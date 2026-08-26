@@ -1,0 +1,10 @@
+# Atelier public crawl policy - proposed 2026-08-26
+# Authentication remains the security boundary for private account data.
+
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+Disallow: /api/*
+
+Sitemap: https://atelier.tokenizart.com/sitemap.xml
+

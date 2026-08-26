@@ -1,0 +1,34 @@
+# Atelier by Tokenizart
+
+> Atelier is Tokenizart's operating platform for preparing and managing records and enabled actions for artworks and other unique physical objects.
+
+## What happens in Atelier
+
+- Authenticated users create or prepare an artwork/object record and technical information.
+- The current minimum preparation data is a main image, an artwork/object type and a name or identifying title.
+- Users can review information before Mint and add further evidence over time through supported workflows.
+- Mint, Certify, NFC linking, privacy and transfer are distinct actions with different effects and permissions.
+- Public views show only information exposed under the owner's visibility choices.
+
+## Action summary
+
+- **Mint:** creates the ERC-721 Token ID and initial immutable record; consumes a Mint voucher.
+- **Certify:** adds an attributed event or evidence to an existing object; does not create another NFT or transfer ownership; consumes the executing actor's Certify voucher.
+- **NFC:** supports a physical-digital evidence link using the applicable flow and voucher; it is not an absolute authenticity guarantee.
+- **Transfer:** changes the ownership relationship in the supported flow; it does not automatically transfer copyright, licenses or physical possession.
+
+## Security and privacy
+
+- Do not place passwords, recovery phrases, private keys or access codes in chat or public records.
+- An Atelier session is not public crawler data.
+- Private account, owner, voucher and draft information requires authenticated, consent-scoped access.
+- Owner Live, when enabled separately, is read-only and does not execute Atelier actions.
+
+## Related resources
+
+- [Tokenizart](https://tokenizart.com/)
+- [Extended Atelier context](https://atelier.tokenizart.com/llms-full.txt)
+- [Companion public beta](https://companion-staging.tokenizart.info/beta)
+- [Demo Atelier](https://companion-staging.tokenizart.info/demo-atelier)
+- [Tokenizart Agent Friendly Web case](https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart)
+

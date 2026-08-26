@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "status": "release_candidate_not_production",
+  "publisher": "Tokenizart",
+  "repository": "https://github.com/tokenizartinfo-ops/tokenizart-agentic",
+  "skills": [
+    {
+      "name": "tokenizart-public-knowledge",
+      "status": "release_candidate",
+      "location": "https://github.com/tokenizartinfo-ops/tokenizart-agentic/tree/main/skills/tokenizart-public-knowledge",
+      "sha256": "53BFF6067D8D7C98A9731DD3439D4DFFB26C2BEA68A715B61AF19126FFEB1D6A"
+    },
+    {
+      "name": "tokenizart-gallery-traceability",
+      "status": "release_candidate",
+      "location": "https://github.com/tokenizartinfo-ops/tokenizart-agentic/tree/main/skills/tokenizart-gallery-traceability",
+      "sha256": "9183CE309B8A163A3D4A0048FC8AADC948A83515FA616B690F7EDE4ADDED432B"
+    }
+  ],
+  "limits": [
+    "Read-only release candidates",
+    "No owner data",
+    "No Mint, Certify, NFC, transfer, voucher, privacy, upload or wallet-signing actions"
+  ]
+}
+

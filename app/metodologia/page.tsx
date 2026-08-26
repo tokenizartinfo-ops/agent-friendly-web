@@ -23,6 +23,7 @@ export default function MethodologyPage() {
         <article className="method-copy">
           <h2>Siete capas, una lectura honesta</h2>
           <p>La puntuacion combina descubrimiento, capacidad de respuesta, contenido legible por maquinas, herramientas, tecnologias experimentales, confianza y comercio agentico. Cada punto debe corresponder a una señal publica observada.</p>
+          <p>La version 0.2 del auditor agrega diagnosticos de Content Signals, politica de crawlers, API Catalog, catalogos de recursos y Agent Skills sin modificar el puntaje AF v1. Asi se conserva la comparabilidad historica mientras calibramos esas señales.</p>
           <div className="principle-list">
             <div><CheckCircle2 /><span><strong>Evidencia</strong> Una ruta que devuelve 404 no cuenta.</span></div>
             <div><FileCheck2 /><span><strong>Procedencia</strong> Las afirmaciones necesitan fuente, fecha y responsable.</span></div>

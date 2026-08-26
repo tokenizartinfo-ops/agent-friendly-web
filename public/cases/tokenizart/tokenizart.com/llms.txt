@@ -1,0 +1,38 @@
+# Tokenizart
+
+> Tokenizart is infrastructure for creating and preserving verifiable digital identity, evidence and traceability for artworks and other unique physical objects.
+
+## Where the product is used
+
+- [Atelier](https://atelier.tokenizart.com/): Tokenizart's operating platform. Authenticated users prepare artwork or object records, review information and perform the actions enabled for their account.
+- [Tokenizart website](https://tokenizart.com/): public identity, services, knowledge and access to the ecosystem.
+- [Shop](https://tokenizart.com/shop/): public entry point for available Tokenizart products and vouchers.
+- [Companion public beta](https://companion-staging.tokenizart.info/beta): public educational assistant in staging; it does not read an Atelier account or execute actions.
+- [Demo Atelier](https://companion-staging.tokenizart.info/demo-atelier): synthetic practice environment; it does not use real wallets, vouchers, blockchain or owner data.
+
+## Core concepts
+
+- Tokenizart uses ERC-721 to represent the unique digital identity associated with an artwork or unique object.
+- Mint creates the initial token record and consumes the applicable Mint voucher.
+- Certify adds an attributed event or evidence to the object's history. It does not create another NFT or transfer ownership.
+- NFC and VOID elements can support a physical-digital link, with limits that must be explained for each use case.
+- Atelier simplifies blockchain interaction through smart-wallet and account-abstraction infrastructure. Users do not need to operate gas manually in native supported flows.
+- Public Gallery information is limited to what the owner chooses to expose.
+
+## Important limits
+
+- Tokenization does not automatically transfer copyright, image rights, intellectual property, physical possession or contractual rights.
+- Tokenizart organizes attributable evidence and traceability; it does not guarantee authenticity, price, liquidity or legal outcome.
+- Release-candidate CLI, MCP, skills and OKF artifacts are documented separately and are not production endpoints on this domain.
+- Owner Live is private, authenticated and consent-scoped. It is not a public crawler resource.
+
+## Public technical resources
+
+- [Agentic repository](https://github.com/tokenizartinfo-ops/tokenizart-agentic)
+- [Agent Friendly Web Tokenizart case](https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart)
+- [Extended public context](https://tokenizart.com/llms-full.txt)
+
+## Contact
+
+- tokenizart.info@gmail.com
+

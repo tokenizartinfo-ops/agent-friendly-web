@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "case": "tokenizart",
+  "prepared_at": "2026-08-26",
+  "owner": "Gabriel Mucchiut",
+  "status": "implementation_candidate",
+  "targets": [
+    "https://tokenizart.com/",
+    "https://atelier.tokenizart.com/"
+  ],
+  "excludes": [
+    "credentials",
+    "owner_data",
+    "private_apis",
+    "owner_live",
+    "mutating_tools"
+  ]
+}
+

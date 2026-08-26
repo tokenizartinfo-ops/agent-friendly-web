@@ -40,6 +40,13 @@ const pendingCategories: Array<[string, Category]> = [
   ['tools', { label: 'APIs y herramientas', score: 0, weight: 20, status: 'pending' }],
 ];
 
+const auxiliaryDiagnostics = [
+  ['contentSignals', 'Content Signals'],
+  ['explicitAiCrawlerPolicy', 'Politica IA explicita'],
+  ['apiCatalog', 'API Catalog'],
+  ['aiCatalog', 'Catalogo de recursos'],
+] as const;
+
 export function ScanWorkspace() {
   const [url, setUrl] = useState('tokenizart.com');
   const [result, setResult] = useState<ScanResult | null>(null);
@@ -148,6 +155,17 @@ export function ScanWorkspace() {
               </div>
             ))}
           </div>
+          {result ? (
+            <div className="diagnostic-strip" aria-label="Diagnosticos auxiliares sin puntaje">
+              <div className="diagnostic-title"><span>Diagnosticos auxiliares</span><small>No alteran AF v1</small></div>
+              {auxiliaryDiagnostics.map(([id, label]) => (
+                <div className="diagnostic-item" data-detected={result.evidence[id]} key={id}>
+                  {result.evidence[id] ? <Check size={14} /> : <CircleAlert size={14} />}
+                  <span>{label}</span>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
 
         <aside className="journey-panel" id="expediente">

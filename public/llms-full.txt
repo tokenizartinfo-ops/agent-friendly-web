@@ -33,5 +33,11 @@ Tokenizart is documented as an evolving agent-first architecture. Existing publi
 - https://agent-friendly-web.tokenizart.chatgpt.site/
 - https://agent-friendly-web.tokenizart.chatgpt.site/metodologia
 - https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart
+- https://agent-friendly-web.tokenizart.chatgpt.site/.well-known/ai-catalog.json
+- https://agent-friendly-web.tokenizart.chatgpt.site/.well-known/agent-skills/index.json
 - https://github.com/tokenizartinfo-ops/agent-friendly-web
+
+## Machine-readable catalogs
+
+The AI catalog and Agent Skills index are project discovery conventions backed by public resources on this site. The API Catalog is a standards-based linkset pointing to the public OpenAPI document. No MCP server, OAuth resource, WebMCP integration or payment protocol is advertised by this release.
 

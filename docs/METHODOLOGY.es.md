@@ -35,6 +35,12 @@ El metodo organiza una transformacion tecnica y editorial. La puntuacion sirve p
 4. Las herramientas privadas no se infieren desde la interfaz publica.
 5. Las recomendaciones no aumentan la puntuacion hasta que se implementen y vuelvan a medir.
 
+## Diagnosticos auxiliares
+
+La implementacion 0.2 agrega observaciones que no modifican el puntaje AF v1: Content Signals, grupos explicitos de crawlers de IA, API Catalog, catalogo publico de recursos, Agent Skills index y la ruta vigente de MCP server card. Se informan por separado hasta que una version futura del metodo defina ponderaciones y permita comparar una ventana de calibracion suficiente.
+
+Un catalogo de proyecto debe declarar que no es un estandar oficial. Una ruta MCP, OpenAPI o skill solo se considera capacidad cuando su contenido es valido y el servicio o artefacto enlazado existe.
+
 ## Estado de tecnologias
 
 - `robots.txt`, sitemap, Schema.org/JSON-LD y OpenAPI son bases estables.
@@ -46,4 +52,3 @@ El metodo organiza una transformacion tecnica y editorial. La puntuacion sirve p
 ## Revision
 
 Cada informe debe conservar: URL, fecha UTC, version del metodo, recursos consultados, codigos HTTP, evidencia detectada, limites y hash/export cuando se publique como artefacto.
-

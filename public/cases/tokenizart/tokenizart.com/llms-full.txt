@@ -1,0 +1,77 @@
+# Tokenizart - extended public context
+
+## Identity and purpose
+
+Tokenizart provides infrastructure for artworks and unique physical objects to carry a verifiable digital identity and an accumulating history of evidence. The project is owner-first: standard access to records already created is not presented as a mandatory subscription. New blockchain actions use the applicable vouchers, and optional professional or recurring services are priced only when their scope or ongoing cost is explicit.
+
+Tokenizart combines open interoperability and attributable public knowledge with a proprietary execution core, protected brand and governed operational services.
+
+## Tokenizart and Atelier
+
+`tokenizart.com` is the public website for the ecosystem. **Atelier is Tokenizart's operating platform.** It is the application where authenticated users create or prepare records, review artwork data and technical sheets, and perform enabled operations such as Mint, Certify, NFC linking, privacy changes or transfer under the applicable rules.
+
+The public website, Atelier, the public Gallery, Companion, Copilot and Demo Atelier are related surfaces with different permissions. A public page must never be treated as proof of an authenticated owner's private account.
+
+## Artwork preparation
+
+The current minimum information for preparing an artwork or unique object is a main image, an artwork/object type and a name or identifying title. Tokenizart encourages users to complete as much reliable information as possible because richer metadata can improve identification and future traceability. The owner decides what facts to associate with the object.
+
+Preparation may be gradual. A user or an authorized manager can organize images and fields before Mint. Under the currently documented manager model, a manager can load, edit or remove prepared artworks but cannot Mint, Certify or link NFC on behalf of the owner. The owner can revoke the manager permission when the task ends.
+
+## Mint and the token
+
+Tokenizart uses the ERC-721 standard because the represented object is treated as unique rather than as interchangeable units. Mint creates a unique Token ID in the Tokenizart smart contract and anchors the initial metadata/evidence references. Mint consumes a Mint voucher.
+
+Using ERC-721 does not prevent parties from arranging co-ownership of the underlying unique object. Tokenizart prefers the term co-ownership over fragmentation when discussing multiple holders of a legally unique and indivisible object. Legal consequences depend on the applicable agreement and jurisdiction.
+
+## Certify
+
+Certify adds a new attributed event or evidence to an existing object's history. A Certify can record, for example, an expert report, exhibition, condition, location, documentation, additional information or correction. It consumes the Certify voucher of the actor performing the action.
+
+Certify does not create a second NFT and does not transfer ownership. A third party such as a curator or expert may add an attributed intervention when the workflow authorizes it, without becoming the owner.
+
+If a Mint contains an omission or incorrect fact, the immutable historical record is not overwritten. The visible technical sheet can be updated where Atelier allows it, and a later Certify such as additional information or an erratum can document the correction. This preserves the original event and the subsequent explanation as dynamic evidence.
+
+## NFC and physical-digital evidence
+
+Tokenizart can link supported NFC/VOID elements to the digital record. This adds evidence about the relationship between a physical item and its digital history, but it must not be described as an absolute guarantee against cloning, replacement, fraud or physical damage. Materials, placement, custody and verification procedures remain relevant.
+
+## Blockchain, IPFS and account abstraction
+
+The public chain used by Tokenizart is Gnosis Chain. The ERC-721 Token ID and transaction events can be inspected in Blockscout. IPFS/Pinata infrastructure is used for content-addressed files or metadata references where documented. Blockchain events and IPFS files are complementary: they do not replace legal analysis or physical inspection.
+
+Tokenizart uses ERC-4337 account-abstraction infrastructure with Pimlico in the currently documented production architecture. Smart Accounts, bundlers and paymasters simplify supported transactions so users do not have to buy cryptocurrency or manage gas manually. In a block explorer, the sender or transaction path may therefore show an EntryPoint, bundler or Smart Account rather than only the owner's email identity.
+
+## Ownership, privacy and public Gallery
+
+The owner controls title and visibility within the permissions offered by Atelier. Gallery shows public information selected for exposure; hidden owner information is not public Level 5 data. Transfer changes the owner relationship according to the supported workflow and is not documented as consuming a voucher. A digital token transfer does not by itself transfer copyright, licenses, possession or other rights unless the parties separately establish them.
+
+## Vouchers and services
+
+Mint, Certify and NFC workflows use their corresponding vouchers. Tokenizart can also provide optional managed onboarding, image preparation, data organization, collection intake, websites, white-label presentations and custom integrations. Those professional services are separated from ownership and standard verification of records already generated.
+
+## Audiences
+
+Artists can start provenance in the primary market. Collectors can preserve history and evidence. Galleries and museums can organize and present collections with controlled visibility. Curators, experts and appraisers can add attributed interventions. Insurers, brokers, custody providers, transport companies, auction houses, archives and educational institutions can use verifiable records as one evidence layer within their own professional processes.
+
+## Agent-first architecture
+
+Tokenizart is progressively publishing public knowledge, read-only CLI workflows, MCP contracts, skills and OKF exports so third-party agents can discover and use documented capabilities. Release-candidate artifacts do not become production services merely because they exist in GitHub.
+
+Owner Live is a separate Level 4 bridge that requires verified Atelier identity, explicit consent, allowlisted scopes, short-lived authorization, revocation and metadata-only audit. It provides eyes, not hands. Mint, Certify, NFC, transfer, vouchers, privacy, uploads and wallet signatures require separate future contracts and approvals.
+
+## Commercial and legal limits
+
+Tokenizart supports identity, evidence and traceability. It does not promise authenticity, future value, liquidity, sale, insurance coverage or a legal result. Tokenizing an object does not automatically transfer copyright, intellectual property, image rights, physical possession or contractual title. Values declared in Atelier are owner-provided reference information unless a separate agreement states otherwise.
+
+## Public resources
+
+- Website: https://tokenizart.com/
+- Atelier: https://atelier.tokenizart.com/
+- Shop: https://tokenizart.com/shop/
+- Companion public beta: https://companion-staging.tokenizart.info/beta
+- Demo Atelier: https://companion-staging.tokenizart.info/demo-atelier
+- Agentic repository: https://github.com/tokenizartinfo-ops/tokenizart-agentic
+- Agent Friendly Web case: https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart
+- Contact: tokenizart.info@gmail.com
+

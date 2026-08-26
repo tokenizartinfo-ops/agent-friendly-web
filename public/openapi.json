@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Agent Friendly Web Public Audit API",
-    "version": "0.1.0",
-    "description": "Read-only audit of public website signals. The AF score is Gabriel Mucchiut's methodology, not an official certification."
+    "version": "0.2.0",
+    "description": "Read-only audit of public website signals. The AF score is Gabriel Mucchiut's methodology, not an official certification. Auxiliary diagnostics include crawler policy, Content Signals and current discovery catalogs without changing the historical AF v1 score."
   },
   "servers": [{ "url": "https://agent-friendly-web.tokenizart.chatgpt.site" }],
   "paths": {
@@ -25,11 +25,28 @@
           }
         },
         "responses": {
-          "200": { "description": "Observed evidence, score, probes and limits" },
+          "200": {
+            "description": "Observed evidence, AF v1 score, auxiliary diagnostics, probes and limits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["target", "checkedAt", "evidence", "readiness", "probes", "limits"],
+                  "properties": {
+                    "target": { "type": "string", "format": "uri" },
+                    "checkedAt": { "type": "string", "format": "date-time" },
+                    "evidence": { "type": "object", "additionalProperties": { "type": "boolean" } },
+                    "readiness": { "type": "object" },
+                    "probes": { "type": "array", "items": { "type": "object" } },
+                    "limits": { "type": "array", "items": { "type": "string" } }
+                  }
+                }
+              }
+            }
+          },
           "400": { "description": "Invalid or non-public target" }
         }
       }
     }
   }
 }
-

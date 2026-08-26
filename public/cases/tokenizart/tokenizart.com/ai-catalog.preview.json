@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "convention": "Agent Friendly Web project catalog; not an official standard",
+  "status": "preview",
+  "resources": [
+    {
+      "name": "Tokenizart public context",
+      "type": "text/plain",
+      "url": "https://tokenizart.com/llms.txt",
+      "status": "implementation_candidate"
+    },
+    {
+      "name": "Tokenizart extended public context",
+      "type": "text/plain",
+      "url": "https://tokenizart.com/llms-full.txt",
+      "status": "implementation_candidate"
+    },
+    {
+      "name": "Tokenizart agentic artifacts",
+      "type": "text/html",
+      "url": "https://github.com/tokenizartinfo-ops/tokenizart-agentic",
+      "status": "release_candidate"
+    }
+  ]
+}
+

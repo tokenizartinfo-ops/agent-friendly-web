@@ -1,7 +1,7 @@
 // @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { calculateReadiness, normalizePublicUrl } from '../../../lib/methodology.mjs';
 // @ts-expect-error Shared ESM module is exercised directly by Node tests.
-import { analyzeHome, evidenceFromProbe, isPrivateIp, matchesResource } from '../../../lib/scanner.mjs';
+import { analyzeHome, analyzeRobots, evidenceFromProbe, isPrivateIp, matchesResource } from '../../../lib/scanner.mjs';
 
 const MAX_BYTES = 250_000;
 const REQUEST_TIMEOUT_MS = 8_000;
@@ -103,7 +103,23 @@ export async function POST(request: Request) {
     const origin = target.origin;
     await assertPublicResolution(target.hostname);
 
-    const [home, robots, sitemap, wpSitemap, llms, llmsFull, mcp, openapi, apiOpenapi, skills, markdown] =
+    const [
+      home,
+      robots,
+      sitemap,
+      wpSitemap,
+      llms,
+      llmsFull,
+      mcp,
+      mcpServerCard,
+      openapi,
+      apiOpenapi,
+      apiCatalog,
+      aiCatalog,
+      skills,
+      agentSkills,
+      markdown,
+    ] =
       await Promise.all([
         probe(origin, 'home', '/'),
         probe(origin, 'robots', '/robots.txt', 'text/plain,*/*;q=0.8'),
@@ -112,13 +128,18 @@ export async function POST(request: Request) {
         probe(origin, 'llms', '/llms.txt', 'text/plain,text/markdown,*/*;q=0.8'),
         probe(origin, 'llms-full', '/llms-full.txt', 'text/plain,text/markdown,*/*;q=0.8'),
         probe(origin, 'mcp', '/.well-known/mcp.json', 'application/json,*/*;q=0.8'),
+        probe(origin, 'mcp-server-card', '/.well-known/mcp/server-card.json', 'application/json,*/*;q=0.8'),
         probe(origin, 'openapi', '/openapi.json', 'application/json,*/*;q=0.8'),
         probe(origin, 'api-openapi', '/api/openapi.json', 'application/json,*/*;q=0.8'),
+        probe(origin, 'api-catalog', '/.well-known/api-catalog', 'application/linkset+json,application/json,*/*;q=0.8'),
+        probe(origin, 'ai-catalog', '/.well-known/ai-catalog.json', 'application/json,*/*;q=0.8'),
         probe(origin, 'skills', '/skills/index.md', 'text/markdown,text/plain,*/*;q=0.8'),
+        probe(origin, 'agent-skills', '/.well-known/agent-skills/index.json', 'application/json,*/*;q=0.8'),
         probe(origin, 'markdown', '/', 'text/markdown'),
       ]);
 
     const homeSignals = analyzeHome(home.body, { link: home.link });
+    const robotsSignals = analyzeRobots(robots.body);
     const evidence = {
       robots: matchesResource(robots, 'robots'),
       sitemap: matchesResource(sitemap, 'sitemap') || matchesResource(wpSitemap, 'sitemap'),
@@ -129,9 +150,14 @@ export async function POST(request: Request) {
       markdown:
         homeSignals.markdown ||
         matchesResource(markdown, 'markdown'),
-      mcp: homeSignals.mcp || matchesResource(mcp, 'mcp'),
+      contentSignals: robotsSignals.contentSignals,
+      explicitAiCrawlerPolicy: robotsSignals.explicitAiCrawlerPolicy,
+      allowsPublicCrawl: robotsSignals.allowsPublicCrawl,
+      mcp: homeSignals.mcp || matchesResource(mcp, 'mcp') || matchesResource(mcpServerCard, 'mcp'),
       openapi: homeSignals.openapi || matchesResource(openapi, 'openapi') || matchesResource(apiOpenapi, 'openapi'),
-      skills: homeSignals.skills || matchesResource(skills, 'skills'),
+      apiCatalog: matchesResource(apiCatalog, 'apiCatalog'),
+      aiCatalog: matchesResource(aiCatalog, 'aiCatalog'),
+      skills: homeSignals.skills || matchesResource(skills, 'skills') || matchesResource(agentSkills, 'agentSkills'),
       webmcp: homeSignals.webmcp,
       ownership: /(@type["']?\s*:\s*["']organization|\/about|\/contact|mailto:|©|copyright)/i.test(home.body),
       sources: /(<cite|footnote|bibliograph|fuentes|sources|references)/i.test(home.body),
@@ -139,7 +165,23 @@ export async function POST(request: Request) {
     };
 
     const readiness = calculateReadiness(evidence);
-    const probes = [home, robots, sitemap, wpSitemap, llms, llmsFull, mcp, openapi, apiOpenapi, skills, markdown]
+    const probes = [
+      home,
+      robots,
+      sitemap,
+      wpSitemap,
+      llms,
+      llmsFull,
+      mcp,
+      mcpServerCard,
+      openapi,
+      apiOpenapi,
+      apiCatalog,
+      aiCatalog,
+      skills,
+      agentSkills,
+      markdown,
+    ]
       .map((item) => ({
         id: item.id,
         path: item.path,

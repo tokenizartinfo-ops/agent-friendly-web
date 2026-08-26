@@ -1,0 +1,65 @@
+# Atelier by Tokenizart - extended public context
+
+## Role inside the ecosystem
+
+Atelier is the application where Tokenizart users operate. The public Tokenizart website explains the ecosystem; Atelier provides the authenticated work surface. Public educational assistants and Demo Atelier can explain or simulate workflows, but they do not prove an Atelier identity or execute real operations.
+
+## Starting an artwork or unique object
+
+Preparation can be gradual. The minimum currently documented information is:
+
+1. one main image;
+2. an artwork or object type;
+3. a name or identifying title.
+
+Users are encouraged to add reliable description, authorship, dates, materials, measurements, signatures, location, exhibition, documentation and technical details when available. More information can improve identification and future traceability, but the owner decides which facts to associate with the object.
+
+Before Mint, permitted prepared fields can be reviewed and updated. Under the currently documented manager model, an authorized manager may load, edit or remove prepared artworks, but cannot Mint, Certify or link NFC for the owner. The owner may revoke manager access after the work.
+
+## Mint
+
+Tokenizart uses ERC-721 for unique object identity. Mint creates a unique Token ID in the Tokenizart contract and anchors the initial metadata/evidence references. Mint consumes the applicable Mint voucher. It does not automatically transfer copyright, image rights, intellectual property, physical possession or other contractual rights.
+
+## Certify
+
+Certify records an attributed event or evidence connected to an existing object. Examples include expert reports, exhibitions, condition, location, delivery, documentation, additional information or an erratum. The action consumes the Certify voucher of the actor who performs it.
+
+A Certify does not create another NFT and does not transfer the owner relationship. Third-party professionals can contribute evidence when the authorized workflow permits it.
+
+If an original Mint omitted or misstated a fact, the immutable historical event is not overwritten. A later Certify can document the correction, while editable visible fields can be updated where Atelier permits. The result is an accumulating evidence history rather than a silent replacement.
+
+## NFC and VOID
+
+Supported NFC/VOID workflows add evidence connecting a physical item to its digital record. A tag, placement procedure and custody history matter. The technology must not be described as impossible to clone, remove, replace, damage or misuse.
+
+## Blockchain and files
+
+Tokenizart uses Gnosis Chain for public blockchain events and Blockscout for inspection. ERC-721 identifies the unique token. IPFS/Pinata infrastructure stores content-addressed files or metadata references where documented. A transaction link, NFT instance link, metadata link and Certify event each answer a different question.
+
+ERC-4337 account abstraction with Pimlico simplifies supported transactions through Smart Accounts, bundlers and paymasters. This means a block explorer may show infrastructure addresses in the transaction path. Users do not need to manage gas manually in native supported flows.
+
+## Privacy and Gallery
+
+Atelier separates private account context from public information. Gallery and public artwork views reflect what the owner chooses to expose. Hiding information removes it from the public surface but does not rewrite earlier immutable blockchain events.
+
+## Vouchers
+
+Mint, Certify and NFC use their applicable vouchers. Transfer is currently documented as not consuming a voucher. Voucher balances are owner data and must not be inferred from public pages.
+
+## Agent access
+
+Public agents may use Level 5 documentation and public Gallery information. Owner-scoped information requires verified Atelier identity, consent, narrow scopes, expiry, revocation and audit. Owner Live read-only provides context only and cannot execute Mint, Certify, NFC, transfer, voucher, privacy, upload or wallet-signing actions.
+
+## Limits
+
+Tokenizart and Atelier organize identity, evidence and traceability. They do not guarantee authenticity, price, liquidity, sale, insurance coverage or legal outcome. Professional and legal conclusions remain attributable to the people or institutions that issue them.
+
+## Public links
+
+- Tokenizart: https://tokenizart.com/
+- Atelier: https://atelier.tokenizart.com/
+- Companion public beta: https://companion-staging.tokenizart.info/beta
+- Demo Atelier: https://companion-staging.tokenizart.info/demo-atelier
+- Agentic repository: https://github.com/tokenizartinfo-ops/tokenizart-agentic
+- Agent Friendly Web case: https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart
+

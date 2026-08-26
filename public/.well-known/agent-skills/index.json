@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "publisher": "Agent Friendly Web",
+  "status": "public",
+  "skills": [
+    {
+      "name": "agent-friendly-web-audit",
+      "description": "Audit public website evidence and produce a progressive, security-aware agent-friendly roadmap.",
+      "location": "https://agent-friendly-web.tokenizart.chatgpt.site/skills/agent-friendly-web-audit/SKILL.md",
+      "sha256": "DCA64F70DD99A4B7F7085A0E95530C28488DA6CEA24632CFE4931829D566C8C9"
+    }
+  ],
+  "limits": [
+    "Public read-only audit",
+    "No credentials",
+    "No target-site mutations",
+    "No certification claim"
+  ]
+}
+

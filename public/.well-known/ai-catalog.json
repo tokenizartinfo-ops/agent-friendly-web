@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "convention": "Agent Friendly Web project catalog; not an official standard",
+  "publisher": "Agent Friendly Web",
+  "resources": [
+    {
+      "name": "Public auditor",
+      "type": "text/html",
+      "url": "https://agent-friendly-web.tokenizart.chatgpt.site/"
+    },
+    {
+      "name": "Methodology",
+      "type": "text/html",
+      "url": "https://agent-friendly-web.tokenizart.chatgpt.site/metodologia"
+    },
+    {
+      "name": "Tokenizart case",
+      "type": "text/html",
+      "url": "https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart"
+    },
+    {
+      "name": "OpenAPI",
+      "type": "application/json",
+      "url": "https://agent-friendly-web.tokenizart.chatgpt.site/openapi.json"
+    },
+    {
+      "name": "Agent Skills",
+      "type": "application/json",
+      "url": "https://agent-friendly-web.tokenizart.chatgpt.site/.well-known/agent-skills/index.json"
+    }
+  ]
+}
+

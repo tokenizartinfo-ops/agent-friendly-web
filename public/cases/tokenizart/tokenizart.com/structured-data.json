@@ -1,0 +1,36 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://tokenizart.com/#organization",
+      "name": "Tokenizart",
+      "url": "https://tokenizart.com/",
+      "email": "tokenizart.info@gmail.com",
+      "description": "Infrastructure for verifiable digital identity, evidence and traceability of artworks and unique physical objects."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://tokenizart.com/#website",
+      "url": "https://tokenizart.com/",
+      "name": "Tokenizart",
+      "publisher": {
+        "@id": "https://tokenizart.com/#organization"
+      },
+      "inLanguage": ["es", "en", "pt"]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://atelier.tokenizart.com/#application",
+      "name": "Atelier",
+      "url": "https://atelier.tokenizart.com/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Tokenizart's operating platform for preparing and managing records and enabled actions for artworks and unique objects.",
+      "provider": {
+        "@id": "https://tokenizart.com/#organization"
+      }
+    }
+  ]
+}
+

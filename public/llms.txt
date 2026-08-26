@@ -10,6 +10,8 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - [Methodology](https://agent-friendly-web.tokenizart.chatgpt.site/metodologia)
 - [Tokenizart case](https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart)
 - [OpenAPI](https://agent-friendly-web.tokenizart.chatgpt.site/openapi.json)
+- [Public AI catalog](https://agent-friendly-web.tokenizart.chatgpt.site/.well-known/ai-catalog.json)
+- [Agent Skills index](https://agent-friendly-web.tokenizart.chatgpt.site/.well-known/agent-skills/index.json)
 - [Public repository](https://github.com/tokenizartinfo-ops/agent-friendly-web)
 
 ## Important limits
@@ -18,4 +20,3 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - `llms.txt` is a community proposal, not a mandatory crawler standard.
 - WebMCP is treated as an experimental W3C Community Group draft.
 - The private owner dossier requires sign-in and must not be crawled or inferred.
-

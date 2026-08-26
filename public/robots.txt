@@ -1,4 +1,5 @@
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 Disallow: /expediente
 Disallow: /api/projects
@@ -6,4 +7,3 @@ Disallow: /signin-with-chatgpt
 Disallow: /callback
 
 Sitemap: https://agent-friendly-web.tokenizart.chatgpt.site/sitemap.xml
-
