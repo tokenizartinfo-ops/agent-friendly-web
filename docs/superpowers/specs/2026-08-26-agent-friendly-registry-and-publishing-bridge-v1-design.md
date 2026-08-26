@@ -344,47 +344,37 @@ Se mantendran `development`, `staging` y `production` con bindings, bases y secr
 
 ## 10. Dominio y publicacion
 
-### 10.1 Decision recomendada
+### 10.1 Decision adoptada
 
-El dominio principal recomendado es `agentfriendlyweb.ai`.
+El dominio principal adoptado es `agentfriendlyweb.dev`.
 
 Motivos:
 
 - coincide exactamente con la marca sin guiones;
-- comunica la categoria del producto;
+- comunica la categoria y el caracter tecnico del producto;
 - es independiente de Tokenizart;
 - permite construir reputacion y URLs canonicas propias;
 - admite una oferta comercial global.
 
-Se recomienda reservar tambien `agent-friendly-web.com` como dominio defensivo y redireccionarlo al principal.
-
-La consulta RDAP del 2026-08-26 mostro:
-
-- `agentfriendlyweb.com`: registrado;
-- `agentfriendly.dev`: registrado;
-- `agentfriendlyweb.ai`: sin registro observado;
-- `agent-friendly-web.com`: sin registro observado;
-- `agentfriendlyweb.org`: sin registro observado.
-
-El estado RDAP no garantiza disponibilidad comercial hasta finalizar la compra.
+El registro se completo el 2026-08-26 en la cuenta organizacional de Cloudflare utilizada por Tokenizart. El periodo inicial es de un ano, con expiracion verificada el 2027-08-26 y renovacion automatica desactivada. Cualquier dominio defensivo adicional queda fuera del Bloque 1 y requiere una decision de costo independiente.
 
 ### 10.2 Hosting
 
-La produccion se alojara en Cloudflare. La URL actual `agent-friendly-web.tokenizart.chatgpt.site` se conservara temporalmente como preview y despues redireccionara al dominio canonico cuando el proveedor lo permita.
+La produccion se sirve mediante Sites sobre infraestructura Cloudflare y utiliza `https://agentfriendlyweb.dev/` como origen canonico. La URL tecnica `agent-friendly-web.tokenizart.chatgpt.site` se conserva como direccion heredada del proveedor, pero no se publica en metadatos, sitemaps, OpenAPI, `robots.txt`, archivos `llms` ni perfiles del Registry.
 
 Estructura inicial:
 
-- `https://agentfriendlyweb.ai/`: sitio publico, auditor y Registry;
-- `https://agentfriendlyweb.ai/expediente`: expediente autenticado;
-- `https://agentfriendlyweb.ai/api/`: API publica y privada separada por contratos;
-- `https://agentfriendlyweb.ai/.well-known/`: descubrimiento real;
-- `https://agentfriendlyweb.ai/docs/`: documentacion humana y agentica.
+- `https://agentfriendlyweb.dev/`: sitio publico, auditor y Registry;
+- `https://agentfriendlyweb.dev/expediente`: expediente autenticado;
+- `https://agentfriendlyweb.dev/api/`: API publica y privada separada por contratos;
+- `https://agentfriendlyweb.dev/.well-known/`: descubrimiento real;
+- `https://agentfriendlyweb.dev/docs/`: documentacion humana y agentica.
 
 Un subdominio MCP se agregara solo cuando el servidor exista y haya superado sus gates.
 
-### 10.3 Momento de compra
+### 10.3 Estado de activacion
 
-Conviene adquirir los dominios antes de publicar el Registry y los conectores. El registro y cualquier gasto requieren aprobacion de billing separada; esta especificacion no autoriza compras automaticamente.
+DNS, HTTPS y el vinculo con Sites quedaron activos el 2026-08-26. La declaracion del origen como oficial exige pruebas HTTP de las superficies publicas, comprobacion del callback autenticado y una prueba automatizada que impida reintroducir el host temporal. Esos controles forman parte del gate de publicacion del Bloque 1.
 
 ## 11. Monetizacion
 
@@ -574,12 +564,25 @@ No se prometera una llegada automatica a 100% ni recomendacion por LLMs.
 
 ### Bloque 1: Registry declarativo y dominio
 
-- dominio propio;
+- dominio propio y origen canonico activo;
 - perfil publico versionado;
 - formulario ampliado;
 - verificacion de dominio sintetica;
 - estados declarado/observado/verificado;
 - caso Tokenizart.
+
+#### Alcance ejecutable y criterios de aceptacion del Bloque 1
+
+1. `https://agentfriendlyweb.dev/` es el unico origen canonico anunciado por la aplicacion y sus recursos de descubrimiento. Una prueba automatizada impide reintroducir el host temporal.
+2. El expediente privado permanece aislado por `oai-authenticated-user-id`, admite guardado progresivo y nunca acepta ni conserva contrasenas, cookies, API keys, private keys o tokens.
+3. El formulario incorpora mantenedor, DNS, contenidos disponibles, capacidades deseadas, recursos autorizados, preferencia de publicacion, politica de crawlers, responsable de aprobacion y monitoreo. Estos datos siguen siendo privados hasta una aprobacion de publicacion separada.
+4. La verificacion admite DNS TXT y archivo HTTP temporal. El desafio dura 30 minutos, es de un solo uso, esta ligado a un expediente y no habilita escritura sobre DNS, hosting o sitio. La condicion verificada dura 90 dias, se revoca ante cambio de dominio y puede renovarse con un nuevo desafio.
+5. Un perfil se publica solo con dominio verificado y confirmacion explicita del propietario. Cada publicacion crea una version inmutable; una version posterior reemplaza a la anterior sin borrar su historial.
+6. El Registry expone lista y detalle en HTML accesible, JSON versionado y Markdown real. En cada afirmacion distingue `owner_declared`, `observed` y `verified` junto con fuente y fecha.
+7. La auditoria publica continua siendo read-only y no persiste datos por defecto. Solo el propietario autenticado puede asociar una observacion saneada a su expediente mediante una accion explicita.
+8. Tokenizart se publica como primer perfil curado, con `tokenizart.com` y `atelier.tokenizart.com` diferenciados, procedencia visible y sin convertir capacidades release candidate en endpoints productivos.
+9. Las rutas privadas fallan cerradas sin identidad; los errores y eventos no exponen desafios completos, secretos ni datos privados del expediente.
+10. El Bloque 1 no incluye capsulas, CLI mutante, GitHub App, plugin WordPress, Cloudflare Bridge, escritura de DNS, pagos ni acciones owner-scoped de Atelier.
 
 ### Bloque 2: Capsula y handoff manual
 
@@ -659,6 +662,10 @@ No se prometera una llegada automatica a 100% ni recomendacion por LLMs.
 
 ## 21. Decision final de diseno
 
-La primera version implementara Registry, expediente ampliado, verificacion de dominio, capsula de publicacion y handoff firmado. La publicacion automatica empezara por Draft PR y WordPress. Cloudflare Bridge quedara como segunda etapa mutante.
+El ciclo v1 completo comprende Registry, expediente ampliado, verificacion de dominio, capsula de publicacion y handoff firmado. La primera entrega ejecutable queda limitada al Bloque 1; capsula, conectores y cualquier mutacion requieren sus propios gates posteriores. La publicacion automatica empezara por Draft PR y WordPress. Cloudflare Bridge quedara como etapa mutante posterior.
 
 La plataforma empodera al propietario reduciendo dependencia, pero conserva doble consentimiento, menor privilegio, prueba posterior y rollback. Esa combinacion es el diferencial juridico, tecnico y comercial del producto.
+
+## 22. Estado de revision
+
+Especificacion revisada y aprobada como base tecnica del Bloque 1 el 2026-08-26. La aprobacion habilita planificacion, desarrollo local, migraciones versionadas y pruebas sinteticas. No autoriza por si sola publicar perfiles de terceros, modificar dominios ajenos, instalar conectores, almacenar credenciales ni ejecutar acciones mutantes.
