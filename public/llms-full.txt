@@ -1,0 +1,37 @@
+# Agent Friendly Web - public context
+
+## Identity
+
+Agent Friendly Web is an initiative created by Gabriel Mucchiut and incubated within the Tokenizart infrastructure. Tokenizart is its first integral case study.
+
+## Purpose
+
+The service helps website owners understand what public agents can currently discover, what context is missing, and which technical or editorial change should happen next. It combines a public read-only audit with an authenticated, progressive owner dossier.
+
+## Methodology
+
+The AF-0 to AF-5 method scores seven evidence layers: discovery, answerability, machine-readable content, tools, experimental web interaction, trust/governance, and agentic commerce. Recommendations do not increase a score until implementation is publicly observable.
+
+## Standards status
+
+- robots.txt, sitemaps, Schema.org/JSON-LD and OpenAPI are treated as stable foundations.
+- MCP 2026-07-28 is the current protocol reference used by this release.
+- llms.txt is a community proposal.
+- WebMCP is a W3C Community Group draft and remains experimental.
+- x402 and MPP are emerging payment mechanisms that require case-specific technical, legal and commercial controls.
+
+## Security
+
+The public scanner accepts only public HTTP/HTTPS targets, rejects credentials and alternate ports, checks DNS resolution, limits time and response size, and does not follow redirects. It never mutates the target. The owner dossier never asks for credentials and stores only allowlisted context behind Sign in with ChatGPT.
+
+## Tokenizart
+
+Tokenizart is documented as an evolving agent-first architecture. Existing public content, release-candidate CLI/MCP/skills, and authenticated Owner Live capabilities are kept as separate maturity boundaries. Unreleased or private tools are not represented as publicly available.
+
+## Links
+
+- https://agent-friendly-web.tokenizart.chatgpt.site/
+- https://agent-friendly-web.tokenizart.chatgpt.site/metodologia
+- https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart
+- https://github.com/tokenizartinfo-ops/agent-friendly-web
+

@@ -1,0 +1,21 @@
+# Agent Friendly Web
+
+> Public website auditor and guided owner workspace created by Gabriel Mucchiut and incubated within Tokenizart.
+
+Agent Friendly Web measures public evidence about how agents can discover, understand, and use a website. Its AF-0 to AF-5 framework is a proprietary methodology published for transparent use; it is not an official certification.
+
+## Primary resources
+
+- [Public auditor](https://agent-friendly-web.tokenizart.chatgpt.site/)
+- [Methodology](https://agent-friendly-web.tokenizart.chatgpt.site/metodologia)
+- [Tokenizart case](https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart)
+- [OpenAPI](https://agent-friendly-web.tokenizart.chatgpt.site/openapi.json)
+- [Public repository](https://github.com/tokenizartinfo-ops/agent-friendly-web)
+
+## Important limits
+
+- Public scans are read-only and do not authenticate to the target website.
+- `llms.txt` is a community proposal, not a mandatory crawler standard.
+- WebMCP is treated as an experimental W3C Community Group draft.
+- The private owner dossier requires sign-in and must not be crawled or inferred.
+

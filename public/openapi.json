@@ -1,0 +1,35 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Agent Friendly Web Public Audit API",
+    "version": "0.1.0",
+    "description": "Read-only audit of public website signals. The AF score is Gabriel Mucchiut's methodology, not an official certification."
+  },
+  "servers": [{ "url": "https://agent-friendly-web.tokenizart.chatgpt.site" }],
+  "paths": {
+    "/api/scan": {
+      "post": {
+        "summary": "Audit public website signals",
+        "operationId": "scanPublicWebsite",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["url"],
+                "properties": { "url": { "type": "string", "format": "uri" } },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Observed evidence, score, probes and limits" },
+          "400": { "description": "Invalid or non-public target" }
+        }
+      }
+    }
+  }
+}
+

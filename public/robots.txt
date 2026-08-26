@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /expediente
+Disallow: /api/projects
+Disallow: /signin-with-chatgpt
+Disallow: /callback
+
+Sitemap: https://agent-friendly-web.tokenizart.chatgpt.site/sitemap.xml
+
