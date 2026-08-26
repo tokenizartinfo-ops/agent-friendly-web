@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "description": "Read-only audit of public website signals. The AF score is Gabriel Mucchiut's methodology, not an official certification. Auxiliary diagnostics include crawler policy, Content Signals and current discovery catalogs without changing the historical AF v1 score."
   },
-  "servers": [{ "url": "https://agent-friendly-web.tokenizart.chatgpt.site" }],
+  "servers": [{ "url": "https://agentfriendlyweb.dev" }],
   "paths": {
     "/api/scan": {
       "post": {

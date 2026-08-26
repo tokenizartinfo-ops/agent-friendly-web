@@ -36,7 +36,7 @@ const surfaces = [
   },
   {
     name: 'Agent Friendly Web',
-    url: 'agent-friendly-web.tokenizart.chatgpt.site',
+    url: 'agentfriendlyweb.dev',
     score: 65,
     level: 'AF-3',
     external: 'Cloudflare Level 2 · Bot-Aware',

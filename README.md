@@ -8,6 +8,8 @@ Auditor publico y espacio de trabajo para ayudar a propietarios de sitios a mejo
 
 Version inicial en desarrollo. El auditor es read-only y trabaja sobre recursos publicos. La metodologia AF-0 a AF-5 es un marco propio de Gabriel Mucchiut: no es una certificacion oficial ni debe presentarse como una norma de la industria.
 
+El origen publico canonico es [agentfriendlyweb.dev](https://agentfriendlyweb.dev/). El dominio esta registrado y administrado en Cloudflare, vinculado al proyecto Sites, con DNS y TLS activos. La URL tecnica de Sites se conserva solo como direccion heredada del proveedor y no se anuncia como origen canonico.
+
 ## Que incluye
 
 - Auditoria publica reproducible de `robots.txt`, sitemaps, contenido estructurado y rutas agenticas.

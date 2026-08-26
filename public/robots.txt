@@ -6,4 +6,4 @@ Disallow: /api/projects
 Disallow: /signin-with-chatgpt
 Disallow: /callback
 
-Sitemap: https://agent-friendly-web.tokenizart.chatgpt.site/sitemap.xml
+Sitemap: https://agentfriendlyweb.dev/sitemap.xml

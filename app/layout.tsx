@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://agent-friendly-web.tokenizart.chatgpt.site'),
+  metadataBase: new URL('https://agentfriendlyweb.dev'),
   title: 'Agent Friendly Web | Auditoria y mejora progresiva',
   description: 'Audita como agentes y motores de respuesta descubren, entienden y utilizan un sitio web.',
   openGraph: {

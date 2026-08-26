@@ -30,5 +30,4 @@
 - [Extended Atelier context](https://atelier.tokenizart.com/llms-full.txt)
 - [Companion public beta](https://companion-staging.tokenizart.info/beta)
 - [Demo Atelier](https://companion-staging.tokenizart.info/demo-atelier)
-- [Tokenizart Agent Friendly Web case](https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart)
-
+- [Tokenizart Agent Friendly Web case](https://agentfriendlyweb.dev/casos/tokenizart)

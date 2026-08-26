@@ -72,6 +72,5 @@ Tokenizart supports identity, evidence and traceability. It does not promise aut
 - Companion public beta: https://companion-staging.tokenizart.info/beta
 - Demo Atelier: https://companion-staging.tokenizart.info/demo-atelier
 - Agentic repository: https://github.com/tokenizartinfo-ops/tokenizart-agentic
-- Agent Friendly Web case: https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart
+- Agent Friendly Web case: https://agentfriendlyweb.dev/casos/tokenizart
 - Contact: tokenizart.info@gmail.com
-

@@ -178,3 +178,20 @@ Llegar a "100% agent-friendly" no significa activar todos los protocolos. Signif
 - Google crawling and indexing: https://developers.google.com/search/docs/crawling-indexing
 - Google robots guidance: https://developers.google.com/search/docs/crawling-indexing/robots/intro
 - MCP TypeScript SDK 2026-07-28 support: https://ts.sdk.modelcontextprotocol.io/v2/migration/support-2026-07-28
+
+## 11. Dominio operativo de Agent Friendly Web
+
+El 2026-08-26 se registro `agentfriendlyweb.dev` en la misma cuenta organizacional de Cloudflare utilizada por Tokenizart.
+
+- Titular del registro: Gabriel Mucchiut.
+- Proveedor de registro y DNS: Cloudflare.
+- Periodo inicial: un ano.
+- Fecha de expiracion verificada: 2027-08-26.
+- Renovacion automatica: desactivada.
+- Origen canonico: `https://agentfriendlyweb.dev/`.
+- Estado de publicacion: activo. El dominio quedo vinculado al proyecto Sites con DNS y certificado TLS validados.
+- Pruebas de publicacion: respuestas HTTP 200 verificadas para portada, `robots.txt`, `llms.txt`, `llms-full.txt`, `sitemap.xml`, OpenAPI, catalogo publico, indice de skills, manifiesto Tokenizart y pagina del caso.
+- Acceso privado: `/expediente` redirige al login autenticado y conserva `https://agentfriendlyweb.dev/callback` como retorno.
+- Limite conocido: la negociacion `Accept: text/markdown` de la portada continua entregando HTML y permanece como mejora verificable; no se declara implementada.
+
+No se versionan datos personales de contacto, domicilio, telefono, tarjeta ni identificadores de pago. La decision de renovar requiere revision anticipada del uso, precio vigente y aprobacion humana expresa.

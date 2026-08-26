@@ -1,4 +1,4 @@
-const origin = 'https://agent-friendly-web.tokenizart.chatgpt.site';
+const origin = 'https://agentfriendlyweb.dev';
 
 export async function GET() {
   return Response.json(
@@ -24,4 +24,3 @@ export async function GET() {
     },
   );
 }
-

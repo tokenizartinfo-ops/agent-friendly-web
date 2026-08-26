@@ -29,10 +29,9 @@
 ## Public technical resources
 
 - [Agentic repository](https://github.com/tokenizartinfo-ops/tokenizart-agentic)
-- [Agent Friendly Web Tokenizart case](https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart)
+- [Agent Friendly Web Tokenizart case](https://agentfriendlyweb.dev/casos/tokenizart)
 - [Extended public context](https://tokenizart.com/llms-full.txt)
 
 ## Contact
 
 - tokenizart.info@gmail.com
-

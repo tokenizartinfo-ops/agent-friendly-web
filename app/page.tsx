@@ -10,7 +10,7 @@ export default function Home() {
     operatingSystem: 'Web',
     author: { '@type': 'Person', name: 'Gabriel Mucchiut' },
     description: 'Auditor publico y expediente guiado para mejorar el descubrimiento y uso agentico de sitios web.',
-    url: 'https://agent-friendly-web.tokenizart.chatgpt.site/',
+    url: 'https://agentfriendlyweb.dev/',
   };
   return (
     <main>
