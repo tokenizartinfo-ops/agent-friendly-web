@@ -41,6 +41,16 @@ El 2026-08-26, `isitagentready.com` clasifico:
 
 El resultado externo confirma la direccion general del auditor propio, aunque utiliza otra escala y otros checks. No debe mezclarse un puntaje con el otro.
 
+### Resultado post despliegue de Agent Friendly Web v2
+
+Despues de publicar Content Signals, Link headers, Agent Skills index, catalogo de recursos y API Catalog:
+
+- el auditor AF v1 paso de 63/100 a **65/100**, manteniendo AF-3 herramientas;
+- el auditor externo paso de Level 1 a **Level 2 - Bot-Aware**;
+- el siguiente requisito externo identificado es negociacion `Accept: text/markdown`.
+
+La mejora es evidencia de que el proceso funciona. Markdown for Agents permanece pendiente porque debe implementarse realmente; no se agrega una respuesta falsa para alcanzar otro nivel.
+
 ### Crawlers observados
 
 Pruebas publicas con user agents de OpenAI, Anthropic, Perplexity, Google, Apple, Amazon, Meta, Cohere y Common Crawl devolvieron HTTP 200 para el inicio y `robots.txt` de Tokenizart y Atelier. Esto demuestra accesibilidad HTTP en la prueba, no indexacion, recomendacion ni uso garantizado por esos proveedores.
