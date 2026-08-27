@@ -30,7 +30,7 @@ function present(project: typeof siteProjects.$inferSelect) {
     hosting: project.hosting,
     notes: project.notes,
   };
-  const question = nextQuestion(intake);
+  const question = nextQuestion(intake, { stage: 'basic' });
   return {
     id: project.id,
     ...intake,
@@ -65,7 +65,8 @@ export async function PUT(request: Request) {
   if (!intake.website) return Response.json({ error: 'Indica el sitio web para guardar el expediente.' }, { status: 400 });
 
   const now = new Date().toISOString();
-  const completion = completionForIntake(intake);
+  // Expanded publication fields become active after the Block 1 D1 migration.
+  const completion = completionForIntake(intake, { stage: 'basic' });
   const db = getDb();
   const requestedId = typeof raw.id === 'string' ? raw.id : '';
   const [existing] = await db

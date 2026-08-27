@@ -44,7 +44,7 @@
 - Consumes: the current `normalizeIntake(input)`, `completionForIntake(intake)`, and `nextQuestion(intake)` API.
 - Produces: `normalizeIntake(input): ExpandedIntake`, `completionForIntake(intake): number`, `nextQuestion(intake): { field: string, prompt: string } | null`, and `publicAttestationDraft(intake): PublicAttestationDraft`.
 
-- [ ] **Step 1: Write failing normalization and projection tests**
+- [x] **Step 1: Write failing normalization and projection tests**
 
 Add these assertions to `test/intake.test.mjs`:
 
@@ -93,13 +93,13 @@ test('publicAttestationDraft exposes only owner-approved public fields', () => {
 });
 ```
 
-- [ ] **Step 2: Run the focused test and confirm the red state**
+- [x] **Step 2: Run the focused test and confirm the red state**
 
 Run: `node --test test/intake.test.mjs`
 
 Expected: FAIL because expanded fields and `publicAttestationDraft` do not exist.
 
-- [ ] **Step 3: Implement the expanded allowlists and sanitized projection**
+- [x] **Step 3: Implement the expanded allowlists and sanitized projection**
 
 In `lib/intake.mjs`, add the exact fields below to `allowedFields` and normalize arrays with the existing `cleanList` helper:
 
@@ -130,7 +130,7 @@ const expandedFields = [
 
 Export a `publicAttestationDraft` that returns only organization, canonical origin, site type, audience, languages, goals, public content sources, desired capabilities, authorized resources, and crawler policies. Convert the website to `new URL(intake.website).origin`; never include maintainer contacts, approver contacts, hosting notes, or free-form notes.
 
-- [ ] **Step 4: Keep completion progressive and deterministic**
+- [x] **Step 4: Keep completion progressive and deterministic**
 
 Use these publication-decision fields after the existing eight basic fields:
 
@@ -145,11 +145,13 @@ const publicationFields = [
 
 `completionForIntake` must calculate completion over twelve decisions. `nextQuestion` must ask the existing basic questions first and then the four publication questions in the listed order.
 
-- [ ] **Step 5: Run the test and commit the contract**
+- [x] **Step 5: Run the test and commit the contract**
 
 Run: `node --test test/intake.test.mjs`
 
 Expected: PASS.
+
+Implementation note: the existing eight-field UI and D1 schema continue using the explicit `stage: 'basic'` compatibility mode until Tasks 2 and 4 persist and render the four publication decisions. This avoids presenting an unreachable 100% state during the migration.
 
 ```bash
 git add lib/intake.mjs test/intake.test.mjs
