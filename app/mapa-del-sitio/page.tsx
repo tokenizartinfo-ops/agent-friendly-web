@@ -8,6 +8,7 @@ import {
   ExternalLink,
   FileCode2,
   FileText,
+  Globe2,
   LockKeyhole,
   Map,
   Radar,
@@ -21,6 +22,7 @@ const humanRoutes = [
   { name: 'Auditor publico', detail: 'Comprueba evidencia visible sin modificar el sitio.', href: '/#auditar', icon: Radar },
   { name: 'Evolucion agentica', detail: 'Compara AF-0 a AF-5 mediante casos ilustrativos.', href: '/evolucion-agentica', icon: Route },
   { name: 'Metodologia', detail: 'Explica el puntaje, sus limites y las fuentes primarias.', href: '/metodologia', icon: Compass },
+  { name: 'Registry publico', detail: 'Perfiles versionados con declaraciones, observaciones y dominio verificado.', href: '/registry', icon: Globe2 },
   { name: 'Caso Tokenizart', detail: 'Primer caso integral, con archivos y progreso verificable.', href: '/casos/tokenizart', icon: CheckCircle2 },
   { name: 'Mi expediente', detail: 'Area privada para ordenar contexto y un roadmap propio.', href: '/expediente', icon: LockKeyhole },
 ];

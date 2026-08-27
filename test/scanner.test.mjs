@@ -98,7 +98,23 @@ test('analyzeRobots scopes a full block to its own crawler group', () => {
 });
 
 test('isPrivateIp blocks non-public IPv4 and IPv6 ranges', () => {
-  for (const ip of ['127.0.0.1', '10.1.2.3', '172.20.0.4', '192.168.2.2', '169.254.1.1', '::1', 'fc00::1', 'fe80::1']) {
+  for (const ip of [
+    '127.0.0.1',
+    '10.1.2.3',
+    '100.64.1.2',
+    '172.20.0.4',
+    '192.0.2.10',
+    '192.168.2.2',
+    '198.18.0.1',
+    '198.51.100.5',
+    '203.0.113.8',
+    '169.254.1.1',
+    '::1',
+    'fc00::1',
+    'fe80::1',
+    'ff02::1',
+    '2001:db8::1',
+  ]) {
     assert.equal(isPrivateIp(ip), true, ip);
   }
   assert.equal(isPrivateIp('104.16.132.229'), false);

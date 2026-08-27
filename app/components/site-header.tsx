@@ -9,7 +9,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <header className="site-header">
-      <a className="brand" href="/" aria-label="Agent Friendly Web, inicio">
+      <a className="brand" href="/">
         <span className="brand-mark">AF</span>
         <span><strong>Agent Friendly Web</strong><small>by Gabriel Mucchiut</small></span>
       </a>
@@ -17,6 +17,7 @@ export function SiteHeader() {
         <a href="/#auditar" onClick={() => setOpen(false)}>Auditar</a>
         <a href="/evolucion-agentica" onClick={() => setOpen(false)}>Evolucion</a>
         <a href="/metodologia" onClick={() => setOpen(false)}>Metodo</a>
+        <a href="/registry" onClick={() => setOpen(false)}>Registry</a>
         <a href="/casos/tokenizart" onClick={() => setOpen(false)}>Casos</a>
         <a href="/mapa-del-sitio" onClick={() => setOpen(false)}>Mapa</a>
         <a className="private-nav-link" href="/expediente" onClick={() => setOpen(false)}>

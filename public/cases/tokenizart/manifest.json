@@ -7,6 +7,9 @@
   "agentic_readiness": {
     "methodology": "Agent Friendly Web Method v1",
     "case_url": "https://agentfriendlyweb.dev/casos/tokenizart",
+    "registry_profile": "https://agentfriendlyweb.dev/registry/tokenizart",
+    "registry_json": "https://agentfriendlyweb.dev/registry/tokenizart/profile.json",
+    "registry_markdown": "https://agentfriendlyweb.dev/registry/tokenizart/profile.md",
     "status": "progressive_implementation",
     "official_certification": false
   },

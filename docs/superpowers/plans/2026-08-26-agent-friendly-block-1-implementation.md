@@ -174,7 +174,7 @@ git commit -m "feat: expand private registry intake contract"
 - Consumes: `ExpandedIntake` from Task 1 and `getDb()` from `db/index.ts`.
 - Produces: `registrySites`, `domainClaims`, `ownerAttestations`, `publicProfiles`, and `scanObservations` Drizzle tables; persisted expanded intake fields on `siteProjects`.
 
-- [ ] **Step 1: Write a failing schema contract test**
+- [x] **Step 1: Write a failing schema contract test**
 
 Create `test/schema.test.mjs`:
 
@@ -194,13 +194,13 @@ test('Block 1 migration contains the registry boundary tables and private intake
 });
 ```
 
-- [ ] **Step 2: Run the schema test and confirm the missing migration**
+- [x] **Step 2: Run the schema test and confirm the missing migration**
 
 Run: `node --test test/schema.test.mjs`
 
 Expected: FAIL with `ENOENT` for `drizzle/0001_registry_block1.sql`.
 
-- [ ] **Step 3: Extend `siteProjects` and add registry tables**
+- [x] **Step 3: Extend `siteProjects` and add registry tables**
 
 Add the twelve expanded fields to `siteProjects` using `text(...).notNull().default('')`, with list values stored as JSON text. Add these table responsibilities:
 
@@ -230,17 +230,17 @@ scanObservations: {
 
 Use unique indexes for `registry_sites.project_id`, `registry_sites.hostname`, and `(public_profiles.slug, public_profiles.version)`. Use indexes for owner lookups, pending claims, latest observations, and latest published profiles. Keep challenge values and all private JSON out of public query helpers.
 
-- [ ] **Step 4: Generate and inspect the migration**
+- [x] **Step 4: Generate and inspect the migration**
 
 Run: `npx drizzle-kit generate --name registry_block1`
 
 Expected: `drizzle/0001_registry_block1.sql` plus updated Drizzle metadata. Inspect the SQL and confirm that it only adds columns, tables, and indexes; it must not drop or rewrite `site_projects` or `project_events`.
 
-- [ ] **Step 5: Persist and present expanded project fields**
+- [x] **Step 5: Persist and present expanded project fields**
 
 Update `app/api/projects/route.ts` so `present`, insert, and update map every expanded field. Continue filtering both selection and update by `siteProjects.userId === user.userId`. Event payloads contain only completion and field names, never field values.
 
-- [ ] **Step 6: Run tests, inspect migration, and commit**
+- [x] **Step 6: Run tests, inspect migration, and commit**
 
 Run:
 
@@ -273,7 +273,7 @@ git commit -m "feat: add registry block one data model"
 - Consumes: authenticated project ownership, `domainClaims`, `registrySites`, scanner SSRF rules.
 - Produces: `createDomainChallenge({ hostname, method, token, now })`, `evaluateDomainChallenge({ claim, dnsAnswers, httpBody, now })`, `assertPublicHostname(hostname, resolve)`, authenticated claim creation/listing, and authenticated verification.
 
-- [ ] **Step 1: Write failing pure verification tests**
+- [x] **Step 1: Write failing pure verification tests**
 
 Create `test/domain-verification.test.mjs` with these cases:
 
@@ -300,13 +300,13 @@ test('expired or already consumed challenge fails closed', () => {
 
 The test file defines `fixtureFor(claim)` to place the expected value in the DNS or HTTP input according to `claim.method`.
 
-- [ ] **Step 2: Run the tests and confirm the missing module**
+- [x] **Step 2: Run the tests and confirm the missing module**
 
 Run: `node --test test/domain-verification.test.mjs`
 
 Expected: FAIL because `lib/domain-verification.mjs` does not exist.
 
-- [ ] **Step 3: Implement challenge creation and evaluation**
+- [x] **Step 3: Implement challenge creation and evaluation**
 
 Use these constants and paths:
 
@@ -318,7 +318,7 @@ export const HTTP_CHALLENGE_PATH = '/.well-known/agent-friendly-owner.json';
 
 DNS uses `_agentfriendly-challenge.${hostname}` and value `agentfriendly-domain-verification=${token}`. HTTP expects JSON with `contract: "agentfriendly.domain-claim.v1"`, the exact hostname, and the exact token. Evaluation rejects mismatched hostname, expired claim, non-pending status, malformed JSON, and reused claims.
 
-- [ ] **Step 4: Extract the scanner network guard without changing behavior**
+- [x] **Step 4: Extract the scanner network guard without changing behavior**
 
 Move public DNS resolution, timeout, response-size limit, and manual-redirect fetch into `lib/public-network.mjs`. Export:
 
@@ -330,7 +330,7 @@ resolvePublicTxt(name): Promise<string[]>
 
 Keep the 8-second timeout, 250,000-byte limit, manual redirects, public A/AAAA requirement, and private-IP rejection. Update `app/api/scan/route.ts` to consume those helpers and confirm its existing scanner tests remain unchanged.
 
-- [ ] **Step 5: Add authenticated claim APIs**
+- [x] **Step 5: Add authenticated claim APIs**
 
 `POST /api/projects/{projectId}/domain-claims` accepts `{ "method": "dns_txt" }` or `{ "method": "http_file" }`, verifies project ownership, derives the hostname from the saved website, invalidates older pending claims for the same project, and returns the challenge instructions. Generate the token with 32 cryptographically random bytes encoded as base64url.
 
@@ -338,7 +338,7 @@ Keep the 8-second timeout, 250,000-byte limit, manual redirects, public A/AAAA r
 
 `POST /api/projects/{projectId}/domain-claims/{claimId}/verify` performs only the declared DNS or HTTP read, enforces one attempt per 10 seconds and a maximum of 10 attempts, updates the claim and `registrySites.verificationStatus` atomically, and records a metadata-only `domain_claim_verified` or `domain_claim_failed` event.
 
-- [ ] **Step 6: Run focused and regression tests, then commit**
+- [x] **Step 6: Run focused and regression tests, then commit**
 
 Run:
 
@@ -348,6 +348,8 @@ npm test
 ```
 
 Expected: PASS with no scanner score changes.
+
+Verification completed on 2026-08-27: focused tests, full regression, lint, and the production build passed. The global standalone `tsc --noEmit` command remains red only on pre-existing JavaScript inference issues outside Task 3; it reports no Task 3 paths. No remote D1 migration, DNS change, deployment, profile publication, or external write was executed.
 
 ```bash
 git add lib/domain-verification.mjs lib/public-network.mjs app/api/scan/route.ts app/api/projects test
@@ -367,17 +369,17 @@ git commit -m "feat: add read only domain verification"
 - Consumes: expanded `/api/projects` fields and domain-claim endpoints from Tasks 2 and 3.
 - Produces: progressive form sections, domain challenge instructions, status labels, and explicit publication readiness without publishing.
 
-- [ ] **Step 1: Write a failing UI contract test**
+- [x] **Step 1: Write a failing UI contract test**
 
 Create `test/intake-ui-contract.test.mjs` that reads `app/components/intake-workspace.tsx` and asserts the presence of labels `Mantenedor actual`, `Proveedor DNS`, `Politica de busqueda`, `Uso para entrenamiento`, `Responsable de aprobacion`, `Verificar dominio`, and the warning `No publica el perfil automaticamente`.
 
-- [ ] **Step 2: Run the contract test and confirm the missing controls**
+- [x] **Step 2: Run the contract test and confirm the missing controls**
 
 Run: `node --test test/intake-ui-contract.test.mjs`
 
 Expected: FAIL on the first missing label.
 
-- [ ] **Step 3: Add four progressive sections**
+- [x] **Step 3: Add four progressive sections**
 
 Add sections in this order:
 
@@ -388,11 +390,11 @@ Add sections in this order:
 
 Keep autosave at 900 ms, update the decision counter to twelve, and maintain responsive dimensions without nesting cards.
 
-- [ ] **Step 4: Add domain verification as an explicit separate action**
+- [x] **Step 4: Add domain verification as an explicit separate action**
 
 Show the normalized domain, current status (`Sin verificar`, `Pendiente`, `Verificado hasta fecha`, `Vencido`), method selector, challenge copy button, and `Comprobar ahora` button. Do not automatically create or verify a challenge during autosave. After success, explain that verification proves temporary domain control but grants no write access.
 
-- [ ] **Step 5: Run UI checks and commit**
+- [x] **Step 5: Run UI checks and commit**
 
 Run:
 
@@ -403,6 +405,8 @@ npm run build
 ```
 
 Expected: PASS and successful build.
+
+Verified locally on 2026-08-27: 56 tests passed, ESLint completed without errors, the vinext production build succeeded, the authenticated form restored all 12 decisions and its pending domain claim after reload, stale instructions disappeared after changing the saved hostname, and Playwright found no horizontal overflow or clipped buttons at 1440x900 and 390x844. Only local D1 migrations were used for browser QA; no remote infrastructure was modified.
 
 ```bash
 git add app/components/intake-workspace.tsx app/globals.css test/intake-ui-contract.test.mjs
@@ -430,7 +434,7 @@ git commit -m "feat: add progressive registry intake workspace"
 - Consumes: verified `registrySites`, expanded private project, latest explicit observation, and `publicAttestationDraft`.
 - Produces: `buildPublicProfile(input): agentfriendly.public-profile.v1`, `renderPublicProfileMarkdown(profile): string`, `listPublishedProfiles()`, `getPublishedProfile(slug, version?)`, and an owner-only publication endpoint.
 
-- [ ] **Step 1: Write failing projection tests**
+- [x] **Step 1: Write failing projection tests**
 
 Create `test/public-profile.test.mjs`:
 
@@ -455,13 +459,13 @@ test('markdown renderer emits real markdown with source dates', () => {
 });
 ```
 
-- [ ] **Step 2: Run the projection test and confirm the missing module**
+- [x] **Step 2: Run the projection test and confirm the missing module**
 
 Run: `node --test test/public-profile.test.mjs`
 
 Expected: FAIL because `lib/public-profile.mjs` does not exist.
 
-- [ ] **Step 3: Implement the public contract and Markdown renderer**
+- [x] **Step 3: Implement the public contract and Markdown renderer**
 
 The JSON root contains:
 
@@ -477,7 +481,7 @@ The JSON root contains:
 
 Every `assertions` entry contains `{ value, state, source, observedAt }`. Remove undefined values and reject free-form HTML. Markdown uses headings, bullet lists, direct source links, state labels, dates, and limits; it contains no embedded HTML or private contact data.
 
-- [ ] **Step 4: Implement an owner-only publication transaction**
+- [x] **Step 4: Implement an owner-only publication transaction**
 
 `POST /api/projects/{projectId}/publish-profile` requires:
 
@@ -491,7 +495,7 @@ Every `assertions` entry contains `{ value, state, source, observedAt }`. Remove
 
 Reject unauthenticated users, project mismatch, unverified or expired domain, hostname mismatch, and false confirmation. In one D1 batch, insert an approved owner attestation, insert `public_profiles` at `max(version)+1`, mark the previous published version `superseded`, set site visibility to `public`, and append a metadata-only project event.
 
-- [ ] **Step 5: Add public Registry routes**
+- [x] **Step 5: Add public Registry routes**
 
 Implement:
 
@@ -502,7 +506,7 @@ Implement:
 
 Return 404 for unknown or unpublished profiles. Never return draft, revoked, or superseded versions from the latest route; allow a specific historical version only when it was once published.
 
-- [ ] **Step 6: Update navigation and sitemap, then commit**
+- [x] **Step 6: Update navigation and sitemap, then commit**
 
 Run:
 
@@ -514,6 +518,8 @@ npm run build
 ```
 
 Expected: all commands pass and `/registry` appears in the build.
+
+Verification completed locally on 2026-08-27: the focused projection and route-contract tests passed, the full 62-test suite passed, ESLint passed, and the production build included `/registry`, `/registry/:slug`, and the JSON/Markdown routes. No D1 migration, domain claim, public profile, deployment, DNS change, or external write was executed.
 
 ```bash
 git add lib/public-profile.mjs lib/registry-store.ts app/api/projects app/registry app/components/site-header.tsx app/sitemap.ts test
@@ -536,23 +542,23 @@ git commit -m "feat: publish versioned agent friendly profiles"
 - Consumes: public network helpers, current scanner analyzers and methodology, authenticated project ownership.
 - Produces: `runPublicAudit(url): AuditResult`, unchanged public `/api/scan`, and explicit owner-only observation persistence.
 
-- [ ] **Step 1: Write a failing sanitization test**
+- [x] **Step 1: Write a failing sanitization test**
 
 Create `test/public-audit.test.mjs` that verifies `sanitizeObservation(audit)` retains target, checkedAt, evidence, readiness, and probe metadata but removes probe bodies, response headers other than content type/link, stack traces, and raw errors.
 
-- [ ] **Step 2: Extract the current scan orchestration**
+- [x] **Step 2: Extract the current scan orchestration**
 
 Move the probe list and readiness assembly from `app/api/scan/route.ts` to `lib/public-audit.mjs`. Keep paths, content negotiation, limits, scoring, and user agent unchanged. The public route calls `runPublicAudit` and still writes nothing.
 
-- [ ] **Step 3: Add explicit authenticated persistence**
+- [x] **Step 3: Add explicit authenticated persistence**
 
 `POST /api/projects/{projectId}/observations` accepts `{ "confirmSave": true }`, reads the saved project URL, runs the same public audit, sanitizes it, inserts `scanObservations`, and appends `scan_observation_saved` with observation ID and score only. Reject false confirmation, unauthenticated callers, and projects owned by another user.
 
-- [ ] **Step 4: Add a human action to the expediente**
+- [x] **Step 4: Add a human action to the expediente**
 
 Add `Auditar y guardar observacion` with explanatory copy: the public scanner normally does not store results; this action saves one dated, sanitized observation to the private expediente. Display last observation date and score, without marking owner declarations as observed.
 
-- [ ] **Step 5: Run full regression and commit**
+- [x] **Step 5: Run full regression and commit**
 
 Run:
 
@@ -564,6 +570,8 @@ npm run build
 ```
 
 Expected: scanner scores remain unchanged and all tests pass.
+
+Verification completed locally on 2026-08-27: focused sanitization/scanner tests passed, the full 67-test suite passed, ESLint passed, and the production build included the authenticated observation route. The public scanner remains non-persistent. No public scan was executed, no observation was saved remotely, and no D1 migration or deployment was applied.
 
 ```bash
 git add lib/public-audit.mjs app/api/scan/route.ts app/api/projects app/components/intake-workspace.tsx test
@@ -586,7 +594,7 @@ git commit -m "feat: save explicit owner audit observations"
 - Consumes: public Tokenizart case files and the Registry profile contract.
 - Produces: immutable built-in profile `tokenizart` version 1, merged read-only with D1-published profiles.
 
-- [ ] **Step 1: Write a failing curated-profile test**
+- [x] **Step 1: Write a failing curated-profile test**
 
 The test loads `registry/builtin/tokenizart.v1.json` and asserts:
 
@@ -601,19 +609,19 @@ assert.equal(JSON.stringify(profile).includes('production MCP'), false);
 assert.equal(JSON.stringify(profile).includes('100% agent friendly'), false);
 ```
 
-- [ ] **Step 2: Build the curated profile from verified public sources**
+- [x] **Step 2: Build the curated profile from verified public sources**
 
 Use `docs/TOKENIZART-CASE-2026-08-26.md` and `public/cases/tokenizart/manifest.json` as provenance. Distinguish Tokenizart corporate/public presence from Atelier operating platform. Mark the Agent Friendly Web audit as observed, owner-first philosophy as owner-declared, and only deployed HTTP resources as observed. Label CLI, MCP, skills, OKF, Owner Live, x402/MPP, and mutating tools by their actual maturity or omit them from available capabilities.
 
-- [ ] **Step 3: Merge built-ins and D1 profiles deterministically**
+- [x] **Step 3: Merge built-ins and D1 profiles deterministically**
 
 `listPublishedProfiles()` returns built-ins plus latest D1 profiles, sorted by organization and slug. `getPublishedProfile('tokenizart')` returns the built-in record unless a later founder-approved built-in version exists. A D1 user profile cannot override a built-in slug.
 
-- [ ] **Step 4: Link the existing case and machine manifest to Registry**
+- [x] **Step 4: Link the existing case and machine manifest to Registry**
 
 Add visible links between `/casos/tokenizart`, `/registry/tokenizart`, JSON, and Markdown. Update the manifest with the canonical Registry URLs; do not change historical audit values.
 
-- [ ] **Step 5: Run tests and commit**
+- [x] **Step 5: Run tests and commit**
 
 Run:
 
@@ -625,6 +633,8 @@ npm run build
 ```
 
 Expected: all commands pass.
+
+Verification completed locally on 2026-08-27: the curated profile tests passed, the full 70-test suite passed, ESLint passed, and the production build resolved the built-in profile without D1 slug replacement. No remote profile, migration, Registry release, DNS change, or deployment was executed.
 
 ```bash
 git add registry lib/registry-store.ts app/casos/tokenizart/page.tsx public/cases/tokenizart/manifest.json test
@@ -646,7 +656,7 @@ git commit -m "feat: add tokenizart registry case"
 - Consumes: all Block 1 tasks and generated D1 migration.
 - Produces: auditable release evidence, deployed Registry, and an explicit rollback point.
 
-- [ ] **Step 1: Run negative API tests locally**
+- [x] **Step 1: Run negative API tests locally**
 
 Verify these exact outcomes:
 
@@ -658,7 +668,7 @@ Verify these exact outcomes:
 - false `confirmPublicProjection` returns 400;
 - secret-like fields never appear in project events, observations, profiles, JSON, Markdown, or logs.
 
-- [ ] **Step 2: Inspect migration and package boundaries**
+- [x] **Step 2: Inspect migration and package boundaries**
 
 Run:
 
@@ -685,11 +695,11 @@ Use one authenticated owner and one unauthenticated window. Verify desktop at 14
 6. Registry filters, provenance badges, JSON, and Markdown work without horizontal overflow.
 7. Tokenizart links distinguish `tokenizart.com` from `atelier.tokenizart.com`.
 
-- [ ] **Step 4: Save and deploy one Sites version**
+- [x] **Step 4: Save and deploy one Sites version**
 
 Push the exact validated commit to the configured Sites source branch using a short-lived per-command credential. Package the successful build with the Sites `package-site.sh` helper, save one version with that commit SHA, and deploy that saved version publicly only under the already-approved public access policy.
 
-- [ ] **Step 5: Execute post-deployment smoke tests**
+- [x] **Step 5: Execute post-deployment smoke tests**
 
 Require HTTP 200 and correct content types for:
 
@@ -708,7 +718,7 @@ https://agentfriendlyweb.dev/registry/tokenizart/profile.md
 
 Confirm that public assets contain `https://agentfriendlyweb.dev` and do not contain `agent-friendly-web.tokenizart.chatgpt.site`. Confirm `/expediente` redirects to authenticated access rather than exposing private content.
 
-- [ ] **Step 6: Record release and rollback evidence**
+- [x] **Step 6: Record release and rollback evidence**
 
 Write the deployed Sites version number, commit SHA, migration name, deployment ID, smoke timestamp, observed status, and previous working Sites version into `docs/BLOCK-1-RELEASE-CHECKLIST-2026-08-26.md`. Rollback means redeploying the previous saved Sites version; do not reverse a D1 migration destructively. Add a forward migration for any schema correction.
 
