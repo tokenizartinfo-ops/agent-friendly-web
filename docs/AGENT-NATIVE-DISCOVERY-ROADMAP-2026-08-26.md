@@ -32,11 +32,12 @@ La meta de 100% representa la finalizacion de las capas que el caso necesita. No
 - contenido sectorial inicial para seis perfiles en ESP/ENG/POR;
 - comparador local antes/despues y contrato `readiness-comparison.v1`;
 - prototipo determinista de asistencia de intake y contrato `intake-assistant.v1`, sin persistencia ni acciones.
+- bundle publico OKF v0.2 con 11 conceptos, manifiesto, procedencia, vigencia, licencia y SHA-256;
+- pagina humana `/conocimiento-abierto` y descubrimiento OKF desde `llms.txt`, catalogos, sitemap y footer.
 
 ### Planificado
 
 - expansion de la biblioteca sectorial con casos, respuestas citables y fuentes especificas;
-- perfiles OKF v0.2 exportables para conocimiento publico con procedencia, confianza y ciclo de vida;
 - monitoreo temporal y comparacion de politicas por crawler, buscador, asistente y uso de entrenamiento;
 - ampliacion multidioma del resto de la experiencia, mas alla de la primera entrega sectorial;
 - asistente de intake autenticado capaz de transferir propuestas aprobadas al expediente;
@@ -108,7 +109,7 @@ Cada cliente podra elegir por separado busqueda, asistencia, entrenamiento y acc
 
 El Registry sera una capa de descubrimiento y no un directorio de pago disfrazado. Los perfiles mostraran estados separados: `owner_declared`, `observed`, `verified`, `deployed`, `planned`, `revoked` y `superseded`.
 
-Cada perfil publicado se ofrecera en HTML, JSON y Markdown. Una exportacion OKF v0.2 posterior podra representar la organizacion, sus servicios, fuentes, herramientas y relaciones mediante Markdown con YAML frontmatter. OKF complementa OpenAPI, MCP, Schema.org y los contratos de cada dominio; no los reemplaza y no convierte conocimiento declarado en evidencia verificada.
+Cada perfil publicado se ofrece en HTML, JSON y Markdown. El primer bundle OKF v0.2 ya representa la metodologia, los limites, el Registry y el caso Tokenizart mediante Markdown con YAML frontmatter, procedencia, vigencia e integridad. OKF complementa OpenAPI, MCP, Schema.org y los contratos de cada dominio; no los reemplaza y no convierte conocimiento declarado en evidencia verificada.
 
 La incorporacion al Registry permite que humanos y agentes encuentren organizaciones que comenzaron su preparacion agentica. Las posiciones promocionadas, si existen, se identificaran claramente y nunca alteraran el estado de verificacion.
 
@@ -188,9 +189,11 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 1. **Bloque 1 - confianza y Registry: desplegado.** Expediente, verificacion de dominio, perfiles versionados, observaciones, caso Tokenizart y release seguro.
 2. **Bloque 2 - AEO, sectores y medicion: implementado para release.** Guia, catalogo, control mensual de fuentes, primera biblioteca ESP/ENG/POR y comparador no persistente.
 3. **Bloque 3 - asistencia de intake: prototipo controlado implementado.** Texto libre, rechazo de secretos, propuestas field-scoped y seleccion humana; guardado, voz, correo y pagos siguen bloqueados.
-4. **Bloque 4 - distribucion agentica:** OKF, CLI y MCP read-only con contratos publicados.
-5. **Bloque 5 - integracion:** adaptadores de CMS, Draft PRs y capsulas con doble consentimiento.
-6. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
+4. **Bloque 4A - OKF publico: implementado para release.** Bundle v0.2 determinista, pagina humana, descubrimiento, manifiesto y checksums.
+5. **Bloque 4B - CLI read-only: siguiente gate.** Auditoria y preparacion local con JSON estable y `--dry-run`.
+6. **Bloque 4C - MCP read-only: planificado.** Contratos y observabilidad antes de cualquier tool remota.
+7. **Bloque 5 - integracion:** adaptadores de CMS, Draft PRs y capsulas con doble consentimiento.
+8. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
 
 ## Recursos de descubrimiento
 
@@ -209,6 +212,10 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/.well-known/readiness-comparison-contract.json` | limites y campos del comparador local | preparado para release, convencion del proyecto |
 | `/.well-known/intake-assistant-contract.json` | contrato fail-closed del prototipo de intake | preparado para release, convencion del proyecto |
 | `/.well-known/security.txt` | contacto y politica de seguridad | desplegado |
+| `/conocimiento-abierto` | explicacion humana del conocimiento publico versionado | preparado para Sites 16 |
+| `/okf/v0.2/index.md` | indice machine-readable del bundle OKF v0.2 | preparado para Sites 16 |
+| `/okf/v0.2/manifest.json` | inventario, metadata y hashes de distribucion | preparado para Sites 16 |
+| `/okf/v0.2/CHECKSUMS.sha256` | verificacion SHA-256 del bundle publicado | preparado para Sites 16 |
 
 ## Secuencia hacia herramientas y delegacion
 
