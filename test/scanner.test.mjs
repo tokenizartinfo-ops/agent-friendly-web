@@ -64,6 +64,19 @@ test('analyzeRobots does not treat a wildcard rule as an explicit AI crawler pol
   });
 });
 
+test('analyzeRobots scopes a full block to its own crawler group', () => {
+  const robots = `
+    User-agent: GPTBot
+    Disallow: /
+
+    User-agent: *
+    Allow: /
+    Disallow: /private/
+  `;
+
+  assert.equal(analyzeRobots(robots).allowsPublicCrawl, true);
+});
+
 test('isPrivateIp blocks non-public IPv4 and IPv6 ranges', () => {
   for (const ip of ['127.0.0.1', '10.1.2.3', '172.20.0.4', '192.168.2.2', '169.254.1.1', '::1', 'fc00::1', 'fe80::1']) {
     assert.equal(isPrivateIp(ip), true, ip);
