@@ -11,6 +11,9 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - [Sector guidance in ES/EN/PT](https://agentfriendlyweb.dev/sectores)
 - [Before and after evidence comparison](https://agentfriendlyweb.dev/medir-mejora)
 - [Controlled intake assistant prototype](https://agentfriendlyweb.dev/asistente)
+- [Open knowledge and OKF downloads](https://agentfriendlyweb.dev/conocimiento-abierto)
+- [OKF v0.2 bundle index](https://agentfriendlyweb.dev/okf/v0.2/index.md)
+- [OKF distribution manifest](https://agentfriendlyweb.dev/okf/v0.2/manifest.json)
 - [Methodology](https://agentfriendlyweb.dev/metodologia)
 - [Tokenizart case](https://agentfriendlyweb.dev/casos/tokenizart)
 - [Agentic maturity demonstrator](https://agentfriendlyweb.dev/evolucion-agentica)
@@ -31,3 +34,4 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - WebMCP is treated as an experimental W3C Community Group draft.
 - The private owner dossier requires sign-in and must not be crawled or inferred.
 - MCP, A2A, CLI, WebMCP and x402 are not production capabilities unless the readiness manifest marks them as `deployed` and links a verifiable endpoint.
+- The AI Catalog links the OKF bundle as an Agent Friendly Web project convention; OKF v0.2 does not define a universal discovery endpoint.

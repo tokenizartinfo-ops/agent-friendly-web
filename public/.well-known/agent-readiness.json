@@ -36,6 +36,16 @@
       "resources": ["/asistente", "/.well-known/intake-assistant-contract.json"],
       "note": "Deterministic and client-side. No autonomous save, email, voice, payment or website mutation."
     },
+    "open_knowledge_okf": {
+      "status": "deployed",
+      "resources": [
+        "/conocimiento-abierto",
+        "/okf/v0.2/index.md",
+        "/okf/v0.2/manifest.json",
+        "/okf/v0.2/CHECKSUMS.sha256"
+      ],
+      "note": "Public read-only OKF v0.2 bundle. AI Catalog discovery is a project convention, not a universal OKF endpoint."
+    },
     "openapi": {
       "status": "deployed",
       "resources": ["/openapi.json", "/api-catalog"]

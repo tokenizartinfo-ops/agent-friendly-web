@@ -37,20 +37,28 @@ test('the human site map groups real resources and roadmap capabilities', async 
   for (const heading of ['Para propietarios y equipos', 'Para agentes y buscadores', 'Capacidades activas', 'Roadmap']) {
     assert.match(page, new RegExp(heading, 'i'));
   }
-  for (const resource of ['/robots.txt', '/sitemap.xml', '/llms.txt', '/llms-full.txt', '/openapi.json']) {
+  for (const resource of ['/robots.txt', '/sitemap.xml', '/llms.txt', '/llms-full.txt', '/openapi.json', '/okf/v0.2/index.md']) {
     assert.ok(page.includes(`href: '${resource}'`) || page.includes(`href="${resource}"`), `site map is missing ${resource}`);
   }
+  assert.match(page, /Conocimiento abierto/);
+  assert.match(page, /Bundle OKF publico/);
 });
 
 test('the technical sitemap includes only canonical public HTML routes', async () => {
   const sitemap = await readFile('app/sitemap.ts', 'utf8');
 
-  for (const route of ['/metodologia', '/evolucion-agentica', '/casos/tokenizart', '/mapa-del-sitio']) {
+  for (const route of ['/metodologia', '/evolucion-agentica', '/casos/tokenizart', '/conocimiento-abierto', '/mapa-del-sitio']) {
     assert.ok(sitemap.includes(route), `sitemap is missing ${route}`);
   }
   for (const excluded of ['/expediente', '/api/', '/.well-known/']) {
     assert.equal(sitemap.includes(excluded), false, `sitemap must not include ${excluded}`);
   }
+});
+
+test('the shared footer exposes human and machine OKF entry points', async () => {
+  const footer = await readFile('app/components/site-footer.tsx', 'utf8');
+  assert.ok(footer.includes("['Conocimiento abierto', '/conocimiento-abierto']"));
+  assert.ok(footer.includes("['OKF v0.2', '/okf/v0.2/index.md']"));
 });
 
 test('every public page uses the shared footer', async () => {

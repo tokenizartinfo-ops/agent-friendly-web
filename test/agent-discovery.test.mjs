@@ -31,6 +31,33 @@ test('public catalogs discover the readiness manifest and maturity demonstrator'
   assert.ok(urls.includes(`${canonical}/evolucion-agentica`));
 });
 
+test('all approved discovery surfaces expose the public OKF release without inventing a universal endpoint', async () => {
+  const llms = await readFile('public/llms.txt', 'utf8');
+  const llmsFull = await readFile('public/llms-full.txt', 'utf8');
+  for (const document of [llms, llmsFull]) {
+    assert.match(document, /https:\/\/agentfriendlyweb\.dev\/conocimiento-abierto/);
+    assert.match(document, /https:\/\/agentfriendlyweb\.dev\/okf\/v0\.2\/index\.md/);
+    assert.match(document, /https:\/\/agentfriendlyweb\.dev\/okf\/v0\.2\/manifest\.json/);
+  }
+
+  const catalog = JSON.parse(await readFile('public/.well-known/ai-catalog.json', 'utf8'));
+  const urls = catalog.resources.map((resource) => resource.url);
+  for (const url of [
+    `${canonical}/conocimiento-abierto`,
+    `${canonical}/okf/v0.2/index.md`,
+    `${canonical}/okf/v0.2/manifest.json`,
+    `${canonical}/okf/v0.2/CHECKSUMS.sha256`,
+  ]) assert.ok(urls.includes(url), `AI Catalog is missing ${url}`);
+  assert.match(catalog.okf_discovery_note, /project convention.*not.*universal.*OKF/i);
+
+  const readiness = JSON.parse(await readFile('public/.well-known/agent-readiness.json', 'utf8'));
+  assert.equal(readiness.capabilities.open_knowledge_okf.status, 'deployed');
+  assert.ok(readiness.capabilities.open_knowledge_okf.resources.includes('/okf/v0.2/index.md'));
+  assert.match(readiness.capabilities.open_knowledge_okf.note, /read-only/i);
+
+  await assert.rejects(readFile('public/.well-known/okf.json', 'utf8'), /ENOENT/);
+});
+
 test('Tokenizart and Atelier packages attribute their agentic roadmap', async () => {
   const paths = [
     'public/cases/tokenizart/tokenizart.com/llms.txt',

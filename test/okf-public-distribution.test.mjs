@@ -251,3 +251,13 @@ test('the human open knowledge page explains and links the public bundle without
   assert.match(page, /<SiteHeader\s*\/>/);
   assert.match(page, /<SiteFooter\s*\/>/);
 });
+
+test('sitemap and discovery sources publish the human OKF route and machine bundle entry', async () => {
+  const sitemap = await readFile('app/sitemap.ts', 'utf8');
+  assert.match(sitemap, /\/conocimiento-abierto/);
+  const footer = await readFile('app/components/site-footer.tsx', 'utf8');
+  assert.match(footer, /\/okf\/v0\.2\/index\.md/);
+  const map = await readFile('app/mapa-del-sitio/page.tsx', 'utf8');
+  assert.match(map, /\/conocimiento-abierto/);
+  assert.match(map, /\/okf\/v0\.2\/manifest\.json/);
+});
