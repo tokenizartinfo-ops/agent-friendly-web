@@ -129,12 +129,12 @@ git commit -m "feat: unify public site shell"
 - [ ] **Step 1: Write the failing prefill tests**
 
 ```js
-test('normalizeSitePrefill accepts a public hostname and strips credentials', () => {
-  assert.equal(normalizeSitePrefill('https://user:pass@example.org/path'), 'example.org/path');
+test('normalizeSitePrefill accepts a public hostname and path', () => {
+  assert.equal(normalizeSitePrefill('https://example.org/path'), 'example.org/path');
 });
 
 test('normalizeSitePrefill rejects private and unsupported targets', () => {
-  for (const value of ['localhost', '127.0.0.1', 'file:///tmp/a', 'javascript:alert(1)']) {
+  for (const value of ['localhost', '127.0.0.1', 'file:///tmp/a', 'javascript:alert(1)', 'https://user:pass@example.org']) {
     assert.equal(normalizeSitePrefill(value), '');
   }
 });

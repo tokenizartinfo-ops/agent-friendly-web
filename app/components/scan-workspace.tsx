@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ArrowRight,
   Bot,
@@ -13,6 +13,8 @@ import {
   Radar,
   Route,
 } from 'lucide-react';
+// @ts-expect-error Shared ESM module is exercised directly by Node tests.
+import { normalizeSitePrefill } from '../../lib/site-prefill.mjs';
 
 type Category = { label: string; score: number; weight: number; status: string };
 type ScanResult = {
@@ -38,6 +40,9 @@ const pendingCategories: Array<[string, Category]> = [
   ['answerability', { label: 'Contenido listo para respuestas', score: 0, weight: 20, status: 'pending' }],
   ['machineContent', { label: 'Contenido legible por agentes', score: 0, weight: 15, status: 'pending' }],
   ['tools', { label: 'APIs y herramientas', score: 0, weight: 20, status: 'pending' }],
+  ['experimental', { label: 'Interaccion web experimental', score: 0, weight: 10, status: 'pending' }],
+  ['trust', { label: 'Identidad, evidencia y gobierno', score: 0, weight: 10, status: 'pending' }],
+  ['commerce', { label: 'Comercio agentico', score: 0, weight: 5, status: 'pending' }],
 ];
 
 const auxiliaryDiagnostics = [
@@ -48,10 +53,15 @@ const auxiliaryDiagnostics = [
 ] as const;
 
 export function ScanWorkspace() {
-  const [url, setUrl] = useState('tokenizart.com');
+  const [url, setUrl] = useState('agentfriendlyweb.dev');
   const [result, setResult] = useState<ScanResult | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const prefill = normalizeSitePrefill(new URLSearchParams(window.location.search).get('site'));
+    if (prefill) setUrl(prefill);
+  }, []);
 
   async function runScan(event: React.FormEvent) {
     event.preventDefault();
@@ -115,19 +125,20 @@ export function ScanWorkspace() {
         <aside className="score-panel" aria-live="polite">
           <div className="score-heading">
             <div>
-              <span>Estado observado</span>
-              <strong>{result ? result.target.replace(/^https?:\/\//, '') : 'Ejemplo: Tokenizart'}</strong>
+              <span>{result ? 'Estado observado' : 'Referencia verificada'}</span>
+              <strong>{result ? result.target.replace(/^https?:\/\//, '') : 'agentfriendlyweb.dev'}</strong>
             </div>
             <Bot size={25} aria-hidden="true" />
           </div>
           <div className="score-value">
-            <strong>{result ? result.readiness.score : '—'}</strong>
+            <strong>{result ? result.readiness.score : '70'}</strong>
             <span>/ 100</span>
           </div>
           <div className="score-track" aria-hidden="true">
-            <span style={{ width: `${result?.readiness.score || 0}%` }} />
+            <span style={{ width: `${result?.readiness.score ?? 70}%` }} />
           </div>
-          <p className="score-level">{result ? result.readiness.level : 'Ejecuta una auditoria para obtener evidencia.'}</p>
+          <p className="score-level">{result ? result.readiness.level : 'AF-3 · Herramientas publicas'}</p>
+          {!result ? <p className="score-reference">Medicion propia publicada como caso de referencia. Audita otro dominio para reemplazarla.</p> : null}
           <p className="score-note">Metodologia propia de Gabriel Mucchiut. No es una certificacion oficial.</p>
         </aside>
       </section>
@@ -156,15 +167,30 @@ export function ScanWorkspace() {
             ))}
           </div>
           {result ? (
-            <div className="diagnostic-strip" aria-label="Diagnosticos auxiliares sin puntaje">
-              <div className="diagnostic-title"><span>Diagnosticos auxiliares</span><small>No alteran AF v1</small></div>
-              {auxiliaryDiagnostics.map(([id, label]) => (
-                <div className="diagnostic-item" data-detected={result.evidence[id]} key={id}>
-                  {result.evidence[id] ? <Check size={14} /> : <CircleAlert size={14} />}
-                  <span>{label}</span>
+            <>
+              <div className="diagnostic-strip" aria-label="Diagnosticos auxiliares sin puntaje">
+                <div className="diagnostic-title"><span>Diagnosticos auxiliares</span><small>No alteran AF v1</small></div>
+                {auxiliaryDiagnostics.map(([id, label]) => (
+                  <div className="diagnostic-item" data-detected={result.evidence[id]} key={id}>
+                    {result.evidence[id] ? <Check size={14} /> : <CircleAlert size={14} />}
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+              <details className="evidence-disclosure">
+                <summary>Ver evidencia tecnica y limites</summary>
+                <div className="evidence-grid">
+                  {Object.entries(result.evidence).map(([id, detected]) => (
+                    <span data-detected={detected} key={id}>{detected ? <Check size={14} /> : <CircleAlert size={14} />}{id}</span>
+                  ))}
                 </div>
-              ))}
-            </div>
+                {result.limits.length ? <ul>{result.limits.map((limit) => <li key={limit}>{limit}</li>)}</ul> : null}
+              </details>
+              <div className="result-next-action">
+                <div><span>Siguiente accion recomendada</span><strong>Convierte esta evidencia en un plan priorizado y revisable.</strong></div>
+                <a href="/expediente">Abrir mi expediente <ArrowRight size={16} /></a>
+              </div>
+            </>
           ) : null}
         </div>
 
