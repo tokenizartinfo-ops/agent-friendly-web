@@ -89,6 +89,7 @@ export default function TokenizartCasePage() {
             Cada capacidad se publica cuando es real, verificable y segura.
           </p>
           <div className="case-actions">
+            <a href="/registry/tokenizart">Ver perfil en Registry <ArrowRight size={17} /></a>
             <a href="/?site=tokenizart.com#auditar">Repetir auditoria <ArrowRight size={17} /></a>
             <a href="/cases/tokenizart/RUNBOOK.es.md">Abrir guia de instalacion <ExternalLink size={16} /></a>
           </div>
@@ -183,6 +184,8 @@ export default function TokenizartCasePage() {
           <a href="https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> Markdown for Agents <ExternalLink size={14} /></a>
           <a href="https://github.com/tokenizartinfo-ops/tokenizart-agentic" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> Tokenizart Agentic <ExternalLink size={14} /></a>
           <a href="https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/TOKENIZART-CASE-2026-08-26.md" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> Informe completo <ExternalLink size={14} /></a>
+          <a href="/registry/tokenizart/profile.json"><FileCheck2 size={16} /> Perfil Registry JSON <ExternalLink size={14} /></a>
+          <a href="/registry/tokenizart/profile.md"><FileCheck2 size={16} /> Perfil Registry Markdown <ExternalLink size={14} /></a>
         </div>
       </section>
       <SiteFooter />

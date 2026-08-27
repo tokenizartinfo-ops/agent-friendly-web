@@ -1,0 +1,147 @@
+{
+  "contract": "agentfriendly.public-profile.v1",
+  "slug": "tokenizart",
+  "version": 1,
+  "publishedAt": "2026-08-26T23:00:00.000Z",
+  "canonicalUrl": "https://agentfriendlyweb.dev/registry/tokenizart",
+  "organization": "Tokenizart",
+  "canonicalOrigin": "https://tokenizart.com/",
+  "siteType": "infraestructura para arte y objetos unicos",
+  "sectors": [
+    "arte",
+    "coleccionismo",
+    "trazabilidad",
+    "identidad digital"
+  ],
+  "audiences": [
+    "artistas",
+    "coleccionistas",
+    "galerias",
+    "museos",
+    "peritos y profesionales del arte"
+  ],
+  "languages": [
+    "Español",
+    "English",
+    "Portugues"
+  ],
+  "publicSources": [
+    {
+      "title": "Sitio publico de Tokenizart",
+      "url": "https://tokenizart.com/",
+      "state": "owner_declared",
+      "observedAt": "2026-08-26T18:00:00.000Z"
+    },
+    {
+      "title": "Atelier, plataforma operativa",
+      "url": "https://atelier.tokenizart.com/",
+      "state": "owner_declared",
+      "observedAt": "2026-08-26T18:00:00.000Z"
+    },
+    {
+      "title": "Caso reproducible Agent Friendly Web",
+      "url": "https://agentfriendlyweb.dev/casos/tokenizart",
+      "state": "observed",
+      "observedAt": "2026-08-26T23:00:00.000Z"
+    }
+  ],
+  "declaredCapabilities": [
+    "identidad digital para obras y objetos unicos",
+    "trazabilidad y evidencia acumulativa",
+    "Mint ERC-721",
+    "Certify",
+    "vinculacion fisico-digital NFC",
+    "Gallery con visibilidad controlada por el owner"
+  ],
+  "observedResources": [
+    {
+      "type": "robots.txt Tokenizart",
+      "url": "https://tokenizart.com/robots.txt",
+      "state": "observed",
+      "observedAt": "2026-08-26T18:00:00.000Z"
+    },
+    {
+      "type": "sitemap WordPress Tokenizart",
+      "url": "https://tokenizart.com/wp-sitemap.xml",
+      "state": "observed",
+      "observedAt": "2026-08-26T18:00:00.000Z"
+    },
+    {
+      "type": "robots.txt Atelier",
+      "url": "https://atelier.tokenizart.com/robots.txt",
+      "state": "observed",
+      "observedAt": "2026-08-26T18:00:00.000Z"
+    }
+  ],
+  "verification": {
+    "status": "curated_owner_attribution",
+    "hostname": "tokenizart.com",
+    "method": "founder_approved_case_record",
+    "verifiedAt": "2026-08-26T23:00:00.000Z",
+    "verifiedUntil": ""
+  },
+  "readiness": {
+    "level": "AF-1 descubrible",
+    "score": 23,
+    "state": "observed",
+    "observedAt": "2026-08-26T18:00:00.000Z"
+  },
+  "assertions": {
+    "organization": {
+      "value": "Tokenizart",
+      "state": "owner_declared",
+      "source": "founder_approved_case_record",
+      "observedAt": "2026-08-26T23:00:00.000Z"
+    },
+    "canonicalOrigin": {
+      "value": "https://tokenizart.com/",
+      "state": "owner_declared",
+      "source": "founder_approved_case_record",
+      "observedAt": "2026-08-26T23:00:00.000Z"
+    },
+    "readiness": {
+      "value": {
+        "level": "AF-1 descubrible",
+        "score": 23
+      },
+      "state": "observed",
+      "source": "agent_friendly_web_audit_2026_08_26",
+      "observedAt": "2026-08-26T18:00:00.000Z"
+    },
+    "primarySite": {
+      "value": "https://tokenizart.com/",
+      "state": "owner_declared",
+      "source": "founder_approved_case_record",
+      "observedAt": "2026-08-26T23:00:00.000Z"
+    },
+    "operatingPlatform": {
+      "value": "https://atelier.tokenizart.com/",
+      "state": "owner_declared",
+      "source": "founder_approved_case_record",
+      "observedAt": "2026-08-26T23:00:00.000Z"
+    },
+    "agenticArtifacts": {
+      "value": {
+        "repository": "https://github.com/tokenizartinfo-ops/tokenizart-agentic",
+        "status": "release_candidate",
+        "includes": [
+          "CLI read-only",
+          "contratos MCP",
+          "skills",
+          "exportaciones OKF"
+        ]
+      },
+      "state": "owner_declared",
+      "source": "public_repository_and_case_report",
+      "observedAt": "2026-08-26T23:00:00.000Z"
+    }
+  },
+  "historyUrl": "https://agentfriendlyweb.dev/registry/tokenizart#history",
+  "limits": [
+    "El nivel AF es una fotografia metodologica y no una certificacion oficial.",
+    "Accesibilidad HTTP no demuestra indexacion, recomendacion o uso por un proveedor de IA.",
+    "CLI, MCP, skills y OKF se mantienen como release candidates hasta contar con distribucion y endpoints verificables.",
+    "Owner Live, acciones Atelier y datos owner permanecen fuera del Registry publico.",
+    "Tokenizart organiza identidad, evidencia y trazabilidad; no garantiza autenticidad, precio, liquidez o resultado juridico."
+  ]
+}

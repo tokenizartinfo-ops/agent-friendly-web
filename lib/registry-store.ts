@@ -1,6 +1,12 @@
 import { and, desc, eq, inArray } from 'drizzle-orm';
 import { getDb } from '../db';
 import { publicProfiles } from '../db/schema';
+import {
+  builtinSlugs,
+  getBuiltinProfile,
+  getBuiltinProfileMarkdown,
+  listBuiltinProfiles,
+} from '../registry/builtin';
 
 export type PublicProfile = {
   contract: string;
@@ -33,6 +39,7 @@ function parseProfile(row: typeof publicProfiles.$inferSelect): PublicProfile | 
 }
 
 export async function listPublishedProfiles(): Promise<PublicProfile[]> {
+  const builtins = listBuiltinProfiles();
   const rows = await getDb()
     .select()
     .from(publicProfiles)
@@ -45,7 +52,9 @@ export async function listPublishedProfiles(): Promise<PublicProfile[]> {
     const profile = parseProfile(row);
     if (profile) latestBySlug.set(row.slug, profile);
   }
-  return [...latestBySlug.values()].sort((left, right) =>
+  return [...builtins, ...latestBySlug.values()].filter((profile, index, all) =>
+    !builtinSlugs.has(profile.slug) || all.findIndex((item) => item.slug === profile.slug) === index,
+  ).sort((left, right) =>
     left.organization.localeCompare(right.organization, 'es') || left.slug.localeCompare(right.slug),
   );
 }
@@ -53,6 +62,9 @@ export async function listPublishedProfiles(): Promise<PublicProfile[]> {
 export async function getPublishedProfile(slug: string, version?: number): Promise<PublicProfile | null> {
   const normalizedSlug = slug.trim().toLowerCase();
   if (!normalizedSlug) return null;
+  const builtin = getBuiltinProfile(normalizedSlug, version);
+  if (builtin) return builtin;
+  if (builtinSlugs.has(normalizedSlug)) return null;
 
   const filters = version
     ? and(
@@ -74,6 +86,9 @@ export async function getPublishedProfile(slug: string, version?: number): Promi
 export async function getPublishedProfileMarkdown(slug: string, version?: number): Promise<string | null> {
   const normalizedSlug = slug.trim().toLowerCase();
   if (!normalizedSlug) return null;
+  const builtin = getBuiltinProfileMarkdown(normalizedSlug, version);
+  if (builtin) return builtin;
+  if (builtinSlugs.has(normalizedSlug)) return null;
   const filters = version
     ? and(
         eq(publicProfiles.slug, normalizedSlug),

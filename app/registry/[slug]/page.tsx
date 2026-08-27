@@ -17,6 +17,7 @@ function provenanceLabel(state: string) {
   if (state === 'verified') return 'Verificado';
   if (state === 'observed') return 'Observado';
   if (state === 'owner_declared') return 'Declarado por el owner';
+  if (state === 'curated_owner_attribution') return 'Caso curado por el owner';
   return 'No observado';
 }
 
@@ -100,12 +101,12 @@ export default async function RegistryProfilePage({ params, searchParams }: Page
         <aside className="profile-aside">
           <section>
             <ShieldCheck size={21} />
-            <span>Control del dominio</span>
+            <span>Identidad del sitio</span>
             <strong>{provenanceLabel(profile.verification.status)}</strong>
             <dl>
-              <div><dt>Metodo</dt><dd>{profile.verification.method}</dd></div>
-              <div><dt>Verificado</dt><dd>{profile.verification.verifiedAt.slice(0, 10)}</dd></div>
-              <div><dt>Vigente hasta</dt><dd>{profile.verification.verifiedUntil.slice(0, 10)}</dd></div>
+              <div><dt>Metodo</dt><dd>{profile.verification.method || 'No registrado'}</dd></div>
+              <div><dt>Registrado</dt><dd>{profile.verification.verifiedAt.slice(0, 10) || 'No registrado'}</dd></div>
+              <div><dt>Vigente hasta</dt><dd>{profile.verification.verifiedUntil.slice(0, 10) || 'No aplica al caso curado'}</dd></div>
             </dl>
           </section>
           <section>

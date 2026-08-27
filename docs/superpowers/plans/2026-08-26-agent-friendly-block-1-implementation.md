@@ -594,7 +594,7 @@ git commit -m "feat: save explicit owner audit observations"
 - Consumes: public Tokenizart case files and the Registry profile contract.
 - Produces: immutable built-in profile `tokenizart` version 1, merged read-only with D1-published profiles.
 
-- [ ] **Step 1: Write a failing curated-profile test**
+- [x] **Step 1: Write a failing curated-profile test**
 
 The test loads `registry/builtin/tokenizart.v1.json` and asserts:
 
@@ -609,19 +609,19 @@ assert.equal(JSON.stringify(profile).includes('production MCP'), false);
 assert.equal(JSON.stringify(profile).includes('100% agent friendly'), false);
 ```
 
-- [ ] **Step 2: Build the curated profile from verified public sources**
+- [x] **Step 2: Build the curated profile from verified public sources**
 
 Use `docs/TOKENIZART-CASE-2026-08-26.md` and `public/cases/tokenizart/manifest.json` as provenance. Distinguish Tokenizart corporate/public presence from Atelier operating platform. Mark the Agent Friendly Web audit as observed, owner-first philosophy as owner-declared, and only deployed HTTP resources as observed. Label CLI, MCP, skills, OKF, Owner Live, x402/MPP, and mutating tools by their actual maturity or omit them from available capabilities.
 
-- [ ] **Step 3: Merge built-ins and D1 profiles deterministically**
+- [x] **Step 3: Merge built-ins and D1 profiles deterministically**
 
 `listPublishedProfiles()` returns built-ins plus latest D1 profiles, sorted by organization and slug. `getPublishedProfile('tokenizart')` returns the built-in record unless a later founder-approved built-in version exists. A D1 user profile cannot override a built-in slug.
 
-- [ ] **Step 4: Link the existing case and machine manifest to Registry**
+- [x] **Step 4: Link the existing case and machine manifest to Registry**
 
 Add visible links between `/casos/tokenizart`, `/registry/tokenizart`, JSON, and Markdown. Update the manifest with the canonical Registry URLs; do not change historical audit values.
 
-- [ ] **Step 5: Run tests and commit**
+- [x] **Step 5: Run tests and commit**
 
 Run:
 
@@ -633,6 +633,8 @@ npm run build
 ```
 
 Expected: all commands pass.
+
+Verification completed locally on 2026-08-27: the curated profile tests passed, the full 70-test suite passed, ESLint passed, and the production build resolved the built-in profile without D1 slug replacement. No remote profile, migration, Registry release, DNS change, or deployment was executed.
 
 ```bash
 git add registry lib/registry-store.ts app/casos/tokenizart/page.tsx public/cases/tokenizart/manifest.json test
