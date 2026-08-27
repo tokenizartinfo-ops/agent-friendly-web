@@ -29,6 +29,18 @@ function present(project: typeof siteProjects.$inferSelect) {
     cms: project.cms,
     hosting: project.hosting,
     notes: project.notes,
+    maintainerName: project.maintainerName,
+    maintainerEmail: project.maintainerEmail,
+    dnsProvider: project.dnsProvider,
+    contentSources: decodeList(project.contentSourcesJson),
+    desiredCapabilities: decodeList(project.desiredCapabilitiesJson),
+    authorizedResources: decodeList(project.authorizedResourcesJson),
+    publicationPreference: project.publicationPreference,
+    crawlerSearchPolicy: project.crawlerSearchPolicy,
+    crawlerTrainingPolicy: project.crawlerTrainingPolicy,
+    approverName: project.approverName,
+    approverEmail: project.approverEmail,
+    monitoringPreference: project.monitoringPreference,
   };
   const question = nextQuestion(intake, { stage: 'basic' });
   return {
@@ -65,7 +77,7 @@ export async function PUT(request: Request) {
   if (!intake.website) return Response.json({ error: 'Indica el sitio web para guardar el expediente.' }, { status: 400 });
 
   const now = new Date().toISOString();
-  // Expanded publication fields become active after the Block 1 D1 migration.
+  // Completion stays on the basic stage until the expanded controls ship in Task 4.
   const completion = completionForIntake(intake, { stage: 'basic' });
   const db = getDb();
   const requestedId = typeof raw.id === 'string' ? raw.id : '';
@@ -94,6 +106,18 @@ export async function PUT(request: Request) {
       cms: intake.cms,
       hosting: intake.hosting,
       notes: intake.notes,
+      maintainerName: intake.maintainerName,
+      maintainerEmail: intake.maintainerEmail,
+      dnsProvider: intake.dnsProvider,
+      contentSourcesJson: JSON.stringify(intake.contentSources),
+      desiredCapabilitiesJson: JSON.stringify(intake.desiredCapabilities),
+      authorizedResourcesJson: JSON.stringify(intake.authorizedResources),
+      publicationPreference: intake.publicationPreference,
+      crawlerSearchPolicy: intake.crawlerSearchPolicy,
+      crawlerTrainingPolicy: intake.crawlerTrainingPolicy,
+      approverName: intake.approverName,
+      approverEmail: intake.approverEmail,
+      monitoringPreference: intake.monitoringPreference,
       status: completion === 100 ? 'ready_for_review' : 'draft',
       completion,
       createdAt: now,
@@ -104,6 +128,7 @@ export async function PUT(request: Request) {
     await db.update(siteProjects).set({
         ownerEmail: user.email,
         organization: intake.organization,
+        website: intake.website,
         role: intake.role,
         siteType: intake.siteType,
         control: intake.control,
@@ -113,6 +138,18 @@ export async function PUT(request: Request) {
         cms: intake.cms,
         hosting: intake.hosting,
         notes: intake.notes,
+        maintainerName: intake.maintainerName,
+        maintainerEmail: intake.maintainerEmail,
+        dnsProvider: intake.dnsProvider,
+        contentSourcesJson: JSON.stringify(intake.contentSources),
+        desiredCapabilitiesJson: JSON.stringify(intake.desiredCapabilities),
+        authorizedResourcesJson: JSON.stringify(intake.authorizedResources),
+        publicationPreference: intake.publicationPreference,
+        crawlerSearchPolicy: intake.crawlerSearchPolicy,
+        crawlerTrainingPolicy: intake.crawlerTrainingPolicy,
+        approverName: intake.approverName,
+        approverEmail: intake.approverEmail,
+        monitoringPreference: intake.monitoringPreference,
         status: completion === 100 ? 'ready_for_review' : 'draft',
         completion,
         updatedAt: now,
@@ -130,6 +167,10 @@ export async function PUT(request: Request) {
     createdAt: now,
   });
 
-  const [saved] = await db.select().from(siteProjects).where(eq(siteProjects.id, id)).limit(1);
+  const [saved] = await db
+    .select()
+    .from(siteProjects)
+    .where(and(eq(siteProjects.id, id), eq(siteProjects.userId, user.userId)))
+    .limit(1);
   return Response.json({ project: present(saved) }, { headers: { 'cache-control': 'no-store' } });
 }

@@ -174,7 +174,7 @@ git commit -m "feat: expand private registry intake contract"
 - Consumes: `ExpandedIntake` from Task 1 and `getDb()` from `db/index.ts`.
 - Produces: `registrySites`, `domainClaims`, `ownerAttestations`, `publicProfiles`, and `scanObservations` Drizzle tables; persisted expanded intake fields on `siteProjects`.
 
-- [ ] **Step 1: Write a failing schema contract test**
+- [x] **Step 1: Write a failing schema contract test**
 
 Create `test/schema.test.mjs`:
 
@@ -194,13 +194,13 @@ test('Block 1 migration contains the registry boundary tables and private intake
 });
 ```
 
-- [ ] **Step 2: Run the schema test and confirm the missing migration**
+- [x] **Step 2: Run the schema test and confirm the missing migration**
 
 Run: `node --test test/schema.test.mjs`
 
 Expected: FAIL with `ENOENT` for `drizzle/0001_registry_block1.sql`.
 
-- [ ] **Step 3: Extend `siteProjects` and add registry tables**
+- [x] **Step 3: Extend `siteProjects` and add registry tables**
 
 Add the twelve expanded fields to `siteProjects` using `text(...).notNull().default('')`, with list values stored as JSON text. Add these table responsibilities:
 
@@ -230,17 +230,17 @@ scanObservations: {
 
 Use unique indexes for `registry_sites.project_id`, `registry_sites.hostname`, and `(public_profiles.slug, public_profiles.version)`. Use indexes for owner lookups, pending claims, latest observations, and latest published profiles. Keep challenge values and all private JSON out of public query helpers.
 
-- [ ] **Step 4: Generate and inspect the migration**
+- [x] **Step 4: Generate and inspect the migration**
 
 Run: `npx drizzle-kit generate --name registry_block1`
 
 Expected: `drizzle/0001_registry_block1.sql` plus updated Drizzle metadata. Inspect the SQL and confirm that it only adds columns, tables, and indexes; it must not drop or rewrite `site_projects` or `project_events`.
 
-- [ ] **Step 5: Persist and present expanded project fields**
+- [x] **Step 5: Persist and present expanded project fields**
 
 Update `app/api/projects/route.ts` so `present`, insert, and update map every expanded field. Continue filtering both selection and update by `siteProjects.userId === user.userId`. Event payloads contain only completion and field names, never field values.
 
-- [ ] **Step 6: Run tests, inspect migration, and commit**
+- [x] **Step 6: Run tests, inspect migration, and commit**
 
 Run:
 
