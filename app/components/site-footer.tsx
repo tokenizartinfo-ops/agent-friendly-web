@@ -6,6 +6,7 @@ const productLinks = [
   ['Soluciones por sector', '/sectores'],
   ['Medir mejora', '/medir-mejora'],
   ['Asistente de preparacion', '/asistente'],
+  ['Conocimiento abierto', '/conocimiento-abierto'],
   ['Evolucion agentica', '/evolucion-agentica'],
   ['Metodologia', '/metodologia'],
   ['Registry publico', '/registry'],
@@ -21,6 +22,7 @@ const agentLinks = [
   ['Crawler Catalog', '/.well-known/crawler-policy-catalog.json'],
   ['Comparison contract', '/.well-known/readiness-comparison-contract.json'],
   ['Assistant contract', '/.well-known/intake-assistant-contract.json'],
+  ['OKF v0.2', '/okf/v0.2/index.md'],
 ];
 
 export function SiteFooter() {

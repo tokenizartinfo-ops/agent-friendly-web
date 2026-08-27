@@ -24,6 +24,7 @@ const humanRoutes = [
   { name: 'Soluciones por sector', detail: 'Adapta evidencia, contenidos y primer paso a cada tipo de organizacion.', href: '/sectores', icon: Globe2 },
   { name: 'Medir mejora', detail: 'Compara evidencia antes y despues sin promesas de ranking.', href: '/medir-mejora', icon: Radar },
   { name: 'Asistente de preparacion', detail: 'Ordena texto libre localmente y exige revision humana.', href: '/asistente', icon: Bot },
+  { name: 'Conocimiento abierto', detail: 'Explica, descarga y verifica el bundle publico OKF v0.2.', href: '/conocimiento-abierto', icon: FileText },
   { name: 'Evolucion agentica', detail: 'Compara AF-0 a AF-5 mediante casos ilustrativos.', href: '/evolucion-agentica', icon: Route },
   { name: 'Metodologia', detail: 'Explica el puntaje, sus limites y las fuentes primarias.', href: '/metodologia', icon: Compass },
   { name: 'Registry publico', detail: 'Perfiles versionados con declaraciones, observaciones y dominio verificado.', href: '/registry', icon: Globe2 },
@@ -45,6 +46,9 @@ const machineResources = [
   { name: 'Crawler policy catalog', detail: 'Matriz JSON de crawlers, finalidades, controles y fuentes oficiales.', href: '/.well-known/crawler-policy-catalog.json', icon: Bot },
   { name: 'Comparison contract', detail: 'Contrato del comparador local de evidencia.', href: '/.well-known/readiness-comparison-contract.json', icon: Braces },
   { name: 'Assistant contract', detail: 'Limites machine-readable del prototipo de intake.', href: '/.well-known/intake-assistant-contract.json', icon: Braces },
+  { name: 'OKF v0.2 index', detail: 'Indice canonico del conocimiento publico versionado.', href: '/okf/v0.2/index.md', icon: FileText },
+  { name: 'OKF manifest', detail: 'Inventario, version, licencia y hashes de distribucion.', href: '/okf/v0.2/manifest.json', icon: Braces },
+  { name: 'OKF checksums', detail: 'Hashes SHA-256 para comprobar integridad de los archivos.', href: '/okf/v0.2/CHECKSUMS.sha256', icon: ShieldCheck },
 ];
 
 const activeCapabilities = [
@@ -57,6 +61,7 @@ const activeCapabilities = [
   ['Contenido sectorial', 'Activo', 'Primera capa ESP/ENG/POR para seis tipos de organizacion.'],
   ['Comparador de evidencia', 'Activo', 'Antes/despues local, no persistente y sin promesas de ranking.'],
   ['Asistente de intake', 'Prototipo', 'Ordena texto libre y requiere seleccion humana antes de copiar.'],
+  ['Bundle OKF publico', 'Activo', 'Once conceptos read-only con procedencia, version, manifiesto y checksums.'],
 ];
 
 const roadmap = [

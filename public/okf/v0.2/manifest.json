@@ -1,0 +1,100 @@
+{
+  "schema": "agent-friendly-web.okf-distribution.v1",
+  "convention": "Agent Friendly Web project extension for distribution; not an OKF requirement.",
+  "okf_version": "0.2",
+  "release": "2026-08-27-public-v1",
+  "canonical_url": "https://agentfriendlyweb.dev/okf/v0.2/index.md",
+  "generated_at": "2026-08-27T00:00:00Z",
+  "verified": {
+    "by": "human:gabriel-mucchiut",
+    "at": "2026-08-27T00:00:00Z"
+  },
+  "stale_after": "2026-11-25T00:00:00Z",
+  "status": "published",
+  "license": "CC-BY-4.0",
+  "marks": "reserved",
+  "extensions": {
+    "manifest": true,
+    "checksums": true
+  },
+  "files": [
+    {
+      "path": "assistance/intake-assistant-boundary.md",
+      "sha256": "1ed876f80142ab8911b60feae4f907e8754af6599f4805282cc3fe62c39830cf",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "assistance/readiness-comparison-boundary.md",
+      "sha256": "789725ad0d399fdcb006ce86f42cc1343a123ee4d2ff56cd4be7edba28e33ccf",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "cases/tokenizart-first-integral-case.md",
+      "sha256": "e3e3daf770f173e8174e2733277553bcb77307d64699086e1227601eb47f007d",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "discovery/aeo-and-crawler-policy.md",
+      "sha256": "ecc0cd86ffcb58b32de64c8073fa2b45dac7e5f6244789a9e4b2304cf0fd7702",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "discovery/public-audit.md",
+      "sha256": "b386c8114160cac987faf83eb5086252735f1c85c5370a01dece1cfc01407a7d",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "discovery/public-discovery-resources.md",
+      "sha256": "781180e9ebc0caf1680e77aaa01b4398c9d3de473bf2b9bda40884da6316bb67",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "index.md",
+      "sha256": "8685bc0a5d8de9d91812acb6c30e4ddfc12151201dd134413c87db481fe68bb2",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "log.md",
+      "sha256": "9918fc67d8c02159780299bc95fc8e9b0a50ddd50724cbf1467aa6a8ea5c8a56",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "method/agent-friendly-web-method.md",
+      "sha256": "983e817dcda35ef311cc792f59b5b219bff56997980d4387ab1e622f0b8db565",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "method/evidence-and-scoring.md",
+      "sha256": "2adec13d62d4f3e8923ac08b3552e07aa3de931be87b9ca5d6d13df21d2310f8",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "method/maturity-levels-af0-af5.md",
+      "sha256": "1658267b7658576ca8dc69f075325fb7e166fb4441e8b1dafa0468c65e680253",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "registry/domain-verification-boundary.md",
+      "sha256": "0da192c3be8f64ad4d38d8d2e2adbb79d8e04d83ea9c98ed14c86976a56a6cc2",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "registry/registry-and-provenance-states.md",
+      "sha256": "8a7fb4787d0bd03f603f6c3042bd891897241d7ab2971d4f4e6ec497aecb9f08",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    }
+  ]
+}

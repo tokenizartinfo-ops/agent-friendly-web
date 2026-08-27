@@ -1,0 +1,186 @@
+{
+  "schema": "agent-friendly-web.okf-public-sources.v1",
+  "okf_version": "0.2",
+  "canonical_origin": "https://agentfriendlyweb.dev",
+  "license": "CC-BY-4.0",
+  "marks": "reserved",
+  "release": {
+    "id": "2026-08-27-public-v1",
+    "generated_at": "2026-08-27T00:00:00Z",
+    "verified_at": "2026-08-27T00:00:00Z",
+    "verified_by": "human:gabriel-mucchiut",
+    "stale_after": "2026-11-25T00:00:00Z",
+    "last_modified": "2026-08-27"
+  },
+  "source_catalog": {
+    "docs/METHODOLOGY.es.md": {
+      "title": "Metodologia Agent Friendly Web v1",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/METHODOLOGY.es.md",
+      "author": "person:gabriel-mucchiut",
+      "last_modified": "2026-08-27T00:00:00Z"
+    },
+    "docs/AEO-AND-CRAWLER-POLICY.es.md": {
+      "title": "AEO y politica de crawlers",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/AEO-AND-CRAWLER-POLICY.es.md",
+      "author": "person:gabriel-mucchiut",
+      "last_modified": "2026-08-27T00:00:00Z"
+    },
+    "docs/SECURITY.md": {
+      "title": "Seguridad y fronteras publicas",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/SECURITY.md",
+      "author": "agent-friendly-web/editorial-v1",
+      "last_modified": "2026-08-27T00:00:00Z"
+    },
+    "docs/SPECIFICATION.es.md": {
+      "title": "Especificacion funcional y tecnica v1",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/SPECIFICATION.es.md",
+      "author": "agent-friendly-web/editorial-v1",
+      "last_modified": "2026-08-27T00:00:00Z"
+    },
+    "docs/TOKENIZART-CASE-2026-08-26.md": {
+      "title": "Caso Tokenizart: auditoria y transformacion agent-friendly",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/TOKENIZART-CASE-2026-08-26.md",
+      "author": "person:gabriel-mucchiut",
+      "last_modified": "2026-08-27T00:00:00Z"
+    },
+    "docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md": {
+      "title": "Agent Friendly Web: roadmap agent-native",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md",
+      "author": "agent-friendly-web/editorial-v1",
+      "last_modified": "2026-08-27T00:00:00Z"
+    },
+    "docs/BLOCK-3-INTAKE-ASSISTANT-CONTRACT.es.md": {
+      "title": "Contrato del asistente de intake",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/BLOCK-3-INTAKE-ASSISTANT-CONTRACT.es.md",
+      "author": "agent-friendly-web/editorial-v1",
+      "last_modified": "2026-08-27T00:00:00Z"
+    },
+    "docs/BLOCK-2-SECTOR-MULTILINGUAL-MEASUREMENT.es.md": {
+      "title": "Contrato de comparacion de evidencia",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/BLOCK-2-SECTOR-MULTILINGUAL-MEASUREMENT.es.md",
+      "author": "agent-friendly-web/editorial-v1",
+      "last_modified": "2026-08-27T00:00:00Z"
+    }
+  },
+  "concepts": [
+    {
+      "output": "method/agent-friendly-web-method.md",
+      "type": "Methodology",
+      "title": "Metodo Agent Friendly Web",
+      "description": "Alcance, reglas de evidencia y revision de la metodologia publica.",
+      "resource": "https://agentfriendlyweb.dev/metodologia",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "methodology", "evidence"],
+      "sources": [{ "path": "docs/METHODOLOGY.es.md", "sections": ["Alcance", "Reglas de evidencia", "Revision"] }]
+    },
+    {
+      "output": "method/maturity-levels-af0-af5.md",
+      "type": "Reference",
+      "title": "Niveles de madurez AF-0 a AF-5",
+      "description": "Escala propia y transparente para ordenar una evolucion agentica.",
+      "resource": "https://agentfriendlyweb.dev/evolucion-agentica",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "maturity", "af0-af5"],
+      "sources": [{ "path": "docs/METHODOLOGY.es.md", "sections": ["Niveles", "Estado de tecnologias"] }]
+    },
+    {
+      "output": "method/evidence-and-scoring.md",
+      "type": "Methodology",
+      "title": "Evidencia y puntuacion",
+      "description": "Ponderaciones, reglas y diagnosticos auxiliares del auditor.",
+      "resource": "https://agentfriendlyweb.dev/metodologia",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "evidence", "scoring"],
+      "sources": [{ "path": "docs/METHODOLOGY.es.md", "sections": ["Capas y ponderacion", "Reglas de evidencia", "Diagnosticos auxiliares"] }]
+    },
+    {
+      "output": "discovery/public-audit.md",
+      "type": "Service",
+      "title": "Auditoria publica read-only",
+      "description": "Recorrido, controles y limites del scanner publico.",
+      "resource": "https://agentfriendlyweb.dev/",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "audit", "read-only"],
+      "sources": [
+        { "path": "docs/SPECIFICATION.es.md", "sections": ["1. Proposito", "3.1 Auditoria publica", "8. Criterios de aceptacion v1"] },
+        { "path": "docs/SECURITY.md", "sections": ["Modelo v1"] }
+      ]
+    },
+    {
+      "output": "discovery/aeo-and-crawler-policy.md",
+      "type": "Policy",
+      "title": "AEO y politica de crawlers",
+      "description": "Decisiones separadas para descubrimiento, recuperacion y entrenamiento.",
+      "resource": "https://agentfriendlyweb.dev/aeo-y-crawlers",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "aeo", "crawlers"],
+      "sources": [{ "path": "docs/AEO-AND-CRAWLER-POLICY.es.md", "sections": ["Objetivo", "Tres decisiones separadas", "Implementacion actual", "Medicion prevista"] }]
+    },
+    {
+      "output": "discovery/public-discovery-resources.md",
+      "type": "Reference",
+      "title": "Recursos publicos de descubrimiento",
+      "description": "Superficies desplegadas, planificadas y en investigacion sin mezclar estados.",
+      "resource": "https://agentfriendlyweb.dev/mapa-del-sitio",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "discovery", "catalog"],
+      "sources": [{ "path": "docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md", "sections": ["Estado verificable de esta entrega", "Recursos de descubrimiento"] }]
+    },
+    {
+      "output": "registry/registry-and-provenance-states.md",
+      "type": "Reference",
+      "title": "Registry y estados de procedencia",
+      "description": "Separacion entre declaraciones owner, observaciones y control de dominio verificado.",
+      "resource": "https://agentfriendlyweb.dev/registry",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "registry", "provenance"],
+      "sources": [
+        { "path": "docs/SPECIFICATION.es.md", "sections": ["3.5 Observacion privada y publicacion", "5. Modelo de persistencia", "6. Salidas actuales de Bloque 1"] },
+        { "path": "docs/SECURITY.md", "sections": ["Evidencia y afirmaciones"] }
+      ]
+    },
+    {
+      "output": "registry/domain-verification-boundary.md",
+      "type": "Policy",
+      "title": "Frontera de verificacion de dominio",
+      "description": "Que acredita un challenge publico y que permisos no concede.",
+      "resource": "https://agentfriendlyweb.dev/registry",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "domain-verification", "security"],
+      "sources": [
+        { "path": "docs/SPECIFICATION.es.md", "sections": ["3.4 Verificacion de dominio"] },
+        { "path": "docs/SECURITY.md", "sections": ["Fronteras del Registry y del expediente"] }
+      ]
+    },
+    {
+      "output": "assistance/intake-assistant-boundary.md",
+      "type": "Service",
+      "title": "Frontera del asistente de intake",
+      "description": "Prototipo determinista que ordena texto y exige seleccion humana.",
+      "resource": "https://agentfriendlyweb.dev/asistente",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "intake", "human-in-the-loop"],
+      "sources": [{ "path": "docs/BLOCK-3-INTAKE-ASSISTANT-CONTRACT.es.md", "sections": ["Objetivo", "Limites de esta version", "Evolucion controlada"] }]
+    },
+    {
+      "output": "assistance/readiness-comparison-boundary.md",
+      "type": "Service",
+      "title": "Frontera del comparador de evidencia",
+      "description": "Comparacion local antes y despues sin promesas de ranking o recomendacion.",
+      "resource": "https://agentfriendlyweb.dev/medir-mejora",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "comparison", "evidence"],
+      "sources": [{ "path": "docs/BLOCK-2-SECTOR-MULTILINGUAL-MEASUREMENT.es.md", "sections": ["Comparacion"] }]
+    },
+    {
+      "output": "cases/tokenizart-first-integral-case.md",
+      "type": "Case Study",
+      "title": "Tokenizart como primer caso integral",
+      "description": "Linea de base, activos y roadmap verificable del primer caso publico.",
+      "resource": "https://agentfriendlyweb.dev/casos/tokenizart",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "tokenizart", "case-study"],
+      "sources": [{ "path": "docs/TOKENIZART-CASE-2026-08-26.md", "sections": ["1. Objetivo", "2. Resultado inicial reproducible", "5. Activos agenticos existentes", "7. Roadmap de ejecucion", "9. Criterio de exito"] }]
+    }
+  ]
+}

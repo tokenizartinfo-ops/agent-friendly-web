@@ -1,6 +1,7 @@
 {
   "schema_version": "1.0",
   "convention": "Agent Friendly Web project catalog; not an official standard",
+  "okf_discovery_note": "AI Catalog links are an Agent Friendly Web project convention, not a universal OKF discovery mechanism.",
   "publisher": "Agent Friendly Web",
   "resources": [
     {
@@ -42,6 +43,26 @@
       "name": "Controlled intake assistant prototype",
       "type": "text/html",
       "url": "https://agentfriendlyweb.dev/asistente"
+    },
+    {
+      "name": "Open knowledge",
+      "type": "text/html",
+      "url": "https://agentfriendlyweb.dev/conocimiento-abierto"
+    },
+    {
+      "name": "OKF v0.2 bundle index",
+      "type": "text/markdown",
+      "url": "https://agentfriendlyweb.dev/okf/v0.2/index.md"
+    },
+    {
+      "name": "OKF distribution manifest",
+      "type": "application/json",
+      "url": "https://agentfriendlyweb.dev/okf/v0.2/manifest.json"
+    },
+    {
+      "name": "OKF distribution checksums",
+      "type": "text/plain",
+      "url": "https://agentfriendlyweb.dev/okf/v0.2/CHECKSUMS.sha256"
     },
     {
       "name": "Intake assistant contract",

@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "vinext dev",
     "generate:crawler-catalog": "node scripts/generate-crawler-catalog.mjs",
+    "generate:okf": "node scripts/generate-okf-public.mjs",
+    "validate:okf": "node scripts/validate-okf-public.mjs",
     "build": "vinext build",
     "start": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
@@ -39,7 +41,8 @@
     "typescript": "5.9.3",
     "vinext": "1.0.0-beta.3",
     "vite": "8.0.13",
-    "wrangler": "4.92.0"
+    "wrangler": "4.92.0",
+    "yaml": "2.9.0"
   },
   "type": "module"
 }
