@@ -16,6 +16,7 @@ export function SiteHeader() {
         <Link href="/#auditar" onClick={() => setOpen(false)}>Auditar</Link>
         <Link href="/expediente" onClick={() => setOpen(false)}>Mi expediente</Link>
         <Link href="/metodologia" onClick={() => setOpen(false)}>Metodologia</Link>
+        <Link href="/evolucion-agentica" onClick={() => setOpen(false)}>Ver evolucion</Link>
         <Link href="/casos/tokenizart" onClick={() => setOpen(false)}>Caso Tokenizart</Link>
       </nav>
       <a className="repo-link" href="https://github.com/tokenizartinfo-ops/agent-friendly-web" target="_blank" rel="noreferrer">

@@ -45,9 +45,11 @@ Un catalogo de proyecto debe declarar que no es un estandar oficial. Una ruta MC
 
 - `robots.txt`, sitemap, Schema.org/JSON-LD y OpenAPI son bases estables.
 - MCP 2026-07-28 es la especificacion vigente utilizada como referencia en esta version.
+- A2A 1.0 es la referencia para futura comunicacion entre agentes. Una Agent Card solo cuenta cuando describe un servicio real y accesible.
 - `llms.txt` es una propuesta comunitaria; puede ayudar a orientar, pero no obliga a los crawlers.
 - WebMCP es un borrador de W3C Community Group y no una recomendacion W3C.
 - x402 y MPP son mecanismos emergentes para pagos agenticos; su presencia no reemplaza controles legales, comerciales y de seguridad.
+- Un manifiesto propio, un catalogo de recursos o una insignia deben declarar que son convenciones del proyecto y no normas oficiales.
 
 ## Revision
 

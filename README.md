@@ -17,6 +17,8 @@ El origen publico canonico es [agentfriendlyweb.dev](https://agentfriendlyweb.de
 - Expediente privado y progresivo para que el propietario aporte contexto sin compartir credenciales.
 - Roadmap adaptado al control disponible: origen, DNS/edge, proveedor externo o ausencia de acceso.
 - Primer caso integral: Tokenizart.
+- Comparador ilustrativo de evolucion para restaurantes, municipalidades y Tokenizart.
+- Manifiesto publico de capacidades que separa `deployed`, `planned` y `research`.
 - Documentacion de metodologia, seguridad y arquitectura.
 
 ## Principios
@@ -56,6 +58,7 @@ npm run db:generate
 - [Metodologia AF-0 a AF-5](docs/METHODOLOGY.es.md)
 - [Seguridad](docs/SECURITY.md)
 - [Caso Tokenizart](docs/TOKENIZART-CASE-2026-08-26.md)
+- [Roadmap agent-native](docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md)
 
 ## Licencias y marca
 

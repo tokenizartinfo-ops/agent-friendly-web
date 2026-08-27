@@ -1,0 +1,5 @@
+Contact: mailto:tokenizart.info@gmail.com
+Canonical: https://agentfriendlyweb.dev/.well-known/security.txt
+Policy: https://agentfriendlyweb.dev/metodologia
+Preferred-Languages: es, en
+Expires: 2027-08-26T00:00:00Z

@@ -4,6 +4,12 @@
   "prepared_at": "2026-08-26",
   "owner": "Gabriel Mucchiut",
   "status": "implementation_candidate",
+  "agentic_readiness": {
+    "methodology": "Agent Friendly Web Method v1",
+    "case_url": "https://agentfriendlyweb.dev/casos/tokenizart",
+    "status": "progressive_implementation",
+    "official_certification": false
+  },
   "targets": [
     "https://tokenizart.com/",
     "https://atelier.tokenizart.com/"

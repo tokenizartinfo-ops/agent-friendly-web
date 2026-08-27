@@ -62,3 +62,7 @@ Tokenizart and Atelier organize identity, evidence and traceability. They do not
 - Demo Atelier: https://companion-staging.tokenizart.info/demo-atelier
 - Agentic repository: https://github.com/tokenizartinfo-ops/tokenizart-agentic
 - Agent Friendly Web case: https://agentfriendlyweb.dev/casos/tokenizart
+
+## Agentic readiness and methodology
+
+Atelier is evaluated as part of the Tokenizart case at https://agentfriendlyweb.dev/casos/tokenizart. Agent Friendly Web records which discovery and interaction layers are observed, proposed, release-candidate or gated. The record is not an official certification, does not prove indexing or recommendation, and does not provide access to owner-scoped data.

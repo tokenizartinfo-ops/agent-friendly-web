@@ -31,3 +31,7 @@
 - [Companion public beta](https://companion-staging.tokenizart.info/beta)
 - [Demo Atelier](https://companion-staging.tokenizart.info/demo-atelier)
 - [Tokenizart Agent Friendly Web case](https://agentfriendlyweb.dev/casos/tokenizart)
+
+## Agentic readiness and methodology
+
+Atelier's public discoverability roadmap is documented through [Agent Friendly Web](https://agentfriendlyweb.dev/casos/tokenizart). The case distinguishes public evidence from authenticated owner capabilities and does not grant access or certify implementation by itself.

@@ -32,6 +32,10 @@
 - [Agent Friendly Web Tokenizart case](https://agentfriendlyweb.dev/casos/tokenizart)
 - [Extended public context](https://tokenizart.com/llms-full.txt)
 
+## Agentic readiness and methodology
+
+Tokenizart uses [Agent Friendly Web](https://agentfriendlyweb.dev/casos/tokenizart) to document and verify its progressive agent-first roadmap. This public case separates observed evidence from planned capabilities. It is not an official certification and does not grant account permissions.
+
 ## Contact
 
 - tokenizart.info@gmail.com

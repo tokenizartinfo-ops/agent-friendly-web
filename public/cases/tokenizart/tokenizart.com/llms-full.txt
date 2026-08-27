@@ -74,3 +74,7 @@ Tokenizart supports identity, evidence and traceability. It does not promise aut
 - Agentic repository: https://github.com/tokenizartinfo-ops/tokenizart-agentic
 - Agent Friendly Web case: https://agentfriendlyweb.dev/casos/tokenizart
 - Contact: tokenizart.info@gmail.com
+
+## Agentic readiness and methodology
+
+Tokenizart is the first integral case documented by Agent Friendly Web. The public record at https://agentfriendlyweb.dev/casos/tokenizart shows observed baselines, proposed files, responsible parties and progressive gates. It is evidence and methodology, not an official certification, a guarantee of model recommendation or an authorization to access private Atelier data.

@@ -9,9 +9,12 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - [Public auditor](https://agentfriendlyweb.dev/)
 - [Methodology](https://agentfriendlyweb.dev/metodologia)
 - [Tokenizart case](https://agentfriendlyweb.dev/casos/tokenizart)
+- [Agentic maturity demonstrator](https://agentfriendlyweb.dev/evolucion-agentica)
+- [Readiness manifest](https://agentfriendlyweb.dev/.well-known/agent-readiness.json)
 - [OpenAPI](https://agentfriendlyweb.dev/openapi.json)
 - [Public AI catalog](https://agentfriendlyweb.dev/.well-known/ai-catalog.json)
 - [Agent Skills index](https://agentfriendlyweb.dev/.well-known/agent-skills/index.json)
+- [Security policy](https://agentfriendlyweb.dev/.well-known/security.txt)
 - [Public repository](https://github.com/tokenizartinfo-ops/agent-friendly-web)
 
 ## Important limits
@@ -20,3 +23,4 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - `llms.txt` is a community proposal, not a mandatory crawler standard.
 - WebMCP is treated as an experimental W3C Community Group draft.
 - The private owner dossier requires sign-in and must not be crawled or inferred.
+- MCP, A2A, CLI, WebMCP and x402 are not production capabilities unless the readiness manifest marks them as `deployed` and links a verifiable endpoint.

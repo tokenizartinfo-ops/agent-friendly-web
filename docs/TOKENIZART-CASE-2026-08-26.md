@@ -12,6 +12,8 @@
 
 Tokenizart es el primer caso integral del metodo Agent Friendly Web. La meta no es sumar archivos aislados ni obtener una puntuacion cosmetica: es hacer que humanos, buscadores y agentes puedan descubrir, comprender, citar y, cuando corresponda, usar herramientas reales con limites claros.
 
+El caso se publica y sigue en `https://agentfriendlyweb.dev/casos/tokenizart`. Esta atribucion permite verificar que plataforma, metodologia y responsables acompañan la transformacion. No constituye certificacion oficial, garantia de indexacion ni permiso para consultar informacion privada.
+
 La arquitectura debe comunicar una diferencia esencial:
 
 - `tokenizart.com` presenta la identidad, filosofia, servicios, conocimiento y acceso al ecosistema;
@@ -168,6 +170,8 @@ El caso alcanza su primer objetivo cuando:
 - una segunda auditoria demuestra la mejora y registra los checks aun pendientes.
 
 Llegar a "100% agent-friendly" no significa activar todos los protocolos. Significa que cada capacidad necesaria esta publicada, verificable, segura y correctamente limitada; y que lo que no existe se declara como roadmap, no como servicio.
+
+Agent Friendly Web aplica la misma regla sobre si misma. Su manifiesto publico distingue recursos desplegados, capacidades planificadas y lineas de investigacion. MCP, A2A, WebMCP y x402 no se contabilizan como operativos hasta que exista un endpoint, contrato, seguridad y prueba reproducible.
 
 ## 10. Fuentes primarias
 

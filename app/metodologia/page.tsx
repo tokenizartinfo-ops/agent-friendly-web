@@ -35,6 +35,7 @@ export default function MethodologyPage() {
           <span>Estado normativo</span>
           <div><strong>robots.txt, sitemap, JSON-LD y OpenAPI</strong><p>Bases estables y ampliamente utilizadas.</p></div>
           <div><strong>MCP 2026-07-28</strong><p>Protocolo vigente para exponer contexto y herramientas.</p></div>
+          <div><strong>A2A 1.0</strong><p>Protocolo abierto para descubrimiento y colaboracion entre agentes; no esta desplegado aqui.</p></div>
           <div><strong>llms.txt</strong><p>Propuesta comunitaria; util como indice, no garantia de indexacion.</p></div>
           <div><strong>WebMCP</strong><p>Borrador de W3C Community Group, todavia experimental.</p></div>
           <div><strong>x402 y MPP</strong><p>Opciones emergentes para pagos agenticos; requieren evaluacion por caso.</p></div>
@@ -51,6 +52,8 @@ export default function MethodologyPage() {
           <a href="https://webmachinelearning.github.io/webmcp/" target="_blank" rel="noreferrer">WebMCP draft <ArrowRight size={16} /></a>
           <a href="https://llmstxt.org/" target="_blank" rel="noreferrer">llms.txt proposal <ArrowRight size={16} /></a>
           <a href="https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/" target="_blank" rel="noreferrer">Markdown for Agents <ArrowRight size={16} /></a>
+          <a href="https://a2a-protocol.org/latest/specification" target="_blank" rel="noreferrer">A2A Specification <ArrowRight size={16} /></a>
+          <a href="https://github.com/x402-foundation/x402" target="_blank" rel="noreferrer">x402 Specification <ArrowRight size={16} /></a>
         </div>
       </section>
     </main>

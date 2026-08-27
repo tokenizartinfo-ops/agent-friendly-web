@@ -40,3 +40,11 @@ Tokenizart is documented as an evolving agent-first architecture. Existing publi
 ## Machine-readable catalogs
 
 The AI catalog and Agent Skills index are project discovery conventions backed by public resources on this site. The API Catalog is a standards-based linkset pointing to the public OpenAPI document. No MCP server, OAuth resource, WebMCP integration or payment protocol is advertised by this release.
+
+## Capability status
+
+The machine-readable readiness manifest at `https://agentfriendlyweb.dev/.well-known/agent-readiness.json` is the current capability ledger. Discovery resources, the public read-only audit API and the audit skill are deployed. MCP, A2A and a native CLI are planned. WebMCP and x402 remain research items. Planned or research work does not count as deployed evidence.
+
+## Illustrative maturity comparisons
+
+The page `https://agentfriendlyweb.dev/evolucion-agentica` demonstrates how clearer public evidence can improve the answer an agent is able to construct for a restaurant, municipality or Tokenizart. Examples are illustrative. They do not guarantee indexing, wording, ranking or recommendation by GPT, Gemini, Claude or another provider.

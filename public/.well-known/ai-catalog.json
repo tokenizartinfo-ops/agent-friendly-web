@@ -6,27 +6,42 @@
     {
       "name": "Public auditor",
       "type": "text/html",
-      "url": "https://agent-friendly-web.tokenizart.chatgpt.site/"
+      "url": "https://agentfriendlyweb.dev/"
     },
     {
       "name": "Methodology",
       "type": "text/html",
-      "url": "https://agent-friendly-web.tokenizart.chatgpt.site/metodologia"
+      "url": "https://agentfriendlyweb.dev/metodologia"
     },
     {
       "name": "Tokenizart case",
       "type": "text/html",
-      "url": "https://agent-friendly-web.tokenizart.chatgpt.site/casos/tokenizart"
+      "url": "https://agentfriendlyweb.dev/casos/tokenizart"
+    },
+    {
+      "name": "Agentic maturity demonstrator",
+      "type": "text/html",
+      "url": "https://agentfriendlyweb.dev/evolucion-agentica"
+    },
+    {
+      "name": "Agent readiness manifest",
+      "type": "application/json",
+      "url": "https://agentfriendlyweb.dev/.well-known/agent-readiness.json"
     },
     {
       "name": "OpenAPI",
       "type": "application/json",
-      "url": "https://agent-friendly-web.tokenizart.chatgpt.site/openapi.json"
+      "url": "https://agentfriendlyweb.dev/openapi.json"
     },
     {
       "name": "Agent Skills",
       "type": "application/json",
-      "url": "https://agent-friendly-web.tokenizart.chatgpt.site/.well-known/agent-skills/index.json"
+      "url": "https://agentfriendlyweb.dev/.well-known/agent-skills/index.json"
+    },
+    {
+      "name": "Security policy",
+      "type": "text/plain",
+      "url": "https://agentfriendlyweb.dev/.well-known/security.txt"
     }
   ]
 }

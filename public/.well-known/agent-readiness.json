@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "convention": "Agent Friendly Web project readiness manifest; not an official standard",
+  "publisher": {
+    "name": "Agent Friendly Web",
+    "creator": "Gabriel Mucchiut"
+  },
+  "canonical_origin": "https://agentfriendlyweb.dev",
+  "updated_at": "2026-08-26",
+  "policy": {
+    "public_search": "allowed",
+    "user_directed_ai_input": "allowed",
+    "model_training": "reserved",
+    "private_routes": "not_crawlable"
+  },
+  "capabilities": {
+    "discovery": {
+      "status": "deployed",
+      "resources": ["/robots.txt", "/sitemap.xml", "/llms.txt", "/llms-full.txt"]
+    },
+    "structured_content": {
+      "status": "deployed",
+      "resources": ["/", "/metodologia", "/casos/tokenizart"]
+    },
+    "openapi": {
+      "status": "deployed",
+      "resources": ["/openapi.json", "/api-catalog"]
+    },
+    "public_skill": {
+      "status": "deployed",
+      "resources": ["/.well-known/agent-skills/index.json", "/skills/agent-friendly-web-audit/SKILL.md"]
+    },
+    "mcp": {
+      "status": "planned",
+      "note": "No MCP endpoint is advertised by this release."
+    },
+    "a2a": {
+      "status": "planned",
+      "note": "No A2A Agent Card or A2A service is advertised by this release."
+    },
+    "cli": {
+      "status": "planned",
+      "note": "No Agent Friendly Web CLI distribution is advertised by this release."
+    },
+    "webmcp": {
+      "status": "research",
+      "note": "WebMCP remains experimental and is not enabled."
+    },
+    "x402": {
+      "status": "research",
+      "note": "No paid resource or HTTP 402 payment flow is active."
+    }
+  },
+  "limits": [
+    "Observed evidence does not prove indexing or recommendation by any model provider.",
+    "The AF score is a proprietary transparent methodology, not an official certification.",
+    "Planned and research capabilities do not count as deployed evidence."
+  ]
+}
