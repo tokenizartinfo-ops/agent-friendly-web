@@ -238,3 +238,16 @@ test('generatePublicOkf creates a complete reproducible bundle that validates in
   await generatePublicOkf({ rootDir: process.cwd(), manifestPath: 'config/okf-public-sources.v1.json', outputDir });
   assert.deepEqual(await readTree(outputDir), firstTree);
 });
+
+test('the human open knowledge page explains and links the public bundle without capability inflation', async () => {
+  const page = await readFile('app/conocimiento-abierto/page.tsx', 'utf8');
+  for (const phrase of ['OKF v0.2', 'read-only', 'CC BY 4.0', 'no es una certificacion', 'no es una API', 'no es un MCP']) {
+    assert.match(page, new RegExp(phrase, 'i'));
+  }
+  for (const href of ['/okf/v0.2/index.md', '/okf/v0.2/manifest.json', '/okf/v0.2/CHECKSUMS.sha256']) {
+    assert.ok(page.includes(`href="${href}"`), `open knowledge page is missing ${href}`);
+  }
+  assert.match(page, /Tokenizart.*primer caso integral/is);
+  assert.match(page, /<SiteHeader\s*\/>/);
+  assert.match(page, /<SiteFooter\s*\/>/);
+});

@@ -17,6 +17,7 @@ const publicPages = [
   'app/evolucion-agentica/page.tsx',
   'app/casos/tokenizart/page.tsx',
   'app/mapa-del-sitio/page.tsx',
+  'app/conocimiento-abierto/page.tsx',
 ];
 
 test('public navigation exposes the approved destinations', async () => {
