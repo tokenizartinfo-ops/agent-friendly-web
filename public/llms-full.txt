@@ -16,6 +16,14 @@ The AF-0 to AF-5 method scores seven evidence layers: discovery, answerability, 
 
 The public guide at `https://agentfriendlyweb.dev/aeo-y-crawlers` explains how answer engine optimization complements SEO. It separates search discovery, user-requested retrieval, model training and other generative-AI controls. The machine-readable catalog at `https://agentfriendlyweb.dev/.well-known/crawler-policy-catalog.json` links each entry to an official provider source and distinguishes crawler user agents from robots.txt product tokens such as Google-Extended.
 
+## Sector and language guidance
+
+The first multilingual content slice is published in Spanish, English and Portuguese at `/sectores`, `/en/sectors` and `/pt/setores`. It explains how the same evidence discipline changes for art and collections, museums, institutions, commerce, SaaS and professional services.
+
+## Measurement and assisted intake
+
+The public comparison at `/medir-mejora` processes manually entered before/after values in the browser and does not persist them. It compares evidence and never guarantees ranking or recommendation. The prototype at `/asistente` deterministically proposes field-scoped intake values from rough text. It rejects likely credentials, requires human selection and does not save, email, charge or modify a website.
+
 ## Standards status
 
 - robots.txt, sitemaps, Schema.org/JSON-LD and OpenAPI are treated as stable foundations.
@@ -37,6 +45,9 @@ Tokenizart is documented as an evolving agent-first architecture. Existing publi
 - https://agentfriendlyweb.dev/
 - https://agentfriendlyweb.dev/metodologia
 - https://agentfriendlyweb.dev/casos/tokenizart
+- https://agentfriendlyweb.dev/sectores
+- https://agentfriendlyweb.dev/medir-mejora
+- https://agentfriendlyweb.dev/asistente
 - https://agentfriendlyweb.dev/.well-known/ai-catalog.json
 - https://agentfriendlyweb.dev/.well-known/agent-skills/index.json
 - https://github.com/tokenizartinfo-ops/agent-friendly-web

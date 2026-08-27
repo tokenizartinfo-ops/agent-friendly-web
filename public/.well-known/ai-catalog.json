@@ -24,6 +24,31 @@
       "url": "https://agentfriendlyweb.dev/.well-known/crawler-policy-catalog.json"
     },
     {
+      "name": "Sector guidance ES/EN/PT",
+      "type": "text/html",
+      "url": "https://agentfriendlyweb.dev/sectores"
+    },
+    {
+      "name": "Readiness comparison",
+      "type": "text/html",
+      "url": "https://agentfriendlyweb.dev/medir-mejora"
+    },
+    {
+      "name": "Readiness comparison contract",
+      "type": "application/json",
+      "url": "https://agentfriendlyweb.dev/.well-known/readiness-comparison-contract.json"
+    },
+    {
+      "name": "Controlled intake assistant prototype",
+      "type": "text/html",
+      "url": "https://agentfriendlyweb.dev/asistente"
+    },
+    {
+      "name": "Intake assistant contract",
+      "type": "application/json",
+      "url": "https://agentfriendlyweb.dev/.well-known/intake-assistant-contract.json"
+    },
+    {
       "name": "Tokenizart case",
       "type": "text/html",
       "url": "https://agentfriendlyweb.dev/casos/tokenizart"

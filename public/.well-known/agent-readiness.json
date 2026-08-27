@@ -20,11 +20,21 @@
     },
     "structured_content": {
       "status": "deployed",
-      "resources": ["/", "/metodologia", "/aeo-y-crawlers", "/casos/tokenizart"]
+      "resources": ["/", "/metodologia", "/aeo-y-crawlers", "/sectores", "/en/sectors", "/pt/setores", "/casos/tokenizart"]
     },
     "crawler_policy_catalog": {
       "status": "deployed",
       "resources": ["/aeo-y-crawlers", "/.well-known/crawler-policy-catalog.json"]
+    },
+    "evidence_comparison": {
+      "status": "deployed",
+      "resources": ["/medir-mejora", "/.well-known/readiness-comparison-contract.json"],
+      "note": "Client-side comparison only; public inputs are not persisted observations."
+    },
+    "intake_assistant": {
+      "status": "prototype",
+      "resources": ["/asistente", "/.well-known/intake-assistant-contract.json"],
+      "note": "Deterministic and client-side. No autonomous save, email, voice, payment or website mutation."
     },
     "openapi": {
       "status": "deployed",

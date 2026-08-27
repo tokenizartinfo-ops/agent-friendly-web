@@ -29,19 +29,24 @@ La meta de 100% representa la finalizacion de las capas que el caso necesita. No
 - Registry publico versionado con perfiles HTML, JSON y Markdown;
 - guia publica `/aeo-y-crawlers` para educacion AEO, decisiones de crawling y valor comercial;
 - catalogo `/.well-known/crawler-policy-catalog.json` con fuentes y finalidades por proveedor.
+- contenido sectorial inicial para seis perfiles en ESP/ENG/POR;
+- comparador local antes/despues y contrato `readiness-comparison.v1`;
+- prototipo determinista de asistencia de intake y contrato `intake-assistant.v1`, sin persistencia ni acciones.
 
 ### Planificado
 
-- expansion AEO por sector basada en respuestas citables, entidades consistentes, actualidad y medicion comparativa;
+- expansion de la biblioteca sectorial con casos, respuestas citables y fuentes especificas;
 - perfiles OKF v0.2 exportables para conocimiento publico con procedencia, confianza y ciclo de vida;
 - monitoreo temporal y comparacion de politicas por crawler, buscador, asistente y uso de entrenamiento;
-- experiencia multidioma en espanol, ingles y portugues;
-- asistente de intake capaz de ordenar texto o audio desestructurado antes de pedir aprobacion;
+- ampliacion multidioma del resto de la experiencia, mas alla de la primera entrega sectorial;
+- asistente de intake autenticado capaz de transferir propuestas aprobadas al expediente;
 - canal de contacto propio de Agent Friendly Web con identidad, retencion y responsables definidos;
 - CLI oficial para auditar y preparar artefactos sin escribir en el sitio;
 - MCP server read-only para auditoria, consulta de expedientes autorizados y generacion de paquetes;
 - A2A Agent Card cuando exista un agente remoto real, autenticado y observable;
 - publicacion asistida mediante adaptadores limitados y aprobacion del owner.
+- paquetes o plugins oficiales por ecosistema, empezando por Tokenizart, Atelier y Agent Friendly Web, solo cuando cada marketplace o cliente tenga contrato y distribucion verificados;
+- skills publicas versionadas y customizadas por organizacion, separadas de las skills internas de operacion;
 
 ### Investigacion
 
@@ -49,6 +54,8 @@ La meta de 100% representa la finalizacion de las capas que el caso necesita. No
 - x402 para servicios concretos donde un pago por recurso tenga sentido;
 - pagos por crawl de Cloudflare, sujeto a disponibilidad, economia y politica editorial;
 - sincronizacion con proveedores y CMS sin exponer credenciales al modelo.
+- WebMCP en ChatGPT, Codex u otros clientes compatibles, manteniendolo como linea experimental hasta verificar especificacion, soporte y seguridad;
+- rampas de cobro fiat y cripto para servicios definidos, con conciliacion, comprobantes y aprobacion contable;
 
 ## Producto humano y producto agentico
 
@@ -135,11 +142,52 @@ La monetizacion puede combinar auditoria inicial, saneamiento de conocimiento, p
 - **APIs:** OpenAPI versionado, scopes, limites, idempotencia y auditoria antes de mutaciones.
 - **Pagos:** x402 o mecanismos equivalentes se incorporan a servicios concretos, nunca como sustituto de identidad o consentimiento.
 
+## Capsula A2A de implementacion
+
+La analogia de la capsula espacial se formaliza como un paquete firmado, limitado y reversible que conecta al owner, Agent Friendly Web y el mantenedor del sitio sin entregar control general del servidor.
+
+1. `OwnerIntentAgent` registra alcance, rutas autorizadas y aprobador.
+2. `CapsuleBuilderAgent` genera archivos, manifiesto, hashes, destinos, permisos minimos y rollback.
+3. `MaintainerGateway` ejecuta primero un dry-run mediante adaptador CMS, MCP o CLI limitado.
+4. A2UI muestra diferencias y solicita doble aprobacion cuando el mantenedor conserva la custodia tecnica.
+5. `ApplyAdapter` escribe solo archivos/rutas allowlisted, con idempotencia y version previa.
+6. `VerifierAgent` vuelve a auditar el origen y emite un recibo metadata-only.
+
+La capsula no contiene contrasenas, cookies, API keys ni claves privadas. A2A coordina la tarea; MCP o CLI ejecutan herramientas acotadas; A2UI conserva las decisiones humanas. El detalle vive en `docs/A2A-DEPLOYMENT-CAPSULE-ROADMAP.es.md`.
+
+## Distribucion por ecosistema
+
+No existe un unico formato universal de plugin. El roadmap mantiene adaptadores separados y no promete presencia en una tienda antes de una publicacion verificable:
+
+| Superficie | Primera entrega candidata | Gate |
+| --- | --- | --- |
+| Codex | plugin/skills del repositorio y MCP read-only | paquete versionado, permisos y prueba de instalacion |
+| ChatGPT | app basada en MCP y UI declarativa | OAuth, politicas de tools y revision de distribucion |
+| Claude | servidor MCP y documentacion compatible | autenticacion, scopes y pruebas oficiales del cliente |
+| Gemini | extension o adaptador compatible con su ecosistema vigente | investigacion primaria y contrato estable |
+| Grok/xAI | integracion solo si existe una superficie oficial adecuada | investigacion; no se presume marketplace |
+| WebMCP | exposicion declarativa desde paginas compatibles | borrador experimental, threat model y compatibilidad real |
+
+Las skills internas de Tokenizart ya usadas por Codex son insumos de desarrollo, no productos publicos por defecto. Antes de exponerlas se revisan nivel, fuentes, acciones bloqueadas, version y licencia. `Visualize` ya esta disponible como capacidad interna de prototipado y explicacion visual; no se contabiliza como herramienta publica de Agent Friendly Web.
+
+## Costos, paquetes y pagos
+
+Cada accion debe registrar costo operativo estimado en cuatro componentes: tiempo humano, consumo de modelos/APIs, infraestructura y riesgo/soporte. El costo no se confunde con el precio: el precio tambien cubre valor, personalizacion, responsabilidad y mantenimiento opcional.
+
+- auditoria publica: gratuita como entrada;
+- diagnostico automatizado o autoguiado: precio bajo y repetible;
+- documentacion F0-F1: paquete base cuando el origen y el contenido estan ordenados;
+- implementacion asistida F0-F3: cotizacion por volumen, CMS, idiomas y acceso tecnico;
+- F3-F5, plugins, MCP, skills, integraciones, A2A y pagos: alcance y PDR especificos;
+- monitoreo: opcional y justificable por una tarea o consumo recurrente real.
+
+Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenible para un diagnostico automatizado y acotado. No debe presentarse como implementacion manual completa F0-F3. Las tarifas definitivas, cuenta receptora, cobro fiat, cripto, impuestos, reembolsos y conciliacion permanecen como decision interna Nivel 1 hasta aprobacion comercial, legal y contable.
+
 ## Orden de implementacion actualizado
 
 1. **Bloque 1 - confianza y Registry: desplegado.** Expediente, verificacion de dominio, perfiles versionados, observaciones, caso Tokenizart y release seguro.
-2. **Bloque 2 - AEO y politica crawler: primera entrega desplegada.** La guia publica y el catalogo por proveedor estan activos desde el 2026-08-27; siguen contenido sectorial, ESP/ENG/POR, frescura y medicion comparativa.
-3. **Bloque 3 - asistencia de intake:** chat contextual, texto libre, revision field-scoped, correo operativo, encuestas breves y audio a texto.
+2. **Bloque 2 - AEO, sectores y medicion: implementado para release.** Guia, catalogo, control mensual de fuentes, primera biblioteca ESP/ENG/POR y comparador no persistente.
+3. **Bloque 3 - asistencia de intake: prototipo controlado implementado.** Texto libre, rechazo de secretos, propuestas field-scoped y seleccion humana; guardado, voz, correo y pagos siguen bloqueados.
 4. **Bloque 4 - distribucion agentica:** OKF, CLI y MCP read-only con contratos publicados.
 5. **Bloque 5 - integracion:** adaptadores de CMS, Draft PRs y capsulas con doble consentimiento.
 6. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
@@ -158,6 +206,8 @@ La monetizacion puede combinar auditoria inicial, saneamiento de conocimiento, p
 | `/.well-known/agent-skills/index.json` | indice de skills descargables | desplegado, convencion del proyecto |
 | `/.well-known/agent-readiness.json` | estado de capacidades | desplegado, no es estandar oficial |
 | `/.well-known/crawler-policy-catalog.json` | catalogo de identidades, finalidades y fuentes por crawler | desplegado, convencion del proyecto |
+| `/.well-known/readiness-comparison-contract.json` | limites y campos del comparador local | preparado para release, convencion del proyecto |
+| `/.well-known/intake-assistant-contract.json` | contrato fail-closed del prototipo de intake | preparado para release, convencion del proyecto |
 | `/.well-known/security.txt` | contacto y politica de seguridad | desplegado |
 
 ## Secuencia hacia herramientas y delegacion
@@ -196,4 +246,4 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 
 ## Gate inmediato
 
-Cerrar la ampliacion del Bloque 2: incorporar contenido sectorial, traducciones ESP/ENG/POR, control de vigencia de fuentes y medicion comparativa antes/despues. En paralelo se puede especificar el contrato del asistente de intake del Bloque 3, sin habilitar todavia guardado autonomo, voz, correo ni escritura por agentes. OKF, CLI, MCP, A2A y pagos conservan gates separados y no deben aparecer como capacidades desplegadas antes de sus pruebas.
+Validar en navegador la ampliacion del Bloque 2 y el prototipo controlado del Bloque 3, publicar sus contratos y volver a auditar el origen. Despues se decide por separado la transferencia de propuestas aprobadas al expediente autenticado. OKF, CLI, MCP, plugins, WebMCP, A2A, pagos, voz, correo y escritura conservan gates separados y no deben aparecer como capacidades desplegadas antes de sus pruebas.
