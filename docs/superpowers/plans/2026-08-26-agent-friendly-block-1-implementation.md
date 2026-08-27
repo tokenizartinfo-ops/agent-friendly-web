@@ -434,7 +434,7 @@ git commit -m "feat: add progressive registry intake workspace"
 - Consumes: verified `registrySites`, expanded private project, latest explicit observation, and `publicAttestationDraft`.
 - Produces: `buildPublicProfile(input): agentfriendly.public-profile.v1`, `renderPublicProfileMarkdown(profile): string`, `listPublishedProfiles()`, `getPublishedProfile(slug, version?)`, and an owner-only publication endpoint.
 
-- [ ] **Step 1: Write failing projection tests**
+- [x] **Step 1: Write failing projection tests**
 
 Create `test/public-profile.test.mjs`:
 
@@ -459,13 +459,13 @@ test('markdown renderer emits real markdown with source dates', () => {
 });
 ```
 
-- [ ] **Step 2: Run the projection test and confirm the missing module**
+- [x] **Step 2: Run the projection test and confirm the missing module**
 
 Run: `node --test test/public-profile.test.mjs`
 
 Expected: FAIL because `lib/public-profile.mjs` does not exist.
 
-- [ ] **Step 3: Implement the public contract and Markdown renderer**
+- [x] **Step 3: Implement the public contract and Markdown renderer**
 
 The JSON root contains:
 
@@ -481,7 +481,7 @@ The JSON root contains:
 
 Every `assertions` entry contains `{ value, state, source, observedAt }`. Remove undefined values and reject free-form HTML. Markdown uses headings, bullet lists, direct source links, state labels, dates, and limits; it contains no embedded HTML or private contact data.
 
-- [ ] **Step 4: Implement an owner-only publication transaction**
+- [x] **Step 4: Implement an owner-only publication transaction**
 
 `POST /api/projects/{projectId}/publish-profile` requires:
 
@@ -495,7 +495,7 @@ Every `assertions` entry contains `{ value, state, source, observedAt }`. Remove
 
 Reject unauthenticated users, project mismatch, unverified or expired domain, hostname mismatch, and false confirmation. In one D1 batch, insert an approved owner attestation, insert `public_profiles` at `max(version)+1`, mark the previous published version `superseded`, set site visibility to `public`, and append a metadata-only project event.
 
-- [ ] **Step 5: Add public Registry routes**
+- [x] **Step 5: Add public Registry routes**
 
 Implement:
 
@@ -506,7 +506,7 @@ Implement:
 
 Return 404 for unknown or unpublished profiles. Never return draft, revoked, or superseded versions from the latest route; allow a specific historical version only when it was once published.
 
-- [ ] **Step 6: Update navigation and sitemap, then commit**
+- [x] **Step 6: Update navigation and sitemap, then commit**
 
 Run:
 
@@ -518,6 +518,8 @@ npm run build
 ```
 
 Expected: all commands pass and `/registry` appears in the build.
+
+Verification completed locally on 2026-08-27: the focused projection and route-contract tests passed, the full 62-test suite passed, ESLint passed, and the production build included `/registry`, `/registry/:slug`, and the JSON/Markdown routes. No D1 migration, domain claim, public profile, deployment, DNS change, or external write was executed.
 
 ```bash
 git add lib/public-profile.mjs lib/registry-store.ts app/api/projects app/registry app/components/site-header.tsx app/sitemap.ts test

@@ -4,6 +4,7 @@ const productLinks = [
   ['Auditar un sitio', '/#auditar'],
   ['Evolucion agentica', '/evolucion-agentica'],
   ['Metodologia', '/metodologia'],
+  ['Registry publico', '/registry'],
   ['Caso Tokenizart', '/casos/tokenizart'],
   ['Mapa completo', '/mapa-del-sitio'],
 ];
