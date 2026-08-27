@@ -70,3 +70,9 @@ test('the home maturity map exposes six stages and one clear demonstrator action
   }
   assert.equal((maturity.match(/href="\/evolucion-agentica"/g) || []).length, 1);
 });
+
+test('the mobile navigation stretches across the available menu width', async () => {
+  const styles = await readFile('app/globals.css', 'utf8');
+  assert.match(styles, /\.site-header nav\.is-open\s*\{[^}]*justify-content:\s*stretch;/s);
+  assert.match(styles, /\.site-header nav\.is-open a\s*\{[^}]*width:\s*100%;/s);
+});
