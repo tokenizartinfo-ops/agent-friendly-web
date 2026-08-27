@@ -15,6 +15,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import Link from 'next/link';
+import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 
 const humanRoutes = [
@@ -130,6 +131,7 @@ export default function SiteMapPage() {
           ))}
         </div>
       </section>
+      <SiteFooter />
     </main>
   );
 }

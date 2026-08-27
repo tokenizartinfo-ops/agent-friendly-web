@@ -13,6 +13,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import Link from 'next/link';
+import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
 
 const surfaces = [
@@ -183,6 +184,7 @@ export default function TokenizartCasePage() {
           <a href="https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/TOKENIZART-CASE-2026-08-26.md" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> Informe completo <ExternalLink size={14} /></a>
         </div>
       </section>
+      <SiteFooter />
     </main>
   );
 }

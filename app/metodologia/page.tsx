@@ -1,4 +1,5 @@
 import { ArrowRight, Beaker, CheckCircle2, FileCheck2, ShieldCheck } from 'lucide-react';
+import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 
 const layers = [
@@ -56,6 +57,7 @@ export default function MethodologyPage() {
           <a href="https://github.com/x402-foundation/x402" target="_blank" rel="noreferrer">x402 Specification <ArrowRight size={16} /></a>
         </div>
       </section>
+      <SiteFooter />
     </main>
   );
 }

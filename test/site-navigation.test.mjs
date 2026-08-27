@@ -11,6 +11,14 @@ const requiredNavigation = [
   '/expediente',
 ];
 
+const publicPages = [
+  'app/page.tsx',
+  'app/metodologia/page.tsx',
+  'app/evolucion-agentica/page.tsx',
+  'app/casos/tokenizart/page.tsx',
+  'app/mapa-del-sitio/page.tsx',
+];
+
 test('public navigation exposes the approved destinations', async () => {
   const header = await readFile('app/components/site-header.tsx', 'utf8');
 
@@ -41,5 +49,12 @@ test('the technical sitemap includes only canonical public HTML routes', async (
   }
   for (const excluded of ['/expediente', '/api/', '/.well-known/']) {
     assert.equal(sitemap.includes(excluded), false, `sitemap must not include ${excluded}`);
+  }
+});
+
+test('every public page uses the shared footer', async () => {
+  for (const page of publicPages) {
+    const source = await readFile(page, 'utf8');
+    assert.match(source, /<SiteFooter\s*\/>/, `${page} must render the shared footer`);
   }
 });

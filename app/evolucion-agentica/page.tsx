@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ArrowRight, BadgeInfo } from 'lucide-react';
 import Link from 'next/link';
 import { MaturityDemonstrator } from '../components/maturity-demonstrator';
+import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 
 export const metadata: Metadata = {
@@ -29,10 +30,7 @@ export default function AgenticEvolutionPage() {
         <Link href="/#auditar">Auditar un sitio <ArrowRight size={17} /></Link>
       </section>
 
-      <footer>
-        <p>© 2026 Agent Friendly Web · Metodologia de Gabriel Mucchiut.</p>
-        <p>Ejemplos educativos, evidencia verificable y limites explicitos.</p>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

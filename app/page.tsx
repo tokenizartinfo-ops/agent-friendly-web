@@ -1,4 +1,5 @@
 import { ScanWorkspace } from './components/scan-workspace';
+import { SiteFooter } from './components/site-footer';
 import { SiteHeader } from './components/site-header';
 import { ArrowRight, Layers3 } from 'lucide-react';
 import Link from 'next/link';
@@ -57,10 +58,7 @@ export default function Home() {
         <Link href="/evolucion-agentica">Ver evolucion <ArrowRight size={17} /></Link>
       </section>
 
-      <footer>
-        <p>© 2026 Agent Friendly Web · Creado por Gabriel Mucchiut e incubado dentro de Tokenizart.</p>
-        <p>Evidencia publica, metodologia abierta y mejoras progresivas.</p>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
