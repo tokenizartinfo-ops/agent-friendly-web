@@ -1,17 +1,15 @@
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { calculateReadiness, normalizePublicUrl } from '../../../lib/methodology.mjs';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import {
   analyzeHome,
   analyzeRobots,
   evidenceFromProbe,
   hasOwnershipEvidence,
-  isPrivateIp,
   matchesResource,
 } from '../../../lib/scanner.mjs';
-
-const MAX_BYTES = 250_000;
-const REQUEST_TIMEOUT_MS = 8_000;
+import {
+  assertPublicHostname,
+  fetchLimitedPublicUrl,
+} from '../../../lib/public-network.mjs';
 
 type Probe = {
   id: string;
@@ -24,69 +22,26 @@ type Probe = {
   error?: string;
 };
 
-async function readLimited(response: Response) {
-  if (!response.body) return '';
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder();
-  let output = '';
-  let bytes = 0;
-
-  while (bytes < MAX_BYTES) {
-    const { value, done } = await reader.read();
-    if (done) break;
-    bytes += value.byteLength;
-    output += decoder.decode(value, { stream: true });
-    if (bytes >= MAX_BYTES) break;
-  }
-  await reader.cancel().catch(() => undefined);
-  return output.slice(0, MAX_BYTES);
-}
-
-async function assertPublicResolution(hostname: string) {
-  if (/^[\d.]+$/.test(hostname) || hostname.includes(':')) {
-    if (isPrivateIp(hostname)) throw new Error('El destino no es una direccion publica auditable.');
-    return;
-  }
-
-  const answers = await Promise.all(
-    ['A', 'AAAA'].map(async (type) => {
-      const response = await fetch(
-        `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(hostname)}&type=${type}`,
-        { headers: { accept: 'application/dns-json' }, signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) },
-      );
-      if (!response.ok) throw new Error('No se pudo verificar el destino con seguridad.');
-      const payload = (await response.json()) as { Answer?: Array<{ type: number; data: string }> };
-      return (payload.Answer || [])
-        .filter((answer) => answer.type === 1 || answer.type === 28)
-        .map((answer) => answer.data);
-    }),
-  );
-
-  const addresses = answers.flat();
-  if (!addresses.length || addresses.some(isPrivateIp)) {
-    throw new Error('El destino no tiene una resolucion publica auditable.');
-  }
-}
-
-async function probe(origin: string, id: string, path: string, accept = 'text/html,*/*;q=0.8'): Promise<Probe> {
+async function probe(
+  origin: string,
+  validatedHostname: string,
+  id: string,
+  path: string,
+  accept = 'text/html,*/*;q=0.8',
+): Promise<Probe> {
   try {
-    const response = await fetch(new URL(path, origin), {
-      headers: {
-        accept,
-        'user-agent': 'AgentFriendlyWebAuditor/0.1',
-      },
-      redirect: 'manual',
-      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    const response = await fetchLimitedPublicUrl(new URL(path, origin), {
+      accept,
+      validatedHostname,
     });
-    const body = await readLimited(response);
     return {
       id,
       path,
       status: response.status,
-      bytes: new TextEncoder().encode(body).byteLength,
-      contentType: response.headers.get('content-type') || '',
-      link: response.headers.get('link') || '',
-      body,
+      bytes: response.bytes,
+      contentType: response.contentType,
+      link: response.link,
+      body: response.body,
     };
   } catch (error) {
     return {
@@ -108,7 +63,7 @@ export async function POST(request: Request) {
     const normalized = normalizePublicUrl(body.url);
     const target = new URL(normalized);
     const origin = target.origin;
-    await assertPublicResolution(target.hostname);
+    await assertPublicHostname(target.hostname);
 
     const [
       home,
@@ -128,21 +83,21 @@ export async function POST(request: Request) {
       markdown,
     ] =
       await Promise.all([
-        probe(origin, 'home', '/'),
-        probe(origin, 'robots', '/robots.txt', 'text/plain,*/*;q=0.8'),
-        probe(origin, 'sitemap', '/sitemap.xml', 'application/xml,text/xml,*/*;q=0.8'),
-        probe(origin, 'wp-sitemap', '/wp-sitemap.xml', 'application/xml,text/xml,*/*;q=0.8'),
-        probe(origin, 'llms', '/llms.txt', 'text/plain,text/markdown,*/*;q=0.8'),
-        probe(origin, 'llms-full', '/llms-full.txt', 'text/plain,text/markdown,*/*;q=0.8'),
-        probe(origin, 'mcp', '/.well-known/mcp.json', 'application/json,*/*;q=0.8'),
-        probe(origin, 'mcp-server-card', '/.well-known/mcp/server-card.json', 'application/json,*/*;q=0.8'),
-        probe(origin, 'openapi', '/openapi.json', 'application/json,*/*;q=0.8'),
-        probe(origin, 'api-openapi', '/api/openapi.json', 'application/json,*/*;q=0.8'),
-        probe(origin, 'api-catalog', '/.well-known/api-catalog', 'application/linkset+json,application/json,*/*;q=0.8'),
-        probe(origin, 'ai-catalog', '/.well-known/ai-catalog.json', 'application/json,*/*;q=0.8'),
-        probe(origin, 'skills', '/skills/index.md', 'text/markdown,text/plain,*/*;q=0.8'),
-        probe(origin, 'agent-skills', '/.well-known/agent-skills/index.json', 'application/json,*/*;q=0.8'),
-        probe(origin, 'markdown', '/', 'text/markdown'),
+        probe(origin, target.hostname, 'home', '/'),
+        probe(origin, target.hostname, 'robots', '/robots.txt', 'text/plain,*/*;q=0.8'),
+        probe(origin, target.hostname, 'sitemap', '/sitemap.xml', 'application/xml,text/xml,*/*;q=0.8'),
+        probe(origin, target.hostname, 'wp-sitemap', '/wp-sitemap.xml', 'application/xml,text/xml,*/*;q=0.8'),
+        probe(origin, target.hostname, 'llms', '/llms.txt', 'text/plain,text/markdown,*/*;q=0.8'),
+        probe(origin, target.hostname, 'llms-full', '/llms-full.txt', 'text/plain,text/markdown,*/*;q=0.8'),
+        probe(origin, target.hostname, 'mcp', '/.well-known/mcp.json', 'application/json,*/*;q=0.8'),
+        probe(origin, target.hostname, 'mcp-server-card', '/.well-known/mcp/server-card.json', 'application/json,*/*;q=0.8'),
+        probe(origin, target.hostname, 'openapi', '/openapi.json', 'application/json,*/*;q=0.8'),
+        probe(origin, target.hostname, 'api-openapi', '/api/openapi.json', 'application/json,*/*;q=0.8'),
+        probe(origin, target.hostname, 'api-catalog', '/.well-known/api-catalog', 'application/linkset+json,application/json,*/*;q=0.8'),
+        probe(origin, target.hostname, 'ai-catalog', '/.well-known/ai-catalog.json', 'application/json,*/*;q=0.8'),
+        probe(origin, target.hostname, 'skills', '/skills/index.md', 'text/markdown,text/plain,*/*;q=0.8'),
+        probe(origin, target.hostname, 'agent-skills', '/.well-known/agent-skills/index.json', 'application/json,*/*;q=0.8'),
+        probe(origin, target.hostname, 'markdown', '/', 'text/markdown'),
       ]);
 
     const homeSignals = analyzeHome(home.body, { link: home.link });

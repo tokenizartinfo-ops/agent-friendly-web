@@ -273,7 +273,7 @@ git commit -m "feat: add registry block one data model"
 - Consumes: authenticated project ownership, `domainClaims`, `registrySites`, scanner SSRF rules.
 - Produces: `createDomainChallenge({ hostname, method, token, now })`, `evaluateDomainChallenge({ claim, dnsAnswers, httpBody, now })`, `assertPublicHostname(hostname, resolve)`, authenticated claim creation/listing, and authenticated verification.
 
-- [ ] **Step 1: Write failing pure verification tests**
+- [x] **Step 1: Write failing pure verification tests**
 
 Create `test/domain-verification.test.mjs` with these cases:
 
@@ -300,13 +300,13 @@ test('expired or already consumed challenge fails closed', () => {
 
 The test file defines `fixtureFor(claim)` to place the expected value in the DNS or HTTP input according to `claim.method`.
 
-- [ ] **Step 2: Run the tests and confirm the missing module**
+- [x] **Step 2: Run the tests and confirm the missing module**
 
 Run: `node --test test/domain-verification.test.mjs`
 
 Expected: FAIL because `lib/domain-verification.mjs` does not exist.
 
-- [ ] **Step 3: Implement challenge creation and evaluation**
+- [x] **Step 3: Implement challenge creation and evaluation**
 
 Use these constants and paths:
 
@@ -318,7 +318,7 @@ export const HTTP_CHALLENGE_PATH = '/.well-known/agent-friendly-owner.json';
 
 DNS uses `_agentfriendly-challenge.${hostname}` and value `agentfriendly-domain-verification=${token}`. HTTP expects JSON with `contract: "agentfriendly.domain-claim.v1"`, the exact hostname, and the exact token. Evaluation rejects mismatched hostname, expired claim, non-pending status, malformed JSON, and reused claims.
 
-- [ ] **Step 4: Extract the scanner network guard without changing behavior**
+- [x] **Step 4: Extract the scanner network guard without changing behavior**
 
 Move public DNS resolution, timeout, response-size limit, and manual-redirect fetch into `lib/public-network.mjs`. Export:
 
@@ -330,7 +330,7 @@ resolvePublicTxt(name): Promise<string[]>
 
 Keep the 8-second timeout, 250,000-byte limit, manual redirects, public A/AAAA requirement, and private-IP rejection. Update `app/api/scan/route.ts` to consume those helpers and confirm its existing scanner tests remain unchanged.
 
-- [ ] **Step 5: Add authenticated claim APIs**
+- [x] **Step 5: Add authenticated claim APIs**
 
 `POST /api/projects/{projectId}/domain-claims` accepts `{ "method": "dns_txt" }` or `{ "method": "http_file" }`, verifies project ownership, derives the hostname from the saved website, invalidates older pending claims for the same project, and returns the challenge instructions. Generate the token with 32 cryptographically random bytes encoded as base64url.
 
@@ -338,7 +338,7 @@ Keep the 8-second timeout, 250,000-byte limit, manual redirects, public A/AAAA r
 
 `POST /api/projects/{projectId}/domain-claims/{claimId}/verify` performs only the declared DNS or HTTP read, enforces one attempt per 10 seconds and a maximum of 10 attempts, updates the claim and `registrySites.verificationStatus` atomically, and records a metadata-only `domain_claim_verified` or `domain_claim_failed` event.
 
-- [ ] **Step 6: Run focused and regression tests, then commit**
+- [x] **Step 6: Run focused and regression tests, then commit**
 
 Run:
 
@@ -348,6 +348,8 @@ npm test
 ```
 
 Expected: PASS with no scanner score changes.
+
+Verification completed on 2026-08-27: focused tests, full regression, lint, and the production build passed. The global standalone `tsc --noEmit` command remains red only on pre-existing JavaScript inference issues outside Task 3; it reports no Task 3 paths. No remote D1 migration, DNS change, deployment, profile publication, or external write was executed.
 
 ```bash
 git add lib/domain-verification.mjs lib/public-network.mjs app/api/scan/route.ts app/api/projects test
