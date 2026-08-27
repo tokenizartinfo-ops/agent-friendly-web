@@ -1,15 +1,19 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import test from 'node:test';
 import { parse as parseYaml } from 'yaml';
 import {
   buildChecksumFile,
   extractMarkdownSection,
+  generatePublicOkf,
   parseOkfDocument,
   renderOkfDocument,
   resolveBundleLink,
   validatePublicText,
+  validatePublicOkf,
   validateReservedDocuments,
   verifyChecksumFile,
 } from '../lib/okf-public.mjs';
@@ -72,6 +76,11 @@ test('OKF source manifest fixes the approved public release contract', async () 
       assert.ok(PUBLIC_SOURCE_ALLOWLIST.has(source.path), `${source.path} is not an approved public source`);
       assert.ok(Array.isArray(source.sections) && source.sections.length > 0);
     }
+  }
+
+  for (const source of Object.values(manifest.source_catalog)) {
+    assert.match(source.last_modified, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/);
+    assert.match(source.resource, /^https:\/\//);
   }
 });
 
@@ -158,4 +167,69 @@ test('reserved index and log documents follow OKF v0.2 conventions', () => {
   assert.doesNotThrow(() => validateReservedDocuments({ index, log }));
   assert.throws(() => validateReservedDocuments({ index: '# Missing version', log }), /okf_version/i);
   assert.throws(() => validateReservedDocuments({ index, log: '# Log\n\n## August 27' }), /ISO 8601/i);
+});
+
+async function listFilesRecursively(root) {
+  const entries = await readdir(root, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const absolute = path.join(root, entry.name);
+    if (entry.isDirectory()) {
+      for (const child of await listFilesRecursively(absolute)) files.push(path.posix.join(entry.name, child));
+    } else {
+      files.push(entry.name);
+    }
+  }
+  return files.sort();
+}
+
+async function readTree(root) {
+  const files = await listFilesRecursively(root);
+  return new Map(await Promise.all(files.map(async (filePath) => [filePath, await readFile(path.join(root, filePath), 'utf8')])));
+}
+
+test('generatePublicOkf creates a complete reproducible bundle that validates independently', async (context) => {
+  const outputDir = await mkdtemp(path.join(tmpdir(), 'agent-friendly-web-okf-'));
+  context.after(() => rm(outputDir, { recursive: true, force: true }));
+
+  const generation = await generatePublicOkf({
+    rootDir: process.cwd(),
+    manifestPath: 'config/okf-public-sources.v1.json',
+    outputDir,
+  });
+
+  assert.equal(generation.conceptCount, EXPECTED_CONCEPTS.length);
+  const firstTree = await readTree(outputDir);
+  assert.deepEqual(
+    [...firstTree.keys()],
+    ['CHECKSUMS.sha256', ...EXPECTED_CONCEPTS, 'index.md', 'log.md', 'manifest.json'].sort(),
+  );
+
+  const index = parseOkfDocument(firstTree.get('index.md'));
+  assert.equal(index.frontmatter.okf_version, '0.2');
+  for (const conceptPath of EXPECTED_CONCEPTS) {
+    const concept = parseOkfDocument(firstTree.get(conceptPath));
+    assert.ok(concept.frontmatter.type, `${conceptPath} has no type`);
+    assert.equal(concept.frontmatter.generated.at, '2026-08-27T00:00:00Z');
+    assert.equal(concept.frontmatter.verified[0].by, 'human:gabriel-mucchiut');
+  }
+
+  const distributionManifest = JSON.parse(firstTree.get('manifest.json'));
+  assert.equal(distributionManifest.schema, 'agent-friendly-web.okf-distribution.v1');
+  assert.equal(distributionManifest.okf_version, '0.2');
+  assert.equal(distributionManifest.files.length, 13);
+  assert.equal(distributionManifest.extensions.manifest, true);
+  assert.equal(distributionManifest.extensions.checksums, true);
+  assert.match(distributionManifest.convention, /project extension.*not.*OKF requirement/i);
+
+  const validation = await validatePublicOkf({
+    rootDir: process.cwd(),
+    manifestPath: 'config/okf-public-sources.v1.json',
+    outputDir,
+  });
+  assert.equal(validation.conceptCount, EXPECTED_CONCEPTS.length);
+  assert.equal(validation.fileCount, 15);
+
+  await generatePublicOkf({ rootDir: process.cwd(), manifestPath: 'config/okf-public-sources.v1.json', outputDir });
+  assert.deepEqual(await readTree(outputDir), firstTree);
 });

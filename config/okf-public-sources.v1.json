@@ -17,49 +17,49 @@
       "title": "Metodologia Agent Friendly Web v1",
       "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/METHODOLOGY.es.md",
       "author": "person:gabriel-mucchiut",
-      "last_modified": "2026-08-27"
+      "last_modified": "2026-08-27T00:00:00Z"
     },
     "docs/AEO-AND-CRAWLER-POLICY.es.md": {
       "title": "AEO y politica de crawlers",
       "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/AEO-AND-CRAWLER-POLICY.es.md",
       "author": "person:gabriel-mucchiut",
-      "last_modified": "2026-08-27"
+      "last_modified": "2026-08-27T00:00:00Z"
     },
     "docs/SECURITY.md": {
       "title": "Seguridad y fronteras publicas",
       "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/SECURITY.md",
-      "author": "organization:agent-friendly-web",
-      "last_modified": "2026-08-27"
+      "author": "agent-friendly-web/editorial-v1",
+      "last_modified": "2026-08-27T00:00:00Z"
     },
     "docs/SPECIFICATION.es.md": {
       "title": "Especificacion funcional y tecnica v1",
       "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/SPECIFICATION.es.md",
-      "author": "organization:agent-friendly-web",
-      "last_modified": "2026-08-27"
+      "author": "agent-friendly-web/editorial-v1",
+      "last_modified": "2026-08-27T00:00:00Z"
     },
     "docs/TOKENIZART-CASE-2026-08-26.md": {
       "title": "Caso Tokenizart: auditoria y transformacion agent-friendly",
       "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/TOKENIZART-CASE-2026-08-26.md",
       "author": "person:gabriel-mucchiut",
-      "last_modified": "2026-08-27"
+      "last_modified": "2026-08-27T00:00:00Z"
     },
     "docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md": {
       "title": "Agent Friendly Web: roadmap agent-native",
       "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md",
-      "author": "organization:agent-friendly-web",
-      "last_modified": "2026-08-27"
+      "author": "agent-friendly-web/editorial-v1",
+      "last_modified": "2026-08-27T00:00:00Z"
     },
     "docs/BLOCK-3-INTAKE-ASSISTANT-CONTRACT.es.md": {
       "title": "Contrato del asistente de intake",
       "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/BLOCK-3-INTAKE-ASSISTANT-CONTRACT.es.md",
-      "author": "organization:agent-friendly-web",
-      "last_modified": "2026-08-27"
+      "author": "agent-friendly-web/editorial-v1",
+      "last_modified": "2026-08-27T00:00:00Z"
     },
     "docs/BLOCK-2-SECTOR-MULTILINGUAL-MEASUREMENT.es.md": {
       "title": "Contrato de comparacion de evidencia",
       "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/BLOCK-2-SECTOR-MULTILINGUAL-MEASUREMENT.es.md",
-      "author": "organization:agent-friendly-web",
-      "last_modified": "2026-08-27"
+      "author": "agent-friendly-web/editorial-v1",
+      "last_modified": "2026-08-27T00:00:00Z"
     }
   },
   "concepts": [
