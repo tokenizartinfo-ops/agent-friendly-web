@@ -37,22 +37,24 @@ Estos campos se completan solo despues de aplicar la migracion y desplegar la mi
 
 | Dato | Valor |
 | --- | --- |
-| Commit validado | pendiente |
-| Migracion aplicada | pendiente |
-| Version Sites anterior | pendiente |
-| Version Sites desplegada | pendiente |
-| Deployment ID | pendiente |
-| URL de produccion | pendiente |
-| Fecha y hora del smoke | pendiente |
-| Resultado | pendiente |
+| Commit validado | `1a57087a251ac89bc6b0a6990fe725c60e9a99bd` |
+| Migracion incluida | `drizzle/0001_registry_block1.sql` |
+| Version Sites anterior | 10 |
+| Version Sites desplegada | 11 |
+| Deployment ID | `appgdep_6a90520e42ac8191b5eaa84e46f7f603` |
+| URL de produccion | `https://agentfriendlyweb.dev` |
+| Fecha y hora del smoke | `2026-08-27T12:08:05-03:00` |
+| Resultado | release publico aprobado; QA owner autenticado pendiente |
 
 ## Smoke post despliegue
 
-- [ ] `/`, `robots.txt`, `llms.txt`, `llms-full.txt`, `sitemap.xml` y `openapi.json` responden 200.
-- [ ] `/registry` y `/registry/tokenizart` responden 200.
-- [ ] `profile.json` usa `application/json` y `profile.md` usa `text/markdown`.
-- [ ] Los activos publicos usan `agentfriendlyweb.dev` como origen canonico.
-- [ ] `/expediente` solicita autenticacion y no expone datos privados.
+- [x] `/`, `robots.txt`, `llms.txt`, `llms-full.txt`, `sitemap.xml` y `openapi.json` responden 200.
+- [x] `/registry` y `/registry/tokenizart` responden 200.
+- [x] `profile.json` usa `application/json` y `profile.md` usa `text/markdown`.
+- [x] Los activos publicos usan `agentfriendlyweb.dev` como origen canonico.
+- [x] `/expediente` devuelve 307 hacia `/signin-with-chatgpt` sin exponer contenido.
+
+La comprobacion del expediente con un owner real no se marco como aprobada: el navegador aislado llego correctamente a `auth.openai.com`, pero no se introdujeron credenciales ni se automatizo el login. Debe completarse en una sesion humana antes de declarar cerrado todo el gate privado.
 
 ## Rollback
 

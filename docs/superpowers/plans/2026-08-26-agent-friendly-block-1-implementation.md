@@ -695,11 +695,11 @@ Use one authenticated owner and one unauthenticated window. Verify desktop at 14
 6. Registry filters, provenance badges, JSON, and Markdown work without horizontal overflow.
 7. Tokenizart links distinguish `tokenizart.com` from `atelier.tokenizart.com`.
 
-- [ ] **Step 4: Save and deploy one Sites version**
+- [x] **Step 4: Save and deploy one Sites version**
 
 Push the exact validated commit to the configured Sites source branch using a short-lived per-command credential. Package the successful build with the Sites `package-site.sh` helper, save one version with that commit SHA, and deploy that saved version publicly only under the already-approved public access policy.
 
-- [ ] **Step 5: Execute post-deployment smoke tests**
+- [x] **Step 5: Execute post-deployment smoke tests**
 
 Require HTTP 200 and correct content types for:
 
@@ -718,7 +718,7 @@ https://agentfriendlyweb.dev/registry/tokenizart/profile.md
 
 Confirm that public assets contain `https://agentfriendlyweb.dev` and do not contain `agent-friendly-web.tokenizart.chatgpt.site`. Confirm `/expediente` redirects to authenticated access rather than exposing private content.
 
-- [ ] **Step 6: Record release and rollback evidence**
+- [x] **Step 6: Record release and rollback evidence**
 
 Write the deployed Sites version number, commit SHA, migration name, deployment ID, smoke timestamp, observed status, and previous working Sites version into `docs/BLOCK-1-RELEASE-CHECKLIST-2026-08-26.md`. Rollback means redeploying the previous saved Sites version; do not reverse a D1 migration destructively. Add a forward migration for any schema correction.
 
