@@ -84,6 +84,11 @@ test('OKF source manifest fixes the approved public release contract', async () 
   }
 });
 
+test('generated OKF artifacts keep LF endings so committed checksums remain portable', async () => {
+  const attributes = await readFile('.gitattributes', 'utf8');
+  assert.match(attributes, /public\/okf\/\*\*\/\*\s+text\s+eol=lf/);
+});
+
 test('extractMarkdownSection returns one exact heading scope', () => {
   const markdown = [
     '# Root',
