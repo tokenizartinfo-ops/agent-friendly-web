@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowUpRight, Braces, Menu, X } from 'lucide-react';
+import { LockKeyhole, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 
 export function SiteHeader() {
@@ -14,14 +14,14 @@ export function SiteHeader() {
       </Link>
       <nav className={open ? 'is-open' : ''} aria-label="Principal">
         <Link href="/#auditar" onClick={() => setOpen(false)}>Auditar</Link>
-        <Link href="/expediente" onClick={() => setOpen(false)}>Mi expediente</Link>
-        <Link href="/metodologia" onClick={() => setOpen(false)}>Metodologia</Link>
-        <Link href="/evolucion-agentica" onClick={() => setOpen(false)}>Ver evolucion</Link>
-        <Link href="/casos/tokenizart" onClick={() => setOpen(false)}>Caso Tokenizart</Link>
+        <Link href="/evolucion-agentica" onClick={() => setOpen(false)}>Evolucion</Link>
+        <Link href="/metodologia" onClick={() => setOpen(false)}>Metodo</Link>
+        <Link href="/casos/tokenizart" onClick={() => setOpen(false)}>Casos</Link>
+        <Link href="/mapa-del-sitio" onClick={() => setOpen(false)}>Mapa</Link>
+        <Link className="private-nav-link" href="/expediente" onClick={() => setOpen(false)}>
+          <LockKeyhole size={15} /> Mi expediente
+        </Link>
       </nav>
-      <a className="repo-link" href="https://github.com/tokenizartinfo-ops/agent-friendly-web" target="_blank" rel="noreferrer">
-        <Braces size={18} /> Repositorio <ArrowUpRight size={15} />
-      </a>
       <button className="menu-button" type="button" aria-expanded={open} aria-label={open ? 'Cerrar menu' : 'Abrir menu'} onClick={() => setOpen(!open)}>
         {open ? <X size={22} /> : <Menu size={22} />}
       </button>
