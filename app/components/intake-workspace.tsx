@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   Bot, Check, CircleHelp, Clipboard, Cloud, FileStack, Globe2, Languages,
-  LoaderCircle, RefreshCw, Save, Settings2, ShieldAlert, Target, UserRound, UsersRound,
+  LoaderCircle, Radar, RefreshCw, Save, Settings2, ShieldAlert, Target, UserRound, UsersRound,
 } from 'lucide-react';
 
 type Intake = {
@@ -31,6 +31,11 @@ type ClaimPayload = {
   error?: string; claim?: DomainClaim | null; verified?: boolean; status?: string;
   reason?: string; attemptCount?: number; verifiedAt?: string; verifiedUntil?: string;
 };
+type ObservationSummary = {
+  id: string; target: string; checkedAt: string;
+  readiness: { score?: number; level?: string };
+};
+type ObservationPayload = { error?: string; observation?: ObservationSummary | null; notice?: string };
 
 const emptyIntake: Intake = {
   organization: '', website: '', role: '', siteType: '', control: 'unknown', audience: '',
@@ -119,6 +124,9 @@ export function IntakeWorkspace({ userName, userEmail }: { userName: string; use
   const [claimBusy, setClaimBusy] = useState(false);
   const [claimMessage, setClaimMessage] = useState('La verificacion se inicia solo cuando vos la solicitas.');
   const [copied, setCopied] = useState(false);
+  const [observation, setObservation] = useState<ObservationSummary | null>(null);
+  const [observationBusy, setObservationBusy] = useState(false);
+  const [observationMessage, setObservationMessage] = useState('La auditoria publica normalmente no guarda resultados.');
   const ready = useRef(false);
 
   useEffect(() => {
@@ -158,6 +166,22 @@ export function IntakeWorkspace({ userName, userEmail }: { userName: string; use
       .catch((error) => {
         if (error instanceof DOMException && error.name === 'AbortError') return;
         setClaimMessage(error instanceof Error ? error.message : 'No se pudo consultar la verificacion.');
+      });
+    return () => controller.abort();
+  }, [projectId]);
+
+  useEffect(() => {
+    if (!projectId) return;
+    const controller = new AbortController();
+    fetch(`/api/projects/${projectId}/observations`, { cache: 'no-store', signal: controller.signal })
+      .then(async (response) => {
+        const payload = await response.json() as ObservationPayload;
+        if (!response.ok) throw new Error(payload.error || 'No se pudo consultar la ultima observacion.');
+        setObservation(payload.observation || null);
+      })
+      .catch((error) => {
+        if (error instanceof DOMException && error.name === 'AbortError') return;
+        setObservationMessage(error instanceof Error ? error.message : 'No se pudo consultar la ultima observacion.');
       });
     return () => controller.abort();
   }, [projectId]);
@@ -258,6 +282,30 @@ export function IntakeWorkspace({ userName, userEmail }: { userName: string; use
     } catch { setClaimMessage('No se pudo copiar automaticamente. Selecciona el texto manualmente.'); }
   }
 
+  async function saveObservation() {
+    if (!projectId || !websiteIsSaved) {
+      setObservationMessage('Espera a que el sitio termine de guardarse antes de auditarlo.');
+      return;
+    }
+    setObservationBusy(true);
+    setObservationMessage('Auditando recursos publicos y preparando una copia saneada...');
+    try {
+      const response = await fetch(`/api/projects/${projectId}/observations`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ confirmSave: true }),
+      });
+      const payload = await response.json() as ObservationPayload;
+      if (!response.ok || !payload.observation) throw new Error(payload.error || 'No se pudo guardar la observacion.');
+      setObservation(payload.observation);
+      setObservationMessage('Observacion guardada. El scanner publico sigue sin almacenar auditorias automaticas.');
+    } catch (error) {
+      setObservationMessage(error instanceof Error ? error.message : 'No se pudo guardar la observacion.');
+    } finally {
+      setObservationBusy(false);
+    }
+  }
+
   return (
     <div className="intake-layout">
       <main className="intake-main">
@@ -355,6 +403,22 @@ export function IntakeWorkspace({ userName, userEmail }: { userName: string; use
           ) : null}
           <div className="verification-message" aria-live="polite"><CircleHelp size={17} /><span>{visibleClaimMessage}</span></div>
           <p className="scope-note strong-note"><strong>No publica el perfil automaticamente.</strong> Verificar acredita control temporal, pero no concede acceso de escritura ni modifica el dominio.</p>
+        </section>
+
+        <section className="form-section observation-section">
+          <div className="verification-heading">
+            <div className="form-section-title"><Radar size={20} /><div><strong>Observacion fechada</strong><span>Guarda una fotografia tecnica saneada del sitio publico.</span></div></div>
+            <span className="verification-status" data-status={observation ? 'verified' : 'unverified'}>
+              {observation ? `${observation.readiness.level || 'Auditoria'} · ${observation.readiness.score ?? 0}/100` : 'Sin observacion guardada'}
+            </span>
+          </div>
+          <p className="observation-copy">El scanner publico normalmente no guarda resultados. Esta accion ejecuta la misma lectura publica y conserva en tu expediente solo evidencia, puntaje, rutas y fecha; elimina cuerpos HTTP, errores crudos y cabeceras sensibles.</p>
+          {observation ? <div className="last-observation"><span>Ultima observacion</span><strong>{formatDate(observation.checkedAt)}</strong><small>{observation.target}</small></div> : null}
+          <button className="primary-action" type="button" onClick={saveObservation} disabled={observationBusy || !websiteIsSaved}>
+            {observationBusy ? <LoaderCircle className="spin" size={16} /> : <Radar size={16} />}
+            Auditar y guardar observacion
+          </button>
+          <div className="verification-message" aria-live="polite"><CircleHelp size={17} /><span>{observationMessage}</span></div>
         </section>
       </main>
 

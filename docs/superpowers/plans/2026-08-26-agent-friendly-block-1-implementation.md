@@ -542,23 +542,23 @@ git commit -m "feat: publish versioned agent friendly profiles"
 - Consumes: public network helpers, current scanner analyzers and methodology, authenticated project ownership.
 - Produces: `runPublicAudit(url): AuditResult`, unchanged public `/api/scan`, and explicit owner-only observation persistence.
 
-- [ ] **Step 1: Write a failing sanitization test**
+- [x] **Step 1: Write a failing sanitization test**
 
 Create `test/public-audit.test.mjs` that verifies `sanitizeObservation(audit)` retains target, checkedAt, evidence, readiness, and probe metadata but removes probe bodies, response headers other than content type/link, stack traces, and raw errors.
 
-- [ ] **Step 2: Extract the current scan orchestration**
+- [x] **Step 2: Extract the current scan orchestration**
 
 Move the probe list and readiness assembly from `app/api/scan/route.ts` to `lib/public-audit.mjs`. Keep paths, content negotiation, limits, scoring, and user agent unchanged. The public route calls `runPublicAudit` and still writes nothing.
 
-- [ ] **Step 3: Add explicit authenticated persistence**
+- [x] **Step 3: Add explicit authenticated persistence**
 
 `POST /api/projects/{projectId}/observations` accepts `{ "confirmSave": true }`, reads the saved project URL, runs the same public audit, sanitizes it, inserts `scanObservations`, and appends `scan_observation_saved` with observation ID and score only. Reject false confirmation, unauthenticated callers, and projects owned by another user.
 
-- [ ] **Step 4: Add a human action to the expediente**
+- [x] **Step 4: Add a human action to the expediente**
 
 Add `Auditar y guardar observacion` with explanatory copy: the public scanner normally does not store results; this action saves one dated, sanitized observation to the private expediente. Display last observation date and score, without marking owner declarations as observed.
 
-- [ ] **Step 5: Run full regression and commit**
+- [x] **Step 5: Run full regression and commit**
 
 Run:
 
@@ -570,6 +570,8 @@ npm run build
 ```
 
 Expected: scanner scores remain unchanged and all tests pass.
+
+Verification completed locally on 2026-08-27: focused sanitization/scanner tests passed, the full 67-test suite passed, ESLint passed, and the production build included the authenticated observation route. The public scanner remains non-persistent. No public scan was executed, no observation was saved remotely, and no D1 migration or deployment was applied.
 
 ```bash
 git add lib/public-audit.mjs app/api/scan/route.ts app/api/projects app/components/intake-workspace.tsx test
