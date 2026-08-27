@@ -37,11 +37,11 @@ const surfaces = [
   {
     name: 'Agent Friendly Web',
     url: 'agentfriendlyweb.dev',
-    score: 65,
+    score: 70,
     level: 'AF-3',
     external: 'Cloudflare Level 2 · Bot-Aware',
     state: 'Herramientas publicas',
-    detail: 'Subio desde 63/100 y Level 1 tras publicar Link headers, catalogos y Content Signals.',
+    detail: 'Subio desde 63/100 tras publicar politica crawler explicita, documentos agenticos, catalogos, OpenAPI, skills y evidencia de autoria.',
   },
 ];
 

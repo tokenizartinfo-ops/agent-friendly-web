@@ -47,11 +47,21 @@ El resultado externo confirma la direccion general del auditor propio, aunque ut
 
 Despues de publicar Content Signals, Link headers, Agent Skills index, catalogo de recursos y API Catalog:
 
-- el auditor AF v1 paso de 63/100 a **65/100**, manteniendo AF-3 herramientas;
+- el primer corte post despliegue llevo el auditor AF v1 de 63/100 a 65/100;
 - el auditor externo paso de Level 1 a **Level 2 - Bot-Aware**;
 - el siguiente requisito externo identificado es negociacion `Accept: text/markdown`.
 
-La mejora es evidencia de que el proceso funciona. Markdown for Agents permanece pendiente porque debe implementarse realmente; no se agrega una respuesta falsa para alcanzar otro nivel.
+### Resultado Agent Friendly Web v3
+
+El 2026-08-26, luego de publicar la primera capa agent-native completa y repetir la auditoria sobre el dominio canonico:
+
+- el auditor AF v1 alcanzo **70/100, AF-3 herramientas**;
+- respondieron HTTP 200 la portada, demostrador de evolucion, `robots.txt`, sitemap, `llms.txt`, `llms-full.txt`, OpenAPI, API Catalog, AI Catalog, indice de skills, manifiesto de readiness y `security.txt`;
+- `/expediente` permanecio cerrado y redirigio a autenticacion;
+- `Accept: text/markdown` continuo devolviendo HTML, por lo que Markdown for Agents sigue pendiente;
+- MCP, A2A, CLI y x402 se conservan como capacidades futuras o experimentales y no se presentan como servicios activos.
+
+La mejora es evidencia de que el proceso funciona. No se agrega una respuesta falsa para alcanzar otro nivel, y el puntaje no implica indexacion, recomendacion ni certificacion de terceros.
 
 ### Crawlers observados
 
