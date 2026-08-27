@@ -11,6 +11,7 @@ test('AEO education page explains business value without ranking promises', asyn
   assert.match(page, /SEO/);
   assert.match(page, /no garantiza indexacion, ranking ni recomendacion/i);
   assert.match(page, /<details className="crawler-detail">/);
+  assert.doesNotMatch(page, /from 'next\/link'/);
 });
 
 test('crawler catalog distinguishes user agents from robots product tokens', async () => {
