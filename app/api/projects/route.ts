@@ -42,7 +42,7 @@ function present(project: typeof siteProjects.$inferSelect) {
     approverEmail: project.approverEmail,
     monitoringPreference: project.monitoringPreference,
   };
-  const question = nextQuestion(intake, { stage: 'basic' });
+  const question = nextQuestion(intake);
   return {
     id: project.id,
     ...intake,
@@ -77,8 +77,7 @@ export async function PUT(request: Request) {
   if (!intake.website) return Response.json({ error: 'Indica el sitio web para guardar el expediente.' }, { status: 400 });
 
   const now = new Date().toISOString();
-  // Completion stays on the basic stage until the expanded controls ship in Task 4.
-  const completion = completionForIntake(intake, { stage: 'basic' });
+  const completion = completionForIntake(intake);
   const db = getDb();
   const requestedId = typeof raw.id === 'string' ? raw.id : '';
   const [existing] = await db

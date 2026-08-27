@@ -369,17 +369,17 @@ git commit -m "feat: add read only domain verification"
 - Consumes: expanded `/api/projects` fields and domain-claim endpoints from Tasks 2 and 3.
 - Produces: progressive form sections, domain challenge instructions, status labels, and explicit publication readiness without publishing.
 
-- [ ] **Step 1: Write a failing UI contract test**
+- [x] **Step 1: Write a failing UI contract test**
 
 Create `test/intake-ui-contract.test.mjs` that reads `app/components/intake-workspace.tsx` and asserts the presence of labels `Mantenedor actual`, `Proveedor DNS`, `Politica de busqueda`, `Uso para entrenamiento`, `Responsable de aprobacion`, `Verificar dominio`, and the warning `No publica el perfil automaticamente`.
 
-- [ ] **Step 2: Run the contract test and confirm the missing controls**
+- [x] **Step 2: Run the contract test and confirm the missing controls**
 
 Run: `node --test test/intake-ui-contract.test.mjs`
 
 Expected: FAIL on the first missing label.
 
-- [ ] **Step 3: Add four progressive sections**
+- [x] **Step 3: Add four progressive sections**
 
 Add sections in this order:
 
@@ -390,11 +390,11 @@ Add sections in this order:
 
 Keep autosave at 900 ms, update the decision counter to twelve, and maintain responsive dimensions without nesting cards.
 
-- [ ] **Step 4: Add domain verification as an explicit separate action**
+- [x] **Step 4: Add domain verification as an explicit separate action**
 
 Show the normalized domain, current status (`Sin verificar`, `Pendiente`, `Verificado hasta fecha`, `Vencido`), method selector, challenge copy button, and `Comprobar ahora` button. Do not automatically create or verify a challenge during autosave. After success, explain that verification proves temporary domain control but grants no write access.
 
-- [ ] **Step 5: Run UI checks and commit**
+- [x] **Step 5: Run UI checks and commit**
 
 Run:
 
@@ -405,6 +405,8 @@ npm run build
 ```
 
 Expected: PASS and successful build.
+
+Verified locally on 2026-08-27: 56 tests passed, ESLint completed without errors, the vinext production build succeeded, the authenticated form restored all 12 decisions and its pending domain claim after reload, stale instructions disappeared after changing the saved hostname, and Playwright found no horizontal overflow or clipped buttons at 1440x900 and 390x844. Only local D1 migrations were used for browser QA; no remote infrastructure was modified.
 
 ```bash
 git add app/components/intake-workspace.tsx app/globals.css test/intake-ui-contract.test.mjs
