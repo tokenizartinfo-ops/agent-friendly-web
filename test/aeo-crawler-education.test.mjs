@@ -29,9 +29,10 @@ test('crawler catalog distinguishes user agents from robots product tokens', asy
   assert.equal(catalog.crawlerCatalogPayload().contract, 'crawler-policy-catalog.v1');
 });
 
-test('machine crawler catalog is discoverable from navigation assets', async () => {
-  const [route, header, footer, sitemap, map, llms, aiCatalog] = await Promise.all([
-    read('app/.well-known/crawler-policy-catalog.json/route.ts'),
+test('machine crawler catalog is static, synchronized and discoverable', async () => {
+  const catalog = await import('../lib/crawler-catalog.mjs');
+  const [staticCatalog, header, footer, sitemap, map, llms, aiCatalog] = await Promise.all([
+    read('public/.well-known/crawler-policy-catalog.json'),
     read('app/components/site-header.tsx'),
     read('app/components/site-footer.tsx'),
     read('app/sitemap.ts'),
@@ -40,8 +41,7 @@ test('machine crawler catalog is discoverable from navigation assets', async () 
     read('public/.well-known/ai-catalog.json'),
   ]);
 
-  assert.match(route, /crawlerCatalogPayload/);
-  assert.match(route, /application\/json/);
+  assert.deepEqual(JSON.parse(staticCatalog), catalog.crawlerCatalogPayload());
   for (const source of [header, footer, sitemap, map, llms, aiCatalog]) {
     assert.match(source, /aeo-y-crawlers|crawler-policy-catalog/);
   }
