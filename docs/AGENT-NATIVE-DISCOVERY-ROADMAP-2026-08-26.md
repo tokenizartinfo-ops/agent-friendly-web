@@ -25,16 +25,19 @@ La meta de 100% representa la finalizacion de las capas que el caso necesita. No
 - manifiesto propio `/.well-known/agent-readiness.json`;
 - politica `/.well-known/security.txt`;
 - comparador ilustrativo AF-0 a AF-5;
-- expediente privado con identidad de Sites y campos allowlisted.
+- expediente privado con identidad de Sites y campos allowlisted;
+- Registry publico versionado con perfiles HTML, JSON y Markdown;
+- guia publica `/aeo-y-crawlers` para educacion AEO, decisiones de crawling y valor comercial;
+- catalogo `/.well-known/crawler-policy-catalog.json` con fuentes y finalidades por proveedor.
 
 ### Planificado
 
-- Registry publico versionado y verificacion read-only de dominio;
-- capa AEO basada en respuestas citables, entidades consistentes, actualidad y medicion comparativa;
+- expansion AEO por sector basada en respuestas citables, entidades consistentes, actualidad y medicion comparativa;
 - perfiles OKF v0.2 exportables para conocimiento publico con procedencia, confianza y ciclo de vida;
-- politicas diferenciadas por crawler, buscador, asistente y uso de entrenamiento;
+- monitoreo temporal y comparacion de politicas por crawler, buscador, asistente y uso de entrenamiento;
 - experiencia multidioma en espanol, ingles y portugues;
 - asistente de intake capaz de ordenar texto o audio desestructurado antes de pedir aprobacion;
+- canal de contacto propio de Agent Friendly Web con identidad, retencion y responsables definidos;
 - CLI oficial para auditar y preparar artefactos sin escribir en el sitio;
 - MCP server read-only para auditoria, consulta de expedientes autorizados y generacion de paquetes;
 - A2A Agent Card cuando exista un agente remoto real, autenticado y observable;
@@ -57,6 +60,8 @@ Agent Friendly Web tiene dos usuarios distintos que deben recibir la misma verda
 La venta inicial se dirige a humanos. La entrega, sin embargo, debe mejorar simultaneamente la comprension humana y el consumo por maquinas. Una interfaz visual antigua no impide renovar la capa documental y estructurada, pero tampoco justifica ocultar una experiencia humana deficiente: ambas superficies se auditan por separado.
 
 La comunicacion comercial debe explicar una urgencia real, no fabricar escasez. El costo de no actuar es mantener informacion fragmentada, desactualizada o ambigua mientras mas busquedas se trasladan a asistentes y respuestas sintetizadas. La plataforma no promete posiciones, citas, trafico, conversiones ni recomendaciones de un modelo determinado.
+
+El mensaje comercial se apoyara en evidencia comparable: que podia descubrir y explicar un agente antes, que recursos se publicaron, que puede comprender despues y que sigue sin estar disponible. Esto transforma el temor a quedar rezagado en un plan verificable, no en una promesa de aparicion automatica.
 
 ## Capa AEO y respuesta preparada
 
@@ -110,6 +115,8 @@ El asistente interno se desarrollara por etapas:
 4. seguimiento multivuelta en espanol, ingles y portugues;
 5. consumo del mismo intake desde LLMs externos mediante contratos publicos y autenticacion cuando corresponda.
 
+El contacto por correo se incorporara despues de definir dominio de correo, responsables, retencion, proteccion contra abuso y separacion entre consultas publicas y expedientes privados. El bot puede preparar una respuesta o un borrador, pero una comunicacion externa sensible conserva revision humana.
+
 El asistente nunca convierte una conversacion en publicacion. Primero propone, luego el humano corrige y finalmente aprueba una proyeccion publica exacta. No recibe contrasenas, cookies, claves, tokens ni datos que no sean necesarios para el expediente.
 
 ## Skills customizadas y casos de exito
@@ -130,9 +137,9 @@ La monetizacion puede combinar auditoria inicial, saneamiento de conocimiento, p
 
 ## Orden de implementacion actualizado
 
-1. **Bloque 1 - confianza y Registry:** expediente, verificacion de dominio, perfiles versionados, observaciones, caso Tokenizart y release seguro.
-2. **Bloque 2 - AEO y contenido multidioma:** preguntas, entidades, fuentes, frescura, ESP/ENG/POR y medicion comparativa.
-3. **Bloque 3 - asistencia de intake:** chat contextual, texto libre, revision field-scoped y audio a texto.
+1. **Bloque 1 - confianza y Registry: desplegado.** Expediente, verificacion de dominio, perfiles versionados, observaciones, caso Tokenizart y release seguro.
+2. **Bloque 2 - AEO y politica crawler: en curso.** La primera guia publica y el catalogo por proveedor estan implementados; siguen contenido sectorial, ESP/ENG/POR, frescura y medicion comparativa.
+3. **Bloque 3 - asistencia de intake:** chat contextual, texto libre, revision field-scoped, correo operativo, encuestas breves y audio a texto.
 4. **Bloque 4 - distribucion agentica:** OKF, CLI y MCP read-only con contratos publicados.
 5. **Bloque 5 - integracion:** adaptadores de CMS, Draft PRs y capsulas con doble consentimiento.
 6. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
@@ -150,6 +157,7 @@ La monetizacion puede combinar auditoria inicial, saneamiento de conocimiento, p
 | `/.well-known/ai-catalog.json` | inventario publico | desplegado, no es estandar oficial |
 | `/.well-known/agent-skills/index.json` | indice de skills descargables | desplegado, convencion del proyecto |
 | `/.well-known/agent-readiness.json` | estado de capacidades | desplegado, no es estandar oficial |
+| `/.well-known/crawler-policy-catalog.json` | catalogo de identidades, finalidades y fuentes por crawler | desplegado, convencion del proyecto |
 | `/.well-known/security.txt` | contacto y politica de seguridad | desplegado |
 
 ## Secuencia hacia herramientas y delegacion
@@ -188,4 +196,4 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 
 ## Gate inmediato
 
-La persistencia ampliada, el formulario progresivo y la verificacion read-only de dominio estan implementados en la rama de Bloque 1, pero todavia no desplegados. El gate inmediato es proyectar y publicar perfiles publicos inmutables y versionados en HTML, JSON y Markdown, omitiendo todos los campos privados. La publicacion requiere dominio vigente y aprobacion explicita; verificar no publica automaticamente.
+Cerrar la primera entrega publica del Bloque 2: validar la guia AEO y el catalogo por crawler en escritorio y movil, comprobar sus contratos machine-readable y publicarlos sin cambiar politicas reales de terceros. Despues se incorporaran contenido sectorial y traducciones ESP/ENG/POR. El asistente, voz, correo, OKF, CLI, MCP, A2A y pagos conservan gates separados y no deben aparecer como capacidades desplegadas antes de sus pruebas.

@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 const productLinks = [
   ['Auditar un sitio', '/#auditar'],
+  ['AEO y crawlers', '/aeo-y-crawlers'],
   ['Evolucion agentica', '/evolucion-agentica'],
   ['Metodologia', '/metodologia'],
   ['Registry publico', '/registry'],
@@ -14,6 +15,7 @@ const agentLinks = [
   ['OpenAPI', '/openapi.json'],
   ['AI Catalog', '/.well-known/ai-catalog.json'],
   ['Readiness', '/.well-known/agent-readiness.json'],
+  ['Crawler Catalog', '/.well-known/crawler-policy-catalog.json'],
 ];
 
 export function SiteFooter() {

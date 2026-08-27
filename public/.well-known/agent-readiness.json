@@ -6,7 +6,7 @@
     "creator": "Gabriel Mucchiut"
   },
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "updated_at": "2026-08-26",
+  "updated_at": "2026-08-27",
   "policy": {
     "public_search": "allowed",
     "user_directed_ai_input": "allowed",
@@ -20,7 +20,11 @@
     },
     "structured_content": {
       "status": "deployed",
-      "resources": ["/", "/metodologia", "/casos/tokenizart"]
+      "resources": ["/", "/metodologia", "/aeo-y-crawlers", "/casos/tokenizart"]
+    },
+    "crawler_policy_catalog": {
+      "status": "deployed",
+      "resources": ["/aeo-y-crawlers", "/.well-known/crawler-policy-catalog.json"]
     },
     "openapi": {
       "status": "deployed",

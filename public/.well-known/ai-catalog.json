@@ -14,6 +14,16 @@
       "url": "https://agentfriendlyweb.dev/metodologia"
     },
     {
+      "name": "AEO and crawler policy guide",
+      "type": "text/html",
+      "url": "https://agentfriendlyweb.dev/aeo-y-crawlers"
+    },
+    {
+      "name": "Crawler policy catalog",
+      "type": "application/json",
+      "url": "https://agentfriendlyweb.dev/.well-known/crawler-policy-catalog.json"
+    },
+    {
       "name": "Tokenizart case",
       "type": "text/html",
       "url": "https://agentfriendlyweb.dev/casos/tokenizart"
