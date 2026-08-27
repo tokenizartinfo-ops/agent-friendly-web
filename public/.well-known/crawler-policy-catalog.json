@@ -1,0 +1,186 @@
+{
+  "contract": "crawler-policy-catalog.v1",
+  "publisher": "Agent Friendly Web",
+  "methodology": "Gabriel Mucchiut Agent Friendly Web Method",
+  "updatedAt": "2026-08-27",
+  "dimensions": [
+    "search_discovery",
+    "user_requested_retrieval",
+    "model_training",
+    "generative_ai_control",
+    "product_and_ai_services",
+    "open_web_dataset"
+  ],
+  "crawlers": [
+    {
+      "id": "oai-searchbot",
+      "provider": "OpenAI",
+      "token": "OAI-SearchBot",
+      "kind": "crawler_user_agent",
+      "isUserAgent": true,
+      "purpose": "search_discovery",
+      "humanPurpose": "Descubrir contenido para resultados de busqueda y respuestas con enlaces.",
+      "ownerDecision": "Puede permitirse aunque GPTBot permanezca bloqueado.",
+      "officialSource": "https://developers.openai.com/api/docs/bots"
+    },
+    {
+      "id": "gptbot",
+      "provider": "OpenAI",
+      "token": "GPTBot",
+      "kind": "crawler_user_agent",
+      "isUserAgent": true,
+      "purpose": "model_training",
+      "humanPurpose": "Controlar el uso del rastreo para mejorar modelos generativos.",
+      "ownerDecision": "Es una decision independiente de aparecer en busquedas de OpenAI.",
+      "officialSource": "https://developers.openai.com/api/docs/bots"
+    },
+    {
+      "id": "chatgpt-user",
+      "provider": "OpenAI",
+      "token": "ChatGPT-User",
+      "kind": "user_directed_fetcher",
+      "isUserAgent": true,
+      "purpose": "user_requested_retrieval",
+      "humanPurpose": "Acceder a una pagina cuando una persona pide a ChatGPT que la consulte.",
+      "ownerDecision": "No debe confundirse con rastreo automatico o entrenamiento.",
+      "officialSource": "https://developers.openai.com/api/docs/bots"
+    },
+    {
+      "id": "claude-searchbot",
+      "provider": "Anthropic",
+      "token": "Claude-SearchBot",
+      "kind": "crawler_user_agent",
+      "isUserAgent": true,
+      "purpose": "search_discovery",
+      "humanPurpose": "Analizar contenido para mejorar relevancia y precision de busquedas de Claude.",
+      "ownerDecision": "Puede definirse por separado de ClaudeBot y Claude-User.",
+      "officialSource": "https://privacy.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler"
+    },
+    {
+      "id": "claudebot",
+      "provider": "Anthropic",
+      "token": "ClaudeBot",
+      "kind": "crawler_user_agent",
+      "isUserAgent": true,
+      "purpose": "model_training",
+      "humanPurpose": "Controlar recoleccion que podria contribuir al entrenamiento de modelos.",
+      "ownerDecision": "La reserva de entrenamiento no exige bloquear busqueda o solicitudes de usuarios.",
+      "officialSource": "https://privacy.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler"
+    },
+    {
+      "id": "claude-user",
+      "provider": "Anthropic",
+      "token": "Claude-User",
+      "kind": "user_directed_fetcher",
+      "isUserAgent": true,
+      "purpose": "user_requested_retrieval",
+      "humanPurpose": "Consultar contenido cuando una persona se lo pide a Claude.",
+      "ownerDecision": "Su acceso responde a una accion del usuario y se gobierna separadamente.",
+      "officialSource": "https://privacy.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler"
+    },
+    {
+      "id": "googlebot",
+      "provider": "Google",
+      "token": "Googlebot",
+      "kind": "crawler_user_agent",
+      "isUserAgent": true,
+      "purpose": "search_discovery",
+      "humanPurpose": "Rastrear contenido para Google Search.",
+      "ownerDecision": "La decision sobre Search no debe inferirse desde Google-Extended.",
+      "officialSource": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers"
+    },
+    {
+      "id": "google-extended",
+      "provider": "Google",
+      "token": "Google-Extended",
+      "kind": "robots_product_token",
+      "isUserAgent": false,
+      "purpose": "generative_ai_control",
+      "humanPurpose": "Controlar determinados usos de contenido por productos Gemini y Vertex AI.",
+      "ownerDecision": "No es un user-agent HTTP separado y no modifica inclusion ni ranking en Google Search.",
+      "officialSource": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers#google-extended"
+    },
+    {
+      "id": "perplexitybot",
+      "provider": "Perplexity",
+      "token": "PerplexityBot",
+      "kind": "crawler_user_agent",
+      "isUserAgent": true,
+      "purpose": "search_discovery",
+      "humanPurpose": "Descubrir y enlazar sitios en resultados de Perplexity.",
+      "ownerDecision": "Perplexity declara que no se usa para entrenar modelos fundacionales.",
+      "officialSource": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers"
+    },
+    {
+      "id": "perplexity-user",
+      "provider": "Perplexity",
+      "token": "Perplexity-User",
+      "kind": "user_directed_fetcher",
+      "isUserAgent": true,
+      "purpose": "user_requested_retrieval",
+      "humanPurpose": "Visitar una pagina para responder una solicitud concreta del usuario.",
+      "ownerDecision": "La documentacion oficial indica que no es rastreo general ni entrenamiento.",
+      "officialSource": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers"
+    },
+    {
+      "id": "bingbot",
+      "provider": "Microsoft",
+      "token": "bingbot",
+      "kind": "crawler_user_agent",
+      "isUserAgent": true,
+      "purpose": "search_discovery",
+      "humanPurpose": "Descubrir e indexar paginas para Bing y experiencias de respuesta vinculadas.",
+      "ownerDecision": "Bing separa directivas de rastreo de controles de indexacion, snippets y uso en Copilot.",
+      "officialSource": "https://www.bing.com/webmasters/help/bing-webmaster-guidelines-30fba23a"
+    },
+    {
+      "id": "meta-externalagent",
+      "provider": "Meta",
+      "token": "meta-externalagent",
+      "kind": "crawler_user_agent",
+      "isUserAgent": true,
+      "purpose": "product_and_ai_services",
+      "humanPurpose": "Crawler identificado por Cloudflare para servicios de IA operados por Meta.",
+      "ownerDecision": "La finalidad exacta debe revisarse contra la documentacion y actividad vigente antes de decidir.",
+      "officialSource": "https://developers.cloudflare.com/ai-crawl-control/reference/bots/"
+    },
+    {
+      "id": "ccbot",
+      "provider": "Common Crawl",
+      "token": "CCBot",
+      "kind": "crawler_user_agent",
+      "isUserAgent": true,
+      "purpose": "open_web_dataset",
+      "humanPurpose": "Recolectar contenido para el repositorio abierto de datos web de Common Crawl.",
+      "ownerDecision": "Su acceso se decide por separado porque el dataset puede ser reutilizado por muchos terceros.",
+      "officialSource": "https://commoncrawl.org/ccbot"
+    },
+    {
+      "id": "applebot-extended",
+      "provider": "Apple",
+      "token": "Applebot-Extended",
+      "kind": "robots_product_token",
+      "isUserAgent": false,
+      "purpose": "generative_ai_control",
+      "humanPurpose": "Administrar el uso de contenido rastreado por Apple para funciones generativas.",
+      "ownerDecision": "Debe revisarse junto con Applebot y la politica publica del sitio.",
+      "officialSource": "https://support.apple.com/en-us/119829"
+    },
+    {
+      "id": "amazonbot",
+      "provider": "Amazon",
+      "token": "Amazonbot",
+      "kind": "crawler_user_agent",
+      "isUserAgent": true,
+      "purpose": "product_and_ai_services",
+      "humanPurpose": "Rastrear contenido para servicios y experiencias de Amazon.",
+      "ownerDecision": "La politica debe contrastarse con el uso concreto y la fuente oficial vigente.",
+      "officialSource": "https://developer.amazon.com/amazonbot"
+    }
+  ],
+  "limits": [
+    "A robots policy expresses preferences but does not prove indexing, recommendation or contractual compliance.",
+    "Private information requires authentication and access control; robots.txt is not a privacy boundary.",
+    "Provider names, tokens and purposes can change. Recheck the linked official source before applying a policy."
+  ]
+}
