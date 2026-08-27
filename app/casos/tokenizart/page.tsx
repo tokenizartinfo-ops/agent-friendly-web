@@ -12,7 +12,6 @@ import {
   ServerCog,
   ShieldCheck,
 } from 'lucide-react';
-import Link from 'next/link';
 import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
 
@@ -88,7 +87,7 @@ export default function TokenizartCasePage() {
             Cada capacidad se publica cuando es real, verificable y segura.
           </p>
           <div className="case-actions">
-            <Link href="/?site=tokenizart.com#auditar">Repetir auditoria <ArrowRight size={17} /></Link>
+            <a href="/?site=tokenizart.com#auditar">Repetir auditoria <ArrowRight size={17} /></a>
             <a href="/cases/tokenizart/RUNBOOK.es.md">Abrir guia de instalacion <ExternalLink size={16} /></a>
           </div>
         </div>

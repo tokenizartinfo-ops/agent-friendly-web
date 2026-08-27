@@ -1,5 +1,4 @@
 import { ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
 
 const productLinks = [
   ['Auditar un sitio', '/#auditar'],
@@ -28,7 +27,7 @@ export function SiteFooter() {
       </div>
       <div className="footer-column">
         <strong>Producto</strong>
-        {productLinks.map(([name, href]) => <Link href={href} key={href}>{name}</Link>)}
+        {productLinks.map(([name, href]) => <a href={href} key={href}>{name}</a>)}
       </div>
       <div className="footer-column">
         <strong>Recursos agenticos</strong>
@@ -36,7 +35,7 @@ export function SiteFooter() {
       </div>
       <div className="footer-column">
         <strong>Proyecto</strong>
-        <Link href="/expediente">Mi expediente</Link>
+        <a href="/expediente">Mi expediente</a>
         <a href="/.well-known/security.txt">Seguridad</a>
         <a href="https://github.com/tokenizartinfo-ops/agent-friendly-web" target="_blank" rel="noreferrer">
           Repositorio <ArrowUpRight size={13} />

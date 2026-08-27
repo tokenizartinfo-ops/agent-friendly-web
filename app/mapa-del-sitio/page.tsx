@@ -14,7 +14,6 @@ import {
   Route,
   ShieldCheck,
 } from 'lucide-react';
-import Link from 'next/link';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 
@@ -73,11 +72,11 @@ export default function SiteMapPage() {
         </div>
         <div className="resource-list">
           {humanRoutes.map(({ name, detail, href, icon: Icon }) => (
-            <Link href={href} className="resource-row" key={href}>
+            <a href={href} className="resource-row" key={href}>
               <span className="resource-icon"><Icon size={19} /></span>
               <span><strong>{name}</strong><small>{detail}</small></span>
               <ArrowRight size={17} />
-            </Link>
+            </a>
           ))}
         </div>
       </section>

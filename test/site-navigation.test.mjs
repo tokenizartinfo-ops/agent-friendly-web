@@ -76,3 +76,19 @@ test('the mobile navigation stretches across the available menu width', async ()
   assert.match(styles, /\.site-header nav\.is-open\s*\{[^}]*justify-content:\s*stretch;/s);
   assert.match(styles, /\.site-header nav\.is-open a\s*\{[^}]*width:\s*100%;/s);
 });
+
+test('public navigation uses stable document links instead of RSC prefetch links', async () => {
+  const files = [
+    'app/components/site-header.tsx',
+    'app/components/site-footer.tsx',
+    'app/components/maturity-map.tsx',
+    'app/evolucion-agentica/page.tsx',
+    'app/mapa-del-sitio/page.tsx',
+    'app/casos/tokenizart/page.tsx',
+  ];
+
+  for (const file of files) {
+    const source = await readFile(file, 'utf8');
+    assert.doesNotMatch(source, /next\/link|<Link\b/, file);
+  }
+});

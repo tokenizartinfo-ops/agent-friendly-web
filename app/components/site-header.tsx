@@ -2,25 +2,24 @@
 
 import { useState } from 'react';
 import { LockKeyhole, Menu, X } from 'lucide-react';
-import Link from 'next/link';
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <header className="site-header">
-      <Link className="brand" href="/" aria-label="Agent Friendly Web, inicio">
+      <a className="brand" href="/" aria-label="Agent Friendly Web, inicio">
         <span className="brand-mark">AF</span>
         <span><strong>Agent Friendly Web</strong><small>by Gabriel Mucchiut</small></span>
-      </Link>
+      </a>
       <nav className={open ? 'is-open' : ''} aria-label="Principal">
-        <Link href="/#auditar" onClick={() => setOpen(false)}>Auditar</Link>
-        <Link href="/evolucion-agentica" onClick={() => setOpen(false)}>Evolucion</Link>
-        <Link href="/metodologia" onClick={() => setOpen(false)}>Metodo</Link>
-        <Link href="/casos/tokenizart" onClick={() => setOpen(false)}>Casos</Link>
-        <Link href="/mapa-del-sitio" onClick={() => setOpen(false)}>Mapa</Link>
-        <Link className="private-nav-link" href="/expediente" onClick={() => setOpen(false)}>
+        <a href="/#auditar" onClick={() => setOpen(false)}>Auditar</a>
+        <a href="/evolucion-agentica" onClick={() => setOpen(false)}>Evolucion</a>
+        <a href="/metodologia" onClick={() => setOpen(false)}>Metodo</a>
+        <a href="/casos/tokenizart" onClick={() => setOpen(false)}>Casos</a>
+        <a href="/mapa-del-sitio" onClick={() => setOpen(false)}>Mapa</a>
+        <a className="private-nav-link" href="/expediente" onClick={() => setOpen(false)}>
           <LockKeyhole size={15} /> Mi expediente
-        </Link>
+        </a>
       </nav>
       <button className="menu-button" type="button" aria-expanded={open} aria-label={open ? 'Cerrar menu' : 'Abrir menu'} onClick={() => setOpen(!open)}>
         {open ? <X size={22} /> : <Menu size={22} />}

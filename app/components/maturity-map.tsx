@@ -1,5 +1,4 @@
 import { ArrowRight, Circle, CircleCheck, Network } from 'lucide-react';
-import Link from 'next/link';
 
 const stages = [
   ['AF-0', 'Invisible', 'El agente no encuentra evidencia suficiente.'],
@@ -17,7 +16,7 @@ export function MaturityMap() {
         <span><Network size={16} /> Ruta de madurez</span>
         <h2 id="maturity-map-title">La transformacion agentica ocurre por capas.</h2>
         <p>Cada nivel suma evidencia o control observable. Un roadmap no cuenta como una capacidad desplegada.</p>
-        <Link href="/evolucion-agentica">Comparar respuestas por etapa <ArrowRight size={16} /></Link>
+        <a href="/evolucion-agentica">Comparar respuestas por etapa <ArrowRight size={16} /></a>
       </div>
       <ol className="maturity-track">
         {stages.map(([level, title, detail], index) => (
