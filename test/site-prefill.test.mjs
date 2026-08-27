@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { normalizeSitePrefill } from '../lib/site-prefill.mjs';
 
@@ -27,4 +28,16 @@ test('normalizeSitePrefill rejects private, credentialed and unsupported targets
   ]) {
     assert.equal(normalizeSitePrefill(value), '', `${value} must be rejected`);
   }
+});
+
+test('the server page passes the query prefill without a state-setting effect', async () => {
+  const [home, scanner] = await Promise.all([
+    readFile('app/page.tsx', 'utf8'),
+    readFile('app/components/scan-workspace.tsx', 'utf8'),
+  ]);
+
+  assert.match(home, /searchParams/);
+  assert.match(home, /<ScanWorkspace initialSite=/);
+  assert.doesNotMatch(scanner, /useEffect/);
+  assert.match(scanner, /initialSite\?: string/);
 });

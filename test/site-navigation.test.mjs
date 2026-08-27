@@ -58,3 +58,15 @@ test('every public page uses the shared footer', async () => {
     assert.match(source, /<SiteFooter\s*\/>/, `${page} must render the shared footer`);
   }
 });
+
+test('the home maturity map exposes six stages and one clear demonstrator action', async () => {
+  const path = 'app/components/maturity-map.tsx';
+  const exists = await stat(path).then(() => true).catch(() => false);
+  assert.equal(exists, true, `${path} must exist`);
+
+  const maturity = await readFile(path, 'utf8');
+  for (let stage = 0; stage <= 5; stage += 1) {
+    assert.match(maturity, new RegExp(`AF-${stage}`));
+  }
+  assert.equal((maturity.match(/href="\/evolucion-agentica"/g) || []).length, 1);
+});

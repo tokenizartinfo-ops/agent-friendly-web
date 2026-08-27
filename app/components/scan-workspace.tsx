@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   ArrowRight,
   Bot,
@@ -52,16 +52,15 @@ const auxiliaryDiagnostics = [
   ['aiCatalog', 'Catalogo de recursos'],
 ] as const;
 
-export function ScanWorkspace() {
-  const [url, setUrl] = useState('agentfriendlyweb.dev');
+type ScanWorkspaceProps = {
+  initialSite?: string;
+};
+
+export function ScanWorkspace({ initialSite }: ScanWorkspaceProps) {
+  const [url, setUrl] = useState(() => normalizeSitePrefill(initialSite) || 'agentfriendlyweb.dev');
   const [result, setResult] = useState<ScanResult | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const prefill = normalizeSitePrefill(new URLSearchParams(window.location.search).get('site'));
-    if (prefill) setUrl(prefill);
-  }, []);
 
   async function runScan(event: React.FormEvent) {
     event.preventDefault();

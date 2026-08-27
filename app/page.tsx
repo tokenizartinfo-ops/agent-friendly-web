@@ -1,10 +1,15 @@
+import { MaturityMap } from './components/maturity-map';
 import { ScanWorkspace } from './components/scan-workspace';
 import { SiteFooter } from './components/site-footer';
 import { SiteHeader } from './components/site-header';
-import { ArrowRight, Layers3 } from 'lucide-react';
-import Link from 'next/link';
 
-export default function Home() {
+type HomeProps = {
+  searchParams?: Promise<{ site?: string | string[] }>;
+};
+
+export default async function Home({ searchParams }: HomeProps) {
+  const query = searchParams ? await searchParams : {};
+  const initialSite = Array.isArray(query.site) ? query.site[0] : query.site;
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -46,17 +51,8 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <SiteHeader />
 
-      <ScanWorkspace />
-
-      <section className="evolution-callout">
-        <div className="journey-icon"><Layers3 size={22} /></div>
-        <div>
-          <span>Demostracion por etapas</span>
-          <h2>Compara que puede responder un agente antes y despues.</h2>
-          <p>Explora ejemplos de un restaurante, una municipalidad y Tokenizart desde AF-0 hasta AF-5, sin confundir una mejora esperable con una promesa de indexacion.</p>
-        </div>
-        <Link href="/evolucion-agentica">Ver evolucion <ArrowRight size={17} /></Link>
-      </section>
+      <ScanWorkspace initialSite={initialSite} />
+      <MaturityMap />
 
       <SiteFooter />
     </main>
