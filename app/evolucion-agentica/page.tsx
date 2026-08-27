@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors avoid unstable vinext RSC prefetch requests. */
+
 import type { Metadata } from 'next';
 import { ArrowRight, BadgeInfo } from 'lucide-react';
 import { MaturityDemonstrator } from '../components/maturity-demonstrator';
