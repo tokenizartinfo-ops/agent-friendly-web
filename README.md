@@ -18,6 +18,8 @@ El origen publico canonico es [agentfriendlyweb.dev](https://agentfriendlyweb.de
 - Verificacion temporal de dominio por archivo HTTP o TXT DNS, sin entregar acceso de escritura.
 - Auditorias privadas guardadas solo por accion expresa y con resultados saneados.
 - Registry publico versionado con perfiles HTML, JSON y Markdown y procedencia `owner_declared`, `observed` o `verified`.
+- Guia publica de AEO que diferencia SEO, motores de respuesta y preparacion para herramientas agenticas sin prometer ranking ni recomendacion.
+- Catalogo machine-readable de crawlers, fetchers y tokens de control, enlazado a fuentes primarias y separado por finalidad.
 - Roadmap adaptado al control disponible: origen, DNS/edge, proveedor externo o ausencia de acceso.
 - Primer caso integral y perfil curado del Registry: Tokenizart, con Atelier identificado como su plataforma operativa.
 - Comparador ilustrativo de evolucion para restaurantes, municipalidades y Tokenizart.
@@ -64,6 +66,7 @@ npm run db:generate
 - [Seguridad](docs/SECURITY.md)
 - [Caso Tokenizart](docs/TOKENIZART-CASE-2026-08-26.md)
 - [Roadmap agent-native](docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md)
+- [AEO y politica de crawlers](docs/AEO-AND-CRAWLER-POLICY.es.md)
 
 ## Licencias y marca
 

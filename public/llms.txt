@@ -7,6 +7,7 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 ## Primary resources
 
 - [Public auditor](https://agentfriendlyweb.dev/)
+- [AEO and crawler policy guide](https://agentfriendlyweb.dev/aeo-y-crawlers)
 - [Methodology](https://agentfriendlyweb.dev/metodologia)
 - [Tokenizart case](https://agentfriendlyweb.dev/casos/tokenizart)
 - [Agentic maturity demonstrator](https://agentfriendlyweb.dev/evolucion-agentica)
@@ -15,6 +16,7 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - [Public AI catalog](https://agentfriendlyweb.dev/.well-known/ai-catalog.json)
 - [Agent Skills index](https://agentfriendlyweb.dev/.well-known/agent-skills/index.json)
 - [Security policy](https://agentfriendlyweb.dev/.well-known/security.txt)
+- [Crawler policy catalog](https://agentfriendlyweb.dev/.well-known/crawler-policy-catalog.json)
 - [Public repository](https://github.com/tokenizartinfo-ops/agent-friendly-web)
 
 ## Important limits

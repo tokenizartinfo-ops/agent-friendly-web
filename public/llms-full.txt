@@ -12,6 +12,10 @@ The service helps website owners understand what public agents can currently dis
 
 The AF-0 to AF-5 method scores seven evidence layers: discovery, answerability, machine-readable content, tools, experimental web interaction, trust/governance, and agentic commerce. Recommendations do not increase a score until implementation is publicly observable.
 
+## AEO and crawler policy
+
+The public guide at `https://agentfriendlyweb.dev/aeo-y-crawlers` explains how answer engine optimization complements SEO. It separates search discovery, user-requested retrieval, model training and other generative-AI controls. The machine-readable catalog at `https://agentfriendlyweb.dev/.well-known/crawler-policy-catalog.json` links each entry to an official provider source and distinguishes crawler user agents from robots.txt product tokens such as Google-Extended.
+
 ## Standards status
 
 - robots.txt, sitemaps, Schema.org/JSON-LD and OpenAPI are treated as stable foundations.
