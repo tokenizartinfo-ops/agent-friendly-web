@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors avoid unstable vinext RSC prefetch requests. */
 import {
   ArrowRight,
   Bot,
@@ -67,8 +67,8 @@ export default function AeoAndCrawlersPage() {
           <h1>Tu web ya no compite solo por clics. Tambien compite por ser una fuente que un asistente pueda comprender.</h1>
           <p>Ordenamos contenido, evidencia y politicas para que humanos, buscadores y agentes encuentren una explicacion fiel de lo que tu organizacion ofrece y permite.</p>
           <div className="aeo-actions">
-            <Link href="/#auditar">Auditar mi sitio <ArrowRight size={17} /></Link>
-            <Link href="/expediente">Preparar mi expediente</Link>
+            <a href="/#auditar">Auditar mi sitio <ArrowRight size={17} /></a>
+            <a href="/expediente">Preparar mi expediente</a>
           </div>
         </div>
         <div className="aeo-signal-board" aria-label="Secuencia de mejora AEO">
@@ -126,9 +126,9 @@ export default function AeoAndCrawlersPage() {
             </article>
           ))}
         </div>
-        <Link className="machine-catalog-link" href="/.well-known/crawler-policy-catalog.json">
+        <a className="machine-catalog-link" href="/.well-known/crawler-policy-catalog.json">
           Ver esta matriz en JSON para agentes <ArrowRight size={16} />
-        </Link>
+        </a>
       </section>
 
       <section className="aeo-commercial-band">
@@ -144,7 +144,7 @@ export default function AeoAndCrawlersPage() {
 
       <section className="aeo-final-cta">
         <div><span>Siguiente paso</span><h2>Primero medimos tu situacion real. Despues proponemos cambios proporcionados.</h2><p>No necesitas conocer crawlers, JSON-LD o servidores para empezar.</p></div>
-        <Link href="/#auditar">Empezar por la auditoria <ArrowRight size={17} /></Link>
+        <a href="/#auditar">Empezar por la auditoria <ArrowRight size={17} /></a>
       </section>
 
       <SiteFooter />
