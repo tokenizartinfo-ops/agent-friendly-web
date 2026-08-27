@@ -1,7 +1,14 @@
 // @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { calculateReadiness, normalizePublicUrl } from '../../../lib/methodology.mjs';
 // @ts-expect-error Shared ESM module is exercised directly by Node tests.
-import { analyzeHome, analyzeRobots, evidenceFromProbe, isPrivateIp, matchesResource } from '../../../lib/scanner.mjs';
+import {
+  analyzeHome,
+  analyzeRobots,
+  evidenceFromProbe,
+  hasOwnershipEvidence,
+  isPrivateIp,
+  matchesResource,
+} from '../../../lib/scanner.mjs';
 
 const MAX_BYTES = 250_000;
 const REQUEST_TIMEOUT_MS = 8_000;
@@ -159,7 +166,7 @@ export async function POST(request: Request) {
       aiCatalog: matchesResource(aiCatalog, 'aiCatalog'),
       skills: homeSignals.skills || matchesResource(skills, 'skills') || matchesResource(agentSkills, 'agentSkills'),
       webmcp: homeSignals.webmcp,
-      ownership: /(@type["']?\s*:\s*["']organization|\/about|\/contact|mailto:|©|copyright)/i.test(home.body),
+      ownership: hasOwnershipEvidence(home.body),
       sources: /(<cite|footnote|bibliograph|fuentes|sources|references)/i.test(home.body),
       payments: /\b(x402|payment-required|payment request|machine payment|mpp)\b/i.test(home.body),
     };

@@ -5,6 +5,7 @@ import {
   analyzeHome,
   analyzeRobots,
   evidenceFromProbe,
+  hasOwnershipEvidence,
   isPrivateIp,
   matchesResource,
 } from '../lib/scanner.mjs';
@@ -30,6 +31,25 @@ test('analyzeHome detects structured data, direct answers and tool hints', () =>
     skills: false,
     webmcp: false,
   });
+});
+
+test('hasOwnershipEvidence recognizes a named creator linked from JSON-LD', () => {
+  const html = `
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          { "@type": "WebSite", "creator": { "@id": "#creator" } },
+          { "@type": "Person", "@id": "#creator", "name": "Gabriel Mucchiut" }
+        ]
+      }
+    </script>`;
+
+  assert.equal(hasOwnershipEvidence(html), true);
+  assert.equal(
+    hasOwnershipEvidence('<script type="application/ld+json">{"@type":"Person","name":"Visitante"}</script>'),
+    false,
+  );
 });
 
 test('evidenceFromProbe only marks successful, non-empty resources as detected', () => {
