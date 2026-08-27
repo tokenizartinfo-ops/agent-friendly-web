@@ -7,7 +7,7 @@ const checksumModule = await readFile(
   path.join(rootDir, 'app', 'okf', 'v0.2', 'CHECKSUMS.sha256', 'checksums.generated.ts'),
   'utf8',
 );
-const checksumMatch = /export const OKF_V02_CHECKSUMS = ("[\s\S]*");\n/.exec(checksumModule);
+const checksumMatch = /export const OKF_V02_CHECKSUMS = ("[\s\S]*");\r?\n?$/.exec(checksumModule);
 if (!checksumMatch) throw new Error('Generated checksum module is malformed');
 const checksumText = JSON.parse(checksumMatch[1]);
 const result = await validatePublicOkf({
