@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors avoid unstable vinext RSC prefetch requests. */
 import {
   ArrowRight,
   BookOpen,
