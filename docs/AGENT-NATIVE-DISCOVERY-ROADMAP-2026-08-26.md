@@ -138,7 +138,7 @@ La monetizacion puede combinar auditoria inicial, saneamiento de conocimiento, p
 ## Orden de implementacion actualizado
 
 1. **Bloque 1 - confianza y Registry: desplegado.** Expediente, verificacion de dominio, perfiles versionados, observaciones, caso Tokenizart y release seguro.
-2. **Bloque 2 - AEO y politica crawler: en curso.** La primera guia publica y el catalogo por proveedor estan implementados; siguen contenido sectorial, ESP/ENG/POR, frescura y medicion comparativa.
+2. **Bloque 2 - AEO y politica crawler: primera entrega desplegada.** La guia publica y el catalogo por proveedor estan activos desde el 2026-08-27; siguen contenido sectorial, ESP/ENG/POR, frescura y medicion comparativa.
 3. **Bloque 3 - asistencia de intake:** chat contextual, texto libre, revision field-scoped, correo operativo, encuestas breves y audio a texto.
 4. **Bloque 4 - distribucion agentica:** OKF, CLI y MCP read-only con contratos publicados.
 5. **Bloque 5 - integracion:** adaptadores de CMS, Draft PRs y capsulas con doble consentimiento.
@@ -186,7 +186,7 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 - Cloudflare Bot Reference: `https://developers.cloudflare.com/ai-crawl-control/reference/bots/`
 - Cloudflare Markdown for Agents: `https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/`
 - Google crawlers y `Google-Extended`: `https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers`
-- Anthropic web crawler policy: `https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler`
+- Anthropic web crawler policy: `https://privacy.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler`
 - Open Knowledge Format v0.2: `https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md`
 - MCP: `https://modelcontextprotocol.io/specification/2026-07-28`
 - A2A: `https://a2a-protocol.org/latest/specification`
@@ -196,4 +196,4 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 
 ## Gate inmediato
 
-Cerrar la primera entrega publica del Bloque 2: validar la guia AEO y el catalogo por crawler en escritorio y movil, comprobar sus contratos machine-readable y publicarlos sin cambiar politicas reales de terceros. Despues se incorporaran contenido sectorial y traducciones ESP/ENG/POR. El asistente, voz, correo, OKF, CLI, MCP, A2A y pagos conservan gates separados y no deben aparecer como capacidades desplegadas antes de sus pruebas.
+Cerrar la ampliacion del Bloque 2: incorporar contenido sectorial, traducciones ESP/ENG/POR, control de vigencia de fuentes y medicion comparativa antes/despues. En paralelo se puede especificar el contrato del asistente de intake del Bloque 3, sin habilitar todavia guardado autonomo, voz, correo ni escritura por agentes. OKF, CLI, MCP, A2A y pagos conservan gates separados y no deben aparecer como capacidades desplegadas antes de sus pruebas.
