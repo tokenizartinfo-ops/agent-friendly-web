@@ -15,8 +15,11 @@ El origen publico canonico es [agentfriendlyweb.dev](https://agentfriendlyweb.de
 - Auditoria publica reproducible de `robots.txt`, sitemaps, contenido estructurado y rutas agenticas.
 - Puntuacion explicable por siete capas, con evidencia separada de recomendaciones.
 - Expediente privado y progresivo para que el propietario aporte contexto sin compartir credenciales.
+- Verificacion temporal de dominio por archivo HTTP o TXT DNS, sin entregar acceso de escritura.
+- Auditorias privadas guardadas solo por accion expresa y con resultados saneados.
+- Registry publico versionado con perfiles HTML, JSON y Markdown y procedencia `owner_declared`, `observed` o `verified`.
 - Roadmap adaptado al control disponible: origen, DNS/edge, proveedor externo o ausencia de acceso.
-- Primer caso integral: Tokenizart.
+- Primer caso integral y perfil curado del Registry: Tokenizart, con Atelier identificado como su plataforma operativa.
 - Comparador ilustrativo de evolucion para restaurantes, municipalidades y Tokenizart.
 - Manifiesto publico de capacidades que separa `deployed`, `planned` y `research`.
 - Documentacion de metodologia, seguridad y arquitectura.
@@ -35,6 +38,8 @@ El origen publico canonico es [agentfriendlyweb.dev](https://agentfriendlyweb.de
 - **Auditor:** route handler read-only con validacion de URL, resolucion DNS publica, limites de cuerpo, timeout y redirecciones deshabilitadas.
 - **Identidad:** Sign in with ChatGPT provisto por Sites.
 - **Persistencia:** Cloudflare D1 para expedientes y eventos metadata-only.
+- **Registry:** perfiles publicos inmutables proyectados desde campos allowlisted; el expediente privado no se publica por defecto.
+- **Verificacion:** challenges acotados, con expiracion, limite de intentos y coincidencia exacta de dominio.
 - **Metodologia:** modulos ESM compartidos entre runtime y pruebas Node.
 
 ## Desarrollo local

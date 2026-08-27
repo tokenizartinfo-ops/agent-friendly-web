@@ -45,6 +45,23 @@ No reemplaza una auditoria de seguridad, no certifica posicionamiento en respues
 - **Proveedor controlado por terceros:** producir especificaciones y solicitar una ventana de cambio acotada.
 - **Sin control:** publicar un expediente externo atribuible como puente, dejando claro que no reemplaza la implementacion nativa.
 
+### 3.4 Verificacion de dominio
+
+1. El owner guarda un sitio valido en su expediente.
+2. Elige archivo HTTP o registro TXT DNS y crea un challenge separado del autosave.
+3. El sistema muestra instrucciones copiables y un vencimiento.
+4. La comprobacion usa acceso publico read-only y limita los intentos.
+5. El resultado acredita control temporal del dominio, no permiso de escritura ni propiedad juridica.
+
+### 3.5 Observacion privada y publicacion
+
+1. El escaner publico no almacena resultados.
+2. El owner puede ordenar una auditoria fechada y saneada con `Auditar y guardar observacion`.
+3. Declaraciones y observaciones conservan procedencia separada.
+4. Antes de publicar se muestra la proyeccion exacta y se exige confirmacion expresa.
+5. El Registry crea una version inmutable en HTML, JSON y Markdown.
+6. Actualizar el expediente privado no modifica automaticamente un perfil ya publicado.
+
 ## 4. Datos del expediente
 
 Campos permitidos:
@@ -60,6 +77,11 @@ Campos permitidos:
 - CMS;
 - hosting;
 - notas libres.
+- catalogos y tipos de contenido disponibles;
+- capacidades declaradas y recursos propuestos;
+- politica de busqueda, uso por agentes y entrenamiento;
+- preferencia de monitoreo;
+- mantenedor, proveedor DNS y responsable de aprobacion.
 
 No se admiten contraseñas, API keys, tokens, claves privadas ni secretos. Los campos desconocidos son descartados en la frontera del servidor.
 
@@ -67,7 +89,18 @@ No se admiten contraseñas, API keys, tokens, claves privadas ni secretos. Los c
 
 `site_projects` conserva el expediente actual del usuario. `project_events` registra creacion y actualizaciones con metadata minima: tipo, fecha, campos presentes y porcentaje de completitud. No registra secretos ni el contenido completo de cada cambio.
 
-## 6. Salidas futuras
+`registry_sites` conserva la identidad normalizada del sitio. `domain_claims` registra challenges de vida corta e intentos. `scan_observations` conserva auditorias saneadas iniciadas expresamente por el owner. `owner_attestations` conserva la autorizacion de la proyeccion publica y `public_profiles` sus versiones inmutables. La visibilidad privada es el estado inicial.
+
+## 6. Salidas actuales de Bloque 1
+
+- auditor publico no persistente;
+- expediente privado progresivo;
+- verificacion de dominio por archivo HTTP o TXT DNS;
+- observacion privada, fechada y saneada;
+- Registry publico con perfiles HTML, JSON y Markdown versionados;
+- primer perfil curado: Tokenizart, con Atelier identificado como plataforma operativa separada.
+
+## 7. Salidas futuras
 
 - informe PDF firmado por version de metodologia;
 - exportacion JSON/Markdown del expediente;
@@ -78,7 +111,7 @@ No se admiten contraseñas, API keys, tokens, claves privadas ni secretos. Los c
 - monitoreo de regresiones y cambios de proveedores;
 - pagos agenticos solo cuando el servicio, consentimiento y responsabilidad esten definidos.
 
-## 7. Criterios de aceptacion v1
+## 8. Criterios de aceptacion v1
 
 - La auditoria nunca modifica el sitio analizado.
 - Un 200 HTML de fallback no se presenta como `llms.txt`, MCP u OpenAPI valido.
@@ -86,4 +119,8 @@ No se admiten contraseñas, API keys, tokens, claves privadas ni secretos. Los c
 - El expediente requiere identidad y se aisla por usuario.
 - Ningun formulario solicita secretos.
 - Tokenizart se presenta como caso real con fecha y limites, no como sitio 100% agentico antes de serlo.
+- La verificacion no publica ni concede acceso de escritura.
+- La publicacion requiere consentimiento explicito y una verificacion vigente.
+- El perfil publico no contiene emails operativos, notas internas, secretos ni cuerpos de auditoria.
+- JSON y Markdown expresan la misma version y procedencia que la vista humana.
 

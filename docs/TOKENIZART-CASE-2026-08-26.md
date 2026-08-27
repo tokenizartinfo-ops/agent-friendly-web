@@ -14,6 +14,8 @@ Tokenizart es el primer caso integral del metodo Agent Friendly Web. La meta no 
 
 El caso se publica y sigue en `https://agentfriendlyweb.dev/casos/tokenizart`. Esta atribucion permite verificar que plataforma, metodologia y responsables acompañan la transformacion. No constituye certificacion oficial, garantia de indexacion ni permiso para consultar informacion privada.
 
+El Registry agrega una segunda representacion verificable en `https://agentfriendlyweb.dev/registry/tokenizart`, con formatos JSON y Markdown para agentes. El perfil inicial es un caso curado y aprobado por el fundador: no sustituye una futura verificacion DNS de `tokenizart.com`, no publica datos owner y conserva sus fuentes y limites.
+
 La arquitectura debe comunicar una diferencia esencial:
 
 - `tokenizart.com` presenta la identidad, filosofia, servicios, conocimiento y acceso al ecosistema;
@@ -182,6 +184,19 @@ El caso alcanza su primer objetivo cuando:
 Llegar a "100% agent-friendly" no significa activar todos los protocolos. Significa que cada capacidad necesaria esta publicada, verificable, segura y correctamente limitada; y que lo que no existe se declara como roadmap, no como servicio.
 
 Agent Friendly Web aplica la misma regla sobre si misma. Su manifiesto publico distingue recursos desplegados, capacidades planificadas y lineas de investigacion. MCP, A2A, WebMCP y x402 no se contabilizan como operativos hasta que exista un endpoint, contrato, seguridad y prueba reproducible.
+
+## 11. Perfil Registry v1
+
+La version 1 registra:
+
+- `tokenizart.com` como presencia publica principal;
+- `atelier.tokenizart.com` como plataforma operativa declarada por el owner;
+- Mint ERC-721, Certify, NFC y Gallery como capacidades declaradas;
+- `robots.txt` y sitemap observados con fecha;
+- CLI, MCP, skills y OKF como release candidates, no como servicios productivos;
+- Owner Live, acciones mutantes y datos owner fuera del Registry publico.
+
+Las futuras mejoras deben crear una nueva version. No se reescribe silenciosamente la fotografia historica de 2026-08-26.
 
 ## 10. Fuentes primarias
 

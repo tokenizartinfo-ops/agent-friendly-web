@@ -656,7 +656,7 @@ git commit -m "feat: add tokenizart registry case"
 - Consumes: all Block 1 tasks and generated D1 migration.
 - Produces: auditable release evidence, deployed Registry, and an explicit rollback point.
 
-- [ ] **Step 1: Run negative API tests locally**
+- [x] **Step 1: Run negative API tests locally**
 
 Verify these exact outcomes:
 
@@ -668,7 +668,7 @@ Verify these exact outcomes:
 - false `confirmPublicProjection` returns 400;
 - secret-like fields never appear in project events, observations, profiles, JSON, Markdown, or logs.
 
-- [ ] **Step 2: Inspect migration and package boundaries**
+- [x] **Step 2: Inspect migration and package boundaries**
 
 Run:
 

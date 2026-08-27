@@ -9,7 +9,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
     <header className="site-header">
-      <a className="brand" href="/" aria-label="Agent Friendly Web, inicio">
+      <a className="brand" href="/">
         <span className="brand-mark">AF</span>
         <span><strong>Agent Friendly Web</strong><small>by Gabriel Mucchiut</small></span>
       </a>
