@@ -3,6 +3,13 @@
   "publisher": "Agent Friendly Web",
   "methodology": "Gabriel Mucchiut Agent Friendly Web Method",
   "updatedAt": "2026-08-27",
+  "sourceReview": {
+    "checkedAt": "2026-08-27",
+    "nextReviewAt": "2026-09-26",
+    "cadenceDays": 30,
+    "status": "current",
+    "rule": "Recheck every linked official provider source before applying a production policy."
+  },
   "dimensions": [
     "search_discovery",
     "user_requested_retrieval",

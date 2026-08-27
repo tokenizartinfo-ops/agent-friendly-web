@@ -1,0 +1,17 @@
+{
+  "contract": "readiness-comparison.v1",
+  "publisher": "Agent Friendly Web",
+  "claimType": "evidence_comparison",
+  "inputs": {
+    "baseline": ["score", "evidenceCount", "observedAt"],
+    "current": ["score", "evidenceCount", "observedAt"]
+  },
+  "scoreRange": [0, 100],
+  "persistence": "none",
+  "guaranteesRanking": false,
+  "limits": [
+    "A score change must be supported by observable evidence to be treated as verified.",
+    "The comparison does not guarantee indexing, ranking, recommendation or identical model output.",
+    "Values entered in the public prototype remain client-side and are not an authenticated observation."
+  ]
+}

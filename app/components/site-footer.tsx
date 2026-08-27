@@ -3,6 +3,9 @@ import { ArrowUpRight } from 'lucide-react';
 const productLinks = [
   ['Auditar un sitio', '/#auditar'],
   ['AEO y crawlers', '/aeo-y-crawlers'],
+  ['Soluciones por sector', '/sectores'],
+  ['Medir mejora', '/medir-mejora'],
+  ['Asistente de preparacion', '/asistente'],
   ['Evolucion agentica', '/evolucion-agentica'],
   ['Metodologia', '/metodologia'],
   ['Registry publico', '/registry'],
@@ -16,6 +19,8 @@ const agentLinks = [
   ['AI Catalog', '/.well-known/ai-catalog.json'],
   ['Readiness', '/.well-known/agent-readiness.json'],
   ['Crawler Catalog', '/.well-known/crawler-policy-catalog.json'],
+  ['Comparison contract', '/.well-known/readiness-comparison-contract.json'],
+  ['Assistant contract', '/.well-known/intake-assistant-contract.json'],
 ];
 
 export function SiteFooter() {

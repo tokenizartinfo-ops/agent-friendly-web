@@ -1,0 +1,33 @@
+{
+  "contract": "intake-assistant.v1",
+  "publisher": "Agent Friendly Web",
+  "status": "public_prototype",
+  "mode": "deterministic_client_side",
+  "persistence": "none",
+  "autonomousWrite": false,
+  "allowedFields": [
+    "organization",
+    "website",
+    "audience",
+    "goals",
+    "languages",
+    "cms",
+    "hosting",
+    "notes"
+  ],
+  "capabilities": {
+    "roughTextReview": true,
+    "fieldScopedSuggestions": true,
+    "humanSelection": true,
+    "voiceInput": false,
+    "emailDispatch": false,
+    "paymentExecution": false,
+    "projectPersistence": false,
+    "websiteMutation": false
+  },
+  "security": {
+    "rejectLikelyCredentials": true,
+    "requiresHumanReview": true,
+    "storesSecrets": false
+  }
+}
