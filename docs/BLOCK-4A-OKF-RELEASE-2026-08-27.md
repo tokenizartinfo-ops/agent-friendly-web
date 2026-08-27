@@ -2,9 +2,10 @@
 
 **Fecha:** 2026-08-27  
 **Origen:** `https://agentfriendlyweb.dev`  
-**Version objetivo:** Sites 16  
-**Commit de implementacion verificado:** `af0b9cff2609c7e1ecaa228f386ad259714c98ab`  
-**Resultado:** aprobado para publicacion como conocimiento publico read-only
+**Version publicada:** Sites 16  
+**Commit publicado:** `cb97b64a2f044b5dc060b14a3a4aff6c544e8976`  
+**PRs:** `#8` implementacion y `#9` portabilidad CRLF  
+**Resultado:** publicado y verificado como conocimiento publico read-only
 
 ## Necesidad
 
@@ -54,15 +55,19 @@ Este release no habilita ni puntua como desplegados:
 
 OKF se publica como recurso de conocimiento verificable. La presencia del bundle no debe inflar el nivel AF ni presentarse como una herramienta activa.
 
-## Publicacion, observacion y rollback
+## Publicacion y observacion
 
-La publicacion autorizada es una nueva version de Sites desde el commit exacto validado o su merge equivalente sin cambios funcionales. Despues del despliegue deben comprobarse el dominio canonico, los cuatro recursos principales, el descubrimiento desde `llms.txt` y el catalogo, y una nueva auditoria publica del propio origen.
+Sites 16 se publico desde el commit exacto indicado. En `https://agentfriendlyweb.dev` respondieron `200` la pagina humana, `index.md`, `manifest.json`, `CHECKSUMS.sha256`, `llms.txt`, AI Catalog, Readiness y sitemap, con cuerpos no vacios y tipos MIME correctos. La verificacion remota reprodujo correctamente los 14 hashes enumerados por `CHECKSUMS.sha256`.
+
+La auditoria publica posterior mantuvo puntaje `70` y nivel `AF-3 herramientas`. Ese resultado es correcto: OKF queda descubierto como conocimiento publico, no se contabiliza como MCP, tool execution ni certificacion. La revision visual de produccion paso en escritorio y movil. No aparecieron errores o warnings de la aplicacion; Chrome solo informo deprecaciones provenientes del script administrado de proteccion de Cloudflare.
+
+## Rollback
 
 Si falla integridad, MIME, navegacion o build remoto, se revierte a Sites 15. No hay migraciones de D1, secretos ni datos que revertir.
 
 ## Siguiente gate
 
-El Bloque 4A queda cerrado cuando Sites 16 responda correctamente desde el dominio canonico. El proximo bloque recomendado es 4B: una CLI local read-only, con JSON estable y `--dry-run`. El Bloque 4C MCP permanece separado y requiere especificacion, threat model y aprobacion propios.
+El Bloque 4A queda cerrado. El proximo bloque recomendado es 4B: una CLI local read-only, con JSON estable y `--dry-run`. El Bloque 4C MCP permanece separado y requiere especificacion, threat model y aprobacion propios.
 
 ## Referencias primarias
 

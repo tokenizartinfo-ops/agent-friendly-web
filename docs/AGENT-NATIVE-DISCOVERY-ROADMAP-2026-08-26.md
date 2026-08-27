@@ -189,7 +189,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 1. **Bloque 1 - confianza y Registry: desplegado.** Expediente, verificacion de dominio, perfiles versionados, observaciones, caso Tokenizart y release seguro.
 2. **Bloque 2 - AEO, sectores y medicion: implementado para release.** Guia, catalogo, control mensual de fuentes, primera biblioteca ESP/ENG/POR y comparador no persistente.
 3. **Bloque 3 - asistencia de intake: prototipo controlado implementado.** Texto libre, rechazo de secretos, propuestas field-scoped y seleccion humana; guardado, voz, correo y pagos siguen bloqueados.
-4. **Bloque 4A - OKF publico: implementado para release.** Bundle v0.2 determinista, pagina humana, descubrimiento, manifiesto y checksums.
+4. **Bloque 4A - OKF publico: desplegado y verificado.** Bundle v0.2 determinista, pagina humana, descubrimiento, manifiesto y checksums.
 5. **Bloque 4B - CLI read-only: siguiente gate.** Auditoria y preparacion local con JSON estable y `--dry-run`.
 6. **Bloque 4C - MCP read-only: planificado.** Contratos y observabilidad antes de cualquier tool remota.
 7. **Bloque 5 - integracion:** adaptadores de CMS, Draft PRs y capsulas con doble consentimiento.
@@ -212,10 +212,10 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/.well-known/readiness-comparison-contract.json` | limites y campos del comparador local | preparado para release, convencion del proyecto |
 | `/.well-known/intake-assistant-contract.json` | contrato fail-closed del prototipo de intake | preparado para release, convencion del proyecto |
 | `/.well-known/security.txt` | contacto y politica de seguridad | desplegado |
-| `/conocimiento-abierto` | explicacion humana del conocimiento publico versionado | preparado para Sites 16 |
-| `/okf/v0.2/index.md` | indice machine-readable del bundle OKF v0.2 | preparado para Sites 16 |
-| `/okf/v0.2/manifest.json` | inventario, metadata y hashes de distribucion | preparado para Sites 16 |
-| `/okf/v0.2/CHECKSUMS.sha256` | verificacion SHA-256 del bundle publicado | preparado para Sites 16 |
+| `/conocimiento-abierto` | explicacion humana del conocimiento publico versionado | desplegado en Sites 16 |
+| `/okf/v0.2/index.md` | indice machine-readable del bundle OKF v0.2 | desplegado en Sites 16 |
+| `/okf/v0.2/manifest.json` | inventario, metadata y hashes de distribucion | desplegado en Sites 16 |
+| `/okf/v0.2/CHECKSUMS.sha256` | verificacion SHA-256 del bundle publicado | desplegado en Sites 16 |
 
 ## Secuencia hacia herramientas y delegacion
 
