@@ -2,7 +2,9 @@
 
 ## Estado
 
-La migracion `drizzle/0001_registry_block1.sql` esta preparada y validada solo en D1 local. No fue aplicada a la base remota de Agent Friendly Web y no habilita por si sola formularios nuevos, verificacion de dominio, publicacion en el Registry ni herramientas mutantes.
+La migracion `drizzle/0001_registry_block1.sql` fue preparada y validada primero en D1 local. Una inspeccion read-only posterior del binding remoto `DB`, realizada el 2026-08-27 sobre Sites 15, observo las tablas `domain_claims`, `owner_attestations`, `project_events`, `public_profiles`, `registry_sites`, `scan_observations` y `site_projects`. Por lo tanto, la afirmacion anterior de que la migracion no estaba presente en remoto quedo superada por evidencia posterior.
+
+Esta constatacion no atribuye el mecanismo de aplicacion, no autoriza otra migracion y no demuestra por si sola aislamiento positivo entre identidades, integridad de registros o disponibilidad de todas las operaciones privadas.
 
 ## Alcance de la migracion
 
@@ -68,4 +70,6 @@ Si existiera corrupcion o perdida de datos, la recuperacion mediante Time Travel
 
 ## Gate pendiente
 
-Todavia faltan la interfaz ampliada, desafios de dominio read-only, perfiles publicos versionados, observaciones explicitas y pruebas de seguridad integrales. La migracion remota permanece bloqueada hasta que esas piezas sean compatibles, el build exacto este validado y Gabriel apruebe separadamente la ventana.
+La interfaz ampliada, los desafios de dominio read-only, los perfiles publicos versionados y las observaciones explicitas ya estan presentes en el build publicado `f63f451` y sus pruebas automatizadas pasaron. Las rutas privadas fallaron cerradas sin identidad durante el gate publico del 2026-08-27.
+
+Continua pendiente el smoke positivo con dos identidades autenticadas para demostrar aislamiento real y el control humano de publicacion. No debe ejecutarse una nueva migracion, transferencia de propuestas, publicacion owner-scoped ni operacion de recuperacion hasta completar ese smoke y registrar una aprobacion separada para cualquier mutacion adicional.

@@ -246,4 +246,6 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 
 ## Gate inmediato
 
-Validar en navegador la ampliacion del Bloque 2 y el prototipo controlado del Bloque 3, publicar sus contratos y volver a auditar el origen. Despues se decide por separado la transferencia de propuestas aprobadas al expediente autenticado. OKF, CLI, MCP, plugins, WebMCP, A2A, pagos, voz, correo y escritura conservan gates separados y no deben aparecer como capacidades desplegadas antes de sus pruebas.
+El gate publico de los Bloques 2 y 3 se cerro el 2026-08-27. La revision humana verifico sectores, idiomas, comparador, intake, rechazo de secretos, ausencia de persistencia local, contratos publicos y una nueva auditoria del origen. La evidencia completa vive en `docs/BLOCK-2-3-BROWSER-AND-ORIGIN-GATE-2026-08-27.md`.
+
+El siguiente bloque es **Bloque 4 - distribucion agentica read-only**. Debe especificarse y ejecutarse en tres entregas separables: OKF publico, CLI local con JSON y `--dry-run`, y MCP read-only con sus propios contratos y limites. La especificacion de la primera entrega vive en `docs/superpowers/specs/2026-08-27-agent-friendly-web-okf-public-v1-design.md`. La transferencia de propuestas aprobadas al expediente autenticado conserva un gate separado y no se mezcla con este bloque. Plugins, WebMCP, A2A, pagos, voz, correo y escritura siguen sin contabilizarse como capacidades desplegadas.
