@@ -211,6 +211,26 @@ test("OKF verifier detects tampered content and undeclared checksum entries", as
   );
 });
 
+test("OKF verifier rejects a resource truncated at the network byte limit", async () => {
+  const fixture = okfFixture();
+  const fetcher = fixtureFetcher(fixture);
+
+  await assert.rejects(
+    verifyRemoteOkf(
+      { origin: "https://agentfriendlyweb.dev", release: "v0.2", dryRun: false },
+      {
+        fetchLimitedPublicUrl: async (url) => {
+          const response = await fetcher(url);
+          return url.toString().endsWith("index.md")
+            ? { ...response, truncated: true }
+            : response;
+        },
+      },
+    ),
+    (error) => error.exitCode === EXIT_CODES.INTEGRITY && error.code === "okf_integrity_failure",
+  );
+});
+
 test("CLI dispatcher wraps OKF dry-run as a planned envelope", async () => {
   const response = await executeCliCommand(
     {

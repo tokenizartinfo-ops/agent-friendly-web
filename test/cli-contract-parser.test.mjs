@@ -120,6 +120,16 @@ test("rejects unknown flags, duplicates and malformed identifiers", () => {
     () => parseCliArgs(["audit", "https://example.com", "--dry-run", "--dry-run"]),
     (error) => error instanceof CliError && error.code === "duplicate_option",
   );
+  assert.throws(
+    () => parseCliArgs([
+      "registry",
+      "get",
+      "tokenizart",
+      "--version",
+      "9007199254740992",
+    ]),
+    (error) => error instanceof CliError && error.code === "invalid_version",
+  );
 });
 
 test("validation errors never echo credentials embedded in an origin", () => {

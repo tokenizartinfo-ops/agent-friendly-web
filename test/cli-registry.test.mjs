@@ -184,4 +184,25 @@ test("registry get classifies malformed JSON and contracts as integrity failures
     ),
     (error) => error.exitCode === EXIT_CODES.INTEGRITY && error.code === "invalid_registry_profile",
   );
+
+  await assert.rejects(
+    executeCliCommand(
+      {
+        command: "registry-get",
+        slug: "wrong-version",
+        origin: "https://agentfriendlyweb.dev",
+        version: 2,
+        dryRun: false,
+      },
+      {
+        fetchLimitedPublicUrl: async () => ({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify(publishedProfile),
+          bytes: 100,
+        }),
+      },
+    ),
+    (error) => error.exitCode === EXIT_CODES.INTEGRITY && error.code === "invalid_registry_profile",
+  );
 });
