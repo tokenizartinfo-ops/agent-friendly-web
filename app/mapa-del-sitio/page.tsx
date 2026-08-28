@@ -20,6 +20,7 @@ import { SiteHeader } from '../components/site-header';
 
 const humanRoutes = [
   { name: 'Auditor publico', detail: 'Comprueba evidencia visible sin modificar el sitio.', href: '/#auditar', icon: Radar },
+  { name: 'Guia publica', detail: 'Mantiene el hilo inmediato, adapta la explicacion y enlaza fuentes sin guardar la charla.', href: '/guia', icon: Bot },
   { name: 'AEO y crawlers', detail: 'Explica valor comercial y politicas por proveedor sin promesas de ranking.', href: '/aeo-y-crawlers', icon: Bot },
   { name: 'Soluciones por sector', detail: 'Adapta evidencia, contenidos y primer paso a cada tipo de organizacion.', href: '/sectores', icon: Globe2 },
   { name: 'Medir mejora', detail: 'Compara evidencia antes y despues sin promesas de ranking.', href: '/medir-mejora', icon: Radar },
@@ -47,6 +48,7 @@ const machineResources = [
   { name: 'Crawler policy catalog', detail: 'Matriz JSON de crawlers, finalidades, controles y fuentes oficiales.', href: '/.well-known/crawler-policy-catalog.json', icon: Bot },
   { name: 'Comparison contract', detail: 'Contrato del comparador local de evidencia.', href: '/.well-known/readiness-comparison-contract.json', icon: Braces },
   { name: 'Assistant contract', detail: 'Limites machine-readable del prototipo de intake.', href: '/.well-known/intake-assistant-contract.json', icon: Braces },
+  { name: 'Public guide contract', detail: 'Contrato machine-readable de la guia determinista y no persistente.', href: '/.well-known/public-guide-contract.json', icon: Braces },
   { name: 'OKF v0.2 index', detail: 'Indice canonico del conocimiento publico versionado.', href: '/okf/v0.2/index.md', icon: FileText },
   { name: 'OKF manifest', detail: 'Inventario, version, licencia y hashes de distribucion.', href: '/okf/v0.2/manifest.json', icon: Braces },
   { name: 'OKF checksums', detail: 'Hashes SHA-256 para comprobar integridad de los archivos.', href: '/okf/v0.2/CHECKSUMS.sha256', icon: ShieldCheck },
@@ -65,6 +67,7 @@ const activeCapabilities = [
   ['Contenido sectorial', 'Activo', 'Primera capa ESP/ENG/POR para seis tipos de organizacion.'],
   ['Comparador de evidencia', 'Activo', 'Antes/despues local, no persistente y sin promesas de ranking.'],
   ['Asistente de intake', 'Prototipo', 'Ordena texto libre y requiere seleccion humana antes de copiar.'],
+  ['Guia publica', 'Prototipo', 'Orienta con continuidad inmediata y fuentes, sin persistencia ni acciones.'],
   ['Bundle OKF publico', 'Activo', 'Once conceptos read-only con procedencia, version, manifiesto y checksums.'],
   ['CLI read-only', 'Desplegada', 'Auditoria, Registry y OKF con JSON estable, sin credenciales ni escrituras.'],
 ];

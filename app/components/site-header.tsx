@@ -15,6 +15,7 @@ export function SiteHeader() {
       </a>
       <nav className={open ? 'is-open' : ''} aria-label="Principal">
         <a href="/#auditar" onClick={() => setOpen(false)}>Auditar</a>
+        <a href="/guia" onClick={() => setOpen(false)}>Guia</a>
         <a href="/aeo-y-crawlers" onClick={() => setOpen(false)}>AEO</a>
         <a href="/sectores" onClick={() => setOpen(false)}>Sectores</a>
         <a href="/evolucion-agentica" onClick={() => setOpen(false)}>Evolucion</a>

@@ -4,6 +4,7 @@ import test from 'node:test';
 
 const requiredNavigation = [
   '/#auditar',
+  '/guia',
   '/evolucion-agentica',
   '/metodologia',
   '/cli',
@@ -19,6 +20,7 @@ const publicPages = [
   'app/casos/tokenizart/page.tsx',
   'app/mapa-del-sitio/page.tsx',
   'app/conocimiento-abierto/page.tsx',
+  'app/guia/page.tsx',
   'app/cli/page.tsx',
 ];
 

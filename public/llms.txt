@@ -11,6 +11,8 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - [Sector guidance in ES/EN/PT](https://agentfriendlyweb.dev/sectores)
 - [Before and after evidence comparison](https://agentfriendlyweb.dev/medir-mejora)
 - [Controlled intake assistant prototype](https://agentfriendlyweb.dev/asistente)
+- [Public deterministic guide](https://agentfriendlyweb.dev/guia)
+- [Public guide contract](https://agentfriendlyweb.dev/.well-known/public-guide-contract.json)
 - [Open knowledge and OKF downloads](https://agentfriendlyweb.dev/conocimiento-abierto)
 - [OKF v0.2 bundle index](https://agentfriendlyweb.dev/okf/v0.2/index.md)
 - [OKF distribution manifest](https://agentfriendlyweb.dev/okf/v0.2/manifest.json)
