@@ -63,8 +63,14 @@
       "note": "No A2A Agent Card or A2A service is advertised by this release."
     },
     "cli": {
-      "status": "planned",
-      "note": "No Agent Friendly Web CLI distribution is advertised by this release."
+      "status": "release-candidate",
+      "resources": [
+        "/cli",
+        "/cli/index.md",
+        "/.well-known/agent-friendly-cli.json",
+        "/schemas/cli-response.v1.json"
+      ],
+      "note": "Repo-first public read-only CLI. No credentials, local writes, remote mutations, MCP or A2A execution."
     },
     "webmcp": {
       "status": "research",

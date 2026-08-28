@@ -6,6 +6,14 @@
     "description": "Read-only audit of public website signals. The AF score is Gabriel Mucchiut's methodology, not an official certification. Auxiliary diagnostics include crawler policy, Content Signals and current discovery catalogs without changing the historical AF v1 score."
   },
   "servers": [{ "url": "https://agentfriendlyweb.dev" }],
+  "x-agent-friendly-web-cli": {
+    "status": "release-candidate",
+    "access": "public-read-only",
+    "manifest": "https://agentfriendlyweb.dev/.well-known/agent-friendly-cli.json",
+    "schema": "https://agentfriendlyweb.dev/schemas/cli-response.v1.json",
+    "guide": "https://agentfriendlyweb.dev/cli",
+    "note": "The CLI consumes public resources; it is not an additional HTTP API path or an MCP server."
+  },
   "paths": {
     "/api/scan": {
       "post": {

@@ -28,6 +28,7 @@ const humanRoutes = [
   { name: 'Evolucion agentica', detail: 'Compara AF-0 a AF-5 mediante casos ilustrativos.', href: '/evolucion-agentica', icon: Route },
   { name: 'Metodologia', detail: 'Explica el puntaje, sus limites y las fuentes primarias.', href: '/metodologia', icon: Compass },
   { name: 'Registry publico', detail: 'Perfiles versionados con declaraciones, observaciones y dominio verificado.', href: '/registry', icon: Globe2 },
+  { name: 'CLI read-only', detail: 'Auditoria, Registry y verificacion OKF desde Node.js con salida JSON.', href: '/cli', icon: FileCode2 },
   { name: 'Caso Tokenizart', detail: 'Primer caso integral, con archivos y progreso verificable.', href: '/casos/tokenizart', icon: CheckCircle2 },
   { name: 'Mi expediente', detail: 'Area privada para ordenar contexto y un roadmap propio.', href: '/expediente', icon: LockKeyhole },
 ];
@@ -49,6 +50,9 @@ const machineResources = [
   { name: 'OKF v0.2 index', detail: 'Indice canonico del conocimiento publico versionado.', href: '/okf/v0.2/index.md', icon: FileText },
   { name: 'OKF manifest', detail: 'Inventario, version, licencia y hashes de distribucion.', href: '/okf/v0.2/manifest.json', icon: Braces },
   { name: 'OKF checksums', detail: 'Hashes SHA-256 para comprobar integridad de los archivos.', href: '/okf/v0.2/CHECKSUMS.sha256', icon: ShieldCheck },
+  { name: 'CLI manifest', detail: 'Comandos, version, limites y fronteras read-only.', href: '/.well-known/agent-friendly-cli.json', icon: Braces },
+  { name: 'CLI response schema', detail: 'Contrato JSON estable para resultados y errores.', href: '/schemas/cli-response.v1.json', icon: FileCode2 },
+  { name: 'CLI guide', detail: 'Guia Markdown para ejecutar el release candidate desde el repositorio.', href: '/cli/index.md', icon: FileText },
 ];
 
 const activeCapabilities = [
@@ -62,6 +66,7 @@ const activeCapabilities = [
   ['Comparador de evidencia', 'Activo', 'Antes/despues local, no persistente y sin promesas de ranking.'],
   ['Asistente de intake', 'Prototipo', 'Ordena texto libre y requiere seleccion humana antes de copiar.'],
   ['Bundle OKF publico', 'Activo', 'Once conceptos read-only con procedencia, version, manifiesto y checksums.'],
+  ['CLI read-only', 'Release candidate', 'Auditoria, Registry y OKF con JSON estable, sin credenciales ni escrituras.'],
 ];
 
 const roadmap = [
@@ -70,7 +75,6 @@ const roadmap = [
   ['Plugins y conectores', 'planned', 'Cada plataforma requiere un adaptador oficial y una capacidad verificable.'],
   ['MCP', 'planned', 'No existe un endpoint MCP ejecutable en esta version.'],
   ['A2A', 'planned', 'No se publica Agent Card ni delegacion entre agentes.'],
-  ['CLI', 'planned', 'No existe una distribucion oficial instalable.'],
   ['x402', 'research', 'No hay recursos pagos ni flujo HTTP 402 activo.'],
 ];
 

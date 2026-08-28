@@ -20,6 +20,7 @@ export function SiteHeader() {
         <a href="/evolucion-agentica" onClick={() => setOpen(false)}>Evolucion</a>
         <a href="/metodologia" onClick={() => setOpen(false)}>Metodo</a>
         <a href="/registry" onClick={() => setOpen(false)}>Registry</a>
+        <a href="/cli" onClick={() => setOpen(false)}>CLI</a>
         <a href="/casos/tokenizart" onClick={() => setOpen(false)}>Casos</a>
         <a href="/mapa-del-sitio" onClick={() => setOpen(false)}>Mapa</a>
         <a className="private-nav-link" href="/expediente" onClick={() => setOpen(false)}>

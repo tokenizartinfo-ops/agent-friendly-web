@@ -10,6 +10,7 @@ const productLinks = [
   ['Evolucion agentica', '/evolucion-agentica'],
   ['Metodologia', '/metodologia'],
   ['Registry publico', '/registry'],
+  ['CLI read-only', '/cli'],
   ['Caso Tokenizart', '/casos/tokenizart'],
   ['Mapa completo', '/mapa-del-sitio'],
 ];
@@ -23,6 +24,8 @@ const agentLinks = [
   ['Comparison contract', '/.well-known/readiness-comparison-contract.json'],
   ['Assistant contract', '/.well-known/intake-assistant-contract.json'],
   ['OKF v0.2', '/okf/v0.2/index.md'],
+  ['CLI manifest', '/.well-known/agent-friendly-cli.json'],
+  ['CLI schema', '/schemas/cli-response.v1.json'],
 ];
 
 export function SiteFooter() {
