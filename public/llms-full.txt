@@ -26,7 +26,7 @@ The public comparison at `/medir-mejora` processes manually entered before/after
 
 ## Public conversational guide
 
-The prototype at `https://agentfriendlyweb.dev/guia` answers from an allowlisted public topic and source catalog. It recognizes immediate continuations, adapts between simple, standard and detailed explanations, and links evidence for each answer. Conversation state exists only in React memory and clears on reload. It does not use an external model, access private projects, run audits or CLI commands, send email, execute payments or modify websites. Its project-specific boundary contract is published at `https://agentfriendlyweb.dev/.well-known/public-guide-contract.json`.
+The deployed public guide at `https://agentfriendlyweb.dev/guia` answers from an allowlisted public topic and source catalog. It recognizes immediate continuations, adapts between simple, standard and detailed explanations, and links evidence for each answer. Conversation state exists only in React memory and clears on reload. It does not use an external model, access private projects, run audits or CLI commands, send email, execute payments or modify websites. Its project-specific boundary contract is published at `https://agentfriendlyweb.dev/.well-known/public-guide-contract.json`.
 
 ## Open knowledge distribution
 

@@ -34,6 +34,8 @@ La meta de 100% representa la finalizacion de las capas que el caso necesita. No
 - prototipo determinista de asistencia de intake y contrato `intake-assistant.v1`, sin persistencia ni acciones.
 - bundle publico OKF v0.2 con 11 conceptos, manifiesto, procedencia, vigencia, licencia y SHA-256;
 - pagina humana `/conocimiento-abierto` y descubrimiento OKF desde `llms.txt`, catalogos, sitemap y footer.
+- CLI oficial read-only para auditoria, consulta Registry y verificacion OKF con JSON estable y `--dry-run`;
+- guia conversacional publica `/guia`, determinista, citada y efimera, con continuidad inmediata y profundidad adaptable.
 
 ### Planificado
 
@@ -42,7 +44,6 @@ La meta de 100% representa la finalizacion de las capas que el caso necesita. No
 - ampliacion multidioma del resto de la experiencia, mas alla de la primera entrega sectorial;
 - asistente de intake autenticado capaz de transferir propuestas aprobadas al expediente;
 - canal de contacto propio de Agent Friendly Web con identidad, retencion y responsables definidos;
-- CLI oficial para auditar y preparar artefactos sin escribir en el sitio;
 - MCP server read-only para auditoria, consulta de expedientes autorizados y generacion de paquetes;
 - A2A Agent Card cuando exista un agente remoto real, autenticado y observable;
 - publicacion asistida mediante adaptadores limitados y aprobacion del owner.
@@ -129,9 +130,9 @@ El asistente nunca convierte una conversacion en publicacion. Primero propone, l
 
 ### Guia conversacional publica del sitio
 
-Despues del release CLI v1 se especificara una guia conversacional interna capaz de explicar toda la experiencia de `agentfriendlyweb.dev` en lenguaje simple. Debe recorrer preguntas frecuentes, metodologia AF-0 a AF-5, auditoria, AEO, crawlers, sectores, Registry, OKF, CLI, expedientes, limites y roadmap, siempre con enlaces a fuentes publicas versionadas.
+La guia conversacional publica v1 ya explica la experiencia de `agentfriendlyweb.dev` en lenguaje simple. Recorre preguntas frecuentes, metodologia AF-0 a AF-5, auditoria, AEO, crawlers, Registry, OKF, CLI, expedientes, limites y roadmap, siempre con enlaces a fuentes publicas versionadas.
 
-La guia debe reconocer continuidad conversacional, aclarar terminos, adaptar profundidad y preguntar cuando la intencion sea ambigua. No puede inventar precios, garantias, certificaciones o capacidades. En su primera version no ejecutara la CLI, no guardara conversaciones, no consultara expedientes privados y no publicara cambios. Idiomas, voz, memoria consentida, auditoria asistida y transferencia al expediente conservaran gates separados.
+La guia reconoce continuidad inmediata, aclara terminos, adapta profundidad y pregunta cuando la intencion es ambigua. No inventa precios, garantias, certificaciones o capacidades. La version desplegada no ejecuta la CLI, no guarda conversaciones, no consulta expedientes privados y no publica cambios. Idiomas, voz, memoria consentida, auditoria asistida y transferencia al expediente conservan gates separados.
 
 ## Skills customizadas y casos de exito
 
@@ -197,7 +198,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 3. **Bloque 3 - asistencia de intake: prototipo controlado implementado.** Texto libre, rechazo de secretos, propuestas field-scoped y seleccion humana; guardado, voz, correo y pagos siguen bloqueados.
 4. **Bloque 4A - OKF publico: desplegado y verificado.** Bundle v0.2 determinista, pagina humana, descubrimiento, manifiesto y checksums.
 5. **Bloque 4B - CLI read-only: desplegado y verificado.** Auditoria, consulta Registry y verificacion OKF con JSON estable, `--dry-run`, cero credenciales y cero escritura. El candidato se valido en Sites 17 y el estado final se publico en Sites 18.
-6. **Bloque 4B.1 - guia conversacional publica: especificacion posterior.** Orientacion integral con fuentes, continuidad y lenguaje adaptable, inicialmente sin acciones ni persistencia.
+6. **Bloque 4B.1 - guia conversacional publica: desplegada y verificada.** Orientacion determinista con fuentes, continuidad inmediata y lenguaje adaptable, sin acciones ni persistencia.
 7. **Bloque 4C - MCP read-only: planificado.** Contratos y observabilidad antes de cualquier tool remota.
 8. **Bloque 5 - integracion:** adaptadores de CMS, Draft PRs y capsulas con doble consentimiento.
 9. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
@@ -218,6 +219,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/.well-known/crawler-policy-catalog.json` | catalogo de identidades, finalidades y fuentes por crawler | desplegado, convencion del proyecto |
 | `/.well-known/readiness-comparison-contract.json` | limites y campos del comparador local | preparado para release, convencion del proyecto |
 | `/.well-known/intake-assistant-contract.json` | contrato fail-closed del prototipo de intake | preparado para release, convencion del proyecto |
+| `/.well-known/public-guide-contract.json` | contrato y limites de la guia conversacional publica | desplegado, convencion del proyecto |
 | `/.well-known/security.txt` | contacto y politica de seguridad | desplegado |
 | `/conocimiento-abierto` | explicacion humana del conocimiento publico versionado | desplegado en Sites 16 |
 | `/okf/v0.2/index.md` | indice machine-readable del bundle OKF v0.2 | desplegado en Sites 16 |
@@ -266,4 +268,4 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 
 El gate publico de los Bloques 2 y 3 se cerro el 2026-08-27. La revision humana verifico sectores, idiomas, comparador, intake, rechazo de secretos, ausencia de persistencia local, contratos publicos y una nueva auditoria del origen. La evidencia completa vive en `docs/BLOCK-2-3-BROWSER-AND-ORIGIN-GATE-2026-08-27.md`.
 
-Los Bloques 4A OKF publico y **4B CLI read-only** estan desplegados. La CLI se integro mediante PR #10, supero recorridos remotos de auditoria, Registry, OKF y capacidades en Sites 17, y su estado final se publico mediante PR #11 y Sites 18. El siguiente bloque es especificar la guia conversacional publica 4B.1; MCP read-only conserva su propio gate 4C. La transferencia de propuestas aprobadas al expediente autenticado, plugins, WebMCP, A2A, pagos, voz, correo y escritura siguen sin contabilizarse como capacidades desplegadas.
+Los Bloques 4A OKF publico, **4B CLI read-only** y **4B.1 guia conversacional publica** estan desplegados. La guia se integro mediante PR #13 y se verifico en produccion con continuidad, profundidad adaptable, fuentes, bloqueo de valores probables de credenciales y ausencia de persistencia. El siguiente bloque es 4C MCP read-only, con contratos, threat model y observabilidad propios. La transferencia de propuestas aprobadas al expediente autenticado, plugins, WebMCP, A2A, pagos, voz, correo y escritura siguen sin contabilizarse como capacidades desplegadas.

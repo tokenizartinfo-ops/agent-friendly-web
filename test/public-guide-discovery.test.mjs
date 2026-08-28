@@ -20,7 +20,7 @@ test('human navigation exposes the public guide and keeps intake separate', asyn
   assert.match(siteMap, /Asistente de preparacion/);
 });
 
-test('machine discovery exposes the guide as a bounded prototype', async () => {
+test('machine discovery exposes the deployed guide with bounded capabilities', async () => {
   const [llms, llmsFull, aiCatalog, readiness] = await Promise.all([
     readFile('public/llms.txt', 'utf8'),
     readFile('public/llms-full.txt', 'utf8'),
@@ -36,7 +36,7 @@ test('machine discovery exposes the guide as a bounded prototype', async () => {
   const urls = aiCatalog.resources.map((resource) => resource.url);
   assert.ok(urls.includes(`${canonical}/guia`));
   assert.ok(urls.includes(`${canonical}/.well-known/public-guide-contract.json`));
-  assert.equal(readiness.capabilities.public_guide.status, 'prototype');
+  assert.equal(readiness.capabilities.public_guide.status, 'deployed');
   assert.match(readiness.capabilities.public_guide.note, /sin persistencia|no persistence/i);
   assert.equal(readiness.capabilities.mcp.status, 'planned');
   assert.equal(readiness.capabilities.a2a.status, 'planned');

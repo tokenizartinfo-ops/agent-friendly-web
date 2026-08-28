@@ -2,7 +2,7 @@
   "contract": "agent-friendly-web.public-guide.v1",
   "publisher": "Agent Friendly Web",
   "creator": "Gabriel Mucchiut",
-  "status": "prototype",
+  "status": "deployed",
   "convention": "Agent Friendly Web project contract; not an official standard",
   "canonical_url": "https://agentfriendlyweb.dev/guia",
   "mode": "deterministic_client_side",

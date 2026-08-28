@@ -6,7 +6,7 @@
     "creator": "Gabriel Mucchiut"
   },
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "updated_at": "2026-08-27",
+  "updated_at": "2026-08-28",
   "policy": {
     "public_search": "allowed",
     "user_directed_ai_input": "allowed",
@@ -37,7 +37,7 @@
       "note": "Deterministic and client-side. No autonomous save, email, voice, payment or website mutation."
     },
     "public_guide": {
-      "status": "prototype",
+      "status": "deployed",
       "resources": ["/guia", "/.well-known/public-guide-contract.json"],
       "note": "Deterministic public guidance with cited sources and immediate continuity; sin persistencia, private context or actions."
     },
