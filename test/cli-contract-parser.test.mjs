@@ -122,3 +122,22 @@ test("rejects unknown flags, duplicates and malformed identifiers", () => {
   );
 });
 
+test("validation errors never echo credentials embedded in an origin", () => {
+  let captured;
+  try {
+    parseCliArgs([
+      "registry",
+      "get",
+      "tokenizart",
+      "--origin",
+      "https://alice:private-password@example.com",
+    ]);
+  } catch (error) {
+    captured = error;
+  }
+
+  assert.ok(captured instanceof CliError);
+  const serialized = serializeEnvelope(createErrorEnvelope("registry-get", captured));
+  assert.equal(serialized.includes("alice"), false);
+  assert.equal(serialized.includes("private-password"), false);
+});
