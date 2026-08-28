@@ -36,6 +36,7 @@ La meta de 100% representa la finalizacion de las capas que el caso necesita. No
 - pagina humana `/conocimiento-abierto` y descubrimiento OKF desde `llms.txt`, catalogos, sitemap y footer.
 - CLI oficial read-only para auditoria, consulta Registry y verificacion OKF con JSON estable y `--dry-run`;
 - guia conversacional publica `/guia`, determinista, citada y efimera, con continuidad inmediata y profundidad adaptable.
+- MCP publico read-only en `https://mcp.agentfriendlyweb.dev/mcp`, con cuatro tools, cuatro resources y Worker independiente sin persistencia ni escritura.
 
 ### Planificado
 
@@ -44,7 +45,7 @@ La meta de 100% representa la finalizacion de las capas que el caso necesita. No
 - ampliacion multidioma del resto de la experiencia, mas alla de la primera entrega sectorial;
 - asistente de intake autenticado capaz de transferir propuestas aprobadas al expediente;
 - canal de contacto propio de Agent Friendly Web con identidad, retencion y responsables definidos;
-- MCP server read-only para auditoria, consulta de expedientes autorizados y generacion de paquetes;
+- MCP autenticado para expedientes autorizados y generacion de paquetes; el MCP publico read-only ya esta desplegado y permanece separado;
 - A2A Agent Card cuando exista un agente remoto real, autenticado y observable;
 - publicacion asistida mediante adaptadores limitados y aprobacion del owner.
 - paquetes o plugins oficiales por ecosistema, empezando por Tokenizart, Atelier y Agent Friendly Web, solo cuando cada marketplace o cliente tenga contrato y distribucion verificados;
@@ -199,7 +200,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 4. **Bloque 4A - OKF publico: desplegado y verificado.** Bundle v0.2 determinista, pagina humana, descubrimiento, manifiesto y checksums.
 5. **Bloque 4B - CLI read-only: desplegado y verificado.** Auditoria, consulta Registry y verificacion OKF con JSON estable, `--dry-run`, cero credenciales y cero escritura. El candidato se valido en Sites 17 y el estado final se publico en Sites 18.
 6. **Bloque 4B.1 - guia conversacional publica: desplegada y verificada.** Orientacion determinista con fuentes, continuidad inmediata y lenguaje adaptable, sin acciones ni persistencia.
-7. **Bloque 4C - MCP read-only: candidato local listo para CI.** Contrato, threat model, endpoint stateless, cuatro tools, cuatro resources, limites HTTP, saneamiento y pruebas modernas/heredadas estan implementados; no se considera desplegado hasta superar PR, preview no promovida y smoke remoto.
+7. **Bloque 4C - MCP read-only: desplegado y verificado.** Worker independiente en `mcp.agentfriendlyweb.dev`, contrato stateless, cuatro tools, cuatro resources, limites HTTP y saneamiento; clientes modernos/heredados, negativos, health, auditoria y QA visual aprobados.
 8. **Bloque 5 - integracion:** adaptadores de CMS, Draft PRs y capsulas con doble consentimiento.
 9. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
 

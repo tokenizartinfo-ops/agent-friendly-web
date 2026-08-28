@@ -48,7 +48,7 @@ test("MCP result schema fixes the safe envelope and denies unknown top-level fie
 });
 
 test("human and machine discovery label MCP as deployed with explicit boundaries", async () => {
-  const [page, header, footer, map, sitemap, readiness, catalog, apiCatalog, llms, llmsFull] = await Promise.all([
+  const [page, header, footer, map, sitemap, readiness, catalog, apiCatalog, llms, llmsFull, roadmap] = await Promise.all([
     read("app/mcp-readonly/page.tsx"),
     read("app/components/site-header.tsx"),
     read("app/components/site-footer.tsx"),
@@ -59,6 +59,7 @@ test("human and machine discovery label MCP as deployed with explicit boundaries
     read("app/api-catalog/route.ts"),
     read("public/llms.txt"),
     read("public/llms-full.txt"),
+    read("docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md"),
   ]);
 
   assert.match(page, /MCP publico read-only/i);
@@ -83,4 +84,6 @@ test("human and machine discovery label MCP as deployed with explicit boundaries
   assert.match(llmsFull, /https:\/\/mcp\.agentfriendlyweb\.dev\/mcp/);
   assert.match(llmsFull, /no A2A/i);
   assert.match(llmsFull, /no WebMCP/i);
+  assert.match(roadmap, /Bloque 4C - MCP read-only: desplegado y verificado/i);
+  assert.doesNotMatch(roadmap, /Bloque 4C - MCP read-only: candidato local/i);
 });
