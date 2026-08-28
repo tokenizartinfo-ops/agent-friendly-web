@@ -79,4 +79,3 @@ Los resultados salen por `stdout`; los errores, por `stderr`. Las trazas interna
 ## Nota sobre npm run
 
 Algunas versiones de npm interpretan `--dry-run` como una opción propia. Para evitar ambigüedad, los ejemplos oficiales con esa bandera usan directamente `node bin/afw.mjs`.
-

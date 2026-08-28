@@ -66,4 +66,3 @@ test("audit dry-run creates no files in an empty working directory", async () =>
     await rm(directory, { recursive: true, force: true });
   }
 });
-

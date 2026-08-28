@@ -81,4 +81,3 @@ test("human navigation and machine catalog expose real CLI destinations", async 
   assert.match(openapi, /x-agent-friendly-web-cli/);
   assert.equal(await stat("app/cli/page.tsx").then(() => true), true);
 });
-

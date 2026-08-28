@@ -70,4 +70,3 @@ test("version returns the machine-readable CLI version", async () => {
   const response = await executeCliCommand({ command: "version" });
   assert.equal(response.result.version, "0.1.0");
 });
-

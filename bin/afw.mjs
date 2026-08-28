@@ -58,4 +58,3 @@ async function main(argv) {
 }
 
 await main(process.argv.slice(2));
-

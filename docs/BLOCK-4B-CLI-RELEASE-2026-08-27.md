@@ -1,9 +1,9 @@
 # Gate de release: Bloque 4B CLI read-only
 
-**Fecha:** 2026-08-27  
-**Origen:** `https://agentfriendlyweb.dev`  
-**Rama candidata:** `feat/cli-readonly-v1`  
-**Commit funcional base:** `0d2b7964cd18d54cf228be97f26f8ba01a9fc9e6`  
+**Fecha:** 2026-08-27
+**Origen:** `https://agentfriendlyweb.dev`
+**Rama candidata:** `feat/cli-readonly-v1`
+**Commit funcional base:** `0d2b7964cd18d54cf228be97f26f8ba01a9fc9e6`
 **Estado:** codigo completo y release candidate; produccion pendiente de verificacion
 
 ## Necesidad

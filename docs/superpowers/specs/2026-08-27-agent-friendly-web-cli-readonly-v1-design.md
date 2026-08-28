@@ -1,8 +1,8 @@
 # Agent Friendly Web CLI Read-Only v1 Design
 
-**Fecha:** 2026-08-27  
-**Responsable:** Gabriel Mucchiut  
-**Estado:** aprobado funcionalmente; pendiente de plan e implementacion  
+**Fecha:** 2026-08-27
+**Responsable:** Gabriel Mucchiut
+**Estado:** aprobado funcionalmente; pendiente de plan e implementacion
 **Bloque:** 4B de distribucion agentica
 
 ## 1. Proposito
