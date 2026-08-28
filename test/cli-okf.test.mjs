@@ -7,6 +7,7 @@ import { executeCliCommand } from "../lib/cli-commands.mjs";
 import { verifyRemoteOkf } from "../lib/cli-okf.mjs";
 
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
+const bodyBytes = (value) => new TextEncoder().encode(value);
 
 function okfFixture() {
   const files = {
@@ -38,15 +39,27 @@ function fixtureFetcher(fixture) {
     const marker = "/okf/v0.2/";
     const path = new URL(url).pathname.split(marker)[1];
     if (path === "manifest.json") {
-      return { status: 200, contentType: "application/json", body: fixture.manifestText };
+      return {
+        status: 200,
+        contentType: "application/json",
+        body: fixture.manifestText,
+        bodyBytes: bodyBytes(fixture.manifestText),
+      };
     }
     if (path === "CHECKSUMS.sha256") {
-      return { status: 200, contentType: "text/plain", body: fixture.checksums };
+      return {
+        status: 200,
+        contentType: "text/plain",
+        body: fixture.checksums,
+        bodyBytes: bodyBytes(fixture.checksums),
+      };
     }
+    const body = fixture.files[path] ?? "Not found";
     return {
       status: fixture.files[path] === undefined ? 404 : 200,
       contentType: "text/markdown; charset=utf-8",
-      body: fixture.files[path] ?? "Not found",
+      body,
+      bodyBytes: bodyBytes(body),
     };
   };
 }
@@ -80,6 +93,61 @@ test("OKF verifier validates inventory, media types and both checksum sources", 
   assert.equal(result.okf_version, "0.2");
   assert.equal(result.files_verified, 2);
   assert.equal(result.checksum_entries, 3);
+});
+
+test("OKF verifier hashes the transferred bytes instead of decoded text", async () => {
+  const visibleText = "# Documento con BOM\n";
+  const encoded = bodyBytes(visibleText);
+  const transferred = new Uint8Array([0xef, 0xbb, 0xbf, ...encoded]);
+  const manifest = {
+    schema: "agent-friendly-web.okf-distribution.v1",
+    okf_version: "0.2",
+    release: "2026-08-27-public-v1",
+    files: [{
+      path: "bom.md",
+      sha256: sha256(transferred),
+      media_type: "text/markdown",
+    }],
+  };
+  const manifestText = `${JSON.stringify(manifest)}\n`;
+  const checksums = [
+    `${sha256(transferred)}  bom.md`,
+    `${sha256(bodyBytes(manifestText))}  manifest.json`,
+  ].sort().join("\n") + "\n";
+
+  const result = await verifyRemoteOkf(
+    { origin: "https://agentfriendlyweb.dev", release: "v0.2", dryRun: false },
+    {
+      fetchLimitedPublicUrl: async (url) => {
+        const path = new URL(url).pathname.split("/okf/v0.2/")[1];
+        if (path === "manifest.json") {
+          return {
+            status: 200,
+            contentType: "application/json",
+            body: manifestText,
+            bodyBytes: bodyBytes(manifestText),
+          };
+        }
+        if (path === "CHECKSUMS.sha256") {
+          return {
+            status: 200,
+            contentType: "text/plain",
+            body: checksums,
+            bodyBytes: bodyBytes(checksums),
+          };
+        }
+        return {
+          status: 200,
+          contentType: "text/markdown",
+          body: new TextDecoder().decode(transferred),
+          bodyBytes: transferred,
+        };
+      },
+    },
+  );
+
+  assert.equal(result.valid, true);
+  assert.equal(result.files_verified, 1);
 });
 
 test("OKF verifier rejects traversal and inventories above 100 files", async () => {
@@ -123,8 +191,9 @@ test("OKF verifier detects tampered content and undeclared checksum entries", as
       {
         fetchLimitedPublicUrl: async (url) => {
           const response = await fetcher(url);
+          const tampered = `${response.body}tampered`;
           return url.toString().endsWith("index.md")
-            ? { ...response, body: `${response.body}tampered` }
+            ? { ...response, body: tampered, bodyBytes: bodyBytes(tampered) }
             : response;
         },
       },
@@ -163,4 +232,3 @@ test("CLI dispatcher wraps OKF dry-run as a planned envelope", async () => {
   assert.equal(response.dry_run, true);
   assert.equal(response.result.executed_requests, 0);
 });
-

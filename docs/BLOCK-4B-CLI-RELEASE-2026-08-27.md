@@ -33,7 +33,7 @@ La CLI:
 
 ## Gate tecnico local
 
-- Suite completa: 130 pruebas aprobadas.
+- Suite completa: 131 pruebas aprobadas.
 - Lint: aprobado sin errores.
 - Build: aprobado, incluida la ruta `/cli` y los artefactos publicos.
 - Dependencias de produccion: `npm audit --omit=dev` informo 0 vulnerabilidades.
@@ -42,6 +42,8 @@ La CLI:
 - Registry Tokenizart: perfil publico v1 valido bajo `agentfriendly.public-profile.v1`.
 - OKF v0.2: 13 archivos recuperados y 14 checksums verificados.
 - Navegador: `/cli` revisado en 1440 x 900 y 390 x 844, sin overflow horizontal, solapamientos ni errores de consola de la aplicacion; menu movil operativo.
+
+La revision independiente previa al PR detecto dos validaciones insuficientes. Se corrigieron antes de integrar: el contrato Registry ahora se comprueba antes de normalizar el perfil y OKF calcula SHA-256 sobre los bytes transferidos, no sobre texto decodificado. Ambas correcciones tienen pruebas de regresion.
 
 ## Uso reproducible
 

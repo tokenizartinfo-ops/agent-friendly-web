@@ -5,6 +5,7 @@ import { EXIT_CODES } from "../lib/cli-contract.mjs";
 import { executeCliCommand } from "../lib/cli-commands.mjs";
 
 const publishedProfile = {
+  contract: "agentfriendly.public-profile.v1",
   slug: "tokenizart",
   version: 1,
   publishedAt: "2026-08-27T14:00:00.000Z",
@@ -160,5 +161,27 @@ test("registry get classifies malformed JSON and contracts as integrity failures
     ),
     (error) => error.exitCode === EXIT_CODES.INTEGRITY && error.code === "invalid_registry_profile",
   );
-});
 
+  await assert.rejects(
+    executeCliCommand(
+      {
+        command: "registry-get",
+        slug: "wrong-contract",
+        origin: "https://agentfriendlyweb.dev",
+        dryRun: false,
+      },
+      {
+        fetchLimitedPublicUrl: async () => ({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            ...publishedProfile,
+            contract: "agentfriendly.public-profile.v999",
+          }),
+          bytes: 100,
+        }),
+      },
+    ),
+    (error) => error.exitCode === EXIT_CODES.INTEGRITY && error.code === "invalid_registry_profile",
+  );
+});
