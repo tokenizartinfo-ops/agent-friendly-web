@@ -2,13 +2,13 @@ import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import test from 'node:test';
 
-test('public guide contract exposes a deterministic ephemeral read-only prototype', async () => {
+test('public guide contract exposes a deployed deterministic ephemeral read-only guide', async () => {
   const path = 'public/.well-known/public-guide-contract.json';
   assert.equal(await stat(path).then(() => true).catch(() => false), true);
   const contract = JSON.parse(await readFile(path, 'utf8'));
 
   assert.equal(contract.contract, 'agent-friendly-web.public-guide.v1');
-  assert.equal(contract.status, 'prototype');
+  assert.equal(contract.status, 'deployed');
   assert.equal(contract.mode, 'deterministic_client_side');
   assert.equal(contract.persistence, 'none');
   assert.equal(contract.external_model, false);

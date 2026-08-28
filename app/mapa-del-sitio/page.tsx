@@ -67,7 +67,7 @@ const activeCapabilities = [
   ['Contenido sectorial', 'Activo', 'Primera capa ESP/ENG/POR para seis tipos de organizacion.'],
   ['Comparador de evidencia', 'Activo', 'Antes/despues local, no persistente y sin promesas de ranking.'],
   ['Asistente de intake', 'Prototipo', 'Ordena texto libre y requiere seleccion humana antes de copiar.'],
-  ['Guia publica', 'Prototipo', 'Orienta con continuidad inmediata y fuentes, sin persistencia ni acciones.'],
+  ['Guia publica', 'Desplegada', 'Orienta con continuidad inmediata y fuentes, sin persistencia ni acciones.'],
   ['Bundle OKF publico', 'Activo', 'Once conceptos read-only con procedencia, version, manifiesto y checksums.'],
   ['CLI read-only', 'Desplegada', 'Auditoria, Registry y OKF con JSON estable, sin credenciales ni escrituras.'],
 ];
