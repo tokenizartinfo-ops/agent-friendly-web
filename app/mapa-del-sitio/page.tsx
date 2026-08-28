@@ -78,10 +78,10 @@ const activeCapabilities = [
   ['Bundle OKF publico', 'Activo', 'Once conceptos read-only con procedencia, version, manifiesto y checksums.'],
   ['CLI read-only', 'Desplegada', 'Auditoria, Registry y OKF con JSON estable, sin credenciales ni escrituras.'],
   ['MCP public read-only', 'Desplegado', 'Cuatro tools y cuatro resources publicos, sin OAuth, memoria ni escrituras.'],
+  ['Capsula manual', 'Desplegada', 'Prepara archivos y hashes para entrega manual con aprobaciones separadas; no publica ni modifica el sitio.'],
 ];
 
 const roadmap = [
-  ['Capsula manual', 'candidate', 'Candidata privada para descargar archivos y hashes con aprobaciones separadas; no publica ni modifica el sitio.'],
   ['Markdown negociado', 'planned', 'La respuesta text/markdown todavia no esta activa en el origen.'],
   ['Voz, correo y guardado asistido', 'planned', 'Permanecen fuera del prototipo hasta contratos, consentimiento y auditoria.'],
   ['Plugins y conectores', 'planned', 'Cada plataforma requiere un adaptador oficial y una capacidad verificable.'],

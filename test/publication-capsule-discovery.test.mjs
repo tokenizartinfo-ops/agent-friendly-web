@@ -4,7 +4,7 @@ import test from 'node:test';
 
 const read = (path) => readFile(path, 'utf8');
 
-test('public discovery documents the publication capsule as a candidate without remote apply', async () => {
+test('public discovery documents the deployed manual capsule without remote apply', async () => {
   const [siteMap, readinessText, catalogText, llms, llmsFull] = await Promise.all([
     read('app/mapa-del-sitio/page.tsx'),
     read('public/.well-known/agent-readiness.json'),
@@ -17,7 +17,7 @@ test('public discovery documents the publication capsule as a candidate without 
   const catalog = JSON.parse(catalogText);
   const catalogUrls = catalog.resources.map((resource) => resource.url);
 
-  assert.equal(readiness.capabilities.publication_capsule.status, 'candidate');
+  assert.equal(readiness.capabilities.publication_capsule.status, 'deployed');
   assert.equal(readiness.capabilities.publication_capsule.mode, 'manual_handoff');
   assert.equal(readiness.capabilities.publication_capsule.remote_apply, false);
   assert.equal(readiness.capabilities.a2a.status, 'planned');
@@ -33,7 +33,7 @@ test('public discovery documents the publication capsule as a candidate without 
   }
 
   assert.match(siteMap, /Capsula manual/u);
-  assert.match(siteMap, /Candidata/u);
+  assert.match(siteMap, /Desplegada/u);
   assert.match(llms, /does not modify the target website/u);
   assert.match(llmsFull, /no aplica cambios remotos/u);
 });

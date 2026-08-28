@@ -1,6 +1,6 @@
 # Capsula A2A de implementacion
 
-**Estado:** arquitectura aprobada; Block 5A manual implementado como candidato local
+**Estado:** arquitectura aprobada; Block 5A manual desplegado sin escritura sobre sitios
 
 **Fecha:** 2026-08-28
 
@@ -46,8 +46,8 @@ flowchart LR
 
 1. **Cumplido localmente:** generacion determinista y validacion de hashes.
 2. **Cumplido localmente:** revision humana, descarga JSON y cero escritura remota.
-3. **Cumplido localmente, no desplegado:** decisiones owner/mantenedor ligadas al hash, idempotencia, expiracion y auditoria metadata-only.
-4. **Cumplido en D1 local aislada:** migraciones aditivas y prueba autenticada sintetica con owner y mantenedor separados. No se utilizo D1 remota.
+3. **Cumplido y desplegado:** decisiones owner/mantenedor ligadas al hash, idempotencia, expiracion y auditoria metadata-only.
+4. **Cumplido en D1 local y remota:** migraciones aditivas; la D1 remota creo solo las dos tablas previstas y quedo vacia tras el release.
 5. **Pendiente:** diff contra el archivo vigente y adaptador de Draft PR sin merge.
 6. **Pendiente:** adaptador CMS en entorno de prueba con backup y rollback.
 7. **Pendiente y sujeto a aprobacion separada:** primera escritura canary sobre una ruta no critica.
@@ -63,4 +63,4 @@ No existe todavia firma criptografica externa, ZIP ejecutable, lectura del archi
 
 No se publica Agent Card ni tool mutante hasta que exista un agente remoto real, identidad, scopes, auditoria y cancelacion verificadas.
 
-La evidencia del gate local vive en `docs/BLOCK-5A-LOCAL-D1-GATE-2026-08-28.md`. El release remoto de esta superficie necesita una decision separada y no habilita por si mismo Draft PR, CMS, A2A ni escrituras sobre dominios registrados.
+La evidencia local vive en `docs/BLOCK-5A-LOCAL-D1-GATE-2026-08-28.md` y el recibo remoto en `docs/BLOCK-5A-REMOTE-RELEASE-RECEIPT-2026-08-28.md`. El release no habilita por si mismo Draft PR, CMS, A2A ni escrituras sobre dominios registrados.

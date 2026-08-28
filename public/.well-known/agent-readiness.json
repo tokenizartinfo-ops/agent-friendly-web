@@ -71,14 +71,14 @@
       "note": "Public stateless read-only MCP on a dedicated Cloudflare Worker. No OAuth, private data, persistence or write actions."
     },
     "publication_capsule": {
-      "status": "candidate",
+      "status": "deployed",
       "mode": "manual_handoff",
       "remote_apply": false,
       "resources": [
         "/schemas/publication-capsule.v1.json",
         "/schemas/capsule-decision.v1.json"
       ],
-      "note": "Private owner workflow implemented as a release candidate. It prepares exact files and SHA-256 hashes, records human decisions and downloads JSON; it does not write to the target website."
+      "note": "Deployed private owner workflow for manual handoff. It prepares exact files and SHA-256 hashes, records human decisions and downloads JSON; it does not write to the target website."
     },
     "a2a": {
       "status": "planned",

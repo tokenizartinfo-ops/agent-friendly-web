@@ -23,8 +23,8 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - [MCP deployed server card](https://agentfriendlyweb.dev/.well-known/mcp/server-card.json)
 - [MCP Streamable HTTP endpoint](https://mcp.agentfriendlyweb.dev/mcp)
 - [MCP result schema v1](https://agentfriendlyweb.dev/schemas/mcp-result.v1.json)
-- [Publication capsule schema v1 - candidate](https://agentfriendlyweb.dev/schemas/publication-capsule.v1.json)
-- [Capsule decision schema v1 - candidate](https://agentfriendlyweb.dev/schemas/capsule-decision.v1.json)
+- [Publication capsule schema v1 - deployed manual handoff](https://agentfriendlyweb.dev/schemas/publication-capsule.v1.json)
+- [Capsule decision schema v1 - deployed manual handoff](https://agentfriendlyweb.dev/schemas/capsule-decision.v1.json)
 - [Methodology](https://agentfriendlyweb.dev/metodologia)
 - [Tokenizart case](https://agentfriendlyweb.dev/casos/tokenizart)
 - [Agentic maturity demonstrator](https://agentfriendlyweb.dev/evolucion-agentica)
@@ -45,5 +45,5 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - WebMCP is treated as an experimental W3C Community Group draft.
 - The private owner dossier requires sign-in and must not be crawled or inferred.
 - The repo-first read-only CLI and the public stateless MCP read-only server are deployed. MCP exposes only four bounded public tools and four public resources; A2A, WebMCP and x402 are not production capabilities.
-- The publication capsule is a private release candidate for manual handoff. It prepares files, hashes and human approvals, but it does not modify the target website, call a CMS or deploy code.
+- The publication capsule is a deployed private workflow for manual handoff. It prepares files, hashes and human approvals, but it does not modify the target website, call a CMS or deploy code.
 - The AI Catalog links the OKF bundle as an Agent Friendly Web project convention; OKF v0.2 does not define a universal discovery endpoint.
