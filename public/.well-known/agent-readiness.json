@@ -63,7 +63,7 @@
       "note": "No A2A Agent Card or A2A service is advertised by this release."
     },
     "cli": {
-      "status": "release-candidate",
+      "status": "deployed",
       "resources": [
         "/cli",
         "/cli/index.md",

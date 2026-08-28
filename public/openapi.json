@@ -7,7 +7,7 @@
   },
   "servers": [{ "url": "https://agentfriendlyweb.dev" }],
   "x-agent-friendly-web-cli": {
-    "status": "release-candidate",
+    "status": "deployed",
     "access": "public-read-only",
     "manifest": "https://agentfriendlyweb.dev/.well-known/agent-friendly-cli.json",
     "schema": "https://agentfriendlyweb.dev/schemas/cli-response.v1.json",

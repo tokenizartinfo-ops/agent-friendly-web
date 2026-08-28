@@ -4,7 +4,10 @@
 **Origen:** `https://agentfriendlyweb.dev`
 **Rama candidata:** `feat/cli-readonly-v1`
 **Commit funcional base:** `0d2b7964cd18d54cf228be97f26f8ba01a9fc9e6`
-**Estado:** codigo completo y release candidate; produccion pendiente de verificacion
+**PR:** `#10`
+**Merge SHA:** `004a560ffed94f4a0f6b5e127382d0afeb2866e9`
+**Sites verificado:** `17`
+**Estado:** produccion verificada; promocion del ledger a `deployed`
 
 ## Necesidad
 
@@ -70,7 +73,7 @@ Para `--dry-run` se recomienda ejecutar `node bin/afw.mjs` directamente. Algunos
 
 ## Publicacion y rollback
 
-El candidato se publicara solo desde el commit mergeado y verificado por CI. Tras el despliegue se repetiran los cuatro recorridos contra produccion y la revision visual. Solo entonces el manifiesto, el readiness ledger, la pagina y este recibo pueden cambiar de `release-candidate` a `deployed`.
+El candidato se publico desde el commit mergeado y verificado por CI. Sites 17 respondio correctamente en el dominio propio y se repitieron los recorridos `capabilities`, `audit`, `registry get` y `okf verify` contra produccion. El manifiesto, el readiness ledger y la pagina pasan por ello de `release-candidate` a `deployed`.
 
 Si falla contrato, seguridad, navegacion, integridad o build remoto, se vuelve a Sites 16. No existen migraciones D1, secretos, pagos ni datos que revertir.
 

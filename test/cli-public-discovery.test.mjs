@@ -4,7 +4,7 @@ import { readFile, stat } from "node:fs/promises";
 
 const canonical = "https://agentfriendlyweb.dev";
 
-test("CLI manifest and schema describe the release candidate without write access", async () => {
+test("CLI manifest and schema describe the deployed read-only release", async () => {
   const manifest = JSON.parse(
     await readFile("public/.well-known/agent-friendly-cli.json", "utf8"),
   );
@@ -12,7 +12,7 @@ test("CLI manifest and schema describe the release candidate without write acces
 
   assert.equal(manifest.contract, "agent-friendly-web.cli-manifest.v1");
   assert.equal(manifest.version, "0.1.0");
-  assert.equal(manifest.status, "release-candidate");
+  assert.equal(manifest.status, "deployed");
   assert.equal(manifest.access, "public-read-only");
   assert.deepEqual(manifest.http_methods, ["GET"]);
   assert.equal(manifest.local_writes, false);
@@ -41,10 +41,10 @@ test("public discovery surfaces link the CLI without claiming MCP or writes", as
   assert.doesNotMatch(guide, /MCP disponible en produccion/i);
   assert.match(sitemap, /\/cli/);
   assert.match(page, /<SiteFooter\s*\/>/);
-  assert.match(page, /Release candidate/i);
+  assert.match(page, /Desplegada/i);
 });
 
-test("catalogs and readiness list CLI resources with release-candidate status", async () => {
+test("catalogs and readiness list CLI resources with deployed status", async () => {
   const aiCatalog = JSON.parse(await readFile("public/.well-known/ai-catalog.json", "utf8"));
   const urls = aiCatalog.resources.map((resource) => resource.url);
   for (const url of [
@@ -59,7 +59,7 @@ test("catalogs and readiness list CLI resources with release-candidate status", 
   const readiness = JSON.parse(
     await readFile("public/.well-known/agent-readiness.json", "utf8"),
   );
-  assert.equal(readiness.capabilities.cli.status, "release-candidate");
+  assert.equal(readiness.capabilities.cli.status, "deployed");
   assert.ok(readiness.capabilities.cli.resources.includes("/.well-known/agent-friendly-cli.json"));
   assert.match(readiness.capabilities.cli.note, /read-only/i);
   assert.match(readiness.capabilities.mcp.note, /No MCP endpoint/i);

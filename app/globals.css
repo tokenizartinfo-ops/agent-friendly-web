@@ -1194,7 +1194,7 @@ footer p { margin: 0; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
 
-/* CLI read-only release candidate */
+/* CLI read-only */
 .cli-hero {
   min-height: 560px;
   display: grid;
