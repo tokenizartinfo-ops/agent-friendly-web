@@ -5,6 +5,7 @@ import {
   Bot, Check, CircleHelp, Clipboard, Cloud, FileStack, Globe2, Languages,
   LoaderCircle, Radar, RefreshCw, Save, Settings2, ShieldAlert, Target, UserRound, UsersRound,
 } from 'lucide-react';
+import { CapsuleReview } from './capsule-review';
 
 type Intake = {
   organization: string; website: string; role: string; siteType: string; control: string;
@@ -420,6 +421,8 @@ export function IntakeWorkspace({ userName, userEmail }: { userName: string; use
           </button>
           <div className="verification-message" aria-live="polite"><CircleHelp size={17} /><span>{observationMessage}</span></div>
         </section>
+
+        <CapsuleReview projectId={projectId} expectedDomain={hostname} allowBuild />
       </main>
 
       <aside className="intake-aside">

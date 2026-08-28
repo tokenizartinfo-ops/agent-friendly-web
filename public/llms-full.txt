@@ -42,6 +42,12 @@ The deployed service documented at `https://agentfriendlyweb.dev/mcp-readonly` e
 
 The service uses no OAuth because it exposes public data only. It has no A2A delegation, no WebMCP browser tools, no private expedients, no owner data, no website mutations and no payment actions. Modern MCP 2026-07-28 and stateless 2025 compatibility were verified with remote clients against the exact production Worker version before promotion.
 
+## Publication capsule candidate
+
+Block 5A adds a private manual-handoff candidate. It creates one immutable package with exact files, allowlisted destination paths, contents, SHA-256 hashes, expiration and human decisions bound to the manifest. Its public contracts are `https://agentfriendlyweb.dev/schemas/publication-capsule.v1.json` and `https://agentfriendlyweb.dev/schemas/capsule-decision.v1.json`.
+
+This candidate no aplica cambios remotos: it does not access a CMS, open a Draft PR, use credentials, deploy code or advertise an A2A service. Real adapters, current-file textual diffs, operational rollback and any website write remain behind later gates.
+
 ## Standards status
 
 - robots.txt, sitemaps, Schema.org/JSON-LD and OpenAPI are treated as stable foundations.

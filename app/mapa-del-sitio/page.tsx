@@ -60,6 +60,8 @@ const machineResources = [
   { name: 'MCP server card', detail: 'Contrato desplegado, endpoint, tools, resources y limites.', href: '/.well-known/mcp/server-card.json', icon: Braces },
   { name: 'MCP endpoint', detail: 'Streamable HTTP publico y read-only en Cloudflare.', href: 'https://mcp.agentfriendlyweb.dev/mcp', icon: Network },
   { name: 'MCP result schema', detail: 'Envelope JSON estable de las cuatro tools read-only.', href: '/schemas/mcp-result.v1.json', icon: FileCode2 },
+  { name: 'Publication capsule schema', detail: 'Contrato candidato para paquetes manuales, acotados y verificables.', href: '/schemas/publication-capsule.v1.json', icon: FileCode2 },
+  { name: 'Capsule decision schema', detail: 'Contrato candidato para aprobaciones humanas ligadas al hash del manifiesto.', href: '/schemas/capsule-decision.v1.json', icon: ShieldCheck },
 ];
 
 const activeCapabilities = [
@@ -79,6 +81,7 @@ const activeCapabilities = [
 ];
 
 const roadmap = [
+  ['Capsula manual', 'candidate', 'Candidata privada para descargar archivos y hashes con aprobaciones separadas; no publica ni modifica el sitio.'],
   ['Markdown negociado', 'planned', 'La respuesta text/markdown todavia no esta activa en el origen.'],
   ['Voz, correo y guardado asistido', 'planned', 'Permanecen fuera del prototipo hasta contratos, consentimiento y auditoria.'],
   ['Plugins y conectores', 'planned', 'Cada plataforma requiere un adaptador oficial y una capacidad verificable.'],

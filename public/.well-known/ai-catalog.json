@@ -146,6 +146,20 @@
       "type": "application/schema+json",
       "url": "https://agentfriendlyweb.dev/schemas/mcp-result.v1.json",
       "status": "deployed"
+    },
+    {
+      "name": "Publication capsule schema v1",
+      "type": "application/schema+json",
+      "url": "https://agentfriendlyweb.dev/schemas/publication-capsule.v1.json",
+      "status": "candidate",
+      "note": "Manual handoff only; no remote apply."
+    },
+    {
+      "name": "Capsule decision schema v1",
+      "type": "application/schema+json",
+      "url": "https://agentfriendlyweb.dev/schemas/capsule-decision.v1.json",
+      "status": "candidate",
+      "note": "Human decisions are bound to a manifest hash; the candidate does not modify websites."
     }
   ]
 }
