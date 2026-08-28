@@ -60,6 +60,8 @@ const machineResources = [
   { name: 'MCP server card', detail: 'Contrato desplegado, endpoint, tools, resources y limites.', href: '/.well-known/mcp/server-card.json', icon: Braces },
   { name: 'MCP endpoint', detail: 'Streamable HTTP publico y read-only en Cloudflare.', href: 'https://mcp.agentfriendlyweb.dev/mcp', icon: Network },
   { name: 'MCP result schema', detail: 'Envelope JSON estable de las cuatro tools read-only.', href: '/schemas/mcp-result.v1.json', icon: FileCode2 },
+  { name: 'Publication capsule schema', detail: 'Contrato candidato para paquetes manuales, acotados y verificables.', href: '/schemas/publication-capsule.v1.json', icon: FileCode2 },
+  { name: 'Capsule decision schema', detail: 'Contrato candidato para aprobaciones humanas ligadas al hash del manifiesto.', href: '/schemas/capsule-decision.v1.json', icon: ShieldCheck },
 ];
 
 const activeCapabilities = [
@@ -76,6 +78,7 @@ const activeCapabilities = [
   ['Bundle OKF publico', 'Activo', 'Once conceptos read-only con procedencia, version, manifiesto y checksums.'],
   ['CLI read-only', 'Desplegada', 'Auditoria, Registry y OKF con JSON estable, sin credenciales ni escrituras.'],
   ['MCP public read-only', 'Desplegado', 'Cuatro tools y cuatro resources publicos, sin OAuth, memoria ni escrituras.'],
+  ['Capsula manual', 'Desplegada', 'Prepara archivos y hashes para entrega manual con aprobaciones separadas; no publica ni modifica el sitio.'],
 ];
 
 const roadmap = [

@@ -70,6 +70,16 @@
       ],
       "note": "Public stateless read-only MCP on a dedicated Cloudflare Worker. No OAuth, private data, persistence or write actions."
     },
+    "publication_capsule": {
+      "status": "deployed",
+      "mode": "manual_handoff",
+      "remote_apply": false,
+      "resources": [
+        "/schemas/publication-capsule.v1.json",
+        "/schemas/capsule-decision.v1.json"
+      ],
+      "note": "Deployed private owner workflow for manual handoff. It prepares exact files and SHA-256 hashes, records human decisions and downloads JSON; it does not write to the target website."
+    },
     "a2a": {
       "status": "planned",
       "note": "No A2A Agent Card or A2A service is advertised by this release."

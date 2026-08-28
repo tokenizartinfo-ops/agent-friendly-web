@@ -158,3 +158,52 @@ export const scanObservations = sqliteTable(
     index('scan_observations_user_checked_idx').on(table.userId, table.checkedAt),
   ],
 );
+
+export const publicationCapsules = sqliteTable(
+  'publication_capsules',
+  {
+    id: text('id').primaryKey(),
+    siteId: text('site_id').notNull(),
+    projectId: text('project_id').notNull(),
+    userId: text('user_id').notNull(),
+    version: integer('version').notNull(),
+    contractVersion: text('contract_version').notNull(),
+    mode: text('mode').notNull().default('manual_handoff'),
+    manifestSha256: text('manifest_sha256').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    capsuleJson: text('capsule_json').notNull(),
+    status: text('status').notNull().default('owner_approval_pending'),
+    ownerApprovalStatus: text('owner_approval_status').notNull().default('pending'),
+    maintainerApprovalStatus: text('maintainer_approval_status').notNull().default('not_required'),
+    expiresAt: text('expires_at').notNull(),
+    createdAt: text('created_at').notNull(),
+    updatedAt: text('updated_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('publication_capsules_site_version_unique').on(table.siteId, table.version),
+    uniqueIndex('publication_capsules_idempotency_unique').on(table.idempotencyKey),
+    index('publication_capsules_project_created_idx').on(table.projectId, table.createdAt),
+    index('publication_capsules_user_created_idx').on(table.userId, table.createdAt),
+  ],
+);
+
+export const capsuleApprovals = sqliteTable(
+  'capsule_approvals',
+  {
+    id: text('id').primaryKey(),
+    capsuleId: text('capsule_id').notNull(),
+    projectId: text('project_id').notNull(),
+    role: text('role').notNull(),
+    actorUserId: text('actor_user_id').notNull(),
+    decision: text('decision').notNull(),
+    manifestSha256: text('manifest_sha256').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    note: text('note').notNull().default(''),
+    createdAt: text('created_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('capsule_approvals_capsule_role_unique').on(table.capsuleId, table.role),
+    uniqueIndex('capsule_approvals_idempotency_unique').on(table.idempotencyKey),
+    index('capsule_approvals_project_created_idx').on(table.projectId, table.createdAt),
+  ],
+);

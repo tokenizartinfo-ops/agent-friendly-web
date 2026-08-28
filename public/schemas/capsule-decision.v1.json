@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentfriendlyweb.dev/schemas/capsule-decision.v1.json",
+  "title": "Agent Friendly Web Capsule Decision v1",
+  "description": "Human approval or rejection bound to one exact capsule manifest. The server derives the actor role.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "decision", "manifestSha256", "idempotencyKey"],
+  "properties": {
+    "contract": { "const": "agentfriendly.capsule-decision.v1" },
+    "decision": { "enum": ["approved", "rejected"] },
+    "manifestSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "idempotencyKey": { "type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]{7,119}$" },
+    "note": { "type": "string", "maxLength": 500 }
+  }
+}
