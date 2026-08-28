@@ -23,5 +23,6 @@ test("public MCP route is POST-only and enforces bounded JSON input", async () =
   assert.match(serverSource, /\.chatgpt\.site/);
   assert.match(serverSource, /\.workers\.dev/);
   assert.match(serverSource, /createPublicMcpServer/);
-  assert.match(source, /getPublishedProfile/);
+  assert.match(source, /getPublicProfileForMcp/);
+  assert.doesNotMatch(source, /from ['"]\.\.\/\.\.\/lib\/registry-store['"]/);
 });
