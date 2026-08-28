@@ -45,6 +45,16 @@
       "url": "https://agentfriendlyweb.dev/asistente"
     },
     {
+      "name": "Public deterministic guide",
+      "type": "text/html",
+      "url": "https://agentfriendlyweb.dev/guia"
+    },
+    {
+      "name": "Public guide contract",
+      "type": "application/json",
+      "url": "https://agentfriendlyweb.dev/.well-known/public-guide-contract.json"
+    },
+    {
       "name": "Open knowledge",
       "type": "text/html",
       "url": "https://agentfriendlyweb.dev/conocimiento-abierto"

@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/pt/setores`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${base}/medir-mejora`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/asistente`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${base}/guia`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${base}/conocimiento-abierto`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/metodologia`, lastModified: new Date('2026-08-26'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/evolucion-agentica`, lastModified: new Date('2026-08-26'), changeFrequency: 'monthly', priority: 0.8 },

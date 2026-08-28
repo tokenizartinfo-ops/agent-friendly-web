@@ -36,6 +36,11 @@
       "resources": ["/asistente", "/.well-known/intake-assistant-contract.json"],
       "note": "Deterministic and client-side. No autonomous save, email, voice, payment or website mutation."
     },
+    "public_guide": {
+      "status": "prototype",
+      "resources": ["/guia", "/.well-known/public-guide-contract.json"],
+      "note": "Deterministic public guidance with cited sources and immediate continuity; sin persistencia, private context or actions."
+    },
     "open_knowledge_okf": {
       "status": "deployed",
       "resources": [

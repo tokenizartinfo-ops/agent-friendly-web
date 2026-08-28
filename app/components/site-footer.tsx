@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 const productLinks = [
   ['Auditar un sitio', '/#auditar'],
+  ['Guia publica', '/guia'],
   ['AEO y crawlers', '/aeo-y-crawlers'],
   ['Soluciones por sector', '/sectores'],
   ['Medir mejora', '/medir-mejora'],
@@ -23,6 +24,7 @@ const agentLinks = [
   ['Crawler Catalog', '/.well-known/crawler-policy-catalog.json'],
   ['Comparison contract', '/.well-known/readiness-comparison-contract.json'],
   ['Assistant contract', '/.well-known/intake-assistant-contract.json'],
+  ['Public guide contract', '/.well-known/public-guide-contract.json'],
   ['OKF v0.2', '/okf/v0.2/index.md'],
   ['CLI manifest', '/.well-known/agent-friendly-cli.json'],
   ['CLI schema', '/schemas/cli-response.v1.json'],
