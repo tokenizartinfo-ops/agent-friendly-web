@@ -1,7 +1,7 @@
 # Block 4C - Release MCP publico read-only v1
 
 Fecha: 2026-08-28  
-Estado: promocion documentada; redespliegue final desde el merge exacto pendiente de registrar
+Estado: desplegado, verificado y documentado
 
 ## Capacidad promovida
 
@@ -17,9 +17,13 @@ La superficie contiene exactamente cuatro tools y cuatro resources versionados. 
 - PR funcional del Worker: `https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/19`.
 - Version Worker staging: `a0a5c545-ca20-47ff-ba1b-22112716a140`.
 - Version Worker productiva candidata verificada: `76de5417-90b5-4a5c-8fa5-87414610afb6`.
+- PR de promocion: `https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/20`.
+- Commit exacto de promocion en `main`: `e254af4c0d4df37aa3250593088e1698c4678f64`.
+- Version Worker productiva final: `2cf7772f-f2d0-4351-b59e-2c366e34a379`.
+- Site publico: version 24, creada desde el mismo commit de promocion.
+- ID de version Sites: `appgprj_6a8f19e35d688191a53e93432543e39c~appgver_d07a32b0d208819184432d45f9662213`.
+- ID de deployment Sites: `appgdep_6a9186a2d94481918cbb5b6da503668c`.
 - Fallback verificado: `https://agent-friendly-web-public-mcp.tokenizart-info.workers.dev/mcp`.
-
-El commit de promocion, la version final del Worker y la version final del Site se agregan despues de sus respectivos merges y despliegues exactos.
 
 ## Pruebas cerradas antes de promocionar
 
@@ -32,6 +36,8 @@ El commit de promocion, la version final del Worker y la version final del Site 
 - Cliente completo aprobado tanto en el dominio canonico como en `workers.dev`.
 - `168/168` pruebas, lint, build y dry-run aprobados antes del despliegue candidato.
 - `npm audit --omit=dev`: cero vulnerabilidades conocidas en el arbol productivo.
+- Auditoria publica posterior al despliegue: MCP detectado, nivel `AF-4 delegable` y puntaje `78/100`.
+- QA visual posterior al despliegue: escritorio `1440x1100` y movil `390x844`, sin overflow horizontal ni errores de consola.
 
 ## Separacion de superficies
 
