@@ -3,7 +3,7 @@
   "convention": "Agent Friendly Web project manifest; not an official standard",
   "name": "Agent Friendly Web CLI",
   "version": "0.1.0",
-  "status": "release-candidate",
+  "status": "deployed",
   "runtime": "Node.js >=22.13.0",
   "access": "public-read-only",
   "authentication": "none",

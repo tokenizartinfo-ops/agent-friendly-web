@@ -36,5 +36,5 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - `llms.txt` is a community proposal, not a mandatory crawler standard.
 - WebMCP is treated as an experimental W3C Community Group draft.
 - The private owner dossier requires sign-in and must not be crawled or inferred.
-- The CLI is a repo-first read-only release candidate; MCP, A2A, WebMCP and x402 are not production capabilities unless the readiness manifest marks them as `deployed` and links a verifiable endpoint.
+- The repo-first read-only CLI is deployed and documented at `https://agentfriendlyweb.dev/cli`; MCP, A2A, WebMCP and x402 are not production capabilities unless the readiness manifest marks them as `deployed` and links a verifiable endpoint.
 - The AI Catalog links the OKF bundle as an Agent Friendly Web project convention; OKF v0.2 does not define a universal discovery endpoint.

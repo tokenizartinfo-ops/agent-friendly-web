@@ -52,7 +52,7 @@ const machineResources = [
   { name: 'OKF checksums', detail: 'Hashes SHA-256 para comprobar integridad de los archivos.', href: '/okf/v0.2/CHECKSUMS.sha256', icon: ShieldCheck },
   { name: 'CLI manifest', detail: 'Comandos, version, limites y fronteras read-only.', href: '/.well-known/agent-friendly-cli.json', icon: Braces },
   { name: 'CLI response schema', detail: 'Contrato JSON estable para resultados y errores.', href: '/schemas/cli-response.v1.json', icon: FileCode2 },
-  { name: 'CLI guide', detail: 'Guia Markdown para ejecutar el release candidate desde el repositorio.', href: '/cli/index.md', icon: FileText },
+  { name: 'CLI guide', detail: 'Guia Markdown para ejecutar la CLI desplegada desde el repositorio.', href: '/cli/index.md', icon: FileText },
 ];
 
 const activeCapabilities = [
@@ -66,7 +66,7 @@ const activeCapabilities = [
   ['Comparador de evidencia', 'Activo', 'Antes/despues local, no persistente y sin promesas de ranking.'],
   ['Asistente de intake', 'Prototipo', 'Ordena texto libre y requiere seleccion humana antes de copiar.'],
   ['Bundle OKF publico', 'Activo', 'Once conceptos read-only con procedencia, version, manifiesto y checksums.'],
-  ['CLI read-only', 'Release candidate', 'Auditoria, Registry y OKF con JSON estable, sin credenciales ni escrituras.'],
+  ['CLI read-only', 'Desplegada', 'Auditoria, Registry y OKF con JSON estable, sin credenciales ni escrituras.'],
 ];
 
 const roadmap = [

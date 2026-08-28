@@ -1,6 +1,6 @@
 # Agent Friendly Web CLI read-only v1
 
-La CLI oficial permite consultar desde una terminal las mismas superficies públicas que Agent Friendly Web publica para humanos y agentes. Esta primera versión es **repo-first**, requiere Node.js 22.13 o superior y permanece en estado **release candidate** hasta cerrar la verificación del despliegue.
+La CLI oficial permite consultar desde una terminal las mismas superficies públicas que Agent Friendly Web publica para humanos y agentes. Esta primera versión **repo-first** fue desplegada y verificada contra producción el 2026-08-27; requiere Node.js 22.13 o superior.
 
 ## Qué hace
 

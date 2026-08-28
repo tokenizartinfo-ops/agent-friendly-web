@@ -52,7 +52,7 @@ export default function CliPage() {
 
       <section className="cli-hero">
         <div className="cli-hero-copy">
-          <span><SquareTerminal size={17} /> Release candidate 0.1.0</span>
+          <span><SquareTerminal size={17} /> Desplegada 0.1.0</span>
           <h1>La auditoría pública también puede recorrerse desde una terminal.</h1>
           <p>La CLI oficial convierte auditoría, Registry y OKF en respuestas JSON previsibles para personas, scripts y agentes. Es repo-first, estrictamente read-only y no reemplaza a MCP.</p>
           <div className="cli-hero-actions">
