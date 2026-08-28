@@ -3,7 +3,7 @@
 **Fecha:** 2026-08-28  
 **Bloque:** 4C  
 **Estado:** aprobado para implementacion por la continuidad expresa del roadmap  
-**Origen canonico previsto:** `https://agentfriendlyweb.dev/mcp`
+**Origen canonico desplegado:** `https://mcp.agentfriendlyweb.dev/mcp`
 
 ## Objetivo
 

@@ -60,15 +60,15 @@
       "resources": ["/.well-known/agent-skills/index.json", "/skills/agent-friendly-web-audit/SKILL.md"]
     },
     "mcp": {
-      "status": "release_candidate",
+      "status": "deployed",
       "resources": [
         "/mcp-readonly",
-        "/mcp",
+        "https://mcp.agentfriendlyweb.dev/mcp",
         "/.well-known/mcp/server-card.json",
         "/.well-known/mcp.json",
         "/schemas/mcp-result.v1.json"
       ],
-      "note": "Public stateless read-only candidate. It does not count as deployed evidence until remote client verification closes."
+      "note": "Public stateless read-only MCP on a dedicated Cloudflare Worker. No OAuth, private data, persistence or write actions."
     },
     "a2a": {
       "status": "planned",

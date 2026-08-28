@@ -62,8 +62,8 @@ test("catalogs and readiness list CLI resources with deployed status", async () 
   assert.equal(readiness.capabilities.cli.status, "deployed");
   assert.ok(readiness.capabilities.cli.resources.includes("/.well-known/agent-friendly-cli.json"));
   assert.match(readiness.capabilities.cli.note, /read-only/i);
-  assert.equal(readiness.capabilities.mcp.status, "release_candidate");
-  assert.match(readiness.capabilities.mcp.note, /does not count as deployed/i);
+  assert.equal(readiness.capabilities.mcp.status, "deployed");
+  assert.match(readiness.capabilities.mcp.note, /public.*read-only/i);
 });
 
 test("human navigation and machine catalog expose real CLI destinations", async () => {

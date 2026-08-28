@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "convention": "Agent Friendly Web project MCP discovery alias; not a universal MCP discovery standard",
-  "status": "release_candidate",
+  "status": "deployed",
   "name": "Agent Friendly Web Public MCP Read-Only",
   "description": "Public stateless MCP server for bounded Agent Friendly Web audit, methodology, Registry and OKF queries.",
   "publisher": {
@@ -9,7 +9,7 @@
     "creator": "Gabriel Mucchiut"
   },
   "endpoint": {
-    "url": "https://agentfriendlyweb.dev/mcp",
+    "url": "https://mcp.agentfriendlyweb.dev/mcp",
     "transport": "streamable-http",
     "method": "POST",
     "content_type": "application/json",
@@ -54,7 +54,7 @@
   "canonical_card": "https://agentfriendlyweb.dev/.well-known/mcp/server-card.json",
   "source_repository": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
   "limits": [
-    "Release candidate until a production client verification closes the deployment gate.",
+    "Deployed after remote client verification of the exact Cloudflare Worker version.",
     "Public evidence does not prove indexing, ranking or recommendation by a model provider.",
     "No application sessions, private context, conversation memory or D1 tool-call persistence."
   ],

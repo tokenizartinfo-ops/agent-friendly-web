@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Entregar en `agentfriendlyweb.dev/mcp` un servidor MCP remoto stateless con cuatro tools y cuatro resources estrictamente publicos y read-only.
+**Goal:** Entregar en `mcp.agentfriendlyweb.dev/mcp` un servidor MCP remoto stateless con cuatro tools y cuatro resources estrictamente publicos y read-only.
 
 **Architecture:** Un modulo de dominio ESM puro produce envelopes, valida inputs y adapta auditoria, Registry, metodologia y OKF. Un factory TypeScript registra esas capacidades en el SDK MCP v2; la route Vinext aplica limites HTTP y delega al handler stateless oficial de Cloudflare. El descubrimiento publico se promueve unicamente despues de validar el candidato con un cliente MCP real.
 
@@ -204,7 +204,7 @@ Run tests/lint/build, merge green PR and package exact commit.
 
 - [ ] **Step 4: Deploy production and re-run real-client tests**
 
-Promote the verified version, then call `https://agentfriendlyweb.dev/mcp` with the same client matrix. Re-audit the origin and verify MCP evidence appears without false A2A/WebMCP/payment signals.
+Promote the verified version, then call `https://mcp.agentfriendlyweb.dev/mcp` with the same client matrix. Re-audit the origin and verify MCP evidence appears without false A2A/WebMCP/payment signals.
 
 - [ ] **Step 5: Record rollback and close**
 

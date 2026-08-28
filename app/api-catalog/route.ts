@@ -32,7 +32,7 @@ export async function GET() {
             {
               href: `${origin}/.well-known/mcp/server-card.json`,
               type: 'application/json',
-              title: 'Agent Friendly Web MCP public read-only release candidate',
+              title: 'Agent Friendly Web MCP public read-only deployed service',
             },
             {
               href: `${origin}/schemas/mcp-result.v1.json`,
@@ -42,7 +42,7 @@ export async function GET() {
             {
               href: `${origin}/mcp-readonly`,
               type: 'text/html',
-              title: 'Agent Friendly Web MCP candidate human guide',
+              title: 'Agent Friendly Web MCP deployed human guide',
             },
           ],
         },

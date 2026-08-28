@@ -67,12 +67,12 @@ export default function PublicMcpPage() {
 
       <section className="mcp-hero">
         <div className="mcp-hero-copy">
-          <span><Cable size={17} /> Release candidate v1</span>
+          <span><Cable size={17} /> Desplegado v1</span>
           <h1>Un canal MCP publico para consultar evidencia sin tomar el control.</h1>
           <p>Agentes y asistentes pueden usar la metodologia, el auditor, el Registry y OKF desde una interfaz comun. La superficie es pequena, stateless y estrictamente read-only.</p>
           <div className="mcp-endpoint" aria-label="Endpoint MCP publico">
             <strong>Streamable HTTP</strong>
-            <code>POST /mcp</code>
+            <code>https://mcp.agentfriendlyweb.dev/mcp</code>
             <small>Protocolo preferido: 2026-07-28</small>
           </div>
           <div className="mcp-hero-actions">
@@ -136,9 +136,9 @@ export default function PublicMcpPage() {
 
       <section className="mcp-candidate-note">
         <div>
-          <span>Gate de publicacion</span>
-          <h2>El codigo existe; la etiqueta “deployed” exige una prueba remota reproducible.</h2>
-          <p>Hasta cerrar listados, llamadas, recursos y pruebas negativas contra la version candidata, esta capacidad no suma evidencia desplegada en el readiness.</p>
+          <span>Publicacion verificada</span>
+          <h2>El servidor ya esta desplegado y conserva un contrato estrictamente read-only.</h2>
+          <p>La promocion se cerro despues de verificar negociacion, listados, llamadas, resources y pruebas negativas con clientes remotos sobre la version exacta del Worker.</p>
         </div>
         <a href="/.well-known/agent-readiness.json">Consultar estado actual <ArrowRight size={17} /></a>
       </section>
