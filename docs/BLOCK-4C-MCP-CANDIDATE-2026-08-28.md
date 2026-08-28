@@ -1,7 +1,7 @@
 # Bloque 4C: candidato MCP publico read-only
 
 **Fecha:** 2026-08-28  
-**Estado:** Worker de staging verificado; subdominio productivo todavia no promovido
+**Estado:** candidato aprobado; promovido mediante el recibo `BLOCK-4C-MCP-RELEASE-2026-08-28.md`
 
 **Baseline del Site estable:** version 20, commit `a7ff85a1dbdd74c2e3d8fab566abf6f5c4e441e8`
 
@@ -64,7 +64,7 @@ El entorno local usa Node `22.17.0`; algunas dependencias de desarrollo de Babel
 
 ## Estado de publicacion
 
-El candidato remoto existe solo en el Worker de staging y no cuenta aun como capacidad productiva. El sitio canonico conserva la version 20. El siguiente gate es: PR verde, merge, despliegue del commit exacto en `mcp.agentfriendlyweb.dev`, repeticion completa del cliente MCP remoto y recien despues actualizacion de tarjetas, catalogos y UI a `deployed`.
+El candidato supero PR, CI, despliegue productivo aislado y repeticion completa del cliente MCP remoto en el subdominio canonico y el fallback `workers.dev`. La evidencia final, identificadores y rollback quedan en el recibo de release; tarjetas, catalogos y UI se promueven de forma separada para conservar trazabilidad.
 
 ## Condiciones NO-GO
 

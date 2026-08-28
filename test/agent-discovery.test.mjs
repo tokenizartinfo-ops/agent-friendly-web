@@ -18,8 +18,8 @@ test('readiness manifest separates deployed capabilities from roadmap work', asy
   assert.equal(manifest.canonical_origin, canonical);
   assert.equal(manifest.capabilities.discovery.status, 'deployed');
   assert.equal(manifest.capabilities.openapi.status, 'deployed');
-  assert.equal(manifest.capabilities.mcp.status, 'release_candidate');
-  assert.match(manifest.capabilities.mcp.note, /does not count as deployed/i);
+  assert.equal(manifest.capabilities.mcp.status, 'deployed');
+  assert.match(manifest.capabilities.mcp.note, /public.*read-only/i);
   assert.equal(manifest.capabilities.a2a.status, 'planned');
   assert.equal(manifest.capabilities.x402.status, 'research');
   assert.match(manifest.convention, /not an official standard/i);

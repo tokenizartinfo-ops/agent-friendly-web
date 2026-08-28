@@ -9,12 +9,13 @@ async function read(relativePath) {
 }
 
 test("dedicated Cloudflare Worker preserves the bounded public MCP contract", async () => {
-  const [entry, server, config, packageJson, gate] = await Promise.all([
+  const [entry, server, config, packageJson, gate, release] = await Promise.all([
     read("worker/mcp/index.mjs"),
     read("lib/public-mcp-server.mjs"),
     read("wrangler.mcp.jsonc"),
     read("package.json"),
     read("docs/BLOCK-4C-MCP-CLOUDFLARE-WORKER-GATE-2026-08-28.md"),
+    read("docs/BLOCK-4C-MCP-RELEASE-2026-08-28.md"),
   ]);
   const wrangler = JSON.parse(config);
   const pkg = JSON.parse(packageJson);
@@ -24,6 +25,7 @@ test("dedicated Cloudflare Worker preserves the bounded public MCP contract", as
   assert.match(entry, /sanitizePublicMcpResponse/);
   assert.match(entry, /getBuiltinProfile/);
   assert.match(entry, /url\.pathname !== "\/mcp"/);
+  assert.match(entry, /status: "deployed"/);
   assert.doesNotMatch(entry, /registry-store|D1|env\.DB/);
 
   assert.match(server, /"mcp\.agentfriendlyweb\.dev"/);
@@ -48,4 +50,8 @@ test("dedicated Cloudflare Worker preserves the bounded public MCP contract", as
   assert.match(gate, /version 20/i);
   assert.match(gate, /mcp\.agentfriendlyweb\.dev/);
   assert.match(gate, /sin D1|no usa D1/i);
+  assert.match(release, /https:\/\/mcp\.agentfriendlyweb\.dev\/mcp/);
+  assert.match(release, /76de5417-90b5-4a5c-8fa5-87414610afb6/);
+  assert.match(release, /4b28c4d7d3e606b7cd8fe7689aea80f164b64f69/);
+  assert.match(release, /sin D1|no usa D1/i);
 });

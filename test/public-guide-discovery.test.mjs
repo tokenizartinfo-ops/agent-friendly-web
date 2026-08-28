@@ -38,7 +38,7 @@ test('machine discovery exposes the deployed guide with bounded capabilities', a
   assert.ok(urls.includes(`${canonical}/.well-known/public-guide-contract.json`));
   assert.equal(readiness.capabilities.public_guide.status, 'deployed');
   assert.match(readiness.capabilities.public_guide.note, /sin persistencia|no persistence/i);
-  assert.equal(readiness.capabilities.mcp.status, 'release_candidate');
-  assert.match(readiness.capabilities.mcp.note, /does not count as deployed/i);
+  assert.equal(readiness.capabilities.mcp.status, 'deployed');
+  assert.match(readiness.capabilities.mcp.note, /public.*read-only/i);
   assert.equal(readiness.capabilities.a2a.status, 'planned');
 });

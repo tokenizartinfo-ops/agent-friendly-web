@@ -1,7 +1,7 @@
 # Block 4C - Gate del Worker MCP publico en Cloudflare
 
 Fecha: 2026-08-28  
-Estado: staging remoto verificado; produccion pendiente de PR y promocion
+Estado: gate cerrado; produccion remota verificada y promocion documental en curso
 
 ## Resultado del candidato Sites
 
@@ -16,7 +16,7 @@ El endpoint remoto continuo respondiendo `404`. La version 23 se rechazo y el si
 El servidor se desacopla en un Cloudflare Worker propio. Esta decision elimina la dependencia del feature flag de Sites y conserva el mismo repositorio, contratos, tests y proceso de release.
 
 - Staging: Worker separado en `workers.dev`.
-- Produccion candidata: `https://mcp.agentfriendlyweb.dev/mcp`.
+- Produccion canonica: `https://mcp.agentfriendlyweb.dev/mcp`.
 - Sitio humano y documentos: `https://agentfriendlyweb.dev/`.
 - Contrato: MCP 2026-07-28, con compatibilidad stateless 2025.
 - Alcance: cuatro tools y cuatro resources publicos, read-only.
@@ -35,6 +35,8 @@ El servidor se desacopla en un Cloudflare Worker propio. Esta decision elimina l
 7. Repeticion completa del cliente remoto.
 8. Solo entonces actualizar tarjetas, catalogos y UI de `release_candidate` a `deployed`.
 
+Los ocho gates se completaron. El despliegue productivo candidato fue verificado desde clientes MCP remotos antes de iniciar la promocion documental.
+
 ## Evidencia de staging
 
 - URL: `https://agent-friendly-web-public-mcp-staging.tokenizart-info.workers.dev/mcp`.
@@ -50,4 +52,4 @@ El servidor se desacopla en un Cloudflare Worker propio. Esta decision elimina l
 
 ## Rollback
 
-El Worker tiene versiones independientes y puede revertirse con Wrangler. El sitio principal permanece en la version 20 hasta que el servidor remoto independiente haya pasado todos los gates. La falla del Worker no debe afectar la home, el Registry, la auditoria web, la CLI ni OKF.
+El Worker tiene versiones independientes y puede revertirse con Wrangler. La falla del Worker no afecta la home, el Registry, la auditoria web, la CLI ni OKF. El sitio principal permanecio en la version 20 durante el gate y solo se actualiza despues de verificar el Worker independiente.

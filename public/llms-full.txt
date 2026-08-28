@@ -36,11 +36,11 @@ The public page at `https://agentfriendlyweb.dev/conocimiento-abierto` explains 
 
 The deployed repo-first CLI is documented at `https://agentfriendlyweb.dev/cli`. Its machine manifest is `https://agentfriendlyweb.dev/.well-known/agent-friendly-cli.json` and its response schema is `https://agentfriendlyweb.dev/schemas/cli-response.v1.json`. It audits public sites, reads already-published Registry profiles and verifies OKF releases in memory. It performs no local or remote writes, uses no credentials and is not an MCP or A2A service.
 
-## MCP public read-only candidate
+## MCP public read-only deployed
 
-The release candidate documented at `https://agentfriendlyweb.dev/mcp-readonly` exposes `POST https://agentfriendlyweb.dev/mcp` through stateless Streamable HTTP. It contains exactly four public read-only tools for audit, methodology, published Registry profiles and canonical OKF v0.2 verification, plus four versioned `afw://` resources. Its discovery card is `https://agentfriendlyweb.dev/.well-known/mcp/server-card.json` and its stable result schema is `https://agentfriendlyweb.dev/schemas/mcp-result.v1.json`.
+The deployed service documented at `https://agentfriendlyweb.dev/mcp-readonly` exposes `POST https://mcp.agentfriendlyweb.dev/mcp` through stateless Streamable HTTP. It contains exactly four public read-only tools for audit, methodology, published Registry profiles and canonical OKF v0.2 verification, plus four versioned `afw://` resources. Its discovery card is `https://agentfriendlyweb.dev/.well-known/mcp/server-card.json` and its stable result schema is `https://agentfriendlyweb.dev/schemas/mcp-result.v1.json`.
 
-The candidate uses no OAuth because it exposes public data only. It has no A2A delegation, no WebMCP browser tools, no private expedients, no owner data, no website mutations and no payment actions. It remains `release_candidate`, not `deployed`, until a remote MCP client verifies the exact production version.
+The service uses no OAuth because it exposes public data only. It has no A2A delegation, no WebMCP browser tools, no private expedients, no owner data, no website mutations and no payment actions. Modern MCP 2026-07-28 and stateless 2025 compatibility were verified with remote clients against the exact production Worker version before promotion.
 
 ## Standards status
 
@@ -76,6 +76,7 @@ Tokenizart is documented as an evolving agent-first architecture. Existing publi
 - https://agentfriendlyweb.dev/.well-known/agent-friendly-cli.json
 - https://agentfriendlyweb.dev/schemas/cli-response.v1.json
 - https://agentfriendlyweb.dev/mcp-readonly
+- https://mcp.agentfriendlyweb.dev/mcp
 - https://agentfriendlyweb.dev/.well-known/mcp/server-card.json
 - https://agentfriendlyweb.dev/.well-known/mcp.json
 - https://agentfriendlyweb.dev/schemas/mcp-result.v1.json
@@ -85,11 +86,11 @@ Tokenizart is documented as an evolving agent-first architecture. Existing publi
 
 ## Machine-readable catalogs
 
-The AI catalog and Agent Skills index are project discovery conventions backed by public resources on this site. The API Catalog is a standards-based linkset pointing to the public OpenAPI document and the MCP release-candidate contract. No OAuth resource, A2A service, WebMCP integration or payment protocol is advertised by this release.
+The AI catalog and Agent Skills index are project discovery conventions backed by public resources on this site. The API Catalog is a standards-based linkset pointing to the public OpenAPI document and the deployed MCP contract. No OAuth resource, A2A service, WebMCP integration or payment protocol is advertised by this release.
 
 ## Capability status
 
-The machine-readable readiness manifest at `https://agentfriendlyweb.dev/.well-known/agent-readiness.json` is the current capability ledger. Discovery resources, the public read-only audit API, the audit skill and the repo-first read-only CLI are deployed. MCP public read-only is a release candidate; A2A remains planned; WebMCP and x402 remain research items. Planned, research or release-candidate work does not count as deployed evidence until its production gate closes.
+The machine-readable readiness manifest at `https://agentfriendlyweb.dev/.well-known/agent-readiness.json` is the current capability ledger. Discovery resources, the public read-only audit API, the audit skill, the repo-first read-only CLI and the public stateless MCP read-only server are deployed. A2A remains planned; WebMCP and x402 remain research items. Planned and research work does not count as deployed evidence until its production gate closes.
 
 ## Illustrative maturity comparisons
 

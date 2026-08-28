@@ -84,7 +84,7 @@ const worker = {
       if (request.method === "GET" && (url.pathname === "/" || url.pathname === "/health")) {
         return jsonResponse({
           service: "agent-friendly-web-public-mcp",
-          status: "release_candidate",
+          status: "deployed",
           endpoint: "/mcp",
           protocol: "2026-07-28",
           access: "public-read-only",
