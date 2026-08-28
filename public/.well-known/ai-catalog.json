@@ -128,6 +128,24 @@
       "name": "CLI response schema",
       "type": "application/schema+json",
       "url": "https://agentfriendlyweb.dev/schemas/cli-response.v1.json"
+    },
+    {
+      "name": "Public MCP read-only candidate guide",
+      "type": "text/html",
+      "url": "https://agentfriendlyweb.dev/mcp-readonly",
+      "status": "release_candidate"
+    },
+    {
+      "name": "Public MCP read-only candidate server card",
+      "type": "application/json",
+      "url": "https://agentfriendlyweb.dev/.well-known/mcp/server-card.json",
+      "status": "release_candidate"
+    },
+    {
+      "name": "MCP result schema v1",
+      "type": "application/schema+json",
+      "url": "https://agentfriendlyweb.dev/schemas/mcp-result.v1.json",
+      "status": "release_candidate"
     }
   ]
 }

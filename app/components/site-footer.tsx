@@ -12,6 +12,7 @@ const productLinks = [
   ['Metodologia', '/metodologia'],
   ['Registry publico', '/registry'],
   ['CLI read-only', '/cli'],
+  ['MCP public read-only', '/mcp-readonly'],
   ['Caso Tokenizart', '/casos/tokenizart'],
   ['Mapa completo', '/mapa-del-sitio'],
 ];
@@ -28,6 +29,8 @@ const agentLinks = [
   ['OKF v0.2', '/okf/v0.2/index.md'],
   ['CLI manifest', '/.well-known/agent-friendly-cli.json'],
   ['CLI schema', '/schemas/cli-response.v1.json'],
+  ['MCP server card', '/.well-known/mcp/server-card.json'],
+  ['MCP result schema', '/schemas/mcp-result.v1.json'],
 ];
 
 export function SiteFooter() {

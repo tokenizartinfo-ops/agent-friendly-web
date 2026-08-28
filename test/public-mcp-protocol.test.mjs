@@ -55,6 +55,7 @@ test("MCP client discovers exactly the approved public read-only surface", async
       assert.equal(tool.annotations?.readOnlyHint, true);
       assert.equal(tool.annotations?.destructiveHint, false);
       assert.equal(tool.annotations?.idempotentHint, true);
+      assert.equal(tool.annotations?.openWorldHint, tool.name === "audit_public_site");
     }
 
     const resources = await client.listResources();

@@ -29,6 +29,21 @@ export async function GET() {
               type: 'text/markdown',
               title: 'Agent Friendly Web CLI guide',
             },
+            {
+              href: `${origin}/.well-known/mcp/server-card.json`,
+              type: 'application/json',
+              title: 'Agent Friendly Web MCP public read-only release candidate',
+            },
+            {
+              href: `${origin}/schemas/mcp-result.v1.json`,
+              type: 'application/schema+json',
+              title: 'Agent Friendly Web MCP result schema v1',
+            },
+            {
+              href: `${origin}/mcp-readonly`,
+              type: 'text/html',
+              title: 'Agent Friendly Web MCP candidate human guide',
+            },
           ],
         },
       ],
