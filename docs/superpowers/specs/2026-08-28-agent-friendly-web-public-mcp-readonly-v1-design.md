@@ -23,7 +23,7 @@ Este enfoque se elige porque:
 Se descartan dos alternativas:
 
 1. **JSON-RPC implementado manualmente.** Reduciria dependencias, pero duplicaria validacion de protocolo, descubrimiento, errores y compatibilidad de clientes.
-2. **Worker MCP separado.** Aislaria despliegues, pero agregaria otro origen, DNS, documentacion y operacion antes de validar el producto. La separacion futura sigue disponible si carga, seguridad o lifecycle lo requieren.
+2. **Worker MCP separado.** Inicialmente se postergo para validar el producto dentro del Site. El candidato remoto demostro que la cuenta propietaria no tiene habilitado Sites MCP; por eso esta alternativa pasa a ser la implementacion aprobada. Se usa `mcp.agentfriendlyweb.dev` para aislar despliegue y rollback sin cambiar el contrato funcional.
 
 ## Alcance publico
 
@@ -186,7 +186,7 @@ Los logs operativos administrados por Cloudflare quedan sujetos a la configuraci
 
 El Bloque 4C se considera desplegado solo cuando la version exacta de produccion:
 
-- responde en `https://agentfriendlyweb.dev/mcp` con un cliente MCP compatible;
+- responde en `https://mcp.agentfriendlyweb.dev/mcp` con un cliente MCP compatible;
 - expone exactamente las cuatro tools y cuatro resources aprobadas;
 - pasa llamadas positivas y negativas sin persistencia ni mutaciones;
 - publica contrato, tarjeta, pagina humana y readiness coherentes;

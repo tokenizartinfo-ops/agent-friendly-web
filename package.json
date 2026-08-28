@@ -19,6 +19,10 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "test": "node --test test/*.test.mjs",
     "smoke:mcp": "node scripts/smoke-public-mcp.mjs",
+    "mcp:dev": "npx --yes wrangler@4.127.0 dev --config wrangler.mcp.jsonc --env staging --port 8791",
+    "mcp:deploy:dry-run": "npx --yes wrangler@4.127.0 deploy --config wrangler.mcp.jsonc --env staging --dry-run",
+    "mcp:deploy:staging": "npx --yes wrangler@4.127.0 deploy --config wrangler.mcp.jsonc --env staging",
+    "mcp:deploy:production": "npx --yes wrangler@4.127.0 deploy --config wrangler.mcp.jsonc --env production",
     "cli": "node bin/afw.mjs",
     "db:generate": "drizzle-kit generate"
   },
