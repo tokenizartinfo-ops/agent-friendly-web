@@ -196,7 +196,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 2. **Bloque 2 - AEO, sectores y medicion: implementado para release.** Guia, catalogo, control mensual de fuentes, primera biblioteca ESP/ENG/POR y comparador no persistente.
 3. **Bloque 3 - asistencia de intake: prototipo controlado implementado.** Texto libre, rechazo de secretos, propuestas field-scoped y seleccion humana; guardado, voz, correo y pagos siguen bloqueados.
 4. **Bloque 4A - OKF publico: desplegado y verificado.** Bundle v0.2 determinista, pagina humana, descubrimiento, manifiesto y checksums.
-5. **Bloque 4B - CLI read-only: desplegado y verificado.** Auditoria, consulta Registry y verificacion OKF con JSON estable, `--dry-run`, cero credenciales y cero escritura. El gate remoto se cerro en Sites 17.
+5. **Bloque 4B - CLI read-only: desplegado y verificado.** Auditoria, consulta Registry y verificacion OKF con JSON estable, `--dry-run`, cero credenciales y cero escritura. El candidato se valido en Sites 17 y el estado final se publico en Sites 18.
 6. **Bloque 4B.1 - guia conversacional publica: especificacion posterior.** Orientacion integral con fuentes, continuidad y lenguaje adaptable, inicialmente sin acciones ni persistencia.
 7. **Bloque 4C - MCP read-only: planificado.** Contratos y observabilidad antes de cualquier tool remota.
 8. **Bloque 5 - integracion:** adaptadores de CMS, Draft PRs y capsulas con doble consentimiento.
@@ -223,8 +223,8 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/okf/v0.2/index.md` | indice machine-readable del bundle OKF v0.2 | desplegado en Sites 16 |
 | `/okf/v0.2/manifest.json` | inventario, metadata y hashes de distribucion | desplegado en Sites 16 |
 | `/okf/v0.2/CHECKSUMS.sha256` | verificacion SHA-256 del bundle publicado | desplegado en Sites 16 |
-| `/cli` | explicacion humana de la CLI read-only | desplegado en Sites 17 |
-| `/cli/index.md` | instalacion, comandos, limites y codigos de salida | desplegado en Sites 17 |
+| `/cli` | explicacion humana de la CLI read-only | desplegado en Sites 18 |
+| `/cli/index.md` | instalacion, comandos, limites y codigos de salida | desplegado en Sites 18 |
 | `/.well-known/agent-friendly-cli.json` | manifiesto de capacidades y restricciones CLI | desplegado, convencion del proyecto |
 | `/schemas/cli-response.v1.json` | contrato JSON estable de respuestas CLI | desplegado |
 
@@ -266,4 +266,4 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 
 El gate publico de los Bloques 2 y 3 se cerro el 2026-08-27. La revision humana verifico sectores, idiomas, comparador, intake, rechazo de secretos, ausencia de persistencia local, contratos publicos y una nueva auditoria del origen. La evidencia completa vive en `docs/BLOCK-2-3-BROWSER-AND-ORIGIN-GATE-2026-08-27.md`.
 
-Los Bloques 4A OKF publico y **4B CLI read-only** estan desplegados. La CLI se integro mediante PR #10, se publico como Sites 17 y supero recorridos remotos de auditoria, Registry, OKF y capacidades. El siguiente bloque es especificar la guia conversacional publica 4B.1; MCP read-only conserva su propio gate 4C. La transferencia de propuestas aprobadas al expediente autenticado, plugins, WebMCP, A2A, pagos, voz, correo y escritura siguen sin contabilizarse como capacidades desplegadas.
+Los Bloques 4A OKF publico y **4B CLI read-only** estan desplegados. La CLI se integro mediante PR #10, supero recorridos remotos de auditoria, Registry, OKF y capacidades en Sites 17, y su estado final se publico mediante PR #11 y Sites 18. El siguiente bloque es especificar la guia conversacional publica 4B.1; MCP read-only conserva su propio gate 4C. La transferencia de propuestas aprobadas al expediente autenticado, plugins, WebMCP, A2A, pagos, voz, correo y escritura siguen sin contabilizarse como capacidades desplegadas.
