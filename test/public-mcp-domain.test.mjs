@@ -62,8 +62,17 @@ test("audit tool delegates once to the existing protected public auditor", async
           checkedAt: NOW,
           evidence: { robots: true },
           readiness: { score: 9, level: "AF-0 invisible" },
-          probes: [{ id: "robots", status: 200, bytes: 20, detected: true }],
+          probes: [{
+            id: "robots",
+            status: 200,
+            bytes: 20,
+            detected: true,
+            link: "x".repeat(1_200),
+            body: "private response body",
+            headers: { authorization: "Bearer private-value" },
+          }],
           limits: ["Solo evidencia publica."],
+          internalDebug: { token: "private-value" },
         };
       },
     },
@@ -72,7 +81,10 @@ test("audit tool delegates once to the existing protected public auditor", async
   assert.equal(calls, 1);
   assert.equal(response.result.report.target, "https://example.com");
   assert.equal(response.result.report.probes.length, 1);
+  assert.equal(response.result.report.probes[0].link.length, 1_000);
   assert.equal(JSON.stringify(response).includes("body"), false);
+  assert.equal(JSON.stringify(response).includes("private-value"), false);
+  assert.equal(Object.hasOwn(response.result.report, "internalDebug"), false);
 });
 
 test("registry tool returns only an already-published canonical profile", async () => {
@@ -80,7 +92,22 @@ test("registry tool returns only an already-published canonical profile", async 
     contract: "agentfriendly.public-profile.v1",
     slug: "tokenizart",
     version: 1,
+    publishedAt: NOW,
+    canonicalUrl: "https://agentfriendlyweb.dev/registry/tokenizart",
     organization: "Tokenizart",
+    canonicalOrigin: "https://tokenizart.com",
+    siteType: "Ecosistema de trazabilidad",
+    sectors: ["Arte"],
+    audiences: ["Owners"],
+    languages: ["es"],
+    publicSources: [{ title: "Sitio", url: "https://tokenizart.com", state: "observed", observedAt: NOW }],
+    declaredCapabilities: ["Trazabilidad publica"],
+    observedResources: [{ type: "robots", url: "https://tokenizart.com/robots.txt", state: "observed", observedAt: NOW }],
+    verification: { status: "verified", hostname: "tokenizart.com", method: "dns_txt", verifiedAt: NOW, verifiedUntil: "2026-11-26T15:00:00.000Z" },
+    readiness: { level: "AF-3 herramientas", score: 70, state: "observed", observedAt: NOW },
+    limits: ["Solo informacion publica."],
+    historyUrl: "https://agentfriendlyweb.dev/registry/tokenizart",
+    privateOwnerEmail: "owner@example.com",
   };
   const response = await executePublicMcpTool(
     "get_public_registry_profile",
@@ -95,7 +122,11 @@ test("registry tool returns only an already-published canonical profile", async 
     },
   );
 
-  assert.deepEqual(response.result.profile, profile);
+  assert.equal(response.result.profile.contract, profile.contract);
+  assert.equal(response.result.profile.organization, profile.organization);
+  assert.equal(response.result.profile.slug, profile.slug);
+  assert.equal(Object.hasOwn(response.result.profile, "privateOwnerEmail"), false);
+  assert.equal(response.result.profile.assertions.organization.state, "owner_declared");
   assert.deepEqual(response.input, { slug: "tokenizart", version: 1 });
   assert.match(response.limits.join(" "), /perfiles ya publicados/i);
 });

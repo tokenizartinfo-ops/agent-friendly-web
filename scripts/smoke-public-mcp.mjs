@@ -109,10 +109,24 @@ try {
   assert.ok(negativeHttp.malformed_json >= 400);
   assert.equal(negativeHttp.oversized, 413);
 
+  const legacyClient = new Client(
+    { name: "agent-friendly-web-release-smoke-legacy", version: "1.0.0" },
+    { capabilities: {}, versionNegotiation: { mode: "legacy" } },
+  );
+  try {
+    await legacyClient.connect(new StreamableHTTPClientTransport(endpoint));
+    assert.equal(legacyClient.getProtocolEra(), "legacy");
+    assert.match(legacyClient.getNegotiatedProtocolVersion(), /^2025-/);
+    assert.deepEqual(names((await legacyClient.listTools()).tools, "name"), [...expectedTools].sort());
+  } finally {
+    await legacyClient.close();
+  }
+
   process.stdout.write(`${JSON.stringify({
     endpoint: endpoint.href,
     protocol_era: client.getProtocolEra(),
     protocol_version: client.getNegotiatedProtocolVersion(),
+    legacy_protocol: "verified",
     tools: names(toolList.tools, "name"),
     resources: names(resourceList.resources, "uri"),
     positive_calls: {

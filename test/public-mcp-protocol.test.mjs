@@ -8,15 +8,33 @@ import { createPublicMcpServer } from "../lib/public-mcp-server.mjs";
 
 const NOW = "2026-08-28T18:00:00.000Z";
 
+function publishedProfile(slug, version) {
+  return {
+    contract: "agentfriendly.public-profile.v1",
+    slug,
+    version: version ?? 3,
+    publishedAt: NOW,
+    canonicalUrl: `https://agentfriendlyweb.dev/registry/${slug}`,
+    organization: "Tokenizart",
+    canonicalOrigin: "https://tokenizart.com",
+    siteType: "Ecosistema de trazabilidad",
+    sectors: ["Arte"],
+    audiences: ["Owners"],
+    languages: ["es"],
+    publicSources: [{ title: "Sitio", url: "https://tokenizart.com", state: "observed", observedAt: NOW }],
+    declaredCapabilities: ["Trazabilidad publica"],
+    observedResources: [{ type: "robots", url: "https://tokenizart.com/robots.txt", state: "observed", observedAt: NOW }],
+    verification: { status: "verified", hostname: "tokenizart.com", method: "dns_txt", verifiedAt: NOW, verifiedUntil: "2026-11-26T18:00:00.000Z" },
+    readiness: { level: "AF-3 herramientas", score: 70, state: "observed", observedAt: NOW },
+    limits: ["Solo informacion publica."],
+    historyUrl: `https://agentfriendlyweb.dev/registry/${slug}`,
+  };
+}
+
 async function withClient(run) {
   const server = createPublicMcpServer({
     now: () => NOW,
-    getPublishedProfile: async (slug, version) => ({
-      contract: "agentfriendly.public-profile.v1",
-      slug,
-      version: version ?? 3,
-      organization: "Tokenizart",
-    }),
+    getPublishedProfile: async (slug, version) => publishedProfile(slug, version),
     runPublicAudit: async () => ({
       target: "https://example.com",
       checkedAt: NOW,
@@ -33,7 +51,7 @@ async function withClient(run) {
   });
   const client = new Client(
     { name: "agent-friendly-web-test", version: "1.0.0" },
-    { capabilities: {} },
+    { capabilities: {}, versionNegotiation: { mode: "legacy" } },
   );
   const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
 
@@ -49,6 +67,8 @@ async function withClient(run) {
 
 test("MCP client discovers exactly the approved public read-only surface", async () => {
   await withClient(async (client) => {
+    assert.equal(client.getProtocolEra(), "legacy");
+    assert.match(client.getNegotiatedProtocolVersion(), /^2025-/);
     const tools = await client.listTools();
     assert.deepEqual(tools.tools.map((tool) => tool.name).sort(), [...MCP_TOOL_NAMES].sort());
     for (const tool of tools.tools) {
