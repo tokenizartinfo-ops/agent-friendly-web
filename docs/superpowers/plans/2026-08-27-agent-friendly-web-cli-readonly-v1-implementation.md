@@ -500,7 +500,7 @@ Run: `npm run cli -- capabilities`
 
 Expected: valid JSON with `status: "ok"`.
 
-Run: `npm run cli -- audit https://example.com --dry-run`
+Run: `node bin/afw.mjs audit https://example.com --dry-run`
 
 Expected: valid JSON with `status: "planned"` and no network dependency.
 
@@ -640,7 +640,7 @@ Run: `npm run cli -- capabilities`
 
 Expected: one valid JSON document and exit `0`.
 
-Run: `npm run cli -- audit https://agentfriendlyweb.dev --dry-run`
+Run: `node bin/afw.mjs audit https://agentfriendlyweb.dev --dry-run`
 
 Expected: `status: "planned"`, 0 requests.
 
@@ -650,7 +650,7 @@ Expected: `status: "ok"` with the current evidence-based AF level.
 
 Run: `npm run cli -- registry get tokenizart`
 
-Expected: `status: "ok"` with `agent-friendly-web.public-profile.v1`.
+Expected: `status: "ok"` with `agentfriendly.public-profile.v1`.
 
 Run: `npm run cli -- okf verify --release v0.2`
 
@@ -658,7 +658,7 @@ Expected: `status: "ok"`, all declared OKF files verified.
 
 - [ ] **Step 2: Verify installation from a clean Windows checkout**
 
-Create a temporary clone outside the repo, run `npm ci`, then run `npm run cli -- capabilities` and `npm run cli -- audit https://agentfriendlyweb.dev --dry-run`. Do not persist credentials or publish packages.
+Create a temporary clone outside the repo, run `npm ci`, then run `npm run cli -- capabilities` and `node bin/afw.mjs audit https://agentfriendlyweb.dev --dry-run`. Do not persist credentials or publish packages. The direct Node form is required for `--dry-run` because npm can consume that option before forwarding arguments to the script.
 
 - [ ] **Step 3: Record the release candidate**
 
