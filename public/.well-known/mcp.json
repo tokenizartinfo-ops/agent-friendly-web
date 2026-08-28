@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "convention": "Agent Friendly Web project MCP discovery alias; not a universal MCP discovery standard",
+  "status": "release_candidate",
+  "name": "Agent Friendly Web Public MCP Read-Only",
+  "description": "Public stateless MCP server for bounded Agent Friendly Web audit, methodology, Registry and OKF queries.",
+  "publisher": {
+    "name": "Agent Friendly Web",
+    "creator": "Gabriel Mucchiut"
+  },
+  "endpoint": {
+    "url": "https://agentfriendlyweb.dev/mcp",
+    "transport": "streamable-http",
+    "method": "POST",
+    "content_type": "application/json",
+    "stateless": true,
+    "protocol_versions": ["2026-07-28", "2025-06-18"]
+  },
+  "authentication": {
+    "type": "none",
+    "scope": "public-data-only",
+    "note": "OAuth is not required because this server exposes no private or personalized data."
+  },
+  "tools": [
+    {
+      "name": "audit_public_site",
+      "read_only": true,
+      "description": "Audit bounded public website evidence without persistence or mutation."
+    },
+    {
+      "name": "get_afw_methodology",
+      "read_only": true,
+      "description": "Read one allowlisted section of the public AF-0 to AF-5 methodology."
+    },
+    {
+      "name": "get_public_registry_profile",
+      "read_only": true,
+      "description": "Read an already-published Registry profile by slug and optional version."
+    },
+    {
+      "name": "verify_public_okf_release",
+      "read_only": true,
+      "description": "Verify the canonical allowlisted OKF v0.2 release in memory."
+    }
+  ],
+  "resources": [
+    { "uri": "afw://capabilities/v1", "mime_type": "application/json" },
+    { "uri": "afw://methodology/v1", "mime_type": "application/json" },
+    { "uri": "afw://okf/v0.2", "mime_type": "application/json" },
+    { "uri": "afw://readiness/v1", "mime_type": "application/json" }
+  ],
+  "result_schema": "https://agentfriendlyweb.dev/schemas/mcp-result.v1.json",
+  "human_documentation": "https://agentfriendlyweb.dev/mcp-readonly",
+  "canonical_card": "https://agentfriendlyweb.dev/.well-known/mcp/server-card.json",
+  "source_repository": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+  "limits": [
+    "Release candidate until a production client verification closes the deployment gate.",
+    "Public evidence does not prove indexing, ranking or recommendation by a model provider.",
+    "No application sessions, private context, conversation memory or D1 tool-call persistence."
+  ],
+  "blocked_actions": [
+    "credentials",
+    "private-expedients",
+    "registry-write",
+    "publish",
+    "deploy",
+    "dns",
+    "billing",
+    "payments",
+    "owner-data",
+    "website-mutation"
+  ],
+  "updated_at": "2026-08-28"
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentfriendlyweb.dev/schemas/mcp-result.v1.json",
+  "title": "Agent Friendly Web MCP Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "server_version",
+    "tool",
+    "status",
+    "generated_at",
+    "input",
+    "result",
+    "sources",
+    "limits",
+    "blocked_actions"
+  ],
+  "properties": {
+    "contract": { "const": "agent-friendly-web.mcp-result.v1" },
+    "server_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "tool": {
+      "enum": [
+        "audit_public_site",
+        "get_afw_methodology",
+        "get_public_registry_profile",
+        "verify_public_okf_release"
+      ]
+    },
+    "status": { "enum": ["ok", "error"] },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "input": { "type": "object" },
+    "result": { "type": "object" },
+    "sources": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "url"],
+        "properties": {
+          "title": { "type": "string", "maxLength": 160 },
+          "url": { "type": "string", "format": "uri", "maxLength": 2000 }
+        }
+      }
+    },
+    "limits": {
+      "type": "array",
+      "maxItems": 24,
+      "items": { "type": "string", "maxLength": 500 }
+    },
+    "blocked_actions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": { "type": "string", "maxLength": 80 }
+    }
+  }
+}

@@ -60,8 +60,15 @@
       "resources": ["/.well-known/agent-skills/index.json", "/skills/agent-friendly-web-audit/SKILL.md"]
     },
     "mcp": {
-      "status": "planned",
-      "note": "No MCP endpoint is advertised by this release."
+      "status": "release_candidate",
+      "resources": [
+        "/mcp-readonly",
+        "/mcp",
+        "/.well-known/mcp/server-card.json",
+        "/.well-known/mcp.json",
+        "/schemas/mcp-result.v1.json"
+      ],
+      "note": "Public stateless read-only candidate. It does not count as deployed evidence until remote client verification closes."
     },
     "a2a": {
       "status": "planned",

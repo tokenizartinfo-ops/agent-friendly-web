@@ -30,6 +30,7 @@ const humanRoutes = [
   { name: 'Metodologia', detail: 'Explica el puntaje, sus limites y las fuentes primarias.', href: '/metodologia', icon: Compass },
   { name: 'Registry publico', detail: 'Perfiles versionados con declaraciones, observaciones y dominio verificado.', href: '/registry', icon: Globe2 },
   { name: 'CLI read-only', detail: 'Auditoria, Registry y verificacion OKF desde Node.js con salida JSON.', href: '/cli', icon: FileCode2 },
+  { name: 'MCP public read-only', detail: 'Candidato stateless con cuatro tools y cuatro resources publicos.', href: '/mcp-readonly', icon: Braces },
   { name: 'Caso Tokenizart', detail: 'Primer caso integral, con archivos y progreso verificable.', href: '/casos/tokenizart', icon: CheckCircle2 },
   { name: 'Mi expediente', detail: 'Area privada para ordenar contexto y un roadmap propio.', href: '/expediente', icon: LockKeyhole },
 ];
@@ -55,6 +56,8 @@ const machineResources = [
   { name: 'CLI manifest', detail: 'Comandos, version, limites y fronteras read-only.', href: '/.well-known/agent-friendly-cli.json', icon: Braces },
   { name: 'CLI response schema', detail: 'Contrato JSON estable para resultados y errores.', href: '/schemas/cli-response.v1.json', icon: FileCode2 },
   { name: 'CLI guide', detail: 'Guia Markdown para ejecutar la CLI desplegada desde el repositorio.', href: '/cli/index.md', icon: FileText },
+  { name: 'MCP server card', detail: 'Contrato candidato, endpoint, tools, resources y limites.', href: '/.well-known/mcp/server-card.json', icon: Braces },
+  { name: 'MCP result schema', detail: 'Envelope JSON estable de las cuatro tools read-only.', href: '/schemas/mcp-result.v1.json', icon: FileCode2 },
 ];
 
 const activeCapabilities = [
@@ -76,7 +79,7 @@ const roadmap = [
   ['Markdown negociado', 'planned', 'La respuesta text/markdown todavia no esta activa en el origen.'],
   ['Voz, correo y guardado asistido', 'planned', 'Permanecen fuera del prototipo hasta contratos, consentimiento y auditoria.'],
   ['Plugins y conectores', 'planned', 'Cada plataforma requiere un adaptador oficial y una capacidad verificable.'],
-  ['MCP', 'planned', 'No existe un endpoint MCP ejecutable en esta version.'],
+  ['MCP public read-only', 'release_candidate', 'Endpoint implementado; no cuenta como desplegado hasta cerrar la verificacion remota.'],
   ['A2A', 'planned', 'No se publica Agent Card ni delegacion entre agentes.'],
   ['x402', 'research', 'No hay recursos pagos ni flujo HTTP 402 activo.'],
 ];

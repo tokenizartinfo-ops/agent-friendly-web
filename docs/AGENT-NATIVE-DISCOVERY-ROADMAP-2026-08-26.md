@@ -199,7 +199,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 4. **Bloque 4A - OKF publico: desplegado y verificado.** Bundle v0.2 determinista, pagina humana, descubrimiento, manifiesto y checksums.
 5. **Bloque 4B - CLI read-only: desplegado y verificado.** Auditoria, consulta Registry y verificacion OKF con JSON estable, `--dry-run`, cero credenciales y cero escritura. El candidato se valido en Sites 17 y el estado final se publico en Sites 18.
 6. **Bloque 4B.1 - guia conversacional publica: desplegada y verificada.** Orientacion determinista con fuentes, continuidad inmediata y lenguaje adaptable, sin acciones ni persistencia.
-7. **Bloque 4C - MCP read-only: planificado.** Contratos y observabilidad antes de cualquier tool remota.
+7. **Bloque 4C - MCP read-only: candidato local listo para CI.** Contrato, threat model, endpoint stateless, cuatro tools, cuatro resources, limites HTTP, saneamiento y pruebas modernas/heredadas estan implementados; no se considera desplegado hasta superar PR, preview no promovida y smoke remoto.
 8. **Bloque 5 - integracion:** adaptadores de CMS, Draft PRs y capsulas con doble consentimiento.
 9. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
 
@@ -220,6 +220,11 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/.well-known/readiness-comparison-contract.json` | limites y campos del comparador local | preparado para release, convencion del proyecto |
 | `/.well-known/intake-assistant-contract.json` | contrato fail-closed del prototipo de intake | preparado para release, convencion del proyecto |
 | `/.well-known/public-guide-contract.json` | contrato y limites de la guia conversacional publica | desplegado, convencion del proyecto |
+| `/.well-known/mcp/server-card.json` | server card del MCP publico read-only | candidato local; no desplegado |
+| `/.well-known/mcp.json` | compatibilidad de descubrimiento MCP del proyecto | candidato local; no desplegado |
+| `/schemas/mcp-result.v1.json` | contrato de salida saneada del MCP publico | candidato local; no desplegado |
+| `/mcp-readonly` | explicacion humana de tools, resources y limites | candidato local; no desplegado |
+| `/mcp` | Streamable HTTP stateless, `POST` read-only | candidato local; no desplegado |
 | `/.well-known/security.txt` | contacto y politica de seguridad | desplegado |
 | `/conocimiento-abierto` | explicacion humana del conocimiento publico versionado | desplegado en Sites 16 |
 | `/okf/v0.2/index.md` | indice machine-readable del bundle OKF v0.2 | desplegado en Sites 16 |
@@ -268,4 +273,4 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 
 El gate publico de los Bloques 2 y 3 se cerro el 2026-08-27. La revision humana verifico sectores, idiomas, comparador, intake, rechazo de secretos, ausencia de persistencia local, contratos publicos y una nueva auditoria del origen. La evidencia completa vive en `docs/BLOCK-2-3-BROWSER-AND-ORIGIN-GATE-2026-08-27.md`.
 
-Los Bloques 4A OKF publico, **4B CLI read-only** y **4B.1 guia conversacional publica** estan desplegados. La guia se integro mediante PR #13 y se verifico en produccion con continuidad, profundidad adaptable, fuentes, bloqueo de valores probables de credenciales y ausencia de persistencia. El siguiente bloque es 4C MCP read-only, con contratos, threat model y observabilidad propios. La transferencia de propuestas aprobadas al expediente autenticado, plugins, WebMCP, A2A, pagos, voz, correo y escritura siguen sin contabilizarse como capacidades desplegadas.
+Los Bloques 4A OKF publico, **4B CLI read-only** y **4B.1 guia conversacional publica** estan desplegados. El Bloque 4C ya tiene candidato local revisado en `c7f143b`: `166/166` pruebas, cliente HTTP real moderno/heredado, build y auditoria productiva aprobados. Permanece como `release_candidate` hasta cerrar CI, version Sites sin trafico y smoke remoto; solo despues se promovera su documentacion a `deployed`. La transferencia de propuestas aprobadas al expediente autenticado, plugins, WebMCP, A2A, pagos, voz, correo y escritura siguen sin contabilizarse como capacidades desplegadas.
