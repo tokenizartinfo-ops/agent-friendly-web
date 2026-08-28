@@ -57,7 +57,9 @@ test('fetchLimitedPublicUrl verifies DNS, keeps redirects manual and returns bou
   }]);
   assert.equal(result.status, 302);
   assert.equal(result.body, 'redirect body');
+  assert.deepEqual([...result.bodyBytes], [...new TextEncoder().encode('redirect body')]);
   assert.equal(result.bytes, 13);
+  assert.equal(result.truncated, false);
   assert.equal(result.contentType, 'text/plain');
   assert.equal(result.link, '</sitemap.xml>; rel="sitemap"');
 });
@@ -85,5 +87,7 @@ test('fetchLimitedPublicUrl truncates response bodies at the byte limit', async 
   });
 
   assert.equal(result.bytes, MAX_PUBLIC_RESPONSE_BYTES);
+  assert.equal(result.bodyBytes.byteLength, MAX_PUBLIC_RESPONSE_BYTES);
+  assert.equal(result.truncated, true);
   assert.equal(new TextEncoder().encode(result.body).byteLength, MAX_PUBLIC_RESPONSE_BYTES);
 });

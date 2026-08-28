@@ -1,0 +1,47 @@
+{
+  "contract": "agent-friendly-web.cli-manifest.v1",
+  "convention": "Agent Friendly Web project manifest; not an official standard",
+  "name": "Agent Friendly Web CLI",
+  "version": "0.1.0",
+  "status": "release-candidate",
+  "runtime": "Node.js >=22.13.0",
+  "access": "public-read-only",
+  "authentication": "none",
+  "http_methods": ["GET"],
+  "local_writes": false,
+  "remote_writes": false,
+  "commands": [
+    "afw audit <url>",
+    "afw registry get <slug>",
+    "afw okf verify",
+    "afw capabilities",
+    "afw --version",
+    "afw --help"
+  ],
+  "entrypoints": {
+    "repository": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+    "executable": "bin/afw.mjs",
+    "package_aliases": ["afw", "agent-friendly-web"]
+  },
+  "documentation": "https://agentfriendlyweb.dev/cli",
+  "guide": "https://agentfriendlyweb.dev/cli/index.md",
+  "response_schema": "https://agentfriendlyweb.dev/schemas/cli-response.v1.json",
+  "limits": {
+    "request_timeout_ms": 8000,
+    "max_response_bytes": 250000,
+    "max_okf_files": 100,
+    "redirects": "manual-no-follow",
+    "filesystem": "no-runtime-writes"
+  },
+  "blocked_actions": [
+    "credentials",
+    "website mutation",
+    "registry mutation",
+    "DNS",
+    "deployment",
+    "billing",
+    "MCP",
+    "A2A",
+    "payments"
+  ]
+}

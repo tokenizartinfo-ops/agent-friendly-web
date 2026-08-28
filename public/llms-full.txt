@@ -28,6 +28,10 @@ The public comparison at `/medir-mejora` processes manually entered before/after
 
 The public page at `https://agentfriendlyweb.dev/conocimiento-abierto` explains the read-only OKF v0.2 release. The canonical bundle index is `https://agentfriendlyweb.dev/okf/v0.2/index.md` and the distribution inventory is `https://agentfriendlyweb.dev/okf/v0.2/manifest.json`. Concepts include source provenance, generated and verified timestamps, lifecycle status and an absolute freshness boundary. `CHECKSUMS.sha256` supports independent integrity checks. The manifest and AI Catalog links are Agent Friendly Web project extensions; they are not universal discovery endpoints required by OKF.
 
+## Read-only CLI
+
+The repo-first CLI release candidate is documented at `https://agentfriendlyweb.dev/cli`. Its machine manifest is `https://agentfriendlyweb.dev/.well-known/agent-friendly-cli.json` and its response schema is `https://agentfriendlyweb.dev/schemas/cli-response.v1.json`. It audits public sites, reads already-published Registry profiles and verifies OKF releases in memory. It performs no local or remote writes, uses no credentials and is not an MCP or A2A service.
+
 ## Standards status
 
 - robots.txt, sitemaps, Schema.org/JSON-LD and OpenAPI are treated as stable foundations.
@@ -55,6 +59,10 @@ Tokenizart is documented as an evolving agent-first architecture. Existing publi
 - https://agentfriendlyweb.dev/conocimiento-abierto
 - https://agentfriendlyweb.dev/okf/v0.2/index.md
 - https://agentfriendlyweb.dev/okf/v0.2/manifest.json
+- https://agentfriendlyweb.dev/cli
+- https://agentfriendlyweb.dev/cli/index.md
+- https://agentfriendlyweb.dev/.well-known/agent-friendly-cli.json
+- https://agentfriendlyweb.dev/schemas/cli-response.v1.json
 - https://agentfriendlyweb.dev/.well-known/ai-catalog.json
 - https://agentfriendlyweb.dev/.well-known/agent-skills/index.json
 - https://github.com/tokenizartinfo-ops/agent-friendly-web
@@ -65,7 +73,7 @@ The AI catalog and Agent Skills index are project discovery conventions backed b
 
 ## Capability status
 
-The machine-readable readiness manifest at `https://agentfriendlyweb.dev/.well-known/agent-readiness.json` is the current capability ledger. Discovery resources, the public read-only audit API and the audit skill are deployed. MCP, A2A and a native CLI are planned. WebMCP and x402 remain research items. Planned or research work does not count as deployed evidence.
+The machine-readable readiness manifest at `https://agentfriendlyweb.dev/.well-known/agent-readiness.json` is the current capability ledger. Discovery resources, the public read-only audit API and the audit skill are deployed. The repo-first CLI is a release candidate. MCP and A2A remain planned; WebMCP and x402 remain research items. Planned, research or release-candidate work does not count as deployed evidence until its production gate closes.
 
 ## Illustrative maturity comparisons
 

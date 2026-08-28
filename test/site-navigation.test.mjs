@@ -6,6 +6,7 @@ const requiredNavigation = [
   '/#auditar',
   '/evolucion-agentica',
   '/metodologia',
+  '/cli',
   '/casos/tokenizart',
   '/mapa-del-sitio',
   '/expediente',
@@ -18,6 +19,7 @@ const publicPages = [
   'app/casos/tokenizart/page.tsx',
   'app/mapa-del-sitio/page.tsx',
   'app/conocimiento-abierto/page.tsx',
+  'app/cli/page.tsx',
 ];
 
 test('public navigation exposes the approved destinations', async () => {
@@ -47,7 +49,7 @@ test('the human site map groups real resources and roadmap capabilities', async 
 test('the technical sitemap includes only canonical public HTML routes', async () => {
   const sitemap = await readFile('app/sitemap.ts', 'utf8');
 
-  for (const route of ['/metodologia', '/evolucion-agentica', '/casos/tokenizart', '/conocimiento-abierto', '/mapa-del-sitio']) {
+  for (const route of ['/metodologia', '/evolucion-agentica', '/casos/tokenizart', '/conocimiento-abierto', '/cli', '/mapa-del-sitio']) {
     assert.ok(sitemap.includes(route), `sitemap is missing ${route}`);
   }
   for (const excluded of ['/expediente', '/api/', '/.well-known/']) {

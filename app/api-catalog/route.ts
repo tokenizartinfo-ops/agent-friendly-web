@@ -13,6 +13,23 @@ export async function GET() {
               title: 'Agent Friendly Web public audit API',
             },
           ],
+          item: [
+            {
+              href: `${origin}/.well-known/agent-friendly-cli.json`,
+              type: 'application/json',
+              title: 'Agent Friendly Web CLI read-only manifest',
+            },
+            {
+              href: `${origin}/schemas/cli-response.v1.json`,
+              type: 'application/schema+json',
+              title: 'Agent Friendly Web CLI response schema',
+            },
+            {
+              href: `${origin}/cli/index.md`,
+              type: 'text/markdown',
+              title: 'Agent Friendly Web CLI guide',
+            },
+          ],
         },
       ],
     },
