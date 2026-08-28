@@ -63,7 +63,7 @@ git commit -m "feat(mcp): add public read-only domain contract"
 ### Task 2: SDK server factory and protocol route
 
 **Files:**
-- Create: `lib/public-mcp-server.ts`
+- Create: `lib/public-mcp-server.mjs`
 - Create: `app/mcp/route.ts`
 - Create: `test/public-mcp-protocol.test.mjs`
 - Create: `test/public-mcp-route-contract.test.mjs`
