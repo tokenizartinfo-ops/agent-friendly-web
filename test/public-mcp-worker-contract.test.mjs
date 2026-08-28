@@ -53,5 +53,11 @@ test("dedicated Cloudflare Worker preserves the bounded public MCP contract", as
   assert.match(release, /https:\/\/mcp\.agentfriendlyweb\.dev\/mcp/);
   assert.match(release, /76de5417-90b5-4a5c-8fa5-87414610afb6/);
   assert.match(release, /4b28c4d7d3e606b7cd8fe7689aea80f164b64f69/);
+  assert.match(release, /2cf7772f-f2d0-4351-b59e-2c366e34a379/);
+  assert.match(release, /e254af4c0d4df37aa3250593088e1698c4678f64/);
+  assert.match(release, /version 24/i);
+  assert.match(release, /appgdep_6a9186a2d94481918cbb5b6da503668c/);
+  assert.match(release, /AF-4/);
+  assert.match(release, /78\/100/);
   assert.match(release, /sin D1|no usa D1/i);
 });
