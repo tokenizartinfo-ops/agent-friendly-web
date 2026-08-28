@@ -1,6 +1,6 @@
 # Capsula A2A de implementacion
 
-**Estado:** arquitectura aprobada; implementacion futura  
+**Estado:** arquitectura aprobada; Bloque 5A candidato local verificado; conectores remotos futuros
 **Fecha:** 2026-08-27
 
 ## Problema
@@ -52,3 +52,16 @@ flowchart LR
 7. ampliacion por proveedor.
 
 No se publica Agent Card ni tool mutante hasta que exista un agente remoto real, identidad, scopes, auditoria y cancelacion verificadas.
+
+## Estado del Bloque 5A
+
+La primera base comun ya existe como candidato local verificado:
+
+- capsula inmutable con SHA-256, firma Ed25519, expiracion y rutas allowlisted;
+- eventos metadata-only para dominio, owner, mantenedor, aplicacion, verificacion y rollback;
+- proyeccion de estado que impide saltos y no permite reutilizar una aprobacion en otra capsula;
+- plan offline de Draft PR con `draft: true`, `executed: false` y `auto_merge: false`.
+
+Este candidato no crea ramas, commits ni pull requests, no se conecta con GitHub o WordPress y no usa credenciales. Los schemas tampoco se anuncian aun como capacidades desplegadas. La evidencia y los limites completos se registran en `docs/BLOCK-5A-PUBLISHING-CAPSULE-GATE-2026-08-28.md`.
+
+El siguiente gate incorpora una fixture Git sintetica y un recibo reproducible. La GitHub App y el plugin WordPress conservan aprobaciones separadas posteriores.

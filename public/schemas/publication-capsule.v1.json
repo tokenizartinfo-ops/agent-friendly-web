@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentfriendlyweb.dev/schemas/publication-capsule.v1.json",
+  "title": "Agent Friendly Web Publication Capsule v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "version",
+    "capsule_id",
+    "digest",
+    "domain",
+    "environment",
+    "owner_ref",
+    "maintainer_ref",
+    "mode",
+    "created_at",
+    "expires_at",
+    "files",
+    "approval_requirements",
+    "post_checks",
+    "rollback",
+    "signature"
+  ],
+  "properties": {
+    "contract": { "const": "agentfriendly.publication-capsule.v1" },
+    "version": { "const": 1 },
+    "capsule_id": { "type": "string", "pattern": "^afwcap_[a-f0-9]{24}$" },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "domain": { "type": "string", "minLength": 4, "maxLength": 253 },
+    "environment": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{1,31}$" },
+    "owner_ref": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,79}$" },
+    "maintainer_ref": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,79}$" },
+    "mode": { "enum": ["package", "pull_request", "connector"] },
+    "created_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "operation", "media_type", "content", "size_bytes", "content_sha256"],
+        "properties": {
+          "path": { "type": "string", "pattern": "^/", "maxLength": 160 },
+          "operation": { "enum": ["create", "replace", "delete"] },
+          "media_type": {
+            "enum": ["application/json", "application/ld+json", "application/xml", "text/markdown", "text/plain", "text/xml"]
+          },
+          "content": { "type": "string", "maxLength": 131072 },
+          "size_bytes": { "type": "integer", "minimum": 0, "maximum": 131072 },
+          "content_sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+          "previous_sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "approval_requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "maintainer", "merge"],
+      "properties": {
+        "owner": { "const": "required" },
+        "maintainer": { "const": "required" },
+        "merge": { "const": "separate_explicit_approval" }
+      }
+    },
+    "post_checks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "items": { "type": "string", "minLength": 1, "maxLength": 160 }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strategy", "scope"],
+      "properties": {
+        "strategy": { "enum": ["revert_pull_request", "restore_previous_hashes"] },
+        "scope": { "const": "capsule_paths_only" }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "key_id", "signed_at", "value"],
+      "properties": {
+        "algorithm": { "const": "Ed25519" },
+        "key_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,79}$" },
+        "signed_at": { "type": "string", "format": "date-time" },
+        "value": { "type": "string", "minLength": 80, "maxLength": 128 }
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentfriendlyweb.dev/schemas/publication-approval.v1.json",
+  "title": "Agent Friendly Web Publication Event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "contract",
+    "capsule_id",
+    "capsule_digest",
+    "action",
+    "from_status",
+    "to_status",
+    "actor_ref",
+    "actor_role",
+    "scopes",
+    "created_at"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "pattern": "^afwevt_[a-f0-9]{24}$" },
+    "contract": { "const": "agentfriendly.publication-event.v1" },
+    "capsule_id": { "type": "string", "pattern": "^afwcap_[a-f0-9]{24}$" },
+    "capsule_digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "action": {
+      "enum": [
+        "request_domain_verification",
+        "verify_domain",
+        "approve_owner",
+        "request_maintainer",
+        "approve_maintainer",
+        "start_application",
+        "record_applied",
+        "record_verified",
+        "record_verification_failed",
+        "record_rollback",
+        "revoke"
+      ]
+    },
+    "from_status": {
+      "enum": [
+        "draft",
+        "domain_verification_pending",
+        "owner_verified",
+        "owner_approved",
+        "maintainer_pending",
+        "maintainer_approved",
+        "applying",
+        "applied",
+        "verification_failed"
+      ]
+    },
+    "to_status": {
+      "enum": [
+        "domain_verification_pending",
+        "owner_verified",
+        "owner_approved",
+        "maintainer_pending",
+        "maintainer_approved",
+        "applying",
+        "applied",
+        "verification_failed",
+        "verified",
+        "rolled_back",
+        "revoked"
+      ]
+    },
+    "actor_ref": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,79}$" },
+    "actor_role": { "enum": ["owner", "maintainer", "verifier", "executor"] },
+    "scopes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z][a-z0-9:_-]{2,79}$" }
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "reason": { "type": "string", "minLength": 3, "maxLength": 300 }
+  }
+}
