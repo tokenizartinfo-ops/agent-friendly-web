@@ -69,12 +69,12 @@
 **Interfaces:**
 - Produces: tablas `capsule_origin_comparisons` y `draft_pr_plans` con indices de idempotencia y proyecto; schemas publicos cerrados con `additionalProperties: false`.
 
-- [ ] Escribir tests fallidos que exijan tablas, indices y contratos.
-- [ ] Crear migracion aditiva y modelos Drizzle sin tocar tablas previas.
-- [ ] Publicar schemas que no admitan tokens, cookies ni merge.
-- [ ] Ejecutar los tests de schema y contratos hasta PASS.
-- [ ] Aplicar la migracion solo a D1 local de prueba y comprobar tablas vacias.
-- [ ] Commit de persistencia y contratos.
+- [x] Escribir tests fallidos que exijan tablas, indices y contratos.
+- [x] Crear migracion aditiva y modelos Drizzle sin tocar tablas previas.
+- [x] Publicar schemas que no admitan tokens, cookies ni merge.
+- [x] Ejecutar los tests de schema y contratos hasta PASS.
+- [x] Aplicar la migracion solo a D1 local de prueba y comprobar tablas vacias.
+- [x] Commit de persistencia y contratos.
 
 ### Task 4: APIs privadas, aislamiento e idempotencia
 

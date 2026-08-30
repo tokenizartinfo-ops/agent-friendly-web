@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentfriendlyweb.dev/schemas/draft-pr-plan.v1.json",
+  "title": "Agent Friendly Web Draft PR Plan v1",
+  "description": "Reviewable technical plan. This contract cannot submit or merge a pull request.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "planId", "capsuleId", "comparisonId", "manifestSha256", "repository", "baseBranch", "branch", "title", "body", "status", "remoteSubmission", "mergeAllowed", "files", "localContractTests", "externalVerifierTests", "rollback", "generatedAt"],
+  "properties": {
+    "contract": { "const": "agentfriendly.draft-pr-plan.v1" },
+    "planId": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "capsuleId": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "comparisonId": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "manifestSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "repository": { "type": "string", "pattern": "^[a-zA-Z0-9_.-]{1,100}/[a-zA-Z0-9_.-]{1,100}$" },
+    "baseBranch": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "branch": { "type": "string", "pattern": "^agentfriendly/capsule-[a-z0-9-]+-v[1-9][0-9]*$" },
+    "title": { "type": "string", "minLength": 1, "maxLength": 300 },
+    "body": { "type": "string", "minLength": 1, "maxLength": 4000 },
+    "status": { "enum": ["prepared_not_submitted", "stale", "blocked", "cancelled"] },
+    "remoteSubmission": { "const": false },
+    "mergeAllowed": { "const": false },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sourcePath", "repositoryPath", "mode", "sha256", "content"],
+        "properties": {
+          "sourcePath": { "enum": ["/", "/llms.txt", "/llms-full.txt", "/robots.txt", "/sitemap.xml"] },
+          "repositoryPath": { "type": "string", "minLength": 1, "maxLength": 240 },
+          "mode": { "enum": ["create_or_update", "proposal_only"] },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "content": { "type": "string", "minLength": 1, "maxLength": 131072 }
+        }
+      }
+    },
+    "localContractTests": { "type": "array", "maxItems": 10, "items": { "type": "object" } },
+    "externalVerifierTests": { "type": "array", "maxItems": 12, "items": { "type": "object" } },
+    "rollback": { "type": "array", "minItems": 1, "maxItems": 5, "items": { "type": "object" } },
+    "generatedAt": { "type": "string", "format": "date-time" }
+  }
+}
