@@ -49,11 +49,11 @@
 - Consumes: capsula y comparacion completa.
 - Produces: `buildDraftPrPlan(input) -> agentfriendly.draft-pr-plan.v1`, `DryRunDraftPrProvider.prepare(plan)` y `GitHubDraftPrProvider.submit(plan)` que falla cerrado mientras el flag este apagado.
 
-- [ ] Escribir tests fallidos para repositorio `owner/name`, rama base, rutas POSIX, rama administrada, archivos manuales bajo `.agentfriendly/proposals/`, post-checks y rollback.
-- [ ] Agregar pruebas negativas para `..`, rutas absolutas, workflows, secretos, merge y envio remoto.
-- [ ] Implementar el plan determinista y los dos providers sin cliente HTTP real.
-- [ ] Ejecutar ambos tests hasta obtener PASS.
-- [ ] Commit de contratos y providers.
+- [x] Escribir tests fallidos para repositorio `owner/name`, rama base, rutas POSIX, rama administrada, archivos manuales bajo `.agentfriendly/proposals/`, post-checks y rollback.
+- [x] Agregar pruebas negativas para `..`, rutas absolutas, workflows, secretos, merge y envio remoto.
+- [x] Implementar el plan determinista y los dos providers sin cliente HTTP real.
+- [x] Ejecutar ambos tests hasta obtener PASS.
+- [x] Commit de contratos y providers.
 
 ### Task 3: Persistencia D1 y schemas publicos
 
