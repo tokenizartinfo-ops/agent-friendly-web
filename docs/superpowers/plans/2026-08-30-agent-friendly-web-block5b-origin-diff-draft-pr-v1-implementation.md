@@ -87,11 +87,11 @@
 - Consumes: identidad ChatGPT, rol derivado, capsula vigente, tablas Task 3 y modulos Tasks 1-2.
 - Produces: GET/POST privados con `cache-control: no-store`, 404 para proyectos ajenos, idempotencia y downloads JSON.
 
-- [ ] Escribir tests contractuales fallidos para identidad, rol, manifest hash, idempotencia, 404 y ausencia de envio remoto.
-- [ ] Implementar GET/POST de comparacion con errores parciales saneados y eventos metadata-only.
-- [ ] Implementar GET/POST del plan solo sobre comparacion completa y vigente.
-- [ ] Ejecutar tests de rutas y regresiones de capsula hasta PASS.
-- [ ] Commit de APIs privadas.
+- [x] Escribir tests contractuales fallidos para identidad, rol, manifest hash, idempotencia, 404 y ausencia de envio remoto.
+- [x] Implementar GET/POST de comparacion con errores parciales saneados y eventos metadata-only.
+- [x] Implementar GET/POST del plan solo sobre comparacion completa y vigente.
+- [x] Ejecutar tests de rutas y regresiones de capsula hasta PASS.
+- [x] Commit de APIs privadas.
 
 ### Task 5: Interfaz progresiva de revision
 
