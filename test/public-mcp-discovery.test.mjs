@@ -83,9 +83,9 @@ test("human and machine discovery label MCP as deployed with explicit boundaries
   assert.match(llmsFull, /MCP public read-only deployed/i);
   assert.match(llmsFull, /https:\/\/mcp\.agentfriendlyweb\.dev\/mcp/);
   assert.match(llmsFull, /no A2A/i);
-  assert.match(llmsFull, /WebMCP browser candidate/i);
+  assert.match(llmsFull, /deployed WebMCP browser tool/i);
   assert.match(llmsFull, /public read-only/i);
-  assert.match(llmsFull, /pending production promotion/i);
+  assert.match(llmsFull, /WebMCP remains experimental/i);
   assert.match(roadmap, /Bloque 4C - MCP read-only: desplegado y verificado/i);
   assert.doesNotMatch(roadmap, /Bloque 4C - MCP read-only: candidato local/i);
 });

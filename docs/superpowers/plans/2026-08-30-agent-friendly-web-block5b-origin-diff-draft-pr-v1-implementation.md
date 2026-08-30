@@ -104,11 +104,11 @@
 - Consumes: APIs privadas de Task 4.
 - Produces: CTA `Comparar con el sitio actual`, diff accesible por archivo y formulario `Preparar borrador tecnico` con descarga marcada `No enviado`.
 
-- [ ] Escribir test fallido para los tres pasos, estados humanos, hashes, diff, CTA exacto y ausencia de `Publicar`/`Crear PR`.
-- [ ] Implementar carga, comparacion y plan con mensajes no tecnicos y errores parciales.
-- [ ] Agregar estilos estables desktop/mobile y colores con texto/simbolo, no solo color.
-- [ ] Ejecutar test de UI y build hasta PASS.
-- [ ] Commit de interfaz.
+- [x] Escribir test fallido para los tres pasos, estados humanos, hashes, diff, CTA exacto y ausencia de `Publicar`/`Crear PR`.
+- [x] Implementar carga, comparacion y plan con mensajes no tecnicos y errores parciales.
+- [x] Agregar estilos estables desktop/mobile y colores con texto/simbolo, no solo color.
+- [x] Ejecutar test de UI y build hasta PASS.
+- [x] Commit de interfaz.
 
 ### Task 6: Evidencia externa, documentacion y gate local
 
@@ -122,11 +122,11 @@
 - Consumes: entrega completa y `docs/EXTERNAL-AUDIT-AND-EVIDENCE-REGISTRY-2026-08-30.md`.
 - Produces: recibo local con comandos, resultados, limites y siguiente gate remoto separado.
 
-- [ ] Ejecutar tests focales de Block 5B.
-- [ ] Ejecutar `npm test`, `npm run lint` y `npm run build`.
-- [ ] Ejecutar D1 local, negativas de red y QA visual desktop/mobile.
-- [ ] Registrar estado `release_candidate`, `remote_submission=false`, migracion remota pendiente y rollback.
-- [ ] Commit del recibo local.
+- [x] Ejecutar tests focales de Block 5B.
+- [x] Ejecutar `npm test`, `npm run lint` y `npm run build`.
+- [x] Ejecutar D1 local, negativas de red y QA visual desktop/mobile.
+- [x] Registrar estado `release_candidate`, `remote_submission=false`, migracion remota pendiente y rollback.
+- [x] Commit del recibo local.
 
 ### Task 7: Gate remoto separado
 

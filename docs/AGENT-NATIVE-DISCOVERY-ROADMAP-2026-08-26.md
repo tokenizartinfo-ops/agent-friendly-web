@@ -211,7 +211,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 7. **Bloque 4C - MCP read-only: desplegado y verificado.** Worker independiente en `mcp.agentfriendlyweb.dev`, contrato stateless, cuatro tools, cuatro resources, limites HTTP y saneamiento; clientes modernos/heredados, negativos, health, auditoria y QA visual aprobados.
 8. **Bloque 5A - capsula manual: desplegado y verificado.** Generacion determinista, hashes SHA-256, vencimiento, descarga JSON y decisiones owner/mantenedor ligadas al manifiesto. La migracion D1 remota fue aditiva, las tablas quedaron vacias y el flujo no aplica cambios ni usa credenciales.
 9. **Gate EV-1 - desplegado y verificado:** Markdown, ARD, WebMCP read-only y perfil externo versionado. La reauditoria Cloudflare paso de Level 2 a Level 4; no incluye DNS, OAuth, A2A o pagos.
-10. **Bloque 5B - integracion asistida:** diff contra archivos vigentes, pruebas posteriores por proveedor externo y adaptador Draft PR sin merge.
+10. **Bloque 5B - candidato local verificado:** diff acotado contra archivos publicos vigentes, pruebas posteriores por proveedor externo y plan de Draft PR descargable sin envio ni merge. La migracion D1 y la publicacion remotas requieren aprobacion separada.
 11. **Bloque 5C - conectores controlados:** adaptadores CMS en entorno de prueba, rollback y primera escritura canary sobre una ruta no critica.
 12. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
 
@@ -250,6 +250,8 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/schemas/cli-response.v1.json` | contrato JSON estable de respuestas CLI | desplegado |
 | `/schemas/publication-capsule.v1.json` | contrato del paquete manual, archivos, hashes, destinos y limites | desplegado en Sites 25 |
 | `/schemas/capsule-decision.v1.json` | contrato de aprobacion o rechazo ligado al hash del manifiesto | desplegado en Sites 25 |
+| `/schemas/origin-comparison.v1.json` | contrato cerrado del diff publico acotado | candidato local Block 5B; publicacion pendiente |
+| `/schemas/draft-pr-plan.v1.json` | plan tecnico no enviado, sin merge ni despliegue | candidato local Block 5B; publicacion pendiente |
 | `Accept: text/markdown` sobre `/` | variante Markdown negociada del inicio | desplegado y verificado en Sites 27 |
 | WebMCP `afw.audit_public_site` | tool in-page read-only para auditoria publica | desplegado y verificado; tecnologia experimental |
 
@@ -293,4 +295,8 @@ El gate publico de los Bloques 2 y 3 se cerro el 2026-08-27. La revision humana 
 
 Los Bloques 4A OKF publico, **4B CLI read-only**, **4B.1 guia conversacional publica** y **4C MCP publico read-only** estan desplegados. El MCP corre en un Worker independiente en `mcp.agentfriendlyweb.dev`, con cuatro tools y cuatro resources, sin OAuth, D1, secretos ni escritura. La transferencia de propuestas aprobadas al expediente autenticado, plugins, WebMCP, A2A, pagos, voz, correo y escritura siguen sin contabilizarse como capacidades desplegadas.
 
-El **Bloque 5A** quedo desplegado y verificado el 2026-08-28. La D1 remota incorporo solo `publication_capsules` y `capsule_approvals`, ambas vacias tras el release; las rutas privadas fallan cerradas y los contratos publicos responden correctamente. **EV-1** se publico en Sites 27 y la reauditoria externa confirmo Level 4 `Agent-Integrated`. El siguiente gate es **Bloque 5B**: comparar contra archivos vigentes y preparar un Draft PR sin merge. CMS, A2A y toda escritura sobre dominios permanecen bloqueados.
+El **Bloque 5A** quedo desplegado y verificado el 2026-08-28. La D1 remota incorporo solo `publication_capsules` y `capsule_approvals`, ambas vacias tras el release; las rutas privadas fallan cerradas y los contratos publicos responden correctamente. **EV-1** se publico en Sites 27 y la reauditoria externa confirmo Level 4 `Agent-Integrated`.
+
+El **Bloque 5B** ya es un candidato local verificado: compara la capsula con recursos publicos allowlisted, muestra diferencias limitadas, conserva las integraciones manuales como propuestas y prepara un documento tecnico `No enviado`. No existe cliente HTTP de GitHub activo, `remoteSubmission=false`, `mergeAllowed=false` y no se modifico D1 remota ni Sites. El siguiente gate exige una decision separada para aplicar solo la migracion aditiva `0003` y publicar la interfaz conservando el envio remoto deshabilitado. CMS, A2A y toda escritura sobre dominios permanecen bloqueados.
+
+La demostracion comercial de mejoras usara un **External Evidence Pack** y no una unica nota: protocolo HTTP reproducible; validadores de Schema.org; Search Console/Bing Webmaster Tools y Cloudflare AI Crawl Control cuando el owner pueda verificarlos; observaciones fechadas de motores de respuesta; y graders comerciales solo como evidencia direccional. Cloudflare Agent Readiness y la rubrica Vercel Agent Readability se mantendran versionadas como controles tecnicos distintos. HubSpot AI Search Grader no se presentara como prueba tecnica independiente. La matriz, sus limites y la vigilancia trimestral viven en `docs/EXTERNAL-AUDIT-AND-EVIDENCE-REGISTRY-2026-08-30.md`.
