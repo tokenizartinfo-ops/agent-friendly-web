@@ -93,6 +93,13 @@ export async function POST(request: Request, context: RouteContext) {
   )).orderBy(desc(capsuleOriginComparisons.createdAt)).limit(1);
   const comparison = comparisonRow ? parseObject(comparisonRow.comparisonJson) : null;
   if (!comparison || comparison.status !== 'complete') return Response.json({ error: 'Completa primero la comparacion con el sitio actual.' }, { status: 409 });
+  const [existingPlan] = await db.select().from(draftPrPlans).where(and(
+    eq(draftPrPlans.capsuleId, capsuleId),
+    eq(draftPrPlans.comparisonId, comparison.comparisonId),
+  )).limit(1);
+  if (existingPlan) {
+    return Response.json({ actorRole: role, plan: parseObject(existingPlan.planJson), replayed: true }, { headers: { 'cache-control': 'no-store' } });
+  }
   const capsule = parseObject(capsuleRow.capsuleJson);
   if (!capsule) return Response.json({ error: 'La capsula almacenada no es valida.' }, { status: 409 });
 

@@ -26,6 +26,9 @@ test('draft plan route prepares and downloads only an unsubmitted plan', async (
   assert.match(source, /confirmPrepare !== true/);
   assert.match(source, /comparison\.status !== 'complete'/);
   assert.match(source, /draftPrPlans\.idempotencyKey/);
+  assert.match(source, /draftPrPlans\.capsuleId/);
+  assert.match(source, /draftPrPlans\.comparisonId/);
+  assert.match(source, /existingPlan/);
   assert.match(source, /prepared_not_submitted/);
   assert.match(source, /remoteSubmission.*false/);
   assert.match(source, /cache-control.*no-store/i);
