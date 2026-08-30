@@ -4,7 +4,7 @@
 
 AF-EV is orthogonal to the proprietary AF-0 to AF-5 maturity method. The Cloudflare `isitagentready.com` baseline observed on 2026-08-30 scored `agentfriendlyweb.dev` at 53/100, Level 2 Bot-Aware. This is a dated third-party diagnostic, not a certification, security assurance, indexing guarantee or ranking guarantee. The machine-readable history is published at `https://agentfriendlyweb.dev/.well-known/external-readiness.json` and the human explanation at `https://agentfriendlyweb.dev/verificacion-externa`.
 
-The immediate local candidate adds real Markdown negotiation, an ARD-compatible draft manifest and one experimental WebMCP public read-only tool. DNS, OAuth, A2A and commerce remain separate gates and are not advertised merely to improve an external score.
+After Sites version 27, a second provider observation returned Level 4 Agent-Integrated and passed Markdown negotiation, ARD and WebMCP. The provider API did not return a numeric score for that observation, so Agent Friendly Web does not infer one. DNS, OAuth, A2A and commerce remain separate gates and are not advertised merely to improve an external result.
 
 ## Identity
 
@@ -46,7 +46,7 @@ The deployed repo-first CLI is documented at `https://agentfriendlyweb.dev/cli`.
 
 The deployed service documented at `https://agentfriendlyweb.dev/mcp-readonly` exposes `POST https://mcp.agentfriendlyweb.dev/mcp` through stateless Streamable HTTP. It contains exactly four public read-only tools for audit, methodology, published Registry profiles and canonical OKF v0.2 verification, plus four versioned `afw://` resources. Its discovery card is `https://agentfriendlyweb.dev/.well-known/mcp/server-card.json` and its stable result schema is `https://agentfriendlyweb.dev/schemas/mcp-result.v1.json`.
 
-The service uses no OAuth because it exposes public data only. It has no A2A delegation, private expedients, owner data, website mutations or payment actions. The separate WebMCP browser candidate exposes only `afw.audit_public_site` from the public page, reuses the public audit API and remains pending production promotion. Modern MCP 2026-07-28 and stateless 2025 compatibility were verified with remote clients against the exact production Worker version before promotion.
+The service uses no OAuth because it exposes public data only. It has no A2A delegation, private expedients, owner data, website mutations or payment actions. The separate deployed WebMCP browser tool exposes only `afw.audit_public_site` from the public page and reuses the public audit API. Modern MCP 2026-07-28 and stateless 2025 compatibility were verified with remote clients against the exact production Worker version before promotion.
 
 ## Publication capsule
 
@@ -98,11 +98,11 @@ Tokenizart is documented as an evolving agent-first architecture. Existing publi
 
 ## Machine-readable catalogs
 
-The ARD-compatible draft manifest, its `ai-catalog.json` compatibility alias and the Agent Skills index point to public resources on this site. The API Catalog is a standards-based linkset pointing to the public OpenAPI document and the deployed MCP contract. No OAuth resource, A2A service or payment protocol is advertised by this release. WebMCP remains a local public read-only candidate until its production gate closes.
+The deployed ARD-compatible draft manifest, its `ai-catalog.json` compatibility alias and the Agent Skills index point to public resources on this site. The API Catalog is a standards-based linkset pointing to the public OpenAPI document and the deployed MCP contract. No OAuth resource, A2A service or payment protocol is advertised by this release. WebMCP remains experimental despite being deployed and externally observed.
 
 ## Capability status
 
-The machine-readable readiness manifest at `https://agentfriendlyweb.dev/.well-known/agent-readiness.json` is the current capability ledger. Discovery resources, the public read-only audit API, the audit skill, the repo-first read-only CLI and the public stateless MCP read-only server are deployed. Markdown negotiation, ARD compatibility and the browser WebMCP tool are local candidates. A2A remains planned and x402 remains research. Candidate, planned and research work does not count as deployed evidence until its production gate closes.
+The machine-readable readiness manifest at `https://agentfriendlyweb.dev/.well-known/agent-readiness.json` is the current capability ledger. Discovery resources, the public read-only audit API, the audit skill, the repo-first read-only CLI, the public stateless MCP read-only server, Markdown negotiation, ARD compatibility and the browser WebMCP tool are deployed. A2A remains planned and x402 remains research. Candidate, planned and research work does not count as deployed evidence until its production gate closes.
 
 ## Illustrative maturity comparisons
 

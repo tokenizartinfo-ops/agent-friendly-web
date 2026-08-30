@@ -8,15 +8,15 @@ export const metadata: Metadata = {
   description: 'Baseline externo fechado, diferencias con AF-0 a AF-5 y roadmap honesto de remediacion.',
 };
 
-const passed = [
-  'robots.txt y sitemap',
-  'Link headers y politica de bots',
-  'Content Signals y API Catalog',
-  'MCP Server Card y Agent Skills',
+const verified = [
+  'Markdown negociado con Vary: Accept',
+  'ARD y AI Catalog compatibles',
+  'WebMCP publico read-only',
+  'Discovery, politica de bots, MCP y skills',
 ];
 
 const next = [
-  ['EV-1', 'Markdown, ARD y WebMCP read-only', 'Candidato local sujeto a pruebas y release separado.'],
+  ['EV-1', 'Markdown, ARD y WebMCP read-only', 'Desplegado en Sites 27 y verificado externamente.'],
   ['EV-2', 'DNS-AID y DNSSEC', 'Requiere analisis de zona, rollback y aprobacion especifica.'],
   ['EV-3', 'OAuth y auth.md', 'Solo junto con un recurso protegido y un authorization server real.'],
   ['EV-4', 'A2A', 'Solo despues de desplegar un agente remoto observable.'],
@@ -35,16 +35,16 @@ export default function ExternalVerificationPage() {
 
       <section className="site-map-section" aria-labelledby="external-score-title">
         <div className="site-map-heading">
-          <span>Baseline Cloudflare</span>
-          <h2 id="external-score-title">53 / 100 · Level 2 Bot-Aware</h2>
-          <p>Este puntaje pertenece a `isitagentready.com` y puede cambiar cuando el proveedor modifique sus checks o su formula.</p>
+          <span>Antes y despues</span>
+          <h2 id="external-score-title">53 / 100 · Level 2 → Level 4 Agent-Integrated</h2>
+          <p>El baseline devolvio 53/100. La reauditoria posterior devolvio Level 4 y el detalle de checks, pero el puntaje numerico no fue devuelto por el API; por eso no inventamos una cifra.</p>
         </div>
         <div className="capability-list">
-          {passed.map((item) => (
+          {verified.map((item) => (
             <article key={item}>
               <CheckCircle2 size={18} />
-              <div><strong>{item}</strong><p>Evidencia observada por el auditor externo.</p></div>
-              <span>pass</span>
+              <div><strong>{item}</strong><p>Activo en produccion y observado por el auditor externo.</p></div>
+              <span>verified</span>
             </article>
           ))}
         </div>
@@ -61,7 +61,7 @@ export default function ExternalVerificationPage() {
             <article key={gate}>
               {gate === 'EV-1' ? <ShieldCheck size={18} /> : <CircleAlert size={18} />}
               <div><strong>{name}</strong><p>{detail}</p></div>
-              <span data-status={gate === 'EV-1' ? 'candidate' : 'planned'}>{gate}</span>
+              <span data-status={gate === 'EV-1' ? 'deployed' : 'planned'}>{gate}</span>
             </article>
           ))}
         </div>

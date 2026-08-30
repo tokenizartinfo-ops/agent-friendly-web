@@ -8,9 +8,9 @@
   "canonical_origin": "https://agentfriendlyweb.dev",
   "updated_at": "2026-08-30",
   "external_verification": {
-    "status": "baseline",
+    "status": "verified",
     "profile": "/.well-known/external-readiness.json",
-    "note": "Third-party observations remain separate from AF-0 to AF-5."
+    "note": "Cloudflare post-release observation reached Level 4 Agent-Integrated. Third-party observations remain separate from AF-0 to AF-5."
   },
   "policy": {
     "public_search": "allowed",
@@ -100,20 +100,20 @@
       "note": "Repo-first public read-only CLI. No credentials, local writes, remote mutations, MCP or A2A execution."
     },
     "webmcp": {
-      "status": "candidate",
+      "status": "deployed",
       "resources": ["/", "/api/scan"],
       "tool": "afw.audit_public_site",
-      "note": "Local release candidate. Experimental public read-only in-page tool; production remains pending."
+      "note": "Experimental public read-only in-page tool, deployed and observed by the external verifier."
     },
     "markdown_negotiation": {
-      "status": "candidate",
+      "status": "deployed",
       "resources": ["/", "/index.md"],
-      "note": "Local release candidate with explicit text/markdown negotiation; production remains pending."
+      "note": "Explicit text/markdown negotiation deployed with Vary: Accept and externally observed."
     },
     "ard": {
-      "status": "candidate",
+      "status": "deployed",
       "resources": ["/.well-known/ard.json", "/.well-known/ai-catalog.json"],
-      "note": "Draft compatibility candidate; ARD remains an evolving proposal."
+      "note": "Draft-compatible manifests deployed and externally observed; ARD remains an evolving proposal."
     },
     "x402": {
       "status": "research",

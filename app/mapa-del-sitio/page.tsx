@@ -82,12 +82,12 @@ const activeCapabilities = [
   ['CLI read-only', 'Desplegada', 'Auditoria, Registry y OKF con JSON estable, sin credenciales ni escrituras.'],
   ['MCP public read-only', 'Desplegado', 'Cuatro tools y cuatro resources publicos, sin OAuth, memoria ni escrituras.'],
   ['Capsula manual', 'Desplegada', 'Prepara archivos y hashes para entrega manual con aprobaciones separadas; no publica ni modifica el sitio.'],
-  ['AF-EV', 'Baseline', 'Conserva 53/100 Level 2 de Cloudflare como fotografia externa fechada.'],
+  ['AF-EV', 'Verificado', 'Conserva el baseline 53/100 Level 2 y la reauditoria Level 4 como fotografias externas fechadas.'],
 ];
 
 const roadmap = [
-  ['Markdown negociado', 'candidate', 'Implementado localmente; requiere release y reauditoria externa.'],
-  ['WebMCP read-only', 'candidate', 'Una tool in-page reutiliza el auditor publico; tecnologia experimental.'],
+  ['Markdown negociado', 'deployed', 'Desplegado con Vary: Accept y verificado externamente.'],
+  ['WebMCP read-only', 'deployed', 'Tool in-page publica read-only desplegada; tecnologia experimental.'],
   ['Voz, correo y guardado asistido', 'planned', 'Permanecen fuera del prototipo hasta contratos, consentimiento y auditoria.'],
   ['Plugins y conectores', 'planned', 'Cada plataforma requiere un adaptador oficial y una capacidad verificable.'],
   ['A2A', 'planned', 'No se publica Agent Card ni delegacion entre agentes.'],

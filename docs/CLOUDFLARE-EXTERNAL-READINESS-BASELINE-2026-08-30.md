@@ -6,6 +6,10 @@
 **Resultado:** 53/100, Level 2 `Bot-Aware`  
 **Informe humano:** `https://isitagentready.com/agentfriendlyweb.dev`
 
+**Reauditoria posterior:** 2026-08-30T21:58:56.237Z, Level 4 `Agent-Integrated`  
+**Release observado:** Sites 27, commit `6cc980560e5505ede7278ac21018506ba92e9b93`  
+**Puntaje posterior:** no informado por el API del proveedor; no se infiere
+
 ## Alcance
 
 Este documento conserva una fotografia externa del origen publico. No es una certificacion de seguridad, una garantia de indexacion ni una parte de la escala propia AF-0 a AF-5. La metodologia y el puntaje pertenecen al proveedor y pueden cambiar sin una version de Agent Friendly Web.
@@ -38,6 +42,12 @@ La meta comercial es obtener el maximo puntaje **aplicable y verdadero**. Un che
 
 Los checks x402, MPP, UCP, ACP y AP2 aparecen informativos y no puntuados porque el origen no presenta actualmente un recurso comercial agentico. Permanecen fuera de la entrega inmediata.
 
+## Resultado posterior a EV-1
+
+La reauditoria confirmo `markdownNegotiation`, `webMcp` y `ard`, junto con los checks ya aprobados de discovery, bots, API Catalog, MCP Server Card y Agent Skills. El nivel externo paso de 2 `Bot-Aware` a 4 `Agent-Integrated`.
+
+Continuaron fallando `dnsAid`, `oauthDiscovery`, `oauthProtectedResource`, `authMd` y `a2aAgentCard`. El API no incluyo un campo de puntaje numerico en esta observacion. Registrar solo el nivel y los checks es mas riguroso que reconstruir una cifra con una formula no publicada en la respuesta.
+
 ## Modelo de madurez
 
 AF-0 a AF-5 sigue describiendo la madurez propia del sitio. No se crea un AF-6 dependiente de un auditor externo. Se agrega una capa ortogonal:
@@ -60,6 +70,8 @@ Un sitio puede ser AF-5 y tener un AF-EV incompleto si el auditor mide una tecno
 ## Roadmap de remediacion
 
 ### Gate EV-1: lectura y catalogacion, sin identidad
+
+**Estado:** desplegado y verificado externamente en Sites 27.
 
 1. Negociacion Markdown real para `/` con `Vary: Accept`.
 2. `/.well-known/ai-catalog.json` compatible con el esquema ARD observado.
@@ -104,4 +116,3 @@ El objetivo no es declarar `100%`. El objetivo es que una reauditoria independie
 - ARD draft y schemas: `https://github.com/ards-project/ard-spec`
 - WebMCP draft: `https://github.com/webmachinelearning/webmcp`
 - Cloudflare WebMCP adapter: `https://github.com/cloudflare/agents/blob/main/experimental/webmcp.md`
-

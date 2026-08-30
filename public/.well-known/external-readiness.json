@@ -17,6 +17,25 @@
       "failed_checks": ["dnsAid", "markdownNegotiation", "oauthDiscovery", "oauthProtectedResource", "authMd", "a2aAgentCard", "webMcp", "ard"],
       "not_scored_checks": ["webBotAuth", "x402", "mpp", "ucp", "acp", "ap2"],
       "source_note": "Provider-controlled directional diagnostic. Checks and scoring can change independently of Agent Friendly Web."
+    },
+    {
+      "provider": "Cloudflare isitagentready.com",
+      "observed_at": "2026-08-30T21:58:56.237Z",
+      "origin": "https://agentfriendlyweb.dev",
+      "report_url": "https://isitagentready.com/agentfriendlyweb.dev",
+      "score": null,
+      "score_status": "not_returned_by_provider_api",
+      "level": 4,
+      "label": "Agent-Integrated",
+      "status": "verified",
+      "release": {
+        "site_version": 27,
+        "source_commit": "6cc980560e5505ede7278ac21018506ba92e9b93"
+      },
+      "passed_checks": ["robotsTxt", "sitemap", "linkHeaders", "markdownNegotiation", "robotsTxtAiRules", "contentSignals", "apiCatalog", "mcpServerCard", "agentSkills", "webMcp", "ard"],
+      "failed_checks": ["dnsAid", "oauthDiscovery", "oauthProtectedResource", "authMd", "a2aAgentCard"],
+      "not_scored_checks": ["webBotAuth", "x402", "mpp", "ucp", "acp", "ap2"],
+      "source_note": "Post-release provider API result. The API returned Level 4 and check statuses but no numeric score field, so no score was inferred."
     }
   ],
   "limits": [
