@@ -1,4 +1,5 @@
 import { MaturityMap } from './components/maturity-map';
+import { PublicWebMcpRegistration } from './components/public-webmcp-registration';
 import { ScanWorkspace } from './components/scan-workspace';
 import { SiteFooter } from './components/site-footer';
 import { SiteHeader } from './components/site-header';
@@ -48,6 +49,7 @@ export default async function Home({ searchParams }: HomeProps) {
   };
   return (
     <main>
+      <PublicWebMcpRegistration />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <SiteHeader />
 

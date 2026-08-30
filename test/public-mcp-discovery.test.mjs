@@ -77,13 +77,15 @@ test("human and machine discovery label MCP as deployed with explicit boundaries
   assert.ok(readinessJson.capabilities.mcp.resources.includes("/.well-known/mcp/server-card.json"));
 
   const catalogJson = JSON.parse(catalog);
-  assert.ok(catalogJson.resources.some((item) => item.url.endsWith("/.well-known/mcp/server-card.json")));
+  assert.ok(catalogJson.entries.some((item) => item.url.endsWith("/.well-known/mcp/server-card.json")));
   assert.match(apiCatalog, /\.well-known\/mcp\/server-card\.json/);
   assert.match(llms, /MCP public read-only deployed/i);
   assert.match(llmsFull, /MCP public read-only deployed/i);
   assert.match(llmsFull, /https:\/\/mcp\.agentfriendlyweb\.dev\/mcp/);
   assert.match(llmsFull, /no A2A/i);
-  assert.match(llmsFull, /no WebMCP/i);
+  assert.match(llmsFull, /WebMCP browser candidate/i);
+  assert.match(llmsFull, /public read-only/i);
+  assert.match(llmsFull, /pending production promotion/i);
   assert.match(roadmap, /Bloque 4C - MCP read-only: desplegado y verificado/i);
   assert.doesNotMatch(roadmap, /Bloque 4C - MCP read-only: candidato local/i);
 });

@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-08-28
 
-**Estado:** especificacion para revision humana
+**Estado:** aprobada por Gabriel Mucchiut el 2026-08-30
 
 **Dependencia:** Block 5A desplegado y verificado
 
@@ -275,3 +275,19 @@ Primera escritura sobre un sitio o CMS de prueba. Requiere otra aprobacion y no 
 ## 15. Resultado esperado
 
 Al cerrar 5B, una persona no tecnica podra ver que cambia y descargar un borrador tecnico reproducible para su mantenedor. Agent Friendly Web habra validado el contrato y el adaptador sin adquirir control general del sitio ni convertir una autorizacion de revision en una autorizacion de publicacion.
+
+## 16. Integracion con verificacion externa
+
+La auditoria Cloudflare `isitagentready.com` del 2026-08-30 se incorpora como baseline independiente, no como nueva escala propia. Block 5B debe poder incluir en las pruebas posteriores del Draft PR un verificador externo declarativo, pero no depender de su disponibilidad para calcular el diff ni para preservar la capsula.
+
+Reglas adicionales:
+
+- cada plan distingue `local_contract_tests` de `external_verifier_tests`;
+- una reauditoria externa es read-only y se ejecuta despues de desplegar, nunca durante la generacion de archivos;
+- puntaje, nivel y checks se guardan como evidencia fechada y atribuida al proveedor;
+- un cambio en la metodologia externa vuelve la fotografia `stale`, no invalida la evidencia local;
+- ningun plan agrega OAuth, A2A, DNS o pagos solo para aumentar un puntaje;
+- DNS y toda reconfiguracion Cloudflare requieren gates y aprobaciones separados;
+- la entrega inmediata EV-1 corrige Markdown, ARD y WebMCP read-only antes de iniciar la persistencia y APIs privadas de 5B.
+
+Fuente canonica del baseline: `docs/CLOUDFLARE-EXTERNAL-READINESS-BASELINE-2026-08-30.md`.

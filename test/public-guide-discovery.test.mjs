@@ -33,7 +33,7 @@ test('machine discovery exposes the deployed guide with bounded capabilities', a
     assert.match(content, /https:\/\/agentfriendlyweb\.dev\/\.well-known\/public-guide-contract\.json/);
   }
 
-  const urls = aiCatalog.resources.map((resource) => resource.url);
+  const urls = aiCatalog.entries.map((resource) => resource.url);
   assert.ok(urls.includes(`${canonical}/guia`));
   assert.ok(urls.includes(`${canonical}/.well-known/public-guide-contract.json`));
   assert.equal(readiness.capabilities.public_guide.status, 'deployed');

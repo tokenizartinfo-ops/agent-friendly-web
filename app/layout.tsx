@@ -37,6 +37,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <link rel="ard" href="/.well-known/ard.json" type="application/json" />
+        <link rel="ai-catalog" href="/.well-known/ai-catalog.json" type="application/json" />
+        <link rel="alternate" href="/index.md" type="text/markdown" title="Agent Friendly Web in Markdown" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

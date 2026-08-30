@@ -15,7 +15,7 @@ test('public discovery documents the deployed manual capsule without remote appl
 
   const readiness = JSON.parse(readinessText);
   const catalog = JSON.parse(catalogText);
-  const catalogUrls = catalog.resources.map((resource) => resource.url);
+  const catalogUrls = catalog.entries.map((resource) => resource.url);
 
   assert.equal(readiness.capabilities.publication_capsule.status, 'deployed');
   assert.equal(readiness.capabilities.publication_capsule.mode, 'manual_handoff');

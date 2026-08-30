@@ -9,7 +9,15 @@
 
 Agent Friendly Web debe demostrar en su propia infraestructura el metodo que ofrece a terceros. El objetivo no es acumular nombres de protocolos, sino permitir que personas y agentes descubran que existe, comprendan que hace, distingan evidencia de declaracion y utilicen solamente capacidades publicadas y seguras.
 
-La meta de 100% representa la finalizacion de las capas que el caso necesita. No exige activar cada tecnologia disponible ni autoriza a presentar un roadmap como producto operativo.
+La meta de 100% representa la finalizacion de las capas que el caso necesita. No exige activar cada tecnologia disponible ni autoriza a presentar un roadmap como producto operativo. Los puntajes externos se conservan en un perfil AF-EV separado: sirven como evidencia comparativa, no redefinen AF-0 a AF-5 ni justifican publicar capacidades ficticias.
+
+## Verificacion externa AF-EV
+
+La fotografia de Cloudflare `isitagentready.com` del 2026-08-30 ubico a `agentfriendlyweb.dev` en **53/100, Level 2 Bot-Aware**. Pasaron robots, sitemap, Link headers, politica de bots, Content Signals, API Catalog, MCP Server Card y Agent Skills. Fallaron DNS-AID, negociacion Markdown, OAuth discovery, OAuth Protected Resource, `auth.md`, A2A Agent Card, WebMCP y compatibilidad ARD del manifiesto existente.
+
+AF-EV registra proveedor, fecha, origen, puntaje, checks, evidencia y vigencia. No se crea AF-6: AF-0 a AF-5 mide madurez propia y AF-EV mide observacion independiente. El detalle y los gates viven en `docs/CLOUDFLARE-EXTERNAL-READINESS-BASELINE-2026-08-30.md`.
+
+La prioridad inmediata es corregir las capacidades publicas que ya pueden ser verdaderas: Markdown, ARD y una tool WebMCP read-only. DNS requiere otra aprobacion. OAuth, `auth.md`, A2A y comercio se implementan solamente junto con servicios reales.
 
 ## Estado verificable de esta entrega
 
@@ -53,7 +61,7 @@ La meta de 100% representa la finalizacion de las capas que el caso necesita. No
 
 ### Investigacion
 
-- WebMCP para interaccion declarada desde una pagina compatible;
+- evolucion y compatibilidad de WebMCP despues del primer registro publico read-only;
 - x402 para servicios concretos donde un pago por recurso tenga sentido;
 - pagos por crawl de Cloudflare, sujeto a disponibilidad, economia y politica editorial;
 - sincronizacion con proveedores y CMS sin exponer credenciales al modelo.
@@ -202,9 +210,10 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 6. **Bloque 4B.1 - guia conversacional publica: desplegada y verificada.** Orientacion determinista con fuentes, continuidad inmediata y lenguaje adaptable, sin acciones ni persistencia.
 7. **Bloque 4C - MCP read-only: desplegado y verificado.** Worker independiente en `mcp.agentfriendlyweb.dev`, contrato stateless, cuatro tools, cuatro resources, limites HTTP y saneamiento; clientes modernos/heredados, negativos, health, auditoria y QA visual aprobados.
 8. **Bloque 5A - capsula manual: desplegado y verificado.** Generacion determinista, hashes SHA-256, vencimiento, descarga JSON y decisiones owner/mantenedor ligadas al manifiesto. La migracion D1 remota fue aditiva, las tablas quedaron vacias y el flujo no aplica cambios ni usa credenciales.
-9. **Bloque 5B - integracion asistida:** diff contra archivos vigentes y adaptador Draft PR sin merge.
-10. **Bloque 5C - conectores controlados:** adaptadores CMS en entorno de prueba, rollback y primera escritura canary sobre una ruta no critica.
-11. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
+9. **Gate EV-1 - verificacion externa honesta:** Markdown, ARD, WebMCP read-only y perfil externo versionado; no incluye DNS, OAuth, A2A o pagos.
+10. **Bloque 5B - integracion asistida:** diff contra archivos vigentes, pruebas posteriores por proveedor externo y adaptador Draft PR sin merge.
+11. **Bloque 5C - conectores controlados:** adaptadores CMS en entorno de prueba, rollback y primera escritura canary sobre una ruta no critica.
+12. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
 
 ## Recursos de descubrimiento
 
@@ -216,7 +225,9 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/llms-full.txt` | contexto publico extendido | desplegado, convencion del proyecto |
 | `/openapi.json` | contrato de auditoria publica | desplegado |
 | `/api-catalog` | linkset hacia OpenAPI | desplegado |
-| `/.well-known/ai-catalog.json` | inventario publico | desplegado, no es estandar oficial |
+| `/.well-known/ai-catalog.json` | inventario de compatibilidad ARD | remediacion EV-1; propuesta en evolucion |
+| `/.well-known/ard.json` | fuente ARD vigente segun el draft observado | remediacion EV-1; propuesta en evolucion |
+| `/.well-known/external-readiness.json` | fotografia AF-EV con procedencia y limites | remediacion EV-1; convencion del proyecto |
 | `/.well-known/agent-skills/index.json` | indice de skills descargables | desplegado, convencion del proyecto |
 | `/.well-known/agent-readiness.json` | estado de capacidades | desplegado, no es estandar oficial |
 | `/.well-known/crawler-policy-catalog.json` | catalogo de identidades, finalidades y fuentes por crawler | desplegado, convencion del proyecto |
@@ -239,6 +250,8 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/schemas/cli-response.v1.json` | contrato JSON estable de respuestas CLI | desplegado |
 | `/schemas/publication-capsule.v1.json` | contrato del paquete manual, archivos, hashes, destinos y limites | desplegado en Sites 25 |
 | `/schemas/capsule-decision.v1.json` | contrato de aprobacion o rechazo ligado al hash del manifiesto | desplegado en Sites 25 |
+| `Accept: text/markdown` sobre `/` | variante Markdown negociada del inicio | remediacion EV-1 |
+| WebMCP `afw.audit_public_site` | tool in-page read-only para auditoria publica | remediacion EV-1, tecnologia experimental |
 
 ## Secuencia hacia herramientas y delegacion
 

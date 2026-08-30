@@ -6,7 +6,12 @@
     "creator": "Gabriel Mucchiut"
   },
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "updated_at": "2026-08-28",
+  "updated_at": "2026-08-30",
+  "external_verification": {
+    "status": "baseline",
+    "profile": "/.well-known/external-readiness.json",
+    "note": "Third-party observations remain separate from AF-0 to AF-5."
+  },
   "policy": {
     "public_search": "allowed",
     "user_directed_ai_input": "allowed",
@@ -95,8 +100,20 @@
       "note": "Repo-first public read-only CLI. No credentials, local writes, remote mutations, MCP or A2A execution."
     },
     "webmcp": {
-      "status": "research",
-      "note": "WebMCP remains experimental and is not enabled."
+      "status": "candidate",
+      "resources": ["/", "/api/scan"],
+      "tool": "afw.audit_public_site",
+      "note": "Local release candidate. Experimental public read-only in-page tool; production remains pending."
+    },
+    "markdown_negotiation": {
+      "status": "candidate",
+      "resources": ["/", "/index.md"],
+      "note": "Local release candidate with explicit text/markdown negotiation; production remains pending."
+    },
+    "ard": {
+      "status": "candidate",
+      "resources": ["/.well-known/ard.json", "/.well-known/ai-catalog.json"],
+      "note": "Draft compatibility candidate; ARD remains an evolving proposal."
     },
     "x402": {
       "status": "research",

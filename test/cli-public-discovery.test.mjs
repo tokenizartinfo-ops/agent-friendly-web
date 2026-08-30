@@ -46,7 +46,7 @@ test("public discovery surfaces link the CLI without claiming MCP or writes", as
 
 test("catalogs and readiness list CLI resources with deployed status", async () => {
   const aiCatalog = JSON.parse(await readFile("public/.well-known/ai-catalog.json", "utf8"));
-  const urls = aiCatalog.resources.map((resource) => resource.url);
+  const urls = aiCatalog.entries.map((resource) => resource.url);
   for (const url of [
     `${canonical}/cli`,
     `${canonical}/cli/index.md`,

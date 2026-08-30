@@ -1,0 +1,27 @@
+{
+  "contract": "agent-friendly-web.external-readiness.v1",
+  "canonical_origin": "https://agentfriendlyweb.dev",
+  "relationship_to_af": "External verification is orthogonal and separate from the proprietary AF-0 to AF-5 maturity model.",
+  "updated_at": "2026-08-30",
+  "observations": [
+    {
+      "provider": "Cloudflare isitagentready.com",
+      "observed_at": "2026-08-30T21:02:04.000Z",
+      "origin": "https://agentfriendlyweb.dev",
+      "report_url": "https://isitagentready.com/agentfriendlyweb.dev",
+      "score": 53,
+      "level": 2,
+      "label": "Bot-Aware",
+      "status": "baseline",
+      "passed_checks": ["robotsTxt", "sitemap", "linkHeaders", "robotsTxtAiRules", "contentSignals", "apiCatalog", "mcpServerCard", "agentSkills"],
+      "failed_checks": ["dnsAid", "markdownNegotiation", "oauthDiscovery", "oauthProtectedResource", "authMd", "a2aAgentCard", "webMcp", "ard"],
+      "not_scored_checks": ["webBotAuth", "x402", "mpp", "ucp", "acp", "ap2"],
+      "source_note": "Provider-controlled directional diagnostic. Checks and scoring can change independently of Agent Friendly Web."
+    }
+  ],
+  "limits": [
+    "This is not a certification, security assurance, indexing guarantee or ranking guarantee.",
+    "A passing signal must correspond to a real usable capability.",
+    "OAuth, A2A, DNS and commerce are not advertised merely to increase a score."
+  ]
+}

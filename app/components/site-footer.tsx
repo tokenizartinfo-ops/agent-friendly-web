@@ -13,6 +13,7 @@ const productLinks = [
   ['Registry publico', '/registry'],
   ['CLI read-only', '/cli'],
   ['MCP public read-only', '/mcp-readonly'],
+  ['Verificacion externa', '/verificacion-externa'],
   ['Caso Tokenizart', '/casos/tokenizart'],
   ['Mapa completo', '/mapa-del-sitio'],
 ];
@@ -21,7 +22,9 @@ const agentLinks = [
   ['llms.txt', '/llms.txt'],
   ['OpenAPI', '/openapi.json'],
   ['AI Catalog', '/.well-known/ai-catalog.json'],
+  ['ARD', '/.well-known/ard.json'],
   ['Readiness', '/.well-known/agent-readiness.json'],
+  ['External readiness', '/.well-known/external-readiness.json'],
   ['Crawler Catalog', '/.well-known/crawler-policy-catalog.json'],
   ['Comparison contract', '/.well-known/readiness-comparison-contract.json'],
   ['Assistant contract', '/.well-known/intake-assistant-contract.json'],
