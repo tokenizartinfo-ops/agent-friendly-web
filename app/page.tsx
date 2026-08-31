@@ -3,6 +3,7 @@ import { MaturityMap } from './components/maturity-map';
 import { ComicCallHero, FutureArchive, HomeNextPaths } from './components/comic-home-intro';
 import { HomeMaturityComparison } from './components/maturity-demonstrator';
 import { PublicWebMcpRegistration } from './components/public-webmcp-registration';
+import { PublicFaq } from './components/public-faq';
 import { ScanWorkspace } from './components/scan-workspace';
 import { SiteFooter } from './components/site-footer';
 import { SiteHeader } from './components/site-header';
@@ -69,6 +70,7 @@ export async function HomeExperience({ searchParams, locale = 'es' }: HomeProps 
       <MaturityMap locale={locale} />
       <ScanWorkspace initialSite={initialSite} locale={locale} />
       <HomeMaturityComparison locale={locale} />
+      <PublicFaq locale={locale} limit={6} />
       <FutureArchive locale={locale} />
       <HomeNextPaths locale={locale} />
 

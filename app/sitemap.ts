@@ -2,13 +2,13 @@ import type { MetadataRoute } from 'next';
 import { localizedPath, routeEntries } from '../lib/site-i18n.mjs';
 
 export const PUBLIC_SITEMAP_ROUTE_KEYS = Object.freeze([
-  'home', 'guide', 'aeo', 'sectors', 'evolution', 'methodology', 'measurement',
+  'home', 'guide', 'faq', 'aeo', 'sectors', 'evolution', 'methodology', 'measurement',
   'assistant', 'openKnowledge', 'registry', 'cli', 'mcp', 'externalVerification',
   'tokenizartCase', 'siteMap',
 ]);
 
 const priorities: Record<string, number> = {
-  home: 1, guide: 0.9, aeo: 0.9, sectors: 0.9, registry: 0.8,
+  home: 1, guide: 0.9, faq: 0.9, aeo: 0.9, sectors: 0.9, registry: 0.8,
 };
 
 function absolute(base: string, path: string | null) {

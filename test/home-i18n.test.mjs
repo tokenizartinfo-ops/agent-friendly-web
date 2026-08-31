@@ -42,6 +42,7 @@ test('home follows the approved human journey before opening the future archive'
     '<MaturityMap locale=',
     '<ScanWorkspace initialSite=',
     '<HomeMaturityComparison locale=',
+    '<PublicFaq locale=',
     '<FutureArchive locale=',
     '<HomeNextPaths locale=',
   ].map((token) => home.indexOf(token));
