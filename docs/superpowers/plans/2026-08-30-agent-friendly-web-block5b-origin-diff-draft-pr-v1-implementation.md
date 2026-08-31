@@ -137,8 +137,8 @@
 - Consumes: commit mergeado, D1 backup/preflight, Sites package exacto.
 - Produces: migracion aditiva remota y release con `remote_submission=false`.
 
-- [ ] Solicitar aprobacion separada para migrar D1 y publicar 5B.
-- [ ] Verificar backup/rollback y tablas remotas antes de migrar.
+- [x] Solicitar aprobacion separada para migrar D1 y publicar 5B.
+- [x] Verificar backup/rollback y tablas remotas antes de migrar.
 - [ ] Aplicar solo `0003`, comprobar tablas vacias y rutas fail-closed.
 - [ ] Publicar el commit exacto con Sites y ejecutar smokes privados/publicos.
 - [ ] Reauditar verificadores externos declarados despues del despliegue.

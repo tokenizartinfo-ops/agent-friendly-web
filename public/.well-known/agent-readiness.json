@@ -86,15 +86,15 @@
       "note": "Deployed private owner workflow for manual handoff. It prepares exact files and SHA-256 hashes, records human decisions and downloads JSON; it does not write to the target website."
     },
     "origin_comparison_and_draft_plan": {
-      "status": "release_candidate",
+      "status": "deployed",
       "remote_submission": false,
       "merge_allowed": false,
-      "remote_database_migration": "pending_separate_approval",
+      "remote_database_migration": "additive_0003_applied",
       "resources": [
         "/schemas/origin-comparison.v1.json",
         "/schemas/draft-pr-plan.v1.json"
       ],
-      "note": "Locally verified Block 5B candidate. It reads only allowlisted public resources, renders bounded diffs and prepares a downloadable technical plan. It does not create a GitHub PR, merge, deploy or modify the target website."
+      "note": "Deployed private Block 5B workflow. It reads only allowlisted public resources, renders bounded diffs and prepares a downloadable technical plan. It does not create a GitHub PR, merge, deploy or modify the target website."
     },
     "a2a": {
       "status": "planned",
