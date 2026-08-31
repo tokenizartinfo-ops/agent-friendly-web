@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
@@ -18,6 +20,10 @@ test('NotebookLM pack is public, traceable and non-canonical', async () => {
   assert.ok(manifest.sources.every((source) => source.reviewed_at === '2026-08-31T00:00:00Z'));
   assert.ok(manifest.sources.every((source) => /^[a-f0-9]{64}$/.test(source.sha256)));
   assert.ok(manifest.sources.every((source) => !source.canonical_url.includes('/blob/main/')));
+  for (const source of manifest.sources) {
+    const blob = execFileSync('git', ['show', `${manifest.repository_revision}:${source.path}`]);
+    assert.equal(createHash('sha256').update(blob).digest('hex'), source.sha256, source.path);
+  }
   assert.ok(manifest.exclusions.includes('credentials'));
   assert.ok(manifest.exclusions.includes('private_dossiers'));
 });

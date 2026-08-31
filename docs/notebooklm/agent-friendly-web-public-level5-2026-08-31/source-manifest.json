@@ -51,7 +51,7 @@
     {
       "path": "public/.well-known/public-guide-contract.json",
       "canonical_url": "https://agentfriendlyweb.dev/.well-known/public-guide-contract.json",
-      "sha256": "b704647ebb106d85b1c22c9cc74a0dfa3468c4488dc3423ef12ba4f19b2fdca2",
+      "sha256": "cfddd4d64301c9fcf731d3b91c3cde214db032d0990aa29c35b04dc5cdede91f",
       "locale": "und",
       "role": "guide_capability_contract",
       "reviewed_at": "2026-08-31T00:00:00Z"
@@ -59,7 +59,7 @@
     {
       "path": "public/.well-known/agent-readiness.json",
       "canonical_url": "https://agentfriendlyweb.dev/.well-known/agent-readiness.json",
-      "sha256": "c73ec6e35fe901d33c97c4a93c28c173264acc6a18c074ecd252f87188e17a58",
+      "sha256": "d9904ffe12507f321de0b196efad7485d140276f9f39f5ee1bbdfddf77082a28",
       "locale": "und",
       "role": "public_capability_manifest",
       "reviewed_at": "2026-08-31T00:00:00Z"
