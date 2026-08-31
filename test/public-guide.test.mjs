@@ -23,6 +23,31 @@ test('guide answers an explicit AF maturity question with public evidence', () =
   assert.ok(turn.quick_replies.length > 0 && turn.quick_replies.length <= 3);
 });
 
+test('guide answers a FAQ intent from the canonical catalog', () => {
+  const turn = respondToPublicGuide({
+    message: 'El cambio de AF-0 a AF-5 es automatico?',
+    context: PUBLIC_GUIDE_INITIAL_CONTEXT,
+  });
+
+  assert.equal(turn.topic, 'faq:automatic-progression');
+  assert.match(turn.answer, /no.*autom[aá]tic/i);
+  assert.ok(turn.sources.some((source) => source.url === '/preguntas-frecuentes'));
+  assert.ok(turn.quick_replies.length <= 1);
+});
+
+test('guide preserves a FAQ topic when more detail is requested', () => {
+  const first = respondToPublicGuide({
+    message: 'Que es llms.txt?',
+    context: PUBLIC_GUIDE_INITIAL_CONTEXT,
+  });
+  const detailed = respondToPublicGuide({ message: 'Explicalo con mas detalle', context: first.next_context });
+
+  assert.equal(first.topic, 'faq:llms-txt');
+  assert.equal(detailed.topic, first.topic);
+  assert.equal(detailed.mode, 'detailed');
+  assert.ok(detailed.answer.length > first.answer.length);
+});
+
 test('guide resolves acknowledgement against the previous offered follow-up', () => {
   const first = respondToPublicGuide({
     message: 'Como empiezo a mejorar mi sitio?',

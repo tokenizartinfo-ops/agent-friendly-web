@@ -32,6 +32,9 @@ test('FAQ matcher selects a canonical entry without model inference', () => {
   assert.equal(matchPublicFaq('El cambio de AF-0 a AF-5 es automatico?', 'es')?.id, 'automatic-progression');
   assert.equal(matchPublicFaq('What is llms.txt used for?', 'en')?.id, 'llms-txt');
   assert.equal(matchPublicFaq('Como protejo minhas senhas e acessos?', 'pt')?.id, 'safe-access');
+  assert.equal(matchPublicFaq('Como empiezo a mejorar mi sitio?', 'es'), null);
+  assert.equal(matchPublicFaq('Que significa pasar de AF-0 a AF-5?', 'es'), null);
+  assert.equal(matchPublicFaq('Publica los archivos en mi sitio', 'es'), null);
   assert.equal(matchPublicFaq('xylophone unrelated sentence', 'en'), null);
 });
 

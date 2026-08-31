@@ -15,6 +15,8 @@ test('public guide contract exposes a deployed deterministic ephemeral read-only
   assert.equal(contract.external_model, false);
   assert.equal(contract.capabilities.conversationContinuity, true);
   assert.equal(contract.capabilities.citedPublicAnswers, true);
+  assert.equal(contract.capabilities.faqCatalogAnswers, true);
+  assert.ok(contract.knowledge_sources.includes('/preguntas-frecuentes'));
   assert.equal(contract.capabilities.websiteMutation, false);
   assert.equal(contract.capabilities.paymentExecution, false);
   assert.equal(contract.capabilities.privateProjectAccess, false);
