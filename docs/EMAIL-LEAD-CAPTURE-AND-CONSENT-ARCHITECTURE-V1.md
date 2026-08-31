@@ -1,6 +1,6 @@
 # Email, Lead Capture and Consent Architecture v1
 
-**Estado:** arquitectura; no desplegada
+**Estado:** arquitectura y codigo local de staging preparados; captura remota y correo no desplegados
 
 **Fecha:** 2026-08-31
 
@@ -161,6 +161,18 @@ Cloudflare Web Analytics puede medir trafico agregado sin reemplazar los consent
 6. DNS y Email Routing con aprobacion separada.
 7. Remitente de salida verificado y canary a una allowlist.
 8. Codex en modo borrador; envio automatico solo para plantillas allowlisted.
+
+## Estado tecnico al 2026-08-31
+
+- el endpoint publico permanece fisicamente cerrado y no lee cuerpos;
+- existe una ruta candidata separada para un futuro staging privado;
+- el gate externo exige hostname exacto, identidad Sites, allowlist y kill switch antes de leer el cuerpo;
+- rate limiting, Turnstile y D1 son bindings obligatorios y la ausencia de cualquiera falla cerrada;
+- el cuerpo JSON se limita a 8 KiB mediante lectura incremental;
+- la pagina candidata utiliza solamente `example.com` y queda fuera de sitemap, navegacion e indexacion;
+- no se crearon recursos remotos, no se aplicaron migraciones y no se habilitaron datos reales.
+
+El detalle de implementacion y rollback vive en `docs/BLOCK-6B-CONTACT-STAGING-ALLOWLIST-V1.md`.
 
 ## Pruebas negativas obligatorias
 
