@@ -18,6 +18,9 @@ import {
 } from 'lucide-react';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
+
+export const metadata: Metadata = localizedRouteMetadata('siteMap', 'es') as Metadata;
 
 const humanRoutes = [
   { name: 'Auditor publico', detail: 'Comprueba evidencia visible sin modificar el sitio.', href: '/#auditar', icon: Radar },
@@ -174,3 +177,4 @@ export default function SiteMapPage() {
     </main>
   );
 }
+import type { Metadata } from 'next';

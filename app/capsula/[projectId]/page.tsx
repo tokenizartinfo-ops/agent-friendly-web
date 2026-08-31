@@ -4,11 +4,17 @@ import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
 import { localizedPath } from '../../../lib/site-i18n.mjs';
 import { privateUiCopy } from '../../../lib/private-ui-copy.mjs';
+import { localizedRouteMetadata } from '../../../lib/localized-route-metadata.mjs';
 
 export const dynamic = 'force-dynamic';
 
 type PageProps = { params: Promise<{ projectId: string }> };
 type Locale = 'es' | 'en' | 'pt';
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { projectId } = await params;
+  return localizedRouteMetadata('capsule', 'es', { projectId }) as Metadata;
+}
 
 export async function CapsulePageExperience({ projectId, locale = 'es' }: { projectId: string; locale?: Locale }) {
   const copy = privateUiCopy(locale).capsule;
@@ -31,3 +37,4 @@ export default async function CapsulePage({ params }: PageProps) {
   const { projectId } = await params;
   return <CapsulePageExperience projectId={projectId} />;
 }
+import type { Metadata } from 'next';

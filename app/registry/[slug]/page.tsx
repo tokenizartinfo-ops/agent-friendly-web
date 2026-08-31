@@ -5,6 +5,7 @@ import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
 import { localizedPath } from '../../../lib/site-i18n.mjs';
 import { privateUiCopy } from '../../../lib/private-ui-copy.mjs';
+import { localizedRouteMetadata } from '../../../lib/localized-route-metadata.mjs';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,6 +15,11 @@ type PageProps = {
 };
 
 type Locale = 'es' | 'en' | 'pt';
+
+export async function generateMetadata({ params }: Pick<PageProps, 'params'>): Promise<Metadata> {
+  const { slug } = await params;
+  return localizedRouteMetadata('registryProfile', 'es', { slug }) as Metadata;
+}
 
 function provenanceLabel(state: string, copy: ReturnType<typeof privateUiCopy>['profile']) {
   if (state === 'verified') return copy.verifiedLabel;
@@ -132,3 +138,4 @@ export async function RegistryProfileExperience({ params, searchParams, locale =
 }
 
 export default async function RegistryProfilePage(props: PageProps) { return <RegistryProfileExperience {...props} />; }
+import type { Metadata } from 'next';

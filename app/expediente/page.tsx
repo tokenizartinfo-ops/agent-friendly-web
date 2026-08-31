@@ -3,6 +3,9 @@ import { IntakeWorkspace } from '../components/intake-workspace';
 import { SiteHeader } from '../components/site-header';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { privateUiCopy } from '../../lib/private-ui-copy.mjs';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
+
+export const metadata: Metadata = localizedRouteMetadata('dossier', 'es') as Metadata;
 
 export const dynamic = 'force-dynamic';
 
@@ -22,3 +25,4 @@ export async function DossierExperience({ locale = 'es' }: { locale?: Locale } =
 }
 
 export default async function ExpedientePage() { return <DossierExperience />; }
+import type { Metadata } from 'next';

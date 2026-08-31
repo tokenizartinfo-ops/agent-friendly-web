@@ -2,11 +2,9 @@ import type { Metadata } from 'next';
 import { ArrowRight, CheckCircle2, CircleAlert, ExternalLink, ShieldCheck } from 'lucide-react';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 
-export const metadata: Metadata = {
-  title: 'Verificacion externa AF-EV | Agent Friendly Web',
-  description: 'Baseline externo fechado, diferencias con AF-0 a AF-5 y roadmap honesto de remediacion.',
-};
+export const metadata: Metadata = localizedRouteMetadata('externalVerification', 'es') as Metadata;
 
 const verified = [
   'Markdown negociado con Vary: Accept',

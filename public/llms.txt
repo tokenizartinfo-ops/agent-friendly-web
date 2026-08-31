@@ -41,6 +41,14 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - [Intake assistant contract](https://agentfriendlyweb.dev/.well-known/intake-assistant-contract.json)
 - [Public repository](https://github.com/tokenizartinfo-ops/agent-friendly-web)
 
+## Human language routes
+
+- [Spanish canonical experience](https://agentfriendlyweb.dev/)
+- [English experience](https://agentfriendlyweb.dev/en/)
+- [Portuguese experience](https://agentfriendlyweb.dev/pt/)
+- Human pages publish canonical and hreflang equivalents in Spanish, English and Portuguese.
+- Machine contracts, schemas, APIs and well-known resources keep one canonical unprefixed URL and are not translated into divergent contracts.
+
 ## Important limits
 
 - Public scans are read-only and do not authenticate to the target website.
@@ -50,3 +58,4 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - The repo-first read-only CLI and the public stateless MCP read-only server are deployed. MCP exposes only four bounded public tools and four public resources; A2A, WebMCP and x402 are not production capabilities.
 - The publication capsule is a deployed private workflow for manual handoff. It prepares files, hashes and human approvals, but it does not modify the target website, call a CMS or deploy code.
 - The AI Catalog links the OKF bundle as an Agent Friendly Web project convention; OKF v0.2 does not define a universal discovery endpoint.
+- Owner-declared Registry content is displayed verbatim in every interface language; the platform does not silently translate or alter owner claims.

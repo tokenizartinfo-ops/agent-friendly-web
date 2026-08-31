@@ -1,6 +1,10 @@
+import type { Metadata } from 'next';
 import { ArrowRight, Beaker, CheckCircle2, FileCheck2, ShieldCheck } from 'lucide-react';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
+
+export const metadata: Metadata = localizedRouteMetadata('methodology', 'es') as Metadata;
 
 const layers = [
   ['AF-0', 'Invisible', 'No hay señales suficientes para descubrir o interpretar el sitio.'],

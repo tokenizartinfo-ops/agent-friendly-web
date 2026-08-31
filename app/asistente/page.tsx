@@ -4,11 +4,9 @@ import { IntakeAssistantPrototype } from '../components/intake-assistant-prototy
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 import { publicToolsCopy } from '../../lib/public-tools-copy.mjs';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 
-export const metadata: Metadata = {
-  title: 'Asistente de preparacion | Agent Friendly Web',
-  description: 'Prototipo local que ordena contexto desestructurado en propuestas revisables sin guardar ni publicar.',
-};
+export const metadata: Metadata = localizedRouteMetadata('assistant', 'es') as Metadata;
 
 type Locale = 'es' | 'en' | 'pt';
 

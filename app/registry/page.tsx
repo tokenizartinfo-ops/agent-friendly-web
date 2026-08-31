@@ -4,6 +4,9 @@ import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { privateUiCopy } from '../../lib/private-ui-copy.mjs';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
+
+export const metadata: Metadata = localizedRouteMetadata('registry', 'es') as Metadata;
 
 export const dynamic = 'force-dynamic';
 
@@ -84,3 +87,4 @@ export async function RegistryExperience({ searchParams, locale = 'es' }: PagePr
 }
 
 export default async function RegistryPage(props: PageProps) { return <RegistryExperience {...props} />; }
+import type { Metadata } from 'next';

@@ -4,11 +4,9 @@ import { ReadinessComparison } from '../components/readiness-comparison';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 import { publicToolsCopy } from '../../lib/public-tools-copy.mjs';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 
-export const metadata: Metadata = {
-  title: 'Medir una mejora agentica | Agent Friendly Web',
-  description: 'Compara evidencia antes y despues sin confundir preparacion agentica con promesas de ranking o recomendacion.',
-};
+export const metadata: Metadata = localizedRouteMetadata('measurement', 'es') as Metadata;
 
 type Locale = 'es' | 'en' | 'pt';
 

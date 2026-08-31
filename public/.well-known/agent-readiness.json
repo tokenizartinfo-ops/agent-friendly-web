@@ -6,7 +6,11 @@
     "creator": "Gabriel Mucchiut"
   },
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "updated_at": "2026-08-30",
+  "updated_at": "2026-08-31",
+  "human_languages": ["es", "en", "pt"],
+  "human_route_strategy": "Spanish unprefixed canonical; English under /en; Portuguese under /pt; canonical and hreflang equivalents",
+  "machine_routes_localized": false,
+  "owner_declared_content_auto_translated": false,
   "external_verification": {
     "status": "verified",
     "profile": "/.well-known/external-readiness.json",

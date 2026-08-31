@@ -16,6 +16,9 @@ import {
 } from 'lucide-react';
 import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
+import { localizedRouteMetadata } from '../../../lib/localized-route-metadata.mjs';
+
+export const metadata: Metadata = localizedRouteMetadata('tokenizartCase', 'es') as Metadata;
 
 const surfaces = [
   {
@@ -192,3 +195,4 @@ export default function TokenizartCasePage() {
     </main>
   );
 }
+import type { Metadata } from 'next';

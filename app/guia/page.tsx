@@ -4,11 +4,9 @@ import { PublicGuideChat } from '../components/public-guide-chat';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 import { publicToolsCopy } from '../../lib/public-tools-copy.mjs';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 
-export const metadata: Metadata = {
-  title: 'Guia publica | Agent Friendly Web',
-  description: 'Guia conversacional determinista y con fuentes para entender Agent Friendly Web y elegir un primer paso.',
-};
+export const metadata: Metadata = localizedRouteMetadata('guide', 'es') as Metadata;
 
 type Locale = 'es' | 'en' | 'pt';
 

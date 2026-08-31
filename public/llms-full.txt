@@ -24,7 +24,9 @@ The public guide at `https://agentfriendlyweb.dev/aeo-y-crawlers` explains how a
 
 ## Sector and language guidance
 
-The first multilingual content slice is published in Spanish, English and Portuguese at `/sectores`, `/en/sectors` and `/pt/setores`. It explains how the same evidence discipline changes for art and collections, museums, institutions, commerce, SaaS and professional services.
+The complete human interface is available in Spanish, English and Portuguese. Spanish remains the unprefixed canonical experience, while English uses `/en/` and Portuguese uses `/pt/`. Every localized human page publishes canonical and hreflang equivalents. Machine contracts, schemas, APIs and well-known resources remain at one canonical unprefixed URL so contract identifiers never diverge by language. Owner-declared Registry content is shown verbatim and is never silently translated.
+
+Language entry points: `https://agentfriendlyweb.dev/`, `https://agentfriendlyweb.dev/en/` and `https://agentfriendlyweb.dev/pt/`. Sector examples remain available at `/sectores`, `/en/sectors` and `/pt/setores`.
 
 ## Measurement and assisted intake
 
