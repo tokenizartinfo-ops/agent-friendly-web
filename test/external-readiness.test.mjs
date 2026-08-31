@@ -56,8 +56,8 @@ test('external verification is discoverable from human and machine surfaces', as
   assert.match(page, /Agent-Integrated/i);
   assert.match(page, /puntaje numerico.*no fue devuelto/i);
   assert.match(page, /no.*certificaci/i);
-  assert.match(sitemap, /\/verificacion-externa/);
-  assert.match(footer, /\/verificacion-externa/);
+  assert.match(sitemap, /'externalVerification'/);
+  assert.match(footer, /\['externalVerification', 'externalVerification'\]/);
   assert.match(map, /Verificacion externa/i);
   assert.match(llms, /external-readiness\.json/);
   assert.match(llmsFull, /AF-EV/);

@@ -62,15 +62,16 @@ test("human and machine discovery label MCP as deployed with explicit boundaries
     read("docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md"),
   ]);
 
-  assert.match(page, /MCP publico read-only/i);
+  assert.match(page, /MCP publico/i);
+  assert.match(page, /read-only/i);
   assert.match(page, /desplegado/i);
   assert.match(page, /https:\/\/mcp\.agentfriendlyweb\.dev\/mcp/);
   assert.match(page, /sin OAuth/i);
   assert.match(page, /no puede publicar/i);
-  assert.match(header, /\/mcp-readonly/);
-  assert.match(footer, /\/mcp-readonly/);
+  assert.match(header, /\['mcp', 'mcp'\]/);
+  assert.match(footer, /\['mcp', 'mcp'\]/);
   assert.match(map, /\/mcp-readonly/);
-  assert.match(sitemap, /\/mcp-readonly/);
+  assert.match(sitemap, /'mcp'/);
 
   const readinessJson = JSON.parse(readiness);
   assert.equal(readinessJson.capabilities.mcp.status, "deployed");

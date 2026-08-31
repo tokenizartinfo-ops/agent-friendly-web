@@ -76,9 +76,10 @@ test('Tokenizart and Atelier packages attribute their agentic roadmap', async ()
 
 test('the maturity page labels comparisons as illustrative rather than guaranteed', async () => {
   const page = await readFile('app/evolucion-agentica/page.tsx', 'utf8');
-  assert.match(page, /Restaurante/);
-  assert.match(page, /Municipalidad/);
-  assert.match(page, /Tokenizart/);
+  const { MATURITY_COPY } = await import('../lib/home-copy.mjs');
+  assert.equal(MATURITY_COPY.es.scenarios.restaurant.label, 'Restaurante');
+  assert.equal(MATURITY_COPY.es.scenarios.municipality.label, 'Municipalidad');
+  assert.equal(MATURITY_COPY.es.scenarios.tokenizart.label, 'Tokenizart');
   assert.match(page, /ilustrativ/i);
-  assert.match(page, /no garantiza/i);
+  assert.match(page, /no garantiza|does not guarantee|não garante/i);
 });

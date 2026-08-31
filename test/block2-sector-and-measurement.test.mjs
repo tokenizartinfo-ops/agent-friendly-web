@@ -5,6 +5,7 @@ import test from 'node:test';
 import { crawlerCatalogPayload } from '../lib/crawler-catalog.mjs';
 import { compareReadinessSnapshots, normalizeReadinessSnapshot } from '../lib/readiness-comparison.mjs';
 import { SECTOR_CONTENT } from '../lib/sector-content.mjs';
+import { localizedPath } from '../lib/site-i18n.mjs';
 
 test('sector guidance is available in Spanish, English and Portuguese', () => {
   for (const locale of ['es', 'en', 'pt']) {
@@ -52,7 +53,10 @@ test('Block 2 public routes and machine contract exist', async () => {
   }
 
   const sitemap = await readFile('app/sitemap.ts', 'utf8');
-  for (const route of ['/sectores', '/en/sectors', '/pt/setores', '/medir-mejora']) {
-    assert.ok(sitemap.includes(route), `sitemap is missing ${route}`);
-  }
+  assert.equal(localizedPath('sectors', 'es'), '/sectores');
+  assert.equal(localizedPath('sectors', 'en'), '/en/sectors');
+  assert.equal(localizedPath('sectors', 'pt'), '/pt/setores');
+  assert.equal(localizedPath('measurement', 'es'), '/medir-mejora');
+  assert.match(sitemap, /'sectors'/);
+  assert.match(sitemap, /'measurement'/);
 });

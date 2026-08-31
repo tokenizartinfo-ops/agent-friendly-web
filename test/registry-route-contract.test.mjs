@@ -40,8 +40,8 @@ test('public navigation and sitemap include the Registry but exclude private API
   const header = await readFile('app/components/site-header.tsx', 'utf8');
   const sitemap = await readFile('app/sitemap.ts', 'utf8');
 
-  assert.ok(header.includes('href="/registry"'));
-  assert.ok(sitemap.includes('/registry'));
+  assert.match(header, /\['registry', 'registry'\]/);
+  assert.match(sitemap, /'registry'/);
   assert.equal(sitemap.includes('/api/projects'), false);
   assert.equal(sitemap.includes('/expediente'), false);
 });

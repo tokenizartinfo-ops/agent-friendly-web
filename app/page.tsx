@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { MaturityMap } from './components/maturity-map';
 import { PublicWebMcpRegistration } from './components/public-webmcp-registration';
 import { ScanWorkspace } from './components/scan-workspace';
@@ -73,4 +74,3 @@ export async function HomeExperience({ searchParams, locale = 'es' }: HomeProps 
 export default async function Home(props: HomeProps) {
   return <HomeExperience {...props} locale="es" />;
 }
-import type { Metadata } from 'next';
