@@ -13,6 +13,7 @@ const headerSource = readFileSync(new URL('../app/components/site-header.tsx', i
 const footerSource = readFileSync(new URL('../app/components/site-footer.tsx', import.meta.url), 'utf8');
 const siteMapSource = readFileSync(new URL('../app/mapa-del-sitio/page.tsx', import.meta.url), 'utf8');
 const faqComponentSource = readFileSync(new URL('../app/components/public-faq.tsx', import.meta.url), 'utf8');
+const globalStyles = readFileSync(new URL('../app/globals.css', import.meta.url), 'utf8');
 
 test('FAQ catalog provides reviewed public answers in every locale', () => {
   assert.ok(PUBLIC_FAQ_ITEMS.length >= 12);
@@ -70,4 +71,9 @@ test('home and full page render one shared FAQ catalog with matching JSON-LD', (
   assert.match(faqPageSource, /<PublicFaq locale=\{locale\}/);
   assert.match(faqPageSource, /<SiteHeader routeKey="faq" locale=\{locale\}/);
   assert.match(faqPageSource, /<SiteFooter locale=\{locale\}/);
+});
+
+test('FAQ document hero keeps readable foreground and background after shared hero styles', () => {
+  assert.match(globalStyles, /\.document-hero\.faq-hero\s*\{[^}]*background:\s*var\(--ink\)[^}]*color:\s*var\(--white\)/s);
+  assert.match(globalStyles, /\.document-hero\.faq-hero\s+p\s*\{[^}]*color:\s*#c5d0cd/s);
 });

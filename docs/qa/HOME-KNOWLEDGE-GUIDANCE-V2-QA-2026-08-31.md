@@ -12,7 +12,7 @@ Entorno: servidor Vinext local en `http://localhost:3000`. No se uso el origen p
 
 | Comando | Resultado |
 | --- | --- |
-| `npm test` | 280 pruebas aprobadas, 0 fallos |
+| `npm test` | 281 pruebas aprobadas, 0 fallos |
 | `npm run lint` | codigo de salida 0; 1 advertencia no bloqueante |
 | `npm run validate:okf` | 14 conceptos OKF validados en 18 archivos |
 | `npm run build` | build Vinext completo, codigo de salida 0 |
@@ -69,6 +69,7 @@ Resultados:
 - la referencia inactiva muestra `95 / 100`, fecha `2026-08-31` y el limite de comercio/pagos;
 - el comparador abre con Restaurante y AF-2 seleccionados;
 - las FAQ se expanden y conservan texto legible en mobile;
+- el encabezado de la pagina FAQ conserva contraste alto en mobile y desktop;
 - Enter envia una pregunta en la guia y la FAQ `automatic-progression` responde con enlace a la fuente publica;
 - consola del navegador: 0 errores; un warning de preload sin `as` valido en desarrollo, originado por la capa Vite/React.
 

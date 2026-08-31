@@ -532,6 +532,9 @@ footer p { margin: 0; }
 .document-hero { padding: 58px max(5vw, 28px); border-bottom: 1px solid var(--line); background: var(--white); }
 .document-hero h1 { max-width: 830px; font-size: 44px; }
 .document-hero p { max-width: 760px; }
+.document-hero.faq-hero { background: var(--ink); color: var(--white); }
+.document-hero.faq-hero > span { color: var(--lime); }
+.document-hero.faq-hero p { color: #c5d0cd; }
 .method-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr); gap: 34px; padding: 44px max(5vw, 28px); }
 .method-copy h2, .standards-panel h2, .source-band h2, .architecture-band h2 { margin: 0 0 12px; font-size: 24px; }
 .method-copy > p { max-width: 700px; color: var(--muted); line-height: 1.65; }
