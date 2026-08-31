@@ -36,6 +36,8 @@ The public comparison at `/medir-mejora` processes manually entered before/after
 
 The deployed public guide at `https://agentfriendlyweb.dev/guia` answers from an allowlisted public topic and source catalog. It recognizes immediate continuations, adapts between simple, standard and detailed explanations, and links evidence for each answer. Conversation state exists only in React memory and clears on reload. It does not use an external model, access private projects, run audits or CLI commands, send email, execute payments or modify websites. Its project-specific boundary contract is published at `https://agentfriendlyweb.dev/.well-known/public-guide-contract.json`.
 
+The optional post-audit contact experience is published in `preview_only` mode. A person may prepare and review a request locally after receiving the complete audit result, but the public release does not persist contact data or send email. Requested-plan consent, commercial contact and product updates are separate purposes. The exact machine-readable boundary is published at `https://agentfriendlyweb.dev/.well-known/contact-intake-contract.json`.
+
 ## Open knowledge distribution
 
 The public page at `https://agentfriendlyweb.dev/conocimiento-abierto` explains the read-only OKF v0.2 release. The canonical bundle index is `https://agentfriendlyweb.dev/okf/v0.2/index.md` and the distribution inventory is `https://agentfriendlyweb.dev/okf/v0.2/manifest.json`. Concepts include source provenance, generated and verified timestamps, lifecycle status and an absolute freshness boundary. `CHECKSUMS.sha256` supports independent integrity checks. The manifest and AI Catalog links are Agent Friendly Web project extensions; they are not universal discovery endpoints required by OKF.

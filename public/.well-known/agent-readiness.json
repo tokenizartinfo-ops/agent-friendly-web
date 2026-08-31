@@ -50,6 +50,13 @@
       "resources": ["/guia", "/.well-known/public-guide-contract.json"],
       "note": "Deterministic public guidance with cited sources and immediate continuity; sin persistencia, private context or actions."
     },
+    "consented_contact": {
+      "status": "prototype",
+      "persistence": false,
+      "email_delivery": false,
+      "resources": ["/", "/.well-known/contact-intake-contract.json"],
+      "note": "Optional post-audit local preview with separated consent. The public release does not persist contacts, send email or prove domain ownership."
+    },
     "open_knowledge_okf": {
       "status": "deployed",
       "resources": [

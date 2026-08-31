@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "name": "Agent Friendly Web consented contact intake",
+  "status": "preview_only",
+  "audit_requires_email": false,
+  "persistence_enabled": false,
+  "email_delivery_enabled": false,
+  "canonical_contact_candidate": "hello@agentfriendlyweb.dev",
+  "mailbox_status": "planned_not_configured",
+  "localized_aliases": ["hola@agentfriendlyweb.dev", "ola@agentfriendlyweb.dev"],
+  "locales": ["es", "en", "pt"],
+  "consent_purposes": {
+    "required": ["requested_plan"],
+    "optional": ["commercial_contact", "product_updates"]
+  },
+  "security": {
+    "turnstile_server_validation": "required_when_enabled",
+    "idempotency": "required",
+    "probable_secrets_rejected": true
+  },
+  "boundaries": [
+    "Email does not prove domain ownership.",
+    "A plan request does not subscribe the requester to marketing.",
+    "This preview does not persist or send data."
+  ],
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/EMAIL-LEAD-CAPTURE-AND-CONSENT-ARCHITECTURE-V1.md"
+}

@@ -29,6 +29,20 @@
       "when": 1788127909132,
       "tag": "0003_origin_comparisons_and_draft_pr_plans",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1788211037161,
+      "tag": "0004_common_guardsmen",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1788214135151,
+      "tag": "0005_normal_ma_gnuci",
+      "breakpoints": true
     }
   ]
 }

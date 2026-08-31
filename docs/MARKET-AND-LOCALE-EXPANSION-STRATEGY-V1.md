@@ -120,13 +120,13 @@ Si ingles supera de manera sostenida al menos la mitad de los leads calificados 
 
 ## Estrategia de correo
 
-`hello@agentfriendlyweb.dev` sera la identidad universal y machine-readable. Se crean aliases:
+`hello@agentfriendlyweb.dev` sera la identidad universal y machine-readable cuando el Gate 6C habilite correo. Se prepararan los aliases:
 
 - `hola@agentfriendlyweb.dev` para espanol;
 - `ola@agentfriendlyweb.dev` para portugues;
 - `security@agentfriendlyweb.dev` para seguridad.
 
-Todos llegan a una unica operacion. La web puede mostrar el alias local, pero contratos, manifiestos y directorios usan `hello@`. Las respuestas deben conservar el alias por el que llego la consulta cuando el proveedor lo permita. No se crean tres newsletters, tres CRMs ni tres historias de consentimiento.
+Todos llegaran a una unica operacion. Mientras las direcciones no esten configuradas y verificadas, los contratos publicos deben declararlas como candidatas y no como canales activos. La web podra mostrar el alias local, pero contratos, manifiestos y directorios usaran `hello@`. Las respuestas deben conservar el alias por el que llego la consulta cuando el proveedor lo permita. No se crean tres newsletters, tres CRMs ni tres historias de consentimiento.
 
 ## Experimentos iniciales
 

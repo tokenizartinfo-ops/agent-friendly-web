@@ -258,3 +258,45 @@ export const draftPrPlans = sqliteTable(
     index('draft_pr_plans_project_created_idx').on(table.projectId, table.createdAt),
   ],
 );
+
+export const contactLeads = sqliteTable(
+  'contact_leads',
+  {
+    id: text('id').primaryKey(),
+    email: text('email').notNull(),
+    name: text('name').notNull().default(''),
+    domain: text('domain').notNull(),
+    role: text('role').notNull().default(''),
+    organization: text('organization').notNull().default(''),
+    locale: text('locale').notNull(),
+    objective: text('objective').notNull(),
+    state: text('state').notNull().default('new'),
+    source: text('source').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    requestHash: text('request_hash').notNull(),
+    createdAt: text('created_at').notNull(),
+    updatedAt: text('updated_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('contact_leads_idempotency_unique').on(table.idempotencyKey),
+    index('contact_leads_email_domain_created_idx').on(table.email, table.domain, table.createdAt),
+    index('contact_leads_state_created_idx').on(table.state, table.createdAt),
+  ],
+);
+
+export const consentReceipts = sqliteTable(
+  'consent_receipts',
+  {
+    id: text('id').primaryKey(),
+    leadId: text('lead_id').notNull(),
+    purpose: text('purpose').notNull(),
+    copyVersion: text('copy_version').notNull(),
+    action: text('action').notNull().default('granted'),
+    evidenceHash: text('evidence_hash').notNull(),
+    createdAt: text('created_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('consent_receipts_lead_purpose_action_unique').on(table.leadId, table.purpose, table.action),
+    index('consent_receipts_lead_created_idx').on(table.leadId, table.createdAt),
+  ],
+);
