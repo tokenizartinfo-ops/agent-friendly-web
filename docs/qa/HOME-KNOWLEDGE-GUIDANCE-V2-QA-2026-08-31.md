@@ -4,7 +4,7 @@
 
 Rama: `feat/home-knowledge-guidance-v2`
 
-Commit de implementacion sometido a QA: `0ce1759`
+Commit de implementacion sometido a QA: `ed95ed5`
 
 Entorno: servidor Vinext local en `http://localhost:3000`. No se uso el origen productivo para validar esta rama.
 
@@ -12,8 +12,8 @@ Entorno: servidor Vinext local en `http://localhost:3000`. No se uso el origen p
 
 | Comando | Resultado |
 | --- | --- |
-| `npm test` | 278 pruebas aprobadas, 0 fallos |
-| `npm run lint` | codigo de salida 0 |
+| `npm test` | 280 pruebas aprobadas, 0 fallos |
+| `npm run lint` | codigo de salida 0; 1 advertencia no bloqueante |
 | `npm run validate:okf` | 14 conceptos OKF validados en 18 archivos |
 | `npm run build` | build Vinext completo, codigo de salida 0 |
 
@@ -22,8 +22,19 @@ Advertencias no bloqueantes observadas:
 - Node informa que SQLite es experimental durante las pruebas que validan migraciones aisladas.
 - Vite anticipa que una futura version de `configLoader: native` exigira atributos en la importacion JSON de `.openai/hosting.json`.
 - Vinext no clasifica estaticamente algunas rutas dinamicas durante el build.
+- ESLint recomienda `next/image` para la ilustracion semantica del hero; se conserva `<img>` para mostrar el asset completo sin recorte ni transformacion del proveedor.
 
 Ninguna advertencia produjo fallos de test, lint, OKF o build.
+
+## Correcciones posteriores a revision independiente
+
+La revision de codigo no encontro hallazgos criticos y marco cinco ajustes importantes. Todos quedaron corregidos y cubiertos por pruebas:
+
+- el filtro de credenciales analiza el mensaje completo antes de limitar el texto usado por el clasificador;
+- el test del canary 5D usa una hora inyectada y ya no depende del reloj calendario;
+- las respuestas FAQ de la guia incluyen la pagina FAQ y las fuentes allowlisted propias de cada entrada;
+- el manifiesto OKF evita enlaces mutables a `main`, y el paquete NotebookLM fija revision de repositorio y SHA-256 por fuente;
+- los enlaces de fuentes FAQ usan nombres localizados y distinguibles para tecnologias de asistencia.
 
 ## HTTP local
 
