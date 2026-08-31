@@ -13,8 +13,11 @@ test('NotebookLM pack is public, traceable and non-canonical', async () => {
   assert.equal(manifest.canonical_source, 'repository');
   assert.equal(manifest.derivative_policy, 'requires_human_qa');
   assert.equal(manifest.reviewed_by, 'human:gabriel-mucchiut');
+  assert.match(manifest.repository_revision, /^[a-f0-9]{40}$/);
   assert.ok(manifest.sources.some((source) => source.path.includes('public/okf/v0.2/index.md')));
   assert.ok(manifest.sources.every((source) => source.reviewed_at === '2026-08-31T00:00:00Z'));
+  assert.ok(manifest.sources.every((source) => /^[a-f0-9]{64}$/.test(source.sha256)));
+  assert.ok(manifest.sources.every((source) => !source.canonical_url.includes('/blob/main/')));
   assert.ok(manifest.exclusions.includes('credentials'));
   assert.ok(manifest.exclusions.includes('private_dossiers'));
 });
