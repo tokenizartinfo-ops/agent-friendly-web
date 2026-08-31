@@ -16,6 +16,13 @@ test('localized catch-all publishes every human route in English and Portuguese'
   assert.match(source, /notFound\(\)/);
 });
 
+test('public localized routes do not eagerly load the Cloudflare-only Registry database', () => {
+  const store = readFileSync(new URL('../lib/registry-store.ts', import.meta.url), 'utf8');
+  assert.doesNotMatch(store, /import\s+\{\s*getDb\s*\}\s+from\s+['"]\.\.\/db['"]/);
+  assert.match(store, /await\s+import\(['"]\.\.\/db['"]\)/);
+  assert.match(store, /ERR_UNSUPPORTED_ESM_URL_SCHEME/);
+});
+
 test('localized metadata binds canonical and hreflang without indexing private routes', async () => {
   assert.ok(existsSync(metadataModulePath), 'localized metadata module must exist');
   if (!existsSync(metadataModulePath)) return;
