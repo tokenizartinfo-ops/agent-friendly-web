@@ -44,9 +44,12 @@ test('assistant does not expose autonomous persistence, voice, email or payments
 test('Block 3 prototype is public but does not call the project persistence API', async () => {
   const page = await readFile('app/asistente/page.tsx', 'utf8');
   const component = await readFile('app/components/intake-assistant-prototype.tsx', 'utf8');
+  const localizedCopy = await readFile('lib/public-tools-copy.mjs', 'utf8');
 
   assert.match(page, /IntakeAssistantPrototype/);
   assert.doesNotMatch(component, /\/api\/projects/);
-  assert.match(component, /Revisar propuesta/);
-  assert.match(component, /No se guarda/);
+  assert.match(component, /copy\.review/);
+  assert.match(component, /copy\.privacy/);
+  assert.match(localizedCopy, /review: 'Revisar propuesta'/);
+  assert.match(localizedCopy, /No se guarda/);
 });
