@@ -6,7 +6,8 @@ test('public contact preview defaults to disabled and cannot call the endpoint w
   const source = await readFile('app/components/contact-intake.tsx', 'utf8');
   assert.match(source, /captureEnabled = false/);
   assert.match(source, /if \(!captureEnabled \|\| !turnstileToken \|\| sending\) return/);
-  assert.match(source, /fetch\('\/api\/contact-intake'/);
+  assert.match(source, /endpoint = '\/api\/contact-intake'/);
+  assert.match(source, /fetch\(endpoint/);
   assert.match(source, /idempotencyKey: requestId/);
   assert.match(source, /setRequestId\(''\)/);
   assert.match(source, /setTurnstileToken\(''\)/);
@@ -17,4 +18,27 @@ test('contact endpoint is physically disabled and does not read request bodies i
   assert.match(source, /contact_capture_disabled/);
   assert.doesNotMatch(source, /request\.text|request\.json|getReader\(/);
   assert.doesNotMatch(source, /CONTACT_CAPTURE_ENABLED|TURNSTILE_SECRET_KEY|saveContactIntake/);
+});
+
+test('staging contact is a separate fail-closed route and the public component keeps its public default', async () => {
+  const [route, component, page, robots, sitemap] = await Promise.all([
+    readFile('app/api/staging/contact-intake/route.ts', 'utf8'),
+    readFile('app/components/contact-intake.tsx', 'utf8'),
+    readFile('app/contact-staging/page.tsx', 'utf8'),
+    readFile('public/robots.txt', 'utf8'),
+    readFile('app/sitemap.ts', 'utf8'),
+  ]);
+  assert.match(route, /processStagingContactRequest/);
+  assert.match(route, /CONTACT_STAGING_TURNSTILE_SECRET/);
+  assert.match(route, /oai-authenticated-user-id/);
+  assert.match(route, /oai-authenticated-user-email/);
+  assert.match(route, /runtimeReady/);
+  assert.doesNotMatch(route, /request\.json\(/);
+  assert.match(component, /endpoint = '\/api\/contact-intake'/);
+  assert.match(component, /fetch\(endpoint/);
+  assert.match(robots, /Disallow: \/contact-staging/);
+  assert.match(robots, /Disallow: \/api\/staging/);
+  assert.match(page, /domain="example\.com"/);
+  assert.match(page, /robots: \{ index: false, follow: false/);
+  assert.doesNotMatch(sitemap, /contact-staging/);
 });

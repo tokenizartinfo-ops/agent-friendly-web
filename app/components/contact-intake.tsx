@@ -11,6 +11,7 @@ type ContactIntakeProps = {
   domain: string;
   locale: Locale;
   captureEnabled?: boolean;
+  endpoint?: string;
   turnstileSiteKey?: string;
 };
 
@@ -19,7 +20,13 @@ const blankForm = {
   requestedPlanConsent: false, commercialContactConsent: false, productUpdatesConsent: false,
 };
 
-export function ContactIntake({ domain, locale, captureEnabled = false, turnstileSiteKey = '' }: ContactIntakeProps) {
+export function ContactIntake({
+  domain,
+  locale,
+  captureEnabled = false,
+  endpoint = '/api/contact-intake',
+  turnstileSiteKey = '',
+}: ContactIntakeProps) {
   const copy = CONTACT_COPY[locale] || CONTACT_COPY.es;
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState(blankForm);
@@ -60,7 +67,7 @@ export function ContactIntake({ domain, locale, captureEnabled = false, turnstil
     setSending(true);
     setMessage('');
     try {
-      const response = await fetch('/api/contact-intake', {
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
