@@ -27,13 +27,15 @@ Aceptar un plan no suscribe a marketing. Dar un email no acredita control del si
 
 ## Direcciones propuestas
 
-- `hola@agentfriendlyweb.dev`: entrada humana general;
+- `hello@agentfriendlyweb.dev`: identidad canonica y entrada humana universal;
+- `hola@agentfriendlyweb.dev`: alias de entrada para espanol;
+- `ola@agentfriendlyweb.dev`: alias de entrada para portugues;
 - `auditoria@agentfriendlyweb.dev`: resultados y planes solicitados;
 - `seguridad@agentfriendlyweb.dev`: vulnerabilidades o abuso;
 - `bajas@agentfriendlyweb.dev`: baja y preferencias;
 - `no-reply@agentfriendlyweb.dev`: solo mensajes transaccionales cuando exista proveedor de salida.
 
-La primera implementacion puede usar Cloudflare Email Routing para reenviar entradas a una bandeja operativa. Email Routing no se trata como una bandeja completa ni como autorizacion para enviar. El proveedor de salida, SPF, DKIM, DMARC y reputacion se verifican en un gate separado.
+Todos los aliases se normalizan hacia una unica operacion y una unica historia de consentimiento. La primera implementacion puede usar Cloudflare Email Routing para reenviar entradas a una bandeja operativa. Email Routing no se trata como una bandeja completa ni como autorizacion para enviar. El proveedor de salida, SPF, DKIM, DMARC y reputacion se verifican en un gate separado.
 
 ## Flujo humano
 

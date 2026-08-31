@@ -14,7 +14,7 @@ No vende una puntuacion ni garantiza aparicion en un LLM. Entrega diagnostico, c
 
 ## Cliente ideal inicial
 
-### Perfil principal
+### Perfil de credibilidad
 
 Museos, galerias, artistas, coleccionistas, archivos e instituciones culturales que:
 
@@ -23,6 +23,14 @@ Museos, galerias, artistas, coleccionistas, archivos e instituciones culturales 
 - no pueden explicar con claridad servicios, colecciones, horarios, eventos o procesos;
 - quieren ser encontrados y entendidos por buscadores, asistentes y agentes;
 - necesitan avanzar sin reemplazar todo su sitio ni entregar contrasenas generales.
+
+### Perfil de escala
+
+Agencias, estudios web y mantenedores que administran varios sitios y necesitan una entrega repetible, auditable y white-label para sus clientes.
+
+### Primer producto sectorial
+
+Grupos de restaurantes, hoteles boutique, bodegas y espacios de eventos con informacion cambiante, reservas directas, varias sedes o un valor comercial claro por cada consulta bien resuelta.
 
 ### Comprador
 

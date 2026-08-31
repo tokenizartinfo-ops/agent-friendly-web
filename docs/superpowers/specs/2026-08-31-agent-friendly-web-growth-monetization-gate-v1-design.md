@@ -40,7 +40,7 @@ El mayor riesgo actual no es tecnico. Es intentar vender "agentizacion" como una
 
 ### Beachhead
 
-El primer segmento sera **arte, cultura, coleccionismo e instituciones con patrimonio**, incluyendo artistas, galerias, museos, archivos y sus proveedores web. La eleccion responde a ventajas reales:
+El primer segmento de credibilidad sera **arte, cultura, coleccionismo e instituciones con patrimonio**, incluyendo artistas, galerias, museos, archivos y sus proveedores web. La eleccion responde a ventajas reales:
 
 - Gabriel y Tokenizart ya poseen lenguaje, casos, contactos y conocimiento del dominio;
 - la informacion suele estar fragmentada entre sitios, redes, catalogos, PDFs y sistemas internos;
@@ -50,7 +50,9 @@ El primer segmento sera **arte, cultura, coleccionismo e instituciones con patri
 
 ### Canal multiplicador
 
-El segundo segmento sera **agencias, estudios web y mantenedores WordPress**. No se los presenta como adversarios. Se los convierte en socios de implementacion mediante paquetes exactos, diffs, dry-runs y recibos. Un estudio puede aplicar el metodo a multiples clientes y reducir la friccion de acceso al origen.
+El canal prioritario sera **agencias, estudios web y mantenedores WordPress**. No se los presenta como adversarios. Se los convierte en socios de implementacion mediante paquetes exactos, diffs, dry-runs y recibos. Un estudio puede aplicar el metodo a multiples clientes y reducir la friccion de acceso al origen.
+
+El primer producto sectorial repetible se probara en **hospitalidad**: grupos de restaurantes, hoteles boutique, bodegas y espacios de eventos. Estos sitios concentran preguntas con impacto comercial y datos cambiantes. El restaurante independiente de bajo ticket se abordara mediante un paquete simple o un partner, no con consultoria intensiva.
 
 ### Segmentos posteriores
 
@@ -105,7 +107,7 @@ Los precios iniciales son hipotesis internas y no se publican hasta validar tiem
 
 ## Correo operativo
 
-El canal candidato es `hola@agentfriendlyweb.dev`, con aliases funcionales para auditoria y seguridad. Cloudflare Email Routing puede recibir y reenviar mensajes cuando el dominio usa DNS de Cloudflare. La salida conserva proveedor, identidad y auditoria separados.
+El canal canonico candidato es `hello@agentfriendlyweb.dev`, con `hola@` y `ola@` como aliases locales y aliases funcionales para auditoria y seguridad. Cloudflare Email Routing puede recibir y reenviar mensajes cuando el dominio usa DNS de Cloudflare. La salida conserva proveedor, identidad y auditoria separados.
 
 Codex podra clasificar, resumir, preparar respuestas y responder asuntos allowlisted cuando exista una conexion autorizada. No sera un custodio informal de contrasenas ni un emisor irrestricto. Consultas contractuales, pagos, reembolsos, incidentes, datos personales sensibles y compromisos comerciales fuera de catalogo conservan revision humana.
 

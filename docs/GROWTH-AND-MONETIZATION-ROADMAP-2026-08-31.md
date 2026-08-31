@@ -26,8 +26,9 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 
 **Estado:** documentado en esta rama.
 
-- beachhead en arte, cultura, coleccionismo e instituciones con patrimonio;
+- casos de credibilidad en arte, cultura, coleccionismo e instituciones con patrimonio;
 - canal multiplicador con agencias y mantenedores web;
+- primer producto repetible para grupos de hospitalidad, hoteles boutique, bodegas, espacios de eventos y restaurantes con reservas directas;
 - auditoria gratuita sin email obligatorio;
 - Discovery Pack F0/F1 a F3 como primera oferta paga;
 - embudo, KPIs y limites;
@@ -48,7 +49,9 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 
 ### Gate 6C - Correo operativo
 
-**Direccion candidata:** `hola@agentfriendlyweb.dev`.
+**Direccion canonica candidata:** `hello@agentfriendlyweb.dev`.
+
+Aliases locales: `hola@agentfriendlyweb.dev` y `ola@agentfriendlyweb.dev`. Todos llegan a la misma operacion; no se crean silos por idioma.
 
 - recepcion y routing desde Cloudflare;
 - remitente y DKIM/SPF/DMARC segun proveedor de salida;
@@ -260,5 +263,6 @@ Estos umbrales son hipotesis de arranque, no benchmarks de mercado. Se revisan c
 - `docs/EMAIL-LEAD-CAPTURE-AND-CONSENT-ARCHITECTURE-V1.md`
 - `docs/AGENTIC-COMMERCE-X402-MPP-ARCHITECTURE-V1.md`
 - `docs/INTERACTIVE-DIAGRAMS-AND-EXPLAINERS-ROADMAP-V1.md`
+- `docs/MARKET-AND-LOCALE-EXPANSION-STRATEGY-V1.md`
 - `docs/EXTERNAL-AUDIT-AND-EVIDENCE-REGISTRY-2026-08-30.md`
 - `docs/A2A-DEPLOYMENT-CAPSULE-ROADMAP.es.md`
