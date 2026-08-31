@@ -93,6 +93,18 @@ test('the mobile navigation stretches across the available menu width', async ()
   assert.match(styles, /\.site-header nav\.is-open a\s*\{[^}]*width:\s*100%;/s);
 });
 
+test('the header collapses its long navigation before the language switcher can overflow', async () => {
+  const styles = await readFile('app/globals.css', 'utf8');
+  const start = styles.indexOf('@media (max-width: 1320px)');
+  const end = styles.indexOf('@media ', start + 1);
+
+  assert.notEqual(start, -1, 'the compact header breakpoint must cover 1280px desktop screens');
+  const compactHeader = styles.slice(start, end === -1 ? styles.length : end);
+  assert.match(compactHeader, /\.site-header nav(?:,\s*\.repo-link)?\s*\{[^}]*display:\s*none;/s);
+  assert.match(compactHeader, /\.site-header nav\.is-open\s*\{[^}]*display:\s*grid;/s);
+  assert.match(compactHeader, /\.menu-button\s*\{[^}]*display:\s*inline-grid;/s);
+});
+
 test('public navigation uses stable document links instead of RSC prefetch links', async () => {
   const files = [
     'app/components/site-header.tsx',
