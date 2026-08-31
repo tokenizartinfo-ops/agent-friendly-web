@@ -15,6 +15,8 @@ import {
 } from 'lucide-react';
 // @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { normalizeSitePrefill } from '../../lib/site-prefill.mjs';
+import { localizedPath } from '../../lib/site-i18n.mjs';
+import { HOME_COPY } from '../../lib/home-copy.mjs';
 
 type Category = { label: string; score: number; weight: number; status: string };
 type ScanResult = {
@@ -25,38 +27,15 @@ type ScanResult = {
   limits: string[];
 };
 
-const categoryHelp: Record<string, string> = {
-  discovery: 'Rastreo, sitemap y señales de acceso.',
-  answerability: 'Contenido claro, estructurado y citable.',
-  machineContent: 'Rutas preparadas para lectura por agentes.',
-  tools: 'Contratos para APIs, MCP y skills.',
-  experimental: 'Capacidades web todavia experimentales.',
-  trust: 'Autoria, fuentes y gobierno del contenido.',
-  commerce: 'Base para pagos y transacciones agenticas.',
-};
-
-const pendingCategories: Array<[string, Category]> = [
-  ['discovery', { label: 'Descubrimiento y rastreo', score: 0, weight: 20, status: 'pending' }],
-  ['answerability', { label: 'Contenido listo para respuestas', score: 0, weight: 20, status: 'pending' }],
-  ['machineContent', { label: 'Contenido legible por agentes', score: 0, weight: 15, status: 'pending' }],
-  ['tools', { label: 'APIs y herramientas', score: 0, weight: 20, status: 'pending' }],
-  ['experimental', { label: 'Interaccion web experimental', score: 0, weight: 10, status: 'pending' }],
-  ['trust', { label: 'Identidad, evidencia y gobierno', score: 0, weight: 10, status: 'pending' }],
-  ['commerce', { label: 'Comercio agentico', score: 0, weight: 5, status: 'pending' }],
-];
-
-const auxiliaryDiagnostics = [
-  ['contentSignals', 'Content Signals'],
-  ['explicitAiCrawlerPolicy', 'Politica IA explicita'],
-  ['apiCatalog', 'API Catalog'],
-  ['aiCatalog', 'Catalogo de recursos'],
-] as const;
-
 type ScanWorkspaceProps = {
   initialSite?: string;
+  locale?: 'es' | 'en' | 'pt';
 };
 
-export function ScanWorkspace({ initialSite }: ScanWorkspaceProps) {
+const weights: Record<string, number> = { discovery: 20, answerability: 20, machineContent: 15, tools: 20, experimental: 10, trust: 10, commerce: 5 };
+
+export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps) {
+  const copy = HOME_COPY[locale] || HOME_COPY.es;
   const [url, setUrl] = useState(() => normalizeSitePrefill(initialSite) || 'agentfriendlyweb.dev');
   const [result, setResult] = useState<ScanResult | null>(null);
   const [error, setError] = useState('');
@@ -73,58 +52,58 @@ export function ScanWorkspace({ initialSite }: ScanWorkspaceProps) {
         body: JSON.stringify({ url }),
       });
       const payload = await response.json();
-      if (!response.ok) throw new Error(payload.error || 'No se pudo auditar el sitio.');
+      if (!response.ok) throw new Error(payload.error || copy.form.error);
       setResult(payload);
     } catch (scanError) {
       setResult(null);
-      setError(scanError instanceof Error ? scanError.message : 'No se pudo auditar el sitio.');
+      setError(scanError instanceof Error ? scanError.message : copy.form.error);
     } finally {
       setLoading(false);
     }
   }
 
-  const categories = result ? Object.entries(result.readiness.categories) : pendingCategories;
+  const categories: Array<[string, Category & { help: string }]> = copy.categories.map(({ id, label, help }) => {
+    const observed = result?.readiness.categories[id];
+    return [id, observed ? { ...observed, label, help } : { label, help, score: 0, weight: weights[id], status: 'pending' }];
+  });
 
   return (
     <>
       <section className="audit-band" id="auditar" aria-labelledby="audit-title">
         <div className="audit-copy">
-          <div className="eyebrow"><Radar size={16} /> Diagnostico publico verificable</div>
-          <h1 id="audit-title">Descubri que entiende un agente de tu sitio.</h1>
-          <p>
-            Revisamos señales publicas, contenido citable y herramientas expuestas. El resultado separa
-            evidencia real, recomendaciones y tecnologias todavia experimentales.
-          </p>
+          <div className="eyebrow"><Radar size={16} /> {copy.eyebrow}</div>
+          <h1 id="audit-title">{copy.title}</h1>
+          <p>{copy.intro}</p>
           <form className="scan-form" onSubmit={runScan}>
-            <label htmlFor="site-url">Sitio web</label>
+            <label htmlFor="site-url">{copy.form.label}</label>
             <div className="scan-input-row">
               <Globe2 aria-hidden="true" size={20} />
               <input
                 id="site-url"
                 value={url}
                 onChange={(event) => setUrl(event.target.value)}
-                placeholder="ejemplo.org"
+                placeholder={copy.form.placeholder}
                 inputMode="url"
                 autoComplete="url"
               />
               <button type="submit" disabled={loading}>
                 {loading ? <LoaderCircle className="spin" aria-hidden="true" size={19} /> : <FileSearch aria-hidden="true" size={19} />}
-                {loading ? 'Auditando' : 'Auditar'}
+                {loading ? copy.form.loading : copy.form.submit}
               </button>
             </div>
           </form>
           {error ? <p className="error-message"><CircleAlert size={18} /> {error}</p> : null}
           <div className="trust-row">
-            <span><LockKeyhole size={15} /> Solo recursos publicos</span>
-            <span><Check size={15} /> Sin contraseñas</span>
-            <span><Check size={15} /> Sin modificar el sitio</span>
+            <span><LockKeyhole size={15} /> {copy.trust[0]}</span>
+            <span><Check size={15} /> {copy.trust[1]}</span>
+            <span><Check size={15} /> {copy.trust[2]}</span>
           </div>
         </div>
 
         <aside className="score-panel" aria-live="polite">
           <div className="score-heading">
             <div>
-              <span>{result ? 'Estado observado' : 'Referencia verificada'}</span>
+              <span>{result ? copy.observed : copy.reference}</span>
               <strong>{result ? result.target.replace(/^https?:\/\//, '') : 'agentfriendlyweb.dev'}</strong>
             </div>
             <Bot size={25} aria-hidden="true" />
@@ -136,9 +115,9 @@ export function ScanWorkspace({ initialSite }: ScanWorkspaceProps) {
           <div className="score-track" aria-hidden="true">
             <span style={{ width: `${result?.readiness.score ?? 70}%` }} />
           </div>
-          <p className="score-level">{result ? result.readiness.level : 'AF-3 · Herramientas publicas'}</p>
-          {!result ? <p className="score-reference">Medicion propia publicada como caso de referencia. Audita otro dominio para reemplazarla.</p> : null}
-          <p className="score-note">Metodologia propia de Gabriel Mucchiut. No es una certificacion oficial.</p>
+          <p className="score-level">{result ? result.readiness.level : copy.referenceLevel}</p>
+          {!result ? <p className="score-reference">{copy.referenceText}</p> : null}
+          <p className="score-note">{copy.note}</p>
         </aside>
       </section>
 
@@ -146,10 +125,10 @@ export function ScanWorkspace({ initialSite }: ScanWorkspaceProps) {
         <div className="results-panel">
           <div className="section-heading">
             <div>
-              <span>Lectura por capas</span>
-              <h2>{result ? 'Resultado de la auditoria' : 'Que vamos a medir'}</h2>
+              <span>{copy.layers}</span>
+              <h2>{result ? copy.result : copy.measuring}</h2>
             </div>
-            {result ? <time dateTime={result.checkedAt}>Actualizado ahora</time> : null}
+            {result ? <time dateTime={result.checkedAt}>{copy.updated}</time> : null}
           </div>
           <div className="category-list">
             {categories.map(([id, category]) => (
@@ -159,17 +138,17 @@ export function ScanWorkspace({ initialSite }: ScanWorkspaceProps) {
                 </div>
                 <div className="category-copy">
                   <strong>{category.label}</strong>
-                  <span>{categoryHelp[id]}</span>
+                  <span>{category.help}</span>
                 </div>
-                <div className="category-score">{result ? `${category.score}/${category.weight}` : 'Pendiente'}</div>
+                <div className="category-score">{result ? `${category.score}/${category.weight}` : copy.pending}</div>
               </div>
             ))}
           </div>
           {result ? (
             <>
               <div className="diagnostic-strip" aria-label="Diagnosticos auxiliares sin puntaje">
-                <div className="diagnostic-title"><span>Diagnosticos auxiliares</span><small>No alteran AF v1</small></div>
-                {auxiliaryDiagnostics.map(([id, label]) => (
+                <div className="diagnostic-title"><span>{copy.diagnostics}</span><small>{copy.diagnosticsLimit}</small></div>
+                {Object.entries(copy.auxiliary).map(([id, label]) => (
                   <div className="diagnostic-item" data-detected={result.evidence[id]} key={id}>
                     {result.evidence[id] ? <Check size={14} /> : <CircleAlert size={14} />}
                     <span>{label}</span>
@@ -177,7 +156,7 @@ export function ScanWorkspace({ initialSite }: ScanWorkspaceProps) {
                 ))}
               </div>
               <details className="evidence-disclosure">
-                <summary>Ver evidencia tecnica y limites</summary>
+                <summary>{copy.evidence}</summary>
                 <div className="evidence-grid">
                   {Object.entries(result.evidence).map(([id, detected]) => (
                     <span data-detected={detected} key={id}>{detected ? <Check size={14} /> : <CircleAlert size={14} />}{id}</span>
@@ -186,8 +165,8 @@ export function ScanWorkspace({ initialSite }: ScanWorkspaceProps) {
                 {result.limits.length ? <ul>{result.limits.map((limit) => <li key={limit}>{limit}</li>)}</ul> : null}
               </details>
               <div className="result-next-action">
-                <div><span>Siguiente accion recomendada</span><strong>Convierte esta evidencia en un plan priorizado y revisable.</strong></div>
-                <a href="/expediente">Abrir mi expediente <ArrowRight size={16} /></a>
+                <div><span>{copy.next}</span><strong>{copy.nextText}</strong></div>
+                <a href={localizedPath('dossier', locale) || '/expediente'}>{copy.openDossier} <ArrowRight size={16} /></a>
               </div>
             </>
           ) : null}
@@ -195,18 +174,13 @@ export function ScanWorkspace({ initialSite }: ScanWorkspaceProps) {
 
         <aside className="journey-panel" id="expediente">
           <div className="journey-icon"><Route size={22} /></div>
-          <span>Expediente guiado</span>
-          <h2>Mejora el sitio con contexto real.</h2>
-          <p>
-            El propietario responde preguntas simples sobre audiencia, contenidos, acceso tecnico y objetivos.
-            El sistema conserva avances y transforma respuestas dispersas en un roadmap accionable.
-          </p>
+          <span>{copy.journey}</span>
+          <h2>{copy.journeyTitle}</h2>
+          <p>{copy.journeyText}</p>
           <ol>
-            <li><span>1</span> Contanos que hace el sitio.</li>
-            <li><span>2</span> Indica que control tecnico tenes.</li>
-            <li><span>3</span> Elegimos mejoras por impacto.</li>
+            {copy.journeySteps.map((step, index) => <li key={step}><span>{index + 1}</span> {step}</li>)}
           </ol>
-          <a href="/expediente">Crear mi expediente <ArrowRight size={17} /></a>
+          <a href={localizedPath('dossier', locale) || '/expediente'}>{copy.createDossier} <ArrowRight size={17} /></a>
         </aside>
       </section>
     </>

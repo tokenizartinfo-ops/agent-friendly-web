@@ -8,7 +8,9 @@ type HomeProps = {
   searchParams?: Promise<{ site?: string | string[] }>;
 };
 
-export default async function Home({ searchParams }: HomeProps) {
+type Locale = 'es' | 'en' | 'pt';
+
+export async function HomeExperience({ searchParams, locale = 'es' }: HomeProps & { locale?: Locale }) {
   const query = searchParams ? await searchParams : {};
   const initialSite = Array.isArray(query.site) ? query.site[0] : query.site;
   const structuredData = {
@@ -19,7 +21,7 @@ export default async function Home({ searchParams }: HomeProps) {
         '@id': 'https://agentfriendlyweb.dev/#website',
         name: 'Agent Friendly Web',
         url: 'https://agentfriendlyweb.dev/',
-        inLanguage: ['es', 'en'],
+        inLanguage: ['es', 'en', 'pt'],
         creator: { '@id': 'https://agentfriendlyweb.dev/#creator' },
       },
       {
@@ -51,12 +53,16 @@ export default async function Home({ searchParams }: HomeProps) {
     <main>
       <PublicWebMcpRegistration />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      <SiteHeader />
+      <SiteHeader locale={locale} routeKey="home" />
 
-      <ScanWorkspace initialSite={initialSite} />
-      <MaturityMap />
+      <ScanWorkspace initialSite={initialSite} locale={locale} />
+      <MaturityMap locale={locale} />
 
-      <SiteFooter />
+      <SiteFooter locale={locale} />
     </main>
   );
+}
+
+export default async function Home(props: HomeProps) {
+  return <HomeExperience {...props} locale="es" />;
 }
