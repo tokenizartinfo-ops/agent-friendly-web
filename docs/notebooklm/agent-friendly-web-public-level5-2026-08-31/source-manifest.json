@@ -1,0 +1,77 @@
+{
+  "schema": "agent-friendly-web.notebooklm-public-source-pack.v1",
+  "title": "Agent Friendly Web public knowledge Level 5 - 2026-08-31",
+  "sensitivity": "Nivel 5",
+  "canonical_source": "repository",
+  "repository_revision": "24af307192dabc9bd3fb5ed3fbae0516468eb016",
+  "derivative_policy": "requires_human_qa",
+  "status": "ready_for_notebook_ingestion",
+  "created_at": "2026-08-31T00:00:00Z",
+  "reviewed_at": "2026-08-31T00:00:00Z",
+  "reviewed_by": "human:gabriel-mucchiut",
+  "canonical_origin": "https://agentfriendlyweb.dev",
+  "provenance": {
+    "repository": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+    "okf_manifest": "https://agentfriendlyweb.dev/okf/v0.2/manifest.json",
+    "okf_checksums": "https://agentfriendlyweb.dev/okf/v0.2/CHECKSUMS.sha256"
+  },
+  "sources": [
+    {
+      "path": "docs/HOME-AND-MATURITY-PATH.es.md",
+      "canonical_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/24af307192dabc9bd3fb5ed3fbae0516468eb016/docs/HOME-AND-MATURITY-PATH.es.md",
+      "sha256": "96080f901ad6a7a30339d7fff89707bfa720c9dadeb178f8711bbd49adf033c0",
+      "locale": "es",
+      "role": "human_home_and_maturity_source",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    },
+    {
+      "path": "docs/PUBLIC-FAQ-AND-GUIDE.es.md",
+      "canonical_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/24af307192dabc9bd3fb5ed3fbae0516468eb016/docs/PUBLIC-FAQ-AND-GUIDE.es.md",
+      "sha256": "b433424a16c319ba0a9bf35a23e17c53013db68337186a37e7ce31770267ded7",
+      "locale": "es",
+      "role": "faq_and_deterministic_guide_source",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    },
+    {
+      "path": "docs/PUBLIC-READINESS-REFERENCE-2026-08-31.md",
+      "canonical_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/24af307192dabc9bd3fb5ed3fbae0516468eb016/docs/PUBLIC-READINESS-REFERENCE-2026-08-31.md",
+      "sha256": "9b68b0eecd39afb634f97049083f8f0be8a1f089b5c7fb888f0a33d3235f536d",
+      "locale": "es",
+      "role": "dated_public_readiness_source",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    },
+    {
+      "path": "public/okf/v0.2/index.md",
+      "canonical_url": "https://agentfriendlyweb.dev/okf/v0.2/index.md",
+      "sha256": "35df2f622df5cdd8c485870606a4173101c26404afa6940dd1c63816e2bacf4c",
+      "locale": "es",
+      "role": "machine_readable_knowledge_index",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    },
+    {
+      "path": "public/.well-known/public-guide-contract.json",
+      "canonical_url": "https://agentfriendlyweb.dev/.well-known/public-guide-contract.json",
+      "sha256": "cfddd4d64301c9fcf731d3b91c3cde214db032d0990aa29c35b04dc5cdede91f",
+      "locale": "und",
+      "role": "guide_capability_contract",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    },
+    {
+      "path": "public/.well-known/agent-readiness.json",
+      "canonical_url": "https://agentfriendlyweb.dev/.well-known/agent-readiness.json",
+      "sha256": "d9904ffe12507f321de0b196efad7485d140276f9f39f5ee1bbdfddf77082a28",
+      "locale": "und",
+      "role": "public_capability_manifest",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    }
+  ],
+  "exclusions": [
+    "credentials",
+    "secret_values",
+    "private_dossiers",
+    "registry_private_data",
+    "payments",
+    "protected_tokenizart_data"
+  ],
+  "promotion_gate": "human_review_required_before_publication_or_ingestion"
+}

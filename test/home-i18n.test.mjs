@@ -42,6 +42,7 @@ test('home follows the approved human journey before opening the future archive'
     '<MaturityMap locale=',
     '<ScanWorkspace initialSite=',
     '<HomeMaturityComparison locale=',
+    '<PublicFaq locale=',
     '<FutureArchive locale=',
     '<HomeNextPaths locale=',
   ].map((token) => home.indexOf(token));
@@ -50,8 +51,8 @@ test('home follows the approved human journey before opening the future archive'
 });
 
 test('comic home leads with the approved call, a responsive hero asset and a progressive future archive', () => {
-  assert.match(styles, /agent-friendly-call-robots\.webp/);
-  assert.match(comicIntro, /className="comic-call-art"/);
+  assert.match(comicIntro, /src="\/images\/agent-friendly-call-robots\.webp"/);
+  assert.match(comicIntro, /<img[\s\S]*className="comic-call-art"/);
   assert.ok(comicIntro.indexOf('id="comic-call-title"') < comicIntro.indexOf('className="comic-call-art"'));
   assert.ok(comicIntro.indexOf('className="comic-call-art"') < comicIntro.indexOf('<p>{copy.intro}<\/p>'));
   assert.match(comicIntro, /id="archivo-del-futuro"/);
@@ -64,10 +65,10 @@ test('comic home leads with the approved call, a responsive hero asset and a pro
   assert.match(map, /data-equipped=/);
 });
 
-test('hero CSS protects desktop contrast and brings the illustration forward on mobile', () => {
-  assert.match(styles, /\.comic-call-hero::before\s*\{[^}]*background:/s);
-  assert.match(styles, /\.comic-call-art\s*\{[^}]*agent-friendly-call-robots\.webp/s);
-  assert.match(styles, /@media \(max-width: 620px\)[\s\S]*\.comic-call-art\s*\{[^}]*position:\s*relative;/s);
+test('hero CSS presents the complete illustration before explanatory actions', () => {
+  assert.doesNotMatch(styles, /\.comic-call-hero::before\s*\{/);
+  assert.match(styles, /\.comic-call-art\s*\{[^}]*object-fit:\s*contain/s);
+  assert.match(styles, /@media \(max-width: 620px\)[\s\S]*\.comic-call-art\s*\{[^}]*aspect-ratio:\s*1680 \/ 941;/s);
   assert.match(styles, /@media \(max-width: 620px\)[\s\S]*\.comic-call-actions\s*\{[^}]*display:\s*grid;/s);
 });
 

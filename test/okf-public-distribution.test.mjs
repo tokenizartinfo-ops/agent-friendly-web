@@ -22,13 +22,16 @@ const EXPECTED_CONCEPTS = [
   'method/agent-friendly-web-method.md',
   'method/maturity-levels-af0-af5.md',
   'method/evidence-and-scoring.md',
+  'method/home-and-maturity-path.md',
   'discovery/public-audit.md',
   'discovery/aeo-and-crawler-policy.md',
+  'discovery/current-public-readiness.md',
   'discovery/public-discovery-resources.md',
   'registry/registry-and-provenance-states.md',
   'registry/domain-verification-boundary.md',
   'assistance/intake-assistant-boundary.md',
   'assistance/readiness-comparison-boundary.md',
+  'assistance/public-faq-and-guide.md',
   'cases/tokenizart-first-integral-case.md',
 ];
 
@@ -41,6 +44,9 @@ const PUBLIC_SOURCE_ALLOWLIST = new Set([
   'docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md',
   'docs/BLOCK-3-INTAKE-ASSISTANT-CONTRACT.es.md',
   'docs/BLOCK-2-SECTOR-MULTILINGUAL-MEASUREMENT.es.md',
+  'docs/HOME-AND-MATURITY-PATH.es.md',
+  'docs/PUBLIC-FAQ-AND-GUIDE.es.md',
+  'docs/PUBLIC-READINESS-REFERENCE-2026-08-31.md',
   'public/.well-known/agent-readiness.json',
   'public/.well-known/readiness-comparison-contract.json',
 ]);
@@ -57,7 +63,9 @@ test('OKF source manifest fixes the approved public release contract', async () 
   assert.equal(manifest.canonical_origin, 'https://agentfriendlyweb.dev');
   assert.equal(manifest.license, 'CC-BY-4.0');
   assert.equal(manifest.marks, 'reserved');
+  assert.equal(manifest.release.id, '2026-08-31-public-v2');
   assert.equal(manifest.release.verified_by, 'human:gabriel-mucchiut');
+  assert.equal(manifest.release.stale_after, '2026-11-29T00:00:00Z');
   assert.match(manifest.release.generated_at, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/);
   assert.match(manifest.release.verified_at, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/);
   assert.match(manifest.release.stale_after, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/);
@@ -81,6 +89,7 @@ test('OKF source manifest fixes the approved public release contract', async () 
   for (const source of Object.values(manifest.source_catalog)) {
     assert.match(source.last_modified, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/);
     assert.match(source.resource, /^https:\/\//);
+    assert.doesNotMatch(source.resource, /\/blob\/main\//);
   }
 });
 
@@ -215,14 +224,14 @@ test('generatePublicOkf creates a complete reproducible bundle that validates in
   for (const conceptPath of EXPECTED_CONCEPTS) {
     const concept = parseOkfDocument(firstTree.get(conceptPath));
     assert.ok(concept.frontmatter.type, `${conceptPath} has no type`);
-    assert.equal(concept.frontmatter.generated.at, '2026-08-27T00:00:00Z');
+    assert.equal(concept.frontmatter.generated.at, '2026-08-31T00:00:00Z');
     assert.equal(concept.frontmatter.verified[0].by, 'human:gabriel-mucchiut');
   }
 
   const distributionManifest = JSON.parse(firstTree.get('manifest.json'));
   assert.equal(distributionManifest.schema, 'agent-friendly-web.okf-distribution.v1');
   assert.equal(distributionManifest.okf_version, '0.2');
-  assert.equal(distributionManifest.files.length, 13);
+  assert.equal(distributionManifest.files.length, 16);
   assert.equal(distributionManifest.extensions.manifest, true);
   assert.equal(distributionManifest.extensions.checksums, true);
   assert.match(distributionManifest.convention, /project extension.*not.*OKF requirement/i);
@@ -233,7 +242,7 @@ test('generatePublicOkf creates a complete reproducible bundle that validates in
     outputDir,
   });
   assert.equal(validation.conceptCount, EXPECTED_CONCEPTS.length);
-  assert.equal(validation.fileCount, 15);
+  assert.equal(validation.fileCount, 18);
 
   await generatePublicOkf({ rootDir: process.cwd(), manifestPath: 'config/okf-public-sources.v1.json', outputDir });
   assert.deepEqual(await readTree(outputDir), firstTree);

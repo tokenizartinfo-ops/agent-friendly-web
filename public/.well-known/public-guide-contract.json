@@ -12,6 +12,7 @@
     "conversationContinuity": true,
     "depthAdaptation": true,
     "citedPublicAnswers": true,
+    "faqCatalogAnswers": true,
     "clickableFollowUps": true,
     "websiteMutation": false,
     "auditExecution": false,
@@ -29,9 +30,12 @@
     "remoteRequests": false,
     "requiresHumanApprovalForActions": true
   },
+  "knowledge_sources": [
+    "/preguntas-frecuentes"
+  ],
   "limits": [
     "Conversation state exists only in React memory and clears on reload.",
-    "Answers come from an allowlisted public topic and source catalog.",
+    "Answers come from an allowlisted public topic catalog and the reviewed FAQ catalog.",
     "The guide does not guarantee rankings, indexing, citations, recommendations or commercial outcomes."
   ]
 }

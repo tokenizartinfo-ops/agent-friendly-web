@@ -119,6 +119,7 @@ export function PublicGuideChat({ locale = 'es' }: { locale?: Locale } = {}) {
                 }
               }}
               rows={2}
+              maxLength={2000}
               placeholder={copy.placeholder}
             />
             <button type="button" onClick={() => send()} disabled={!draft.trim()} aria-label={copy.send}>

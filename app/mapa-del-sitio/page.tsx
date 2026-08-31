@@ -25,6 +25,7 @@ export const metadata: Metadata = localizedRouteMetadata('siteMap', 'es') as Met
 const humanRoutes = [
   { name: 'Auditor publico', detail: 'Comprueba evidencia visible sin modificar el sitio.', href: '/#auditar', icon: Radar },
   { name: 'Guia publica', detail: 'Mantiene el hilo inmediato, adapta la explicacion y enlaza fuentes sin guardar la charla.', href: '/guia', icon: Bot },
+  { name: 'Preguntas frecuentes', detail: 'Respuestas publicas revisadas, multilingues y compartidas con la guia.', href: '/preguntas-frecuentes', icon: FileText },
   { name: 'AEO y crawlers', detail: 'Explica valor comercial y politicas por proveedor sin promesas de ranking.', href: '/aeo-y-crawlers', icon: Bot },
   { name: 'Soluciones por sector', detail: 'Adapta evidencia, contenidos y primer paso a cada tipo de organizacion.', href: '/sectores', icon: Globe2 },
   { name: 'Medir mejora', detail: 'Compara evidencia antes y despues sin promesas de ranking.', href: '/medir-mejora', icon: Radar },

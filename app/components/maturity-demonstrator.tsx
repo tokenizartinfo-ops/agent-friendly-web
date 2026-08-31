@@ -12,7 +12,7 @@ const scenarioIcons = { restaurant: Building2, municipality: Landmark, tokenizar
 export function MaturityDemonstrator({ locale = 'es' }: { locale?: 'es' | 'en' | 'pt' } = {}) {
   const copy = MATURITY_COPY[locale] || MATURITY_COPY.es;
   const stages = copy.stages.map(([level, name, evidence], id) => ({ id, level, name, evidence }));
-  const [scenarioId, setScenarioId] = useState<ScenarioId>('tokenizart');
+  const [scenarioId, setScenarioId] = useState<ScenarioId>('restaurant');
   const [stageId, setStageId] = useState(2);
   const scenario = copy.scenarios[scenarioId];
   const stage = stages[stageId];

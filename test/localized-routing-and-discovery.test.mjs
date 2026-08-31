@@ -9,7 +9,7 @@ test('localized catch-all publishes every human route in English and Portuguese'
   assert.ok(existsSync(localizedPagePath), 'localized route dispatcher must exist');
   if (!existsSync(localizedPagePath)) return;
   const source = readFileSync(localizedPagePath, 'utf8');
-  for (const routeKey of ['home', 'guide', 'aeo', 'sectors', 'evolution', 'methodology', 'measurement', 'assistant', 'openKnowledge', 'registry', 'registryProfile', 'cli', 'mcp', 'externalVerification', 'tokenizartCase', 'siteMap', 'dossier', 'capsule']) {
+  for (const routeKey of ['home', 'guide', 'faq', 'aeo', 'sectors', 'evolution', 'methodology', 'measurement', 'assistant', 'openKnowledge', 'registry', 'registryProfile', 'cli', 'mcp', 'externalVerification', 'tokenizartCase', 'siteMap', 'dossier', 'capsule']) {
     assert.match(source, new RegExp(`['\"]${routeKey}['\"]`));
   }
   assert.match(source, /resolveLocalizedRoute/);

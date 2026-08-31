@@ -3,7 +3,7 @@ import { localizedPath } from '../../lib/site-i18n.mjs';
 import { sharedCopy } from '../../lib/site-copy.mjs';
 
 const productLinks = [
-  ['audit', 'home', 'auditar'], ['guide', 'guide'], ['aeo', 'aeo'], ['sectors', 'sectors'],
+  ['audit', 'home', 'auditar'], ['guide', 'guide'], ['faq', 'faq'], ['aeo', 'aeo'], ['sectors', 'sectors'],
   ['measurement', 'measurement'], ['assistant', 'assistant'], ['openKnowledge', 'openKnowledge'],
   ['evolution', 'evolution'], ['methodology', 'methodology'], ['registry', 'registry'], ['cli', 'cli'],
   ['mcp', 'mcp'], ['externalVerification', 'externalVerification'], ['tokenizartCase', 'tokenizartCase'], ['siteMap', 'siteMap'],

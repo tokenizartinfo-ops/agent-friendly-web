@@ -7,6 +7,7 @@ import { LocalizedPublicPage } from '../../components/localized-public-page';
 import { AgenticEvolutionExperience } from '../../evolucion-agentica/page';
 import { DossierExperience } from '../../expediente/page';
 import { PublicGuideExperience } from '../../guia/page';
+import { PublicFaqExperience } from '../../preguntas-frecuentes/page';
 import { MeasureImprovementExperience } from '../../medir-mejora/page';
 import { HomeExperience } from '../../page';
 import { RegistryProfileExperience } from '../../registry/[slug]/page';
@@ -43,6 +44,7 @@ export default async function LocalizedRoutePage({ params, searchParams }: PageP
   switch (resolved.routeKey) {
     case 'home': return <HomeExperience locale={locale} searchParams={query as Promise<{ site?: string | string[] }>} />;
     case 'guide': return <PublicGuideExperience locale={locale} />;
+    case 'faq': return <PublicFaqExperience locale={locale} />;
     case 'sectors': return <SectorGuidePage locale={locale} />;
     case 'evolution': return <AgenticEvolutionExperience locale={locale} />;
     case 'measurement': return <MeasureImprovementExperience locale={locale} />;

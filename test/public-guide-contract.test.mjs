@@ -15,6 +15,8 @@ test('public guide contract exposes a deployed deterministic ephemeral read-only
   assert.equal(contract.external_model, false);
   assert.equal(contract.capabilities.conversationContinuity, true);
   assert.equal(contract.capabilities.citedPublicAnswers, true);
+  assert.equal(contract.capabilities.faqCatalogAnswers, true);
+  assert.ok(contract.knowledge_sources.includes('/preguntas-frecuentes'));
   assert.equal(contract.capabilities.websiteMutation, false);
   assert.equal(contract.capabilities.paymentExecution, false);
   assert.equal(contract.capabilities.privateProjectAccess, false);
@@ -31,6 +33,7 @@ test('public guide UI remains local, ephemeral and keyboard operable', async () 
   assert.match(component, /respondToPublicGuide/);
   assert.match(component, /event\.key === 'Enter'/);
   assert.match(component, /event\.shiftKey/);
+  assert.match(component, /maxLength=\{2000\}/);
   assert.equal(PUBLIC_TOOLS_COPY.es.guideUI.reset, 'Reiniciar');
   assert.match(component, /quick_replies/);
   assert.match(component, /sources/);

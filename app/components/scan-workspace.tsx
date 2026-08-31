@@ -17,6 +17,8 @@ import {
 import { normalizeSitePrefill } from '../../lib/site-prefill.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { HOME_COPY } from '../../lib/home-copy.mjs';
+// @ts-expect-error Shared ESM module is exercised directly by Node tests.
+import { PUBLIC_READINESS_REFERENCE } from '../../lib/public-readiness-reference.mjs';
 
 type Category = { label: string; score: number; weight: number; status: string };
 type ScanResult = {
@@ -104,19 +106,24 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
           <div className="score-heading">
             <div>
               <span>{result ? copy.observed : copy.reference}</span>
-              <strong>{result ? result.target.replace(/^https?:\/\//, '') : 'agentfriendlyweb.dev'}</strong>
+              <strong>{result ? result.target.replace(/^https?:\/\//, '') : PUBLIC_READINESS_REFERENCE.target}</strong>
             </div>
             <Bot size={25} aria-hidden="true" />
           </div>
           <div className="score-value">
-            <strong>{result ? result.readiness.score : '70'}</strong>
+            <strong>{result ? result.readiness.score : PUBLIC_READINESS_REFERENCE.score}</strong>
             <span>/ 100</span>
           </div>
           <div className="score-track" aria-hidden="true">
-            <span style={{ width: `${result?.readiness.score ?? 70}%` }} />
+            <span style={{ width: `${result?.readiness.score ?? PUBLIC_READINESS_REFERENCE.score}%` }} />
           </div>
-          <p className="score-level">{result ? result.readiness.level : copy.referenceLevel}</p>
-          {!result ? <p className="score-reference">{copy.referenceText}</p> : null}
+          <p className="score-level">{result ? result.readiness.level : PUBLIC_READINESS_REFERENCE.level[locale]}</p>
+          {!result ? (
+            <p className="score-reference">
+              {copy.referenceText} <time dateTime={PUBLIC_READINESS_REFERENCE.measuredAt}>{PUBLIC_READINESS_REFERENCE.measuredAt}</time>
+            </p>
+          ) : null}
+          {!result ? <p className="score-boundary">{PUBLIC_READINESS_REFERENCE.boundary[locale]}</p> : null}
           <p className="score-note">{copy.note}</p>
         </aside>
       </section>

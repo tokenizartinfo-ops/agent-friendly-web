@@ -9,7 +9,7 @@ type Locale = 'es' | 'en' | 'pt';
 type SiteHeaderProps = { locale?: Locale; routeKey?: string; projectId?: string; slug?: string };
 
 const navItems = [
-  ['guide', 'guide'], ['aeo', 'aeo'], ['sectors', 'sectors'], ['evolution', 'evolution'],
+  ['guide', 'guide'], ['faq', 'faq'], ['aeo', 'aeo'], ['sectors', 'sectors'], ['evolution', 'evolution'],
   ['methodology', 'methodology'], ['registry', 'registry'], ['cli', 'cli'], ['mcp', 'mcp'],
   ['tokenizartCase', 'cases'], ['siteMap', 'siteMap'],
 ] as const;

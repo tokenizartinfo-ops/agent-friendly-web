@@ -10,11 +10,13 @@ Bundle read-only, versionado y verificable. La escala AF-0 a AF-5 es una metodol
 * [Metodo Agent Friendly Web](method/agent-friendly-web-method.md) - Alcance, reglas de evidencia y revision de la metodologia publica.
 * [Niveles de madurez AF-0 a AF-5](method/maturity-levels-af0-af5.md) - Escala propia y transparente para ordenar una evolucion agentica.
 * [Evidencia y puntuacion](method/evidence-and-scoring.md) - Ponderaciones, reglas y diagnosticos auxiliares del auditor.
+* [Portada humana y ruta de madurez](method/home-and-maturity-path.md) - Orden de la experiencia publica, niveles navegables y progreso no automatico.
 
 ## Descubrimiento
 
 * [Auditoria publica read-only](discovery/public-audit.md) - Recorrido, controles y limites del scanner publico.
 * [AEO y politica de crawlers](discovery/aeo-and-crawler-policy.md) - Decisiones separadas para descubrimiento, recuperacion y entrenamiento.
+* [Referencia publica de readiness al 2026-08-31](discovery/current-public-readiness.md) - Snapshot propio 95 sobre 100 con fecha, evidencia, limites y revalidacion.
 * [Recursos publicos de descubrimiento](discovery/public-discovery-resources.md) - Superficies desplegadas, planificadas y en investigacion sin mezclar estados.
 
 ## Registry
@@ -26,6 +28,7 @@ Bundle read-only, versionado y verificable. La escala AF-0 a AF-5 es una metodol
 
 * [Frontera del asistente de intake](assistance/intake-assistant-boundary.md) - Prototipo determinista que ordena texto y exige seleccion humana.
 * [Frontera del comparador de evidencia](assistance/readiness-comparison-boundary.md) - Comparacion local antes y despues sin promesas de ranking o recomendacion.
+* [FAQ y guia publica determinista](assistance/public-faq-and-guide.md) - Catalogo multilingue compartido, continuidad local y limites de seguridad.
 
 ## Casos
 

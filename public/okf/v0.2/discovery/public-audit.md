@@ -8,13 +8,13 @@ tags:
   - audit
   - read-only
 status: stable
-stale_after: 2026-11-25T00:00:00Z
+stale_after: 2026-11-29T00:00:00Z
 generated:
   by: process:agent-friendly-web-okf-generator
-  at: 2026-08-27T00:00:00Z
+  at: 2026-08-31T00:00:00Z
 verified:
   - by: human:gabriel-mucchiut
-    at: 2026-08-27T00:00:00Z
+    at: 2026-08-31T00:00:00Z
 sources:
   - id: source-1
     resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/SPECIFICATION.es.md
