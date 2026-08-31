@@ -1,18 +1,15 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { PRIVATE_UI_COPY } from '../lib/private-ui-copy.mjs';
 
 test('capsule review exposes progressive read-only comparison and an unsubmitted technical draft', async () => {
   const source = await readFile('app/components/capsule-review.tsx', 'utf8');
-  for (const label of [
-    'Comparar con el sitio actual',
-    'Revisar diferencias',
-    'Preparar borrador tecnico',
-    'No enviado',
-    'Descargar comparacion',
-    'Descargar borrador tecnico',
-    'Solo lee archivos publicos',
-  ]) assert.match(source, new RegExp(label, 'i'));
+  for (const locale of ['es', 'en', 'pt']) {
+    const copy = PRIVATE_UI_COPY[locale].capsule;
+    for (const label of ['compare', 'differences', 'draftTitle', 'notSent', 'downloadComparison', 'downloadDraft', 'compareBody']) assert.ok(copy[label]);
+  }
+  assert.match(source, /copy\.compare/);
 
   assert.match(source, /origin-comparison-request\.v1/);
   assert.match(source, /draft-pr-plan-request\.v1/);

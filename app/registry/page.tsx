@@ -1,17 +1,19 @@
-/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors avoid unstable vinext RSC prefetch requests. */
-
 import { ArrowRight, BadgeCheck, Database, Globe2, Search } from 'lucide-react';
 import { listPublishedProfiles } from '../../lib/registry-store';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
+import { localizedPath } from '../../lib/site-i18n.mjs';
+import { privateUiCopy } from '../../lib/private-ui-copy.mjs';
 
 export const dynamic = 'force-dynamic';
 
 type PageProps = { searchParams: Promise<{ q?: string | string[] }> };
+type Locale = 'es' | 'en' | 'pt';
 
-export default async function RegistryPage({ searchParams }: PageProps) {
+export async function RegistryExperience({ searchParams, locale = 'es' }: PageProps & { locale?: Locale }) {
+  const copy = privateUiCopy(locale).registry;
   const params = await searchParams;
-  const query = (Array.isArray(params.q) ? params.q[0] : params.q || '').trim().toLocaleLowerCase('es');
+  const query = (Array.isArray(params.q) ? params.q[0] : params.q || '').trim().toLocaleLowerCase(locale);
   const profiles = await listPublishedProfiles();
   const visible = query
     ? profiles.filter((profile) => [
@@ -23,32 +25,29 @@ export default async function RegistryPage({ searchParams }: PageProps) {
         ...profile.languages,
         profile.readiness.level,
         profile.verification.status,
-      ].join(' ').toLocaleLowerCase('es').includes(query))
+      ].join(' ').toLocaleLowerCase(locale).includes(query))
     : profiles;
 
   return (
-    <main>
-      <SiteHeader />
+    <main lang={locale}>
+      <SiteHeader routeKey="registry" locale={locale} />
       <section className="registry-hero">
         <div>
-          <span>Registry publico y verificable</span>
-          <h1>Sitios que empezaron a explicar mejor lo que son, ofrecen y permiten.</h1>
-          <p>Cada perfil separa lo declarado por su responsable, lo observado en recursos publicos y el control temporal del dominio verificado.</p>
+          <span>{copy.eyebrow}</span><h1>{copy.title}</h1><p>{copy.intro}</p>
         </div>
-        <aside><Database size={24} /><strong>{profiles.length}</strong><span>perfiles publicados</span></aside>
+        <aside><Database size={24} /><strong>{profiles.length}</strong><span>{copy.profiles}</span></aside>
       </section>
 
       <section className="registry-workspace">
-        <form className="registry-search" action="/registry" method="get">
+        <form className="registry-search" action={localizedPath('registry', locale) || '/registry'} method="get">
           <Search size={19} aria-hidden="true" />
-          <label htmlFor="registry-q">Buscar organizacion, dominio, sector, idioma o nivel AF</label>
-          <input id="registry-q" name="q" defaultValue={query} placeholder="Ejemplo: museo, arte, Español, AF-2" />
-          <button type="submit">Buscar</button>
+          <label htmlFor="registry-q">{copy.searchLabel}</label>
+          <input id="registry-q" name="q" defaultValue={query} placeholder={copy.placeholder} />
+          <button type="submit">{copy.search}</button>
         </form>
 
         <div className="registry-summary">
-          <span>{visible.length} resultados</span>
-          <p>Un perfil no garantiza indexacion, recomendacion ni calidad comercial.</p>
+          <span>{visible.length} {copy.results}</span><p>{copy.disclaimer}</p>
         </div>
 
         {visible.length ? (
@@ -59,7 +58,7 @@ export default async function RegistryPage({ searchParams }: PageProps) {
                 <div className="registry-item-main">
                   <div className="registry-item-title">
                     <h2>{profile.organization}</h2>
-                    {profile.verification.status === 'verified' && <span><BadgeCheck size={14} /> Dominio verificado</span>}
+                    {profile.verification.status === 'verified' && <span><BadgeCheck size={14} /> {copy.verified}</span>}
                   </div>
                   <a href={profile.canonicalOrigin} target="_blank" rel="noreferrer">{profile.verification.hostname}</a>
                   <div className="registry-tags">
@@ -68,20 +67,20 @@ export default async function RegistryPage({ searchParams }: PageProps) {
                     {profile.sectors.slice(0, 2).map((sector) => <span key={sector}>{sector}</span>)}
                   </div>
                 </div>
-                <a className="registry-open" href={`/registry/${profile.slug}`}>Abrir perfil <ArrowRight size={16} /></a>
+                <a className="registry-open" href={localizedPath('registryProfile', locale, { slug: profile.slug }) || `/registry/${profile.slug}`}>{copy.open} <ArrowRight size={16} /></a>
               </article>
             ))}
           </div>
         ) : (
           <div className="registry-empty">
             <Globe2 size={25} />
-            <h2>No hay perfiles que coincidan.</h2>
-            <p>Prueba una busqueda mas amplia o vuelve al listado completo.</p>
-            <a href="/registry">Ver todos</a>
+            <h2>{copy.emptyTitle}</h2><p>{copy.emptyBody}</p><a href={localizedPath('registry', locale) || '/registry'}>{copy.all}</a>
           </div>
         )}
       </section>
-      <SiteFooter />
+      <SiteFooter locale={locale} />
     </main>
   );
 }
+
+export default async function RegistryPage(props: PageProps) { return <RegistryExperience {...props} />; }

@@ -6,7 +6,7 @@ import { localizedPath } from '../../lib/site-i18n.mjs';
 import { sharedCopy } from '../../lib/site-copy.mjs';
 
 type Locale = 'es' | 'en' | 'pt';
-type SiteHeaderProps = { locale?: Locale; routeKey?: string; projectId?: string };
+type SiteHeaderProps = { locale?: Locale; routeKey?: string; projectId?: string; slug?: string };
 
 const navItems = [
   ['guide', 'guide'], ['aeo', 'aeo'], ['sectors', 'sectors'], ['evolution', 'evolution'],
@@ -14,10 +14,10 @@ const navItems = [
   ['tokenizartCase', 'cases'], ['siteMap', 'siteMap'],
 ] as const;
 
-export function SiteHeader({ locale = 'es', routeKey = 'home', projectId }: SiteHeaderProps = {}) {
+export function SiteHeader({ locale = 'es', routeKey = 'home', projectId, slug }: SiteHeaderProps = {}) {
   const [open, setOpen] = useState(false);
   const copy = sharedCopy(locale);
-  const currentOptions = projectId ? { projectId } : {};
+  const currentOptions = projectId ? { projectId } : slug ? { slug } : {};
   return (
     <header className="site-header">
       <a className="brand" href={localizedPath('home', locale) || '/'}>

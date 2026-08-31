@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { PRIVATE_UI_COPY } from '../lib/private-ui-copy.mjs';
 
 test('owner expediente exposes explicit capsule preparation without remote publication', async () => {
   const source = await readFile('app/components/intake-workspace.tsx', 'utf8');
@@ -13,23 +14,19 @@ test('owner expediente exposes explicit capsule preparation without remote publi
 test('capsule review shows exact files, hashes, download and separate human decisions', async () => {
   const source = await readFile('app/components/capsule-review.tsx', 'utf8');
 
-  for (const label of [
-    'Capsula de implementacion',
-    'Preparar vista previa',
-    'Descargar paquete JSON',
-    'Aprobacion del owner',
-    'Aprobacion del mantenedor',
-    'Aprobar esta version',
-    'Rechazar esta version',
-    'No modifica el sitio',
-  ]) {
-    assert.match(source, new RegExp(label));
+  for (const locale of ['es', 'en', 'pt']) {
+    const copy = PRIVATE_UI_COPY[locale].capsule;
+    for (const label of ['title', 'prepare', 'downloadJson', 'ownerApproval', 'maintainerApproval', 'approve', 'reject', 'noWrite']) {
+      assert.ok(copy[label]);
+    }
   }
+  assert.match(source, /privateUiCopy\(locale\)\.capsule/);
   assert.match(source, /file\.sha256\.slice/);
   assert.match(source, /file\.operation/);
   assert.match(source, /deployment-capsules/);
   assert.match(source, /agentfriendly\.publication-capsule-build\.v1/);
   assert.match(source, /agentfriendly\.capsule-decision\.v1/);
+  assert.match(source, /localizedPath\('capsule'/);
   assert.doesNotMatch(source, /password|apiKey|Authorization/);
 });
 
