@@ -24,7 +24,7 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 
 ### Gate 6A - Traccion F1
 
-**Estado:** documentado en esta rama.
+**Estado:** cerrado y fusionado el 2026-08-31. La estrategia se revisa con evidencia de 90 dias.
 
 - casos de credibilidad en arte, cultura, coleccionismo e instituciones con patrimonio;
 - canal multiplicador con agencias y mantenedores web;
@@ -37,7 +37,9 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 
 ### Gate 6B - Captura consentida
 
-**Dependencias:** politica de privacidad revisada, D1 preparada, Turnstile y UI multidioma.
+**Estado:** implementacion local y preview publico preparados; persistencia real, Turnstile remoto y correo deshabilitados.
+
+**Dependencias para datos reales:** politica de privacidad revisada, migracion D1 staging con backup/rollback, Turnstile provisionado y aprobacion separada.
 
 1. Mostrar el resultado completo de la auditoria.
 2. Ofrecer `Recibir mi plan` como accion opcional.
@@ -46,6 +48,8 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 5. Ofrecer newsletter en un control separado y desmarcado.
 6. Validar Turnstile en servidor.
 7. Permitir baja, rectificacion y eliminacion segun politica aprobada.
+
+La version actual permite completar y revisar localmente la solicitud, pero no la envia ni la almacena. El contrato publico declara `preview_only`; no se contara como captacion activa hasta verificar la ruta remota.
 
 ### Gate 6C - Correo operativo
 
@@ -196,7 +200,7 @@ La busqueda en `skills.sh` encontro playbooks de GTM, SEO/AEO y growth. Se tomar
 
 ### Semanas 1-2
 
-- cerrar Gate 6A;
+- Gate 6A cerrado;
 - redactar propuesta y checklist del Discovery Pack;
 - definir politica de contacto y retencion;
 - preparar los diagramas interactivos;
@@ -204,7 +208,7 @@ La busqueda en `skills.sh` encontro playbooks de GTM, SEO/AEO y growth. Se tomar
 
 ### Semanas 3-4
 
-- implementar Gate 6B en staging;
+- validar Gate 6B primero en preview y despues en `staging_allowlist` con aprobacion separada;
 - configurar analitica de privacidad y eventos del embudo;
 - probar tres versiones del mensaje y una sola CTA primaria;
 - realizar cinco auditorias asistidas sin cobro.

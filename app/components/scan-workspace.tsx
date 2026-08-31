@@ -19,6 +19,7 @@ import { localizedPath } from '../../lib/site-i18n.mjs';
 import { HOME_COPY } from '../../lib/home-copy.mjs';
 // @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { PUBLIC_READINESS_REFERENCE } from '../../lib/public-readiness-reference.mjs';
+import { ContactIntake } from './contact-intake';
 
 type Category = { label: string; score: number; weight: number; status: string };
 type ScanResult = {
@@ -173,7 +174,10 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
               </details>
               <div className="result-next-action">
                 <div><span>{copy.next}</span><strong>{copy.nextText}</strong></div>
-                <a href={localizedPath('dossier', locale) || '/expediente'}>{copy.openDossier} <ArrowRight size={16} /></a>
+                <div className="result-next-actions">
+                  <ContactIntake domain={result.target} locale={locale} />
+                  <a href={localizedPath('dossier', locale) || '/expediente'}>{copy.openDossier} <ArrowRight size={16} /></a>
+                </div>
               </div>
             </>
           ) : null}

@@ -13,6 +13,7 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - [Controlled intake assistant prototype](https://agentfriendlyweb.dev/asistente)
 - [Public deterministic guide](https://agentfriendlyweb.dev/guia)
 - [Public guide contract](https://agentfriendlyweb.dev/.well-known/public-guide-contract.json)
+- [Consented contact preview contract](https://agentfriendlyweb.dev/.well-known/contact-intake-contract.json)
 - [Open knowledge and OKF downloads](https://agentfriendlyweb.dev/conocimiento-abierto)
 - [OKF v0.2 bundle index](https://agentfriendlyweb.dev/okf/v0.2/index.md)
 - [OKF distribution manifest](https://agentfriendlyweb.dev/okf/v0.2/manifest.json)
@@ -59,3 +60,4 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - The publication capsule is a deployed private workflow for manual handoff. It prepares files, hashes and human approvals, but it does not modify the target website, call a CMS or deploy code.
 - The AI Catalog links the OKF bundle as an Agent Friendly Web project convention; OKF v0.2 does not define a universal discovery endpoint.
 - Owner-declared Registry content is displayed verbatim in every interface language; the platform does not silently translate or alter owner claims.
+- The optional post-audit contact form is a local preview. It does not persist data or send email, and marketing choices remain separate and unchecked.
