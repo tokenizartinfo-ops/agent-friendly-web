@@ -13,11 +13,11 @@ La meta de 100% representa la finalizacion de las capas que el caso necesita. No
 
 ## Verificacion externa AF-EV
 
-La fotografia de Cloudflare `isitagentready.com` del 2026-08-30 ubico a `agentfriendlyweb.dev` en **53/100, Level 2 Bot-Aware**. Pasaron robots, sitemap, Link headers, politica de bots, Content Signals, API Catalog, MCP Server Card y Agent Skills. Fallaron DNS-AID, negociacion Markdown, OAuth discovery, OAuth Protected Resource, `auth.md`, A2A Agent Card, WebMCP y compatibilidad ARD del manifiesto existente.
+La fotografia inicial de Cloudflare `isitagentready.com` del 2026-08-30 ubico a `agentfriendlyweb.dev` en **53/100, Level 2 Bot-Aware**. Despues de EV-1, las reauditorias del 2026-08-30 y 2026-08-31 confirmaron **Level 4 Agent-Integrated**. El API no devolvio puntaje numerico posterior, por lo que no se infiere uno. Pasan robots, sitemap, Link headers, negociacion Markdown, politica de bots, Content Signals, API Catalog, MCP Server Card, Agent Skills, WebMCP y ARD. Permanecen ausentes DNS-AID, OAuth discovery, OAuth Protected Resource, `auth.md` y A2A Agent Card.
 
 AF-EV registra proveedor, fecha, origen, puntaje, checks, evidencia y vigencia. No se crea AF-6: AF-0 a AF-5 mide madurez propia y AF-EV mide observacion independiente. El detalle y los gates viven en `docs/CLOUDFLARE-EXTERNAL-READINESS-BASELINE-2026-08-30.md`.
 
-La prioridad inmediata es corregir las capacidades publicas que ya pueden ser verdaderas: Markdown, ARD y una tool WebMCP read-only. DNS requiere otra aprobacion. OAuth, `auth.md`, A2A y comercio se implementan solamente junto con servicios reales.
+La prioridad inmediata ya no es agregar señales para elevar una nota. Es cerrar **Gate 6A - Traccion F1**: oferta, beachhead, contacto consentido, medicion y evidencia comercial. DNS requiere otra aprobacion. OAuth, `auth.md`, A2A y comercio se implementan solamente junto con servicios reales.
 
 ## Estado verificable de esta entrega
 
@@ -216,7 +216,13 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 12. **Bloque 5C - desplegado como sandbox efimero de navegador:** contrato fail-closed y laboratorio comic con adaptador en memoria, backup, rollback y canary de una ruta. Proveedores y escrituras reales permanecen deshabilitados hasta aprobacion separada.
 13. **Bloque 5D - canary remoto verificado:** contrato y ejecucion de un unico Draft PR GitHub en `tokenizartinfo-ops/agent-friendly-web-synthetic-origin`, archivo `llms.txt`, base `main`, capacidad efimera por alias y recibo metadata-only. El PR #1 permanece Draft, abierto y sin merge; no hubo deployment ni cambios sobre un origen real.
 14. **Home Guided Journey v1 - desplegado y verificado:** orden humano `La llamada -> F0-F5 -> diagnostico -> comparador -> archivo -> siguientes caminos`, hero responsive y archivo progresivo. Se publico en Sites 30 sin cambiar metodologia, puntajes ni permisos.
-15. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
+15. **Gate 6A - Traccion F1: documentacion y arquitectura en preparacion.** Beachhead cultural, canal de agencias, Discovery Pack, embudo, KPIs, contacto consentido, correo y comercio agentico separados.
+16. **Gate 6B - captura consentida:** auditoria sin email obligatorio, Turnstile, D1 minima, consentimientos separados, baja y pruebas negativas.
+17. **Gate 6C - correo operativo:** routing, remitente, playbook, automatizaciones allowlisted y revision humana para asuntos sensibles.
+18. **Gate 6D - ventas y CRM ligero:** pipeline, calificacion, propuestas, costos y motivos de ganancia/perdida.
+19. **Gate 6E - primer piloto pago humano:** catalogo, checkout, recibo, conciliacion y una entrega medida.
+20. **Gate 6F - comercio agentico sandbox:** un recurso read-only, x402/MPP, idempotencia y recibos sin dinero real al inicio.
+21. **Gate 6G - coordinacion avanzada:** A2A, OAuth, MCP owner-scoped, skills customizadas y capsulas por proveedor.
 
 ## Recursos de descubrimiento
 
@@ -293,6 +299,18 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 - Schema.org: `https://schema.org/`
 
 ## Gate inmediato
+
+El gate inmediato es **6A - Traccion F1**. La decision completa vive en:
+
+- `docs/GROWTH-AND-MONETIZATION-ROADMAP-2026-08-31.md`;
+- `docs/INITIAL-GO-TO-MARKET-AND-SALES-MOTION-V1.md`;
+- `docs/EMAIL-LEAD-CAPTURE-AND-CONSENT-ARCHITECTURE-V1.md`;
+- `docs/AGENTIC-COMMERCE-X402-MPP-ARCHITECTURE-V1.md`;
+- `docs/INTERACTIVE-DIAGRAMS-AND-EXPLAINERS-ROADMAP-V1.md`.
+
+La primera oferta paga propuesta es un Discovery Pack F0/F1 a F3 para arte, cultura, coleccionismo e instituciones con patrimonio. Las agencias y mantenedores web forman el primer canal multiplicador. La auditoria publica permanece gratuita y visible sin email; solicitar un plan y recibir marketing son consentimientos distintos.
+
+Este gate no activa correo, D1 de leads, pagos, x402, OAuth, A2A ni cambios DNS. El siguiente gate ejecutable es 6B en staging, con TDD y aprobacion separada antes de almacenar contactos remotamente.
 
 El gate publico de los Bloques 2 y 3 se cerro el 2026-08-27. La revision humana verifico sectores, idiomas, comparador, intake, rechazo de secretos, ausencia de persistencia local, contratos publicos y una nueva auditoria del origen. La evidencia completa vive en `docs/BLOCK-2-3-BROWSER-AND-ORIGIN-GATE-2026-08-27.md`.
 

@@ -69,7 +69,7 @@ El informe compara evidencia. No afirma que una subida de puntuacion cause mas v
 
 ## Roadmap
 
-La observacion posterior a Sites 28, ejecutada el 2026-08-31T02:25:28Z, mantuvo a `agentfriendlyweb.dev` en Level 4 `Agent-Integrated`. El proveedor no devolvio una puntuacion numerica, por lo que no se infiere una. Confirmo `robots.txt`, sitemap, Link headers, Markdown negotiation, reglas de bots, Content Signals, API Catalog, MCP Server Card, Agent Skills, WebMCP y ARD. Marco como siguientes gates DNS-AID, `auth.md`/OAuth y A2A Agent Card. Comercio agentico quedo neutral porque el sitio no se declaro como comercio.
+Las observaciones del 2026-08-31T02:25:28Z y 2026-08-31T19:18:35.099Z mantuvieron a `agentfriendlyweb.dev` en Level 4 `Agent-Integrated`. El proveedor no devolvio una puntuacion numerica, por lo que no se infiere una. Confirmaron `robots.txt`, sitemap, Link headers, Markdown negotiation, reglas de bots, Content Signals, API Catalog, MCP Server Card, Agent Skills, WebMCP y ARD. Marcaron como siguientes gates DNS-AID, `auth.md`/OAuth y A2A Agent Card. Comercio agentico quedo neutral porque el sitio no se declaro como comercio.
 
 Esta observacion no autoriza publicar DNS, OAuth, Auth.md, A2A ni pagos. Cada superficie exige contrato, implementacion real, negativas y aprobacion propia.
 
@@ -79,3 +79,5 @@ Esta observacion no autoriza publicar DNS, OAuth, Auth.md, A2A ni pagos. Cada su
 4. Integrar telemetria solo con consentimiento y acceso owner-scoped.
 5. Crear panel AEO repetible con prompts y modelos declarados.
 6. Automatizar vigilancia trimestral de cambios en estandares y auditores.
+7. Incorporar el External Evidence Pack al Discovery Pack comercial sin presentar la nota como garantia de resultados.
+8. Repetir la observacion despues de cada gate que cambie discovery, autenticacion, A2A o comercio, conservando la fotografia anterior.
