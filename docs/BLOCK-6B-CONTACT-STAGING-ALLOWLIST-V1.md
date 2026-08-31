@@ -71,3 +71,4 @@ Cerrar `CONTACT_STAGING_WRITES_ENABLED` detiene nuevas escrituras antes del limi
 - `npm run build`: aprobado, incluidas las rutas candidatas;
 - smoke sin configuracion: endpoint publico `503`, endpoint staging `404`, pagina staging `404`;
 - ningun secreto, binding remoto, migracion o dato real fue agregado.
+- revision tecnica: `https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/31`.

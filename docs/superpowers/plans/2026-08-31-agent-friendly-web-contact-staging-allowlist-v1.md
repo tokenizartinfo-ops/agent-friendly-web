@@ -42,5 +42,5 @@
 - [x] Ejecutar pruebas especificas en rojo y luego en verde.
 - [x] Ejecutar `npm test`, `npm run lint` y `npm run build`.
 - [x] Ejecutar `git diff --check` y revisar que no haya secretos.
-- [ ] Abrir PR con resultados y limites.
+- [x] Abrir PR con resultados y limites: `tokenizartinfo-ops/agent-friendly-web#31`.
 - [x] No desplegar staging ni produccion desde este plan.
