@@ -93,32 +93,26 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .language-switcher a[aria-current='page'] { border-color: var(--ink); background: var(--ink); color: var(--lime); }
 
 .comic-call-hero {
-  min-height: min(780px, calc(100vh - 74px));
+  min-height: min(960px, calc(100vh + 120px));
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  overflow: hidden;
-  padding: clamp(58px, 8vh, 98px) max(5vw, 28px) 42px;
+  padding: clamp(48px, 7vh, 82px) max(5vw, 28px) 48px;
   border-bottom: 3px solid var(--ink);
   background-color: #f1dfbd;
   color: var(--ink);
 }
-.comic-call-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 50% 40%, rgba(246, 229, 197, 0.98) 0%, rgba(246, 229, 197, 0.94) 25%, rgba(246, 229, 197, 0.64) 43%, rgba(246, 229, 197, 0) 68%);
-}
 .comic-call-art {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: url('/images/agent-friendly-call-robots.webp') center / cover no-repeat;
+  display: block;
+  width: min(1180px, 100%);
+  height: auto;
+  aspect-ratio: 1680 / 941;
+  margin: 28px auto 24px;
+  border: 2px solid var(--ink);
+  object-fit: contain;
+  background: #ead9bc;
 }
-.comic-call-heading, .comic-call-body { width: min(780px, 100%); position: relative; z-index: 2; text-align: center; }
+.comic-call-heading, .comic-call-body { width: min(860px, 100%); text-align: center; }
 .comic-call-heading > span {
   display: inline-flex;
   align-items: center;
@@ -317,7 +311,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .score-track { height: 8px; margin-top: 16px; overflow: hidden; background: #344743; border-radius: 3px; }
 .score-track span { display: block; height: 100%; background: var(--lime); transition: width 400ms ease; }
 .score-level { margin: 13px 0 0; font-weight: 750; }
-.score-note { margin: 18px 0 0; color: #a9bbb7; font-size: 11px; line-height: 1.45; }
+.score-reference, .score-boundary, .score-note { color: #a9bbb7; font-size: 11px; line-height: 1.45; }
+.score-reference { margin: 12px 0 0; }
+.score-reference time { color: var(--white); font-weight: 750; }
+.score-boundary { margin: 8px 0 0; }
+.score-note { margin: 18px 0 0; }
 
 .workspace-grid {
   display: grid;
@@ -729,13 +727,25 @@ footer p { margin: 0; }
 .maturity-map-intro a { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; color: var(--teal-dark); font-size: 12px; font-weight: 800; }
 .maturity-map-intro a:hover { text-decoration: underline; }
 .maturity-track { display: grid; grid-template-columns: repeat(6, minmax(118px, 1fr)); padding: 0; margin: 0; list-style: none; border: 2px solid var(--ink); background: var(--white); box-shadow: 8px 8px 0 #7b6a56; }
-.maturity-track li { min-width: 0; min-height: 335px; padding: 16px 12px; border-right: 1px solid var(--ink); background: rgba(255, 250, 241, 0.7); }
+.maturity-track li { min-width: 0; min-height: 335px; border-right: 1px solid var(--ink); background: rgba(255, 250, 241, 0.7); }
 .maturity-track li:last-child { border-right: 0; }
-.maturity-track li[data-stage='3'] { background: #ead8bc; box-shadow: inset 0 6px 0 var(--ink); }
+.maturity-track li > a { min-height: 335px; display: block; padding: 16px 12px; }
+.maturity-track li > a:hover { background: #ead8bc; box-shadow: inset 0 5px 0 var(--ink); }
 .maturity-node { display: flex; align-items: center; justify-content: space-between; color: var(--teal); }
 .maturity-node span { color: var(--orange); font-family: var(--font-geist-mono), monospace; font-size: 10px; font-weight: 800; }
 .maturity-track strong { display: block; margin-top: 15px; font-size: 13px; }
 .maturity-track p { margin: 7px 0 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+
+.evolution-stage-guide { padding: 44px max(5vw, 28px); border-bottom: 2px solid var(--ink); background: #e6d8c3; }
+.evolution-stage-guide > header { max-width: 780px; }
+.evolution-stage-guide > header > span { color: var(--orange); font-size: 11px; font-weight: 850; text-transform: uppercase; }
+.evolution-stage-guide h2 { margin: 9px 0; font-size: 38px; }
+.evolution-stage-guide > header p { margin: 0; color: var(--muted); line-height: 1.6; }
+.evolution-stage-guide > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 30px; }
+.evolution-stage-guide article { min-height: 150px; padding: 18px; border: 2px solid var(--ink); background: var(--white); scroll-margin-top: 92px; }
+.evolution-stage-guide article > span { color: var(--orange); font: 850 11px var(--font-geist-mono), monospace; }
+.evolution-stage-guide article h3 { margin: 9px 0 7px; font-size: 18px; }
+.evolution-stage-guide article p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
 
 .af-robot { width: 88px; height: 128px; position: relative; margin: 15px auto 0; }
 .af-robot i, .af-robot b { display: block; position: absolute; }
@@ -2078,19 +2088,16 @@ footer p { margin: 0; }
     align-items: start;
     padding: 36px 18px 42px;
   }
-  .comic-call-hero::before { display: none; }
   .comic-call-heading, .comic-call-body { width: 100%; }
   .comic-call-heading h1 { margin-top: 20px; font-size: 39px; line-height: 0.98; }
   .comic-call-art {
-    position: relative;
-    inset: auto;
     width: calc(100% + 36px);
-    aspect-ratio: 390 / 238;
+    max-width: none;
+    aspect-ratio: 1680 / 941;
     margin: 24px -18px 22px;
     border-top: 2px solid var(--ink);
     border-bottom: 2px solid var(--ink);
-    background-position: center;
-    background-size: cover;
+    object-fit: contain;
   }
   .comic-call-body p { font-size: 14px; line-height: 1.5; }
   .comic-call-actions { display: grid; }
@@ -2107,6 +2114,9 @@ footer p { margin: 0; }
   .home-next-paths > div > a { min-height: 160px; border-right: 0; border-bottom: 1px solid var(--ink); }
   .home-next-paths > div > a:last-child { border-bottom: 0; }
   .maturity-track li, .maturity-track li:nth-child(even), .maturity-track li:nth-child(3) { min-height: 290px; }
+  .maturity-track li > a { min-height: 290px; }
+  .evolution-stage-guide { padding-left: 18px; padding-right: 18px; }
+  .evolution-stage-guide > div { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

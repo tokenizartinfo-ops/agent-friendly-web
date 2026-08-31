@@ -33,7 +33,13 @@ export function ComicCallHero({ locale = 'es' }: { locale?: Locale }) {
         <span><span aria-hidden="true">01</span> {copy.eyebrow}</span>
         <h1 id="comic-call-title">{copy.title}</h1>
       </div>
-      <div className="comic-call-art" aria-hidden="true" />
+      <img
+        className="comic-call-art"
+        src="/images/agent-friendly-call-robots.webp"
+        alt={copy.heroAlt}
+        width={1680}
+        height={941}
+      />
       <div className="comic-call-body">
         <p>{copy.intro}</p>
         <div className="comic-call-actions">
