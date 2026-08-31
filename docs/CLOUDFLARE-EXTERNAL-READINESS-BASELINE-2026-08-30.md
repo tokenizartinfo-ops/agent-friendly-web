@@ -10,6 +10,10 @@
 **Release observado:** Sites 27, commit `6cc980560e5505ede7278ac21018506ba92e9b93`  
 **Puntaje posterior:** no informado por el API del proveedor; no se infiere
 
+**Confirmacion adicional:** 2026-08-31T19:18:35.099Z, Level 4 `Agent-Integrated`
+
+**Puntaje de confirmacion:** no informado por el API del proveedor; no se infiere
+
 ## Alcance
 
 Este documento conserva una fotografia externa del origen publico. No es una certificacion de seguridad, una garantia de indexacion ni una parte de la escala propia AF-0 a AF-5. La metodologia y el puntaje pertenecen al proveedor y pueden cambiar sin una version de Agent Friendly Web.
@@ -47,6 +51,8 @@ Los checks x402, MPP, UCP, ACP y AP2 aparecen informativos y no puntuados porque
 La reauditoria confirmo `markdownNegotiation`, `webMcp` y `ard`, junto con los checks ya aprobados de discovery, bots, API Catalog, MCP Server Card y Agent Skills. El nivel externo paso de 2 `Bot-Aware` a 4 `Agent-Integrated`.
 
 Continuaron fallando `dnsAid`, `oauthDiscovery`, `oauthProtectedResource`, `authMd` y `a2aAgentCard`. El API no incluyo un campo de puntaje numerico en esta observacion. Registrar solo el nivel y los checks es mas riguroso que reconstruir una cifra con una formula no publicada en la respuesta.
+
+La observacion del 2026-08-31T19:18:35.099Z confirmo el mismo Level 4 y la misma frontera: pasaron discovery, Markdown, bot policy, catalogs, MCP, skill, WebMCP y ARD; continuaron ausentes DNS-AID, OAuth, `auth.md` y A2A. Comercio x402/MPP/UCP/ACP/AP2 permanecio neutral porque el origen no declaro un recurso comercial agentico. Esta confirmacion tampoco devolvio un puntaje numerico.
 
 ## Modelo de madurez
 
