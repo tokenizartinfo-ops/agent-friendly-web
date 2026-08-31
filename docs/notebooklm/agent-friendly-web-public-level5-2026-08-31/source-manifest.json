@@ -1,0 +1,70 @@
+{
+  "schema": "agent-friendly-web.notebooklm-public-source-pack.v1",
+  "title": "Agent Friendly Web public knowledge Level 5 - 2026-08-31",
+  "sensitivity": "Nivel 5",
+  "canonical_source": "repository",
+  "derivative_policy": "requires_human_qa",
+  "status": "ready_for_notebook_ingestion",
+  "created_at": "2026-08-31T00:00:00Z",
+  "reviewed_at": "2026-08-31T00:00:00Z",
+  "reviewed_by": "human:gabriel-mucchiut",
+  "canonical_origin": "https://agentfriendlyweb.dev",
+  "provenance": {
+    "repository": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+    "okf_manifest": "https://agentfriendlyweb.dev/okf/v0.2/manifest.json",
+    "okf_checksums": "https://agentfriendlyweb.dev/okf/v0.2/CHECKSUMS.sha256"
+  },
+  "sources": [
+    {
+      "path": "docs/HOME-AND-MATURITY-PATH.es.md",
+      "canonical_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/HOME-AND-MATURITY-PATH.es.md",
+      "locale": "es",
+      "role": "human_home_and_maturity_source",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    },
+    {
+      "path": "docs/PUBLIC-FAQ-AND-GUIDE.es.md",
+      "canonical_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/PUBLIC-FAQ-AND-GUIDE.es.md",
+      "locale": "es",
+      "role": "faq_and_deterministic_guide_source",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    },
+    {
+      "path": "docs/PUBLIC-READINESS-REFERENCE-2026-08-31.md",
+      "canonical_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/PUBLIC-READINESS-REFERENCE-2026-08-31.md",
+      "locale": "es",
+      "role": "dated_public_readiness_source",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    },
+    {
+      "path": "public/okf/v0.2/index.md",
+      "canonical_url": "https://agentfriendlyweb.dev/okf/v0.2/index.md",
+      "locale": "es",
+      "role": "machine_readable_knowledge_index",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    },
+    {
+      "path": "public/.well-known/public-guide-contract.json",
+      "canonical_url": "https://agentfriendlyweb.dev/.well-known/public-guide-contract.json",
+      "locale": "und",
+      "role": "guide_capability_contract",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    },
+    {
+      "path": "public/.well-known/agent-readiness.json",
+      "canonical_url": "https://agentfriendlyweb.dev/.well-known/agent-readiness.json",
+      "locale": "und",
+      "role": "public_capability_manifest",
+      "reviewed_at": "2026-08-31T00:00:00Z"
+    }
+  ],
+  "exclusions": [
+    "credentials",
+    "secret_values",
+    "private_dossiers",
+    "registry_private_data",
+    "payments",
+    "protected_tokenizart_data"
+  ],
+  "promotion_gate": "human_review_required_before_publication_or_ingestion"
+}

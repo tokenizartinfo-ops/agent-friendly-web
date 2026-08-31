@@ -5,12 +5,12 @@
   "license": "CC-BY-4.0",
   "marks": "reserved",
   "release": {
-    "id": "2026-08-27-public-v1",
-    "generated_at": "2026-08-27T00:00:00Z",
-    "verified_at": "2026-08-27T00:00:00Z",
+    "id": "2026-08-31-public-v2",
+    "generated_at": "2026-08-31T00:00:00Z",
+    "verified_at": "2026-08-31T00:00:00Z",
     "verified_by": "human:gabriel-mucchiut",
-    "stale_after": "2026-11-25T00:00:00Z",
-    "last_modified": "2026-08-27"
+    "stale_after": "2026-11-29T00:00:00Z",
+    "last_modified": "2026-08-31"
   },
   "source_catalog": {
     "docs/METHODOLOGY.es.md": {
@@ -60,6 +60,24 @@
       "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/BLOCK-2-SECTOR-MULTILINGUAL-MEASUREMENT.es.md",
       "author": "agent-friendly-web/editorial-v1",
       "last_modified": "2026-08-27T00:00:00Z"
+    },
+    "docs/HOME-AND-MATURITY-PATH.es.md": {
+      "title": "Portada humana y ruta de madurez Agent Friendly Web",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/HOME-AND-MATURITY-PATH.es.md",
+      "author": "person:gabriel-mucchiut",
+      "last_modified": "2026-08-31T00:00:00Z"
+    },
+    "docs/PUBLIC-FAQ-AND-GUIDE.es.md": {
+      "title": "Preguntas frecuentes y guia publica determinista",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/PUBLIC-FAQ-AND-GUIDE.es.md",
+      "author": "person:gabriel-mucchiut",
+      "last_modified": "2026-08-31T00:00:00Z"
+    },
+    "docs/PUBLIC-READINESS-REFERENCE-2026-08-31.md": {
+      "title": "Referencia publica de readiness de agentfriendlyweb.dev",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/PUBLIC-READINESS-REFERENCE-2026-08-31.md",
+      "author": "person:gabriel-mucchiut",
+      "last_modified": "2026-08-31T00:00:00Z"
     }
   },
   "concepts": [
@@ -94,6 +112,16 @@
       "sources": [{ "path": "docs/METHODOLOGY.es.md", "sections": ["Capas y ponderacion", "Reglas de evidencia", "Diagnosticos auxiliares"] }]
     },
     {
+      "output": "method/home-and-maturity-path.md",
+      "type": "Methodology",
+      "title": "Portada humana y ruta de madurez",
+      "description": "Orden de la experiencia publica, niveles navegables y progreso no automatico.",
+      "resource": "https://agentfriendlyweb.dev/",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "home", "maturity", "human-experience"],
+      "sources": [{ "path": "docs/HOME-AND-MATURITY-PATH.es.md", "sections": ["Orden humano de la portada", "Ruta AF-0 a AF-5", "Proceso no automatico", "Limites"] }]
+    },
+    {
       "output": "discovery/public-audit.md",
       "type": "Service",
       "title": "Auditoria publica read-only",
@@ -115,6 +143,16 @@
       "status": "stable",
       "tags": ["agent-friendly-web", "aeo", "crawlers"],
       "sources": [{ "path": "docs/AEO-AND-CRAWLER-POLICY.es.md", "sections": ["Objetivo", "Tres decisiones separadas", "Implementacion actual", "Medicion prevista"] }]
+    },
+    {
+      "output": "discovery/current-public-readiness.md",
+      "type": "Reference",
+      "title": "Referencia publica de readiness al 2026-08-31",
+      "description": "Snapshot propio 95 sobre 100 con fecha, evidencia, limites y revalidacion.",
+      "resource": "https://agentfriendlyweb.dev/",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "readiness", "evidence", "dated-reference"],
+      "sources": [{ "path": "docs/PUBLIC-READINESS-REFERENCE-2026-08-31.md", "sections": ["Referencia fechada", "Evidencia observada", "Limites", "Revalidacion"] }]
     },
     {
       "output": "discovery/public-discovery-resources.md",
@@ -171,6 +209,16 @@
       "status": "stable",
       "tags": ["agent-friendly-web", "comparison", "evidence"],
       "sources": [{ "path": "docs/BLOCK-2-SECTOR-MULTILINGUAL-MEASUREMENT.es.md", "sections": ["Comparacion"] }]
+    },
+    {
+      "output": "assistance/public-faq-and-guide.md",
+      "type": "Service",
+      "title": "FAQ y guia publica determinista",
+      "description": "Catalogo multilingue compartido, continuidad local y limites de seguridad.",
+      "resource": "https://agentfriendlyweb.dev/preguntas-frecuentes",
+      "status": "stable",
+      "tags": ["agent-friendly-web", "faq", "guide", "multilingual", "read-only"],
+      "sources": [{ "path": "docs/PUBLIC-FAQ-AND-GUIDE.es.md", "sections": ["Catalogo compartido", "Guia determinista", "Seguridad y limites", "Rutas publicas"] }]
     },
     {
       "output": "cases/tokenizart-first-integral-case.md",
