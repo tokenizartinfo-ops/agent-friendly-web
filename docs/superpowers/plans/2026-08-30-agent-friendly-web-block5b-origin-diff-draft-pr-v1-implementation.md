@@ -139,6 +139,6 @@
 
 - [x] Solicitar aprobacion separada para migrar D1 y publicar 5B.
 - [x] Verificar backup/rollback y tablas remotas antes de migrar.
-- [ ] Aplicar solo `0003`, comprobar tablas vacias y rutas fail-closed.
-- [ ] Publicar el commit exacto con Sites y ejecutar smokes privados/publicos.
-- [ ] Reauditar verificadores externos declarados despues del despliegue.
+- [x] Aplicar solo `0003`, comprobar tablas vacias y rutas fail-closed.
+- [x] Publicar el commit exacto con Sites y ejecutar smokes privados/publicos.
+- [x] Reauditar verificadores externos declarados despues del despliegue.

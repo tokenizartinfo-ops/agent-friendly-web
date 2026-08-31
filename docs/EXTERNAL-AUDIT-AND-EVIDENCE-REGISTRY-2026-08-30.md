@@ -69,6 +69,10 @@ El informe compara evidencia. No afirma que una subida de puntuacion cause mas v
 
 ## Roadmap
 
+La observacion posterior a Sites 28, ejecutada el 2026-08-31T02:25:28Z, mantuvo a `agentfriendlyweb.dev` en Level 4 `Agent-Integrated`. El proveedor no devolvio una puntuacion numerica, por lo que no se infiere una. Confirmo `robots.txt`, sitemap, Link headers, Markdown negotiation, reglas de bots, Content Signals, API Catalog, MCP Server Card, Agent Skills, WebMCP y ARD. Marco como siguientes gates DNS-AID, `auth.md`/OAuth y A2A Agent Card. Comercio agentico quedo neutral porque el sitio no se declaro como comercio.
+
+Esta observacion no autoriza publicar DNS, OAuth, Auth.md, A2A ni pagos. Cada superficie exige contrato, implementacion real, negativas y aprobacion propia.
+
 1. Incorporar este registro al roadmap y al plan de pruebas de Block 5B.
 2. Construir runner versionado para la rubrica Vercel y guardar resultados JSON.
 3. Disenar el `External Evidence Pack` descargable y su schema.

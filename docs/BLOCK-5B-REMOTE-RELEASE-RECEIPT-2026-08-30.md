@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-08-30
 
-**Estado:** preparado para Sites 28; verificacion posterior obligatoria
+**Estado:** desplegado y verificado
 
 **Sitio:** `https://agentfriendlyweb.dev`
 
@@ -25,13 +25,24 @@
 - ninguna escritura sobre el sitio del owner;
 - CMS, A2A, credenciales y pagos permanecen fuera de alcance.
 
-## Verificacion posterior requerida
+## Release
 
-1. confirmar Sites 28 y el commit exacto publicado;
-2. confirmar que las dos tablas nuevas existen y tienen cero filas;
-3. comprobar schemas y recursos publicos por HTTP;
-4. comprobar que las rutas privadas fallan cerradas sin identidad;
-5. repetir la observacion externa declarada y registrar su respuesta sin inferir puntuaciones ausentes.
+- Sites 28 publico el commit `456b18bfb984bacfa00ef3d10c4fccbcbabbe407`.
+- Sites 27 permanece disponible como version de rollback de la aplicacion.
+- La migracion `0003_origin_comparisons_and_draft_pr_plans.sql` se aplico durante el deployment.
+
+## Verificacion posterior
+
+- `capsule_origin_comparisons`: presente y con cero filas;
+- `draft_pr_plans`: presente y con cero filas;
+- ambos schemas publicos: HTTP `200 application/json`;
+- inicio con `Accept: text/markdown`: HTTP `200 text/markdown` y `Vary: Accept`;
+- API privada de comparacion sin identidad: HTTP `401`;
+- expediente privado sin identidad: HTTP `307` hacia el ingreso protegido;
+- readiness publico: Block 5B `deployed`, `remote_submission=false`, `merge_allowed=false`;
+- auditoria Cloudflare posterior: Level 4 `Agent-Integrated`, sin puntuacion numerica declarada.
+
+La auditoria externa mantuvo como siguientes requisitos DNS-AID, `auth.md`/OAuth y A2A Agent Card. Se registran como gates futuros; no se publican artefactos ficticios para aumentar una nota.
 
 ## Rollback
 
