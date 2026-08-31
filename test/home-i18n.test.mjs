@@ -27,19 +27,48 @@ test('home experience passes locale through the comic shell and interactive audi
   assert.match(home, /HomeExperience/);
   assert.match(home, /locale/);
   assert.match(home, /<SiteHeader locale=/);
-  assert.match(home, /<ComicHomeIntro locale=/);
+  assert.match(home, /<ComicCallHero locale=/);
   assert.match(home, /<ScanWorkspace initialSite=.*locale=/s);
   assert.match(home, /<MaturityMap locale=/);
+  assert.match(home, /<HomeMaturityComparison locale=/);
+  assert.match(home, /<FutureArchive locale=/);
+  assert.match(home, /<HomeNextPaths locale=/);
   assert.match(home, /<SiteFooter locale=/);
 });
 
-test('comic home leads with the approved call, a real hero asset and the future archive', () => {
+test('home follows the approved human journey before opening the future archive', () => {
+  const sequence = [
+    '<ComicCallHero locale=',
+    '<MaturityMap locale=',
+    '<ScanWorkspace initialSite=',
+    '<HomeMaturityComparison locale=',
+    '<FutureArchive locale=',
+    '<HomeNextPaths locale=',
+  ].map((token) => home.indexOf(token));
+  assert.ok(sequence.every((index) => index >= 0), `missing home section: ${sequence}`);
+  assert.deepEqual(sequence, [...sequence].sort((a, b) => a - b));
+});
+
+test('comic home leads with the approved call, a responsive hero asset and a progressive future archive', () => {
   assert.match(styles, /agent-friendly-call-robots\.webp/);
+  assert.match(comicIntro, /className="comic-call-art"/);
+  assert.ok(comicIntro.indexOf('id="comic-call-title"') < comicIntro.indexOf('className="comic-call-art"'));
+  assert.ok(comicIntro.indexOf('className="comic-call-art"') < comicIntro.indexOf('<p>{copy.intro}<\/p>'));
   assert.match(comicIntro, /id="archivo-del-futuro"/);
+  assert.match(comicIntro, /<details className="archive-more"/);
+  assert.match(comicIntro, /copy\.files\.slice\(0, 3\)/);
+  assert.match(comicIntro, /copy\.files\.slice\(3\)/);
   assert.match(comicIntro, /localizedPath/);
   assert.match(comicIntro, /COMIC_HOME_COPY/);
   assert.match(map, /af-robot/);
   assert.match(map, /data-equipped=/);
+});
+
+test('hero CSS protects desktop contrast and brings the illustration forward on mobile', () => {
+  assert.match(styles, /\.comic-call-hero::before\s*\{[^}]*background:/s);
+  assert.match(styles, /\.comic-call-art\s*\{[^}]*agent-friendly-call-robots\.webp/s);
+  assert.match(styles, /@media \(max-width: 620px\)[\s\S]*\.comic-call-art\s*\{[^}]*position:\s*relative;/s);
+  assert.match(styles, /@media \(max-width: 620px\)[\s\S]*\.comic-call-actions\s*\{[^}]*display:\s*grid;/s);
 });
 
 test('audit and maturity components accept locale without changing the public scan endpoint', () => {

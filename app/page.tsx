@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { MaturityMap } from './components/maturity-map';
-import { ComicHomeIntro } from './components/comic-home-intro';
+import { ComicCallHero, FutureArchive, HomeNextPaths } from './components/comic-home-intro';
+import { HomeMaturityComparison } from './components/maturity-demonstrator';
 import { PublicWebMcpRegistration } from './components/public-webmcp-registration';
 import { ScanWorkspace } from './components/scan-workspace';
 import { SiteFooter } from './components/site-footer';
@@ -64,9 +65,12 @@ export async function HomeExperience({ searchParams, locale = 'es' }: HomeProps 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <SiteHeader locale={locale} routeKey="home" />
 
-      <ComicHomeIntro locale={locale} />
-      <ScanWorkspace initialSite={initialSite} locale={locale} />
+      <ComicCallHero locale={locale} />
       <MaturityMap locale={locale} />
+      <ScanWorkspace initialSite={initialSite} locale={locale} />
+      <HomeMaturityComparison locale={locale} />
+      <FutureArchive locale={locale} />
+      <HomeNextPaths locale={locale} />
 
       <SiteFooter locale={locale} />
     </main>

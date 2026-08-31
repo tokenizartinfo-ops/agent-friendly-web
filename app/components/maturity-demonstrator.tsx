@@ -1,8 +1,9 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Building2, Check, CircleAlert, Clock3, Landmark, Palette } from 'lucide-react';
+import { ArrowRight, Building2, Check, CircleAlert, Clock3, Landmark, Palette } from 'lucide-react';
 import { MATURITY_COPY } from '../../lib/home-copy.mjs';
+import { localizedPath } from '../../lib/site-i18n.mjs';
 
 type ScenarioId = 'restaurant' | 'municipality' | 'tokenizart';
 
@@ -57,6 +58,21 @@ export function MaturityDemonstrator({ locale = 'es' }: { locale?: 'es' | 'en' |
           ) : <div className="empty-evidence">{copy.labels.empty}</div>}
         </article>
       </div>
+    </section>
+  );
+}
+
+export function HomeMaturityComparison({ locale = 'es' }: { locale?: 'es' | 'en' | 'pt' } = {}) {
+  const copy = MATURITY_COPY[locale] || MATURITY_COPY.es;
+  return (
+    <section className="home-comparison-band" id="comparador-af" aria-labelledby="home-comparison-title">
+      <header>
+        <span>{copy.comparison.eyebrow}</span>
+        <h2 id="home-comparison-title">{copy.comparison.title}</h2>
+        <p>{copy.comparison.intro}</p>
+        <a href={localizedPath('evolution', locale) || '/evolucion-agentica'}>{copy.comparison.cta} <ArrowRight size={16} /></a>
+      </header>
+      <MaturityDemonstrator locale={locale} />
     </section>
   );
 }
