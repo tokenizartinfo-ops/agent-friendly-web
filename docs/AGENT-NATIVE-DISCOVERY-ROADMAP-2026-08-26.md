@@ -214,7 +214,9 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 10. **Bloque 5B - desplegado y verificado:** diff acotado contra archivos publicos vigentes, pruebas posteriores por proveedor externo y plan de Draft PR descargable sin envio ni merge. La migracion D1 fue aditiva y el envio remoto permanece deshabilitado.
 11. **Gate visual e idiomas integral - release candidate local:** interfaz completa ESP/ENG/POR, portada comic `La llamada`, Archivo del futuro y robots F0-F5. No cambia contratos, permisos ni datos owner y aun no fue desplegado.
 12. **Bloque 5C - release candidate local:** contrato fail-closed y laboratorio comic con adaptador efimero, backup, rollback y canary de una ruta. Proveedores y escrituras reales permanecen deshabilitados hasta aprobacion separada.
-13. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
+13. **Bloque 5D - implementacion local:** contrato para un unico Draft PR GitHub en `tokenizartinfo-ops/agent-friendly-web-synthetic-origin`, archivo `llms.txt`, base `main`, capacidad efimera por alias y recibo metadata-only. El contrato declara `remoteMutation=true`; el envio remoto sigue apagado y requiere aprobacion posterior sobre el target exacto.
+14. **Home Guided Journey v1 - release candidate local:** orden humano `La llamada -> F0-F5 -> diagnostico -> comparador -> archivo -> siguientes caminos`, hero responsive y archivo progresivo. No cambia metodologia, puntajes ni permisos.
+15. **Bloque 6 - coordinacion y monetizacion avanzada:** A2A, skills customizadas, servicios agent-to-agent y pagos para recursos definidos.
 
 ## Recursos de descubrimiento
 
@@ -303,5 +305,7 @@ El **Bloque 5B** esta desplegado y verificado: compara la capsula con recursos p
 El **gate integral de idiomas y experiencia comic** se cerro localmente el 2026-08-31. Espanol conserva canonicals, ingles y portugues usan rutas allowlisted, y las superficies humanas comparten la portada `La llamada`, Archivo del futuro y madurez F0-F5. La evidencia vive en `docs/INTEGRAL-I18N-COMIC-LOCAL-GATE-2026-08-31.md`. No se realizo deployment ni cambio remoto.
 
 El **Bloque 5C local** quedo implementado y verificado el 2026-08-31. El laboratorio prueba un unico canary dentro de memoria efimera, exige aprobaciones vigentes, genera backup, verifica SHA-256 y permite rollback. No tiene cliente HTTP, provider real, D1, secretos ni escritura remota. La evidencia vive en `docs/BLOCK-5C-CONTROLLED-SANDBOX-LOCAL-GATE-2026-08-31.md`.
+
+El **Bloque 5D** esta implementado solo como contrato y adaptador local fail-closed. Fija un repositorio sintetico, una base y un archivo; exige un alias de capacidad, una aprobacion especifica de corta duracion, idempotencia y un cliente GitHub inyectado. La libreria puede construir y validar el request y un recibo saneado mediante cliente simulado, pero no existe ruta HTTP, SDK, token, flag remoto habilitado ni Draft PR real. La primera apertura remota conserva un gate separado.
 
 La demostracion comercial de mejoras usara un **External Evidence Pack** y no una unica nota: protocolo HTTP reproducible; validadores de Schema.org; Search Console/Bing Webmaster Tools y Cloudflare AI Crawl Control cuando el owner pueda verificarlos; observaciones fechadas de motores de respuesta; y graders comerciales solo como evidencia direccional. Cloudflare Agent Readiness y la rubrica Vercel Agent Readability se mantendran versionadas como controles tecnicos distintos. HubSpot AI Search Grader no se presentara como prueba tecnica independiente. La matriz, sus limites y la vigilancia trimestral viven en `docs/EXTERNAL-AUDIT-AND-EVIDENCE-REGISTRY-2026-08-30.md`.
