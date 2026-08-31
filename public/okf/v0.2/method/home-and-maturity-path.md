@@ -18,7 +18,7 @@ verified:
     at: 2026-08-31T00:00:00Z
 sources:
   - id: source-1
-    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/HOME-AND-MATURITY-PATH.es.md
+    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/0ce175906ab21763cc6c1a11d9adc65c30dcc527/docs/HOME-AND-MATURITY-PATH.es.md
     title: Portada humana y ruta de madurez Agent Friendly Web
     author: person:gabriel-mucchiut
     last_modified: 2026-08-31T00:00:00Z

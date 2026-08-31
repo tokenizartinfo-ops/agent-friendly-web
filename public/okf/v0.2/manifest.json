@@ -26,7 +26,7 @@
     },
     {
       "path": "assistance/public-faq-and-guide.md",
-      "sha256": "033017d4eea6fd16afd0be7bc4f8844a619c05d648d472859bc1f48d9e0d3528",
+      "sha256": "c727d0ee83633e1a94922c5da66c5d1561026e6e734f195d249f0a9ebe3ad4f5",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
@@ -50,7 +50,7 @@
     },
     {
       "path": "discovery/current-public-readiness.md",
-      "sha256": "7aab71592eb5ab0dac9535a3ad557997e393d496a384c5d5fc8dc8f12abfe6d3",
+      "sha256": "eda0eeafc0423f0ab6b82b38d2745fee06cfc05212390173f5d8c2fa2c5c3e20",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
@@ -92,7 +92,7 @@
     },
     {
       "path": "method/home-and-maturity-path.md",
-      "sha256": "e83423bd6b4c78d2e0f782758264b808d8785a818fe49419730657c47fa5e8c6",
+      "sha256": "8a3a5954d89a9e2c27c101a61965bb727b3fb6bcaee9999f9d0ebebb30c5bae0",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },

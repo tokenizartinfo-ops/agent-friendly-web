@@ -33,6 +33,7 @@ test('public guide UI remains local, ephemeral and keyboard operable', async () 
   assert.match(component, /respondToPublicGuide/);
   assert.match(component, /event\.key === 'Enter'/);
   assert.match(component, /event\.shiftKey/);
+  assert.match(component, /maxLength=\{2000\}/);
   assert.equal(PUBLIC_TOOLS_COPY.es.guideUI.reset, 'Reiniciar');
   assert.match(component, /quick_replies/);
   assert.match(component, /sources/);

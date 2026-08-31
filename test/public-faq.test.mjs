@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
-import { PUBLIC_FAQ_ITEMS, faqEntries, matchPublicFaq } from '../lib/public-faq.mjs';
+import { PUBLIC_FAQ_ITEMS, faqEntries, faqSourceLabel, matchPublicFaq } from '../lib/public-faq.mjs';
 import { localizedPath } from '../lib/site-i18n.mjs';
 
 const homeSource = readFileSync(new URL('../app/page.tsx', import.meta.url), 'utf8');
@@ -12,6 +12,7 @@ const sitemapSource = readFileSync(new URL('../app/sitemap.ts', import.meta.url)
 const headerSource = readFileSync(new URL('../app/components/site-header.tsx', import.meta.url), 'utf8');
 const footerSource = readFileSync(new URL('../app/components/site-footer.tsx', import.meta.url), 'utf8');
 const siteMapSource = readFileSync(new URL('../app/mapa-del-sitio/page.tsx', import.meta.url), 'utf8');
+const faqComponentSource = readFileSync(new URL('../app/components/public-faq.tsx', import.meta.url), 'utf8');
 
 test('FAQ catalog provides reviewed public answers in every locale', () => {
   assert.ok(PUBLIC_FAQ_ITEMS.length >= 12);
@@ -26,6 +27,18 @@ test('FAQ catalog provides reviewed public answers in every locale', () => {
     }
   }
   assert.equal(faqEntries('es').length, PUBLIC_FAQ_ITEMS.length);
+});
+
+test('FAQ source links have localized, distinguishable accessible names', () => {
+  for (const locale of ['es', 'en', 'pt']) {
+    for (const entry of faqEntries(locale)) {
+      const labels = entry.sources.map((routeKey) => faqSourceLabel(routeKey, locale));
+      assert.ok(labels.every((label) => label.length > 2));
+      assert.equal(new Set(labels).size, labels.length);
+    }
+  }
+  assert.match(faqComponentSource, /faqSourceLabel/);
+  assert.match(faqComponentSource, /\{copy\.source\}: \{faqSourceLabel\(routeKey, locale\)\}/);
 });
 
 test('FAQ matcher selects a canonical entry without model inference', () => {

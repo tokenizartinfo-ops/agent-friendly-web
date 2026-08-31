@@ -89,6 +89,7 @@ test('OKF source manifest fixes the approved public release contract', async () 
   for (const source of Object.values(manifest.source_catalog)) {
     assert.match(source.last_modified, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/);
     assert.match(source.resource, /^https:\/\//);
+    assert.doesNotMatch(source.resource, /\/blob\/main\//);
   }
 });
 

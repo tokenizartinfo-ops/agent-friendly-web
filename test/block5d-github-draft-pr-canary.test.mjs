@@ -101,9 +101,10 @@ test('Block 5D execution requires the enabled server gate and a matching short-l
   const run = await prepareGitHubDraftPrCanary(fixture());
   const client = { createDraftPullRequest: async () => ({}) };
 
-  await assert.rejects(() => executeGitHubDraftPrCanary(run, { client, enabled: false }), /disabled/i);
-  await assert.rejects(() => executeGitHubDraftPrCanary(run, { client, enabled: true }), /approval/i);
-  await assert.rejects(() => executeGitHubDraftPrCanary(run, { client, enabled: true, approval: approval(run, { repository: 'owner/real-site' }) }), /repository|approval/i);
+  const at = '2026-08-31T18:02:00.000Z';
+  await assert.rejects(() => executeGitHubDraftPrCanary(run, { client, enabled: false, at }), /disabled/i);
+  await assert.rejects(() => executeGitHubDraftPrCanary(run, { client, enabled: true, at }), /approval/i);
+  await assert.rejects(() => executeGitHubDraftPrCanary(run, { client, enabled: true, approval: approval(run, { repository: 'owner/real-site' }), at }), /repository|approval/i);
   await assert.rejects(() => executeGitHubDraftPrCanary(run, { client, enabled: true, approval: approval(run, { expiresAt: '2026-08-31T18:01:30.000Z' }), at: '2026-08-31T18:02:00.000Z' }), /expir/i);
 });
 

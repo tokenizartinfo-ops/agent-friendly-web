@@ -32,6 +32,8 @@ test('guide answers a FAQ intent from the canonical catalog', () => {
   assert.equal(turn.topic, 'faq:automatic-progression');
   assert.match(turn.answer, /no.*autom[aá]tic/i);
   assert.ok(turn.sources.some((source) => source.url === '/preguntas-frecuentes'));
+  assert.ok(turn.sources.some((source) => source.url === '/evolucion-agentica'));
+  assert.ok(turn.sources.some((source) => source.url === '/metodologia'));
   assert.ok(turn.quick_replies.length <= 1);
 });
 
@@ -108,6 +110,19 @@ test('guide fails closed on likely credentials without echoing them', () => {
   assert.equal(turn.topic, 'security_block');
   assert.equal(turn.blocked, true);
   assert.match(turn.answer, /retira|elimina/i);
+  assert.doesNotMatch(turn.answer, new RegExp(secret));
+  assert.deepEqual(turn.sources, []);
+});
+
+test('guide scans the complete visitor message for secrets before truncating it', () => {
+  const secret = 'sk-live-123456789-super-secret';
+  const turn = respondToPublicGuide({
+    message: `${'contexto publico '.repeat(55)} Mi API key es ${secret}`,
+    context: PUBLIC_GUIDE_INITIAL_CONTEXT,
+  });
+
+  assert.equal(turn.topic, 'security_block');
+  assert.equal(turn.blocked, true);
   assert.doesNotMatch(turn.answer, new RegExp(secret));
   assert.deepEqual(turn.sources, []);
 });
