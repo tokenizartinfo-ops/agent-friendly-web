@@ -49,8 +49,8 @@ flowchart LR
 3. **Cumplido y desplegado:** decisiones owner/mantenedor ligadas al hash, idempotencia, expiracion y auditoria metadata-only.
 4. **Cumplido en D1 local y remota:** migraciones aditivas; la D1 remota creo solo las dos tablas previstas y quedo vacia tras el release.
 5. **Cumplido y desplegado:** diff acotado contra archivos publicos y plan de Draft PR descargable, sin envio ni merge.
-6. **Siguiente gate local:** adaptador sandbox con backup, apply canary sobre ruta no critica, verificacion y rollback.
-7. **Pendiente y sujeto a aprobacion separada:** primera escritura canary sobre una ruta no critica.
+6. **Cumplido localmente:** adaptador efimero con backup, apply canary sobre una ruta, verificacion y rollback.
+7. **Pendiente y sujeto a aprobacion separada:** primer proveedor real y primera escritura canary sobre una ruta no critica.
 8. **Futuro:** ampliacion por proveedor y coordinacion A2A real.
 
 ## Block 5A implementado
@@ -59,7 +59,7 @@ La version actual usa `manual_handoff`: prepara `llms.txt`, `llms-full.txt` y pr
 
 La interfaz privada permite revisar contenido y destinos, descargar el paquete y registrar decisiones humanas. Si el owner y el mantenedor son personas distintas, ambas aprobaciones son necesarias. La identidad y el rol se derivan en el servidor; no se confia en un rol enviado por el navegador.
 
-Existe lectura publica acotada del archivo actual y plan tecnico de Draft PR, pero no envio remoto, merge, adaptador CMS real, Secret Broker conectado ni escritura sobre dominios. El nombre historico “Capsula A2A” describe la arquitectura final; este candidato no publica Agent Card ni ejecuta A2A.
+Existe lectura publica acotada del archivo actual, plan tecnico de Draft PR y laboratorio efimero de apply/rollback. No existe envio remoto, merge, adaptador CMS real, Secret Broker conectado ni escritura sobre dominios. El nombre historico “Capsula A2A” describe la arquitectura final; este candidato no publica Agent Card ni ejecuta A2A.
 
 No se publica Agent Card ni tool mutante hasta que exista un agente remoto real, identidad, scopes, auditoria y cancelacion verificadas.
 

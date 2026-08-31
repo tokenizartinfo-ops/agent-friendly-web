@@ -88,3 +88,7 @@
 - [ ] Revisar laboratorio en Chromium a `1440x900` y `390x844`.
 - [ ] Documentar resultados, limites, rollback y siguiente aprobacion.
 - [ ] Commit: `docs:block5c-close-controlled-sandbox-gate`.
+
+## Execution status
+
+Completado localmente el 2026-08-31. Las Tasks 1-3 quedaron implementadas en `71128d0`; la suite focalizada paso 8/8, la regresion 255/255, lint y build pasaron y la UI se reviso en Chromium desktop/mobile. No se creo ruta productiva adicional, migracion D1, secreto, provider remoto ni escritura externa.
