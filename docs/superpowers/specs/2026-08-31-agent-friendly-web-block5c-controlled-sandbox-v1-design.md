@@ -25,7 +25,7 @@ El conector acepta solo:
 - todas las aprobaciones humanas requeridas en estado `approved`;
 - comparacion `agentfriendly.origin-comparison.v1` completa y ligada al mismo manifiesto;
 - plan `agentfriendly.draft-pr-plan.v1` con `remoteSubmission=false`, `mergeAllowed=false` y `prepared_not_submitted`;
-- un unico archivo `create_or_replace` con destino `/llms.txt` o `/llms-full.txt`;
+- un unico archivo `create_or_replace` seleccionado como canary, con destino `/llms.txt` o `/llms-full.txt`;
 - contenido cuyo SHA-256 coincide con la capsula y no contiene secretos probables.
 
 Rechaza merge manual, JSON-LD embebido, multiples escrituras, rutas no allowlisted, hashes inconsistentes, capsulas vencidas o rechazadas y cualquier proveedor distinto de `ephemeral_memory`.

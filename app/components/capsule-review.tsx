@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { privateUiCopy } from '../../lib/private-ui-copy.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
+import { ConnectorSandbox } from './connector-sandbox';
 
 type Locale = 'es' | 'en' | 'pt';
 type CapsuleCopy = ReturnType<typeof privateUiCopy>['capsule'];
@@ -32,6 +33,7 @@ type CapsuleFile = {
 };
 
 type Capsule = {
+  contract: string;
   capsuleId: string;
   version: number;
   status: string;
@@ -69,21 +71,27 @@ type ComparisonResource = {
   note: string;
 };
 type OriginComparison = {
+  contract: string;
   comparisonId: string;
+  capsuleId: string;
   manifestSha256: string;
   observedAt: string;
   status: 'complete' | 'incomplete';
   resources: ComparisonResource[];
 };
 type DraftPrPlan = {
+  contract: string;
   planId: string;
+  capsuleId: string;
+  comparisonId: string;
+  manifestSha256: string;
   repository: string;
   baseBranch: string;
   branch: string;
   status: string;
   remoteSubmission: false;
   mergeAllowed: false;
-  files: Array<{ repositoryPath: string; mode: string; sha256: string }>;
+  files: Array<{ sourcePath: string; repositoryPath: string; mode: string; sha256: string; content: string }>;
 };
 type Block5BPayload = {
   error?: string;
@@ -502,6 +510,10 @@ export function CapsuleReview({
                 </div>
               ) : null}
             </section>
+          ) : null}
+
+          {comparison?.status === 'complete' && draftPlan ? (
+            <ConnectorSandbox capsule={capsule} comparison={comparison} plan={draftPlan} locale={locale} />
           ) : null}
 
           <div className="capsule-approvals">
