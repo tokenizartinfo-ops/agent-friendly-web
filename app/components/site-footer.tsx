@@ -1,22 +1,13 @@
 import { ArrowUpRight } from 'lucide-react';
+import { localizedPath } from '../../lib/site-i18n.mjs';
+import { sharedCopy } from '../../lib/site-copy.mjs';
 
 const productLinks = [
-  ['Auditar un sitio', '/#auditar'],
-  ['Guia publica', '/guia'],
-  ['AEO y crawlers', '/aeo-y-crawlers'],
-  ['Soluciones por sector', '/sectores'],
-  ['Medir mejora', '/medir-mejora'],
-  ['Asistente de preparacion', '/asistente'],
-  ['Conocimiento abierto', '/conocimiento-abierto'],
-  ['Evolucion agentica', '/evolucion-agentica'],
-  ['Metodologia', '/metodologia'],
-  ['Registry publico', '/registry'],
-  ['CLI read-only', '/cli'],
-  ['MCP public read-only', '/mcp-readonly'],
-  ['Verificacion externa', '/verificacion-externa'],
-  ['Caso Tokenizart', '/casos/tokenizart'],
-  ['Mapa completo', '/mapa-del-sitio'],
-];
+  ['audit', 'home', 'auditar'], ['guide', 'guide'], ['aeo', 'aeo'], ['sectors', 'sectors'],
+  ['measurement', 'measurement'], ['assistant', 'assistant'], ['openKnowledge', 'openKnowledge'],
+  ['evolution', 'evolution'], ['methodology', 'methodology'], ['registry', 'registry'], ['cli', 'cli'],
+  ['mcp', 'mcp'], ['externalVerification', 'externalVerification'], ['tokenizartCase', 'tokenizartCase'], ['siteMap', 'siteMap'],
+] as const;
 
 const agentLinks = [
   ['llms.txt', '/llms.txt'],
@@ -36,35 +27,41 @@ const agentLinks = [
   ['MCP result schema', '/schemas/mcp-result.v1.json'],
 ];
 
-export function SiteFooter() {
+type Locale = 'es' | 'en' | 'pt';
+
+export function SiteFooter({ locale = 'es' }: { locale?: Locale } = {}) {
+  const copy = sharedCopy(locale).footer;
   return (
     <footer className="site-footer">
       <div className="footer-intro">
         <span className="brand-mark" aria-hidden="true">AF</span>
         <div>
           <strong>Agent Friendly Web</strong>
-          <p>Diagnostico verificable y evolucion progresiva para sitios legibles por humanos y agentes.</p>
+          <p>{copy.description}</p>
         </div>
       </div>
       <div className="footer-column">
-        <strong>Producto</strong>
-        {productLinks.map(([name, href]) => <a href={href} key={href}>{name}</a>)}
+        <strong>{copy.product}</strong>
+        {productLinks.map(([label, routeKey, hash]) => {
+          const href = localizedPath(routeKey, locale, hash ? { hash } : {}) || '/';
+          return <a href={href} key={`${locale}-${routeKey}`}>{copy[label]}</a>;
+        })}
       </div>
       <div className="footer-column">
-        <strong>Recursos agenticos</strong>
+        <strong>{copy.agentResources}</strong>
         {agentLinks.map(([name, href]) => <a href={href} key={href}>{name}</a>)}
       </div>
       <div className="footer-column">
-        <strong>Proyecto</strong>
-        <a href="/expediente">Mi expediente</a>
-        <a href="/.well-known/security.txt">Seguridad</a>
+        <strong>{copy.project}</strong>
+        <a href={localizedPath('dossier', locale) || '/expediente'}>{copy.dossier}</a>
+        <a href="/.well-known/security.txt">{copy.security}</a>
         <a href="https://github.com/tokenizartinfo-ops/agent-friendly-web" target="_blank" rel="noreferrer">
-          Repositorio <ArrowUpRight size={13} />
+          {copy.repository} <ArrowUpRight size={13} />
         </a>
       </div>
       <div className="footer-legal">
-        <p>Creado por Gabriel Mucchiut e incubado dentro de Tokenizart.</p>
-        <p>Metodologia propia, evidencia publica y limites explicitos.</p>
+        <p>{copy.attribution}</p>
+        <p>{copy.limits}</p>
       </div>
     </footer>
   );
