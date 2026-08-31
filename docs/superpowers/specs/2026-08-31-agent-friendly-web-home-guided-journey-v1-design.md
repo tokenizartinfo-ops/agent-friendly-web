@@ -52,4 +52,3 @@ Tres rutas simples cierran la portada: auditar un sitio, abrir un expediente y c
 - Sin overflow horizontal a 390x844 ni solapamiento a 1440x900.
 - Foco visible y controles nativos accesibles.
 - `prefers-reduced-motion` respetado.
-
