@@ -27,7 +27,7 @@ test('readiness manifest separates deployed capabilities from roadmap work', asy
 
 test('public catalogs discover the readiness manifest and maturity demonstrator', async () => {
   const catalog = JSON.parse(await readFile('public/.well-known/ai-catalog.json', 'utf8'));
-  const urls = catalog.resources.map((resource) => resource.url);
+  const urls = catalog.entries.map((resource) => resource.url);
   assert.ok(urls.includes(`${canonical}/.well-known/agent-readiness.json`));
   assert.ok(urls.includes(`${canonical}/evolucion-agentica`));
 });
@@ -42,14 +42,15 @@ test('all approved discovery surfaces expose the public OKF release without inve
   }
 
   const catalog = JSON.parse(await readFile('public/.well-known/ai-catalog.json', 'utf8'));
-  const urls = catalog.resources.map((resource) => resource.url);
+  const urls = catalog.entries.map((resource) => resource.url);
   for (const url of [
     `${canonical}/conocimiento-abierto`,
     `${canonical}/okf/v0.2/index.md`,
     `${canonical}/okf/v0.2/manifest.json`,
     `${canonical}/okf/v0.2/CHECKSUMS.sha256`,
   ]) assert.ok(urls.includes(url), `AI Catalog is missing ${url}`);
-  assert.match(catalog.okf_discovery_note, /project convention.*not.*universal.*OKF/i);
+  assert.equal(catalog.specVersion, '1.0');
+  assert.ok(catalog.entries.some((entry) => /OKF/i.test(entry.displayName)));
 
   const readiness = JSON.parse(await readFile('public/.well-known/agent-readiness.json', 'utf8'));
   assert.equal(readiness.capabilities.open_knowledge_okf.status, 'deployed');
@@ -75,9 +76,10 @@ test('Tokenizart and Atelier packages attribute their agentic roadmap', async ()
 
 test('the maturity page labels comparisons as illustrative rather than guaranteed', async () => {
   const page = await readFile('app/evolucion-agentica/page.tsx', 'utf8');
-  assert.match(page, /Restaurante/);
-  assert.match(page, /Municipalidad/);
-  assert.match(page, /Tokenizart/);
+  const { MATURITY_COPY } = await import('../lib/home-copy.mjs');
+  assert.equal(MATURITY_COPY.es.scenarios.restaurant.label, 'Restaurante');
+  assert.equal(MATURITY_COPY.es.scenarios.municipality.label, 'Municipalidad');
+  assert.equal(MATURITY_COPY.es.scenarios.tokenizart.label, 'Tokenizart');
   assert.match(page, /ilustrativ/i);
-  assert.match(page, /no garantiza/i);
+  assert.match(page, /no garantiza|does not guarantee|não garante/i);
 });

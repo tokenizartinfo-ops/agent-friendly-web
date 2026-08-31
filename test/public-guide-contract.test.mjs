@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import test from 'node:test';
+import { PUBLIC_TOOLS_COPY } from '../lib/public-tools-copy.mjs';
 
 test('public guide contract exposes a deployed deterministic ephemeral read-only guide', async () => {
   const path = 'public/.well-known/public-guide-contract.json';
@@ -26,15 +27,15 @@ test('public guide UI remains local, ephemeral and keyboard operable', async () 
   ]);
 
   assert.match(page, /PublicGuideChat/);
-  assert.match(page, /<SiteFooter\s*\/>/);
+  assert.match(page, /<SiteFooter locale=\{locale\}\s*\/>/);
   assert.match(component, /respondToPublicGuide/);
   assert.match(component, /event\.key === 'Enter'/);
   assert.match(component, /event\.shiftKey/);
-  assert.match(component, /Reiniciar/);
+  assert.equal(PUBLIC_TOOLS_COPY.es.guideUI.reset, 'Reiniciar');
   assert.match(component, /quick_replies/);
   assert.match(component, /sources/);
   assert.match(component, /scrollTop/);
-  assert.match(component, /Mensaje bloqueado por posible credencial/);
+  assert.equal(PUBLIC_TOOLS_COPY.es.guideUI.blocked, 'Mensaje bloqueado por posible credencial.');
   assert.match(component, /nextMessageIdRef/);
   assert.doesNotMatch(component, /messages\.length \+ 1/);
   assert.doesNotMatch(component, /localStorage|sessionStorage|document\.cookie|fetch\(|\/api\//);

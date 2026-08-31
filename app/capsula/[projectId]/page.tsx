@@ -2,25 +2,39 @@ import { chatGPTSignOutPath, requireChatGPTUser } from '../../chatgpt-auth';
 import { CapsuleReview } from '../../components/capsule-review';
 import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
+import { localizedPath } from '../../../lib/site-i18n.mjs';
+import { privateUiCopy } from '../../../lib/private-ui-copy.mjs';
+import { localizedRouteMetadata } from '../../../lib/localized-route-metadata.mjs';
 
 export const dynamic = 'force-dynamic';
 
 type PageProps = { params: Promise<{ projectId: string }> };
+type Locale = 'es' | 'en' | 'pt';
 
-export default async function CapsulePage({ params }: PageProps) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { projectId } = await params;
-  const user = await requireChatGPTUser(`/capsula/${projectId}`);
+  return localizedRouteMetadata('capsule', 'es', { projectId }) as Metadata;
+}
+
+export async function CapsulePageExperience({ projectId, locale = 'es' }: { projectId: string; locale?: Locale }) {
+  const copy = privateUiCopy(locale).capsule;
+  const returnPath = localizedPath('capsule', locale, { projectId }) || `/capsula/${projectId}`;
+  const user = await requireChatGPTUser(returnPath);
   return (
-    <main>
-      <SiteHeader />
-      <div className="account-bar">Revision privada: <strong>{user.email}</strong><a href={chatGPTSignOutPath('/')}>Cerrar sesion</a></div>
+    <main lang={locale}>
+      <SiteHeader routeKey="capsule" locale={locale} projectId={projectId} />
+      <div className="account-bar">{copy.privateReview}: <strong>{user.email}</strong><a href={chatGPTSignOutPath(localizedPath('home', locale) || '/')}>{copy.signOut}</a></div>
       <section className="capsule-page-hero">
-        <span>Handoff controlado</span>
-        <h1>Revisa la version exacta antes de autorizarla.</h1>
-        <p>Esta pantalla solo permite leer, descargar, aprobar o rechazar la capsula. No muestra el resto del expediente y no modifica el sitio.</p>
+        <span>{copy.eyebrow}</span><h1>{copy.pageTitle}</h1><p>{copy.pageIntro}</p>
       </section>
-      <div className="capsule-page-shell"><CapsuleReview projectId={projectId} /></div>
-      <SiteFooter />
+      <div className="capsule-page-shell"><CapsuleReview projectId={projectId} locale={locale} /></div>
+      <SiteFooter locale={locale} />
     </main>
   );
 }
+
+export default async function CapsulePage({ params }: PageProps) {
+  const { projectId } = await params;
+  return <CapsulePageExperience projectId={projectId} />;
+}
+import type { Metadata } from 'next';

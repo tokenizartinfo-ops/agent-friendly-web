@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import test from 'node:test';
+import { PRIVATE_UI_COPY } from '../lib/private-ui-copy.mjs';
 
 test('owner observation route is explicit, scoped and metadata-only audited', async () => {
   const path = 'app/api/projects/[projectId]/observations/route.ts';
@@ -26,7 +27,7 @@ test('public scanner remains non-persistent and delegates to the shared audit', 
 
 test('private workspace explains and explicitly requests saved observations', async () => {
   const source = await readFile('app/components/intake-workspace.tsx', 'utf8');
-  assert.match(source, /Auditar y guardar observacion/);
+  assert.equal(PRIVATE_UI_COPY.es.intake.labels.auditSave, 'Auditar y guardar observación');
   assert.match(source, /\/observations/);
   assert.match(source, /confirmSave:\s*true/);
   assert.match(source, /normalmente no guarda/i);

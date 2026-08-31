@@ -207,3 +207,54 @@ export const capsuleApprovals = sqliteTable(
     index('capsule_approvals_project_created_idx').on(table.projectId, table.createdAt),
   ],
 );
+
+export const capsuleOriginComparisons = sqliteTable(
+  'capsule_origin_comparisons',
+  {
+    id: text('id').primaryKey(),
+    capsuleId: text('capsule_id').notNull(),
+    siteId: text('site_id').notNull(),
+    projectId: text('project_id').notNull(),
+    userId: text('user_id').notNull(),
+    manifestSha256: text('manifest_sha256').notNull(),
+    origin: text('origin').notNull(),
+    contractVersion: text('contract_version').notNull(),
+    status: text('status').notNull().default('incomplete'),
+    comparisonJson: text('comparison_json').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    expiresAt: text('expires_at').notNull(),
+    createdAt: text('created_at').notNull(),
+    updatedAt: text('updated_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('capsule_origin_comparisons_idempotency_unique').on(table.idempotencyKey),
+    uniqueIndex('capsule_origin_comparisons_capsule_manifest_unique').on(table.capsuleId, table.manifestSha256),
+    index('capsule_origin_comparisons_project_created_idx').on(table.projectId, table.createdAt),
+  ],
+);
+
+export const draftPrPlans = sqliteTable(
+  'draft_pr_plans',
+  {
+    id: text('id').primaryKey(),
+    capsuleId: text('capsule_id').notNull(),
+    comparisonId: text('comparison_id').notNull(),
+    projectId: text('project_id').notNull(),
+    userId: text('user_id').notNull(),
+    provider: text('provider').notNull().default('github'),
+    repository: text('repository').notNull(),
+    baseBranch: text('base_branch').notNull(),
+    proposedBranch: text('proposed_branch').notNull(),
+    contractVersion: text('contract_version').notNull(),
+    status: text('status').notNull().default('prepared_not_submitted'),
+    planJson: text('plan_json').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    createdAt: text('created_at').notNull(),
+    updatedAt: text('updated_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('draft_pr_plans_idempotency_unique').on(table.idempotencyKey),
+    uniqueIndex('draft_pr_plans_capsule_comparison_unique').on(table.capsuleId, table.comparisonId),
+    index('draft_pr_plans_project_created_idx').on(table.projectId, table.createdAt),
+  ],
+);

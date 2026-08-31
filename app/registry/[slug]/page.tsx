@@ -1,10 +1,11 @@
-/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors avoid unstable vinext RSC prefetch requests. */
-
 import { ArrowLeft, BadgeCheck, Braces, ExternalLink, Eye, FileText, ShieldCheck } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { getPublishedProfile } from '../../../lib/registry-store';
 import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
+import { localizedPath } from '../../../lib/site-i18n.mjs';
+import { privateUiCopy } from '../../../lib/private-ui-copy.mjs';
+import { localizedRouteMetadata } from '../../../lib/localized-route-metadata.mjs';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,15 +14,23 @@ type PageProps = {
   searchParams: Promise<{ version?: string | string[] }>;
 };
 
-function provenanceLabel(state: string) {
-  if (state === 'verified') return 'Verificado';
-  if (state === 'observed') return 'Observado';
-  if (state === 'owner_declared') return 'Declarado por el owner';
-  if (state === 'curated_owner_attribution') return 'Caso curado por el owner';
-  return 'No observado';
+type Locale = 'es' | 'en' | 'pt';
+
+export async function generateMetadata({ params }: Pick<PageProps, 'params'>): Promise<Metadata> {
+  const { slug } = await params;
+  return localizedRouteMetadata('registryProfile', 'es', { slug }) as Metadata;
 }
 
-export default async function RegistryProfilePage({ params, searchParams }: PageProps) {
+function provenanceLabel(state: string, copy: ReturnType<typeof privateUiCopy>['profile']) {
+  if (state === 'verified') return copy.verifiedLabel;
+  if (state === 'observed') return copy.observedLabel;
+  if (state === 'owner_declared') return copy.ownerLabel;
+  if (state === 'curated_owner_attribution') return copy.curatedLabel;
+  return copy.notObserved;
+}
+
+export async function RegistryProfileExperience({ params, searchParams, locale = 'es' }: PageProps & { locale?: Locale }) {
+  const copy = privateUiCopy(locale).profile;
   const { slug } = await params;
   const query = await searchParams;
   const rawVersion = Array.isArray(query.version) ? query.version[0] : query.version;
@@ -30,67 +39,67 @@ export default async function RegistryProfilePage({ params, searchParams }: Page
   if (!profile) notFound();
 
   return (
-    <main>
-      <SiteHeader />
+    <main lang={locale}>
+      <SiteHeader routeKey="registryProfile" locale={locale} slug={profile.slug} />
       <section className="profile-hero">
-        <a className="profile-back" href="/registry"><ArrowLeft size={16} /> Registry</a>
+        <a className="profile-back" href={localizedPath('registry', locale) || '/registry'}><ArrowLeft size={16} /> {copy.back}</a>
         <div className="profile-hero-grid">
           <div>
-            <span>Perfil publico · version {profile.version}</span>
+            <span>{copy.publicProfile} · v{profile.version}</span>
             <h1>{profile.organization}</h1>
             <a className="profile-origin" href={profile.canonicalOrigin} target="_blank" rel="noreferrer">
               {profile.verification.hostname} <ExternalLink size={15} />
             </a>
           </div>
           <div className="profile-score">
-            <span>Nivel observado</span>
+            <span>{copy.observedLevel}</span>
             <strong>{profile.readiness.level}</strong>
-            <small>{profile.readiness.score === null ? 'Sin auditoria guardada' : `${profile.readiness.score}/100`}</small>
+            <small>{profile.readiness.score === null ? copy.noAudit : `${profile.readiness.score}/100`}</small>
           </div>
         </div>
         <div className="profile-provenance">
-          <span data-state="owner_declared"><FileText size={15} /> Declarado por el owner</span>
-          <span data-state="observed"><Eye size={15} /> Observado publicamente</span>
-          <span data-state="verified"><BadgeCheck size={15} /> Dominio verificado</span>
+          <span data-state="owner_declared"><FileText size={15} /> {copy.ownerDeclared}</span>
+          <span data-state="observed"><Eye size={15} /> {copy.observed}</span>
+          <span data-state="verified"><BadgeCheck size={15} /> {copy.verified}</span>
         </div>
       </section>
 
       <section className="profile-layout">
         <div className="profile-content">
           <section className="profile-section">
-            <header><span>01</span><div><h2>Identidad publica</h2><p>Lo que el responsable autorizo a publicar sobre el sitio.</p></div></header>
+            <header><span>01</span><div><h2>{copy.identityTitle}</h2><p>{copy.identityBody}</p></div></header>
             <dl className="profile-facts">
-              <div><dt>Tipo de sitio</dt><dd>{profile.siteType || 'No declarado'}</dd></div>
-              <div><dt>Audiencias</dt><dd>{profile.audiences.join(', ') || 'No declaradas'}</dd></div>
-              <div><dt>Sectores</dt><dd>{profile.sectors.join(', ') || 'No declarados'}</dd></div>
-              <div><dt>Idiomas</dt><dd>{profile.languages.join(', ') || 'No declarados'}</dd></div>
+              <div><dt>{copy.siteType}</dt><dd>{profile.siteType || copy.notDeclared}</dd></div>
+              <div><dt>{copy.audiences}</dt><dd>{profile.audiences.join(', ') || copy.notDeclared}</dd></div>
+              <div><dt>{copy.sectors}</dt><dd>{profile.sectors.join(', ') || copy.notDeclared}</dd></div>
+              <div><dt>{copy.languages}</dt><dd>{profile.languages.join(', ') || copy.notDeclared}</dd></div>
             </dl>
           </section>
 
           <section className="profile-section">
-            <header><span>02</span><div><h2>Capacidades y evidencia</h2><p>Declarar una capacidad no equivale a haberla observado en el sitio.</p></div></header>
+            <header><span>02</span><div><h2>{copy.capabilitiesTitle}</h2><p>{copy.capabilitiesBody}</p></div></header>
             <div className="profile-evidence-grid">
               <div>
-                <h3>Declaradas</h3>
+                <h3>{copy.declared}</h3>
                 {profile.declaredCapabilities.length
-                  ? profile.declaredCapabilities.map((item) => <p key={item}><FileText size={14} /> {item}<small>Declarado por el owner</small></p>)
-                  : <p>Sin capacidades declaradas.</p>}
+                  ? profile.declaredCapabilities.map((item) => <p key={item}><FileText size={14} /> {item}<small>{copy.ownerDeclared}</small></p>)
+                  : <p>{copy.noDeclaredCapabilities}</p>}
               </div>
               <div>
-                <h3>Observadas</h3>
+                <h3>{copy.observedPlural}</h3>
                 {profile.observedResources.length
                   ? profile.observedResources.map((item) => <a href={item.url} target="_blank" rel="noreferrer" key={`${item.type}-${item.url}`}><Eye size={14} /> {item.type}<small>{item.observedAt.slice(0, 10)}</small></a>)
-                  : <p>No hay una observacion publica guardada.</p>}
+                  : <p>{copy.noObservation}</p>}
               </div>
             </div>
           </section>
 
           <section className="profile-section">
-            <header><span>03</span><div><h2>Fuentes publicas</h2><p>Enlaces directos y fecha asociada a cada afirmacion.</p></div></header>
+            <header><span>03</span><div><h2>{copy.sourcesTitle}</h2><p>{copy.sourcesBody}</p></div></header>
             <div className="profile-source-list">
               {profile.publicSources.map((source) => (
                 <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>
-                  <div><strong>{source.title}</strong><small>{provenanceLabel(source.state)} · {source.observedAt.slice(0, 10)}</small></div>
+                  <div><strong>{source.title}</strong><small>{provenanceLabel(source.state, copy)} · {source.observedAt.slice(0, 10)}</small></div>
                   <ExternalLink size={15} />
                 </a>
               ))}
@@ -101,31 +110,32 @@ export default async function RegistryProfilePage({ params, searchParams }: Page
         <aside className="profile-aside">
           <section>
             <ShieldCheck size={21} />
-            <span>Identidad del sitio</span>
-            <strong>{provenanceLabel(profile.verification.status)}</strong>
+            <span>{copy.siteIdentity}</span><strong>{provenanceLabel(profile.verification.status, copy)}</strong>
             <dl>
-              <div><dt>Metodo</dt><dd>{profile.verification.method || 'No registrado'}</dd></div>
-              <div><dt>Registrado</dt><dd>{profile.verification.verifiedAt.slice(0, 10) || 'No registrado'}</dd></div>
-              <div><dt>Vigente hasta</dt><dd>{profile.verification.verifiedUntil.slice(0, 10) || 'No aplica al caso curado'}</dd></div>
+              <div><dt>{copy.method}</dt><dd>{profile.verification.method || copy.notRegistered}</dd></div>
+              <div><dt>{copy.registered}</dt><dd>{profile.verification.verifiedAt.slice(0, 10) || copy.notRegistered}</dd></div>
+              <div><dt>{copy.validUntil}</dt><dd>{profile.verification.verifiedUntil.slice(0, 10) || copy.notApplicable}</dd></div>
             </dl>
           </section>
           <section>
-            <span>Formatos para agentes</span>
-            <a href={`/registry/${profile.slug}/profile.json${version ? `?version=${version}` : ''}`}><Braces size={16} /> JSON verificable</a>
-            <a href={`/registry/${profile.slug}/profile.md${version ? `?version=${version}` : ''}`}><FileText size={16} /> Markdown legible</a>
+            <span>{copy.agentFormats}</span>
+            <a href={`/registry/${profile.slug}/profile.json${version ? `?version=${version}` : ''}`}><Braces size={16} /> {copy.json}</a>
+            <a href={`/registry/${profile.slug}/profile.md${version ? `?version=${version}` : ''}`}><FileText size={16} /> {copy.markdown}</a>
           </section>
           <section id="history">
-            <span>Historial</span>
-            <p>Esta es la version {profile.version}, publicada el {profile.publishedAt.slice(0, 10)}. Las nuevas versiones no borran las anteriores.</p>
+            <span>{copy.history}</span><p>v{profile.version} · {profile.publishedAt.slice(0, 10)}. {copy.historyText}</p>
           </section>
         </aside>
       </section>
 
       <section className="profile-limits">
-        <h2>Que no significa este perfil</h2>
+        <h2>{copy.limitsTitle}</h2>
         <div>{profile.limits.map((limit) => <p key={limit}>{limit}</p>)}</div>
       </section>
-      <SiteFooter />
+      <SiteFooter locale={locale} />
     </main>
   );
 }
+
+export default async function RegistryProfilePage(props: PageProps) { return <RegistryProfileExperience {...props} />; }
+import type { Metadata } from 'next';

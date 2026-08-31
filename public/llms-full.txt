@@ -1,5 +1,11 @@
 # Agent Friendly Web - public context
 
+## External verification AF-EV
+
+AF-EV is orthogonal to the proprietary AF-0 to AF-5 maturity method. The Cloudflare `isitagentready.com` baseline observed on 2026-08-30 scored `agentfriendlyweb.dev` at 53/100, Level 2 Bot-Aware. This is a dated third-party diagnostic, not a certification, security assurance, indexing guarantee or ranking guarantee. The machine-readable history is published at `https://agentfriendlyweb.dev/.well-known/external-readiness.json` and the human explanation at `https://agentfriendlyweb.dev/verificacion-externa`.
+
+After Sites version 27, a second provider observation returned Level 4 Agent-Integrated and passed Markdown negotiation, ARD and WebMCP. The provider API did not return a numeric score for that observation, so Agent Friendly Web does not infer one. DNS, OAuth, A2A and commerce remain separate gates and are not advertised merely to improve an external result.
+
 ## Identity
 
 Agent Friendly Web is an initiative created by Gabriel Mucchiut and incubated within the Tokenizart infrastructure. Tokenizart is its first integral case study.
@@ -18,7 +24,9 @@ The public guide at `https://agentfriendlyweb.dev/aeo-y-crawlers` explains how a
 
 ## Sector and language guidance
 
-The first multilingual content slice is published in Spanish, English and Portuguese at `/sectores`, `/en/sectors` and `/pt/setores`. It explains how the same evidence discipline changes for art and collections, museums, institutions, commerce, SaaS and professional services.
+The complete human interface is available in Spanish, English and Portuguese. Spanish remains the unprefixed canonical experience, while English uses `/en/` and Portuguese uses `/pt/`. Every localized human page publishes canonical and hreflang equivalents. Machine contracts, schemas, APIs and well-known resources remain at one canonical unprefixed URL so contract identifiers never diverge by language. Owner-declared Registry content is shown verbatim and is never silently translated.
+
+Language entry points: `https://agentfriendlyweb.dev/`, `https://agentfriendlyweb.dev/en/` and `https://agentfriendlyweb.dev/pt/`. Sector examples remain available at `/sectores`, `/en/sectors` and `/pt/setores`.
 
 ## Measurement and assisted intake
 
@@ -40,13 +48,19 @@ The deployed repo-first CLI is documented at `https://agentfriendlyweb.dev/cli`.
 
 The deployed service documented at `https://agentfriendlyweb.dev/mcp-readonly` exposes `POST https://mcp.agentfriendlyweb.dev/mcp` through stateless Streamable HTTP. It contains exactly four public read-only tools for audit, methodology, published Registry profiles and canonical OKF v0.2 verification, plus four versioned `afw://` resources. Its discovery card is `https://agentfriendlyweb.dev/.well-known/mcp/server-card.json` and its stable result schema is `https://agentfriendlyweb.dev/schemas/mcp-result.v1.json`.
 
-The service uses no OAuth because it exposes public data only. It has no A2A delegation, no WebMCP browser tools, no private expedients, no owner data, no website mutations and no payment actions. Modern MCP 2026-07-28 and stateless 2025 compatibility were verified with remote clients against the exact production Worker version before promotion.
+The service uses no OAuth because it exposes public data only. It has no A2A delegation, private expedients, owner data, website mutations or payment actions. The separate deployed WebMCP browser tool exposes only `afw.audit_public_site` from the public page and reuses the public audit API. Modern MCP 2026-07-28 and stateless 2025 compatibility were verified with remote clients against the exact production Worker version before promotion.
 
 ## Publication capsule
 
 Block 5A deploys a private manual-handoff workflow. It creates one immutable package with exact files, allowlisted destination paths, contents, SHA-256 hashes, expiration and human decisions bound to the manifest. Its public contracts are `https://agentfriendlyweb.dev/schemas/publication-capsule.v1.json` and `https://agentfriendlyweb.dev/schemas/capsule-decision.v1.json`.
 
 This workflow no aplica cambios remotos: it does not access a CMS, open a Draft PR, use credentials, deploy code or advertise an A2A service. Real adapters, current-file textual diffs, operational rollback and any website write remain behind later gates.
+
+## Block 5B deployed with remote submission disabled
+
+The deployed private Block 5B workflow compares one approved capsule against only five allowlisted public destinations: `/llms.txt`, `/llms-full.txt`, `/robots.txt`, `/sitemap.xml` and `/`. It limits redirects, response time, bytes and diff lines; classifies partial failures without reflecting probable secrets; and keeps manual integrations separate from direct file proposals.
+
+After human review, the owner may prepare and download an `agentfriendly.draft-pr-plan.v1` document. Its state is always `prepared_not_submitted`, `remoteSubmission` is `false` and `mergeAllowed` is `false`. The additive D1 migration is deployed, but GitHub authorization, Draft PR creation, merge, deployment and every target-site write remain behind later gates.
 
 ## Standards status
 
@@ -92,11 +106,11 @@ Tokenizart is documented as an evolving agent-first architecture. Existing publi
 
 ## Machine-readable catalogs
 
-The AI catalog and Agent Skills index are project discovery conventions backed by public resources on this site. The API Catalog is a standards-based linkset pointing to the public OpenAPI document and the deployed MCP contract. No OAuth resource, A2A service, WebMCP integration or payment protocol is advertised by this release.
+The deployed ARD-compatible draft manifest, its `ai-catalog.json` compatibility alias and the Agent Skills index point to public resources on this site. The API Catalog is a standards-based linkset pointing to the public OpenAPI document and the deployed MCP contract. No OAuth resource, A2A service or payment protocol is advertised by this release. WebMCP remains experimental despite being deployed and externally observed.
 
 ## Capability status
 
-The machine-readable readiness manifest at `https://agentfriendlyweb.dev/.well-known/agent-readiness.json` is the current capability ledger. Discovery resources, the public read-only audit API, the audit skill, the repo-first read-only CLI and the public stateless MCP read-only server are deployed. A2A remains planned; WebMCP and x402 remain research items. Planned and research work does not count as deployed evidence until its production gate closes.
+The machine-readable readiness manifest at `https://agentfriendlyweb.dev/.well-known/agent-readiness.json` is the current capability ledger. Discovery resources, the public read-only audit API, the audit skill, the repo-first read-only CLI, the public stateless MCP read-only server, Markdown negotiation, ARD compatibility and the browser WebMCP tool are deployed. A2A remains planned and x402 remains research. Candidate, planned and research work does not count as deployed evidence until its production gate closes.
 
 ## Illustrative maturity comparisons
 

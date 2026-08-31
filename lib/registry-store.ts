@@ -1,5 +1,4 @@
 import { and, desc, eq, inArray } from 'drizzle-orm';
-import { getDb } from '../db';
 import { publicProfiles } from '../db/schema';
 import {
   builtinSlugs,
@@ -29,6 +28,26 @@ export type PublicProfile = {
   historyUrl: string;
 };
 
+async function getRegistryDb() {
+  try {
+    const { getDb } = await import('../db');
+    return getDb();
+  } catch (error) {
+    if (
+      error instanceof Error
+      && 'code' in error
+      && error.code === 'ERR_UNSUPPORTED_ESM_URL_SCHEME'
+    ) return null;
+    throw error;
+  }
+}
+
+function sortProfiles(profiles: PublicProfile[]) {
+  return profiles.sort((left, right) =>
+    left.organization.localeCompare(right.organization, 'es') || left.slug.localeCompare(right.slug),
+  );
+}
+
 function parseProfile(row: typeof publicProfiles.$inferSelect): PublicProfile | null {
   try {
     const profile = JSON.parse(row.profileJson) as PublicProfile;
@@ -40,7 +59,9 @@ function parseProfile(row: typeof publicProfiles.$inferSelect): PublicProfile | 
 
 export async function listPublishedProfiles(): Promise<PublicProfile[]> {
   const builtins = listBuiltinProfiles();
-  const rows = await getDb()
+  const db = await getRegistryDb();
+  if (!db) return sortProfiles(builtins);
+  const rows = await db
     .select()
     .from(publicProfiles)
     .where(eq(publicProfiles.status, 'published'))
@@ -52,11 +73,9 @@ export async function listPublishedProfiles(): Promise<PublicProfile[]> {
     const profile = parseProfile(row);
     if (profile) latestBySlug.set(row.slug, profile);
   }
-  return [...builtins, ...latestBySlug.values()].filter((profile, index, all) =>
+  return sortProfiles([...builtins, ...latestBySlug.values()].filter((profile, index, all) =>
     !builtinSlugs.has(profile.slug) || all.findIndex((item) => item.slug === profile.slug) === index,
-  ).sort((left, right) =>
-    left.organization.localeCompare(right.organization, 'es') || left.slug.localeCompare(right.slug),
-  );
+  ));
 }
 
 export async function getPublishedProfile(slug: string, version?: number): Promise<PublicProfile | null> {
@@ -74,7 +93,9 @@ export async function getPublishedProfile(slug: string, version?: number): Promi
       )
     : and(eq(publicProfiles.slug, normalizedSlug), eq(publicProfiles.status, 'published'));
 
-  const [row] = await getDb()
+  const db = await getRegistryDb();
+  if (!db) return null;
+  const [row] = await db
     .select()
     .from(publicProfiles)
     .where(filters)
@@ -96,7 +117,9 @@ export async function getPublishedProfileMarkdown(slug: string, version?: number
         inArray(publicProfiles.status, ['published', 'superseded']),
       )
     : and(eq(publicProfiles.slug, normalizedSlug), eq(publicProfiles.status, 'published'));
-  const [row] = await getDb()
+  const db = await getRegistryDb();
+  if (!db) return null;
+  const [row] = await db
     .select()
     .from(publicProfiles)
     .where(filters)

@@ -13,11 +13,9 @@ import {
 } from 'lucide-react';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 
-export const metadata: Metadata = {
-  title: 'MCP publico read-only | Agent Friendly Web',
-  description: 'Servidor MCP publico, stateless y de solo lectura para auditoria, metodologia, Registry y OKF.',
-};
+export const metadata: Metadata = localizedRouteMetadata('mcp', 'es') as Metadata;
 
 const tools = [
   {
@@ -63,7 +61,7 @@ const boundaries = [
 export default function PublicMcpPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="mcp" />
 
       <section className="mcp-hero">
         <div className="mcp-hero-copy">

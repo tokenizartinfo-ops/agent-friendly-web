@@ -1,38 +1,32 @@
-/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors avoid unstable vinext RSC prefetch requests. */
-
 import { ArrowRight, Building2, CheckCircle2, Languages, ScanSearch } from 'lucide-react';
 import { SECTOR_CONTENT } from '../../lib/sector-content.mjs';
+import { localizedPath } from '../../lib/site-i18n.mjs';
 import { SiteFooter } from './site-footer';
 import { SiteHeader } from './site-header';
 
 type Locale = 'es' | 'en' | 'pt';
 
-const languageRoutes = [
-  ['ES', '/sectores'],
-  ['EN', '/en/sectors'],
-  ['PT', '/pt/setores'],
-];
-
 export function SectorGuidePage({ locale }: { locale: Locale }) {
   const content = SECTOR_CONTENT[locale];
+  const languageRoutes = (['es', 'en', 'pt'] as const).map((target) => [target.toUpperCase(), localizedPath('sectors', target) || '/']);
 
   return (
     <main lang={locale}>
-      <SiteHeader />
+      <SiteHeader locale={locale} routeKey="sectors" />
       <section className="sector-hero">
         <div>
           <span>{content.eyebrow}</span>
           <h1>{content.title}</h1>
           <p>{content.intro}</p>
           <div className="aeo-actions">
-            <a href="/#auditar">{content.auditLabel} <ArrowRight size={17} /></a>
-            <a href="/medir-mejora">{content.measureLabel}</a>
+            <a href={localizedPath('home', locale, { hash: 'auditar' }) || '/#auditar'}>{content.auditLabel} <ArrowRight size={17} /></a>
+            <a href={localizedPath('measurement', locale) || '/medir-mejora'}>{content.measureLabel}</a>
           </div>
         </div>
         <aside className="language-switch" aria-label={content.languageLabel}>
           <Languages size={22} />
           <span>{content.languageLabel}</span>
-          <div>{languageRoutes.map(([label, href]) => <a aria-current={href === (locale === 'es' ? '/sectores' : locale === 'en' ? '/en/sectors' : '/pt/setores') ? 'page' : undefined} href={href} key={href}>{label}</a>)}</div>
+          <div>{languageRoutes.map(([label, href]) => <a aria-current={href === localizedPath('sectors', locale) ? 'page' : undefined} href={href} key={href}>{label}</a>)}</div>
         </aside>
       </section>
 
@@ -55,9 +49,9 @@ export function SectorGuidePage({ locale }: { locale: Locale }) {
       <section className="sector-closing">
         <ScanSearch size={27} />
         <div><h2>{content.closingTitle}</h2><p>{content.closingBody}</p></div>
-        <a href="/expediente">{locale === 'en' ? 'Open my dossier' : locale === 'pt' ? 'Abrir meu dossie' : 'Abrir mi expediente'} <ArrowRight size={16} /></a>
+        <a href={localizedPath('dossier', locale) || '/expediente'}>{locale === 'en' ? 'Open my dossier' : locale === 'pt' ? 'Abrir meu dossiê' : 'Abrir mi expediente'} <ArrowRight size={16} /></a>
       </section>
-      <SiteFooter />
+      <SiteFooter locale={locale} />
     </main>
   );
 }

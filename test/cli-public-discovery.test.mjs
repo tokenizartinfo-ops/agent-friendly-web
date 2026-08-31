@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";
+import { localizedPath } from "../lib/site-i18n.mjs";
 
 const canonical = "https://agentfriendlyweb.dev";
 
@@ -39,14 +40,15 @@ test("public discovery surfaces link the CLI without claiming MCP or writes", as
   assert.match(guide, /No escribe archivos locales/i);
   assert.match(guide, /node bin\/afw\.mjs audit/);
   assert.doesNotMatch(guide, /MCP disponible en produccion/i);
-  assert.match(sitemap, /\/cli/);
-  assert.match(page, /<SiteFooter\s*\/>/);
+  assert.match(sitemap, /'cli'/);
+  assert.equal(localizedPath('cli', 'es'), '/cli');
+  assert.match(page, /<SiteFooter(?:\s+locale=\{locale\})?\s*\/>/);
   assert.match(page, /Desplegada/i);
 });
 
 test("catalogs and readiness list CLI resources with deployed status", async () => {
   const aiCatalog = JSON.parse(await readFile("public/.well-known/ai-catalog.json", "utf8"));
-  const urls = aiCatalog.resources.map((resource) => resource.url);
+  const urls = aiCatalog.entries.map((resource) => resource.url);
   for (const url of [
     `${canonical}/cli`,
     `${canonical}/cli/index.md`,
@@ -75,8 +77,8 @@ test("human navigation and machine catalog expose real CLI destinations", async 
     readFile("public/openapi.json", "utf8"),
   ]);
 
-  assert.match(header, /href="\/cli"/);
-  assert.match(footer, /\['CLI read-only', '\/cli'\]/);
+  assert.match(header, /\['cli', 'cli'\]/);
+  assert.match(footer, /\['cli', 'cli'\]/);
   assert.match(siteMap, /CLI read-only/);
   assert.match(apiCatalog, /agent-friendly-cli\.json/);
   assert.match(openapi, /x-agent-friendly-web-cli/);

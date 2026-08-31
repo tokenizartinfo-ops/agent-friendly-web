@@ -1,37 +1,43 @@
-/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors avoid unstable vinext RSC prefetch requests. */
-
 import type { Metadata } from 'next';
 import { ArrowRight, BadgeInfo } from 'lucide-react';
+import { localizedPath } from '../../lib/site-i18n.mjs';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 import { MaturityDemonstrator } from '../components/maturity-demonstrator';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 
-export const metadata: Metadata = {
-  title: 'Evolucion agentica | Agent Friendly Web',
-  description: 'Compara como la evidencia publica mejora respuestas y capacidades agenticas por etapas.',
-};
+export const metadata: Metadata = localizedRouteMetadata('evolution', 'es') as Metadata;
 
-export default function AgenticEvolutionPage() {
+type Locale = 'es' | 'en' | 'pt';
+
+const evolutionCopy = {
+  es: { eyebrow: 'Comparador AF-0 a AF-5', title: 'De una web difícil de interpretar a una plataforma nativa para agentes.', intro: 'Recorre ejemplos de un restaurante, una municipalidad y Tokenizart. Cada etapa muestra cómo cambia una respuesta cuando aparecen mejores fuentes, datos y herramientas.', note: 'La comparación es ilustrativa: mejorar evidencia aumenta la capacidad de responder con precisión, pero no garantiza indexación, ranking, recomendación ni una redacción idéntica en GPT, Gemini, Claude u otro modelo.', next: 'Siguiente movimiento', nextTitle: 'Audita evidencia antes de prometer capacidades.', nextBody: 'El puntaje solo cambia cuando la mejora puede observarse en el origen público. MCP, A2A, WebMCP o x402 no cuentan por estar en un roadmap.', audit: 'Auditar un sitio' },
+  en: { eyebrow: 'AF-0 to AF-5 comparison', title: 'From a hard-to-interpret website to an agent-native platform.', intro: 'Explore restaurant, municipality and Tokenizart examples. Each stage shows how an answer changes as better sources, data and tools appear.', note: 'The comparison is illustrative: better evidence improves answer precision, but does not guarantee indexing, ranking, recommendation or identical wording in GPT, Gemini, Claude or another model.', next: 'Next move', nextTitle: 'Audit evidence before promising capabilities.', nextBody: 'The score changes only when an improvement can be observed at the public origin. MCP, A2A, WebMCP or x402 do not count merely because they appear on a roadmap.', audit: 'Audit a website' },
+  pt: { eyebrow: 'Comparador AF-0 a AF-5', title: 'De um site difícil de interpretar a uma plataforma nativa para agentes.', intro: 'Explore exemplos de restaurante, município e Tokenizart. Cada etapa mostra como uma resposta muda quando surgem melhores fontes, dados e ferramentas.', note: 'A comparação é ilustrativa: melhorar evidências aumenta a precisão das respostas, mas não garante indexação, ranking, recomendação ou texto idêntico em GPT, Gemini, Claude ou outro modelo.', next: 'Próximo movimento', nextTitle: 'Audite evidências antes de prometer capacidades.', nextBody: 'A pontuação só muda quando a melhoria pode ser observada na origem pública. MCP, A2A, WebMCP ou x402 não contam apenas por estarem no roadmap.', audit: 'Auditar um site' },
+} as const;
+
+export function AgenticEvolutionExperience({ locale = 'es' }: { locale?: Locale } = {}) {
+  const copy = evolutionCopy[locale];
   return (
-    <main>
-      <SiteHeader />
+    <main lang={locale}>
+      <SiteHeader routeKey="evolution" locale={locale} />
       <section className="document-hero evolution-hero">
-        <span>Comparador AF-0 a AF-5</span>
-        <h1>De una web dificil de interpretar a una plataforma nativa para agentes.</h1>
-        <p>
-          Recorre ejemplos de un Restaurante, una Municipalidad y Tokenizart. Cada etapa muestra como cambia una respuesta cuando aparecen mejores fuentes, datos y herramientas.
-        </p>
-        <div className="illustrative-note"><BadgeInfo size={18} /><p>La comparacion es ilustrativa: mejorar evidencia aumenta la capacidad de responder con precision, pero no garantiza indexacion, ranking, recomendacion ni una redaccion identica en GPT, Gemini, Claude u otro modelo.</p></div>
+        <span>{copy.eyebrow}</span>
+        <h1>{copy.title}</h1>
+        <p>{copy.intro}</p>
+        <div className="illustrative-note"><BadgeInfo size={18} /><p>{copy.note}</p></div>
       </section>
 
-      <MaturityDemonstrator />
+      <MaturityDemonstrator locale={locale} />
 
       <section className="evolution-next">
-        <div><span>Siguiente movimiento</span><h2>Audita evidencia antes de prometer capacidades.</h2><p>El puntaje solo cambia cuando la mejora puede observarse en el origen publico. MCP, A2A, WebMCP o x402 no cuentan por estar en un roadmap.</p></div>
-        <a href="/#auditar">Auditar un sitio <ArrowRight size={17} /></a>
+        <div><span>{copy.next}</span><h2>{copy.nextTitle}</h2><p>{copy.nextBody}</p></div>
+        <a href={localizedPath('home', locale, { hash: 'auditar' }) || '/#auditar'}>{copy.audit} <ArrowRight size={17} /></a>
       </section>
 
-      <SiteFooter />
+      <SiteFooter locale={locale} />
     </main>
   );
 }
+
+export default function AgenticEvolutionPage() { return <AgenticEvolutionExperience />; }

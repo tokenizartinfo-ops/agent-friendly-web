@@ -1,16 +1,18 @@
 import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import test from 'node:test';
+import { MATURITY_COPY } from '../lib/home-copy.mjs';
+import { localizedPath } from '../lib/site-i18n.mjs';
 
 const requiredNavigation = [
-  '/#auditar',
-  '/guia',
-  '/evolucion-agentica',
-  '/metodologia',
-  '/cli',
-  '/casos/tokenizart',
-  '/mapa-del-sitio',
-  '/expediente',
+  ['home', { hash: 'auditar' }, '/#auditar'],
+  ['guide', {}, '/guia'],
+  ['evolution', {}, '/evolucion-agentica'],
+  ['methodology', {}, '/metodologia'],
+  ['cli', {}, '/cli'],
+  ['tokenizartCase', {}, '/casos/tokenizart'],
+  ['siteMap', {}, '/mapa-del-sitio'],
+  ['dossier', {}, '/expediente'],
 ];
 
 const publicPages = [
@@ -27,8 +29,9 @@ const publicPages = [
 test('public navigation exposes the approved destinations', async () => {
   const header = await readFile('app/components/site-header.tsx', 'utf8');
 
-  for (const href of requiredNavigation) {
-    assert.ok(header.includes(`href="${href}"`), `header is missing ${href}`);
+  assert.match(header, /localizedPath/);
+  for (const [routeKey, options, expected] of requiredNavigation) {
+    assert.equal(localizedPath(routeKey, 'es', options), expected);
   }
 });
 
@@ -51,8 +54,8 @@ test('the human site map groups real resources and roadmap capabilities', async 
 test('the technical sitemap includes only canonical public HTML routes', async () => {
   const sitemap = await readFile('app/sitemap.ts', 'utf8');
 
-  for (const route of ['/metodologia', '/evolucion-agentica', '/casos/tokenizart', '/conocimiento-abierto', '/cli', '/mapa-del-sitio']) {
-    assert.ok(sitemap.includes(route), `sitemap is missing ${route}`);
+  for (const routeKey of ['methodology', 'evolution', 'tokenizartCase', 'openKnowledge', 'cli', 'siteMap']) {
+    assert.match(sitemap, new RegExp(`'${routeKey}'`), `sitemap is missing ${routeKey}`);
   }
   for (const excluded of ['/expediente', '/api/', '/.well-known/']) {
     assert.equal(sitemap.includes(excluded), false, `sitemap must not include ${excluded}`);
@@ -61,14 +64,14 @@ test('the technical sitemap includes only canonical public HTML routes', async (
 
 test('the shared footer exposes human and machine OKF entry points', async () => {
   const footer = await readFile('app/components/site-footer.tsx', 'utf8');
-  assert.ok(footer.includes("['Conocimiento abierto', '/conocimiento-abierto']"));
+  assert.ok(footer.includes("['openKnowledge', 'openKnowledge']"));
   assert.ok(footer.includes("['OKF v0.2', '/okf/v0.2/index.md']"));
 });
 
 test('every public page uses the shared footer', async () => {
   for (const page of publicPages) {
     const source = await readFile(page, 'utf8');
-    assert.match(source, /<SiteFooter\s*\/>/, `${page} must render the shared footer`);
+    assert.match(source, /<SiteFooter(?:\s+locale=\{locale\})?\s*\/>/, `${page} must render the shared footer`);
   }
 });
 
@@ -79,9 +82,9 @@ test('the home maturity map exposes six stages and one clear demonstrator action
 
   const maturity = await readFile(path, 'utf8');
   for (let stage = 0; stage <= 5; stage += 1) {
-    assert.match(maturity, new RegExp(`AF-${stage}`));
+    assert.equal(MATURITY_COPY.es.stages[stage][0], `AF-${stage}`);
   }
-  assert.equal((maturity.match(/href="\/evolucion-agentica"/g) || []).length, 1);
+  assert.match(maturity, /localizedPath\('evolution'/);
 });
 
 test('the mobile navigation stretches across the available menu width', async () => {

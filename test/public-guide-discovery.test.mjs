@@ -12,11 +12,11 @@ test('human navigation exposes the public guide and keeps intake separate', asyn
     readFile('app/sitemap.ts', 'utf8'),
   ]);
 
-  assert.match(header, /href="\/guia"/);
-  assert.match(footer, /\['Guia publica', '\/guia'\]/);
+  assert.match(header, /\['guide', 'guide'\]/);
+  assert.match(footer, /\['guide', 'guide'\]/);
   assert.match(siteMap, /Guia publica/);
   assert.match(siteMap, /Public guide contract/);
-  assert.match(sitemap, /\/guia/);
+  assert.match(sitemap, /'guide'/);
   assert.match(siteMap, /Asistente de preparacion/);
 });
 
@@ -33,7 +33,7 @@ test('machine discovery exposes the deployed guide with bounded capabilities', a
     assert.match(content, /https:\/\/agentfriendlyweb\.dev\/\.well-known\/public-guide-contract\.json/);
   }
 
-  const urls = aiCatalog.resources.map((resource) => resource.url);
+  const urls = aiCatalog.entries.map((resource) => resource.url);
   assert.ok(urls.includes(`${canonical}/guia`));
   assert.ok(urls.includes(`${canonical}/.well-known/public-guide-contract.json`));
   assert.equal(readiness.capabilities.public_guide.status, 'deployed');

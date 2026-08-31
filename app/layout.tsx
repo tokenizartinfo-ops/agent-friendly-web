@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Bangers, Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
 const geistSans = Geist({
@@ -10,6 +10,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+});
+
+const comicDisplay = Bangers({
+  variable: '--font-comic',
+  subsets: ['latin'],
+  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -37,8 +43,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <link rel="ard" href="/.well-known/ard.json" type="application/json" />
+        <link rel="ai-catalog" href="/.well-known/ai-catalog.json" type="application/json" />
+        <link rel="alternate" href="/index.md" type="text/markdown" title="Agent Friendly Web in Markdown" />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${comicDisplay.variable} antialiased`}
       >
         {children}
       </body>

@@ -1,6 +1,8 @@
 # Caso Tokenizart: auditoria y transformacion agent-friendly
 
-**Fecha de corte:** 2026-08-26
+**Fecha de corte inicial:** 2026-08-26
+
+**Ultima reauditoria externa:** 2026-08-30
 
 **Responsable:** Gabriel Mucchiut
 
@@ -44,6 +46,19 @@ El 2026-08-26, `isitagentready.com` clasifico:
 - Agent Friendly Web como **Level 1 - Basic Web Presence**.
 
 El resultado externo confirma la direccion general del auditor propio, aunque utiliza otra escala y otros checks. No debe mezclarse un puntaje con el otro.
+
+### Reauditoria externa de Tokenizart del 2026-08-30
+
+Una nueva consulta directa a `https://isitagentready.com/api/scan` clasifico `https://tokenizart.com` como **Level 1 - Basic Web Presence**. La respuesta del proveedor no incluyo un puntaje numerico, por lo que no se inventa ni deriva uno.
+
+Pasaron `robotsTxt`, `sitemap` y `robotsTxtAiRules`. Fallaron `linkHeaders`, `dnsAid`, `markdownNegotiation`, `contentSignals`, `apiCatalog`, `oauthDiscovery`, `oauthProtectedResource`, `authMd`, `mcpServerCard`, `a2aAgentCard`, `agentSkills`, `webMcp` y `ard`. Los checks comerciales fueron informativos o neutrales.
+
+Esto fija la prelacion del caso Tokenizart:
+
+1. publicar verdad y descubrimiento basico en `tokenizart.com`: Content Signals, archivos `llms`, cabeceras y catalogos;
+2. publicar solo las skills, OpenAPI y tarjetas que correspondan a recursos reales y mantenibles;
+3. tratar Markdown, ARD y WebMCP read-only como mejoras verificables;
+4. conservar DNS, OAuth, A2A y pagos detras de gates propios, sin simular capacidades para aumentar el nivel externo.
 
 ### Resultado post despliegue de Agent Friendly Web v2
 
@@ -142,12 +157,15 @@ Esta declaracion no sustituye las condiciones de cada crawler ni obliga a tercer
 - Incorporar sitemap en Atelier y Link headers utiles.
 - Revisar AI Crawl Control en Cloudflare y registrar la configuracion observada.
 - Evaluar Markdown for Agents en Tokenizart, primero con prueba y rollback.
+- Publicar un manifiesto ARD compatible y su enlace de descubrimiento solo despues de validar el paquete en preview.
+- Repetir la auditoria externa y registrar cada fotografia en el perfil AF-EV del caso.
 
 ### Fase P2 - Herramientas reales
 
 - Publicar el indice de skills solo con artefactos descargables, versionados y verificables.
 - Publicar OpenAPI y MCP card cuando los endpoints read-only tengan URL estable, seguridad, rate limits y soporte.
 - Marcar CLI, MCP, OKF y skills como `release_candidate` hasta completar esos gates.
+- Incorporar WebMCP exclusivamente para tools publicas read-only que existan en la pagina y fallen cerradas.
 
 ### Fase P3 - Owner Live read-only
 
@@ -183,7 +201,7 @@ El caso alcanza su primer objetivo cuando:
 
 Llegar a "100% agent-friendly" no significa activar todos los protocolos. Significa que cada capacidad necesaria esta publicada, verificable, segura y correctamente limitada; y que lo que no existe se declara como roadmap, no como servicio.
 
-Agent Friendly Web aplica la misma regla sobre si misma. Su manifiesto publico distingue recursos desplegados, capacidades planificadas y lineas de investigacion. MCP, A2A, WebMCP y x402 no se contabilizan como operativos hasta que exista un endpoint, contrato, seguridad y prueba reproducible.
+Agent Friendly Web aplica la misma regla sobre si misma. Su manifiesto publico distingue recursos desplegados, candidatos, capacidades planificadas y lineas de investigacion. El MCP remoto read-only ya desplegado se diferencia del candidato WebMCP de navegador; A2A y x402 siguen sin anunciarse como operativos. Ninguna capacidad se considera desplegada hasta que exista endpoint o integracion, contrato, seguridad y prueba reproducible.
 
 ## 11. Perfil Registry v1
 

@@ -15,11 +15,9 @@ import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 // @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { CRAWLER_CATALOG } from '../../lib/crawler-catalog.mjs';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 
-export const metadata: Metadata = {
-  title: 'AEO y crawlers de IA | Agent Friendly Web',
-  description: 'Guia verificable para mejorar respuestas sobre una empresa y decidir por separado busqueda, solicitudes de usuarios y entrenamiento.',
-};
+export const metadata: Metadata = localizedRouteMetadata('aeo', 'es') as Metadata;
 
 const purposeLabels: Record<string, string> = {
   search_discovery: 'Busqueda y descubrimiento',
@@ -58,7 +56,7 @@ const jsonLd = {
 export default function AeoAndCrawlersPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="aeo" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <section className="aeo-hero">

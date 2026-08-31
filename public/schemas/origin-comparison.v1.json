@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentfriendlyweb.dev/schemas/origin-comparison.v1.json",
+  "title": "Agent Friendly Web Origin Comparison v1",
+  "description": "Bounded read-only comparison between one publication capsule and public origin resources.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "comparisonId", "capsuleId", "capsuleVersion", "manifestSha256", "origin", "observedAt", "status", "resources", "limits"],
+  "properties": {
+    "contract": { "const": "agentfriendly.origin-comparison.v1" },
+    "comparisonId": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "capsuleId": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "capsuleVersion": { "type": "integer", "minimum": 1 },
+    "manifestSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "origin": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "observedAt": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["complete", "incomplete"] },
+    "resources": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["packagePath", "destinationPath", "operation", "status", "httpStatus", "currentSha256", "proposedSha256", "diff", "note"],
+        "properties": {
+          "packagePath": { "type": "string", "minLength": 1, "maxLength": 130 },
+          "destinationPath": { "enum": ["/", "/llms.txt", "/llms-full.txt", "/robots.txt", "/sitemap.xml"] },
+          "operation": { "enum": ["create_or_replace", "manual_merge", "manual_embed"] },
+          "status": { "enum": ["missing", "unchanged", "changed", "manual_review_required", "unavailable", "blocked"] },
+          "httpStatus": { "type": ["integer", "null"], "minimum": 100, "maximum": 599 },
+          "currentSha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+          "proposedSha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+          "diff": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "required": ["algorithm", "changes", "truncated"],
+            "properties": {
+              "algorithm": { "const": "bounded_line_comparison_v1" },
+              "changes": {
+                "type": "array",
+                "maxItems": 400,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["type", "oldLine", "newLine", "text"],
+                  "properties": {
+                    "type": { "enum": ["context", "add", "remove"] },
+                    "oldLine": { "type": ["integer", "null"], "minimum": 1 },
+                    "newLine": { "type": ["integer", "null"], "minimum": 1 },
+                    "text": { "type": "string", "maxLength": 1001 }
+                  }
+                }
+              },
+              "truncated": { "type": "boolean" }
+            }
+          },
+          "note": { "type": "string", "maxLength": 240 }
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxResponseBytes", "maxDiffLines", "redirects", "remoteMutation"],
+      "properties": {
+        "maxResponseBytes": { "const": 250000 },
+        "maxDiffLines": { "const": 400 },
+        "redirects": { "const": "manual" },
+        "remoteMutation": { "const": false }
+      }
+    }
+  }
+}

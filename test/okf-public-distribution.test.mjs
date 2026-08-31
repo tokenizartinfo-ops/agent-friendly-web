@@ -248,13 +248,13 @@ test('the human open knowledge page explains and links the public bundle without
     assert.ok(page.includes(`href="${href}"`), `open knowledge page is missing ${href}`);
   }
   assert.match(page, /Tokenizart.*primer caso integral/is);
-  assert.match(page, /<SiteHeader\s*\/>/);
+  assert.match(page, /<SiteHeader\s+routeKey="openKnowledge"\s*\/>/);
   assert.match(page, /<SiteFooter\s*\/>/);
 });
 
 test('sitemap and discovery sources publish the human OKF route and machine bundle entry', async () => {
   const sitemap = await readFile('app/sitemap.ts', 'utf8');
-  assert.match(sitemap, /\/conocimiento-abierto/);
+  assert.match(sitemap, /'openKnowledge'/);
   const footer = await readFile('app/components/site-footer.tsx', 'utf8');
   assert.match(footer, /\/okf\/v0\.2\/index\.md/);
   const map = await readFile('app/mapa-del-sitio/page.tsx', 'utf8');

@@ -9,11 +9,9 @@ import {
 } from 'lucide-react';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 
-export const metadata: Metadata = {
-  title: 'CLI read-only | Agent Friendly Web',
-  description: 'CLI pública para auditar sitios, consultar el Registry y verificar OKF sin credenciales, escritura local ni mutaciones remotas.',
-};
+export const metadata: Metadata = localizedRouteMetadata('cli', 'es') as Metadata;
 
 const commands = [
   {
@@ -48,7 +46,7 @@ const boundaries = [
 export default function CliPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="cli" />
 
       <section className="cli-hero">
         <div className="cli-hero-copy">

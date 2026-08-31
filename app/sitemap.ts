@@ -1,23 +1,36 @@
 import type { MetadataRoute } from 'next';
+import { localizedPath, routeEntries } from '../lib/site-i18n.mjs';
+
+export const PUBLIC_SITEMAP_ROUTE_KEYS = Object.freeze([
+  'home', 'guide', 'aeo', 'sectors', 'evolution', 'methodology', 'measurement',
+  'assistant', 'openKnowledge', 'registry', 'cli', 'mcp', 'externalVerification',
+  'tokenizartCase', 'siteMap',
+]);
+
+const priorities: Record<string, number> = {
+  home: 1, guide: 0.9, aeo: 0.9, sectors: 0.9, registry: 0.8,
+};
+
+function absolute(base: string, path: string | null) {
+  return `${base}${path === '/' ? '' : path || ''}`;
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://agentfriendlyweb.dev';
-  return [
-    { url: base, lastModified: new Date('2026-08-26'), changeFrequency: 'weekly', priority: 1 },
-    { url: `${base}/aeo-y-crawlers`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${base}/sectores`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${base}/en/sectors`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${base}/pt/setores`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${base}/medir-mejora`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${base}/asistente`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${base}/guia`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${base}/conocimiento-abierto`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${base}/metodologia`, lastModified: new Date('2026-08-26'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${base}/evolucion-agentica`, lastModified: new Date('2026-08-26'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${base}/registry`, lastModified: new Date('2026-08-27'), changeFrequency: 'daily', priority: 0.8 },
-    { url: `${base}/cli`, lastModified: new Date('2026-08-27'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${base}/mcp-readonly`, lastModified: new Date('2026-08-28'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${base}/casos/tokenizart`, lastModified: new Date('2026-08-26'), changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${base}/mapa-del-sitio`, lastModified: new Date('2026-08-26'), changeFrequency: 'monthly', priority: 0.7 },
-  ];
+  const declaredRoutes = new Set(routeEntries().map(({ routeKey }) => routeKey));
+  return PUBLIC_SITEMAP_ROUTE_KEYS
+    .filter((routeKey) => declaredRoutes.has(routeKey))
+    .flatMap((routeKey) => (['es', 'en', 'pt'] as const).map((locale) => ({
+      url: absolute(base, localizedPath(routeKey, locale)),
+      lastModified: new Date('2026-08-31'),
+      changeFrequency: routeKey === 'registry' ? 'daily' as const : 'weekly' as const,
+      priority: priorities[routeKey] || 0.8,
+      alternates: {
+        languages: {
+          es: absolute(base, localizedPath(routeKey, 'es')),
+          en: absolute(base, localizedPath(routeKey, 'en')),
+          pt: absolute(base, localizedPath(routeKey, 'pt')),
+        },
+      },
+    })));
 }

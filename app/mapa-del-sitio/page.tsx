@@ -18,6 +18,9 @@ import {
 } from 'lucide-react';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
+
+export const metadata: Metadata = localizedRouteMetadata('siteMap', 'es') as Metadata;
 
 const humanRoutes = [
   { name: 'Auditor publico', detail: 'Comprueba evidencia visible sin modificar el sitio.', href: '/#auditar', icon: Radar },
@@ -32,6 +35,7 @@ const humanRoutes = [
   { name: 'Registry publico', detail: 'Perfiles versionados con declaraciones, observaciones y dominio verificado.', href: '/registry', icon: Globe2 },
   { name: 'CLI read-only', detail: 'Auditoria, Registry y verificacion OKF desde Node.js con salida JSON.', href: '/cli', icon: FileCode2 },
   { name: 'MCP public read-only', detail: 'Servicio stateless desplegado con cuatro tools y cuatro resources publicos.', href: '/mcp-readonly', icon: Braces },
+  { name: 'Verificacion externa', detail: 'Fotografias AF-EV de auditores independientes, con fecha, checks y limites.', href: '/verificacion-externa', icon: ShieldCheck },
   { name: 'Caso Tokenizart', detail: 'Primer caso integral, con archivos y progreso verificable.', href: '/casos/tokenizart', icon: CheckCircle2 },
   { name: 'Mi expediente', detail: 'Area privada para ordenar contexto y un roadmap propio.', href: '/expediente', icon: LockKeyhole },
 ];
@@ -44,6 +48,8 @@ const machineResources = [
   { name: 'OpenAPI', detail: 'Contrato verificable del scanner publico.', href: '/openapi.json', icon: Braces },
   { name: 'API Catalog', detail: 'Catalogo de superficies y capacidades publicadas.', href: '/api-catalog', icon: FileCode2 },
   { name: 'AI Catalog', detail: 'Recursos publicos destinados al descubrimiento.', href: '/.well-known/ai-catalog.json', icon: Bot },
+  { name: 'ARD', detail: 'Manifiesto compatible con el draft de Agentic Resource Discovery.', href: '/.well-known/ard.json', icon: Network },
+  { name: 'External readiness', detail: 'Baseline AF-EV atribuido a un proveedor externo.', href: '/.well-known/external-readiness.json', icon: ShieldCheck },
   { name: 'Agent Skill', detail: 'Instrucciones publicas para ejecutar una auditoria.', href: '/skills/agent-friendly-web-audit/SKILL.md', icon: Braces },
   { name: 'Readiness manifest', detail: 'Estado machine-readable de capacidades y limites.', href: '/.well-known/agent-readiness.json', icon: ShieldCheck },
   { name: 'Security policy', detail: 'Canal y alcance para reportar problemas de seguridad.', href: '/.well-known/security.txt', icon: ShieldCheck },
@@ -79,10 +85,12 @@ const activeCapabilities = [
   ['CLI read-only', 'Desplegada', 'Auditoria, Registry y OKF con JSON estable, sin credenciales ni escrituras.'],
   ['MCP public read-only', 'Desplegado', 'Cuatro tools y cuatro resources publicos, sin OAuth, memoria ni escrituras.'],
   ['Capsula manual', 'Desplegada', 'Prepara archivos y hashes para entrega manual con aprobaciones separadas; no publica ni modifica el sitio.'],
+  ['AF-EV', 'Verificado', 'Conserva el baseline 53/100 Level 2 y la reauditoria Level 4 como fotografias externas fechadas.'],
 ];
 
 const roadmap = [
-  ['Markdown negociado', 'planned', 'La respuesta text/markdown todavia no esta activa en el origen.'],
+  ['Markdown negociado', 'deployed', 'Desplegado con Vary: Accept y verificado externamente.'],
+  ['WebMCP read-only', 'deployed', 'Tool in-page publica read-only desplegada; tecnologia experimental.'],
   ['Voz, correo y guardado asistido', 'planned', 'Permanecen fuera del prototipo hasta contratos, consentimiento y auditoria.'],
   ['Plugins y conectores', 'planned', 'Cada plataforma requiere un adaptador oficial y una capacidad verificable.'],
   ['A2A', 'planned', 'No se publica Agent Card ni delegacion entre agentes.'],
@@ -92,7 +100,7 @@ const roadmap = [
 export default function SiteMapPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="siteMap" />
       <section className="document-hero site-map-hero">
         <span>Mapa humano y agentico</span>
         <h1>Todo lo que Agent Friendly Web publica, en un solo lugar.</h1>
@@ -169,3 +177,4 @@ export default function SiteMapPage() {
     </main>
   );
 }
+import type { Metadata } from 'next';

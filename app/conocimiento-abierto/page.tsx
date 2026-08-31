@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors avoid unstable vinext RSC prefetch requests. */
 import type { Metadata } from 'next';
 import {
   ArrowRight,
@@ -12,11 +13,9 @@ import {
 } from 'lucide-react';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
+import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 
-export const metadata: Metadata = {
-  title: 'Conocimiento abierto OKF | Agent Friendly Web',
-  description: 'Bundle OKF v0.2 publico, read-only y verificable sobre metodologia, descubrimiento, Registry, asistencia y el caso Tokenizart.',
-};
+export const metadata: Metadata = localizedRouteMetadata('openKnowledge', 'es') as Metadata;
 
 const domains = [
   ['Metodo', 'Alcance, niveles AF-0 a AF-5, evidencia y puntuacion.', '03'],
@@ -36,7 +35,7 @@ const verification = [
 export default function OpenKnowledgePage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="openKnowledge" />
 
       <section className="okf-hero">
         <div className="okf-hero-copy">

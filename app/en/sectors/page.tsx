@@ -1,11 +1,8 @@
 import type { Metadata } from 'next';
 import { SectorGuidePage } from '../../components/sector-guide-page';
+import { localizedRouteMetadata } from '../../../lib/localized-route-metadata.mjs';
 
-export const metadata: Metadata = {
-  title: 'Sector solutions | Agent Friendly Web',
-  description: 'AEO and agent-readiness applications for culture, institutions, commerce, platforms and professional services.',
-  alternates: { canonical: '/en/sectors', languages: { es: '/sectores', pt: '/pt/setores' } },
-};
+export const metadata: Metadata = localizedRouteMetadata('sectors', 'en') as Metadata;
 
 export default function EnglishSectorsPage() {
   return <SectorGuidePage locale="en" />;

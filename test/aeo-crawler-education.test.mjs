@@ -43,8 +43,11 @@ test('machine crawler catalog is static, synchronized and discoverable', async (
   ]);
 
   assert.deepEqual(JSON.parse(staticCatalog), catalog.crawlerCatalogPayload());
-  for (const source of [header, footer, sitemap, map, llms, aiCatalog]) {
+  for (const source of [map, llms, aiCatalog]) {
     assert.match(source, /aeo-y-crawlers|crawler-policy-catalog/);
   }
+  assert.match(header, /\['aeo', 'aeo'\]/);
+  assert.match(footer, /\['aeo', 'aeo'\]/);
+  assert.match(sitemap, /'aeo'/);
   assert.match(map, /Registry publico[\s\S]*Activo/);
 });

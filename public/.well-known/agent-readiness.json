@@ -6,7 +6,16 @@
     "creator": "Gabriel Mucchiut"
   },
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "updated_at": "2026-08-28",
+  "updated_at": "2026-08-31",
+  "human_languages": ["es", "en", "pt"],
+  "human_route_strategy": "Spanish unprefixed canonical; English under /en; Portuguese under /pt; canonical and hreflang equivalents",
+  "machine_routes_localized": false,
+  "owner_declared_content_auto_translated": false,
+  "external_verification": {
+    "status": "verified",
+    "profile": "/.well-known/external-readiness.json",
+    "note": "Cloudflare post-release observation reached Level 4 Agent-Integrated. Third-party observations remain separate from AF-0 to AF-5."
+  },
   "policy": {
     "public_search": "allowed",
     "user_directed_ai_input": "allowed",
@@ -80,6 +89,17 @@
       ],
       "note": "Deployed private owner workflow for manual handoff. It prepares exact files and SHA-256 hashes, records human decisions and downloads JSON; it does not write to the target website."
     },
+    "origin_comparison_and_draft_plan": {
+      "status": "deployed",
+      "remote_submission": false,
+      "merge_allowed": false,
+      "remote_database_migration": "additive_0003_applied",
+      "resources": [
+        "/schemas/origin-comparison.v1.json",
+        "/schemas/draft-pr-plan.v1.json"
+      ],
+      "note": "Deployed private Block 5B workflow. It reads only allowlisted public resources, renders bounded diffs and prepares a downloadable technical plan. It does not create a GitHub PR, merge, deploy or modify the target website."
+    },
     "a2a": {
       "status": "planned",
       "note": "No A2A Agent Card or A2A service is advertised by this release."
@@ -95,8 +115,20 @@
       "note": "Repo-first public read-only CLI. No credentials, local writes, remote mutations, MCP or A2A execution."
     },
     "webmcp": {
-      "status": "research",
-      "note": "WebMCP remains experimental and is not enabled."
+      "status": "deployed",
+      "resources": ["/", "/api/scan"],
+      "tool": "afw.audit_public_site",
+      "note": "Experimental public read-only in-page tool, deployed and observed by the external verifier."
+    },
+    "markdown_negotiation": {
+      "status": "deployed",
+      "resources": ["/", "/index.md"],
+      "note": "Explicit text/markdown negotiation deployed with Vary: Accept and externally observed."
+    },
+    "ard": {
+      "status": "deployed",
+      "resources": ["/.well-known/ard.json", "/.well-known/ai-catalog.json"],
+      "note": "Draft-compatible manifests deployed and externally observed; ARD remains an evolving proposal."
     },
     "x402": {
       "status": "research",

@@ -16,6 +16,9 @@ import {
 } from 'lucide-react';
 import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
+import { localizedRouteMetadata } from '../../../lib/localized-route-metadata.mjs';
+
+export const metadata: Metadata = localizedRouteMetadata('tokenizartCase', 'es') as Metadata;
 
 const surfaces = [
   {
@@ -79,7 +82,7 @@ const owners = [
 export default function TokenizartCasePage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="tokenizartCase" />
       <section className="case-hero">
         <div>
           <span>Primer caso integral · corte 2026-08-26</span>
@@ -192,3 +195,4 @@ export default function TokenizartCasePage() {
     </main>
   );
 }
+import type { Metadata } from 'next';
