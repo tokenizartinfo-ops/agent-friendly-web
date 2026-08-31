@@ -36,7 +36,7 @@ const verification = [
 export default function OpenKnowledgePage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="openKnowledge" />
 
       <section className="okf-hero">
         <div className="okf-hero-copy">

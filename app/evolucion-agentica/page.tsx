@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function AgenticEvolutionPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="evolution" />
       <section className="document-hero evolution-hero">
         <span>Comparador AF-0 a AF-5</span>
         <h1>De una web dificil de interpretar a una plataforma nativa para agentes.</h1>

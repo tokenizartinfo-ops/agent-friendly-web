@@ -14,7 +14,7 @@ const layers = [
 export default function MethodologyPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="methodology" />
       <section className="document-hero">
         <span>Metodologia abierta v1</span>
         <h1>Medir evidencia antes de prometer capacidades agenticas.</h1>

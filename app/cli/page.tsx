@@ -48,7 +48,7 @@ const boundaries = [
 export default function CliPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="cli" />
 
       <section className="cli-hero">
         <div className="cli-hero-copy">

@@ -63,7 +63,7 @@ const boundaries = [
 export default function PublicMcpPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="mcp" />
 
       <section className="mcp-hero">
         <div className="mcp-hero-copy">

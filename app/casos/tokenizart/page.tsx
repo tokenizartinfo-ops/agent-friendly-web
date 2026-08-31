@@ -79,7 +79,7 @@ const owners = [
 export default function TokenizartCasePage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="tokenizartCase" />
       <section className="case-hero">
         <div>
           <span>Primer caso integral · corte 2026-08-26</span>

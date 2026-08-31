@@ -97,7 +97,7 @@ const roadmap = [
 export default function SiteMapPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="siteMap" />
       <section className="document-hero site-map-hero">
         <span>Mapa humano y agentico</span>
         <h1>Todo lo que Agent Friendly Web publica, en un solo lugar.</h1>

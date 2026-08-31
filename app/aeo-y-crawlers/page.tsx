@@ -58,7 +58,7 @@ const jsonLd = {
 export default function AeoAndCrawlersPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="aeo" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <section className="aeo-hero">

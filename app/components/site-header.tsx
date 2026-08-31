@@ -1,7 +1,5 @@
 'use client';
 
-/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors avoid unstable vinext RSC prefetch requests. */
-
 import { useState } from 'react';
 import { Languages, LockKeyhole, Menu, X } from 'lucide-react';
 import { localizedPath } from '../../lib/site-i18n.mjs';

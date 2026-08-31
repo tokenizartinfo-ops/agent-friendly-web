@@ -26,7 +26,7 @@ const next = [
 export default function ExternalVerificationPage() {
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader routeKey="externalVerification" />
       <section className="document-hero site-map-hero">
         <span>AF-EV · fotografia externa</span>
         <h1>Una medicion independiente, separada de nuestra escala AF.</h1>
