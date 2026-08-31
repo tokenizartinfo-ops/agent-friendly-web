@@ -5,7 +5,7 @@ import { MATURITY_COPY } from '../../lib/home-copy.mjs';
 export function MaturityMap({ locale = 'es' }: { locale?: 'es' | 'en' | 'pt' } = {}) {
   const copy = MATURITY_COPY[locale] || MATURITY_COPY.es;
   return (
-    <section className="maturity-map-band" aria-labelledby="maturity-map-title">
+    <section className="maturity-map-band" id="ruta-de-madurez" aria-labelledby="maturity-map-title">
       <div className="maturity-map-intro">
         <span><Network size={16} /> {copy.eyebrow}</span>
         <h2 id="maturity-map-title">{copy.title}</h2>
