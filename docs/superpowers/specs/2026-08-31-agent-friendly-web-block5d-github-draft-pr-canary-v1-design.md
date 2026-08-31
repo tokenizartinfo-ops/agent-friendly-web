@@ -14,6 +14,7 @@ Preparar la primera frontera remota reversible de Agent Friendly Web: crear un u
 - Repositorio allowlisted: `tokenizartinfo-ops/agent-friendly-web-synthetic-origin`.
 - Base: `main`.
 - Archivo canary: `llms.txt`.
+- Tamano maximo del archivo: 128 KiB.
 - Maximo: un archivo y un Draft PR.
 - Merge, auto-merge, release, deployment, DNS y CMS: prohibidos.
 
@@ -48,9 +49,8 @@ La ejecucion remota exige simultaneamente:
 
 ## Fallo cerrado
 
-Se rechazan repositorios, bases o rutas diferentes; mas de un archivo; contenido con secreto probable; PR no draft; respuesta sin URL GitHub verificable; expiracion; replay divergente; merge o capacidad ausente.
+Se rechazan repositorios, bases o rutas diferentes; mas de un archivo; contenido superior a 128 KiB o con secreto probable; PR no draft; respuesta sin URL GitHub verificable; expiracion; replay divergente; merge o capacidad ausente.
 
 ## Limite del release
 
 Este bloque implementa contrato, adaptador, cliente simulado, recibo y documentacion. No crea el repositorio, no solicita credenciales, no abre el Draft PR y no cambia produccion.
-

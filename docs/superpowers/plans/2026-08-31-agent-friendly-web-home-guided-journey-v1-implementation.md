@@ -30,11 +30,11 @@
 **Interfaces:**
 - Produces: `ComicCallHero`, `FutureArchive`, orden DOM canonico y copy localizada.
 
-- [ ] **Step 1: Write the failing test** para exigir `ComicCallHero -> MaturityMap -> ScanWorkspace -> HomeMaturityComparison -> FutureArchive -> HomeNextPaths` y divulgacion progresiva.
-- [ ] **Step 2: Run test to verify it fails** con `node --test test/home-i18n.test.mjs`.
-- [ ] **Step 3: Write minimal implementation** separando componentes y componiendo la secuencia aprobada.
-- [ ] **Step 4: Run test to verify it passes** con el mismo comando.
-- [ ] **Step 5: Commit** el recorrido semantico.
+- [x] **Step 1: Write the failing test** para exigir `ComicCallHero -> MaturityMap -> ScanWorkspace -> HomeMaturityComparison -> FutureArchive -> HomeNextPaths` y divulgacion progresiva.
+- [x] **Step 2: Run test to verify it fails** con `node --test test/home-i18n.test.mjs`.
+- [x] **Step 3: Write minimal implementation** separando componentes y componiendo la secuencia aprobada.
+- [x] **Step 4: Run test to verify it passes** con el mismo comando.
+- [x] **Step 5: Commit** el recorrido semantico.
 
 ### Task 2: Hero y responsive
 
@@ -46,11 +46,11 @@
 - Consumes: clases de `ComicCallHero`.
 - Produces: capa central legible en escritorio y orden ilustracion/texto en movil.
 
-- [ ] **Step 1: Write the failing test** para exigir media query, capa de contraste y orden movil declarado.
-- [ ] **Step 2: Run test to verify it fails** con `node --test test/home-i18n.test.mjs`.
-- [ ] **Step 3: Write minimal implementation** en CSS sin blur global ni escalado tipografico por ancho en texto de cuerpo.
-- [ ] **Step 4: Run test to verify it passes**.
-- [ ] **Step 5: Commit** el tratamiento visual.
+- [x] **Step 1: Write the failing test** para exigir media query, capa de contraste y orden movil declarado.
+- [x] **Step 2: Run test to verify it fails** con `node --test test/home-i18n.test.mjs`.
+- [x] **Step 3: Write minimal implementation** en CSS sin blur global ni escalado tipografico por ancho en texto de cuerpo.
+- [x] **Step 4: Run test to verify it passes**.
+- [x] **Step 5: Commit** el tratamiento visual.
 
 ### Task 3: QA del recorrido
 
@@ -60,9 +60,8 @@
 **Interfaces:**
 - Produces: evidencia de test, build y capturas.
 
-- [ ] **Step 1: Run focused and full verification** con `npm test`, `npm run lint` y `npm run build`.
-- [ ] **Step 2: Capture desktop and mobile screenshots** con Playwright.
-- [ ] **Step 3: Inspect overflow, overlap, image framing and controls**.
-- [ ] **Step 4: Record exact evidence** en el gate local.
-- [ ] **Step 5: Commit** la evidencia.
-
+- [x] **Step 1: Run focused and full verification** con `npm test`, `npm run lint` y `npm run build`.
+- [x] **Step 2: Capture desktop and mobile screenshots** con Playwright.
+- [x] **Step 3: Inspect overflow, overlap, image framing and controls**.
+- [x] **Step 4: Record exact evidence** en el gate local.
+- [x] **Step 5: Commit** la evidencia.

@@ -31,11 +31,11 @@
 - Consumes: capsula, comparacion y `agentfriendly.draft-pr-plan.v1` aprobados.
 - Produces: `prepareGitHubDraftPrCanary(input)` y `validateGitHubDraftPrCanary(run)`.
 
-- [ ] **Step 1: Write the failing test** para target exacto, un archivo, hashes, expiracion y ausencia de secretos.
-- [ ] **Step 2: Run test to verify it fails** con `node --test test/block5d-github-draft-pr-canary.test.mjs`.
-- [ ] **Step 3: Write minimal implementation** del contrato puro.
-- [ ] **Step 4: Run test to verify it passes**.
-- [ ] **Step 5: Commit** el contrato.
+- [x] **Step 1: Write the failing test** para target exacto, un archivo, hashes, expiracion y ausencia de secretos.
+- [x] **Step 2: Run test to verify it fails** con `node --test test/block5d-github-draft-pr-canary.test.mjs`.
+- [x] **Step 3: Write minimal implementation** del contrato puro.
+- [x] **Step 4: Run test to verify it passes**.
+- [x] **Step 5: Commit** el contrato.
 
 ### Task 2: Ejecutor fail-closed y recibo
 
@@ -46,11 +46,11 @@
 **Interfaces:**
 - Produces: `executeGitHubDraftPrCanary(run, controls)` y recibo `agentfriendly.github-draft-pr-receipt.v1`.
 
-- [ ] **Step 1: Write the failing tests** para flag apagado, aprobacion ausente, capability incorrecta, respuesta no draft, replay divergente y cliente simulado valido.
-- [ ] **Step 2: Run test to verify expected failures**.
-- [ ] **Step 3: Write minimal implementation** sin SDK ni red.
-- [ ] **Step 4: Run focused and full tests**.
-- [ ] **Step 5: Commit** el adaptador probado.
+- [x] **Step 1: Write the failing tests** para flag apagado, aprobacion ausente, capability incorrecta, respuesta no draft, replay divergente y cliente simulado valido.
+- [x] **Step 2: Run test to verify expected failures**.
+- [x] **Step 3: Write minimal implementation** sin SDK ni red.
+- [x] **Step 4: Run focused and full tests**.
+- [x] **Step 5: Commit** el adaptador probado.
 
 ### Task 3: Gate local y siguiente consentimiento
 
@@ -61,9 +61,8 @@
 **Interfaces:**
 - Produces: evidencia y checklist para la futura accion remota.
 
-- [ ] **Step 1: Run `npm test`, `npm run lint` and `npm run build`**.
-- [ ] **Step 2: Confirm no network client, token, route or enabled flag exists**.
-- [ ] **Step 3: Record repository, one-file boundary and approval still required**.
-- [ ] **Step 4: Update roadmap without claiming remote deployment**.
-- [ ] **Step 5: Commit** la evidencia del gate.
-
+- [x] **Step 1: Run `npm test`, `npm run lint` and `npm run build`**.
+- [x] **Step 2: Confirm no network client, token, route or enabled flag exists**.
+- [x] **Step 3: Record repository, one-file boundary and approval still required**.
+- [x] **Step 4: Update roadmap without claiming remote deployment**.
+- [x] **Step 5: Commit** la evidencia del gate.

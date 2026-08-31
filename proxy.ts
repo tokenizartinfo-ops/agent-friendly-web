@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 // @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { acceptsMarkdown, mergeVaryHeader } from './lib/markdown-negotiation.mjs';
+// @ts-expect-error Shared ESM module is exercised directly by Node tests.
+import { localeFromPathname } from './lib/request-locale.mjs';
 
 const discoveryLinks = [
   '</sitemap.xml>; rel="sitemap"; type="application/xml"',
@@ -20,7 +22,9 @@ export function proxy(request: NextRequest) {
     response.headers.set('Vary', mergeVaryHeader(response.headers.get('Vary'), 'Accept'));
     return response;
   }
-  const response = NextResponse.next();
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-agent-friendly-locale', localeFromPathname(request.nextUrl.pathname));
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
   if (request.nextUrl.pathname === '/') {
     response.headers.set('Link', discoveryLinks);
     response.headers.set('Vary', mergeVaryHeader(response.headers.get('Vary'), 'Accept'));
@@ -29,5 +33,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/.well-known/api-catalog'],
+  matcher: ['/', '/en/:path*', '/pt/:path*', '/.well-known/api-catalog'],
 };

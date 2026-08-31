@@ -80,6 +80,16 @@ test('Block 5D preparation fails closed outside the one-file synthetic boundary'
     [() => { const x = fixture(); x.plan.files[0].repositoryPath = 'public/llms.txt'; return x; }, /path|llms/i],
     [() => { const x = fixture(); x.plan.files.push({ ...x.plan.files[0], repositoryPath: 'llms-full.txt' }); return x; }, /one|file/i],
     [() => { const x = fixture(); x.plan.files[0].content = 'api_key=super-secret-value'; return x; }, /secret|hash/i],
+    [() => {
+      const x = fixture();
+      const oversized = 'x'.repeat((128 * 1024) + 1);
+      const oversizedSha256 = createHash('sha256').update(oversized).digest('hex');
+      x.capsule.files[0].content = oversized;
+      x.capsule.files[0].sha256 = oversizedSha256;
+      x.plan.files[0].content = oversized;
+      x.plan.files[0].sha256 = oversizedSha256;
+      return x;
+    }, /size|128/i],
     [() => { const x = fixture(); x.plan.body = 'access_token=super-secret-value'; return x; }, /secret|metadata/i],
     [() => ({ ...fixture(), capabilityRef: 'secretbroker://github/other' }), /capability/i],
     [() => ({ ...fixture(), expiresAt: '2026-08-31T17:59:00.000Z' }), /expir/i],

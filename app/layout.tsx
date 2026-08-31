@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { Bangers, Geist, Geist_Mono } from 'next/font/google';
+import { headers } from 'next/headers';
 import './globals.css';
+// @ts-expect-error Shared ESM module is exercised directly by Node tests.
+import { localeFromRequestHeader } from '../lib/request-locale.mjs';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -36,13 +39,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const requestHeaders = await headers();
+  const locale = localeFromRequestHeader(requestHeaders.get('x-agent-friendly-locale'));
+
   return (
-    <html lang="es">
+    <html lang={locale}>
       <head>
         <link rel="ard" href="/.well-known/ard.json" type="application/json" />
         <link rel="ai-catalog" href="/.well-known/ai-catalog.json" type="application/json" />
