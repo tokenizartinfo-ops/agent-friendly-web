@@ -17,6 +17,7 @@ test('contact Worker staging config binds isolated D1 and native rate limiting w
   assert.deepEqual(staging.d1_databases, [{
     binding: 'DB',
     database_name: 'agent-friendly-web-contact-staging-frontier',
+    database_id: 'd66d6319-5cde-420c-9bce-5366e4194360',
     migrations_dir: 'drizzle',
   }]);
   assert.deepEqual(staging.ratelimits, [{
