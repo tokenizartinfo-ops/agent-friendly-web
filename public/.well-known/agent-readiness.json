@@ -57,6 +57,25 @@
       "resources": ["/", "/.well-known/contact-intake-contract.json"],
       "note": "Optional post-audit local preview with separated consent. The public release does not persist contacts, send email or prove domain ownership."
     },
+    "email_operations": {
+      "status": "local_planning_only",
+      "inbound_routing": false,
+      "outbound_sending": false,
+      "dns_configured": false,
+      "email_provider_configured": false,
+      "resources": ["/.well-known/email-operations-contract.json"],
+      "note": "The public contract documents candidate addresses, consent boundaries and blocked actions. No mailbox, DNS route, provider, message read or send operation is active."
+    },
+    "crm_lite": {
+      "status": "local_planning_only",
+      "remote_persistence": false,
+      "accepts_pii": false,
+      "email_actions": false,
+      "proposal_actions": false,
+      "payment_actions": false,
+      "resources": ["/.well-known/crm-lite-contract.json"],
+      "note": "The public contract documents a metadata-only planning model. It is not an active CRM and does not store real contacts or execute commercial actions."
+    },
     "open_knowledge_okf": {
       "status": "deployed",
       "resources": [

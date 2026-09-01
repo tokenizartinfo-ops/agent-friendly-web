@@ -316,6 +316,8 @@ La frontera local de Gate 6C tambien esta implementada como `planned_draft_only`
 
 Gate 6D dispone ademas de un planificador local `local_planning_only` que separa contacto y oportunidad, impide saltos de etapa y no copia emails, cuerpos o credenciales. Antes de cualquier D1 remota deben cerrarse los canaries sinteticos de Gates 6B y 6C con aprobacion separada. La evidencia vive en `docs/BLOCK-6D-CRM-LITE-LOCAL-GATE-2026-08-31.md`.
 
+La reconciliacion publica del 2026-08-31 corrige el placeholder de la home que presentaba como `Pendiente` el desglose de una referencia ya medida en 95/100. Tambien incorpora los contratos 6C/6D al inventario publico con estados exclusivamente documentales. A2A, x402, correo operativo, contactos reales y CRM remoto siguen sin contabilizarse como desplegados. La evidencia vive en `docs/PUBLIC-SITE-STATUS-RECONCILIATION-2026-08-31.md`.
+
 El gate publico de los Bloques 2 y 3 se cerro el 2026-08-27. La revision humana verifico sectores, idiomas, comparador, intake, rechazo de secretos, ausencia de persistencia local, contratos publicos y una nueva auditoria del origen. La evidencia completa vive en `docs/BLOCK-2-3-BROWSER-AND-ORIGIN-GATE-2026-08-27.md`.
 
 Los Bloques 4A OKF publico, **4B CLI read-only**, **4B.1 guia conversacional publica** y **4C MCP publico read-only** estan desplegados. El MCP corre en un Worker independiente en `mcp.agentfriendlyweb.dev`, con cuatro tools y cuatro resources, sin OAuth, D1, secretos ni escritura. La transferencia de propuestas aprobadas al expediente autenticado, plugins, WebMCP, A2A, pagos, voz, correo y escritura siguen sin contabilizarse como capacidades desplegadas.
