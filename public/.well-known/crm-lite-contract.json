@@ -1,0 +1,46 @@
+{
+  "contract": "agent-friendly-web.crm-lite.v1",
+  "status": "local_planning_only",
+  "updated_at": "2026-08-31",
+  "pipeline": [
+    "new",
+    "qualified",
+    "discovery",
+    "proposal",
+    "approved",
+    "delivery",
+    "verified",
+    "won",
+    "lost"
+  ],
+  "capabilities": {
+    "metadata_normalization": true,
+    "transition_planning": true,
+    "remote_persistence": false,
+    "automatic_scoring": false,
+    "email_actions": false,
+    "proposal_actions": false,
+    "payment_actions": false,
+    "customer_site_actions": false
+  },
+  "accepts_pii": false,
+  "accepts_message_bodies": false,
+  "accepts_attachments": false,
+  "human_review_required_from": [
+    "proposal",
+    "approved",
+    "delivery",
+    "verified",
+    "won",
+    "lost"
+  ],
+  "blocked_actions": [
+    "persist_opportunity",
+    "send_email",
+    "create_proposal",
+    "charge_payment",
+    "modify_customer_site"
+  ],
+  "requires_separate_remote_approval": true,
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6D-CRM-LITE-LOCAL-GATE-2026-08-31.md"
+}
