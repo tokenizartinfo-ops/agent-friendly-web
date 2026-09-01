@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-08-31
 
-**Estado:** implementacion local verificada; canary privado remoto desplegado con escrituras deshabilitadas
+**Estado:** canary Sites privado OFF desplegado; frontera Worker 6B.1 verificada localmente; Worker remoto pendiente
 
 ## Objetivo
 
@@ -39,7 +39,8 @@ El cierre del bloque debe incluir pruebas negativas, build, PR y una matriz que 
 | ruta staging | verificada fail-closed | privada, kill switch cerrado | no |
 | D1 staging | adapter preparado | aislada, migrada y vacia | no |
 | Turnstile staging | adapter preparado | no provisionado | no |
-| rate limiting | binding obligatorio | no provisionado | no |
+| rate limiting Sites | binding obligatorio | no disponible en Sites | no |
+| frontera Worker | JWT, CORS, limiter y D1 verificados | no desplegada | no |
 | allowlist | parser y politica preparados | configurada para un unico actor | no |
 | correo | fuera del gate | no configurado | no |
 
@@ -78,13 +79,14 @@ El 2026-08-31 se desplego una instancia separada y owner-only en `https://agent-
 
 La base aislada expone las trece tablas esperadas. `contact_leads` y `consent_receipts` tienen cero filas. Las pruebas remotas observaron `401` sin autenticacion, `404` para `/contact-staging` con el kill switch cerrado, `401 contact_staging_identity_required` para la API usando un bypass sin identidad y `503 contact_capture_disabled` en el endpoint publico.
 
-Este hito prueba aislamiento, migraciones y cierre por defecto. No autoriza abrir escrituras: el siguiente subgate debe elegir y verificar un rate limiter remoto compatible y provisionar Turnstile sin exponer secretos.
+Este hito prueba aislamiento, migraciones y cierre por defecto. Gate 6B.1 agrego despues una frontera Worker local con rate limiting nativo, verificacion criptografica de Access, CORS exacto y adaptador D1 directo. No autoriza abrir escrituras: Gate 6B.2 debe desplegar esa frontera con el kill switch cerrado y provisionar Turnstile sin exponer secretos.
 
 ## Verificacion local
 
-- `npm test`: 332 pruebas aprobadas;
+- `npm test`: 357 pruebas aprobadas en Gate 6B.1;
 - `npm run lint`: cero errores, una advertencia preexistente sobre la imagen principal;
 - `npm run build`: aprobado, incluidas las rutas candidatas;
 - smoke sin configuracion: endpoint publico `503`, endpoint staging `404`, pagina staging `404`;
-- D1 privada migrada; ningun secreto, binding de rate limiting, contacto o dato real fue agregado.
+- D1 Sites privada migrada; ningun secreto, contacto o dato real fue agregado;
+- Worker 6B.1: `wrangler deploy --dry-run` aprobado con D1 y rate limiter nativo declarados, sin despliegue remoto.
 - revision tecnica: `https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/31`.

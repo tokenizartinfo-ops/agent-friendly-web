@@ -37,7 +37,7 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 
 ### Gate 6B - Captura consentida
 
-**Estado:** implementacion local fail-closed preparada y probada; staging remoto, persistencia real, Turnstile remoto y correo deshabilitados.
+**Estado:** preview publico y canary Sites cerrados; frontera Worker 6B.1 verificada localmente; Worker remoto, Turnstile remoto, persistencia de contactos y correo deshabilitados.
 
 **Dependencias para datos reales:** politica de privacidad revisada, migracion D1 staging con backup/rollback, Turnstile provisionado y aprobacion separada.
 
@@ -49,7 +49,7 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 6. Validar Turnstile en servidor.
 7. Permitir baja, rectificacion y eliminacion segun politica aprobada.
 
-La version publica permite completar y revisar localmente la solicitud, pero no la envia ni la almacena. El contrato publico declara `preview_only`. El codigo incorpora una ruta candidata distinta para staging privado, protegida por hostname, identidad, allowlist, kill switch, rate limiting y bindings obligatorios. No se contara como captacion activa hasta crear y verificar esa infraestructura remota con una aprobacion separada.
+La version publica permite completar y revisar localmente la solicitud, pero no la envia ni la almacena. El contrato publico declara `preview_only`. Gate 6B.1 incorpora una frontera Worker distinta con JWT Access firmado, host y CORS exactos, allowlist, kill switch, rate limiting nativo, Turnstile y D1 aislada. No se contara como captacion activa hasta desplegar Gate 6B.2 en estado OFF y aprobar separadamente la unica escritura sintetica de Gate 6B.3.
 
 ### Gate 6C - Correo operativo
 
