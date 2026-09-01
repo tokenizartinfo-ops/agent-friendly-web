@@ -122,7 +122,7 @@ export function ContactIntake({
           {syntheticTokenProbe ? (
             <input
               type="hidden"
-              data-afw-synthetic-turnstile-token
+              data-afw-synthetic-turnstile-token={turnstileToken}
               value={turnstileToken}
               readOnly
             />

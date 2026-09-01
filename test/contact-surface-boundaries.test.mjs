@@ -48,7 +48,7 @@ test('private contact staging exposes the one-time Turnstile response only for t
   const page = await readFile('app/contact-staging/page.tsx', 'utf8');
 
   assert.match(component, /syntheticTokenProbe\?: boolean/);
-  assert.match(component, /data-afw-synthetic-turnstile-token/);
+  assert.match(component, /data-afw-synthetic-turnstile-token=\{turnstileToken\}/);
   assert.match(page, /syntheticTokenProbe/);
   assert.doesNotMatch(await readFile('app/components/scan-workspace.tsx', 'utf8'), /syntheticTokenProbe/);
 });
