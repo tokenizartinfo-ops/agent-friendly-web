@@ -60,3 +60,18 @@ La metodologia historica contiene dos formulaciones de AF-5: `Transaccional` y `
 4. suite completa, lint y build;
 5. QA visual de escritorio y movil en ES/EN/PT;
 6. crawl posterior del sitemap y auditoria publica del origen.
+
+## Verificacion remota posterior a v34
+
+La publicacion se reconcilio contra el origen, no solo contra el codigo local:
+
+- 48 rutas del `sitemap.xml` respondieron `200`;
+- la home ya no contiene `Que vamos a medir`, `What we will measure` u `O que vamos medir`;
+- no aparecen etiquetas exactas `Pendiente`, `Pending` o `Pendente` en la lectura inicial por capas;
+- el unico uso humano exacto de `pendiente` pertenece a la guia AEO y describe correctamente lo que una nueva medicion todavia debe comprobar;
+- 16 recursos bajo `/.well-known/` respondieron `200` y los JSON se pudieron parsear;
+- `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt`, `openapi.json` y el catalogo API respondieron con sus tipos esperados;
+- el auditor publico devolvio `95/100`, con seis capas verificadas y comercio agentico `0/5`;
+- los tres enlaces que no responden a visitantes anonimos corresponden a los expedientes privados ES/EN/PT y devuelven `403` por diseno, no por enlace roto.
+
+La inconsistencia terminologica de AF-5 sigue separada en Fix Center. No se modifica la metodologia historica como parte de una correccion de interfaz.
