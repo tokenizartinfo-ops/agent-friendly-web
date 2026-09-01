@@ -37,9 +37,9 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 
 ### Gate 6B - Captura consentida
 
-**Estado:** preview publico y canary Sites cerrados; frontera Worker 6B.1 fusionada; Worker 6B.2 remoto desplegado con escrituras OFF y D1 vacia. Access y Turnstile remotos siguen pendientes, por lo que el gate no esta cerrado. Persistencia de contactos reales y correo permanecen deshabilitados.
+**Estado:** preview publico y canary Sites cerrados; frontera Worker 6B.1 fusionada; Gate 6B.2 remoto cerrado con Access, Turnstile, escrituras OFF y D1 vacia. Persistencia de contactos reales y correo permanecen deshabilitados.
 
-**Dependencias para datos reales:** politica de privacidad revisada, migracion D1 staging con backup/rollback, Turnstile provisionado y aprobacion separada.
+**Dependencias para datos reales:** Gate 6B.3 sintetico aprobado y cerrado, politica de privacidad revisada, backup/rollback validado y una aprobacion posterior especifica para contactos reales.
 
 1. Mostrar el resultado completo de la auditoria.
 2. Ofrecer `Recibir mi plan` como accion opcional.
@@ -49,7 +49,7 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 6. Validar Turnstile en servidor.
 7. Permitir baja, rectificacion y eliminacion segun politica aprobada.
 
-La version publica permite completar y revisar localmente la solicitud, pero no la envia ni la almacena. El contrato publico declara `preview_only`. Gate 6B.1 incorpora una frontera Worker distinta con JWT Access firmado, host y CORS exactos, allowlist, kill switch, rate limiting nativo, Turnstile y D1 aislada. Gate 6B.2 creo el Worker y D1 remotos con escrituras OFF; falta cerrar Access y Turnstile antes de considerarlo completo. No se contara como captacion activa hasta aprobar separadamente la unica escritura sintetica de Gate 6B.3.
+La version publica permite completar y revisar localmente la solicitud, pero no la envia ni la almacena. El contrato publico declara `preview_only`. Gate 6B.1 incorpora una frontera Worker distinta con JWT Access firmado, host y CORS exactos, allowlist, kill switch, rate limiting nativo, Turnstile y D1 aislada. Gate 6B.2 desplego y verifico esa frontera con escrituras OFF y cero filas. No se contara como captacion activa hasta aprobar y cerrar separadamente la unica escritura sintetica de Gate 6B.3 y, despues, autorizar datos reales.
 
 ### Gate 6C - Correo operativo
 

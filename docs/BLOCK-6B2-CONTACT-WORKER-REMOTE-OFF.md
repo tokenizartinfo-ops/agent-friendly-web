@@ -1,8 +1,8 @@
 # Gate 6B.2 - Worker remoto OFF
 
-**Fecha:** 2026-08-31
+**Fecha:** 2026-09-01
 
-**Estado:** infraestructura remota creada; gate incompleto y escrituras deshabilitadas
+**Estado:** gate remoto OFF cerrado; escrituras deshabilitadas y cero datos
 
 **Entorno:** `contact-staging.agentfriendlyweb.dev`
 
@@ -13,12 +13,18 @@ Preparar una frontera remota aislada para el futuro contacto consentido sin acep
 ## Infraestructura creada
 
 - Worker dedicado `agent-friendly-web-contact-staging-frontier`;
-- version remota `5887de03-7b8e-48d1-992a-3e46c62447ec`;
+- version de codigo inicial `5887de03-7b8e-48d1-992a-3e46c62447ec`;
+- version activa con bindings sensibles `c2928e2d-75ae-4e86-880e-5461b2a4a48d`, sin cambios de codigo;
 - hostname candidato separado de `agentfriendlyweb.dev`;
 - D1 dedicada `agent-friendly-web-contact-staging-frontier` en region WEUR;
 - rate limiter nativo de 10 solicitudes por 60 segundos;
 - `workers.dev` y preview URLs deshabilitados;
 - `CONTACT_STAGING_WRITES_ENABLED=false` fijado en configuracion versionada;
+- aplicacion Access `self_hosted` con una unica politica `allow`, un unico selector de identidad y denegacion por defecto;
+- launcher, iframe y preflight bypass deshabilitados; cookie Access marcada HTTP-only y sesion de una hora;
+- widget Turnstile administrado y restringido al hostname privado del formulario;
+- cuatro aliases sensibles vinculados al Worker: allowlist, team domain, audience y secreto Turnstile;
+- Site Key publica vinculada a la interfaz Sites privada, aplicada sin cambiar su version de codigo y con captura deshabilitada;
 - hash SHA-256 de la configuracion desplegada: `34c1b0617606e0bc2cb2660ca3163cf7c8603b12297627389ae02565c1de739a`.
 
 No se registran en este documento emails allowlisted, audiencia Access, tokens, claves ni valores de secretos.
@@ -38,26 +44,27 @@ La verificacion fue read-only: leyo dos contadores y escribio cero filas.
 
 | Prueba | Resultado |
 | --- | --- |
-| `GET /health` | `200`, `writes:false` |
-| `POST` al candidato con origen previsto | `503 contact_staging_misconfigured` |
-| `POST` al candidato con origen ajeno | `503 contact_staging_misconfigured` |
+| `GET /health` anonimo | `302`, interceptado por Access antes del Worker |
+| `POST` anonimo al candidato | `302`, interceptado por Access antes del Worker |
+| `OPTIONS` anonimo al candidato | `403`, sin bypass de preflight |
 | `POST /api/contact-intake` publico | `503 contact_capture_disabled` |
 | filas despues de las pruebas | 0 leads, 0 consentimientos |
 
-El `503` del candidato es el cierre por defecto esperado mientras falten configuraciones sensibles. El handler no alcanza validacion de origen ni lee el cuerpo porque la politica obligatoria esta incompleta.
+Una lectura posterior de la configuracion Access confirmo una sola aplicacion coincidente y una sola politica, sin reglas `bypass` ni `service_auth`. Las pruebas remotas cubrieron la frontera anonima; las pruebas locales cubren origen incorrecto y orden OFF antes del cuerpo. Ninguna prueba envio un formulario valido, abrio el kill switch, genero una sesion de usuario, consulto valores de secretos ni alcanzo persistencia.
 
-## Frontera pendiente
+## Frontera cerrada
 
-Gate 6B.2 todavia no esta cerrado. Faltan:
+Gate 6B.2 queda cerrado porque:
 
-1. crear una aplicacion Cloudflare Access para el hostname candidato;
-2. permitir una sola identidad operativa y negar el resto;
-3. crear un widget Turnstile restringido al hostname privado del formulario;
-4. cargar allowlist, issuer, audience y secreto Turnstile mediante controles de Cloudflare;
-5. repetir los smokes negativos y comprobar que una solicitud anonima no llega al Worker;
-6. verificar nuevamente que D1 conserve cero filas.
+1. Access protege el hostname antes del Worker;
+2. la politica admite un unico operador y el resto queda denegado;
+3. Turnstile esta restringido al hostname privado;
+4. los bindings sensibles existen fuera de Git y sus valores no se documentan;
+5. los smokes negativos demuestran que el trafico anonimo no alcanza el handler;
+6. D1 conserva cero filas y cero escrituras en la verificacion final;
+7. el endpoint publico y el sitio principal no cambiaron.
 
-Crear Access modifica permisos persistentes y crear Turnstile genera una credencial persistente. Ambos pasos requieren confirmacion humana en el momento de la accion.
+La autorizacion humana cubrio exclusivamente Access, Turnstile y sus bindings en estado OFF. No cubre la primera escritura sintetica.
 
 ## Rollback
 

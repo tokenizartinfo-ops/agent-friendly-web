@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-08-31
 
-**Estado:** canary Sites privado OFF desplegado; frontera Worker 6B.1 verificada localmente; Worker remoto pendiente
+**Estado:** canary Sites privado OFF desplegado; frontera Worker 6B.1 fusionada; Gate 6B.2 remoto OFF cerrado
 
 ## Objetivo
 
@@ -38,9 +38,9 @@ El cierre del bloque debe incluir pruebas negativas, build, PR y una matriz que 
 | preview publico | verificado | activo sin persistencia | no |
 | ruta staging | verificada fail-closed | privada, kill switch cerrado | no |
 | D1 staging | adapter preparado | aislada, migrada y vacia | no |
-| Turnstile staging | adapter preparado | no provisionado | no |
+| Turnstile staging | adapter preparado | provisionado y restringido al hostname privado | no |
 | rate limiting Sites | binding obligatorio | no disponible en Sites | no |
-| frontera Worker | JWT, CORS, limiter y D1 verificados | no desplegada | no |
+| frontera Worker | JWT, CORS, limiter y D1 verificados | desplegada detras de Access, escrituras OFF | no |
 | allowlist | parser y politica preparados | configurada para un unico actor | no |
 | correo | fuera del gate | no configurado | no |
 
@@ -52,14 +52,14 @@ Cada paso requiere autorizacion antes de la mutacion correspondiente:
 2. [completado] comprobar que el origen privado cierre el acceso anonimo;
 3. [completado] disponer D1 staging aislada y aplicar las migraciones del repositorio;
 4. [completado] verificar que `contact_leads` y `consent_receipts` esten vacias;
-5. [pendiente] crear Turnstile de prueba limitado al hostname privado;
-6. [pendiente] provisionar secret, Site Key y rate limiter sin exponer valores;
+5. [completado] crear Turnstile de prueba limitado al hostname privado;
+6. [completado] provisionar secret, Site Key y rate limiter sin exponer valores;
 7. [completado] configurar una allowlist inicial minima;
 8. [completado] desplegar con `CONTACT_STAGING_WRITES_ENABLED=false`;
-9. [parcial] ejecutar pruebas negativas de modo, host e identidad; limiter, Turnstile y escritura siguen cerrados;
+9. [completado] ejecutar pruebas negativas anonimas, mantener Turnstile y escritura cerrados y comprobar D1 vacia;
 10. [pendiente] abrir el kill switch para un unico actor y enviar solamente datos sinteticos;
 11. [pendiente] comprobar idempotencia, recibos y ausencia de correo;
-12. [pendiente] cerrar nuevamente el kill switch y registrar evidencia final.
+12. [pendiente Gate 6B.3] cerrar nuevamente el kill switch y registrar evidencia final.
 
 ## Rollback
 
@@ -73,13 +73,13 @@ El 2026-08-31 se desplego una instancia separada y owner-only en `https://agent-
 - hostname fijado al origen privado;
 - allowlist inicial de un unico actor operativo;
 - `CONTACT_STAGING_WRITES_ENABLED=false`;
-- sin Site Key ni secret Turnstile;
+- la instancia Sites original conserva su propia frontera sin Site Key ni secret Turnstile;
 - sin binding remoto de rate limiting;
 - sin correo, contactos reales, pagos ni trafico publico.
 
 La base aislada expone las trece tablas esperadas. `contact_leads` y `consent_receipts` tienen cero filas. Las pruebas remotas observaron `401` sin autenticacion, `404` para `/contact-staging` con el kill switch cerrado, `401 contact_staging_identity_required` para la API usando un bypass sin identidad y `503 contact_capture_disabled` en el endpoint publico.
 
-Este hito prueba aislamiento, migraciones y cierre por defecto. Gate 6B.1 agrego despues una frontera Worker local con rate limiting nativo, verificacion criptografica de Access, CORS exacto y adaptador D1 directo. No autoriza abrir escrituras: Gate 6B.2 debe desplegar esa frontera con el kill switch cerrado y provisionar Turnstile sin exponer secretos.
+Este hito prueba aislamiento, migraciones y cierre por defecto. Gate 6B.1 agrego despues una frontera Worker local con rate limiting nativo, verificacion criptografica de Access, CORS exacto y adaptador D1 directo. Gate 6B.2 desplego esa frontera con Access y Turnstile, mantuvo el kill switch cerrado y verifico cero filas. No autoriza abrir escrituras: Gate 6B.3 requiere una aprobacion separada.
 
 ## Verificacion local
 
