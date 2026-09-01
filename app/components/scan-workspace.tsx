@@ -35,8 +35,6 @@ type ScanWorkspaceProps = {
   locale?: 'es' | 'en' | 'pt';
 };
 
-const weights: Record<string, number> = { discovery: 20, answerability: 20, machineContent: 15, tools: 20, experimental: 10, trust: 10, commerce: 5 };
-
 export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps) {
   const copy = HOME_COPY[locale] || HOME_COPY.es;
   const [url, setUrl] = useState(() => normalizeSitePrefill(initialSite) || 'agentfriendlyweb.dev');
@@ -66,8 +64,8 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
   }
 
   const categories: Array<[string, Category & { help: string }]> = copy.categories.map(({ id, label, help }) => {
-    const observed = result?.readiness.categories[id];
-    return [id, observed ? { ...observed, label, help } : { label, help, score: 0, weight: weights[id], status: 'pending' }];
+    const observed = result?.readiness.categories[id] || PUBLIC_READINESS_REFERENCE.categories[id];
+    return [id, { ...observed, label, help }];
   });
 
   return (
@@ -134,9 +132,11 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
           <div className="section-heading">
             <div>
               <span>{copy.layers}</span>
-              <h2>{result ? copy.result : copy.measuring}</h2>
+              <h2>{result ? copy.result : copy.referenceBreakdown}</h2>
             </div>
-            {result ? <time dateTime={result.checkedAt}>{copy.updated}</time> : null}
+            <time dateTime={result?.checkedAt || PUBLIC_READINESS_REFERENCE.measuredAt}>
+              {result ? copy.updated : `${copy.referenceMeasured} ${PUBLIC_READINESS_REFERENCE.measuredAt}`}
+            </time>
           </div>
           <div className="category-list">
             {categories.map(([id, category]) => (
@@ -148,7 +148,7 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
                   <strong>{category.label}</strong>
                   <span>{category.help}</span>
                 </div>
-                <div className="category-score">{result ? `${category.score}/${category.weight}` : copy.pending}</div>
+                <div className="category-score">{`${category.score}/${category.weight}`}</div>
               </div>
             ))}
           </div>

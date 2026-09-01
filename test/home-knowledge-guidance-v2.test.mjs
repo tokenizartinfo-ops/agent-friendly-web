@@ -15,9 +15,21 @@ test('home reference is dated, accurate and bounded', async () => {
   assert.equal(PUBLIC_READINESS_REFERENCE.target, 'agentfriendlyweb.dev');
   assert.equal(PUBLIC_READINESS_REFERENCE.score, 95);
   assert.equal(PUBLIC_READINESS_REFERENCE.measuredAt, '2026-08-31');
+  assert.equal(
+    Object.values(PUBLIC_READINESS_REFERENCE.categories).reduce((sum, category) => sum + category.score, 0),
+    PUBLIC_READINESS_REFERENCE.score,
+  );
+  assert.deepEqual(PUBLIC_READINESS_REFERENCE.categories.commerce, {
+    score: 0,
+    weight: 5,
+    status: 'not_detected',
+  });
   assert.match(PUBLIC_READINESS_REFERENCE.boundary.es, /pagos|comercio/i);
   assert.match(scanSource, /PUBLIC_READINESS_REFERENCE\.score/);
   assert.match(scanSource, /PUBLIC_READINESS_REFERENCE\.measuredAt/);
+  assert.match(scanSource, /PUBLIC_READINESS_REFERENCE\.categories\[id\]/);
+  assert.match(scanSource, /copy\.referenceBreakdown/);
+  assert.doesNotMatch(scanSource, /result \? `\$\{category\.score\}\/\$\{category\.weight\}` : copy\.pending/);
   assert.doesNotMatch(scanSource, /:\s*'70'/);
 });
 
