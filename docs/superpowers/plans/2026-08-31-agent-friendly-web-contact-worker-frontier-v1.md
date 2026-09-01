@@ -273,22 +273,22 @@ Require GitHub CI green and inspect the complete diff for secrets, public-route 
 - Consumes: merged Worker source and approved Cloudflare account.
 - Produces: Worker staging reachable only through Access, D1 migrated and empty, writes false.
 
-- [ ] **Step 1: Crear recursos sin abrir escrituras**
+- [x] **Step 1: Crear recursos sin abrir escrituras**
 
 Deploy the staging Worker with automatic D1 provisioning and native rate limiting. Configure the custom hostname, an Access application with one allowed email, exact issuer/audience values, Turnstile test widget and secrets through Cloudflare controls. Keep `CONTACT_STAGING_WRITES_ENABLED=false`.
 
-- [ ] **Step 2: Apply migrations and inspect read-only state**
+- [x] **Step 2: Apply migrations and inspect read-only state**
 
 Apply `drizzle/0000` through `0005` to the Worker D1. Query only schema and row counts; require zero `contact_leads` and zero `consent_receipts`.
 
-- [ ] **Step 3: Run remote negative smokes**
+- [x] **Step 3: Run remote negative smokes**
 
-Confirm anonymous Access denial, wrong origin denial, OFF response before body, public endpoint unchanged and no rows. Do not submit a valid form.
+Confirm anonymous Access denial and preflight denial remotely. Retain wrong-origin denial and OFF-before-body ordering in the local suite. Confirm the public endpoint is unchanged and D1 has no rows. Do not submit a valid form.
 
-- [ ] **Step 4: Record rollback and remote evidence**
+- [x] **Step 4: Record rollback and remote evidence**
 
 Document Worker version, config hash, D1 migration state, Access boundary, negative responses and zero rows without recording tokens, secrets, email values or audience tags.
 
-- [ ] **Step 5: Stop before synthetic write**
+- [x] **Step 5: Stop before synthetic write**
 
 Subgate 6B.3 requires una nueva aprobacion explicita para abrir el kill switch y ejecutar una unica solicitud sintetica e idempotente.

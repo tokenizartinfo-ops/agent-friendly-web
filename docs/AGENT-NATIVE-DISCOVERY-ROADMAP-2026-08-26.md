@@ -217,7 +217,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 13. **Bloque 5D - canary remoto verificado:** contrato y ejecucion de un unico Draft PR GitHub en `tokenizartinfo-ops/agent-friendly-web-synthetic-origin`, archivo `llms.txt`, base `main`, capacidad efimera por alias y recibo metadata-only. El PR #1 permanece Draft, abierto y sin merge; no hubo deployment ni cambios sobre un origen real.
 14. **Home Guided Journey v1 - desplegado y verificado:** orden humano `La llamada -> F0-F5 -> diagnostico -> comparador -> archivo -> siguientes caminos`, hero responsive y archivo progresivo. Se publico en Sites 30 sin cambiar metodologia, puntajes ni permisos.
 15. **Gate 6A - Traccion F1: documentacion y arquitectura en preparacion.** Beachhead cultural, canal de agencias, Discovery Pack, embudo, KPIs, contacto consentido, correo y comercio agentico separados.
-16. **Gate 6B - captura consentida local preparada:** preview publico cerrado y ruta candidata de staging separada con hostname exacto, identidad, allowlist, kill switch, rate limiting obligatorio, cuerpo acotado, Turnstile y D1 aislada. Infraestructura remota, datos reales y correo siguen deshabilitados.
+16. **Gate 6B - captura consentida remota OFF cerrada:** preview publico cerrado y ruta candidata de staging separada con hostname exacto, Access allowlist, Turnstile restringido, kill switch, rate limiting obligatorio, cuerpo acotado y D1 remota aislada y vacia. Gate 6B.2 esta cerrado con escrituras OFF. Datos reales y correo siguen deshabilitados.
 17. **Gate 6C - correo operativo, frontera local preparada:** politica `planned_draft_only`, aliases normalizados, consentimiento separado, idempotencia y revision humana para asuntos sensibles. DNS, casillas, routing, proveedor y envio requieren aprobacion separada.
 18. **Gate 6D - ventas y CRM ligero, frontera local preparada:** pipeline y transiciones `local_planning_only`, metadata sin PII, perdida razonada e idempotencia. D1, datos reales, scoring, propuestas y pagos requieren aprobacion separada.
 19. **Gate 6E - primer piloto pago humano:** catalogo, checkout, recibo, conciliacion y una entrega medida.
@@ -300,7 +300,7 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 
 ## Gate inmediato
 
-Gate 6A quedo cerrado. El gate inmediato es **6B remoto - staging privado sin datos reales**, sujeto a aprobaciones separadas. La decision completa vive en:
+Gate 6A y Gate 6B.2 remoto OFF quedaron cerrados. El gate inmediato posible es **6B.3: una unica escritura sintetica e idempotente**, pero permanece detenido hasta una aprobacion humana separada. La decision completa vive en:
 
 - `docs/GROWTH-AND-MONETIZATION-ROADMAP-2026-08-31.md`;
 - `docs/INITIAL-GO-TO-MARKET-AND-SALES-MOTION-V1.md`;
@@ -318,7 +318,7 @@ Gate 6D dispone ademas de un planificador local `local_planning_only` que separa
 
 La reconciliacion publica del 2026-08-31 corrige el placeholder de la home que presentaba como `Pendiente` el desglose de una referencia ya medida en 95/100. Tambien incorpora los contratos 6C/6D al inventario publico con estados exclusivamente documentales. A2A, x402, correo operativo, contactos reales y CRM remoto siguen sin contabilizarse como desplegados. La evidencia vive en `docs/PUBLIC-SITE-STATUS-RECONCILIATION-2026-08-31.md`.
 
-El canary privado OFF de Gate 6B ya valida aislamiento, D1 migrada y cierre por defecto sin contactos. Gate 6B.1 implementa localmente un Worker privado dedicado con Cloudflare Access firmado, CORS exacto, rate limiting nativo, Turnstile obligatorio y D1 propia. Sus 357 pruebas, build y dry-run estan aprobados; no existe aun infraestructura Worker remota. Gate 6B.2 solo puede desplegarla con escrituras OFF y smokes negativos. La primera escritura sintetica pertenece a Gate 6B.3 y requiere aprobacion separada. La especificacion y evidencia viven en `docs/superpowers/specs/2026-08-31-agent-friendly-web-contact-worker-frontier-v1-design.md` y `docs/BLOCK-6B1-CONTACT-WORKER-LOCAL-2026-08-31.md`.
+El canary privado OFF de Gate 6B valida aislamiento, Access deny-by-default, Turnstile restringido, D1 migrada y cierre sin contactos. Gate 6B.1 implemento y fusiono un Worker privado dedicado con Cloudflare Access firmado, CORS exacto, rate limiting nativo, Turnstile obligatorio y D1 propia. Sus 357 pruebas, build y dry-run estan aprobados. Gate 6B.2 creo la frontera remota completa, mantuvo escrituras OFF y comprobo cero filas. La primera escritura sintetica pertenece a Gate 6B.3 y requiere aprobacion separada. La especificacion y evidencia viven en `docs/superpowers/specs/2026-08-31-agent-friendly-web-contact-worker-frontier-v1-design.md`, `docs/BLOCK-6B1-CONTACT-WORKER-LOCAL-2026-08-31.md` y `docs/BLOCK-6B2-CONTACT-WORKER-REMOTE-OFF.md`.
 
 El gate publico de los Bloques 2 y 3 se cerro el 2026-08-27. La revision humana verifico sectores, idiomas, comparador, intake, rechazo de secretos, ausencia de persistencia local, contratos publicos y una nueva auditoria del origen. La evidencia completa vive en `docs/BLOCK-2-3-BROWSER-AND-ORIGIN-GATE-2026-08-27.md`.
 
