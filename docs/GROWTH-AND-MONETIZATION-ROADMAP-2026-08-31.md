@@ -55,6 +55,8 @@ La version publica permite completar y revisar localmente la solicitud, pero no 
 
 **Direccion canonica candidata:** `hello@agentfriendlyweb.dev`.
 
+**Estado local:** politica `planned_draft_only` implementada y probada. Clasifica metadata minima, normaliza aliases, separa consentimiento transaccional de marketing y obliga revision humana para asuntos sensibles. No existen DNS, casillas, routing, proveedor ni envio; toda activacion remota requiere aprobacion separada.
+
 Aliases locales: `hola@agentfriendlyweb.dev` y `ola@agentfriendlyweb.dev`. Todos llegan a la misma operacion; no se crean silos por idioma.
 
 - recepcion y routing desde Cloudflare;
@@ -64,6 +66,8 @@ Aliases locales: `hola@agentfriendlyweb.dev` y `ola@agentfriendlyweb.dev`. Todos
 - revision humana para compromisos, pagos, incidentes y asuntos sensibles;
 - logs sin cuerpos completos ni secretos;
 - politica de tiempos de respuesta.
+
+El cierre local se documenta en `docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-2026-08-31.md`. El gate solo se considerara operativo despues de verificar routing de entrada, autenticacion del remitente, proveedor de salida, canary allowlisted y rollback.
 
 ### Gate 6D - Ventas y CRM ligero
 

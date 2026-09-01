@@ -218,7 +218,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 14. **Home Guided Journey v1 - desplegado y verificado:** orden humano `La llamada -> F0-F5 -> diagnostico -> comparador -> archivo -> siguientes caminos`, hero responsive y archivo progresivo. Se publico en Sites 30 sin cambiar metodologia, puntajes ni permisos.
 15. **Gate 6A - Traccion F1: documentacion y arquitectura en preparacion.** Beachhead cultural, canal de agencias, Discovery Pack, embudo, KPIs, contacto consentido, correo y comercio agentico separados.
 16. **Gate 6B - captura consentida local preparada:** preview publico cerrado y ruta candidata de staging separada con hostname exacto, identidad, allowlist, kill switch, rate limiting obligatorio, cuerpo acotado, Turnstile y D1 aislada. Infraestructura remota, datos reales y correo siguen deshabilitados.
-17. **Gate 6C - correo operativo:** routing, remitente, playbook, automatizaciones allowlisted y revision humana para asuntos sensibles.
+17. **Gate 6C - correo operativo, frontera local preparada:** politica `planned_draft_only`, aliases normalizados, consentimiento separado, idempotencia y revision humana para asuntos sensibles. DNS, casillas, routing, proveedor y envio requieren aprobacion separada.
 18. **Gate 6D - ventas y CRM ligero:** pipeline, calificacion, propuestas, costos y motivos de ganancia/perdida.
 19. **Gate 6E - primer piloto pago humano:** catalogo, checkout, recibo, conciliacion y una entrega medida.
 20. **Gate 6F - comercio agentico sandbox:** un recurso read-only, x402/MPP, idempotencia y recibos sin dinero real al inicio.
@@ -311,6 +311,8 @@ Gate 6A quedo cerrado. El gate inmediato es **6B remoto - staging privado sin da
 La primera oferta paga propuesta es un Discovery Pack F0/F1 a F3 para arte, cultura, coleccionismo e instituciones con patrimonio. Las agencias y mantenedores web forman el primer canal multiplicador. La auditoria publica permanece gratuita y visible sin email; solicitar un plan y recibir marketing son consentimientos distintos.
 
 La implementacion local de Gate 6B agrega una ruta candidata separada y pruebas fail-closed, pero no activa correo, D1 remota de leads, Turnstile remoto, pagos, x402, OAuth, A2A ni cambios DNS. El siguiente gate ejecutable es crear el staging privado y sus bindings con datos sinteticos; cada mutacion remota conserva aprobacion separada.
+
+La frontera local de Gate 6C tambien esta implementada como `planned_draft_only`: acepta solo metadata minima saneada, rechaza cuerpos, adjuntos y secretos probables, y nunca envia. Su publicacion o conexion con DNS, routing y proveedores requiere aprobacion separada. La evidencia vive en `docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-2026-08-31.md`.
 
 El gate publico de los Bloques 2 y 3 se cerro el 2026-08-27. La revision humana verifico sectores, idiomas, comparador, intake, rechazo de secretos, ausencia de persistencia local, contratos publicos y una nueva auditoria del origen. La evidencia completa vive en `docs/BLOCK-2-3-BROWSER-AND-ORIGIN-GATE-2026-08-27.md`.
 

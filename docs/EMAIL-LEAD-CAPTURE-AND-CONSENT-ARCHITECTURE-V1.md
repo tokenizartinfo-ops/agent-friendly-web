@@ -171,8 +171,11 @@ Cloudflare Web Analytics puede medir trafico agregado sin reemplazar los consent
 - el cuerpo JSON se limita a 8 KiB mediante lectura incremental;
 - la pagina candidata utiliza solamente `example.com` y queda fuera de sitemap, navegacion e indexacion;
 - no se crearon recursos remotos, no se aplicaron migraciones y no se habilitaron datos reales.
+- Gate 6C incorpora una politica local `planned_draft_only` que clasifica solo metadata minima y no acepta cuerpos completos ni adjuntos;
+- la politica separa solicitudes transaccionales de consentimiento para novedades, exige revision humana en asuntos sensibles y no puede enviar;
+- DNS, casillas, routing y proveedor siguen sujetos a aprobacion separada.
 
-El detalle de implementacion y rollback vive en `docs/BLOCK-6B-CONTACT-STAGING-ALLOWLIST-V1.md`.
+El detalle de implementacion y rollback vive en `docs/BLOCK-6B-CONTACT-STAGING-ALLOWLIST-V1.md` y `docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-2026-08-31.md`.
 
 ## Pruebas negativas obligatorias
 
