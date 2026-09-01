@@ -13,6 +13,7 @@ type ContactIntakeProps = {
   captureEnabled?: boolean;
   endpoint?: string;
   turnstileSiteKey?: string;
+  syntheticTokenProbe?: boolean;
 };
 
 const blankForm = {
@@ -26,6 +27,7 @@ export function ContactIntake({
   captureEnabled = false,
   endpoint = '/api/contact-intake',
   turnstileSiteKey = '',
+  syntheticTokenProbe = false,
 }: ContactIntakeProps) {
   const copy = CONTACT_COPY[locale] || CONTACT_COPY.es;
   const [open, setOpen] = useState(false);
@@ -117,6 +119,14 @@ export function ContactIntake({
           </ul>
           <p>{copy.notSent}</p>
           {captureEnabled && turnstileSiteKey ? <TurnstileWidget siteKey={turnstileSiteKey} onToken={setTurnstileToken} /> : null}
+          {syntheticTokenProbe ? (
+            <input
+              type="hidden"
+              data-afw-synthetic-turnstile-token
+              value={turnstileToken}
+              readOnly
+            />
+          ) : null}
           <div className="contact-actions">
             <button type="button" className="secondary-button" onClick={() => setPreview(false)}><ArrowLeft size={16} /> {copy.edit}</button>
             <button type="button" disabled={!captureEnabled || !turnstileToken || sending} onClick={send}><Send size={16} /> {captureEnabled ? copy.send : copy.unavailable}</button>

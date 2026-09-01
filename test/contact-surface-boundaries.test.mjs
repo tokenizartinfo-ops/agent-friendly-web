@@ -42,3 +42,13 @@ test('staging contact is a separate fail-closed route and the public component k
   assert.match(page, /robots: \{ index: false, follow: false/);
   assert.doesNotMatch(sitemap, /contact-staging/);
 });
+
+test('private contact staging exposes the one-time Turnstile response only for the synthetic gate', async () => {
+  const component = await readFile('app/components/contact-intake.tsx', 'utf8');
+  const page = await readFile('app/contact-staging/page.tsx', 'utf8');
+
+  assert.match(component, /syntheticTokenProbe\?: boolean/);
+  assert.match(component, /data-afw-synthetic-turnstile-token/);
+  assert.match(page, /syntheticTokenProbe/);
+  assert.doesNotMatch(await readFile('app/components/scan-workspace.tsx', 'utf8'), /syntheticTokenProbe/);
+});

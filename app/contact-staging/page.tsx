@@ -49,6 +49,7 @@ export default async function ContactStagingPage() {
           captureEnabled
           endpoint="/api/staging/contact-intake"
           turnstileSiteKey={siteKey}
+          syntheticTokenProbe
         />
       </section>
     </main>
