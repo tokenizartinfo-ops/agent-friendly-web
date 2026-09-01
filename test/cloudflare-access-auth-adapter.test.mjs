@@ -24,4 +24,3 @@ test('private web identity exposes a bounded logout and fail-closed redirect', (
   assert.match(source, /requireCloudflareAccessUser/);
   assert.match(source, /redirect\(/);
 });
-

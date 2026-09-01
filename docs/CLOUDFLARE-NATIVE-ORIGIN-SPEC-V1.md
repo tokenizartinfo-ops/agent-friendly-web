@@ -1,8 +1,8 @@
 # Agent Friendly Web Cloudflare-native origin v1
 
-**Estado:** candidato local implementado y verificado; canary remoto y trafico pendientes  
-**Fecha:** 2026-09-01  
-**Owner:** Gabriel Mucchiut  
+**Estado:** candidato local implementado y verificado; canary remoto y trafico pendientes
+**Fecha:** 2026-09-01
+**Owner:** Gabriel Mucchiut
 **Repositorio:** `tokenizartinfo-ops/agent-friendly-web`
 
 ## Decision
