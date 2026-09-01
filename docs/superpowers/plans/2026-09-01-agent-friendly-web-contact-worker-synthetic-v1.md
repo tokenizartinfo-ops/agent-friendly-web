@@ -1,5 +1,7 @@
 # Gate 6B.3 Contact Worker Synthetic Write Plan
 
+> **Superseded 2026-09-01:** execution stopped before the first write. The private `*.tokenizart.chatgpt.site` staging UI was retired and restored to its closed version. Do not resume this plan or merge PR #39 as written. A replacement canary must use a dedicated `agentfriendlyweb.dev` subdomain with same-origin Cloudflare UI/API.
+
 > **For Codex:** execute this plan from an isolated worktree and preserve the OFF version as the first rollback control.
 
 **Goal:** Probar una unica captura sintetica e idempotente en la frontera privada de contacto, verificar su evidencia y volver a cerrar toda escritura.

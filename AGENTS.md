@@ -7,9 +7,18 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 ## Canonical surfaces
 
 - `public_web`: `https://agentfriendlyweb.dev`, the public Sites website. The committed `.openai/hosting.json` must always point to this project.
-- `contact_staging_ui`: the private `tokenizart.chatgpt.site` Sites project used only as the authenticated human test interface. It is not production and cannot write directly.
-- `contact_staging_api`: `https://contact-staging.agentfriendlyweb.dev`, the Access-protected Cloudflare Worker API with an isolated D1 and kill switch. It never serves the human UI; `/health` is JSON only.
-- Read `config/surface-environments.json` and run the matching `sites:assert:*` command before every Sites publication. Never infer the target from an open browser tab.
+- `afw_contact_sites_legacy`: the private `tokenizart.chatgpt.site` project was retired on 2026-09-01 before any synthetic write. Do not deploy or use it as staging.
+- `afw_contact_worker_legacy`: `https://contact-staging.agentfriendlyweb.dev` remains Access-protected, write-disabled and attached only to its isolated empty D1 while replacement/retirement is decided.
+- `afw_canary`: any future remote canary must use a dedicated `agentfriendlyweb.dev` subdomain, Cloudflare Access and same-origin UI/API. It must not use `*.chatgpt.site`.
+- Read the project boundary audit before changing this branch. Run `sites:assert:public` before every public Sites publication. Never infer the target from an open browser tab.
+
+## Project boundary
+
+- Active project: Agent Friendly Web.
+- Canonical repository: `tokenizartinfo-ops/agent-friendly-web`.
+- Tokenizart is a documented customer/case only. Its `tokenizart-*` repositories, Workers, D1, R2, Access apps, Companion, Copilot, Owner Live, Atelier, RAG and Secret Broker are forbidden deployment targets from this repository.
+- The Cloudflare account, GitHub organization, authentication email and Sites workspace namespace are shared administrative containers, not proof of resource ownership.
+- Before any remote action declare `PROJECT`, `REPOSITORY`, `ENVIRONMENT`, `ORIGIN`, `RESOURCE_TYPE`, `RESOURCE_ID`, `ALLOWED_ACTION` and `ROLLBACK`.
 
 ## Truth and standards
 
