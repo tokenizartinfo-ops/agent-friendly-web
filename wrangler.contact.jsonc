@@ -1,0 +1,50 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "agent-friendly-web-contact-staging-frontier",
+  "main": "worker/contact/index.mjs",
+  "compatibility_date": "2026-08-31",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "env": {
+    "staging": {
+      "name": "agent-friendly-web-contact-staging-frontier",
+      "workers_dev": true,
+      "preview_urls": false,
+      "vars": {
+        "CONTACT_STAGING_MODE": "staging_allowlist",
+        "CONTACT_STAGING_WRITES_ENABLED": "false",
+        "CONTACT_STAGING_API_HOST": "contact-staging.agentfriendlyweb.dev",
+        "CONTACT_STAGING_FORM_ORIGIN": "https://agent-friendly-web-contact-staging.tokenizart.chatgpt.site",
+        "CONTACT_STAGING_WIDGET_HOST": "agent-friendly-web-contact-staging.tokenizart.chatgpt.site"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "agent-friendly-web-contact-staging-frontier",
+          "migrations_dir": "drizzle"
+        }
+      ],
+      "ratelimits": [
+        {
+          "name": "CONTACT_STAGING_RATE_LIMITER",
+          "namespace_id": "6831",
+          "simple": {
+            "limit": 10,
+            "period": 60
+          }
+        }
+      ],
+      "routes": [
+        {
+          "pattern": "contact-staging.agentfriendlyweb.dev",
+          "custom_domain": true
+        }
+      ]
+    }
+  }
+}
