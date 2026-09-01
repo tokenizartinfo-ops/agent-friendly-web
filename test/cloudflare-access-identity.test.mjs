@@ -15,7 +15,7 @@ async function accessToken(claims = {}, options = {}) {
     email: ' Owner@Example.com ',
     ...claims,
   })
-    .setProtectedHeader({ alg: 'RS256', kid: 'test-key' })
+    .setProtectedHeader({ alg: 'RS256', kid: 'test-key', typ: options.typ === undefined ? 'JWT' : options.typ })
     .setIssuer(options.issuer || issuer)
     .setAudience(options.audience || audience)
     .setSubject(options.subject === undefined ? 'owner-1' : options.subject)
@@ -58,7 +58,9 @@ test('fails closed for wrong issuer, audience or expiration without returning cl
 test('requires subject and normalized email claims', async () => {
   const missingEmail = await accessToken({ email: '' });
   const missingSubject = await accessToken({}, { subject: '' });
-  for (const token of [missingEmail, missingSubject]) {
+  const oversizedSubject = await accessToken({}, { subject: 'a'.repeat(201) });
+  const wrongType = await accessToken({}, { typ: 'JOSE' });
+  for (const token of [missingEmail, missingSubject, oversizedSubject, wrongType]) {
     assert.deepEqual(await verifyCloudflareAccessJwt({
       token,
       teamDomain: 'tokenizart.cloudflareaccess.com',

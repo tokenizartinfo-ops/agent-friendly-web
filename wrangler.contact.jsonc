@@ -4,7 +4,7 @@
   "main": "worker/contact/index.mjs",
   "compatibility_date": "2026-08-31",
   "compatibility_flags": ["nodejs_compat"],
-  "workers_dev": true,
+  "workers_dev": false,
   "preview_urls": false,
   "observability": {
     "enabled": true,
@@ -13,7 +13,7 @@
   "env": {
     "staging": {
       "name": "agent-friendly-web-contact-staging-frontier",
-      "workers_dev": true,
+      "workers_dev": false,
       "preview_urls": false,
       "vars": {
         "CONTACT_STAGING_MODE": "staging_allowlist",

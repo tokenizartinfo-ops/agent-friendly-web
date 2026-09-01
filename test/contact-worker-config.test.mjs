@@ -10,6 +10,8 @@ test('contact Worker staging config binds isolated D1 and native rate limiting w
   const config = JSON.parse(fs.readFileSync(path.join(root, 'wrangler.contact.jsonc'), 'utf8'));
   const staging = config.env.staging;
   assert.equal(config.main, 'worker/contact/index.mjs');
+  assert.equal(config.workers_dev, false);
+  assert.equal(staging.workers_dev, false);
   assert.equal(staging.vars.CONTACT_STAGING_WRITES_ENABLED, 'false');
   assert.equal(staging.vars.CONTACT_STAGING_MODE, 'staging_allowlist');
   assert.deepEqual(staging.d1_databases, [{
