@@ -291,5 +291,4 @@ Document Worker version, config hash, D1 migration state, Access boundary, negat
 
 - [ ] **Step 5: Stop before synthetic write**
 
-Subgate 6B.3 requires a new explicit approval to open the kill switch for one synthetic idempotent request.
-
+Subgate 6B.3 requires una nueva aprobacion explicita para abrir el kill switch y ejecutar una unica solicitud sintetica e idempotente.
