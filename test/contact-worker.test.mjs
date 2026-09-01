@@ -58,6 +58,7 @@ test('contact Worker exposes a no-store health receipt without opening writes', 
   assert.equal(response.headers.get('cache-control'), 'no-store');
   assert.deepEqual(await response.json(), {
     service: 'agent-friendly-web-contact-staging-frontier',
+    surface: 'contact_staging_api',
     status: 'deployed',
     mode: 'staging_allowlist',
     writes: false,
@@ -184,6 +185,102 @@ test('default contact gate passes the exact widget hostname to Turnstile and nev
   assert.equal(JSON.stringify(observed.saved).includes('single-use-browser-token'), false);
 });
 
+test('synthetic Turnstile mode accepts only the fixed canary payload and drops production claims', async () => {
+  const privateUiOrigin = 'https://agent-friendly-web-contact-staging.tokenizart.chatgpt.site';
+  const observed = {};
+  const syntheticInput = {
+    email: 'gate-6b3-canary@example.com',
+    name: 'Caso sintetico Gate 6B.3',
+    domain: 'example.com',
+    role: 'synthetic_test',
+    organization: 'Agent Friendly Web Synthetic',
+    locale: 'es',
+    objective: 'receive_plan',
+    source: 'public_audit',
+    idempotencyKey: '6ba7b810-9dad-41d1-80b4-00c04fd430c8',
+    requestedPlanConsent: true,
+    commercialContactConsent: false,
+    productUpdatesConsent: false,
+    turnstileToken: 'XXXX.DUMMY.TOKEN.XXXX',
+  };
+  const worker = createContactWorker({
+    verifyAccessJwt: dependencies().verifyAccessJwt,
+    readJson: async () => ({ ok: true, value: syntheticInput }),
+    verifyTurnstile: async (input) => {
+      observed.turnstile = input;
+      return { success: true };
+    },
+    saveContact: async (_database, normalized) => {
+      observed.saved = normalized;
+      return { leadId: 'lead-synthetic', duplicate: false, conflict: false };
+    },
+  });
+  const response = await worker.fetch(request({
+    headers: { origin: privateUiOrigin },
+  }), {
+    ...baseEnv,
+    CONTACT_STAGING_FORM_ORIGIN: privateUiOrigin,
+    CONTACT_SYNTHETIC_GATE_ENABLED: 'true',
+    CONTACT_SYNTHETIC_TURNSTILE_TEST: 'true',
+    CONTACT_STAGING_TURNSTILE_SECRET: '1x0000000000000000000000000000000AA',
+  });
+  assert.equal(response.status, 201);
+  assert.equal(observed.turnstile.action, '');
+  assert.equal(observed.turnstile.hostname, '');
+  assert.equal(observed.turnstile.token, 'XXXX.DUMMY.TOKEN.XXXX');
+  assert.equal(JSON.stringify(observed.saved).includes('XXXX.DUMMY.TOKEN.XXXX'), false);
+});
+
+test('synthetic Turnstile mode rejects any payload outside the fixed canary', async () => {
+  const privateUiOrigin = 'https://agent-friendly-web-contact-staging.tokenizart.chatgpt.site';
+  const calls = [];
+  const worker = createContactWorker({
+    ...dependencies(calls),
+    readJson: async () => ({
+      ok: true,
+      value: {
+        email: 'other@example.com',
+        domain: 'example.com',
+        turnstileToken: 'XXXX.DUMMY.TOKEN.XXXX',
+      },
+    }),
+  });
+  const response = await worker.fetch(request({
+    headers: { origin: privateUiOrigin },
+  }), {
+    ...baseEnv,
+    CONTACT_STAGING_FORM_ORIGIN: privateUiOrigin,
+    CONTACT_SYNTHETIC_GATE_ENABLED: 'true',
+    CONTACT_SYNTHETIC_TURNSTILE_TEST: 'true',
+    CONTACT_STAGING_TURNSTILE_SECRET: '1x0000000000000000000000000000000AA',
+  });
+  assert.equal(response.status, 403);
+  assert.equal((await response.json()).code, 'synthetic_gate_payload_mismatch');
+  assert.deepEqual(calls, ['jwt']);
+});
+
+test('partial synthetic configuration fails closed before identity, quota or body access', async () => {
+  for (const partialFlags of [
+    { CONTACT_SYNTHETIC_GATE_ENABLED: 'true' },
+    { CONTACT_SYNTHETIC_TURNSTILE_TEST: 'true' },
+    {
+      CONTACT_SYNTHETIC_GATE_ENABLED: 'true',
+      CONTACT_SYNTHETIC_TURNSTILE_TEST: 'false',
+    },
+  ]) {
+    const calls = [];
+    const worker = createContactWorker(dependencies(calls));
+    const response = await worker.fetch(request(), {
+      ...baseEnv,
+      ...partialFlags,
+    });
+
+    assert.equal(response.status, 503);
+    assert.equal((await response.json()).code, 'contact_staging_misconfigured');
+    assert.deepEqual(calls, []);
+  }
+});
+
 test('preflight never verifies identity and unknown routes stay unavailable', async () => {
   const calls = [];
   const worker = createContactWorker(dependencies(calls));
@@ -201,6 +298,48 @@ test('preflight never verifies identity and unknown routes stay unavailable', as
     url: 'https://contact-staging.agentfriendlyweb.dev/private',
   }), baseEnv);
   assert.equal(missing.status, 404);
+});
+
+test('health remains a JSON API response even when the synthetic gate is enabled', async () => {
+  const workerOrigin = 'https://contact-staging.agentfriendlyweb.dev';
+  const privateUiOrigin = 'https://agent-friendly-web-contact-staging.tokenizart.chatgpt.site';
+  const calls = [];
+  const worker = createContactWorker(dependencies(calls));
+  const response = await worker.fetch(
+    request({ method: 'GET', url: `${workerOrigin}/health` }),
+    {
+      ...baseEnv,
+      CONTACT_SYNTHETIC_GATE_ENABLED: 'true',
+      CONTACT_SYNTHETIC_TURNSTILE_TEST: 'true',
+      CONTACT_STAGING_TURNSTILE_SECRET: '1x0000000000000000000000000000000AA',
+      CONTACT_STAGING_FORM_ORIGIN: privateUiOrigin,
+    },
+  );
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get('content-type'), /application\/json/);
+  assert.deepEqual(await response.json(), {
+    service: 'agent-friendly-web-contact-staging-frontier',
+    surface: 'contact_staging_api',
+    status: 'deployed',
+    mode: 'staging_allowlist',
+    writes: true,
+  });
+  assert.deepEqual(calls, []);
+});
+
+test('health never embeds the synthetic browser payload or testing token', async () => {
+  const response = await createContactWorker(dependencies()).fetch(request({
+    method: 'GET',
+    url: 'https://contact-staging.agentfriendlyweb.dev/health',
+  }), {
+    ...baseEnv,
+    CONTACT_SYNTHETIC_GATE_ENABLED: 'true',
+    CONTACT_SYNTHETIC_TURNSTILE_TEST: 'true',
+    CONTACT_STAGING_TURNSTILE_SECRET: '1x0000000000000000000000000000000AA',
+  });
+  const body = await response.text();
+  assert.doesNotMatch(body, /data-afw-synthetic-worker-gate/);
+  assert.doesNotMatch(body, /XXXX\.DUMMY\.TOKEN\.XXXX/);
 });
 
 test('unexpected internal errors return only a stable sanitized response', async () => {

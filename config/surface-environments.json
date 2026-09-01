@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "surfaces": {
+    "public_web": {
+      "kind": "sites_public",
+      "origin": "https://agentfriendlyweb.dev",
+      "projectId": "appgprj_6a8f19e35d688191a53e93432543e39c",
+      "hostingConfig": ".openai/hosting.json",
+      "canWrite": false,
+      "purpose": "Sitio publico canonico para personas y agentes"
+    },
+    "contact_staging_ui": {
+      "kind": "sites_private",
+      "origin": "https://agent-friendly-web-contact-staging.tokenizart.chatgpt.site",
+      "projectId": "appgprj_6a9626e7c0988191af5625107dd55ba7",
+      "hostingConfig": ".openai/hosting.contact-staging.json",
+      "canWrite": false,
+      "purpose": "Interfaz privada de prueba; nunca es el sitio publico ni el API"
+    },
+    "contact_staging_api": {
+      "kind": "cloudflare_worker_api",
+      "origin": "https://contact-staging.agentfriendlyweb.dev",
+      "service": "agent-friendly-web-contact-staging-frontier",
+      "servesHumanUi": false,
+      "purpose": "API privada protegida por Access con kill switch y D1 aislada"
+    }
+  }
+}

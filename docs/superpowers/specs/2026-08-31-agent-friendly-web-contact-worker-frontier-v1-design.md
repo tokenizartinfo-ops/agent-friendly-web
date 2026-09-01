@@ -30,6 +30,8 @@ Reduce duplicacion de handler, pero crea una frontera de identidad confusa: la s
 
 Implementar el enfoque A como servicio de staging independiente. El canary Sites permanece owner-only y con escrituras deshabilitadas. La produccion publica conserva `POST /api/contact-intake` en `503 contact_capture_disabled`.
 
+La visibilidad de la interfaz y la capacidad de escribir son controles distintos: Sites usa `CONTACT_STAGING_UI_ENABLED` para mostrar el formulario privado y conserva `CONTACT_STAGING_WRITES_ENABLED=false`. El Worker usa su propio kill switch de escritura. El Worker no sirve interfaz humana y su `/health` permanece JSON-only.
+
 ## Componentes
 
 ### Host y Access

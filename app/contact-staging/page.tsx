@@ -6,10 +6,11 @@ import { ContactIntake } from '../components/contact-intake';
 import { SiteHeader } from '../components/site-header';
 import { getChatGPTUser } from '../chatgpt-auth';
 // @ts-expect-error Shared ESM module is exercised directly by Node tests.
-import { authorizeContactStaging, readContactStagingPolicy } from '../../lib/contact-staging-policy.mjs';
+import { authorizeContactStagingView, readContactStagingPolicy } from '../../lib/contact-staging-policy.mjs';
 
 type ContactStagingPageBindings = {
   CONTACT_STAGING_MODE?: string;
+  CONTACT_STAGING_UI_ENABLED?: string;
   CONTACT_STAGING_WRITES_ENABLED?: string;
   CONTACT_STAGING_EXPECTED_HOST?: string;
   CONTACT_STAGING_ALLOWED_EMAILS?: string;
@@ -27,7 +28,7 @@ export default async function ContactStagingPage() {
   const policy = readContactStagingPolicy(bindings);
   const requestHeaders = await headers();
   const user = await getChatGPTUser();
-  const authorization = authorizeContactStaging(policy, requestHeaders.get('host') || '', {
+  const authorization = authorizeContactStagingView(policy, requestHeaders.get('host') || '', {
     userId: user?.userId || '',
     email: user?.email || '',
   });
@@ -35,12 +36,12 @@ export default async function ContactStagingPage() {
   if (!authorization.allowed || !siteKey) notFound();
 
   return (
-    <main lang="es">
+    <main lang="es" data-afw-surface="contact_staging_ui">
       <SiteHeader locale="es" routeKey="home" />
       <section className="content-hero compact-hero">
         <div className="eyebrow">Gate 6B · staging privado</div>
         <h1>Prueba sintetica de contacto consentido</h1>
-        <p>Esta pantalla no envia correo y solo utiliza la base aislada del entorno privado. El dominio de prueba permanece fijado en example.com.</p>
+        <p>Esta es la interfaz privada de Sites. No es la web publica ni el Worker API. No envia correo y el dominio de prueba permanece fijado en example.com.</p>
       </section>
       <section className="content-section">
         <ContactIntake

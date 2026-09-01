@@ -3,11 +3,13 @@ import test from 'node:test';
 
 import {
   authorizeContactStaging,
+  authorizeContactStagingView,
   readContactStagingPolicy,
 } from '../lib/contact-staging-policy.mjs';
 
 const rawConfig = {
   CONTACT_STAGING_MODE: 'staging_allowlist',
+  CONTACT_STAGING_UI_ENABLED: 'true',
   CONTACT_STAGING_WRITES_ENABLED: 'true',
   CONTACT_STAGING_EXPECTED_HOST: 'contact-staging.example.com',
   CONTACT_STAGING_ALLOWED_EMAILS: ' Gabriel@Example.com, reviewer@example.com ',
@@ -18,9 +20,38 @@ const identity = { userId: 'user-123', email: 'gabriel@example.com' };
 test('contact staging policy normalizes the private hostname and exact email allowlist', () => {
   const policy = readContactStagingPolicy(rawConfig);
   assert.equal(policy.mode, 'staging_allowlist');
+  assert.equal(policy.uiEnabled, true);
   assert.equal(policy.writesEnabled, true);
   assert.equal(policy.expectedHost, 'contact-staging.example.com');
   assert.deepEqual(policy.allowedEmails, ['gabriel@example.com', 'reviewer@example.com']);
+});
+
+test('private Sites UI can be visible while every Sites write path remains closed', () => {
+  const policy = readContactStagingPolicy({
+    ...rawConfig,
+    CONTACT_STAGING_WRITES_ENABLED: 'false',
+  });
+  assert.deepEqual(authorizeContactStagingView(policy, policy.expectedHost, identity), {
+    allowed: true,
+    actor: { userId: 'user-123', email: 'gabriel@example.com' },
+  });
+  assert.deepEqual(authorizeContactStaging(policy, policy.expectedHost, identity), {
+    allowed: false,
+    status: 503,
+    code: 'contact_staging_kill_switch_closed',
+  });
+});
+
+test('private Sites UI has its own fail-closed switch', () => {
+  const policy = readContactStagingPolicy({
+    ...rawConfig,
+    CONTACT_STAGING_UI_ENABLED: 'false',
+  });
+  assert.deepEqual(authorizeContactStagingView(policy, policy.expectedHost, identity), {
+    allowed: false,
+    status: 404,
+    code: 'contact_staging_unavailable',
+  });
 });
 
 test('contact staging fails closed for mode, configuration and hostname mismatches', () => {

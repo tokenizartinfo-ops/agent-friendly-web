@@ -11,6 +11,8 @@ import {
 import { verifyTurnstileToken } from '../../lib/turnstile.mjs';
 
 const noStore = { 'cache-control': 'no-store' };
+const syntheticTurnstileSecret = '1x0000000000000000000000000000000AA';
+const syntheticTurnstileToken = 'XXXX.DUMMY.TOKEN.XXXX';
 
 function jsonResponse(body, status, corsHeaders = {}) {
   return Response.json(body, { status, headers: { ...corsHeaders, ...noStore } });
@@ -18,6 +20,35 @@ function jsonResponse(body, status, corsHeaders = {}) {
 
 function failure(status, code, corsHeaders = {}) {
   return jsonResponse({ accepted: false, code }, status, corsHeaders);
+}
+
+function isExactSyntheticPayload(value) {
+  return Boolean(
+    value
+    && value.email === 'gate-6b3-canary@example.com'
+    && value.name === 'Caso sintetico Gate 6B.3'
+    && value.organization === 'Agent Friendly Web Synthetic'
+    && value.role === 'synthetic_test'
+    && value.domain === 'example.com'
+    && value.locale === 'es'
+    && value.objective === 'receive_plan'
+    && value.source === 'public_audit'
+    && value.requestedPlanConsent === true
+    && value.commercialContactConsent === false
+    && value.productUpdatesConsent === false
+    && value.turnstileToken === syntheticTurnstileToken
+  );
+}
+
+function readSyntheticGateState(env = {}) {
+  const gate = env.CONTACT_SYNTHETIC_GATE_ENABLED;
+  const turnstile = env.CONTACT_SYNTHETIC_TURNSTILE_TEST;
+  if (
+    (gate === undefined || gate === 'false')
+    && (turnstile === undefined || turnstile === 'false')
+  ) return 'off';
+  if (gate === 'true' && turnstile === 'true') return 'on';
+  return 'invalid';
 }
 
 function runtimeReady(env) {
@@ -52,10 +83,16 @@ export function createContactWorker(overrides = {}) {
       if (request.method === 'GET' && url.pathname === '/health' && !url.search) {
         return jsonResponse({
           service: 'agent-friendly-web-contact-staging-frontier',
+          surface: 'contact_staging_api',
           status: 'deployed',
           mode: policy.mode || 'unavailable',
           writes: policy.writesEnabled === true,
         }, 200);
+      }
+
+      const syntheticGateState = readSyntheticGateState(env);
+      if (syntheticGateState === 'invalid') {
+        return failure(503, 'contact_staging_misconfigured');
       }
 
       const boundary = evaluateContactWorkerRequest(policy, request);
@@ -98,6 +135,16 @@ export function createContactWorker(overrides = {}) {
           return failure(parsed?.status || 400, parsed?.code || 'invalid_json', boundary.corsHeaders);
         }
 
+        const syntheticTurnstileTest = syntheticGateState === 'on';
+        if (syntheticTurnstileTest) {
+          if (env.CONTACT_STAGING_TURNSTILE_SECRET !== syntheticTurnstileSecret) {
+            return failure(503, 'contact_staging_misconfigured', boundary.corsHeaders);
+          }
+          if (!isExactSyntheticPayload(parsed.value)) {
+            return failure(403, 'synthetic_gate_payload_mismatch', boundary.corsHeaders);
+          }
+        }
+
         const remoteIp = request.headers.get('cf-connecting-ip') || '';
         const result = await processContact(parsed.value, {
           enabled: true,
@@ -106,8 +153,8 @@ export function createContactWorker(overrides = {}) {
             secret: env.CONTACT_STAGING_TURNSTILE_SECRET,
             remoteIp,
             idempotencyKey,
-            action,
-            hostname: policy.widgetHost,
+            action: syntheticTurnstileTest ? '' : action,
+            hostname: syntheticTurnstileTest ? '' : policy.widgetHost,
           }),
           save: (intake) => saveContact(env.DB, intake),
         });

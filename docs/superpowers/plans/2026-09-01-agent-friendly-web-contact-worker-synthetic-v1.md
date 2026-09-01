@@ -6,6 +6,8 @@
 
 **Architecture:** La interfaz Sites privada produce un token Turnstile de prueba. El Worker separado valida Cloudflare Access, allowlist, rate limiting, cuerpo acotado, contrato, Turnstile y D1 en ese orden. La web publica, correo, CRM, pagos, webhooks y marketing permanecen fuera del gate.
 
+**Correccion de frontera 2026-09-01:** `public_web`, `contact_staging_ui` y `contact_staging_api` son superficies diferentes. La interfaz humana vive exclusivamente en Sites privado. El Worker es API-only y `GET /health` siempre devuelve JSON. `CONTACT_STAGING_UI_ENABLED` controla la visibilidad de Sites sin abrir su ruta de escritura; `CONTACT_STAGING_WRITES_ENABLED` se mantiene cerrado en Sites y solo se abre temporalmente en el Worker.
+
 **Spec:** `docs/superpowers/specs/2026-08-31-agent-friendly-web-contact-worker-frontier-v1-design.md`
 
 ## Global Constraints
@@ -30,12 +32,13 @@
 
 - [ ] Crear una version Worker no productiva con escrituras ON y Turnstile oficial de testing.
 - [ ] Inspeccionar la version antes de asignarle trafico.
-- [ ] Habilitar temporalmente la pagina Sites owner-only con el Site Key oficial de testing.
+- [ ] Habilitar temporalmente la pagina Sites owner-only con `CONTACT_STAGING_UI_ENABLED=true` y el Site Key oficial de testing, manteniendo `CONTACT_STAGING_WRITES_ENABLED=false` en Sites.
 - [ ] Verificar que Access sigue deny-by-default y que no existe bypass ni service auth.
 
 ## Task 3: Caso sintetico
 
 - [ ] Autenticar el unico operador allowlisted mediante Cloudflare Access.
+- [ ] Confirmar visualmente que la prueba se ejecuta desde `contact_staging_ui`, no desde la web publica ni desde `/health` del Worker.
 - [ ] Enviar un payload acotado con email y dominio `example.com`, consentimiento requerido y consentimientos opcionales en `false`.
 - [ ] Verificar respuesta `201`, `emailQueued=false` y recibo metadata-only.
 - [ ] Repetir solo si hace falta probar idempotencia remota; debe responder como duplicado y conservar una fila.
