@@ -71,11 +71,15 @@ El cierre local se documenta en `docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-20
 
 ### Gate 6D - Ventas y CRM ligero
 
+**Estado local:** maquina de estados y planificador `local_planning_only` implementados sin PII, datos reales, D1, email, propuestas ni pagos. Toda persistencia remota requiere aprobacion separada y debe comenzar despues del staging sintetico de Gates 6B y 6C.
+
 Estados minimos:
 
 `new -> qualified -> discovery -> proposal -> approved -> delivery -> verified -> won/lost`
 
 Cada oportunidad registra dominio, segmento, problema, owner, mantenedor, alcance, evidencia, siguiente accion, fecha, valor estimado y motivo de perdida. No se duplican cuerpos de email ni credenciales.
+
+La evidencia local vive en `docs/BLOCK-6D-CRM-LITE-LOCAL-GATE-2026-08-31.md`. El pipeline no salta etapas, los estados terminales no se reabren y propuesta, aprobacion, entrega, verificacion y cierre mantienen revision humana.
 
 ### Gate 6E - Primer piloto pago humano
 
