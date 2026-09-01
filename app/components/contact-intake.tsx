@@ -35,6 +35,8 @@ export function ContactIntake({
   const [preview, setPreview] = useState(false);
   const [requestId, setRequestId] = useState('');
   const [turnstileToken, setTurnstileToken] = useState('');
+  const [syntheticResponseStatus, setSyntheticResponseStatus] = useState('');
+  const [syntheticResponseCode, setSyntheticResponseCode] = useState('');
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
   const normalizedDomain = useMemo(() => domain.replace(/^https?:\/\//, '').split('/')[0], [domain]);
@@ -43,6 +45,8 @@ export function ContactIntake({
     setForm((current) => ({ ...current, [field]: value }));
     setRequestId('');
     setTurnstileToken('');
+    setSyntheticResponseStatus('');
+    setSyntheticResponseCode('');
     setMessage('');
   }
 
@@ -82,8 +86,13 @@ export function ContactIntake({
           turnstileToken,
         }),
       });
+      const responseBody = await response.clone().json().catch(() => null) as { code?: unknown } | null;
+      setSyntheticResponseStatus(String(response.status));
+      setSyntheticResponseCode(typeof responseBody?.code === 'string' ? responseBody.code : 'non_json_response');
       setMessage(response.ok ? copy.sent : copy.invalid);
     } catch {
+      setSyntheticResponseStatus('0');
+      setSyntheticResponseCode('network_error');
       setMessage(copy.invalid);
     } finally {
       setSending(false);
@@ -124,6 +133,8 @@ export function ContactIntake({
             <input
               type="hidden"
               data-afw-synthetic-turnstile-token={turnstileToken}
+              data-afw-synthetic-response-status={syntheticResponseStatus}
+              data-afw-synthetic-response-code={syntheticResponseCode}
               value={turnstileToken}
               readOnly
             />
