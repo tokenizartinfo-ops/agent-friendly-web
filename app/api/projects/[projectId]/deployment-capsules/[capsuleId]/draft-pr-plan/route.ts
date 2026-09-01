@@ -1,5 +1,5 @@
 import { and, desc, eq } from 'drizzle-orm';
-import { getChatGPTUser } from '../../../../../../chatgpt-auth';
+import { getCloudflareAccessUser } from '../../../../../../cloudflare-access-auth';
 import { getDb } from '../../../../../../../db';
 import {
   capsuleOriginComparisons,
@@ -47,7 +47,7 @@ async function latestPlan(capsuleId: string) {
 }
 
 export async function GET(request: Request, context: RouteContext) {
-  const user = await getChatGPTUser();
+  const user = await getCloudflareAccessUser();
   if (!user) return Response.json({ error: 'Inicia sesion para revisar el borrador tecnico.' }, { status: 401 });
   const { projectId, capsuleId } = await context.params;
   const { role, capsuleRow } = await access(projectId, capsuleId, user);
@@ -63,7 +63,7 @@ export async function GET(request: Request, context: RouteContext) {
 }
 
 export async function POST(request: Request, context: RouteContext) {
-  const user = await getChatGPTUser();
+  const user = await getCloudflareAccessUser();
   if (!user) return Response.json({ error: 'Inicia sesion para preparar el borrador tecnico.' }, { status: 401 });
   const body = await request.json() as Record<string, unknown>;
   if (body.contract !== REQUEST_CONTRACT || body.confirmPrepare !== true) {

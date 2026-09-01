@@ -56,13 +56,13 @@
     },
     {
       "path": "discovery/public-audit.md",
-      "sha256": "b84e2219001db140498b3e9b7b717ba54d4d374e2e405cab48d97359f956e28f",
+      "sha256": "aaf7f73cf612ec7bc4cfe35204fdd66b550b9dfe4a0f81697e480f51c07bbadd",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "discovery/public-discovery-resources.md",
-      "sha256": "13d383b7b31f751ddf274868ccfa10217347f3accc156576fd3c60233f983bda",
+      "sha256": "83f3b489990c8c25d7803d01cb96aaeb0435a946218c2fdf47a3cfa24a293564",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },

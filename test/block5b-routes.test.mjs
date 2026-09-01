@@ -4,7 +4,7 @@ import test from 'node:test';
 
 test('comparison route is private, manifest-bound, idempotent and uses the bounded public fetcher indirectly', async () => {
   const source = await readFile('app/api/projects/[projectId]/deployment-capsules/[capsuleId]/comparison/route.ts', 'utf8');
-  assert.match(source, /getChatGPTUser/);
+  assert.match(source, /getCloudflareAccessUser/);
   assert.match(source, /deriveCapsuleRole/);
   assert.match(source, /compareCapsuleOrigin/);
   assert.match(source, /agentfriendly\.origin-comparison-request\.v1/);
@@ -18,7 +18,7 @@ test('comparison route is private, manifest-bound, idempotent and uses the bound
 
 test('draft plan route prepares and downloads only an unsubmitted plan', async () => {
   const source = await readFile('app/api/projects/[projectId]/deployment-capsules/[capsuleId]/draft-pr-plan/route.ts', 'utf8');
-  assert.match(source, /getChatGPTUser/);
+  assert.match(source, /getCloudflareAccessUser/);
   assert.match(source, /deriveCapsuleRole/);
   assert.match(source, /role !== 'owner'/);
   assert.match(source, /buildDraftPrPlan/);

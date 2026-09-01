@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "convention": "Agent Friendly Web infrastructure status; not an official standard",
+  "project": "agent-friendly-web",
+  "canonical_origin": "https://agentfriendlyweb.dev",
+  "observed_at": "2026-09-01",
+  "stale_after": "2026-09-08",
+  "public_runtime": {
+    "state": "transitional",
+    "provider": "OpenAI Sites",
+    "canonical_origin": "https://agentfriendlyweb.dev",
+    "accept_new_private_data": false,
+    "note": "The canonical public origin remains online through the legacy runtime while Cloudflare Worker parity and rollback are prepared. This is a migration source, not the target architecture."
+  },
+  "cloudflare_native_candidate": {
+    "state": "candidate_local_verified",
+    "target": "Cloudflare Workers with Vinext",
+    "private_identity": "Cloudflare Access signed JWT subject and audience",
+    "traffic_percent": 0,
+    "dns_changed": false,
+    "remote_canary_created": false,
+    "remote_database_created": false,
+    "verified_locally": [
+      "automated test suite",
+      "Vinext compatibility check",
+      "production build",
+      "Cloudflare deployment dry-run"
+    ],
+    "note": "Local verification does not make the candidate a deployed canary or production runtime."
+  },
+  "retired_surfaces": [
+    {
+      "surface": "private and contact interfaces under *.chatgpt.site",
+      "state": "retired",
+      "operational_use": false,
+      "may_be_restored": false
+    }
+  ],
+  "project_boundaries": {
+    "repository": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+    "tokenizart_is_reference_case": true,
+    "tokenizart_runtime_dependency": false,
+    "shared_cloudflare_account_does_not_merge_projects": true
+  },
+  "next_gate": {
+    "name": "afw_canary",
+    "host": "canary.agentfriendlyweb.dev",
+    "requirements": [
+      "Cloudflare Access allowlist",
+      "isolated Agent Friendly Web D1",
+      "same-origin private UI and API",
+      "zero public traffic",
+      "parity checks and tested rollback"
+    ],
+    "authorization": "remote resources and DNS remain pending a separate execution gate"
+  },
+  "historical_evidence_policy": "Release receipts that mention Sites are retained as historical evidence and do not describe the current target architecture."
+}

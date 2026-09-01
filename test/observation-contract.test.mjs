@@ -8,7 +8,7 @@ test('owner observation route is explicit, scoped and metadata-only audited', as
   assert.equal(await stat(path).then(() => true).catch(() => false), true, `${path} must exist`);
   const route = await readFile(path, 'utf8');
 
-  assert.match(route, /getChatGPTUser/);
+  assert.match(route, /getCloudflareAccessUser/);
   assert.match(route, /confirmSave/);
   assert.match(route, /eq\(siteProjects\.id, projectId\)/);
   assert.match(route, /eq\(siteProjects\.userId, (?:user\.userId|userId)\)/);

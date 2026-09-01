@@ -1,5 +1,7 @@
 # Agent Friendly Web Contact Staging Allowlist v1
 
+> SUPERSEDED 2026-09-01. La UI Sites de contacto fue retirada. Cualquier prueba futura debe usar `afw_canary` en `canary.agentfriendlyweb.dev`, segun `docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md`.
+
 **Fecha:** 2026-08-31
 
 **Estado:** aprobado para especificacion, implementacion local y pruebas. Sin activacion remota.

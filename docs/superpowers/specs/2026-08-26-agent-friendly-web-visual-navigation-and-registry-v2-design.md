@@ -1,5 +1,7 @@
 # Agent Friendly Web Visual, Navigation and Registry v2
 
+> Especificacion historica. La identidad privada Sites fue superada el 2026-09-01 por Cloudflare Access en el candidato definido por `docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md`.
+
 Estado: diseno aprobado para especificacion tecnica
 
 Fecha: 2026-08-26

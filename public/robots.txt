@@ -15,10 +15,7 @@ Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 Disallow: /expediente
 Disallow: /api/projects
-Disallow: /signin-with-chatgpt
-Disallow: /callback
-Disallow: /contact-staging
-Disallow: /api/staging
+Disallow: /capsula
 
 # Training-only and bulk corpus crawlers are not authorized.
 User-agent: GPTBot
@@ -32,9 +29,6 @@ Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 Disallow: /expediente
 Disallow: /api/projects
-Disallow: /signin-with-chatgpt
-Disallow: /callback
-Disallow: /contact-staging
-Disallow: /api/staging
+Disallow: /capsula
 
 Sitemap: https://agentfriendlyweb.dev/sitemap.xml

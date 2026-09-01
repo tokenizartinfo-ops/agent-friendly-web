@@ -12,8 +12,8 @@ const rawConfig = {
   CONTACT_STAGING_MODE: 'staging_allowlist',
   CONTACT_STAGING_WRITES_ENABLED: 'true',
   CONTACT_STAGING_API_HOST: 'contact-staging.agentfriendlyweb.dev',
-  CONTACT_STAGING_FORM_ORIGIN: 'https://agent-friendly-web-contact-staging.tokenizart.chatgpt.site',
-  CONTACT_STAGING_WIDGET_HOST: 'agent-friendly-web-contact-staging.tokenizart.chatgpt.site',
+  CONTACT_STAGING_FORM_ORIGIN: 'https://canary.agentfriendlyweb.dev',
+  CONTACT_STAGING_WIDGET_HOST: 'canary.agentfriendlyweb.dev',
   CONTACT_STAGING_ALLOWED_EMAILS: ' Gabriel@Example.com, reviewer@example.com ',
   CONTACT_ACCESS_TEAM_DOMAIN: 'example.cloudflareaccess.com',
   CONTACT_ACCESS_AUD: 'contact-staging-audience',
@@ -24,7 +24,7 @@ function request(path = '/api/contact-intake', options = {}) {
     method: options.method || 'POST',
     headers: {
       origin: options.origin === undefined
-        ? 'https://agent-friendly-web-contact-staging.tokenizart.chatgpt.site'
+        ? 'https://canary.agentfriendlyweb.dev'
         : options.origin,
       ...(options.headers || {}),
     },
@@ -37,8 +37,8 @@ test('worker policy normalizes exact API, form, widget, Access and allowlist bou
     mode: 'staging_allowlist',
     writesEnabled: true,
     apiHost: 'contact-staging.agentfriendlyweb.dev',
-    formOrigin: 'https://agent-friendly-web-contact-staging.tokenizart.chatgpt.site',
-    widgetHost: 'agent-friendly-web-contact-staging.tokenizart.chatgpt.site',
+    formOrigin: 'https://canary.agentfriendlyweb.dev',
+    widgetHost: 'canary.agentfriendlyweb.dev',
     allowedEmails: ['gabriel@example.com', 'reviewer@example.com'],
     accessTeamDomain: 'example.cloudflareaccess.com',
     accessAudience: 'contact-staging-audience',

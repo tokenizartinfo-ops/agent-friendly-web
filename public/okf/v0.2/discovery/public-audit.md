@@ -77,5 +77,9 @@ Controles implementados:
 - limite de lectura por respuesta;
 - redirecciones deshabilitadas;
 - validacion por contenido para evitar falsos positivos de paginas 200/404;
-- expedientes protegidos mediante Sign in with ChatGPT;
+- rutas privadas del runtime legado congeladas durante la migracion y sin admision de nuevos datos reales;
+- candidato Cloudflare-native protegido mediante Cloudflare Access, con validacion de JWT firmado, `sub`, issuer y audience;
+- fallo cerrado cuando falta identidad Access valida;
 - campos allowlisted y eventos metadata-only.
+
+El estado de infraestructura es independiente del estado funcional. Al 2026-09-01 el origen publico sigue sobre un runtime transitorio; la identidad Cloudflare Access esta implementada y verificada localmente, pero no se presenta como canary ni produccion. El ledger fechado vive en `https://agentfriendlyweb.dev/.well-known/infrastructure-status.json`.

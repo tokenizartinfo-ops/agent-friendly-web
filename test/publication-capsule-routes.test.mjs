@@ -5,7 +5,7 @@ import test from 'node:test';
 test('capsule collection route fails closed and creates only manual handoff packages', async () => {
   const source = await readFile('app/api/projects/[projectId]/deployment-capsules/route.ts', 'utf8');
 
-  assert.match(source, /getChatGPTUser/);
+  assert.match(source, /getCloudflareAccessUser/);
   assert.match(source, /deriveCapsuleRole/);
   assert.match(source, /role !== 'owner'/);
   assert.match(source, /agentfriendly\.publication-capsule-build\.v1/);
@@ -21,7 +21,7 @@ test('capsule collection route fails closed and creates only manual handoff pack
 test('capsule decision route derives roles and binds every decision to one manifest', async () => {
   const source = await readFile('app/api/projects/[projectId]/deployment-capsules/[capsuleId]/decisions/route.ts', 'utf8');
 
-  assert.match(source, /getChatGPTUser/);
+  assert.match(source, /getCloudflareAccessUser/);
   assert.match(source, /deriveCapsuleRole/);
   assert.match(source, /validateCapsuleDecision/);
   assert.match(source, /decision\.manifestSha256 !== capsule\.manifestSha256/);

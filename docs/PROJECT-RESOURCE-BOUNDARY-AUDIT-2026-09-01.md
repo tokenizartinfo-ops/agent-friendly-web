@@ -10,10 +10,11 @@ Agent Friendly Web and Tokenizart share administrative infrastructure but remain
 
 | Resource | Identifier | State |
 | --- | --- | --- |
-| public web | `https://agentfriendlyweb.dev` | active, Sites behind custom domain |
+| public web | `https://agentfriendlyweb.dev` | active, transitional Sites runtime behind the canonical custom domain; no new private data |
+| Cloudflare-native web candidate | `agent-friendly-web-web` | implemented and locally verified; 0% traffic, no DNS, remote canary or remote D1 |
 | public MCP | `agent-friendly-web-public-mcp` / `https://mcp.agentfriendlyweb.dev` | active, read-only, no D1 |
-| contact Worker legacy | `agent-friendly-web-contact-staging-frontier` | Access protected, writes OFF |
-| contact D1 legacy | `agent-friendly-web-contact-staging-frontier` | isolated, zero leads and zero receipts |
+| contact Worker legacy | `agent-friendly-web-contact-staging-frontier` | retirement evidence only; Access protected, writes OFF |
+| contact D1 legacy | `agent-friendly-web-contact-staging-frontier` | retirement evidence only; isolated, zero leads and zero receipts |
 | private Sites contact UI | `agent-friendly-web-contact-staging.tokenizart.chatgpt.site` | retired and restored to its closed version |
 
 ## Verified Tokenizart resources kept outside this repository
@@ -36,7 +37,7 @@ No cross-project Worker, D1 or custom-domain binding was observed.
 
 ## New operating rule
 
-Normal AFW testing uses local fixtures and CI. A remote canary is exceptional and must use a dedicated `agentfriendlyweb.dev` subdomain, Cloudflare Access, same-origin UI/API, isolated AFW storage, a bounded lifetime and prepared rollback. `*.chatgpt.site` is not an AFW staging target.
+Normal AFW testing uses local fixtures and CI. A remote canary is exceptional and must use `canary.agentfriendlyweb.dev`, Cloudflare Access, same-origin UI/API, isolated AFW storage, a bounded lifetime and prepared rollback. `*.chatgpt.site` is not an AFW staging, preview, authentication or rollback target. The dated public ledger is `https://agentfriendlyweb.dev/.well-known/infrastructure-status.json`.
 
 ## Status of PR #39
 

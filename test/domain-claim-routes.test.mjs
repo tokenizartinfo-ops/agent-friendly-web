@@ -8,7 +8,7 @@ const verifyRoutePath = 'app/api/projects/[projectId]/domain-claims/[claimId]/ve
 test('domain claim creation is owner-scoped and issues a 32-byte challenge', async () => {
   const route = await readFile(claimsRoutePath, 'utf8');
 
-  assert.match(route, /getChatGPTUser/);
+  assert.match(route, /getCloudflareAccessUser/);
   assert.match(route, /eq\(siteProjects\.id, projectId\)/);
   assert.match(route, /eq\(siteProjects\.userId, (?:user\.userId|userId)\)/);
   assert.match(route, /new Uint8Array\(32\)/);

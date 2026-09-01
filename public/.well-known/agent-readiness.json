@@ -6,11 +6,20 @@
     "creator": "Gabriel Mucchiut"
   },
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "updated_at": "2026-08-31",
+  "updated_at": "2026-09-01",
   "human_languages": ["es", "en", "pt"],
   "human_route_strategy": "Spanish unprefixed canonical; English under /en; Portuguese under /pt; canonical and hreflang equivalents",
   "machine_routes_localized": false,
   "owner_declared_content_auto_translated": false,
+  "infrastructure": {
+    "status_resource": "/.well-known/infrastructure-status.json",
+    "public_runtime": "transitional",
+    "cloudflare_native_candidate": "candidate_local_verified",
+    "candidate_traffic_percent": 0,
+    "private_chatgpt_site_surfaces": "retired",
+    "tokenizart_runtime_dependency": false,
+    "note": "Hosting migration state is published separately so active, transitional, candidate and retired surfaces are never conflated."
+  },
   "external_verification": {
     "status": "verified",
     "profile": "/.well-known/external-readiness.json",
@@ -23,6 +32,11 @@
     "private_routes": "not_crawlable"
   },
   "capabilities": {
+    "infrastructure_status": {
+      "status": "deployed",
+      "resources": ["/.well-known/infrastructure-status.json"],
+      "note": "Dated project ledger for the canonical origin, transitional runtime, Cloudflare-native candidate, retired surfaces and next gate."
+    },
     "discovery": {
       "status": "deployed",
       "resources": ["/robots.txt", "/sitemap.xml", "/llms.txt", "/llms-full.txt"]

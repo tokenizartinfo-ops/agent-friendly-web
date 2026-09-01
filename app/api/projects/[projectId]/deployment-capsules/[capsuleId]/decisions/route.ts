@@ -1,5 +1,5 @@
 import { and, eq } from 'drizzle-orm';
-import { getChatGPTUser } from '../../../../../../chatgpt-auth';
+import { getCloudflareAccessUser } from '../../../../../../cloudflare-access-auth';
 import { getDb } from '../../../../../../../db';
 import {
   capsuleApprovals,
@@ -28,7 +28,7 @@ function approvalStatus(rows: Array<{ role: string; decision: string }>, role: s
 }
 
 export async function POST(request: Request, context: RouteContext) {
-  const user = await getChatGPTUser();
+  const user = await getCloudflareAccessUser();
   if (!user) return Response.json({ error: 'Inicia sesion para decidir sobre la capsula.' }, { status: 401 });
   const { projectId, capsuleId } = await context.params;
   const db = getDb();

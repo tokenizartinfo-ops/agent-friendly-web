@@ -22,6 +22,12 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 
 ## Orden de prelacion
 
+### Gate de infraestructura - origen Cloudflare-native
+
+**Estado:** candidato implementado y verificado localmente; 0% de trafico, sin DNS, canary remoto ni D1 remota.
+
+Antes de reabrir captacion, correo o CRM remoto, Agent Friendly Web debe abandonar Sites como runtime operativo. El unico canary permitido sera `canary.agentfriendlyweb.dev`, protegido por Cloudflare Access, con UI/API same-origin, D1 propia, paridad publica y rollback probado. Las referencias Tokenizart permanecen como caso documental y no como dependencias de ejecucion.
+
 ### Gate 6A - Traccion F1
 
 **Estado:** cerrado y fusionado el 2026-08-31. La estrategia se revisa con evidencia de 90 dias.
@@ -37,9 +43,9 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 
 ### Gate 6B - Captura consentida
 
-**Estado:** preview publico y canary Sites cerrados; frontera Worker 6B.1 fusionada; Gate 6B.2 remoto cerrado con Access, Turnstile, escrituras OFF y D1 vacia. Persistencia de contactos reales y correo permanecen deshabilitados.
+**Estado:** preview publico cerrado, UI privada Sites retirada y frontera Worker 6B.1/6B.2 conservada solo como evidencia remota OFF, con Access, Turnstile, escrituras deshabilitadas y D1 vacia. Persistencia de contactos reales y correo permanecen deshabilitados.
 
-**Dependencias para datos reales:** Gate 6B.3 sintetico aprobado y cerrado, politica de privacidad revisada, backup/rollback validado y una aprobacion posterior especifica para contactos reales.
+**Dependencias para datos reales:** corte Cloudflare-native cerrado, una nueva definicion same-origin del flujo, prueba sintetica idempotente aprobada, politica de privacidad revisada, backup/rollback validado y una aprobacion posterior especifica para contactos reales.
 
 1. Mostrar el resultado completo de la auditoria.
 2. Ofrecer `Recibir mi plan` como accion opcional.
@@ -49,7 +55,7 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 6. Validar Turnstile en servidor.
 7. Permitir baja, rectificacion y eliminacion segun politica aprobada.
 
-La version publica permite completar y revisar localmente la solicitud, pero no la envia ni la almacena. El contrato publico declara `preview_only`. Gate 6B.1 incorpora una frontera Worker distinta con JWT Access firmado, host y CORS exactos, allowlist, kill switch, rate limiting nativo, Turnstile y D1 aislada. Gate 6B.2 desplego y verifico esa frontera con escrituras OFF y cero filas. No se contara como captacion activa hasta aprobar y cerrar separadamente la unica escritura sintetica de Gate 6B.3 y, despues, autorizar datos reales.
+La version publica permite completar y revisar localmente la solicitud, pero no la envia ni la almacena. El contrato publico declara `preview_only`. Gate 6B.1/6B.2 demostro una frontera Worker con JWT Access firmado, host y CORS exactos, allowlist, kill switch, rate limiting nativo, Turnstile y D1 aislada, siempre con escrituras OFF y cero filas. Esa frontera no se trata como staging vigente. El diseño futuro sera same-origin dentro de `afw_canary` y no se contara como captacion activa hasta cerrar migracion, prueba sintetica y autorizacion de datos reales.
 
 ### Gate 6C - Correo operativo
 
@@ -71,7 +77,7 @@ El cierre local se documenta en `docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-20
 
 ### Gate 6D - Ventas y CRM ligero
 
-**Estado local:** maquina de estados y planificador `local_planning_only` implementados sin PII, datos reales, D1, email, propuestas ni pagos. Toda persistencia remota requiere aprobacion separada y debe comenzar despues del staging sintetico de Gates 6B y 6C.
+**Estado local:** maquina de estados y planificador `local_planning_only` implementados sin PII, datos reales, D1, email, propuestas ni pagos. Toda persistencia remota requiere aprobacion separada y debe comenzar despues del canary `afw_canary` de Gates 6B y 6C.
 
 Estados minimos:
 
@@ -216,7 +222,7 @@ La busqueda en `skills.sh` encontro playbooks de GTM, SEO/AEO y growth. Se tomar
 
 ### Semanas 3-4
 
-- validar Gate 6B primero en preview y despues en `staging_allowlist` con aprobacion separada;
+- cerrar primero el origen Cloudflare-native y validar Gate 6B dentro de `afw_canary` con aprobacion separada;
 - configurar analitica de privacidad y eventos del embudo;
 - probar tres versiones del mensaje y una sola CTA primaria;
 - realizar cinco auditorias asistidas sin cobro.

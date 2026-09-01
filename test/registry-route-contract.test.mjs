@@ -27,7 +27,7 @@ test('Registry implementation exposes human, JSON and Markdown surfaces', async 
 test('publication requires an authenticated owner, verification and explicit confirmation', async () => {
   const route = await readFile('app/api/projects/[projectId]/publish-profile/route.ts', 'utf8');
 
-  assert.match(route, /getChatGPTUser/);
+  assert.match(route, /getCloudflareAccessUser/);
   assert.match(route, /agentfriendly\.owner-attestation\.v1/);
   assert.match(route, /confirmPublicProjection/);
   assert.match(route, /expectedDomain/);

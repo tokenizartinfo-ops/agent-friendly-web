@@ -33,7 +33,7 @@ test('capsule review shows exact files, hashes, download and separate human deci
 test('private capsule page requires identity and reveals only the capsule review surface', async () => {
   const source = await readFile('app/capsula/[projectId]/page.tsx', 'utf8');
 
-  assert.match(source, /requireChatGPTUser/);
+  assert.match(source, /requireCloudflareAccessUser/);
   assert.match(source, /CapsuleReview/);
   assert.doesNotMatch(source, /IntakeWorkspace/);
 });

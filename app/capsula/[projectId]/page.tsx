@@ -1,4 +1,4 @@
-import { chatGPTSignOutPath, requireChatGPTUser } from '../../chatgpt-auth';
+import { cloudflareAccessSignOutPath, requireCloudflareAccessUser } from '../../cloudflare-access-auth';
 import { CapsuleReview } from '../../components/capsule-review';
 import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export async function CapsulePageExperience({ projectId, locale = 'es' }: { projectId: string; locale?: Locale }) {
   const copy = privateUiCopy(locale).capsule;
   const returnPath = localizedPath('capsule', locale, { projectId }) || `/capsula/${projectId}`;
-  const user = await requireChatGPTUser(returnPath);
+  const user = await requireCloudflareAccessUser(returnPath);
   return (
     <main lang={locale}>
       <SiteHeader routeKey="capsule" locale={locale} projectId={projectId} />
-      <div className="account-bar">{copy.privateReview}: <strong>{user.email}</strong><a href={chatGPTSignOutPath(localizedPath('home', locale) || '/')}>{copy.signOut}</a></div>
+      <div className="account-bar">{copy.privateReview}: <strong>{user.email}</strong><a href={cloudflareAccessSignOutPath()}>{copy.signOut}</a></div>
       <section className="capsule-page-hero">
         <span>{copy.eyebrow}</span><h1>{copy.pageTitle}</h1><p>{copy.pageIntro}</p>
       </section>

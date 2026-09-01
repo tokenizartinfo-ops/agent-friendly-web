@@ -38,7 +38,7 @@ sources:
 - manifiesto propio `/.well-known/agent-readiness.json`;
 - politica `/.well-known/security.txt`;
 - comparador ilustrativo AF-0 a AF-5;
-- expediente privado con identidad de Sites y campos allowlisted;
+- expediente privado del runtime transitorio congelado; reemplazo Cloudflare Access implementado localmente, aun sin canary ni trafico;
 - Registry publico versionado con perfiles HTML, JSON y Markdown;
 - guia publica `/aeo-y-crawlers` para educacion AEO, decisiones de crawling y valor comercial;
 - catalogo `/.well-known/crawler-policy-catalog.json` con fuentes y finalidades por proveedor.
@@ -61,6 +61,7 @@ sources:
 - MCP autenticado para expedientes autorizados y generacion de paquetes; el MCP publico read-only ya esta desplegado y permanece separado;
 - A2A Agent Card cuando exista un agente remoto real, autenticado y observable;
 - publicacion asistida mediante adaptadores limitados y aprobacion del owner.
+- migracion del origen publico a un Worker Cloudflare-native, con canary Access, D1 aislada, paridad y rollback antes del corte DNS;
 - paquetes o plugins oficiales por ecosistema, empezando por Tokenizart, Atelier y Agent Friendly Web, solo cuando cada marketplace o cliente tenga contrato y distribucion verificados;
 - skills publicas versionadas y customizadas por organizacion, separadas de las skills internas de operacion;
 
@@ -83,8 +84,9 @@ sources:
 | `/llms-full.txt` | contexto publico extendido | desplegado, convencion del proyecto |
 | `/openapi.json` | contrato de auditoria publica | desplegado |
 | `/api-catalog` | linkset hacia OpenAPI | desplegado |
-| `/.well-known/ai-catalog.json` | inventario de compatibilidad ARD | desplegado en Sites 27; propuesta en evolucion |
-| `/.well-known/ard.json` | fuente ARD vigente segun el draft observado | desplegado en Sites 27; propuesta en evolucion |
+| `/.well-known/ai-catalog.json` | inventario de compatibilidad ARD | desplegado; propuesta en evolucion |
+| `/.well-known/ard.json` | fuente ARD vigente segun el draft observado | desplegado; propuesta en evolucion |
+| `/.well-known/infrastructure-status.json` | estado fechado del origen, candidato, superficies retiradas y gate siguiente | preparado en el candidato Cloudflare-native; 0% de trafico |
 | `/.well-known/external-readiness.json` | historial AF-EV con procedencia y limites | desplegado y verificado; convencion del proyecto |
 | `/.well-known/agent-skills/index.json` | indice de skills descargables | desplegado, convencion del proyecto |
 | `/.well-known/agent-readiness.json` | estado de capacidades | desplegado, no es estandar oficial |
@@ -98,17 +100,17 @@ sources:
 | `/mcp-readonly` | explicacion humana de tools, resources y limites | desplegado |
 | `https://mcp.agentfriendlyweb.dev/mcp` | Streamable HTTP stateless, `POST` read-only | desplegado |
 | `/.well-known/security.txt` | contacto y politica de seguridad | desplegado |
-| `/conocimiento-abierto` | explicacion humana del conocimiento publico versionado | desplegado en Sites 16 |
-| `/okf/v0.2/index.md` | indice machine-readable del bundle OKF v0.2 | desplegado en Sites 16 |
-| `/okf/v0.2/manifest.json` | inventario, metadata y hashes de distribucion | desplegado en Sites 16 |
-| `/okf/v0.2/CHECKSUMS.sha256` | verificacion SHA-256 del bundle publicado | desplegado en Sites 16 |
-| `/cli` | explicacion humana de la CLI read-only | desplegado en Sites 18 |
-| `/cli/index.md` | instalacion, comandos, limites y codigos de salida | desplegado en Sites 18 |
+| `/conocimiento-abierto` | explicacion humana del conocimiento publico versionado | desplegado |
+| `/okf/v0.2/index.md` | indice machine-readable del bundle OKF v0.2 | desplegado |
+| `/okf/v0.2/manifest.json` | inventario, metadata y hashes de distribucion | desplegado |
+| `/okf/v0.2/CHECKSUMS.sha256` | verificacion SHA-256 del bundle publicado | desplegado |
+| `/cli` | explicacion humana de la CLI read-only | desplegado |
+| `/cli/index.md` | instalacion, comandos, limites y codigos de salida | desplegado |
 | `/.well-known/agent-friendly-cli.json` | manifiesto de capacidades y restricciones CLI | desplegado, convencion del proyecto |
 | `/schemas/cli-response.v1.json` | contrato JSON estable de respuestas CLI | desplegado |
-| `/schemas/publication-capsule.v1.json` | contrato del paquete manual, archivos, hashes, destinos y limites | desplegado en Sites 25 |
-| `/schemas/capsule-decision.v1.json` | contrato de aprobacion o rechazo ligado al hash del manifiesto | desplegado en Sites 25 |
-| `/schemas/origin-comparison.v1.json` | contrato cerrado del diff publico acotado | desplegado en Sites 28 |
-| `/schemas/draft-pr-plan.v1.json` | plan tecnico no enviado, sin merge ni despliegue | desplegado en Sites 28; envio remoto deshabilitado |
-| `Accept: text/markdown` sobre `/` | variante Markdown negociada del inicio | desplegado y verificado en Sites 27 |
+| `/schemas/publication-capsule.v1.json` | contrato del paquete manual, archivos, hashes, destinos y limites | desplegado |
+| `/schemas/capsule-decision.v1.json` | contrato de aprobacion o rechazo ligado al hash del manifiesto | desplegado |
+| `/schemas/origin-comparison.v1.json` | contrato cerrado del diff publico acotado | desplegado |
+| `/schemas/draft-pr-plan.v1.json` | plan tecnico no enviado, sin merge ni despliegue | desplegado; envio remoto deshabilitado |
+| `Accept: text/markdown` sobre `/` | variante Markdown negociada del inicio | desplegado y verificado |
 | WebMCP `afw.audit_public_site` | tool in-page read-only para auditoria publica | desplegado y verificado; tecnologia experimental |
