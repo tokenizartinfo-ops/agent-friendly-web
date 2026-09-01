@@ -2,14 +2,14 @@
   "schema": "agent-friendly-web.okf-distribution.v1",
   "convention": "Agent Friendly Web project extension for distribution; not an OKF requirement.",
   "okf_version": "0.2",
-  "release": "2026-08-31-public-v2",
+  "release": "2026-09-01-public-v3",
   "canonical_url": "https://agentfriendlyweb.dev/okf/v0.2/index.md",
-  "generated_at": "2026-08-31T00:00:00Z",
+  "generated_at": "2026-09-01T00:00:00Z",
   "verified": {
     "by": "human:gabriel-mucchiut",
-    "at": "2026-08-31T00:00:00Z"
+    "at": "2026-09-01T00:00:00Z"
   },
-  "stale_after": "2026-11-29T00:00:00Z",
+  "stale_after": "2026-11-30T00:00:00Z",
   "status": "published",
   "license": "CC-BY-4.0",
   "marks": "reserved",
@@ -20,97 +20,103 @@
   "files": [
     {
       "path": "assistance/intake-assistant-boundary.md",
-      "sha256": "ede01e6b8b23a849eb75f621fbbd03178b0a94f808a43eba70e626b90ee9633f",
+      "sha256": "9b26205e4fea5d869a258d176ab435276aa99a01243792b947a51aa40cfbe98f",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "assistance/public-faq-and-guide.md",
-      "sha256": "c727d0ee83633e1a94922c5da66c5d1561026e6e734f195d249f0a9ebe3ad4f5",
+      "sha256": "a58eb6b36155aa621261ff2494cd42b6d3fd23c1e8290e934b5fe25e16ce5049",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "assistance/readiness-comparison-boundary.md",
-      "sha256": "6bd71ea8e0ecc3ee572259cca37b652bdb0f5757db8b2c9af9dcf66633f331a8",
+      "sha256": "a7d01f197be1f3abfc56e36af08ba66585c925e454155c2bc558d0a994eb2d2d",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "cases/tokenizart-first-integral-case.md",
-      "sha256": "6493ecc018cd67d6a51bcf603564c692a1c4f2b3007151ce7d032c2964c61a8a",
+      "sha256": "c23c45e459b501c65b2903a4fcac9c1bd4a59054628ad3a82d772c5f40f80d88",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "discovery/aeo-and-crawler-policy.md",
-      "sha256": "8d93e7af83c000a3a6017a8e94243b42d5c7965e11025eadab09aa15323b4ffd",
+      "sha256": "3f456405f186734ff370a3237b6d1454b49903b44d1fed8c41d664463236cbe3",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "discovery/current-public-readiness.md",
-      "sha256": "eda0eeafc0423f0ab6b82b38d2745fee06cfc05212390173f5d8c2fa2c5c3e20",
+      "sha256": "477cb77ef0b452a696ba56cd10ebcb41a2c3940fd72efe09035aab366d797ccd",
+      "media_type": "text/markdown; charset=utf-8",
+      "okf_document": true
+    },
+    {
+      "path": "discovery/infrastructure-status.md",
+      "sha256": "0298d0c6ad68d71620703c300375d0775befabcc378b85dc8a1d29ab00ba5c70",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "discovery/public-audit.md",
-      "sha256": "aaf7f73cf612ec7bc4cfe35204fdd66b550b9dfe4a0f81697e480f51c07bbadd",
+      "sha256": "b00de75870d9f1d77d3ca603381a0edad33ca3546fe349738beb522832cce1ab",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "discovery/public-discovery-resources.md",
-      "sha256": "83f3b489990c8c25d7803d01cb96aaeb0435a946218c2fdf47a3cfa24a293564",
+      "sha256": "21713e4dabdf254387a7b4d2f85e9230607e0296859902cd75119b6216a9ea87",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "index.md",
-      "sha256": "35df2f622df5cdd8c485870606a4173101c26404afa6940dd1c63816e2bacf4c",
+      "sha256": "7738579a898401d8c0b023380ead074e1f17d1beb01f5aa73c1c5404bdebab84",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "log.md",
-      "sha256": "dde8b6754c9fb126bfa50a7d31962bb68a6b8a07aca9966a4d323f0560641a5a",
+      "sha256": "3056693fd36bf52b07bc244486bdd255ce00db9dcb7d5cc4c1177ce6c77ed55b",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "method/agent-friendly-web-method.md",
-      "sha256": "f3b38b94894482995aa64192e564c65e9a21d59e862220e88bc96414d8be0b91",
+      "sha256": "ec84512cf85cfc9937692af7787865182d13695cf98dbe7bef4faaea81e60ded",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "method/evidence-and-scoring.md",
-      "sha256": "e92474266bf9dbf9f97060927ad3ad2b861282729b389740a2a7a26132431ef0",
+      "sha256": "61bada307e87358a9bdf8f7cf2f11b8838168fa7edefd311a86566f3185322c8",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "method/home-and-maturity-path.md",
-      "sha256": "8a3a5954d89a9e2c27c101a61965bb727b3fb6bcaee9999f9d0ebebb30c5bae0",
+      "sha256": "2e0a8a57a572ced5bd069afcd7211f288a2462f0a918420b4bd88d11cc44c975",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "method/maturity-levels-af0-af5.md",
-      "sha256": "bb04dd39c939e01fa362ef508b010d476efde320ba0bb06b0ff36129fc979ff5",
+      "sha256": "fff84e1d6199be619f80a39f834769ac83b9fab33005da53c5b326ea82359b42",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "registry/domain-verification-boundary.md",
-      "sha256": "6136a934a26fd30c99901c38d7341ba25a49c206cd8da08f3558d2924e6da418",
+      "sha256": "fb532101890266548220d190d92de4952d2491f2326358d2b2003bbe3119320b",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "registry/registry-and-provenance-states.md",
-      "sha256": "c52c9c8b853b0eea2759efa1a989d4f6228984fcc923d86cc03e336740aa5c1a",
+      "sha256": "d28a8cdc7663503f651b7f2ee8bbf9923d8ad6ff68cd90f33f9052cfedce3d07",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     }

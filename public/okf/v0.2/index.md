@@ -17,6 +17,7 @@ Bundle read-only, versionado y verificable. La escala AF-0 a AF-5 es una metodol
 * [Auditoria publica read-only](discovery/public-audit.md) - Recorrido, controles y limites del scanner publico.
 * [AEO y politica de crawlers](discovery/aeo-and-crawler-policy.md) - Decisiones separadas para descubrimiento, recuperacion y entrenamiento.
 * [Referencia publica de readiness al 2026-08-31](discovery/current-public-readiness.md) - Snapshot propio 95 sobre 100 con fecha, evidencia, limites y revalidacion.
+* [Estado de infraestructura y migracion](discovery/infrastructure-status.md) - Separacion fechada entre el origen canonico, runtime transitorio, candidato Cloudflare-native, superficies retiradas y gate siguiente.
 * [Recursos publicos de descubrimiento](discovery/public-discovery-resources.md) - Superficies desplegadas, planificadas y en investigacion sin mezclar estados.
 
 ## Registry
