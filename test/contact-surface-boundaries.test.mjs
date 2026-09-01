@@ -52,3 +52,11 @@ test('private contact staging exposes the one-time Turnstile response only for t
   assert.match(page, /syntheticTokenProbe/);
   assert.doesNotMatch(await readFile('app/components/scan-workspace.tsx', 'utf8'), /syntheticTokenProbe/);
 });
+
+test('private synthetic gate targets the Access-protected Worker with browser credentials', async () => {
+  const component = await readFile('app/components/contact-intake.tsx', 'utf8');
+  const page = await readFile('app/contact-staging/page.tsx', 'utf8');
+
+  assert.match(component, /credentials: endpoint\.startsWith\('https:\/\/'\) \? 'include' : 'same-origin'/);
+  assert.match(page, /endpoint="https:\/\/contact-staging\.agentfriendlyweb\.dev\/api\/contact-intake"/);
+});

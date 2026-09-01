@@ -71,6 +71,7 @@ export function ContactIntake({
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
+        credentials: endpoint.startsWith('https://') ? 'include' : 'same-origin',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
           ...form,

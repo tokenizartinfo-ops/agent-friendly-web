@@ -47,7 +47,7 @@ export default async function ContactStagingPage() {
           domain="example.com"
           locale="es"
           captureEnabled
-          endpoint="/api/staging/contact-intake"
+          endpoint="https://contact-staging.agentfriendlyweb.dev/api/contact-intake"
           turnstileSiteKey={siteKey}
           syntheticTokenProbe
         />
