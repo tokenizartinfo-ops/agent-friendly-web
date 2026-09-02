@@ -142,6 +142,8 @@ Criterio de salida: el aumento de automatizacion reduce costo, tiempo o error co
 
 La tesis es que la proliferacion de sitios generados con IA no garantiza claridad, procedencia ni utilidad agentica. Agent Friendly Web podra ofrecer sitios personales, profesionales, institucionales y comerciales de bajo costo relativo, con una experiencia humana cuidada y una capa machine-readable coherente desde su primera version.
 
+Como hipotesis de mercado, cada vez mas personas y organizaciones necesitaran una presencia digital propia donde su identidad y sus declaraciones puedan contrastarse con fuentes elegidas por el owner. AFW no tratara esa identidad como verificacion universal: registrara quien declara, que alcance tiene la declaracion, cuando fue actualizada y que evidencia publica la respalda.
+
 Principios de producto:
 
 - identidad declarada por el owner, con fuentes, vigencia y alcance visibles;

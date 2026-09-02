@@ -1,0 +1,17 @@
+{
+  "contract": "agent-friendly-web.email-inbound-canary.v1",
+  "testId": "afw-email-canary-pending-20260902",
+  "verificationStatus": "pending_external_sender",
+  "syntheticDeliveryVerified": false,
+  "blocker": "sender_different_from_private_destination_required",
+  "activeAliasesPending": [
+    "hello@agentfriendlyweb.dev",
+    "hola@agentfriendlyweb.dev",
+    "ola@agentfriendlyweb.dev"
+  ],
+  "blockedAliasPending": "no-reply@agentfriendlyweb.dev",
+  "outboundConfigured": false,
+  "responseSent": false,
+  "bodyPersisted": false,
+  "attachmentsPersisted": false
+}

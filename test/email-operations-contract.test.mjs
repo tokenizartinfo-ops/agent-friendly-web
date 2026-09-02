@@ -8,13 +8,13 @@ async function read(path) {
   return readFile(new URL(path, root), 'utf8');
 }
 
-test('public email operations contract reports draft-only local capability truthfully', async () => {
+test('public email operations contract reports inbound routing and outbound limits truthfully', async () => {
   const contract = JSON.parse(await read('public/.well-known/email-operations-contract.json'));
 
   assert.equal(contract.contract, 'agent-friendly-web.email-operations.v1');
-  assert.equal(contract.status, 'planned_draft_only');
+  assert.equal(contract.status, 'inbound_routing_configured_test_pending');
   assert.equal(contract.canonical_address.address, 'hello@agentfriendlyweb.dev');
-  assert.equal(contract.canonical_address.status, 'candidate_not_configured');
+  assert.equal(contract.canonical_address.status, 'inbound_configured_test_pending');
   assert.deepEqual(contract.aliases.map((item) => item.address), [
     'hola@agentfriendlyweb.dev',
     'ola@agentfriendlyweb.dev',
@@ -24,9 +24,10 @@ test('public email operations contract reports draft-only local capability truth
     'no-reply@agentfriendlyweb.dev',
   ]);
   assert.equal(contract.capabilities.local_draft_planning, true);
-  assert.equal(contract.capabilities.inbound_routing, false);
+  assert.equal(contract.capabilities.inbound_routing, true);
   assert.equal(contract.capabilities.outbound_sending, false);
-  assert.equal(contract.capabilities.dns_configured, false);
+  assert.equal(contract.capabilities.dns_configured, true);
+  assert.equal(contract.capabilities.synthetic_delivery_verified, false);
   assert.equal(contract.capabilities.email_provider_configured, false);
   assert.equal(contract.requires_separate_remote_approval, true);
   assert.ok(contract.blocked_actions.includes('send_email'));

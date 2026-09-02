@@ -42,11 +42,11 @@ test('package registers a bounded local-only inbound email preflight', async () 
   assert.equal(pkg.scripts['email:send'], undefined);
 });
 
-test('public inbound contract declares the local readiness state truthfully', async () => {
+test('public inbound contract declares configured routing and pending external verification truthfully', async () => {
   const contract = JSON.parse(await read('public/.well-known/email-inbound-canary-contract.json'));
 
   assert.equal(contract.contract, EMAIL_INBOUND_CANARY_CONTRACT);
-  assert.equal(contract.status, 'local_preflight_ready_remote_unconfigured');
+  assert.equal(contract.status, 'remote_routing_configured_test_pending');
   assert.deepEqual(contract.active_aliases, [
     'hello@agentfriendlyweb.dev',
     'hola@agentfriendlyweb.dev',
@@ -59,7 +59,9 @@ test('public inbound contract declares the local readiness state truthfully', as
   ]);
   assert.deepEqual(contract.blocked_inbound_aliases, ['no-reply@agentfriendlyweb.dev']);
   assert.equal(contract.capabilities.local_preflight, true);
-  assert.equal(contract.capabilities.inbound_routing, false);
+  assert.equal(contract.capabilities.inbound_routing, true);
+  assert.equal(contract.capabilities.dns_configured, true);
+  assert.equal(contract.capabilities.synthetic_delivery_verified, false);
   assert.equal(contract.capabilities.outbound_sending, false);
   assert.equal(contract.capabilities.automatic_replies, false);
   assert.equal(contract.capabilities.message_body_processing, false);
@@ -140,5 +142,35 @@ test('sanitized baseline and runbook preserve the exact remote boundary and roll
   assert.match(runbook, /una regla.*drop/i);
   assert.match(runbook, /prueba sintetica/i);
   assert.match(runbook, /orden de rollback/i);
-  assert.match(design, /local_preflight_ready_remote_unconfigured/);
+  assert.match(design, /remote_routing_configured_test_pending/);
+});
+
+test('application evidence records only AFW resources and keeps the synthetic receipt pending', async () => {
+  const application = JSON.parse(
+    await read('docs/evidence/email-inbound-canary-application-2026-09-02.json'),
+  );
+  const receipt = JSON.parse(
+    await read('docs/evidence/email-inbound-canary-receipt-2026-09-02.json'),
+  );
+
+  assert.equal(application.project, 'agent-friendly-web');
+  assert.equal(application.environment, 'afw_email_inbound_canary');
+  assert.equal(application.origin, 'agentfriendlyweb.dev');
+  assert.equal(application.routing.enabled, true);
+  assert.equal(application.routing.status, 'ready');
+  assert.equal(application.dns.records.length, 5);
+  assert.equal(application.rules.forward.length, 3);
+  assert.equal(application.rules.drop.length, 1);
+  assert.equal(application.rules.catchAllEnabled, false);
+  assert.equal(application.capabilities.outboundConfigured, false);
+  assert.equal(application.capabilities.messagePersistenceConfigured, false);
+  assert.equal(application.rollback.dryRunVerified, true);
+
+  assert.equal(receipt.contract, EMAIL_INBOUND_CANARY_CONTRACT);
+  assert.equal(receipt.verificationStatus, 'pending_external_sender');
+  assert.equal(receipt.syntheticDeliveryVerified, false);
+  assert.equal(receipt.outboundConfigured, false);
+  assert.equal(receipt.bodyPersisted, false);
+  assert.equal(receipt.attachmentsPersisted, false);
+  assert.doesNotMatch(JSON.stringify({ application, receipt }), /gmail\.com/i);
 });

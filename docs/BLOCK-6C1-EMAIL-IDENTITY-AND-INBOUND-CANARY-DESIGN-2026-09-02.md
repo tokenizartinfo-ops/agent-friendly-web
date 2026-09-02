@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-09-02
 
-**Estado:** `local_preflight_ready_remote_unconfigured`; especificacion aprobada, baseline remoto saneado y configuracion remota no aplicada
+**Estado:** `remote_routing_configured_test_pending`; DNS y reglas entrantes aplicados, prueba sintetica desde un remitente externo pendiente
 
 ## Objetivo
 
@@ -47,7 +47,7 @@ Cloudflare Email Routing transporta el mensaje a la bandeja aprobada. La aplicac
 
 ## Protecciones
 
-- `EMAIL_INBOUND_ENABLED=false` hasta el canary;
+- recepcion limitada a tres aliases literales; el catch-all permanece deshabilitado;
 - allowlist temporal para la prueba;
 - kill switch independiente del sitio publico;
 - sin D1 para cuerpos, headers completos ni adjuntos;
@@ -104,3 +104,7 @@ Gate 6C.2 seleccionara un proveedor de salida, autenticara remitente con SPF/DKI
 - runbook: `docs/BLOCK-6C1-EMAIL-INBOUND-CANARY-RUNBOOK-2026-09-02.md`.
 
 El preflight no acepta la direccion privada de destino, no hace red y no ejecuta mutaciones. El baseline observado confirma zona activa, routing no configurado, cero destinos, cero reglas activas y cero MX actuales.
+
+La aplicacion remota posterior dejo Email Routing en `ready`, creo tres reglas `forward`, una regla `drop` para `no-reply@` y mantuvo el catch-all historico deshabilitado. La resolucion DNS publica confirma los tres MX de Cloudflare y el SPF de routing. La evidencia saneada vive en `docs/evidence/email-inbound-canary-application-2026-09-02.json`.
+
+El cierre sigue pendiente: la unica conexion Gmail disponible pertenece a la propia bandeja receptora. Cloudflare recomienda probar desde otra identidad. Hasta realizar esa prueba, `inbound_routing=true` significa configuracion remota presente, no entrega funcional certificada; `synthetic_delivery_verified=false` conserva esa diferencia.

@@ -175,6 +175,10 @@ Cloudflare Web Analytics puede medir trafico agregado sin reemplazar los consent
 - la politica separa solicitudes transaccionales de consentimiento para novedades, exige revision humana en asuntos sensibles y no puede enviar;
 - DNS, casillas, routing y proveedor siguen sujetos a aprobacion separada.
 
+## Actualizacion Gate 6C.1 - 2026-09-02
+
+La aprobacion de recepcion entrante ya fue ejecutada: Cloudflare Email Routing, MX/SPF/DKIM y los aliases `hello@`, `hola@` y `ola@` estan configurados; `no-reply@` descarta y el catch-all permanece deshabilitado. El estado es `remote_routing_configured_test_pending` porque aun falta probar la entrega desde una cuenta distinta de la bandeja receptora. No se habilitaron proveedor de salida, envio, respuestas automaticas, newsletter, lectura agentica, D1 ni CRM. Esas capacidades requieren gates y aprobacion separada.
+
 El detalle de implementacion y rollback vive en `docs/BLOCK-6B-CONTACT-STAGING-ALLOWLIST-V1.md` y `docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-2026-08-31.md`.
 
 ## Pruebas negativas obligatorias

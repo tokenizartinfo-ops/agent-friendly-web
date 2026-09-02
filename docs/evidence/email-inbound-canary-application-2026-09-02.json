@@ -1,0 +1,65 @@
+{
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_email_inbound_canary",
+  "origin": "agentfriendlyweb.dev",
+  "observedAt": "2026-09-02",
+  "routing": {
+    "before": "unconfigured",
+    "enabled": true,
+    "status": "ready"
+  },
+  "destination": {
+    "present": true,
+    "verified": true,
+    "id": "dd315975fb3249aa97627f9318fdbb28",
+    "addressPublished": false
+  },
+  "dns": {
+    "records": [
+      { "id": "3bed6bbebe50658d936dee6a5ca041fa", "type": "MX", "class": "cloudflare-routing-mx", "priority": 74 },
+      { "id": "210f7d70171c0c76a78851ca55d93587", "type": "MX", "class": "cloudflare-routing-mx", "priority": 76 },
+      { "id": "e36ae983f9935a8672094890a95f842b", "type": "MX", "class": "cloudflare-routing-mx", "priority": 81 },
+      { "id": "1b29261f1035588277081ff3e0184332", "type": "TXT", "class": "cloudflare-routing-spf" },
+      { "id": "68e06f750eb106ef3332594fdb2c3958", "type": "TXT", "class": "cloudflare-routing-dkim" }
+    ],
+    "foreignMxDetected": false,
+    "publicResolutionVerified": true
+  },
+  "rules": {
+    "forward": [
+      { "id": "218f51dcc9f74c648cdc5bba00b864fe", "alias": "hello", "enabled": true },
+      { "id": "a9983622da0441199c11f6983f0facec", "alias": "hola", "enabled": true },
+      { "id": "5a553f3c7c3b41e7bfedc36c0c0e943d", "alias": "ola", "enabled": true }
+    ],
+    "drop": [
+      { "id": "921da98f295942608a1a41301620132f", "alias": "no-reply", "enabled": true }
+    ],
+    "preExistingDisabledCatchAllId": "7b6e01eb20f6488fa39860f65b23bfe6",
+    "catchAllEnabled": false,
+    "emailWorkerConfigured": false
+  },
+  "capabilities": {
+    "inboundRoutingConfigured": true,
+    "syntheticDeliveryVerified": false,
+    "outboundConfigured": false,
+    "automaticRepliesConfigured": false,
+    "messagePersistenceConfigured": false
+  },
+  "rollback": {
+    "dryRunVerified": true,
+    "orderedActions": [
+      "disable-created-rules",
+      "delete-created-rules",
+      "preserve-pre-existing-disabled-catch-all",
+      "disable-email-routing-dns-if-full-rollback-is-required",
+      "verify-created-mail-dns-records-are-removed"
+    ],
+    "ruleIds": [
+      "218f51dcc9f74c648cdc5bba00b864fe",
+      "a9983622da0441199c11f6983f0facec",
+      "5a553f3c7c3b41e7bfedc36c0c0e943d",
+      "921da98f295942608a1a41301620132f"
+    ]
+  }
+}

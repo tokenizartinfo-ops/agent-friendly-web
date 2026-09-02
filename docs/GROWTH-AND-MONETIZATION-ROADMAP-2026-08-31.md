@@ -63,7 +63,7 @@ La version publica permite completar y revisar localmente la solicitud, pero no 
 
 **Direccion canonica candidata:** `hello@agentfriendlyweb.dev`.
 
-**Estado local:** politica de borradores y preflight entrante implementados y probados. Gate 6C.1 declara `local_preflight_ready_remote_unconfigured`: el baseline confirma zona activa, cero destinos, cero reglas activas y cero MX actuales. No existen routing operativo, proveedor de salida ni envio.
+**Estado actual:** el estado previo `planned_draft_only` avanzo a `remote_routing_configured_test_pending`. Gate 6C.1 tiene destino privado verificado, DNS de Email Routing y reglas entrantes activas para `hello@`, `hola@` y `ola@`; `no-reply@` descarta y el catch-all sigue deshabilitado. Falta comprobar entregas desde un remitente externo distinto de la bandeja receptora. No existen proveedor de salida, envio, respuestas automaticas ni persistencia de mensajes.
 
 Aliases locales: `hola@agentfriendlyweb.dev` y `ola@agentfriendlyweb.dev`. Todos llegan a la misma operacion; no se crean silos por idioma.
 

@@ -306,27 +306,27 @@ Expected: JSON with `ok: true` and `state: ready_to_apply`.
 - Consumes: verified destination ID, ready preflight, Cloudflare zone ID.
 - Produces: Email Routing ready, three forward rule IDs, one drop rule ID, metadata-only synthetic receipt and public truthful status.
 
-- [ ] **Step 1: Capture a fresh pre-mutation snapshot**
+- [x] **Step 1: Capture a fresh pre-mutation snapshot**
 
 Read Email Routing settings, required DNS diff, current MX/TXT records, routing rules and destination verification. Abort if any data differs materially from Task 4 or an unknown enabled rule appears.
 
-- [ ] **Step 2: Enable Email Routing DNS**
+- [x] **Step 2: Enable Email Routing DNS**
 
 Call `POST /zones/{zone_id}/email/routing/dns` with `{ "name": "agentfriendlyweb.dev" }`. Re-read settings and DNS; require `enabled: true`, `status: ready` and only Cloudflare-provided MX/SPF changes.
 
-- [ ] **Step 3: Create exact routing rules**
+- [x] **Step 3: Create exact routing rules**
 
 For each active alias call `POST /zones/{zone_id}/email/routing/rules` with one literal `to` matcher and one `forward` action to the verified destination. Create a fourth rule for `no-reply@agentfriendlyweb.dev` with one literal matcher and one `drop` action. Do not enable catch-all.
 
-- [ ] **Step 4: Verify the remote rule set**
+- [x] **Step 4: Verify the remote rule set**
 
 Re-read all rules. Require exactly one enabled AFW rule per active alias, one enabled drop rule for `no-reply@`, no enabled catch-all and no Worker action.
 
-- [ ] **Step 5: Run the synthetic reception test**
+- [ ] **Step 5: Run the synthetic reception test** - pending a sender different from the private destination
 
 From a separate approved sender, send one non-sensitive message per active alias using a unique test ID. Confirm exactly one arrival for each. Send one message to `no-reply@` and confirm no delivery. Do not reply and do not attach files.
 
-- [ ] **Step 6: Verify metadata-only receipt**
+- [ ] **Step 6: Verify metadata-only receipt** - pending the external delivery observations
 
 Run `verifyEmailInboundCanaryReceipt` against a local receipt containing only test ID, aliases, counts and booleans. Require `status: passed`; otherwise execute rollback immediately.
 
@@ -347,13 +347,13 @@ Demonstrate rollback as a dry-run from the captured snapshot: disable/delete onl
 - Consumes: completed local implementation and remote evidence.
 - Produces: reviewable branch with no secrets and a truthful gate status.
 
-- [ ] **Step 1: Run focused verification**
+- [x] **Step 1: Run focused verification**
 
 Run: `node --test test/email-inbound-canary*.test.mjs test/email-operations*.test.mjs test/company-building-capital-roadmap.test.mjs`
 
 Expected: PASS.
 
-- [ ] **Step 2: Run full verification**
+- [x] **Step 2: Run full verification**
 
 Run: `npm test`
 
@@ -367,13 +367,13 @@ Run: `npm run build`
 
 Expected: exit code `0`.
 
-- [ ] **Step 3: Scan for leaked secrets and private destination**
+- [x] **Step 3: Scan for leaked secrets and private destination**
 
 Run: `rg -n "tokenizart\.info@gmail\.com|password|api[_ -]?key|private[_ -]?key|BEGIN .*PRIVATE KEY" lib scripts test docs public package.json`
 
 Expected: no private destination in Gate 6C.1 implementation or evidence and no secret literals. Existing educational references are reviewed manually.
 
-- [ ] **Step 4: Review diff and repository boundary**
+- [x] **Step 4: Review diff and repository boundary**
 
 Run: `git diff --check`
 

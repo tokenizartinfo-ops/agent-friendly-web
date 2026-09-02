@@ -12,6 +12,8 @@ Ese trabajo mostro un problema mas amplio: muchas organizaciones hacen cosas val
 
 Agent Friendly Web convierte esa observacion en un metodo general. Tokenizart es su primer caso integral y fuente de aprendizaje, pero Agent Friendly Web es un proyecto separado, con dominio, repositorio, runtime, datos y roadmap propios.
 
+La tesis futura no termina en mejorar sitios existentes. Si la IA reduce el costo de crear presencia digital, proliferaran sitios personales, profesionales y empresariales; pero volumen no garantiza identidad clara, fuentes trazables ni capacidades utilizables por agentes. AFW proyecta crear sitios **AFW-native** que nazcan con experiencia humana, informacion declarada por su owner y capas de descubrimiento coherentes desde el momento cero. Esta linea sera un producto separado, portable y de bajo costo relativo, no una promesa de posicionamiento ni una suscripcion obligatoria.
+
 ## Proposito
 
 Ayudar a que una web pase de ser dificil de interpretar a ser descubrible, explicable, verificable y, cuando corresponda, utilizable por agentes bajo limites claros.
@@ -94,4 +96,3 @@ Codex funciona como orquestador tecnico y documental bajo aprobacion humana de G
 - `un archivo mejora ventas por si solo`;
 - `Cloudflare, OpenAI, Google o Anthropic aprueban el servicio` sin fuente expresa;
 - presentar roadmap, mock o contrato como capacidad desplegada.
-

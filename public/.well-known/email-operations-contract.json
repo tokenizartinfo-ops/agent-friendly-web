@@ -1,24 +1,25 @@
 {
   "contract": "agent-friendly-web.email-operations.v1",
-  "status": "planned_draft_only",
-  "updated_at": "2026-08-31",
+  "status": "inbound_routing_configured_test_pending",
+  "updated_at": "2026-09-02",
   "canonical_address": {
     "address": "hello@agentfriendlyweb.dev",
-    "status": "candidate_not_configured"
+    "status": "inbound_configured_test_pending"
   },
   "aliases": [
-    { "address": "hola@agentfriendlyweb.dev", "purpose": "spanish-entry", "status": "candidate_not_configured" },
-    { "address": "ola@agentfriendlyweb.dev", "purpose": "portuguese-entry", "status": "candidate_not_configured" },
-    { "address": "auditoria@agentfriendlyweb.dev", "purpose": "audit-and-plan", "status": "candidate_not_configured" },
-    { "address": "seguridad@agentfriendlyweb.dev", "purpose": "security-and-abuse", "status": "candidate_not_configured" },
-    { "address": "bajas@agentfriendlyweb.dev", "purpose": "consent-withdrawal", "status": "candidate_not_configured" },
-    { "address": "no-reply@agentfriendlyweb.dev", "purpose": "outbound-only", "status": "candidate_not_configured" }
+    { "address": "hola@agentfriendlyweb.dev", "purpose": "spanish-entry", "status": "inbound_configured_test_pending" },
+    { "address": "ola@agentfriendlyweb.dev", "purpose": "portuguese-entry", "status": "inbound_configured_test_pending" },
+    { "address": "auditoria@agentfriendlyweb.dev", "purpose": "audit-and-plan", "status": "reserved_not_configured" },
+    { "address": "seguridad@agentfriendlyweb.dev", "purpose": "security-and-abuse", "status": "reserved_not_configured" },
+    { "address": "bajas@agentfriendlyweb.dev", "purpose": "consent-withdrawal", "status": "reserved_not_configured" },
+    { "address": "no-reply@agentfriendlyweb.dev", "purpose": "closed-inbound", "status": "drop_configured_test_pending" }
   ],
   "capabilities": {
     "local_draft_planning": true,
-    "inbound_routing": false,
+    "inbound_routing": true,
     "outbound_sending": false,
-    "dns_configured": false,
+    "dns_configured": true,
+    "synthetic_delivery_verified": false,
     "email_provider_configured": false,
     "message_body_processing": false,
     "attachment_processing": false

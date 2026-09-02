@@ -48,6 +48,8 @@ Los contratos ya fusionados de Gate 6C y Gate 6D se publican con limites explici
 
 Ambos aparecen en AI Catalog, ARD, readiness y mapa del sitio. La publicacion del contrato no activa proveedor, DNS, persistencia, contactos reales, propuestas, email ni pagos.
 
+**Actualizacion 2026-09-02:** `/.well-known/email-operations-contract.json` avanza de `planned_draft_only` a `inbound_routing_configured_test_pending`. Email Routing y su DNS estan configurados, pero la entrega sintetica desde un remitente externo sigue pendiente. Proveedor de salida, envio, auto-respuestas, lectura de cuerpos, adjuntos y persistencia permanecen deshabilitados.
+
 ## Inconsistencia terminologica separada
 
 La metodologia historica contiene dos formulaciones de AF-5: `Transaccional` y `agent-native con gobierno`. La referencia actual llega a 95/100 sin comercio porque las otras seis capas suman 95. Esa diferencia no se cambia silenciosamente en esta correccion: requiere una decision terminologica HITL y una migracion coordinada de metodologia, OKF, MCP, FAQ y documentos.

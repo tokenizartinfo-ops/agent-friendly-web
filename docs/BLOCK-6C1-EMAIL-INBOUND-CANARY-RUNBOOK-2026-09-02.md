@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-09-02
 
-**Estado:** preflight local listo; routing remoto sin configurar
+**Estado:** routing remoto listo; prueba sintetica externa pendiente
 
 ## Proposito
 
@@ -38,6 +38,20 @@ La lectura saneada del 2026-09-02 observo:
 - sitio publico, canary web y recursos Tokenizart fuera de esta frontera.
 
 La evidencia machine-readable vive en `docs/evidence/email-inbound-canary-baseline-2026-09-02.json` y no contiene la direccion privada de destino.
+
+## Aplicacion verificada
+
+El 2026-09-02 se completo la configuracion remota dentro de la frontera declarada:
+
+- destino account-scoped presente y verificado, sin publicar su direccion;
+- Email Routing `ready` y `enabled=true`;
+- tres MX Cloudflare, SPF y DKIM aplicados;
+- `hello@`, `hola@` y `ola@` activos mediante reglas literales `forward`;
+- `no-reply@` activo mediante regla literal `drop`;
+- catch-all historico conservado y deshabilitado;
+- cero Email Worker, proveedor de salida, auto-respuesta o persistencia de mensajes.
+
+La aplicacion y su rollback reproducible se registran en `docs/evidence/email-inbound-canary-application-2026-09-02.json`. El recibo en `docs/evidence/email-inbound-canary-receipt-2026-09-02.json` permanece `pending_external_sender`.
 
 ## Direcciones
 
@@ -112,6 +126,8 @@ El kill switch consiste en deshabilitar o eliminar las cuatro reglas creadas por
 6. comprobar que los registros MX agregados por el gate fueron retirados;
 7. conservar identificadores, timestamps, conteos y causa, sin cuerpos ni adjuntos;
 8. devolver el contrato a `local_preflight_ready_remote_unconfigured`.
+
+Mientras el routing permanezca configurado pero la prueba externa no haya cerrado, el contrato usa `remote_routing_configured_test_pending`. No debe presentarse como `inbound_canary_verified`.
 
 La direccion de destino no se elimina automaticamente: es account-scoped y podria utilizarse en otro dominio. Solo se elimina si fue creada por este gate, no tiene reglas dependientes y una decision especifica lo autoriza.
 

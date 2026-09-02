@@ -59,6 +59,9 @@ test('founder narrative preserves Gabriel attribution and the Tokenizart project
   assert.match(narrative, /proyecto separado/i);
   assert.match(narrative, /Codex.*orquestador.*aprobacion humana/i);
   assert.match(narrative, /robots F0.*F5/i);
+  assert.match(narrative, /sitios.*AFW-native/i);
+  assert.match(narrative, /informacion declarada por su owner/i);
+  assert.match(narrative, /no una promesa de posicionamiento/i);
   assert.doesNotMatch(narrative, /Tokenizart.*propietario tecnico/i);
 });
 
