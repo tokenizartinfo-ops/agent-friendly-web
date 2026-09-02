@@ -98,6 +98,7 @@ test('the roadmap no longer lists the completed public-origin migration as plann
   assert.doesNotMatch(roadmap, /continua disponible sobre un runtime Sites transitorio/i);
   assert.doesNotMatch(roadmap, /gate inmediato es \*\*migrar el origen/i);
   assert.match(roadmap, /Worker Cloudflare-native productivo.*100% del trafico publico/i);
+  assert.match(roadmap, /bundle publico OKF v0\.2 con 15 conceptos/i);
 });
 
 test('the production receipt records exact Access coverage and separates local comparison from remote checks', () => {

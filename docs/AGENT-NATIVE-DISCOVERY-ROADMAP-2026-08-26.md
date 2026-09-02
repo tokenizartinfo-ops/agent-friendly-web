@@ -50,7 +50,7 @@ La prioridad inmediata ya no es agregar senales para elevar una nota. Es complet
 - contenido sectorial inicial para seis perfiles en ESP/ENG/POR;
 - comparador local antes/despues y contrato `readiness-comparison.v1`;
 - prototipo determinista de asistencia de intake y contrato `intake-assistant.v1`, sin persistencia ni acciones.
-- bundle publico OKF v0.2 con 11 conceptos, manifiesto, procedencia, vigencia, licencia y SHA-256;
+- bundle publico OKF v0.2 con 15 conceptos, manifiesto, procedencia, vigencia, licencia y SHA-256;
 - pagina humana `/conocimiento-abierto` y descubrimiento OKF desde `llms.txt`, catalogos, sitemap y footer.
 - CLI oficial read-only para auditoria, consulta Registry y verificacion OKF con JSON estable y `--dry-run`;
 - guia conversacional publica `/guia`, determinista, citada y efimera, con continuidad inmediata y profundidad adaptable.
