@@ -1,0 +1,34 @@
+{
+  "contract_version": "agentfriendly.cloudflare-native-stability-report.v1",
+  "project": "agent-friendly-web",
+  "environment": "afw_public",
+  "origin": "https://agentfriendlyweb.dev",
+  "observed_at": "2026-09-02T05:46:18.373Z",
+  "ok": true,
+  "checks": [
+    { "id": "public_smoke", "ok": true, "evidence": true },
+    { "id": "ledger_origin", "ok": true, "evidence": "https://agentfriendlyweb.dev" },
+    { "id": "ledger_fresh", "ok": true, "evidence": "2026-09-09" },
+    { "id": "runtime_state", "ok": true, "evidence": "cloudflare_native_production" },
+    { "id": "public_traffic", "ok": true, "evidence": 100 },
+    { "id": "production_worker", "ok": true, "evidence": "agent-friendly-web-web-production" },
+    { "id": "private_access", "ok": true, "evidence": true },
+    { "id": "ledger_database", "ok": true, "evidence": 0 },
+    { "id": "live_database", "ok": true, "evidence": 0 },
+    { "id": "database_read_only", "ok": true, "evidence": 0 },
+    { "id": "legacy_no_traffic", "ok": true, "evidence": false },
+    { "id": "rollback_retained", "ok": true, "evidence": "rollback_retained_without_apex" },
+    { "id": "next_gate", "ok": true, "evidence": "afw_cloudflare_native_stability_and_legacy_retirement" }
+  ],
+  "database": {
+    "migrations": 6,
+    "functional_tables": 13,
+    "functional_rows": 0,
+    "rows_written": 0,
+    "changed_db": false
+  },
+  "rollback": {
+    "legacy_sites_retained": true,
+    "retirement_authorized": false
+  }
+}

@@ -314,6 +314,8 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 
 La migracion del origen Cloudflare-native se completo el 2026-09-02. El gate activo es **estabilidad productiva y decision de retiro legado**: repetir el smoke publico, confirmar que D1 conserva cero escrituras funcionales no autorizadas, mantener el recibo exacto de rollback y decidir separadamente cuando retirar el binding Sites. La escritura sintetica 6B.3, el contacto real, email, CRM, pagos y toda capacidad A2A transaccional siguen diferidos.
 
+El baseline del 2026-09-02 quedo verde y es reproducible con `npm run web:audit:stability`: verifica el origen publico, la frontera Access, la vigencia del ledger y una consulta D1 `SELECT` fija con cero escrituras. La ventana permanece abierta hasta al menos el `2026-09-09`; entonces se repetira el control y se preparara una decision separada sobre Sites. La evidencia vive en `docs/CLOUDFLARE-NATIVE-STABILITY-BASELINE-2026-09-02.md` y `docs/evidence/cloudflare-native-stability-baseline-2026-09-02.json`.
+
 El plan de migracion vive en:
 
 - `docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md`;
