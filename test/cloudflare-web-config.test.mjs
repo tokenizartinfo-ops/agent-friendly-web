@@ -42,12 +42,14 @@ test('package exposes bounded Cloudflare-native canary and production commands',
   assert.match(packageJson.scripts['web:preflight:canary'], /preflight-cloudflare-native-canary\.mjs/);
   assert.match(packageJson.scripts['web:d1:migrations:canary'], /d1 migrations apply agent-friendly-web-web-canary --remote.*--env canary/);
   assert.match(packageJson.scripts['web:deploy:canary'], /@vinext\/cloudflare deploy --env canary$/);
-  assert.match(packageJson.scripts['web:preflight:production'], /preflight-cloudflare-native-production\.mjs/);
+  assert.equal(packageJson.scripts['web:preflight:production'], undefined);
+  assert.match(packageJson.scripts['web:verify:production'], /smoke-cloudflare-native-local\.mjs.*agentfriendlyweb\.dev.*--mode public-edge/);
   assert.match(packageJson.scripts['web:d1:migrations:production'], /d1 migrations apply agent-friendly-web-web-production --remote.*--env production/);
   assert.match(packageJson.scripts['web:deploy:production:dry-run'], /@vinext\/cloudflare deploy --env production --dry-run/);
   assert.match(packageJson.scripts['web:deploy:production'], /@vinext\/cloudflare deploy --env production$/);
   assert.match(packageJson.scripts['web:smoke:production'], /smoke-cloudflare-native-local\.mjs.*agentfriendlyweb\.dev.*--mode public-edge/);
-  assert.match(packageJson.scripts['web:compare:cutover'], /compare-cloudflare-native-public-origin\.mjs/);
+  assert.equal(packageJson.scripts['web:compare:cutover'], undefined);
+  assert.match(packageJson.scripts['web:compare:precutover-local'], /compare-cloudflare-native-public-origin\.mjs.*127\.0\.0\.1:8788/);
   assert.equal(packageJson.devDependencies['@vinext/cloudflare'], '1.0.0-beta.6');
   assert.equal(packageJson.devDependencies.vinext, '1.0.0-beta.8');
   assert.equal(packageJson.dependencies.react, '19.2.8');

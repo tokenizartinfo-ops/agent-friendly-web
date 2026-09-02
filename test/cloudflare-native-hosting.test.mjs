@@ -60,7 +60,7 @@ test('public discovery exposes the active Cloudflare production state without st
   assert.equal(status.production.worker_deployed, true);
   assert.equal(status.production.apex_custom_domain_attached, true);
   assert.equal(status.production.private_access_enforced, true);
-  assert.deepEqual(status.production.private_access_routes, ['/expediente*', '/capsula/*', '/api/projects/*']);
+  assert.deepEqual(status.production.private_access_routes, ['/expediente*', '/capsula/*', '/api/projects', '/api/projects/*']);
   assert.equal(status.production.migrations_applied, 6);
   assert.equal(status.production.functional_table_count, 13);
   assert.equal(status.production.functional_row_count, 0);
@@ -83,9 +83,38 @@ test('public discovery exposes the active Cloudflare production state without st
   ].map(read).join('\n');
 
   assert.match(publicKnowledge, /https:\/\/agentfriendlyweb\.dev\/\.well-known\/infrastructure-status\.json/);
+  assert.match(publicKnowledge, /private `\/expediente\*`, `\/capsula\/\*`, `\/api\/projects` and `\/api\/projects\/\*` routes/i);
   assert.doesNotMatch(publicKnowledge, /Sign in with ChatGPT|identidad de Sites|oai-authenticated-/i);
   assert.doesNotMatch(publicKnowledge, /transitional legacy Sites runtime|candidate with 0% traffic|production cutover remains a separate gate/i);
 
   const robots = read('public/robots.txt');
   assert.doesNotMatch(robots, /\/signin-with-chatgpt|\/contact-staging|\/api\/staging/i);
+});
+
+test('the roadmap no longer lists the completed public-origin migration as planned work', () => {
+  const roadmap = read('docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md');
+  const planned = roadmap.split('### Planificado')[1]?.split('### Investigacion')[0] || '';
+  assert.doesNotMatch(planned, /migracion del origen publico a un Worker Cloudflare-native/i);
+  assert.doesNotMatch(roadmap, /continua disponible sobre un runtime Sites transitorio/i);
+  assert.doesNotMatch(roadmap, /gate inmediato es \*\*migrar el origen/i);
+  assert.match(roadmap, /Worker Cloudflare-native productivo.*100% del trafico publico/i);
+});
+
+test('the production receipt records exact Access coverage and separates local comparison from remote checks', () => {
+  const receipt = JSON.parse(read('docs/evidence/cloudflare-native-production-cutover-receipt.json'));
+  assert.deepEqual(receipt.access.private_destinations, [
+    'agentfriendlyweb.dev/expediente*',
+    'agentfriendlyweb.dev/capsula/*',
+    'agentfriendlyweb.dev/api/projects',
+    'agentfriendlyweb.dev/api/projects/*',
+  ]);
+  assert.deepEqual(receipt.verification.origin_comparison, {
+    baseline_origin_before_cutover: 'https://agentfriendlyweb.dev',
+    local_candidate_origin: 'http://127.0.0.1:8788',
+    remote_release_origin: 'https://release.agentfriendlyweb.dev',
+    local_semantic_status: 'passed',
+    local_semantic_critical_failures: 0,
+    remote_release_anonymous_access_smoke: 'passed',
+    remote_release_authenticated_html: 'passed',
+  });
 });

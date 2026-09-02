@@ -14,6 +14,8 @@ export const CLOUD_NATIVE_SMOKE_ROUTES = Object.freeze([
   { path: '/okf/v0.2/manifest.json', boundary: 'public', contentType: 'application/json', marker: /OKF|open.knowledge/i },
   { path: '/api-catalog', boundary: 'public', contentType: 'application/linkset+json', marker: /agentfriendlyweb\.dev/i },
   { path: '/expediente', boundary: 'private' },
+  { path: '/api/projects', boundary: 'private' },
+  { path: '/api/projects/probe', boundary: 'private' },
 ]);
 
 async function readBoundedBody(response, limit = MAX_RESPONSE_BYTES) {

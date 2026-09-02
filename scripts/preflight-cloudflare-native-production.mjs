@@ -17,6 +17,7 @@ const PLACEHOLDER_IDS = new Set([
 const REQUIRED_PRIVATE_DESTINATIONS = Object.freeze([
   'agentfriendlyweb.dev/expediente*',
   'agentfriendlyweb.dev/capsula/*',
+  'agentfriendlyweb.dev/api/projects',
   'agentfriendlyweb.dev/api/projects/*',
 ]);
 const REQUIRED_APEX_ADDRESSES = new Set(['162.159.143.30', '172.66.3.26']);
@@ -47,7 +48,7 @@ function validDnsSnapshot(value) {
   return addresses.size === 2 && [...REQUIRED_APEX_ADDRESSES].every((address) => addresses.has(address));
 }
 
-export function validateProductionCutoverPreflight(metadata = {}) {
+export function validateProductionCutoverPreflight(metadata = {}, { now = new Date() } = {}) {
   const errors = [];
   const authorization = metadata.authorization || {};
   const worker = metadata.worker || {};
@@ -68,6 +69,19 @@ export function validateProductionCutoverPreflight(metadata = {}) {
   requireValue(errors, metadata.environment === 'afw_public', 'environment must be afw_public');
   requireValue(errors, metadata.origin === 'https://agentfriendlyweb.dev', 'origin must be the Agent Friendly Web apex');
   requireValue(errors, metadata.allowed_action === 'bounded_cloudflare_native_apex_cutover', 'allowed_action is invalid');
+
+  const preparedAt = new Date(metadata.prepared_at || '');
+  const expiresAt = new Date(metadata.expires_at || '');
+  const currentTime = now instanceof Date ? now : new Date(now);
+  requireValue(errors, Number.isFinite(preparedAt.getTime()), 'prepared_at must be a valid timestamp');
+  requireValue(errors, Number.isFinite(expiresAt.getTime()), 'expires_at must be a valid timestamp');
+  requireValue(errors, Number.isFinite(currentTime.getTime()), 'preflight current time is invalid');
+  if (Number.isFinite(preparedAt.getTime()) && Number.isFinite(expiresAt.getTime())) {
+    const windowMs = expiresAt.getTime() - preparedAt.getTime();
+    requireValue(errors, windowMs >= 15 * 60_000 && windowMs <= 120 * 60_000, 'cutover window must be between 15 and 120 minutes');
+    requireValue(errors, currentTime.getTime() >= preparedAt.getTime(), 'cutover window is not active yet');
+    requireValue(errors, currentTime.getTime() <= expiresAt.getTime(), 'cutover preflight has expired');
+  }
 
   requireValue(errors, authorization.approved === true, 'production cutover authorization must be explicit');
   requireValue(errors, authorization.owner === 'Gabriel Mucchiut', 'authorization owner is invalid');
@@ -107,10 +121,13 @@ export function validateProductionCutoverPreflight(metadata = {}) {
   requireValue(errors, exactStringSet(release.responsive_qa, ['1440x900', '390x844']), 'release responsive QA is incomplete');
   requireValue(errors, release.detach_reattach_rollback === 'passed', 'release detach and reattach rollback must pass');
 
-  requireValue(errors, comparison.baseline_origin === 'https://agentfriendlyweb.dev', 'comparison baseline origin is invalid');
-  requireValue(errors, comparison.candidate_origin === 'https://release.agentfriendlyweb.dev', 'comparison candidate origin is invalid');
-  requireValue(errors, comparison.status === 'passed', 'comparison must pass');
-  requireValue(errors, comparison.critical_failures === 0, 'comparison must have zero critical failures');
+  requireValue(errors, comparison.baseline_origin_before_cutover === 'https://agentfriendlyweb.dev', 'comparison baseline origin is invalid');
+  requireValue(errors, comparison.local_candidate_origin === 'http://127.0.0.1:8788', 'comparison local candidate origin is invalid');
+  requireValue(errors, comparison.remote_release_origin === 'https://release.agentfriendlyweb.dev', 'comparison remote release origin is invalid');
+  requireValue(errors, comparison.local_semantic_status === 'passed', 'comparison local semantic status must pass');
+  requireValue(errors, comparison.local_semantic_critical_failures === 0, 'comparison local semantic failures must be zero');
+  requireValue(errors, comparison.remote_release_anonymous_access_smoke === 'passed', 'release remote anonymous Access smoke must pass');
+  requireValue(errors, comparison.remote_release_authenticated_html === 'passed', 'release remote authenticated HTML must pass');
 
   requireValue(errors, legacy.provider === 'OpenAI Sites', 'legacy provider must be OpenAI Sites');
   requireValue(errors, SITE_PROJECT.test(String(legacy.project_id || '')), 'legacy Sites project ID is invalid');

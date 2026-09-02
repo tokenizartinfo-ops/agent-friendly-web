@@ -47,6 +47,7 @@ La aplicacion Access debe admitir luego, con la misma audiencia, estos destinos 
 
 - `agentfriendlyweb.dev/expediente*`;
 - `agentfriendlyweb.dev/capsula/*`;
+- `agentfriendlyweb.dev/api/projects`;
 - `agentfriendlyweb.dev/api/projects/*`.
 
 El release permite comprobar HTML autenticado, rutas publicas, recursos agenticos, idiomas, responsive, D1 vacia y cierre de rutas privadas sin exponer la aplicacion a visitantes.
@@ -89,7 +90,7 @@ El cutover falla cerrado salvo que todos estos controles esten verdes:
 4. Access con un unico owner y destinos exactos;
 5. release autenticado y responsive;
 6. ensayo detach/attach del release;
-7. comparacion automatizada entre origen vigente y candidato;
+7. comparacion semantica local entre el origen vigente y la misma compilacion candidata, mas controles remotos separados sobre release;
 8. snapshot DNS y rollback completos;
 9. smoke publico posterior con rutas publicas `200` y privadas interceptadas por Access;
 10. D1 con cero escrituras durante la verificacion.
@@ -111,7 +112,7 @@ El recibo `docs/CLOUDFLARE-NATIVE-PRODUCTION-CUTOVER-RECEIPT.md` debe registrar 
 ## Resultado 2026-09-02
 
 - `agentfriendlyweb.dev` sirve el Worker `agent-friendly-web-web-production` mediante Custom Domain Cloudflare.
-- El smoke publico final paso las ocho superficies publicas y la frontera privada `/expediente`.
+- El smoke publico final paso las ocho superficies publicas y las fronteras privadas `/expediente`, `/api/projects` y `/api/projects/probe`.
 - La D1 productiva conserva trece tablas funcionales y cero filas.
 - `release.agentfriendlyweb.dev` permanece protegido por Access para diagnostico controlado.
 - El binding Sites y sus TXT permanecen activos, sin recibir el dominio apex, durante la ventana de estabilidad.

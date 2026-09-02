@@ -46,6 +46,7 @@ Rutas privadas iniciales:
 - `/expediente`;
 - `/capsula/*`;
 - `/contacto-interno`, cuando exista;
+- `/api/projects`;
 - `/api/projects/*`;
 - cualquier futura API mutante o con datos owner.
 
@@ -76,7 +77,7 @@ El formulario y su API deben ser same-origin. El Worker de contacto separado per
 4. Las rutas publicas deben mantener contenido, MIME, idiomas, sitemap, `robots.txt`, `llms.txt`, OKF, WebMCP y MCP externo.
 5. Las rutas privadas deben fallar cerradas sin Access y aislar datos por actor verificado.
 6. Canary requiere hostname propio, Access, D1 aislada y cero trafico publico.
-7. El corte de `agentfriendlyweb.dev` exige comparacion automatizada de origen, smoke humano y rollback probado.
+7. El corte de `agentfriendlyweb.dev` exigio una comparacion semantica local de la misma compilacion, verificacion remota separada, smoke humano y rollback probado.
 8. Solo despues de una ventana estable y una decision separada se elimina el binding publico de Sites y se archivan sus proyectos.
 
 ## Rollback

@@ -1,11 +1,13 @@
 {
   "contract_version": "agentfriendly.cloudflare-native-production-cutover.v1",
-  "phase": "apex_cutover_ready",
+  "phase": "apex_cutover_consumed",
   "project": "agent-friendly-web",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "environment": "afw_public",
   "origin": "https://agentfriendlyweb.dev",
-  "allowed_action": "bounded_cloudflare_native_apex_cutover",
+  "allowed_action": "historical_evidence_only",
+  "consumed_at": "2026-09-02T03:37:31.0903978Z",
+  "superseded_by": "docs/evidence/cloudflare-native-production-cutover-receipt.json",
   "authorization": {
     "approved": true,
     "owner": "Gabriel Mucchiut",
@@ -55,11 +57,14 @@
     "detach_reattach_rollback": "passed"
   },
   "comparison": {
-    "baseline_origin": "https://agentfriendlyweb.dev",
-    "candidate_origin": "https://release.agentfriendlyweb.dev",
-    "status": "passed",
-    "critical_failures": 0,
-    "method": "same-build local semantic comparison plus authenticated release HTML and anonymous Access smoke"
+    "baseline_origin_before_cutover": "https://agentfriendlyweb.dev",
+    "local_candidate_origin": "http://127.0.0.1:8788",
+    "remote_release_origin": "https://release.agentfriendlyweb.dev",
+    "local_semantic_status": "passed",
+    "local_semantic_critical_failures": 0,
+    "remote_release_anonymous_access_smoke": "passed",
+    "remote_release_authenticated_html": "passed",
+    "method": "Local semantic comparison used the same production build at 127.0.0.1; the remote release origin was verified separately through anonymous Access and authenticated HTML checks."
   },
   "legacy": {
     "provider": "OpenAI Sites",

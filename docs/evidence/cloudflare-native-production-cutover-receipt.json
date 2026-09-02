@@ -33,6 +33,7 @@
     "private_destinations": [
       "agentfriendlyweb.dev/expediente*",
       "agentfriendlyweb.dev/capsula/*",
+      "agentfriendlyweb.dev/api/projects",
       "agentfriendlyweb.dev/api/projects/*"
     ]
   },
@@ -58,7 +59,15 @@
     "lint_errors": 0,
     "build": "passed",
     "production_dry_run": "passed",
-    "origin_comparison_critical_failures": 0,
+    "origin_comparison": {
+      "baseline_origin_before_cutover": "https://agentfriendlyweb.dev",
+      "local_candidate_origin": "http://127.0.0.1:8788",
+      "remote_release_origin": "https://release.agentfriendlyweb.dev",
+      "local_semantic_status": "passed",
+      "local_semantic_critical_failures": 0,
+      "remote_release_anonymous_access_smoke": "passed",
+      "remote_release_authenticated_html": "passed"
+    },
     "release_access_smoke": "passed",
     "release_detach_reattach": "passed",
     "public_smoke": "passed_after_dns_propagation",

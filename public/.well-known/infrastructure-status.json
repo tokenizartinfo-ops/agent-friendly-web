@@ -21,7 +21,7 @@
     "worker_deployed": true,
     "apex_custom_domain_attached": true,
     "private_access_enforced": true,
-    "private_access_routes": ["/expediente*", "/capsula/*", "/api/projects/*"],
+    "private_access_routes": ["/expediente*", "/capsula/*", "/api/projects", "/api/projects/*"],
     "migrations_applied": 6,
     "functional_table_count": 13,
     "functional_row_count": 0,

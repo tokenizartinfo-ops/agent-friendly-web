@@ -35,6 +35,7 @@ La aplicacion permite unicamente `tokenizart.info@gmail.com` y protege:
 - todo `release.agentfriendlyweb.dev`;
 - `agentfriendlyweb.dev/expediente*`;
 - `agentfriendlyweb.dev/capsula/*`;
+- `agentfriendlyweb.dev/api/projects`;
 - `agentfriendlyweb.dev/api/projects/*`.
 
 ## DNS y rollback
@@ -54,11 +55,12 @@ El rollback ensayado sobre `release` desasocio y reasocio correctamente el mismo
 - lint: 0 errores, 1 advertencia conocida de optimizacion de imagen;
 - build Vinext: OK;
 - dry-run productivo: OK;
-- comparacion Sites/candidato: 0 fallas criticas;
+- comparacion semantica local Sites/misma compilacion candidata: 0 fallas criticas;
+- release remoto: Access anonimo y HTML autenticado verificados por separado;
 - Access anonimo en release: 9 de 9 rutas interceptadas;
 - HTML autenticado release: OK;
 - responsive 1440x900 y 390x844: sin overflow, hero cargado e idiomas visibles;
-- smoke publico final: 8 rutas publicas OK y `/expediente` interceptado por Access;
+- smoke publico final: 8 rutas publicas OK y `/expediente`, `/api/projects` y `/api/projects/probe` interceptados por Access;
 - D1 posterior: 0 filas y 0 escrituras.
 
 ## Auditoria externa posterior

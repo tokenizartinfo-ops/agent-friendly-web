@@ -1,10 +1,13 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 import {
   PRODUCTION_CUTOVER_CONTRACT,
   validateProductionCutoverPreflight,
 } from '../scripts/preflight-cloudflare-native-production.mjs';
+
+const PREFLIGHT_OPTIONS = { now: new Date('2026-09-02T03:00:00Z') };
 
 function validMetadata(overrides = {}) {
   return {
@@ -15,6 +18,8 @@ function validMetadata(overrides = {}) {
     environment: 'afw_public',
     origin: 'https://agentfriendlyweb.dev',
     allowed_action: 'bounded_cloudflare_native_apex_cutover',
+    prepared_at: '2026-09-02T02:45:00Z',
+    expires_at: '2026-09-02T03:15:00Z',
     authorization: {
       approved: true,
       owner: 'Gabriel Mucchiut',
@@ -51,6 +56,7 @@ function validMetadata(overrides = {}) {
       apex_private_destinations: [
         'agentfriendlyweb.dev/expediente*',
         'agentfriendlyweb.dev/capsula/*',
+        'agentfriendlyweb.dev/api/projects',
         'agentfriendlyweb.dev/api/projects/*',
       ],
     },
@@ -63,10 +69,13 @@ function validMetadata(overrides = {}) {
       detach_reattach_rollback: 'passed',
     },
     comparison: {
-      baseline_origin: 'https://agentfriendlyweb.dev',
-      candidate_origin: 'https://release.agentfriendlyweb.dev',
-      status: 'passed',
-      critical_failures: 0,
+      baseline_origin_before_cutover: 'https://agentfriendlyweb.dev',
+      local_candidate_origin: 'http://127.0.0.1:8788',
+      remote_release_origin: 'https://release.agentfriendlyweb.dev',
+      local_semantic_status: 'passed',
+      local_semantic_critical_failures: 0,
+      remote_release_anonymous_access_smoke: 'passed',
+      remote_release_authenticated_html: 'passed',
     },
     legacy: {
       provider: 'OpenAI Sites',
@@ -107,7 +116,7 @@ function validMetadata(overrides = {}) {
 }
 
 test('production preflight accepts only the exact rollback-ready AFW apex cutover', () => {
-  const report = validateProductionCutoverPreflight(validMetadata());
+  const report = validateProductionCutoverPreflight(validMetadata(), PREFLIGHT_OPTIONS);
   assert.deepEqual(report, {
     ok: true,
     contract_version: PRODUCTION_CUTOVER_CONTRACT,
@@ -129,7 +138,7 @@ test('production preflight rejects placeholders, cross-project targets and non-e
     worker: { ...fixture.worker, deployment_id: '11111111-1111-4111-8111-111111111111' },
     database: { ...fixture.database, functional_row_count: 2, rows_written_during_verification: 1 },
     capabilities: { ...fixture.capabilities, contact_writes: true, tokenizart_runtime_dependency: true },
-  });
+  }, PREFLIGHT_OPTIONS);
 
   assert.equal(report.ok, false);
   assert.match(report.errors.join('\n'), /project|repository|origin/i);
@@ -145,11 +154,11 @@ test('production preflight rejects missing Access, release rollback, DNS restore
     authorization: { ...fixture.authorization, approved: false },
     access: { ...fixture.access, apex_private_destinations: [], apex_private_destinations_prepared: false },
     release: { ...fixture.release, detach_reattach_rollback: 'not_run' },
-    comparison: { ...fixture.comparison, status: 'failed', critical_failures: 1 },
+    comparison: { ...fixture.comparison, local_semantic_status: 'failed', local_semantic_critical_failures: 1 },
     legacy: { ...fixture.legacy, binding_state: 'removed' },
     dns_snapshot: { ...fixture.dns_snapshot, rollback_restore_ready: false, apex_records: [] },
     traffic: { ...fixture.traffic, public_percent_before_cutover: 1 },
-  });
+  }, PREFLIGHT_OPTIONS);
 
   assert.equal(report.ok, false);
   const errors = report.errors.join('\n');
@@ -160,4 +169,54 @@ test('production preflight rejects missing Access, release rollback, DNS restore
   assert.match(errors, /Sites|legacy/i);
   assert.match(errors, /DNS|restore/i);
   assert.match(errors, /traffic/i);
+});
+
+test('production preflight rejects an Access matrix that omits the exact projects API root', () => {
+  const fixture = validMetadata();
+  const report = validateProductionCutoverPreflight({
+    ...fixture,
+    access: {
+      ...fixture.access,
+      apex_private_destinations: fixture.access.apex_private_destinations
+        .filter((destination) => destination !== 'agentfriendlyweb.dev/api/projects'),
+    },
+  }, PREFLIGHT_OPTIONS);
+
+  assert.equal(report.ok, false);
+  assert.match(report.errors.join('\n'), /api\/projects|Access.*destination/i);
+});
+
+test('production preflight rejects ambiguous comparison evidence and an expired cutover window', () => {
+  const report = validateProductionCutoverPreflight({
+    ...validMetadata(),
+    prepared_at: '2026-09-02T02:00:00Z',
+    expires_at: '2026-09-02T02:30:00Z',
+    comparison: {
+      baseline_origin: 'https://agentfriendlyweb.dev',
+      candidate_origin: 'https://release.agentfriendlyweb.dev',
+      status: 'passed',
+      critical_failures: 0,
+    },
+  }, { now: new Date('2026-09-02T03:00:00Z') });
+
+  assert.equal(report.ok, false);
+  assert.match(report.errors.join('\n'), /expired|comparison.*local|release.*remote/i);
+});
+
+test('the repository keeps the completed apex preflight only as consumed historical evidence', async () => {
+  const metadata = JSON.parse(await readFile(
+    new URL('../docs/evidence/cloudflare-native-production-cutover-metadata.json', import.meta.url),
+    'utf8',
+  ));
+
+  assert.equal(metadata.phase, 'apex_cutover_consumed');
+  assert.equal(metadata.allowed_action, 'historical_evidence_only');
+  assert.match(metadata.consumed_at, /^2026-09-02T/);
+  assert.equal(metadata.superseded_by, 'docs/evidence/cloudflare-native-production-cutover-receipt.json');
+
+  const report = validateProductionCutoverPreflight(metadata, {
+    now: new Date('2026-09-02T04:30:00Z'),
+  });
+  assert.equal(report.ok, false);
+  assert.match(report.errors.join('\n'), /phase|allowed_action|expired/i);
 });
