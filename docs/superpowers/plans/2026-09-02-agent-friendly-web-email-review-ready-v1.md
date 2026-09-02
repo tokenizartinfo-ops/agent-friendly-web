@@ -31,17 +31,17 @@
 - Consumes: one closed JSON object and an authenticated actor hash supplied by the caller.
 - Produces: `validateEmailReviewReadyRequest(input)` and `buildEmailReviewReadyMessage(input)`.
 
-- [ ] **Step 1: Write the failing contract tests**
+- [x] **Step 1: Write the failing contract tests**
 
 Assert a valid ESP request returns the fixed contract, event, template, purpose and a generated subject/text. Add literal table cases rejecting missing human approval, unknown fields, arbitrary email fields, body/HTML, invalid UUID, unsupported locale and a non-fixed purpose or template.
 
-- [ ] **Step 2: Run the test to verify RED**
+- [x] **Step 2: Run the test to verify RED**
 
 Run: `node --test test/email-review-ready.test.mjs`
 
 Expected: module-not-found for `lib/email-review-ready.mjs`.
 
-- [ ] **Step 3: Implement the minimal pure contract**
+- [x] **Step 3: Implement the minimal pure contract**
 
 Export:
 
@@ -53,7 +53,7 @@ export function buildEmailReviewReadyMessage(input = {}) {}
 
 Use exact-key allowlists and fixed translations for `es`, `en` and `pt`. The result may contain only the canonical sender, fixed template content and opaque event metadata.
 
-- [ ] **Step 4: Run the focused test to verify GREEN**
+- [x] **Step 4: Run the focused test to verify GREEN**
 
 Run: `node --test test/email-review-ready.test.mjs`
 
