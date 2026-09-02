@@ -58,9 +58,15 @@ export async function runCloudflareNativeSmoke({
   mode = 'local',
   fetchImpl = fetch,
 } = {}) {
-  if (!['local', 'access-edge'].includes(mode)) throw new Error('mode must be local or access-edge');
+  if (!['local', 'access-edge', 'public-edge'].includes(mode)) throw new Error('mode must be local, access-edge or public-edge');
   const origin = new URL(baseUrl || 'http://127.0.0.1:8788');
   if (origin.pathname !== '/' || origin.search || origin.hash) throw new Error('baseUrl must be an origin');
+  if (mode === 'public-edge' && origin.origin !== 'https://agentfriendlyweb.dev') {
+    throw new Error('public-edge origin must be Agent Friendly Web production');
+  }
+  if (mode === 'access-edge' && !['https://canary.agentfriendlyweb.dev', 'https://release.agentfriendlyweb.dev'].includes(origin.origin)) {
+    throw new Error('access-edge origin must be an approved Agent Friendly Web release');
+  }
   const requestTimeoutMs = mode === 'local' ? LOCAL_REQUEST_TIMEOUT_MS : EDGE_REQUEST_TIMEOUT_MS;
 
   const checks = [];
@@ -74,7 +80,7 @@ export async function runCloudflareNativeSmoke({
         headers: { accept: route.contentType || 'text/html' },
       });
 
-      if (mode === 'access-edge') {
+      if (mode === 'access-edge' || (mode === 'public-edge' && route.boundary === 'private')) {
         const ok = isAccessBoundary(response);
         checks.push({
           path: route.path,
@@ -115,7 +121,7 @@ export async function runCloudflareNativeSmoke({
     } catch (error) {
       checks.push({
         path: route.path,
-        boundary: mode === 'access-edge' ? 'cloudflare_access' : route.boundary,
+        boundary: mode === 'access-edge' || (mode === 'public-edge' && route.boundary === 'private') ? 'cloudflare_access' : route.boundary,
         status: 0,
         ok: false,
         error: error instanceof Error ? error.message : String(error),

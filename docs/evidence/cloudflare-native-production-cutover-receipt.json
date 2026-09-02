@@ -1,0 +1,68 @@
+{
+  "contract_version": "agentfriendly.cloudflare-native-production-cutover-receipt.v1",
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_public",
+  "origin": "https://agentfriendlyweb.dev",
+  "status": "cutover_complete_initial_monitoring_green",
+  "observed_at": "2026-09-02T03:37:31.0903978Z",
+  "worker": {
+    "name": "agent-friendly-web-web-production",
+    "deployment_id": "ce265b49-9f6c-4c0c-ab74-656ecb93f0ad",
+    "version_id": "2863d8b4-552b-419f-89bc-4c0f4363ce35",
+    "apex_custom_domain_id": "57a78f718d4dabc302bbcd2c17dbdc8e8882b8d3",
+    "release_custom_domain_id": "5a87a3ab6973b11aad5bd2acccf78bdd35e4b189"
+  },
+  "database": {
+    "id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8",
+    "migrations": 6,
+    "functional_tables": 13,
+    "functional_rows": 0,
+    "rows_written_during_verification": 0,
+    "time_travel_bookmark": "00000001-00000012-000050da-6071cbc8434461d6ffd3450a952af2e6"
+  },
+  "access": {
+    "application_id": "b7d7d62e-de25-4b4b-ac52-972b104738a1",
+    "allowed_emails": ["tokenizart.info@gmail.com"],
+    "private_destinations": [
+      "agentfriendlyweb.dev/expediente*",
+      "agentfriendlyweb.dev/capsula/*",
+      "agentfriendlyweb.dev/api/projects/*"
+    ]
+  },
+  "dns": {
+    "current_record": {
+      "id": "6b861effbcadc374a0651168640160d3",
+      "type": "AAAA",
+      "name": "agentfriendlyweb.dev",
+      "content": "100::",
+      "proxied": true,
+      "ttl": 1
+    },
+    "rollback_apex_addresses": ["162.159.143.30", "172.66.3.26"]
+  },
+  "legacy_sites": {
+    "project_id": "appgprj_6a8f19e35d688191a53e93432543e39c",
+    "custom_domain_id": "appgdom_6a8f665d5bc881919ac5fbdd05f69cbd",
+    "binding_retained": true,
+    "validation_txt_retained": true
+  },
+  "verification": {
+    "tests_passed": 382,
+    "lint_errors": 0,
+    "build": "passed",
+    "production_dry_run": "passed",
+    "origin_comparison_critical_failures": 0,
+    "release_access_smoke": "passed",
+    "release_detach_reattach": "passed",
+    "public_smoke": "passed_after_dns_propagation",
+    "responsive": ["1440x900", "390x844"]
+  },
+  "capabilities": {
+    "contact_writes": false,
+    "email_sending": false,
+    "crm_remote": false,
+    "payments": false,
+    "tokenizart_runtime_dependency": false
+  }
+}

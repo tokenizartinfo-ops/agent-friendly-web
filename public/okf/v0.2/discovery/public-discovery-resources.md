@@ -8,19 +8,19 @@ tags:
   - discovery
   - catalog
 status: stable
-stale_after: 2026-11-30T00:00:00Z
+stale_after: 2026-12-01T00:00:00Z
 generated:
   by: process:agent-friendly-web-okf-generator
-  at: 2026-09-01T00:00:00Z
+  at: 2026-09-02T00:00:00Z
 verified:
   - by: human:gabriel-mucchiut
-    at: 2026-09-01T00:00:00Z
+    at: 2026-09-02T00:00:00Z
 sources:
   - id: source-1
     resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/39acfeeecc9f39911d2a5467893c36dc2223e253/docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md
     title: "Agent Friendly Web: roadmap agent-native"
     author: agent-friendly-web/editorial-v1
-    last_modified: 2026-09-01T00:00:00Z
+    last_modified: 2026-09-02T00:00:00Z
 ---
 # Recursos publicos de descubrimiento
 
@@ -38,7 +38,7 @@ sources:
 - manifiesto propio `/.well-known/agent-readiness.json`;
 - politica `/.well-known/security.txt`;
 - comparador ilustrativo AF-0 a AF-5;
-- expediente privado del runtime transitorio congelado; reemplazo Cloudflare Access implementado localmente, aun sin canary ni trafico;
+- expediente privado productivo protegido por Cloudflare Access; D1 migrada y vacia, sin apertura de contacto ni otras escrituras reales;
 - Registry publico versionado con perfiles HTML, JSON y Markdown;
 - guia publica `/aeo-y-crawlers` para educacion AEO, decisiones de crawling y valor comercial;
 - catalogo `/.well-known/crawler-policy-catalog.json` con fuentes y finalidades por proveedor.
@@ -86,7 +86,7 @@ sources:
 | `/api-catalog` | linkset hacia OpenAPI | desplegado |
 | `/.well-known/ai-catalog.json` | inventario de compatibilidad ARD | desplegado; propuesta en evolucion |
 | `/.well-known/ard.json` | fuente ARD vigente segun el draft observado | desplegado; propuesta en evolucion |
-| `/.well-known/infrastructure-status.json` | estado fechado del origen, canary, superficies retiradas y gate siguiente | canary Cloudflare-native protegido; 0% del trafico del origen publico |
+| `/.well-known/infrastructure-status.json` | estado fechado del origen, canary, rollback legado, superficies retiradas y gate siguiente | produccion Cloudflare-native activa; canary y release protegidos; Sites sin trafico apex |
 | `/.well-known/external-readiness.json` | historial AF-EV con procedencia y limites | desplegado y verificado; convencion del proyecto |
 | `/.well-known/agent-skills/index.json` | indice de skills descargables | desplegado, convencion del proyecto |
 | `/.well-known/agent-readiness.json` | estado de capacidades | desplegado, no es estandar oficial |

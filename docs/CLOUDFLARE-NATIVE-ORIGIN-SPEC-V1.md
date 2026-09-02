@@ -1,7 +1,7 @@
 # Agent Friendly Web Cloudflare-native origin v1
 
-**Estado:** candidato local verificado y canary remoto protegido; produccion sin cambios
-**Fecha:** 2026-09-01
+**Estado:** produccion Cloudflare-native activa; Sites retenido solo para rollback inicial
+**Fecha:** 2026-09-02
 **Owner:** Gabriel Mucchiut
 **Repositorio:** `tokenizartinfo-ops/agent-friendly-web`
 
@@ -13,11 +13,11 @@ La migracion no altera Tokenizart. Tokenizart sigue siendo el primer caso integr
 
 ## Estado de partida
 
-- `agentfriendlyweb.dev` responde publicamente bajo dominio propio, pero el runtime actual todavia es Sites.
+- El estado de partida tenia `agentfriendlyweb.dev` sobre Sites. Desde el 2026-09-02 el apex sirve el Worker Cloudflare-native.
 - La aplicacion ya usa Next 16, Vinext, Vite y bindings `cloudflare:workers`.
 - `npx vinext check` informa 96% de compatibilidad: cero incompatibilidades y una advertencia parcial por `next/font/google`.
 - La suite baseline del repositorio pasa antes de la migracion.
-- Las rutas privadas del origen legado usan identidad Sites; el candidato ya las reemplaza por Cloudflare Access verificado.
+- Las rutas privadas usan Cloudflare Access verificado; la identidad Sites ya no forma parte del runtime activo.
 - El Worker de contacto aislado esta deshabilitado y su D1 permanece vacia.
 
 ## Estado canary verificado
@@ -27,7 +27,9 @@ La migracion no altera Tokenizart. Tokenizart sigue siendo el primer caso integr
 - La D1 canary es independiente: seis migraciones aplicadas, trece tablas funcionales y cero filas funcionales.
 - El custom domain del canary no modifica los registros A ni el runtime de `agentfriendlyweb.dev` y recibe 0% de su trafico.
 - Una sesion owner allowlisted confirmo el HTML autenticado. La misma compilacion paso QA Playwright en escritorio y movil, el smoke local completo y el smoke de Access en nueve rutas; D1 continuo con cero filas funcionales.
-- El rollback esta preparado y falla cerrado, pero el detach no se ejecuto sobre un canary verde. El canary no se presenta como produccion y el corte conserva una decision separada.
+- El canary continua protegido y con 0% del trafico apex. El release productivo protegido paso detach/reattach antes del corte.
+- El Worker `agent-friendly-web-web-production` sirve ahora el apex, con D1 productiva migrada, trece tablas funcionales y cero filas.
+- El smoke posterior al corte paso recursos publicos, identidad privada y QA responsive. Sites permanece solo como rollback inicial.
 
 ## Arquitectura objetivo
 
@@ -75,7 +77,7 @@ El formulario y su API deben ser same-origin. El Worker de contacto separado per
 5. Las rutas privadas deben fallar cerradas sin Access y aislar datos por actor verificado.
 6. Canary requiere hostname propio, Access, D1 aislada y cero trafico publico.
 7. El corte de `agentfriendlyweb.dev` exige comparacion automatizada de origen, smoke humano y rollback probado.
-8. Solo despues del corte se elimina el binding publico de Sites y se archivan sus proyectos.
+8. Solo despues de una ventana estable y una decision separada se elimina el binding publico de Sites y se archivan sus proyectos.
 
 ## Rollback
 

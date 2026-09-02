@@ -43,7 +43,7 @@ La prioridad inmediata ya no es agregar señales para elevar una nota. Es cerrar
 - manifiesto propio `/.well-known/agent-readiness.json`;
 - politica `/.well-known/security.txt`;
 - comparador ilustrativo AF-0 a AF-5;
-- expediente privado del runtime transitorio congelado; reemplazo Cloudflare Access implementado localmente, aun sin canary ni trafico;
+- expediente privado productivo protegido por Cloudflare Access; D1 migrada y vacia, sin apertura de contacto ni otras escrituras reales;
 - Registry publico versionado con perfiles HTML, JSON y Markdown;
 - guia publica `/aeo-y-crawlers` para educacion AEO, decisiones de crawling y valor comercial;
 - catalogo `/.well-known/crawler-policy-catalog.json` con fuentes y finalidades por proveedor.
@@ -231,9 +231,10 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 16. **Gate 6B - captura consentida remota OFF cerrada:** preview publico cerrado; la interfaz privada Sites esta retirada y la frontera Worker heredada queda como evidencia remota con escrituras OFF y D1 vacia. Datos reales y correo siguen deshabilitados. La captura no se reabre antes del corte Cloudflare-native.
 17. **Gate 6C - correo operativo, frontera local preparada:** politica `planned_draft_only`, aliases normalizados, consentimiento separado, idempotencia y revision humana para asuntos sensibles. DNS, casillas, routing, proveedor y envio requieren aprobacion separada.
 18. **Gate 6D - ventas y CRM ligero, frontera local preparada:** pipeline y transiciones `local_planning_only`, metadata sin PII, perdida razonada e idempotencia. D1, datos reales, scoring, propuestas y pagos requieren aprobacion separada.
-19. **Gate 6E - primer piloto pago humano:** catalogo, checkout, recibo, conciliacion y una entrega medida.
-20. **Gate 6F - comercio agentico sandbox:** un recurso read-only, x402/MPP, idempotencia y recibos sin dinero real al inicio.
-21. **Gate 6G - coordinacion avanzada:** A2A, OAuth, MCP owner-scoped, skills customizadas y capsulas por proveedor.
+19. **Cloudflare-native production cutover - desplegado y verificado:** `agentfriendlyweb.dev` sirve el Worker productivo, Access protege las rutas privadas, D1 conserva cero filas y Sites queda retenido solo para rollback inicial.
+20. **Gate 6E - primer piloto pago humano:** catalogo, checkout, recibo, conciliacion y una entrega medida.
+21. **Gate 6F - comercio agentico sandbox:** un recurso read-only, x402/MPP, idempotencia y recibos sin dinero real al inicio.
+22. **Gate 6G - coordinacion avanzada:** A2A, OAuth, MCP owner-scoped, skills customizadas y capsulas por proveedor.
 
 ## Recursos de descubrimiento
 
@@ -247,7 +248,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/api-catalog` | linkset hacia OpenAPI | desplegado |
 | `/.well-known/ai-catalog.json` | inventario de compatibilidad ARD | desplegado; propuesta en evolucion |
 | `/.well-known/ard.json` | fuente ARD vigente segun el draft observado | desplegado; propuesta en evolucion |
-| `/.well-known/infrastructure-status.json` | estado fechado del origen, canary, superficies retiradas y gate siguiente | canary Cloudflare-native protegido; 0% del trafico del origen publico |
+| `/.well-known/infrastructure-status.json` | estado fechado del origen, canary, rollback legado, superficies retiradas y gate siguiente | produccion Cloudflare-native activa; canary y release protegidos; Sites sin trafico apex |
 | `/.well-known/external-readiness.json` | historial AF-EV con procedencia y limites | desplegado y verificado; convencion del proyecto |
 | `/.well-known/agent-skills/index.json` | indice de skills descargables | desplegado, convencion del proyecto |
 | `/.well-known/agent-readiness.json` | estado de capacidades | desplegado, no es estandar oficial |

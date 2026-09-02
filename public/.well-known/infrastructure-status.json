@@ -3,33 +3,46 @@
   "convention": "Agent Friendly Web infrastructure status; not an official standard",
   "project": "agent-friendly-web",
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "observed_at": "2026-09-01",
-  "stale_after": "2026-09-08",
+  "observed_at": "2026-09-02",
+  "stale_after": "2026-09-09",
   "public_runtime": {
-    "state": "transitional",
-    "provider": "OpenAI Sites",
+    "state": "cloudflare_native_production",
+    "provider": "Cloudflare Workers",
     "canonical_origin": "https://agentfriendlyweb.dev",
+    "public_traffic_percent": 100,
     "accept_new_private_data": false,
-    "note": "The canonical public origin remains online through the legacy runtime while Cloudflare Worker parity and rollback are prepared. This is a migration source, not the target architecture."
+    "note": "The canonical origin is served by the full-stack Vinext Worker. Public discovery is active; contact, email, CRM and payment writes remain disabled."
   },
-  "cloudflare_native_candidate": {
-    "state": "canary_deployed_access_protected",
-    "target": "Cloudflare Workers with Vinext",
+  "production": {
+    "state": "deployed",
+    "runtime": "Cloudflare Workers with Vinext",
+    "worker": "agent-friendly-web-web-production",
     "private_identity": "Cloudflare Access signed JWT subject and audience",
-    "traffic_percent": 0,
-    "public_origin_dns_changed": false,
-    "remote_canary_created": true,
-    "remote_database_created": true,
     "worker_deployed": true,
-    "custom_domain_attached": true,
-    "access_protected": true,
+    "apex_custom_domain_attached": true,
+    "private_access_enforced": true,
+    "private_access_routes": ["/expediente*", "/capsula/*", "/api/projects/*"],
     "migrations_applied": 6,
     "functional_table_count": 13,
     "functional_row_count": 0,
-    "anonymous_edge_smoke": "passed",
+    "public_smoke": "passed",
+    "responsive_qa": "passed at 1440x900 and 390x844",
+    "rollback": "prepared and release detach-reattach rehearsed",
+    "note": "The public cutover completed on 2026-09-02. Verification wrote no functional rows."
+  },
+  "canary": {
+    "state": "retained_access_protected",
+    "host": "canary.agentfriendlyweb.dev",
+    "public_traffic_percent": 0,
+    "database_isolated": true,
+    "functional_row_count": 0
+  },
+  "release": {
+    "state": "retained_access_protected",
+    "host": "release.agentfriendlyweb.dev",
+    "public_traffic_percent": 0,
     "verified_locally": [
       "automated test suite",
-      "Vinext compatibility check",
       "production build",
       "Cloudflare deployment dry-run"
     ],
@@ -40,9 +53,15 @@
       "anonymous requests intercepted by Access on every representative route"
     ],
     "authenticated_html": "passed",
-    "responsive_qa": "passed at 1440x900 and 390x844",
-    "rollback": "prepared_not_executed",
-    "note": "The protected canary passed authenticated HTML, local route parity, Access edge and responsive QA. It receives no public-origin traffic and is not the production runtime. Rollback is prepared but was not executed against the healthy canary."
+    "detach_reattach_rollback": "passed"
+  },
+  "legacy_sites": {
+    "state": "rollback_retained_without_apex",
+    "provider": "OpenAI Sites",
+    "receives_apex_traffic": false,
+    "custom_domain_binding_retained": true,
+    "validation_txt_retained": true,
+    "note": "Historical Sites binding is retained only for the initial rollback window and is not the active runtime."
   },
   "retired_surfaces": [
     {
@@ -59,16 +78,15 @@
     "shared_cloudflare_account_does_not_merge_projects": true
   },
   "next_gate": {
-    "name": "afw_cloudflare_native_cutover_decision",
+    "name": "afw_cloudflare_native_stability_and_legacy_retirement",
     "host": "agentfriendlyweb.dev",
     "requirements": [
-      "explicit production cutover approval",
-      "production D1 decision and migration receipt",
-      "final public-origin comparison",
-      "bounded custom-domain cutover plan",
-      "post-cutover smoke and rollback window"
+      "repeat public smoke after the stability window",
+      "confirm D1 remains free of unintended writes",
+      "retain an exact DNS rollback receipt",
+      "decide separately when to detach the legacy Sites binding"
     ],
-    "authorization": "canary verification is closed; production cutover remains a separate decision and has not occurred"
+    "authorization": "production cutover completed; contact writes, email, CRM, payments and legacy retirement remain separate decisions"
   },
   "historical_evidence_policy": "Release receipts that mention Sites are retained as historical evidence and do not describe the current target architecture."
 }

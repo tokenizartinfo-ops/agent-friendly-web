@@ -66,6 +66,34 @@ test('Access edge smoke requires every canary route to be blocked before the app
   assert.ok(report.checks.every((check) => check.boundary === 'cloudflare_access'));
 });
 
+test('public edge smoke requires public contracts and Access on private routes', async () => {
+  const report = await runCloudflareNativeSmoke({
+    baseUrl: 'https://agentfriendlyweb.dev',
+    mode: 'public-edge',
+    fetchImpl: async (url) => new URL(url).pathname === '/expediente'
+      ? new Response(null, {
+        status: 302,
+        headers: { location: 'https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/production' },
+      })
+      : responseFor(new URL(url).pathname),
+  });
+
+  assert.equal(report.ok, true);
+  assert.equal(report.checks.find((check) => check.path === '/expediente').boundary, 'cloudflare_access');
+  assert.equal(report.checks.find((check) => check.path === '/llms.txt').boundary, 'public');
+});
+
+test('edge modes reject origins outside the exact Agent Friendly Web boundary', async () => {
+  await assert.rejects(() => runCloudflareNativeSmoke({
+    baseUrl: 'https://companion.tokenizart.info',
+    mode: 'public-edge',
+  }), /origin|Agent Friendly Web/i);
+  await assert.rejects(() => runCloudflareNativeSmoke({
+    baseUrl: 'https://example.com',
+    mode: 'access-edge',
+  }), /origin|Agent Friendly Web/i);
+});
+
 test('smoke fails if a private local route or protected canary route becomes public', async () => {
   const local = await runCloudflareNativeSmoke({
     baseUrl: 'http://127.0.0.1:8788',

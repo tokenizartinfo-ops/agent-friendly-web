@@ -1,6 +1,6 @@
 # Agent Friendly Web Cloudflare-native production cutover v1
 
-**Estado:** especificacion aprobada para implementacion controlada
+**Estado:** implementado; corte Cloudflare activo y Sites retenido para rollback
 **Fecha:** 2026-09-01
 **Owner:** Gabriel Mucchiut
 **Proyecto:** `agent-friendly-web`
@@ -108,3 +108,11 @@ El cutover falla cerrado salvo que todos estos controles esten verdes:
 
 El recibo `docs/CLOUDFLARE-NATIVE-PRODUCTION-CUTOVER-RECEIPT.md` debe registrar recursos, versiones, hashes, pruebas, timestamps, estado de D1, cambio DNS, resultado del rollback ensayado y decision de conservar o revertir el corte.
 
+## Resultado 2026-09-02
+
+- `agentfriendlyweb.dev` sirve el Worker `agent-friendly-web-web-production` mediante Custom Domain Cloudflare.
+- El smoke publico final paso las ocho superficies publicas y la frontera privada `/expediente`.
+- La D1 productiva conserva trece tablas funcionales y cero filas.
+- `release.agentfriendlyweb.dev` permanece protegido por Access para diagnostico controlado.
+- El binding Sites y sus TXT permanecen activos, sin recibir el dominio apex, durante la ventana de estabilidad.
+- El detalle auditable vive en `docs/CLOUDFLARE-NATIVE-PRODUCTION-CUTOVER-RECEIPT.md` y `docs/evidence/cloudflare-native-production-cutover-receipt.json`.

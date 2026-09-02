@@ -1,0 +1,100 @@
+{
+  "contract_version": "agentfriendly.cloudflare-native-production-cutover.v1",
+  "phase": "apex_cutover_ready",
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_public",
+  "origin": "https://agentfriendlyweb.dev",
+  "allowed_action": "bounded_cloudflare_native_apex_cutover",
+  "authorization": {
+    "approved": true,
+    "owner": "Gabriel Mucchiut",
+    "scope": "agent-friendly-web-production-cutover-v1"
+  },
+  "worker": {
+    "name": "agent-friendly-web-web-production",
+    "workers_dev": false,
+    "preview_urls": false,
+    "deployed": true,
+    "deployment_id": "ce265b49-9f6c-4c0c-ab74-656ecb93f0ad",
+    "version_id": "2863d8b4-552b-419f-89bc-4c0f4363ce35",
+    "apex_custom_domain_attached": false
+  },
+  "database": {
+    "name": "agent-friendly-web-web-production",
+    "id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8",
+    "isolation": "production_only",
+    "schema_state": "migrations_applied_empty",
+    "migration_count": 6,
+    "functional_table_count": 13,
+    "functional_row_count": 0,
+    "rows_written_during_verification": 0,
+    "time_travel_bookmark_recorded": true,
+    "time_travel_bookmark": "00000001-00000012-000050da-6071cbc8434461d6ffd3450a952af2e6"
+  },
+  "access": {
+    "application_id": "b7d7d62e-de25-4b4b-ac52-972b104738a1",
+    "audience": "afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac",
+    "team_domain": "tokenizart.cloudflareaccess.com",
+    "policy_decision": "allow",
+    "allowed_emails": ["tokenizart.info@gmail.com"],
+    "release_origin_protected": true,
+    "apex_private_destinations_prepared": true,
+    "apex_private_destinations": [
+      "agentfriendlyweb.dev/expediente*",
+      "agentfriendlyweb.dev/capsula/*",
+      "agentfriendlyweb.dev/api/projects/*"
+    ]
+  },
+  "release": {
+    "origin": "https://release.agentfriendlyweb.dev",
+    "custom_domain_id": "5a87a3ab6973b11aad5bd2acccf78bdd35e4b189",
+    "anonymous_access_smoke": "passed",
+    "authenticated_html": "passed",
+    "responsive_qa": ["1440x900", "390x844"],
+    "detach_reattach_rollback": "passed"
+  },
+  "comparison": {
+    "baseline_origin": "https://agentfriendlyweb.dev",
+    "candidate_origin": "https://release.agentfriendlyweb.dev",
+    "status": "passed",
+    "critical_failures": 0,
+    "method": "same-build local semantic comparison plus authenticated release HTML and anonymous Access smoke"
+  },
+  "legacy": {
+    "provider": "OpenAI Sites",
+    "project_id": "appgprj_6a8f19e35d688191a53e93432543e39c",
+    "custom_domain_id": "appgdom_6a8f665d5bc881919ac5fbdd05f69cbd",
+    "binding_state": "active_retained_for_rollback",
+    "validation_txt_retained": true
+  },
+  "dns_snapshot": {
+    "zone_id": "4b1a3fe4b6dcb81e9d6a633174c5939f",
+    "apex_records": [
+      { "id": "04591fffee45db59433aa4af15c48485", "type": "A", "name": "agentfriendlyweb.dev", "content": "162.159.143.30", "proxied": false, "ttl": 1 },
+      { "id": "52f25c64e4973872c3191ed6d3958a5e", "type": "A", "name": "agentfriendlyweb.dev", "content": "172.66.3.26", "proxied": false, "ttl": 1 }
+    ],
+    "rollback_restore_ready": true
+  },
+  "traffic": {
+    "public_percent_before_cutover": 0,
+    "canonical_origin_unchanged": true,
+    "release_linked_publicly": false
+  },
+  "capabilities": {
+    "contact_writes": false,
+    "email_sending": false,
+    "crm_remote": false,
+    "payments": false,
+    "tokenizart_runtime_dependency": false
+  },
+  "verification": {
+    "full_suite": "passed",
+    "full_suite_tests": 382,
+    "build": "passed",
+    "lint_errors": 0,
+    "lint_warnings": 1,
+    "production_dry_run": "passed",
+    "rollback_window_minutes": 30
+  }
+}
