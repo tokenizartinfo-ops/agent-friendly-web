@@ -383,13 +383,15 @@ Run: `git diff --stat HEAD~3..HEAD`
 
 Expected: only Agent Friendly Web files are changed; no Tokenizart runtime, repository or credential file appears.
 
-- [ ] **Step 5: Commit final truthful status**
+- [x] **Step 5: Commit final truthful status**
 
 ```bash
 git add docs public test
 git commit -m "docs: record verified inbound email canary"
 ```
 
-- [ ] **Step 6: Push and open a Draft PR**
+- [x] **Step 6: Push and open a Draft PR**
 
 Push the isolated branch and create a Draft PR whose body states: inbound only, destination private, no outbound provider, no newsletter, no message persistence, test evidence, rollback and Gate 6C.2 excluded.
+
+Draft PR: `https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/49`.
