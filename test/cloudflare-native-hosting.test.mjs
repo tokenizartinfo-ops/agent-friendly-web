@@ -92,12 +92,24 @@ test('public discovery exposes the active Cloudflare production state without st
 });
 
 test('active repository guidance describes Workers as production and Sites only as rollback evidence', () => {
-  const guidance = [read('README.md'), read('AGENTS.md')].join('\n');
+  const staleSitesRuntimeClaims = /vinculado al proyecto Sites|Frontend:.*sobre Sites|Sign in with ChatGPT provisto por Sites|current public Sites runtime|runtime publico(?: canonico)?.{0,40}(?:es|ejecuta(?:rse)? en|corre en|funciona sobre) (?:OpenAI )?Sites|canonical public runtime.{0,40}(?:is|runs on|is served by) (?:OpenAI )?Sites|(?:served by|runs on|ejecuta(?:do)? (?:en|sobre)) (?:OpenAI )?Sites|Sites.*runtime activo/i;
 
-  assert.match(guidance, /Cloudflare(?:-native)? (?:Worker|Workers)/i);
-  assert.match(guidance, /Sites.*rollback/i);
-  assert.doesNotMatch(guidance, /vinculado al proyecto Sites|Frontend:.*sobre Sites|Sign in with ChatGPT provisto por Sites/i);
-  assert.doesNotMatch(guidance, /current public Sites runtime is a temporary migration source/i);
+  for (const staleClaim of [
+    'El runtime publico canonico vuelve a ejecutarse en OpenAI Sites',
+    'The canonical public runtime is OpenAI Sites',
+    'The application runs on OpenAI Sites',
+    'Sites es el runtime activo',
+  ]) {
+    assert.match(staleClaim, staleSitesRuntimeClaims);
+  }
+
+  for (const path of ['README.md', 'AGENTS.md']) {
+    const guidance = read(path);
+    assert.match(guidance, /Cloudflare-native/i, path);
+    assert.match(guidance, /\bWorkers?\b/i, path);
+    assert.match(guidance, /Sites.*rollback/i, path);
+    assert.doesNotMatch(guidance, staleSitesRuntimeClaims, path);
+  }
 });
 
 test('the roadmap no longer lists the completed public-origin migration as planned work', () => {
