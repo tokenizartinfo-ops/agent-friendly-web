@@ -28,7 +28,8 @@
     "ACCESS_TEAM_DOMAIN": "replace-before-remote-deploy.cloudflareaccess.com",
     "ACCESS_AUD": "replace-before-remote-deploy",
     "AFW_CANARY_DIAGNOSTICS_ENABLED": "false",
-    "AFW_REMOTE_DEPLOY_ENABLED": "false"
+    "AFW_REMOTE_DEPLOY_ENABLED": "false",
+    "AFW_EMAIL_REVIEW_READY_ENABLED": "false"
   },
   "env": {
     "canary": {
@@ -47,7 +48,8 @@
         "ACCESS_TEAM_DOMAIN": "tokenizart.cloudflareaccess.com",
         "ACCESS_AUD": "5e6f80fdd77e026d6e9f513d4614d22e10cba0f7a90ea4bf7a10b27d6de67a45",
         "AFW_CANARY_DIAGNOSTICS_ENABLED": "true",
-        "AFW_REMOTE_DEPLOY_ENABLED": "false"
+        "AFW_REMOTE_DEPLOY_ENABLED": "false",
+        "AFW_EMAIL_REVIEW_READY_ENABLED": "false"
       }
     },
     "production": {
@@ -66,7 +68,8 @@
         "ACCESS_TEAM_DOMAIN": "replace-before-remote-deploy.cloudflareaccess.com",
         "ACCESS_AUD": "replace-before-remote-deploy",
         "AFW_CANARY_DIAGNOSTICS_ENABLED": "false",
-        "AFW_REMOTE_DEPLOY_ENABLED": "false"
+        "AFW_REMOTE_DEPLOY_ENABLED": "false",
+        "AFW_EMAIL_REVIEW_READY_ENABLED": "false"
       }
     }
   }

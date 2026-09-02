@@ -31,6 +31,14 @@ test('web Worker config isolates canary and production without attaching traffic
   assert.match(canary.vars.ACCESS_AUD, /^[0-9a-f]{64}$/i);
   assert.equal(canary.vars.AFW_REMOTE_DEPLOY_ENABLED, 'false');
   assert.equal(production.vars.AFW_REMOTE_DEPLOY_ENABLED, 'false');
+  assert.equal(config.vars.AFW_EMAIL_REVIEW_READY_ENABLED, 'false');
+  assert.equal(canary.vars.AFW_EMAIL_REVIEW_READY_ENABLED, 'false');
+  assert.equal(production.vars.AFW_EMAIL_REVIEW_READY_ENABLED, 'false');
+  assert.equal(config.send_email, undefined);
+  assert.equal(canary.send_email, undefined);
+  assert.equal(production.send_email, undefined);
+  assert.equal(canary.ratelimits, undefined);
+  assert.equal(production.ratelimits, undefined);
 });
 
 test('package exposes bounded Cloudflare-native canary commands and no production deploy command', () => {

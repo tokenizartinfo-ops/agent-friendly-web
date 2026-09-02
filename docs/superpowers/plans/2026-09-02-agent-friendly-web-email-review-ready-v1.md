@@ -103,21 +103,21 @@ Expected: all focused storage and migration tests pass.
 - Consumes: HTTP request, Access identity verifier, rate limiter, D1 adapter and `SendEmail` binding supplied by the runtime.
 - Produces: `processEmailReviewReadyRequest(input, dependencies)` and a Next POST adapter.
 
-- [ ] **Step 1: Write failing orchestration tests**
+- [x] **Step 1: Write failing orchestration tests**
 
 Assert kill switch, identity, actor hash allowlist, exact origin, rate limit and runtime bindings all fail closed before reservation. Assert first send returns 201, replay returns 200 without calling the binding twice, provider failure records only a stable code and performs zero retries.
 
-- [ ] **Step 2: Run the test to verify RED**
+- [x] **Step 2: Run the test to verify RED**
 
 Run: `node --test test/email-review-ready-gate.test.mjs`
 
 Expected: module-not-found for `lib/email-review-ready-gate.mjs`.
 
-- [ ] **Step 3: Implement gate and route adapter**
+- [x] **Step 3: Implement gate and route adapter**
 
 The gate calls dependencies in this order: validate, authorize actor hash, rate limit, reserve, build template, send once, mark sent. The route reads at most 2 KiB JSON, verifies Cloudflare Access and uses `Cache-Control: no-store, private`. `AFW_EMAIL_REVIEW_READY_ENABLED` is committed as `false`; no `send_email` or remote route is added.
 
-- [ ] **Step 4: Run focused tests to verify GREEN**
+- [x] **Step 4: Run focused tests to verify GREEN**
 
 Run: `node --test test/email-review-ready*.test.mjs test/cloudflare-web-config.test.mjs`
 
