@@ -1,6 +1,6 @@
 {
   "contract": "agent-friendly-web.email-operations.v1",
-  "status": "inbound_canary_verified",
+  "status": "inbound_and_one_shot_outbound_verified",
   "updated_at": "2026-09-02",
   "canonical_address": {
     "address": "hello@agentfriendlyweb.dev",
@@ -21,7 +21,9 @@
     "dns_configured": true,
     "synthetic_delivery_verified": true,
     "outbound_provider_selected": true,
-    "email_provider_configured": false,
+    "email_provider_configured": true,
+    "outbound_delivery_verified": true,
+    "outbound_binding_configured": false,
     "message_body_processing": false,
     "attachment_processing": false
   },
@@ -41,7 +43,7 @@
   ],
   "blocked_actions": [
     "send_email",
-    "configure_dns",
+    "create_send_email_binding",
     "provision_mailbox",
     "configure_email_provider",
     "read_message_body",

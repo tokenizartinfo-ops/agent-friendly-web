@@ -1,0 +1,36 @@
+{
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_email_outbound_canary",
+  "origin": "agentfriendlyweb.dev",
+  "observedAt": "2026-09-02T22:11:15Z",
+  "provider": "cloudflare_email_service",
+  "sendingDomain": {
+    "name": "agentfriendlyweb.dev",
+    "enabled": true,
+    "returnPath": "cf-bounce.agentfriendlyweb.dev",
+    "dkimSelector": "cf-bounce"
+  },
+  "dns": {
+    "recordCount": 6,
+    "missingCount": 0,
+    "conflictCount": 0,
+    "records": [
+      { "name": "cf-bounce.agentfriendlyweb.dev", "type": "MX", "count": 3 },
+      { "name": "cf-bounce.agentfriendlyweb.dev", "type": "TXT", "contentClass": "spf_policy", "count": 1 },
+      { "name": "cf-bounce._domainkey.agentfriendlyweb.dev", "type": "TXT", "contentClass": "dkim_public_key", "count": 1 },
+      { "name": "_dmarc.agentfriendlyweb.dev", "type": "TXT", "contentClass": "dmarc_policy", "count": 1 }
+    ],
+    "publicResolverVerified": true
+  },
+  "inboundRouting": {
+    "enabled": true,
+    "ruleCount": 5,
+    "enabledRuleCount": 4,
+    "catchAllEnabled": false,
+    "preserved": true
+  },
+  "billingChanged": false,
+  "privateDestinationPersisted": false,
+  "rawDkimPersisted": false
+}

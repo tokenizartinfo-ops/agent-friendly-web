@@ -8,11 +8,11 @@ async function read(path) {
   return readFile(new URL(path, root), 'utf8');
 }
 
-test('public email operations contract reports the verified inbound canary and outbound limits truthfully', async () => {
+test('public email operations contract reports verified inbound and one-shot outbound canaries truthfully', async () => {
   const contract = JSON.parse(await read('public/.well-known/email-operations-contract.json'));
 
   assert.equal(contract.contract, 'agent-friendly-web.email-operations.v1');
-  assert.equal(contract.status, 'inbound_canary_verified');
+  assert.equal(contract.status, 'inbound_and_one_shot_outbound_verified');
   assert.equal(contract.canonical_address.address, 'hello@agentfriendlyweb.dev');
   assert.equal(contract.canonical_address.status, 'inbound_verified');
   assert.deepEqual(contract.aliases.map((item) => item.address), [
@@ -29,14 +29,16 @@ test('public email operations contract reports the verified inbound canary and o
   assert.equal(contract.capabilities.dns_configured, true);
   assert.equal(contract.capabilities.synthetic_delivery_verified, true);
   assert.equal(contract.capabilities.outbound_provider_selected, true);
-  assert.equal(contract.capabilities.email_provider_configured, false);
+  assert.equal(contract.capabilities.email_provider_configured, true);
+  assert.equal(contract.capabilities.outbound_delivery_verified, true);
+  assert.equal(contract.capabilities.outbound_binding_configured, false);
   assert.equal(
     contract.outbound_canary_contract,
     'https://agentfriendlyweb.dev/.well-known/email-outbound-canary-contract.json',
   );
   assert.equal(contract.requires_separate_remote_approval, true);
   assert.ok(contract.blocked_actions.includes('send_email'));
-  assert.ok(contract.blocked_actions.includes('configure_dns'));
+  assert.ok(contract.blocked_actions.includes('create_send_email_binding'));
   assert.ok(contract.blocked_actions.includes('read_message_body'));
 });
 

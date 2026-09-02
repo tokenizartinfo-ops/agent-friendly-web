@@ -125,3 +125,9 @@ Si el canary remoto falla, el orden de rollback sera:
 5. No existen scripts `apply`, `deploy` o `send` para este gate.
 6. Documentacion y roadmaps distinguen seleccion de proveedor de configuracion remota.
 7. Tests, lint, build y escaneo de secretos quedan verdes antes de actualizar el Draft PR.
+
+## Resultado remoto posterior - Gate 6C.2B
+
+El 2026-09-02 las dos decisiones remotas fueron aprobadas. El dominio y sus seis DNS quedaron activos; un canary manual via Cloudflare REST API fue recibido con SPF, DKIM y DMARC en `pass`. Para evitar una capacidad permanente sin caso de negocio definido, no se creo el binding previsto: el estado final es `human_canary_verified_binding_blocked` y cualquier envio adicional permanece bloqueado.
+
+Esta decision conserva el objetivo de seguridad del diseño con menor superficie: no existe Worker, ruta, cron, secreto de aplicacion ni automatizacion que pueda repetir el mensaje. Gate 6C.3 debera redefinir el binding solo junto con un caso transaccional real.

@@ -52,6 +52,8 @@ Ambos aparecen en AI Catalog, ARD, readiness y mapa del sitio. La publicacion de
 
 **Actualizacion Gate 6C.2A:** Cloudflare Email Service queda seleccionado como proveedor previsto bajo `provider_selected_remote_unconfigured`. `/.well-known/email-inbound-canary-contract.json` y `/.well-known/email-outbound-canary-contract.json` se incorporan al readiness, AI Catalog, ARD y mapa humano. El dominio emisor, DNS de salida, binding, billing y envio siguen deshabilitados; la seleccion no se contabiliza como capacidad de salida activa.
 
+**Actualizacion Gate 6C.2B:** el dominio remitente y seis DNS de autenticacion quedaron activos, y un canary humano unico fue recibido con SPF, DKIM y DMARC en `pass`. El contrato avanza a `human_canary_verified_binding_blocked`. Se contabiliza la entrega verificada, pero no una capacidad recurrente: no hay binding, Worker de envio, automatizacion ni segundo mensaje habilitado.
+
 ## Inconsistencia terminologica separada
 
 La metodologia historica contiene dos formulaciones de AF-5: `Transaccional` y `agent-native con gobierno`. La referencia actual llega a 95/100 sin comercio porque las otras seis capas suman 95. Esa diferencia no se cambia silenciosamente en esta correccion: requiere una decision terminologica HITL y una migracion coordinada de metodologia, OKF, MCP, FAQ y documentos.

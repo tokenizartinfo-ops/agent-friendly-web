@@ -1,10 +1,10 @@
 {
   "contract": "agent-friendly-web.email-outbound-canary.v1",
-  "status": "provider_selected_remote_unconfigured",
+  "status": "human_canary_verified_binding_blocked",
   "updated_at": "2026-09-02",
   "provider": {
     "id": "cloudflare_email_service",
-    "status": "selected_remote_unconfigured"
+    "status": "sending_domain_ready_one_shot_verified"
   },
   "identity": {
     "sender": "hello@agentfriendlyweb.dev",
@@ -13,22 +13,33 @@
     "template_id": "transactional_canary_v1"
   },
   "remote_state": {
-    "sending_domain_onboarded": false,
-    "dns_applied": false,
-    "dns_preview_missing_records": 6,
+    "sending_domain_onboarded": true,
+    "dns_applied": true,
+    "dns_preview_missing_records": 0,
     "dns_preview_conflicts": 0,
+    "binding_configured": false,
     "workers_paid_status": "unknown"
   },
   "capabilities": {
     "local_preflight": true,
     "provider_selected": true,
-    "provider_configured": false,
+    "provider_configured": true,
+    "outbound_delivery_verified": true,
     "outbound_sending": false,
-    "human_canary_verified": false,
+    "human_canary_verified": true,
     "automatic_sending": false,
     "arbitrary_recipients": false,
     "marketing": false,
     "message_persistence": false
+  },
+  "verification": {
+    "transport": "cloudflare_email_service_rest_api_one_shot",
+    "delivery_count": 1,
+    "received_count": 1,
+    "spf": "pass",
+    "dkim": "pass",
+    "dmarc": "pass",
+    "receipt": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/evidence/email-outbound-human-canary-2026-09-02.json"
   },
   "cost": {
     "pricing_observed_at": "2026-09-02",
@@ -41,10 +52,8 @@
   },
   "blocked_actions": [
     "send_email",
-    "configure_dns",
-    "configure_email_service_domain",
-    "change_workers_plan",
     "create_send_email_binding",
+    "change_workers_plan",
     "allow_arbitrary_recipient",
     "send_automatic_reply",
     "start_newsletter",
@@ -52,5 +61,5 @@
     "persist_message_content"
   ],
   "requires_separate_remote_approval": true,
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C2-EMAIL-OUTBOUND-CANARY-LOCAL-GATE-2026-09-02.md"
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C2B-EMAIL-OUTBOUND-REMOTE-CANARY-2026-09-02.md"
 }

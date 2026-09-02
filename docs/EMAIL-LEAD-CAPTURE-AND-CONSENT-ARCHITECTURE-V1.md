@@ -189,6 +189,12 @@ El preflight local y su contrato publico no realizan red ni envios. `hello@agent
 
 El detalle vive en `docs/BLOCK-6C2-EMAIL-OUTBOUND-CANARY-LOCAL-GATE-2026-09-02.md`.
 
+## Actualizacion Gate 6C.2B - 2026-09-02
+
+`agentfriendlyweb.dev` fue incorporado a Cloudflare Email Service. Los seis registros de retorno y autenticacion quedaron publicados sin conflictos, y un canary humano unico llego al destino verificado con SPF, DKIM y DMARC en `pass`. El estado contractual es `human_canary_verified_binding_blocked`.
+
+La prueba uso Cloudflare REST API como operacion puntual. No se creo binding, Worker, ruta, cron ni reintento; por eso `outbound_sending` sigue `false` como capacidad recurrente. Un envio futuro requiere primero un caso transaccional definido y Gate 6C.3. La evidencia saneada vive en `docs/BLOCK-6C2B-EMAIL-OUTBOUND-REMOTE-CANARY-2026-09-02.md`.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;

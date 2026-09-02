@@ -127,7 +127,7 @@ Si ingles supera de manera sostenida al menos la mitad de los leads calificados 
 
 `seguridad@agentfriendlyweb.dev`, `auditoria@agentfriendlyweb.dev` y `bajas@agentfriendlyweb.dev` permanecen reservados y no configurados. `no-reply@` descarta entrada y el catch-all esta deshabilitado.
 
-Todos los aliases activos llegan a una unica operacion privada. La web puede mostrar el alias local, pero contratos, manifiestos y directorios usan `hello@`. Gate 6C.2A selecciono Cloudflare Email Service para salida bajo `provider_selected_remote_unconfigured`: todavia no hay dominio emisor, binding ni envio. Las respuestas conservaran el alias por el que llego la consulta cuando el proveedor y el gate humano lo permitan. No se crean tres newsletters, tres CRMs ni tres historias de consentimiento.
+Todos los aliases activos llegan a una unica operacion privada. La web puede mostrar el alias local, pero contratos, manifiestos y directorios usan `hello@`. Gate 6C.2B verifico dominio, SPF, DKIM, DMARC y una entrega saliente humana, pero no dejo binding ni envio recurrente. Las respuestas conservaran el alias por el que llego la consulta solo cuando exista un caso transaccional aprobado. No se crean tres newsletters, tres CRMs ni tres historias de consentimiento.
 
 ## Experimentos iniciales
 

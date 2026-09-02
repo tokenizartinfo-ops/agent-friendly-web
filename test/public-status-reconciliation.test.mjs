@@ -7,12 +7,14 @@ const canonical = 'https://agentfriendlyweb.dev';
 test('public status ledger exposes planning contracts without inflating active capabilities', async () => {
   const readiness = JSON.parse(await readFile('public/.well-known/agent-readiness.json', 'utf8'));
 
-  assert.equal(readiness.capabilities.email_operations.status, 'inbound_verified_outbound_planned');
+  assert.equal(readiness.capabilities.email_operations.status, 'inbound_and_one_shot_outbound_verified');
   assert.equal(readiness.capabilities.email_operations.inbound_routing, true);
   assert.equal(readiness.capabilities.email_operations.outbound_sending, false);
   assert.equal(readiness.capabilities.email_operations.dns_configured, true);
   assert.equal(readiness.capabilities.email_operations.outbound_provider_selected, true);
-  assert.equal(readiness.capabilities.email_operations.email_provider_configured, false);
+  assert.equal(readiness.capabilities.email_operations.email_provider_configured, true);
+  assert.equal(readiness.capabilities.email_operations.outbound_delivery_verified, true);
+  assert.equal(readiness.capabilities.email_operations.outbound_binding_configured, false);
   assert.deepEqual(readiness.capabilities.email_operations.resources, [
     '/.well-known/email-operations-contract.json',
     '/.well-known/email-inbound-canary-contract.json',
