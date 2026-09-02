@@ -1,0 +1,43 @@
+{
+  "contract": "agent-friendly-web.commercial-control.v1",
+  "status": "local_synthetic_only",
+  "updated_at": "2026-09-02",
+  "public_ui": false,
+  "synthetic_data_only": true,
+  "dependencies": [
+    "agent-friendly-web.crm-lite.v1",
+    "agent-friendly-web.traction-f1.v1"
+  ],
+  "views": [
+    "overview",
+    "pipeline",
+    "pricing_hypotheses",
+    "content_plan",
+    "email_template_inventory",
+    "metric_definitions"
+  ],
+  "capabilities": {
+    "local_filtering": true,
+    "local_planning": true,
+    "remote_persistence": false,
+    "email_sending": false,
+    "social_publishing": false,
+    "proposal_creation": false,
+    "payment_collection": false,
+    "customer_site_changes": false
+  },
+  "accepts_pii": false,
+  "accepts_message_bodies": false,
+  "accepts_credentials": false,
+  "blocked_actions": [
+    "persist_opportunity",
+    "send_email",
+    "publish_social_content",
+    "create_proposal",
+    "publish_price",
+    "charge_payment",
+    "modify_customer_site"
+  ],
+  "requires_separate_remote_approval": true,
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6D1-COMMERCIAL-CONTROL-LOCAL-GATE-2026-09-02.md"
+}
