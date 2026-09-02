@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-09-02
 
-**Estado:** `remote_routing_configured_test_pending`; DNS y reglas entrantes aplicados, prueba sintetica desde un remitente externo pendiente
+**Estado:** `inbound_canary_verified`; DNS, reglas y prueba sintetica metadata-only verificados
 
 ## Objetivo
 
@@ -107,4 +107,4 @@ El preflight no acepta la direccion privada de destino, no hace red y no ejecuta
 
 La aplicacion remota posterior dejo Email Routing en `ready`, creo tres reglas `forward`, una regla `drop` para `no-reply@` y mantuvo el catch-all historico deshabilitado. La resolucion DNS publica confirma los tres MX de Cloudflare y el SPF de routing. La evidencia saneada vive en `docs/evidence/email-inbound-canary-application-2026-09-02.json`.
 
-El cierre sigue pendiente: la unica conexion Gmail disponible pertenece a la propia bandeja receptora. Cloudflare recomienda probar desde otra identidad. Hasta realizar esa prueba, `inbound_routing=true` significa configuracion remota presente, no entrega funcional certificada; `synthetic_delivery_verified=false` conserva esa diferencia.
+El cierre se verifico desde una identidad externa allowlisted: `hello@`, `hola@` y `ola@` registraron exactamente una entrega cada uno, mientras `no-reply@` no entrego. Solo se inspeccionaron metadatos de los cuatro mensajes de prueba; no se leyeron cuerpos ni adjuntos, no hubo respuesta y no se habilito salida. El recibo saneado vive en `docs/evidence/email-inbound-canary-receipt-2026-09-02.json`.

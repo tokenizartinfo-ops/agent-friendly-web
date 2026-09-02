@@ -41,7 +41,7 @@
   },
   "capabilities": {
     "inboundRoutingConfigured": true,
-    "syntheticDeliveryVerified": false,
+    "syntheticDeliveryVerified": true,
     "outboundConfigured": false,
     "automaticRepliesConfigured": false,
     "messagePersistenceConfigured": false

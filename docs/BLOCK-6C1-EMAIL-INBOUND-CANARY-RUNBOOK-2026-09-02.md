@@ -51,7 +51,7 @@ El 2026-09-02 se completo la configuracion remota dentro de la frontera declarad
 - catch-all historico conservado y deshabilitado;
 - cero Email Worker, proveedor de salida, auto-respuesta o persistencia de mensajes.
 
-La aplicacion y su rollback reproducible se registran en `docs/evidence/email-inbound-canary-application-2026-09-02.json`. El recibo en `docs/evidence/email-inbound-canary-receipt-2026-09-02.json` permanece `pending_external_sender`.
+La aplicacion y su rollback reproducible se registran en `docs/evidence/email-inbound-canary-application-2026-09-02.json`. El recibo metadata-only verificado vive en `docs/evidence/email-inbound-canary-receipt-2026-09-02.json`.
 
 ## Direcciones
 
@@ -127,7 +127,7 @@ El kill switch consiste en deshabilitar o eliminar las cuatro reglas creadas por
 7. conservar identificadores, timestamps, conteos y causa, sin cuerpos ni adjuntos;
 8. devolver el contrato a `local_preflight_ready_remote_unconfigured`.
 
-Mientras el routing permanezca configurado pero la prueba externa no haya cerrado, el contrato usa `remote_routing_configured_test_pending`. No debe presentarse como `inbound_canary_verified`.
+La prueba externa cerro con una entrega por alias activo y cero entregas para `no-reply@`; el contrato usa `inbound_canary_verified`. Este estado certifica solo recepcion entrante acotada y no habilita envio, respuestas automaticas, lectura de cuerpos, adjuntos ni persistencia.
 
 La direccion de destino no se elimina automaticamente: es account-scoped y podria utilizarse en otro dominio. Solo se elimina si fue creada por este gate, no tiene reglas dependientes y una decision especifica lo autoriza.
 

@@ -63,7 +63,7 @@ La version publica permite completar y revisar localmente la solicitud, pero no 
 
 **Direccion canonica candidata:** `hello@agentfriendlyweb.dev`.
 
-**Estado actual:** el estado previo `planned_draft_only` avanzo a `remote_routing_configured_test_pending`. Gate 6C.1 tiene destino privado verificado, DNS de Email Routing y reglas entrantes activas para `hello@`, `hola@` y `ola@`; `no-reply@` descarta y el catch-all sigue deshabilitado. Falta comprobar entregas desde un remitente externo distinto de la bandeja receptora. No existen proveedor de salida, envio, respuestas automaticas ni persistencia de mensajes.
+**Estado actual:** el estado previo `planned_draft_only` avanzo a `inbound_canary_verified`. Gate 6C.1 tiene destino privado verificado, DNS de Email Routing y reglas entrantes activas para `hello@`, `hola@` y `ola@`; una prueba externa confirmo una entrega por alias, cero entregas para `no-reply@` y catch-all deshabilitado. No existen proveedor de salida, envio, respuestas automaticas ni persistencia de mensajes.
 
 Aliases locales: `hola@agentfriendlyweb.dev` y `ola@agentfriendlyweb.dev`. Todos llegan a la misma operacion; no se crean silos por idioma.
 

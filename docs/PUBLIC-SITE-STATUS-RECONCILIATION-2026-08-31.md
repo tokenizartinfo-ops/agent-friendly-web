@@ -48,7 +48,7 @@ Los contratos ya fusionados de Gate 6C y Gate 6D se publican con limites explici
 
 Ambos aparecen en AI Catalog, ARD, readiness y mapa del sitio. La publicacion del contrato no activa proveedor, DNS, persistencia, contactos reales, propuestas, email ni pagos.
 
-**Actualizacion 2026-09-02:** `/.well-known/email-operations-contract.json` avanza de `planned_draft_only` a `inbound_routing_configured_test_pending`. Email Routing y su DNS estan configurados, pero la entrega sintetica desde un remitente externo sigue pendiente. Proveedor de salida, envio, auto-respuestas, lectura de cuerpos, adjuntos y persistencia permanecen deshabilitados.
+**Actualizacion 2026-09-02:** `/.well-known/email-operations-contract.json` avanza de `planned_draft_only` a `inbound_canary_verified`. Email Routing, DNS y la entrega sintetica desde un remitente externo quedaron verificados para los tres aliases activos; `no-reply@` no entrego. Proveedor de salida, envio, auto-respuestas, lectura de cuerpos, adjuntos y persistencia permanecen deshabilitados.
 
 ## Inconsistencia terminologica separada
 

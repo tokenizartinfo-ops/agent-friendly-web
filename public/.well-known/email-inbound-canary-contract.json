@@ -1,6 +1,6 @@
 {
   "contract": "agent-friendly-web.email-inbound-canary.v1",
-  "status": "remote_routing_configured_test_pending",
+  "status": "inbound_canary_verified",
   "updated_at": "2026-09-02",
   "project": "agent-friendly-web",
   "environment": "afw_email_inbound_canary",
@@ -22,7 +22,7 @@
     "local_preflight": true,
     "inbound_routing": true,
     "dns_configured": true,
-    "synthetic_delivery_verified": false,
+    "synthetic_delivery_verified": true,
     "outbound_sending": false,
     "automatic_replies": false,
     "newsletter": false,
@@ -32,6 +32,6 @@
     "d1_persistence": false
   },
   "private_destination_published": false,
-  "remote_dependency": "external_sender_synthetic_delivery_test",
+  "remote_dependency": null,
   "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C1-EMAIL-IDENTITY-AND-INBOUND-CANARY-DESIGN-2026-09-02.md"
 }

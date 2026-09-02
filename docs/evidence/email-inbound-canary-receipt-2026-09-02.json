@@ -1,17 +1,15 @@
 {
   "contract": "agent-friendly-web.email-inbound-canary.v1",
-  "testId": "afw-email-canary-pending-20260902",
-  "verificationStatus": "pending_external_sender",
-  "syntheticDeliveryVerified": false,
-  "blocker": "sender_different_from_private_destination_required",
-  "activeAliasesPending": [
-    "hello@agentfriendlyweb.dev",
-    "hola@agentfriendlyweb.dev",
-    "ola@agentfriendlyweb.dev"
+  "testId": "afw-email-canary-20260902-external-sender",
+  "aliasResults": [
+    { "alias": "hello@agentfriendlyweb.dev", "deliveryCount": 1 },
+    { "alias": "hola@agentfriendlyweb.dev", "deliveryCount": 1 },
+    { "alias": "ola@agentfriendlyweb.dev", "deliveryCount": 1 }
   ],
-  "blockedAliasPending": "no-reply@agentfriendlyweb.dev",
-  "outboundConfigured": false,
+  "noReplyDeliveryCount": 0,
+  "senderAllowlisted": true,
   "responseSent": false,
   "bodyPersisted": false,
-  "attachmentsPersisted": false
+  "attachmentsPersisted": false,
+  "outboundConfigured": false
 }

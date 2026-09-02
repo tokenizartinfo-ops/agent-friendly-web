@@ -1,25 +1,25 @@
 {
   "contract": "agent-friendly-web.email-operations.v1",
-  "status": "inbound_routing_configured_test_pending",
+  "status": "inbound_canary_verified",
   "updated_at": "2026-09-02",
   "canonical_address": {
     "address": "hello@agentfriendlyweb.dev",
-    "status": "inbound_configured_test_pending"
+    "status": "inbound_verified"
   },
   "aliases": [
-    { "address": "hola@agentfriendlyweb.dev", "purpose": "spanish-entry", "status": "inbound_configured_test_pending" },
-    { "address": "ola@agentfriendlyweb.dev", "purpose": "portuguese-entry", "status": "inbound_configured_test_pending" },
+    { "address": "hola@agentfriendlyweb.dev", "purpose": "spanish-entry", "status": "inbound_verified" },
+    { "address": "ola@agentfriendlyweb.dev", "purpose": "portuguese-entry", "status": "inbound_verified" },
     { "address": "auditoria@agentfriendlyweb.dev", "purpose": "audit-and-plan", "status": "reserved_not_configured" },
     { "address": "seguridad@agentfriendlyweb.dev", "purpose": "security-and-abuse", "status": "reserved_not_configured" },
     { "address": "bajas@agentfriendlyweb.dev", "purpose": "consent-withdrawal", "status": "reserved_not_configured" },
-    { "address": "no-reply@agentfriendlyweb.dev", "purpose": "closed-inbound", "status": "drop_configured_test_pending" }
+    { "address": "no-reply@agentfriendlyweb.dev", "purpose": "closed-inbound", "status": "drop_verified" }
   ],
   "capabilities": {
     "local_draft_planning": true,
     "inbound_routing": true,
     "outbound_sending": false,
     "dns_configured": true,
-    "synthetic_delivery_verified": false,
+    "synthetic_delivery_verified": true,
     "email_provider_configured": false,
     "message_body_processing": false,
     "attachment_processing": false

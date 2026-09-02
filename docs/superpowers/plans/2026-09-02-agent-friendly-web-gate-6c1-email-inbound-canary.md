@@ -322,11 +322,11 @@ For each active alias call `POST /zones/{zone_id}/email/routing/rules` with one 
 
 Re-read all rules. Require exactly one enabled AFW rule per active alias, one enabled drop rule for `no-reply@`, no enabled catch-all and no Worker action.
 
-- [ ] **Step 5: Run the synthetic reception test** - pending a sender different from the private destination
+- [x] **Step 5: Run the synthetic reception test**
 
 From a separate approved sender, send one non-sensitive message per active alias using a unique test ID. Confirm exactly one arrival for each. Send one message to `no-reply@` and confirm no delivery. Do not reply and do not attach files.
 
-- [ ] **Step 6: Verify metadata-only receipt** - pending the external delivery observations
+- [x] **Step 6: Verify metadata-only receipt**
 
 Run `verifyEmailInboundCanaryReceipt` against a local receipt containing only test ID, aliases, counts and booleans. Require `status: passed`; otherwise execute rollback immediately.
 
