@@ -37,7 +37,12 @@ test('web Worker config isolates canary and production without attaching traffic
   assert.equal(config.send_email, undefined);
   assert.equal(canary.send_email, undefined);
   assert.equal(production.send_email, undefined);
-  assert.equal(canary.ratelimits, undefined);
+  assert.equal(config.ratelimits, undefined);
+  assert.deepEqual(canary.ratelimits, [{
+    name: 'AFW_EMAIL_REVIEW_READY_RATE_LIMITER',
+    namespace_id: '1895760673',
+    simple: { limit: 1, period: 60 },
+  }]);
   assert.equal(production.ratelimits, undefined);
 });
 
