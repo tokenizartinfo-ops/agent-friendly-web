@@ -92,15 +92,26 @@ test('public discovery exposes the active Cloudflare production state without st
 });
 
 test('active repository guidance describes Workers as production and Sites only as rollback evidence', () => {
-  const staleSitesRuntimeClaims = /vinculado al proyecto Sites|Frontend:.*sobre Sites|Sign in with ChatGPT provisto por Sites|current public Sites runtime|runtime publico(?: canonico)?.{0,40}(?:es|ejecuta(?:rse)? en|corre en|funciona sobre) (?:OpenAI )?Sites|canonical public runtime.{0,40}(?:is|runs on|is served by) (?:OpenAI )?Sites|(?:served by|runs on|ejecuta(?:do)? (?:en|sobre)) (?:OpenAI )?Sites|Sites.*runtime activo/i;
+  const staleSitesRuntimeClaims = /vinculado al proyecto Sites|Frontend:.*sobre Sites|Sign in with ChatGPT provisto por Sites|current public Sites runtime|runtime publico(?: canonico)?.{0,40}(?:es|ejecuta(?:rse)? en|corre en|funciona sobre) (?:OpenAI )?Sites|canonical public runtime.{0,40}(?:is|runs on|is served by) (?:OpenAI )?Sites|(?:public site|sitio publico|production hosting).{0,40}(?:hosted on|alojado en|:) (?:OpenAI )?Sites|(?:served by|runs on|ejecuta(?:do)? (?:en|sobre)) (?:OpenAI )?Sites|Sites.{0,30}(?:runtime activo|active runtime)/i;
+  const boundedSitesContext = /legacy|historical|rollback|retired|antiguo|retirad[oa]s?|no recibe|receives no|must not|no (?:puede|debe)|shared administrative|workspace namespace|not proof/i;
+
+  function assertSitesIsOnlyLegacy(guidance, label) {
+    for (const line of guidance.split(/\r?\n/).filter((value) => /Sites/i.test(value))) {
+      assert.match(line, boundedSitesContext, `${label}: ${line}`);
+      assert.doesNotMatch(line, staleSitesRuntimeClaims, `${label}: ${line}`);
+    }
+  }
 
   for (const staleClaim of [
     'El runtime publico canonico vuelve a ejecutarse en OpenAI Sites',
     'The canonical public runtime is OpenAI Sites',
     'The application runs on OpenAI Sites',
     'Sites es el runtime activo',
+    'The public site is hosted on OpenAI Sites',
+    'El sitio publico esta alojado en OpenAI Sites',
+    'Production hosting: OpenAI Sites',
   ]) {
-    assert.match(staleClaim, staleSitesRuntimeClaims);
+    assert.throws(() => assertSitesIsOnlyLegacy(staleClaim, 'synthetic stale claim'));
   }
 
   for (const path of ['README.md', 'AGENTS.md']) {
@@ -108,7 +119,7 @@ test('active repository guidance describes Workers as production and Sites only 
     assert.match(guidance, /Cloudflare-native/i, path);
     assert.match(guidance, /\bWorkers?\b/i, path);
     assert.match(guidance, /Sites.*rollback/i, path);
-    assert.doesNotMatch(guidance, staleSitesRuntimeClaims, path);
+    assertSitesIsOnlyLegacy(guidance, path);
   }
 });
 
