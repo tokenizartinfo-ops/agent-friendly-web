@@ -86,7 +86,8 @@ test('enforces all six integer signals between zero and two', () => {
     }),
     { ok: false, code: 'invalid_signal_score', field: 'signals.budget' },
   );
-  const { urgency: _urgency, ...missingUrgency } = baseAssessment.signals;
+  const missingUrgency = { ...baseAssessment.signals };
+  delete missingUrgency.urgency;
   assert.deepEqual(
     qualifyTractionOpportunity({ ...baseAssessment, signals: missingUrgency }),
     { ok: false, code: 'missing_signal', field: 'signals.urgency' },
