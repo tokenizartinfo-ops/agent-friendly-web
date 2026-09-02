@@ -22,6 +22,8 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 
 ## Orden de prelacion
 
+Este documento gobierna **Gate 6: producto y operacion**. La identidad empresarial, el modelo operativo, la preparacion previa al lanzamiento y las alternativas de capital pertenecen a **Gate 7: construccion empresarial y capital**, documentado por separado en `docs/COMPANY-BUILDING-AND-CAPITAL-ROADMAP-2026-09-02.md`. Ningun gate financiero activa capacidades tecnicas.
+
 ### Gate de infraestructura - origen Cloudflare-native
 
 **Estado:** candidato verificado y canary propio desplegado detras de Access; D1 aislada y vacia; 0% del trafico del origen publico; paridad autenticada y QA responsive cerrados; rollback preparado; corte pendiente de decision separada.
@@ -74,6 +76,11 @@ Aliases locales: `hola@agentfriendlyweb.dev` y `ola@agentfriendlyweb.dev`. Todos
 - politica de tiempos de respuesta.
 
 El cierre local se documenta en `docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-2026-08-31.md`. El gate solo se considerara operativo despues de verificar routing de entrada, autenticacion del remitente, proveedor de salida, canary allowlisted y rollback.
+
+La secuencia remota se divide para reducir riesgo:
+
+- **Gate 6C.1:** identidad `hello@`, aliases, Cloudflare Email Routing entrante, prueba allowlisted, kill switch y rollback; sin salida autonoma ni newsletter. Diseno: `docs/BLOCK-6C1-EMAIL-IDENTITY-AND-INBOUND-CANARY-DESIGN-2026-09-02.md`.
+- **Gate 6C.2:** proveedor de salida, SPF/DKIM/DMARC, plantillas transaccionales y envio humano verificado. Conserva una aprobacion y un canary propios.
 
 ### Gate 6D - Ventas y CRM ligero
 
@@ -276,6 +283,11 @@ Estos umbrales son hipotesis de arranque, no benchmarks de mercado. Se revisan c
 - hacer del monitoreo una suscripcion obligatoria para conservar entregables ya pagados.
 
 ## Documentos relacionados
+
+- `docs/COMPANY-BUILDING-AND-CAPITAL-ROADMAP-2026-09-02.md`
+- `docs/FOUNDER-NARRATIVE-AND-BRAND-FOUNDATION-V1.md`
+- `docs/SERVICE-DELIVERY-AND-VALUE-CHAIN-MAP-V1.md`
+- `docs/BLOCK-6C1-EMAIL-IDENTITY-AND-INBOUND-CANARY-DESIGN-2026-09-02.md`
 
 - `docs/INITIAL-GO-TO-MARKET-AND-SALES-MOTION-V1.md`
 - `docs/EMAIL-LEAD-CAPTURE-AND-CONSENT-ARCHITECTURE-V1.md`
