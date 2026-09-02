@@ -25,6 +25,24 @@ flowchart LR
 
 La cadena no comienza con una venta ni termina al publicar un archivo. El valor consiste en comprender el sitio, reconciliar su verdad, aplicar un cambio delimitado y demostrar el resultado.
 
+## Dos entradas al servicio
+
+La operacion actual comienza con un **sitio existente** y prepara un diagnostico, una capsula de cambios y evidencia de implementacion. La **creacion de sitios AFW-native** es una linea futura: parte de la identidad y del objetivo del owner para construir un sitio nuevo con experiencia humana y recursos machine-readable derivados de la misma fuente.
+
+```mermaid
+flowchart LR
+  E[Sitio existente] --> A[Auditoria y transformacion]
+  N[Sitio nuevo] --> C[Creacion AFW-native]
+  A --> P[Expediente portable]
+  C --> P
+  P --> H[Experiencia humana]
+  P --> M[Capa machine-readable]
+  H --> V[Verificacion]
+  M --> V
+```
+
+Ambas entradas preservan portabilidad, exportacion de contenidos y activos, documentacion del origen y operacion sin lock-in. La rama de sitio nuevo no esta desplegada ni disponible comercialmente: se activara solo despues de validar el servicio sobre sitios existentes y aprobar un arquetipo piloto.
+
 ## Etapas
 
 | Etapa | Entrada | Resultado | Gate humano |
@@ -95,6 +113,8 @@ Los subagentes preparan resultados acotados. Codex concilia el expediente y Gabr
 9. rollback disponible o motivo documentado;
 10. inventario final propiedad del cliente.
 
+Para un sitio AFW-native futuro se agregan el repositorio exportable, instrucciones de despliegue, mapa de componentes, contrato de contenido, inventario de recursos agenticos y procedimiento de migracion a otro proveedor.
+
 ## Excepciones
 
 - Sin control del origen: preparar expediente externo y paquete para mantenedor.
@@ -114,4 +134,3 @@ Los subagentes preparan resultados acotados. Codex concilia el expediente y Gabr
 - casos publicables con consentimiento;
 - reincidencia de contradicciones;
 - costo por entrega y margen observado.
-

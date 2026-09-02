@@ -20,7 +20,7 @@ El roadmap conserva dos vias coordinadas:
 ## Relacion con el roadmap tecnico
 
 - **Gate 6 gobierna producto y operacion:** captacion, correo, CRM, pilotos, comercio agentico y A2A.
-- **Gate 7 gobierna construccion empresarial y capital:** marca, modelo operativo, preparacion comercial, escenarios de crecimiento e Investor Room.
+- **Gate 7 gobierna construccion empresarial y capital:** marca, modelo operativo, preparacion comercial, escenarios de crecimiento, Investor Room y nuevas lineas de producto.
 
 Superar un Gate 7 no activa una capacidad tecnica de Gate 6. Obtener capital tampoco autoriza correo, pagos, datos personales, escritura sobre sitios o acciones agenticas.
 
@@ -136,6 +136,30 @@ Criterio de salida: material revisado, cifras conciliadas, fuentes citadas y aut
 
 Criterio de salida: el aumento de automatizacion reduce costo, tiempo o error con una metrica observada y un mecanismo de rollback.
 
+## Gate 7H - Creacion de sitios AFW-native
+
+**Objetivo:** convertir el aprendizaje obtenido al transformar sitios existentes en una linea futura para crear sitios nuevos que nazcan preparados para personas y agentes desde el momento cero.
+
+La tesis es que la proliferacion de sitios generados con IA no garantiza claridad, procedencia ni utilidad agentica. Agent Friendly Web podra ofrecer sitios personales, profesionales, institucionales y comerciales de bajo costo relativo, con una experiencia humana cuidada y una capa machine-readable coherente desde su primera version.
+
+Principios de producto:
+
+- identidad declarada por el owner, con fuentes, vigencia y alcance visibles;
+- arquitectura humana y machine-readable derivada de una misma verdad;
+- `robots.txt`, sitemap, metadatos estructurados y recursos agenticos adecuados al caso;
+- formularios, APIs, skills, MCP o A2A solo cuando exista una capacidad real que los justifique;
+- dominio, contenido, datos y entregables exportables;
+- despliegue portable y documentado, sin lock-in impuesto por Agent Friendly Web;
+- acceso minimo, aprobaciones y rollback para cada integracion;
+- multidioma y accesibilidad definidos desde el sistema de contenido, no agregados al final;
+- costos y mantenimiento explicados sin presentar una suscripcion como requisito para conservar lo ya adquirido.
+
+La primera oferta no sera un constructor generico ilimitado. Comenzara con arquetipos acotados y repetibles: sitio personal verificable, sitio profesional, sitio institucional, catalogo o servicio local. Cada arquetipo tendra un baseline, un expediente de identidad, componentes visuales, contratos de descubrimiento y pruebas externas fechadas.
+
+**Estado:** capacidad futura; no esta desplegada ni se ofrece comercialmente todavia.
+
+Criterio de salida: un sitio piloto nuevo puede demostrar propiedad y portabilidad, experiencia humana completa, recursos agenticos coherentes, medicion AFW y auditoria externa sin inventar endpoints ni depender de una infraestructura cautiva.
+
 ## Orden de ejecucion
 
 1. Cerrar Gate 7A y el mapa 7B como fuentes comunes.
@@ -146,6 +170,7 @@ Criterio de salida: el aumento de automatizacion reduce costo, tiempo o error co
 6. Investigar Gate 7E sin postular hasta tener un caso de uso de fondos.
 7. Derivar los materiales 7F desde datos revisados.
 8. Ampliar 7G solamente por demanda y evidencia.
+9. Prototipar 7H despues de cerrar el flujo de entrega de sitios existentes y medir al menos un piloto real.
 
 ## Gobierno y revision
 
@@ -163,4 +188,3 @@ Criterio de salida: el aumento de automatizacion reduce costo, tiempo o error co
 - `docs/GROWTH-AND-MONETIZATION-ROADMAP-2026-08-31.md`
 - `docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md`
 - `docs/EXTERNAL-AUDIT-AND-EVIDENCE-REGISTRY-2026-08-30.md`
-

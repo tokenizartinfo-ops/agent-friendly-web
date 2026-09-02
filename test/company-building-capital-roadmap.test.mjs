@@ -11,7 +11,7 @@ async function read(path) {
 test('company-building roadmap separates verified public strategy from private capital data', async () => {
   const roadmap = await read('docs/COMPANY-BUILDING-AND-CAPITAL-ROADMAP-2026-09-02.md');
 
-  for (const gate of ['Gate 7A', 'Gate 7B', 'Gate 7C', 'Gate 7D', 'Gate 7E', 'Gate 7F', 'Gate 7G']) {
+  for (const gate of ['Gate 7A', 'Gate 7B', 'Gate 7C', 'Gate 7D', 'Gate 7E', 'Gate 7F', 'Gate 7G', 'Gate 7H']) {
     assert.match(roadmap, new RegExp(gate));
   }
 
@@ -23,8 +23,31 @@ test('company-building roadmap separates verified public strategy from private c
   assert.match(roadmap, /apoyo no dilutivo/i);
   assert.match(roadmap, /incubadora|aceleradora/i);
   assert.match(roadmap, /angel|pre-seed|venture capital/i);
+  assert.match(roadmap, /sitios AFW-native/i);
+  assert.match(roadmap, /desde el momento cero/i);
+  assert.match(roadmap, /sin lock-in/i);
+  assert.match(roadmap, /identidad declarada/i);
+  assert.match(roadmap, /exportable/i);
   assert.match(roadmap, /Nivel 1.*no_embed/i);
   assert.doesNotMatch(roadmap, /cap table actual|saldo bancario|numero de tarjeta|clave api/i);
+});
+
+test('service map includes the future AFW-native website creation branch without presenting it as deployed', async () => {
+  const map = await read('docs/SERVICE-DELIVERY-AND-VALUE-CHAIN-MAP-V1.md');
+  const growth = await read('docs/GROWTH-AND-MONETIZATION-ROADMAP-2026-08-31.md');
+
+  for (const document of [map, growth]) {
+    assert.match(document, /creacion de sitios AFW-native/i);
+    assert.match(document, /capacidad futura|linea futura/i);
+    assert.match(document, /portabilidad|exportable/i);
+    assert.match(document, /sin lock-in/i);
+  }
+
+  assert.match(map, /sitio nuevo/i);
+  assert.match(map, /sitio existente/i);
+  assert.match(map, /humana.*machine-readable/i);
+  assert.match(growth, /identidad.*declarada.*owner/i);
+  assert.match(growth, /No es una capacidad disponible ni operativa hoy/i);
 });
 
 test('founder narrative preserves Gabriel attribution and the Tokenizart project boundary', async () => {

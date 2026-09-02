@@ -122,6 +122,14 @@ La evidencia local vive en `docs/BLOCK-6D-CRM-LITE-LOCAL-GATE-2026-08-31.md`. El
 - capsula firmada y adaptadores allowlisted;
 - pagos separados de autorizacion.
 
+### Linea futura - creacion de sitios AFW-native
+
+Despues de validar la transformacion de sitios existentes, Agent Friendly Web evaluara la **creacion de sitios AFW-native** desde cero. No es una capacidad disponible ni operativa hoy. La propuesta combinara un front humano claro con contenido machine-readable, descubrimiento, evidencia y herramientas reales desde su arquitectura inicial.
+
+Los primeros arquetipos previstos son sitios personales verificables, profesionales, institucionales, catalogos y servicios locales. Cada uno partira de la identidad y la informacion declarada por el owner, conservara dominio y activos exportables, documentara como migrar a otro proveedor y operara sin lock-in. Esta linea podra monetizar diseno, implementacion, integraciones y mantenimiento opcional sin convertir la suscripcion en condicion para conservar el sitio o sus entregables.
+
+La creacion se planificara como Gate 7H dentro de `docs/COMPANY-BUILDING-AND-CAPITAL-ROADMAP-2026-09-02.md`; no altera la prelacion inmediata de Gates 6B, 6C y 6D.
+
 ## Oferta y precio como hipotesis
 
 Estos valores sirven para aprender costos y disposicion a pagar. No constituyen una tarifa publica aprobada.
