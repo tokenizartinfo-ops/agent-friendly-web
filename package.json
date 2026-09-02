@@ -22,6 +22,7 @@
     "web:smoke:canary-edge": "node scripts/smoke-cloudflare-native-local.mjs --base-url https://canary.agentfriendlyweb.dev --mode access-edge",
     "web:preflight:canary": "node scripts/preflight-cloudflare-native-canary.mjs --input docs/evidence/cloudflare-native-canary-metadata.json",
     "web:verify:production": "node scripts/smoke-cloudflare-native-local.mjs --base-url https://agentfriendlyweb.dev --mode public-edge",
+    "web:audit:stability": "node scripts/audit-cloudflare-native-stability.mjs",
     "web:d1:migrations:canary": "wrangler d1 migrations apply agent-friendly-web-web-canary --remote --config wrangler.jsonc --env canary",
     "web:d1:migrations:production": "wrangler d1 migrations apply agent-friendly-web-web-production --remote --config wrangler.jsonc --env production",
     "web:deploy:canary": "npx @vinext/cloudflare deploy --env canary",

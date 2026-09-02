@@ -1,0 +1,131 @@
+{
+  "contract_version": "agentfriendly.cloudflare-native-stability-report.v3",
+  "project": "agent-friendly-web",
+  "environment": "afw_public",
+  "origin": "https://agentfriendlyweb.dev",
+  "observed_at": "2026-09-02T12:58:20.598Z",
+  "ok": true,
+  "checks": [
+    { "id": "public_smoke", "ok": true, "evidence": 11 },
+    { "id": "infrastructure_observation_fresh", "ok": true, "evidence": "2026-09-02T12:58:15.417Z" },
+    { "id": "local_production_config", "ok": true, "evidence": "agent-friendly-web-web-production" },
+    { "id": "remote_worker_deployment", "ok": true, "evidence": "6ebb4aeb-e556-4a85-bfbc-2d0725eab614" },
+    { "id": "remote_worker_version", "ok": true, "evidence": "dc7531c7-5f1e-4e7c-9774-2a6acf131f44" },
+    { "id": "cloudflare_custom_domain", "ok": true, "evidence": "agent-friendly-web-web-production" },
+    { "id": "cloudflare_access_edges_signed", "ok": true, "evidence": 3 },
+    { "id": "ledger_origin", "ok": true, "evidence": "https://agentfriendlyweb.dev" },
+    { "id": "ledger_observation_fresh", "ok": true, "evidence": "2026-09-02" },
+    { "id": "ledger_validity_bounded", "ok": true, "evidence": "2026-09-09" },
+    { "id": "ledger_not_expired", "ok": true, "evidence": "2026-09-09" },
+    { "id": "runtime_state_declaration", "ok": true, "evidence": "cloudflare_native_production" },
+    { "id": "public_traffic_declaration", "ok": true, "evidence": 100 },
+    { "id": "production_worker_declaration", "ok": true, "evidence": "agent-friendly-web-web-production" },
+    { "id": "private_access_declaration", "ok": true, "evidence": true },
+    { "id": "ledger_database_declaration", "ok": true, "evidence": 0 },
+    { "id": "live_database", "ok": true, "evidence": 0 },
+    { "id": "database_read_only", "ok": true, "evidence": 0 },
+    { "id": "database_identity", "ok": true, "evidence": "d26fc9d2-df5a-4957-8e58-cc4c945faad8" },
+    { "id": "legacy_no_traffic_declaration", "ok": true, "evidence": false },
+    { "id": "rollback_retained_declaration", "ok": true, "evidence": "rollback_retained_without_apex" },
+    { "id": "next_gate", "ok": true, "evidence": "afw_cloudflare_native_stability_and_legacy_retirement" }
+  ],
+  "smoke_checks": [
+    { "path": "/", "boundary": "public", "status": 200, "ok": true },
+    { "path": "/robots.txt", "boundary": "public", "status": 200, "ok": true },
+    { "path": "/llms.txt", "boundary": "public", "status": 200, "ok": true },
+    { "path": "/index.md", "boundary": "public", "status": 200, "ok": true },
+    { "path": "/.well-known/agent-readiness.json", "boundary": "public", "status": 200, "ok": true },
+    { "path": "/.well-known/infrastructure-status.json", "boundary": "public", "status": 200, "ok": true },
+    { "path": "/okf/v0.2/manifest.json", "boundary": "public", "status": 200, "ok": true },
+    { "path": "/api-catalog", "boundary": "public", "status": 200, "ok": true },
+    { "path": "/expediente", "boundary": "cloudflare_access", "status": 302, "ok": true },
+    { "path": "/api/projects", "boundary": "cloudflare_access", "status": 302, "ok": true },
+    { "path": "/api/projects/probe", "boundary": "cloudflare_access", "status": 302, "ok": true }
+  ],
+  "infrastructure": {
+    "observed_at": "2026-09-02T12:58:15.417Z",
+    "local_config": {
+      "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+      "worker": "agent-friendly-web-web-production",
+      "d1_binding": "DB",
+      "d1_database_name": "agent-friendly-web-web-production",
+      "d1_database_id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8",
+      "access_team_domain": "tokenizart.cloudflareaccess.com",
+      "access_aud": "afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac"
+    },
+    "remote_worker": {
+      "worker": "agent-friendly-web-web-production",
+      "deployment_id": "6ebb4aeb-e556-4a85-bfbc-2d0725eab614",
+      "version_id": "dc7531c7-5f1e-4e7c-9774-2a6acf131f44",
+      "percentage": 100,
+      "d1_binding": "DB",
+      "d1_database_id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8"
+    },
+    "cloudflare_custom_domain": {
+      "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+      "domain_id": "57a78f718d4dabc302bbcd2c17dbdc8e8882b8d3",
+      "hostname": "agentfriendlyweb.dev",
+      "service": "agent-friendly-web-web-production",
+      "environment": "production",
+      "enabled": true,
+      "previews_enabled": false
+    },
+    "cloudflare_access_edge": {
+      "origin": "https://agentfriendlyweb.dev",
+      "team_domain": "tokenizart.cloudflareaccess.com",
+      "audience": "afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac",
+      "shared_identity_container": true,
+      "protected_routes": [
+        {
+          "path": "/expediente",
+          "status": 302,
+          "login_path": "/cdn-cgi/access/login/agentfriendlyweb.dev",
+          "redirect_url": "/expediente",
+          "resource_metadata_url": "https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/expediente",
+          "resource_metadata_protected": true,
+          "signing_key_id": "f79e658c14036da6043c384d7f88fb1a5c61a417592e54bda346c8be73f50593",
+          "meta_signature_verified": true,
+          "meta_valid_from": "2026-09-02T12:58:17Z",
+          "meta_expires_at": "2026-09-02T13:03:17Z"
+        },
+        {
+          "path": "/api/projects",
+          "status": 302,
+          "login_path": "/cdn-cgi/access/login/agentfriendlyweb.dev",
+          "redirect_url": "/api/projects",
+          "resource_metadata_url": "https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects",
+          "resource_metadata_protected": true,
+          "signing_key_id": "f79e658c14036da6043c384d7f88fb1a5c61a417592e54bda346c8be73f50593",
+          "meta_signature_verified": true,
+          "meta_valid_from": "2026-09-02T12:58:18Z",
+          "meta_expires_at": "2026-09-02T13:03:18Z"
+        },
+        {
+          "path": "/api/projects/probe",
+          "status": 302,
+          "login_path": "/cdn-cgi/access/login/agentfriendlyweb.dev",
+          "redirect_url": "/api/projects/probe",
+          "resource_metadata_url": "https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects/probe",
+          "resource_metadata_protected": true,
+          "signing_key_id": "f79e658c14036da6043c384d7f88fb1a5c61a417592e54bda346c8be73f50593",
+          "meta_signature_verified": true,
+          "meta_valid_from": "2026-09-02T12:58:18Z",
+          "meta_expires_at": "2026-09-02T13:03:18Z"
+        }
+      ]
+    }
+  },
+  "database": {
+    "migrations": 6,
+    "functional_tables": 13,
+    "functional_rows": 0,
+    "rows_written": 0,
+    "changed_db": false,
+    "database_id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8"
+  },
+  "rollback": {
+    "legacy_sites_retained": null,
+    "sites_observation_required": true,
+    "retirement_authorized": false
+  }
+}

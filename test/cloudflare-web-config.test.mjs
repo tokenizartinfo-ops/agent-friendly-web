@@ -48,6 +48,7 @@ test('package exposes bounded Cloudflare-native canary and production commands',
   assert.match(packageJson.scripts['web:deploy:production:dry-run'], /@vinext\/cloudflare deploy --env production --dry-run/);
   assert.match(packageJson.scripts['web:deploy:production'], /@vinext\/cloudflare deploy --env production$/);
   assert.match(packageJson.scripts['web:smoke:production'], /smoke-cloudflare-native-local\.mjs.*agentfriendlyweb\.dev.*--mode public-edge/);
+  assert.equal(packageJson.scripts['web:audit:stability'], 'node scripts/audit-cloudflare-native-stability.mjs');
   assert.equal(packageJson.scripts['web:compare:cutover'], undefined);
   assert.match(packageJson.scripts['web:compare:precutover-local'], /compare-cloudflare-native-public-origin\.mjs.*127\.0\.0\.1:8788/);
   assert.equal(packageJson.devDependencies['@vinext/cloudflare'], '1.0.0-beta.6');
