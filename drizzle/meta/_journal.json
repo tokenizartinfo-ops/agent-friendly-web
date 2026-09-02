@@ -43,6 +43,13 @@
       "when": 1788214135151,
       "tag": "0005_normal_ma_gnuci",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1788388200000,
+      "tag": "0006_email_transactional_deliveries",
+      "breakpoints": true
     }
   ]
 }

@@ -300,3 +300,28 @@ export const consentReceipts = sqliteTable(
     index('consent_receipts_lead_created_idx').on(table.leadId, table.createdAt),
   ],
 );
+
+export const emailTransactionalDeliveries = sqliteTable(
+  'email_transactional_deliveries',
+  {
+    id: text('id').primaryKey(),
+    eventId: text('event_id').notNull(),
+    templateId: text('template_id').notNull(),
+    locale: text('locale').notNull(),
+    purpose: text('purpose').notNull(),
+    actorSubjectHash: text('actor_subject_hash').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    requestHash: text('request_hash').notNull(),
+    status: text('status').notNull().default('reserved'),
+    providerDeliveryHash: text('provider_delivery_hash').notNull().default(''),
+    failureCode: text('failure_code').notNull().default(''),
+    createdAt: text('created_at').notNull(),
+    sentAt: text('sent_at').notNull().default(''),
+    updatedAt: text('updated_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('email_transactional_deliveries_event_unique').on(table.eventId),
+    uniqueIndex('email_transactional_deliveries_idempotency_unique').on(table.idempotencyKey),
+    index('email_transactional_deliveries_status_created_idx').on(table.status, table.createdAt),
+  ],
+);

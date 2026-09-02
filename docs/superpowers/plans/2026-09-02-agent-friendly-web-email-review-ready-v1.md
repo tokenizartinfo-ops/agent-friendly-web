@@ -71,21 +71,21 @@ Expected: all Task 1 tests pass.
 - Consumes: validated request plus SHA-256 actor hash.
 - Produces: `reserveEmailReviewReadyDelivery(database, request, actorHash)`, `markEmailReviewReadySent(database, reservationId, providerId)` and `markEmailReviewReadyFailed(database, reservationId, code)`.
 
-- [ ] **Step 1: Write failing storage and migration tests**
+- [x] **Step 1: Write failing storage and migration tests**
 
 Exercise a real-shaped fake D1 statement API and assert the first call inserts metadata only, same-request replay returns duplicate without insert, changed payload conflicts, event reuse cannot send twice, provider IDs are hashed and raw addresses/content never enter bindings. Apply every migration to isolated SQLite and assert the new table is empty.
 
-- [ ] **Step 2: Run the tests to verify RED**
+- [x] **Step 2: Run the tests to verify RED**
 
 Run: `node --test test/email-review-ready-d1.test.mjs`
 
 Expected: module-not-found and then missing table until code and migration exist.
 
-- [ ] **Step 3: Implement schema, migration and adapter**
+- [x] **Step 3: Implement schema, migration and adapter**
 
 The migration creates `email_transactional_deliveries` with unique indexes on `event_id` and `idempotency_key`. Reserve before send; on uniqueness races re-read and classify duplicate/conflict. Updates use `WHERE status = 'reserved'` and never store raw provider errors.
 
-- [ ] **Step 4: Run focused tests to verify GREEN**
+- [x] **Step 4: Run focused tests to verify GREEN**
 
 Run: `node --test test/email-review-ready-d1.test.mjs test/block5b-local-migration.test.mjs test/block6b-local-migration.test.mjs`
 
