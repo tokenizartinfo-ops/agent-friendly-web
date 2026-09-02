@@ -226,7 +226,8 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 12. **Bloque 5C - desplegado como sandbox efimero de navegador:** contrato fail-closed y laboratorio comic con adaptador en memoria, backup, rollback y canary de una ruta. Proveedores y escrituras reales permanecen deshabilitados hasta aprobacion separada.
 13. **Bloque 5D - canary remoto verificado:** contrato y ejecucion de un unico Draft PR GitHub en `tokenizartinfo-ops/agent-friendly-web-synthetic-origin`, archivo `llms.txt`, base `main`, capacidad efimera por alias y recibo metadata-only. El PR #1 permanece Draft, abierto y sin merge; no hubo deployment ni cambios sobre un origen real.
 14. **Home Guided Journey v1 - desplegado y verificado:** orden humano `La llamada -> F0-F5 -> diagnostico -> comparador -> archivo -> siguientes caminos`, hero responsive y archivo progresivo. Su recibo historico de publicacion no cambia metodologia, puntajes ni permisos.
-15. **Gate 6A - Traccion F1: documentacion y arquitectura en preparacion.** Beachhead cultural, canal de agencias, Discovery Pack, embudo, KPIs, contacto consentido, correo y comercio agentico separados.
+15. **Gate 6A - Traccion F1: documentacion cerrada.** Beachhead cultural, canal de agencias, Discovery Pack, embudo, KPIs, contacto consentido, correo y comercio agentico separados.
+15.1. **Gate 6A.1 - calificacion local de traccion:** planificador determinista `local_planning_only`, sin PII, persistencia, outreach, propuestas, precios activos, pagos ni cambios de sitios. Toda capacidad remota requiere aprobacion separada.
 16. **Gate 6B - captura consentida remota OFF cerrada:** preview publico cerrado; la interfaz privada Sites esta retirada y la frontera Worker heredada queda como evidencia remota con escrituras OFF y D1 vacia. Datos reales y correo siguen deshabilitados. La captura no se reabre antes del corte Cloudflare-native.
 17. **Gate 6C - correo operativo, frontera local preparada:** politica `planned_draft_only`, aliases normalizados, consentimiento separado, idempotencia y revision humana para asuntos sensibles. DNS, casillas, routing, proveedor y envio requieren aprobacion separada.
 18. **Gate 6D - ventas y CRM ligero, frontera local preparada:** pipeline y transiciones `local_planning_only`, metadata sin PII, perdida razonada e idempotencia. D1, datos reales, scoring, propuestas y pagos requieren aprobacion separada.
@@ -333,6 +334,10 @@ La decision comercial completa vive en:
 - `docs/INTERACTIVE-DIAGRAMS-AND-EXPLAINERS-ROADMAP-V1.md`.
 
 La primera oferta paga propuesta es un Discovery Pack F0/F1 a F3 para arte, cultura, coleccionismo e instituciones con patrimonio. Las agencias y mantenedores web forman el primer canal multiplicador. La auditoria publica permanece gratuita y visible sin email; solicitar un plan y recibir marketing son consentimientos distintos.
+
+Gate 6A.1 vuelve ejecutable la calificacion comercial de seis senales sin descubrir personas ni almacenar sus datos. El contrato `agent-friendly-web.traction-f1.v1` permanece `local_planning_only`; la promocion de lanzamiento y cualquier precio publico, propuesta, contacto o pago requieren aprobacion separada. La evidencia vive en `docs/BLOCK-6A1-TRACTION-F1-LOCAL-GATE-2026-09-02.md`.
+
+La madurez y el modelo de entrega no son equivalentes. AF-0 a AF-3 admite componentes estandarizables; AF-4 y AF-5 dependen del sistema real y requieren requerimiento firmable, PDR, cotizacion, seguridad, aceptacion y rollback propios. Ningun paquete base habilita automaticamente tools, identidad, pagos o escrituras.
 
 La implementacion local de Gate 6B conserva pruebas fail-closed, pero su UI Sites fue retirada. No activa correo, D1 remota de leads, Turnstile remoto, pagos, x402, OAuth, A2A ni cambios DNS. Cualquier futura prueba privada se ejecutara en `afw_canary`, no en un entorno generico llamado staging ni en un dominio ajeno al proyecto.
 

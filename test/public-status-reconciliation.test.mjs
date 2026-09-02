@@ -13,6 +13,11 @@ test('public status ledger exposes planning contracts without inflating active c
   assert.equal(readiness.capabilities.crm_lite.status, 'local_planning_only');
   assert.equal(readiness.capabilities.crm_lite.remote_persistence, false);
   assert.equal(readiness.capabilities.crm_lite.accepts_pii, false);
+  assert.equal(readiness.capabilities.traction_f1.status, 'local_planning_only');
+  assert.equal(readiness.capabilities.traction_f1.remote_persistence, false);
+  assert.equal(readiness.capabilities.traction_f1.automatic_outreach, false);
+  assert.equal(readiness.capabilities.traction_f1.pricing_actions, false);
+  assert.equal(readiness.capabilities.traction_f1.payment_actions, false);
 });
 
 test('public catalogs and site map discover the planning contracts with explicit boundaries', async () => {
@@ -24,6 +29,7 @@ test('public catalogs and site map discover the planning contracts with explicit
   const expected = [
     `${canonical}/.well-known/email-operations-contract.json`,
     `${canonical}/.well-known/crm-lite-contract.json`,
+    `${canonical}/.well-known/traction-f1-contract.json`,
   ];
 
   for (const manifest of [catalog, ard]) {
@@ -33,8 +39,10 @@ test('public catalogs and site map discover the planning contracts with explicit
 
   assert.match(siteMap, /Email operations contract/);
   assert.match(siteMap, /CRM Lite contract/);
+  assert.match(siteMap, /Traction F1 contract/);
   assert.match(siteMap, /Correo operativo[\s\S]*documented/);
   assert.match(siteMap, /CRM Lite[\s\S]*documented/);
+  assert.match(siteMap, /Traccion F1[\s\S]*documented/);
 });
 
 test('home no longer labels the verified reference breakdown as pending work', async () => {
