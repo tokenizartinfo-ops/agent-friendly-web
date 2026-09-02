@@ -1,6 +1,6 @@
 {
   "contract": "agent-friendly-web.email-operations.v1",
-  "status": "inbound_and_one_shot_outbound_verified",
+  "status": "transactional_case_selected_local_ready_remote_disabled",
   "updated_at": "2026-09-02",
   "canonical_address": {
     "address": "hello@agentfriendlyweb.dev",
@@ -24,6 +24,12 @@
     "email_provider_configured": true,
     "outbound_delivery_verified": true,
     "outbound_binding_configured": false,
+    "transactional_case_selected": true,
+    "transactional_local_implementation_ready": true,
+    "transactional_remote_migration_applied": false,
+    "transactional_automatic_sending": false,
+    "arbitrary_recipients": false,
+    "customer_email_sending": false,
     "message_body_processing": false,
     "attachment_processing": false
   },
@@ -32,6 +38,7 @@
     "product_updates_requires_explicit_consent": true
   },
   "outbound_canary_contract": "https://agentfriendlyweb.dev/.well-known/email-outbound-canary-contract.json",
+  "review_ready_contract": "https://agentfriendlyweb.dev/.well-known/email-review-ready-contract.json",
   "human_review_required_for": [
     "security",
     "privacy-and-withdrawal",

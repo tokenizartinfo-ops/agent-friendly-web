@@ -138,21 +138,21 @@ Expected: all focused tests pass and config exposes no active binding or route.
 - Consumes: verified local implementation and current remote evidence.
 - Produces: truthful public status `transactional_case_selected_local_ready_remote_disabled` and Gate 6C.3B preconditions.
 
-- [ ] **Step 1: Write failing contract assertions**
+- [x] **Step 1: Write failing contract assertions**
 
 Extend the email contract tests to require the new machine contract, at-most-once semantics, fixed binding destination, metadata-only persistence and explicit false values for remote binding, sending, automation and arbitrary recipients.
 
-- [ ] **Step 2: Run contract tests to verify RED**
+- [x] **Step 2: Run contract tests to verify RED**
 
 Run: `node --test test/email-operations-contract.test.mjs`
 
 Expected: failure because the new contract and status are absent.
 
-- [ ] **Step 3: Reconcile public and private documentation**
+- [x] **Step 3: Reconcile public and private documentation**
 
 Record the selected case, architecture, limits, tests and rollback. Keep the outbound canary result intact and describe Gate 6C.3B as a future remote preflight plus one controlled canary.
 
-- [ ] **Step 4: Run complete verification**
+- [x] **Step 4: Run complete verification**
 
 Run:
 

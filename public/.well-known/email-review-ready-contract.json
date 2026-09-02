@@ -1,0 +1,77 @@
+{
+  "contract": "agent-friendly-web.email-review-ready.v1",
+  "status": "transactional_case_selected_local_ready_remote_disabled",
+  "updated_at": "2026-09-02",
+  "environment": "afw_email_review_ready_canary",
+  "origin": "https://canary.agentfriendlyweb.dev",
+  "transactional_case": {
+    "event": "internal_review_ready",
+    "purpose": "notify_existing_verified_destination_that_internal_request_is_ready_for_human_review",
+    "template_id": "internal-review-ready-v1",
+    "locales": ["es", "en", "pt"],
+    "sender": "hello@agentfriendlyweb.dev",
+    "reply_to": "hello@agentfriendlyweb.dev",
+    "destination": {
+      "delivery": "fixed_cloudflare_binding",
+      "request_supplied": false,
+      "stored": false,
+      "published": false
+    }
+  },
+  "delivery_semantics": {
+    "mode": "at_most_once",
+    "reserve_before_send": true,
+    "automatic_retry": false,
+    "duplicate_sent_returns_without_resend": true,
+    "reserved_or_failed_replay_requires_human_reconciliation": true
+  },
+  "persistence": {
+    "planned_store": "cloudflare_d1",
+    "metadata_only": true,
+    "stores_message_body": false,
+    "stores_recipient": false,
+    "stores_access_subject": false,
+    "stores_raw_provider_id": false,
+    "stores_raw_provider_error": false
+  },
+  "security": {
+    "cloudflare_access_required": true,
+    "access_subject_hash_allowlist": true,
+    "exact_origin_required": true,
+    "rate_limit_required": true,
+    "kill_switch_default": "false",
+    "request_body_limit_bytes": 2048
+  },
+  "capabilities": {
+    "transactional_case_selected": true,
+    "local_implementation_ready": true,
+    "remote_migration_applied": false,
+    "outbound_binding_configured": false,
+    "outbound_sending": false,
+    "automatic_sending": false,
+    "arbitrary_recipients": false,
+    "customer_sending": false
+  },
+  "gate_6c3b_preconditions": [
+    "verify_exact_canary_access_application_and_audience",
+    "create_or_select_isolated_canary_d1_database",
+    "apply_and_verify_migration_0006_on_canary_only",
+    "create_fixed_destination_email_binding",
+    "create_native_rate_limit_binding",
+    "configure_hashed_actor_allowlist_outside_git",
+    "deploy_with_kill_switch_false",
+    "run_negative_tests_before_enabling_one_canary",
+    "obtain_human_approval_for_exactly_one_controlled_send"
+  ],
+  "blocked_actions": [
+    "accept_recipient_from_request",
+    "accept_subject_or_body_from_request",
+    "send_customer_email",
+    "send_marketing_email",
+    "automatic_reply",
+    "automatic_retry",
+    "read_inbound_message_body",
+    "read_attachments"
+  ],
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3A-EMAIL-REVIEW-READY-LOCAL-GATE-2026-09-02.md"
+}

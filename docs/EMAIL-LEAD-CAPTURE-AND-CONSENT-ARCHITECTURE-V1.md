@@ -195,6 +195,14 @@ El detalle vive en `docs/BLOCK-6C2-EMAIL-OUTBOUND-CANARY-LOCAL-GATE-2026-09-02.m
 
 La prueba uso Cloudflare REST API como operacion puntual. No se creo binding, Worker, ruta, cron ni reintento; por eso `outbound_sending` sigue `false` como capacidad recurrente. Un envio futuro requiere primero un caso transaccional definido y Gate 6C.3. La evidencia saneada vive en `docs/BLOCK-6C2B-EMAIL-OUTBOUND-REMOTE-CANARY-2026-09-02.md`.
 
+## Actualizacion Gate 6C.3A - 2026-09-02
+
+El primer caso transaccional quedo seleccionado e implementado localmente: `internal_review_ready` avisa al destino interno ya verificado que una solicitud esta lista para revision humana. El estado es `transactional_case_selected_local_ready_remote_disabled`.
+
+La ruta cerrada solo admite identificadores opacos, template y proposito fijos, idioma, idempotencia y aprobacion humana. El destinatario futuro queda fijado por el binding Cloudflare; no se acepta ni publica en el request. La entrega es `at-most-once`, reserva primero en D1 y conserva auditoria `metadata-only`. No hay reintentos automaticos.
+
+El kill switch sigue en `false` y no existe migracion D1 remota, binding de email, binding de rate limit ni despliegue de esta ruta. Gate 6C.3B debe verificar Access, aislar D1, aplicar la migracion, crear bindings y superar pruebas negativas antes de solicitar un unico canary controlado. El detalle vive en `docs/BLOCK-6C3A-EMAIL-REVIEW-READY-LOCAL-GATE-2026-09-02.md`.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;

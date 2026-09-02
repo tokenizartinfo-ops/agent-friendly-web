@@ -63,7 +63,9 @@ La version publica permite completar y revisar localmente la solicitud, pero no 
 
 **Direccion canonica candidata:** `hello@agentfriendlyweb.dev`.
 
-**Estado actual:** el estado previo `planned_draft_only` avanzo a `inbound_canary_verified`. Gate 6C.1 tiene destino privado verificado, DNS de Email Routing y reglas entrantes activas para `hello@`, `hola@` y `ola@`; una prueba externa confirmo una entrega por alias, cero entregas para `no-reply@` y catch-all deshabilitado. Gate 6C.2B incorporo el dominio remitente, verifico SPF/DKIM/DMARC y recibio un unico canary humano. El binding, los envios posteriores, billing, marketing y automatizaciones permanecen OFF bajo `human_canary_verified_binding_blocked`.
+**Estado actual:** el estado previo `planned_draft_only` avanzo a `inbound_canary_verified`. Gate 6C.1 tiene destino privado verificado, DNS de Email Routing y reglas entrantes activas para `hello@`, `hola@` y `ola@`; una prueba externa confirmo una entrega por alias, cero entregas para `no-reply@` y catch-all deshabilitado. Gate 6C.2B incorporo el dominio remitente, verifico SPF/DKIM/DMARC y recibio un unico canary humano. Gate 6C.3A selecciono e implemento localmente un aviso interno listo para revision. El binding, la migracion remota, los envios posteriores, billing, marketing y automatizaciones permanecen OFF bajo `transactional_case_selected_local_ready_remote_disabled`.
+
+El cierre comprobado de Gate 6C.2B se conserva como antecedente `human_canary_verified_binding_blocked`; Gate 6C.3A agrega preparacion local, no reemplaza ni repite aquel envio.
 
 Aliases locales: `hola@agentfriendlyweb.dev` y `ola@agentfriendlyweb.dev`. Todos llegan a la misma operacion; no se crean silos por idioma.
 
@@ -82,7 +84,8 @@ La secuencia remota se divide para reducir riesgo:
 - **Gate 6C.1:** identidad `hello@`, aliases, Cloudflare Email Routing entrante, prueba allowlisted, kill switch y rollback; sin salida autonoma ni newsletter. Diseno: `docs/BLOCK-6C1-EMAIL-IDENTITY-AND-INBOUND-CANARY-DESIGN-2026-09-02.md`.
 - **Gate 6C.2A:** Cloudflare Email Service seleccionado, costos fechados, baseline saneado, contrato y preflight local verificados; cero subdominios emisores y seis registros DNS pendientes, sin mutaciones.
 - **Gate 6C.2B:** cerrado el 2026-09-02 con dominio, seis DNS y un unico canary a `verified_destination_1`; SPF, DKIM y DMARC pasaron. No se dejo binding ni automatizacion activa.
-- **Gate 6C.3:** seleccionar un caso transaccional real antes de crear un Worker/binding permanente. Exige template versionado, destinatario acotado, idempotencia, rate limit, kill switch y auditoria metadata-only.
+- **Gate 6C.3A:** caso `internal_review_ready` seleccionado y preparado localmente con template fijo ESP/ENG/POR, destino fijo por binding, semantica `at-most-once`, idempotencia, rate limit, kill switch y auditoria `metadata-only`. No fue desplegado.
+- **Gate 6C.3B:** preflight remoto futuro sobre `afw_email_review_ready_canary`: Access exacto, D1 aislada, migracion `0006`, bindings restringidos, deploy con flag OFF, pruebas negativas y recien despues un unico canary controlado.
 
 ### Gate 6D - Ventas y CRM ligero
 
