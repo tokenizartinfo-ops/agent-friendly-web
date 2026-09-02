@@ -1,6 +1,6 @@
 # Agent Friendly Web Cloudflare-native production cutover receipt
 
-**Estado:** corte completado; monitoreo inicial verde
+**Estado:** corte completado; correcciones de revision desplegadas y verdes
 **Fecha:** 2026-09-02
 **Proyecto:** `agent-friendly-web`
 **Origen canonico:** `https://agentfriendlyweb.dev`
@@ -10,8 +10,9 @@
 | Recurso | Identificador |
 | --- | --- |
 | Worker | `agent-friendly-web-web-production` |
-| Deployment | `13639380-8652-4a2c-9fbf-5c1f21eb01d5` |
-| Version | `1969053f-ba2e-4cca-bd93-06741fe23f33` |
+| Deployment | `6ebb4aeb-e556-4a85-bfbc-2d0725eab614` |
+| Version | `dc7531c7-5f1e-4e7c-9774-2a6acf131f44` |
+| Version anterior para rollback | `1969053f-ba2e-4cca-bd93-06741fe23f33` |
 | D1 | `d26fc9d2-df5a-4957-8e58-cc4c945faad8` |
 | Access app | `b7d7d62e-de25-4b4b-ac52-972b104738a1` |
 | Release domain | `5a87a3ab6973b11aad5bd2acccf78bdd35e4b189` |
@@ -51,7 +52,7 @@ El rollback ensayado sobre `release` desasocio y reasocio correctamente el mismo
 
 ## Pruebas
 
-- 382 pruebas: OK;
+- 388 pruebas: OK;
 - lint: 0 errores, 1 advertencia conocida de optimizacion de imagen;
 - build Vinext: OK;
 - dry-run productivo: OK;
