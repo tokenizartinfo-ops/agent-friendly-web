@@ -366,20 +366,19 @@ test('production D1 executor invokes the local Wrangler binary without a shell o
 
 test('production infrastructure reader combines fresh Wrangler evidence with a sanitized control-plane observation', () => {
   const invocations = [];
-  const files = new Map([
-    ['C:\\afw\\wrangler.jsonc', productionConfigFixture],
-    ['C:\\afw\\docs\\evidence\\cloudflare-native-control-plane-observation.json', JSON.stringify({
-      contract_version: 'agentfriendly.control-plane-observation.v1',
-      observed_at: '2026-09-02T11:55:00.000Z',
-      cloudflare_custom_domain: infrastructureFixture().cloudflare_custom_domain,
-      legacy_sites: infrastructureFixture().legacy_sites,
-    })],
-  ]);
+  const controlPlaneFixture = JSON.stringify({
+    contract_version: 'agentfriendly.control-plane-observation.v1',
+    observed_at: '2026-09-02T11:55:00.000Z',
+    cloudflare_custom_domain: infrastructureFixture().cloudflare_custom_domain,
+    legacy_sites: infrastructureFixture().legacy_sites,
+  });
   const infrastructure = readProductionInfrastructure({
     cwd: 'C:\\afw',
     nodePath: 'C:\\node.exe',
     observedAt: '2026-09-02T12:00:00.000Z',
-    readFileImpl: (path) => files.get(path),
+    readFileImpl: (path) => String(path).replaceAll('\\', '/').endsWith('/wrangler.jsonc')
+      ? productionConfigFixture
+      : controlPlaneFixture,
     spawnImpl(command, args) {
       invocations.push({ command, args });
       if (args.includes('deployments')) {
