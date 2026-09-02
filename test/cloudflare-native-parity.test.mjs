@@ -93,6 +93,27 @@ test('public edge smoke requires public contracts and Access on private routes',
   assert.equal(report.checks.find((check) => check.path === '/llms.txt').boundary, 'public');
 });
 
+test('edge smoke rejects application-level 401 and 403 responses as Access evidence', async () => {
+  for (const status of [401, 403]) {
+    const report = await runCloudflareNativeSmoke({
+      baseUrl: 'https://agentfriendlyweb.dev',
+      mode: 'public-edge',
+      fetchImpl: async (url) => CLOUD_NATIVE_SMOKE_ROUTES
+        .some((route) => route.boundary === 'private' && route.path === new URL(url).pathname)
+        ? new Response(JSON.stringify({ error: 'application_auth_required' }), {
+          status,
+          headers: { 'content-type': 'application/json' },
+        })
+        : responseFor(new URL(url).pathname),
+    });
+
+    assert.equal(report.ok, false);
+    assert.ok(report.checks
+      .filter((check) => check.boundary === 'cloudflare_access')
+      .every((check) => check.ok === false));
+  }
+});
+
 test('edge modes reject origins outside the exact Agent Friendly Web boundary', async () => {
   await assert.rejects(() => runCloudflareNativeSmoke({
     baseUrl: 'https://companion.tokenizart.info',

@@ -59,7 +59,7 @@
     "validation_txt_retained": true
   },
   "verification": {
-    "tests_passed": 388,
+    "tests_passed": 389,
     "lint_errors": 0,
     "build": "passed",
     "production_dry_run": "passed",
@@ -76,6 +76,7 @@
     "release_detach_reattach": "passed",
     "public_smoke": "passed_after_review_fix_deploy",
     "access_exact_projects_root": "passed",
+    "application_401_403_rejected_as_access_evidence": "passed",
     "d1_rows_written_after_review_fix_deploy": 0,
     "responsive": ["1440x900", "390x844"]
   },

@@ -52,7 +52,7 @@ El rollback ensayado sobre `release` desasocio y reasocio correctamente el mismo
 
 ## Pruebas
 
-- 388 pruebas: OK;
+- 389 pruebas: OK;
 - lint: 0 errores, 1 advertencia conocida de optimizacion de imagen;
 - build Vinext: OK;
 - dry-run productivo: OK;
@@ -61,7 +61,8 @@ El rollback ensayado sobre `release` desasocio y reasocio correctamente el mismo
 - Access anonimo en release: 9 de 9 rutas interceptadas;
 - HTML autenticado release: OK;
 - responsive 1440x900 y 390x844: sin overflow, hero cargado e idiomas visibles;
-- smoke publico final: 8 rutas publicas OK y `/expediente`, `/api/projects` y `/api/projects/probe` interceptados por Access;
+- smoke publico final: 8 rutas publicas OK y `/expediente`, `/api/projects` y `/api/projects/probe` interceptados por el redirect verificable de Cloudflare Access;
+- respuestas `401/403` de aplicacion rechazadas expresamente como evidencia de Access;
 - D1 posterior: 0 filas y 0 escrituras.
 
 ## Auditoria externa posterior

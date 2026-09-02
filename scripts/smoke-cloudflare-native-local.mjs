@@ -44,10 +44,16 @@ async function readBoundedBody(response, limit = MAX_RESPONSE_BYTES) {
 }
 
 function isAccessBoundary(response) {
-  if ([401, 403].includes(response.status)) return true;
   if (![301, 302, 303, 307, 308].includes(response.status)) return false;
   const location = response.headers.get('location') || '';
-  return /(?:cloudflareaccess\.com\/cdn-cgi\/access|\/cdn-cgi\/access\/login)/i.test(location);
+  try {
+    const login = new URL(location);
+    return login.protocol === 'https:'
+      && login.hostname === 'tokenizart.cloudflareaccess.com'
+      && login.pathname.startsWith('/cdn-cgi/access/login/');
+  } catch {
+    return false;
+  }
 }
 
 function isLocalPrivateBoundary(response) {
@@ -89,7 +95,7 @@ export async function runCloudflareNativeSmoke({
           boundary: 'cloudflare_access',
           status: response.status,
           ok,
-          ...(ok ? {} : { error: 'canary route bypassed Cloudflare Access' }),
+          ...(ok ? {} : { error: 'route did not present the expected Cloudflare Access login redirect' }),
         });
         continue;
       }
