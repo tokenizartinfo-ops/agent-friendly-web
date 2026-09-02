@@ -7,8 +7,9 @@
   "zoneStatus": "active",
   "routingStatus": "unconfigured",
   "routingEnabled": false,
-  "destinationPresent": false,
-  "destinationVerified": false,
+  "destinationPresent": true,
+  "destinationVerified": true,
+  "destinationId": "dd315975fb3249aa97627f9318fdbb28",
   "existingMailDns": [],
   "existingRules": [
     {

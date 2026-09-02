@@ -257,7 +257,7 @@ git commit -m "docs: add inbound email canary runbook"
 - Consumes: connected Cloudflare account, private destination supplied outside Git.
 - Produces: one Cloudflare destination ID and `destinationVerified: true`; no message content or private address in repository.
 
-- [ ] **Step 1: Declare the remote boundary in the execution log**
+- [x] **Step 1: Declare the remote boundary in the execution log**
 
 ```text
 PROJECT=Agent Friendly Web
@@ -270,23 +270,23 @@ ALLOWED_ACTION=create destination and observe verification state
 ROLLBACK=delete destination only if it was created by this gate and no rule references it
 ```
 
-- [ ] **Step 2: Re-read account destinations**
+- [x] **Step 2: Re-read account destinations**
 
 Call `GET /accounts/{account_id}/email/routing/addresses`. Compare in memory with the approved private destination and return only present/verified booleans and the public resource ID.
 
-- [ ] **Step 3: Create the destination if absent**
+- [x] **Step 3: Create the destination if absent**
 
 Call `POST /accounts/{account_id}/email/routing/addresses` with the private destination supplied out of band. This sends Cloudflare's verification message; do not create rules yet.
 
-- [ ] **Step 4: Complete and verify the checkpoint**
+- [x] **Step 4: Complete and verify the checkpoint**
 
 Open the Cloudflare verification link from the private destination inbox, then repeat the account GET. Continue only when Cloudflare reports a non-null `verified` timestamp.
 
-- [ ] **Step 5: Update the sanitized baseline**
+- [x] **Step 5: Update the sanitized baseline**
 
 Set only `destinationPresent: true`, `destinationVerified: true`, and `destinationId` to the Cloudflare resource ID. Do not write the address.
 
-- [ ] **Step 6: Re-run preflight**
+- [x] **Step 6: Re-run preflight**
 
 Run: `npm run email:inbound:preflight -- docs/evidence/email-inbound-canary-baseline-2026-09-02.json`
 

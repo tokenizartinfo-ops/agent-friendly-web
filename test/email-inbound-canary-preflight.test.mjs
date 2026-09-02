@@ -117,8 +117,9 @@ test('sanitized baseline and runbook preserve the exact remote boundary and roll
   assert.equal(baselineEvidence.zoneStatus, 'active');
   assert.equal(baselineEvidence.routingStatus, 'unconfigured');
   assert.equal(baselineEvidence.routingEnabled, false);
-  assert.equal(baselineEvidence.destinationPresent, false);
-  assert.equal(baselineEvidence.destinationVerified, false);
+  assert.equal(baselineEvidence.destinationPresent, true);
+  assert.equal(baselineEvidence.destinationVerified, true);
+  assert.match(baselineEvidence.destinationId, /^[0-9a-f]{32}$/);
   assert.equal(baselineEvidence.existingMailDns.length, 0);
   assert.equal(baselineEvidence.existingRules.filter((rule) => rule.enabled).length, 0);
   assert.doesNotMatch(JSON.stringify(baselineEvidence), /gmail\.com/i);
