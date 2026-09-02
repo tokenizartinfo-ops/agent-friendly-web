@@ -1,0 +1,67 @@
+{
+  "schema_version": "agentfriendly.scanner-self-audit-fix.v1",
+  "project": "agent-friendly-web",
+  "canonical_origin": "https://agentfriendlyweb.dev",
+  "observed_at": "2026-09-02T15:08:24Z",
+  "status": "corrected_production_stability_open",
+  "cause": "cloudflare_worker_same_custom_domain_fetch_without_public_front_door",
+  "change": {
+    "compatibility_flag": "global_fetch_strictly_public",
+    "scoring_changed": false,
+    "ssrf_controls_changed": false
+  },
+  "source": {
+    "pull_request": "https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/45",
+    "merge_commit": "4a13fe0135fcd98499b92920ef77160fe8e660fb"
+  },
+  "canary": {
+    "worker": "agent-friendly-web-web-canary",
+    "version_id": "5ca4fe04-2156-47b4-ae66-3390510f18af",
+    "self_scan": {
+      "http_status": 200,
+      "score": 95,
+      "level": "AF-5 transaccional",
+      "server_error_probes": 0
+    },
+    "external_control": {
+      "target": "https://tokenizart.com",
+      "http_status": 200,
+      "score": 23,
+      "level": "AF-1 descubrible"
+    }
+  },
+  "production": {
+    "worker": "agent-friendly-web-web-production",
+    "version_id": "33ac170d-6b16-4a48-95c7-bbe31d34792a",
+    "traffic_percent": 100,
+    "public_smoke_checks": 11,
+    "public_smoke_failures": 0,
+    "self_scan": {
+      "http_status": 200,
+      "score": 95,
+      "level": "AF-5 transaccional",
+      "probe_status_counts": {
+        "200": 13,
+        "404": 2
+      },
+      "server_error_probes": 0
+    },
+    "database": {
+      "migrations": 6,
+      "functional_tables": 13,
+      "functional_rows": 0,
+      "rows_written": 0,
+      "changed_db": false
+    }
+  },
+  "rollback": {
+    "previous_production_version_id": "dc7531c7-5f1e-4e7c-9774-2a6acf131f44"
+  },
+  "stability_gate": {
+    "state": "open",
+    "not_before": "2026-09-09",
+    "full_audit_pending": true,
+    "pending_reason": "authorized Cloudflare API token was not present in the shell; the auditor failed closed"
+  }
+}
+
