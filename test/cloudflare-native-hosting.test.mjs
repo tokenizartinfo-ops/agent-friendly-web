@@ -92,34 +92,24 @@ test('public discovery exposes the active Cloudflare production state without st
 });
 
 test('active repository guidance describes Workers as production and Sites only as rollback evidence', () => {
-  const staleSitesRuntimeClaims = /vinculado al proyecto Sites|Frontend:.*sobre Sites|Sign in with ChatGPT provisto por Sites|current public Sites runtime|runtime publico(?: canonico)?.{0,40}(?:es|ejecuta(?:rse)? en|corre en|funciona sobre) (?:OpenAI )?Sites|canonical public runtime.{0,40}(?:is|runs on|is served by) (?:OpenAI )?Sites|(?:public site|sitio publico|production hosting).{0,40}(?:hosted on|alojado en|:) (?:OpenAI )?Sites|(?:served by|runs on|ejecuta(?:do)? (?:en|sobre)) (?:OpenAI )?Sites|Sites.{0,30}(?:runtime activo|active runtime)/i;
-  const boundedSitesContext = /legacy|historical|rollback|retired|antiguo|retirad[oa]s?|no recibe|receives no|must not|no (?:puede|debe)|shared administrative|workspace namespace|not proof/i;
-
-  function assertSitesIsOnlyLegacy(guidance, label) {
-    for (const line of guidance.split(/\r?\n/).filter((value) => /Sites/i.test(value))) {
-      assert.match(line, boundedSitesContext, `${label}: ${line}`);
-      assert.doesNotMatch(line, staleSitesRuntimeClaims, `${label}: ${line}`);
-    }
-  }
-
-  for (const staleClaim of [
-    'El runtime publico canonico vuelve a ejecutarse en OpenAI Sites',
-    'The canonical public runtime is OpenAI Sites',
-    'The application runs on OpenAI Sites',
-    'Sites es el runtime activo',
-    'The public site is hosted on OpenAI Sites',
-    'El sitio publico esta alojado en OpenAI Sites',
-    'Production hosting: OpenAI Sites',
-  ]) {
-    assert.throws(() => assertSitesIsOnlyLegacy(staleClaim, 'synthetic stale claim'));
-  }
+  const allowedSitesLines = {
+    'README.md': [
+      'El origen publico canonico es [agentfriendlyweb.dev](https://agentfriendlyweb.dev/). Desde el 2 de septiembre de 2026, el 100% del trafico publico se sirve mediante el Worker Cloudflare-native propio, con DNS, TLS y rutas privadas protegidas por Cloudflare Access. El antiguo binding de Sites no recibe trafico del dominio y se conserva temporalmente solo como evidencia de rollback.',
+    ],
+    'AGENTS.md': [
+      '- `afw_sites_legacy`: every `*.chatgpt.site` surface is retired and must not be deployed, restored, linked or used as staging.',
+      '- The canonical public runtime is the Cloudflare-native production Worker. The historical Sites binding receives no apex traffic and is retained temporarily only as bounded rollback evidence.',
+      '- The Cloudflare account, GitHub organization, authentication email and Sites workspace namespace are shared administrative containers, not proof of resource ownership.',
+    ],
+  };
 
   for (const path of ['README.md', 'AGENTS.md']) {
     const guidance = read(path);
     assert.match(guidance, /Cloudflare-native/i, path);
     assert.match(guidance, /\bWorkers?\b/i, path);
     assert.match(guidance, /Sites.*rollback/i, path);
-    assertSitesIsOnlyLegacy(guidance, path);
+    const sitesLines = guidance.split(/\r?\n/).filter((value) => /Sites/i.test(value));
+    assert.deepEqual(sitesLines, allowedSitesLines[path], path);
   }
 });
 
