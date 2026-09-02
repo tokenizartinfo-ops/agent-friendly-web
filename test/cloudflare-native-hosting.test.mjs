@@ -55,10 +55,17 @@ test('public discovery exposes the exact Cloudflare migration state without lega
   const status = JSON.parse(read('public/.well-known/infrastructure-status.json'));
   assert.equal(status.canonical_origin, 'https://agentfriendlyweb.dev');
   assert.equal(status.public_runtime.state, 'transitional');
-  assert.equal(status.cloudflare_native_candidate.state, 'candidate_local_verified');
+  assert.equal(status.cloudflare_native_candidate.state, 'canary_deployed_access_protected');
   assert.equal(status.cloudflare_native_candidate.traffic_percent, 0);
-  assert.equal(status.cloudflare_native_candidate.dns_changed, false);
-  assert.equal(status.cloudflare_native_candidate.remote_canary_created, false);
+  assert.equal(status.cloudflare_native_candidate.public_origin_dns_changed, false);
+  assert.equal(status.cloudflare_native_candidate.remote_canary_created, true);
+  assert.equal(status.cloudflare_native_candidate.remote_database_created, true);
+  assert.equal(status.cloudflare_native_candidate.worker_deployed, true);
+  assert.equal(status.cloudflare_native_candidate.custom_domain_attached, true);
+  assert.equal(status.cloudflare_native_candidate.access_protected, true);
+  assert.equal(status.cloudflare_native_candidate.migrations_applied, 6);
+  assert.equal(status.cloudflare_native_candidate.functional_row_count, 0);
+  assert.equal(status.cloudflare_native_candidate.anonymous_edge_smoke, 'passed');
   assert.equal(status.project_boundaries.tokenizart_runtime_dependency, false);
   assert.ok(status.retired_surfaces.every((surface) => surface.operational_use === false));
 

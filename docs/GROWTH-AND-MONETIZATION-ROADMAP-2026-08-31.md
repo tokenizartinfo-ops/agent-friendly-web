@@ -24,7 +24,7 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 
 ### Gate de infraestructura - origen Cloudflare-native
 
-**Estado:** candidato implementado y verificado localmente; 0% de trafico, sin DNS, canary remoto ni D1 remota.
+**Estado:** candidato verificado y canary propio desplegado detras de Access; D1 aislada y vacia; 0% del trafico del origen publico; paridad autenticada y QA responsive cerrados; rollback preparado; corte pendiente de decision separada.
 
 Antes de reabrir captacion, correo o CRM remoto, Agent Friendly Web debe abandonar Sites como runtime operativo. El unico canary permitido sera `canary.agentfriendlyweb.dev`, protegido por Cloudflare Access, con UI/API same-origin, D1 propia, paridad publica y rollback probado. Las referencias Tokenizart permanecen como caso documental y no como dependencias de ejecucion.
 

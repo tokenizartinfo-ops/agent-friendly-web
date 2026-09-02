@@ -86,7 +86,7 @@ sources:
 | `/api-catalog` | linkset hacia OpenAPI | desplegado |
 | `/.well-known/ai-catalog.json` | inventario de compatibilidad ARD | desplegado; propuesta en evolucion |
 | `/.well-known/ard.json` | fuente ARD vigente segun el draft observado | desplegado; propuesta en evolucion |
-| `/.well-known/infrastructure-status.json` | estado fechado del origen, candidato, superficies retiradas y gate siguiente | preparado en el candidato Cloudflare-native; 0% de trafico |
+| `/.well-known/infrastructure-status.json` | estado fechado del origen, canary, superficies retiradas y gate siguiente | canary Cloudflare-native protegido; 0% del trafico del origen publico |
 | `/.well-known/external-readiness.json` | historial AF-EV con procedencia y limites | desplegado y verificado; convencion del proyecto |
 | `/.well-known/agent-skills/index.json` | indice de skills descargables | desplegado, convencion del proyecto |
 | `/.well-known/agent-readiness.json` | estado de capacidades | desplegado, no es estandar oficial |

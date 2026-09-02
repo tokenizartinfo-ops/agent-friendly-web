@@ -56,19 +56,19 @@
     },
     {
       "path": "discovery/infrastructure-status.md",
-      "sha256": "0298d0c6ad68d71620703c300375d0775befabcc378b85dc8a1d29ab00ba5c70",
+      "sha256": "ceb5fffadba3bdc58016dd59b3db89e14ae9639b71040e9edd88be8175388675",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "discovery/public-audit.md",
-      "sha256": "b00de75870d9f1d77d3ca603381a0edad33ca3546fe349738beb522832cce1ab",
+      "sha256": "49b1dd4df93c9639da1b05497a6877eed38e97dc588b25e08a48c76290031e51",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "discovery/public-discovery-resources.md",
-      "sha256": "21713e4dabdf254387a7b4d2f85e9230607e0296859902cd75119b6216a9ea87",
+      "sha256": "8237bead698e8228778e88a8892ef74eb26d82582a80213320087b730a003d89",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },

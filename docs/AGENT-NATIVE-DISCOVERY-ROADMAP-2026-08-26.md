@@ -15,7 +15,7 @@ La meta de 100% representa la finalizacion de las capas que el caso necesita. No
 
 El unico origen publico canonico es `https://agentfriendlyweb.dev`. Ese dominio continua disponible sobre un runtime Sites transitorio mientras se prepara el reemplazo Cloudflare-native. El runtime transitorio es una fuente de migracion, no la arquitectura objetivo, y sus rutas privadas quedan congeladas sin admision de nuevos datos reales.
 
-El candidato Cloudflare Worker con Vinext y Cloudflare Access esta implementado y verificado localmente. Mantiene **0% de trafico**, no tiene cambio DNS, canary remoto ni D1 remota. Las interfaces privadas o de contacto bajo `*.chatgpt.site` estan retiradas y no pueden usarse como produccion, staging, preview, autenticacion o rollback.
+El candidato Cloudflare Worker con Vinext y Cloudflare Access esta implementado y verificado. El canary propio `canary.agentfriendlyweb.dev` esta desplegado detras de Access con D1 aislada, seis migraciones y cero filas funcionales. Mantiene **0% del trafico del origen publico** y no modifica `agentfriendlyweb.dev`; una sesion allowlisted confirmo el HTML autenticado, la misma compilacion paso QA responsive y el rollback quedo preparado sin ejecutar. El corte productivo conserva un gate separado. Las interfaces privadas o de contacto bajo `*.chatgpt.site` estan retiradas y no pueden usarse como produccion, staging, preview, autenticacion o rollback.
 
 Tokenizart sigue siendo el primer caso integral documentado, pero no es una dependencia de ejecucion. Compartir cuenta Cloudflare, organizacion GitHub o identidad administrativa no fusiona Workers, D1, repositorios ni datos de ambos proyectos.
 
@@ -247,7 +247,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/api-catalog` | linkset hacia OpenAPI | desplegado |
 | `/.well-known/ai-catalog.json` | inventario de compatibilidad ARD | desplegado; propuesta en evolucion |
 | `/.well-known/ard.json` | fuente ARD vigente segun el draft observado | desplegado; propuesta en evolucion |
-| `/.well-known/infrastructure-status.json` | estado fechado del origen, candidato, superficies retiradas y gate siguiente | preparado en el candidato Cloudflare-native; 0% de trafico |
+| `/.well-known/infrastructure-status.json` | estado fechado del origen, canary, superficies retiradas y gate siguiente | canary Cloudflare-native protegido; 0% del trafico del origen publico |
 | `/.well-known/external-readiness.json` | historial AF-EV con procedencia y limites | desplegado y verificado; convencion del proyecto |
 | `/.well-known/agent-skills/index.json` | indice de skills descargables | desplegado, convencion del proyecto |
 | `/.well-known/agent-readiness.json` | estado de capacidades | desplegado, no es estandar oficial |

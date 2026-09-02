@@ -21,7 +21,9 @@ Controles implementados:
 - fallo cerrado cuando falta identidad Access valida;
 - campos allowlisted y eventos metadata-only.
 
-El estado de infraestructura es independiente del estado funcional. Al 2026-09-01 el origen publico sigue sobre un runtime transitorio; la identidad Cloudflare Access esta implementada y verificada localmente, pero no se presenta como canary ni produccion. El ledger fechado vive en `https://agentfriendlyweb.dev/.well-known/infrastructure-status.json`.
+La verificacion del candidato usa React `19.2.8`, Vinext `1.0.0-beta.8` y `@vinext/cloudflare` `1.0.0-beta.6`. `npm audit --omit=dev` informa cero vulnerabilidades conocidas en dependencias de produccion. El arbol de desarrollo conserva cuatro vulnerabilidades moderadas transitivas de `drizzle-kit`; no alcanzan al Worker publicado y su correccion automatica propone un downgrade incompatible, por lo que se mantienen registradas para tratamiento separado.
+
+El estado de infraestructura es independiente del estado funcional. Al 2026-09-01 el origen publico sigue sobre un runtime transitorio. El canary Cloudflare-native esta desplegado en un dominio propio, protegido por Access y con D1 aislada vacia; no recibe trafico del origen publico ni se presenta como produccion. Una sesion allowlisted confirmo el HTML autenticado, la compilacion paso QA responsive y los smokes cubrieron las rutas representativas. El rollback esta preparado sin ejecutar; el corte productivo conserva un gate separado. El ledger fechado vive en `https://agentfriendlyweb.dev/.well-known/infrastructure-status.json`.
 
 ## Fronteras del Registry y del expediente
 

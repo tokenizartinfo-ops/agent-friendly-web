@@ -13,20 +13,36 @@
     "note": "The canonical public origin remains online through the legacy runtime while Cloudflare Worker parity and rollback are prepared. This is a migration source, not the target architecture."
   },
   "cloudflare_native_candidate": {
-    "state": "candidate_local_verified",
+    "state": "canary_deployed_access_protected",
     "target": "Cloudflare Workers with Vinext",
     "private_identity": "Cloudflare Access signed JWT subject and audience",
     "traffic_percent": 0,
-    "dns_changed": false,
-    "remote_canary_created": false,
-    "remote_database_created": false,
+    "public_origin_dns_changed": false,
+    "remote_canary_created": true,
+    "remote_database_created": true,
+    "worker_deployed": true,
+    "custom_domain_attached": true,
+    "access_protected": true,
+    "migrations_applied": 6,
+    "functional_table_count": 13,
+    "functional_row_count": 0,
+    "anonymous_edge_smoke": "passed",
     "verified_locally": [
       "automated test suite",
       "Vinext compatibility check",
       "production build",
       "Cloudflare deployment dry-run"
     ],
-    "note": "Local verification does not make the candidate a deployed canary or production runtime."
+    "verified_remotely": [
+      "Cloudflare Access application and single-owner allow policy",
+      "isolated D1 schema with zero functional rows",
+      "Worker deployment and own-domain binding",
+      "anonymous requests intercepted by Access on every representative route"
+    ],
+    "authenticated_html": "passed",
+    "responsive_qa": "passed at 1440x900 and 390x844",
+    "rollback": "prepared_not_executed",
+    "note": "The protected canary passed authenticated HTML, local route parity, Access edge and responsive QA. It receives no public-origin traffic and is not the production runtime. Rollback is prepared but was not executed against the healthy canary."
   },
   "retired_surfaces": [
     {
@@ -43,16 +59,16 @@
     "shared_cloudflare_account_does_not_merge_projects": true
   },
   "next_gate": {
-    "name": "afw_canary",
-    "host": "canary.agentfriendlyweb.dev",
+    "name": "afw_cloudflare_native_cutover_decision",
+    "host": "agentfriendlyweb.dev",
     "requirements": [
-      "Cloudflare Access allowlist",
-      "isolated Agent Friendly Web D1",
-      "same-origin private UI and API",
-      "zero public traffic",
-      "parity checks and tested rollback"
+      "explicit production cutover approval",
+      "production D1 decision and migration receipt",
+      "final public-origin comparison",
+      "bounded custom-domain cutover plan",
+      "post-cutover smoke and rollback window"
     ],
-    "authorization": "remote resources and DNS remain pending a separate execution gate"
+    "authorization": "canary verification is closed; production cutover remains a separate decision and has not occurred"
   },
   "historical_evidence_policy": "Release receipts that mention Sites are retained as historical evidence and do not describe the current target architecture."
 }

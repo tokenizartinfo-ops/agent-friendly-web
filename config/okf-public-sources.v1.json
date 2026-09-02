@@ -168,7 +168,7 @@
       "resource": "https://agentfriendlyweb.dev/.well-known/infrastructure-status.json",
       "status": "candidate",
       "tags": ["agent-friendly-web", "infrastructure", "cloudflare", "migration", "provenance"],
-      "sources": [{ "path": "docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md", "sections": ["Decision", "Estado de partida", "Arquitectura objetivo", "Reglas de corte", "Evidencia historica"] }]
+      "sources": [{ "path": "docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md", "sections": ["Decision", "Estado de partida", "Estado canary verificado", "Arquitectura objetivo", "Reglas de corte", "Evidencia historica"] }]
     },
     {
       "output": "discovery/public-discovery-resources.md",

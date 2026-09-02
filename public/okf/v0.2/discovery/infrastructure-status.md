@@ -41,6 +41,15 @@ La migracion no altera Tokenizart. Tokenizart sigue siendo el primer caso integr
 - Las rutas privadas del origen legado usan identidad Sites; el candidato ya las reemplaza por Cloudflare Access verificado.
 - El Worker de contacto aislado esta deshabilitado y su D1 permanece vacia.
 
+## Estado canary verificado
+
+- `canary.agentfriendlyweb.dev` sirve el Worker `agent-friendly-web-web-canary` y permanece completamente detras de Cloudflare Access.
+- Access conserva una unica politica allowlist para un owner; el smoke anonimo confirma intercepcion en nueve rutas representativas.
+- La D1 canary es independiente: seis migraciones aplicadas, trece tablas funcionales y cero filas funcionales.
+- El custom domain del canary no modifica los registros A ni el runtime de `agentfriendlyweb.dev` y recibe 0% de su trafico.
+- Una sesion owner allowlisted confirmo el HTML autenticado. La misma compilacion paso QA Playwright en escritorio y movil, el smoke local completo y el smoke de Access en nueve rutas; D1 continuo con cero filas funcionales.
+- El rollback esta preparado y falla cerrado, pero el detach no se ejecuto sobre un canary verde. El canary no se presenta como produccion y el corte conserva una decision separada.
+
 ## Arquitectura objetivo
 
 ### Origen publico

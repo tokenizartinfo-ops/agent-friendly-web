@@ -11,7 +11,7 @@ Agent Friendly Web and Tokenizart share administrative infrastructure but remain
 | Resource | Identifier | State |
 | --- | --- | --- |
 | public web | `https://agentfriendlyweb.dev` | active, transitional Sites runtime behind the canonical custom domain; no new private data |
-| Cloudflare-native web candidate | `agent-friendly-web-web` | implemented and locally verified; 0% traffic, no DNS, remote canary or remote D1 |
+| Cloudflare-native web canary | `agent-friendly-web-web-canary` / `canary.agentfriendlyweb.dev` | deployed behind Access with isolated migrated D1; 0% public-origin traffic; authenticated HTML and responsive parity verified; rollback prepared |
 | public MCP | `agent-friendly-web-public-mcp` / `https://mcp.agentfriendlyweb.dev` | active, read-only, no D1 |
 | contact Worker legacy | `agent-friendly-web-contact-staging-frontier` | retirement evidence only; Access protected, writes OFF |
 | contact D1 legacy | `agent-friendly-web-contact-staging-frontier` | retirement evidence only; isolated, zero leads and zero receipts |
