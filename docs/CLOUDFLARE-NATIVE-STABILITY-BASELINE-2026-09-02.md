@@ -1,9 +1,13 @@
 # Cloudflare-native production stability baseline
 
-**Proyecto:** `agent-friendly-web`  
-**Entorno:** `afw_public`  
-**Origen:** `https://agentfriendlyweb.dev`  
-**Fecha:** 2026-09-02  
+**Proyecto:** `agent-friendly-web`
+
+**Entorno:** `afw_public`
+
+**Origen:** `https://agentfriendlyweb.dev`
+
+**Fecha:** 2026-09-02
+
 **Estado:** baseline verde; ventana de estabilidad abierta
 
 ## Alcance
