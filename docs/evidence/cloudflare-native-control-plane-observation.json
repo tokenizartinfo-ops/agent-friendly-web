@@ -1,0 +1,28 @@
+{
+  "contract_version": "agentfriendly.control-plane-observation.v1",
+  "observed_at": "2026-09-02T06:06:18.793Z",
+  "project": "agent-friendly-web",
+  "environment": "afw_public",
+  "sources": {
+    "cloudflare": "Cloudflare API GET /accounts/{account_id}/workers/domains",
+    "sites": "OpenAI Sites get_site + list_custom_domains"
+  },
+  "cloudflare_custom_domain": {
+    "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+    "domain_id": "57a78f718d4dabc302bbcd2c17dbdc8e8882b8d3",
+    "hostname": "agentfriendlyweb.dev",
+    "service": "agent-friendly-web-web-production",
+    "environment": "production",
+    "enabled": true,
+    "previews_enabled": false
+  },
+  "legacy_sites": {
+    "project_id": "appgprj_6a8f19e35d688191a53e93432543e39c",
+    "project_status": "active",
+    "domain_binding_id": "appgdom_6a8f665d5bc881919ac5fbdd05f69cbd",
+    "hostname": "agentfriendlyweb.dev",
+    "status": "active",
+    "provider_status": "active",
+    "ssl_status": "active"
+  }
+}
