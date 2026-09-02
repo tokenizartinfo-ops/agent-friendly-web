@@ -147,7 +147,7 @@ git commit -m "feat: add inbound email canary planner"
 - Consumes: archivo JSON de inventario saneado mediante `--input`.
 - Produces: un unico documento JSON en stdout; exit code `0` para plan valido y `1` para frontera rechazada.
 
-- [ ] **Step 1: Write failing CLI and public contract tests**
+- [x] **Step 1: Write failing CLI and public contract tests**
 
 Test exact script registration `email:inbound:preflight`, JSON-only stdout, no destination address, `status: local_preflight_ready_remote_unconfigured`, active/reserved aliases and blocked outbound capabilities.
 
@@ -162,23 +162,23 @@ assert.deepEqual(contract.active_aliases, [
 ]);
 ```
 
-- [ ] **Step 2: Run tests and verify RED**
+- [x] **Step 2: Run tests and verify RED**
 
 Run: `node --test test/email-inbound-canary-preflight.test.mjs`
 
 Expected: FAIL because the CLI, script registration and contract do not exist.
 
-- [ ] **Step 3: Implement CLI and contract**
+- [x] **Step 3: Implement CLI and contract**
 
 The CLI reads one file, calls `buildEmailInboundCanaryPlan`, writes one JSON result, never accepts a destination address flag and never invokes the network. The public contract declares the observed state dated `2026-09-02` without exposing the private destination.
 
-- [ ] **Step 4: Run tests and verify GREEN**
+- [x] **Step 4: Run tests and verify GREEN**
 
 Run: `node --test test/email-inbound-canary-preflight.test.mjs`
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add scripts/preflight-email-inbound-canary.mjs test/email-inbound-canary-preflight.test.mjs public/.well-known/email-inbound-canary-contract.json package.json

@@ -34,6 +34,7 @@
     "contact:dev": "npx --yes wrangler@4.127.0 dev --config wrangler.contact.jsonc --env staging --port 8792",
     "contact:deploy:dry-run": "npx --yes wrangler@4.127.0 deploy --config wrangler.contact.jsonc --env staging --dry-run",
     "contact:deploy:staging": "npx --yes wrangler@4.127.0 deploy --config wrangler.contact.jsonc --env staging",
+    "email:inbound:preflight": "node scripts/preflight-email-inbound-canary.mjs",
     "cli": "node bin/afw.mjs",
     "db:generate": "drizzle-kit generate"
   },
