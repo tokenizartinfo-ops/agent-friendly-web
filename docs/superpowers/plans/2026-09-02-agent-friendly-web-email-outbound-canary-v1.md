@@ -161,6 +161,6 @@ git diff --check
 
 Expected: all tests, lint and build pass; `git diff --check` reports no whitespace errors.
 
-- [ ] **Step 5: Scan and publish only the Draft PR update**
+- [x] **Step 5: Scan and publish only the Draft PR update**
 
 Search changed files for private email destinations, credentials, DKIM contents, API keys and unrelated Tokenizart runtime references. Commit and push the branch, update Draft PR `#49`, and do not merge, deploy, alter billing, apply DNS or send email.
