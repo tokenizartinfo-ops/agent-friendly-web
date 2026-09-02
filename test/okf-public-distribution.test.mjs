@@ -65,7 +65,7 @@ test('OKF source manifest fixes the approved public release contract', async () 
   assert.equal(manifest.canonical_origin, 'https://agentfriendlyweb.dev');
   assert.equal(manifest.license, 'CC-BY-4.0');
   assert.equal(manifest.marks, 'reserved');
-  assert.equal(manifest.release.id, '2026-09-02-public-v4');
+  assert.equal(manifest.release.id, '2026-09-02-public-v5');
   assert.equal(manifest.release.verified_by, 'human:gabriel-mucchiut');
   assert.equal(manifest.release.stale_after, '2026-12-01T00:00:00Z');
   assert.match(manifest.release.generated_at, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/);
