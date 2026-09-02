@@ -35,7 +35,7 @@
 - Consumes: inventario remoto saneado sin direccion de destino.
 - Produces: `buildEmailInboundCanaryPlan(input)`, `verifyEmailInboundCanaryReceipt(input)`, `EMAIL_INBOUND_CANARY_CONTRACT`, `ACTIVE_INBOUND_ALIASES`, `RESERVED_INBOUND_ALIASES`.
 
-- [ ] **Step 1: Write the failing planner tests**
+- [x] **Step 1: Write the failing planner tests**
 
 ```js
 import assert from 'node:assert/strict';
@@ -96,13 +96,13 @@ test('accepts only a complete metadata-only synthetic receipt', () => {
 });
 ```
 
-- [ ] **Step 2: Run the focused test and verify RED**
+- [x] **Step 2: Run the focused test and verify RED**
 
 Run: `node --test test/email-inbound-canary.test.mjs`
 
 Expected: FAIL because `lib/email-inbound-canary.mjs` does not exist.
 
-- [ ] **Step 3: Implement the minimal pure boundary**
+- [x] **Step 3: Implement the minimal pure boundary**
 
 Implement a closed input schema, stable SHA-256 plan ID, exact project/origin checks, conflict detection, explicit steps and rollback actions. The plan must expose only booleans, counts, aliases, public resource IDs and operation names.
 
@@ -122,13 +122,13 @@ export const RESERVED_INBOUND_ALIASES = Object.freeze([
 
 The returned plan must include `state`, `activeAliases`, `reservedAliases`, `blockedInboundAliases`, `outboundEnabled: false`, `persistenceEnabled: false`, `steps`, `rollback`, and `blockedActions`.
 
-- [ ] **Step 4: Run the focused test and verify GREEN**
+- [x] **Step 4: Run the focused test and verify GREEN**
 
 Run: `node --test test/email-inbound-canary.test.mjs`
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add lib/email-inbound-canary.mjs test/email-inbound-canary.test.mjs
@@ -393,4 +393,3 @@ git commit -m "docs: record verified inbound email canary"
 - [ ] **Step 6: Push and open a Draft PR**
 
 Push the isolated branch and create a Draft PR whose body states: inbound only, destination private, no outbound provider, no newsletter, no message persistence, test evidence, rollback and Gate 6C.2 excluded.
-
