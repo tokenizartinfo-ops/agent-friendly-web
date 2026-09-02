@@ -17,7 +17,7 @@ verified:
     at: 2026-09-02T00:00:00Z
 sources:
   - id: source-1
-    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/1bfea0f086dd40b439e1f197752c583faddf176d/docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md
+    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/ab13caa3c5d64db415b520a955f1c985bfaa8828/docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md
     title: "Agent Friendly Web: roadmap agent-native"
     author: agent-friendly-web/editorial-v1
     last_modified: 2026-09-02T00:00:00Z
@@ -45,7 +45,7 @@ sources:
 - contenido sectorial inicial para seis perfiles en ESP/ENG/POR;
 - comparador local antes/despues y contrato `readiness-comparison.v1`;
 - prototipo determinista de asistencia de intake y contrato `intake-assistant.v1`, sin persistencia ni acciones.
-- bundle publico OKF v0.2 con 11 conceptos, manifiesto, procedencia, vigencia, licencia y SHA-256;
+- bundle publico OKF v0.2 con 15 conceptos, manifiesto, procedencia, vigencia, licencia y SHA-256;
 - pagina humana `/conocimiento-abierto` y descubrimiento OKF desde `llms.txt`, catalogos, sitemap y footer.
 - CLI oficial read-only para auditoria, consulta Registry y verificacion OKF con JSON estable y `--dry-run`;
 - guia conversacional publica `/guia`, determinista, citada y efimera, con continuidad inmediata y profundidad adaptable.
@@ -61,7 +61,6 @@ sources:
 - MCP autenticado para expedientes autorizados y generacion de paquetes; el MCP publico read-only ya esta desplegado y permanece separado;
 - A2A Agent Card cuando exista un agente remoto real, autenticado y observable;
 - publicacion asistida mediante adaptadores limitados y aprobacion del owner.
-- migracion del origen publico a un Worker Cloudflare-native, con canary Access, D1 aislada, paridad y rollback antes del corte DNS;
 - paquetes o plugins oficiales por ecosistema, empezando por Tokenizart, Atelier y Agent Friendly Web, solo cuando cada marketplace o cliente tenga contrato y distribucion verificados;
 - skills publicas versionadas y customizadas por organizacion, separadas de las skills internas de operacion;
 

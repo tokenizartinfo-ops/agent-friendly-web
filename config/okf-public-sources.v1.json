@@ -5,7 +5,7 @@
   "license": "CC-BY-4.0",
   "marks": "reserved",
   "release": {
-    "id": "2026-09-02-public-v4",
+    "id": "2026-09-02-public-v5",
     "generated_at": "2026-09-02T00:00:00Z",
     "verified_at": "2026-09-02T00:00:00Z",
     "verified_by": "human:gabriel-mucchiut",
@@ -45,7 +45,7 @@
     },
     "docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md": {
       "title": "Agent Friendly Web: roadmap agent-native",
-      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/1bfea0f086dd40b439e1f197752c583faddf176d/docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/ab13caa3c5d64db415b520a955f1c985bfaa8828/docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md",
       "author": "agent-friendly-web/editorial-v1",
       "last_modified": "2026-09-02T00:00:00Z"
     },
@@ -81,7 +81,7 @@
     },
     "docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md": {
       "title": "Agent Friendly Web Cloudflare-native origin v1",
-      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/1bfea0f086dd40b439e1f197752c583faddf176d/docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/6ba79ed4086a5a71e48e3cb9cfdef0aaf173674e/docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md",
       "author": "person:gabriel-mucchiut",
       "last_modified": "2026-09-02T00:00:00Z"
     }

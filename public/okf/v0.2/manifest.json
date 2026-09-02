@@ -2,7 +2,7 @@
   "schema": "agent-friendly-web.okf-distribution.v1",
   "convention": "Agent Friendly Web project extension for distribution; not an OKF requirement.",
   "okf_version": "0.2",
-  "release": "2026-09-02-public-v4",
+  "release": "2026-09-02-public-v5",
   "canonical_url": "https://agentfriendlyweb.dev/okf/v0.2/index.md",
   "generated_at": "2026-09-02T00:00:00Z",
   "verified": {
@@ -56,7 +56,7 @@
     },
     {
       "path": "discovery/infrastructure-status.md",
-      "sha256": "3b10494d63a6f060a3b902149864e3feb641bb7d1f69ea3c23fb2a179588f673",
+      "sha256": "85a3a91c4e8e35a9c79ba2e6131279911062de33c8390b7da52f58a925c438c7",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
@@ -68,7 +68,7 @@
     },
     {
       "path": "discovery/public-discovery-resources.md",
-      "sha256": "d17a7f5491826b03dd306d29126b4e8193304f3cfd520dfc2f9e756d2e9aa6d9",
+      "sha256": "65b8fcd3d70129164634e0ae7a87557c1a559cb0123c3cfed17d5e7fe13d141f",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
@@ -80,7 +80,7 @@
     },
     {
       "path": "log.md",
-      "sha256": "d5f3959be859d937ba62b793d59c72995edcb05a93bcb18efa38657b546e9e62",
+      "sha256": "61ed09bf650bf78ce2b5dbc6841a6df66b1d932e5a7afa8a7291b321047ca508",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
