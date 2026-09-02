@@ -1,5 +1,7 @@
 # Agent Friendly Web Contact Worker Frontier v1
 
+> Frontera historica remota OFF. Se conserva como evidencia de Access, Turnstile y D1 vacia, pero no es un staging vigente. El diseño futuro sera same-origin dentro de `afw_canary`.
+
 **Fecha:** 2026-08-31
 
 **Estado:** propuesta tecnica para revision humana; sin despliegue ni escrituras

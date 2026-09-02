@@ -1,5 +1,5 @@
 import { and, eq } from 'drizzle-orm';
-import { getChatGPTUser } from '../../../../../../chatgpt-auth';
+import { getCloudflareAccessUser } from '../../../../../../cloudflare-access-auth';
 import { getDb } from '../../../../../../../db';
 import {
   domainClaims,
@@ -32,7 +32,7 @@ function tokenFromStoredClaim(claim: typeof domainClaims.$inferSelect) {
 }
 
 export async function POST(_request: Request, context: RouteContext) {
-  const user = await getChatGPTUser();
+  const user = await getCloudflareAccessUser();
   if (!user) return Response.json({ error: 'Inicia sesion para comprobar el dominio.' }, { status: 401 });
 
   const { projectId, claimId } = await context.params;

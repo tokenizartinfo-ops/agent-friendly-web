@@ -1,0 +1,73 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "agent-friendly-web-web",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "main": "vinext/server/fetch-handler",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "assets": {
+    "directory": "dist/client",
+    "not_found_handling": "none",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "agent-friendly-web-web-local",
+      "database_id": "00000000-0000-4000-8000-000000000000",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "vars": {
+    "ACCESS_TEAM_DOMAIN": "replace-before-remote-deploy.cloudflareaccess.com",
+    "ACCESS_AUD": "replace-before-remote-deploy",
+    "AFW_CANARY_DIAGNOSTICS_ENABLED": "false",
+    "AFW_REMOTE_DEPLOY_ENABLED": "false"
+  },
+  "env": {
+    "canary": {
+      "name": "agent-friendly-web-web-canary",
+      "workers_dev": false,
+      "preview_urls": false,
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "agent-friendly-web-web-canary",
+          "database_id": "2b518988-eacb-4c31-b760-4e58c3c0285b",
+          "migrations_dir": "drizzle"
+        }
+      ],
+      "vars": {
+        "ACCESS_TEAM_DOMAIN": "tokenizart.cloudflareaccess.com",
+        "ACCESS_AUD": "5e6f80fdd77e026d6e9f513d4614d22e10cba0f7a90ea4bf7a10b27d6de67a45",
+        "AFW_CANARY_DIAGNOSTICS_ENABLED": "true",
+        "AFW_REMOTE_DEPLOY_ENABLED": "false"
+      }
+    },
+    "production": {
+      "name": "agent-friendly-web-web-production",
+      "workers_dev": false,
+      "preview_urls": false,
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "agent-friendly-web-web-production",
+          "database_id": "22222222-2222-4222-8222-222222222222",
+          "migrations_dir": "drizzle"
+        }
+      ],
+      "vars": {
+        "ACCESS_TEAM_DOMAIN": "replace-before-remote-deploy.cloudflareaccess.com",
+        "ACCESS_AUD": "replace-before-remote-deploy",
+        "AFW_CANARY_DIAGNOSTICS_ENABLED": "false",
+        "AFW_REMOTE_DEPLOY_ENABLED": "false"
+      }
+    }
+  }
+}

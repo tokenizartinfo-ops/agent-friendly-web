@@ -3,13 +3,13 @@ import test from 'node:test';
 
 import { createContactWorker } from '../worker/contact/index.mjs';
 
-const formOrigin = 'https://agent-friendly-web-contact-staging.tokenizart.chatgpt.site';
+const formOrigin = 'https://canary.agentfriendlyweb.dev';
 const baseEnv = {
   CONTACT_STAGING_MODE: 'staging_allowlist',
   CONTACT_STAGING_WRITES_ENABLED: 'true',
   CONTACT_STAGING_API_HOST: 'contact-staging.agentfriendlyweb.dev',
   CONTACT_STAGING_FORM_ORIGIN: formOrigin,
-  CONTACT_STAGING_WIDGET_HOST: 'agent-friendly-web-contact-staging.tokenizart.chatgpt.site',
+  CONTACT_STAGING_WIDGET_HOST: 'canary.agentfriendlyweb.dev',
   CONTACT_STAGING_ALLOWED_EMAILS: 'owner@example.com',
   CONTACT_ACCESS_TEAM_DOMAIN: 'example.cloudflareaccess.com',
   CONTACT_ACCESS_AUD: 'contact-staging-audience',

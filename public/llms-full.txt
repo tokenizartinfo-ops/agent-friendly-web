@@ -4,11 +4,17 @@
 
 AF-EV is orthogonal to the proprietary AF-0 to AF-5 maturity method. The Cloudflare `isitagentready.com` baseline observed on 2026-08-30 scored `agentfriendlyweb.dev` at 53/100, Level 2 Bot-Aware. This is a dated third-party diagnostic, not a certification, security assurance, indexing guarantee or ranking guarantee. The machine-readable history is published at `https://agentfriendlyweb.dev/.well-known/external-readiness.json` and the human explanation at `https://agentfriendlyweb.dev/verificacion-externa`.
 
-After Sites version 27, a second provider observation returned Level 4 Agent-Integrated and passed Markdown negotiation, ARD and WebMCP. The provider API did not return a numeric score for that observation, so Agent Friendly Web does not infer one. DNS, OAuth, A2A and commerce remain separate gates and are not advertised merely to improve an external result.
+A later dated provider observation returned Level 4 Agent-Integrated and passed Markdown negotiation, ARD and WebMCP. The provider API did not return a numeric score for that observation, so Agent Friendly Web does not infer one. DNS, OAuth, A2A and commerce remain separate gates and are not advertised merely to improve an external result.
 
 ## Identity
 
 Agent Friendly Web is an initiative created by Gabriel Mucchiut and incubated within the Tokenizart infrastructure. Tokenizart is its first integral case study.
+
+## Infrastructure status
+
+The only canonical public origin is `https://agentfriendlyweb.dev`. As observed on 2026-09-01, that origin remains online through a transitional legacy Sites runtime while a Cloudflare-native Worker canary is verified. The own-domain canary is deployed behind Cloudflare Access with an isolated, migrated D1 containing zero functional rows. It receives 0% of public-origin traffic and does not change the canonical origin. An allowlisted session verified authenticated HTML, the same build passed desktop/mobile responsive QA, and rollback is prepared but was not executed against the healthy canary. Production cutover remains a separate gate. Private and contact interfaces under `*.chatgpt.site` are retired and have no operational role. The candidate remains separate from all Tokenizart runtimes and data.
+
+The exact dated state, freshness boundary and next gate are published at `https://agentfriendlyweb.dev/.well-known/infrastructure-status.json`. Historical release receipts may mention Sites because they record what happened at that time; they do not authorize its continued use or describe the target architecture.
 
 ## Purpose
 
@@ -74,7 +80,7 @@ After human review, the owner may prepare and download an `agentfriendly.draft-p
 
 ## Security
 
-The public scanner accepts only public HTTP/HTTPS targets, rejects credentials and alternate ports, checks DNS resolution, limits time and response size, and does not follow redirects. It never mutates the target. The owner dossier never asks for credentials and stores only allowlisted context behind Sign in with ChatGPT.
+The public scanner accepts only public HTTP/HTTPS targets, rejects credentials and alternate ports, checks DNS resolution, limits time and response size, and does not follow redirects. It never mutates the target. Legacy private routes are frozen during migration and must not receive new real user data. The Cloudflare-native candidate never asks for credentials, validates the signed Cloudflare Access subject and audience, fails closed without that identity and stores only allowlisted context.
 
 ## Tokenizart
 
@@ -104,6 +110,7 @@ Tokenizart is documented as an evolving agent-first architecture. Existing publi
 - https://agentfriendlyweb.dev/schemas/mcp-result.v1.json
 - https://agentfriendlyweb.dev/.well-known/ai-catalog.json
 - https://agentfriendlyweb.dev/.well-known/agent-skills/index.json
+- https://agentfriendlyweb.dev/.well-known/infrastructure-status.json
 - https://github.com/tokenizartinfo-ops/agent-friendly-web
 
 ## Machine-readable catalogs
@@ -112,7 +119,7 @@ The deployed ARD-compatible draft manifest, its `ai-catalog.json` compatibility 
 
 ## Capability status
 
-The machine-readable readiness manifest at `https://agentfriendlyweb.dev/.well-known/agent-readiness.json` is the current capability ledger. Discovery resources, the public read-only audit API, the audit skill, the repo-first read-only CLI, the public stateless MCP read-only server, Markdown negotiation, ARD compatibility and the browser WebMCP tool are deployed. A2A remains planned and x402 remains research. Candidate, planned and research work does not count as deployed evidence until its production gate closes.
+The machine-readable readiness manifest at `https://agentfriendlyweb.dev/.well-known/agent-readiness.json` is the capability ledger. The separate infrastructure ledger at `https://agentfriendlyweb.dev/.well-known/infrastructure-status.json` distinguishes the transitional public runtime, the 0%-traffic Cloudflare-native candidate, retired surfaces and the next remote gate. Discovery resources, the public read-only audit API, the audit skill, the repo-first read-only CLI, the public stateless MCP read-only server, Markdown negotiation, ARD compatibility and the browser WebMCP tool are deployed. A2A remains planned and x402 remains research. Candidate, planned and research work does not count as deployed evidence until its production gate closes.
 
 ## Illustrative maturity comparisons
 

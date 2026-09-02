@@ -1,0 +1,59 @@
+{
+  "contract_version": "agentfriendly.cloudflare-native-canary.v1",
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_canary",
+  "origin": "https://canary.agentfriendlyweb.dev",
+  "worker": {
+    "name": "agent-friendly-web-web-canary",
+    "workers_dev": false,
+    "preview_urls": false,
+    "deployed": true,
+    "deployment_id": "620ebbd0-7434-4e30-b37c-1da780a3f62b",
+    "version_id": "5cddabb2-2efd-4b19-bcf7-ea4766a30104",
+    "custom_domain_attached": true,
+    "custom_domain_id": "b61a8874e9df56a6b2e9caec04cdd6f0f9616dc5"
+  },
+  "database": {
+    "name": "agent-friendly-web-web-canary",
+    "id": "2b518988-eacb-4c31-b760-4e58c3c0285b",
+    "isolation": "canary_only",
+    "schema_state": "migrations_applied_empty",
+    "row_count": 0,
+    "backup_state": "new_empty_database_no_backup_required"
+  },
+  "access": {
+    "application_id": "dc905004-16dc-4174-b6ec-bb9911f6965c",
+    "audience": "5e6f80fdd77e026d6e9f513d4614d22e10cba0f7a90ea4bf7a10b27d6de67a45",
+    "team_domain": "tokenizart.cloudflareaccess.com",
+    "policy_decision": "allow",
+    "allowed_emails": [
+      "tokenizart.info@gmail.com"
+    ],
+    "protected_before_domain_attach": true
+  },
+  "traffic": {
+    "public_percent": 0,
+    "canonical_origin_unchanged": true,
+    "canonical_origin": "https://agentfriendlyweb.dev",
+    "canary_linked_from_public_site": false
+  },
+  "verification": {
+    "authenticated_html": "passed",
+    "responsive_qa": [
+      "1440x900",
+      "390x844"
+    ],
+    "representative_edge_routes": 9,
+    "functional_table_count": 13,
+    "functional_row_count_after_smoke": 0,
+    "rows_written_during_verification": 0
+  },
+  "rollback": {
+    "action": "detach_canary_custom_domain",
+    "state": "prepared_not_executed",
+    "production_change_required": false,
+    "canonical_origin": "https://agentfriendlyweb.dev",
+    "legacy_runtime_observed": "OpenAI Sites"
+  }
+}

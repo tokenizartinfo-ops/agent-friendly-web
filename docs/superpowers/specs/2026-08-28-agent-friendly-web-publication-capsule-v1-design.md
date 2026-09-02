@@ -1,5 +1,7 @@
 # Agent Friendly Web Publication Capsule v1
 
+> Especificacion funcional historica. Su modelo de autorizacion Sites fue reemplazado en el candidato Cloudflare-native; el contrato de capsula se conserva y la identidad vigente se rige por `docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md`.
+
 **Fecha:** 2026-08-28
 
 **Estado:** aprobado para implementacion como Bloque 5A

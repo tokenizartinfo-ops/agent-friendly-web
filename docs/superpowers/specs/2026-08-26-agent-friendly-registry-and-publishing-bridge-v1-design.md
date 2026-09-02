@@ -1,5 +1,7 @@
 # Agent Friendly Registry y Owner-Authorized Publishing Bridge v1
 
+> Especificacion historica. Las referencias a Sites y `oai-authenticated-*` fueron superadas el 2026-09-01 por `docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md`; se conservan para explicar decisiones y releases anteriores.
+
 Estado: propuesta aprobada para especificacion tecnica
 
 Fecha: 2026-08-26

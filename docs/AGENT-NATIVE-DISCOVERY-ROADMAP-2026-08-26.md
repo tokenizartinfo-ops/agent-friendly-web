@@ -11,6 +11,16 @@ Agent Friendly Web debe demostrar en su propia infraestructura el metodo que ofr
 
 La meta de 100% representa la finalizacion de las capas que el caso necesita. No exige activar cada tecnologia disponible ni autoriza a presentar un roadmap como producto operativo. Los puntajes externos se conservan en un perfil AF-EV separado: sirven como evidencia comparativa, no redefinen AF-0 a AF-5 ni justifican publicar capacidades ficticias.
 
+## Estado de infraestructura al 2026-09-01
+
+El unico origen publico canonico es `https://agentfriendlyweb.dev`. Ese dominio continua disponible sobre un runtime Sites transitorio mientras se prepara el reemplazo Cloudflare-native. El runtime transitorio es una fuente de migracion, no la arquitectura objetivo, y sus rutas privadas quedan congeladas sin admision de nuevos datos reales.
+
+El candidato Cloudflare Worker con Vinext y Cloudflare Access esta implementado y verificado. El canary propio `canary.agentfriendlyweb.dev` esta desplegado detras de Access con D1 aislada, seis migraciones y cero filas funcionales. Mantiene **0% del trafico del origen publico** y no modifica `agentfriendlyweb.dev`; una sesion allowlisted confirmo el HTML autenticado, la misma compilacion paso QA responsive y el rollback quedo preparado sin ejecutar. El corte productivo conserva un gate separado. Las interfaces privadas o de contacto bajo `*.chatgpt.site` estan retiradas y no pueden usarse como produccion, staging, preview, autenticacion o rollback.
+
+Tokenizart sigue siendo el primer caso integral documentado, pero no es una dependencia de ejecucion. Compartir cuenta Cloudflare, organizacion GitHub o identidad administrativa no fusiona Workers, D1, repositorios ni datos de ambos proyectos.
+
+La fuente machine-readable de este estado es `https://agentfriendlyweb.dev/.well-known/infrastructure-status.json`. Los documentos que nombran versiones Sites se conservan solamente como recibos historicos de releases anteriores.
+
 ## Verificacion externa AF-EV
 
 La fotografia inicial de Cloudflare `isitagentready.com` del 2026-08-30 ubico a `agentfriendlyweb.dev` en **53/100, Level 2 Bot-Aware**. Despues de EV-1, las reauditorias del 2026-08-30 y 2026-08-31 confirmaron **Level 4 Agent-Integrated**. El API no devolvio puntaje numerico posterior, por lo que no se infiere uno. Pasan robots, sitemap, Link headers, negociacion Markdown, politica de bots, Content Signals, API Catalog, MCP Server Card, Agent Skills, WebMCP y ARD. Permanecen ausentes DNS-AID, OAuth discovery, OAuth Protected Resource, `auth.md` y A2A Agent Card.
@@ -33,7 +43,7 @@ La prioridad inmediata ya no es agregar señales para elevar una nota. Es cerrar
 - manifiesto propio `/.well-known/agent-readiness.json`;
 - politica `/.well-known/security.txt`;
 - comparador ilustrativo AF-0 a AF-5;
-- expediente privado con identidad de Sites y campos allowlisted;
+- expediente privado del runtime transitorio congelado; reemplazo Cloudflare Access implementado localmente, aun sin canary ni trafico;
 - Registry publico versionado con perfiles HTML, JSON y Markdown;
 - guia publica `/aeo-y-crawlers` para educacion AEO, decisiones de crawling y valor comercial;
 - catalogo `/.well-known/crawler-policy-catalog.json` con fuentes y finalidades por proveedor.
@@ -56,6 +66,7 @@ La prioridad inmediata ya no es agregar señales para elevar una nota. Es cerrar
 - MCP autenticado para expedientes autorizados y generacion de paquetes; el MCP publico read-only ya esta desplegado y permanece separado;
 - A2A Agent Card cuando exista un agente remoto real, autenticado y observable;
 - publicacion asistida mediante adaptadores limitados y aprobacion del owner.
+- migracion del origen publico a un Worker Cloudflare-native, con canary Access, D1 aislada, paridad y rollback antes del corte DNS;
 - paquetes o plugins oficiales por ecosistema, empezando por Tokenizart, Atelier y Agent Friendly Web, solo cuando cada marketplace o cliente tenga contrato y distribucion verificados;
 - skills publicas versionadas y customizadas por organizacion, separadas de las skills internas de operacion;
 
@@ -206,18 +217,18 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 2. **Bloque 2 - AEO, sectores y medicion: implementado para release.** Guia, catalogo, control mensual de fuentes, primera biblioteca ESP/ENG/POR y comparador no persistente.
 3. **Bloque 3 - asistencia de intake: prototipo controlado implementado.** Texto libre, rechazo de secretos, propuestas field-scoped y seleccion humana; guardado, voz, correo y pagos siguen bloqueados.
 4. **Bloque 4A - OKF publico: desplegado y verificado.** Bundle v0.2 determinista, pagina humana, descubrimiento, manifiesto y checksums.
-5. **Bloque 4B - CLI read-only: desplegado y verificado.** Auditoria, consulta Registry y verificacion OKF con JSON estable, `--dry-run`, cero credenciales y cero escritura. El candidato se valido en Sites 17 y el estado final se publico en Sites 18.
+5. **Bloque 4B - CLI read-only: desplegado y verificado.** Auditoria, consulta Registry y verificacion OKF con JSON estable, `--dry-run`, cero credenciales y cero escritura. Los recibos historicos de validacion y publicacion permanecen archivados.
 6. **Bloque 4B.1 - guia conversacional publica: desplegada y verificada.** Orientacion determinista con fuentes, continuidad inmediata y lenguaje adaptable, sin acciones ni persistencia.
 7. **Bloque 4C - MCP read-only: desplegado y verificado.** Worker independiente en `mcp.agentfriendlyweb.dev`, contrato stateless, cuatro tools, cuatro resources, limites HTTP y saneamiento; clientes modernos/heredados, negativos, health, auditoria y QA visual aprobados.
 8. **Bloque 5A - capsula manual: desplegado y verificado.** Generacion determinista, hashes SHA-256, vencimiento, descarga JSON y decisiones owner/mantenedor ligadas al manifiesto. La migracion D1 remota fue aditiva, las tablas quedaron vacias y el flujo no aplica cambios ni usa credenciales.
 9. **Gate EV-1 - desplegado y verificado:** Markdown, ARD, WebMCP read-only y perfil externo versionado. La reauditoria Cloudflare paso de Level 2 a Level 4; no incluye DNS, OAuth, A2A o pagos.
 10. **Bloque 5B - desplegado y verificado:** diff acotado contra archivos publicos vigentes, pruebas posteriores por proveedor externo y plan de Draft PR descargable sin envio ni merge. La migracion D1 fue aditiva y el envio remoto permanece deshabilitado.
-11. **Gate visual e idiomas integral - desplegado y verificado:** interfaz completa ESP/ENG/POR, portada comic `La llamada`, Archivo del futuro y robots F0-F5. Se publico primero en Sites 29 y conserva contratos, permisos y datos owner sin cambios.
+11. **Gate visual e idiomas integral - desplegado y verificado:** interfaz completa ESP/ENG/POR, portada comic `La llamada`, Archivo del futuro y robots F0-F5. El recibo historico de la primera publicacion permanece archivado y conserva contratos, permisos y datos owner sin cambios.
 12. **Bloque 5C - desplegado como sandbox efimero de navegador:** contrato fail-closed y laboratorio comic con adaptador en memoria, backup, rollback y canary de una ruta. Proveedores y escrituras reales permanecen deshabilitados hasta aprobacion separada.
 13. **Bloque 5D - canary remoto verificado:** contrato y ejecucion de un unico Draft PR GitHub en `tokenizartinfo-ops/agent-friendly-web-synthetic-origin`, archivo `llms.txt`, base `main`, capacidad efimera por alias y recibo metadata-only. El PR #1 permanece Draft, abierto y sin merge; no hubo deployment ni cambios sobre un origen real.
-14. **Home Guided Journey v1 - desplegado y verificado:** orden humano `La llamada -> F0-F5 -> diagnostico -> comparador -> archivo -> siguientes caminos`, hero responsive y archivo progresivo. Se publico en Sites 30 sin cambiar metodologia, puntajes ni permisos.
+14. **Home Guided Journey v1 - desplegado y verificado:** orden humano `La llamada -> F0-F5 -> diagnostico -> comparador -> archivo -> siguientes caminos`, hero responsive y archivo progresivo. Su recibo historico de publicacion no cambia metodologia, puntajes ni permisos.
 15. **Gate 6A - Traccion F1: documentacion y arquitectura en preparacion.** Beachhead cultural, canal de agencias, Discovery Pack, embudo, KPIs, contacto consentido, correo y comercio agentico separados.
-16. **Gate 6B - captura consentida remota OFF cerrada:** preview publico cerrado y ruta candidata de staging separada con hostname exacto, Access allowlist, Turnstile restringido, kill switch, rate limiting obligatorio, cuerpo acotado y D1 remota aislada y vacia. Gate 6B.2 esta cerrado con escrituras OFF. Datos reales y correo siguen deshabilitados.
+16. **Gate 6B - captura consentida remota OFF cerrada:** preview publico cerrado; la interfaz privada Sites esta retirada y la frontera Worker heredada queda como evidencia remota con escrituras OFF y D1 vacia. Datos reales y correo siguen deshabilitados. La captura no se reabre antes del corte Cloudflare-native.
 17. **Gate 6C - correo operativo, frontera local preparada:** politica `planned_draft_only`, aliases normalizados, consentimiento separado, idempotencia y revision humana para asuntos sensibles. DNS, casillas, routing, proveedor y envio requieren aprobacion separada.
 18. **Gate 6D - ventas y CRM ligero, frontera local preparada:** pipeline y transiciones `local_planning_only`, metadata sin PII, perdida razonada e idempotencia. D1, datos reales, scoring, propuestas y pagos requieren aprobacion separada.
 19. **Gate 6E - primer piloto pago humano:** catalogo, checkout, recibo, conciliacion y una entrega medida.
@@ -234,8 +245,9 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/llms-full.txt` | contexto publico extendido | desplegado, convencion del proyecto |
 | `/openapi.json` | contrato de auditoria publica | desplegado |
 | `/api-catalog` | linkset hacia OpenAPI | desplegado |
-| `/.well-known/ai-catalog.json` | inventario de compatibilidad ARD | desplegado en Sites 27; propuesta en evolucion |
-| `/.well-known/ard.json` | fuente ARD vigente segun el draft observado | desplegado en Sites 27; propuesta en evolucion |
+| `/.well-known/ai-catalog.json` | inventario de compatibilidad ARD | desplegado; propuesta en evolucion |
+| `/.well-known/ard.json` | fuente ARD vigente segun el draft observado | desplegado; propuesta en evolucion |
+| `/.well-known/infrastructure-status.json` | estado fechado del origen, canary, superficies retiradas y gate siguiente | canary Cloudflare-native protegido; 0% del trafico del origen publico |
 | `/.well-known/external-readiness.json` | historial AF-EV con procedencia y limites | desplegado y verificado; convencion del proyecto |
 | `/.well-known/agent-skills/index.json` | indice de skills descargables | desplegado, convencion del proyecto |
 | `/.well-known/agent-readiness.json` | estado de capacidades | desplegado, no es estandar oficial |
@@ -249,19 +261,19 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/mcp-readonly` | explicacion humana de tools, resources y limites | desplegado |
 | `https://mcp.agentfriendlyweb.dev/mcp` | Streamable HTTP stateless, `POST` read-only | desplegado |
 | `/.well-known/security.txt` | contacto y politica de seguridad | desplegado |
-| `/conocimiento-abierto` | explicacion humana del conocimiento publico versionado | desplegado en Sites 16 |
-| `/okf/v0.2/index.md` | indice machine-readable del bundle OKF v0.2 | desplegado en Sites 16 |
-| `/okf/v0.2/manifest.json` | inventario, metadata y hashes de distribucion | desplegado en Sites 16 |
-| `/okf/v0.2/CHECKSUMS.sha256` | verificacion SHA-256 del bundle publicado | desplegado en Sites 16 |
-| `/cli` | explicacion humana de la CLI read-only | desplegado en Sites 18 |
-| `/cli/index.md` | instalacion, comandos, limites y codigos de salida | desplegado en Sites 18 |
+| `/conocimiento-abierto` | explicacion humana del conocimiento publico versionado | desplegado |
+| `/okf/v0.2/index.md` | indice machine-readable del bundle OKF v0.2 | desplegado |
+| `/okf/v0.2/manifest.json` | inventario, metadata y hashes de distribucion | desplegado |
+| `/okf/v0.2/CHECKSUMS.sha256` | verificacion SHA-256 del bundle publicado | desplegado |
+| `/cli` | explicacion humana de la CLI read-only | desplegado |
+| `/cli/index.md` | instalacion, comandos, limites y codigos de salida | desplegado |
 | `/.well-known/agent-friendly-cli.json` | manifiesto de capacidades y restricciones CLI | desplegado, convencion del proyecto |
 | `/schemas/cli-response.v1.json` | contrato JSON estable de respuestas CLI | desplegado |
-| `/schemas/publication-capsule.v1.json` | contrato del paquete manual, archivos, hashes, destinos y limites | desplegado en Sites 25 |
-| `/schemas/capsule-decision.v1.json` | contrato de aprobacion o rechazo ligado al hash del manifiesto | desplegado en Sites 25 |
-| `/schemas/origin-comparison.v1.json` | contrato cerrado del diff publico acotado | desplegado en Sites 28 |
-| `/schemas/draft-pr-plan.v1.json` | plan tecnico no enviado, sin merge ni despliegue | desplegado en Sites 28; envio remoto deshabilitado |
-| `Accept: text/markdown` sobre `/` | variante Markdown negociada del inicio | desplegado y verificado en Sites 27 |
+| `/schemas/publication-capsule.v1.json` | contrato del paquete manual, archivos, hashes, destinos y limites | desplegado |
+| `/schemas/capsule-decision.v1.json` | contrato de aprobacion o rechazo ligado al hash del manifiesto | desplegado |
+| `/schemas/origin-comparison.v1.json` | contrato cerrado del diff publico acotado | desplegado |
+| `/schemas/draft-pr-plan.v1.json` | plan tecnico no enviado, sin merge ni despliegue | desplegado; envio remoto deshabilitado |
+| `Accept: text/markdown` sobre `/` | variante Markdown negociada del inicio | desplegado y verificado |
 | WebMCP `afw.audit_public_site` | tool in-page read-only para auditoria publica | desplegado y verificado; tecnologia experimental |
 
 ## Secuencia hacia herramientas y delegacion
@@ -300,7 +312,15 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 
 ## Gate inmediato
 
-Gate 6A y Gate 6B.2 remoto OFF quedaron cerrados. El gate inmediato posible es **6B.3: una unica escritura sintetica e idempotente**, pero permanece detenido hasta una aprobacion humana separada. La decision completa vive en:
+Gate 6A y Gate 6B.2 remoto OFF quedaron cerrados. La decision del 2026-09-01 retira Sites como entorno operativo y cambia la prelacion. El gate inmediato es **migrar el origen de Agent Friendly Web a Cloudflare de forma nativa**, primero mediante `afw_canary` protegido por Access, D1 aislada, 0% de trafico publico, paridad y rollback. La escritura sintetica 6B.3 queda diferida hasta despues del corte y de una nueva revision de su necesidad.
+
+El plan de migracion vive en:
+
+- `docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md`;
+- `docs/PROJECT-RESOURCE-BOUNDARY-AUDIT-2026-09-01.md`;
+- `docs/superpowers/plans/2026-09-01-agent-friendly-web-cloudflare-native-origin-v1.md`.
+
+La decision comercial completa vive en:
 
 - `docs/GROWTH-AND-MONETIZATION-ROADMAP-2026-08-31.md`;
 - `docs/INITIAL-GO-TO-MARKET-AND-SALES-MOTION-V1.md`;
@@ -310,7 +330,7 @@ Gate 6A y Gate 6B.2 remoto OFF quedaron cerrados. El gate inmediato posible es *
 
 La primera oferta paga propuesta es un Discovery Pack F0/F1 a F3 para arte, cultura, coleccionismo e instituciones con patrimonio. Las agencias y mantenedores web forman el primer canal multiplicador. La auditoria publica permanece gratuita y visible sin email; solicitar un plan y recibir marketing son consentimientos distintos.
 
-La implementacion local de Gate 6B agrega una ruta candidata separada y pruebas fail-closed, pero no activa correo, D1 remota de leads, Turnstile remoto, pagos, x402, OAuth, A2A ni cambios DNS. El siguiente gate ejecutable es crear el staging privado y sus bindings con datos sinteticos; cada mutacion remota conserva aprobacion separada.
+La implementacion local de Gate 6B conserva pruebas fail-closed, pero su UI Sites fue retirada. No activa correo, D1 remota de leads, Turnstile remoto, pagos, x402, OAuth, A2A ni cambios DNS. Cualquier futura prueba privada se ejecutara en `afw_canary`, no en un entorno generico llamado staging ni en un dominio ajeno al proyecto.
 
 La frontera local de Gate 6C tambien esta implementada como `planned_draft_only`: acepta solo metadata minima saneada, rechaza cuerpos, adjuntos y secretos probables, y nunca envia. Su publicacion o conexion con DNS, routing y proveedores requiere aprobacion separada. La evidencia vive en `docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-2026-08-31.md`.
 

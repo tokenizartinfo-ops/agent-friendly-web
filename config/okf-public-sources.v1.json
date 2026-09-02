@@ -5,12 +5,12 @@
   "license": "CC-BY-4.0",
   "marks": "reserved",
   "release": {
-    "id": "2026-08-31-public-v2",
-    "generated_at": "2026-08-31T00:00:00Z",
-    "verified_at": "2026-08-31T00:00:00Z",
+    "id": "2026-09-01-public-v3",
+    "generated_at": "2026-09-01T00:00:00Z",
+    "verified_at": "2026-09-01T00:00:00Z",
     "verified_by": "human:gabriel-mucchiut",
-    "stale_after": "2026-11-29T00:00:00Z",
-    "last_modified": "2026-08-31"
+    "stale_after": "2026-11-30T00:00:00Z",
+    "last_modified": "2026-09-01"
   },
   "source_catalog": {
     "docs/METHODOLOGY.es.md": {
@@ -27,9 +27,9 @@
     },
     "docs/SECURITY.md": {
       "title": "Seguridad y fronteras publicas",
-      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/SECURITY.md",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/39acfeeecc9f39911d2a5467893c36dc2223e253/docs/SECURITY.md",
       "author": "agent-friendly-web/editorial-v1",
-      "last_modified": "2026-08-27T00:00:00Z"
+      "last_modified": "2026-09-01T00:00:00Z"
     },
     "docs/SPECIFICATION.es.md": {
       "title": "Especificacion funcional y tecnica v1",
@@ -45,9 +45,9 @@
     },
     "docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md": {
       "title": "Agent Friendly Web: roadmap agent-native",
-      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/39acfeeecc9f39911d2a5467893c36dc2223e253/docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md",
       "author": "agent-friendly-web/editorial-v1",
-      "last_modified": "2026-08-27T00:00:00Z"
+      "last_modified": "2026-09-01T00:00:00Z"
     },
     "docs/BLOCK-3-INTAKE-ASSISTANT-CONTRACT.es.md": {
       "title": "Contrato del asistente de intake",
@@ -78,6 +78,12 @@
       "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/0ce175906ab21763cc6c1a11d9adc65c30dcc527/docs/PUBLIC-READINESS-REFERENCE-2026-08-31.md",
       "author": "person:gabriel-mucchiut",
       "last_modified": "2026-08-31T00:00:00Z"
+    },
+    "docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md": {
+      "title": "Agent Friendly Web Cloudflare-native origin v1",
+      "resource": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/39acfeeecc9f39911d2a5467893c36dc2223e253/docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md",
+      "author": "person:gabriel-mucchiut",
+      "last_modified": "2026-09-01T00:00:00Z"
     }
   },
   "concepts": [
@@ -153,6 +159,16 @@
       "status": "stable",
       "tags": ["agent-friendly-web", "readiness", "evidence", "dated-reference"],
       "sources": [{ "path": "docs/PUBLIC-READINESS-REFERENCE-2026-08-31.md", "sections": ["Referencia fechada", "Evidencia observada", "Limites", "Revalidacion"] }]
+    },
+    {
+      "output": "discovery/infrastructure-status.md",
+      "type": "Reference",
+      "title": "Estado de infraestructura y migracion",
+      "description": "Separacion fechada entre el origen canonico, runtime transitorio, candidato Cloudflare-native, superficies retiradas y gate siguiente.",
+      "resource": "https://agentfriendlyweb.dev/.well-known/infrastructure-status.json",
+      "status": "candidate",
+      "tags": ["agent-friendly-web", "infrastructure", "cloudflare", "migration", "provenance"],
+      "sources": [{ "path": "docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md", "sections": ["Decision", "Estado de partida", "Estado canary verificado", "Arquitectura objetivo", "Reglas de corte", "Evidencia historica"] }]
     },
     {
       "output": "discovery/public-discovery-resources.md",

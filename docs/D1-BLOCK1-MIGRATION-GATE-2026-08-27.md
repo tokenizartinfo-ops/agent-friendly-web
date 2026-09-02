@@ -1,5 +1,7 @@
 # D1 Block 1 Migration Gate
 
+> Evidencia historica del runtime anterior. La identidad Sites y sus headers quedaron superados el 2026-09-01 por `docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md`. Este recibo no autoriza reutilizar Sites ni describe el candidato Cloudflare-native.
+
 ## Estado
 
 La migracion `drizzle/0001_registry_block1.sql` fue preparada y validada primero en D1 local. Una inspeccion read-only posterior del binding remoto `DB`, realizada el 2026-08-27 sobre Sites 15, observo las tablas `domain_claims`, `owner_attestations`, `project_events`, `public_profiles`, `registry_sites`, `scan_observations` y `site_projects`. Por lo tanto, la afirmacion anterior de que la migracion no estaba presente en remoto quedo superada por evidencia posterior.

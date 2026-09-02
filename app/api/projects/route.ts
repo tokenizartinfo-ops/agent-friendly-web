@@ -1,5 +1,5 @@
 import { and, desc, eq } from 'drizzle-orm';
-import { getChatGPTUser } from '../../chatgpt-auth';
+import { getCloudflareAccessUser } from '../../cloudflare-access-auth';
 import { getDb } from '../../../db';
 import { projectEvents, siteProjects } from '../../../db/schema';
 // @ts-expect-error Shared ESM module is exercised directly by Node tests.
@@ -55,7 +55,7 @@ function present(project: typeof siteProjects.$inferSelect) {
 }
 
 export async function GET() {
-  const user = await getChatGPTUser();
+  const user = await getCloudflareAccessUser();
   if (!user) return Response.json({ error: 'Inicia sesion para abrir tu expediente.' }, { status: 401 });
 
   const [project] = await getDb()
@@ -69,7 +69,7 @@ export async function GET() {
 }
 
 export async function PUT(request: Request) {
-  const user = await getChatGPTUser();
+  const user = await getCloudflareAccessUser();
   if (!user) return Response.json({ error: 'Inicia sesion para guardar tu expediente.' }, { status: 401 });
 
   const raw = await request.json();

@@ -1,5 +1,5 @@
 import { and, desc, eq } from 'drizzle-orm';
-import { getChatGPTUser } from '../../../../chatgpt-auth';
+import { getCloudflareAccessUser } from '../../../../cloudflare-access-auth';
 import { getDb } from '../../../../../db';
 import {
   domainClaims,
@@ -72,7 +72,7 @@ async function getOwnedProject(projectId: string, userId: string) {
 }
 
 export async function GET(_request: Request, context: RouteContext) {
-  const user = await getChatGPTUser();
+  const user = await getCloudflareAccessUser();
   if (!user) return Response.json({ error: 'Inicia sesion para consultar la verificacion.' }, { status: 401 });
 
   const { projectId } = await context.params;
@@ -104,7 +104,7 @@ export async function GET(_request: Request, context: RouteContext) {
 }
 
 export async function POST(request: Request, context: RouteContext) {
-  const user = await getChatGPTUser();
+  const user = await getCloudflareAccessUser();
   if (!user) return Response.json({ error: 'Inicia sesion para verificar tu dominio.' }, { status: 401 });
 
   const { projectId } = await context.params;

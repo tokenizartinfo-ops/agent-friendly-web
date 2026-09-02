@@ -19,8 +19,8 @@
         "CONTACT_STAGING_MODE": "staging_allowlist",
         "CONTACT_STAGING_WRITES_ENABLED": "false",
         "CONTACT_STAGING_API_HOST": "contact-staging.agentfriendlyweb.dev",
-        "CONTACT_STAGING_FORM_ORIGIN": "https://agent-friendly-web-contact-staging.tokenizart.chatgpt.site",
-        "CONTACT_STAGING_WIDGET_HOST": "agent-friendly-web-contact-staging.tokenizart.chatgpt.site"
+        "CONTACT_STAGING_FORM_ORIGIN": "https://canary.agentfriendlyweb.dev",
+        "CONTACT_STAGING_WIDGET_HOST": "canary.agentfriendlyweb.dev"
       },
       "d1_databases": [
         {

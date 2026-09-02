@@ -1,5 +1,5 @@
 import { and, desc, eq } from 'drizzle-orm';
-import { getChatGPTUser } from '../../../../chatgpt-auth';
+import { getCloudflareAccessUser } from '../../../../cloudflare-access-auth';
 import { getDb } from '../../../../../db';
 import {
   domainClaims,
@@ -71,7 +71,7 @@ function observedResources(origin: string, raw: string, checkedAt: string) {
 }
 
 export async function POST(request: Request, context: RouteContext) {
-  const user = await getChatGPTUser();
+  const user = await getCloudflareAccessUser();
   if (!user) return Response.json({ error: 'Inicia sesion para publicar el perfil.' }, { status: 401 });
 
   const body = await request.json() as Record<string, unknown>;
