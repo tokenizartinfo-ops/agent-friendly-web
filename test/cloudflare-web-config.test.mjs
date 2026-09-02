@@ -33,6 +33,15 @@ test('web Worker config isolates canary and production without attaching traffic
   assert.equal(production.vars.AFW_REMOTE_DEPLOY_ENABLED, 'false');
 });
 
+test('web Worker can audit its own public Custom Domain through the Cloudflare front door', () => {
+  const config = JSON.parse(readFileSync(configPath, 'utf8'));
+
+  assert.ok(
+    config.compatibility_flags.includes('global_fetch_strictly_public'),
+    'same-origin public probes require global_fetch_strictly_public on a Worker Custom Domain',
+  );
+});
+
 test('package exposes bounded Cloudflare-native canary and production commands', () => {
   const packageJson = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
