@@ -91,6 +91,15 @@ test('public discovery exposes the active Cloudflare production state without st
   assert.doesNotMatch(robots, /\/signin-with-chatgpt|\/contact-staging|\/api\/staging/i);
 });
 
+test('active repository guidance describes Workers as production and Sites only as rollback evidence', () => {
+  const guidance = [read('README.md'), read('AGENTS.md')].join('\n');
+
+  assert.match(guidance, /Cloudflare(?:-native)? (?:Worker|Workers)/i);
+  assert.match(guidance, /Sites.*rollback/i);
+  assert.doesNotMatch(guidance, /vinculado al proyecto Sites|Frontend:.*sobre Sites|Sign in with ChatGPT provisto por Sites/i);
+  assert.doesNotMatch(guidance, /current public Sites runtime is a temporary migration source/i);
+});
+
 test('the roadmap no longer lists the completed public-origin migration as planned work', () => {
   const roadmap = read('docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md');
   const planned = roadmap.split('### Planificado')[1]?.split('### Investigacion')[0] || '';

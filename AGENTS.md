@@ -10,7 +10,7 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 - `afw_private`: private paths and APIs use Cloudflare Access on an `agentfriendlyweb.dev` hostname or path.
 - `afw_canary`: remote parity testing, when needed, uses a dedicated `agentfriendlyweb.dev` subdomain protected by Cloudflare Access.
 - `afw_sites_legacy`: every `*.chatgpt.site` surface is retired and must not be deployed, restored, linked or used as staging.
-- The current public Sites runtime is a temporary migration source, not the target architecture. Replace it with a Cloudflare-native Worker before removing the existing public binding.
+- The canonical public runtime is the Cloudflare-native production Worker. The historical Sites binding receives no apex traffic and is retained temporarily only as bounded rollback evidence.
 - Read the project boundary audit before changing remote infrastructure. Never infer the target from an open browser tab.
 
 ## Project boundary
