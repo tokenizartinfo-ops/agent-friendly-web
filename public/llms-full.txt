@@ -16,6 +16,8 @@ The only canonical public origin is `https://agentfriendlyweb.dev`. As observed 
 
 The exact dated state, freshness boundary and next gate are published at `https://agentfriendlyweb.dev/.well-known/infrastructure-status.json`. Historical release receipts may mention Sites because they record what happened at that time; they do not authorize its continued use or describe the target architecture.
 
+The active authentication boundary is documented at `https://agentfriendlyweb.dev/auth.md`. Cloudflare Access protects the private human routes with an allowlisted email and a one-time code. The application verifies the signed Access JWT, issuer and audience. ChatGPT identity is not part of the active runtime. OAuth 2.1, OpenID Connect discovery, Protected Resource Metadata and A2A authorization are not deployed.
+
 ## Purpose
 
 The service helps website owners understand what public agents can currently discover, what context is missing, and which technical or editorial change should happen next. It combines a public read-only audit with an authenticated, progressive owner dossier.
@@ -80,7 +82,7 @@ After human review, the owner may prepare and download an `agentfriendly.draft-p
 
 ## Security
 
-The public scanner accepts only public HTTP/HTTPS targets, rejects credentials and alternate ports, checks DNS resolution, limits time and response size, and does not follow redirects. It never mutates the target. Legacy private routes are frozen during migration and must not receive new real user data. The Cloudflare-native candidate never asks for credentials, validates the signed Cloudflare Access subject and audience, fails closed without that identity and stores only allowlisted context.
+The public scanner accepts only public HTTP/HTTPS targets, rejects credentials and alternate ports, checks DNS resolution, limits time and response size, and does not follow redirects. It never mutates the target. Private routes are protected by Cloudflare Access. The application never asks for reusable passwords, validates the signed Cloudflare Access subject and audience, fails closed without that identity and stores only allowlisted context.
 
 ## Tokenizart
 
