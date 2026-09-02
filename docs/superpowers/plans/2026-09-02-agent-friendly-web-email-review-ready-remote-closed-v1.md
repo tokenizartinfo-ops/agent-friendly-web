@@ -22,16 +22,16 @@
 
 ## Task 3: Closed canary deployment
 
-- [ ] Record current Worker deployment version for rollback.
-- [ ] Deploy the reviewed branch to `agent-friendly-web-web-canary` with `AFW_EMAIL_REVIEW_READY_ENABLED=false`.
-- [ ] Verify Access interception on the email route and the full canary smoke.
-- [ ] Inspect remote settings to prove the rate limiter exists and no `send_email` binding exists.
-- [ ] Verify production Worker and `agentfriendlyweb.dev` were not modified.
+- [x] Record current Worker deployment version for rollback.
+- [x] Deploy the reviewed branch to `agent-friendly-web-web-canary` with `AFW_EMAIL_REVIEW_READY_ENABLED=false`.
+- [x] Verify Access interception on the email route and the full canary smoke.
+- [x] Inspect remote settings to prove the rate limiter exists and no `send_email` binding exists.
+- [x] Verify production Worker and `agentfriendlyweb.dev` were not modified.
 
 ## Task 4: Evidence and reconciliation
 
-- [ ] Create a sanitized Gate 6C.3B phase 1 record with resource IDs, versions, commands, counts and rollback.
-- [ ] Update public email contracts to `remote_database_and_closed_route_ready_binding_pending` without claiming sending.
-- [ ] Update the email architecture, roadmaps and private Obsidian project note.
-- [ ] Run complete tests, lint, build, JSON parse, diff and secret/cross-project scans.
+- [x] Create a sanitized Gate 6C.3B phase 1 record with resource IDs, versions, commands, counts and rollback.
+- [x] Update public email contracts to `remote_database_and_closed_route_ready_binding_pending` without claiming sending.
+- [x] Update the email architecture, roadmaps and private Obsidian project note.
+- [x] Run complete tests, lint, build, JSON parse, diff and secret/cross-project scans.
 - [ ] Commit, push and update Draft PR `#49`; do not merge or send email.

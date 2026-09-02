@@ -203,6 +203,12 @@ La ruta cerrada solo admite identificadores opacos, template y proposito fijos, 
 
 El kill switch sigue en `false` y no existe migracion D1 remota, binding de email, binding de rate limit ni despliegue de esta ruta. Gate 6C.3B debe verificar Access, aislar D1, aplicar la migracion, crear bindings y superar pruebas negativas antes de solicitar un unico canary controlado. El detalle vive en `docs/BLOCK-6C3A-EMAIL-REVIEW-READY-LOCAL-GATE-2026-09-02.md`.
 
+## Actualizacion Gate 6C.3B fase 1 - 2026-09-02
+
+La frontera cerrada quedo desplegada en `afw_email_review_ready_canary` con estado `remote_database_and_closed_route_ready_binding_pending`. La D1 aislada recibio solamente la migracion aditiva `0006`, conserva cero filas de entregas y cuenta con backup saneado y rollback documentado. La ruta permanece detras de Cloudflare Access y el rate limiter nativo esta configurado.
+
+El kill switch continua en `false` y no existe binding `send_email`, destino privado, envio automatico ni segundo correo. Esta fase prepara una infraestructura comprobable, no una capacidad operativa. La fase 2 debe incorporar el destino fijo y la allowlist hash fuera de Git, volver a probar el cierre y mantener el flag OFF antes de considerar un unico canary humano. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-REMOTE-CLOSED-2026-09-02.md`.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;

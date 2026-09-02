@@ -1,6 +1,6 @@
 {
   "contract": "agent-friendly-web.email-review-ready.v1",
-  "status": "transactional_case_selected_local_ready_remote_disabled",
+  "status": "remote_database_and_closed_route_ready_binding_pending",
   "updated_at": "2026-09-02",
   "environment": "afw_email_review_ready_canary",
   "origin": "https://canary.agentfriendlyweb.dev",
@@ -45,7 +45,9 @@
   "capabilities": {
     "transactional_case_selected": true,
     "local_implementation_ready": true,
-    "remote_migration_applied": false,
+    "remote_migration_applied": true,
+    "closed_route_deployed_canary": true,
+    "rate_limit_binding_configured": true,
     "outbound_binding_configured": false,
     "outbound_sending": false,
     "automatic_sending": false,
@@ -53,14 +55,9 @@
     "customer_sending": false
   },
   "gate_6c3b_preconditions": [
-    "verify_exact_canary_access_application_and_audience",
-    "create_or_select_isolated_canary_d1_database",
-    "apply_and_verify_migration_0006_on_canary_only",
     "create_fixed_destination_email_binding",
-    "create_native_rate_limit_binding",
     "configure_hashed_actor_allowlist_outside_git",
-    "deploy_with_kill_switch_false",
-    "run_negative_tests_before_enabling_one_canary",
+    "verify_closed_route_again_after_private_bindings",
     "obtain_human_approval_for_exactly_one_controlled_send"
   ],
   "blocked_actions": [
@@ -73,5 +70,5 @@
     "read_inbound_message_body",
     "read_attachments"
   ],
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3A-EMAIL-REVIEW-READY-LOCAL-GATE-2026-09-02.md"
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-REMOTE-CLOSED-2026-09-02.md"
 }
