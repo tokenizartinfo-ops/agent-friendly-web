@@ -56,19 +56,19 @@
     },
     {
       "path": "discovery/infrastructure-status.md",
-      "sha256": "740e5da5a86e442bbc59b2ad26f1fd1a0559133c5e6b7b08a633073dce53b9f6",
+      "sha256": "3b10494d63a6f060a3b902149864e3feb641bb7d1f69ea3c23fb2a179588f673",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "discovery/public-audit.md",
-      "sha256": "1e71d64d2f2c0f6929b48d4619eaea83f2ecdf8234a0de28cc5b52ee98b986fe",
+      "sha256": "fb4e44002c159090eb6ded3b5613bbc4843259c53d81e50c997f471542e9bbfc",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "discovery/public-discovery-resources.md",
-      "sha256": "66067657b0e2ff98344dabaa7df29308477862a38e4f2c44fefcfc5dbf18c290",
+      "sha256": "d17a7f5491826b03dd306d29126b4e8193304f3cfd520dfc2f9e756d2e9aa6d9",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
@@ -110,13 +110,13 @@
     },
     {
       "path": "registry/domain-verification-boundary.md",
-      "sha256": "2066163633de9d13abc42b7e1efe1777d0de608c17a6741b44f5502fe7722f50",
+      "sha256": "22fd021eaeef76cc22889ffa1117bbbde44bc7547253d2dfef6294e7ce3a0602",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     },
     {
       "path": "registry/registry-and-provenance-states.md",
-      "sha256": "355add6cec8d0009f0749772ffb748dc48291599fc01d0989fd5f834538c8d66",
+      "sha256": "8e679ffc03607e848ce086b98dcf15840364297486d59669605c3cad3e490aad",
       "media_type": "text/markdown; charset=utf-8",
       "okf_document": true
     }

@@ -17,7 +17,7 @@ verified:
     at: 2026-09-02T00:00:00Z
 sources:
   - id: source-1
-    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/39acfeeecc9f39911d2a5467893c36dc2223e253/docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md
+    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/1bfea0f086dd40b439e1f197752c583faddf176d/docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md
     title: "Agent Friendly Web: roadmap agent-native"
     author: agent-friendly-web/editorial-v1
     last_modified: 2026-09-02T00:00:00Z

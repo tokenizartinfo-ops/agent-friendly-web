@@ -19,7 +19,7 @@ verified:
     at: 2026-09-02T00:00:00Z
 sources:
   - id: source-1
-    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/39acfeeecc9f39911d2a5467893c36dc2223e253/docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md
+    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/1bfea0f086dd40b439e1f197752c583faddf176d/docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md
     title: Agent Friendly Web Cloudflare-native origin v1
     author: person:gabriel-mucchiut
     last_modified: 2026-09-02T00:00:00Z
