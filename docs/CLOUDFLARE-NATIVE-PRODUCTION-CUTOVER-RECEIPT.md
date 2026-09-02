@@ -10,8 +10,8 @@
 | Recurso | Identificador |
 | --- | --- |
 | Worker | `agent-friendly-web-web-production` |
-| Deployment | `ce265b49-9f6c-4c0c-ab74-656ecb93f0ad` |
-| Version | `2863d8b4-552b-419f-89bc-4c0f4363ce35` |
+| Deployment | `13639380-8652-4a2c-9fbf-5c1f21eb01d5` |
+| Version | `1969053f-ba2e-4cca-bd93-06741fe23f33` |
 | D1 | `d26fc9d2-df5a-4957-8e58-cc4c945faad8` |
 | Access app | `b7d7d62e-de25-4b4b-ac52-972b104738a1` |
 | Release domain | `5a87a3ab6973b11aad5bd2acccf78bdd35e4b189` |
@@ -25,6 +25,7 @@ El Worker mantiene `workers_dev=false`, `preview_urls=false`, diagnostico canary
 - trece tablas funcionales;
 - cero filas funcionales antes y despues del corte;
 - cero escrituras durante verificacion;
+- `_cf_KV` y `d1_migrations` se identificaron como tablas de infraestructura y se excluyeron del conteo funcional;
 - bookmark D1 previo: `00000001-00000012-000050da-6071cbc8434461d6ffd3450a952af2e6`.
 
 ## Access
@@ -59,6 +60,14 @@ El rollback ensayado sobre `release` desasocio y reasocio correctamente el mismo
 - responsive 1440x900 y 390x844: sin overflow, hero cargado e idiomas visibles;
 - smoke publico final: 8 rutas publicas OK y `/expediente` interceptado por Access;
 - D1 posterior: 0 filas y 0 escrituras.
+
+## Auditoria externa posterior
+
+Cloudflare `Is Your Site Agent-Ready?` audito el origen canonico el 2026-09-02T04:20:39.198Z y lo clasifico como **nivel 4, Agent-Integrated**.
+
+Pasaron robots, sitemap, Link headers, negociacion Markdown, reglas de crawlers, Content Signals, API Catalog, MCP Server Card, Agent Skills, WebMCP y ARD. Para nivel 5 la auditoria exige `auth.md` y una A2A Agent Card. Tambien permanecen pendientes DNS-AID, OAuth/OIDC discovery y OAuth Protected Resource Metadata. Los controles x402, MPP, UCP, ACP y AP2 quedaron neutrales porque la superficie no se declara todavia como comercio agentico.
+
+La clasificacion pertenece a la metodologia externa observada en esa fecha; no sustituye el modelo AF-0 a AF-5 propio ni autoriza publicar protocolos sin una implementacion real.
 
 El primer smoke inmediatamente posterior resolvio temporalmente el cache DNS de Sites. Una vez propagada la resolucion Cloudflare, el segundo smoke paso completo. No se ejecuto rollback porque no hubo falla del Worker ni del contrato publico.
 

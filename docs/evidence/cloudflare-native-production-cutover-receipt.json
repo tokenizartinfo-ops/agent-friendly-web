@@ -5,11 +5,16 @@
   "environment": "afw_public",
   "origin": "https://agentfriendlyweb.dev",
   "status": "cutover_complete_initial_monitoring_green",
-  "observed_at": "2026-09-02T03:37:31.0903978Z",
+  "observed_at": "2026-09-02T04:20:39.198Z",
+  "source_control": {
+    "cutover_commit": "1bfea0f086dd40b439e1f197752c583faddf176d",
+    "okf_seal_commit": "2cafc6fdbee72ded149bb88080dfd608b69c2473"
+  },
   "worker": {
     "name": "agent-friendly-web-web-production",
-    "deployment_id": "ce265b49-9f6c-4c0c-ab74-656ecb93f0ad",
-    "version_id": "2863d8b4-552b-419f-89bc-4c0f4363ce35",
+    "deployment_id": "13639380-8652-4a2c-9fbf-5c1f21eb01d5",
+    "version_id": "1969053f-ba2e-4cca-bd93-06741fe23f33",
+    "previous_deployment_id": "ce265b49-9f6c-4c0c-ab74-656ecb93f0ad",
     "apex_custom_domain_id": "57a78f718d4dabc302bbcd2c17dbdc8e8882b8d3",
     "release_custom_domain_id": "5a87a3ab6973b11aad5bd2acccf78bdd35e4b189"
   },
@@ -18,6 +23,7 @@
     "migrations": 6,
     "functional_tables": 13,
     "functional_rows": 0,
+    "cloudflare_internal_tables_excluded": ["_cf_KV", "d1_migrations"],
     "rows_written_during_verification": 0,
     "time_travel_bookmark": "00000001-00000012-000050da-6071cbc8434461d6ffd3450a952af2e6"
   },
@@ -57,6 +63,16 @@
     "release_detach_reattach": "passed",
     "public_smoke": "passed_after_dns_propagation",
     "responsive": ["1440x900", "390x844"]
+  },
+  "external_audit": {
+    "provider": "Cloudflare Is Your Site Agent-Ready?",
+    "scanned_at": "2026-09-02T04:20:39.198Z",
+    "level": 4,
+    "level_name": "Agent-Integrated",
+    "next_level": 5,
+    "next_requirements": ["authMd", "a2aAgentCard"],
+    "additional_failed_checks": ["dnsAid", "oauthDiscovery", "oauthProtectedResource"],
+    "commerce_checks": "neutral_not_a_commerce_site"
   },
   "capabilities": {
     "contact_writes": false,
