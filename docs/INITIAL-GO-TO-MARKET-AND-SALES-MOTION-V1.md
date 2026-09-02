@@ -104,6 +104,67 @@ Cada oportunidad recibe 0, 1 o 2 puntos:
 
 Con 8 o mas puntos se prepara diagnostico. Entre 5 y 7 se nutre y aclara. Por debajo de 5 no se cotiza todavia.
 
+### Gate 6A.1: calificacion ejecutable
+
+La misma regla se implementa como `agent-friendly-web.traction-f1.v1` en estado `local_planning_only`. Recibe solamente un identificador opaco, segmento, fuente, idioma y seis valores numericos. No recibe datos personales ni texto libre, no persiste, no contacta, no cotiza y no cobra. Toda salida pasa por revision humana y cualquier uso remoto requiere aprobacion separada.
+
+## Politica de precio para lanzamiento
+
+El objetivo inicial es reducir la barrera de entrada sin vender trabajo manual por debajo de su costo:
+
+| Oferta | Precio de referencia | Piloto fundador | Limite |
+| --- | ---: | ---: | --- |
+| Auditoria publica | USD 0 | USD 0 | sin email obligatorio |
+| Diagnostico guiado | USD 20 | USD 10 | alcance automatizado, sin publicacion |
+| Discovery Pack | USD 198 | USD 99 | un dominio, un idioma y hasta cinco areas |
+| Implementacion F0/F1 a F3 | USD 250-600 | cotizacion | depende de CMS, acceso, volumen e idiomas |
+
+El piloto del Discovery Pack se ofrece a los primeros cinco sitios o 30 dias desde la activacion comercial, lo que ocurra primero. La fecha de inicio y los lugares utilizados deben quedar visibles. El descuento del 50% solo se comunica si USD 198 fue aprobado previamente como precio de lista real. En caso contrario se presenta honestamente como `piloto fundador USD 99`, sin precio tachado.
+
+Los precios anteriores son hipotesis para medir disposicion a pagar, horas, consumo y soporte. Esta tabla no constituye una tarifa publica activa. La promocion no comenzo, no se renueva automaticamente y no incluye implementacion, monitoreo, MCP, A2A, pagos agenticos ni cambios de hosting. Publicar la oferta o cobrar requiere aprobacion separada.
+
+Los referidos se evaluaran despues de habilitar consentimiento y contacto. Nunca se importaran cinco emails de terceros: cada organizacion referida debe iniciar su propia auditoria y consentir su contacto. Cualquier credito se aplica a trabajo futuro y no equivale a efectivo ni activa una accion automatica.
+
+### Guardrail de costo
+
+Cada piloto registra tiempo humano, uso de modelos/APIs, infraestructura, soporte y retrabajo. La regla de control es:
+
+`precio_minimo_sostenible = costo_directo_estimado / (1 - margen_objetivo)`
+
+Para la fase fundadora:
+
+- el diagnostico de USD 10 no admite investigacion o redaccion a medida; si requiere intervencion humana material se convierte en Discovery Pack;
+- el Discovery Pack de USD 99 tiene un presupuesto maximo de dos horas y media de trabajo humano y cinco areas; un alcance mayor se cotiza aparte;
+- ningun piloto se acepta si el costo directo previsto supera el precio;
+- despues de cada entrega se calcula margen de contribucion y se corrige alcance o precio antes de abrir otro cupo.
+
+### Frontera entre producto estandar y proyecto custom
+
+De AF-0 a AF-3 se puede estandarizar una parte sustancial del trabajo: auditoria publica, inventario, reconciliacion basica, `llms.txt`, metadatos, respuestas citables, politicas de crawlers, documentacion y capsula de publicacion. El precio fijo solo aplica cuando dominio, idioma, cantidad de paginas, fuentes y entregables entran en el alcance publicado.
+
+AF-4 y AF-5 requieren customizacion por empresa, web, plataforma o sistema. Pueden involucrar OpenAPI, MCP, OAuth, A2A, herramientas con permisos, pagos, datos privados, observabilidad, integracion con sistemas existentes y responsabilidades operativas. Cada caso exige:
+
+1. relevamiento y fuentes verificadas;
+2. requerimiento entendible y firmable;
+3. PDR con arquitectura, riesgos y limites;
+4. roadmap y estimacion de tiempos;
+5. cotizacion particular;
+6. criterios de aceptacion, pruebas y rollback;
+7. aprobaciones separadas para identidad, datos, pagos, produccion o acciones mutantes.
+
+Un sitio no compra automaticamente AF-5 por completar AF-3. Primero debe existir una necesidad concreta y una herramienta real. La metodologia conserva AF-0 a AF-5 como recorrido de madurez; la unidad comercial cambia de paquete estandar a proyecto custom cuando aparecen integraciones y riesgos propios.
+
+### Experimento comercial de 30 dias
+
+El periodo empieza solo cuando contacto consentido, propuesta y cobro humano tengan sus gates aprobados. Hasta entonces permanece planificado.
+
+1. Dias 1-7: seleccionar cinco prospectos con relacion o contexto verificable y registrar una pregunta concreta que su sitio deberia responder mejor.
+2. Dias 8-14: ejecutar cinco auditorias gratuitas y ofrecer dos devoluciones guiadas a cambio de feedback, sin exigir testimonio.
+3. Dias 15-21: ofrecer hasta cinco diagnosticos de USD 10 y preparar como maximo dos propuestas de Discovery Pack fundador.
+4. Dias 22-30: completar al menos una entrega, reauditar, medir costo/tiempo, registrar objeciones y decidir si se mantiene, sube o retira el precio.
+
+El exito inicial no es cantidad de formularios. Es obtener una entrega paga verificable, una decision humana clara y datos suficientes para saber si el alcance puede repetirse.
+
 ## Pipeline
 
 ```mermaid

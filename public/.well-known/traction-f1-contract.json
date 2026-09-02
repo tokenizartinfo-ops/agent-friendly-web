@@ -1,0 +1,83 @@
+{
+  "contract": "agent-friendly-web.traction-f1.v1",
+  "status": "local_planning_only",
+  "updated_at": "2026-09-02",
+  "signals": [
+    "pain",
+    "responsible",
+    "access",
+    "evidence",
+    "urgency",
+    "budget"
+  ],
+  "score_range_per_signal": {
+    "minimum": 0,
+    "maximum": 2
+  },
+  "score_bands": [
+    {
+      "minimum": 8,
+      "maximum": 12,
+      "qualification": "prepare_diagnostic",
+      "recommended_offer": "discovery_pack"
+    },
+    {
+      "minimum": 5,
+      "maximum": 7,
+      "qualification": "nurture_and_clarify",
+      "recommended_offer": "guided_diagnostic"
+    },
+    {
+      "minimum": 0,
+      "maximum": 4,
+      "qualification": "not_ready",
+      "recommended_offer": "public_audit"
+    }
+  ],
+  "offers": {
+    "public_audit": "available_free_entry",
+    "guided_diagnostic": "launch_hypothesis_not_active",
+    "discovery_pack": "launch_hypothesis_not_active"
+  },
+  "delivery_model": {
+    "standardizable": [
+      "af0_to_af3"
+    ],
+    "custom": [
+      "af4",
+      "af5"
+    ],
+    "custom_requires": [
+      "verified_discovery",
+      "signed_requirements",
+      "pdr",
+      "custom_quote",
+      "acceptance_criteria",
+      "security_review",
+      "rollback_plan"
+    ]
+  },
+  "capabilities": {
+    "deterministic_scoring_from_human_inputs": true,
+    "remote_persistence": false,
+    "automatic_outreach": false,
+    "proposal_actions": false,
+    "pricing_actions": false,
+    "payment_actions": false,
+    "customer_site_actions": false
+  },
+  "accepts_pii": false,
+  "accepts_message_bodies": false,
+  "accepts_credentials": false,
+  "requires_human_review": true,
+  "blocked_actions": [
+    "persist_assessment",
+    "send_outreach",
+    "create_proposal",
+    "publish_price",
+    "charge_payment",
+    "modify_customer_site"
+  ],
+  "requires_separate_remote_approval": true,
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6A1-TRACTION-F1-LOCAL-GATE-2026-09-02.md"
+}
