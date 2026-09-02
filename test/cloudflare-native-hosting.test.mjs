@@ -91,6 +91,28 @@ test('public discovery exposes the active Cloudflare production state without st
   assert.doesNotMatch(robots, /\/signin-with-chatgpt|\/contact-staging|\/api\/staging/i);
 });
 
+test('active repository guidance describes Workers as production and Sites only as rollback evidence', () => {
+  const allowedSitesLines = {
+    'README.md': [
+      'El origen publico canonico es [agentfriendlyweb.dev](https://agentfriendlyweb.dev/). Desde el 2 de septiembre de 2026, el 100% del trafico publico se sirve mediante el Worker Cloudflare-native propio, con DNS, TLS y rutas privadas protegidas por Cloudflare Access. El antiguo binding de Sites no recibe trafico del dominio y se conserva temporalmente solo como evidencia de rollback.',
+    ],
+    'AGENTS.md': [
+      '- `afw_sites_legacy`: every `*.chatgpt.site` surface is retired and must not be deployed, restored, linked or used as staging.',
+      '- The canonical public runtime is the Cloudflare-native production Worker. The historical Sites binding receives no apex traffic and is retained temporarily only as bounded rollback evidence.',
+      '- The Cloudflare account, GitHub organization, authentication email and Sites workspace namespace are shared administrative containers, not proof of resource ownership.',
+    ],
+  };
+
+  for (const path of ['README.md', 'AGENTS.md']) {
+    const guidance = read(path);
+    assert.match(guidance, /Cloudflare-native/i, path);
+    assert.match(guidance, /\bWorkers?\b/i, path);
+    assert.match(guidance, /Sites.*rollback/i, path);
+    const sitesLines = guidance.split(/\r?\n/).filter((value) => /(?:Sites|\.chatgpt\.site)/i.test(value));
+    assert.deepEqual(sitesLines, allowedSitesLines[path], path);
+  }
+});
+
 test('the roadmap no longer lists the completed public-origin migration as planned work', () => {
   const roadmap = read('docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md');
   const planned = roadmap.split('### Planificado')[1]?.split('### Investigacion')[0] || '';

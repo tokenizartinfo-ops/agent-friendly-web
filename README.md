@@ -8,7 +8,7 @@ Auditor publico y espacio de trabajo para ayudar a propietarios de sitios a mejo
 
 Version inicial en desarrollo. El auditor es read-only y trabaja sobre recursos publicos. La metodologia AF-0 a AF-5 es un marco propio de Gabriel Mucchiut: no es una certificacion oficial ni debe presentarse como una norma de la industria.
 
-El origen publico canonico es [agentfriendlyweb.dev](https://agentfriendlyweb.dev/). El dominio esta registrado y administrado en Cloudflare, vinculado al proyecto Sites, con DNS y TLS activos. La URL tecnica de Sites se conserva solo como direccion heredada del proveedor y no se anuncia como origen canonico.
+El origen publico canonico es [agentfriendlyweb.dev](https://agentfriendlyweb.dev/). Desde el 2 de septiembre de 2026, el 100% del trafico publico se sirve mediante el Worker Cloudflare-native propio, con DNS, TLS y rutas privadas protegidas por Cloudflare Access. El antiguo binding de Sites no recibe trafico del dominio y se conserva temporalmente solo como evidencia de rollback.
 
 ## Que incluye
 
@@ -34,15 +34,17 @@ El origen publico canonico es [agentfriendlyweb.dev](https://agentfriendlyweb.de
 4. **Control del propietario.** El expediente conserva contexto autorizado; nunca pide contraseñas o claves.
 5. **Herramientas con limites.** Acciones, pagos y delegacion requieren identidad, consentimiento, alcance y auditoria.
 
-## Arquitectura inicial
+## Arquitectura actual
 
-- **Frontend:** vinext/React sobre Sites.
+- **Frontend:** vinext/React sobre Cloudflare Workers.
 - **Auditor:** route handler read-only con validacion de URL, resolucion DNS publica, limites de cuerpo, timeout y redirecciones deshabilitadas.
-- **Identidad:** Sign in with ChatGPT provisto por Sites.
+- **Identidad privada:** Cloudflare Access; el backend verifica emisor, audiencia y firma del JWT antes de aceptar una identidad.
 - **Persistencia:** Cloudflare D1 para expedientes y eventos metadata-only.
 - **Registry:** perfiles publicos inmutables proyectados desde campos allowlisted; el expediente privado no se publica por defecto.
 - **Verificacion:** challenges acotados, con expiracion, limite de intentos y coincidencia exacta de dominio.
 - **Metodologia:** modulos ESM compartidos entre runtime y pruebas Node.
+
+El estado operativo fechado y legible por maquinas se publica en [`/.well-known/infrastructure-status.json`](https://agentfriendlyweb.dev/.well-known/infrastructure-status.json).
 
 ## Desarrollo local
 
