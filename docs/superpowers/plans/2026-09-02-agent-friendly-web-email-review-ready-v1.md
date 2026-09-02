@@ -165,6 +165,6 @@ git diff --check
 
 Expected: tests and build exit 0, lint has no errors, and the diff check is empty.
 
-- [ ] **Step 5: Scan, commit and update only the Draft PR**
+- [x] **Step 5: Scan, commit and update only the Draft PR**
 
 Scan changed files for private destinations, JWTs, credentials, DKIM values, message content supplied by callers and cross-project resource names. Commit, push and update Draft PR `#49`; do not merge, deploy, migrate D1 or send email.
