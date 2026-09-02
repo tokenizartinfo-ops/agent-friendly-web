@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-09-02
 
-**Estado:** especificacion aprobada; configuracion remota no aplicada
+**Estado:** `local_preflight_ready_remote_unconfigured`; especificacion aprobada, baseline remoto saneado y configuracion remota no aplicada
 
 ## Objetivo
 
@@ -94,3 +94,13 @@ La prueba usa mensajes sin PII real y comprueba:
 ## Gate 6C.2
 
 Gate 6C.2 seleccionara un proveedor de salida, autenticara remitente con SPF/DKIM/DMARC y probara borradores transaccionales allowlisted con envio humano. Requiere especificacion, costo, retencion, reputacion, plantillas y aprobacion separadas; no se activa por superar 6C.1.
+
+## Implementacion local y evidencia
+
+- contrato puro: `lib/email-inbound-canary.mjs`;
+- preflight: `npm run email:inbound:preflight -- <inventario-saneado.json>`;
+- contrato publico: `/.well-known/email-inbound-canary-contract.json`;
+- baseline: `docs/evidence/email-inbound-canary-baseline-2026-09-02.json`;
+- runbook: `docs/BLOCK-6C1-EMAIL-INBOUND-CANARY-RUNBOOK-2026-09-02.md`.
+
+El preflight no acepta la direccion privada de destino, no hace red y no ejecuta mutaciones. El baseline observado confirma zona activa, routing no configurado, cero destinos, cero reglas activas y cero MX actuales.

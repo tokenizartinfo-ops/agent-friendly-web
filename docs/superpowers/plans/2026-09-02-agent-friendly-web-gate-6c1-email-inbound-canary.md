@@ -152,7 +152,7 @@ git commit -m "feat: add inbound email canary planner"
 Test exact script registration `email:inbound:preflight`, JSON-only stdout, no destination address, `status: local_preflight_ready_remote_unconfigured`, active/reserved aliases and blocked outbound capabilities.
 
 ```js
-assert.equal(pkg.scripts['email:inbound:preflight'], 'node scripts/preflight-email-inbound-canary.mjs');
+assert.equal(pkg.scripts['email:inbound:preflight'], 'node scripts/preflight-email-inbound-canary.mjs --input');
 assert.equal(contract.capabilities.inbound_routing, false);
 assert.equal(contract.capabilities.outbound_sending, false);
 assert.deepEqual(contract.active_aliases, [
@@ -198,17 +198,17 @@ git commit -m "feat: add email inbound canary preflight"
 - Consumes: baseline Cloudflare saneado y planner Task 1.
 - Produces: inventario reproducible, comandos de preflight y rollback, estado `local_preflight_ready_remote_unconfigured`.
 
-- [ ] **Step 1: Add failing documentation assertions**
+- [x] **Step 1: Add failing documentation assertions**
 
 Assert the baseline contains zone active, routing unconfigured, zero destinations, zero active rules and no current MX; assert the runbook declares the eight remote boundary fields, verification dependency, rule set, synthetic test and rollback order.
 
-- [ ] **Step 2: Run tests and verify RED**
+- [x] **Step 2: Run tests and verify RED**
 
 Run: `node --test test/email-inbound-canary-preflight.test.mjs`
 
 Expected: FAIL because baseline and runbook are absent.
 
-- [ ] **Step 3: Add sanitized baseline and runbook**
+- [x] **Step 3: Add sanitized baseline and runbook**
 
 The baseline must contain:
 
@@ -231,9 +231,9 @@ The baseline must contain:
 
 The runbook must state the exact safe order: snapshot, destination creation, human verification, preflight, Email Routing DNS enablement, three forward rules, one drop rule, synthetic messages, receipt verification, and rollback if any check fails.
 
-- [ ] **Step 4: Execute local preflight and tests**
+- [x] **Step 4: Execute local preflight and tests**
 
-Run: `npm run email:inbound:preflight -- --input docs/evidence/email-inbound-canary-baseline-2026-09-02.json`
+Run: `npm run email:inbound:preflight -- docs/evidence/email-inbound-canary-baseline-2026-09-02.json`
 
 Expected: JSON with `ok: true` and `state: destination_verification_required`.
 
@@ -241,7 +241,7 @@ Run: `node --test test/email-inbound-canary*.test.mjs`
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add docs/evidence/email-inbound-canary-baseline-2026-09-02.json docs/BLOCK-6C1-EMAIL-INBOUND-CANARY-RUNBOOK-2026-09-02.md docs/BLOCK-6C1-EMAIL-IDENTITY-AND-INBOUND-CANARY-DESIGN-2026-09-02.md docs/GROWTH-AND-MONETIZATION-ROADMAP-2026-08-31.md test/email-inbound-canary-preflight.test.mjs
@@ -288,7 +288,7 @@ Set only `destinationPresent: true`, `destinationVerified: true`, and `destinati
 
 - [ ] **Step 6: Re-run preflight**
 
-Run: `npm run email:inbound:preflight -- --input docs/evidence/email-inbound-canary-baseline-2026-09-02.json`
+Run: `npm run email:inbound:preflight -- docs/evidence/email-inbound-canary-baseline-2026-09-02.json`
 
 Expected: JSON with `ok: true` and `state: ready_to_apply`.
 

@@ -1,0 +1,20 @@
+{
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_email_inbound_canary",
+  "origin": "agentfriendlyweb.dev",
+  "zoneId": "4b1a3fe4b6dcb81e9d6a633174c5939f",
+  "zoneStatus": "active",
+  "routingStatus": "unconfigured",
+  "routingEnabled": false,
+  "destinationPresent": false,
+  "destinationVerified": false,
+  "existingMailDns": [],
+  "existingRules": [
+    {
+      "id": "7b6e01eb20f6488fa39860f65b23bfe6",
+      "enabled": false,
+      "managedByAfw": false
+    }
+  ]
+}

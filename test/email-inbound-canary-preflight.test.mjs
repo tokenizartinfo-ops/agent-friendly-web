@@ -36,7 +36,7 @@ test('package registers a bounded local-only inbound email preflight', async () 
 
   assert.equal(
     pkg.scripts['email:inbound:preflight'],
-    'node scripts/preflight-email-inbound-canary.mjs',
+    'node scripts/preflight-email-inbound-canary.mjs --input',
   );
   assert.equal(pkg.scripts['email:inbound:apply'], undefined);
   assert.equal(pkg.scripts['email:send'], undefined);
@@ -101,4 +101,43 @@ test('CLI exits closed with sanitized JSON for an invalid boundary', async () =>
   } finally {
     await rm(folder, { recursive: true, force: true });
   }
+});
+
+test('sanitized baseline and runbook preserve the exact remote boundary and rollback order', async () => {
+  const baselineEvidence = JSON.parse(
+    await read('docs/evidence/email-inbound-canary-baseline-2026-09-02.json'),
+  );
+  const runbook = await read('docs/BLOCK-6C1-EMAIL-INBOUND-CANARY-RUNBOOK-2026-09-02.md');
+  const design = await read('docs/BLOCK-6C1-EMAIL-IDENTITY-AND-INBOUND-CANARY-DESIGN-2026-09-02.md');
+
+  assert.equal(baselineEvidence.project, 'agent-friendly-web');
+  assert.equal(baselineEvidence.repository, 'tokenizartinfo-ops/agent-friendly-web');
+  assert.equal(baselineEvidence.environment, 'afw_email_inbound_canary');
+  assert.equal(baselineEvidence.origin, 'agentfriendlyweb.dev');
+  assert.equal(baselineEvidence.zoneStatus, 'active');
+  assert.equal(baselineEvidence.routingStatus, 'unconfigured');
+  assert.equal(baselineEvidence.routingEnabled, false);
+  assert.equal(baselineEvidence.destinationPresent, false);
+  assert.equal(baselineEvidence.destinationVerified, false);
+  assert.equal(baselineEvidence.existingMailDns.length, 0);
+  assert.equal(baselineEvidence.existingRules.filter((rule) => rule.enabled).length, 0);
+  assert.doesNotMatch(JSON.stringify(baselineEvidence), /gmail\.com/i);
+
+  for (const field of [
+    'PROJECT',
+    'REPOSITORY',
+    'ENVIRONMENT',
+    'ORIGIN',
+    'RESOURCE_TYPE',
+    'RESOURCE_ID',
+    'ALLOWED_ACTION',
+    'ROLLBACK',
+  ]) assert.match(runbook, new RegExp(field));
+
+  assert.match(runbook, /verificar.*destino/i);
+  assert.match(runbook, /tres reglas.*forward/i);
+  assert.match(runbook, /una regla.*drop/i);
+  assert.match(runbook, /prueba sintetica/i);
+  assert.match(runbook, /orden de rollback/i);
+  assert.match(design, /local_preflight_ready_remote_unconfigured/);
 });

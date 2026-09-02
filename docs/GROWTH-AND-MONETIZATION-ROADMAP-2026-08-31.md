@@ -63,7 +63,7 @@ La version publica permite completar y revisar localmente la solicitud, pero no 
 
 **Direccion canonica candidata:** `hello@agentfriendlyweb.dev`.
 
-**Estado local:** politica `planned_draft_only` implementada y probada. Clasifica metadata minima, normaliza aliases, separa consentimiento transaccional de marketing y obliga revision humana para asuntos sensibles. No existen DNS, casillas, routing, proveedor ni envio; toda activacion remota requiere aprobacion separada.
+**Estado local:** politica de borradores y preflight entrante implementados y probados. Gate 6C.1 declara `local_preflight_ready_remote_unconfigured`: el baseline confirma zona activa, cero destinos, cero reglas activas y cero MX actuales. No existen routing operativo, proveedor de salida ni envio.
 
 Aliases locales: `hola@agentfriendlyweb.dev` y `ola@agentfriendlyweb.dev`. Todos llegan a la misma operacion; no se crean silos por idioma.
 
