@@ -1,0 +1,56 @@
+{
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_email_outbound_canary",
+  "origin": "agentfriendlyweb.dev",
+  "observedAt": "2026-09-02T21:49:21Z",
+  "accountId": "85d0d5dadac3341a564f22ce885e9eec",
+  "zoneId": "4b1a3fe4b6dcb81e9d6a633174c5939f",
+  "workersPaidStatus": "unknown",
+  "quota": null,
+  "usage": null,
+  "sendingSubdomains": [],
+  "dnsPreview": {
+    "requestedName": "agentfriendlyweb.dev",
+    "records": [
+      {
+        "name": "cf-bounce.agentfriendlyweb.dev",
+        "type": "MX",
+        "status": "missing",
+        "contentClass": "cloudflare_email_service_route"
+      },
+      {
+        "name": "cf-bounce.agentfriendlyweb.dev",
+        "type": "MX",
+        "status": "missing",
+        "contentClass": "cloudflare_email_service_route"
+      },
+      {
+        "name": "cf-bounce.agentfriendlyweb.dev",
+        "type": "MX",
+        "status": "missing",
+        "contentClass": "cloudflare_email_service_route"
+      },
+      {
+        "name": "cf-bounce.agentfriendlyweb.dev",
+        "type": "TXT",
+        "status": "missing",
+        "contentClass": "spf_policy"
+      },
+      {
+        "name": "cf-bounce._domainkey.agentfriendlyweb.dev",
+        "type": "TXT",
+        "status": "missing",
+        "contentClass": "dkim_public_key"
+      },
+      {
+        "name": "_dmarc.agentfriendlyweb.dev",
+        "type": "TXT",
+        "status": "missing",
+        "contentClass": "dmarc_policy"
+      }
+    ],
+    "missingCount": 6,
+    "conflictCount": 0
+  }
+}

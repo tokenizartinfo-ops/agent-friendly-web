@@ -20,6 +20,7 @@
     "outbound_sending": false,
     "dns_configured": true,
     "synthetic_delivery_verified": true,
+    "outbound_provider_selected": true,
     "email_provider_configured": false,
     "message_body_processing": false,
     "attachment_processing": false
@@ -28,6 +29,7 @@
     "transactional_request_is_separate_from_marketing": true,
     "product_updates_requires_explicit_consent": true
   },
+  "outbound_canary_contract": "https://agentfriendlyweb.dev/.well-known/email-outbound-canary-contract.json",
   "human_review_required_for": [
     "security",
     "privacy-and-withdrawal",

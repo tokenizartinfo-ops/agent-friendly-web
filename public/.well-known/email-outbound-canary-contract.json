@@ -1,0 +1,56 @@
+{
+  "contract": "agent-friendly-web.email-outbound-canary.v1",
+  "status": "provider_selected_remote_unconfigured",
+  "updated_at": "2026-09-02",
+  "provider": {
+    "id": "cloudflare_email_service",
+    "status": "selected_remote_unconfigured"
+  },
+  "identity": {
+    "sender": "hello@agentfriendlyweb.dev",
+    "reply_to": "hello@agentfriendlyweb.dev",
+    "destination_id": "verified_destination_1",
+    "template_id": "transactional_canary_v1"
+  },
+  "remote_state": {
+    "sending_domain_onboarded": false,
+    "dns_applied": false,
+    "dns_preview_missing_records": 6,
+    "dns_preview_conflicts": 0,
+    "workers_paid_status": "unknown"
+  },
+  "capabilities": {
+    "local_preflight": true,
+    "provider_selected": true,
+    "provider_configured": false,
+    "outbound_sending": false,
+    "human_canary_verified": false,
+    "automatic_sending": false,
+    "arbitrary_recipients": false,
+    "marketing": false,
+    "message_persistence": false
+  },
+  "cost": {
+    "pricing_observed_at": "2026-09-02",
+    "verified_destination_canary_usd": 0,
+    "arbitrary_recipients_require_workers_paid": true,
+    "workers_paid_minimum_usd_per_month": 5,
+    "included_outbound_emails_per_month": 3000,
+    "overage_usd_per_thousand_emails": 0.35,
+    "source": "https://developers.cloudflare.com/email-service/platform/pricing/"
+  },
+  "blocked_actions": [
+    "send_email",
+    "configure_dns",
+    "configure_email_service_domain",
+    "change_workers_plan",
+    "create_send_email_binding",
+    "allow_arbitrary_recipient",
+    "send_automatic_reply",
+    "start_newsletter",
+    "send_marketing_email",
+    "persist_message_content"
+  ],
+  "requires_separate_remote_approval": true,
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C2-EMAIL-OUTBOUND-CANARY-LOCAL-GATE-2026-09-02.md"
+}

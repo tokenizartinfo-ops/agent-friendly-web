@@ -32,7 +32,7 @@
 - Consumes: sanitized Cloudflare account, zone, plan, sending-domain and DNS-preview metadata.
 - Produces: `buildEmailOutboundCanaryPlan(input)` and `verifyEmailOutboundCanaryReceipt(input)`.
 
-- [ ] **Step 1: Write the failing policy tests**
+- [x] **Step 1: Write the failing policy tests**
 
 Create tests that import the missing module and assert:
 
@@ -48,13 +48,13 @@ assert.equal(result.plan.cost.arbitraryRecipientsRequireWorkersPaid, true);
 
 Add table tests that reject a Tokenizart boundary, private destination fields, body/HTML/headers/attachments, raw DNS content, unknown fields, conflicts and an invalid record inventory.
 
-- [ ] **Step 2: Run the focused test and verify RED**
+- [x] **Step 2: Run the focused test and verify RED**
 
 Run: `node --test test/email-outbound-canary.test.mjs`
 
 Expected: failure because `lib/email-outbound-canary.mjs` does not exist.
 
-- [ ] **Step 3: Implement the smallest pure policy**
+- [x] **Step 3: Implement the smallest pure policy**
 
 Export:
 
@@ -66,7 +66,7 @@ export function verifyEmailOutboundCanaryReceipt(input = {}) {}
 
 Use exact-key allowlists, stable failure codes and a SHA-256 plan ID. Return only sanitized fields, pending remote steps with `networkMutation: false`, rollback metadata and blocked actions. The receipt verifier must require one human-approved delivery and reject all message content or automation.
 
-- [ ] **Step 4: Run the focused test and verify GREEN**
+- [x] **Step 4: Run the focused test and verify GREEN**
 
 Run: `node --test test/email-outbound-canary.test.mjs`
 
@@ -87,7 +87,7 @@ Expected: all focused tests pass.
 - Consumes: `buildEmailOutboundCanaryPlan(input)` from Task 1 and one local evidence path.
 - Produces: `runEmailOutboundCanaryPreflight(inputPath)` and package script `email:outbound:preflight`.
 
-- [ ] **Step 1: Write failing CLI and contract tests**
+- [x] **Step 1: Write failing CLI and contract tests**
 
 Assert the exact package script:
 
@@ -102,19 +102,19 @@ assert.equal(pkg.scripts['email:outbound:apply'], undefined);
 
 Execute the CLI against the evidence file and assert one JSON output, `provider_selected_remote_unconfigured`, six missing DNS records, zero conflicts and no address outside `agentfriendlyweb.dev`. Assert the public contract keeps outbound sending, arbitrary recipients, marketing and automation false.
 
-- [ ] **Step 2: Run focused tests and verify RED**
+- [x] **Step 2: Run focused tests and verify RED**
 
 Run: `node --test test/email-outbound-canary-preflight.test.mjs test/email-operations-contract.test.mjs`
 
 Expected: failure because the CLI, evidence and public contract do not exist.
 
-- [ ] **Step 3: Implement CLI, evidence and contracts**
+- [x] **Step 3: Implement CLI, evidence and contracts**
 
 The CLI must follow the inbound preflight pattern: accept only `--input <path>`, parse JSON, call the pure module, print one JSON object and exit `1` on closed failure. Record only account/zone IDs, `null` quota/usage, empty sending subdomains, record names/types/status/content classes, missing count and conflict count; omit DKIM values and all private destinations.
 
 Update the aggregate contract with `outbound_provider_selected: true` and a link to the dedicated contract while preserving `outbound_sending: false` and `email_provider_configured: false`.
 
-- [ ] **Step 4: Run focused tests and verify GREEN**
+- [x] **Step 4: Run focused tests and verify GREEN**
 
 Run: `node --test test/email-outbound-canary*.test.mjs test/email-operations-contract.test.mjs`
 
@@ -133,21 +133,21 @@ Expected: all focused tests pass.
 - Consumes: verified tests and sanitized evidence from Tasks 1 and 2.
 - Produces: a human-readable gate record and a clear boundary for Gate 6C.2B.
 
-- [ ] **Step 1: Extend failing documentation assertions**
+- [x] **Step 1: Extend failing documentation assertions**
 
 Add assertions to `test/email-outbound-canary-preflight.test.mjs` that require the boundary fields `PROJECT`, `REPOSITORY`, `ENVIRONMENT`, `ORIGIN`, `RESOURCE_TYPE`, `RESOURCE_ID`, `ALLOWED_ACTION`, `ROLLBACK`, official pricing references and the explicit absence of remote activation.
 
-- [ ] **Step 2: Run the focused test and verify RED**
+- [x] **Step 2: Run the focused test and verify RED**
 
 Run: `node --test test/email-outbound-canary-preflight.test.mjs`
 
 Expected: failure because the Gate 6C.2A document is absent.
 
-- [ ] **Step 3: Write the gate record and reconcile roadmaps**
+- [x] **Step 3: Write the gate record and reconcile roadmaps**
 
 Document the provider decision, the sanitized baseline, current costs, state machine, blocked actions and rollback. Mark the next gate as two remote approvals: domain/DNS onboarding, then one human verified-destination canary. Update the private Obsidian project note without copying secrets or private addresses.
 
-- [ ] **Step 4: Run complete verification**
+- [x] **Step 4: Run complete verification**
 
 Run:
 

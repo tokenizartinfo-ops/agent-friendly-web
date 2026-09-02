@@ -28,7 +28,12 @@ test('public email operations contract reports the verified inbound canary and o
   assert.equal(contract.capabilities.outbound_sending, false);
   assert.equal(contract.capabilities.dns_configured, true);
   assert.equal(contract.capabilities.synthetic_delivery_verified, true);
+  assert.equal(contract.capabilities.outbound_provider_selected, true);
   assert.equal(contract.capabilities.email_provider_configured, false);
+  assert.equal(
+    contract.outbound_canary_contract,
+    'https://agentfriendlyweb.dev/.well-known/email-outbound-canary-contract.json',
+  );
   assert.equal(contract.requires_separate_remote_approval, true);
   assert.ok(contract.blocked_actions.includes('send_email'));
   assert.ok(contract.blocked_actions.includes('configure_dns'));

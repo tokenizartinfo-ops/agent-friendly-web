@@ -72,13 +72,18 @@
       "note": "Optional post-audit local preview with separated consent. The public release does not persist contacts, send email or prove domain ownership."
     },
     "email_operations": {
-      "status": "local_planning_only",
-      "inbound_routing": false,
+      "status": "inbound_verified_outbound_planned",
+      "inbound_routing": true,
       "outbound_sending": false,
-      "dns_configured": false,
+      "dns_configured": true,
+      "outbound_provider_selected": true,
       "email_provider_configured": false,
-      "resources": ["/.well-known/email-operations-contract.json"],
-      "note": "The public contract documents candidate addresses, consent boundaries and blocked actions. No mailbox, DNS route, provider, message read or send operation is active."
+      "resources": [
+        "/.well-known/email-operations-contract.json",
+        "/.well-known/email-inbound-canary-contract.json",
+        "/.well-known/email-outbound-canary-contract.json"
+      ],
+      "note": "Cloudflare Email Routing and three inbound aliases are verified. Cloudflare Email Service is selected but its sending domain, outbound DNS, binding and delivery remain disabled."
     },
     "crm_lite": {
       "status": "local_planning_only",
