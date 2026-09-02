@@ -23,20 +23,21 @@ import {
 
 const ACCESS_AUD = 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac';
 const ACCESS_SIGNING_KID = 'f79e658c14036da6043c384d7f88fb1a5c61a417592e54bda346c8be73f50593';
+const ACCESS_TEST_KEY_PAIR = generateKeyPairSync('rsa', { modulusLength: 2048 });
 
 function encodeJwtPart(value) {
   return Buffer.from(JSON.stringify(value)).toString('base64url');
 }
 
-function signedAccessMeta({ observedAt = '2026-09-02T12:00:00.000Z', overrides = {} } = {}) {
-  const { privateKey, publicKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
+function signedAccessMeta({ observedAt = '2026-09-02T12:00:00.000Z', route = '/api/projects', overrides = {} } = {}) {
+  const { privateKey, publicKey } = ACCESS_TEST_KEY_PAIR;
   const observedSeconds = Math.floor(Date.parse(observedAt) / 1000);
   const header = { typ: 'JWT', alg: 'RS256', kid: ACCESS_SIGNING_KID };
   const claims = {
     type: 'meta',
     aud: ACCESS_AUD,
     hostname: 'agentfriendlyweb.dev',
-    redirect_url: '/api/projects',
+    redirect_url: route,
     auth_status: 'NONE',
     service_token_status: false,
     iat: observedSeconds - 30,
@@ -153,18 +154,21 @@ function infrastructureFixture(overrides = {}) {
     },
     cloudflare_access_edge: {
       origin: 'https://agentfriendlyweb.dev',
-      protected_route: '/api/projects',
-      status: 302,
       team_domain: 'tokenizart.cloudflareaccess.com',
       audience: 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac',
-      login_path: '/cdn-cgi/access/login/agentfriendlyweb.dev',
-      redirect_url: '/api/projects',
-      resource_metadata_url: 'https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects',
-      resource_metadata_protected: true,
-      signing_key_id: ACCESS_SIGNING_KID,
-      meta_signature_verified: true,
-      meta_valid_from: '2026-09-02T11:59:30.000Z',
-      meta_expires_at: '2026-09-02T12:04:30.000Z',
+      shared_identity_container: true,
+      protected_routes: ['/expediente', '/api/projects', '/api/projects/probe'].map((path) => ({
+        path,
+        status: 302,
+        login_path: '/cdn-cgi/access/login/agentfriendlyweb.dev',
+        redirect_url: path,
+        resource_metadata_url: `https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource${path}`,
+        resource_metadata_protected: true,
+        signing_key_id: ACCESS_SIGNING_KID,
+        meta_signature_verified: true,
+        meta_valid_from: '2026-09-02T11:59:30.000Z',
+        meta_expires_at: '2026-09-02T12:04:30.000Z',
+      })),
     },
     ...overrides,
   };
@@ -312,7 +316,7 @@ test('stability report fails closed on stale truth, public regressions or unexpe
     { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: smokeFixture, rows: 1 },
     { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: smokeFixture, rows: 0, infrastructure: infrastructureFixture({ remote_worker: { ...infrastructureFixture().remote_worker, d1_database_id: 'wrong-database' } }) },
     { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: smokeFixture, rows: 0, infrastructure: infrastructureFixture({ cloudflare_custom_domain: { ...infrastructureFixture().cloudflare_custom_domain, service: 'wrong-worker' } }) },
-    { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: smokeFixture, rows: 0, infrastructure: infrastructureFixture({ cloudflare_access_edge: { ...infrastructureFixture().cloudflare_access_edge, audience: 'wrong-audience' } }) },
+    { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: smokeFixture, rows: 0, infrastructure: infrastructureFixture({ cloudflare_access_edge: { ...infrastructureFixture().cloudflare_access_edge, protected_routes: infrastructureFixture().cloudflare_access_edge.protected_routes.slice(1) } }) },
   ];
 
   for (const fixture of cases) {
@@ -448,10 +452,11 @@ test('production infrastructure reader combines fresh Wrangler evidence with a l
       assert.equal(accountId, '85d0d5dadac3341a564f22ce885e9eec');
       return infrastructureFixture().cloudflare_custom_domain;
     },
-    cloudflareAccessRead: async ({ teamDomain, audience, observedAt }) => {
+    now: () => new Date('2026-09-02T12:00:00.000Z'),
+    cloudflareAccessRead: async ({ teamDomain, audience, now }) => {
       assert.equal(teamDomain, 'tokenizart.cloudflareaccess.com');
       assert.equal(audience, 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac');
-      assert.equal(observedAt, '2026-09-02T12:00:00.000Z');
+      assert.equal(now().toISOString(), '2026-09-02T12:00:00.000Z');
       return infrastructureFixture().cloudflare_access_edge;
     },
     spawnImpl(command, args) {
@@ -519,42 +524,52 @@ test('Cloudflare custom-domain reader queries the live API and returns only sani
 
 test('Cloudflare Access reader verifies signed AFW edge evidence without retaining session claims', async () => {
   const observedAt = '2026-09-02T12:00:00.000Z';
-  const signed = signedAccessMeta({ observedAt });
+  const routes = ['/expediente', '/api/projects', '/api/projects/probe'];
+  const signed = new Map(routes.map((route) => [route, signedAccessMeta({ observedAt, route })]));
   const requested = [];
   let metadataAttempts = 0;
   const evidence = await fetchCloudflareAccessEvidence({
     teamDomain: 'tokenizart.cloudflareaccess.com',
     audience: ACCESS_AUD,
-    observedAt,
+    now: () => new Date(observedAt),
     fetchImpl: async (url, init) => {
       requested.push({ url: String(url), init });
-      if (String(url) === 'https://agentfriendlyweb.dev/api/projects') {
-        const location = `https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/agentfriendlyweb.dev?kid=${ACCESS_AUD}&meta=${signed.token}&redirect_url=%2Fapi%2Fprojects`;
+      if (String(url) === 'https://tokenizart.cloudflareaccess.com/cdn-cgi/access/certs') {
+        return new Response(JSON.stringify(signed.get('/api/projects').jwks), { status: 200, headers: { 'content-type': 'application/json' } });
+      }
+      const target = new URL(url);
+      if (target.origin === 'https://agentfriendlyweb.dev' && routes.includes(target.pathname)) {
+        const location = `https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/agentfriendlyweb.dev?kid=${ACCESS_AUD}&meta=${signed.get(target.pathname).token}&redirect_url=${encodeURIComponent(target.pathname)}`;
         return new Response(null, { status: 302, headers: { location } });
       }
-      if (String(url) === 'https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects') {
-        metadataAttempts += 1;
-        if (metadataAttempts === 1) throw new TypeError('simulated transient network reset');
+      const metadataPrefix = '/.well-known/cloudflare-access-protected-resource';
+      if (target.origin === 'https://agentfriendlyweb.dev' && target.pathname.startsWith(metadataPrefix)) {
+        const route = target.pathname.slice(metadataPrefix.length);
+        if (route === '/api/projects') {
+          metadataAttempts += 1;
+          if (metadataAttempts === 1) throw new TypeError('simulated transient network reset');
+        }
         return new Response(JSON.stringify({
-          resource: 'https://agentfriendlyweb.dev/api/projects',
+          resource: `https://agentfriendlyweb.dev${route}`,
           protected: true,
           team_domain: 'tokenizart.cloudflareaccess.com',
           authorization_servers: ['https://tokenizart.cloudflareaccess.com'],
           authentication_methods: [{ name: 'cloudflared', description: 'must-not-be-retained' }],
         }), { status: 200, headers: { 'content-type': 'application/json' } });
       }
-      if (String(url) === 'https://tokenizart.cloudflareaccess.com/cdn-cgi/access/certs') {
-        return new Response(JSON.stringify(signed.jwks), { status: 200, headers: { 'content-type': 'application/json' } });
-      }
       throw new Error(`unexpected URL ${url}`);
     },
   });
 
   assert.deepEqual(requested.map(({ url }) => url), [
+    'https://tokenizart.cloudflareaccess.com/cdn-cgi/access/certs',
+    'https://agentfriendlyweb.dev/expediente',
+    'https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/expediente',
     'https://agentfriendlyweb.dev/api/projects',
     'https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects',
     'https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects',
-    'https://tokenizart.cloudflareaccess.com/cdn-cgi/access/certs',
+    'https://agentfriendlyweb.dev/api/projects/probe',
+    'https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects/probe',
   ]);
   assert.ok(requested.every(({ init }) => init.method === 'GET' && init.redirect !== 'follow'));
   const metadataSignals = requested
@@ -567,23 +582,23 @@ test('Cloudflare Access reader verifies signed AFW edge evidence without retaini
 
 test('Cloudflare Access reader rejects a signed challenge whose audience is not AFW', async () => {
   const observedAt = '2026-09-02T12:00:00.000Z';
-  const signed = signedAccessMeta({ observedAt, overrides: { aud: 'wrong-audience' } });
+  const signed = signedAccessMeta({ observedAt, route: '/expediente', overrides: { aud: 'wrong-audience' } });
   await assert.rejects(() => fetchCloudflareAccessEvidence({
     teamDomain: 'tokenizart.cloudflareaccess.com',
     audience: ACCESS_AUD,
-    observedAt,
+    now: () => new Date(observedAt),
     fetchImpl: async (url) => {
-      if (String(url) === 'https://agentfriendlyweb.dev/api/projects') {
-        return new Response(null, {
-          status: 302,
-          headers: { location: `https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/agentfriendlyweb.dev?kid=${ACCESS_AUD}&meta=${signed.token}&redirect_url=%2Fapi%2Fprojects` },
-        });
-      }
       if (String(url).endsWith('/cdn-cgi/access/certs')) {
         return new Response(JSON.stringify(signed.jwks), { status: 200, headers: { 'content-type': 'application/json' } });
       }
+      if (String(url) === 'https://agentfriendlyweb.dev/expediente') {
+        return new Response(null, {
+          status: 302,
+          headers: { location: `https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/agentfriendlyweb.dev?kid=${ACCESS_AUD}&meta=${signed.token}&redirect_url=%2Fexpediente` },
+        });
+      }
       return new Response(JSON.stringify({
-        resource: 'https://agentfriendlyweb.dev/api/projects',
+        resource: 'https://agentfriendlyweb.dev/expediente',
         protected: true,
         team_domain: 'tokenizart.cloudflareaccess.com',
         authorization_servers: ['https://tokenizart.cloudflareaccess.com'],
@@ -595,23 +610,23 @@ test('Cloudflare Access reader rejects a signed challenge whose audience is not 
 test('Cloudflare Access meta rejects authenticated or service-token challenge state', async () => {
   const observedAt = '2026-09-02T12:00:00.000Z';
   for (const overrides of [{ auth_status: 'SUCCESS' }, { service_token_status: true }]) {
-    const signed = signedAccessMeta({ observedAt, overrides });
+    const signed = signedAccessMeta({ observedAt, route: '/expediente', overrides });
     await assert.rejects(() => fetchCloudflareAccessEvidence({
       teamDomain: 'tokenizart.cloudflareaccess.com',
       audience: ACCESS_AUD,
-      observedAt,
+      now: () => new Date(observedAt),
       fetchImpl: async (url) => {
-        if (String(url) === 'https://agentfriendlyweb.dev/api/projects') {
-          return new Response(null, {
-            status: 302,
-            headers: { location: `https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/agentfriendlyweb.dev?kid=${ACCESS_AUD}&meta=${signed.token}&redirect_url=%2Fapi%2Fprojects` },
-          });
-        }
         if (String(url).endsWith('/cdn-cgi/access/certs')) {
           return new Response(JSON.stringify(signed.jwks), { status: 200, headers: { 'content-type': 'application/json' } });
         }
+        if (String(url) === 'https://agentfriendlyweb.dev/expediente') {
+          return new Response(null, {
+            status: 302,
+            headers: { location: `https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/agentfriendlyweb.dev?kid=${ACCESS_AUD}&meta=${signed.token}&redirect_url=%2Fexpediente` },
+          });
+        }
         return new Response(JSON.stringify({
-          resource: 'https://agentfriendlyweb.dev/api/projects',
+          resource: 'https://agentfriendlyweb.dev/expediente',
           protected: true,
           team_domain: 'tokenizart.cloudflareaccess.com',
           authorization_servers: ['https://tokenizart.cloudflareaccess.com'],
@@ -639,7 +654,8 @@ test('stability baseline evidence is versioned and keeps legacy retirement unaut
   assert.equal(evidence.smoke_checks.length, 11);
   assert.equal(evidence.infrastructure.remote_worker.percentage, 100);
   assert.equal(evidence.infrastructure.cloudflare_custom_domain.service, 'agent-friendly-web-web-production');
-  assert.equal(evidence.infrastructure.cloudflare_access_edge.meta_signature_verified, true);
+  assert.equal(evidence.infrastructure.cloudflare_access_edge.protected_routes.length, 3);
+  assert.ok(evidence.infrastructure.cloudflare_access_edge.protected_routes.every((route) => route.meta_signature_verified));
   assert.equal(evidence.infrastructure.cloudflare_access_edge.audience, ACCESS_AUD);
   assert.equal(evidence.rollback.legacy_sites_retained, null);
   assert.equal(evidence.rollback.sites_observation_required, true);
@@ -648,6 +664,7 @@ test('stability baseline evidence is versioned and keeps legacy retirement unaut
   assert.equal(sitesObservation.decisive_for_automated_audit, false);
   assert.equal(sitesObservation.project, 'agent-friendly-web');
   assert.equal(sitesObservation.environment, 'afw_public');
+  assert.doesNotMatch(JSON.stringify(sitesObservation), /openai-site-verification=/i);
   assert.match(roadmap, /npm run web:audit:stability/);
   assert.match(roadmap, /2026-09-09/);
 });

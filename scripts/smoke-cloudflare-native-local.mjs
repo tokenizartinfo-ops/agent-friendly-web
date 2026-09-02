@@ -23,6 +23,15 @@ export const CLOUD_NATIVE_SMOKE_ROUTES = Object.freeze([
   { path: '/api/projects/probe', boundary: 'private' },
 ]);
 
+function cancelWithoutBlocking(streamOrReader) {
+  try {
+    const cancellation = streamOrReader?.cancel();
+    if (cancellation && typeof cancellation.catch === 'function') void cancellation.catch(() => {});
+  } catch {
+    // Cancellation is best-effort and must never block the smoke result.
+  }
+}
+
 async function readBoundedBody(response, limit = MAX_RESPONSE_BYTES) {
   if (!response.body) return '';
   const reader = response.body.getReader();
@@ -34,7 +43,7 @@ async function readBoundedBody(response, limit = MAX_RESPONSE_BYTES) {
       if (done) break;
       total += value.byteLength;
       if (total > limit) {
-        await reader.cancel();
+        cancelWithoutBlocking(reader);
         throw new Error(`response exceeds ${limit} bytes`);
       }
       chunks.push(value);
@@ -105,6 +114,7 @@ export async function runCloudflareNativeSmoke({
 
       if (mode === 'access-edge' || (mode === 'public-edge' && route.boundary === 'private')) {
         const ok = isAccessBoundary(response, origin, route.path);
+        cancelWithoutBlocking(response.body);
         checks.push({
           path: route.path,
           boundary: 'cloudflare_access',
@@ -117,6 +127,7 @@ export async function runCloudflareNativeSmoke({
 
       if (route.boundary === 'private') {
         const ok = isLocalPrivateBoundary(response);
+        cancelWithoutBlocking(response.body);
         checks.push({
           path: route.path,
           boundary: route.boundary,

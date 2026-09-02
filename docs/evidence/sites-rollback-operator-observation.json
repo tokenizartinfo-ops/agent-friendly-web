@@ -20,11 +20,7 @@
     "ssl_status": "active",
     "cname_target": "custom-domains.chatgpt.site.",
     "apex_proxy_ipv4_targets": ["162.159.143.30", "172.66.3.26"],
-    "validation_record": {
-      "record_type": "TXT",
-      "name": "_openai-site-verification.agentfriendlyweb.dev",
-      "value": "openai-site-verification=RzyJvfS_YfwsLdtNciAPpG6U906xYwR2Uu-argiID8k"
-    }
+    "validation_record_present": true
   },
   "rollback_tested": false,
   "retirement_authorized": false

@@ -19,7 +19,7 @@ El comando `npm run web:audit:stability` ejecuta un control estrictamente read-o
 3. lee el ledger publico `/.well-known/infrastructure-status.json` con limite de tiempo y tamano;
 4. limita el ledger a ocho dias desde su observacion y rechaza fechas futuras o vigencias artificialmente largas;
 5. consulta por Wrangler el deployment y la version remota activos, y comprueba que el binding D1 coincide con `wrangler.jsonc`;
-6. contrasta el custom domain con la API de Cloudflare y verifica el JWT `meta` de Access contra las claves publicas vivas del tenant;
+6. contrasta el custom domain con la API de Cloudflare y verifica los tres JWT `meta` de Access contra las claves publicas vivas del tenant;
 7. contrasta tambien el documento publico `cloudflare-access-protected-resource` sin conservar identidad, sesion ni reglas de usuarios;
 8. ejecuta un unico `SELECT` fijo sobre la D1 productiva obtenida de la configuracion validada;
 9. falla si cambian las seis migraciones, las trece tablas, las cero filas, la identidad de la base o si la consulta escribe.
@@ -30,7 +30,7 @@ No despliega, no migra, no cambia DNS, no modifica Access y no usa recursos Toke
 
 - Worker productivo y version al 100%: observados remotamente por Wrangler;
 - custom domain `agentfriendlyweb.dev` -> `agent-friendly-web-web-production`: observado por API Cloudflare;
-- Access: desafio del borde con audiencia AFW exacta y firma `RS256` verificada contra el JWKS vivo;
+- Access: tres desafios del borde con audiencia AFW exacta y firmas `RS256` verificadas contra el JWKS vivo;
 - trafico publico declarado por el ledger: 100%;
 - once rutas del smoke publico y frontera Access: OK;
 - ledger vigente hasta: `2026-09-09`;

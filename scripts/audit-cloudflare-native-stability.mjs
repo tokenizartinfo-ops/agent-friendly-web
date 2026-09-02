@@ -24,6 +24,15 @@ function retryDelay(attempt) {
   return new Promise((resolve) => setTimeout(resolve, attempt * 100));
 }
 
+function cancelWithoutBlocking(streamOrReader) {
+  try {
+    const cancellation = streamOrReader?.cancel();
+    if (cancellation && typeof cancellation.catch === 'function') void cancellation.catch(() => {});
+  } catch {
+    // Cancellation is best-effort and must never block the fail-closed result.
+  }
+}
+
 async function fetchReadOnlyWithRetry(fetchImpl, url, init) {
   let lastError;
   for (let attempt = 1; attempt <= CLOUDFLARE_READ_ATTEMPTS; attempt += 1) {
@@ -35,7 +44,7 @@ async function fetchReadOnlyWithRetry(fetchImpl, url, init) {
       if ((response.status !== 429 && response.status < 500) || attempt === CLOUDFLARE_READ_ATTEMPTS) {
         return response;
       }
-      await response.body?.cancel().catch(() => {});
+      cancelWithoutBlocking(response.body);
     } catch (error) {
       lastError = error;
       if (attempt === CLOUDFLARE_READ_ATTEMPTS) throw error;
@@ -59,7 +68,7 @@ async function readBoundedResponseJson(response, maxBytes) {
       if (done) break;
       total += value.byteLength;
       if (total > maxBytes) {
-        await reader.cancel();
+        cancelWithoutBlocking(reader);
         throw new Error('Cloudflare control-plane response exceeds byte limit');
       }
       chunks.push(value);
@@ -123,7 +132,7 @@ function decodeJwtJson(value, label) {
   }
 }
 
-export function verifyCloudflareAccessMeta({ token, jwks, audience, observedAt }) {
+export function verifyCloudflareAccessMeta({ token, jwks, audience, expectedRoute, verificationTime }) {
   const parts = typeof token === 'string' ? token.split('.') : [];
   if (parts.length !== 3) throw new Error('Cloudflare Access meta must be a compact JWT');
   const [encodedHeader, encodedClaims, encodedSignature] = parts;
@@ -159,13 +168,13 @@ export function verifyCloudflareAccessMeta({ token, jwks, audience, observedAt }
   if (claims?.type !== 'meta'
     || claims?.aud !== audience
     || claims?.hostname !== 'agentfriendlyweb.dev'
-    || claims?.redirect_url !== '/api/projects') {
+    || claims?.redirect_url !== expectedRoute) {
     throw new Error('Cloudflare Access meta audience or route is invalid');
   }
   if (claims?.auth_status !== 'NONE' || claims?.service_token_status !== false) {
     throw new Error('Cloudflare Access meta must represent an anonymous challenge');
   }
-  const observedSeconds = Date.parse(observedAt || '') / 1000;
+  const observedSeconds = Date.parse(verificationTime || '') / 1000;
   if (!Number.isFinite(observedSeconds)
     || !Number.isInteger(claims.iat)
     || !Number.isInteger(claims.nbf)
@@ -189,7 +198,7 @@ export function verifyCloudflareAccessMeta({ token, jwks, audience, observedAt }
 export async function fetchCloudflareAccessEvidence({
   teamDomain,
   audience,
-  observedAt = new Date().toISOString(),
+  now = () => new Date(),
   fetchImpl = fetch,
 } = {}) {
   if (teamDomain !== 'tokenizart.cloudflareaccess.com') throw new Error('Cloudflare Access team domain is not allowlisted');
@@ -197,66 +206,79 @@ export async function fetchCloudflareAccessEvidence({
     throw new Error('Cloudflare Access audience is not allowlisted');
   }
   const origin = 'https://agentfriendlyweb.dev';
-  const protectedRoute = '/api/projects';
-  const response = await fetchReadOnlyWithRetry(fetchImpl, `${origin}${protectedRoute}`, {
-    method: 'GET',
-    redirect: 'manual',
-    headers: { accept: 'application/json' },
-  });
-  if (![301, 302, 303, 307, 308].includes(response.status)) {
-    throw new Error('Cloudflare Access edge must return a login redirect');
-  }
-  let login;
-  try {
-    login = new URL(response.headers.get('location') || '');
-  } catch {
-    throw new Error('Cloudflare Access edge returned an invalid login URL');
-  }
-  const meta = login.searchParams.get('meta') || '';
-  if (login.protocol !== 'https:'
-    || login.hostname !== teamDomain
-    || login.pathname !== '/cdn-cgi/access/login/agentfriendlyweb.dev'
-    || login.searchParams.get('kid') !== audience
-    || login.searchParams.get('redirect_url') !== protectedRoute) {
-    throw new Error('Cloudflare Access edge challenge does not match AFW');
-  }
-
-  const resourceMetadataUrl = `${origin}/.well-known/cloudflare-access-protected-resource${protectedRoute}`;
-  const metadataResponse = await fetchReadOnlyWithRetry(fetchImpl, resourceMetadataUrl, {
-    method: 'GET',
-    redirect: 'error',
-    headers: { accept: 'application/json' },
-  });
-  const metadata = await readBoundedResponseJson(metadataResponse, CLOUDFLARE_API_MAX_BYTES);
-  if (metadata?.resource !== `${origin}${protectedRoute}`
-    || metadata?.protected !== true
-    || metadata?.team_domain !== teamDomain
-    || JSON.stringify(metadata?.authorization_servers) !== JSON.stringify([`https://${teamDomain}`])) {
-    throw new Error('Cloudflare Access protected-resource metadata does not match AFW');
-  }
-
   const certsResponse = await fetchReadOnlyWithRetry(fetchImpl, `https://${teamDomain}/cdn-cgi/access/certs`, {
     method: 'GET',
     redirect: 'error',
     headers: { accept: 'application/json' },
   });
   const jwks = await readBoundedResponseJson(certsResponse, CLOUDFLARE_API_MAX_BYTES);
-  const verifiedMeta = verifyCloudflareAccessMeta({ token: meta, jwks, audience, observedAt });
+  const protectedRoutes = [];
+
+  for (const protectedRoute of ['/expediente', '/api/projects', '/api/projects/probe']) {
+    const response = await fetchReadOnlyWithRetry(fetchImpl, `${origin}${protectedRoute}`, {
+      method: 'GET',
+      redirect: 'manual',
+      headers: { accept: 'application/json' },
+    });
+    if (![301, 302, 303, 307, 308].includes(response.status)) {
+      throw new Error('Cloudflare Access edge must return a login redirect');
+    }
+    cancelWithoutBlocking(response.body);
+    let login;
+    try {
+      login = new URL(response.headers.get('location') || '');
+    } catch {
+      throw new Error('Cloudflare Access edge returned an invalid login URL');
+    }
+    const meta = login.searchParams.get('meta') || '';
+    if (login.protocol !== 'https:'
+      || login.hostname !== teamDomain
+      || login.pathname !== '/cdn-cgi/access/login/agentfriendlyweb.dev'
+      || login.searchParams.get('kid') !== audience
+      || login.searchParams.get('redirect_url') !== protectedRoute) {
+      throw new Error('Cloudflare Access edge challenge does not match AFW');
+    }
+
+    const resourceMetadataUrl = `${origin}/.well-known/cloudflare-access-protected-resource${protectedRoute}`;
+    const metadataResponse = await fetchReadOnlyWithRetry(fetchImpl, resourceMetadataUrl, {
+      method: 'GET',
+      redirect: 'error',
+      headers: { accept: 'application/json' },
+    });
+    const metadata = await readBoundedResponseJson(metadataResponse, CLOUDFLARE_API_MAX_BYTES);
+    if (metadata?.resource !== `${origin}${protectedRoute}`
+      || metadata?.protected !== true
+      || metadata?.team_domain !== teamDomain
+      || JSON.stringify(metadata?.authorization_servers) !== JSON.stringify([`https://${teamDomain}`])) {
+      throw new Error('Cloudflare Access protected-resource metadata does not match AFW');
+    }
+    const verifiedMeta = verifyCloudflareAccessMeta({
+      token: meta,
+      jwks,
+      audience,
+      expectedRoute: protectedRoute,
+      verificationTime: now().toISOString(),
+    });
+    protectedRoutes.push({
+      path: protectedRoute,
+      status: response.status,
+      login_path: login.pathname,
+      redirect_url: login.searchParams.get('redirect_url'),
+      resource_metadata_url: resourceMetadataUrl,
+      resource_metadata_protected: metadata.protected,
+      signing_key_id: verifiedMeta.signing_key_id,
+      meta_signature_verified: true,
+      meta_valid_from: verifiedMeta.meta_valid_from,
+      meta_expires_at: verifiedMeta.meta_expires_at,
+    });
+  }
 
   return {
     origin,
-    protected_route: protectedRoute,
-    status: response.status,
     team_domain: teamDomain,
-    audience: verifiedMeta.audience,
-    login_path: login.pathname,
-    redirect_url: login.searchParams.get('redirect_url'),
-    resource_metadata_url: resourceMetadataUrl,
-    resource_metadata_protected: metadata.protected,
-    signing_key_id: verifiedMeta.signing_key_id,
-    meta_signature_verified: true,
-    meta_valid_from: verifiedMeta.meta_valid_from,
-    meta_expires_at: verifiedMeta.meta_expires_at,
+    audience,
+    shared_identity_container: true,
+    protected_routes: protectedRoutes,
   };
 }
 
@@ -281,7 +303,8 @@ function readProductionConfig({ cwd, readFileImpl }) {
 export async function readProductionInfrastructure({
   cwd = process.cwd(),
   nodePath = process.execPath,
-  observedAt = new Date().toISOString(),
+  observedAt,
+  now = () => new Date(),
   readFileImpl = readFileSync,
   spawnImpl = spawnSync,
   cloudflareDomainRead = fetchCloudflareCustomDomain,
@@ -306,11 +329,11 @@ export async function readProductionInfrastructure({
   const cloudflareAccessEdge = await cloudflareAccessRead({
     teamDomain: localConfig.access_team_domain,
     audience: localConfig.access_aud,
-    observedAt,
+    now,
   });
 
   return {
-    observed_at: observedAt,
+    observed_at: observedAt || now().toISOString(),
     local_config: localConfig,
     remote_worker: {
       worker: localConfig.worker,
@@ -354,10 +377,8 @@ export function executeProductionD1Read({
 }
 
 async function main() {
-  const observedAt = new Date().toISOString();
-  const infrastructure = await readProductionInfrastructure({ observedAt });
+  const infrastructure = await readProductionInfrastructure();
   const report = await runCloudflareNativeStabilityAudit({
-    observedAt,
     infrastructureRead: async () => infrastructure,
     d1Read: (sql) => executeProductionD1Read({ sql }),
   });

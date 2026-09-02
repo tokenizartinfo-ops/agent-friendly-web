@@ -3,16 +3,16 @@
   "project": "agent-friendly-web",
   "environment": "afw_public",
   "origin": "https://agentfriendlyweb.dev",
-  "observed_at": "2026-09-02T12:22:09.127Z",
+  "observed_at": "2026-09-02T12:58:20.598Z",
   "ok": true,
   "checks": [
     { "id": "public_smoke", "ok": true, "evidence": 11 },
-    { "id": "infrastructure_observation_fresh", "ok": true, "evidence": "2026-09-02T12:22:09.127Z" },
+    { "id": "infrastructure_observation_fresh", "ok": true, "evidence": "2026-09-02T12:58:15.417Z" },
     { "id": "local_production_config", "ok": true, "evidence": "agent-friendly-web-web-production" },
     { "id": "remote_worker_deployment", "ok": true, "evidence": "6ebb4aeb-e556-4a85-bfbc-2d0725eab614" },
     { "id": "remote_worker_version", "ok": true, "evidence": "dc7531c7-5f1e-4e7c-9774-2a6acf131f44" },
     { "id": "cloudflare_custom_domain", "ok": true, "evidence": "agent-friendly-web-web-production" },
-    { "id": "cloudflare_access_edge_signed", "ok": true, "evidence": "afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac" },
+    { "id": "cloudflare_access_edges_signed", "ok": true, "evidence": 3 },
     { "id": "ledger_origin", "ok": true, "evidence": "https://agentfriendlyweb.dev" },
     { "id": "ledger_observation_fresh", "ok": true, "evidence": "2026-09-02" },
     { "id": "ledger_validity_bounded", "ok": true, "evidence": "2026-09-09" },
@@ -43,7 +43,7 @@
     { "path": "/api/projects/probe", "boundary": "cloudflare_access", "status": 302, "ok": true }
   ],
   "infrastructure": {
-    "observed_at": "2026-09-02T12:22:09.127Z",
+    "observed_at": "2026-09-02T12:58:15.417Z",
     "local_config": {
       "account_id": "85d0d5dadac3341a564f22ce885e9eec",
       "worker": "agent-friendly-web-web-production",
@@ -72,18 +72,47 @@
     },
     "cloudflare_access_edge": {
       "origin": "https://agentfriendlyweb.dev",
-      "protected_route": "/api/projects",
-      "status": 302,
       "team_domain": "tokenizart.cloudflareaccess.com",
       "audience": "afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac",
-      "login_path": "/cdn-cgi/access/login/agentfriendlyweb.dev",
-      "redirect_url": "/api/projects",
-      "resource_metadata_url": "https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects",
-      "resource_metadata_protected": true,
-      "signing_key_id": "f79e658c14036da6043c384d7f88fb1a5c61a417592e54bda346c8be73f50593",
-      "meta_signature_verified": true,
-      "meta_valid_from": "2026-09-02T12:22:26Z",
-      "meta_expires_at": "2026-09-02T12:27:26Z"
+      "shared_identity_container": true,
+      "protected_routes": [
+        {
+          "path": "/expediente",
+          "status": 302,
+          "login_path": "/cdn-cgi/access/login/agentfriendlyweb.dev",
+          "redirect_url": "/expediente",
+          "resource_metadata_url": "https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/expediente",
+          "resource_metadata_protected": true,
+          "signing_key_id": "f79e658c14036da6043c384d7f88fb1a5c61a417592e54bda346c8be73f50593",
+          "meta_signature_verified": true,
+          "meta_valid_from": "2026-09-02T12:58:17Z",
+          "meta_expires_at": "2026-09-02T13:03:17Z"
+        },
+        {
+          "path": "/api/projects",
+          "status": 302,
+          "login_path": "/cdn-cgi/access/login/agentfriendlyweb.dev",
+          "redirect_url": "/api/projects",
+          "resource_metadata_url": "https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects",
+          "resource_metadata_protected": true,
+          "signing_key_id": "f79e658c14036da6043c384d7f88fb1a5c61a417592e54bda346c8be73f50593",
+          "meta_signature_verified": true,
+          "meta_valid_from": "2026-09-02T12:58:18Z",
+          "meta_expires_at": "2026-09-02T13:03:18Z"
+        },
+        {
+          "path": "/api/projects/probe",
+          "status": 302,
+          "login_path": "/cdn-cgi/access/login/agentfriendlyweb.dev",
+          "redirect_url": "/api/projects/probe",
+          "resource_metadata_url": "https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects/probe",
+          "resource_metadata_protected": true,
+          "signing_key_id": "f79e658c14036da6043c384d7f88fb1a5c61a417592e54bda346c8be73f50593",
+          "meta_signature_verified": true,
+          "meta_valid_from": "2026-09-02T12:58:18Z",
+          "meta_expires_at": "2026-09-02T13:03:18Z"
+        }
+      ]
     }
   },
   "database": {
