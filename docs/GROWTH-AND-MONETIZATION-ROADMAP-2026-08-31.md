@@ -97,6 +97,12 @@ Cada oportunidad registra dominio, segmento, problema, owner, mantenedor, alcanc
 
 La evidencia local vive en `docs/BLOCK-6D-CRM-LITE-LOCAL-GATE-2026-08-31.md`. El pipeline no salta etapas, los estados terminales no se reabren y propuesta, aprobacion, entrega, verificacion y cierre mantienen revision humana.
 
+### Gate 6D.1 - Centro Comercial interno
+
+**Estado en rama de implementacion:** tablero `local_synthetic_only` construido sobre CRM Lite y Gate 6A.1. Reune resumen, pipeline, hipotesis de precio, contenido, estructuras de email y definiciones metricas sin presentar ningun dato como cliente, ingreso o actividad real.
+
+La ruta permanece fuera del sitemap, menu y catalogo publico. Requiere una bandera local exacta y rechaza produccion incluso si esa bandera se configura por error. La primera version no incorpora D1, datos personales, envios, publicaciones, propuestas, pagos ni cambios de sitios. La evidencia y los criterios viven en `docs/BLOCK-6D1-COMMERCIAL-CONTROL-LOCAL-GATE-2026-09-02.md`.
+
 ### Gate 6E - Primer piloto pago humano
 
 - catalogo privado de alcance y precio;
