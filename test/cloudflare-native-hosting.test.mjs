@@ -108,7 +108,7 @@ test('active repository guidance describes Workers as production and Sites only 
     assert.match(guidance, /Cloudflare-native/i, path);
     assert.match(guidance, /\bWorkers?\b/i, path);
     assert.match(guidance, /Sites.*rollback/i, path);
-    const sitesLines = guidance.split(/\r?\n/).filter((value) => /Sites/i.test(value));
+    const sitesLines = guidance.split(/\r?\n/).filter((value) => /(?:Sites|\.chatgpt\.site)/i.test(value));
     assert.deepEqual(sitesLines, allowedSitesLines[path], path);
   }
 });
