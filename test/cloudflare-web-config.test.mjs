@@ -33,7 +33,7 @@ test('web Worker config isolates canary and production without attaching traffic
   assert.equal(production.vars.AFW_REMOTE_DEPLOY_ENABLED, 'false');
 });
 
-test('package exposes bounded Cloudflare-native canary commands and no production deploy command', () => {
+test('package exposes bounded Cloudflare-native canary and production commands', () => {
   const packageJson = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
   assert.match(packageJson.scripts['web:deploy:dry-run'], /@vinext\/cloudflare deploy --env canary --dry-run/);
@@ -42,7 +42,14 @@ test('package exposes bounded Cloudflare-native canary commands and no productio
   assert.match(packageJson.scripts['web:preflight:canary'], /preflight-cloudflare-native-canary\.mjs/);
   assert.match(packageJson.scripts['web:d1:migrations:canary'], /d1 migrations apply agent-friendly-web-web-canary --remote.*--env canary/);
   assert.match(packageJson.scripts['web:deploy:canary'], /@vinext\/cloudflare deploy --env canary$/);
-  assert.equal(packageJson.scripts['web:deploy:production'], undefined);
+  assert.equal(packageJson.scripts['web:preflight:production'], undefined);
+  assert.match(packageJson.scripts['web:verify:production'], /smoke-cloudflare-native-local\.mjs.*agentfriendlyweb\.dev.*--mode public-edge/);
+  assert.match(packageJson.scripts['web:d1:migrations:production'], /d1 migrations apply agent-friendly-web-web-production --remote.*--env production/);
+  assert.match(packageJson.scripts['web:deploy:production:dry-run'], /@vinext\/cloudflare deploy --env production --dry-run/);
+  assert.match(packageJson.scripts['web:deploy:production'], /@vinext\/cloudflare deploy --env production$/);
+  assert.match(packageJson.scripts['web:smoke:production'], /smoke-cloudflare-native-local\.mjs.*agentfriendlyweb\.dev.*--mode public-edge/);
+  assert.equal(packageJson.scripts['web:compare:cutover'], undefined);
+  assert.match(packageJson.scripts['web:compare:precutover-local'], /compare-cloudflare-native-public-origin\.mjs.*127\.0\.0\.1:8788/);
   assert.equal(packageJson.devDependencies['@vinext/cloudflare'], '1.0.0-beta.6');
   assert.equal(packageJson.devDependencies.vinext, '1.0.0-beta.8');
   assert.equal(packageJson.dependencies.react, '19.2.8');
@@ -51,4 +58,16 @@ test('package exposes bounded Cloudflare-native canary commands and no productio
   assert.equal(packageJson.devDependencies['@cloudflare/vite-plugin'], '1.54.3');
   assert.equal(packageJson.devDependencies.wrangler, '4.128.0');
   assert.equal(packageJson.engines.node, '>=22.18.0');
+});
+
+test('production Worker configuration contains real isolated identifiers and no source route', () => {
+  const config = JSON.parse(readFileSync(configPath, 'utf8'));
+  const production = config.env.production;
+  assert.equal(production.routes, undefined);
+  assert.match(production.d1_databases[0].database_id, /^[0-9a-f]{8}-[0-9a-f-]{27}$/i);
+  assert.notEqual(production.d1_databases[0].database_id, '22222222-2222-4222-8222-222222222222');
+  assert.equal(production.vars.ACCESS_TEAM_DOMAIN, 'tokenizart.cloudflareaccess.com');
+  assert.match(production.vars.ACCESS_AUD, /^[0-9a-f]{64}$/i);
+  assert.equal(production.vars.AFW_CANARY_DIAGNOSTICS_ENABLED, 'false');
+  assert.equal(production.vars.AFW_REMOTE_DEPLOY_ENABLED, 'false');
 });

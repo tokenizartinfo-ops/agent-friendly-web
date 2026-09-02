@@ -14,6 +14,8 @@ export const CLOUD_NATIVE_SMOKE_ROUTES = Object.freeze([
   { path: '/okf/v0.2/manifest.json', boundary: 'public', contentType: 'application/json', marker: /OKF|open.knowledge/i },
   { path: '/api-catalog', boundary: 'public', contentType: 'application/linkset+json', marker: /agentfriendlyweb\.dev/i },
   { path: '/expediente', boundary: 'private' },
+  { path: '/api/projects', boundary: 'private' },
+  { path: '/api/projects/probe', boundary: 'private' },
 ]);
 
 async function readBoundedBody(response, limit = MAX_RESPONSE_BYTES) {
@@ -42,10 +44,16 @@ async function readBoundedBody(response, limit = MAX_RESPONSE_BYTES) {
 }
 
 function isAccessBoundary(response) {
-  if ([401, 403].includes(response.status)) return true;
   if (![301, 302, 303, 307, 308].includes(response.status)) return false;
   const location = response.headers.get('location') || '';
-  return /(?:cloudflareaccess\.com\/cdn-cgi\/access|\/cdn-cgi\/access\/login)/i.test(location);
+  try {
+    const login = new URL(location);
+    return login.protocol === 'https:'
+      && login.hostname === 'tokenizart.cloudflareaccess.com'
+      && login.pathname.startsWith('/cdn-cgi/access/login/');
+  } catch {
+    return false;
+  }
 }
 
 function isLocalPrivateBoundary(response) {
@@ -58,9 +66,15 @@ export async function runCloudflareNativeSmoke({
   mode = 'local',
   fetchImpl = fetch,
 } = {}) {
-  if (!['local', 'access-edge'].includes(mode)) throw new Error('mode must be local or access-edge');
+  if (!['local', 'access-edge', 'public-edge'].includes(mode)) throw new Error('mode must be local, access-edge or public-edge');
   const origin = new URL(baseUrl || 'http://127.0.0.1:8788');
   if (origin.pathname !== '/' || origin.search || origin.hash) throw new Error('baseUrl must be an origin');
+  if (mode === 'public-edge' && origin.origin !== 'https://agentfriendlyweb.dev') {
+    throw new Error('public-edge origin must be Agent Friendly Web production');
+  }
+  if (mode === 'access-edge' && !['https://canary.agentfriendlyweb.dev', 'https://release.agentfriendlyweb.dev'].includes(origin.origin)) {
+    throw new Error('access-edge origin must be an approved Agent Friendly Web release');
+  }
   const requestTimeoutMs = mode === 'local' ? LOCAL_REQUEST_TIMEOUT_MS : EDGE_REQUEST_TIMEOUT_MS;
 
   const checks = [];
@@ -74,14 +88,14 @@ export async function runCloudflareNativeSmoke({
         headers: { accept: route.contentType || 'text/html' },
       });
 
-      if (mode === 'access-edge') {
+      if (mode === 'access-edge' || (mode === 'public-edge' && route.boundary === 'private')) {
         const ok = isAccessBoundary(response);
         checks.push({
           path: route.path,
           boundary: 'cloudflare_access',
           status: response.status,
           ok,
-          ...(ok ? {} : { error: 'canary route bypassed Cloudflare Access' }),
+          ...(ok ? {} : { error: 'route did not present the expected Cloudflare Access login redirect' }),
         });
         continue;
       }
@@ -115,7 +129,7 @@ export async function runCloudflareNativeSmoke({
     } catch (error) {
       checks.push({
         path: route.path,
-        boundary: mode === 'access-edge' ? 'cloudflare_access' : route.boundary,
+        boundary: mode === 'access-edge' || (mode === 'public-edge' && route.boundary === 'private') ? 'cloudflare_access' : route.boundary,
         status: 0,
         ok: false,
         error: error instanceof Error ? error.message : String(error),

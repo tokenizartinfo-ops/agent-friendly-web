@@ -6,6 +6,15 @@ import {
   runCloudflareNativeSmoke,
 } from '../scripts/smoke-cloudflare-native-local.mjs';
 
+test('production smoke covers both the exact projects API root and a descendant', () => {
+  const privatePaths = CLOUD_NATIVE_SMOKE_ROUTES
+    .filter((route) => route.boundary === 'private')
+    .map((route) => route.path);
+
+  assert.ok(privatePaths.includes('/api/projects'));
+  assert.ok(privatePaths.includes('/api/projects/probe'));
+});
+
 const smokeSource = await import('node:fs/promises')
   .then(({ readFile }) => readFile(new URL('../scripts/smoke-cloudflare-native-local.mjs', import.meta.url), 'utf8'));
 
@@ -22,9 +31,9 @@ function responseFor(path) {
     status: 200,
     headers: { 'content-type': 'text/markdown; charset=utf-8' },
   });
-  if (path === '/expediente') return new Response(null, {
+  if (['/expediente', '/api/projects', '/api/projects/probe'].includes(path)) return new Response(null, {
     status: 307,
-    headers: { location: '/?access=required&return_to=%2Fexpediente' },
+    headers: { location: `/?access=required&return_to=${encodeURIComponent(path)}` },
   });
   if (path === '/okf/v0.2/manifest.json') return Response.json({ name: 'Agent Friendly Web OKF' });
   if (path === '/api-catalog') return new Response(JSON.stringify({ canonical_origin: 'https://agentfriendlyweb.dev' }), {
@@ -64,6 +73,56 @@ test('Access edge smoke requires every canary route to be blocked before the app
 
   assert.equal(report.ok, true);
   assert.ok(report.checks.every((check) => check.boundary === 'cloudflare_access'));
+});
+
+test('public edge smoke requires public contracts and Access on private routes', async () => {
+  const report = await runCloudflareNativeSmoke({
+    baseUrl: 'https://agentfriendlyweb.dev',
+    mode: 'public-edge',
+    fetchImpl: async (url) => CLOUD_NATIVE_SMOKE_ROUTES
+      .some((route) => route.boundary === 'private' && route.path === new URL(url).pathname)
+      ? new Response(null, {
+        status: 302,
+        headers: { location: 'https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/production' },
+      })
+      : responseFor(new URL(url).pathname),
+  });
+
+  assert.equal(report.ok, true);
+  assert.equal(report.checks.find((check) => check.path === '/expediente').boundary, 'cloudflare_access');
+  assert.equal(report.checks.find((check) => check.path === '/llms.txt').boundary, 'public');
+});
+
+test('edge smoke rejects application-level 401 and 403 responses as Access evidence', async () => {
+  for (const status of [401, 403]) {
+    const report = await runCloudflareNativeSmoke({
+      baseUrl: 'https://agentfriendlyweb.dev',
+      mode: 'public-edge',
+      fetchImpl: async (url) => CLOUD_NATIVE_SMOKE_ROUTES
+        .some((route) => route.boundary === 'private' && route.path === new URL(url).pathname)
+        ? new Response(JSON.stringify({ error: 'application_auth_required' }), {
+          status,
+          headers: { 'content-type': 'application/json' },
+        })
+        : responseFor(new URL(url).pathname),
+    });
+
+    assert.equal(report.ok, false);
+    assert.ok(report.checks
+      .filter((check) => check.boundary === 'cloudflare_access')
+      .every((check) => check.ok === false));
+  }
+});
+
+test('edge modes reject origins outside the exact Agent Friendly Web boundary', async () => {
+  await assert.rejects(() => runCloudflareNativeSmoke({
+    baseUrl: 'https://companion.tokenizart.info',
+    mode: 'public-edge',
+  }), /origin|Agent Friendly Web/i);
+  await assert.rejects(() => runCloudflareNativeSmoke({
+    baseUrl: 'https://example.com',
+    mode: 'access-edge',
+  }), /origin|Agent Friendly Web/i);
 });
 
 test('smoke fails if a private local route or protected canary route becomes public', async () => {

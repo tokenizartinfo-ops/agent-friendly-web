@@ -11,11 +11,11 @@ Agent Friendly Web debe demostrar en su propia infraestructura el metodo que ofr
 
 La meta de 100% representa la finalizacion de las capas que el caso necesita. No exige activar cada tecnologia disponible ni autoriza a presentar un roadmap como producto operativo. Los puntajes externos se conservan en un perfil AF-EV separado: sirven como evidencia comparativa, no redefinen AF-0 a AF-5 ni justifican publicar capacidades ficticias.
 
-## Estado de infraestructura al 2026-09-01
+## Estado de infraestructura al 2026-09-02
 
-El unico origen publico canonico es `https://agentfriendlyweb.dev`. Ese dominio continua disponible sobre un runtime Sites transitorio mientras se prepara el reemplazo Cloudflare-native. El runtime transitorio es una fuente de migracion, no la arquitectura objetivo, y sus rutas privadas quedan congeladas sin admision de nuevos datos reales.
+El unico origen publico canonico es `https://agentfriendlyweb.dev`. El Worker Cloudflare-native productivo sirve el 100% del trafico publico del apex. Sites no recibe trafico del dominio y permanece retenido unicamente como rollback temporal documentado.
 
-El candidato Cloudflare Worker con Vinext y Cloudflare Access esta implementado y verificado. El canary propio `canary.agentfriendlyweb.dev` esta desplegado detras de Access con D1 aislada, seis migraciones y cero filas funcionales. Mantiene **0% del trafico del origen publico** y no modifica `agentfriendlyweb.dev`; una sesion allowlisted confirmo el HTML autenticado, la misma compilacion paso QA responsive y el rollback quedo preparado sin ejecutar. El corte productivo conserva un gate separado. Las interfaces privadas o de contacto bajo `*.chatgpt.site` estan retiradas y no pueden usarse como produccion, staging, preview, autenticacion o rollback.
+El canary `canary.agentfriendlyweb.dev` y el release `release.agentfriendlyweb.dev` permanecen detras de Cloudflare Access, con 0% del trafico apex. La D1 productiva tiene seis migraciones, trece tablas funcionales y cero filas funcionales. Access protege tanto la raiz exacta `/api/projects` como sus rutas hijas, ademas de `/expediente*` y `/capsula/*`. Las interfaces privadas o de contacto bajo `*.chatgpt.site` estan retiradas y no pueden usarse como produccion, staging, preview, autenticacion o rollback.
 
 Tokenizart sigue siendo el primer caso integral documentado, pero no es una dependencia de ejecucion. Compartir cuenta Cloudflare, organizacion GitHub o identidad administrativa no fusiona Workers, D1, repositorios ni datos de ambos proyectos.
 
@@ -27,7 +27,7 @@ La fotografia inicial de Cloudflare `isitagentready.com` del 2026-08-30 ubico a 
 
 AF-EV registra proveedor, fecha, origen, puntaje, checks, evidencia y vigencia. No se crea AF-6: AF-0 a AF-5 mide madurez propia y AF-EV mide observacion independiente. El detalle y los gates viven en `docs/CLOUDFLARE-EXTERNAL-READINESS-BASELINE-2026-08-30.md`.
 
-La prioridad inmediata ya no es agregar señales para elevar una nota. Es cerrar **Gate 6A - Traccion F1**: oferta, beachhead, contacto consentido, medicion y evidencia comercial. DNS requiere otra aprobacion. OAuth, `auth.md`, A2A y comercio se implementan solamente junto con servicios reales.
+La prioridad inmediata ya no es agregar senales para elevar una nota. Es completar la ventana de estabilidad del origen Cloudflare-native, confirmar que D1 sigue sin escrituras imprevistas y decidir por separado el retiro del binding Sites. Despues se podran disenar `auth.md`, OAuth y una A2A Agent Card solamente junto con identidad y servicios reales; no se publicaran artefactos vacios para mejorar una medicion externa.
 
 ## Estado verificable de esta entrega
 
@@ -43,14 +43,14 @@ La prioridad inmediata ya no es agregar señales para elevar una nota. Es cerrar
 - manifiesto propio `/.well-known/agent-readiness.json`;
 - politica `/.well-known/security.txt`;
 - comparador ilustrativo AF-0 a AF-5;
-- expediente privado del runtime transitorio congelado; reemplazo Cloudflare Access implementado localmente, aun sin canary ni trafico;
+- expediente privado productivo protegido por Cloudflare Access; D1 migrada y vacia, sin apertura de contacto ni otras escrituras reales;
 - Registry publico versionado con perfiles HTML, JSON y Markdown;
 - guia publica `/aeo-y-crawlers` para educacion AEO, decisiones de crawling y valor comercial;
 - catalogo `/.well-known/crawler-policy-catalog.json` con fuentes y finalidades por proveedor.
 - contenido sectorial inicial para seis perfiles en ESP/ENG/POR;
 - comparador local antes/despues y contrato `readiness-comparison.v1`;
 - prototipo determinista de asistencia de intake y contrato `intake-assistant.v1`, sin persistencia ni acciones.
-- bundle publico OKF v0.2 con 11 conceptos, manifiesto, procedencia, vigencia, licencia y SHA-256;
+- bundle publico OKF v0.2 con 15 conceptos, manifiesto, procedencia, vigencia, licencia y SHA-256;
 - pagina humana `/conocimiento-abierto` y descubrimiento OKF desde `llms.txt`, catalogos, sitemap y footer.
 - CLI oficial read-only para auditoria, consulta Registry y verificacion OKF con JSON estable y `--dry-run`;
 - guia conversacional publica `/guia`, determinista, citada y efimera, con continuidad inmediata y profundidad adaptable.
@@ -66,7 +66,6 @@ La prioridad inmediata ya no es agregar señales para elevar una nota. Es cerrar
 - MCP autenticado para expedientes autorizados y generacion de paquetes; el MCP publico read-only ya esta desplegado y permanece separado;
 - A2A Agent Card cuando exista un agente remoto real, autenticado y observable;
 - publicacion asistida mediante adaptadores limitados y aprobacion del owner.
-- migracion del origen publico a un Worker Cloudflare-native, con canary Access, D1 aislada, paridad y rollback antes del corte DNS;
 - paquetes o plugins oficiales por ecosistema, empezando por Tokenizart, Atelier y Agent Friendly Web, solo cuando cada marketplace o cliente tenga contrato y distribucion verificados;
 - skills publicas versionadas y customizadas por organizacion, separadas de las skills internas de operacion;
 
@@ -231,9 +230,10 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 16. **Gate 6B - captura consentida remota OFF cerrada:** preview publico cerrado; la interfaz privada Sites esta retirada y la frontera Worker heredada queda como evidencia remota con escrituras OFF y D1 vacia. Datos reales y correo siguen deshabilitados. La captura no se reabre antes del corte Cloudflare-native.
 17. **Gate 6C - correo operativo, frontera local preparada:** politica `planned_draft_only`, aliases normalizados, consentimiento separado, idempotencia y revision humana para asuntos sensibles. DNS, casillas, routing, proveedor y envio requieren aprobacion separada.
 18. **Gate 6D - ventas y CRM ligero, frontera local preparada:** pipeline y transiciones `local_planning_only`, metadata sin PII, perdida razonada e idempotencia. D1, datos reales, scoring, propuestas y pagos requieren aprobacion separada.
-19. **Gate 6E - primer piloto pago humano:** catalogo, checkout, recibo, conciliacion y una entrega medida.
-20. **Gate 6F - comercio agentico sandbox:** un recurso read-only, x402/MPP, idempotencia y recibos sin dinero real al inicio.
-21. **Gate 6G - coordinacion avanzada:** A2A, OAuth, MCP owner-scoped, skills customizadas y capsulas por proveedor.
+19. **Cloudflare-native production cutover - desplegado y verificado:** `agentfriendlyweb.dev` sirve el Worker productivo, Access protege las rutas privadas, D1 conserva cero filas y Sites queda retenido solo para rollback inicial.
+20. **Gate 6E - primer piloto pago humano:** catalogo, checkout, recibo, conciliacion y una entrega medida.
+21. **Gate 6F - comercio agentico sandbox:** un recurso read-only, x402/MPP, idempotencia y recibos sin dinero real al inicio.
+22. **Gate 6G - coordinacion avanzada:** A2A, OAuth, MCP owner-scoped, skills customizadas y capsulas por proveedor.
 
 ## Recursos de descubrimiento
 
@@ -247,7 +247,7 @@ Una oferta de lanzamiento, por ejemplo USD 20 tachado a USD 10, solo es sostenib
 | `/api-catalog` | linkset hacia OpenAPI | desplegado |
 | `/.well-known/ai-catalog.json` | inventario de compatibilidad ARD | desplegado; propuesta en evolucion |
 | `/.well-known/ard.json` | fuente ARD vigente segun el draft observado | desplegado; propuesta en evolucion |
-| `/.well-known/infrastructure-status.json` | estado fechado del origen, canary, superficies retiradas y gate siguiente | canary Cloudflare-native protegido; 0% del trafico del origen publico |
+| `/.well-known/infrastructure-status.json` | estado fechado del origen, canary, rollback legado, superficies retiradas y gate siguiente | produccion Cloudflare-native activa; canary y release protegidos; Sites sin trafico apex |
 | `/.well-known/external-readiness.json` | historial AF-EV con procedencia y limites | desplegado y verificado; convencion del proyecto |
 | `/.well-known/agent-skills/index.json` | indice de skills descargables | desplegado, convencion del proyecto |
 | `/.well-known/agent-readiness.json` | estado de capacidades | desplegado, no es estandar oficial |
@@ -312,7 +312,7 @@ Las respuestas son ilustrativas. Ninguna mejora garantiza que GPT, Gemini, Claud
 
 ## Gate inmediato
 
-Gate 6A y Gate 6B.2 remoto OFF quedaron cerrados. La decision del 2026-09-01 retira Sites como entorno operativo y cambia la prelacion. El gate inmediato es **migrar el origen de Agent Friendly Web a Cloudflare de forma nativa**, primero mediante `afw_canary` protegido por Access, D1 aislada, 0% de trafico publico, paridad y rollback. La escritura sintetica 6B.3 queda diferida hasta despues del corte y de una nueva revision de su necesidad.
+La migracion del origen Cloudflare-native se completo el 2026-09-02. El gate activo es **estabilidad productiva y decision de retiro legado**: repetir el smoke publico, confirmar que D1 conserva cero escrituras funcionales no autorizadas, mantener el recibo exacto de rollback y decidir separadamente cuando retirar el binding Sites. La escritura sintetica 6B.3, el contacto real, email, CRM, pagos y toda capacidad A2A transaccional siguen diferidos.
 
 El plan de migracion vive en:
 

@@ -1,0 +1,100 @@
+{
+  "contract_version": "agentfriendly.cloudflare-native-production-cutover-receipt.v1",
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_public",
+  "origin": "https://agentfriendlyweb.dev",
+  "status": "cutover_complete_review_fixes_green",
+  "observed_at": "2026-09-02T04:54:33.263627Z",
+  "source_control": {
+    "cutover_commit": "1bfea0f086dd40b439e1f197752c583faddf176d",
+    "review_fix_commit": "6ba79ed4086a5a71e48e3cb9cfdef0aaf173674e",
+    "roadmap_alignment_commit": "ab13caa3c5d64db415b520a955f1c985bfaa8828",
+    "okf_seal_commit": "14c7a27c37fc69a1f493ba12dc28cd9a9da222e1",
+    "verification_commit": "5dfaee5a52ef15ac13ad66e6e597f66f28b92097"
+  },
+  "worker": {
+    "name": "agent-friendly-web-web-production",
+    "deployment_id": "6ebb4aeb-e556-4a85-bfbc-2d0725eab614",
+    "version_id": "dc7531c7-5f1e-4e7c-9774-2a6acf131f44",
+    "previous_deployment_id": "13639380-8652-4a2c-9fbf-5c1f21eb01d5",
+    "previous_version_id": "1969053f-ba2e-4cca-bd93-06741fe23f33",
+    "apex_custom_domain_id": "57a78f718d4dabc302bbcd2c17dbdc8e8882b8d3",
+    "release_custom_domain_id": "5a87a3ab6973b11aad5bd2acccf78bdd35e4b189"
+  },
+  "database": {
+    "id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8",
+    "migrations": 6,
+    "functional_tables": 13,
+    "functional_rows": 0,
+    "cloudflare_internal_tables_excluded": ["_cf_KV", "d1_migrations"],
+    "rows_written_during_verification": 0,
+    "time_travel_bookmark": "00000001-00000012-000050da-6071cbc8434461d6ffd3450a952af2e6"
+  },
+  "access": {
+    "application_id": "b7d7d62e-de25-4b4b-ac52-972b104738a1",
+    "allowed_emails": ["tokenizart.info@gmail.com"],
+    "private_destinations": [
+      "agentfriendlyweb.dev/expediente*",
+      "agentfriendlyweb.dev/capsula/*",
+      "agentfriendlyweb.dev/api/projects",
+      "agentfriendlyweb.dev/api/projects/*"
+    ]
+  },
+  "dns": {
+    "current_record": {
+      "id": "6b861effbcadc374a0651168640160d3",
+      "type": "AAAA",
+      "name": "agentfriendlyweb.dev",
+      "content": "100::",
+      "proxied": true,
+      "ttl": 1
+    },
+    "rollback_apex_addresses": ["162.159.143.30", "172.66.3.26"]
+  },
+  "legacy_sites": {
+    "project_id": "appgprj_6a8f19e35d688191a53e93432543e39c",
+    "custom_domain_id": "appgdom_6a8f665d5bc881919ac5fbdd05f69cbd",
+    "binding_retained": true,
+    "validation_txt_retained": true
+  },
+  "verification": {
+    "tests_passed": 389,
+    "lint_errors": 0,
+    "build": "passed",
+    "production_dry_run": "passed",
+    "origin_comparison": {
+      "baseline_origin_before_cutover": "https://agentfriendlyweb.dev",
+      "local_candidate_origin": "http://127.0.0.1:8788",
+      "remote_release_origin": "https://release.agentfriendlyweb.dev",
+      "local_semantic_status": "passed",
+      "local_semantic_critical_failures": 0,
+      "remote_release_anonymous_access_smoke": "passed",
+      "remote_release_authenticated_html": "passed"
+    },
+    "release_access_smoke": "passed",
+    "release_detach_reattach": "passed",
+    "public_smoke": "passed_after_review_fix_deploy",
+    "access_exact_projects_root": "passed",
+    "application_401_403_rejected_as_access_evidence": "passed",
+    "d1_rows_written_after_review_fix_deploy": 0,
+    "responsive": ["1440x900", "390x844"]
+  },
+  "external_audit": {
+    "provider": "Cloudflare Is Your Site Agent-Ready?",
+    "scanned_at": "2026-09-02T04:20:39.198Z",
+    "level": 4,
+    "level_name": "Agent-Integrated",
+    "next_level": 5,
+    "next_requirements": ["authMd", "a2aAgentCard"],
+    "additional_failed_checks": ["dnsAid", "oauthDiscovery", "oauthProtectedResource"],
+    "commerce_checks": "neutral_not_a_commerce_site"
+  },
+  "capabilities": {
+    "contact_writes": false,
+    "email_sending": false,
+    "crm_remote": false,
+    "payments": false,
+    "tokenizart_runtime_dependency": false
+  }
+}
