@@ -1,0 +1,31 @@
+{
+  "contract_version": "agentfriendly.sites-rollback-operator-observation.v1",
+  "observed_at": "2026-09-02T06:06:18.793Z",
+  "project": "agent-friendly-web",
+  "environment": "afw_public",
+  "source": "OpenAI Sites get_site + list_custom_domains",
+  "decisive_for_automated_audit": false,
+  "required_refresh_before_retirement": true,
+  "site": {
+    "project_id": "appgprj_6a8f19e35d688191a53e93432543e39c",
+    "status": "active",
+    "latest_version_number": 34
+  },
+  "custom_domain": {
+    "domain_binding_id": "appgdom_6a8f665d5bc881919ac5fbdd05f69cbd",
+    "hostname": "agentfriendlyweb.dev",
+    "worker_name": "site---6a8f19e35d688191a53e93432543e39c",
+    "status": "active",
+    "provider_status": "active",
+    "ssl_status": "active",
+    "cname_target": "custom-domains.chatgpt.site.",
+    "apex_proxy_ipv4_targets": ["162.159.143.30", "172.66.3.26"],
+    "validation_record": {
+      "record_type": "TXT",
+      "name": "_openai-site-verification.agentfriendlyweb.dev",
+      "value": "openai-site-verification=RzyJvfS_YfwsLdtNciAPpG6U906xYwR2Uu-argiID8k"
+    }
+  },
+  "rollback_tested": false,
+  "retirement_authorized": false
+}

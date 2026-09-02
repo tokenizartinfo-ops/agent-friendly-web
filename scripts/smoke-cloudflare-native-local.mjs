@@ -3,6 +3,11 @@ import { pathToFileURL } from 'node:url';
 const MAX_RESPONSE_BYTES = 512 * 1024;
 const LOCAL_REQUEST_TIMEOUT_MS = 30_000;
 const EDGE_REQUEST_TIMEOUT_MS = 10_000;
+const ACCESS_AUDIENCE_BY_ORIGIN = Object.freeze({
+  'https://agentfriendlyweb.dev': 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac',
+  'https://release.agentfriendlyweb.dev': 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac',
+  'https://canary.agentfriendlyweb.dev': '5e6f80fdd77e026d6e9f513d4614d22e10cba0f7a90ea4bf7a10b27d6de67a45',
+});
 
 export const CLOUD_NATIVE_SMOKE_ROUTES = Object.freeze([
   { path: '/', boundary: 'public', contentType: 'text/html', marker: /Agent Friendly Web/i },
@@ -28,7 +33,10 @@ async function readBoundedBody(response, limit = MAX_RESPONSE_BYTES) {
       const { done, value } = await reader.read();
       if (done) break;
       total += value.byteLength;
-      if (total > limit) throw new Error(`response exceeds ${limit} bytes`);
+      if (total > limit) {
+        await reader.cancel();
+        throw new Error(`response exceeds ${limit} bytes`);
+      }
       chunks.push(value);
     }
   } finally {
@@ -43,14 +51,21 @@ async function readBoundedBody(response, limit = MAX_RESPONSE_BYTES) {
   return new TextDecoder().decode(body);
 }
 
-function isAccessBoundary(response) {
+function isAccessBoundary(response, origin, routePath) {
   if (![301, 302, 303, 307, 308].includes(response.status)) return false;
   const location = response.headers.get('location') || '';
+  const challenge = response.headers.get('www-authenticate') || '';
+  const cookie = response.headers.get('set-cookie') || '';
   try {
     const login = new URL(location);
     return login.protocol === 'https:'
       && login.hostname === 'tokenizart.cloudflareaccess.com'
-      && login.pathname.startsWith('/cdn-cgi/access/login/');
+      && login.pathname === `/cdn-cgi/access/login/${origin.hostname}`
+      && login.searchParams.get('kid') === ACCESS_AUDIENCE_BY_ORIGIN[origin.origin]
+      && /^[^.]+\.[^.]+\.[^.]+$/.test(login.searchParams.get('meta') || '')
+      && login.searchParams.get('redirect_url') === routePath
+      && challenge === `Cloudflare-Access resource_metadata="${origin.origin}/.well-known/cloudflare-access-protected-resource${routePath}"`
+      && /(?:^|,\s*)CF_AppSession=[^;]+;/i.test(cookie);
   } catch {
     return false;
   }
@@ -89,7 +104,7 @@ export async function runCloudflareNativeSmoke({
       });
 
       if (mode === 'access-edge' || (mode === 'public-edge' && route.boundary === 'private')) {
-        const ok = isAccessBoundary(response);
+        const ok = isAccessBoundary(response, origin, route.path);
         checks.push({
           path: route.path,
           boundary: 'cloudflare_access',

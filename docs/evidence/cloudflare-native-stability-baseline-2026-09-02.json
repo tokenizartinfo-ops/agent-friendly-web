@@ -1,21 +1,22 @@
 {
-  "contract_version": "agentfriendly.cloudflare-native-stability-report.v2",
+  "contract_version": "agentfriendly.cloudflare-native-stability-report.v3",
   "project": "agent-friendly-web",
   "environment": "afw_public",
   "origin": "https://agentfriendlyweb.dev",
-  "observed_at": "2026-09-02T06:07:14.063Z",
+  "observed_at": "2026-09-02T12:22:09.127Z",
   "ok": true,
   "checks": [
     { "id": "public_smoke", "ok": true, "evidence": 11 },
-    { "id": "infrastructure_observation_fresh", "ok": true, "evidence": "2026-09-02T06:07:14.063Z" },
-    { "id": "control_plane_observation_fresh", "ok": true, "evidence": "2026-09-02T06:06:18.793Z" },
+    { "id": "infrastructure_observation_fresh", "ok": true, "evidence": "2026-09-02T12:22:09.127Z" },
     { "id": "local_production_config", "ok": true, "evidence": "agent-friendly-web-web-production" },
     { "id": "remote_worker_deployment", "ok": true, "evidence": "6ebb4aeb-e556-4a85-bfbc-2d0725eab614" },
     { "id": "remote_worker_version", "ok": true, "evidence": "dc7531c7-5f1e-4e7c-9774-2a6acf131f44" },
     { "id": "cloudflare_custom_domain", "ok": true, "evidence": "agent-friendly-web-web-production" },
-    { "id": "sites_rollback_observed", "ok": true, "evidence": "appgdom_6a8f665d5bc881919ac5fbdd05f69cbd" },
+    { "id": "cloudflare_access_edge_signed", "ok": true, "evidence": "afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac" },
     { "id": "ledger_origin", "ok": true, "evidence": "https://agentfriendlyweb.dev" },
-    { "id": "ledger_fresh", "ok": true, "evidence": "2026-09-09" },
+    { "id": "ledger_observation_fresh", "ok": true, "evidence": "2026-09-02" },
+    { "id": "ledger_validity_bounded", "ok": true, "evidence": "2026-09-09" },
+    { "id": "ledger_not_expired", "ok": true, "evidence": "2026-09-09" },
     { "id": "runtime_state_declaration", "ok": true, "evidence": "cloudflare_native_production" },
     { "id": "public_traffic_declaration", "ok": true, "evidence": 100 },
     { "id": "production_worker_declaration", "ok": true, "evidence": "agent-friendly-web-web-production" },
@@ -42,13 +43,15 @@
     { "path": "/api/projects/probe", "boundary": "cloudflare_access", "status": 302, "ok": true }
   ],
   "infrastructure": {
-    "observed_at": "2026-09-02T06:07:14.063Z",
-    "control_plane_observed_at": "2026-09-02T06:06:18.793Z",
+    "observed_at": "2026-09-02T12:22:09.127Z",
     "local_config": {
+      "account_id": "85d0d5dadac3341a564f22ce885e9eec",
       "worker": "agent-friendly-web-web-production",
       "d1_binding": "DB",
       "d1_database_name": "agent-friendly-web-web-production",
-      "d1_database_id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8"
+      "d1_database_id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8",
+      "access_team_domain": "tokenizart.cloudflareaccess.com",
+      "access_aud": "afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac"
     },
     "remote_worker": {
       "worker": "agent-friendly-web-web-production",
@@ -67,14 +70,20 @@
       "enabled": true,
       "previews_enabled": false
     },
-    "legacy_sites": {
-      "project_id": "appgprj_6a8f19e35d688191a53e93432543e39c",
-      "project_status": "active",
-      "domain_binding_id": "appgdom_6a8f665d5bc881919ac5fbdd05f69cbd",
-      "hostname": "agentfriendlyweb.dev",
-      "status": "active",
-      "provider_status": "active",
-      "ssl_status": "active"
+    "cloudflare_access_edge": {
+      "origin": "https://agentfriendlyweb.dev",
+      "protected_route": "/api/projects",
+      "status": 302,
+      "team_domain": "tokenizart.cloudflareaccess.com",
+      "audience": "afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac",
+      "login_path": "/cdn-cgi/access/login/agentfriendlyweb.dev",
+      "redirect_url": "/api/projects",
+      "resource_metadata_url": "https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects",
+      "resource_metadata_protected": true,
+      "signing_key_id": "f79e658c14036da6043c384d7f88fb1a5c61a417592e54bda346c8be73f50593",
+      "meta_signature_verified": true,
+      "meta_valid_from": "2026-09-02T12:22:26Z",
+      "meta_expires_at": "2026-09-02T12:27:26Z"
     }
   },
   "database": {
@@ -86,7 +95,8 @@
     "database_id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8"
   },
   "rollback": {
-    "legacy_sites_retained": true,
+    "legacy_sites_retained": null,
+    "sites_observation_required": true,
     "retirement_authorized": false
   }
 }

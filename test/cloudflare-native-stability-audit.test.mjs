@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
+import { generateKeyPairSync, sign as signBytes } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import {
   FUNCTIONAL_TABLES,
   PRODUCTION_D1_READ_SQL,
+  STABILITY_SMOKE_CONTRACT,
   buildCloudflareNativeStabilityReport,
   parseProductionWorkerConfig,
   parseWranglerDeployments,
@@ -14,8 +16,44 @@ import {
 } from '../lib/cloudflare-native-stability.mjs';
 import {
   executeProductionD1Read,
+  fetchCloudflareAccessEvidence,
+  fetchCloudflareCustomDomain,
   readProductionInfrastructure,
 } from '../scripts/audit-cloudflare-native-stability.mjs';
+
+const ACCESS_AUD = 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac';
+const ACCESS_SIGNING_KID = 'f79e658c14036da6043c384d7f88fb1a5c61a417592e54bda346c8be73f50593';
+
+function encodeJwtPart(value) {
+  return Buffer.from(JSON.stringify(value)).toString('base64url');
+}
+
+function signedAccessMeta({ observedAt = '2026-09-02T12:00:00.000Z', overrides = {} } = {}) {
+  const { privateKey, publicKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
+  const observedSeconds = Math.floor(Date.parse(observedAt) / 1000);
+  const header = { typ: 'JWT', alg: 'RS256', kid: ACCESS_SIGNING_KID };
+  const claims = {
+    type: 'meta',
+    aud: ACCESS_AUD,
+    hostname: 'agentfriendlyweb.dev',
+    redirect_url: '/api/projects',
+    auth_status: 'NONE',
+    service_token_status: false,
+    iat: observedSeconds - 30,
+    nbf: observedSeconds - 30,
+    exp: observedSeconds + 270,
+    real_country: 'must-not-be-retained',
+    app_session_hash: 'must-not-be-retained',
+    ...overrides,
+  };
+  const signingInput = `${encodeJwtPart(header)}.${encodeJwtPart(claims)}`;
+  const signature = signBytes('RSA-SHA256', Buffer.from(signingInput), privateKey).toString('base64url');
+  const jwk = publicKey.export({ format: 'jwk' });
+  return {
+    token: `${signingInput}.${signature}`,
+    jwks: { keys: [{ ...jwk, kid: ACCESS_SIGNING_KID, alg: 'RS256', use: 'sig' }] },
+  };
+}
 
 function statusFixture(overrides = {}) {
   return {
@@ -67,9 +105,14 @@ const smokeFixture = {
 };
 
 const productionConfigFixture = JSON.stringify({
+  account_id: '85d0d5dadac3341a564f22ce885e9eec',
   env: {
     production: {
       name: 'agent-friendly-web-web-production',
+      vars: {
+        ACCESS_TEAM_DOMAIN: 'tokenizart.cloudflareaccess.com',
+        ACCESS_AUD: 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac',
+      },
       d1_databases: [{
         binding: 'DB',
         database_name: 'agent-friendly-web-web-production',
@@ -82,12 +125,14 @@ const productionConfigFixture = JSON.stringify({
 function infrastructureFixture(overrides = {}) {
   return {
     observed_at: '2026-09-02T12:00:00.000Z',
-    control_plane_observed_at: '2026-09-02T11:55:00.000Z',
     local_config: {
+      account_id: '85d0d5dadac3341a564f22ce885e9eec',
       worker: 'agent-friendly-web-web-production',
       d1_binding: 'DB',
       d1_database_name: 'agent-friendly-web-web-production',
       d1_database_id: 'd26fc9d2-df5a-4957-8e58-cc4c945faad8',
+      access_team_domain: 'tokenizart.cloudflareaccess.com',
+      access_aud: 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac',
     },
     remote_worker: {
       worker: 'agent-friendly-web-web-production',
@@ -106,18 +151,40 @@ function infrastructureFixture(overrides = {}) {
       enabled: true,
       previews_enabled: false,
     },
-    legacy_sites: {
-      project_id: 'appgprj_6a8f19e35d688191a53e93432543e39c',
-      project_status: 'active',
-      domain_binding_id: 'appgdom_6a8f665d5bc881919ac5fbdd05f69cbd',
-      hostname: 'agentfriendlyweb.dev',
-      status: 'active',
-      provider_status: 'active',
-      ssl_status: 'active',
+    cloudflare_access_edge: {
+      origin: 'https://agentfriendlyweb.dev',
+      protected_route: '/api/projects',
+      status: 302,
+      team_domain: 'tokenizart.cloudflareaccess.com',
+      audience: 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac',
+      login_path: '/cdn-cgi/access/login/agentfriendlyweb.dev',
+      redirect_url: '/api/projects',
+      resource_metadata_url: 'https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects',
+      resource_metadata_protected: true,
+      signing_key_id: ACCESS_SIGNING_KID,
+      meta_signature_verified: true,
+      meta_valid_from: '2026-09-02T11:59:30.000Z',
+      meta_expires_at: '2026-09-02T12:04:30.000Z',
     },
     ...overrides,
   };
 }
+
+test('stability smoke contract independently pins eleven critical route boundaries', () => {
+  assert.deepEqual(STABILITY_SMOKE_CONTRACT, [
+    { path: '/', boundary: 'public' },
+    { path: '/robots.txt', boundary: 'public' },
+    { path: '/llms.txt', boundary: 'public' },
+    { path: '/index.md', boundary: 'public' },
+    { path: '/.well-known/agent-readiness.json', boundary: 'public' },
+    { path: '/.well-known/infrastructure-status.json', boundary: 'public' },
+    { path: '/okf/v0.2/manifest.json', boundary: 'public' },
+    { path: '/api-catalog', boundary: 'public' },
+    { path: '/expediente', boundary: 'cloudflare_access' },
+    { path: '/api/projects', boundary: 'cloudflare_access' },
+    { path: '/api/projects/probe', boundary: 'cloudflare_access' },
+  ]);
+});
 
 test('production D1 stability query is a fixed SELECT over the thirteen functional tables', () => {
   assert.equal(FUNCTIONAL_TABLES.length, 13);
@@ -166,10 +233,13 @@ test('D1 parser rejects numeric strings, nulls and booleans instead of coercing 
 
 test('production config and Wrangler evidence identify the active worker version and D1 binding', () => {
   assert.deepEqual(parseProductionWorkerConfig(productionConfigFixture), {
+    account_id: '85d0d5dadac3341a564f22ce885e9eec',
     worker: 'agent-friendly-web-web-production',
     d1_binding: 'DB',
     d1_database_name: 'agent-friendly-web-web-production',
     d1_database_id: 'd26fc9d2-df5a-4957-8e58-cc4c945faad8',
+    access_team_domain: 'tokenizart.cloudflareaccess.com',
+    access_aud: 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac',
   });
 
   assert.deepEqual(parseWranglerDeployments(JSON.stringify([
@@ -234,12 +304,15 @@ test('stability report passes only with fresh production truth, strict smoke and
 test('stability report fails closed on stale truth, public regressions or unexpected D1 state', () => {
   const cases = [
     { observedAt: '2026-09-10T00:00:00.000Z', status: statusFixture(), smoke: smokeFixture, rows: 0 },
+    { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture({ observed_at: '2026-08-01', stale_after: '2026-09-09' }), smoke: smokeFixture, rows: 0 },
+    { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture({ stale_after: '2099-12-31' }), smoke: smokeFixture, rows: 0 },
     { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: { ...smokeFixture, ok: false }, rows: 0 },
     { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: { ...smokeFixture, checks: smokeFixture.checks.slice(0, 1) }, rows: 0 },
+    { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: { ...smokeFixture, checks: [...smokeFixture.checks].reverse() }, rows: 0 },
     { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: smokeFixture, rows: 1 },
-    { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: smokeFixture, rows: 0, infrastructure: infrastructureFixture({ control_plane_observed_at: '2026-08-31T00:00:00.000Z' }) },
     { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: smokeFixture, rows: 0, infrastructure: infrastructureFixture({ remote_worker: { ...infrastructureFixture().remote_worker, d1_database_id: 'wrong-database' } }) },
     { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: smokeFixture, rows: 0, infrastructure: infrastructureFixture({ cloudflare_custom_domain: { ...infrastructureFixture().cloudflare_custom_domain, service: 'wrong-worker' } }) },
+    { observedAt: '2026-09-02T12:00:00.000Z', status: statusFixture(), smoke: smokeFixture, rows: 0, infrastructure: infrastructureFixture({ cloudflare_access_edge: { ...infrastructureFixture().cloudflare_access_edge, audience: 'wrong-audience' } }) },
   ];
 
   for (const fixture of cases) {
@@ -364,21 +437,23 @@ test('production D1 executor invokes the local Wrangler binary without a shell o
   }), /exact fixed SELECT/i);
 });
 
-test('production infrastructure reader combines fresh Wrangler evidence with a sanitized control-plane observation', () => {
+test('production infrastructure reader combines fresh Wrangler evidence with a live Cloudflare domain read', async () => {
   const invocations = [];
-  const controlPlaneFixture = JSON.stringify({
-    contract_version: 'agentfriendly.control-plane-observation.v1',
-    observed_at: '2026-09-02T11:55:00.000Z',
-    cloudflare_custom_domain: infrastructureFixture().cloudflare_custom_domain,
-    legacy_sites: infrastructureFixture().legacy_sites,
-  });
-  const infrastructure = readProductionInfrastructure({
+  const infrastructure = await readProductionInfrastructure({
     cwd: 'C:\\afw',
     nodePath: 'C:\\node.exe',
     observedAt: '2026-09-02T12:00:00.000Z',
-    readFileImpl: (path) => String(path).replaceAll('\\', '/').endsWith('/wrangler.jsonc')
-      ? productionConfigFixture
-      : controlPlaneFixture,
+    readFileImpl: () => productionConfigFixture,
+    cloudflareDomainRead: async ({ accountId }) => {
+      assert.equal(accountId, '85d0d5dadac3341a564f22ce885e9eec');
+      return infrastructureFixture().cloudflare_custom_domain;
+    },
+    cloudflareAccessRead: async ({ teamDomain, audience, observedAt }) => {
+      assert.equal(teamDomain, 'tokenizart.cloudflareaccess.com');
+      assert.equal(audience, 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac');
+      assert.equal(observedAt, '2026-09-02T12:00:00.000Z');
+      return infrastructureFixture().cloudflare_access_edge;
+    },
     spawnImpl(command, args) {
       invocations.push({ command, args });
       if (args.includes('deployments')) {
@@ -412,12 +487,146 @@ test('production infrastructure reader combines fresh Wrangler evidence with a s
   assert.ok(invocations.every(({ args }) => args.includes('agent-friendly-web-web-production')));
 });
 
+test('Cloudflare custom-domain reader queries the live API and returns only sanitized routing evidence', async () => {
+  let requested;
+  const evidence = await fetchCloudflareCustomDomain({
+    accountId: '85d0d5dadac3341a564f22ce885e9eec',
+    apiToken: 'test-only-token',
+    fetchImpl: async (url, init) => {
+      requested = { url: String(url), init };
+      return new Response(JSON.stringify({
+        success: true,
+        result: [{
+          id: '57a78f718d4dabc302bbcd2c17dbdc8e8882b8d3',
+          hostname: 'agentfriendlyweb.dev',
+          service: 'agent-friendly-web-web-production',
+          environment: 'production',
+          enabled: true,
+          previews_enabled: false,
+          cert_id: 'must-not-be-retained',
+        }],
+      }), { status: 200, headers: { 'content-type': 'application/json' } });
+    },
+  });
+
+  assert.equal(requested.url, 'https://api.cloudflare.com/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/domains');
+  assert.equal(requested.init.method, 'GET');
+  assert.equal(requested.init.redirect, 'error');
+  assert.equal(requested.init.headers.authorization, 'Bearer test-only-token');
+  assert.deepEqual(evidence, infrastructureFixture().cloudflare_custom_domain);
+  assert.doesNotMatch(JSON.stringify(evidence), /token|cert_id/i);
+});
+
+test('Cloudflare Access reader verifies signed AFW edge evidence without retaining session claims', async () => {
+  const observedAt = '2026-09-02T12:00:00.000Z';
+  const signed = signedAccessMeta({ observedAt });
+  const requested = [];
+  let metadataAttempts = 0;
+  const evidence = await fetchCloudflareAccessEvidence({
+    teamDomain: 'tokenizart.cloudflareaccess.com',
+    audience: ACCESS_AUD,
+    observedAt,
+    fetchImpl: async (url, init) => {
+      requested.push({ url: String(url), init });
+      if (String(url) === 'https://agentfriendlyweb.dev/api/projects') {
+        const location = `https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/agentfriendlyweb.dev?kid=${ACCESS_AUD}&meta=${signed.token}&redirect_url=%2Fapi%2Fprojects`;
+        return new Response(null, { status: 302, headers: { location } });
+      }
+      if (String(url) === 'https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects') {
+        metadataAttempts += 1;
+        if (metadataAttempts === 1) throw new TypeError('simulated transient network reset');
+        return new Response(JSON.stringify({
+          resource: 'https://agentfriendlyweb.dev/api/projects',
+          protected: true,
+          team_domain: 'tokenizart.cloudflareaccess.com',
+          authorization_servers: ['https://tokenizart.cloudflareaccess.com'],
+          authentication_methods: [{ name: 'cloudflared', description: 'must-not-be-retained' }],
+        }), { status: 200, headers: { 'content-type': 'application/json' } });
+      }
+      if (String(url) === 'https://tokenizart.cloudflareaccess.com/cdn-cgi/access/certs') {
+        return new Response(JSON.stringify(signed.jwks), { status: 200, headers: { 'content-type': 'application/json' } });
+      }
+      throw new Error(`unexpected URL ${url}`);
+    },
+  });
+
+  assert.deepEqual(requested.map(({ url }) => url), [
+    'https://agentfriendlyweb.dev/api/projects',
+    'https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects',
+    'https://agentfriendlyweb.dev/.well-known/cloudflare-access-protected-resource/api/projects',
+    'https://tokenizart.cloudflareaccess.com/cdn-cgi/access/certs',
+  ]);
+  assert.ok(requested.every(({ init }) => init.method === 'GET' && init.redirect !== 'follow'));
+  const metadataSignals = requested
+    .filter(({ url }) => url.includes('cloudflare-access-protected-resource'))
+    .map(({ init }) => init.signal);
+  assert.notEqual(metadataSignals[0], metadataSignals[1]);
+  assert.deepEqual(evidence, infrastructureFixture().cloudflare_access_edge);
+  assert.doesNotMatch(JSON.stringify(evidence), /must-not-be-retained|real_country|app_session_hash/i);
+});
+
+test('Cloudflare Access reader rejects a signed challenge whose audience is not AFW', async () => {
+  const observedAt = '2026-09-02T12:00:00.000Z';
+  const signed = signedAccessMeta({ observedAt, overrides: { aud: 'wrong-audience' } });
+  await assert.rejects(() => fetchCloudflareAccessEvidence({
+    teamDomain: 'tokenizart.cloudflareaccess.com',
+    audience: ACCESS_AUD,
+    observedAt,
+    fetchImpl: async (url) => {
+      if (String(url) === 'https://agentfriendlyweb.dev/api/projects') {
+        return new Response(null, {
+          status: 302,
+          headers: { location: `https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/agentfriendlyweb.dev?kid=${ACCESS_AUD}&meta=${signed.token}&redirect_url=%2Fapi%2Fprojects` },
+        });
+      }
+      if (String(url).endsWith('/cdn-cgi/access/certs')) {
+        return new Response(JSON.stringify(signed.jwks), { status: 200, headers: { 'content-type': 'application/json' } });
+      }
+      return new Response(JSON.stringify({
+        resource: 'https://agentfriendlyweb.dev/api/projects',
+        protected: true,
+        team_domain: 'tokenizart.cloudflareaccess.com',
+        authorization_servers: ['https://tokenizart.cloudflareaccess.com'],
+      }), { status: 200, headers: { 'content-type': 'application/json' } });
+    },
+  }), /audience/i);
+});
+
+test('Cloudflare Access meta rejects authenticated or service-token challenge state', async () => {
+  const observedAt = '2026-09-02T12:00:00.000Z';
+  for (const overrides of [{ auth_status: 'SUCCESS' }, { service_token_status: true }]) {
+    const signed = signedAccessMeta({ observedAt, overrides });
+    await assert.rejects(() => fetchCloudflareAccessEvidence({
+      teamDomain: 'tokenizart.cloudflareaccess.com',
+      audience: ACCESS_AUD,
+      observedAt,
+      fetchImpl: async (url) => {
+        if (String(url) === 'https://agentfriendlyweb.dev/api/projects') {
+          return new Response(null, {
+            status: 302,
+            headers: { location: `https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/agentfriendlyweb.dev?kid=${ACCESS_AUD}&meta=${signed.token}&redirect_url=%2Fapi%2Fprojects` },
+          });
+        }
+        if (String(url).endsWith('/cdn-cgi/access/certs')) {
+          return new Response(JSON.stringify(signed.jwks), { status: 200, headers: { 'content-type': 'application/json' } });
+        }
+        return new Response(JSON.stringify({
+          resource: 'https://agentfriendlyweb.dev/api/projects',
+          protected: true,
+          team_domain: 'tokenizart.cloudflareaccess.com',
+          authorization_servers: ['https://tokenizart.cloudflareaccess.com'],
+        }), { status: 200, headers: { 'content-type': 'application/json' } });
+      },
+    }), /anonymous challenge/i);
+  }
+});
+
 test('stability baseline evidence is versioned and keeps legacy retirement unauthorized', () => {
   const evidence = JSON.parse(readFileSync('docs/evidence/cloudflare-native-stability-baseline-2026-09-02.json', 'utf8'));
-  const controlPlane = JSON.parse(readFileSync('docs/evidence/cloudflare-native-control-plane-observation.json', 'utf8'));
+  const sitesObservation = JSON.parse(readFileSync('docs/evidence/sites-rollback-operator-observation.json', 'utf8'));
   const roadmap = readFileSync('docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md', 'utf8');
 
-  assert.equal(evidence.contract_version, 'agentfriendly.cloudflare-native-stability-report.v2');
+  assert.equal(evidence.contract_version, 'agentfriendly.cloudflare-native-stability-report.v3');
   assert.equal(evidence.ok, true);
   assert.deepEqual(evidence.database, {
     migrations: 6,
@@ -430,12 +639,15 @@ test('stability baseline evidence is versioned and keeps legacy retirement unaut
   assert.equal(evidence.smoke_checks.length, 11);
   assert.equal(evidence.infrastructure.remote_worker.percentage, 100);
   assert.equal(evidence.infrastructure.cloudflare_custom_domain.service, 'agent-friendly-web-web-production');
-  assert.equal(evidence.infrastructure.legacy_sites.domain_binding_id, 'appgdom_6a8f665d5bc881919ac5fbdd05f69cbd');
-  assert.equal(evidence.rollback.legacy_sites_retained, true);
+  assert.equal(evidence.infrastructure.cloudflare_access_edge.meta_signature_verified, true);
+  assert.equal(evidence.infrastructure.cloudflare_access_edge.audience, ACCESS_AUD);
+  assert.equal(evidence.rollback.legacy_sites_retained, null);
+  assert.equal(evidence.rollback.sites_observation_required, true);
   assert.equal(evidence.rollback.retirement_authorized, false);
-  assert.equal(controlPlane.contract_version, 'agentfriendly.control-plane-observation.v1');
-  assert.equal(controlPlane.project, 'agent-friendly-web');
-  assert.equal(controlPlane.environment, 'afw_public');
+  assert.equal(sitesObservation.contract_version, 'agentfriendly.sites-rollback-operator-observation.v1');
+  assert.equal(sitesObservation.decisive_for_automated_audit, false);
+  assert.equal(sitesObservation.project, 'agent-friendly-web');
+  assert.equal(sitesObservation.environment, 'afw_public');
   assert.match(roadmap, /npm run web:audit:stability/);
   assert.match(roadmap, /2026-09-09/);
 });

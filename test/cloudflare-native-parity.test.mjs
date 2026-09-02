@@ -43,6 +43,23 @@ function responseFor(path) {
   return Response.json({ project: 'agent-friendly-web', canonical_origin: 'https://agentfriendlyweb.dev' });
 }
 
+function accessResponse(origin, path) {
+  const login = new URL(`https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/${new URL(origin).hostname}`);
+  login.searchParams.set('kid', origin === 'https://canary.agentfriendlyweb.dev'
+    ? '5e6f80fdd77e026d6e9f513d4614d22e10cba0f7a90ea4bf7a10b27d6de67a45'
+    : 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac');
+  login.searchParams.set('meta', 'header.payload.signature');
+  login.searchParams.set('redirect_url', path);
+  return new Response(null, {
+    status: 302,
+    headers: {
+      location: login.toString(),
+      'set-cookie': 'CF_AppSession=test-session; Path=/; Secure; HttpOnly',
+      'www-authenticate': `Cloudflare-Access resource_metadata="${origin}/.well-known/cloudflare-access-protected-resource${path}"`,
+    },
+  });
+}
+
 test('local parity smoke covers public HTML, agent resources, API catalog and private fail-closed behavior', async () => {
   const requested = [];
   const report = await runCloudflareNativeSmoke({
@@ -65,10 +82,7 @@ test('Access edge smoke requires every canary route to be blocked before the app
   const report = await runCloudflareNativeSmoke({
     baseUrl: 'https://canary.agentfriendlyweb.dev',
     mode: 'access-edge',
-    fetchImpl: async () => new Response(null, {
-      status: 302,
-      headers: { location: 'https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/canary' },
-    }),
+    fetchImpl: async (url) => accessResponse('https://canary.agentfriendlyweb.dev', new URL(url).pathname),
   });
 
   assert.equal(report.ok, true);
@@ -81,10 +95,7 @@ test('public edge smoke requires public contracts and Access on private routes',
     mode: 'public-edge',
     fetchImpl: async (url) => CLOUD_NATIVE_SMOKE_ROUTES
       .some((route) => route.boundary === 'private' && route.path === new URL(url).pathname)
-      ? new Response(null, {
-        status: 302,
-        headers: { location: 'https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/production' },
-      })
+      ? accessResponse('https://agentfriendlyweb.dev', new URL(url).pathname)
       : responseFor(new URL(url).pathname),
   });
 
@@ -112,6 +123,25 @@ test('edge smoke rejects application-level 401 and 403 responses as Access evide
       .filter((check) => check.boundary === 'cloudflare_access')
       .every((check) => check.ok === false));
   }
+});
+
+test('edge smoke rejects a fabricated Access login redirect without Cloudflare challenge headers', async () => {
+  const report = await runCloudflareNativeSmoke({
+    baseUrl: 'https://agentfriendlyweb.dev',
+    mode: 'public-edge',
+    fetchImpl: async (url) => CLOUD_NATIVE_SMOKE_ROUTES
+      .some((route) => route.boundary === 'private' && route.path === new URL(url).pathname)
+      ? new Response(null, {
+        status: 302,
+        headers: { location: 'https://tokenizart.cloudflareaccess.com/cdn-cgi/access/login/agentfriendlyweb.dev' },
+      })
+      : responseFor(new URL(url).pathname),
+  });
+
+  assert.equal(report.ok, false);
+  assert.ok(report.checks
+    .filter((check) => check.boundary === 'cloudflare_access')
+    .every((check) => check.ok === false));
 });
 
 test('edge modes reject origins outside the exact Agent Friendly Web boundary', async () => {
@@ -149,4 +179,34 @@ test('each smoke request has a bounded timeout', () => {
   assert.match(smokeSource, /LOCAL_REQUEST_TIMEOUT_MS\s*=\s*30_000/);
   assert.match(smokeSource, /EDGE_REQUEST_TIMEOUT_MS\s*=\s*10_000/);
   assert.match(smokeSource, /AbortSignal\.timeout\(requestTimeoutMs\)/);
+});
+
+test('smoke cancels an oversized streamed public response at the byte boundary', async () => {
+  let cancelled = false;
+  const report = await runCloudflareNativeSmoke({
+    baseUrl: 'https://agentfriendlyweb.dev',
+    mode: 'public-edge',
+    fetchImpl: async (url) => {
+      const path = new URL(url).pathname;
+      if (path === '/') {
+        return new Response(new ReadableStream({
+          start(controller) {
+            controller.enqueue(new Uint8Array(512 * 1024));
+            controller.enqueue(new Uint8Array(1));
+          },
+          cancel() {
+            cancelled = true;
+          },
+        }), { status: 200, headers: { 'content-type': 'text/html' } });
+      }
+      if (CLOUD_NATIVE_SMOKE_ROUTES.some((route) => route.boundary === 'private' && route.path === path)) {
+        return accessResponse('https://agentfriendlyweb.dev', path);
+      }
+      return responseFor(path);
+    },
+  });
+
+  assert.equal(report.ok, false);
+  assert.equal(cancelled, true);
+  assert.match(report.checks[0].error, /exceeds 524288 bytes/i);
 });
