@@ -1,0 +1,61 @@
+{
+  "contract": "agent-friendly-web.synthetic-crm-persistence-evidence.v1",
+  "status": "synthetic_crm_persistence_verified_kill_switch_off",
+  "observed_at": "2026-09-03T20:22:13Z",
+  "scope": {
+    "project": "agent-friendly-web",
+    "environment": "afw_canary",
+    "origin": "https://canary.agentfriendlyweb.dev",
+    "public_production_modified": false,
+    "tokenizart_resources_used": false,
+    "real_contacts_used": false
+  },
+  "d1": {
+    "database": "agent-friendly-web-web-canary",
+    "bookmark_before": "0000002d-00000000-000050db-4a52b3919da8ee93781cffd2e8ce13f0",
+    "migration": "0007_synthetic_crm_lite.sql",
+    "before": {
+      "contact_rows": 1,
+      "requested_plan_rows": 1,
+      "email_rows": 4,
+      "crm_opportunities": 0,
+      "crm_transition_events": 0
+    },
+    "final": {
+      "contact_rows": 1,
+      "requested_plan_rows": 1,
+      "email_rows": 4,
+      "crm_opportunities": 1,
+      "crm_transition_events": 1,
+      "qualified_rows": 1,
+      "sanitized_opportunities": 1,
+      "synthetic_transitions": 1
+    }
+  },
+  "worker": {
+    "off_version": "42ebda4f-cec1-4708-96c7-4bfa4ef97cd5",
+    "off_baseline_deployment": "aedc987a-9e62-4bef-92ad-87ccdf91cebd",
+    "temporary_on_version": "19899ef3-281e-4cbd-95ae-be4f6c1db902",
+    "temporary_on_deployment": "ddfdd697-cb7c-4d87-b14a-41aa2bdc6e09",
+    "rollback_deployment": "f4372d5a-3def-46ee-93a4-db93e7cdd6d7"
+  },
+  "execution": {
+    "authenticated_off_before_http": 404,
+    "first_http": 201,
+    "first_status": "synthetic_opportunity_persisted",
+    "first_stage": "qualified",
+    "replay_http": 200,
+    "replay_status": "synthetic_opportunity_already_persisted",
+    "replay_duplicate": true,
+    "authenticated_off_after_http": 404
+  },
+  "final": {
+    "worker_flag": "off",
+    "verified_rollback_worker_version": "42ebda4f-cec1-4708-96c7-4bfa4ef97cd5",
+    "temporary_access_cookie_deleted": true,
+    "email_sent": false,
+    "proposal_created": false,
+    "payment_charged": false,
+    "customer_site_modified": false
+  }
+}

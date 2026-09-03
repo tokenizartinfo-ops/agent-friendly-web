@@ -180,7 +180,7 @@ La primera integracion entre captacion y CRM alcanzo `synthetic_commercial_revie
 
 ### Gate 6D.2 - una oportunidad sintetica persistida
 
-El siguiente incremento introduce tablas CRM Lite aditivas y una operacion privada capaz de persistir solamente el plan sintetico validado en 6D.1. La escritura es atomica, actor-scoped e idempotente: debe producir una oportunidad `qualified` y un evento de transicion, mientras un replay no agrega filas. El interruptor permanece apagado por defecto y no habilita contactos reales, correos, propuestas, pagos ni cambios en sitios. La salida requiere migracion aislada, prueba remota antes/despues y rollback operativo en `afw_canary`.
+El Gate 6D.2 alcanzo `synthetic_crm_persistence_verified_kill_switch_off`. Las tablas CRM Lite aditivas guardaron solamente el plan sintetico validado en 6D.1: una oportunidad `qualified` y un evento de transicion. El replay devolvio el registro existente sin agregar filas, los conteos previos permanecieron iguales y el canary volvio a la version OFF. No habilita contactos reales, correos, propuestas, pagos ni cambios en sitios.
 
 ## Gobierno y revision
 

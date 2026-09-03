@@ -1,6 +1,6 @@
 {
   "contract": "agent-friendly-web.synthetic-crm-persistence.v1",
-  "status": "local_ready_remote_disabled",
+  "status": "synthetic_crm_persistence_verified_kill_switch_off",
   "updated_at": "2026-09-03",
   "scope": {
     "environment": "afw_canary",
@@ -28,5 +28,9 @@
     "rate_limit_required": true,
     "metadata_only": true
   },
-  "kill_switch_default": "off"
+  "kill_switch_default": "off",
+  "remote_evidence": {
+    "href": "/.well-known/synthetic-crm-persistence-evidence.json",
+    "observed_at": "2026-09-03T20:22:13Z"
+  }
 }

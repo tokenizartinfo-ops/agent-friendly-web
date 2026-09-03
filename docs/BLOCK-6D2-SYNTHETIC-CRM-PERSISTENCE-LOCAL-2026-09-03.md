@@ -46,4 +46,4 @@ La migracion es aditiva. La bandera `AFW_SYNTHETIC_CRM_PERSISTENCE_ENABLED` qued
 
 ## Estado
 
-`local_ready_remote_disabled`. La ejecucion remota y su evidencia pertenecen a un gate posterior de canary.
+La preparacion local fue promovida y verificada en canary. El estado final es `synthetic_crm_persistence_verified_kill_switch_off`; la evidencia remota esta en `docs/BLOCK-6D2-SYNTHETIC-CRM-PERSISTENCE-REMOTE-2026-09-03.md` y `/.well-known/synthetic-crm-persistence-evidence.json`.
