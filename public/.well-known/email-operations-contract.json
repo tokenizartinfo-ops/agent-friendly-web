@@ -31,6 +31,8 @@
     "transactional_rate_limit_binding_configured": true,
     "private_review_ready_adapter_local_ready": true,
     "private_review_ready_integration_deployed": false,
+    "synthetic_private_contact_local_ready": true,
+    "synthetic_private_contact_remotely_verified": false,
     "transactional_automatic_sending": false,
     "arbitrary_recipients": false,
     "customer_email_sending": false,
@@ -44,6 +46,7 @@
   "outbound_canary_contract": "https://agentfriendlyweb.dev/.well-known/email-outbound-canary-contract.json",
   "review_ready_contract": "https://agentfriendlyweb.dev/.well-known/email-review-ready-contract.json",
   "private_review_ready_integration_contract": "https://agentfriendlyweb.dev/.well-known/private-review-ready-integration-contract.json",
+  "synthetic_contact_canary_contract": "https://agentfriendlyweb.dev/.well-known/synthetic-contact-canary-contract.json",
   "latest_transactional_canary": {
     "status": "sent_once_kill_switch_off",
     "approved_attempts": 4,

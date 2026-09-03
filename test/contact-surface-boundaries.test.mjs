@@ -21,6 +21,18 @@ test('contact endpoint is physically disabled and does not read request bodies i
   assert.doesNotMatch(source, /CONTACT_CAPTURE_ENABLED|TURNSTILE_SECRET_KEY|saveContactIntake/);
 });
 
+test('synthetic contact exists only on the private canary route and cannot enable the public endpoint', async () => {
+  const [publicRoute, canaryRoute] = await Promise.all([
+    readFile('app/api/contact-intake/route.ts', 'utf8'),
+    readFile('app/api/canary/contact-intake/route.ts', 'utf8'),
+  ]);
+  assert.match(publicRoute, /contact_capture_disabled/);
+  assert.doesNotMatch(publicRoute, /synthetic-contact-canary|AFW_SYNTHETIC_CONTACT/);
+  assert.match(canaryRoute, /synthetic-contact-canary/);
+  assert.match(canaryRoute, /cloudflare:workers/);
+  assert.doesNotMatch(canaryRoute, /email-review-ready-gate|EMAIL_REVIEW_READY/);
+});
+
 test('retired Sites contact UI is absent and the public component stays disabled', async () => {
   const [component, robots, sitemap] = await Promise.all([
     readFile('app/components/contact-intake.tsx', 'utf8'),

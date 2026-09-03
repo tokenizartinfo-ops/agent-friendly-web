@@ -29,7 +29,8 @@
     "ACCESS_AUD": "replace-before-remote-deploy",
     "AFW_CANARY_DIAGNOSTICS_ENABLED": "false",
     "AFW_REMOTE_DEPLOY_ENABLED": "false",
-    "AFW_EMAIL_REVIEW_READY_ENABLED": "false"
+    "AFW_EMAIL_REVIEW_READY_ENABLED": "false",
+    "AFW_SYNTHETIC_CONTACT_ENABLED": "false"
   },
   "env": {
     "canary": {
@@ -52,6 +53,14 @@
             "limit": 1,
             "period": 60
           }
+        },
+        {
+          "name": "AFW_SYNTHETIC_CONTACT_RATE_LIMITER",
+          "namespace_id": "1895760674",
+          "simple": {
+            "limit": 3,
+            "period": 60
+          }
         }
       ],
       "vars": {
@@ -59,7 +68,10 @@
         "ACCESS_AUD": "5e6f80fdd77e026d6e9f513d4614d22e10cba0f7a90ea4bf7a10b27d6de67a45",
         "AFW_CANARY_DIAGNOSTICS_ENABLED": "true",
         "AFW_REMOTE_DEPLOY_ENABLED": "false",
-        "AFW_EMAIL_REVIEW_READY_ENABLED": "false"
+        "AFW_EMAIL_REVIEW_READY_ENABLED": "false",
+        "AFW_SYNTHETIC_CONTACT_ENABLED": "false",
+        "AFW_SYNTHETIC_CONTACT_TURNSTILE_SITE_KEY": "1x00000000000000000000AA",
+        "AFW_SYNTHETIC_CONTACT_TURNSTILE_SECRET": "1x0000000000000000000000000000000AA"
       }
     },
     "production": {
@@ -79,7 +91,8 @@
         "ACCESS_AUD": "afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac",
         "AFW_CANARY_DIAGNOSTICS_ENABLED": "false",
         "AFW_REMOTE_DEPLOY_ENABLED": "false",
-        "AFW_EMAIL_REVIEW_READY_ENABLED": "false"
+        "AFW_EMAIL_REVIEW_READY_ENABLED": "false",
+        "AFW_SYNTHETIC_CONTACT_ENABLED": "false"
       }
     }
   }

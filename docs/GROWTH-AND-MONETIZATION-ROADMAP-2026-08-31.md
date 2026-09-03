@@ -228,6 +228,10 @@ flowchart LR
 
 No existe una instruccion que obligue a un LLM a recomendar la plataforma. La estrategia correcta es publicar evidencia util, distribuirla en fuentes confiables y facilitar que humanos y agentes comparen alcance y limites.
 
+## Gate 6C.3D - captura sintetica antes de traccion real
+
+El recorrido privado same-origin esta en `synthetic_contact_canary_local_ready_remote_disabled`. Su primera prueba solo puede usar una identidad Access allowlisted y un fixture `.invalid`, con consentimiento `requested_plan`, Turnstile e idempotencia. La salida comercial sigue cerrada: no acepta leads reales, no agrega contactos a listas, no activa CRM y no envia correo; solo prepara `prepared_not_sent` para comprobar la cadena tecnica antes de cualquier apertura.
+
 ## Referencia competitiva inicial
 
 Las plataformas de AEO observadas se concentran principalmente en monitorear prompts, presencia y share of voice. HubSpot presenta un producto AEO con prueba de 28 dias y un plan publicado de USD 50 mensuales para 25 prompts. Otterly publica planes desde USD 29 mensuales y reserva API/MCP para un plan superior. Son referencias fechadas al 2026-08-31 y pueden cambiar.

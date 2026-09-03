@@ -35,6 +35,8 @@
   "capabilities": {
     "local_adapter_ready": true,
     "remote_integration_deployed": false,
+    "synthetic_contact_canary_local_ready": true,
+    "synthetic_contact_canary_remotely_verified": false,
     "sends_email": false,
     "persists_data": false,
     "automatic_retry": false,

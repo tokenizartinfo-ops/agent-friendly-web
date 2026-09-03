@@ -34,15 +34,34 @@ test('web Worker config isolates canary and production without attaching traffic
   assert.equal(config.vars.AFW_EMAIL_REVIEW_READY_ENABLED, 'false');
   assert.equal(canary.vars.AFW_EMAIL_REVIEW_READY_ENABLED, 'false');
   assert.equal(production.vars.AFW_EMAIL_REVIEW_READY_ENABLED, 'false');
+  assert.equal(config.vars.AFW_SYNTHETIC_CONTACT_ENABLED, 'false');
+  assert.equal(canary.vars.AFW_SYNTHETIC_CONTACT_ENABLED, 'false');
+  assert.equal(production.vars.AFW_SYNTHETIC_CONTACT_ENABLED, 'false');
+  assert.equal(canary.vars.AFW_SYNTHETIC_CONTACT_TURNSTILE_SITE_KEY, '1x00000000000000000000AA');
+  assert.equal(canary.vars.AFW_SYNTHETIC_CONTACT_TURNSTILE_SECRET, '1x0000000000000000000000000000000AA');
+  assert.equal(config.vars.AFW_SYNTHETIC_CONTACT_TURNSTILE_SITE_KEY, undefined);
+  assert.equal(config.vars.AFW_SYNTHETIC_CONTACT_TURNSTILE_SECRET, undefined);
+  assert.equal(production.vars.AFW_SYNTHETIC_CONTACT_TURNSTILE_SITE_KEY, undefined);
+  assert.equal(production.vars.AFW_SYNTHETIC_CONTACT_TURNSTILE_SECRET, undefined);
+  assert.equal(config.vars.AFW_SYNTHETIC_CONTACT_ALLOWED_SUBJECT_HASHES, undefined);
+  assert.equal(canary.vars.AFW_SYNTHETIC_CONTACT_ALLOWED_SUBJECT_HASHES, undefined);
+  assert.equal(production.vars.AFW_SYNTHETIC_CONTACT_ALLOWED_SUBJECT_HASHES, undefined);
   assert.equal(config.send_email, undefined);
   assert.equal(canary.send_email, undefined);
   assert.equal(production.send_email, undefined);
   assert.equal(config.ratelimits, undefined);
-  assert.deepEqual(canary.ratelimits, [{
-    name: 'AFW_EMAIL_REVIEW_READY_RATE_LIMITER',
-    namespace_id: '1895760673',
-    simple: { limit: 1, period: 60 },
-  }]);
+  assert.deepEqual(canary.ratelimits, [
+    {
+      name: 'AFW_EMAIL_REVIEW_READY_RATE_LIMITER',
+      namespace_id: '1895760673',
+      simple: { limit: 1, period: 60 },
+    },
+    {
+      name: 'AFW_SYNTHETIC_CONTACT_RATE_LIMITER',
+      namespace_id: '1895760674',
+      simple: { limit: 3, period: 60 },
+    },
+  ]);
   assert.equal(production.ratelimits, undefined);
 });
 

@@ -51,6 +51,8 @@
     "outbound_binding_configured": true,
     "private_flow_adapter_local_ready": true,
     "private_flow_integration_deployed": false,
+    "synthetic_contact_canary_local_ready": true,
+    "synthetic_contact_canary_remotely_verified": false,
     "outbound_sending": false,
     "automatic_sending": false,
     "arbitrary_recipients": false,
