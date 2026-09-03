@@ -13,7 +13,7 @@
 | `ENVIRONMENT` | `afw_email_review_ready_canary` |
 | `ORIGIN` | `https://canary.agentfriendlyweb.dev` |
 | `RESOURCE_TYPE` | Cloudflare Worker, Access, Email Service binding, D1 y Rate Limiting aislados |
-| `RESOURCE_ID` | Worker `agent-friendly-web-web-canary`; version `3af007c5-c67d-45f3-8f8e-ccb350ac76a4`; deployment `de2a744b-9489-4709-a5a7-cd5404179767`; D1 `2b518988-eacb-4c31-b760-4e58c3c0285b` |
+| `RESOURCE_ID` | Worker `agent-friendly-web-web-canary`; version final `7b25f69e-d30e-4ee4-be0e-c2deafed0f3d`; deployment `7f81a402-38c0-4a72-b883-1088dfd734a6`; D1 `2b518988-eacb-4c31-b760-4e58c3c0285b` |
 | `ALLOWED_ACTION` | desplegar la correccion con el kill switch OFF, verificar bindings por nombre/tipo y ejecutar solo una prueba negativa autenticada |
 | `ROLLBACK` | reasignar el canary a la version OFF anterior `189d6cd1-b70c-4552-aa1c-3e0101b35911` |
 
@@ -21,9 +21,9 @@ Esta operacion pertenecio exclusivamente a Agent Friendly Web. No utilizo recurs
 
 ## Despliegue cerrado
 
-La correccion `to: undefined` se compilo y cargo como una version inmutable. La carga preservo el binding privado `send_email` sin leer, reconstruir ni publicar su destino. Antes de promoverla se verificaron por nombre y tipo Access, D1 canary, rate limiting, assets, la allowlist secreta y el binding de correo.
+La correccion `to: undefined` se compilo y cargo como una version inmutable. La carga preservo el binding privado `send_email` sin leer, reconstruir ni publicar su destino. Antes de promoverla se verificaron por nombre y tipo Access, D1 canary, rate limiting, assets, la allowlist secreta y el binding de correo. La primera version corregida `3af007c5-c67d-45f3-8f8e-ccb350ac76a4` verifico el comportamiento OFF; fue reemplazada por la version final sincronizada para que los contratos machine-readable reflejaran el mismo estado observado.
 
-La version `3af007c5-c67d-45f3-8f8e-ccb350ac76a4` quedo al 100% unicamente dentro del Worker aislado del canary. Los flags remotos comprobados fueron:
+La version final `7b25f69e-d30e-4ee4-be0e-c2deafed0f3d` quedo al 100% unicamente dentro del Worker aislado del canary mediante el deployment `7f81a402-38c0-4a72-b883-1088dfd734a6`. Los flags remotos comprobados fueron:
 
 - `AFW_EMAIL_REVIEW_READY_ENABLED=false`;
 - `AFW_REMOTE_DEPLOY_ENABLED=false`;

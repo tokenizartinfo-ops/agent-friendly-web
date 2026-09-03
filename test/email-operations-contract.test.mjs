@@ -278,8 +278,8 @@ test('Gate 6C.3B records the corrected OFF deployment and authenticated negative
   ]) assert.match(gate, new RegExp(field));
 
   assert.match(gate, /corrected_off_version_verified_negative_probe_passed/);
-  assert.match(gate, /3af007c5-c67d-45f3-8f8e-ccb350ac76a4/);
-  assert.match(gate, /de2a744b-9489-4709-a5a7-cd5404179767/);
+  assert.match(gate, /7b25f69e-d30e-4ee4-be0e-c2deafed0f3d/);
+  assert.match(gate, /7f81a402-38c0-4a72-b883-1088dfd734a6/);
   assert.match(gate, /HTTP 404/);
   assert.match(gate, /sent=false/);
   assert.match(gate, /email_review_ready_unavailable/);
@@ -290,8 +290,8 @@ test('Gate 6C.3B records the corrected OFF deployment and authenticated negative
   assert.equal(evidence.scope.project, 'agent-friendly-web');
   assert.equal(evidence.scope.public_origin_modified, false);
   assert.equal(evidence.scope.tokenizart_resources_used, false);
-  assert.equal(evidence.worker.version_id, '3af007c5-c67d-45f3-8f8e-ccb350ac76a4');
-  assert.equal(evidence.worker.deployment_id, 'de2a744b-9489-4709-a5a7-cd5404179767');
+  assert.equal(evidence.worker.version_id, '7b25f69e-d30e-4ee4-be0e-c2deafed0f3d');
+  assert.equal(evidence.worker.deployment_id, '7f81a402-38c0-4a72-b883-1088dfd734a6');
   assert.equal(evidence.worker.traffic_percentage, 100);
   assert.equal(evidence.worker.flag_enabled, false);
   assert.equal(evidence.worker.send_email_binding_preserved, true);
@@ -313,7 +313,7 @@ test('Gate 6C.3B records the corrected OFF deployment and authenticated negative
 
   for (const document of [emailArchitecture, growthRoadmap, agentRoadmap]) {
     assert.match(document, /corrected_off_version_verified_negative_probe_passed/);
-    assert.match(document, /3af007c5-c67d-45f3-8f8e-ccb350ac76a4/);
+    assert.match(document, /7b25f69e-d30e-4ee4-be0e-c2deafed0f3d/);
   }
 });
 

@@ -1,7 +1,7 @@
 {
   "contract": "agent-friendly-web.email-review-ready-corrected-off-negative-probe-evidence.v1",
   "status": "corrected_off_version_verified_negative_probe_passed",
-  "recorded_at": "2026-09-03T05:04:10.0541902Z",
+  "recorded_at": "2026-09-03T12:09:25.5016767Z",
   "scope": {
     "project": "agent-friendly-web",
     "repository": "tokenizartinfo-ops/agent-friendly-web",
@@ -12,8 +12,9 @@
   },
   "worker": {
     "name": "agent-friendly-web-web-canary",
-    "version_id": "3af007c5-c67d-45f3-8f8e-ccb350ac76a4",
-    "deployment_id": "de2a744b-9489-4709-a5a7-cd5404179767",
+    "version_id": "7b25f69e-d30e-4ee4-be0e-c2deafed0f3d",
+    "deployment_id": "7f81a402-38c0-4a72-b883-1088dfd734a6",
+    "superseded_corrected_version_id": "3af007c5-c67d-45f3-8f8e-ccb350ac76a4",
     "traffic_percentage": 100,
     "traffic_scope": "isolated_canary_only",
     "flag_enabled": false,

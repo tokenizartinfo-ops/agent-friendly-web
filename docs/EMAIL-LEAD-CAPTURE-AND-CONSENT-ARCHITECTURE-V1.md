@@ -227,7 +227,7 @@ La revision encontro `missing_explicit_to_field_for_fixed_destination_binding`: 
 
 ## Actualizacion Gate 6C.3B fase 5 - 2026-09-03
 
-La correccion fue desplegada en la version canary `3af007c5-c67d-45f3-8f8e-ccb350ac76a4`, deployment `de2a744b-9489-4709-a5a7-cd5404179767`, preservando el binding privado sin revelar su destino y con `AFW_EMAIL_REVIEW_READY_ENABLED=false`. La prueba negativa autenticada mostro envio bloqueado y devolvio `HTTP 404`, `sent=false`, `email_review_ready_unavailable`.
+La correccion fue desplegada finalmente en la version canary `7b25f69e-d30e-4ee4-be0e-c2deafed0f3d`, deployment `7f81a402-38c0-4a72-b883-1088dfd734a6`, preservando el binding privado sin revelar su destino y con `AFW_EMAIL_REVIEW_READY_ENABLED=false`. La prueba negativa autenticada mostro envio bloqueado y devolvio `HTTP 404`, `sent=false`, `email_review_ready_unavailable`.
 
 D1 permanecio en una fila historica (`failed=1`, `sent=0`, `reserved=0`) y no hubo invocaciones nuevas al proveedor ni correos. El estado avanza a `corrected_off_version_verified_negative_probe_passed`. Esto verifica el despliegue cerrado, no la entrega corregida: `remotely_verified_fix` continua en `false` hasta un eventual canary exitoso. Antes de otro intento resta una nueva confirmacion humana exacta en el momento de la accion. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-CORRECTED-OFF-NEGATIVE-PROBE-2026-09-03.md`.
 
