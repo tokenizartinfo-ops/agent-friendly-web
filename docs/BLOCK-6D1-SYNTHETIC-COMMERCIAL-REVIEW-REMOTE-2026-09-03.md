@@ -31,6 +31,7 @@ Produccion publica, correo, pagos, propuestas, datos reales, sitios de clientes 
 6. La vista `/canary/commercial-review` se reviso a 1440 x 900 y 390 x 844. El contenido fue legible, sin superposiciones y con etiquetas humanas de solo lectura.
 7. D1 mantuvo los mismos conteos antes, durante y despues. Cada consulta informo `changes=0`, `changed_db=false` y `rows_written=0`.
 8. Se restauro el baseline apagado mediante el deployment `0adf2853-bfb4-4449-8ccc-849a1364b0d4`. La API volvio a responder HTTP 404 con `synthetic_commercial_review_unavailable`.
+9. El contrato de evidencia final se publico tambien con el interruptor apagado en la version `720db52d-b5c5-4891-81ac-d00927810e50`, deployment `e409d0c5-5f00-4888-829e-9f97b0d77205`. El contrato respondio HTTP 200 con el estado final y la API permanecio bloqueada con HTTP 404.
 
 ## Conteos D1 invariantes
 
