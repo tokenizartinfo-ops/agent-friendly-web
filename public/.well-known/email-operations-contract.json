@@ -1,6 +1,6 @@
 {
   "contract": "agent-friendly-web.email-operations.v1",
-  "status": "remote_database_and_closed_route_ready_binding_pending",
+  "status": "private_bindings_ready_kill_switch_off",
   "updated_at": "2026-09-02",
   "canonical_address": {
     "address": "hello@agentfriendlyweb.dev",
@@ -23,7 +23,7 @@
     "outbound_provider_selected": true,
     "email_provider_configured": true,
     "outbound_delivery_verified": true,
-    "outbound_binding_configured": false,
+    "outbound_binding_configured": true,
     "transactional_case_selected": true,
     "transactional_local_implementation_ready": true,
     "transactional_remote_migration_applied": true,
@@ -52,7 +52,6 @@
   ],
   "blocked_actions": [
     "send_email",
-    "create_send_email_binding",
     "provision_mailbox",
     "configure_email_provider",
     "read_message_body",

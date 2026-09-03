@@ -12,7 +12,7 @@ test('public email operations contract reports verified canaries and the closed 
   const contract = JSON.parse(await read('public/.well-known/email-operations-contract.json'));
 
   assert.equal(contract.contract, 'agent-friendly-web.email-operations.v1');
-  assert.equal(contract.status, 'remote_database_and_closed_route_ready_binding_pending');
+  assert.equal(contract.status, 'private_bindings_ready_kill_switch_off');
   assert.equal(contract.canonical_address.address, 'hello@agentfriendlyweb.dev');
   assert.equal(contract.canonical_address.status, 'inbound_verified');
   assert.deepEqual(contract.aliases.map((item) => item.address), [
@@ -31,7 +31,7 @@ test('public email operations contract reports verified canaries and the closed 
   assert.equal(contract.capabilities.outbound_provider_selected, true);
   assert.equal(contract.capabilities.email_provider_configured, true);
   assert.equal(contract.capabilities.outbound_delivery_verified, true);
-  assert.equal(contract.capabilities.outbound_binding_configured, false);
+  assert.equal(contract.capabilities.outbound_binding_configured, true);
   assert.equal(contract.capabilities.transactional_case_selected, true);
   assert.equal(contract.capabilities.transactional_local_implementation_ready, true);
   assert.equal(contract.capabilities.transactional_remote_migration_applied, true);
@@ -50,7 +50,7 @@ test('public email operations contract reports verified canaries and the closed 
   );
   assert.equal(contract.requires_separate_remote_approval, true);
   assert.ok(contract.blocked_actions.includes('send_email'));
-  assert.ok(contract.blocked_actions.includes('create_send_email_binding'));
+  assert.ok(!contract.blocked_actions.includes('create_send_email_binding'));
   assert.ok(contract.blocked_actions.includes('read_message_body'));
 });
 
@@ -58,7 +58,7 @@ test('review-ready contract is fixed-destination, metadata-only and at-most-once
   const contract = JSON.parse(await read('public/.well-known/email-review-ready-contract.json'));
 
   assert.equal(contract.contract, 'agent-friendly-web.email-review-ready.v1');
-  assert.equal(contract.status, 'remote_database_and_closed_route_ready_binding_pending');
+  assert.equal(contract.status, 'private_bindings_ready_kill_switch_off');
   assert.equal(contract.environment, 'afw_email_review_ready_canary');
   assert.equal(contract.origin, 'https://canary.agentfriendlyweb.dev');
   assert.equal(contract.transactional_case.event, 'internal_review_ready');
@@ -72,7 +72,7 @@ test('review-ready contract is fixed-destination, metadata-only and at-most-once
   assert.equal(contract.capabilities.remote_migration_applied, true);
   assert.equal(contract.capabilities.closed_route_deployed_canary, true);
   assert.equal(contract.capabilities.rate_limit_binding_configured, true);
-  assert.equal(contract.capabilities.outbound_binding_configured, false);
+  assert.equal(contract.capabilities.outbound_binding_configured, true);
   assert.equal(contract.capabilities.outbound_sending, false);
   assert.equal(contract.capabilities.automatic_sending, false);
   assert.equal(contract.capabilities.arbitrary_recipients, false);
@@ -94,7 +94,7 @@ test('Gate 6C.3A documentation records local readiness and a disabled remote bou
     assert.match(document, /Gate 6C\.3B/);
   }
   for (const document of [emailArchitecture, growthRoadmap, agentRoadmap]) {
-    assert.match(document, /remote_database_and_closed_route_ready_binding_pending/);
+    assert.match(document, /private_bindings_ready_kill_switch_off/);
   }
   assert.match(gate, /at-most-once/i);
   assert.match(gate, /metadata-only/i);
@@ -136,6 +136,45 @@ test('Gate 6C.3B phase 1 records the closed remote deployment without email capa
   assert.equal(evidence.database.migration_0006_applied, true);
   assert.equal(evidence.database.delivery_rows, 0);
   assert.equal(evidence.delivery.email_sent, false);
+  assert.equal(evidence.public_origin.modified, false);
+});
+
+test('Gate 6C.3B phase 2 records private bindings with the kill switch still off', async () => {
+  const [gate, evidence] = await Promise.all([
+    read('docs/BLOCK-6C3B-EMAIL-REVIEW-READY-PRIVATE-BINDINGS-2026-09-02.md'),
+    read('docs/evidence/email-review-ready-private-bindings-2026-09-02.json').then(JSON.parse),
+  ]);
+
+  for (const field of [
+    'PROJECT',
+    'REPOSITORY',
+    'ENVIRONMENT',
+    'ORIGIN',
+    'RESOURCE_TYPE',
+    'RESOURCE_ID',
+    'ALLOWED_ACTION',
+    'ROLLBACK',
+  ]) assert.match(gate, new RegExp(field));
+
+  assert.match(gate, /private_bindings_ready_kill_switch_off/);
+  assert.match(gate, /d2ba9701-0c61-4d96-84e1-f5659a9426be/);
+  assert.match(gate, /AFW_EMAIL_REVIEW_READY_ENABLED=false/);
+  assert.match(gate, /destino fijo/i);
+  assert.match(gate, /huella|hash/i);
+  assert.match(gate, /cero filas/i);
+  assert.match(gate, /ningun correo/i);
+
+  assert.equal(evidence.contract, 'agent-friendly-web.email-review-ready-private-bindings-evidence.v1');
+  assert.equal(evidence.status, 'private_bindings_ready_kill_switch_off');
+  assert.equal(evidence.worker.code_version_id, 'd2ba9701-0c61-4d96-84e1-f5659a9426be');
+  assert.equal(evidence.worker.flag_enabled, false);
+  assert.equal(evidence.worker.send_email_binding_configured, true);
+  assert.equal(evidence.worker.destination_restricted, true);
+  assert.equal(evidence.worker.actor_allowlist_secret_configured, true);
+  assert.equal(evidence.worker.secret_value_returned, false);
+  assert.equal(evidence.database.delivery_rows, 0);
+  assert.equal(evidence.delivery.email_sent, false);
+  assert.equal(evidence.delivery.authenticated_application_probe_completed, false);
   assert.equal(evidence.public_origin.modified, false);
 });
 

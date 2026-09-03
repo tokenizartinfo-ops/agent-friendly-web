@@ -209,6 +209,12 @@ La frontera cerrada quedo desplegada en `afw_email_review_ready_canary` con esta
 
 El kill switch continua en `false` y no existe binding `send_email`, destino privado, envio automatico ni segundo correo. Esta fase prepara una infraestructura comprobable, no una capacidad operativa. La fase 2 debe incorporar el destino fijo y la allowlist hash fuera de Git, volver a probar el cierre y mantener el flag OFF antes de considerar un unico canary humano. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-REMOTE-CLOSED-2026-09-02.md`.
 
+## Actualizacion Gate 6C.3B fase 2 - 2026-09-02
+
+El destino fijo y la allowlist de identidad opaca quedaron configurados exclusivamente en Cloudflare, fuera de Git, bajo estado `private_bindings_ready_kill_switch_off`. El destino no se acepta por request ni se publica, el secreto no es recuperable por API y el kill switch continua en `false`.
+
+Access rechazo solicitudes sin identidad, produccion mantuvo la ruta ausente y D1 conservo cero filas. No se envio correo. Falta una sesion humana Access vigente para verificar el `404` autenticado de aplicacion antes de considerar un unico canary controlado. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-PRIVATE-BINDINGS-2026-09-02.md`.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;
