@@ -1,6 +1,6 @@
 # Gate 6D.1 - Revision comercial sintetica local
 
-**Estado:** `planned_not_persisted`; implementacion local lista, interruptor remoto apagado
+**Estado:** `synthetic_commercial_review_verified_kill_switch_off`; implementacion y canary read-only verificados, interruptor remoto apagado
 
 **Fecha:** 2026-09-03
 
@@ -41,8 +41,8 @@ node --test test/synthetic-commercial-review-contract.test.mjs
 
 Las pruebas verifican kill switch, frontera exacta, identidad Access, allowlist, consulta preparada, consentimiento, ausencia de escrituras, referencias opacas y bloqueo de correo, propuestas y pagos.
 
-## Proximo subgate
+## Verificacion remota cerrada
 
-La verificacion remota debe desplegar primero la version con el interruptor apagado. Luego puede habilitarse temporalmente solo en `afw_canary`, confirmar la vista con identidad allowlisted, comparar los conteos D1 antes y despues y volver a apagar el interruptor.
+La verificacion remota se completo en `afw_canary`: rechazo con el interruptor apagado, lectura temporal con identidad Access allowlisted, respuesta `planned_not_persisted`, QA visual de escritorio y movil, conteos D1 invariables y rollback al interruptor apagado. La evidencia detallada vive en `docs/BLOCK-6D1-SYNTHETIC-COMMERCIAL-REVIEW-REMOTE-2026-09-03.md` y `docs/evidence/synthetic-commercial-review-remote-2026-09-03.json`.
 
 Datos reales, persistencia CRM, scoring, propuestas, correo comercial y pagos permanecen fuera de alcance y requieren gates propios.

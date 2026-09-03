@@ -176,7 +176,7 @@ Criterio de salida: un sitio piloto nuevo puede demostrar propiedad y portabilid
 
 ### Gate 6D.1 - puente sintetico de revision
 
-La primera integracion entre captacion y CRM conserva el estado `planned_not_persisted`. Lee exclusivamente el fixture `.invalid` ya consentido, propone su calificacion y muestra una vista privada. No acepta datos reales, no persiste CRM, no envia correo, no crea propuestas, no cobra pagos y no cambia recursos de Tokenizart.
+La primera integracion entre captacion y CRM alcanzo `synthetic_commercial_review_verified_kill_switch_off`. Lee exclusivamente el fixture `.invalid` ya consentido cuando se habilita de forma controlada, propone su calificacion con estado `planned_not_persisted` y muestra una vista privada. El canary real confirmo respuesta saneada, interfaz responsiva, `rows_written=0`, conteos D1 invariables y rollback al interruptor apagado. No acepta datos reales, no persiste CRM, no envia correo, no crea propuestas, no cobra pagos y no cambia recursos de Tokenizart.
 
 ## Gobierno y revision
 

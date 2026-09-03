@@ -235,7 +235,7 @@ El recorrido privado same-origin alcanzo `synthetic_contact_canary_verified_kill
 
 ## Gate 6D.1 - revision comercial sintetica
 
-El primer enlace con CRM Lite queda limitado a `planned_not_persisted`: una vista privada read-only toma solo la solicitud sintetica con consentimiento `requested_plan`, deriva referencias opacas y propone `new -> qualified`. No crea tablas CRM, no persiste la transicion, no envia correos, no crea propuestas y no cobra pagos. El interruptor remoto permanece apagado hasta cerrar el subgate canary con conteos D1 invariables.
+El primer enlace con CRM Lite alcanzo `synthetic_commercial_review_verified_kill_switch_off`. Una vista privada read-only tomo solo la solicitud sintetica con consentimiento `requested_plan`, derivo referencias opacas y propuso `new -> qualified` con estado `planned_not_persisted`. El canary fue verificado con Cloudflare Access en escritorio y movil; D1 conservo exactamente los mismos conteos y registro `rows_written=0`. El interruptor volvio a quedar apagado. No crea tablas CRM, no persiste la transicion, no envia correos, no crea propuestas y no cobra pagos.
 
 ## Referencia competitiva inicial
 

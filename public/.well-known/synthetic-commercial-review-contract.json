@@ -1,6 +1,6 @@
 {
   "contract": "agent-friendly-web.synthetic-commercial-review.v1",
-  "status": "local_ready_remote_disabled",
+  "status": "synthetic_commercial_review_verified_kill_switch_off",
   "updated_at": "2026-09-03",
   "scope": {
     "project": "agent-friendly-web",
@@ -36,5 +36,5 @@
   "requires_allowlisted_subject": true,
   "kill_switch": "AFW_SYNTHETIC_COMMERCIAL_REVIEW_ENABLED",
   "kill_switch_default": "off",
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6D1-SYNTHETIC-COMMERCIAL-REVIEW-LOCAL-2026-09-03.md"
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6D1-SYNTHETIC-COMMERCIAL-REVIEW-REMOTE-2026-09-03.md"
 }

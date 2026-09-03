@@ -22,10 +22,10 @@
 
 ## Tarea 4 - Canary remoto
 
-- [ ] Declarar frontera remota y rollback.
-- [ ] Desplegar con interruptor apagado y probar el rechazo.
-- [ ] Registrar conteos D1 antes de la lectura.
-- [ ] Habilitar temporalmente solo la vista read-only.
-- [ ] Verificar con Access allowlisted.
-- [ ] Confirmar conteos D1 sin cambios.
-- [ ] Volver a apagar el interruptor y registrar evidencia.
+- [x] Declarar frontera remota y rollback.
+- [x] Desplegar con interruptor apagado y probar el rechazo.
+- [x] Registrar conteos D1 antes de la lectura.
+- [x] Habilitar temporalmente solo la vista read-only.
+- [x] Verificar con Access allowlisted.
+- [x] Confirmar conteos D1 sin cambios.
+- [x] Volver a apagar el interruptor y registrar evidencia.
