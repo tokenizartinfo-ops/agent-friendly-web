@@ -231,6 +231,12 @@ La correccion fue desplegada finalmente en la version canary `7b25f69e-d30e-4ee4
 
 D1 permanecio en una fila historica (`failed=1`, `sent=0`, `reserved=0`) y no hubo invocaciones nuevas al proveedor ni correos. El estado avanza a `corrected_off_version_verified_negative_probe_passed`. Esto verifica el despliegue cerrado, no la entrega corregida: `remotely_verified_fix` continua en `false` hasta un eventual canary exitoso. Antes de otro intento resta una nueva confirmacion humana exacta en el momento de la accion. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-CORRECTED-OFF-NEGATIVE-PROBE-2026-09-03.md`.
 
+## Actualizacion Gate 6C.3B fase 6 - 2026-09-03
+
+La version corregida se habilito temporalmente para un unico intento humano aprobado. El proveedor fue invocado una vez y rechazo nuevamente el mensaje; no hubo entrega, recibo ni reintento. El rollback `ce8635ee-03d5-4f21-96c4-46efb886aaf5` restauro inmediatamente la version OFF `7b25f69e-d30e-4ee4-be0e-c2deafed0f3d`. D1 conserva dos filas historicas `failed`, cero `sent` y cero `reserved`; el uso diario del proveedor y Gmail confirman cero correos. El estado vigente es `corrected_single_canary_attempt_failed_no_retry_kill_switch_off`.
+
+La hipotesis `to: undefined` queda descartada como solucion remota suficiente. La siguiente candidata local es `explicit_to_null_with_sanitized_provider_failure_codes`: conserva el destino exclusivamente en el binding y clasifica solo codigos tecnicos permitidos, sin persistir errores crudos. Permanece sin desplegar y sin otro envio. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-SECOND-CANARY-ATTEMPT-2026-09-03.md`.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;

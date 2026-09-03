@@ -44,7 +44,7 @@ test('builds fixed localized text without accepting caller-controlled content', 
     assert.deepEqual(buildEmailReviewReadyMessage({ ...validRequest, locale }), {
       ok: true,
       message: {
-        to: undefined,
+        to: null,
         from: 'hello@agentfriendlyweb.dev',
         replyTo: 'hello@agentfriendlyweb.dev',
         subject: expected[locale].subject,

@@ -154,14 +154,14 @@ test('sends one fixed-template message after reservation and records its receipt
   });
   assert.equal(sentMessages.length, 1);
   assert.deepEqual(sentMessages[0], {
-    to: undefined,
+    to: null,
     from: 'hello@agentfriendlyweb.dev',
     replyTo: 'hello@agentfriendlyweb.dev',
     subject: 'Agent Friendly Web: solicitud lista para revision',
     text: 'Hay una solicitud de Agent Friendly Web lista para revision humana. Referencia: afw-review-ready-20260902-0001.',
   });
   assert.equal('to' in sentMessages[0], true);
-  assert.equal(sentMessages[0].to, undefined);
+  assert.equal(sentMessages[0].to, null);
   assert.equal(marks.length, 1);
   assert.equal(marks[0][1], '00000000-0000-4000-8000-000000000601');
   assert.equal(marks[0][2], 'provider-message-001');
@@ -223,6 +223,35 @@ test('provider failure records one stable code and performs no retry', async () 
   assert.equal(sends, 1);
   assert.equal(failures.length, 1);
   assert.equal(failures[0][2], 'provider_delivery_failed');
+});
+
+test('provider failure classifies allowlisted Cloudflare codes without storing raw details', async () => {
+  const cases = [
+    ['E_FIELD_MISSING', 'provider_field_missing'],
+    ['E_SENDER_NOT_VERIFIED', 'provider_sender_not_verified'],
+    ['E_RECIPIENT_NOT_ALLOWED', 'provider_recipient_not_allowed'],
+    ['E_RATE_LIMIT_EXCEEDED', 'provider_rate_limited'],
+    ['E_INTERNAL_SERVER_ERROR', 'provider_internal_error'],
+    ['PRIVATE_UNEXPECTED_CODE', 'provider_delivery_failed'],
+  ];
+
+  for (const [providerCode, expectedCode] of cases) {
+    const failures = [];
+    const deps = dependencies({
+      markFailed: async (...args) => { failures.push(args); return { updated: true }; },
+    });
+    const error = new Error('private upstream details must not be persisted');
+    error.code = providerCode;
+    const response = await createEmailReviewReadyHandler(deps.overrides)(request(), environment({
+      EMAIL_REVIEW_READY: { async send() { throw error; } },
+    }));
+
+    assert.equal(response.status, 502);
+    assert.deepEqual(await response.json(), { sent: false, code: 'email_review_ready_delivery_failed' });
+    assert.equal(failures.length, 1);
+    assert.equal(failures[0][2], expectedCode);
+    assert.ok(!failures[0].includes(error.message));
+  }
 });
 
 test('missing runtime binding fails closed without reading the body', async () => {

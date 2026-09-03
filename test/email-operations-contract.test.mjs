@@ -12,7 +12,7 @@ test('public email operations contract reports verified canaries and the closed 
   const contract = JSON.parse(await read('public/.well-known/email-operations-contract.json'));
 
   assert.equal(contract.contract, 'agent-friendly-web.email-operations.v1');
-  assert.equal(contract.status, 'corrected_off_version_verified_negative_probe_passed');
+  assert.equal(contract.status, 'corrected_single_canary_attempt_failed_no_retry_kill_switch_off');
   assert.equal(contract.canonical_address.address, 'hello@agentfriendlyweb.dev');
   assert.equal(contract.canonical_address.status, 'inbound_verified');
   assert.deepEqual(contract.aliases.map((item) => item.address), [
@@ -41,11 +41,14 @@ test('public email operations contract reports verified canaries and the closed 
   assert.equal(contract.capabilities.arbitrary_recipients, false);
   assert.equal(contract.capabilities.customer_email_sending, false);
   assert.equal(contract.latest_transactional_canary.email_sent, false);
-  assert.equal(contract.latest_transactional_canary.provider_invocations, 1);
+  assert.equal(contract.latest_transactional_canary.approved_attempts, 2);
+  assert.equal(contract.latest_transactional_canary.provider_invocations, 2);
   assert.equal(contract.latest_transactional_canary.retries, 0);
   assert.equal(contract.latest_transactional_canary.corrected_code_remotely_deployed, true);
   assert.equal(contract.latest_transactional_canary.negative_probe_after_corrected_deploy, true);
   assert.equal(contract.latest_transactional_canary.remotely_verified_fix, false);
+  assert.equal(contract.latest_transactional_canary.next_local_candidate, 'explicit_to_null_with_sanitized_provider_failure_codes');
+  assert.equal(contract.latest_transactional_canary.next_candidate_deployed, false);
   assert.equal(
     contract.outbound_canary_contract,
     'https://agentfriendlyweb.dev/.well-known/email-outbound-canary-contract.json',
@@ -64,7 +67,7 @@ test('review-ready contract is fixed-destination, metadata-only and at-most-once
   const contract = JSON.parse(await read('public/.well-known/email-review-ready-contract.json'));
 
   assert.equal(contract.contract, 'agent-friendly-web.email-review-ready.v1');
-  assert.equal(contract.status, 'corrected_off_version_verified_negative_probe_passed');
+  assert.equal(contract.status, 'corrected_single_canary_attempt_failed_no_retry_kill_switch_off');
   assert.equal(contract.environment, 'afw_email_review_ready_canary');
   assert.equal(contract.origin, 'https://canary.agentfriendlyweb.dev');
   assert.equal(contract.transactional_case.event, 'internal_review_ready');
@@ -83,11 +86,13 @@ test('review-ready contract is fixed-destination, metadata-only and at-most-once
   assert.equal(contract.capabilities.automatic_sending, false);
   assert.equal(contract.capabilities.arbitrary_recipients, false);
   assert.equal(contract.capabilities.customer_sending, false);
-  assert.equal(contract.latest_canary.approved_attempts, 1);
-  assert.equal(contract.latest_canary.provider_invocations, 1);
+  assert.equal(contract.latest_canary.approved_attempts, 2);
+  assert.equal(contract.latest_canary.provider_invocations, 2);
   assert.equal(contract.latest_canary.retries, 0);
   assert.equal(contract.latest_canary.email_sent, false);
-  assert.equal(contract.latest_canary.local_fix, 'explicit_to_undefined');
+  assert.equal(contract.latest_canary.previous_local_fix, 'explicit_to_undefined');
+  assert.equal(contract.latest_canary.next_local_candidate, 'explicit_to_null_with_sanitized_provider_failure_codes');
+  assert.equal(contract.latest_canary.next_candidate_deployed, false);
   assert.equal(contract.latest_canary.corrected_code_remotely_deployed, true);
   assert.equal(contract.latest_canary.negative_probe_after_corrected_deploy, true);
   assert.equal(contract.latest_canary.remotely_verified_fix, false);
@@ -314,6 +319,68 @@ test('Gate 6C.3B records the corrected OFF deployment and authenticated negative
   for (const document of [emailArchitecture, growthRoadmap, agentRoadmap]) {
     assert.match(document, /corrected_off_version_verified_negative_probe_passed/);
     assert.match(document, /7b25f69e-d30e-4ee4-be0e-c2deafed0f3d/);
+  }
+});
+
+test('Gate 6C.3B records the second failed canary and keeps the next diagnostic candidate local', async () => {
+  const [gate, evidence, emailArchitecture, growthRoadmap, agentRoadmap] = await Promise.all([
+    read('docs/BLOCK-6C3B-EMAIL-REVIEW-READY-SECOND-CANARY-ATTEMPT-2026-09-03.md'),
+    read('docs/evidence/email-review-ready-second-canary-attempt-2026-09-03.json').then(JSON.parse),
+    read('docs/EMAIL-LEAD-CAPTURE-AND-CONSENT-ARCHITECTURE-V1.md'),
+    read('docs/GROWTH-AND-MONETIZATION-ROADMAP-2026-08-31.md'),
+    read('docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md'),
+  ]);
+
+  for (const field of [
+    'PROJECT',
+    'REPOSITORY',
+    'ENVIRONMENT',
+    'ORIGIN',
+    'RESOURCE_TYPE',
+    'RESOURCE_ID',
+    'ALLOWED_ACTION',
+    'ROLLBACK',
+  ]) assert.match(gate, new RegExp(field));
+
+  assert.match(gate, /corrected_single_canary_attempt_failed_no_retry_kill_switch_off/);
+  assert.match(gate, /932da22a-5eba-4fee-ab9b-5fc33c7c8027/);
+  assert.match(gate, /7b25f69e-d30e-4ee4-be0e-c2deafed0f3d/);
+  assert.match(gate, /ce8635ee-03d5-4f21-96c4-46efb886aaf5/);
+  assert.match(gate, /dos intentos acumulados/i);
+  assert.match(gate, /to: null/i);
+  assert.match(gate, /sin otro envio/i);
+
+  assert.equal(evidence.contract, 'agent-friendly-web.email-review-ready-second-canary-attempt-evidence.v1');
+  assert.equal(evidence.status, 'corrected_single_canary_attempt_failed_no_retry_kill_switch_off');
+  assert.equal(evidence.scope.project, 'agent-friendly-web');
+  assert.equal(evidence.scope.public_origin_modified, false);
+  assert.equal(evidence.scope.tokenizart_resources_used, false);
+  assert.equal(evidence.worker.enabled_version_id, '932da22a-5eba-4fee-ab9b-5fc33c7c8027');
+  assert.equal(evidence.worker.restored_off_version_id, '7b25f69e-d30e-4ee4-be0e-c2deafed0f3d');
+  assert.equal(evidence.worker.rollback_deployment_id, 'ce8635ee-03d5-4f21-96c4-46efb886aaf5');
+  assert.equal(evidence.worker.flag_enabled_after_attempt, false);
+  assert.equal(evidence.delivery.approved_attempts_cumulative, 2);
+  assert.equal(evidence.delivery.provider_invocations_cumulative, 2);
+  assert.equal(evidence.delivery.retries_cumulative, 0);
+  assert.equal(evidence.delivery.email_sent, false);
+  assert.deepEqual(evidence.database.delivery_rows, {
+    total: 2,
+    reserved: 0,
+    sent: 0,
+    failed: 2,
+  });
+  assert.equal(evidence.provider_checks.daily_sent, 0);
+  assert.equal(evidence.provider_checks.daily_quota, 200);
+  assert.equal(evidence.provider_checks.gmail_exact_subject_matches, 0);
+  assert.equal(evidence.diagnosis.previous_hypothesis_verified, false);
+  assert.equal(evidence.next_local_candidate.explicit_to, 'null');
+  assert.equal(evidence.next_local_candidate.sanitized_provider_failure_codes, true);
+  assert.equal(evidence.next_local_candidate.deployed, false);
+  assert.equal(evidence.next_gate.requires_new_action_time_approval, true);
+
+  for (const document of [emailArchitecture, growthRoadmap, agentRoadmap]) {
+    assert.match(document, /corrected_single_canary_attempt_failed_no_retry_kill_switch_off/);
+    assert.match(document, /explicit_to_null_with_sanitized_provider_failure_codes/);
   }
 });
 
