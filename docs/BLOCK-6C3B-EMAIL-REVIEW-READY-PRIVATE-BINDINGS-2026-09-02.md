@@ -2,7 +2,9 @@
 
 **Fecha:** 2026-09-02
 
-**Estado:** `private_bindings_ready_kill_switch_off`
+**Estado inicial:** `private_bindings_ready_kill_switch_off`
+
+**Estado posterior verificado:** `authenticated_negative_probe_verified_kill_switch_off`
 
 ## Declaracion de frontera
 
@@ -34,11 +36,11 @@ La identidad se derivo dentro de Cloudflare a partir de una unica aplicacion, un
 - D1 mantuvo cero filas de entregas, cero lecturas de fila y cero escrituras;
 - ningun correo fue preparado, enviado ni reintentado.
 
-La comprobacion autenticada del `404` de aplicacion queda pendiente porque la sesion humana de Access habia vencido. No se sustituyo esa identidad con cookies, tokens, credenciales ni un service token artificial.
+La comprobacion autenticada se completo posteriormente con una sesion humana Access valida. El diagnostico de aplicacion confirmo `verification_status=verified`; la prueba negativa devolvio `404`, `sent=false` y `email_review_ready_unavailable`; D1 conservo cero entregas. La evidencia posterior vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-AUTHENTICATED-NEGATIVE-PROBE-2026-09-02.md`.
 
 ## Limite del gate
 
-Este estado instala capacidad privada pero no la habilita. El proximo paso requiere que el operador humano inicie sesion en el canary, comprobar el `404` autenticado con el flag apagado y recien despues evaluar un unico correo controlado. La capacidad debe volver a `false` inmediatamente despues de esa prueba.
+Este estado instala capacidad privada pero no la habilita. La prueba negativa autenticada ya fue superada. El proximo paso requiere confirmacion humana en el momento de la accion para evaluar un unico correo controlado; la capacidad debe volver a `false` inmediatamente despues de esa prueba.
 
 No habilita correo a clientes, destinatarios arbitrarios, marketing, autorespuestas, reintentos automaticos, lectura entrante, adjuntos, CRM, billing ni automatizacion.
 

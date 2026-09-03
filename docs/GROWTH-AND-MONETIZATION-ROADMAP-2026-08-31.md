@@ -63,7 +63,7 @@ La version publica permite completar y revisar localmente la solicitud, pero no 
 
 **Direccion canonica candidata:** `hello@agentfriendlyweb.dev`.
 
-**Estado actual:** el estado previo `planned_draft_only` avanzo a `inbound_canary_verified`. Gate 6C.1 tiene destino privado verificado, DNS de Email Routing y reglas entrantes activas para `hello@`, `hola@` y `ola@`; una prueba externa confirmo una entrega por alias, cero entregas para `no-reply@` y catch-all deshabilitado. Gate 6C.2B incorporo el dominio remitente, verifico SPF/DKIM/DMARC y recibio un unico canary humano. Gate 6C.3A selecciono e implemento localmente un aviso interno listo para revision. Gate 6C.3B fase 1 desplego la ruta cerrada, D1 migrada y rate limiter en el canary con flag OFF; fase 2 incorporo el destino fijo y la identidad opaca fuera de Git. El estado es `private_bindings_ready_kill_switch_off`: envios, billing, marketing y automatizaciones permanecen OFF.
+**Estado actual:** el estado previo `planned_draft_only` avanzo a `inbound_canary_verified`. Gate 6C.1 tiene destino privado verificado, DNS de Email Routing y reglas entrantes activas para `hello@`, `hola@` y `ola@`; una prueba externa confirmo una entrega por alias, cero entregas para `no-reply@` y catch-all deshabilitado. Gate 6C.2B incorporo el dominio remitente, verifico SPF/DKIM/DMARC y recibio un unico canary humano. Gate 6C.3A selecciono e implemento localmente un aviso interno listo para revision. Gate 6C.3B desplego la ruta cerrada, D1 migrada, rate limiter, destino fijo e identidad opaca fuera de Git y supero la prueba negativa autenticada. El estado es `authenticated_negative_probe_verified_kill_switch_off`: envios, billing, marketing y automatizaciones permanecen OFF.
 
 El cierre comprobado de Gate 6C.2B se conserva como antecedente `human_canary_verified_binding_blocked`; Gate 6C.3A agrega preparacion local, no reemplaza ni repite aquel envio.
 
@@ -86,7 +86,8 @@ La secuencia remota se divide para reducir riesgo:
 - **Gate 6C.2B:** cerrado el 2026-09-02 con dominio, seis DNS y un unico canary a `verified_destination_1`; SPF, DKIM y DMARC pasaron. No se dejo binding ni automatizacion activa.
 - **Gate 6C.3A:** caso `internal_review_ready` seleccionado y preparado localmente con template fijo ESP/ENG/POR, destino fijo por binding, semantica `at-most-once`, idempotencia, rate limit, kill switch y auditoria `metadata-only`. No fue desplegado.
 - **Gate 6C.3B fase 1:** cerrado sobre `afw_email_review_ready_canary`: Access exacto, D1 aislada, migracion `0006`, rate limiter y deploy con flag OFF. No existe binding `send_email` y no se envio correo.
-- **Gate 6C.3B fase 2:** destino fijo y allowlist hash provisionados fuera de Git; Access sin identidad responde `302`, produccion `404`, D1 conserva cero filas y el flag sigue OFF. Falta el probe autenticado antes de evaluar un unico canary humano controlado.
+- **Gate 6C.3B fase 2:** destino fijo y allowlist hash provisionados fuera de Git; Access sin identidad responde `302`, produccion `404`, D1 conserva cero filas y el flag sigue OFF.
+- **Gate 6C.3B fase 3:** Access y la aplicacion validaron al operador; la prueba negativa devolvio `404`, `sent=false`, `email_review_ready_unavailable`, sin invocar proveedor ni escribir D1. Falta una confirmacion humana en el momento de la accion antes de un unico canary fijo.
 
 ### Gate 6D - Ventas y CRM ligero
 

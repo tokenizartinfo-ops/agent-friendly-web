@@ -16,7 +16,12 @@ export async function GET(request: NextRequest) {
   const token = assertion;
   const teamDomain = env.ACCESS_TEAM_DOMAIN || '';
   const audience = env.ACCESS_AUD || '';
-  const result = await verifyCloudflareAccessJwt({ token, teamDomain, audience });
+  const result = await verifyCloudflareAccessJwt({
+    token,
+    teamDomain,
+    audience,
+    diagnostics: true,
+  });
   const actorSubjectHash = result.ok
     ? await hashAccessSubject(result.identity.userId)
     : null;
@@ -26,6 +31,7 @@ export async function GET(request: NextRequest) {
     assertion_header_present: Boolean(assertion),
     access_configuration_present: Boolean(teamDomain && audience),
     verification_status: result.ok ? 'verified' : 'rejected',
+    verification_diagnostic: result.ok ? null : result.diagnosticCode,
     actor_subject_hash: actorSubjectHash,
   }, {
     status: result.ok ? 200 : 403,

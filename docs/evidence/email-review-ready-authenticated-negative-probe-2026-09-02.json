@@ -1,0 +1,55 @@
+{
+  "contract": "agent-friendly-web.email-review-ready-authenticated-negative-probe-evidence.v1",
+  "status": "authenticated_negative_probe_verified_kill_switch_off",
+  "observed_at": "2026-09-02",
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_email_review_ready_canary",
+  "origin": "https://canary.agentfriendlyweb.dev",
+  "worker": {
+    "name": "agent-friendly-web-web-canary",
+    "previous_version_id": "40baec0c-b832-4d18-b46a-a7c97cd1719e",
+    "deployed_version_id": "189d6cd1-b70c-4552-aa1c-3e0101b35911",
+    "traffic_percent_within_isolated_canary": 100,
+    "flag_enabled": false,
+    "access_assertion_present": true,
+    "access_application_verification": "verified",
+    "access_verification_diagnostic": "none",
+    "send_email_binding_configured": true,
+    "destination_restricted": true,
+    "actor_allowlist_secret_configured": true
+  },
+  "negative_probe": {
+    "path": "/canary/email-review-ready?probe=negative",
+    "internal_http_status": 404,
+    "sent": false,
+    "code": "email_review_ready_unavailable",
+    "arbitrary_destination_accepted": false,
+    "arbitrary_content_accepted": false,
+    "provider_invoked": false
+  },
+  "database": {
+    "name": "agent-friendly-web-web-canary",
+    "database_id": "2b518988-eacb-4c31-b760-4e58c3c0285b",
+    "delivery_rows": 0,
+    "rows_written_by_verification_query": 0,
+    "changed_by_verification_query": false
+  },
+  "verification": {
+    "specific_tests_passed": 13,
+    "full_tests_passed": 436,
+    "lint_errors": 0,
+    "build_passed": true
+  },
+  "delivery": {
+    "email_sent": false,
+    "retry_attempted": false,
+    "recipient_value_published": false,
+    "actor_value_published": false
+  },
+  "public_origin": {
+    "origin": "https://agentfriendlyweb.dev",
+    "modified": false
+  },
+  "next_gate": "one_human_confirmed_fixed_template_canary_then_immediate_disable"
+}

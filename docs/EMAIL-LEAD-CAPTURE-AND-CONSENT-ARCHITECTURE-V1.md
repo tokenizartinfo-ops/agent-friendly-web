@@ -213,6 +213,10 @@ El kill switch continua en `false` y no existe binding `send_email`, destino pri
 
 El destino fijo y la allowlist de identidad opaca quedaron configurados exclusivamente en Cloudflare, fuera de Git, bajo estado `private_bindings_ready_kill_switch_off`. El destino no se acepta por request ni se publica, el secreto no es recuperable por API y el kill switch continua en `false`.
 
+## Actualizacion Gate 6C.3B fase 3 - 2026-09-02
+
+La identidad humana Access y la validacion JWT de aplicacion quedaron comprobadas. Una superficie privada sin campos libres ejecuto el contrato fijo con el kill switch apagado y obtuvo `404 email_review_ready_unavailable`, `sent=false`; la consulta agregada posterior confirmo cero entregas y cero escrituras en D1. El estado avanza a `authenticated_negative_probe_verified_kill_switch_off`. Un unico canary real requiere confirmacion humana en el momento de la accion y deshabilitacion inmediata posterior.
+
 Access rechazo solicitudes sin identidad, produccion mantuvo la ruta ausente y D1 conservo cero filas. No se envio correo. Falta una sesion humana Access vigente para verificar el `404` autenticado de aplicacion antes de considerar un unico canary controlado. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-PRIVATE-BINDINGS-2026-09-02.md`.
 
 ## Pruebas negativas obligatorias
