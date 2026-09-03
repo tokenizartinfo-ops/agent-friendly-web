@@ -321,6 +321,10 @@ Estos umbrales son hipotesis de arranque, no benchmarks de mercado. Se revisan c
 
 ## Documentos relacionados
 
+### Gate 6D.2 - primera persistencia CRM sintetica
+
+El Gate 6D.2 incorpora una frontera privada para guardar exactamente una oportunidad sintetica y su transicion a `qualified`. Es metadata-only, exige identidad Access allowlisted y replay idempotente, y mantiene apagadas las capacidades de correo, propuesta, pago y modificacion de sitios. La captacion real sigue cerrada hasta medir esta prueba en `afw_canary`, restaurar el kill switch y registrar evidencia D1 antes/despues.
+
 - `docs/COMPANY-BUILDING-AND-CAPITAL-ROADMAP-2026-09-02.md`
 - `docs/FOUNDER-NARRATIVE-AND-BRAND-FOUNDATION-V1.md`
 - `docs/SERVICE-DELIVERY-AND-VALUE-CHAIN-MAP-V1.md`

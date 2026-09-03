@@ -325,3 +325,55 @@ export const emailTransactionalDeliveries = sqliteTable(
     index('email_transactional_deliveries_status_created_idx').on(table.status, table.createdAt),
   ],
 );
+
+export const crmOpportunities = sqliteTable(
+  'crm_opportunities',
+  {
+    id: text('id').primaryKey(),
+    contactRef: text('contact_ref').notNull(),
+    domain: text('domain').notNull(),
+    segment: text('segment').notNull(),
+    problem: text('problem').notNull(),
+    source: text('source').notNull(),
+    locale: text('locale').notNull(),
+    stage: text('stage').notNull().default('new'),
+    ownerContext: text('owner_context').notNull(),
+    maintainerContext: text('maintainer_context').notNull(),
+    scopeCodesJson: text('scope_codes_json').notNull().default('[]'),
+    estimatedValueBand: text('estimated_value_band').notNull().default('unknown'),
+    nextAction: text('next_action').notNull(),
+    nextActionAt: text('next_action_at').notNull().default(''),
+    evidenceRefsJson: text('evidence_refs_json').notNull().default('[]'),
+    lossReason: text('loss_reason').notNull().default(''),
+    actorSubjectHash: text('actor_subject_hash').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    requestHash: text('request_hash').notNull(),
+    createdAt: text('created_at').notNull(),
+    updatedAt: text('updated_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('crm_opportunities_actor_idempotency_unique').on(table.actorSubjectHash, table.idempotencyKey),
+    index('crm_opportunities_actor_stage_updated_idx').on(table.actorSubjectHash, table.stage, table.updatedAt),
+  ],
+);
+
+export const crmTransitionEvents = sqliteTable(
+  'crm_transition_events',
+  {
+    id: text('id').primaryKey(),
+    opportunityId: text('opportunity_id').notNull(),
+    actorSubjectHash: text('actor_subject_hash').notNull(),
+    fromStage: text('from_stage').notNull(),
+    toStage: text('to_stage').notNull(),
+    reasonCode: text('reason_code').notNull().default(''),
+    evidenceRefsJson: text('evidence_refs_json').notNull().default('[]'),
+    idempotencyKey: text('idempotency_key').notNull(),
+    requestHash: text('request_hash').notNull(),
+    createdAt: text('created_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('crm_transition_events_actor_idempotency_unique').on(table.actorSubjectHash, table.idempotencyKey),
+    index('crm_transition_events_opportunity_created_idx').on(table.opportunityId, table.createdAt),
+    index('crm_transition_events_actor_created_idx').on(table.actorSubjectHash, table.createdAt),
+  ],
+);

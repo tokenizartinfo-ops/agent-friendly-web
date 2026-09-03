@@ -40,6 +40,9 @@ test('web Worker config isolates canary and production without attaching traffic
   assert.equal(config.vars.AFW_SYNTHETIC_COMMERCIAL_REVIEW_ENABLED, 'false');
   assert.equal(canary.vars.AFW_SYNTHETIC_COMMERCIAL_REVIEW_ENABLED, 'false');
   assert.equal(production.vars.AFW_SYNTHETIC_COMMERCIAL_REVIEW_ENABLED, 'false');
+  assert.equal(config.vars.AFW_SYNTHETIC_CRM_PERSISTENCE_ENABLED, 'false');
+  assert.equal(canary.vars.AFW_SYNTHETIC_CRM_PERSISTENCE_ENABLED, 'false');
+  assert.equal(production.vars.AFW_SYNTHETIC_CRM_PERSISTENCE_ENABLED, 'false');
   assert.equal(canary.vars.AFW_SYNTHETIC_CONTACT_TURNSTILE_SITE_KEY, '1x00000000000000000000AA');
   assert.equal(canary.vars.AFW_SYNTHETIC_CONTACT_TURNSTILE_SECRET, '1x0000000000000000000000000000000AA');
   assert.equal(config.vars.AFW_SYNTHETIC_CONTACT_TURNSTILE_SITE_KEY, undefined);
