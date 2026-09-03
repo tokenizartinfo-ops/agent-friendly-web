@@ -49,6 +49,14 @@ test('web Worker config isolates canary and production without attaching traffic
   assert.equal(config.send_email, undefined);
   assert.equal(canary.send_email, undefined);
   assert.equal(production.send_email, undefined);
+  assert.deepEqual(canary.unsafe?.bindings, [
+    {
+      name: 'EMAIL_REVIEW_READY',
+      type: 'inherit',
+    },
+  ]);
+  assert.equal(config.unsafe, undefined);
+  assert.equal(production.unsafe, undefined);
   assert.equal(config.ratelimits, undefined);
   assert.deepEqual(canary.ratelimits, [
     {

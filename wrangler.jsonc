@@ -63,6 +63,14 @@
           }
         }
       ],
+      "unsafe": {
+        "bindings": [
+          {
+            "name": "EMAIL_REVIEW_READY",
+            "type": "inherit"
+          }
+        ]
+      },
       "vars": {
         "ACCESS_TEAM_DOMAIN": "tokenizart.cloudflareaccess.com",
         "ACCESS_AUD": "5e6f80fdd77e026d6e9f513d4614d22e10cba0f7a90ea4bf7a10b27d6de67a45",
