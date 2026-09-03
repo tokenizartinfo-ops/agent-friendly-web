@@ -226,6 +226,18 @@ test('derives a fixed non-sensitive contact and prepares but never sends its rev
   });
 });
 
+test('uses Cloudflare test-token semantics only with the exact official pass secret', async () => {
+  const observations = {};
+  const handler = createSyntheticContactCanaryHandler(successOverrides(observations));
+  const response = await handler(request(), await baseEnv({
+    AFW_SYNTHETIC_CONTACT_TURNSTILE_SECRET: '1x0000000000000000000000000000000AA',
+  }));
+
+  assert.equal(response.status, 201);
+  assert.equal(observations.turnstile.action, '');
+  assert.equal(observations.turnstile.hostname, '');
+});
+
 test('returns a duplicate receipt without creating a second logical request', async () => {
   const handler = createSyntheticContactCanaryHandler({
     ...successOverrides(),
