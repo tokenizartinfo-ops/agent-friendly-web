@@ -1,7 +1,7 @@
 # Gate 6C.2A - Email outbound canary local
 
-**Fecha:** 2026-09-02  
-**Estado:** `provider_selected_remote_unconfigured`  
+**Fecha:** 2026-09-02
+**Estado:** `provider_selected_remote_unconfigured`
 **Resultado:** proveedor seleccionado, baseline remoto saneado y preflight local verificado; salida remota OFF
 
 ## Frontera declarada

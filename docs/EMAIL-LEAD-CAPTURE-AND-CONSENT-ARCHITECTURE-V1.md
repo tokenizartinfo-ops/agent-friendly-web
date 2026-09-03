@@ -245,6 +245,12 @@ La prueba negativa autenticada devolvio `HTTP 404`, `sent=false` y `email_review
 
 La trazabilidad conserva como antecedentes `single_canary_attempt_failed_no_retry_kill_switch_off`, `missing_explicit_to_field_for_fixed_destination_binding`, `corrected_off_version_verified_negative_probe_passed` y `corrected_single_canary_attempt_failed_no_retry_kill_switch_off`. Ninguno de esos hitos reemplaza el estado vigente.
 
+## Actualizacion Gate 6C.3B fase 8 - 2026-09-03
+
+La candidata `to: null` se habilito una sola vez tras confirmacion humana puntual. La version ON `b9949bbc-685b-406d-abe5-905ae9a9e394`, deployment `ca3d0d7c-2d27-4099-9e28-f69070274519`, devolvio `HTTP 502`, `sent=false` y `email_review_ready_delivery_failed`. No hubo entrega ni reintento. El rollback `b96030cd-0e9b-4ec8-bd17-8c2807b829b0` restauro de inmediato la version OFF `8d759339-5caf-4492-bf6a-ff6a2b3f9801`; D1 quedo en tres `failed`, cero `sent` y cero `reserved`.
+
+El estado vigente es `third_canary_failed_private_destination_candidate_local_off`. Como el runtime no confirmo la sustitucion documentada de `null` y no devolvio un codigo especifico, se preparo por TDD `explicit_to_private_runtime_destination`: la direccion procede de una variable privada del Worker, nunca del request, y el binding mantiene la restriccion al mismo destino. La candidata paso `16/16` pruebas especificas, permanece local y no genero un cuarto intento. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-THIRD-CANARY-ATTEMPT-2026-09-03.md`.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;

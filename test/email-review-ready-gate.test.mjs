@@ -35,6 +35,7 @@ function environment(overrides = {}) {
     ACCESS_TEAM_DOMAIN: 'tokenizart.cloudflareaccess.com',
     ACCESS_AUD: 'a'.repeat(64),
     AFW_EMAIL_REVIEW_READY_ALLOWED_SUBJECT_HASHES: actorHash,
+    AFW_EMAIL_REVIEW_READY_DESTINATION: 'review-destination@example.com',
     DB: { prepare() {} },
     EMAIL_REVIEW_READY: { async send() { return { messageId: 'provider-message-001' }; } },
     AFW_EMAIL_REVIEW_READY_RATE_LIMITER: { async limit() { return { success: true }; } },
@@ -154,14 +155,14 @@ test('sends one fixed-template message after reservation and records its receipt
   });
   assert.equal(sentMessages.length, 1);
   assert.deepEqual(sentMessages[0], {
-    to: null,
+    to: 'review-destination@example.com',
     from: 'hello@agentfriendlyweb.dev',
     replyTo: 'hello@agentfriendlyweb.dev',
     subject: 'Agent Friendly Web: solicitud lista para revision',
     text: 'Hay una solicitud de Agent Friendly Web lista para revision humana. Referencia: afw-review-ready-20260902-0001.',
   });
   assert.equal('to' in sentMessages[0], true);
-  assert.equal(sentMessages[0].to, null);
+  assert.equal(sentMessages[0].to, 'review-destination@example.com');
   assert.equal(marks.length, 1);
   assert.equal(marks[0][1], '00000000-0000-4000-8000-000000000601');
   assert.equal(marks[0][2], 'provider-message-001');
@@ -265,4 +266,37 @@ test('missing runtime binding fails closed without reading the body', async () =
   assert.equal(response.status, 503);
   assert.deepEqual(await response.json(), { sent: false, code: 'email_review_ready_misconfigured' });
   assert.equal(bodyRead, false);
+});
+
+test('missing or malformed private destination fails closed before rate limit, body read or reservation', async () => {
+  for (const destination of [
+    undefined,
+    'not-an-email',
+    'review@example.com,',
+    'review@example..com',
+  ]) {
+    let rateLimited = false;
+    let bodyRead = false;
+    let reserved = false;
+    const handler = createEmailReviewReadyHandler({
+      verifyAccessJwt: async () => ({ ok: true, identity: { userId: actorId } }),
+      readJson: async () => { bodyRead = true; },
+      reserve: async () => { reserved = true; },
+    });
+    const response = await handler(request(), environment({
+      AFW_EMAIL_REVIEW_READY_DESTINATION: destination,
+      AFW_EMAIL_REVIEW_READY_RATE_LIMITER: {
+        async limit() {
+          rateLimited = true;
+          return { success: true };
+        },
+      },
+    }));
+
+    assert.equal(response.status, 503);
+    assert.deepEqual(await response.json(), { sent: false, code: 'email_review_ready_misconfigured' });
+    assert.equal(rateLimited, false);
+    assert.equal(bodyRead, false);
+    assert.equal(reserved, false);
+  }
 });

@@ -1,7 +1,7 @@
 # Gate 6C.2B - Email outbound remote canary
 
-**Fecha:** 2026-09-02  
-**Estado:** `human_canary_verified_binding_blocked`  
+**Fecha:** 2026-09-02
+**Estado:** `human_canary_verified_binding_blocked`
 **Resultado:** dominio remitente y autenticacion verificados; un unico canary humano recibido; envio recurrente OFF
 
 ## Frontera ejecutada

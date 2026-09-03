@@ -25,6 +25,7 @@ test('accepts only the closed internal review-ready request contract', () => {
 });
 
 test('builds fixed localized text without accepting caller-controlled content', () => {
+  const privateDestination = 'review-destination@example.com';
   const expected = {
     es: {
       subject: 'Agent Friendly Web: solicitud lista para revision',
@@ -41,10 +42,10 @@ test('builds fixed localized text without accepting caller-controlled content', 
   };
 
   for (const locale of ['es', 'en', 'pt']) {
-    assert.deepEqual(buildEmailReviewReadyMessage({ ...validRequest, locale }), {
+    assert.deepEqual(buildEmailReviewReadyMessage({ ...validRequest, locale }, privateDestination), {
       ok: true,
       message: {
-        to: null,
+        to: privateDestination,
         from: 'hello@agentfriendlyweb.dev',
         replyTo: 'hello@agentfriendlyweb.dev',
         subject: expected[locale].subject,
@@ -57,6 +58,23 @@ test('builds fixed localized text without accepting caller-controlled content', 
         locale,
         purpose: validRequest.purpose,
       },
+    });
+  }
+});
+
+test('fails closed when the private runtime destination is missing or malformed', () => {
+  for (const destination of [
+    undefined,
+    null,
+    '',
+    'not-an-email',
+    'two@example.com,other@example.com',
+    'review@example.com,',
+    'review@example..com',
+  ]) {
+    assert.deepEqual(buildEmailReviewReadyMessage(validRequest, destination), {
+      ok: false,
+      code: 'private_destination_unavailable',
     });
   }
 });
