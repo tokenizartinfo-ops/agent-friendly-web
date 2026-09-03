@@ -58,7 +58,7 @@
 - [x] **Step 1: probar primero el contrato machine-readable y el estado exacto.**
 - [x] **Step 2: documentar capacidades verificadas y limites sin presentarlos como publicos.**
 - [x] **Step 3: ejecutar pruebas dirigidas, `npm test`, `npm run lint`, `npm run build` y dry-run canary.**
-- [ ] **Step 4: revisar diff, secretos y fronteras; commit, push y CI del Draft PR.**
+- [x] **Step 4: revisar diff, secretos y fronteras; commit, push y CI del Draft PR.**
 
 ### Task 4: Canary remoto con una solicitud sintetica
 
