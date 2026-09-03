@@ -51,4 +51,6 @@ No se devuelven `contact_ref`, hashes de actor, claves de idempotencia, hashes d
 
 ## Estado
 
-`local_ready_remote_disabled`. La implementacion y sus pruebas estan preparadas en el Draft PR #49. Una ventana remota posterior debe comenzar y terminar con el flag apagado, verificar lectura autenticada, confirmar `rows_written=0` y conservar los conteos D1.
+`synthetic_crm_readonly_verified_kill_switch_off`. La ventana remota comenzo con el flag apagado, habilito temporalmente una sola lectura autenticada y termino otra vez en OFF. La interfaz mostro exclusivamente el dominio sintetico `example.invalid`, la etapa `qualified`, los dos alcances permitidos y la transicion `new -> qualified`.
+
+La consulta posterior mantuvo una oportunidad y una transicion, con `rows_written=0`. Produccion publica, contactos reales, correo, propuestas, pagos, sitios de clientes y recursos Tokenizart quedaron fuera de alcance. La evidencia verificable vive en `public/.well-known/synthetic-crm-readonly-evidence.json` y el acta remota en `docs/BLOCK-6D3-SYNTHETIC-CRM-READONLY-REMOTE-2026-09-03.md`.

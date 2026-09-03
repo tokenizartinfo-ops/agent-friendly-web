@@ -184,7 +184,7 @@ El Gate 6D.2 alcanzo `synthetic_crm_persistence_verified_kill_switch_off`. Las t
 
 ### Gate 6D.3 - lectura humana de la oportunidad sintetica
 
-El incremento esta `local_ready_remote_disabled`. Agrega una bandeja privada que lee la unica oportunidad sintetica del actor Access y muestra una linea temporal sin exponer hashes, referencias internas o PII. No puede editar, avanzar etapas ni disparar correo, propuesta, pago o implementacion. Su eventual verificacion remota permanece limitada a `afw_canary` y debe terminar con el flag OFF.
+El incremento alcanzo `synthetic_crm_readonly_verified_kill_switch_off`. La bandeja privada leyo la unica oportunidad sintetica del actor Access y mostro una linea temporal sin exponer hashes, referencias internas o PII. La comprobacion remota registro `rows_written=0`, mantuvo los conteos D1 y devolvio el canary a OFF. No puede editar, avanzar etapas ni disparar correo, propuesta, pago o implementacion; la captacion real sigue cerrada.
 
 ## Gobierno y revision
 

@@ -1,6 +1,6 @@
 {
   "contract": "agent-friendly-web.synthetic-crm-readonly.v1",
-  "status": "local_ready_remote_disabled",
+  "status": "synthetic_crm_readonly_verified_kill_switch_off",
   "updated_at": "2026-09-03",
   "scope": {
     "environment": "afw_canary",
@@ -24,5 +24,11 @@
     "noindex": true,
     "no_store": true
   },
-  "kill_switch_default": "off"
+  "kill_switch_default": "off",
+  "remote_verification": {
+    "observed_at": "2026-09-03T21:04:34Z",
+    "temporary_on_version": "6d7abfe4-5e51-41ce-ae76-9e5793081f1d",
+    "verified_rollback_version": "2d077362-0811-4fc1-96c6-fad8b46b598c",
+    "d1_rows_written": 0
+  }
 }

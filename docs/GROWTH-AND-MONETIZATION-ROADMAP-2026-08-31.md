@@ -103,7 +103,7 @@ La secuencia remota se divide para reducir riesgo:
 
 ### Gate 6D - Ventas y CRM ligero
 
-**Estado actual:** la maquina de estados conserva su contrato base `local_planning_only`; Gate 6D.1 verifico planificacion sintetica read-only; Gate 6D.2 persistio una sola oportunidad sintetica y restauro el kill switch OFF; Gate 6D.3 prepara localmente una bandeja privada read-only. Datos reales, email, propuestas y pagos permanecen deshabilitados.
+**Estado actual:** la maquina de estados conserva su contrato base `local_planning_only`; Gate 6D.1 verifico planificacion sintetica read-only; Gate 6D.2 persistio una sola oportunidad sintetica y restauro el kill switch OFF; Gate 6D.3 verifico remotamente su bandeja privada read-only y tambien restauro el kill switch OFF. Datos reales, email, propuestas y pagos permanecen deshabilitados.
 
 Estados minimos:
 
@@ -327,7 +327,7 @@ El Gate 6D.2 alcanzo `synthetic_crm_persistence_verified_kill_switch_off`: guard
 
 ### Gate 6D.3 - bandeja CRM sintetica read-only
 
-La bandeja privada esta `local_ready_remote_disabled`. Lee exclusivamente la oportunidad `example.invalid` del actor autenticado y presenta su etapa, alcance, siguiente paso e historia sin devolver referencias internas de seguridad. No contiene formularios ni controles de mutacion y no puede cambiar etapa, enviar correo, crear propuestas, cobrar pagos o modificar sitios. Una prueba remota posterior debe mantener la frontera Access, confirmar una sola fila y demostrar `rows_written=0` antes de volver a OFF.
+La bandeja privada alcanzo `synthetic_crm_readonly_verified_kill_switch_off`. Leyo exclusivamente la oportunidad `example.invalid` del actor autenticado y presento su etapa, alcance, siguiente paso e historia sin devolver referencias internas de seguridad. No contiene formularios ni controles de mutacion; la prueba remota conservo una sola oportunidad y una transicion, demostro `rows_written=0` y devolvio el Worker a OFF. No habilita cambio de etapa, correo, propuestas, pagos, sitios de clientes ni captacion real.
 
 - `docs/COMPANY-BUILDING-AND-CAPITAL-ROADMAP-2026-09-02.md`
 - `docs/FOUNDER-NARRATIVE-AND-BRAND-FOUNDATION-V1.md`
