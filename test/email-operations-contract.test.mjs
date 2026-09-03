@@ -38,9 +38,9 @@ test('public email operations contract reports verified canaries and the closed 
   assert.equal(contract.capabilities.transactional_route_deployed_canary, true);
   assert.equal(contract.capabilities.transactional_rate_limit_binding_configured, true);
   assert.equal(contract.capabilities.private_review_ready_adapter_local_ready, true);
-  assert.equal(contract.capabilities.private_review_ready_integration_deployed, false);
+  assert.equal(contract.capabilities.private_review_ready_integration_deployed, true);
   assert.equal(contract.capabilities.synthetic_private_contact_local_ready, true);
-  assert.equal(contract.capabilities.synthetic_private_contact_remotely_verified, false);
+  assert.equal(contract.capabilities.synthetic_private_contact_remotely_verified, true);
   assert.equal(contract.capabilities.transactional_automatic_sending, false);
   assert.equal(contract.capabilities.arbitrary_recipients, false);
   assert.equal(contract.capabilities.customer_email_sending, false);
@@ -98,9 +98,9 @@ test('review-ready contract is fixed-destination, metadata-only and at-most-once
   assert.equal(contract.capabilities.rate_limit_binding_configured, true);
   assert.equal(contract.capabilities.outbound_binding_configured, true);
   assert.equal(contract.capabilities.private_flow_adapter_local_ready, true);
-  assert.equal(contract.capabilities.private_flow_integration_deployed, false);
+  assert.equal(contract.capabilities.private_flow_integration_deployed, true);
   assert.equal(contract.capabilities.synthetic_contact_canary_local_ready, true);
-  assert.equal(contract.capabilities.synthetic_contact_canary_remotely_verified, false);
+  assert.equal(contract.capabilities.synthetic_contact_canary_remotely_verified, true);
   assert.equal(contract.capabilities.outbound_sending, false);
   assert.equal(contract.capabilities.automatic_sending, false);
   assert.equal(contract.capabilities.arbitrary_recipients, false);
@@ -123,11 +123,11 @@ test('review-ready contract is fixed-destination, metadata-only and at-most-once
   assert.ok(contract.blocked_actions.includes('send_without_persisted_private_request'));
 });
 
-test('synthetic contact canary contract is private, fixed and locally ready without claiming remote verification', async () => {
+test('synthetic contact canary contract reports the verified private canary and closed runtime', async () => {
   const contract = JSON.parse(await read('public/.well-known/synthetic-contact-canary-contract.json'));
 
   assert.equal(contract.contract, 'agent-friendly-web.synthetic-contact-canary.v1');
-  assert.equal(contract.status, 'synthetic_contact_canary_local_ready_remote_disabled');
+  assert.equal(contract.status, 'synthetic_contact_canary_verified_kill_switch_off');
   assert.equal(contract.scope.project, 'agent-friendly-web');
   assert.equal(contract.scope.environment, 'afw_canary');
   assert.equal(contract.scope.origin, 'https://canary.agentfriendlyweb.dev');
@@ -136,12 +136,14 @@ test('synthetic contact canary contract is private, fixed and locally ready with
   assert.equal(contract.input.accepts_free_text, false);
   assert.equal(contract.fixture.reserved_tld, '.invalid');
   assert.equal(contract.turnstile.server_side_validation, true);
-  assert.equal(contract.turnstile.expected_action, 'afw_synthetic_contact');
-  assert.equal(contract.turnstile.expected_hostname, 'canary.agentfriendlyweb.dev');
+  assert.equal(contract.turnstile.real_credentials_expected_action, 'afw_synthetic_contact');
+  assert.equal(contract.turnstile.real_credentials_expected_hostname, 'canary.agentfriendlyweb.dev');
+  assert.equal(contract.turnstile.test_credentials_expected_action, 'test');
+  assert.equal(contract.turnstile.test_credentials_expected_hostname, 'localhost');
   assert.equal(contract.turnstile.test_credentials_canary_only, true);
   assert.equal(contract.capabilities.local_handler_ready, true);
-  assert.equal(contract.capabilities.remote_route_deployed, false);
-  assert.equal(contract.capabilities.synthetic_write_verified, false);
+  assert.equal(contract.capabilities.remote_route_deployed, true);
+  assert.equal(contract.capabilities.synthetic_write_verified, true);
   assert.equal(contract.capabilities.prepares_review_notification, true);
   assert.equal(contract.capabilities.sends_email, false);
   assert.equal(contract.capabilities.public_contact_capture, false);
@@ -150,7 +152,7 @@ test('synthetic contact canary contract is private, fixed and locally ready with
   assert.ok(contract.blocked_actions.includes('send_email'));
 });
 
-test('Gate 6C.3D local documentation records the closed synthetic canary before remote execution', async () => {
+test('Gate 6C.3D local documentation remains a truthful historical preflight', async () => {
   const [gate, emailArchitecture, growthRoadmap, agentRoadmap] = await Promise.all([
     read('docs/BLOCK-6C3D-SYNTHETIC-CONTACT-CANARY-LOCAL-2026-09-03.md'),
     read('docs/EMAIL-LEAD-CAPTURE-AND-CONSENT-ARCHITECTURE-V1.md'),
@@ -169,10 +171,9 @@ test('Gate 6C.3D local documentation records the closed synthetic canary before 
     'ROLLBACK',
   ]) assert.match(gate, new RegExp(field));
 
-  for (const document of [gate, emailArchitecture, growthRoadmap, agentRoadmap]) {
-    assert.match(document, /synthetic_contact_canary_local_ready_remote_disabled/);
-    assert.match(document, /Gate 6C\.3D/);
-  }
+  assert.match(gate, /synthetic_contact_canary_local_ready_remote_disabled/);
+  assert.match(gate, /synthetic_contact_canary_verified_kill_switch_off/);
+  for (const document of [gate, emailArchitecture, growthRoadmap, agentRoadmap]) assert.match(document, /Gate 6C\.3D/);
   assert.match(gate, /\.invalid/);
   assert.match(gate, /prepared_not_sent/);
   assert.match(gate, /AFW_EMAIL_REVIEW_READY_ENABLED=false/);
@@ -180,11 +181,56 @@ test('Gate 6C.3D local documentation records the closed synthetic canary before 
   assert.match(gate, /sin correo/i);
 });
 
-test('private review-ready integration contract exposes a local metadata-only adapter without claiming deployment', async () => {
+test('Gate 6C.3D remote evidence records one synthetic write, no email and final rollback OFF', async () => {
+  const [gate, evidence, emailArchitecture, growthRoadmap, agentRoadmap] = await Promise.all([
+    read('docs/BLOCK-6C3D-SYNTHETIC-CONTACT-CANARY-REMOTE-2026-09-03.md'),
+    read('docs/evidence/synthetic-contact-canary-remote-2026-09-03.json').then(JSON.parse),
+    read('docs/EMAIL-LEAD-CAPTURE-AND-CONSENT-ARCHITECTURE-V1.md'),
+    read('docs/GROWTH-AND-MONETIZATION-ROADMAP-2026-08-31.md'),
+    read('docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md'),
+  ]);
+
+  for (const field of [
+    'PROJECT',
+    'REPOSITORY',
+    'ENVIRONMENT',
+    'ORIGIN',
+    'RESOURCE_TYPE',
+    'RESOURCE_ID',
+    'ALLOWED_ACTION',
+    'ROLLBACK',
+  ]) assert.match(gate, new RegExp(field));
+
+  for (const document of [gate, emailArchitecture, growthRoadmap, agentRoadmap]) {
+    assert.match(document, /synthetic_contact_canary_verified_kill_switch_off/);
+  }
+
+  assert.equal(evidence.contract, 'agent-friendly-web.synthetic-contact-canary-remote-evidence.v1');
+  assert.equal(evidence.status, 'synthetic_contact_canary_verified_kill_switch_off');
+  assert.equal(evidence.scope.project, 'agent-friendly-web');
+  assert.equal(evidence.scope.environment, 'afw_canary');
+  assert.equal(evidence.scope.origin, 'https://canary.agentfriendlyweb.dev');
+  assert.equal(evidence.canary.successful_synthetic_requests, 1);
+  assert.equal(evidence.canary.real_contact_data_accepted, false);
+  assert.equal(evidence.database.contact_rows.before, 0);
+  assert.equal(evidence.database.contact_rows.after, 1);
+  assert.equal(evidence.database.requested_plan_consent_rows.before, 0);
+  assert.equal(evidence.database.requested_plan_consent_rows.after, 1);
+  assert.equal(evidence.email.rows.before, 4);
+  assert.equal(evidence.email.rows.after, 4);
+  assert.equal(evidence.email.sent.before, 1);
+  assert.equal(evidence.email.sent.after, 1);
+  assert.equal(evidence.email.sent_by_this_gate, false);
+  assert.equal(evidence.rollback.synthetic_contact_enabled, false);
+  assert.equal(evidence.rollback.email_review_ready_enabled, false);
+  assert.equal(evidence.public_production.modified, false);
+});
+
+test('private review-ready integration contract reports the remotely verified metadata-only adapter', async () => {
   const contract = JSON.parse(await read('public/.well-known/private-review-ready-integration-contract.json'));
 
   assert.equal(contract.contract, 'agent-friendly-web.private-review-ready-integration.v1');
-  assert.equal(contract.status, 'private_flow_adapter_local_ready_remote_disabled');
+  assert.equal(contract.status, 'private_flow_adapter_remote_verified_kill_switch_off');
   assert.equal(contract.source.store, 'contact_leads');
   assert.deepEqual(contract.source.selected_fields, ['id', 'locale', 'state']);
   assert.equal(contract.source.reads_pii, false);
@@ -192,7 +238,7 @@ test('private review-ready integration contract exposes a local metadata-only ad
   assert.equal(contract.input.accepts_message_content, false);
   assert.equal(contract.output.status, 'prepared_not_sent');
   assert.equal(contract.capabilities.local_adapter_ready, true);
-  assert.equal(contract.capabilities.remote_integration_deployed, false);
+  assert.equal(contract.capabilities.remote_integration_deployed, true);
   assert.equal(contract.capabilities.sends_email, false);
   assert.equal(contract.capabilities.persists_data, false);
   assert.equal(contract.capabilities.automatic_retry, false);

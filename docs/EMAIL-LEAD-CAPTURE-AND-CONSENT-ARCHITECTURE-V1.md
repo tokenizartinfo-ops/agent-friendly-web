@@ -265,11 +265,21 @@ La integracion con una solicitud privada quedo preparada localmente bajo estado 
 
 No hubo despliegue, migracion, escritura, correo ni cambio de produccion. La integracion remota queda bloqueada hasta reconstruir Gate 6B en el mismo `afw_canary`, crear una solicitud sintetica y superar primero la prueba con el kill switch OFF. El detalle vive en `docs/BLOCK-6C3C-PRIVATE-REVIEW-READY-INTEGRATION-LOCAL-2026-09-03.md`.
 
+Este es un estado historico de preflight y fue superado por la verificacion remota de Gate 6C.3D descrita mas abajo.
+
 ## Actualizacion Gate 6C.3D local - 2026-09-03
 
 La reconstruccion same-origin de Gate 6B quedo preparada localmente dentro del canary canonico, con estado `synthetic_contact_canary_local_ready_remote_disabled`. La UI privada no pide ni acepta datos reales; el servidor deriva un fixture `.invalid`, valida Turnstile, guarda solo una solicitud sintetica y su consentimiento `requested_plan`, y prepara `internal_review_ready` como `prepared_not_sent`.
 
 El flujo exige Access, allowlist hash, limite propio, contrato cerrado e idempotencia. `AFW_SYNTHETIC_CONTACT_ENABLED=false` y `AFW_EMAIL_REVIEW_READY_ENABLED=false` permanecen como estado inicial. Esta fase fue sin despliegue, sin escritura remota y sin correo. El detalle vive en `docs/BLOCK-6C3D-SYNTHETIC-CONTACT-CANARY-LOCAL-2026-09-03.md`.
+
+Este es un estado historico de preflight y fue superado por `synthetic_contact_canary_verified_kill_switch_off`.
+
+## Actualizacion Gate 6C.3D remoto - 2026-09-03
+
+La cadena same-origin se verifico bajo estado `synthetic_contact_canary_verified_kill_switch_off`. La prueba privada creo una sola solicitud `example.invalid`, registro exclusivamente el consentimiento `requested_plan` y preparo `internal_review_ready` como `prepared_not_sent`. Las filas de entrega de email permanecieron en cuatro antes y despues; no hubo invocacion del proveedor ni correo nuevo.
+
+El primer token de prueba fue rechazado antes de escribir porque las credenciales oficiales Turnstile devuelven accion `test` y hostname `localhost`. La correccion acepta esa semantica solo con el secreto oficial de prueba; cualquier credencial real sigue exigiendo accion `afw_synthetic_contact` y host `canary.agentfriendlyweb.dev`. El rollback dejo `AFW_SYNTHETIC_CONTACT_ENABLED=false` y `AFW_EMAIL_REVIEW_READY_ENABLED=false`. Captura publica, datos personales y marketing permanecen bloqueados. Evidencia: `docs/BLOCK-6C3D-SYNTHETIC-CONTACT-CANARY-REMOTE-2026-09-03.md`.
 
 ## Pruebas negativas obligatorias
 

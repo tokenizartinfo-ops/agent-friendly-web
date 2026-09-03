@@ -2,6 +2,8 @@
 
 **Estado:** `private_flow_adapter_local_ready_remote_disabled`
 
+**Superado el 2026-09-03 por:** `private_flow_adapter_remote_verified_kill_switch_off`. Este documento conserva el preflight local; la verificacion remota se documenta en `docs/BLOCK-6C3D-SYNTHETIC-CONTACT-CANARY-REMOTE-2026-09-03.md`.
+
 **Fecha:** 2026-09-03
 
 ## Resultado

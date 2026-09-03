@@ -1,11 +1,11 @@
 {
   "contract": "agent-friendly-web.private-review-ready-integration.v1",
-  "status": "private_flow_adapter_local_ready_remote_disabled",
+  "status": "private_flow_adapter_remote_verified_kill_switch_off",
   "updated_at": "2026-09-03",
   "scope": {
     "project": "agent-friendly-web",
-    "environment": "local_preparation_for_afw_email_review_ready_canary",
-    "future_origin": "https://canary.agentfriendlyweb.dev",
+    "environment": "afw_canary",
+    "origin": "https://canary.agentfriendlyweb.dev",
     "public_production_modified": false
   },
   "source": {
@@ -34,9 +34,9 @@
   },
   "capabilities": {
     "local_adapter_ready": true,
-    "remote_integration_deployed": false,
+    "remote_integration_deployed": true,
     "synthetic_contact_canary_local_ready": true,
-    "synthetic_contact_canary_remotely_verified": false,
+    "synthetic_contact_canary_remotely_verified": true,
     "sends_email": false,
     "persists_data": false,
     "automatic_retry": false,
@@ -60,5 +60,12 @@
     "use_real_contact_data",
     "modify_public_production"
   ],
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3C-PRIVATE-REVIEW-READY-INTEGRATION-LOCAL-2026-09-03.md"
+  "latest_canary": {
+    "source": "synthetic_contact_request",
+    "prepared_notifications": 1,
+    "status": "prepared_not_sent",
+    "email_sent": false,
+    "kill_switch_after_canary": "false"
+  },
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3D-SYNTHETIC-CONTACT-CANARY-REMOTE-2026-09-03.md"
 }

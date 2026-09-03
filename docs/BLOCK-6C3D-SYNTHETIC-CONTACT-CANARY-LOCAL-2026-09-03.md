@@ -2,6 +2,8 @@
 
 **Estado:** `synthetic_contact_canary_local_ready_remote_disabled`
 
+**Superado el 2026-09-03 por:** `synthetic_contact_canary_verified_kill_switch_off`. Este documento conserva el preflight local historico; la evidencia remota vigente esta en `docs/BLOCK-6C3D-SYNTHETIC-CONTACT-CANARY-REMOTE-2026-09-03.md`.
+
 ## Frontera declarada
 
 | Campo | Valor |
@@ -32,13 +34,13 @@ La API exige:
 - Turnstile validado en servidor con accion y hostname exactos;
 - D1 canary con prepared statements e idempotencia.
 
-Despues de persistir, el adaptador Gate 6C.3C lee solamente `id`, `locale` y `state` y devuelve `prepared_not_sent`. El nuevo handler no importa la ruta de entrega ni dispone del binding de correo.
+Despues de persistir, el adaptador Gate 6C.3C lee solamente `id`, `locale` y `state` y devuelve `prepared_not_sent`. El nuevo handler no importa ni invoca la ruta de entrega. El Worker conserva el binding privado heredado para no destruir la configuracion previa, pero el handler sintetico no lo recibe y el interruptor de email permanece OFF.
 
 ## Estado remoto
 
 Esta fase termino sin despliegue, sin escritura D1 remota, sin llamada Turnstile, sin cambio de produccion y sin correo. `AFW_SYNTHETIC_CONTACT_ENABLED=false` y `AFW_EMAIL_REVIEW_READY_ENABLED=false` son el estado esperado antes y despues de la prueba remota.
 
-Las credenciales Turnstile usadas por el canary son las credenciales oficiales de prueba y no se configuran en produccion. Aunque son deterministas, la validacion sigue ocurriendo en Siteverify del lado servidor y verifica accion y hostname.
+Las credenciales Turnstile usadas por el canary son las credenciales oficiales de prueba y no se configuran en produccion. La validacion sigue ocurriendo en Siteverify del lado servidor. Esas credenciales devuelven accion `test` y hostname `localhost`; una credencial real debe verificar `afw_synthetic_contact` y `canary.agentfriendlyweb.dev`.
 
 ## Evidencia local
 

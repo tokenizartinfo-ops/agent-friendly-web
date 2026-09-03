@@ -1,0 +1,72 @@
+{
+  "contract": "agent-friendly-web.synthetic-contact-canary-remote-evidence.v1",
+  "status": "synthetic_contact_canary_verified_kill_switch_off",
+  "observed_at": "2026-09-03",
+  "scope": {
+    "project": "agent-friendly-web",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "environment": "afw_canary",
+    "origin": "https://canary.agentfriendlyweb.dev",
+    "resource_type": "cloudflare_worker_d1_access_turnstile_rate_limit",
+    "resource_id": "agent-friendly-web-web-canary",
+    "allowed_action": "create_one_fixed_synthetic_contact_and_prepare_review_without_email"
+  },
+  "versions": {
+    "off_preflight": "dd138dbd-379b-4d8e-b8f4-c0beaf697ce6",
+    "allowlist_and_final_off": "66a4248a-4c89-4b4c-a18b-c5bf1acafb28",
+    "initial_on": "4630c85c-394f-47ca-b699-6b6292094e11",
+    "corrected_on": "a962e615-e182-4519-8809-a0231e5e3ebd"
+  },
+  "canary": {
+    "off_probe_before_write": "synthetic_contact_unavailable",
+    "initial_probe_result": "turnstile_failed",
+    "initial_probe_writes": 0,
+    "turnstile_fix": "official_test_credentials_use_test_and_localhost_semantics_only_in_canary",
+    "real_credentials_keep_exact_action_and_hostname_validation": true,
+    "successful_synthetic_requests": 1,
+    "review_notification_status": "prepared_not_sent",
+    "real_contact_data_accepted": false,
+    "free_text_accepted": false,
+    "recipient_accepted": false
+  },
+  "database": {
+    "contact_rows": { "before": 0, "after": 1 },
+    "requested_plan_consent_rows": { "before": 0, "after": 1 },
+    "fixture_email": "synthetic-canary@example.invalid",
+    "fixture_domain": "example.invalid",
+    "fixture_state": "new",
+    "fixture_source": "direct",
+    "marketing_consent_created": false,
+    "product_updates_consent_created": false
+  },
+  "email": {
+    "rows": { "before": 4, "after": 4 },
+    "failed": { "before": 3, "after": 3 },
+    "sent": { "before": 1, "after": 1 },
+    "reserved": { "before": 0, "after": 0 },
+    "provider_invocations_by_this_gate": 0,
+    "sent_by_this_gate": false
+  },
+  "rollback": {
+    "version_id": "66a4248a-4c89-4b4c-a18b-c5bf1acafb28",
+    "traffic_percent": 100,
+    "synthetic_contact_enabled": false,
+    "email_review_ready_enabled": false,
+    "private_page_state": "synthetic_capture_blocked"
+  },
+  "public_production": {
+    "modified": false,
+    "contact_capture_enabled": false
+  },
+  "security": {
+    "access_subject_or_jwt_published": false,
+    "secret_values_published": false,
+    "token_persisted": false,
+    "tokenizart_resources_used": false
+  },
+  "sources": [
+    "https://developers.cloudflare.com/turnstile/troubleshooting/testing/",
+    "https://developers.cloudflare.com/turnstile/get-started/server-side-validation/",
+    "https://developers.cloudflare.com/api/resources/workers/subresources/scripts/subresources/versions/methods/create/"
+  ]
+}

@@ -67,10 +67,10 @@
 - D1: `agent-friendly-web-web-canary`.
 - Origin: `https://canary.agentfriendlyweb.dev`.
 
-- [ ] **Step 1: declarar frontera remota, ejecutar `wrangler whoami` y capturar baseline D1/email.**
-- [ ] **Step 2: desplegar OFF y probar cierre sin cambios de datos.**
-- [ ] **Step 3: habilitar temporalmente el gate sintetico, manteniendo email OFF.**
-- [ ] **Step 4: ejecutar una unica captura desde la UI privada y guardar evidencia saneada.**
-- [ ] **Step 5: verificar D1, consentimiento, preparacion y cero cambios en entregas de email.**
-- [ ] **Step 6: restaurar OFF, verificar cierre y registrar version/rollback.**
-- [ ] **Step 7: actualizar evidencia y contratos; commit, push y CI sin merge.**
+- [x] **Step 1: declarar frontera remota, ejecutar `wrangler whoami` y capturar baseline D1/email.**
+- [x] **Step 2: desplegar OFF y probar cierre sin cambios de datos.**
+- [x] **Step 3: habilitar temporalmente el gate sintetico, manteniendo email OFF.**
+- [x] **Step 4: ejecutar una unica captura desde la UI privada y guardar evidencia saneada.**
+- [x] **Step 5: verificar D1, consentimiento, preparacion y cero cambios en entregas de email.**
+- [x] **Step 6: restaurar OFF, verificar cierre y registrar version/rollback.**
+- [x] **Step 7: actualizar evidencia y contratos; commit, push y CI sin merge.**
