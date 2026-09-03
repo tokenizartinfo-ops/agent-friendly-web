@@ -1,6 +1,6 @@
 {
   "contract": "agent-friendly-web.email-operations.v1",
-  "status": "corrected_single_canary_attempt_failed_no_retry_kill_switch_off",
+  "status": "null_candidate_off_version_verified_negative_probe_passed",
   "updated_at": "2026-09-03",
   "canonical_address": {
     "address": "hello@agentfriendlyweb.dev",
@@ -52,7 +52,9 @@
     "negative_probe_after_corrected_deploy": true,
     "remotely_verified_fix": false,
     "next_local_candidate": "explicit_to_null_with_sanitized_provider_failure_codes",
-    "next_candidate_deployed": false
+    "next_candidate_deployed": true,
+    "next_candidate_negative_probe_passed": true,
+    "delivery_fix_remotely_verified": false
   },
   "human_review_required_for": [
     "security",
@@ -71,5 +73,5 @@
     "read_attachments"
   ],
   "requires_separate_remote_approval": true,
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-SECOND-CANARY-ATTEMPT-2026-09-03.md"
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-NULL-CANDIDATE-OFF-NEGATIVE-PROBE-2026-09-03.md"
 }

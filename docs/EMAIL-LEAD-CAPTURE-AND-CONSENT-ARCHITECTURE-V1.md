@@ -237,6 +237,14 @@ La version corregida se habilito temporalmente para un unico intento humano apro
 
 La hipotesis `to: undefined` queda descartada como solucion remota suficiente. La siguiente candidata local es `explicit_to_null_with_sanitized_provider_failure_codes`: conserva el destino exclusivamente en el binding y clasifica solo codigos tecnicos permitidos, sin persistir errores crudos. Permanece sin desplegar y sin otro envio. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-SECOND-CANARY-ATTEMPT-2026-09-03.md`.
 
+## Actualizacion Gate 6C.3B fase 7 - 2026-09-03
+
+La candidata `explicit_to_null_with_sanitized_provider_failure_codes` quedo desplegada solo en `afw_email_review_ready_canary`, version `8d759339-5caf-4492-bf6a-ff6a2b3f9801`, deployment `fec166ba-ca50-4134-9ddb-5f1e4976f125`, con `AFW_EMAIL_REVIEW_READY_ENABLED=false`. El binding privado de destino fijo, la allowlist hash, D1, rate limiter y Assets se conservaron sin publicar valores privados.
+
+La prueba negativa autenticada devolvio `HTTP 404`, `sent=false` y `email_review_ready_unavailable`. D1 permanecio en dos filas historicas `failed`, cero `sent` y cero `reserved`; no hubo invocacion al proveedor, reintento ni ningun correo. El estado vigente es `null_candidate_off_version_verified_negative_probe_passed`: verifica aislamiento, cierre y despliegue de la candidata, pero `delivery_fix_remotely_verified` continua en `false`. Cualquier nuevo intento real exige una nueva aprobacion humana exacta en el momento de la accion. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-NULL-CANDIDATE-OFF-NEGATIVE-PROBE-2026-09-03.md`.
+
+La trazabilidad conserva como antecedentes `single_canary_attempt_failed_no_retry_kill_switch_off`, `missing_explicit_to_field_for_fixed_destination_binding`, `corrected_off_version_verified_negative_probe_passed` y `corrected_single_canary_attempt_failed_no_retry_kill_switch_off`. Ninguno de esos hitos reemplaza el estado vigente.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;
