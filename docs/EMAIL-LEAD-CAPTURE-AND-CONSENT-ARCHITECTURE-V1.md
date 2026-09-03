@@ -225,6 +225,12 @@ Luego de una confirmacion humana exacta se habilito temporalmente el canary y se
 
 La revision encontro `missing_explicit_to_field_for_fixed_destination_binding`: el mensaje omitia la propiedad que Cloudflare usa para sustituir el destino privado fijo. La correccion `to: undefined` paso de dos fallos esperados a `13/13` pruebas especificas, pero continua solo local y sin verificacion remota. Otro intento requiere suite completa, despliegue con flag OFF, prueba negativa autenticada y nueva confirmacion humana en el momento de la accion. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-SINGLE-CANARY-ATTEMPT-2026-09-03.md`.
 
+## Actualizacion Gate 6C.3B fase 5 - 2026-09-03
+
+La correccion fue desplegada en la version canary `3af007c5-c67d-45f3-8f8e-ccb350ac76a4`, deployment `de2a744b-9489-4709-a5a7-cd5404179767`, preservando el binding privado sin revelar su destino y con `AFW_EMAIL_REVIEW_READY_ENABLED=false`. La prueba negativa autenticada mostro envio bloqueado y devolvio `HTTP 404`, `sent=false`, `email_review_ready_unavailable`.
+
+D1 permanecio en una fila historica (`failed=1`, `sent=0`, `reserved=0`) y no hubo invocaciones nuevas al proveedor ni correos. El estado avanza a `corrected_off_version_verified_negative_probe_passed`. Esto verifica el despliegue cerrado, no la entrega corregida: `remotely_verified_fix` continua en `false` hasta un eventual canary exitoso. Antes de otro intento resta una nueva confirmacion humana exacta en el momento de la accion. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-CORRECTED-OFF-NEGATIVE-PROBE-2026-09-03.md`.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;
