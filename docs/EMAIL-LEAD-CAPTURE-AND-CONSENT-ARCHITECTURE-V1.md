@@ -251,6 +251,14 @@ La candidata `to: null` se habilito una sola vez tras confirmacion humana puntua
 
 El estado vigente es `third_canary_failed_private_destination_candidate_local_off`. Como el runtime no confirmo la sustitucion documentada de `null` y no devolvio un codigo especifico, se preparo por TDD `explicit_to_private_runtime_destination`: la direccion procede de una variable privada del Worker, nunca del request, y el binding mantiene la restriccion al mismo destino. La candidata paso `16/16` pruebas especificas, permanece local y no genero un cuarto intento. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-THIRD-CANARY-ATTEMPT-2026-09-03.md`.
 
+## Actualizacion Gate 6C.3B fase 9 - 2026-09-03
+
+La candidata `explicit_to_private_runtime_destination` se cargo con dos controles coincidentes: el destino proviene de un secreto privado del Worker y el binding de Cloudflare permite exclusivamente ese mismo destino. Primero se desplego y probo con el kill switch OFF. Luego de una confirmacion humana puntual, la version ON `1e8b7bcc-9af1-463d-a68d-2942c1fb8a97` recibio un unico clic y produjo exactamente una entrega `sent`.
+
+D1 conserva un hash de recibo del proveedor sin guardar destinatario ni contenido. Gmail confirmo la recepcion de la plantilla fija y la referencia esperada, sin adjuntos. No hubo reintentos. El rollback `2e1b0e3f-1648-437f-9c4c-ebf3ea4bb2bb` restauro inmediatamente la version OFF `5f6d149e-8611-4d53-9229-37c779a87ab4` al 100% del canary. El estado vigente es `fixed_destination_canary_verified_kill_switch_off` y `delivery_fix_remotely_verified=true`.
+
+El resultado valida solamente el aviso interno cerrado `internal_review_ready`. El envio general, destinatarios arbitrarios, marketing, autorespuestas, adjuntos y automatizacion recurrente siguen deshabilitados. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-VERIFIED-CANARY-2026-09-03.md`.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;

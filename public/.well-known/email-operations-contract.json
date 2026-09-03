@@ -1,6 +1,6 @@
 {
   "contract": "agent-friendly-web.email-operations.v1",
-  "status": "third_canary_failed_private_destination_candidate_local_off",
+  "status": "fixed_destination_canary_verified_kill_switch_off",
   "updated_at": "2026-09-03",
   "canonical_address": {
     "address": "hello@agentfriendlyweb.dev",
@@ -42,20 +42,20 @@
   "outbound_canary_contract": "https://agentfriendlyweb.dev/.well-known/email-outbound-canary-contract.json",
   "review_ready_contract": "https://agentfriendlyweb.dev/.well-known/email-review-ready-contract.json",
   "latest_transactional_canary": {
-    "status": "failed_no_delivery_kill_switch_off",
-    "approved_attempts": 3,
-    "provider_invocations": 3,
+    "status": "sent_once_kill_switch_off",
+    "approved_attempts": 4,
+    "provider_invocations": 4,
     "retries": 0,
-    "email_sent": false,
+    "email_sent": true,
     "previous_local_fix": "explicit_to_null_with_sanitized_provider_failure_codes",
     "corrected_code_remotely_deployed": true,
     "negative_probe_after_corrected_deploy": true,
-    "remotely_verified_fix": false,
+    "remotely_verified_fix": true,
     "next_local_candidate": "explicit_to_private_runtime_destination",
     "runtime_destination_source": "private_worker_secret",
-    "next_candidate_deployed": false,
-    "next_candidate_negative_probe_passed": false,
-    "delivery_fix_remotely_verified": false
+    "next_candidate_deployed": true,
+    "next_candidate_negative_probe_passed": true,
+    "delivery_fix_remotely_verified": true
   },
   "human_review_required_for": [
     "security",
@@ -74,5 +74,5 @@
     "read_attachments"
   ],
   "requires_separate_remote_approval": true,
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-THIRD-CANARY-ATTEMPT-2026-09-03.md"
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-VERIFIED-CANARY-2026-09-03.md"
 }

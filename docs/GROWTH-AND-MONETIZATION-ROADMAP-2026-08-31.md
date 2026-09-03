@@ -95,6 +95,7 @@ La secuencia remota se divide para reducir riesgo:
 - **Gate 6C.3B fase 6:** un segundo intento individualmente aprobado uso la correccion desplegada y fallo sin entrega ni reintento. El rollback `ce8635ee-03d5-4f21-96c4-46efb886aaf5` restauro OFF; D1 quedo en dos `failed`, cero `sent` y cero `reserved`. `to: undefined` queda descartado como solucion suficiente. La siguiente candidata `explicit_to_null_with_sanitized_provider_failure_codes` permanece local, sin otro envio ni deployment.
 - **Gate 6C.3B fase 7:** la candidata `to: null` y el diagnostico saneado quedaron desplegados solo en el canary aislado, version `8d759339-5caf-4492-bf6a-ff6a2b3f9801`, deployment `fec166ba-ca50-4134-9ddb-5f1e4976f125`, con flag OFF. El probe autenticado devolvio `HTTP 404`, `sent=false`, `email_review_ready_unavailable`; D1 siguio en dos `failed`, cero `sent` y cero `reserved`, sin invocacion ni correo. Estado `null_candidate_off_version_verified_negative_probe_passed`; `delivery_fix_remotely_verified=false` hasta otro intento expresamente aprobado en el momento de la accion.
 - **Gate 6C.3B fase 8:** un tercer intento puntual con `to: null` fallo sin entrega ni reintento; el rollback `b96030cd-0e9b-4ec8-bd17-8c2807b829b0` restauro inmediatamente OFF y D1 quedo en tres `failed`. La nueva candidata `explicit_to_private_runtime_destination` obtiene el destinatario solo desde una variable privada y mantiene el binding restringido al mismo destino; paso `16/16` pruebas especificas, permanece local y no habilita un cuarto intento. Estado `third_canary_failed_private_destination_candidate_local_off`.
+- **Gate 6C.3B fase 9:** la candidata `explicit_to_private_runtime_destination` se verifico primero con flag OFF y luego se habilito para un unico intento confirmado. D1 registro una fila `sent`, Gmail recibio la plantilla fija sin adjuntos, no hubo reintento y el rollback `2e1b0e3f-1648-437f-9c4c-ebf3ea4bb2bb` restauro la version OFF `5f6d149e-8611-4d53-9229-37c779a87ab4`. Estado `fixed_destination_canary_verified_kill_switch_off`; `delivery_fix_remotely_verified=true`. Correo general, clientes, marketing y automatizacion siguen bloqueados.
 
 ### Gate 6D - Ventas y CRM ligero
 
@@ -135,6 +136,8 @@ La evidencia local vive en `docs/BLOCK-6D-CRM-LITE-LOCAL-GATE-2026-08-31.md`. El
 - MCP privado con scopes owner;
 - capsula firmada y adaptadores allowlisted;
 - pagos separados de autorizacion.
+
+La oferta **MCP para clientes** se desarrolla dentro de este gate y continua no desplegada. El orden es: PDR, MCP publico read-only, OAuth privado, una primera mutacion acotada y solo entonces Code Mode cuando el tamano de la API lo justifique. No reutiliza credenciales administrativas del cliente ni confunde el MCP publico de AFW con un runtime multi-tenant. Especificacion: `docs/CLIENT-MCP-SERVER-OFFERING-ARCHITECTURE-V1.md`.
 
 ### Linea futura - creacion de sitios AFW-native
 

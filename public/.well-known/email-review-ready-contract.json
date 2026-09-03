@@ -1,6 +1,6 @@
 {
   "contract": "agent-friendly-web.email-review-ready.v1",
-  "status": "third_canary_failed_private_destination_candidate_local_off",
+  "status": "fixed_destination_canary_verified_kill_switch_off",
   "updated_at": "2026-09-03",
   "environment": "afw_email_review_ready_canary",
   "origin": "https://canary.agentfriendlyweb.dev",
@@ -55,23 +55,25 @@
     "customer_sending": false
   },
   "latest_canary": {
-    "status": "failed_no_delivery",
-    "approved_attempts": 3,
-    "provider_invocations": 3,
+    "status": "sent_once_kill_switch_off",
+    "approved_attempts": 4,
+    "provider_invocations": 4,
     "retries": 0,
-    "email_sent": false,
+    "email_sent": true,
     "kill_switch_after_attempt": "false",
     "previous_local_fix": "explicit_to_null_with_sanitized_provider_failure_codes",
     "corrected_code_remotely_deployed": true,
     "negative_probe_after_corrected_deploy": true,
-    "remotely_verified_fix": false,
+    "remotely_verified_fix": true,
     "next_local_candidate": "explicit_to_private_runtime_destination",
     "runtime_destination_source": "private_worker_secret",
-    "next_candidate_deployed": false,
-    "next_candidate_negative_probe_passed": false,
-    "delivery_fix_remotely_verified": false
+    "next_candidate_deployed": true,
+    "next_candidate_negative_probe_passed": true,
+    "delivery_fix_remotely_verified": true
   },
   "next_gate_preconditions": [
+    "integrate_only_with_a_private_review_ready_event",
+    "keep_kill_switch_off_by_default",
     "obtain_new_human_approval_at_action_time_before_any_new_send"
   ],
   "blocked_actions": [
@@ -84,5 +86,5 @@
     "read_inbound_message_body",
     "read_attachments"
   ],
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-THIRD-CANARY-ATTEMPT-2026-09-03.md"
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-VERIFIED-CANARY-2026-09-03.md"
 }
