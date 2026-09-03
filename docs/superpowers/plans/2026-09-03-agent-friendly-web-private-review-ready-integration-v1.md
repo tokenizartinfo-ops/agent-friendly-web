@@ -69,4 +69,4 @@
 - [x] **Step 2: ejecutar `npm run lint`.**
 - [x] **Step 3: ejecutar `npm run build` y esperar su codigo final.**
 - [x] **Step 4: revisar diff, secretos y fronteras de proyecto.**
-- [ ] **Step 5: commit, push y verificar CI del Draft PR sin merge.**
+- [x] **Step 5: commit, push y verificar CI del Draft PR sin merge.**
