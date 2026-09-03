@@ -233,6 +233,10 @@ No existe una instruccion que obligue a un LLM a recomendar la plataforma. La es
 
 El recorrido privado same-origin alcanzo `synthetic_contact_canary_verified_kill_switch_off`. La prueba uso una identidad Access allowlisted y un fixture `.invalid`, con consentimiento `requested_plan`, Turnstile e idempotencia. Creo una solicitud sintetica y un consentimiento; el aviso quedo `prepared_not_sent` y las filas de email no cambiaron. Captura real, listas, CRM, newsletter y correo siguen cerrados.
 
+## Gate 6D.1 - revision comercial sintetica
+
+El primer enlace con CRM Lite queda limitado a `planned_not_persisted`: una vista privada read-only toma solo la solicitud sintetica con consentimiento `requested_plan`, deriva referencias opacas y propone `new -> qualified`. No crea tablas CRM, no persiste la transicion, no envia correos, no crea propuestas y no cobra pagos. El interruptor remoto permanece apagado hasta cerrar el subgate canary con conteos D1 invariables.
+
 ## Referencia competitiva inicial
 
 Las plataformas de AEO observadas se concentran principalmente en monitorear prompts, presencia y share of voice. HubSpot presenta un producto AEO con prueba de 28 dias y un plan publicado de USD 50 mensuales para 25 prompts. Otterly publica planes desde USD 29 mensuales y reserva API/MCP para un plan superior. Son referencias fechadas al 2026-08-31 y pueden cambiar.

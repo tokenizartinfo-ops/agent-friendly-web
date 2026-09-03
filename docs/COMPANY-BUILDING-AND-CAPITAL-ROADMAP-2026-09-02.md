@@ -174,6 +174,10 @@ Criterio de salida: un sitio piloto nuevo puede demostrar propiedad y portabilid
 8. Ampliar 7G solamente por demanda y evidencia.
 9. Prototipar 7H despues de cerrar el flujo de entrega de sitios existentes y medir al menos un piloto real.
 
+### Gate 6D.1 - puente sintetico de revision
+
+La primera integracion entre captacion y CRM conserva el estado `planned_not_persisted`. Lee exclusivamente el fixture `.invalid` ya consentido, propone su calificacion y muestra una vista privada. No acepta datos reales, no persiste CRM, no envia correo, no crea propuestas, no cobra pagos y no cambia recursos de Tokenizart.
+
 ## Gobierno y revision
 
 - Gabriel decide marca, oferta, capital, precios, contratos y publicacion.

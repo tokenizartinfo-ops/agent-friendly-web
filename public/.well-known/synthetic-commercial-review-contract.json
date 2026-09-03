@@ -1,0 +1,40 @@
+{
+  "contract": "agent-friendly-web.synthetic-commercial-review.v1",
+  "status": "local_ready_remote_disabled",
+  "updated_at": "2026-09-03",
+  "scope": {
+    "project": "agent-friendly-web",
+    "environment": "afw_canary",
+    "origin": "https://canary.agentfriendlyweb.dev",
+    "public_production_modified": false,
+    "tokenizart_resources_used": false
+  },
+  "source": {
+    "type": "synthetic_contact_only",
+    "domain_suffix": ".invalid",
+    "required_consent": "requested_plan",
+    "accepts_real_contacts": false
+  },
+  "capabilities": {
+    "reads_one_synthetic_contact": true,
+    "plans_crm_transition": true,
+    "persists_crm": false,
+    "sends_email": false,
+    "creates_proposal": false,
+    "charges_payment": false,
+    "modifies_customer_site": false
+  },
+  "privacy": {
+    "returns_email": false,
+    "returns_name": false,
+    "returns_message": false,
+    "returns_source_uuid": false,
+    "uses_opaque_references": true
+  },
+  "accepts_request_parameters": false,
+  "requires_cloudflare_access": true,
+  "requires_allowlisted_subject": true,
+  "kill_switch": "AFW_SYNTHETIC_COMMERCIAL_REVIEW_ENABLED",
+  "kill_switch_default": "off",
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6D1-SYNTHETIC-COMMERCIAL-REVIEW-LOCAL-2026-09-03.md"
+}
