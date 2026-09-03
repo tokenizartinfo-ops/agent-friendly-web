@@ -259,6 +259,12 @@ D1 conserva un hash de recibo del proveedor sin guardar destinatario ni contenid
 
 El resultado valida solamente el aviso interno cerrado `internal_review_ready`. El envio general, destinatarios arbitrarios, marketing, autorespuestas, adjuntos y automatizacion recurrente siguen deshabilitados. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-VERIFIED-CANARY-2026-09-03.md`.
 
+## Actualizacion Gate 6C.3C - 2026-09-03
+
+La integracion con una solicitud privada quedo preparada localmente bajo estado `private_flow_adapter_local_ready_remote_disabled`. El adaptador recibe un UUID opaco, exige aprobacion humana y consulta en D1 solamente `id`, `locale` y `state`; no lee email, nombre, dominio, organizacion ni contenido. Desde esa fuente deriva internamente el contrato idempotente `internal_review_ready` y devuelve `prepared_not_sent`.
+
+No hubo despliegue, migracion, escritura, correo ni cambio de produccion. La integracion remota queda bloqueada hasta reconstruir Gate 6B en el mismo `afw_canary`, crear una solicitud sintetica y superar primero la prueba con el kill switch OFF. El detalle vive en `docs/BLOCK-6C3C-PRIVATE-REVIEW-READY-INTEGRATION-LOCAL-2026-09-03.md`.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;

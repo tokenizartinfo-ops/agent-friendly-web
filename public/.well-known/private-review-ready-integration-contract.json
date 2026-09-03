@@ -1,0 +1,62 @@
+{
+  "contract": "agent-friendly-web.private-review-ready-integration.v1",
+  "status": "private_flow_adapter_local_ready_remote_disabled",
+  "updated_at": "2026-09-03",
+  "scope": {
+    "project": "agent-friendly-web",
+    "environment": "local_preparation_for_afw_email_review_ready_canary",
+    "future_origin": "https://canary.agentfriendlyweb.dev",
+    "public_production_modified": false
+  },
+  "source": {
+    "store": "contact_leads",
+    "eligible_persisted_state": "new",
+    "derived_state": "review_ready",
+    "selected_fields": ["id", "locale", "state"],
+    "reads_pii": false,
+    "mutates_source": false
+  },
+  "input": {
+    "contract": "agent-friendly-web.internal-review-ready-trigger.v1",
+    "fields": ["contract", "requestId", "action", "humanApproved"],
+    "request_id_format": "uuid",
+    "action": "notify_internal_operator",
+    "accepts_recipient": false,
+    "accepts_message_content": false,
+    "accepts_contact_pii": false
+  },
+  "output": {
+    "contract": "agent-friendly-web.email-review-ready.v1",
+    "status": "prepared_not_sent",
+    "event_id_derived_from_request_id": true,
+    "idempotency_key_derived_from_request_id": true,
+    "locale_loaded_from_private_source": true
+  },
+  "capabilities": {
+    "local_adapter_ready": true,
+    "remote_integration_deployed": false,
+    "sends_email": false,
+    "persists_data": false,
+    "automatic_retry": false,
+    "arbitrary_recipients": false
+  },
+  "requires": {
+    "same_origin_private_contact_flow": true,
+    "persisted_request": true,
+    "cloudflare_access": true,
+    "action_time_human_approval": true,
+    "kill_switch_off_by_default": true,
+    "synthetic_canary_before_real_data": true
+  },
+  "blocked_actions": [
+    "read_contact_email",
+    "read_contact_name",
+    "read_message_content",
+    "accept_recipient_from_request",
+    "send_email",
+    "automatic_retry",
+    "use_real_contact_data",
+    "modify_public_production"
+  ],
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3C-PRIVATE-REVIEW-READY-INTEGRATION-LOCAL-2026-09-03.md"
+}

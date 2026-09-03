@@ -37,6 +37,8 @@ test('public email operations contract reports verified canaries and the closed 
   assert.equal(contract.capabilities.transactional_remote_migration_applied, true);
   assert.equal(contract.capabilities.transactional_route_deployed_canary, true);
   assert.equal(contract.capabilities.transactional_rate_limit_binding_configured, true);
+  assert.equal(contract.capabilities.private_review_ready_adapter_local_ready, true);
+  assert.equal(contract.capabilities.private_review_ready_integration_deployed, false);
   assert.equal(contract.capabilities.transactional_automatic_sending, false);
   assert.equal(contract.capabilities.arbitrary_recipients, false);
   assert.equal(contract.capabilities.customer_email_sending, false);
@@ -59,6 +61,10 @@ test('public email operations contract reports verified canaries and the closed 
   assert.equal(
     contract.review_ready_contract,
     'https://agentfriendlyweb.dev/.well-known/email-review-ready-contract.json',
+  );
+  assert.equal(
+    contract.private_review_ready_integration_contract,
+    'https://agentfriendlyweb.dev/.well-known/private-review-ready-integration-contract.json',
   );
   assert.equal(contract.requires_separate_remote_approval, true);
   assert.ok(contract.blocked_actions.includes('send_email'));
@@ -85,6 +91,8 @@ test('review-ready contract is fixed-destination, metadata-only and at-most-once
   assert.equal(contract.capabilities.closed_route_deployed_canary, true);
   assert.equal(contract.capabilities.rate_limit_binding_configured, true);
   assert.equal(contract.capabilities.outbound_binding_configured, true);
+  assert.equal(contract.capabilities.private_flow_adapter_local_ready, true);
+  assert.equal(contract.capabilities.private_flow_integration_deployed, false);
   assert.equal(contract.capabilities.outbound_sending, false);
   assert.equal(contract.capabilities.automatic_sending, false);
   assert.equal(contract.capabilities.arbitrary_recipients, false);
@@ -104,6 +112,29 @@ test('review-ready contract is fixed-destination, metadata-only and at-most-once
   assert.equal(contract.latest_canary.remotely_verified_fix, true);
   assert.ok(contract.blocked_actions.includes('accept_recipient_from_request'));
   assert.ok(contract.blocked_actions.includes('automatic_retry'));
+  assert.ok(contract.blocked_actions.includes('send_without_persisted_private_request'));
+});
+
+test('private review-ready integration contract exposes a local metadata-only adapter without claiming deployment', async () => {
+  const contract = JSON.parse(await read('public/.well-known/private-review-ready-integration-contract.json'));
+
+  assert.equal(contract.contract, 'agent-friendly-web.private-review-ready-integration.v1');
+  assert.equal(contract.status, 'private_flow_adapter_local_ready_remote_disabled');
+  assert.equal(contract.source.store, 'contact_leads');
+  assert.deepEqual(contract.source.selected_fields, ['id', 'locale', 'state']);
+  assert.equal(contract.source.reads_pii, false);
+  assert.equal(contract.input.accepts_recipient, false);
+  assert.equal(contract.input.accepts_message_content, false);
+  assert.equal(contract.output.status, 'prepared_not_sent');
+  assert.equal(contract.capabilities.local_adapter_ready, true);
+  assert.equal(contract.capabilities.remote_integration_deployed, false);
+  assert.equal(contract.capabilities.sends_email, false);
+  assert.equal(contract.capabilities.persists_data, false);
+  assert.equal(contract.capabilities.automatic_retry, false);
+  assert.equal(contract.requires.same_origin_private_contact_flow, true);
+  assert.equal(contract.requires.action_time_human_approval, true);
+  assert.ok(contract.blocked_actions.includes('read_contact_email'));
+  assert.ok(contract.blocked_actions.includes('send_email'));
 });
 
 test('Gate 6C.3A documentation records local readiness and a disabled remote boundary', async () => {
