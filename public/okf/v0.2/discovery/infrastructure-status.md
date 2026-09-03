@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: Estado de infraestructura y migracion
-description: Separacion fechada entre el origen canonico, runtime transitorio, candidato Cloudflare-native, superficies retiradas y gate siguiente.
+description: Estado fechado del origen Cloudflare-native, canary protegido, rollback legado, superficies retiradas y gate siguiente.
 resource: https://agentfriendlyweb.dev/.well-known/infrastructure-status.json
 tags:
   - agent-friendly-web
@@ -9,20 +9,20 @@ tags:
   - cloudflare
   - migration
   - provenance
-status: candidate
-stale_after: 2026-11-30T00:00:00Z
+status: stable
+stale_after: 2026-12-01T00:00:00Z
 generated:
   by: process:agent-friendly-web-okf-generator
-  at: 2026-09-01T00:00:00Z
+  at: 2026-09-02T00:00:00Z
 verified:
   - by: human:gabriel-mucchiut
-    at: 2026-09-01T00:00:00Z
+    at: 2026-09-02T00:00:00Z
 sources:
   - id: source-1
-    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/39acfeeecc9f39911d2a5467893c36dc2223e253/docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md
+    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/6ba79ed4086a5a71e48e3cb9cfdef0aaf173674e/docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md
     title: Agent Friendly Web Cloudflare-native origin v1
     author: person:gabriel-mucchiut
-    last_modified: 2026-09-01T00:00:00Z
+    last_modified: 2026-09-02T00:00:00Z
 ---
 # Estado de infraestructura y migracion
 
@@ -34,11 +34,11 @@ La migracion no altera Tokenizart. Tokenizart sigue siendo el primer caso integr
 
 ## Estado de partida
 
-- `agentfriendlyweb.dev` responde publicamente bajo dominio propio, pero el runtime actual todavia es Sites.
+- El estado de partida tenia `agentfriendlyweb.dev` sobre Sites. Desde el 2026-09-02 el apex sirve el Worker Cloudflare-native.
 - La aplicacion ya usa Next 16, Vinext, Vite y bindings `cloudflare:workers`.
 - `npx vinext check` informa 96% de compatibilidad: cero incompatibilidades y una advertencia parcial por `next/font/google`.
 - La suite baseline del repositorio pasa antes de la migracion.
-- Las rutas privadas del origen legado usan identidad Sites; el candidato ya las reemplaza por Cloudflare Access verificado.
+- Las rutas privadas usan Cloudflare Access verificado; la identidad Sites ya no forma parte del runtime activo.
 - El Worker de contacto aislado esta deshabilitado y su D1 permanece vacia.
 
 ## Estado canary verificado
@@ -48,7 +48,9 @@ La migracion no altera Tokenizart. Tokenizart sigue siendo el primer caso integr
 - La D1 canary es independiente: seis migraciones aplicadas, trece tablas funcionales y cero filas funcionales.
 - El custom domain del canary no modifica los registros A ni el runtime de `agentfriendlyweb.dev` y recibe 0% de su trafico.
 - Una sesion owner allowlisted confirmo el HTML autenticado. La misma compilacion paso QA Playwright en escritorio y movil, el smoke local completo y el smoke de Access en nueve rutas; D1 continuo con cero filas funcionales.
-- El rollback esta preparado y falla cerrado, pero el detach no se ejecuto sobre un canary verde. El canary no se presenta como produccion y el corte conserva una decision separada.
+- El canary continua protegido y con 0% del trafico apex. El release productivo protegido paso detach/reattach antes del corte.
+- El Worker `agent-friendly-web-web-production` sirve ahora el apex, con D1 productiva migrada, trece tablas funcionales y cero filas.
+- El smoke posterior al corte paso recursos publicos, identidad privada y QA responsive. Sites permanece solo como rollback inicial.
 
 ## Arquitectura objetivo
 
@@ -65,6 +67,7 @@ Rutas privadas iniciales:
 - `/expediente`;
 - `/capsula/*`;
 - `/contacto-interno`, cuando exista;
+- `/api/projects`;
 - `/api/projects/*`;
 - cualquier futura API mutante o con datos owner.
 
@@ -95,8 +98,8 @@ El formulario y su API deben ser same-origin. El Worker de contacto separado per
 4. Las rutas publicas deben mantener contenido, MIME, idiomas, sitemap, `robots.txt`, `llms.txt`, OKF, WebMCP y MCP externo.
 5. Las rutas privadas deben fallar cerradas sin Access y aislar datos por actor verificado.
 6. Canary requiere hostname propio, Access, D1 aislada y cero trafico publico.
-7. El corte de `agentfriendlyweb.dev` exige comparacion automatizada de origen, smoke humano y rollback probado.
-8. Solo despues del corte se elimina el binding publico de Sites y se archivan sus proyectos.
+7. El corte de `agentfriendlyweb.dev` exigio una comparacion semantica local de la misma compilacion, verificacion remota separada, smoke humano y rollback probado.
+8. Solo despues de una ventana estable y una decision separada se elimina el binding publico de Sites y se archivan sus proyectos.
 
 ## Evidencia historica
 

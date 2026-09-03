@@ -10,13 +10,13 @@ tags:
   - multilingual
   - read-only
 status: stable
-stale_after: 2026-11-30T00:00:00Z
+stale_after: 2026-12-01T00:00:00Z
 generated:
   by: process:agent-friendly-web-okf-generator
-  at: 2026-09-01T00:00:00Z
+  at: 2026-09-02T00:00:00Z
 verified:
   - by: human:gabriel-mucchiut
-    at: 2026-09-01T00:00:00Z
+    at: 2026-09-02T00:00:00Z
 sources:
   - id: source-1
     resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/0ce175906ab21763cc6c1a11d9adc65c30dcc527/docs/PUBLIC-FAQ-AND-GUIDE.es.md

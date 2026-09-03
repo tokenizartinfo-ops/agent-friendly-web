@@ -8,13 +8,13 @@ tags:
   - audit
   - read-only
 status: stable
-stale_after: 2026-11-30T00:00:00Z
+stale_after: 2026-12-01T00:00:00Z
 generated:
   by: process:agent-friendly-web-okf-generator
-  at: 2026-09-01T00:00:00Z
+  at: 2026-09-02T00:00:00Z
 verified:
   - by: human:gabriel-mucchiut
-    at: 2026-09-01T00:00:00Z
+    at: 2026-09-02T00:00:00Z
 sources:
   - id: source-1
     resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e53166e/docs/SPECIFICATION.es.md
@@ -22,10 +22,10 @@ sources:
     author: agent-friendly-web/editorial-v1
     last_modified: 2026-08-27T00:00:00Z
   - id: source-2
-    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/39acfeeecc9f39911d2a5467893c36dc2223e253/docs/SECURITY.md
+    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/1bfea0f086dd40b439e1f197752c583faddf176d/docs/SECURITY.md
     title: Seguridad y fronteras publicas
     author: agent-friendly-web/editorial-v1
-    last_modified: 2026-09-01T00:00:00Z
+    last_modified: 2026-09-02T00:00:00Z
 ---
 # Auditoria publica read-only
 
@@ -77,11 +77,11 @@ Controles implementados:
 - limite de lectura por respuesta;
 - redirecciones deshabilitadas;
 - validacion por contenido para evitar falsos positivos de paginas 200/404;
-- rutas privadas del runtime legado congeladas durante la migracion y sin admision de nuevos datos reales;
-- candidato Cloudflare-native protegido mediante Cloudflare Access, con validacion de JWT firmado, `sub`, issuer y audience;
+- rutas privadas productivas protegidas por Cloudflare Access y sin admision de nuevos datos reales;
+- runtime Cloudflare-native con validacion de JWT firmado, `sub`, issuer y audience;
 - fallo cerrado cuando falta identidad Access valida;
 - campos allowlisted y eventos metadata-only.
 
-La verificacion del candidato usa React `19.2.8`, Vinext `1.0.0-beta.8` y `@vinext/cloudflare` `1.0.0-beta.6`. `npm audit --omit=dev` informa cero vulnerabilidades conocidas en dependencias de produccion. El arbol de desarrollo conserva cuatro vulnerabilidades moderadas transitivas de `drizzle-kit`; no alcanzan al Worker publicado y su correccion automatica propone un downgrade incompatible, por lo que se mantienen registradas para tratamiento separado.
+El runtime verificado usa React `19.2.8`, Vinext `1.0.0-beta.8` y `@vinext/cloudflare` `1.0.0-beta.6`. `npm audit --omit=dev` informa cero vulnerabilidades conocidas en dependencias de produccion. El arbol de desarrollo conserva cuatro vulnerabilidades moderadas transitivas de `drizzle-kit`; no alcanzan al Worker publicado y su correccion automatica propone un downgrade incompatible, por lo que se mantienen registradas para tratamiento separado.
 
-El estado de infraestructura es independiente del estado funcional. Al 2026-09-01 el origen publico sigue sobre un runtime transitorio. El canary Cloudflare-native esta desplegado en un dominio propio, protegido por Access y con D1 aislada vacia; no recibe trafico del origen publico ni se presenta como produccion. Una sesion allowlisted confirmo el HTML autenticado, la compilacion paso QA responsive y los smokes cubrieron las rutas representativas. El rollback esta preparado sin ejecutar; el corte productivo conserva un gate separado. El ledger fechado vive en `https://agentfriendlyweb.dev/.well-known/infrastructure-status.json`.
+El estado de infraestructura es independiente del estado funcional. Al 2026-09-02 el origen publico usa el Worker Cloudflare-native productivo; Cloudflare Access protege las rutas privadas y la D1 productiva conserva seis migraciones, trece tablas funcionales y cero filas. Los smokes cubrieron contratos publicos, identidad privada y QA responsive. El canary y el release permanecen protegidos sin trafico apex; Sites queda retenido solo como rollback inicial. El ledger fechado vive en `https://agentfriendlyweb.dev/.well-known/infrastructure-status.json`.

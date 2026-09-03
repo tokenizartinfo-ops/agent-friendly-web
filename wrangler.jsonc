@@ -4,7 +4,7 @@
   "account_id": "85d0d5dadac3341a564f22ce885e9eec",
   "main": "vinext/server/fetch-handler",
   "compatibility_date": "2026-09-01",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "workers_dev": false,
   "preview_urls": false,
   "assets": {
@@ -70,13 +70,13 @@
         {
           "binding": "DB",
           "database_name": "agent-friendly-web-web-production",
-          "database_id": "22222222-2222-4222-8222-222222222222",
+          "database_id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8",
           "migrations_dir": "drizzle"
         }
       ],
       "vars": {
-        "ACCESS_TEAM_DOMAIN": "replace-before-remote-deploy.cloudflareaccess.com",
-        "ACCESS_AUD": "replace-before-remote-deploy",
+        "ACCESS_TEAM_DOMAIN": "tokenizart.cloudflareaccess.com",
+        "ACCESS_AUD": "afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac",
         "AFW_CANARY_DIAGNOSTICS_ENABLED": "false",
         "AFW_REMOTE_DEPLOY_ENABLED": "false",
         "AFW_EMAIL_REVIEW_READY_ENABLED": "false"

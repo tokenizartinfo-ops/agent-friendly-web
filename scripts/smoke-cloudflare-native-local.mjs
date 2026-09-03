@@ -3,6 +3,11 @@ import { pathToFileURL } from 'node:url';
 const MAX_RESPONSE_BYTES = 512 * 1024;
 const LOCAL_REQUEST_TIMEOUT_MS = 30_000;
 const EDGE_REQUEST_TIMEOUT_MS = 10_000;
+const ACCESS_AUDIENCE_BY_ORIGIN = Object.freeze({
+  'https://agentfriendlyweb.dev': 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac',
+  'https://release.agentfriendlyweb.dev': 'afac57a0e7660c20cffe344cd331a2d42a37eb1440d6b20bdbca9d6ad89708ac',
+  'https://canary.agentfriendlyweb.dev': '5e6f80fdd77e026d6e9f513d4614d22e10cba0f7a90ea4bf7a10b27d6de67a45',
+});
 
 export const CLOUD_NATIVE_SMOKE_ROUTES = Object.freeze([
   { path: '/', boundary: 'public', contentType: 'text/html', marker: /Agent Friendly Web/i },
@@ -14,7 +19,18 @@ export const CLOUD_NATIVE_SMOKE_ROUTES = Object.freeze([
   { path: '/okf/v0.2/manifest.json', boundary: 'public', contentType: 'application/json', marker: /OKF|open.knowledge/i },
   { path: '/api-catalog', boundary: 'public', contentType: 'application/linkset+json', marker: /agentfriendlyweb\.dev/i },
   { path: '/expediente', boundary: 'private' },
+  { path: '/api/projects', boundary: 'private' },
+  { path: '/api/projects/probe', boundary: 'private' },
 ]);
+
+function cancelWithoutBlocking(streamOrReader) {
+  try {
+    const cancellation = streamOrReader?.cancel();
+    if (cancellation && typeof cancellation.catch === 'function') void cancellation.catch(() => {});
+  } catch {
+    // Cancellation is best-effort and must never block the smoke result.
+  }
+}
 
 async function readBoundedBody(response, limit = MAX_RESPONSE_BYTES) {
   if (!response.body) return '';
@@ -26,7 +42,10 @@ async function readBoundedBody(response, limit = MAX_RESPONSE_BYTES) {
       const { done, value } = await reader.read();
       if (done) break;
       total += value.byteLength;
-      if (total > limit) throw new Error(`response exceeds ${limit} bytes`);
+      if (total > limit) {
+        cancelWithoutBlocking(reader);
+        throw new Error(`response exceeds ${limit} bytes`);
+      }
       chunks.push(value);
     }
   } finally {
@@ -41,11 +60,24 @@ async function readBoundedBody(response, limit = MAX_RESPONSE_BYTES) {
   return new TextDecoder().decode(body);
 }
 
-function isAccessBoundary(response) {
-  if ([401, 403].includes(response.status)) return true;
+function isAccessBoundary(response, origin, routePath) {
   if (![301, 302, 303, 307, 308].includes(response.status)) return false;
   const location = response.headers.get('location') || '';
-  return /(?:cloudflareaccess\.com\/cdn-cgi\/access|\/cdn-cgi\/access\/login)/i.test(location);
+  const challenge = response.headers.get('www-authenticate') || '';
+  const cookie = response.headers.get('set-cookie') || '';
+  try {
+    const login = new URL(location);
+    return login.protocol === 'https:'
+      && login.hostname === 'tokenizart.cloudflareaccess.com'
+      && login.pathname === `/cdn-cgi/access/login/${origin.hostname}`
+      && login.searchParams.get('kid') === ACCESS_AUDIENCE_BY_ORIGIN[origin.origin]
+      && /^[^.]+\.[^.]+\.[^.]+$/.test(login.searchParams.get('meta') || '')
+      && login.searchParams.get('redirect_url') === routePath
+      && challenge === `Cloudflare-Access resource_metadata="${origin.origin}/.well-known/cloudflare-access-protected-resource${routePath}"`
+      && /(?:^|,\s*)CF_AppSession=[^;]+;/i.test(cookie);
+  } catch {
+    return false;
+  }
 }
 
 function isLocalPrivateBoundary(response) {
@@ -58,9 +90,15 @@ export async function runCloudflareNativeSmoke({
   mode = 'local',
   fetchImpl = fetch,
 } = {}) {
-  if (!['local', 'access-edge'].includes(mode)) throw new Error('mode must be local or access-edge');
+  if (!['local', 'access-edge', 'public-edge'].includes(mode)) throw new Error('mode must be local, access-edge or public-edge');
   const origin = new URL(baseUrl || 'http://127.0.0.1:8788');
   if (origin.pathname !== '/' || origin.search || origin.hash) throw new Error('baseUrl must be an origin');
+  if (mode === 'public-edge' && origin.origin !== 'https://agentfriendlyweb.dev') {
+    throw new Error('public-edge origin must be Agent Friendly Web production');
+  }
+  if (mode === 'access-edge' && !['https://canary.agentfriendlyweb.dev', 'https://release.agentfriendlyweb.dev'].includes(origin.origin)) {
+    throw new Error('access-edge origin must be an approved Agent Friendly Web release');
+  }
   const requestTimeoutMs = mode === 'local' ? LOCAL_REQUEST_TIMEOUT_MS : EDGE_REQUEST_TIMEOUT_MS;
 
   const checks = [];
@@ -74,20 +112,22 @@ export async function runCloudflareNativeSmoke({
         headers: { accept: route.contentType || 'text/html' },
       });
 
-      if (mode === 'access-edge') {
-        const ok = isAccessBoundary(response);
+      if (mode === 'access-edge' || (mode === 'public-edge' && route.boundary === 'private')) {
+        const ok = isAccessBoundary(response, origin, route.path);
+        cancelWithoutBlocking(response.body);
         checks.push({
           path: route.path,
           boundary: 'cloudflare_access',
           status: response.status,
           ok,
-          ...(ok ? {} : { error: 'canary route bypassed Cloudflare Access' }),
+          ...(ok ? {} : { error: 'route did not present the expected Cloudflare Access login redirect' }),
         });
         continue;
       }
 
       if (route.boundary === 'private') {
         const ok = isLocalPrivateBoundary(response);
+        cancelWithoutBlocking(response.body);
         checks.push({
           path: route.path,
           boundary: route.boundary,
@@ -115,7 +155,7 @@ export async function runCloudflareNativeSmoke({
     } catch (error) {
       checks.push({
         path: route.path,
-        boundary: mode === 'access-edge' ? 'cloudflare_access' : route.boundary,
+        boundary: mode === 'access-edge' || (mode === 'public-edge' && route.boundary === 'private') ? 'cloudflare_access' : route.boundary,
         status: 0,
         ok: false,
         error: error instanceof Error ? error.message : String(error),
