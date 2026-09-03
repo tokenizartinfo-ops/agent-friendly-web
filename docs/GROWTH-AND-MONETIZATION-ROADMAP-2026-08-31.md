@@ -103,7 +103,7 @@ La secuencia remota se divide para reducir riesgo:
 
 ### Gate 6D - Ventas y CRM ligero
 
-**Estado local:** maquina de estados y planificador `local_planning_only` implementados sin PII, datos reales, D1, email, propuestas ni pagos. Toda persistencia remota requiere aprobacion separada y debe comenzar despues del canary `afw_canary` de Gates 6B y 6C.
+**Estado actual:** la maquina de estados conserva su contrato base `local_planning_only`; Gate 6D.1 verifico planificacion sintetica read-only; Gate 6D.2 persistio una sola oportunidad sintetica y restauro el kill switch OFF; Gate 6D.3 prepara localmente una bandeja privada read-only. Datos reales, email, propuestas y pagos permanecen deshabilitados.
 
 Estados minimos:
 
@@ -324,6 +324,10 @@ Estos umbrales son hipotesis de arranque, no benchmarks de mercado. Se revisan c
 ### Gate 6D.2 - primera persistencia CRM sintetica
 
 El Gate 6D.2 alcanzo `synthetic_crm_persistence_verified_kill_switch_off`: guardo exactamente una oportunidad sintetica y su transicion a `qualified`, demostro replay idempotente y restauro el Worker OFF. Es metadata-only, no altero los conteos previos y mantiene apagadas las capacidades de correo, propuesta, pago y modificacion de sitios. La captacion real sigue cerrada y requiere una especificacion separada de privacidad, retencion, consentimiento y borrado.
+
+### Gate 6D.3 - bandeja CRM sintetica read-only
+
+La bandeja privada esta `local_ready_remote_disabled`. Lee exclusivamente la oportunidad `example.invalid` del actor autenticado y presenta su etapa, alcance, siguiente paso e historia sin devolver referencias internas de seguridad. No contiene formularios ni controles de mutacion y no puede cambiar etapa, enviar correo, crear propuestas, cobrar pagos o modificar sitios. Una prueba remota posterior debe mantener la frontera Access, confirmar una sola fila y demostrar `rows_written=0` antes de volver a OFF.
 
 - `docs/COMPANY-BUILDING-AND-CAPITAL-ROADMAP-2026-09-02.md`
 - `docs/FOUNDER-NARRATIVE-AND-BRAND-FOUNDATION-V1.md`

@@ -182,6 +182,10 @@ La primera integracion entre captacion y CRM alcanzo `synthetic_commercial_revie
 
 El Gate 6D.2 alcanzo `synthetic_crm_persistence_verified_kill_switch_off`. Las tablas CRM Lite aditivas guardaron solamente el plan sintetico validado en 6D.1: una oportunidad `qualified` y un evento de transicion. El replay devolvio el registro existente sin agregar filas, los conteos previos permanecieron iguales y el canary volvio a la version OFF. No habilita contactos reales, correos, propuestas, pagos ni cambios en sitios.
 
+### Gate 6D.3 - lectura humana de la oportunidad sintetica
+
+El incremento esta `local_ready_remote_disabled`. Agrega una bandeja privada que lee la unica oportunidad sintetica del actor Access y muestra una linea temporal sin exponer hashes, referencias internas o PII. No puede editar, avanzar etapas ni disparar correo, propuesta, pago o implementacion. Su eventual verificacion remota permanece limitada a `afw_canary` y debe terminar con el flag OFF.
+
 ## Gobierno y revision
 
 - Gabriel decide marca, oferta, capital, precios, contratos y publicacion.
