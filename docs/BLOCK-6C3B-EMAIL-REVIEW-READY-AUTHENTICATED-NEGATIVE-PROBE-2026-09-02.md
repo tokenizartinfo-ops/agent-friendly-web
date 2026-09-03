@@ -56,3 +56,7 @@ El gate rechazo la operacion antes de verificar identidad de negocio, leer paylo
 La infraestructura ya supero el ultimo control negativo. El siguiente paso, separado y sujeto a confirmacion humana en el momento de la accion, es habilitar temporalmente el flag, enviar exactamente un correo `internal_review_ready` de plantilla fija al unico destino privado ya vinculado, registrar el recibo metadata-only y volver inmediatamente el flag a `false`. No se permite reintento automatico.
 
 Este estado no habilita correo a clientes, destinatarios arbitrarios, marketing, autorespuestas, adjuntos, CRM, billing ni automatizacion.
+
+## Resultado posterior - 2026-09-03
+
+La confirmacion humana posterior habilito un solo intento real. El proveedor fue invocado una vez, pero no se entrego correo; no hubo reintento y la version OFF se restauro inmediatamente. El estado vigente es `single_canary_attempt_failed_no_retry_kill_switch_off`. El diagnostico `missing_explicit_to_field_for_fixed_destination_binding` fue corregido localmente y todavia no fue verificado en remoto. Ver `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-SINGLE-CANARY-ATTEMPT-2026-09-03.md`.

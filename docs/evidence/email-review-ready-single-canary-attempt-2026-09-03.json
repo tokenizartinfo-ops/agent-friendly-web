@@ -1,0 +1,72 @@
+{
+  "contract": "agent-friendly-web.email-review-ready-single-canary-attempt-evidence.v1",
+  "status": "single_canary_attempt_failed_no_retry_kill_switch_off",
+  "recorded_at": "2026-09-03T04:21:06.897804Z",
+  "scope": {
+    "project": "agent-friendly-web",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "environment": "afw_email_review_ready_canary",
+    "origin": "https://canary.agentfriendlyweb.dev",
+    "public_origin_modified": false,
+    "tokenizart_resources_used": false
+  },
+  "worker": {
+    "name": "agent-friendly-web-web-canary",
+    "enabled_version_id": "960c2834-3199-4c44-b42d-8d8a177b6007",
+    "restored_off_version_id": "189d6cd1-b70c-4552-aa1c-3e0101b35911",
+    "rollback_deployment_id": "3d4d48d3-3fa6-4b1e-9191-76c48d189e16",
+    "flag_enabled_after_attempt": false,
+    "traffic_scope": "isolated_canary_only"
+  },
+  "delivery": {
+    "event_id": "afw-review-ready-20260903-987d8c487e0b",
+    "template_id": "internal-review-ready-v1",
+    "locale": "es",
+    "purpose": "internal_review_ready",
+    "approved_attempts": 1,
+    "provider_invocations": 1,
+    "automatic_retries": 0,
+    "manual_retries": 0,
+    "email_sent": false,
+    "provider_receipt_present": false,
+    "sanitized_failure_code": "provider_delivery_failed"
+  },
+  "database": {
+    "id": "2b518988-eacb-4c31-b760-4e58c3c0285b",
+    "delivery_rows": {
+      "total": 1,
+      "reserved": 0,
+      "sent": 0,
+      "failed": 1
+    }
+  },
+  "provider_checks": {
+    "daily_sent": 0,
+    "daily_quota": 200,
+    "over_quota": false,
+    "sending_domain_enabled": true,
+    "fixed_destination_status": "verified",
+    "suppressions": 0,
+    "gmail_exact_subject_matches": 0
+  },
+  "diagnosis": {
+    "code": "missing_explicit_to_field_for_fixed_destination_binding",
+    "confidence": "high_contract_reproduction_provider_error_sanitized",
+    "provider_specific_error_available": false,
+    "other_provider_preconditions_checked": true
+  },
+  "local_fix": {
+    "explicit_to": "undefined",
+    "request_supplied_recipient": false,
+    "test_red_failures": 2,
+    "test_green_passed": 13,
+    "remotely_verified": false
+  },
+  "next_gate": {
+    "deploy_corrected_code_with_flag_off": true,
+    "authenticated_negative_probe_required": true,
+    "requires_new_action_time_approval": true,
+    "automatic_retry_allowed": false
+  }
+}
+

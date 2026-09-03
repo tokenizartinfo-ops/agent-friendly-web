@@ -46,4 +46,8 @@ No habilita correo a clientes, destinatarios arbitrarios, marketing, autorespues
 
 ## Rollback
 
-El rollback normal elimina `EMAIL_REVIEW_READY` y `AFW_EMAIL_REVIEW_READY_ALLOWED_SUBJECT_HASHES` de la configuracion remota, conserva `AFW_EMAIL_REVIEW_READY_ENABLED=false` y redespliega el codigo previo. La migracion `0006` es aditiva y la tabla sigue vacia, por lo que no requiere borrar schema.
+El rollback normal elimina `EMAIL_REVIEW_READY` y `AFW_EMAIL_REVIEW_READY_ALLOWED_SUBJECT_HASHES` de la configuracion remota, conserva `AFW_EMAIL_REVIEW_READY_ENABLED=false` y redespliega el codigo previo. En esta fase la migracion `0006` era aditiva y la tabla seguia vacia, por lo que no requeria borrar schema.
+
+## Resultado posterior - 2026-09-03
+
+El primer intento confirmado no produjo entrega. Hubo una sola invocacion, cero reintentos y restauracion inmediata de la version OFF. D1 conserva una unica fila historica `failed`. El estado vigente y la correccion local del contrato de destinatario se documentan en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-SINGLE-CANARY-ATTEMPT-2026-09-03.md`.

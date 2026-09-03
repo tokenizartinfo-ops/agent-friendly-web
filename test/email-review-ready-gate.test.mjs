@@ -154,12 +154,14 @@ test('sends one fixed-template message after reservation and records its receipt
   });
   assert.equal(sentMessages.length, 1);
   assert.deepEqual(sentMessages[0], {
+    to: undefined,
     from: 'hello@agentfriendlyweb.dev',
     replyTo: 'hello@agentfriendlyweb.dev',
     subject: 'Agent Friendly Web: solicitud lista para revision',
     text: 'Hay una solicitud de Agent Friendly Web lista para revision humana. Referencia: afw-review-ready-20260902-0001.',
   });
-  assert.equal('to' in sentMessages[0], false);
+  assert.equal('to' in sentMessages[0], true);
+  assert.equal(sentMessages[0].to, undefined);
   assert.equal(marks.length, 1);
   assert.equal(marks[0][1], '00000000-0000-4000-8000-000000000601');
   assert.equal(marks[0][2], 'provider-message-001');

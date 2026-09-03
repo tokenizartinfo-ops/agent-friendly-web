@@ -1,7 +1,7 @@
 {
   "contract": "agent-friendly-web.email-operations.v1",
-  "status": "private_bindings_ready_kill_switch_off",
-  "updated_at": "2026-09-02",
+  "status": "single_canary_attempt_failed_no_retry_kill_switch_off",
+  "updated_at": "2026-09-03",
   "canonical_address": {
     "address": "hello@agentfriendlyweb.dev",
     "status": "inbound_verified"
@@ -41,6 +41,14 @@
   },
   "outbound_canary_contract": "https://agentfriendlyweb.dev/.well-known/email-outbound-canary-contract.json",
   "review_ready_contract": "https://agentfriendlyweb.dev/.well-known/email-review-ready-contract.json",
+  "latest_transactional_canary": {
+    "status": "failed_no_delivery_kill_switch_off",
+    "provider_invocations": 1,
+    "retries": 0,
+    "email_sent": false,
+    "local_fix": "explicit_to_undefined",
+    "remotely_verified_fix": false
+  },
   "human_review_required_for": [
     "security",
     "privacy-and-withdrawal",
@@ -58,5 +66,5 @@
     "read_attachments"
   ],
   "requires_separate_remote_approval": true,
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-2026-08-31.md"
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-SINGLE-CANARY-ATTEMPT-2026-09-03.md"
 }

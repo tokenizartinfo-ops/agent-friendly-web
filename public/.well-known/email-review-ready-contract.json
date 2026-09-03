@@ -1,7 +1,7 @@
 {
   "contract": "agent-friendly-web.email-review-ready.v1",
-  "status": "private_bindings_ready_kill_switch_off",
-  "updated_at": "2026-09-02",
+  "status": "single_canary_attempt_failed_no_retry_kill_switch_off",
+  "updated_at": "2026-09-03",
   "environment": "afw_email_review_ready_canary",
   "origin": "https://canary.agentfriendlyweb.dev",
   "transactional_case": {
@@ -54,10 +54,22 @@
     "arbitrary_recipients": false,
     "customer_sending": false
   },
+  "latest_canary": {
+    "status": "failed_no_delivery",
+    "approved_attempts": 1,
+    "provider_invocations": 1,
+    "retries": 0,
+    "email_sent": false,
+    "kill_switch_after_attempt": "false",
+    "local_fix": "explicit_to_undefined",
+    "remotely_verified_fix": false
+  },
   "next_gate_preconditions": [
+    "complete_full_local_verification",
+    "deploy_corrected_code_with_kill_switch_off",
     "authenticate_allowlisted_human_operator",
-    "verify_kill_switch_off_returns_404",
-    "obtain_human_approval_for_exactly_one_controlled_send"
+    "verify_kill_switch_off_returns_404_without_new_delivery_row",
+    "obtain_new_human_approval_at_action_time_before_any_new_send"
   ],
   "blocked_actions": [
     "accept_recipient_from_request",
@@ -69,5 +81,5 @@
     "read_inbound_message_body",
     "read_attachments"
   ],
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-PRIVATE-BINDINGS-2026-09-02.md"
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-SINGLE-CANARY-ATTEMPT-2026-09-03.md"
 }

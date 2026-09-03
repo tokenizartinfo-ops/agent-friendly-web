@@ -217,7 +217,13 @@ El destino fijo y la allowlist de identidad opaca quedaron configurados exclusiv
 
 La identidad humana Access y la validacion JWT de aplicacion quedaron comprobadas. Una superficie privada sin campos libres ejecuto el contrato fijo con el kill switch apagado y obtuvo `404 email_review_ready_unavailable`, `sent=false`; la consulta agregada posterior confirmo cero entregas y cero escrituras en D1. El estado avanza a `authenticated_negative_probe_verified_kill_switch_off`. Un unico canary real requiere confirmacion humana en el momento de la accion y deshabilitacion inmediata posterior.
 
-Access rechazo solicitudes sin identidad, produccion mantuvo la ruta ausente y D1 conservo cero filas. No se envio correo. Falta una sesion humana Access vigente para verificar el `404` autenticado de aplicacion antes de considerar un unico canary controlado. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-PRIVATE-BINDINGS-2026-09-02.md`.
+Access rechazo solicitudes sin identidad, produccion mantuvo la ruta ausente y D1 conservo cero filas. No se envio correo en esta fase. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-PRIVATE-BINDINGS-2026-09-02.md` y `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-AUTHENTICATED-NEGATIVE-PROBE-2026-09-02.md`.
+
+## Actualizacion Gate 6C.3B fase 4 - 2026-09-03
+
+Luego de una confirmacion humana exacta se habilito temporalmente el canary y se ejecuto un solo intento `internal_review_ready`. Hubo una invocacion al proveedor, el evento quedo `failed`, no se recibio comprobante ni correo, no hubo reintento y se restauro inmediatamente la version con flag OFF. El estado vigente es `single_canary_attempt_failed_no_retry_kill_switch_off`.
+
+La revision encontro `missing_explicit_to_field_for_fixed_destination_binding`: el mensaje omitia la propiedad que Cloudflare usa para sustituir el destino privado fijo. La correccion `to: undefined` paso de dos fallos esperados a `13/13` pruebas especificas, pero continua solo local y sin verificacion remota. Otro intento requiere suite completa, despliegue con flag OFF, prueba negativa autenticada y nueva confirmacion humana en el momento de la accion. La evidencia vive en `docs/BLOCK-6C3B-EMAIL-REVIEW-READY-SINGLE-CANARY-ATTEMPT-2026-09-03.md`.
 
 ## Pruebas negativas obligatorias
 
