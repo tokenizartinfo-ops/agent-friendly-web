@@ -1,6 +1,6 @@
 # Gate 6D.4B: Contact Privacy Lifecycle Local Evidence
 
-**Status:** `local_gate_passed`
+**Status:** `local_gate_passed_after_whole_branch_review`
 
 **Environment:** `local_only`
 
@@ -9,6 +9,8 @@
 **Branch:** `docs/company-building-capital-roadmap-v1`
 
 **Task 6 baseline:** `782406a5ddb2b7be389bdff949977551410a8e11`
+
+**Final reviewed implementation head:** `ce2747bc94f4240fa0c2a9203372edc73a2cf243`
 
 ## Scope and Observed State
 
@@ -54,14 +56,21 @@ No Cloudflare resource was read or mutated. The only deploy-related command was 
 
 - `782406a5ddb2b7be389bdff949977551410a8e11` - `docs: publish disabled privacy lifecycle contract`
 
+### Whole-branch hardening
+
+- `ce2747bc94f4240fa0c2a9203372edc73a2cf243` - `fix: harden contact privacy lifecycle`
+- prevents an erased contact from being recreated by replaying the original intake request;
+- resolves same-timestamp consent conflicts in favor of withdrawal or supersession;
+- enforces a purpose-specific allowlist of approved consent-copy versions before any D1 activity.
+
 ## Required Local Verification
 
 All commands below ran from the stated worktree with the default local toolchain.
 
 | Command | Exit | Observed result |
 | --- | ---: | --- |
-| `node --test test/contact-privacy-policy.test.mjs test/block6d4-local-migration.test.mjs test/contact-privacy-d1-store.test.mjs test/contact-privacy-erasure.test.mjs test/contact-privacy-contract.test.mjs test/contact-d1-store.test.mjs test/crm-lite.test.mjs test/synthetic-crm-persistence.test.mjs test/synthetic-crm-readonly.test.mjs` | `0` | `64/64` passed; `0` failed, skipped or cancelled. |
-| `npm test` | `0` | `578/578` passed; `0` failed, skipped or cancelled. |
+| `node --test test/contact-privacy-policy.test.mjs test/block6d4-local-migration.test.mjs test/contact-privacy-d1-store.test.mjs test/contact-privacy-erasure.test.mjs test/contact-privacy-contract.test.mjs test/contact-d1-store.test.mjs test/contact-intake.test.mjs test/contact-gate.test.mjs test/synthetic-contact-canary.test.mjs test/crm-lite.test.mjs test/synthetic-crm-persistence.test.mjs test/synthetic-crm-readonly.test.mjs` | `0` | `89/89` passed; `0` failed, skipped or cancelled. |
+| `npm test` | `0` | `584/584` passed; `0` failed, skipped or cancelled. |
 | `npm run lint` | `0` | `0` errors and `1` pre-existing `@next/next/no-img-element` warning at `app/components/comic-home-intro.tsx:36`. |
 | `npm run build` | `0` | Vinext completed all `5/5` build phases and printed `Build complete.` |
 | `npm run web:deploy:dry-run` | `0` | Printed `Dry run complete. No build or deploy performed.` Remote deploys remain `0`. |
@@ -86,8 +95,14 @@ The migration is additive: its destructive-token scan is empty, and `test/block6
 - `@vinext/cloudflare` `1.0.0-beta.6` reported during the deploy dry-run that `next/image` is served unoptimized unless Cloudflare Images is configured. No configuration was changed.
 - `git add` emitted the Windows working-copy notice that LF will be replaced by CRLF the next time Git touches this evidence file; the staged whitespace check remained clean.
 
+## Independent Whole-Branch Review
+
+The first whole-branch review identified three Important cross-task findings: replay after erasure could recreate PII, equal-timestamp consent events depended on UUID order, and consent-copy versions were syntactically but not semantically allowlisted. Commit `ce2747bc94f4240fa0c2a9203372edc73a2cf243` resolved all three with observed RED -> GREEN regression tests.
+
+A fresh independent reviewer then inspected the complete fix diff and returned `APPROVED`: Critical `0`, Important `0`, Minor `0`, blocker `No`. No migration, runtime configuration, remote resource, real contact, email, Tokenizart resource, or `*.chatgpt.site` surface was added or used by the hardening work.
+
 ## Gate Decision
 
-Gate 6D.4B has reproducible local evidence and remains remote-disabled. This evidence does not authorize a remote migration, deployment, traffic change, real-contact access, email delivery, or use of shared Cloudflare or Tokenizart resources.
+Gate 6D.4B has reproducible local evidence, a clean whole-branch review, and remains remote-disabled. This evidence does not authorize a remote migration, deployment, traffic change, real-contact access, email delivery, or use of shared Cloudflare or Tokenizart resources.
 
 The next gate is `6D.4C private synthetic lifecycle`; it is not active and requires a separately declared and approved operation.
