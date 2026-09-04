@@ -188,11 +188,19 @@ El incremento alcanzo `synthetic_crm_readonly_verified_kill_switch_off`. La band
 
 ### Gate 6D.4B - politica ejecutable local - 2026-09-03
 
-La politica, el schema aditivo y los stores de privacidad estan listos y probados localmente. `consent_receipts` sigue siendo la fuente legacy inmutable de grants iniciales, mientras `contact_consent_events` agrega los nuevos grants, retiros y supersesiones sin reescribir ese historial.
+Al cierre de Gate 6D.4B, la politica, el schema aditivo y los stores de privacidad estaban listos y probados localmente. `consent_receipts` sigue siendo la fuente legacy inmutable de grants iniciales, mientras `contact_consent_events` agrega los nuevos grants, retiros y supersesiones sin reescribir ese historial.
 
-No se ejecuto migracion remota de Gate 6D.4 ni backfill, no hay ruta publica de derechos y no se usaron contactos reales ni recursos de Tokenizart. Los cuatro flags de contacto real, derechos, retencion y novedades permanecen como string `false` en base, canary y produccion.
+En esa etapa no se habia ejecutado la migracion remota ni un backfill, no habia ruta publica de derechos y no se habian usado contactos reales ni recursos de Tokenizart. Los cuatro flags de contacto real, derechos, retencion y novedades permanecian como string `false` en base, canary y produccion.
 
-El contrato machine-readable existe solo como artefacto local y aun no se anuncia en discovery como capacidad desplegada. El siguiente gate, 6D.4C, es una etapa separada, privada y exclusivamente sintetica.
+El contrato machine-readable era solo un artefacto local y no se anunciaba en discovery como capacidad desplegada. El gate siguiente era 6D.4C, separado, privado y exclusivamente sintetico.
+
+### Gate 6D.4C - lifecycle privado sintetico - 2026-09-04
+
+Gate 6D.4C alcanzo `private_synthetic_lifecycle_verified_kill_switch_off` en `afw_canary`. La migracion aditiva `0008_contact_privacy_lifecycle.sql` se aplico solo a la D1 canary y el unico fixture fijo `.invalid` completo grant, rectificacion, export, retiro y borrado/supresion. El replay no agrego eventos. Los campos directos quedaron vacios y el registro sintetico permanecio en estado `erased`.
+
+El cierre dejo `AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED=false`, los cuatro flags de datos reales en `false` y todos los demas flags sinteticos de escritura apagados. Las entregas de email permanecieron en 4, con 0 envios del gate. La D1 de produccion siguio separada, con 14 tablas, 0 consultas de escritura y 0 filas escritas en la ventana observada de 24 horas. No se uso ningun recurso Tokenizart, contacto real, propuesta, pago o sitio de cliente.
+
+Este resultado no declara preparacion de privacidad para datos reales ni aprobacion legal. El siguiente gate es `private_human_privacy_pilot_legal_review_required`.
 
 ## Gobierno y revision
 

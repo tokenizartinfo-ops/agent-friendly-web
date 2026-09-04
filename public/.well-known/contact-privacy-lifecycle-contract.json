@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "contract": "agent-friendly-web.contact-privacy-lifecycle.v1",
-  "status": "private_synthetic_lifecycle_local_ready_remote_disabled",
+  "status": "private_synthetic_lifecycle_verified_kill_switch_off",
   "audit_requires_email": false,
   "synthetic_privacy_lifecycle_enabled": false,
   "real_contact_enabled": false,
@@ -37,6 +37,6 @@
     "global_legal_compliance": false,
     "legal_review_required_before_real_capture": true
   },
-  "next_gate": "private_synthetic_lifecycle",
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/superpowers/specs/2026-09-03-agent-friendly-web-real-contact-privacy-lifecycle-v1-design.md"
+  "next_gate": "private_human_privacy_pilot_legal_review_required",
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6D4C-SYNTHETIC-PRIVACY-CANARY-REMOTE-2026-09-04.md"
 }

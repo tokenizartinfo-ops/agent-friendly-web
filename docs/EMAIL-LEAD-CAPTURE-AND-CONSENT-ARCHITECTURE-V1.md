@@ -283,11 +283,19 @@ El primer token de prueba fue rechazado antes de escribir porque las credenciale
 
 ## Actualizacion Gate 6D.4B local - 2026-09-03
 
-La politica, el schema aditivo y los stores del ciclo de privacidad estan listos y probados solo en local. `consent_receipts` permanece como fuente legacy inmutable de grants iniciales; `contact_consent_events` es el stream aditivo para nuevos grants, retiros y supersesiones.
+Al cierre de Gate 6D.4B, la politica, el schema aditivo y los stores del ciclo de privacidad estaban listos y probados solo en local. `consent_receipts` permanece como fuente legacy inmutable de grants iniciales; `contact_consent_events` es el stream aditivo para nuevos grants, retiros y supersesiones.
 
-No se ejecuto migracion remota de Gate 6D.4 ni backfill, no existe ruta publica de derechos y no se procesaron contactos reales. `AFW_REAL_CONTACT_ENABLED`, `AFW_PRIVACY_REQUESTS_ENABLED`, `AFW_RETENTION_JOBS_ENABLED` y `AFW_PRODUCT_UPDATES_ENABLED` permanecen en string `false` en base, canary y produccion. No se uso ningun recurso de Tokenizart.
+En esa etapa no se habia ejecutado la migracion remota ni un backfill, no existia ruta publica de derechos y no se habian procesado contactos reales. `AFW_REAL_CONTACT_ENABLED`, `AFW_PRIVACY_REQUESTS_ENABLED`, `AFW_RETENTION_JOBS_ENABLED` y `AFW_PRODUCT_UPDATES_ENABLED` permanecian en string `false` en base, canary y produccion. No se habia usado ningun recurso de Tokenizart.
 
-El contrato machine-readable existe localmente, pero todavia no se anuncia en catalogos de discovery como capacidad desplegada. Gate 6D.4C es un gate posterior, separado, privado y exclusivamente sintetico.
+El contrato machine-readable existia localmente, pero todavia no se anunciaba en catalogos de discovery como capacidad desplegada. Gate 6D.4C era el gate posterior, separado, privado y exclusivamente sintetico.
+
+## Actualizacion Gate 6D.4C remota - 2026-09-04
+
+El canary privado alcanzo `private_synthetic_lifecycle_verified_kill_switch_off`. La migracion `0008_contact_privacy_lifecycle.sql` se aplico correctamente a la D1 canary y la lista final quedo sin pendientes. Sobre el unico fixture fijo `.invalid`, el flujo completo registro dos eventos de consentimiento, cuatro solicitudes de privacidad resueltas, dos supresiones y tres eventos de lifecycle. El replay devolvio `synthetic_privacy_lifecycle_already_completed` sin eventos nuevos.
+
+El contacto sintetico quedo en `erased`, con `erased_at` poblado, `restriction_state=none` y todos los campos directos vacios. Las cuatro filas de email no cambiaron y el gate hizo 0 envios mediante proveedor. El cierre devolvio el Worker a `AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED=false`; los cuatro flags de datos reales y todos los demas flags sinteticos de escritura permanecen apagados. La pagina y la API privadas responden 404 despues del cierre, mientras Access conserva una sola politica allow y cero bypass.
+
+No se procesaron contactos reales, no se uso Tokenizart y no hubo propuesta, pago, sitio de cliente ni mutacion de la D1 de produccion. Esta evidencia sintetica no establece preparacion de privacidad real ni aprobacion legal. El siguiente gate es `private_human_privacy_pilot_legal_review_required`. Evidencia: `docs/BLOCK-6D4C-SYNTHETIC-PRIVACY-CANARY-REMOTE-2026-09-04.md`.
 
 ## Pruebas negativas obligatorias
 

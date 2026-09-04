@@ -329,6 +329,12 @@ El Gate 6D.2 alcanzo `synthetic_crm_persistence_verified_kill_switch_off`: guard
 
 La bandeja privada alcanzo `synthetic_crm_readonly_verified_kill_switch_off`. Leyo exclusivamente la oportunidad `example.invalid` del actor autenticado y presento su etapa, alcance, siguiente paso e historia sin devolver referencias internas de seguridad. No contiene formularios ni controles de mutacion; la prueba remota conservo una sola oportunidad y una transicion, demostro `rows_written=0` y devolvio el Worker a OFF. No habilita cambio de etapa, correo, propuestas, pagos, sitios de clientes ni captacion real.
 
+### Gate 6D.4C - lifecycle de privacidad sintetico
+
+Gate 6D.4C alcanzo `private_synthetic_lifecycle_verified_kill_switch_off`. El canary aplico la migracion aditiva de privacidad, ejecuto grant, rectificacion, export, retiro y borrado/supresion sobre el unico fixture fijo `.invalid`, y comprobo que el replay no agrega eventos. El contacto sintetico quedo borrado de forma segura; las entregas de email permanecieron en 4 y el gate realizo 0 envios.
+
+El Worker final, los cuatro flags de datos reales y todos los demas flags sinteticos de escritura quedaron OFF. Access mantuvo una sola politica allow sin bypass, la D1 de produccion permanecio separada y sin escrituras en la ventana observada, y no hubo contacto real, propuesta, pago, sitio de cliente ni recurso Tokenizart. El siguiente gate es `private_human_privacy_pilot_legal_review_required`; este resultado no equivale a preparacion de privacidad real ni aprobacion legal.
+
 - `docs/COMPANY-BUILDING-AND-CAPITAL-ROADMAP-2026-09-02.md`
 - `docs/FOUNDER-NARRATIVE-AND-BRAND-FOUNDATION-V1.md`
 - `docs/SERVICE-DELIVERY-AND-VALUE-CHAIN-MAP-V1.md`
