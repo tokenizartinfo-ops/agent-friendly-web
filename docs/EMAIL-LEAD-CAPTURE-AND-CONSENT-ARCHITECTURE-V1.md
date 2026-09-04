@@ -281,6 +281,14 @@ La cadena same-origin se verifico bajo estado `synthetic_contact_canary_verified
 
 El primer token de prueba fue rechazado antes de escribir porque las credenciales oficiales Turnstile devuelven accion `test` y hostname `localhost`. La correccion acepta esa semantica solo con el secreto oficial de prueba; cualquier credencial real sigue exigiendo accion `afw_synthetic_contact` y host `canary.agentfriendlyweb.dev`. El rollback dejo `AFW_SYNTHETIC_CONTACT_ENABLED=false` y `AFW_EMAIL_REVIEW_READY_ENABLED=false`. Captura publica, datos personales y marketing permanecen bloqueados. Evidencia: `docs/BLOCK-6C3D-SYNTHETIC-CONTACT-CANARY-REMOTE-2026-09-03.md`.
 
+## Actualizacion Gate 6D.4B local - 2026-09-03
+
+La politica, el schema aditivo y los stores del ciclo de privacidad estan listos y probados solo en local. `consent_receipts` permanece como fuente legacy inmutable de grants iniciales; `contact_consent_events` es el stream aditivo para nuevos grants, retiros y supersesiones.
+
+No se ejecuto migracion remota de Gate 6D.4 ni backfill, no existe ruta publica de derechos y no se procesaron contactos reales. `AFW_REAL_CONTACT_ENABLED`, `AFW_PRIVACY_REQUESTS_ENABLED`, `AFW_RETENTION_JOBS_ENABLED` y `AFW_PRODUCT_UPDATES_ENABLED` permanecen en string `false` en base, canary y produccion. No se uso ningun recurso de Tokenizart.
+
+El contrato machine-readable existe localmente, pero todavia no se anuncia en catalogos de discovery como capacidad desplegada. Gate 6D.4C es un gate posterior, separado, privado y exclusivamente sintetico.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;

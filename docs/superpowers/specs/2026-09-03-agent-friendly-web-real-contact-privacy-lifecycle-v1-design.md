@@ -4,7 +4,7 @@
 
 **Gate:** 6D.4
 
-**Estado:** diseno aprobado; implementacion no iniciada; captura real deshabilitada
+**Estado:** politica, schema y stores listos localmente; runtime remoto y captura real deshabilitados
 
 ## Decision
 
@@ -195,9 +195,11 @@ La implementacion sera aditiva y no cambiara los registros sinteticos existentes
 - `policy_version`;
 - `restriction_state`.
 
-### Evolucion de `consent_receipts`
+### Compatibilidad de consentimientos
 
-El recibo pasa a ser un evento inmutable con acciones `granted`, `withdrawn` o `superseded`. La vigencia se calcula por finalidad y secuencia; nunca se sobreescribe la evidencia historica.
+`consent_receipts` permanece como fuente legacy inmutable de grants iniciales. No se reescribe ni se usa para representar retiros o supersesiones.
+
+`contact_consent_events` es el stream aditivo para nuevos eventos `granted`, `withdrawn` y `superseded`. La vigencia se calcula por finalidad y secuencia entre la fuente legacy y el stream nuevo, sin sobreescribir evidencia historica.
 
 ### `privacy_requests`
 
@@ -321,11 +323,16 @@ El rollback no puede restaurar datos personales eliminados. Una vez confirmado u
 - implementacion planificada con TDD;
 - cero cambios remotos.
 
-### Gate 6D.4B - Politica ejecutable local
+### Gate 6D.4B - Politica ejecutable local - 2026-09-03
 
-- modulo puro, repositorio y migracion aditiva;
-- pruebas de finalidades, derechos y retencion;
-- todos los flags OFF.
+- la politica, el schema aditivo y los stores existen y estan probados localmente;
+- `consent_receipts` conserva los grants iniciales como fuente legacy inmutable;
+- `contact_consent_events` agrega nuevos grants, retiros y supersesiones;
+- no se ejecuto migracion remota de Gate 6D.4 ni backfill;
+- no existe ruta publica de derechos ni se usaron contactos reales;
+- los cuatro flags permanecen como string `false` en base, canary y produccion;
+- no se uso ningun recurso de Tokenizart;
+- el contrato machine-readable existe localmente y no se anuncia aun en discovery como capacidad desplegada.
 
 ### Gate 6D.4C - Ciclo sintetico privado
 
@@ -368,4 +375,4 @@ Estas fuentes orientan el diseno; no constituyen por si solas una certificacion 
 
 ## Siguiente decision
 
-Despues de revisar y aprobar esta especificacion escrita, el siguiente paso es producir el plan tecnico ejecutable de Gate 6D.4B. Ese plan debe comenzar con tests, mantener todos los flags OFF y prohibir cualquier migracion remota o contacto real hasta los subgates correspondientes.
+Gate 6D.4B queda limitado a preparacion local. El siguiente paso es Gate 6D.4C como ciclo de privacidad separado, privado y exclusivamente sintetico; requiere su propia autorizacion y no habilita migracion remota, backfill, rutas publicas ni contactos reales por implicacion.

@@ -186,6 +186,14 @@ El Gate 6D.2 alcanzo `synthetic_crm_persistence_verified_kill_switch_off`. Las t
 
 El incremento alcanzo `synthetic_crm_readonly_verified_kill_switch_off`. La bandeja privada leyo la unica oportunidad sintetica del actor Access y mostro una linea temporal sin exponer hashes, referencias internas o PII. La comprobacion remota registro `rows_written=0`, mantuvo los conteos D1 y devolvio el canary a OFF. No puede editar, avanzar etapas ni disparar correo, propuesta, pago o implementacion; la captacion real sigue cerrada.
 
+### Gate 6D.4B - politica ejecutable local - 2026-09-03
+
+La politica, el schema aditivo y los stores de privacidad estan listos y probados localmente. `consent_receipts` sigue siendo la fuente legacy inmutable de grants iniciales, mientras `contact_consent_events` agrega los nuevos grants, retiros y supersesiones sin reescribir ese historial.
+
+No se ejecuto migracion remota de Gate 6D.4 ni backfill, no hay ruta publica de derechos y no se usaron contactos reales ni recursos de Tokenizart. Los cuatro flags de contacto real, derechos, retencion y novedades permanecen como string `false` en base, canary y produccion.
+
+El contrato machine-readable existe solo como artefacto local y aun no se anuncia en discovery como capacidad desplegada. El siguiente gate, 6D.4C, es una etapa separada, privada y exclusivamente sintetica.
+
 ## Gobierno y revision
 
 - Gabriel decide marca, oferta, capital, precios, contratos y publicacion.
