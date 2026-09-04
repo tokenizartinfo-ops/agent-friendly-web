@@ -47,6 +47,19 @@ Esta separacion es una medida tecnica y de seguridad. No pretende definir hoy un
 - Si aparece una venta, se prepara una cotizacion simple y una factura de Tokenizart Group LLC con el servicio claramente identificado.
 - Los ingresos y costos se etiquetan con una referencia `AFW` para poder medirlos sin crear otra contabilidad o infraestructura.
 
+## Identidad editorial inicial
+
+Las comunicaciones editoriales podran presentarse con estas capas claramente diferenciadas:
+
+- **marca y remitente visible:** Agent Friendly Web;
+- **autor personal cuando corresponda:** Gabriel Mucchiut;
+- **pie institucional breve:** `Agent Friendly Web by Tokenizart Group LLC`;
+- **direccion de respuesta:** una cuenta verificada del dominio de Agent Friendly Web cuando este operativa.
+
+Esta formula permite que Gabriel publique analisis, novedades o aprendizajes con voz propia sin crear ahora otra entidad. El pie identifica el marco comercial inicial y no debe interpretarse como una cesion definitiva, una sociedad separada ni una declaracion sobre titularidad futura.
+
+La identidad editorial no habilita envios. Toda newsletter futura requerira consentimiento `product_updates` separado, prueba del texto aceptado, baja simple y verificable, lista de supresion y trazabilidad del remitente. Hasta completar ese gate, `AFW_PRODUCT_UPDATES_ENABLED=false` y no se importa, infiere ni reutiliza una lista de destinatarios.
+
 ## Unica constancia interna
 
 Una nota privada registrara solamente:
@@ -96,3 +109,5 @@ El siguiente paso es el piloto humano privado del ciclo de privacidad con datos 
 - [x] No se integra el shop de Tokenizart.
 - [x] Se conserva separacion tecnica de datos y runtimes.
 - [x] La formalizacion se difiere hasta que exista monetizacion frecuente.
+- [x] La identidad editorial puede usar la marca Agent Friendly Web, autoria de Gabriel y el pie `by Tokenizart Group LLC`.
+- [x] La newsletter permanece tecnicamente deshabilitada hasta tener opt-in y baja verificables.
