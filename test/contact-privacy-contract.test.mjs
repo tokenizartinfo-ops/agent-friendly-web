@@ -36,10 +36,15 @@ test('privacy lifecycle contract reports the verified synthetic canary with ever
 });
 
 test('Gate 6D.4C evidence records one idempotent synthetic lifecycle and the final closed boundary', async () => {
-  const evidence = JSON.parse(await readFile(
+  const evidenceText = await readFile(
     'docs/evidence/synthetic-privacy-lifecycle-canary-remote-2026-09-04.json',
     'utf8',
-  ));
+  );
+  const reportText = await readFile(
+    'docs/BLOCK-6D4C-SYNTHETIC-PRIVACY-CANARY-REMOTE-2026-09-04.md',
+    'utf8',
+  );
+  const evidence = JSON.parse(evidenceText);
 
   assert.equal(evidence.contract, 'agent-friendly-web.synthetic-privacy-lifecycle-canary-remote-evidence.v1');
   assert.equal(evidence.status, 'private_synthetic_lifecycle_verified_kill_switch_off');
@@ -66,9 +71,11 @@ test('Gate 6D.4C evidence records one idempotent synthetic lifecycle and the fin
     policy_id: '39a8f0e6-419f-4c21-b8af-eabd6295a9b9',
     audience: '5e6f80fdd77e026d6e9f513d4614d22e10cba0f7a90ea4bf7a10b27d6de67a45',
     allow_policy_count: 1,
-    allowed_identity: 'tokenizart.info@gmail.com',
+    allowed_identity_count: 1,
     bypass_policy_count: 0,
   });
+  assert.doesNotMatch(evidenceText, /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/iu);
+  assert.doesNotMatch(reportText, /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/iu);
   assert.deepEqual(evidence.migration, {
     name: '0008_contact_privacy_lifecycle.sql',
     applied_successfully: true,

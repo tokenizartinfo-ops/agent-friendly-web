@@ -14,7 +14,7 @@
 - D1 canary: `agent-friendly-web-web-canary` / `2b518988-eacb-4c31-b760-4e58c3c0285b`;
 - D1 produccion: `agent-friendly-web-web-production` / `d26fc9d2-df5a-4957-8e58-cc4c945faad8`.
 
-La aplicacion Access `dc905004-16dc-4174-b6ec-bb9911f6965c`, la politica `39a8f0e6-419f-4c21-b8af-eabd6295a9b9` y la audiencia `5e6f80fdd77e026d6e9f513d4614d22e10cba0f7a90ea4bf7a10b27d6de67a45` conservaron exactamente una politica allow para `tokenizart.info@gmail.com` y ninguna politica bypass.
+La aplicacion Access `dc905004-16dc-4174-b6ec-bb9911f6965c`, la politica `39a8f0e6-419f-4c21-b8af-eabd6295a9b9` y la audiencia `5e6f80fdd77e026d6e9f513d4614d22e10cba0f7a90ea4bf7a10b27d6de67a45` conservaron exactamente una politica allow, una identidad permitida y ninguna politica bypass. La identidad se omite deliberadamente de esta evidencia metadata-only.
 
 ## Recuperacion y migracion
 
