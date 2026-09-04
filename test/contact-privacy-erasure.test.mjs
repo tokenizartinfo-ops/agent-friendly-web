@@ -22,6 +22,7 @@ const validInput = {
 const now = '2026-09-03T22:00:00.000Z';
 const refHash = '11e594f481958c10e3015d0bf0447a22f068a8a647f475df15ce2c7ab4b8f3f1';
 const requestHash = 'cf72ccfdf8c507dca70d390bee3593cb23f44bfa168e933c7924d771cfd70054';
+const ownershipProof = '72cd25cf1a78ae6004e588b14e29ce3c5b7c70d14e75ded5f01f5134ef2dca3e';
 const tombstoneRef = 'contact-erased-11e594f481958c10e301';
 const erasedIdempotency = 'erased-8cca3400b26b951f6157d39a58db3';
 
@@ -107,6 +108,7 @@ class SqliteD1 {
     this.sqlite = sqlite;
     this.batches = [];
     this.beforeBatch = null;
+    this.waitBeforeBatch = null;
   }
 
   prepare(sql) {
@@ -114,6 +116,7 @@ class SqliteD1 {
   }
 
   async batch(statements) {
+    if (this.waitBeforeBatch) await this.waitBeforeBatch();
     if (this.beforeBatch) {
       const beforeBatch = this.beforeBatch;
       this.beforeBatch = null;
@@ -317,7 +320,7 @@ function erasureDatabase({
 
 test('erases identifiers and tombstones only UUID-linked CRM rows in one exact D1 batch', async () => {
   const database = erasureDatabase({ initialSuppressions: [validSuppression()] });
-  database.batchResults = [1, 1, 0, 1].map((changes) => ({
+  database.batchResults = [1, 1, 0, 1, 1].map((changes) => ({
     success: true,
     meta: { changes },
   }));
@@ -330,16 +333,16 @@ test('erases identifiers and tombstones only UUID-linked CRM rows in one exact D
     tombstoneRef,
   });
   assert.equal(database.batches.length, 1);
-  assert.equal(database.batches[0].length, 4);
+  assert.equal(database.batches[0].length, 5);
 
-  const [lead, crm, suppression, lifecycle] = database.batches[0];
+  const [lead, crm, suppression, lifecycle, releaseOwnership] = database.batches[0];
   assert.match(lead.sql, /UPDATE contact_leads/);
   assert.match(lead.sql, /email = '', name = '', domain = '', role = '', organization = ''/);
-  assert.match(lead.sql, /objective = '', source = '', idempotency_key = \?, request_hash = ''/);
+  assert.match(lead.sql, /objective = '', source = '', idempotency_key = \?, request_hash = \?/);
   assert.match(lead.sql, /state = 'erased', erased_at = \?, updated_at = \?/);
   assert.match(lead.sql, /retention_expires_at = '', restriction_state = 'none'/);
   assert.match(lead.sql, /WHERE id = \? AND erased_at = ''/);
-  assert.deepEqual(lead.bindings, [erasedIdempotency, now, now, leadId]);
+  assert.deepEqual(lead.bindings, [erasedIdempotency, ownershipProof, now, now, leadId]);
 
   assert.match(crm.sql, /UPDATE crm_opportunities/);
   assert.match(crm.sql, /contact_ref = \?, domain = 'erased\.invalid', contact_status = 'erased'/);
@@ -355,6 +358,7 @@ test('erases identifiers and tombstones only UUID-linked CRM rows in one exact D
     leadId,
     erasedIdempotency,
     now,
+    ownershipProof,
   ]);
 
   assert.match(suppression.sql, /INSERT INTO contact_suppressions/);
@@ -374,6 +378,7 @@ test('erases identifiers and tombstones only UUID-linked CRM rows in one exact D
     leadId,
     erasedIdempotency,
     now,
+    ownershipProof,
   ]);
 
   assert.match(lifecycle.sql, /INSERT INTO data_lifecycle_events/);
@@ -390,6 +395,14 @@ test('erases identifiers and tombstones only UUID-linked CRM rows in one exact D
     leadId,
     erasedIdempotency,
     now,
+    ownershipProof,
+  ]);
+  assert.match(releaseOwnership.sql, /UPDATE contact_leads SET request_hash = ''/);
+  assert.deepEqual(releaseOwnership.bindings, [
+    leadId,
+    erasedIdempotency,
+    now,
+    ownershipProof,
   ]);
   assert.doesNotMatch(
     JSON.stringify(database.batches[0]),
@@ -476,6 +489,88 @@ test('exact original intake replay after erasure returns a tombstone conflict wi
   }
 });
 
+test('same-millisecond different-key erasure loser is idempotent and commits no partial writes', async () => {
+  const database = createSqliteErasureDatabase();
+  const loserInput = {
+    ...validInput,
+    purpose: 'commercial_contact',
+    idempotencyKey: '6ba7b811-9dad-41d1-80b4-00c04fd430c8',
+  };
+  let arrivals = 0;
+  let releaseBatches;
+  let markFirstReady;
+  const bothReady = new Promise((resolve) => { releaseBatches = resolve; });
+  const firstReady = new Promise((resolve) => { markFirstReady = resolve; });
+  database.waitBeforeBatch = async () => {
+    arrivals += 1;
+    if (arrivals === 1) markFirstReady();
+    if (arrivals === 2) releaseBatches();
+    await bothReady;
+  };
+
+  try {
+    const winnerPromise = applyContactErasureToD1(database, validInput, deterministic());
+    await firstReady;
+    const loserPromise = applyContactErasureToD1(database, loserInput, deterministic({
+      ids: [
+        '00000000-0000-4000-8000-000000000022',
+        '00000000-0000-4000-8000-000000000023',
+      ],
+    }));
+    const settled = await Promise.allSettled([winnerPromise, loserPromise]);
+    const outcomes = settled.map((result) => (
+      result.status === 'fulfilled'
+        ? result.value
+        : { error: result.reason instanceof Error ? result.reason.message : 'non_error' }
+    ));
+    const snapshot = {
+      outcomes,
+      lead: {
+        ...database.sqlite.prepare(`SELECT
+          state, idempotency_key AS idempotencyKey, request_hash AS requestHash
+          FROM contact_leads WHERE id = ?`).get(leadId),
+      },
+      crm: {
+        ...database.sqlite.prepare(`SELECT
+          contact_ref AS contactRef, contact_status AS contactStatus
+          FROM crm_opportunities WHERE id = 'crm-real-1'`).get(),
+      },
+      suppressions: database.sqlite.prepare(`SELECT
+        id, purpose, idempotency_key AS idempotencyKey
+        FROM contact_suppressions ORDER BY id`).all().map((row) => ({ ...row })),
+      lifecycleEvents: database.sqlite.prepare(`SELECT
+        id, idempotency_key AS idempotencyKey
+        FROM data_lifecycle_events WHERE event_type = 'deleted' ORDER BY id`).all()
+        .map((row) => ({ ...row })),
+    };
+
+    assert.deepEqual(snapshot, {
+      outcomes: [
+        { erased: true, duplicate: false, contactStatus: 'erased', tombstoneRef },
+        { erased: true, duplicate: true, contactStatus: 'erased' },
+      ],
+      lead: {
+        state: 'erased',
+        idempotencyKey: erasedIdempotency,
+        requestHash: '',
+      },
+      crm: { contactRef: tombstoneRef, contactStatus: 'erased' },
+      suppressions: [{
+        id: '00000000-0000-4000-8000-000000000020',
+        purpose: validInput.purpose,
+        idempotencyKey,
+      }],
+      lifecycleEvents: [{
+        id: '00000000-0000-4000-8000-000000000021',
+        idempotencyKey,
+      }],
+    });
+    assert.doesNotMatch(JSON.stringify(outcomes[1]), /email|hmac|purpose|policy|request/iu);
+  } finally {
+    database.sqlite.close();
+  }
+});
+
 test('canonicalizes accepted UUIDs before lookup, hashing, binding and generated ID use', async () => {
   const uppercaseInput = {
     ...validInput,
@@ -499,7 +594,13 @@ test('canonicalizes accepted UUIDs before lookup, hashing, binding and generated
 
   assert.equal(result.tombstoneRef, tombstoneRef);
   assert.deepEqual(database.queries[0].bindings, [leadId]);
-  assert.deepEqual(database.batches[0][0].bindings, [erasedIdempotency, now, now, leadId]);
+  assert.deepEqual(database.batches[0][0].bindings, [
+    erasedIdempotency,
+    '433302142fdff91020d5a6a6024817552b0363b7a932d6c8d2a48c10d4266ab9',
+    now,
+    now,
+    leadId,
+  ]);
   assert.deepEqual(database.batches[0][1].bindings, [
     tombstoneRef,
     now,
@@ -507,13 +608,26 @@ test('canonicalizes accepted UUIDs before lookup, hashing, binding and generated
     leadId,
     erasedIdempotency,
     now,
+    '433302142fdff91020d5a6a6024817552b0363b7a932d6c8d2a48c10d4266ab9',
   ]);
   assert.equal(database.batches[0][2].bindings[0], 'abcdefab-cdef-4abc-8def-abcdefabcde0');
   assert.equal(database.batches[0][2].bindings[4], idempotencyKey);
+  assert.equal(
+    database.batches[0][2].bindings.at(-1),
+    '433302142fdff91020d5a6a6024817552b0363b7a932d6c8d2a48c10d4266ab9',
+  );
   assert.equal(database.batches[0][3].bindings[0], 'abcdefab-cdef-4abc-8def-abcdefabcde1');
   assert.equal(database.batches[0][3].bindings[1], refHash);
   assert.equal(database.batches[0][3].bindings[3], idempotencyKey);
   assert.equal(database.batches[0][3].bindings[4], requestHash);
+  assert.equal(
+    database.batches[0][3].bindings.at(-1),
+    '433302142fdff91020d5a6a6024817552b0363b7a932d6c8d2a48c10d4266ab9',
+  );
+  assert.equal(
+    database.batches[0][4].bindings.at(-1),
+    '433302142fdff91020d5a6a6024817552b0363b7a932d6c8d2a48c10d4266ab9',
+  );
 });
 
 test('returns an idempotent tombstone for an already erased contact without generating or batching', async () => {
@@ -558,7 +672,7 @@ test('recovers a same-key race loser from committed erased state without another
     { erased: true, duplicate: true, contactStatus: 'erased' },
   );
   assert.equal(database.batches.length, 1);
-  assert.equal(database.batches[0].length, 4);
+  assert.equal(database.batches[0].length, 5);
   assert.equal(database.queries.length, 5);
 });
 
@@ -572,7 +686,7 @@ test('recovers a different-key zero-change race without creating another lifecyc
       requestHash: 'b'.repeat(64),
     }),
   });
-  database.batchResults = [0, 0, 0, 0].map((changes) => ({
+  database.batchResults = [0, 0, 0, 0, 0].map((changes) => ({
     success: true,
     meta: { changes },
   }));
@@ -588,7 +702,7 @@ test('recovers a different-key zero-change race without creating another lifecyc
   assert.equal(database.queries.length, 5);
 });
 
-test('resolver returns status only, canonicalizes lookup UUIDs and never returns contact PII', async () => {
+test('resolver returns only valid active, restricted and erased states without contact PII', async () => {
   const database = new FakeD1([{
     state: 'erased',
     erasedAt: now,
@@ -603,8 +717,14 @@ test('resolver returns status only, canonicalizes lookup UUIDs and never returns
   });
   assert.deepEqual(database.queries[0].bindings, [leadId]);
 
-  const active = new FakeD1([{ state: 'new', erasedAt: '', restrictionState: 'restricted' }]);
+  const active = new FakeD1([{ state: 'new', erasedAt: '', restrictionState: 'none' }]);
   assert.deepEqual(await resolveContactStatusFromD1(active, leadId), {
+    found: true,
+    contactStatus: 'active',
+    restricted: false,
+  });
+  const restricted = new FakeD1([{ state: 'new', erasedAt: '', restrictionState: 'restricted' }]);
+  assert.deepEqual(await resolveContactStatusFromD1(restricted, leadId), {
     found: true,
     contactStatus: 'active',
     restricted: true,
@@ -614,6 +734,34 @@ test('resolver returns status only, canonicalizes lookup UUIDs and never returns
     contactStatus: 'not_found',
     restricted: false,
   });
+});
+
+test('resolver fails closed when erased state has no erasure timestamp', async () => {
+  const database = new FakeD1([{ state: 'erased', erasedAt: '', restrictionState: 'none' }]);
+  await assertErasureError(
+    () => resolveContactStatusFromD1(database, leadId),
+    'privacy_erasure_failed',
+  );
+});
+
+test('resolver fails closed for an unknown restriction state', async () => {
+  const database = new FakeD1([{ state: 'new', erasedAt: '', restrictionState: 'unexpected' }]);
+  await assertErasureError(
+    () => resolveContactStatusFromD1(database, leadId),
+    'privacy_erasure_failed',
+  );
+});
+
+test('resolver fails closed for a non-empty invalid erasure timestamp', async () => {
+  const database = new FakeD1([{
+    state: 'erased',
+    erasedAt: '2026-09-31T22:00:00.000Z',
+    restrictionState: 'none',
+  }]);
+  await assertErasureError(
+    () => resolveContactStatusFromD1(database, leadId),
+    'privacy_erasure_failed',
+  );
 });
 
 test('rejects non-plain, incomplete, accessor, symbol, unknown and coercible erasure inputs', async () => {
@@ -760,13 +908,16 @@ test('rejects invalid resolver refs without coercion and sanitizes resolver or l
   assert.equal(coercions, 0);
 });
 
-test('fails closed unless all four batch results report exact success', async () => {
+test('fails closed unless all five batch results report exact success', async () => {
   const malformedResults = [
-    [{ success: true }, { success: false }, { success: true }, { success: true }],
-    [{ success: true }, { success: true }, { success: true }],
-    [{ success: true }, { success: true }, { success: true }, { success: true }, { success: true }],
-    [{ success: true }, { success: true }, {}, { success: true }],
-    [{ success: true }, { success: true }, { success: 1 }, { success: true }],
+    [{ success: true }, { success: false }, { success: true }, { success: true }, { success: true }],
+    [{ success: true }, { success: true }, { success: true }, { success: true }],
+    [
+      { success: true }, { success: true }, { success: true },
+      { success: true }, { success: true }, { success: true },
+    ],
+    [{ success: true }, { success: true }, {}, { success: true }, { success: true }],
+    [{ success: true }, { success: true }, { success: 1 }, { success: true }, { success: true }],
     'not-an-array',
   ];
   for (const batchResults of malformedResults) {
@@ -799,7 +950,7 @@ test('does not report a fresh erasure when the guarded lead update changes zero 
     [{ id: leadId, erasedAt: '', idempotencyKey: originalIntakeIdempotencyKey }, null],
     [{ results: [] }],
   );
-  database.batchResults = [0, 0, 0, 0].map((changes) => ({
+  database.batchResults = [0, 0, 0, 0, 0].map((changes) => ({
     success: true,
     meta: { changes },
   }));
@@ -866,7 +1017,7 @@ test('rolls back erasure when an incompatible suppression wins after preflight',
       'privacy_erasure_failed',
     );
     assert.equal(database.batches.length, 1);
-    assert.equal(database.batches[0].length, 4);
+    assert.equal(database.batches[0].length, 5);
     assert.match(database.batches[0][2].sql, /ON CONFLICT\s*\(email_hmac, purpose\)/iu);
     assert.match(database.batches[0][2].sql, /reason_code\s*=\s*NULL/iu);
 
