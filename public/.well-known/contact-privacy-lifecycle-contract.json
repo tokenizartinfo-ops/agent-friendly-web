@@ -1,8 +1,9 @@
 {
   "schema_version": "1.0",
   "contract": "agent-friendly-web.contact-privacy-lifecycle.v1",
-  "status": "local_policy_ready_remote_disabled",
+  "status": "private_synthetic_lifecycle_local_ready_remote_disabled",
   "audit_requires_email": false,
+  "synthetic_privacy_lifecycle_enabled": false,
   "real_contact_enabled": false,
   "privacy_requests_enabled": false,
   "retention_jobs_enabled": false,

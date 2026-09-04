@@ -1,0 +1,65 @@
+{
+  "contract": "agent-friendly-web.synthetic-privacy-lifecycle-canary-preflight.v1",
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_canary",
+  "origin": "https://canary.agentfriendlyweb.dev",
+  "route": {
+    "path": "/api/canary/synthetic-privacy-lifecycle",
+    "visibility": "private",
+    "access_required": true
+  },
+  "resources": {
+    "canary_worker": {
+      "name": "agent-friendly-web-web-canary"
+    },
+    "canary_database": {
+      "name": "agent-friendly-web-web-canary",
+      "id": "2b518988-eacb-4c31-b760-4e58c3c0285b"
+    },
+    "production_worker": {
+      "name": "agent-friendly-web-web-production"
+    },
+    "production_database": {
+      "name": "agent-friendly-web-web-production",
+      "id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8"
+    }
+  },
+  "migrations": [
+    "0008_contact_privacy_lifecycle.sql"
+  ],
+  "expected_flags": {
+    "base": {
+      "AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED": "false",
+      "AFW_REAL_CONTACT_ENABLED": "false",
+      "AFW_PRIVACY_REQUESTS_ENABLED": "false",
+      "AFW_RETENTION_JOBS_ENABLED": "false",
+      "AFW_PRODUCT_UPDATES_ENABLED": "false"
+    },
+    "canary": {
+      "AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED": "false",
+      "AFW_REAL_CONTACT_ENABLED": "false",
+      "AFW_PRIVACY_REQUESTS_ENABLED": "false",
+      "AFW_RETENTION_JOBS_ENABLED": "false",
+      "AFW_PRODUCT_UPDATES_ENABLED": "false"
+    },
+    "production": {
+      "AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED": "false",
+      "AFW_REAL_CONTACT_ENABLED": "false",
+      "AFW_PRIVACY_REQUESTS_ENABLED": "false",
+      "AFW_RETENTION_JOBS_ENABLED": "false",
+      "AFW_PRODUCT_UPDATES_ENABLED": "false"
+    }
+  },
+  "mutation_policy": {
+    "local_preflight_only": true,
+    "canary_remote_mutation": false,
+    "production_mutation": false,
+    "cross_project_mutation": false
+  },
+  "rollback": {
+    "worker_action": "restore_previous_canary_worker_version_with_every_switch_off",
+    "database_action": "use_recorded_pre_migration_d1_time_travel_bookmark_only_on_failure",
+    "production_change_required": false
+  }
+}

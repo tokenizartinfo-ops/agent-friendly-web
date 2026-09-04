@@ -10,8 +10,9 @@ test('privacy lifecycle contract reports local readiness and remote closure', as
     'utf8',
   ));
   assert.equal(contract.contract, 'agent-friendly-web.contact-privacy-lifecycle.v1');
-  assert.equal(contract.status, 'local_policy_ready_remote_disabled');
+  assert.equal(contract.status, 'private_synthetic_lifecycle_local_ready_remote_disabled');
   assert.equal(contract.audit_requires_email, false);
+  assert.equal(contract.synthetic_privacy_lifecycle_enabled, false);
   assert.equal(contract.real_contact_enabled, false);
   assert.equal(contract.privacy_requests_enabled, false);
   assert.equal(contract.retention_jobs_enabled, false);
@@ -35,6 +36,7 @@ test('privacy lifecycle contract reports local readiness and remote closure', as
 test('all web environments keep every real-data flag OFF', async () => {
   const config = JSON.parse(await readFile('wrangler.jsonc', 'utf8'));
   const flags = [
+    'AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED',
     'AFW_REAL_CONTACT_ENABLED',
     'AFW_PRIVACY_REQUESTS_ENABLED',
     'AFW_RETENTION_JOBS_ENABLED',
@@ -43,4 +45,14 @@ test('all web environments keep every real-data flag OFF', async () => {
   for (const vars of [config.vars, config.env.canary.vars, config.env.production.vars]) {
     for (const flag of flags) assert.equal(vars[flag], 'false');
   }
+  assert.equal('AFW_CONTACT_SUPPRESSION_HMAC_KEY' in config.vars, false);
+  assert.equal('AFW_CONTACT_SUPPRESSION_HMAC_KEY' in config.env.canary.vars, false);
+  assert.equal('AFW_CONTACT_SUPPRESSION_HMAC_KEY' in config.env.production.vars, false);
+});
+
+test('generated Worker types expose the OFF switch without materializing the HMAC secret', async () => {
+  const types = await readFile('worker-configuration.d.ts', 'utf8');
+
+  assert.match(types, /AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED: "false";/);
+  assert.doesNotMatch(types, /AFW_CONTACT_SUPPRESSION_HMAC_KEY/);
 });
