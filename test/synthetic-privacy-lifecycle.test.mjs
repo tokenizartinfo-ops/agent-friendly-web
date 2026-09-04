@@ -4,6 +4,7 @@ import test from 'node:test';
 
 import {
   SYNTHETIC_PRIVACY_LIFECYCLE_CONTRACT,
+  createSyntheticPrivacyLifecycleHandler,
   runSyntheticPrivacyLifecycle,
 } from '../lib/synthetic-privacy-lifecycle.mjs';
 
@@ -14,6 +15,13 @@ const FIXTURE_EMAIL = 'synthetic-canary@example.invalid';
 const FIXTURE_NAME = 'Agent Friendly Web Synthetic Canary Rectified';
 const NOW = '2026-09-04T12:00:00.000Z';
 const LATER_NOW = '2026-09-05T12:00:00.000Z';
+const ACCESS_SUBJECT = 'cf-access-subject';
+const ACCESS_SUBJECT_HASH = 'cd8b394ba2c49b0c6af7f53ef31062f0633a9fbf03bdceb795121f2af6356f04';
+const LIFECYCLE_REQUEST = {
+  contract: 'agent-friendly-web.synthetic-privacy-lifecycle.v1',
+  action: 'run_one_private_synthetic_privacy_lifecycle',
+  confirmation: 'synthetic_only',
+};
 
 const COMPLETED_RESULT = {
   status: 'synthetic_privacy_lifecycle_completed',
@@ -510,4 +518,221 @@ test('serializes no identifiers, hashes, SQL, secrets or fixture values', async 
   assert.doesNotMatch(serialized, /[0-9a-f]{64}/iu);
   assert.doesNotMatch(serialized, /\b(?:sql|SELECT|INSERT|UPDATE|DELETE|token|secret)\b/iu);
   assert.doesNotMatch(serialized, /synthetic-canary|example\.invalid|Agent Friendly Web Synthetic Canary/iu);
+});
+
+function lifecycleHttpRequest({
+  url = 'https://canary.agentfriendlyweb.dev/api/canary/synthetic-privacy-lifecycle',
+  method = 'POST',
+  origin = 'https://canary.agentfriendlyweb.dev',
+  body = LIFECYCLE_REQUEST,
+  headers = {},
+} = {}) {
+  return new Request(url, {
+    method,
+    headers: {
+      'content-type': 'application/json',
+      'cf-access-jwt-assertion': 'signed-access-assertion',
+      origin,
+      ...headers,
+    },
+    ...(method === 'GET' || method === 'HEAD' ? {} : { body: JSON.stringify(body) }),
+  });
+}
+
+function lifecycleEnvironment(overrides = {}) {
+  return {
+    AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED: 'true',
+    ACCESS_TEAM_DOMAIN: 'team.cloudflareaccess.com',
+    ACCESS_AUD: 'canary-access-audience',
+    AFW_SYNTHETIC_CONTACT_ALLOWED_SUBJECT_HASHES: ACCESS_SUBJECT_HASH,
+    AFW_CONTACT_SUPPRESSION_HMAC_KEY: SUPPRESSION_HMAC_KEY,
+    AFW_SYNTHETIC_CONTACT_RATE_LIMITER: {
+      async limit() { return { success: true }; },
+    },
+    DB: { prepare() {}, batch() {} },
+    ...overrides,
+  };
+}
+
+function lifecycleHandler(overrides = {}) {
+  return createSyntheticPrivacyLifecycleHandler({
+    async verifyAccessJwt() {
+      return { ok: true, identity: { userId: ACCESS_SUBJECT, email: 'operator@example.invalid' } };
+    },
+    async runLifecycle() {
+      return COMPLETED_RESULT;
+    },
+    ...overrides,
+  });
+}
+
+test('HTTP boundary returns 404 before identity or runtime bindings when its independent switch is off', async () => {
+  let verified = false;
+  const handler = createSyntheticPrivacyLifecycleHandler({
+    async verifyAccessJwt() {
+      verified = true;
+      throw new Error('identity must not be reached');
+    },
+  });
+  const env = {
+    AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED: 'false',
+    get DB() { throw new Error('D1 must not be read'); },
+    get AFW_CONTACT_SUPPRESSION_HMAC_KEY() { throw new Error('HMAC must not be read'); },
+    get AFW_SYNTHETIC_CONTACT_RATE_LIMITER() { throw new Error('limiter must not be read'); },
+  };
+
+  const response = await handler(lifecycleHttpRequest(), env);
+
+  assert.equal(response.status, 404);
+  assert.equal(response.headers.get('cache-control'), 'no-store, private');
+  assert.deepEqual(await response.json(), {
+    ok: false,
+    code: 'synthetic_privacy_lifecycle_unavailable',
+  });
+  assert.equal(verified, false);
+});
+
+test('HTTP boundary accepts only the exact canary HTTPS host, path and origin', async () => {
+  const handler = lifecycleHandler();
+  const rejected = [
+    lifecycleHttpRequest({ url: 'https://agentfriendlyweb.dev/api/canary/synthetic-privacy-lifecycle' }),
+    lifecycleHttpRequest({ url: 'http://canary.agentfriendlyweb.dev/api/canary/synthetic-privacy-lifecycle' }),
+    lifecycleHttpRequest({ url: 'https://canary.agentfriendlyweb.dev/api/canary/synthetic-privacy-lifecycle?again=1' }),
+    lifecycleHttpRequest({ url: 'https://canary.agentfriendlyweb.dev/canary/synthetic-privacy-lifecycle' }),
+    lifecycleHttpRequest({ origin: 'https://agentfriendlyweb.dev' }),
+    lifecycleHttpRequest({ method: 'GET' }),
+  ];
+
+  for (const request of rejected) {
+    const response = await handler(request, lifecycleEnvironment());
+    assert.equal(response.status, 403);
+    assert.deepEqual(await response.json(), {
+      ok: false,
+      code: 'synthetic_privacy_lifecycle_boundary_rejected',
+    });
+  }
+});
+
+test('HTTP boundary requires a valid Access JWT and an allowlisted hashed subject', async () => {
+  let response = await createSyntheticPrivacyLifecycleHandler({
+    async verifyAccessJwt() { return { ok: false, providerDetail: 'private' }; },
+  })(lifecycleHttpRequest(), lifecycleEnvironment());
+  assert.equal(response.status, 403);
+  assert.deepEqual(await response.json(), {
+    ok: false,
+    code: 'synthetic_privacy_lifecycle_identity_rejected',
+  });
+
+  response = await lifecycleHandler()(lifecycleHttpRequest(), lifecycleEnvironment({
+    AFW_SYNTHETIC_CONTACT_ALLOWED_SUBJECT_HASHES: 'f'.repeat(64),
+  }));
+  assert.equal(response.status, 403);
+  assert.equal((await response.json()).code, 'synthetic_privacy_lifecycle_actor_not_allowed');
+
+  for (const invalidEnv of [
+    { ACCESS_TEAM_DOMAIN: '' },
+    { ACCESS_AUD: '' },
+    { AFW_SYNTHETIC_CONTACT_ALLOWED_SUBJECT_HASHES: '' },
+  ]) {
+    response = await lifecycleHandler()(lifecycleHttpRequest(), lifecycleEnvironment(invalidEnv));
+    assert.equal(response.status, 503);
+    assert.equal((await response.json()).code, 'synthetic_privacy_lifecycle_misconfigured');
+  }
+});
+
+test('HTTP boundary requires D1 and HMAC bindings and consumes a subject-scoped rate limit', async () => {
+  const handler = lifecycleHandler();
+  for (const invalidEnv of [
+    { DB: undefined },
+    { DB: { prepare() {} } },
+    { AFW_CONTACT_SUPPRESSION_HMAC_KEY: '' },
+    { AFW_SYNTHETIC_CONTACT_RATE_LIMITER: undefined },
+  ]) {
+    const response = await handler(lifecycleHttpRequest(), lifecycleEnvironment(invalidEnv));
+    assert.equal(response.status, 503);
+    assert.equal((await response.json()).code, 'synthetic_privacy_lifecycle_misconfigured');
+  }
+
+  let observedKey = '';
+  const response = await handler(lifecycleHttpRequest(), lifecycleEnvironment({
+    AFW_SYNTHETIC_CONTACT_RATE_LIMITER: {
+      async limit({ key }) {
+        observedKey = key;
+        return { success: false };
+      },
+    },
+  }));
+  assert.equal(response.status, 429);
+  assert.equal((await response.json()).code, 'synthetic_privacy_lifecycle_rate_limited');
+  assert.equal(observedKey, `synthetic-privacy-lifecycle:${ACCESS_SUBJECT_HASH}`);
+  assert.doesNotMatch(observedKey, /cf-access-subject/u);
+});
+
+test('HTTP boundary accepts only bounded JSON with the exact fixed request keys', async () => {
+  const handler = lifecycleHandler();
+  const invalidRequests = [
+    lifecycleHttpRequest({ body: { ...LIFECYCLE_REQUEST, email: 'person@example.com' } }),
+    lifecycleHttpRequest({ body: { ...LIFECYCLE_REQUEST, confirmation: 'human_data' } }),
+    lifecycleHttpRequest({ body: { action: LIFECYCLE_REQUEST.action } }),
+    lifecycleHttpRequest({ headers: { 'content-type': 'text/plain' } }),
+    lifecycleHttpRequest({ body: { ...LIFECYCLE_REQUEST, padding: 'x'.repeat(2048) } }),
+  ];
+
+  for (const request of invalidRequests) {
+    const response = await handler(request, lifecycleEnvironment());
+    assert.ok([400, 413, 415].includes(response.status));
+    assert.equal((await response.json()).code, 'invalid_synthetic_privacy_lifecycle_request');
+  }
+});
+
+test('HTTP boundary passes only the hashed actor and HMAC secret to the service and sanitizes completion', async () => {
+  const observed = {};
+  const handler = lifecycleHandler({
+    async runLifecycle(database, value) {
+      observed.database = database;
+      observed.value = value;
+      return COMPLETED_RESULT;
+    },
+  });
+  const env = lifecycleEnvironment();
+
+  const response = await handler(lifecycleHttpRequest(), env);
+
+  assert.equal(response.status, 201);
+  assert.deepEqual(await response.json(), COMPLETED_RESULT);
+  assert.equal(observed.database, env.DB);
+  assert.deepEqual(observed.value, {
+    actorRefHash: ACCESS_SUBJECT_HASH,
+    suppressionHmacKey: SUPPRESSION_HMAC_KEY,
+  });
+});
+
+test('HTTP boundary returns the sanitized write-free replay receipt', async () => {
+  const replay = {
+    ...COMPLETED_RESULT,
+    status: 'synthetic_privacy_lifecycle_already_completed',
+  };
+  const response = await lifecycleHandler({
+    async runLifecycle() { return replay; },
+  })(lifecycleHttpRequest(), lifecycleEnvironment());
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), replay);
+});
+
+test('HTTP boundary replaces service failures and malformed results with one stable response', async () => {
+  for (const runLifecycle of [
+    async () => { throw new Error('SQL token secret@example.invalid'); },
+    async () => ({ status: 'completed', email: 'synthetic-canary@example.invalid' }),
+  ]) {
+    const response = await lifecycleHandler({ runLifecycle })(
+      lifecycleHttpRequest(),
+      lifecycleEnvironment(),
+    );
+    assert.equal(response.status, 503);
+    assert.deepEqual(await response.json(), {
+      ok: false,
+      code: 'synthetic_privacy_lifecycle_failed',
+    });
+  }
 });
