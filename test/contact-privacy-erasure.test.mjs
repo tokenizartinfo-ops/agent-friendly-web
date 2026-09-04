@@ -992,6 +992,59 @@ test('validates the committed suppression after the atomic batch', async () => {
   assert.equal(database.batches.length, 1);
 });
 
+test('accepts the compatible same-purpose suppression preserved by the erasure UPSERT', async () => {
+  const database = createSqliteErasureDatabase();
+  const historicalSuppression = {
+    id: '00000000-0000-4000-8000-000000000030',
+    emailHmac: validInput.emailHmac,
+    purpose: validInput.purpose,
+    reasonCode: 'subject_deletion',
+    policyVersion: validInput.policyVersion,
+    idempotencyKey: '6ba7b812-9dad-41d1-80b4-00c04fd430c8',
+    createdAt: '2026-09-01T22:00:00.000Z',
+    expiresAt: '2028-09-02T22:00:00.000Z',
+  };
+  database.sqlite.prepare(`INSERT INTO contact_suppressions (
+    id, email_hmac, purpose, reason_code, policy_version,
+    idempotency_key, created_at, expires_at
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`)
+    .run(...Object.values(historicalSuppression));
+
+  try {
+    const settled = await Promise.allSettled([
+      applyContactErasureToD1(database, validInput, deterministic()),
+    ]);
+    const outcome = settled[0].status === 'fulfilled'
+      ? settled[0].value
+      : {
+          error: settled[0].reason instanceof Error
+            ? settled[0].reason.message
+            : 'non_error',
+        };
+    const suppressions = database.sqlite.prepare(`SELECT
+      id, email_hmac AS emailHmac, purpose, reason_code AS reasonCode,
+      policy_version AS policyVersion, idempotency_key AS idempotencyKey,
+      created_at AS createdAt, expires_at AS expiresAt
+      FROM contact_suppressions ORDER BY id`).all().map((row) => ({ ...row }));
+    const lifecycleEvents = database.sqlite.prepare(`SELECT
+      event_type AS eventType, idempotency_key AS idempotencyKey
+      FROM data_lifecycle_events ORDER BY id`).all().map((row) => ({ ...row }));
+
+    assert.deepEqual({ outcome, lifecycleEvents, suppressions }, {
+      outcome: {
+        erased: true,
+        duplicate: false,
+        contactStatus: 'erased',
+        tombstoneRef,
+      },
+      lifecycleEvents: [{ eventType: 'deleted', idempotencyKey }],
+      suppressions: [historicalSuppression],
+    });
+  } finally {
+    database.sqlite.close();
+  }
+});
+
 test('rolls back erasure when an incompatible suppression wins after preflight', async () => {
   const database = createSqliteErasureDatabase();
   database.beforeBatch = () => {
