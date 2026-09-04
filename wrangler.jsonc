@@ -35,6 +35,7 @@
     "AFW_SYNTHETIC_CRM_PERSISTENCE_ENABLED": "false",
     "AFW_SYNTHETIC_CRM_READONLY_ENABLED": "false",
     "AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED": "false",
+    "AFW_PRIVATE_HUMAN_PRIVACY_PILOT_ENABLED": "false",
     "AFW_REAL_CONTACT_ENABLED": "false",
     "AFW_PRIVACY_REQUESTS_ENABLED": "false",
     "AFW_RETENTION_JOBS_ENABLED": "false",
@@ -69,6 +70,14 @@
             "limit": 3,
             "period": 60
           }
+        },
+        {
+          "name": "AFW_PRIVATE_HUMAN_PRIVACY_RATE_LIMITER",
+          "namespace_id": "1895760675",
+          "simple": {
+            "limit": 5,
+            "period": 60
+          }
         }
       ],
       "unsafe": {
@@ -90,6 +99,7 @@
         "AFW_SYNTHETIC_CRM_PERSISTENCE_ENABLED": "false",
         "AFW_SYNTHETIC_CRM_READONLY_ENABLED": "false",
         "AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED": "false",
+        "AFW_PRIVATE_HUMAN_PRIVACY_PILOT_ENABLED": "false",
         "AFW_REAL_CONTACT_ENABLED": "false",
         "AFW_PRIVACY_REQUESTS_ENABLED": "false",
         "AFW_RETENTION_JOBS_ENABLED": "false",
@@ -121,6 +131,7 @@
         "AFW_SYNTHETIC_CRM_PERSISTENCE_ENABLED": "false",
         "AFW_SYNTHETIC_CRM_READONLY_ENABLED": "false",
         "AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED": "false",
+        "AFW_PRIVATE_HUMAN_PRIVACY_PILOT_ENABLED": "false",
         "AFW_REAL_CONTACT_ENABLED": "false",
         "AFW_PRIVACY_REQUESTS_ENABLED": "false",
         "AFW_RETENTION_JOBS_ENABLED": "false",

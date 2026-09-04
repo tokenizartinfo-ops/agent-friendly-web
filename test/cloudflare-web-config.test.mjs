@@ -75,6 +75,11 @@ test('web Worker config isolates canary and production without attaching traffic
       namespace_id: '1895760674',
       simple: { limit: 3, period: 60 },
     },
+    {
+      name: 'AFW_PRIVATE_HUMAN_PRIVACY_RATE_LIMITER',
+      namespace_id: '1895760675',
+      simple: { limit: 5, period: 60 },
+    },
   ]);
   assert.equal(production.ratelimits, undefined);
 });
