@@ -1,6 +1,6 @@
 # Gate 6D.4B: Contact Privacy Lifecycle Local Evidence
 
-**Status:** `implementation_fixed_pending_final_rereview`
+**Status:** `local_gate_passed_after_independent_final_rereview`
 
 **Environment:** `local_only`
 
@@ -18,7 +18,9 @@
 
 **Final fix round-3 implementation commit:** `5415458ce5079f92461407be2b7f3d4a78336304`
 
-**Review state:** independent final re-review pending; no final `APPROVED` verdict is claimed
+**Final reviewed implementation head:** `e9b5978ae9ac0d549c986ab3dea79badbf23c9c4`
+
+**Review state:** `APPROVED`; Critical `0`, Important `0`, Minor `0`, blocker `No`
 
 ## Scope and Observed State
 
@@ -103,6 +105,7 @@ All commands below ran from the stated worktree with the default local toolchain
 | `npm test` | `0` | `590/590` passed; `0` failed, skipped or cancelled. |
 | `npm run lint` | `0` | `0` errors and `1` pre-existing `@next/next/no-img-element` warning at `app/components/comic-home-intro.tsx:36`. |
 | `npm run build` | `0` | Vinext completed all `5/5` build phases and printed `Build complete.` |
+| `npm run web:deploy:dry-run` | `0` | Printed `Dry run complete. No build or deploy performed.` Remote deploys remain `0`. |
 
 ## Migration and Security Inspection
 
@@ -127,10 +130,12 @@ The migration is additive: its destructive-token scan is empty, and `test/block6
 
 The earlier whole-branch hardening addressed replay after erasure, equal-timestamp consent precedence and purpose-specific consent-copy validation. The final independent whole-branch review of `2f48408f9c914eb3253ec2012c6c93357b84adcc..0a57d9f89cdbdbd8fb511a61eb40e4b19a71a505` nevertheless returned `CHANGES_REQUESTED`: Critical `0`, Important `3`, Minor `0`, blocker `Yes`.
 
-Implementation commit `582b62d0968c3891d437ba0570492a1d2b998d0a` addressed the original two code blockers with observed RED -> GREEN regressions. The first independent re-review returned `CHANGES_REQUESTED` because a compatible historical suppression could be preserved while post-commit validation reported failure; round-2 commit `ddd6e71d3cdf7ba05a53f19b73575e8b9d27d98e` addressed that case. The round-2 re-review then returned `CHANGES_REQUESTED` with one compositional finding involving a simultaneous different-purpose loser. Round-3 commit `5415458ce5079f92461407be2b7f3d4a78336304` addresses it with a coordinated real SQLite RED -> GREEN regression. An independent re-review of round 3 has not yet occurred, so this evidence does not claim `APPROVED`.
+Implementation commit `582b62d0968c3891d437ba0570492a1d2b998d0a` addressed the original two code blockers with observed RED -> GREEN regressions. The first independent re-review returned `CHANGES_REQUESTED` because a compatible historical suppression could be preserved while post-commit validation reported failure; round-2 commit `ddd6e71d3cdf7ba05a53f19b73575e8b9d27d98e` addressed that case. The round-2 re-review then returned `CHANGES_REQUESTED` with one compositional finding involving a simultaneous different-purpose loser. Round-3 commit `5415458ce5079f92461407be2b7f3d4a78336304` addressed it with a coordinated real SQLite RED -> GREEN regression.
+
+The independent round-3 re-review inspected `0b551765433c1ee857e99aaf41f2ba2c636db88e..e9b5978ae9ac0d549c986ab3dea79badbf23c9c4` and returned `APPROVED`: Critical `0`, Important `0`, Minor `0`, blocker `No`. It confirmed unique winner-purpose recovery, bounded suppression validation, one lifecycle event, one unchanged historical suppression, an idempotent loser result and no partial writes.
 
 ## Gate Decision
 
-Gate 6D.4B has reproducible local implementation evidence and remains remote-disabled, but final approval is pending independent re-review. This evidence does not authorize a remote migration, deployment, traffic change, real-contact access, email delivery, or use of shared Cloudflare or Tokenizart resources.
+Gate 6D.4B has reproducible local implementation evidence, an approved final independent re-review and remains remote-disabled. This evidence does not authorize a remote migration, deployment, traffic change, real-contact access, email delivery, or use of shared Cloudflare or Tokenizart resources.
 
 The next gate is `6D.4C private synthetic lifecycle`; it is not active and requires a separately declared and approved operation.
