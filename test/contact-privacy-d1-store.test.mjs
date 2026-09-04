@@ -140,6 +140,82 @@ test('canonical privacy request hash normalizes timestamps and validates its inp
   );
 });
 
+test('canonicalizes consent UUID case before hashing, lookup, binding and return', async () => {
+  const lowercase = {
+    ...consentInput,
+    leadId: 'abcdefab-cdef-4abc-8def-abcdefabcdef',
+  };
+  const uppercase = {
+    ...lowercase,
+    leadId: lowercase.leadId.toUpperCase(),
+    idempotencyKey: lowercase.idempotencyKey.toUpperCase(),
+  };
+  const requestHash = await canonicalConsentLifecycleHash(lowercase);
+  assert.equal(await canonicalConsentLifecycleHash(uppercase), requestHash);
+
+  const duplicate = new FakeD1([{ id: 'evt-existing', requestHash }]);
+  assert.deepEqual(await recordConsentLifecycleEventToD1(duplicate, uppercase), {
+    id: 'evt-existing', persisted: true, duplicate: true, conflict: false,
+  });
+  assert.deepEqual(duplicate.queries[0].bindings, [lowercase.idempotencyKey]);
+  assert.equal(duplicate.batches.length, 0);
+
+  const generatedId = 'ABCDEFAB-CDEF-4ABC-8DEF-ABCDEFABCDEF';
+  const inserted = new FakeD1([null]);
+  assert.deepEqual(
+    await recordConsentLifecycleEventToD1(
+      inserted,
+      uppercase,
+      deterministic({ id: generatedId }),
+    ),
+    {
+      id: generatedId.toLowerCase(),
+      persisted: true,
+      duplicate: false,
+      conflict: false,
+    },
+  );
+  assert.equal(inserted.batches[0][0].bindings[0], generatedId.toLowerCase());
+  assert.equal(inserted.batches[0][0].bindings[1], lowercase.leadId);
+  assert.equal(inserted.batches[0][0].bindings[7], lowercase.idempotencyKey);
+  assert.equal(inserted.batches[0][0].bindings[8], requestHash);
+});
+
+test('canonicalizes privacy request UUID case before hashing, lookup, binding and return', async () => {
+  const uppercase = {
+    ...validRequest,
+    idempotencyKey: validRequest.idempotencyKey.toUpperCase(),
+  };
+  const requestHash = await canonicalPrivacyRequestHash(validRequest);
+  assert.equal(await canonicalPrivacyRequestHash(uppercase), requestHash);
+
+  const duplicate = new FakeD1([{ id: 'req-existing', requestHash }]);
+  assert.deepEqual(await createPrivacyRequestToD1(duplicate, uppercase), {
+    id: 'req-existing', persisted: true, duplicate: true, conflict: false,
+  });
+  assert.deepEqual(duplicate.queries[0].bindings, [validRequest.idempotencyKey]);
+  assert.equal(duplicate.batches.length, 0);
+
+  const generatedId = 'ABCDEFAB-CDEF-4ABC-8DEF-ABCDEFABCDEF';
+  const inserted = new FakeD1([null]);
+  assert.deepEqual(
+    await createPrivacyRequestToD1(
+      inserted,
+      uppercase,
+      deterministic({ id: generatedId }),
+    ),
+    {
+      id: generatedId.toLowerCase(),
+      persisted: true,
+      duplicate: false,
+      conflict: false,
+    },
+  );
+  assert.equal(inserted.batches[0][0].bindings[0], generatedId.toLowerCase());
+  assert.equal(inserted.batches[0][0].bindings[6], validRequest.idempotencyKey);
+  assert.equal(inserted.batches[0][0].bindings[7], requestHash);
+});
+
 test('records one consent event without binding PII or free text', async () => {
   const database = new FakeD1([null]);
   const result = await recordConsentLifecycleEventToD1(
