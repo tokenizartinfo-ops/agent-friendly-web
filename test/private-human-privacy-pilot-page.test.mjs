@@ -59,3 +59,9 @@ test('private pilot client sends only the exact contract and disables the flow a
   assert.match(source, /disabled\s*=\s*true/);
   assert.doesNotMatch(source, /export\s+async\s+function\s+POST/);
 });
+
+test('private pilot escapes line breaks inside its template-rendered client script', () => {
+  const source = readFileSync(pagePath, 'utf8');
+
+  assert.ok(source.includes(String.raw`Datos verificados de esta prueba:\\n`));
+});

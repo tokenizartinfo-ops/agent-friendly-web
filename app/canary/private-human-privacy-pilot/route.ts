@@ -158,7 +158,7 @@ function render() {
               if (!response.ok) throw new Error(String(payload.code || 'private_human_privacy_pilot_failed'));
 
               if (payload.export) {
-                result.textContent = 'Datos verificados de esta prueba:\n' + JSON.stringify(payload.export, null, 2);
+                result.textContent = 'Datos verificados de esta prueba:\\n' + JSON.stringify(payload.export, null, 2);
               } else if (action === 'erase') {
                 result.textContent = 'Prueba completada: tus datos quedaron borrados.';
               } else {
