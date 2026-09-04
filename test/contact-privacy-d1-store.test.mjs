@@ -401,6 +401,31 @@ test('rejects malformed consent records before hashing, lookup or persistence', 
   assert.equal(coercions, 0);
 });
 
+test('rejects stale and unknown consent copy versions before D1 activity', async () => {
+  const invalidCopyInputs = [
+    {
+      ...consentInput,
+      purpose: 'requested_plan',
+      copyVersion: 'agent-friendly-web.contact-intake.v0',
+    },
+    {
+      ...consentInput,
+      purpose: 'product_updates',
+      copyVersion: 'agent-friendly-web.product-updates.v1',
+    },
+  ];
+
+  for (const input of invalidCopyInputs) {
+    const database = new FakeD1();
+    await assertStoreError(
+      () => recordConsentLifecycleEventToD1(database, input),
+      'privacy_store_invalid_input',
+    );
+    assert.equal(database.queries.length, 0);
+    assert.equal(database.batches.length, 0);
+  }
+});
+
 test('rejects malformed privacy requests before lookup or persistence', async () => {
   const inherited = Object.create(validRequest);
   const symbolField = Symbol('private-metadata');

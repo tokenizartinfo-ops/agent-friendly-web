@@ -10,7 +10,12 @@
   "consent": {
     "required": ["requested_plan"],
     "optional": ["commercial_contact", "product_updates"],
-    "inherited": false
+    "inherited": false,
+    "approved_copy_versions": {
+      "requested_plan": ["agent-friendly-web.contact-intake.v1"],
+      "commercial_contact": ["agent-friendly-web.contact-intake.v1"],
+      "product_updates": ["agent-friendly-web.contact-intake.v1"]
+    }
   },
   "rights": ["access_export", "rectification", "withdraw_consent", "deletion", "restriction", "consent_status"],
   "retention_days": {

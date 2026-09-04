@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import test from 'node:test';
 
+import { saveContactIntakeToD1 } from '../lib/contact-d1-store.mjs';
 import {
   applyContactErasureToD1,
   resolveContactStatusFromD1,
@@ -9,6 +10,7 @@ import {
 import { CONTACT_PRIVACY_POLICY_VERSION } from '../lib/contact-privacy-policy.mjs';
 
 const leadId = '00000000-0000-4000-8000-000000000001';
+const originalIntakeIdempotencyKey = '00000000-0000-4000-8000-000000000099';
 const idempotencyKey = '6ba7b810-9dad-41d1-80b4-00c04fd430c8';
 const validInput = {
   leadId,
@@ -21,7 +23,7 @@ const now = '2026-09-03T22:00:00.000Z';
 const refHash = '11e594f481958c10e3015d0bf0447a22f068a8a647f475df15ce2c7ab4b8f3f1';
 const requestHash = 'cf72ccfdf8c507dca70d390bee3593cb23f44bfa168e933c7924d771cfd70054';
 const tombstoneRef = 'contact-erased-11e594f481958c10e301';
-const erasedIdempotency = 'erased-cf72ccfdf8c507dca70d390bee359';
+const erasedIdempotency = 'erased-8cca3400b26b951f6157d39a58db3';
 
 class FakeStatement {
   constructor(database, sql) {
@@ -136,7 +138,7 @@ class SqliteD1 {
   }
 }
 
-function createSqliteErasureDatabase() {
+function createSqliteErasureDatabase({ seedLead = true } = {}) {
   const sqlite = new DatabaseSync(':memory:');
   sqlite.exec(`
     CREATE TABLE contact_leads (
@@ -159,6 +161,16 @@ function createSqliteErasureDatabase() {
       restriction_state TEXT NOT NULL DEFAULT 'none',
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL
+    );
+    CREATE TABLE consent_receipts (
+      id TEXT PRIMARY KEY NOT NULL,
+      lead_id TEXT NOT NULL,
+      purpose TEXT NOT NULL,
+      copy_version TEXT NOT NULL,
+      action TEXT NOT NULL DEFAULT 'granted',
+      evidence_hash TEXT NOT NULL,
+      created_at TEXT NOT NULL,
+      UNIQUE(lead_id, purpose, action)
     );
     CREATE TABLE crm_opportunities (
       id TEXT PRIMARY KEY NOT NULL,
@@ -193,31 +205,33 @@ function createSqliteErasureDatabase() {
       created_at TEXT NOT NULL
     );
   `);
-  sqlite.prepare(`INSERT INTO contact_leads (
-    id, email, name, domain, role, organization, locale, objective,
-    state, source, idempotency_key, request_hash, created_at, updated_at
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
-    .run(
-      leadId,
-      'person@example.invalid',
-      'Person',
-      'example.invalid',
-      'owner',
-      'Example Org',
-      'en',
-      'message body',
-      'new',
-      'contact_form',
-      '00000000-0000-4000-8000-000000000099',
-      'c'.repeat(64),
-      now,
-      now,
-    );
-  sqlite.prepare(`INSERT INTO crm_opportunities (
-    id, contact_ref, domain, contact_status, owner_context,
-    maintainer_context, evidence_refs_json, updated_at
-  ) VALUES (?, ?, ?, 'active', 'owner_verified', 'known', '["evidence"]', ?)`)
-    .run('crm-real-1', leadId, 'example.invalid', now);
+  if (seedLead) {
+    sqlite.prepare(`INSERT INTO contact_leads (
+      id, email, name, domain, role, organization, locale, objective,
+      state, source, idempotency_key, request_hash, created_at, updated_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+      .run(
+        leadId,
+        'person@example.invalid',
+        'Person',
+        'example.invalid',
+        'owner',
+        'Example Org',
+        'en',
+        'message body',
+        'new',
+        'contact_form',
+        originalIntakeIdempotencyKey,
+        'c'.repeat(64),
+        now,
+        now,
+      );
+    sqlite.prepare(`INSERT INTO crm_opportunities (
+      id, contact_ref, domain, contact_status, owner_context,
+      maintainer_context, evidence_refs_json, updated_at
+    ) VALUES (?, ?, ?, 'active', 'owner_verified', 'known', '["evidence"]', ?)`)
+      .run('crm-real-1', leadId, 'example.invalid', now);
+  }
   return new SqliteD1(sqlite);
 }
 
@@ -289,7 +303,7 @@ function validLifecycle(overrides = {}) {
 }
 
 function erasureDatabase({
-  initialLead = { id: leadId, erasedAt: '' },
+  initialLead = { id: leadId, erasedAt: '', idempotencyKey: originalIntakeIdempotencyKey },
   finalLead = committedLead(),
   initialSuppressions = [],
   finalSuppressions = [validSuppression()],
@@ -383,6 +397,85 @@ test('erases identifiers and tombstones only UUID-linked CRM rows in one exact D
   );
 });
 
+test('exact original intake replay after erasure returns a tombstone conflict without rehydrating PII', async () => {
+  const database = createSqliteErasureDatabase({ seedLead: false });
+  const originalIntake = {
+    email: 'person@example.invalid',
+    name: 'Person',
+    domain: 'example.invalid',
+    role: 'owner',
+    organization: 'Example Org',
+    locale: 'en',
+    objective: 'receive_plan',
+    source: 'contact_form',
+    idempotencyKey: originalIntakeIdempotencyKey,
+    consentPurposes: ['product_updates'],
+    copyVersion: 'agent-friendly-web.contact-intake.v1',
+    turnstileToken: 'must-never-be-bound',
+  };
+
+  try {
+    const created = await saveContactIntakeToD1(database, originalIntake, {
+      now: () => '2026-09-03T21:00:00.000Z',
+      randomUUID: (() => {
+        const ids = [leadId, '00000000-0000-4000-8000-000000000002'];
+        return () => ids.shift();
+      })(),
+    });
+    assert.deepEqual(created, { leadId, duplicate: false, conflict: false });
+
+    await applyContactErasureToD1(database, validInput, deterministic());
+    const batchesBeforeReplay = database.batches.length;
+    const replay = await saveContactIntakeToD1(database, originalIntake, {
+      now: () => '2026-09-03T23:00:00.000Z',
+      randomUUID: (() => {
+        const ids = [
+          '00000000-0000-4000-8000-000000000010',
+          '00000000-0000-4000-8000-000000000011',
+        ];
+        return () => ids.shift();
+      })(),
+    });
+
+    assert.deepEqual(replay, { leadId, duplicate: false, conflict: true });
+    assert.equal(database.batches.length, batchesBeforeReplay);
+    assert.equal(
+      database.sqlite.prepare('SELECT count(*) AS count FROM contact_leads').get().count,
+      1,
+    );
+    assert.equal(
+      database.sqlite
+        .prepare("SELECT count(*) AS count FROM contact_leads WHERE erased_at = ''")
+        .get().count,
+      0,
+    );
+    assert.equal(
+      database.sqlite.prepare('SELECT count(*) AS count FROM consent_receipts').get().count,
+      1,
+    );
+    const erasedLead = database.sqlite.prepare(`SELECT
+      id, email, name, domain, role, organization, objective, source,
+      idempotency_key AS idempotencyKey, request_hash AS requestHash, state
+      FROM contact_leads WHERE id = ?`).get(leadId);
+    assert.deepEqual({ ...erasedLead }, {
+      id: leadId,
+      email: '',
+      name: '',
+      domain: '',
+      role: '',
+      organization: '',
+      objective: '',
+      source: '',
+      idempotencyKey: erasedIdempotency,
+      requestHash: '',
+      state: 'erased',
+    });
+    assert.doesNotMatch(JSON.stringify(replay), /person|example|owner/iu);
+  } finally {
+    database.sqlite.close();
+  }
+});
+
 test('canonicalizes accepted UUIDs before lookup, hashing, binding and generated ID use', async () => {
   const uppercaseInput = {
     ...validInput,
@@ -390,7 +483,11 @@ test('canonicalizes accepted UUIDs before lookup, hashing, binding and generated
     idempotencyKey: idempotencyKey.toUpperCase(),
   };
   const database = erasureDatabase({
-    initialLead: { id: leadId.toUpperCase(), erasedAt: '' },
+    initialLead: {
+      id: leadId.toUpperCase(),
+      erasedAt: '',
+      idempotencyKey: originalIntakeIdempotencyKey.toUpperCase(),
+    },
   });
   const result = await applyContactErasureToD1(database, uppercaseInput, deterministic({
     ids: [
@@ -421,7 +518,7 @@ test('canonicalizes accepted UUIDs before lookup, hashing, binding and generated
 
 test('returns an idempotent tombstone for an already erased contact without generating or batching', async () => {
   const database = new FakeD1(
-    [{ id: leadId, erasedAt: now }, committedLead(), validLifecycle()],
+    [{ id: leadId, erasedAt: now, idempotencyKey: erasedIdempotency }, committedLead(), validLifecycle()],
     [{ results: [validSuppression()] }],
   );
   const result = await applyContactErasureToD1(database, validInput, {
@@ -439,7 +536,7 @@ test('returns an idempotent tombstone for an already erased contact without gene
 
 test('already-erased fast path rejects incomplete committed suppression or lifecycle state', async () => {
   const database = new FakeD1(
-    [{ id: leadId, erasedAt: now }, committedLead(), null],
+    [{ id: leadId, erasedAt: now, idempotencyKey: erasedIdempotency }, committedLead(), null],
     [{ results: [] }],
   );
 
@@ -467,9 +564,8 @@ test('recovers a same-key race loser from committed erased state without another
 
 test('recovers a different-key zero-change race without creating another lifecycle event', async () => {
   const winnerKey = '6ba7b811-9dad-41d1-80b4-00c04fd430c8';
-  const winnerErasedIdempotency = `erased-${'b'.repeat(29)}`;
   const database = erasureDatabase({
-    finalLead: committedLead(winnerErasedIdempotency),
+    finalLead: committedLead(),
     finalSuppressions: [validSuppression({ idempotencyKey: winnerKey })],
     lifecycle: validLifecycle({
       idempotencyKey: winnerKey,
@@ -608,7 +704,11 @@ test('validates exact overrides, generated UUIDs and explicit-zone timestamps be
   ];
 
   for (const overrides of invalidOverrides) {
-    const database = new FakeD1([{ id: leadId, erasedAt: '' }]);
+    const database = new FakeD1([{
+      id: leadId,
+      erasedAt: '',
+      idempotencyKey: originalIntakeIdempotencyKey,
+    }]);
     await assertErasureError(
       () => applyContactErasureToD1(database, validInput, overrides),
       'privacy_erasure_invalid_input',
@@ -670,7 +770,11 @@ test('fails closed unless all four batch results report exact success', async ()
     'not-an-array',
   ];
   for (const batchResults of malformedResults) {
-    const database = new FakeD1([{ id: leadId, erasedAt: '' }]);
+    const database = new FakeD1([{
+      id: leadId,
+      erasedAt: '',
+      idempotencyKey: originalIntakeIdempotencyKey,
+    }]);
     database.batchResults = batchResults;
     await assertErasureError(
       () => applyContactErasureToD1(database, validInput, deterministic()),
@@ -678,7 +782,11 @@ test('fails closed unless all four batch results report exact success', async ()
     );
   }
 
-  const batchFailure = new FakeD1([{ id: leadId, erasedAt: '' }]);
+  const batchFailure = new FakeD1([{
+    id: leadId,
+    erasedAt: '',
+    idempotencyKey: originalIntakeIdempotencyKey,
+  }]);
   batchFailure.batchError = new Error('batch provider detail');
   await assertErasureError(
     () => applyContactErasureToD1(batchFailure, validInput, deterministic()),
@@ -688,7 +796,7 @@ test('fails closed unless all four batch results report exact success', async ()
 
 test('does not report a fresh erasure when the guarded lead update changes zero rows', async () => {
   const database = new FakeD1(
-    [{ id: leadId, erasedAt: '' }, null],
+    [{ id: leadId, erasedAt: '', idempotencyKey: originalIntakeIdempotencyKey }, null],
     [{ results: [] }],
   );
   database.batchResults = [0, 0, 0, 0].map((changes) => ({
@@ -801,7 +909,11 @@ test('sanitizes statement errors and reports unavailable stores without touching
     'privacy_erasure_store_unavailable',
   );
 
-  const prepareFailure = new FakeD1([{ id: leadId, erasedAt: '' }]);
+  const prepareFailure = new FakeD1([{
+    id: leadId,
+    erasedAt: '',
+    idempotencyKey: originalIntakeIdempotencyKey,
+  }]);
   prepareFailure.prepareError = new Error('prepare provider detail');
   await assertErasureError(
     () => applyContactErasureToD1(prepareFailure, validInput),

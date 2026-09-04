@@ -20,6 +20,7 @@ const intake = {
   copyVersion: 'agent-friendly-web.contact-intake.v1',
   turnstileToken: 'must-never-be-bound',
 };
+const erasedIntakeIdempotencyKey = 'erased-2a64f8555ae94463fee88a122101d';
 
 class FakeStatement {
   constructor(database, sql) {
@@ -44,6 +45,7 @@ class FakeD1 {
     this.queries = [];
     this.batches = [];
     this.batchError = null;
+    this.batchResults = null;
   }
 
   prepare(sql) {
@@ -61,7 +63,8 @@ class FakeD1 {
       bindings: statement.bindings,
     })));
     if (this.batchError) throw this.batchError;
-    return statements.map(() => ({ success: true }));
+    if (this.batchResults !== null) return this.batchResults;
+    return statements.map(() => ({ success: true, meta: { changes: 1 } }));
   }
 }
 
@@ -102,6 +105,11 @@ test('D1 adapter returns duplicate or conflict without writing for an existing i
   assert.deepEqual(await saveContactIntakeToD1(duplicateDb, intake), {
     leadId: 'existing', duplicate: true, conflict: false,
   });
+  assert.deepEqual(duplicateDb.queries[0].bindings, [
+    intake.idempotencyKey,
+    erasedIntakeIdempotencyKey,
+    erasedIntakeIdempotencyKey,
+  ]);
   assert.equal(duplicateDb.batches.length, 0);
 
   const conflictDb = new FakeD1([{ id: 'existing', requestHash: 'different' }]);
@@ -109,6 +117,12 @@ test('D1 adapter returns duplicate or conflict without writing for an existing i
     leadId: 'existing', duplicate: false, conflict: true,
   });
   assert.equal(conflictDb.batches.length, 0);
+
+  const tombstoneDb = new FakeD1([{ id: 'erased-existing', requestHash: '' }]);
+  assert.deepEqual(await saveContactIntakeToD1(tombstoneDb, intake), {
+    leadId: 'erased-existing', duplicate: false, conflict: true,
+  });
+  assert.equal(tombstoneDb.batches.length, 0);
 });
 
 test('D1 adapter re-reads after a unique-key race and classifies the winner', async () => {
@@ -119,6 +133,38 @@ test('D1 adapter re-reads after a unique-key race and classifies the winner', as
     leadId: 'winner', duplicate: true, conflict: false,
   });
   assert.equal(database.queries.length, 2);
+  for (const query of database.queries) {
+    assert.deepEqual(query.bindings, [
+      intake.idempotencyKey,
+      erasedIntakeIdempotencyKey,
+      erasedIntakeIdempotencyKey,
+    ]);
+  }
+});
+
+test('D1 adapter fails closed when erasure wins between intake lookup and batch', async () => {
+  const database = new FakeD1([
+    null,
+    { id: 'erased-winner', requestHash: '' },
+  ]);
+  database.batchResults = [0, 0, 0].map((changes) => ({
+    success: true,
+    meta: { changes },
+  }));
+
+  assert.deepEqual(await saveContactIntakeToD1(database, intake, deterministic), {
+    leadId: 'erased-winner', duplicate: false, conflict: true,
+  });
+  assert.equal(database.queries.length, 2);
+  assert.equal(database.batches.length, 1);
+  for (const query of database.queries) {
+    assert.deepEqual(query.bindings, [
+      intake.idempotencyKey,
+      erasedIntakeIdempotencyKey,
+      erasedIntakeIdempotencyKey,
+    ]);
+  }
+  assert.match(database.batches[0][0].sql, /WHERE NOT EXISTS/);
 });
 
 test('D1 adapter fails closed for missing bindings and unrelated persistence failures', async () => {

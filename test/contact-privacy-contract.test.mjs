@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
+import * as contactPrivacyPolicy from '../lib/contact-privacy-policy.mjs';
+
 test('privacy lifecycle contract reports local readiness and remote closure', async () => {
   const contract = JSON.parse(await readFile(
     'public/.well-known/contact-privacy-lifecycle-contract.json',
@@ -17,6 +19,15 @@ test('privacy lifecycle contract reports local readiness and remote closure', as
   assert.equal(contract.claims.global_legal_compliance, false);
   assert.deepEqual(contract.consent.required, ['requested_plan']);
   assert.deepEqual(contract.consent.optional, ['commercial_contact', 'product_updates']);
+  assert.deepEqual(contract.consent.approved_copy_versions, {
+    requested_plan: ['agent-friendly-web.contact-intake.v1'],
+    commercial_contact: ['agent-friendly-web.contact-intake.v1'],
+    product_updates: ['agent-friendly-web.contact-intake.v1'],
+  });
+  assert.deepEqual(
+    contract.consent.approved_copy_versions,
+    contactPrivacyPolicy.APPROVED_CONSENT_COPY_VERSIONS,
+  );
   assert.equal(contract.boundaries.crm_stores_direct_pii, false);
   assert.equal(contract.boundaries.tokenizart_resources_used, false);
 });
