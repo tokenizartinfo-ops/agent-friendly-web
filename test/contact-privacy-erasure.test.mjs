@@ -20,7 +20,7 @@ const now = '2026-09-03T22:00:00.000Z';
 const refHash = '11e594f481958c10e3015d0bf0447a22f068a8a647f475df15ce2c7ab4b8f3f1';
 const requestHash = 'cf72ccfdf8c507dca70d390bee3593cb23f44bfa168e933c7924d771cfd70054';
 const tombstoneRef = 'contact-erased-11e594f481958c10e301';
-const erasedIdempotency = 'erased-11e594f481958c10e3015d0bf0447';
+const erasedIdempotency = 'erased-cf72ccfdf8c507dca70d390bee359';
 
 class FakeStatement {
   constructor(database, sql) {
@@ -41,11 +41,19 @@ class FakeStatement {
     if (result instanceof Error) throw result;
     return result === undefined ? null : result;
   }
+
+  async all() {
+    this.database.queries.push({ sql: this.sql, bindings: this.bindings });
+    const result = this.database.allResults.shift();
+    if (result instanceof Error) throw result;
+    return result === undefined ? { results: [] } : result;
+  }
 }
 
 class FakeD1 {
-  constructor(firstResults = []) {
+  constructor(firstResults = [], allResults = []) {
     this.firstResults = [...firstResults];
+    this.allResults = [...allResults];
     this.queries = [];
     this.batches = [];
     this.prepareError = null;
@@ -66,7 +74,7 @@ class FakeD1 {
     })));
     if (this.batchError) throw this.batchError;
     if (this.batchResults !== null) return this.batchResults;
-    return statements.map(() => ({ success: true }));
+    return statements.map(() => ({ success: true, meta: { changes: 1 } }));
   }
 }
 
@@ -92,8 +100,70 @@ async function assertErasureError(operation, code) {
   });
 }
 
+function committedLead(idempotency = erasedIdempotency) {
+  return {
+    id: leadId,
+    email: '',
+    name: '',
+    domain: '',
+    role: '',
+    organization: '',
+    objective: '',
+    source: '',
+    idempotencyKey: idempotency,
+    requestHash: '',
+    state: 'erased',
+    erasedAt: now,
+    updatedAt: now,
+    retentionExpiresAt: '',
+    restrictionState: 'none',
+  };
+}
+
+function validSuppression(overrides = {}) {
+  return {
+    emailHmac: validInput.emailHmac,
+    purpose: validInput.purpose,
+    reasonCode: 'subject_deletion',
+    policyVersion: validInput.policyVersion,
+    idempotencyKey,
+    expiresAt: '2028-09-02T22:00:00.000Z',
+    ...overrides,
+  };
+}
+
+function validLifecycle(overrides = {}) {
+  return {
+    eventType: 'deleted',
+    contactRefHash: refHash,
+    resultCode: 'identifiers_erased',
+    policyVersion: validInput.policyVersion,
+    idempotencyKey,
+    requestHash,
+    createdAt: now,
+    ...overrides,
+  };
+}
+
+function erasureDatabase({
+  initialLead = { id: leadId, erasedAt: '' },
+  finalLead = committedLead(),
+  initialSuppressions = [],
+  finalSuppressions = [validSuppression()],
+  lifecycle = validLifecycle(),
+} = {}) {
+  return new FakeD1(
+    [initialLead, finalLead, lifecycle],
+    [{ results: initialSuppressions }, { results: finalSuppressions }],
+  );
+}
+
 test('erases identifiers and tombstones only UUID-linked CRM rows in one exact D1 batch', async () => {
-  const database = new FakeD1([{ id: leadId, erasedAt: '' }]);
+  const database = erasureDatabase({ initialSuppressions: [validSuppression()] });
+  database.batchResults = [1, 1, 0, 1].map((changes) => ({
+    success: true,
+    meta: { changes },
+  }));
   const result = await applyContactErasureToD1(database, validInput, deterministic());
 
   assert.deepEqual(result, {
@@ -119,11 +189,20 @@ test('erases identifiers and tombstones only UUID-linked CRM rows in one exact D
   assert.match(crm.sql, /owner_context = 'unknown', maintainer_context = 'unknown'/);
   assert.match(crm.sql, /evidence_refs_json = '\[\]', updated_at = \?/);
   assert.match(crm.sql, /WHERE contact_ref = \?/);
+  assert.match(crm.sql, /EXISTS/);
   assert.doesNotMatch(crm.sql, /LIKE|contact-synthetic/iu);
-  assert.deepEqual(crm.bindings, [tombstoneRef, now, leadId]);
+  assert.deepEqual(crm.bindings, [
+    tombstoneRef,
+    now,
+    leadId,
+    leadId,
+    erasedIdempotency,
+    now,
+  ]);
 
   assert.match(suppression.sql, /INSERT OR IGNORE INTO contact_suppressions/);
   assert.match(suppression.sql, /'subject_deletion'/);
+  assert.match(suppression.sql, /EXISTS/);
   assert.deepEqual(suppression.bindings, [
     '00000000-0000-4000-8000-000000000020',
     validInput.emailHmac,
@@ -132,17 +211,24 @@ test('erases identifiers and tombstones only UUID-linked CRM rows in one exact D
     idempotencyKey,
     now,
     '2028-09-02T22:00:00.000Z',
+    leadId,
+    erasedIdempotency,
+    now,
   ]);
 
   assert.match(lifecycle.sql, /INSERT INTO data_lifecycle_events/);
   assert.match(lifecycle.sql, /'deleted'/);
   assert.match(lifecycle.sql, /'identifiers_erased'/);
+  assert.match(lifecycle.sql, /EXISTS/);
   assert.deepEqual(lifecycle.bindings, [
     '00000000-0000-4000-8000-000000000021',
     refHash,
     validInput.policyVersion,
     idempotencyKey,
     requestHash,
+    now,
+    leadId,
+    erasedIdempotency,
     now,
   ]);
   assert.doesNotMatch(
@@ -157,7 +243,9 @@ test('canonicalizes accepted UUIDs before lookup, hashing, binding and generated
     leadId: leadId.toUpperCase(),
     idempotencyKey: idempotencyKey.toUpperCase(),
   };
-  const database = new FakeD1([{ id: leadId.toUpperCase(), erasedAt: '' }]);
+  const database = erasureDatabase({
+    initialLead: { id: leadId.toUpperCase(), erasedAt: '' },
+  });
   const result = await applyContactErasureToD1(database, uppercaseInput, deterministic({
     ids: [
       'ABCDEFAB-CDEF-4ABC-8DEF-ABCDEFABCDE0',
@@ -169,7 +257,14 @@ test('canonicalizes accepted UUIDs before lookup, hashing, binding and generated
   assert.equal(result.tombstoneRef, tombstoneRef);
   assert.deepEqual(database.queries[0].bindings, [leadId]);
   assert.deepEqual(database.batches[0][0].bindings, [erasedIdempotency, now, now, leadId]);
-  assert.deepEqual(database.batches[0][1].bindings, [tombstoneRef, now, leadId]);
+  assert.deepEqual(database.batches[0][1].bindings, [
+    tombstoneRef,
+    now,
+    leadId,
+    leadId,
+    erasedIdempotency,
+    now,
+  ]);
   assert.equal(database.batches[0][2].bindings[0], 'abcdefab-cdef-4abc-8def-abcdefabcde0');
   assert.equal(database.batches[0][2].bindings[4], idempotencyKey);
   assert.equal(database.batches[0][3].bindings[0], 'abcdefab-cdef-4abc-8def-abcdefabcde1');
@@ -191,6 +286,46 @@ test('returns an idempotent tombstone for an already erased contact without gene
     contactStatus: 'erased',
   });
   assert.equal(database.batches.length, 0);
+});
+
+test('recovers a same-key race loser from committed erased state without another batch', async () => {
+  const database = erasureDatabase();
+  database.batchError = new Error(
+    'UNIQUE constraint failed: data_lifecycle_events.idempotency_key provider detail',
+  );
+
+  assert.deepEqual(
+    await applyContactErasureToD1(database, validInput, deterministic()),
+    { erased: true, duplicate: true, contactStatus: 'erased' },
+  );
+  assert.equal(database.batches.length, 1);
+  assert.equal(database.batches[0].length, 4);
+  assert.equal(database.queries.length, 5);
+});
+
+test('recovers a different-key zero-change race without creating another lifecycle event', async () => {
+  const winnerKey = '6ba7b811-9dad-41d1-80b4-00c04fd430c8';
+  const winnerErasedIdempotency = `erased-${'b'.repeat(29)}`;
+  const database = erasureDatabase({
+    finalLead: committedLead(winnerErasedIdempotency),
+    finalSuppressions: [validSuppression({ idempotencyKey: winnerKey })],
+    lifecycle: validLifecycle({
+      idempotencyKey: winnerKey,
+      requestHash: 'b'.repeat(64),
+    }),
+  });
+  database.batchResults = [0, 0, 0, 0].map((changes) => ({
+    success: true,
+    meta: { changes },
+  }));
+
+  assert.deepEqual(
+    await applyContactErasureToD1(database, validInput, deterministic()),
+    { erased: true, duplicate: true, contactStatus: 'erased' },
+  );
+  assert.equal(database.batches.length, 1);
+  assert.match(database.batches[0][3].sql, /EXISTS/);
+  assert.equal(database.queries.length, 5);
 });
 
 test('resolver returns status only, canonicalizes lookup UUIDs and never returns contact PII', async () => {
@@ -385,6 +520,53 @@ test('fails closed unless all four batch results report exact success', async ()
     () => applyContactErasureToD1(batchFailure, validInput, deterministic()),
     'privacy_erasure_failed',
   );
+});
+
+test('does not report a fresh erasure when the guarded lead update changes zero rows', async () => {
+  const database = new FakeD1(
+    [{ id: leadId, erasedAt: '' }, null],
+    [{ results: [] }],
+  );
+  database.batchResults = [0, 0, 0, 0].map((changes) => ({
+    success: true,
+    meta: { changes },
+  }));
+
+  await assertErasureError(
+    () => applyContactErasureToD1(database, validInput, deterministic()),
+    'privacy_erasure_failed',
+  );
+  assert.equal(database.batches.length, 1);
+});
+
+test('blocks incompatible or inadequate existing suppressions before erasing', async () => {
+  const incompatibleSuppressions = [
+    validSuppression({ emailHmac: 'b'.repeat(64) }),
+    validSuppression({ reasonCode: 'consent_withdrawal' }),
+    validSuppression({ policyVersion: 'legacy' }),
+    validSuppression({ expiresAt: '2028-09-01T22:00:00.000Z' }),
+  ];
+
+  for (const suppression of incompatibleSuppressions) {
+    const database = erasureDatabase({ initialSuppressions: [suppression] });
+    await assertErasureError(
+      () => applyContactErasureToD1(database, validInput, deterministic()),
+      'privacy_erasure_failed',
+    );
+    assert.equal(database.batches.length, 0);
+  }
+});
+
+test('validates the committed suppression after the atomic batch', async () => {
+  const database = erasureDatabase({
+    finalSuppressions: [validSuppression({ expiresAt: '2028-09-01T22:00:00.000Z' })],
+  });
+
+  await assertErasureError(
+    () => applyContactErasureToD1(database, validInput, deterministic()),
+    'privacy_erasure_failed',
+  );
+  assert.equal(database.batches.length, 1);
 });
 
 test('sanitizes statement errors and reports unavailable stores without touching D1', async () => {
