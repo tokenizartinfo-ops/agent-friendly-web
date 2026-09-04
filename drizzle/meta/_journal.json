@@ -57,6 +57,13 @@
       "when": 1788469200000,
       "tag": "0007_synthetic_crm_lite",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1788482353945,
+      "tag": "0008_contact_privacy_lifecycle",
+      "breakpoints": true
     }
   ]
 }

@@ -274,6 +274,11 @@ export const contactLeads = sqliteTable(
     source: text('source').notNull(),
     idempotencyKey: text('idempotency_key').notNull(),
     requestHash: text('request_hash').notNull(),
+    lastInteractionAt: text('last_interaction_at').notNull().default(''),
+    retentionExpiresAt: text('retention_expires_at').notNull().default(''),
+    erasedAt: text('erased_at').notNull().default(''),
+    privacyPolicyVersion: text('privacy_policy_version').notNull().default(''),
+    restrictionState: text('restriction_state').notNull().default('none'),
     createdAt: text('created_at').notNull(),
     updatedAt: text('updated_at').notNull(),
   },
@@ -337,6 +342,7 @@ export const crmOpportunities = sqliteTable(
     source: text('source').notNull(),
     locale: text('locale').notNull(),
     stage: text('stage').notNull().default('new'),
+    contactStatus: text('contact_status').notNull().default('active'),
     ownerContext: text('owner_context').notNull(),
     maintainerContext: text('maintainer_context').notNull(),
     scopeCodesJson: text('scope_codes_json').notNull().default('[]'),
@@ -375,5 +381,86 @@ export const crmTransitionEvents = sqliteTable(
     uniqueIndex('crm_transition_events_actor_idempotency_unique').on(table.actorSubjectHash, table.idempotencyKey),
     index('crm_transition_events_opportunity_created_idx').on(table.opportunityId, table.createdAt),
     index('crm_transition_events_actor_created_idx').on(table.actorSubjectHash, table.createdAt),
+  ],
+);
+
+export const contactConsentEvents = sqliteTable(
+  'contact_consent_events',
+  {
+    id: text('id').primaryKey(),
+    leadId: text('lead_id').notNull(),
+    purpose: text('purpose').notNull(),
+    copyVersion: text('copy_version').notNull(),
+    action: text('action').notNull(),
+    evidenceHash: text('evidence_hash').notNull(),
+    actorRefHash: text('actor_ref_hash').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    requestHash: text('request_hash').notNull(),
+    createdAt: text('created_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('contact_consent_events_idempotency_unique').on(table.idempotencyKey),
+    index('contact_consent_events_lead_purpose_created_idx').on(table.leadId, table.purpose, table.createdAt),
+  ],
+);
+
+export const privacyRequests = sqliteTable(
+  'privacy_requests',
+  {
+    id: text('id').primaryKey(),
+    requestType: text('request_type').notNull(),
+    contactRefHash: text('contact_ref_hash').notNull(),
+    status: text('status').notNull().default('pending_verification'),
+    verificationHash: text('verification_hash').notNull(),
+    verificationExpiresAt: text('verification_expires_at').notNull(),
+    policyVersion: text('policy_version').notNull(),
+    decisionCode: text('decision_code').notNull().default(''),
+    idempotencyKey: text('idempotency_key').notNull(),
+    requestHash: text('request_hash').notNull(),
+    createdAt: text('created_at').notNull(),
+    verifiedAt: text('verified_at').notNull().default(''),
+    resolvedAt: text('resolved_at').notNull().default(''),
+    expiresAt: text('expires_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('privacy_requests_idempotency_unique').on(table.idempotencyKey),
+    uniqueIndex('privacy_requests_verification_hash_unique').on(table.verificationHash),
+    index('privacy_requests_status_expires_idx').on(table.status, table.expiresAt),
+  ],
+);
+
+export const contactSuppressions = sqliteTable(
+  'contact_suppressions',
+  {
+    id: text('id').primaryKey(),
+    emailHmac: text('email_hmac').notNull(),
+    purpose: text('purpose').notNull(),
+    reasonCode: text('reason_code').notNull(),
+    policyVersion: text('policy_version').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    createdAt: text('created_at').notNull(),
+    expiresAt: text('expires_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('contact_suppressions_email_purpose_unique').on(table.emailHmac, table.purpose),
+    uniqueIndex('contact_suppressions_idempotency_unique').on(table.idempotencyKey),
+  ],
+);
+
+export const dataLifecycleEvents = sqliteTable(
+  'data_lifecycle_events',
+  {
+    id: text('id').primaryKey(),
+    eventType: text('event_type').notNull(),
+    contactRefHash: text('contact_ref_hash').notNull(),
+    resultCode: text('result_code').notNull(),
+    policyVersion: text('policy_version').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    requestHash: text('request_hash').notNull(),
+    createdAt: text('created_at').notNull(),
+  },
+  (table) => [
+    uniqueIndex('data_lifecycle_events_idempotency_unique').on(table.idempotencyKey),
+    index('data_lifecycle_events_contact_created_idx').on(table.contactRefHash, table.createdAt),
   ],
 );
