@@ -1,6 +1,6 @@
 # Gate 6D.4B: Contact Privacy Lifecycle Local Evidence
 
-**Status:** `local_gate_passed_after_whole_branch_review`
+**Status:** `implementation_fixed_pending_final_rereview`
 
 **Environment:** `local_only`
 
@@ -10,7 +10,11 @@
 
 **Task 6 baseline:** `782406a5ddb2b7be389bdff949977551410a8e11`
 
-**Final reviewed implementation head:** `ce2747bc94f4240fa0c2a9203372edc73a2cf243`
+**Previously reviewed implementation head:** `0a57d9f89cdbdbd8fb511a61eb40e4b19a71a505`
+
+**Final fix implementation commit:** `582b62d0968c3891d437ba0570492a1d2b998d0a`
+
+**Review state:** independent final re-review pending; no final `APPROVED` verdict is claimed
 
 ## Scope and Observed State
 
@@ -27,7 +31,7 @@
 | `AFW_RETENTION_JOBS_ENABLED` | `false` in base, canary and production |
 | `AFW_PRODUCT_UPDATES_ENABLED` | `false` in base, canary and production |
 
-No Cloudflare resource was read or mutated. The only deploy-related command was the required local dry-run; it ended with `Dry run complete. No build or deploy performed.`
+No Cloudflare resource was read or mutated. This final fix round ran no deploy command; remote deploys remain `0`.
 
 ## Reviewed Task 1-5 Commits
 
@@ -61,7 +65,14 @@ No Cloudflare resource was read or mutated. The only deploy-related command was 
 - `ce2747bc94f4240fa0c2a9203372edc73a2cf243` - `fix: harden contact privacy lifecycle`
 - prevents an erased contact from being recreated by replaying the original intake request;
 - resolves same-timestamp consent conflicts in favor of withdrawal or supersession;
-- enforces a purpose-specific allowlist of approved consent-copy versions before any D1 activity.
+- enforces a purpose-specific allowlist of approved consent-copy versions before D1 activity in the new consent lifecycle store.
+
+### Final fix round
+
+- `582b62d0968c3891d437ba0570492a1d2b998d0a` - `fix: close contact privacy lifecycle races`
+- adds an invocation-unique in-transaction ownership proof so an equal-millisecond erasure loser cannot commit lifecycle or suppression writes;
+- validates the persisted contact state, restriction state and erasure timestamp as one explicit fail-closed combination;
+- preserves exact intake replay protection, bounded return contracts and the additive migration unchanged.
 
 ## Required Local Verification
 
@@ -69,11 +80,10 @@ All commands below ran from the stated worktree with the default local toolchain
 
 | Command | Exit | Observed result |
 | --- | ---: | --- |
-| `node --test test/contact-privacy-policy.test.mjs test/block6d4-local-migration.test.mjs test/contact-privacy-d1-store.test.mjs test/contact-privacy-erasure.test.mjs test/contact-privacy-contract.test.mjs test/contact-d1-store.test.mjs test/contact-intake.test.mjs test/contact-gate.test.mjs test/synthetic-contact-canary.test.mjs test/crm-lite.test.mjs test/synthetic-crm-persistence.test.mjs test/synthetic-crm-readonly.test.mjs` | `0` | `89/89` passed; `0` failed, skipped or cancelled. |
-| `npm test` | `0` | `584/584` passed; `0` failed, skipped or cancelled. |
+| `node --test test/contact-privacy-policy.test.mjs test/block6d4-local-migration.test.mjs test/contact-privacy-d1-store.test.mjs test/contact-privacy-erasure.test.mjs test/contact-privacy-contract.test.mjs test/contact-d1-store.test.mjs test/contact-intake.test.mjs test/contact-gate.test.mjs test/synthetic-contact-canary.test.mjs test/crm-lite.test.mjs test/synthetic-crm-persistence.test.mjs test/synthetic-crm-readonly.test.mjs` | `0` | `93/93` passed; `0` failed, skipped or cancelled. |
+| `npm test` | `0` | `588/588` passed; `0` failed, skipped or cancelled. |
 | `npm run lint` | `0` | `0` errors and `1` pre-existing `@next/next/no-img-element` warning at `app/components/comic-home-intro.tsx:36`. |
 | `npm run build` | `0` | Vinext completed all `5/5` build phases and printed `Build complete.` |
-| `npm run web:deploy:dry-run` | `0` | Printed `Dry run complete. No build or deploy performed.` Remote deploys remain `0`. |
 
 ## Migration and Security Inspection
 
@@ -92,17 +102,16 @@ The migration is additive: its destructive-token scan is empty, and `test/block6
 - Focused and full tests emitted Node's `ExperimentalWarning` for the built-in SQLite module. The SQLite-backed assertions passed.
 - Lint retained the already-known `<img>` optimization warning above; it introduced no lint errors.
 - Vinext `1.0.0-beta.8` used Vite `8.2.2`. Build output reported plugin timing notices and that some routes could not be statically classified because Vinext's classifier cannot yet detect all dynamic API usage.
-- `@vinext/cloudflare` `1.0.0-beta.6` reported during the deploy dry-run that `next/image` is served unoptimized unless Cloudflare Images is configured. No configuration was changed.
 - `git add` emitted the Windows working-copy notice that LF will be replaced by CRLF the next time Git touches this evidence file; the staged whitespace check remained clean.
 
 ## Independent Whole-Branch Review
 
-The first whole-branch review identified three Important cross-task findings: replay after erasure could recreate PII, equal-timestamp consent events depended on UUID order, and consent-copy versions were syntactically but not semantically allowlisted. Commit `ce2747bc94f4240fa0c2a9203372edc73a2cf243` resolved all three with observed RED -> GREEN regression tests.
+The earlier whole-branch hardening addressed replay after erasure, equal-timestamp consent precedence and purpose-specific consent-copy validation. The final independent whole-branch review of `2f48408f9c914eb3253ec2012c6c93357b84adcc..0a57d9f89cdbdbd8fb511a61eb40e4b19a71a505` nevertheless returned `CHANGES_REQUESTED`: Critical `0`, Important `3`, Minor `0`, blocker `Yes`.
 
-A fresh independent reviewer then inspected the complete fix diff and returned `APPROVED`: Critical `0`, Important `0`, Minor `0`, blocker `No`. No migration, runtime configuration, remote resource, real contact, email, Tokenizart resource, or `*.chatgpt.site` surface was added or used by the hardening work.
+Implementation commit `582b62d0968c3891d437ba0570492a1d2b998d0a` addresses the two code blockers with observed RED -> GREEN regressions. This document corrects the third finding by withdrawing the stale clean-review claim. An independent final re-review of the new head has not yet occurred, so this evidence does not claim `APPROVED`.
 
 ## Gate Decision
 
-Gate 6D.4B has reproducible local evidence, a clean whole-branch review, and remains remote-disabled. This evidence does not authorize a remote migration, deployment, traffic change, real-contact access, email delivery, or use of shared Cloudflare or Tokenizart resources.
+Gate 6D.4B has reproducible local implementation evidence and remains remote-disabled, but final approval is pending independent re-review. This evidence does not authorize a remote migration, deployment, traffic change, real-contact access, email delivery, or use of shared Cloudflare or Tokenizart resources.
 
 The next gate is `6D.4C private synthetic lifecycle`; it is not active and requires a separately declared and approved operation.
