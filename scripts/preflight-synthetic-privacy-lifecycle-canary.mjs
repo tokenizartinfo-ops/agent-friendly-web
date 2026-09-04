@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
+import { parseDocument } from 'yaml';
 
 export const SYNTHETIC_PRIVACY_LIFECYCLE_PREFLIGHT_CONTRACT =
   'agent-friendly-web.synthetic-privacy-lifecycle-canary-preflight.v1';
@@ -77,6 +78,16 @@ function hasExpectedShape(metadata) {
 
 function decision(ready, code) {
   return { ready, code };
+}
+
+function hasDuplicateMetadataKeys(raw) {
+  const document = parseDocument(raw, {
+    prettyErrors: false,
+    schema: 'json',
+    strict: true,
+    uniqueKeys: true,
+  });
+  return document.errors.some((error) => error.code === 'DUPLICATE_KEY');
 }
 
 function allFlagsAreOff(expectedFlags) {
@@ -165,7 +176,11 @@ function parseInputPath(args) {
 export async function runSyntheticPrivacyLifecyclePreflight(inputPath) {
   if (!inputPath) return decision(false, 'invalid_arguments');
   try {
-    const metadata = JSON.parse(await readFile(inputPath, 'utf8'));
+    const raw = await readFile(inputPath, 'utf8');
+    if (hasDuplicateMetadataKeys(raw)) {
+      return decision(false, 'duplicate_metadata_key');
+    }
+    const metadata = JSON.parse(raw);
     return validateSyntheticPrivacyLifecyclePreflight(metadata);
   } catch {
     return decision(false, 'invalid_input_file');

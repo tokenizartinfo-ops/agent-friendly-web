@@ -179,6 +179,49 @@ test('CLI emits one sanitized ready decision for the checked-in metadata', () =>
   assert.equal(result.stderr, '');
 });
 
+test('CLI rejects top-level and nested duplicate metadata keys before normalization', async (t) => {
+  const folder = await mkdtemp(join(tmpdir(), 'afw-privacy-lifecycle-duplicates-'));
+  const fixtures = [
+    {
+      file: 'top-level.json',
+      raw: JSON.stringify(validMetadata()).replace(
+        '"project":"agent-friendly-web"',
+        '"project":"tokenizart","project":"agent-friendly-web"',
+      ),
+      unsafe: /tokenizart/i,
+    },
+    {
+      file: 'nested.json',
+      raw: JSON.stringify(validMetadata()).replace(
+        '"visibility":"private"',
+        '"visibility":"public","\\u0076isibility":"private"',
+      ),
+      unsafe: /public/i,
+    },
+  ];
+
+  try {
+    for (const fixture of fixtures) {
+      await t.test(fixture.file, async () => {
+        const input = join(folder, fixture.file);
+        await writeFile(input, fixture.raw, 'utf8');
+        const result = cli(['--input', input]);
+
+        assert.equal(result.status, 1);
+        assert.deepEqual(JSON.parse(result.stdout), {
+          ready: false,
+          code: 'duplicate_metadata_key',
+        });
+        assert.doesNotMatch(result.stdout, fixture.unsafe);
+        assert.equal(result.stdout.includes(input), false);
+        assert.equal(result.stderr, '');
+      });
+    }
+  } finally {
+    await rm(folder, { recursive: true, force: true });
+  }
+});
+
 test('CLI fails closed with stable JSON for arguments, files and unsafe metadata', async () => {
   const missingArguments = cli([]);
   assert.equal(missingArguments.status, 1);
