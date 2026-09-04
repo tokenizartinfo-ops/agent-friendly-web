@@ -14,6 +14,8 @@
 
 **Final fix implementation commit:** `582b62d0968c3891d437ba0570492a1d2b998d0a`
 
+**Final fix round-2 implementation commit:** `ddd6e71d3cdf7ba05a53f19b73575e8b9d27d98e`
+
 **Review state:** independent final re-review pending; no final `APPROVED` verdict is claimed
 
 ## Scope and Observed State
@@ -74,14 +76,22 @@ No Cloudflare resource was read or mutated. This final fix round ran no deploy c
 - validates the persisted contact state, restriction state and erasure timestamp as one explicit fail-closed combination;
 - preserves exact intake replay protection, bounded return contracts and the additive migration unchanged.
 
+### Final fix round 2
+
+- `ddd6e71d3cdf7ba05a53f19b73575e8b9d27d98e` - `fix: validate preserved erasure suppressions`
+- accepts one committed suppression when it either belongs to the winning lifecycle idempotency key or is the exact compatible `email_hmac`/purpose row preserved by the erasure UPSERT;
+- continues to reject multiple, ambiguous, incompatible or inadequate suppression rows;
+- adds a real SQLite regression proving a fresh successful erasure leaves one deleted lifecycle event and one unchanged compatible historical suppression.
+
 ## Required Local Verification
 
 All commands below ran from the stated worktree with the default local toolchain.
 
 | Command | Exit | Observed result |
 | --- | ---: | --- |
-| `node --test test/contact-privacy-policy.test.mjs test/block6d4-local-migration.test.mjs test/contact-privacy-d1-store.test.mjs test/contact-privacy-erasure.test.mjs test/contact-privacy-contract.test.mjs test/contact-d1-store.test.mjs test/contact-intake.test.mjs test/contact-gate.test.mjs test/synthetic-contact-canary.test.mjs test/crm-lite.test.mjs test/synthetic-crm-persistence.test.mjs test/synthetic-crm-readonly.test.mjs` | `0` | `93/93` passed; `0` failed, skipped or cancelled. |
-| `npm test` | `0` | `588/588` passed; `0` failed, skipped or cancelled. |
+| `node --test test/contact-privacy-erasure.test.mjs` | `0` | `22/22` passed; `0` failed, skipped or cancelled. |
+| `node --test test/contact-privacy-policy.test.mjs test/block6d4-local-migration.test.mjs test/contact-privacy-d1-store.test.mjs test/contact-privacy-erasure.test.mjs test/contact-privacy-contract.test.mjs test/contact-d1-store.test.mjs test/contact-intake.test.mjs test/contact-gate.test.mjs test/synthetic-contact-canary.test.mjs test/crm-lite.test.mjs test/synthetic-crm-persistence.test.mjs test/synthetic-crm-readonly.test.mjs` | `0` | `94/94` passed; `0` failed, skipped or cancelled. |
+| `npm test` | `0` | `589/589` passed; `0` failed, skipped or cancelled. |
 | `npm run lint` | `0` | `0` errors and `1` pre-existing `@next/next/no-img-element` warning at `app/components/comic-home-intro.tsx:36`. |
 | `npm run build` | `0` | Vinext completed all `5/5` build phases and printed `Build complete.` |
 
@@ -108,7 +118,7 @@ The migration is additive: its destructive-token scan is empty, and `test/block6
 
 The earlier whole-branch hardening addressed replay after erasure, equal-timestamp consent precedence and purpose-specific consent-copy validation. The final independent whole-branch review of `2f48408f9c914eb3253ec2012c6c93357b84adcc..0a57d9f89cdbdbd8fb511a61eb40e4b19a71a505` nevertheless returned `CHANGES_REQUESTED`: Critical `0`, Important `3`, Minor `0`, blocker `Yes`.
 
-Implementation commit `582b62d0968c3891d437ba0570492a1d2b998d0a` addresses the two code blockers with observed RED -> GREEN regressions. This document corrects the third finding by withdrawing the stale clean-review claim. An independent final re-review of the new head has not yet occurred, so this evidence does not claim `APPROVED`.
+Implementation commit `582b62d0968c3891d437ba0570492a1d2b998d0a` addressed the original two code blockers with observed RED -> GREEN regressions. The first independent re-review then returned `CHANGES_REQUESTED` with one Important finding: a compatible historical suppression could be preserved by the UPSERT while post-commit validation reported failure. Round-2 implementation commit `ddd6e71d3cdf7ba05a53f19b73575e8b9d27d98e` addresses that finding with a real SQLite RED -> GREEN regression. An independent re-review of round 2 has not yet occurred, so this evidence does not claim `APPROVED`.
 
 ## Gate Decision
 
