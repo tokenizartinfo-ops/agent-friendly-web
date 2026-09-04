@@ -13,6 +13,7 @@ const FIXTURE_ID = '38e17927-bc9d-4cab-ac56-12d2bf5d0349';
 const FIXTURE_EMAIL = 'synthetic-canary@example.invalid';
 const FIXTURE_NAME = 'Agent Friendly Web Synthetic Canary Rectified';
 const NOW = '2026-09-04T12:00:00.000Z';
+const LATER_NOW = '2026-09-05T12:00:00.000Z';
 
 const COMPLETED_RESULT = {
   status: 'synthetic_privacy_lifecycle_completed',
@@ -462,6 +463,42 @@ test('resumes after every interrupted write phase without duplicate events', asy
       assert.equal(count(database, 'contact_leads'), 1);
     });
   }
+});
+
+test('reuses committed privacy request expiries when a retry runs at a later time', async () => {
+  const database = createDatabase();
+  let currentNow = NOW;
+  let id = 1;
+  const overrides = {
+    now: () => currentNow,
+    randomUUID: () => `40000000-0000-4000-8000-${String(id++).padStart(12, '0')}`,
+  };
+  database.failBatchAt = 3;
+  await expectCode(
+    runSyntheticPrivacyLifecycle(database, input(), overrides),
+    'synthetic_privacy_lifecycle_store_failed',
+  );
+  const committedAtT1 = database.sqlite.prepare(`SELECT
+    verification_expires_at AS verificationExpiresAt, expires_at AS expiresAt
+    FROM privacy_requests WHERE request_type = 'rectification'`).get();
+  assert.deepEqual({ ...committedAtT1 }, {
+    verificationExpiresAt: '2026-09-04T12:15:00.000Z',
+    expiresAt: '2026-09-05T12:00:00.000Z',
+  });
+
+  currentNow = LATER_NOW;
+  database.failBatchAt = 0;
+  const result = await runSyntheticPrivacyLifecycle(database, input(), overrides);
+
+  assert.deepEqual(result, COMPLETED_RESULT);
+  const committedAfterRetry = database.sqlite.prepare(`SELECT
+    verification_expires_at AS verificationExpiresAt, expires_at AS expiresAt
+    FROM privacy_requests WHERE request_type = 'rectification'`).get();
+  assert.deepEqual({ ...committedAfterRetry }, { ...committedAtT1 });
+  assert.equal(count(database, 'contact_consent_events'), 2);
+  assert.equal(count(database, 'privacy_requests'), 4);
+  assert.equal(count(database, 'contact_suppressions'), 2);
+  assert.equal(count(database, 'data_lifecycle_events'), 3);
 });
 
 test('serializes no identifiers, hashes, SQL, secrets or fixture values', async () => {
