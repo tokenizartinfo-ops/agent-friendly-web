@@ -7,7 +7,7 @@ export const PRIVATE_HUMAN_PRIVACY_PILOT_PREFLIGHT_CONTRACT =
 const CANARY_DATABASE_ID = '2b518988-eacb-4c31-b760-4e58c3c0285b';
 const PRODUCTION_DATABASE_ID = 'd26fc9d2-df5a-4957-8e58-cc4c945faad8';
 const REQUIRED_MIGRATION = '0008_contact_privacy_lifecycle.sql';
-const HASH = /^[0-9a-f]{64}$/;
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const PUBLIC_FLAGS = [
   'AFW_REAL_CONTACT_ENABLED',
   'AFW_PRIVACY_REQUESTS_ENABLED',
@@ -52,12 +52,15 @@ function hasExpectedShape(metadata) {
   if (!hasExactKeys(metadata.resources, [
     'canary_worker', 'canary_database', 'production_worker', 'production_database',
   ])) return false;
-  if (!hasExactKeys(metadata.resources.canary_worker, ['name'])) return false;
+  if (!hasExactKeys(metadata.resources.canary_worker, [
+    'name', 'current_version_id', 'current_deployment_id',
+  ])) return false;
   if (!hasExactKeys(metadata.resources.production_worker, ['name'])) return false;
   if (!hasExactKeys(metadata.resources.canary_database, ['name', 'id'])) return false;
   if (!hasExactKeys(metadata.resources.production_database, ['name', 'id'])) return false;
   if (!hasExactKeys(metadata.access, [
-    'verified', 'audience_configured', 'allowed_subject_hashes',
+    'verified', 'audience_configured', 'allowed_subject_hash_count',
+    'hash_format_verified',
   ])) return false;
   if (!Array.isArray(metadata.migrations)) return false;
   if (!hasExactKeys(metadata.expected_flags, ['base', 'canary', 'production'])) return false;
@@ -115,6 +118,10 @@ export function validatePrivateHumanPrivacyPilotPreflight(metadata = {}) {
     return rejected('invalid_canary_worker');
   }
   if (
+    !UUID.test(resources.canary_worker.current_version_id)
+    || !UUID.test(resources.canary_worker.current_deployment_id)
+  ) return rejected('invalid_canary_worker');
+  if (
     resources.canary_database.name !== 'agent-friendly-web-web-canary'
     || resources.canary_database.id !== CANARY_DATABASE_ID
     || resources.canary_database.id === resources.production_database.id
@@ -131,9 +138,8 @@ export function validatePrivateHumanPrivacyPilotPreflight(metadata = {}) {
     return rejected('access_required');
   }
   if (
-    !Array.isArray(metadata.access.allowed_subject_hashes)
-    || metadata.access.allowed_subject_hashes.length !== 1
-    || !HASH.test(metadata.access.allowed_subject_hashes[0])
+    metadata.access.allowed_subject_hash_count !== 1
+    || metadata.access.hash_format_verified !== true
   ) return rejected('invalid_access_allowlist');
   if (
     metadata.migrations.length !== 1

@@ -38,7 +38,11 @@ function validMetadata() {
       access_required: true,
     },
     resources: {
-      canary_worker: { name: 'agent-friendly-web-web-canary' },
+      canary_worker: {
+        name: 'agent-friendly-web-web-canary',
+        current_version_id: '5105a6f1-a7b9-40ec-aa1a-9f650cf3ff5c',
+        current_deployment_id: 'ca3ac412-c439-44c4-a57c-57952cc5d192',
+      },
       canary_database: {
         name: 'agent-friendly-web-web-canary',
         id: '2b518988-eacb-4c31-b760-4e58c3c0285b',
@@ -52,7 +56,8 @@ function validMetadata() {
     access: {
       verified: true,
       audience_configured: true,
-      allowed_subject_hashes: ['a'.repeat(64)],
+      allowed_subject_hash_count: 1,
+      hash_format_verified: true,
     },
     migrations: ['0008_contact_privacy_lifecycle.sql'],
     expected_flags: {
@@ -101,9 +106,11 @@ test('preflight rejects non-canary resources, absent Access and unsafe flags', (
     ['invalid_environment', (value) => { value.environment = 'production'; }],
     ['invalid_origin', (value) => { value.origin = 'https://agentfriendlyweb.dev'; }],
     ['invalid_canary_worker', (value) => { value.resources.canary_worker.name = 'agent-friendly-web-web-production'; }],
+    ['invalid_canary_worker', (value) => { value.resources.canary_worker.current_version_id = ''; }],
     ['invalid_canary_database', (value) => { value.resources.canary_database.id = value.resources.production_database.id; }],
     ['access_required', (value) => { value.access.verified = false; }],
-    ['invalid_access_allowlist', (value) => { value.access.allowed_subject_hashes.push('b'.repeat(64)); }],
+    ['invalid_access_allowlist', (value) => { value.access.allowed_subject_hash_count = 2; }],
+    ['invalid_access_allowlist', (value) => { value.access.hash_format_verified = false; }],
     ['unsafe_public_flags', (value) => { value.expected_flags.canary.AFW_REAL_CONTACT_ENABLED = 'true'; }],
     ['unsafe_public_flags', (value) => { value.expected_flags.base.AFW_PRODUCT_UPDATES_ENABLED = 'true'; }],
     ['pilot_not_disabled', (value) => { value.expected_flags.canary.AFW_PRIVATE_HUMAN_PRIVACY_PILOT_ENABLED = 'true'; }],

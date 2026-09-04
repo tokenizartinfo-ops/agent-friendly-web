@@ -1,0 +1,74 @@
+{
+  "contract": "agent-friendly-web.private-human-privacy-pilot-canary-preflight.v1",
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_canary",
+  "origin": "https://canary.agentfriendlyweb.dev",
+  "route": {
+    "path": "/api/canary/private-human-privacy-pilot",
+    "visibility": "private",
+    "access_required": true
+  },
+  "resources": {
+    "canary_worker": {
+      "name": "agent-friendly-web-web-canary",
+      "current_version_id": "5105a6f1-a7b9-40ec-aa1a-9f650cf3ff5c",
+      "current_deployment_id": "ca3ac412-c439-44c4-a57c-57952cc5d192"
+    },
+    "canary_database": {
+      "name": "agent-friendly-web-web-canary",
+      "id": "2b518988-eacb-4c31-b760-4e58c3c0285b"
+    },
+    "production_worker": {
+      "name": "agent-friendly-web-web-production"
+    },
+    "production_database": {
+      "name": "agent-friendly-web-web-production",
+      "id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8"
+    }
+  },
+  "access": {
+    "verified": true,
+    "audience_configured": true,
+    "allowed_subject_hash_count": 1,
+    "hash_format_verified": true
+  },
+  "migrations": [
+    "0008_contact_privacy_lifecycle.sql"
+  ],
+  "expected_flags": {
+    "base": {
+      "AFW_PRIVATE_HUMAN_PRIVACY_PILOT_ENABLED": "false",
+      "AFW_REAL_CONTACT_ENABLED": "false",
+      "AFW_PRIVACY_REQUESTS_ENABLED": "false",
+      "AFW_RETENTION_JOBS_ENABLED": "false",
+      "AFW_PRODUCT_UPDATES_ENABLED": "false"
+    },
+    "canary": {
+      "AFW_PRIVATE_HUMAN_PRIVACY_PILOT_ENABLED": "false",
+      "AFW_REAL_CONTACT_ENABLED": "false",
+      "AFW_PRIVACY_REQUESTS_ENABLED": "false",
+      "AFW_RETENTION_JOBS_ENABLED": "false",
+      "AFW_PRODUCT_UPDATES_ENABLED": "false"
+    },
+    "production": {
+      "AFW_PRIVATE_HUMAN_PRIVACY_PILOT_ENABLED": "false",
+      "AFW_REAL_CONTACT_ENABLED": "false",
+      "AFW_PRIVACY_REQUESTS_ENABLED": "false",
+      "AFW_RETENTION_JOBS_ENABLED": "false",
+      "AFW_PRODUCT_UPDATES_ENABLED": "false"
+    }
+  },
+  "mutation_policy": {
+    "local_preflight_only": true,
+    "canary_remote_mutation": false,
+    "production_mutation": false,
+    "cross_project_mutation": false
+  },
+  "rollback": {
+    "worker_action": "restore_previous_canary_worker_version_with_every_switch_off",
+    "database_action": "use_recorded_d1_time_travel_bookmark_and_reapply_erasure_tombstone",
+    "time_travel_bookmark_recorded": true,
+    "production_change_required": false
+  }
+}
