@@ -22,6 +22,7 @@ const validInput = {
 const now = '2026-09-03T22:00:00.000Z';
 const refHash = '11e594f481958c10e3015d0bf0447a22f068a8a647f475df15ce2c7ab4b8f3f1';
 const requestHash = 'cf72ccfdf8c507dca70d390bee3593cb23f44bfa168e933c7924d771cfd70054';
+const winnerRequestHash = '46f2de9aeaef883e0184b3677a9c2923c41f4972ab456222820d7fde9df3e454';
 const ownershipProof = '72cd25cf1a78ae6004e588b14e29ce3c5b7c70d14e75ded5f01f5134ef2dca3e';
 const tombstoneRef = 'contact-erased-11e594f481958c10e301';
 const erasedIdempotency = 'erased-8cca3400b26b951f6157d39a58db3';
@@ -571,6 +572,96 @@ test('same-millisecond different-key erasure loser is idempotent and commits no 
   }
 });
 
+test('same-millisecond different-purpose loser recovers a preserved historical winner suppression', async () => {
+  const database = createSqliteErasureDatabase();
+  const loserInput = {
+    ...validInput,
+    purpose: 'commercial_contact',
+    idempotencyKey: '6ba7b811-9dad-41d1-80b4-00c04fd430c8',
+  };
+  const historicalSuppression = {
+    id: '00000000-0000-4000-8000-000000000030',
+    emailHmac: validInput.emailHmac,
+    purpose: validInput.purpose,
+    reasonCode: 'subject_deletion',
+    policyVersion: validInput.policyVersion,
+    idempotencyKey: '6ba7b812-9dad-41d1-80b4-00c04fd430c8',
+    createdAt: '2026-09-01T22:00:00.000Z',
+    expiresAt: '2028-09-02T22:00:00.000Z',
+  };
+  database.sqlite.prepare(`INSERT INTO contact_suppressions (
+    id, email_hmac, purpose, reason_code, policy_version,
+    idempotency_key, created_at, expires_at
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`)
+    .run(...Object.values(historicalSuppression));
+  let arrivals = 0;
+  let releaseBatches;
+  let markFirstReady;
+  const bothReady = new Promise((resolve) => { releaseBatches = resolve; });
+  const firstReady = new Promise((resolve) => { markFirstReady = resolve; });
+  database.waitBeforeBatch = async () => {
+    arrivals += 1;
+    if (arrivals === 1) markFirstReady();
+    if (arrivals === 2) releaseBatches();
+    await bothReady;
+  };
+
+  try {
+    const winnerPromise = applyContactErasureToD1(database, validInput, deterministic());
+    await firstReady;
+    const loserPromise = applyContactErasureToD1(database, loserInput, deterministic({
+      ids: [
+        '00000000-0000-4000-8000-000000000022',
+        '00000000-0000-4000-8000-000000000023',
+      ],
+    }));
+    const settled = await Promise.allSettled([winnerPromise, loserPromise]);
+    const outcomes = settled.map((result) => (
+      result.status === 'fulfilled'
+        ? result.value
+        : { error: result.reason instanceof Error ? result.reason.message : 'non_error' }
+    ));
+    const snapshot = {
+      outcomes,
+      lead: {
+        ...database.sqlite.prepare(`SELECT
+          state, idempotency_key AS idempotencyKey, request_hash AS requestHash
+          FROM contact_leads WHERE id = ?`).get(leadId),
+      },
+      suppressions: database.sqlite.prepare(`SELECT
+        id, email_hmac AS emailHmac, purpose, reason_code AS reasonCode,
+        policy_version AS policyVersion, idempotency_key AS idempotencyKey,
+        created_at AS createdAt, expires_at AS expiresAt
+        FROM contact_suppressions ORDER BY id`).all().map((row) => ({ ...row })),
+      lifecycleEvents: database.sqlite.prepare(`SELECT
+        event_type AS eventType, idempotency_key AS idempotencyKey,
+        request_hash AS requestHash
+        FROM data_lifecycle_events ORDER BY id`).all().map((row) => ({ ...row })),
+    };
+
+    assert.deepEqual(snapshot, {
+      outcomes: [
+        { erased: true, duplicate: false, contactStatus: 'erased', tombstoneRef },
+        { erased: true, duplicate: true, contactStatus: 'erased' },
+      ],
+      lead: {
+        state: 'erased',
+        idempotencyKey: erasedIdempotency,
+        requestHash: '',
+      },
+      suppressions: [historicalSuppression],
+      lifecycleEvents: [{
+        eventType: 'deleted',
+        idempotencyKey,
+        requestHash,
+      }],
+    });
+    assert.doesNotMatch(JSON.stringify(outcomes[1]), /email|hmac|purpose|policy|request/iu);
+  } finally {
+    database.sqlite.close();
+  }
+});
+
 test('canonicalizes accepted UUIDs before lookup, hashing, binding and generated ID use', async () => {
   const uppercaseInput = {
     ...validInput,
@@ -683,7 +774,7 @@ test('recovers a different-key zero-change race without creating another lifecyc
     finalSuppressions: [validSuppression({ idempotencyKey: winnerKey })],
     lifecycle: validLifecycle({
       idempotencyKey: winnerKey,
-      requestHash: 'b'.repeat(64),
+      requestHash: winnerRequestHash,
     }),
   });
   database.batchResults = [0, 0, 0, 0, 0].map((changes) => ({
