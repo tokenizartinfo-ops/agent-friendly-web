@@ -1,0 +1,78 @@
+{
+  "contract": "agent-friendly-web.email-review-ready-corrected-off-negative-probe-evidence.v1",
+  "status": "corrected_off_version_verified_negative_probe_passed",
+  "recorded_at": "2026-09-03T12:09:25.5016767Z",
+  "scope": {
+    "project": "agent-friendly-web",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "environment": "afw_email_review_ready_canary",
+    "origin": "https://canary.agentfriendlyweb.dev",
+    "public_origin_modified": false,
+    "tokenizart_resources_used": false
+  },
+  "worker": {
+    "name": "agent-friendly-web-web-canary",
+    "version_id": "7b25f69e-d30e-4ee4-be0e-c2deafed0f3d",
+    "deployment_id": "7f81a402-38c0-4a72-b883-1088dfd734a6",
+    "superseded_corrected_version_id": "3af007c5-c67d-45f3-8f8e-ccb350ac76a4",
+    "traffic_percentage": 100,
+    "traffic_scope": "isolated_canary_only",
+    "flag_enabled": false,
+    "remote_deploy_enabled": false,
+    "send_email_binding_preserved": true,
+    "private_destination_read_or_published": false
+  },
+  "bindings": {
+    "verified_by_name_and_type": true,
+    "access": true,
+    "d1_canary": true,
+    "rate_limiter": true,
+    "secret_subject_allowlist": true,
+    "send_email": true,
+    "assets": true
+  },
+  "probe": {
+    "authenticated": true,
+    "mode": "negative",
+    "http_status": 404,
+    "sent": false,
+    "code": "email_review_ready_unavailable",
+    "visible_mode": "PRUEBA NEGATIVA: ENVIO BLOQUEADO"
+  },
+  "delivery": {
+    "provider_invocations_this_phase": 0,
+    "email_sent_this_phase": false,
+    "automatic_retries_this_phase": 0,
+    "cumulative_provider_invocations": 1,
+    "cumulative_email_sent": 0
+  },
+  "database": {
+    "id": "2b518988-eacb-4c31-b760-4e58c3c0285b",
+    "delivery_rows_before_probe": {
+      "total": 1,
+      "reserved": 0,
+      "sent": 0,
+      "failed": 1
+    },
+    "delivery_rows_after_probe": {
+      "total": 1,
+      "reserved": 0,
+      "sent": 0,
+      "failed": 1
+    },
+    "probe_writes": 0
+  },
+  "fix": {
+    "code": "explicit_to_undefined",
+    "corrected_code_remotely_deployed": true,
+    "negative_boundary_remotely_verified": true,
+    "delivery_fix_remotely_verified": false
+  },
+  "next_gate": {
+    "requires_new_action_time_approval": true,
+    "new_idempotency_identifier_required": true,
+    "exactly_one_attempt_maximum": true,
+    "restore_off_immediately": true,
+    "automatic_retry_allowed": false
+  }
+}

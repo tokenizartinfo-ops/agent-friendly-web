@@ -1,31 +1,67 @@
 {
   "contract": "agent-friendly-web.email-operations.v1",
-  "status": "planned_draft_only",
-  "updated_at": "2026-08-31",
+  "status": "fixed_destination_canary_verified_kill_switch_off",
+  "updated_at": "2026-09-03",
   "canonical_address": {
     "address": "hello@agentfriendlyweb.dev",
-    "status": "candidate_not_configured"
+    "status": "inbound_verified"
   },
   "aliases": [
-    { "address": "hola@agentfriendlyweb.dev", "purpose": "spanish-entry", "status": "candidate_not_configured" },
-    { "address": "ola@agentfriendlyweb.dev", "purpose": "portuguese-entry", "status": "candidate_not_configured" },
-    { "address": "auditoria@agentfriendlyweb.dev", "purpose": "audit-and-plan", "status": "candidate_not_configured" },
-    { "address": "seguridad@agentfriendlyweb.dev", "purpose": "security-and-abuse", "status": "candidate_not_configured" },
-    { "address": "bajas@agentfriendlyweb.dev", "purpose": "consent-withdrawal", "status": "candidate_not_configured" },
-    { "address": "no-reply@agentfriendlyweb.dev", "purpose": "outbound-only", "status": "candidate_not_configured" }
+    { "address": "hola@agentfriendlyweb.dev", "purpose": "spanish-entry", "status": "inbound_verified" },
+    { "address": "ola@agentfriendlyweb.dev", "purpose": "portuguese-entry", "status": "inbound_verified" },
+    { "address": "auditoria@agentfriendlyweb.dev", "purpose": "audit-and-plan", "status": "reserved_not_configured" },
+    { "address": "seguridad@agentfriendlyweb.dev", "purpose": "security-and-abuse", "status": "reserved_not_configured" },
+    { "address": "bajas@agentfriendlyweb.dev", "purpose": "consent-withdrawal", "status": "reserved_not_configured" },
+    { "address": "no-reply@agentfriendlyweb.dev", "purpose": "closed-inbound", "status": "drop_verified" }
   ],
   "capabilities": {
     "local_draft_planning": true,
-    "inbound_routing": false,
+    "inbound_routing": true,
     "outbound_sending": false,
-    "dns_configured": false,
-    "email_provider_configured": false,
+    "dns_configured": true,
+    "synthetic_delivery_verified": true,
+    "outbound_provider_selected": true,
+    "email_provider_configured": true,
+    "outbound_delivery_verified": true,
+    "outbound_binding_configured": true,
+    "transactional_case_selected": true,
+    "transactional_local_implementation_ready": true,
+    "transactional_remote_migration_applied": true,
+    "transactional_route_deployed_canary": true,
+    "transactional_rate_limit_binding_configured": true,
+    "private_review_ready_adapter_local_ready": true,
+    "private_review_ready_integration_deployed": true,
+    "synthetic_private_contact_local_ready": true,
+    "synthetic_private_contact_remotely_verified": true,
+    "transactional_automatic_sending": false,
+    "arbitrary_recipients": false,
+    "customer_email_sending": false,
     "message_body_processing": false,
     "attachment_processing": false
   },
   "consent": {
     "transactional_request_is_separate_from_marketing": true,
     "product_updates_requires_explicit_consent": true
+  },
+  "outbound_canary_contract": "https://agentfriendlyweb.dev/.well-known/email-outbound-canary-contract.json",
+  "review_ready_contract": "https://agentfriendlyweb.dev/.well-known/email-review-ready-contract.json",
+  "private_review_ready_integration_contract": "https://agentfriendlyweb.dev/.well-known/private-review-ready-integration-contract.json",
+  "synthetic_contact_canary_contract": "https://agentfriendlyweb.dev/.well-known/synthetic-contact-canary-contract.json",
+  "latest_transactional_canary": {
+    "status": "sent_once_kill_switch_off",
+    "approved_attempts": 4,
+    "provider_invocations": 4,
+    "retries": 0,
+    "email_sent": true,
+    "previous_local_fix": "explicit_to_null_with_sanitized_provider_failure_codes",
+    "corrected_code_remotely_deployed": true,
+    "negative_probe_after_corrected_deploy": true,
+    "remotely_verified_fix": true,
+    "next_local_candidate": "explicit_to_private_runtime_destination",
+    "runtime_destination_source": "private_worker_secret",
+    "next_candidate_deployed": true,
+    "next_candidate_negative_probe_passed": true,
+    "delivery_fix_remotely_verified": true
   },
   "human_review_required_for": [
     "security",
@@ -38,12 +74,11 @@
   ],
   "blocked_actions": [
     "send_email",
-    "configure_dns",
     "provision_mailbox",
     "configure_email_provider",
     "read_message_body",
     "read_attachments"
   ],
   "requires_separate_remote_approval": true,
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-2026-08-31.md"
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-VERIFIED-CANARY-2026-09-03.md"
 }

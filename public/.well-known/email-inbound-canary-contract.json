@@ -1,0 +1,37 @@
+{
+  "contract": "agent-friendly-web.email-inbound-canary.v1",
+  "status": "inbound_canary_verified",
+  "updated_at": "2026-09-02",
+  "project": "agent-friendly-web",
+  "environment": "afw_email_inbound_canary",
+  "origin": "agentfriendlyweb.dev",
+  "active_aliases": [
+    "hello@agentfriendlyweb.dev",
+    "hola@agentfriendlyweb.dev",
+    "ola@agentfriendlyweb.dev"
+  ],
+  "reserved_aliases": [
+    "auditoria@agentfriendlyweb.dev",
+    "seguridad@agentfriendlyweb.dev",
+    "bajas@agentfriendlyweb.dev"
+  ],
+  "blocked_inbound_aliases": [
+    "no-reply@agentfriendlyweb.dev"
+  ],
+  "capabilities": {
+    "local_preflight": true,
+    "inbound_routing": true,
+    "dns_configured": true,
+    "synthetic_delivery_verified": true,
+    "outbound_sending": false,
+    "automatic_replies": false,
+    "newsletter": false,
+    "message_body_processing": false,
+    "attachment_processing": false,
+    "email_worker": false,
+    "d1_persistence": false
+  },
+  "private_destination_published": false,
+  "remote_dependency": null,
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C1-EMAIL-IDENTITY-AND-INBOUND-CANARY-DESIGN-2026-09-02.md"
+}

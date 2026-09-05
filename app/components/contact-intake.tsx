@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { ArrowLeft, Check, LockKeyhole, Mail, Send, ShieldCheck, X } from 'lucide-react';
 import { CONTACT_COPY } from '../../lib/contact-copy.mjs';
+import { localizedPath } from '../../lib/site-i18n.mjs';
 import { validateContactPreview } from '../../lib/contact-intake.mjs';
 import { TurnstileWidget } from './turnstile-widget';
 
@@ -102,6 +103,7 @@ export function ContactIntake({
         <button type="button" className="icon-button" aria-label={copy.close} title={copy.close} onClick={() => setOpen(false)}><X size={18} /></button>
       </header>
       <div className="contact-preview-notice"><LockKeyhole size={16} /><strong>{copy.previewNotice}</strong></div>
+      <a className="contact-privacy-link" href={localizedPath('privacy', locale) || '/privacidad'}>{copy.privacy}</a>
 
       {preview ? (
         <div className="contact-review" aria-live="polite">

@@ -1,0 +1,99 @@
+{
+  "contract": "agent-friendly-web.synthetic-commercial-review-remote-evidence.v1",
+  "status": "synthetic_commercial_review_verified_kill_switch_off",
+  "observed_at": "2026-09-03",
+  "scope": {
+    "project": "agent-friendly-web",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "environment": "afw_canary",
+    "origin": "https://canary.agentfriendlyweb.dev",
+    "resource_type": "cloudflare_worker_d1_readonly_access",
+    "resource_id": "agent-friendly-web-web-canary / 2b518988-eacb-4c31-b760-4e58c3c0285b",
+    "allowed_action": "read_one_fixed_synthetic_contact_and_plan_without_persistence"
+  },
+  "versions": {
+    "off_baseline": "6f7d0d6c-239c-4356-a016-eb7348ea9bb1",
+    "temporary_on": "bcc86013-238f-4520-b696-0e14eb255f35",
+    "final_off_publication": "720db52d-b5c5-4891-81ac-d00927810e50"
+  },
+  "deployments": {
+    "temporary_on": "7a05c46b-1864-4628-adbd-0a9136f17614",
+    "verified_rollback_off": "0adf2853-bfb4-4449-8ccc-849a1364b0d4",
+    "final_off_publication": "e409d0c5-5f00-4888-829e-9f97b0d77205"
+  },
+  "api": {
+    "off_before": {
+      "http_status": 404,
+      "code": "synthetic_commercial_review_unavailable"
+    },
+    "temporary_on": {
+      "http_status": 200,
+      "contract": "agent-friendly-web.synthetic-commercial-review.v1",
+      "status": "planned_not_persisted",
+      "from_stage": "new",
+      "to_stage": "qualified",
+      "persists_data": false,
+      "sends_email": false,
+      "creates_proposal": false,
+      "charges_payment": false,
+      "modifies_customer_site": false
+    },
+    "off_after": {
+      "http_status": 404,
+      "code": "synthetic_commercial_review_unavailable"
+    }
+  },
+  "database": {
+    "counts_before": {
+      "contact_rows": 1,
+      "requested_plan_rows": 1,
+      "email_rows": 4,
+      "sent_rows": 1,
+      "failed_rows": 3,
+      "reserved_rows": 0
+    },
+    "counts_after": {
+      "contact_rows": 1,
+      "requested_plan_rows": 1,
+      "email_rows": 4,
+      "sent_rows": 1,
+      "failed_rows": 3,
+      "reserved_rows": 0
+    },
+    "rows_written_before": 0,
+    "rows_written_after": 0,
+    "changed_db_before": false,
+    "changed_db_after": false
+  },
+  "visual_qa": {
+    "desktop": "1440x900_pass",
+    "mobile": "390x844_pass",
+    "overlap_detected": false,
+    "labels_are_human_readable": true
+  },
+  "rollback": {
+    "version_id": "720db52d-b5c5-4891-81ac-d00927810e50",
+    "traffic_percent": 100,
+    "kill_switch_enabled": false,
+    "api_state": "blocked",
+    "contract_http_status": 200,
+    "contract_status": "synthetic_commercial_review_verified_kill_switch_off"
+  },
+  "public_production": {
+    "modified": false
+  },
+  "security": {
+    "cloudflare_access_required": true,
+    "allowlisted_subject_required": true,
+    "raw_source_uuid_returned": false,
+    "email_returned": false,
+    "name_returned": false,
+    "message_returned": false,
+    "tokenizart_resources_used": false
+  },
+  "sources": [
+    "https://developers.cloudflare.com/d1/worker-api/prepared-statements/",
+    "https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/",
+    "https://developers.cloudflare.com/workers/best-practices/workers-best-practices/"
+  ]
+}

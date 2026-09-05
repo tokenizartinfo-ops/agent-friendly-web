@@ -120,13 +120,14 @@ Si ingles supera de manera sostenida al menos la mitad de los leads calificados 
 
 ## Estrategia de correo
 
-`hello@agentfriendlyweb.dev` sera la identidad universal y machine-readable cuando el Gate 6C habilite correo. Se prepararan los aliases:
+`hello@agentfriendlyweb.dev` es la identidad universal y machine-readable de entrada. Gate 6C.1 verifico Cloudflare Email Routing bajo `inbound_canary_verified` para estos aliases activos:
 
 - `hola@agentfriendlyweb.dev` para espanol;
 - `ola@agentfriendlyweb.dev` para portugues;
-- `security@agentfriendlyweb.dev` para seguridad.
 
-Todos llegaran a una unica operacion. Mientras las direcciones no esten configuradas y verificadas, los contratos publicos deben declararlas como candidatas y no como canales activos. La web podra mostrar el alias local, pero contratos, manifiestos y directorios usaran `hello@`. Las respuestas deben conservar el alias por el que llego la consulta cuando el proveedor lo permita. No se crean tres newsletters, tres CRMs ni tres historias de consentimiento.
+`seguridad@agentfriendlyweb.dev`, `auditoria@agentfriendlyweb.dev` y `bajas@agentfriendlyweb.dev` permanecen reservados y no configurados. `no-reply@` descarta entrada y el catch-all esta deshabilitado.
+
+Todos los aliases activos llegan a una unica operacion privada. La web puede mostrar el alias local, pero contratos, manifiestos y directorios usan `hello@`. Gate 6C.2B verifico dominio, SPF, DKIM, DMARC y una entrega saliente humana, pero no dejo binding ni envio recurrente. Las respuestas conservaran el alias por el que llego la consulta solo cuando exista un caso transaccional aprobado. No se crean tres newsletters, tres CRMs ni tres historias de consentimiento.
 
 ## Experimentos iniciales
 

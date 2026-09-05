@@ -1,0 +1,80 @@
+{
+  "contract": "agent-friendly-web.synthetic-contact-canary.v1",
+  "status": "synthetic_contact_canary_verified_kill_switch_off",
+  "updated_at": "2026-09-03",
+  "scope": {
+    "project": "agent-friendly-web",
+    "environment": "afw_canary",
+    "origin": "https://canary.agentfriendlyweb.dev",
+    "public_production_modified": false,
+    "tokenizart_resources_used": false
+  },
+  "input": {
+    "fields": ["contract", "idempotencyKey", "action", "humanApproved", "turnstileToken"],
+    "action": "create_synthetic_contact_and_prepare_review",
+    "accepts_pii": false,
+    "accepts_free_text": false,
+    "accepts_recipient": false,
+    "turnstile_token_persisted": false
+  },
+  "fixture": {
+    "server_derived": true,
+    "reserved_tld": ".invalid",
+    "locale": "es",
+    "objective": "receive_plan",
+    "consent_purposes": ["requested_plan"],
+    "commercial_contact_consent": false,
+    "product_updates_consent": false
+  },
+  "turnstile": {
+    "server_side_validation": true,
+    "real_credentials_expected_action": "afw_synthetic_contact",
+    "real_credentials_expected_hostname": "canary.agentfriendlyweb.dev",
+    "test_credentials_expected_action": "test",
+    "test_credentials_expected_hostname": "localhost",
+    "test_credentials_canary_only": true,
+    "production_credentials_configured_by_this_gate": false
+  },
+  "identity": {
+    "cloudflare_access_required": true,
+    "exact_application_audience_required": true,
+    "access_subject_hash_allowlist_required": true,
+    "raw_subject_persisted": false
+  },
+  "kill_switch": {
+    "variable": "AFW_SYNTHETIC_CONTACT_ENABLED",
+    "default": "false",
+    "restored_after_canary": true
+  },
+  "capabilities": {
+    "local_handler_ready": true,
+    "remote_route_deployed": true,
+    "synthetic_write_verified": true,
+    "persists_contact": true,
+    "persists_requested_plan_consent": true,
+    "prepares_review_notification": true,
+    "sends_email": false,
+    "public_contact_capture": false,
+    "automatic_retry": false
+  },
+  "blocked_actions": [
+    "accept_real_contact_data",
+    "accept_free_text",
+    "accept_recipient_from_request",
+    "send_email",
+    "automatic_retry",
+    "enable_public_contact_capture",
+    "modify_production",
+    "use_tokenizart_resources"
+  ],
+  "latest_canary": {
+    "successful_synthetic_requests": 1,
+    "contact_rows_created": 1,
+    "requested_plan_consent_rows_created": 1,
+    "email_rows_created": 0,
+    "email_sent": false,
+    "review_notification_status": "prepared_not_sent",
+    "kill_switch_after_canary": "false"
+  },
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3D-SYNTHETIC-CONTACT-CANARY-REMOTE-2026-09-03.md"
+}

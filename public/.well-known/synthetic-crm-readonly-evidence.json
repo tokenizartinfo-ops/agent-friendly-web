@@ -1,0 +1,55 @@
+{
+  "contract": "agent-friendly-web.synthetic-crm-readonly-evidence.v1",
+  "status": "synthetic_crm_readonly_verified_kill_switch_off",
+  "observed_at": "2026-09-03T21:04:34Z",
+  "scope": {
+    "project": "agent-friendly-web",
+    "environment": "afw_canary",
+    "origin": "https://canary.agentfriendlyweb.dev",
+    "public_production_modified": false,
+    "tokenizart_resources_used": false,
+    "real_contacts_used": false
+  },
+  "worker": {
+    "off_version": "2d077362-0811-4fc1-96c6-fad8b46b598c",
+    "off_baseline_deployment": "7ccc2e35-2f4e-43a5-b49c-0cad0b7c0dbe",
+    "temporary_on_version": "6d7abfe4-5e51-41ce-ae76-9e5793081f1d",
+    "temporary_on_deployment": "a1329651-4148-49db-8d20-5fc8425038d8",
+    "rollback_deployment": "d438d606-eec6-461c-970e-abb1264fa323"
+  },
+  "execution": {
+    "anonymous_http": 302,
+    "authenticated_page_http": 200,
+    "api_status": "synthetic_crm_readonly_ready",
+    "rendered_domain": "example.invalid",
+    "rendered_stage": "qualified",
+    "rendered_scope_codes": [
+      "discovery_pack",
+      "external_evidence"
+    ],
+    "rendered_transition": "new_to_qualified",
+    "forms_present": false,
+    "mutation_controls_present": false
+  },
+  "d1": {
+    "database": "agent-friendly-web-web-canary",
+    "before": {
+      "crm_opportunities": 1,
+      "crm_transition_events": 1
+    },
+    "final": {
+      "crm_opportunities": 1,
+      "crm_transition_events": 1
+    },
+    "rows_written": 0
+  },
+  "final": {
+    "worker_flag": "off",
+    "verified_rollback_worker_version": "2d077362-0811-4fc1-96c6-fad8b46b598c",
+    "real_contact_used": false,
+    "email_sent": false,
+    "proposal_created": false,
+    "payment_charged": false,
+    "customer_site_modified": false
+  }
+}

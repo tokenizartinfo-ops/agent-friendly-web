@@ -6,7 +6,7 @@
     "creator": "Gabriel Mucchiut"
   },
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "updated_at": "2026-09-01",
+  "updated_at": "2026-09-05",
   "human_languages": ["es", "en", "pt"],
   "human_route_strategy": "Spanish unprefixed canonical; English under /en; Portuguese under /pt; canonical and hreflang equivalents",
   "machine_routes_localized": false,
@@ -72,14 +72,36 @@
       "resources": ["/", "/.well-known/contact-intake-contract.json"],
       "note": "Optional post-audit local preview with separated consent. The public release does not persist contacts, send email or prove domain ownership."
     },
+    "contact_privacy": {
+      "status": "candidate_for_legal_review",
+      "real_contact": false,
+      "voluntary_inbound_email": true,
+      "automated_rights_requests": false,
+      "automated_retention": false,
+      "product_updates": false,
+      "resources": [
+        "/privacidad",
+        "/en/privacy",
+        "/pt/privacidade",
+        "/.well-known/contact-privacy-lifecycle-contract.json"
+      ],
+      "note": "The localized notice documents current technical processing and proposed retention targets. Public web capture is disabled; voluntary inbound email remains a separate manual channel. This is not legal approval."
+    },
     "email_operations": {
-      "status": "local_planning_only",
-      "inbound_routing": false,
+      "status": "inbound_and_one_shot_outbound_verified",
+      "inbound_routing": true,
       "outbound_sending": false,
-      "dns_configured": false,
-      "email_provider_configured": false,
-      "resources": ["/.well-known/email-operations-contract.json"],
-      "note": "The public contract documents candidate addresses, consent boundaries and blocked actions. No mailbox, DNS route, provider, message read or send operation is active."
+      "dns_configured": true,
+      "outbound_provider_selected": true,
+      "email_provider_configured": true,
+      "outbound_delivery_verified": true,
+      "outbound_binding_configured": false,
+      "resources": [
+        "/.well-known/email-operations-contract.json",
+        "/.well-known/email-inbound-canary-contract.json",
+        "/.well-known/email-outbound-canary-contract.json"
+      ],
+      "note": "Cloudflare Email Routing and three inbound aliases are verified. The Email Service sending domain, SPF, DKIM, DMARC and one human-approved delivery are verified; recurring sending and the Worker binding remain disabled."
     },
     "crm_lite": {
       "status": "local_planning_only",

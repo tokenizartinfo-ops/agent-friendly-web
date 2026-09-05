@@ -11,11 +11,14 @@ const { privateKey, publicKey } = await generateKeyPair('RS256');
 
 async function accessToken(claims = {}, options = {}) {
   const now = Math.floor(Date.now() / 1000);
+  const protectedHeader = options.omitTyp
+    ? { alg: 'RS256', kid: 'test-key' }
+    : { alg: 'RS256', kid: 'test-key', typ: options.typ === undefined ? 'JWT' : options.typ };
   return new SignJWT({
     email: ' Owner@Example.com ',
     ...claims,
   })
-    .setProtectedHeader({ alg: 'RS256', kid: 'test-key', typ: options.typ === undefined ? 'JWT' : options.typ })
+    .setProtectedHeader(protectedHeader)
     .setIssuer(options.issuer || issuer)
     .setAudience(options.audience || audience)
     .setSubject(options.subject === undefined ? 'owner-1' : options.subject)
@@ -55,12 +58,57 @@ test('fails closed for wrong issuer, audience or expiration without returning cl
   }
 });
 
+test('accepts a valid Cloudflare Access JWT without the optional typ header', async () => {
+  const result = await verifyCloudflareAccessJwt({
+    token: await accessToken({}, { omitTyp: true }),
+    teamDomain: 'tokenizart.cloudflareaccess.com',
+    audience,
+    keySet: publicKey,
+  });
+  assert.deepEqual(result, {
+    ok: true,
+    identity: { userId: 'owner-1', email: 'owner@example.com' },
+  });
+});
+
+test('returns only a bounded diagnostic category when canary diagnostics are requested', async () => {
+  const cases = [
+    {
+      token: await accessToken({}, { issuer: 'https://other.cloudflareaccess.com' }),
+      diagnosticCode: 'issuer_mismatch',
+    },
+    {
+      token: await accessToken({}, { audience: 'other-audience' }),
+      diagnosticCode: 'audience_mismatch',
+    },
+    {
+      token: await accessToken({}, { expiresAt: Math.floor(Date.now() / 1000) - 10 }),
+      diagnosticCode: 'token_expired',
+    },
+  ];
+
+  for (const testCase of cases) {
+    const result = await verifyCloudflareAccessJwt({
+      token: testCase.token,
+      teamDomain: 'tokenizart.cloudflareaccess.com',
+      audience,
+      keySet: publicKey,
+      diagnostics: true,
+    });
+    assert.deepEqual(result, {
+      ok: false,
+      code: 'contact_staging_identity_required',
+      diagnosticCode: testCase.diagnosticCode,
+    });
+    assert.equal(JSON.stringify(result).includes('Owner@Example.com'), false);
+  }
+});
+
 test('requires subject and normalized email claims', async () => {
   const missingEmail = await accessToken({ email: '' });
   const missingSubject = await accessToken({}, { subject: '' });
   const oversizedSubject = await accessToken({}, { subject: 'a'.repeat(201) });
-  const wrongType = await accessToken({}, { typ: 'JOSE' });
-  for (const token of [missingEmail, missingSubject, oversizedSubject, wrongType]) {
+  for (const token of [missingEmail, missingSubject, oversizedSubject]) {
     assert.deepEqual(await verifyCloudflareAccessJwt({
       token,
       teamDomain: 'tokenizart.cloudflareaccess.com',

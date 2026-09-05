@@ -4,6 +4,7 @@ import { AssistantExperience } from '../../asistente/page';
 import { CapsulePageExperience } from '../../capsula/[projectId]/page';
 import { SectorGuidePage } from '../../components/sector-guide-page';
 import { LocalizedPublicPage } from '../../components/localized-public-page';
+import { PrivacyPolicyPage } from '../../components/privacy-policy-page';
 import { AgenticEvolutionExperience } from '../../evolucion-agentica/page';
 import { DossierExperience } from '../../expediente/page';
 import { PublicGuideExperience } from '../../guia/page';
@@ -45,6 +46,7 @@ export default async function LocalizedRoutePage({ params, searchParams }: PageP
     case 'home': return <HomeExperience locale={locale} searchParams={query as Promise<{ site?: string | string[] }>} />;
     case 'guide': return <PublicGuideExperience locale={locale} />;
     case 'faq': return <PublicFaqExperience locale={locale} />;
+    case 'privacy': return <PrivacyPolicyPage locale={locale} />;
     case 'sectors': return <SectorGuidePage locale={locale} />;
     case 'evolution': return <AgenticEvolutionExperience locale={locale} />;
     case 'measurement': return <MeasureImprovementExperience locale={locale} />;

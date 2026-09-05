@@ -1,0 +1,36 @@
+{
+  "contract": "agent-friendly-web.synthetic-crm-persistence.v1",
+  "status": "synthetic_crm_persistence_verified_kill_switch_off",
+  "updated_at": "2026-09-03",
+  "scope": {
+    "environment": "afw_canary",
+    "public_production_modified": false,
+    "tokenizart_resources_used": false
+  },
+  "source": {
+    "type": "fixed_synthetic_contact",
+    "accepts_real_contacts": false,
+    "contains_pii": false
+  },
+  "capabilities": {
+    "persists_one_synthetic_opportunity": true,
+    "records_one_transition": true,
+    "idempotent_replay": true,
+    "sends_email": false,
+    "creates_proposal": false,
+    "charges_payment": false,
+    "modifies_customer_site": false
+  },
+  "controls": {
+    "cloudflare_access_required": true,
+    "actor_hash_allowlist_required": true,
+    "same_origin_required": true,
+    "rate_limit_required": true,
+    "metadata_only": true
+  },
+  "kill_switch_default": "off",
+  "remote_evidence": {
+    "href": "/.well-known/synthetic-crm-persistence-evidence.json",
+    "observed_at": "2026-09-03T20:22:13Z"
+  }
+}

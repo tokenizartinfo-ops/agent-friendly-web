@@ -1,0 +1,59 @@
+{
+  "contract": "agent-friendly-web.email-review-ready-private-bindings-evidence.v1",
+  "status": "private_bindings_ready_kill_switch_off",
+  "observed_at": "2026-09-02",
+  "project": "agent-friendly-web",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "afw_email_review_ready_canary",
+  "origin": "https://canary.agentfriendlyweb.dev",
+  "worker": {
+    "name": "agent-friendly-web-web-canary",
+    "previous_code_version_id": "6bb88a08-ec6c-4577-b131-5d7729446822",
+    "code_version_id": "d2ba9701-0c61-4d96-84e1-f5659a9426be",
+    "flag_enabled": false,
+    "access_edge_status": 302,
+    "rate_limit_binding_configured": true,
+    "send_email_binding_configured": true,
+    "destination_restricted": true,
+    "destination_value_published": false,
+    "actor_allowlist_secret_configured": true,
+    "actor_value_published": false,
+    "secret_value_returned": false
+  },
+  "identity_derivation": {
+    "access_application_count": 1,
+    "allow_policy_count": 1,
+    "allowed_email_rule_count": 1,
+    "matching_access_user_count": 1,
+    "raw_identity_published": false
+  },
+  "database": {
+    "name": "agent-friendly-web-web-canary",
+    "database_id": "2b518988-eacb-4c31-b760-4e58c3c0285b",
+    "migration_0006_applied": true,
+    "delivery_rows": 0,
+    "rows_read": 0,
+    "rows_written": 0
+  },
+  "delivery": {
+    "email_sent": false,
+    "authenticated_application_probe_completed": false,
+    "recipient_read": false,
+    "message_body_read": false
+  },
+  "public_origin": {
+    "origin": "https://agentfriendlyweb.dev",
+    "modified": false,
+    "review_ready_route_status": 404
+  },
+  "production_worker": {
+    "name": "agent-friendly-web-web-production",
+    "latest_known_version_id": "33ac170d-6b16-4a48-95c7-bbe31d34792a",
+    "modified": false
+  },
+  "rollback": {
+    "remove_private_bindings": true,
+    "redeploy_commit": "14e61da",
+    "schema_strategy": "leave_additive_empty_table_in_place"
+  }
+}

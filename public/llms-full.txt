@@ -44,6 +44,12 @@ The deployed public guide at `https://agentfriendlyweb.dev/guia` answers from an
 
 The optional post-audit contact experience is published in `preview_only` mode. A person may prepare and review a request locally after receiving the complete audit result, but the public release does not persist contact data or send email. Requested-plan consent, commercial contact and product updates are separate purposes. The exact machine-readable boundary is published at `https://agentfriendlyweb.dev/.well-known/contact-intake-contract.json`.
 
+## Operational privacy candidate
+
+The localized notice at `https://agentfriendlyweb.dev/privacidad`, `/en/privacy` and `/pt/privacidade` separates current infrastructure processing from future contact plans. Cloudflare may process request metadata to deliver and protect the public site; public domain audits are transient and are not persisted in D1; contact preview data remains in browser memory; and voluntary inbound email is handled manually through the verified `hello@agentfriendlyweb.dev` route. Real public contact capture, automated rights requests, retention jobs, newsletters and CRM ingestion remain disabled.
+
+The notice records proposed retention targets of 180, 365 and 730 days for later legal and operational review. Those targets are not active automated deletion guarantees. The machine-readable status is `https://agentfriendlyweb.dev/.well-known/contact-privacy-lifecycle-contract.json`. This candidate is not legal advice, legal approval or a universal compliance claim, and it does not authorize processing third-party contact data.
+
 ## Open knowledge distribution
 
 The public page at `https://agentfriendlyweb.dev/conocimiento-abierto` explains the read-only OKF v0.2 release. The canonical bundle index is `https://agentfriendlyweb.dev/okf/v0.2/index.md` and the distribution inventory is `https://agentfriendlyweb.dev/okf/v0.2/manifest.json`. Concepts include source provenance, generated and verified timestamps, lifecycle status and an absolute freshness boundary. `CHECKSUMS.sha256` supports independent integrity checks. The manifest and AI Catalog links are Agent Friendly Web project extensions; they are not universal discovery endpoints required by OKF.
@@ -96,6 +102,10 @@ Tokenizart is documented as an evolving agent-first architecture. Existing publi
 - https://agentfriendlyweb.dev/asistente
 - https://agentfriendlyweb.dev/guia
 - https://agentfriendlyweb.dev/.well-known/public-guide-contract.json
+- https://agentfriendlyweb.dev/privacidad
+- https://agentfriendlyweb.dev/en/privacy
+- https://agentfriendlyweb.dev/pt/privacidade
+- https://agentfriendlyweb.dev/.well-known/contact-privacy-lifecycle-contract.json
 - https://agentfriendlyweb.dev/conocimiento-abierto
 - https://agentfriendlyweb.dev/okf/v0.2/index.md
 - https://agentfriendlyweb.dev/okf/v0.2/manifest.json

@@ -43,6 +43,27 @@
       "when": 1788214135151,
       "tag": "0005_normal_ma_gnuci",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1788388200000,
+      "tag": "0006_email_transactional_deliveries",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1788469200000,
+      "tag": "0007_synthetic_crm_lite",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1788482353945,
+      "tag": "0008_contact_privacy_lifecycle",
+      "breakpoints": true
     }
   ]
 }

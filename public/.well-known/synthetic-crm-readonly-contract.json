@@ -1,0 +1,34 @@
+{
+  "contract": "agent-friendly-web.synthetic-crm-readonly.v1",
+  "status": "synthetic_crm_readonly_verified_kill_switch_off",
+  "updated_at": "2026-09-03",
+  "scope": {
+    "environment": "afw_canary",
+    "source": "one_fixed_synthetic_opportunity",
+    "public_production_modified": false,
+    "tokenizart_resources_used": false,
+    "real_contacts_used": false
+  },
+  "capabilities": {
+    "reads_synthetic_opportunity": true,
+    "persists_data": false,
+    "changes_stage": false,
+    "sends_email": false,
+    "creates_proposal": false,
+    "charges_payment": false,
+    "modifies_customer_site": false
+  },
+  "security": {
+    "cloudflare_access_required": true,
+    "allowlisted_subject_required": true,
+    "noindex": true,
+    "no_store": true
+  },
+  "kill_switch_default": "off",
+  "remote_verification": {
+    "observed_at": "2026-09-03T21:04:34Z",
+    "temporary_on_version": "6d7abfe4-5e51-41ce-ae76-9e5793081f1d",
+    "verified_rollback_version": "2d077362-0811-4fc1-96c6-fad8b46b598c",
+    "d1_rows_written": 0
+  }
+}

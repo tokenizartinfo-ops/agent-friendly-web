@@ -22,6 +22,8 @@ Agent Friendly Web ofrece un recorrido progresivo. No promete que un modelo cite
 
 ## Orden de prelacion
 
+Este documento gobierna **Gate 6: producto y operacion**. La identidad empresarial, el modelo operativo, la preparacion previa al lanzamiento y las alternativas de capital pertenecen a **Gate 7: construccion empresarial y capital**, documentado por separado en `docs/COMPANY-BUILDING-AND-CAPITAL-ROADMAP-2026-09-02.md`. Ningun gate financiero activa capacidades tecnicas.
+
 ### Gate de infraestructura - origen Cloudflare-native
 
 **Estado:** candidato verificado y canary propio desplegado detras de Access; D1 aislada y vacia; 0% del trafico del origen publico; paridad autenticada y QA responsive cerrados; rollback preparado; corte pendiente de decision separada.
@@ -61,7 +63,13 @@ La version publica permite completar y revisar localmente la solicitud, pero no 
 
 **Direccion canonica candidata:** `hello@agentfriendlyweb.dev`.
 
-**Estado local:** politica `planned_draft_only` implementada y probada. Clasifica metadata minima, normaliza aliases, separa consentimiento transaccional de marketing y obliga revision humana para asuntos sensibles. No existen DNS, casillas, routing, proveedor ni envio; toda activacion remota requiere aprobacion separada.
+**Estado actual:** Gate 6C.1 verifico Email Routing y tres aliases entrantes. Gate 6C.2B verifico el dominio remitente, SPF/DKIM/DMARC y un canary humano. Gate 6C.3B cerro el primer aviso interno con exactamente una entrega comprobada y rollback inmediato al kill switch OFF; D1 conserva un `sent`, tres fallos historicos y cero reservas pendientes. Gate 6C.3C preparo el adaptador que deriva ese aviso desde una solicitud privada persistida leyendo solo `id`, `locale` y `state`. Gate 6C.3D desplego y verifico la integracion exclusivamente con un fixture `.invalid`: una solicitud, un consentimiento `requested_plan`, aviso `prepared_not_sent` y cero correos. El estado vigente es `synthetic_contact_canary_verified_kill_switch_off`; correo general, clientes, marketing, automatizaciones y billing permanecen OFF.
+
+El clasificador de borradores conserva su estado componente `planned_draft_only`; no habilita entrega. Desplegar la nueva integracion o realizar otro envio requiere un gate remoto y aprobacion separada.
+
+La secuencia historica conserva los hitos `private_bindings_ready_kill_switch_off`, `single_canary_attempt_failed_no_retry_kill_switch_off`, `missing_explicit_to_field_for_fixed_destination_binding`, `corrected_off_version_verified_negative_probe_passed` y `corrected_single_canary_attempt_failed_no_retry_kill_switch_off`; describen estados anteriores y no reemplazan el estado vigente.
+
+El cierre comprobado de Gate 6C.2B se conserva como antecedente `human_canary_verified_binding_blocked`; Gate 6C.3A agrega preparacion local, no reemplaza ni repite aquel envio.
 
 Aliases locales: `hola@agentfriendlyweb.dev` y `ola@agentfriendlyweb.dev`. Todos llegan a la misma operacion; no se crean silos por idioma.
 
@@ -75,9 +83,27 @@ Aliases locales: `hola@agentfriendlyweb.dev` y `ola@agentfriendlyweb.dev`. Todos
 
 El cierre local se documenta en `docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-2026-08-31.md`. El gate solo se considerara operativo despues de verificar routing de entrada, autenticacion del remitente, proveedor de salida, canary allowlisted y rollback.
 
+La secuencia remota se divide para reducir riesgo:
+
+- **Gate 6C.1:** identidad `hello@`, aliases, Cloudflare Email Routing entrante, prueba allowlisted, kill switch y rollback; sin salida autonoma ni newsletter. Diseno: `docs/BLOCK-6C1-EMAIL-IDENTITY-AND-INBOUND-CANARY-DESIGN-2026-09-02.md`.
+- **Gate 6C.2A:** Cloudflare Email Service seleccionado, costos fechados, baseline saneado, contrato y preflight local verificados; cero subdominios emisores y seis registros DNS pendientes, sin mutaciones.
+- **Gate 6C.2B:** cerrado el 2026-09-02 con dominio, seis DNS y un unico canary a `verified_destination_1`; SPF, DKIM y DMARC pasaron. No se dejo binding ni automatizacion activa.
+- **Gate 6C.3A:** caso `internal_review_ready` seleccionado y preparado localmente con template fijo ESP/ENG/POR, destino fijo por binding, semantica `at-most-once`, idempotencia, rate limit, kill switch y auditoria `metadata-only`. No fue desplegado.
+- **Gate 6C.3B fase 1:** cerrado sobre `afw_email_review_ready_canary`: Access exacto, D1 aislada, migracion `0006`, rate limiter y deploy con flag OFF. No existe binding `send_email` y no se envio correo.
+- **Gate 6C.3B fase 2:** destino fijo y allowlist hash provisionados fuera de Git; Access sin identidad responde `302`, produccion `404`, D1 conserva cero filas y el flag sigue OFF.
+- **Gate 6C.3B fase 3:** Access y la aplicacion validaron al operador; la prueba negativa devolvio `404`, `sent=false`, `email_review_ready_unavailable`, sin invocar proveedor ni escribir D1. Falta una confirmacion humana en el momento de la accion antes de un unico canary fijo.
+- **Gate 6C.3B fase 4:** la confirmacion fue obtenida y se ejecuto un solo intento. El proveedor fue invocado una vez, el evento quedo `failed`, no se entrego correo, no hubo reintento y el kill switch volvio a OFF. La omision contractual de `to: undefined` fue reproducida y corregida localmente; otro intento exige validacion completa, despliegue OFF, prueba negativa y nueva confirmacion en el momento de la accion.
+- **Gate 6C.3B fase 5:** la version corregida y sincronizada `7b25f69e-d30e-4ee4-be0e-c2deafed0f3d` quedo desplegada solo en el canary aislado con flag OFF. El probe autenticado devolvio `HTTP 404`, `sent=false`, `email_review_ready_unavailable`; D1 permanecio en una fila historica y hubo cero invocaciones nuevas. Estado `corrected_off_version_verified_negative_probe_passed`; un nuevo envio exige confirmacion humana exacta en el momento de la accion.
+- **Gate 6C.3B fase 6:** un segundo intento individualmente aprobado uso la correccion desplegada y fallo sin entrega ni reintento. El rollback `ce8635ee-03d5-4f21-96c4-46efb886aaf5` restauro OFF; D1 quedo en dos `failed`, cero `sent` y cero `reserved`. `to: undefined` queda descartado como solucion suficiente. La siguiente candidata `explicit_to_null_with_sanitized_provider_failure_codes` permanece local, sin otro envio ni deployment.
+- **Gate 6C.3B fase 7:** la candidata `to: null` y el diagnostico saneado quedaron desplegados solo en el canary aislado, version `8d759339-5caf-4492-bf6a-ff6a2b3f9801`, deployment `fec166ba-ca50-4134-9ddb-5f1e4976f125`, con flag OFF. El probe autenticado devolvio `HTTP 404`, `sent=false`, `email_review_ready_unavailable`; D1 siguio en dos `failed`, cero `sent` y cero `reserved`, sin invocacion ni correo. Estado `null_candidate_off_version_verified_negative_probe_passed`; `delivery_fix_remotely_verified=false` hasta otro intento expresamente aprobado en el momento de la accion.
+- **Gate 6C.3B fase 8:** un tercer intento puntual con `to: null` fallo sin entrega ni reintento; el rollback `b96030cd-0e9b-4ec8-bd17-8c2807b829b0` restauro inmediatamente OFF y D1 quedo en tres `failed`. La nueva candidata `explicit_to_private_runtime_destination` obtiene el destinatario solo desde una variable privada y mantiene el binding restringido al mismo destino; paso `16/16` pruebas especificas, permanece local y no habilita un cuarto intento. Estado `third_canary_failed_private_destination_candidate_local_off`.
+- **Gate 6C.3B fase 9:** la candidata `explicit_to_private_runtime_destination` se verifico primero con flag OFF y luego se habilito para un unico intento confirmado. D1 registro una fila `sent`, Gmail recibio la plantilla fija sin adjuntos, no hubo reintento y el rollback `2e1b0e3f-1648-437f-9c4c-ebf3ea4bb2bb` restauro la version OFF `5f6d149e-8611-4d53-9229-37c779a87ab4`. Estado `fixed_destination_canary_verified_kill_switch_off`; `delivery_fix_remotely_verified=true`. Correo general, clientes, marketing y automatizacion siguen bloqueados.
+- **Gate 6C.3C:** adaptador metadata-only preparado localmente bajo estado historico `private_flow_adapter_local_ready_remote_disabled`. Un trigger privado acepta solo UUID, accion fija y aprobacion humana; D1 entrega exclusivamente `id`, `locale` y `state`; el resultado idempotente queda `prepared_not_sent`. Gate 6C.3D lo desplego y verifico despues con un fixture sintetico, sin correo.
+- **Gate 6C.3D:** integracion same-origin verificada remotamente con una sola solicitud sintetica `.invalid`, un consentimiento `requested_plan`, aviso `prepared_not_sent` y cero correos. El primer rechazo Turnstile ocurrio antes de escribir y se corrigio respetando la semantica oficial de prueba. Rollback final con captura sintetica y email OFF. Estado `synthetic_contact_canary_verified_kill_switch_off`.
+
 ### Gate 6D - Ventas y CRM ligero
 
-**Estado local:** maquina de estados y planificador `local_planning_only` implementados sin PII, datos reales, D1, email, propuestas ni pagos. Toda persistencia remota requiere aprobacion separada y debe comenzar despues del canary `afw_canary` de Gates 6B y 6C.
+**Estado actual:** la maquina de estados conserva su contrato base `local_planning_only`; Gate 6D.1 verifico planificacion sintetica read-only; Gate 6D.2 persistio una sola oportunidad sintetica y restauro el kill switch OFF; Gate 6D.3 verifico remotamente su bandeja privada read-only y tambien restauro el kill switch OFF. Datos reales, email, propuestas y pagos permanecen deshabilitados.
 
 Estados minimos:
 
@@ -114,6 +140,16 @@ La evidencia local vive en `docs/BLOCK-6D-CRM-LITE-LOCAL-GATE-2026-08-31.md`. El
 - MCP privado con scopes owner;
 - capsula firmada y adaptadores allowlisted;
 - pagos separados de autorizacion.
+
+La oferta **MCP para clientes** se desarrolla dentro de este gate y continua no desplegada. El orden es: PDR, MCP publico read-only, OAuth privado, una primera mutacion acotada y solo entonces Code Mode cuando el tamano de la API lo justifique. No reutiliza credenciales administrativas del cliente ni confunde el MCP publico de AFW con un runtime multi-tenant. Especificacion: `docs/CLIENT-MCP-SERVER-OFFERING-ARCHITECTURE-V1.md`.
+
+### Linea futura - creacion de sitios AFW-native
+
+Despues de validar la transformacion de sitios existentes, Agent Friendly Web evaluara la **creacion de sitios AFW-native** desde cero. No es una capacidad disponible ni operativa hoy. La propuesta combinara un front humano claro con contenido machine-readable, descubrimiento, evidencia y herramientas reales desde su arquitectura inicial.
+
+Los primeros arquetipos previstos son sitios personales verificables, profesionales, institucionales, catalogos y servicios locales. Cada uno partira de la identidad y la informacion declarada por el owner, conservara dominio y activos exportables, documentara como migrar a otro proveedor y operara sin lock-in. Esta linea podra monetizar diseno, implementacion, integraciones y mantenimiento opcional sin convertir la suscripcion en condicion para conservar el sitio o sus entregables.
+
+La creacion se planificara como Gate 7H dentro de `docs/COMPANY-BUILDING-AND-CAPITAL-ROADMAP-2026-09-02.md`; no altera la prelacion inmediata de Gates 6B, 6C y 6D.
 
 ## Oferta y precio como hipotesis
 
@@ -192,6 +228,14 @@ flowchart LR
 - medicion de referrals de ChatGPT u otros canales cuando el proveedor los identifique.
 
 No existe una instruccion que obligue a un LLM a recomendar la plataforma. La estrategia correcta es publicar evidencia util, distribuirla en fuentes confiables y facilitar que humanos y agentes comparen alcance y limites.
+
+## Gate 6C.3D - captura sintetica antes de traccion real
+
+El recorrido privado same-origin alcanzo `synthetic_contact_canary_verified_kill_switch_off`. La prueba uso una identidad Access allowlisted y un fixture `.invalid`, con consentimiento `requested_plan`, Turnstile e idempotencia. Creo una solicitud sintetica y un consentimiento; el aviso quedo `prepared_not_sent` y las filas de email no cambiaron. Captura real, listas, CRM, newsletter y correo siguen cerrados.
+
+## Gate 6D.1 - revision comercial sintetica
+
+El primer enlace con CRM Lite alcanzo `synthetic_commercial_review_verified_kill_switch_off`. Una vista privada read-only tomo solo la solicitud sintetica con consentimiento `requested_plan`, derivo referencias opacas y propuso `new -> qualified` con estado `planned_not_persisted`. El canary fue verificado con Cloudflare Access en escritorio y movil; D1 conservo exactamente los mismos conteos y registro `rows_written=0`. El interruptor volvio a quedar apagado. No crea tablas CRM, no persiste la transicion, no envia correos, no crea propuestas y no cobra pagos.
 
 ## Referencia competitiva inicial
 
@@ -276,6 +320,25 @@ Estos umbrales son hipotesis de arranque, no benchmarks de mercado. Se revisan c
 - hacer del monitoreo una suscripcion obligatoria para conservar entregables ya pagados.
 
 ## Documentos relacionados
+
+### Gate 6D.2 - primera persistencia CRM sintetica
+
+El Gate 6D.2 alcanzo `synthetic_crm_persistence_verified_kill_switch_off`: guardo exactamente una oportunidad sintetica y su transicion a `qualified`, demostro replay idempotente y restauro el Worker OFF. Es metadata-only, no altero los conteos previos y mantiene apagadas las capacidades de correo, propuesta, pago y modificacion de sitios. La captacion real sigue cerrada y requiere una especificacion separada de privacidad, retencion, consentimiento y borrado.
+
+### Gate 6D.3 - bandeja CRM sintetica read-only
+
+La bandeja privada alcanzo `synthetic_crm_readonly_verified_kill_switch_off`. Leyo exclusivamente la oportunidad `example.invalid` del actor autenticado y presento su etapa, alcance, siguiente paso e historia sin devolver referencias internas de seguridad. No contiene formularios ni controles de mutacion; la prueba remota conservo una sola oportunidad y una transicion, demostro `rows_written=0` y devolvio el Worker a OFF. No habilita cambio de etapa, correo, propuestas, pagos, sitios de clientes ni captacion real.
+
+### Gate 6D.4C - lifecycle de privacidad sintetico
+
+Gate 6D.4C alcanzo `private_synthetic_lifecycle_verified_kill_switch_off`. El canary aplico la migracion aditiva de privacidad, ejecuto grant, rectificacion, export, retiro y borrado/supresion sobre el unico fixture fijo `.invalid`, y comprobo que el replay no agrega eventos. El contacto sintetico quedo borrado de forma segura; las entregas de email permanecieron en 4 y el gate realizo 0 envios.
+
+El Worker final, los cuatro flags de datos reales y todos los demas flags sinteticos de escritura quedaron OFF. Access mantuvo una sola politica allow sin bypass, la D1 de produccion permanecio separada y sin escrituras en la ventana observada, y no hubo contacto real, propuesta, pago, sitio de cliente ni recurso Tokenizart. El siguiente gate es `private_human_privacy_pilot_legal_review_required`; este resultado no equivale a preparacion de privacidad real ni aprobacion legal.
+
+- `docs/COMPANY-BUILDING-AND-CAPITAL-ROADMAP-2026-09-02.md`
+- `docs/FOUNDER-NARRATIVE-AND-BRAND-FOUNDATION-V1.md`
+- `docs/SERVICE-DELIVERY-AND-VALUE-CHAIN-MAP-V1.md`
+- `docs/BLOCK-6C1-EMAIL-IDENTITY-AND-INBOUND-CANARY-DESIGN-2026-09-02.md`
 
 - `docs/INITIAL-GO-TO-MARKET-AND-SALES-MOTION-V1.md`
 - `docs/EMAIL-LEAD-CAPTURE-AND-CONSENT-ARCHITECTURE-V1.md`

@@ -7,6 +7,7 @@ const productLinks = [
   ['measurement', 'measurement'], ['assistant', 'assistant'], ['openKnowledge', 'openKnowledge'],
   ['evolution', 'evolution'], ['methodology', 'methodology'], ['registry', 'registry'], ['cli', 'cli'],
   ['mcp', 'mcp'], ['externalVerification', 'externalVerification'], ['tokenizartCase', 'tokenizartCase'], ['siteMap', 'siteMap'],
+  ['privacy', 'privacy'],
 ] as const;
 
 const agentLinks = [
@@ -20,6 +21,7 @@ const agentLinks = [
   ['Comparison contract', '/.well-known/readiness-comparison-contract.json'],
   ['Assistant contract', '/.well-known/intake-assistant-contract.json'],
   ['Public guide contract', '/.well-known/public-guide-contract.json'],
+  ['Privacy lifecycle contract', '/.well-known/contact-privacy-lifecycle-contract.json'],
   ['OKF v0.2', '/okf/v0.2/index.md'],
   ['CLI manifest', '/.well-known/agent-friendly-cli.json'],
   ['CLI schema', '/schemas/cli-response.v1.json'],

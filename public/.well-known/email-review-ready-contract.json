@@ -1,0 +1,96 @@
+{
+  "contract": "agent-friendly-web.email-review-ready.v1",
+  "status": "fixed_destination_canary_verified_kill_switch_off",
+  "updated_at": "2026-09-03",
+  "environment": "afw_email_review_ready_canary",
+  "origin": "https://canary.agentfriendlyweb.dev",
+  "transactional_case": {
+    "event": "internal_review_ready",
+    "purpose": "notify_existing_verified_destination_that_internal_request_is_ready_for_human_review",
+    "template_id": "internal-review-ready-v1",
+    "locales": ["es", "en", "pt"],
+    "sender": "hello@agentfriendlyweb.dev",
+    "reply_to": "hello@agentfriendlyweb.dev",
+    "destination": {
+      "delivery": "fixed_cloudflare_binding",
+      "request_supplied": false,
+      "stored": false,
+      "published": false
+    }
+  },
+  "delivery_semantics": {
+    "mode": "at_most_once",
+    "reserve_before_send": true,
+    "automatic_retry": false,
+    "duplicate_sent_returns_without_resend": true,
+    "reserved_or_failed_replay_requires_human_reconciliation": true
+  },
+  "persistence": {
+    "planned_store": "cloudflare_d1",
+    "metadata_only": true,
+    "stores_message_body": false,
+    "stores_recipient": false,
+    "stores_access_subject": false,
+    "stores_raw_provider_id": false,
+    "stores_raw_provider_error": false
+  },
+  "security": {
+    "cloudflare_access_required": true,
+    "access_subject_hash_allowlist": true,
+    "exact_origin_required": true,
+    "rate_limit_required": true,
+    "kill_switch_default": "false",
+    "request_body_limit_bytes": 2048
+  },
+  "capabilities": {
+    "transactional_case_selected": true,
+    "local_implementation_ready": true,
+    "remote_migration_applied": true,
+    "closed_route_deployed_canary": true,
+    "rate_limit_binding_configured": true,
+    "outbound_binding_configured": true,
+    "private_flow_adapter_local_ready": true,
+    "private_flow_integration_deployed": true,
+    "synthetic_contact_canary_local_ready": true,
+    "synthetic_contact_canary_remotely_verified": true,
+    "outbound_sending": false,
+    "automatic_sending": false,
+    "arbitrary_recipients": false,
+    "customer_sending": false
+  },
+  "latest_canary": {
+    "status": "sent_once_kill_switch_off",
+    "approved_attempts": 4,
+    "provider_invocations": 4,
+    "retries": 0,
+    "email_sent": true,
+    "kill_switch_after_attempt": "false",
+    "previous_local_fix": "explicit_to_null_with_sanitized_provider_failure_codes",
+    "corrected_code_remotely_deployed": true,
+    "negative_probe_after_corrected_deploy": true,
+    "remotely_verified_fix": true,
+    "next_local_candidate": "explicit_to_private_runtime_destination",
+    "runtime_destination_source": "private_worker_secret",
+    "next_candidate_deployed": true,
+    "next_candidate_negative_probe_passed": true,
+    "delivery_fix_remotely_verified": true
+  },
+  "next_gate_preconditions": [
+    "deploy_the_local_adapter_only_with_a_same_origin_private_request_source",
+    "verify_one_synthetic_persisted_request_before_real_data",
+    "keep_kill_switch_off_by_default",
+    "obtain_new_human_approval_at_action_time_before_any_new_send"
+  ],
+  "blocked_actions": [
+    "accept_recipient_from_request",
+    "accept_subject_or_body_from_request",
+    "send_customer_email",
+    "send_marketing_email",
+    "automatic_reply",
+    "automatic_retry",
+    "send_without_persisted_private_request",
+    "read_inbound_message_body",
+    "read_attachments"
+  ],
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C3B-EMAIL-REVIEW-READY-VERIFIED-CANARY-2026-09-03.md"
+}
