@@ -309,6 +309,12 @@ El cierre restauro `AFW_PRIVATE_HUMAN_PRIVACY_PILOT_ENABLED=false`. Captura real
 
 La prueba no constituye aprobacion juridica ni cumplimiento universal. D1 Time Travel puede retener temporalmente versiones anteriores; cualquier restauracion debe reaplicar el tombstone de borrado. Antes de aceptar datos de terceros se requiere revisar identidad juridica, jurisdicciones, responsable de tratamiento, copy publico, retencion, canal de derechos y soporte. Evidencia: `docs/BLOCK-6D4D-PRIVATE-HUMAN-PRIVACY-PILOT-2026-09-04.md`.
 
+## Actualizacion Gate 6D.4D2 local - 2026-09-05
+
+Se preparo un aviso operativo candidato en espanol, ingles y portugues, enlazado desde el preview de contacto, footer, sitemap y catalogos machine-readable. El texto identifica el procesamiento tecnico actual, el canal manual `hello@agentfriendlyweb.dev`, los objetivos de retencion todavia no automatizados y los derechos que deberan instrumentarse cuando correspondan.
+
+El candidato no resuelve por si mismo la designacion juridica del responsable, domicilio, aplicabilidad territorial, inventario final de procesadores ni procedimiento de soporte. Tampoco habilita contacto real, solicitudes publicas, jobs de retencion, novedades o CRM. Los cuatro flags permanecen en `false` y no hubo despliegue, migracion ni tratamiento de datos de terceros en este gate. Detalle: `docs/BLOCK-6D4D2-PUBLIC-PRIVACY-POLICY-CANDIDATE-2026-09-05.md`.
+
 ## Pruebas negativas obligatorias
 
 - auditoria accesible sin email;

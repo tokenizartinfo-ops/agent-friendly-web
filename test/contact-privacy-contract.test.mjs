@@ -4,13 +4,13 @@ import test from 'node:test';
 
 import * as contactPrivacyPolicy from '../lib/contact-privacy-policy.mjs';
 
-test('privacy lifecycle contract reports the verified synthetic canary with every real capability OFF', async () => {
+test('privacy lifecycle contract reports the closed human pilot and policy candidate with every real capability OFF', async () => {
   const contract = JSON.parse(await readFile(
     'public/.well-known/contact-privacy-lifecycle-contract.json',
     'utf8',
   ));
   assert.equal(contract.contract, 'agent-friendly-web.contact-privacy-lifecycle.v1');
-  assert.equal(contract.status, 'private_synthetic_lifecycle_verified_kill_switch_off');
+  assert.equal(contract.status, 'private_human_privacy_pilot_completed_erased_kill_switch_off');
   assert.equal(contract.audit_requires_email, false);
   assert.equal(contract.synthetic_privacy_lifecycle_enabled, false);
   assert.equal(contract.real_contact_enabled, false);
@@ -19,7 +19,9 @@ test('privacy lifecycle contract reports the verified synthetic canary with ever
   assert.equal(contract.product_updates_enabled, false);
   assert.equal(contract.claims.global_legal_compliance, false);
   assert.equal(contract.claims.legal_review_required_before_real_capture, true);
-  assert.equal(contract.next_gate, 'private_human_privacy_pilot_legal_review_required');
+  assert.equal(contract.policy_notice.status, 'candidate_for_legal_review');
+  assert.equal(contract.policy_notice.approved_for_real_contact, false);
+  assert.equal(contract.next_gate, 'policy_legal_identity_and_public_copy_review_required');
   assert.deepEqual(contract.consent.required, ['requested_plan']);
   assert.deepEqual(contract.consent.optional, ['commercial_contact', 'product_updates']);
   assert.deepEqual(contract.consent.approved_copy_versions, {

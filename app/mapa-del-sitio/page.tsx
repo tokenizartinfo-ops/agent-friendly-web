@@ -38,6 +38,7 @@ const humanRoutes = [
   { name: 'MCP public read-only', detail: 'Servicio stateless desplegado con cuatro tools y cuatro resources publicos.', href: '/mcp-readonly', icon: Braces },
   { name: 'Verificacion externa', detail: 'Fotografias AF-EV de auditores independientes, con fecha, checks y limites.', href: '/verificacion-externa', icon: ShieldCheck },
   { name: 'Caso Tokenizart', detail: 'Primer caso integral, con archivos y progreso verificable.', href: '/casos/tokenizart', icon: CheckCircle2 },
+  { name: 'Privacidad', detail: 'Estado real de los datos, plazos previstos, derechos y controles pendientes.', href: '/privacidad', icon: ShieldCheck },
   { name: 'Mi expediente', detail: 'Area privada para ordenar contexto y un roadmap propio.', href: '/expediente', icon: LockKeyhole },
 ];
 
@@ -62,6 +63,7 @@ const machineResources = [
   { name: 'Email inbound canary contract', detail: 'Aliases, DNS y entregas entrantes verificadas sin lectura de contenido.', href: '/.well-known/email-inbound-canary-contract.json', icon: Braces },
   { name: 'Email outbound canary contract', detail: 'Dominio y autenticacion verificados con un envio humano; binding y automatizacion siguen OFF.', href: '/.well-known/email-outbound-canary-contract.json', icon: Braces },
   { name: 'CRM Lite contract', detail: 'Plan local metadata-only; no guarda contactos reales ni ejecuta acciones comerciales.', href: '/.well-known/crm-lite-contract.json', icon: Braces },
+  { name: 'Privacy lifecycle contract', detail: 'Estado machine-readable del piloto borrado, política candidata y kill switches OFF.', href: '/.well-known/contact-privacy-lifecycle-contract.json', icon: ShieldCheck },
   { name: 'OKF v0.2 index', detail: 'Indice canonico del conocimiento publico versionado.', href: '/okf/v0.2/index.md', icon: FileText },
   { name: 'OKF manifest', detail: 'Inventario, version, licencia y hashes de distribucion.', href: '/okf/v0.2/manifest.json', icon: Braces },
   { name: 'OKF checksums', detail: 'Hashes SHA-256 para comprobar integridad de los archivos.', href: '/okf/v0.2/CHECKSUMS.sha256', icon: ShieldCheck },
@@ -91,6 +93,7 @@ const activeCapabilities = [
   ['MCP public read-only', 'Desplegado', 'Cuatro tools y cuatro resources publicos, sin OAuth, memoria ni escrituras.'],
   ['Capsula manual', 'Desplegada', 'Prepara archivos y hashes para entrega manual con aprobaciones separadas; no publica ni modifica el sitio.'],
   ['AF-EV', 'Verificado', 'Conserva el baseline 53/100 Level 2 y la reauditoria Level 4 como fotografias externas fechadas.'],
+  ['Privacidad operativa', 'Candidata', 'Piloto propio borrado; política pública candidata y datos de terceros todavía deshabilitados.'],
 ];
 
 const roadmap = [
@@ -98,7 +101,8 @@ const roadmap = [
   ['WebMCP read-only', 'deployed', 'Tool in-page publica read-only desplegada; tecnologia experimental.'],
   ['Voz y guardado asistido', 'planned', 'Permanecen fuera del prototipo hasta contratos, consentimiento y auditoria.'],
   ['Correo operativo', 'documented', 'Entrada y un canary saliente verificados; binding, automatizacion y nuevos envios siguen bloqueados.'],
-  ['CRM Lite', 'documented', 'Modelo metadata-only documentado; no hay persistencia remota, contactos reales ni acciones comerciales.'],
+  ['CRM Lite', 'documented', 'Modelo metadata-only documentado; no hay operación con terceros ni acciones comerciales.'],
+  ['Contacto real', 'legal_review', 'Requiere identidad jurídica, jurisdicción, copy y canal de derechos revisados antes del canary.'],
   ['Plugins y conectores', 'planned', 'Cada plataforma requiere un adaptador oficial y una capacidad verificable.'],
   ['A2A', 'planned', 'No se publica Agent Card ni delegacion entre agentes.'],
   ['x402', 'research', 'No hay recursos pagos ni flujo HTTP 402 activo.'],

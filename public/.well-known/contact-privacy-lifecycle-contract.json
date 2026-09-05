@@ -1,13 +1,50 @@
 {
   "schema_version": "1.0",
   "contract": "agent-friendly-web.contact-privacy-lifecycle.v1",
-  "status": "private_synthetic_lifecycle_verified_kill_switch_off",
+  "status": "private_human_privacy_pilot_completed_erased_kill_switch_off",
+  "updated_at": "2026-09-05",
   "audit_requires_email": false,
   "synthetic_privacy_lifecycle_enabled": false,
   "real_contact_enabled": false,
   "privacy_requests_enabled": false,
   "retention_jobs_enabled": false,
   "product_updates_enabled": false,
+  "policy_notice": {
+    "version": "agent-friendly-web.privacy-notice.candidate.v1",
+    "status": "candidate_for_legal_review",
+    "publication_state": "local_pr_candidate",
+    "approved_for_real_contact": false,
+    "automated_retention_enforcement": false,
+    "effective_date": "2026-09-05"
+  },
+  "identity": {
+    "product": "Agent Friendly Web",
+    "creator": "Gabriel Mucchiut",
+    "commercial_operator": "Tokenizart Group LLC",
+    "controller_designation_verified": false,
+    "controller_address_verified": false
+  },
+  "contact": {
+    "channel": "hello@agentfriendlyweb.dev",
+    "inbound_routing_verified": true,
+    "automated_rights_portal": false,
+    "outbound_automation": false
+  },
+  "human_policy": {
+    "es": "https://agentfriendlyweb.dev/privacidad",
+    "en": "https://agentfriendlyweb.dev/en/privacy",
+    "pt": "https://agentfriendlyweb.dev/pt/privacidade"
+  },
+  "current_processing": {
+    "public_request_delivery_and_security": true,
+    "public_audit_transient": true,
+    "contact_preview_browser_only": true,
+    "voluntary_inbound_email": true,
+    "web_contact_persistence": false,
+    "newsletter": false,
+    "behavioral_advertising": false,
+    "personal_data_sale": false
+  },
   "consent": {
     "required": ["requested_plan"],
     "optional": ["commercial_contact", "product_updates"],
@@ -37,6 +74,12 @@
     "global_legal_compliance": false,
     "legal_review_required_before_real_capture": true
   },
-  "next_gate": "private_human_privacy_pilot_legal_review_required",
-  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6D4C-SYNTHETIC-PRIVACY-CANARY-REMOTE-2026-09-04.md"
+  "jurisdiction_review": {
+    "argentina": "candidate_reviewed_against_official_source",
+    "european_union": "applicability_not_determined",
+    "brazil": "applicability_not_determined",
+    "california": "applicability_not_determined"
+  },
+  "next_gate": "policy_legal_identity_and_public_copy_review_required",
+  "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6D4D2-PUBLIC-PRIVACY-POLICY-CANDIDATE-2026-09-05.md"
 }

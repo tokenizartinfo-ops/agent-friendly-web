@@ -202,6 +202,12 @@ El cierre dejo `AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED=false`, los cuatro flags
 
 Este resultado no declara preparacion de privacidad para datos reales ni aprobacion legal. El siguiente gate es `private_human_privacy_pilot_legal_review_required`.
 
+### Gate 6D.4D2 - politica operativa publica candidata
+
+El 2026-09-05 se preparo localmente una politica ES/EN/PT que explica los flujos de datos existentes sin presentar el CRM, la newsletter ni el portal de derechos como capacidades activas. La identidad comercial inicial sigue la decision de etapa: Agent Friendly Web fue creado por Gabriel Mucchiut, esta incubado dentro de Tokenizart y una primera prestacion, si la hubiera, seria ofrecida y facturada por Tokenizart Group LLC.
+
+La designacion legal del responsable, domicilio, jurisdicciones aplicables, procesadores, retencion ejecutable y soporte permanecen pendientes de revision. Este gate no publica, no activa datos reales y no modifica la estructura societaria. Su salida es un candidato verificable para revision, no una certificacion de cumplimiento.
+
 ## Gobierno y revision
 
 - Gabriel decide marca, oferta, capital, precios, contratos y publicacion.
