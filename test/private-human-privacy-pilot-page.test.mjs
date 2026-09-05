@@ -65,3 +65,10 @@ test('private pilot escapes line breaks inside its template-rendered client scri
 
   assert.ok(source.includes(String.raw`Datos verificados de esta prueba:\\n`));
 });
+
+test('private pilot restores the next enabled step after a browser reload', () => {
+  const source = readFileSync(pagePath, 'utf8');
+
+  assert.match(source, /payload\.resumeStage/);
+  assert.match(source, /Progreso recuperado/);
+});

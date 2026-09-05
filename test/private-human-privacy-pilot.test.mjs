@@ -337,6 +337,27 @@ test('makes completed steps idempotent and does not recreate an erased contact',
   );
 });
 
+test('lets the enrollment action restore browser progress without duplicating data', async () => {
+  const database = new SqliteD1();
+  const overrides = deterministic();
+  await runPrivateHumanPrivacyPilotAction(database, input('enroll'), overrides);
+  await runPrivateHumanPrivacyPilotAction(database, input('inspect_export'), overrides);
+  const batchesBeforeResume = database.batches.length;
+
+  const resumed = await runPrivateHumanPrivacyPilotAction(
+    database,
+    input('enroll'),
+    overrides,
+  );
+
+  assert.equal(resumed.status, 'private_human_privacy_pilot_step_already_completed');
+  assert.equal(resumed.step, 'enroll');
+  assert.equal(resumed.resumeStage, 2);
+  assert.equal(database.batches.length, batchesBeforeResume);
+  assert.equal(count(database, 'contact_leads'), 1);
+  assert.equal(count(database, 'privacy_requests'), 1);
+});
+
 test('fails closed on out-of-order, cross-actor and malformed input', async () => {
   const database = new SqliteD1();
   const overrides = deterministic();

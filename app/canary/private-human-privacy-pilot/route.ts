@@ -165,7 +165,12 @@ function render() {
                 result.textContent = 'Paso completado. Ya puedes continuar con el siguiente.';
               }
               result.dataset.tone = 'success';
-              current += 1;
+              if (action === 'enroll' && Number.isInteger(payload.resumeStage)) {
+                current = payload.resumeStage;
+                result.textContent = 'Progreso recuperado. Ya puedes continuar con el paso ' + (current + 1) + '.';
+              } else {
+                current += 1;
+              }
               if (action === 'enroll') initialLocale = 'es';
               if (action === 'erase' && payload.status.match(/private_human_privacy_pilot_(?:completed|already_completed)/)) {
                 result.dataset.state = 'privacy_pilot_erased';
