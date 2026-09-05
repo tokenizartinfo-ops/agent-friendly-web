@@ -75,6 +75,7 @@
     "contact_privacy": {
       "status": "candidate_for_legal_review",
       "real_contact": false,
+      "voluntary_inbound_email": true,
       "automated_rights_requests": false,
       "automated_retention": false,
       "product_updates": false,
@@ -84,7 +85,7 @@
         "/pt/privacidade",
         "/.well-known/contact-privacy-lifecycle-contract.json"
       ],
-      "note": "The localized notice documents current technical processing and proposed retention targets. It is not legal approval and does not enable third-party data."
+      "note": "The localized notice documents current technical processing and proposed retention targets. Public web capture is disabled; voluntary inbound email remains a separate manual channel. This is not legal approval."
     },
     "email_operations": {
       "status": "inbound_and_one_shot_outbound_verified",

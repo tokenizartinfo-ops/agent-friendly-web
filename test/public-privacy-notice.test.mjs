@@ -29,7 +29,11 @@ test('privacy notice copy is substantial, transparent and localized', async () =
     'no constituye asesoramiento jurídico',
     'does not constitute legal advice',
     'não constitui assessoria jurídica',
+    'Captura web de datos reales deshabilitada',
+    'Real-data web capture disabled',
+    'Captura web de dados reais desativada',
   ]) assert.ok(source.includes(concept), `privacy copy is missing ${concept}`);
+  assert.ok(!source.includes('Canal de datos reales cerrado'));
 });
 
 test('privacy page renders current processing, rights, retention and official sources', async () => {
@@ -60,6 +64,7 @@ test('machine privacy contract describes the candidate policy and keeps every re
   assert.equal(contract.identity.commercial_operator, 'Tokenizart Group LLC');
   assert.equal(contract.identity.controller_designation_verified, false);
   assert.equal(contract.contact.channel, 'hello@agentfriendlyweb.dev');
+  assert.equal(contract.current_processing.voluntary_inbound_email, true);
   assert.equal(contract.real_contact_enabled, false);
   assert.equal(contract.privacy_requests_enabled, false);
   assert.equal(contract.retention_jobs_enabled, false);

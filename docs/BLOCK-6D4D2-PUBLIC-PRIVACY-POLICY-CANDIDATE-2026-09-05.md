@@ -7,7 +7,7 @@ Estado: `candidate_for_legal_review`
 
 ## Objetivo
 
-Preparar una explicacion humana y machine-readable que distinga el tratamiento tecnico que existe hoy de las capacidades futuras de contacto, CRM, retencion y novedades. El objetivo no es certificar cumplimiento legal ni abrir la captacion de datos.
+Preparar una explicacion humana y machine-readable que distinga el tratamiento tecnico que existe hoy de las capacidades futuras de contacto, CRM, retencion y novedades. El objetivo no es certificar cumplimiento legal ni abrir la captacion web de datos. El correo que una persona envia voluntariamente permanece como un canal manual separado.
 
 ## Identidad operativa candidata
 
