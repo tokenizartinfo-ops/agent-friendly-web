@@ -268,6 +268,8 @@ git commit -m "chore: prepare disabled human privacy canary"
 
 ### Task 5: One controlled canary run and closure
 
+**Ruling 2026-09-05:** La especificacion vinculante de Gate 6D.4D exige una prueba privada con datos propios y cierre con captura publica/newsletter OFF, pero no exige reabrir el tratamiento despues del borrado para repetir `erase`. El requisito de replay remoto de este plan se reemplaza por: replay idempotente cubierto por pruebas locales, consulta remota metadata-only sin eventos duplicados y switch OFF inmediato. Reabrir una identidad ya borrada solo para generar otra llamada contradiria minimizacion de datos sin agregar una garantia material distinta. El costo de esta decision es no disponer de un segundo request HTTP remoto de `erase`; la garantia queda compuesta por tests del mismo codigo desplegado y estado D1 final.
+
 **Files:**
 - Create: `docs/BLOCK-6D4D-PRIVATE-HUMAN-PRIVACY-PILOT-2026-09-04.md`
 - Create: `docs/evidence/private-human-privacy-pilot-canary-2026-09-04.json`
@@ -292,7 +294,7 @@ Set only `AFW_PRIVATE_HUMAN_PRIVACY_PILOT_ENABLED=true` for the canary version. 
 
 - [ ] **Step 4: Verify erasure and close immediately**
 
-Confirm through metadata-only queries that one pilot contact is `erased`, direct identifier fields are blank, CRM cannot resolve it, the consent withdrawal exists and deletion replay is write-free. Return the pilot switch to `false`, deploy the closed version and confirm the endpoint returns `404`.
+Confirm through metadata-only queries that one pilot contact is `erased`, direct identifier fields are blank, CRM cannot resolve it, the consent withdrawal exists and no duplicate deletion events were created. Confirm deletion replay is write-free in the focused tests without reopening the remote window. Return the pilot switch to `false`, deploy the closed version and confirm the application endpoint returns `404`; Access and application closure may be verified as separate layers when browser automation does not expose the authenticated non-2xx status.
 
 - [ ] **Step 5: Record sanitized evidence and commit**
 

@@ -1,10 +1,10 @@
 # Email, Lead Capture and Consent Architecture v1
 
-**Estado:** arquitectura y codigo local de staging preparados; captura remota y correo no desplegados
+**Estado:** infraestructura y canaries privados verificados; captura publica, envios recurrentes y novedades OFF
 
-**Fecha:** 2026-08-31
+**Fecha:** 2026-08-31; actualizado 2026-09-05
 
-**Dominio propuesto:** `agentfriendlyweb.dev`
+**Dominio canonico:** `agentfriendlyweb.dev`
 
 ## Objetivo
 
@@ -296,6 +296,18 @@ El canary privado alcanzo `private_synthetic_lifecycle_verified_kill_switch_off`
 El contacto sintetico quedo en `erased`, con `erased_at` poblado, `restriction_state=none` y todos los campos directos vacios. Las cuatro filas de email no cambiaron y el gate hizo 0 envios mediante proveedor. El cierre devolvio el Worker a `AFW_SYNTHETIC_PRIVACY_LIFECYCLE_ENABLED=false`; los cuatro flags de datos reales y todos los demas flags sinteticos de escritura permanecen apagados. La pagina y la API privadas responden 404 despues del cierre, mientras Access conserva una sola politica allow y cero bypass.
 
 No se procesaron contactos reales, no se uso Tokenizart y no hubo propuesta, pago, sitio de cliente ni mutacion de la D1 de produccion. Esta evidencia sintetica no establece preparacion de privacidad real ni aprobacion legal. El siguiente gate es `private_human_privacy_pilot_legal_review_required`. Evidencia: `docs/BLOCK-6D4C-SYNTHETIC-PRIVACY-CANARY-REMOTE-2026-09-04.md`.
+
+## Actualizacion Gate 6D.4D remota - 2026-09-05
+
+Una identidad Access expresamente autorizada completo una unica prueba privada con datos propios: alta, exportacion, rectificacion de idioma, retiro de `requested_plan` y borrado. El navegador no recibio un campo para escribir email; la API lo derivo del JWT firmado de Access. El flujo termino en `private_human_privacy_pilot_completed_erased_kill_switch_off`.
+
+El baseline era el fixture sintetico ya borrado de Gate 6D.4C. El piloto agrego un lead, cuatro solicitudes de privacidad, un evento de consentimiento, una supresion y un evento de lifecycle. No agrego oportunidades CRM ni filas de entrega de email. La D1 canary quedo con dos leads, ambos `erased`, ambos saneados y cero identificadores directos poblados en filas borradas. Las consultas de cierre fueron read-only y escribieron cero filas.
+
+Durante la ventana se corrigio un defecto de UX: una recarga perdia la etapa local aunque el servidor la conservaba. El contrato ahora devuelve `resumeStage` para recuperar el recorrido sin repetir escrituras. La correccion esta cubierta por pruebas de servidor y UI en `dbacb9b`.
+
+El cierre restauro `AFW_PRIVATE_HUMAN_PRIVACY_PILOT_ENABLED=false`. Captura real, derechos publicos, retencion, novedades y todos los flags sinteticos de escritura tambien permanecen en `false`. Las solicitudes anonimas siguen detenidas por Access y la ruta de aplicacion deshabilitada conserva respuesta contractual `404`. Wrangler informa cero migraciones pendientes.
+
+La prueba no constituye aprobacion juridica ni cumplimiento universal. D1 Time Travel puede retener temporalmente versiones anteriores; cualquier restauracion debe reaplicar el tombstone de borrado. Antes de aceptar datos de terceros se requiere revisar identidad juridica, jurisdicciones, responsable de tratamiento, copy publico, retencion, canal de derechos y soporte. Evidencia: `docs/BLOCK-6D4D-PRIVATE-HUMAN-PRIVACY-PILOT-2026-09-04.md`.
 
 ## Pruebas negativas obligatorias
 

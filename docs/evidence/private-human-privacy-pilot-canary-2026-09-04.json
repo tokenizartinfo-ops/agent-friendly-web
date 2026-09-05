@@ -1,0 +1,192 @@
+{
+  "contract": "agent-friendly-web.private-human-privacy-pilot-canary-evidence.v1",
+  "gate": "6D.4D",
+  "status": "private_human_privacy_pilot_completed_erased_kill_switch_off",
+  "observed_at": "2026-09-05T14:05:50.879Z",
+  "scope": {
+    "project": "agent-friendly-web",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "environment": "afw_canary",
+    "origin": "https://canary.agentfriendlyweb.dev",
+    "route": "/api/canary/private-human-privacy-pilot",
+    "allowed_action": "one_private_owner_data_privacy_cycle"
+  },
+  "provenance": {
+    "source_commit": "dbacb9bef87337448abdf28635d1d9a9535c6533",
+    "preflight_path": "docs/evidence/private-human-privacy-pilot-canary-preflight-2026-09-04.json",
+    "preflight_sha256": "a4f1354322a436aed3365477355ff40541501fdb94439ad4c961d65b4486c601",
+    "configuration_sha256": "718e004e77dcff72bc1601889979d6120ff9852a1dd972c28589e4057a8950a3",
+    "authorization": "explicit_human_authorization_for_own_data_private_pilot",
+    "legal_compliance_approval": false
+  },
+  "resources": {
+    "worker": {
+      "name": "agent-friendly-web-web-canary",
+      "final_version_id": "fb72bfc4-90c9-46ea-a9ff-3239d5baf955",
+      "final_deployment_id": "6f77d833-33d7-4d3d-9f73-18dd3ca3a678",
+      "traffic_percentage": 100
+    },
+    "canary_database": {
+      "name": "agent-friendly-web-web-canary",
+      "id": "2b518988-eacb-4c31-b760-4e58c3c0285b"
+    },
+    "production_database": {
+      "name": "agent-friendly-web-web-production",
+      "id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8"
+    }
+  },
+  "access": {
+    "required": true,
+    "audience_configured": true,
+    "allowed_identity_count": 1,
+    "allow_policy_count": 1,
+    "bypass_policy_count": 0,
+    "anonymous_ui_http": 302,
+    "anonymous_api_http": 302,
+    "anonymous_result": "redirected_to_cloudflare_access"
+  },
+  "migration": {
+    "name": "0008_contact_privacy_lifecycle.sql",
+    "applied": true,
+    "pending_after": 0
+  },
+  "window": {
+    "initial_switch": false,
+    "bounded_switch": true,
+    "final_switch": false,
+    "only_pilot_switch_changed": true,
+    "human_steps": [
+      {
+        "step": "enroll",
+        "result": "private_human_privacy_pilot_step_completed"
+      },
+      {
+        "step": "inspect_export",
+        "result": "private_human_privacy_pilot_step_completed"
+      },
+      {
+        "step": "rectify_locale",
+        "result": "private_human_privacy_pilot_step_completed"
+      },
+      {
+        "step": "withdraw_requested_plan",
+        "result": "private_human_privacy_pilot_step_completed"
+      },
+      {
+        "step": "erase",
+        "result": "private_human_privacy_pilot_completed"
+      }
+    ],
+    "final_human_message_observed": true,
+    "export_payload_recorded_in_evidence": false
+  },
+  "database": {
+    "before": {
+      "total_leads": 1,
+      "erased_leads": 1,
+      "consent_events": 2,
+      "privacy_requests": 4,
+      "suppressions": 2,
+      "lifecycle_events": 3,
+      "crm_opportunities": 1,
+      "email_deliveries": 4
+    },
+    "after": {
+      "total_leads": 2,
+      "erased_leads": 2,
+      "sanitized_erased_leads": 2,
+      "erased_rows_with_direct_identifiers": 0,
+      "consent_events": 3,
+      "privacy_requests": 8,
+      "suppressions": 3,
+      "lifecycle_events": 4,
+      "crm_opportunities": 1,
+      "crm_resolvable_direct_contacts": 0,
+      "email_deliveries": 4,
+      "email_sent_historical": 1,
+      "email_failed_historical": 3
+    },
+    "pilot_delta": {
+      "leads": 1,
+      "erased_leads": 1,
+      "consent_events": 1,
+      "privacy_requests": 4,
+      "suppressions": 1,
+      "lifecycle_events": 1,
+      "crm_opportunities": 0,
+      "email_deliveries": 0
+    },
+    "purpose_breakdown_after": {
+      "requested_plan_withdrawn": 1,
+      "access_export_resolved": 2,
+      "deletion_resolved": 2,
+      "rectification_resolved": 2,
+      "withdraw_consent_resolved": 2,
+      "deleted_identifiers_erased": 2
+    },
+    "queries_changed_rows": 0,
+    "production_contact_leads": 0
+  },
+  "closure": {
+    "AFW_PRIVATE_HUMAN_PRIVACY_PILOT_ENABLED": false,
+    "AFW_REAL_CONTACT_ENABLED": false,
+    "AFW_PRIVACY_REQUESTS_ENABLED": false,
+    "AFW_RETENTION_JOBS_ENABLED": false,
+    "AFW_PRODUCT_UPDATES_ENABLED": false,
+    "all_synthetic_write_flags": false,
+    "direct_worker_application_http": 404,
+    "application_route_contract_http": 404,
+    "authenticated_browser_observation": "http_response_code_failure_after_final_off_deploy",
+    "anonymous_access_boundary_preserved": true,
+    "public_production_http": 200
+  },
+  "implementation_correction": {
+    "issue": "page_reload_lost_local_progress_while_server_retained_stage",
+    "resolution": "server_returns_resume_stage_for_duplicate_enroll",
+    "commit": "dbacb9bef87337448abdf28635d1d9a9535c6533",
+    "duplicate_actions_write_free_tested": true
+  },
+  "verification": {
+    "focused_tests": {
+      "passed": 21,
+      "failed": 0
+    },
+    "full_tests": {
+      "passed": 664,
+      "failed": 0
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 1,
+      "warning_scope": "pre_existing_comic_hero_image"
+    },
+    "build": "passed",
+    "cloudflare_deploy_dry_run": "passed_no_deploy",
+    "preflight": "private_human_privacy_pilot_ready"
+  },
+  "rulings": {
+    "authenticated_off_probe": "verified_by_decomposition_access_redirect_plus_direct_worker_404_plus_off_binding",
+    "remote_delete_replay": "not_reopened_after_erasure_to_preserve_data_minimization",
+    "replay_assurance": "local_idempotency_tests_and_remote_event_counts_without_duplicates"
+  },
+  "capabilities": {
+    "email_sent_by_pilot": false,
+    "proposal_created": false,
+    "payment_charged": false,
+    "customer_site_modified": false,
+    "production_database_mutated": false,
+    "cross_project_mutation": false,
+    "tokenizart_resource_used": false,
+    "public_contact_enabled": false,
+    "newsletter_enabled": false,
+    "real_privacy_channel_enabled": false
+  },
+  "rollback": {
+    "worker_previous_versions_available": true,
+    "database_time_travel_marker_recorded_outside_public_evidence": true,
+    "restore_used": false,
+    "restore_must_reapply_erasure_tombstone": true,
+    "absolute_backup_erasure_claimed": false
+  },
+  "next_privacy_gate": "policy_legal_identity_and_public_copy_review_required"
+}
