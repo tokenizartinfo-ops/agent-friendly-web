@@ -1,0 +1,44 @@
+name: Disposable WordPress rehearsal
+
+on:
+  workflow_dispatch: {}
+  pull_request:
+    paths:
+      - '.github/workflows/wordpress-rehearsal.yml'
+      - 'scripts/Test-WordPressDisposableHttp.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  rehearsal:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.2'
+      - name: Install isolated test runtime
+        run: npm install --prefix "$RUNNER_TEMP/afw-wp-runtime" --no-audit --no-fund --ignore-scripts @wp-playground/cli@3.1.53
+      - name: Run synthetic HTTP and rollback assertions
+        id: rehearsal
+        continue-on-error: true
+        run: node scripts/Test-WordPressDisposableHttp.mjs "$RUNNER_TEMP/afw-wp-runtime/node_modules/@wp-playground/cli" > "$RUNNER_TEMP/afw-wordpress-receipt.json"
+      - name: Preserve receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-wordpress-receipt
+          path: ${{ runner.temp }}/afw-wordpress-receipt.json
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Enforce result
+        if: always()
+        env:
+          REHEARSAL_OUTCOME: ${{ steps.rehearsal.outcome }}
+        run: |
+          if [ "$REHEARSAL_OUTCOME" != "success" ]; then exit 1; fi
+          node --input-type=module -e 'import {readFileSync} from "node:fs"; import assert from "node:assert/strict"; const r=JSON.parse(readFileSync(process.env.RUNNER_TEMP+"/afw-wordpress-receipt.json","utf8")); assert.equal(r.status,"passed"); assert.equal(r.serverClosed,true); assert.equal(r.rollback,"verified_absent"); assert.equal(r.checks.length,2);'
