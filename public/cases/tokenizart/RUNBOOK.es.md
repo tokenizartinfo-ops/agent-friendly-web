@@ -1,5 +1,12 @@
 # Guia de instalacion del paquete Tokenizart
 
+> Paquete historico: requiere conciliacion antes de instalar. El 2026-09-11 los
+> documentos publicos observados en Tokenizart diferian de esta version. No
+> sobrescribir archivos existentes con este paquete ni retirar documentos como
+> rollback si existian previamente. Comparar versiones y conservar una copia
+> recuperable antes de cualquier cambio. Este aviso no actualiza archivos ZIP
+> distribuidos anteriormente ni acredita permisos de publicacion.
+
 ## Regla de seguridad
 
 Cada cambio necesita backup, responsable, prueba y rollback. El paquete no habilita Owner Live ni acciones reales de Atelier.

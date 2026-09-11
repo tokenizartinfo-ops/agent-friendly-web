@@ -1,5 +1,12 @@
 # Runbook de instalacion agent-friendly para Tokenizart y Atelier
 
+> AVISO 2026-09-11: referencia historica, no instruccion vigente de despliegue.
+> El paquete de agosto difiere de los archivos observados en produccion. No
+> reinstalarlo ni ejecutar su rollback literalmente. Restaurar versiones previas;
+> retirar archivos solo si el lote los creo sobre ausencia verificada. Ver
+> [preflight real](TOKENIZART-ASSISTED-DELIVERY-PREFLIGHT-2026-09-11.es.md) y
+> [checklist vigente de entrega asistida](ASSISTED-DELIVERY-CHECKLIST.es.md).
+
 **Version:** 1.0
 
 **Fecha:** 2026-08-26

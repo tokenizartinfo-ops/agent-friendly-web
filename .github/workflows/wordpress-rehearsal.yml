@@ -1,0 +1,137 @@
+name: Disposable WordPress rehearsal
+
+on:
+  workflow_dispatch: {}
+  pull_request:
+    paths:
+      - '.github/workflows/wordpress-rehearsal.yml'
+      - 'scripts/Test-WordPressDisposableHttp.mjs'
+      - 'scripts/Test-NativePhpDeliveryHttp.mjs'
+      - 'scripts/Test-NativeWordPressDeliveryHttp.mjs'
+      - 'test/wordpress-rehearsal-workflow.test.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  playground_single_worker:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.2'
+      - name: Install pinned diagnostic runtime
+        run: npm install --prefix "$RUNNER_TEMP/afw-wp-runtime" --no-audit --no-fund --ignore-scripts @wp-playground/cli@3.1.53
+      - name: Contrast same scenario with one worker
+        id: single
+        continue-on-error: true
+        run: node scripts/Test-WordPressDisposableHttp.mjs "$RUNNER_TEMP/afw-wp-runtime/node_modules/@wp-playground/cli" --single-worker > "$RUNNER_TEMP/afw-single-worker-receipt.json"
+      - name: Preserve contrast receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-single-worker-receipt
+          path: ${{ runner.temp }}/afw-single-worker-receipt.json
+          retention-days: 7
+      - name: Enforce single-worker contrast
+        if: always()
+        env:
+          SINGLE_OUTCOME: ${{ steps.single.outcome }}
+        run: |
+          if [ "$SINGLE_OUTCOME" != "success" ]; then exit 1; fi
+          node --input-type=module -e 'import {readFileSync} from "node:fs"; import assert from "node:assert/strict"; const r=JSON.parse(readFileSync(process.env.RUNNER_TEMP+"/afw-single-worker-receipt.json","utf8")); assert.equal(r.status,"passed"); assert.equal(r.workerCount,1); assert.equal(r.workerMode,"single"); assert.equal(r.rollback,"verified_absent"); assert.equal(r.serverClosed,true); assert.equal(r.checks.length,2); for(const c of r.rollbackObservations){assert.equal(c.status,404); assert.equal(c.filesystemExists,false);}'
+  native_wordpress:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.2'
+      - name: Native WordPress assisted handoff
+        id: native_wp
+        continue-on-error: true
+        run: node scripts/Test-NativeWordPressDeliveryHttp.mjs > "$RUNNER_TEMP/afw-native-wordpress-receipt.json"
+      - name: Preserve WordPress receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-native-wordpress-receipt
+          path: ${{ runner.temp }}/afw-native-wordpress-receipt.json
+          retention-days: 7
+      - name: Enforce assisted WordPress result
+        if: always()
+        env:
+          WP_OUTCOME: ${{ steps.native_wp.outcome }}
+        run: |
+          if [ "$WP_OUTCOME" != "success" ]; then exit 1; fi
+          node --input-type=module -e 'import {readFileSync} from "node:fs"; import assert from "node:assert/strict"; const r=JSON.parse(readFileSync(process.env.RUNNER_TEMP+"/afw-native-wordpress-receipt.json","utf8")); assert.equal(r.interruptedRecovery.status,"verified_previous_bytes"); assert.equal(r.interruptedRecovery.interruptionExit,86); assert.equal(r.interruptedRecovery.corruptBackupRejected,true); assert.equal(r.interruptedRecovery.thirdPartyRejected,true); assert.equal(r.interruptedRecovery.repeatWrites,0); assert.equal(r.interruptedRecovery.httpChecks.length,2); for(const c of r.interruptedRecovery.httpChecks){assert.equal(c.beforeSha256,c.restoredSha256); assert.equal(c.get,200); assert.equal(c.head,200);}'
+          node --input-type=module -e 'import {readFileSync} from "node:fs"; import assert from "node:assert/strict"; const r=JSON.parse(readFileSync(process.env.RUNNER_TEMP+"/afw-native-wordpress-receipt.json","utf8")); assert.equal(r.status,"passed"); assert.equal(r.cleanupVerified,true); assert.equal(r.automaticAdapterTested,false); assert.equal(r.wordpressTested,true); assert.equal(r.rollback,"verified_absent"); assert.equal(r.checks.length,2); assert.equal(r.updateRollback,"verified_previous_bytes"); assert.equal(r.updateChecks.length,2); assert.equal(r.conflictRejected,true); assert.equal(r.staleRestoreRejected,true); for(const c of r.updateChecks){assert.equal(c.beforeSha256,c.restoredSha256); assert.notEqual(c.beforeSha256,c.updatedSha256);}'
+  native_php:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.2'
+      - name: Native PHP contrast
+        id: native
+        continue-on-error: true
+        run: node scripts/Test-NativePhpDeliveryHttp.mjs > "$RUNNER_TEMP/afw-native-php-receipt.json"
+      - name: Preserve independent receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-native-php-receipt
+          path: ${{ runner.temp }}/afw-native-php-receipt.json
+          retention-days: 7
+      - name: Enforce native result only
+        if: always()
+        env:
+          NATIVE_OUTCOME: ${{ steps.native.outcome }}
+        run: |
+          if [ "$NATIVE_OUTCOME" != "success" ]; then exit 1; fi
+          node --input-type=module -e 'import {readFileSync} from "node:fs"; import assert from "node:assert/strict"; const r=JSON.parse(readFileSync(process.env.RUNNER_TEMP+"/afw-native-php-receipt.json","utf8")); assert.equal(r.status,"passed"); assert.equal(r.serverClosed,true); assert.equal(r.tempRemoved,true); assert.equal(r.wordpressTested,false); assert.equal(r.rollback,"verified_absent"); assert.equal(r.checks.length,2);'
+  rehearsal:
+    name: Experimental multiprocess compatibility (manual)
+    # Explicitly unsupported pilot mode. Keep strict diagnostics on manual runs.
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.2'
+      - name: Install isolated test runtime
+        run: npm install --prefix "$RUNNER_TEMP/afw-wp-runtime" --no-audit --no-fund --ignore-scripts @wp-playground/cli@3.1.53
+      - name: Run synthetic HTTP and rollback assertions
+        id: rehearsal
+        continue-on-error: true
+        run: node scripts/Test-WordPressDisposableHttp.mjs "$RUNNER_TEMP/afw-wp-runtime/node_modules/@wp-playground/cli" > "$RUNNER_TEMP/afw-wordpress-receipt.json"
+      - name: Preserve receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-wordpress-receipt
+          path: ${{ runner.temp }}/afw-wordpress-receipt.json
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Enforce result
+        if: always()
+        env:
+          REHEARSAL_OUTCOME: ${{ steps.rehearsal.outcome }}
+        run: |
+          if [ "$REHEARSAL_OUTCOME" != "success" ]; then exit 1; fi
+          node --input-type=module -e 'import {readFileSync} from "node:fs"; import assert from "node:assert/strict"; const r=JSON.parse(readFileSync(process.env.RUNNER_TEMP+"/afw-wordpress-receipt.json","utf8")); assert.equal(r.status,"passed"); assert.equal(r.serverClosed,true); assert.equal(r.rollback,"verified_absent"); assert.equal(r.checks.length,2);'
