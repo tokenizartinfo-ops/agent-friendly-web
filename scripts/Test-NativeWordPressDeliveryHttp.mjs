@@ -61,7 +61,8 @@ try {
   }
   assert(ready, 'Database and WordPress bootstrap must finish');
   phase = 'install_synthetic_wordpress';
-  const info = JSON.parse(php(`$_SERVER['HTTP_HOST']='${binding}'; $_SERVER['REQUEST_URI']='/';
+  const info = JSON.parse(php(`define('WP_INSTALLING',true);
+    $_SERVER['HTTP_HOST']='${binding}'; $_SERVER['REQUEST_URI']='/';
     require '/var/www/html/wp-load.php'; require_once ABSPATH.'wp-admin/includes/upgrade.php';
     if(is_blog_installed()){throw new Exception('unexpected existing install');}
     wp_install('AFW Synthetic','afw-fixture','admin@afw.invalid',false,'',bin2hex(random_bytes(24)));
