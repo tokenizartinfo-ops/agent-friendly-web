@@ -114,8 +114,38 @@ solo sirven de oraculo de verificacion, no de entrada a la recuperacion.
 Se agregaron pruebas de copia corrupta y cambio ajeno, repeticion sin nuevas
 escrituras y verificacion HTTP GET/HEAD con hashes. La workflow exige estos campos
 del recibo; no basta con que termine el script. Resultado de ejecucion Linux:
-pendiente de la nueva revision del PR. Diez pruebas locales focalizadas correctas.
+**correcto** en revision `e394dd36c29f4f58a057c921a35338dcdaaedb45`,
+[run 34626883131, native_wordpress](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/34626883131/job/103354017826).
+Diez pruebas focalizadas y 420 pruebas locales completas correctas. La
+[CI de esa revision](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/34626883176)
+tambien completo tests, lint y build correctamente.
+
+Recibo revisado: `status=passed`, `interruptionExit=86`,
+`interruptedRecovery.status=verified_previous_bytes`, `corruptBackupRejected=true`,
+`thirdPartyRejected=true`, `repeatWrites=0`, `homepage=200`, `cleanupVerified=true`.
+El primer archivo quedo `restored`; el segundo, `already_original`.
+
+| Ruta | SHA-256 anterior y restaurado | GET / HEAD despues |
+| --- | --- | --- |
+| /llms.txt | c4e27d4e920e3e93b9147e8e0cb6c1ce06d40dc5182cd88960f93935dd9ca17f | 200 / 200 |
+| /llms-full.txt | 598455e9f82774128ac1ddc04f2f699022ad48ae58c07789b0812cb4b4c57d78 | 200 / 200 |
+
+Tiempo de ejecucion nativa: 38.687 segundos; incluye entorno sintetico, no es una
+estimacion comercial ni costo de cliente. Los artefactos CI retienen siete dias;
+esta nota conserva el resultado y hashes relevantes mas alla de esa retencion.
+
+El job Playground de la misma ejecucion sigue fallido. No se fusiona el PR ni se
+declara validacion global completa por el exito independiente de WordPress nativo.
 
 La interrupcion ensayada es salida del proceso, no reinicio del contenedor ni corte
 de energia. Las copias desaparecen al destruir el contenedor descartable. Esto no
 certifica backups del hosting real ni un servicio de recuperacion para clientes.
+
+## Decision de avance
+
+La recuperacion entre procesos y su verificacion HTTP ya estan comprobadas en el
+entorno nativo delimitado. No repetir ni ampliar ese trabajo por cada idioma.
+Antes de un cliente real: cerrar la discrepancia de Playground con una reproduccion
+minima o una decision explicita sobre su alcance, revisar el PR y ensayar una entrega
+asistida completa con la checklist y un recibo unico. Medir tiempo humano, esperas
+y excepciones; no construir conectores nuevos ni prometer automatizacion universal.
