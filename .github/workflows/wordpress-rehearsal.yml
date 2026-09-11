@@ -102,6 +102,9 @@ jobs:
           if [ "$NATIVE_OUTCOME" != "success" ]; then exit 1; fi
           node --input-type=module -e 'import {readFileSync} from "node:fs"; import assert from "node:assert/strict"; const r=JSON.parse(readFileSync(process.env.RUNNER_TEMP+"/afw-native-php-receipt.json","utf8")); assert.equal(r.status,"passed"); assert.equal(r.serverClosed,true); assert.equal(r.tempRemoved,true); assert.equal(r.wordpressTested,false); assert.equal(r.rollback,"verified_absent"); assert.equal(r.checks.length,2);'
   rehearsal:
+    name: Experimental multiprocess compatibility (manual)
+    # Explicitly unsupported pilot mode. Keep strict diagnostics on manual runs.
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:

@@ -197,3 +197,25 @@ invertir el piloto comercial en reescribir un runtime externo. Cambiar la matriz
 de gates requiere una decision visible de revision, no ocultar el fallo mediante
 `continue-on-error` global. El proximo bloque es esa revision de alcance y un
 recibo de entrega medible, no mas capas documentales ni nuevos conectores.
+
+## Decision aplicada tras continuar la revision
+
+Se adopta el alcance recomendado: WordPress nativo y Playground con un worker
+son referencias admitidas para el piloto asistido. Los tres jobs admitidos
+(incluido PHP de contraste) siguen ejecutandose en cada PR relevante y fallan
+si sus comprobaciones fallan. La CI general conserva tests, lint y build.
+
+El job `rehearsal` se identifica como `Experimental multiprocess compatibility
+(manual)` y se ejecuta solo por `workflow_dispatch`. Conserva todos sus asserts,
+su recibo y su salida fallida: NO esta arreglado, NO esta admitido y no se ha
+convertido un 500 en un resultado valido. Las ejecuciones previas fallidas siguen
+enlazadas arriba. El diagnostico se reabre antes de admitir multiples workers,
+al cambiar el runtime o cuando una incidencia nueva lo requiera. No se modifican
+reglas de proteccion de ramas ni se fusiona automaticamente el PR.
+
+Esta es una reduccion explicita del alcance soportado, no una correccion del
+runtime externo. No se transfiere esta limitacion ni trabajo innecesario al hosting
+del cliente. La checklist unica incorpora unidad por lote, tres contactos humanos
+y medicion de trabajo/espera. Conservar el resultado tecnico separado de cualquier
+declaracion de entrega comercial real: aun no se ha realizado un piloto de cliente
+medido con este procedimiento.

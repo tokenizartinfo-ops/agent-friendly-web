@@ -13,6 +13,11 @@ test('WordPress rehearsal is isolated, bounded and preserves failures', () => {
   assert.equal(workflow.on.pull_request_target, undefined);
   assert.equal(job['runs-on'], 'ubuntu-24.04');
   assert.equal(job['timeout-minutes'], 12);
+  assert.equal(job.if, "github.event_name == 'workflow_dispatch'");
+  assert.equal(job.name, 'Experimental multiprocess compatibility (manual)');
+  for (const name of ['native_wordpress', 'native_php', 'playground_single_worker']) {
+    assert.equal(workflow.jobs[name].if, undefined, 'supported baselines always run');
+  }
   assert.equal(job.steps[0].with['persist-credentials'], false);
   const run = job.steps.find(s => s.id === 'rehearsal');
   assert.equal(run['continue-on-error'], true);

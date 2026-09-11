@@ -6,6 +6,25 @@ Los idiomas se resuelven dentro del paquete aprobado y sus enlaces, no mediante
 una nueva entrega por idioma. Robots, sitemap, plugins y cambios de portada se
 presupuestan y autorizan aparte cuando sean necesarios.
 
+## Alcance del piloto admitido
+
+Entrega asistida, un sitio y un lote por vez, con un unico escritor durante la
+ventana acordada. La referencia tecnica es WordPress nativo; Playground con un
+worker sirve de ensayo secuencial. Playground multiproceso no esta admitido:
+mantiene una incidencia reproducible de HTTP 500 despues del borrado.
+No hay instalador automatico ni garantia de equivalencia con cada hosting.
+
+El cliente participa en tres momentos: confirma sitio y contenido, autoriza la
+ventana de publicacion y recibe el resultado. AFW coordina los detalles tecnicos
+con el proveedor autorizado; si falta recuperacion, se entrega el paquete preparado
+y se informa el bloqueo, sin pedir intentos repetidos al cliente.
+
+La unidad comercial es el lote, no cada idioma ni cada reintento. Registrar una
+sola fila temporal por actividad: preparacion, coordinacion, publicacion,
+verificacion o recuperacion. Separar minutos de trabajo de minutos de espera.
+Una ampliacion de alcance o incidencia ajena se comunica antes de generar trabajo
+adicional. No deducir precios de la duracion de los ensayos sinteticos.
+
 ## 1. Acordar sin complicar al cliente
 
 - [ ] Confirmar dominio exacto y si el trabajo corresponde a la web o a un subdominio.
