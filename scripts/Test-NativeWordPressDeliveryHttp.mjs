@@ -45,12 +45,12 @@ try {
     '-e', 'MYSQL_ROOT_PASSWORD=' + password, '-e', 'MYSQL_DATABASE=wordpress', images.mysql]);
   created.push(db);
   docker(['run', '-d', '--name', wp, '--network', id, '--label', 'afw.rehearsal=' + id,
-    '-p', '127.0.0.1::80', '-e', 'WORDPRESS_DB_HOST=' + db, '-e', 'WORDPRESS_DB_USER=root',
+    '-e', 'WORDPRESS_DB_HOST=' + db, '-e', 'WORDPRESS_DB_USER=root',
     '-e', 'WORDPRESS_DB_PASSWORD=' + password, '-e', 'WORDPRESS_DB_NAME=wordpress', images.wordpress]);
   created.push(wp);
-  const binding = docker(['port', wp, '80/tcp']);
-  assert.match(binding, /^127\.0\.0\.1:\d+$/);
+  const binding = '127.0.0.1';
   const origin = 'http://' + binding;
+  report.httpClient = 'PHP cURL to loopback Apache inside isolated container';
   let ready = false;
   for (let attempt = 0; attempt < 90; attempt++) {
     try {
@@ -70,12 +70,17 @@ try {
   assert.equal(info.version, '6.8.3'); report.wordpress = info.version; report.php = info.php;
   const request = async (path, method = 'GET') => {
     assert([...Object.keys(files), '/', '/afw-never-created.txt'].includes(path));
-    const response = await fetch(origin + path, { method, redirect: 'manual', signal: AbortSignal.timeout(8000) });
-    const chunks = []; let length = 0;
-    if (response.body) for await (const chunk of response.body) {
-      length += chunk.length; assert(length <= 1048576); chunks.push(chunk);
-    }
-    return { status: response.status, type: response.headers.get('content-type'), body: Buffer.concat(chunks) };
+    assert(['GET', 'HEAD'].includes(method));
+    const response = JSON.parse(php(`$body=''; $c=curl_init('${origin}${path}');
+      curl_setopt_array($c,[CURLOPT_FOLLOWLOCATION=>false,CURLOPT_TIMEOUT=>8,
+        CURLOPT_NOBODY=>${method === 'HEAD' ? 'true' : 'false'},
+        CURLOPT_WRITEFUNCTION=>function($c,$chunk)use(&$body){
+          if(strlen($body)+strlen($chunk)>1048576)return 0; $body.=$chunk; return strlen($chunk);
+        }]);
+      if(curl_exec($c)===false)exit(1);
+      echo json_encode(['status'=>curl_getinfo($c,CURLINFO_HTTP_CODE),
+        'type'=>curl_getinfo($c,CURLINFO_CONTENT_TYPE),'body'=>base64_encode($body)]); curl_close($c);`));
+    return { ...response, body: Buffer.from(response.body, 'base64') };
   };
   const home = await request('/'); assert.equal(home.status, 200);
   const indexHash = php("echo hash_file('sha256','/var/www/html/index.php');");
