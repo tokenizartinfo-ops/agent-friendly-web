@@ -98,6 +98,48 @@ try {
     assert.equal(sha(get.body), sha(body)); assert.equal(head.status, 200); assert.equal(head.body.length, 0);
     report.checks.push({ path, status: 200, sha256: sha(get.body), head: 200 });
   }
+  phase = 'backup_existing_pair';
+  const backups = {}, updated = {};
+  for (const [path, body] of Object.entries(files)) {
+    backups[path] = Buffer.from(php(`echo base64_encode(file_get_contents('/var/www/html${path}'));`), 'base64');
+    assert.equal(sha(backups[path]), sha(body));
+    updated[path] = Buffer.from(body.replaceAll('\n', '\r\n') + 'Revision 2: caf\u00e9 / a\u00e7\u00e3o\r\n');
+    assert.notEqual(sha(updated[path]), sha(backups[path]));
+  }
+  // Assisted single-writer fixture only: this check/write is NOT a remote CAS.
+  const replaceExpected = (path, expectedHash, bytes) => {
+    assert(Object.hasOwn(files, path)); assert.match(expectedHash, /^[a-f0-9]{64}$/);
+    const encoded = bytes.toString('base64');
+    return php(`$p='/var/www/html${path}';
+      if(!is_file($p)||hash_file('sha256',$p)!=='${expectedHash}'){echo 'conflict';exit;}
+      $b=base64_decode('${encoded}'); $n=file_put_contents($p,$b);
+      if($n!==strlen($b))exit(1); echo 'written';`);
+  };
+  const verifyBytes = async (path, bytes) => {
+    const get = await request(path), head = await request(path, 'HEAD');
+    assert.equal(get.status, 200); assert.equal(get.type?.split(';')[0], 'text/plain');
+    assert.equal(sha(get.body), sha(bytes)); assert.equal(head.status, 200); assert.equal(head.body.length, 0);
+    assert.equal(php(`echo hash_file('sha256','/var/www/html${path}');`), sha(bytes));
+    return sha(get.body);
+  };
+  phase = 'reject_stale_update';
+  assert.equal(replaceExpected('/llms.txt', '0'.repeat(64), updated['/llms.txt']), 'conflict');
+  for (const path of Object.keys(files)) await verifyBytes(path, backups[path]);
+  report.conflictRejected = true;
+  phase = 'update_existing_pair';
+  for (const path of Object.keys(files)) assert.equal(replaceExpected(path, sha(backups[path]), updated[path]), 'written');
+  report.updateChecks = [];
+  for (const path of Object.keys(files)) {
+    report.updateChecks.push({ path, beforeSha256: sha(backups[path]), updatedSha256: await verifyBytes(path, updated[path]) });
+  }
+  phase = 'reject_stale_restore';
+  assert.equal(replaceExpected('/llms-full.txt', sha(backups['/llms-full.txt']), backups['/llms-full.txt']), 'conflict');
+  for (const path of Object.keys(files)) await verifyBytes(path, updated[path]);
+  report.staleRestoreRejected = true;
+  phase = 'restore_previous_pair';
+  for (const path of Object.keys(files)) assert.equal(replaceExpected(path, sha(updated[path]), backups[path]), 'written');
+  for (const check of report.updateChecks) check.restoredSha256 = await verifyBytes(check.path, backups[check.path]);
+  report.updateRollback = 'verified_previous_bytes';
   phase = 'filesystem_rollback';
   for (const [path, body] of Object.entries(files)) {
     assert.equal(php(`if(hash_file('sha256','/var/www/html${path}')!=='${sha(body)}')exit(1); echo unlink('/var/www/html${path}')?'removed':'failed';`), 'removed');

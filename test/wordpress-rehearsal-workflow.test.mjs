@@ -51,4 +51,7 @@ test('native WordPress rehearsal is explicit, bounded and separate from Playgrou
   assert.match(job.steps.find(s => s.id === 'native_wp').run, /Test-NativeWordPressDeliveryHttp/);
   assert.match(job.steps.at(-1).run, /cleanupVerified,true/);
   assert.match(job.steps.at(-1).run, /automaticAdapterTested,false/);
+  assert.match(job.steps.at(-1).run, /updateRollback,"verified_previous_bytes"/);
+  assert.match(job.steps.at(-1).run, /updateChecks.length,2/);
+  assert.match(job.steps.at(-1).run, /conflictRejected,true/);
 });
