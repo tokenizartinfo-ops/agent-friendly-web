@@ -11,8 +11,18 @@ const images = {
 const id = 'afw-wp-' + randomUUID();
 const wp = id + '-web', db = id + '-db';
 const password = randomBytes(24).toString('hex');
-const docker = args => execFileSync('docker', args, { encoding: 'utf8', timeout: 120000,
-  maxBuffer: 1048576, stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+let dockerDiagnostic;
+const docker = args => {
+  try {
+    return execFileSync('docker', args, { encoding: 'utf8', timeout: 120000,
+      maxBuffer: 1048576, stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+  } catch (error) {
+    dockerDiagnostic = { operation: args[0], status: error.status,
+      // Only image/network bootstrap output, never exec commands or DB logs.
+      detail: ['pull', 'network'].includes(args[0]) ? String(error.stderr ?? '').slice(0, 1500) : null };
+    throw error;
+  }
+};
 const php = code => docker(['exec', wp, 'php', '-r', code]);
 const sha = value => createHash('sha256').update(value).digest('hex');
 const files = { '/llms.txt': '# Synthetic AFW test\n', '/llms-full.txt': '# Synthetic AFW detail\n' };
@@ -99,6 +109,7 @@ try {
   report.rollback = 'verified_absent'; report.status = 'passed';
 } catch (error) {
   report.status = 'failed'; report.phase = phase; process.exitCode = 1;
+  report.dockerDiagnostic = dockerDiagnostic;
   // Never export exec error objects: command arguments contain ephemeral DB access.
   report.failure = { code: error.code === 'ERR_ASSERTION' ? 'assertion_failed' : 'runtime_failed',
     actual: typeof error.actual === 'number' ? error.actual : null,
