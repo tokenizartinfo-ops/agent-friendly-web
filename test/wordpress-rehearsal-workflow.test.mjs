@@ -57,3 +57,14 @@ test('native WordPress rehearsal is explicit, bounded and separate from Playgrou
   const native = readFileSync(new URL('../scripts/Test-NativeWordPressDeliveryHttp.mjs', import.meta.url), 'utf8');
   assert.match(native, /--protocol=TCP/);
 });
+
+test('native WordPress gate requires persistent recovery after partial interruption', () => {
+  const workflow = parse(readFileSync(new URL('../.github/workflows/wordpress-rehearsal.yml', import.meta.url), 'utf8'));
+  const enforce = workflow.jobs.native_wordpress.steps.at(-1).run;
+  assert.match(enforce, /interruptedRecovery.status,"verified_previous_bytes"/);
+  assert.match(enforce, /interruptedRecovery.interruptionExit,86/);
+  assert.match(enforce, /interruptedRecovery.corruptBackupRejected,true/);
+  assert.match(enforce, /interruptedRecovery.thirdPartyRejected,true/);
+  assert.match(enforce, /interruptedRecovery.repeatWrites,0/);
+  assert.match(enforce, /interruptedRecovery.httpChecks.length,2/);
+});

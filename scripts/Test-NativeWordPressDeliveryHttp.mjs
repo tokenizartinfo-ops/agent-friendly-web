@@ -141,6 +141,94 @@ try {
   for (const path of Object.keys(files)) assert.equal(replaceExpected(path, sha(updated[path]), backups[path]), 'written');
   for (const check of report.updateChecks) check.restoredSha256 = await verifyBytes(check.path, backups[check.path]);
   report.updateRollback = 'verified_previous_bytes';
+  phase = 'persistent_backup_and_partial_interruption';
+  const privateDir = '/tmp/' + id + '-backup';
+  // Every php() call is a fresh process. Recovery receives no original file bytes.
+  const save = `$save=function($p,$b,$mode){$f=fopen($p,$mode); if(!$f)exit(1);
+    if(fwrite($f,$b)!==strlen($b)||!fflush($f)||!fsync($f))exit(1); fclose($f);};`;
+  const nextEncoded = Buffer.from(JSON.stringify(Object.fromEntries(
+    Object.entries(updated).map(([path, bytes]) => [path, bytes.toString('base64')])
+  ))).toString('base64');
+  php(`${save}
+    if(!mkdir('${privateDir}',0700))exit(1); umask(0077);
+    $next=json_decode(base64_decode('${nextEncoded}'),true,512,JSON_THROW_ON_ERROR); $m=[];
+    foreach(['/llms.txt','/llms-full.txt'] as $path){
+      $old=file_get_contents('/var/www/html'.$path); $new=base64_decode($next[$path],true);
+      $save('${privateDir}'.$path,$old,'x'); $save('${privateDir}'.$path.'.next',$new,'x');
+      $m[$path]=['before'=>hash('sha256',$old),'after'=>hash('sha256',$new)];
+    }
+    $save('${privateDir}/manifest.json',json_encode($m),'x');`);
+  let interruptionExit;
+  try {
+    php(`${save}
+      $m=json_decode(file_get_contents('${privateDir}/manifest.json'),true);
+      if(hash_file('sha256','/var/www/html/llms.txt')!==$m['/llms.txt']['before'])exit(1);
+      $save('/var/www/html/llms.txt',file_get_contents('${privateDir}/llms.txt.next'),'w');
+      exit(86);`);
+  } catch (error) { interruptionExit = error.status; }
+  assert.equal(interruptionExit, 86);
+  dockerDiagnostic = undefined; // Planned exit is not a Docker bootstrap failure.
+  await verifyBytes('/llms.txt', updated['/llms.txt']);
+  await verifyBytes('/llms-full.txt', backups['/llms-full.txt']);
+  const recoveryCode = `${save}
+    $result=['status'=>'blocked','writes'=>0,'files'=>[]];
+    try {
+      $m=json_decode(file_get_contents('${privateDir}/manifest.json'),true,512,JSON_THROW_ON_ERROR);
+      $plan=[];
+      foreach(['/llms.txt','/llms-full.txt'] as $path){
+        $result['files'][$path]='not_changed';
+        $old=file_get_contents('${privateDir}'.$path);
+        $hash=hash_file('sha256','/var/www/html'.$path);
+        if(hash('sha256',$old)!==$m[$path]['before']||
+          !in_array($hash,[$m[$path]['before'],$m[$path]['after']],true)){
+          $result['files'][$path]='blocked'; throw new Exception('conflict');
+        }
+        $plan[$path]=['bytes'=>$old,'current'=>$hash];
+      }
+      foreach($plan as $path=>$item){
+        if(hash_file('sha256','/var/www/html'.$path)!==$item['current'])throw new Exception('conflict');
+        if($item['current']!==$m[$path]['before']){
+          $save('/var/www/html'.$path,$item['bytes'],'w'); $result['writes']++;
+          $result['files'][$path]='restored';
+        } else $result['files'][$path]='already_original';
+        if(hash_file('sha256','/var/www/html'.$path)!==$m[$path]['before'])throw new Exception('verify');
+      }
+      $result['status']='restored';
+    } catch(Throwable $e){$result['status']=$result['writes']?'partial':'blocked';}
+    echo json_encode($result);`;
+  const recovery = () => JSON.parse(php(recoveryCode));
+  report.interruptedRecovery = { interruptionExit, status: 'pending', httpChecks: [] };
+  phase = 'persistent_corrupt_backup_guard';
+  php("file_put_contents('" + privateDir + "/llms-full.txt','damaged');");
+  const corrupt = recovery();
+  assert.equal(corrupt.status, 'blocked'); assert.equal(corrupt.writes, 0);
+  await verifyBytes('/llms.txt', updated['/llms.txt']);
+  await verifyBytes('/llms-full.txt', backups['/llms-full.txt']);
+  report.interruptedRecovery.corruptBackupRejected = true;
+  // Repair only the synthetic fixture from its still-original second document.
+  php(`copy('/var/www/html/llms-full.txt','${privateDir}/llms-full.txt');`);
+  phase = 'persistent_third_party_guard';
+  php("file_put_contents('/var/www/html/llms-full.txt','Synthetic third-party edit');");
+  const conflict = recovery();
+  assert.equal(conflict.status, 'blocked'); assert.equal(conflict.writes, 0);
+  await verifyBytes('/llms.txt', updated['/llms.txt']);
+  await verifyBytes('/llms-full.txt', Buffer.from('Synthetic third-party edit'));
+  report.interruptedRecovery.thirdPartyRejected = true;
+  php(`copy('${privateDir}/llms-full.txt','/var/www/html/llms-full.txt');`);
+  phase = 'persistent_fresh_process_recovery';
+  const recovered = recovery();
+  assert.equal(recovered.status, 'restored'); assert.equal(recovered.writes, 1);
+  assert.deepEqual(recovered.files, { '/llms.txt': 'restored', '/llms-full.txt': 'already_original' });
+  for (const path of Object.keys(files)) {
+    report.interruptedRecovery.httpChecks.push({ path,
+      restoredSha256: await verifyBytes(path, backups[path]), beforeSha256: sha(backups[path]),
+      get: 200, head: 200 });
+  }
+  const repeated = recovery();
+  assert.equal(repeated.status, 'restored'); assert.equal(repeated.writes, 0);
+  report.interruptedRecovery.repeatWrites = repeated.writes;
+  report.interruptedRecovery.files = recovered.files;
+  report.interruptedRecovery.status = 'verified_previous_bytes';
   phase = 'filesystem_rollback';
   for (const [path, body] of Object.entries(files)) {
     assert.equal(php(`if(hash_file('sha256','/var/www/html${path}')!=='${sha(body)}')exit(1); echo unlink('/var/www/html${path}')?'removed':'failed';`), 'removed');

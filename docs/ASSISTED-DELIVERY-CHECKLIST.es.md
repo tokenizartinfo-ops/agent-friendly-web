@@ -34,6 +34,8 @@ Te avisaremos antes de publicar y comprobaremos que el sitio siga funcionando."
       se registra como ausencia, no como archivo vacio.
 - [ ] Comprobar portada y acordar quien restaura si una prueba falla. No comenzar
       sin acceso de recuperacion utilizable durante la ventana.
+- [ ] Confirmar que la copia puede abrirse y verificarse desde una sesion nueva;
+      no depender de la memoria, pestana o proceso que realizo la publicacion.
 
 ## 3. Publicar y verificar el lote
 
@@ -51,6 +53,8 @@ Te avisaremos antes de publicar y comprobaremos que el sitio siga funcionando."
 
 - [ ] Confirmar que el archivo actual sigue siendo la version de este lote. Un
       cambio posterior obliga a revision humana: no restaurar encima de otro trabajo.
+- [ ] Verificar todas las copias y los estados del lote antes de restaurar el primer
+      archivo. Copia corrupta, archivo ausente inesperado o cambio ajeno: detenerse.
 - [ ] Si existia antes, restaurar sus bytes guardados; no regenerar el texto ni borrar
       el archivo. Si no existia, retirar solo el archivo creado por el lote.
 - [ ] Repetir verificacion HTTP y hash: anterior existente debe responder 200 con
@@ -91,3 +95,4 @@ ventana coordinada sin escritores concurrentes. No hay atomicidad global del par
 Copias de prueba en memoria no prueban recuperacion durable del hosting: el cliente
 necesita su copia persistente y recuperacion verificable antes de publicar.
 Resultados y versiones: [ensayos del PR #50](https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/50).
+Revision consolidada y siguiente gate: [revision del piloto del 11 de septiembre](WORDPRESS-PILOT-REVIEW-2026-09-11.es.md).
