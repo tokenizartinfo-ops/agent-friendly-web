@@ -219,3 +219,41 @@ del cliente. La checklist unica incorpora unidad por lote, tres contactos humano
 y medicion de trabajo/espera. Conservar el resultado tecnico separado de cualquier
 declaracion de entrega comercial real: aun no se ha realizado un piloto de cliente
 medido con este procedimiento.
+
+## Ensayo conectado de capsula, entrega y recibo
+
+`scripts/Rehearse-AssistedDelivery.mjs` conecta `buildPublicationCapsule` y
+`capsuleState` existentes con el worker sintetico de recuperacion. No agrega una
+nueva API de producto. Los documentos generados son los bytes que se usan en
+la actualizacion local; no se sustituyen por placeholders. Tres idiomas declarados
+mantienen un solo lote de dos archivos, sin simular traducciones que no se generaron.
+
+Ejecucion observada: 2026-09-11T17:42:17.004Z, restaurante ficticio bajo `.example`,
+sin consultas de red. Estado final `restored`; primer archivo restaurado y segundo
+sin modificar. Hashes finales iguales a los originales; limpieza verificada.
+
+| Actividad medida automaticamente | Milisegundos observados |
+| --- | --- |
+| Generacion de capsula | 11.218 |
+| Evaluacion de aprobaciones simuladas | 0.316 |
+| Preparacion del entorno temporal | 19.534 |
+| Publicacion parcial y comprobacion | 252.813 |
+| Recuperacion y comprobacion | 249.570 |
+| Limpieza | 11.012 |
+| Total, incluido overhead | 547.393 |
+
+Tiempo humano, espera del proveedor y costo LLM: `null`. Esto NO significa que
+una entrega comercial cueste cero o tarde medio segundo. No se midieron relevamiento,
+redaccion humana, coordinacion, acceso al hosting, carga por panel, CDN ni aprobacion
+real. No se prueban formularios, audio, correo, identidad ni HTTP en este comando.
+Las pruebas WordPress/HTTP anteriores son evidencia separada, no una propiedad
+heredada automaticamente por esta ejecucion local.
+
+Los otros escenarios ensayan proveedor pendiente y ventana vencida. Ambos bloquean
+antes de crear el entorno de publicacion; no convierten una capsula preparada en
+permiso de escritura. Los tres escenarios estan cubiertos por tests y los seis
+tests de recuperacion anteriores siguen pasando con archivos aprobados externos.
+
+Siguiente uso: revisar el recibo con un operador y registrar manualmente en la
+misma checklist las actividades humanas de una entrega asistida autorizada. No
+ampliar la automatizacion para rellenar metricas todavia desconocidas.

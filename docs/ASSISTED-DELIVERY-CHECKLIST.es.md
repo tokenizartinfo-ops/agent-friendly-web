@@ -115,3 +115,20 @@ Copias de prueba en memoria no prueban recuperacion durable del hosting: el clie
 necesita su copia persistente y recuperacion verificable antes de publicar.
 Resultados y versiones: [ensayos del PR #50](https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/50).
 Revision consolidada y siguiente gate: [revision del piloto del 11 de septiembre](WORDPRESS-PILOT-REVIEW-2026-09-11.es.md).
+
+## Ensayar sin un cliente ni accesos
+
+En la rama del piloto, el siguiente comando reutiliza el generador de capsulas y
+emite un unico recibo JSON con tiempos y hashes. Solo usa datos ficticios y disco
+temporal; no recibe destinos ni credenciales y no publica en Internet.
+
+```sh
+node scripts/Rehearse-AssistedDelivery.mjs interrupted
+node scripts/Rehearse-AssistedDelivery.mjs missing-provider
+node scripts/Rehearse-AssistedDelivery.mjs expired
+```
+
+El primer escenario termina `restored`, no `published`: se revierte deliberadamente
+el lote parcial. Los otros dos terminan `blocked` sin intentar publicar. Las
+aprobaciones son simuladas, no consentimiento ni identidad verificados. Esta prueba
+no sustituye los ensayos WordPress/HTTP ni la checklist de un hosting real.

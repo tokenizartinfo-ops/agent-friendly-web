@@ -22,6 +22,8 @@ async function fixture(t) {
     await rm(root, { recursive: true });
   });
   await mkdir(join(root, 'public'));
+  await mkdir(join(root, 'approved'));
+  for (const name of names) await writeFile(join(root, 'approved', name), `# Synthetic revision 2: ${name}\r\n`);
   await writeFile(join(root, 'fixture.json'), JSON.stringify({ syntheticOnly: true }));
   for (const [i, name] of names.entries()) await writeFile(join(root, 'public', name), old[i]);
   return root;

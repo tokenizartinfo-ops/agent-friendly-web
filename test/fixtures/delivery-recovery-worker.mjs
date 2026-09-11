@@ -6,7 +6,6 @@ import { tmpdir } from 'node:os';
 
 // Synthetic local experiment only. Not a hosting connector or production recovery tool.
 const names = ['llms.txt', 'llms-full.txt'];
-const next = names.map(name => Buffer.from(`# Synthetic revision 2: ${name}\r\n`));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const receipt = { syntheticOnly: true, remoteMutation: false, status: 'blocked', writes: 0,
   files: names.map(path => ({ path, status: 'not_changed' })) };
@@ -29,6 +28,9 @@ try {
   assert.deepEqual(JSON.parse(await regular(join(root, 'fixture.json'))), { syntheticOnly: true });
   const web = join(root, 'public'), backup = join(root, 'backup');
   assert.equal(await realpath(web), web);
+  const approved = join(root, 'approved');
+  assert.equal(await realpath(approved), approved);
+  const next = await Promise.all(names.map(name => regular(join(approved, name))));
   if (mode === 'interrupt') {
     const previous = await Promise.all(names.map(name => regular(join(web, name))));
     await mkdir(backup, { mode: 0o700 }); // Existing backup must never be replaced.
