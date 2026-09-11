@@ -94,3 +94,23 @@ Aprendizaje reutilizable: antes de pedir accesos, comparar sitio, paquete propue
 y fuente local/versionada. Si el sitio ya contiene la version prevista, conservar
 el recibo y evitar una entrega redundante; si hay cambios locales sin confirmar,
 registrar esa limitacion de procedencia sin inventar una release.
+
+## Cierre de conciliacion local
+
+Posteriormente se reviso el delta y se preparo una copia aislada en el repositorio
+del cliente, rama `review/tokenizart-public-index-reconciliation-2026-09-11`,
+commit local `c8d1dc5`. Incluye solamente los dos indices, una prueba de hashes,
+la regla LF de esos archivos y su nota de procedencia. Las cuatro pruebas de
+`test/discovery-pack.test.mjs` pasaron. La copia original con otros cambios
+pendientes no fue modificada y la rama de revision quedo limpia.
+
+Este commit registra los bytes observados despues de su publicacion; no prueba
+retrospectivamente el commit desplegado. No se publico la rama, no se genero una
+release, no se copio el manifest global de Atelier ni se actualizo el ZIP de AFW.
+Por ello se mantiene `blocked_revision_mismatch` para el paquete historico.
+
+Resultado: revision cerrada sin escritura productiva. Una nueva entrega necesita
+un cambio concreto y su evidencia; no requiere repetir instalaciones para marcar
+actividad. La siguiente validacion comercial debe medir una entrega asistida real
+con alcance acotado, tiempo humano y espera de proveedor, sin presentar los
+tiempos sinteticos del piloto como costos o plazos comerciales.
