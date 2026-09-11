@@ -68,3 +68,19 @@ test('native WordPress gate requires persistent recovery after partial interrupt
   assert.match(enforce, /interruptedRecovery.repeatWrites,0/);
   assert.match(enforce, /interruptedRecovery.httpChecks.length,2/);
 });
+
+test('single worker diagnostic is opt-in and preserves the default failure gate', () => {
+  const script = readFileSync(new URL('../scripts/Test-WordPressDisposableHttp.mjs', import.meta.url), 'utf8');
+  assert.match(script, /--single-worker/);
+  assert.match(script, /singleWorker \? \{ workers: 1 \} : \{\}/);
+  assert.match(script, /internalsKeyForTesting/);
+  const workflow = parse(readFileSync(new URL('../.github/workflows/wordpress-rehearsal.yml', import.meta.url), 'utf8'));
+  assert(!workflow.jobs.rehearsal.steps.find(s => s.id === 'rehearsal').run.includes('--single-worker'));
+  const contrast = workflow.jobs.playground_single_worker;
+  assert.equal(contrast.needs, undefined);
+  assert.equal(contrast['timeout-minutes'], 8);
+  assert.equal(contrast.steps[0].with['persist-credentials'], false);
+  assert.match(contrast.steps.find(s => s.id === 'single').run, /--single-worker/);
+  assert.match(contrast.steps.at(-1).run, /workerCount,1/);
+  assert.match(contrast.steps.at(-1).run, /c.status,404/);
+});

@@ -6,13 +6,15 @@ import { createHash } from 'node:crypto';
 import { performance } from 'node:perf_hooks';
 import { createRequire } from 'node:module';
 
-// Explicit opt-in integration test. Uses only a fresh, unmounted synthetic WP.
+// Fresh synthetic WP, no caller mounts. CLI creates its own temporary shared mounts.
 const root = process.argv[2];
 if (!root) throw new Error('Pass the local @wp-playground/cli package directory');
+assert(process.argv.length === 3 || (process.argv.length === 4 && process.argv[3] === '--single-worker'));
+const singleWorker = process.argv[3] === '--single-worker';
 const metadata = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 assert.equal(metadata.name, '@wp-playground/cli');
 assert.equal(metadata.version, '3.1.53');
-const { runCLI } = await import(pathToFileURL(resolve(root, 'index.js')).href);
+const { runCLI, internalsKeyForTesting } = await import(pathToFileURL(resolve(root, 'index.js')).href);
 const runtimeRequire = createRequire(resolve(root, 'package.json'));
 const { logger, LogSeverity } = await import(pathToFileURL(runtimeRequire.resolve('@php-wasm/logger')).href);
 const runtimeErrors = [];
@@ -31,7 +33,11 @@ let report = { contract: 'agentfriendly.wordpress-http-rehearsal.local.v1',
   mode: 'synthetic_disposable', status: 'running', checks: [], remoteMutation: false };
 try {
   cli = await runCLI({ command: 'server', port: 0, wp: '6.8.8', php: '8.3',
-    login: false, verbosity: 'quiet', mount: [], 'mount-before-install': [] });
+    login: false, verbosity: 'quiet', mount: [], 'mount-before-install': [],
+    ...(singleWorker ? { workers: 1 } : {}) });
+  report.workerCount = cli[internalsKeyForTesting].workerThreadCount;
+  report.workerMode = singleWorker ? 'single' : 'default';
+  if (singleWorker) assert.equal(report.workerCount, 1);
   // Synthetic runtime only: preserve the adapter exception hidden by quiet mode.
   logger.handlers.push(captureError);
   logger.setSeverityFilterLevel(LogSeverity.Error);
@@ -109,7 +115,7 @@ try {
   assert.equal(report.homeAfter, 200);
   const after = await cli.playground.run({ code: "<?php require '/wordpress/wp-load.php'; echo json_encode(['name'=>get_option('blogname')]);" });
   assert.equal(JSON.parse(after.text).name, initial.name);
-  report = { contract: 'agentfriendly.wordpress-http-rehearsal.local.v1', mode: 'synthetic_disposable', status: 'passed',
+  report = { ...report, contract: 'agentfriendly.wordpress-http-rehearsal.local.v1', mode: 'synthetic_disposable', status: 'passed',
     wordpress: initial.version, checks, rollback: 'verified_absent', homepage: 200,
     elapsedMs: Math.round(performance.now() - started), remoteMutation: false,
     limits: ['Synthetic direct filesystem handoff, not CMS plugin installation',

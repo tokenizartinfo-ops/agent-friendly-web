@@ -14,6 +14,36 @@ permissions:
   contents: read
 
 jobs:
+  playground_single_worker:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.2'
+      - name: Install pinned diagnostic runtime
+        run: npm install --prefix "$RUNNER_TEMP/afw-wp-runtime" --no-audit --no-fund --ignore-scripts @wp-playground/cli@3.1.53
+      - name: Contrast same scenario with one worker
+        id: single
+        continue-on-error: true
+        run: node scripts/Test-WordPressDisposableHttp.mjs "$RUNNER_TEMP/afw-wp-runtime/node_modules/@wp-playground/cli" --single-worker > "$RUNNER_TEMP/afw-single-worker-receipt.json"
+      - name: Preserve contrast receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-single-worker-receipt
+          path: ${{ runner.temp }}/afw-single-worker-receipt.json
+          retention-days: 7
+      - name: Enforce single-worker contrast
+        if: always()
+        env:
+          SINGLE_OUTCOME: ${{ steps.single.outcome }}
+        run: |
+          if [ "$SINGLE_OUTCOME" != "success" ]; then exit 1; fi
+          node --input-type=module -e 'import {readFileSync} from "node:fs"; import assert from "node:assert/strict"; const r=JSON.parse(readFileSync(process.env.RUNNER_TEMP+"/afw-single-worker-receipt.json","utf8")); assert.equal(r.status,"passed"); assert.equal(r.workerCount,1); assert.equal(r.workerMode,"single"); assert.equal(r.rollback,"verified_absent"); assert.equal(r.serverClosed,true); assert.equal(r.checks.length,2); for(const c of r.rollbackObservations){assert.equal(c.status,404); assert.equal(c.filesystemExists,false);}'
   native_wordpress:
     runs-on: ubuntu-24.04
     timeout-minutes: 8
