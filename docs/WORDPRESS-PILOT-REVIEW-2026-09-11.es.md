@@ -149,3 +149,51 @@ Antes de un cliente real: cerrar la discrepancia de Playground con una reproducc
 minima o una decision explicita sobre su alcance, revisar el PR y ensayar una entrega
 asistida completa con la checklist y un recibo unico. Medir tiempo humano, esperas
 y excepciones; no construir conectores nuevos ni prometer automatizacion universal.
+
+## Diagnostico adicional: numero de workers de Playground
+
+Revision `092ff9fe5c04ca4c36d723178b6bd8cdd3da8712`;
+[ejecucion 34628001403](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/34628001403).
+Se comparo el mismo script, WordPress 6.8.8 y CLI 3.1.53, cambiando solo la
+opcion de workers. No se relajaron los asserts ni se convirtio el 500 en exito.
+
+| Variante Linux | Workers observados | GET despues de borrar ambos archivos | Portada | Resultado |
+| --- | --- | --- | --- | --- |
+| Playground predeterminado | 3 | 500 / 500 | 200 | Fallido |
+| Playground `--single-worker` | 1 | 404 / 404 | 200 | Correcto |
+| WordPress nativo con recuperacion persistente | No aplica | 404 / 404 | 200 | Correcto |
+| PHP nativo de contraste | No aplica | 404 / 404 | 200 | Correcto |
+
+Ambos recibos Playground confirman archivos ausentes y servidor cerrado. El archivo
+nunca creado devuelve 404 en ambas variantes. El contraste de un worker tambien
+paso localmente en Windows; el predeterminado reprodujo un 500 en uno de los archivos.
+
+El codigo instalado de CLI crea varios workers y expone `playground` mediante
+`createObjectPoolProxy`; cada llamada toma una instancia disponible y la devuelve
+al pool. El manejador HTTP de `@php-wasm/universal` comprueba `isFile` antes de
+`readFileAsBuffer`, donde ocurre el error de archivo ausente. CLI crea mounts
+temporales propios aunque no se proporcionen mounts del usuario.
+
+Conclusion delimitada: el fallo observado depende del modo multiproceso en este
+ensayo. Es compatible con metadata de filesystem desincronizada entre workers;
+no se ha identificado ni parcheado la linea interna que causa esa desincronizacion.
+No atribuirlo a WordPress productivo, al idioma del sitio ni a los documentos AFW.
+
+Reproduccion (runtime de CLI 3.1.53 instalado por separado):
+
+```sh
+node scripts/Test-WordPressDisposableHttp.mjs <directorio-paquete-cli>
+node scripts/Test-WordPressDisposableHttp.mjs <directorio-paquete-cli> --single-worker
+```
+
+Son instalaciones nuevas y sinteticas, nunca un hosting de cliente. El job
+`playground_single_worker` es independiente; el job original `rehearsal` sigue
+fallando y sigue imponiendo su resultado. El PR no esta fusionado.
+
+Recomendacion para revision: usar WordPress nativo como referencia del piloto de
+entrega asistida y Playground con un worker para ensayos secuenciales; mantener
+el multiproceso como incidencia de compatibilidad explicitamente separada. No
+invertir el piloto comercial en reescribir un runtime externo. Cambiar la matriz
+de gates requiere una decision visible de revision, no ocultar el fallo mediante
+`continue-on-error` global. El proximo bloque es esa revision de alcance y un
+recibo de entrega medible, no mas capas documentales ni nuevos conectores.
