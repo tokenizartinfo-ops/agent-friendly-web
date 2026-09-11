@@ -40,10 +40,12 @@ try {
     assert([...Object.keys(files), '/', '/afw-never-created.txt'].includes(path));
     const response = await fetch(origin + path, { method, redirect: 'manual', signal: AbortSignal.timeout(3000) });
     const chunks = []; let length = 0;
-    for await (const chunk of response.body) {
-      length += chunk.length;
-      assert(length <= 131072, 'bounded response required');
-      chunks.push(chunk);
+    if (response.body) {
+      for await (const chunk of response.body) {
+        length += chunk.length;
+        assert(length <= 131072, 'bounded response required');
+        chunks.push(chunk);
+      }
     }
     return { status: response.status, type: response.headers.get('content-type'), body: Buffer.concat(chunks) };
   };
