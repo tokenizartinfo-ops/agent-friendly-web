@@ -257,3 +257,26 @@ tests de recuperacion anteriores siguen pasando con archivos aprobados externos.
 Siguiente uso: revisar el recibo con un operador y registrar manualmente en la
 misma checklist las actividades humanas de una entrega asistida autorizada. No
 ampliar la automatizacion para rellenar metricas todavia desconocidas.
+
+## Cierre local de consolidacion y paso a entrega asistida
+
+La checklist unica ya incorpora una hoja por lote para medir trabajo humano,
+esperas, ejecucion y costos conocidos. No se agrega otro conector, API, formulario
+ni entrega por idioma. El preflight real Tokenizart termino sin escrituras porque
+las copias locales revisadas coinciden con lo publicado; su recibo vive en
+`TOKENIZART-ASSISTED-DELIVERY-PREFLIGHT-2026-09-11.es.md`. No contar ese resultado
+como una publicacion nueva ni como un piloto comercial de instalacion completado.
+
+Verificacion local de esta consolidacion: `npm test`, 424 pruebas correctas;
+`npm run lint`, cero errores y una advertencia preexistente de `no-img-element`
+en `app/components/comic-home-intro.tsx:36`; `npm run build`, completo.
+No se repitieron aqui las pruebas Docker/HTTP remotas: su evidencia y alcance
+son los registrados arriba. No se fusiono el PR ni se desplego una nueva version.
+
+La preparacion local queda consolidada para revision. El siguiente gate no es
+otro simulador: seleccionar una necesidad real y acotada, completar preflight,
+confirmar contenido y recuperacion, coordinar una ventana y medir una entrega
+asistida con el mismo recibo. La identidad, los permisos y la recuperacion de ese
+hosting siguen pendientes hasta verificarlos para ese caso concreto. Ningun
+resultado de este ensayo los sustituye. Si no existe un delta necesario, cerrar
+sin cambios y avanzar con otro caso; no crear trabajo para completar el gate.

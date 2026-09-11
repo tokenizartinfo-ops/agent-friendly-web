@@ -105,6 +105,49 @@ verificado / restaurado / bloqueado. Portada antes/despues: pendiente.
 Tiempo activo: null. Espera: null. Consumo atribuible: null. Intervenciones: null.
 Incidencias, responsable y siguiente accion: pendiente. Sin secretos en el recibo.
 
+### Hoja de medicion del primer lote real
+
+Completar dentro del mismo recibo, no crear una planilla por archivo o idioma.
+Una fila corresponde a una actividad continua. IDs de responsables y referencias
+de evidencia, sin claves ni contenido de correos privados. Si falta una medicion,
+dejar `null`; no reconstruir tiempos a partir de recuerdos como si fueran medidos.
+
+| Actividad / intento | Inicio UTC | Fin UTC | Minutos humanos activos | Minutos de espera | Ejecucion automatica ms | Costo directo USD | Evidencia / motivo |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Relevamiento y contenido | null | null | null | null | null | null | pendiente |
+| Coordinacion y autorizacion | null | null | null | null | null | null | pendiente |
+| Publicacion o cierre sin cambios | null | null | null | null | null | null | pendiente |
+| Verificacion y posible recuperacion | null | null | null | null | null | null | pendiente |
+| Entrega del recibo | null | null | null | null | null | null | pendiente |
+
+- Tiempo de calendario: desde apertura a cierre; no sumarlo al trabajo activo.
+- Trabajo humano: minutos-persona efectivos. Registrar reintentos con el mismo ID
+  de lote; no duplicar sesiones ni contar como trabajo la espera desatendida.
+- Espera: identificar dependencia (cliente/proveedor/cache), sin sumar intervalos
+  superpuestos como si fueran consecutivos. No mantener un agente esperando.
+- Costos: guardar importes medidos y su referencia. Una suscripcion mensual no es
+  costo atribuible al lote sin una regla de reparto; los tokens no tienen costo USD
+  verificable sin proveedor/modelo/tarifa aplicable. No leer secretos para medirlos.
+- Si alguna partida es desconocida, el total es incompleto. Mostrar subtotal conocido
+  y partidas faltantes, no margen ni costo total definitivos. El valor de la hora
+  humana se define aparte; no tratar el trabajo de Gabriel como gratuito.
+
+Cierre sin cambios es un resultado valido del preflight, no una publicacion ni una
+mejora de puntuacion. El caso Tokenizart del 11 de septiembre pertenece a esa clase.
+Mantener separado de los lotes publicados al comparar plazos y costos.
+
+### Decision tras el primer caso
+
+Elegir un sitio con necesidad concreta, contenido publico aprobado, dos rutas y
+proveedor identificado. Si el preflight muestra que ya tiene los bytes previstos,
+cerrar sin escritura; no modificarlo solo para completar el piloto.
+
+Tras el primer lote real, revisar una sola vez: resultado verificado o bloqueo,
+tiempo humano, esperas, contactos requeridos, excepciones y costos conocidos.
+Automatizar primero la tarea repetitiva observada mas costosa. No crear conectores
+para todos los hostings ni fijar un precio definitivo a partir de un solo caso.
+Si no hay recuperacion utilizable, acotar el servicio a preparacion y coordinacion.
+
 ## Limites y evidencia tecnica
 
 La prueba nativa descartable cubre entrega asistida sobre WordPress con Apache.
