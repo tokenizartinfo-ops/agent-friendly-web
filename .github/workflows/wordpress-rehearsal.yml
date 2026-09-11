@@ -7,12 +7,41 @@ on:
       - '.github/workflows/wordpress-rehearsal.yml'
       - 'scripts/Test-WordPressDisposableHttp.mjs'
       - 'scripts/Test-NativePhpDeliveryHttp.mjs'
+      - 'scripts/Test-NativeWordPressDeliveryHttp.mjs'
       - 'test/wordpress-rehearsal-workflow.test.mjs'
 
 permissions:
   contents: read
 
 jobs:
+  native_wordpress:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.2'
+      - name: Native WordPress assisted handoff
+        id: native_wp
+        continue-on-error: true
+        run: node scripts/Test-NativeWordPressDeliveryHttp.mjs > "$RUNNER_TEMP/afw-native-wordpress-receipt.json"
+      - name: Preserve WordPress receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-native-wordpress-receipt
+          path: ${{ runner.temp }}/afw-native-wordpress-receipt.json
+          retention-days: 7
+      - name: Enforce assisted WordPress result
+        if: always()
+        env:
+          WP_OUTCOME: ${{ steps.native_wp.outcome }}
+        run: |
+          if [ "$WP_OUTCOME" != "success" ]; then exit 1; fi
+          node --input-type=module -e 'import {readFileSync} from "node:fs"; import assert from "node:assert/strict"; const r=JSON.parse(readFileSync(process.env.RUNNER_TEMP+"/afw-native-wordpress-receipt.json","utf8")); assert.equal(r.status,"passed"); assert.equal(r.cleanupVerified,true); assert.equal(r.automaticAdapterTested,false); assert.equal(r.wordpressTested,true); assert.equal(r.rollback,"verified_absent"); assert.equal(r.checks.length,2);'
   native_php:
     runs-on: ubuntu-24.04
     timeout-minutes: 3
