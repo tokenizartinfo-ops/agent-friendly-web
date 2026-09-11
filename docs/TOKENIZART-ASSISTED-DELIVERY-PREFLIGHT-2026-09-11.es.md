@@ -114,3 +114,37 @@ un cambio concreto y su evidencia; no requiere repetir instalaciones para marcar
 actividad. La siguiente validacion comercial debe medir una entrega asistida real
 con alcance acotado, tiempo humano y espera de proveedor, sin presentar los
 tiempos sinteticos del piloto como costos o plazos comerciales.
+
+## Siguiente candidato: Atelier, origen separado
+
+Observacion publica del 2026-09-11, sin login ni escritura. PROJECT Agent Friendly
+Web; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT
+public_case_readonly; ORIGIN https://atelier.tokenizart.com; RESOURCE_TYPE
+documentos HTTP; RESOURCE_ID /llms.txt y /llms-full.txt; ALLOWED_ACTION GET/HEAD
+anonimos acotados; ROLLBACK no aplica a lectura. Respuesta limitada a 128 KiB,
+timeout 15 segundos y sin seguir redirecciones.
+
+| Ruta | GET observado UTC | GET / HEAD | MIME | Bytes GET |
+| --- | --- | --- | --- | --- |
+| /llms.txt | 2026-09-11T19:55:49.873Z | 404 / 404 | text/html; charset=utf-8 | 27956 |
+| /llms-full.txt | 2026-09-11T19:55:49.995Z | 404 / 404 | text/html; charset=utf-8 | 27956 |
+
+No hubo redirecciones. Es una necesidad distinta del padre: los dos documentos
+no estan disponibles en esas rutas. No prueba ausencia fisica en disco, averia
+de Atelier ni un problema de DNS. No se midio puntuacion AF o indexacion.
+
+Hay candidatos de contenido en `tokenizart-agentic/discovery/v1/atelier.tokenizart.com/`
+y un procedimiento en `docs/HOSTING-HANDOFF.es.md` del repositorio del cliente.
+No son un despliegue ni documentos automaticamente aprobados para una nueva version.
+El indice candidato enlaza su propio llms-full: publicar y comprobar el par antes
+de anunciarlo desde el padre. La documentacion tecnica consultada no acredita aun
+el mecanismo actual de publicacion persistente y recuperacion del frontend.
+
+Decision: candidato con necesidad real, pendiente de mecanismo de entrega; NO es
+un piloto WordPress ni justifica ampliar el adaptador de WordPress. Siguiente
+comprobacion en el proyecto Tokenizart: identificar componente que sirve esas dos
+rutas, configuracion/version efectiva, mecanismo persistente y rollback acotado.
+Reutilizar capacidades existentes antes de solicitar accesos nuevos; no copiar a
+un contenedor efimero, cambiar DNS ni tocar Core/Owner Live. Si la configuracion
+revela una ruta estatica ya soportada, usarla; si exige codigo o proxy, preparar
+un cambio especifico con pruebas y recuperacion antes de publicar.
