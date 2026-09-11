@@ -4,6 +4,7 @@ import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import { performance } from 'node:perf_hooks';
+import { createRequire } from 'node:module';
 
 // Explicit opt-in integration test. Uses only a fresh, unmounted synthetic WP.
 const root = process.argv[2];
@@ -12,6 +13,15 @@ const metadata = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 assert.equal(metadata.name, '@wp-playground/cli');
 assert.equal(metadata.version, '3.1.53');
 const { runCLI } = await import(pathToFileURL(resolve(root, 'index.js')).href);
+const runtimeRequire = createRequire(resolve(root, 'package.json'));
+const { logger, LogSeverity } = await import(pathToFileURL(runtimeRequire.resolve('@php-wasm/logger')).href);
+const runtimeErrors = [];
+const captureError = entry => {
+  if (entry.severity.level > 1 || runtimeErrors.length >= 6) return;
+  const error = entry.message;
+  runtimeErrors.push({ phase, message: String(error?.message ?? error).slice(0, 1200),
+    stack: typeof error?.stack === 'string' ? error.stack.split('\n').slice(0, 6).join('\n').slice(0, 2400) : null });
+};
 const sha = data => createHash('sha256').update(data).digest('hex');
 const files = { '/llms.txt': '# Synthetic AFW test\n', '/llms-full.txt': '# Synthetic AFW detail\n' };
 const started = performance.now();
@@ -22,6 +32,9 @@ let report = { contract: 'agentfriendly.wordpress-http-rehearsal.local.v1',
 try {
   cli = await runCLI({ command: 'server', port: 0, wp: '6.8.8', php: '8.3',
     login: false, verbosity: 'quiet', mount: [], 'mount-before-install': [] });
+  // Synthetic runtime only: preserve the adapter exception hidden by quiet mode.
+  logger.handlers.push(captureError);
+  logger.setSeverityFilterLevel(LogSeverity.Error);
   // Upstream currently binds without a host argument. Rebind before test traffic.
   const port = cli.server.address().port;
   await new Promise((resolve, reject) => {
@@ -109,6 +122,8 @@ try {
       expected: typeof error?.expected === 'number' ? error.expected : null } };
   process.exitCode = 1;
 } finally {
+  report.runtimeErrors = runtimeErrors;
+  logger.handlers = logger.handlers.filter(handler => handler !== captureError);
   if (cli) await cli[Symbol.asyncDispose]();
 }
 console.log(JSON.stringify({ ...report, serverClosed: true }, null, 2));
