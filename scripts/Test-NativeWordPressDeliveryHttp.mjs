@@ -54,7 +54,8 @@ try {
   let ready = false;
   for (let attempt = 0; attempt < 90; attempt++) {
     try {
-      docker(['exec', db, 'mysql', '-uroot', '-p' + password, '-Dwordpress', '-e', 'SELECT 1']);
+      // MySQL entrypoint's temporary init server has sockets but no networking.
+      docker(['exec', db, 'mysql', '--protocol=TCP', '-h127.0.0.1', '-uroot', '-p' + password, '-Dwordpress', '-e', 'SELECT 1']);
       docker(['exec', wp, 'test', '-f', '/var/www/html/wp-config.php']);
       ready = true; break;
     } catch { await delay(500); }

@@ -54,4 +54,6 @@ test('native WordPress rehearsal is explicit, bounded and separate from Playgrou
   assert.match(job.steps.at(-1).run, /updateRollback,"verified_previous_bytes"/);
   assert.match(job.steps.at(-1).run, /updateChecks.length,2/);
   assert.match(job.steps.at(-1).run, /conflictRejected,true/);
+  const native = readFileSync(new URL('../scripts/Test-NativeWordPressDeliveryHttp.mjs', import.meta.url), 'utf8');
+  assert.match(native, /--protocol=TCP/);
 });
