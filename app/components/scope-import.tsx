@@ -24,10 +24,15 @@ export function ScopeImport({locale,website,onUseWebsite,projectId,revision,canS
   const [reviewedFor,setReviewedFor]=useState<string|null>(null);
   const sequence=useRef(0);
   useEffect(()=>{
-    try {
-      const pending=takeScopeHandoff(window.sessionStorage);
-      if(pending){touched.current=true;setText(pending);setReviewedFor(null);setStatus(copy.handoff);}
-    } catch { /* Browsers may disable session storage; the file path remains available. */ }
+    let cancelled=false;
+    Promise.resolve().then(()=>{
+      if(cancelled)return;
+      try {
+        const pending=takeScopeHandoff(window.sessionStorage);
+        if(pending){touched.current=true;setText(pending);setReviewedFor(null);setStatus(copy.handoff);}
+      } catch { /* Browsers may disable session storage; the file path remains available. */ }
+    });
+    return()=>{cancelled=true;};
   },[copy.handoff]);
   if(previousProject!==projectId){setPreviousProject(projectId);if(previousProject){setText('');setReviewedFor(null);setBusy(false);}}
 
