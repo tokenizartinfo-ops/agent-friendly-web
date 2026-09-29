@@ -13,7 +13,7 @@ const COPY={
 
 export type ReviewedScope={website:string;scopeText:string;reviewed:true}|null;
 
-export function ScopeImport({locale,website,onUseWebsite,projectId,revision,canSave,request,onReviewChange,onPrepareSeparate}:{locale:'es'|'en'|'pt';website:string;onUseWebsite:(website:string)=>void;projectId:string;revision:number;canSave:boolean;request:typeof fetch;onReviewChange?:(scope:ReviewedScope)=>void;onPrepareSeparate?:(scope:{website:string;scopeText:string}|null)=>void}) {
+export function ScopeImport({locale,website,onUseWebsite,projectId,revision,canSave,request,onReviewChange,onPrepareSeparate,onAvailableScopeChange}:{locale:'es'|'en'|'pt';website:string;onUseWebsite:(website:string)=>void;projectId:string;revision:number;canSave:boolean;request:typeof fetch;onReviewChange?:(scope:ReviewedScope)=>void;onPrepareSeparate?:(scope:{website:string;scopeText:string}|null)=>void;onAvailableScopeChange?:(scope:{website:string;scopeText:string}|null)=>void}) {
   const copy=COPY[locale];
   const [busy,setBusy]=useState(false);
   const touched=useRef(false);
@@ -44,6 +44,7 @@ export function ScopeImport({locale,website,onUseWebsite,projectId,revision,canS
   const matches=useMemo(()=>{try{return text?previewScanScope(text,website).websiteMatches:null;}catch{return false;}},[text,website]);
   const reviewed=reviewedFor===website && matches===true;
   useEffect(()=>{onReviewChange?.(reviewed?{website,scopeText:text,reviewed:true}:null);},[reviewed,website,text,onReviewChange]);
+  useEffect(()=>{onAvailableScopeChange?.(preview&&matches===false?{website:preview.brief.target,scopeText:text}:null);},[preview,matches,text,onAvailableScopeChange]);
   async function read(file?:File) {
     touched.current=true;
     onPrepareSeparate?.(null);
@@ -73,7 +74,7 @@ export function ScopeImport({locale,website,onUseWebsite,projectId,revision,canS
       <p className="scope-origin">{preview.brief.observedUrl}</p><p>{copy.observed}: <time dateTime={preview.brief.checkedAt}>{new Date(preview.brief.checkedAt).toLocaleString(locale)}</time></p>
       <p>{copy.reference}</p>
       <ul>{preview.brief.actions.map(action=><li key={action.id}><strong>{action.title}</strong><p>{action.deliverable}</p></li>)}</ul>
-      {matches===false?<><p role="alert">{copy.mismatch}</p>{projectId&&onPrepareSeparate?<button type="button" onClick={()=>{onPrepareSeparate({website:preview.brief.target,scopeText:text});document.getElementById('project-create')?.scrollIntoView({behavior:'smooth',block:'center'});}}>{locale==='es'?'Preparar otro expediente para este sitio':locale==='en'?'Prepare another dossier for this website':'Preparar outro dossiê para este site'}</button>:null}</>:matches===null?<><p>{copy.empty}</p><button type="button" onClick={()=>onUseWebsite(preview.brief.target)}>{copy.use}</button></>:null}
+      {matches===false?<><p role="alert">{copy.mismatch}</p>{projectId?<p>{locale==='es'?<>Si ya tenés un expediente de este sitio, buscá abajo en <a href="#project-directory-title">Tus expedientes</a> y abrilo con esta referencia.</>:locale==='en'?<>If you already have a dossier for this website, find it below in <a href="#project-directory-title">Your dossiers</a> and open it with this reference.</>:<>Se você já tem um dossiê deste site, encontre-o abaixo em <a href="#project-directory-title">Seus dossiês</a> e abra-o com esta referência.</>}</p>:null}{projectId&&onPrepareSeparate?<button type="button" onClick={()=>{onPrepareSeparate({website:preview.brief.target,scopeText:text});document.getElementById('project-create')?.scrollIntoView({behavior:'smooth',block:'center'});}}>{locale==='es'?'Preparar otro expediente para este sitio':locale==='en'?'Prepare another dossier for this website':'Preparar outro dossiê para este site'}</button>:null}</>:matches===null?<><p>{copy.empty}</p><button type="button" onClick={()=>onUseWebsite(preview.brief.target)}>{copy.use}</button></>:null}
       <label className="scope-review"><input type="checkbox" disabled={matches!==true} checked={reviewed} onChange={event=>setReviewedFor(event.target.checked?website:null)}/>{copy.review}</label>
       {reviewed?<p role="status">{copy.ready} <a href="#dossier-assistant" onClick={()=>{const panel=document.getElementById('dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{copy.assist}</a></p>:null}
       <button type="button" onClick={downloadReference}>{locale==='es'?'Descargar copia de la referencia (.json)':locale==='en'?'Download a copy of the reference (.json)':'Baixar cópia da referência (.json)'}</button>
