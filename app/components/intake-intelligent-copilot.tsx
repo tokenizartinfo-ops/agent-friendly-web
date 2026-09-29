@@ -5,11 +5,17 @@ import { previewIntakeDraft, applyIntakeDraft } from '../../lib/intake-draft-rev
 import { analyzeIntakeNotes } from '../../lib/intake-assistant.mjs';
 import { dossierFieldLabels, dossierValueLabel } from '../../lib/dossier-field-labels.mjs';
 import { classifyCopilotResponse } from '../../lib/copilot-ui-response.mjs';
+import { defaultCopilotSelection } from '../../lib/copilot-review-selection.mjs';
 
 type Draft = Record<string, string | string[]>;
 type Locale = 'es' | 'en' | 'pt';
 type Suggestion = { field: string; value: string | string[]; sourceExcerpt: string };
 type Result = { blocked: boolean; suggestions: Suggestion[]; warning: string };
+const selectionCopy = {
+  es: 'Los campos que ya tienen datos quedan sin seleccionar. Si querés reemplazarlos, marcá la propuesta y revisá la diferencia antes de aplicarla.',
+  en: 'Fields that already contain data stay unselected. To replace them, select the proposal and review the difference before applying it.',
+  pt: 'Campos que já têm dados ficam desmarcados. Para substituí-los, selecione a proposta e revise a diferença antes de aplicá-la.',
+};
 const copy = {
   es: { title: 'Copilot inteligente', intro: 'Contame con tus palabras qué hace tu sitio y qué necesitás. El copilot propone datos; vos decidís qué incorporar.', privacy: 'Al pedir ayuda, este texto se procesa con Workers AI en Cloudflare. No incluyas claves ni datos privados. Nada se guarda o publica automáticamente.', consent: 'Entiendo y acepto enviar este texto a Workers AI en Cloudflare para preparar propuestas. Puedo seguir con la guía sin hacerlo.', grant: 'Activar ayuda con IA para este expediente', revoke: 'Revocar permiso para este expediente', granted: 'La ayuda con IA está autorizada para este expediente. Confirmás cada envío por separado.', revoked: 'El permiso está revocado. Podés seguir con la guía o volver a activarlo cuando quieras.', consentUnavailable: 'No pude comprobar el permiso. El copilot seguirá cerrado hasta que podamos hacerlo.', ask: 'Preparar propuestas', busy: 'Pensando con vos…', unavailable: 'El copilot no está disponible ahora. Podés seguir con la guía del expediente.', session: 'Tu sesión necesita renovarse. Conservá esta pestaña y volvé a iniciar sesión antes de reintentar.', projectUnavailable: 'No encuentro este expediente con tu sesión. Revisá que estés en el expediente correcto; no se aplicó ningún cambio.', rateLimited: 'Llegaste al límite temporal de consultas. Esperá un minuto o seguí con la guía del expediente.', review: 'Revisar cambios', apply: 'Aplicar al borrador', stale: 'El formulario cambió. Volvé a revisar las propuestas.', empty: 'No encontré datos suficientemente claros. Podés contármelo de otra forma.', source: 'Lo escribiste así', evidence: 'Esta propuesta sale de tu texto; todavía no verificamos ese dato en tu sitio.', applied: 'Aplicado al borrador. Revisalo antes de guardar.' },
   en: { title: 'Intelligent copilot', intro: 'Tell me in your own words what your site does and what you need. The copilot proposes details; you decide what to include.', privacy: 'When you ask for help, this text is processed with Workers AI on Cloudflare. Do not include keys or private data. Nothing is saved or published automatically.', consent: 'I understand and agree to send this text to Workers AI on Cloudflare to prepare suggestions. I can continue with the guide without doing so.', grant: 'Enable AI help for this dossier', revoke: 'Revoke permission for this dossier', granted: 'AI help is authorized for this dossier. You confirm each submission separately.', revoked: 'Permission is revoked. You can continue with the guide or enable it again whenever you choose.', consentUnavailable: 'I could not verify permission. The copilot stays closed until I can.', ask: 'Prepare suggestions', busy: 'Thinking with you…', unavailable: 'The copilot is unavailable right now. You can continue with the dossier guide.', session: 'Your session needs to be renewed. Keep this tab open and sign in again before retrying.', projectUnavailable: 'I cannot find this dossier in your session. Check that you opened the right one; no changes were applied.', rateLimited: 'You have reached the temporary request limit. Wait a minute or continue with the dossier guide.', review: 'Review changes', apply: 'Apply to draft', stale: 'The form changed. Review the suggestions again.', empty: 'I could not find clear enough details. You can rephrase them.', source: 'You wrote', evidence: 'This suggestion comes from your text; we have not verified it on your website.', applied: 'Applied to the draft. Review it before saving.' },
@@ -76,7 +82,7 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply }: 
       }
       const answer = await response.json() as Result;
       if (!isCurrent()) return;
-      setResult(answer); setSelected(answer.suggestions.map(item => item.field));
+      setResult(answer); setSelected(defaultCopilotSelection(answer.suggestions,draft));
     } catch { if (isCurrent()) setStatus(t.unavailable); } finally { if (isCurrent()) setBusy(false); }
   }
   return <section className="assistant-prototype" aria-label={t.title}>
@@ -88,7 +94,7 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply }: 
     </div>
     <div className="assistant-review-panel" aria-live="polite">
       {status ? <p role="status">{status}</p> : null}
-      {result ? <><p>{result.suggestions.length ? result.warning : t.empty}</p>{result.suggestions.length ? <p>{t.evidence}</p> : null}
+      {result ? <><p>{result.suggestions.length ? result.warning : t.empty}</p>{result.suggestions.length ? <><p>{t.evidence}</p><p>{selectionCopy[locale]}</p></> : null}
         <div className="assistant-suggestion-list">{result.suggestions.map(item => <label key={item.field}>
           <input type="checkbox" checked={selected.includes(item.field)} onChange={() => { setSelected(current => current.includes(item.field) ? current.filter(value => value !== item.field) : [...current, item.field]); setChanges(null); }} />
           <span><strong>{label(item.field)}</strong><small>{dossierValueLabel(item.field, item.value, locale)}</small><em>{t.source}: {item.sourceExcerpt}</em></span>
