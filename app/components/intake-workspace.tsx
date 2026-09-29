@@ -26,6 +26,7 @@ import { roadmapPresentation } from '../../lib/roadmap-presentation.mjs';
 import { proportionalTargetGuide } from '../../lib/proportional-target.mjs';
 import { readProjectSaveResponse } from '../../lib/project-save-response.mjs';
 import { createObservationSaveAttempt } from '../../lib/observation-save-attempt.mjs';
+import { currentOriginObservations, observationOrigin } from '../../lib/observation-current-origin.mjs';
 import { compareObservationHistory } from '../../lib/observation-history.mjs';
 
 import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
@@ -229,6 +230,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
     request(`/api/projects/${projectId}/observations`, { cache: 'no-store', signal: controller.signal })
       .then(async (response) => {
         const payload = await response.json() as ObservationPayload;
+        if(controller.signal.aborted)return;
         if (!response.ok) throw new Error(payload.error || localizedMessage(locale, 'No se pudo consultar la última observación.', 'The latest observation could not be loaded.', 'Não foi possível consultar a última observação.'));
         setObservation(payload.observation || null);
         setObservationHistory(Array.isArray(payload.history)?payload.history:[]);
@@ -238,7 +240,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         setObservationMessage(error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo consultar la última observación.', 'The latest observation could not be loaded.', 'Não foi possível consultar a última observação.'));
       });
     return () => controller.abort();
-  }, [locale, projectId, request]);
+  }, [locale, projectId, request, savedWebsite]);
 
   const saveReviewedDraft = useCallback(async () => {
     if (!ready.current || manualLock.current || conflictReview || !data.website) return;
@@ -333,6 +335,8 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const websiteIsSaved = Boolean(
     projectId && hostname && normalizedHostname(savedWebsite) === hostname && status !== 'saving',
   );
+  const observationWebsiteIsSaved=Boolean(projectId&&observationOrigin(data.website)&&observationOrigin(data.website)===observationOrigin(savedWebsite)&&status!=='saving');
+  const currentObservations=currentOriginObservations(observation,observationHistory,savedWebsite);
   const challengeCopy = activeClaim?.method === 'dns_txt'
     ? `Tipo: TXT\nNombre: ${activeClaim.challengeName}\nValor: ${activeClaim.challengeValue}`
     : activeClaim ? `URL: ${activeClaim.challengeUrl}\nContenido:\n${activeClaim.challengeValue}` : '';
@@ -402,7 +406,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
 
   async function saveObservation() {
     if(observationLock.current)return;
-    if (!projectId || !websiteIsSaved) {
+    if (!projectId || !observationWebsiteIsSaved) {
       setObservationMessage(localizedMessage(locale, 'Espera a que el sitio termine de guardarse antes de auditarlo.', 'Wait for the website to finish saving before auditing it.', 'Aguarde o site terminar de salvar antes de auditá-lo.'));
       return;
     }
@@ -433,7 +437,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
     }
   }
 
-  const historyComparison=compareObservationHistory(observationHistory);
+  const historyComparison=compareObservationHistory(currentObservations.history);
   return (
     <div className="intake-layout">
       <a className="dossier-help-dock" href="#dossier-assistant" onClick={()=>{const panel=document.getElementById('dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
@@ -565,17 +569,17 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         <section className="form-section observation-section">
           <div className="verification-heading">
             <div className="form-section-title"><Radar size={20} /><div><strong>{copy.labels.observation}</strong><span>{copy.labels.observationSubtitle}</span></div></div>
-            <span className="verification-status" data-status={observation ? 'verified' : 'unverified'}>
-              {observation ? `${observation.readiness.level || 'Audit'} · ${observation.readiness.score ?? 0}/100` : (locale === 'en' ? 'No saved observation' : locale === 'pt' ? 'Sem observação salva' : 'Sin observación guardada')}
+            <span className="verification-status" data-status={currentObservations.observation ? 'verified' : 'unverified'}>
+              {currentObservations.observation ? `${currentObservations.observation.readiness.level || 'Audit'} · ${currentObservations.observation.readiness.score ?? 0}/100` : (locale === 'en' ? 'No saved observation' : locale === 'pt' ? 'Sem observação salva' : 'Sin observación guardada')}
             </span>
           </div>
           <p className="observation-copy">{localizedMessage(locale, 'El escáner público normalmente no guarda resultados. Esta acción ejecuta la misma lectura pública y conserva en tu expediente solo evidencia, puntaje, rutas y fecha; elimina cuerpos HTTP, errores crudos y cabeceras sensibles.', 'The public scanner normally stores no results. This action runs the same public reading and saves only evidence, score, paths and date in your dossier; HTTP bodies, raw errors and sensitive headers are removed.', 'O scanner público normalmente não armazena resultados. Esta ação executa a mesma leitura pública e salva no dossiê somente evidências, pontuação, rotas e data; corpos HTTP, erros brutos e cabeçalhos sensíveis são removidos.')}</p>
-          {observation ? <div className="last-observation"><span>{locale === 'en' ? 'Latest observation' : locale === 'pt' ? 'Última observação' : 'Última observación'}</span><strong>{formatDate(observation.checkedAt, locale)}</strong><small>{observation.target}</small></div> : null}
-          {observationHistory.length>1?<div className="observation-history"><strong>{localizedMessage(locale,'Evolución observada','Observed progress','Evolução observada')}</strong>
+          {currentObservations.observation ? <div className="last-observation"><span>{locale === 'en' ? 'Latest observation' : locale === 'pt' ? 'Última observação' : 'Última observación'}</span><strong>{formatDate(currentObservations.observation.checkedAt, locale)}</strong><small>{currentObservations.observation.target}</small></div> : null}
+          {currentObservations.history.length>1?<div className="observation-history"><strong>{localizedMessage(locale,'Evolución observada','Observed progress','Evolução observada')}</strong>
             {historyComparison?<p>{localizedMessage(locale,'Entre las dos últimas lecturas:','Between the two latest readings:','Entre as duas últimas leituras:')} {historyComparison.delta>=0?'+':''}{historyComparison.delta} {localizedMessage(locale,'puntos. Es una señal técnica, no una garantía de visibilidad o ventas.','points. This is a technical signal, not a visibility or sales guarantee.','pontos. É um sinal técnico, não uma garantia de visibilidade ou vendas.')}</p>:<p>{localizedMessage(locale,'Las lecturas usan métodos distintos o faltan datos comparables; conservamos sus fechas sin afirmar una mejora.','The readings use different methods or lack comparable data; dates are retained without claiming an improvement.','As leituras usam métodos diferentes ou faltam dados comparáveis; mantemos as datas sem afirmar melhora.')}</p>}
-            <ol>{observationHistory.map(item=><li key={item.id}><time dateTime={item.checkedAt}>{formatDate(item.checkedAt,locale)}</time> · {item.score===null?'—':`${item.score}/100`} {item.level?`· ${item.level}`:''}</li>)}</ol>
+            <ol>{currentObservations.history.map(item=><li key={item.id}><time dateTime={item.checkedAt}>{formatDate(item.checkedAt,locale)}</time> · {item.score===null?'—':`${item.score}/100`} {item.level?`· ${item.level}`:''}</li>)}</ol>
           </div>:null}
-          <button className="primary-action" type="button" onClick={saveObservation} disabled={observationBusy || !websiteIsSaved}>
+          <button className="primary-action" type="button" onClick={saveObservation} disabled={observationBusy || !observationWebsiteIsSaved}>
             {observationBusy ? <LoaderCircle className="spin" size={16} /> : <Radar size={16} />}
             {copy.labels.auditSave}
           </button>
