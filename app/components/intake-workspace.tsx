@@ -25,6 +25,7 @@ import { DraftExitDialog } from './draft-exit-dialog';
 import { roadmapPresentation } from '../../lib/roadmap-presentation.mjs';
 import { proportionalTargetGuide } from '../../lib/proportional-target.mjs';
 import { readProjectSaveResponse } from '../../lib/project-save-response.mjs';
+import { createObservationSaveAttempt } from '../../lib/observation-save-attempt.mjs';
 import { compareObservationHistory } from '../../lib/observation-history.mjs';
 
 import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
@@ -61,7 +62,7 @@ type ObservationSummary = {
   readiness: { score?: number; level?: string };
 };
 type ObservationHistoryItem = {id:string;target:string;checkedAt:string;score:number|null;level:string;methodology:string};
-type ObservationPayload = { error?: string; observation?: ObservationSummary | null; history?: ObservationHistoryItem[]; notice?: string };
+type ObservationPayload = { error?: string; code?: string; observation?: ObservationSummary | null; history?: ObservationHistoryItem[]; notice?: string; replayed?: boolean };
 
 const emptyIntake: Intake = {
   organization: '', website: '', role: '', siteType: '', control: 'unknown', audience: '',
@@ -170,6 +171,8 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const [observation, setObservation] = useState<ObservationSummary | null>(null);
   const [observationHistory,setObservationHistory]=useState<ObservationHistoryItem[]>([]);
   const [observationBusy, setObservationBusy] = useState(false);
+  const observationLock=useRef(false);
+  const [observationAttempt]=useState(()=>createObservationSaveAttempt());
   const [observationMessage, setObservationMessage] = useState(localizedMessage(locale, 'La auditoría pública normalmente no guarda resultados.', 'The public audit normally stores no results.', 'A auditoria pública normalmente não armazena resultados.'));
   const ready = useRef(false);
 
@@ -398,32 +401,34 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   }
 
   async function saveObservation() {
+    if(observationLock.current)return;
     if (!projectId || !websiteIsSaved) {
       setObservationMessage(localizedMessage(locale, 'Espera a que el sitio termine de guardarse antes de auditarlo.', 'Wait for the website to finish saving before auditing it.', 'Aguarde o site terminar de salvar antes de auditá-lo.'));
       return;
     }
+    observationLock.current=true;
+    const attempt=observationAttempt.prepare(projectId,savedWebsite);
     setObservationBusy(true);
     setObservationMessage(localizedMessage(locale, 'Auditando recursos públicos y preparando una copia saneada...', 'Auditing public resources and preparing a sanitized copy...', 'Auditando recursos públicos e preparando uma cópia saneada...'));
     try {
-      const response = await request(`/api/projects/${projectId}/observations`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ confirmSave: true }),
-      });
+      const response = await request(`/api/projects/${projectId}/observations`, attempt.request);
       const payload = await response.json() as ObservationPayload;
       if (!response.ok || !payload.observation) throw new Error(payload.error || localizedMessage(locale, 'No se pudo guardar la observación.', 'The observation could not be saved.', 'Não foi possível salvar a observação.'));
+      observationAttempt.confirmed(attempt.key);
       setObservation(payload.observation);
       try {
         const refreshed=await request(`/api/projects/${projectId}/observations`,{cache:'no-store'});
         if(refreshed.ok){
           const recent=await refreshed.json() as ObservationPayload;
           setObservationHistory(Array.isArray(recent.history)?recent.history:[]);
+          if(recent.observation)setObservation(recent.observation);
         }else setObservationHistory([]);
       }catch{setObservationHistory([]);}
-      setObservationMessage(localizedMessage(locale, 'Observación guardada. El escáner público sigue sin almacenar auditorías automáticas.', 'Observation saved. The public scanner still stores no automatic audits.', 'Observação salva. O scanner público continua sem armazenar auditorias automáticas.'));
+      setObservationMessage(payload.replayed?localizedMessage(locale,'Recuperé la observación que ya se había guardado; no se duplicó.','I recovered the observation already saved; no duplicate was created.','Recuperei a observação já salva; não houve duplicação.'):localizedMessage(locale, 'Observación guardada. El escáner público sigue sin almacenar auditorías automáticas.', 'Observation saved. The public scanner still stores no automatic audits.', 'Observação salva. O scanner público continua sem armazenar auditorias automáticas.'));
     } catch (error) {
-      setObservationMessage(error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo guardar la observación.', 'The observation could not be saved.', 'Não foi possível salvar a observação.'));
+      setObservationMessage(error instanceof TypeError?localizedMessage(locale,'No pude confirmar el resultado por la conexión. Tu próximo clic reintentará la misma solicitud antes de hacer otra auditoría.','I could not confirm the result because of the connection. Your next click will retry the same request before starting another audit.','Não consegui confirmar o resultado por causa da conexão. O próximo clique repetirá a mesma solicitação antes de iniciar outra auditoria.'):error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo guardar la observación.', 'The observation could not be saved.', 'Não foi possível salvar a observação.'));
     } finally {
+      observationLock.current=false;
       setObservationBusy(false);
     }
   }

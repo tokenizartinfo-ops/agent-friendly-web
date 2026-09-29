@@ -29,7 +29,8 @@ test('private workspace explains and explicitly requests saved observations', as
   const source = await readFile('app/components/intake-workspace.tsx', 'utf8');
   assert.equal(PRIVATE_UI_COPY.es.intake.labels.auditSave, 'Auditar y guardar observación');
   assert.match(source, /\/observations/);
-  assert.match(source, /confirmSave:\s*true/);
+  assert.match(source, /observationAttempt\.prepare\(projectId,savedWebsite\)/);
+  assert.match(await readFile('lib/observation-save-attempt.mjs','utf8'), /confirmSave:true/);
   assert.match(source, /normalmente no guarda/i);
   const autosaveStart = source.indexOf('const timer = window.setTimeout');
   const autosave = source.slice(autosaveStart, source.indexOf('}, 900)', autosaveStart));
