@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { CapsuleReview } from './capsule-review';
 import { ProjectCreate } from './project-create';
+import { ProjectDirectory } from './project-directory';
 import { privateUiCopy } from '../../lib/private-ui-copy.mjs';
 import { IntakeAssistantPrototype } from './intake-assistant-prototype';
 import { IntakeIntelligentCopilot } from './intake-intelligent-copilot';
@@ -572,6 +573,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           <div className="proportional-target-next"><strong>{localizedMessage(locale, 'Un siguiente paso', 'One next step', 'Um próximo passo')}</strong><p>{targetGuide.next.reason}</p><a href={targetGuide.next.href}>{targetGuide.next.label}</a></div>
           <small>{targetGuide.limit}</small>
         </section> : null}
+        {!rehearsal && projectId ? <ProjectDirectory locale={locale} currentProjectId={projectId} currentName={savedSnapshot.organization} currentWebsite={savedWebsite} request={request} /> : null}
         {!rehearsal && projectId ? <ProjectCreate key={separateScope?.scopeText || 'manual'} locale={locale} suggestion={separateScope} disabled={manualBusy || Boolean(conflictReview) || sessionRequired || shouldAutosaveProject({ ready: true, draft: data, base: savedSnapshot }) || (status !== 'idle' && status !== 'saved')} /> : null}
         {conflictReview ? <div id="dossier-conflict"><IntakeConflictReview key={conflictReview.plan.revision} locale={locale} plan={conflictReview.plan} onConfirm={confirmConflictReview} onCancel={() => setConflictReview(null)} /></div> : null}
         {<button id="dossier-save" className="primary-action" type="button" disabled={manualBusy || Boolean(conflictReview) || !loaded || !data.website} onClick={saveReviewedDraft}><Save size={17} />{rehearsal ? localizedMessage(locale, 'Confirmar guardado simulado', 'Confirm simulated save', 'Confirmar salvamento simulado') : localizedMessage(locale, 'Guardar cambios', 'Save changes', 'Salvar alterações')}</button>}

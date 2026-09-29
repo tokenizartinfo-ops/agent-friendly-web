@@ -4,6 +4,8 @@ import { getDb } from '../../../db';
 import { projectEvents, siteProjects } from '../../../db/schema';
 import { completionForIntake, nextQuestion, normalizeIntake } from '../../../lib/intake.mjs';
 import { buildRoadmap } from '../../../lib/methodology.mjs';
+import { listOwnerProjects } from '../../../lib/project-directory.mjs';
+import { env } from 'cloudflare:workers';
 
 function decodeList(value: string) {
   try {
@@ -60,9 +62,15 @@ function present(project: typeof siteProjects.$inferSelect) {
 
 export async function GET(request?: Request) {
   const user = await getCloudflareAccessUser();
-  if (!user) return Response.json({ error: 'Inicia sesion para abrir tu expediente.' }, { status: 401 });
+  if (!user) return Response.json({ error: 'Inicia sesion para abrir tu expediente.' }, { status: 401, headers: { 'cache-control': 'no-store' } });
 
-  const requestedId = request ? new URL(request.url).searchParams.get('project') : null;
+  const search = request ? new URL(request.url).searchParams : new URLSearchParams();
+  if (search.get('list') === '1') {
+    if (search.has('project') || search.getAll('offset').length > 1) return Response.json({code:'invalid_directory_request'},{status:400,headers:{'cache-control':'no-store'}});
+    const result = await listOwnerProjects(env.DB,user.userId,search.get('offset')??'0');
+    return Response.json(result.status===200?{projects:result.projects,nextOffset:result.nextOffset}:{code:result.code},{status:result.status,headers:{'cache-control':'no-store'}});
+  }
+  const requestedId = search.get('project');
   const [project] = await getDb()
     .select()
     .from(siteProjects)
