@@ -4,8 +4,10 @@ import { getDb } from '../../../../../db';
 import { projectEvents, registrySites, scanObservations, siteProjects } from '../../../../../db/schema';
 import { runPublicAudit, sanitizeObservation } from '../../../../../lib/public-audit.mjs';
 import { summarizeObservationHistory } from '../../../../../lib/observation-history.mjs';
+import { observationRequestIds } from '../../../../../lib/observation-save-attempt.mjs';
 
 type RouteContext = { params: Promise<{ projectId: string }> };
+const REQUEST_KEY = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function readinessFromStored(value: string) {
   try {
@@ -60,9 +62,16 @@ export async function GET(_request: Request, context: RouteContext) {
 export async function POST(request: Request, context: RouteContext) {
   const user = await getCloudflareAccessUser();
   if (!user) return Response.json({ error: 'Inicia sesion para guardar una observacion.' }, { status: 401 });
-  const body = await request.json() as { confirmSave?: boolean };
-  if (body.confirmSave !== true) {
+  let body: { confirmSave?: boolean };
+  try { body = await request.json() as { confirmSave?: boolean }; } catch {
+    return Response.json({ code: 'invalid_json' }, { status: 400 });
+  }
+  if (!body || body.confirmSave !== true) {
     return Response.json({ error: 'Confirma expresamente que deseas ejecutar y guardar esta auditoria.' }, { status: 400 });
+  }
+  const requestKey = request.headers.get('idempotency-key');
+  if (!requestKey || !REQUEST_KEY.test(requestKey)) {
+    return Response.json({ code: 'idempotency_key_required' }, { status: 400, headers: { 'cache-control': 'no-store' } });
   }
 
   const { projectId } = await context.params;
@@ -77,6 +86,18 @@ export async function POST(request: Request, context: RouteContext) {
   }
 
   const db = getDb();
+  const { observationId, eventId } = await observationRequestIds(user.userId, projectId, requestKey);
+  const recover = async () => {
+    const [saved] = await db.select().from(scanObservations).where(and(
+      eq(scanObservations.id, observationId), eq(scanObservations.projectId, projectId), eq(scanObservations.userId, user.userId),
+    )).limit(1);
+    if (!saved) return null;
+    if (saved.targetOrigin !== requestedOrigin.origin) return Response.json({ code: 'idempotency_conflict' }, { status: 409, headers: { 'cache-control': 'no-store' } });
+    return Response.json({ observation: { id: saved.id, target: saved.targetOrigin, checkedAt: saved.checkedAt,
+      readiness: readinessFromStored(saved.readinessJson) }, replayed: true }, { status: 200, headers: { 'cache-control': 'no-store' } });
+  };
+  const prior = await recover();
+  if (prior) return prior;
   const [existingSite] = await db
     .select()
     .from(registrySites)
@@ -109,7 +130,6 @@ export async function POST(request: Request, context: RouteContext) {
 
   const now = new Date().toISOString();
   const siteId = existingSite?.id || crypto.randomUUID();
-  const observationId = crypto.randomUUID();
   const observationWrite = db.insert(scanObservations).values({
     id: observationId,
     siteId,
@@ -121,9 +141,9 @@ export async function POST(request: Request, context: RouteContext) {
     probesJson: JSON.stringify(sanitized.probes),
     checkedAt: sanitized.checkedAt,
     createdAt: now,
-  });
+  }).onConflictDoNothing().returning({ id: scanObservations.id });
   const eventWrite = db.insert(projectEvents).values({
-    id: crypto.randomUUID(),
+    id: eventId,
     projectId,
     userId: user.userId,
     type: 'scan_observation_saved',
@@ -133,13 +153,15 @@ export async function POST(request: Request, context: RouteContext) {
       checkedAt: sanitized.checkedAt,
     }),
     createdAt: now,
-  });
+  }).onConflictDoNothing();
 
-  if (existingSite) {
-    await db.batch([observationWrite, eventWrite]);
-  } else {
-    await db.batch([
-      db.insert(registrySites).values({
+  let inserted: { id: string }[];
+  try {
+    if (existingSite) {
+      [inserted] = await db.batch([observationWrite, eventWrite]);
+    } else {
+      const [, result] = await db.batch([
+        db.insert(registrySites).values({
         id: siteId,
         projectId,
         userId: user.userId,
@@ -149,12 +171,21 @@ export async function POST(request: Request, context: RouteContext) {
         visibility: 'private',
         createdAt: now,
         updatedAt: now,
-      }),
-      observationWrite,
-      eventWrite,
-    ]);
+        }),
+        observationWrite,
+        eventWrite,
+      ]);
+      inserted = result;
+    }
+  } catch {
+    const committed = await recover();
+    if (committed) return committed;
+    return Response.json({ code: 'observation_save_unconfirmed', error: 'No pudimos confirmar el guardado. Reintenta con esta misma solicitud.' },
+      { status: 503, headers: { 'cache-control': 'no-store' } });
   }
-
+  const committed = await recover();
+  if (!committed) return Response.json({ code: 'observation_save_unconfirmed' }, { status: 503, headers: { 'cache-control': 'no-store' } });
+  if (!inserted.length) return committed;
   return Response.json({
     observation: {
       id: observationId,
