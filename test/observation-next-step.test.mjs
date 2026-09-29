@@ -7,6 +7,8 @@ const actions=[{id:'crawl',state:'not_detected'},{id:'answers',state:'not_detect
 
 test('saved draft and unknown control take priority over implementation suggestions',()=>{
  assert.deepEqual(observationNextStep({actions,control:'origin',unsaved:true}),{kind:'save_draft',target:'dossier-save'});
+ assert.deepEqual(observationNextStep({actions,control:'unknown',missingBasicCount:2}),{kind:'complete_basics',target:'dossier-assistant'});
+ assert.deepEqual(observationNextStep({actions,control:'unknown',missingBasicCount:2,unsaved:true}),{kind:'save_draft',target:'dossier-save'});
  assert.deepEqual(observationNextStep({actions,control:'unknown'}),{kind:'clarify_control',target:'dossier-control'});
 });
 
@@ -21,9 +23,9 @@ test('known control picks a foundation and never forces advanced capabilities',(
  assert.deepEqual(observationNextStep({actions:actions.map(action=>({...action,state:'detected'})),control:'origin'}),{kind:'choose_goal',target:'dossier-goals'});
 });
 
-test('the private guide receives current control and unsaved-draft state',async()=>{
+test('the private guide receives current basic gaps, control and unsaved-draft state',async()=>{
  const workspace=await readFile('app/components/intake-workspace.tsx','utf8');
  const guide=await readFile('app/components/saved-observation-evidence.tsx','utf8');
- assert.match(workspace,/control=\{data\.control\} unsaved=\{unconfirmedChanges\}/);
- assert.match(guide,/observationNextStep\(\{actions:plan\.actions,control,unsaved\}\)/);
+ assert.match(workspace,/missingBasicCount=\{missingIntakeQuestions\(data\)\.length\}/);
+ assert.match(guide,/observationNextStep\(\{actions:plan\.actions,control,unsaved,missingBasicCount\}\)/);
 });
