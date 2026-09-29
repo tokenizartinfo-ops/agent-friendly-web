@@ -10,7 +10,13 @@ import { defaultCopilotSelection } from '../../lib/copilot-review-selection.mjs'
 type Draft = Record<string, string | string[]>;
 type Locale = 'es' | 'en' | 'pt';
 type Suggestion = { field: string; value: string | string[]; sourceExcerpt: string };
-type Result = { blocked: boolean; suggestions: Suggestion[]; warning: string };
+type GoalMode = 'discover' | 'explain' | 'query' | 'act' | 'transact';
+type Result = { blocked: boolean; suggestions: Suggestion[]; warning: string; goalGuidance?: { mode: GoalMode; sourceExcerpt: string } | null };
+const goalGuidanceCopy = {
+  es: { intro: 'Entendí este objetivo de tu texto. Es una hipótesis para conversar, no una capacidad verificada ni una autorización.', discover: '¿Qué deberían poder encontrar primero los visitantes o asistentes?', explain: '¿Qué información necesitás explicar con claridad antes de avanzar?', query: '¿Qué datos concretos deberían poder consultar y quién puede verlos?', act: '¿Qué acción querés permitir, quién la autoriza y cómo se revierte?', transact: '¿Qué operación querés ofrecer y qué controles necesitaría antes de habilitarla?' },
+  en: { intro: 'I understood this goal from your text. It is a discussion hypothesis, not a verified capability or permission.', discover: 'What should visitors or assistants find first?', explain: 'What information needs a clear explanation first?', query: 'Which specific data should be queryable, and who may see it?', act: 'Which action should be possible, who authorizes it, and how can it be reversed?', transact: 'Which transaction do you want to offer, and what controls would it need first?' },
+  pt: { intro: 'Entendi este objetivo do seu texto. É uma hipótese para conversar, não uma capacidade verificada nem uma autorização.', discover: 'O que visitantes ou assistentes devem encontrar primeiro?', explain: 'Que informação precisa de uma explicação clara primeiro?', query: 'Quais dados devem ser consultáveis e quem pode vê-los?', act: 'Que ação você quer permitir, quem a autoriza e como revertê-la?', transact: 'Que transação você quer oferecer e quais controles ela exigiria antes?' },
+};
 const selectionCopy = {
   es: 'Los campos que ya tienen datos quedan sin seleccionar. Si querés reemplazarlos, marcá la propuesta y revisá la diferencia antes de aplicarla.',
   en: 'Fields that already contain data stay unselected. To replace them, select the proposal and review the difference before applying it.',
@@ -94,7 +100,7 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply }: 
     </div>
     <div className="assistant-review-panel" aria-live="polite">
       {status ? <p role="status">{status}</p> : null}
-      {result ? <><p>{result.suggestions.length ? result.warning : t.empty}</p>{result.suggestions.length ? <><p>{t.evidence}</p><p>{selectionCopy[locale]}</p></> : null}
+      {result ? <><p>{result.suggestions.length || result.goalGuidance ? result.warning : t.empty}</p>{result.goalGuidance ? <div className="assistant-guidance"><p>{goalGuidanceCopy[locale].intro}</p><p><em>{t.source}: {result.goalGuidance.sourceExcerpt}</em></p><p>{goalGuidanceCopy[locale][result.goalGuidance.mode]}</p></div> : null}{result.suggestions.length ? <><p>{t.evidence}</p><p>{selectionCopy[locale]}</p></> : null}
         <div className="assistant-suggestion-list">{result.suggestions.map(item => <label key={item.field}>
           <input type="checkbox" checked={selected.includes(item.field)} onChange={() => { setSelected(current => current.includes(item.field) ? current.filter(value => value !== item.field) : [...current, item.field]); setChanges(null); }} />
           <span><strong>{label(item.field)}</strong><small>{dossierValueLabel(item.field, item.value, locale)}</small><em>{t.source}: {item.sourceExcerpt}</em></span>
