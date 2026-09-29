@@ -22,6 +22,7 @@ import { createProjectSaveAttempt } from '../../lib/project-save-attempt.mjs';
 import { hasPendingDraft, attachDraftExitGuard } from '../../lib/draft-exit-guard.mjs';
 import { DraftExitDialog } from './draft-exit-dialog';
 import { roadmapPresentation } from '../../lib/roadmap-presentation.mjs';
+import { proportionalTargetGuide } from '../../lib/proportional-target.mjs';
 import { readProjectSaveResponse } from '../../lib/project-save-response.mjs';
 
 import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
@@ -144,6 +145,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const capabilityOptions = copy.capabilities;
   const resourceOptions = copy.resources;
   const [data, setData] = useState<Intake>(emptyIntake);
+  const targetGuide = proportionalTargetGuide(data, locale);
   const [projectId, setProjectId] = useState('');
   const [savedWebsite, setSavedWebsite] = useState('');
   const [loaded,setLoaded]=useState(false);
@@ -562,6 +564,12 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
 
       <aside className="intake-aside">
         <DossierProgress draft={data} saved={savedSnapshot} loaded={loaded} projectId={projectId} status={status} sessionRequired={sessionRequired} conflict={Boolean(conflictReview)} verified={activeClaim?.status === 'verified' && websiteIsSaved} verifiedUntil={activeClaim?.verifiedUntil || ''} locale={locale} rehearsal={Boolean(rehearsal)} onRetryLoad={()=>{if(loaded)return;setStatus('loading');setLoadAttempt(value=>value+1);}}/>
+        {loaded ? <section className="proportional-target" aria-labelledby="proportional-target-title">
+          <h3 id="proportional-target-title">{targetGuide.title}</h3><p>{targetGuide.provisional}</p>
+          <ul>{targetGuide.steps.map(step => <li key={step}>{step}</li>)}</ul>
+          {targetGuide.questions.length ? <div className="proportional-target-questions"><strong>{localizedMessage(locale, 'Para decidir juntos', 'To decide together', 'Para decidirmos juntos')}</strong><ul>{targetGuide.questions.map(question => <li key={question}>{question}</li>)}</ul></div> : null}
+          <small>{targetGuide.limit}</small>
+        </section> : null}
         {!rehearsal && projectId ? <ProjectCreate locale={locale} disabled={manualBusy || Boolean(conflictReview) || sessionRequired || shouldAutosaveProject({ ready: true, draft: data, base: savedSnapshot }) || (status !== 'idle' && status !== 'saved')} /> : null}
         {conflictReview ? <div id="dossier-conflict"><IntakeConflictReview key={conflictReview.plan.revision} locale={locale} plan={conflictReview.plan} onConfirm={confirmConflictReview} onCancel={() => setConflictReview(null)} /></div> : null}
         {<button id="dossier-save" className="primary-action" type="button" disabled={manualBusy || Boolean(conflictReview) || !loaded || !data.website} onClick={saveReviewedDraft}><Save size={17} />{rehearsal ? localizedMessage(locale, 'Confirmar guardado simulado', 'Confirm simulated save', 'Confirmar salvamento simulado') : localizedMessage(locale, 'Guardar cambios', 'Save changes', 'Salvar alterações')}</button>}
