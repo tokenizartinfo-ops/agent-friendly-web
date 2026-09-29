@@ -7,9 +7,7 @@ import {
   publicationCapsules,
   siteProjects,
 } from '../../../../../../../db/schema';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { deriveCapsuleRole } from '../../../../../../../lib/capsule-access.mjs';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { compareCapsuleOrigin } from '../../../../../../../lib/origin-comparison.mjs';
 
 type RouteContext = { params: Promise<{ projectId: string; capsuleId: string }> };

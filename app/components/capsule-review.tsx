@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Check,
   CheckCircle2,
@@ -16,8 +16,11 @@ import {
   X,
 } from 'lucide-react';
 import { privateUiCopy } from '../../lib/private-ui-copy.mjs';
+import { capsuleBuildMessage } from '../../lib/capsule-build-message.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { ConnectorSandbox } from './connector-sandbox';
+import {CapsuleGuidance} from './capsule-guidance';
+import {capsuleGuideState,capsuleEvidenceMatches} from '../../lib/capsule-guidance.mjs';
 
 type Locale = 'es' | 'en' | 'pt';
 type CapsuleCopy = ReturnType<typeof privateUiCopy>['capsule'];
@@ -148,6 +151,11 @@ export function CapsuleReview({
   const [capsule, setCapsule] = useState<Capsule | null>(null);
   const [actorRole, setActorRole] = useState<'owner' | 'maintainer' | null>(null);
   const [busy, setBusy] = useState(false);
+  const loadGeneration=useRef(0);
+  const comparisonGeneration=useRef(0);
+  const capsuleIdentity=useRef('');
+  const [comparisonState,setComparisonState]=useState<'loading'|'ready'|'failed'>('loading');
+  const [loadState,setLoadState]=useState<'loading'|'ready'|'failed'>('loading');
   const [message, setMessage] = useState(copy.messages.empty);
   const [copied, setCopied] = useState(false);
   const [comparison, setComparison] = useState<OriginComparison | null>(null);
@@ -159,17 +167,26 @@ export function CapsuleReview({
 
   const loadCapsule = useCallback(async () => {
     if (!projectId) return;
+    const generation=++loadGeneration.current;
+    comparisonGeneration.current++;capsuleIdentity.current='';
+    setLoadState('loading');
     try {
       const response = await fetch(`/api/projects/${projectId}/deployment-capsules`, { cache: 'no-store' });
       const payload = await response.json() as CapsulePayload;
+      if(generation!==loadGeneration.current)return;
       if (!response.ok) throw new Error(payload.error || localizedMessage(locale, 'No se pudo consultar la cápsula.', 'The capsule could not be loaded.', 'Não foi possível consultar a cápsula.'));
       setActorRole(payload.actorRole || null);
+      capsuleIdentity.current=payload.capsule?`${payload.capsule.capsuleId}:${payload.capsule.integrity.manifestSha256}`:'';
+      setComparison(null);setDraftPlan(null);setComparisonState(payload.capsule?'loading':'ready');
       setCapsule(payload.capsule || null);
+      setLoadState('ready');
       if (payload.capsule) {
         setPathMappings(defaultPathMappings(payload.capsule.files));
         setMessage(copy.messages.loaded);
       }
     } catch (error) {
+      if(generation!==loadGeneration.current)return;
+      setLoadState('failed');
       setMessage(error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo consultar la cápsula.', 'The capsule could not be loaded.', 'Não foi possível consultar a cápsula.'));
     }
   }, [copy.messages.loaded, locale, projectId]);
@@ -179,7 +196,11 @@ export function CapsuleReview({
     return () => window.clearTimeout(timer);
   }, [loadCapsule]);
 
-  const loadBlock5B = useCallback(async (capsuleId: string) => {
+  const loadBlock5B = useCallback(async (capsuleId: string, manifestSha256: string) => {
+    const identity=`${capsuleId}:${manifestSha256}`;
+    if(capsuleIdentity.current!==identity)return;
+    const generation=++comparisonGeneration.current;
+    setComparisonState('loading');
     try {
       const [comparisonResponse, planResponse] = await Promise.all([
         fetch(`/api/projects/${projectId}/deployment-capsules/${capsuleId}/comparison`, { cache: 'no-store' }),
@@ -187,25 +208,33 @@ export function CapsuleReview({
       ]);
       const comparisonPayload = await comparisonResponse.json() as Block5BPayload;
       const planPayload = await planResponse.json() as Block5BPayload;
-      if (comparisonResponse.ok) setComparison(comparisonPayload.comparison || null);
-      if (planResponse.ok) setDraftPlan(planPayload.plan || null);
+      if(generation!==comparisonGeneration.current || capsuleIdentity.current!==identity)return;
+      const observed=comparisonPayload.comparison;
+      if(!comparisonResponse.ok || (observed && (observed.capsuleId!==capsuleId || observed.manifestSha256!==manifestSha256))) throw new Error('Comparison unavailable');
+      setComparison(observed || null);setComparisonState('ready');
+      const plan=planPayload.plan;
+      setDraftPlan(planResponse.ok && plan?.capsuleId===capsuleId && plan.manifestSha256===manifestSha256 && plan.comparisonId===observed?.comparisonId?plan:null);
     } catch {
+      if(generation!==comparisonGeneration.current || capsuleIdentity.current!==identity)return;
+      setComparison(null);setDraftPlan(null);setComparisonState('failed');
       setMessage(localizedMessage(locale, 'La cápsula sigue disponible, pero no se pudo consultar su comparación técnica.', 'The capsule remains available, but its technical comparison could not be loaded.', 'A cápsula continua disponível, mas a comparação técnica não pôde ser consultada.'));
     }
   }, [locale, projectId]);
 
   useEffect(() => {
     if (!capsule) return;
-    const timer = window.setTimeout(() => { void loadBlock5B(capsule.capsuleId); }, 0);
+    const timer = window.setTimeout(() => { void loadBlock5B(capsule.capsuleId,capsule.integrity.manifestSha256); }, 0);
     return () => window.clearTimeout(timer);
   }, [capsule, loadBlock5B]);
 
   async function buildCapsule() {
+    if(loadState==='loading')return;
     if (!projectId || !expectedDomain) {
       setMessage(localizedMessage(locale, 'Guarda y verifica primero el dominio del expediente.', 'Save and verify the dossier domain first.', 'Salve e verifique primeiro o domínio do dossiê.'));
       return;
     }
     setBusy(true);
+    loadGeneration.current++;comparisonGeneration.current++;capsuleIdentity.current='';setLoadState('loading');
     setMessage(localizedMessage(locale, 'Preparando archivos, inventario y hashes...', 'Preparing files, inventory and hashes...', 'Preparando arquivos, inventário e hashes...'));
     try {
       const response = await fetch(`/api/projects/${projectId}/deployment-capsules`, {
@@ -221,20 +250,28 @@ export function CapsuleReview({
       const payload = await response.json() as CapsulePayload;
       if (!response.ok || !payload.capsule) throw new Error(payload.error || localizedMessage(locale, 'No se pudo preparar la cápsula.', 'The capsule could not be prepared.', 'Não foi possível preparar a cápsula.'));
       setActorRole(payload.actorRole || 'owner');
+      comparisonGeneration.current++;capsuleIdentity.current=`${payload.capsule.capsuleId}:${payload.capsule.integrity.manifestSha256}`;
+      setComparisonState('loading');
       setCapsule(payload.capsule);
+      setLoadState('ready');
       setPathMappings(defaultPathMappings(payload.capsule.files));
       setComparison(null);
       setDraftPlan(null);
       setMessage(copy.messages.previewReady);
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo preparar la cápsula.', 'The capsule could not be prepared.', 'Não foi possível preparar a cápsula.'));
+      setLoadState('failed');
+      setMessage(capsuleBuildMessage(error, locale));
     } finally {
       setBusy(false);
     }
   }
 
   async function compareWithOrigin() {
+    if(loadState==='loading')return;
     if (!capsule) return;
+    const generation=++comparisonGeneration.current;
+    const identity=`${capsule.capsuleId}:${capsule.integrity.manifestSha256}`;
+    setComparisonState('loading');setComparison(null);setDraftPlan(null);
     setBusy(true);
     setMessage(localizedMessage(locale, 'Leyendo solo los archivos públicos permitidos del sitio actual...', 'Reading only the allowed public files from the current website...', 'Lendo somente os arquivos públicos permitidos do site atual...'));
     try {
@@ -249,13 +286,16 @@ export function CapsuleReview({
         }),
       });
       const payload = await response.json() as Block5BPayload;
-      if (!response.ok || !payload.comparison) throw new Error(payload.error || localizedMessage(locale, 'No se pudo comparar con el sitio actual.', 'The current website could not be compared.', 'Não foi possível comparar com o site atual.'));
-      setComparison(payload.comparison);
+      if(generation!==comparisonGeneration.current || capsuleIdentity.current!==identity)return;
+      if (!response.ok || !payload.comparison || !capsuleEvidenceMatches(capsule,payload.comparison)) throw new Error(payload.error || localizedMessage(locale, 'No se pudo comparar con el sitio actual.', 'The current website could not be compared.', 'Não foi possível comparar com o site atual.'));
+      setComparison(payload.comparison);setComparisonState('ready');
       setDraftPlan(null);
       setMessage(payload.comparison.status === 'complete'
         ? localizedMessage(locale, 'Comparación lista. Revisa las diferencias antes de preparar un borrador técnico.', 'Comparison ready. Review the differences before preparing a technical draft.', 'Comparação pronta. Revise as diferenças antes de preparar um rascunho técnico.')
         : localizedMessage(locale, 'La comparación quedó incompleta. No se preparará ningún borrador hasta resolver los recursos bloqueados.', 'The comparison is incomplete. No draft will be prepared until blocked resources are resolved.', 'A comparação ficou incompleta. Nenhum rascunho será preparado até resolver os recursos bloqueados.'));
     } catch (error) {
+      if(generation!==comparisonGeneration.current || capsuleIdentity.current!==identity)return;
+      setComparisonState('failed');
       setMessage(error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo comparar con el sitio actual.', 'The current website could not be compared.', 'Não foi possível comparar com o site atual.'));
     } finally {
       setBusy(false);
@@ -263,6 +303,7 @@ export function CapsuleReview({
   }
 
   async function prepareDraftPlan() {
+    if(loadState==='loading')return;
     if (!capsule || !comparison) return;
     setBusy(true);
     setMessage(localizedMessage(locale, 'Preparando un plan técnico local. No se enviará a GitHub.', 'Preparing a local technical plan. It will not be sent to GitHub.', 'Preparando um plano técnico local. Ele não será enviado ao GitHub.'));
@@ -293,6 +334,7 @@ export function CapsuleReview({
   }
 
   async function decide(decision: 'approved' | 'rejected') {
+    if(loadState==='loading')return;
     if (!capsule || !actorRole) return;
     setBusy(true);
     setMessage(decision === 'approved'
@@ -336,6 +378,7 @@ export function CapsuleReview({
 
   const actorDecision = capsule && actorRole ? capsule.approvals[actorRole] : '';
   const canDecide = Boolean(
+    loadState === 'ready' && comparisonState === 'ready' &&
     capsule &&
     actorRole &&
     capsule.approvals.requiredRoles.includes(actorRole) &&
@@ -363,11 +406,13 @@ export function CapsuleReview({
         <div><strong>{copy.noWrite}</strong><span>{copy.noWriteBody}</span></div>
       </div>
 
+      <CapsuleGuidance locale={locale} hasCapsule={Boolean(capsule)} canRefresh={Boolean(projectId)&&!busy&&loadState!=='loading'} onRefresh={()=>{void loadCapsule();}} state={capsuleGuideState({projectId,loadState,status:capsule?.status||'',canDecide,allowBuild,comparisonState,comparisonStatus:capsuleEvidenceMatches(capsule,comparison)?comparison?.status||'':''})}/>
+
       {!capsule ? (
         <div className="capsule-empty">
           <FileCode2 size={28} />
           <div><strong>{copy.emptyTitle}</strong><p>{copy.emptyBody}</p></div>
-          {allowBuild ? <button className="primary-action" type="button" onClick={buildCapsule} disabled={busy || !projectId || !expectedDomain}>{busy ? <LoaderCircle className="spin" size={16} /> : <FileCheck2 size={16} />}{copy.prepare}</button> : null}
+          {allowBuild ? <button className="primary-action" type="button" onClick={buildCapsule} disabled={busy || loadState==='loading' || !projectId || !expectedDomain}>{busy ? <LoaderCircle className="spin" size={16} /> : <FileCheck2 size={16} />}{copy.prepare}</button> : null}
         </div>
       ) : (
         <>
@@ -378,7 +423,7 @@ export function CapsuleReview({
             <div><span>{copy.manifest}</span><code>{capsule.integrity.manifestSha256.slice(0, 14)}...</code></div>
           </div>
 
-          <div className="capsule-files">
+          <div className="capsule-files" id="capsule-files-review">
             <div className="capsule-subheading"><span>{copy.files}</span><strong>{capsule.files.length}</strong></div>
             {capsule.files.map((file) => (
               <details key={file.packagePath}>
@@ -407,14 +452,14 @@ export function CapsuleReview({
             </div>
           ) : null}
 
-          <section className="capsule-comparison" aria-labelledby="comparison-title">
+          <section className="capsule-comparison" id="capsule-comparison-review" aria-labelledby="comparison-title">
             <div className="capsule-comparison-heading">
               <GitCompareArrows size={20} />
               <div>
                 <strong id="comparison-title">{copy.compareTitle}</strong>
                 <span>{copy.compareBody}</span>
               </div>
-              <button type="button" className="secondary-action" onClick={compareWithOrigin} disabled={busy}>
+              <button type="button" className="secondary-action" onClick={compareWithOrigin} disabled={busy || loadState==='loading'}>
                 {busy ? <LoaderCircle className="spin" size={16} /> : <GitCompareArrows size={16} />}
                 {comparison ? copy.compareAgain : copy.compare}
               </button>
@@ -494,7 +539,7 @@ export function CapsuleReview({
                 ))}
               </div>
 
-              <button type="button" className="draft-plan-prepare" onClick={prepareDraftPlan} disabled={busy || !repository.trim() || !baseBranch.trim()}>
+              <button type="button" className="draft-plan-prepare" onClick={prepareDraftPlan} disabled={busy || loadState==='loading' || !repository.trim() || !baseBranch.trim()}>
                 {busy ? <LoaderCircle className="spin" size={16} /> : <GitPullRequestDraft size={16} />}{copy.prepareDraft}
               </button>
 
@@ -516,7 +561,7 @@ export function CapsuleReview({
             <ConnectorSandbox capsule={capsule} comparison={comparison} plan={draftPlan} locale={locale} />
           ) : null}
 
-          <div className="capsule-approvals">
+          <div className="capsule-approvals" id="capsule-decisions-review">
             <article data-status={capsule.approvals.owner}><UserCheck size={19} /><div><strong>{copy.ownerApproval}</strong><span>{approvalLabel(capsule.approvals.owner, copy)}</span></div>{capsule.approvals.owner === 'approved' ? <Check size={17} /> : null}</article>
             <article data-status={capsule.approvals.maintainer}><UserCheck size={19} /><div><strong>{copy.maintainerApproval}</strong><span>{approvalLabel(capsule.approvals.maintainer, copy)}</span></div>{capsule.approvals.maintainer === 'approved' || capsule.approvals.maintainer === 'not_required' ? <Check size={17} /> : null}</article>
           </div>
@@ -525,13 +570,13 @@ export function CapsuleReview({
             <a className="secondary-action" href={`/api/projects/${projectId}/deployment-capsules?download=1`}><Download size={16} />{copy.downloadJson}</a>
             <a className="secondary-action" href={localizedPath('capsule', locale, { projectId }) || `/capsula/${projectId}`}><FileCheck2 size={16} />{copy.openPrivate}</a>
             {actorRole === 'owner' && capsule.approvals.requiredRoles.includes('maintainer') ? <button className="secondary-action" type="button" onClick={copyReviewLink}><Clipboard size={16} />{copied ? copy.copied : copy.copyMaintainer}</button> : null}
-            {allowBuild && actorRole === 'owner' ? <button className="secondary-action" type="button" onClick={buildCapsule} disabled={busy}><FileCode2 size={16} />{copy.newVersion}</button> : null}
+            {allowBuild && actorRole === 'owner' ? <button className="secondary-action" type="button" onClick={buildCapsule} disabled={busy || loadState==='loading'}><FileCode2 size={16} />{copy.newVersion}</button> : null}
           </div>
 
           {canDecide ? (
             <div className="capsule-decision-actions">
-              <button type="button" className="capsule-approve" onClick={() => decide('approved')} disabled={busy}>{busy ? <LoaderCircle className="spin" size={16} /> : <CheckCircle2 size={17} />}{copy.approve}</button>
-              <button type="button" className="capsule-reject" onClick={() => decide('rejected')} disabled={busy}><X size={17} />{copy.reject}</button>
+              <button type="button" className="capsule-approve" onClick={() => decide('approved')} disabled={busy || loadState==='loading'}>{busy ? <LoaderCircle className="spin" size={16} /> : <CheckCircle2 size={17} />}{copy.approve}</button>
+              <button type="button" className="capsule-reject" onClick={() => decide('rejected')} disabled={busy || loadState==='loading'}><X size={17} />{copy.reject}</button>
             </div>
           ) : null}
         </>

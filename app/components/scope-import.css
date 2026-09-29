@@ -1,0 +1,11 @@
+.scope-import,.dossier-guide{padding:20px 0;border-block:1px solid #c7beb1;overflow-wrap:anywhere;font-family:var(--font-geist-sans),sans-serif;font-size:15px;line-height:1.6;color:#25211d}
+.scope-import h2,.dossier-guide h2{font-family:var(--font-comic),sans-serif;font-size:28px;font-weight:400;margin:0 0 12px}
+.scope-import p,.dossier-guide p{margin:10px 0}.scope-import label{display:block}.scope-import input[type=file]{display:block;max-width:100%;min-height:44px;padding:10px 0}
+.scope-import button,.dossier-guide a{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;color:inherit;background:#f5f0e7;border:1px solid #766958;border-radius:5px;margin:5px 8px 5px 0;white-space:normal;text-align:start}
+.scope-import .scope-review{display:flex;align-items:flex-start;gap:10px;padding:14px 0}.scope-review input{width:20px;height:20px;flex-shrink:0;margin-top:3px}.scope-origin{font-weight:600}
+#dossier-assistant,#dossier-form,#scope-import-title{scroll-margin-top:110px}.dossier-assistant{padding-block:20px}.dossier-assistant summary{cursor:pointer;min-height:44px;padding-block:10px}
+.scope-import :focus-visible,.dossier-guide :focus-visible,.dossier-assistant summary:focus-visible{outline:3px solid #7c5127;outline-offset:4px}
+.dossier-help-dock{position:fixed;bottom:16px;right:16px;z-index:30;min-height:44px;padding:12px 18px;background:#25211d;color:#fffaf0;border:2px solid #fffaf0;border-radius:24px;box-shadow:0 2px 8px #0003;font:600 15px var(--font-geist-sans),sans-serif}.dossier-help-dock:focus-visible{outline:3px solid #7c5127;outline-offset:4px}.intake-layout{padding-bottom:90px}.dossier-assistant .assistant-prototype{padding:18px 0;gap:18px}
+@media(max-width:1100px){.dossier-assistant .assistant-prototype{grid-template-columns:1fr}}
+
+.scope-import .scope-local{border:0;padding:0;margin:0;min-width:0}.scope-memory{border-top:1px dashed #c7beb1;margin-top:16px;padding-top:12px}.scope-import button:disabled{opacity:.55;cursor:not-allowed}

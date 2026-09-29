@@ -54,7 +54,7 @@ export function MaturityDemonstrator({ locale = 'es' }: { locale?: 'es' | 'en' |
           <p>{scenario.answers[stageId]}</p>
           <div className="evidence-line"><Clock3 size={16} /><span>{stage.evidence}</span></div>
           {visibleDetails.length ? (
-            <ul>{visibleDetails.map((detail) => <li key={detail}><Check size={15} />{detail}</li>)}</ul>
+            <ul>{visibleDetails.map((detail: string) => <li key={detail}><Check size={15} />{detail}</li>)}</ul>
           ) : <div className="empty-evidence">{copy.labels.empty}</div>}
         </article>
       </div>

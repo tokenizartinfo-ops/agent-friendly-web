@@ -462,7 +462,7 @@ footer p { margin: 0; }
 .security-note strong, .security-note span { display: block; }
 .security-note strong { font-size: 12px; }
 .security-note span { margin-top: 3px; font-size: 11px; line-height: 1.45; }
-.intake-aside { position: sticky; top: 96px; display: grid; gap: 14px; }
+.intake-aside { position: static; display: grid; gap: 14px; }
 .owner-chip, .progress-block, .question-block, .save-status, .mini-roadmap { border: 1px solid var(--line); border-radius: 8px; background: var(--white); }
 .owner-chip { display: flex; align-items: center; gap: 10px; padding: 14px; }
 .owner-chip > span { width: 34px; height: 34px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--ink); color: var(--lime); font-weight: 800; }
@@ -1006,6 +1006,7 @@ footer p { margin: 0; }
 .capsule-empty { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: center; gap: 16px; margin-top: 18px; padding: 19px; border: 1px dashed #9d8e79; background: #f7f0e6; }
 .capsule-empty strong { display: block; font-size: 13px; }
 .capsule-empty p { margin: 6px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.capsule-empty.capsule-load-error { grid-template-columns: minmax(0, 1fr) auto; }
 .capsule-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 18px; border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); }
 .capsule-summary > div { min-width: 0; padding: 13px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
 .capsule-summary span, .capsule-summary strong, .capsule-summary code { display: block; }
@@ -1132,9 +1133,42 @@ footer p { margin: 0; }
 .capsule-page-hero p { max-width: 720px; margin: 0; color: #5e554b; font-size: 13px; line-height: 1.6; }
 .capsule-page-shell { max-width: 1040px; margin: 0 auto; padding: 38px 28px 64px; }
 
+/* Readable review text at normal zoom; keep technical content selectable. */
+.capsule-section .form-section-title strong { font-size: 18px; }
+.capsule-section .form-section-title span,
+.capsule-section .capsule-no-write span,
+.capsule-section .capsule-empty p,
+.capsule-section .capsule-files summary small,
+.capsule-section .capsule-comparison-heading span,
+.capsule-section .capsule-approvals span,
+.capsule-section .verification-message span { font-size: 14px; line-height: 1.55; }
+.capsule-section .capsule-status,
+.capsule-section .capsule-summary span,
+.capsule-section .capsule-file-detail dt,
+.capsule-section .capsule-file-detail dd,
+.capsule-section .capsule-files summary code { font-size: 13px; line-height: 1.5; }
+.capsule-section .capsule-no-write strong,
+.capsule-section .capsule-empty strong,
+.capsule-section .capsule-summary strong,
+.capsule-section .capsule-summary code,
+.capsule-section .capsule-subheading,
+.capsule-section .capsule-files summary strong,
+.capsule-section .capsule-comparison-heading strong,
+.capsule-section .capsule-approvals strong { font-size: 15px; line-height: 1.45; }
+.capsule-section .capsule-file-detail pre { font-size: 13px; line-height: 1.55; overflow-wrap: anywhere; }
+.capsule-section .capsule-files summary span { min-width: 0; overflow-wrap: anywhere; }
+.capsule-section .capsule-actions :is(a, button),
+.capsule-section .capsule-decision-actions button,
+.capsule-section .capsule-comparison-heading button,
+.capsule-section .capsule-empty button { min-height: 44px; max-width: 100%; padding: 8px 12px; font-size: 14px; line-height: 1.45; white-space: normal; }
+.capsule-section button svg, .capsule-section a svg { flex-shrink: 0; }
+
 @media (max-width: 760px) {
   .capsule-heading { display: grid; }
+  .capsule-empty.capsule-load-error { grid-template-columns: minmax(0, 1fr); }
   .capsule-status { justify-self: start; }
+  .capsule-section .capsule-files summary { padding: 12px 0; grid-template-columns: 22px minmax(0, 1fr); }
+  .capsule-section .capsule-files summary code { grid-column: 2; }
   .capsule-empty { grid-template-columns: 30px minmax(0, 1fr); }
   .capsule-empty .primary-action { grid-column: 1 / -1; width: 100%; }
   .capsule-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -2203,3 +2237,10 @@ footer p { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   .comic-call-actions a:hover, .archive-drawers > a:hover { transform: none; }
 }
+
+/* Explicit dossier creation stays separate from the autosaved intake. */
+.project-create summary { cursor: pointer; font-weight: 700; font-size: 16px; }
+.project-create summary svg { display: inline-block; vertical-align: middle; margin-right: 8px; }
+.project-create p { margin: 12px 0; font-size: 15px; line-height: 1.5; }
+.project-create fieldset { border: 0; padding: 0; margin: 16px 0; min-width: 0; }
+.project-create .secondary-action { min-height: 44px; font-family: inherit; font-size: 14px; font-weight: 700; white-space: normal; }

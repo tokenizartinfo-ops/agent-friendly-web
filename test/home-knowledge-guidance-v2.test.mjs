@@ -27,7 +27,7 @@ test('home reference is dated, accurate and bounded', async () => {
   assert.match(PUBLIC_READINESS_REFERENCE.boundary.es, /pagos|comercio/i);
   assert.match(scanSource, /PUBLIC_READINESS_REFERENCE\.score/);
   assert.match(scanSource, /PUBLIC_READINESS_REFERENCE\.measuredAt/);
-  assert.match(scanSource, /PUBLIC_READINESS_REFERENCE\.categories\[id\]/);
+  assert.match(scanSource, /PUBLIC_READINESS_REFERENCE\.categories\[id(?: as keyof typeof PUBLIC_READINESS_REFERENCE\.categories)?\]/);
   assert.match(scanSource, /copy\.referenceBreakdown/);
   assert.doesNotMatch(scanSource, /result \? `\$\{category\.score\}\/\$\{category\.weight\}` : copy\.pending/);
   assert.doesNotMatch(scanSource, /:\s*'70'/);

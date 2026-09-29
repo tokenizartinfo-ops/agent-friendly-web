@@ -1,8 +1,6 @@
 import { getBuiltinProfile } from '../../registry/builtin';
 // The MCP adapter is plain ESM so it can also be exercised by protocol tests.
-// @ts-expect-error The JavaScript module intentionally has no separate declarations.
 import { allowedHostnamesForRequest, createPublicMcpHttpHandler } from '../../lib/public-mcp-server.mjs';
-// @ts-expect-error The JavaScript module intentionally has no separate declarations.
 import { prepareBoundedPublicMcpRequest, PublicMcpHttpError, sanitizePublicMcpResponse } from '../../lib/public-mcp-http.mjs';
 
 async function getPublicProfileForMcp(slug: string, version?: number) {

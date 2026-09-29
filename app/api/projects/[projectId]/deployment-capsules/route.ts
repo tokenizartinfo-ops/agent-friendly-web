@@ -10,10 +10,8 @@ import {
   registrySites,
   siteProjects,
 } from '../../../../../db/schema';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { deriveCapsuleRole, maintainerApprovalRequired } from '../../../../../lib/capsule-access.mjs';
 import { domainClaimStatusAt } from '../../../../../lib/domain-verification.mjs';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { buildPublicationCapsule, capsuleState } from '../../../../../lib/publication-capsule.mjs';
 
 type RouteContext = { params: Promise<{ projectId: string }> };

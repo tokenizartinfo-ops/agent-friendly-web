@@ -59,14 +59,25 @@ test('requires subject and normalized email claims', async () => {
   const missingEmail = await accessToken({ email: '' });
   const missingSubject = await accessToken({}, { subject: '' });
   const oversizedSubject = await accessToken({}, { subject: 'a'.repeat(201) });
-  const wrongType = await accessToken({}, { typ: 'JOSE' });
-  for (const token of [missingEmail, missingSubject, oversizedSubject, wrongType]) {
+  for (const token of [missingEmail, missingSubject, oversizedSubject]) {
     assert.deepEqual(await verifyCloudflareAccessJwt({
       token,
       teamDomain: 'tokenizart.cloudflareaccess.com',
       audience,
       keySet: publicKey,
     }), { ok: false, code: 'contact_staging_identity_required' });
+  }
+});
+
+test('optional typ does not replace issuer, audience or signature verification', async () => {
+  const token = await accessToken({}, { typ: null });
+  const input = { token, teamDomain: 'tokenizart.cloudflareaccess.com', audience, keySet: publicKey };
+  assert.equal((await verifyCloudflareAccessJwt(input)).ok, true);
+  const otherKeys = await generateKeyPair('RS256');
+  for (const changed of [{ audience: 'foreign-app' }, { keySet: otherKeys.publicKey }]) {
+    assert.deepEqual(await verifyCloudflareAccessJwt({ ...input, ...changed }), {
+      ok: false, code: 'contact_staging_identity_required',
+    });
   }
 });
 

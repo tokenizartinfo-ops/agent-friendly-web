@@ -13,7 +13,6 @@ import {
 } from 'lucide-react';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { CRAWLER_CATALOG } from '../../lib/crawler-catalog.mjs';
 import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 

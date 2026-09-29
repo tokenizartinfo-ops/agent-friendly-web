@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "vinext dev",
     "generate:crawler-catalog": "node scripts/generate-crawler-catalog.mjs",
-    "generate:okf": "node scripts/generate-okf-public.mjs",
+    "generate:okf": "node scripts/generate-okf-public.mjs && node scripts/RefreshInfrastructureDiscovery.mjs",
     "validate:okf": "node scripts/validate-okf-public.mjs",
     "build": "vinext build",
     "start": "vinext start",

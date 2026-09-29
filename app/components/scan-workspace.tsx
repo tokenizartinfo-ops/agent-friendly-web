@@ -13,13 +13,13 @@ import {
   Radar,
   Route,
 } from 'lucide-react';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { normalizeSitePrefill } from '../../lib/site-prefill.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { HOME_COPY } from '../../lib/home-copy.mjs';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { PUBLIC_READINESS_REFERENCE } from '../../lib/public-readiness-reference.mjs';
 import { ContactIntake } from './contact-intake';
+import { ScanActionPlan } from './scan-action-plan';
+import { ACTION_PLAN_COPY } from '../../lib/scan-action-plan.mjs';
 
 type Category = { label: string; score: number; weight: number; status: string };
 type ScanResult = {
@@ -44,6 +44,8 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
 
   async function runScan(event: React.FormEvent) {
     event.preventDefault();
+    if (loading) return;
+    setResult(null);
     setLoading(true);
     setError('');
     try {
@@ -52,7 +54,7 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ url }),
       });
-      const payload = await response.json();
+      const payload = await response.json() as ScanResult & { error?: string };
       if (!response.ok) throw new Error(payload.error || copy.form.error);
       setResult(payload);
     } catch (scanError) {
@@ -64,7 +66,7 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
   }
 
   const categories: Array<[string, Category & { help: string }]> = copy.categories.map(({ id, label, help }) => {
-    const observed = result?.readiness.categories[id] || PUBLIC_READINESS_REFERENCE.categories[id];
+    const observed = result?.readiness.categories[id] || PUBLIC_READINESS_REFERENCE.categories[id as keyof typeof PUBLIC_READINESS_REFERENCE.categories];
     return [id, { ...observed, label, help }];
   });
 
@@ -82,7 +84,8 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
               <input
                 id="site-url"
                 value={url}
-                onChange={(event) => setUrl(event.target.value)}
+                onChange={(event) => { setUrl(event.target.value); setResult(null); setError(''); }}
+                disabled={loading}
                 placeholder={copy.form.placeholder}
                 inputMode="url"
                 autoComplete="url"
@@ -175,6 +178,7 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
               <div className="result-next-action">
                 <div><span>{copy.next}</span><strong>{copy.nextText}</strong></div>
                 <div className="result-next-actions">
+                  <a href="#action-plan-title">{ACTION_PLAN_COPY[locale].viewPlan} <ArrowRight size={16} /></a>
                   <ContactIntake domain={result.target} locale={locale} />
                   <a href={localizedPath('dossier', locale) || '/expediente'}>{copy.openDossier} <ArrowRight size={16} /></a>
                 </div>
@@ -194,6 +198,7 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
           <a href={localizedPath('dossier', locale) || '/expediente'}>{copy.createDossier} <ArrowRight size={17} /></a>
         </aside>
       </section>
+      {result ? <ScanActionPlan key={`${result.target}:${result.checkedAt}`} scan={result} locale={locale} /> : null}
     </>
   );
 }

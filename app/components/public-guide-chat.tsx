@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowUp, Bot, ExternalLink, RotateCcw, ShieldCheck, UserRound } from 'lucide-react';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { PUBLIC_GUIDE_INITIAL_CONTEXT, respondToPublicGuide } from '../../lib/public-guide.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { publicToolsCopy } from '../../lib/public-tools-copy.mjs';

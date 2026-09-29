@@ -1,25 +1,8 @@
 import type { Metadata } from 'next';
-import { Bangers, Geist, Geist_Mono } from 'next/font/google';
+import './fonts.css';
 import { headers } from 'next/headers';
 import './globals.css';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { localeFromRequestHeader } from '../lib/request-locale.mjs';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
-
-const comicDisplay = Bangers({
-  variable: '--font-comic',
-  subsets: ['latin'],
-  weight: '400',
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://agentfriendlyweb.dev'),
@@ -54,9 +37,7 @@ export default async function RootLayout({
         <link rel="ai-catalog" href="/.well-known/ai-catalog.json" type="application/json" />
         <link rel="alternate" href="/index.md" type="text/markdown" title="Agent Friendly Web in Markdown" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${comicDisplay.variable} antialiased`}
-      >
+      <body className="antialiased">
         {children}
       </body>
     </html>

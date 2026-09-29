@@ -55,6 +55,18 @@
   ],
   "observedResources": [
     {
+      "type": "llms.txt Tokenizart publicado",
+      "url": "https://tokenizart.com/llms.txt",
+      "state": "observed",
+      "observedAt": "2026-09-09T23:03:35.400Z"
+    },
+    {
+      "type": "llms-full.txt Tokenizart publicado",
+      "url": "https://tokenizart.com/llms-full.txt",
+      "state": "observed",
+      "observedAt": "2026-09-09T23:03:37.433Z"
+    },
+    {
       "type": "robots.txt Tokenizart",
       "url": "https://tokenizart.com/robots.txt",
       "state": "observed",
@@ -138,6 +150,7 @@
   },
   "historyUrl": "https://agentfriendlyweb.dev/registry/tokenizart#history",
   "limits": [
+    "Readiness 23/100 es un baseline historico del 2026-08-26, no una auditoria actual. El reporte de Gabriel de 36/100 del 2026-09-09 aun no se ha reproducido independientemente.",
     "El nivel AF es una fotografia metodologica y no una certificacion oficial.",
     "Accesibilidad HTTP no demuestra indexacion, recomendacion o uso por un proveedor de IA.",
     "CLI, MCP, skills y OKF se mantienen como release candidates hasta contar con distribucion y endpoints verificables.",

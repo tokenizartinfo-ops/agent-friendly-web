@@ -1,12 +1,31 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   Bot, Check, CircleHelp, Clipboard, Cloud, FileStack, Globe2, Languages,
   LoaderCircle, Radar, RefreshCw, Save, Settings2, ShieldAlert, Target, UserRound, UsersRound,
 } from 'lucide-react';
 import { CapsuleReview } from './capsule-review';
+import { ProjectCreate } from './project-create';
 import { privateUiCopy } from '../../lib/private-ui-copy.mjs';
+import { IntakeAssistantPrototype } from './intake-assistant-prototype';
+import { IntakeIntelligentCopilot } from './intake-intelligent-copilot';
+import { isCopilotProjectAllowed } from '../../lib/copilot-rollout.mjs';
+import {dossierDirtyFields} from '../../lib/dossier-progress.mjs';
+import {DossierProgress} from './dossier-progress';
+import { ScopeImport, type ReviewedScope } from './scope-import';
+import {DOSSIER_GUIDE_COPY} from '../../lib/dossier-guide.mjs';
+import { languageSelection, languageChoices, goalChoices } from '../../lib/intake-choice-compatibility.mjs';
+import { planDossierRebase, resolveDossierRebase } from '../../lib/dossier-rebase.mjs';
+import { IntakeConflictReview, type RebasePlan } from './intake-conflict-review';
+import { createProjectSaveAttempt } from '../../lib/project-save-attempt.mjs';
+import { hasPendingDraft, attachDraftExitGuard } from '../../lib/draft-exit-guard.mjs';
+import { DraftExitDialog } from './draft-exit-dialog';
+import { roadmapPresentation } from '../../lib/roadmap-presentation.mjs';
+import { readProjectSaveResponse } from '../../lib/project-save-response.mjs';
+
+import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
+import { reconcileSavedDraft } from '../../lib/project-save-reconciliation.mjs';
 
 type Intake = {
   organization: string; website: string; role: string; siteType: string; control: string;
@@ -19,6 +38,7 @@ type Intake = {
 
 type RoadmapItem = { id: string; title: string; reason: string; stage: string };
 type SavedProject = Partial<Intake> & {
+  revision?: number;
   id: string; completion: number; nextQuestion: string | null; roadmap: RoadmapItem[];
 };
 type DomainClaim = {
@@ -51,7 +71,7 @@ const listFields = new Set<keyof Intake>([
   'goals', 'languages', 'contentSources', 'desiredCapabilities', 'authorizedResources',
 ]);
 
-function intakeFromProject(saved: SavedProject): Intake {
+function intakeFromProject(saved: Partial<Intake>): Intake {
   const output = { ...emptyIntake };
   for (const key of Object.keys(output) as Array<keyof Intake>) {
     const value = saved[key];
@@ -103,19 +123,35 @@ function claimFailureMessage(payload: ClaimPayload, locale: Locale) {
   return localizedMessage(locale, 'El dominio todavía no pudo verificarse.', 'The domain could not be verified yet.', 'O domínio ainda não pôde ser verificado.');
 }
 
-export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userName: string; userEmail: string; locale?: Locale }) {
+export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal, copilotEnabled = false, copilotProjectId = '' }: { userName: string; userEmail: string; locale?: Locale; rehearsal?: { request: typeof fetch; autoSave?: boolean }; copilotEnabled?: boolean; copilotProjectId?: string }) {
+  const request = rehearsal?.request || fetch;
+  const [autosavePaused, setAutosavePaused] = useState(false);
+  const [manualBusy, setManualBusy] = useState(false);
+  const [sessionRequired, setSessionRequired] = useState(false);
+  const [exitTarget, setExitTarget] = useState<string | null>(null);
+  const exitCleanup = useRef<(() => void) | null>(null);
+  const savedBase = useRef<Intake>(emptyIntake);
+  const [savedSnapshot, setSavedSnapshot] = useState<Intake>(emptyIntake);
+  const savedRevision = useRef(0);
+  const [scopeRevision,setScopeRevision]=useState(0);
+  const [reviewedScope,setReviewedScope]=useState<ReviewedScope>(null);
+  const [conflictReview, setConflictReview] = useState<{ current: SavedProject; plan: RebasePlan } | null>(null);
+  const manualLock = useRef(false);
+  const [saveAttempt] = useState(() => createProjectSaveAttempt());
   const copy = privateUiCopy(locale).intake;
   const [identitySection, goalsSection, controlSection, languagesSection, contentSection, capabilitiesSection, publicationSection, governanceSection] = copy.sections;
-  const goalOptions = copy.goals;
-  const languageOptions = copy.languages;
   const contentOptions = copy.content;
   const capabilityOptions = copy.capabilities;
   const resourceOptions = copy.resources;
   const [data, setData] = useState<Intake>(emptyIntake);
   const [projectId, setProjectId] = useState('');
   const [savedWebsite, setSavedWebsite] = useState('');
-  const [completion, setCompletion] = useState(0);
-  const [nextQuestion, setNextQuestion] = useState(locale === 'en' ? 'Let us start with the organization or project name.' : locale === 'pt' ? 'Vamos começar pelo nome da organização ou projeto.' : 'Empecemos por el nombre de la organización o proyecto.');
+  const [loaded,setLoaded]=useState(false);
+  const [loadAttempt,setLoadAttempt]=useState(0);
+  const unconfirmedChanges=dossierDirtyFields(data,savedSnapshot).length>0;
+  const savedMessage = rehearsal
+    ? localizedMessage(locale, 'Guardado simulado. No se enviaron datos.', 'Simulated save. No data was sent.', 'Salvamento simulado. Nenhum dado foi enviado.')
+    : localizedMessage(locale, 'Cambios guardados.', 'Changes saved.', 'Mudanças salvas.');
   const [roadmap, setRoadmap] = useState<RoadmapItem[]>([]);
   const [status, setStatus] = useState<'loading' | 'idle' | 'saving' | 'saved' | 'error'>('loading');
   const [message, setMessage] = useState(copy.loading);
@@ -130,33 +166,39 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
   const ready = useRef(false);
 
   useEffect(() => {
-    fetch('/api/projects', { cache: 'no-store' })
+    if (ready.current) return;
+    let cancelled = false;
+    request(new URL(window.location.href).searchParams.has('project') ? `/api/projects?project=${encodeURIComponent(new URL(window.location.href).searchParams.get('project') || '')}` : '/api/projects', { cache: 'no-store' })
       .then(async (response) => {
         const payload = await response.json() as ProjectPayload;
+        if (cancelled) return;
         if (!response.ok) throw new Error(payload.error || localizedMessage(locale, 'No se pudo abrir el expediente.', 'The dossier could not be opened.', 'Não foi possível abrir o dossiê.'));
         if (payload.project) {
           const saved = payload.project;
           setProjectId(saved.id);
           setSavedWebsite(saved.website || '');
           setData(intakeFromProject(saved));
-          setCompletion(saved.completion || 0);
-          setNextQuestion(saved.nextQuestion || localizedMessage(locale, 'Revisemos el próximo dato.', 'Let us review the next item.', 'Vamos revisar o próximo dado.'));
+          savedBase.current = intakeFromProject(saved);
+          setSavedSnapshot(intakeFromProject(saved));
+          savedRevision.current = saved.revision || 0;setScopeRevision(saved.revision || 0);
           setRoadmap(saved.roadmap || []);
           setMessage(copy.recovered);
         } else setMessage(copy.newDossier);
         setStatus('idle');
-        window.setTimeout(() => { ready.current = true; }, 0);
+        ready.current = true;setLoaded(true);
       })
       .catch((error) => {
+        if (cancelled) return;
         setStatus('error');
         setMessage(error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo abrir el expediente.', 'The dossier could not be opened.', 'Não foi possível abrir o dossiê.'));
       });
-  }, [copy.newDossier, copy.recovered, locale]);
+    return () => { cancelled = true; };
+  }, [copy.newDossier, copy.recovered, locale, request, rehearsal,loadAttempt]);
 
   useEffect(() => {
     if (!projectId) return;
     const controller = new AbortController();
-    fetch(`/api/projects/${projectId}/domain-claims`, { cache: 'no-store', signal: controller.signal })
+    request(`/api/projects/${projectId}/domain-claims`, { cache: 'no-store', signal: controller.signal })
       .then(async (response) => {
         const payload = await response.json() as ClaimPayload;
         if (!response.ok) throw new Error(payload.error || localizedMessage(locale, 'No se pudo consultar la verificación.', 'Verification could not be loaded.', 'Não foi possível consultar a verificação.'));
@@ -168,12 +210,12 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
         setClaimMessage(error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo consultar la verificación.', 'Verification could not be loaded.', 'Não foi possível consultar a verificação.'));
       });
     return () => controller.abort();
-  }, [locale, projectId]);
+  }, [locale, projectId, request]);
 
   useEffect(() => {
     if (!projectId) return;
     const controller = new AbortController();
-    fetch(`/api/projects/${projectId}/observations`, { cache: 'no-store', signal: controller.signal })
+    request(`/api/projects/${projectId}/observations`, { cache: 'no-store', signal: controller.signal })
       .then(async (response) => {
         const payload = await response.json() as ObservationPayload;
         if (!response.ok) throw new Error(payload.error || localizedMessage(locale, 'No se pudo consultar la última observación.', 'The latest observation could not be loaded.', 'Não foi possível consultar a última observação.'));
@@ -184,36 +226,96 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
         setObservationMessage(error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo consultar la última observación.', 'The latest observation could not be loaded.', 'Não foi possível consultar a última observação.'));
       });
     return () => controller.abort();
-  }, [locale, projectId]);
+  }, [locale, projectId, request]);
+
+  const saveReviewedDraft = useCallback(async () => {
+    if (!ready.current || manualLock.current || conflictReview || !data.website) return;
+    manualLock.current = true;
+    setManualBusy(true);
+    setStatus('saving');
+    try {
+      const response = await request('/api/projects', saveAttempt.prepare({ ...data, id: projectId, revision: savedRevision.current }));
+      const parsed = await readProjectSaveResponse(response);
+      if (parsed.sessionRequired) {
+        setSessionRequired(true);
+        setAutosavePaused(true);
+        setStatus('error');
+        return;
+      }
+      setSessionRequired(false);
+      const payload = parsed.payload as ProjectPayload;
+      if (response.status === 409 && payload.project && payload.project.id === projectId) {
+        const plan = planDossierRebase(savedBase.current, data, intakeFromProject(payload.project), payload.project.revision);
+        setAutosavePaused(true);
+        setConflictReview({ current: payload.project, plan });
+        setStatus('error');
+        return;
+      }
+      if (!response.ok || !payload.project) throw new Error(payload.error || 'Save failed');
+      const acknowledged = intakeFromProject(payload.project);
+      savedBase.current = acknowledged;
+      setData(current => reconcileSavedDraft(data, acknowledged, current));
+      setSavedSnapshot(intakeFromProject(payload.project));
+      savedRevision.current = payload.project.revision || 0;setScopeRevision(payload.project.revision || 0);
+      setProjectId(payload.project.id);
+      setSavedWebsite(payload.project.website || '');
+      setRoadmap(payload.project.roadmap || []);
+      setStatus('saved');
+      setAutosavePaused(false);
+      setSessionRequired(false);
+      setMessage(rehearsal
+        ? localizedMessage(locale, 'Guardado simulado. No se enviaron datos.', 'Simulated save. No data was sent.', 'Salvamento simulado. Nenhum dado foi enviado.')
+        : localizedMessage(locale, 'Cambios guardados.', 'Changes saved.', 'Mudanças salvas.'));
+    } catch (error) {
+      setAutosavePaused(true);
+      setStatus('error');
+      setMessage(error instanceof Error && error.message === 'invalid_save_response'
+        ? localizedMessage(locale, 'No pudimos confirmar el guardado. Tu borrador sigue aqui. Comprueba tu sesion en otra pestana y vuelve a guardar.', 'We could not confirm the save. Your draft is still here. Check your session in another tab and save again.', 'Nao foi possivel confirmar o salvamento. Seu rascunho continua aqui. Confira sua sessao em outra aba e salve novamente.')
+        : error instanceof Error && error.message === 'invalid_proposal'
+        ? localizedMessage(locale, 'Tu borrador se conserva. Hay un dato con formato o longitud que no podemos conciliar. Revisalo en el formulario antes de volver a guardar. No se guardaron estos cambios.', 'Your draft is preserved. A detail has a format or length we cannot reconcile. Review it in the form before saving again. These changes were not saved.', 'Seu rascunho foi preservado. Um dado tem formato ou tamanho que não conseguimos conciliar. Revise no formulário antes de salvar novamente. Estas alterações não foram salvas.')
+        : error instanceof Error && error.message === 'response_lost'
+          ? localizedMessage(locale, 'No recibimos la confirmación. Tu borrador sigue aquí: vuelve a guardar y comprobaremos el mismo intento sin duplicarlo.', 'Confirmation was not received. Your draft is still here: save again to check the same attempt without duplicating it.', 'Não recebemos a confirmação. Seu rascunho continua aqui: salve novamente para verificar a mesma tentativa sem duplicá-la.')
+          : error instanceof Error ? error.message : 'Save failed');
+    } finally {
+      manualLock.current = false;
+      setManualBusy(false);
+    }
+  }, [conflictReview, data, locale, projectId, rehearsal, request, saveAttempt]);
 
   useEffect(() => {
-    if (!ready.current || !data.website) return;
-    setStatus('saving');
-    setMessage(localizedMessage(locale, 'Guardando cambios...', 'Saving changes...', 'Salvando mudanças...'));
+    if (!shouldAutosaveProject({ ready: ready.current, draft: data, base: savedBase.current,
+      manual: Boolean(rehearsal && !rehearsal.autoSave), busy: manualBusy, paused: autosavePaused,
+      conflict: Boolean(conflictReview), sessionRequired })) return;
+    if (exitTarget) return;
     const timer = window.setTimeout(async () => {
-      try {
-        const response = await fetch('/api/projects', {
-          method: 'PUT', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ ...data, id: projectId }),
-        });
-        const payload = await response.json() as ProjectPayload;
-        if (!response.ok || !payload.project) throw new Error(payload.error || localizedMessage(locale, 'No se pudo guardar.', 'Changes could not be saved.', 'Não foi possível salvar.'));
-        setCompletion(payload.project.completion);
-        setProjectId(payload.project.id);
-        setSavedWebsite(payload.project.website || '');
-        setNextQuestion(payload.project.nextQuestion || localizedMessage(locale, 'El expediente está listo para revisión.', 'The dossier is ready for review.', 'O dossiê está pronto para revisão.'));
-        setRoadmap(payload.project.roadmap || []);
-        setStatus('saved');
-        setMessage(localizedMessage(locale, 'Cambios guardados.', 'Changes saved.', 'Mudanças salvas.'));
-      } catch (error) {
-        setStatus('error');
-        setMessage(error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo guardar.', 'Changes could not be saved.', 'Não foi possível salvar.'));
-      }
+      await saveReviewedDraft();
     }, 900);
     return () => window.clearTimeout(timer);
-  }, [data, locale, projectId]);
+  }, [data, rehearsal, manualBusy, autosavePaused, conflictReview, sessionRequired, saveReviewedDraft, status, exitTarget]);
 
-  const completedFields = useMemo(() => Math.round((completion / 100) * 12), [completion]);
+  useEffect(() => {
+    if (!hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
+      busy: manualBusy, conflict: Boolean(conflictReview) })) return;
+    const cleanup = attachDraftExitGuard(window, document, (href: string) => { setExitTarget(href); return false; });
+    exitCleanup.current = cleanup;
+    return () => { cleanup(); exitCleanup.current = null; };
+  }, [data, manualBusy, conflictReview, status, locale]);
+
+  function confirmConflictReview(choices: Record<string, string>) {
+    if (!conflictReview) return;
+    const { current, plan } = conflictReview;
+    const combined = resolveDossierRebase(intakeFromProject(current), current.revision, plan, choices);
+    setData(intakeFromProject(combined));
+    savedBase.current = intakeFromProject(current);
+    setSavedSnapshot(intakeFromProject(current));
+    setSavedWebsite(current.website || "");
+    savedRevision.current = current.revision || 0;setScopeRevision(current.revision || 0);
+    setConflictReview(null);
+    setAutosavePaused(true);
+    setStatus('idle');
+    setMessage(localizedMessage(locale, 'Revisión aplicada al borrador. Confirma el guardado cuando estés listo.', 'Review applied to your draft. Confirm saving when ready.', 'Revisão aplicada ao rascunho. Confirme o salvamento quando estiver pronto.'));
+  }
+
   const hostname = useMemo(() => normalizedHostname(data.website), [data.website]);
   const activeClaim = claim?.hostname === hostname ? claim : null;
   const websiteIsSaved = Boolean(
@@ -228,6 +330,10 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
 
   function update<K extends keyof Intake>(field: K, value: Intake[K]) {
     setData((current) => ({ ...current, [field]: value }));
+    if (rehearsal) {
+      setStatus('idle');
+      setMessage(localizedMessage(locale, 'Borrador sin guardar.', 'Unsaved draft.', 'Rascunho não salvo.'));
+    }
   }
   function toggleList(field: 'goals' | 'languages' | 'contentSources' | 'desiredCapabilities' | 'authorizedResources', value: string) {
     const current = data[field];
@@ -241,7 +347,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
     }
     setClaimBusy(true); setCopied(false); setClaimMessage(localizedMessage(locale, 'Preparando instrucciones...', 'Preparing instructions...', 'Preparando instruções...'));
     try {
-      const response = await fetch(`/api/projects/${projectId}/domain-claims`, {
+      const response = await request(`/api/projects/${projectId}/domain-claims`, {
         method: 'POST', headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ method: claimMethod }),
       });
@@ -258,7 +364,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
     if (!projectId || !activeClaim) return;
     setClaimBusy(true); setClaimMessage(localizedMessage(locale, 'Comprobando el recurso público...', 'Checking the public resource...', 'Verificando o recurso público...'));
     try {
-      const response = await fetch(`/api/projects/${projectId}/domain-claims/${activeClaim.id}/verify`, { method: 'POST' });
+      const response = await request(`/api/projects/${projectId}/domain-claims/${activeClaim.id}/verify`, { method: 'POST' });
       const payload = await response.json() as ClaimPayload;
       if (!response.ok || !payload.verified) {
         setClaim((current) => current ? { ...current, status: payload.status || current.status, attemptCount: payload.attemptCount ?? current.attemptCount } : current);
@@ -290,7 +396,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
     setObservationBusy(true);
     setObservationMessage(localizedMessage(locale, 'Auditando recursos públicos y preparando una copia saneada...', 'Auditing public resources and preparing a sanitized copy...', 'Auditando recursos públicos e preparando uma cópia saneada...'));
     try {
-      const response = await fetch(`/api/projects/${projectId}/observations`, {
+      const response = await request(`/api/projects/${projectId}/observations`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ confirmSave: true }),
@@ -308,28 +414,54 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
 
   return (
     <div className="intake-layout">
+      <a className="dossier-help-dock" href="#dossier-assistant" onClick={()=>{const panel=document.getElementById('dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
+      {exitTarget && <DraftExitDialog locale={locale} onStay={() => setExitTarget(null)} onLeave={() => {
+        exitCleanup.current?.();
+        window.location.assign(exitTarget);
+      }} />}
       <main className="intake-main">
+        <fieldset disabled={Boolean(manualBusy || conflictReview || !loaded)} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
         <div className="page-title">
           <span>{copy.pageEyebrow}</span>
           <h1>{privateUiCopy(locale).dossier.title}</h1>
           <p>{privateUiCopy(locale).dossier.intro}</p>
         </div>
 
-        <FormSection icon={<UserRound size={20} />} title={identitySection[1]} subtitle={identitySection[2]}>
+        <ScopeImport onReviewChange={setReviewedScope} locale={locale} website={data.website} projectId={projectId || ""} revision={scopeRevision} canSave={Boolean(projectId && data.website === savedWebsite && status !== "saving")} request={request} onUseWebsite={website => {
+          if(manualLock.current || data.website.trim())return;
+          setAutosavePaused(true);setData(current=>({...current,website}));setStatus('idle');setMessage(DOSSIER_GUIDE_COPY[locale].draft);
+        }}/>
+        <details id="dossier-assistant" className="dossier-assistant" open>
+          <summary>{DOSSIER_GUIDE_COPY[locale].assist}</summary>
+          <p>{DOSSIER_GUIDE_COPY[locale].local}</p>
+          <IntakeAssistantPrototype locale={locale} draft={data} reviewedScope={reviewedScope} onApply={next => {
+            if(manualLock.current)return;
+            setAutosavePaused(true);setData(intakeFromProject(next));setStatus('idle');setMessage(DOSSIER_GUIDE_COPY[locale].draft);
+          }} />
+        </details>
+        {isCopilotProjectAllowed({ enabled: copilotEnabled, allowedProjectId: copilotProjectId, projectId }) && !rehearsal ? <details className="dossier-assistant"><summary>{locale === 'en' ? 'Intelligent copilot' : 'Copilot inteligente'}</summary>
+          <IntakeIntelligentCopilot key={`${projectId}:${locale}`} projectId={projectId} locale={locale} draft={data} onApply={next => {
+            if (manualLock.current) return;
+            setAutosavePaused(true); setData(intakeFromProject(next)); setStatus('idle'); setMessage(DOSSIER_GUIDE_COPY[locale].draft);
+          }} />
+        </details> : null}
+        <div id="dossier-form" />
+
+        <FormSection icon={<UserRound size={20} />} id="dossier-identity" title={identitySection[1]} subtitle={identitySection[2]}>
           <div className="field-grid">
             <label>{copy.organization}<input value={data.organization} onChange={(event) => update('organization', event.target.value)} placeholder="Museo Top" /></label>
-            <label>{copy.website}<input value={data.website} onChange={(event) => update('website', event.target.value)} placeholder="example.org" inputMode="url" /></label>
+            <label>{copy.website}<input id="dossier-website" value={data.website} onChange={(event) => update('website', event.target.value)} placeholder="example.org" inputMode="url" /></label>
             <label>{copy.role}<input value={data.role} onChange={(event) => update('role', event.target.value)} placeholder={locale === 'en' ? 'Owner, artist, manager...' : locale === 'pt' ? 'Owner, artista, responsável...' : 'Owner, artista, responsable...'} /></label>
             <label>{copy.siteType}<select value={data.siteType} onChange={(event) => update('siteType', event.target.value)}><option value="">{copy.choose}</option>{copy.siteTypes.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label>
           </div>
           <label className="wide-field">{copy.audience}<textarea value={data.audience} onChange={(event) => update('audience', event.target.value)} placeholder={locale === 'en' ? 'People, organizations or agents that should find and understand you.' : locale === 'pt' ? 'Pessoas, organizações ou agentes que devem encontrar e compreender você.' : 'Personas, organizaciones o agentes que deberían encontrarte y entenderte.'} /></label>
         </FormSection>
 
-        <FormSection icon={<Target size={20} />} title={goalsSection[1]} subtitle={goalsSection[2]}>
-          <ChoiceList options={goalOptions} values={data.goals} onToggle={(value) => toggleList('goals', value)} />
+        <FormSection icon={<Target size={20} />} id="dossier-goals" title={goalsSection[1]} subtitle={goalsSection[2]}>
+          <ChoiceList options={goalChoices(locale, data.goals)} values={data.goals} onToggle={(value) => toggleList('goals', value)} />
         </FormSection>
 
-        <FormSection icon={<Cloud size={20} />} title={controlSection[1]} subtitle={controlSection[2]}>
+        <FormSection icon={<Cloud size={20} />} id="dossier-control" title={controlSection[1]} subtitle={controlSection[2]}>
           <div className="field-grid">
             <label>{copy.labels.control}<select value={data.control} onChange={(event) => update('control', event.target.value)}>{copy.controls.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label>
             <label>{copy.labels.cms}<input value={data.cms} onChange={(event) => update('cms', event.target.value)} placeholder="WordPress, Shopify..." /></label>
@@ -338,16 +470,19 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
           <div className="security-note"><ShieldAlert size={19} /><div><strong>{copy.labels.noSecrets}</strong><span>{copy.labels.noSecretsBody}</span></div></div>
         </FormSection>
 
-        <FormSection icon={<Languages size={20} />} title={languagesSection[1]} subtitle={languagesSection[2]}>
-          <ChoiceList compact options={languageOptions.map((value) => [value, value])} values={data.languages} onToggle={(value) => toggleList('languages', value)} />
+        <FormSection icon={<Languages size={20} />} id="dossier-languages" title={languagesSection[1]} subtitle={languagesSection[2]}>
+          <ChoiceList compact options={languageChoices(locale, data.languages)} values={languageSelection(data.languages)} onToggle={(value) => {
+            const selected = languageSelection(data.languages);
+            update('languages', selected.includes(value) ? selected.filter((item: string) => item !== value) : [...selected, value]);
+          }} />
         </FormSection>
 
-        <FormSection icon={<FileStack size={20} />} title={contentSection[1]} subtitle={contentSection[2]}>
+        <FormSection icon={<FileStack size={20} />} id="dossier-content" title={contentSection[1]} subtitle={contentSection[2]}>
           <ChoiceList compact options={contentOptions} values={data.contentSources} onToggle={(value) => toggleList('contentSources', value)} />
           <label className="wide-field">{copy.labels.notes}<textarea value={data.notes} onChange={(event) => update('notes', event.target.value)} placeholder={locale === 'en' ? 'Write freely. The system will help organize this information before it becomes content or tools.' : locale === 'pt' ? 'Escreva livremente. O sistema ajudará a organizar antes de transformar em conteúdo ou ferramentas.' : 'Escribe libremente. El sistema ayudará a ordenar antes de convertir en contenido o herramientas.'} /></label>
         </FormSection>
 
-        <FormSection icon={<Bot size={20} />} title={capabilitiesSection[1]} subtitle={capabilitiesSection[2]}>
+        <FormSection icon={<Bot size={20} />} id="dossier-capabilities" title={capabilitiesSection[1]} subtitle={capabilitiesSection[2]}>
           <span className="field-label">{copy.labels.desired}</span>
           <ChoiceList compact options={capabilityOptions} values={data.desiredCapabilities} onToggle={(value) => toggleList('desiredCapabilities', value)} />
           <span className="field-label spaced">{copy.labels.proposed}</span>
@@ -355,7 +490,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
           <p className="scope-note">{copy.labels.scope}</p>
         </FormSection>
 
-        <FormSection icon={<Globe2 size={20} />} title={publicationSection[1]} subtitle={publicationSection[2]}>
+        <FormSection icon={<Globe2 size={20} />} id="dossier-publication" title={publicationSection[1]} subtitle={publicationSection[2]}>
           <div className="field-grid">
             <label>{copy.labels.firstPublication}<select value={data.publicationPreference} onChange={(event) => update('publicationPreference', event.target.value)}><option value="">{copy.choose}</option>{copy.publication.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label>
             <label>{copy.labels.searchPolicy}<select value={data.crawlerSearchPolicy} onChange={(event) => update('crawlerSearchPolicy', event.target.value)}><option value="">{copy.choose}</option>{copy.searchPolicies.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label>
@@ -364,7 +499,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
           </div>
         </FormSection>
 
-        <FormSection icon={<UsersRound size={20} />} title={governanceSection[1]} subtitle={governanceSection[2]}>
+        <FormSection icon={<UsersRound size={20} />} id="dossier-governance" title={governanceSection[1]} subtitle={governanceSection[2]}>
           <div className="field-grid">
             <label>{copy.labels.maintainer}<input value={data.maintainerName} onChange={(event) => update('maintainerName', event.target.value)} /></label>
             <label>{copy.labels.maintainerEmail}<input value={data.maintainerEmail} onChange={(event) => update('maintainerEmail', event.target.value)} placeholder="web@example.org" inputMode="email" /></label>
@@ -374,7 +509,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
           </div>
         </FormSection>
 
-        <section className="form-section verification-section">
+        <section id="dossier-verification" className="form-section verification-section">
           <div className="verification-heading">
             <div className="form-section-title"><Settings2 size={20} /><div><strong>{copy.labels.verify}</strong><span>{copy.labels.verifySubtitle}</span></div></div>
             <span className="verification-status" data-status={activeClaim?.status || 'unverified'}>{claimStatusLabel(activeClaim, locale)}</span>
@@ -421,22 +556,29 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es' }: { userNa
           <div className="verification-message" aria-live="polite"><CircleHelp size={17} /><span>{observationMessage}</span></div>
         </section>
 
-        <CapsuleReview projectId={projectId} expectedDomain={hostname} allowBuild locale={locale} />
+        {!rehearsal ? <div id="dossier-capsule"><CapsuleReview projectId={projectId} expectedDomain={hostname} allowBuild locale={locale} /></div> : null}
+        </fieldset>
       </main>
 
       <aside className="intake-aside">
+        <DossierProgress draft={data} saved={savedSnapshot} loaded={loaded} projectId={projectId} status={status} sessionRequired={sessionRequired} conflict={Boolean(conflictReview)} verified={activeClaim?.status === 'verified' && websiteIsSaved} verifiedUntil={activeClaim?.verifiedUntil || ''} locale={locale} rehearsal={Boolean(rehearsal)} onRetryLoad={()=>{if(loaded)return;setStatus('loading');setLoadAttempt(value=>value+1);}}/>
+        {!rehearsal && projectId ? <ProjectCreate locale={locale} disabled={manualBusy || Boolean(conflictReview) || sessionRequired || shouldAutosaveProject({ ready: true, draft: data, base: savedSnapshot }) || (status !== 'idle' && status !== 'saved')} /> : null}
+        {conflictReview ? <div id="dossier-conflict"><IntakeConflictReview key={conflictReview.plan.revision} locale={locale} plan={conflictReview.plan} onConfirm={confirmConflictReview} onCancel={() => setConflictReview(null)} /></div> : null}
+        {<button id="dossier-save" className="primary-action" type="button" disabled={manualBusy || Boolean(conflictReview) || !loaded || !data.website} onClick={saveReviewedDraft}><Save size={17} />{rehearsal ? localizedMessage(locale, 'Confirmar guardado simulado', 'Confirm simulated save', 'Confirmar salvamento simulado') : localizedMessage(locale, 'Guardar cambios', 'Save changes', 'Salvar alterações')}</button>}
+        {sessionRequired ? <p id="dossier-session" tabIndex={-1} role="alert">{!rehearsal ? localizedMessage(locale, 'La sesión venció. Conserva esta pestaña abierta e inicia sesión en otra pestaña; después vuelve a guardar aquí.', 'Your session expired. Keep this tab open and sign in in another tab; then return here and save again.', 'Sua sessão expirou. Mantenha esta aba aberta e entre em outra aba; depois volte e salve novamente.') : localizedMessage(locale,
+          'La sesión de prueba venció. Tus cambios siguen en este formulario, sin guardar. No cierres ni recargues esta pestaña. Restablece la sesión simulada arriba y vuelve a confirmar el guardado; no necesitas completar todo otra vez.',
+          'The test session expired. Your unsaved changes remain in this form. Do not close or reload this tab. Restore the simulated session above, then confirm saving again; you do not need to fill everything out again.',
+          'A sessão de teste expirou. Suas alterações continuam neste formulário, sem salvar. Não feche nem recarregue esta aba. Restabeleça a sessão simulada acima e confirme o salvamento novamente; não precisa preencher tudo outra vez.')}</p> : null}
         <div className="owner-chip"><span>{userName.slice(0, 1).toUpperCase()}</span><div><strong>{userName}</strong><small>{userEmail}</small></div></div>
-        <div className="progress-block"><div className="progress-label"><span>{copy.labels.contextGathered}</span><strong>{completion}%</strong></div><div className="progress-track"><span style={{ width: `${completion}%` }} /></div><small>{completedFields}/12 {copy.labels.decisions}</small></div>
-        <div className="question-block"><CircleHelp size={20} /><span>{copy.labels.nextQuestion}</span><strong>{nextQuestion}</strong></div>
-        <div className="save-status" data-status={status}>{status === 'saving' || status === 'loading' ? <LoaderCircle className="spin" size={17} /> : status === 'saved' ? <Check size={17} /> : <Save size={17} />}<span>{message}</span></div>
-        {roadmap.length ? <div className="mini-roadmap"><span>{copy.labels.firstRoadmap}</span>{roadmap.slice(0, 4).map((item) => <div key={item.id}><small>{item.stage}</small><strong>{item.title}</strong></div>)}</div> : null}
+        {!sessionRequired ? <div className="save-status" data-status={status==='saved' && unconfirmedChanges ? 'idle' : status}>{status === 'saving' || status === 'loading' ? <LoaderCircle className="spin" size={17} /> : status === 'saved' ? <Check size={17} /> : <Save size={17} />}<span>{status === 'saved' ? unconfirmedChanges ? DOSSIER_GUIDE_COPY[locale].draft : savedMessage : message}</span></div> : null}
+        {roadmap.length ? <div className="mini-roadmap"><span>{copy.labels.firstRoadmap}</span>{roadmap.slice(0, 4).map(item => roadmapPresentation(item, locale)).map((item) => <div key={item.id}><small>{item.stage}</small><strong>{item.title}</strong></div>)}</div> : null}
       </aside>
     </div>
   );
 }
 
-function FormSection({ icon, title, subtitle, children }: { icon: ReactNode; title: string; subtitle: string; children: ReactNode }) {
-  return <section className="form-section"><div className="form-section-title">{icon}<div><strong>{title}</strong><span>{subtitle}</span></div></div>{children}</section>;
+function FormSection({ id, icon, title, subtitle, children }: { id:string; icon: ReactNode; title: string; subtitle: string; children: ReactNode }) {
+  return <section id={id} className="form-section"><div className="form-section-title">{icon}<div><strong>{title}</strong><span>{subtitle}</span></div></div>{children}</section>;
 }
 
 function ChoiceList({ options, values, onToggle, compact = false }: { options: string[][]; values: string[]; onToggle: (value: string) => void; compact?: boolean }) {
