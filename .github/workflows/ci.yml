@@ -24,4 +24,12 @@ jobs:
       - run: npm test
       - run: npm run lint
       - run: npm run build
+      - name: Preserve production build for controlled Cloudflare release
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-build-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
 
