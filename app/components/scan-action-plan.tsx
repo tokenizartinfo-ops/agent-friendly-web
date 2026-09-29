@@ -6,6 +6,7 @@ import {ACTION_PLAN_COPY, buildScanActionPlan, prepareScopeBrief} from '../../li
 import {localizedPath} from '../../lib/site-i18n.mjs';
 import './scan-action-plan.css';
 import {exportScanScope} from '../../lib/scan-scope-transfer.mjs';
+import {saveScopeHandoff} from '../../lib/scan-scope-handoff.mjs';
 
 type Props = {
   scan: {target:string;checkedAt:string;evidence:Record<string,boolean>;limits:string[]};
@@ -74,6 +75,16 @@ export function ScanActionPlan({scan,locale}:Props) {
     } catch {setMessage(copy.exportError);}
   }
 
+  function continueToDossier() {
+    try {
+      const text=exportScanScope(scan,{selected,reviewed,control},locale);
+      saveScopeHandoff(window.sessionStorage,text);
+      window.location.assign(localizedPath('dossier',locale)||'/expediente');
+    } catch {
+      setMessage(locale==='en'?'This browser could not carry the scope. Download the JSON file instead.':locale==='pt'?'Este navegador não conseguiu levar o escopo. Baixe o arquivo JSON.':'Este navegador no pudo llevar el alcance. Descargá el archivo JSON.');
+    }
+  }
+
   return <section className="scan-action-plan" aria-labelledby="action-plan-title">
     <header>
       <span className="plan-eyebrow"><FileCheck2 size={17} aria-hidden="true"/>{copy.eyebrow}</span>
@@ -108,6 +119,7 @@ export function ScanActionPlan({scan,locale}:Props) {
       <label className="plan-confirm"><input type="checkbox" checked={reviewed} disabled={!selected.length} onChange={event=>{setReviewed(event.target.checked);setMessage('');}}/>{copy.review}</label>
       <button type="button" className="plan-download" disabled={!selected.length||!reviewed} onClick={downloadScope}><Download size={17} aria-hidden="true"/>{copy.download}</button>
       <button type="button" className="plan-download" disabled={!selected.length||!reviewed} onClick={downloadTransfer}><Download size={17} aria-hidden="true"/>{locale==='es'?'Llevar al expediente (.json)':locale==='en'?'Transfer to dossier (.json)':'Levar ao dossiê (.json)'}</button>
+      <button type="button" className="plan-download" disabled={!selected.length||!reviewed} onClick={continueToDossier}><ArrowRight size={17} aria-hidden="true"/>{locale==='es'?'Continuar en el expediente con esta referencia':locale==='en'?'Continue in the dossier with this reference':'Continuar no dossiê com esta referência'}</button>
       <p role="status">{message}</p>
       <p className="plan-session">{copy.session}</p>
       <div className="plan-capsule">

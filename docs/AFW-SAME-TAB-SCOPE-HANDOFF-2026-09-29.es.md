@@ -1,0 +1,7 @@
+# Traspaso temporal del diagnóstico al expediente — 2026-09-29
+
+**Proyecto:** AFW. **Repositorio:** `tokenizartinfo-ops/agent-friendly-web`. **Entorno objetivo:** Worker productivo `agent-friendly-web-web-production` en `https://agentfriendlyweb.dev`. **Acción de este bloque:** simplificar el paso público → privado sin ampliar permisos. **Rollback:** volver a la versión productiva anterior; no alterar D1.
+
+El diagnóstico público conserva la descarga JSON y añade «Continuar en el expediente con esta referencia» después de que el usuario seleccione mejoras y confirme su revisión. El navegador guarda únicamente el JSON validado de alcance en `sessionStorage` de la misma pestaña durante un máximo de 30 minutos. El expediente consume la referencia una sola vez, la muestra como importación **no verificada**, pide revisar el sitio y las mejoras, y mantiene el guardado privado como una acción separada. Si el almacenamiento falla, se ofrece descargar el archivo. La navegación por Access no concede acceso ni sustituye la autenticación.
+
+El contrato de transferencia ya excluye texto libre, credenciales, parámetros de URL, identidad owner y permisos. La nueva envoltura rechaza entradas malformadas, demasiado grandes o caducadas; no crea proyectos ni escribe D1. Pruebas locales focalizadas: 8/8 y TypeScript correcto. El CI de la PR ejecutará instalación limpia, suite completa, lint y build fuera de C:.
