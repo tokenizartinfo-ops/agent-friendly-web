@@ -568,6 +568,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           <h3 id="proportional-target-title">{targetGuide.title}</h3><p>{targetGuide.provisional}</p>
           <ul>{targetGuide.steps.map(step => <li key={step}>{step}</li>)}</ul>
           {targetGuide.questions.length ? <div className="proportional-target-questions"><strong>{localizedMessage(locale, 'Para decidir juntos', 'To decide together', 'Para decidirmos juntos')}</strong><ul>{targetGuide.questions.map(question => <li key={question}>{question}</li>)}</ul></div> : null}
+          <div className="proportional-target-next"><strong>{localizedMessage(locale, 'Un siguiente paso', 'One next step', 'Um próximo passo')}</strong><p>{targetGuide.next.reason}</p><a href={targetGuide.next.href}>{targetGuide.next.label}</a></div>
           <small>{targetGuide.limit}</small>
         </section> : null}
         {!rehearsal && projectId ? <ProjectCreate locale={locale} disabled={manualBusy || Boolean(conflictReview) || sessionRequired || shouldAutosaveProject({ ready: true, draft: data, base: savedSnapshot }) || (status !== 'idle' && status !== 'saved')} /> : null}

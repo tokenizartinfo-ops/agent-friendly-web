@@ -8,6 +8,7 @@ test('an informational site can stop after discovery and clear answers', () => {
   assert.match(guide.steps.join(' '), /puede ser suficiente/);
   assert.doesNotMatch(guide.steps.join(' '), /MCP|AF-4|AF-5/);
   assert.equal(guide.questions.length, 0);
+  assert.equal(guide.next.href, '#dossier-publication');
 });
 
 test('selected technologies alone do not imply an advanced target or deployed capability', () => {
@@ -15,6 +16,7 @@ test('selected technologies alone do not imply an advanced target or deployed ca
   assert.equal(guide.stage, 'undecided');
   assert.match(guide.steps[0], /qué deberían poder descubrir o hacer/);
   assert.match(guide.limit, /no los publica/);
+  assert.equal(guide.next.href, '#dossier-goals');
 });
 
 test('tool interest adds a use-case question but never mandates MCP', () => {
@@ -23,6 +25,7 @@ test('tool interest adds a use-case question but never mandates MCP', () => {
   assert.match(guide.steps.join(' '), /MCP is not required/);
   assert.match(guide.steps.join(' '), /confirm who can do so/);
   assert.equal(guide.questions.length, 1);
+  assert.equal(guide.next.href, '#dossier-control');
 });
 
 test('transaction interest keeps AF-4 and AF-5 conditional and asks for controls', () => {
@@ -32,4 +35,11 @@ test('transaction interest keeps AF-4 and AF-5 conditional and asks for controls
   assert.match(guide.steps.join(' '), /AF-4/);
   assert.match(guide.steps.join(' '), /AF-5/);
   assert.equal(guide.questions.length, 2);
+  assert.equal(guide.next.href, '#dossier-content');
+});
+
+test('missing public sources take priority over technical implementation choices', () => {
+  const guide = proportionalTargetGuide({ goals: ['payments'], control: 'origin' });
+  assert.equal(guide.next.href, '#dossier-content');
+  assert.match(guide.next.label, /fuentes públicas/);
 });
