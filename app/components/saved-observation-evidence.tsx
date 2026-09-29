@@ -18,14 +18,20 @@ const contextCopy:Record<Locale,Record<string,[string,string,string]>>={
  pt:{save_draft:['Vamos salvar suas alterações primeiro.','Assim a orientação usa o contexto revisado sem perder dados do rascunho.','Ir para salvar'],clarify_control:['Vamos esclarecer quem pode alterar o site.','Se não souber, pode deixar pendente; não prepararemos entrega como se houvesse acesso.','Revisar controle'],coordinate_provider:['Vamos coordenar com seu fornecedor.','A evidência ajuda a pedir uma intervenção delimitada; ainda não autoriza mudanças no site.','Revisar controle'],request_access:['Precisamos definir uma via de implementação.','Podemos organizar evidência externa enquanto você obtém acesso. Isso não substitui publicar no seu site.','Revisar acesso'],review_action:['Vamos revisar a proposta e seus arquivos.','A cápsula mostra conteúdo, destinos e hashes para decisão humana. Prepará-la não significa publicar.','Ir para cápsula'],choose_goal:['Vamos escolher um objetivo adequado.','Os sinais básicos observados não exigem MCP, pagamentos ou outras capacidades avançadas.','Revisar objetivos']},
 };
 
-export function SavedObservationEvidence({observation,locale,control,unsaved}: {observation:Observation;locale:Locale;control:string;unsaved:boolean}){
+const basicStepCopy:Record<Locale,[string,string,string]>={
+ es:['Completemos los datos básicos que puedas aportar.','Una respuesta breve alcanza. Si algo no lo sabés, podés dejarlo pendiente y seguir revisando la evidencia.','Continuar con el asistente'],
+ en:['Let us fill in the basics you know.','A brief answer is enough. You can leave unknown details open and keep reviewing the evidence.','Continue with the assistant'],
+ pt:['Vamos completar os dados básicos que você conhece.','Uma resposta breve basta. Você pode deixar o que não sabe pendente e continuar revendo as evidências.','Continuar com o assistente'],
+};
+
+export function SavedObservationEvidence({observation,locale,control,unsaved,missingBasicCount}: {observation:Observation;locale:Locale;control:string;unsaved:boolean;missingBasicCount:number}){
  const copy=guidance[locale];
  if(!observation.evidence||!Object.keys(observation.evidence).length)return <section className="saved-observation-evidence"><h3>{copy.title}</h3><p>{copy.unknown}</p></section>;
  let plan:ReturnType<typeof buildScanActionPlan>;
  try{plan=buildScanActionPlan({target:observation.target,checkedAt:observation.checkedAt,evidence:observation.evidence},locale);}catch{return null;}
  const next=plan.actions.find(action=>action.state!=='detected');
- const step=observationNextStep({actions:plan.actions,control,unsaved});
- const stepCopy=contextCopy[locale][step.kind];
+ const step=observationNextStep({actions:plan.actions,control,unsaved,missingBasicCount});
+ const stepCopy=step.kind==='complete_basics'?basicStepCopy[locale]:contextCopy[locale][step.kind];
  const labels=ACTION_PLAN_COPY[locale];
  return <section className="saved-observation-evidence" aria-label={copy.title}>
    <h3>{copy.title}</h3><p>{copy.intro}</p>
