@@ -3,6 +3,7 @@ import { getCloudflareAccessUser } from '../../../../cloudflare-access-auth';
 import { getDb } from '../../../../../db';
 import { projectEvents, registrySites, scanObservations, siteProjects } from '../../../../../db/schema';
 import { runPublicAudit, sanitizeObservation } from '../../../../../lib/public-audit.mjs';
+import { summarizeObservationHistory } from '../../../../../lib/observation-history.mjs';
 
 type RouteContext = { params: Promise<{ projectId: string }> };
 
@@ -31,15 +32,19 @@ export async function GET(_request: Request, context: RouteContext) {
   const project = await ownedProject(projectId, user.userId);
   if (!project) return Response.json({ error: 'No se encontro el expediente.' }, { status: 404 });
 
-  const [observation] = await getDb()
+  let origin = '';
+  try { origin = new URL(project.website).origin; } catch { /* No comparable current origin. */ }
+  const rows = origin ? await getDb()
     .select()
     .from(scanObservations)
     .where(and(
       eq(scanObservations.projectId, projectId),
       eq(scanObservations.userId, user.userId),
+      eq(scanObservations.targetOrigin, origin),
     ))
     .orderBy(desc(scanObservations.checkedAt))
-    .limit(1);
+    .limit(5) : [];
+  const [observation] = rows;
 
   return Response.json({
     observation: observation ? {
@@ -48,6 +53,7 @@ export async function GET(_request: Request, context: RouteContext) {
       checkedAt: observation.checkedAt,
       readiness: readinessFromStored(observation.readinessJson),
     } : null,
+    history: summarizeObservationHistory(rows, project.website),
   }, { headers: { 'cache-control': 'no-store' } });
 }
 

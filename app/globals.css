@@ -2265,6 +2265,10 @@ footer p { margin: 0; }
 .project-directory button:disabled { opacity: .55; cursor: not-allowed; }
 .project-directory :focus-visible { outline: 3px solid #7c5127; outline-offset: 3px; }
 .project-create summary svg { display: inline-block; vertical-align: middle; margin-right: 8px; }
+.observation-history { margin-top: 14px; padding: 14px; border: 1px solid #d9d0c4; border-radius: 6px; background: #fffaf2; }
+.observation-history p { margin: 8px 0; line-height: 1.5; }
+.observation-history ol { margin: 8px 0 0; padding-left: 24px; }
+.observation-history li { margin-top: 5px; }
 .project-create p { margin: 12px 0; font-size: 15px; line-height: 1.5; }
 .project-create fieldset { border: 0; padding: 0; margin: 16px 0; min-width: 0; }
 .project-create .secondary-action { min-height: 44px; font-family: inherit; font-size: 14px; font-weight: 700; white-space: normal; }

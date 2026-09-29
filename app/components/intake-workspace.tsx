@@ -25,6 +25,7 @@ import { DraftExitDialog } from './draft-exit-dialog';
 import { roadmapPresentation } from '../../lib/roadmap-presentation.mjs';
 import { proportionalTargetGuide } from '../../lib/proportional-target.mjs';
 import { readProjectSaveResponse } from '../../lib/project-save-response.mjs';
+import { compareObservationHistory } from '../../lib/observation-history.mjs';
 
 import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
 import { reconcileSavedDraft } from '../../lib/project-save-reconciliation.mjs';
@@ -59,7 +60,8 @@ type ObservationSummary = {
   id: string; target: string; checkedAt: string;
   readiness: { score?: number; level?: string };
 };
-type ObservationPayload = { error?: string; observation?: ObservationSummary | null; notice?: string };
+type ObservationHistoryItem = {id:string;target:string;checkedAt:string;score:number|null;level:string;methodology:string};
+type ObservationPayload = { error?: string; observation?: ObservationSummary | null; history?: ObservationHistoryItem[]; notice?: string };
 
 const emptyIntake: Intake = {
   organization: '', website: '', role: '', siteType: '', control: 'unknown', audience: '',
@@ -166,6 +168,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const [claimMessage, setClaimMessage] = useState(localizedMessage(locale, 'La verificación se inicia solo cuando la solicitas.', 'Verification starts only when you request it.', 'A verificação começa somente quando você solicita.'));
   const [copied, setCopied] = useState(false);
   const [observation, setObservation] = useState<ObservationSummary | null>(null);
+  const [observationHistory,setObservationHistory]=useState<ObservationHistoryItem[]>([]);
   const [observationBusy, setObservationBusy] = useState(false);
   const [observationMessage, setObservationMessage] = useState(localizedMessage(locale, 'La auditoría pública normalmente no guarda resultados.', 'The public audit normally stores no results.', 'A auditoria pública normalmente não armazena resultados.'));
   const ready = useRef(false);
@@ -225,6 +228,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         const payload = await response.json() as ObservationPayload;
         if (!response.ok) throw new Error(payload.error || localizedMessage(locale, 'No se pudo consultar la última observación.', 'The latest observation could not be loaded.', 'Não foi possível consultar a última observação.'));
         setObservation(payload.observation || null);
+        setObservationHistory(Array.isArray(payload.history)?payload.history:[]);
       })
       .catch((error) => {
         if (error instanceof DOMException && error.name === 'AbortError') return;
@@ -409,6 +413,13 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
       const payload = await response.json() as ObservationPayload;
       if (!response.ok || !payload.observation) throw new Error(payload.error || localizedMessage(locale, 'No se pudo guardar la observación.', 'The observation could not be saved.', 'Não foi possível salvar a observação.'));
       setObservation(payload.observation);
+      try {
+        const refreshed=await request(`/api/projects/${projectId}/observations`,{cache:'no-store'});
+        if(refreshed.ok){
+          const recent=await refreshed.json() as ObservationPayload;
+          setObservationHistory(Array.isArray(recent.history)?recent.history:[]);
+        }else setObservationHistory([]);
+      }catch{setObservationHistory([]);}
       setObservationMessage(localizedMessage(locale, 'Observación guardada. El escáner público sigue sin almacenar auditorías automáticas.', 'Observation saved. The public scanner still stores no automatic audits.', 'Observação salva. O scanner público continua sem armazenar auditorias automáticas.'));
     } catch (error) {
       setObservationMessage(error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo guardar la observación.', 'The observation could not be saved.', 'Não foi possível salvar a observação.'));
@@ -417,6 +428,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
     }
   }
 
+  const historyComparison=compareObservationHistory(observationHistory);
   return (
     <div className="intake-layout">
       <a className="dossier-help-dock" href="#dossier-assistant" onClick={()=>{const panel=document.getElementById('dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
@@ -554,6 +566,10 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           </div>
           <p className="observation-copy">{localizedMessage(locale, 'El escáner público normalmente no guarda resultados. Esta acción ejecuta la misma lectura pública y conserva en tu expediente solo evidencia, puntaje, rutas y fecha; elimina cuerpos HTTP, errores crudos y cabeceras sensibles.', 'The public scanner normally stores no results. This action runs the same public reading and saves only evidence, score, paths and date in your dossier; HTTP bodies, raw errors and sensitive headers are removed.', 'O scanner público normalmente não armazena resultados. Esta ação executa a mesma leitura pública e salva no dossiê somente evidências, pontuação, rotas e data; corpos HTTP, erros brutos e cabeçalhos sensíveis são removidos.')}</p>
           {observation ? <div className="last-observation"><span>{locale === 'en' ? 'Latest observation' : locale === 'pt' ? 'Última observação' : 'Última observación'}</span><strong>{formatDate(observation.checkedAt, locale)}</strong><small>{observation.target}</small></div> : null}
+          {observationHistory.length>1?<div className="observation-history"><strong>{localizedMessage(locale,'Evolución observada','Observed progress','Evolução observada')}</strong>
+            {historyComparison?<p>{localizedMessage(locale,'Entre las dos últimas lecturas:','Between the two latest readings:','Entre as duas últimas leituras:')} {historyComparison.delta>=0?'+':''}{historyComparison.delta} {localizedMessage(locale,'puntos. Es una señal técnica, no una garantía de visibilidad o ventas.','points. This is a technical signal, not a visibility or sales guarantee.','pontos. É um sinal técnico, não uma garantia de visibilidade ou vendas.')}</p>:<p>{localizedMessage(locale,'Las lecturas usan métodos distintos o faltan datos comparables; conservamos sus fechas sin afirmar una mejora.','The readings use different methods or lack comparable data; dates are retained without claiming an improvement.','As leituras usam métodos diferentes ou faltam dados comparáveis; mantemos as datas sem afirmar melhora.')}</p>}
+            <ol>{observationHistory.map(item=><li key={item.id}><time dateTime={item.checkedAt}>{formatDate(item.checkedAt,locale)}</time> · {item.score===null?'—':`${item.score}/100`} {item.level?`· ${item.level}`:''}</li>)}</ol>
+          </div>:null}
           <button className="primary-action" type="button" onClick={saveObservation} disabled={observationBusy || !websiteIsSaved}>
             {observationBusy ? <LoaderCircle className="spin" size={16} /> : <Radar size={16} />}
             {copy.labels.auditSave}
