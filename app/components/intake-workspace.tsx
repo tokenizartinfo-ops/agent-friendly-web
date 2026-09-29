@@ -27,6 +27,7 @@ import { proportionalTargetGuide } from '../../lib/proportional-target.mjs';
 import { readProjectSaveResponse } from '../../lib/project-save-response.mjs';
 import { createObservationSaveAttempt } from '../../lib/observation-save-attempt.mjs';
 import { currentOriginObservations, observationOrigin } from '../../lib/observation-current-origin.mjs';
+import { observationScoreLabel } from '../../lib/observation-score-copy.mjs';
 import { compareObservationHistory } from '../../lib/observation-history.mjs';
 
 import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
@@ -570,7 +571,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           <div className="verification-heading">
             <div className="form-section-title"><Radar size={20} /><div><strong>{copy.labels.observation}</strong><span>{copy.labels.observationSubtitle}</span></div></div>
             <span className="verification-status" data-status={currentObservations.observation ? 'verified' : 'unverified'}>
-              {currentObservations.observation ? `${currentObservations.observation.readiness.level || 'Audit'} · ${currentObservations.observation.readiness.score ?? 0}/100` : (locale === 'en' ? 'No saved observation' : locale === 'pt' ? 'Sem observação salva' : 'Sin observación guardada')}
+              {currentObservations.observation ? `${currentObservations.observation.readiness.level || 'Audit'} · ${observationScoreLabel(currentObservations.observation.readiness,locale)}` : (locale === 'en' ? 'No saved observation' : locale === 'pt' ? 'Sem observação salva' : 'Sin observación guardada')}
             </span>
           </div>
           <p className="observation-copy">{localizedMessage(locale, 'El escáner público normalmente no guarda resultados. Esta acción ejecuta la misma lectura pública y conserva en tu expediente solo evidencia, puntaje, rutas y fecha; elimina cuerpos HTTP, errores crudos y cabeceras sensibles.', 'The public scanner normally stores no results. This action runs the same public reading and saves only evidence, score, paths and date in your dossier; HTTP bodies, raw errors and sensitive headers are removed.', 'O scanner público normalmente não armazena resultados. Esta ação executa a mesma leitura pública e salva no dossiê somente evidências, pontuação, rotas e data; corpos HTTP, erros brutos e cabeçalhos sensíveis são removidos.')}</p>
