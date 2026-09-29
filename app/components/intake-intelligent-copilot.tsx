@@ -6,6 +6,7 @@ import { analyzeIntakeNotes } from '../../lib/intake-assistant.mjs';
 import { dossierFieldLabels, dossierValueLabel } from '../../lib/dossier-field-labels.mjs';
 import { classifyCopilotResponse } from '../../lib/copilot-ui-response.mjs';
 import { defaultCopilotSelection } from '../../lib/copilot-review-selection.mjs';
+import { appendVoiceSegment } from '../../lib/intake-copilot-audio.mjs';
 
 type Draft = Record<string, string | string[]>;
 type Locale = 'es' | 'en' | 'pt';
@@ -17,19 +18,25 @@ const goalGuidanceCopy = {
   en: { intro: 'I understood this goal from your text. It is a discussion hypothesis, not a verified capability or permission.', discover: 'What should visitors or assistants find first?', explain: 'What information needs a clear explanation first?', query: 'Which specific data should be queryable, and who may see it?', act: 'Which action should be possible, who authorizes it, and how can it be reversed?', transact: 'Which transaction do you want to offer, and what controls would it need first?' },
   pt: { intro: 'Entendi este objetivo do seu texto. É uma hipótese para conversar, não uma capacidade verificada nem uma autorização.', discover: 'O que visitantes ou assistentes devem encontrar primeiro?', explain: 'Que informação precisa de uma explicação clara primeiro?', query: 'Quais dados devem ser consultáveis e quem pode vê-los?', act: 'Que ação você quer permitir, quem a autoriza e como revertê-la?', transact: 'Que transação você quer oferecer e quais controles ela exigiria antes?' },
 };
+const voiceCopy = {
+  es: { title: 'Contármelo por audio', intro: 'Podés hablar en varios segmentos de hasta 30 segundos. Cada transcripción queda para corregir antes de sumarla a tu relato.', start: 'Grabar segmento', stop: 'Detener grabación', send: 'Transcribir este segmento', discard: 'Descartar segmento', add: 'Agregar transcripción al relato', transcript: '¿Así quisiste decirlo? Corregí o ampliá la transcripción.', consent: 'Marcá el permiso de envío antes de transcribir el audio.', ready: 'Escuchá el segmento antes de enviarlo. El archivo no se guarda en tu expediente.', unsupported: 'Este navegador no permite grabar audio aquí. Podés escribir tu relato.', microphone: 'No pude acceder al micrófono. Revisá el permiso del navegador o escribí tu relato.', failed: 'No pude transcribir este segmento. Podés reintentar o escribirlo.', tooLong: 'El relato completo supera el límite de 5000 caracteres. Resumí un segmento antes de agregarlo.', sensitive: 'La transcripción podría contener claves o datos privados. No la incorporé; revisá el audio y escribí una versión sin esos datos.' },
+  en: { title: 'Tell me by voice', intro: 'You can speak in several segments of up to 30 seconds. Review each transcript before adding it to your account.', start: 'Record a segment', stop: 'Stop recording', send: 'Transcribe this segment', discard: 'Discard segment', add: 'Add transcript to account', transcript: 'Is this what you meant? Correct or expand the transcript.', consent: 'Check the processing permission before sending audio.', ready: 'Listen before sending. The recording is not saved to your dossier.', unsupported: 'This browser cannot record audio here. You can type your account.', microphone: 'I could not access the microphone. Check browser permission or type your account.', failed: 'I could not transcribe this segment. Retry or type it.', tooLong: 'The complete account exceeds 5000 characters. Shorten a segment before adding it.', sensitive: 'The transcript may contain keys or private details. I did not add it; review the recording and write a safe version.' },
+  pt: { title: 'Contar por áudio', intro: 'Você pode falar em vários segmentos de até 30 segundos. Revise cada transcrição antes de acrescentá-la ao relato.', start: 'Gravar segmento', stop: 'Parar gravação', send: 'Transcrever este segmento', discard: 'Descartar segmento', add: 'Adicionar transcrição ao relato', transcript: 'Era isso que você queria dizer? Corrija ou amplie a transcrição.', consent: 'Marque a permissão de envio antes de transcrever o áudio.', ready: 'Ouça antes de enviar. A gravação não é salva no dossiê.', unsupported: 'Este navegador não pode gravar áudio aqui. Você pode escrever o relato.', microphone: 'Não consegui acessar o microfone. Confira a permissão do navegador ou escreva o relato.', failed: 'Não consegui transcrever este segmento. Tente novamente ou escreva.', tooLong: 'O relato completo ultrapassa 5000 caracteres. Resuma um segmento antes de adicioná-lo.', sensitive: 'A transcrição pode conter chaves ou dados privados. Não a adicionei; revise o áudio e escreva uma versão segura.' },
+};
 const selectionCopy = {
   es: 'Los campos que ya tienen datos quedan sin seleccionar. Si querés reemplazarlos, marcá la propuesta y revisá la diferencia antes de aplicarla.',
   en: 'Fields that already contain data stay unselected. To replace them, select the proposal and review the difference before applying it.',
   pt: 'Campos que já têm dados ficam desmarcados. Para substituí-los, selecione a proposta e revise a diferença antes de aplicá-la.',
 };
 const copy = {
-  es: { title: 'Copilot inteligente', intro: 'Contame con tus palabras qué hace tu sitio y qué necesitás. El copilot propone datos; vos decidís qué incorporar.', privacy: 'Al pedir ayuda, este texto se procesa con Workers AI en Cloudflare. No incluyas claves ni datos privados. Nada se guarda o publica automáticamente.', consent: 'Entiendo y acepto enviar este texto a Workers AI en Cloudflare para preparar propuestas. Puedo seguir con la guía sin hacerlo.', grant: 'Activar ayuda con IA para este expediente', revoke: 'Revocar permiso para este expediente', granted: 'La ayuda con IA está autorizada para este expediente. Confirmás cada envío por separado.', revoked: 'El permiso está revocado. Podés seguir con la guía o volver a activarlo cuando quieras.', consentUnavailable: 'No pude comprobar el permiso. El copilot seguirá cerrado hasta que podamos hacerlo.', ask: 'Preparar propuestas', busy: 'Pensando con vos…', unavailable: 'El copilot no está disponible ahora. Podés seguir con la guía del expediente.', session: 'Tu sesión necesita renovarse. Conservá esta pestaña y volvé a iniciar sesión antes de reintentar.', projectUnavailable: 'No encuentro este expediente con tu sesión. Revisá que estés en el expediente correcto; no se aplicó ningún cambio.', rateLimited: 'Llegaste al límite temporal de consultas. Esperá un minuto o seguí con la guía del expediente.', review: 'Revisar cambios', apply: 'Aplicar al borrador', stale: 'El formulario cambió. Volvé a revisar las propuestas.', empty: 'No encontré datos suficientemente claros. Podés contármelo de otra forma.', source: 'Lo escribiste así', evidence: 'Esta propuesta sale de tu texto; todavía no verificamos ese dato en tu sitio.', applied: 'Aplicado al borrador. Revisalo antes de guardar.' },
-  en: { title: 'Intelligent copilot', intro: 'Tell me in your own words what your site does and what you need. The copilot proposes details; you decide what to include.', privacy: 'When you ask for help, this text is processed with Workers AI on Cloudflare. Do not include keys or private data. Nothing is saved or published automatically.', consent: 'I understand and agree to send this text to Workers AI on Cloudflare to prepare suggestions. I can continue with the guide without doing so.', grant: 'Enable AI help for this dossier', revoke: 'Revoke permission for this dossier', granted: 'AI help is authorized for this dossier. You confirm each submission separately.', revoked: 'Permission is revoked. You can continue with the guide or enable it again whenever you choose.', consentUnavailable: 'I could not verify permission. The copilot stays closed until I can.', ask: 'Prepare suggestions', busy: 'Thinking with you…', unavailable: 'The copilot is unavailable right now. You can continue with the dossier guide.', session: 'Your session needs to be renewed. Keep this tab open and sign in again before retrying.', projectUnavailable: 'I cannot find this dossier in your session. Check that you opened the right one; no changes were applied.', rateLimited: 'You have reached the temporary request limit. Wait a minute or continue with the dossier guide.', review: 'Review changes', apply: 'Apply to draft', stale: 'The form changed. Review the suggestions again.', empty: 'I could not find clear enough details. You can rephrase them.', source: 'You wrote', evidence: 'This suggestion comes from your text; we have not verified it on your website.', applied: 'Applied to the draft. Review it before saving.' },
-  pt: { title: 'Copilot inteligente', intro: 'Conte com suas palavras o que seu site faz e do que precisa. O copilot propõe dados; você decide o que incluir.', privacy: 'Ao pedir ajuda, este texto é processado com Workers AI na Cloudflare. Não inclua chaves nem dados privados. Nada é salvo ou publicado automaticamente.', consent: 'Entendo e aceito enviar este texto ao Workers AI na Cloudflare para preparar sugestões. Posso continuar com o guia sem fazer isso.', grant: 'Ativar ajuda com IA para este dossiê', revoke: 'Revogar permissão para este dossiê', granted: 'A ajuda com IA está autorizada para este dossiê. Você confirma cada envio separadamente.', revoked: 'A permissão foi revogada. Você pode seguir com o guia ou ativá-la novamente quando quiser.', consentUnavailable: 'Não consegui verificar a permissão. O copilot permanece fechado até que eu consiga.', ask: 'Preparar sugestões', busy: 'Pensando com você…', unavailable: 'O copilot não está disponível agora. Você pode continuar com o guia.', session: 'Sua sessão precisa ser renovada. Mantenha esta aba aberta e entre novamente antes de tentar de novo.', projectUnavailable: 'Não encontro este dossiê na sua sessão. Confira se abriu o correto; nenhuma alteração foi aplicada.', rateLimited: 'Você atingiu o limite temporário de consultas. Aguarde um minuto ou continue com o guia.', review: 'Revisar alterações', apply: 'Aplicar ao rascunho', stale: 'O formulário mudou. Revise as sugestões novamente.', empty: 'Não encontrei dados suficientemente claros. Você pode reformular.', source: 'Você escreveu', evidence: 'Esta sugestão vem do seu texto; ainda não verificamos esse dado no seu site.', applied: 'Aplicado ao rascunho. Revise antes de salvar.' },
+  es: { title: 'Copilot inteligente', intro: 'Contame con tus palabras qué hace tu sitio y qué necesitás. El copilot propone datos; vos decidís qué incorporar.', privacy: 'Al pedir ayuda, tu texto o audio se procesa con Workers AI en Cloudflare. No incluyas claves ni datos privados. El audio no se guarda en el expediente; nada se publica automáticamente.', consent: 'Entiendo y acepto enviar este texto o segmento de audio a Workers AI en Cloudflare. Confirmo cada envío por separado.', grant: 'Activar ayuda con IA para este expediente', revoke: 'Revocar permiso para este expediente', granted: 'La ayuda con IA está autorizada para este expediente. Confirmás cada envío por separado.', revoked: 'El permiso está revocado. Podés seguir con la guía o volver a activarlo cuando quieras.', consentUnavailable: 'No pude comprobar el permiso. El copilot seguirá cerrado hasta que podamos hacerlo.', ask: 'Preparar propuestas', busy: 'Pensando con vos…', unavailable: 'El copilot no está disponible ahora. Podés seguir con la guía del expediente.', session: 'Tu sesión necesita renovarse. Conservá esta pestaña y volvé a iniciar sesión antes de reintentar.', projectUnavailable: 'No encuentro este expediente con tu sesión. Revisá que estés en el expediente correcto; no se aplicó ningún cambio.', rateLimited: 'Llegaste al límite temporal de consultas. Esperá un minuto o seguí con la guía del expediente.', review: 'Revisar cambios', apply: 'Aplicar al borrador', stale: 'El formulario cambió. Volvé a revisar las propuestas.', empty: 'No encontré datos suficientemente claros. Podés contármelo de otra forma.', source: 'Lo escribiste así', evidence: 'Esta propuesta sale de tu texto; todavía no verificamos ese dato en tu sitio.', applied: 'Aplicado al borrador. Revisalo antes de guardar.' },
+  en: { title: 'Intelligent copilot', intro: 'Tell me in your own words what your site does and what you need. The copilot proposes details; you decide what to include.', privacy: 'When you ask for help, your text or audio is processed with Workers AI on Cloudflare. Do not include keys or private data. Audio is not saved to your dossier; nothing is published automatically.', consent: 'I agree to send this text or audio segment to Workers AI on Cloudflare. I confirm each submission separately.', grant: 'Enable AI help for this dossier', revoke: 'Revoke permission for this dossier', granted: 'AI help is authorized for this dossier. You confirm each submission separately.', revoked: 'Permission is revoked. You can continue with the guide or enable it again whenever you choose.', consentUnavailable: 'I could not verify permission. The copilot stays closed until I can.', ask: 'Prepare suggestions', busy: 'Thinking with you…', unavailable: 'The copilot is unavailable right now. You can continue with the dossier guide.', session: 'Your session needs to be renewed. Keep this tab open and sign in again before retrying.', projectUnavailable: 'I cannot find this dossier in your session. Check that you opened the right one; no changes were applied.', rateLimited: 'You have reached the temporary request limit. Wait a minute or continue with the dossier guide.', review: 'Review changes', apply: 'Apply to draft', stale: 'The form changed. Review the suggestions again.', empty: 'I could not find clear enough details. You can rephrase them.', source: 'You wrote', evidence: 'This suggestion comes from your text; we have not verified it on your website.', applied: 'Applied to the draft. Review it before saving.' },
+  pt: { title: 'Copilot inteligente', intro: 'Conte com suas palavras o que seu site faz e do que precisa. O copilot propõe dados; você decide o que incluir.', privacy: 'Ao pedir ajuda, seu texto ou áudio é processado com Workers AI na Cloudflare. Não inclua chaves nem dados privados. O áudio não é salvo no dossiê; nada é publicado automaticamente.', consent: 'Aceito enviar este texto ou segmento de áudio ao Workers AI na Cloudflare. Confirmo cada envio separadamente.', grant: 'Ativar ajuda com IA para este dossiê', revoke: 'Revogar permissão para este dossiê', granted: 'A ajuda com IA está autorizada para este dossiê. Você confirma cada envio separadamente.', revoked: 'A permissão foi revogada. Você pode seguir com o guia ou ativá-la novamente quando quiser.', consentUnavailable: 'Não consegui verificar a permissão. O copilot permanece fechado até que eu consiga.', ask: 'Preparar sugestões', busy: 'Pensando com você…', unavailable: 'O copilot não está disponível agora. Você pode continuar com o guia.', session: 'Sua sessão precisa ser renovada. Mantenha esta aba aberta e entre novamente antes de tentar de novo.', projectUnavailable: 'Não encontro este dossiê na sua sessão. Confira se abriu o correto; nenhuma alteração foi aplicada.', rateLimited: 'Você atingiu o limite temporário de consultas. Aguarde um minuto ou continue com o guia.', review: 'Revisar alterações', apply: 'Aplicar ao rascunho', stale: 'O formulário mudou. Revise as sugestões novamente.', empty: 'Não encontrei dados suficientemente claros. Você pode reformular.', source: 'Você escreveu', evidence: 'Esta sugestão vem do seu texto; ainda não verificamos esse dado no seu site.', applied: 'Aplicado ao rascunho. Revise antes de salvar.' },
 };
 
 export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply }: { projectId: string; locale: Locale; draft: Draft; onApply: (draft: Draft) => void }) {
   const t = copy[locale];
+  const v = voiceCopy[locale];
   const labels = dossierFieldLabels(locale);
   const label = (field: string) => field in labels ? labels[field as keyof typeof labels] : field;
   const [notes, setNotes] = useState('');
@@ -38,6 +45,18 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply }: 
   const [changes, setChanges] = useState<ReturnType<typeof previewIntakeDraft> | null>(null);
   const [status, setStatus] = useState('');
   const [busy, setBusy] = useState(false);
+  const [recording, setRecording] = useState(false);
+  const [clip, setClip] = useState<Blob | null>(null);
+  const [clipUrl, setClipUrl] = useState('');
+  const [transcriptDraft, setTranscriptDraft] = useState('');
+  const [audioBusy, setAudioBusy] = useState(false);
+  const [audioStatus, setAudioStatus] = useState('');
+  const recorder = useRef<MediaRecorder | null>(null);
+  const audioRequest = useRef<AbortController | null>(null);
+  const stream = useRef<MediaStream | null>(null);
+  const recordingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const discardRecording = useRef(false);
+  const clipUrlRef = useRef('');
   const [processingConsent, setProcessingConsent] = useState(false);
   const [consentState, setConsentState] = useState<{ projectId: string; value: 'loading' | 'granted' | 'revoked' | 'error' }>({ projectId, value: 'loading' });
   const projectConsent = consentState.projectId === projectId ? consentState.value : 'loading';
@@ -45,6 +64,67 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply }: 
   const [consentBusy, setConsentBusy] = useState(false);
   const requestEpoch = useRef(0);
   const currentNotes = useRef(notes);
+  useEffect(() => () => {
+    discardRecording.current = true;
+    audioRequest.current?.abort();
+    if (recordingTimer.current) clearTimeout(recordingTimer.current);
+    if (recorder.current?.state === 'recording') recorder.current.stop();
+    stream.current?.getTracks().forEach(track => track.stop());
+    if (clipUrlRef.current) URL.revokeObjectURL(clipUrlRef.current);
+  }, []);
+  function clearClip() {
+    if (clipUrlRef.current) URL.revokeObjectURL(clipUrlRef.current);
+    clipUrlRef.current = ''; setClipUrl(''); setClip(null);
+  }
+  async function startRecording() {
+    setAudioStatus(''); setTranscriptDraft(''); clearClip();
+    discardRecording.current = false;
+    if (typeof MediaRecorder === 'undefined' || !navigator.mediaDevices?.getUserMedia) { setAudioStatus(v.unsupported); return; }
+    try {
+      const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      if (discardRecording.current) { mediaStream.getTracks().forEach(track => track.stop()); return; }
+      stream.current = mediaStream;
+      const mimeType = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg'].find(type => MediaRecorder.isTypeSupported(type));
+      if (!mimeType) { mediaStream.getTracks().forEach(track => track.stop()); setAudioStatus(v.unsupported); return; }
+      const mediaRecorder = new MediaRecorder(mediaStream, { mimeType });
+      recorder.current = mediaRecorder;
+      const pieces: Blob[] = [];
+      mediaRecorder.ondataavailable = event => { if (event.data.size) pieces.push(event.data); };
+      mediaRecorder.onstop = () => {
+        mediaStream.getTracks().forEach(track => track.stop()); stream.current = null;
+        if (recordingTimer.current) clearTimeout(recordingTimer.current);
+        const blob = new Blob(pieces, { type: mimeType });
+        if (blob.size && !discardRecording.current) { const url = URL.createObjectURL(blob); clipUrlRef.current = url; setClipUrl(url); setClip(blob); setAudioStatus(v.ready); }
+        setRecording(false);
+      };
+      mediaRecorder.start(); setRecording(true);
+      recordingTimer.current = setTimeout(() => { if (mediaRecorder.state === 'recording') mediaRecorder.stop(); }, 30_000);
+    } catch { stream.current?.getTracks().forEach(track => track.stop()); stream.current = null; setAudioStatus(v.microphone); }
+  }
+  function stopRecording() { if (recorder.current?.state === 'recording') recorder.current.stop(); }
+  async function transcribeAudio() {
+    if (!clip || !processingConsent || projectConsent !== 'granted') { setAudioStatus(v.consent); return; }
+    if (clip.size > 2_000_000) { setAudioStatus(v.failed); clearClip(); return; }
+    setAudioBusy(true); setAudioStatus(''); setProcessingConsent(false);
+    const epoch = requestEpoch.current;
+    const controller = new AbortController(); audioRequest.current = controller;
+    try {
+      const response = await fetch(`/api/projects/${encodeURIComponent(projectId)}/copilot/audio`, { method: 'POST', cache: 'no-store', headers: { 'content-type': clip.type, 'x-afw-locale': locale, 'x-afw-processing-consent': 'afw-copilot-processing-v1' }, body: clip, signal: controller.signal });
+      if (controller.signal.aborted || epoch !== requestEpoch.current) return;
+      const kind = classifyCopilotResponse(response);
+      if (kind !== 'ok') { setAudioStatus(kind === 'rate_limited' ? t.rateLimited : kind === 'session' ? t.session : kind === 'project_unavailable' ? t.projectUnavailable : v.failed); return; }
+      const answer = await response.json() as { text: string };
+      if (controller.signal.aborted || epoch !== requestEpoch.current) return;
+      setTranscriptDraft(answer.text); clearClip();
+    } catch { if (!controller.signal.aborted) setAudioStatus(v.failed); } finally { if (audioRequest.current === controller) audioRequest.current = null; setAudioBusy(false); }
+  }
+  function addTranscript() {
+    const checked = analyzeIntakeNotes(transcriptDraft, locale);
+    if (checked.blocked) { setAudioStatus(v.sensitive); return; }
+    const next = appendVoiceSegment(notes, transcriptDraft);
+    if (!next) { setAudioStatus(v.tooLong); return; }
+    currentNotes.current = next; requestEpoch.current += 1; setNotes(next); setTranscriptDraft(''); setResult(null); setChanges(null); setStatus(''); setAudioStatus('');
+  }
   useEffect(() => {
     let active = true;
     fetch(`/api/projects/${encodeURIComponent(projectId)}/copilot-consent`, { cache: 'no-store' })
@@ -63,7 +143,7 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply }: 
       if (!response.ok) throw new Error('consent_unavailable');
       const value = await response.json() as { granted: boolean };
       setProjectConsent(value.granted ? 'granted' : 'revoked');
-      if (!value.granted) { requestEpoch.current += 1; setResult(null); setChanges(null); setBusy(false); }
+      if (!value.granted) { discardRecording.current = true; audioRequest.current?.abort(); stopRecording(); clearClip(); setTranscriptDraft(''); requestEpoch.current += 1; setResult(null); setChanges(null); setBusy(false); }
     } catch { setProjectConsent('error'); setStatus(t.consentUnavailable); }
     finally { setConsentBusy(false); }
   }
@@ -96,7 +176,14 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply }: 
       <label>{t.title}<textarea rows={5} maxLength={5000} value={notes} onChange={event => { requestEpoch.current += 1; currentNotes.current = event.target.value; setNotes(event.target.value); setProcessingConsent(false); setResult(null); setChanges(null); setStatus(''); setBusy(false); }} /></label>
       <p className="assistant-privacy">{t.privacy}</p>
       {projectConsent === 'granted' ? <><p className="assistant-privacy">{t.granted}</p><button type="button" className="secondary-action" disabled={consentBusy} onClick={() => changeProjectConsent('revoke')}>{t.revoke}</button></> : <><p className="assistant-privacy">{projectConsent === 'revoked' ? t.revoked : t.consentUnavailable}</p><button type="button" className="secondary-action" disabled={consentBusy || projectConsent === 'loading'} onClick={() => changeProjectConsent('grant')}>{t.grant}</button></>}
-      <label className="assistant-privacy"><input type="checkbox" checked={processingConsent} disabled={projectConsent !== 'granted' || consentBusy} onChange={event => setProcessingConsent(event.target.checked)} /> {t.consent}</label><button type="button" className="primary-action" disabled={busy || consentBusy || projectConsent !== 'granted' || !notes.trim() || !processingConsent} onClick={ask}>{busy ? t.busy : t.ask}</button>
+      <label className="assistant-privacy"><input type="checkbox" checked={processingConsent} disabled={projectConsent !== 'granted' || consentBusy} onChange={event => setProcessingConsent(event.target.checked)} /> {t.consent}</label>
+      <div className="assistant-voice-panel"><h3>{v.title}</h3><p>{v.intro}</p>
+        <button type="button" className="secondary-action" disabled={audioBusy || projectConsent !== 'granted' || (!recording && (!!clip || !!transcriptDraft))} onClick={recording ? stopRecording : startRecording}>{recording ? v.stop : v.start}</button>
+        {clipUrl ? <><audio controls src={clipUrl} /><p>{v.ready}</p>{!processingConsent ? <p>{v.consent}</p> : null}<button type="button" className="secondary-action" disabled={audioBusy || !processingConsent} onClick={transcribeAudio}>{v.send}</button><button type="button" className="secondary-action" disabled={audioBusy} onClick={() => { clearClip(); setAudioStatus(''); }}>{v.discard}</button></> : null}
+        {transcriptDraft ? <><label>{v.transcript}<textarea rows={4} maxLength={5000} value={transcriptDraft} onChange={event => setTranscriptDraft(event.target.value)} /></label><button type="button" className="secondary-action" onClick={addTranscript}>{v.add}</button></> : null}
+        {audioStatus ? <p role="status">{audioStatus}</p> : null}
+      </div>
+      <button type="button" className="primary-action" disabled={busy || consentBusy || projectConsent !== 'granted' || !notes.trim() || !processingConsent} onClick={ask}>{busy ? t.busy : t.ask}</button>
     </div>
     <div className="assistant-review-panel" aria-live="polite">
       {status ? <p role="status">{status}</p> : null}

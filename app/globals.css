@@ -1460,6 +1460,12 @@ footer p { margin: 0; }
 .assistant-input-panel textarea { width: 100%; min-height: 210px; padding: 13px; border: 1px solid #b9c9c5; border-radius: 6px; resize: vertical; color: var(--ink); font: inherit; font-size: 13px; line-height: 1.55; }
 .assistant-input-panel > .primary-action { margin-top: 14px; }
 .assistant-privacy { display: flex; align-items: flex-start; gap: 7px; margin: 15px 0 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.assistant-voice-panel { margin-top: 18px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+.assistant-voice-panel h3 { margin: 0 0 6px; font-size: 14px; }
+.assistant-voice-panel p { color: var(--muted); font-size: 11px; line-height: 1.5; }
+.assistant-voice-panel audio { display: block; width: 100%; max-width: 420px; margin: 12px 0; }
+.assistant-voice-panel textarea { min-height: 110px; margin: 8px 0; }
+.assistant-voice-panel .secondary-action { margin: 5px 7px 5px 0; }
 .assistant-empty { padding: 28px 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .assistant-blocked { display: flex; align-items: flex-start; gap: 9px; padding: 14px; border-left: 3px solid var(--orange); background: #fff4ef; color: #873f2a; }
 .assistant-blocked p { margin: 0; font-size: 11px; line-height: 1.5; }
