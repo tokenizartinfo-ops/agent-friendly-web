@@ -138,6 +138,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const [scopeRevision,setScopeRevision]=useState(0);
   const [reviewedScope,setReviewedScope]=useState<ReviewedScope>(null);
   const [separateScope,setSeparateScope]=useState<{website:string;scopeText:string}|null>(null);
+  const [availableScope,setAvailableScope]=useState<{website:string;scopeText:string}|null>(null);
   const [conflictReview, setConflictReview] = useState<{ current: SavedProject; plan: RebasePlan } | null>(null);
   const manualLock = useRef(false);
   const [saveAttempt] = useState(() => createProjectSaveAttempt());
@@ -431,7 +432,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           <p>{privateUiCopy(locale).dossier.intro}</p>
         </div>
 
-        <ScopeImport onReviewChange={setReviewedScope} onPrepareSeparate={setSeparateScope} locale={locale} website={data.website} projectId={projectId || ""} revision={scopeRevision} canSave={Boolean(projectId && data.website === savedWebsite && status !== "saving")} request={request} onUseWebsite={website => {
+        <ScopeImport onReviewChange={setReviewedScope} onPrepareSeparate={setSeparateScope} onAvailableScopeChange={setAvailableScope} locale={locale} website={data.website} projectId={projectId || ""} revision={scopeRevision} canSave={Boolean(projectId && data.website === savedWebsite && status !== "saving")} request={request} onUseWebsite={website => {
           if(manualLock.current || data.website.trim())return;
           setAutosavePaused(true);setData(current=>({...current,website}));setStatus('idle');setMessage(DOSSIER_GUIDE_COPY[locale].draft);
         }}/>
@@ -573,7 +574,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           <div className="proportional-target-next"><strong>{localizedMessage(locale, 'Un siguiente paso', 'One next step', 'Um próximo passo')}</strong><p>{targetGuide.next.reason}</p><a href={targetGuide.next.href}>{targetGuide.next.label}</a></div>
           <small>{targetGuide.limit}</small>
         </section> : null}
-        {!rehearsal && projectId ? <ProjectDirectory locale={locale} currentProjectId={projectId} currentName={savedSnapshot.organization} currentWebsite={savedWebsite} request={request} /> : null}
+        {!rehearsal && projectId ? <ProjectDirectory locale={locale} currentProjectId={projectId} currentName={savedSnapshot.organization} currentWebsite={savedWebsite} pendingScope={availableScope} request={request} /> : null}
         {!rehearsal && projectId ? <ProjectCreate key={separateScope?.scopeText || 'manual'} locale={locale} suggestion={separateScope} disabled={manualBusy || Boolean(conflictReview) || sessionRequired || shouldAutosaveProject({ ready: true, draft: data, base: savedSnapshot }) || (status !== 'idle' && status !== 'saved')} /> : null}
         {conflictReview ? <div id="dossier-conflict"><IntakeConflictReview key={conflictReview.plan.revision} locale={locale} plan={conflictReview.plan} onConfirm={confirmConflictReview} onCancel={() => setConflictReview(null)} /></div> : null}
         {<button id="dossier-save" className="primary-action" type="button" disabled={manualBusy || Boolean(conflictReview) || !loaded || !data.website} onClick={saveReviewedDraft}><Save size={17} />{rehearsal ? localizedMessage(locale, 'Confirmar guardado simulado', 'Confirm simulated save', 'Confirmar salvamento simulado') : localizedMessage(locale, 'Guardar cambios', 'Save changes', 'Salvar alterações')}</button>}
