@@ -5,6 +5,7 @@ import { projectEvents, registrySites, scanObservations, siteProjects } from '..
 import { runPublicAudit, sanitizeObservation } from '../../../../../lib/public-audit.mjs';
 import { summarizeObservationHistory } from '../../../../../lib/observation-history.mjs';
 import { observationRequestIds } from '../../../../../lib/observation-save-attempt.mjs';
+import { storedObservationEvidence } from '../../../../../lib/saved-observation-evidence.mjs';
 
 type RouteContext = { params: Promise<{ projectId: string }> };
 const REQUEST_KEY = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -54,6 +55,7 @@ export async function GET(_request: Request, context: RouteContext) {
       target: observation.targetOrigin,
       checkedAt: observation.checkedAt,
       readiness: readinessFromStored(observation.readinessJson),
+      evidence: storedObservationEvidence(observation.evidenceJson),
     } : null,
     history: summarizeObservationHistory(rows, project.website),
   }, { headers: { 'cache-control': 'no-store' } });
@@ -94,7 +96,7 @@ export async function POST(request: Request, context: RouteContext) {
     if (!saved) return null;
     if (saved.targetOrigin !== requestedOrigin.origin) return Response.json({ code: 'idempotency_conflict' }, { status: 409, headers: { 'cache-control': 'no-store' } });
     return Response.json({ observation: { id: saved.id, target: saved.targetOrigin, checkedAt: saved.checkedAt,
-      readiness: readinessFromStored(saved.readinessJson) }, replayed: true }, { status: 200, headers: { 'cache-control': 'no-store' } });
+      readiness: readinessFromStored(saved.readinessJson), evidence: storedObservationEvidence(saved.evidenceJson) }, replayed: true }, { status: 200, headers: { 'cache-control': 'no-store' } });
   };
   const prior = await recover();
   if (prior) return prior;
@@ -192,6 +194,7 @@ export async function POST(request: Request, context: RouteContext) {
       target: sanitized.target,
       checkedAt: sanitized.checkedAt,
       readiness: sanitized.readiness,
+      evidence: sanitized.evidence,
     },
     notice: 'Se guardo una observacion saneada. No se guardaron cuerpos HTTP, credenciales ni errores crudos.',
   }, { status: 201, headers: { 'cache-control': 'no-store' } });
