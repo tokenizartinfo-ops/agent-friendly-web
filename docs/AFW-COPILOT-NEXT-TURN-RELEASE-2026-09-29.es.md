@@ -1,0 +1,7 @@
+# Siguiente indicación del copilot privado
+
+La PR #100 quedó integrada en `53c96501c152848a7f53fb2cec4d4485ae909b4a`. Tras una respuesta del copilot, la interfaz muestra una sola indicación: revisar una propuesta citada que aún no está en el borrador, aclarar una propuesta distinta de un valor existente, o pedir el siguiente dato básico que falta. Se recalcula al aplicar cambios. Es una guía temporal en la pantalla: no crea memoria durable, no verifica el sitio, no guarda campos y no publica nada. Las propuestas siguen requiriendo revisión, aplicación y guardado explícitos.
+
+Pasaron 558 pruebas, lint sin errores (una advertencia previa de `<img>`), build y CI de la PR. El Worker se compiló desde el commit integrado. La configuración conservó D1, Access, AI y límite de 5 solicitudes por 60 segundos; el copilot quedó limitado al expediente sintético `6e972c18-cae1-402b-b959-646abd8499d7`. No hubo migraciones. Se subió la versión `c0a232dc-19c7-4f0e-b684-38647888a9ff`, se asignó 0 % y luego 100 % del tráfico. El smoke público posterior pasó 11/11, incluidos los tres límites de Cloudflare Access. Ese smoke no demuestra el nuevo texto dentro de una sesión autenticada; queda pendiente su comprobación visual privada.
+
+Rollback inmediato: devolver 100 % a `ad69aea2-ca78-4ee3-8534-3082c1cdb63b`. Cierre completo del piloto: devolver 100 % a `377e6c7a-a783-478b-86ef-e7290d15b97e`. No tocar D1.
