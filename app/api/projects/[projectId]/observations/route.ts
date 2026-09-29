@@ -2,7 +2,6 @@ import { and, desc, eq } from 'drizzle-orm';
 import { getCloudflareAccessUser } from '../../../../cloudflare-access-auth';
 import { getDb } from '../../../../../db';
 import { projectEvents, registrySites, scanObservations, siteProjects } from '../../../../../db/schema';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { runPublicAudit, sanitizeObservation } from '../../../../../lib/public-audit.mjs';
 
 type RouteContext = { params: Promise<{ projectId: string }> };

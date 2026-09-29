@@ -1,17 +1,18 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.2",
   "convention": "Agent Friendly Web infrastructure status; not an official standard",
   "project": "agent-friendly-web",
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "observed_at": "2026-09-02",
-  "stale_after": "2026-09-09",
+  "observed_at": "2026-09-14",
+  "stale_after": "2026-09-21",
   "public_runtime": {
     "state": "cloudflare_native_production",
     "provider": "Cloudflare Workers",
     "canonical_origin": "https://agentfriendlyweb.dev",
     "public_traffic_percent": 100,
-    "accept_new_private_data": false,
-    "note": "The canonical origin is served by the full-stack Vinext Worker. Public discovery is active; contact, email, CRM and payment writes remain disabled."
+    "accept_new_private_data": true,
+    "private_data_scope": "existing_access_allowlist_only",
+    "note": "The canonical Worker serves public discovery and a reduced private dossier pilot for the existing Access allowlist. This does not open registration, commercial CRM, payments, commercial email or remote installation."
   },
   "production": {
     "state": "deployed",
@@ -21,26 +22,48 @@
     "worker_deployed": true,
     "apex_custom_domain_attached": true,
     "private_access_enforced": true,
-    "private_access_routes": ["/expediente*", "/capsula/*", "/api/projects", "/api/projects/*"],
-    "migrations_applied": 6,
-    "functional_table_count": 13,
-    "functional_row_count": 0,
+    "private_access_routes": ["/expediente*", "/capsula/*", "/api/projects", "/api/projects/*", "/en/dossier*", "/pt/dossie*", "/en/capsule/*", "/pt/capsula/*"],
+    "functional_row_count": null,
+    "row_count_note": "Not recounted in this review. Synthetic QA dossiers and capsules have been persisted; the historical zero-row observation is not the current state.",
     "public_smoke": "passed",
-    "responsive_qa": "passed at 1440x900 and 390x844",
-    "rollback": "prepared and release detach-reattach rehearsed",
-    "note": "The public cutover completed on 2026-09-02. Verification wrote no functional rows."
+    "responsive_qa": "historical: passed at 1440x900 and 390x844 on 2026-09-02; not repeated by the infrastructure review",
+    "rollback": "prior Worker version identified; production and database restoration not rehearsed",
+    "observation_scope": "point_in_time_checks_not_continuous_uptime",
+    "note": "The reduced private pilot was promoted on 2026-09-14. Eleven post-deployment public and anonymous-access smoke checks passed. An authenticated browser recovered and saved its synthetic dossier at the canonical origin. These observations do not constitute continuous monitoring or commercial readiness."
+  },
+  "private_pilot": {
+    "state": "deployed_allowlisted",
+    "canonical_entry": "https://agentfriendlyweb.dev/expediente",
+    "commercial_launch": false,
+    "crm_link_enabled": false,
+    "remote_installation_enabled": false,
+    "payments_enabled": false,
+    "commercial_email_enabled": false,
+    "verified": ["dossier persistence", "supported-field conflict review", "capsule generation, comparison, rejection and JSON download", "localized resource errors in ES/EN/PT"],
+    "session_recovery": {
+      "result": "passed",
+      "method": "explicit_logout_and_reauthentication",
+      "natural_ttl_expiry_tested": false
+    },
+    "limits": ["unsupported conflict fields require assisted review and block writes", "synthetic capsules are not approved for installation", "no full commercial CRM validation claimed"]
   },
   "canary": {
     "state": "retained_access_protected",
     "host": "canary.agentfriendlyweb.dev",
     "public_traffic_percent": 0,
     "database_isolated": true,
-    "functional_row_count": 0
+    "functional_row_count": null,
+    "row_count_note": "Not remeasured in the 2026-09-09 recovery review.",
+    "sensitive_action_flags": "off",
+    "new_prefill_candidate_enabled": false
   },
   "release": {
+    "observed_at": "2026-09-14",
+    "observation_scope": "reduced_pilot_release_checks",
     "state": "retained_access_protected",
     "host": "release.agentfriendlyweb.dev",
     "public_traffic_percent": 0,
+    "version_override_enabled": false,
     "verified_locally": [
       "automated test suite",
       "production build",
@@ -48,20 +71,33 @@
     ],
     "verified_remotely": [
       "Cloudflare Access application and single-owner allow policy",
-      "isolated D1 schema with zero functional rows",
+      "same production Worker and database; release is not an independent data sandbox",
       "Worker deployment and own-domain binding",
       "anonymous requests intercepted by Access on every representative route"
     ],
     "authenticated_html": "passed",
-    "detach_reattach_rollback": "passed"
+    "detach_reattach_rollback": "historical 2026-09-02; not repeated in this review"
   },
   "legacy_sites": {
-    "state": "rollback_retained_without_apex",
+    "state": "historical_not_an_operational_recovery_target",
     "provider": "OpenAI Sites",
     "receives_apex_traffic": false,
-    "custom_domain_binding_retained": true,
-    "validation_txt_retained": true,
-    "note": "Historical Sites binding is retained only for the initial rollback window and is not the active runtime."
+    "custom_domain_binding_retained": null,
+    "validation_txt_retained": null,
+    "binding_retention_reverified": false,
+    "restore_permitted": false,
+    "note": "Sites is retired and must not be restored as an operational target. Its historical binding and TXT retention were not reverified in this review; removal is a separate action."
+  },
+  "recovery": {
+    "state": "canary_worker_version_switch_and_restore_verified",
+    "observed_at": "2026-09-09T15:04:25.466531Z",
+    "scope": "canary_worker_version_only",
+    "authenticated_diagnostic": "VERIFIED_before_during_after",
+    "anonymous_routes_protected": 11,
+    "production_restoration_tested": false,
+    "database_restoration_tested": false,
+    "non_versioned_settings_restoration_tested": false,
+    "note": "The canary experiment restored the captured stable Worker version after roughly 40 seconds. This is not a full disaster-recovery test."
   },
   "retired_surfaces": [
     {
@@ -78,15 +114,16 @@
     "shared_cloudflare_account_does_not_merge_projects": true
   },
   "next_gate": {
-    "name": "afw_cloudflare_native_stability_and_legacy_retirement",
+    "name": "afw_assisted_commercial_pilot_readiness",
     "host": "agentfriendlyweb.dev",
     "requirements": [
-      "repeat public smoke after the stability window",
-      "confirm D1 remains free of unintended writes",
-      "retain an exact DNS rollback receipt",
-      "decide separately when to detach the legacy Sites binding"
+      "continue dated public smoke and read-only infrastructure checks",
+      "capture non-versioned settings before future recovery rehearsals",
+      "review legacy resource retirement separately",
+      "complete remote CRM replay and cross-actor checks before reintroducing CRM linkage",
+      "validate the assisted first-customer journey without payments or commercial email"
     ],
-    "authorization": "production cutover completed; contact writes, email, CRM, payments and legacy retirement remain separate decisions"
+    "authorization": "reduced allowlisted private dossier pilot active; new client access, commercial email, CRM, payments and legacy retirement remain outside this release"
   },
   "historical_evidence_policy": "Release receipts that mention Sites are retained as historical evidence and do not describe the current target architecture."
 }

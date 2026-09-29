@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from 'react';
 import { ArrowUpRight, CalendarDays, Gauge, ShieldCheck } from 'lucide-react';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { compareReadinessSnapshots } from '../../lib/readiness-comparison.mjs';
 import { publicToolsCopy } from '../../lib/public-tools-copy.mjs';
 

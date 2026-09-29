@@ -31,6 +31,7 @@ export const siteProjects = sqliteTable(
     monitoringPreference: text('monitoring_preference').notNull().default(''),
     status: text('status').notNull().default('draft'),
     completion: integer('completion').notNull().default(0),
+    revision: integer('revision').notNull().default(1),
     createdAt: text('created_at').notNull(),
     updatedAt: text('updated_at').notNull(),
   },
@@ -50,6 +51,23 @@ export const projectEvents = sqliteTable(
     createdAt: text('created_at').notNull(),
   },
   (table) => [index('project_events_project_created_idx').on(table.projectId, table.createdAt)],
+);
+
+export const copilotConsentEvents = sqliteTable(
+  'copilot_consent_events',
+  {
+    sequence: integer('sequence').primaryKey({ autoIncrement: true }),
+    projectId: text('project_id').notNull(),
+    userId: text('user_id').notNull(),
+    action: text('action').notNull(),
+    consentVersion: text('consent_version').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    createdAt: text('created_at').notNull(),
+  },
+  (table) => [
+    index('copilot_consent_events_project_sequence_idx').on(table.projectId, table.sequence),
+    uniqueIndex('copilot_consent_events_project_request_unique').on(table.projectId, table.idempotencyKey),
+  ],
 );
 
 export const registrySites = sqliteTable(

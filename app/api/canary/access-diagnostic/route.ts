@@ -1,6 +1,5 @@
 import { env } from 'cloudflare:workers';
 import { NextRequest, NextResponse } from 'next/server';
-// @ts-expect-error Shared ESM verifier is exercised directly by Node tests.
 import { verifyCloudflareAccessJwt } from '../../../../lib/cloudflare-access-identity.mjs';
 
 const ACCESS_ASSERTION_HEADER = 'cf-access-jwt-assertion';

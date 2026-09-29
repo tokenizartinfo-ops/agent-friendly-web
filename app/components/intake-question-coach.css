@@ -1,0 +1,6 @@
+.intake-question-coach{padding:22px 0;border-block:1px solid #c7beb1;color:#25211d;font:15px/1.6 var(--font-geist-sans),sans-serif;overflow-wrap:anywhere}
+.intake-question-coach h2{font:400 28px/1.2 var(--font-comic),sans-serif;margin:0 0 14px}.intake-question-coach h3{font-size:18px;line-height:1.5;margin:18px 0 6px}.intake-question-coach p{margin:10px 0}
+.intake-question-coach textarea{display:block;width:100%;min-height:100px;padding:12px;border:1px solid #8f8270;border-radius:5px;background:#fffaf0;font:inherit;color:inherit;resize:vertical}.coach-actions{display:flex;flex-wrap:wrap;gap:10px;margin-block:14px}
+.intake-question-coach button{min-height:44px;padding:10px 14px;margin:4px 8px 4px 0;border:1px solid #77654c;border-radius:5px;background:#f5f0e7;color:inherit;font:inherit;cursor:pointer}.coach-preview{padding:16px;border-left:3px solid #77654c;background:#eee7da}.coach-language{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-right:16px}.coach-language input{width:20px;height:20px}.coach-pending{margin-block:16px}.intake-question-coach :focus-visible{outline:3px solid #7c5127;outline-offset:3px}
+
+.coach-scope{border-left:3px solid #7c5127;padding:12px 16px;background:#f5f0e7;margin-block:16px}.coach-scope ul{padding-left:20px}

@@ -51,8 +51,8 @@ const surfaces = [
 ];
 
 const phases = [
-  ['P0', 'Verdad publica', 'Corregir idioma, portada, H1, descripciones, duplicados y JSON-LD.', 'En preparacion'],
-  ['P1', 'Lectura por agentes', 'Instalar llms, politica crawler, sitemap Atelier y Link headers.', 'Paquete listo'],
+  ['P0', 'Verdad publica', 'Guia e indice de recursos publicados. Traducciones, metadata y revision editorial completa siguen pendientes.', 'Avance parcial'],
+  ['P1', 'Lectura por agentes', 'WordPress: llms y sitemap verificados. Atelier: llms pendiente. Plugin de Link headers desactivado tras verificacion fallida.', 'Entrega parcial'],
   ['P2', 'Herramientas reales', 'Publicar CLI, skills, OpenAPI y MCP solo con version y URL verificadas.', 'Release candidate'],
   ['P3', 'Owner Live', 'Identidad, consentimiento, scopes, revocacion y auditoria read-only.', 'Gate separado'],
   ['P4', 'Acciones y pagos', 'Contratos seguros para acciones y eventual x402/MPP.', 'No iniciado'],
@@ -74,9 +74,9 @@ const downloads = [
 
 const owners = [
   ['Gabriel', 'Aprueba contenido publico, politica de entrenamiento y ventanas de produccion.'],
-  ['Leonardo', 'Implementa el bloque editorial y los archivos raiz de WordPress con backup.'],
-  ['Leandro', 'Verifica Cloudflare, cabeceras y prepara el cambio en el source real de Atelier.'],
-  ['Codex', 'Mantiene archivos, pruebas, auditorias comparativas y trazabilidad del caso.'],
+  ['Leonardo', 'Facilita acceso y coordinacion del sitio y hosting de WordPress.'],
+  ['Leandro', 'Aporta contexto tecnico y accesos para comprender Atelier y preparar cambios acotados.'],
+  ['Codex', 'Realiza implementacion asistida autorizada, pruebas, rollback y documentacion; no sustituye aprobaciones ni evidencia de despliegue.'],
 ];
 
 export default function TokenizartCasePage() {
@@ -85,7 +85,7 @@ export default function TokenizartCasePage() {
       <SiteHeader routeKey="tokenizartCase" />
       <section className="case-hero">
         <div>
-          <span>Primer caso integral · corte 2026-08-26</span>
+          <span>Primer caso integral · revision 2026-09-09</span>
           <h1>Tokenizart: una infraestructura preparada para humanos y agentes.</h1>
           <p>
             El caso conecta contenido publico, crawlers, CLI, MCP, skills y futuras herramientas owner-scoped.
@@ -94,7 +94,7 @@ export default function TokenizartCasePage() {
           <div className="case-actions">
             <a href="/registry/tokenizart">Ver perfil en Registry <ArrowRight size={17} /></a>
             <a href="/?site=tokenizart.com#auditar">Repetir auditoria <ArrowRight size={17} /></a>
-            <a href="/cases/tokenizart/RUNBOOK.es.md">Abrir guia de instalacion <ExternalLink size={16} /></a>
+            <a href="https://tokenizart.com/#agent-resources">Ver recursos publicados <ExternalLink size={16} /></a>
           </div>
         </div>
         <aside>
@@ -104,10 +104,23 @@ export default function TokenizartCasePage() {
         </aside>
       </section>
 
+      <section className="architecture-band" aria-labelledby="published-title">
+        <div><span>Publicacion verificada: 2026-09-09</span><h2 id="published-title">Lo que ya puede consultarse en Tokenizart.com</h2></div>
+        <div className="case-source-links">
+          <a href="https://tokenizart.com/es/tokenizart-y-atelier-guia-publica-y-descubrimiento-agentico/">Guia publica de Tokenizart y Atelier</a>
+          <a href="https://tokenizart.com/llms.txt">llms.txt vigente</a>
+          <a href="https://tokenizart.com/llms-full.txt">llms-full.txt vigente</a>
+          <a href="https://tokenizart.com/wp-sitemap.xml">Sitemap WordPress</a>
+          <a href="https://tokenizart.com/#agent-resources">Indice y acceso desde menus</a>
+        </div>
+        <p>Verificados mediante acceso publico. Esto no significa indexacion por una LLM ni habilita operaciones de cuenta. Atelier es un origen separado: su llms.txt devolvio 404 en esta revision.</p>
+        <p>36/100 en AFW, reportados por Gabriel el 2026-09-09; pendiente de una medicion independiente reproducible. No se asigna un nuevo nivel AF a partir de este reporte.</p>
+      </section>
+
       <section className="case-score-band" aria-labelledby="baseline-title">
         <div className="section-heading plain">
-          <div><span>Baseline doble</span><h2 id="baseline-title">Tres superficies, dos auditores</h2></div>
-          <p>Los niveles de Cloudflare y AF usan escalas diferentes.</p>
+          <div><span>Baseline historico del 2026-08-26</span><h2 id="baseline-title">Tres superficies, dos auditores</h2></div>
+          <p>Valores conservados como referencia historica, no puntajes actuales. Cloudflare y AF usan escalas diferentes.</p>
         </div>
         <div className="surface-grid">
           {surfaces.map((surface) => (
@@ -148,7 +161,8 @@ export default function TokenizartCasePage() {
 
       <section className="case-grid">
         <article className="evidence-table">
-          <div className="section-heading plain"><div><span>Paquete P0/P1</span><h2>Archivos listos para revision</h2></div></div>
+          <div className="section-heading plain"><div><span>Candidatos del 2026-08-26</span><h2>Paquete historico de referencia</h2></div></div>
+          <p>No instalar este ZIP sobre los archivos actuales. Conserva propuestas anteriores y no representa lo publicado hoy. Los enlaces de produccion estan en la seccion superior.</p>
           <div className="download-list">
             {downloads.map(([name, href, detail]) => (
               <a href={href} key={href}>
@@ -158,7 +172,7 @@ export default function TokenizartCasePage() {
               </a>
             ))}
           </div>
-          <p className="table-note">“Listo” significa preparado en este repositorio. La capacidad cuenta como disponible solo cuando la URL canonica de produccion responde correctamente.</p>
+          <p className="table-note">Estos archivos son candidatos historicos. Cada cambio requiere comparar el origen actual, revisar alcance y probar rollback. WordPress y Atelier se verifican por separado.</p>
         </article>
 
         <aside className="case-roadmap">

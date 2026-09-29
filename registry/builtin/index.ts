@@ -1,5 +1,4 @@
 import type { PublicProfile } from '../../lib/registry-store';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { renderPublicProfileMarkdown } from '../../lib/public-profile.mjs';
 import tokenizartV1 from './tokenizart.v1.json';
 

@@ -51,7 +51,7 @@ export default async function LocalizedRoutePage({ params, searchParams }: PageP
     case 'assistant': return <AssistantExperience locale={locale} />;
     case 'registry': return <RegistryExperience locale={locale} searchParams={query as Promise<{ q?: string | string[] }>} />;
     case 'registryProfile': return <RegistryProfileExperience locale={locale} params={Promise.resolve({ slug: resolved.params.slug })} searchParams={query as Promise<{ version?: string | string[] }>} />;
-    case 'dossier': return <DossierExperience locale={locale} />;
+    case 'dossier': return <DossierExperience locale={locale} searchParams={query} />;
     case 'capsule': return <CapsulePageExperience locale={locale} projectId={resolved.params.projectId} />;
     case 'aeo':
     case 'methodology':

@@ -1,5 +1,15 @@
 # Guia de instalacion del paquete Tokenizart
 
+> Archivo historico del paquete candidato 2026-08-26. No ejecutar estas instrucciones
+> como una actualizacion automatica ni sobrescribir el sitio desde el ZIP antiguo.
+> Al 2026-09-09 WordPress ya publica https://tokenizart.com/llms.txt,
+> https://tokenizart.com/llms-full.txt y https://tokenizart.com/wp-sitemap.xml.
+> Consulte https://tokenizart.com/#agent-resources para las fuentes vigentes.
+> Atelier se verifica por separado; su llms.txt seguia devolviendo 404.
+> El candidato de Link headers se desactivo tras no superar la prueba publica.
+
+Las instrucciones siguientes conservan el plan original como referencia.
+
 ## Regla de seguridad
 
 Cada cambio necesita backup, responsable, prueba y rollback. El paquete no habilita Owner Live ni acciones reales de Atelier.
@@ -40,4 +50,3 @@ Un archivo cuenta como disponible solo cuando su URL de produccion devuelve HTTP
 ## Documento completo
 
 https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/TOKENIZART-INSTALLATION-RUNBOOK.es.md
-

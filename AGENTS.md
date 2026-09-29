@@ -6,6 +6,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Canonical surfaces
 
+- Current release provenance: `docs/AFW-COPILOT-DURABLE-CONSENT-CLOSED-RELEASE-2026-09-29.es.md`; previous releases: `docs/AFW-COPILOT-CONSENT-CLOSED-RELEASE-2026-09-28.es.md`, `docs/AFW-PRODUCTION-COPILOT-CLOSED-RELEASE-2026-09-28.es.md` and `docs/GUIDED-CONTINUITY-RELEASE-2026-09-21.es.md`; historical checkout pointers: `docs/COMIC-FONT-RELEASE-2026-09-20.es.md`. Verify the active deployment again before publishing; a worktree HEAD alone does not represent the frozen production source.
+
 - `public_web`: `https://agentfriendlyweb.dev`, the only canonical public origin.
 - `afw_private`: private paths and APIs use Cloudflare Access on an `agentfriendlyweb.dev` hostname or path.
 - `afw_canary`: remote parity testing, when needed, uses a dedicated `agentfriendlyweb.dev` subdomain protected by Cloudflare Access.
@@ -43,3 +45,7 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 - Run `npm test`, `npm run lint`, and `npm run build` before publishing.
 - Keep documentation and UI claims aligned with actual runtime behavior.
 
+
+## User accompaniment
+
+- Gabriel requires continuous, empathetic guidance throughout the AFW journey: explain the next useful step and why it matters, structure supplied facts, help identify missing information, and allow unknowns to remain pending. Do not invent facts or equate selected improvements with publication permission. Keep help reachable; proposals remain reviewable before saving.

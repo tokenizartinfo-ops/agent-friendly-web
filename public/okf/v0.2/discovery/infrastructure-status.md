@@ -1,106 +1,52 @@
 ---
 type: Reference
-title: Estado de infraestructura y migracion
-description: Estado fechado del origen Cloudflare-native, canary protegido, rollback legado, superficies retiradas y gate siguiente.
+title: Infraestructura y piloto privado de Agent Friendly Web
+description: Observaciones fechadas, alcance privado y limites del piloto reducido.
 resource: https://agentfriendlyweb.dev/.well-known/infrastructure-status.json
 tags:
   - agent-friendly-web
   - infrastructure
   - cloudflare
-  - migration
   - provenance
 status: stable
-stale_after: 2026-12-01T00:00:00Z
+stale_after: 2026-09-21T00:00:00Z
 generated:
-  by: process:agent-friendly-web-okf-generator
-  at: 2026-09-02T00:00:00Z
+  by: process:afw-infrastructure-ledger
+  at: 2026-09-14T00:00:00Z
 verified:
-  - by: human:gabriel-mucchiut
-    at: 2026-09-02T00:00:00Z
+  - by: process:afw-infrastructure-ledger-review
+    at: 2026-09-14T00:00:00Z
 sources:
   - id: source-1
-    resource: https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/6ba79ed4086a5a71e48e3cb9cfdef0aaf173674e/docs/CLOUDFLARE-NATIVE-ORIGIN-SPEC-V1.md
-    title: Agent Friendly Web Cloudflare-native origin v1
-    author: person:gabriel-mucchiut
-    last_modified: 2026-09-02T00:00:00Z
+    resource: https://agentfriendlyweb.dev/.well-known/infrastructure-status.json
+    title: AFW infrastructure observation 2026-09-14
+    author: organization:agent-friendly-web
+    last_modified: 2026-09-14T00:00:00Z
 ---
-# Estado de infraestructura y migracion
+# Infraestructura y piloto privado
 
-## Decision
+## Estado observado: 2026-09-14
 
-Agent Friendly Web deja de usar `*.chatgpt.site` como produccion, staging, preview, autenticacion o rollback. El unico origen publico canonico es `https://agentfriendlyweb.dev`.
+El origen canonico es https://agentfriendlyweb.dev. Cloudflare Workers sirve el sitio publico y el expediente privado. Cloudflare Access conserva una lista limitada de cuentas autorizadas; el piloto no abre el registro comercial.
 
-La migracion no altera Tokenizart. Tokenizart sigue siendo el primer caso integral documentado, pero sus repositorios, Workers, D1, Access, Companion, Copilot, Atelier, Owner Live y RAG quedan fuera de esta arquitectura.
+El expediente permite guardar contexto, revisar conflictos soportados y preparar, comparar, rechazar y descargar capsulas. La verificacion del dominio no autoriza por si sola una instalacion. Las capsulas sinteticas de QA no son entregables aprobados para un sitio real.
 
-## Estado de partida
+## Evidencia y limites
 
-- El estado de partida tenia `agentfriendlyweb.dev` sobre Sites. Desde el 2026-09-02 el apex sirve el Worker Cloudflare-native.
-- La aplicacion ya usa Next 16, Vinext, Vite y bindings `cloudflare:workers`.
-- `npx vinext check` informa 96% de compatibilidad: cero incompatibilidades y una advertencia parcial por `next/font/google`.
-- La suite baseline del repositorio pasa antes de la migracion.
-- Las rutas privadas usan Cloudflare Access verificado; la identidad Sites ya no forma parte del runtime activo.
-- El Worker de contacto aislado esta deshabilitado y su D1 permanece vacia.
+Se verifico recuperacion tras cierre explicito de sesion, reingreso y guardado. No se espero el vencimiento natural del TTL. Los conflictos de campos no soportados requieren asistencia y bloquean la escritura.
 
-## Estado canary verificado
+La base contiene datos de pruebas persistidos; no se publico un recuento nuevo. Las afirmaciones historicas de cero filas, seis migraciones o unica cuenta canary no deben extrapolarse al estado actual.
 
-- `canary.agentfriendlyweb.dev` sirve el Worker `agent-friendly-web-web-canary` y permanece completamente detras de Cloudflare Access.
-- Access conserva una unica politica allowlist para un owner; el smoke anonimo confirma intercepcion en nueve rutas representativas.
-- La D1 canary es independiente: seis migraciones aplicadas, trece tablas funcionales y cero filas funcionales.
-- El custom domain del canary no modifica los registros A ni el runtime de `agentfriendlyweb.dev` y recibe 0% de su trafico.
-- Una sesion owner allowlisted confirmo el HTML autenticado. La misma compilacion paso QA Playwright en escritorio y movil, el smoke local completo y el smoke de Access en nueve rutas; D1 continuo con cero filas funcionales.
-- El canary continua protegido y con 0% del trafico apex. El release productivo protegido paso detach/reattach antes del corte.
-- El Worker `agent-friendly-web-web-production` sirve ahora el apex, con D1 productiva migrada, trece tablas funcionales y cero filas.
-- El smoke posterior al corte paso recursos publicos, identidad privada y QA responsive. Sites permanece solo como rollback inicial.
+Release utiliza el mismo Worker y base productiva, no una base aislada. La regla temporal que fijaba su version esta deshabilitada. Canary es un entorno distinto: sus mediciones historicas conservan su propia fecha.
 
-## Arquitectura objetivo
+Pagos, correo comercial, instalacion remota y vinculacion CRM ampliada no estan habilitados en este piloto. No se declara el lanzamiento comercial ni AF-5 por haber completado estas pruebas.
 
-### Origen publico
+## Siguiente etapa
 
-Un Worker full-stack Vinext sirve HTML, assets, rutas de API y recursos machine-readable desde `agentfriendlyweb.dev`. D1 se vincula por configuracion Wrangler propia del repositorio.
+Validar el recorrido asistido de un cliente y resolver las pruebas remotas de CRM antes de reintroducir esa vinculacion. No confundir estado documentado con monitorizacion continua.
 
-### Identidad privada
+## Separacion de proyectos y recuperacion
 
-Cloudflare Access protege las rutas privadas. La aplicacion valida el JWT de Access y deriva un actor estable de `sub`, `email`, issuer y audience. El cliente no puede declarar su propio actor.
+Tokenizart es un caso de referencia, no el runtime de AFW. Companion, Copilot, Atelier y Owner Live pertenecen a Tokenizart y no comparten esta autorizacion.
 
-Rutas privadas iniciales:
-
-- `/expediente`;
-- `/capsula/*`;
-- `/contacto-interno`, cuando exista;
-- `/api/projects`;
-- `/api/projects/*`;
-- cualquier futura API mutante o con datos owner.
-
-### Entornos
-
-| Identificador | Host | Uso | Trafico |
-| --- | --- | --- | --- |
-| `afw_local` | `127.0.0.1` | desarrollo y pruebas | local |
-| `afw_ci` | ninguno | build, tests y dry-run | ninguno |
-| `afw_canary` | `canary.agentfriendlyweb.dev` | paridad remota excepcional, detras de Access | allowlist |
-| `afw_public` | `agentfriendlyweb.dev` | origen canonico | publico |
-
-No existe un entorno llamado solamente `staging`. No se usa ningun hostname `tokenizart.chatgpt.site`.
-
-### Datos
-
-Se crea una D1 propia para canary y otra para produccion. Como no hay usuarios reales en el origen legado, la migracion parte de esquema limpio y conserva solo fixtures y perfiles publicos versionados desde Git. Antes del corte se vuelve a comprobar que no existan datos reales en la D1 legado.
-
-### Contacto
-
-El formulario y su API deben ser same-origin. El Worker de contacto separado permanece OFF durante la migracion y luego se retira o se convierte en service binding interno; no conserva una UI en otro origen.
-
-## Reglas de corte
-
-1. El sitio publico vigente no se modifica durante el desarrollo.
-2. La nueva configuracion debe construir y ejecutar localmente sin `@openai/sites-vite-plugin`.
-3. La suite completa, lint, build y dry-run Wrangler deben pasar.
-4. Las rutas publicas deben mantener contenido, MIME, idiomas, sitemap, `robots.txt`, `llms.txt`, OKF, WebMCP y MCP externo.
-5. Las rutas privadas deben fallar cerradas sin Access y aislar datos por actor verificado.
-6. Canary requiere hostname propio, Access, D1 aislada y cero trafico publico.
-7. El corte de `agentfriendlyweb.dev` exigio una comparacion semantica local de la misma compilacion, verificacion remota separada, smoke humano y rollback probado.
-8. Solo despues de una ventana estable y una decision separada se elimina el binding publico de Sites y se archivan sus proyectos.
-
-## Evidencia historica
-
-Los documentos que mencionan versiones Sites se conservan como recibos inmutables. No autorizan nuevos despliegues ni convierten Sites en un entorno vigente.
+Sites esta retirado y no es un destino de recuperacion. Se conserva la version anterior del Worker para rollback de codigo; no se afirma una restauracion integral de base de datos.

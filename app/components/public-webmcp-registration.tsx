@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { createPublicAuditWebMcpTool } from '../../lib/public-webmcp.mjs';
 
 type ModelContext = {

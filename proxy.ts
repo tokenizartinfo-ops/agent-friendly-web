@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { acceptsMarkdown, mergeVaryHeader } from './lib/markdown-negotiation.mjs';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { localeFromPathname } from './lib/request-locale.mjs';
 
 const discoveryLinks = [

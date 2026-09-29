@@ -10,7 +10,7 @@ test('expanded intake exposes the approved progressive sections and owner contro
   for (const label of ['Contenido disponible', 'Capacidades y recursos', 'Publicación y crawlers', 'Responsables y control']) assert.ok(copy.sections.some((section) => section.includes(label)));
   for (const label of ['Mantenedor actual', 'Proveedor DNS', 'Política de búsqueda', 'Uso para entrenamiento', 'Responsable de aprobación']) assert.ok(Object.values(copy.labels).includes(label));
 
-  assert.match(source, /completedFields\}\/12/);
+  assert.match(source, /DossierProgress draft=\{data\} saved=\{savedSnapshot\}/);
   assert.match(source, /window\.setTimeout\(async \(\) => \{/);
   assert.match(source, /}, 900\)/);
 });

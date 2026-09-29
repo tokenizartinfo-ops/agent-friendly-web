@@ -11,9 +11,7 @@ import {
   siteProjects,
 } from '../../../../../db/schema';
 import { domainClaimStatusAt, VERIFIED_TTL_MS } from '../../../../../lib/domain-verification.mjs';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { publicAttestationDraft } from '../../../../../lib/intake.mjs';
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { buildPublicProfile, renderPublicProfileMarkdown } from '../../../../../lib/public-profile.mjs';
 
 type RouteContext = { params: Promise<{ projectId: string }> };

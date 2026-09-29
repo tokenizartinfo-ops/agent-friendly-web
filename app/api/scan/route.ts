@@ -1,4 +1,3 @@
-// @ts-expect-error Shared ESM module is exercised directly by Node tests.
 import { runPublicAudit } from '../../../lib/public-audit.mjs';
 
 export async function POST(request: Request) {
