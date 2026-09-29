@@ -2,15 +2,15 @@
 
 import {useCallback,useEffect,useRef,useState} from 'react';
 import {localizedPath} from '../../lib/site-i18n.mjs';
-import {canCarryScopeToProject} from '../../lib/scope-project-navigation.mjs';
+import {canCarryScopeToProject,orderProjectsForScope} from '../../lib/scope-project-navigation.mjs';
 import {saveScopeHandoff} from '../../lib/scan-scope-handoff.mjs';
 
 type ProjectSummary={id:string;organization:string;website:string;status:string;completion:number;updatedAt:string};
 type Locale='es'|'en'|'pt';
 const COPY={
- es:{title:'Tus expedientes',intro:'Cada sitio conserva su propio contexto. Elegí el expediente que querés continuar.',current:'Estás aquí',open:'Abrir',openWithScope:'Abrir con esta referencia',more:'Ver más',refresh:'Actualizar lista',loading:'Buscando tus expedientes…',error:'No pude consultar la lista. Tu expediente actual sigue abierto.',session:'La sesión necesita renovarse antes de consultar la lista.',empty:'Todavía no hay otros expedientes guardados.',transferError:'Este navegador no pudo trasladar la referencia. Descargá su copia JSON antes de cambiar de expediente.'},
- en:{title:'Your dossiers',intro:'Each website keeps its own context. Choose the dossier you want to continue.',current:'You are here',open:'Open',openWithScope:'Open with this reference',more:'Show more',refresh:'Refresh list',loading:'Finding your dossiers…',error:'I could not load the list. Your current dossier remains open.',session:'Your session needs renewal before loading the list.',empty:'There are no other saved dossiers yet.',transferError:'This browser could not carry the reference. Download its JSON copy before changing dossiers.'},
- pt:{title:'Seus dossiês',intro:'Cada site mantém seu próprio contexto. Escolha o dossiê que deseja continuar.',current:'Você está aqui',open:'Abrir',openWithScope:'Abrir com esta referência',more:'Ver mais',refresh:'Atualizar lista',loading:'Buscando seus dossiês…',error:'Não consegui consultar a lista. O dossiê atual continua aberto.',session:'Sua sessão precisa ser renovada antes de consultar a lista.',empty:'Ainda não há outros dossiês salvos.',transferError:'Este navegador não conseguiu levar a referência. Baixe sua cópia JSON antes de trocar de dossiê.'},
+ es:{title:'Tus expedientes',intro:'Cada sitio conserva su propio contexto. Elegí el expediente que querés continuar.',match:'Ya hay un expediente visible para el sitio del diagnóstico. Podés continuar allí antes de crear otro; tendrás que revisar la referencia de nuevo.',current:'Estás aquí',open:'Abrir',openWithScope:'Abrir con esta referencia',more:'Ver más',refresh:'Actualizar lista',loading:'Buscando tus expedientes…',error:'No pude consultar la lista. Tu expediente actual sigue abierto.',session:'La sesión necesita renovarse antes de consultar la lista.',empty:'Todavía no hay otros expedientes guardados.',transferError:'Este navegador no pudo trasladar la referencia. Descargá su copia JSON antes de cambiar de expediente.'},
+ en:{title:'Your dossiers',intro:'Each website keeps its own context. Choose the dossier you want to continue.',match:'A visible dossier already matches the scanned website. You can continue there before creating another; you will review the reference again.',current:'You are here',open:'Open',openWithScope:'Open with this reference',more:'Show more',refresh:'Refresh list',loading:'Finding your dossiers…',error:'I could not load the list. Your current dossier remains open.',session:'Your session needs renewal before loading the list.',empty:'There are no other saved dossiers yet.',transferError:'This browser could not carry the reference. Download its JSON copy before changing dossiers.'},
+ pt:{title:'Seus dossiês',intro:'Cada site mantém seu próprio contexto. Escolha o dossiê que deseja continuar.',match:'Já há um dossiê visível para o site analisado. Você pode continuar nele antes de criar outro; será preciso revisar a referência novamente.',current:'Você está aqui',open:'Abrir',openWithScope:'Abrir com esta referência',more:'Ver mais',refresh:'Atualizar lista',loading:'Buscando seus dossiês…',error:'Não consegui consultar a lista. O dossiê atual continua aberto.',session:'Sua sessão precisa ser renovada antes de consultar a lista.',empty:'Ainda não há outros dossiês salvos.',transferError:'Este navegador não conseguiu levar a referência. Baixe sua cópia JSON antes de trocar de dossiê.'},
 };
 
 export function ProjectDirectory({locale,currentProjectId,currentName,currentWebsite,pendingScope,request=fetch}:{locale:Locale;currentProjectId:string;currentName:string;currentWebsite:string;pendingScope?:{website:string;scopeText:string}|null;request?:typeof fetch}){
@@ -35,9 +35,11 @@ export function ProjectDirectory({locale,currentProjectId,currentName,currentWeb
   }catch{if(seq===generation.current)setState('error');}
  },[locale,request]);
  useEffect(()=>{let active=true;const currentGeneration=generation;Promise.resolve().then(()=>{if(active)void load(0);});return()=>{active=false;currentGeneration.current++;};},[load]);
- const others=projects.filter(project=>project.id!==currentProjectId);
+ const others=orderProjectsForScope(projects.filter(project=>project.id!==currentProjectId),pendingScope?.scopeText);
+ const hasMatch=Boolean(pendingScope&&others.some(project=>canCarryScopeToProject(pendingScope.scopeText,project.website)));
  return <section className="project-directory" aria-labelledby="project-directory-title">
   <h3 id="project-directory-title">{copy.title}</h3><p>{copy.intro}</p>
+  {hasMatch?<p role="status">{copy.match}</p>:null}
   <ul><li><strong>{currentName||currentWebsite}</strong><small>{currentWebsite}</small><span aria-current="page">{copy.current}</span></li>{others.map(project=>{
    const href=localizedPath('dossier',locale,{projectId:project.id});
    const carries=Boolean(pendingScope&&canCarryScopeToProject(pendingScope.scopeText,project.website));
