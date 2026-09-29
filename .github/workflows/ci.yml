@@ -30,6 +30,8 @@ jobs:
         with:
           name: afw-build-${{ github.sha }}
           path: dist/
+          # Public discovery contracts live under dist/client/.well-known/.
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 7
 
