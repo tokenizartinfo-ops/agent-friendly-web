@@ -28,6 +28,7 @@ import { readProjectSaveResponse } from '../../lib/project-save-response.mjs';
 import { createObservationSaveAttempt } from '../../lib/observation-save-attempt.mjs';
 import { currentOriginObservations, observationOrigin } from '../../lib/observation-current-origin.mjs';
 import { observationScoreLabel } from '../../lib/observation-score-copy.mjs';
+import { readObservationSnapshot } from '../../lib/observation-read-client.mjs';
 import { compareObservationHistory } from '../../lib/observation-history.mjs';
 
 import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
@@ -172,6 +173,8 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const [copied, setCopied] = useState(false);
   const [observation, setObservation] = useState<ObservationSummary | null>(null);
   const [observationHistory,setObservationHistory]=useState<ObservationHistoryItem[]>([]);
+  const [observationReadFailure,setObservationReadFailure]=useState<{projectId:string;website:string}|null>(null);
+  const [observationLoadAttempt,setObservationLoadAttempt]=useState(0);
   const [observationBusy, setObservationBusy] = useState(false);
   const observationLock=useRef(false);
   const [observationAttempt]=useState(()=>createObservationSaveAttempt());
@@ -228,20 +231,20 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   useEffect(() => {
     if (!projectId) return;
     const controller = new AbortController();
-    request(`/api/projects/${projectId}/observations`, { cache: 'no-store', signal: controller.signal })
-      .then(async (response) => {
-        const payload = await response.json() as ObservationPayload;
+    readObservationSnapshot(projectId,request,controller.signal)
+      .then((payload) => {
         if(controller.signal.aborted)return;
-        if (!response.ok) throw new Error(payload.error || localizedMessage(locale, 'No se pudo consultar la última observación.', 'The latest observation could not be loaded.', 'Não foi possível consultar a última observação.'));
         setObservation(payload.observation || null);
         setObservationHistory(Array.isArray(payload.history)?payload.history:[]);
+        setObservationReadFailure(null);
       })
       .catch((error) => {
         if (error instanceof DOMException && error.name === 'AbortError') return;
-        setObservationMessage(error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo consultar la última observación.', 'The latest observation could not be loaded.', 'Não foi possível consultar a última observação.'));
+        setObservationReadFailure({projectId,website:savedWebsite});
+        setObservationMessage(localizedMessage(locale, 'No pude consultar las observaciones guardadas. Podés reintentar la consulta sin ejecutar ni guardar una auditoría nueva.', 'I could not load saved observations. You can retry this read without running or saving a new audit.', 'Não consegui consultar as observações salvas. Você pode repetir a leitura sem executar nem salvar uma nova auditoria.'));
       });
     return () => controller.abort();
-  }, [locale, projectId, request, savedWebsite]);
+  }, [locale, projectId, request, savedWebsite, observationLoadAttempt]);
 
   const saveReviewedDraft = useCallback(async () => {
     if (!ready.current || manualLock.current || conflictReview || !data.website) return;
@@ -421,15 +424,14 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
       if (!response.ok || !payload.observation) throw new Error(payload.error || localizedMessage(locale, 'No se pudo guardar la observación.', 'The observation could not be saved.', 'Não foi possível salvar a observação.'));
       observationAttempt.confirmed(attempt.key);
       setObservation(payload.observation);
+      let refreshFailed=false;
       try {
-        const refreshed=await request(`/api/projects/${projectId}/observations`,{cache:'no-store'});
-        if(refreshed.ok){
-          const recent=await refreshed.json() as ObservationPayload;
-          setObservationHistory(Array.isArray(recent.history)?recent.history:[]);
-          if(recent.observation)setObservation(recent.observation);
-        }else setObservationHistory([]);
-      }catch{setObservationHistory([]);}
-      setObservationMessage(payload.replayed?localizedMessage(locale,'Recuperé la observación que ya se había guardado; no se duplicó.','I recovered the observation already saved; no duplicate was created.','Recuperei a observação já salva; não houve duplicação.'):localizedMessage(locale, 'Observación guardada. El escáner público sigue sin almacenar auditorías automáticas.', 'Observation saved. The public scanner still stores no automatic audits.', 'Observação salva. O scanner público continua sem armazenar auditorias automáticas.'));
+        const recent=await readObservationSnapshot(projectId,request);
+        setObservationHistory(recent.history);
+        if(recent.observation)setObservation(recent.observation);
+        setObservationReadFailure(null);
+      }catch{refreshFailed=true;setObservationHistory([]);setObservationReadFailure({projectId,website:savedWebsite});}
+      setObservationMessage(refreshFailed?localizedMessage(locale,'La observación se guardó, pero no pude volver a consultar el historial. Usá “Reintentar consulta”; no hace falta auditar de nuevo.','The observation was saved, but I could not reload the history. Use “Retry saved read”; no new audit is needed.','A observação foi salva, mas não consegui atualizar o histórico. Use “Repetir consulta”; não é preciso auditar novamente.'):payload.replayed?localizedMessage(locale,'Recuperé la observación que ya se había guardado; no se duplicó.','I recovered the observation already saved; no duplicate was created.','Recuperei a observação já salva; não houve duplicação.'):localizedMessage(locale, 'Observación guardada. El escáner público sigue sin almacenar auditorías automáticas.', 'Observation saved. The public scanner still stores no automatic audits.', 'Observação salva. O scanner público continua sem armazenar auditorias automáticas.'));
     } catch (error) {
       setObservationMessage(error instanceof TypeError?localizedMessage(locale,'No pude confirmar el resultado por la conexión. Tu próximo clic reintentará la misma solicitud antes de hacer otra auditoría.','I could not confirm the result because of the connection. Your next click will retry the same request before starting another audit.','Não consegui confirmar o resultado por causa da conexão. O próximo clique repetirá a mesma solicitação antes de iniciar outra auditoria.'):error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo guardar la observación.', 'The observation could not be saved.', 'Não foi possível salvar a observação.'));
     } finally {
@@ -584,6 +586,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
             {observationBusy ? <LoaderCircle className="spin" size={16} /> : <Radar size={16} />}
             {copy.labels.auditSave}
           </button>
+          {observationReadFailure?.projectId===projectId&&observationReadFailure.website===savedWebsite?<button type="button" className="secondary-action" onClick={()=>{setObservationReadFailure(null);setObservationMessage(localizedMessage(locale,'Consultando solo las observaciones ya guardadas…','Reading saved observations only…','Consultando apenas as observações já salvas…'));setObservationLoadAttempt(value=>value+1);}}>{localizedMessage(locale,'Reintentar consulta guardada','Retry saved read','Repetir consulta salva')}</button>:null}
           <div className="verification-message" aria-live="polite"><CircleHelp size={17} /><span>{observationMessage}</span></div>
         </section>
 

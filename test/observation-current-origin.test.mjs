@@ -18,6 +18,6 @@ test('an unsaved origin cannot start an observation and saved-origin changes tri
  assert.match(source,/observationOrigin\(data\.website\)===observationOrigin\(savedWebsite\)/);
  assert.match(source,/if \(!projectId \|\| !observationWebsiteIsSaved\)/);
  assert.match(source,/disabled=\{observationBusy \|\| !observationWebsiteIsSaved\}/);
- assert.match(source,/\[locale, projectId, request, savedWebsite\]/);
+ assert.match(source,/\[locale, projectId, request, savedWebsite, observationLoadAttempt\]/);
  assert.match(source,/currentOriginObservations\(observation,observationHistory,savedWebsite\)/);
 });
