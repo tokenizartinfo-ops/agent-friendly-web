@@ -2254,6 +2254,16 @@ footer p { margin: 0; }
 
 /* Explicit dossier creation stays separate from the autosaved intake. */
 .project-create summary { cursor: pointer; font-weight: 700; font-size: 16px; }
+.project-directory { padding: 18px; border: 1px solid #c7beb1; border-radius: 8px; background: #fffaf2; overflow-wrap: anywhere; }
+.project-directory h3 { margin: 0 0 8px; font-size: 20px; }
+.project-directory p { margin: 8px 0; font-size: 14px; line-height: 1.5; }
+.project-directory ul { list-style: none; padding: 0; margin: 14px 0; display: grid; gap: 10px; }
+.project-directory li { display: grid; gap: 4px; padding: 10px; border: 1px solid #d9d0c4; border-radius: 5px; }
+.project-directory li small { font-size: 12px; overflow-wrap: anywhere; }
+.project-directory li a,.project-directory li span { justify-self: start; font-weight: 700; }
+.project-directory button { min-height: 44px; margin: 4px 8px 4px 0; padding: 8px 12px; border: 1px solid #766958; border-radius: 5px; background: #f5f0e7; color: inherit; cursor: pointer; }
+.project-directory button:disabled { opacity: .55; cursor: not-allowed; }
+.project-directory :focus-visible { outline: 3px solid #7c5127; outline-offset: 3px; }
 .project-create summary svg { display: inline-block; vertical-align: middle; margin-right: 8px; }
 .project-create p { margin: 12px 0; font-size: 15px; line-height: 1.5; }
 .project-create fieldset { border: 0; padding: 0; margin: 16px 0; min-width: 0; }
