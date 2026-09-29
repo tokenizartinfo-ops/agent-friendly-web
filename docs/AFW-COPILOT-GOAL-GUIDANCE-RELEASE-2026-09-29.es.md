@@ -1,0 +1,11 @@
+# AFW: orientación provisional sobre objetivos del sitio — 2026-09-29
+
+**Proyecto y recurso:** Agent Friendly Web; origen `https://agentfriendlyweb.dev`; Worker `agent-friendly-web-web-production`. El copilot del expediente ahora puede citar un objetivo expresado en el texto de la persona y plantear una pregunta para precisar el alcance. Admite descubrimiento, explicación, consulta, acción y transacción como temas de conversación, sin asignar nivel AF observado, inferir permisos ni modificar el borrador.
+
+PR #94, commit integrado `8143bb464c4060883e5c838be4cb000238e83485`. La salida del modelo pasa por una validación que exige cita exacta, intención positiva y verbos concretos para acciones o transacciones. La pregunta es informativa y no tiene control de aplicación. Los objetivos negados o no sustentados se descartan. Esta validación es deliberadamente conservadora: una frase que mezcle objetivos positivos y negativos puede no producir pregunta.
+
+Pasaron 548 pruebas, build y CI `36638581548`. Lint terminó sin errores y con la advertencia previa sobre `<img>`. El artefacto se reconstruyó desde el commit integrado. La configuración productiva piloto, ignorada por Git, conservó SHA-256 `5f2492cf6fe945b2f80a0caf0ced7aa32669ac1d9f67d15fdcb129145193160e`, con Cloudflare Access, Workers AI, cuota 5/60 y compuerta de un solo expediente sintético. No hubo migraciones.
+
+La versión `5fad53a0-51d2-46da-9e0c-f837f9a4f652` se asignó primero al 0 % y luego al 100 %. El smoke anónimo pasó 11/11 rutas: ocho públicas con 200 y tres privadas redirigidas por Access. **Rollback:** asignar 100 % a `b45d9bc2-1e30-46ed-92f4-28ae370044ec`; para cerrar por completo el piloto, usar `377e6c7a-a783-478b-86ef-e7290d15b97e`. No tocar D1.
+
+La nueva pregunta todavía no se verificó visualmente en sesión autenticada. El smoke anónimo acredita el límite de Access, pero no el recorrido privado. El despliegue no concedió consentimiento ni cambió datos de expedientes.
