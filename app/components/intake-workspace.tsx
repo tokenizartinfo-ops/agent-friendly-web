@@ -32,6 +32,7 @@ import { SavedObservationEvidence } from './saved-observation-evidence';
 import { readObservationSnapshot } from '../../lib/observation-read-client.mjs';
 import { compareObservationHistory } from '../../lib/observation-history.mjs';
 import { missingIntakeQuestions } from '../../lib/intake-question-coach.mjs';
+import { isGuidedPilotView } from '../../lib/guided-pilot-view.mjs';
 
 import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
 import { reconcileSavedDraft } from '../../lib/project-save-reconciliation.mjs';
@@ -161,6 +162,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const [projectId, setProjectId] = useState('');
   const [savedWebsite, setSavedWebsite] = useState('');
   const [loaded,setLoaded]=useState(false);
+  const [guidedViewRequested,setGuidedViewRequested]=useState(true);
   const [loadAttempt,setLoadAttempt]=useState(0);
   const unconfirmedChanges=dossierDirtyFields(data,savedSnapshot).length>0;
   const savedMessage = rehearsal
@@ -444,9 +446,11 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   }
 
   const historyComparison=compareObservationHistory(currentObservations.history);
+  const pilotCopilot = isCopilotProjectAllowed({ enabled: copilotEnabled, allowedProjectId: copilotProjectId, projectId }) && !rehearsal;
+  const guidedView = isGuidedPilotView({ pilot: pilotCopilot, loaded, requested: guidedViewRequested, conflict: Boolean(conflictReview), sessionRequired });
   return (
-    <div className="intake-layout">
-      <a className="dossier-help-dock" href="#dossier-assistant" onClick={()=>{const panel=document.getElementById('dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
+    <div className={guidedView ? 'intake-layout guided-pilot' : 'intake-layout'}>
+      <a className="dossier-help-dock" href={guidedView ? '#dossier-copilot' : '#dossier-assistant'} onClick={()=>{const panel=document.getElementById(guidedView ? 'dossier-copilot' : 'dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
       {exitTarget && <DraftExitDialog locale={locale} onStay={() => setExitTarget(null)} onLeave={() => {
         exitCleanup.current?.();
         window.location.assign(exitTarget);
@@ -459,24 +463,33 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           <p>{privateUiCopy(locale).dossier.intro}</p>
         </div>
 
+        {pilotCopilot && loaded && !conflictReview && !sessionRequired ? <div className="guided-view-switch"><p>{guidedView
+          ? localizedMessage(locale, 'Vamos de a poco. Contame tu sitio con tus palabras o por audio; revisamos juntos cada propuesta antes de guardarla.', 'Let us take this one step at a time. Describe your site in text or audio; we will review each suggestion before saving.', 'Vamos por partes. Conte sobre seu site por texto ou áudio; revisaremos cada sugestão antes de salvar.')
+          : localizedMessage(locale, 'Este es el expediente completo. Podés volver a la guía breve en cualquier momento.', 'This is the full dossier. You can return to the brief guide at any time.', 'Este é o dossiê completo. Você pode voltar ao guia breve quando quiser.')}</p><button type="button" className="secondary-action" onClick={() => setGuidedViewRequested(!guidedViewRequested)}>{guidedView
+          ? localizedMessage(locale, 'Ver expediente completo', 'View full dossier', 'Ver dossiê completo')
+          : localizedMessage(locale, 'Volver a la guía breve', 'Return to brief guide', 'Voltar ao guia breve')}</button></div> : null}
+
+        <div hidden={guidedView}>
         <ScopeImport onReviewChange={setReviewedScope} onPrepareSeparate={setSeparateScope} onAvailableScopeChange={setAvailableScope} locale={locale} website={data.website} projectId={projectId || ""} revision={scopeRevision} canSave={Boolean(projectId && data.website === savedWebsite && status !== "saving")} request={request} onUseWebsite={website => {
           if(manualLock.current || data.website.trim())return;
           setAutosavePaused(true);setData(current=>({...current,website}));setStatus('idle');setMessage(DOSSIER_GUIDE_COPY[locale].draft);
         }}/>
-        <details id="dossier-assistant" className="dossier-assistant" open>
-          <summary>{DOSSIER_GUIDE_COPY[locale].assist}</summary>
+        </div>
+        <details id="dossier-assistant" className="dossier-assistant" open={!guidedView}>
+          <summary>{guidedView ? localizedMessage(locale, 'Seguir sin IA: una pregunta por vez', 'Continue without AI: one question at a time', 'Continuar sem IA: uma pergunta por vez') : DOSSIER_GUIDE_COPY[locale].assist}</summary>
           <p>{DOSSIER_GUIDE_COPY[locale].local}</p>
           <IntakeAssistantPrototype locale={locale} draft={data} reviewedScope={reviewedScope} onApply={next => {
             if(manualLock.current)return;
             setAutosavePaused(true);setData(intakeFromProject(next));setStatus('idle');setMessage(DOSSIER_GUIDE_COPY[locale].draft);
           }} />
         </details>
-        {isCopilotProjectAllowed({ enabled: copilotEnabled, allowedProjectId: copilotProjectId, projectId }) && !rehearsal ? <details className="dossier-assistant"><summary>{locale === 'en' ? 'Intelligent copilot' : 'Copilot inteligente'}</summary>
+        {pilotCopilot ? <details id="dossier-copilot" className="dossier-assistant" open={guidedView}><summary>{locale === 'en' ? 'Intelligent copilot' : 'Copilot inteligente'}</summary>
           <IntakeIntelligentCopilot key={`${projectId}:${locale}`} projectId={projectId} locale={locale} draft={data} onApply={next => {
             if (manualLock.current) return;
             setAutosavePaused(true); setData(intakeFromProject(next)); setStatus('idle'); setMessage(DOSSIER_GUIDE_COPY[locale].draft);
           }} />
         </details> : null}
+        <div hidden={guidedView}>
         <div id="dossier-form" />
 
         <FormSection icon={<UserRound size={20} />} id="dossier-identity" title={identitySection[1]} subtitle={identitySection[2]}>
@@ -595,29 +608,32 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         </section>
 
         {!rehearsal ? <div id="dossier-capsule"><CapsuleReview projectId={projectId} expectedDomain={hostname} allowBuild locale={locale} /></div> : null}
+        </div>
         </fieldset>
       </main>
 
       <aside className="intake-aside">
-        <DossierProgress draft={data} saved={savedSnapshot} loaded={loaded} projectId={projectId} status={status} sessionRequired={sessionRequired} conflict={Boolean(conflictReview)} verified={activeClaim?.status === 'verified' && websiteIsSaved} verifiedUntil={activeClaim?.verifiedUntil || ''} locale={locale} rehearsal={Boolean(rehearsal)} onRetryLoad={()=>{if(loaded)return;setStatus('loading');setLoadAttempt(value=>value+1);}}/>
-        {loaded ? <section className="proportional-target" aria-labelledby="proportional-target-title">
+        {!guidedView ? <DossierProgress draft={data} saved={savedSnapshot} loaded={loaded} projectId={projectId} status={status} sessionRequired={sessionRequired} conflict={Boolean(conflictReview)} verified={activeClaim?.status === 'verified' && websiteIsSaved} verifiedUntil={activeClaim?.verifiedUntil || ''} locale={locale} rehearsal={Boolean(rehearsal)} onRetryLoad={()=>{if(loaded)return;setStatus('loading');setLoadAttempt(value=>value+1);}}/> : null}
+        {loaded && !guidedView ? <section className="proportional-target" aria-labelledby="proportional-target-title">
           <h3 id="proportional-target-title">{targetGuide.title}</h3><p>{targetGuide.provisional}</p>
           <ul>{targetGuide.steps.map(step => <li key={step}>{step}</li>)}</ul>
           {targetGuide.questions.length ? <div className="proportional-target-questions"><strong>{localizedMessage(locale, 'Para decidir juntos', 'To decide together', 'Para decidirmos juntos')}</strong><ul>{targetGuide.questions.map(question => <li key={question}>{question}</li>)}</ul></div> : null}
           <div className="proportional-target-next"><strong>{localizedMessage(locale, 'Un siguiente paso', 'One next step', 'Um próximo passo')}</strong><p>{targetGuide.next.reason}</p><a href={targetGuide.next.href}>{targetGuide.next.label}</a></div>
           <small>{targetGuide.limit}</small>
         </section> : null}
-        {!rehearsal && projectId ? <ProjectDirectory locale={locale} currentProjectId={projectId} currentName={savedSnapshot.organization} currentWebsite={savedWebsite} pendingScope={availableScope} request={request} /> : null}
-        {!rehearsal && projectId ? <ProjectCreate key={separateScope?.scopeText || 'manual'} locale={locale} suggestion={separateScope} disabled={manualBusy || Boolean(conflictReview) || sessionRequired || shouldAutosaveProject({ ready: true, draft: data, base: savedSnapshot }) || (status !== 'idle' && status !== 'saved')} /> : null}
+        <div className="intake-project-tools" hidden={guidedView}>
+          {!rehearsal && projectId ? <ProjectDirectory locale={locale} currentProjectId={projectId} currentName={savedSnapshot.organization} currentWebsite={savedWebsite} pendingScope={availableScope} request={request} /> : null}
+          {!rehearsal && projectId ? <ProjectCreate key={separateScope?.scopeText || 'manual'} locale={locale} suggestion={separateScope} disabled={manualBusy || Boolean(conflictReview) || sessionRequired || shouldAutosaveProject({ ready: true, draft: data, base: savedSnapshot }) || (status !== 'idle' && status !== 'saved')} /> : null}
+        </div>
         {conflictReview ? <div id="dossier-conflict"><IntakeConflictReview key={conflictReview.plan.revision} locale={locale} plan={conflictReview.plan} onConfirm={confirmConflictReview} onCancel={() => setConflictReview(null)} /></div> : null}
         {<button id="dossier-save" className="primary-action" type="button" disabled={manualBusy || Boolean(conflictReview) || !loaded || !data.website} onClick={saveReviewedDraft}><Save size={17} />{rehearsal ? localizedMessage(locale, 'Confirmar guardado simulado', 'Confirm simulated save', 'Confirmar salvamento simulado') : localizedMessage(locale, 'Guardar cambios', 'Save changes', 'Salvar alterações')}</button>}
         {sessionRequired ? <p id="dossier-session" tabIndex={-1} role="alert">{!rehearsal ? localizedMessage(locale, 'La sesión venció. Conserva esta pestaña abierta e inicia sesión en otra pestaña; después vuelve a guardar aquí.', 'Your session expired. Keep this tab open and sign in in another tab; then return here and save again.', 'Sua sessão expirou. Mantenha esta aba aberta e entre em outra aba; depois volte e salve novamente.') : localizedMessage(locale,
           'La sesión de prueba venció. Tus cambios siguen en este formulario, sin guardar. No cierres ni recargues esta pestaña. Restablece la sesión simulada arriba y vuelve a confirmar el guardado; no necesitas completar todo otra vez.',
           'The test session expired. Your unsaved changes remain in this form. Do not close or reload this tab. Restore the simulated session above, then confirm saving again; you do not need to fill everything out again.',
           'A sessão de teste expirou. Suas alterações continuam neste formulário, sem salvar. Não feche nem recarregue esta aba. Restabeleça a sessão simulada acima e confirme o salvamento novamente; não precisa preencher tudo outra vez.')}</p> : null}
-        <div className="owner-chip"><span>{userName.slice(0, 1).toUpperCase()}</span><div><strong>{userName}</strong><small>{userEmail}</small></div></div>
+        {!guidedView ? <div className="owner-chip"><span>{userName.slice(0, 1).toUpperCase()}</span><div><strong>{userName}</strong><small>{userEmail}</small></div></div> : null}
         {!sessionRequired ? <div className="save-status" data-status={status==='saved' && unconfirmedChanges ? 'idle' : status}>{status === 'saving' || status === 'loading' ? <LoaderCircle className="spin" size={17} /> : status === 'saved' ? <Check size={17} /> : <Save size={17} />}<span>{status === 'saved' ? unconfirmedChanges ? DOSSIER_GUIDE_COPY[locale].draft : savedMessage : message}</span></div> : null}
-        {roadmap.length ? <div className="mini-roadmap"><span>{copy.labels.firstRoadmap}</span>{roadmap.slice(0, 4).map(item => roadmapPresentation(item, locale)).map((item) => <div key={item.id}><small>{item.stage}</small><strong>{item.title}</strong></div>)}</div> : null}
+        {roadmap.length && !guidedView ? <div className="mini-roadmap"><span>{copy.labels.firstRoadmap}</span>{roadmap.slice(0, 4).map(item => roadmapPresentation(item, locale)).map((item) => <div key={item.id}><small>{item.stage}</small><strong>{item.title}</strong></div>)}</div> : null}
       </aside>
     </div>
   );
