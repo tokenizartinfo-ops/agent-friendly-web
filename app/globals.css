@@ -463,7 +463,7 @@ footer p { margin: 0; }
 .security-note strong { font-size: 12px; }
 .security-note span { margin-top: 3px; font-size: 11px; line-height: 1.45; }
 .intake-aside { position: static; display: grid; gap: 14px; }
-.owner-chip, .progress-block, .question-block, .save-status, .mini-roadmap { border: 1px solid var(--line); border-radius: 8px; background: var(--white); }
+.owner-chip, .progress-block, .question-block, .save-status, .mini-roadmap, .proportional-target { border: 1px solid var(--line); border-radius: 8px; background: var(--white); }
 .owner-chip { display: flex; align-items: center; gap: 10px; padding: 14px; }
 .owner-chip > span { width: 34px; height: 34px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--ink); color: var(--lime); font-weight: 800; }
 .owner-chip strong, .owner-chip small { display: block; overflow-wrap: anywhere; }
@@ -488,6 +488,15 @@ footer p { margin: 0; }
 .mini-roadmap small, .mini-roadmap strong { display: block; }
 .mini-roadmap small { color: var(--orange); font-size: 9px; font-weight: 800; text-transform: uppercase; }
 .mini-roadmap strong { margin-top: 4px; font-size: 12px; line-height: 1.4; }
+.proportional-target { padding: 18px; }
+.proportional-target h3 { margin: 0 0 8px; font-size: 15px; line-height: 1.35; }
+.proportional-target p, .proportional-target li, .proportional-target small { font-size: 11px; line-height: 1.55; }
+.proportional-target p, .proportional-target small { color: var(--muted); }
+.proportional-target ul { margin: 12px 0; padding-left: 18px; }
+.proportional-target li + li { margin-top: 8px; }
+.proportional-target-questions { padding-top: 12px; border-top: 1px solid var(--line); }
+.proportional-target-questions strong { color: var(--teal); font-size: 10px; }
+.proportional-target small { display: block; margin-top: 12px; }
 
 .field-label { display: block; margin-bottom: 9px; color: var(--ink); font-size: 12px; font-weight: 750; }
 .field-label.spaced { margin-top: 20px; }
