@@ -2269,6 +2269,14 @@ footer p { margin: 0; }
 .observation-history p { margin: 8px 0; line-height: 1.5; }
 .observation-history ol { margin: 8px 0 0; padding-left: 24px; }
 .observation-history li { margin-top: 5px; }
+.saved-observation-evidence { margin: 16px 0; padding: 16px; border: 1px solid #b8d1ca; border-radius: 6px; background: #fff; }
+.saved-observation-evidence h3 { margin: 0 0 8px; font-size: 15px; }
+.saved-observation-evidence p { margin: 8px 0; line-height: 1.5; }
+.saved-observation-next { margin: 12px 0; padding: 12px; border-left: 3px solid var(--teal); background: #f6faf8; }
+.saved-observation-evidence details { margin: 12px 0; }
+.saved-observation-evidence summary { cursor: pointer; font-weight: 700; }
+.saved-observation-evidence li { margin: 5px 0; }
+.saved-observation-evidence small { display: block; color: var(--muted); line-height: 1.5; }
 .project-create p { margin: 12px 0; font-size: 15px; line-height: 1.5; }
 .project-create fieldset { border: 0; padding: 0; margin: 16px 0; min-width: 0; }
 .project-create .secondary-action { min-height: 44px; font-family: inherit; font-size: 14px; font-weight: 700; white-space: normal; }

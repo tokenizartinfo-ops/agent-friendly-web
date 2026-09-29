@@ -28,6 +28,7 @@ import { readProjectSaveResponse } from '../../lib/project-save-response.mjs';
 import { createObservationSaveAttempt } from '../../lib/observation-save-attempt.mjs';
 import { currentOriginObservations, observationOrigin } from '../../lib/observation-current-origin.mjs';
 import { observationScoreLabel } from '../../lib/observation-score-copy.mjs';
+import { SavedObservationEvidence } from './saved-observation-evidence';
 import { readObservationSnapshot } from '../../lib/observation-read-client.mjs';
 import { compareObservationHistory } from '../../lib/observation-history.mjs';
 
@@ -63,6 +64,7 @@ type ClaimPayload = {
 type ObservationSummary = {
   id: string; target: string; checkedAt: string;
   readiness: { score?: number; level?: string };
+  evidence?: Record<string,boolean>;
 };
 type ObservationHistoryItem = {id:string;target:string;checkedAt:string;score:number|null;level:string;methodology:string};
 type ObservationPayload = { error?: string; code?: string; observation?: ObservationSummary | null; history?: ObservationHistoryItem[]; notice?: string; replayed?: boolean };
@@ -582,6 +584,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
             {historyComparison?<p>{localizedMessage(locale,'Entre las dos últimas lecturas:','Between the two latest readings:','Entre as duas últimas leituras:')} {historyComparison.delta>=0?'+':''}{historyComparison.delta} {localizedMessage(locale,'puntos. Es una señal técnica, no una garantía de visibilidad o ventas.','points. This is a technical signal, not a visibility or sales guarantee.','pontos. É um sinal técnico, não uma garantia de visibilidade ou vendas.')}</p>:<p>{localizedMessage(locale,'Las lecturas usan métodos distintos o faltan datos comparables; conservamos sus fechas sin afirmar una mejora.','The readings use different methods or lack comparable data; dates are retained without claiming an improvement.','As leituras usam métodos diferentes ou faltam dados comparáveis; mantemos as datas sem afirmar melhora.')}</p>}
             <ol>{currentObservations.history.map(item=><li key={item.id}><time dateTime={item.checkedAt}>{formatDate(item.checkedAt,locale)}</time> · {observationScoreLabel({score:item.score},locale)} {item.level?`· ${item.level}`:''}</li>)}</ol>
           </div>:null}
+          {currentObservations.observation?<SavedObservationEvidence observation={currentObservations.observation} locale={locale}/>:null}
           <button className="primary-action" type="button" onClick={saveObservation} disabled={observationBusy || !observationWebsiteIsSaved}>
             {observationBusy ? <LoaderCircle className="spin" size={16} /> : <Radar size={16} />}
             {copy.labels.auditSave}
