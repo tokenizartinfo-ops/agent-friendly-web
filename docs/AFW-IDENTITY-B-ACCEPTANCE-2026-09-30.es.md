@@ -20,3 +20,15 @@ Capturas locales privadas, ignoradas por Git: `output/afw-identity-b-recovery.pn
 4. Retirar al terminar la política QA registrada en [el recibo de producción](AFW-GUIDED-RELEASE-2026-09-30.es.md); sus sesiones de 1 h no hacen expirar la política.
 
 MA-07 permanece parcialmente validado. Esta prueba no acredita una instalación en un sitio de cliente ni cierra MA-06.
+
+## Continuación con A autenticada
+
+El owner confirmó que el intento rechazado usaba un código antiguo. Con un código nuevo, la UI mostró la sesión A y recuperó el piloto. No se modificaron políticas para resolver el acceso.
+
+La propuesta recuperada citó exactamente la consulta del catálogo mediante una API. Se revisó, se aplicó al borrador y se guardó mediante la UI; tras recargar, quedaron seleccionados contenido y herramientas, sin pagos ni acciones delegadas. No se incorporó una organización genérica. Esto acredita recuperación, revisión y persistencia de la propuesta en una sesión real; no acredita una nueva inferencia remota en esta continuación.
+
+Con A se abrió el ID sintético de B: campos vacíos, controles deshabilitados y mensaje de expediente no disponible. La lista propia de A mostró solo sus dos expedientes, sin el de B. Queda comprobado el aislamiento visual en ambas direcciones; no se envió una escritura cruzada ni se observó su respuesta HTTP.
+
+Se dejó abierta la guía breve del piloto A. Captura local privada: `output/afw-pilot-authenticated-recovery.png`. El relato sintético de trabajo sigue conservado para regresión; no se publicó. Pendientes: limpiar el relato al terminar QA, comprobar escritura cruzada con un mecanismo autorizado y retirar la política temporal QA sin afectar al owner.
+
+Hallazgos de interfaz para el siguiente bloque: tras consumir la propuesta aparece «No encontré datos suficientemente claros», aunque la interpretación fue correcta; al aplicar se mezcla la indicación de autoguardado con una invitación a guardar manualmente. Unificar mensajes con el estado real de persistencia y evitar presentar una propuesta consumida como falta de comprensión. La consulta por API conduce a la pregunta sobre editor del sitio; revisar si primero corresponde concretar datos, audiencia y alcance de consulta antes de detalles de entrega.
