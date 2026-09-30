@@ -6,6 +6,8 @@ La ruta `GET/PUT /api/projects/:projectId/copilot/working-draft` exige identidad
 
 No se usa Durable Objects porque todavía no existe edición simultánea en tiempo real ni coordinación de conexiones persistentes. La revisión optimista de D1 evita sobrescrituras silenciosas en este flujo. Un cierre abrupto antes del primer guardado confirmado, una conexión sin respuesta y el audio aún sin transcribir pueden perder el último material; la interfaz avisa cuando hay cambios pendientes. No se promete guardado garantizado en `beforeunload`.
 
+El siguiente ajuste comparte con el expediente principal la salida por enlaces internos: cuando el relato de trabajo tiene cambios pendientes, **Guardar y salir** envía primero ese relato y espera confirmación; después guarda los campos del expediente que sigan pendientes. Si alguna escritura falla, permanece en la pestaña. **Salir sin guardar** conserva su significado explícito. Cerrar la pestaña por medios externos mantiene el aviso nativo, sin afirmar que un envío asincrónico pueda terminar durante el cierre.
+
 ## Entrega y verificación
 
 PR #108 integrado en commit `7306e06cd6ed3cc98f9355625106da12c51c2507`. La migración 0008 se aplicó a `agent-friendly-web-web-production` (`d26fc9d2-df5a-4957-8e58-cc4c945faad8`): quedó sin migraciones pendientes y la tabla nueva tenía cero filas antes de probar. El Worker `agent-friendly-web-web-production` sirve la versión `47fa424c-527d-4150-b0f8-ca896d7e6848` al 100 %, con la bandera del copilot limitada al proyecto sintético `6e972c18-cae1-402b-b959-646abd8499d7` bajo Access. Reversión de código: versión `f00ec771-70db-4a57-86c9-45110bc57ef1`; conservar la tabla aditiva para no perder relatos ya escritos, sin `DROP`.

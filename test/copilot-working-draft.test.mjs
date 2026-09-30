@@ -94,3 +94,13 @@ test('working draft route is owner-only, exact-pilot, versioned and idempotent',
   assert.equal((await (await h.request('GET')).json()).draft.text, second.text);
   h.env.AFW_COPILOT_ENABLED = 'false'; assert.equal((await h.request('GET')).status, 503);
 });
+
+test('private navigation waits for the working text before leaving', () => {
+  const workspace = readFileSync('app/components/intake-workspace.tsx', 'utf8');
+  const copilot = readFileSync('app/components/intake-intelligent-copilot.tsx', 'utf8');
+  assert.match(workspace, /if \(!workingPending && !hasPendingDraft/);
+  assert.match(workspace, /if \(workingPending && !\(await workingSave\.current\?\.\(\)\)\) return false/);
+  assert.match(workspace, /workingExit\.current\?\.\(\); window\.location\.assign\(exitTarget\)/);
+  assert.match(copilot, /onRegisterWorkingSave\?\.\(saveWorkingNow\)/);
+  assert.match(copilot, /onRegisterWorkingExit\?\.\(\(\) => \{ allowNavigation\.current = true; \}\)/);
+});

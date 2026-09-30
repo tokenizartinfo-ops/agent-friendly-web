@@ -142,6 +142,9 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const [sessionRequired, setSessionRequired] = useState(false);
   const [exitTarget, setExitTarget] = useState<string | null>(null);
   const exitCleanup = useRef<(() => void) | null>(null);
+  const [workingPending, setWorkingPending] = useState(false);
+  const workingSave = useRef<(() => Promise<boolean>) | null>(null);
+  const workingExit = useRef<(() => void) | null>(null);
   const savedBase = useRef<Intake>(emptyIntake);
   const [savedSnapshot, setSavedSnapshot] = useState<Intake>(emptyIntake);
   const savedRevision = useRef(0);
@@ -319,12 +322,12 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   }, [data, rehearsal, manualBusy, autosavePaused, conflictReview, sessionRequired, saveReviewedDraft, status, exitTarget]);
 
   useEffect(() => {
-    if (!hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
+    if (!workingPending && !hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
       busy: manualBusy, conflict: Boolean(conflictReview) })) return;
     const cleanup = attachDraftExitGuard(window, document, (href: string) => { setExitTarget(href); return false; });
     exitCleanup.current = cleanup;
     return () => { cleanup(); exitCleanup.current = null; };
-  }, [data, manualBusy, conflictReview, status, locale]);
+  }, [data, manualBusy, conflictReview, status, locale, workingPending]);
 
   function confirmConflictReview(choices: Record<string, string>) {
     if (!conflictReview) return;
@@ -454,11 +457,14 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
     <div className={guidedView ? 'intake-layout guided-pilot' : 'intake-layout'}>
       <a className="dossier-help-dock" href={guidedView ? '#dossier-copilot' : '#dossier-assistant'} onClick={()=>{const panel=document.getElementById(guidedView ? 'dossier-copilot' : 'dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
       {exitTarget && <DraftExitDialog locale={locale} saving={manualBusy} onStay={() => setExitTarget(null)} onSaveLeave={async () => {
-        const saved = await saveReviewedDraft();
-        if (saved) { exitCleanup.current?.(); window.location.assign(exitTarget); }
+        if (workingPending && !(await workingSave.current?.())) return false;
+        const saved = hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
+          busy: manualBusy, conflict: Boolean(conflictReview) }) ? await saveReviewedDraft() : true;
+        if (saved) { exitCleanup.current?.(); workingExit.current?.(); window.location.assign(exitTarget); }
         return saved;
       }} onLeave={() => {
         exitCleanup.current?.();
+        workingExit.current?.();
         window.location.assign(exitTarget);
       }} />}
       <main className="intake-main">
@@ -490,7 +496,9 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           }} />
         </details>
         {pilotCopilot ? <details id="dossier-copilot" className="dossier-assistant" open={guidedView}><summary>{locale === 'en' ? 'Intelligent copilot' : 'Copilot inteligente'}</summary>
-          <IntakeIntelligentCopilot key={`${projectId}:${locale}`} projectId={projectId} locale={locale} draft={data} onApply={next => {
+          <IntakeIntelligentCopilot key={`${projectId}:${locale}`} projectId={projectId} locale={locale} draft={data}
+            onWorkingPendingChange={setWorkingPending} onRegisterWorkingSave={save => { workingSave.current = save; }}
+            onRegisterWorkingExit={allow => { workingExit.current = allow; }} onApply={next => {
             if (manualLock.current) return;
             setAutosavePaused(false); setData(intakeFromProject(next)); setStatus('idle'); setMessage(DOSSIER_GUIDE_COPY[locale].draft);
           }} />
