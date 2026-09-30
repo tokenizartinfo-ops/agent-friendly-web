@@ -21,7 +21,7 @@ import { capsuleBuildMessage } from '../../lib/capsule-build-message.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { ConnectorSandbox } from './connector-sandbox';
 import {CapsuleGuidance} from './capsule-guidance';
-import {capsuleGuideState,capsuleEvidenceMatches} from '../../lib/capsule-guidance.mjs';
+import {capsuleGuideState,capsuleEvidenceMatches,capsuleFilesObservedUnchanged} from '../../lib/capsule-guidance.mjs';
 
 type Locale = 'es' | 'en' | 'pt';
 type CapsuleCopy = ReturnType<typeof privateUiCopy>['capsule'];
@@ -408,7 +408,7 @@ export function CapsuleReview({
         <div><strong>{copy.noWrite}</strong><span>{copy.noWriteBody}</span></div>
       </div>
 
-      <CapsuleGuidance locale={locale} hasCapsule={Boolean(capsule)} canRefresh={Boolean(projectId)&&!busy&&loadState!=='loading'} onRefresh={()=>{void loadCapsule();}} state={capsuleGuideState({projectId,loadState,status:capsule?.status||'',canDecide,allowBuild,comparisonState,comparisonStatus:capsuleEvidenceMatches(capsule,comparison)?comparison?.status||'':''})}/>
+      <CapsuleGuidance locale={locale} hasCapsule={Boolean(capsule)} canRefresh={Boolean(projectId)&&!busy&&loadState!=='loading'} onRefresh={()=>{void loadCapsule();}} state={capsuleGuideState({projectId,loadState,status:capsule?.status||'',canDecide,allowBuild,comparisonState,filesObservedUnchanged:capsuleFilesObservedUnchanged(capsule,comparison),comparisonStatus:capsuleEvidenceMatches(capsule,comparison)?comparison?.status||'':''})}/>
 
       {!capsule ? (
         <div className="capsule-empty">
