@@ -54,5 +54,5 @@ test('the private copilot renders the planned next turn without changing the sav
   const source = await readFile('app/components/intake-intelligent-copilot.tsx', 'utf8');
   assert.match(source, /planCopilotNextTurn\(draft, result,/);
   assert.match(source, /nextTurnCopy\[locale\]/);
-  assert.match(source, /onApply\(applyIntakeDraft\(draft, changes\), Object\.fromEntries\(changes\.map/);
+  assert.match(source, /onApply\(applyCopilotReview\(draft, changes, reviewEpoch\.current, requestEpoch\.current\), Object\.fromEntries\(changes\.map/);
 });

@@ -1,7 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { previewIntakeDraft, applyIntakeDraft } from '../../lib/intake-draft-review.mjs';
+import { previewIntakeDraft } from '../../lib/intake-draft-review.mjs';
+import { applyCopilotReview } from '../../lib/copilot-review-epoch.mjs';
 import { analyzeIntakeNotes } from '../../lib/intake-assistant.mjs';
 import { dossierFieldLabels, dossierValueLabel } from '../../lib/dossier-field-labels.mjs';
 import { classifyCopilotResponse } from '../../lib/copilot-ui-response.mjs';
@@ -62,7 +63,7 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
   const [session, setSession] = useState<Session>(emptyCopilotSession);
   const currentSession = useRef(session);
   useEffect(() => { currentSession.current = session; }, [session]);
-  const recoveredResult = visibleSessionResult(session);
+  const recoveredResult = visibleSessionResult(session, draft);
   const result: Result | null = recoveredResult ? { ...recoveredResult, warning: t.evidence } : null;
   function setResult(value: Result | null) { setSession(current => ({ ...current, basedOnRevision: dossierRevision, pending: value ? { suggestions: value.suggestions, goalGuidance: value.goalGuidance || null } : null })); }
   function resetNarrativeDecisions() { setSession(current => ({ ...current, pending: null, decisions: [] })); }
@@ -105,6 +106,8 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
   const setProjectConsent = (value: 'loading' | 'granted' | 'revoked' | 'error') => setConsentState({ projectId, value });
   const [consentBusy, setConsentBusy] = useState(false);
   const requestEpoch = useRef(0);
+  const reviewEpoch = useRef(-1);
+  const narrativeEpoch = useRef(-1);
   const currentNotes = useRef(notes);
   const allowNavigation = useRef(false);
   useEffect(() => { allowNavigation.current = false; }, [notes]);
@@ -113,6 +116,13 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
   const [workingConflict, setWorkingConflict] = useState<WorkingDraft | null>(null);
   const workingDirty = notes !== workingSaved.text || JSON.stringify(session) !== JSON.stringify(workingSaved.session);
   const [workingRetry, setWorkingRetry] = useState(0);
+  function recoverWorking() {
+    if (!workingConflict) return;
+    requestEpoch.current += 1;
+    currentNotes.current = workingConflict.text;
+    setNotes(workingConflict.text); setSession(workingConflict.session); setWorkingSaved(workingConflict);
+    setWorkingConflict(null); setChanges(null); setNarrativeChanges(null); setSelected([]); setStatus(''); setNarrativeStatus(''); setBusy(false); setProcessingConsent(false); setWorkingState('ready');
+  }
   const workingInFlight = useRef<Promise<boolean> | null>(null);
   const workingCopy = {
     es: { saved: 'Tu relato de trabajo está guardado en privado. Aún no es un dato del expediente.', pending: 'Guardando tu relato de trabajo…', error: 'No pude guardar este relato. Seguí en esta pestaña o reintentá; no se agregó al expediente.', sensitive: 'No guardé este texto porque podría contener claves o credenciales. Quitalas antes de continuar.', conflict: 'Otra pestaña cambió este relato. Elegí qué versión conservar antes de seguir.', keep: 'Conservar lo que escribí aquí', recover: 'Recuperar la otra versión', retry: 'Reintentar guardado', loading: 'Recuperando tu relato privado…', clear: 'Borrar relato de trabajo' },
@@ -261,7 +271,7 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
     const submittedNotes = notes;
     const epoch = ++requestEpoch.current;
     const isCurrent = () => epoch === requestEpoch.current && currentNotes.current === submittedNotes;
-    setBusy(true); setProcessingConsent(false); setStatus(''); setChanges(null); setResult(null);
+    setBusy(true); setProcessingConsent(false); setStatus(''); setChanges(null);
     try {
       const response = await fetch(`/api/projects/${encodeURIComponent(projectId)}/copilot`, {
         method: 'POST', headers: { 'content-type': 'application/json' }, cache: 'no-store',
@@ -286,10 +296,10 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
 
       {workingState === 'error' ? <button type="button" className="secondary-action" onClick={() => { setWorkingState('loading'); setWorkingRetry(value => value + 1); }}>{workingCopy.retry}</button> : null}
       {notes && workingState === 'ready' ? <button type="button" className="secondary-action" onClick={() => { currentNotes.current = ''; setNotes(''); setSession(emptyCopilotSession()); setChanges(null); setNarrativeChanges(null); }}>{workingCopy.clear}</button> : null}
-      {workingState === 'conflict' && workingConflict ? <div className="assistant-guidance"><button type="button" className="secondary-action" onClick={() => { currentNotes.current = workingConflict.text; setNotes(workingConflict.text); setSession(workingConflict.session); setWorkingSaved(workingConflict); setWorkingConflict(null); setWorkingState('ready'); }}>{workingCopy.recover}</button><button type="button" className="secondary-action" onClick={() => { setWorkingSaved(workingConflict); setWorkingConflict(null); setWorkingState('ready'); }}>{workingCopy.keep}</button></div> : null}
-      <button type="button" className="secondary-action" disabled={!notes.trim()} onClick={() => { try { const preview = previewCopilotNarrative(draft, notes, locale); setNarrativeChanges(preview); setNarrativeStatus(preview.length ? '' : n.duplicate); } catch (error) { setNarrativeChanges(null); setNarrativeStatus(error instanceof Error && error.message === 'too_long' ? n.tooLong : error instanceof Error && error.message === 'sensitive' ? n.sensitive : n.empty); } }}>{n.review}</button>
+      {workingState === 'conflict' && workingConflict ? <div className="assistant-guidance"><button type="button" className="secondary-action" onClick={recoverWorking}>{workingCopy.recover}</button><button type="button" className="secondary-action" onClick={() => { setWorkingSaved(workingConflict); setWorkingConflict(null); setWorkingState('ready'); }}>{workingCopy.keep}</button></div> : null}
+      <button type="button" className="secondary-action" disabled={!notes.trim()} onClick={() => { try { const preview = previewCopilotNarrative(draft, notes, locale); narrativeEpoch.current = requestEpoch.current; setNarrativeChanges(preview); setNarrativeStatus(preview.length ? '' : n.duplicate); } catch (error) { setNarrativeChanges(null); setNarrativeStatus(error instanceof Error && error.message === 'too_long' ? n.tooLong : error instanceof Error && error.message === 'sensitive' ? n.sensitive : n.empty); } }}>{n.review}</button>
       {narrativeStatus ? <p role="status">{narrativeStatus}</p> : null}
-      {narrativeChanges?.length ? <div className="assistant-guidance"><p>{n.intro}</p><label>{n.preview}<textarea rows={6} readOnly value={String(narrativeChanges[0].after)} /></label><button type="button" className="primary-action" onClick={() => { try { onApply(applyIntakeDraft(draft, narrativeChanges)); setNarrativeChanges(null); setNarrativeStatus(n.applied); } catch { setNarrativeChanges(null); setNarrativeStatus(n.stale); } }}>{n.apply}</button></div> : null}
+      {narrativeChanges?.length ? <div className="assistant-guidance"><p>{n.intro}</p><label>{n.preview}<textarea rows={6} readOnly value={String(narrativeChanges[0].after)} /></label><button type="button" className="primary-action" onClick={() => { try { onApply(applyCopilotReview(draft, narrativeChanges, narrativeEpoch.current, requestEpoch.current)); setNarrativeChanges(null); setNarrativeStatus(n.applied); } catch { setNarrativeChanges(null); setNarrativeStatus(n.stale); } }}>{n.apply}</button></div> : null}
       <p className="assistant-privacy">{t.privacy}</p>
       {projectConsent === 'granted' ? <><p className="assistant-privacy">{t.granted}</p><button type="button" className="secondary-action" disabled={consentBusy} onClick={() => changeProjectConsent('revoke')}>{t.revoke}</button></> : <><p className="assistant-privacy">{projectConsent === 'revoked' ? t.revoked : t.consentUnavailable}</p><button type="button" className="secondary-action" disabled={consentBusy || projectConsent === 'loading'} onClick={() => changeProjectConsent('grant')}>{t.grant}</button></>}
       <label className="assistant-privacy"><input type="checkbox" checked={processingConsent} disabled={projectConsent !== 'granted' || consentBusy} onChange={event => setProcessingConsent(event.target.checked)} /> {t.consent}</label>
@@ -308,14 +318,14 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
       {nextTurnField ? <button type="button" className="secondary-action" onClick={() => { if (nextTurn.kind === 'review' || nextTurn.kind === 'clarify') decide(nextTurnField, 'discarded'); else setSession(current => ({ ...current, deferred: [...new Set([...current.deferred, nextTurnField])] })); setChanges(null); }}>{locale === 'en' ? 'Leave this for later' : locale === 'pt' ? 'Deixar para depois' : 'Dejarlo para después'}</button> : null}
       {session.deferred.length ? <button type="button" className="secondary-action" onClick={() => setSession(current => ({ ...current, deferred: [] }))}>{locale === 'en' ? 'Return to pending questions' : locale === 'pt' ? 'Retomar perguntas pendentes' : 'Retomar preguntas pendientes'}</button> : null}
         {nextTurn ? <p role="status" className="assistant-guidance">{nextTurnCopy[locale][nextTurn.kind as keyof typeof nextTurnCopy.es].replace('{field}', nextTurnField ? label(nextTurnField) : '')}{nextTurn.kind === 'clarify' && nextTurnField && fieldHistory[nextTurnField] ? ` ${fieldHistory[nextTurnField].source === 'copilot_reviewed' ? locale === 'en' ? 'You previously reviewed a copilot suggestion for this field; that does not verify the website.' : locale === 'pt' ? 'Você já revisou uma sugestão do copilot para este campo; isso não verifica o site.' : 'Antes revisaste una propuesta del copilot para este dato; eso no verifica el sitio.' : locale === 'en' ? 'The dossier records a previous change to this field; let us check it together.' : locale === 'pt' ? 'O dossiê registra uma alteração anterior neste campo; vamos conferi-la juntos.' : 'El expediente registra un cambio anterior en este dato; revisémoslo juntos.'}` : ''}</p> : null}
-      {result ? <><p>{result.suggestions.length || result.goalGuidance ? result.warning : t.empty}</p>{nextTurnField === 'goals' && goalProposal && result.goalGuidance ? <div className="assistant-guidance"><p>{goalGuidanceCopy[locale].intro}</p><p><em>{t.source}: {result.goalGuidance.sourceExcerpt}</em></p><p>{goalGuidanceCopy[locale][result.goalGuidance.mode]}</p><p>{label('goals')}: {dossierValueLabel('goals', goalProposal.value, locale)}</p><button type="button" className="secondary-action" onClick={() => { try { setChanges(previewIntakeDraft(draft, { suggestions: [goalProposal] }, ['goals'])); setStatus(''); } catch { setChanges(null); setStatus(t.stale); } }}>{reviewGoalCopy}</button></div> : null}{result.suggestions.length ? <><p>{t.evidence}</p><p>{selectionCopy[locale]}</p></> : null}
+      {result ? <><p>{result.suggestions.length || result.goalGuidance ? result.warning : t.empty}</p>{nextTurnField === 'goals' && goalProposal && result.goalGuidance ? <div className="assistant-guidance"><p>{goalGuidanceCopy[locale].intro}</p><p><em>{t.source}: {result.goalGuidance.sourceExcerpt}</em></p><p>{goalGuidanceCopy[locale][result.goalGuidance.mode]}</p><p>{label('goals')}: {dossierValueLabel('goals', goalProposal.value, locale)}</p><button type="button" className="secondary-action" onClick={() => { try { reviewEpoch.current = requestEpoch.current; setChanges(previewIntakeDraft(draft, { suggestions: [goalProposal] }, ['goals'])); setStatus(''); } catch { setChanges(null); setStatus(t.stale); } }}>{reviewGoalCopy}</button></div> : null}{result.suggestions.length ? <><p>{t.evidence}</p><p>{selectionCopy[locale]}</p></> : null}
         <div className="assistant-suggestion-list">{result.suggestions.filter(item => item.field === nextTurnField).map(item => <label key={item.field}>
           <input type="checkbox" checked={selected.includes(item.field)} onChange={() => { setSelected(current => current.includes(item.field) ? current.filter(value => value !== item.field) : [...current, item.field]); setChanges(null); }} />
           <span><strong>{label(item.field)}</strong><small>{dossierValueLabel(item.field, item.value, locale)}</small><em>{t.source}: {item.sourceExcerpt}</em></span>
         </label>)}</div>
-        <button type="button" className="secondary-action" disabled={!selected.some(field => field === nextTurnField)} onClick={() => { try { setChanges(previewIntakeDraft(draft, result, selected.filter(field => field === nextTurnField))); setStatus(''); } catch { setChanges(null); setStatus(t.stale); } }}>{t.review}</button>
+        <button type="button" className="secondary-action" disabled={!selected.some(field => field === nextTurnField)} onClick={() => { try { reviewEpoch.current = requestEpoch.current; setChanges(previewIntakeDraft(draft, result, selected.filter(field => field === nextTurnField))); setStatus(''); } catch { setChanges(null); setStatus(t.stale); } }}>{t.review}</button>
         {changes ? <div><ul>{changes.map((change: { field: string; after: string | string[] }) => <li key={change.field}>{label(change.field)}: {dossierValueLabel(change.field, change.after, locale)}</li>)}</ul>
-          <button type="button" className="primary-action" disabled={!changes.length} onClick={() => { try { onApply(applyIntakeDraft(draft, changes), Object.fromEntries(changes.map((change: { field: string; after: string | string[] }) => [change.field, change.after]))); changes.forEach((change: { field: string }) => decide(change.field, 'applied_to_draft')); setChanges(null); setStatus(t.applied); } catch { setChanges(null); setStatus(t.stale); } }}>{t.apply}</button></div> : null}
+          <button type="button" className="primary-action" disabled={!changes.length} onClick={() => { try { onApply(applyCopilotReview(draft, changes, reviewEpoch.current, requestEpoch.current), Object.fromEntries(changes.map((change: { field: string; after: string | string[] }) => [change.field, change.after]))); changes.forEach((change: { field: string }) => decide(change.field, 'applied_to_draft')); setChanges(null); setStatus(t.applied); } catch { setChanges(null); setStatus(t.stale); } }}>{t.apply}</button></div> : null}
       </> : null}
     </div>
   </section>;

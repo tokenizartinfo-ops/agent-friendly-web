@@ -27,3 +27,9 @@ Cloudflare externo: revisión reservada para el jueves 1 de octubre; no se adela
 ## Validación
 
 Regresiones red/green verificadas para objetivos, horizonte, turno prematuro, recuperación, estado conversacional, nombre genérico y comparaciones temporales. Logs de trabajo en `output/afw-*.log` (ignorados). Cierre pendiente de la última batería completa, revisión independiente, CI y prueba privada del segmento desplegado.
+
+Revisión independiente: se reprodujo y corrigió la pérdida de una propuesta aplicada cuyo guardado del expediente había fallado; al recuperar, se compara con el valor real del expediente antes de ocultarla. Se reprodujo y corrigió también la aplicación de una revisión anterior a la recuperación del relato: la aplicación exige época vigente y valores previos coincidentes. Recuperar otra versión invalida inferencias tardías y limpia previews/selecciones.
+
+Ruling operativo: el registro de ejecución permanece en este documento y Git; se usa PowerShell y comandos de prueba directos para este segmento, en lugar del extractor de briefs Bash. Los fallos red/green y los límites de cierre quedan explícitos; no se contabilizan como despliegue.
+
+El owner aportó dos identidades adicionales para MA-07. Sus direcciones no se incorporan a esta documentación pública. Antes de acceder se preparará una política AFW acotada, conservando los límites del expediente piloto y la propiedad del servidor; aún no se acreditaron sesiones reales de ambas.
