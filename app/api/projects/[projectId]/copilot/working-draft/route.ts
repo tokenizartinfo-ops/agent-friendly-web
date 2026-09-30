@@ -24,7 +24,7 @@ async function owner(context: Context) {
 
 export async function GET(_request: Request, context: Context) {
   const access = await owner(context);
-  if ('code' in access) return reply(access.code, access.status);
+  if ('code' in access) return reply(access.code || 'project_unavailable', access.status || 404);
   const [draft] = await getDb().select({ text: copilotWorkingDrafts.text, revision: copilotWorkingDrafts.revision, updatedAt: copilotWorkingDrafts.updatedAt })
     .from(copilotWorkingDrafts).where(and(eq(copilotWorkingDrafts.projectId, access.projectId), eq(copilotWorkingDrafts.userId, access.userId))).limit(1);
   return Response.json({ draft: draft || { text: '', revision: 0, updatedAt: null } }, { headers });
@@ -32,7 +32,7 @@ export async function GET(_request: Request, context: Context) {
 
 export async function PUT(request: Request, context: Context) {
   const access = await owner(context);
-  if ('code' in access) return reply(access.code, access.status);
+  if ('code' in access) return reply(access.code || 'project_unavailable', access.status || 404);
   if (request.headers.get('origin') !== new URL(request.url).origin
     || request.headers.get('content-type')?.split(';')[0].trim() !== 'application/json') return reply('invalid_origin', 403);
   if (Number(request.headers.get('content-length')) > 12000) return reply('input_too_large', 413);
@@ -54,7 +54,7 @@ export async function PUT(request: Request, context: Context) {
   let parsed: unknown;
   try { parsed = JSON.parse(raw); } catch { return reply('invalid_working_draft', 400); }
   const input = validateCopilotWorkingDraft(parsed);
-  if (!input.ok) return reply(input.code, input.code === 'sensitive_working_draft' ? 422 : 400);
+  if (!input.ok) return reply(input.code || 'invalid_working_draft', input.code === 'sensitive_working_draft' ? 422 : 400);
   const db = getDb();
   const now = new Date().toISOString();
   const row = { projectId: access.projectId, userId: access.userId, text: input.text, revision: 1, lastMutationKey: input.mutationKey, updatedAt: now };

@@ -5,7 +5,7 @@ import { projectEvents, siteProjects } from '../../../db/schema';
 import { completionForIntake, nextQuestion, normalizeIntake } from '../../../lib/intake.mjs';
 import { buildRoadmap } from '../../../lib/methodology.mjs';
 import { listOwnerProjects } from '../../../lib/project-directory.mjs';
-import { changedDossierFields } from '../../../lib/dossier-field-history.mjs';
+import { changedDossierFields, reviewedDossierSources } from '../../../lib/dossier-field-history.mjs';
 import { env } from 'cloudflare:workers';
 
 function decodeList(value: string) {
@@ -145,6 +145,10 @@ export async function PUT(request: Request) {
     return Response.json({ code: 'invalid_json' }, { status: 400 });
   }
   const raw = input as Record<string, unknown>;
+  if (raw.sourceHints !== undefined && (!raw.sourceHints || typeof raw.sourceHints !== 'object'
+    || Array.isArray(raw.sourceHints) || JSON.stringify(raw.sourceHints).length > 8000)) {
+    return Response.json({ code: 'invalid_source_hints' }, { status: 400, headers: { 'cache-control': 'no-store' } });
+  }
   const expectedRevision = typeof raw.revision === 'number' ? raw.revision : 0;
   const intake = normalizeIntake(raw);
   if (!intake.website) return Response.json({ error: 'Indica el sitio web para guardar el expediente.' }, { status: 400 });
@@ -158,7 +162,8 @@ export async function PUT(request: Request) {
     return Response.json({ code: 'invalid_idempotency_key' }, { status: 400, headers: { 'cache-control': 'no-store' } });
   }
   const eventId = requestKey ? await digest(JSON.stringify(['project-save-v1', user.userId, requestKey])) : crypto.randomUUID();
-  const fingerprint = requestKey ? await digest(JSON.stringify({ intake, id: requestedId, revision: raw.revision ?? null })) : null;
+  const fingerprint = requestKey ? await digest(JSON.stringify({ intake, id: requestedId, revision: raw.revision ?? null,
+    ...(raw.sourceHints !== undefined ? { sourceHints: raw.sourceHints } : {}) })) : null;
   const recoverReceipt = async () => {
     if (!requestKey) return null;
     const [receipt] = await db.select().from(projectEvents)
@@ -269,11 +274,13 @@ export async function PUT(request: Request) {
       }).where(and(eq(siteProjects.id, id), eq(siteProjects.userId, user.userId), eq(siteProjects.revision, expectedRevision))).returning()
     : db.insert(siteProjects).values(values).returning();
 
+  const changedFields = changedDossierFields(existing ? present(existing) : null, intake);
+  const sources = reviewedDossierSources(raw.sourceHints, intake, changedFields);
   // D1 batch is atomic. A lost revision race writes neither the project nor an event.
   const event = db.insert(projectEvents).select(sql`select
     ${eventId}, ${id}, ${user.userId},
     ${existing ? 'project_updated' : 'project_created'},
-    ${JSON.stringify({ completion, changedFields: changedDossierFields(existing ? present(existing) : null, intake), revision: existing ? expectedRevision + 1 : 1, ...(requestKey ? { fingerprint } : {}) })}, ${now}
+    ${JSON.stringify({ completion, changedFields, sources, revision: existing ? expectedRevision + 1 : 1, ...(requestKey ? { fingerprint } : {}) })}, ${now}
     where changes() > 0`);
   let saved: typeof siteProjects.$inferSelect | undefined;
   try {

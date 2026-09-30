@@ -49,6 +49,6 @@ test('field history returns bounded metadata without private values', async () =
   const response = await h.get('owned');
   assert.equal(response.status, 200);
   assert.equal(response.headers.get('cache-control'), 'no-store');
-  assert.deepEqual(await response.json(), { fields: { cms: { revision: 2, savedAt: '2026-09-30T12:00:00Z' } } });
+  assert.deepEqual(await response.json(), { fields: { cms: { revision: 2, savedAt: '2026-09-30T12:00:00Z', source: 'unattributed_owner_save' } } });
   assert.equal(h.eventReads(), 1);
 });
