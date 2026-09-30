@@ -33,7 +33,7 @@ import { readObservationSnapshot } from '../../lib/observation-read-client.mjs';
 import { compareObservationHistory } from '../../lib/observation-history.mjs';
 import { missingIntakeQuestions } from '../../lib/intake-question-coach.mjs';
 import { isGuidedPilotView } from '../../lib/guided-pilot-view.mjs';
-import { dossierUpdates } from '../../lib/dossier-updates.mjs';
+import { dossierUpdates,dossierUpdatesReadState,DOSSIER_UPDATES_READ_COPY } from '../../lib/dossier-updates.mjs';
 
 import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
 import { reconcileSavedDraft } from '../../lib/project-save-reconciliation.mjs';
@@ -185,6 +185,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const [observation, setObservation] = useState<ObservationSummary | null>(null);
   const [observationHistory,setObservationHistory]=useState<ObservationHistoryItem[]>([]);
   const [observationReadFailure,setObservationReadFailure]=useState<{projectId:string;website:string}|null>(null);
+  const [observationReadReady,setObservationReadReady]=useState<{projectId:string;website:string}|null>(null);
   const [observationLoadAttempt,setObservationLoadAttempt]=useState(0);
   const [observationBusy, setObservationBusy] = useState(false);
   const observationLock=useRef(false);
@@ -248,8 +249,10 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         setObservation(payload.observation || null);
         setObservationHistory(Array.isArray(payload.history)?payload.history:[]);
         setObservationReadFailure(null);
+        setObservationReadReady({projectId,website:savedWebsite});
       })
       .catch((error) => {
+        if(controller.signal.aborted)return;
         if (error instanceof DOMException && error.name === 'AbortError') return;
         setObservationReadFailure({projectId,website:savedWebsite});
         setObservationMessage(localizedMessage(locale, 'No pude consultar las observaciones guardadas. Podés reintentar la consulta sin ejecutar ni guardar una auditoría nueva.', 'I could not load saved observations. You can retry this read without running or saving a new audit.', 'Não consegui consultar as observações salvas. Você pode repetir a leitura sem executar nem salvar uma nova auditoria.'));
@@ -448,6 +451,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         setObservationHistory(recent.history);
         if(recent.observation)setObservation(recent.observation);
         setObservationReadFailure(null);
+        setObservationReadReady({projectId,website:savedWebsite});
       }catch{refreshFailed=true;setObservationHistory([]);setObservationReadFailure({projectId,website:savedWebsite});}
       setObservationMessage(refreshFailed?localizedMessage(locale,'La observación se guardó, pero no pude volver a consultar el historial. Usá “Reintentar consulta”; no hace falta auditar de nuevo.','The observation was saved, but I could not reload the history. Use “Retry saved read”; no new audit is needed.','A observação foi salva, mas não consegui atualizar o histórico. Use “Repetir consulta”; não é preciso auditar novamente.'):payload.replayed?localizedMessage(locale,'Recuperé la observación que ya se había guardado; no se duplicó.','I recovered the observation already saved; no duplicate was created.','Recuperei a observação já salva; não houve duplicação.'):localizedMessage(locale, 'Observación guardada. El escáner público sigue sin almacenar auditorías automáticas.', 'Observation saved. The public scanner still stores no automatic audits.', 'Observação salva. O scanner público continua sem armazenar auditorias automáticas.'));
     } catch (error) {
@@ -461,7 +465,13 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const historyComparison=compareObservationHistory(currentObservations.history);
   const pilotCopilot = isCopilotProjectAllowed({ enabled: copilotEnabled, allowedProjectId: copilotProjectId, projectId }) && !rehearsal;
   const guidedView = isGuidedPilotView({ pilot: pilotCopilot, loaded, requested: guidedViewRequested, conflict: Boolean(conflictReview), sessionRequired });
-  const updates = dossierUpdates({ website: savedWebsite, history: currentObservations.history, monitoringPreference: savedSnapshot.monitoringPreference });
+  const updatesReadState=dossierUpdatesReadState({projectId,website:savedWebsite,ready:observationReadReady,failure:observationReadFailure});
+  function retrySavedObservationRead(){
+    setObservationReadReady(null);setObservationReadFailure(null);
+    setObservationMessage(DOSSIER_UPDATES_READ_COPY[locale].loading);
+    setObservationLoadAttempt(value=>value+1);
+  }
+  const updates = dossierUpdates({ website: savedWebsite, history: currentObservations.history, monitoringPreference: savedSnapshot.monitoringPreference,readState:updatesReadState });
   return (
     <div className={guidedView ? 'intake-layout guided-pilot' : 'intake-layout'}>
       <a className="dossier-help-dock" href={guidedView ? '#dossier-copilot' : '#dossier-assistant'} onClick={()=>{const panel=document.getElementById(guidedView ? 'dossier-copilot' : 'dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
@@ -629,7 +639,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
             {observationBusy ? <LoaderCircle className="spin" size={16} /> : <Radar size={16} />}
             {copy.labels.auditSave}
           </button>
-          {observationReadFailure?.projectId===projectId&&observationReadFailure.website===savedWebsite?<button type="button" className="secondary-action" onClick={()=>{setObservationReadFailure(null);setObservationMessage(localizedMessage(locale,'Consultando solo las observaciones ya guardadas…','Reading saved observations only…','Consultando apenas as observações já salvas…'));setObservationLoadAttempt(value=>value+1);}}>{localizedMessage(locale,'Reintentar consulta guardada','Retry saved read','Repetir consulta salva')}</button>:null}
+          {observationReadFailure?.projectId===projectId&&observationReadFailure.website===savedWebsite?<button type="button" className="secondary-action" onClick={retrySavedObservationRead}>{localizedMessage(locale,'Reintentar consulta guardada','Retry saved read','Repetir consulta salva')}</button>:null}
           <div className="verification-message" aria-live="polite"><CircleHelp size={17} /><span>{observationMessage}</span></div>
         </section>
 
@@ -640,7 +650,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
 
       <aside className="intake-aside">
         <details className="dossier-assistant"><summary>{localizedMessage(locale, 'Novedades de tu expediente', 'Dossier updates', 'Novidades do dossiê')}</summary>
-          {updates.items.length ? updates.items.map(item => <div key={item.id}><time dateTime={item.checkedAt}>{formatDate(item.checkedAt, locale)}</time><p>{item.kind === 'observed_change' && typeof item.delta === 'number' ? `${localizedMessage(locale, 'Cambio observado:', 'Observed change:', 'Mudança observada:')} ${item.delta >= 0 ? '+' : ''}${item.delta}` : localizedMessage(locale, 'Tenemos una observación fechada para revisar.', 'We have a dated observation to review.', 'Temos uma observação datada para revisar.')}</p><button type="button" className="secondary-action" onClick={() => { setGuidedDeliveryRequested(true); document.getElementById('dossier-delivery')?.scrollIntoView({ behavior: 'smooth' }); }}>{localizedMessage(locale, 'Revisar evidencia y siguiente paso', 'Review evidence and next step', 'Revisar evidência e próximo passo')}</button></div>) : <p>{localizedMessage(locale, 'Todavía no hay una observación guardada para este sitio.', 'There is no saved observation for this site yet.', 'Ainda não há observação salva para este site.')}</p>}
+          {updatesReadState!=='ready' ? <div aria-live="polite"><p>{DOSSIER_UPDATES_READ_COPY[locale][updatesReadState]}</p>{updatesReadState==='failed'?<button type="button" className="secondary-action" onClick={retrySavedObservationRead}>{localizedMessage(locale,'Reintentar consulta guardada','Retry saved read','Repetir consulta salva')}</button>:null}</div> : updates.items.length ? updates.items.map(item => <div key={item.id}><time dateTime={item.checkedAt}>{formatDate(item.checkedAt, locale)}</time><p>{item.kind === 'observed_change' && typeof item.delta === 'number' ? `${localizedMessage(locale, 'Cambio observado:', 'Observed change:', 'Mudança observada:')} ${item.delta >= 0 ? '+' : ''}${item.delta}` : localizedMessage(locale, 'Tenemos una observación fechada para revisar.', 'We have a dated observation to review.', 'Temos uma observação datada para revisar.')}</p><button type="button" className="secondary-action" onClick={() => { setGuidedDeliveryRequested(true); document.getElementById('dossier-delivery')?.scrollIntoView({ behavior: 'smooth' }); }}>{localizedMessage(locale, 'Revisar evidencia y siguiente paso', 'Review evidence and next step', 'Revisar evidência e próximo passo')}</button></div>) : <p>{localizedMessage(locale, 'Todavía no hay una observación guardada para este sitio.', 'There is no saved observation for this site yet.', 'Ainda não há observação salva para este site.')}</p>}
           <p>{localizedMessage(locale, 'La preferencia de seguimiento no activa revisiones automáticas. Por ahora podés solicitar una nueva lectura desde la entrega.', 'A monitoring preference does not activate automatic reviews. For now, request a new reading from delivery.', 'A preferência de acompanhamento não ativa revisões automáticas. Por enquanto, solicite uma nova leitura na entrega.')}</p>
         </details>
         {!guidedView ? <DossierProgress draft={data} saved={savedSnapshot} loaded={loaded} projectId={projectId} status={status} sessionRequired={sessionRequired} conflict={Boolean(conflictReview)} verified={activeClaim?.status === 'verified' && websiteIsSaved} verifiedUntil={activeClaim?.verifiedUntil || ''} locale={locale} rehearsal={Boolean(rehearsal)} onRetryLoad={()=>{if(loaded)return;setStatus('loading');setLoadAttempt(value=>value+1);}}/> : null}
