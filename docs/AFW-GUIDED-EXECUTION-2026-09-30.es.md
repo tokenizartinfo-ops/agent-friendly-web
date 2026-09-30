@@ -18,7 +18,7 @@ Base: `f14b8b30145f5420d2492955a3e6c87a7ac57619`. Rama: `fix/afw-guided-goals-20
 
 ## Límites y siguientes dependencias
 
-MA-07 necesita una segunda identidad real de prueba antes de acreditar aislamiento remoto, invitación y retirada. Se pidió el correo al owner; el piloto exacto permanece cerrado. Las pruebas locales de propiedad no equivalen a dos sesiones reales.
+MA-07 tiene dos identidades dadas por el owner y política AFW acotada preparada. Faltan sesiones reales antes de acreditar aislamiento remoto y retirada. El piloto exacto del copilot permanece cerrado; las pruebas locales de propiedad no equivalen a dos sesiones reales.
 
 MA-09 conserva la dependencia de datos/fuentes y límites de coste. No integrar una ingesta masiva ni activar un proveedor externo por inferencia. MA-10 depende de demostrar utilidad con clientes; el cerebro empresarial y la transformación interna siguen como capas opcionales posteriores.
 
@@ -26,10 +26,10 @@ Cloudflare externo: revisión reservada para el jueves 1 de octubre; no se adela
 
 ## Validación
 
-Regresiones red/green verificadas para objetivos, horizonte, turno prematuro, recuperación, estado conversacional, nombre genérico y comparaciones temporales. Logs de trabajo en `output/afw-*.log` (ignorados). Cierre pendiente de la última batería completa, revisión independiente, CI y prueba privada del segmento desplegado.
+Regresiones red/green verificadas para objetivos, horizonte, turno prematuro, recuperación, estado conversacional, nombre genérico y comparaciones temporales. Resultado final: 594/594 pruebas, TypeScript, lint sin errores, build y CI aprobados; revisión independiente cerrada. Logs en `output/` (ignorados). [Recibo de producción](AFW-GUIDED-RELEASE-2026-09-30.es.md) con prueba privada y pendientes.
 
 Revisión independiente: se reprodujo y corrigió la pérdida de una propuesta aplicada cuyo guardado del expediente había fallado; al recuperar, se compara con el valor real del expediente antes de ocultarla. Se reprodujo y corrigió también la aplicación de una revisión anterior a la recuperación del relato: la aplicación exige época vigente y valores previos coincidentes. Recuperar otra versión invalida inferencias tardías y limpia previews/selecciones.
 
 Ruling operativo: el registro de ejecución permanece en este documento y Git; se usa PowerShell y comandos de prueba directos para este segmento, en lugar del extractor de briefs Bash. Los fallos red/green y los límites de cierre quedan explícitos; no se contabilizan como despliegue.
 
-El owner aportó dos identidades adicionales para MA-07. Sus direcciones no se incorporan a esta documentación pública. Antes de acceder se preparará una política AFW acotada, conservando los límites del expediente piloto y la propiedad del servidor; aún no se acreditaron sesiones reales de ambas.
+El owner aportó dos identidades adicionales para MA-07. Sus direcciones no se incorporan a esta documentación pública. Se preparó y verificó la política AFW acotada del recibo, conservando el piloto y la propiedad del servidor; aún no se acreditaron sesiones reales de ambas. Retirar la política al terminar la prueba; la duración de sesión no la hace expirar.

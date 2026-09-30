@@ -1,6 +1,6 @@
 # Roadmap operativo y continuidad de AFW
 
-Actualizado: 2026-09-30. Fuente: [microauditoría](AFW-MICROAUDIT-2026-09-30.es.md), base `9f3d869822080a2f30a242c3fdd29b5ad4bbc392`. Es un plan de ejecución; los bloques futuros todavía no están implementados. Revisar este documento al cerrar un bloque o una nueva microauditoría, sin reescribir la historia de entregas.
+Actualizado: 2026-09-30. Fuente inicial: [microauditoría](AFW-MICROAUDIT-2026-09-30.es.md), base `9f3d869822080a2f30a242c3fdd29b5ad4bbc392`. MA-01..05 ya están implementados y desplegados: [recibo actual](AFW-GUIDED-RELEASE-2026-09-30.es.md). Los cierres privados y bloques posteriores se distinguen abajo. Conservar la historia de entregas.
 
 ## Resultado que dirige el trabajo
 
@@ -8,7 +8,7 @@ Una persona debe poder expresar un objetivo sin conocer protocolos, recibir una 
 
 No usar «expediente completo», cantidad de archivos o puntaje propio como sustitutos de ese resultado. Separar datos aportados, hipótesis, observaciones, objetivo acordado, permisos y cambio verificado.
 
-## Punto de partida comprobable
+## Punto de partida de la microauditoría inicial
 
 - Repo canónico: `tokenizartinfo-ops/agent-friendly-web`; web: `https://agentfriendlyweb.dev`.
 - Entrega de referencia: [procedencia y prueba privada](AFW-COPILOT-SOURCE-HINTS-RELEASE-2026-09-30.es.md). Fuente funcional integrada en `cff6ae06e23f1b7a4a5793c8493158b2209730dd`; recibos posteriores están en `main`.
@@ -32,7 +32,7 @@ No usar «expediente completo», cantidad de archivos o puntaje propio como sust
 | MA-09 | Después de MA-05/06 | Enriquecimiento público con fuentes | Reutiliza scanner; Firecrawl solo para una pregunta faltante, dominio permitido, límites y costo. Propuesta con URL/fecha/cita, contradicción explícita y revisión antes de guardar. |
 | MA-10 | Tras probar utilidad con clientes | Escala comercial y transformación progresiva | Paquete repetible con alcance/entregables verificables, soporte y mantenimiento. Mapa de procesos y corpus preceden skills/MCPs internos. Subdominio agéntico y cerebro empresarial se evalúan como capas opcionales. |
 
-MA-01 a MA-06 forman el próximo segmento operativo. MA-07 a MA-10 son horizontes; no convertirlos ahora en una implementación masiva ni inventar fechas. Al cerrar MA-02, elegir un único caso vertical de contenido/servicios para MA-03 a MA-06.
+MA-01 a MA-05 forman el segmento desplegado. Cerrar primero su aceptación privada y la evidencia vertical de MA-06. MA-07 tiene identidades de prueba preparadas; MA-09/10 siguen como horizontes, sin implementación masiva ni fechas inventadas. La prueba vertical local de contenido/servicios se distingue de una instalación en cliente.
 
 ## Especificación breve de los próximos bloques
 
@@ -68,7 +68,7 @@ Después, contexto mínimo del copilot preparado por servidor y evaluaciones. El
 
 1. Leer `AGENTS.md`, este documento y el plan del primer bloque pendiente. Consultar la microauditoría solo para el hallazgo que se va a resolver. No cargar todos los recibos o el vault de Tokenizart.
 2. Verificar árbol limpio, rama, `origin` y revisión de `main`; preservar cambios ajenos. El checkout de trabajo conocido es `C:/Users/gabri/OneDrive/Documentos/Agent Friendly Web Worktrees/afw-release-reconciliation`, pero verificarlo antes de usarlo.
-3. Continuar MA-01. En esta entrega de planificación **no se implementó** MA-01 ni se cambió runtime. No contabilizar el plan como funcionalidad.
+3. Continuar aceptación privada del caso API después de PR #119 y MA-06 desde el recibo actual; no rehacer MA-01..05. Contenido/guardado/pausa/recarga/acceso a entrega ya se probaron en Chrome. Luego MA-07 con los expedientes sintéticos de las dos identidades del owner, sin ampliar por inferencia el piloto del copilot. Los apartados de punto de partida anteriores describen la microauditoría inicial; el recibo actual y la tabla de estado prevalecen para continuidad.
 4. Tomar un bloque con resultado y cierre, implementar y probar el comportamiento. Al aprobarlo, continuar el siguiente dentro del alcance autorizado; informar solo hitos, riesgos reales o una acción humana estrictamente necesaria.
 5. No remendar cada síntoma con un mensaje adicional. Si el problema es de estado, contrato u orden de preguntas, corregir esa capa y usarla desde la UI.
 6. Mantener identidad, consentimiento, compuerta del piloto, confirmación de propuestas y distinción entre datos e implementación. No ampliar permisos por haber alcanzado una etapa o puntaje.
@@ -96,6 +96,10 @@ La revisión de Cloudflare del jueves 2026-10-01 compara mismo origen/perfil y f
 | Bloque | Estado al 2026-09-30 | Evidencia |
 | --- | --- | --- |
 | Microauditoría y traspaso | Documentado | Hallazgos reproducidos localmente; código y límites registrados. |
-| MA-01 | Pendiente; plan exacto preparado | No hay implementación ni nueva migración. |
-| MA-02 a MA-06 | Pendientes; especificación operativa | Deben ejecutarse en el orden anterior. |
-| MA-07 a MA-10 | Horizonte posterior | Requieren cierres previos y decisiones propias donde corresponda. |
+| MA-01/02 | Implementados/desplegados | Objetivos canónicos y un turno con razón/revisión; PR #118. |
+| MA-03 | Implementado/desplegado | Sesión atómica y migración 0009; pruebas de conflicto/recuperación y restore SQLite local. |
+| MA-04/05 | Implementados/desplegados; aceptación privada parcial | Contenido, guardado, pausa/recarga y entrega probados en Chrome. Fix API #119: 598 pruebas, CI/revisión aprobados; repetición privada pendiente de conexión. |
+| MA-06 | Corte vertical sintético local; cierre remoto pendiente | Entrega accesible desde la guía; no acredita instalación en cliente. |
+| MA-07 | Identidades/acceso preparados; sesiones pendientes | Dos emails exactos y sesiones de 1 h. Retirar política al terminar: no expira automáticamente. |
+| MA-08 | Feed acotado implementado/desplegado | Observaciones compatibles/fechadas; sin scheduler ni bandeja persistida acreditados. |
+| MA-09/10 | Horizonte posterior | Requieren entrega útil acreditada y límites de fuentes/costes. |
