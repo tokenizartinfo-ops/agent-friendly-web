@@ -47,3 +47,18 @@ Luego, con las dos identidades reales, crear expedientes sintéticos separados, 
 MA-06 dispone de una prueba vertical **sintética local**, no de una instalación comprobada en un sitio de cliente. MA-07 tiene acceso preparado, no aislamiento remoto acreditado. MA-08 es un feed acotado dentro del expediente, sin bandeja persistida ni tareas periódicas. MA-09/10 continúan como horizontes: no activar ingesta masiva, gastos ni prometer transformación empresarial completada.
 
 La revisión externa de Cloudflare se conserva para el jueves 2026-10-01. El segmento no demuestra una mejora de aquel puntaje.
+
+## Corrección de propuestas consumidas
+
+PR #122 integrada en `ec3824e3cdd36959ea7b8a20a6ea27c112a9a40f`. CI de PR y main aprobada, 599 pruebas, lint sin errores y build aprobado. Artefacto exacto del run `36766767301`: `afw-build-ec3824e3cdd36959ea7b8a20a6ea27c112a9a40f`.
+
+Worker AFW productivo: versión `a80261b2-29ba-4165-af54-3ceb3fe41df5`, deployment `827260f5-a667-4a6b-8db2-ef7f31376e75`. Smoke previo con override y posterior a promoción aprobados. Sin migración ni cambio de permisos, cuota, piloto o publicación remota. Rollback: `8368ba5d-d123-4832-b525-0d253f34dfbf` al 100 %, conservando datos.
+
+La UI autenticada recuperó el piloto y dejó de mostrar falta de comprensión después de consumir la propuesta, manteniendo una pregunta y el estado de recuperación. Captura privada local: `output/afw-consumed-proposal-fixed.png`. El resultado realmente vacío conserva su mensaje; las propuestas siguen recuperables si falla el guardado del expediente. La apertura a clientes sigue regida por `AFW-PRODUCTION-OPENING-2026-09-30.es.md`.
+
+## Avance de entrega remota controlada
+
+Con sesión A se abrió el expediente sintético propio de entrega AFW `project-45195b183f5edf3e21dcf56d05c2eb53e1f7ce48767cadd10bbd5a8869a5548a`, origen declarado `https://agentfriendlyweb.dev/`. La cápsula v1 estaba vencida/rechazada; la UI preparó v2 `d910f286-e77e-47e4-b1aa-7d20904ac606` y confirmó comparación pública del archivo `/llms.txt`, distinta del archivo propuesto, el 2026-09-30. Quedó pendiente de aprobación. No se aprobó ni implementó el archivo sintético en el sitio público.
+
+MA-06 avanza hasta preparación/comparación remota, sin acreditar instalación ni auditoría posterior a un cambio. El contenido propuesto sí es legible al abrir el desplegable del archivo. Se comprobó que contiene datos sintéticos y campos no declarados; no debe reemplazar el llms.txt público existente. Próximo bloque: entrega en un destino controlado con contenido adecuado, preservando el origen público real. Capturas locales privadas: `output/afw-consumed-proposal-fixed.png`, `output/afw-delivery-v2-comparison.png`.
+
