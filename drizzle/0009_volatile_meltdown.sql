@@ -1,0 +1,1 @@
+ALTER TABLE `copilot_working_drafts` ADD `session_json` text DEFAULT '{}' NOT NULL;

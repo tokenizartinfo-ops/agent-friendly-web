@@ -64,6 +64,13 @@
       "when": 1790729217157,
       "tag": "0008_happy_klaw",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1790782164924,
+      "tag": "0009_volatile_meltdown",
+      "breakpoints": true
     }
   ]
 }

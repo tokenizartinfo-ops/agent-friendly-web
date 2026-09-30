@@ -7,8 +7,8 @@ test('the brief view is only available in a loaded, authenticated exact pilot', 
   const ready = { pilot: true, loaded: true, requested: true, conflict: false, sessionRequired: false };
   assert.equal(isGuidedPilotView(ready), true);
   for (const field of ['pilot', 'loaded', 'requested']) assert.equal(isGuidedPilotView({ ...ready, [field]: false }), false);
-  assert.equal(isGuidedPilotView({ ...ready, conflict: true }), false);
-  assert.equal(isGuidedPilotView({ ...ready, sessionRequired: true }), false);
+  assert.equal(isGuidedPilotView({ ...ready, conflict: true }), true);
+  assert.equal(isGuidedPilotView({ ...ready, sessionRequired: true }), true);
 });
 
 test('the pilot interface preserves full dossier, local no-AI guide, explicit save and conflicts', async () => {

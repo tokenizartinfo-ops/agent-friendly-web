@@ -76,6 +76,7 @@ export const copilotWorkingDrafts = sqliteTable(
     projectId: text('project_id').primaryKey(),
     userId: text('user_id').notNull(),
     text: text('text').notNull().default(''),
+    sessionJson: text('session_json').notNull().default('{}'),
     revision: integer('revision').notNull().default(1),
     lastMutationKey: text('last_mutation_key').notNull(),
     updatedAt: text('updated_at').notNull(),

@@ -23,6 +23,13 @@ test('progress is only comparable for the same origin and named methodology',()=
  assert.equal(compareObservationHistory([{...comparable[0],score:null},comparable[1]]),null);
 });
 
+test('reversed, duplicate or undated snapshots cannot claim improvement',()=>{
+ const comparable=summarizeObservationHistory([row('29','https://example.com',60),row('27','https://example.com',40)],'https://example.com');
+ assert.equal(compareObservationHistory([...comparable].reverse()),null);
+ assert.equal(compareObservationHistory([{...comparable[0],checkedAt:'invalid'},comparable[1]]),null);
+ assert.equal(compareObservationHistory([{...comparable[0],id:comparable[1].id},comparable[1]]),null);
+});
+
 test('history route remains owner scoped and queries only the saved current origin',async()=>{
  const route=await readFile('app/api/projects/[projectId]/observations/route.ts','utf8');
  assert.match(route,/eq\(scanObservations\.userId, user\.userId\)/);

@@ -6,6 +6,7 @@ import ts from 'typescript';
 import * as copilot from '../lib/intake-copilot.mjs';
 import { requestIntakeSuggestions } from '../lib/intake-copilot-provider.mjs';
 import { isCopilotProjectAllowed } from '../lib/copilot-rollout.mjs';
+import { buildCopilotContext } from '../lib/copilot-context.mjs';
 
 async function harness() {
   let actor = { userId: 'owner-a' };
@@ -49,7 +50,8 @@ async function harness() {
     'drizzle-orm': { eq: (key, value) => row => row[key] === value, and: (...parts) => row => parts.every(fn => fn(row)) },
     '../../../../cloudflare-access-auth': { getCloudflareAccessUser: async () => actor },
     '../../../../../db': { getDb: () => db },
-    '../../../../../db/schema': { siteProjects: table },
+    '../../../../../db/schema': { siteProjects: table, copilotWorkingDrafts: table },
+    '../../../../../lib/copilot-context.mjs': { buildCopilotContext },
     '../../../../../lib/intake-copilot.mjs': copilot,
     '../../../../../lib/intake-copilot-provider.mjs': { requestIntakeSuggestions },
     '../../../../../lib/copilot-rollout.mjs': { isCopilotProjectAllowed },

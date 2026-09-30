@@ -30,7 +30,7 @@ test('private dossier normalization retains reviewed paragraph breaks up to 5000
 test('copilot offers a separate review before applying the account to the draft', async () => {
   const ui = await readFile('app/components/intake-intelligent-copilot.tsx', 'utf8');
   assert.match(ui, /previewCopilotNarrative\(draft, notes, locale\)/);
-  assert.match(ui, /applyIntakeDraft\(draft, narrativeChanges\)/);
+  assert.match(ui, /applyCopilotReview\(draft, narrativeChanges, narrativeEpoch\.current, requestEpoch\.current\)/);
 });
 
 test('reviewed copilot changes resume project autosave and navigation waits for an acknowledged save', async () => {
