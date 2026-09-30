@@ -100,6 +100,6 @@ La revisión de Cloudflare del jueves 2026-10-01 compara mismo origen/perfil y f
 | MA-03 | Implementado/desplegado | Sesión atómica y migración 0009; pruebas de conflicto/recuperación y restore SQLite local. |
 | MA-04/05 | Implementados/desplegados; aceptación privada parcial | Contenido, guardado, pausa/recarga y entrega probados en Chrome. Fix API #119: 598 pruebas, CI/revisión aprobados; repetición privada pendiente de conexión. |
 | MA-06 | Corte vertical sintético local; cierre remoto pendiente | Entrega accesible desde la guía; no acredita instalación en cliente. |
-| MA-07 | Identidades/acceso preparados; sesiones pendientes | Dos emails exactos y sesiones de 1 h. Retirar política al terminar: no expira automáticamente. |
+| MA-07 | Aceptación privada parcial | [Identidad B](AFW-IDENTITY-B-ACCEPTANCE-2026-09-30.es.md): expediente propio guardado/recuperado y piloto A inaccesible desde UI. Lectura inversa, escritura cruzada y retirada pendientes. Retirar política QA al terminar; no expira automáticamente. |
 | MA-08 | Feed acotado implementado/desplegado | Observaciones compatibles/fechadas; sin scheduler ni bandeja persistida acreditados. |
 | MA-09/10 | Horizonte posterior | Requieren entrega útil acreditada y límites de fuentes/costes. |
