@@ -252,7 +252,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   }, [locale, projectId, request, savedWebsite, observationLoadAttempt]);
 
   const saveReviewedDraft = useCallback(async () => {
-    if (!ready.current || manualLock.current || conflictReview || !data.website) return;
+    if (!ready.current || manualLock.current || conflictReview || !data.website) return false;
     manualLock.current = true;
     setManualBusy(true);
     setStatus('saving');
@@ -263,7 +263,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         setSessionRequired(true);
         setAutosavePaused(true);
         setStatus('error');
-        return;
+        return false;
       }
       setSessionRequired(false);
       const payload = parsed.payload as ProjectPayload;
@@ -272,7 +272,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         setAutosavePaused(true);
         setConflictReview({ current: payload.project, plan });
         setStatus('error');
-        return;
+        return false;
       }
       if (!response.ok || !payload.project) throw new Error(payload.error || 'Save failed');
       const acknowledged = intakeFromProject(payload.project);
@@ -289,6 +289,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
       setMessage(rehearsal
         ? localizedMessage(locale, 'Guardado simulado. No se enviaron datos.', 'Simulated save. No data was sent.', 'Salvamento simulado. Nenhum dado foi enviado.')
         : localizedMessage(locale, 'Cambios guardados.', 'Changes saved.', 'Mudanças salvas.'));
+      return true;
     } catch (error) {
       setAutosavePaused(true);
       setStatus('error');
@@ -299,6 +300,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         : error instanceof Error && error.message === 'response_lost'
           ? localizedMessage(locale, 'No recibimos la confirmación. Tu borrador sigue aquí: vuelve a guardar y comprobaremos el mismo intento sin duplicarlo.', 'Confirmation was not received. Your draft is still here: save again to check the same attempt without duplicating it.', 'Não recebemos a confirmação. Seu rascunho continua aqui: salve novamente para verificar a mesma tentativa sem duplicá-la.')
           : error instanceof Error ? error.message : 'Save failed');
+      return false;
     } finally {
       manualLock.current = false;
       setManualBusy(false);
@@ -451,7 +453,11 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   return (
     <div className={guidedView ? 'intake-layout guided-pilot' : 'intake-layout'}>
       <a className="dossier-help-dock" href={guidedView ? '#dossier-copilot' : '#dossier-assistant'} onClick={()=>{const panel=document.getElementById(guidedView ? 'dossier-copilot' : 'dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
-      {exitTarget && <DraftExitDialog locale={locale} onStay={() => setExitTarget(null)} onLeave={() => {
+      {exitTarget && <DraftExitDialog locale={locale} saving={manualBusy} onStay={() => setExitTarget(null)} onSaveLeave={async () => {
+        const saved = await saveReviewedDraft();
+        if (saved) { exitCleanup.current?.(); window.location.assign(exitTarget); }
+        return saved;
+      }} onLeave={() => {
         exitCleanup.current?.();
         window.location.assign(exitTarget);
       }} />}
@@ -480,13 +486,13 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           <p>{DOSSIER_GUIDE_COPY[locale].local}</p>
           <IntakeAssistantPrototype locale={locale} draft={data} reviewedScope={reviewedScope} onApply={next => {
             if(manualLock.current)return;
-            setAutosavePaused(true);setData(intakeFromProject(next));setStatus('idle');setMessage(DOSSIER_GUIDE_COPY[locale].draft);
+            setAutosavePaused(false);setData(intakeFromProject(next));setStatus('idle');setMessage(DOSSIER_GUIDE_COPY[locale].draft);
           }} />
         </details>
         {pilotCopilot ? <details id="dossier-copilot" className="dossier-assistant" open={guidedView}><summary>{locale === 'en' ? 'Intelligent copilot' : 'Copilot inteligente'}</summary>
           <IntakeIntelligentCopilot key={`${projectId}:${locale}`} projectId={projectId} locale={locale} draft={data} onApply={next => {
             if (manualLock.current) return;
-            setAutosavePaused(true); setData(intakeFromProject(next)); setStatus('idle'); setMessage(DOSSIER_GUIDE_COPY[locale].draft);
+            setAutosavePaused(false); setData(intakeFromProject(next)); setStatus('idle'); setMessage(DOSSIER_GUIDE_COPY[locale].draft);
           }} />
         </details> : null}
         <div hidden={guidedView}>

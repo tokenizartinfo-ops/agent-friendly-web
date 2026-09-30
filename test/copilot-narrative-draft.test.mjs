@@ -32,3 +32,12 @@ test('copilot offers a separate review before applying the account to the draft'
   assert.match(ui, /previewCopilotNarrative\(draft, notes, locale\)/);
   assert.match(ui, /applyIntakeDraft\(draft, narrativeChanges\)/);
 });
+
+test('reviewed copilot changes resume project autosave and navigation waits for an acknowledged save', async () => {
+  const workspace = await readFile('app/components/intake-workspace.tsx', 'utf8');
+  const dialog = await readFile('app/components/draft-exit-dialog.tsx', 'utf8');
+  assert.match(workspace, /<IntakeIntelligentCopilot[\s\S]*?setAutosavePaused\(false\); setData\(intakeFromProject\(next\)\)/);
+  assert.match(workspace, /const saved = await saveReviewedDraft\(\);[\s\S]*?if \(saved\) \{ exitCleanup\.current\?\.\(\); window\.location\.assign\(exitTarget\); \}/);
+  assert.match(dialog, /if \(!await onSaveLeave\(\)\) setFailed\(true\)/);
+  assert.match(dialog, /Salir sin guardar/);
+});
