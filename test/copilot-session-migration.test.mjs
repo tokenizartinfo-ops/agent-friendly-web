@@ -1,12 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
-import { readFileSync, readdirSync, copyFileSync, unlinkSync, existsSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { randomUUID } from 'node:crypto';
+import { readFileSync, readdirSync, copyFileSync, unlinkSync, existsSync, mkdtempSync, rmdirSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 
 test('the additive session migration preserves working text and a restored database recovers decisions', () => {
-  const source = resolve(`output/afw-session-${randomUUID()}.sqlite`);
+  const directory = mkdtempSync(join(tmpdir(), 'afw-session-'));
+  const source = join(directory, 'source.sqlite');
   const restored = `${source}.restored`;
   let db;
   try {
@@ -28,5 +29,6 @@ test('the additive session migration preserves working text and a restored datab
   } finally {
     db?.close();
     for (const file of [source, restored]) if (existsSync(file)) unlinkSync(file);
+    rmdirSync(directory);
   }
 });
