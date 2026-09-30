@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { previewIntakeDraft, applyIntakeDraft } from '../../lib/intake-draft-review.mjs';
 import { analyzeIntakeNotes } from '../../lib/intake-assistant.mjs';
 import { dossierFieldLabels, dossierValueLabel } from '../../lib/dossier-field-labels.mjs';
@@ -47,7 +47,7 @@ const copy = {
   pt: { title: 'Copilot inteligente', intro: 'Conte com suas palavras o que seu site faz e do que precisa. O copilot propõe dados; você decide o que incluir.', privacy: 'O que você escreve é salvo automaticamente como relato privado de trabalho. Ao pedir ajuda, seu texto ou áudio é processado com Workers AI na Cloudflare. Não inclua chaves nem dados privados. O áudio não é salvo no dossiê; nada é publicado automaticamente.', consent: 'Aceito enviar este texto ou segmento de áudio ao Workers AI na Cloudflare. Confirmo cada envio separadamente.', grant: 'Ativar ajuda com IA para este dossiê', revoke: 'Revogar permissão para este dossiê', granted: 'A ajuda com IA está autorizada para este dossiê. Você confirma cada envio separadamente.', revoked: 'A permissão foi revogada. Você pode seguir com o guia ou ativá-la novamente quando quiser.', consentUnavailable: 'Não consegui verificar a permissão. O copilot permanece fechado até que eu consiga.', ask: 'Preparar sugestões', busy: 'Pensando com você…', unavailable: 'O copilot não está disponível agora. Você pode continuar com o guia.', session: 'Sua sessão precisa ser renovada. Mantenha esta aba aberta e entre novamente antes de tentar de novo.', projectUnavailable: 'Não encontro este dossiê na sua sessão. Confira se abriu o correto; nenhuma alteração foi aplicada.', rateLimited: 'Você atingiu o limite temporário de consultas. Aguarde um minuto ou continue com o guia.', review: 'Revisar alterações', apply: 'Aplicar ao rascunho', stale: 'O formulário mudou. Revise as sugestões novamente.', empty: 'Não encontrei dados suficientemente claros. Você pode reformular.', source: 'Você escreveu', evidence: 'Esta sugestão vem do seu texto; ainda não verificamos esse dado no seu site.', applied: 'Aplicado ao rascunho. É salvo automaticamente.' },
 };
 
-export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply }: { projectId: string; locale: Locale; draft: Draft; onApply: (draft: Draft) => void }) {
+export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply, onWorkingPendingChange, onRegisterWorkingSave, onRegisterWorkingExit }: { projectId: string; locale: Locale; draft: Draft; onApply: (draft: Draft) => void; onWorkingPendingChange?: (pending: boolean) => void; onRegisterWorkingSave?: (save: (() => Promise<boolean>) | null) => void; onRegisterWorkingExit?: (allow: (() => void) | null) => void }) {
   const t = copy[locale];
   const v = voiceCopy[locale];
   const n = narrativeCopy[locale];
@@ -81,10 +81,13 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply }: 
   const [consentBusy, setConsentBusy] = useState(false);
   const requestEpoch = useRef(0);
   const currentNotes = useRef(notes);
+  const allowNavigation = useRef(false);
+  useEffect(() => { allowNavigation.current = false; }, [notes]);
   const [workingSaved, setWorkingSaved] = useState<{ text: string; revision: number }>({ text: '', revision: 0 });
   const [workingState, setWorkingState] = useState<'loading' | 'ready' | 'saving' | 'error' | 'conflict'>('loading');
   const [workingConflict, setWorkingConflict] = useState<{ text: string; revision: number } | null>(null);
   const [workingRetry, setWorkingRetry] = useState(0);
+  const workingInFlight = useRef<Promise<boolean> | null>(null);
   const workingCopy = {
     es: { saved: 'Tu relato de trabajo está guardado en privado. Aún no es un dato del expediente.', pending: 'Guardando tu relato de trabajo…', error: 'No pude guardar este relato. Seguí en esta pestaña o reintentá; no se agregó al expediente.', sensitive: 'No guardé este texto porque podría contener claves o credenciales. Quitalas antes de continuar.', conflict: 'Otra pestaña cambió este relato. Elegí qué versión conservar antes de seguir.', keep: 'Conservar lo que escribí aquí', recover: 'Recuperar la otra versión', retry: 'Reintentar guardado', loading: 'Recuperando tu relato privado…', clear: 'Borrar relato de trabajo' },
     en: { saved: 'Your working account is saved privately. It is not yet a dossier fact.', pending: 'Saving your working account…', error: 'I could not save this account. Keep this tab open or retry; it has not been added to the dossier.', sensitive: 'I did not save this text because it may contain credentials. Remove them to continue.', conflict: 'Another tab changed this account. Choose which version to keep.', keep: 'Keep what I wrote here', recover: 'Recover the other version', retry: 'Retry save', loading: 'Recovering your private account…', clear: 'Clear working account' },
@@ -106,29 +109,40 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply }: 
       }).catch(error => { if (!(error instanceof DOMException && error.name === 'AbortError')) setWorkingState('error'); });
     return () => controller.abort();
   }, [projectId, workingRetry]);
-  useEffect(() => {
-    if (workingState !== 'ready' || notes === workingSaved.text || !projectId) return;
-    const timer = window.setTimeout(async () => {
-      const mutationKey = crypto.randomUUID();
-      const input = { text: notes, revision: workingSaved.revision, mutationKey, locale };
-      if (!validateCopilotWorkingDraft(input).ok) { setWorkingState('error'); return; }
+  const saveWorkingNow = useCallback(async () => {
+    if (workingInFlight.current) return workingInFlight.current;
+    if (workingState !== 'ready' || !projectId) return false;
+    if (notes === workingSaved.text) return true;
+    const input = { text: notes, revision: workingSaved.revision, mutationKey: crypto.randomUUID(), locale };
+    if (!validateCopilotWorkingDraft(input).ok) { setWorkingState('error'); return false; }
+    const write = (async () => {
       setWorkingState('saving');
       try {
         const response = await fetch(`/api/projects/${projectId}/copilot/working-draft`, {
           method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(input),
         });
         const payload = await response.json() as { code?: string; draft?: { text: string; revision: number } };
-        if (response.status === 409 && payload.draft) { setWorkingConflict(payload.draft); setWorkingState('conflict'); return; }
+        if (response.status === 409 && payload.draft) { setWorkingConflict(payload.draft); setWorkingState('conflict'); return false; }
         if (!response.ok || !payload.draft) throw new Error(payload.code || 'save_failed');
         setWorkingSaved(payload.draft);
         setWorkingState('ready');
-      } catch { setWorkingState('error'); }
-    }, 900);
+        return currentNotes.current === input.text;
+      } catch { setWorkingState('error'); return false; }
+    })();
+    workingInFlight.current = write;
+    try { return await write; } finally { workingInFlight.current = null; }
+  }, [workingState, notes, workingSaved, projectId, locale]);
+  useEffect(() => {
+    if (workingState !== 'ready' || notes === workingSaved.text || !projectId) return;
+    const timer = window.setTimeout(() => { void saveWorkingNow(); }, 900);
     return () => window.clearTimeout(timer);
-  }, [notes, workingSaved, workingState, projectId, locale]);
+  }, [workingState, notes, workingSaved.text, projectId, saveWorkingNow]);
+  useEffect(() => { onWorkingPendingChange?.(notes !== workingSaved.text || Boolean(notes) && workingState !== 'ready'); }, [notes, workingSaved.text, workingState, onWorkingPendingChange]);
+  useEffect(() => { onRegisterWorkingSave?.(saveWorkingNow); return () => onRegisterWorkingSave?.(null); }, [saveWorkingNow, onRegisterWorkingSave]);
+  useEffect(() => { onRegisterWorkingExit?.(() => { allowNavigation.current = true; }); return () => onRegisterWorkingExit?.(null); }, [onRegisterWorkingExit]);
   useEffect(() => {
     if (notes === workingSaved.text && (workingState === 'ready' || !notes)) return;
-    const warn = (event: BeforeUnloadEvent) => { event.preventDefault(); event.returnValue = ''; };
+    const warn = (event: BeforeUnloadEvent) => { if (!allowNavigation.current) { event.preventDefault(); event.returnValue = ''; } };
     window.addEventListener('beforeunload', warn);
     return () => window.removeEventListener('beforeunload', warn);
   }, [workingState, notes, workingSaved.text]);
