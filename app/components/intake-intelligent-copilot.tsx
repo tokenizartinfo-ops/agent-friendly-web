@@ -10,12 +10,17 @@ import { appendVoiceSegment } from '../../lib/intake-copilot-audio.mjs';
 import { planCopilotNextTurn } from '../../lib/copilot-next-turn.mjs';
 import { previewCopilotNarrative } from '../../lib/copilot-narrative-draft.mjs';
 import { validateCopilotWorkingDraft } from '../../lib/copilot-working-draft.mjs';
+import { reviewedGoalProposal } from '../../lib/copilot-goal-contract.mjs';
+import { emptyCopilotSession, visibleSessionResult } from '../../lib/copilot-session.mjs';
+import { CopilotTurnAnswer } from './copilot-turn-answer';
 
 type Draft = Record<string, string | string[]>;
 type Locale = 'es' | 'en' | 'pt';
 type Suggestion = { field: string; value: string | string[]; sourceExcerpt: string };
 type GoalMode = 'discover' | 'explain' | 'query' | 'act' | 'transact';
 type Result = { blocked: boolean; suggestions: Suggestion[]; warning: string; goalGuidance?: { mode: GoalMode; sourceExcerpt: string } | null };
+type Session = { version: number; basedOnRevision: number; deferred: string[]; decisions: { field: string; choice: string }[]; pending: { suggestions: Suggestion[]; goalGuidance?: Result['goalGuidance'] } | null };
+type WorkingDraft = { text: string; revision: number; session: Session };
 const goalGuidanceCopy = {
   es: { intro: 'Entendí este objetivo de tu texto. Es una hipótesis para conversar, no una capacidad verificada ni una autorización.', discover: '¿Qué deberían poder encontrar primero los visitantes o asistentes?', explain: '¿Qué información necesitás explicar con claridad antes de avanzar?', query: '¿Qué datos concretos deberían poder consultar y quién puede verlos?', act: '¿Qué acción querés permitir, quién la autoriza y cómo se revierte?', transact: '¿Qué operación querés ofrecer y qué controles necesitaría antes de habilitarla?' },
   en: { intro: 'I understood this goal from your text. It is a discussion hypothesis, not a verified capability or permission.', discover: 'What should visitors or assistants find first?', explain: 'What information needs a clear explanation first?', query: 'Which specific data should be queryable, and who may see it?', act: 'Which action should be possible, who authorizes it, and how can it be reversed?', transact: 'Which transaction do you want to offer, and what controls would it need first?' },
@@ -32,9 +37,9 @@ const selectionCopy = {
   pt: 'Campos que já têm dados ficam desmarcados. Para substituí-los, selecione a proposta e revise a diferença antes de aplicá-la.',
 };
 const nextTurnCopy = {
-  es: { review: 'Primero revisemos mi propuesta para {field}; salió de tu frase citada. Todavía no está guardada.', clarify: 'Ya hay un dato para {field} y tu relato sugiere otro. ¿Cuál es el correcto? No lo reemplazaré sin que lo revises.', ask: 'Para seguir, contame una sola cosa: {field}. Si todavía no lo sabés, podemos dejarlo pendiente.', done: 'Con estos datos podemos revisar juntos el borrador. Si tenés dudas, te explico cualquier parte.' },
-  en: { review: 'First, let us review my suggestion for {field}; it came from your quoted words. It is not saved yet.', clarify: 'There is already a value for {field}, and your account suggests another. Which is correct? I will not replace it without your review.', ask: 'To continue, tell me one thing: {field}. We can leave it pending if you do not know yet.', done: 'We can review the draft together now. I can explain any part.' },
-  pt: { review: 'Primeiro, vamos revisar minha sugestão para {field}; ela veio da sua frase citada. Ainda não foi salva.', clarify: 'Já existe um dado para {field}, e seu relato sugere outro. Qual está correto? Não vou substituí-lo sem sua revisão.', ask: 'Para continuar, conte-me uma coisa: {field}. Podemos deixar pendente se você ainda não souber.', done: 'Podemos revisar o rascunho juntos agora. Posso explicar qualquer parte.' },
+  es: { review: 'Primero revisemos mi propuesta para {field}; salió de tu frase citada. Todavía no está guardada.', clarify: 'Ya hay un dato para {field} y tu relato sugiere otro. ¿Cuál es el correcto? No lo reemplazaré sin que lo revises.', ask: 'Para seguir, contame una sola cosa: {field}. Si todavía no lo sabés, podemos dejarlo pendiente.', summary: 'Con estos datos podemos revisar juntos el borrador. Si tenés dudas, te explico cualquier parte.' },
+  en: { review: 'First, let us review my suggestion for {field}; it came from your quoted words. It is not saved yet.', clarify: 'There is already a value for {field}, and your account suggests another. Which is correct? I will not replace it without your review.', ask: 'To continue, tell me one thing: {field}. We can leave it pending if you do not know yet.', summary: 'We can review the draft together now. I can explain any part.' },
+  pt: { review: 'Primeiro, vamos revisar minha sugestão para {field}; ela veio da sua frase citada. Ainda não foi salva.', clarify: 'Já existe um dado para {field}, e seu relato sugere outro. Qual está correto? Não vou substituí-lo sem sua revisão.', ask: 'Para continuar, conte-me uma coisa: {field}. Podemos deixar pendente se você ainda não souber.', summary: 'Podemos revisar o rascunho juntos agora. Posso explicar qualquer parte.' },
 };
 const narrativeCopy = {
   es: { review: 'Conservar mi relato en el borrador', intro: 'Puedo conservar tus palabras en las notas privadas del expediente. Revisá el texto completo antes de aplicarlo; después se guardará automáticamente.', preview: 'Relato que quedará en el borrador', apply: 'Aplicar relato al borrador', applied: 'El relato quedó en el borrador. Estoy guardando los cambios.', duplicate: 'Este relato ya está incluido en las notas del borrador.', tooLong: 'Las notas juntas superan 5000 caracteres. Resumí o quitá una parte antes de conservarlas.', sensitive: 'El relato podría contener claves o datos privados. Retiralos antes de conservarlo.', empty: 'Primero contame algo del sitio.', stale: 'Las notas del expediente cambiaron. Revisá de nuevo antes de aplicarlas.' },
@@ -47,16 +52,25 @@ const copy = {
   pt: { title: 'Copilot inteligente', intro: 'Conte com suas palavras o que seu site faz e do que precisa. O copilot propõe dados; você decide o que incluir.', privacy: 'O que você escreve é salvo automaticamente como relato privado de trabalho. Ao pedir ajuda, seu texto ou áudio é processado com Workers AI na Cloudflare. Não inclua chaves nem dados privados. O áudio não é salvo no dossiê; nada é publicado automaticamente.', consent: 'Aceito enviar este texto ou segmento de áudio ao Workers AI na Cloudflare. Confirmo cada envio separadamente.', grant: 'Ativar ajuda com IA para este dossiê', revoke: 'Revogar permissão para este dossiê', granted: 'A ajuda com IA está autorizada para este dossiê. Você confirma cada envio separadamente.', revoked: 'A permissão foi revogada. Você pode seguir com o guia ou ativá-la novamente quando quiser.', consentUnavailable: 'Não consegui verificar a permissão. O copilot permanece fechado até que eu consiga.', ask: 'Preparar sugestões', busy: 'Pensando com você…', unavailable: 'O copilot não está disponível agora. Você pode continuar com o guia.', session: 'Sua sessão precisa ser renovada. Mantenha esta aba aberta e entre novamente antes de tentar de novo.', projectUnavailable: 'Não encontro este dossiê na sua sessão. Confira se abriu o correto; nenhuma alteração foi aplicada.', rateLimited: 'Você atingiu o limite temporário de consultas. Aguarde um minuto ou continue com o guia.', review: 'Revisar alterações', apply: 'Aplicar ao rascunho', stale: 'O formulário mudou. Revise as sugestões novamente.', empty: 'Não encontrei dados suficientemente claros. Você pode reformular.', source: 'Você escreveu', evidence: 'Esta sugestão vem do seu texto; ainda não verificamos esse dado no seu site.', applied: 'Aplicado ao rascunho. É salvo automaticamente.' },
 };
 
-export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, draft, onApply, onWorkingPendingChange, onRegisterWorkingSave, onRegisterWorkingExit }: { projectId: string; dossierRevision: number; locale: Locale; draft: Draft; onApply: (draft: Draft, sourceValues?: Record<string, string | string[]>) => void; onWorkingPendingChange?: (pending: boolean) => void; onRegisterWorkingSave?: (save: (() => Promise<boolean>) | null) => void; onRegisterWorkingExit?: (allow: (() => void) | null) => void }) {
+export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, draft, onApply, onReviewDelivery, onWorkingPendingChange, onRegisterWorkingSave, onRegisterWorkingExit }: { projectId: string; dossierRevision: number; locale: Locale; draft: Draft; onApply: (draft: Draft, sourceValues?: Record<string, string | string[]>) => void; onReviewDelivery?: () => void; onWorkingPendingChange?: (pending: boolean) => void; onRegisterWorkingSave?: (save: (() => Promise<boolean>) | null) => void; onRegisterWorkingExit?: (allow: (() => void) | null) => void }) {
   const t = copy[locale];
   const v = voiceCopy[locale];
   const n = narrativeCopy[locale];
   const labels = dossierFieldLabels(locale);
   const label = (field: string) => field in labels ? labels[field as keyof typeof labels] : field;
   const [notes, setNotes] = useState('');
-  const [result, setResult] = useState<Result | null>(null);
+  const [session, setSession] = useState<Session>(emptyCopilotSession);
+  const currentSession = useRef(session);
+  useEffect(() => { currentSession.current = session; }, [session]);
+  const recoveredResult = visibleSessionResult(session);
+  const result: Result | null = recoveredResult ? { ...recoveredResult, warning: t.evidence } : null;
+  function setResult(value: Result | null) { setSession(current => ({ ...current, basedOnRevision: dossierRevision, pending: value ? { suggestions: value.suggestions, goalGuidance: value.goalGuidance || null } : null })); }
+  function resetNarrativeDecisions() { setSession(current => ({ ...current, pending: null, decisions: [] })); }
+  function decide(field: string, choice: 'discarded' | 'applied_to_draft') { setSession(current => ({ ...current, basedOnRevision: dossierRevision, decisions: [...current.decisions.filter(item => item.field !== field), { field, choice }].slice(-32) })); }
+  const goalProposal = reviewedGoalProposal({ goalGuidance: result?.goalGuidance, currentGoals: draft.goals });
+  const reviewGoalCopy = { es: 'Revisar esta interpretación del objetivo', en: 'Review this goal interpretation', pt: 'Revisar esta interpretação do objetivo' }[locale];
   const [fieldHistory, setFieldHistory] = useState<Record<string, { revision: number; savedAt: string; source?: string }>>({});
-  const nextTurn = result ? planCopilotNextTurn(draft, result) : null;
+  const nextTurn = planCopilotNextTurn(draft, result, session.deferred, { revision: dossierRevision });
   const nextTurnField = nextTurn && 'field' in nextTurn && typeof nextTurn.field === 'string' ? nextTurn.field : '';
   useEffect(() => {
     if (!projectId) return;
@@ -94,9 +108,10 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
   const currentNotes = useRef(notes);
   const allowNavigation = useRef(false);
   useEffect(() => { allowNavigation.current = false; }, [notes]);
-  const [workingSaved, setWorkingSaved] = useState<{ text: string; revision: number }>({ text: '', revision: 0 });
+  const [workingSaved, setWorkingSaved] = useState<WorkingDraft>({ text: '', revision: 0, session: emptyCopilotSession() });
   const [workingState, setWorkingState] = useState<'loading' | 'ready' | 'saving' | 'error' | 'conflict'>('loading');
-  const [workingConflict, setWorkingConflict] = useState<{ text: string; revision: number } | null>(null);
+  const [workingConflict, setWorkingConflict] = useState<WorkingDraft | null>(null);
+  const workingDirty = notes !== workingSaved.text || JSON.stringify(session) !== JSON.stringify(workingSaved.session);
   const [workingRetry, setWorkingRetry] = useState(0);
   const workingInFlight = useRef<Promise<boolean> | null>(null);
   const workingCopy = {
@@ -110,12 +125,12 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
     fetch(`/api/projects/${projectId}/copilot/working-draft`, { cache: 'no-store', signal: controller.signal })
       .then(async response => {
         if (!response.ok) throw new Error('read_failed');
-        const payload = await response.json() as { draft?: { text?: string; revision?: number } };
+        const payload = await response.json() as { draft?: Partial<WorkingDraft> };
         if (controller.signal.aborted) return;
-        const recovered = { text: payload.draft?.text || '', revision: payload.draft?.revision || 0 };
+        const recovered = { text: payload.draft?.text || '', revision: payload.draft?.revision || 0, session: payload.draft?.session || emptyCopilotSession() };
         setWorkingSaved(recovered);
-        if (!currentNotes.current) { currentNotes.current = recovered.text; setNotes(recovered.text); setWorkingState('ready'); }
-        else if (currentNotes.current !== recovered.text) { setWorkingConflict(recovered); setWorkingState('conflict'); }
+        if (!currentNotes.current && !currentSession.current.pending && !currentSession.current.deferred.length && !currentSession.current.decisions.length) { currentNotes.current = recovered.text; setNotes(recovered.text); setSession(recovered.session); setWorkingState('ready'); }
+        else if (currentNotes.current !== recovered.text || JSON.stringify(currentSession.current) !== JSON.stringify(recovered.session)) { setWorkingConflict(recovered); setWorkingState('conflict'); }
         else setWorkingState('ready');
       }).catch(error => { if (!(error instanceof DOMException && error.name === 'AbortError')) setWorkingState('error'); });
     return () => controller.abort();
@@ -123,8 +138,8 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
   const saveWorkingNow = useCallback(async () => {
     if (workingInFlight.current) return workingInFlight.current;
     if (workingState !== 'ready' || !projectId) return false;
-    if (notes === workingSaved.text) return true;
-    const input = { text: notes, revision: workingSaved.revision, mutationKey: crypto.randomUUID(), locale };
+    if (!workingDirty) return true;
+    const input = { text: notes, session, revision: workingSaved.revision, mutationKey: crypto.randomUUID(), locale };
     if (!validateCopilotWorkingDraft(input).ok) { setWorkingState('error'); return false; }
     const write = (async () => {
       setWorkingState('saving');
@@ -132,31 +147,31 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
         const response = await fetch(`/api/projects/${projectId}/copilot/working-draft`, {
           method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(input),
         });
-        const payload = await response.json() as { code?: string; draft?: { text: string; revision: number } };
+        const payload = await response.json() as { code?: string; draft?: WorkingDraft };
         if (response.status === 409 && payload.draft) { setWorkingConflict(payload.draft); setWorkingState('conflict'); return false; }
         if (!response.ok || !payload.draft) throw new Error(payload.code || 'save_failed');
         setWorkingSaved(payload.draft);
         setWorkingState('ready');
-        return currentNotes.current === input.text;
+        return currentNotes.current === input.text && JSON.stringify(currentSession.current) === JSON.stringify(input.session);
       } catch { setWorkingState('error'); return false; }
     })();
     workingInFlight.current = write;
     try { return await write; } finally { workingInFlight.current = null; }
-  }, [workingState, notes, workingSaved, projectId, locale]);
+  }, [workingState, notes, session, workingDirty, workingSaved, projectId, locale]);
   useEffect(() => {
-    if (workingState !== 'ready' || notes === workingSaved.text || !projectId) return;
+    if (workingState !== 'ready' || !workingDirty || !projectId) return;
     const timer = window.setTimeout(() => { void saveWorkingNow(); }, 900);
     return () => window.clearTimeout(timer);
-  }, [workingState, notes, workingSaved.text, projectId, saveWorkingNow]);
-  useEffect(() => { onWorkingPendingChange?.(notes !== workingSaved.text || Boolean(notes) && workingState !== 'ready'); }, [notes, workingSaved.text, workingState, onWorkingPendingChange]);
+  }, [workingState, workingDirty, projectId, saveWorkingNow]);
+  useEffect(() => { onWorkingPendingChange?.(workingDirty || workingState !== 'ready'); }, [workingDirty, workingState, onWorkingPendingChange]);
   useEffect(() => { onRegisterWorkingSave?.(saveWorkingNow); return () => onRegisterWorkingSave?.(null); }, [saveWorkingNow, onRegisterWorkingSave]);
   useEffect(() => { onRegisterWorkingExit?.(() => { allowNavigation.current = true; }); return () => onRegisterWorkingExit?.(null); }, [onRegisterWorkingExit]);
   useEffect(() => {
-    if (notes === workingSaved.text && (workingState === 'ready' || !notes)) return;
+    if (!workingDirty && workingState === 'ready') return;
     const warn = (event: BeforeUnloadEvent) => { if (!allowNavigation.current) { event.preventDefault(); event.returnValue = ''; } };
     window.addEventListener('beforeunload', warn);
     return () => window.removeEventListener('beforeunload', warn);
-  }, [workingState, notes, workingSaved.text]);
+  }, [workingState, workingDirty]);
   useEffect(() => () => {
     discardRecording.current = true;
     audioRequest.current?.abort();
@@ -216,7 +231,7 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
     if (checked.blocked) { setAudioStatus(v.sensitive); return; }
     const next = appendVoiceSegment(notes, transcriptDraft);
     if (!next) { setAudioStatus(v.tooLong); return; }
-    currentNotes.current = next; requestEpoch.current += 1; setNotes(next); setTranscriptDraft(''); setResult(null); setChanges(null); setNarrativeChanges(null); setNarrativeStatus(''); setStatus(''); setAudioStatus('');
+    currentNotes.current = next; requestEpoch.current += 1; setNotes(next); setTranscriptDraft(''); resetNarrativeDecisions(); setChanges(null); setNarrativeChanges(null); setNarrativeStatus(''); setStatus(''); setAudioStatus('');
   }
   useEffect(() => {
     let active = true;
@@ -265,12 +280,13 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
     } catch { if (isCurrent()) setStatus(t.unavailable); } finally { if (isCurrent()) setBusy(false); }
   }
   return <section className="assistant-prototype" aria-label={t.title}>
-    <div className="assistant-input-panel"><h2>{t.title}</h2><p>{t.intro}</p>
-      <label>{t.title}<textarea rows={5} maxLength={5000} value={notes} onChange={event => { requestEpoch.current += 1; currentNotes.current = event.target.value; setNotes(event.target.value); setProcessingConsent(false); setResult(null); setChanges(null); setNarrativeChanges(null); setNarrativeStatus(''); setStatus(''); setBusy(false); }} /></label>
-      <p role="status" className="assistant-privacy">{workingState === 'loading' ? workingCopy.loading : workingState === 'saving' || workingState === 'ready' && notes !== workingSaved.text ? workingCopy.pending : workingState === 'conflict' ? workingCopy.conflict : workingState === 'error' ? validateCopilotWorkingDraft({ text: notes, revision: workingSaved.revision, mutationKey: '00000000-0000-4000-8000-000000000000', locale }).code === 'sensitive_working_draft' ? workingCopy.sensitive : workingCopy.error : workingCopy.saved}</p>
+      <p role="status" className="assistant-privacy">{workingState === 'loading' ? workingCopy.loading : workingState === 'saving' || workingState === 'ready' && workingDirty ? workingCopy.pending : workingState === 'conflict' ? workingCopy.conflict : workingState === 'error' ? validateCopilotWorkingDraft({ text: notes, revision: workingSaved.revision, mutationKey: '00000000-0000-4000-8000-000000000000', locale }).code === 'sensitive_working_draft' ? workingCopy.sensitive : workingCopy.error : workingCopy.saved}</p>
+    <details className="assistant-input-panel"><summary>{locale === 'en' ? 'Tell me in text or audio' : locale === 'pt' ? 'Contar por texto ou áudio' : 'Contármelo con texto o audio'}</summary><h2>{t.title}</h2><p>{t.intro}</p>
+      <label>{t.title}<textarea rows={5} maxLength={5000} value={notes} onChange={event => { requestEpoch.current += 1; currentNotes.current = event.target.value; setNotes(event.target.value); setProcessingConsent(false); resetNarrativeDecisions(); setChanges(null); setNarrativeChanges(null); setNarrativeStatus(''); setStatus(''); setBusy(false); }} /></label>
+
       {workingState === 'error' ? <button type="button" className="secondary-action" onClick={() => { setWorkingState('loading'); setWorkingRetry(value => value + 1); }}>{workingCopy.retry}</button> : null}
-      {notes && workingState === 'ready' ? <button type="button" className="secondary-action" onClick={() => { currentNotes.current = ''; setNotes(''); setResult(null); setChanges(null); setNarrativeChanges(null); }}>{workingCopy.clear}</button> : null}
-      {workingState === 'conflict' && workingConflict ? <div className="assistant-guidance"><button type="button" className="secondary-action" onClick={() => { currentNotes.current = workingConflict.text; setNotes(workingConflict.text); setWorkingSaved(workingConflict); setWorkingConflict(null); setWorkingState('ready'); }}>{workingCopy.recover}</button><button type="button" className="secondary-action" onClick={() => { setWorkingSaved(workingConflict); setWorkingConflict(null); setWorkingState('ready'); }}>{workingCopy.keep}</button></div> : null}
+      {notes && workingState === 'ready' ? <button type="button" className="secondary-action" onClick={() => { currentNotes.current = ''; setNotes(''); setSession(emptyCopilotSession()); setChanges(null); setNarrativeChanges(null); }}>{workingCopy.clear}</button> : null}
+      {workingState === 'conflict' && workingConflict ? <div className="assistant-guidance"><button type="button" className="secondary-action" onClick={() => { currentNotes.current = workingConflict.text; setNotes(workingConflict.text); setSession(workingConflict.session); setWorkingSaved(workingConflict); setWorkingConflict(null); setWorkingState('ready'); }}>{workingCopy.recover}</button><button type="button" className="secondary-action" onClick={() => { setWorkingSaved(workingConflict); setWorkingConflict(null); setWorkingState('ready'); }}>{workingCopy.keep}</button></div> : null}
       <button type="button" className="secondary-action" disabled={!notes.trim()} onClick={() => { try { const preview = previewCopilotNarrative(draft, notes, locale); setNarrativeChanges(preview); setNarrativeStatus(preview.length ? '' : n.duplicate); } catch (error) { setNarrativeChanges(null); setNarrativeStatus(error instanceof Error && error.message === 'too_long' ? n.tooLong : error instanceof Error && error.message === 'sensitive' ? n.sensitive : n.empty); } }}>{n.review}</button>
       {narrativeStatus ? <p role="status">{narrativeStatus}</p> : null}
       {narrativeChanges?.length ? <div className="assistant-guidance"><p>{n.intro}</p><label>{n.preview}<textarea rows={6} readOnly value={String(narrativeChanges[0].after)} /></label><button type="button" className="primary-action" onClick={() => { try { onApply(applyIntakeDraft(draft, narrativeChanges)); setNarrativeChanges(null); setNarrativeStatus(n.applied); } catch { setNarrativeChanges(null); setNarrativeStatus(n.stale); } }}>{n.apply}</button></div> : null}
@@ -284,18 +300,22 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
         {audioStatus ? <p role="status">{audioStatus}</p> : null}
       </div>
       <button type="button" className="primary-action" disabled={busy || consentBusy || projectConsent !== 'granted' || !notes.trim() || !processingConsent} onClick={ask}>{busy ? t.busy : t.ask}</button>
-    </div>
+    </details>
     <div className="assistant-review-panel" aria-live="polite">
       {status ? <p role="status">{status}</p> : null}
-      {result ? <><p>{result.suggestions.length || result.goalGuidance ? result.warning : t.empty}</p>{result.goalGuidance ? <div className="assistant-guidance"><p>{goalGuidanceCopy[locale].intro}</p><p><em>{t.source}: {result.goalGuidance.sourceExcerpt}</em></p><p>{goalGuidanceCopy[locale][result.goalGuidance.mode]}</p></div> : null}{result.suggestions.length ? <><p>{t.evidence}</p><p>{selectionCopy[locale]}</p></> : null}
+      {nextTurn.kind === 'summary' ? <div className="assistant-guidance"><p>{label('organization')}: {String(draft.organization || '—')}</p><p>{label('goals')}: {dossierValueLabel('goals', draft.goals || [], locale)}</p><p>{label('contentSources')}: {dossierValueLabel('contentSources', draft.contentSources || [], locale)}</p>{'actionId' in nextTurn && nextTurn.actionId === 'review_scope' ? <button type="button" className="primary-action" onClick={onReviewDelivery}>{locale === 'en' ? 'Review delivery and verification' : locale === 'pt' ? 'Revisar entrega e verificação' : 'Revisar entrega y comprobación'}</button> : null}</div> : null}
+      {nextTurn.kind === 'ask' && nextTurnField ? <CopilotTurnAnswer key={nextTurnField} field={nextTurnField} draft={draft} locale={locale} onApply={onApply} /> : null}
+      {nextTurnField ? <button type="button" className="secondary-action" onClick={() => { if (nextTurn.kind === 'review' || nextTurn.kind === 'clarify') decide(nextTurnField, 'discarded'); else setSession(current => ({ ...current, deferred: [...new Set([...current.deferred, nextTurnField])] })); setChanges(null); }}>{locale === 'en' ? 'Leave this for later' : locale === 'pt' ? 'Deixar para depois' : 'Dejarlo para después'}</button> : null}
+      {session.deferred.length ? <button type="button" className="secondary-action" onClick={() => setSession(current => ({ ...current, deferred: [] }))}>{locale === 'en' ? 'Return to pending questions' : locale === 'pt' ? 'Retomar perguntas pendentes' : 'Retomar preguntas pendientes'}</button> : null}
         {nextTurn ? <p role="status" className="assistant-guidance">{nextTurnCopy[locale][nextTurn.kind as keyof typeof nextTurnCopy.es].replace('{field}', nextTurnField ? label(nextTurnField) : '')}{nextTurn.kind === 'clarify' && nextTurnField && fieldHistory[nextTurnField] ? ` ${fieldHistory[nextTurnField].source === 'copilot_reviewed' ? locale === 'en' ? 'You previously reviewed a copilot suggestion for this field; that does not verify the website.' : locale === 'pt' ? 'Você já revisou uma sugestão do copilot para este campo; isso não verifica o site.' : 'Antes revisaste una propuesta del copilot para este dato; eso no verifica el sitio.' : locale === 'en' ? 'The dossier records a previous change to this field; let us check it together.' : locale === 'pt' ? 'O dossiê registra uma alteração anterior neste campo; vamos conferi-la juntos.' : 'El expediente registra un cambio anterior en este dato; revisémoslo juntos.'}` : ''}</p> : null}
-        <div className="assistant-suggestion-list">{result.suggestions.map(item => <label key={item.field}>
+      {result ? <><p>{result.suggestions.length || result.goalGuidance ? result.warning : t.empty}</p>{nextTurnField === 'goals' && goalProposal && result.goalGuidance ? <div className="assistant-guidance"><p>{goalGuidanceCopy[locale].intro}</p><p><em>{t.source}: {result.goalGuidance.sourceExcerpt}</em></p><p>{goalGuidanceCopy[locale][result.goalGuidance.mode]}</p><p>{label('goals')}: {dossierValueLabel('goals', goalProposal.value, locale)}</p><button type="button" className="secondary-action" onClick={() => { try { setChanges(previewIntakeDraft(draft, { suggestions: [goalProposal] }, ['goals'])); setStatus(''); } catch { setChanges(null); setStatus(t.stale); } }}>{reviewGoalCopy}</button></div> : null}{result.suggestions.length ? <><p>{t.evidence}</p><p>{selectionCopy[locale]}</p></> : null}
+        <div className="assistant-suggestion-list">{result.suggestions.filter(item => item.field === nextTurnField).map(item => <label key={item.field}>
           <input type="checkbox" checked={selected.includes(item.field)} onChange={() => { setSelected(current => current.includes(item.field) ? current.filter(value => value !== item.field) : [...current, item.field]); setChanges(null); }} />
           <span><strong>{label(item.field)}</strong><small>{dossierValueLabel(item.field, item.value, locale)}</small><em>{t.source}: {item.sourceExcerpt}</em></span>
         </label>)}</div>
-        <button type="button" className="secondary-action" disabled={!selected.length} onClick={() => { try { setChanges(previewIntakeDraft(draft, result, selected)); setStatus(''); } catch { setChanges(null); setStatus(t.stale); } }}>{t.review}</button>
+        <button type="button" className="secondary-action" disabled={!selected.some(field => field === nextTurnField)} onClick={() => { try { setChanges(previewIntakeDraft(draft, result, selected.filter(field => field === nextTurnField))); setStatus(''); } catch { setChanges(null); setStatus(t.stale); } }}>{t.review}</button>
         {changes ? <div><ul>{changes.map((change: { field: string; after: string | string[] }) => <li key={change.field}>{label(change.field)}: {dossierValueLabel(change.field, change.after, locale)}</li>)}</ul>
-          <button type="button" className="primary-action" disabled={!changes.length} onClick={() => { try { onApply(applyIntakeDraft(draft, changes), Object.fromEntries(changes.map((change: { field: string; after: string | string[] }) => [change.field, change.after]))); setChanges(null); setStatus(t.applied); } catch { setChanges(null); setStatus(t.stale); } }}>{t.apply}</button></div> : null}
+          <button type="button" className="primary-action" disabled={!changes.length} onClick={() => { try { onApply(applyIntakeDraft(draft, changes), Object.fromEntries(changes.map((change: { field: string; after: string | string[] }) => [change.field, change.after]))); changes.forEach((change: { field: string }) => decide(change.field, 'applied_to_draft')); setChanges(null); setStatus(t.applied); } catch { setChanges(null); setStatus(t.stale); } }}>{t.apply}</button></div> : null}
       </> : null}
     </div>
   </section>;

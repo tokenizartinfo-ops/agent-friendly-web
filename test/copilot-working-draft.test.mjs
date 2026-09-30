@@ -6,6 +6,7 @@ import vm from 'node:vm';
 import ts from 'typescript';
 import { isCopilotProjectAllowed } from '../lib/copilot-rollout.mjs';
 import { validateCopilotWorkingDraft } from '../lib/copilot-working-draft.mjs';
+import { emptyCopilotSession, reviewCopilotSession } from '../lib/copilot-session.mjs';
 
 const key = '8a6296d4-ff88-4d34-830e-90757b4f0e33';
 
@@ -16,6 +17,21 @@ test('working text is bounded and credentials are not persisted', () => {
   assert.equal(validateCopilotWorkingDraft({ ...base, text: 'Mi password es abc123' }).code, 'sensitive_working_draft');
   assert.equal(validateCopilotWorkingDraft({ ...base, privateKey: 'x' }).ok, false);
   assert.equal(validateCopilotWorkingDraft({ ...base, revision: -1 }).ok, false);
+});
+
+test('working decisions and quoted proposals are saved together, bounded and source reviewed', () => {
+  const base = { text: 'Queremos consultar el catálogo.', revision: 0, mutationKey: key, locale: 'es', session: {
+    version: 1, basedOnRevision: 8, deferred: ['hosting'], decisions: [{ field: 'cms', choice: 'discarded' }],
+    pending: { suggestions: [], goalGuidance: { mode: 'query', sourceExcerpt: 'consultar el catálogo' } },
+  } };
+  const checked = validateCopilotWorkingDraft(base);
+  assert.equal(checked.ok, true);
+  assert.equal(checked.session.pending.goalGuidance.mode, 'query');
+  assert.equal(validateCopilotWorkingDraft({ ...base, session: { ...base.session, deferred: ['secret'] } }).ok, false);
+  assert.equal(validateCopilotWorkingDraft({ ...base, session: { ...base.session, decisions: Array(33).fill({ field: 'cms', choice: 'discarded' }) } }).ok, false);
+  assert.equal(validateCopilotWorkingDraft({ ...base, session: { ...base.session, token: 'private' } }).ok, false);
+  const invented = validateCopilotWorkingDraft({ ...base, session: { ...base.session, pending: { suggestions: [], goalGuidance: { mode: 'query', sourceExcerpt: 'invented' } } } });
+  assert.equal(invented.session.pending.goalGuidance, null);
 });
 
 test('additive migration leaves existing projects intact and creates isolated working drafts', () => {
@@ -50,11 +66,11 @@ async function harness() {
     },
     insert(table) {
       assert.equal(table, draftTable);
-      return { values(row) { return { onConflictDoNothing() { return { async returning() { if (drafts.some(item => item.projectId === row.projectId)) return []; drafts.push({ ...row }); return [{ revision: row.revision, updatedAt: row.updatedAt }]; } }; } }; } };
+      return { values(row) { return { onConflictDoNothing() { return { async returning() { if (drafts.some(item => item.projectId === row.projectId)) return []; drafts.push({ ...row }); return [{ ...row }]; } }; } }; } };
     },
     update(table) {
       assert.equal(table, draftTable);
-      return { set(patch) { return { where(predicate) { return { async returning() { const row = drafts.find(predicate); if (!row) return []; Object.assign(row, patch); return [{ revision: row.revision, updatedAt: row.updatedAt }]; } }; } }; } };
+      return { set(patch) { return { where(predicate) { return { async returning() { const row = drafts.find(predicate); if (!row) return []; Object.assign(row, patch); return [{ ...row }]; } }; } }; } };
     },
   };
   const imports = {
@@ -64,6 +80,7 @@ async function harness() {
     '../../../../../../db/schema': { siteProjects: projectTable, copilotWorkingDrafts: draftTable },
     '../../../../../../lib/copilot-rollout.mjs': { isCopilotProjectAllowed },
     '../../../../../../lib/copilot-working-draft.mjs': { validateCopilotWorkingDraft },
+    '../../../../../../lib/copilot-session.mjs': { emptyCopilotSession, reviewCopilotSession },
   };
   const code = ts.transpileModule(readFileSync('app/api/projects/[projectId]/copilot/working-draft/route.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
   const exports = {};
@@ -103,4 +120,18 @@ test('private navigation waits for the working text before leaving', () => {
   assert.match(workspace, /workingExit\.current\?\.\(\); window\.location\.assign\(exitTarget\)/);
   assert.match(copilot, /onRegisterWorkingSave\?\.\(saveWorkingNow\)/);
   assert.match(copilot, /onRegisterWorkingExit\?\.\(\(\) => \{ allowNavigation\.current = true; \}\)/);
+});
+
+test('session recovery and concurrent decisions use the working draft revision', async () => {
+  const h = await harness();
+  const session = { version: 1, basedOnRevision: 8, deferred: ['hosting'], decisions: [{ field: 'goals', choice: 'discarded' }], pending: null };
+  const input = { text: 'Somos una librería.', revision: 0, mutationKey: key, locale: 'es', session };
+  assert.equal((await h.request('PUT', input)).status, 200);
+  assert.deepEqual((await (await h.request('GET')).json()).draft.session, session);
+  assert.equal((await h.request('PUT', { ...input, session: { ...session, deferred: [] } })).status, 409);
+  const conflict = await h.request('PUT', { ...input, mutationKey: '8c6296d4-ff88-4d34-830e-90757b4f0e33' });
+  assert.equal(conflict.status, 409);
+  assert.deepEqual((await conflict.json()).draft.session, session);
+  assert.equal((await h.request('PUT', { ...input, revision: 1, mutationKey: '8b6296d4-ff88-4d34-830e-90757b4f0e33', text: '' , session: { version: 1, basedOnRevision: 0, deferred: [], decisions: [], pending: null } })).status, 200);
+  assert.deepEqual((await (await h.request('GET')).json()).draft.session.decisions, []);
 });

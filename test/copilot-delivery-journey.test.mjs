@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { reviewCopilotOutput } from '../lib/intake-copilot.mjs';
+import { reviewedGoalProposal } from '../lib/copilot-goal-contract.mjs';
+import { previewIntakeDraft, applyIntakeDraft } from '../lib/intake-draft-review.mjs';
+import { planCopilotNextTurn } from '../lib/copilot-next-turn.mjs';
+import { buildPublicationCapsule, capsuleState } from '../lib/publication-capsule.mjs';
+import { compareCapsuleOrigin } from '../lib/origin-comparison.mjs';
+
+test('synthetic content journey confirms a goal, reviews delivery and checks actual file bytes without claiming production publication', async () => {
+  const notes = 'Somos Museo Sur y queremos explicar nuestro catálogo.';
+  const reviewed = reviewCopilotOutput({ suggestions: [], goalEvidence: { mode: 'explain', sourceExcerpt: 'explicar nuestro catálogo' } }, notes);
+  let draft = { organization: 'Museo Sur', website: 'https://museum.example', audience: 'Visitors', languages: ['es'], goals: [], contentSources: ['catalog'], control: 'provider' };
+  assert.equal(planCopilotNextTurn(draft, reviewed).field, 'goals');
+  const proposal = reviewedGoalProposal({ goalGuidance: reviewed.goalGuidance, currentGoals: draft.goals });
+  const preview = previewIntakeDraft(draft, { suggestions: [proposal] }, ['goals']);
+  assert.deepEqual(draft.goals, []);
+  draft = applyIntakeDraft(draft, preview);
+  assert.equal(planCopilotNextTurn(draft).stage, 'scope_review');
+  const capsule = buildPublicationCapsule({ capsuleId: 'synthetic-content', projectId: 'synthetic-project', siteId: 'synthetic-site', version: 1, canonicalOrigin: draft.website, organization: draft.organization, goals: draft.goals, languages: draft.languages, selectedResources: ['llms'], ownerRef: 'synthetic-owner', createdAt: '2026-09-30T12:00:00Z', expiresAt: '2026-10-07T12:00:00Z' });
+  assert.equal(capsule.mode, 'manual_handoff');
+  const before = await compareCapsuleOrigin(capsule, { observedAt: '2026-09-30T12:01:00Z', fetchLimitedPublicUrl: async () => ({ status: 404 }) });
+  assert.equal(before.resources[0].status, 'missing');
+  assert.equal(capsuleState({ requiredRoles: ['owner'], approvals: [{ role: 'owner', decision: 'approved' }], expiresAt: capsule.expiresAt, now: '2026-09-30T12:02:00Z' }), 'approved_for_manual_handoff');
+  const file = capsule.files[0];
+  const after = await compareCapsuleOrigin(capsule, { observedAt: '2026-09-30T12:03:00Z', fetchLimitedPublicUrl: async () => ({ status: 200, body: file.content, bodyBytes: Buffer.from(file.content), contentType: file.mediaType, truncated: false }) });
+  assert.equal(after.resources[0].status, 'unchanged');
+  assert.equal(after.resources[0].currentSha256, file.sha256);
+  assert.equal(after.manifestSha256, capsule.integrity.manifestSha256);
+  assert.equal(after.limits.remoteMutation, false);
+});

@@ -2,11 +2,12 @@ import { env } from 'cloudflare:workers';
 import { and, eq } from 'drizzle-orm';
 import { getCloudflareAccessUser } from '../../../../cloudflare-access-auth';
 import { getDb } from '../../../../../db';
-import { siteProjects } from '../../../../../db/schema';
+import { siteProjects, copilotWorkingDrafts } from '../../../../../db/schema';
 import { reviewCopilotOutput, validateCopilotInput } from '../../../../../lib/intake-copilot.mjs';
 import { requestIntakeSuggestions } from '../../../../../lib/intake-copilot-provider.mjs';
 import { isCopilotProjectAllowed } from '../../../../../lib/copilot-rollout.mjs';
 import { currentCopilotConsent } from '../../../../../lib/copilot-consent';
+import { buildCopilotContext } from '../../../../../lib/copilot-context.mjs';
 
 type Context = { params: Promise<{ projectId: string }> };
 const headers = { 'cache-control': 'no-store' };
@@ -21,7 +22,7 @@ export async function POST(request: Request, context: Context) {
   const { projectId } = await context.params;
   if (!env.AFW_COPILOT_PROJECT_ID) return reply('copilot_unavailable', 503);
   if (!isCopilotProjectAllowed({ enabled: true, allowedProjectId: env.AFW_COPILOT_PROJECT_ID, projectId })) return reply('project_unavailable', 404);
-  const [project] = await getDb().select({ id: siteProjects.id }).from(siteProjects)
+  const [project] = await getDb().select({ id: siteProjects.id, revision: siteProjects.revision, organization: siteProjects.organization, website: siteProjects.website, audience: siteProjects.audience, cms: siteProjects.cms, hosting: siteProjects.hosting, control: siteProjects.control, goalsJson: siteProjects.goalsJson }).from(siteProjects)
     .where(and(eq(siteProjects.id, projectId), eq(siteProjects.userId, user.userId))).limit(1);
   if (!project) return reply('project_unavailable', 404);
 
@@ -51,7 +52,9 @@ export async function POST(request: Request, context: Context) {
     if (!consent.granted) return reply('project_consent_required', 403);
     const { success } = await env.COPILOT_RATE_LIMIT.limit({ key: user.userId });
     if (!success) return Response.json({ code: 'copilot_rate_limited' }, { status: 429, headers: { ...headers, 'retry-after': '60' } });
-    const payload = await requestIntakeSuggestions(env.AI, input.notes, input.locale);
+    const [working] = await getDb().select({ text: copilotWorkingDrafts.text, sessionJson: copilotWorkingDrafts.sessionJson }).from(copilotWorkingDrafts)
+      .where(and(eq(copilotWorkingDrafts.projectId, projectId), eq(copilotWorkingDrafts.userId, user.userId))).limit(1);
+    const payload = await requestIntakeSuggestions(env.AI, input.notes, input.locale, buildCopilotContext(project, working));
     const reviewed = reviewCopilotOutput(payload, input.notes, input.locale);
     return Response.json(reviewed, { headers });
   } catch {
