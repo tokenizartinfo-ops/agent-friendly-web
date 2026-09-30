@@ -1,0 +1,7 @@
+# Procedencia privada de propuestas revisadas
+
+Cuando el dueño selecciona y aplica una propuesta estructurada del copilot, la interfaz prepara una marca privada por campo. El guardado normal del expediente conserva esa marca en el evento de la revisión **solo si el valor normalizado guardado coincide con el valor que la persona aplicó**. Si corrige el dato antes de guardarlo, la marca se descarta. Los demás campos quedan como `unattributed_owner_save`; no se infiere que hayan sido escritos manualmente, verificados en el sitio o sugeridos por una fuente concreta.
+
+El evento no duplica el valor ni guarda el relato o la cita usada por el modelo. La pista procede de la interfaz del dueño y **no es evidencia independiente**: no modifica la puntuación, el Registry, la auditoría ni los permisos de publicación. La respuesta privada del historial solo muestra la última revisión, fecha y tipo de procedencia acotado. Los eventos anteriores permanecen con procedencia no atribuida. Al confirmar un guardado, la interfaz limpia las pistas usadas; ante error o conflicto las conserva para reintentar con la misma clave.
+
+El contrato de idempotencia anterior se conserva cuando un cliente no envía `sourceHints`. El campo nuevo queda incluido en la huella de los intentos nuevos para que un reintento no cambie silenciosamente la atribución. La procedencia completa de frases, transcripciones y observaciones externas exigirá un contrato de privacidad y retención propio; este bloque no la afirma.

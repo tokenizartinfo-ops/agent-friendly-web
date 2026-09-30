@@ -154,6 +154,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const [availableScope,setAvailableScope]=useState<{website:string;scopeText:string}|null>(null);
   const [conflictReview, setConflictReview] = useState<{ current: SavedProject; plan: RebasePlan } | null>(null);
   const manualLock = useRef(false);
+  const sourceHints = useRef<Record<string, { kind: 'copilot_reviewed'; value: string | string[] }>>({});
   const [saveAttempt] = useState(() => createProjectSaveAttempt());
   const copy = privateUiCopy(locale).intake;
   const [identitySection, goalsSection, controlSection, languagesSection, contentSection, capabilitiesSection, publicationSection, governanceSection] = copy.sections;
@@ -259,8 +260,10 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
     manualLock.current = true;
     setManualBusy(true);
     setStatus('saving');
+    const submittedSources = { ...sourceHints.current };
     try {
-      const response = await request('/api/projects', saveAttempt.prepare({ ...data, id: projectId, revision: savedRevision.current }));
+      const response = await request('/api/projects', saveAttempt.prepare({ ...data, id: projectId, revision: savedRevision.current,
+        ...(Object.keys(submittedSources).length ? { sourceHints: submittedSources } : {}) }));
       const parsed = await readProjectSaveResponse(response);
       if (parsed.sessionRequired) {
         setSessionRequired(true);
@@ -286,6 +289,9 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
       setProjectId(payload.project.id);
       setSavedWebsite(payload.project.website || '');
       setRoadmap(payload.project.roadmap || []);
+      for (const [field, hint] of Object.entries(submittedSources)) {
+        if (sourceHints.current[field] === hint) delete sourceHints.current[field];
+      }
       setStatus('saved');
       setAutosavePaused(false);
       setSessionRequired(false);
@@ -496,10 +502,11 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           }} />
         </details>
         {pilotCopilot ? <details id="dossier-copilot" className="dossier-assistant" open={guidedView}><summary>{locale === 'en' ? 'Intelligent copilot' : 'Copilot inteligente'}</summary>
-          <IntakeIntelligentCopilot key={`${projectId}:${locale}`} projectId={projectId} locale={locale} draft={data}
+          <IntakeIntelligentCopilot key={`${projectId}:${locale}`} projectId={projectId} dossierRevision={scopeRevision} locale={locale} draft={data}
             onWorkingPendingChange={setWorkingPending} onRegisterWorkingSave={save => { workingSave.current = save; }}
-            onRegisterWorkingExit={allow => { workingExit.current = allow; }} onApply={next => {
+            onRegisterWorkingExit={allow => { workingExit.current = allow; }} onApply={(next, sourceValues) => {
             if (manualLock.current) return;
+            for (const [field, value] of Object.entries(sourceValues || {})) sourceHints.current[field] = { kind: 'copilot_reviewed', value };
             setAutosavePaused(false); setData(intakeFromProject(next)); setStatus('idle'); setMessage(DOSSIER_GUIDE_COPY[locale].draft);
           }} />
         </details> : null}

@@ -47,7 +47,7 @@ const copy = {
   pt: { title: 'Copilot inteligente', intro: 'Conte com suas palavras o que seu site faz e do que precisa. O copilot propõe dados; você decide o que incluir.', privacy: 'O que você escreve é salvo automaticamente como relato privado de trabalho. Ao pedir ajuda, seu texto ou áudio é processado com Workers AI na Cloudflare. Não inclua chaves nem dados privados. O áudio não é salvo no dossiê; nada é publicado automaticamente.', consent: 'Aceito enviar este texto ou segmento de áudio ao Workers AI na Cloudflare. Confirmo cada envio separadamente.', grant: 'Ativar ajuda com IA para este dossiê', revoke: 'Revogar permissão para este dossiê', granted: 'A ajuda com IA está autorizada para este dossiê. Você confirma cada envio separadamente.', revoked: 'A permissão foi revogada. Você pode seguir com o guia ou ativá-la novamente quando quiser.', consentUnavailable: 'Não consegui verificar a permissão. O copilot permanece fechado até que eu consiga.', ask: 'Preparar sugestões', busy: 'Pensando com você…', unavailable: 'O copilot não está disponível agora. Você pode continuar com o guia.', session: 'Sua sessão precisa ser renovada. Mantenha esta aba aberta e entre novamente antes de tentar de novo.', projectUnavailable: 'Não encontro este dossiê na sua sessão. Confira se abriu o correto; nenhuma alteração foi aplicada.', rateLimited: 'Você atingiu o limite temporário de consultas. Aguarde um minuto ou continue com o guia.', review: 'Revisar alterações', apply: 'Aplicar ao rascunho', stale: 'O formulário mudou. Revise as sugestões novamente.', empty: 'Não encontrei dados suficientemente claros. Você pode reformular.', source: 'Você escreveu', evidence: 'Esta sugestão vem do seu texto; ainda não verificamos esse dado no seu site.', applied: 'Aplicado ao rascunho. É salvo automaticamente.' },
 };
 
-export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply, onWorkingPendingChange, onRegisterWorkingSave, onRegisterWorkingExit }: { projectId: string; locale: Locale; draft: Draft; onApply: (draft: Draft) => void; onWorkingPendingChange?: (pending: boolean) => void; onRegisterWorkingSave?: (save: (() => Promise<boolean>) | null) => void; onRegisterWorkingExit?: (allow: (() => void) | null) => void }) {
+export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, draft, onApply, onWorkingPendingChange, onRegisterWorkingSave, onRegisterWorkingExit }: { projectId: string; dossierRevision: number; locale: Locale; draft: Draft; onApply: (draft: Draft, sourceValues?: Record<string, string | string[]>) => void; onWorkingPendingChange?: (pending: boolean) => void; onRegisterWorkingSave?: (save: (() => Promise<boolean>) | null) => void; onRegisterWorkingExit?: (allow: (() => void) | null) => void }) {
   const t = copy[locale];
   const v = voiceCopy[locale];
   const n = narrativeCopy[locale];
@@ -55,17 +55,18 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply, on
   const label = (field: string) => field in labels ? labels[field as keyof typeof labels] : field;
   const [notes, setNotes] = useState('');
   const [result, setResult] = useState<Result | null>(null);
-  const [fieldHistory, setFieldHistory] = useState<Record<string, { revision: number; savedAt: string }>>({});
+  const [fieldHistory, setFieldHistory] = useState<Record<string, { revision: number; savedAt: string; source?: string }>>({});
   const nextTurn = result ? planCopilotNextTurn(draft, result) : null;
+  const nextTurnField = nextTurn && 'field' in nextTurn && typeof nextTurn.field === 'string' ? nextTurn.field : '';
   useEffect(() => {
     if (!projectId) return;
     const controller = new AbortController();
     fetch(`/api/projects/${encodeURIComponent(projectId)}/field-history`, { cache: 'no-store', signal: controller.signal })
-      .then(async response => response.ok ? response.json() : null)
+      .then(async response => response.ok ? await response.json() as { fields?: Record<string, { revision: number; savedAt: string; source?: string }> } : null)
       .then(payload => { if (!controller.signal.aborted && payload?.fields && typeof payload.fields === 'object') setFieldHistory(payload.fields); })
       .catch(() => {});
     return () => controller.abort();
-  }, [projectId]);
+  }, [projectId, dossierRevision]);
   const [selected, setSelected] = useState<string[]>([]);
   const [changes, setChanges] = useState<ReturnType<typeof previewIntakeDraft> | null>(null);
   const [narrativeChanges, setNarrativeChanges] = useState<ReturnType<typeof previewIntakeDraft> | null>(null);
@@ -287,14 +288,14 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply, on
     <div className="assistant-review-panel" aria-live="polite">
       {status ? <p role="status">{status}</p> : null}
       {result ? <><p>{result.suggestions.length || result.goalGuidance ? result.warning : t.empty}</p>{result.goalGuidance ? <div className="assistant-guidance"><p>{goalGuidanceCopy[locale].intro}</p><p><em>{t.source}: {result.goalGuidance.sourceExcerpt}</em></p><p>{goalGuidanceCopy[locale][result.goalGuidance.mode]}</p></div> : null}{result.suggestions.length ? <><p>{t.evidence}</p><p>{selectionCopy[locale]}</p></> : null}
-        {nextTurn ? <p role="status" className="assistant-guidance">{nextTurnCopy[locale][nextTurn.kind as keyof typeof nextTurnCopy.es].replace('{field}', 'field' in nextTurn ? label(nextTurn.field) : '')}{nextTurn.kind === 'clarify' && fieldHistory[nextTurn.field] ? ` ${locale === 'en' ? 'The dossier records a previous change to this field; let us check it together.' : locale === 'pt' ? 'O dossiê registra uma alteração anterior neste campo; vamos conferi-la juntos.' : 'El expediente registra un cambio anterior en este dato; revisémoslo juntos.'}` : ''}</p> : null}
+        {nextTurn ? <p role="status" className="assistant-guidance">{nextTurnCopy[locale][nextTurn.kind as keyof typeof nextTurnCopy.es].replace('{field}', nextTurnField ? label(nextTurnField) : '')}{nextTurn.kind === 'clarify' && nextTurnField && fieldHistory[nextTurnField] ? ` ${fieldHistory[nextTurnField].source === 'copilot_reviewed' ? locale === 'en' ? 'You previously reviewed a copilot suggestion for this field; that does not verify the website.' : locale === 'pt' ? 'Você já revisou uma sugestão do copilot para este campo; isso não verifica o site.' : 'Antes revisaste una propuesta del copilot para este dato; eso no verifica el sitio.' : locale === 'en' ? 'The dossier records a previous change to this field; let us check it together.' : locale === 'pt' ? 'O dossiê registra uma alteração anterior neste campo; vamos conferi-la juntos.' : 'El expediente registra un cambio anterior en este dato; revisémoslo juntos.'}` : ''}</p> : null}
         <div className="assistant-suggestion-list">{result.suggestions.map(item => <label key={item.field}>
           <input type="checkbox" checked={selected.includes(item.field)} onChange={() => { setSelected(current => current.includes(item.field) ? current.filter(value => value !== item.field) : [...current, item.field]); setChanges(null); }} />
           <span><strong>{label(item.field)}</strong><small>{dossierValueLabel(item.field, item.value, locale)}</small><em>{t.source}: {item.sourceExcerpt}</em></span>
         </label>)}</div>
         <button type="button" className="secondary-action" disabled={!selected.length} onClick={() => { try { setChanges(previewIntakeDraft(draft, result, selected)); setStatus(''); } catch { setChanges(null); setStatus(t.stale); } }}>{t.review}</button>
         {changes ? <div><ul>{changes.map((change: { field: string; after: string | string[] }) => <li key={change.field}>{label(change.field)}: {dossierValueLabel(change.field, change.after, locale)}</li>)}</ul>
-          <button type="button" className="primary-action" disabled={!changes.length} onClick={() => { try { onApply(applyIntakeDraft(draft, changes)); setChanges(null); setStatus(t.applied); } catch { setChanges(null); setStatus(t.stale); } }}>{t.apply}</button></div> : null}
+          <button type="button" className="primary-action" disabled={!changes.length} onClick={() => { try { onApply(applyIntakeDraft(draft, changes), Object.fromEntries(changes.map((change: { field: string; after: string | string[] }) => [change.field, change.after]))); setChanges(null); setStatus(t.applied); } catch { setChanges(null); setStatus(t.stale); } }}>{t.apply}</button></div> : null}
       </> : null}
     </div>
   </section>;
