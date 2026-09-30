@@ -72,7 +72,7 @@ Después, contexto mínimo del copilot preparado por servidor y evaluaciones. El
 4. Tomar un bloque con resultado y cierre, implementar y probar el comportamiento. Al aprobarlo, continuar el siguiente dentro del alcance autorizado; informar solo hitos, riesgos reales o una acción humana estrictamente necesaria.
 5. No remendar cada síntoma con un mensaje adicional. Si el problema es de estado, contrato u orden de preguntas, corregir esa capa y usarla desde la UI.
 6. Mantener identidad, consentimiento, compuerta del piloto, confirmación de propuestas y distinción entre datos e implementación. No ampliar permisos por haber alcanzado una etapa o puntaje.
-7. Navegador: Chrome existente elegido por Gabriel. Buscar exclusivamente la pestaña de AFW. No usar `chrome_devtools.new_page` para recuperar acceso: puede abrir otra instancia. Si el control no está disponible, pedir al usuario el enlace/pestaña y avanzar con tareas independientes. No cerrar ni reclamar pestañas de Atelier/Tokenizart de otro chat.
+7. Navegador: usar el autorizado en la sesión vigente. Gabriel autorizó el navegador integrado el 2026-09-30; la sesión privada A funciona allí. No abrir otra instancia de Chrome ni cerrar o reclamar pestañas de Atelier/Tokenizart de otro chat.
 8. Para cada publicación remota declarar `PROJECT`, `REPOSITORY`, `ENVIRONMENT`, `ORIGIN`, `RESOURCE_TYPE`, `RESOURCE_ID`, `ALLOWED_ACTION`, `ROLLBACK`. Compartir cuenta no comparte recursos.
 9. Pruebas proporcionales: lógica de contrato, identidad y concurrencia; un recorrido UI relevante y casos de error. Antes de publicar: `npm test`, `npm run lint`, `npm run build`, CI y fuente del artefacto. La cuenta de tests no demuestra usabilidad.
 10. Una respuesta perdida exige comprobar el resultado antes de reintentar. Prueba privada y smoke anónimo acreditan cosas distintas. La presencia de un archivo o PR no acredita despliegue.
@@ -98,8 +98,12 @@ La revisión de Cloudflare del jueves 2026-10-01 compara mismo origen/perfil y f
 | Microauditoría y traspaso | Documentado | Hallazgos reproducidos localmente; código y límites registrados. |
 | MA-01/02 | Implementados/desplegados | Objetivos canónicos y un turno con razón/revisión; PR #118. |
 | MA-03 | Implementado/desplegado | Sesión atómica y migración 0009; pruebas de conflicto/recuperación y restore SQLite local. |
-| MA-04/05 | Implementados/desplegados; aceptación privada parcial | Contenido, guardado, pausa/recarga y entrega probados en Chrome. Fix API #119: 598 pruebas, CI/revisión aprobados; repetición privada pendiente de conexión. |
+| MA-04/05 | Implementados/desplegados; aceptación privada parcial | Contenido, guardado, pausa/recarga y entrega probados. Con A autenticada se recuperó la interpretación API, se revisó/guardó y persistió tras recarga sin pagos. No acredita nueva inferencia en esa continuación. Ver recibo privado. |
 | MA-06 | Corte vertical sintético local; cierre remoto pendiente | Entrega accesible desde la guía; no acredita instalación en cliente. |
-| MA-07 | Aceptación privada parcial | [Identidad B](AFW-IDENTITY-B-ACCEPTANCE-2026-09-30.es.md): expediente propio guardado/recuperado y piloto A inaccesible desde UI. Lectura inversa, escritura cruzada y retirada pendientes. Retirar política QA al terminar; no expira automáticamente. |
+| MA-07 | Aceptación privada parcial | [Identidades A/B](AFW-IDENTITY-B-ACCEPTANCE-2026-09-30.es.md): guardado/recuperación y aislamiento visual en ambas direcciones, con listas propias. Escritura cruzada remota y retirada pendientes. Retirar política QA al terminar; no expira automáticamente. |
 | MA-08 | Feed acotado implementado/desplegado | Observaciones compatibles/fechadas; sin scheduler ni bandeja persistida acreditados. |
 | MA-09/10 | Horizonte posterior | Requieren entrega útil acreditada y límites de fuentes/costes. |
+
+## Apertura de producción
+
+La web está desplegada; el recorrido privado todavía no está abierto a clientes generales. Seguir [la puerta de salida para beta acompañada](AFW-PRODUCTION-OPENING-2026-09-30.es.md): corrección de mensajes → entrega real controlada → aislamiento/retirada → habilitación acotada → primer cliente. No ampliar el piloto por inferencia.
