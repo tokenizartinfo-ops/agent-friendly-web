@@ -8,6 +8,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 - Current release provenance: `docs/AFW-GUIDED-RELEASE-2026-09-30.es.md`; previous releases remain dated evidence under `docs/`. Verify the active deployment again before publishing; a worktree HEAD alone does not represent the frozen production source.
 
+- Latest release and integral acceptance: `docs/AFW-INTEGRAL-ACCEPTANCE-2026-09-30.es.md` (PR #126, source d403908). MA-06 passed with the same synthetic capsule; MA-07 cross-write and withdrawal still require real acceptance. Preserve comparison history on code rollback.
+
 - `public_web`: `https://agentfriendlyweb.dev`, the only canonical public origin.
 - `afw_private`: private paths and APIs use Cloudflare Access on an `agentfriendlyweb.dev` hostname or path.
 - `afw_canary`: remote parity testing, when needed, uses a dedicated `agentfriendlyweb.dev` subdomain protected by Cloudflare Access.
