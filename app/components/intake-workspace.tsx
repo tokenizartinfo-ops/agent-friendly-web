@@ -34,6 +34,7 @@ import { compareObservationHistory } from '../../lib/observation-history.mjs';
 import { missingIntakeQuestions } from '../../lib/intake-question-coach.mjs';
 import { isGuidedPilotView } from '../../lib/guided-pilot-view.mjs';
 import { dossierUpdates,dossierUpdatesReadState,DOSSIER_UPDATES_READ_COPY } from '../../lib/dossier-updates.mjs';
+import { revealDossierDelivery } from '../../lib/dossier-delivery-navigation.mjs';
 
 import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
 import { reconcileSavedDraft } from '../../lib/project-save-reconciliation.mjs';
@@ -471,6 +472,10 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
     setObservationMessage(DOSSIER_UPDATES_READ_COPY[locale].loading);
     setObservationLoadAttempt(value=>value+1);
   }
+  function reviewDelivery(){
+    const panel=document.getElementById('dossier-delivery');
+    if(panel instanceof HTMLDetailsElement)revealDossierDelivery(panel,()=>setGuidedDeliveryRequested(true));
+  }
   const updates = dossierUpdates({ website: savedWebsite, history: currentObservations.history, monitoringPreference: savedSnapshot.monitoringPreference,readState:updatesReadState });
   return (
     <div className={guidedView ? 'intake-layout guided-pilot' : 'intake-layout'}>
@@ -515,7 +520,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           }} />
         </details>
         {pilotCopilot ? <details id="dossier-copilot" className="dossier-assistant" open={guidedView}><summary>{locale === 'en' ? 'Intelligent copilot' : 'Copilot inteligente'}</summary>
-          <IntakeIntelligentCopilot key={`${projectId}:${locale}`} projectId={projectId} dossierRevision={scopeRevision} locale={locale} draft={data} onReviewDelivery={() => { setGuidedDeliveryRequested(true); document.getElementById('dossier-delivery')?.scrollIntoView({ behavior: 'smooth' }); }}
+          <IntakeIntelligentCopilot key={`${projectId}:${locale}`} projectId={projectId} dossierRevision={scopeRevision} locale={locale} draft={data} onReviewDelivery={reviewDelivery}
             onWorkingPendingChange={setWorkingPending} onRegisterWorkingSave={save => { workingSave.current = save; }}
             onRegisterWorkingExit={allow => { workingExit.current = allow; }} onApply={(next, sourceValues) => {
             if (manualLock.current) return;
@@ -650,7 +655,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
 
       <aside className="intake-aside">
         <details className="dossier-assistant"><summary>{localizedMessage(locale, 'Novedades de tu expediente', 'Dossier updates', 'Novidades do dossiê')}</summary>
-          {updatesReadState!=='ready' ? <div aria-live="polite"><p>{DOSSIER_UPDATES_READ_COPY[locale][updatesReadState]}</p>{updatesReadState==='failed'?<button type="button" className="secondary-action" onClick={retrySavedObservationRead}>{localizedMessage(locale,'Reintentar consulta guardada','Retry saved read','Repetir consulta salva')}</button>:null}</div> : updates.items.length ? updates.items.map(item => <div key={item.id}><time dateTime={item.checkedAt}>{formatDate(item.checkedAt, locale)}</time><p>{item.kind === 'observed_change' && typeof item.delta === 'number' ? `${localizedMessage(locale, 'Cambio observado:', 'Observed change:', 'Mudança observada:')} ${item.delta >= 0 ? '+' : ''}${item.delta}` : localizedMessage(locale, 'Tenemos una observación fechada para revisar.', 'We have a dated observation to review.', 'Temos uma observação datada para revisar.')}</p><button type="button" className="secondary-action" onClick={() => { setGuidedDeliveryRequested(true); document.getElementById('dossier-delivery')?.scrollIntoView({ behavior: 'smooth' }); }}>{localizedMessage(locale, 'Revisar evidencia y siguiente paso', 'Review evidence and next step', 'Revisar evidência e próximo passo')}</button></div>) : <p>{localizedMessage(locale, 'Todavía no hay una observación guardada para este sitio.', 'There is no saved observation for this site yet.', 'Ainda não há observação salva para este site.')}</p>}
+          {updatesReadState!=='ready' ? <div aria-live="polite"><p>{DOSSIER_UPDATES_READ_COPY[locale][updatesReadState]}</p>{updatesReadState==='failed'?<button type="button" className="secondary-action" onClick={retrySavedObservationRead}>{localizedMessage(locale,'Reintentar consulta guardada','Retry saved read','Repetir consulta salva')}</button>:null}</div> : updates.items.length ? updates.items.map(item => <div key={item.id}><time dateTime={item.checkedAt}>{formatDate(item.checkedAt, locale)}</time><p>{item.kind === 'observed_change' && typeof item.delta === 'number' ? `${localizedMessage(locale, 'Cambio observado:', 'Observed change:', 'Mudança observada:')} ${item.delta >= 0 ? '+' : ''}${item.delta}` : localizedMessage(locale, 'Tenemos una observación fechada para revisar.', 'We have a dated observation to review.', 'Temos uma observação datada para revisar.')}</p><button type="button" className="secondary-action" onClick={reviewDelivery}>{localizedMessage(locale, 'Revisar evidencia y siguiente paso', 'Review evidence and next step', 'Revisar evidência e próximo passo')}</button></div>) : <p>{localizedMessage(locale, 'Todavía no hay una observación guardada para este sitio.', 'There is no saved observation for this site yet.', 'Ainda não há observação salva para este site.')}</p>}
           <p>{localizedMessage(locale, 'La preferencia de seguimiento no activa revisiones automáticas. Por ahora podés solicitar una nueva lectura desde la entrega.', 'A monitoring preference does not activate automatic reviews. For now, request a new reading from delivery.', 'A preferência de acompanhamento não ativa revisões automáticas. Por enquanto, solicite uma nova leitura na entrega.')}</p>
         </details>
         {!guidedView ? <DossierProgress draft={data} saved={savedSnapshot} loaded={loaded} projectId={projectId} status={status} sessionRequired={sessionRequired} conflict={Boolean(conflictReview)} verified={activeClaim?.status === 'verified' && websiteIsSaved} verifiedUntil={activeClaim?.verifiedUntil || ''} locale={locale} rehearsal={Boolean(rehearsal)} onRetryLoad={()=>{if(loaded)return;setStatus('loading');setLoadAttempt(value=>value+1);}}/> : null}
