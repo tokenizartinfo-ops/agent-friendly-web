@@ -1,0 +1,9 @@
+# Vista breve del expediente piloto
+
+La PR #102 quedó integrada en `531a2dd1a52e3671d107a1e1ede2f354f5a6f442`. Solo el expediente sintético habilitado para el copilot inicia con una vista breve: copilot abierto, acceso desplegable a la guía sin IA y guardado explícito. «Ver expediente completo» muestra las secciones, el progreso, la evidencia y las herramientas existentes. Alternar la vista no desmonta el relato del copilot ni el borrador; si hay conflicto de guardado o vence la sesión, aparece la vista completa para resolverlo. Los demás expedientes mantienen su recorrido anterior.
+
+Pasaron 561 pruebas, lint sin errores (una advertencia previa de `<img>`), build y CI de la PR. El artefacto se reconstruyó desde el commit integrado. La configuración del Worker conservó D1, Access, AI y límite de 5 solicitudes cada 60 segundos; la compuerta del copilot permanece en el único proyecto `6e972c18-cae1-402b-b959-646abd8499d7`. No hubo migraciones. La versión `8f4153c4-f5bc-42c7-ae3e-741f28272b6b` se asignó primero al 0 % y luego al 100 % del Worker `agent-friendly-web-web-production`. El smoke público posterior pasó 11/11, incluidos los tres límites de Access.
+
+En Chrome con sesión autenticada, la vista breve mostró el copilot y «Seguir sin IA: una pregunta por vez» sin exponer el formulario ni los conteos. Al abrir «Ver expediente completo» reaparecieron la sección de identidad y el progreso; al volver a la guía breve se conservó texto de prueba no enviado en el copilot. Ese texto fue retirado y no se guardó. La prueba no valida todavía la experiencia completa con usuarios externos ni sustituye el trabajo pendiente de conversación progresiva.
+
+Rollback inmediato: asignar 100 % a `c0a232dc-19c7-4f0e-b684-38647888a9ff`. Cierre completo del piloto: asignar 100 % a `377e6c7a-a783-478b-86ef-e7290d15b97e`. No tocar D1.
