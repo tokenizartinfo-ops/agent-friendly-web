@@ -18,4 +18,6 @@ La decisión de incorporar clientes externos y habilitar sus identidades debe ll
 
 ## Próximo orden
 
+Actualización tras PR #126: entrega integral sintética cerrada con la misma cápsula y mensajes corregidos, según [recibo vigente](AFW-INTEGRAL-ACCEPTANCE-2026-09-30.es.md). El procedimiento de beta y la lista acotada están preparados; no se habilitaron clientes nuevos. Próximo bloqueo de aceptación: escritura cruzada real y retirada de la identidad de prueba. Después, habilitación explícita y primer cliente acompañado.
+
 Corrección de recuperación → entrega real controlada → pruebas pendientes de acceso → habilitación acotada → primer cliente acompañado. Las evidencias se registran en el roadmap y en recibos fechados. Cloudflare se revisa el jueves 2026-10-01; su puntaje no sustituye aceptación ni bloquea el piloto.

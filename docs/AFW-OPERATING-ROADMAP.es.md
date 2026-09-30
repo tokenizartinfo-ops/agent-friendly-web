@@ -99,7 +99,7 @@ La revisión de Cloudflare del jueves 2026-10-01 compara mismo origen/perfil y f
 | MA-01/02 | Implementados/desplegados | Objetivos canónicos y un turno con razón/revisión; PR #118. |
 | MA-03 | Implementado/desplegado | Sesión atómica y migración 0009; pruebas de conflicto/recuperación y restore SQLite local. |
 | MA-04/05 | Implementados/desplegados; aceptación privada parcial | Contenido, guardado, pausa/recarga y entrega probados. Con A autenticada se recuperó la interpretación API, se revisó/guardó y persistió tras recarga sin pagos. No acredita nueva inferencia en esa continuación. Ver recibo privado. |
-| MA-06 | Instalación remota controlada comprobada; recorrido integral de cliente pendiente | [Entrega remota](AFW-REMOTE-DELIVERY-2026-09-30.es.md): ausencia → instalación/hash exacto → cambio posterior → rollback verificado, recursos temporales retirados. Cápsula de fixture distinta de v2 privada; no afirmar instalación de cliente ni aprobación de esa v2. |
+| MA-06 | Recorrido integral sintético cerrado; cliente externo pendiente | [Aceptación integral](AFW-INTEGRAL-ACCEPTANCE-2026-09-30.es.md): misma cápsula revisada/aprobada/descargada → archivo exacto instalado → auditoría 9→17 AF0 → comparación coincidente recuperada tras recarga. Historial conservado y destino temporal retirado. No acredita entrega externa ni instalación de v2 sobre el apex. |
 | MA-07 | Aceptación privada parcial | [Identidades A/B](AFW-IDENTITY-B-ACCEPTANCE-2026-09-30.es.md): guardado/recuperación y aislamiento visual en ambas direcciones, con listas propias. Escritura cruzada remota y retirada pendientes. Retirar política QA al terminar; no expira automáticamente. |
 | MA-08 | Feed acotado implementado/desplegado | Observaciones compatibles/fechadas; sin scheduler ni bandeja persistida acreditados. |
 | MA-09/10 | Horizonte posterior | Requieren entrega útil acreditada y límites de fuentes/costes. |
@@ -107,3 +107,5 @@ La revisión de Cloudflare del jueves 2026-10-01 compara mismo origen/perfil y f
 ## Apertura de producción
 
 La web está desplegada; el recorrido privado todavía no está abierto a clientes generales. Seguir [la puerta de salida para beta acompañada](AFW-PRODUCTION-OPENING-2026-09-30.es.md): corrección de mensajes → entrega real controlada → aislamiento/retirada → habilitación acotada → primer cliente. No ampliar el piloto por inferencia.
+
+Continuidad vigente tras PR #126: comenzar por MA-07, no repetir la entrega sintética. La sesión del owner confirmó aprobación y lectura coincidente. Se solicitó la segunda identidad para escritura cruzada; si el navegador no controla la pestaña anterior, recuperar control antes de afirmar una petición remota. Procedimiento de beta preparado en [operaciones](AFW-BETA-OPERATIONS-2026-09-30.es.md); rollout productivo aún de un solo expediente.
