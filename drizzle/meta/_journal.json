@@ -57,6 +57,13 @@
       "when": 1790640303047,
       "tag": "0007_dry_power_pack",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1790729217157,
+      "tag": "0008_happy_klaw",
+      "breakpoints": true
     }
   ]
 }

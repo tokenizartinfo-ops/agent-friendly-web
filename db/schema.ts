@@ -70,6 +70,19 @@ export const copilotConsentEvents = sqliteTable(
   ],
 );
 
+export const copilotWorkingDrafts = sqliteTable(
+  'copilot_working_drafts',
+  {
+    projectId: text('project_id').primaryKey(),
+    userId: text('user_id').notNull(),
+    text: text('text').notNull().default(''),
+    revision: integer('revision').notNull().default(1),
+    lastMutationKey: text('last_mutation_key').notNull(),
+    updatedAt: text('updated_at').notNull(),
+  },
+  (table) => [index('copilot_working_drafts_owner_idx').on(table.userId, table.projectId)],
+);
+
 export const registrySites = sqliteTable(
   'registry_sites',
   {
