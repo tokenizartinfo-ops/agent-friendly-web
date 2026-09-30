@@ -4,9 +4,9 @@ Fecha: 2026-09-30. La web ya está desplegada; la apertura comercial del recorri
 
 ## Puerta de salida para una beta acompañada
 
-1. Cerrar una entrega controlada: objetivo confirmado, alcance revisado, archivos preparados, implementación en un origen autorizado y auditoría posterior comparable. Existe simulación local; falta acreditar instalación real. No usar dominios de ejemplo como clientes ni afirmar mejora por generar archivos.
+1. Cerrar el recorrido integral con la misma cápsula: objetivo confirmado, alcance revisado, archivos preparados, aprobación, implementación en un origen autorizado y observación posterior. La instalación remota sintética y rollback ya se acreditan en [el recibo](AFW-REMOTE-DELIVERY-2026-09-30.es.md); son distintos de la cápsula privada v2 y no prueban entrega de cliente. No afirmar mejora por generar archivos.
 2. Completar aislamiento operativo: lectura y listado visual aislados entre A/B comprobados; escritura cruzada remota y retirada de acceso siguen pendientes. La política QA no expira por limitar sesiones a una hora.
-3. Corregir mensajes que contradicen el guardado o presentan propuestas consumidas como incomprensión. Mantener confirmación del servidor y recuperación de conflictos. La corrección de propuestas consumidas está en esta rama, pendiente de CI/publicación.
+3. Corregir mensajes que contradicen el guardado. Mantener confirmación del servidor y recuperación de conflictos. La corrección de propuestas consumidas ya está desplegada y comprobada en sesión privada; quedan mensajes de guardado por unificar.
 4. Preparar habilitación gradual del copilot: expedientes explícitos, consentimiento, límites de llamadas/coste y revocación. La bandera del piloto actual no sirve como apertura general. Definir soporte operativo, responsable de incidentes y una prueba de recuperación antes de datos de clientes.
 5. Ejecutar un recorrido de aceptación con una identidad habilitada: entrada, objetivo, texto/audio, revisión, pausa/retorno, entrega y evidencia. Informar qué es declarado, preparado, publicado y comprobado. No imponer AF5 ni MCP.
 
