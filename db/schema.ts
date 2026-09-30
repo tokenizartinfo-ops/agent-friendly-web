@@ -260,7 +260,7 @@ export const capsuleOriginComparisons = sqliteTable(
   },
   (table) => [
     uniqueIndex('capsule_origin_comparisons_idempotency_unique').on(table.idempotencyKey),
-    uniqueIndex('capsule_origin_comparisons_capsule_manifest_unique').on(table.capsuleId, table.manifestSha256),
+    index('capsule_origin_comparisons_capsule_manifest_created_idx').on(table.capsuleId, table.manifestSha256, table.createdAt),
     index('capsule_origin_comparisons_project_created_idx').on(table.projectId, table.createdAt),
   ],
 );
