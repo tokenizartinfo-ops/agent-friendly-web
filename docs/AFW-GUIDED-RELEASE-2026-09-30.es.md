@@ -62,3 +62,7 @@ Con sesión A se abrió el expediente sintético propio de entrega AFW `project-
 
 MA-06 avanza hasta preparación/comparación remota, sin acreditar instalación ni auditoría posterior a un cambio. El contenido propuesto sí es legible al abrir el desplegable del archivo. Se comprobó que contiene datos sintéticos y campos no declarados; no debe reemplazar el llms.txt público existente. Próximo bloque: entrega en un destino controlado con contenido adecuado, preservando el origen público real. Capturas locales privadas: `output/afw-consumed-proposal-fixed.png`, `output/afw-delivery-v2-comparison.png`.
 
+
+## Guía de archivos observados desplegada
+
+PR #130, fuente 6c822c5, publicada al 100 % con verificaciones previas y posteriores aprobadas. Recibo vigente: [AFW-OBSERVED-GUIDANCE-RELEASE-2026-09-30.es.md](AFW-OBSERVED-GUIDANCE-RELEASE-2026-09-30.es.md). MA-06 y MA-07 tienen evidencia posterior que prevalece sobre los pendientes históricos de este documento. QA retirada; no pedir OTP a esa identidad. La comprobación visual de novedades/guía sigue pendiente.
