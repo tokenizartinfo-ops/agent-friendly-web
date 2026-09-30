@@ -22,4 +22,6 @@ Quitar el ID de la lista cierra las rutas del copilot para ese proyecto sin borr
 
 ## Criterio de apertura
 
+En Access OTP, una identidad retirada no recibe correo aunque la interfaz anuncie envío. Verificar la política exacta y el acceso conservado del owner; no pedir reintentos indefinidos ni registrar ausencia de correo como una respuesta HTTP autenticada. La revocación de una sesión activa es un control distinto: no revocar toda la organización compartida para probar una aplicación AFW.
+
 Entrega integral con una cápsula acreditada; aislamiento/escritura/retirada comprobados; consentimiento, recuperación y soporte operativos. Configurar una lista por sí sola no satisface estos criterios. Abrir primero una beta acotada y acompañada, sin afirmar disponibilidad general.

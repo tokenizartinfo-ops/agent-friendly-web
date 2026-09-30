@@ -20,6 +20,10 @@ La sesión A se recargó después de la retirada y recuperó su expediente. No s
 
 ## Pendiente preciso
 
+Actualización posterior: se solicitó un nuevo OTP para B y el owner informó que no recibió correo, tampoco en spam. La documentación oficial de [Cloudflare OTP](https://developers.cloudflare.com/cloudflare-one/integrations/identity-providers/one-time-pin/) aclara que usuarios bloqueados no reciben código y que la pantalla afirma envío independientemente del resultado. Por tanto, fue incorrecto pedir que esperara un correo o exigir una pantalla de rechazo tras un código que no se enviará. Consulta administrativa posterior volvió a confirmar que solo queda el Allow exacto del owner. Esto acredita retirada de la política y comportamiento de solicitud compatible con bloqueo; no acredita una respuesta posterior a autenticación ni revocación de un token B activo. No repetir solicitudes OTP a B para cerrar ese supuesto requisito.
+
+El owner regresó mediante Chrome habitual: sesión A y expediente recuperado observados. El navegador integrado se congeló repetidamente en el login; Chrome permitió el ingreso humano. Utilizar la pestaña AFW de Chrome ya autorizada, sin abrir otra instancia ni intervenir en pestañas Tokenizart/Atelier.
+
 Se pidió al owner un nuevo ingreso B para observar el rechazo de acceso después de retirar la política. La eliminación administrativa y la preservación del acceso A están comprobadas; el rechazo de nueva autenticación B todavía no. Tampoco se prueba revocación inmediata de una sesión B activa: durante la escritura cruzada la sesión del navegador ya era A.
 
 MA-07: lectura/listado/guardado propio y escritura cruzada comprobados; política QA retirada; aceptación de renovación retirada pendiente. El copilot productivo conserva su expediente piloto único. No declarar apertura general ni incorporar identidades externas por inferencia.
