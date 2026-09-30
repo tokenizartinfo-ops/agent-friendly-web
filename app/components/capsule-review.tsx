@@ -16,6 +16,7 @@ import {
   X,
 } from 'lucide-react';
 import { privateUiCopy } from '../../lib/private-ui-copy.mjs';
+import { draftPlanMatchesComparison } from '../../lib/draft-pr-plan.mjs';
 import { capsuleBuildMessage } from '../../lib/capsule-build-message.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { ConnectorSandbox } from './connector-sandbox';
@@ -376,6 +377,7 @@ export function CapsuleReview({
     }
   }
 
+  const currentDraftPlan = draftPlanMatchesComparison(draftPlan, comparison) ? draftPlan : null;
   const actorDecision = capsule && actorRole ? capsule.approvals[actorRole] : '';
   const canDecide = Boolean(
     loadState === 'ready' && comparisonState === 'ready' &&
@@ -543,12 +545,12 @@ export function CapsuleReview({
                 {busy ? <LoaderCircle className="spin" size={16} /> : <GitPullRequestDraft size={16} />}{copy.prepareDraft}
               </button>
 
-              {draftPlan ? (
+              {currentDraftPlan ? (
                 <div className="draft-plan-result">
                   <div><span>{copy.status}</span><strong>{copy.notSent}</strong></div>
-                  <div><span>{copy.repository}</span><strong>{draftPlan.repository}</strong></div>
-                  <div><span>{copy.proposedBranch}</span><code>{draftPlan.branch}</code></div>
-                  <div><span>{copy.files}</span><strong>{draftPlan.files.length}</strong></div>
+                  <div><span>{copy.repository}</span><strong>{currentDraftPlan.repository}</strong></div>
+                  <div><span>{copy.proposedBranch}</span><code>{currentDraftPlan.branch}</code></div>
+                  <div><span>{copy.files}</span><strong>{currentDraftPlan.files.length}</strong></div>
                   <a className="secondary-action" href={`/api/projects/${projectId}/deployment-capsules/${capsule.capsuleId}/draft-pr-plan?download=1`}>
                     <Download size={16} />{copy.downloadDraft}
                   </a>
@@ -557,8 +559,8 @@ export function CapsuleReview({
             </section>
           ) : null}
 
-          {comparison?.status === 'complete' && draftPlan ? (
-            <ConnectorSandbox capsule={capsule} comparison={comparison} plan={draftPlan} locale={locale} />
+          {comparison?.status === 'complete' && currentDraftPlan ? (
+            <ConnectorSandbox capsule={capsule} comparison={comparison} plan={currentDraftPlan} locale={locale} />
           ) : null}
 
           <div className="capsule-approvals" id="capsule-decisions-review">

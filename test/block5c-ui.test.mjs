@@ -33,10 +33,11 @@ test('capsule review reveals the laboratory only after a complete comparison and
   const source = await readFile('app/components/capsule-review.tsx', 'utf8');
 
   assert.match(source, /ConnectorSandbox/);
-  assert.match(source, /comparison\?\.status === 'complete' && draftPlan/);
+  assert.match(source, /draftPlanMatchesComparison\(draftPlan, comparison\)/);
+  assert.match(source, /comparison\?\.status === 'complete' && currentDraftPlan/);
   assert.match(source, /capsule=\{capsule\}/);
   assert.match(source, /comparison=\{comparison\}/);
-  assert.match(source, /plan=\{draftPlan\}/);
+  assert.match(source, /plan=\{currentDraftPlan\}/);
 });
 
 test('connector laboratory has stable comic desktop and mobile styling', async () => {
