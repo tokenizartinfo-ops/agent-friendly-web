@@ -1,0 +1,7 @@
+# Historial mínimo por campo del expediente
+
+Este bloque registra en cada guardado nuevo qué campos del expediente cambiaron y en qué revisión. El evento no duplica los valores del expediente ni conserva frases del relato. Un endpoint privado devuelve, para cada campo, la última revisión y fecha encontrada entre los 500 eventos más recientes del proyecto. Exige la identidad Cloudflare Access y propiedad del expediente; una respuesta vacía también puede significar que el campo solo figura en eventos anteriores que no tenían este formato o quedan fuera de la ventana consultada.
+
+En el piloto, cuando una nueva propuesta del copilot contradice un dato existente, la interfaz avisa que ese campo registra un cambio anterior y propone comprobarlo juntos. No presenta el cambio anterior como verificación del sitio ni atribuye su origen a la IA. La persona sigue revisando la propuesta y el autoguardado se realiza por el circuito existente. El historial no modifica puntuación, autorizaciones, publicación ni el estado de los campos.
+
+Queda para otro bloque conservar la procedencia específica de cada propuesta (frase aportada, transcripción corregida, observación pública o edición manual) y las decisiones de aceptación/rechazo, con retención, privacidad y reconciliación entre pestañas. No inferir esa procedencia a partir de este historial: por ahora solo acredita que una revisión privada guardó un campo.

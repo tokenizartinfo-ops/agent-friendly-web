@@ -55,7 +55,17 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply, on
   const label = (field: string) => field in labels ? labels[field as keyof typeof labels] : field;
   const [notes, setNotes] = useState('');
   const [result, setResult] = useState<Result | null>(null);
+  const [fieldHistory, setFieldHistory] = useState<Record<string, { revision: number; savedAt: string }>>({});
   const nextTurn = result ? planCopilotNextTurn(draft, result) : null;
+  useEffect(() => {
+    if (!projectId) return;
+    const controller = new AbortController();
+    fetch(`/api/projects/${encodeURIComponent(projectId)}/field-history`, { cache: 'no-store', signal: controller.signal })
+      .then(async response => response.ok ? response.json() : null)
+      .then(payload => { if (!controller.signal.aborted && payload?.fields && typeof payload.fields === 'object') setFieldHistory(payload.fields); })
+      .catch(() => {});
+    return () => controller.abort();
+  }, [projectId]);
   const [selected, setSelected] = useState<string[]>([]);
   const [changes, setChanges] = useState<ReturnType<typeof previewIntakeDraft> | null>(null);
   const [narrativeChanges, setNarrativeChanges] = useState<ReturnType<typeof previewIntakeDraft> | null>(null);
@@ -277,7 +287,7 @@ export function IntakeIntelligentCopilot({ projectId, locale, draft, onApply, on
     <div className="assistant-review-panel" aria-live="polite">
       {status ? <p role="status">{status}</p> : null}
       {result ? <><p>{result.suggestions.length || result.goalGuidance ? result.warning : t.empty}</p>{result.goalGuidance ? <div className="assistant-guidance"><p>{goalGuidanceCopy[locale].intro}</p><p><em>{t.source}: {result.goalGuidance.sourceExcerpt}</em></p><p>{goalGuidanceCopy[locale][result.goalGuidance.mode]}</p></div> : null}{result.suggestions.length ? <><p>{t.evidence}</p><p>{selectionCopy[locale]}</p></> : null}
-        {nextTurn ? <p role="status" className="assistant-guidance">{nextTurnCopy[locale][nextTurn.kind as keyof typeof nextTurnCopy.es].replace('{field}', 'field' in nextTurn ? label(nextTurn.field) : '')}</p> : null}
+        {nextTurn ? <p role="status" className="assistant-guidance">{nextTurnCopy[locale][nextTurn.kind as keyof typeof nextTurnCopy.es].replace('{field}', 'field' in nextTurn ? label(nextTurn.field) : '')}{nextTurn.kind === 'clarify' && fieldHistory[nextTurn.field] ? ` ${locale === 'en' ? 'The dossier records a previous change to this field; let us check it together.' : locale === 'pt' ? 'O dossiê registra uma alteração anterior neste campo; vamos conferi-la juntos.' : 'El expediente registra un cambio anterior en este dato; revisémoslo juntos.'}` : ''}</p> : null}
         <div className="assistant-suggestion-list">{result.suggestions.map(item => <label key={item.field}>
           <input type="checkbox" checked={selected.includes(item.field)} onChange={() => { setSelected(current => current.includes(item.field) ? current.filter(value => value !== item.field) : [...current, item.field]); setChanges(null); }} />
           <span><strong>{label(item.field)}</strong><small>{dossierValueLabel(item.field, item.value, locale)}</small><em>{t.source}: {item.sourceExcerpt}</em></span>
