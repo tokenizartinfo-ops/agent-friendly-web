@@ -100,7 +100,7 @@ La revisión de Cloudflare del jueves 2026-10-01 compara mismo origen/perfil y f
 | MA-03 | Implementado/desplegado | Sesión atómica y migración 0009; pruebas de conflicto/recuperación y restore SQLite local. |
 | MA-04/05 | Implementados/desplegados; aceptación privada parcial | Contenido, guardado, pausa/recarga y entrega probados. Con A autenticada se recuperó la interpretación API, se revisó/guardó y persistió tras recarga sin pagos. No acredita nueva inferencia en esa continuación. Ver recibo privado. |
 | MA-06 | Recorrido integral sintético cerrado; cliente externo pendiente | [Aceptación integral](AFW-INTEGRAL-ACCEPTANCE-2026-09-30.es.md): misma cápsula revisada/aprobada/descargada → archivo exacto instalado → auditoría 9→17 AF0 → comparación coincidente recuperada tras recarga. Historial conservado y destino temporal retirado. No acredita entrega externa ni instalación de v2 sobre el apex. |
-| MA-07 | Aceptación privada parcial | [Identidades A/B](AFW-IDENTITY-B-ACCEPTANCE-2026-09-30.es.md): guardado/recuperación y aislamiento visual en ambas direcciones, con listas propias. Escritura cruzada remota y retirada pendientes. Retirar política QA al terminar; no expira automáticamente. |
+| MA-07 | Escritura cruzada comprobada; política QA retirada | [Recibo vigente](AFW-CROSS-WRITE-ACCEPTANCE-2026-09-30.es.md): guardado propio B, formulario B sin recargar bajo sesión A rechaza escritura y D1 permanece intacta. Política QA retirada; owner conserva acceso. Pendiente observar rechazo de un nuevo login B. |
 | MA-08 | Feed acotado implementado/desplegado | Observaciones compatibles/fechadas; sin scheduler ni bandeja persistida acreditados. |
 | MA-09/10 | Horizonte posterior | Requieren entrega útil acreditada y límites de fuentes/costes. |
 

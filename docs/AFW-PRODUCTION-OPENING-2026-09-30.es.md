@@ -12,6 +12,8 @@ Fecha: 2026-09-30. La web ya está desplegada; la apertura comercial del recorri
 
 ## Alcance inicial recomendable
 
+Actualización de aislamiento: la [escritura cruzada real](AFW-CROSS-WRITE-ACCEPTANCE-2026-09-30.es.md) fue rechazada y la política QA ya fue retirada, conservando owner y datos. Falta observar el rechazo de un nuevo login B. Las menciones anteriores a escritura/retirada pendientes describen el punto de partida; este recibo delimita el estado actual.
+
 Beta por invitación, acompañada, centrada en descubrimiento y contenido, con entrega asistida. El cliente puede terminar en AF1–AF3 según su necesidad. Acciones delegadas, transacciones, ingesta masiva y automatización interna no son requisitos para abrir este servicio inicial.
 
 La decisión de incorporar clientes externos y habilitar sus identidades debe llegar con un paquete revisable: alcance, recursos exactos, consentimiento, límites y retirada. El owner ya autorizó las correcciones ordinarias; no se necesita detener cada bloque técnico.
