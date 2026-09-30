@@ -86,14 +86,6 @@ export async function POST(request: Request, context: RouteContext) {
     }
     return Response.json({ actorRole: role, comparison: parseObject(replayed.comparisonJson), replayed: true }, { headers: { 'cache-control': 'no-store' } });
   }
-  const [existing] = await db.select().from(capsuleOriginComparisons).where(and(
-    eq(capsuleOriginComparisons.capsuleId, capsuleId),
-    eq(capsuleOriginComparisons.manifestSha256, capsuleRow.manifestSha256),
-  )).limit(1);
-  if (existing) {
-    return Response.json({ actorRole: role, comparison: parseObject(existing.comparisonJson), replayed: true }, { headers: { 'cache-control': 'no-store' } });
-  }
-
   const capsule = parseObject(capsuleRow.capsuleJson);
   if (!capsule) return Response.json({ error: 'La capsula almacenada no es valida.' }, { status: 409 });
   const comparisonId = crypto.randomUUID();

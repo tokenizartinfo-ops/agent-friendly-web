@@ -1,0 +1,2 @@
+DROP INDEX `capsule_origin_comparisons_capsule_manifest_unique`;--> statement-breakpoint
+CREATE INDEX `capsule_origin_comparisons_capsule_manifest_created_idx` ON `capsule_origin_comparisons` (`capsule_id`,`manifest_sha256`,`created_at`);

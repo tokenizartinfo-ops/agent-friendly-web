@@ -38,8 +38,12 @@ async function access(projectId: string, capsuleId: string, user: { userId: stri
 }
 
 async function latestPlan(capsuleId: string) {
+  const [comparison] = await getDb().select({ id: capsuleOriginComparisons.id })
+    .from(capsuleOriginComparisons).where(eq(capsuleOriginComparisons.capsuleId, capsuleId))
+    .orderBy(desc(capsuleOriginComparisons.createdAt)).limit(1);
+  if (!comparison) return null;
   const [row] = await getDb().select().from(draftPrPlans)
-    .where(eq(draftPrPlans.capsuleId, capsuleId))
+    .where(and(eq(draftPrPlans.capsuleId, capsuleId), eq(draftPrPlans.comparisonId, comparison.id)))
     .orderBy(desc(draftPrPlans.createdAt)).limit(1);
   return row ? parseObject(row.planJson) : null;
 }

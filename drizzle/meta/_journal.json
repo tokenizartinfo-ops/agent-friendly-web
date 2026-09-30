@@ -71,6 +71,13 @@
       "when": 1790782164924,
       "tag": "0009_volatile_meltdown",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1790800657758,
+      "tag": "0010_origin_comparison_history",
+      "breakpoints": true
     }
   ]
 }
