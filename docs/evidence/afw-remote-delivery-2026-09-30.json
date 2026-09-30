@@ -1,0 +1,56 @@
+{
+  "environment": "temporary_remote_synthetic_fixture",
+  "sourceSha256": "d5ba5206e53ccf35640ed89f2a129fc78aeae14a08992aaa3d71685060a14301",
+  "productionAppSource": "ec3824e3cdd36959ea7b8a20a6ea27c112a9a40f",
+  "worker": "agent-friendly-web-delivery-qa",
+  "cleanup": {
+    "domainDetached": true,
+    "workerDeleted": true
+  },
+  "phases": [
+    {
+      "phase": "missing",
+      "observedAt": "2026-09-30T20:07:33.742Z",
+      "origin": "https://delivery-qa.agentfriendlyweb.dev",
+      "capsuleId": "afw-remote-delivery-20260930",
+      "manifestSha256": "6a03c0f659c3b2bdad7e138149129db3d6eef3da3a124bd4c839ab3fda1d2dc1",
+      "status": "missing",
+      "httpStatus": 404,
+      "currentSha256": null,
+      "proposedSha256": "365f0e545ff002c8f3ee601da570e2e6cac51e925c51705d291ef3d13646d26d"
+    },
+    {
+      "phase": "installed",
+      "observedAt": "2026-09-30T20:08:08.892Z",
+      "origin": "https://delivery-qa.agentfriendlyweb.dev",
+      "capsuleId": "afw-remote-delivery-20260930",
+      "manifestSha256": "6a03c0f659c3b2bdad7e138149129db3d6eef3da3a124bd4c839ab3fda1d2dc1",
+      "status": "unchanged",
+      "httpStatus": 200,
+      "currentSha256": "365f0e545ff002c8f3ee601da570e2e6cac51e925c51705d291ef3d13646d26d",
+      "proposedSha256": "365f0e545ff002c8f3ee601da570e2e6cac51e925c51705d291ef3d13646d26d"
+    },
+    {
+      "phase": "drift",
+      "observedAt": "2026-09-30T20:08:45.397Z",
+      "origin": "https://delivery-qa.agentfriendlyweb.dev",
+      "capsuleId": "afw-remote-delivery-20260930",
+      "manifestSha256": "6a03c0f659c3b2bdad7e138149129db3d6eef3da3a124bd4c839ab3fda1d2dc1",
+      "status": "changed",
+      "httpStatus": 200,
+      "currentSha256": "497270ecd242a1cc80764d587308fb77f7d9cd32a6cf10fa763e068198248455",
+      "proposedSha256": "365f0e545ff002c8f3ee601da570e2e6cac51e925c51705d291ef3d13646d26d"
+    },
+    {
+      "phase": "restored",
+      "observedAt": "2026-09-30T20:09:19.488Z",
+      "origin": "https://delivery-qa.agentfriendlyweb.dev",
+      "capsuleId": "afw-remote-delivery-20260930",
+      "manifestSha256": "6a03c0f659c3b2bdad7e138149129db3d6eef3da3a124bd4c839ab3fda1d2dc1",
+      "status": "unchanged",
+      "httpStatus": 200,
+      "currentSha256": "365f0e545ff002c8f3ee601da570e2e6cac51e925c51705d291ef3d13646d26d",
+      "proposedSha256": "365f0e545ff002c8f3ee601da570e2e6cac51e925c51705d291ef3d13646d26d"
+    }
+  ]
+}
