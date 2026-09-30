@@ -43,7 +43,7 @@ test('private project persistence maps expanded intake without storing event val
     assert.match(route, new RegExp(field));
   }
 
-  assert.match(route, /fields:\s*Object\.keys\(intake\)/);
+  assert.match(route, /changedFields:\s*changedDossierFields\(/);
   assert.doesNotMatch(route, /payloadJson:\s*JSON\.stringify\(intake\)/);
   assert.match(
     route,

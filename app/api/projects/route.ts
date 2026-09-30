@@ -5,6 +5,7 @@ import { projectEvents, siteProjects } from '../../../db/schema';
 import { completionForIntake, nextQuestion, normalizeIntake } from '../../../lib/intake.mjs';
 import { buildRoadmap } from '../../../lib/methodology.mjs';
 import { listOwnerProjects } from '../../../lib/project-directory.mjs';
+import { changedDossierFields } from '../../../lib/dossier-field-history.mjs';
 import { env } from 'cloudflare:workers';
 
 function decodeList(value: string) {
@@ -117,7 +118,7 @@ export async function POST(request: Request) {
         status: 'draft', createdAt: now, updatedAt: now,
       }).onConflictDoNothing().returning({ id: siteProjects.id }),
       db.insert(projectEvents).values({ id: eventId, projectId: id, userId: user.userId,
-        type: 'project_created', payloadJson: JSON.stringify({ contract: raw.contract, requestHash }), createdAt: now,
+        type: 'project_created', payloadJson: JSON.stringify({ contract: raw.contract, requestHash, changedFields: changedDossierFields(null, intake), revision: 1 }), createdAt: now,
       }).onConflictDoNothing(),
     ]);
     const [receipt] = await db.select().from(projectEvents).where(and(eq(projectEvents.id, eventId), eq(projectEvents.userId, user.userId))).limit(1);
@@ -272,7 +273,7 @@ export async function PUT(request: Request) {
   const event = db.insert(projectEvents).select(sql`select
     ${eventId}, ${id}, ${user.userId},
     ${existing ? 'project_updated' : 'project_created'},
-    ${JSON.stringify({ completion, fields: Object.keys(intake), ...(requestKey ? { fingerprint, revision: existing ? expectedRevision + 1 : 1 } : {}) })}, ${now}
+    ${JSON.stringify({ completion, changedFields: changedDossierFields(existing ? present(existing) : null, intake), revision: existing ? expectedRevision + 1 : 1, ...(requestKey ? { fingerprint } : {}) })}, ${now}
     where changes() > 0`);
   let saved: typeof siteProjects.$inferSelect | undefined;
   try {

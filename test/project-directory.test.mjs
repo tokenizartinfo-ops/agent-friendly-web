@@ -37,6 +37,7 @@ test('private directory route authenticates before reading and keeps owner ident
   '../../../db/schema':{siteProjects:{}},
   '../../../lib/intake.mjs':{},'../../../lib/methodology.mjs':{},
   '../../../lib/project-directory.mjs':{listOwnerProjects:async(...args)=>{calls.push(args);return {status:200,projects:[],nextOffset:null};}},
+  '../../../lib/dossier-field-history.mjs':{changedDossierFields(){}},
   'cloudflare:workers':{env:{DB:'owner-scoped-db'}},
  };
  vm.runInNewContext(code,{exports,require:name=>{assert.ok(modules[name],name);return modules[name];},Response,URL,URLSearchParams,crypto});
