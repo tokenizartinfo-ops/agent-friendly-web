@@ -2,6 +2,8 @@
 
 ## Auditoria externa: bloque del 30 de septiembre
 
+Primer bloque delegado implementado localmente: [lectura acotada](AFW-DELEGATED-READ-BLOCK-2026-09-30.es.md), 619 tests aprobados. Aun sin OAuth/endpoints privados de agentes. Dependencias locales parciales por ENOSPC; usar CI limpio para lint/build, restaurar entorno antes del siguiente adaptador. No publicar discovery por la sola existencia de estos modulos.
+
 Propuesta de servicios reales para los pendientes OAuth/A2A: [diseno funcional](AFW-OAUTH-A2A-PROPOSAL-2026-09-30.es.md). Orden recomendado: acceso delegado de solo lectura al expediente, luego tareas A2A con evidencias y propuestas; escritura/publicacion permanecen etapas separadas. Propuesta no implementada ni piloto ampliado.
 
 Consulta nueva de Cloudflare: perfil completo Level 4 (11 aprobadas, 5 pendientes); contenido Level 5 (6 aprobadas, 1 pendiente). No devuelve puntaje numerico. DNSSEC sigue `pending`, sin DS en el padre; no deshabilitarlo ni fabricar descriptores OAuth/A2A. Evidencia y orden de remediacion: [recibo externo](AFW-EXTERNAL-AUDIT-2026-09-30.es.md). La evidencia publica actualizada conserva el baseline; verificar su despliegue antes de afirmar que ya esta publicada. Siguiente incremento comprobable: validar DS y DNS-AID tras la publicacion automatica del Registrar, luego evaluar autenticacion para una API agéntica real.
