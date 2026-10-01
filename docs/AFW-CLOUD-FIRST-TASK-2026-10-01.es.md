@@ -1,5 +1,7 @@
 # Primera tarea cloud: incidencia de arranque
 
+Actualización posterior: una [tarea web de correo](AFW-CLOUD-MAIL-ACCEPTANCE-2026-10-01.es.md) sí ejecutó lectura Gmail y tiene cadencia horaria configurada. Es otro runtime, sin sandbox de código: no resuelve la incidencia de AFW Operations descrita abajo.
+
 Fecha de observación 2026-10-01. Entorno publicado AFW Operations, repositorio visible `tokenizartinfo-ops/agent-friendly-web`, privacidad Solo yo, red restringida GitHub/npm, ningún secreto de red ni variable añadidos. Publicación confirmada; esto no acredita primera tarea iniciada.
 
 Dos intentos sintéticos fallaron antes de crear una tarea: Nuevo chat en superficie Codex con Trabajar en Nube y AFW Operations seleccionado; continuidad desde el setup publicado `01a0f7d3-a806-76c5-a024-6ddf4ccb401b`. Ambos mostraron `Unable to determine project root for task`. El prompt permanece en pantalla; ningún resultado de ejecución ni recibo de tarea se generó. No afirmar PC apagado, evento activo o consumidor funcionando.
