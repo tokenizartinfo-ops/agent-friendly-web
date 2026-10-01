@@ -8,6 +8,8 @@ Después de esa convergencia: once comprobaciones public-edge aprobadas y asset 
 
 Aceptación funcional anterior en Canary: guardado/reapertura/conflicto entre pestañas en sesión real y expediente sintético;658 pruebas, lint y build aprobados. Producción acredita artefacto/configuración y fronteras públicas/Access. No afirmar interacción privada productiva por los smokes anónimos. El plan es declarativo: acceso not_verified, authorization none y publicationStatus not_published; no entrega acceso al hosting ni instala cápsulas.
 
+Comprobación privada posterior separada de los smokes: Chrome habitual abrió el expediente piloto6e972c18-cae1-402b-b959-646abd8499d7 en producción con la sesión existente. Después de hidratar, UI confirmó Expediente recuperado, Copilot inteligente y relato de trabajo guardado en privado. No se modificaron campos ni se envió el relato al proveedor en esta comprobación. Acredita recuperación privada del piloto, no un nuevo guardado productivo del plan, conexión ChatGPT ni apertura del copilot a todos los clientes.
+
 Reportes locales ignorados: output/asset-propagation-{before,immediate,settled}.jsonl y output/asset-propagation-active-smoke.json; fuente de la sonda output/asset-propagation-probe.mjs; deployment output/asset-propagation-final-deployment.log.
 
 ## Procedimiento para los próximos despliegues
