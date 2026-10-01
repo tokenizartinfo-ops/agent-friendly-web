@@ -408,7 +408,7 @@ export function CapsuleReview({
         <div><strong>{copy.noWrite}</strong><span>{copy.noWriteBody}</span></div>
       </div>
 
-      <CapsuleGuidance locale={locale} hasCapsule={Boolean(capsule)} canRefresh={Boolean(projectId)&&!busy&&loadState!=='loading'} onRefresh={()=>{void loadCapsule();}} state={capsuleGuideState({projectId,loadState,status:capsule?.status||'',canDecide,allowBuild,comparisonState,filesObservedUnchanged:capsuleFilesObservedUnchanged(capsule,comparison),comparisonStatus:capsuleEvidenceMatches(capsule,comparison)?comparison?.status||'':''})}/>
+      <CapsuleGuidance deliveryScope={actorRole==='owner'&&capsule?{projectId,capsuleId:capsule.capsuleId,manifestSha256:capsule.integrity.manifestSha256}:undefined} locale={locale} hasCapsule={Boolean(capsule)} canRefresh={Boolean(projectId)&&!busy&&loadState!=='loading'} onRefresh={()=>{void loadCapsule();}} state={capsuleGuideState({projectId,loadState,status:capsule?.status||'',canDecide,allowBuild,comparisonState,filesObservedUnchanged:capsuleFilesObservedUnchanged(capsule,comparison),comparisonStatus:capsuleEvidenceMatches(capsule,comparison)?comparison?.status||'':''})}/>
 
       {!capsule ? (
         <div className="capsule-empty">
