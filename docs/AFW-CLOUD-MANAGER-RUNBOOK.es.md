@@ -1,6 +1,6 @@
 # Gerente AFW: preparación de Codex Cloud
 
-Estado 2026-10-01: preparación local y acceso GitHub en revisión; entorno aún no publicado. Preferencia explícita del owner: **GPT 6.1 Sol (`gpt-6.1-sol`), razonamiento bajo (`low`), velocidad Standard**, con uso de suscripción. Configurar en el selector disponible del cliente; este documento no cambia el modelo ni acredita activación.
+Estado 2026-10-01: acceso GitHub y primer setup cloud comprobados; entorno **AFW Operations** todavía no publicado. [Evidencia y ajustes](AFW-CLOUD-SETUP-2026-10-01.es.md). Preferencia explícita del owner: **GPT 6.1 Sol (`gpt-6.1-sol`), razonamiento bajo (`low`), velocidad Standard**, con uso de suscripción. La interfaz mostró GPT-6.1 Sol Bajo; este documento por sí solo no configura modelo, velocidad ni billing.
 
 ## Qué se lleva a la nube
 

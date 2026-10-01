@@ -126,13 +126,29 @@ export async function runCloudflareNativeSmoke({
       }
 
       if (route.boundary === 'private') {
-        const ok = isLocalPrivateBoundary(response);
+        let ok, boundary = route.boundary;
+        if (route.path === '/api/projects') {
+          boundary = 'application_auth';
+          const contentType = response.headers.get('content-type') || '';
+          const body = await readBoundedBody(response);
+          let denial;
+          try { denial = JSON.parse(body); } catch { denial = null; }
+          ok = response.status === 401 && contentType.toLowerCase().startsWith('application/json')
+            && response.headers.get('cache-control')?.split(',').map(value => value.trim().toLowerCase()).includes('no-store')
+            && denial && Object.keys(denial).length === 1 && denial.error === 'Inicia sesion para abrir tu expediente.';
+        } else if (route.path === '/api/projects/probe') {
+          // No application route exists here. Only edge mode proves Access on the subtree.
+          boundary = 'local_missing_route';
+          ok = response.status === 404;
+        } else {
+          ok = isLocalPrivateBoundary(response);
+        }
         cancelWithoutBlocking(response.body);
         checks.push({
           path: route.path,
-          boundary: route.boundary,
+          boundary,
           status: response.status,
-          ok,
+          ok: Boolean(ok),
           ...(ok ? {} : { error: 'private route did not fail closed' }),
         });
         continue;
