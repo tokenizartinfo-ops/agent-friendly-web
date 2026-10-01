@@ -1,5 +1,7 @@
 # Roadmap operativo y continuidad de AFW
 
+2026-10-01: PR140 integrada (`5f60a23`), CI completo aprobado. [Canary delegado](AFW-DELEGATED-CANARY-2026-10-01.es.md) preparado con D1/KV/Access nuevos y datos sintéticos; guardas de plazo/límite comprobadas, 630 pruebas. Aceptación autenticada en edge pendiente; no mezclar su AUD ni recursos con producción. Próxima intervención del owner solo para consentimiento cuando se confirme la superficie remota.
+
 Continuidad OAuth posterior: [bloque local completo](AFW-DELEGATED-OAUTH-LOCAL-2026-09-30.es.md), 628 pruebas y revisión independiente. Instalación restaurada; consentimiento, PKCE, lectura y desconexión comprobados con identidad sintética. Config desactivada por defecto, sin despliegue privado ni migraciones remotas. Próximo: canary aislado y aceptación real; no publicar discovery en el apex por esta prueba. Priorizar CI para builds pesados y conservar documentación histórica.
 
 ## Auditoria externa: bloque del 30 de septiembre

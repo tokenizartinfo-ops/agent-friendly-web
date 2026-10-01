@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "name": "agent-friendly-web-delegated-canary",
+  "main": "worker/delegated/index.mjs",
+  "compatibility_date": "2026-09-07",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {"enabled": false},
+  "vars": {
+    "AFW_DELEGATED_OAUTH_ENABLED": "false",
+    "AFW_OAUTH_ISSUER": "https://delegated-canary.agentfriendlyweb.dev",
+    "AFW_OAUTH_RESOURCE": "https://delegated-canary.agentfriendlyweb.dev/mcp",
+    "AFW_OAUTH_PILOT_CLIENT_ID": "afw-canary-loopback-20261001",
+    "AFW_OAUTH_PILOT_EXPIRES_AT": "2026-10-02T12:14:20.000Z",
+    "ACCESS_TEAM_DOMAIN": "tokenizart.cloudflareaccess.com",
+    "ACCESS_AUD": "02b03e27a446409b924b6c2b2ee48a91d1845717c9d3433575d0d4634cc99138"
+  },
+  "kv_namespaces": [{"binding": "OAUTH_KV", "id": "6b94ff702e504e14a7730cee73a0f6ff"}],
+  "d1_databases": [{"binding": "DB", "database_name": "agent-friendly-web-delegated-canary", "database_id": "6a728254-1494-4039-802e-b39288a55fcc"}],
+  "ratelimits": [{"name": "DELEGATED_RATE_LIMITER", "namespace_id": "88231", "simple": {"limit": 30,"period": 60}}],
+  "routes": [{"pattern": "delegated-canary.agentfriendlyweb.dev", "custom_domain": true}]
+}
