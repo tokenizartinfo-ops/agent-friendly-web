@@ -1,5 +1,15 @@
 import { index, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 
+export const deliveryPlans = sqliteTable('delivery_plans', {
+  capsuleId: text('capsule_id').primaryKey(),
+  projectId: text('project_id').notNull(),
+  userId: text('user_id').notNull(),
+  revision: integer('revision').notNull(),
+  mutationKey: text('mutation_key').notNull(),
+  payload: text('payload').notNull(),
+  updatedAt: text('updated_at').notNull(),
+},table=>[index('delivery_plans_project_user_idx').on(table.projectId,table.userId)]);
+
 export const delegatedAccessGrants = sqliteTable('delegated_access_grants', {
   id: text('id').primaryKey(),
   userId: text('user_id').notNull(),
