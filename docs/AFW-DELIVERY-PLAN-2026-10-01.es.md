@@ -10,4 +10,4 @@ La API exige owner del proyecto, cápsula de ese proyecto, Origin exacto para es
 
 Verificación fuente: 657 tests aprobados, lint sin errores (una advertencia de imagen preexistente), build completo. Pruebas SQLite usan la migración real; pruebas de ruta cubren anonimato, otro owner, cápsula ajena, Origin externo y tamaño. No acredita D1 remoto ni aceptación de UI autenticada.
 
-Promoción pendiente: aplicar migración primero en entorno AFW identificado, revisar UI/guardado/reapertura/conflicto y luego entregar fuente comprobada. Rollback de código conserva la tabla y planes; no retirar columnas ni borrar registros. Producción no fue migrada ni desplegada por este bloque.
+Canary publicado y migrado: ver [recibo y aceptación pendiente](AFW-DELIVERY-PLAN-CANARY-2026-10-01.es.md). Falta comprobar UI/guardado/reapertura/conflicto antes de producción. Rollback de código conserva la tabla y planes; no retirar columnas ni borrar registros. Producción no fue migrada ni desplegada por este bloque.
