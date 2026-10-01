@@ -20,3 +20,11 @@ Producción confirmada en el recibo anterior: fuente `644e605`, versión `0f3eb3
 ## Ajuste de navegación en preparación
 
 El botón del copilot y el de novedades compartían una instrucción de apertura en estado React. Después de cerrar manualmente el desplegable, repetir la acción con el estado ya verdadero podía no reabrirlo. El ajuste preparado abre explícitamente el panel antes de llevar foco a su resumen y desplazarlo, manteniendo la vista breve y los datos. La prueba de reapertura repetida es local; consultar el recibo posterior para conocer integración/despliegue.
+
+## Confirmación posterior de la guía
+
+El 2026-09-30 el owner transcribió el mensaje visible «En la última comparación, los archivos coincidían con esta versión», su explicación de lectura histórica y los enlaces a archivos, comparación y responsables. También informó cápsula v1, dominio `delivery-qa.agentfriendlyweb.dev`, vencimiento 7 de octubre y prefijo de manifiesto `4acca65760b66a`, compatibles con el ensayo MA-06.
+
+Se cierra la comprobación manual del mensaje de PR #130: reconoce coincidencia observada, evita repetir entrega según esa lectura y no promete certificación ni vigencia actual. Esta confirmación prevalece sobre el pendiente de mensaje anterior. Es una declaración del owner sobre la UI, sin captura del agente ni nueva comparación remota. El destino sintético fue retirado; no se acredita que esos archivos sigan disponibles ahora.
+
+El ajuste de reapertura ya fue desplegado en PR #134, fuente `7c049da`; ver [recibo de navegación](AFW-DELIVERY-NAVIGATION-RELEASE-2026-09-30.es.md). Esta lectura del mensaje no prueba por sí sola la reapertura repetida ni fallos de consulta. Próximo cierre útil: aceptación de inferencia/revisión/guardado del piloto y preparación de una beta acompañada concreta, preservando el alcance actual y los pendientes operativos separados.

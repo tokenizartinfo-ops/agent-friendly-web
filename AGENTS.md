@@ -8,7 +8,7 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 - Current release provenance: `docs/AFW-GUIDED-RELEASE-2026-09-30.es.md`; previous releases remain dated evidence under `docs/`. Verify the active deployment again before publishing; a worktree HEAD alone does not represent the frozen production source.
 
-- Latest runtime release: `docs/AFW-DELIVERY-NAVIGATION-RELEASE-2026-09-30.es.md` (PR #134, source 7c049da). Includes PR #130 observed file guidance and PR #132 saved updates read states. MA-08 normal updates navigation/date was confirmed manually by the owner; agent browser control, repeated-reopen UI and guidance-message acceptance remain separate. MA-06/07 receipts remain valid; QA Access policy was withdrawn. Do not request OTP for a removed identity. Preserve comparison history on code rollback.
+- Latest runtime release: `docs/AFW-DELIVERY-NAVIGATION-RELEASE-2026-09-30.es.md` (PR #134, source 7c049da). Includes PR #130 observed file guidance and PR #132 saved updates read states. Owner manually confirmed MA-08 normal navigation/date and the historical-match guidance message; see `docs/AFW-UPDATES-MANUAL-ACCEPTANCE-2026-09-30.es.md`. Do not repeat those questions. Agent browser control, repeated-reopen UI and failed-read acceptance remain separate. MA-06/07 receipts remain valid; QA Access policy was withdrawn. Do not request OTP for a removed identity. Preserve comparison history on code rollback.
 
 - `public_web`: `https://agentfriendlyweb.dev`, the only canonical public origin.
 - `afw_private`: private paths and APIs use Cloudflare Access on an `agentfriendlyweb.dev` hostname or path.
