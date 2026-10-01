@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## Auditoria externa: bloque del 30 de septiembre
+
+Consulta nueva de Cloudflare: perfil completo Level 4 (11 aprobadas, 5 pendientes); contenido Level 5 (6 aprobadas, 1 pendiente). No devuelve puntaje numerico. DNSSEC sigue `pending`, sin DS en el padre; no deshabilitarlo ni fabricar descriptores OAuth/A2A. Evidencia y orden de remediacion: [recibo externo](AFW-EXTERNAL-AUDIT-2026-09-30.es.md). La evidencia publica actualizada conserva el baseline; verificar su despliegue antes de afirmar que ya esta publicada. Siguiente incremento comprobable: validar DS y DNS-AID tras la publicacion automatica del Registrar, luego evaluar autenticacion para una API agéntica real.
+
 Actualizado: 2026-09-30. Fuente inicial: [microauditoría](AFW-MICROAUDIT-2026-09-30.es.md), base `9f3d869822080a2f30a242c3fdd29b5ad4bbc392`. MA-01..05 ya están implementados y desplegados: [recibo actual](AFW-GUIDED-RELEASE-2026-09-30.es.md). Los cierres privados y bloques posteriores se distinguen abajo. Conservar la historia de entregas.
 
 ## Resultado que dirige el trabajo
