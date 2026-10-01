@@ -70,6 +70,51 @@ test('connections explain withdrawn and expired permissions without offering red
   }finally{f.close();}
 });
 
+test('standard authorization selects an owned project in consent without a client-specific query',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
+    f.sqlite.prepare("INSERT INTO site_projects SELECT 'p-a2',user_id,'Second <site>',website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at FROM site_projects WHERE id='p-a'").run();
+    const a=await authorize(f,{project:null});assert.equal(a.response.status,200);
+    assert.match(a.html,/<select name="project" required>/);assert.match(a.html,/Second &lt;site&gt;/);
+    assert.ok(!a.html.includes('value="p-b"'));assert.ok(!a.html.includes('selected'));
+    assert.equal((await approve(f,a)).status,400);
+    assert.equal((await approve(f,a,{project:['p-a','p-a2']})).status,400);
+    assert.equal((await approve(f,a,{project:'p-b'})).status,404);
+    const redirect=await approve(f,a,{project:'p-a2'});assert.equal(redirect.status,302);
+    assert.equal(f.sqlite.prepare('SELECT project_id FROM delegated_access_grants').get().project_id,'p-a2');
+    assert.equal((await exchange(f,redirect.headers.get('Location'),a.verifier)).status,200);
+  }finally{f.close();}
+});
+
+test('project consent handles no projects, cancellation, pinned tampering and ownership changes',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
+    const pinned=await authorize(f);assert.equal((await approve(f,pinned,{project:'p-b'})).status,400);
+    const a=await authorize(f,{project:null});assert.equal(a.response.status,200);
+    assert.equal((await approve(f,a,{decision:'deny'})).status,302);
+    const b=await authorize(f,{project:null});
+    f.sqlite.prepare("UPDATE site_projects SET user_id='owner-b' WHERE id='p-a'").run();
+    assert.equal((await approve(f,b,{project:'p-a'})).status,404);
+    const empty=await authorize(f,{project:null});assert.equal(empty.response.status,200);
+    assert.match(empty.html,/Todavía no tenés un expediente/);assert.ok(!empty.html.includes('Permitir lectura'));
+    assert.equal(f.sqlite.prepare('SELECT count(*) n FROM delegated_access_grants').get().n,0);
+  }finally{f.close();}
+});
+
+test('project picker stays bounded and rejects duplicate query, expired consent and replay',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
+    const a=await authorize(f,{project:null});assert.match(a.html,/name="project" value="p-a"/);
+    const repeated=await f.request('/authorize?'+a.query+'&project=p-a&project=p-a');assert.equal(repeated.status,400);
+    const redirect=await approve(f,a,{project:'p-a'});assert.equal(redirect.status,302);
+    assert.notEqual((await approve(f,a,{project:'p-a'})).status,302);
+    const b=await authorize(f,{project:null});f.setTime(new Date(Date.now()+20*60*1000).toISOString());
+    assert.equal((await approve(f,b,{project:'p-a'})).status,403);
+    f.setTime(new Date().toISOString());
+    for(let i=0;i<20;i++)f.sqlite.prepare("INSERT INTO site_projects SELECT ?,user_id,organization,website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at FROM site_projects WHERE id='p-a'").run('extra-'+i);
+    const bounded=await authorize(f,{project:null});assert.equal(bounded.response.status,200);
+    assert.match(bounded.html,/Elegí el expediente desde AFW/);assert.ok(!bounded.html.includes('Permitir lectura'));
+    assert.equal(f.sqlite.prepare('SELECT count(*) n FROM delegated_access_grants').get().n,1);
+  }finally{f.close();}
+});
+
 test('PKCE, audience and code replay failures do not issue a reusable token',async()=>{
   const f=await localOAuthFixture(createDelegatedOAuthWorker);try {
     let a=await authorize(f);let r=await approve(f,a);

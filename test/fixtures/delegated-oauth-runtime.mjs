@@ -39,11 +39,13 @@ export async function authorize(f,{project='p-a',identity='owner-a',scope='afw:p
   const verifier='a'.repeat(64);
   const challenge=Buffer.from(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(verifier))).toString('base64url');
   const query=new URLSearchParams({response_type:'code',client_id:f.client.clientId,redirect_uri:'http://localhost:8950/callback',resource:f.resource,scope,state:'local-state',code_challenge:challenge,code_challenge_method:'S256',project,...params});
+  if(project===null)query.delete('project');
   const response=await f.request('/authorize?'+query,{},identity);
   return {response,html:await response.text(),cookie:cookies(response),verifier,query};
 }
-export async function approve(f,a,{identity='owner-a',scope=['afw:project:read','afw:evidence:read'],cookie=a.cookie}={}){
-  const form=new URLSearchParams({handle:handle(a.html),decision:'approve'});for(const s of scope)form.append('scope',s);
+export async function approve(f,a,{identity='owner-a',scope=['afw:project:read','afw:evidence:read'],cookie=a.cookie,project,decision='approve'}={}){
+  const form=new URLSearchParams({handle:handle(a.html),decision});for(const s of scope)form.append('scope',s);
+  if(project!==undefined)for(const value of Array.isArray(project)?project:[project])form.append('project',value);
   return f.request('/authorize',{method:'POST',headers:{Origin:f.issuer,Cookie:cookie,'Content-Type':'application/x-www-form-urlencoded'},body:form},identity);
 }
 export async function exchange(f,redirect,verifier,extra={}){
