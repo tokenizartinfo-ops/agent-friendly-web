@@ -53,6 +53,23 @@ test('consent cannot cross subjects, projects, browsers, redirect URIs or scopes
   } finally {f.close();}
 });
 
+test('connections explain withdrawn and expired permissions without offering redundant disconnect',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
+    assert.match(await (await f.request('/connections')).text(),/No tenés conexiones/);
+    const a=await authorize(f);await approve(f,a);
+    let html=await (await f.request('/connections')).text();
+    assert.match(html,/Conectada/);assert.match(html,/<button>Desconectar<\/button>/);
+    assert.ok(!html.includes('owner-a'));
+    f.sqlite.prepare("UPDATE delegated_access_grants SET expires_at='2020-01-01T00:00:00Z'").run();
+    html=await (await f.request('/connections')).text();
+    assert.match(html,/Permiso vencido/);assert.ok(!html.includes('<button>Desconectar</button>'));
+    f.sqlite.prepare("UPDATE delegated_access_grants SET revoked_at='2026-10-01T13:00:00Z'").run();
+    html=await (await f.request('/connections')).text();
+    assert.match(html,/Desconectada/);assert.ok(!html.includes('<button>Desconectar</button>'));
+    assert.ok(!html.includes(' · revoked · '));
+  }finally{f.close();}
+});
+
 test('PKCE, audience and code replay failures do not issue a reusable token',async()=>{
   const f=await localOAuthFixture(createDelegatedOAuthWorker);try {
     let a=await authorize(f);let r=await approve(f,a);
