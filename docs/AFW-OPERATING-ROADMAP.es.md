@@ -1,5 +1,7 @@
 # Roadmap operativo y continuidad de AFW
 
+Continuidad del intento OAuth: [corrección de políticas de navegador](AFW-OAUTH-CONSENT-FIX-2026-10-01.es.md), PR142 integrada (`6d42ac2`), canary fuente `7ade40e`, versión `27238a30-4ace-49de-bfec-d833449582a8`. Owner autenticado llegó a Permitir lectura, pero el primer intento dejó cero grants; corregidos contrato Origin/referrer y retorno CSP. Cliente nuevo esperando consentimiento; no pedir otro login por ese fallo. Lectura/retirada reales siguen pendientes hasta recibir evidencia del proceso; si el enlace venció, generar otro y conservar sesión Chrome.
+
 2026-10-01: PR140 integrada (`5f60a23`), CI completo aprobado. [Canary delegado](AFW-DELEGATED-CANARY-2026-10-01.es.md) preparado con D1/KV/Access nuevos y datos sintéticos; guardas de plazo/límite comprobadas, 630 pruebas. Aceptación autenticada en edge pendiente; no mezclar su AUD ni recursos con producción. Próxima intervención del owner solo para consentimiento cuando se confirme la superficie remota.
 
 Continuidad posterior: canary fuente `a3facaa` desplegado y habilitado en ventana acotada, versión `807bf611-a4e1-4bc7-bb6c-ffd2062da58b`. Siete probes antes y después aprobados, Access/discovery/challenge correctos; producción sin cambio. Falta consentimiento y retirada con cliente loopback real. El proceso genera enlace efímero (no conservarlo); si ya venció, reiniciar `node scripts/check-delegated-canary.mjs`. No confundir este canary sintético con activación OAuth del expediente productivo ni publicar discovery en el apex todavía.
