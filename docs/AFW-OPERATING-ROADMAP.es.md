@@ -142,6 +142,8 @@ La revisión de Cloudflare del jueves 2026-10-01 compara mismo origen/perfil y f
 
 ## Apertura de producción
 
+Actualización2026-10-01: plan de entrega persistido y disponible durante revisión/comparación pendiente, sin conceder acceso ni publicación. Guardado, reapertura y conflicto entre pestañas comprobados en Canary. Producción fuente4788e5a, versión00861678-d968-41d3-be85-180896a321b7 activa, con smokes y hash específico después de convergencia del despliegue. [Recibo y procedimiento](AFW-DELIVERY-PLAN-RELEASE-2026-10-01.es.md). Siguientes bloques: comprobación real de accesos por método, consulta delegada desde ChatGPT y primera tarea cloud (aún bloqueada al iniciar; no guardia24/7). No repetir aceptación ya completada ni trasladar datos privados a herramientas externas por esta actualización.
+
 La web está desplegada; el recorrido privado todavía no está abierto a clientes generales. Seguir [la puerta de salida para beta acompañada](AFW-PRODUCTION-OPENING-2026-09-30.es.md): corrección de mensajes → entrega real controlada → aislamiento/retirada → habilitación acotada → primer cliente. No ampliar el piloto por inferencia.
 
 Continuidad vigente tras PR #126: comenzar por MA-07, no repetir la entrega sintética. La sesión del owner confirmó aprobación y lectura coincidente. Se solicitó la segunda identidad para escritura cruzada; si el navegador no controla la pestaña anterior, recuperar control antes de afirmar una petición remota. Procedimiento de beta preparado en [operaciones](AFW-BETA-OPERATIONS-2026-09-30.es.md); rollout productivo aún de un solo expediente.
