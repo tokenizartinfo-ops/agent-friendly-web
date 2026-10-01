@@ -38,6 +38,7 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - [Agent Skills index](https://agentfriendlyweb.dev/.well-known/agent-skills/index.json)
 - [External verification human guide](https://agentfriendlyweb.dev/verificacion-externa)
 - [Security policy](https://agentfriendlyweb.dev/.well-known/security.txt)
+- [Authentication and authorization boundary](https://agentfriendlyweb.dev/auth.md)
 - [Crawler policy catalog](https://agentfriendlyweb.dev/.well-known/crawler-policy-catalog.json)
 - [Readiness comparison contract](https://agentfriendlyweb.dev/.well-known/readiness-comparison-contract.json)
 - [Intake assistant contract](https://agentfriendlyweb.dev/.well-known/intake-assistant-contract.json)
@@ -56,7 +57,7 @@ Agent Friendly Web measures public evidence about how agents can discover, under
 - Public scans are read-only and do not authenticate to the target website.
 - `llms.txt` is a community proposal, not a mandatory crawler standard.
 - WebMCP is treated as an experimental W3C Community Group draft.
-- The private owner dossier requires sign-in and must not be crawled or inferred.
+- The private owner dossier uses Cloudflare Access email OTP. It does not use ChatGPT identity; agent OAuth is not deployed.
 - The repo-first read-only CLI and the public stateless MCP read-only server are deployed. MCP exposes only four bounded public tools and four public resources; A2A, WebMCP and x402 are not production capabilities.
 - The publication capsule is a deployed private workflow for manual handoff. It prepares files, hashes and human approvals, but it does not modify the target website, call a CMS or deploy code.
 - The AI Catalog links the OKF bundle as an Agent Friendly Web project convention; OKF v0.2 does not define a universal discovery endpoint.
