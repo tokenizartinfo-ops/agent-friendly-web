@@ -1,7 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {capsuleGuideState,capsuleEvidenceMatches,capsuleFilesObservedUnchanged,CAPSULE_GUIDE_COPY} from '../lib/capsule-guidance.mjs';
+import {capsuleGuideState,capsuleEvidenceMatches,capsuleFilesObservedUnchanged,canPlanDelivery,CAPSULE_GUIDE_COPY} from '../lib/capsule-guidance.mjs';
 const base={projectId:'example',loadState:'ready',status:'owner_approval_pending',canDecide:true,allowBuild:true,comparisonStatus:'complete'};
+
+test('declarative delivery planning does not require a public comparison or confer approval',()=>{
+ for(const state of ['compare','incomplete','review','waiting','handoff']) assert.equal(canPlanDelivery(state),true);
+ for(const state of ['save','loading','comparisonLoading','comparisonUnavailable','unavailable','prepare','awaitPreparation','unknown','expired','rejected','observedUnchanged',null,'other']) assert.equal(canPlanDelivery(state),false);
+ const before=capsuleGuideState({...base,comparisonStatus:''});
+ assert.equal(before,'compare'); assert.equal(canPlanDelivery(before),true);
+ assert.equal(capsuleGuideState({...base,comparisonStatus:'incomplete'}),'incomplete');
+});
 test('does not imply a saved project, loaded evidence or build permission',()=>{
  assert.equal(capsuleGuideState({...base,projectId:''}),'save');
  assert.equal(capsuleGuideState({...base,loadState:'loading'}),'loading');
