@@ -1,6 +1,6 @@
 # AFW: operación cloud y mejora continua
 
-Estado: diseño propuesto y comprobación documental del 2026-10-01. No se creó un entorno Codex Cloud, scheduler, webhook, sesión API ni agente de guardia. El owner solicita operación sin depender de su ordenador, control de correo y mejora recursiva para AFW y futuros productos. Este diseño conserva las fronteras por proyecto y los recorridos de usuarios ya implementados.
+Estado inicial: diseño propuesto y comprobación documental del 2026-10-01. En ese momento no se había creado entorno, scheduler, webhook, sesión API ni agente de guardia. Estado posterior del mismo día: AFW Operations fue publicado; inbox probado localmente, runtime operacional y disparador remoto pendientes. Consultar el [runbook vigente](AFW-CLOUD-MANAGER-RUNBOOK.es.md) y la [guía de adopción](AFW-OPERATIONS-ADOPTION-GUIDE.es.md). El owner solicita operación sin depender de su ordenador, control de correo y mejora recursiva para AFW y futuros productos. Este diseño conserva las fronteras por proyecto y los recorridos de usuarios ya implementados.
 
 ## Decisión recomendada
 
