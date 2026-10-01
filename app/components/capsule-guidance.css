@@ -2,3 +2,4 @@
 .capsule-guidance h3{font:400 28px/1.2 var(--font-comic),sans-serif;margin:0 0 16px}.capsule-guidance p{margin:10px 0}.capsule-guidance nav{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
 .capsule-guidance nav a,.capsule-guidance summary{min-height:44px;padding:10px 8px;cursor:pointer}.capsule-guidance nav a{color:inherit;text-decoration:underline}.capsule-guidance summary{padding-left:0}.capsule-guidance-boundary{font-size:14px}
 .capsule-guidance :focus-visible{outline:3px solid #7c5127;outline-offset:3px}#capsule-files-review,#capsule-comparison-review,#capsule-decisions-review{scroll-margin-top:110px}
+.delivery-advisor label{display:grid;gap:8px}.delivery-advisor select{width:100%;max-width:480px;min-height:44px;padding:8px;font:inherit;background:#fff;color:inherit;border:1px solid #bcb1a2}
