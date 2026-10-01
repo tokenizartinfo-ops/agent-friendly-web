@@ -29,3 +29,13 @@ Los documentos existentes `llms.txt`, `llms-full.txt`, API catalog, MCP server c
 Este bloque corrige evidencia publica desactualizada y el reclamo de alojamiento Sites 27. No cambia el puntaje, la metodologia AF, datos privados, permisos ni el piloto del copilot. Publicacion de esta evidencia requiere conservar la configuracion congelada del Worker de produccion; rollback a `c6175cff-42ca-490d-8507-96c5fce23126`, sin migraciones de D1.
 
 Fuentes: https://developers.cloudflare.com/dns/dnssec/ ; https://developers.cloudflare.com/registrar/get-started/enable-dnssec/ ; https://blog.cloudflare.com/agent-readiness/ .
+
+## Publicacion verificada
+
+PR #137 integrada; fuente de produccion `66fc04c51b95812a7f0b4caf169ffc278d4d3608`. CI de PR y main aprobada, main run `36796256171`, artefacto `afw-build-66fc04c51b95812a7f0b4caf169ffc278d4d3608`. 610 pruebas, lint sin errores (una advertencia existente), tipos y build aprobados.
+
+Worker version `d09bcf52-6fae-4c34-bfec-40b715384205`, deployment `83a8bd57-2af6-4131-a4a7-1bd049cd3123`, 100 %. Configuracion congelada identica a la release anterior; sin migraciones, cambios de Access o ampliacion del piloto. Rollback: version `c6175cff-42ca-490d-8507-96c5fce23126` al 100 %, conservando D1.
+
+Antes de promover se incluyo la candidata al 0 % junto a la anterior al 100 %, deployment `60b163c3-5f63-45e6-a485-400c8fe7446a`. Smoke general de 11 comprobaciones y smoke especifico de perfiles/pagina aprobados con override, y repetidos despues de promover. Reportes privados: `output/external-audit-20260930/{staged,public}-general-smoke.json` y `{staged,public}-evidence-smoke.json`.
+
+**Correccion operativa**: el primer override tras `versions upload` devolvio la version anterior; el smoke especifico lo detecto. Segun Cloudflare, el override solo funciona para versiones incluidas en el despliegue activo. No atribuir una comprobacion previa a la candidata por la sola presencia de ese header. Los recibos anteriores mantienen sus comprobaciones posteriores de produccion; sus smokes previos sin despliegue al 0 % no demuestran la candidata. Fuente: https://developers.cloudflare.com/workers/versions-and-deployments/version-overrides/ . Esta correccion debe aplicarse en las siguientes releases.

@@ -6,6 +6,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Canonical surfaces
 
+- Latest production source after external evidence refresh: `66fc04c51b95812a7f0b4caf169ffc278d4d3608` (PR #137), Worker version `d09bcf52-6fae-4c34-bfec-40b715384205`. Receipt: `docs/AFW-EXTERNAL-AUDIT-2026-09-30.es.md`. Version overrides only prove a candidate when it is included in the active deployment, even at 0%; add it at 0% with the current version at 100%, verify candidate-specific content, then promote. An uploaded-only override silently falls back to active traffic. Preserve pilot bindings and D1. DNSSEC remains pending parent DS; do not claim a numeric external score increase.
+
 - Current release provenance: `docs/AFW-GUIDED-RELEASE-2026-09-30.es.md`; previous releases remain dated evidence under `docs/`. Verify the active deployment again before publishing; a worktree HEAD alone does not represent the frozen production source.
 
 - Latest runtime release: `docs/AFW-DELIVERY-NAVIGATION-RELEASE-2026-09-30.es.md` (PR #134, source 7c049da). Includes PR #130 observed file guidance and PR #132 saved updates read states. Owner manually confirmed MA-08 normal navigation/date and the historical-match guidance message; see `docs/AFW-UPDATES-MANUAL-ACCEPTANCE-2026-09-30.es.md`. Do not repeat those questions. Agent browser control, repeated-reopen UI and failed-read acceptance remain separate. MA-06/07 receipts remain valid; QA Access policy was withdrawn. Do not request OTP for a removed identity. Preserve comparison history on code rollback.
