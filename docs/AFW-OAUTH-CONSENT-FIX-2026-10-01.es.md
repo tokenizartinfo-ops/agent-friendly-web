@@ -1,5 +1,7 @@
 # Corrección de formulario OAuth
 
+Continuidad posterior, 2026-10-01: consentimiento, lectura y retirada reales aprobados en Chrome y cliente MCP; canary cerrado conservando datos. Véase [aceptación y cierre](AFW-OAUTH-ACCEPTANCE-2026-10-01.es.md). Los pendientes descritos abajo corresponden al momento de la corrección.
+
 El owner llegó al consentimiento del canary y pulsó Permitir lectura; recibió el mensaje genérico de conexión fallida. Lectura acotada posterior de D1 del canary: un consentimiento no consumido, cero grants. No se emitió un permiso por ese intento. No se inspeccionaron cookies/tokens del navegador.
 
 La página respondía `Referrer-Policy: no-referrer` y el servidor exige `Origin` igual al issuer para los POST humanos. Según [Fetch, append a request Origin header](https://fetch.spec.whatwg.org/#append-a-request-origin-header), un POST de navegación sin CORS bajo esa política serializa Origin como `null`. Las pruebas Node anteriores establecían Origin explícitamente y no detectaron el conflicto de navegador. El header del POST real no fue capturado; es la causa reproducible del contrato encontrada, y la nueva aceptación deberá confirmar el resultado en Chrome.
