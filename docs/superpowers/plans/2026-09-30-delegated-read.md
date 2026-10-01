@@ -39,7 +39,7 @@ Missing authorization context; mismatched client/resource/project; revoked/expir
 
 - [x] Register two read-only tools with strict empty inputs; use the grant project resolved by the trusted adapter.
 - [x] Exercise an MCP client/server exchange for successful minimal reads and denied requests; repeat after revocation.
-- [ ] Run full tests, lint and build. Record source, limitations, next adapter steps and criteria in the roadmap. Create reviewable PR without enabling a production service.
+- [x] Run full tests, lint and build. Local 619 tests passed; clean PR139 CI run36799153517 passed tests/lint/build. Independent focused review found no actionable issues. Record source, limitations, next adapter steps and criteria in the roadmap. PR139 does not enable a production service.
 
 ### Next OAuth adapter block
 

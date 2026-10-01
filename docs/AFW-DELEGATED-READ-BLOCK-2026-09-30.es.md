@@ -14,7 +14,9 @@ Estado: implementacion interna y adaptador MCP local; no servidor OAuth ni endpo
 
 619 pruebas completas aprobadas. Nueve pruebas nuevas incluyen intercambios con el cliente MCP, revocacion entre llamadas y consultas SQLite reales con otro sujeto/origen e intento de inyeccion. No prueban PKCE, consentimiento OAuth, identidad Access o interoperabilidad con un asistente externo: esos corresponden al siguiente bloque.
 
-Intento de instalar Workers OAuth Provider 1.2.1 fallo por ENOSPC. `package.json` y el lock no cambiaron. Npm sustituyo el enlace local de dependencias por una instalacion parcial; lint local falla por un modulo faltante. La eliminacion recursiva de la instalacion nueva fue rechazada por politica. No borrar dependencias compartidas ni archivos ajenos. La base completa pasa los tests, pero lint y build deben acreditarse en CI limpio antes de integrar; no afirmar release ni despliegue.
+Intento de instalar Workers OAuth Provider 1.2.1 fallo por ENOSPC. `package.json` y el lock no cambiaron. Npm sustituyo el enlace local de dependencias por una instalacion parcial; lint local falla por un modulo faltante. La eliminacion recursiva de la instalacion nueva fue rechazada por politica. No borrar dependencias compartidas ni archivos ajenos. CI limpio de PR #139, run `36799153517`, aprobo tests, lint y build del commit `009f4eedc7be810caf24763f2769169a025e7710`; eso no restaura las dependencias locales ni prueba un despliegue.
+
+Revision independiente de lectura sobre ese commit: sin hallazgos accionables en el alcance del servicio interno. No reprodujo los tests ni valido el futuro transporte OAuth. El owner fue informado del impedimento local y se solicito liberar al menos 2 GB en C: para continuar la instalacion/adaptador. Ninguna credencial ni permiso real fue agregado.
 
 ## Siguiente bloque
 
