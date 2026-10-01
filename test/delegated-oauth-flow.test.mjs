@@ -15,6 +15,11 @@ test('OAuth consent, PKCE exchange, MCP read and disconnect work without sharing
   try {
     const anonymous=await f.request('/mcp',{},null);assert.equal(anonymous.status,401);assert.match(anonymous.headers.get('www-authenticate'),/oauth-protected-resource/);
     const auth=await authorize(f);assert.equal(auth.response.status,200);assert.ok(auth.html.includes('&lt;script&gt;'));assert.ok(!auth.html.includes('<script>'));
+    // Fetch's navigation POST algorithm serializes Origin:null under no-referrer.
+    // Keep origin available for the strict CSRF check, but send no cross-origin referrer.
+    assert.equal(auth.response.headers.get('Referrer-Policy'),'same-origin');
+    assert.match(auth.response.headers.get('Content-Security-Policy'),/form-action 'self' http:\/\/localhost:8950;/);
+    assert.ok(!auth.response.headers.get('Content-Security-Policy').includes('*'));
     const redirect=await approve(f,auth);assert.equal(redirect.status,302);
     assert.equal(new URL(redirect.headers.get('Location')).searchParams.get('iss'),f.issuer);
     const tokenResponse=await exchange(f,redirect.headers.get('Location'),auth.verifier);assert.equal(tokenResponse.status,200);
@@ -22,7 +27,8 @@ test('OAuth consent, PKCE exchange, MCP read and disconnect work without sharing
     const transport=new StreamableHTTPClientTransport(new URL(f.resource),{requestInit:{headers:{Authorization:'Bearer '+tokens.access_token,Host:new URL(f.issuer).host}},fetch:(url,options)=>f.worker.fetch(new Request(url,options),f.env,f.ctx)});
     await client.connect(transport);
     const result=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(result.structuredContent.data.id,'p-a');
-    const screen=await f.request('/connections');const html=await screen.text();const nonce=handle(html);const grant=f.sqlite.prepare('SELECT id FROM delegated_access_grants').get().id;
+    const screen=await f.request('/connections');assert.equal(screen.headers.get('Referrer-Policy'),'same-origin');const html=await screen.text();const nonce=handle(html);const grant=f.sqlite.prepare('SELECT id FROM delegated_access_grants').get().id;
+    assert.match(screen.headers.get('Content-Security-Policy'),/form-action 'self';/);
     const disconnect=await f.request('/connections/revoke',{method:'POST',headers:{Origin:f.issuer,Cookie:cookies(screen),'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:nonce,grant})});
     assert.equal(disconnect.status,303);
     const revoked=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(revoked.isError,true);
@@ -37,6 +43,8 @@ test('consent cannot cross subjects, projects, browsers, redirect URIs or scopes
     assert.equal((await authorize(f,{params:{redirect_uri:'https://attacker.invalid/cb'}})).response.status,400);
     const a=await authorize(f);
     assert.equal((await approve(f,a,{identity:'owner-b'})).status,403);
+    assert.equal((await f.request('/authorize',{method:'POST',headers:{Origin:'null',Cookie:a.cookie,'Content-Type':'application/x-www-form-urlencoded'},
+      body:new URLSearchParams({handle:handle(a.html),decision:'approve',scope:'afw:project:read'})})).status,403);
     assert.equal((await approve(f,a,{cookie:''})).status,400);
     assert.equal((await approve(f,a,{scope:['afw:project:read','afw:write']})).status,400);
     assert.equal((await approve(f,a)).status,302);
