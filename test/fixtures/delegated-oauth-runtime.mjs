@@ -7,9 +7,10 @@ export async function localOAuthFixture(createWorker) {
   const issuer='https://delegated-local.agentfriendlyweb.dev',resource=issuer+'/mcp';
   const sqlite=new DatabaseSync(':memory:');
   for(const name of readdirSync('drizzle').filter(x=>/^001[12]_.*\.sql$/.test(x)).sort())sqlite.exec(readFileSync('drizzle/'+name,'utf8'));
-  sqlite.exec(`CREATE TABLE site_projects (id TEXT,user_id TEXT,organization TEXT,website TEXT,role TEXT,site_type TEXT,control TEXT,audience TEXT,goals_json TEXT,languages_json TEXT,status TEXT,completion INTEGER,revision INTEGER,updated_at TEXT);
+  sqlite.exec(`CREATE TABLE site_projects (id TEXT,user_id TEXT,organization TEXT,website TEXT,role TEXT,site_type TEXT,control TEXT,audience TEXT,goals_json TEXT,languages_json TEXT,status TEXT,completion INTEGER,revision INTEGER,updated_at TEXT,cms TEXT DEFAULT '',hosting TEXT DEFAULT '',content_sources_json TEXT DEFAULT '[]');
     CREATE TABLE scan_observations (id TEXT,project_id TEXT,user_id TEXT,target_origin TEXT,readiness_json TEXT,checked_at TEXT);
-    INSERT INTO site_projects VALUES ('p-a','owner-a','A','https://a.example','owner','content','none','users','["content"]','["es"]','draft',30,1,'2026-09-30T18:00:00Z'),('p-b','owner-b','B','https://b.example','owner','content','none','users','["content"]','["es"]','draft',50,1,'2026-09-30T18:00:00Z');`);
+    CREATE TABLE copilot_working_drafts (project_id TEXT PRIMARY KEY,user_id TEXT,session_json TEXT DEFAULT '{}');
+    INSERT INTO site_projects (id,user_id,organization,website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at) VALUES ('p-a','owner-a','A','https://a.example','owner','content','none','users','["content"]','["es"]','draft',30,1,'2026-09-30T18:00:00Z'),('p-b','owner-b','B','https://b.example','owner','content','none','users','["content"]','["es"]','draft',50,1,'2026-09-30T18:00:00Z');`);
   const DB={prepare(sql){const stmt=sqlite.prepare(sql);return {bind(...args){return {first:async()=>stmt.get(...args)??null,all:async()=>({results:stmt.all(...args)}),run:async()=>({meta:{changes:stmt.run(...args).changes}})};}};}};
   const kv=new Map();
   const OAUTH_KV={

@@ -72,7 +72,7 @@ test('connections explain withdrawn and expired permissions without offering red
 
 test('standard authorization selects an owned project in consent without a client-specific query',async()=>{
   const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
-    f.sqlite.prepare("INSERT INTO site_projects SELECT 'p-a2',user_id,'Second <site>',website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at FROM site_projects WHERE id='p-a'").run();
+    f.sqlite.prepare("INSERT INTO site_projects (id,user_id,organization,website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at) SELECT 'p-a2',user_id,'Second <site>',website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at FROM site_projects WHERE id='p-a'").run();
     const a=await authorize(f,{project:null});assert.equal(a.response.status,200);
     assert.match(a.html,/<select name="project" required>/);assert.match(a.html,/Second &lt;site&gt;/);
     assert.ok(!a.html.includes('value="p-b"'));assert.ok(!a.html.includes('selected'));
@@ -108,7 +108,7 @@ test('project picker stays bounded and rejects duplicate query, expired consent 
     const b=await authorize(f,{project:null});f.setTime(new Date(Date.now()+20*60*1000).toISOString());
     assert.equal((await approve(f,b,{project:'p-a'})).status,403);
     f.setTime(new Date().toISOString());
-    for(let i=0;i<20;i++)f.sqlite.prepare("INSERT INTO site_projects SELECT ?,user_id,organization,website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at FROM site_projects WHERE id='p-a'").run('extra-'+i);
+    for(let i=0;i<20;i++)f.sqlite.prepare("INSERT INTO site_projects (id,user_id,organization,website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at) SELECT ?,user_id,organization,website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at FROM site_projects WHERE id='p-a'").run('extra-'+i);
     const bounded=await authorize(f,{project:null});assert.equal(bounded.response.status,200);
     assert.match(bounded.html,/Elegí el expediente desde AFW/);assert.ok(!bounded.html.includes('Permitir lectura'));
     assert.equal(f.sqlite.prepare('SELECT count(*) n FROM delegated_access_grants').get().n,1);

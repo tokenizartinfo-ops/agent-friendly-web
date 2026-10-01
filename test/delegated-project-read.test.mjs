@@ -24,10 +24,23 @@ function fixture() {
 test('private summary uses a persisted grant and only exposes the bounded read contract',async()=>{
   const f=fixture();const result=await f.read();
   assert.equal(result.status,200);
-  assert.deepEqual(Object.keys(result.data).sort(),['completion','id','nextQuestion','organization','revision','status','updatedAt','website'].sort());
-  assert.equal(result.data.nextQuestion.field,'role');
+  assert.deepEqual(Object.keys(result.data).sort(),['completion','id','nextQuestion','nextStep','organization','revision','status','updatedAt','website'].sort());
+  assert.equal(result.data.nextQuestion.field,'goals');
+  assert.equal(result.data.nextStep.reasonKey,'confirm_goal');
+  assert.equal(result.data.nextStep.basedOnRevision,3);
   assert.ok(!JSON.stringify(result).includes('private'));
   assert.deepEqual(f.calls,[['grant','g-a'],['project','p-a','owner-a']]);
+});
+
+test('delegated guidance respects deferred questions and declared data without exporting private working memory',async()=>{
+ const f=fixture();f.project.guidance={deferred:['goals','audience'],hasCms:true,hasHosting:true,hasContentSources:true};
+ f.project.sessionJson='private-working-memory';
+ const result=await f.read();assert.equal(result.data.nextQuestion.field,'languages');
+ assert.ok(!JSON.stringify(result).includes('private'));
+ f.project.intake={...f.project.intake,goals:['tools'],audience:'users',languages:['es'],control:'none'};
+ f.project.guidance.deferred=[];
+ const completed=await f.read();assert.equal(completed.data.nextQuestion,null);
+ assert.equal(completed.data.nextStep.reasonKey,'review_proportional_scope');
 });
 
 test('missing, mismatched or malformed grants deny before project data is read',async()=>{
