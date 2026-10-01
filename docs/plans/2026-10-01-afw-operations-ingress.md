@@ -40,8 +40,8 @@ Interface: createOperationsIngress({now}).fetch(request, env), env.OPERATIONS_DB
 ### 3. Cloud manager handoff and delivery
 Files: docs/AFW-CLOUD-MANAGER-RUNBOOK.es.md, docs/AFW-OPERATING-ROADMAP.es.md, design and this ledger.
 - [x] Document inventory, subscription-first manager instructions, activation and rollback requirements.
-- [ ] Run whole suite/lint; fresh reviewer; fix evidenced defects; CI build; PR and attach it.
-- [ ] Keep deployment and cloud-account activation as explicit pending outcomes, not equivalent to code completion.
+- [x] Run whole suite/lint; fresh reviewer; fix evidenced defects; CI build; PR and attach it.
+- [x] Keep deployment and cloud-account activation as explicit pending outcomes, not equivalent to code completion.
 
 ## Execution ledger
 
@@ -50,3 +50,5 @@ Ruling: prioritize the subscription-backed Codex Cloud manager over Agents API �
 Ruling: first ledger is the durable inbox; no Queue or Workflow resources yet — acknowledgement after atomic D1 commit and reconciliation of expired leases are sufficient for a local ingress slice — remote throughput and scheduler acceptance remain separate.
 
 2026-10-01: RED observed for absent ledger and receiver modules; GREEN 13 operational tests. Additional RED→GREEN pins newer failure during active diagnosis. Full suite 647/647; lint zero errors (one pre-existing img warning); fresh review no critical/important findings. Runtime and executor remain disabled/uncreated. GitHub setup now sees AFW; new environment setup initiated, UI GPT-6.1 Sol Bajo; not yet published.
+
+2026-10-01 closure: PR148 integrated (52610ec), CI36875536747 passed test/lint/build. Cloud setup revealed local smoke expectations; separate PR149 fixed them (5c15c0a), RED→GREEN and 649 full tests, CI36876973760 passed. Remote setup at integrated main then confirmed 649 tests/build/smoke11/11 and restricted-network acceptance. Final draft saved; owner asked to publish personally. Operations runtime, consumer, scheduler and PC-off incident acceptance remain explicit next outcomes.
