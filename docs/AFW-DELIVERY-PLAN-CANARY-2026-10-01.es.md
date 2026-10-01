@@ -1,0 +1,13 @@
+# Plan de entrega: publicación Canary y aceptación pendiente
+
+Proyecto AFW; repositorio tokenizartinfo-ops/agent-friendly-web; entorno canary; origen https://canary.agentfriendlyweb.dev; Worker agent-friendly-web-web-canary; D1 2b518988-eacb-4c31-b760-4e58c3c0285b. Fecha 2026-10-01.
+
+Fuente b399c306fb6c7d97ccc03a86bcbe44d16432babc, CI 36891198421 aprobada, artefacto afw-build-b399c306fb6c7d97ccc03a86bcbe44d16432babc descargado sin recompilar. Versión ad2c0c94-be50-4cfd-9ea9-226886416c21 publicada al 100% únicamente en Canary. Variables existentes conservadas con keep-vars, binding D1 aislado, sin cambios de dominios, Access o producción. Once comprobaciones Access-edge aprobadas: desafío de autenticación en todas las rutas examinadas; no acreditan guardado privado.
+
+Migración inicial se detuvo con duplicate column revision. Consulta de sqlite_master confirmó columna revision INTEGER DEFAULT 1 NOT NULL y trigger site_projects_legacy_revision_fence equivalentes a los dos elementos de 0006. Se reconcilió exclusivamente su registro faltante en d1_migrations y luego se aplicaron 0007–0013. Consulta final: ninguna migración pendiente; tabla delivery_plans e índice delivery_plans_project_user_idx presentes. Sin eliminación de registros. Bookmark previo: 0000009d-00000000-000050f7-a1065ef2efb5f34ed98106e83bddda30. No restaurar automáticamente porque puede perder escrituras posteriores.
+
+Chrome habitual abrió Canary con la sesión existente del owner; recuperó listado y expediente sintético 93b50225-70bf-456a-9244-610efc2c8620. Se preparó cápsula v2 y se aprobó para entrega manual en ese expediente de QA, sin ejecutar publicación, DNS, auditoría externa ni envío. Su origen continúa siendo Canary. La guía pide comparar primero, coherente con capsuleGuideState: el asesor de entrega se presenta solo en handoff, después de comparisonStatus complete. Un destino protegido por Access no permite acreditar comparación pública completa; no se fabricó evidencia ni se desactivó protección.
+
+Pendiente de aceptación: elegir un destino público controlado para un expediente sintético aislado, acreditar comparación real, guardar plan mediante UI, reabrir y comprobar conflicto entre pestañas. Alternativamente diseñar y probar si la planificación declarativa debe estar disponible antes de comparar; no confundir esa planificación con permiso de entrega. Producción permanece sin migración ni despliegue de este bloque. No afirmar persistencia remota del plan solo por la existencia de su tabla.
+
+Rollback de código Canary: versión 31d8d488-2324-4a66-a4bb-ac2cd520d7a3 al 100%, conservando schema, planes y evidencias. No DROP ni restore global como rollback rutinario.
