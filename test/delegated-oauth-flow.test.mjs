@@ -95,3 +95,18 @@ test('two concurrent exchanges of one code cannot issue two tokens',async()=>{
     assert.equal(replies.filter(r=>r.status===200).length,1);
   }finally{f.close();}
 });
+
+test('bounded canary expires and refuses requests without its edge rate guard',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
+    f.env.AFW_OAUTH_PILOT_EXPIRES_AT=new Date(Date.now()+60000).toISOString();
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,503);
+    f.env.DELEGATED_RATE_LIMITER={limit:async()=>({success:false})};
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,429);
+    f.env.DELEGATED_RATE_LIMITER={limit:async()=>({success:true})};
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,200);
+    f.setTime(new Date(Date.now()+120000).toISOString());
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,404);
+    f.env.AFW_OAUTH_PILOT_EXPIRES_AT='invalid';
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,503);
+  }finally{f.close();}
+});
