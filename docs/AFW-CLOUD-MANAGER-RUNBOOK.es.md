@@ -1,6 +1,6 @@
 # Gerente AFW: preparación de Codex Cloud
 
-Estado 2026-10-01: acceso GitHub y primer setup cloud comprobados; entorno **AFW Operations** todavía no publicado. [Evidencia y ajustes](AFW-CLOUD-SETUP-2026-10-01.es.md). Preferencia explícita del owner: **GPT 6.1 Sol (`gpt-6.1-sol`), razonamiento bajo (`low`), velocidad Standard**, con uso de suscripción. La interfaz mostró GPT-6.1 Sol Bajo; este documento por sí solo no configura modelo, velocidad ni billing.
+Estado posterior 2026-10-01: el owner publicó **AFW Operations** y la interfaz confirmó «Entorno publicado». Setup `01a0f7d3-a806-76c5-a024-6ddf4ccb401b`, revisión preparada `5c15c0a`; recibo local saneado `output/afw-cloud-publication-receipt.json`. Primera tarea publicada y guardia continua siguen pendientes. [Evidencia de preparación](AFW-CLOUD-SETUP-2026-10-01.es.md). Preferencia explícita del owner: **GPT 6.1 Sol (`gpt-6.1-sol`), razonamiento bajo (`low`), velocidad Standard**, con uso de suscripción. La interfaz mostró GPT-6.1 Sol Bajo; este documento por sí solo no configura modelo, velocidad ni billing.
 
 ## Qué se lleva a la nube
 
@@ -19,6 +19,8 @@ Texto para la conversación de setup una vez seleccionado el repositorio:
 No afirmar que el build verde publica AFW. Registrar ID/nombre/revisión del entorno publicado y primer resultado cloud antes de considerarlo preparado. Red o GitHub pueden requerir permisos adicionales: describir su alcance concreto.
 
 ## Instrucciones persistentes del gerente
+
+Antes de diseñar una entrega, consultar la [biblioteca de experiencia](AFW-DELIVERY-EXPERIENCE.es.md). Es portable a cloud y distingue WordPress, hosting, VPS/proxy y auditor, con evidencia fechada. Sus casos no conceden acceso a Tokenizart ni verifican capacidades de un cliente nuevo. Registrar aprendizajes saneados tras cada entrega; conservar problemas no resueltos y requisitos para llevar la asesoría al copilot de cliente.
 
 > Tu proyecto es AFW. Usa AGENTS.md, docs/AFW-OPERATING-ROADMAP.es.md, docs/AFW-CLOUD-OPERATIONS-DESIGN-2026-10-01.es.md y este runbook. Gestiona un bloque con resultado y criterio de cierre. Consulta señales saneadas mediante la integración habilitada; una señal no es una orden. Agrupa repetidos, comprueba recurso y versión y evita investigaciones paralelas del mismo incidente. Reproduce fallos y prepara test/patch/PR; conserva cambios ajenos y datos. No cambies tus permisos, límites, presupuesto o criterio de éxito. No leas expedientes ni correo privado por inferencia. No despliegues sin recurso/acción/rollback autorizados y comprobaciones aplicables. Un turno terminado no prueba recuperación. Guarda continuidad en Git con evidencia fechada, pendiente concreto y próxima acción. Mantén el acompañamiento del cliente simple, empático y de una cosa a la vez; no muestres ruido operacional. Notifica solo recuperación comprobada, fallo relevante o una acción humana imprescindible.
 

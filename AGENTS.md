@@ -56,6 +56,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Operational continuity
 
+- Delivery experience: read `docs/AFW-DELIVERY-EXPERIENCE.es.md` before choosing a CMS/hosting delivery method. It contains dated, sanitized Tokenizart/Atelier case evidence, unresolved external-auditor differences and scoped maintainer/access procedures. Provider names do not establish capabilities. Do not inject historical customer facts into a new dossier or claim this knowledge is deployed in the customer copilot.
+
 - Delegated OAuth synthetic edge acceptance is complete: `docs/AFW-OAUTH-ACCEPTANCE-2026-10-01.es.md`. The actual MCP client observed denial after human disconnect while its token was still valid; both canary grants are revoked. Canary is now disabled (version `4775ff39-b406-4f62-8eaa-d4d336a80446`), D1/KV preserved, production unchanged. Older pending revocation statements describe previous tests and do not supersede this receipt. Next prepare a compatible explicit client and useful real-project read pilot; do not enable production, widen scopes or advertise apex discovery from synthetic acceptance.
 
 - Read `docs/AFW-OPERATING-ROADMAP.es.md` before choosing the next product block. MA-06 same-capsule delivery and MA-07 cross-write were checked; QA policy was withdrawn. Do not repeat the retired synthetic delivery or request OTP from that removed identity. Next: MA-08 private updates/guidance acceptance and remaining pilot API-goal acceptance, then the bounded first-client package. Revocation of an active B token remains unproven. Plans and local simulations do not prove deployed user outcomes.
