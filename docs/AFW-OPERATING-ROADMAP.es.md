@@ -1,5 +1,7 @@
 # Roadmap operativo y continuidad de AFW
 
+Continuidad OAuth posterior: [bloque local completo](AFW-DELEGATED-OAUTH-LOCAL-2026-09-30.es.md), 628 pruebas y revisión independiente. Instalación restaurada; consentimiento, PKCE, lectura y desconexión comprobados con identidad sintética. Config desactivada por defecto, sin despliegue privado ni migraciones remotas. Próximo: canary aislado y aceptación real; no publicar discovery en el apex por esta prueba. Priorizar CI para builds pesados y conservar documentación histórica.
+
 ## Auditoria externa: bloque del 30 de septiembre
 
 Primer bloque delegado implementado localmente: [lectura acotada](AFW-DELEGATED-READ-BLOCK-2026-09-30.es.md), 619 tests aprobados. Aun sin OAuth/endpoints privados de agentes. Dependencias locales parciales por ENOSPC; usar CI limpio para lint/build, restaurar entorno antes del siguiente adaptador. No publicar discovery por la sola existencia de estos modulos.

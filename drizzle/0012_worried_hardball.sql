@@ -1,0 +1,1 @@
+ALTER TABLE `delegated_access_grants` ADD `exchanged_at` text DEFAULT '' NOT NULL;

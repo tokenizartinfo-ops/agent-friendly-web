@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "agent-friendly-web-delegated-local",
+  "main": "worker/delegated/index.mjs",
+  "compatibility_date": "2026-09-07",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "vars": {
+    "AFW_DELEGATED_OAUTH_ENABLED": "false",
+    "AFW_OAUTH_ISSUER": "http://localhost:8793",
+    "AFW_OAUTH_RESOURCE": "http://localhost:8793/mcp"
+  },
+  // Placeholders for local emulation only. No production resources or routes.
+  "kv_namespaces": [{"binding": "OAUTH_KV", "id": "00000000000000000000000000000000", "remote": false}],
+  "d1_databases": [{"binding": "DB", "database_name": "agent-friendly-web-delegated-local", "database_id": "00000000-0000-0000-0000-000000000000", "remote": false}]
+}
