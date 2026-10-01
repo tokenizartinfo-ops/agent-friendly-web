@@ -45,6 +45,7 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@cloudflare/workers-oauth-provider": "1.2.1",
     "@modelcontextprotocol/server": "2.0.0",
     "agents": "0.22.0",
     "drizzle-orm": "0.45.2",

@@ -1,5 +1,30 @@
 import { index, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 
+export const delegatedAccessGrants = sqliteTable('delegated_access_grants', {
+  id: text('id').primaryKey(),
+  userId: text('user_id').notNull(),
+  clientId: text('client_id').notNull(),
+  projectId: text('project_id').notNull(),
+  resource: text('resource').notNull(),
+  scopesJson: text('scopes_json').notNull(),
+  createdAt: text('created_at').notNull(),
+  expiresAt: text('expires_at').notNull(),
+  revokedAt: text('revoked_at').notNull().default(''),
+  exchangedAt: text('exchanged_at').notNull().default(''),
+}, table => [index('delegated_grants_owner_created_idx').on(table.userId, table.createdAt)]);
+
+export const delegatedConsentSessions = sqliteTable('delegated_consent_sessions', {
+  handleHash: text('handle_hash').primaryKey(),
+  userId: text('user_id').notNull(),
+  kind: text('kind').notNull(),
+  projectId: text('project_id').notNull(),
+  clientId: text('client_id').notNull(),
+  resource: text('resource').notNull(),
+  scopesJson: text('scopes_json').notNull(),
+  expiresAt: text('expires_at').notNull(),
+  consumedAt: text('consumed_at').notNull().default(''),
+});
+
 export const siteProjects = sqliteTable(
   'site_projects',
   {
