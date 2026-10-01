@@ -23,3 +23,15 @@ Antes de exponer el canary: revisión independiente, CI completo, dry-run y desp
 Desactivar solo este Worker (`AFW_DELEGATED_OAUTH_ENABLED=false`) y desconectar su dominio nuevo si es necesario. La expiración automática bloquea solicitudes pero no borra recursos ni evidencias. Conservar la base sintética hasta revisar el resultado y retirar el entorno; no aplicar `DROP` ni migraciones sobre la D1 de producción. Es una excepción acotada al canary web histórico para preservar su despliegue y separar audiencias.
 
 Build completo en GitHub; solo pruebas/bundle pequeño locales. No se limpiaron archivos compartidos. Solicitar al owner únicamente abrir el enlace de consentimiento generado por el proceso local cuando el canary esté verificado; no pedir códigos/tokens en el chat.
+
+## Despliegue verificado
+
+Fuente del Worker `a3facaa`, PR141. [CI 36861395189](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/36861395189) aprobó instalación, 630 pruebas, lint y build. Revisión independiente identificó callback malformado que podía cerrar el cliente local; corregido con prueba observada fallar y pasar. Revisión posterior sin hallazgos accionables.
+
+Primero se desplegó desactivado: versión `e62557ad-b81c-46da-9999-837c8c2fe78d`, deployment `5441a135-c0f3-4758-9e21-97de87c18875`, 2026-10-01T12:25:57Z. Siete probes: MCP/discovery/registro 404, rutas humanas redirigen a Access.
+
+Después se habilitó únicamente el canary mediante override CLI `--var AFW_DELEGATED_OAUTH_ENABLED:true`; el archivo editable conserva `false` para evitar reapertura accidental. Versión `807bf611-a4e1-4bc7-bb6c-ffd2062da58b`, deployment `b89b3b67-8885-4da6-9fd4-4a25dfbd60aa`, 100%, 2026-10-01T12:27:51Z. Siete probes posteriores: MCP 401 con challenge de protected resource, ambos discovery 200 con issuer/recurso exactos y sin registro abierto; registro 404, authorize/connections/revoke redirigen a Access. No es todavía aceptación de un token real.
+
+Producción comprobada sin cambio: deployment `83a8bd57-2af6-4131-a4a7-1bd049cd3123`, versión `d09bcf52-6fae-4c34-bfec-40b715384205`, 100%. No se aplicaron migraciones allí. Cierre inmediato del canary: desplegar este mismo config sin override o con `--var AFW_DELEGATED_OAUTH_ENABLED:false`; rollback de versión a `e62557ad-b81c-46da-9999-837c8c2fe78d`. La ruta nueva puede desconectarse posteriormente, conservando evidencia sintética.
+
+Cliente local iniciado para consentimiento del owner; PKCE/state/token permanecen exclusivamente en RAM. Enlace de autorización de un solo recorrido, espera máxima diez minutos, no guardar enlace efímero ni credenciales en documentación. Si vence sin intervención, reiniciar cliente para generar enlace nuevo. Login/canje/lectura/retirada reales permanecen pendientes hasta observar la salida correspondiente del proceso.
