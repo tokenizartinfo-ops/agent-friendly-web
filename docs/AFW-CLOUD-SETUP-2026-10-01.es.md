@@ -1,6 +1,12 @@
 # AFW: preparación real de Codex Cloud
 
-Evidencia del 2026-10-01; entorno preparado para revisión, no publicado ni guardia activada.
+Evidencia del 2026-10-01; entorno **AFW Operations comprobado y borrador final guardado**, botón Publicar disponible. Publicación entregada al owner a su pedido; sin confirmación todavía ni guardia activada.
+
+## Aceptación final de preparación
+
+PR #149 integrado en `main` **5c15c0a42f2e1da4e5f9798a6476838ab90372b7**, fuente `2749551`; CI [36876973760](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/36876973760) aprobó tests/lint/build. Setup cloud actualizado a ese main sin reset; conservó referencia del candidato porque el squash produjo historia divergente con árboles iguales. Informe final visible en Chrome: **649 pruebas, lint sin errores (una advertencia), build y smoke 11/11 aprobados**. Checkout limpio.
+
+Instalación con caché nueva y fetch correctos bajo red restringida; destino fuera de lista rechazado con 403. Skill de inicio actualizada con runbooks y continuidad del gerente, sin excepciones del smoke. Guardado final comprobado: «Todos los cambios guardados», «Publicar» disponible. No se pulsó Publicar; respetamos el pedido del owner «abre todo tú y yo apruebo».
 
 El owner autorizó el conector GitHub después de preparar la selección exclusiva de AFW. En el selector cloud elegimos únicamente `tokenizartinfo-ops/agent-friendly-web`. [Conversación de setup](https://chatgpt.com/local/01a0f7d3-a806-76c5-a024-6ddf4ccb401b?hostId=local), ID `01a0f7d3-a806-76c5-a024-6ddf4ccb401b`. La interfaz identifica «Chat en la nube» y mostró **GPT-6.1 Sol Bajo**. El backend de estado devuelve host durable; los comandos del setup usan `/workspace`. No inferir ejecución local solo por el segmento local de su URL.
 
@@ -16,6 +22,6 @@ El setup detectó expectativas locales incorrectas: `/api/projects` devuelve 401
 
 ## Continuidad
 
-Actualizar checkout del setup sin perder cambios, leer runbook en main, ejecutar suite/build/smoke corregido y revisar reporte. Actualizar skill de inicio para retirar excepciones históricas. Publicar después de revisión del owner. La primera tarea posterior debe acreditar entorno publicado, revisión y herramientas; después conectar disparador cloud con uso de suscripción y aceptar incidente sintético con PC apagado.
+Actualización del checkout, lectura del runbook, suite/build/smoke y skill de inicio completadas según aceptación final arriba. Pendiente: publicación por owner. La primera tarea posterior debe acreditar entorno publicado, revisión y herramientas; después conectar disparador cloud con uso de suscripción y aceptar incidente sintético con PC apagado.
 
 Setup no equivale a monitor continuo, permisos Cloudflare, lectura de expedientes, envío de correo ni reparación productiva. Producción permanece intacta; no se activó facturación API.
