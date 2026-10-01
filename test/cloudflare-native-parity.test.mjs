@@ -31,7 +31,9 @@ function responseFor(path) {
     status: 200,
     headers: { 'content-type': 'text/markdown; charset=utf-8' },
   });
-  if (['/expediente', '/api/projects', '/api/projects/probe'].includes(path)) return new Response(null, {
+  if (path === '/api/projects') return Response.json({ error: 'Inicia sesion para abrir tu expediente.' }, { status: 401, headers: { 'cache-control': 'no-store' } });
+  if (path === '/api/projects/probe') return new Response('Not found', { status: 404 });
+  if (path === '/expediente') return new Response(null, {
     status: 307,
     headers: { location: `/?access=required&return_to=${encodeURIComponent(path)}` },
   });
@@ -203,6 +205,25 @@ test('each smoke request has a bounded timeout', () => {
   assert.match(smokeSource, /LOCAL_REQUEST_TIMEOUT_MS\s*=\s*30_000/);
   assert.match(smokeSource, /EDGE_REQUEST_TIMEOUT_MS\s*=\s*10_000/);
   assert.match(smokeSource, /AbortSignal\.timeout\(requestTimeoutMs\)/);
+});
+
+test('local smoke accepts exact anonymous API denial and labels absent probe without claiming Access', async () => {
+  const report = await runCloudflareNativeSmoke({ baseUrl: 'http://127.0.0.1:8788', fetchImpl: async url => {
+    const path = new URL(url).pathname;
+    if (path === '/api/projects') return Response.json({ error: 'Inicia sesion para abrir tu expediente.' }, { status: 401, headers: { 'cache-control': 'no-store' } });
+    if (path === '/api/projects/probe') return new Response('Not found', { status: 404 });
+    return responseFor(path);
+  } });
+  assert.equal(report.ok, true);
+  assert.equal(report.checks.find(check => check.path === '/api/projects/probe').boundary, 'local_missing_route');
+  assert.equal(report.checks.find(check => check.path === '/api/projects').boundary, 'application_auth');
+});
+
+test('local API denial fails for leaked data, wrong status, missing no-store or arbitrary 401', async () => {
+  for (const response of [Response.json({ error: 'Inicia sesion para abrir tu expediente.', project: { private: true } }, { status: 401, headers: { 'cache-control': 'no-store' } }), Response.json({ error: 'arbitrary' }, { status: 401, headers: { 'cache-control': 'no-store' } }), Response.json({ error: 'Inicia sesion para abrir tu expediente.' }, { status: 401 }), Response.json({ project: null }, { status: 200 })]) {
+    const report = await runCloudflareNativeSmoke({ baseUrl: 'http://127.0.0.1:8788', fetchImpl: async url => new URL(url).pathname === '/api/projects' ? response : responseFor(new URL(url).pathname) });
+    assert.equal(report.checks.find(check => check.path === '/api/projects').ok, false);
+  }
 });
 
 test('smoke cancels an oversized streamed public response at the byte boundary', async () => {
