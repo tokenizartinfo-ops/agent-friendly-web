@@ -18,6 +18,8 @@ test('OAuth consent, PKCE exchange, MCP read and disconnect work without sharing
     // Fetch's navigation POST algorithm serializes Origin:null under no-referrer.
     // Keep origin available for the strict CSRF check, but send no cross-origin referrer.
     assert.equal(auth.response.headers.get('Referrer-Policy'),'same-origin');
+    assert.match(auth.response.headers.get('Content-Security-Policy'),/form-action 'self' http:\/\/localhost:8950;/);
+    assert.ok(!auth.response.headers.get('Content-Security-Policy').includes('*'));
     const redirect=await approve(f,auth);assert.equal(redirect.status,302);
     assert.equal(new URL(redirect.headers.get('Location')).searchParams.get('iss'),f.issuer);
     const tokenResponse=await exchange(f,redirect.headers.get('Location'),auth.verifier);assert.equal(tokenResponse.status,200);
@@ -26,6 +28,7 @@ test('OAuth consent, PKCE exchange, MCP read and disconnect work without sharing
     await client.connect(transport);
     const result=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(result.structuredContent.data.id,'p-a');
     const screen=await f.request('/connections');assert.equal(screen.headers.get('Referrer-Policy'),'same-origin');const html=await screen.text();const nonce=handle(html);const grant=f.sqlite.prepare('SELECT id FROM delegated_access_grants').get().id;
+    assert.match(screen.headers.get('Content-Security-Policy'),/form-action 'self';/);
     const disconnect=await f.request('/connections/revoke',{method:'POST',headers:{Origin:f.issuer,Cookie:cookies(screen),'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:nonce,grant})});
     assert.equal(disconnect.status,303);
     const revoked=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(revoked.isError,true);
