@@ -12,7 +12,7 @@ test('AF-EV preserves baseline and verified post-release observations without re
   assert.equal(manifest.contract, 'agent-friendly-web.external-readiness.v1');
   assert.equal(manifest.canonical_origin, canonical);
   assert.match(manifest.relationship_to_af, /orthogonal|separate/i);
-  assert.equal(manifest.observations.length, 2);
+  assert.ok(manifest.observations.length >= 4);
 
   const [baseline, verified] = manifest.observations;
   assert.equal(baseline.provider, 'Cloudflare isitagentready.com');
@@ -37,6 +37,23 @@ test('AF-EV preserves baseline and verified post-release observations without re
   assert.ok(verified.failed_checks.includes('dnsAid'));
   assert.ok(verified.failed_checks.includes('a2aAgentCard'));
   assert.match(JSON.stringify(manifest), /not.*certification|no.*certification/i);
+});
+
+test('fresh external observations disclose profile scope and preserve provider results', async () => {
+  const manifest = JSON.parse(await readFile('public/.well-known/external-readiness.json', 'utf8'));
+  for (const profile of ['all', 'content']) {
+    const observation = manifest.observations.findLast((item) => item.profile === profile);
+    assert.ok(observation);
+    assert.equal(observation.score, null);
+    assert.equal(observation.score_status, 'not_returned_by_provider_api');
+    assert.equal(observation.observed_at.slice(0, 10), '2026-10-01');
+    assert.equal(observation.level, profile === 'all' ? 4 : 5);
+    assert.equal(observation.passed_checks.length, profile === 'all' ? 11 : 6);
+    assert.equal(observation.failed_checks.length, profile === 'all' ? 5 : 1);
+    assert.ok(observation.failed_checks.includes('dnsAid'));
+    assert.match(observation.source_sha256, /^[a-f0-9]{64}$/);
+    assert.equal(observation.release.source_commit, '7c049daa3ff435d6f1d91c6b5a83977cdeefb9b7');
+  }
 });
 
 test('external verification is discoverable from human and machine surfaces', async () => {

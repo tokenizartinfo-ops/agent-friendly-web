@@ -2,7 +2,7 @@
   "contract": "agent-friendly-web.external-readiness.v1",
   "canonical_origin": "https://agentfriendlyweb.dev",
   "relationship_to_af": "External verification is orthogonal and separate from the proprietary AF-0 to AF-5 maturity model.",
-  "updated_at": "2026-08-30",
+  "updated_at": "2026-09-30",
   "observations": [
     {
       "provider": "Cloudflare isitagentready.com",
@@ -13,9 +13,34 @@
       "level": 2,
       "label": "Bot-Aware",
       "status": "baseline",
-      "passed_checks": ["robotsTxt", "sitemap", "linkHeaders", "robotsTxtAiRules", "contentSignals", "apiCatalog", "mcpServerCard", "agentSkills"],
-      "failed_checks": ["dnsAid", "markdownNegotiation", "oauthDiscovery", "oauthProtectedResource", "authMd", "a2aAgentCard", "webMcp", "ard"],
-      "not_scored_checks": ["webBotAuth", "x402", "mpp", "ucp", "acp", "ap2"],
+      "passed_checks": [
+        "robotsTxt",
+        "sitemap",
+        "linkHeaders",
+        "robotsTxtAiRules",
+        "contentSignals",
+        "apiCatalog",
+        "mcpServerCard",
+        "agentSkills"
+      ],
+      "failed_checks": [
+        "dnsAid",
+        "markdownNegotiation",
+        "oauthDiscovery",
+        "oauthProtectedResource",
+        "authMd",
+        "a2aAgentCard",
+        "webMcp",
+        "ard"
+      ],
+      "not_scored_checks": [
+        "webBotAuth",
+        "x402",
+        "mpp",
+        "ucp",
+        "acp",
+        "ap2"
+      ],
       "source_note": "Provider-controlled directional diagnostic. Checks and scoring can change independently of Agent Friendly Web."
     },
     {
@@ -32,10 +57,120 @@
         "site_version": 27,
         "source_commit": "6cc980560e5505ede7278ac21018506ba92e9b93"
       },
-      "passed_checks": ["robotsTxt", "sitemap", "linkHeaders", "markdownNegotiation", "robotsTxtAiRules", "contentSignals", "apiCatalog", "mcpServerCard", "agentSkills", "webMcp", "ard"],
-      "failed_checks": ["dnsAid", "oauthDiscovery", "oauthProtectedResource", "authMd", "a2aAgentCard"],
-      "not_scored_checks": ["webBotAuth", "x402", "mpp", "ucp", "acp", "ap2"],
+      "passed_checks": [
+        "robotsTxt",
+        "sitemap",
+        "linkHeaders",
+        "markdownNegotiation",
+        "robotsTxtAiRules",
+        "contentSignals",
+        "apiCatalog",
+        "mcpServerCard",
+        "agentSkills",
+        "webMcp",
+        "ard"
+      ],
+      "failed_checks": [
+        "dnsAid",
+        "oauthDiscovery",
+        "oauthProtectedResource",
+        "authMd",
+        "a2aAgentCard"
+      ],
+      "not_scored_checks": [
+        "webBotAuth",
+        "x402",
+        "mpp",
+        "ucp",
+        "acp",
+        "ap2"
+      ],
       "source_note": "Post-release provider API result. The API returned Level 4 and check statuses but no numeric score field, so no score was inferred."
+    },
+    {
+      "provider": "Cloudflare isitagentready.com",
+      "observed_at": "2026-10-01T00:13:48.450Z",
+      "origin": "https://agentfriendlyweb.dev",
+      "report_url": "https://isitagentready.com/agentfriendlyweb.dev",
+      "profile": "all",
+      "score": null,
+      "score_status": "not_returned_by_provider_api",
+      "level": 4,
+      "label": "Agent-Integrated",
+      "status": "verified",
+      "release": {
+        "source_commit": "7c049daa3ff435d6f1d91c6b5a83977cdeefb9b7",
+        "worker_version": "c6175cff-42ca-490d-8507-96c5fce23126"
+      },
+      "passed_checks": [
+        "robotsTxt",
+        "sitemap",
+        "linkHeaders",
+        "markdownNegotiation",
+        "robotsTxtAiRules",
+        "contentSignals",
+        "apiCatalog",
+        "mcpServerCard",
+        "agentSkills",
+        "webMcp",
+        "ard"
+      ],
+      "failed_checks": [
+        "dnsAid",
+        "oauthDiscovery",
+        "oauthProtectedResource",
+        "authMd",
+        "a2aAgentCard"
+      ],
+      "source_sha256": "63707297b418aca63b6db47a40887909b1906911491262891cd215c8d9e9bd7a",
+      "source_endpoint": "https://isitagentready.com/mcp",
+      "source_tool": "scan_site",
+      "enabled_checks_override": false,
+      "source_note": "Full profile: all applicable checks, no passing-only selection. Numeric score was not returned.",
+      "dnssec": {
+        "provider_status": "pending",
+        "parent_ds_present": false,
+        "svcb_present": true,
+        "svcb_dnssec_validated": false
+      }
+    },
+    {
+      "provider": "Cloudflare isitagentready.com",
+      "observed_at": "2026-10-01T00:13:55.753Z",
+      "origin": "https://agentfriendlyweb.dev",
+      "report_url": "https://isitagentready.com/agentfriendlyweb.dev",
+      "profile": "content",
+      "score": null,
+      "score_status": "not_returned_by_provider_api",
+      "level": 5,
+      "label": "Agent-Native",
+      "status": "verified",
+      "release": {
+        "source_commit": "7c049daa3ff435d6f1d91c6b5a83977cdeefb9b7",
+        "worker_version": "c6175cff-42ca-490d-8507-96c5fce23126"
+      },
+      "passed_checks": [
+        "robotsTxt",
+        "sitemap",
+        "linkHeaders",
+        "markdownNegotiation",
+        "robotsTxtAiRules",
+        "contentSignals"
+      ],
+      "failed_checks": [
+        "dnsAid"
+      ],
+      "source_sha256": "a71b957167fa445e0c3c78577bd6371bce8999d6699d91579bef49d12caa1c9c",
+      "source_endpoint": "https://isitagentready.com/mcp",
+      "source_tool": "scan_site",
+      "enabled_checks_override": false,
+      "source_note": "Content profile excludes API/authentication checks. Level 5 here is not a full-profile pass or transactional AF-5.",
+      "dnssec": {
+        "provider_status": "pending",
+        "parent_ds_present": false,
+        "svcb_present": true,
+        "svcb_dnssec_validated": false
+      }
     }
   ],
   "limits": [

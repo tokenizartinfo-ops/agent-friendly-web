@@ -3,6 +3,9 @@ import { ArrowRight, CheckCircle2, CircleAlert, ExternalLink, ShieldCheck } from
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
+import evidence from '../../public/.well-known/external-readiness.json';
+
+const latest = evidence.observations.filter((item) => 'profile' in item);
 
 export const metadata: Metadata = localizedRouteMetadata('externalVerification', 'es') as Metadata;
 
@@ -14,8 +17,8 @@ const verified = [
 ];
 
 const next = [
-  ['EV-1', 'Markdown, ARD y WebMCP read-only', 'Desplegado en Sites 27 y verificado externamente.'],
-  ['EV-2', 'DNS-AID y DNSSEC', 'Requiere analisis de zona, rollback y aprobacion especifica.'],
+  ['EV-1', 'Markdown, ARD y WebMCP read-only', 'Observados en el origen de produccion Cloudflare el 30 de septiembre de 2026.'],
+  ['EV-2', 'DNS-AID y DNSSEC', 'El registro SVCB ya existe. DNSSEC sigue pendiente del registro DS en el dominio padre; todavia no pasa la comprobacion externa.'],
   ['EV-3', 'OAuth y auth.md', 'Solo junto con un recurso protegido y un authorization server real.'],
   ['EV-4', 'A2A', 'Solo despues de desplegar un agente remoto observable.'],
   ['EV-5', 'Comercio agentico', 'Solo para un servicio pago concreto, con reglas legales y contables.'],
@@ -28,14 +31,26 @@ export default function ExternalVerificationPage() {
       <section className="document-hero site-map-hero">
         <span>AF-EV · fotografia externa</span>
         <h1>Una medicion independiente, separada de nuestra escala AF.</h1>
-        <p>Cloudflare observo el origen publico el 30 de agosto de 2026. Conservamos el resultado, lo que paso, lo que falta y la fecha. No lo presentamos como certificacion ni como garantia de indexacion.</p>
+        <p>Ultima consulta: 30 de septiembre de 2026, hora de Buenos Aires. Conservamos cada perfil y fecha; el resultado de contenido no sustituye la auditoria completa. No es una certificacion ni una garantia de indexacion.</p>
       </section>
 
       <section className="site-map-section" aria-labelledby="external-score-title">
         <div className="site-map-heading">
-          <span>Antes y despues</span>
-          <h2 id="external-score-title">53 / 100 · Level 2 → Level 4 Agent-Integrated</h2>
-          <p>El baseline devolvio 53/100. La reauditoria posterior devolvio Level 4 y el detalle de checks, pero el puntaje numerico no fue devuelto por el API; por eso no inventamos una cifra.</p>
+          <span>Resultado externo actual</span>
+          <h2 id="external-score-title">Level 4 Agent-Integrated · perfil completo</h2>
+          <p>El puntaje numerico no fue devuelto por el API. El baseline historico de agosto fue 53 / 100, Level 2; no es el puntaje actual.</p>
+        </div>
+        <div className="capability-list">
+          {latest.map((observation) => (
+            <article key={observation.observed_at}>
+              <ShieldCheck size={18} />
+              <div>
+                <strong>{'profile' in observation && observation.profile === 'all' ? 'Perfil completo' : 'Perfil de contenido'} · Level {observation.level} {observation.label}</strong>
+                <p>{observation.passed_checks.length} comprobaciones aprobadas; {observation.failed_checks.length} pendientes. Fecha UTC: <time dateTime={observation.observed_at}>{observation.observed_at}</time>.</p>
+                {'profile' in observation && observation.profile === 'content' && <p>Excluye las comprobaciones de API y autenticacion. No demuestra AF-5 transaccional ni 100/100.</p>}
+              </div>
+            </article>
+          ))}
         </div>
         <div className="capability-list">
           {verified.map((item) => (
