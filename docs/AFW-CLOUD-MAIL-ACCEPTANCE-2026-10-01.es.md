@@ -12,6 +12,10 @@ La misma tarea se actualizó a «AFW — seguimiento de correo y primer piloto»
 
 Inicio guardado: 2026-10-01 20:00 America/Argentina/Buenos_Aires. La UI muestra «Hoy 8 p.m. · Cada hora»; la herramienta del gestor devolvió `next_run_time: null`. El horario configurado no acredita que ese primer run haya ocurrido.
 
+Un segundo run manual con las instrucciones recurrentes utilizó Gmail, conservó la misma conversación y terminó sin aviso final ni envío. Consulta independiente: cuatro IDs coincidentes con la baseline, sin página siguiente. Acredita el comportamiento sin novedades en esa muestra; no prueba ledger durable ni todos los futuros runs.
+
+Prueba puntual de envío cloud `20261001-CF04`: no se ejecutó. La sesión no tenía conector Cloudflare API ni herramienta para descubrirlo. La búsqueda del directorio de plugins desde este chat tampoco devolvió Cloudflare. El plugin local usa el MCP HTTP oficial `https://mcp.cloudflare.com/mcp`; su disponibilidad/OAuth local no demuestra conexión en esa tarea web. No se creó clave, no se amplió acceso, no se sustituyó el remitente por Gmail ni se activó otra facturación. El seguimiento queda de solo lectura; una respuesta preparada en el chat no es un correo enviado.
+
 Identificadores y contactos particulares permanecen en la tarea privada, no en este repositorio público. La configuración y resultados se revisan en ChatGPT web → Se programó. Pausar esa tarea es el rollback, conservando mensajes e historial. No se creó scheduler desktop alternativo.
 
 ## Acreditado y pendiente
