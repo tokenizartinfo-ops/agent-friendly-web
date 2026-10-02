@@ -1,5 +1,7 @@
 # Roadmap operativo y continuidad de AFW
 
+2026-10-02, [envío propio cloud aceptado](AFW-OWN-MAIL-ACCEPTANCE-2026-10-02.es.md): owner aprobó nuevo borrador, consumo accepted y segunda consulta not_claimed. Primaria: un intento/un recibo. Gmail: un único mensaje INBOX a las 13:30:35 Buenos Aires. Canary cerrado (flags false/ambos Access deny), EMAIL/limiter/identidad temporal retirados, datos preservados. Siguiente: disparador/cadencia independiente sin PC con evidencia; no acredita gerente permanente ni cliente real.
+
 2026-10-02, PR171 integrada/CI aprobado: fix de transporte vacío publicado solo en mail-canary, 691 pruebas y lint/build pasan. Diagnóstico cloud con clave inexistente y sin EMAIL obtuvo 200 blocked, acreditando cuerpo vacío/JWT; no envío. Permiso propio vencido: intento anterior cancelado sin attempt/recibo; nuevo borrador idéntico own-cloud-mail-20261002-02 observado en Chrome. Servicio false/Access deny, EMAIL ausente; pendiente nueva aprobación humana antes de probar envío idempotente. [Continuidad](AFW-OWN-MAIL-PILOT-2026-10-02.es.md).
 
 2026-10-02, [piloto propio de correo preparado](AFW-OWN-MAIL-PILOT-2026-10-02.es.md): borrador privado en D1, hash verificado, cero intentos/recibos; pantalla Chrome observada con destinatario propio y aprobación habilitada. Operador propio abierto, servicio false/Access deny; EMAIL limitado y limitador preparados. Pendiente aprobación humana del mensaje exacto antes de consumidor cloud y aceptación idempotente; no envío ni cliente real.
