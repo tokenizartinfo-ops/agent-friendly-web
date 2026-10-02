@@ -13,3 +13,13 @@ DNS: consulta pública Google DoH DS agentfriendlyweb.dev el 02/10/2026 18:45:59
 Prueba PC apagado separada: declaración owner 14:59–15:32; UI horario avanzó a 16:00 pero no se observó recibo de ejecución. No aceptada por inferencia.
 
 Rollback local: retirar módulo/pruebas antes de integrar. No hay recurso remoto que revertir. Siguiente bloque: transporte cerrado con presupuesto y contrato A2A independientes de OAuth privado, después canary y auditoría externa comparable.
+
+## Transporte HTTP preparado
+
+lib/public-a2a-http.mjs permanece deshabilitado por defecto y falla cerrado sin una función limitadora ligada al runtime de confianza. Solo POST application/json; cuerpo máximo 8192 bytes comprobado también durante streaming, lectura con presupuesto máximo 5 segundos. Respuesta JSON-RPC no-store, versión 1.0, sin habilitar CORS. Rechazos 404/405/415/413/408/429/503 y errores saneados. No se basa en IP enviada por cliente ni acepta callback. El límite distribuido sigue pendiente: una función sintética de prueba no es un binding Cloudflare comprobado.
+
+Once pruebas A2A específicas pasan, incluyendo un cliente fetch separado contra servidor HTTP local por socket: protocolo, fecha del fixture y ausencia de autorización de publicación comprobados. Es aceptación del transporte local con datos sintéticos, no cliente SDK independiente ni interoperabilidad remota. Suite completa/compilación se registran tras terminar, sin inferir deploy.
+
+Validación final del bloque: npm test 702/702 aprobado; ESLint de los cuatro archivos A2A sin errores ni advertencias; npm run build terminó con código 0. Lint global del bloque anterior sin errores y una advertencia img ya existente. Recibos locales output/a2a-full-tests.txt y output/a2a-build.txt, excluidos de Git.
+
+Antes de canary: binding rate limiter y clave de servidor definidos, flag cerrado por entorno, plazo del diagnóstico completo y prueba de versión negativa. Antes de apex: canary con cliente independiente, evidencia de límites/errores y rollback del flag; solo entonces Agent Card ligada al endpoint verificado y nueva consulta al auditor externo. OAuth/expedientes privados conservan su contrato separado.
