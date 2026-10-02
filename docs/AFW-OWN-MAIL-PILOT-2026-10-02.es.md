@@ -1,5 +1,15 @@
 # Piloto propio de correo: revisión preparada
 
+## Corrección publicada y aceptación remota sin proveedor
+
+PR 171 integrada, CI verify aprobado 1m6s; merge 75c7dba57d553441af0cdae91ab9c6edd5db5093. Fuente canary d99d5878167de9b3abdd5ad7a1c1f62e4a6bbca7, versión de código cerrado 0a3fadce-462a-4331-92b7-f00bd8a8d31d. Overrides posteriores modificaron únicamente settings, sin nuevo código. Producción intacta.
+
+Turno cloud 01a0fd6c-7214-70e4-bf6d-b52b6afc5140: POST a clave sin mensaje, EMAIL ausente, identidad y limitador configurados, obtuvo 200 JSON state blocked, curl 0. Acredita que transporte vacío y JWT del servicio pasan el control; bloqueo deliberado por ausencia de proveedor evita envío. No equivale a aceptación del correo.
+
+Decisión original vencida comprobada: caso own-cloud-mail-20261002-01 cancelado, decisión revocada, attempt_id null, cero recibos. Nuevo borrador own-cloud-mail-20261002-02 copia contenido y hash idénticos bajo custodia; draft sin intento ni recibos. No renovar consentimiento silenciosamente ni crear otra clave si aparece un intento o recibo.
+
+Estado de handoff: operador true con allow únicamente owner, sesión 5m; servicio false y Access deny; EMAIL ausente. Identidad de servicio y limitador preparados. Chrome muestra nueva clave y botón Aprobar habilitado. Siguiente: owner aprueba nuevo borrador, verificar en primaria vigencia/hash/ausencia de intentos, añadir EMAIL con destino propio/remitente fijo, habilitar servicio exacto, consumir desde tarea cloud existente 01a0fd44-ed76-701d-8891-e028a2ce9032. Solo tras accepted consultar segunda vez; no reintentar uncertain/sending/error. Cerrar ambas políticas/flags y retirar bindings de envío al finalizar. Credencial sigue venciendo 3 de octubre 10:50 Buenos Aires.
+
 ## Seguimiento: aprobación registrada, envío bloqueado antes del intento
 
 El owner declaró haber pulsado Aprobar. La consulta primaria aún mostró draft y la pantalla no pudo confirmar estado; una recarga recuperó la lectura. El agente registró la aprobación ya autorizada por el owner mediante el botón, y comprobó approved con vigencia diez minutos. No atribuir el fallo transitorio a expiración de sesión sin evidencia.
