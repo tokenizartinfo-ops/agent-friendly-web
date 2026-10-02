@@ -1,5 +1,17 @@
 # Preparación del piloto con un asistente externo
 
+## Continuidad comprobada el 2 de octubre
+
+Consulta oficial actual de [OpenAI](https://developers.openai.com/plugins/build/auth) y fuente instalada `@cloudflare/workers-oauth-provider` 1.2.1: el proveedor publica RFC9207 issuer identification y añade `iss` a respuestas satisfactorias y errores de autorización. Esto permite preparar el modo CIMD estable de ChatGPT, conservando comprobación exacta del issuer y del callback mostrado por la gestión del cliente.
+
+La documentación describe `https://chatgpt.com/oauth/client.json` y `https://chatgpt.com/connector_platform_oauth_redirect` para ese modo. Son candidatos documentados, no configuración ya comprobada de esta conexión. Si no cumple issuer identification, son específicos del callback. Nunca autorizar un prefijo amplio de chatgpt.com ni copiar el callback loopback anterior.
+
+El proveedor soporta CIMD opcional y requiere `global_fetch_strictly_public`; implementa autenticación token endpoint `none` con PKCE. Su negociación admite que el documento de ChatGPT prefiera private_key_jwt si también ofrece none. No declarar soporte de private_key_jwt: el proveedor no lo implementa. La aplicación actual todavía fija `clientIdMetadataDocumentEnabled:false`.
+
+Siguiente implementación concreta: modo separado y deshabilitado por defecto para cliente ChatGPT exacto, sin DCR abierto; rechazar client_id ajeno antes de resolver metadata en authorize/token; verificar HTTPS, redirects exactos y resource; no compartir sujeto/grant del cliente loopback. Pruebas necesarias: callback/issuer distintos, metadata sin none, cliente ajeno, selección de proyecto ajeno, expiración, token cruzado y desconexión con token vigente. Luego comprobar gestión del cliente y pedir consentimiento humano solo para el recurso real acotado. No habilitar issuer discovery en el apex hasta que ese servicio funcione y se compruebe su descubrimiento externo.
+
+A2A también requiere fijar versión de protocolo antes de implementar: la especificación vigente documenta interfaces `protocolVersion`, enumeraciones ProtoJSON y wrappers de respuesta, distintos de ejemplos antiguos con `kind`. No mezclar esquemas 0.3/1.0 al publicar una tarjeta ni declarar compatibilidad por detección de un JSON. [Especificación consultada](https://a2a-protocol.org/latest/specification/).
+
 Estado: preparación, sin nuevo servicio remoto habilitado. La aceptación sintética real está cerrada en [su recibo](AFW-OAUTH-ACCEPTANCE-2026-10-01.es.md). El owner eligió ChatGPT para el primer piloto. No confundir el éxito del cliente loopback con compatibilidad demostrada de ChatGPT.
 
 ## Diferencias concretas encontradas
