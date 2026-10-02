@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## Prueba sin PC: programada y preflight aprobado
+
+2 de octubre21:48 UTC: prueba web cloud puntual para hoy19:30 Buenos Aires guardada; GPT6.1 Sol Bajo, sin repetición. Seguimiento horario previo intacto. Preflight21:47:32–21:47:46 UTC usó Gmail/reloj y obtuvo cuatro resultados sin errores ni efectos externos. [Recibo y criterio de aceptación](AFW-CLOUD-OFFLINE-TEST-2026-10-02.es.md). Falta comprobar mañana ejecución por horario durante el apagado real declarado por owner; no acredita gerente de código o reparación autónoma. DNSSEC pospuesto hasta mañana.
+
 ## Preparación inmediata: prueba cloud y registro ChatGPT
 
 Owner solicita prueba puntual cloud hoy19:30 Buenos Aires y prevé apagar19:15 hasta mañana. [Plan de aceptación](AFW-CLOUD-OFFLINE-TEST-2026-10-02.es.md) preparado; programación aún sin verificar por conexión de control Chrome indisponible. DNSSEC diferido hasta mañana por instrucción del owner. [Preflight ChatGPT](AFW-CHATGPT-CLIENT-PREFLIGHT-2026-10-02.es.md): cliente prerregistrado, callback obtenido de la UI actual, scopes mínimos y aceptación sintética antes de expediente real; sin nuevo servicio privado habilitado.
