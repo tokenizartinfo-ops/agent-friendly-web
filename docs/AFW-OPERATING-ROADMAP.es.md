@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## Seguimiento externo y A2A — 2 de octubre, 19:25 UTC
+
+Auditor externo repetido: all/apiApp4/5, content5/5; cinco brechas sin cambio. DNSSEC continúa pending y sin DS en padre. Adaptador de límites Workers preparado y probado localmente; falta plazo total, binding dedicado y canary antes de publicar A2A. Recibo: [seguimiento](AFW-READINESS-FOLLOWUP-2026-10-02.es.md). La notificación16:00 declarada con PC encendida no acepta la prueba de apagado.
+
 2026-10-02, [A2A diagnóstico y transporte cerrado](AFW-A2A-DIAGNOSTIC-CORE-2026-10-02.es.md): núcleo JSON-RPC 1.0 reutiliza auditoría pública y próximos pasos; once pruebas específicas pasan, incluida conexión HTTP local con cliente separado y datos sintéticos. Límites de cuerpo/lectura/concurrencia; falla cerrado sin limitador. Sin endpoint ni tarjeta publicados, sin nuevo puntaje acreditado. Siguiente: limitador distribuido, plazo total, canary y cliente externo antes de promoción. DNS DS continúa ausente en lectura fechada.
 
 2026-10-02, [kit visual y correo HTML propio recibido](design/afw-mail-20261002/README.es.md): tres modelos, brochure HTML/PDF y nueva ilustración de marca. Owner autorizó prueba propia única vía API Cloudflare, Gmail INBOX/Promotions y render Chrome confirmados; mensaje fechado 14:10:38 Buenos Aires, entregado 13 segundos después, SPF/DKIM/DMARC PASS. No envío a Sector de Sistemas, no consumidor automático HTML ni cambios en canary cerrado/producción. Siguiente: elegir dirección, integrar custodia/aprobación exactas del HTML y activos con pruebas antes del primer cliente; seguir DNSSEC/OAuth/A2A por recibo de auditoría.
