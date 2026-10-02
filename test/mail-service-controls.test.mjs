@@ -26,6 +26,28 @@ test('service can consume an approved key once using bound custody and provider'
   assert.equal((await (await handle(request())).json()).state,'accepted');
   await handle(request());assert.equal(sends,1);
 });
+test('an empty transport body is allowed but any actual payload is rejected before send',async()=>{
+  const db=await setup();let sends=0;
+  const handle=createMailServiceControls({db,config,keySet:publicKey,now:()=>101,limiter:{limit:async()=>({success:true})},email:{send:async()=>{sends++;return {messageId:'<empty-transport@example.com>'};}}});
+  const jwt=await token();
+  for(const body of [' ', '{}', 'x']) {
+    const result=await handle(new Request(config.origin+'/consume/reply-1',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':jwt,'Content-Length':'0'},body}));
+    assert.equal(result.status,403);assert.equal(sends,0);
+  }
+  const result=await handle(new Request(config.origin+'/consume/reply-1',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':jwt,'Content-Length':'0'},body:''}));
+  assert.equal((await result.json()).state,'accepted');assert.equal(sends,1);
+  const again=await handle(new Request(config.origin+'/consume/reply-1',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':jwt},body:''}));
+  assert.equal((await again.json()).state,'not_claimed');assert.equal(sends,1);
+});
+test('an unfinished transport body fails closed within a bounded read',async()=>{
+  const db=await setup();let sends=0,cancelled=false;
+  const handle=createMailServiceControls({db,config,keySet:publicKey,now:()=>101,limiter:{limit:async()=>({success:true})},email:{send:async()=>{sends++;}}});
+  const body=new ReadableStream({cancel(){cancelled=true;}});
+  const request=new Request(config.origin+'/consume/reply-1',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':await token()},body,duplex:'half'});
+  const result=await handle(request);
+  assert.equal(result.status,403);assert.equal((await result.json()).code,'service_request_required');
+  assert.equal(sends,0);assert.equal(cancelled,true);
+});
 test('human token, wrong service, shared audience, browser origin and arbitrary payload fail closed',async()=>{
   const db=await setup();let sends=0;
   const options={db,config,keySet:publicKey,email:{send:async()=>{sends++;}},limiter:{limit:async()=>({success:true})}};

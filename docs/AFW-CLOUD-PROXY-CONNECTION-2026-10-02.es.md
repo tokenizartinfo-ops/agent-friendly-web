@@ -1,5 +1,22 @@
 # Custodia cloud y prueba de conexión AFW
 
+## Aceptación de Access/proxy tras corrección humana
+
+El owner volvió a rotar el secreto del mismo token y pegó únicamente su valor completo en el formulario privado. ID previamente corregido conservado. Borrador `01a0fd37-257d-71f3-98ab-1f40c5a05000` guardado y publicado. Expiración confirmada por API: 2026-10-03T13:50:43Z (10:50 Buenos Aires), duración 24h, sin renovación.
+
+Nueva tarea cloud `01a0fd44-ed76-701d-8891-e028a2ce9032`: primera lectura unknown detuvo peticiones. Segunda lectura explícita ready/enforced; turno `01a0fd46-1ace-7471-b956-eff01f1d8d26` ejecutó exactamente dos GET con aprobación acotada, TLS verificado, sin redirects ni retries. Autenticado: 404 application/json, code unavailable, curl returncode 0. Control sin credenciales: 403 text/html, returncode 0. Access/proxy aceptado. Valores no leídos ni registrados.
+
+Consumidor restaurado y verificado deny everyone tras la prueba. Worker MAIL_SERVICE_ENABLED y MAIL_OPERATOR_ENABLED false; EMAIL ausente. Producción y datos intactos. Esto acredita credenciales y proxy; no acredita verificador JWT activo del Worker, envío, cliente real ni gerente autónomo con PC apagada.
+
+Siguiente bloque: preparar un mensaje propio revisable y el consumidor idempotente bajo identidad exacta, con rate limiter y aprobación trazable antes de habilitar envío. Conservar cierre del canary y no repetir el caso cancelado.
+## Seguimiento histórico: secreto actualizado, aceptación pendiente
+
+El owner rotó e ingresó el secreto en el formulario privado. Borrador guardado y publicado; vigencia original conservada. Nueva tarea `01a0fd1c-048e-735c-82ff-bfd8db53e038`: readiness inicialmente unknown, luego red enforced y ambos bindings ready explícitos, revisión 4, versión `cecfgver_6abfc54010f481a3a00a4525529cdb2e`. La primera lectura transitoria no autorizó peticiones.
+
+Con readiness actual, GET autenticado y control devolvieron 403 text/html. Un único GET posterior sin credenciales reconoció Cloudflare Access y presencia de cf-ray, sin indicadores de denegación del proxy; no se conservaron HTML, headers ni valores. Consumidor restaurado y verificado deny everyone. Worker flags false, sin EMAIL; no envío.
+
+El owner confirmó que había incluido el nombre del encabezado antes de los dos puntos en el ID original; declaró posible el mismo error en el secreto. Corrigió el ID en el formulario privado; borrador `01a0fd23-5f41-7095-93bc-dac304f64029` guardado y publicado. Nueva tarea `01a0fd30-ded7-7736-9519-9f592718e032`: metadatos transitorios unknown, luego ready/enforced. Primera prueba 000 no conservó diagnóstico individual y no acredita rechazo del proveedor. Prueba posterior con aprobación acotada require_escalated, revisión 5/5, obtuvo autenticado 403 text/html y control 403 text/html, ambos curl returncode 0. No identifica cuál valor falla. Consumidor restaurado y verificado deny. Siguiente: corregir únicamente el secreto mediante handoff humano, sin leer valores ni rotar por inferencia. No envío ni cambios en producción.
+
 ## Evidencia del 2 de octubre de 2026
 
 El owner ingresó personalmente los dos valores en la custodia privada de AFW Operations. Guardar el modal no bastaba: después de Guardar borrador, ambos bindings informaron `has_saved_binding:true`. El entorno se publicó. No se copiaron valores a documentos, Git o logs.
