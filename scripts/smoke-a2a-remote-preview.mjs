@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 const base=process.argv[2]||'http://127.0.0.1:8796';
-if(!['http://127.0.0.1:8796','http://127.0.0.1:8797'].includes(base))throw Error('Use the verified private Wrangler bridge');
+if(!['http://127.0.0.1:8796','http://127.0.0.1:8797','https://a2a-canary.agentfriendlyweb.dev'].includes(base))throw Error('Use the verified AFW test endpoint');
 const request=url=>({jsonrpc:'2.0',id:1,method:'SendMessage',params:{message:{messageId:'afw-cloud-smoke',role:'ROLE_USER',parts:[{data:{url,locale:'es'}}]}}});
 const receipts=[];
 async function rpc(body,version='1.0'){
@@ -23,5 +23,5 @@ try {
  assert.ok(data.audit.probes.some(probe=>probe.status===200),'No successful live probe');
  const statuses=[];for(let i=0;i<5;i++)statuses.push((await rpc(request('http://127.0.0.1'))).response.status);
  assert.ok(statuses.includes(429),'Live limiter did not reject the burst');
- console.log(JSON.stringify({verifiedAt:new Date().toISOString(),transport:'Wrangler remote preview through private loopback',target:data.audit.target,checkedAt:data.audit.checkedAt,successfulProbes:data.audit.probes.filter(p=>p.status===200).length,rateStatuses:statuses,publicationAuthorized:false}));
-} finally {await mkdir('output/a2a-canary',{recursive:true});await writeFile('output/a2a-canary/remote-receipts.json',JSON.stringify(receipts,null,2));}
+ console.log(JSON.stringify({verifiedAt:new Date().toISOString(),transport:base.startsWith('https:')?'Canonical Cloudflare canary HTTPS':'Wrangler remote preview through private loopback',target:data.audit.target,checkedAt:data.audit.checkedAt,successfulProbes:data.audit.probes.filter(p=>p.status===200).length,rateStatuses:statuses,publicationAuthorized:false}));
+} finally {await mkdir('output/a2a-canary',{recursive:true});await writeFile(base.startsWith('https:')?'output/a2a-canary/https-receipts.json':'output/a2a-canary/remote-receipts.json',JSON.stringify(receipts,null,2));}
