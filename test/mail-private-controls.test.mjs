@@ -21,6 +21,10 @@ async function setup() {
 }
 test('signed operator reviews exact content, approves atomically and revokes without a sending route',async()=>{
   const {db,hash,handle,request}=await setup();
+  const page=await handle(request('/message/reply-1'));
+  assert.equal(page.status,200);
+  assert.match(page.headers.get('Content-Type'),/text\/html/);
+  assert.equal((await handle(new Request(config.origin+'/message/reply-1'))).status,401);
   const review=await handle(request('/review/reply-1'));
   assert.equal(review.status,200); assert.equal(review.headers.get('Cache-Control'),'no-store');
   assert.equal((await review.json()).contentHash,hash);
