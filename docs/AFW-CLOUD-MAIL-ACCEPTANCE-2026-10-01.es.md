@@ -31,4 +31,6 @@ La deduplicación es conversacional, no un ledger transaccional. Antes de efecto
 
 ## Fuentes
 
+Consulta posterior, alrededor de las 21:00 BA: interfaz muestra próxima ejecución 22:00 y opción Pausar. No aparece un nuevo recibo de herramientas con fecha que permita distinguir ejecución por horario de mero avance del scheduler. No marcar aceptada la cadencia ni ordenador apagado. Consulta independiente de Gmail conserva cuatro resultados, sin página adicional ni nueva respuesta del piloto. [Registro de salida local](AFW-MAIL-OUTBOX-DESIGN.es.md) preparado; todavía no conectado a esta tarea.
+
 [Tareas programadas](https://learn.chatgpt.com/docs/automations): ejecución web, conexiones/eventos según disponibilidad. [Entornos cloud](https://learn.chatgpt.com/docs/environments/cloud-environments): no heredan archivos ni sesiones locales. La herramienta desktop ofrece creación local; se utilizó la interfaz web porque no hay operación cloud equivalente expuesta aquí.
