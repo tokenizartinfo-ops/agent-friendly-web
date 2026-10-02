@@ -14,6 +14,10 @@ Lint y build pasaron (una advertencia histórica de imagen). npm test falló en 
 
 Informe saneado de esa instancia fuera de Git: `/workspace/work/afw-acceptance-20261002T132324Z/REPORT.es.md`. Outputs resultó de solo lectura. No se alteró código, recursos remotos, red ni permisos para hacer pasar comprobaciones.
 
+## Contraste admitido y recuperación comprobada
+
+La revisión automática admitió solicitudes por comando, sin aprobación reutilizable ni cambio de política global. `npm test` pasó 689/689, D1 local terminó sin migraciones pendientes, servidor alcanzó readiness y smoke pasó 11/11. Proceso detenido al finalizar. Mismo HEAD y Git conservados. El contraste identifica la restricción de ejecución como origen de los bloqueos observados; no expone la regla interna exacta. Lint/build aprobados en el turno anterior, sin cambios posteriores de código.
+
 ## Siguiente cierre
 
-Contrastar política de ejecución de setup y tarea, recoger evidencia del bloqueo y usar únicamente mecanismos admitidos. No omitir asserts ni declarar operación completa por el arranque recuperado. Tras aceptación de pruebas locales: conexión mediada con destino específico, envío propio idempotente, disparador/cadencia y prueba con PC apagada. Consumidor sigue deshabilitado; todavía no se acredita correo autónomo ni recorrido del primer cliente.
+Conservar el uso acotado del mecanismo admitido para comprobaciones locales; no ampliar políticas globales ni omitir asserts. Sigue conexión mediada con destino específico, envío propio idempotente, disparador/cadencia y prueba con PC apagada. Consumidor sigue deshabilitado; todavía no se acredita correo autónomo ni recorrido del primer cliente.
