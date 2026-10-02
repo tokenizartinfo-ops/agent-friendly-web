@@ -40,7 +40,7 @@ Autorización: owner pidió explícitamente enviar una prueba visual desde hello
 
 Asunto: `AFW | Prueba visual de correo · 20261002-DESIGN01`. HTML exacto [05-prueba-editorial.html](05-prueba-editorial.html), SHA-256 `d93ae4d0fb138199c2a0dc1f1ba0bd450c2c992a90659cc534d12611b3b346be`. JPEG SHA-256 `3368cf7f11457d42a68193103a6e42d0fbc55afdce01a3dc3acffd5b6619b977`.
 
-Cloudflare success true, sin errores/bounces/supresión, inicialmente queued. Gmail encontró un único mensaje INBOX/CATEGORY_PROMOTIONS, recibido 2026-10-02 17:10:38 UTC (14:10:38 Buenos Aires), imagen JPEG inline 264.047 bytes. Chrome mostró encabezado, ilustración, texto, botón y firma. Evidencia local ignorada: `output/mail-visual-20261002/{attempt.json,request.json,receipt.json,gmail-render.png,gmail-hero.png,gmail-body.png}`. No se envió a Mataniya ni a Sector de Sistemas. No acredita Outlook, móvil, autenticación SPF/DKIM/DMARC ni futura entregabilidad.
+Cloudflare success true, sin errores/bounces/supresión, inicialmente queued. Gmail encontró un único mensaje INBOX/CATEGORY_PROMOTIONS, fechado 2026-10-02 17:10:38 UTC (14:10:38 Buenos Aires) y entregado 13 segundos después según Gmail, imagen JPEG inline 264.047 bytes. Chrome mostró encabezado, ilustración, texto, botón y firma. Evidencia local ignorada: `output/mail-visual-20261002/{attempt.json,request.json,receipt.json,gmail-render.png,gmail-hero.png,gmail-body.png}`. No se envió a Mataniya ni a Sector de Sistemas. El resumen «Original Message» de Gmail confirmó SPF PASS, DKIM PASS con dominio agentfriendlyweb.dev y DMARC PASS para este mensaje. No acredita Outlook, móvil ni futura entregabilidad.
 
 ## Integración necesaria antes del primer cliente
 
