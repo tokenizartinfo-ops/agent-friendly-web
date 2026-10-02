@@ -1,5 +1,7 @@
 # Roadmap operativo y continuidad de AFW
 
+2026-10-02, revisión canary lista: [recibo](AFW-MAIL-REVIEW-CANARY-2026-10-02.es.md), pantalla publicada y caso sintético draft. Operador habilitado solo para identidad propia con subject privado; consumidor false, Access deny everyone y sin EMAIL. Versión `6a1e244f-8386-45ea-8fd2-4ea2b67adbd4`; producción intacta. Solicitada aceptación humana aprobar→revocar; pendiente resultado y lectura D1. No acredita envío ni gerente cloud autónomo.
+
 2026-10-02, revisión privada mínima: [pantalla de correo](AFW-MAIL-REVIEW-UI-2026-10-02.es.md) bajo identidad existente, un mensaje y decisiones explícitas; texto inerte, estado consultado, fallos sin reintento automático. Suite local 689/689; validación de build/CI del incremento antes de publicación. Canary sigue cerrado; no envío ni aceptación autenticada real. Siguiente: caso sintético custodiado y aceptación visual propia con alcance acotado, antes de consumidor cloud.
 
 2026-10-02, canary de correo publicado y cerrado: [recibo](AFW-MAIL-CANARY-RELEASE-2026-10-02.es.md), versión `2f37fa85-7926-4ee9-919a-b086f876eff0` al 100%; dos custom domains protegidos por Access deny everyone, flags false y sin EMAIL/credenciales/cron. CI PR #163 aprobado, 686 pruebas; producción conserva `00861678-d968-41d3-be85-180896a321b7`. Siguiente: revisión privada mínima antes de pedir autenticación propia; envío cloud y cliente real siguen pendientes.
