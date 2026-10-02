@@ -10,9 +10,9 @@ from pypdf import PdfReader
 root = Path(__file__).resolve().parent
 out = root.parents[2] / 'output' / 'pdf'
 out.mkdir(parents=True, exist_ok=True)
-pdf = out / 'AFW-presentacion-general-v1.pdf'
-for name, filename in [('AFWText','arial.ttf'),('AFWBold','arialbd.ttf'),('AFWTitle','impact.ttf')]:
-    pdfmetrics.registerFont(TTFont(name,str(Path('C:/Windows/Fonts') / filename)))
+pdf = out / 'AFW-presentacion-general-v2-comic.pdf'
+for name in ['AFWText','AFWBold','AFWTitle']:
+    pdfmetrics.registerFont(TTFont(name,str(root / 'fonts' / 'Bangers-Regular.ttf')))
 pdfmetrics.registerFontFamily('AFWText',normal='AFWText',bold='AFWBold')
 ink, paper, cream, green, terracotta = map(HexColor,['#181512','#f3eadb','#fffaf1','#3c514b','#ad4f35'])
 c=canvas.Canvas(str(pdf),pagesize=(595.28,841.89))

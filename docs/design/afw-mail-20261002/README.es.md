@@ -1,4 +1,4 @@
-# Kit visual de correo y presentación AFW — v1
+# Kit visual de correo y presentación AFW — v2 cómic
 
 2 de octubre de 2026. Propuestas para revisar, no plantilla automática desplegada. [Comparar modelos](index.html).
 
@@ -7,7 +7,7 @@
 1. [Editorial cercana](01-editorial.html): primer correo para Sector de Sistemas. Encabezado AFW, robots, saludo contextual, beneficio comprensible, una pregunta y un botón. Primer recorrido gratuito; publicación se revisa con el cliente. El enlace al expediente se sustituirá solo después de comprobar su acceso real.
 2. [Cómic conversacional](02-comic.html): presentación de marca y difusión. Más expresivo, con tres pasos. Usar cuando el destinatario necesita entender qué hace AFW.
 3. [Acompañamiento simple](03-acompanamiento.html): seguimiento operativo. Una pregunta pendiente, una acción y contexto suficiente. Nunca mostrar «revisado», «guardado» o un avance sin evidencia del expediente.
-4. [Brochure](04-brochure.html): presentación genérica. Una empresa informativa no necesita el mismo alcance que una plataforma transaccional. PDF reproducible con `build-brochure.py`, salida `output/pdf/AFW-presentacion-general-v1.pdf` desde raíz del repositorio; una página inspeccionada visualmente.
+4. [Brochure](04-brochure.html): presentación genérica. Una empresa informativa no necesita el mismo alcance que una plataforma transaccional. PDF reproducible con `build-brochure.py`, salida `output/pdf/AFW-presentacion-general-v2-comic.pdf` desde raíz del repositorio; una página inspeccionada visualmente.
 
 ## Identidad completa
 
@@ -17,7 +17,7 @@
 | Texto | Tinta #181512; secundario #665d53 |
 | Acción | Verde #3c514b, texto blanco |
 | Acento | Terracota #ad4f35; no colorear cada párrafo |
-| Tipografía | Impact/Arial Narrow para títulos cortos; Arial/Helvetica para lectura. Sin fuentes externas en correo |
+| Tipografía | Bangers en TODO el corpus: títulos, párrafos, botones, firma y PDF. Fuente OFL incluida en fonts/; sin fuentes remotas en correo |
 | Ilustración | Robots originales conectados por latas; motivo de comunicación y acompañamiento |
 | Composición | Ancho máximo 600 px, cuerpo 16 px, interlineado 1.65, una acción principal |
 | Remitente | AFW · Agent Friendly Web, hello@agentfriendlyweb.dev |
@@ -26,7 +26,7 @@
 | Preheader | Resumir beneficio o siguiente paso; diferente del asunto |
 | Firma | «Un paso claro. Una decisión a la vez.» y dominio público |
 
-Texto humano seleccionable fuera de la ilustración; alt significativo; datos esenciales disponibles con imágenes bloqueadas. Sin scripts, formularios, fuentes remotas ni píxeles de seguimiento. Alternativa text/plain equivalente. No usar enlaces a expedientes privados como destinos genéricos, ni incluir OTP/secretos en correo.
+Maquetas y PDF con texto seleccionable. En correo real, paneles tipográficos PNG inline CID conservan Bangers aunque Gmail descarte fuentes: alt significativo y alternativa text/plain equivalente. Con imágenes bloqueadas no se garantiza la misma presentación visual. Sin scripts, formularios, fuentes remotas ni píxeles de seguimiento. Alternativa text/plain equivalente. No usar enlaces a expedientes privados como destinos genéricos, ni incluir OTP/secretos en correo.
 
 ## Ilustración y reproducción
 
@@ -34,7 +34,7 @@ Nueva ilustración generada con herramienta integrada image_gen, referencia `pub
 
 `node docs/design/afw-mail-20261002/build-preview.mjs` reproduce maquetas autocontenidas; sus imágenes data URI son para comparación local. El correo real reemplazó ese URI por una imagen MIME inline cid:afw-robots-header. No usar data URI como solución de producción para correo.
 
-## Prueba real propia aceptada
+## Prueba histórica v1 (sustituida visualmente por v2)
 
 Autorización: owner pidió explícitamente enviar una prueba visual desde hello a tokenizart.info@gmail.com en esta conversación. Un único POST al API oficial Cloudflare Email Sending; canary cerrado y producción sin cambios. Dos intentos previos de cargar el archivo público remoto fallaron **antes** del POST de envío; no fueron envíos ni reintentos del proveedor.
 
@@ -54,3 +54,22 @@ El consumidor actual admite exclusivamente to/subject/text. Esta prueba propia a
 - Solo entonces activar el primer correo real con acceso comprobado de Sector de Sistemas y destinatario exacto. No convertir consentimiento del piloto gratuito en suscripción a marketing.
 
 Fuente: [Cloudflare Email Sending](https://developers.cloudflare.com/api/resources/email_sending/methods/send/).
+
+## Corrección v2 y envíos comprobados — 2 octubre 2026
+
+El owner exige tipografía cómic en toda la pieza; esta instrucción sustituye la separación anterior de títulos cómic/cuerpo convencional para estas comunicaciones AFW. Se actualizaron los cuatro modelos HTML, galería, brochure PDF y generadores. 05-prueba-editorial.html se preserva como evidencia histórica exacta y no es la plantilla vigente.
+
+Bangers-Regular.ttf y OFL.txt provienen de google/fonts, ofl/bangers. Paleta, robots con latas, firma y remitente permanecen coherentes. build-comic-mail.py genera paneles tipográficos deterministas a doble resolución, HTML de comparación, alternativa textual y payloads; no incorpora texto a la ilustración original. El PDF incorpora Bangers y conserva texto y enlaces.
+
+Cuatro POST administrativos autorizados desde hello@agentfriendlyweb.dev únicamente a tokenizart.info@gmail.com. Cada intento tiene marcador exclusivo previo y recibo local; sin reintentos ni envío al cliente. Cloudflare aceptó los cuatro, sin errores, rebotes permanentes ni supresión. Gmail confirmó exactamente cuatro mensajes en INBOX/CATEGORY_PROMOTIONS:
+
+| Modelo | Fecha UTC | Gmail message ID |
+| --- | --- | --- |
+| 01 Editorial cercana | 17:36:43 | 1a0fdb0c6f08fc97 |
+| 02 Cómic conversacional | 17:36:54 | 1a0fdb0edc89ba1f |
+| 03 Acompañamiento simple | 17:37:06 | 1a0fdb111ca7fa99 |
+| 04 Presentación general | 17:38:05 | 1a0fdb212b2a199d |
+
+Asuntos identificados COMIC02. Modelo 04 incluye AFW-presentacion-general-v2-comic.pdf, 348888 bytes, confirmado por Gmail. Chrome mostró Bangers en cuerpo y encabezado del correo recibido y el adjunto. Evidencia local ignorada output/mail-comic-20261002/ (request model-NN.json, attempt-NN.json, receipt-NN.json, gmail-comic.png). No acredita Outlook/móvil ni integra aún la cola automática HTML.
+
+Criterio permanente: cada nueva pieza respeta fuente en todo el corpus, paleta y robots propios, una acción principal, tono cercano y evidencia honesta. La integración automática deberá aprobar versión/hash del texto y paneles conjuntamente, mantener alternativa textual y destinatario comprobado.
