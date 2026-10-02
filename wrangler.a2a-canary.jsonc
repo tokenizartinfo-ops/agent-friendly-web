@@ -1,0 +1,32 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "agent-friendly-web-a2a-canary",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "main": "worker/a2a/index.mjs",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "vars": {
+    "A2A_ENABLED": "false"
+  },
+  "ratelimits": [
+    {
+      "name": "A2A_RATE_LIMITER",
+      "namespace_id": "26100201",
+      "simple": {
+        "limit": 6,
+        "period": 60
+      }
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "a2a-canary.agentfriendlyweb.dev",
+      "custom_domain": true
+    }
+  ]
+}

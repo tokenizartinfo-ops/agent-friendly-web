@@ -1,5 +1,23 @@
 # Roadmap operativo y continuidad de AFW
 
+## Estado vigente: A2A público aceptado, 20:53 UTC del 2 de octubre
+
+Diagnóstico público y Agent Card publicados y comprobados por HTTPS independiente. Auditor externo all/apiApp subió de4/5 a5/5, de11 a12PASS; quedan DNS y tres señales OAuth/Auth. Sin puntuación numérica nueva ni certificación transaccional. Suite717/717 y revisión independiente aprobadas. [Recibo y rollback](AFW-A2A-PUBLIC-RELEASE-2026-10-02.es.md). Los apartados siguientes conservan evidencia histórica anterior. Próximo: completar registro/lectura privada ChatGPT antes de anunciar OAuth; verificar DNSSEC y separar la aceptación del gerente sin PC.
+
+## A2A: ejecución remota Cloudflare comprobada
+
+Worker dedicado agent-friendly-web-a2a-canary: diagnóstico real AFW,15 sondas/13 HTTP200, destino privado/versiones rechazados y ráfaga429 comprobados mediante remote preview y cliente HTTP separado. Worker persistente cerrado, flagfalse y workers.dev/previews deshabilitados verificados por API; sesión temporal terminada. Suite712/712, lint/build aprobados. [Recibo](AFW-A2A-CLOUD-CANARY-2026-10-02.es.md). Próximo: endpoint canónico protegido en canary y aceptación independiente antes de promoción/Agent Card. No aceptación SDK ni mejora externa atribuible todavía.
+
+## A2A: cancelación completa preparada
+
+Plazo de diagnóstico 12 segundos propagado a DNS, fetch y lectura de cuerpos; no libera concurrencia mientras una operación sigue pendiente. Cinco regresiones nuevas; suite710/710 aprobada. Continúa la integración en canary dedicado con binding y flag cerrado, cliente independiente y rollback antes de Agent Card público. [Evidencia](AFW-A2A-DIAGNOSTIC-CORE-2026-10-02.es.md). Sin cambio de producción ni nueva puntuación externa atribuible a este bloque.
+
+## Seguimiento externo y A2A — 2 de octubre, 19:25 UTC
+
+Auditor externo repetido: all/apiApp4/5, content5/5; cinco brechas sin cambio. DNSSEC continúa pending y sin DS en padre. Adaptador de límites Workers preparado y probado localmente; falta plazo total, binding dedicado y canary antes de publicar A2A. Recibo: [seguimiento](AFW-READINESS-FOLLOWUP-2026-10-02.es.md). La notificación16:00 declarada con PC encendida no acepta la prueba de apagado.
+
+2026-10-02, [A2A diagnóstico y transporte cerrado](AFW-A2A-DIAGNOSTIC-CORE-2026-10-02.es.md): núcleo JSON-RPC 1.0 reutiliza auditoría pública y próximos pasos; once pruebas específicas pasan, incluida conexión HTTP local con cliente separado y datos sintéticos. Límites de cuerpo/lectura/concurrencia; falla cerrado sin limitador. Sin endpoint ni tarjeta publicados, sin nuevo puntaje acreditado. Siguiente: limitador distribuido, plazo total, canary y cliente externo antes de promoción. DNS DS continúa ausente en lectura fechada.
+
 2026-10-02, [kit visual y correo HTML propio recibido](design/afw-mail-20261002/README.es.md): tres modelos, brochure HTML/PDF y nueva ilustración de marca. Owner autorizó prueba propia única vía API Cloudflare, Gmail INBOX/Promotions y render Chrome confirmados; mensaje fechado 14:10:38 Buenos Aires, entregado 13 segundos después, SPF/DKIM/DMARC PASS. No envío a Sector de Sistemas, no consumidor automático HTML ni cambios en canary cerrado/producción. Siguiente: elegir dirección, integrar custodia/aprobación exactas del HTML y activos con pruebas antes del primer cliente; seguir DNSSEC/OAuth/A2A por recibo de auditoría.
 
 2026-10-02, [auditoría externa nueva y diagnóstico DNSSEC](AFW-EXTERNAL-AUDIT-2026-10-02.es.md): all nivel 4, 11 PASS/5 FAIL; content nivel 5, 6 PASS/1 FAIL. DNSSEC sigue pending, CDS y SVCB firmados presentes, DS ausente en delegación; Registrar Cloudflare confirmado. Siguiente: investigar operación Registrar, luego OAuth ChatGPT real, registro auth.md y servicio A2A público comprobable. Sin cambio de producción ni puntuación numérica nueva. Owner pospone prueba PC apagada mientras otro chat trabaja.
