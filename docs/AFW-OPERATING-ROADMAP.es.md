@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## Estado vigente: A2A público aceptado, 20:53 UTC del 2 de octubre
+
+Diagnóstico público y Agent Card publicados y comprobados por HTTPS independiente. Auditor externo all/apiApp subió de4/5 a5/5, de11 a12PASS; quedan DNS y tres señales OAuth/Auth. Sin puntuación numérica nueva ni certificación transaccional. Suite717/717 y revisión independiente aprobadas. [Recibo y rollback](AFW-A2A-PUBLIC-RELEASE-2026-10-02.es.md). Los apartados siguientes conservan evidencia histórica anterior. Próximo: completar registro/lectura privada ChatGPT antes de anunciar OAuth; verificar DNSSEC y separar la aceptación del gerente sin PC.
+
 ## A2A: ejecución remota Cloudflare comprobada
 
 Worker dedicado agent-friendly-web-a2a-canary: diagnóstico real AFW,15 sondas/13 HTTP200, destino privado/versiones rechazados y ráfaga429 comprobados mediante remote preview y cliente HTTP separado. Worker persistente cerrado, flagfalse y workers.dev/previews deshabilitados verificados por API; sesión temporal terminada. Suite712/712, lint/build aprobados. [Recibo](AFW-A2A-CLOUD-CANARY-2026-10-02.es.md). Próximo: endpoint canónico protegido en canary y aceptación independiente antes de promoción/Agent Card. No aceptación SDK ni mejora externa atribuible todavía.

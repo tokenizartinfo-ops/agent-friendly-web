@@ -6,6 +6,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Canonical surfaces
 
+- Independent public A2A runtime: `agent-friendly-web-a2a`, source `ee62698`, version `3238969a-d5e8-45c6-9417-fc19452b762a`, verified2026-10-02. Receipt and rollback: `docs/AFW-A2A-PUBLIC-RELEASE-2026-10-02.es.md`. This is not the web/private Worker release. External all/apiApp5/5,12PASS/4FAIL; no numeric score returned. Preserve private Access and do not advertise OAuth until real client acceptance.
+
 - Latest production source: `4788e5a4caed7d57bd783201ffb6bd43da02c8c9`, Worker version `00861678-d968-41d3-be85-180896a321b7`, 100%. Receipt: `docs/AFW-DELIVERY-PLAN-RELEASE-2026-10-01.es.md`. Delivery planning, saved reload and concurrent-tab rejection were accepted in Canary; production artifact/Access smoke passed after measured deployment propagation. Preserve existing Access/copilot pilot and D1; migrations 0011–0013 applied. Code rollback is `d09bcf52-6fae-4c34-bfec-40b715384205` preserving tables/data. Version overrides only prove a candidate included in the active deployment, even at 0%. Verify a specific new asset hash before promotion and again on normal traffic after bounded convergence (30s budget), not solely immediate CLI success. Read the receipt before calling a transient asset 404 a failed build. External audit evidence remains `docs/AFW-EXTERNAL-AUDIT-2026-09-30.es.md`; this release does not prove a numeric score increase or DNSSEC resolution.
 
 - Current release provenance: `docs/AFW-GUIDED-RELEASE-2026-09-30.es.md`; previous releases remain dated evidence under `docs/`. Verify the active deployment again before publishing; a worktree HEAD alone does not represent the frozen production source.
