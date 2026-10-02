@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "agent-friendly-web-mail-canary",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "main": "worker/mail/index.mjs",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "mail-ops-canary.agentfriendlyweb.dev", "custom_domain": true, "zone_name": "agentfriendlyweb.dev" },
+    { "pattern": "mail-consumer-canary.agentfriendlyweb.dev", "custom_domain": true, "zone_name": "agentfriendlyweb.dev" }
+  ],
+  "vars": {
+    "MAIL_OPERATOR_ENABLED": "false",
+    "MAIL_SERVICE_ENABLED": "false",
+    "MAIL_OPERATOR_ORIGIN": "https://mail-ops-canary.agentfriendlyweb.dev",
+    "MAIL_SERVICE_ORIGIN": "https://mail-consumer-canary.agentfriendlyweb.dev",
+    "MAIL_ACCESS_TEAM_DOMAIN": "tokenizart.cloudflareaccess.com",
+    "MAIL_OPERATOR_AUDIENCE": "47c16f2a2a2d7bfd43d4ec39849a4cb4a8bef799d692c36ea6ea463efe37a56c",
+    "MAIL_SERVICE_AUDIENCE": "452a0d1e0c413215280c58e7b02d5abe09853298f090e587e16945190fab0ad5"
+  },
+  "d1_databases": [
+    { "binding": "MAIL_DB", "database_name": "agent-friendly-web-mail-canary", "database_id": "e1d480e2-e369-4f0b-ae7d-5cab3b7eee16" }
+  ]
+}
