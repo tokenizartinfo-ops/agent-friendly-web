@@ -40,3 +40,13 @@ test('legacy methods/version, notifications and batch rejected without running a
  assert.ok((await agent.handle([request()])).error);
  const r=request();delete r.id;assert.ok((await agent.handle(r)).error);
 });
+
+test('diagnostic deadline aborts work and only releases capacity after it settles',async()=>{
+ let finish;let signal;
+ const agent=createDiagnosticAgent({timeoutMs:10,maxConcurrent:1,audit:(_,options)=>{signal=options?.signal;return new Promise(resolve=>{finish=resolve;});}});
+ const pending=agent.handle(request());await new Promise(resolve=>setTimeout(resolve,25));
+ assert.equal(signal?.aborted,true);
+ assert.equal((await agent.handle(request())).error.code,-32004);
+ finish(scan);assert.equal((await pending).error.message,'Diagnostic unavailable');
+ assert.throws(()=>createDiagnosticAgent({timeoutMs:0}));
+});

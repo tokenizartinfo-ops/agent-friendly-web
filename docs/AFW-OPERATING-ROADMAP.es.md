@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## A2A: cancelación completa preparada
+
+Plazo de diagnóstico 12 segundos propagado a DNS, fetch y lectura de cuerpos; no libera concurrencia mientras una operación sigue pendiente. Cinco regresiones nuevas; suite710/710 aprobada. Continúa la integración en canary dedicado con binding y flag cerrado, cliente independiente y rollback antes de Agent Card público. [Evidencia](AFW-A2A-DIAGNOSTIC-CORE-2026-10-02.es.md). Sin cambio de producción ni nueva puntuación externa atribuible a este bloque.
+
 ## Seguimiento externo y A2A — 2 de octubre, 19:25 UTC
 
 Auditor externo repetido: all/apiApp4/5, content5/5; cinco brechas sin cambio. DNSSEC continúa pending y sin DS en padre. Adaptador de límites Workers preparado y probado localmente; falta plazo total, binding dedicado y canary antes de publicar A2A. Recibo: [seguimiento](AFW-READINESS-FOLLOWUP-2026-10-02.es.md). La notificación16:00 declarada con PC encendida no acepta la prueba de apagado.

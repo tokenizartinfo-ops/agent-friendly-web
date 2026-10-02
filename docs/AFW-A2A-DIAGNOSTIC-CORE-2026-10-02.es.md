@@ -23,3 +23,11 @@ Once pruebas A2A específicas pasan, incluyendo un cliente fetch separado contra
 Validación final del bloque: npm test 702/702 aprobado; ESLint de los cuatro archivos A2A sin errores ni advertencias; npm run build terminó con código 0. Lint global del bloque anterior sin errores y una advertencia img ya existente. Recibos locales output/a2a-full-tests.txt y output/a2a-build.txt, excluidos de Git.
 
 Antes de canary: binding rate limiter y clave de servidor definidos, flag cerrado por entorno, plazo del diagnóstico completo y prueba de versión negativa. Antes de apex: canary con cliente independiente, evidencia de límites/errores y rollback del flag; solo entonces Agent Card ligada al endpoint verificado y nueva consulta al auditor externo. OAuth/expedientes privados conservan su contrato separado.
+
+## Plazo completo y cancelación — seguimiento
+
+El diagnóstico A2A ahora tiene un plazo predeterminado de 12 segundos (máximo configurable 15 segundos). Su AbortSignal se propaga a la resolución DNS, solicitudes y lectura de cuerpos; cada solicitud conserva además su límite de 8 segundos, tamaño acotado y redirecciones manuales. La lectura cancelada libera su reader. No devuelve un diagnóstico parcial como éxito tras vencer el plazo.
+
+El cupo por instancia se conserva hasta que termina la operación: un adaptador inyectado que ignore la señal no permite iniciar nuevos trabajos ilimitados. El runtime estándar usa fetch cancelable; el límite no equivale a terminación forzada de JavaScript arbitrario. La espera de admisión y lectura del cuerpo tienen presupuestos separados de 1 y 5 segundos.
+
+Cinco pruebas nuevas comprueban cancelación previa, cuerpo detenido, DNS, las 15 sondas y conservación del cupo hasta finalizar. Suite completa 710/710 aprobada; npm run lint sin errores (una advertencia img preexistente); npm run build terminó con código 0. Recibos locales output/a2a-deadline-{tests,lint,build}.txt. No se publicó ruta ni Agent Card. Continúa pendiente conectar binding dedicado y flag cerrado en un Worker canary propio, verificar comportamiento remoto con cliente independiente y solo después promover el servicio y anunciarlo.

@@ -91,3 +91,16 @@ test('fetchLimitedPublicUrl truncates response bodies at the byte limit', async 
   assert.equal(result.truncated, true);
   assert.equal(new TextEncoder().encode(result.body).byteLength, MAX_PUBLIC_RESPONSE_BYTES);
 });
+
+test('external abort stops a stalled response stream and cancels its reader',async()=>{
+ const controller=new AbortController();let cancelled=false;
+ const pending=fetchLimitedPublicUrl('https://museo.example/',{signal:controller.signal,validatedHostname:'museo.example',fetchImpl:async()=>new Response(new ReadableStream({cancel(){cancelled=true;}}))});
+ setTimeout(()=>controller.abort(),15);
+ await assert.rejects(Promise.race([pending,new Promise((_,reject)=>setTimeout(()=>reject(Error('test watchdog')),100))]),error=>error.name==='AbortError');
+ assert.equal(cancelled,true);
+});
+test('already cancelled network request performs neither DNS nor fetch',async()=>{
+ const controller=new AbortController();controller.abort();let calls=0;
+ await assert.rejects(fetchLimitedPublicUrl('https://museo.example/',{signal:controller.signal,resolveDns:async()=>{calls++;return ['104.16.132.229'];},fetchImpl:async()=>{calls++;return new Response('unexpected');}}));
+ assert.equal(calls,0);
+});
