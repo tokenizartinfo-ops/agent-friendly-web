@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## A2A: ejecución remota Cloudflare comprobada
+
+Worker dedicado agent-friendly-web-a2a-canary: diagnóstico real AFW,15 sondas/13 HTTP200, destino privado/versiones rechazados y ráfaga429 comprobados mediante remote preview y cliente HTTP separado. Worker persistente cerrado, flagfalse y workers.dev/previews deshabilitados verificados por API; sesión temporal terminada. Suite712/712, lint/build aprobados. [Recibo](AFW-A2A-CLOUD-CANARY-2026-10-02.es.md). Próximo: endpoint canónico protegido en canary y aceptación independiente antes de promoción/Agent Card. No aceptación SDK ni mejora externa atribuible todavía.
+
 ## A2A: cancelación completa preparada
 
 Plazo de diagnóstico 12 segundos propagado a DNS, fetch y lectura de cuerpos; no libera concurrencia mientras una operación sigue pendiente. Cinco regresiones nuevas; suite710/710 aprobada. Continúa la integración en canary dedicado con binding y flag cerrado, cliente independiente y rollback antes de Agent Card público. [Evidencia](AFW-A2A-DIAGNOSTIC-CORE-2026-10-02.es.md). Sin cambio de producción ni nueva puntuación externa atribuible a este bloque.

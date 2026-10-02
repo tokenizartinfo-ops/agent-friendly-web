@@ -10,10 +10,10 @@ Remote preview explícito (no Miniflare local): código ejecutado en Cloudflare,
 
 El puente Wrangler entregó cuerpo vacío para429 en la primera prueba; el cliente esperaba JSON y falló aunque el log remoto confirmaba429. Se corrigió el cliente para tolerar ausencia de cuerpo en rechazo HTTP; segunda prueba completa pasó. Esto no acredita JSON de error a través de un endpoint público estable. Rate limit es eventual por ubicación: se observaron más admisiones que seis; no prometer presupuesto global estricto.
 
-Recibos locales ignorados output/a2a-canary/remote-receipts.json. Repetición: sesión privada `npx wrangler dev --config wrangler.a2a-canary.jsonc --remote --ip 127.0.0.1 --port8796 --var A2A_ENABLED:true`; cliente `node scripts/smoke-a2a-remote-preview.mjs`. Usar espacios correctos en flags: `--port 8796`. No es una prueba con SDK A2A oficial ni aceptación de despliegue canónico/Access.
+Recibos locales ignorados output/a2a-canary/remote-receipts.json. Repetición: sesión privada `npx wrangler dev --config wrangler.a2a-canary.jsonc --remote --ip 127.0.0.1 --port 8796 --var A2A_ENABLED:true`; cliente `node scripts/smoke-a2a-remote-preview.mjs`. No es una prueba con SDK A2A oficial ni aceptación de despliegue canónico/Access.
 
 ## Validación y continuación
 
 712/712 pruebas completas; lint global sin errores (advertencia img previa); build completo código0; ESLint específico Worker/pruebas/script aprobado. Recibos output/a2a-canary-{tests,lint,build}.txt. Módulo mantiene un agente por instancia para conservar el contador de concurrencia entre peticiones.
 
-Pendiente de este recibo: despliegue persistente cerrado y verificación API de flag/subdominios. Después preparar endpoint canónico con protección canary y cliente independiente antes de promoción/Agent Card. Producción sin A2A y ninguna subida externa de puntaje atribuible al ensayo.
+Despliegue persistente cerrado completado: source378f97b; Worker version6ea0f124-3f5d-4c59-ad56-d7ed226a7c75. CLI confirma «No targets deployed». API settings confirma flagfalse y binding dedicado6/60; API subdomain confirma enabledfalse y previews_enabledfalse. Puente loopback dejó de responder después de terminar el proceso. Sin rutas, hostname público ni recursos de datos. Después preparar endpoint canónico con protección canary y cliente independiente antes de promoción/Agent Card. Producción sin A2A y ninguna subida externa de puntaje atribuible al ensayo.
