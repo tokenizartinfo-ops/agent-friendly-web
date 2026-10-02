@@ -20,3 +20,12 @@ test('audit cancellation cancels every stalled probe without returning a partial
  try {const pending=runPublicAudit('https://example.com',{signal:controller.signal});await new Promise(resolve=>setTimeout(resolve,15));controller.abort();await assert.rejects(pending);assert.equal(started,PUBLIC_AUDIT_PROBES.length);assert.equal(cancelled,started);}
  finally {globalThis.fetch=original;}
 });
+
+test('one failed DNS family waits for the sibling query before releasing the audit',async()=>{
+ const original=globalThis.fetch;let finish;let settled=false;
+ globalThis.fetch=async(url)=>{if(String(url).endsWith('type=A'))throw Error('DNS unavailable');return new Promise(resolve=>{finish=()=>resolve(Response.json({Answer:[{type:28,data:'2606:4700::6810:84e5'}]}));});};
+ try{
+  const pending=runPublicAudit('https://example.com').then(()=>{settled=true;},error=>{settled=true;return error;});
+  await new Promise(resolve=>setTimeout(resolve,10));assert.equal(settled,false);finish();assert.ok((await pending) instanceof Error);
+ }finally{finish?.();globalThis.fetch=original;}
+});

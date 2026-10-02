@@ -13,6 +13,6 @@ test('A2A Worker requires dedicated limiter and shares instance concurrency',asy
  assert.equal((await worker.fetch(request(),{A2A_ENABLED:'true'})).status,503);
  const env={A2A_ENABLED:'true',A2A_RATE_LIMITER:{limit:async()=>({success:true})}};
  const first=worker.fetch(request(),env);await new Promise(resolve=>setTimeout(resolve,5));
- const second=await worker.fetch(request(),env);assert.equal((await second.json()).error.code,-32004);
+ const second=await worker.fetch(request(),env);assert.equal((await second.json()).error.code,-32000);
  finish({target:'https://example.com',checkedAt:new Date().toISOString(),evidence:{},limits:[]});assert.ok((await (await first).json()).result);
 });

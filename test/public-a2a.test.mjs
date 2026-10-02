@@ -27,7 +27,7 @@ test('does not resume client task/context or accept callbacks',async()=>{
 });
 test('bounded concurrency rejects extra requests and releases slot after failure',async()=>{
  let finish;const agent=createDiagnosticAgent({audit:()=>new Promise(resolve=>{finish=resolve;}),maxConcurrent:1});
- const first=agent.handle(request()); const second=await agent.handle(request());assert.equal(second.error.code,-32004);
+ const first=agent.handle(request()); const second=await agent.handle(request());assert.equal(second.error.code,-32000);
  finish(scan);assert.ok((await first).result);
  const failing=createDiagnosticAgent({audit:async()=>{throw Error('secret-provider-detail');}});
  assert.equal((await failing.handle(request())).error.message,'Diagnostic unavailable');
@@ -46,7 +46,7 @@ test('diagnostic deadline aborts work and only releases capacity after it settle
  const agent=createDiagnosticAgent({timeoutMs:10,maxConcurrent:1,audit:(_,options)=>{signal=options?.signal;return new Promise(resolve=>{finish=resolve;});}});
  const pending=agent.handle(request());await new Promise(resolve=>setTimeout(resolve,25));
  assert.equal(signal?.aborted,true);
- assert.equal((await agent.handle(request())).error.code,-32004);
+ assert.equal((await agent.handle(request())).error.code,-32000);
  finish(scan);assert.equal((await pending).error.message,'Diagnostic unavailable');
  assert.throws(()=>createDiagnosticAgent({timeoutMs:0}));
 });

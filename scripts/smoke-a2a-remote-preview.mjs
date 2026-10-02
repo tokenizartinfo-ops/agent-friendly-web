@@ -5,9 +5,15 @@ if(!['http://127.0.0.1:8796','http://127.0.0.1:8797','https://a2a-canary.agentfr
 const request=url=>({jsonrpc:'2.0',id:1,method:'SendMessage',params:{message:{messageId:'afw-cloud-smoke',role:'ROLE_USER',parts:[{data:{url,locale:'es'}}]}}});
 const receipts=[];
 async function rpc(body,version='1.0'){
- const response=await fetch(`${base}/a2a`,{method:'POST',headers:{'content-type':'application/json','a2a-version':version},body:JSON.stringify(body),signal:AbortSignal.timeout(25000)});
- const text=await response.text();
- const result=text?JSON.parse(text):null;receipts.push({at:new Date().toISOString(),status:response.status,bodyBytes:new TextEncoder().encode(text).length,version:response.headers.get('a2a-version'),cache:response.headers.get('cache-control'),result});return {response,result};
+ const deadline=Date.now()+30000;
+ while(true){
+  const response=await fetch(`${base}/a2a`,{method:'POST',redirect:'manual',headers:{'content-type':'application/json','a2a-version':version},body:JSON.stringify(body),signal:AbortSignal.timeout(25000)});
+  const text=await response.text();
+  const result=text&&response.headers.get('content-type')?.includes('application/json')?JSON.parse(text):null;
+  receipts.push({at:new Date().toISOString(),status:response.status,bodyBytes:new TextEncoder().encode(text).length,version:response.headers.get('a2a-version'),cache:response.headers.get('cache-control'),result});
+  if(response.status===404&&result?.error==='Unavailable'&&Date.now()<deadline){await new Promise(resolve=>setTimeout(resolve,1000));continue;}
+  return {response,result};
+ }
 }
 try {
  assert.equal((await fetch(`${base}/.well-known/agent-card.json`)).status,404);

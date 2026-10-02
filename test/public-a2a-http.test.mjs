@@ -60,3 +60,9 @@ test('separate HTTP client receives dated diagnostic over a real local socket',a
   assert.equal(result.result.message.parts[0].data.publicationAuthorized,false);
  }finally{server.closeAllConnections();await new Promise(resolve=>server.close(resolve));}
 });
+
+test('malformed JSON returns a JSON-RPC parse error without provider details',async()=>{
+ const handler=createDiagnosticHttpHandler({enabled:true,rateLimit:async()=>true});
+ const response=await handler(new Request('https://example.com/a2a',{method:'POST',headers:{'content-type':'application/json'},body:'{'}));
+ assert.equal(response.status,400);assert.deepEqual(await response.json(),{jsonrpc:'2.0',id:null,error:{code:-32700,message:'Parse error'}});
+});
