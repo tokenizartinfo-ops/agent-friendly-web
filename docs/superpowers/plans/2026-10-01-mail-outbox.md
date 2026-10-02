@@ -19,4 +19,4 @@ Interfaces: prepareMail(db,input,now), approveMail(db,key,hash,decisionRef,now),
 - [x] Write behavioral tests with a real SQLite-backed D1 wrapper; run and verify missing feature failure.
 - [x] Implement strict bounded metadata and conditional transitions. Claim generates server attempt ID. No expired claim recycling.
 - [x] Run targeted tests, full suite and lint; review terminal states and privacy.
-- [ ] Record results and open reviewable PR. Do not deploy or connect sending in this block.
+- [x] Record results and open reviewable PR #161. Do not deploy or connect sending in this block.
