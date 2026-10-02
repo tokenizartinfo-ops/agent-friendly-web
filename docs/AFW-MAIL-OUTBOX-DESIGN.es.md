@@ -2,6 +2,10 @@
 
 Estado: implementación local, sin consumidor remoto ni envío activado.
 
+Validación de custodia 2026-10-02: tres pruebas específicas; suite completa 674/674, lint global y focal sin errores, build aprobado. Persiste la advertencia previa de imagen en portada. No prueba D1 remoto, conexión cloud ni correo real.
+
+Custodia local añadida en `lib/mail-custody.mjs`: contenido privado inmutable por clave y decisiones ligadas a respuesta/hash/actor opaco, con vencimiento máximo de 24 horas y revocación persistida. El actor debe ser resuelto y autorizado por el servidor antes de crear la decisión; una referencia no prueba identidad. Recibos privados inmutables por intento devuelven referencias opacas, sin exponer Message-ID. Retención/borrado del contenido privado, integración autenticada y conexión cloud aún no están implementados. Estas tablas pertenecen exclusivamente a la futura base privada de correo, nunca al ledger de salud ni al expediente del cliente.
+
 Validación del consumidor: cinco pruebas adicionales, suite 671/671, lint sin errores con la misma advertencia de portada y build completo. Proveedor y custodia sintéticos; metadatos sobre SQLite real. PR #161 reúne almacenamiento y consumidor interno, sin recursos remotos activados.
 
 Consumidor interno añadido: `lib/mail-consumer.mjs` recupera contenido custodiado, comprueba hash completo (incluye destinatario y remitente fijo), pide autorización a una función de servidor y reclama un único intento. Usa el contrato `email.send({from,to,subject,text})` del binding Workers. Cualquier excepción posterior a reclamar deja resultado incierto o `sending` si falla el almacenamiento; nunca reenvía. Un recibo se guarda mediante `saveReceipt` antes de registrar aceptación. Los callbacks de custodia/autorización aún deben implementarse en un runtime privado: este módulo no equivale a autenticación desplegada.
