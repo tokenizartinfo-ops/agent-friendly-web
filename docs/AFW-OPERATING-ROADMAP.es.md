@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## Preparación inmediata: prueba cloud y registro ChatGPT
+
+Owner solicita prueba puntual cloud hoy19:30 Buenos Aires y prevé apagar19:15 hasta mañana. [Plan de aceptación](AFW-CLOUD-OFFLINE-TEST-2026-10-02.es.md) preparado; programación aún sin verificar por conexión de control Chrome indisponible. DNSSEC diferido hasta mañana por instrucción del owner. [Preflight ChatGPT](AFW-CHATGPT-CLIENT-PREFLIGHT-2026-10-02.es.md): cliente prerregistrado, callback obtenido de la UI actual, scopes mínimos y aceptación sintética antes de expediente real; sin nuevo servicio privado habilitado.
+
 ## Estado vigente: A2A público aceptado, 20:53 UTC del 2 de octubre
 
 Diagnóstico público y Agent Card publicados y comprobados por HTTPS independiente. Auditor externo all/apiApp subió de4/5 a5/5, de11 a12PASS; quedan DNS y tres señales OAuth/Auth. Sin puntuación numérica nueva ni certificación transaccional. Suite717/717 y revisión independiente aprobadas. [Recibo y rollback](AFW-A2A-PUBLIC-RELEASE-2026-10-02.es.md). Los apartados siguientes conservan evidencia histórica anterior. Próximo: completar registro/lectura privada ChatGPT antes de anunciar OAuth; verificar DNSSEC y separar la aceptación del gerente sin PC.
