@@ -8,6 +8,16 @@ Estado inicial: preparación, **programación todavía no verificada**. La pesta
 
 ## Recorrido de comprobación
 
+## Programación y preflight comprobados — 21:48 UTC
+
+Chrome recuperó el control. Se creó en ChatGPT web una prueba independiente llamada **AFW — prueba cloud sin PC · 19:30**, origen cloud comprobado por la URL de Scheduled. La interfaz confirmó «Próxima ejecución: 2 oct, 7:30 p.m. GMT-3». Repetir tarea está apagado; modelo GPT6.1 Sol y esfuerzo Bajo observados. El seguimiento previo conserva «Hoy7p.m. · Cada hora» sin modificaciones. IDs privados del scheduler/chat y captura se guardan únicamente en output local ignorado.
+
+Preflight manual separado, marcador `AFW-PREFLIGHT-20261002-1930`: inicio21:47:32 UTC, fin21:47:46 UTC. Registro de actividad muestra uso de Gmail y web; resultado confirma cuenta operativa correcta, cuatro resultados, sin páginas adicionales ni errores. Herramientas reportadas: gmail_get_profile, gmail_search_email_ids y reloj time de search_service_web_run. No fue necesario leer mensajes/adjuntos; sin envíos ni cambios. Esta ejecución manual no consume la prueba programada ni demuestra apagado.
+
+Próximo: comprobar mañana el run puntual real de22:30 UTC, sus herramientas y resultado; cotejarlo con el intervalo de apagado confirmado por el owner. Estado actual: **programada y preflight aprobado; ejecución durante apagado pendiente**. DNSSEC sigue diferido. Rollback: pausar únicamente esta prueba puntual desde Scheduled, preservando historial y la tarea horaria.
+
+### Criterios del recorrido
+
 1. Desde la tarea web existente, conservar prompt y horario recurrentes antes de cualquier modificación. Preferir una ejecución puntual de prueba; no reemplazar silenciosamente la guardia horaria ni duplicar efectos.
 2. Confirmar fecha, hora, zona, estado activo y próxima ejecución22:30 UTC. Usar GPT6.1 Sol bajo si esa configuración está disponible; registrar el modelo observado, no inferirlo de este documento.
 3. Ejecutar manualmente el mismo prompt acotado antes de programar: lectura Gmail del correo AFW autorizado, sin adjuntos/OTP, sin envíos ni mutaciones. Registrar herramienta utilizada y resultado agregado saneado. No trasladar mensajes privados a este repositorio público.
