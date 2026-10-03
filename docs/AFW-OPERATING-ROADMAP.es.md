@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## 3 de octubre: servicio real separado provisionado cerrado
+
+[Recibo y rollback](AFW-REAL-READ-CLOSED-RELEASE-2026-10-03.es.md): Worker, KV, Access y rate limiter separados provisionados; versión cerrada 4db09f45-c082-44b1-ab6f-d019467c9178 verificada al 100%. MCP/metadatos 404 y rutas humanas protegidas. Correlación administrativa identidad/propietario positiva, sin publicar subjects; aún requiere JWT real de la nueva audiencia y consentimiento específico. 721/721, lint/build/dry-run aprobados. Siguiente: constructor ChatGPT actual, registro exclusivo none/PKCE, ventana acotada, lectura real/retirada y cierre; no discovery en apex.
+
 ## 3 de octubre: borrador del propio sitio separado de QA
 
 [Recibo de creación](AFW-OWN-DOSSIER-PREPARATION-2026-10-03.es.md): expediente Agent Friendly Web creado desde sesión privada, con organización/sitio públicos y recuperación guardada 2/6. Ensayos anteriores conservados. Candidato para piloto real propio; sin auditoría, publicación ni OAuth concedido. PR189 integrado/CI aprobado. Siguiente: verificar recursos/identidad del servicio separado cerrado antes de conectar este borrador con consentimiento específico.
