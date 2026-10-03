@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## 3 de octubre: permiso adicional de evidencia por herramienta
+
+[Contrato de consentimiento](AFW-TOOL-CONSENT-2026-10-03.es.md): metadata MCP y challenge de scope añadidos para pedir evidencia al usar esa herramienta; revocación permanece denegada sin reconexión automática. Cliente local verificó descriptor y resultados; suite 720/720, lint y build aprobados. No publicado: siguiente aceptación en canary con ChatGPT y consentimiento visible antes de cualquier expediente real.
+
 ## 3 de octubre: evidencia sintética preparada y aislamiento probado
 
 [Preparación y límites](AFW-DELEGATED-EVIDENCE-PREPARATION-2026-10-03.es.md): dos fixtures fechados en D1 canary, con score nulo y etiqueta explícita de prueba; servicio cerrado. Prueba OAuth/MCP local excluye otro owner, otro origen y fechas inválidas, y deniega evidencia a un permiso de solo resumen. Suite 720/720, lint sin errores y build aprobado. Pendiente consentimiento del alcance de evidencia y lectura/retirada desde ChatGPT cloud; los fixtures no representan auditorías ni expedientes reales.
