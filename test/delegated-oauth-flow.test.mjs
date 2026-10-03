@@ -25,6 +25,9 @@ test('OAuth evidence read returns only dated synthetic current-owner/current-ori
     for(const evidenceScope of [true,false]) {
       const scope=evidenceScope?['afw:project:read','afw:evidence:read']:['afw:project:read'];
       const auth=await authorize(f,{scope:scope.join(' ')});
+      assert.match(auth.html,/el resumen del expediente/);
+      if(evidenceScope)assert.match(auth.html,/y sus observaciones guardadas/);
+      else assert.ok(!auth.html.includes('sus observaciones guardadas'));
       const redirect=await approve(f,auth,{scope});
       assert.equal(redirect.status,302);
       const exchanged=await exchange(f,redirect.headers.get('Location'),auth.verifier);
