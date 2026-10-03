@@ -1,5 +1,7 @@
 # AFW — aceptación de trabajo de código cloud, 3 de octubre de 2026
 
+Estado vigente tras la revisión local: comandos cloud, escritura GitHub y CI comprobados; PR 177 integrado. El [plan de entrega cloud](AFW-CLOUD-RELEASE-PLAN-2026-10-03.es.md) conserva la conexión Cloudflare como pendiente y especifica la primera aceptación aislada.
+
 ## Alcance y evidencia
 
 Proyecto: Agent Friendly Web. Repositorio: tokenizartinfo-ops/agent-friendly-web.
