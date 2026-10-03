@@ -25,3 +25,7 @@ Rollback de esta propuesta: cerrar el PR y retirar su rama; no cambia código de
 ## Declaración adicional del owner
 
 El 3 de octubre Gabriel declaró estar hablando desde su celular y no haber encendido la computadora desde el día anterior. Confirma el apagado durante las pruebas de código de esta sesión; es una declaración del owner, separada de la ejecución cloud observada.
+
+## Verificación adicional del 3 de octubre
+
+CI de la propuesta 11bc52d completado con success. En la copia cloud de ccd50c8, npm run lint terminó con cero errores y una advertencia existente por img; npm run build terminó correctamente. Esto supersede la limitación anterior sobre lint/build no ejecutados en esta sesión. wrangler whoami devolvió que el entorno no está autenticado: despliegue bloqueado por conexión Cloudflare ausente, no por necesidad demostrada del ordenador. No se inició login, no se crearon credenciales, no se usó cuenta temporal ni Sites legacy, y no se modificó producción.
