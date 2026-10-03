@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { registerHooks } from 'node:module';
+import { readFileSync } from 'node:fs';
 import { Client,StreamableHTTPClientTransport } from '@modelcontextprotocol/client';
 import { localOAuthFixture,authorize,approve,exchange,handle,cookies } from './fixtures/delegated-oauth-runtime.mjs';
 
@@ -9,6 +10,108 @@ import { localOAuthFixture,authorize,approve,exchange,handle,cookies } from './f
 const hook=registerHooks({resolve(s,c,next){return s==='cloudflare:workers'?{url:'data:text/javascript,export class WorkerEntrypoint {}',shortCircuit:true}:next(s,c);}});
 const {createDelegatedOAuthWorker}=await import('../lib/delegated-oauth-worker.mjs');
 hook.deregister();
+
+async function refreshFixture(){
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);
+  f.env.AFW_OAUTH_REFRESH_ENABLED='true';
+  // Candidate schema only: production migration is a separate operation.
+  f.sqlite.exec(readFileSync('drizzle/0014_bizarre_excalibur.sql','utf8'));
+  await f.worker.authorizationServer.getOAuthApi(f.env).updateClient(f.client.clientId,{grantTypes:['authorization_code','refresh_token']});
+  const auth=await authorize(f,{scope:'afw:project:read'}),redirect=await approve(f,auth,{scope:['afw:project:read']});
+  const response=await exchange(f,redirect.headers.get('Location'),auth.verifier);
+  assert.equal(response.status,200);f.initial=await response.json();
+  f.refresh=(token=f.initial.refresh_token,extra={})=>f.request('/oauth/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'refresh_token',refresh_token:token,client_id:f.client.clientId,resource:f.resource,...extra})},null);
+  return f;
+}
+
+test('opt-in refresh remains bounded to original permission and uses each credential once',async()=>{
+  const f=await refreshFixture();try{
+    assert.equal(typeof f.initial.refresh_token,'string');
+    const grant=f.sqlite.prepare('SELECT * FROM delegated_access_grants').get();
+    const metadata=await (await f.request('/.well-known/oauth-authorization-server',{},null)).json();
+    assert.deepEqual(metadata.grant_types_supported,['authorization_code','refresh_token']);
+    const replies=await Promise.all([f.refresh(),f.refresh()]);
+    assert.deepEqual(replies.map(r=>r.status).sort(),[200,400]);
+    const next=await replies.find(r=>r.status===200).json();assert.notEqual(next.refresh_token,f.initial.refresh_token);
+    assert.equal((await f.refresh()).status,400);
+    f.setTime(new Date(Date.parse(grant.expires_at)-90000).toISOString());
+    const bounded=await f.refresh(next.refresh_token);assert.equal(bounded.status,200);
+    const last=await bounded.json();assert.ok(last.expires_in<=90);
+    assert.equal(f.sqlite.prepare('SELECT expires_at FROM delegated_access_grants').get().expires_at,grant.expires_at);
+    f.setTime(grant.expires_at);assert.equal((await f.refresh(last.refresh_token)).status,400);
+    assert.equal(f.sqlite.prepare('SELECT count(*) n FROM delegated_refresh_uses').get().n,2);
+  }finally{f.close();}
+});
+
+test('refresh denies withdrawal, changed owner and disabled mode without broadening scope',async()=>{
+  for(const mode of ['revoked','owner','scope','disabled','storage','resource','client','pin']){
+    const f=await refreshFixture();try{
+      assert.equal(typeof f.initial.refresh_token,'string');
+      let extra={};
+      if(mode==='revoked')f.sqlite.prepare("UPDATE delegated_access_grants SET revoked_at='2026-10-03T00:00:00Z'").run();
+      if(mode==='owner')f.sqlite.prepare("UPDATE site_projects SET user_id='owner-b' WHERE id='p-a'").run();
+      if(mode==='scope')extra={scope:'afw:project:read afw:evidence:read'};
+      if(mode==='disabled')f.env.AFW_OAUTH_REFRESH_ENABLED='false';
+      if(mode==='storage')f.sqlite.exec('DROP TABLE delegated_refresh_uses');
+      if(mode==='resource')extra={resource:'https://other.example/mcp'};
+      if(mode==='client')extra={client_id:'other-client'};
+      if(mode==='pin')f.env.AFW_OAUTH_PILOT_PROJECT_ID='p-b';
+      const response=await f.refresh(f.initial.refresh_token,extra);
+      if(mode==='scope'){
+        assert.equal(response.status,200);assert.equal((await response.json()).scope,'afw:project:read');
+      }else assert.notEqual(response.status,200,mode);
+    }finally{f.close();}
+  }
+});
+
+test('refreshed MCP reads remain subject to disconnect and never expose credential records',async()=>{
+  const f=await refreshFixture();const client=new Client({name:'afw-refresh-test',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
+  try{
+    const refreshed=await (await f.refresh()).json();
+    await client.connect(new StreamableHTTPClientTransport(new URL(f.resource),{requestInit:{headers:{Authorization:'Bearer '+refreshed.access_token,Host:new URL(f.issuer).host}},fetch:(url,options)=>f.worker.fetch(new Request(url,options),f.env,f.ctx)}));
+    assert.equal((await client.callTool({name:'read_project_summary',arguments:{}})).structuredContent.data.id,'p-a');
+    const screen=await f.request('/connections'),html=await screen.text();
+    assert.ok(!html.includes(f.initial.refresh_token));assert.ok(!html.includes(refreshed.access_token));
+    const records=JSON.stringify(f.sqlite.prepare('SELECT * FROM delegated_refresh_uses').all());
+    assert.ok(!records.includes(f.initial.refresh_token));assert.match(records,/[a-f0-9]{64}/);
+    const grant=f.sqlite.prepare('SELECT id FROM delegated_access_grants').get().id;
+    assert.equal((await f.request('/connections/revoke',{method:'POST',headers:{Origin:f.issuer,Cookie:cookies(screen),'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:handle(html),grant})})).status,303);
+    const denied=await client.callTool({name:'read_project_summary',arguments:{}});
+    assert.equal(denied.structuredContent.code,'delegated_access_denied');
+    assert.equal((await f.refresh(refreshed.refresh_token)).status,400);
+  }finally{await client.close();f.close();}
+});
+
+test('a failed credential write cannot retry the consumed refresh into another successor',async()=>{
+  const f=await refreshFixture();try{
+    const originalPut=f.env.OAUTH_KV.put;
+    f.env.OAUTH_KV.put=async(key,...args)=>{if(key.startsWith('token:'))throw Error('synthetic storage outage');return originalPut(key,...args);};
+    const failed=await f.refresh();assert.notEqual(failed.status,200);
+    f.env.OAUTH_KV.put=originalPut;
+    assert.equal((await f.refresh()).status,400);
+    assert.equal(f.sqlite.prepare('SELECT count(*) n FROM delegated_refresh_uses').get().n,1);
+    // Credential recovery requires fresh consent; existing dossier remains intact.
+    assert.equal(f.sqlite.prepare("SELECT organization FROM site_projects WHERE id='p-a'").get().organization,'A');
+  }finally{f.close();}
+});
+
+test('token response advertises only original permission time remaining after storage latency',async()=>{
+  const f=await refreshFixture();try{
+    const deadline=f.sqlite.prepare('SELECT expires_at FROM delegated_access_grants').get().expires_at;
+    f.setTime(new Date(Date.parse(deadline)-90000).toISOString());
+    const put=f.env.OAUTH_KV.put;
+    f.env.OAUTH_KV.put=async(key,...args)=>{if(key.startsWith('token:'))f.setTime(new Date(Date.parse(deadline)-85000).toISOString());return put(key,...args);};
+    const response=await f.refresh();assert.equal(response.status,200);
+    const token=await response.json();assert.ok(token.expires_in<=85);
+    // Provider KV lifetime is not the authority for the application permission.
+    f.setTime(deadline);
+    const client=new Client({name:'afw-latency-test',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
+    try{
+      await client.connect(new StreamableHTTPClientTransport(new URL(f.resource),{requestInit:{headers:{Authorization:'Bearer '+token.access_token,Host:new URL(f.issuer).host}},fetch:(url,options)=>f.worker.fetch(new Request(url,options),f.env,f.ctx)}));
+      assert.equal((await client.callTool({name:'read_project_summary',arguments:{}})).structuredContent.code,'delegated_access_denied');
+    }finally{await client.close();}
+  }finally{f.close();}
+});
 
 test('OAuth evidence read returns only dated synthetic current-owner/current-origin history and denies summary-only scope',async()=>{
   const f=await localOAuthFixture(createDelegatedOAuthWorker);
