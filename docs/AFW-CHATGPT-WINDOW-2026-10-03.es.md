@@ -8,4 +8,10 @@ ChatGPT rechazó «Crear como complemento» con un error genérico de opciones d
 
 La documentación oficial de OpenAI admite clientes OAuth predefinidos con método `none` y PKCE S256: https://developers.openai.com/plugins/build/auth . Esto establece compatibilidad prevista, no aceptación de esta configuración particular. Próximo diagnóstico: detalle de validación del constructor y transporte/discovery, sin ampliar permisos, activar DCR/CIMD ni desproteger MCP para eludir el error.
 
+## Diagnóstico posterior: configuración aceptada
+
+Se reabrió la misma versión con su deadline original para recoger únicamente la respuesta fallida del constructor. HTTP 400, `apps_sdk_error/app_validation`: metadata sin `code_challenge_methods_supported` con S256. La metadata pública sí incluía S256; el formulario conservaba la detección fallida realizada cuando el canary estaba cerrado. «Reintentar la detección» recuperó la metadata y regeneró el callback, que se actualizó en el único registro KV temporal con TTL de 24 horas. No hubo cambios de código ni ampliación de permisos.
+
+Tras restaurar el client ID explícito, ChatGPT aceptó la creación y mostró «Conecta AFW · piloto de lectura» / «Continuar a AFW · piloto de lectura». Esto supersede el rechazo como bloqueo de configuración; aún no acredita consentimiento ni lectura. El alcance actual detectado es únicamente `afw:project:read`. La revocación y el cierre final de esta nueva ventana requieren comprobación propia.
+
 Se restauró la versión cerrada `4775ff39-b406-4f62-8eaa-d4d336a80446` al 100%. Las tres rutas públicas comprobadas después del cierre devuelven 404. El registro temporal KV conserva TTL de 24 horas y no autoriza consultas por sí mismo. Producción no fue objetivo de despliegue y no hubo migraciones.
