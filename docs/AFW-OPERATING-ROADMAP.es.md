@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## 3 de octubre: borrador del propio sitio separado de QA
+
+[Recibo de creación](AFW-OWN-DOSSIER-PREPARATION-2026-10-03.es.md): expediente Agent Friendly Web creado desde sesión privada, con organización/sitio públicos y recuperación guardada 2/6. Ensayos anteriores conservados. Candidato para piloto real propio; sin auditoría, publicación ni OAuth concedido. PR189 integrado/CI aprobado. Siguiente: verificar recursos/identidad del servicio separado cerrado antes de conectar este borrador con consentimiento específico.
+
 ## 3 de octubre: preflight productivo y plan de lectura real
 
 [Preparación operativa](AFW-REAL-READ-PILOT-2026-10-03.es.md): esquema productivo pasó cuatro consultas sin filas leídas/escritas; preflight incluye grants/consentimientos y detecta columnas de intercambio/consumo faltantes. Sin migración, datos de clientes leídos ni servicio real abierto. Siguiente: límite server-side de proyecto, configuración cerrada y comprobación de identidad/bindings antes del consentimiento de un expediente owner; conservar canary exclusivamente sintético.
