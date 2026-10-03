@@ -1,4 +1,9 @@
 # Roadmap operativo y continuidad de AFW
+## 3 de octubre: ChatGPT preparado; auditoría y entrega cloud comprobadas
+
+[Preparación ChatGPT](AFW-CHATGPT-PREPARATION-2026-10-03.es.md): formulario de cliente OAuth explícito y callback exacto registrados en KV canary con TTL de 24 horas, sin secreto. Runtime cerrado; pendiente confirmación de creación, consentimiento sintético, lectura y retirada antes de cualquier expediente real.
+
+[Auditoría externa vigente](AFW-EXTERNAL-AUDIT-2026-10-03.es.md): all/apiApp nivel 5, 12 PASS y 4 FAIL; no score numérico. DNSSEC sigue pending con DS ausente en Registrar; escalación preparada, no enviada. [Entrega cloud](AFW-CLOUD-CANARY-ACCEPTANCE-2026-10-03.es.md): GitHub Actions verificó y subió una versión inactiva del canary A2A, sin promover tráfico. Secret de Actions retirado; token temporal del emisor pendiente de eliminación o vencimiento. Estas evidencias superseden estados pendientes históricos inferiores sin demostrar gerente permanente.
 
 ## 3 de octubre: trabajo cloud comprobado desde conversación
 
@@ -235,3 +240,4 @@ MA-08 aceptación manual parcial: el owner confirmó que Novedades abre Entrega 
 PR #134 desplegada: fuente `7c049da`, versión `c6175cff-42ca-490d-8507-96c5fce23126`, 100 %, 11 comprobaciones previas/posteriores aprobadas. [Recibo vigente de navegación](AFW-DELIVERY-NAVIGATION-RELEASE-2026-09-30.es.md). Reapertura repetida probada localmente; aceptación de navegador no acreditada. Conservar la confirmación manual de MA-08 sin exigir otro login ni repetir el camino normal por defecto.
 
 Confirmación posterior del owner: mensaje de coincidencia histórica de PR #130 visible y transcrito, con cápsula v1/manifiesto compatible con MA-06. Cierra la aceptación manual de esa guía; no acredita nueva lectura ni disponibilidad actual del destino retirado. [Recibo manual actualizado](AFW-UPDATES-MANUAL-ACCEPTANCE-2026-09-30.es.md). No repetir la pregunta de mensaje. Continuar inferencia/revisión/guardado del piloto; reapertura repetida y fallos de consulta siguen probados localmente, sin aceptación privada adicional.
+
