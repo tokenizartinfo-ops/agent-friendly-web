@@ -25,3 +25,5 @@ Rollback: la versión activa no requiere restauración; deshabilitar o retirar e
 ## DNSSEC: evidencia independiente
 
 La lectura de Cloudflare el3deoctubre sigue mostrando pending, modified_on2026-09-29T20:32:11.984581+00:00. Google Public DNS devolvió DS sin Answer, Status0 y ADtrue; DNSKEY presente con ADfalse. La firma de la zona existe, pero esta lectura no muestra la cadena DS delegada. No atribuirlo sin más a propagación ni publicar una mejora del puntaje. Revisar el registrador y el registro DS antes de cualquier cambio, con un bloque y rollback propios.
+
+La API Registrar confirmó name agentfriendlyweb.dev, current_registrar Cloudflare, cloudflare_registration true, ds_records vacío y nameservers betty/kaiser.ns.cloudflare.com. La delegación DS pendiente está respaldada por dos lecturas diferentes; no se modificó DNSSEC ni el registrador. Siguiente: preparar la reparación con el DS exacto de esta zona y procedimiento oficial de Registrar, manteniendo firma activa y comprobando la cadena pública antes de repetir la auditoría externa.
