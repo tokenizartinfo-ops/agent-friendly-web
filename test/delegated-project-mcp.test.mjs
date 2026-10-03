@@ -17,16 +17,26 @@ test('MCP client gets only grant-scoped read tools, strict arguments and revocab
     const tools=await client.listTools();
     assert.deepEqual(tools.tools.map(x=>x.name).sort(),['read_project_summary','read_saved_evidence']);
     for(const tool of tools.tools){assert.equal(tool.annotations.readOnlyHint,true);assert.equal(tool.annotations.openWorldHint,false);assert.equal(tool.inputSchema.additionalProperties,false);}
+    assert.deepEqual(tools.tools.find(x=>x.name==='read_project_summary')._meta.securitySchemes,[{type:'oauth2',scopes:['afw:project:read']}]);
+    assert.deepEqual(tools.tools.find(x=>x.name==='read_saved_evidence')._meta.securitySchemes,[{type:'oauth2',scopes:['afw:project:read','afw:evidence:read']}]);
     const summary=await client.callTool({name:'read_project_summary',arguments:{}});
     assert.equal(summary.structuredContent.data.id,'p');assert.equal(summary.isError,undefined);
     const evidence=await client.callTool({name:'read_saved_evidence',arguments:{}});
     assert.deepEqual(evidence.structuredContent.data.history,[]);
+    const beforeScope=reads;
+    context.scopes=['afw:project:read'];
+    const scopeDenied=await client.callTool({name:'read_saved_evidence',arguments:{}});
+    assert.equal(scopeDenied.structuredContent.code,'insufficient_scope');
+    assert.equal(reads,beforeScope);
+    assert.deepEqual(scopeDenied._meta['mcp/www_authenticate'],['Bearer resource_metadata="https://private.example.invalid/.well-known/oauth-protected-resource/mcp", error="insufficient_scope", error_description="Evidence read requires additional consent", scope="afw:project:read afw:evidence:read"']);
+    context.scopes=['afw:project:read','afw:evidence:read'];
     const before=reads;
     const foreign=await client.callTool({name:'read_project_summary',arguments:{projectId:'other'}});
     assert.equal(foreign.isError,true);assert.equal(reads,before);
     grant.revokedAt=now;
     const revoked=await client.callTool({name:'read_project_summary',arguments:{}});
     assert.equal(revoked.isError,true);assert.equal(revoked.structuredContent.code,'delegated_access_denied');
+    assert.equal(revoked._meta,undefined);
     authorized=false;
     const anonymous=await client.callTool({name:'read_project_summary',arguments:{}});
     assert.equal(anonymous.isError,true);assert.equal(anonymous.structuredContent.status,401);
