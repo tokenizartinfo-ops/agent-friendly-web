@@ -32,6 +32,14 @@ Rollback: deshabilitar únicamente el trigger nuevo si se crea; conservar la ver
 
 ## Orden siguiente
 
+### Ajuste de implementación: token personalizado, 3 de octubre
+
+La aplicación GitHub Cloudflare Workers and Pages quedó instalada para el único repositorio AFW seleccionado. El owner creó el token temporal aprobado con Scripts de Workers: Editar en la cuenta compartida, vencimiento mostrado 4 de octubre. No se guardó su valor en documentación. Este permiso antiguo abarca los Workers de la cuenta; no equivale a exclusividad del canary ni a permisos directos sobre D1/DNS/almacenamiento.
+
+El selector de Builds no mostró el token personalizado y solo ofreció generar uno amplio. No se guardó el trigger. Se prepara como alternativa el workflow manual `.github/workflows/afw-canary-cloud-upload.yml`, restringido a la rama `release/a2a-canary-cloud`. Prueba, lint, build y compilación dry-run preceden a la subida inactiva con flags cerrados. La credencial se suministra exclusivamente mediante el secreto privado GitHub `AFW_CANARY_UPLOAD_TOKEN`, sin devolver su valor. Crear el workflow no acredita una ejecución ni una subida: ambos recibos siguen pendientes. Revocar el token tras aceptar la prueba; su expiración vuelve a bloquear futuras subidas.
+
+Rollback del workflow: no ejecutarlo o retirarlo; no activa versiones ni toca el tráfico. La conexión GitHub instalada y el token creado tienen registros independientes y no convierten este workflow en una guardia automática. Fuente: [configuración de Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/), que distingue tokens de usuario y custodia de compilaciones.
+
 1. Resolver la conexión cloud a Cloudflare y aceptar la subida inactiva anterior.
 2. Probar promoción controlada del canary cerrado y rollback, con evidencia separada.
 3. Completar el piloto de consulta de expedientes desde ChatGPT con registro real del cliente, consentimiento y revocación; no publicar descubrimiento OAuth por puntos de auditoría antes de que el servicio exista.

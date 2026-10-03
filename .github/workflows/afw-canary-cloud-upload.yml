@@ -1,0 +1,55 @@
+name: AFW canary inactive cloud upload
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: afw-a2a-canary-inactive-upload
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/release/a2a-canary-cloud'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: npm run build
+      - name: Compile closed canary without publishing
+        run: npx wrangler versions upload --config wrangler.a2a-canary.jsonc --var A2A_ENABLED:false --var A2A_DISCOVERY_ENABLED:false --dry-run
+
+  upload:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Require private deployment credential
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.AFW_CANARY_UPLOAD_TOKEN }}
+        run: test -n "$CLOUDFLARE_API_TOKEN"
+      - name: Upload inactive closed version
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.AFW_CANARY_UPLOAD_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 85d0d5dadac3341a564f22ce885e9eec
+        run: npx wrangler versions upload --config wrangler.a2a-canary.jsonc --var A2A_ENABLED:false --var A2A_DISCOVERY_ENABLED:false --tag "$GITHUB_SHA" --message "AFW closed canary cloud acceptance"
