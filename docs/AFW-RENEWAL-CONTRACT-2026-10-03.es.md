@@ -29,3 +29,7 @@ Con permiso vigente: renovación silenciosa dentro del alcance autorizado. Con p
 - Después de esa evidencia decidir duración comercial y apertura por cliente. No prometer continuidad permanente, guardia cloud ni aumento de auditoría externa a partir de esta preparación.
 
 Cierre de este bloque: contrato y matriz preparados; implementación, pruebas de refresh y aceptación real pendientes. No requiere ahora intervención del owner.
+
+## Inspección inicial del proveedor instalado
+
+Paquete @cloudflare/workers-oauth-provider 1.2.1, inspeccionado en node_modules el 2026-10-03: handleRefreshTokenGrant lee grant en OAUTH_KV y admite tanto refreshTokenId como previousRefreshTokenId; genera sucesor y guarda mediante saveGrantWithTTL. Por tanto no asumir consumo único atómico ni considerar cualquier uso del anterior como replay malicioso. Este hallazgo no demuestra explotación ni invalida el modo actual sin refresh. Antes de implementar: ensayo controlado de dos solicitudes simultáneas y reintento del anterior, y decisión sobre serialización/registro atómico por familia si la garantía observada no satisface el contrato. No editar node_modules ni agregar Durable Objects sin prueba y diseño de rollback.
