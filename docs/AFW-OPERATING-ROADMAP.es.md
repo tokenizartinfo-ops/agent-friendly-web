@@ -2,6 +2,8 @@
 
 ## Punto de partida vigente — 3 de octubre, renovación
 
+[Preparación de dos identidades reales](AFW-MULTIOWNER-READINESS-2026-10-03.es.md): regla QA separada del expediente, sesión15m, reglas owner/cliente preservadas. Candidato multiowner local permanece cerrado/no publicado. Pendiente ingreso humano de la segunda identidad en ventana separada; esa intervención es necesaria para acreditar aislamiento real, no una nueva aprobación rutinaria. Retirar la regla QA al cerrar; TTL de sesión no caduca la regla.
+
 [Consentimiento mínimo publicado cerrado](AFW-MINIMUM-CONSENT-2026-10-03.es.md): PR198/CI731, pantalla Chrome con casilla opcional desmarcada sin editar URL, cancelación sin grant. Ambos Workers actualizados cerrados, seis endpoints404 y cero permisos activos. Este bloque está completo; siguiente [apertura controlada y recuperación](AFW-DELEGATED-OPENING-PLAN-2026-10-03.es.md). Las versiones/cierres históricos permanecen en sus recibos fechados.
 
 Los apartados fechados inferiores son historial, no una lista acumulada de tareas pendientes. Consultar primero [aceptación de renovación](AFW-REFRESH-ACCEPTANCE-2026-10-03.es.md): renovación sintética y del resumen propio desde ChatGPT cloud aceptadas, sin extender el consentimiento. Ambos permisos retirados y servicios restaurados cerrados. Migración0014 aplicada y comprobada también en producción; no habilita ningún servicio. Siguiente: elección mínima de scopes en el consentimiento y recuperación conversacional. Las aceptaciones humanas anteriores de lectura, entrega y retirada se conservan y no deben repetirse sin un cambio relevante.
