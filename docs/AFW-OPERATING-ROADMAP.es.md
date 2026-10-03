@@ -1,5 +1,10 @@
 # Roadmap operativo y continuidad de AFW
 
+## 3 de octubre: preflight de consultas antes de abrir OAuth
+
+[Procedimiento y siguiente aceptación](AFW-DELEGATED-SCHEMA-PREFLIGHT-2026-10-03.es.md): SQL derivado de consultas actuales, sin datos owner, rechaza fixture antiguo y dependencias de evidencia ausentes. Comprobado contra canary cerrado: dos consultas, cero filas leídas/escritas. Suite ampliada 719/719. No es un gate automático de deploy; incorporarlo a cada operación de apertura. Siguiente: fixture de evidencia fechado y scope propio, aislamiento y retirada desde ChatGPT antes de expediente real.
+
+
 ## 3 de octubre: lectura desde ChatGPT y retirada aceptadas
 
 [Recibo vigente](AFW-CHATGPT-ACCEPTANCE-2026-10-03.es.md): esquema sintético del canary alineado con las consultas actuales; consentimiento e intercambio completados, resumen leído desde ChatGPT cloud AFW Operations y segunda llamada denegada tras desconectar con token vigente. Canary restaurado cerrado; grant revocado, D1/KV conservados. Supersede los bloqueos de configuración y consentimiento anteriores. Pendiente preflight de esquema antes de próximas ventanas, evidencia guardada con scope propio y piloto de expediente real; no publicar discovery OAuth por aceptación sintética.
@@ -250,7 +255,3 @@ MA-08 aceptación manual parcial: el owner confirmó que Novedades abre Entrega 
 PR #134 desplegada: fuente `7c049da`, versión `c6175cff-42ca-490d-8507-96c5fce23126`, 100 %, 11 comprobaciones previas/posteriores aprobadas. [Recibo vigente de navegación](AFW-DELIVERY-NAVIGATION-RELEASE-2026-09-30.es.md). Reapertura repetida probada localmente; aceptación de navegador no acreditada. Conservar la confirmación manual de MA-08 sin exigir otro login ni repetir el camino normal por defecto.
 
 Confirmación posterior del owner: mensaje de coincidencia histórica de PR #130 visible y transcrito, con cápsula v1/manifiesto compatible con MA-06. Cierra la aceptación manual de esa guía; no acredita nueva lectura ni disponibilidad actual del destino retirado. [Recibo manual actualizado](AFW-UPDATES-MANUAL-ACCEPTANCE-2026-09-30.es.md). No repetir la pregunta de mensaje. Continuar inferencia/revisión/guardado del piloto; reapertura repetida y fallos de consulta siguen probados localmente, sin aceptación privada adicional.
-
-
-
-
