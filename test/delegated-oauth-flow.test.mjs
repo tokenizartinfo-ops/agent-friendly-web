@@ -113,6 +113,31 @@ test('token response advertises only original permission time remaining after st
   }finally{f.close();}
 });
 
+test('browser consent starts with summary only and requires an explicit evidence choice',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);
+  try {
+    const auth=await authorize(f);
+    const controls=[...auth.html.matchAll(/<input\b[^>]*name="scope"[^>]*>/g)].map(m=>m[0]);
+    const defaults=controls.filter(tag=>/type="hidden"/.test(tag)||/\bchecked(?:\s|>|=)/.test(tag)).map(tag=>tag.match(/value="([^"]+)"/)[1]);
+    assert.deepEqual(defaults,['afw:project:read']);
+    const evidence=controls.find(tag=>tag.includes('afw:evidence:read'));
+    assert.match(evidence,/type="checkbox"/);
+    assert.ok(!/\bchecked(?:\s|>|=)/.test(evidence));
+    assert.match(auth.html,/También compartir las observaciones guardadas/);
+    const response=await approve(f,auth,{scope:defaults});
+    const token=await (await exchange(f,response.headers.get('Location'),auth.verifier)).json();
+    assert.equal(token.scope,'afw:project:read');
+    assert.deepEqual(JSON.parse(f.sqlite.prepare('SELECT scopes_json FROM delegated_access_grants').get().scopes_json),defaults);
+    const explicit=await authorize(f);
+    const both=['afw:project:read','afw:evidence:read'];
+    const approved=await approve(f,explicit,{scope:both});
+    const second=await (await exchange(f,approved.headers.get('Location'),explicit.verifier)).json();
+    assert.equal(second.scope,both.join(' '));
+    const summary=await authorize(f,{scope:'afw:project:read'});
+    assert.ok(!summary.html.includes('type="checkbox"'));
+  } finally { f.close(); }
+});
+
 test('OAuth evidence read returns only dated synthetic current-owner/current-origin history and denies summary-only scope',async()=>{
   const f=await localOAuthFixture(createDelegatedOAuthWorker);
   const clients=[];
@@ -129,7 +154,7 @@ test('OAuth evidence read returns only dated synthetic current-owner/current-ori
       const scope=evidenceScope?['afw:project:read','afw:evidence:read']:['afw:project:read'];
       const auth=await authorize(f,{scope:scope.join(' ')});
       assert.match(auth.html,/el resumen del expediente/);
-      if(evidenceScope)assert.match(auth.html,/y sus observaciones guardadas/);
+      if(evidenceScope)assert.match(auth.html,/También compartir las observaciones guardadas/);
       else assert.ok(!auth.html.includes('sus observaciones guardadas'));
       const redirect=await approve(f,auth,{scope});
       assert.equal(redirect.status,302);
