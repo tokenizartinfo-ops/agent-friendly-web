@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## 3 de octubre: evidencia sintética preparada y aislamiento probado
+
+[Preparación y límites](AFW-DELEGATED-EVIDENCE-PREPARATION-2026-10-03.es.md): dos fixtures fechados en D1 canary, con score nulo y etiqueta explícita de prueba; servicio cerrado. Prueba OAuth/MCP local excluye otro owner, otro origen y fechas inválidas, y deniega evidencia a un permiso de solo resumen. Suite 720/720, lint sin errores y build aprobado. Pendiente consentimiento del alcance de evidencia y lectura/retirada desde ChatGPT cloud; los fixtures no representan auditorías ni expedientes reales.
+
 ## 3 de octubre: preflight de consultas antes de abrir OAuth
 
 [Procedimiento y siguiente aceptación](AFW-DELEGATED-SCHEMA-PREFLIGHT-2026-10-03.es.md): SQL derivado de consultas actuales, sin datos owner, rechaza fixture antiguo y dependencias de evidencia ausentes. Comprobado contra canary cerrado: dos consultas, cero filas leídas/escritas. Suite ampliada 719/719. No es un gate automático de deploy; incorporarlo a cada operación de apertura. Siguiente: fixture de evidencia fechado y scope propio, aislamiento y retirada desde ChatGPT antes de expediente real.

@@ -10,6 +10,38 @@ const hook=registerHooks({resolve(s,c,next){return s==='cloudflare:workers'?{url
 const {createDelegatedOAuthWorker}=await import('../lib/delegated-oauth-worker.mjs');
 hook.deregister();
 
+test('OAuth evidence read returns only dated synthetic current-owner/current-origin history and denies summary-only scope',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);
+  const clients=[];
+  try {
+    const project=f.sqlite.prepare("SELECT website FROM site_projects WHERE id='p-a'").get();
+    const origin=new URL(project.website).origin;
+    const insert=f.sqlite.prepare('INSERT INTO scan_observations(id,project_id,user_id,target_origin,readiness_json,checked_at) VALUES(?,?,?,?,?,?)');
+    const readiness=JSON.stringify({score:null,level:'SYNTHETIC — not an audit',methodology:'AFW synthetic acceptance fixture',privatePayload:'must-not-leak'});
+    insert.run('synthetic-current','p-a','owner-a',origin,readiness,'2026-10-03T12:00:00.000Z');
+    insert.run('synthetic-other-owner','p-a','owner-b',origin,readiness,'2026-10-03T12:01:00.000Z');
+    insert.run('synthetic-old-origin','p-a','owner-a','https://old.example.invalid',readiness,'2026-10-03T12:02:00.000Z');
+    insert.run('synthetic-undated','p-a','owner-a',origin,readiness,'invalid');
+    for(const evidenceScope of [true,false]) {
+      const scope=evidenceScope?['afw:project:read','afw:evidence:read']:['afw:project:read'];
+      const auth=await authorize(f,{scope:scope.join(' ')});
+      const redirect=await approve(f,auth,{scope});
+      assert.equal(redirect.status,302);
+      const exchanged=await exchange(f,redirect.headers.get('Location'),auth.verifier);
+      assert.equal(exchanged.status,200);
+      const token=await exchanged.json();
+      const client=new Client({name:'afw-evidence-fixture',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});clients.push(client);
+      await client.connect(new StreamableHTTPClientTransport(new URL(f.resource),{requestInit:{headers:{Authorization:'Bearer '+token.access_token,Host:new URL(f.issuer).host}},fetch:(url,options)=>f.worker.fetch(new Request(url,options),f.env,f.ctx)}));
+      const result=await client.callTool({name:'read_saved_evidence',arguments:{}});
+      if(!evidenceScope){assert.equal(result.isError,true);assert.equal(result.structuredContent.code,'insufficient_scope');continue;}
+      assert.equal(result.isError,undefined);
+      assert.deepEqual(result.structuredContent.data.history,[{id:'synthetic-current',target:origin,checkedAt:'2026-10-03T12:00:00.000Z',score:null,level:'SYNTHETIC — not an audit',methodology:'AFW synthetic acceptance fixture'}]);
+      assert.ok(!JSON.stringify(result).includes('must-not-leak'));
+      assert.ok(result.structuredContent.data.limits.length>0);
+    }
+  } finally {for(const client of clients)await client.close();f.close();}
+});
+
 test('OAuth consent, PKCE exchange, MCP read and disconnect work without sharing the human session',async()=>{
   const f=await localOAuthFixture(createDelegatedOAuthWorker);const client=new Client({name:'afw-delegated-local',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
   try {
