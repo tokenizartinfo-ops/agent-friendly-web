@@ -293,3 +293,7 @@ Confirmación posterior del owner: mensaje de coincidencia histórica de PR #130
 ## Continuidad de renovación — 2026-10-03
 
 PR #193 integrada; CI723 y publicación cerrada 5d412e32-0f56-4dce-9088-60a941aa7015 verificadas. [Recibo](AFW-CONNECTION-EXPIRY-2026-10-03.es.md). [Contrato del siguiente bloque](AFW-RENEWAL-CONTRACT-2026-10-03.es.md): renovación dentro del permiso original, rotación/replay/concurrencia y retirada autoritativa. Diseño preparado; refresh todavía no implementado. Continuar inspección del proveedor y pruebas locales sin reabrir piloto ni repetir aceptación humana anterior. La duración comercial y el puntaje externo siguen separados.
+
+## Renovación implementada localmente — 2026-10-03
+
+[Implementación, límites y rollout](AFW-REFRESH-IMPLEMENTATION-2026-10-03.es.md): bandera false por defecto; consumo atómico D1 de cada hash, tokens acotados al permiso original, retirada/propiedad/alcance comprobados. Pruebas del proveedor reprodujeron doble sucesor y reintento del anterior; AFW los controla sin retirar el sucesor correcto. Migración0014 generada, aún no remota. Próximo: CI/revisión, publicación cerrada, esquema canary y nueva aceptación del ciclo antes de apertura. No repetir aceptación antigua como sustituto ni anunciar refresh en apex.

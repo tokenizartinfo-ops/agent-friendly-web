@@ -10,6 +10,7 @@
   "observability": {"enabled": false},
   "vars": {
     "AFW_DELEGATED_OAUTH_ENABLED": "false",
+    "AFW_OAUTH_REFRESH_ENABLED": "false",
     "AFW_OAUTH_ISSUER": "https://delegated-pilot.agentfriendlyweb.dev",
     "AFW_OAUTH_RESOURCE": "https://delegated-pilot.agentfriendlyweb.dev/mcp",
     "AFW_OAUTH_PILOT_CLIENT_ID": "afw-chatgpt-real-pilot-20261003",

@@ -8,6 +8,7 @@
   "preview_urls": false,
   "vars": {
     "AFW_DELEGATED_OAUTH_ENABLED": "false",
+    "AFW_OAUTH_REFRESH_ENABLED": "false",
     "AFW_OAUTH_ISSUER": "http://localhost:8793",
     "AFW_OAUTH_RESOURCE": "http://localhost:8793/mcp"
   },
