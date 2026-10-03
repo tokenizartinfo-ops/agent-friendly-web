@@ -216,11 +216,67 @@ test('revoked consent grant cannot issue tokens; metadata describes only the iso
   const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
     const metadata=await (await f.request('/.well-known/oauth-authorization-server',{},null)).json();
     assert.equal(metadata.issuer,f.issuer);assert.equal(metadata.registration_endpoint,undefined);
+    assert.deepEqual(metadata.grant_types_supported,['authorization_code']);
+    assert.deepEqual(metadata.token_endpoint_auth_methods_supported,['none']);
     const a=await authorize(f),redirect=await approve(f,a);
     f.sqlite.prepare("UPDATE delegated_access_grants SET revoked_at='2026-09-30T19:00:00Z'").run();
     assert.equal((await exchange(f,redirect.headers.get('Location'),a.verifier)).status,400);
     assert.equal((await f.request('/oauth/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'x='.padEnd(17000,'x')},null)).status,400);
   }finally{f.close();}
+});
+
+test('connections explain expiry without exposing or revoking grants of another service',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
+    f.env.AFW_OAUTH_PILOT_PROJECT_ID='p-a';
+    f.sqlite.prepare("UPDATE site_projects SET organization=? WHERE id='p-a'").run('A <script>owner</script>');
+    const a=await authorize(f),redirect=await approve(f,a);
+    await exchange(f,redirect.headers.get('Location'),a.verifier);
+    const grant=f.sqlite.prepare('SELECT * FROM delegated_access_grants').get();
+    f.sqlite.prepare('INSERT INTO delegated_access_grants(id,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at) VALUES(?,?,?,?,?,?,?,?,?)')
+      .run('other-service','owner-a','other-client','p-a','https://other.example/mcp','["afw:project:read"]',grant.created_at,grant.expires_at,'');
+    const active=await f.request('/connections');const activeHtml=await active.text();
+    assert.match(activeHtml,/Expediente: A &lt;script&gt;owner&lt;\/script&gt;/);
+    assert.match(activeHtml,/Resumen y comprobaciones guardadas/);
+    assert.ok(!activeHtml.includes('other-service'));
+    assert.match(activeHtml,/<time datetime=/);
+    const denied=await f.request('/connections/revoke',{method:'POST',headers:{Origin:f.issuer,Cookie:cookies(active),'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:handle(activeHtml),grant:'other-service'})});
+    assert.equal(denied.status,403);
+    assert.equal(f.sqlite.prepare("SELECT revoked_at FROM delegated_access_grants WHERE id='other-service'").get().revoked_at,'');
+    for(let i=0;i<21;i++)f.sqlite.prepare('INSERT INTO delegated_access_grants(id,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at) VALUES(?,?,?,?,?,?,?,?,?)')
+      .run('foreign-'+i,'owner-a','other-client','p-a','https://other.example/mcp','["afw:project:read"]',new Date(Date.parse(grant.created_at)+1000).toISOString(),grant.expires_at,'');
+    assert.match(await (await f.request('/connections')).text(),/Expediente: A/);
+    f.setTime(new Date(Date.parse(grant.expires_at)+1000).toISOString());
+    const expiredHtml=await (await f.request('/connections')).text();
+    assert.match(expiredHtml,/Permiso vencido/);
+    assert.match(expiredHtml,/Tu expediente sigue guardado/);
+    assert.match(expiredHtml,/Volver a tu expediente/);
+    assert.ok(!expiredHtml.includes('<button>Desconectar</button>'));
+  }finally{f.close();}
+});
+
+test('expired application permission requires fresh consent and never revives a revoked grant',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);const clients=[];
+  async function connect(token){const client=new Client({name:'expiry-read',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});clients.push(client);await client.connect(new StreamableHTTPClientTransport(new URL(f.resource),{requestInit:{headers:{Authorization:'Bearer '+token,Host:new URL(f.issuer).host}},fetch:(url,options)=>f.worker.fetch(new Request(url,options),f.env,f.ctx)}));return client;}
+  try{
+    const first=await authorize(f,{scope:'afw:project:read'});
+    const firstRedirect=await approve(f,first,{scope:['afw:project:read']});
+    const token=await (await exchange(f,firstRedirect.headers.get('Location'),first.verifier)).json();
+    const oldClient=await connect(token.access_token);
+    assert.equal((await oldClient.callTool({name:'read_project_summary',arguments:{}})).isError,undefined);
+    const oldGrant=f.sqlite.prepare('SELECT id FROM delegated_access_grants').get().id;
+    f.sqlite.prepare("UPDATE delegated_access_grants SET expires_at='2020-01-01T00:00:00Z' WHERE id=?").run(oldGrant);
+    assert.equal((await oldClient.callTool({name:'read_project_summary',arguments:{}})).structuredContent.code,'delegated_access_denied');
+    f.sqlite.prepare("UPDATE delegated_access_grants SET revoked_at='2026-10-03T00:00:00Z' WHERE id=?").run(oldGrant);
+    const fresh=await authorize(f,{scope:'afw:project:read'});
+    assert.match(fresh.html,/El permiso dura diez minutos/);
+    const freshRedirect=await approve(f,fresh,{scope:['afw:project:read']});
+    const renewed=await (await exchange(f,freshRedirect.headers.get('Location'),fresh.verifier)).json();
+    assert.equal(renewed.refresh_token,undefined);
+    const newClient=await connect(renewed.access_token);
+    assert.equal((await newClient.callTool({name:'read_project_summary',arguments:{}})).isError,undefined);
+    assert.equal((await oldClient.callTool({name:'read_project_summary',arguments:{}})).structuredContent.code,'delegated_access_denied');
+    assert.equal(f.sqlite.prepare('SELECT COUNT(*) AS count FROM delegated_access_grants').get().count,2);
+  }finally{for(const client of clients)await client.close();f.close();}
 });
 
 test('two concurrent exchanges of one code cannot issue two tokens',async()=>{

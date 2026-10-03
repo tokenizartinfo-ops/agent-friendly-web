@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## 3 de octubre: recuperación de conexiones y aislamiento de servicios
+
+[Contrato y pruebas](AFW-CONNECTION-EXPIRY-2026-10-03.es.md): metadata alineada con ausencia de refresh; conexiones muestran expediente/alcance/fechas y conservan acceso al borrador. Filtro por servicio antes de paginar y retirada de permisos ajenos denegada. Reconexión explícita local aceptada sin revivir grant retirado. Sin ampliar duración ni publicar discovery. Siguiente: contrato de renovación automática y pruebas de rotación/replay/retiro antes de eventual consentimiento cloud, con despliegue cerrado.
+
 ## 3 de octubre: resumen real propio y retirada aceptados
 
 [Aceptación real desde ChatGPT](AFW-REAL-READ-ACCEPTANCE-2026-10-03.es.md): owner autorizó resumen del propio borrador AFW; cloud leyó datos actuales y siguiente pregunta. Tras Desconectar, nueva llamada devolvió 403 delegated_access_denied con token todavía vigente. Grant retirado; servicio restaurado cerrado al 100%, MCP/metadatos 404. No scope de evidencia real, servicio persistente, cliente externo ni aumento numérico acreditados. Siguiente: renovación proporcional y experiencia de vencimiento antes de apertura comercial; no repetir estas pruebas humanas sin cambio relevante.
