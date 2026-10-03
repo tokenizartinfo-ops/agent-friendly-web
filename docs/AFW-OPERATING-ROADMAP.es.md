@@ -1,5 +1,19 @@
 # Roadmap operativo y continuidad de AFW
 
+## Punto de partida vigente — 3 de octubre, renovación
+
+Los apartados fechados inferiores son historial, no una lista acumulada de tareas pendientes. Consultar primero [aceptación de renovación](AFW-REFRESH-ACCEPTANCE-2026-10-03.es.md): renovación sintética y del resumen propio desde ChatGPT cloud aceptadas, sin extender el consentimiento. Ambos permisos retirados y servicios restaurados cerrados. Migración0014 aplicada y comprobada también en producción; no habilita ningún servicio. Siguiente: elección mínima de scopes en el consentimiento y recuperación conversacional. Las aceptaciones humanas anteriores de lectura, entrega y retirada se conservan y no deben repetirse sin un cambio relevante.
+
+| Bloque siguiente | Resultado necesario | Criterio de cierre |
+| --- | --- | --- |
+| Consentimiento mínimo | Elegir resumen sin editar URL aunque el cliente solicite también evidencias | Scope guardado igual a la elección; evidencias solo mediante decisión explícita |
+| Recuperación conversacional | Explicar una conexión no disponible sin inventar su causa; conservar la siguiente pregunta y el borrador | Recorrido con error y recuperación explícita, sin reconectar después de retirada por inferencia |
+| Servicio comercial delegado | Contrato de duración, clientes permitidos, scopes mínimos, retirada, custodia y soporte | Publicación solo después de contrato y pruebas de usuario; un piloto no acredita servicio permanente |
+| Auditor externo | Revisar las señales OAuth/discovery/auth.md y DNSSEC contra servicios realmente disponibles | Resultado fechado externo; no prometer porcentaje numérico cuando la API no lo devuelve |
+| Primer cliente | Acceso recibido, objetivo declarado, expediente guiado, entrega y comprobación | Caso completo de Sector de Sistemas con datos confirmados, sin rellenar por suposición |
+
+Dependencias: no publicar discovery del apex hacia un piloto retirado. DNSSEC requiere evidencia nueva del registrador; no activar/resetear repetidamente. El objetivo del expediente requiere una respuesta real del owner. Los cambios a los sitios de clientes requieren acceso específico y rollback, no permisos administrativos compartidos.
+
 ## 3 de octubre: recuperación de conexiones y aislamiento de servicios
 
 [Contrato y pruebas](AFW-CONNECTION-EXPIRY-2026-10-03.es.md): metadata alineada con ausencia de refresh; conexiones muestran expediente/alcance/fechas y conservan acceso al borrador. Filtro por servicio antes de paginar y retirada de permisos ajenos denegada. Reconexión explícita local aceptada sin revivir grant retirado. Sin ampliar duración ni publicar discovery. Siguiente: contrato de renovación automática y pruebas de rotación/replay/retiro antes de eventual consentimiento cloud, con despliegue cerrado.
