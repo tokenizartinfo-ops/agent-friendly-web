@@ -58,6 +58,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Operational continuity
 
+- Latest delegated ChatGPT acceptance: `docs/AFW-EVIDENCE-WINDOW-2026-10-03.es.md`. Incremental evidence consent, dated synthetic read and denial after revocation with a live token passed; both renewed grants revoked and canary restored closed. Do not repeat synthetic acceptance or equate it with production access. Real-pilot preparation: `docs/AFW-REAL-READ-PILOT-2026-10-03.es.md`; four schema checks passed on production without reading/writing rows. The example configuration is closed and incomplete, not an existing service. Require a server project pin and verified identity/resources before a real pilot.
+
 - Delivery experience: read `docs/AFW-DELIVERY-EXPERIENCE.es.md` before choosing a CMS/hosting delivery method. It contains dated, sanitized Tokenizart/Atelier case evidence, unresolved external-auditor differences and scoped maintainer/access procedures. Provider names do not establish capabilities. Do not inject historical customer facts into a new dossier or claim this knowledge is deployed in the customer copilot.
 
 - Delegated OAuth synthetic edge acceptance is complete: `docs/AFW-OAUTH-ACCEPTANCE-2026-10-01.es.md`. The actual MCP client observed denial after human disconnect while its token was still valid; both canary grants are revoked. Canary is now disabled (version `4775ff39-b406-4f62-8eaa-d4d336a80446`), D1/KV preserved, production unchanged. Older pending revocation statements describe previous tests and do not supersede this receipt. Next prepare a compatible explicit client and useful real-project read pilot; do not enable production, widen scopes or advertise apex discovery from synthetic acceptance.

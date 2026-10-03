@@ -1,5 +1,7 @@
 # Preflight de esquema antes del consentimiento delegado
 
+Ampliación vigente: cuatro consultas SELECT LIMIT 0 incluyen las proyecciones actuales de grants y consentimientos del store OAuth, además de proyecto/evidencia. Pruebas basadas en migraciones 0011/0012 detectan exchanged_at o consumed_at ausentes. Preflight productivo aceptado sin leer/escribir filas: AFW-REAL-READ-PILOT-2026-10-03.es.md. Las referencias históricas a dos consultas describen la versión anterior.
+
 El piloto ChatGPT falló al autorizar porque listar proyectos no compilaba el JOIN usado por la lectura real. `scripts/delegated-schema-preflight-sql.mjs` genera comprobaciones a partir de las mismas consultas del repositorio: resumen con borradores y observaciones guardadas. Cada consulta está envuelta en LIMIT 0, con parámetros vacíos constantes. No recibe propietarios, proyectos, tokens ni destinos; no conecta ni migra por sí mismo.
 
 Pruebas SQLite: fixture antiguo rechazado aunque el listado funcionaba; fixture actual aceptado sin cambios ni datos devueltos; ausencia de la tabla de observaciones rechazada. Comprobación remota del 3 de octubre sobre D1 delegated-canary cerrado: dos consultas procesadas, cero filas leídas y cero escritas. Wrangler --file utilizó su mecanismo de importación y marcó changed_db true aunque las consultas no escribieron filas; para próximas lecturas preferir --command, evitando ese mecanismo y su ventana de indisponibilidad.
