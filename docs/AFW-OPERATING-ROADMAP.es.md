@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## 3 de octubre: trabajo cloud comprobado desde conversación
+
+[Recibo de aceptación](AFW-CLOUD-CODE-ACCEPTANCE-2026-10-03.es.md): lectura y clon del repositorio, instalación de dependencias y 717/717 pruebas aprobadas en entorno cloud. Gabriel confirma desde celular que no encendió la PC desde ayer; complementa el recibo de lectura Gmail del 2 de octubre a las 22:33 UTC. Los estados pendientes inferiores son históricos. Escritura remota se comprueba mediante esta propuesta documental; no acredita merge, despliegue, guardia permanente ni gerente autónomo. Siguiente: verificar PR/CI y conexión Cloudflare antes de un despliegue acotado; no usar Sites legacy.
+
 ## Prueba sin PC: programada y preflight aprobado
 
 2 de octubre21:48 UTC: prueba web cloud puntual para hoy19:30 Buenos Aires guardada; GPT6.1 Sol Bajo, sin repetición. Seguimiento horario previo intacto. Preflight21:47:32–21:47:46 UTC usó Gmail/reloj y obtuvo cuatro resultados sin errores ni efectos externos. [Recibo y criterio de aceptación](AFW-CLOUD-OFFLINE-TEST-2026-10-02.es.md). Falta comprobar mañana ejecución por horario durante el apagado real declarado por owner; no acredita gerente de código o reparación autónoma. DNSSEC pospuesto hasta mañana.
