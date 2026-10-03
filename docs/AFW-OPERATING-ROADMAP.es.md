@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## 3 de octubre: resumen real propio y retirada aceptados
+
+[Aceptación real desde ChatGPT](AFW-REAL-READ-ACCEPTANCE-2026-10-03.es.md): owner autorizó resumen del propio borrador AFW; cloud leyó datos actuales y siguiente pregunta. Tras Desconectar, nueva llamada devolvió 403 delegated_access_denied con token todavía vigente. Grant retirado; servicio restaurado cerrado al 100%, MCP/metadatos 404. No scope de evidencia real, servicio persistente, cliente externo ni aumento numérico acreditados. Siguiente: renovación proporcional y experiencia de vencimiento antes de apertura comercial; no repetir estas pruebas humanas sin cambio relevante.
+
 ## 3 de octubre: servicio real separado provisionado cerrado
 
 [Recibo y rollback](AFW-REAL-READ-CLOSED-RELEASE-2026-10-03.es.md): Worker, KV, Access y rate limiter separados provisionados; versión cerrada 4db09f45-c082-44b1-ab6f-d019467c9178 verificada al 100%. MCP/metadatos 404 y rutas humanas protegidas. Correlación administrativa identidad/propietario positiva, sin publicar subjects; aún requiere JWT real de la nueva audiencia y consentimiento específico. 721/721, lint/build/dry-run aprobados. Siguiente: constructor ChatGPT actual, registro exclusivo none/PKCE, ventana acotada, lectura real/retirada y cierre; no discovery en apex.
