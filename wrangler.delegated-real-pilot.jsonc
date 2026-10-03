@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "name": "agent-friendly-web-delegated-real-pilot",
+  "main": "worker/delegated/index.mjs",
+  "compatibility_date": "2026-09-07",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {"enabled": false},
+  "vars": {
+    "AFW_DELEGATED_OAUTH_ENABLED": "false",
+    "AFW_OAUTH_ISSUER": "https://delegated-pilot.agentfriendlyweb.dev",
+    "AFW_OAUTH_RESOURCE": "https://delegated-pilot.agentfriendlyweb.dev/mcp",
+    "AFW_OAUTH_PILOT_CLIENT_ID": "afw-chatgpt-real-pilot-20261003",
+    "AFW_OAUTH_PILOT_PROJECT_ID": "project-06a83cc2e8cc9a4f38e854c60b265ac8d2fee6bd358633e49a6088f3ed172f82",
+    "AFW_OAUTH_PILOT_EXPIRES_AT": "2026-10-03T00:00:00.000Z",
+    "ACCESS_TEAM_DOMAIN": "tokenizart.cloudflareaccess.com",
+    "ACCESS_AUD": "302f143430669dfebe856f068fa8776affa1ca7eae5bf43c9451368b30ae3f46"
+  },
+  "kv_namespaces": [{"binding": "OAUTH_KV", "id": "8dc247fd525e42559faa373576caa8a6"}],
+  "d1_databases": [{"binding": "DB", "database_name": "agent-friendly-web-web-production", "database_id": "d26fc9d2-df5a-4957-8e58-cc4c945faad8"}],
+  "ratelimits": [{"name": "DELEGATED_RATE_LIMITER", "namespace_id": "88232", "simple": {"limit": 30, "period": 60}}],
+  "routes": [{"pattern": "delegated-pilot.agentfriendlyweb.dev", "custom_domain": true}]
+}
