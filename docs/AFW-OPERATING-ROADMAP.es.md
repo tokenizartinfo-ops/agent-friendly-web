@@ -1,5 +1,9 @@
 # Roadmap operativo y continuidad de AFW
 
+## 3 de octubre: evidencia desde ChatGPT y retirada aceptadas
+
+[Recibo vigente](AFW-EVIDENCE-WINDOW-2026-10-03.es.md): ChatGPT pidió evidence read al usar la herramienta, owner confirmó, lectura devolvió únicamente fixture fechado del origen actual; tras desconectar, nueva consulta denegada con token vigente. Ambos permisos retirados y canary cerrado/verificado 404, datos preservados. Corrección del texto de consentimiento por scopes y procedimiento SQL estructurado documentados; 720/720, lint/build aprobados. Siguiente: preparar piloto de expediente real con alcance propio antes de discovery productivo; ningún aumento numérico de auditor externo acreditado por esta prueba.
+
 ## 3 de octubre: permiso adicional de evidencia por herramienta
 
 [Contrato de consentimiento](AFW-TOOL-CONSENT-2026-10-03.es.md): metadata MCP y challenge de scope añadidos para pedir evidencia al usar esa herramienta; revocación permanece denegada sin reconexión automática. Cliente local verificó descriptor y resultados; suite 720/720, lint y build aprobados. No publicado: siguiente aceptación en canary con ChatGPT y consentimiento visible antes de cualquier expediente real.

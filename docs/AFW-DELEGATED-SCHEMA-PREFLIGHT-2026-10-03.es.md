@@ -6,14 +6,14 @@ Pruebas SQLite: fixture antiguo rechazado aunque el listado funcionaba; fixture 
 
 ## Procedimiento acotado
 
-Identificar proyecto AFW, repo, origen y D1 canary; verificar configuración y autenticación. Generar el SQL y enviarlo únicamente al D1 de delegated-canary. En PowerShell desde el repo:
+Identificar proyecto AFW, repo, origen y D1 canary; verificar configuración y autenticación. Generar el SQL desde el repo:
 
 ```powershell
 $afwSchemaSql = node scripts/delegated-schema-preflight-sql.mjs
 if ($LASTEXITCODE -ne 0) { throw 'Preflight SQL generation failed' }
-npx wrangler d1 execute agent-friendly-web-delegated-canary --config wrangler.delegated-canary.jsonc --remote --command ($afwSchemaSql -join "`n")
-if ($LASTEXITCODE -ne 0) { throw 'Canary schema incompatible; do not open OAuth' }
 ```
+
+Enviar el SQL generado como campo `sql` de un cuerpo JSON estructurado a POST `/accounts/{cuenta-verificada}/d1/database/{d1-canary-verificado}/query`, usando el conector/API con identidad comprobada. No interpolarlo en texto de shell. En esta sesión de Windows, el procedimiento anterior con `--command` devolvió incomplete input, aunque SELECT 1 funcionó y ambas consultas completas pasaron por API estructurada. Un 7403 transitorio anterior tampoco permite diagnosticar un esquema incompatible. Recibo vigente: dos consultas, cero filas leídas/escritas, changed_db false. No reutilizar el comando de shell retirado ni recurrir a --file/import para una lectura.
 
 No ejecutar migraciones globales para resolver un fallo. Comparar las dependencias concretas y preparar solo una corrección aditiva en el entorno verificado; conservar datos en rollback. Esta comprobación es un paso de operación, no un bloqueo integrado en Wrangler deploy ni una prueba de autenticación/propiedad.
 
