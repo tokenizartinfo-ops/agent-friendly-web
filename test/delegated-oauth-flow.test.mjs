@@ -105,6 +105,36 @@ test('connections explain withdrawn and expired permissions without offering red
   }finally{f.close();}
 });
 
+test('server-pinned pilot cannot select another owned project or retain access after its target changes',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);const client=new Client({name:'afw-pinned-pilot',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
+  try {
+    f.sqlite.prepare("INSERT INTO site_projects (id,user_id,organization,website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at) SELECT 'p-a2',user_id,'Other owned project',website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at FROM site_projects WHERE id='p-a'").run();
+    f.env.AFW_OAUTH_PILOT_PROJECT_ID='p-a';
+    const auth=await authorize(f,{project:null});
+    assert.equal(auth.response.status,200);assert.ok(!auth.html.includes('Other owned project'));assert.ok(!auth.html.includes('<select'));
+    assert.equal((await authorize(f,{project:'p-a2'})).response.status,404);
+    assert.equal((await authorize(f,{project:null,identity:'owner-b'})).response.status,404);
+    f.env.AFW_OAUTH_PILOT_PROJECT_ID='p-a2';
+    assert.equal((await approve(f,auth)).status,403);
+    f.env.AFW_OAUTH_PILOT_PROJECT_ID='p-a';
+    const redirect=await approve(f,auth);assert.equal(redirect.status,302);
+    f.env.AFW_OAUTH_PILOT_PROJECT_ID='p-a2';
+    assert.equal((await exchange(f,redirect.headers.get('Location'),auth.verifier)).status,400);
+    f.env.AFW_OAUTH_PILOT_PROJECT_ID='p-a';
+    const fresh=await authorize(f,{project:null}),approved=await approve(f,fresh);
+    const tokenResponse=await exchange(f,approved.headers.get('Location'),fresh.verifier);assert.equal(tokenResponse.status,200);
+    const token=await tokenResponse.json();
+    let lastMcpStatus;
+    await client.connect(new StreamableHTTPClientTransport(new URL(f.resource),{requestInit:{headers:{Authorization:'Bearer '+token.access_token,Host:new URL(f.issuer).host}},fetch:async(url,options)=>{const response=await f.worker.fetch(new Request(url,options),f.env,f.ctx);lastMcpStatus=response.status;return response;}}));
+    assert.equal((await client.callTool({name:'read_project_summary',arguments:{}})).structuredContent.data.id,'p-a');
+    f.env.AFW_OAUTH_PILOT_PROJECT_ID='p-a2';
+    await assert.rejects(()=>client.callTool({name:'read_project_summary',arguments:{}}));
+    assert.equal(lastMcpStatus,403);
+    f.env.AFW_OAUTH_PILOT_PROJECT_ID=' ';
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,503);
+  } finally {await client.close();f.close();}
+});
+
 test('standard authorization selects an owned project in consent without a client-specific query',async()=>{
   const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
     f.sqlite.prepare("INSERT INTO site_projects (id,user_id,organization,website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at) SELECT 'p-a2',user_id,'Second <site>',website,role,site_type,control,audience,goals_json,languages_json,status,completion,revision,updated_at FROM site_projects WHERE id='p-a'").run();

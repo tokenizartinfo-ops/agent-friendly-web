@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
+import {readFileSync} from 'node:fs';
 import {delegatedSchemaPreflightSql} from '../lib/delegated-project-repository.mjs';
 
 test('schema preflight rejects legacy canary before consent despite a working project list',()=>{
@@ -19,10 +20,16 @@ test('schema preflight compiles current project join and evidence without exposi
       CREATE TABLE copilot_working_drafts(project_id TEXT,user_id TEXT,session_json TEXT);
       CREATE TABLE scan_observations(id TEXT,project_id TEXT,user_id TEXT,target_origin TEXT,readiness_json TEXT,checked_at TEXT);
       INSERT INTO site_projects(id,user_id,organization) VALUES('private','owner','Do not output');`);
+    db.exec(readFileSync(new URL('../drizzle/0011_furry_solo.sql',import.meta.url),'utf8'));
+    assert.throws(()=>db.exec(delegatedSchemaPreflightSql()),/exchanged_at/);
+    db.exec(readFileSync(new URL('../drizzle/0012_worried_hardball.sql',import.meta.url),'utf8'));
     const before=db.prepare('SELECT total_changes() AS count').get().count;
     db.exec(delegatedSchemaPreflightSql());
     assert.equal(db.prepare('SELECT total_changes() AS count').get().count,before);
     assert.deepEqual(db.prepare('SELECT organization FROM site_projects').get(),Object.assign(Object.create(null),{organization:'Do not output'}));
+    db.exec('ALTER TABLE delegated_consent_sessions RENAME COLUMN consumed_at TO missing_consumed_at');
+    assert.throws(()=>db.exec(delegatedSchemaPreflightSql()),/consumed_at/);
+    db.exec('ALTER TABLE delegated_consent_sessions RENAME COLUMN missing_consumed_at TO consumed_at');
     db.exec('DROP TABLE scan_observations');
     assert.throws(()=>db.exec(delegatedSchemaPreflightSql()),/no such table/);
   } finally {db.close();}

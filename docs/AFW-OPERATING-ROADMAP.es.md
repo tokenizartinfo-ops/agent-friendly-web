@@ -1,5 +1,11 @@
 # Roadmap operativo y continuidad de AFW
 
+## 3 de octubre: preflight productivo y plan de lectura real
+
+[Preparación operativa](AFW-REAL-READ-PILOT-2026-10-03.es.md): esquema productivo pasó cuatro consultas sin filas leídas/escritas; preflight incluye grants/consentimientos y detecta columnas de intercambio/consumo faltantes. Sin migración, datos de clientes leídos ni servicio real abierto. Siguiente: límite server-side de proyecto, configuración cerrada y comprobación de identidad/bindings antes del consentimiento de un expediente owner; conservar canary exclusivamente sintético.
+
+Preparación local completada: límite AFW_OAUTH_PILOT_PROJECT_ID en consentimiento/intercambio/MCP y plantilla cerrada con marcadores de recursos por verificar. 721/721, lint/build aprobados. Siguiente: elegir expediente owner desde sesión real y provisionar recursos separados cerrados; no desplegar la plantilla incompleta ni abrir acceso por este recibo.
+
 ## 3 de octubre: evidencia desde ChatGPT y retirada aceptadas
 
 [Recibo vigente](AFW-EVIDENCE-WINDOW-2026-10-03.es.md): ChatGPT pidió evidence read al usar la herramienta, owner confirmó, lectura devolvió únicamente fixture fechado del origen actual; tras desconectar, nueva consulta denegada con token vigente. Ambos permisos retirados y canary cerrado/verificado 404, datos preservados. Corrección del texto de consentimiento por scopes y procedimiento SQL estructurado documentados; 720/720, lint/build aprobados. Siguiente: preparar piloto de expediente real con alcance propio antes de discovery productivo; ningún aumento numérico de auditor externo acreditado por esta prueba.
