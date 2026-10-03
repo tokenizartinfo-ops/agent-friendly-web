@@ -297,3 +297,5 @@ PR #193 integrada; CI723 y publicación cerrada 5d412e32-0f56-4dce-9088-60a941aa
 ## Renovación implementada localmente — 2026-10-03
 
 [Implementación, límites y rollout](AFW-REFRESH-IMPLEMENTATION-2026-10-03.es.md): bandera false por defecto; consumo atómico D1 de cada hash, tokens acotados al permiso original, retirada/propiedad/alcance comprobados. Pruebas del proveedor reprodujeron doble sucesor y reintento del anterior; AFW los controla sin retirar el sucesor correcto. Migración0014 generada, aún no remota. Próximo: CI/revisión, publicación cerrada, esquema canary y nueva aceptación del ciclo antes de apertura. No repetir aceptación antigua como sustituto ni anunciar refresh en apex.
+
+[Release cerrada de renovación](AFW-REFRESH-CLOSED-RELEASE-2026-10-03.es.md): PR195/CI730 integradas, ambos Workers cerrados actualizados; esquema0014 solo canary, historial conservado. Siguiente: aceptación del nuevo ciclo con cliente sintético existente, token renovado tras cinco minutos y retirada, antes de migración real/apertura.
