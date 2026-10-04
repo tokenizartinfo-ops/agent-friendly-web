@@ -1,0 +1,15 @@
+# Comprobación operativa de consulta delegada
+
+Proyecto AFW, repositorio agent-friendly-web. Comprobación pública de lectura exclusivamente sobre los orígenes fijos delegated-canary.agentfriendlyweb.dev y delegated-pilot.agentfriendlyweb.dev. No modifica Workers, permisos, DNS, expedientes o credenciales.
+
+`node scripts/check-delegated-edge.mjs` comprueba MCP, metadata de autorización y metadata del recurso /mcp. Ambos servicios se declaran cerrados: se esperan seis404. Una respuesta diferente o un fallo de red produce salida no cero y un informe saneado con fecha, ruta, estado y motivo fijo. No se registran cuerpos, cabeceras de autorización, callbacks o datos personales. No admite URLs, credenciales o overrides por argumentos.
+
+El módulo también prueba el criterio futuro de disponibilidad: metadataJSON200 coherente con issuer, resource, endpoints locales y PKCES256/cliente none; MCP sin autenticar debe denegar401. Esto no acredita lectura privada ni identidad, consentimiento, retirada o transacciones. La CLI productiva permanece en expectativa closed hasta un cambio revisado de modalidad. Límites: cinco segundos por petición,16KiB por metadata, redirects rechazados, sin cookies ni autenticación. No hay auto-fix ni reintentos indefinidos.
+
+## Ejecución cloud
+
+Workflow manual `AFW delegated edge check`, archivo .github/workflows/afw-delegated-edge.yml. GitHub hosted Ubuntu, Node22, contentsread, sin secretos ni npm install, máximo2min y concurrencia exclusiva. Permite una comprobación independiente del PC mediante workflow_dispatch. No crea una tarea Codex, una suscripción MCPEvents ni un gerente permanente. No se configuró periodicidad ni se promete aviso instantáneo; el resultado queda en Actions y su política de notificaciones del owner.
+
+Ante fallo: comparar el modo declarado y la ventana de QA antes de diagnosticar una incidencia; si hay un piloto intencionalmente abierto, el chequeo cerrado fallará como corresponde. Verificar deployment y flags por control-plane autorizado, mantener la pregunta del usuario como histórica y no asumir pérdida del expediente. No reconectar, revocar grants ni desplegar automáticamente. Restaurar solo con el rollback y autorización de la operación concreta.
+
+Prerequisitos de apertura estable: recuperación remota, aislamiento y retirada ya aceptados en recibos fechados; conservarlos. Falta convertir la modalidad de ventanas en disponibilidad estable, registrar cliente/callback vigente, designar responsable y monitoreo periódico de esa modalidad, y enlazar conexiones desde la experiencia del usuario. Discovery/auth.md solo hacia el servicio real disponible, nunca hacia QA cerrado. El consentimiento inicial permanece10min, resumen por defecto/evidencia opcional; no ampliar duración por inferencia.
