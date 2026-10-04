@@ -9,6 +9,7 @@
   "preview_urls": false,
   "observability": {"enabled": false},
   "vars": {"AFW_OPERATIONS_CONSUMER_ENABLED": "false"},
+  "ratelimits": [{"name":"OPERATIONS_RATE_LIMITER","namespace_id":"2026100401","simple":{"limit":10,"period":60}}],
   "d1_databases": [{"binding":"OPERATIONS_DB","database_name":"agent-friendly-web-operations","database_id":"603c471d-19bb-4530-9773-c02e18b29840"}],
   "triggers": {"crons": []}
 }
