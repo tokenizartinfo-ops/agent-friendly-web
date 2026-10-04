@@ -1,5 +1,15 @@
 # Gerente AFW: preparación de Codex Cloud
 
+## Estado operativo reconciliado — 4 de octubre
+
+El receptor y productor operacional ya existen en recursos AFW aislados. [PR224 y aceptación de binding](AFW-PRODUCER-BINDING-ACCEPTANCE-2026-10-04.es.md) acreditan entrega manual remota202, constancias persistidas y supresión del segundo ciclo sano. Ambos permanecen cerrados sin firmas/cadencia permanente; [ensayo de cron](AFW-CRON-ACCEPTANCE-2026-10-04.es.md) separado. Los apartados iniciales siguientes conservan la preparación histórica y no sustituyen estos recibos.
+
+El envío propio desde cloud fue [aceptado el2deoctubre](AFW-OWN-MAIL-ACCEPTANCE-2026-10-02.es.md); las credenciales temporales y el servicio quedaron cerrados. El código/PR cloud y la subida inactiva al canary tienen [recibos del3deoctubre](AFW-CLOUD-CANARY-ACCEPTANCE-2026-10-03.es.md). Ninguno acredita aún la cadena incidente operacional→gerente→diagnóstico.
+
+La documentación oficial consultada el4deoctubre enumera eventos Gmail/Slack/GitHub para tareas web en planes elegibles; no establece un webhook arbitrario hacia este chat. [Tareas](https://learn.chatgpt.com/docs/automations). Elegir una integración realmente disponible en la cuenta y probar una señal sintética saneada, con recibo de ejecución y correlación durable; no crear scheduler desktop como sustituto ni API paga sin decisión explícita.
+
+Orden próximo: cron acotado; adaptador de lectura/reserva con identidad propia, presupuesto y pausas; ejecución cloud real con correlación; watchdog independiente de silencio y entrega vencida; finalmente cadencia estable. Una tarea Gmail conversacional no cierra por sí sola un incidente ni demuestra capacidad de reparar código. No reutilizar las credenciales vencidas del piloto de correo.
+
 Estado posterior 2026-10-01: el owner publicó **AFW Operations** y la interfaz confirmó «Entorno publicado». Setup `01a0f7d3-a806-76c5-a024-6ddf4ccb401b`, revisión preparada `5c15c0a`; recibo local saneado `output/afw-cloud-publication-receipt.json`. Primera tarea publicada y guardia continua siguen pendientes. [Evidencia de preparación](AFW-CLOUD-SETUP-2026-10-01.es.md). Preferencia explícita del owner: **GPT 6.1 Sol (`gpt-6.1-sol`), razonamiento bajo (`low`), velocidad Standard**, con uso de suscripción. La interfaz mostró GPT-6.1 Sol Bajo; este documento por sí solo no configura modelo, velocidad ni billing.
 
 ## Qué se lleva a la nube
