@@ -4,7 +4,7 @@
 
 Se retomó la sesión cloud existente del resumen propio, sin crear otro chat, reabrir el servicio ni conceder permisos. El último resultado disponible era UNAUTHORIZED/oauth_token_invalid_grant, sin nuevos datos. Se pidió explícitamente no invocar herramientas, no reconectar y conservar una pregunta previa como contexto histórico.
 
-El nuevo turno cloud terminó correctamente el3deoctubre a23:17:38 Argentina (4deoctubre02:17:38UTC), duración7.6s. Respondió que el error requiere reautenticación pero no permite determinar su causa, que no hubo datos nuevos y que se trataba de una comprobación conversacional sin lectura MCP. Recuperó la pregunta real anterior sobre qué deben descubrir o hacer personas/agentes en el sitio. Ofreció responderla en el chat y aclaró que quedaría en la conversación sin guardarse en AFW. No confirmó actualidad del expediente ni nuevos guardados. El recibo privado del chat conserva sus identificadores; no se publica historial privado en Git.
+El nuevo turno cloud terminó correctamente el3deoctubre a22:57:38 Argentina (4deoctubre01:57:38UTC), duración7.6s. Respondió que el error requiere reautenticación pero no permite determinar su causa, que no hubo datos nuevos y que se trataba de una comprobación conversacional sin lectura MCP. Recuperó la pregunta real anterior sobre qué deben descubrir o hacer personas/agentes en el sitio. Ofreció responderla en el chat y aclaró que quedaría en la conversación sin guardarse en AFW. No confirmó actualidad del expediente ni nuevos guardados. El recibo privado del chat conserva sus identificadores; no se publica historial privado en Git.
 
 ## Alcance de esta aceptación
 
