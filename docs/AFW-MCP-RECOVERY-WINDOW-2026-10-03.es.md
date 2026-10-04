@@ -1,0 +1,9 @@
+# Ventana de recuperación MCP — 3 de octubre de 2026
+
+PROJECT AFW; REPOSITORY agent-friendly-web; ENVIRONMENT synthetic canary; ORIGIN delegated-canary.agentfriendlyweb.dev; RESOURCE_TYPE Worker/D1 synthetic; ALLOWED_ACTION ventana15m de lectura y acortar exclusivamente un nuevo permiso sintético tras lectura, sin ampliar alcance, cambiar expedientes ni datos reales; ROLLBACK efaf2265-b97f-4b5f-aaf0-52036d4c6217 cerrado, preservar D1/KV. Source main632368b (PR207 documental), runtime PR204/CI732.
+
+Versión candidatafe5b5dee-f30f-4882-ba1c-591bd70bf281 subida y desplegada con OAuthtrue/refreshfalse, cliente sintético registrado afw-chatgpt-pilot-20261003, límite4deoctubre02:17:14UTC /3deoctubre23:17:14Argentina. El nuevo intento cloud pidió reconexión; al abrirla Cloudflare exigió ingreso de la audiencia canary. No se emitió consentimiento ni se ejecutó una lectura nueva. Se restauró efaf2265 al100% antes de solicitar intervención humana; D1 conserva seis permisos históricos y cero activos.
+
+Se preparó una página de ingreso de /connections sin callback OAuth antiguo. Se solicitó el código a la cuenta de prueba autorizada; la UI mostró Enter your code, vigencia10min. El owner debe escribirlo directamente en Chrome; nunca enviarlo en el chat. Captura local ignorada afw-recovery-login-required.png. La marca Tokenizart de Cloudflare es el nombre de la cuenta Access compartida; la audiencia y recurso son exclusivamente AFW Canary.
+
+Pendiente únicamente autenticación para continuar esta aceptación. No reutilizar el candidato ni consentimiento viejo: comprobar hora y preparar una ventana nueva después del ingreso. Si /connections da404 al ingresar es compatible con el Worker cerrado, no un rechazo de la identidad. No afirmar recuperación de payload MCP probada: el cliente aún no alcanzó el servidor MCP. No repetir QA visual ni aislamiento de dos identidades.
