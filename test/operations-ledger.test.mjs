@@ -6,6 +6,18 @@ import { validateSignal, recordSignal, claimIncident, finishInvestigation } from
 const now = Date.parse('2026-10-01T15:00:00Z');
 const signal = (extra = {}) => ({ eventId: 'event-1', check: 'public_discovery', resource: 'afw_public_web', version: 'd09bcf52-6fae-4c34-bfec-40b715384205', observedAt: new Date(now).toISOString(), result: 'failed', ...extra });
 
+test('delegated resources accept only their public edge check and stay isolated from web incidents', async () => {
+  const {db}=operationsDb();
+  for(const resource of ['afw_delegated_canary','afw_delegated_real_pilot']) {
+    const value=signal({eventId:resource,resource,check:'delegated_edge'});
+    assert.equal(validateSignal(value,now).resource,resource);
+    await recordSignal(db,value,now);
+    assert.throws(()=>validateSignal({...value,check:'public_home'},now));
+  }
+  assert.throws(()=>validateSignal(signal({check:'delegated_edge'}),now));
+  assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM operations_incidents').first()).n,2);
+});
+
 test('signal contract rejects foreign resources, unknown fields, invalid dates and versions', () => {
   assert.equal(validateSignal(signal(), now).result, 'failed');
   for (const extra of [{ resource: 'atelier' }, { body: 'private' }, { check: 'email' }, { observedAt: 'garbage' }, { observedAt: new Date(now + 300001).toISOString() }, { version: 'latest' }, { eventId: 'https://evil.test' }]) assert.throws(() => validateSignal(signal(extra), now));
