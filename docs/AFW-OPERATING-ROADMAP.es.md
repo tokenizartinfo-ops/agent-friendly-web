@@ -2,6 +2,8 @@
 
 ## Punto de partida vigente — 3 de octubre, recuperación
 
+4deoctubre: [consumidor operacional preparado](AFW-OPERATIONS-CONSUMER-2026-10-04.es.md), identidad Access de servicio, consulta saneada, reserva global con presupuesto/recibo e idempotencia. Suite769/769 y workerd/D1 aceptados; no ruta ni credencial activadas. Continuar publicación cerrada y esquema aditivo, después custodia exclusiva y correlación cloud real. No repetir cron ya aceptado ni pedir reconexión Chrome.
+
 4deoctubre13:34Argentina: [cron remoto aceptado](AFW-CRON-ACCEPTANCE-2026-10-04.es.md), dos ciclos con recibo y supresión,10eventos sintéticos; cierre receptor17b54683/productorfa04bb41 sin firmas/schedules. [Watchdog de lectura](AFW-WATCHDOG-PREPARATION-2026-10-04.es.md) preparado755tests, no activo. [Cloud reconciliado](AFW-CLOUD-TRIGGER-RECONCILIATION-2026-10-04.es.md): tarea de correo cada hora intacta, entorno AFW correcto; siguiente consumidor autenticado/correlación real y aviso independiente. No pedir reconexión Chrome ya resuelta ni afirmar guardia/PCoff por el cron.
 
 4 de octubre12:21Argentina: [constancias publicadas cerradas](AFW-PRODUCER-HEARTBEAT-2026-10-04.es.md), PR222/CI747. Tabla operativa aditiva, productor7ebc8570100% disabled/sin cron/sin firma. Historial2eventos/1incidencia intacto,0constancias porque aún no ejecutó remoto. Siguiente ensayo real por binding y watchdog/consumidor independiente; no afirmar monitoreo activo.
