@@ -58,6 +58,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Operational continuity
 
+- Latest stable edge acceptance: `docs/AFW-STABLE-EDGE-ACCEPTANCE-2026-10-04.es.md`. Temporary synthetic stable aa17ee2a returned metadata200/MCP401 anonymously; restored closedaa121311 (full ID in receipt) at14:12:58UTC. Real94a3c291 unchanged; six404 and8/4historical grants/zero unrevoked verified. No new private acceptance or continuous availability claimed. Next cloud monitoring/incident delivery and stable-client operations before discovery; do not repeat owner login.
+
 - Latest delegated closed release: PR214/source065bf6b/CI739, receipt `docs/AFW-STABLE-SERVICE-GUARD-2026-10-04.es.md`. Canary aa121311-2d88-4a2f-ad54-b52193cd1c20 and real94a3c291-a966-4bcd-987b-d913ed2fcf4d verified100%, OAuth/refreshfalse/window. Eight/four historical grants preserved, zero unrevoked. Actions37207726390 six404, no private reads. Supersedes earlier closed pointers, preserving dated history. Stable mode acceptance remains local; next remote synthetic stable acceptance/monitoring before discovery. Do not repeat accepted owner login/recovery or infer commercial availability.
 
 - Latest operational edge check: `docs/AFW-DELEGATED-EDGE-OPERATIONS-2026-10-04.es.md`, PR212/main2f28742/CI737. Manual Actions37206451510 on GitHub hosted Ubuntu passed six404 with no credentials or private reads. CLI fixed origins/closed expectation; no mode overrides, redirects or auto-fixes. Not a schedule, Codex event subscription or continuous manager. Next stable availability and periodic monitoring before discovery; do not repeat accepted recovery/login.
