@@ -14,6 +14,8 @@ Si falla el servicio o el operador se interrumpe: el plazo cierra la utilidad de
 
 ## Paso a disponibilidad estable
 
-Pendiente: definir origen/cliente estable registrado, monitoreo y responsable de incidentes, aceptación remota de recuperación y QA móvil/teclado, comunicación al primer cliente y duración comercial si difiere. Solo después publicar discovery y auth.md hacia endpoints activos. Una beta con plazo corto no equivale a disponibilidad continua. El aislamiento de dos propietarios, lectura y retirada ya están acreditados en su recibo; no repetir ingreso por rutina.
+Actualización4deoctubre: recuperación desde ChatGPT y QA móvil/teclado ya aceptadas en AFW-RECOVERY-CLOUD-ACCEPTANCE-2026-10-04.es.md y AFW-CONNECTION-UI-ACCEPTANCE-2026-10-03.es.md; no repetir por rutina. Comprobación pública cloud manual aceptada en AFW-DELEGATED-EDGE-OPERATIONS-2026-10-04.es.md. Sigue pendiente disponibilidad estable, modalidad de monitoreo periódico, cliente/callback vigente, responsable y comunicación al primer cliente. Las ventanas de diez minutos y sus permisos retirados no se convierten en acceso permanente por estos resultados.
+
+Pendiente: definir origen/cliente estable registrado, monitoreo periódico y responsable de incidentes, comunicación al primer cliente y duración comercial si difiere. Solo después publicar discovery y auth.md hacia endpoints activos. Una beta con plazo corto no equivale a disponibilidad continua. El aislamiento de dos propietarios, lectura y retirada ya están acreditados en su recibo; no repetir ingreso por rutina.
 
 Sector de Sistemas: confirmar recepción de acceso y objetivo con el cliente; datos y permisos de hosting ambiguos se preguntan. La habilitación administrativa no acredita recepción de OTP. No enviar invitación prometiendo servicio disponible mientras esté cerrado.
