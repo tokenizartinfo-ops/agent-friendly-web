@@ -484,6 +484,8 @@ test('two concurrent exchanges of one code cannot issue two tokens',async()=>{
 
 test('bounded canary expires and refuses requests without its edge rate guard',async()=>{
   const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
+    f.env.AFW_OAUTH_SERVICE_MODE='window';
+    delete f.env.DELEGATED_RATE_LIMITER;
     f.env.AFW_OAUTH_PILOT_EXPIRES_AT=new Date(Date.now()+60000).toISOString();
     assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,503);
     f.env.DELEGATED_RATE_LIMITER={limit:async()=>({success:false})};
@@ -495,4 +497,55 @@ test('bounded canary expires and refuses requests without its edge rate guard',a
     f.env.AFW_OAUTH_PILOT_EXPIRES_AT='invalid';
     assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,503);
   }finally{f.close();}
+});
+
+test('enabled service rejects missing or ambiguous availability policy',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);try {
+    delete f.env.AFW_OAUTH_SERVICE_MODE;
+    delete f.env.AFW_OAUTH_PILOT_EXPIRES_AT;
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,503);
+    f.env.AFW_OAUTH_SERVICE_MODE='unexpected';
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,503);
+    f.env.AFW_OAUTH_SERVICE_MODE='stable';
+    f.env.AFW_OAUTH_PILOT_EXPIRES_AT='2026-10-04T00:00:00Z';
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,503);
+  }finally{f.close();}
+});
+
+test('stable service requires a functioning edge guard and keeps consent duration bounded',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);
+  const client=new Client({name:'afw-stable-guard-test',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
+  try {
+    f.env.AFW_OAUTH_SERVICE_MODE='stable';
+    delete f.env.AFW_OAUTH_PILOT_EXPIRES_AT;
+    delete f.env.DELEGATED_RATE_LIMITER;
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,503);
+    f.env.DELEGATED_RATE_LIMITER={limit:async()=>({success:false})};
+    const limited=await f.request('/.well-known/oauth-authorization-server',{},null);
+    assert.equal(limited.status,429);assert.equal(limited.headers.get('Retry-After'),'60');
+    f.env.DELEGATED_RATE_LIMITER={limit:async()=>{throw Error('private limiter diagnostic');}};
+    const failed=await f.request('/.well-known/oauth-authorization-server',{},null);
+    assert.equal(failed.status,503);assert.ok(!(await failed.text()).includes('private limiter diagnostic'));
+    for(const malformed of [null,{}, {success:'true'}]){
+      f.env.DELEGATED_RATE_LIMITER={limit:async()=>malformed};
+      assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,503);
+    }
+    f.env.DELEGATED_RATE_LIMITER={limit:async()=>({success:true})};
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,200);
+    const a=await authorize(f,{scope:'afw:project:read'});
+    const approved=await approve(f,a,{scope:['afw:project:read']});
+    const issued=await exchange(f,approved.headers.get('Location'),a.verifier);
+    assert.equal(issued.status,200);const token=await issued.json();
+    await client.connect(new StreamableHTTPClientTransport(new URL(f.resource),{requestInit:{headers:{Authorization:'Bearer '+token.access_token,Host:new URL(f.issuer).host}},fetch:(url,options)=>f.worker.fetch(new Request(url,options),f.env,f.ctx)}));
+    assert.equal((await client.callTool({name:'read_project_summary',arguments:{}})).structuredContent.status,200);
+    const grant=f.sqlite.prepare('SELECT created_at,expires_at FROM delegated_access_grants').get();
+    assert.equal(Date.parse(grant.expires_at)-Date.parse(grant.created_at),600000);
+    f.setTime(grant.expires_at);
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,200);
+    const expired=await client.callTool({name:'read_project_summary',arguments:{}});
+    assert.equal(expired.structuredContent.code,'delegated_access_denied');
+    assert.equal(expired.structuredContent.data,undefined);
+    f.env.AFW_DELEGATED_OAUTH_ENABLED='false';
+    assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,404);
+  }finally{await client.close();f.close();}
 });
