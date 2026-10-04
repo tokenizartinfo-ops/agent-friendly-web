@@ -2,6 +2,8 @@
 
 ## Punto de partida vigente — 3 de octubre, recuperación
 
+4 de octubre11:01Argentina: [guardia publicada cerrada](AFW-STABLE-SERVICE-GUARD-2026-10-04.es.md), PR214/CI739. Ambos Workers nuevos100%, flagsfalse/window, historial8/4 y cero permisos sin retirar. Actions37207726390 confirmó seis404. Cierre remoto comprobado; siguiente aceptación estable sintética y monitoreo coherente antes de apertura comercial/discovery. No repetir ingreso o recuperación ya aceptados.
+
 4 de octubre: [recuperación real desde ChatGPT cloud aceptada](AFW-RECOVERY-CLOUD-ACCEPTANCE-2026-10-04.es.md):200 → error de aplicación503 con orientación y pregunta histórica →200 usando el mismo permiso de resumen. Sin reconexión automática. Permiso retirado, ocho registros históricos/cero activos, ambos servicios cerrados. Ya no está pendiente esa aceptación; conservar la distinción con OAuth vencido. Próximo bloque: disponibilidad/monitoreo del servicio estable antes de discovery y apertura al cliente.
 
 [Auditoría externa del4deoctubre](AFW-EXTERNAL-AUDIT-2026-10-04.es.md): nivel5/5, all/apiApp12PASS/4FAIL; content6PASS/1FAIL; sin puntuación numérica. DNSSECpending/DSausente persisten: investigar registrador, no resetear. Metadata OAuth y auth.md requieren servicio estable activo; no publicarlas hacia los pilotos cerrados.
