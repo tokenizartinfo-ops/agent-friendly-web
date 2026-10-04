@@ -58,6 +58,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Operational continuity
 
+- Latest checkpoint closed release: PR222/main9fb935a/CI747, `docs/AFW-PRODUCER-HEARTBEAT-2026-10-04.es.md`. Producer7ebc8570-8ea2-4fe2-bb7f-630c0c05cc27@100% disabled/no cron/no secrets, isolated DB/binding verified. Additive state table only in operations D1; events2/incidents1/checkpoints0. No remote producer run or silence alert accepted. Next actual binding receipt/checkpoints and independent watchdog/consumer; preserve all history.
+
 - Producer checkpoint preparation: `docs/AFW-PRODUCER-HEARTBEAT-2026-10-04.es.md`. Additive operational-only state table, per-resource leases, separate observation/receipt times, recent healthy suppression15m and pending-delivery recovery. Local freshness classification is not an active watchdog/alert. Producer remains disabled/no cron; next isolated schema/closed promotion and remote binding acceptance, preserving ledger and customer D1.
 
 - Latest producer closed deployment: PR220/main9a54600/CI746, receipt `docs/AFW-OPERATIONS-PRODUCER-2026-10-04.es.md`. Worker agent-friendly-web-operations-producer30090b7c-db4b-4fcb-b815-04f15c914d7c@100%, disabled, binding only AFW receiver, zero secrets, schedules[], no public targets. No remote producer execution/notification claimed. Next binding acceptance plus repeated-health reduction/heartbeat before cadence; preserve operations D1 and closed receiver.
