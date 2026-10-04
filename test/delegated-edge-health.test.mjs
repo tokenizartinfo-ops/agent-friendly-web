@@ -7,7 +7,7 @@ test('closed service checks fixed public surfaces and reports unexpected opening
   const result=await checkDelegatedEdge({service:'canary',fetchImpl:async(url,options)=>{calls.push({url,options});return new Response('private diagnostic',{status:url.endsWith('/mcp')?200:404});}});
   assert.equal(result.ok,false);assert.equal(result.checks.length,3);
   assert.ok(!JSON.stringify(result).includes('private diagnostic'));
-  assert.ok(calls.every(x=>x.url.startsWith('https://delegated-canary.agentfriendlyweb.dev/')&&x.options.redirect==='error'&&!x.options.headers&&x.options.signal));
+  assert.ok(calls.every(x=>x.url.startsWith('https://delegated-canary.agentfriendlyweb.dev/')&&x.options.redirect==='manual'&&!x.options.headers&&x.options.signal));
   await assert.rejects(()=>checkDelegatedEdge({service:'https://other.invalid'}),/Unknown service/);
 });
 

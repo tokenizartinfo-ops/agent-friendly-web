@@ -30,7 +30,7 @@ test('producer fails closed before sending invalid data and sanitizes rejected o
   const unavailable=await deliverOperationalSignal({signal,secret,receiver,now:()=>time});
   assert.equal(unavailable.ok,false);assert.ok(!JSON.stringify(unavailable).includes('private'));
   for(const response of [Response.json({accepted:true},{status:200}),Response.json({accepted:false},{status:202}),new Response('x'.repeat(5000),{status:202,headers:{'content-type':'application/json'}}),new Response(null,{status:302,headers:{location:'https://other.invalid'}})]) {
-    const result=await deliverOperationalSignal({signal,secret,receiver:{fetch:async request=>{assert.equal(request.url,'https://operations.agentfriendlyweb.dev/signals');assert.equal(request.redirect,'error');return response;}},now:()=>time});
+    const result=await deliverOperationalSignal({signal,secret,receiver:{fetch:async request=>{assert.equal(request.url,'https://operations.agentfriendlyweb.dev/signals');assert.equal(request.redirect,'manual');return response;}},now:()=>time});
     assert.equal(result.ok,false);
   }
 });
