@@ -2,6 +2,8 @@
 
 ## Estado operativo reconciliado — 4 de octubre
 
+Actualización19:53UTC: [ciclo cloud sintético correlacionado](AFW-CLOUD-INCIDENT-ACCEPTANCE-2026-10-04.es.md) aceptado por recepción HMAC202 y list/claim/finish reales de AFW Operations; D1 confirmó requestId/runId, diagnosed/review y posterior recuperación sintética/closed. Receptor861bc360 y manager31ff4c39 cerrados100%, firma retirada/tokenfalse;12eventos/2incidencias/2checkpoints/1investigación preservados. La programación vinculada al entorno no está expuesta en herramientas/UI observadas; no anunciar gerente autónomo ni pedir apagar PC todavía. Los pendientes antiguos de Access/custodia/correlación debajo son históricos y quedan sustituidos por este recibo.
+
 El receptor y productor operacional ya existen en recursos AFW aislados. [PR224 y aceptación de binding](AFW-PRODUCER-BINDING-ACCEPTANCE-2026-10-04.es.md) acreditan entrega manual remota202, constancias persistidas y supresión del segundo ciclo sano. Ambos permanecen cerrados sin firmas/cadencia permanente; [ensayo de cron](AFW-CRON-ACCEPTANCE-2026-10-04.es.md) separado. Los apartados iniciales siguientes conservan la preparación histórica y no sustituyen estos recibos.
 
 El envío propio desde cloud fue [aceptado el2deoctubre](AFW-OWN-MAIL-ACCEPTANCE-2026-10-02.es.md); las credenciales temporales y el servicio quedaron cerrados. El código/PR cloud y la subida inactiva al canary tienen [recibos del3deoctubre](AFW-CLOUD-CANARY-ACCEPTANCE-2026-10-03.es.md). Ninguno acredita aún la cadena incidente operacional→gerente→diagnóstico.
