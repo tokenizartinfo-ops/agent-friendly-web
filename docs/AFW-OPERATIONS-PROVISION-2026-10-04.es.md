@@ -1,0 +1,5 @@
+# Receptor operativo aislado — preparación
+
+PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT isolated operations; ORIGIN https://operations.agentfriendlyweb.dev; RESOURCE_TYPE Worker/D1; RESOURCE_ID previstos agent-friendly-web-operations. ALLOWED_ACTION crear recursos exclusivos, tablas operativas vacías, publicar receptor cerrado y probar recepción sintética firmada en apertura temporal. No reutilizar D1 de expedientes, no modificar permisos de clientes ni Tokenizart. ROLLBACK volver a versión cerrada conservando D1 e historial; desactivar recepción antes de cualquier investigación. No borrar datos ni habilitar reparaciones automáticas.
+
+La configuración canónica queda disabled. Firma HMAC exclusiva custodiada como secreto Worker; nunca Git, chat, archivo de evidencia ni correo. La prueba temporal no crea productor continuo, cron o consumidor Codex. Primero comprobar POST503 cerrado, después recepción202/duplicado/recuperación y firma inválida401; restaurar cierre incluso si falla la prueba. El material sintético queda en el ledger aislado como evidencia, sin expedientes.
