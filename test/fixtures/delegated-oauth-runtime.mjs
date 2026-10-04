@@ -19,7 +19,7 @@ export async function localOAuthFixture(createWorker) {
     async delete(key){kv.delete(key);},
     async list({prefix='',limit=1000}={}){return {keys:[...kv.keys()].filter(k=>k.startsWith(prefix)).slice(0,limit).map(name=>({name})),list_complete:true,cursor:''};},
   };
-  const env={DB,OAUTH_KV,AFW_DELEGATED_OAUTH_ENABLED:'true',AFW_OAUTH_PILOT_CLIENT_ID:'',ACCESS_TEAM_DOMAIN:'tokenizart.cloudflareaccess.com',ACCESS_AUD:'synthetic-afw-delegated-aud'};
+  const env={DB,OAUTH_KV,AFW_DELEGATED_OAUTH_ENABLED:'true',AFW_OAUTH_SERVICE_MODE:'stable',DELEGATED_RATE_LIMITER:{limit:async()=>({success:true})},AFW_OAUTH_PILOT_CLIENT_ID:'',ACCESS_TEAM_DOMAIN:'tokenizart.cloudflareaccess.com',ACCESS_AUD:'synthetic-afw-delegated-aud'};
   const {privateKey,publicKey}=await generateKeyPair('RS256');
   const jwk={...await exportJWK(publicKey),kid:'local-afw-test',alg:'RS256'};
   const keySet=createLocalJWKSet({keys:[jwk]});
