@@ -16,3 +16,7 @@ Suite completa, lint/build, revisión independiente, CI y publicación cerrada. 
 ## Verificación local
 
 732 pruebas completas aprobadas; lint cero errores con advertencia histórica de imagen, build finalizado. Tras ajustar la frase de alcance a disponibilidad condicional, las dos pruebas MCP pertinentes volvieron a pasar. La revisión independiente detectó ese P2 y fue corregido. La aceptación conversacional real de esta nueva respuesta sigue pendiente; no se deduce del test local.
+
+## Publicación cerrada — 3 de octubre, 22:42 Argentina
+
+PR204 integrada en main3787eb7, CI37168672058 aprobada. Worker real774c9547-a205-4f24-b369-1dca58a7de16 y canaryefaf2265-b97f-4b5f-aaf0-52036d4c6217 comprobados al100%, OAuth/refreshfalse y seis respuestas404 para MCP/metadatos. Reversiones cerradas0f13d991 y a2ed1787; preservar D1/KV y todas las reglas Access. Sin migraciones ni nuevos permisos. PROJECT AFW; REPOSITORY agent-friendly-web; ENVIRONMENT pilotos cerrados; ORIGIN delegated-pilot/delegated-canary.agentfriendlyweb.dev; RESOURCE_TYPE Worker; ALLOWED_ACTION publicación cerrada y verificación. Se conserva el límite: no acredita interpretación conversacional remota, servicio comercial ni nuevo puntaje externo.
