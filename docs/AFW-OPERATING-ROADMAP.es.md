@@ -2,6 +2,8 @@
 
 ## Punto de partida vigente — 3 de octubre, recuperación
 
+4 de octubre: [contrato de incidencias delegadas](AFW-DELEGATED-INCIDENT-CONTRACT-2026-10-04.es.md) preparado localmente: probe saneado → recurso/check específicos → agrupación y recuperación durable; ingreso firmado probado. No receptor o programación nuevos activados. Siguiente provisionar/verificar registro operativo aislado y recepción remota antes de periodicidad/consumidor cloud.
+
 4 de octubre11:13Argentina: [configuración estable remota sintética comprobada](AFW-STABLE-EDGE-ACCEPTANCE-2026-10-04.es.md): metadata200 válida/MCP anónimo401; cierre restaurado, piloto real sin cambios, seis404 y permisos históricos8/4todos retirados. No continuidad prolongada ni nueva lectura privada. Siguiente monitoreo cloud y entrega comprobada de incidencias, luego operaciones de cliente estable antes de discovery.
 
 4 de octubre11:01Argentina: [guardia publicada cerrada](AFW-STABLE-SERVICE-GUARD-2026-10-04.es.md), PR214/CI739. Ambos Workers nuevos100%, flagsfalse/window, historial8/4 y cero permisos sin retirar. Actions37207726390 confirmó seis404. Cierre remoto comprobado; siguiente aceptación estable sintética y monitoreo coherente antes de apertura comercial/discovery. No repetir ingreso o recuperación ya aceptados.

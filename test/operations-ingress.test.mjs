@@ -16,6 +16,14 @@ function fixture() {
   return { db, env: { OPERATIONS_DB: db, AFW_OPERATIONS_ENABLED: 'true', AFW_OPERATIONS_SIGNING_SECRET: secret }, worker: createOperationsIngress({ now: () => now, bodyTimeoutMs: 20 }) };
 }
 
+test('authenticated delegated signal persists but resource/check mismatch is rejected',async()=>{
+  const f=fixture();
+  const delegated={...payload,resource:'afw_delegated_canary',check:'delegated_edge'};
+  assert.equal((await f.worker.fetch(await request(JSON.stringify(delegated)),f.env)).status,202);
+  assert.equal((await f.worker.fetch(await request(JSON.stringify({...delegated,eventId:'wrong',check:'public_home'})),f.env)).status,400);
+  assert.equal((await f.db.prepare('SELECT COUNT(*) AS n FROM operations_events').first()).n,1);
+});
+
 test('signed signal is persisted, duplicate acknowledged without another failure', async () => {
   const f = fixture();
   assert.equal((await f.worker.fetch(await request(), f.env)).status, 202);
