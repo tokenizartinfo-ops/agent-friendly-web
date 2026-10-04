@@ -1,0 +1,20 @@
+{
+  "$schema":"node_modules/wrangler/config-schema.json",
+  "account_id":"85d0d5dadac3341a564f22ce885e9eec",
+  "name":"agent-friendly-web-operations-producer",
+  "main":"worker/operations-producer/index.mjs",
+  "compatibility_date":"2026-09-07",
+  "compatibility_flags":["nodejs_compat","global_fetch_strictly_public"],
+  "workers_dev":false,
+  "preview_urls":false,
+  "observability":{"enabled":false},
+  "vars":{
+    "AFW_OPERATIONS_PRODUCER_ENABLED":"false",
+    "AFW_CANARY_VERSION":"aa121311-2d88-4a2f-ad54-b52193cd1c20",
+    "AFW_REAL_PILOT_VERSION":"94a3c291-a966-4bcd-987b-d913ed2fcf4d",
+    "AFW_CANARY_EXPECTED":"closed",
+    "AFW_REAL_PILOT_EXPECTED":"closed"
+  },
+  "services":[{"binding":"OPERATIONS_RECEIVER","service":"agent-friendly-web-operations"}],
+  "triggers":{"crons":[]}
+}
