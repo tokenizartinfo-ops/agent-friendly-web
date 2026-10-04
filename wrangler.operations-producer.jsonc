@@ -16,5 +16,6 @@
     "AFW_REAL_PILOT_EXPECTED":"closed"
   },
   "services":[{"binding":"OPERATIONS_RECEIVER","service":"agent-friendly-web-operations"}],
+  "d1_databases":[{"binding":"OPERATIONS_STATE_DB","database_name":"agent-friendly-web-operations","database_id":"603c471d-19bb-4530-9773-c02e18b29840"}],
   "triggers":{"crons":[]}
 }
