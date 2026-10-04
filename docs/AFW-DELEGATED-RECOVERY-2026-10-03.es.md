@@ -12,3 +12,7 @@ Enlaces de recuperación derivados del origen servidor, nunca de un argumento de
 
 Suite completa, lint/build, revisión independiente, CI y publicación cerrada. Probar luego el texto interpretado por ChatGPT en una ventana acotada real antes de afirmar aceptación conversacional remota. El cliente podría detenerse en su validación OAuth antes de invocar MCP; esta respuesta no cubre esa pantalla externa.
 
+
+## Verificación local
+
+732 pruebas completas aprobadas; lint cero errores con advertencia histórica de imagen, build finalizado. Tras ajustar la frase de alcance a disponibilidad condicional, las dos pruebas MCP pertinentes volvieron a pasar. La revisión independiente detectó ese P2 y fue corregido. La aceptación conversacional real de esta nueva respuesta sigue pendiente; no se deduce del test local.
