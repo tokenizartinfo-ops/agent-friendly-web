@@ -63,3 +63,6 @@ Rechaza campos extra, origen/recurso/check desconocidos, señal de más de 24 h,
 No hay Wrangler de despliegue con IDs inventados. Crear Worker/D1 propios y verificar IDs, dominio y permisos. Aplicar schema en la base operacional nueva, nunca D1 productivo de expedientes. Habilitar entrada solo tras control de capacidad/retención/rate limiting y evidencia del productor. Pausa `AFW_OPERATIONS_ENABLED` distinta de true bloquea recepción; retirar ruta o volver a versión previa conserva D1. Las funciones de reserva no se exponen por HTTP: necesitan adaptador autenticado, pausa y presupuesto global antes de un ejecutor real.
 
 Aceptación remota pendiente: persistir señal sintética, reenviar duplicado, simular caída y lease vencida, comprobar una sola investigación y resultado recuperado con equipo apagado. Retención/purga, presupuesto diario, dead-letter, scheduler de reconciliación y prueba D1 remota siguen pendientes; los tests SQLite no prueban esas capacidades cloud.
+# Preparación de ventanas operativas
+
+Antes de otra apertura, consultar [vencimiento por servidor](AFW-OPERATIONS-WINDOW-EXPIRY-2026-10-04.es.md): el código preparado requiere `AFW_OPERATIONS_WINDOW_EXPIRES_AT` en receptor y manager. Todavía no está desplegado; no inferir protección remota desde esta nota. El vencimiento bloquea nuevas peticiones y conserva el cierre administrativo separado.
