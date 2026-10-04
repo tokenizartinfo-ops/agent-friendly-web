@@ -78,6 +78,11 @@ Las herramientas de automations requieren title/prompt para create; schedule VEV
 - El preflight sigue pendiente de evidencia en este informe; no se consultó su estado ni se duplicó/reintentó. No se afirma que la hora futura implique ejecución efectiva.
 - 776 tests/CI recientes informados por el owner; no se repitió suite ni se verificó CI por red en este bloque.
 
+## Verificación posterior del conector GitHub
+
+Turno `01a10914-da67-7269-96de-fdb88956e28f`, finalizado 2026-10-04 22:42:21 UTC: una única lectura `github.get_repo` confirmó `repository_full_name: tokenizartinfo-ops/agent-friendly-web`, clone_url canónica y default_branch main. La respuesta no devolvió SHA. Esto amplía la evidencia de la fila GitHub: metadata mediante conector comprobada, sin credenciales locales, mutaciones ni programación; lectura de archivos, CI y escritura siguen sin probar en ese chat.
+
+
 ## Próximos cierres propuestos
 
 1. Recoger el resultado del único preflight existente y cotejar environment_id, origin, HEAD, presencia y correlación; aceptar BINDING_UNAVAILABLE como falta de vínculo, sin scratch ni sustitutos.
