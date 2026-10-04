@@ -2,7 +2,7 @@
 
 ## Punto de partida vigente — 3 de octubre, renovación
 
-[Preparación de dos identidades reales](AFW-MULTIOWNER-READINESS-2026-10-03.es.md): regla QA separada del expediente, sesión15m, reglas owner/cliente preservadas. Candidato multiowner local permanece cerrado/no publicado. Pendiente ingreso humano de la segunda identidad en ventana separada; esa intervención es necesaria para acreditar aislamiento real, no una nueva aprobación rutinaria. Retirar la regla QA al cerrar; TTL de sesión no caduca la regla.
+[Aceptación de dos propietarios](AFW-MULTIOWNER-ACCEPTANCE-2026-10-03.es.md): ambas sesiones leyeron su propio resumen mediante MCP200; lecturas cruzadas UI denegadas, retirada seguida de403 sin datos en ambos tokens. Reglas QA/cliente temporal retirados, servidor detenido, Worker real cerrado8dfb4024 al100%. Se conservan seis expedientes. Siguiente: identidad visual del consentimiento y recuperación conversacional; no requiere repetir el ingreso humano.
 
 [Consentimiento mínimo publicado cerrado](AFW-MINIMUM-CONSENT-2026-10-03.es.md): PR198/CI731, pantalla Chrome con casilla opcional desmarcada sin editar URL, cancelación sin grant. Ambos Workers actualizados cerrados, seis endpoints404 y cero permisos activos. Este bloque está completo; siguiente [apertura controlada y recuperación](AFW-DELEGATED-OPENING-PLAN-2026-10-03.es.md). Las versiones/cierres históricos permanecen en sus recibos fechados.
 
