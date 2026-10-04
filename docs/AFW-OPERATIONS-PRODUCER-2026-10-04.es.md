@@ -1,5 +1,11 @@
 # Productor operativo delegado
 
+## Publicación cerrada comprobada
+
+PR220 integrado, fuente9a546003779b99ecb7cf98d55aed8e8b76585eef; CI37211764014 pasó746pruebas/lint/build. Artefactos del runtime iguales entre revisión probada5e0a168 y main integrado. Worker publicado4deoctubre15:08:42UTC (12:08Argentina), versión30090b7c-db4b-4fcb-b815-04f15c914d7c100%. API Cloudflare verificó AFW_OPERATIONS_PRODUCER_ENABLEDfalse, modosclosed, versiones declaradas originales y servicebinding exclusivo a agent-friendly-web-operations/environmentproduction. Cero secretos y schedules[]; no targets públicos desplegados. Esto acredita provisión/configuración cerrada, no ejecución scheduled remota ni entrega por binding. Receptor permanece cerrado; no se generaron señales remotas en este bloque.
+
+Rollback de código: esta versión cerrada, conservando registro y receptor. Antes de activación verificar nuevamente versiones declaradas, custodia, mantenimiento, recepción y límites. No inferir notificación cloud ni puntaje externo desde este despliegue.
+
 PROJECT AFW; REPOSITORY agent-friendly-web; ENVIRONMENT isolated operations producer; RESOURCE_TYPE Worker; RESOURCE_ID agent-friendly-web-operations-producer; ORIGIN sin ruta pública. ALLOWED_ACTION preparar y publicar cerrado, verificar binding exclusivo al receptor AFW y ausencia de cron. ROLLBACK configuración disabled sin triggers, sin borrar registro operativo. No usa datos, D1, permisos o runtime de clientes/Tokenizart.
 
 ## Identidad y contrato
