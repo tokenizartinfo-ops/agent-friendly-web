@@ -1,5 +1,13 @@
 # Disponibilidad del servicio y duración del consentimiento
 
+## Promoción cerrada comprobada — 4 de octubre
+
+PR214 integrado: fuente `065bf6b96701194b5233c25ce974c3759bd8e321`; CI37207277597 pasó739pruebas, lint y build. Canary versión `aa121311-2d88-4a2f-ad54-b52193cd1c20` desplegada100% a14:00:30UTC; piloto real `94a3c291-a966-4bcd-987b-d913ed2fcf4d`100% a14:00:53UTC. API Cloudflare confirmó ambas versiones activas, OAuth/refreshfalse, window y bindings originales, incluido pin real y limitadores30/60. Se preservaron ocho grants históricos canary y cuatro reales, cero sin retirar en ambas bases; solo consulta agregada, sin migraciones o modificación de datos.
+
+Comprobación directa14:01:20–21UTC: seis404. [Actions37207726390](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/37207726390), fuente065bf6b, runner GitHub Ubuntu, pasó a14:01:36UTC con los mismos seis404 y privateReadVerifiedfalse. No requirió credenciales ni lecturas privadas. El ordenador no se apagó durante esta comprobación; acredita ejecución alojada en GitHub, no una nueva prueba física de apagado ni gerente continuo.
+
+Rollback de código: canary `efaf2265-b97f-4b5f-aaf0-52036d4c6217` y real `774c9547-a205-4f24-b369-1dca58a7de16`, ambos cerrados; conservar D1/KV y Access al regresar. Web pública y A2A sin cambios. Este recibo sustituye los punteros de cierre anteriores, conservando su historia. Próximo bloque: aceptación remota de modalidad estable sintética, expectativa operativa coherente y monitoreo antes de apertura/discovery. No habilita OAuth comercial ni prueba nuevas señales del auditor externo.
+
 PROJECT AFW; REPOSITORY agent-friendly-web. Preparación de código; no habilita el servicio ni amplía permisos de clientes. Runtime delegado, separado de web pública/A2A/Tokenizart. Los permisos individuales permanecen diez minutos, resumen por defecto y evidencia opcional; refresh, cuando esté habilitado explícitamente, solo dentro del plazo original.
 
 ## Política explícita

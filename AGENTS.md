@@ -58,6 +58,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Operational continuity
 
+- Latest delegated closed release: PR214/source065bf6b/CI739, receipt `docs/AFW-STABLE-SERVICE-GUARD-2026-10-04.es.md`. Canary aa121311-2d88-4a2f-ad54-b52193cd1c20 and real94a3c291-a966-4bcd-987b-d913ed2fcf4d verified100%, OAuth/refreshfalse/window. Eight/four historical grants preserved, zero unrevoked. Actions37207726390 six404, no private reads. Supersedes earlier closed pointers, preserving dated history. Stable mode acceptance remains local; next remote synthetic stable acceptance/monitoring before discovery. Do not repeat accepted owner login/recovery or infer commercial availability.
+
 - Latest operational edge check: `docs/AFW-DELEGATED-EDGE-OPERATIONS-2026-10-04.es.md`, PR212/main2f28742/CI737. Manual Actions37206451510 on GitHub hosted Ubuntu passed six404 with no credentials or private reads. CLI fixed origins/closed expectation; no mode overrides, redirects or auto-fixes. Not a schedule, Codex event subscription or continuous manager. Next stable availability and periodic monitoring before discovery; do not repeat accepted recovery/login.
 
 - Latest recovery acceptance: `docs/AFW-RECOVERY-CLOUD-ACCEPTANCE-2026-10-04.es.md`. Actual ChatGPT200 → application503 with recovery/historical question/no reconnect →200 on the same summary-only consent passed. PR210/CI734 QA adapter never imported by production. Withdrawn via connections; eight historical canary grants, zero unrevoked; canary closedefaf2265@100%/flagsfalse/three404, real unchanged774c9547@100%/flagsfalse. Do not repeat this login/fault test or infer commercial availability. Next stable service monitoring/availability before apex discovery.
