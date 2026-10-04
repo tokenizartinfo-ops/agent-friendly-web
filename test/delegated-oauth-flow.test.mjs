@@ -11,6 +11,56 @@ const hook=registerHooks({resolve(s,c,next){return s==='cloudflare:workers'?{url
 const {createDelegatedOAuthWorker}=await import('../lib/delegated-oauth-worker.mjs');
 hook.deregister();
 
+test('valid OAuth transport delivers read recovery and resumes with the same consent after storage returns',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);
+  const client=new Client({name:'afw-recovery-transport-test',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
+  const statuses=[];
+  const originalPrepare=f.env.DB.prepare;
+  let unavailable=false;
+  try {
+    const a=await authorize(f,{scope:'afw:project:read'});
+    const approval=await approve(f,a,{scope:['afw:project:read']});
+    const token=await (await exchange(f,approval.headers.get('Location'),a.verifier)).json();
+    const grantBefore=f.sqlite.prepare('SELECT * FROM delegated_access_grants').get();
+    f.env.DB.prepare=sql=>{
+      if(unavailable&&/FROM site_projects/i.test(sql))throw Error('synthetic outage with private diagnostic');
+      return originalPrepare(sql);
+    };
+    await client.connect(new StreamableHTTPClientTransport(new URL(f.resource),{
+      requestInit:{headers:{Authorization:'Bearer '+token.access_token,Host:new URL(f.issuer).host}},
+      fetch:async(url,options)=>{
+        const response=await f.worker.fetch(new Request(url,options),f.env,f.ctx);
+        if(options.body&&JSON.parse(options.body).method==='tools/call')
+          statuses.push({status:response.status,challenge:response.headers.get('WWW-Authenticate')});
+        return response;
+      },
+    }));
+    const first=await client.callTool({name:'read_project_summary',arguments:{}});
+    assert.equal(first.structuredContent.status,200);
+    unavailable=true;
+    const failed=await client.callTool({name:'read_project_summary',arguments:{}});
+    assert.equal(failed.isError,true);
+    assert.equal(failed.structuredContent.status,503);
+    assert.equal(failed.structuredContent.code,'delegated_read_unavailable');
+    assert.equal(failed.structuredContent.recovery.action,'retry_read');
+    assert.equal(failed.structuredContent.recovery.automaticReconnect,false);
+    assert.equal(failed.structuredContent.recovery.lastKnownContext,'historical_only');
+    assert.equal(failed.structuredContent.data,undefined);
+    assert.equal(failed._meta,undefined);
+    assert.ok(!JSON.stringify(failed).includes('private diagnostic'));
+    assert.ok(!JSON.stringify(failed).includes(token.access_token));
+    assert.deepEqual(statuses.at(-1),{status:200,challenge:null});
+    unavailable=false;
+    const resumed=await client.callTool({name:'read_project_summary',arguments:{}});
+    assert.equal(resumed.structuredContent.status,200);
+    assert.deepEqual(resumed.structuredContent.data.nextQuestion,first.structuredContent.data.nextQuestion);
+    assert.deepEqual(f.sqlite.prepare('SELECT * FROM delegated_access_grants').get(),grantBefore);
+    assert.equal(f.sqlite.prepare('SELECT COUNT(*) AS n FROM delegated_access_grants').get().n,1);
+    assert.equal(statuses.length,3);
+    assert.ok(statuses.every(row=>row.status===200&&row.challenge===null));
+  } finally {f.env.DB.prepare=originalPrepare;await client.close();f.close();}
+});
+
 test('human pages allow only their fresh style nonce and provide safe recovery',async()=>{
   const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
     const first=await authorize(f),second=await authorize(f);
