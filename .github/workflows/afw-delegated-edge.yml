@@ -1,0 +1,19 @@
+name: AFW delegated edge check
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: afw-delegated-edge
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify declared closed services without credentials
+        run: node scripts/check-delegated-edge.mjs
