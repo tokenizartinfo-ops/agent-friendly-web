@@ -526,6 +526,10 @@ test('stable service requires a functioning edge guard and keeps consent duratio
     f.env.DELEGATED_RATE_LIMITER={limit:async()=>{throw Error('private limiter diagnostic');}};
     const failed=await f.request('/.well-known/oauth-authorization-server',{},null);
     assert.equal(failed.status,503);assert.ok(!(await failed.text()).includes('private limiter diagnostic'));
+    for(const malformed of [null,{}, {success:'true'}]){
+      f.env.DELEGATED_RATE_LIMITER={limit:async()=>malformed};
+      assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,503);
+    }
     f.env.DELEGATED_RATE_LIMITER={limit:async()=>({success:true})};
     assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,200);
     const a=await authorize(f,{scope:'afw:project:read'});
