@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "name": "agent-friendly-web-operations",
+  "main": "worker/operations/index.mjs",
+  "compatibility_date": "2026-09-07",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {"enabled": false},
+  "vars": {"AFW_OPERATIONS_ENABLED": "false"},
+  "d1_databases": [{"binding":"OPERATIONS_DB","database_name":"agent-friendly-web-operations","database_id":"603c471d-19bb-4530-9773-c02e18b29840"}],
+  "routes": [{"pattern":"operations.agentfriendlyweb.dev","custom_domain":true}]
+}
