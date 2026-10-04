@@ -2,6 +2,8 @@
 
 ## Punto de partida vigente — 3 de octubre, recuperación
 
+4 de octubre: [constancias durables del productor](AFW-PRODUCER-HEARTBEAT-2026-10-04.es.md) preparadas: salud repetida omitida, acuse perdido pendiente, lease concurrente y clasificación de silencio. Falta aceptación remota por binding y watchdog/consumidor cloud; no programación activa ni aviso demostrado. La migración va solo a D1 operaciones.
+
 4 de octubre12:08Argentina: [productor publicado cerrado](AFW-OPERATIONS-PRODUCER-2026-10-04.es.md), PR220/CI746, Worker interno30090b7c100%, disabled/sin secretos/sin cron, binding receptor AFW verificado. Siguiente aceptar entrega remota por binding, reducir estados saludables repetidos y comprobar heartbeat antes de cadencia/consumidor cloud. No hay ejecución periódica activa.
 
 4 de octubre: [productor interno y entrega firmada](AFW-OPERATIONS-PRODUCER-2026-10-04.es.md) preparados: binding exclusivo, recibo durable202 comprobado localmente y ejecución cerrada sin cron. Siguiente aceptación remota del binding, reducción de salud repetida/heartbeat y consumidor cloud antes de periodicidad. No hay gerente continuo por esta preparación.
