@@ -58,6 +58,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Operational continuity
 
+- Producer preparation: `docs/AFW-OPERATIONS-PRODUCER-2026-10-04.es.md`. Dedicated internal service-binding producer, HMAC fixed receiver, bounded verified202 receipt, no arbitrary destinations/private data. Config disabled/no cron/no signature. Next remote binding acceptance, repeated-health suppression/heartbeat and actual consumer receipt before cadence. Declared version UUID must be reconciled with control plane; delivery ok is not service healthy or Codex notified.
+
 - Latest operations remote acceptance: `docs/AFW-OPERATIONS-PROVISION-2026-10-04.es.md`, PR218/source d134287/CI742. Isolated Worker agent-friendly-web-operations/D1 603c471d-19bb-4530-9773-c02e18b29840; signed synthetic202, duplicate acknowledged, forged401, recovery closed verified. Final4157f63d-2976-4a97-b40f-5d20a590da19@100% disabled, signature secret removed, POST503, two synthetic events/one closed incident. Supersedes earlier absence of receiver; no schedule/producer/consumer/alert delivery active. Next authenticated producer and actual cloud consumer receipt, never dossier D1 or inferred Codex notification.
 
 - Delegated operational contract: `docs/AFW-DELEGATED-INCIDENT-CONTRACT-2026-10-04.es.md`. Local observer produces sanitized fixed-origin signals; ledger allows delegated_edge only for dedicated canary/real-pilot resources. Signed ingress and grouped failure/recovery tested. No producer, schedule or remote receiver activated. API inventory found no AFW script named operations/monitor; verify/provision isolated resources before promising alert delivery. Never use dossier D1 for incidents or infer UUID format proves an active version.

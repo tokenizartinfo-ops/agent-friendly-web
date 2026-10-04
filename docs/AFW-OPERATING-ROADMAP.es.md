@@ -2,6 +2,8 @@
 
 ## Punto de partida vigente — 3 de octubre, recuperación
 
+4 de octubre: [productor interno y entrega firmada](AFW-OPERATIONS-PRODUCER-2026-10-04.es.md) preparados: binding exclusivo, recibo durable202 comprobado localmente y ejecución cerrada sin cron. Siguiente aceptación remota del binding, reducción de salud repetida/heartbeat y consumidor cloud antes de periodicidad. No hay gerente continuo por esta preparación.
+
 4 de octubre11:52Argentina: [receptor operativo remoto comprobado](AFW-OPERATIONS-PROVISION-2026-10-04.es.md), PR218/CI742. D1 aislado, señal firmada202/duplicado/firma falsa401/recuperación; dos eventos sintéticos y una incidencia cerrada. Receptor restaurado disabled y firma retirada. Ya no falta provisionar el receptor; siguiente productor autenticado/cadencia y recepción real por consumidor cloud. No anuncia monitoreo continuo ni notificación Codex.
 
 4 de octubre: [contrato de incidencias delegadas](AFW-DELEGATED-INCIDENT-CONTRACT-2026-10-04.es.md) preparado localmente: probe saneado → recurso/check específicos → agrupación y recuperación durable; ingreso firmado probado. No receptor o programación nuevos activados. Siguiente provisionar/verificar registro operativo aislado y recepción remota antes de periodicidad/consumidor cloud.
