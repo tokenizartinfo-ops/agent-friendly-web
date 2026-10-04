@@ -1,5 +1,7 @@
 # Guía de adopción: gerencia cloud y Fix Center operativo
 
+Actualización4deoctubre: receptor/productor aislados y entrega manual por binding aceptados en [PR224](AFW-PRODUCER-BINDING-ACCEPTANCE-2026-10-04.es.md). Ocho eventos sintéticos conservados; cierre sin firma/cadencia. Cron, consumidor real y watchdog siguen como criterios independientes. Código cloud, subida inactiva y envío propio cuentan con recibos posteriores al estado inicial descrito abajo; consultar [runbook reconciliado](AFW-CLOUD-MANAGER-RUNBOOK.es.md) antes de asumir que falta crear recursos o que la gerencia está activa.
+
 Fecha: 2026-10-01. Destinatario: chat «Tokenizart / Atelier · Operación y descubrimiento». Proyecto fuente: AFW, repositorio `tokenizartinfo-ops/agent-friendly-web`. Esta guía transmite patrones; no concede permisos ni configura recursos Tokenizart. La implementación correspondiente pertenece a su repositorio responsable.
 
 ## Resultado buscado y estado real
