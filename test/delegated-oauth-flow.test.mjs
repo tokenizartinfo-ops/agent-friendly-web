@@ -11,6 +11,23 @@ const hook=registerHooks({resolve(s,c,next){return s==='cloudflare:workers'?{url
 const {createDelegatedOAuthWorker}=await import('../lib/delegated-oauth-worker.mjs');
 hook.deregister();
 
+test('human pages allow only their fresh style nonce and provide safe recovery',async()=>{
+  const f=await localOAuthFixture(createDelegatedOAuthWorker);try{
+    const first=await authorize(f),second=await authorize(f);
+    const nonce=first.html.match(/<style nonce="([^"]+)"/)[1];
+    const csp=first.response.headers.get('Content-Security-Policy');
+    assert.ok(csp.includes(`style-src 'nonce-${nonce}'`));
+    assert.ok(!csp.includes('unsafe-inline'));
+    assert.ok(!second.html.includes(`nonce="${nonce}"`));
+    assert.match(first.html,/name="viewport"/);
+    const denied=await f.request('/authorize?invalid=1');
+    assert.equal(denied.status,400);
+    const html=await denied.text();
+    assert.match(html,/href="https:\/\/agentfriendlyweb.dev\/expediente"/);
+    assert.match(html,/No voy a volver a conectar/);
+  }finally{f.close();}
+});
+
 async function refreshFixture(){
   const f=await localOAuthFixture(createDelegatedOAuthWorker);
   f.env.AFW_OAUTH_REFRESH_ENABLED='true';
@@ -134,7 +151,7 @@ test('browser consent starts with summary only and requires an explicit evidence
     const second=await (await exchange(f,approved.headers.get('Location'),explicit.verifier)).json();
     assert.equal(second.scope,both.join(' '));
     const summary=await authorize(f,{scope:'afw:project:read'});
-    assert.ok(!summary.html.includes('type="checkbox"'));
+    assert.doesNotMatch(summary.html,/<input\b[^>]*type="checkbox"/);
   } finally { f.close(); }
 });
 
