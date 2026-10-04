@@ -22,6 +22,18 @@ Inventario previo remoto4deoctubre: Worker manager ausente; D1 conserva diez eve
 
 Validación local: catorce pruebas nuevas, suite769/769, lint sin errores (warning histórico img), build y dry-run del Worker correctos. Wrapper cerrado sin scheduled; fixture workerd verificó firma, batch D1 y diagnóstico que conserva state failed. Esto no sustituye prueba remota Access ni resultado de una tarea cloud.
 
+## Publicación cerrada comprobada
+
+Fuente bc793510a50ab26d1bcca5f1f76179f199e5190a; CI37220368391 pasó. Esquema aditivo aplicado únicamente a D1 operaciones (dos statements); Worker publicado versión0d5c52b7-c1c1-4e6d-84d2-117136792c24 al100%. API verificó enabledfalse, único binding D1 esperado, cero secretos, schedules[], workers.dev/previewsfalse y ningún dominio asociado. No se creó hostname, aplicación Access ni credencial. D1 después conserva diez eventos, dos incidentes, dos checkpoints y cero investigaciones. Receptor/productor, Access privados y expedientes no modificados. El cierre no es aceptación de lectura remota ni ejecución cloud.
+
+## Cliente listo para la futura custodia
+
+`scripts/afw-operations-client.mjs` y `lib/operations-client.mjs` usan únicamente HTTPS443 hacia el hostname operativo fijo, redirect manual, deadline10s y respuesta8KiB. No reintentos automáticos ni volcado de respuestas/errores externos. Valida campos exactos, recursos/checks cerrados, UUID/fechas/fingerprint y correlación del claim. Rechaza HTML de login200, redirects, payloads extra y lecturas inconclusas. No escribe credenciales ni realiza HMAC con placeholders.
+
+Network secret keys propios: `AFW_OPERATIONS_ACCESS_CLIENT_ID` y `AFW_OPERATIONS_ACCESS_CLIENT_SECRET`; allowed domain exclusivo operations-manager.agentfriendlyweb.dev. Todavía no existen en el entorno ni se concede acceso por enumerarlos. Comandos para la tarea cloud, después de aceptación de identidad y fuente: `node scripts/afw-operations-client.mjs list`, `claim <fingerprint> <requestId-UUID>`, `finish <runId-UUID> diagnosed|blocked`. Guardar requestId antes del claim y runId/revisión en el informe saneado; no generar otro requestId al perder una respuesta. Un receipt superseded requiere nueva lectura, no declarar reparación.
+
+Tres pruebas del cliente cubren destino/correlación, rechazo de respuestas no confiables y deadline/cancelación. Suite final772/772, lint solo warning histórico img y build correctos. Estas adiciones no cambian el grafo del Worker desplegado desde bc793510; no requieren republicarlo para conservar el cierre. Aún falta identidad/custodia, ruta protegida/limitador y una tarea cloud autorizada con recibo real. La generación/carga privada de una credencial nueva es el siguiente paso que necesita participación del owner; no pedir que la pegue en chat.
+
 ## Conexión cloud posterior
 
 El entorno AFW Operations sigue visible con el repositorio correcto; en la inspección solo había nombres de secretos de correo. No se editaron/publicaron ni reutilizaron. Preparar dos network secrets nuevos propios, restringidos al hostname operativo exacto y con permiso/duración de prueba definidos. [Documentación oficial de entornos cloud](https://learn.chatgpt.com/docs/environments/cloud-environments), consultada4deoctubre: proxy sustituye placeholders en HTTPS443; publicar configuración no actualiza una tarea existente. Verificar desde una tarea nueva el origen, revisión, identidad y recibo. La creación de la credencial y su carga privada requieren custodia; nunca pegarla en chat/Git/logs.
