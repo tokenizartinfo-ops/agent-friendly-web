@@ -8,6 +8,8 @@ El módulo también prueba el criterio futuro de disponibilidad: metadataJSON200
 
 ## Ejecución cloud
 
+Aceptación real: PR212/source64c101b integrado en main2f287425fc87ab6e316da2cff8628ce37a261c0d; CI37206340017 pasó737 pruebas/lint/build. [Actions37206451510](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/37206451510), workflow_dispatch sobre main, terminósuccess el4deoctubre13:40:34UTC /10:40:34Argentina. Runner GitHub hosted Ubuntu24.04, comprobaciones13:40:30.467UTC y13:40:31.046UTC: seis404, oktrue, privateReadVerifiedfalse. Registro local ignorado output/edge-health-cloud-run.log. Esto demuestra ejecución en infraestructura GitHub; el PC no se apagó para este bloque y no es una nueva prueba de Codex cloud ni de suscripción de eventos.
+
 Workflow manual `AFW delegated edge check`, archivo .github/workflows/afw-delegated-edge.yml. GitHub hosted Ubuntu, Node22, contentsread, sin secretos ni npm install, máximo2min y concurrencia exclusiva. Permite una comprobación independiente del PC mediante workflow_dispatch. No crea una tarea Codex, una suscripción MCPEvents ni un gerente permanente. No se configuró periodicidad ni se promete aviso instantáneo; el resultado queda en Actions y su política de notificaciones del owner.
 
 Ante fallo: comparar el modo declarado y la ventana de QA antes de diagnosticar una incidencia; si hay un piloto intencionalmente abierto, el chequeo cerrado fallará como corresponde. Verificar deployment y flags por control-plane autorizado, mantener la pregunta del usuario como histórica y no asumir pérdida del expediente. No reconectar, revocar grants ni desplegar automáticamente. Restaurar solo con el rollback y autorización de la operación concreta.
