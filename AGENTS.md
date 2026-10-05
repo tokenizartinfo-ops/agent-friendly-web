@@ -58,6 +58,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Operational continuity
 
+- Notice remote cloud recovery accepted: docs/AFW-NOTICE-CLOUD-ACCEPTANCE-2026-10-05.es.md. Source33cfdde/CI37317566751; actual cloud three fresh client instances recover dropped claim/ACK responses, independent QA D1 one reservation/runIdabe39d5e accepted. Final manager0afdc102@100% flagsfalse/no deadline/cron[]/zero secrets, original operations DB restored; tokenfalse/version2/original expiry2026-10-05T17:39:03Z. QA schemas/history preserved, operations counts16/2/2/2 intact. Next hosted notice trigger and explicit review resolution/identity lifespan; do not repeat transport/loss/PC-off/cron accepted.
+
 - Server-ledger notice recovery prepared locally: docs/AFW-NOTICE-RECOVERY-2026-10-05.es.md. GET /notices/receipts reads at most three rolling24h sanitized reservation snapshots under same auth/flags/window. notice-cycle reads receipts first, restores runId after lost claim/ACK without scratch persistence; expired/multiple pending/superseded require review. Receipt journal reuses existing atomic reservations, superseding separate-intent plan. Authenticated workerd acceptance remains local only. Next closed publication/QA/cloud correlation; no remote activation or customer mutations.
 
 - Notice cloud transport prepared locally: docs/AFW-NOTICE-CLOUD-CLIENT-2026-10-05.es.md. Fixed origin/strict response correlation; CLI notice-list/notice-claim/notice-ack, explicit stable requestId/runId and no automatic retries. No durable cloud state or remote reception proved. Next authenticated D1 intention journal before claim; cloud scratch filesystem is not durable custody. Preserve closed remote runtime and shared budget.
