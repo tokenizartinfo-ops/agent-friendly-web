@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {generateKeyPair,SignJWT} from 'jose';
 import {resolveOperationsReviewEnrollment} from '../lib/operations-review-enrollment.mjs';
 import {resolveOperationsReviewOperator} from '../lib/operations-review-operator.mjs';
-import {createOperationsReviewWorker,OPERATIONS_REVIEW_ORIGIN} from '../worker/operations-review/index.mjs';
+import {createOperationsReviewWorker,OPERATIONS_REVIEW_ORIGIN} from '../worker/operations-review/handler.mjs';
 const now=Date.now(),subject='synthetic-enrollment-human';
 const {privateKey,publicKey}=await generateKeyPair('RS256');
 const config={enabled:true,origin:OPERATIONS_REVIEW_ORIGIN,teamDomain:'test.cloudflareaccess.com',audience:'synthetic-enrollment',consumerAudience:'synthetic-consumer',email:'synthetic@example.com'};
@@ -40,3 +40,4 @@ test('identity attestation denies expiry during limiter and reports key provider
  let clock=now;const response=await createOperationsReviewWorker({keySet:publicKey,now:()=>clock}).fetch(request(jwt),{...base,AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(now+600000).toISOString(),OPERATIONS_REVIEW_RATE_LIMITER:{limit:async()=>{clock=now+300000;return {success:true};}}});
  assert.equal(response.status,401);assert.doesNotMatch(await response.text(),/operator-/);
 });
+

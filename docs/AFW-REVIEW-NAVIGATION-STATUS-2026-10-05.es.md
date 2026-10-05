@@ -18,3 +18,9 @@ Cloudflare documenta que la pantalla «código enviado» no prueba envío y que 
 
 PROJECT=AFW; REPOSITORY=tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT=private synthetic QA; ORIGIN=operations-review.agentfriendlyweb.dev; RESOURCE_TYPE=Worker; RESOURCE_ID=agent-friendly-web-operations-review; ALLOWED_ACTION=publicar nueva presentación con todos los flags false en QA ya protegido. Rollback: redeploy fuente880586859 con configuración .wrangler/review-qa-protected-closed.jsonc y conservar D1/pin/política/historia. No cambios en web pública o producción operativa; no ampliar permisos.
 
+
+## Corrección de arranque del entrypoint
+
+Wrangler local/workerd rechazó el export constante OPERATIONS_REVIEW_ORIGIN del módulo de entrada: Incorrect type for map entry. Las pruebas anteriores empaquetaban una factory mediante wrapper y no arrancaban el bundle de despliegue sin modificar. Se reprodujo RED con esbuild(entryPoints index)+Miniflare, sin inyectar identidad ni wrapper. Ahora index exporta solamente default; factory/constantes y lógica quedan en handler.mjs interno. Las pruebas de factory importan ese módulo; una nueva regresión ejecuta exactamente el entrypoint de despliegue y verifica404 JSON cerrado. GREEN observado.
+
+Wrangler dev --local inició en127.0.0.1:8797. Chrome abrió el Worker real y mostró «Este ensayo está cerrado» y «No hace falta volver a ingresar ni cambiar de cuenta por este mensaje». Esto prueba presentación/arranque locales, no recepción Cloudflare ni aceptaciones remotas pendientes. No afirmar incidencia del mismo error en producción: el runtime remoto funcionó en el ensayo anterior; la incompatibilidad se observó en workerd local.

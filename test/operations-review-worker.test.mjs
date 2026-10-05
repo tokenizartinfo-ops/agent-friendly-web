@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {generateKeyPair,SignJWT} from 'jose';
-import worker,{createOperationsReviewWorker,OPERATIONS_REVIEW_ORIGIN} from '../worker/operations-review/index.mjs';
+import worker,{createOperationsReviewWorker,OPERATIONS_REVIEW_ORIGIN} from '../worker/operations-review/handler.mjs';
 import {operationsDb} from './fixtures/operations-db.mjs';
 
 const time=Date.now(),subject='synthetic-review-worker-human';
@@ -75,3 +75,4 @@ test('real review worker maps server-only human authority and storage into the s
   assert.match(s.sqlite.prepare('SELECT operator_id FROM operations_notice_reviews').get().operator_id,/^operator-[a-f0-9]{64}$/);
  }finally{s.sqlite.close();}
 });
+

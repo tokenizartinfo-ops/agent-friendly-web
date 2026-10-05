@@ -10,7 +10,7 @@ test('actual review entrypoint in workerd persists a receipt and denies a live J
  const {privateKey,publicKey}=await generateKeyPair('RS256'),jwk=await exportJWK(publicKey);
  const bundle=await build({stdin:{resolveDir:process.cwd(),contents:`
   import {importJWK} from 'jose';
-  import {createOperationsReviewWorker} from './worker/operations-review/index.mjs';
+  import {createOperationsReviewWorker} from './worker/operations-review/handler.mjs';
   const key=await importJWK(${JSON.stringify(jwk)},'RS256');
   const worker=createOperationsReviewWorker({keySet:key,now:()=>${current}});
   export default {fetch(request,binding){return worker.fetch(request,{...binding,OPERATIONS_STATE_DB:binding.DB,OPERATIONS_REVIEW_RATE_LIMITER:{limit:async()=>({success:true})}});}};
@@ -48,3 +48,4 @@ test('actual review entrypoint in workerd persists a receipt and denies a live J
   assert.deepEqual((await afterDb.prepare('SELECT * FROM operations_notice_reservations').all()).results,before);
  }finally{await runtime.dispose();}
 });
+

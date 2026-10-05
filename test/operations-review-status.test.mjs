@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {reviewNavigationStatus} from '../lib/operations-review-status.mjs';
-import worker from '../worker/operations-review/index.mjs';
+import worker from '../worker/operations-review/handler.mjs';
 const url='https://operations-review.agentfriendlyweb.dev/';
 const navigation=()=>new Request(url,{headers:{Accept:'text/html','Sec-Fetch-Mode':'navigate','Sec-Fetch-Dest':'document'}});
 test('closed human navigation explains closure without suggesting an identity diagnosis',async()=>{
@@ -24,3 +24,4 @@ test('API fetch, POST, successful and unknown responses remain untouched',async(
  for(const original of [new Response('ok'),Response.json({code:'unknown'},{status:503})])assert.equal(await reviewNavigationStatus(navigation(),original),original);
  const api=await worker.fetch(new Request(url),{});assert.deepEqual(await api.json(),{code:'unavailable'});
 });
+
