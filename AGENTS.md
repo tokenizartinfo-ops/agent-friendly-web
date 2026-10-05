@@ -58,6 +58,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Operational continuity
 
+- Review operator identity prepared internally: docs/AFW-REVIEW-OPERATOR-IDENTITY-2026-10-05.es.md. Server-enabled pinned human subject, exact own origin, unique review audience distinct from reception; verified JWT/expiry yields opaque domain-separated operatorId only. No route/Accesspolicy/journalwrite/remote activation; future adapter still needs CSRF/body/idempotency authorization acceptance. Five JWT tests/suite831/lint0errors/build pass; do not infer deployed operator capability.
+
 - Watchdog admission cron QA accepted and published closed: docs/AFW-WATCHDOG-ADMISSION-QA-2026-10-05.es.md, sourcef5cfeac/PR251/CI37325194535/826tests. Real cron admits15 once, repeat dedupes, pause16/10 adds no inbox. QA finaldbf0184e closed/16outbox/4inbox/2historicalreservations; operational watchdogae622e3e closed/DB603c/cron[]/no deadline or secrets,16/2/2/2 preserved and notice tables0. Not cloud ACK of15 or permanent guard. Next traceable review_required resolution and identity lifecycle; do not repeat accepted cron/scheduler/PC-off.
 
 - Watchdog notice admission connected in code: docs/AFW-WATCHDOG-ADMISSION-RUNTIME-2026-10-05.es.md. Explicit noticesflag gates post-transition SQL admission using same primary binding and fresh deadline; failure preserves outbox for next observation. Separate transactions, no combined atomicity claim, dispatch or ACK. Defaultflagfalse/cron[]/no deadline. Three RED→GREEN regressions;826tests. Remote integration/QA cron receipt still separate; do not infer it from earlier manual fixture reception.
