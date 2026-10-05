@@ -1,4 +1,6 @@
-5 de octubre UTC: [presupuesto coordinado del gerente preparado localmente](AFW-SHARED-MANAGER-BUDGET-2026-10-05.es.md). Canal de avisos habilitado por servidor: tres reservas rolling24h y una tarea activa entre avisos e investigaciones, transacciones y reintentos conservados. Sin deploy/esquema remoto. Siguiente cliente cloud durable y QA correlacionada.
+5 de octubre UTC: [transporte cloud de avisos preparado localmente](AFW-NOTICE-CLOUD-CLIENT-2026-10-05.es.md). Listado/claim/ACK estricto y CLI; respuesta perdida reconciliada sintéticamente con nueva instancia y mismos identificadores. Sin journal durable ni recepción cloud acreditada. Siguiente intención persistida en D1 antes de claim, ciclo recuperable y QA correlacionada.
+
+5 de octubre UTC: [presupuesto coordinado del gerente integrado en código](AFW-SHARED-MANAGER-BUDGET-2026-10-05.es.md), PR246/main bb95fba/CI37313592469. Canal de avisos habilitado por servidor: tres reservas rolling24h y una tarea activa entre avisos e investigaciones, transacciones y reintentos conservados. Sin deploy/esquema remoto.
 
 5 de octubre UTC: [adaptador autenticado de avisos preparado cerrado](AFW-NOTICE-ADAPTER-2026-10-05.es.md). Identidad de servicio/origen/limitador existentes, tres flags/deadline y cuerpos estrictos; listado vigente saneado, claim y ACK. Workerd/D1 local autenticado acepta flujo y reconcilia respuesta de ACK descartada sin duplicar reserva. Sin deploy/esquema remoto/identidad real o recepción cloud. PR245/main fb81f1a, revisión cloud y CI37312103815 aceptadas.
 
