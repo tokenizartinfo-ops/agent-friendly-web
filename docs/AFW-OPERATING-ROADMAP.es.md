@@ -1,5 +1,7 @@
 # Roadmap operativo y continuidad de AFW
 
+4 de octubre, 21:27 Argentina: [ciclo cloud por horario aceptado](AFW-SCHEDULED-CYCLE-ACCEPTANCE-2026-10-04.es.md). Señal firmada, una reserva/diagnóstico programados y recibo independiente D1; recuperación sintética separada, accesos y automation cerrados. Demora observada4m33.8s, sin ejecución manual. [PC-off](AFW-PCOFF-CLOUD-ACCEPTANCE-2026-10-04.es.md) y [cron productor](AFW-CRON-ACCEPTANCE-2026-10-04.es.md) ya aceptados en sus propios alcances. Esto sustituye los impedimentos históricos de scheduler/custodia/correlación debajo; no demuestra vigilancia permanente. Siguiente: watchdog independiente con pausa/transiciones/avisos deduplicados, y ciclo de vida de identidad antes de periodicidad. No repetir ensayos aceptados ni pedir nuevos ingresos.
+
 ## Punto de partida vigente — 3 de octubre, recuperación
 
 4deoctubre16:53Argentina: [recepción e investigación cloud correlacionadas](AFW-CLOUD-INCIDENT-ACCEPTANCE-2026-10-04.es.md), señal sintética HMAC202→list/claim/finish cloud→recibo independiente diagnosed/review→recuperación sintética closed. Entorno actualizado491118a/proxy custodiado aceptado. Receptor861bc360/manager31ff4c39 cerrados, tokenfalse/firma retirada;12eventos/2incidencias/2checkpoints/1investigación. Siguiente impedimento concreto: programación hosted vinculada al entorno no expuesta por UI/herramientas observadas. Resolver vínculo antes de ensayo único de disparo/PCoff; no sustituir con scheduler desktop, API paga o tarea scratch. No repetir login/rotación/transporte/correlación aceptados.

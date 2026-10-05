@@ -1,5 +1,11 @@
 # Gerente AFW: preparación de Codex Cloud
 
+## Continuidad comprobada — 4 de octubre, 21:27 Argentina
+
+[Ciclo programado completo](AFW-SCHEDULED-CYCLE-ACCEPTANCE-2026-10-04.es.md) aceptado: tarea hosted vinculada a AFW, una list/claim/finish y correlación independiente D1 antes de recuperación sintética. [PC-off/contexto](AFW-PCOFF-CLOUD-ACCEPTANCE-2026-10-04.es.md) y [cron productor](AFW-CRON-ACCEPTANCE-2026-10-04.es.md) conservan sus alcances propios. Los pendientes de scheduler/custodia/correlación de las secciones históricas siguientes quedan sustituidos; no volver a solicitar esos accesos.
+
+Receiver1d265a51 y managera827a2dc cerrados100%, flagsfalse/sin firmas/deadlines, token temporalfalse con vigencia original y automationdisabled. No anunciar vigilancia continua. Próximo: watchdog fuera del productor, aviso deduplicado y recuperación; identidad vigente/renovación/revocación antes de cadencia estable. Una tarea scheduled puede demorar:4m33.8s en este ensayo. Esperar la ventana autorizada completa salvo riesgo real, revocación o precondición rota; metadata temporalmente nula no implica fallo. No sustituir disparo cloud por ejecución manual, scheduler desktop o API paga.
+
 ## Estado operativo reconciliado — 4 de octubre
 
 Actualización19:53UTC: [ciclo cloud sintético correlacionado](AFW-CLOUD-INCIDENT-ACCEPTANCE-2026-10-04.es.md) aceptado por recepción HMAC202 y list/claim/finish reales de AFW Operations; D1 confirmó requestId/runId, diagnosed/review y posterior recuperación sintética/closed. Receptor861bc360 y manager31ff4c39 cerrados100%, firma retirada/tokenfalse;12eventos/2incidencias/2checkpoints/1investigación preservados. La programación vinculada al entorno no está expuesta en herramientas/UI observadas; no anunciar gerente autónomo ni pedir apagar PC todavía. Los pendientes antiguos de Access/custodia/correlación debajo son históricos y quedan sustituidos por este recibo.
