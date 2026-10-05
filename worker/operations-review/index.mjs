@@ -5,6 +5,7 @@ import {resolveOperationsReviewOperator} from '../../lib/operations-review-opera
 import {readNoticeReviewTarget} from '../../lib/operations-review-context.mjs';
 import {renderReviewPage} from '../../lib/operations-review-page.mjs';
 import {resolveOperationsReviewEnrollment} from '../../lib/operations-review-enrollment.mjs';
+import {reviewNavigationStatus} from '../../lib/operations-review-status.mjs';
 
 // Prepared origin only. This module/config does not provision a hostname or Access policy.
 export const OPERATIONS_REVIEW_ORIGIN='https://operations-review.agentfriendlyweb.dev';
@@ -67,7 +68,7 @@ async function view(request,env,{config,keySet,now}){
  * never taken from HTTP input. The default export uses Access JWKS and the server clock.
  */
 export function createOperationsReviewWorker({keySet,now=Date.now}={}){
- return {async fetch(request,env){
+ const handle=async(request,env)=>{
   try{
    if(env?.AFW_OPERATIONS_REVIEW_IDENTITY_ENABLED==='true'&&request.method==='GET'&&new URL(request.url).pathname==='/identity')return await identity(request,env,{keySet,now});
    if(env?.AFW_OPERATIONS_REVIEW_ENABLED!=='true'||env?.AFW_OPERATIONS_REVIEWS_ENABLED!=='true'
@@ -78,7 +79,8 @@ export function createOperationsReviewWorker({keySet,now=Date.now}={}){
    if(request.method==='GET'&&new URL(request.url).pathname==='/')return await view(request,env,{config,keySet,now});
    return await createNoticeReviewControls({env,keySet,now,limiter:env.OPERATIONS_REVIEW_RATE_LIMITER,config})(request);
   }catch{return Response.json({code:'temporarily_unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});}
- }};
+ };
+ return {async fetch(request,env){return reviewNavigationStatus(request,await handle(request,env));}};
 }
 
 export default createOperationsReviewWorker();
