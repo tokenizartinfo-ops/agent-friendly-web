@@ -1,3 +1,5 @@
+5 de octubre UTC (4 de octubre Argentina): [cron watchdog QA aceptado](AFW-WATCHDOG-QA-2026-10-05.es.md). Cuatro ciclos reales: falta de checkpoint, dedupe, recuperación sintética y pausa silenciosa; QA exclusiva cerrada6b9ea3e2, cron[]/flagsfalse/sin deadline. Producción preservada. Siguiente ensayar entrega pendiente/obsolescencia y consumidor de avisos con fence/acuse; outbox no es notificación entregada.
+
 # Roadmap operativo y continuidad de AFW
 
 4 de octubre: [watchdog independiente publicado cerrado](AFW-WATCHDOG-CLOSED-RELEASE-2026-10-04.es.md), PR238/CI786. Workerfdd0b7f7 sin cron/ruta/secretos; esquema aditivo solo en D1 operaciones, historial16/2/2/2 conservado y nuevas tablas vacías. Publicación y esquema remoto comprobados; ejecución/aviso no acreditados. Siguiente ensayo remoto por cron con fixtures en QA separada, transición/dedupe/pausa/recuperación y clausura; después transporte/acuse de avisos. No repetir el diagnóstico cloud programado ni PC-off ya aceptados.
@@ -356,3 +358,4 @@ PR #193 integrada; CI723 y publicación cerrada 5d412e32-0f56-4dce-9088-60a941aa
 [Implementación, límites y rollout](AFW-REFRESH-IMPLEMENTATION-2026-10-03.es.md): bandera false por defecto; consumo atómico D1 de cada hash, tokens acotados al permiso original, retirada/propiedad/alcance comprobados. Pruebas del proveedor reprodujeron doble sucesor y reintento del anterior; AFW los controla sin retirar el sucesor correcto. Migración0014 generada, aún no remota. Próximo: CI/revisión, publicación cerrada, esquema canary y nueva aceptación del ciclo antes de apertura. No repetir aceptación antigua como sustituto ni anunciar refresh en apex.
 
 [Release cerrada de renovación](AFW-REFRESH-CLOSED-RELEASE-2026-10-03.es.md): PR195/CI730 integradas, ambos Workers cerrados actualizados; esquema0014 solo canary, historial conservado. Siguiente: aceptación del nuevo ciclo con cliente sintético existente, token renovado tras cinco minutos y retirada, antes de migración real/apertura.
+
