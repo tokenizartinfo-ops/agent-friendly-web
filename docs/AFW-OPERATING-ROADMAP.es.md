@@ -1,3 +1,5 @@
+5 de octubre UTC (4 de octubre Argentina): [cron watchdog QA aceptado](AFW-WATCHDOG-QA-2026-10-05.es.md). Cuatro ciclos reales: falta de checkpoint, dedupe, recuperación sintética y pausa silenciosa; QA exclusiva cerrada6b9ea3e2, cron[]/flagsfalse/sin deadline. Producción preservada. Siguiente ensayar entrega pendiente/obsolescencia y consumidor de avisos con fence/acuse; outbox no es notificación entregada.
+
 # Roadmap operativo y continuidad de AFW
 
 4 de octubre: [watchdog independiente publicado cerrado](AFW-WATCHDOG-CLOSED-RELEASE-2026-10-04.es.md), PR238/CI786. Workerfdd0b7f7 sin cron/ruta/secretos; esquema aditivo solo en D1 operaciones, historial16/2/2/2 conservado y nuevas tablas vacías. Publicación y esquema remoto comprobados; ejecución/aviso no acreditados. Siguiente ensayo remoto por cron con fixtures en QA separada, transición/dedupe/pausa/recuperación y clausura; después transporte/acuse de avisos. No repetir el diagnóstico cloud programado ni PC-off ya aceptados.
