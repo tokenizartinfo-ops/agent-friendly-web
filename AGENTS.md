@@ -58,6 +58,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Operational continuity
 
+- Review code integration accepted: docs/AFW-REVIEW-INTEGRATION-2026-10-05.es.md, main0db59c4/PR253+254/CI850tests. Append-only CAS/provisional→terminal, replacement-lease/restore/ACK fences, opaque canonical operator identity. No remote review schema/route/policy/publication; existing runtimes remain closed. Next internal signed operator adapter under docs/superpowers/plans/2026-10-05-notice-review-controls.md, still unmounted with strict origin/body/identity guards. Do not infer deployed operator writes or reuse reception credentials.
+
 - Review operator identity prepared internally: docs/AFW-REVIEW-OPERATOR-IDENTITY-2026-10-05.es.md. Server-enabled pinned human subject, exact own origin, unique review audience distinct from reception; verified JWT/expiry yields opaque domain-separated operatorId only. Seven JWT tests include canonical team-domain stability and double trailing-dot denial before key lookup. No route/Accesspolicy/journalwrite/remote activation; future adapter still needs CSRF/body/idempotency authorization acceptance. Do not infer deployed operator capability.
 
 - Notice review Tasks1/2 prepared closed: docs/AFW-NOTICE-REVIEW-2026-10-05.es.md. Append-only decision journal with expectedSequence CAS; retain can close later, closure terminal; original ACK/outcome/reservations/shared budget preserved. Flag explicit and default closed; keep review read/fence enabled with installed schema/history while using notices, close consumer/notices/deadline instead. No operator HTTP write route, remote schema or activation. Task3 requires independent server operator capability; reception identity cannot write reviews.
