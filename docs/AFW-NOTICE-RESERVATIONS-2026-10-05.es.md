@@ -1,0 +1,15 @@
+# AFW: reserva y acuse operativo de avisos
+
+Preparación local sobre la inbox de PR241. No runtime conectado, esquema remoto aplicado, nuevo permiso, cron o envío. Fuente editable: lib/operations-notice-reservation.mjs y worker/operations/notice-reservations.sql. La tabla es aditiva y exclusiva de D1 operacional/QA; no usar migraciones de expedientes.
+
+Reserva: resource/revision fijos, requestId UUID estable y runId generado por servidor. Un INSERT SELECT une inbox al estado vigente al ejecutar, con fecha reciente y exclusión de pausa. Una reserva activa global, lease máxima5min limitada por deadline y3reservas por día móvil para este canal. Reintentar requestId conserva la misma identidad mientras está vigente; no puede reasignarse a otro aviso o revivir después del vencimiento. Nueva identidad tras vencimiento consume presupuesto. Avisos con acuse accepted no se reservan otra vez. Un recibo superseded permite una nueva identidad dentro del presupuesto cuando vuelve a haber evidencia vigente; no bloquea permanentemente una revisión todavía no aceptada.
+
+Acuse: actualiza una reserva no vencida una sola vez. Revisión/condición/fecha vigentes devuelven accepted; cambio, pausa o antigüedad devuelven superseded. Repetir el runId conserva el recibo histórico; no es autorización nueva ni diagnóstico vigente. Flag cerrado o deadline vencido no realiza IO. Sesión primaria cuando está disponible, escrituras transaccionales, errores saneados. El acuse acredita solamente esta operación de recepción; no envío externo, atención humana ni reparación.
+
+El deadline verifica entrada y limita la lease; no cancela transacciones admitidas. Persisten las limitaciones del contrato: revalidar al despacho, idempotencia del destinatario y reconciliación de respuesta perdida; no garantía de entrega exactamente una vez. El futuro adaptador autenticado debe fijar identidad/alcance del consumidor por servidor, validar cuerpos estrictos y no confiar en resource o rol declarados por el cliente. El presupuesto de este canal todavía no se agrega al de investigaciones del ledger existente.
+
+RED observado con stub y esquema disponible antes de implementar; nueva prueba RED detectó el bloqueo permanente por superseded y pasó después de corregirlo. Ocho pruebas SQLite: reintento/acuse idempotentes, pausa obsoleta, concurrencia, vencimiento, deadline/flag sin IO, rollback/error saneado, pausa al ejecutar, presupuesto diario y reintento tras recuperar vigencia. Suite general/lint/build deben pasar antes de integrar. Estas pruebas no sustituyen workerd/D1 remoto o recepción cloud.
+
+Siguiente: listado y adaptador autenticado cerrado, prueba workerd, migración exclusiva de QA, ciclo cloud correlacionado y rechazo de acuse/revisión obsoletos. No repetir cron o PC-off aceptados. No reabrir identidad ni anunciar vigilancia continua por esta preparación.
+
+Validación local posterior a la corrección:801/801 pruebas,0fallos; lint0errores/dos warnings previos; build completo. No esquema aplicado remotamente. La prueba de ACK es de contrato local, no una recepción real desde Codex cloud.
