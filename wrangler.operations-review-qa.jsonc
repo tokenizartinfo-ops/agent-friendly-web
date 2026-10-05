@@ -1,0 +1,40 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "name": "agent-friendly-web-operations-review",
+  "main": "worker/operations-review/index.mjs",
+  "compatibility_date": "2026-09-07",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": false
+  },
+  "vars": {
+    "AFW_OPERATIONS_REVIEW_ENABLED": "false",
+    "AFW_OPERATIONS_REVIEWS_ENABLED": "false"
+  },
+  "ratelimits": [
+    {
+      "name": "OPERATIONS_REVIEW_RATE_LIMITER",
+      "namespace_id": "2026100503",
+      "simple": {
+        "limit": 10,
+        "period": 60
+      }
+    }
+  ],
+  "d1_databases": [
+    {
+      "database_id": "d43b321d-a5e1-4e1a-9fe2-c63bcb0e9f46",
+      "binding": "OPERATIONS_STATE_DB",
+      "database_name": "agent-friendly-web-review-qa-20261005"
+    }
+  ],
+  "triggers": {
+    "crons": []
+  }
+}
