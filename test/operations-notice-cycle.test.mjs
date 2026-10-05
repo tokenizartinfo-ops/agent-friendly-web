@@ -17,3 +17,11 @@ test('expired receipt requires review; fresh cycle acknowledges exactly one noti
  const fresh={listNoticeReceipts:async()=>[],listNotices:async()=>[notice],claimNotice:async()=>reservation,ackNotice:async()=>{writes++;return 'superseded';}};
  assert.deepEqual(await run(fresh),{status:'review_required',reason:'superseded',runId:reservation.runId});assert.equal(writes,1);
 });
+test('lost superseded ACK blocks another identity on restart whether another notice exists or not',async()=>{
+ for(const available of [[],[notice]]){
+  let receipt=null,claims=0,reads=0;
+  const client={listNoticeReceipts:async()=>receipt?[receipt]:[],listNotices:async()=>{reads++;return receipt?available:[notice];},claimNotice:async()=>{claims++;return reservation;},ackNotice:async()=>{receipt={notice,reservation,outcome:'superseded'};throw Error('response lost');}};
+  await assert.rejects(run(client));assert.equal(claims,1);
+  assert.deepEqual(await run(client),{status:'review_required',reason:'superseded',runId:reservation.runId});assert.equal(claims,1);assert.equal(reads,1);
+ }
+});

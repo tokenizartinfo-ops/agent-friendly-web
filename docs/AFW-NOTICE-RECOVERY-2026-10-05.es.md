@@ -14,4 +14,6 @@ Workerd/D1 local autenticado: respuesta de claim descartada, reserva recuperada 
 
 Preparación local exclusivamente; no deploy, esquemas remotos, token, flags o cron modificados. Siguiente: publicar cerrado preservando bindings actuales y aplicar únicamente los esquemas QA verificados que faltan (consumer-state/inbox/reservations); comprobar identidad custodiada y abrir ensayo sintético acotado cloud, correlacionar D1/resultado y cerrar en finally. No repetir PC-off/cron/OTP aceptados. Rollback de código main65f413f conserva historial; nunca DROP o eliminación de recibos.
 
-Validación:822/822 pruebas, cero fallos; lint cero errores/dos warnings previos; build completo.
+Revisión detectó que un ACK superseded con respuesta perdida podía ignorarse al reiniciar, generando otra identidad desde un listado nuevo. RED reprodujo reconciled/superseded en lugar de review_required; el ciclo ahora bloquea antes de listar/claim ante cualquier recibo superseded de la ventana recuperada. Regresión cubre aviso disponible y listado vacío con cero claims adicionales. No hay endpoint automático de resolución de esa revisión; preservar recibos y evaluar el caso, sin borrarlos para desbloquear.
+
+Validación final:823/823 pruebas, cero fallos; lint cero errores/dos warnings previos; build completo.
