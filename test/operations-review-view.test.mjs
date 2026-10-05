@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {generateKeyPair,SignJWT} from 'jose';
-import {createOperationsReviewWorker,OPERATIONS_REVIEW_ORIGIN} from '../worker/operations-review/index.mjs';
+import {createOperationsReviewWorker,OPERATIONS_REVIEW_ORIGIN} from '../worker/operations-review/handler.mjs';
 import {reviewContextDb} from './fixtures/notice-review-context-db.mjs';
 const now=Date.now(),subject='synthetic-view-human';
 const {privateKey,publicKey}=await generateKeyPair('RS256');
@@ -72,3 +72,4 @@ test('top-level navigation accepts a human link while foreign Origin and program
   assert.equal(s.sqlite.prepare('SELECT COUNT(*) n FROM operations_notice_reviews').get().n,0);
  }finally{s.sqlite.close();}
 });
+
