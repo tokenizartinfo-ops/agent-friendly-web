@@ -33,3 +33,29 @@ test('deadline expiring during checkpoint reads prevents transition writes',asyn
  const {db,sqlite}=setup();assert.deepEqual(await execute({...config,OPERATIONS_STATE_DB:db},{now,clock:()=>now+60000}),{skipped:true});
  assert.equal(sqlite.prepare('SELECT COUNT(*) AS count FROM operations_watchdog_state').get().count,0);sqlite.close();
 });
+
+test('notice-enabled runtime admits current transitions once and excludes paused revisions',async()=>{
+ const {db,sqlite}=setup();sqlite.exec(readFileSync(new URL('../worker/operations/watchdog-inbox.sql',import.meta.url),'utf8'));
+ const env={...config,AFW_OPERATIONS_NOTICES_ENABLED:'true',OPERATIONS_STATE_DB:db};
+ assert.equal((await runWatchdog(env,{now})).admitted,2);
+ assert.equal((await runWatchdog(env,{now:now+1})).admitted,0);
+ assert.equal((await runWatchdog({...env,AFW_OPERATIONS_PRODUCER_ENABLED:'false'},{now:now+2})).admitted,0);
+ assert.equal(sqlite.prepare('SELECT count(*) n FROM operations_watchdog_inbox').get().n,2);sqlite.close();
+});
+
+test('window closing after transition persistence prevents inbox admission',async()=>{
+ const {db,sqlite}=setup();sqlite.exec(readFileSync(new URL('../worker/operations/watchdog-inbox.sql',import.meta.url),'utf8'));
+ let calls=0;const result=await execute({...config,AFW_OPERATIONS_NOTICES_ENABLED:'true',OPERATIONS_STATE_DB:db},{now,clock:()=>++calls===1?now:now+60000});
+ assert.equal(result.admitted,0);
+ assert.equal(sqlite.prepare('SELECT count(*) n FROM operations_watchdog_outbox').get().n,2);
+ assert.equal(sqlite.prepare('SELECT count(*) n FROM operations_watchdog_inbox').get().n,0);sqlite.close();
+});
+
+test('an admission failure preserves outbox and a later observation admits without duplicating it',async()=>{
+ const {db,sqlite}=setup();const env={...config,AFW_OPERATIONS_NOTICES_ENABLED:'true',OPERATIONS_STATE_DB:db};
+ await assert.rejects(()=>runWatchdog(env,{now}),error=>error.message==='Watchdog execution unavailable');
+ assert.equal(sqlite.prepare('SELECT count(*) n FROM operations_watchdog_outbox').get().n,2);
+ sqlite.exec(readFileSync(new URL('../worker/operations/watchdog-inbox.sql',import.meta.url),'utf8'));
+ assert.equal((await runWatchdog(env,{now:now+1})).admitted,2);
+ assert.equal(sqlite.prepare('SELECT count(*) n FROM operations_watchdog_outbox').get().n,2);sqlite.close();
+});
