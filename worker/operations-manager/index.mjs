@@ -7,7 +7,7 @@ const operationsManager = {
     if (!operationsWindowOpen(env) || env.AFW_OPERATIONS_CONSUMER_ENABLED !== 'true' || !env.OPERATIONS_DB) {
       return Response.json({ code: 'unavailable' }, { status: 404, headers: { 'Cache-Control': 'no-store' } });
     }
-    return createOperationsServiceControls({ db: env.OPERATIONS_DB, limiter: env.OPERATIONS_RATE_LIMITER,
+    return createOperationsServiceControls({ db: env.OPERATIONS_DB, limiter: env.OPERATIONS_RATE_LIMITER, noticeEnv:env,
       config: { enabled: true, origin: OPERATIONS_MANAGER_ORIGIN, teamDomain: env.AFW_OPERATIONS_ACCESS_TEAM_DOMAIN,
         audience: env.AFW_OPERATIONS_CONSUMER_AUDIENCE, clientId: env.AFW_OPERATIONS_CONSUMER_CLIENT_ID } })(request);
   },
