@@ -1,4 +1,6 @@
-5 de octubre UTC: [transporte cloud de avisos preparado localmente](AFW-NOTICE-CLOUD-CLIENT-2026-10-05.es.md). Listado/claim/ACK estricto y CLI; respuesta perdida reconciliada sintéticamente con nueva instancia y mismos identificadores. Sin journal durable ni recepción cloud acreditada. Siguiente intención persistida en D1 antes de claim, ciclo recuperable y QA correlacionada.
+5 de octubre UTC: [recuperación desde el journal servidor preparada localmente](AFW-NOTICE-RECOVERY-2026-10-05.es.md). Consulta autenticada de recibos/ciclo real recupera claim/ACK descartados en workerd/D1 local con una única reserva. Reutiliza reservas atómicas y reemplaza intención separada; no depende del filesystem cloud. Sin deploy o recepción cloud remota. Siguiente publicación cerrada y QA/cloud correlacionada.
+
+5 de octubre UTC: [transporte cloud de avisos integrado en código](AFW-NOTICE-CLOUD-CLIENT-2026-10-05.es.md), PR247/main65f413f/CI37315418250. Listado/claim/ACK estricto y CLI; respuesta perdida reconciliada sintéticamente con nueva instancia y mismos identificadores. La persistencia se continúa con el journal servidor del bloque siguiente.
 
 5 de octubre UTC: [presupuesto coordinado del gerente integrado en código](AFW-SHARED-MANAGER-BUDGET-2026-10-05.es.md), PR246/main bb95fba/CI37313592469. Canal de avisos habilitado por servidor: tres reservas rolling24h y una tarea activa entre avisos e investigaciones, transacciones y reintentos conservados. Sin deploy/esquema remoto.
 

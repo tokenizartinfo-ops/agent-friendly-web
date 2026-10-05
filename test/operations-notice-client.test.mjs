@@ -4,6 +4,11 @@ import {createOperationsClient} from '../lib/operations-client.mjs';
 const env={AFW_OPERATIONS_ACCESS_CLIENT_ID:'synthetic-id',AFW_OPERATIONS_ACCESS_CLIENT_SECRET:'synthetic-secret'};
 const notice={resource:'afw_delegated_canary',revision:1,kind:'attention',condition:'["delivery_pending"]',observedAt:Date.now()};
 const requestId=crypto.randomUUID(),reservation={resource:notice.resource,revision:1,requestId,runId:crypto.randomUUID(),expiresAt:notice.observedAt+300000};
+test('receipt transport validates nested notice/reservation and rejects forged correlation',async()=>{
+ const receipt={notice,reservation,outcome:null};
+ assert.deepEqual(await createOperationsClient({env,fetchImpl:async()=>Response.json({receipts:[receipt]})}).listNoticeReceipts(),[receipt]);
+ for(const value of [{...receipt,outcome:'repaired'},{...receipt,reservation:{...reservation,revision:2}},{...receipt,reservation:{...reservation,runId:[reservation.runId]}},{...receipt,private:'data'}])await assert.rejects(createOperationsClient({env,fetchImpl:async()=>Response.json({receipts:[value]})}).listNoticeReceipts(),{message:'Operational request unavailable'});
+});
 test('notice transport pins origin and preserves explicit correlation across retries',async()=>{
  const paths=[],client=createOperationsClient({env,fetchImpl:async request=>{
   assert.equal(new URL(request.url).origin,'https://operations-manager.agentfriendlyweb.dev');assert.equal(request.redirect,'manual');

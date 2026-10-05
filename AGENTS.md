@@ -58,6 +58,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Operational continuity
 
+- Server-ledger notice recovery prepared locally: docs/AFW-NOTICE-RECOVERY-2026-10-05.es.md. GET /notices/receipts reads at most three rolling24h sanitized reservation snapshots under same auth/flags/window. notice-cycle reads receipts first, restores runId after lost claim/ACK without scratch persistence; expired/multiple pending/superseded require review. Receipt journal reuses existing atomic reservations, superseding separate-intent plan. Authenticated workerd acceptance remains local only. Next closed publication/QA/cloud correlation; no remote activation or customer mutations.
+
 - Notice cloud transport prepared locally: docs/AFW-NOTICE-CLOUD-CLIENT-2026-10-05.es.md. Fixed origin/strict response correlation; CLI notice-list/notice-claim/notice-ack, explicit stable requestId/runId and no automatic retries. No durable cloud state or remote reception proved. Next authenticated D1 intention journal before claim; cloud scratch filesystem is not durable custody. Preserve closed remote runtime and shared budget.
 
 - Shared manager budget prepared locally: docs/AFW-SHARED-MANAGER-BUDGET-2026-10-05.es.md. Notices require consumer-state plus watchdog/inbox/reservation schemas; server-enabled notice channel coordinates both reservation ledgers: three rolling24h and one active task. Preserve AFW_OPERATIONS_SHARED_BUDGET_ENABLED=true after closing notices, until24h after its last reservation or permanently with that schema. Only both controls off preserve prior legacy schema compatibility. No remote publication/schema/activation. Next durable cloud client and bounded QA correlation; preserve existing closed bindings.
