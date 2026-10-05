@@ -25,3 +25,16 @@ test('API fetch, POST, successful and unknown responses remain untouched',async(
  const api=await worker.fetch(new Request(url),{});assert.deepEqual(await api.json(),{code:'unavailable'});
 });
 
+
+test('foreign form navigation presents the origin rejection without weakening POST API errors',async()=>{
+ const form=new Request(url+'notices/review',{method:'POST',headers:{Accept:'text/html','Sec-Fetch-Mode':'navigate','Sec-Fetch-Dest':'document',Origin:'https://review-csrf-qa.agentfriendlyweb.dev','Sec-Fetch-Site':'same-site'}});
+ const response=await reviewNavigationStatus(form,Response.json({code:'same_origin_required'},{status:403}));
+ assert.equal(response.status,403);assert.match(response.headers.get('content-type'),/text\/html/);
+ assert.match(await response.text(),/Abramos la revisión desde AFW/);
+ assert.match(response.headers.get('content-security-policy'),/form-action 'none'/);
+ const api=new Request(url+'notices/review',{method:'POST',headers:{Accept:'application/json'}});
+ const denied=Response.json({code:'same_origin_required'},{status:403});assert.equal(await reviewNavigationStatus(api,denied),denied);
+ for(const [code,status] of [['operator_identity_required',401],['temporarily_unavailable',503],['unavailable',404]]){
+  const original=Response.json({code},{status});assert.equal(await reviewNavigationStatus(form,original),original);
+ }
+});
