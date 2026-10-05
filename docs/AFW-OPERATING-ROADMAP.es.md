@@ -1,3 +1,5 @@
+5 de octubre Argentina: [controles internos de revisión preparados cerrados](AFW-NOTICE-REVIEW-CONTROLS-2026-10-05.es.md). JWT humano separado, Origin/Fetch-Metadata, limitador obligatorio, body acotado/cancelación y ventana/identidad revalidadas tras awaits antes del journal CAS. Sin ruta montada, política Access, credenciales o esquema remoto. Próximo: política/custodia humanas y aceptación real de identidad/CSRF/limitador bajo plan propio; no repetir scheduler/PC-off ni afirmar escritura desplegada.
+
 5 de octubre UTC: [admisión por cron QA aceptada y código publicado cerrado](AFW-WATCHDOG-ADMISSION-QA-2026-10-05.es.md), fuentef5cfeac/PR251/CI826tests. Admite revisión15, deduplica y pausa16/10 sin aviso extra. QA y operaciones cerradas; histórico operativo intacto. Próximo resolución trazable de revisión y ciclo de vida de identidad antes de cadencia permanente.
 
 5 de octubre UTC: [admisión conectada al runtime watchdog](AFW-WATCHDOG-ADMISSION-RUNTIME-2026-10-05.es.md), preparada cerrada;826tests. Próximo aceptación específica de cron/admisión QA, resolución trazable de revisión y ciclo de vida de identidad.

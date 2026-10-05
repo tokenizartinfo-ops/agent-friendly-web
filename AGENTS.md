@@ -58,6 +58,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Operational continuity
 
+- Internal notice review controls prepared closed: docs/AFW-NOTICE-REVIEW-CONTROLS-2026-10-05.es.md. No mounting/Worker imports. Explicit flags/window, exact Origin and Fetch-Metadata, separate signed operator identity and limiter, bounded/cancelled 1024-byte JSON, fresh identity/window after awaits, server-only actor/DB and real journal CAS. No deployed operator policy, custody or live CSRF acceptance; reception identity cannot authorize reviews. Preserve original outcome/history/budget and closed remote runtime.
+
 - Review code integration accepted: docs/AFW-REVIEW-INTEGRATION-2026-10-05.es.md, main0db59c4/PR253+254/CI850tests. Append-only CAS/provisional→terminal, replacement-lease/restore/ACK fences, opaque canonical operator identity. No remote review schema/route/policy/publication; existing runtimes remain closed. Next internal signed operator adapter under docs/superpowers/plans/2026-10-05-notice-review-controls.md, still unmounted with strict origin/body/identity guards. Do not infer deployed operator writes or reuse reception credentials.
 
 - Review operator identity prepared internally: docs/AFW-REVIEW-OPERATOR-IDENTITY-2026-10-05.es.md. Server-enabled pinned human subject, exact own origin, unique review audience distinct from reception; verified JWT/expiry yields opaque domain-separated operatorId only. Seven JWT tests include canonical team-domain stability and double trailing-dot denial before key lookup. No route/Accesspolicy/journalwrite/remote activation; future adapter still needs CSRF/body/idempotency authorization acceptance. Do not infer deployed operator capability.
