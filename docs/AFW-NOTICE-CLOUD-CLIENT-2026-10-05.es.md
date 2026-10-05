@@ -13,3 +13,5 @@ Orden siguiente: contrato y pruebas del journal servidor; almacenamiento/endpoin
 Presupuesto compartido integrado PR246/main bb95fba, CI37313592469 pass1m18s. Mantener control compartido independiente al cerrar notices según AFW-SHARED-MANAGER-BUDGET-2026-10-05.es.md.
 
 Validación local:816/816 pruebas, cero fallos; lint cero errores/dos warnings previos; build completo. Simulación de respuestas claim/ACK perdidas y nueva instancia cliente conserva requestId/runId explícitos. No servidor remoto ni almacenamiento persistente entre ejecuciones comprobados por esa simulación.
+
+Revisión: respuesta HTTP200 JSON null reproducía TypeError al acceder a reservation. Acceso seguro y validación estricta ahora producen Operational request unavailable; regresión exige una sola petición, sin retry. No secretos en errores.

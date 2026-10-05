@@ -27,6 +27,8 @@ test('notice transport rejects extra data, foreign resources and mismatched corr
   await assert.rejects(createOperationsClient({env,fetchImpl:async()=>Response.json({reservation:value})}).claimNotice(notice.resource,1,requestId));
  }
  let calls=0;const client=createOperationsClient({env,fetchImpl:async()=>{calls++;throw Error('private');}});
+ let malformedCalls=0;
+ await assert.rejects(createOperationsClient({env,fetchImpl:async()=>{malformedCalls++;return Response.json(null);}}).claimNotice(notice.resource,1,requestId),{message:'Operational request unavailable'});assert.equal(malformedCalls,1);
  await assert.rejects(client.claimNotice('atelier',1,requestId));await assert.rejects(client.ackNotice([reservation.runId]));assert.equal(calls,0);
  await assert.rejects(client.listNotices(),{message:'Operational request unavailable'});assert.equal(calls,1);
 });
