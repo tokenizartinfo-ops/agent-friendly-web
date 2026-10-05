@@ -28,7 +28,7 @@ test('workerd/D1 preserves notice identity and fences ACK after a real state tra
  const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:bundle.outputFiles[0].text,d1Databases:{DB:'notice-contract-test'}}));
  try{
   const db=await runtime.getD1Database('DB');
-  for(const name of ['watchdog-state','watchdog-inbox','notice-reservations']){
+  for(const name of ['schema','consumer-state','watchdog-state','watchdog-inbox','notice-reservations']){
    const sql=readFileSync(new URL(`../worker/operations/${name}.sql`,import.meta.url),'utf8').replace(/--[^\n]*/g,'');
    for(const statement of sql.split(';').map(x=>x.trim()).filter(Boolean))await db.prepare(statement).run();
   }
