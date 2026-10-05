@@ -1,3 +1,5 @@
+5 de octubre UTC: [inbox de avisos preparada localmente](AFW-WATCHDOG-NOTICE-CONTRACT-2026-10-05.es.md). Admisión atómica de revisión vigente, dedupe, exclusión de pausas/estados vencidos y pruebas de carreras. Sin envío/acuse, conexión runtime o esquema remoto. Siguiente reserva/acuse con fence y adaptador cerrado antes de comprobar recepción por gerente cloud.
+
 5 de octubre UTC (4 de octubre Argentina): [cron watchdog QA aceptado](AFW-WATCHDOG-QA-2026-10-05.es.md). Cuatro ciclos reales: falta de checkpoint, dedupe, recuperación sintética y pausa silenciosa; QA exclusiva cerrada6b9ea3e2, cron[]/flagsfalse/sin deadline. Producción preservada. Siguiente ensayar entrega pendiente/obsolescencia y consumidor de avisos con fence/acuse; outbox no es notificación entregada.
 
 # Roadmap operativo y continuidad de AFW
