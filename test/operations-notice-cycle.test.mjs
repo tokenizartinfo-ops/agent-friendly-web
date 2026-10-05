@@ -2,6 +2,22 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 const now=Date.now(),notice={resource:'afw_delegated_canary',revision:1,kind:'attention',condition:'["delivery_pending"]',observedAt:now},reservation={resource:notice.resource,revision:1,requestId:crypto.randomUUID(),runId:crypto.randomUUID(),expiresAt:now+300000};
 async function run(client){const {runNoticeCycle}=await import('../lib/operations-notice-cycle.mjs');return runNoticeCycle(client,{now:()=>now});}
+
+test('terminal server review remains a dated reviewed result rather than idle or delivery success',async()=>{
+ for(const [decision,reason,outcome] of [['close_obsolete','producer_paused','superseded'],['close_expired_unconfirmed','expired_unconfirmed',null]]){
+  const review={decision,reason,reviewedAt:now-1};let writes=0;
+  const client={listNoticeReceipts:async()=>[{notice,reservation:{...reservation,expiresAt:now-1000},outcome,review}],listNotices:async()=>[],claimNotice:async()=>{writes++;},ackNotice:async()=>{writes++;}};
+  assert.deepEqual(await run(client),{status:'reviewed',runId:reservation.runId,review,outcome});assert.equal(writes,0);
+ }
+});
+test('historical closure does not hide a new notice or unblock a retained review',async()=>{
+ const closed={notice,reservation:{...reservation,expiresAt:now-1000},outcome:'superseded',review:{decision:'close_obsolete',reason:'producer_paused',reviewedAt:now-1}};
+ let claims=0,acks=0;
+ const client={listNoticeReceipts:async()=>[closed],listNotices:async()=>[{...notice,revision:2}],claimNotice:async()=>{claims++;return {...reservation,revision:2};},ackNotice:async()=>{acks++;return 'accepted';}};
+ assert.equal((await run(client)).status,'received');assert.equal(claims,1);assert.equal(acks,1);
+ client.listNoticeReceipts=async()=>[{...closed,review:{decision:'retain_block',reason:'investigation_required',reviewedAt:now-1}}];
+ assert.equal((await run(client)).status,'review_required');assert.equal(claims,1);assert.equal(acks,1);
+});
 test('cycle reads server receipts before claiming and recovers lost claim and ACK without another reservation',async()=>{
  let receipt=null,claims=0,acks=0,dropClaim=true,dropAck=true;
  const client={listNoticeReceipts:async()=>receipt?[structuredClone(receipt)]:[],listNotices:async()=>receipt?.outcome==='accepted'?[]:[notice],claimNotice:async(resource,revision,requestId)=>{
