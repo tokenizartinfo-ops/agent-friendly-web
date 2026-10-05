@@ -1,6 +1,7 @@
 import {operationsWindowOpen} from '../../lib/operations-window.mjs';
 import {readProducerWatchdog} from '../../lib/operations-watchdog.mjs';
 import {recordWatchdogObservation} from '../../lib/operations-watchdog-transitions.mjs';
+import {admitWatchdogNotices} from '../../lib/operations-watchdog-inbox.mjs';
 
 export async function runWatchdog(env,{now=Date.now(),clock=Date.now}={}){
  if(env?.AFW_OPERATIONS_WATCHDOG_ENABLED!=='true'||!operationsWindowOpen(env,now))return {skipped:true};
@@ -11,6 +12,12 @@ export async function runWatchdog(env,{now=Date.now(),clock=Date.now}={}){
   // Recheck the actual wall clock before writing; a deadline is not only a cron admission check.
   if(!operationsWindowOpen(env,Math.max(now,clock())))return {skipped:true};
   const result=await recordWatchdogObservation(db,observation,{now});
+  if(env.AFW_OPERATIONS_NOTICES_ENABLED==='true'){
+   // Admission is fenced against current state in SQL; a failed inbox write leaves the
+   // durable outbox available to a later observation. It never dispatches or ACKs.
+   const admission=await admitWatchdogNotices({...env,OPERATIONS_STATE_DB:db},{now:Math.max(now,clock())});
+   return {skipped:false,paused:observation.paused,...result,admitted:admission.admitted};
+  }
   return {skipped:false,paused:observation.paused,...result};
  }catch{throw Error('Watchdog execution unavailable');}
 }
