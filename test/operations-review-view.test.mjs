@@ -39,3 +39,36 @@ test('session or window expiring during context read never discloses the snapsho
   }finally{s.sqlite.close();}
  }
 });
+
+test('review access withdrawal denies a still-valid token without touching storage',async()=>{
+ let reads=0;const instance=createOperationsReviewWorker({keySet:publicKey,now:()=>now}),jwt=await token();
+ const base={...env({env:{}}),AFW_OPERATIONS_REVIEWS_ENABLED:'true',AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(now+300000).toISOString(),OPERATIONS_STATE_DB:{prepare(){reads++;throw Error('private');}}};
+ for(const [change,status] of [[{AFW_OPERATIONS_REVIEW_ENABLED:'false'},404],[{AFW_OPERATIONS_REVIEW_SUBJECT:'withdrawn-human'},401]]){
+  const state={...base,...change};assert.equal((await instance.fetch(request(jwt),state)).status,status);
+  const write=new Request(OPERATIONS_REVIEW_ORIGIN+'/notices/review',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':jwt,Origin:OPERATIONS_REVIEW_ORIGIN,'Sec-Fetch-Site':'same-origin','content-type':'application/json'},body:'{}'});
+  assert.equal((await instance.fetch(write,state)).status,status);
+ }
+ assert.equal(reads,0);
+});
+
+test('view rate-limit and key-provider denial fail before any operational read',async()=>{
+ let reads=0,keys=0;const jwt=await token(),base={...env({env:{}}),AFW_OPERATIONS_REVIEWS_ENABLED:'true',AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(now+300000).toISOString(),OPERATIONS_STATE_DB:{prepare(){reads++;throw Error('private');}}};
+ for(const [limiter,status] of [[undefined,503],[{limit:async()=>({success:false})},429],[{limit:async()=>({})},503],[{limit:async()=>{throw Error('private-limit');}},503]]){
+  const instance=createOperationsReviewWorker({keySet:async()=>{keys++;return publicKey;},now:()=>now});
+  const response=await instance.fetch(request(jwt),{...base,OPERATIONS_REVIEW_RATE_LIMITER:limiter});assert.equal(response.status,status);assert.doesNotMatch(await response.text(),/private/);
+ }
+ assert.equal(keys,3);assert.equal(reads,0);
+ const response=await createOperationsReviewWorker({keySet:async()=>{throw Error('private-key');},now:()=>now}).fetch(request(jwt),base);
+ assert.equal(response.status,503);assert.doesNotMatch(await response.text(),/private/);assert.equal(reads,0);
+});
+
+test('top-level navigation accepts a human link while foreign Origin and programmatic reads remain denied',async()=>{
+ const s=reviewContextDb(now);try{
+  const instance=createOperationsReviewWorker({keySet:publicKey,now:()=>now}),state=env(s),jwt=await token();
+  const headers={'Sec-Fetch-Site':'cross-site','Sec-Fetch-Mode':'navigate','Sec-Fetch-Dest':'document'};
+  assert.equal((await instance.fetch(request(jwt,'/',headers),state)).status,200);
+  assert.equal((await instance.fetch(request(jwt,'/',{...headers,Origin:'https://foreign.invalid'}),state)).status,403);
+  assert.equal((await instance.fetch(request(jwt,'/',{...headers,'Sec-Fetch-Mode':'cors'}),state)).status,403);
+  assert.equal(s.sqlite.prepare('SELECT COUNT(*) n FROM operations_notice_reviews').get().n,0);
+ }finally{s.sqlite.close();}
+});
