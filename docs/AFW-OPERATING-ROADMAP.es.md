@@ -1,3 +1,5 @@
+5 de octubre UTC: [admisión por cron QA aceptada y código publicado cerrado](AFW-WATCHDOG-ADMISSION-QA-2026-10-05.es.md), fuentef5cfeac/PR251/CI826tests. Admite revisión15, deduplica y pausa16/10 sin aviso extra. QA y operaciones cerradas; histórico operativo intacto. Próximo resolución trazable de revisión y ciclo de vida de identidad antes de cadencia permanente.
+
 5 de octubre UTC: [admisión conectada al runtime watchdog](AFW-WATCHDOG-ADMISSION-RUNTIME-2026-10-05.es.md), preparada cerrada;826tests. Próximo aceptación específica de cron/admisión QA, resolución trazable de revisión y ciclo de vida de identidad.
 
 5 de octubre UTC: [recepción programada de avisos aceptada](AFW-SCHEDULED-NOTICE-ACCEPTANCE-2026-10-05.es.md). Un ciclo hosted real confirma revisión13/accepted en D1QA; demora6m10s, cierre managera27a3088/tokenfalse/automationdisabled. [Preparación operativa](AFW-NOTICE-OPERATING-HANDOFF-2026-10-05.es.md): inbox/reservations aditivas aplicadas a D1operativa cerrada y vacías, historial16/2/2/2 preservado. Próximo: admisión watchdog real, resolución trazable de revisión y vigencia/custodia antes de cadencia permanente. No repetir scheduler/PC-off.
