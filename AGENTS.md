@@ -6,6 +6,8 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 
 ## Canonical surfaces
 
+- Private review QA deployed and restored closed: `docs/AFW-REVIEW-PRIVATE-PILOT-2026-10-05.es.md`. Signed human enrollment, opaque pin, actual browser retain→reopen→archive→terminal accepted; isolated D1 has two immutable CAS decisions and original superseded reservation unchanged. Final Worker `390c3ecf-127d-419e-971e-131d9e784ad3`, all three flags false/no deadline; own Access deny/everyone restored. Chrome inspector blocked repeated queries and subsequent navigation: live HTTP429/CSRF/still-valid JWT withdrawal remain unproved. Next only those bounded QA acceptances, no customer promotion, credential extension or PC-off repeat. Older no-deployment statements below describe their dated preparation stages.
+
 - Guided operator review prepared closed: `docs/AFW-GUIDED-OPERATOR-REVIEW-2026-10-05.es.md`. One observed decision, explicit stable retry and dated receipt; signed GET/no-store/CSP and server journal CAS. 886 local tests, synthetic browser persist/reopen acceptance. No remote Worker/schema/Access changes. Next private identity lifecycle, binding10/60 and revocation acceptance before exposure; do not repeat PC-off/scheduler or infer external score improvement.
 
 - Independent public A2A runtime: `agent-friendly-web-a2a`, source `ee62698`, version `3238969a-d5e8-45c6-9417-fc19452b762a`, verified2026-10-02. Receipt and rollback: `docs/AFW-A2A-PUBLIC-RELEASE-2026-10-02.es.md`. This is not the web/private Worker release. External all/apiApp5/5,12PASS/4FAIL; no numeric score returned. Preserve private Access and do not advertise OAuth until real client acceptance.
