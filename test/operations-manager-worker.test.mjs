@@ -5,10 +5,12 @@ import { Miniflare, convertV4MiniflareOptions } from 'miniflare';
 import { readFileSync } from 'node:fs';
 import { generateKeyPair, SignJWT, exportJWK } from 'jose';
 import worker from '../worker/operations-manager/index.mjs';
+import {createOperationsClient} from '../lib/operations-client.mjs';
+import {runNoticeCycle} from '../lib/operations-notice-cycle.mjs';
 
 test('operations manager is closed by default, has no cron and never accepts a public origin', async () => {
   for (const origin of ['https://operations-manager.agentfriendlyweb.dev', 'https://agentfriendlyweb.dev']) {
-    for (const path of ['/incidents', '/claim', '/finish','/notices','/notices/claim','/notices/ack']) assert.equal((await worker.fetch(new Request(origin + path), {})).status, 404);
+    for (const path of ['/incidents', '/claim', '/finish','/notices','/notices/claim','/notices/ack','/notices/receipts']) assert.equal((await worker.fetch(new Request(origin + path), {})).status, 404);
   }
   assert.equal(Object.hasOwn(worker, 'scheduled'), false);
 });
@@ -62,8 +64,11 @@ test('signed notice service in workerd reconciles a lost ACK response using its 
  const origin='https://operations-manager.agentfriendlyweb.dev';await runtime.dispatchFetch(origin+'/synthetic-fixture');assert.equal((await runtime.dispatchFetch(origin+'/notices')).status,401);
  const headers={'Cf-Access-Jwt-Assertion':jwt,'content-type':'application/json'};const listing=await runtime.dispatchFetch(origin+'/notices',{headers});assert.equal(listing.status,200);const {notices}=await listing.json();assert.equal(notices.length,1);
  const body={resource:notices[0].resource,revision:notices[0].revision,requestId:crypto.randomUUID()};const post=(path,value)=>runtime.dispatchFetch(origin+path,{method:'POST',headers,body:JSON.stringify(value)});
- const claim=await post('/notices/claim',body);assert.equal(claim.status,200);const {reservation}=await claim.json();assert.deepEqual(await (await post('/notices/claim',body)).json(),{reservation});
+ const claim=await post('/notices/claim',body);assert.equal(claim.status,200);await claim.body.cancel();
+ const receipts=await runtime.dispatchFetch(origin+'/notices/receipts',{headers});assert.equal(receipts.status,200);const {reservation}=(await receipts.json()).receipts[0];assert.deepEqual(await (await post('/notices/claim',body)).json(),{reservation});
  const lost=await post('/notices/ack',{runId:reservation.runId});assert.equal(lost.status,200);await lost.body.cancel();assert.deepEqual(await (await post('/notices/ack',{runId:reservation.runId})).json(),{outcome:'accepted'});
+ const client=createOperationsClient({env:{AFW_OPERATIONS_ACCESS_CLIENT_ID:'synthetic',AFW_OPERATIONS_ACCESS_CLIENT_SECRET:'synthetic'},fetchImpl:async request=>runtime.dispatchFetch(request.url,{method:request.method,headers,body:request.method==='POST'?await request.text():undefined})});
+ assert.deepEqual(await runNoticeCycle(client,{now:()=>current}),{status:'reconciled',runId:reservation.runId,outcome:'accepted'});
  assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM operations_notice_reservations').first()).n,1);assert.equal((await db.prepare('SELECT outcome FROM operations_notice_reservations').first()).outcome,'accepted');
  }finally{await runtime.dispose();}
 });

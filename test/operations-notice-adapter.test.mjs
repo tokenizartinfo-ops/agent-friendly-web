@@ -9,6 +9,15 @@ import {createOperationsServiceControls} from '../lib/operations-service-control
 import {recordSignal} from '../lib/operations-ledger.mjs';
 const {privateKey,publicKey}=await generateKeyPair('RS256'),now=Date.now();
 const config={enabled:true,origin:'https://operations-manager.agentfriendlyweb.dev',teamDomain:'test.cloudflareaccess.com',audience:'notices-test',clientId:'notices.access'};
+test('service-only receipts recover reservation identity and terminal ACK',async()=>{
+ const s=await setup(),handle=createOperationsServiceControls(s.options),jwt=await token();try{
+  const claim=await handle(request('/notices/claim',jwt,{resource:'afw_delegated_canary',revision:1,requestId:crypto.randomUUID()}));const {reservation}=await claim.json();
+  const read=await handle(request('/notices/receipts',jwt));assert.equal(read.status,200);assert.deepEqual((await read.json()).receipts[0].reservation,reservation);
+  assert.equal((await handle(request('/notices/receipts','bad'))).status,401);
+  assert.equal((await createOperationsServiceControls({...s.options,noticeEnv:undefined})(request('/notices/receipts',jwt))).status,404);
+  await handle(request('/notices/ack',jwt,{runId:reservation.runId}));assert.equal((await (await handle(request('/notices/receipts',jwt))).json()).receipts[0].outcome,'accepted');
+ }finally{s.sqlite.close();}
+});
 test('server enabled notices enforce the shared budget on the legacy HTTP claim',async()=>{
  const s=await setup(),handle=createOperationsServiceControls(s.options),jwt=await token();try{
   const incident=await recordSignal(s.db,{eventId:crypto.randomUUID(),check:'public_home',resource:'afw_public_web',version:crypto.randomUUID(),observedAt:new Date(now).toISOString(),result:'failed'},now);
