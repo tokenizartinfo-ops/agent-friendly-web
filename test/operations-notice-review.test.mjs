@@ -83,4 +83,3 @@ test('defensive closed fence denies restoring and ACKing pending B without chang
   s.sqlite.close();
  }
 });
-
