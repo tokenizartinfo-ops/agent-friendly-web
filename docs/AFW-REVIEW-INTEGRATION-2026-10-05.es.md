@@ -1,0 +1,9 @@
+# AFW: revisión trazable integrada en código
+
+PR253 y PR254 integradas en main0db59c43eeaff512f2efe2380bea59214e597135. Journal append-only con secuencia/CAS: mantener pendiente permite decisión posterior; cierre terminal. Recibos/ACK/leases/budget originales no se modifican. Lectura/claim/restore/ACK excluyen una versión cerrada; otro claim vivo de esa versión impide cerrar el aviso antiguo. Actor del operador se verifica por contexto firmado distinto del receptor y se representa opacamente.
+
+La revisión root detectó y corrigió la carrera claimB→cierreA y el bloqueo irreversible retain_block; revisión cloud detectó canonicalización del equipo Access/doble punto. Pruebas RED→GREEN conservadas. PR253 final0f90a5c, CI37329856387pass1m26/843tests. PR254 finalfadc180, CI37330870561pass1m9/850tests/lint0errors2warnings/buildcompleto. Suite conjunta local anterior849/849 y build completo; CI final añade la séptima prueba de identidad. No afirmar tests remotos de operador a partir de estas pruebas.
+
+No nueva ruta HTTP, política Access, identidad remota, migración, activación o publicación por estos PRs. Runtime vigente conserva los recibos cerrados anteriores: managera27a3088, watchdogoperativoae622e3e y QAdbf0184e. Esquema de revisiones todavía NO aplicado a D1remota. Aviso revision15 fue admitido por cron QA, no reconocido por cloud. PC-off/scheduler/cron ya aceptados en sus propios alcances.
+
+Siguiente bloque cerrado: docs/superpowers/plans/2026-10-05-notice-review-controls.md, adaptador firmado del operador con origen/Fetch-Metadata, límites/cancelación y journal real sintético. No montar/publicar ese adaptador ni reutilizar identidad receptora para escritura. La intervención del owner será necesaria solo al preparar política/identidad privada y su aceptación real; no pedir login de nuevo para avanzar con este código cerrado.
