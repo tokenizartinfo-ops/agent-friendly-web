@@ -1,3 +1,5 @@
+5 de octubre Argentina: [límites de acceso aceptados localmente](AFW-REVIEW-ACCESS-BOUNDARIES-2026-10-05.es.md). Worker real/workerd/D1 confirma recibo/replay y denegación con JWT vigente tras cierre, historial preservado;890tests. Inventario GET confirma Worker de revisión ausente y Access exacto vacío; sin cambios remotos. Próximo QA aislada e identidad/binding/retirada real bajo el plan vigente, sin repetir PC-off/scheduler.
+
 5 de octubre Argentina: [plan acotado de identidad y retirada](AFW-REVIEW-ACCESS-ACCEPTANCE-PLAN-2026-10-05.es.md). Vista integrada PR260/main9ac67ed/CI37341050845;886tests. Próximo ensayo aislado con operador real, binding/CSRF y denegación con JWT todavía vigente; retirada de Access y capacidad AFW se verifican por separado. Sin mutaciones remotas.
 
 5 de octubre Argentina: [revisión guiada preparada cerrada](AFW-GUIDED-OPERATOR-REVIEW-2026-10-05.es.md). Una decisión por pantalla, guardado explícito estable y constancia persistente;886tests y navegador sintético local. Sin deploy/schema/Access remoto. Próximo identidad/política/custodia y aceptación real de limitador/CSRF/retirada antes de apertura; no repetir scheduler/PC-off.
