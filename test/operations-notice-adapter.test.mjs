@@ -16,6 +16,9 @@ test('server enabled notices enforce the shared budget on the legacy HTTP claim'
   const claim=await handle(request('/notices/claim',jwt,body));assert.equal(claim.status,200);
   assert.equal((await handle(request('/claim',jwt,{fingerprint:incident.fingerprint,requestId:crypto.randomUUID()}))).status,409);
   assert.equal(s.sqlite.prepare('SELECT attempts FROM operations_incidents').get().attempts,0);
+  const closedNotices=createOperationsServiceControls({...s.options,noticeEnv:{...s.noticeEnv,AFW_OPERATIONS_NOTICES_ENABLED:'false',AFW_OPERATIONS_SHARED_BUDGET_ENABLED:'true'}});
+  assert.equal((await closedNotices(request('/notices',jwt))).status,404);
+  assert.equal((await closedNotices(request('/claim',jwt,{fingerprint:incident.fingerprint,requestId:crypto.randomUUID()}))).status,409);
  }finally{s.sqlite.close();}
 });
 async function token(claims={}){return new SignJWT({type:'app',common_name:config.clientId,...claims}).setProtectedHeader({alg:'RS256'}).setIssuer('https://'+config.teamDomain).setAudience(config.audience).setSubject('').setExpirationTime('5m').sign(privateKey);}
