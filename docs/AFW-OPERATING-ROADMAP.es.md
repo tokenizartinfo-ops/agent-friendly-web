@@ -1,4 +1,6 @@
-5 de octubre UTC: [recuperación desde el journal servidor preparada localmente](AFW-NOTICE-RECOVERY-2026-10-05.es.md). Consulta autenticada de recibos/ciclo real recupera claim/ACK descartados en workerd/D1 local con una única reserva. Reutiliza reservas atómicas y reemplaza intención separada; no depende del filesystem cloud. Sin deploy o recepción cloud remota. Siguiente publicación cerrada y QA/cloud correlacionada.
+5 de octubre UTC: [recuperación cloud remota aceptada](AFW-NOTICE-CLOUD-ACCEPTANCE-2026-10-05.es.md). Tres instancias cloud recuperan respuestas claim/ACK descartadas; D1QA independiente confirma una reserva accepted. Manager final0afdc102 cerrado/DBoperativa restaurada/tokenfalse;16/2/2/2 intactos. Sin guardia permanente. Siguiente disparador hosted de avisos y resolución trazable de revisión/vigencia de identidad.
+
+5 de octubre UTC: [recuperación desde el journal servidor integrada](AFW-NOTICE-RECOVERY-2026-10-05.es.md), PR248/main33cfdde/CI37317566751. Consulta autenticada de recibos/ciclo real recupera claim/ACK descartados en workerd/D1 local con una única reserva. Reutiliza reservas atómicas y reemplaza intención separada; no depende del filesystem cloud.
 
 5 de octubre UTC: [transporte cloud de avisos integrado en código](AFW-NOTICE-CLOUD-CLIENT-2026-10-05.es.md), PR247/main65f413f/CI37315418250. Listado/claim/ACK estricto y CLI; respuesta perdida reconciliada sintéticamente con nueva instancia y mismos identificadores. La persistencia se continúa con el journal servidor del bloque siguiente.
 
