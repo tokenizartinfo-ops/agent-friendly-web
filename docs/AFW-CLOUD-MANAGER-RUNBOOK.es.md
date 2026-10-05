@@ -17,7 +17,7 @@ El comando `node scripts/afw-operations-client.mjs notice-cycle` solo se ejecuta
 
 La consulta de constancias conserva el límite de tres reservas de las últimas 24 horas. `reviewed` elige la revisión más reciente dentro de esa consulta, no certifica que sea todo el historial. Un aviso nuevo conserva su recorrido; `retain_block` continúa bloqueando hasta una decisión humana permitida. El servidor mantiene los fences, presupuesto compartido y CAS; la narrativa del gerente nunca los sustituye.
 
-Evidencia actual: [revisión humana QA y cierre](AFW-REVIEW-PRIVATE-PILOT-2026-10-05.es.md), [pantallas de estado y arranque real](AFW-REVIEW-NAVIGATION-STATUS-2026-10-05.es.md), [binding real local](AFW-REVIEW-REAL-LIMITER-2026-10-05.es.md), [constancia reviewed](AFW-NOTICE-REVIEWED-RESULT-2026-10-05.es.md). La revisión privada QA permanece cerrada; dos constancias anteriores se conservaron. Limitador/CSRF/retiro con JWT real siguen pendientes en Cloudflare: los resultados locales no los acreditan. El bloqueo del inspector no se corrige borrando cookies ni ampliando permisos.
+Evidencia actual: [revisión humana QA y cierre](AFW-REVIEW-PRIVATE-PILOT-2026-10-05.es.md), [pantallas de estado y arranque real](AFW-REVIEW-NAVIGATION-STATUS-2026-10-05.es.md), [binding real local](AFW-REVIEW-REAL-LIMITER-2026-10-05.es.md), [constancia reviewed](AFW-NOTICE-REVIEWED-RESULT-2026-10-05.es.md). La revisión privada QA permanece cerrada; dos constancias anteriores se conservaron. La aceptación HTTP remota posterior confirmó 429, cierre administrativo404 y retirada de pin200→401→200 con la misma sesión; consultar AFW-REVIEW-HTTP-ACCEPTANCE-2026-10-05.es.md. El POST humano con Origin ajeno permanece sin aceptación remota. El bloqueo del inspector no se corrige borrando cookies ni ampliando permisos.
 
 Antes de guardia permanente faltan aceptación remota y ciclo de vida/custodia de una identidad exclusiva y revocable con alcance definido. No reactivar el token temporal vencido, duplicar scheduler, repetir PC-off ni solicitar OTP para etapas ya aceptadas. Las secciones siguientes son registros de etapas previas; sus declaraciones de ausencia de recursos o pendientes quedan subordinadas a los recibos fechados más recientes, nunca al estado de esta nota sin inventario.
 
@@ -93,3 +93,12 @@ Aceptación remota pendiente: persistir señal sintética, reenviar duplicado, s
 # Preparación de ventanas operativas
 
 Antes de otra apertura, consultar [vencimiento por servidor](AFW-OPERATIONS-WINDOW-EXPIRY-2026-10-04.es.md): el código preparado requiere `AFW_OPERATIONS_WINDOW_EXPIRES_AT` en receptor y manager. Todavía no está desplegado; no inferir protección remota desde esta nota. El vencimiento bloquea nuevas peticiones y conserva el cierre administrativo separado.
+
+
+## Continuidad verificada del 5 de octubre: custodia, código y cierre
+
+Consultar AFW-CUSTODY-PROXY-ACCEPTANCE-2026-10-05.es.md antes de operar. Snapshot publicado en a4d90d4; ejecución real en ese contexto confirmó reviewed sin POST ni nueva reserva. No equivale a restauración en contexto nuevo. No repetir el ensayo funcional para suplir esa comprobación: el nuevo contexto debe probar primero HEAD/origin/limpieza, metadata de publicación y bindings por nombres/destinos, sin usar sus valores ni abrir el servicio.
+
+Cierre comprobado en manager a34abbb3: seis controlesfalse, sin deadline, base operacional original; credencial nueva disabled y política anterior restaurada. El ID servidor permanece en custodia secreta. Para rollback, verificar settings efectivos además de la versión activa: seleccionar una versión anterior no restauró por sí solo los bindings durante este ensayo.
+
+Orden de promoción pendiente: (1) evidencia de restauración de código en contexto nuevo; (2) aceptación remota CSRF humana soportada; (3) especificar y comprobar identidad estable, revocación, vencimiento, presupuesto y journal operacional antes de habilitar una cadencia. No renovar el piloto automáticamente ni volver a habilitar la identidad vencida. La credencial nueva vence el 6 de octubre a las17:31Argentina y ya está disabled; la caducidad no requiere intervención para conservar el cierre. No repetir pruebas PC-off aceptadas ni prometer reparaciones automáticas a partir de un ACK.
