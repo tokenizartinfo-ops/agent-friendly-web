@@ -1,5 +1,26 @@
 # Gerente AFW: preparación de Codex Cloud
 
+## Contrato vigente del ciclo de avisos — 5 de octubre de 2026
+
+Fuente integrada: PR269/main `dbcf212f582f1f18f128eed7e2a765136a2d1a65`, CI `37359543208`, 902 pruebas. Antes de utilizarla en cloud, comprobar el commit real de esa tarea y que `scripts/afw-operations-client.mjs` importe esta versión de `lib/operations-notice-cycle.mjs`. Un merge no actualiza una tarea o un entorno ya iniciado. No afirmar ejecución cloud nueva ni reenviar avisos desde este documento.
+
+El comando `node scripts/afw-operations-client.mjs notice-cycle` solo se ejecuta cuando la identidad de servicio, origen, ventana, permisos y presupuesto están habilitados y comprobados para ese ciclo. Actualmente la apertura permanente no está autorizada por una aceptación terminada; conservar el cierre y la vigencia original de las identidades temporales.
+
+| Resultado | Lectura y acción del gerente |
+| --- | --- |
+| `idle` | No había un aviso actual ni una constancia activa en la consulta acotada. No significa que todo el sistema esté sano. No notificar si no cambió nada. |
+| `received` | Se guardó un ACK `accepted` de recepción. No acredita diagnóstico, reparación ni envío a un cliente. Conservar `runId` para correlación. |
+| `reconciled` | Se recuperó una constancia existente sin una nueva reserva. Comunicar su `outcome` observado, sin repetir ACK ni atribuir un efecto nuevo. |
+| `reviewed` | La revisión humana terminal tiene decisión, motivo y `reviewedAt`. Mantener su `outcome` original y no reenviar ese aviso. No es una reparación ni una entrega. |
+| `review_required` | Detener el ciclo: `superseded`, `lease_expired` o `multiple_unfinished_receipts` requieren revisión trazable. No borrar historia, fabricar ACK, extender lease ni abrir un bucle de reintentos. |
+| Error genérico | Resultado incierto. En un ciclo posterior autorizado, recuperar primero constancias del servidor; no asumir que la escritura anterior falló ni persistir un token en scratch. |
+
+La consulta de constancias conserva el límite de tres reservas de las últimas 24 horas. `reviewed` elige la revisión más reciente dentro de esa consulta, no certifica que sea todo el historial. Un aviso nuevo conserva su recorrido; `retain_block` continúa bloqueando hasta una decisión humana permitida. El servidor mantiene los fences, presupuesto compartido y CAS; la narrativa del gerente nunca los sustituye.
+
+Evidencia actual: [revisión humana QA y cierre](AFW-REVIEW-PRIVATE-PILOT-2026-10-05.es.md), [pantallas de estado y arranque real](AFW-REVIEW-NAVIGATION-STATUS-2026-10-05.es.md), [binding real local](AFW-REVIEW-REAL-LIMITER-2026-10-05.es.md), [constancia reviewed](AFW-NOTICE-REVIEWED-RESULT-2026-10-05.es.md). La revisión privada QA permanece cerrada; dos constancias anteriores se conservaron. Limitador/CSRF/retiro con JWT real siguen pendientes en Cloudflare: los resultados locales no los acreditan. El bloqueo del inspector no se corrige borrando cookies ni ampliando permisos.
+
+Antes de guardia permanente faltan aceptación remota y ciclo de vida/custodia de una identidad exclusiva y revocable con alcance definido. No reactivar el token temporal vencido, duplicar scheduler, repetir PC-off ni solicitar OTP para etapas ya aceptadas. Las secciones siguientes son registros de etapas previas; sus declaraciones de ausencia de recursos o pendientes quedan subordinadas a los recibos fechados más recientes, nunca al estado de esta nota sin inventario.
+
 ## Continuidad comprobada — 4 de octubre, 21:27 Argentina
 
 [Ciclo programado completo](AFW-SCHEDULED-CYCLE-ACCEPTANCE-2026-10-04.es.md) aceptado: tarea hosted vinculada a AFW, una list/claim/finish y correlación independiente D1 antes de recuperación sintética. [PC-off/contexto](AFW-PCOFF-CLOUD-ACCEPTANCE-2026-10-04.es.md) y [cron productor](AFW-CRON-ACCEPTANCE-2026-10-04.es.md) conservan sus alcances propios. Los pendientes de scheduler/custodia/correlación de las secciones históricas siguientes quedan sustituidos; no volver a solicitar esos accesos.
