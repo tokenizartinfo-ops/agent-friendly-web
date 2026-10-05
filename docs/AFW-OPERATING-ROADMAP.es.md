@@ -1,5 +1,7 @@
 # Roadmap operativo y continuidad de AFW
 
+4 de octubre, continuidad: [transiciones del watchdog](AFW-WATCHDOG-TRANSITIONS-2026-10-04.es.md) preparadas localmente. Estado y aviso pendiente en un batch; duplicados/observaciones antiguas no generan ruido ni retroceden el estado; pausa silenciosa sin recuperación inventada. Tablas solo en SQLite de pruebas, no aplicadas remotamente. Siguiente: lectura/registro independientes y aceptación remota sintética; después transporte, acuse y descarte de avisos obsoletos. No anunciar avisos entregados o vigilancia activa por esta preparación.
+
 4 de octubre, 21:27 Argentina: [ciclo cloud por horario aceptado](AFW-SCHEDULED-CYCLE-ACCEPTANCE-2026-10-04.es.md). Señal firmada, una reserva/diagnóstico programados y recibo independiente D1; recuperación sintética separada, accesos y automation cerrados. Demora observada4m33.8s, sin ejecución manual. [PC-off](AFW-PCOFF-CLOUD-ACCEPTANCE-2026-10-04.es.md) y [cron productor](AFW-CRON-ACCEPTANCE-2026-10-04.es.md) ya aceptados en sus propios alcances. Esto sustituye los impedimentos históricos de scheduler/custodia/correlación debajo; no demuestra vigilancia permanente. Siguiente: watchdog independiente con pausa/transiciones/avisos deduplicados, y ciclo de vida de identidad antes de periodicidad. No repetir ensayos aceptados ni pedir nuevos ingresos.
 
 ## Punto de partida vigente — 3 de octubre, recuperación
