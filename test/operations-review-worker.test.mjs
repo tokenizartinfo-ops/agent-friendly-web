@@ -41,6 +41,18 @@ test('review configuration is unrouted, disabled and pinned exclusively to opera
  assert.deepEqual(config.ratelimits,[{name:'OPERATIONS_REVIEW_RATE_LIMITER',namespace_id:'2026100502',simple:{limit:10,period:60}}]);
  assert.equal(Object.hasOwn(config.vars,'AFW_OPERATIONS_REVIEW_SUBJECT'),false);
 });
+
+test('review QA configuration isolates its synthetic database and remains closed without credentials or routes',()=>{
+ const qa=JSON.parse(readFileSync(new URL('../wrangler.operations-review-qa.jsonc',import.meta.url),'utf8'));
+ const operational=JSON.parse(readFileSync(new URL('../wrangler.operations-review.jsonc',import.meta.url),'utf8'));
+ assert.equal(qa.account_id,operational.account_id);assert.equal(qa.name,'agent-friendly-web-operations-review');assert.equal(qa.main,operational.main);
+ assert.deepEqual(qa.d1_databases,[{binding:'OPERATIONS_STATE_DB',database_name:'agent-friendly-web-review-qa-20261005',database_id:'d43b321d-a5e1-4e1a-9fe2-c63bcb0e9f46'}]);
+ assert.notEqual(qa.d1_databases[0].database_id,operational.d1_databases[0].database_id);
+ assert.equal(qa.workers_dev,false);assert.equal(qa.preview_urls,false);assert.deepEqual(qa.routes??[],[]);assert.deepEqual(qa.triggers.crons,[]);
+ assert.deepEqual(qa.vars,{AFW_OPERATIONS_REVIEW_ENABLED:'false',AFW_OPERATIONS_REVIEWS_ENABLED:'false'});
+ assert.equal(qa.ratelimits[0].simple.limit,10);assert.equal(qa.ratelimits[0].simple.period,60);
+ assert.notEqual(qa.ratelimits[0].namespace_id,operational.ratelimits[0].namespace_id);
+});
 test('real review worker maps server-only human authority and storage into the signed adapter',async()=>{
  const s=operationsDb();try{
   for(const name of ['consumer-state','watchdog-state','watchdog-inbox','notice-reservations','notice-reviews'])s.sqlite.exec(readFileSync(new URL(`../worker/operations/${name}.sql`,import.meta.url),'utf8'));
