@@ -14,4 +14,6 @@ El límite por solicitud es compartido con incidencias, pero el presupuesto diar
 
 Siguiente: coordinación del presupuesto diario, cliente cloud de listado/claim/ACK con requestId persistido y lectura/reconciliación de acuse perdido; luego publicación cerrada y único ensayo QA correlacionado. No repetir workerd/cron/PC-off/login aceptados o ampliar permisos por un badge del conector.
 
-Validación local:807/807 pruebas,0fallos; lint0errores/dos warnings previos; build completo. Ningún recurso remoto modificado.
+Revisión de tipos: RED reproducido con requestId como arreglo de UUID (503 en lugar de400). Claim y helpers ahora exigen strings antes de validar UUID; ACK HTTP ya exigía string. Regresión cubre arreglos/objetos, respuesta400 y cero reservas escritas.
+
+Validación local:808/808 pruebas,0fallos; lint0errores/dos warnings previos. Ningún recurso remoto modificado.
