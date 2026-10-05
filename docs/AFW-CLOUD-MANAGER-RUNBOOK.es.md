@@ -1,3 +1,4 @@
+Estado vigente: ciclo funcional gestionado aceptado y cerrado; ver docs/AFW-MANAGED-FUNCTIONAL-ACCEPTANCE-2026-10-05.es.md (en docs, usar el nombre del archivo). Los pendientes históricos de snapshot/CSRF/custodia/esquema no sustituyen este recibo. Siguiente: cadencia operacional con identidad gestionada, presupuesto y retirada; no guardia permanente todavía.
 # Gerente AFW: preparación de Codex Cloud
 
 ## Contrato vigente del ciclo de avisos — 5 de octubre de 2026

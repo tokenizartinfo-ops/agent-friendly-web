@@ -1,3 +1,4 @@
+Estado vigente: ciclo funcional gestionado aceptado y cerrado; ver docs/AFW-MANAGED-FUNCTIONAL-ACCEPTANCE-2026-10-05.es.md (en docs, usar el nombre del archivo). Los pendientes históricos de snapshot/CSRF/custodia/esquema no sustituyen este recibo. Siguiente: cadencia operacional con identidad gestionada, presupuesto y retirada; no guardia permanente todavía.
 # AFW: condiciones para una identidad operativa estable
 
 Estado: diseño operativo, no activación. Repositorio tokenizartinfo-ops/agent-friendly-web; receptor y manager exclusivos AFW. Los ensayos sintéticos y el snapshot no equivalen a una guardia permanente.
