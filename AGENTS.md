@@ -1,3 +1,4 @@
+- Remote foreign-form rejection accepted: docs/AFW-FOREIGN-FORM-REVIEW-2026-10-05.es.md. Actual Chrome navigation POST rejected403, synthetic journal unchanged. Final reviewd4440a3d closed/no deadline, own Accessdeny restored; fixture expired. PR274/903tests preserves API JSON and presents only navigation POST403/same_origin_required. Do not repeat accepted CSRF/snapshot/PC-off; next operational journal and stable identity lifecycle, still no permanent guard.
 # Agent Friendly Web - agent instructions
 
 ## Scope
