@@ -37,3 +37,7 @@ test('wrong request origin and a separately expired server clock fail closed',as
  assert.deepEqual(await resolveOperationsReviewOperator(await request(),config,{keySet:publicKey,now:()=>Date.now()+600000}),{ok:false});
  assert.deepEqual(await resolveOperationsReviewOperator(await request(),config,{keySet:publicKey,now:()=>NaN}),{ok:false});
 });
+test('equivalent Access domain spellings keep the same operator audit identity',async()=>{
+ const req=await request(),canonical=await resolveOperationsReviewOperator(req,config,{keySet:publicKey});
+ for(const teamDomain of ['TEST.cloudflareaccess.com','test.cloudflareaccess.com.',' test.cloudflareaccess.com '])assert.deepEqual(await resolveOperationsReviewOperator(req,{...config,teamDomain},{keySet:publicKey}),canonical);
+});

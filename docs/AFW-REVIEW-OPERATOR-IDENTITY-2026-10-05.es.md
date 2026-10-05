@@ -4,7 +4,7 @@ resolveOperationsReviewOperator en lib/operations-review-operator.mjs es un reso
 
 Requiere enabledtrue explícito, origin HTTPS de un subdominio propio exactamente configurado y sin puerto, subject humano específico y audiencia de revisión distinta de la audiencia receptora. Verifica firmaRS256/issuer mediante el verificador existente; además exige audiencia única, subject sin normalización ambigua y exp entero vigente. No acepta un servicio con sub vacío ni identidad declarada en un encabezado de email. Ante error devuelve únicamente okfalse.
 
-Una identidad verificada produce operatorId opaco mediante SHA256 de contexto propio afw-operations-review-operator-v1/equipo/audiencia/subject. La respuesta no incluye email, subject o token. El identificador separa contextos de política y no representa por sí solo permiso de reparación, envío o acceso a expedientes.
+Una identidad verificada produce operatorId opaco mediante SHA256 de contexto propio afw-operations-review-operator-v1/equipo/audiencia/subject. El equipo se normaliza igual antes de verificar y antes del hash: mayúsculas, espacios externos o punto final no fragmentan la identidad auditada. La respuesta no incluye email, subject o token. El identificador separa contextos de política y no representa por sí solo permiso de reparación, envío o acceso a expedientes.
 
 Cinco tests con claves y JWT sintéticos cubren identidad exacta/id estable/separación de audiencia, recepción/servicio/subject incorrecto/audiencias múltiples, firma/issuer/exp inválidos, configuración cerrada sin resolver claves y reloj/origin inválidos. El módulo faltante se observó en RED antes de implementarlo; suite831/831, lint cero errores/dos warnings previos y build completo. No cambios de runtime o custodia remota.
 
