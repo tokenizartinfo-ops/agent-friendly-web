@@ -41,3 +41,8 @@ test('equivalent Access domain spellings keep the same operator audit identity',
  const req=await request(),canonical=await resolveOperationsReviewOperator(req,config,{keySet:publicKey});
  for(const teamDomain of ['TEST.cloudflareaccess.com','test.cloudflareaccess.com.',' test.cloudflareaccess.com '])assert.deepEqual(await resolveOperationsReviewOperator(req,{...config,teamDomain},{keySet:publicKey}),canonical);
 });
+test('multiple trailing dots cannot be normalized twice into a different audit identity',async()=>{
+ let reads=0;const keySet=async()=>{reads++;return publicKey;};const req=await request();
+ for(const teamDomain of ['test.cloudflareaccess.com..','test.cloudflareaccess.com...'])assert.deepEqual(await resolveOperationsReviewOperator(req,{...config,teamDomain},{keySet}),{ok:false});
+ assert.equal(reads,0);
+});
