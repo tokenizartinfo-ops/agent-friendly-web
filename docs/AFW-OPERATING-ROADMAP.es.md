@@ -1,3 +1,5 @@
+5 de octubre Argentina: [plan acotado de identidad y retirada](AFW-REVIEW-ACCESS-ACCEPTANCE-PLAN-2026-10-05.es.md). Vista integrada PR260/main9ac67ed/CI37341050845;886tests. Próximo ensayo aislado con operador real, binding/CSRF y denegación con JWT todavía vigente; retirada de Access y capacidad AFW se verifican por separado. Sin mutaciones remotas.
+
 5 de octubre Argentina: [revisión guiada preparada cerrada](AFW-GUIDED-OPERATOR-REVIEW-2026-10-05.es.md). Una decisión por pantalla, guardado explícito estable y constancia persistente;886tests y navegador sintético local. Sin deploy/schema/Access remoto. Próximo identidad/política/custodia y aceptación real de limitador/CSRF/retirada antes de apertura; no repetir scheduler/PC-off.
 
 5 de octubre Argentina: [Worker humano preparado cerrado](AFW-REVIEW-WORKER-PREPARATION-2026-10-05.es.md). Entry point/config separados, JWT firmado y actor servidor ligados al journal.872 pruebas/lint/build y dry-run locales; sin despliegue ni ruta. Próximo: vista mínima de revisión, identidad/política privadas y retirada de acceso comprobada antes de apertura estable.
