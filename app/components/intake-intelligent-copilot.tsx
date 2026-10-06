@@ -5,7 +5,7 @@ import { previewIntakeDraft } from '../../lib/intake-draft-review.mjs';
 import { applyCopilotReview } from '../../lib/copilot-review-epoch.mjs';
 import { analyzeIntakeNotes } from '../../lib/intake-assistant.mjs';
 import { dossierFieldLabels, dossierValueLabel } from '../../lib/dossier-field-labels.mjs';
-import { classifyCopilotResponse } from '../../lib/copilot-ui-response.mjs';
+import { readCopilotResponseKind } from '../../lib/copilot-ui-response.mjs';
 import { defaultCopilotSelection } from '../../lib/copilot-review-selection.mjs';
 import { appendVoiceSegment } from '../../lib/intake-copilot-audio.mjs';
 import { planCopilotNextTurn } from '../../lib/copilot-next-turn.mjs';
@@ -22,6 +22,11 @@ type GoalMode = 'discover' | 'explain' | 'query' | 'act' | 'transact';
 type Result = { blocked: boolean; suggestions: Suggestion[]; warning: string; goalGuidance?: { mode: GoalMode; sourceExcerpt: string } | null };
 type Session = { version: number; basedOnRevision: number; deferred: string[]; decisions: { field: string; choice: string }[]; pending: { suggestions: Suggestion[]; goalGuidance?: Result['goalGuidance'] } | null };
 type WorkingDraft = { text: string; revision: number; session: Session };
+const authorityCopy = {
+  es: { consent: 'El permiso cambió durante la consulta. Conservá tu relato y revisá el permiso antes de volver a pedir ayuda.', projectChanged: 'El expediente cambió mientras preparaba la respuesta. Conservá tu relato; revisemos la versión actual antes de repetir la consulta.' },
+  en: { consent: 'The permission changed during this request. Keep your account and review the permission before asking again.', projectChanged: 'The dossier changed while I prepared the response. Keep your account; review the current version before asking again.' },
+  pt: { consent: 'A permissão mudou durante a consulta. Preserve seu relato e revise a permissão antes de pedir ajuda novamente.', projectChanged: 'O dossiê mudou enquanto eu preparava a resposta. Preserve seu relato; revise a versão atual antes de repetir a consulta.' },
+};
 const goalGuidanceCopy = {
   es: { intro: 'Entendí este objetivo de tu texto. Es una hipótesis para conversar, no una capacidad verificada ni una autorización.', discover: '¿Qué deberían poder encontrar primero los visitantes o asistentes?', explain: '¿Qué información necesitás explicar con claridad antes de avanzar?', query: '¿Qué datos concretos deberían poder consultar y quién puede verlos?', act: '¿Qué acción querés permitir, quién la autoriza y cómo se revierte?', transact: '¿Qué operación querés ofrecer y qué controles necesitaría antes de habilitarla?' },
   en: { intro: 'I understood this goal from your text. It is a discussion hypothesis, not a verified capability or permission.', discover: 'What should visitors or assistants find first?', explain: 'What information needs a clear explanation first?', query: 'Which specific data should be queryable, and who may see it?', act: 'Which action should be possible, who authorizes it, and how can it be reversed?', transact: 'Which transaction do you want to offer, and what controls would it need first?' },
@@ -229,8 +234,9 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
     try {
       const response = await fetch(`/api/projects/${encodeURIComponent(projectId)}/copilot/audio`, { method: 'POST', cache: 'no-store', headers: { 'content-type': clip.type, 'x-afw-locale': locale, 'x-afw-processing-consent': 'afw-copilot-processing-v1' }, body: clip, signal: controller.signal });
       if (controller.signal.aborted || epoch !== requestEpoch.current) return;
-      const kind = classifyCopilotResponse(response);
-      if (kind !== 'ok') { setAudioStatus(kind === 'rate_limited' ? t.rateLimited : kind === 'session' ? t.session : kind === 'project_unavailable' ? t.projectUnavailable : v.failed); return; }
+      const kind = await readCopilotResponseKind(response);
+      if (controller.signal.aborted || epoch !== requestEpoch.current) return;
+      if (kind !== 'ok') { if (kind === 'consent') setProjectConsent('error'); setAudioStatus(kind === 'consent' ? authorityCopy[locale].consent : kind === 'project_changed' ? authorityCopy[locale].projectChanged : kind === 'rate_limited' ? t.rateLimited : kind === 'session' ? t.session : kind === 'project_unavailable' ? t.projectUnavailable : v.failed); return; }
       const answer = await response.json() as { text: string };
       if (controller.signal.aborted || epoch !== requestEpoch.current) return;
       setTranscriptDraft(answer.text); clearClip();
@@ -278,9 +284,11 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
         body: JSON.stringify({ locale, notes, processingConsentVersion: 'afw-copilot-processing-v1' }),
       });
       if (!isCurrent()) return;
-      const responseKind = classifyCopilotResponse(response);
+      const responseKind = await readCopilotResponseKind(response);
+      if (!isCurrent()) return;
       if (responseKind !== 'ok') {
-        setStatus(responseKind === 'rate_limited' ? t.rateLimited : responseKind === 'session' ? t.session
+        if (responseKind === 'consent') setProjectConsent('error');
+        setStatus(responseKind === 'consent' ? authorityCopy[locale].consent : responseKind === 'project_changed' ? authorityCopy[locale].projectChanged : responseKind === 'rate_limited' ? t.rateLimited : responseKind === 'session' ? t.session
           : responseKind === 'project_unavailable' ? t.projectUnavailable : t.unavailable);
         return;
       }

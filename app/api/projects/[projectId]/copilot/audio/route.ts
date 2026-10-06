@@ -7,6 +7,8 @@ import { currentCopilotConsent } from '../../../../../../lib/copilot-consent';
 import { isCopilotProjectAllowed } from '../../../../../../lib/copilot-rollout.mjs';
 import { MAX_VOICE_BYTES, reviewVoiceTranscript, validateVoiceUpload } from '../../../../../../lib/intake-copilot-audio.mjs';
 
+import { createCopilotResponseGuard } from '../../../../../../lib/copilot-response-guard.mjs';
+
 type Context = { params: Promise<{ projectId: string }> };
 const headers = { 'cache-control': 'no-store' };
 const reply = (code: string, status: number) => Response.json({ code }, { status, headers });
@@ -18,7 +20,7 @@ export async function POST(request: Request, context: Context) {
   if (request.headers.get('origin') !== new URL(request.url).origin) return reply('invalid_origin', 403);
   const { projectId } = await context.params;
   if (!isCopilotProjectAllowed({ enabled: true, allowedProjectId: env.AFW_COPILOT_PROJECT_ID, projectId })) return reply('project_unavailable', 404);
-  const [project] = await getDb().select({ id: siteProjects.id }).from(siteProjects)
+  const [project] = await getDb().select({ id: siteProjects.id, revision: siteProjects.revision }).from(siteProjects)
     .where(and(eq(siteProjects.id, projectId), eq(siteProjects.userId, user.userId))).limit(1);
   if (!project) return reply('project_unavailable', 404);
   if (request.headers.get('x-afw-processing-consent') !== 'afw-copilot-processing-v1') return reply('processing_consent_required', 400);
@@ -31,6 +33,8 @@ export async function POST(request: Request, context: Context) {
   try {
     const consent = await currentCopilotConsent(projectId, user.userId);
     if (!consent.granted) return reply('project_consent_required', 403);
+    const guard = await createCopilotResponseGuard(env, { projectId, userId: user.userId, revision: project.revision }, getCloudflareAccessUser);
+    if (!guard.ok) return reply(guard.code, guard.status);
     const { success } = await env.COPILOT_RATE_LIMIT.limit({ key: user.userId });
     if (!success) return Response.json({ code: 'copilot_rate_limited' }, { status: 429, headers: { ...headers, 'retry-after': '60' } });
     const reader = request.body?.getReader();
@@ -46,9 +50,13 @@ export async function POST(request: Request, context: Context) {
     }
     if (!validateVoiceUpload(contentType, size).ok) return reply('invalid_audio', 400);
     const binary = chunks.map(chunk => Array.from(chunk, byte => String.fromCharCode(byte)).join('')).join('');
+    const beforeInference = await guard.check();
+    if (!beforeInference.ok) return reply(beforeInference.code, beforeInference.status);
     const transcript = await env.AI.run('@cf/openai/whisper-large-v3-turbo', {
       audio: btoa(binary), task: 'transcribe', vad_filter: true,
     });
+    const beforeDelivery = await guard.check();
+    if (!beforeDelivery.ok) return reply(beforeDelivery.code, beforeDelivery.status);
     const reviewed = reviewVoiceTranscript(transcript, locale);
     if ('code' in reviewed && typeof reviewed.code === 'string') return reply(reviewed.code, 422);
     return Response.json(reviewed, { headers });
