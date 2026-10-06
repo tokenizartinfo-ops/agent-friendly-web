@@ -1,0 +1,31 @@
+'use client';
+import {useEffect,useRef,useState} from 'react';
+import {createAssistanceAttempt,readAssistanceResponse} from '../../lib/dossier-assistance-client.mjs';
+type Receipt={id:string;requestedAt:string;revision:number;topic:string;state:string;stale:boolean};
+type Props={projectId:string;revision:number;canRequest:boolean;locale:'es'|'en'|'pt';request:typeof fetch};
+const copy={
+ es:{title:'¿En qué parte te ayudo?',intro:'Elegí una parte. Tu pedido quedará en el expediente y podés seguir a tu ritmo.',topics:['Orientarme','Guardar cambios','Comparar archivos','Entregar mejoras'],send:'Guardar pedido de ayuda',retry:'Reintentar el mismo pedido',saving:'Guardando tu pedido…',received:'Tu pedido quedó guardado. Podés seguir con el expediente; este recibo todavía no confirma una revisión.',stale:'El expediente cambió después de este pedido.',error:'No pude confirmar el recibo. Reintentemos el mismo pedido para evitar duplicarlo.',unready:'Primero confirmemos el guardado del expediente. Tus cambios siguen en la pantalla.',readError:'No pude consultar tu último pedido. Volvé a consultar antes de crear otro.',refresh:'Consultar último pedido'},
+ en:{title:'Where can I help?',intro:'Choose one part. Your request will stay in the dossier, and you can continue at your own pace.',topics:['Find my way','Save changes','Compare files','Deliver improvements'],send:'Save help request',retry:'Retry the same request',saving:'Saving your request…',received:'Your request is saved. You can continue; this receipt does not yet confirm a review.',stale:'The dossier changed after this request.',error:'I could not confirm the receipt. Retry the same request to avoid a duplicate.',unready:'First, let us confirm the dossier is saved. Your changes remain on screen.',readError:'I could not check your latest request. Check again before creating another.',refresh:'Check latest request'},
+ pt:{title:'Em qual parte posso ajudar?',intro:'Escolha uma parte. Seu pedido ficará no dossiê e você pode continuar no seu ritmo.',topics:['Me orientar','Salvar alterações','Comparar arquivos','Entregar melhorias'],send:'Salvar pedido de ajuda',retry:'Repetir o mesmo pedido',saving:'Salvando seu pedido…',received:'Seu pedido foi salvo. Você pode continuar; este recibo ainda não confirma uma revisão.',stale:'O dossiê mudou depois deste pedido.',error:'Não pude confirmar o recibo. Vamos repetir o mesmo pedido para evitar duplicação.',unready:'Primeiro, vamos confirmar que o dossiê foi salvo. Suas alterações continuam na tela.',readError:'Não pude consultar seu último pedido. Consulte novamente antes de criar outro.',refresh:'Consultar último pedido'}
+};
+export function DossierAssistance({projectId,revision,canRequest,locale,request}:Props){
+ const text=copy[locale],topics=['orientation','save','comparison','delivery'];
+ const [topic,setTopic]=useState('orientation'),[receipt,setReceipt]=useState<Receipt|null>(null),[state,setState]=useState('loading');
+ const [attempt]=useState(()=>createAssistanceAttempt());const lock=useRef(false),mounted=useRef(true);
+ const [blockedRevision,setBlockedRevision]=useState<number|null>(null);
+ const viewState=state==='changed'&&revision!==blockedRevision?'ready':state;
+ useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;};},[]);
+
+ async function refresh(){if(lock.current)return;lock.current=true;setState('loading');try{const value=await readAssistanceResponse(await request(`/api/projects/${projectId}/assistance`,{cache:'no-store'}),{allowEmpty:true});if(mounted.current){setReceipt(value);setState('ready');}}catch{if(mounted.current)setState('read-error');}finally{lock.current=false;}}
+ useEffect(()=>{const abort=new AbortController();let current=true;void request(`/api/projects/${projectId}/assistance`,{cache:'no-store',signal:abort.signal}).then(r=>readAssistanceResponse(r,{allowEmpty:true})).then(value=>{if(current){setReceipt(value);setState('ready');}}).catch(()=>{if(current)setState('read-error');});return()=>{current=false;abort.abort();};},[projectId,request]);
+ async function send(){if(lock.current||!canRequest||['loading','read-error','changed'].includes(viewState))return;lock.current=true;setState('saving');const init=attempt.prepare(projectId,revision,topic);try{const value=await readAssistanceResponse(await request(`/api/projects/${projectId}/assistance`,init),{expected:JSON.parse(init.body)});if(mounted.current){attempt.confirm();setReceipt(value);setState('ready');}}catch(error){if(mounted.current){if((error as {code?:string}).code==='project_changed'){setBlockedRevision(JSON.parse(init.body).expectedRevision);attempt.confirm();setState('changed');}else setState('send-error');}}finally{lock.current=false;}}
+ return <details id="dossier-help" className="dossier-assistant dossier-assistance"><summary>{text.title}</summary><p>{text.intro}</p>
+  <p role="status" aria-live="polite">{viewState==='saving'?text.saving:viewState==='send-error'?text.error:viewState==='read-error'?text.readError:viewState==='changed'?locale==='es'?'Revisemos la versión guardada del expediente antes de crear otro pedido.':locale==='en'?'Let us check the saved dossier version before creating another request.':'Vamos revisar a versão salva do dossiê antes de criar outro pedido.':receipt?text.received:null}</p>
+  {receipt?<p><time dateTime={receipt.requestedAt}>{new Intl.DateTimeFormat(locale,{dateStyle:'medium',timeStyle:'short'}).format(new Date(receipt.requestedAt))}</time>{receipt.stale||receipt.revision!==revision?` · ${text.stale}`:null}</p>:null}
+  {viewState==='read-error'?<button type="button" onClick={()=>void refresh()}>{text.refresh}</button>:<>
+   {!receipt||receipt.revision!==revision||viewState==='send-error'?<><label>{text.title} <select value={topic} onChange={e=>setTopic(e.target.value)} disabled={['send-error','saving','loading','changed'].includes(viewState)}>{topics.map((value,index)=><option key={value} value={value}>{text.topics[index]}</option>)}</select></label><button type="button" disabled={!canRequest||['saving','loading','changed'].includes(viewState)} onClick={()=>void send()}>{viewState==='send-error'?text.retry:text.send}</button></>:null}
+   {!canRequest?<p>{text.unready}</p>:null}
+  </>}
+ </details>;
+}
+

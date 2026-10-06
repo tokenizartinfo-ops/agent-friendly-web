@@ -38,6 +38,7 @@ import { revealDossierDelivery } from '../../lib/dossier-delivery-navigation.mjs
 
 import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
 import { reconcileSavedDraft } from '../../lib/project-save-reconciliation.mjs';
+import { DossierAssistance } from './dossier-assistance';
 
 type Intake = {
   organization: string; website: string; role: string; siteType: string; control: string;
@@ -137,7 +138,7 @@ function claimFailureMessage(payload: ClaimPayload, locale: Locale) {
   return localizedMessage(locale, 'El dominio todavía no pudo verificarse.', 'The domain could not be verified yet.', 'O domínio ainda não pôde ser verificado.');
 }
 
-export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal, copilotEnabled = false, copilotProjectId = '' }: { userName: string; userEmail: string; locale?: Locale; rehearsal?: { request: typeof fetch; autoSave?: boolean }; copilotEnabled?: boolean; copilotProjectId?: string }) {
+export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal, copilotEnabled = false, copilotProjectId = '', assistanceEnabled = false, assistanceProjectId = '' }: { userName: string; userEmail: string; locale?: Locale; rehearsal?: { request: typeof fetch; autoSave?: boolean }; copilotEnabled?: boolean; copilotProjectId?: string; assistanceEnabled?: boolean; assistanceProjectId?: string }) {
   const request = rehearsal?.request || fetch;
   const [autosavePaused, setAutosavePaused] = useState(false);
   const [manualBusy, setManualBusy] = useState(false);
@@ -465,6 +466,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
 
   const historyComparison=compareObservationHistory(currentObservations.history);
   const pilotCopilot = isCopilotProjectAllowed({ enabled: copilotEnabled, allowedProjectId: copilotProjectId, projectId }) && !rehearsal;
+  const assistanceAvailable = isCopilotProjectAllowed({enabled:assistanceEnabled,allowedProjectId:assistanceProjectId,projectId}) && !rehearsal;
   const guidedView = isGuidedPilotView({ pilot: pilotCopilot, guidedEntry: true, loaded, requested: guidedViewRequested, conflict: Boolean(conflictReview), sessionRequired });
   const updatesReadState=dossierUpdatesReadState({projectId,website:savedWebsite,ready:observationReadReady,failure:observationReadFailure});
   function retrySavedObservationRead(){
@@ -479,7 +481,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const updates = dossierUpdates({ website: savedWebsite, history: currentObservations.history, monitoringPreference: savedSnapshot.monitoringPreference,readState:updatesReadState });
   return (
     <div className={guidedView ? 'intake-layout guided-pilot' : 'intake-layout'}>
-      <a className="dossier-help-dock" href={guidedView && pilotCopilot ? '#dossier-copilot' : '#dossier-assistant'} onClick={()=>{const panel=document.getElementById(guidedView ? 'dossier-copilot' : 'dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
+      <a className="dossier-help-dock" href={assistanceAvailable?'#dossier-help':guidedView && pilotCopilot ? '#dossier-copilot' : '#dossier-assistant'} onClick={()=>{const panel=document.getElementById(assistanceAvailable?'dossier-help':guidedView ? 'dossier-copilot' : 'dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
       {exitTarget && <DraftExitDialog locale={locale} saving={manualBusy} onStay={() => setExitTarget(null)} onSaveLeave={async () => {
         if (workingPending && !(await workingSave.current?.())) return false;
         const saved = hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
@@ -492,6 +494,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         window.location.assign(exitTarget);
       }} />}
       <main className="intake-main">
+        {assistanceAvailable?<DossierAssistance key={projectId} projectId={projectId} revision={scopeRevision} canRequest={Boolean(loaded&&scopeRevision>0&&!unconfirmedChanges&&!conflictReview&&!sessionRequired&&status!=='saving'&&!workingPending)} locale={locale} request={request}/>:null}
         <fieldset disabled={Boolean(manualBusy || conflictReview || !loaded)} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
         <div className="page-title">
           <span>{copy.pageEyebrow}</span>

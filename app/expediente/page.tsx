@@ -22,11 +22,12 @@ export async function DossierExperience({ locale = 'es', searchParams }: Dossier
   if (!returnPath) notFound();
   const projectId = typeof project === 'string' ? project : undefined;
   const user = await requireCloudflareAccessUser(returnPath);
+  const assistanceSettings=env as unknown as Record<string,unknown>;
   return (
     <main lang={locale}>
       <SiteHeader routeKey="dossier" locale={locale} projectId={projectId} />
       <div className="account-bar">{copy.privateSession}: <strong>{user.email}</strong><a href={cloudflareAccessSignOutPath()}>{copy.signOut}</a></div>
-      <IntakeWorkspace userName={user.displayName} userEmail={user.email} locale={locale} copilotEnabled={String(env.AFW_COPILOT_ENABLED) === 'true'} copilotProjectId={env.AFW_COPILOT_PROJECT_ID} />
+      <IntakeWorkspace userName={user.displayName} userEmail={user.email} locale={locale} copilotEnabled={String(env.AFW_COPILOT_ENABLED) === 'true'} copilotProjectId={env.AFW_COPILOT_PROJECT_ID} assistanceEnabled={assistanceSettings.AFW_ASSISTANCE_ENABLED==='true'} assistanceProjectId={typeof assistanceSettings.AFW_ASSISTANCE_PROJECT_ID==='string'?assistanceSettings.AFW_ASSISTANCE_PROJECT_ID:''} />
     </main>
   );
 }
