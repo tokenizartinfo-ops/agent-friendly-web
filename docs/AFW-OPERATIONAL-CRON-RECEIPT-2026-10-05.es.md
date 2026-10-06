@@ -1,5 +1,7 @@
 # AFW: ensayo del productor operacional cerrado sin ejecución confirmada
 
+Recibo histórico del primer ensayo. El bloque posterior obtuvo ejecución automática, entrega firmada, deduplicación, watchdog saludable y lectura operacional cloud; ver AFW-OPERATIONAL-POSITIVE-ACCEPTANCE-2026-10-05.es.md. Esta actualización no convierte retroactivamente el primer ensayo en exitoso ni identifica una causa interna de Cloudflare.
+
 ## Alcance
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT operacional acotado; ORIGIN operations.agentfriendlyweb.dev y Workers sin ruta productor/watchdog; RESOURCE_TYPE Workers/crons/firma temporal/D1; RESOURCE_ID agent-friendly-web-operations, agent-friendly-web-operations-producer y agent-friendly-web-operations-watchdog; ALLOWED_ACTION observar únicamente los dos bordes públicos delegados, entregar señales firmadas y retirar la ventana; ROLLBACK flagsfalse, sin deadline ni cron y retirar firma temporal, preservando D1original603c471d-19bb-4530-9773-c02e18b29840. Sin expedientes, correo, datos de clientes o cambios en sus sitios.
