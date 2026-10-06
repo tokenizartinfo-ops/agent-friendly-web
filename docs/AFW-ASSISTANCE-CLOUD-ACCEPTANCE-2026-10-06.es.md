@@ -41,4 +41,3 @@ Cierre independiente: tres Workers con flags de ejecución false, sin deadline n
 Siguiente bloque: cliente de asistencia versionado para evitar helpers ad hoc; después respuesta visible en aplicación y repregunta con contexto privado consentido y revocable. No repetir esta entrega ni reservar de nuevo el evento reviewed.
 
 Retirada final real: 2026-10-06T20:28:34.075Z, único GET /assistance devolvió 401 unauthorized desde la tarea cloud existente; sin POST, reintento ni reactivación. Criterio de cierre cumplido para entrega/revisión/retirada operacional de metadata.
-
