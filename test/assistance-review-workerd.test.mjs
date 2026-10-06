@@ -6,6 +6,8 @@ import {readFileSync} from 'node:fs';
 import {generateKeyPair,exportJWK,SignJWT} from 'jose';
 import {projectAssistanceSignal} from '../lib/assistance-supervision-contract.mjs';
 import {recordAssistanceEvent} from '../lib/assistance-supervision-delivery.mjs';
+import {claimAssistanceSignal} from '../lib/assistance-supervision-review.mjs';
+import {projectDossierEvent,recordDossierEvent,claimDossierSignal} from '../lib/dossier-supervision.mjs';
 test('native authenticated help review recovers a lost claim, finishes once and denies withdrawal',async()=>{
  const time=Date.now(),origin='https://operations-manager.agentfriendlyweb.dev';
  const {privateKey,publicKey}=await generateKeyPair('RS256'),jwk=await exportJWK(publicKey);
@@ -34,6 +36,10 @@ test('native authenticated help review recovers a lost claim, finishes once and 
   assert.deepEqual(await(await call('/assistance/finish',{runId:reservation.runId,outcome:'reviewed'})).json(),{outcome:'reviewed'});
   assert.deepEqual(await(await call('/assistance/finish',{runId:reservation.runId,outcome:'reviewed'})).json(),{outcome:'reviewed'});
   assert.deepEqual(await(await call('/assistance')).json(),{signals:[]});
+  const nextHelp={...signal,eventId:'b'.repeat(64)};await recordAssistanceEvent(db,nextHelp,time);
+  const saved=await projectDossierEvent({id:'synthetic-save',projectId:'qa-project',type:'project_updated',revision:3,createdAt:new Date(time).toISOString()},'synthetic-native-help-review-secret-minimum-32');await recordDossierEvent(db,saved,time);
+  const concurrent=await Promise.all([claimAssistanceSignal(db,nextHelp.eventId,crypto.randomUUID(),time),claimDossierSignal(db,saved.eventId,crypto.randomUUID(),time,{sharedBudget:true,sharedAssistanceBudget:true})]);
+  assert.equal(concurrent.filter(Boolean).length,1);
   await call('/qa-close');assert.equal((await call('/assistance')).status,404);
  }finally{await runtime.dispose();}
 });
