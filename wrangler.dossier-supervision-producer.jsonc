@@ -1,0 +1,12 @@
+{
+ "$schema":"node_modules/wrangler/config-schema.json",
+ "account_id":"85d0d5dadac3341a564f22ce885e9eec",
+ "name":"agent-friendly-web-dossier-supervision-producer",
+ "main":"worker/dossier-supervision-producer/index.mjs",
+ "compatibility_date":"2026-09-07",
+ "compatibility_flags":["nodejs_compat","global_fetch_strictly_public"],
+ "workers_dev":false,"preview_urls":false,"observability":{"enabled":false},
+ "vars":{"AFW_DOSSIER_SUPERVISION_ENABLED":"false","AFW_DOSSIER_ENROLLMENTS":"[]"},
+ "services":[{"binding":"DOSSIER_RECEIVER","service":"agent-friendly-web-operations"}],
+ "triggers":{"crons":[]}
+}
