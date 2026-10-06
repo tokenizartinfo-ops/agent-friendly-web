@@ -1,6 +1,6 @@
 # AFW: entrega durable de pedidos de ayuda
 
-Proyecto AFW; preparación local del 6 de octubre. No activación, migración remota, inscripción de clientes ni guardia por esta implementación.
+Proyecto AFW; implementación y publicación cerrada del 6 de octubre. No activación, migración remota, inscripción de clientes ni guardia por esta implementación.
 
 ## Resultado
 
@@ -18,7 +18,15 @@ El productor envía como máximo tres intentos por ejecución, fuera del camino 
 
 `wrangler.assistance-supervision-producer.jsonc` prepara Worker separado, sin rutas, workers.dev, preview, crons, D1 o inscripción por defecto. Secreto y enrollment quedan en custodia de servidor; `AFW_ASSISTANCE_ENROLLMENTS` no figura en vars. Nuevo handler del receptor operacional solo acepta la ruta al habilitar el control específico. Todos los recursos remotos siguen con el estado previo cerrado.
 
-Trece pruebas específicas pasaron: firma, cuerpo/origen/ruta, propietario inicial y cambiado durante selección/envío, cierre, confirmación inesperada, colisión, lote acotado, contenido privado inválido y recuperación nativa workerd/D1 con dos pedidos en una revisión. La regresión de cambio de propietario falló antes de agregar la lectura justo antes del transporte. Lint acotado comprobado separadamente; CI integral debe pasar antes de merge.
+Trece pruebas específicas pasaron: firma, cuerpo/origen/ruta, propietario inicial y cambiado durante selección/envío, cierre, confirmación inesperada, colisión, lote acotado, contenido privado inválido y recuperación nativa workerd/D1 con dos pedidos en una revisión. Las regresiones de cambio de propietario y alteración de tipo/fecha fallaron antes de corregir las comprobaciones. PR301 merged `140e9204c65fecff4122e0919dd9f5d625644064`; CI37508398477 pasó966/966 pruebas, lint y build.
+
+## Publicación cerrada verificada
+
+A las18:07 UTC: receptor `agent-friendly-web-operations`, versión `33ce77f8-8652-487c-999c-78159ce95a15` al100%; original D1 `603c471d-19bb-4530-9773-c02e18b29840`, flagfalse, sin ventana ni cron. Conservados los nombres de los dos secretos del circuito previo; sin leer sus valores ni preparar nuevos para ayuda. POST anónimo de ensayo a `/assistance-events` devolvió503 `{error:paused}` y no-store.
+
+Productor nuevo `agent-friendly-web-assistance-supervision-producer`, versión `6c628bcd-34bd-4748-b5c2-3d998cd8c58b` al100%; flagfalse, service binding al receptor AFW, sin DB, secretos, ventana, rutas, workers.dev, preview o cron. Ambos empaquetados dry-run pasaron antes de publicar desde la fuente merged limpia. No se aplicaron los SQL a bases remotas.
+
+Rollback receptor: `3c7dc696-0afc-44b6-a3e7-778cd4fb9467`, preservando D1/custodia y flags cerrados. Productor nuevo: conservarlo deshabilitado y sin rutas/calendario; no borrar datos o recibos como parte de una reversión.
 
 ## Próximos bloques y reversión
 
