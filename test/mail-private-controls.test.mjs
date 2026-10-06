@@ -6,6 +6,7 @@ import { operationsDb } from './fixtures/operations-db.mjs';
 import { storeMailContent } from '../lib/mail-custody.mjs';
 import { prepareMail } from '../lib/mail-outbox.mjs';
 import { createMailPrivateControls } from '../lib/mail-private-controls.mjs';
+import { brandedMessage } from './fixtures/branded-mail.mjs';
 const {privateKey,publicKey}=await generateKeyPair('RS256');
 const config={enabled:true,origin:'https://mail-ops.agentfriendlyweb.dev',teamDomain:'test.cloudflareaccess.com',audience:'mail-only',subject:'operator-1'};
 async function setup() {
@@ -58,4 +59,20 @@ test('review distinguishes missing and retired content without exposing stored h
   assert.equal((await handle(request('/review/missing'))).status,404);
   await db.prepare("UPDATE mail_content SET content_json='' WHERE reply_key='reply-1'").run();
   assert.equal((await handle(request('/review/reply-1'))).status,410);
+});
+
+test('brand preview requires the pinned operator and preserves the reviewed approval hash',async()=>{
+  const {db,handle,request}=await setup(),content=await brandedMessage();
+  const hash=await storeMailContent(db,'brand-1',content);
+  await prepareMail(db,{key:'brand-1',sourceRef:'source-brand',contentHash:hash},100);
+  assert.equal((await handle(new Request(config.origin+'/preview/brand-1'))).status,401);
+  const preview=await handle(request('/preview/brand-1'));
+  assert.equal(preview.status,200);
+  assert.match(await preview.text(),/data:image\/png;base64/);
+  assert.equal((await handle(request('/preview/reply-1'))).status,404);
+  const review=await (await handle(request('/review/brand-1'))).json();
+  assert.deepEqual(review.content,content);assert.equal(review.contentHash,hash);
+  assert.equal((await handle(request('/approve',{key:'brand-1',contentHash:hash}))).status,201);
+  assert.equal((await handle(request('/revoke',{key:'brand-1'}))).status,200);
+  assert.equal((await db.prepare('SELECT state FROM mail_outbox WHERE reply_key=?').bind('brand-1').first()).state,'cancelled');
 });

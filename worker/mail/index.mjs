@@ -13,7 +13,7 @@ const mailWorker = {
     }
     if(origin===env.MAIL_SERVICE_ORIGIN && env.MAIL_SERVICE_ENABLED==='true') {
       if(!env.MAIL_DB)return unavailable();
-      return createMailServiceControls({db:env.MAIL_DB,email:env.EMAIL,limiter:env.MAIL_RATE_LIMITER,config:{enabled:true,origin:env.MAIL_SERVICE_ORIGIN,teamDomain:env.MAIL_ACCESS_TEAM_DOMAIN,audience:env.MAIL_SERVICE_AUDIENCE,operatorAudience:env.MAIL_OPERATOR_AUDIENCE,clientId:env.MAIL_SERVICE_CLIENT_ID}})(request);
+      return createMailServiceControls({db:env.MAIL_DB,email:env.EMAIL,limiter:env.MAIL_RATE_LIMITER,config:{enabled:true,brandEnabled:env.MAIL_BRAND_ENABLED==='true',origin:env.MAIL_SERVICE_ORIGIN,teamDomain:env.MAIL_ACCESS_TEAM_DOMAIN,audience:env.MAIL_SERVICE_AUDIENCE,operatorAudience:env.MAIL_OPERATOR_AUDIENCE,clientId:env.MAIL_SERVICE_CLIENT_ID}})(request);
     }
     return unavailable();
   },

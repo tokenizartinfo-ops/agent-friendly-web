@@ -34,3 +34,18 @@ test('review interaction displays hostile text inertly and does not retry a fail
   assert.equal(nodes.approve.disabled,true);
   assert.match(nodes.status.textContent,/No pude confirmar/);
 });
+
+test('brand review cannot approve when its exact visual preview cannot be loaded',async()=>{
+  const html=await mailReviewPage('reply-1').text();
+  const nodes=Object.fromEntries(['status','message','to','subject','text','preview','brand-note','approve','revoke','refresh'].map(id=>[id,{disabled:false,hidden:true,textContent:'',removeAttribute(){}}]));
+  const calls=[];
+  runInNewContext(html.match(/<script nonce="[^"]+">([\s\S]*?)<\/script>/)[1],{
+    document:{getElementById:id=>nodes[id]},
+    fetch:async path=>{calls.push(path);return path.startsWith('/review/')?{ok:true,json:async()=>({state:'draft',contentHash:'a'.repeat(64),content:{to:'own@example.com',subject:'Own',text:'Alternative',brand:{version:'afw-comic-panels-v1'}}})}:{ok:false};},
+  });
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.deepEqual(calls,['/review/reply-1','/preview/reply-1']);
+  assert.equal(nodes.approve.disabled,true);
+  assert.equal(nodes.preview.hidden,true);
+  assert.match(nodes.status.textContent,/No pude confirmar/);
+});

@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { operationsDb } from './fixtures/operations-db.mjs';
 import { prepareMail, approveMail } from '../lib/mail-outbox.mjs';
 import { mailContentHash, consumeApprovedMail } from '../lib/mail-consumer.mjs';
+import { brandedMessage } from './fixtures/branded-mail.mjs';
 
 const message = () => ({ to: 'owner@example.com', subject: 'AFW test', text: 'Synthetic test' });
 async function setup() {
@@ -60,4 +61,19 @@ test('provider that never responds times out without releasing the send for retr
   assert.deepEqual(await consumeApprovedMail(options), { state: 'uncertain' });
   await consumeApprovedMail(options); assert.equal(sends, 1);
   resolveSend({ messageId: '<late@example.com>' });
+});
+
+test('branded delivery stays blocked by default and consumes exact approved assets once when explicitly enabled',async()=>{
+  const {db,sqlite}=operationsDb();sqlite.exec(readFileSync(new URL('../worker/mail/schema.sql',import.meta.url),'utf8'));
+  const content=await brandedMessage(),hash=await mailContentHash(content);
+  await prepareMail(db,{key:'reply-1',sourceRef:'source-1',contentHash:hash},100);
+  await approveMail(db,'reply-1',hash,'decision-1',101);
+  const sent=[],options=deps(db,content,{email:{send:async value=>{sent.push(value);return {messageId:'<brand@example.com>'};}}});
+  assert.equal((await consumeApprovedMail(options)).state,'blocked');
+  assert.equal(sent.length,0);
+  assert.equal((await db.prepare('SELECT state FROM mail_outbox').first()).state,'approved');
+  assert.equal((await consumeApprovedMail({...options,allowBrand:true})).state,'accepted');
+  assert.deepEqual(sent[0],content.brand.message);
+  assert.equal((await consumeApprovedMail({...options,allowBrand:true})).state,'not_claimed');
+  assert.equal(sent.length,1);
 });

@@ -6,19 +6,33 @@ import { operationsDb } from './fixtures/operations-db.mjs';
 import { storeMailContent,storeMailDecision } from '../lib/mail-custody.mjs';
 import { prepareMail,approveMail } from '../lib/mail-outbox.mjs';
 import { createMailServiceControls } from '../lib/mail-service-controls.mjs';
+import { brandedMessage } from './fixtures/branded-mail.mjs';
 const {privateKey,publicKey}=await generateKeyPair('RS256');
 const config={enabled:true,origin:'https://mail-consumer.agentfriendlyweb.dev',teamDomain:'test.cloudflareaccess.com',audience:'consumer-only',operatorAudience:'operator-only',clientId:'synthetic-client.access'};
 async function token(claims={common_name:config.clientId},audience=config.audience,subject=''){
   return new SignJWT({type:'app',...claims}).setProtectedHeader({alg:'RS256'}).setIssuer('https://'+config.teamDomain).setAudience(audience).setSubject(subject).setExpirationTime('5m').sign(privateKey);
 }
-async function setup() {
+async function setup(message={to:'owner@example.com',subject:'Synthetic',text:'Approved'}) {
   const {db,sqlite}=operationsDb();sqlite.exec(readFileSync(new URL('../worker/mail/schema.sql',import.meta.url),'utf8'));
-  const hash=await storeMailContent(db,'reply-1',{to:'owner@example.com',subject:'Synthetic',text:'Approved'});
+  const hash=await storeMailContent(db,'reply-1',message);
   await prepareMail(db,{key:'reply-1',sourceRef:'source-1',contentHash:hash},100);
   await storeMailDecision(db,{key:'reply-1',contentHash:hash,decisionRef:'decision-1',actorRef:'actor-1',expiresAt:200},100);
   await approveMail(db,'reply-1',hash,'decision-1',100);
   return db;
 }
+
+test('service brand promotion is server-only and preserves the exact approved payload',async()=>{
+  const content=await brandedMessage(),db=await setup(content),sent=[];
+  const options={db,config,keySet:publicKey,now:()=>101,limiter:{limit:async()=>({success:true})},email:{send:async value=>{sent.push(value);return {messageId:'<brand@example.com>'};}}};
+  const jwt=await token(),request=()=>new Request(config.origin+'/consume/reply-1',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':jwt}});
+  assert.equal((await (await createMailServiceControls(options)(request())).json()).state,'blocked');
+  assert.equal(sent.length,0);
+  const handle=createMailServiceControls({...options,config:{...config,brandEnabled:true}});
+  assert.equal((await (await handle(request())).json()).state,'accepted');
+  assert.deepEqual(sent[0],content.brand.message);
+  assert.equal((await (await handle(request())).json()).state,'not_claimed');
+  assert.equal(sent.length,1);
+});
 test('service can consume an approved key once using bound custody and provider',async()=>{
   const db=await setup();let sends=0;
   const handle=createMailServiceControls({db,config,keySet:publicKey,now:()=>101,limiter:{limit:async()=>({success:true})},email:{send:async()=>{sends++;return {messageId:'<synthetic@example.com>'};}}});
