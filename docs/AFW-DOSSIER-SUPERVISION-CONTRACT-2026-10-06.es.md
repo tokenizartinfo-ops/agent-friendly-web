@@ -35,3 +35,15 @@ El chat cloud AFW `01a11150-19b6-716d-8b13-f5769d743034` inventarió sus herrami
 La observación operacional no es una orden de cambio. El gerente registra la fricción con referencia opaca, evidencia fechada y comportamiento esperado; separa hipótesis de causa confirmada. Reproduce con datos sintéticos, propone un diff y valida pruebas proporcionales. Una corrección pasa por revisión, despliegue con rollback y comprobación posterior antes de cerrar el incidente. Los cambios legales, históricos, de consentimiento o alcance mantienen controles específicos. El Fix-Center arquitectónico solo recibe aprendizaje técnico saneado, nunca el expediente o transcripción del cliente.
 
 La siguiente capa deberá incluir solicitudes de ayuda y fallos operativos explícitos, además de estos eventos de guardado; y un servicio de lectura consentida para repreguntas dentro de AFW. Este primer puente no completa esas funciones ni acredita acompañamiento permanente.
+
+## Publicación cerrada y siguiente aceptación
+
+PR292 integrada en `d770e1fd23b661c306437cd3e0ae32af6711b226`; CI `37489047007` pasó. Upload local desde `506c2af7e9068bbdc0816e53a4d353ca0dcd5980`, comparado sin diferencias de código lib/worker/config con el merge.
+
+Lectura API posterior al deploy el 6 octubre confirmó al 100%: receiver `ef76fe2f-a759-489e-9ea8-4d4fe7925423`, manager `c6b17015-47a8-43c6-9702-7c5edf9b8c14`, nuevo productor `50ff0dc2-0918-4d2d-9da8-7f0ce8c96780`. Los tres tienen cron vacío. Receiver conserva flag false; manager conserva sus seis flags false, identidad de servicio y D1 original `603c471d-19bb-4530-9773-c02e18b29840`. Productor tiene flag false, inscripciones vacías y únicamente service binding: ninguna D1 ni firma. No hubo migraciones ni inscripción/lectura de clientes.
+
+Rollback: receiver previo `03ba90ef-9f42-4f06-9c0e-7ccb02ca5206`; manager previo `835b5bf2-5e29-40cd-919c-840b20a8d420`; nuevo productor se mantiene cerrado, sin bindings fuente/estado/firma ni cron. Preservar D1 e identidad y verificar settings efectivos, no solo versión.
+
+Corrección de inventario cloud: peek/list sí muestran asociación persistida `thread_id`, aunque create no la exponga como parámetro. Programación `6ac42c5f75288191b991f0d8fc04cc74` deshabilitada, ligada al chat AFW `01a10e3b-05fe-72b1-aa51-24163557a012`, candidata a reutilizar. Esto no acredita webhook arbitrario ni el nuevo cliente: fuente publicada todavía `a4d90d438cb5ebca855e46637aff91ec45610b9f`. Preparar publicación nueva preservando custodia/red y verificar checkout/readiness en ejecución ordinaria antes de activar cadencia. No repetir PC apagada ya aceptado como sustituto de este circuito.
+
+Próximo bloque: ensayo con eventos de expediente propio, D1 QA operacional y cursor separadas, inscripción/owner resueltos por servidor, firma en custodia y ventana finita. Verificar entrega, reintento, reserva cloud, finish y retirada; restaurar D1 original y cerrar admisiones. Sector sigue sin inscribir ni contactar por este release.
