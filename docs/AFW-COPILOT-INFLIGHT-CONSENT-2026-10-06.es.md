@@ -1,23 +1,23 @@
-# Copilot: permiso vigente durante texto y audio — 6 octubre 2026
+# Copilot: permiso vigente durante texto y audio â€” 6 octubre 2026
 
 ## Problema y alcance
 
-La prueba local reprodujo una respuesta 200 después de retirar el consentimiento durante la inferencia; debía devolver 403 sin propuestas. No es evidencia de un incidente de producción.
+La prueba local reprodujo una respuesta 200 despuÃ©s de retirar el consentimiento durante la inferencia; debÃ­a devolver 403 sin propuestas. No es evidencia de un incidente de producciÃ³n.
 
-Las rutas privadas de texto y audio comprueban ahora identidad, proyecto habilitado, propietario, revisión y última secuencia de consentimiento antes de inferir y antes de responder. Cada lectura de autoridad combina propietario y consentimiento en una consulta a D1 con sesión first-primary. Revocar y volver a conceder no revive una petición anterior: exige iniciar otra.
+Las rutas privadas de texto y audio comprueban ahora identidad, proyecto habilitado, propietario, revisiÃ³n y Ãºltima secuencia de consentimiento antes de inferir y antes de responder. Cada lectura de autoridad combina propietario y consentimiento en una consulta a D1 con sesiÃ³n first-primary. Revocar y volver a conceder no revive una peticiÃ³n anterior: exige iniciar otra.
 
-Se conservan modelos, borradores, ratelimit, revisión humana y contrato de consentimiento público. La secuencia no sale al navegador. No se escribe el resultado automáticamente ni se habilita el copilot en remoto.
+Se conservan modelos, borradores, ratelimit, revisiÃ³n humana y contrato de consentimiento pÃºblico. La secuencia no sale al navegador. No se escribe el resultado automÃ¡ticamente ni se habilita el copilot en remoto.
 
-## Límites y continuación
+## LÃ­mites y continuaciÃ³n
 
-La comprobación entrega una instantánea fresca; no cancela un procesamiento ya enviado al proveedor ni borra sus efectos. La verificación del JWT respeta su vigencia, pero no acredita consulta remota de revocación a Access en cada paso. Cambios de flags comprobados son los de la configuración visible a la petición; una nueva versión del Worker no modifica el env de una invocación anterior.
+La comprobaciÃ³n entrega una instantÃ¡nea fresca; no cancela un procesamiento ya enviado al proveedor ni borra sus efectos. La verificaciÃ³n del JWT respeta su vigencia, pero no acredita consulta remota de revocaciÃ³n a Access en cada paso. Cambios de flags comprobados son los de la configuraciÃ³n visible a la peticiÃ³n; una nueva versiÃ³n del Worker no modifica el env de una invocaciÃ³n anterior.
 
-No amplía el permiso de Codex cloud para leer contenido privado: la revisión cloud existente sigue usando metadatos. Ese acceso requiere un contrato de finalidad, alcance y retirada independiente. No hay migración ni apertura para clientes.
+No amplÃ­a el permiso de Codex cloud para leer contenido privado: la revisiÃ³n cloud existente sigue usando metadatos. Ese acceso requiere un contrato de finalidad, alcance y retirada independiente. No hay migraciÃ³n ni apertura para clientes.
 
 ## Criterio de cierre
 
-Prueba roja observada 200 frente a 403; pruebas de retirada en texto/audio, cambio de propietario/revisión, regrant, límites y consulta SQL real; suite, lint y build antes de integrar. Promoción remota y aceptación autenticada son posteriores y separadas.
+Prueba roja observada 200 frente a 403; pruebas de retirada en texto/audio, cambio de propietario/revisiÃ³n, regrant, lÃ­mites y consulta SQL real; suite, lint y build antes de integrar. PromociÃ³n remota y aceptaciÃ³n autenticada son posteriores y separadas.
 
-## Validación local
+## ValidaciÃ³n local
 
-27 pruebas focalizadas y suite completa de 997 pruebas pasaron; lint sin errores (dos advertencias previas) y build completado. Consulta SQL probada con SQLite real; no equivale a aceptación remota de D1. Los errores no contienen propuestas y conservan no-store. No se cambia el contrato público del consentimiento.
+27 pruebas focalizadas y suite completa de 997 pruebas pasaron; lint sin errores (dos advertencias previas) y build completado. Consulta SQL probada con SQLite real; no equivale a aceptaciÃ³n remota de D1. Los errores no contienen propuestas y conservan no-store. No se cambia el contrato pÃºblico del consentimiento.
