@@ -73,7 +73,11 @@ test('branded delivery stays blocked by default and consumes exact approved asse
   assert.equal(sent.length,0);
   assert.equal((await db.prepare('SELECT state FROM mail_outbox').first()).state,'approved');
   assert.equal((await consumeApprovedMail({...options,allowBrand:true})).state,'accepted');
-  assert.deepEqual(sent[0],content.brand.message);
+  const expected=structuredClone(content.brand.message);
+  for(const attachment of expected.attachments)attachment.content=Uint8Array.from(atob(attachment.content),c=>c.charCodeAt(0));
+  assert.deepEqual(sent[0],expected);
+  assert.equal(typeof content.brand.message.attachments[0].content,'string');
+  assert.equal(sent[0].attachments[0].content[0],137);
   assert.equal((await consumeApprovedMail({...options,allowBrand:true})).state,'not_claimed');
   assert.equal(sent.length,1);
 });

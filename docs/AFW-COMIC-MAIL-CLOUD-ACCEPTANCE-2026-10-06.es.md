@@ -28,3 +28,7 @@ Pendiente separado: confirmar recepción y render en casilla propia; después au
 Verificación D1 primaria: stateaccepted/attempted1/receiptCount1, hash y receiptRef coinciden con cloud. PATCHsettings conserva secretos omitidos: MAIL_SERVICE_CLIENT_ID requirió DELETE explícito del binding temporal, sin tocar el token custodiado ni MAIL_OPERATOR_SUBJECT. Verificar ausencia después de ese DELETE; no inferirla desde PATCH.
 
 Versión final cerrada e6ebdbc1-c117-4e6f-bff6-4c80a9fa3983 al100%; API confirmó ausencia de EMAIL/limiter/serverClient y subject preservado tras DELETE. No nuevo correo durante cierre.
+
+## Recepción informada por el owner
+
+Gabriel confirmó recepción en gabrielmucchiut5@gmail.com desde hello@agentfriendlyweb.dev, pero no se muestran las imágenes. Fuente: declaración del owner, 6oct2026; no inspección MIME ni render Gmail aún. Aceptación de envío/duplicado/cierre permanece; recepción propia confirmada por declaración. Aceptación visual del correo recibido FALLIDA/PENDIENTE: el ensayo también debía mostrar branding completo, no era solo texto. Investigar MIME del mensaje recibido, coincidencia cid/Content-ID y bytes antes de modificar código o atribuirlo a Gmail/proveedor. No reenviar el mismo intento ni reabrir permisos por inferencia.

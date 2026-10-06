@@ -29,7 +29,9 @@ test('service brand promotion is server-only and preserves the exact approved pa
   assert.equal(sent.length,0);
   const handle=createMailServiceControls({...options,config:{...config,brandEnabled:true,brandStartsAt:'1970-01-01T00:00:00.100Z',brandExpiresAt:'1970-01-01T00:00:00.200Z'}});
   assert.equal((await (await handle(request())).json()).state,'accepted');
-  assert.deepEqual(sent[0],content.brand.message);
+  const expected=structuredClone(content.brand.message);
+  for(const attachment of expected.attachments)attachment.content=Uint8Array.from(atob(attachment.content),c=>c.charCodeAt(0));
+  assert.deepEqual(sent[0],expected);
   assert.equal((await (await handle(request())).json()).state,'not_claimed');
   assert.equal(sent.length,1);
 });
