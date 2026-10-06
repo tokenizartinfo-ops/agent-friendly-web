@@ -1,7 +1,8 @@
 'use client';
 import {useEffect,useRef,useState} from 'react';
 import {createAssistanceAttempt,readAssistanceResponse} from '../../lib/dossier-assistance-client.mjs';
-type Receipt={id:string;requestedAt:string;revision:number;topic:string;state:string;stale:boolean};
+import {assistanceReviewPresentation} from '../../lib/assistance-review-presentation.mjs';
+type Receipt={id:string;requestedAt:string;revision:number;topic:string;state:string;stale:boolean;review?:{outcome:string;reviewedAt:number}};
 type Props={projectId:string;revision:number;canRequest:boolean;locale:'es'|'en'|'pt';request:typeof fetch};
 const copy={
  es:{title:'¿En qué parte te ayudo?',intro:'Elegí una parte. Tu pedido quedará en el expediente y podés seguir a tu ritmo.',topics:['Orientarme','Guardar cambios','Comparar archivos','Entregar mejoras'],send:'Guardar pedido de ayuda',retry:'Reintentar el mismo pedido',saving:'Guardando tu pedido…',received:'Tu pedido quedó guardado. Podés seguir con el expediente; este recibo todavía no confirma una revisión.',stale:'El expediente cambió después de este pedido.',error:'No pude confirmar el recibo. Reintentemos el mismo pedido para evitar duplicarlo.',unready:'Primero confirmemos el guardado del expediente. Tus cambios siguen en la pantalla.',readError:'No pude consultar tu último pedido. Volvé a consultar antes de crear otro.',refresh:'Consultar último pedido'},
@@ -14,18 +15,20 @@ export function DossierAssistance({projectId,revision,canRequest,locale,request}
  const [attempt]=useState(()=>createAssistanceAttempt());const lock=useRef(false),mounted=useRef(true);
  const [blockedRevision,setBlockedRevision]=useState<number|null>(null);
  const viewState=state==='changed'&&revision!==blockedRevision?'ready':state;
+ const reviewView=assistanceReviewPresentation(receipt,revision,locale);
  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;};},[]);
 
  async function refresh(){if(lock.current)return;lock.current=true;setState('loading');try{const value=await readAssistanceResponse(await request(`/api/projects/${projectId}/assistance`,{cache:'no-store'}),{allowEmpty:true});if(mounted.current){setReceipt(value);setState('ready');}}catch{if(mounted.current)setState('read-error');}finally{lock.current=false;}}
  useEffect(()=>{const abort=new AbortController();let current=true;void request(`/api/projects/${projectId}/assistance`,{cache:'no-store',signal:abort.signal}).then(r=>readAssistanceResponse(r,{allowEmpty:true})).then(value=>{if(current){setReceipt(value);setState('ready');}}).catch(()=>{if(current)setState('read-error');});return()=>{current=false;abort.abort();};},[projectId,request]);
  async function send(){if(lock.current||!canRequest||['loading','read-error','changed'].includes(viewState))return;lock.current=true;setState('saving');const init=attempt.prepare(projectId,revision,topic);try{const value=await readAssistanceResponse(await request(`/api/projects/${projectId}/assistance`,init),{expected:JSON.parse(init.body)});if(mounted.current){attempt.confirm();setReceipt(value);setState('ready');}}catch(error){if(mounted.current){if((error as {code?:string}).code==='project_changed'){setBlockedRevision(JSON.parse(init.body).expectedRevision);attempt.confirm();setState('changed');}else setState('send-error');}}finally{lock.current=false;}}
  return <details id="dossier-help" className="dossier-assistant dossier-assistance"><summary>{text.title}</summary><p>{text.intro}</p>
-  <p role="status" aria-live="polite">{viewState==='saving'?text.saving:viewState==='send-error'?text.error:viewState==='read-error'?text.readError:viewState==='changed'?locale==='es'?'Revisemos la versión guardada del expediente antes de crear otro pedido.':locale==='en'?'Let us check the saved dossier version before creating another request.':'Vamos revisar a versão salva do dossiê antes de criar outro pedido.':receipt?text.received:null}</p>
+  <p role="status" aria-live="polite">{viewState==='saving'?text.saving:viewState==='send-error'?text.error:viewState==='read-error'?text.readError:viewState==='changed'?locale==='es'?'Revisemos la versión guardada del expediente antes de crear otro pedido.':locale==='en'?'Let us check the saved dossier version before creating another request.':'Vamos revisar a versão salva do dossiê antes de criar outro pedido.':receipt?reviewView?(locale==='es'?'Tu pedido quedó guardado.':locale==='en'?'Your request is saved.':'Seu pedido foi salvo.'):text.received:null}</p>
   {receipt?<p><time dateTime={receipt.requestedAt}>{new Intl.DateTimeFormat(locale,{dateStyle:'medium',timeStyle:'short'}).format(new Date(receipt.requestedAt))}</time>{receipt.stale||receipt.revision!==revision?` · ${text.stale}`:null}</p>:null}
+  {reviewView&&receipt?.review?<div><p>{reviewView.message}</p><p><time dateTime={new Date(receipt.review.reviewedAt).toISOString()}>{new Intl.DateTimeFormat(locale,{dateStyle:'medium',timeStyle:'short'}).format(new Date(receipt.review.reviewedAt))}</time></p>{reviewView.href?<a href={reviewView.href} onClick={()=>{const panel=document.querySelector(reviewView.href!);if(panel instanceof HTMLDetailsElement)panel.open=true;else{const details=panel?.closest('details');if(details)details.open=true;}}}>{reviewView.label}</a>:null}</div>:null}
+  {receipt&&viewState!=='read-error'?<button type="button" disabled={['saving','loading','send-error'].includes(viewState)} onClick={()=>void refresh()}>{text.refresh}</button>:null}
   {viewState==='read-error'?<button type="button" onClick={()=>void refresh()}>{text.refresh}</button>:<>
    {!receipt||receipt.revision!==revision||viewState==='send-error'?<><label>{text.title} <select value={topic} onChange={e=>setTopic(e.target.value)} disabled={['send-error','saving','loading','changed'].includes(viewState)}>{topics.map((value,index)=><option key={value} value={value}>{text.topics[index]}</option>)}</select></label><button type="button" disabled={!canRequest||['saving','loading','changed'].includes(viewState)} onClick={()=>void send()}>{viewState==='send-error'?text.retry:text.send}</button></>:null}
    {!canRequest?<p>{text.unready}</p>:null}
   </>}
  </details>;
 }
-
