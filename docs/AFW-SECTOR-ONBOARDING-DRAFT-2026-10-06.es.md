@@ -34,3 +34,26 @@ Lectura API 6oct2026: aplicación Access b7d7d62e-de25-4b4b-ac52-972b104738a1, p
 El paquete de envío propio fue aceptado visualmente; los grants canary y token están cerrados. Un destinatario externo requiere paquete propio/render equivalente, hash y aprobación nueva, binding limitado a correo exacto, recibo único y cierre. No reutilizar identidad habilitada ni accepted key de prueba.
 
 Antes de enviar: comprobar canal de respuesta hello@ y observabilidad real de la bandeja; el claim «respondé este correo» necesita recepción operativa y seguimiento. Revisar evidencia vigente de inbox/webhook/gerente; no inferirla del envío saliente. Si faltase recepción, resolverla en el recorrido del producto antes del contacto.
+## Corrección del owner: recorrido dentro de AFW (6oct2026)
+
+Esta versión sustituye el cuerpo anterior para el siguiente envío. No enviar aún al cliente; Gabriel exige una nueva copia propia y revisión previa. Saludo exacto: «Hola Max, de Sector de Sistemas». No mencionar gratis/gratuito; si se necesita expresar condición económica, «100% bonificado», sin introducirla en este primer mensaje.
+
+Asunto: Sector de Sistemas + AFW · Abramos tu expediente
+
+Hola Max, de Sector de Sistemas.
+
+Te invitamos a iniciar el recorrido de tu web en Agent Friendly Web. Vamos a ordenar su información y definir qué capacidades de descubrimiento e interacción con asistentes de IA tienen sentido para tu empresa.
+
+No necesitás tener todo preparado. Entrá a AFW y empecemos con una cosa por vez. Dentro del expediente podrás contarnos qué querés conseguir con tu sitio; el asistente te ayudará a organizar tus respuestas y te preguntará cuando algo necesite aclaración.
+
+Podés avanzar a tu ritmo y volver al expediente para continuar. Allí reuniremos los datos, las propuestas y las comprobaciones. Antes de publicar un cambio, revisaremos con vos qué se hará y cómo instalarlo.
+
+Abrir mi expediente: https://agentfriendlyweb.dev/expediente
+
+Un paso claro. Una decisión a la vez.
+AFW · Agent Friendly Web
+hello@agentfriendlyweb.dev
+
+El CTA debe enlazar a /expediente tanto en HTML como en alternativa textual; el contrato actual fija el enlace action a la portada. No dibujar «Abrir mi expediente» sobre un botón que lleva a portada. Extender solo destinos AFW predefinidos y verificables, con hash/approval invalidada ante cambio. No aceptar URLs arbitrarias del modelo.
+
+Antes de la copia propia: demostrar onboarding real guiado, guardado/reapertura, alcance copilot y circuito de seguimiento. No prometer que Codex observa cada respuesta si no hay ese circuito operativo. La copia enviada antes pidió respuesta por mail y no cumple este nuevo criterio; conservar su recibo como histórico, no reenviarla.

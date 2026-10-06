@@ -465,7 +465,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
 
   const historyComparison=compareObservationHistory(currentObservations.history);
   const pilotCopilot = isCopilotProjectAllowed({ enabled: copilotEnabled, allowedProjectId: copilotProjectId, projectId }) && !rehearsal;
-  const guidedView = isGuidedPilotView({ pilot: pilotCopilot, loaded, requested: guidedViewRequested, conflict: Boolean(conflictReview), sessionRequired });
+  const guidedView = isGuidedPilotView({ pilot: pilotCopilot, guidedEntry: true, loaded, requested: guidedViewRequested, conflict: Boolean(conflictReview), sessionRequired });
   const updatesReadState=dossierUpdatesReadState({projectId,website:savedWebsite,ready:observationReadReady,failure:observationReadFailure});
   function retrySavedObservationRead(){
     setObservationReadReady(null);setObservationReadFailure(null);
@@ -479,7 +479,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const updates = dossierUpdates({ website: savedWebsite, history: currentObservations.history, monitoringPreference: savedSnapshot.monitoringPreference,readState:updatesReadState });
   return (
     <div className={guidedView ? 'intake-layout guided-pilot' : 'intake-layout'}>
-      <a className="dossier-help-dock" href={guidedView ? '#dossier-copilot' : '#dossier-assistant'} onClick={()=>{const panel=document.getElementById(guidedView ? 'dossier-copilot' : 'dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
+      <a className="dossier-help-dock" href={guidedView && pilotCopilot ? '#dossier-copilot' : '#dossier-assistant'} onClick={()=>{const panel=document.getElementById(guidedView ? 'dossier-copilot' : 'dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
       {exitTarget && <DraftExitDialog locale={locale} saving={manualBusy} onStay={() => setExitTarget(null)} onSaveLeave={async () => {
         if (workingPending && !(await workingSave.current?.())) return false;
         const saved = hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
@@ -499,8 +499,8 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           <p>{privateUiCopy(locale).dossier.intro}</p>
         </div>
 
-        {pilotCopilot && loaded && !conflictReview && !sessionRequired ? <div className="guided-view-switch"><p>{guidedView
-          ? localizedMessage(locale, 'Vamos de a poco. Contame tu sitio con tus palabras o por audio; revisamos juntos cada propuesta antes de guardarla.', 'Let us take this one step at a time. Describe your site in text or audio; we will review each suggestion before saving.', 'Vamos por partes. Conte sobre seu site por texto ou áudio; revisaremos cada sugestão antes de salvar.')
+        {loaded && !conflictReview && !sessionRequired ? <div className="guided-view-switch"><p>{guidedView
+          ? pilotCopilot ? localizedMessage(locale, 'Vamos de a poco. Contame tu sitio con tus palabras o por audio; revisamos juntos cada propuesta antes de guardarla.', 'Let us take this one step at a time. Describe your site in text or audio; we will review each suggestion before saving.', 'Vamos por partes. Conte sobre seu site por texto ou áudio; revisaremos cada sugestão antes de salvar.') : localizedMessage(locale,'Vamos de a poco. Respondé una pregunta por vez; revisá la propuesta y comprobá el guardado antes de salir.','Take one step at a time. Answer one question, review the suggestion and check saving before leaving.','Vamos por partes. Responda uma pergunta, revise a proposta e confira o salvamento antes de sair.')
           : localizedMessage(locale, 'Este es el expediente completo. Podés volver a la guía breve en cualquier momento.', 'This is the full dossier. You can return to the brief guide at any time.', 'Este é o dossiê completo. Você pode voltar ao guia breve quando quiser.')}</p><button type="button" className="secondary-action" onClick={() => setGuidedViewRequested(!guidedViewRequested)}>{guidedView
           ? localizedMessage(locale, 'Ver expediente completo', 'View full dossier', 'Ver dossiê completo')
           : localizedMessage(locale, 'Volver a la guía breve', 'Return to brief guide', 'Voltar ao guia breve')}</button></div> : null}
@@ -511,8 +511,8 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           setAutosavePaused(true);setData(current=>({...current,website}));setStatus('idle');setMessage(DOSSIER_GUIDE_COPY[locale].draft);
         }}/>
         </div>
-        <details id="dossier-assistant" className="dossier-assistant" open={!guidedView}>
-          <summary>{guidedView ? localizedMessage(locale, 'Seguir sin IA: una pregunta por vez', 'Continue without AI: one question at a time', 'Continuar sem IA: uma pergunta por vez') : DOSSIER_GUIDE_COPY[locale].assist}</summary>
+        <details id="dossier-assistant" className="dossier-assistant" open={!guidedView || !pilotCopilot}>
+          <summary>{guidedView && pilotCopilot ? localizedMessage(locale, 'Seguir sin IA: una pregunta por vez', 'Continue without AI: one question at a time', 'Continuar sem IA: uma pergunta por vez') : DOSSIER_GUIDE_COPY[locale].assist}</summary>
           <p>{DOSSIER_GUIDE_COPY[locale].local}</p>
           <IntakeAssistantPrototype locale={locale} draft={data} reviewedScope={reviewedScope} onApply={next => {
             if(manualLock.current)return;

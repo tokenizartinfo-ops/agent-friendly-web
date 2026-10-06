@@ -64,3 +64,17 @@ test('private preview embeds exact raster bytes without navigable links or netwo
   const changed=structuredClone(pack);changed.message.html='<script>bad()</script>';
   await assert.rejects(brandPreview(changed),/invalid/);
 });
+
+test('dossier invitation binds its fixed destination to HTML, text and approval',async()=>{
+  const pack=await buildBrandPackage({...input(),action:'expediente'});
+  assert.match(pack.message.html,/href="https:\/\/agentfriendlyweb\.dev\/expediente"/);
+  assert.match(pack.message.text,/https:\/\/agentfriendlyweb\.dev\/expediente/);
+  assert.equal(await verifyBrandPackage(pack),true);
+  const modified=structuredClone(pack);modified.action='presentation';
+  assert.equal(await verifyBrandPackage(modified),false);
+  const swapped=structuredClone(pack);swapped.message.html=swapped.message.html.replace('/expediente','');
+  assert.equal(await verifyBrandPackage(swapped),false);
+  assert.equal(await verifyBrandPackage(await buildBrandPackage(input())),true);
+  await assert.rejects(buildBrandPackage({...input(),action:'https://outside.example'}),/invalid/);
+  const preview=await brandPreview(pack);assert.doesNotMatch(await preview.text(),/href=/);
+});
