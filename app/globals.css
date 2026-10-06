@@ -1,5 +1,12 @@
 @import 'tailwindcss';
 
+.dossier-assistance { scroll-margin-top: 110px; }
+.dossier-assistance label { display: grid; gap: 8px; margin-bottom: 12px; }
+.dossier-assistance select, .dossier-assistance button { min-height: 44px; max-width: 100%; padding: 10px 14px; font: inherit; color: #25211d; background: #fffaf0; border: 1px solid #7c5127; border-radius: 5px; white-space: normal; }
+.dossier-assistance button { cursor: pointer; }
+.dossier-assistance button:disabled { cursor: default; opacity: .65; }
+.dossier-assistance :focus-visible { outline: 3px solid #7c5127; outline-offset: 4px; }
+
 :root {
   --ink: #181512;
   --muted: #665d53;
