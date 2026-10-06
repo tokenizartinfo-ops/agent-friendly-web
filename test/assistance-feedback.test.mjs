@@ -2,8 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
+import {projectAssistanceSignal} from '../lib/assistance-supervision-contract.mjs';
 const feedback=await import('../lib/assistance-feedback.mjs').catch(()=>({}));
-const time=Date.now(),secret='synthetic-feedback-secret-at-least-32',eventId='a'.repeat(64),projectRef='b'.repeat(64),runId=crypto.randomUUID();
+const time=Date.now(),secret='synthetic-feedback-secret-at-least-32',deliverySecret='synthetic-delivery-secret-at-least-32',runId=crypto.randomUUID();
+const {eventId,projectRef}=await projectAssistanceSignal({id:'help-'+'c'.repeat(64),projectId:'p',type:'assistance_requested',createdAt:new Date(time-1000).toISOString(),payload:{contract:'afw.assistance-request.v1',requestId:crypto.randomUUID(),expectedRevision:3,topic:'orientation'}},deliverySecret);
 const review={version:'afw-assistance-review-v1',eventId,projectRef,revision:3,topic:'orientation',runId,outcome:'reviewed',reviewedAt:time};
 function database(sql){
  const sqlite=new DatabaseSync(':memory:');sqlite.exec(sql);
@@ -14,7 +16,7 @@ function fixture(){
  const ledger=database(readFileSync('worker/operations/assistance-supervision.sql','utf8')+readFileSync('worker/operations/assistance-supervision-runs.sql','utf8'));
  ledger.sqlite.prepare('INSERT INTO assistance_supervision_events VALUES(?,?,?,?,?,?,?)').run(eventId,projectRef,3,'assistance_requested','orientation',new Date(time-1000).toISOString(),time-500);
  ledger.sqlite.prepare('INSERT INTO assistance_supervision_runs VALUES(?,?,?,?,?,?,?)').run(runId,crypto.randomUUID(),eventId,time-100,time+60000,'reviewed',time);
- const env={AFW_ASSISTANCE_FEEDBACK_ENABLED:'true',AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(time+60000).toISOString(),AFW_ASSISTANCE_FEEDBACK_SIGNING_SECRET:secret,AFW_ASSISTANCE_PROJECT_REFS:JSON.stringify([projectRef]),OPERATIONS_DB:ledger.db};
+ const env={AFW_ASSISTANCE_FEEDBACK_ENABLED:'true',AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(time+60000).toISOString(),AFW_ASSISTANCE_SIGNING_SECRET:deliverySecret,AFW_ASSISTANCE_FEEDBACK_SIGNING_SECRET:secret,AFW_ASSISTANCE_PROJECT_REFS:JSON.stringify([projectRef]),OPERATIONS_DB:ledger.db};
  return{ledger,env};
 }
 test('review metadata is exact and cannot claim resolution or contain private context',()=>{
@@ -45,6 +47,12 @@ test('private feedback retries lost responses, preserves source and rechecks own
  assert.equal((await producer.run(config)).failed,1);assert.equal((await producer.run(config)).confirmed,1);assert.equal((await producer.run(config)).confirmed,0);
  assert.equal(source.sqlite.prepare('SELECT COUNT(*) n FROM assistance_feedback_receipts').get().n,1);
  source.sqlite.exec('DELETE FROM assistance_feedback_receipts');
+ source.sqlite.prepare('UPDATE project_events SET id=?').run('help-'+'d'.repeat(64));
+ source.sqlite.prepare('UPDATE assistance_delivery_receipts SET source_event_id=?').run('help-'+'d'.repeat(64));
+ assert.equal((await producer.run(config)).confirmed,0,'a reassigned delivery acknowledgement must not attest a different source event');
+ assert.equal(source.sqlite.prepare('SELECT COUNT(*) n FROM assistance_feedback_receipts').get().n,0);
+ source.sqlite.prepare('UPDATE project_events SET id=?').run('help-'+'c'.repeat(64));
+ source.sqlite.prepare('UPDATE assistance_delivery_receipts SET source_event_id=?').run('help-'+'c'.repeat(64));
  config.ASSISTANCE_RECEIVER.fetch=async request=>{const response=await ingress.fetch(request,env);source.sqlite.exec("UPDATE site_projects SET user_id='bob'");return response;};
  assert.equal((await producer.run(config)).confirmed,0);assert.equal(source.sqlite.prepare('SELECT COUNT(*) n FROM assistance_feedback_receipts').get().n,0);
  source.sqlite.exec("UPDATE site_projects SET user_id='alice'");

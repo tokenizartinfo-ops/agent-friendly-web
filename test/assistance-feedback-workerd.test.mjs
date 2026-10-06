@@ -3,15 +3,17 @@ import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {readFileSync} from 'node:fs';
+import {projectAssistanceSignal} from '../lib/assistance-supervision-contract.mjs';
 test('native D1 feedback recovers a lost response, remains owner scoped and withdraws service reads',async()=>{
- const time=Date.now(),eventId='a'.repeat(64),projectRef='b'.repeat(64),runId=crypto.randomUUID();
+ const time=Date.now(),deliverySecret='synthetic-native-delivery-secret-minimum-32',runId=crypto.randomUUID();
+ const {eventId,projectRef}=await projectAssistanceSignal({id:'help-'+'c'.repeat(64),projectId:'p',type:'assistance_requested',createdAt:new Date(time-1000).toISOString(),payload:{contract:'afw.assistance-request.v1',requestId:crypto.randomUUID(),expectedRevision:3,topic:'orientation'}},deliverySecret);
  const bundle=await build({stdin:{resolveDir:process.cwd(),contents:`
  import {createAssistanceFeedbackIngress,createAssistanceFeedbackProducer,signedAssistanceReviewRequest} from './lib/assistance-feedback.mjs';
  import {readAssistanceRequest} from './lib/dossier-assistance.mjs';
  const time=${time},eventId='${eventId}',projectRef='${projectRef}',secret='synthetic-native-feedback-secret-minimum-32';let lost=true,closed=false;
  export default {async fetch(request,b){
   const path=new URL(request.url).pathname;
-  const env={AFW_ASSISTANCE_FEEDBACK_ENABLED:closed?'false':'true',AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(time+60000).toISOString(),AFW_ASSISTANCE_FEEDBACK_SIGNING_SECRET:secret,AFW_ASSISTANCE_PROJECT_REFS:JSON.stringify([projectRef]),AFW_ASSISTANCE_ENROLLMENTS:JSON.stringify([{projectId:'p',ownerId:'alice',since:new Date(time-2000).toISOString()}]),OPERATIONS_DB:b.DB,ASSISTANCE_SOURCE_DB:b.SOURCE};
+  const env={AFW_ASSISTANCE_FEEDBACK_ENABLED:closed?'false':'true',AFW_OPERATIONS_WINDOW_EXPIRES_AT:new Date(time+60000).toISOString(),AFW_ASSISTANCE_SIGNING_SECRET:'${deliverySecret}',AFW_ASSISTANCE_FEEDBACK_SIGNING_SECRET:secret,AFW_ASSISTANCE_PROJECT_REFS:JSON.stringify([projectRef]),AFW_ASSISTANCE_ENROLLMENTS:JSON.stringify([{projectId:'p',ownerId:'alice',since:new Date(time-2000).toISOString()}]),OPERATIONS_DB:b.DB,ASSISTANCE_SOURCE_DB:b.SOURCE};
   const ingress=createAssistanceFeedbackIngress({now:()=>time});
   env.ASSISTANCE_RECEIVER={fetch:async r=>{const response=await ingress.fetch(r,env);if(lost){lost=false;throw Error('lost response');}return response;}};
   if(path==='/produce')return Response.json(await createAssistanceFeedbackProducer({now:()=>time}).run(env));
