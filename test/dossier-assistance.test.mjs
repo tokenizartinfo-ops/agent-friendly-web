@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
+import {readFileSync} from 'node:fs';
 const assistance=await import('../lib/dossier-assistance.mjs').catch(()=>({}));
 function fixture(){
  const sqlite=new DatabaseSync(':memory:');
@@ -9,6 +10,21 @@ function fixture(){
  return{sqlite,db:{prepare:s=>statement(s)}};
 }
 const input=(changes={})=>({contract:'afw.assistance-request.v1',requestId:crypto.randomUUID(),expectedRevision:3,topic:'orientation',...changes});
+test('authenticated assistance shows only correlated review metadata, never another owner or a resolution',async()=>{
+ const f=fixture(),saved=await assistance.saveAssistanceRequest(f.db,'alice','p',input());
+ f.sqlite.exec(readFileSync('worker/operations/assistance-delivery-receipts.sql','utf8')+readFileSync('worker/operations/assistance-feedback-receipts.sql','utf8'));
+ const reviewedAt=Date.now(),review={version:'afw-assistance-review-v1',eventId:'a'.repeat(64),projectRef:'b'.repeat(64),revision:3,topic:'orientation',runId:crypto.randomUUID(),outcome:'reviewed',reviewedAt};
+ f.sqlite.prepare('INSERT INTO assistance_delivery_receipts VALUES(?,?,?,?)').run(review.projectRef,saved.receipt.id,review.eventId,reviewedAt);
+ f.sqlite.prepare('INSERT INTO assistance_feedback_receipts VALUES(?,?,?)').run(saved.receipt.id,JSON.stringify(review),reviewedAt);
+ assert.equal((await assistance.readAssistanceRequest(f.db,'alice','p')).receipt.review,undefined,'closed feature must not expose reviews');
+ const read=await assistance.readAssistanceRequest(f.db,'alice','p',{feedbackEnabled:true});
+ assert.deepEqual(read.receipt.review,{outcome:'reviewed',reviewedAt});
+ assert.doesNotMatch(JSON.stringify(read),/PRIVATE ANSWER|runId|projectRef|resolved/);
+ assert.equal((await assistance.readAssistanceRequest(f.db,'bob','p',{feedbackEnabled:true})).status,404);
+ f.sqlite.exec('UPDATE site_projects SET revision=4');assert.equal((await assistance.readAssistanceRequest(f.db,'alice','p',{feedbackEnabled:true})).receipt.stale,true);
+ f.sqlite.prepare('UPDATE assistance_feedback_receipts SET review_json=?').run(JSON.stringify({...review,eventId:'c'.repeat(64)}));
+ await assert.rejects(assistance.readAssistanceRequest(f.db,'alice','p',{feedbackEnabled:true}));
+});
 test('durable assistance is owner isolated, idempotent and never edits answers',async()=>{
  assert.equal(typeof assistance.saveAssistanceRequest,'function');
  const f=fixture(),body=input(),save=(x=body,user='alice')=>assistance.saveAssistanceRequest(f.db,user,'p',x);
