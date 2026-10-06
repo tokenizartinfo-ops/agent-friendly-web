@@ -15,10 +15,16 @@ test('the pilot interface preserves full dossier, local no-AI guide, explicit sa
   const ui = await readFile('app/components/intake-workspace.tsx', 'utf8');
   assert.match(ui, /isGuidedPilotView\(/);
   assert.match(ui, /hidden=\{guidedView\}/);
-  assert.match(ui, /open=\{!guidedView\}/);
+  assert.match(ui, /open=\{!guidedView \|\| !pilotCopilot\}/);
   assert.match(ui, /setGuidedViewRequested\(!guidedViewRequested\)/);
   assert.match(ui, /<IntakeAssistantPrototype/);
   assert.match(ui, /<IntakeIntelligentCopilot/);
   assert.match(ui, /<IntakeConflictReview/);
   assert.match(ui, /onClick=\{saveReviewedDraft\}/);
+});
+
+test('an opted-in brief entry works without enabling the AI pilot',()=>{
+  assert.equal(isGuidedPilotView({pilot:false,guidedEntry:true,loaded:true,requested:true}),true);
+  assert.equal(isGuidedPilotView({pilot:false,guidedEntry:true,loaded:false,requested:true}),false);
+  assert.equal(isGuidedPilotView({pilot:false,guidedEntry:true,loaded:true,requested:false}),false);
 });
