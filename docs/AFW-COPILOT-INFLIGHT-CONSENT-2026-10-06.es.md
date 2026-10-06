@@ -20,4 +20,6 @@ Prueba roja observada 200 frente a 403; pruebas de retirada en texto/audio, camb
 
 ## Validación local
 
-27 pruebas focalizadas y suite completa de 997 pruebas pasaron; lint sin errores (dos advertencias previas) y build completado. Consulta SQL probada con SQLite real; no equivale a aceptación remota de D1. Los errores no contienen propuestas y conservan no-store. No se cambia el contrato público del consentimiento.
+30 pruebas focalizadas y suite completa de 998 pruebas pasaron; lint sin errores (dos advertencias previas) y build completado. Consulta SQL probada con SQLite real; no equivale a aceptación remota de D1. Los errores no contienen propuestas y conservan no-store. No se cambia el contrato público del consentimiento.
+
+La interfaz distingue permiso modificado y revisión desactualizada de una sesión vencida; conserva relato/audio local sin aplicar resultados. Se volvió a comprobar la época de la petición después de interpretar el error, para no mostrar mensajes de una consulta anterior.
