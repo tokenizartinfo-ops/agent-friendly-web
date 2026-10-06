@@ -5,8 +5,8 @@
 **Spec:** docs/superpowers/specs/2026-10-06-assistance-feedback-design.md
 **Execution:** Implementación secuencial por el agente actual; sin subagentes. Autonomía explícita del usuario prevalece sobre nuevas pausas administrativas.
 
-- [ ] Contrato/firma/ingress y productor de constancias; escribir pruebas fallidas, implementar, comprobar correlación y retirada.
-- [ ] Tabla privada additive, API owner-scoped opcional y lector cliente estricto; pruebas de aislamiento, no acceso con flag cerrado y revisión obsoleta.
-- [ ] Interfaz sencilla con fecha y siguiente paso enumerado; no resolved/response falsa. Consulta manual.
-- [ ] Ensayo native workerd/D1, lint/build/suite, documentación y revisión diff.
-- [ ] Integración y despliegue cerrado con rollback verificado; aceptación propia aparte, nunca promoción por inferencia.
+- [x] Contrato/firma/ingress y productor de constancias; escribir pruebas fallidas, implementar, comprobar correlación y retirada.
+- [x] Tabla privada additive, API owner-scoped opcional y lector cliente estricto; pruebas de aislamiento, no acceso con flag cerrado y revisión obsoleta.
+- [x] Interfaz sencilla con fecha y siguiente paso enumerado; no resolved/response falsa. Consulta manual.
+- [x] Ensayo native workerd/D1, lint/build/suite, documentación y revisión diff.
+- [x] Integración y despliegue cerrado con rollback verificado; aceptación propia aparte, nunca promoción por inferencia.
