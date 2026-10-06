@@ -1,6 +1,6 @@
 # Orientación con contexto mínimo consentido — 6 octubre 2026
 
-Estado: proyección pura preparada; sin endpoint, tabla de permisos, transporte, lectura remota ni activación.
+Estado: proyección pura y almacenamiento preparados; esquema SQL probado solo en SQLite local, con adaptador HTTP cerrado; sin migración remota, UI de permiso, transporte, lectura de contexto cloud ni activación.
 
 ## Decisión de alcance
 
@@ -23,3 +23,19 @@ La proyección `lib/assistance-goal-context.mjs` exige concordancia entre propie
 Prueba roja por función ausente y proyección exacta; casos de minimización, ventana, sustitución de identidad/reserva, finalidad, secuencia, revisión y declaraciones inválidas. Las pruebas puras no equivalen a aceptación remota ni a consentimiento humano.
 
 Cuatro pruebas focalizadas y suite completa de1.002pruebas pasaron; lint focalizado sin errores. La proyección no está importada por ningún runtime ni publica datos.
+
+## Almacenamiento separado preparado
+
+`db/assistance-goal-consent.sql` es exclusivo de D1 privado de origen; no aplicarlo a la base operacional. `lib/assistance-goal-consent.mjs` registra concesiones/retiros append-only, secuencia independiente y TTL servidor de diez minutos. Reintentar el mismo intento no renueva la vigencia ni crea otra concesión. El retiro continúa posible aunque el expediente cambie. Las admisiones comparan propietario, revisión y fuente dentro del mismo INSERT; cambios durante esperas no escriben permisos.
+
+La lectura combina propietario, fuente y última secuencia con sesión primaria. La secuencia es interna: un adaptador HTTP deberá excluirla del contrato público, resolver el actor y reloj por servidor, verificar CSRF, limitar cuerpos/rate y volver a cercar la respuesta. Este módulo no reemplaza esas garantías ni crea permisos para un cliente por sí mismo.
+
+## Adaptador HTTP preparado cerrado
+
+Ruta `/api/projects/[projectId]/assistance-consent`: GET de estado y POST de concesión/retiro. Resuelve JWT/propietario por servidor, origen/JSON exactos, cuerpo máximo768bytes/3segundos, límite de solicitudes, revisión/pedido y finalidad fija. Publica solo granted/issuedAt/expiresAt, nunca secuencia o actor. Corta al cambiar ventana, identidad o inscripción visible durante las esperas y consulta otra vez el estado primario antes de responder.
+
+Requiere flag nuevo `AFW_ASSISTANCE_GOAL_CONTEXT_ENABLED=true`, selector propio existente y fecha UTC canónica `AFW_ASSISTANCE_GOAL_CONTEXT_EXPIRES_AT` dentro de diez minutos. Ausentes por defecto: deniega404 antes de leer/escribir DB. La concesión se acota a esa ventana. Ningún config remoto o entorno cloud fue ampliado por preparar el adaptador.
+
+Sigue pendiente la UI, lectura de servicio con identidad/reserva separadas, entrega de preguntas/propuestas, migración propia y aceptación real. La ruta de consentimiento no lee ni transmite contexto a Codex cloud; conceder no inicia una consulta. Los mensajes deberán explicar ese estado con precisión.
+
+Validación ampliada del almacenamiento/adaptador:16pruebas focalizadas y suite completa de1.014pruebas pasaron; lint sin errores (dos advertencias previas) y build completado. Se comprobó timeout real de3segundos y cancelación del cuerpo, límites, CSRF, idempotencia, expiración, propiedad y carrera de escritura. No hubo SQL ni permisos remotos.
