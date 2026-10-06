@@ -9,3 +9,10 @@ test('assistance producer is unrouted, disabled and cannot declare private enrol
  assert.equal(Object.hasOwn(config,'d1_databases'),false);assert.equal(Object.hasOwn(config,'routes'),false);
  assert.equal(config.services[0].service,'agent-friendly-web-operations');
 });
+test('manager deployment retains symmetric assistance budget admission even between pilot modes',async()=>{
+ const config=JSON.parse(await readFile('wrangler.operations-manager.jsonc','utf8'));
+ assert.equal(config.vars.AFW_OPERATIONS_CONSUMER_ENABLED,'false');
+ assert.equal(config.vars.AFW_ASSISTANCE_SUPERVISION_ENABLED,'false');
+ assert.equal(config.vars.AFW_OPERATIONS_SHARED_ASSISTANCE_BUDGET_ENABLED,'true');
+ assert.deepEqual(config.triggers.crons,[]);
+});
