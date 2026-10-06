@@ -33,6 +33,21 @@ test('analyzeHome detects structured data, direct answers and tool hints', () =>
   });
 });
 
+test('direct answers recognize accented questions and inline formatting', () => {
+  for (const heading of ['¿Qué ofrece AFW?', '¿Cómo funciona AFW?', 'O que <em>é</em> AFW?', 'How <span>does</span> AFW work?']) {
+    assert.equal(analyzeHome(`<h2>${heading}</h2><p>Una respuesta <strong>descriptiva</strong> suficientemente extensa para el visitante.</p>`).directAnswers, true, heading);
+  }
+});
+
+test('direct answers do not count incidental substrings or noncontent markup', () => {
+  for (const html of [
+    '<h2>Unique showcase</h2><p>A descriptive paragraph with enough readable characters.</p>',
+    '<h2>¿Qué ofrece?</h2><p>Breve.</p>',
+    '<!-- <h2>What is AFW?</h2><p>A descriptive paragraph with enough readable characters.</p> -->',
+    '<script><h2>What is AFW?</h2><p>A descriptive paragraph with enough readable characters.</p></script>',
+  ]) assert.equal(analyzeHome(html).directAnswers, false, html);
+});
+
 test('hasOwnershipEvidence recognizes a named creator linked from JSON-LD', () => {
   const html = `
     <script type="application/ld+json">
