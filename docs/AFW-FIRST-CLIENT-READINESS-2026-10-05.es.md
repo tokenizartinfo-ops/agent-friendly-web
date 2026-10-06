@@ -1,3 +1,11 @@
+## Actualización fechada: 6 octubre de 2026
+
+El bloque técnico de correo de marca ya tiene aceptación propia de extremo a extremo: paquete fijo, custodia/hash, revisión autenticada, envío cloud, segundo consumo sin duplicación, MIME con cinco imágenes binarias válidas y confirmación del owner «llego perfecto, imagen perfecta». Ver AFW-MAIL-BINARY-RASTER-FIX-2026-10-06.es.md y PR288. El ensayo terminó cerrado y su identidad deshabilitada.
+
+El inventario y las casillas del 5 octubre que siguen se conservan como fotografía histórica: el consumidor ahora admite el paquete de marca validado; ya no es exclusivamente text-only. No repetir ese desarrollo ni otra prueba rutinaria propia. Sigue pendiente redactar y aprobar el onboarding contextual de Sector y comprobar su acceso real antes del envío. No enviar el texto del ensayo propio a un cliente.
+
+Próximo bloque: comprobar la configuración vigente del acceso de Sector; preparar un mensaje específico con una sola acción y objetivos sin asumir. Incorporar sus propios activos/texto al paquete revisable y una nueva decisión. La aceptación propia no concede consentimiento ni crea expediente del cliente.
+
 # Sector de Sistemas: cierre del primer recorrido real
 
 ## Decisión operativa
