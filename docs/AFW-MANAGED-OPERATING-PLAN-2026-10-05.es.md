@@ -16,6 +16,14 @@ Gateway y executor son controles distintos: exigir current/enforced/ready y soli
 4. Escalar únicamente señales que cambian o requieren acción. `reviewed` terminal permanece silencioso; `review_required` bloquea. Conservar UTC, source, revisión y resultado saneado. Nunca copiar datos de cliente a incidentes de arquitectura.
 5. Retirar programación, cerrar flags/deadline, deshabilitar token y restaurar selector. Verificar versión y settings efectivos, D1 original, cron y preservación del historial. `--keep-vars` puede conservar un deadline ausente en el archivo de rollback: comprobarlo.
 
+## Preparación del cron y arranque sin falsas alertas
+
+Preparar el cron con el watchdog cerrado. Esperar confirmación reciente de los dos checkpoints del productor antes de habilitar las clasificaciones y los avisos: datos antiguos no acreditan un fallo actual. Una ejecución saludable inicial no debe crear una alerta de recuperación sin una condición problemática previa.
+
+Cloudflare documenta hasta15minutos de propagación de cambios de cron. En el ensayo del6octubreUTC, un segundo `wrangler deploy` con la misma expresión actualizó `modified_on`: no repetir ese comando para ajustar únicamente una ventana ya preparada. Usar `wrangler versions upload` y después `wrangler versions deploy` para código/configuración versionados, comprobar settings efectivos y verificar que el cron no cambió. Los triggers se administran por separado. Fuente: https://developers.cloudflare.com/workers/configuration/cron-triggers/.
+
+Al cerrar, retirar explícitamente el cron, flags y deadline; eliminar la firma temporal del productor y receptor después del cierre. No confiar en seleccionar una versión histórica ni en que el deadline por sí solo retire la programación. Una operación admitida antes del vencimiento puede terminar después: preservar el journal y no prometer cancelación retroactiva.
+
 ## Vigencia y responsabilidad
 
 Owner responsable: Gabriel. Identidad gestionada vigente hasta4noviembre2026 22:09:32UTC (19:09BuenosAires), sin autorrenovación. Avisar antes de caducar con metadata, sin secretos. Si no se renueva mediante custodia autorizada, cerrar; no elegir otra identidad ni usar el piloto vencido.
