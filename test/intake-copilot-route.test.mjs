@@ -6,6 +6,7 @@ import ts from 'typescript';
 import * as copilot from '../lib/intake-copilot.mjs';
 import { requestIntakeSuggestions } from '../lib/intake-copilot-provider.mjs';
 import { isCopilotProjectAllowed } from '../lib/copilot-rollout.mjs';
+import { createCopilotResponseGuard } from '../lib/copilot-response-guard.mjs';
 import { buildCopilotContext } from '../lib/copilot-context.mjs';
 
 async function harness() {
@@ -14,8 +15,10 @@ async function harness() {
   let rateCalls = 0;
   let allowed = true;
   let consentGranted = true;
-  const rows = [{ id: 'owned', userId: 'owner-a' }];
+  let sequence = 1;
+  const rows = [{ id: 'owned', userId: 'owner-a', revision: 3 }];
   const env = {
+    DB: { withSession(mode) { assert.equal(mode, 'first-primary'); return this; }, prepare() { return { bind(projectId, userId) { return { async first() { const row = rows.find(row => row.id === projectId && row.userId === userId); return row ? { revision: row.revision, sequence, action: consentGranted ? 'grant' : 'revoke', consent_version: 'afw-copilot-processing-v1' } : null; } }; } }; } },
     AFW_COPILOT_ENABLED: 'true',
     AFW_COPILOT_PROJECT_ID: 'owned',
     AI: { run: async (_model, options) => {
@@ -55,6 +58,7 @@ async function harness() {
     '../../../../../lib/intake-copilot.mjs': copilot,
     '../../../../../lib/intake-copilot-provider.mjs': { requestIntakeSuggestions },
     '../../../../../lib/copilot-rollout.mjs': { isCopilotProjectAllowed },
+    '../../../../../lib/copilot-response-guard.mjs': { createCopilotResponseGuard },
     '../../../../../lib/copilot-consent': { currentCopilotConsent: async () => ({ granted: consentGranted }) },
   };
   const source = await readFile('app/api/projects/[projectId]/copilot/route.ts', 'utf8');
@@ -73,12 +77,20 @@ async function harness() {
     env, rows, post,
     actor(value) { actor = value; },
     rate(value) { allowed = value; },
-    consent(value) { consentGranted = value; },
+    consent(value) { consentGranted = value; sequence++; },
     counts() { return { inferenceCalls, rateCalls }; },
   };
 }
 
 const safe = { locale: 'es', notes: 'Museo Sur utiliza WordPress.', processingConsentVersion: 'afw-copilot-processing-v1' };
+
+test('private copilot discards a response when consent is withdrawn during inference', async () => {
+  const h = await harness();
+  h.env.AI.run = async () => { h.consent(false); return { response: { suggestions: [] } }; };
+  const response = await h.post(safe);
+  assert.equal(response.status, 403);
+  assert.equal((await response.json()).code, 'project_consent_required');
+});
 
 test('private copilot requires a durable active consent for the owned dossier', async () => {
   const h = await harness();
@@ -165,5 +177,28 @@ test('private copilot rate-limits before model use and never writes automaticall
   assert.equal(result.persistence, 'none');
   assert.equal(result.suggestions[0].field, 'cms');
   assert.deepEqual(h.counts(), { inferenceCalls: 1, rateCalls: 2 });
-  assert.deepEqual(h.rows, [{ id: 'owned', userId: 'owner-a' }]);
+  assert.deepEqual(h.rows, [{ id: 'owned', userId: 'owner-a', revision: 3 }]);
+});
+
+for (const [name, mutate, status] of [
+  ['owner changed', h => { h.rows[0].userId = 'owner-b'; }, 404],
+  ['revision changed', h => { h.rows[0].revision++; }, 409],
+  ['consent revoked then granted', h => { h.consent(false); h.consent(true); }, 403],
+  ['identity expired', h => h.actor(null), 401],
+  ['rollout withdrawn', h => { h.env.AFW_COPILOT_ENABLED = 'false'; }, 503],
+  ['project removed from rollout', h => { h.env.AFW_COPILOT_PROJECT_ID = 'other'; }, 404],
+]) test(`private copilot discards inference after ${name}`, async () => {
+  const h = await harness();
+  h.env.AI.run = async () => { mutate(h); return { response: { suggestions: [] } }; };
+  const response = await h.post(safe);
+  assert.equal(response.status, status);
+  assert.equal(response.headers.get('cache-control'), 'no-store');
+  assert.equal('suggestions' in await response.json(), false);
+});
+
+test('withdrawal during rate limiting prevents private inference altogether', async () => {
+  const h = await harness();
+  h.env.COPILOT_RATE_LIMIT.limit = async () => { h.consent(false); return { success: true }; };
+  assert.equal((await h.post(safe)).status, 403);
+  assert.equal(h.counts().inferenceCalls, 0);
 });

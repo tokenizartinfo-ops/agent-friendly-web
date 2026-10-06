@@ -9,6 +9,8 @@ import { isCopilotProjectAllowed } from '../../../../../lib/copilot-rollout.mjs'
 import { currentCopilotConsent } from '../../../../../lib/copilot-consent';
 import { buildCopilotContext } from '../../../../../lib/copilot-context.mjs';
 
+import { createCopilotResponseGuard } from '../../../../../lib/copilot-response-guard.mjs';
+
 type Context = { params: Promise<{ projectId: string }> };
 const headers = { 'cache-control': 'no-store' };
 const reply = (code: string, status: number) => Response.json({ code }, { status, headers });
@@ -50,11 +52,17 @@ export async function POST(request: Request, context: Context) {
     if (!input.ok) return reply(input.code || 'invalid_input', 400);
     const consent = await currentCopilotConsent(projectId, user.userId);
     if (!consent.granted) return reply('project_consent_required', 403);
+    const guard = await createCopilotResponseGuard(env, { projectId, userId: user.userId, revision: project.revision }, getCloudflareAccessUser);
+    if (!guard.ok) return reply(guard.code, guard.status);
     const { success } = await env.COPILOT_RATE_LIMIT.limit({ key: user.userId });
     if (!success) return Response.json({ code: 'copilot_rate_limited' }, { status: 429, headers: { ...headers, 'retry-after': '60' } });
     const [working] = await getDb().select({ text: copilotWorkingDrafts.text, sessionJson: copilotWorkingDrafts.sessionJson }).from(copilotWorkingDrafts)
       .where(and(eq(copilotWorkingDrafts.projectId, projectId), eq(copilotWorkingDrafts.userId, user.userId))).limit(1);
+    const beforeInference = await guard.check();
+    if (!beforeInference.ok) return reply(beforeInference.code, beforeInference.status);
     const payload = await requestIntakeSuggestions(env.AI, input.notes, input.locale, buildCopilotContext(project, working));
+    const beforeDelivery = await guard.check();
+    if (!beforeDelivery.ok) return reply(beforeDelivery.code, beforeDelivery.status);
     const reviewed = reviewCopilotOutput(payload, input.notes, input.locale);
     return Response.json(reviewed, { headers });
   } catch {
