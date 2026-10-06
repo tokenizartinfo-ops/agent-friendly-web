@@ -76,3 +76,24 @@ test('brand preview requires the pinned operator and preserves the reviewed appr
   assert.equal((await handle(request('/revoke',{key:'brand-1'}))).status,200);
   assert.equal((await db.prepare('SELECT state FROM mail_outbox WHERE reply_key=?').bind('brand-1').first()).state,'cancelled');
 });
+
+test('brand trial clamps approval expiry and closes review with a still-valid operator token',async()=>{
+  const {db,hash,request}=await setup();let clock=101;
+  const handle=createMailPrivateControls({db,keySet:publicKey,now:()=>clock,config:{...config,brandEnabled:true,brandStartsAt:'1970-01-01T00:00:00.100Z',brandExpiresAt:'1970-01-01T00:00:00.200Z'}});
+  assert.equal((await handle(request('/approve',{key:'reply-1',contentHash:hash}))).status,201);
+  assert.equal((await db.prepare('SELECT expires_at FROM mail_decisions').first()).expires_at,200);
+  clock=200;
+  assert.equal((await handle(request('/review/reply-1'))).status,404);
+  assert.equal((await handle(request('/message/reply-1'))).status,404);
+  assert.equal((await db.prepare('SELECT state FROM mail_outbox').first()).state,'approved');
+});
+
+test('brand trial expires during operator body loading without recording an approval',async()=>{
+  const {db,hash,request}=await setup();let clock=101;
+  const original=request('/approve',{key:'reply-1',contentHash:hash});
+  const stream=new ReadableStream({pull(controller){clock=200;controller.enqueue(new TextEncoder().encode(JSON.stringify({key:'reply-1',contentHash:hash})));controller.close();}},{highWaterMark:0});
+  const req=new Request(original.url,{method:'POST',headers:original.headers,body:stream,duplex:'half'});
+  const handle=createMailPrivateControls({db,keySet:publicKey,now:()=>clock,config:{...config,brandEnabled:true,brandStartsAt:'1970-01-01T00:00:00.100Z',brandExpiresAt:'1970-01-01T00:00:00.200Z'}});
+  assert.equal((await handle(req)).status,404);
+  assert.equal((await db.prepare('SELECT COUNT(*) n FROM mail_decisions').first()).n,0);
+});
