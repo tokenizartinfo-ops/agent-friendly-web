@@ -1,6 +1,6 @@
 # Orientación con contexto mínimo consentido — 6 octubre 2026
 
-Estado: proyección pura y almacenamiento preparados; esquema SQL probado solo en SQLite local, con adaptador HTTP cerrado; sin migración remota, UI de permiso, transporte, lectura de contexto cloud ni activación.
+Estado: proyección, almacenamiento, adaptador HTTP cerrado y UI de permiso preparados. Esquema SQL probado solo en SQLite local. Sin migración remota, transporte, lectura de contexto cloud ni activación. Aceptación visual de la nueva UI pendiente.
 
 ## Decisión de alcance
 
@@ -32,10 +32,18 @@ La lectura combina propietario, fuente y última secuencia con sesión primaria.
 
 ## Adaptador HTTP preparado cerrado
 
-Ruta `/api/projects/[projectId]/assistance-consent`: GET de estado y POST de concesión/retiro. Resuelve JWT/propietario por servidor, origen/JSON exactos, cuerpo máximo768bytes/3segundos, límite de solicitudes, revisión/pedido y finalidad fija. Publica solo granted/issuedAt/expiresAt, nunca secuencia o actor. Corta al cambiar ventana, identidad o inscripción visible durante las esperas y consulta otra vez el estado primario antes de responder.
+Ruta `/api/projects/[projectId]/assistance-consent`: GET de estado y POST de concesión/retiro. Resuelve JWT/propietario por servidor, origen/JSON exactos, cuerpo máximo768bytes/3segundos, límite de solicitudes, revisión/pedido y finalidad fija. Publica granted/issuedAt/expiresAt y stateVersion, nunca secuencia o actor. stateVersion es una marca de concurrencia, no una credencial ni permiso. Corta al cambiar ventana, identidad o inscripción visible durante las esperas y consulta otra vez el estado primario antes de responder.
 
 Requiere flag nuevo `AFW_ASSISTANCE_GOAL_CONTEXT_ENABLED=true`, selector propio existente y fecha UTC canónica `AFW_ASSISTANCE_GOAL_CONTEXT_EXPIRES_AT` dentro de diez minutos. Ausentes por defecto: deniega404 antes de leer/escribir DB. La concesión se acota a esa ventana. Ningún config remoto o entorno cloud fue ampliado por preparar el adaptador.
 
-Sigue pendiente la UI, lectura de servicio con identidad/reserva separadas, entrega de preguntas/propuestas, migración propia y aceptación real. La ruta de consentimiento no lee ni transmite contexto a Codex cloud; conceder no inicia una consulta. Los mensajes deberán explicar ese estado con precisión.
+Sigue pendiente la aceptación visual, lectura de servicio con identidad/reserva separadas, entrega de preguntas/propuestas, migración propia y aceptación real. La ruta de consentimiento no lee ni transmite contexto a Codex cloud; conceder no inicia una consulta. La UI explica ese estado con precisión.
 
 Validación ampliada del almacenamiento/adaptador:16pruebas focalizadas y suite completa de1.014pruebas pasaron; lint sin errores (dos advertencias previas) y build completado. Se comprobó timeout real de3segundos y cancelación del cuerpo, límites, CSRF, idempotencia, expiración, propiedad y carrera de escritura. No hubo SQL ni permisos remotos.
+
+## Retiro frente a una autorización atrasada y UI preparada
+
+Se reprodujo primero el fallo: una concesión anterior al retiro podía llegar tarde y devolver200/reactivar. El POST ahora exige la marca de estado consultada; una concesión nueva compara esa marca y el INSERT compara la secuencia del proyecto en la misma operación SQL. El retiro no depende de una marca vigente. Un reintento ya registrado devuelve el estado vigente sin renovar permiso. La prueba nativa SQLite introduce el retiro entre la comprobación y el INSERT: se conserva solo el retiro, la concesión falla409 y la lectura deniega.
+
+`AssistanceGoalConsent` aparece dentro del pedido de orientación únicamente con flag y ventana canónica explícitos; ambos siguen ausentes remotamente. Explica tipo de sitio/objetivos, destino, vigencia y límites. Retirar permanece disponible aunque haya cambios sin confirmar. Una respuesta perdida conserva el mismo intento; consultar no confirma ese intento ni lo renueva. Retirar explícitamente reemplaza una concesión incierta y el servidor bloquea su llegada tardía. Conflictos409 obligan a consultar el estado antes de una nueva concesión. Respuestas tardías de vistas desmontadas no actualizan la UI. No descarta audio, narrativa ni borrador.
+
+El lector cliente limita JSON a512bytes/3segundos, cancela streams bloqueados y rechaza metadatos privados o fechas incoherentes. Suite completa de1.019pruebas aprobada, seguida de una prueba nativa adicional aprobada de retiro durante el INSERT. Lint sin errores y dos advertencias anteriores; build final aprobado. El ensayo visual desktop/móvil no está acreditado: Chrome3 no estuvo disponible para control. Harness sintético local en output/goal-consent-preview, sin Cloudflare ni datos reales; servidor detenido al terminar el intento. No promocionar esta UI como aceptada ni desplegarla abierta por los checks locales.

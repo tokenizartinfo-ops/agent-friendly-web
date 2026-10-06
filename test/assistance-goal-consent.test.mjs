@@ -22,6 +22,22 @@ test('a purpose-specific consent is recorded once without renewal on retry',asyn
  assert.equal(a.status,200);assert.equal(a.granted,true);assert.equal(a.expiresAt,now+600000);
  assert.deepEqual(b,a);assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM assistance_goal_consent_events').get().n,1);f.sqlite.close();
 });
+
+test('withdrawal between the state check and INSERT fences the grant in native SQLite',async()=>{
+ const f=fixture(),prepare=f.options.db.prepare;
+ const state=await consent.readAssistanceGoalConsent(f.options);
+ f.options.db.prepare=sql=>{
+  const statement=prepare(sql);if(!sql.startsWith('INSERT'))return statement;
+  return{bind(...args){const bound=statement.bind(...args);return{async run(){
+   f.sqlite.prepare('INSERT INTO assistance_goal_consent_events(project_id,user_id,source_event_id,revision,action,consent_version,request_id,issued_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?)').run('own','owner',sourceId,3,'revoke','afw.assistance-goals-consent.v1','22222222-2222-4222-8222-222222222222',now,now);
+   return bound.run();
+  }};}};
+ };
+ const result=await consent.recordAssistanceGoalConsent({...f.options,expectedProjectSequence:state.projectSequence,expectedStateVersion:state.stateVersion});
+ assert.equal(result.status,409);
+ assert.deepEqual(f.sqlite.prepare('SELECT action FROM assistance_goal_consent_events').all().map(row=>row.action),['revoke']);
+ assert.equal((await consent.readAssistanceGoalConsent(f.options)).granted,false);f.sqlite.close();
+});
 test('withdrawal and expiry deny while preserving grant history',async()=>{
  const f=fixture();await consent.recordAssistanceGoalConsent(f.options);
  const revoked=await consent.recordAssistanceGoalConsent({...f.options,action:'revoke',requestId:'22222222-2222-4222-8222-222222222222',now:now+1000});

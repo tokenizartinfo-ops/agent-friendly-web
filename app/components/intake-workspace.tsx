@@ -138,7 +138,7 @@ function claimFailureMessage(payload: ClaimPayload, locale: Locale) {
   return localizedMessage(locale, 'El dominio todavía no pudo verificarse.', 'The domain could not be verified yet.', 'O domínio ainda não pôde ser verificado.');
 }
 
-export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal, copilotEnabled = false, copilotProjectId = '', assistanceEnabled = false, assistanceProjectId = '' }: { userName: string; userEmail: string; locale?: Locale; rehearsal?: { request: typeof fetch; autoSave?: boolean }; copilotEnabled?: boolean; copilotProjectId?: string; assistanceEnabled?: boolean; assistanceProjectId?: string }) {
+export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal, copilotEnabled = false, copilotProjectId = '', assistanceEnabled = false, assistanceProjectId = '', assistanceGoalConsentEnabled = false }: { userName: string; userEmail: string; locale?: Locale; rehearsal?: { request: typeof fetch; autoSave?: boolean }; copilotEnabled?: boolean; copilotProjectId?: string; assistanceEnabled?: boolean; assistanceProjectId?: string; assistanceGoalConsentEnabled?: boolean }) {
   const request = rehearsal?.request || fetch;
   const [autosavePaused, setAutosavePaused] = useState(false);
   const [manualBusy, setManualBusy] = useState(false);
@@ -494,7 +494,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         window.location.assign(exitTarget);
       }} />}
       <main className="intake-main">
-        {assistanceAvailable?<DossierAssistance key={projectId} projectId={projectId} revision={scopeRevision} canRequest={Boolean(loaded&&scopeRevision>0&&!unconfirmedChanges&&!conflictReview&&!sessionRequired&&status!=='saving'&&!workingPending)} locale={locale} request={request}/>:null}
+        {assistanceAvailable?<DossierAssistance key={projectId} projectId={projectId} revision={scopeRevision} canRequest={Boolean(loaded&&scopeRevision>0&&!unconfirmedChanges&&!conflictReview&&!sessionRequired&&status!=='saving'&&!workingPending)} locale={locale} request={request} goalConsentEnabled={assistanceGoalConsentEnabled}/>:null}
         <fieldset disabled={Boolean(manualBusy || conflictReview || !loaded)} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
         <div className="page-title">
           <span>{copy.pageEyebrow}</span>
