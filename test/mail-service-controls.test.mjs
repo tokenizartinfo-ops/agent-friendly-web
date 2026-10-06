@@ -27,11 +27,46 @@ test('service brand promotion is server-only and preserves the exact approved pa
   const jwt=await token(),request=()=>new Request(config.origin+'/consume/reply-1',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':jwt}});
   assert.equal((await (await createMailServiceControls(options)(request())).json()).state,'blocked');
   assert.equal(sent.length,0);
-  const handle=createMailServiceControls({...options,config:{...config,brandEnabled:true}});
+  const handle=createMailServiceControls({...options,config:{...config,brandEnabled:true,brandStartsAt:'1970-01-01T00:00:00.100Z',brandExpiresAt:'1970-01-01T00:00:00.200Z'}});
   assert.equal((await (await handle(request())).json()).state,'accepted');
   assert.deepEqual(sent[0],content.brand.message);
   assert.equal((await (await handle(request())).json()).state,'not_claimed');
   assert.equal(sent.length,1);
+});
+
+test('brand trial rejects missing, malformed, future, overlong and expired windows with a still-valid service token',async()=>{
+  const db=await setup(await brandedMessage()),jwt=await token();let sends=0;
+  const options={db,keySet:publicKey,now:()=>101,limiter:{limit:async()=>({success:true})},email:{send:async()=>{sends++;return {messageId:'<unexpected@example.com>'};}}};
+  for(const window of [
+    {},{brandStartsAt:'bad',brandExpiresAt:'bad'},
+    {brandStartsAt:'1970-01-01T00:00:00.102Z',brandExpiresAt:'1970-01-01T00:00:00.200Z'},
+    {brandStartsAt:'1970-01-01T00:00:00.000Z',brandExpiresAt:'1970-01-01T00:10:00.001Z'},
+    {brandStartsAt:'1970-01-01T00:00:00.000Z',brandExpiresAt:'1970-01-01T00:00:00.101Z'},
+  ]){
+    const handle=createMailServiceControls({...options,config:{...config,brandEnabled:true,...window}});
+    const response=await handle(new Request(config.origin+'/consume/reply-1',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':jwt}}));
+    assert.equal(response.status,404);
+  }
+  assert.equal(sends,0);
+  assert.equal((await db.prepare('SELECT state FROM mail_outbox').first()).state,'approved');
+});
+
+test('expiry while the limiter awaits prevents claiming an approved branded message',async()=>{
+  const db=await setup(await brandedMessage());let clock=101,sends=0;
+  const handle=createMailServiceControls({db,keySet:publicKey,now:()=>clock,config:{...config,brandEnabled:true,brandStartsAt:'1970-01-01T00:00:00.100Z',brandExpiresAt:'1970-01-01T00:00:00.150Z'},limiter:{limit:async()=>{clock=150;return {success:true};}},email:{send:async()=>{sends++;return {messageId:'<unexpected@example.com>'};}}});
+  const response=await handle(new Request(config.origin+'/consume/reply-1',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':await token()}}));
+  assert.equal((await response.json()).state,'blocked');assert.equal(sends,0);
+  assert.equal((await db.prepare('SELECT state FROM mail_outbox').first()).state,'approved');
+});
+
+test('expiry after claim cancels the attempt before any provider call',async()=>{
+  const db=await setup(await brandedMessage());let clock=101,sends=0;
+  const delayedDb={prepare(sql){let statement=db.prepare(sql);return {bind(...args){statement=statement.bind(...args);return this;},async first(){const row=await statement.first();if(sql.includes("SET state='sending'"))clock=150;return row;},run(){return statement.run();}};}};
+  const handle=createMailServiceControls({db:delayedDb,keySet:publicKey,now:()=>clock,config:{...config,brandEnabled:true,brandStartsAt:'1970-01-01T00:00:00.100Z',brandExpiresAt:'1970-01-01T00:00:00.150Z'},limiter:{limit:async()=>({success:true})},email:{send:async()=>{sends++;return {messageId:'<unexpected@example.com>'};}}});
+  const response=await handle(new Request(config.origin+'/consume/reply-1',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':await token()}}));
+  assert.equal((await response.json()).state,'blocked');assert.equal(sends,0);
+  assert.equal((await db.prepare('SELECT state FROM mail_outbox').first()).state,'cancelled');
+  assert.equal((await db.prepare('SELECT COUNT(*) n FROM mail_receipts').first()).n,0);
 });
 test('service can consume an approved key once using bound custody and provider',async()=>{
   const db=await setup();let sends=0;

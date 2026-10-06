@@ -11,7 +11,7 @@ test('private review shell keeps mail out of HTML and confines requests to same 
   assert.match(html,/Aprobar este mensaje/);
   assert.match(html,/Retirar permiso/);
   assert.match(response.headers.get('Content-Security-Policy'),/connect-src 'self'/);
-  assert.match(html,/no confirma su envío/);
+  assert.match(html,/no confirma su envío/i);
 });
 test('invalid opaque key cannot enter page markup',()=>{
   assert.throws(()=>mailReviewPage('<script>alert(1)</script>'));
