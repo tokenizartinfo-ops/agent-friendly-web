@@ -10,6 +10,8 @@ Una operación admitida antes del deadline puede concluir después: el corte no 
 
 Validación: suite completa previa905/905, lint0errores/2warnings existentes y build completo; posterior prueba adicional de entrega en vuelo4/4 casos productor. CI de la revisión debe validar la suite906 antes de merge. Sin migraciones, datos de clientes o activación permanente.
 
+Actualización remota: PR280 merged, main c11a0d0d9352ea858ce7c98637bd9854110ef274, CI37391570075 success (npm test/lint/build). Fuente del despliegue4a042080cea742ff3fffad0a498d4fc2f208ca95. Productor inicialmente cerrado eee609d5; tras ensayo y retirada de firma quedó25b94286-ec49-4dd2-8ce9-25f2026bd401 al100%, flagsfalse/deadlineausente/cronvacío/D1original verificados por API. El ensayo de cron no acreditó ejecución; ver AFW-OPERATIONAL-CRON-RECEIPT-2026-10-05.es.md. No convertir validación local o deploy correcto en aceptación de ejecución programada.
+
 Inventario público read-only: las seis rutas de delegated-canary/delegated-pilot son404 con las versiones esperadas aa121311/94a3c291. Dos lecturas iniciales PowerShell tuvieron error de transporte; curl corroboró404 sin credenciales. Esto solo verifica el borde cerrado, no lectura privada ni funcionalidad OAuth.
 
 Promoción remota: desplegar primero productor disabled/sin deadline/cron vacío, conservar servicio receptor y D1operacional original. Verificar settings y versión independientemente. Después preparar ventana operacional con firma de entrega en custodia servidor y cierre de todos los componentes; no habilitar cron sin ese contrato.
