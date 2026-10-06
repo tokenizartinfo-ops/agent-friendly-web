@@ -13,6 +13,7 @@
   "vars": {
     "MAIL_OPERATOR_ENABLED": "false",
     "MAIL_SERVICE_ENABLED": "false",
+    "MAIL_BRAND_ENABLED": "false",
     "MAIL_OPERATOR_ORIGIN": "https://mail-ops-canary.agentfriendlyweb.dev",
     "MAIL_SERVICE_ORIGIN": "https://mail-consumer-canary.agentfriendlyweb.dev",
     "MAIL_ACCESS_TEAM_DOMAIN": "tokenizart.cloudflareaccess.com",

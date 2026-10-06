@@ -3,8 +3,20 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { operationsDb } from './fixtures/operations-db.mjs';
 import { storeMailContent, loadMailContent, storeMailDecision, authorizeMailDecision, revokeMailDecision, storeMailReceipt } from '../lib/mail-custody.mjs';
+import { brandedMessage } from './fixtures/branded-mail.mjs';
 const message = { to: 'owner@example.com', subject: 'Test', text: 'Synthetic' };
 function setup() { const { db, sqlite } = operationsDb(); sqlite.exec(readFileSync(new URL('../worker/mail/schema.sql', import.meta.url),'utf8')); return db; }
+
+test('brand custody preserves every asset and rejects a changed approval snapshot',async()=>{
+  const db=setup(),content=await brandedMessage();
+  const hash=await storeMailContent(db,'brand-1',content);
+  assert.deepEqual(await loadMailContent(db,'brand-1'),content);
+  await storeMailDecision(db,{key:'brand-1',contentHash:hash,decisionRef:'decision-brand',actorRef:'actor-1',expiresAt:200},100);
+  assert.equal(await authorizeMailDecision(db,{key:'brand-1',decisionRef:'decision-brand',contentHash:hash,recipient:content.to},101),true);
+  const changed=structuredClone(content);changed.brand.message.html+='changed';
+  await assert.rejects(storeMailContent(db,'brand-1',changed),/invalid/);
+  await assert.rejects(storeMailContent(db,'brand-2',{...content,text:'Different alternative'}),/invalid/);
+});
 test('custodied content is immutable and reloads the exact approved message', async () => {
   const db = setup(); const hash = await storeMailContent(db,'reply-1',message);
   assert.deepEqual(await loadMailContent(db,'reply-1'),message);
