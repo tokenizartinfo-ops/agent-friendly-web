@@ -44,7 +44,7 @@ export default function MethodologyPage() {
           <span>Estado normativo</span>
           <div><strong>robots.txt, sitemap, JSON-LD y OpenAPI</strong><p>Bases estables y ampliamente utilizadas.</p></div>
           <div><strong>MCP 2026-07-28</strong><p>Protocolo vigente para exponer contexto y herramientas.</p></div>
-          <div><strong>A2A 1.0</strong><p>Protocolo abierto para descubrimiento y colaboracion entre agentes; no esta desplegado aqui.</p></div>
+          <div><strong>A2A 1.0</strong><p>AFW publica un servicio independiente de diagnóstico de sitios públicos. No permite consultar expedientes privados, publicar cambios ni realizar transacciones. <a href="/.well-known/agent-card.json">Ver contrato y capacidades</a>.</p></div>
           <div><strong>llms.txt</strong><p>Propuesta comunitaria; util como indice, no garantia de indexacion.</p></div>
           <div><strong>WebMCP</strong><p>Borrador de W3C Community Group, todavia experimental.</p></div>
           <div><strong>x402 y MPP</strong><p>Opciones emergentes para pagos agenticos; requieren evaluacion por caso.</p></div>
