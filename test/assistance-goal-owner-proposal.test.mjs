@@ -29,4 +29,3 @@ test('owner sees dated minimal prepared guidance after service permission expire
  assert.equal(f.sqlite.prepare('SELECT count(*) n FROM assistance_goal_proposal_results').get().n,1);
  }finally{f.close();}
 });
-
