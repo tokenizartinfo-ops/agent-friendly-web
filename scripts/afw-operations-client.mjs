@@ -2,8 +2,8 @@ import { pathToFileURL } from 'node:url';
 import { createOperationsClient } from '../lib/operations-client.mjs';
 import {runNoticeCycle} from '../lib/operations-notice-cycle.mjs';
 
-export async function runOperationsClient(args, env = process.env, {fetchImpl} = {}) {
-  const client = createOperationsClient({ env, ...(fetchImpl?{fetchImpl}:{}) });
+export async function runOperationsClient(args, env = process.env, {fetchImpl,onDiagnostic} = {}) {
+  const client = createOperationsClient({ env, onDiagnostic, ...(fetchImpl?{fetchImpl}:{}) });
   if(args.length===1&&args[0]==='assistance-list')return {signals:await client.listAssistance()};
   if(args.length===3&&args[0]==='assistance-claim')return {reservation:await client.claimAssistance(args[1],args[2])};
   if(args.length===3&&args[0]==='assistance-finish')return {outcome:await client.finishAssistance(args[1],args[2])};
@@ -18,6 +18,9 @@ export async function runOperationsClient(args, env = process.env, {fetchImpl} =
   throw new Error('Invalid operational command');
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  try { process.stdout.write(JSON.stringify(await runOperationsClient(process.argv.slice(2))) + '\n'); }
+  const args = process.argv.slice(2), diagnostics = args[0] === '--diagnostics';
+  if (diagnostics) args.shift();
+  const onDiagnostic = diagnostics ? value => process.stderr.write(JSON.stringify({ diagnostic: value }) + '\n') : undefined;
+  try { process.stdout.write(JSON.stringify(await runOperationsClient(args, process.env, { onDiagnostic })) + '\n'); }
   catch { process.stderr.write('Operational request unavailable\n'); process.exitCode = 1; }
 }
