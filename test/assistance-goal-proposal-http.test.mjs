@@ -6,6 +6,8 @@ import {goalSourceFixture,time} from './fixtures/assistance-goal-source.mjs';
 import {operationsDb} from './fixtures/operations-db.mjs';
 import {recordAssistanceGoalRead} from '../lib/assistance-goal-read-receipt.mjs';
 import {signedAssistanceGoalProposalRequest} from '../lib/assistance-goal-proposal-identity.mjs';
+import {reserveAssistanceGoalGeneration} from '../lib/assistance-goal-generation-budget.mjs';
+import {createAssistanceGoalGenerator} from '../lib/assistance-goal-provider.mjs';
 const contract=await import('../lib/assistance-goal-proposal-http.mjs').catch(()=>({}));
 const {privateKey,publicKey}=await generateKeyPair('RS256');
 async function fixture(){
@@ -29,6 +31,19 @@ test('closed proposal HTTP has no side effects; authenticated own composition ge
  const f=await fixture();try{const handler=contract.createAssistanceGoalProposalHttp(f.options),first=await handler(await f.request());assert.equal(first.status,200);const result=await first.json();
  const second=await handler(await f.request());assert.equal(second.status,200);assert.deepEqual(await second.json(),result);assert.deepEqual(f.counts(),{generations:1,budgets:1});
  assert.equal(result.proposal.reviewRequired,true);assert.equal(result.proposal.operationsAuthorized,false);assert.doesNotMatch(JSON.stringify(result),/PRIVATE|owner|goalsJson|consentSequence/);
+ }finally{f.close();}
+});
+
+test('HTTP composition uses durable nested budget and bounded WorkersAI adapter; cached retry never calls provider again',async()=>{
+ const f=await fixture();try{
+ for(const name of ['dossier-supervision','consumer-state','notice-reservations','assistance-goal-generation-budget'])f.ops.sqlite.exec(readFileSync('worker/operations/'+name+'.sql','utf8'));
+ let calls=0;
+ f.options.reserveGeneration=value=>reserveAssistanceGoalGeneration({...value,db:f.ops.db});
+ f.options.generate=createAssistanceGoalGenerator({locale:'es',ai:{run:async()=>{calls++;return{response:{question:'¿Qué información querés que encuentren primero?',why:'Así elegimos un comienzo útil para tu sitio.'}};}}});
+ const handler=contract.createAssistanceGoalProposalHttp(f.options);
+ const first=await handler(await f.request());assert.equal(first.status,200);const expected=await first.json();
+ const retry=await handler(await f.request());assert.equal(retry.status,200);assert.deepEqual(await retry.json(),expected);
+ assert.equal(calls,1);assert.equal(f.ops.sqlite.prepare('SELECT count(*) n FROM assistance_goal_generation_budget').get().n,1);
  }finally{f.close();}
 });
 test('missing budget, failed budget, withdrawal during generation and closure during rate limit cannot deliver a proposal',async()=>{
