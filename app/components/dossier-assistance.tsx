@@ -2,15 +2,16 @@
 import {useEffect,useRef,useState} from 'react';
 import {createAssistanceAttempt,readAssistanceResponse} from '../../lib/dossier-assistance-client.mjs';
 import {assistanceReviewPresentation} from '../../lib/assistance-review-presentation.mjs';
+import {AssistanceGoalProposal} from './assistance-goal-proposal';
 import {AssistanceGoalConsent} from './assistance-goal-consent';
 type Receipt={id:string;requestedAt:string;revision:number;topic:string;state:string;stale:boolean;review?:{outcome:string;reviewedAt:number}};
-type Props={projectId:string;revision:number;canRequest:boolean;locale:'es'|'en'|'pt';request:typeof fetch;goalConsentEnabled?:boolean};
+type Props={projectId:string;revision:number;canRequest:boolean;locale:'es'|'en'|'pt';request:typeof fetch;goalProposalEnabled?:boolean;goalConsentEnabled?:boolean};
 const copy={
  es:{title:'¿En qué parte te ayudo?',intro:'Elegí una parte. Tu pedido quedará en el expediente y podés seguir a tu ritmo.',topics:['Orientarme','Guardar cambios','Comparar archivos','Entregar mejoras'],send:'Guardar pedido de ayuda',retry:'Reintentar el mismo pedido',saving:'Guardando tu pedido…',received:'Tu pedido quedó guardado. Podés seguir con el expediente; este recibo todavía no confirma una revisión.',stale:'El expediente cambió después de este pedido.',error:'No pude confirmar el recibo. Reintentemos el mismo pedido para evitar duplicarlo.',unready:'Primero confirmemos el guardado del expediente. Tus cambios siguen en la pantalla.',readError:'No pude consultar tu último pedido. Volvé a consultar antes de crear otro.',refresh:'Consultar último pedido'},
  en:{title:'Where can I help?',intro:'Choose one part. Your request will stay in the dossier, and you can continue at your own pace.',topics:['Find my way','Save changes','Compare files','Deliver improvements'],send:'Save help request',retry:'Retry the same request',saving:'Saving your request…',received:'Your request is saved. You can continue; this receipt does not yet confirm a review.',stale:'The dossier changed after this request.',error:'I could not confirm the receipt. Retry the same request to avoid a duplicate.',unready:'First, let us confirm the dossier is saved. Your changes remain on screen.',readError:'I could not check your latest request. Check again before creating another.',refresh:'Check latest request'},
  pt:{title:'Em qual parte posso ajudar?',intro:'Escolha uma parte. Seu pedido ficará no dossiê e você pode continuar no seu ritmo.',topics:['Me orientar','Salvar alterações','Comparar arquivos','Entregar melhorias'],send:'Salvar pedido de ajuda',retry:'Repetir o mesmo pedido',saving:'Salvando seu pedido…',received:'Seu pedido foi salvo. Você pode continuar; este recibo ainda não confirma uma revisão.',stale:'O dossiê mudou depois deste pedido.',error:'Não pude confirmar o recibo. Vamos repetir o mesmo pedido para evitar duplicação.',unready:'Primeiro, vamos confirmar que o dossiê foi salvo. Suas alterações continuam na tela.',readError:'Não pude consultar seu último pedido. Consulte novamente antes de criar outro.',refresh:'Consultar último pedido'}
 };
-export function DossierAssistance({projectId,revision,canRequest,locale,request,goalConsentEnabled=false}:Props){
+export function DossierAssistance({projectId,revision,canRequest,locale,request,goalProposalEnabled=false,goalConsentEnabled=false}:Props){
  const text=copy[locale],topics=['orientation','save','comparison','delivery'];
  const [topic,setTopic]=useState('orientation'),[receipt,setReceipt]=useState<Receipt|null>(null),[state,setState]=useState('loading');
  const [attempt]=useState(()=>createAssistanceAttempt());const lock=useRef(false),mounted=useRef(true);
@@ -31,6 +32,7 @@ export function DossierAssistance({projectId,revision,canRequest,locale,request,
    {!receipt||receipt.revision!==revision||viewState==='send-error'?<><label>{text.title} <select value={topic} onChange={e=>setTopic(e.target.value)} disabled={['send-error','saving','loading','changed'].includes(viewState)}>{topics.map((value,index)=><option key={value} value={value}>{text.topics[index]}</option>)}</select></label><button type="button" disabled={!canRequest||['saving','loading','changed'].includes(viewState)} onClick={()=>void send()}>{viewState==='send-error'?text.retry:text.send}</button></>:null}
    {!canRequest?<p>{text.unready}</p>:null}
   </>}
-  {goalConsentEnabled&&receipt?.topic==='orientation'?<AssistanceGoalConsent key={receipt.id} projectId={projectId} sourceId={receipt.id} revision={receipt.revision} canGrant={canRequest&&!receipt.stale&&receipt.revision===revision} locale={locale} request={request}/>:null}
+  {goalProposalEnabled&&receipt?.topic==='orientation'?<AssistanceGoalProposal key={'proposal-'+receipt.id} projectId={projectId} sourceId={receipt.id} locale={locale} request={request} currentSaved={canRequest&&!receipt.stale&&receipt.revision===revision}/>:null}
+ {goalConsentEnabled&&receipt?.topic==='orientation'?<AssistanceGoalConsent key={receipt.id} projectId={projectId} sourceId={receipt.id} revision={receipt.revision} canGrant={canRequest&&!receipt.stale&&receipt.revision===revision} locale={locale} request={request}/>:null}
  </details>;
 }
