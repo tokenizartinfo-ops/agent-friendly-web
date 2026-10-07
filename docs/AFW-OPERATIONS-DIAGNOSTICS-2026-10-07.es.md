@@ -30,4 +30,14 @@ La [documentación Cloudflare de métricas](https://developers.cloudflare.com/an
 
 ## Siguiente aceptación
 
-Integrar el cliente probado y comprobar adopción de fuente sin reemplazar credenciales por inferencia. Primero baseline de autenticación contra servicio cerrado; luego comprobar cron propagado con resultado observable y ACK. Solo después revisar el pedido vigente y devolverlo a la interfaz. La invitación de Max y la prueba integrada con ordenador apagado siguen pendientes.
+Comprobar adopción del cliente integrado en la fuente cloud sin reemplazar credenciales por inferencia. Primero baseline de autenticación contra servicio cerrado; luego comprobar cron propagado con resultado observable y ACK. Solo después revisar el pedido vigente y devolverlo a la interfaz. La invitación de Max y la prueba integrada con ordenador apagado siguen pendientes.
+
+## Contraste y validación final
+
+Un único GET de curl, con los mismos bindings del entorno y sin shell ni redirecciones, devolvió401JSON a las20:09:25.291Z. No se imprimieron argumentos, valores, headers ni cuerpo. Dos clientes HTTP distintos rechazados no sostienen la hipótesis de un fallo exclusivo de Node; tampoco prueban una clave incorrecta.
+
+Cierre revalidado a las20:10:15.399Z: token deshabilitado/versión2, selector anterior restaurado, gerente cerrado/plazo vacío/D1 original verificada en ambos campos y cron vacío. Sin nueva lectura privada ni rotación.
+
+PR322, fuente `86b91c2a73b4957d55cef4b778595b2d3450c936`, CI `37679652042` success: **1101 pruebas, 1101 aprobadas, cero fallos**. Revisión independiente sin hallazgos accionables. Esta validación acredita el cambio del cliente, no resuelve el rechazo remoto ni adopta automáticamente la fuente en Codex Cloud.
+
+PR322 integrada a las20:11:19Z, merge `4d424cf2c1b117bf42069532f9ce19747e649078`. No requiere despliegue de la web pública para acreditar el CLI. La tarea cloud existente conserva su fuente08f47d9 hasta una adopción explícitamente verificada; no se hizo fetch/checkout para simularla.
