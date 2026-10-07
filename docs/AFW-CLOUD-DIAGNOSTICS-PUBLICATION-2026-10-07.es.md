@@ -42,6 +42,8 @@ Cierre final por API a las23:32:31.309Z: token disabled/versión2, política ori
 
 Adopción y cliente diagnóstico quedan comprobados; autenticación remota sigue pendiente. Próximo ensayo remoto debe usar la modalidad soportada por orden con sidecar restringido y lectura fresca, sin convertir ese permiso de ejecución en ampliación de destinos o acceso a clientes. No repetir baselines idénticos ni pedir claves por inferencia; la próxima comprobación necesita una hipótesis discriminante sobre suministro/Access. Revisión10 y prueba integradaPC-off todavía no aceptadas.
 
+El contrato de `worker/operations-manager/index.mjs` devuelve404/unavailable antes de la validación de identidad cuando la ventana/consumidor están cerrados. El baseline no depende de filas del expediente ni del clientId secreto del Worker. Una respuesta401 no acredita haber atravesado ese cierre; no abrir gates para intentar resolver autenticación.
+
 Productor QA revalidado por API a las23:22:43.120Z: flags de supervisión y feedback false, cron vacío, D1 propia f100f2fd en ambos campos y versión1540af42 al100%. Sin mutación del productor. Publicación cloud no abre el circuito privado ni resuelve401.
 
 Siguiente criterio: instancia publicada running, red enforced y custodia observada; después diagnóstico finito de acceso con servicio cerrado. Exigir autenticación comprobada, entrega de revisión10, retorno vigente y cierre antes del ensayo integrado con PC apagada y la invitación de Max.
