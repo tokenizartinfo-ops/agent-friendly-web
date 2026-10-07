@@ -9,7 +9,9 @@ test('progress counts actual basic fields and separates draft changes from ackno
  const model=dossierProgress(state({...basic,audience:''},{saved:basic,status:'saved'}));
  assert.equal(model.basicCount,5);assert.equal(model.savedBasicCount,6);assert.deepEqual(model.changed,['audience']);assert.equal(model.state,'unsaved');assert.equal(model.target,'dossier-save');
  assert.equal(dossierProgress(state(basic)).basicCount,6);
- assert.equal(dossierProgress(state(basic)).state,'decisions');
+ assert.equal(dossierProgress(state(basic)).state,'basics');
+ assert.equal(dossierProgress(state(basic)).basicTotal,8);
+ assert.deepEqual(dossierProgress(state(basic)).missing,['siteType','goals']);
  assert.equal(dossierProgress(state({}, {saved:{}})).basicCount,0);
 });
 test('connection and recovery take precedence and never claim unsaved data was stored',()=>{
@@ -21,7 +23,7 @@ test('connection and recovery take precedence and never claim unsaved data was s
  assert.equal(dossierProgress(state({...basic,cms:'Wix'},{saved:basic,status:'error'})).state,'retry');
 });
 test('guidance transitions to explicit decisions, verification, then delivery review without permission',()=>{
- assert.equal(dossierProgress(state(basic)).target,'dossier-identity');
+ assert.equal(dossierProgress(state(basic)).target,'dossier-assistant');
  assert.equal(dossierProgress(state({...basic,role:'Owner',siteType:'business',goals:['discovery']})).target,'dossier-content');
  assert.equal(dossierProgress(state(complete)).state,'verification');
  const end=dossierProgress(state(complete,{verified:true,verifiedUntil:new Date(Date.now()+60000).toISOString()}));

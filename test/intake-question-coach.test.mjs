@@ -5,8 +5,20 @@ import {applyIntakeDraft} from '../lib/intake-draft-review.mjs';
 import {normalizeIntake} from '../lib/intake.mjs';
 test('asks only missing descriptive fields and leaves deferred facts untouched',()=>{
  const draft={organization:'Example',languages:['en'],authorizedResources:[]};
- assert.deepEqual(missingIntakeQuestions(draft,['hosting']),['website','audience','cms']);
+ assert.deepEqual(missingIntakeQuestions(draft,['hosting']),['website','siteType','goals','audience','cms']);
  assert.deepEqual(draft,{organization:'Example',languages:['en'],authorizedResources:[]});
+});
+
+test('guides explicit site type and goals without inferring capability or permission',()=>{
+ const draft={siteType:'',goals:[],authorizedResources:[],control:'unknown'};
+ const type=previewIntakeAnswer(draft,'siteType','commerce');
+ const next=applyIntakeDraft(draft,type);
+ const goals=previewIntakeAnswer(next,'goals',['content','discovery','content']);
+ assert.deepEqual(applyIntakeDraft(next,goals),{...draft,siteType:'commerce',goals:['content','discovery']});
+ assert.deepEqual(draft.goals,[]);
+ for(const answer of ['AF5','',[],['commerce']])assert.throws(()=>previewIntakeAnswer(draft,'siteType',answer));
+ for(const answer of ['improve everything',[],['AF5'],['content',2]])assert.throws(()=>previewIntakeAnswer(draft,'goals',answer));
+ assert.throws(()=>previewIntakeAnswer({...draft,goals:['content']},'goals',['discovery']),/stale/);
 });
 test('previews one declared answer without saving or expanding permissions',()=>{
  const draft={organization:'',authorizedResources:['llms'],control:'unknown'};
