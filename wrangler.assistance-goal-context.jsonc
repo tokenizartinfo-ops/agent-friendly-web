@@ -1,9 +1,10 @@
 {
   "name": "agent-friendly-web-goal-context-canary",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
   "main": "worker/assistance-goal-context/index.mjs",
   "compatibility_date": "2026-09-28",
   "workers_dev": false,
   "preview_urls": false,
-  "vars": { "AFW_GOAL_CONTEXT_ENABLED": "false" },
+  "vars": { "AFW_GOAL_CONTEXT_ENABLED": "false", "AFW_GOAL_PROPOSAL_ENABLED": "false", "AFW_GOAL_GENERATION_ENABLED": "false" },
   "triggers": { "crons": [] }
 }
