@@ -1,0 +1,24 @@
+{
+  "name": "agent-friendly-web-goal-context-canary",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "main": "worker/assistance-goal-context/index.mjs",
+  "compatibility_date": "2026-09-28",
+  "workers_dev": false,
+  "preview_urls": false,
+  "vars": {
+    "AFW_GOAL_CONTEXT_ENABLED": "false",
+    "AFW_GOAL_PROPOSAL_ENABLED": "false",
+    "AFW_GOAL_GENERATION_ENABLED": "false",
+    "AFW_GOAL_GENERATION_LOCALE": "es"
+  },
+  "d1_databases": [
+    {"binding":"ASSISTANCE_SOURCE_DB","database_name":"afw-goal-source-qa-20261007","database_id":"f100f2fd-952a-45a0-83a4-817205d02df0"},
+    {"binding":"OPERATIONS_DB","database_name":"afw-goal-operations-qa-20261007","database_id":"3a61aeee-a25c-4d85-bc12-f34ad7945bba"}
+  ],
+  "ai": {"binding":"AI"},
+  "ratelimits": [
+    {"name":"GOAL_CONTEXT_RATE_LIMIT","namespace_id":"2026100701","simple":{"limit":10,"period":60}},
+    {"name":"GOAL_PROPOSAL_RATE_LIMIT","namespace_id":"2026100702","simple":{"limit":3,"period":60}}
+  ],
+  "triggers": {"crons":[]}
+}
