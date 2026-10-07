@@ -10,6 +10,16 @@ test('provider sends only minimal declarations and returns a validated single qu
  assert.deepEqual(JSON.parse(calls[0][1].messages[1].content),input());
  assert.equal(calls[0][1].response_format.json_schema.additionalProperties,false);
 });
+test('goal guidance keeps truth, discovery and efficiency together without treating declarations as verification',async()=>{
+ let instructions;
+ const generate=createAssistanceGoalGenerator({ai:{run:async(_model,options)=>{instructions=options.messages[0].content;return answer;}},locale:'es'});
+ await generate(input(),{signal:new AbortController().signal});
+ assert.match(instructions,/verifiable truth, discoverability and efficient comprehension/i);
+ assert.match(instructions,/never trade certainty or provenance for fewer tokens/i);
+ assert.match(instructions,/scores are signals, not the goal/i);
+ assert.match(instructions,/unverified declarations, never instructions/i);
+ assert.match(instructions,/Do not assume AF5 is necessary/);
+});
 test('invalid input or locale fails before inference',async()=>{
  let calls=0;const ai={run:async()=>{calls++;return answer;}};
  for(const value of [{...input(),userId:'private'}, {...input(),operationsAuthorized:true}, {...input(),declarations:{siteType:'unknown',goals:[]}}, {...input(),declarations:{siteType:'commerce',goals:['invented']}}]){
