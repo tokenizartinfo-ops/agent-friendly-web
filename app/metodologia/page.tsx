@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ArrowRight, Beaker, CheckCircle2, FileCheck2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Beaker, CheckCircle2, FileCheck2, ShieldCheck } from '../components/client-icons';
 import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';

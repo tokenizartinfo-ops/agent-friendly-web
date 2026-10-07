@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Bot, MessageCircleMore, ShieldCheck } from 'lucide-react';
+import { Bot, MessageCircleMore, ShieldCheck } from '../components/client-icons';
 import { PublicGuideChat } from '../components/public-guide-chat';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';

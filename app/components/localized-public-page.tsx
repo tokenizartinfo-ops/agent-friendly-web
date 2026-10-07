@@ -1,4 +1,4 @@
-import { ArrowRight, Bot, FileCheck2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Bot, FileCheck2, ShieldCheck } from './client-icons';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { publicPageCopy } from '../../lib/public-page-copy.mjs';
 import { SiteFooter } from './site-footer';

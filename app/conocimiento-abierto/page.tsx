@@ -10,7 +10,7 @@ import {
   FolderTree,
   Scale,
   ShieldCheck,
-} from 'lucide-react';
+} from '../components/client-icons';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';

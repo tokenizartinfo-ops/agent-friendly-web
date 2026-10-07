@@ -1,4 +1,4 @@
-import { ArrowRight, Circle, Network } from 'lucide-react';
+import { ArrowRight, Circle, Network } from './client-icons';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { MATURITY_COPY } from '../../lib/home-copy.mjs';
 

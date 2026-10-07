@@ -1,4 +1,4 @@
-import { ArrowRight, HelpCircle } from 'lucide-react';
+import { ArrowRight, HelpCircle } from './client-icons';
 import { faqEntries, faqSourceLabel, PUBLIC_FAQ_COPY } from '../../lib/public-faq.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 
