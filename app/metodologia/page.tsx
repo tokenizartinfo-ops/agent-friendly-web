@@ -3,6 +3,7 @@ import { ArrowRight, Beaker, CheckCircle2, FileCheck2, ShieldCheck } from '../co
 import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
+import { publicPageCopy } from '../../lib/public-page-copy.mjs';
 
 export const metadata: Metadata = localizedRouteMetadata('methodology', 'es') as Metadata;
 
@@ -16,6 +17,7 @@ const layers = [
 ];
 
 export default function MethodologyPage() {
+  const purpose = publicPageCopy('methodology', 'es').sections[0];
   return (
     <main>
       <SiteHeader routeKey="methodology" />
@@ -26,6 +28,8 @@ export default function MethodologyPage() {
       </section>
       <section className="method-grid">
         <article className="method-copy">
+          <h2>{purpose.title}</h2>
+          <p>{purpose.body}</p>
           <h2>Siete capas, una lectura honesta</h2>
           <p>La puntuacion combina descubrimiento, capacidad de respuesta, contenido legible por maquinas, herramientas, tecnologias experimentales, confianza y comercio agentico. Cada punto debe corresponder a una señal publica observada.</p>
           <p>La version 0.2 del auditor agrega diagnosticos de Content Signals, politica de crawlers, API Catalog, catalogos de recursos y Agent Skills sin modificar el puntaje AF v1. Asi se conserva la comparabilidad historica mientras calibramos esas señales.</p>
