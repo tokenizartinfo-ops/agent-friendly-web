@@ -1,3 +1,13 @@
+## Actualización vigente: 7 octubre de 2026
+
+La portada recuperada ya tiene corrección publicada y comprobada: AFW-ICON-PRODUCTION-RELEASE-2026-10-07.es.md, versiónfe4478cd100%,16 páginas200, documentos públicos200 y rutas privadas protegidas. La fotografía del 5oct debajo no representa la versión vigente. El piloto copilot continúa exclusivamente propio; Max no está incorporado automáticamente.
+
+La cadena de orientación mínima está preparada en PR307 y el Worker9a7a75ab permanece cerrado: tres flagsfalse, sin DB/AI/custodia/inscripción/rutas/cron. Pruebas locales de proveedor/presupuesto/lectura idempotente no equivalen a inferencia remota. Próximo cierre operativo: ensayo propio finito de generación y lectura; luego fuente cloud publicada/adoptada y turno útil confirmado. No repetir los ensayos propios de correo, dos propietarios o PC apagada ya aceptados.
+
+Estado cloud leído7oct: versión publicada6ac569e9/ref declarada43c54af; conserva seis referencias de custodia. Readiness/red actualesunknown no diagnostican credenciales incorrectas. No guardia permanente. La invitación contextual sigue pendiente y debe conducir directamente a /expediente, saludar a «Hola Max, de Sector de sistemas», explicar una pregunta por vez y el guardado, y permitir ayuda dentro del producto; no solicitar completar el expediente por correo ni prometer vigilancia aún no activa.
+
+Antes de invitar: comprobar fuente y generación propias; acordar mecanismo real de seguimiento finito con evidencias y cierre; preparar decisión de correo y entrada directa. El ingreso/consentimiento/objetivos del cliente solo se obtienen desde su sesión. No crearle proyecto por inferencia. Las cuatro etapas históricas siguen como mapa del caso, no como cuatro desarrollos pendientes íntegros.
+
 ## Actualización fechada: 6 octubre de 2026
 
 El bloque técnico de correo de marca ya tiene aceptación propia de extremo a extremo: paquete fijo, custodia/hash, revisión autenticada, envío cloud, segundo consumo sin duplicación, MIME con cinco imágenes binarias válidas y confirmación del owner «llego perfecto, imagen perfecta». Ver AFW-MAIL-BINARY-RASTER-FIX-2026-10-06.es.md y PR288. El ensayo terminó cerrado y su identidad deshabilitada.
