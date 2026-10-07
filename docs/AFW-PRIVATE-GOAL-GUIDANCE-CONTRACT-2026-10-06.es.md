@@ -123,3 +123,10 @@ Evidencia local: suite completa1057 pasó antes del último caso de código409;1
 CI37555198086 aprobó b8f9ae1 previo, que documenta la base cerrada87142980. No se cambió esa versión remota, flag, binding, cron, dominio, Access o esquema. Publicación/adopción cloud permanece en source43c54af; no acredita lectura privada ni ejecución de este coordinador.
 
 Siguiente bloque: canal de consulta del propietario, con proyecto/identidad resueltos por servidor y una pregunta visible con fecha, procedencia y vigencia; constancia append-only de presentación separada de aprobación o autosave. Resolver texto para intento no confirmado sin insinuar que continúa trabajando. Después completar propósito criptográfico, custodia y ensayo finito propio con preservación/rollback. Conservar aceptación móvil/teclado/reduced-motion/console pendiente y no promover clientes/guardia por esta preparación.
+
+
+## Lectura propia y confirmación explícita preparadas
+
+El canal del dueño y el recibo de lectura ya se prepararon en source5e57759: ver AFW-OWNER-GUIDANCE-READ-2026-10-06.es.md y AFW-OWNER-READING-CONFIRMATION-2026-10-06.es.md. GET no escribe; POST explícito con CAS/ledger conserva fecha ante corte y reintento. No implica aprobación, autosave ni resolución. La prueba local del componente recuperó el recibo y verificó teclado, cambios sin guardar y movimiento reducido; ancho móvil sin desbordamiento. No reemplaza aceptación autenticada o tipografía final.
+
+La autoridad criptográfica exclusiva de propuesta se prepara por separado en AFW-PROPOSAL-SERVICE-AUTHORITY-2026-10-06.es.md. El siguiente cierre es componerla en un adaptador HTTP cerrado y después proveer custodia/inscripción/fuente propia para un ensayo finito. No hay generación real o guardia permanente activada.
