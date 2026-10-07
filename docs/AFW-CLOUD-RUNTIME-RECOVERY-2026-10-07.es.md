@@ -8,6 +8,8 @@ El aprovisionamiento falló durante la autorización con causa desconocida. Un i
 
 Las herramientas ofrecieron consulta de estado y espera para starting, pero no reinicio de un executor failed. No se modificaron credenciales, publicación, red, Workers, permisos ni datos. La solicitud previa de Work general `6ac6775c-fd34-83e8-98a6-7f8e30ee1de5` carecía de binding AFW y se detuvo; no usarla como aceptación Codex. La conexión local de Chrome se recuperó, pero no acredita recuperación cloud.
 
+Comparación posterior con la tarea histórica `01a116b6-f87d-721c-ac2e-f2279c28b009`: consulta única, publicación `cecfgver_6ac652ef60c881a3a55fcdccb5e49b93`, running/running, connected, failure null, observaciones 39/39, red restricted/enforced y diez bindings ready. Ofrece exec_command/write_stdin; no se ejecutaron comandos ni HTTP. Esto distingue una instancia histórica operativa de la nueva fallida; no prueba la causa del fallo nuevo ni adopción de su fuente. No volver a cargar credenciales por inferencia de unknown.
+
 ## Recuperación requerida
 
 Usar solo un mecanismo soportado que restablezca capacidades, sin ampliar red o sustituir secretos a partir de unknown. Si exige otra tarea o publicación, identificar esa acción antes de ejecutarla. Una tarea posterior debe acreditar publicación, fuente real, origen, árbol limpio, política aplicada y referencias disponibles sin revelar valores; ejecutar entonces las cinco pruebas originales. No importar un checkout local para simular adopción.
