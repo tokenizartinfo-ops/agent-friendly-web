@@ -8,14 +8,14 @@ async function fixture(){
  const signal=await projectAssistanceSignal(source,secret);
  const request={eventId:signal.eventId,projectRef:signal.projectRef,runId:'22222222-2222-4222-8222-222222222222',revision:3};
  const state={open:true,service:{id:'synthetic-goal-service',purpose:'afw.goal-guidance.read.v1'},source:{projectId:'own',userId:'owner',sourceId:source.id},snapshot:{project:{id:'own',userId:'owner',revision:3,siteType:'commerce',goalsJson:'["discovery"]'},source,consent:{sequence:1,issuedAt:now-1000,expiresAt:now+60000}},lease:{...request,topic:'orientation',expiresAt:now+30000},reads:0};
- const deps={authenticate:async()=>structuredClone(state.service),resolveSource:async()=>structuredClone(state.source),readSnapshot:async()=>{state.reads++;return state.snapshot?{status:200,snapshot:structuredClone(state.snapshot)}:{status:403,code:'consent_required'};},readLease:async()=>structuredClone(state.lease),signalSecret:secret,isOpen:()=>state.open,getWindowExpiresAt:()=>now+60000,now:()=>now};
+ const deps={authenticate:async()=>structuredClone(state.service),resolveSource:async()=>structuredClone(state.source),readSnapshot:async()=>{state.reads++;return state.snapshot?{status:200,snapshot:structuredClone(state.snapshot)}:{status:403,code:'consent_required'};},readLease:async()=>structuredClone(state.lease),recordRead:async({context})=>({status:200,receipt:{version:'afw.assistance-goal-read-receipt.v1',id:'33333333-3333-4333-8333-333333333333',expiresAt:context.expiresAt}}),signalSecret:secret,isOpen:()=>state.open,getWindowExpiresAt:()=>now+60000,now:()=>now};
  return{state,deps,request};
 }
 test('the read orchestration returns only the minimal context after fresh server checks',async()=>{
  assert.equal(typeof readerContract.createAssistanceGoalReader,'function');const f=await fixture();
  const result=await readerContract.createAssistanceGoalReader(f.deps)(f.request);
  assert.equal(result.status,200);assert.deepEqual(result.context.declarations,{siteType:'commerce',goals:['discovery']});
- assert.equal(result.context.expiresAt,now+30000);assert.equal(result.context.operationsAuthorized,false);assert.equal(f.state.reads,2);
+ assert.equal(result.context.expiresAt,now+30000);assert.equal(result.context.operationsAuthorized,false);assert.equal(f.state.reads,3);
  assert.doesNotMatch(JSON.stringify(result),/"owner"|"own"|sourceId|sequence|synthetic-goal-service/);
 });
 test('finite window caps delivery and missing authentication remains closed',async()=>{
@@ -40,4 +40,11 @@ test('owner, revision, authority, lease and configuration changes during awaits 
  for(const change of changes){const f=await fixture();const original=f.deps.readSnapshot;let reads=0;f.deps.readSnapshot=async()=>{const value=await original();if(++reads===1)change(f);return value;};
   const result=await readerContract.createAssistanceGoalReader(f.deps)(f.request);assert.notEqual(result.status,200);assert.equal(result.context,undefined);
  }
+});
+test('service reads carry a persisted receipt and recheck authority after persistence',async()=>{
+ const f=await fixture();let recorded=false;
+ f.deps.recordRead=async({snapshot,context})=>{recorded=true;assert.equal(snapshot.consent.sequence,1);return{status:200,receipt:{version:'afw.assistance-goal-read-receipt.v1',id:'33333333-3333-4333-8333-333333333333',expiresAt:context.expiresAt}};};
+ const result=await readerContract.createAssistanceGoalReader(f.deps)(f.request);assert.equal(recorded,true);assert.equal(result.receipt.id,'33333333-3333-4333-8333-333333333333');
+ const g=await fixture();g.deps.recordRead=async({context})=>{g.state.snapshot.consent.sequence++;return{status:200,receipt:{version:'afw.assistance-goal-read-receipt.v1',id:'33333333-3333-4333-8333-333333333333',expiresAt:context.expiresAt}};};
+ assert.notEqual((await readerContract.createAssistanceGoalReader(g.deps)(g.request)).status,200);
 });
