@@ -9,6 +9,7 @@
     "AFW_GOAL_CONTEXT_ENABLED": "false",
     "AFW_GOAL_PROPOSAL_ENABLED": "false",
     "AFW_GOAL_GENERATION_ENABLED": "false",
+    "AFW_GOAL_CUSTODIAL_ENABLED": "false",
     "AFW_GOAL_GENERATION_LOCALE": "es"
   },
   "d1_databases": [

@@ -4,10 +4,21 @@ import {createAssistanceGoalProposalHttp} from '../../lib/assistance-goal-propos
 import {GOAL_PROPOSAL_ORIGIN,GOAL_PROPOSAL_PATH,GOAL_PROPOSAL_PURPOSE} from '../../lib/assistance-goal-proposal-identity.mjs';
 import {reserveAssistanceGoalGeneration} from '../../lib/assistance-goal-generation-budget.mjs';
 import {createAssistanceGoalGenerator} from '../../lib/assistance-goal-provider.mjs';
+import {createAssistanceGoalCustodialHttp} from '../../lib/assistance-goal-custodial-http.mjs';
 const parse=value=>{try{return JSON.parse(value);}catch{return null;}};
 // Both purposes remain independently closed by default. No cron or enrollment
 // is inferred from read activation; generation requires its own gate and budget.
 const worker={fetch(request,env){
+ if(new URL(request.url).pathname.startsWith('/custodial/')){
+  return createAssistanceGoalCustodialHttp({
+   getSettings:proposal=>({enabled:env.AFW_GOAL_CUSTODIAL_ENABLED==='true',contextEnabled:env.AFW_GOAL_CONTEXT_ENABLED==='true',proposalEnabled:env.AFW_GOAL_PROPOSAL_ENABLED==='true',generationEnabled:env.AFW_GOAL_GENERATION_ENABLED==='true',
+    expiresAt:proposal?env.AFW_GOAL_PROPOSAL_EXPIRES_AT:env.AFW_GOAL_CONTEXT_EXPIRES_AT,teamDomain:proposal?env.AFW_GOAL_PROPOSAL_ACCESS_TEAM_DOMAIN:env.AFW_GOAL_CONTEXT_ACCESS_TEAM_DOMAIN,
+    readClientId:env.AFW_GOAL_CONTEXT_CLIENT_ID,readAudience:env.AFW_GOAL_CONTEXT_ACCESS_AUD,proposalClientId:env.AFW_GOAL_PROPOSAL_CLIENT_ID,proposalAudience:env.AFW_GOAL_PROPOSAL_ACCESS_AUD,operationsClientId:env.AFW_ASSISTANCE_CLIENT_ID,operationsAudience:env.AFW_ASSISTANCE_ACCESS_AUD}),
+   signingSecret:env.AFW_GOAL_PROPOSAL_SIGNING_SECRET,readSigningSecret:env.AFW_GOAL_CONTEXT_SIGNING_SECRET,signalSecret:env.AFW_ASSISTANCE_SIGNING_SECRET,
+   limiter:new URL(request.url).pathname==='/custodial/proposal'?env.GOAL_PROPOSAL_RATE_LIMIT:env.GOAL_CONTEXT_RATE_LIMIT,
+   dispatch:signed=>worker.fetch(signed,env),
+  })(request);
+ }
  if(new URL(request.url).pathname===GOAL_PROPOSAL_PATH){
   if(env.AFW_GOAL_PROPOSAL_ENABLED!=='true'||env.AFW_GOAL_GENERATION_ENABLED!=='true')return Response.json({code:'unavailable'},{status:404,headers:{'cache-control':'no-store'}});
   if(typeof env.AI?.run!=='function'||!['es','en','pt'].includes(env.AFW_GOAL_GENERATION_LOCALE))return Response.json({code:'unavailable'},{status:503,headers:{'cache-control':'no-store'}});

@@ -5,6 +5,6 @@
   "compatibility_date": "2026-09-28",
   "workers_dev": false,
   "preview_urls": false,
-  "vars": { "AFW_GOAL_CONTEXT_ENABLED": "false", "AFW_GOAL_PROPOSAL_ENABLED": "false", "AFW_GOAL_GENERATION_ENABLED": "false" },
+  "vars": { "AFW_GOAL_CONTEXT_ENABLED": "false", "AFW_GOAL_PROPOSAL_ENABLED": "false", "AFW_GOAL_GENERATION_ENABLED": "false", "AFW_GOAL_CUSTODIAL_ENABLED": "false" },
   "triggers": { "crons": [] }
 }
