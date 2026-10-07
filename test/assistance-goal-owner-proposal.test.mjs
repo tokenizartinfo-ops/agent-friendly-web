@@ -9,6 +9,7 @@ test('owner sees dated minimal prepared guidance after service permission expire
  assert.equal(typeof contract.readOwnerAssistanceGoalProposal,'function');
  const f=await goalSourceFixture();try{
  f.sqlite.exec(readFileSync('db/assistance-goal-proposals.sql','utf8'));
+ f.sqlite.exec(readFileSync('db/assistance-goal-read-confirmations.sql','utf8'));
  const receipt=await recordAssistanceGoalRead({...f,now:time});
  const query={eventId:f.context.eventId,projectRef:f.context.projectRef,runId:f.context.runId,revision:3,receiptId:receipt.receipt.id};
  const scope={db:f.db,projectId:'own',userId:'owner',query,now:time};
@@ -17,7 +18,7 @@ test('owner sees dated minimal prepared guidance after service permission expire
  await completeAssistanceGoalProposal({...scope,claimId:claim.claimId,proposal});
  const options={db:f.db,projectId:'own',userId:'owner',sourceId:f.snapshot.source.id,now:time};
  const read=await contract.readOwnerAssistanceGoalProposal(options);
- assert.equal(read.status,200);assert.deepEqual(Object.keys(read.guidance).sort(),['expired','message','preparedAt','revision','stale']);
+ assert.equal(read.status,200);assert.deepEqual(Object.keys(read.guidance).sort(),['confirmedAt','expired','expiresAt','message','preparedAt','proposalId','revision','stale']);
  assert.deepEqual(read.guidance.message,proposal.message);assert.equal(read.guidance.stale,false);
  f.grant('revoke');
  assert.equal((await contract.readOwnerAssistanceGoalProposal({...options,now:f.context.expiresAt})).guidance.expired,true);
