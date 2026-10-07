@@ -17,3 +17,9 @@ La selección no verifica capacidades ni autoriza acciones. No se infiere AF5, n
 - Ensayo visual privado separado antes de acreditar que está desplegado y usable.
 
 El resto de decisiones de entrega, recursos, permisos y responsables conserva sus controles. Este cambio no abre la supervisión cloud ni inicia el caso de Max.
+
+## Aceptación local
+
+Build y lint aprobados (dos advertencias existentes). Ensayo visual en `localhost:8799/internal/intake-workspace-preview`: tipo «Comercio o servicio» → revisión → incorporación → objetivo «Explicar mejor productos o servicios» → revisión → incorporación → confirmación de guardado simulado. La guía avanza a audiencia y el estado indica «Guardado simulado. No se enviaron datos». Captura local `output/afw-guided-goals-preview-20261007.png`.
+
+Se ajustó el mensaje de incorporación para remitir al estado real de guardado, evitando que siga diciendo «falta guardar» después de un guardado confirmado. No se acredita persistencia remota desde este ensayo en memoria.
