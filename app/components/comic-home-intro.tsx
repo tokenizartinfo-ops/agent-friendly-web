@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, ClipboardList, FileText, FolderOpen, Route, ScanSearch } from 'lucide-react';
+import { ArrowDown, ArrowRight, ClipboardList, FileText, FolderOpen, Route, ScanSearch } from './client-icons';
 import { COMIC_HOME_COPY } from '../../lib/home-copy.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 

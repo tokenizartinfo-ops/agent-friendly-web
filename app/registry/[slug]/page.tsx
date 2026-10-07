@@ -1,4 +1,4 @@
-import { ArrowLeft, BadgeCheck, Braces, ExternalLink, Eye, FileText, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, BadgeCheck, Braces, ExternalLink, Eye, FileText, ShieldCheck } from '../../components/client-icons';
 import { notFound } from 'next/navigation';
 import { getPublishedProfile } from '../../../lib/registry-store';
 import { SiteFooter } from '../../components/site-footer';

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ArrowRight, BadgeInfo } from 'lucide-react';
+import { ArrowRight, BadgeInfo } from '../components/client-icons';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
 import { MaturityDemonstrator } from '../components/maturity-demonstrator';

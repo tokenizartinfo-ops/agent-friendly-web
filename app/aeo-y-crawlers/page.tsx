@@ -10,7 +10,7 @@ import {
   MessagesSquare,
   Search,
   ShieldCheck,
-} from 'lucide-react';
+} from '../components/client-icons';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 import { CRAWLER_CATALOG } from '../../lib/crawler-catalog.mjs';

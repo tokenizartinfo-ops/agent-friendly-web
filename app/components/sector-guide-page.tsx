@@ -1,4 +1,4 @@
-import { ArrowRight, Building2, CheckCircle2, Languages, ScanSearch } from 'lucide-react';
+import { ArrowRight, Building2, CheckCircle2, Languages, ScanSearch } from './client-icons';
 import { SECTOR_CONTENT } from '../../lib/sector-content.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { SiteFooter } from './site-footer';
