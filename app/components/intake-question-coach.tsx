@@ -3,6 +3,7 @@ import {useEffect,useRef,useState} from 'react';
 import {missingIntakeQuestions,previewIntakeAnswer} from '../../lib/intake-question-coach.mjs';
 import {QUESTION_COPY} from '../../lib/intake-question-copy.mjs';
 import {applyIntakeDraft} from '../../lib/intake-draft-review.mjs';
+import {privateUiCopy} from '../../lib/private-ui-copy.mjs';
 import {languageChoices} from '../../lib/intake-choice-compatibility.mjs';
 import './intake-question-coach.css';
 import {scopeQuestionGuide,SCOPE_QUESTION_COPY} from '../../lib/scope-question-guide.mjs';
@@ -40,12 +41,14 @@ function Answer({field,draft,locale,onApply,onSkip,cached,onRemember,reason}:{fi
  const [error,setError]=useState('');
  const copy=QUESTION_COPY[locale];
  function showError(reason:unknown){const key=reason instanceof Error?reason.message:'invalid';setError(copy.errors[key as keyof typeof copy.errors]||copy.errors.stale);}
- const display=(value:string|string[])=>Array.isArray(value)?languageChoices(locale,value).filter(([code])=>value.includes(code)).map(([,label])=>label).join(', '):value;
+ const form=privateUiCopy(locale).intake;
+ const choices: [string,string][]=field==='goals'?form.goals:languageChoices(locale,[]);
+ const display=(value:string|string[])=>Array.isArray(value)?choices.filter(([code])=>value.includes(code)).map(([,label])=>label).join(', '):field==='siteType'?(form.siteTypes.find(([code]:[string,string])=>code===value)?.[1]||value):value;
  return <div className="coach-question" data-field={field}>
   <h3 tabIndex={-1}>{copy.fields[field][1]}</h3><p id="coach-reason">{reason||copy.fields[field][2]}</p>
-  {field==='languages'?<fieldset><legend>{copy.answer}</legend>{languageChoices(locale,[]).map(([code,label])=><label className="coach-language" key={code}><input type="checkbox" checked={languages.includes(code)} onChange={()=>{const next=languages.includes(code)?languages.filter(item=>item!==code):[...languages,code];setLanguages(next);onRemember({text:answer,languages:next});setChanges(null);setError('');}}/>{label}</label>)}</fieldset>:<label>{copy.answer}<textarea id="coach-answer" value={answer} aria-describedby="coach-reason" rows={3} onChange={event=>{setAnswer(event.target.value);onRemember({text:event.target.value,languages});setChanges(null);setError('');}}/><small>{answer.length}/1200</small></label>}
+  {field==='siteType'?<label>{copy.answer}<select value={answer} aria-describedby="coach-reason" onChange={event=>{setAnswer(event.target.value);onRemember({text:event.target.value,languages});setChanges(null);setError('');}}><option value="">—</option>{form.siteTypes.map(([code,label]:[string,string])=><option key={code} value={code}>{label}</option>)}</select></label>:field==='languages'||field==='goals'?<fieldset><legend>{copy.answer}</legend>{choices.map(([code,label])=><label className="coach-language" key={code}><input type="checkbox" checked={languages.includes(code)} onChange={()=>{const next=languages.includes(code)?languages.filter(item=>item!==code):[...languages,code];setLanguages(next);onRemember({text:answer,languages:next});setChanges(null);setError('');}}/>{label}</label>)}</fieldset>:<label>{copy.answer}<textarea id="coach-answer" value={answer} aria-describedby="coach-reason" rows={3} onChange={event=>{setAnswer(event.target.value);onRemember({text:event.target.value,languages});setChanges(null);setError('');}}/><small>{answer.length}/1200</small></label>}
   {error?<p role="alert">{error}</p>:null}
-  <div className="coach-actions"><button type="button" onClick={()=>{setError('');try{setChanges(previewIntakeAnswer(draft,field,field==='languages'?languages:answer));}catch(reason){setChanges(null);showError(reason);}}}>{copy.review}</button><button type="button" onClick={onSkip}>{copy.skip}</button></div>
+  <div className="coach-actions"><button type="button" onClick={()=>{setError('');try{setChanges(previewIntakeAnswer(draft,field,field==='languages'||field==='goals'?languages:answer));}catch(reason){setChanges(null);showError(reason);}}}>{copy.review}</button><button type="button" onClick={onSkip}>{copy.skip}</button></div>
   {changes?.length?<div className="coach-preview"><strong>{copy.proposed}</strong><p>{display(changes[0].after)}</p><button type="button" onClick={()=>{try{onApply(applyIntakeDraft(draft,changes));setChanges(null);}catch(reason){setChanges(null);showError(reason);}}}>{copy.apply}</button><button type="button" onClick={()=>setChanges(null)}>{copy.edit}</button></div>:null}
  </div>;
 }

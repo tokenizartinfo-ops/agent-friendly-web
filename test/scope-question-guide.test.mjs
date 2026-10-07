@@ -13,9 +13,9 @@ test('only a freshly reviewed, matching scope can guide questions',()=>{
 });
 test('reviewed scope prioritizes relevant missing facts without changing the draft',()=>{
  const before=JSON.stringify(draft);const guide=scopeQuestionGuide(draft,context(),'es');
- assert.deepEqual(missingIntakeQuestions(draft,[],guide.order),['cms','hosting','audience','languages']);
- assert.deepEqual(missingIntakeQuestions(draft,['cms'],guide.order),['hosting','audience','languages']);
- assert.deepEqual(missingIntakeQuestions({...draft,cms:'Known',hosting:'Known'},[],guide.order),['audience','languages']);
+ assert.deepEqual(missingIntakeQuestions(draft,[],guide.order),['cms','hosting','siteType','goals','audience','languages']);
+ assert.deepEqual(missingIntakeQuestions(draft,['cms'],guide.order),['hosting','siteType','goals','audience','languages']);
+ assert.deepEqual(missingIntakeQuestions({...draft,cms:'Known',hosting:'Known'},[],guide.order),['siteType','goals','audience','languages']);
  assert.deepEqual(missingIntakeQuestions({},[],guide.order).slice(0,2),['organization','website']);
  assert.equal(JSON.stringify(draft),before);
  assert.equal(guide.publicationAuthorized,false);
@@ -23,9 +23,9 @@ test('reviewed scope prioritizes relevant missing facts without changing the dra
 test('combined scope is localized, bounded and keeps every basic question once',()=>{
  for(const locale of ['es','en','pt']){
   const guide=scopeQuestionGuide(draft,context(['documents','crawl','trust','answers']),locale);
-  assert.equal(new Set(guide.order).size,6);assert.equal(guide.actions.length,4);
+  assert.equal(new Set(guide.order).size,8);assert.equal(guide.actions.length,4);
   assert.ok(guide.reasons.cms);assert.ok(guide.reasons.audience);
-  assert.deepEqual(new Set(guide.order),new Set(['organization','website','audience','languages','cms','hosting']));
+  assert.deepEqual(new Set(guide.order),new Set(['organization','website','siteType','goals','audience','languages','cms','hosting']));
  }
- assert.deepEqual(missingIntakeQuestions(draft,[],['unknown','cms','cms']),['cms','audience','languages','hosting']);
+ assert.deepEqual(missingIntakeQuestions(draft,[],['unknown','cms','cms']),['cms','siteType','goals','audience','languages','hosting']);
 });
