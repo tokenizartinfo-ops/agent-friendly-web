@@ -19,15 +19,20 @@ test('native workerd and separate D1 bindings read minimal goals and reject with
  import {createAssistanceGoalProposal} from './lib/assistance-goal-proposal.mjs';
  import {readCurrentAssistanceGoalReceipt} from './lib/assistance-goal-read-receipt.mjs';
  import {readActiveAssistanceGoalLease} from './lib/assistance-goal-lease.mjs';
- import {importSPKI} from 'jose';const key=await importSPKI(${JSON.stringify(pem)},'RS256');
+ import {reserveAssistanceGoalProposal,completeAssistanceGoalProposal} from './lib/assistance-goal-proposal-ledger.mjs';
+ import {importSPKI} from 'jose';const key=await importSPKI(${JSON.stringify(pem)},'RS256');let generations=0;
  export default {async fetch(r,b){
   const url=new URL(r.url);
+  if(url.pathname==='/stats')return Response.json({generations});
   if(url.pathname==='/proposal'){
    const handler=createAssistanceGoalProposal({authenticate:async()=>({id:'synthetic-fixture',purpose:'afw.goal-guidance.propose.v1'}),
     resolveSource:async()=>({projectId:'own',userId:'owner',sourceId:${JSON.stringify(sourceId)}}),
     readReceipt:value=>readCurrentAssistanceGoalReceipt({...value,db:b.SOURCE}),
+    reserveProposal:value=>reserveAssistanceGoalProposal({...value,db:b.SOURCE}),
+    completeProposal:async value=>{const result=await completeAssistanceGoalProposal({...value,db:b.SOURCE});if(url.searchParams.get('lost')==='true')throw Error('synthetic lost response');return result;},
     readLease:value=>readActiveAssistanceGoalLease({...value,db:b.DB}),isOpen:()=>true,getWindowExpiresAt:()=>${time+60000},now:()=>${time},
     generate:async input=>{
+     generations++;
      if(Object.keys(input).length!==3||input.declarations.siteType!=='commerce')throw Error('unexpected model input');
      if(url.searchParams.get('withdraw')==='true')await b.SOURCE.prepare('INSERT INTO assistance_goal_consent_events(project_id,user_id,source_event_id,revision,action,consent_version,request_id,issued_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?)').bind('own','owner',${JSON.stringify(sourceId)},3,'revoke','afw.assistance-goals-consent.v1',crypto.randomUUID(),${time},${time}).run();
      return{question:'¿Qué información debería ser más fácil de encontrar?',why:'Podemos revisar primero lo esencial.'};
@@ -41,6 +46,7 @@ test('native workerd and separate D1 bindings read minimal goals and reject with
  const source=await runtime.getD1Database('SOURCE'),db=await runtime.getD1Database('DB');
  const apply=async(target,text)=>{for(const sql of text.replace(/--[^\n]*/g,'').split(';').map(x=>x.trim()).filter(Boolean))await target.prepare(sql).run();};
  await apply(source,'CREATE TABLE site_projects(id TEXT,user_id TEXT,revision INTEGER,site_type TEXT,goals_json TEXT,notes TEXT);CREATE TABLE project_events(id TEXT,project_id TEXT,user_id TEXT,type TEXT,payload_json TEXT,created_at TEXT);CREATE TABLE assistance_delivery_receipts(project_ref TEXT,source_event_id TEXT,event_id TEXT);'+readFileSync('db/assistance-goal-consent.sql','utf8')+readFileSync('db/assistance-goal-read-receipts.sql','utf8'));
+ await apply(source,readFileSync('db/assistance-goal-proposals.sql','utf8'));
  for(const name of ['assistance-supervision','assistance-supervision-runs'])await apply(db,readFileSync('worker/operations/'+name+'.sql','utf8'));
  await source.prepare('INSERT INTO site_projects VALUES(?,?,?,?,?,?)').bind('own','owner',3,'commerce','["discovery"]','PRIVATE NARRATIVE').run();
  await source.prepare('INSERT INTO project_events VALUES(?,?,?,?,?,?)').bind(sourceId,'own','owner','assistance_requested',JSON.stringify(payload),createdAt).run();
@@ -53,10 +59,16 @@ test('native workerd and separate D1 bindings read minimal goals and reject with
  const response=await call();assert.equal(response.status,200);const body=await response.json();assert.equal(body.receipt.version,'afw.assistance-goal-read-receipt.v1');assert.deepEqual(body.context.declarations,{siteType:'commerce',goals:['discovery']});assert.doesNotMatch(JSON.stringify(body),/PRIVATE|"owner"|"own"|sequence/);
  const retry=await (await call()).json();assert.deepEqual(retry.receipt,body.receipt);
  assert.equal((await source.prepare('SELECT count(*) n FROM assistance_goal_read_receipts').first()).n,1);
- const propose=async withdraw=>runtime.dispatchFetch('https://goal-native.invalid/proposal'+(withdraw?'?withdraw=true':''),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:signal.eventId,projectRef:signal.projectRef,runId,revision:3,receiptId:body.receipt.id})});
- const proposed=await propose(false);assert.equal(proposed.status,200);assert.equal((await proposed.json()).proposal.reviewRequired,true);
- const withdrawn=await propose(true);assert.equal(withdrawn.status,403);assert.equal((await withdrawn.json()).proposal,undefined);
+ const propose=async(withdraw=false,receiptId=body.receipt.id,lost=false)=>runtime.dispatchFetch('https://goal-native.invalid/proposal?withdraw='+withdraw+'&lost='+lost,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:signal.eventId,projectRef:signal.projectRef,runId,revision:3,receiptId})});
+ const lost=await propose(false,body.receipt.id,true);assert.equal(lost.status,403);
+ const proposed=await propose();assert.equal(proposed.status,200);const recovered=await proposed.json();assert.equal(recovered.proposal.reviewRequired,true);
+ const again=await (await propose()).json();assert.equal(again.proposalId,recovered.proposalId);
+ assert.equal((await (await runtime.dispatchFetch('https://goal-native.invalid/stats')).json()).generations,1);
+ await source.prepare(consent).bind('own','owner',sourceId,3,'grant','afw.assistance-goals-consent.v1',crypto.randomUUID(),time,time+60000).run();
+ assert.equal((await propose()).status,403);
+ const newer=await (await call()).json();assert.notEqual(newer.receipt.id,body.receipt.id);
+ const withdrawn=await propose(true,newer.receipt.id);assert.equal(withdrawn.status,403);assert.equal((await withdrawn.json()).proposal,undefined);
  const denied=await call();assert.equal(denied.status,403);assert.equal((await denied.json()).context,undefined);
- assert.equal((await source.prepare('SELECT count(*) n FROM assistance_goal_consent_events').first()).n,2);assert.equal((await source.prepare('SELECT notes FROM site_projects').first()).notes,'PRIVATE NARRATIVE');
+ assert.equal((await source.prepare('SELECT count(*) n FROM assistance_goal_consent_events').first()).n,3);assert.equal((await source.prepare('SELECT count(*) n FROM assistance_goal_proposal_results').first()).n,1);assert.equal((await source.prepare('SELECT notes FROM site_projects').first()).notes,'PRIVATE NARRATIVE');
  }finally{await runtime.dispose();}
 });

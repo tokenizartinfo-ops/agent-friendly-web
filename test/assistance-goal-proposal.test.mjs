@@ -5,7 +5,7 @@ const time=1791323200000;
 function fixture(){
  const query={eventId:'a'.repeat(64),projectRef:'b'.repeat(64),runId:'11111111-1111-4111-8111-111111111111',revision:3,receiptId:'22222222-2222-4222-8222-222222222222'};
  const state={open:true,service:{id:'synthetic-proposal-service',purpose:'afw.goal-guidance.propose.v1'},mapping:{projectId:'own',userId:'owner',sourceId:'help-'+'c'.repeat(64)},lease:{eventId:query.eventId,projectRef:query.projectRef,runId:query.runId,revision:3,topic:'orientation',expiresAt:time+30000},read:{status:200,receipt:{id:query.receiptId,contextHash:'d'.repeat(64),consentSequence:1,expiresAt:time+30000},context:{version:'afw.assistance-goal-context.v1',eventId:query.eventId,projectRef:query.projectRef,runId:query.runId,revision:3,expiresAt:time+30000,declarations:{siteType:'commerce',goals:['discovery']},evidenceStatus:'owner_declared',operationsAuthorized:false}},generated:0};
- const deps={authenticate:async()=>structuredClone(state.service),resolveSource:async()=>structuredClone(state.mapping),readLease:async()=>structuredClone(state.lease),readReceipt:async()=>structuredClone(state.read),isOpen:()=>state.open,getWindowExpiresAt:()=>time+60000,now:()=>time,generate:async(input)=>{state.generated++;assert.deepEqual(Object.keys(input).sort(),['declarations','evidenceStatus','operationsAuthorized']);return{question:'¿Qué información debería encontrar primero un asistente?',why:'Tu objetivo actual es facilitar el descubrimiento. Podemos empezar por esa información.'};}};
+ const deps={reserveProposal:async()=>({status:200,mode:'claimed',claimId:'33333333-3333-4333-8333-333333333333',expiresAt:state.read.receipt.expiresAt}),completeProposal:async({proposal})=>({status:200,proposalId:'44444444-4444-4444-8444-444444444444',proposal:structuredClone(proposal)}),authenticate:async()=>structuredClone(state.service),resolveSource:async()=>structuredClone(state.mapping),readLease:async()=>structuredClone(state.lease),readReceipt:async()=>structuredClone(state.read),isOpen:()=>state.open,getWindowExpiresAt:()=>time+60000,now:()=>time,generate:async(input)=>{state.generated++;assert.deepEqual(Object.keys(input).sort(),['declarations','evidenceStatus','operationsAuthorized']);return{question:'¿Qué información debería encontrar primero un asistente?',why:'Tu objetivo actual es facilitar el descubrimiento. Podemos empezar por esa información.'};}};
  return{query,state,deps};
 }
 test('proposal asks one question without transmitting internal references or authorizing edits',async()=>{
@@ -32,4 +32,21 @@ test('generation aborts at the receipt deadline rather than the longer configura
  const atDeadline=new Promise(resolve=>setTimeout(()=>resolve(signal?.aborted),100));
  const result=await contract.createAssistanceGoalProposal({...f.deps,timeoutMs:200})(f.query);assert.equal(await atDeadline,true);
  assert.notEqual(result.status,200);assert.equal(signal.aborted,true);
+});
+test('a lost completion response recovers the same prepared proposal without another generation',async()=>{
+ const f=fixture();let stored;
+ f.deps.reserveProposal=async()=>stored?{status:200,mode:'prepared',...structuredClone(stored)}:{status:200,mode:'claimed',claimId:'33333333-3333-4333-8333-333333333333',expiresAt:time+30000};
+ f.deps.completeProposal=async({proposal})=>{stored={proposalId:'44444444-4444-4444-8444-444444444444',proposal:structuredClone(proposal)};throw Error('synthetic lost response');};
+ const run=contract.createAssistanceGoalProposal(f.deps),first=await run(f.query);assert.notEqual(first.status,200);
+ const retry=await run(f.query);assert.equal(retry.status,200);assert.equal(retry.proposalId,stored.proposalId);assert.deepEqual(retry.proposal,stored.proposal);assert.equal(f.state.generated,1);
+});
+test('a concurrent pending attempt does not start generation and missing ledger stays closed',async()=>{
+ const f=fixture();f.deps.reserveProposal=async()=>({status:202,mode:'processing',expiresAt:time+30000});
+ const result=await contract.createAssistanceGoalProposal(f.deps)(f.query);assert.equal(result.status,202);assert.equal(f.state.generated,0);assert.equal(result.proposal,undefined);
+ const g=fixture();delete g.deps.reserveProposal;assert.notEqual((await contract.createAssistanceGoalProposal(g.deps)(g.query)).status,200);assert.equal(g.state.generated,0);
+});
+
+test('an expired generation attempt is explained without silently starting a new one',async()=>{
+ const f=fixture();f.deps.reserveProposal=async()=>({status:409,code:'proposal_attempt_expired'});
+ const result=await contract.createAssistanceGoalProposal(f.deps)(f.query);assert.equal(result.status,409);assert.equal(result.code,'proposal_attempt_expired');assert.equal(f.state.generated,0);
 });
