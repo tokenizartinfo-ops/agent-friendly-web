@@ -29,3 +29,9 @@ Token temporal deshabilitado, versión secreta 2 intacta; política de servicio 
 4. Después, ensayo integrado con ordenador apagado y evidencia alojada. Aún no está programado ni aceptado este recorrido nuevo. Luego preview editorial del mail al owner antes de invitar a Max por el expediente real.
 
 No es bloqueo que requiera una acción del owner por ahora. Mantener investigación técnica; no repetir OTP, borrar cookies ni solicitar claves sin causa demostrada.
+
+## Diagnóstico posterior al cierre
+
+La tarea cloud ejecutó un solo GET con el servicio retirado: HTTP401 JSON, claves superiores `message`, `status_code`, `aud`, `ray_id`, `ip_address`, `is_warp`, `is_gateway`, `mtls_status`. No se imprimieron sus valores; solo se confirmó coincidencia textual con `unauthorized`. Esta forma es compatible con rechazo en el borde de autenticación y con la retirada esperada, pero no identifica la causa del rechazo anterior. No se reabrió el servicio.
+
+El editor cloud `01a1172f-862e-7626-9f2b-60b979144016` releyó la publicación `6ac675187ee881a3b1845c7ad289e4b7`: las dos referencias operativas tienen destino correcto y `has_saved_binding=true`. La herramienta no expone header de inyección ni modo de entrega; no se pueden certificar esos campos desde esta API. Readiness del editor fue `unknown`, mientras la tarea ordinaria informó `ready`: son observaciones de instancias distintas, no evidencia de una clave mal cargada. No se reingresaron credenciales ni se creó otra tarea.
