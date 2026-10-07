@@ -2,8 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import worker from '../worker/assistance-goal-context/index.mjs';
 test('the independent entrypoint remains closed with no bindings or credentials',async()=>{
- for(const path of ['/context','/context?owner=private','/proposal','/publish']){
+ for(const path of ['/context','/context?owner=private','/proposal','/publish','/custodial/context','/custodial/proposal']){
   const response=await worker.fetch(new Request('https://goal-context-canary.agentfriendlyweb.dev'+path,{method:'POST'}),{});
+  assert.equal(response.status,404);assert.deepEqual(await response.json(),{code:'unavailable'});
+ }
+});
+
+test('custodial routes are independently closed even when the original read and proposal gates are enabled',async()=>{
+ for(const path of ['/custodial/context','/custodial/proposal']){
+  const response=await worker.fetch(new Request('https://goal-context-canary.agentfriendlyweb.dev'+path,{method:'POST'}),{AFW_GOAL_CONTEXT_ENABLED:'true',AFW_GOAL_PROPOSAL_ENABLED:'true',AFW_GOAL_GENERATION_ENABLED:'true'});
   assert.equal(response.status,404);assert.deepEqual(await response.json(),{code:'unavailable'});
  }
 });
