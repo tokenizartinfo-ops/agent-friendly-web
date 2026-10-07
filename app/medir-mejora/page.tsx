@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BadgeInfo, History, ScanSearch, ShieldCheck } from 'lucide-react';
+import { BadgeInfo, History, ScanSearch, ShieldCheck } from '../components/client-icons';
 import { ReadinessComparison } from '../components/readiness-comparison';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';

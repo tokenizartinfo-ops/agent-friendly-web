@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BadgeInfo } from 'lucide-react';
+import { BadgeInfo } from '../components/client-icons';
 import { IntakeAssistantPrototype } from '../components/intake-assistant-prototype';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';

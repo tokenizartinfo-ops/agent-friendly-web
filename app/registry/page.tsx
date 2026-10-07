@@ -1,4 +1,4 @@
-import { ArrowRight, BadgeCheck, Database, Globe2, Search } from 'lucide-react';
+import { ArrowRight, BadgeCheck, Database, Globe2, Search } from '../components/client-icons';
 import { listPublishedProfiles } from '../../lib/registry-store';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';

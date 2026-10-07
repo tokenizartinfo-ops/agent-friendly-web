@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from './client-icons';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { sharedCopy } from '../../lib/site-copy.mjs';
 
