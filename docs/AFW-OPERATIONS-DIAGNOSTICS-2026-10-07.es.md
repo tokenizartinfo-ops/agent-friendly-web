@@ -30,4 +30,24 @@ La [documentación Cloudflare de métricas](https://developers.cloudflare.com/an
 
 ## Siguiente aceptación
 
-Integrar el cliente probado y comprobar adopción de fuente sin reemplazar credenciales por inferencia. Primero baseline de autenticación contra servicio cerrado; luego comprobar cron propagado con resultado observable y ACK. Solo después revisar el pedido vigente y devolverlo a la interfaz. La invitación de Max y la prueba integrada con ordenador apagado siguen pendientes.
+Comprobar adopción del cliente integrado en la fuente cloud sin reemplazar credenciales por inferencia. Primero baseline de autenticación contra servicio cerrado; luego comprobar cron propagado con resultado observable y ACK. Solo después revisar el pedido vigente y devolverlo a la interfaz. La invitación de Max y la prueba integrada con ordenador apagado siguen pendientes.
+
+## Contraste y validación final
+
+Un único GET de curl, con los mismos bindings del entorno y sin shell ni redirecciones, devolvió401JSON a las20:09:25.291Z. No se imprimieron argumentos, valores, headers ni cuerpo. Dos clientes HTTP distintos rechazados no sostienen la hipótesis de un fallo exclusivo de Node; tampoco prueban una clave incorrecta.
+
+Cierre revalidado a las20:10:15.399Z: token deshabilitado/versión2, selector anterior restaurado, gerente cerrado/plazo vacío/D1 original verificada en ambos campos y cron vacío. Sin nueva lectura privada ni rotación.
+
+PR322, fuente `86b91c2a73b4957d55cef4b778595b2d3450c936`, CI `37679652042` success: **1101 pruebas, 1101 aprobadas, cero fallos**. Revisión independiente sin hallazgos accionables. Esta validación acredita el cambio del cliente, no resuelve el rechazo remoto ni adopta automáticamente la fuente en Codex Cloud.
+
+PR322 integrada a las20:11:19Z, merge `4d424cf2c1b117bf42069532f9ce19747e649078`. No requiere despliegue de la web pública para acreditar el CLI. La tarea cloud existente conserva su fuente08f47d9 hasta una adopción explícitamente verificada; no se hizo fetch/checkout para simularla.
+
+## Relectura de configuración y suministro, 23:05–23:09Z
+
+El editor existente no encontró duplicados, diferencias de nombre/destino ni asignaciones que sobrescriban las dos variables operativas en los campos y scripts del draft expuestos. `environment_variables`, `env` y `environment.env` no están expuestos; tampoco los scripts de la publicación. El resultado negativo tiene esa cobertura limitada y no descarta un conflicto oculto.
+
+La tarea ordinaria reconsultó el estado soportado: observaciones actuales, red aplicada y ambos bindings operativos ready. La estructura no secreta de `/etc/codex/network-policy.json` tampoco expone los headers de suministro ni el modo de entrega. No puede certificar su coincidencia con los dos headers Access desde esta API. No encontró sobrescrituras en las definiciones locales examinadas; no acredita cobertura completa de setup/start.
+
+No hubo nuevos HTTP, cambios de permisos, publicaciones, lecturas de valores o rotación. Las comprobaciones descartan algunas hipótesis visibles; no resuelven401 ni convierten readiness en autorización efectiva. Se solicitó preparar la adopción del merge4d424cf únicamente si el draft de este mismo editor admite edición soportada, preservando custodia y red; publicación y adopción siguen pendientes de respuesta y evidencia.
+
+Preparación posterior en el editor: origin y árbol limpio verificados, avance fast-forward real a4d424cf y revisión anterior conservada en `afw-preparation-before-pr322-08f47d9`. Cinco pruebas de diagnóstico aprobadas allí. Esto acredita preparación de fuente; no adopción de la tarea ordinaria. El intento de guardar únicamente el selector fue rechazado con `CONFLICT / draft_not_editable`; relectura confirma draft revisión2/fuente08f47d9 intactos. La UI existente muestra «Entorno publicado». Requiere un nuevo borrador editable mediante Configuración → Codex Cloud → AFW Operations → Editar. No se creó ese borrador ni otra tarea, ni se publicó. Propuesta saneada preparada en el editor: cambiar exclusivamente `repositories[0].ref` de08f47d9 a4d424cf, conservar todos los otros campos.
