@@ -1,0 +1,23 @@
+✔ one occurrence persists each attempt before its three calls and closes without private context (3.433249ms)
+✔ two concurrent starters share one exclusive occurrence (0.623452ms)
+✔ lost claim response stops with attempted intent preserved and never resends (0.64203ms)
+✔ changed or stale cloud preflight makes zero operational calls (1.654037ms)
+✔ expiry after checkpoint persistence prevents sending even a budgeted intent (0.258222ms)
+✔ preflight that becomes stale while persisting prevents the first send (0.193516ms)
+✔ the entire request timeout must fit all deadlines including the lease (0.569783ms)
+✔ exact current event is required; missing, duplicate and changed revisions do not claim (0.525828ms)
+✔ bad or uncorrelated reservations never finish (1.127498ms)
+✔ failed checkpoint or backwards clock stops before the next call (0.381855ms)
+✔ no future occurrence, extra manifest fields or claimed resolution is accepted (0.52047ms)
+✔ manifest mutation during a checkpoint wait cannot extend the permitted window (0.224662ms)
+✔ coercible identifiers cannot persist nested private data (0.208449ms)
+✔ file checkpoints preserve exclusive ownership across newly constructed runners (13.89716ms)
+﹣ Windows refuses the durable file adapter before creating an occurrence (0.063244ms) # SKIP
+ℹ tests 15
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 39.519267

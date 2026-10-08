@@ -1,0 +1,11 @@
+✔ native D1 two bindings enforce create/CAS/one-use effects, rollback and independent closure (1116.54933ms)
+✔ native internal operations share atomic run/journal, budget rollback and exact superseded outcome (1292.797962ms)
+✔ native effective SQL clock rejects a delayed claim transaction without any run or consumption (5668.723698ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8324.321372

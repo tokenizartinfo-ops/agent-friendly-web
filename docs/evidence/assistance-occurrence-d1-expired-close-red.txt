@@ -1,0 +1,24 @@
+✔ two real SQLite connections share exclusive create; different UUID cannot repeat event (12.422977ms)
+✔ CAS race and one-use admissions permit only three phases, finish is terminal (5.40789ms)
+✔ effect constraint failure rolls back consumption in same batch, no JS split commit (7.989709ms)
+✔ lost create or consumed response remains exclusive from fresh connection; stopped history immutable (6.560715ms)
+✔ strict manifest/preflight, deadline after await, coercion and foreign signal deny before writes (3.51536ms)
+✔ database constraints forbid forged phase, attempt4, controls5 and journal mutation (3.732372ms)
+✖ independent close after expired claim lease preserves lease and makes no preflight call (4.282455ms)
+✔ closure during preflight wait rolls back stale consume and leaves zero effects (4.176298ms)
+✔ mutated manifest and wrong identity cannot adopt existing admissions (4.317587ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 8
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 68.007483
+
+✖ failing tests:
+
+test at test/assistance-occurrence-d1.test.mjs:20:1
+✖ independent close after expired claim lease preserves lease and makes no preflight call (4.282455ms)
+  Error: Occurrence storage unavailable
+      at batch (file:///workspace/work/afw-occurrence-d1/lib/assistance-occurrence-d1.mjs:26:263)

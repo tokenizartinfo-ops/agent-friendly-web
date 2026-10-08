@@ -1,0 +1,24 @@
+✖ native D1 two bindings enforce create/CAS/one-use effects, rollback and independent closure (17.551206ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 233.288139
+
+✖ failing tests:
+
+test at test/assistance-occurrence-d1-workerd.test.mjs:6:1
+✖ native D1 two bindings enforce create/CAS/one-use effects, rollback and independent closure (17.551206ms)
+  Error: listen EPERM: operation not permitted 127.0.0.1
+      at Server.setupListenHandle [as _listen2] (node:net:2145:21)
+      at listenInCluster (node:net:2224:12)
+      at node:net:2448:7
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'EPERM',
+    errno: -1,
+    syscall: 'listen',
+    address: '127.0.0.1'
+  }

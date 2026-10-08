@@ -1,5 +1,7 @@
 ## Estado vigente: 8 octubre de 2026
 
+Actualización posterior: AFW-OCCURRENCE-CLOUD-ADOPTION-2026-10-08.es.md acredita publicación6ac78bc y adopción ordinaria01a11b8a/source8eecaac,17pass/1skipWindows. El filesystem del chat no acredita persistencia entre instancias. AFW-GLOBAL-OCCURRENCE-IMPLEMENTATION-2026-10-08.es.md ordena el registro global D1 y su integración, todavía sin activar. No repetir la adopción de8eecaac como si probara una fuente posterior. AFW-FIRST-CLIENT-ACCESS-PREFLIGHT-2026-10-08.es.md confirma regla allow exacta para Max y destinoexpediente, sin everyone; login/OTP del cliente siguen pendientes.
+
 Este bloque supera los pendientes históricos de las secciones fechadas debajo; preserva sus evidencias sin convertirlas en nuevas tareas.
 
 | Tramo | Evidencia actual | Pendiente real |

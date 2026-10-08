@@ -1,0 +1,43 @@
+✔ two real SQLite connections share exclusive create; different UUID cannot repeat event (13.035795ms)
+✔ CAS race and one-use admissions permit only three phases, finish is terminal (7.945523ms)
+✔ effect constraint failure rolls back consumption in same batch, no JS split commit (8.655479ms)
+✔ lost create or consumed response remains exclusive from fresh connection; stopped history immutable (6.374225ms)
+✔ strict manifest/preflight, deadline after await, coercion and foreign signal deny before writes (2.664351ms)
+✔ database constraints forbid forged phase, attempt4, controls5 and journal mutation (3.614938ms)
+✔ independent close after expired claim lease preserves lease and makes no preflight call (21.264272ms)
+✔ closure during preflight wait rolls back stale consume and leaves zero effects (7.982349ms)
+✔ mutated manifest and wrong identity cannot adopt existing admissions (4.165101ms)
+✔ SQL rejects non-UUID operation identifiers rather than accepting opaque arbitrary text (2.51504ms)
+✖ SQL format and date range constraints match strict metadata contract (2.923425ms)
+✔ two concurrent consume attempts have one effect; committed lost claim cannot replay (4.523962ms)
+✔ finish loses to independent closure during preflight and produces no effect (4.572675ms)
+✔ zero-row effect SQL postcondition rolls back admission without a second commit (3.187315ms)
+✔ new signal revision inserted during preflight denies stale consume before effects (4.058634ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 14
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 112.623473
+
+✖ failing tests:
+
+test at test/assistance-occurrence-d1.test.mjs:24:1
+✖ SQL format and date range constraints match strict metadata contract (2.923425ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /CHECK constraint failed/. Input:
+
+  'Error: UNIQUE constraint failed: assistance_occurrences.event_id'
+
+      at file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:24:451
+      at async TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:13:56)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [Error],
+    expected: /CHECK constraint failed/,
+    operator: 'throws',
+    diff: 'simple'
+  }

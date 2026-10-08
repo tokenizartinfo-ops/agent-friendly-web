@@ -1,0 +1,45 @@
+✔ two real SQLite connections share exclusive create; different UUID cannot repeat event (13.168905ms)
+✔ CAS race and one-use admissions permit only three phases, finish is terminal (5.944465ms)
+✔ effect constraint failure rolls back consumption in same batch, no JS split commit (5.272422ms)
+✔ lost create or consumed response remains exclusive from fresh connection; stopped history immutable (5.084984ms)
+✔ strict manifest/preflight, deadline after await, coercion and foreign signal deny before writes (3.10862ms)
+✔ database constraints forbid forged phase, attempt4, controls5 and journal mutation (3.573938ms)
+✔ independent close after expired claim lease preserves lease and makes no preflight call (4.28424ms)
+✔ closure during preflight wait rolls back stale consume and leaves zero effects (5.988751ms)
+✔ mutated manifest and wrong identity cannot adopt existing admissions (4.465487ms)
+✔ SQL rejects non-UUID operation identifiers rather than accepting opaque arbitrary text (2.934682ms)
+✔ SQL format and date range constraints match strict metadata contract (6.756547ms)
+✔ two concurrent consume attempts have one effect; committed lost claim cannot replay (5.046527ms)
+✔ finish loses to independent closure during preflight and produces no effect (4.739984ms)
+✔ zero-row effect SQL postcondition rolls back admission without a second commit (3.231481ms)
+✔ new signal revision inserted during preflight denies stale consume before effects (3.938908ms)
+✔ preflight provider failure stops without returning provider details or writing state (1.552567ms)
+✖ real transaction clock rejects queued batch after timeout margin; no effects commit (1054.505645ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 16
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1148.080892
+
+✖ failing tests:
+
+test at test/assistance-occurrence-d1.test.mjs:30:1
+✖ real transaction clock rejects queued batch after timeout margin; no effects commit (1054.505645ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  true !== false
+
+      at file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:35:36
+      at async TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:13:56)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

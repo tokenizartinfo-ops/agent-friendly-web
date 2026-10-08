@@ -1,0 +1,43 @@
+✔ two real SQLite connections share exclusive create; different UUID cannot repeat event (11.667541ms)
+✔ CAS race and one-use admissions permit only three phases, finish is terminal (6.879358ms)
+✔ effect constraint failure rolls back consumption in same batch, no JS split commit (6.178351ms)
+✔ lost create or consumed response remains exclusive from fresh connection; stopped history immutable (5.541027ms)
+✔ strict manifest/preflight, deadline after await, coercion and foreign signal deny before writes (2.889955ms)
+✔ database constraints forbid forged phase, attempt4, controls5 and journal mutation (4.215997ms)
+✔ independent close after expired claim lease preserves lease and makes no preflight call (5.59648ms)
+✔ closure during preflight wait rolls back stale consume and leaves zero effects (5.744979ms)
+✔ mutated manifest and wrong identity cannot adopt existing admissions (4.431185ms)
+✔ SQL rejects non-UUID operation identifiers rather than accepting opaque arbitrary text (3.110893ms)
+✔ SQL format and date range constraints match strict metadata contract (3.558996ms)
+✔ two concurrent consume attempts have one effect; committed lost claim cannot replay (5.744299ms)
+✔ finish loses to independent closure during preflight and produces no effect (5.827141ms)
+✔ zero-row effect SQL postcondition rolls back admission without a second commit (4.205271ms)
+✔ new signal revision inserted during preflight denies stale consume before effects (4.572966ms)
+✔ preflight provider failure stops without returning provider details or writing state (1.769438ms)
+✔ real transaction clock rejects queued batch after timeout margin; no effects commit (1055.584215ms)
+✖ generic consume rolls back effects if clock crosses margin between batch statements (1055.000799ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 17
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2208.003839
+
+✖ failing tests:
+
+test at test/assistance-occurrence-d1.test.mjs:39:1
+✖ generic consume rolls back effects if clock crosses margin between batch statements (1055.000799ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:44:2
+      at async TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:13:56)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /Occurrence storage unavailable/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
