@@ -1,0 +1,45 @@
+✖ standalone QA adapter composes six canonical runner calls and one correlated real terminal run (5.020658ms)
+✖ QA OFF preserves legacy dispatch; exclusive vetoes every legacy route before DB/limiter (6.329504ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 104.563183
+
+✖ failing tests:
+
+test at test/assistance-occurrence-http.test.mjs:5:1
+✖ standalone QA adapter composes six canonical runner calls and one correlated real terminal run (5.020658ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-http.test.mjs:6:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-http.test.mjs:9:1
+✖ QA OFF preserves legacy dispatch; exclusive vetoes every legacy route before DB/limiter (6.329504ms)
+  TypeError: adapter.computeOccurrenceServerConfigVersion is not a function
+      at httpFixture (file:///workspace/work/afw-occurrence-d1/test/fixtures/occurrence-http.mjs:13:43)
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-http.test.mjs:10:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
