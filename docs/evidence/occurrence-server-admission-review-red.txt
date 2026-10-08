@@ -1,0 +1,41 @@
+✔ server admission uses exact own-state DTO with no cloud assertions and real approvals (33.151151ms)
+✔ revocation after trusted lookup rolls back consumption and all run effects (14.881705ms)
+✔ server mode refuses missing migration, unknown/mixed providers and malformed approval (10.101383ms)
+✔ exact server DTO rejects extras, wrong refs/config/version/revision and stale/future dates (10.714099ms)
+✔ catalog exact read, uniqueness, immutable schema and revocations prohibit resurrection (10.407496ms)
+✔ revocation before create batch leaves no header or journal and before admit preserves consumed (22.102086ms)
+✔ two server clients race same approval once and expired revoked stop preserves history (12.889538ms)
+✔ server catalog requires actual schema and exact signal including observation date bounds (11.425883ms)
+✔ catalog denies approval of a fabricated revision of an existing event (8.174032ms)
+✔ missing approval and approved cloud downgrade fail without header history (14.386322ms)
+✔ lost server responses cannot replay or change admission revision (9.486383ms)
+✔ revocation fences list, finish admission and terminal effect after their lookup (42.162302ms)
+✔ SQL constraints and mapping immutable; direct journal SQL cannot evade revocation (9.056758ms)
+✖ approval cannot convert an existing cloud occurrence or block its independent close (10.201432ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 13
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 243.732911
+
+✖ failing tests:
+
+test at test/assistance-occurrence-server-admission.test.mjs:61:1
+✖ approval cannot convert an existing cloud occurrence or block its independent close (10.201432ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:62:279)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
