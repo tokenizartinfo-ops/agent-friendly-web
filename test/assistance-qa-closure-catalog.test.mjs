@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {computeQaClosureBaselineRef,createQaClosureCatalog} from '../lib/assistance-qa-closure-catalog.mjs';
+import {computeQaClosureBaselineRef,createQaClosureCatalog,validateQaClosureApproval} from '../lib/assistance-qa-closure-catalog.mjs';
+import {computeOccurrencePlanDigest} from '../lib/assistance-occurrence-digest.mjs';
+import {manifest} from './fixtures/occurrence-operations.mjs';
 export async function fixture(){
  const registration={contract:'afw-qa-closure-approval/v1',plan:{occurrenceId:'11111111-1111-4111-8111-111111111111',baselineRef:'a'.repeat(64),closeAt:1000},planRevision:1,resources:{accountId:'a'.repeat(32),tokenId:'22222222-2222-4222-8222-222222222222',workerName:'afw-own-qa',applicationId:'33333333-3333-4333-8333-333333333333',policyId:'44444444-4444-4444-8444-444444444444'},digests:{token:'b'.repeat(64),settings:'c'.repeat(64),schedules:'d'.repeat(64),policy:'e'.repeat(64)},identity:{name:'owned-qa',metadataDigest:'f'.repeat(64)},provisioning:{creationRef:'1'.repeat(64),custodyRef:'2'.repeat(64),inventoryRef:'3'.repeat(64),createdAt:100,expiresAt:12000}};
  registration.plan.baselineRef=await computeQaClosureBaselineRef(registration);
@@ -9,6 +11,30 @@ export async function fixture(){
  const options={storage,registration,now:()=>clock,readProvisioning:async ref=>{assert.equal(ref,registration.provisioning.creationRef);reads++;return structuredClone(receipt);}};
  return {registration,options,data,reads:()=>reads,setClock(v){clock=v;},setReceipt(v){receipt=v;},make:()=>createQaClosureCatalog(options)};
 }
+test('V2 correlates every immutable occurrence approval field and baseline without asserting authority',async()=>{
+ const f=await fixture(),m=manifest(),approval={manifest:m,identityRef:'1'.repeat(64),enrollmentRef:'2'.repeat(64),serverConfigVersion:'3'.repeat(64),planRevision:1};
+ const r={...structuredClone(f.registration),contract:'afw-qa-closure-approval/v2',approvalDigest:await computeOccurrencePlanDigest({manifest:m,identityRef:approval.identityRef,admissionContract:'server-v1',approval})};
+ r.plan.occurrenceId=m.occurrenceId;r.plan.closeAt=m.deadline;r.provisioning.createdAt=m.startAt;r.provisioning.expiresAt=m.deadline+10000;r.plan.baselineRef=await computeQaClosureBaselineRef(r);
+ assert.deepEqual(await validateQaClosureApproval(r,approval),r);
+ for(const mutate of [a=>a.identityRef='4'.repeat(64),a=>a.enrollmentRef='4'.repeat(64),a=>a.serverConfigVersion='4'.repeat(64),a=>a.planRevision++,a=>a.manifest.sourceRevision='4'.repeat(40),a=>a.manifest.configId='cecfg_other',a=>a.manifest.publicationId='cecfgver_other',a=>a.manifest.signal.revision++,a=>a.manifest.requestId='66666666-6666-4666-8666-666666666666']){const changed=structuredClone(approval);mutate(changed);await assert.rejects(validateQaClosureApproval(r,changed));}
+ await assert.rejects(validateQaClosureApproval(f.registration,approval));
+ await assert.rejects(validateQaClosureApproval({...r,plan:{...r.plan,baselineRef:'9'.repeat(64)}},approval));
+});
+test('explicit V2 binds full approval digest without migrating or replacing V1 authority',async()=>{
+ const f=await fixture(),r={...structuredClone(f.registration),contract:'afw-qa-closure-approval/v2',approvalDigest:'7'.repeat(64)};
+ r.plan.baselineRef=await computeQaClosureBaselineRef(r);
+ assert.notEqual(r.plan.baselineRef,f.registration.plan.baselineRef);
+ const make=value=>createQaClosureCatalog({...f.options,registration:value,readProvisioning:async()=>({contract:'afw-qa-provisioning/v1',recordRef:value.plan.baselineRef,state:'exclusive'})});
+ assert.equal(await make(r).approve(),true);assert.deepEqual(await make(r).read(),r);
+ const changed=structuredClone(r);changed.approvalDigest='8'.repeat(64);changed.plan.baselineRef=await computeQaClosureBaselineRef(changed);
+ assert.notEqual(changed.plan.baselineRef,r.plan.baselineRef);assert.equal(await make(changed).approve(),false);assert.equal(await make(changed).read(),null);
+ assert.equal(await f.make().approve(),false);assert.equal(await f.make().read(),null);
+ assert.equal(await make(r).revoke(),true);assert.equal(await make(r).read(),null);
+ const old=await fixture();assert.equal(await old.make().approve(),true);
+ const upgrade={...structuredClone(old.registration),contract:'afw-qa-closure-approval/v2',approvalDigest:'7'.repeat(64)};upgrade.plan.baselineRef=await computeQaClosureBaselineRef(upgrade);
+ assert.equal(await createQaClosureCatalog({...old.options,registration:upgrade,readProvisioning:async()=>({contract:'afw-qa-provisioning/v1',recordRef:upgrade.plan.baselineRef,state:'exclusive'})}).approve(),false);
+ for(const bad of [{...r,approvalDigest:undefined},{...r,approvalDigest:'bad'},{...r,contract:'afw-qa-closure-approval/v1'},{...f.registration,approvalDigest:'7'.repeat(64)}])assert.throws(()=>make(bad));
+});
 test('only a primary exact provisioning receipt admits immutable server registration',async()=>{
  const f=await fixture(),a=f.make();assert.equal(await a.read(),null);assert.equal(await a.approve(),true);assert.deepEqual(await a.read(),f.registration);assert.equal(await a.approve(),true);assert.equal(f.data.size,2);
  assert.ok(Object.isFrozen(await a.read()));assert.ok(f.reads()>0);
