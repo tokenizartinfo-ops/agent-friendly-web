@@ -15,8 +15,8 @@ test('native Durable Object transactions persist closure and prevent reissuing a
    if(path==='/snapshot')return Response.json(await this.storage.get('alarm-result')||{pending:true});
    const lost=new URL(request.url).pathname==='/lost';
    const action=async(step,state)=>{const count=await this.storage.get(step)||0;await this.storage.put(step,count+1);if(lost&&step==='revokePlan')throw Error('synthetic lost response');return {verified:true,state};};
-   const coordinator=createIndependentClosureCoordinator({storage:this.storage,plan:{occurrenceId:'11111111-1111-4111-8111-111111111111',baselineRef:'a'.repeat(64),closeAt:1000},now:()=>1000,revokePlan:()=>action('revokePlan','revoked'),closeLedger:()=>action('closeLedger','completed'),restoreAdministration:()=>action('restoreAdministration','restored')});
-   const result=await coordinator.tick();const counts=[];for(const name of ['revokePlan','closeLedger','restoreAdministration'])counts.push(await this.storage.get(name)||0);return Response.json({result,counts});
+   const coordinator=createIndependentClosureCoordinator({storage:this.storage,plan:{occurrenceId:'11111111-1111-4111-8111-111111111111',baselineRef:'a'.repeat(64),closeAt:1000},now:()=>1000,revokePlan:()=>action('revokePlan','revoked'),closeLedger:()=>action('closeLedger','completed'),restoreAdministration:()=>action('restoreAdministration','restored'),readIssuedReceipt:async p=>({verified:(await this.storage.get(p.step))===1,state:{revokePlan:'revoked',closeLedger:'completed',restoreAdministration:'restored'}[p.step]})});
+   const result=path==='/reconcile'?await coordinator.reconcile():await coordinator.tick();const counts=[];for(const name of ['revokePlan','closeLedger','restoreAdministration'])counts.push(await this.storage.get(name)||0);return Response.json({result,counts});
   }
  }
  export default {fetch(request,env){const name=new URL(request.url).pathname;return env.CLOSURES.get(env.CLOSURES.idFromName(name)).fetch(request);}};
@@ -29,6 +29,9 @@ test('native Durable Object transactions persist closure and prevent reissuing a
   assert.deepEqual(await call('/lost'),{result:{state:'intervention_required',step:'revokePlan'},counts:[1,0,0]});
   assert.deepEqual(await call('/lost'),{result:{state:'intervention_required',step:'revokePlan'},counts:[1,0,0]});
   const ns=await runtime.getDurableObjectNamespace('CLOSURES');const stub=ns.get(ns.idFromName('own-synthetic-alarm'));
+  const lostStub=ns.get(ns.idFromName('/lost'));
+  assert.deepEqual(await(await lostStub.fetch('https://synthetic.invalid/reconcile')).json(),{result:{state:'waiting',step:null},counts:[1,0,0]});
+  assert.deepEqual(await(await lostStub.fetch('https://synthetic.invalid/continue')).json(),{result:{state:'complete',step:null},counts:[1,1,1]});
   assert.deepEqual(await (await stub.fetch('https://synthetic.invalid/arm')).json(),{armed:true});
   let observation={pending:true};const deadline=Date.now()+5000;
   while(observation.pending&&Date.now()<deadline){await new Promise(r=>setTimeout(r,50));observation=await(await stub.fetch('https://synthetic.invalid/snapshot')).json();}
