@@ -6,13 +6,18 @@ const original={id:'22222222-2222-4222-8222-222222222222',client_id:'synthetic.a
 const unknown={verified:false,state:'unknown'},disabled={verified:true,state:'disabled'};
 async function fixture(){
  let token={...original},clock=1000,hook;const calls=[];
- const options={plan:{...plan},identity:{accountId:'a'.repeat(32),tokenId:token.id,metadataDigest:await computeServiceIdentityDigest(token)},now:()=>clock,request:async input=>{calls.push(input);if(hook)return hook(input);if(input.method==='PUT')token={...token,enabled:false,updated_at:'2026-10-08T00:10:01Z'};return {success:true,result:{...token}};}};
+ const options={plan:{...plan},identity:{accountId:'a'.repeat(32),tokenId:token.id,metadataDigest:await computeServiceIdentityDigest(token),exclusiveQa:true},now:()=>clock,request:async input=>{calls.push(input);if(hook)return hook(input);if(input.method==='PUT')token={...token,enabled:false,updated_at:'2026-10-08T00:10:01Z'};return {success:true,result:{...token}};}};
  return {options,calls,setHook:h=>hook=h,setToken:t=>token=t,setClock:t=>clock=t};
 }
 test('one fixed disable PUT is verified by primary GET, with no renewal or rotation fields',async()=>{
  const f=await fixture(),a=createServiceIdentityDisableAction(f.options);assert.deepEqual(await a.disableServiceIdentity(plan),disabled);
- assert.deepEqual(f.calls.map(c=>c.method),['GET','PUT','GET']);assert.deepEqual(f.calls[1],{method:'PUT',path:'/accounts/'+ 'a'.repeat(32)+'/access/service_tokens/'+original.id,body:{enabled:false}});
+ assert.deepEqual(f.calls.map(c=>c.method),['GET','PUT','GET']);assert.deepEqual(f.calls[1],{method:'PUT',path:'/accounts/'+ 'a'.repeat(32)+'/access/service_tokens/'+original.id,body:{enabled:false,name:original.name}});
  assert.deepEqual(await a.disableServiceIdentity(plan),disabled);assert.equal(f.calls.filter(c=>c.method==='PUT').length,1);
+});
+test('provider PUT replaces an omitted name: preserve the primary approved name explicitly',async()=>{
+ const f=await fixture();let token={...original};f.setHook(async req=>{if(req.method==='PUT')token={...token,enabled:false,name:req.body.name??''};return {success:true,result:{...token}};});
+ assert.deepEqual(await createServiceIdentityDisableAction(f.options).disableServiceIdentity(plan),disabled);
+ assert.equal(f.calls.find(c=>c.method==='PUT').body.name,original.name);
 });
 test('early, changed input, identity drift and provider failure do not dispatch PUT',async()=>{
  for(const kind of ['early','input','drift','failure','secret']){const f=await fixture(),input={...plan};if(kind==='early')f.setClock(999);if(kind==='input')input.extra=true;if(kind==='drift')f.setToken({...original,name:'other'});if(kind==='failure')f.setHook(async()=>({success:false,errors:[{message:'private'}]}));if(kind==='secret')f.setToken({...original,client_secret:'never-export'});assert.deepEqual(await createServiceIdentityDisableAction(f.options).disableServiceIdentity(input),unknown);assert.equal(f.calls.filter(c=>c.method==='PUT').length,0);}
@@ -32,6 +37,8 @@ test('input edits and regressed clock after awaited primary read prevent writes'
 test('configuration is copied and unsafe metadata/resources are rejected',async()=>{
  const f=await fixture(),a=createServiceIdentityDisableAction(f.options);f.options.plan.closeAt=2000;f.options.identity.tokenId='33333333-3333-4333-8333-333333333333';assert.deepEqual(await a.readDisabledIdentity(plan),unknown);assert.ok(f.calls[0].path.endsWith(original.id));
  assert.throws(()=>createServiceIdentityDisableAction({...f.options,identity:{...f.options.identity,accountId:'../../'}}));
+ assert.throws(()=>createServiceIdentityDisableAction({...f.options,identity:{...f.options.identity,exclusiveQa:false}}));
+ const shared={...f.options.identity};delete shared.exclusiveQa;assert.throws(()=>createServiceIdentityDisableAction({...f.options,identity:shared}));
  await assert.rejects(computeServiceIdentityDigest({...original,enabled:'false'}));await assert.rejects(computeServiceIdentityDigest({...original,duration:'forever'}));await assert.rejects(computeServiceIdentityDigest({...original,expires_at:'invalid'}));
  await assert.rejects(computeServiceIdentityDigest({...original,previous_client_secret_expires_at:'invalid'}));
  assert.equal(await computeServiceIdentityDigest({...original,enabled:false,updated_at:'new',last_seen_at:'new'}),await computeServiceIdentityDigest(original));
