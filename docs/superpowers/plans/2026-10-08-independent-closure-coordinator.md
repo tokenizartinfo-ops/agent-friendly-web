@@ -28,5 +28,5 @@
 - [x] Write failing tests for expiry, ordered receipts, concurrency, missing callback result, restart, changed plan, and malformed storage.
 - [x] Run node --test test/assistance-independent-closure.test.mjs; establish missing module failure.
 - [x] Implement transaction/get/put write-ahead reservation and strict receipt/state validation.
-- [ ] Run focal tests and scoped lint; review exact source; record remote gates. Eight tests passed including two native alarms with invocation counts; final review pending after identifier fix.
-- [ ] Commit verified preparation, without remote activation.
+- [x] Run focal tests and scoped lint; review exact source; record remote gates. Eight tests passed including two native alarms with invocation counts; final identifier fix reviewed and closed. Full1225pass/2platformskip/0fail.
+- [x] Commit verified preparation, without remote activation.

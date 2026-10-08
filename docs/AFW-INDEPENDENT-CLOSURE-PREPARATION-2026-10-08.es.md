@@ -9,6 +9,8 @@ La reserva transaccional se guarda antes de cada efecto; los callbacks quedan fu
 
 La revisión independiente encontró coerción de identificadores por RegExp: arrays/objetos podían validarse y bloquear la segunda lectura. Se reprodujo con prueba roja y corrigió exigiendo strings primitivos. La prueba nativa permanece exclusivamente en `test/`; no hay actor de producción construido por ella.
 
+Validación final local: suite completa1227 casos,1225 aprobados,0 fallos,2 omisiones de plataforma; log `output/afw-independent-closure-full-test-20261008.log`. Lint de los tres archivos nuevos terminó exit0. Revisión independiente final de dc15c666 cerró P2 y no encontró otros hallazgos accionables. La rama se rebasó sobre main8b9a4c8f sin modificar esos archivos, evitando repetir los commits ya integrados por PR331. PR332 prepara solo este módulo y su evidencia; no implica promoción del runtime.
+
 ## Evidencia cloud precedente
 La tarea ordinaria `01a11c47-583a-70fb-bd4e-2a3aa46e2002` adoptó fuente `8b9a4c8fadafe427c568cd47cef365aaa2f3a1de` y publicación `cecfgver_6ac7ba5d553881a39528829a28507a87`. Su puente real metadata-only pasó: una observación soportada y salida accepted/exit0. No realizó HTTP operacional.
 
