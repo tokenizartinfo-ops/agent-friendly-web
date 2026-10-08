@@ -74,6 +74,24 @@ test('native primary closure: exact pins, revocation, stop, terminal preservatio
    assert.equal((await catalog.read(delayed.plan.occurrenceId)).revoked,false);
   }
 
+  for(const mode of ['denied','unknown','throws','clock','input','allowed']){
+   const guarded=await setup(),input={...guarded.plan};let clock=guarded.plan.closeAt,calls=0;
+   const authorizeWrite=async pin=>{calls++;assert.deepEqual(pin,guarded.plan);assert.ok(Object.isFrozen(pin));await Promise.resolve();if(mode==='throws')throw Error('private authority');if(mode==='clock')clock--;if(mode==='input')input.baselineRef='9'.repeat(64);return mode==='unknown'?undefined:mode!=='denied';};
+   const guardedActions=createClosureD1Actions({...guarded.options,now:()=>clock,authorizeWrite});
+   assert.deepEqual(await guardedActions.revokePlan(input),mode==='allowed'?{verified:true,state:'revoked'}:unknown);
+   assert.equal(calls,1);
+   assert.equal((await catalog.read(guarded.plan.occurrenceId)).revoked,mode==='allowed');
+  }
+  for(const mode of ['denied','unknown','throws','clock','input','allowed']){
+   const guarded=await setup();await createClosureD1Actions(guarded.options).revokePlan(guarded.plan);
+   const input={...guarded.plan};let clock=guarded.plan.closeAt,calls=0;
+   const authorizeWrite=async pin=>{calls++;assert.deepEqual(pin,guarded.plan);await Promise.resolve();if(mode==='throws')throw Error('private authority');if(mode==='clock')clock--;if(mode==='input')input.closeAt++;return mode==='unknown'?undefined:mode!=='denied';};
+   const guardedActions=createClosureD1Actions({...guarded.options,now:()=>clock,authorizeWrite});
+   assert.deepEqual(await guardedActions.closeLedger(input),mode==='allowed'?{verified:true,state:'stopped'}:unknown);
+   assert.equal(calls,1);
+   assert.equal((await db.prepare("SELECT count(*) n FROM assistance_occurrence_journal WHERE occurrence_id=? AND state='stopped'").bind(guarded.plan.occurrenceId).first()).n,mode==='allowed'?1:0);
+  }
+  assert.throws(()=>createClosureD1Actions({...active.options,authorizeWrite:true}));
   const lost=await setup();
   const ambiguousDb={
    prepare(sql){const stmt=db.prepare(sql);return {first:()=>stmt.first(),bind(...args){const bound=stmt.bind(...args);return {first:()=>bound.first(),async run(){const result=await bound.run();if(sql.startsWith('INSERT INTO assistance_occurrence_plan_revocations'))throw Error('private provider error');return result;}};}};},
