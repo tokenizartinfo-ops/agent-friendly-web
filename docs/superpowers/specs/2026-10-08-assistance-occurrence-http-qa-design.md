@@ -6,7 +6,7 @@ Fecha: 2026-10-08. Estado: propuesta para revisión; solo documentación. No rut
 
 Siete HTTP como máximo por invocación finita del runner: tres controles, tres operaciones y un stop excepcional; sin retries, polling ni recuperación mediante consultas. Exclusión global de efectos en D1 compartida, no límite agregado de tráfico entre contendientes. Dos create pueden llegar; solo uno obtiene la ocurrencia. UUID distinto no permite repetir eventId/requestId.
 
-Reutilizar helpers transaccionales y transporte canónico existente. Importar posteriormente el contador exacto de 33b617c; no duplicarlo. Este bloque no hace cherry-pick ni implementa adaptador. Mantener rutas legacy, public/runtime, budgets compartidos, schemas/runs e historia hasta la implementación revisada.
+Reutilizar helpers transaccionales y la extracción canónica lib/operations-http-transport.mjs preparada por el owner en origin/feat/afw-occurrence-service-20261008 (base main4aa4441, revisión/full test todavía en curso al comunicarla). createOperationsHttpTransport({env,fetchImpl,timeoutMs,onDiagnostic}) devuelve request(path,body), conserva origin pinned, allowlists GET/POST fijas, request máximo1024B, reply8192B y timeout/abort/diagnósticos; incluir paths futuros no monta HTTP. createOperationsClient sigue sobre ese transporte; validación de negocio no se desplaza al primitive. No crear otro transporte, ni interpretar los10/10 focales reportados como full/revisión final propios. Pin exacto de la extracción pendiente de su cierre por el owner antes de integrar. Importar posteriormente el contador exacto de 33b617c; no duplicarlo. Este bloque no hace cherry-pick ni implementa adaptador. Mantener rutas legacy, public/runtime, budgets compartidos, schemas/runs e historia hasta la implementación revisada.
 
 Pins source/config/publicación son autorización declarada por plan owner. El runner los corrobora en su entorno mediante herramientas soportadas y Git local. El servidor valida su propia versión efectiva aprobada, identidad, enrollment, plazo, esquema y evento; no presenta los pins como observación independiente de la VM.
 
@@ -106,7 +106,7 @@ No connector Cloudflare restaurador acreditado; Wrangler presente sin auth/capac
 
 1. TDD separación versionada de store y evidencia aditiva de admisión; mantener callers históricos y helpers/SQL clock. Solo local Miniflare/SQLite.
 2. TDD provider server interno, aprobaciones/revocación exactas y guards en batch. Escribir migración aditiva local, no SQL remoto.
-3. Importar contador33b617c exacto y TDD runner con transporte canónico/observador host real inyectado. No rutas montadas ni activación implícita.
+3. Importar contador33b617c exacto y reutilizar operations-http-transport.mjs de la fuente revisada/pin exacto del owner; TDD runner con observador host real inyectado. Validación de negocio y correlación permanece dentro del callback contado, fuera del primitive HTTP. No rutas montadas ni activación implícita.
 4. Adaptador cerrado QA_OFF con allowlists y veto legacy, solo tras revisión del contrato. Activación y control-plane siguen otro bloque autorizado.
 
 Pendientes concretos: dependencia host soportada para preflight del runner; frontera real de escritura de aprobaciones; identificación de versión/config efectiva Worker y binding QA; disponibilidad/expiry real de identidad servicio; actor independiente de cierre ledger y cualquier habilitación/restauración admin requerida. Ninguno exige atestación VM ni puente de observación cloud al Worker. No programa, activa ni reclama piloto listo.
