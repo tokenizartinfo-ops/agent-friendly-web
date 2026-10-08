@@ -1,0 +1,50 @@
+✔ server admission uses exact own-state DTO with no cloud assertions and real approvals (28.876146ms)
+✔ revocation after trusted lookup rolls back consumption and all run effects (13.101461ms)
+✔ server mode refuses missing migration, unknown/mixed providers and malformed approval (3.890355ms)
+✔ exact server DTO rejects extras, wrong refs/config/version/revision and stale/future dates (9.047604ms)
+✔ catalog exact read, uniqueness, immutable schema and revocations prohibit resurrection (8.695413ms)
+✔ revocation before create batch leaves no header or journal and before admit preserves consumed (16.744049ms)
+✔ two server clients race same approval once and expired revoked stop preserves history (10.764784ms)
+✔ server catalog requires actual schema and exact signal including observation date bounds (9.84283ms)
+✔ catalog denies approval of a fabricated revision of an existing event (6.363814ms)
+✔ missing approval and approved cloud downgrade fail without header history (6.847109ms)
+✔ lost server responses cannot replay or change admission revision (8.865235ms)
+✔ revocation fences list, finish admission and terminal effect after their lookup (35.099131ms)
+✔ SQL constraints and mapping immutable; direct journal SQL cannot evade revocation (6.359678ms)
+✔ approval cannot convert an existing cloud occurrence or block its independent close (6.596588ms)
+✔ schema2 marker cannot certify incomplete schema1 guards (4.904044ms)
+✖ final server check rejects expiry after business and clock statements with total rollback (1060.124949ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 15
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1254.878873
+
+✖ failing tests:
+
+test at test/assistance-occurrence-server-admission.test.mjs:68:1
+✖ final server check rejects expiry after business and clock statements with total rollback (1060.124949ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + {
+  +   eventId: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+  +   expiresAt: 1791468764735,
+  +   requestId: '507edc1d-bae6-4400-8043-57d0623f1ded',
+  +   runId: '753d3233-d317-4e8b-a572-1f3e03358668'
+  + }
+  - null
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:69:720)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [Object],
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,12 @@
+
+> agent-friendly-web@0.1.0 lint
+> eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern worker-configuration.d.ts
+
+
+/workspace/work/afw-occurrence-d1/app/components/comic-home-intro.tsx
+  36:7  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/work/afw-occurrence-d1/worker/operations/index.mjs
+  11:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+✖ 2 problems (0 errors, 2 warnings)

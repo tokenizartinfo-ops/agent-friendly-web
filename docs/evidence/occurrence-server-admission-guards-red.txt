@@ -1,0 +1,36 @@
+✔ server admission uses exact own-state DTO with no cloud assertions and real approvals (20.588062ms)
+✔ revocation after trusted lookup rolls back consumption and all run effects (10.907524ms)
+✔ server mode refuses missing migration, unknown/mixed providers and malformed approval (4.367039ms)
+✔ exact server DTO rejects extras, wrong refs/config/version/revision and stale/future dates (7.130427ms)
+✔ catalog exact read, uniqueness, immutable schema and revocations prohibit resurrection (7.393526ms)
+✔ revocation before create batch leaves no header or journal and before admit preserves consumed (14.97484ms)
+✔ two server clients race same approval once and expired revoked stop preserves history (8.716182ms)
+✔ server catalog requires actual schema and exact signal including observation date bounds (8.334207ms)
+✖ catalog denies approval of a fabricated revision of an existing event (5.013175ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 8
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 103.987171
+
+✖ failing tests:
+
+test at test/assistance-occurrence-server-admission.test.mjs:44:1
+✖ catalog denies approval of a fabricated revision of an existing event (5.013175ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  true !== false
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:45:94)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

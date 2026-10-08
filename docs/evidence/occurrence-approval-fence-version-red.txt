@@ -1,0 +1,46 @@
+✔ server admission uses exact own-state DTO with no cloud assertions and real approvals (23.081633ms)
+✔ revocation after trusted lookup rolls back consumption and all run effects (10.866305ms)
+✔ server mode refuses missing migration, unknown/mixed providers and malformed approval (4.711756ms)
+✔ exact server DTO rejects extras, wrong refs/config/version/revision and stale/future dates (8.054999ms)
+✔ catalog exact read, uniqueness, immutable schema and revocations prohibit resurrection (7.494199ms)
+✔ revocation before create batch leaves no header or journal and before admit preserves consumed (15.49005ms)
+✔ two server clients race same approval once and expired revoked stop preserves history (9.228543ms)
+✔ server catalog requires actual schema and exact signal including observation date bounds (7.04178ms)
+✔ catalog denies approval of a fabricated revision of an existing event (4.630085ms)
+✔ missing approval and approved cloud downgrade fail without header history (6.612936ms)
+✔ lost server responses cannot replay or change admission revision (9.393948ms)
+✔ revocation fences list, finish admission and terminal effect after their lookup (29.696262ms)
+✔ SQL constraints and mapping immutable; direct journal SQL cannot evade revocation (6.941432ms)
+✔ approval cannot convert an existing cloud occurrence or block its independent close (7.195397ms)
+✔ schema2 marker cannot certify incomplete schema1 guards (4.38958ms)
+✔ final server check rejects expiry after business and clock statements with total rollback (1056.209363ms)
+✔ reserved event cannot downgrade to cloud with different occurrence and request UUIDs, revoked or active (16.214444ms)
+✖ unpatched schema2 cannot approve or admit new server work (6.484693ms)
+✔ reserved requestId cannot select a different event even with another occurrence UUID (7.868028ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 18
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1262.842281
+
+✖ failing tests:
+
+test at test/assistance-occurrence-server-admission.test.mjs:75:1
+✖ unpatched schema2 cannot approve or admit new server work (6.484693ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  true !== false
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:76:72)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
