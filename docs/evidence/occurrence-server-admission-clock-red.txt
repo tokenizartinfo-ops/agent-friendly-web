@@ -29,7 +29,7 @@ test at test/assistance-occurrence-server-admission.test.mjs:68:1
 ✖ final server check rejects expiry after business and clock statements with total rollback (1060.124949ms)
   AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
   + actual - expected
-  
+
   + {
   +   eventId: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
   +   expiresAt: 1791468764735,
@@ -37,7 +37,7 @@ test at test/assistance-occurrence-server-admission.test.mjs:68:1
   +   runId: '753d3233-d317-4e8b-a572-1f3e03358668'
   + }
   - null
-  
+
       at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:69:720)
       at async Test.run (node:internal/test_runner/test:1389:7)
       at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {

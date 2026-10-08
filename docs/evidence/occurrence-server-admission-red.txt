@@ -15,10 +15,10 @@ test at test/assistance-occurrence-server-admission.test.mjs:13:1
 ✖ server admission uses exact own-state DTO with no cloud assertions and real approvals (11.739634ms)
   AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
   + actual - expected
-  
+
   + 'undefined'
   - 'function'
-  
+
       at setup (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:12:43)
       at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:14:10)
       at Test.runInAsyncScope (node:async_hooks:227:14)
@@ -37,10 +37,10 @@ test at test/assistance-occurrence-server-admission.test.mjs:16:1
 ✖ revocation after trusted lookup rolls back consumption and all run effects (4.248448ms)
   AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
   + actual - expected
-  
+
   + 'undefined'
   - 'function'
-  
+
       at setup (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:12:43)
       at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:17:10)
       at Test.runInAsyncScope (node:async_hooks:227:14)

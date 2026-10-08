@@ -10,4 +10,3 @@
   11:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
 
 ✖ 2 problems (0 errors, 2 warnings)
-

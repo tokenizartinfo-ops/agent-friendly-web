@@ -26,9 +26,9 @@
 test at test/assistance-occurrence-server-admission.test.mjs:61:1
 ✖ approval cannot convert an existing cloud occurrence or block its independent close (10.201432ms)
   AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
-  
+
   true !== false
-  
+
       at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:62:279)
       at async Test.run (node:internal/test_runner/test:1389:7)
       at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
