@@ -77,3 +77,9 @@ test('lost storage confirmation after a verified effect keeps issued and never r
  const c=f.make({storage});await assert.rejects(c.tick(),/^Error: Closure storage unavailable$/);assert.equal(writes,1);fail=false;
  assert.deepEqual(await c.tick(),{state:'intervention_required',step:'revokePlan'});assert.equal(writes,1);
 });
+test('committed advancement with lost acknowledgment resumes at the next step without replay',async()=>{
+ let fail=true,writes=0;const f=fixture({revokePlan:async()=>{writes++;return {verified:true,state:'revoked'};}});const original=f.options.storage;
+ const storage={async transaction(fn){let advanced=false;const result=await original.transaction(tx=>fn({...tx,put:async(k,v)=>{await tx.put(k,v);if(v.index===1)advanced=true;}}));if(fail&&advanced){fail=false;throw Error('private-lost-ack');}return result;}};
+ const c=f.make({storage});await assert.rejects(c.tick(),/^Error: Closure storage unavailable$/);assert.equal(writes,1);
+ assert.deepEqual(await c.tick(),{state:'complete',step:null});assert.equal(writes,1);assert.deepEqual(f.calls.map(c=>c[0]),['ledger','admin']);
+});
