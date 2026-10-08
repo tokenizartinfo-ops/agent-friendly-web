@@ -1,3 +1,24 @@
+## Estado vigente: 8 octubre de 2026
+
+Este bloque supera los pendientes históricos de las secciones fechadas debajo; preserva sus evidencias sin convertirlas en nuevas tareas.
+
+| Tramo | Evidencia actual | Pendiente real |
+| --- | --- | --- |
+| Dossier guiado, guardado y reapertura | AFW-GUIDED-DELIVERY-ACCEPTANCE-2026-10-07.es.md | Recorrido personal del cliente |
+| Orientación propia, lectura y retirada | AFW-PRIVATE-GOAL-JOURNEY-ACCEPTANCE-2026-10-07.es.md | Contexto y consentimiento actuales por proyecto; no inferirlos |
+| Entrega, ACK y revisión cloud | AFW-CURRENT-REVIEW-ACCEPTANCE-2026-10-08.es.md: revisión10, tres HTTP200 y retorno fechado | Resultado intervention_required; no respuesta personalizada ni resolución |
+| Correo de marca | AFW-MAIL-BINARY-RASTER-FIX-2026-10-06.es.md: ensayo propio recibido | Preview editorial contextual a Gabriel y aprobación del primer envío |
+| Programación | AFW-MANAGED-SCHEDULED-ACCEPTANCE-2026-10-05.es.md: ensayo histórico cerrado | Verificar vínculo al chat actual/publicación antes de programar |
+| Operación integrada PC-off | Aún no aceptada para el recorrido actual | Correlacionar turno alojado, recibos y retorno con intervalo apagado declarado por owner |
+| Cadencia operativa | Ensayos propios finitos cerrados | Ventana, presupuesto, retirada y recuperación comprobadas; no guardia permanente |
+| Max | No incorporación acreditada | Ingreso, consentimiento y objetivos desde su sesión, luego paquete/instalación/comparación proporcionales |
+
+Verificación pública del 8oct11:08UTC: smoke public-edge exit0/oktrue, ocho superficies públicas200 y tres rutas privadas302 Access. No acredita interacción privada, versión de deploy, nuevo puntaje externo ni acceso de Max.
+
+Preparación cloud actual01a118b0/publicación6ac6d401/fuente4d424cf: contrato de una sola ocurrencia fuera de Git y tres pruebas pertinentes del cliente pasaron. CLI no integra el control global de ocurrencia/deadline/checkpoints; el orquestador debe comprobarlos. El schema de programación no expone selector de chat/entorno: vínculo todavía no verificado. La automation histórica6ac42c5f permanece deshabilitada, dirigida al chat anterior; no reactivarla como sustituto.
+
+Orden operativo: verificar scheduler actual → ensayo integrado propio → cadencia acotada → preview/aprobación del correo → Max entra personalmente. No exigir OAuth/A2A, AF5 ni puntaje100 para el piloto. No suponer hosting, WordPress, objetivos ni publicar caso de estudio sin permiso separado.
+
 ## Actualización vigente: 7 octubre de 2026
 
 La portada recuperada ya tiene corrección publicada y comprobada: AFW-ICON-PRODUCTION-RELEASE-2026-10-07.es.md, versiónfe4478cd100%,16 páginas200, documentos públicos200 y rutas privadas protegidas. La fotografía del 5oct debajo no representa la versión vigente. El piloto copilot continúa exclusivamente propio; Max no está incorporado automáticamente.
