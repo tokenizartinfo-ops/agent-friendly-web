@@ -23,6 +23,6 @@
 **Files:** lib/assistance-independent-closure.mjs, test/assistance-independent-closure.test.mjs; native fixture in test/assistance-independent-closure-workerd.test.mjs.
 **Interfaces:** Optional constructor readIssuedReceipt({occurrenceId,baselineRef,closeAt,step}); reconcile()->{state,step}.
 - [x] Establish red tests: reconcile is not a function; no repeated write; mismatched/unknown/error results remain issued.
-- [ ] Implement strict callback validation and read-only reconciliation outside transaction with exact index/phase CAS.
-- [ ] Test concurrent recovery, ready/complete no unnecessary read, and final admin recovery; focal/scoped lint and review.
-- [ ] Commit and record exact acceptance and remote limits.
+- [x] Implement strict callback validation and read-only reconciliation outside transaction with exact index/phase CAS.
+- [x] Test concurrent recovery, ready/complete no unnecessary read, and final admin recovery; focal/scoped lint and review. 14focalpass/lint0; implementation review clear; final added lost-ack coverage reviewed separately.
+- [x] Commit and record exact acceptance and remote limits. CI remains gate for merge; local full recorded native startup I/O failure, isolated original case passed, both receipts preserved.
