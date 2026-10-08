@@ -1,0 +1,10 @@
+Command: npm test (supported per-command network.enabled=true, restricted/enforced unchanged)
+ℹ tests 1218
+ℹ suites 0
+ℹ pass 1217
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 57287.76871
+Scoped eslint: exit 0; no diagnostics.
