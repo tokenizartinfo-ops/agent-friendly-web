@@ -33,5 +33,6 @@ test('configuration is copied and unsafe metadata/resources are rejected',async(
  const f=await fixture(),a=createServiceIdentityDisableAction(f.options);f.options.plan.closeAt=2000;f.options.identity.tokenId='33333333-3333-4333-8333-333333333333';assert.deepEqual(await a.readDisabledIdentity(plan),unknown);assert.ok(f.calls[0].path.endsWith(original.id));
  assert.throws(()=>createServiceIdentityDisableAction({...f.options,identity:{...f.options.identity,accountId:'../../'}}));
  await assert.rejects(computeServiceIdentityDigest({...original,enabled:'false'}));await assert.rejects(computeServiceIdentityDigest({...original,duration:'forever'}));await assert.rejects(computeServiceIdentityDigest({...original,expires_at:'invalid'}));
+ await assert.rejects(computeServiceIdentityDigest({...original,previous_client_secret_expires_at:'invalid'}));
  assert.equal(await computeServiceIdentityDigest({...original,enabled:false,updated_at:'new',last_seen_at:'new'}),await computeServiceIdentityDigest(original));
 });
