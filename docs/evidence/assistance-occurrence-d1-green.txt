@@ -1,0 +1,24 @@
+✔ two real SQLite connections share exclusive create; different UUID cannot repeat event (12.393977ms)
+✔ CAS race and one-use admissions permit only three phases, finish is terminal (6.585233ms)
+✔ effect constraint failure rolls back consumption in same batch, no JS split commit (5.460098ms)
+✔ lost create or consumed response remains exclusive from fresh connection; stopped history immutable (5.821363ms)
+✔ strict manifest/preflight, deadline after await, coercion and foreign signal deny before writes (3.397386ms)
+✔ database constraints forbid forged phase, attempt4, controls5 and journal mutation (4.381703ms)
+✔ independent close after expired claim lease preserves lease and makes no preflight call (8.28711ms)
+✔ closure during preflight wait rolls back stale consume and leaves zero effects (6.033797ms)
+✔ mutated manifest and wrong identity cannot adopt existing admissions (5.446478ms)
+✔ SQL rejects non-UUID operation identifiers rather than accepting opaque arbitrary text (3.330257ms)
+✔ SQL format and date range constraints match strict metadata contract (3.562581ms)
+✔ two concurrent consume attempts have one effect; committed lost claim cannot replay (5.277748ms)
+✔ finish loses to independent closure during preflight and produces no effect (5.787132ms)
+✔ zero-row effect SQL postcondition rolls back admission without a second commit (4.031144ms)
+✔ new signal revision inserted during preflight denies stale consume before effects (5.011154ms)
+✔ preflight provider failure stops without returning provider details or writing state (2.166626ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 103.749514

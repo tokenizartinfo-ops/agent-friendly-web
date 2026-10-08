@@ -1,0 +1,11 @@
+✔ cloud client pins its destination and validates correlated metadata without returning credentials (29.654245ms)
+✔ cloud client refuses redirects, login HTML, arbitrary metadata, wrong correlation and failed receipts (5.82704ms)
+✔ cloud client bounds a stuck fetch or unfinished response and cancels transport (32.667056ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 86.031669

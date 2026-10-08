@@ -1,0 +1,37 @@
+✔ two real SQLite connections share exclusive create; different UUID cannot repeat event (13.87549ms)
+✔ CAS race and one-use admissions permit only three phases, finish is terminal (6.368833ms)
+✔ effect constraint failure rolls back consumption in same batch, no JS split commit (6.281484ms)
+✔ lost create or consumed response remains exclusive from fresh connection; stopped history immutable (6.362459ms)
+✔ strict manifest/preflight, deadline after await, coercion and foreign signal deny before writes (3.005948ms)
+✔ database constraints forbid forged phase, attempt4, controls5 and journal mutation (3.648489ms)
+✔ independent close after expired claim lease preserves lease and makes no preflight call (4.741691ms)
+✔ closure during preflight wait rolls back stale consume and leaves zero effects (4.41333ms)
+✔ mutated manifest and wrong identity cannot adopt existing admissions (5.853522ms)
+✔ SQL rejects non-UUID operation identifiers rather than accepting opaque arbitrary text (2.798982ms)
+✔ SQL format and date range constraints match strict metadata contract (3.374623ms)
+✔ two concurrent consume attempts have one effect; committed lost claim cannot replay (5.104523ms)
+✔ finish loses to independent closure during preflight and produces no effect (5.653875ms)
+✔ zero-row effect SQL postcondition rolls back admission without a second commit (4.154507ms)
+✔ new signal revision inserted during preflight denies stale consume before effects (4.312812ms)
+✖ preflight provider failure stops without returning provider details or writing state (1.887442ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 15
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 98.488403
+
+✖ failing tests:
+
+test at test/assistance-occurrence-d1.test.mjs:29:1
+✖ preflight provider failure stops without returning provider details or writing state (1.887442ms)
+  Error: synthetic-private-provider-detail
+      at file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:29:162
+      at ready (file:///workspace/work/afw-occurrence-d1/lib/assistance-occurrence-d1.mjs:24:80)
+      at Object.create (file:///workspace/work/afw-occurrence-d1/lib/assistance-occurrence-d1.mjs:30:53)
+      at async file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:29:221
+      at async TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:13:56)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
