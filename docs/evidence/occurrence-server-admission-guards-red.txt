@@ -21,9 +21,9 @@
 test at test/assistance-occurrence-server-admission.test.mjs:44:1
 ✖ catalog denies approval of a fabricated revision of an existing event (5.013175ms)
   AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
-  
+
   true !== false
-  
+
       at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:45:94)
       at async Test.run (node:internal/test_runner/test:1389:7)
       at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
