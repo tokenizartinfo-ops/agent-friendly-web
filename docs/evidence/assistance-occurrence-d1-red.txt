@@ -1,0 +1,158 @@
+✖ two real SQLite connections share exclusive create; different UUID cannot repeat event (1.606536ms)
+✖ CAS race and one-use admissions permit only three phases, finish is terminal (0.217822ms)
+✖ effect constraint failure rolls back consumption in same batch, no JS split commit (0.239374ms)
+✖ lost create or consumed response remains exclusive from fresh connection; stopped history immutable (0.157824ms)
+✖ strict manifest/preflight, deadline after await, coercion and foreign signal deny before writes (0.177793ms)
+✖ database constraints forbid forged phase, attempt4, controls5 and journal mutation (0.232334ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 0
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15.807902
+
+✖ failing tests:
+
+test at test/assistance-occurrence-d1.test.mjs:14:1
+✖ two real SQLite connections share exclusive create; different UUID cannot repeat event (1.606536ms)
+  AssertionError [ERR_ASSERTION]: D1 store contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at fixture (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:12:27)
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:13:33)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-d1.test.mjs:15:1
+✖ CAS race and one-use admissions permit only three phases, finish is terminal (0.217822ms)
+  AssertionError [ERR_ASSERTION]: D1 store contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at fixture (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:12:27)
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:13:33)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-d1.test.mjs:16:1
+✖ effect constraint failure rolls back consumption in same batch, no JS split commit (0.239374ms)
+  AssertionError [ERR_ASSERTION]: D1 store contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at fixture (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:12:27)
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:13:33)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-d1.test.mjs:17:1
+✖ lost create or consumed response remains exclusive from fresh connection; stopped history immutable (0.157824ms)
+  AssertionError [ERR_ASSERTION]: D1 store contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at fixture (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:12:27)
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:13:33)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-d1.test.mjs:18:1
+✖ strict manifest/preflight, deadline after await, coercion and foreign signal deny before writes (0.177793ms)
+  AssertionError [ERR_ASSERTION]: D1 store contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at fixture (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:12:27)
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:13:33)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-d1.test.mjs:19:1
+✖ database constraints forbid forged phase, attempt4, controls5 and journal mutation (0.232334ms)
+  AssertionError [ERR_ASSERTION]: D1 store contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at fixture (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:12:27)
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:13:33)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

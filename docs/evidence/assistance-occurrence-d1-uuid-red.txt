@@ -1,0 +1,35 @@
+✔ two real SQLite connections share exclusive create; different UUID cannot repeat event (10.977602ms)
+✔ CAS race and one-use admissions permit only three phases, finish is terminal (8.581838ms)
+✔ effect constraint failure rolls back consumption in same batch, no JS split commit (6.105253ms)
+✔ lost create or consumed response remains exclusive from fresh connection; stopped history immutable (5.844287ms)
+✔ strict manifest/preflight, deadline after await, coercion and foreign signal deny before writes (2.928613ms)
+✔ database constraints forbid forged phase, attempt4, controls5 and journal mutation (3.585686ms)
+✔ independent close after expired claim lease preserves lease and makes no preflight call (5.034339ms)
+✔ closure during preflight wait rolls back stale consume and leaves zero effects (4.817368ms)
+✔ mutated manifest and wrong identity cannot adopt existing admissions (4.294174ms)
+✖ SQL rejects non-UUID operation identifiers rather than accepting opaque arbitrary text (3.094799ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 68.607434
+
+✖ failing tests:
+
+test at test/assistance-occurrence-d1.test.mjs:23:1
+✖ SQL rejects non-UUID operation identifiers rather than accepting opaque arbitrary text (3.094799ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:23:326
+      at async TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-d1.test.mjs:13:56)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
