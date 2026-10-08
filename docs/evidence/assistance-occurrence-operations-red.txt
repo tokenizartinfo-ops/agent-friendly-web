@@ -1,0 +1,176 @@
+✖ real claim and terminal outcome correlate journal/run and reject lost responses from new connection (1.57504ms)
+✖ shared budget zero-row claim rolls back admission, journal and run together (0.324229ms)
+✖ concurrent real claims and finish calls produce one run/effect each (0.152976ms)
+✖ finish zero-row effect aborts completed journal and never invents outcome (0.122271ms)
+✖ newer signal at claim denies effect; newer signal after claim produces exact superseded terminal (0.165715ms)
+✖ closure during preflight blocks real claim and exact lease/window margin blocks finish (0.285262ms)
+✖ lease deadline margin and missing list signal stop without consumption or business effect (0.159877ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 0
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 22.928913
+
+✖ failing tests:
+
+test at test/assistance-occurrence-operations.test.mjs:7:1
+✖ real claim and terminal outcome correlate journal/run and reject lost responses from new connection (1.57504ms)
+  AssertionError [ERR_ASSERTION]: internal operations contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-operations.test.mjs:5:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-operations.test.mjs:8:1
+✖ shared budget zero-row claim rolls back admission, journal and run together (0.324229ms)
+  AssertionError [ERR_ASSERTION]: internal operations contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-operations.test.mjs:5:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-operations.test.mjs:9:1
+✖ concurrent real claims and finish calls produce one run/effect each (0.152976ms)
+  AssertionError [ERR_ASSERTION]: internal operations contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-operations.test.mjs:5:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-operations.test.mjs:10:1
+✖ finish zero-row effect aborts completed journal and never invents outcome (0.122271ms)
+  AssertionError [ERR_ASSERTION]: internal operations contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-operations.test.mjs:5:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-operations.test.mjs:11:1
+✖ newer signal at claim denies effect; newer signal after claim produces exact superseded terminal (0.165715ms)
+  AssertionError [ERR_ASSERTION]: internal operations contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-operations.test.mjs:5:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-operations.test.mjs:12:1
+✖ closure during preflight blocks real claim and exact lease/window margin blocks finish (0.285262ms)
+  AssertionError [ERR_ASSERTION]: internal operations contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-operations.test.mjs:5:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/assistance-occurrence-operations.test.mjs:13:1
+✖ lease deadline margin and missing list signal stop without consumption or business effect (0.159877ms)
+  AssertionError [ERR_ASSERTION]: internal operations contract missing
+  + actual - expected
+
+  + 'undefined'
+  - 'function'
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-operations.test.mjs:5:40)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

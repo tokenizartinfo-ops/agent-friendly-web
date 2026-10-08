@@ -1,0 +1,36 @@
+✔ real claim and terminal outcome correlate journal/run and reject lost responses from new connection (18.302544ms)
+✔ shared budget zero-row claim rolls back admission, journal and run together (7.768011ms)
+✔ concurrent real claims and finish calls produce one run/effect each (8.819246ms)
+✔ finish zero-row effect aborts completed journal and never invents outcome (7.357844ms)
+✔ newer signal at claim denies effect; newer signal after claim produces exact superseded terminal (7.51042ms)
+✔ closure during preflight blocks real claim and exact lease/window margin blocks finish (6.555698ms)
+✔ lease deadline margin and missing list signal stop without consumption or business effect (7.7136ms)
+✖ new signal before finish admission must close reservation as superseded, not leave it hanging (6.667863ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 7
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 86.693093
+
+✖ failing tests:
+
+test at test/assistance-occurrence-operations.test.mjs:14:1
+✖ new signal before finish admission must close reservation as superseded, not leave it hanging (6.667863ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  false !== true
+
+      at file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-operations.test.mjs:14:383
+      at async TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-operations.test.mjs:5:365)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,34 @@
+✔ real claim and terminal outcome correlate journal/run and reject lost responses from new connection (23.794643ms)
+✔ shared budget zero-row claim rolls back admission, journal and run together (11.029016ms)
+✔ concurrent real claims and finish calls produce one run/effect each (11.902229ms)
+✔ finish zero-row effect aborts completed journal and never invents outcome (11.843262ms)
+✔ newer signal at claim denies effect; newer signal after claim produces exact superseded terminal (7.677318ms)
+✔ closure during preflight blocks real claim and exact lease/window margin blocks finish (8.831305ms)
+✔ lease deadline margin and missing list signal stop without consumption or business effect (10.619346ms)
+✔ new signal before finish admission must close reservation as superseded, not leave it hanging (11.565055ms)
+✖ real clock crossing between journal and claim effect rolls back the entire transaction (1082.056472ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 8
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1200.713928
+
+✖ failing tests:
+
+test at test/assistance-occurrence-operations.test.mjs:15:1
+✖ real clock crossing between journal and claim effect rolls back the entire transaction (1082.056472ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-operations.test.mjs:20:2
+      at async TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-operations.test.mjs:5:365)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /Occurrence storage unavailable/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

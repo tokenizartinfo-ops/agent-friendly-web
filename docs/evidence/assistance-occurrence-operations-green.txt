@@ -1,0 +1,20 @@
+✔ real claim and terminal outcome correlate journal/run and reject lost responses from new connection (18.262598ms)
+✔ shared budget zero-row claim rolls back admission, journal and run together (6.865437ms)
+✔ concurrent real claims and finish calls produce one run/effect each (8.660692ms)
+✔ finish zero-row effect aborts completed journal and never invents outcome (6.851777ms)
+✔ newer signal at claim denies effect; newer signal after claim produces exact superseded terminal (7.680543ms)
+✔ closure during preflight blocks real claim and exact lease/window margin blocks finish (7.606694ms)
+✔ lease deadline margin and missing list signal stop without consumption or business effect (5.946708ms)
+✔ new signal before finish admission must close reservation as superseded, not leave it hanging (6.655517ms)
+✔ real clock crossing between journal and claim effect rolls back the entire transaction (1079.240487ms)
+✔ terminal listed event fails postcondition with admission rolled back (4.686593ms)
+✔ newer signal during claim preflight denies old claim with zero runs (6.15808ms)
+✔ caller cannot request personalized outcome or supply SQL through operation inputs (6.400779ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1182.805395
