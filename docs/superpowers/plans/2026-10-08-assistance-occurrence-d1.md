@@ -40,3 +40,14 @@ SQLite16/16 y focalización43pass/1skip; lint0. Miniflare real bloqueado por EPE
 ## Cierre posterior
 
 Miniflare native1/1 green con network.enabled=true por comando autorizado; retorno use_default y SQLite16/16/lint0. Parser de triggers de test corregido tras error native observado. Los límites EPERM previos son históricos. Integración y contador/rutas/QA remota continúan pendientes.
+
+### Task2: composición de operaciones reales internas
+
+Files: lib/assistance-occurrence-operations.mjs, store/schema aditivos, test/assistance-occurrence-operations.test.mjs y -workerd.test.mjs.
+API: createOccurrenceOperations({db,manifest,identityRef,preflight,now}) retorna create/admit/close,list({expectedSequence}),claim({expectedSequence}),finish({expectedSequence}); sin request SQL ni outcome personalizado.
+- Escribir y observar RED contract missing con SQLite real/runs/budget cuatro canales.
+- Añadir consumePrepared con builder SQL síncrono y resultados del mismo batch; checks postcondition inmutables.
+- Integrar claim INSERT/fence real y finish UPDATE correlacionado, terminal SQL idéntico journal/run; list snapshot exacto.
+- GREEN SQLite/native/lint/focalización; commit y push misma rama sin force. Public runtime y HTTP intactos.
+
+Task2 completada localmente: SQLite18store+12ops y native3, focalización60pass/1skip, lint0. Hallazgos de queuedbatch y reloj ENTRE statements corregidos con RED→GREEN. Evidencia en docs/evidence/assistance-occurrence-operations-local-receipt.md. Runner/contador33b617c/HTTP no empezados.

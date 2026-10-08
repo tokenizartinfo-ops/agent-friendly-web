@@ -7,7 +7,7 @@ test('native D1 two bindings enforce create/CAS/one-use effects, rollback and in
  assert.equal(typeof implementation.createOccurrenceD1Store,'function','D1 store contract missing');
  const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:'export default {fetch(){return new Response(null,{status:404});}}',d1Databases:{DB:'native-occurrence-ledger',OTHER:'native-occurrence-ledger'}}));
  try{
-  const db=await runtime.getD1Database('DB'),other=await runtime.getD1Database('OTHER'),time=1791450000000;
+  const db=await runtime.getD1Database('DB'),other=await runtime.getD1Database('OTHER'),time=Date.now();
   for(const name of ['assistance-supervision','assistance-occurrences']){
    const source=readFileSync('worker/operations/'+name+'.sql','utf8').replace(/--[^\n]*/g,'');
    const pattern=/^CREATE TRIGGER\b[\s\S]*?^END;/gm, triggers=source.match(pattern)??[];

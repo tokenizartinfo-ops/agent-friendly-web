@@ -1,0 +1,13 @@
+✔ signed service lists, reserves, correlates and completes one bounded investigation (34.661234ms)
+✔ human, other service, foreign audience, multiple audiences, expired and forged tokens fail before storage (23.510058ms)
+✔ paused, unknown origin/routes and browser requests cannot use the service (2.343022ms)
+✔ strict bounded payload rejects configuration, commands, oversized and unfinished bodies (20.03972ms)
+✔ limiter and storage errors fail closed without exposing provider details (4.704622ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 162.697979

@@ -1,0 +1,13 @@
+✔ help review has stable bounded reservation and quiet terminal receipt (10.385115ms)
+✔ expired lease and newer help revision cannot complete as reviewed (2.150536ms)
+✔ historical dossier attempts exhaust assistance budget (1.574637ms)
+✔ help reservation blocks dossier mode and its completed attempts consume the same budget (4.095938ms)
+✔ active help reservation blocks both legacy investigations and notices symmetrically (4.6337ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 38.846043

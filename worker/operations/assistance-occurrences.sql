@@ -61,10 +61,11 @@ CREATE TRIGGER IF NOT EXISTS assistance_occurrence_transition
  SELECT CASE WHEN NEW.state!='stopped' AND NOT EXISTS(SELECT 1 FROM assistance_occurrences o
  JOIN assistance_supervision_events e ON e.event_id=o.event_id WHERE o.occurrence_id=NEW.occurrence_id
  AND e.project_ref=o.project_ref AND e.revision=o.revision AND e.kind=o.kind AND e.topic=o.topic AND e.observed_at=o.observed_at
- AND NOT EXISTS(SELECT 1 FROM assistance_supervision_events n WHERE n.project_ref=e.project_ref AND n.revision>e.revision)
- AND NEW.recorded_at>=o.start_at AND NEW.recorded_at+10000<min(o.deadline,o.token_expires_at,o.server_deadline,coalesce(NEW.lease_expires_at,9007199254740991))
- AND NEW.observation_revision=o.configuration_revision AND NEW.observation_at<=NEW.recorded_at AND NEW.recorded_at-NEW.observation_at<=30000)
+ AND ((NEW.phase='finish' AND NEW.state IN ('attempted','completed')) OR NOT EXISTS(SELECT 1 FROM assistance_supervision_events n WHERE n.project_ref=e.project_ref AND n.revision>e.revision))
+ AND CAST(unixepoch('subsec')*1000 AS INTEGER)>=o.start_at AND CAST(unixepoch('subsec')*1000 AS INTEGER)+10000<min(o.deadline,o.token_expires_at,o.server_deadline,coalesce(NEW.lease_expires_at,9007199254740991))
+ AND NEW.observation_revision=o.configuration_revision AND NEW.observation_at<=CAST(unixepoch('subsec')*1000 AS INTEGER) AND CAST(unixepoch('subsec')*1000 AS INTEGER)-NEW.observation_at<=30000)
  THEN RAISE(ABORT,'Occurrence denied') END;
+ SELECT CASE WHEN NEW.state='completed' AND NEW.outcome!=(CASE WHEN EXISTS(SELECT 1 FROM assistance_supervision_events n JOIN assistance_occurrences o ON o.project_ref=n.project_ref WHERE o.occurrence_id=NEW.occurrence_id AND n.revision>o.revision) THEN 'superseded' ELSE 'intervention_required' END) THEN RAISE(ABORT,'Occurrence denied') END;
  SELECT CASE WHEN NOT (
  (NEW.sequence=0 AND NEW.phase='preflight' AND NEW.state='started' AND NEW.attempts=0 AND NEW.controls=1 AND NEW.run_id IS NULL
  AND NOT EXISTS(SELECT 1 FROM assistance_occurrence_journal WHERE occurrence_id=NEW.occurrence_id))
@@ -93,5 +94,34 @@ CREATE TRIGGER IF NOT EXISTS assistance_occurrence_journal_no_update BEFORE UPDA
  SELECT RAISE(ABORT,'Immutable occurrence');
 END;
 CREATE TRIGGER IF NOT EXISTS assistance_occurrence_journal_no_delete BEFORE DELETE ON assistance_occurrence_journal BEGIN
+ SELECT RAISE(ABORT,'Immutable occurrence');
+END;
+
+-- Business postconditions abort the SAME batch as consumption and effect.
+CREATE TABLE IF NOT EXISTS assistance_occurrence_effect_checks (
+ operation_id TEXT PRIMARY KEY REFERENCES assistance_occurrence_journal(operation_id),
+ occurrence_id TEXT NOT NULL REFERENCES assistance_occurrences(occurrence_id),
+ phase TEXT NOT NULL CHECK(phase IN ('list','claim','finish')),
+ verified INTEGER NOT NULL CHECK(typeof(verified)='integer' AND verified=1)
+);
+CREATE TRIGGER IF NOT EXISTS assistance_occurrence_effect_check_correlation
+ BEFORE INSERT ON assistance_occurrence_effect_checks BEGIN
+ SELECT CASE WHEN NOT EXISTS(SELECT 1 FROM assistance_occurrence_journal j WHERE j.operation_id=NEW.operation_id AND j.occurrence_id=NEW.occurrence_id AND j.phase=NEW.phase AND j.state IN ('consumed','completed')) THEN RAISE(ABORT,'Occurrence denied') END;
+END;
+CREATE TRIGGER IF NOT EXISTS assistance_occurrence_effect_checks_no_update BEFORE UPDATE ON assistance_occurrence_effect_checks BEGIN
+ SELECT RAISE(ABORT,'Immutable occurrence');
+END;
+CREATE TRIGGER IF NOT EXISTS assistance_occurrence_effect_checks_no_delete BEFORE DELETE ON assistance_occurrence_effect_checks BEGIN
+ SELECT RAISE(ABORT,'Immutable occurrence');
+END;
+-- Final clock fence protects generic trusted effects too, after every batch statement.
+CREATE TABLE IF NOT EXISTS assistance_occurrence_clock_checks (
+ operation_id TEXT PRIMARY KEY REFERENCES assistance_occurrence_journal(operation_id),
+ verified INTEGER NOT NULL CHECK(typeof(verified)='integer' AND verified=1)
+);
+CREATE TRIGGER IF NOT EXISTS assistance_occurrence_clock_checks_no_update BEFORE UPDATE ON assistance_occurrence_clock_checks BEGIN
+ SELECT RAISE(ABORT,'Immutable occurrence');
+END;
+CREATE TRIGGER IF NOT EXISTS assistance_occurrence_clock_checks_no_delete BEFORE DELETE ON assistance_occurrence_clock_checks BEGIN
  SELECT RAISE(ABORT,'Immutable occurrence');
 END;
