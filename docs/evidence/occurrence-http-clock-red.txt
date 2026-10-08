@@ -1,0 +1,35 @@
+✔ standalone QA adapter composes six canonical runner calls and one correlated real terminal run (77.510392ms)
+✔ QA OFF preserves legacy dispatch; exclusive vetoes every legacy route before DB/limiter (8.832998ms)
+✖ own admission clock snapshot is sampled after the final awaited policy read (11.712788ms)
+✔ service identity and enrollment cannot be selected by caller; browser and foreign JWT deny (13.804708ms)
+✔ strict HTTP body and path allowlists reject commands, origin/query and sequence overrides (23.152432ms)
+✔ missing schema/provider/limiter or invalid effective config fails closed without legacy fallback (13.761164ms)
+✔ revocation after own provider lookup rolls back HTTP claim and preserves independent stop (24.577986ms)
+✔ HTTP binds owned first-primary and fails when current policy changes after await (9.850143ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 7
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 277.001376
+
+✖ failing tests:
+
+test at test/assistance-occurrence-http.test.mjs:12:1
+✖ own admission clock snapshot is sampled after the final awaited policy read (11.712788ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  503 !== 200
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-http.test.mjs:13:384)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 503,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

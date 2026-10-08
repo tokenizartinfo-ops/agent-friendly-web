@@ -1,0 +1,45 @@
+✔ standalone QA adapter composes six canonical runner calls and one correlated real terminal run (61.01112ms)
+✔ QA OFF preserves legacy dispatch; exclusive vetoes every legacy route before DB/limiter (7.75422ms)
+✔ own admission uses coherent primary SQL time then a synchronous policy postcheck (12.80741ms)
+✔ service identity and enrollment cannot be selected by caller; browser and foreign JWT deny (16.516562ms)
+✔ strict HTTP body and path allowlists reject commands, origin/query and sequence overrides (9.065801ms)
+✔ missing schema/provider/limiter or invalid effective config fails closed without legacy fallback (8.379906ms)
+✔ revocation after own provider lookup rolls back HTTP claim and preserves independent stop (18.731829ms)
+✔ HTTP binds owned first-primary and fails when current policy changes after await (7.270855ms)
+✔ fixed one-second payload timeout cancels stalled body before any occurrence SQL effect (1008.478015ms)
+✔ shared pure digest agrees exactly with historical cloud recipe and stored server digest (10.716691ms)
+✔ effective policy changed during final SQL clock await denies every create effect (6.891935ms)
+✔ async effective policy readers fail closed instead of pretending a synchronous runtime snapshot (6.536608ms)
+✔ server admission uses exact own-state DTO with no cloud assertions and real approvals (13.314145ms)
+✔ revocation after trusted lookup rolls back consumption and all run effects (10.368969ms)
+✔ server mode refuses missing migration, unknown/mixed providers and malformed approval (3.938606ms)
+✔ exact server DTO rejects extras, wrong refs/config/version/revision and stale/future dates (8.344904ms)
+✔ catalog exact read, uniqueness, immutable schema and revocations prohibit resurrection (7.088175ms)
+✔ revocation before create batch leaves no header or journal and before admit preserves consumed (16.525285ms)
+✔ two server clients race same approval once and expired revoked stop preserves history (11.002515ms)
+✔ server catalog requires actual schema and exact signal including observation date bounds (8.378404ms)
+✔ catalog denies approval of a fabricated revision of an existing event (5.337586ms)
+✔ missing approval and approved cloud downgrade fail without header history (7.633441ms)
+✔ lost server responses cannot replay or change admission revision (9.941456ms)
+✔ revocation fences list, finish admission and terminal effect after their lookup (36.067102ms)
+✔ SQL constraints and mapping immutable; direct journal SQL cannot evade revocation (6.974657ms)
+✔ approval cannot convert an existing cloud occurrence or block its independent close (7.64589ms)
+✔ schema2 marker cannot certify incomplete schema1 guards (5.625872ms)
+✔ final server check rejects expiry after business and clock statements with total rollback (1055.404883ms)
+✔ reserved event cannot downgrade to cloud with different occurrence and request UUIDs, revoked or active (11.881246ms)
+✔ unpatched schema2 cannot approve or admit new server work (4.40762ms)
+✔ reserved requestId cannot select a different event even with another occurrence UUID (5.627735ms)
+✔ migrating a historical cloud alias preserves stop only and denies new consumption (6.90827ms)
+✔ signed service lists, reserves, correlates and completes one bounded investigation (6.994597ms)
+✔ human, other service, foreign audience, multiple audiences, expired and forged tokens fail before storage (17.046412ms)
+✔ paused, unknown origin/routes and browser requests cannot use the service (2.247524ms)
+✔ strict bounded payload rejects configuration, commands, oversized and unfinished bodies (19.451554ms)
+✔ limiter and storage errors fail closed without exposing provider details (2.922503ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2642.025006
