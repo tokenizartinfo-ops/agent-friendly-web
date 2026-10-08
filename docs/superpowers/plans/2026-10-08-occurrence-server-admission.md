@@ -16,3 +16,5 @@ TDD: SQLite tests first RED, then validators/catalog/migration/store. New tests 
 Focal+native, full npm test, lint. Supported network command only for loopback, back to use_default; sanitized receipts; commit/push own branch. Transport c8ee03d unnecessary for blocks1–2, defer import. No runtime/public/routes/budget/Access/remote SQL/scheduler changes.
 
 Completed LOCAL blocks1–2: see docs/evidence/occurrence-server-admission-local-receipt.md. Reviewer P2 corrected with RED/GREEN; final SQL clock fence added to server checks. No HTTP adapter or runner imported. Native4/4 and full1165pass/1skip; schema2 is local-only.
+
+P2 follow-up: before headers, reserve approved event/request against cloud aliases using explicit v2-reservation-fence migration (generation1); catalog approve/server admission require actual fence marker. Historical unmatched cloud aliases may stop only, keeping original base CAS/identity/digest. Adapter stopped pending parent integration. Synthetic fixtures use observedAt100ms delivery margin after confirmed Windows JS/SQL drift and explicit setup assertions; production unchanged.

@@ -1,0 +1,3 @@
+Targeted revocation-fences setup classification; LOCAL SQLite only.
+Synthetic observedAt delivery margin100ms; production SQL/JS fences unchanged.
+Runs100; pass100; fail0

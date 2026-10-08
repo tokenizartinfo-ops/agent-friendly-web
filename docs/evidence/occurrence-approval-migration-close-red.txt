@@ -1,0 +1,47 @@
+✔ server admission uses exact own-state DTO with no cloud assertions and real approvals (26.466319ms)
+✔ revocation after trusted lookup rolls back consumption and all run effects (13.190096ms)
+✔ server mode refuses missing migration, unknown/mixed providers and malformed approval (6.499932ms)
+✔ exact server DTO rejects extras, wrong refs/config/version/revision and stale/future dates (7.690834ms)
+✔ catalog exact read, uniqueness, immutable schema and revocations prohibit resurrection (8.274076ms)
+✔ revocation before create batch leaves no header or journal and before admit preserves consumed (14.615293ms)
+✔ two server clients race same approval once and expired revoked stop preserves history (8.933871ms)
+✔ server catalog requires actual schema and exact signal including observation date bounds (7.131166ms)
+✔ catalog denies approval of a fabricated revision of an existing event (4.896891ms)
+✔ missing approval and approved cloud downgrade fail without header history (7.251253ms)
+✔ lost server responses cannot replay or change admission revision (9.104173ms)
+✔ revocation fences list, finish admission and terminal effect after their lookup (29.153332ms)
+✔ SQL constraints and mapping immutable; direct journal SQL cannot evade revocation (6.312875ms)
+✔ approval cannot convert an existing cloud occurrence or block its independent close (7.293596ms)
+✔ schema2 marker cannot certify incomplete schema1 guards (3.986826ms)
+✔ final server check rejects expiry after business and clock statements with total rollback (1055.651474ms)
+✔ reserved event cannot downgrade to cloud with different occurrence and request UUIDs, revoked or active (13.105891ms)
+✔ unpatched schema2 cannot approve or admit new server work (4.212069ms)
+✔ reserved requestId cannot select a different event even with another occurrence UUID (5.912624ms)
+✖ migrating a historical cloud alias preserves stop only and denies new consumption (10.230168ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 19
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1269.009047
+
+✖ failing tests:
+
+test at test/assistance-occurrence-server-admission.test.mjs:82:1
+✖ migrating a historical cloud alias preserves stop only and denies new consumption (10.230168ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  false !== true
+
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-server-admission.test.mjs:83:954)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
