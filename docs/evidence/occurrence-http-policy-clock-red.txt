@@ -1,0 +1,35 @@
+✔ standalone QA adapter composes six canonical runner calls and one correlated real terminal run (78.852354ms)
+✔ QA OFF preserves legacy dispatch; exclusive vetoes every legacy route before DB/limiter (13.390355ms)
+✔ own admission clock snapshot is sampled after the final awaited policy read (12.498646ms)
+✔ service identity and enrollment cannot be selected by caller; browser and foreign JWT deny (15.732018ms)
+✔ strict HTTP body and path allowlists reject commands, origin/query and sequence overrides (13.183549ms)
+✔ missing schema/provider/limiter or invalid effective config fails closed without legacy fallback (10.079487ms)
+✔ revocation after own provider lookup rolls back HTTP claim and preserves independent stop (26.408109ms)
+✔ HTTP binds owned first-primary and fails when current policy changes after await (11.863026ms)
+✔ fixed one-second payload timeout cancels stalled body before any occurrence SQL effect (1010.657954ms)
+✔ shared pure digest agrees exactly with historical cloud recipe and stored server digest (13.583371ms)
+✖ effective policy changed during final SQL clock await denies every create effect (13.12322ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 10
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1348.781956
+
+✖ failing tests:
+
+test at test/assistance-occurrence-http.test.mjs:36:1
+✖ effective policy changed during final SQL clock await denies every create effect (13.12322ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to: 200
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-http.test.mjs:37:502)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 200,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }

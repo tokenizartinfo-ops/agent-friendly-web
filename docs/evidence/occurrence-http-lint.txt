@@ -1,0 +1,2 @@
+Full npm run lint: exit0;0errors;2existingwarnings (comic-home-intro img, operations default export).
+Scoped modified JS eslint: exit0;0errors;0warnings.

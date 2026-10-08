@@ -28,18 +28,18 @@ test('zero-row effect SQL postcondition rolls back admission without a second co
 test('new signal revision inserted during preflight denies stale consume before effects',usingFixture(async f=>{const a=f.make();await a.create();await a.consume({expectedSequence:1,phase:'list'});await a.admit({expectedSequence:2,phase:'claim'});const stale=f.make(f.db,f.m,async()=>{f.b.prepare('INSERT INTO assistance_supervision_events VALUES(?,?,?,?,?,?,?)').run('d'.repeat(64),f.m.signal.projectRef,11,'assistance_requested','orientation',f.m.signal.observedAt,base);return observation(f.m);});assert.equal(await stale.consume({expectedSequence:3,phase:'claim',runId:crypto.randomUUID(),leaseExpiresAt:base+60000},f.effect(f.db)),false);assert.equal(f.a.prepare('SELECT count(*) n FROM qa_effects').get().n,0);assert.equal(await a.close({reason:'operator_closed'}),true);}));
 test('preflight provider failure stops without returning provider details or writing state',usingFixture(async f=>{const stopped=f.make(f.db,f.m,async()=>{throw Error('synthetic-private-provider-detail');});assert.equal(await stopped.create(),false);assert.equal(f.a.prepare('SELECT count(*) n FROM assistance_occurrences').get().n,0);}));
 test('real transaction clock rejects queued batch after timeout margin; no effects commit',usingFixture(async f=>{
- const deadline=Date.now()+11000,m={...f.m,deadline,tokenExpiresAt:deadline,serverDeadline:deadline};
- const make=db=>implementation.createOccurrenceD1Store({db,manifest:m,identityRef:'c'.repeat(64),preflight:async()=>observation(m,Date.now()),now:Date.now});
- const a=make(f.db);await a.create();await a.consume({expectedSequence:1,phase:'list'});await a.admit({expectedSequence:2,phase:'claim'});
+ const deadline=Date.now()+15000,m={...f.m,deadline,tokenExpiresAt:deadline,serverDeadline:deadline};
+ const make=db=>implementation.createOccurrenceD1Store({db,manifest:m,identityRef:'c'.repeat(64),preflight:async()=>observation(m,Date.now()-100),now:Date.now});
+ const a=make(f.db);assert.equal(await a.create(),true,'setup create');assert.ok(await a.consume({expectedSequence:1,phase:'list'}),'setup list');assert.equal(await a.admit({expectedSequence:2,phase:'claim'}),true,'setup admit');
  const delayed={prepare:f.db.prepare,batch:async statements=>{await new Promise(resolve=>setTimeout(resolve,Math.max(0,deadline-10000-Date.now()+50)));return f.db.batch(statements);}};
  const queued=make(delayed);assert.equal(await queued.consume({expectedSequence:3,phase:'claim',runId:crypto.randomUUID(),leaseExpiresAt:deadline},f.effect(f.db)),false);
  assert.equal(f.a.prepare('SELECT count(*) n FROM qa_effects').get().n,0);assert.equal(f.a.prepare('SELECT max(sequence) n FROM assistance_occurrence_journal').get().n,3);
  assert.equal(await queued.close({reason:'window_expired'}),true);
 }));
 test('generic consume rolls back effects if clock crosses margin between batch statements',usingFixture(async f=>{
- const deadline=Date.now()+11000,m={...f.m,deadline,tokenExpiresAt:deadline,serverDeadline:deadline};
- const make=db=>implementation.createOccurrenceD1Store({db,manifest:m,identityRef:'c'.repeat(64),preflight:async()=>observation(m,Date.now()),now:Date.now});
- const a=make(f.db);await a.create();await a.consume({expectedSequence:1,phase:'list'});await a.admit({expectedSequence:2,phase:'claim'});
+ const deadline=Date.now()+15000,m={...f.m,deadline,tokenExpiresAt:deadline,serverDeadline:deadline};
+ const make=db=>implementation.createOccurrenceD1Store({db,manifest:m,identityRef:'c'.repeat(64),preflight:async()=>observation(m,Date.now()-100),now:Date.now});
+ const a=make(f.db);assert.equal(await a.create(),true,'setup create');assert.ok(await a.consume({expectedSequence:1,phase:'list'}),'setup list');assert.equal(await a.admit({expectedSequence:2,phase:'claim'}),true,'setup admit');
  const delayed={prepare:f.db.prepare,async batch(statements){f.a.exec('BEGIN IMMEDIATE');try{const results=[{meta:{changes:statements[0].execute().changes}}];await new Promise(resolve=>setTimeout(resolve,Math.max(0,deadline-10000-Date.now()+50)));for(const s of statements.slice(1))results.push({meta:{changes:s.execute().changes}});f.a.exec('COMMIT');return results;}catch(e){f.a.exec('ROLLBACK');throw e;}}};
  await assert.rejects(make(delayed).consume({expectedSequence:3,phase:'claim',runId:crypto.randomUUID(),leaseExpiresAt:deadline},f.effect(f.db)),/Occurrence storage unavailable/);
  assert.equal(f.a.prepare('SELECT count(*) n FROM qa_effects').get().n,0);assert.equal(f.a.prepare('SELECT max(sequence) n FROM assistance_occurrence_journal').get().n,3);

@@ -1,0 +1,37 @@
+✔ standalone QA adapter composes six canonical runner calls and one correlated real terminal run (77.725538ms)
+✔ QA OFF preserves legacy dispatch; exclusive vetoes every legacy route before DB/limiter (8.402133ms)
+✔ own admission uses coherent primary SQL time then a synchronous policy postcheck (9.376133ms)
+✔ service identity and enrollment cannot be selected by caller; browser and foreign JWT deny (13.837279ms)
+✔ strict HTTP body and path allowlists reject commands, origin/query and sequence overrides (21.334142ms)
+✔ missing schema/provider/limiter or invalid effective config fails closed without legacy fallback (9.450883ms)
+✔ revocation after own provider lookup rolls back HTTP claim and preserves independent stop (22.064433ms)
+✔ HTTP binds owned first-primary and fails when current policy changes after await (7.651452ms)
+✔ fixed one-second payload timeout cancels stalled body before any occurrence SQL effect (1009.311342ms)
+✔ shared pure digest agrees exactly with historical cloud recipe and stored server digest (13.034206ms)
+✔ effective policy changed during final SQL clock await denies every create effect (9.915427ms)
+✔ async effective policy readers fail closed instead of pretending a synchronous runtime snapshot (7.61575ms)
+✖ stop denies policy withdrawn during journal lookup before close batch (13.91228ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 12
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1325.054548
+
+✖ failing tests:
+
+test at test/assistance-occurrence-http.test.mjs:43:1
+✖ stop denies policy withdrawn during journal lookup before close batch (13.91228ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to: 200
+      at TestContext.<anonymous> (file:///workspace/work/afw-occurrence-d1/test/assistance-occurrence-http.test.mjs:44:679)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 200,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
