@@ -5,7 +5,7 @@ export async function fixture(){
  const registration={contract:'afw-qa-closure-approval/v1',plan:{occurrenceId:'11111111-1111-4111-8111-111111111111',baselineRef:'a'.repeat(64),closeAt:1000},planRevision:1,resources:{accountId:'a'.repeat(32),tokenId:'22222222-2222-4222-8222-222222222222',workerName:'afw-own-qa',applicationId:'33333333-3333-4333-8333-333333333333',policyId:'44444444-4444-4444-8444-444444444444'},digests:{token:'b'.repeat(64),settings:'c'.repeat(64),schedules:'d'.repeat(64),policy:'e'.repeat(64)},identity:{name:'owned-qa',metadataDigest:'f'.repeat(64)},provisioning:{creationRef:'1'.repeat(64),custodyRef:'2'.repeat(64),inventoryRef:'3'.repeat(64),createdAt:100,expiresAt:12000}};
  registration.plan.baselineRef=await computeQaClosureBaselineRef(registration);
  const data=new Map();let queue=Promise.resolve(),clock=200,receipt={contract:'afw-qa-provisioning/v1',recordRef:registration.plan.baselineRef,state:'exclusive'},reads=0;
- const storage={transaction(fn){const task=queue.then(()=>fn({get:async k=>structuredClone(data.get(k)),put:async(k,v)=>{data.set(k,structuredClone(v));}}));queue=task.catch(()=>{});return task;}};
+ const storage={transaction(fn){const task=queue.then(async()=>{const draft=new Map(structuredClone([...data]));const result=await fn({get:async k=>structuredClone(draft.get(k)),put:async(k,v)=>{draft.set(k,structuredClone(v));}});data.clear();for(const [k,v] of draft)data.set(k,v);return result;});queue=task.catch(()=>{});return task;}};
  const options={storage,registration,now:()=>clock,readProvisioning:async ref=>{assert.equal(ref,registration.provisioning.creationRef);reads++;return structuredClone(receipt);}};
  return {registration,options,data,reads:()=>reads,setClock(v){clock=v;},setReceipt(v){receipt=v;},make:()=>createQaClosureCatalog(options)};
 }
@@ -46,5 +46,10 @@ test('withdrawal during primary receipt await is observed before returning autho
  const f=await fixture();assert.equal(await f.make().approve(),true);
  const a=createQaClosureCatalog({...f.options,readProvisioning:async()=>{assert.equal(await f.make().revoke(),true);return {contract:'afw-qa-provisioning/v1',recordRef:f.registration.plan.baselineRef,state:'exclusive'};}});
  assert.equal(await a.read(),null);
+});
+test('deadline crossing either awaited put aborts both token fence and registration',async()=>{
+ for(const target of [1,2]){const f=await fixture();let puts=0;const storage={transaction:fn=>f.options.storage.transaction(tx=>fn({get:tx.get,put:async(k,v)=>{await tx.put(k,v);if(++puts===target)f.setClock(1000);}}))};
+  const a=createQaClosureCatalog({...f.options,storage});assert.equal(await a.approve(),false);assert.equal(f.data.size,0);assert.equal(await a.read(),null);
+ }
 });
 
