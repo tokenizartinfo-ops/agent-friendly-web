@@ -23,10 +23,10 @@
 - Mismatched plan/invalid persistent state must fail closed.
 
 ### Task 1: Finite persistent coordinator
-**Files:** Create lib/assistance-independent-closure.mjs and test/assistance-independent-closure.test.mjs.
+**Files:** Create lib/assistance-independent-closure.mjs, test/assistance-independent-closure.test.mjs and test/assistance-independent-closure-workerd.test.mjs (test-only native DO/alarm fixture).
 **Interface:** createIndependentClosureCoordinator({storage,plan,now,revokePlan,closeLedger,restoreAdministration}).tick() -> {state,step}.
-- [ ] Write failing tests for expiry, ordered receipts, concurrency, missing callback result, restart, changed plan, and malformed storage.
-- [ ] Run node --test test/assistance-independent-closure.test.mjs; establish missing module failure.
-- [ ] Implement transaction/get/put write-ahead reservation and strict receipt/state validation.
-- [ ] Run focal tests and scoped lint; review exact source; record remote gates.
+- [x] Write failing tests for expiry, ordered receipts, concurrency, missing callback result, restart, changed plan, and malformed storage.
+- [x] Run node --test test/assistance-independent-closure.test.mjs; establish missing module failure.
+- [x] Implement transaction/get/put write-ahead reservation and strict receipt/state validation.
+- [ ] Run focal tests and scoped lint; review exact source; record remote gates. Eight tests passed including two native alarms with invocation counts; final review pending after identifier fix.
 - [ ] Commit verified preparation, without remote activation.

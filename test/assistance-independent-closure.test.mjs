@@ -38,3 +38,8 @@ test('plan is copied and callbacks cannot modify it or receive unapproved fields
  assert.throws(()=>f.make({plan:{...plan,url:'https://private.invalid'}}),/Invalid closure configuration/);
  assert.throws(()=>f.make({now:null}),/Invalid closure configuration/);
 });
+test('rejects non-string identifiers before creating any persisted plan',()=>{
+ const f=fixture();
+ for(const field of ['occurrenceId','baselineRef'])for(const value of [[plan[field]],{toString:()=>plan[field]}])assert.throws(()=>f.make({plan:{...plan,[field]:value}}),/Invalid closure configuration/);
+ assert.equal(f.data.size,0);
+});
