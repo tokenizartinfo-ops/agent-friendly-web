@@ -1,0 +1,32 @@
+{
+  "sourceRevision": "2041095b4c62d7841052b51e37f37cdda14d7c38",
+  "frame": {
+    "version": "afw-host-observe-v1",
+    "type": "observe",
+    "id": 1,
+    "nonce": "e485f628-d136-465e-9c28-09213dfe7425",
+    "startedAt": 1791472988586
+  },
+  "cloud": {
+    "configId": "cecfg_6abe6b6814a481a3aa2299efe46e2fe6",
+    "publicationId": "cecfgver_6ac78bc1412481a3bec9eee966a96544",
+    "configurationRevision": 22,
+    "observationRevision": 22,
+    "observationsCurrent": true,
+    "networkMode": "restricted",
+    "networkEnforced": true,
+    "operationsBindingsReady": true
+  },
+  "toolInvocations": 1,
+  "transport": "supported exec_command(tty)/write_stdin",
+  "mode": "metadata-only, no HTTP",
+  "timestampSemantics": "retrievalIntervalStart; no platform observed_at",
+  "preparedBranchReadinessClaim": false,
+  "ordinaryAdoptionClaim": false,
+  "processExit": 0,
+  "probeResult": {
+    "version": "afw-host-observe-v1",
+    "type": "probeResult",
+    "accepted": true
+  }
+}

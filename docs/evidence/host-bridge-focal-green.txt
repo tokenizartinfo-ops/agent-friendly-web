@@ -1,0 +1,41 @@
+✔ six correlated phases complete with exactly six host observations and no extra stop (36.447321ms)
+✔ malformed or lost reply at every phase consumes its attempt and stops once without recovery (17.919871ms)
+✔ stale or mismatched preflight makes no normal send and cannot fabricate readiness (0.819712ms)
+✔ a stuck first or second host observer is bounded and cancelled without more work (4.802024ms)
+✔ expiry or stale observation after HTTP reply fails inside callback before the next phase (0.949195ms)
+✔ manifest mutation during host observation cannot extend authorization (0.695839ms)
+✔ stop loss never retries and finish with claimed resolution cannot complete (1.93306ms)
+✔ HOSTBRIDGE has an internal API wrapping the existing runner (1.70366ms)
+✔ EOF and stream error terminate pending observation without private error details (58.818438ms)
+✔ bounded timeout aborts a pending read, with no retry or second frame (46.290875ms)
+✔ cancellation is sticky and ignores late metadata (26.871295ms)
+✔ unsolicited frames, correlation mismatch, extras, oversized and invalid UTF8 fail closed (238.126823ms)
+✔ a second simultaneous preflight invalidates the first (33.358752ms)
+✔ pure cloud projection requires exact targets, current revisions and actual network policy (1.014611ms)
+✔ real Git reads the loaded module repo, exact source/origin, tracked and untracked dirt (105.369517ms)
+✔ fragmented correlation succeeds with retrieval-start time, not a host timestamp (47.173951ms)
+✔ replay of an earlier response invalidates the next observation (64.622441ms)
+✔ duplicate response in one chunk rejects the pending observation (27.221203ms)
+✔ six successful observations exhaust the bridge without a seventh request (105.518609ms)
+✔ time reversal, wrong pins, and over-limit configuration cannot authorize (54.670111ms)
+✔ unterminated oversize input rejects immediately instead of waiting for timeout (28.933246ms)
+✔ the trusted wrapper runs the canonical six-phase runner, without a seventh send (137.546713ms)
+✔ metadata-only process CLI completes one framed stdin response, without HTTP credentials (91.545987ms)
+✔ synchronous stdout failure has no orphan promise or uncaught process error (76.303276ms)
+✔ output error and output close reject pending observation with a fixed error (60.194744ms)
+✔ concurrent clean commit between Git reads cannot return the old pinned HEAD (359.8494ms)
+✔ successful occurrence counts all six requests and rejects any extra effect (0.488512ms)
+✔ lost finish reply consumes its attempt; only one stop remains and total cannot exceed seven (0.440672ms)
+✔ failure before reply never allows recovery queries or new phases (0.810429ms)
+✔ concurrent or reordered sends do not reach the transport and snapshot cannot alter budget (0.345231ms)
+✔ transport pins destination and rejects unknown routes, methods and oversized bodies before sending (1.489703ms)
+✔ lost responses and hostile content never retry or leak credentials into diagnostics (0.95304ms)
+✔ timeout bounds body consumption and cancels its stream (16.411119ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1673.873257
