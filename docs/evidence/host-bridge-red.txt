@@ -1,0 +1,154 @@
+✖ HOSTBRIDGE has an internal API wrapping the existing runner (1.401214ms)
+✖ EOF and stream error terminate pending observation without private error details (0.435535ms)
+✖ bounded timeout aborts a pending read, with no retry or second frame (0.393442ms)
+✖ cancellation is sticky and ignores late metadata (0.325732ms)
+✖ unsolicited frames, correlation mismatch, extras, oversized and invalid UTF8 fail closed (0.403828ms)
+✖ a second simultaneous preflight invalidates the first (0.334164ms)
+✖ pure cloud projection requires exact targets, current revisions and actual network policy (0.541521ms)
+✖ real Git reads the loaded module repo, exact source/origin, tracked and untracked dirt (0.767747ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 0
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19.079874
+
+✖ failing tests:
+
+test at test/assistance-occurrence-host-bridge.test.mjs:23:1
+✖ HOSTBRIDGE has an internal API wrapping the existing runner (1.401214ms)
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs' imported from /workspace/work/afw-occurrence-d1/test/assistance-occurrence-host-bridge.test.mjs
+      at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+      at moduleResolve (node:internal/modules/esm/resolve:865:10)
+      at defaultResolve (node:internal/modules/esm/resolve:992:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+      at #resolve (node:internal/modules/esm/loader:683:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+      at node:internal/modules/esm/loader:632:32
+      at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs'
+  }
+
+test at test/assistance-occurrence-host-bridge.test.mjs:26:1
+✖ EOF and stream error terminate pending observation without private error details (0.435535ms)
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs' imported from /workspace/work/afw-occurrence-d1/test/assistance-occurrence-host-bridge.test.mjs
+      at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+      at moduleResolve (node:internal/modules/esm/resolve:865:10)
+      at defaultResolve (node:internal/modules/esm/resolve:992:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+      at #resolve (node:internal/modules/esm/loader:683:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+      at node:internal/modules/esm/loader:632:32
+      at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs'
+  }
+
+test at test/assistance-occurrence-host-bridge.test.mjs:33:1
+✖ bounded timeout aborts a pending read, with no retry or second frame (0.393442ms)
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs' imported from /workspace/work/afw-occurrence-d1/test/assistance-occurrence-host-bridge.test.mjs
+      at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+      at moduleResolve (node:internal/modules/esm/resolve:865:10)
+      at defaultResolve (node:internal/modules/esm/resolve:992:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+      at #resolve (node:internal/modules/esm/loader:683:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+      at node:internal/modules/esm/loader:632:32
+      at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs'
+  }
+
+test at test/assistance-occurrence-host-bridge.test.mjs:37:1
+✖ cancellation is sticky and ignores late metadata (0.325732ms)
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs' imported from /workspace/work/afw-occurrence-d1/test/assistance-occurrence-host-bridge.test.mjs
+      at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+      at moduleResolve (node:internal/modules/esm/resolve:865:10)
+      at defaultResolve (node:internal/modules/esm/resolve:992:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+      at #resolve (node:internal/modules/esm/loader:683:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+      at node:internal/modules/esm/loader:632:32
+      at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs'
+  }
+
+test at test/assistance-occurrence-host-bridge.test.mjs:42:1
+✖ unsolicited frames, correlation mismatch, extras, oversized and invalid UTF8 fail closed (0.403828ms)
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs' imported from /workspace/work/afw-occurrence-d1/test/assistance-occurrence-host-bridge.test.mjs
+      at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+      at moduleResolve (node:internal/modules/esm/resolve:865:10)
+      at defaultResolve (node:internal/modules/esm/resolve:992:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+      at #resolve (node:internal/modules/esm/loader:683:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+      at node:internal/modules/esm/loader:632:32
+      at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs'
+  }
+
+test at test/assistance-occurrence-host-bridge.test.mjs:53:1
+✖ a second simultaneous preflight invalidates the first (0.334164ms)
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs' imported from /workspace/work/afw-occurrence-d1/test/assistance-occurrence-host-bridge.test.mjs
+      at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+      at moduleResolve (node:internal/modules/esm/resolve:865:10)
+      at defaultResolve (node:internal/modules/esm/resolve:992:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+      at #resolve (node:internal/modules/esm/loader:683:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+      at node:internal/modules/esm/loader:632:32
+      at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs'
+  }
+
+test at test/assistance-occurrence-host-bridge.test.mjs:56:1
+✖ pure cloud projection requires exact targets, current revisions and actual network policy (0.541521ms)
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs' imported from /workspace/work/afw-occurrence-d1/test/assistance-occurrence-host-bridge.test.mjs
+      at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+      at moduleResolve (node:internal/modules/esm/resolve:865:10)
+      at defaultResolve (node:internal/modules/esm/resolve:992:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+      at #resolve (node:internal/modules/esm/loader:683:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+      at node:internal/modules/esm/loader:632:32
+      at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs'
+  }
+
+test at test/assistance-occurrence-host-bridge.test.mjs:63:1
+✖ real Git reads the loaded module repo, exact source/origin, tracked and untracked dirt (0.767747ms)
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs' imported from /workspace/work/afw-occurrence-d1/test/assistance-occurrence-host-bridge.test.mjs
+      at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+      at moduleResolve (node:internal/modules/esm/resolve:865:10)
+      at defaultResolve (node:internal/modules/esm/resolve:992:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+      at #resolve (node:internal/modules/esm/loader:683:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+      at node:internal/modules/esm/loader:632:32
+      at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///workspace/work/afw-occurrence-d1/lib/assistance-occurrence-host-bridge.mjs'
+  }
