@@ -132,6 +132,14 @@ test('metadata-only process CLI completes one framed stdin response, without HTT
  const code=await new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',resolve);});
  assert.equal(code,0);assert.equal(stderr,'');assert.equal(frames.length,2);assert.deepEqual(frames[1],{version:'afw-host-observe-v1',type:'probeResult',accepted:true});
 });
+test('CLI broken stdout during final probe result exits denied with empty stderr',async()=>{
+ const f=await fixture();f.bridge.close();
+ const child=spawn(process.execPath,[join(f.dir,'scripts/afw-occurrence-host-bridge.mjs'),...Object.values(f.pins)],{stdio:['pipe','pipe','pipe']});
+ let stderr='';child.stderr.on('data',c=>{stderr+=c;});
+ child.stdout.once('data',()=>{child.stdout.destroy();child.stdin.end();});
+ const code=await new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',resolve);});
+ assert.equal(code,1);assert.equal(stderr,'');
+});
 test('synchronous stdout failure has no orphan promise or uncaught process error',async()=>{
  const f=await fixture();f.bridge.close();
  const script=`import {PassThrough} from 'node:stream';import {createOccurrenceHostBridge} from ${JSON.stringify(pathToFileURL(join(f.dir,'lib/assistance-occurrence-host-bridge.mjs')).href)};
