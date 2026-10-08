@@ -1,0 +1,9 @@
+npm test — final LOCAL reservation fence fix
+ℹ tests 1171
+ℹ suites 0
+ℹ pass 1170
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 53943.306839
