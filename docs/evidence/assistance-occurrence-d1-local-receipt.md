@@ -27,3 +27,11 @@ Reviewer revisó CAS/batch/close y no encontró defecto crítico. Hallazgo const
 - Controles SQL confirmados <=4 y fases operacionales admitidas <=3. Capa de transporte futura debe contabilizar TODAS las solicitudes enviadas/incluidas las perdidas/rechazadas, máximo4control/3operacionales/7total sin retries. Este módulo sin HTTP no observa solicitudes que nunca llegan ni promete presupuesto de red implementado.
 - D1 QA citada por recibo histórico únicamente; ningún binding vivo verificado/cambiado. Sin prueba cross-instance remota o PC-off; /workspace/work no acredita persistencia entre instancias.
 - Antes de piloto: workerd green bajo ejecución ya permitida, integración transaccional con helpers y sus postcondiciones, contador de transporte, rutas QA cerradas y fences legacy, verificación independiente de binding/owner/preflight/cierre, señal propia nueva y consentimiento/contexto privado separados.
+
+## Cierre posterior autorizado: Miniflare green y push de rama
+
+El owner autorizó network.enabled=true por comando, sin alterar política ni credenciales. Native D1 se ejecutó con proxy/CA/TLS heredados y restricted/enforced conservado. Primera ejecución soportada expuso defecto en cargador de test: regex terminaba trigger en END de CASE; causó D1_ERROR transacción no permitida. Se corrigió terminación anclada a END de trigger y formato multilínea de triggers de inmutabilidad, sin cambiar lógica del esquema. Segunda ejecución native1/1pass,0fail. Log workerd-green versionado; EPERM anterior permanece evidencia histórica, ya superado por permiso por comando.
+
+Retorno explícito use_default: SQLite16/16; lint0; diff-check0. environment_status posterior: currenttrue, spec/observed7/7, restricted/enforced, diez custodiasready; source publication original sin cambio. No se modificó proxy/TLS/policy/config. Origin verificado https://github.com/tokenizartinfo-ops/agent-friendly-web.git.
+
+Push autorizado exclusivamente HEAD:refs/heads/afw/local-occurrence-d1, sin force/main; verificación remota por ls-remote. Resultado del push se registra en continuidad fuera del commit para no crear otro commit circular. Continúan pendientes integración helpers/rutas/contador y aceptación QA propia; no listo para piloto. Sin Cloudflare/SQL remoto/gates/cliente.

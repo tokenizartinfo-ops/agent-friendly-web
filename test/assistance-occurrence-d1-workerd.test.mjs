@@ -10,7 +10,7 @@ test('native D1 two bindings enforce create/CAS/one-use effects, rollback and in
   const db=await runtime.getD1Database('DB'),other=await runtime.getD1Database('OTHER'),time=1791450000000;
   for(const name of ['assistance-supervision','assistance-occurrences']){
    const source=readFileSync('worker/operations/'+name+'.sql','utf8').replace(/--[^\n]*/g,'');
-   const pattern=/CREATE TRIGGER\b[\s\S]*?END;/g, triggers=source.match(pattern)??[];
+   const pattern=/^CREATE TRIGGER\b[\s\S]*?^END;/gm, triggers=source.match(pattern)??[];
    for(const sql of [...source.replace(pattern,'').split(';').map(x=>x.trim()).filter(Boolean),...triggers])await db.prepare(sql).run();
   }
   await db.exec('CREATE TABLE qa_effects(id TEXT PRIMARY KEY,value INTEGER NOT NULL CHECK(value>0))');

@@ -83,7 +83,15 @@ CREATE TRIGGER IF NOT EXISTS assistance_occurrence_transition
  OR (NEW.state='completed' AND NEW.phase='finish' AND NEW.run_id=p.run_id AND NEW.lease_expires_at=p.lease_expires_at)))
  ))) THEN RAISE(ABORT,'Occurrence denied') END;
 END;
-CREATE TRIGGER IF NOT EXISTS assistance_occurrences_no_update BEFORE UPDATE ON assistance_occurrences BEGIN SELECT RAISE(ABORT,'Immutable occurrence'); END;
-CREATE TRIGGER IF NOT EXISTS assistance_occurrences_no_delete BEFORE DELETE ON assistance_occurrences BEGIN SELECT RAISE(ABORT,'Immutable occurrence'); END;
-CREATE TRIGGER IF NOT EXISTS assistance_occurrence_journal_no_update BEFORE UPDATE ON assistance_occurrence_journal BEGIN SELECT RAISE(ABORT,'Immutable occurrence'); END;
-CREATE TRIGGER IF NOT EXISTS assistance_occurrence_journal_no_delete BEFORE DELETE ON assistance_occurrence_journal BEGIN SELECT RAISE(ABORT,'Immutable occurrence'); END;
+CREATE TRIGGER IF NOT EXISTS assistance_occurrences_no_update BEFORE UPDATE ON assistance_occurrences BEGIN
+ SELECT RAISE(ABORT,'Immutable occurrence');
+END;
+CREATE TRIGGER IF NOT EXISTS assistance_occurrences_no_delete BEFORE DELETE ON assistance_occurrences BEGIN
+ SELECT RAISE(ABORT,'Immutable occurrence');
+END;
+CREATE TRIGGER IF NOT EXISTS assistance_occurrence_journal_no_update BEFORE UPDATE ON assistance_occurrence_journal BEGIN
+ SELECT RAISE(ABORT,'Immutable occurrence');
+END;
+CREATE TRIGGER IF NOT EXISTS assistance_occurrence_journal_no_delete BEFORE DELETE ON assistance_occurrence_journal BEGIN
+ SELECT RAISE(ABORT,'Immutable occurrence');
+END;

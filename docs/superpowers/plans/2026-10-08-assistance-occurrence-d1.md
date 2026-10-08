@@ -36,3 +36,7 @@
 ## Estado de ejecución
 
 SQLite16/16 y focalización43pass/1skip; lint0. Miniflare real bloqueado por EPERM sin permisos adicionales, no green acreditado. Hallazgo de revisión constraints SQL corregido con RED→GREEN. Integración/contador HTTP/rutas y aceptación native pendientes. Ver docs/evidence/assistance-occurrence-d1-local-receipt.md.
+
+## Cierre posterior
+
+Miniflare native1/1 green con network.enabled=true por comando autorizado; retorno use_default y SQLite16/16/lint0. Parser de triggers de test corregido tras error native observado. Los límites EPERM previos son históricos. Integración y contador/rutas/QA remota continúan pendientes.
