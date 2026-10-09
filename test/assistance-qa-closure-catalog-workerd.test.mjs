@@ -16,7 +16,7 @@ test('native SQLite DO catalog preserves immutable registration and withdrawal a
    registration.plan.baselineRef=await computeQaClosureBaselineRef(registration);
    let clock=200,puts=0;
    const storage=path.startsWith('/late')?{transaction:fn=>this.storage.transaction(tx=>fn({get:k=>tx.get(k),put:async(k,v)=>{await tx.put(k,v);if(++puts===(path==='/late1'?1:2))clock=1000;}}))}:this.storage;
-   const catalog=createQaClosureCatalog({storage,registration,now:()=>clock,readProvisioning:async()=>({contract:'afw-qa-provisioning/v1',recordRef:registration.plan.baselineRef,state:'exclusive'})});
+   const catalog=createQaClosureCatalog({storage,registration,now:()=>clock,readProvisioning:async()=>({contract:'afw-qa-provisioning/v2',scope:'own-resource-reservation',recordRef:registration.plan.baselineRef,state:'reserved'})});
    let result;if(path==='/approve'||path==='/collision'||path==='/other'||path.startsWith('/late'))result=await catalog.approve();else if(path==='/revoke')result=await catalog.revoke();else {const r=await catalog.read();result=r?{revision:r.planRevision,baselineRef:r.plan.baselineRef}:null;}
    return Response.json({result,rows:(await this.storage.list()).size});
   }

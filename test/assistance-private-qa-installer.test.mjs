@@ -16,7 +16,7 @@ async function setup(){
  r.contract='afw-qa-closure-approval/v2';r.plan.occurrenceId=f.m.occurrenceId;r.approvalDigest=await computeOccurrencePlanDigest({manifest:f.m,identityRef:approval.identityRef,admissionContract:'server-v1',approval});r.plan.baselineRef=await computeQaClosureBaselineRef(r);
  let values=new Map(),clock=f.m.startAt,proof=true,reads=0,hook,putHook,source={registration:r,approval};
  const storage={get:async k=>structuredClone(values.get(k)),transaction:async fn=>{const pending=new Map(values);const result=await fn({get:async k=>structuredClone(pending.get(k)),put:async(k,v)=>{pending.set(k,structuredClone(v));if(putHook)await putHook(k);}});values=pending;return result;}};
- const options={storage,db:f.db,now:()=>clock,readInstallation:async()=>structuredClone(source),readProvisioning:async()=>{if(hook)await hook(++reads);return proof?{contract:'afw-qa-provisioning/v1',recordRef:r.plan.baselineRef,state:'exclusive'}:null;}};
+ const options={storage,db:f.db,now:()=>clock,readInstallation:async()=>structuredClone(source),readProvisioning:async()=>{if(hook)await hook(++reads);return proof?{contract:'afw-qa-provisioning/v2',scope:'own-resource-reservation',recordRef:r.plan.baselineRef,state:'reserved'}:null;}};
  return {...f,r,approval,options,get values(){return values;},setProof:v=>{proof=v;},setClock:v=>{clock=v;},setSource:v=>{source=v;},setHook:v=>{hook=v;},setPutHook:v=>{putHook=v;}};
 }
 test('private installation ignores caller authority and makes current reader reconstructible',async()=>{
@@ -61,14 +61,16 @@ test('unknown primary cleanup keeps a pending operator recovery gate',async()=>{
 test('completed replay rejects another valid registration sharing the same primary approval',async()=>{
  const f=await setup();try{const {createPrivateQaInstaller}=await load(),h=createPrivateQaInstaller(f.options);assert.equal(await h.install(),'installed');const b=structuredClone(f.r);b.provisioning.creationRef='4'.repeat(64);b.plan.baselineRef=await computeQaClosureBaselineRef(b);
  f.values.set(pointer,{contract:'afw-private-qa-catalog/v1',registration:b});f.values.set('afw-qa-closure-approval/v1:'+b.plan.occurrenceId,b);f.values.set('afw-qa-closure-token/v1:'+b.resources.accountId+':'+b.resources.tokenId,b.plan.baselineRef);
- f.options.readProvisioning=async ref=>({contract:'afw-qa-provisioning/v1',recordRef:ref===b.provisioning.creationRef?b.plan.baselineRef:f.r.plan.baselineRef,state:'exclusive'});
+ f.options.readProvisioning=async ref=>({contract:'afw-qa-provisioning/v2',scope:'own-resource-reservation',recordRef:ref===b.provisioning.creationRef?b.plan.baselineRef:f.r.plan.baselineRef,state:'reserved'});
  assert.equal(await createPrivateQaInstaller(f.options).install(),'unavailable');
  }finally{f.cleanup();}
 });
 test('replay rejects pointer drift during its last primary await',async()=>{
  const f=await setup();try{const {createPrivateQaInstaller}=await load();assert.equal(await createPrivateQaInstaller(f.options).install(),'installed');const b=structuredClone(f.r);b.provisioning.creationRef='4'.repeat(64);b.plan.baselineRef=await computeQaClosureBaselineRef(b);let reads=0;const db=f.db;
- f.options.readProvisioning=async ref=>({contract:'afw-qa-provisioning/v1',recordRef:ref===b.provisioning.creationRef?b.plan.baselineRef:f.r.plan.baselineRef,state:'exclusive'});
+ f.options.readProvisioning=async ref=>({contract:'afw-qa-provisioning/v2',scope:'own-resource-reservation',recordRef:ref===b.provisioning.creationRef?b.plan.baselineRef:f.r.plan.baselineRef,state:'reserved'});
  f.options.db={...db,prepare:sql=>{const s=db.prepare(sql);if(sql!=='SELECT * FROM assistance_occurrence_approved_plans WHERE occurrence_id=?')return s;return {...s,bind:(...args)=>{const bound=s.bind(...args);return {...bound,first:async()=>{const result=await bound.first();if(++reads===5){f.values.set(pointer,{contract:'afw-private-qa-catalog/v1',registration:b});f.values.set('afw-qa-closure-approval/v1:'+b.plan.occurrenceId,b);f.values.set('afw-qa-closure-token/v1:'+b.resources.accountId+':'+b.resources.tokenId,b.plan.baselineRef);}return result;}};}};}};
  assert.equal(await createPrivateQaInstaller(f.options).install(),'unavailable');assert.ok(reads>=5);
  }finally{f.cleanup();}
 });
+
+test('installer rejects legacy exclusive authority before reserving or writing',async()=>{const f=await setup();try{const {createPrivateQaInstaller}=await load();f.options.readProvisioning=async()=>({contract:'afw-qa-provisioning/v1',recordRef:f.r.plan.baselineRef,state:'exclusive'});assert.equal(await createPrivateQaInstaller(f.options).install(),'unavailable');assert.equal(f.values.size,0);assert.equal(await createOccurrenceApprovalCatalog({db:f.db}).read(f.approval.manifest.occurrenceId),null);}finally{f.cleanup();}});

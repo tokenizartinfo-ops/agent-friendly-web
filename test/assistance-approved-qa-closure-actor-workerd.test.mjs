@@ -23,7 +23,7 @@ test('native primary D1 and SQLite DO actor recover lost administrative PUT acro
  export class CatalogFixture{
   constructor(ctx){this.ctx=ctx;}
   async fetch(request){const f=await ownFixture(),r=f.registration;
-   const catalog=createQaClosureCatalog({storage:this.ctx.storage,registration:r,now:()=>m.startAt,readProvisioning:async()=>({contract:'afw-qa-provisioning/v1',recordRef:r.plan.baselineRef,state:'exclusive'})});
+   const catalog=createQaClosureCatalog({storage:this.ctx.storage,registration:r,now:()=>m.startAt,readProvisioning:async()=>({contract:'afw-qa-provisioning/v2',scope:'own-resource-reservation',recordRef:r.plan.baselineRef,state:'reserved'})});
    const path=new URL(request.url).pathname;
    return Response.json(path.endsWith('/approve')?await catalog.approve():path.endsWith('/revoke')?await catalog.revoke():await catalog.read());
   }
