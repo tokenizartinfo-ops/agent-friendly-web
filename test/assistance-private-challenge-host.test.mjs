@@ -5,6 +5,7 @@ import {manifest} from './fixtures/occurrence-operations.mjs';
 import {qaAdministrationFixture} from './fixtures/qa-administrative-composition.mjs';
 import {computeOccurrencePlanDigest} from '../lib/assistance-occurrence-digest.mjs';
 import {computeQaClosureBaselineRef} from '../lib/assistance-qa-closure-catalog.mjs';
+import {createPrivateQaPreregistration} from '../lib/assistance-private-qa-preregistration.mjs';
 const load=()=>import('../lib/assistance-private-challenge-host.mjs');
 const {privateKey,publicKey}=await generateKeyPair('RS256');
 async function fixture(){
@@ -42,4 +43,33 @@ test('clock reversal between signed verification and confirmation never consumes
  const f=await fixture(),{createPrivateChallengeHost}=await load(),h=createPrivateChallengeHost(f.options),issued=await h.issue();let calls=0;
  const backwards=createPrivateChallengeHost({...f.options,now:()=>f.r.provisioning.createdAt+(++calls<=2?1000:500)});
  assert.equal((await backwards.fetch(f.req({nonce:issued.nonce}))).status,409);assert.equal((await h.status()).state,'issued');
+});
+
+test('authenticated challenge request is default-denied and explicit bootstrap remains one-shot',async()=>{const f=await fixture(),{createPrivateChallengeHost}=await load();assert.equal((await createPrivateChallengeHost(f.options).fetch(f.req({challenge:'request'}))).status,409);let prepared=0;const h=createPrivateChallengeHost({...f.options,allowChallengeRequest:true,prepareExchange:async()=>{prepared++;return true;}});const response=await h.fetch(f.req({challenge:'request'}));assert.equal(response.status,200);const issued=await response.json();assert.match(issued.nonce,/^[0-9a-f]{64}$/);assert.equal((await h.fetch(f.req({nonce:issued.nonce}))).status,200);assert.equal((await h.fetch(f.req({challenge:'request'}))).status,409);assert.ok(prepared>=4);});
+test('bootstrap never prepares for foreign JWT and denies missing authority or principal mismatch',async()=>{const f=await fixture(),{createPrivateChallengeHost}=await load();let calls=0;const opts={...f.options,allowChallengeRequest:true,prepareExchange:async()=>{calls++;return true;}};assert.equal((await createPrivateChallengeHost(opts).fetch(f.req({challenge:'request'},'invalid'))).status,401);assert.equal(calls,0);assert.equal((await createPrivateChallengeHost({...opts,prepareExchange:undefined}).fetch(f.req({challenge:'request'}))).status,503);f.config.principalRef='f'.repeat(64);assert.equal((await createPrivateChallengeHost(opts).fetch(f.req({challenge:'request'}))).status,409);assert.equal(calls,0);});
+test('withdrawn preregistration after issuance suppresses nonce and cannot reissue',async()=>{const f=await fixture(),{createPrivateChallengeHost}=await load();let active=true;const h=createPrivateChallengeHost({...f.options,allowChallengeRequest:true,prepareExchange:async()=>active});f.hook(()=>{active=false;});assert.equal((await h.fetch(f.req({challenge:'request'}))).status,409);assert.equal((await h.status()).state,'issued');f.hook(undefined);active=true;assert.equal((await h.fetch(f.req({challenge:'request'}))).status,409);});
+
+test('real preregistration preparation requires prior operator registration and respects permanent withdrawal',async()=>{
+ const f=await fixture(),{createPrivateChallengeHost,createPreregisteredExchangePreparation}=await load();
+ const preregistration=createPrivateQaPreregistration({storage:f.options.storage,readPreregistration:f.options.readInstallation,now:f.options.now});
+ const prepareExchange=createPreregisteredExchangePreparation({preregistration,readInstallation:f.options.readInstallation});
+ const h=createPrivateChallengeHost({...f.options,allowChallengeRequest:true,prepareExchange});
+ assert.equal((await h.fetch(f.req({challenge:'request'}))).status,409);
+ assert.equal(await preregistration.readForClosure(),null);
+ assert.equal(await preregistration.register(),true);
+ const response=await h.fetch(f.req({challenge:'request'}));assert.equal(response.status,200);
+ const issued=await response.json();assert.equal(await preregistration.withdraw(),true);
+ assert.equal((await h.fetch(f.req({nonce:issued.nonce}))).status,409);
+ assert.equal((await h.fetch(f.req({challenge:'request'}))).status,409);
+ assert.ok(await preregistration.readForClosure());assert.equal((await h.status()).state,'issued');
+});
+
+test('preregistered preparation rejects mismatching current pins and missing current read',async()=>{
+ const f=await fixture(),{createPreregisteredExchangePreparation}=await load();
+ const preregistration=createPrivateQaPreregistration({storage:f.options.storage,readPreregistration:f.options.readInstallation,now:f.options.now});assert.equal(await preregistration.register(),true);
+ const identity={principalRef:f.config.principalRef};
+ const prepare=createPreregisteredExchangePreparation({preregistration,readInstallation:f.options.readInstallation});assert.equal(await prepare(identity),true);assert.equal(await prepare({principalRef:'f'.repeat(64)}),false);
+ const other=structuredClone(f.options.readInstallation());other.approval.planRevision++;
+ assert.equal(await createPreregisteredExchangePreparation({preregistration,readInstallation:()=>other})(identity),false);
+ assert.equal(await createPreregisteredExchangePreparation({preregistration:{readForClosure:preregistration.readForClosure},readInstallation:f.options.readInstallation})(identity),false);
 });
