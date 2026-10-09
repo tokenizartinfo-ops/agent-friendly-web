@@ -7,6 +7,7 @@ import {manifest} from './fixtures/occurrence-operations.mjs';
 import {qaAdministrationFixture} from './fixtures/qa-administrative-composition.mjs';
 import {computeOccurrencePlanDigest} from '../lib/assistance-occurrence-digest.mjs';
 import {computeQaClosureBaselineRef} from '../lib/assistance-qa-closure-catalog.mjs';
+import {runPrivateChallengeClient} from '../scripts/afw-private-challenge-client.mjs';
 
 test('actual Worker and preregistry DO require signed identity and prior registration, with finite persistent budget',async()=>{
  const start=Date.now()-1000,m={...manifest(),startAt:start,deadline:start+90000};
@@ -23,7 +24,7 @@ test('actual Worker and preregistry DO require signed identity and prior registr
  export default{fetch(request,env){if(new URL(request.url).pathname.startsWith('/fixture/'))return env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa')).fetch(request);return original.fetch(request,env);}};
  `},bundle:true,write:false,format:'esm',platform:'browser',external:['cloudflare:workers']});
  const bundle=await bundleFor('index'),rollback=await bundleFor('closed-rollback');
- for(const scenario of ['confirmed','withdrawn','unregistered','closed']){
+ for(const scenario of ['confirmed','withdrawn','unregistered','closed','client']){
   let keyRequests=0;
   const options={modules:true,compatibilityDate:'2026-09-07',script:bundle.outputFiles[0].text,bindings:{AFW_QA_BOOTSTRAP_ENABLED:'true',AFW_QA_CHALLENGE_ENABLED:scenario==='closed'?'false':'true',AFW_QA_PREREGISTRATION:JSON.stringify({registration,approval}),AFW_QA_CHALLENGE_IDENTITY:JSON.stringify(config)},durableObjects:{AFW_QA_PREREGISTRY:{className:'Fixture',useSQLite:true}},outboundService:async request=>{assert.equal(request.url,'https://test.cloudflareaccess.com/cdn-cgi/access/certs');keyRequests++;return Response.json({keys:[jwk]});}};
   const runtime=new Miniflare(convertV4MiniflareOptions(options));
@@ -37,6 +38,11 @@ test('actual Worker and preregistry DO require signed identity and prior registr
    assert.equal((await call(undefined,'',{'Cf-Access-Jwt-Assertion':'invalid'})).status,401);
    if(scenario==='unregistered'){assert.equal((await call()).status,409);assert.equal(await fixture('history'),null);continue;}
    assert.equal(await fixture('register'),true);
+   if(scenario==='client'){
+    let calls=0;
+    const result=await runPrivateChallengeClient(['confirm',registration.plan.baselineRef,String(start),String(m.deadline)],{AFW_OPERATIONS_ACCESS_CLIENT_ID:config.clientId,AFW_OPERATIONS_ACCESS_CLIENT_SECRET:'synthetic'}, {fetchImpl:async request=>{calls++;const headers=new Headers(request.headers);headers.set('Cf-Access-Jwt-Assertion',jwt);return runtime.dispatchFetch(request.url,{method:request.method,headers,body:await request.text()});}});
+    assert.equal(calls,2);assert.deepEqual(result,await fixture('status'));assert.equal(result.state,'confirmed');assert.equal(Object.hasOwn(result,'nonce'),false);assert.equal((await call()).status,429);continue;
+   }
    const issued=await call();assert.equal(issued.status,200);const {nonce}=await issued.json();assert.match(nonce,/^[0-9a-f]{64}$/);
    if(scenario==='withdrawn'){assert.equal(await fixture('withdraw'),true);assert.equal((await call({nonce})).status,409);assert.ok(await fixture('history'));assert.notEqual((await fixture('status')).state,'confirmed');}
    else {assert.equal((await call({nonce})).status,200);assert.equal((await fixture('status')).state,'confirmed');}
