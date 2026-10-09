@@ -3,6 +3,7 @@ import {createApprovedQaClosureHost} from '../../lib/assistance-approved-qa-clos
 import {createPrivateQaCatalogHost} from '../../lib/assistance-private-qa-catalog-host.mjs';
 import {createPrivateQaPreregistration} from '../../lib/assistance-private-qa-preregistration.mjs';
 import {createPrivateAdminBootstrap} from '../../lib/assistance-private-admin-bootstrap.mjs';
+import {createPrivateQaObservation} from '../../lib/assistance-private-qa-observation.mjs';
 import {createPrivateChallengeHost,createPreregisteredExchangePreparation} from '../../lib/assistance-private-challenge-host.mjs';
 import {createPrivateChallengeBudget} from '../../lib/assistance-private-challenge-budget.mjs';
 
@@ -21,13 +22,21 @@ export class PrivateQaPreregistration extends DurableObject {
  async register(expectedRef){const c=control(this.configuration);if(c.enabled!==true||c.recordRef!==expectedRef)return false;return this.actor.register();}
  read(){return this.actor.read();}
  readForClosure(){return this.actor.readForClosure();}
+ readChallengeStatus(){return this.challenge.status();}
  // Private rollback preserves history. HTTP exposes only authenticated exchange.
  withdraw(){return this.actor.withdraw();}
  fetch(request){if(this.configuration.AFW_QA_CHALLENGE_ENABLED!=='true'||!challengePath(request))return new Response(null,{status:404});return this.challenge.fetch(request);}
 }
 export class PrivateQaBootstrap extends WorkflowEntrypoint {
- run(event,step){return createPrivateAdminBootstrap({readControl:()=>control(this.env),readRegistered:async ref=>(await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).read())?.registration?.plan?.baselineRef===ref,register:ref=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).register(ref)}).run(event.payload,step);}
+ run(event,step){let params=event.payload;try{if(typeof params==='string'&&params.length<=256)params=JSON.parse(params);}catch{/* Strict handlers reject malformed payloads. */}
+  if(params?.operation==='observe')return observePrivateQa(this.env,params);
+  return createPrivateAdminBootstrap({readControl:()=>control(this.env),readRegistered:async ref=>(await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).read())?.registration?.plan?.baselineRef===ref,register:ref=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).register(ref)}).run(event.payload,step);}
 }
+export function observePrivateQa(env,params){const actor=()=>env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa'));
+ // workerd adds a disposable RPC handle to otherwise plain metadata. Remove
+ // only transport machinery before the strict schema validation, then release.
+ const metadata=async promise=>{const value=await promise;try{return structuredClone(value);}finally{value?.[Symbol.dispose]?.();}};
+ return createPrivateQaObservation({readHistory:()=>metadata(actor().readForClosure()),readChallenge:()=>metadata(actor().readChallengeStatus())}).run(params);}
 
 // Exported but deliberately unbound until private provisioning and installation
 // are verified. No consumer-facing approval or installation methods exist.
