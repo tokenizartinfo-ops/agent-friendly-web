@@ -9,7 +9,7 @@ test('fixed GET origin and server custody; response strips private metadata and 
  const requests=[],o=options({fetchImpl:async(url,init)=>{requests.push({url,init});return json({success:true,result:{bindings:[]},errors:[],messages:[{message:'private'}]});}}),transport=createAdministrativeGetTransport(o);
  o.resources={...resources,workerName:'different'};
  assert.deepEqual(await transport({method:'GET',path}),{success:true,result:{bindings:[]}});
- assert.equal(requests[0].url,'https://api.cloudflare.com/client/v4'+path);assert.equal(requests[0].init.method,'GET');assert.equal(requests[0].init.redirect,'error');assert.ok(requests[0].init.signal instanceof AbortSignal);assert.equal(requests[0].init.headers.Authorization,'Bearer synthetic-only-private-api-key');
+ assert.equal(requests[0].url,'https://api.cloudflare.com/client/v4'+path);assert.equal(requests[0].init.method,'GET');assert.equal(requests[0].init.redirect,'manual');assert.ok(requests[0].init.signal instanceof AbortSignal);assert.equal(requests[0].init.headers.Authorization,'Bearer synthetic-only-private-api-key');
 });
 test('unapproved methods, URLs, queries, fields and resource paths never read custody or fetch',async()=>{
  let calls=0;const transport=createAdministrativeGetTransport(options({readCredential:async()=>{calls++;return 'synthetic-only-private-api-key';}}));

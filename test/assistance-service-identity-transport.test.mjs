@@ -9,7 +9,7 @@ const get=()=>({method:'GET',path}),put=()=>({method:'PUT',path,body:{enabled:fa
 const options=extra=>({identity:{...identity},closeAt:1000,now:()=>1000,readCredential:async()=> 'synthetic-private-api-key-only',fetchImpl:async()=>Response.json({success:true,result:{...token}}),...extra});
 test('fixed origin and minimal body; PUT credentials never leave transport and pins are copied',async()=>{
  const calls=[],o=options({fetchImpl:async(url,init)=>{calls.push({url,init});return Response.json({success:true,result:{client_secret:'must-not-escape'}});}}),t=createServiceIdentityTransport(o);o.identity.name='other';
- assert.deepEqual(await t(put()),{success:true,result:null});assert.equal(calls[0].url,'https://api.cloudflare.com/client/v4'+path);assert.equal(calls[0].init.redirect,'error');assert.deepEqual(JSON.parse(calls[0].init.body),{enabled:false,name:identity.name});assert.equal(calls[0].init.headers.Authorization,'Bearer synthetic-private-api-key-only');
+ assert.deepEqual(await t(put()),{success:true,result:null});assert.equal(calls[0].url,'https://api.cloudflare.com/client/v4'+path);assert.equal(calls[0].init.redirect,'manual');assert.deepEqual(JSON.parse(calls[0].init.body),{enabled:false,name:identity.name});assert.equal(calls[0].init.headers.Authorization,'Bearer synthetic-private-api-key-only');
 });
 test('unsafe methods, routes, body, extra properties and accessors never read custody',async()=>{
  let calls=0;const t=createServiceIdentityTransport(options({readCredential:async()=>{calls++;return 'synthetic-private-api-key-only';}}));
