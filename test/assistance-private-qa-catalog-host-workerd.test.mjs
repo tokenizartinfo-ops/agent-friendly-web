@@ -25,7 +25,7 @@ test('native private reader correlates persisted SQLite DO catalog and primary D
    let proofs=0;
    const readProvisioning=async()=>{
     if(path==='/race-pointer'&&++proofs===3)await this.storage.delete(key);
-    return await this.storage.get('withdrawn')?null:{contract:'afw-qa-provisioning/v1',recordRef:r.plan.baselineRef,state:'exclusive'};
+    return await this.storage.get('withdrawn')?null:{contract:'afw-qa-provisioning/v2',scope:'own-resource-reservation',recordRef:r.plan.baselineRef,state:'reserved'};
    };
    const catalog=createQaClosureCatalog({storage:this.storage,registration:r,readProvisioning});
    if(path==='/seed'){

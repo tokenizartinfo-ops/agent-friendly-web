@@ -21,7 +21,7 @@ test('native installer commits durable authority, reconstructs and rolls back a 
  const path=new URL(request.url).pathname;let clock=r.provisioning.createdAt;
  const options={storage:this.storage,db:this.db,now:()=>clock,
  // Test-only synthetic administrative input, never production provisioning.
- readInstallation:async()=>({registration:r,approval:a}),readProvisioning:async()=>({contract:'afw-qa-provisioning/v1',recordRef:r.plan.baselineRef,state:'exclusive'})};
+ readInstallation:async()=>({registration:r,approval:a}),readProvisioning:async()=>({contract:'afw-qa-provisioning/v2',scope:'own-resource-reservation',recordRef:r.plan.baselineRef,state:'reserved'})};
  if(path==='/late')options.storage={get:k=>this.storage.get(k),transaction:fn=>this.storage.transaction(tx=>fn({get:k=>tx.get(k),put:async(k,v)=>{await tx.put(k,v);if(k===key)clock=r.plan.closeAt;}}))};
  const status=path==='/read'?null:await createPrivateQaInstaller(options).install();
  const reader=createPrivateQaCatalogHost({...options,now:()=>r.provisioning.createdAt});
