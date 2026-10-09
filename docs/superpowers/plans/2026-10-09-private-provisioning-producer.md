@@ -30,6 +30,8 @@
 
 ## Task 1: expediente primario y reserva CAS
 
+**Avance parcial 9 octubre:** `assistance-private-resource-holds.mjs` conserva propietarios de recursos y `assistance-private-evidence-journal.mjs` conserva referencias append-only, ambos internos y sin montaje. Son primitivas separadas: todavía no producen el contrato de autoridad ni validan fuentes reales. El journal admite observaciones históricas después del vencimiento, sin renovar autoridad, y cierra nuevos registros al retirarse. Task1 completo depende del productor y la correlación de Task2; no marcar sus checks por pruebas de estos helpers.
+
 **Files:** crear `lib/assistance-private-qa-provisioning.mjs`, `test/assistance-private-qa-provisioning.test.mjs` y prueba nativa SQLite. Mantener `lib/assistance-qa-closure-catalog.mjs` como consumidor del contrato existente.
 
 **Interfaces:** `createPrivateQaProvisioning({storage,readAdministrativeEvidence,readChallengeObservation,now})`; métodos administrativos `reserve(creationRef)`, `read(creationRef)` y `withdraw(creationRef,expectedSequence)`. Sin HTTP ni métodos accesibles al consumidor. `read` devuelve el contrato de cuatro campos existente solo si evidencia y propietario vigente coinciden; historial usa un método separado y nunca cumple autoridad de instalación.
