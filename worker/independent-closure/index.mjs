@@ -1,5 +1,19 @@
 import {DurableObject} from 'cloudflare:workers';
 import {createApprovedQaClosureHost} from '../../lib/assistance-approved-qa-closure-host.mjs';
+import {createPrivateQaCatalogHost} from '../../lib/assistance-private-qa-catalog-host.mjs';
+
+// Exported but deliberately unbound until private provisioning and installation
+// are verified. No consumer-facing approval or installation methods exist.
+export class PrivateQaCatalog extends DurableObject {
+ constructor(ctx,env){
+  super(ctx,env);
+  this.reader=createPrivateQaCatalogHost({storage:ctx.storage,db:env.AFW_QA_DB,
+   readProvisioning:ref=>env.AFW_QA_PROVISIONING.get(env.AFW_QA_PROVISIONING.idFromName('own-qa')).read(ref)});
+ }
+ read(){return this.reader.read();}
+ readOccurrenceApproval(){return this.reader.readOccurrenceApproval();}
+ fetch(){return new Response(null,{status:404});}
+}
 
 // Private host only. Missing catalog/custody stays closed. No caller approval,
 // provisioning, registration, HTTP routes or implicit enrollment.

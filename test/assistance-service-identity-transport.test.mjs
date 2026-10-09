@@ -24,9 +24,19 @@ test('custody deadline prevents late PUT and invalid credentials never dispatch'
  let resolve,calls=0;const pending=new Promise(r=>resolve=r),t=createServiceIdentityTransport(options({timeoutMs:15,readCredential:()=>pending,fetchImpl:async()=>{calls++;}}));assert.deepEqual(await t(put()),failure);resolve('synthetic-private-api-key-only');await new Promise(r=>setTimeout(r,10));assert.equal(calls,0);
  const invalid=createServiceIdentityTransport(options({readCredential:async()=> 'private\r\nheader',fetchImpl:async()=>{calls++;}}));assert.deepEqual(await invalid(put()),failure);assert.equal(calls,0);
 });
-test('stalled fetch/body aborted and cancelled without retry',async()=>{
- let signal,calls=0;const fetchStall=createServiceIdentityTransport(options({timeoutMs:15,fetchImpl:async(_url,init)=>{calls++;signal=init.signal;return new Promise(()=>{});}}));assert.deepEqual(await fetchStall(put()),failure);assert.equal(signal.aborted,true);assert.equal(calls,1);
- let cancelled=false;const body=new ReadableStream({start(){},cancel(){cancelled=true;}}),bodyStall=createServiceIdentityTransport(options({timeoutMs:15,fetchImpl:async()=>new Response(body,{headers:{'Content-Type':'application/json'}})}));assert.deepEqual(await bodyStall(put()),failure);assert.equal(cancelled,true);
+test('stalled fetch/body aborted and cancelled without retry',async ctx=>{
+ // Advance the deadline only after the operation being tested has started.
+ // A 15ms wall-clock setup under parallel load could expire before any fetch,
+ // testing custody expiry instead of cancellation of an in-flight request.
+ ctx.mock.timers.enable({apis:['setTimeout']});
+ let signal,calls=0,started;const ready=new Promise(resolve=>{started=resolve;});
+ const fetchStall=createServiceIdentityTransport(options({timeoutMs:10000,fetchImpl:async(_url,init)=>{calls++;signal=init.signal;started();return new Promise(()=>{});}}));
+ const fetchResult=fetchStall(put());await ready;ctx.mock.timers.tick(10000);assert.deepEqual(await fetchResult,failure);assert.equal(signal.aborted,true);assert.equal(calls,1);
+ let cancelled=false,reading;const readerReady=new Promise(resolve=>{reading=resolve;});
+ const body=new ReadableStream({start(){},cancel(){cancelled=true;}}),getReader=body.getReader.bind(body);
+ body.getReader=(...args)=>{const reader=getReader(...args);reading();return reader;};
+ const bodyStall=createServiceIdentityTransport(options({timeoutMs:10000,fetchImpl:async()=>new Response(body,{headers:{'Content-Type':'application/json'}})}));
+ const bodyResult=bodyStall(put());await readerReady;ctx.mock.timers.tick(10000);assert.deepEqual(await bodyResult,failure);assert.equal(cancelled,true);
 });
 test('private failures, invalid MIME/JSON, oversized body and credential-bearing GET fail closed',async()=>{
  for(const response of [new Response('private',{status:401}),new Response(null,{status:302}),new Response('{}',{headers:{'Content-Type':'text/html'}}),new Response('bad',{headers:{'Content-Type':'application/json'}}),Response.json({success:false,errors:[{message:'private key'}]}),Response.json({success:true,result:{...token,client_secret:'must-not-escape'}}),Response.json({success:true,result:'a'.repeat(262145)}),new Response('{}',{headers:{'Content-Type':'application/json','Content-Length':'262145'}})])assert.deepEqual(await createServiceIdentityTransport(options({fetchImpl:async()=>response}))(get()),failure);
