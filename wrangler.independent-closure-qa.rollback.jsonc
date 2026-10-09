@@ -56,6 +56,8 @@
   ],
   "vars": {
     "AFW_QA_BOOTSTRAP_ENABLED": "false",
-    "AFW_QA_PREREGISTRATION": ""
+    "AFW_QA_PREREGISTRATION": "",
+    "AFW_QA_CHALLENGE_ENABLED": "false",
+    "AFW_QA_CHALLENGE_IDENTITY": ""
   }
 }
