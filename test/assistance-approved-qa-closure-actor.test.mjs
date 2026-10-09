@@ -15,7 +15,7 @@ async function setup(){
  f.a.exec(readFileSync('worker/operations/assistance-occurrences-v2-reservation-fence.sql','utf8'));
  const approval={manifest:m,identityRef:'c'.repeat(64),enrollmentRef:'d'.repeat(64),serverConfigVersion:'e'.repeat(64),planRevision:1};
  await createOccurrenceApprovalCatalog({db:f.db}).approve(approval);
- const operations=createOccurrenceOperations({db:f.db,manifest:m,identityRef:approval.identityRef,admissionContract:'server-v1',approval,readServerAdmission:async()=>({contractVersion:'afw-server-admission-v1',identityRef:approval.identityRef,enrollmentRef:approval.enrollmentRef,serverConfigVersion:approval.serverConfigVersion,planRevision:1,admissionRevision:1,observedAt:Date.now(),schemaVersion:2})});
+ const operations=createOccurrenceOperations({db:f.db,manifest:m,identityRef:approval.identityRef,admissionContract:'server-v1',approval,now:()=>f.a.prepare("SELECT CAST(unixepoch('subsec')*1000 AS INTEGER) t").get().t,readServerAdmission:async()=>({contractVersion:'afw-server-admission-v1',identityRef:approval.identityRef,enrollmentRef:approval.enrollmentRef,serverConfigVersion:approval.serverConfigVersion,planRevision:1,admissionRevision:1,observedAt:f.a.prepare("SELECT CAST(unixepoch('subsec')*1000 AS INTEGER) t").get().t,schemaVersion:2})});
  assert.equal(await operations.create(),true);
  const admin=await qaAdministrationFixture({createdAt:m.startAt,closeAt:m.deadline,expiresAt:m.deadline+10000}),r=admin.registration;
  r.contract='afw-qa-closure-approval/v2';r.plan.occurrenceId=m.occurrenceId;
