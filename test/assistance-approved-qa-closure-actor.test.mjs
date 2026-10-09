@@ -57,13 +57,13 @@ test('foreign complete approval or V1 record never arms or writes',async()=>{
  assert.deepEqual(await(await createApprovedQaClosureActor(f.options)).arm(),{state:'unavailable'});assert.equal(f.data.size,0);assert.equal(f.admin.calls.length,0);
  }finally{f.cleanup();}
 });
-test('withdrawal during primary D1 lookup denies the following revocation write',async()=>{
- const f=await setup();try{
+test('withdrawal or clock regression during primary D1 lookup denies the following revocation write',async()=>{
+ for(const mode of ['withdrawal','clock']){const f=await setup();try{
  let withdraw=false;
- const db={batch:ss=>f.db.batch(ss),prepare(sql){const stmt=f.db.prepare(sql);return {first:()=>stmt.first(),bind(...args){const bound=stmt.bind(...args);return {run:()=>bound.run(),async first(){const row=await bound.first();if(withdraw&&sql.startsWith('SELECT * FROM assistance_occurrence_approved_plans'))f.setCurrent(null);return row;}};}};}};
+ const db={batch:ss=>f.db.batch(ss),prepare(sql){const stmt=f.db.prepare(sql);return {first:()=>stmt.first(),bind(...args){const bound=stmt.bind(...args);return {run:()=>bound.run(),async first(){const row=await bound.first();if(withdraw&&sql.startsWith('SELECT * FROM assistance_occurrence_approved_plans')){if(mode==='withdrawal')f.setCurrent(null);else f.setClock(f.m.deadline-1);}return row;}};}};}};
  const actor=await createApprovedQaClosureActor({...f.options,db});await actor.arm();withdraw=true;f.setClock(f.m.deadline);
  assert.equal((await actor.alarm()).state,'intervention_required');assert.equal(f.a.prepare('SELECT count(*) n FROM assistance_occurrence_plan_revocations').get().n,0);assert.equal(f.admin.calls.length,0);
- }finally{f.cleanup();}
+ }finally{f.cleanup();}}
 });
 test('withdrawal during identity custody prevents actual provider dispatch',async()=>{
  const f=await setup();try{
