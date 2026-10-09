@@ -1,0 +1,61 @@
+{
+  "name": "agent-friendly-web-independent-closure-qa",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "main": "worker/independent-closure/closed-rollback.mjs",
+  "compatibility_date": "2026-09-07",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    {
+      "pattern": "https://operations-manager.agentfriendlyweb.dev/assistance/occurrences/*",
+      "zone_id": "4b1a3fe4b6dcb81e9d6a633174c5939f"
+    }
+  ],
+  "triggers": {
+    "crons": []
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "AFW_INDEPENDENT_CLOSURE",
+        "class_name": "IndependentClosure"
+      },
+      {
+        "name": "AFW_QA_PREREGISTRY",
+        "class_name": "PrivateQaPreregistration"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "afw-own-qa-closed-v1",
+      "new_sqlite_classes": [
+        "IndependentClosure"
+      ]
+    },
+    {
+      "tag": "afw-private-preregistry-v1",
+      "new_sqlite_classes": [
+        "PrivateQaPreregistration"
+      ]
+    }
+  ],
+  "d1_databases": [
+    {
+      "database_id": "676ca49e-af71-4f2f-a12d-11f13de78a51",
+      "database_name": "agent-friendly-web-independent-closure-qa",
+      "binding": "AFW_QA_DB"
+    }
+  ],
+  "workflows": [
+    {
+      "name": "afw-own-qa-private-bootstrap",
+      "binding": "AFW_QA_BOOTSTRAP",
+      "class_name": "PrivateQaBootstrap"
+    }
+  ],
+  "vars": {
+    "AFW_QA_BOOTSTRAP_ENABLED": "false",
+    "AFW_QA_PREREGISTRATION": ""
+  }
+}
