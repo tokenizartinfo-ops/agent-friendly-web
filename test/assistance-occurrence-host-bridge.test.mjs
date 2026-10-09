@@ -14,7 +14,9 @@ const pins={sourceRevision:'a'.repeat(40),configId:'cecfg_test',publicationId:'c
 const cloud={configId:pins.configId,publicationId:pins.publicationId,configurationRevision:1,observationRevision:1,observationsCurrent:true,networkMode:'restricted',networkEnforced:true,operationsBindingsReady:true};
 const reply=(frame,patch={})=>JSON.stringify({version:frame.version,type:'observation',id:frame.id,nonce:frame.nonce,cloud:{...cloud},...patch})+'\n';
 const temporary=[];
-afterEach(async()=>{for(const dir of temporary.splice(0))await rm(dir,{recursive:true,force:true});});
+// Windows may briefly retain a handle after aborting the bounded Git child.
+// Retry cleanup only; the assertions and host observation budget are unchanged.
+afterEach(async()=>{for(const dir of temporary.splice(0))await rm(dir,{recursive:true,force:true,maxRetries:5,retryDelay:100});});
 // Load identical canonical files in a real temporary Git repository. No Git
 // readiness mock, no alternate path selectable via IPC, no cloud proof.
 async function fixture(options={}){
