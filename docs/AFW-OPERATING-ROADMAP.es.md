@@ -401,3 +401,9 @@ PR #193 integrada; CI723 y publicación cerrada 5d412e32-0f56-4dce-9088-60a941aa
 
 [Release cerrada de renovación](AFW-REFRESH-CLOSED-RELEASE-2026-10-03.es.md): PR195/CI730 integradas, ambos Workers cerrados actualizados; esquema0014 solo canary, historial conservado. Siguiente: aceptación del nuevo ciclo con cliente sintético existente, token renovado tras cinco minutos y retirada, antes de migración real/apertura.
 
+
+
+## Avance 9oct 16:58:10Z: solicitud autenticada aceptada
+PR358 integrada44f54514e600e48551a2c9106c7c63b6c828fab5; fuente be4533305ce0ebcac59b64ddb73789cee9f813a8, CI37962639797 success. Opt-in request challenge con preparación real mediante lecturas activas de preregistro previo. Nunca registrar desde consumidor ni usar historia como autoridad. CASnonce único y auth/config/time cercados. 12focales/native;1378pass0fail2skip/lintbuild0; guardfinal11unitarias y CI finalsuccess; revisiónfreshsinP1/P2. docs/AFW-PRIVATE-CHALLENGE-BOOTSTRAP-2026-10-09.es.md.
+Inventario GET16:54:39Z igual24932e39@100%, d2a65e91, DO070c4a77, D1676ca49e, cron[]. Evidencia output/afw-closure-qa-inventory-20261009T165439Z.json; sinmutaciones. Chrome3AFW1913701866 control real comprobado, no tocar WordPress/Tokenizart. AdjuntarPR358 falló por límite100 attachments; enlaceconservado.
+Pendiente: canal administrativo privado y montaje cerrado; correlación ejecución cloud/journal; reservaCAS propia real; cierre remoto; programaciónúnica y PCoff. Sin invitaciónMax, clavesnuevas, scheduler ni guardia. Ownerningunaacciónahora. Publicacióncloud6ac8fuente0c559 sin modificación.
