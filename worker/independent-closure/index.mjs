@@ -3,18 +3,27 @@ import {createApprovedQaClosureHost} from '../../lib/assistance-approved-qa-clos
 import {createPrivateQaCatalogHost} from '../../lib/assistance-private-qa-catalog-host.mjs';
 import {createPrivateQaPreregistration} from '../../lib/assistance-private-qa-preregistration.mjs';
 import {createPrivateAdminBootstrap} from '../../lib/assistance-private-admin-bootstrap.mjs';
+import {createPrivateChallengeHost,createPreregisteredExchangePreparation} from '../../lib/assistance-private-challenge-host.mjs';
+import {createPrivateChallengeBudget} from '../../lib/assistance-private-challenge-budget.mjs';
 
 // Configuration comes only from prior administrative deployment. Never params.
 const pins=env=>{try{const text=env.AFW_QA_PREREGISTRATION;if(typeof text!=='string'||text.length>20000)return null;return JSON.parse(text);}catch{return null;}};
 const control=env=>({enabled:env.AFW_QA_BOOTSTRAP_ENABLED==='true',recordRef:pins(env)?.registration?.plan?.baselineRef??'',closeAt:pins(env)?.registration?.plan?.closeAt??0});
+const identity=env=>{try{const text=env.AFW_QA_CHALLENGE_IDENTITY;if(env.AFW_QA_CHALLENGE_ENABLED!=='true'||typeof text!=='string'||text.length>3000)return null;return JSON.parse(text);}catch{return null;}};
+const challengePath=request=>{const url=new URL(request.url);return request.method==='POST'&&url.pathname==='/assistance/custody/confirm'&&!url.search;};
 export class PrivateQaPreregistration extends DurableObject {
- constructor(ctx,env){super(ctx,env);this.actor=createPrivateQaPreregistration({storage:ctx.storage,readPreregistration:()=>pins(env)});this.configuration=env;}
+ constructor(ctx,env){super(ctx,env);this.actor=createPrivateQaPreregistration({storage:ctx.storage,readPreregistration:()=>pins(env)});this.configuration=env;
+  const readInstallation=()=>pins(env),readIdentityConfig=()=>identity(env);
+  this.challenge=createPrivateChallengeHost({storage:ctx.storage,readInstallation,readIdentityConfig,allowChallengeRequest:true,
+   prepareExchange:createPreregisteredExchangePreparation({preregistration:this.actor,readInstallation}),
+   limiter:createPrivateChallengeBudget({storage:ctx.storage,readPrincipal:()=>readIdentityConfig()?.principalRef})});
+ }
  async register(expectedRef){const c=control(this.configuration);if(c.enabled!==true||c.recordRef!==expectedRef)return false;return this.actor.register();}
  read(){return this.actor.read();}
  readForClosure(){return this.actor.readForClosure();}
- // Private rollback preserves history. No HTTP methods expose these RPCs.
+ // Private rollback preserves history. HTTP exposes only authenticated exchange.
  withdraw(){return this.actor.withdraw();}
- fetch(){return new Response(null,{status:404});}
+ fetch(request){if(this.configuration.AFW_QA_CHALLENGE_ENABLED!=='true'||!challengePath(request))return new Response(null,{status:404});return this.challenge.fetch(request);}
 }
 export class PrivateQaBootstrap extends WorkflowEntrypoint {
  run(event,step){return createPrivateAdminBootstrap({readControl:()=>control(this.env),readRegistered:async ref=>(await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).read())?.registration?.plan?.baselineRef===ref,register:ref=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).register(ref)}).run(event.payload,step);}
@@ -49,5 +58,5 @@ export class IndependentClosure extends DurableObject {
  alarm(){return this.actor.alarm();}
  fetch(){return new Response(null,{status:404});}
 }
-const worker={fetch(){return new Response(null,{status:404});}};
+const worker={async fetch(request,env){if(env?.AFW_QA_CHALLENGE_ENABLED!=='true'||!challengePath(request)||!env.AFW_QA_PREREGISTRY)return new Response(null,{status:404});try{return await env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa')).fetch(request);}catch{return Response.json({code:'unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});}}};
 export default worker;
