@@ -1,0 +1,7 @@
+# Reserva primaria en el host existente
+
+Extender el Durable Object existente, sin namespace ni endpoint nuevo. Reutilizar createPrivateQaProvisioning y fuentes preregistro/originales/proveedor/challenge reales. RPC sin selectores reserveOwn/readOwnReservation/readOwnReservationHistory/withdrawOwnReservation; creación fija desde pins desplegados y flag AFW_QA_PRIMARY_RESERVATION_ENABLED false por defecto para operaciones vivas o retirada.
+
+Scope transaccional por invocación, no estado global: lectores de originales y challenge usan el mismo tx SQLite activo mediante adaptador de storage; no nested ctx.storage.transaction. Adaptadores cerrados al finalizar la operación y productor conserva deadlines/rollback. Correlación recibo actual/observación efectiva proveedor (28 GET para evidencia doble), controles fijos antes/durante/después. Checkpoint atómico conjunto original/reserva/holds/journal después de validar ambos, sin await posterior, para respuestas vivas tras ACK. Historial exclusivamente documental no autoridad; retirada de reserva conserva holds/diario y no es cierre global.
+
+Primero native ensayo con HTTP/identidad sintéticos declarados, reintento mismareserva sinrehacer evidencia, retiro mientrasawait noautoridad, historial después de retiro. No D1 write, installer, dispatch, catalog legacy, secrets ni remoteactivation todavía. Un reviewer final, one fixpass, focused/native/full/lint/build/dryrun/CI antes de integrar. Plan finito aprobado sigue: montar installer/catalog/closure, custodyactual/closedmount/cloudadoption/PC-on/hosted/PC-off.
