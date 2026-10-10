@@ -9,11 +9,12 @@ import {createPrivateChallengeBudget} from '../../lib/assistance-private-challen
 
 // Configuration comes only from prior administrative deployment. Never params.
 const pins=env=>{try{const text=env.AFW_QA_PREREGISTRATION;if(typeof text!=='string'||text.length>20000)return null;return JSON.parse(text);}catch{return null;}};
+const originalControl=env=>{try{if(env.AFW_QA_ORIGINALS_ENABLED!=='true'||typeof env.AFW_QA_OPERATOR_CONTEXT!=='string'||env.AFW_QA_OPERATOR_CONTEXT.length>3000)return null;const c=JSON.parse(env.AFW_QA_OPERATOR_CONTEXT);if(!c||Object.keys(c).length!==2||!Object.hasOwn(c,'operatorRef')||!Object.hasOwn(c,'cloud'))return null;return {...c,enabled:true};}catch{return null;}};
 const control=env=>({enabled:env.AFW_QA_BOOTSTRAP_ENABLED==='true',recordRef:pins(env)?.registration?.plan?.baselineRef??'',closeAt:pins(env)?.registration?.plan?.closeAt??0});
 const identity=env=>{try{const text=env.AFW_QA_CHALLENGE_IDENTITY;if(env.AFW_QA_CHALLENGE_ENABLED!=='true'||typeof text!=='string'||text.length>3000)return null;return JSON.parse(text);}catch{return null;}};
 const challengePath=request=>{const url=new URL(request.url);return request.method==='POST'&&url.pathname==='/assistance/custody/confirm'&&!url.search;};
 export class PrivateQaPreregistration extends DurableObject {
- constructor(ctx,env){super(ctx,env);this.actor=createPrivateQaPreregistration({storage:ctx.storage,readPreregistration:()=>pins(env)});this.configuration=env;
+ constructor(ctx,env){super(ctx,env);this.actor=createPrivateQaPreregistration({storage:ctx.storage,readPreregistration:()=>pins(env),readOriginalControl:()=>originalControl(env)});this.configuration=env;
   const readInstallation=()=>pins(env),readIdentityConfig=()=>identity(env);
   this.challenge=createPrivateChallengeHost({storage:ctx.storage,readInstallation,readIdentityConfig,allowChallengeRequest:true,
    prepareExchange:createPreregisteredExchangePreparation({preregistration:this.actor,readInstallation}),
@@ -22,15 +23,18 @@ export class PrivateQaPreregistration extends DurableObject {
  async register(expectedRef){const c=control(this.configuration);if(c.enabled!==true||c.recordRef!==expectedRef)return false;return this.actor.register();}
  read(){return this.actor.read();}
  readForClosure(){return this.actor.readForClosure();}
+ appendOperatorObservation(ref,sequence,originals){return this.actor.appendOperatorObservation(ref,sequence,originals);}
+ readOperatorObservation(){return this.actor.readOperatorObservation();}
+ readOperatorHistory(){return this.actor.readOperatorHistory();}
  readChallengeStatus(){return this.challenge.status();}
  // Private rollback preserves history. HTTP exposes only authenticated exchange.
  withdraw(){return this.actor.withdraw();}
  fetch(request){if(this.configuration.AFW_QA_CHALLENGE_ENABLED!=='true'||!challengePath(request))return new Response(null,{status:404});return this.challenge.fetch(request);}
 }
 export class PrivateQaBootstrap extends WorkflowEntrypoint {
- run(event,step){let params=event.payload;try{if(typeof params==='string'&&params.length<=256)params=JSON.parse(params);}catch{/* Strict handlers reject malformed payloads. */}
+ run(event,step){let params=event.payload;try{if(typeof params==='string'&&params.length<=8192){const decoded=JSON.parse(params);if(params.length<=256||decoded?.operation==='originals')params=decoded;}}catch{/* Strict handlers reject malformed payloads. */}
   if(params?.operation==='observe')return observePrivateQa(this.env,params);
-  return createPrivateAdminBootstrap({readControl:()=>control(this.env),readRegistered:async ref=>(await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).read())?.registration?.plan?.baselineRef===ref,register:ref=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).register(ref)}).run(event.payload,step);}
+  return createPrivateAdminBootstrap({readControl:()=>control(this.env),readRegistered:async ref=>(await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).read())?.registration?.plan?.baselineRef===ref,register:ref=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).register(ref),appendOriginals:(ref,sequence,originals)=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).appendOperatorObservation(ref,sequence,originals),readOriginals:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).readOperatorObservation();try{return structuredClone(value);}finally{value?.[Symbol.dispose]?.();}}}).run(event.payload,step);}
 }
 export function observePrivateQa(env,params){const actor=()=>env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa'));
  // workerd adds a disposable RPC handle to otherwise plain metadata. Remove
