@@ -6,7 +6,7 @@
     "creator": "Gabriel Mucchiut"
   },
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "updated_at": "2026-09-01",
+  "updated_at": "2026-09-02",
   "human_languages": ["es", "en", "pt"],
   "human_route_strategy": "Spanish unprefixed canonical; English under /en; Portuguese under /pt; canonical and hreflang equivalents",
   "machine_routes_localized": false,
@@ -108,6 +108,13 @@
     "public_skill": {
       "status": "deployed",
       "resources": ["/.well-known/agent-skills/index.json", "/skills/agent-friendly-web-audit/SKILL.md"]
+    },
+    "authentication_documentation": {
+      "status": "deployed",
+      "resources": ["/auth.md"],
+      "human_authentication": "cloudflare_access_email_otp",
+      "agent_oauth": "not_deployed",
+      "note": "Documents the active human boundary and planned agent authorization without advertising OAuth, OIDC or A2A as deployed."
     },
     "mcp": {
       "status": "deployed",
