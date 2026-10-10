@@ -44,6 +44,8 @@
 
 ## Task 2: fuentes administrativas y correlación de ejecución
 
+**Avance parcial 9oct:** lector `assistance-private-provider-observation.mjs` y transporte `assistance-private-provider-get-transport.mjs`, internos sin montaje, realizan lecturas/paginación/doble snapshot acotados. Envelopes reales comprobados read-only: tokens11/11 y políticas app propia1/1. GET puntual omitió name y aportó versión2 de identidad histórica retirada; listado aporta nombre. El lector cruza metadata exacta, sin inventarla. No cierra correlación cloud/diario ni productor. Antes de instalar, corregir también compatibilidad del cierre existente con GET sin name, mediante fuente independiente del nombre actual: no relajar validación ni restaurar nombre declarado por inferencia.
+
 **Files:** crear `lib/assistance-private-qa-provisioning-evidence.mjs` y pruebas; adaptar el lector administrativo existente solo si su contrato coincide. Ninguna afirmación de capacidades de Codex no disponibles.
 
 **Interfaces:** `readAdministrativeEvidence(creationRef)` resuelve un expediente propio fijado por el operador, no parámetros del consumidor. Debe aportar procedencia/fecha del original, recursos efectivos y constatación independiente de tarea/turno/comando/HEAD/config/publicación; la recepción se contrasta mediante el lector privado del diario primario.
