@@ -1,0 +1,11 @@
+# Un solo intento de revocacion D1 propia
+
+Fuente administrativa interna, sin montaje ni mutacion D1/proveedor en este bloque. startOwnRevocation exige reserva propia ya retirada, intento que inicio escritura, pins originales y fila D1 propia observada no revocada. Una reserva meramente vencida, ausencia de fila, fila ajena o fila ya revocada no inicia un intento. La lectura de recuperacion ignora argumentos extra del caller y nunca elige una operacion de escritura.
+
+En el ultimo checkpoint de recuperacion, dentro de la MISMA transaccion SQLite primaria, conserva un unico registro attempted ligado al propietario, intento, ocurrencia, pins completos y digest de procedencia. Solo el primer ACK devuelve un locator interno de dispatch. Commit confirmado sin ACK, reinicio, concurrencia, consulta o retry nunca reconstruyen ese locator ni liberan el presupuesto. El locator no es un bearer permiso ni acredita autorizacion administrativa del proveedor. El futuro controlador debe resolver permisos actuales propios y ejecutar una revocacion condicionada exacta; este helper no lo hace.
+
+observeOwnRevocation consulta nuevamente la procedencia exacta y puede persistir d1_revocation_observed despues del intento. causality permanece not-attributed: la tabla D1 constata estado revocado, no quien lo produjo. D1 puede revocarse entre snapshot y checkpoint; la comprobacion de no revocacion al iniciar describe aquella lectura, sin atomicidad DO-D1. No se afirma exactamente una ejecucion D1 ni atribucion causal.
+
+Observacion idempotente, fechas coherentes y checksum/procedencia originales verificados, historia y tombstones preservados. La fila ausente o contradictoria deja el intento sin cierre; no permite redispatch, liberar propietario, resetear presupuesto o acreditar cierre global. El cierre de token, policy, settings y calendario del proveedor requiere comprobaciones separadas y material recuperable previo.
+
+Ensayos locales cubren concurrencia, ACK perdido, reinicio y estados rechazados. El Durable Object nativo usa reader D1 sintetico declarado; pruebas D1 nativas separadas no acreditan instalacion remota integrada. Siguientes gates: controlador de compensacion con readbacks propios, installer cerrado, originales reales, PC-on y una ocurrencia alojada antes del intervalo PC-off acordado. Sin datos de Max ni correo.
