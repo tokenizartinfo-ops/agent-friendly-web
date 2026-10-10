@@ -1,0 +1,13 @@
+# Controlador propio de revocacion y lectura de comprobacion
+
+Composicion interna sin montaje. El host fija creationRef y adaptadores de provisioning y dispatchRevocation; run y observe no admiten selectores del usuario. dispatchRevocation debe comprobar autorizacion administrativa vigente y ejecutar una mutacion D1 condicionada por procedencia exacta. Una callback, locator o historial no acredita ese permiso; las pruebas locales no reemplazan esta comprobacion en el host real.
+
+run lee recuperacion propia original y reciente. Si la reserva vencida sigue reservada, retira primero sequence1 en la misma autoridad y relee su tombstone; no revoca una fila con reserva viva. Requiere fila propia exacta y el primer ACK de startOwnRevocation. Despues relee originales/pins/intento antes del despacho. Falta de fila, ACK perdido, cambio de originales o rechazo administrativo conserva pending/unavailable; no repite ni libera presupuesto.
+
+El adaptador recibe una procedencia descriptor-safe e inmutable, attemptId opaco y AbortSignal acotado. Su retorno no certifica nada: el controlador observa despues el estado real mediante el lector primario/D1 ya aceptado. Una revocacion con ACK perdido se comprueba por lectura; llamadas siguientes nunca vuelven a despachar. observe solo consulta y registra observacion documental; no retira la reserva ni inicia revocacion. Una fila ya revocada puede constatarse sin atribuir autor o causalidad al intento.
+
+El limite de tiempo aborta el transporte y devuelve pending, sin afirmar cancelacion del servidor. Un adaptador que ignore la senal puede terminar posteriormente; la lectura siguiente puede observar esa fila propia revocada. No hay atomicidad DO-D1, cierre de permisos Cloudflare, liberacion de recursos ni guardia permanente desde este resultado.
+
+Prueba combinada local usa una SQLite primaria y una D1 SQLite distintas, productor primario e instalador D1 reales, finalizacion, retirada, revocacion condicionada y lectura independiente. Origines administrativos, permisos y reloj de vencimiento siguen sinteticos declarados. No acredita bindings/identidad cloud reales ni PC-off. Siguiente: integrar instalador cerrado y canal administrativo de originales reales, montar flags false, luego recorrido propio PC-on y una ocurrencia alojada antes de PC-off acordado y Max.
+
+La vigencia de cada lectura D1 se conserva como límite de toda la invocación, incluyendo validaciones y hashes asíncronos, retirada, despacho y resultado. Otra lectura no renueva ese límite; una nueva invocación puede observar de nuevo, sin recuperar un presupuesto gastado.
