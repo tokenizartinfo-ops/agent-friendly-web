@@ -30,6 +30,8 @@
 
 ## Task 1: expediente primario y reserva CAS
 
+**Preparación fuente 10oct:** `assistance-private-qa-provisioning.mjs` compone holds, journal y reserva en la misma transacción SQLite, con proveedores/ejecución/recibo privados ligados a pins y cinco referencias inmutables. No hay montaje ni autoridad operativa desde fixtures. El productor valida frescura al reservar; consultas posteriores no refechan evidencia y requieren ventana/propiedad/pins/retirada. Expiración o retiro durante ACK no devuelve autoridad y conserva commits ya realizados. Ver `docs/AFW-PRIVATE-RESERVATION-PRODUCER-2026-10-10.es.md`. Wiring real y Task3/4 siguen pendientes.
+
 **Avance parcial 9 octubre:** `assistance-private-resource-holds.mjs` conserva propietarios de recursos y `assistance-private-evidence-journal.mjs` conserva referencias append-only, ambos internos y sin montaje. Son primitivas separadas: todavía no producen el contrato de autoridad ni validan fuentes reales. El journal admite observaciones históricas después del vencimiento, sin renovar autoridad, y cierra nuevos registros al retirarse. Task1 completo depende del productor y la correlación de Task2; no marcar sus checks por pruebas de estos helpers.
 
 **Files:** crear `lib/assistance-private-qa-provisioning.mjs`, `test/assistance-private-qa-provisioning.test.mjs` y prueba nativa SQLite. Mantener `lib/assistance-qa-closure-catalog.mjs` como consumidor del contrato existente.
