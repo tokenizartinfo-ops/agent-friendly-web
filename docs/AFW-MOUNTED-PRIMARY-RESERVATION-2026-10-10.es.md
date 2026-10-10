@@ -1,0 +1,11 @@
+# Reserva propia en el primario existente
+
+El Durable Object del preregistro compone ahora el productor de reservas existente con los originales cloud, el recibo de desafío y el lector efectivo del proveedor. No agrega namespace, tabla de autoridad alternativa ni endpoint público. Las operaciones RPC no aceptan selectores de recursos: la creación y los recursos provienen de la configuración administrativa previa.
+
+`AFW_QA_PRIMARY_RESERVATION_ENABLED` queda cerrado por defecto. La lectura y reserva activas vuelven a verificar originales y retiro primario después del ACK mediante una captura atómica conjunta del preregistro, originales, desafío, reserva, propietarios y diario. La validación completa ocurre entre dos capturas idénticas; ninguna espera asíncrona sigue al checkpoint final. Cada invocación tiene su propio scope SQLite; los lectores internos reutilizan la transacción activa. La cancelación del productor llega al transporte externo y los adaptadores dejan de estar activos al finalizar.
+
+La reserva es idempotente e inmutable. Dos llamadas concurrentes comparten el mismo registro; un ACK perdido no reconstruye un presupuesto de instalación. Retirar la reserva conserva holds y diario para recuperación. El historial es documental, incluso después del retiro: no permite instalar ni ejecutar.
+
+El ensayo nativo usa el transporte de producción con HTTP e identidad explícitamente sintéticos. Cuenta 28 GET para la evidencia doble inicial; los reintentos conservan la reserva. Comprueba respuesta perdida de un reintento, retiro del desafío y lectura histórica. Una intercalación de prueba alrededor del storage real reproduce el retiro de reserva durante la última lectura original: antes devolvía reserved y ahora devuelve null; el historial confirma withdrawn. La pérdida de ACK de la primera creación queda cubierta por las pruebas del productor, no por esta ruta HTTP de reintento. Esto no acredita latencia, custodia ni permiso administrativos reales.
+
+Esta entrega sigue sin montar remotamente y no escribe D1, instala, despacha, programa ni conecta el catálogo legacy como autoridad nueva. Quedan instalador/catálogo/cierre, custodia efectiva, montaje cerrado y adopción cloud, prueba propia PC-on, una ejecución alojada y luego PC-off acordado. No se ha invitado a Max.
