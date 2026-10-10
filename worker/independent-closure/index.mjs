@@ -1,3 +1,5 @@
+import {createPrivateProviderObservation} from '../../lib/assistance-private-provider-observation.mjs';
+import {createPrivateProviderGetTransport} from '../../lib/assistance-private-provider-get-transport.mjs';
 import {DurableObject,WorkflowEntrypoint} from 'cloudflare:workers';
 import {createApprovedQaClosureHost} from '../../lib/assistance-approved-qa-closure-host.mjs';
 import {createPrivateQaCatalogHost} from '../../lib/assistance-private-qa-catalog-host.mjs';
@@ -26,6 +28,15 @@ export class PrivateQaPreregistration extends DurableObject {
  appendOperatorObservation(ref,sequence,originals){return this.actor.appendOperatorObservation(ref,sequence,originals);}
  readOperatorObservation(){return this.actor.readOperatorObservation();}
  readOperatorHistory(){return this.actor.readOperatorHistory();}
+ async readProviderObservation(){try{
+  const env=this.configuration,configured=()=>{if(env.AFW_QA_PROVIDER_OBSERVATION_ENABLED!=='true'||typeof env.AFW_QA_PROVIDER_CONTEXT!=='string'||env.AFW_QA_PROVIDER_CONTEXT.length>1000)throw Error('Provider unavailable');return JSON.parse(env.AFW_QA_PROVIDER_CONTEXT);};
+  const provider=configured(),fingerprint=JSON.stringify(provider),readPins=async()=>{const p=await this.actor.read();if(!p||JSON.stringify(configured())!==fingerprint)throw Error('Provider unavailable');return {...p,provider};};
+  const first=await this.actor.readOperatorObservation();if(!first)return null;const p=await readPins(),recordRef=p.registration.plan.baselineRef;
+  const value=await createPrivateProviderObservation({readPins,request:createPrivateProviderGetTransport({resources:p.registration.resources,readCredential:async()=>env.AFW_QA_ADMIN_READ_API_TOKEN})}).read(recordRef);if(!value)return null;
+  const final=await this.actor.readOperatorObservation();if(!final||JSON.stringify(first.originals)!==JSON.stringify(final.originals)||first.correlation.receiptRef!==final.correlation.receiptRef||JSON.stringify(configured())!==fingerprint)return null;
+  // Final original reader includes a post-ACK primary withdrawal/freshness fence.
+  return value;
+ }catch{return null;}}
  readChallengeStatus(){return this.challenge.status();}
  // Private rollback preserves history. HTTP exposes only authenticated exchange.
  withdraw(){return this.actor.withdraw();}
