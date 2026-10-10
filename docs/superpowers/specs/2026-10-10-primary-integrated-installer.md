@@ -1,0 +1,9 @@
+# Instalador primario integrado
+
+Continuación finita Task3: usar productor, intención, D1, finalización y consumo existentes; no nuevo runtime ni autoridad. API createPrimaryQaInstaller con creationRef, provisioning e installation fijos, lector administrativo original readInstallation, dispatcherOccurrence privado y reloj/timeout. install no acepta payload ni operaciones. Fuente pública legacy preservada. Primer ACK exclusivo permite cada escritura y cada despacho. Historia o ACK incierto no reconstruyen permiso. D1 y primaria independientes; pending explícito. Dispatcher debe comprobar autorización administrativa vigente y, para runner, preflight cloud/admission por sus canales reales. No certificar éxito desde callback.
+
+RED integrada escritura+consumo+un despacho y retry sin duplicado; pérdida de ACK escritura reconciliada por lectura, consumo incierto no despacha; withdrawal/pins drift durante await bloquea siguiente efecto. Combinación nativa primary SQLite/D1 con originales administrativos sintéticos declarados. Abort no acredita cancelación de servidor. Deadline registra ventana original y wall monotónico, no renovación por historia.
+
+No bindings/deploy/migraciones/identidad nueva, scheduler, PC-off o Max desde este bloque. Pre-flight: producer write_started ACK -> D1 exact intent; D1 current read -> primary finalization; consumption ACK -> fixed runner wrapper. Los retornos históricos son documentación, no permisos. Brief output/afw-integrated-installer-next-brief-20261010.md. Fresh whole-branch review una vez y un fixpass, verificación final proporcional.
+
+La lectura independiente de originales se compara también después de las esperas primarias y justo antes de consumir/despachar. Su retirada impide el efecto siguiente y no restaura presupuestos gastados. Estas comprobaciones no crean atomicidad distribuida: el host conserva autorización vigente al mutar.
