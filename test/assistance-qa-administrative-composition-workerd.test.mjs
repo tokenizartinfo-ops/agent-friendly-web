@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
-test('native SQLite issued fence recovers administrative PUT loss by GET without replay',async()=>{
+test('native SQLite issued fence recovers nameless administrative GET and PUT loss without replay',async()=>{
  const bundle=await build({stdin:{resolveDir:process.cwd(),contents:`
  import {qaAdministrationFixture} from './test/fixtures/qa-administrative-composition.mjs';
  import {createQaAdministrativeClosureActions} from './lib/assistance-qa-administrative-composition.mjs';
@@ -14,7 +14,10 @@ test('native SQLite issued fence recovers administrative PUT loss by GET without
    const options={...f.options,fetchImpl:async(url,init)=>{
     if(init.method==='PUT'){await this.storage.put('put-count',(await this.storage.get('put-count')||0)+1);await this.storage.put('provider-disabled',true);throw Error('synthetic acknowledgment lost');}
     if(await this.storage.get('provider-disabled')){f.results.token.enabled=false;f.results.token.updated_at='2026-10-08T22:00:02Z';}
-    return f.options.fetchImpl(url,init);
+    if(new URL(url).pathname.endsWith('/access/service_tokens'))return Response.json({success:true,result:[structuredClone(f.results.token)],result_info:{page:1,per_page:100,count:1,total_count:1,total_pages:1}});
+    const response=await f.options.fetchImpl(url,init);
+    if(init.method==='GET'&&new URL(url).pathname.includes('/access/service_tokens/')){const payload=await response.json();delete payload.result.name;return Response.json(payload);}
+    return response;
    }};
    const actions=await createQaAdministrativeClosureActions(options);
    const step=async(name,state)=>{await this.storage.put(name,(await this.storage.get(name)||0)+1);return {verified:true,state};};
