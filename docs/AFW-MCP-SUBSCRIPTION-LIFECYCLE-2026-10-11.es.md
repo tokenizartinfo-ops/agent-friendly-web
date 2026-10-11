@@ -1,0 +1,21 @@
+# Suscripción privada de prueba
+
+El controlador `lib/mcp-subscription-lifecycle.mjs` prepara el ciclo de una suscripción propia, finita y sin montar. Sus métodos son `subscribe`, `unsubscribe` y `deliver`. No incorpora métodos Events a un endpoint ni cambia permisos OAuth existentes.
+
+El host debe resolver identidad autenticada y consentimiento explícito para observar el proyecto. El controlador recibe únicamente referencias opacas de principal, recurso, proyecto y permiso, vigencia y habilitación. Comprobar esa forma no acredita el origen de la autorización: el montaje deberá verificarlo con las fuentes reales del servidor. Un permiso de lectura existente no se transforma automáticamente en permiso para supervisar.
+
+La identidad de la suscripción reúne principal, recurso, proyecto, evento y destino normalizado. El destino y el secreto se cifran juntos con AES-GCM y contexto ligado a identidad/generación. HKDF separa claves para cifrado y autenticación de todo el registro. Las respuestas públicas no incluyen destino, secreto, cifrado ni referencias del permiso.
+
+La suscripción requiere un desafío firmado y una respuesta exacta antes de activarse. El primer registro confirmado por la persistencia consume el intento: un reinicio, una respuesta perdida o una solicitud concurrente no recrean ese envío. Una retirada conserva un estado terminal y una respuesta tardía no puede reactivarlo. La renovación con el mismo secreto conserva generación y presupuesto, dentro del máximo de diez minutos desde la creación y del permiso actual. Un cambio de secreto se rechaza hasta implementar rotación compatible; no se anuncia soporte de esa rotación.
+
+Cada identidad admite una única entrega en este ensayo. El presupuesto se registra antes de enviar; ante una respuesta desconocida se conserva gastado. El recibo distingue recepción HTTP de revisión cloud: `cloudReviewConfirmed` permanece falso. El montaje real debe añadir el presupuesto global del ensayo y la procedencia del evento, además de conectar este recibo con el turno cloud original completado.
+
+Las pruebas utilizan SQLite nativo, dos instancias del controlador, cifrado real y funciones sintéticas de autorización/red. Comprueban retirada, reinicio, concurrencia, pérdida de ACK, permisos ajenos, expiración, alteración del registro y conservación de los bytes declarados. No demuestran autorización real, entrega pública, ejecución cloud ni PC-off. El transporte predeterminado es el HTTPS con IP fijada aceptado en PR394; la inyección del emisor es una dependencia privada del host para pruebas/composición y no un parámetro de la petición.
+
+Siguiente: métodos MCP2 privados en el mismo endpoint autenticado, integración nativa del host/persistencia/custodia y presupuesto global, montaje propio cerrado con rollback, suscripción real de la cuenta y una ocurrencia alojada. Después corresponde preparar el ensayo acordado con PC apagada. Max conserva los gates de preview, aprobación y consentimiento propios.
+
+La revisión independiente detectó una retirada concurrente completada durante la consulta de autorización anterior al envío. El controlador vuelve a leer el registro persistido después de esa consulta y antes de enviar; el caso se reprodujo primero fallando y después pasó. Una petición que ya está en vuelo en otra instancia no puede retirarse retroactivamente: su respuesta tardía no reactiva la suscripción ni autoriza otra entrega. La cancelación del emisor en la misma instancia utiliza AbortSignal.
+
+Una comprobación descartable del SDK instalado 2.0.0 negoció `2026-07-28` y sirvió `events/list` usando `createMcpHandler`, el transporte HTTP del cliente y un fetch local. El catálogo y la capacidad `events` llegaron en la respuesta original; el decodificador de capacidades del cliente omite esta extensión desconocida. La conexión directa InMemory de esta prueba no negoció MCP2 y no se usa como evidencia de compatibilidad. Este ensayo local no acredita aceptación del plugin de la cuenta ni un endpoint desplegado.
+
+El mismo ensayo pasó usando el wrapper instalado `agents/mcp/server`, que AFW utiliza actualmente. Conservó su validación de Host; el fixture añadió ese encabezado como lo hace un transporte HTTP real, sin deshabilitar la protección. Es compatibilidad local de la extensión, sin autenticación OAuth real ni montaje remoto.
