@@ -1,0 +1,15 @@
+# Un único ensayo propio por almacenamiento
+
+El controlador privado de suscripciones ahora limita todo su almacenamiento de ensayo a un único intento de desafío y una única entrega. Cambiar callback, principal o proyecto no crea otro presupuesto. Esto solo corresponde a un recurso dedicado de QA; no es la política del servicio general ni un límite compartido entre clientes.
+
+Un registro global autenticado fija identidad, generación, creación y plazo del intento junto al registro cifrado de suscripción, en la misma transacción. Ambos registros deben coincidir en las siguientes lecturas. El intento queda consumido antes de devolver el primer ACK que permite el desafío; una respuesta perdida no lo recrea. La entrega registra simultáneamente su evento y fecha en ambos registros antes de salir a la red.
+
+Renovar la misma suscripción conserva el plazo máximo inicial y el presupuesto. Retirada, vencimiento, reinicio y fallos no liberan el registro global ni permiten sustituirlo por otro destino. El estado terminal se conserva para revisión. El montaje debe proteger este almacenamiento de borrados o restauraciones que eliminen ese historial: el HMAC comprueba alteraciones del registro, no puede demostrar que un administrador no haya borrado toda la autoridad persistente.
+
+No se importa ni migra un expediente real. Los registros antiguos sin presupuesto global se rechazan; no se reconstruye un permiso a partir de ellos. Una eventual nueva prueba requiere una autoridad propia nueva, original y explícitamente delimitada por servidor; no se elige desde una petición ni se crea automáticamente al vencer. El código sigue sin montar y no amplía permisos de lectura o supervisión.
+
+Las pruebas de SQLite reproducen primero el defecto: dos callbacks concurrentes obtenían dos desafíos. Con el límite global solo uno puede activarse. También comprueban que cambio de identidad, retirada, expiración y pérdida del ACK no permiten otro intento. Los casos previos de retirada concurrente, cifrado, entrega y respuesta desconocida siguen aplicando. No acreditan suscripción real del plugin, revisión cloud o funcionamiento con PC apagada.
+
+La prueba `test/mcp-subscription-native-storage.test.mjs` ejecuta el controlador en workerd con Durable Object SQLite y transacciones nativas de almacenamiento. Reinicia el runtime conservando su directorio dedicado, confirma la misma suscripción sin otro desafío, rechaza otro callback y otra entrega, y admite la retirada después de deshabilitar el permiso sintético. Usa la fecha de compatibilidad del binario local instalado, `2026-09-07`. Esto comprueba persistencia nativa local; no verifica identidad real, TLS del callback, adopción cloud o recursos remotos.
+
+Siguiente bloque: métodos MCP2 en el endpoint privado autenticado, consentimiento original de supervisión distinto de lectura, custodia/almacenamiento real, evento con procedencia comprobada y montaje propio cerrado. La selección técnica del proyecto debe resolverla el copilot sin pedir IDs al usuario. La revisión cloud completada seguirá siendo una evidencia independiente del recibo HTTP.
