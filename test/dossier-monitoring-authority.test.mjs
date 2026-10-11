@@ -117,6 +117,17 @@ test('original primary monitoring authority composes the real lifecycle without 
   const {secret:ignored,...delivery}=params.delivery;void ignored;await authority.unsubscribe({...params,delivery});await assert.rejects(authority.subscribe(params));assert.equal(sends,1);
  }finally{state.close();f.sqlite.close();}
 });
+test('monitoring composition honors closed Node readiness and exposes only a separate internal consume method',async()=>{
+ const f=fixture(),state=new DatabaseSync(':memory:');state.exec('CREATE TABLE records(k TEXT PRIMARY KEY,v TEXT NOT NULL)');let localSends=0;
+ const storage={transaction:async fn=>fn({get:async k=>{const row=state.prepare('SELECT v FROM records WHERE k=?').get(k);return row?JSON.parse(row.v):undefined;},put:async(k,v)=>state.prepare('INSERT INTO records VALUES(?,?)').run(k,JSON.stringify(v))})};
+ try{
+ const nodeHost={processGeneration:'f'.repeat(64),readReadiness:async()=>({purpose:'afw.mcp-node-readiness.v1',processGeneration:'f'.repeat(64),ready:false,expiresAt:now+600000}),readIdentity:async()=>{throw Error('not reached');},send:async()=>{throw Error('not reached');}};
+ const authority=api.createDossierMonitoringEventsAuthority({db:f.db,context:f.context,projectId:'p',projectionSecret:'x'.repeat(32),storage,custodyKey:Buffer.alloc(32,1),now:()=>now,nodeHost,send:async()=>{localSends++;return{status:200,body:''};}});
+ assert.equal(typeof authority.consumeNodeDispatch,'function');await api.recordDossierMonitoringConsent(f.options);const projectRef=await authority.list();
+ await assert.rejects(authority.subscribe({name:'afw.dossier.changed',arguments:{projectRef},delivery:{mode:'webhook',url:'https://callback.example.com/own',secret:'whsec_'+Buffer.alloc(32,2).toString('base64')}}));
+ assert.equal(localSends,0);assert.equal(state.prepare('SELECT count(*) n FROM records').get().n,0);
+ }finally{state.close();f.sqlite.close();}
+});
 
 test('consent writer snapshots server actor and grant before awaits',async()=>{
  const f=fixture();try{
