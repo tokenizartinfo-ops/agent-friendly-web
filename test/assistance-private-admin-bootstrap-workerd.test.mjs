@@ -13,7 +13,7 @@ import {qaAdministrationFixture} from './fixtures/qa-administrative-composition.
 import {computeOccurrencePlanDigest} from '../lib/assistance-occurrence-digest.mjs';
 import {computeQaClosureBaselineRef} from '../lib/assistance-qa-closure-catalog.mjs';
 test('native Workflow registers configured pins only and native DO preserves withdrawal history',async()=>{
- const start=Date.now()-1000,m={...manifest(),startAt:start,deadline:start+90000};
+ const start=Date.now()-1000,m={...manifest(start),startAt:start,deadline:start+90000};
  const approval={manifest:m,identityRef:'c'.repeat(64),enrollmentRef:'d'.repeat(64),serverConfigVersion:'e'.repeat(64),planRevision:1};
  const{registration}=await qaAdministrationFixture({createdAt:start,closeAt:m.deadline,expiresAt:m.deadline+10000});registration.contract='afw-qa-closure-approval/v2';registration.plan.occurrenceId=m.occurrenceId;registration.approvalDigest=await computeOccurrencePlanDigest({manifest:m,identityRef:approval.identityRef,admissionContract:'server-v1',approval});registration.plan.baselineRef=await computeQaClosureBaselineRef(registration);
  const bundle=await build({stdin:{resolveDir:process.cwd(),contents:`
@@ -31,7 +31,7 @@ test('native Workflow registers configured pins only and native DO preserves wit
 });
 
 async function nativePrimaryScenario(revokeBeforeFinish=false){
- const start=Date.now()-1000,m={...manifest(),startAt:start,deadline:start+90000};
+ const start=Date.now()-1000,m={...manifest(start),startAt:start,deadline:start+90000};
  const httpPolicy={mode:'QA_OCCURRENCE_EXCLUSIVE',auth:{enabled:true,origin:'https://operations-manager.agentfriendlyweb.dev',teamDomain:'test.cloudflareaccess.com',audience:'synthetic-primary-native',clientId:'synthetic-primary-native.access'},principalRef:'c'.repeat(64),enrollments:[{enrollmentRef:'d'.repeat(64),projectRef:m.signal.projectRef}],serverConfigVersion:'0'.repeat(64),admissionRevision:1,serverDeadline:m.serverDeadline,qaBindingRef:'f'.repeat(64)};
  httpPolicy.serverConfigVersion=await computeOccurrenceServerConfigVersion(httpPolicy);
  const approval={manifest:m,identityRef:httpPolicy.principalRef,enrollmentRef:httpPolicy.enrollments[0].enrollmentRef,serverConfigVersion:httpPolicy.serverConfigVersion,planRevision:1};

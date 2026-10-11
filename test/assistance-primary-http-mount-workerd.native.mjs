@@ -11,7 +11,7 @@ import {computeQaClosureBaselineRef} from '../lib/assistance-qa-closure-catalog.
 import {createOccurrenceApprovalCatalog} from '../lib/assistance-occurrence-approvals.mjs';
 
 test('mounted own Worker verifies synthetic remote JWKS, real D1 six phases and real limiter',async()=>{
- const f=await httpFixture();let runtime;
+ const f=await httpFixture(Date.now());let runtime;
  try{
   const {registration}=await qaAdministrationFixture({createdAt:f.m.startAt,closeAt:f.m.deadline,expiresAt:f.m.deadline+10000});
   registration.contract='afw-qa-closure-approval/v2';registration.plan.occurrenceId=f.m.occurrenceId;registration.approvalDigest=f.planDigest;registration.plan.baselineRef=await computeQaClosureBaselineRef(registration);

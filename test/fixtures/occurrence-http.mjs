@@ -7,8 +7,8 @@ export const digestModule=await import('../../lib/assistance-occurrence-digest.m
 const {privateKey,publicKey}=await generateKeyPair('RS256');
 export const origin='https://operations-manager.agentfriendlyweb.dev';
 export async function signed(auth,patch={},aud=auth.audience,sub=''){return new SignJWT({type:'app',common_name:auth.clientId,...patch}).setProtectedHeader({alg:'RS256'}).setIssuer('https://'+auth.teamDomain).setAudience(aud).setSubject(sub).setExpirationTime(patch.exp??'5m').sign(privateKey);}
-export async function httpFixture(){
- const f=fixture();f.a.exec(readFileSync('worker/operations/assistance-occurrences-v2.sql','utf8'));f.a.exec(readFileSync('worker/operations/assistance-occurrences-v2-reservation-fence.sql','utf8'));
+export async function httpFixture(now){
+ const f=fixture(now);f.a.exec(readFileSync('worker/operations/assistance-occurrences-v2.sql','utf8'));f.a.exec(readFileSync('worker/operations/assistance-occurrences-v2-reservation-fence.sql','utf8'));
  const policy={mode:'QA_OCCURRENCE_EXCLUSIVE',auth:{enabled:true,origin,teamDomain:'test.cloudflareaccess.com',audience:'qa-operations-only',clientId:'synthetic-service.access'},principalRef:'c'.repeat(64),enrollments:[{enrollmentRef:'d'.repeat(64),projectRef:f.m.signal.projectRef}],serverConfigVersion:'0'.repeat(64),admissionRevision:1,serverDeadline:f.m.serverDeadline,qaBindingRef:'f'.repeat(64)};
  policy.serverConfigVersion=await adapter.computeOccurrenceServerConfigVersion(policy);
  const approval={manifest:f.m,identityRef:policy.principalRef,enrollmentRef:policy.enrollments[0].enrollmentRef,serverConfigVersion:policy.serverConfigVersion,planRevision:1};const catalog=createOccurrenceApprovalCatalog({db:f.db});await catalog.approve(approval);let current=policy,limitCalls=0;
