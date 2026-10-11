@@ -1,0 +1,11 @@
+# Entrada administrativa de instalación propia
+
+El Workflow `PrivateQaBootstrap` acepta ahora únicamente `{operation:'install',recordRef}` para invocar `installOwn()` en el preregistro propio configurado por el servidor. No incorpora rutas públicas, otra autoridad, permisos del solicitante ni selección de recursos. Conserva las comprobaciones de control vigente antes y después del paso y del RPC.
+
+El paso tiene cero reintentos. Sus resultados `pending` y `dispatch_attempted` se reducen a `installation_pending`: constancia documental que no demuestra ejecución cloud, disponibilidad del dispatcher, programación o éxito de la ocurrencia. El Workflow no guarda ni devuelve el permiso de consumo, admissionId, aprobación o credenciales. Las pérdidas de respuesta y los resultados inesperados permanecen `unavailable`; una observación posterior se tramita por separado, nunca reconstruyendo un permiso desde el estado del Workflow.
+
+Pruebas unitarias reproducen la ausencia de esta operación antes del cambio y verifican carga estricta, retirada de control, pérdida de ACK, dependencia ausente y caché sin llamada nueva. Ensayo local nativo con originales e identidad sintéticos: dos Workflows de instalación producen una sola llamada al dispatcher de prueba; reiniciar el primero conserva el historial y no produce otra llamada. Ese dispatcher es una fixture, no un servicio cloud instalado.
+
+La fuente queda cerrada y sin despliegue remoto. Siguen pendientes el despacho real alojado, la admisión HTTP ligada al consumo primario y su procedencia D1, el cierre/recuperación administrativo, la custodia efectiva, la publicación/adopción ordinaria y el ensayo integrado propio. Después corresponde una ocurrencia alojada con scheduler real y el ensayo de PC apagado acordado. El piloto de Max conserva su preview, aprobación y consentimiento propios.
+
+Verificación local: unitarias 9/9 y nativas aisladas 2/2; suite completa 1532 aprobadas, cero fallos y dos omitidas (171875.454 ms). Revisión independiente sin P1/P2. Detalle menor pendiente: liberar explícitamente el resultado disposable del nuevo RPC en la próxima composición. El ensayo nativo del revisor, superpuesto a la suite, observó una denegación temporal; la causa de contención es hipótesis, no acreditación de un defecto nuevo. Se conserva el ensayo aislado y no se amplían los plazos.
