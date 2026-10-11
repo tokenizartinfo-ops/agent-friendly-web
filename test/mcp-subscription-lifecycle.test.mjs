@@ -52,3 +52,14 @@ test('withdrawal during post-refresh authorization is observed before returning 
 test('cross-instance withdrawal completed during post-claim authorization prevents network delivery',async()=>{
  const {createMcpSubscriptionController}=await load(),f=fixture();try{const b=createMcpSubscriptionController(f.config),r=await b.subscribe(params());let calls=0;const original=f.config.readAuthorization;const a=createMcpSubscriptionController({...f.config,readAuthorization:async()=>{if(++calls===4){await b.unsubscribe({name:params().name,arguments:params().arguments,delivery:{mode:'webhook',url:params().delivery.url}});assert.equal(f.sends(),1);}return original();}});await assert.rejects(a.deliver(r.id,signal()));assert.equal(f.sends(),1);await assert.rejects(b.deliver(r.id,signal()));assert.equal(f.sends(),1);}finally{f.close();}
 });
+
+const otherDestination=()=>{const p=params();p.delivery.url='https://callback.agentfriendlyweb.dev/another-hook';return p;};
+test('own QA namespace permits one global subscription even with another destination or principal',async()=>{
+ const {createMcpSubscriptionController}=await load(),f=fixture();try{const a=createMcpSubscriptionController(f.config),r=await a.subscribe(params());await assert.rejects(createMcpSubscriptionController(f.config).subscribe(otherDestination()));f.setAuth({principalRef:'f'.repeat(64)});await assert.rejects(createMcpSubscriptionController(f.config).subscribe(params()));f.setAuth({principalRef:'a'.repeat(64)});await a.deliver(r.id,signal());assert.equal(f.sends(),2);}finally{f.close();}
+});
+test('global attempt cannot be replaced after withdrawal, expiry or lost creation ACK',async()=>{
+ const {createMcpSubscriptionController}=await load();for(const state of ['withdrawn','expired','lost']){const f=fixture();try{const a=createMcpSubscriptionController(f.config);if(state==='lost'){f.loseAck();await assert.rejects(a.subscribe(params()));}else{await a.subscribe(params());if(state==='withdrawn')await a.unsubscribe({name:params().name,arguments:params().arguments,delivery:{mode:'webhook',url:params().delivery.url}});else{f.setTime(601000);f.setAuth({expiresAt:1201000});}}const before=f.sends();await assert.rejects(createMcpSubscriptionController(f.config).subscribe(otherDestination()));assert.equal(f.sends(),before);}finally{f.close();}}
+});
+test('concurrent different callbacks share one global challenge and one delivery',async()=>{
+ const {createMcpSubscriptionController}=await load(),f=fixture();try{const a=createMcpSubscriptionController(f.config),b=createMcpSubscriptionController(f.config);const results=await Promise.allSettled([a.subscribe(params()),b.subscribe(otherDestination())]);assert.equal(results.filter(x=>x.status==='fulfilled').length,1);assert.equal(f.sends(),1);const r=results.find(x=>x.status==='fulfilled').value;await a.deliver(r.id,signal());await assert.rejects(b.deliver(r.id,signal()));assert.equal(f.sends(),2);}finally{f.close();}
+});
