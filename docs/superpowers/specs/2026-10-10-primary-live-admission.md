@@ -1,0 +1,11 @@
+# Validación primaria viva para admisión
+
+Base f84c323ce1094349aab49e64fceb67027625f659. Extender SAME preregistro con RPC fijo readOwnAdmissionScope sin parámetros. Reutilizar validación primaria de histórico/procedencia, pero exigir explícitamente AFW_QA_PRIMARY_ADMISSION_ENABLED, reserva y configuración vivas, consumo válido presente, originales/challenge actuales y D1 no revocado. Antes de retornar comprobar snapshot conjunto y freshness mediante checkpoint existente. No devolver firstACK locator ni admissionId, solo pins configurados y validados; no disparar ni reconstruir permisos.
+
+El cierre histórico sigue pudiendo leer después de expiry/revocación D1; no se convierte en admisión. No nuevo namespace, SQL write, endpoint público o despliegue. Test nativo genuineRED/GREEN: ausencia, coherencia consumida, revocación, expiry, corrupción consumo y retirada. Verificar suite/compilación, una revisión de rama.
+
+Adaptador HTTP propio: createPrimaryOccurrenceHttpAdapter requiere recordRef/creationRef y readers live/closure configurados por servidor; payload nunca los elige. Cada checked consulta el primario correspondiente y coteja pins/aprobación completa; timeout 5s, snapshot descriptor-safe, luego configuración y SQLclock último. Missing/malformed/foreign/withdrawn reader falla cerrado. Conserva adapter standalone existente para consumidores anteriores; no se monta Worker en este bloque ni se acredita distributed atomicity. Un reader closure válido solo permite stop, no live. Normalize/release disposable del RPC install pendiente PR388.
+
+Revisión final: beforeCloseAuthorize relee autoridad documental después de digest/journal awaits. La lectura viva lleva admission metadata con observedAt, evidenceAt original mínimo y freshUntil=min(deadline,evidenceAt+30000). HTTP valida la ventana después del SQLclock y preserva evidenceAt en server admission/journal, usando el fence SQL transaccional existente para no renovar evidencia al ejecutar el batch. No selector ni permiso adicional en este metadata.
+
+Ruling: primero preparar la lectura viva en la autoridad real, antes de consumirla en HTTP. Una callback constante o readOwnClosureScope no satisface esta etapa. El coste si falla esta división es retrasar el montaje HTTP, nunca abrirlo desde evidencia histórica.
