@@ -1,0 +1,18 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+const load=()=>import('../lib/dossier-mcp-event.mjs');
+const signal=()=>({version:'afw-dossier-event-v1',eventId:'a'.repeat(64),projectRef:'b'.repeat(64),revision:2,kind:'project_updated',observedAt:'2026-10-10T12:00:00.000Z'});
+test('event envelope keeps original opaque identity and date without content',async()=>{const{buildDossierMcpEvent}=await load(),s=signal();assert.deepEqual(buildDossierMcpEvent(s,s.projectRef),{eventId:s.eventId,name:'afw.dossier.changed',timestamp:s.observedAt,data:{projectRef:s.projectRef,revision:2,kind:'project_updated'},cursor:null});});
+test('foreign project and raw owner data cannot enter the event',async()=>{const{buildDossierMcpEvent}=await load(),s=signal();assert.throws(()=>buildDossierMcpEvent(s,'c'.repeat(64)));for(const field of ['ownerId','email','domain','text','instructions'])assert.throws(()=>buildDossierMcpEvent({...s,[field]:'private'},s.projectRef));});
+test('malformed signal dates references revisions and kinds fail closed',async()=>{const{buildDossierMcpEvent}=await load(),s=signal();for(const delta of [{revision:0},{revision:1.5},{kind:'help_requested'},{eventId:'x'},{version:'v2'},{observedAt:'2026-10-10'},{projectRef:{toString(){throw Error('must not coerce');}}}])assert.throws(()=>buildDossierMcpEvent({...s,...delta},s.projectRef));});
+test('rejected object fields never invoke coercion',async()=>{
+ const{buildDossierMcpEvent}=await load(),s=signal();
+ for(const field of ['projectRef','eventId','observedAt','revision']){
+  let calls=0;const value={[Symbol.toPrimitive](){calls++;return field==='revision'?2:s[field];}};
+  assert.throws(()=>buildDossierMcpEvent({...s,[field]:value},s.projectRef));
+  assert.equal(calls,0,field);
+ }
+});
+test('projection rejects accessors and exotic metadata without running it',async()=>{const{buildDossierMcpEvent}=await load();let called=0;const s=signal();Object.defineProperty(s,'kind',{enumerable:true,get(){called++;return 'project_updated';}});assert.throws(()=>buildDossierMcpEvent(s,'b'.repeat(64)));assert.equal(called,0);const symbol=signal();symbol[Symbol('private')]='private';assert.throws(()=>buildDossierMcpEvent(symbol,symbol.projectRef));assert.throws(()=>buildDossierMcpEvent(Object.assign(Object.create({secret:'private'}),signal()),'b'.repeat(64)));});
+test('catalog requires one exact project filter and copies cannot alter later discovery',async()=>{const{getDossierMcpEventDefinition}=await load(),first=getDossierMcpEventDefinition();assert.equal(first.name,'afw.dossier.changed');assert.deepEqual(first.delivery,['webhook']);assert.deepEqual(first.inputSchema.required,['projectRef']);assert.equal(first.inputSchema.additionalProperties,false);assert.deepEqual(Object.keys(first.payloadSchema.properties).sort(),['kind','projectRef','revision']);first.name='changed';first.payloadSchema.properties.text={type:'string'};const next=getDossierMcpEventDefinition();assert.equal(next.name,'afw.dossier.changed');assert.equal(Object.hasOwn(next.payloadSchema.properties,'text'),false);});
+test('reordered valid signal preserves event identity and detached output',async()=>{const{buildDossierMcpEvent}=await load(),s=signal(),a=buildDossierMcpEvent(s,s.projectRef),reordered=Object.fromEntries(Object.entries(s).reverse());assert.deepEqual(buildDossierMcpEvent(reordered,s.projectRef),a);s.revision=3;assert.equal(a.data.revision,2);a.data.kind='injected';assert.equal(buildDossierMcpEvent(reordered,reordered.projectRef).data.kind,'project_updated');});
