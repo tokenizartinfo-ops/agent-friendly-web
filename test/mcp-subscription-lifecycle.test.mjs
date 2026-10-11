@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
+import {createDecipheriv,hkdfSync,createHash} from 'node:crypto';
 const load=()=>import('../lib/mcp-subscription-lifecycle.mjs');
 const secret='whsec_'+Buffer.alloc(32,3).toString('base64');
 const params=()=>({name:'afw.dossier.changed',arguments:{projectRef:'c'.repeat(64)},delivery:{mode:'webhook',url:'https://callback.agentfriendlyweb.dev/hook',secret},ttlMs:600000,cursor:null});
@@ -9,7 +10,8 @@ function fixture(){
  let auth={principalRef:'a'.repeat(64),resourceRef:'b'.repeat(64),projectRef:'c'.repeat(64),permissionRef:'d'.repeat(64),enabled:true,expiresAt:601000};
  const storage={transaction(fn){const p=queue.then(async()=>{db.exec('BEGIN');let open=true;try{const value=await fn({get:async k=>{const r=db.prepare('SELECT v FROM records WHERE k=?').get(k);return r?JSON.parse(r.v):undefined;},put:async(k,v)=>db.prepare('INSERT INTO records VALUES(?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v').run(k,JSON.stringify(v))});db.exec('COMMIT');open=false;if(lost){lost=false;throw Error('lost ack');}return value;}catch(e){if(open)db.exec('ROLLBACK');throw e;}});queue=p.catch(()=>{});return p;}};
  const config={storage,custodyKey:Buffer.alloc(32,4),readAuthorization:async()=>structuredClone(auth),now:()=>time,send:async(url,envelope)=>{sends++;if(hook)await hook();if(mode==='throw')throw Error('private details');const body=JSON.parse(envelope.body);return {status:200,body:JSON.stringify({challenge:body.challenge})};}};
- return {config,setAuth(v){auth={...auth,...v};},setTime(v){time=v;},setMode(v){mode=v;},setHook(v){hook=v;},loseAck(){lost=true;},tamper(){const row=db.prepare('SELECT k,v FROM records LIMIT 1').get();const v=JSON.parse(row.v);v.state='active';v.expiresAt++;db.prepare('UPDATE records SET v=? WHERE k=?').run(JSON.stringify(v),row.k);},sends:()=>sends,dump:()=>db.prepare('SELECT v FROM records').all().map(r=>r.v).join('\n'),close:()=>db.close()};
+ const rows=()=>db.prepare('SELECT k,v FROM records').all().map(r=>({key:r.k,value:JSON.parse(r.v)}));
+ return {config,rows,setAuth(v){auth={...auth,...v};},setTime(v){time=v;},setMode(v){mode=v;},setHook(v){hook=v;},loseAck(){lost=true;},tamper(){const row=db.prepare('SELECT k,v FROM records LIMIT 1').get();const v=JSON.parse(row.v);v.state='active';v.expiresAt++;db.prepare('UPDATE records SET v=? WHERE k=?').run(JSON.stringify(v),row.k);},sends:()=>sends,dump:()=>db.prepare('SELECT v FROM records').all().map(r=>r.v).join('\n'),close:()=>db.close()};
 }
 test('subscription native SQLite stores encrypted custody and duplicate/restart never reverify',async()=>{
  const {createMcpSubscriptionController}=await load(),f=fixture();try{const a=createMcpSubscriptionController(f.config),r=await a.subscribe(params());assert.match(r.id,/^sub_[0-9a-f]{64}$/);assert.equal(r.refreshBefore,new Date(601000).toISOString());assert.equal(f.sends(),1);const b=createMcpSubscriptionController(f.config);assert.deepEqual(await b.subscribe(params()),r);assert.equal(f.sends(),1);assert.ok(!f.dump().includes(secret));assert.ok(!f.dump().includes('callback.agentfriendlyweb.dev'));}finally{f.close();}
@@ -62,4 +64,53 @@ test('global attempt cannot be replaced after withdrawal, expiry or lost creatio
 });
 test('concurrent different callbacks share one global challenge and one delivery',async()=>{
  const {createMcpSubscriptionController}=await load(),f=fixture();try{const a=createMcpSubscriptionController(f.config),b=createMcpSubscriptionController(f.config);const results=await Promise.allSettled([a.subscribe(params()),b.subscribe(otherDestination())]);assert.equal(results.filter(x=>x.status==='fulfilled').length,1);assert.equal(f.sends(),1);const r=results.find(x=>x.status==='fulfilled').value;await a.deliver(r.id,signal());await assert.rejects(b.deliver(r.id,signal()));assert.equal(f.sends(),2);}finally{f.close();}
+});
+
+test('transport encrypts exact signed bytes and consumes phase admission before calling sender',async()=>{
+ const {createMcpSubscriptionController}=await load(),f=fixture();try{
+ const original=f.config.send;let phases=0;
+ f.config.send=async(url,envelope,signal)=>{
+  const phase=envelope.headers['webhook-id'].startsWith('verify_')?'verification':'delivery';
+  const rows=f.rows().filter(r=>r.value.phase===phase);assert.equal(rows.length,1);
+  const r=rows[0].value;assert.equal(r.version,1);assert.equal(r.consumedAt,1000);assert.equal(r.preparedAt,1000);assert.equal(r.expiresAt,6000);
+  const key=Buffer.from(hkdfSync('sha256',Buffer.alloc(32,4),'afw-mcp-subscription/v1:','transport-encryption',32));
+  const decipher=createDecipheriv('aes-256-gcm',key,Buffer.from(r.cipher.iv,'base64'));decipher.setAAD(Buffer.from('afw-mcp-subscription/v1:transport:'+r.id+':'+r.generation+':'+phase));decipher.setAuthTag(Buffer.from(r.cipher.tag,'base64'));
+  const stored=Buffer.concat([decipher.update(Buffer.from(r.cipher.data,'base64')),decipher.final()]).toString('utf8');
+  assert.deepEqual(JSON.parse(stored),{url,envelope});assert.equal(r.digest,createHash('sha256').update(stored).digest('hex'));assert.ok(!f.dump().includes(envelope.headers['webhook-signature']));phases++;
+  return original(url,envelope,signal);
+ };
+ const a=createMcpSubscriptionController(f.config),r=await a.subscribe(params());await a.deliver(r.id,signal());assert.equal(phases,2);
+ }finally{f.close();}
+});
+
+test('lost prepared or consumed transport ACK stops challenge and delivery permanently across restart',async()=>{
+ const {createMcpSubscriptionController}=await load();
+ for(const phase of ['verification','delivery'])for(const checkpoint of ['prepared','consumed']){
+  const f=fixture();try{
+   const a=createMcpSubscriptionController(f.config);let receipt;if(phase==='delivery')receipt=await a.subscribe(params());
+   const original=f.config.storage.transaction;let hit=false;
+   f.config.storage.transaction=fn=>original(async tx=>fn({...tx,put:async(k,v)=>{await tx.put(k,v);if(v.phase===phase&&(checkpoint==='prepared'?v.consumedAt===null:v.consumedAt!==null)){hit=true;f.loseAck();}}}));
+   const before=f.sends();await assert.rejects(phase==='verification'?a.subscribe(params()):a.deliver(receipt.id,signal()));assert.equal(hit,true);assert.equal(f.sends(),before);
+   const restarted=createMcpSubscriptionController(f.config);await assert.rejects(phase==='verification'?restarted.subscribe(params()):restarted.deliver(receipt.id,signal()));assert.equal(f.sends(),before);
+  }finally{f.close();}
+ }
+});
+test('withdrawal or fixed transport deadline crossing during durable preparation prevents sender invocation',async()=>{
+ const {createMcpSubscriptionController}=await load();for(const change of ['withdraw','deadline']){
+  const f=fixture();try{
+   const original=f.config.storage.transaction;let changed=false;
+   f.config.storage.transaction=fn=>original(async tx=>fn({...tx,put:async(k,v)=>{await tx.put(k,v);if(v.phase==='verification'&&v.consumedAt===null&&!changed){changed=true;if(change==='withdraw')f.setAuth({enabled:false});else f.setTime(6001);}}}));
+   const a=createMcpSubscriptionController(f.config);await assert.rejects(a.subscribe(params()));assert.equal(changed,true);assert.equal(f.sends(),0);await assert.rejects(createMcpSubscriptionController(f.config).subscribe(params()));assert.equal(f.sends(),0);
+  }finally{f.close();}
+ }
+});
+test('withdrawal during the final transport read ACK blocks both sender phases',async()=>{
+ const {createMcpSubscriptionController}=await load();for(const phase of ['verification','delivery'])for(const withdrawal of ['permission','subscription']){
+  const f=fixture();try{
+   const a=createMcpSubscriptionController(f.config);let r;if(phase==='delivery')r=await a.subscribe(params());const before=f.sends(),other=createMcpSubscriptionController(f.config);
+   const original=f.config.storage.transaction;let changed=false;
+   f.config.storage.transaction=fn=>original(fn).then(async value=>{if(value?.payload?.envelope&&!changed){changed=true;if(withdrawal==='permission')f.setAuth({enabled:false});else await other.unsubscribe({name:params().name,arguments:params().arguments,delivery:{mode:'webhook',url:params().delivery.url}});}return value;});
+   await assert.rejects(phase==='verification'?a.subscribe(params()):a.deliver(r.id,signal()));assert.equal(changed,true);assert.equal(f.sends(),before);
+  }finally{f.close();}
+ }
 });
