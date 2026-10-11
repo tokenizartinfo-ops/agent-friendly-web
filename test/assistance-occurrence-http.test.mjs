@@ -12,6 +12,27 @@ async function ownScope(f){
  registration.plan.baselineRef=await computeQaClosureBaselineRef(registration);
  return {registration,approval:f.approval};
 }
+test('primary SQL clock may catch up within three samples but never accepts lag, regression, expiry or withdrawn policy',async()=>{
+ for(const mode of ['catch-up','third-sample','persistent-lag','regression','expired','withdrawn']){
+  const f=await httpFixture(Date.now());try{
+   const scope=await ownScope(f),t=Date.now()-1;let samples=0;
+   const live={...scope,admission:{contract:'afw-primary-admission-observation/v1',observedAt:t,evidenceAt:t,freshUntil:Math.min(f.m.deadline,t+30000)}};
+   const db={prepare:s=>{const stmt=f.db.prepare(s);if(s.startsWith('SELECT')&&s.includes("unixepoch('subsec')"))return {...stmt,first:async()=>{
+    samples++;if(samples===1||mode==='persistent-lag'||mode==='third-sample'&&samples===2)return {time:t-4};
+    if(mode==='regression')return {time:t-5};
+    if(mode==='expired')return {time:live.admission.freshUntil};
+    if(mode==='withdrawn')f.setPolicy({...f.policy,mode:'QA_OFF'});
+    return {time:t};
+   }};return stmt;},batch:ss=>f.db.batch(ss)};
+   const h=adapter.createPrimaryOccurrenceHttpAdapter({...f.options,db,primary:{recordRef:scope.registration.plan.baselineRef,creationRef:scope.registration.provisioning.creationRef,readLive:async()=>live,readClosure:async()=>scope}});
+   const response=await h(f.makeRequest('/assistance/occurrences/create',{occurrenceId:f.m.occurrenceId}));
+   const accepted=mode==='catch-up'||mode==='third-sample';
+   assert.equal(response.status,accepted?200:409,mode);
+   assert.equal(f.a.prepare('SELECT count(*) n FROM assistance_occurrences').get().n,accepted?1:0,mode);
+   assert.equal(samples,mode==='third-sample'?4:mode==='catch-up'||mode==='persistent-lag'?3:2,mode);
+  }finally{f.cleanup();}
+ }
+});
 test('primary stop rereads closure authority after awaited journal lookup',async()=>{
  const f=await httpFixture();try{
   const scope=await ownScope(f);let allowed=true;
