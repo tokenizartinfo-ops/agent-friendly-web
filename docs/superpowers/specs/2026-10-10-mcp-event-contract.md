@@ -1,0 +1,11 @@
+# Diseño: metadata de expedientes para MCP Events
+
+Resultado: preparar el contrato local del evento afw.dossier.changed sobre señales operacionales ya existentes. El owner pidió despertar al gerente cloud por eventos y conservar suscripción/modelo; autorización amplia de ejecución inline vigente. Diseño/planning propios, sin nueva solicitud de claves o alcance.
+
+Referencia primaria abierta10oct2026: https://developers.openai.com/plugins/build/mcp-events. MCP2.0/protocol2026-07-28, events/list/subscribe/unsubscribe, callback validado, StandardWebhooks, almacenamiento persistente, vigencia y revocación. Un ACK2xx es recepción asíncrona, no revisión terminada. No se acredita compatibilidad ni disponibilidad de la cuenta por documentación.
+
+Primer bloque acotado: catálogo de un evento y conversión pura del contrato exacto afw-dossier-event-v1 (lib/dossier-supervision.mjs). Envelope usa eventId opaco original, fecha original, name fijo, cursor null y data con projectRef/revision/kind solamente. Filtro projectRef exacto. Datos adicionales, accesores, símbolos, valores incorrectos o referencia ajena se rechazan antes de proyección; no ejecutar código aportado. Clonar definición para impedir cambio del catálogo entre consumidores. La función no acredita persistencia/owner: el host futuro resolverá permiso y evento confirmado del servidor.
+
+No modificar MCP público ni delegado, no anunciar events en runtime hasta soportar el lifecycle. Sin red, almacenamiento, callback, secretos, endpoint, OAuthscope, despliegue o task. No es dispatcher operativo ni pruebaPCoff.
+
+Ruta siguiente: lifecycle en endpoint autenticado propio y custodia protegida; TTLfinito10min/QApropia, verificación callback HTTPSconDNS/SSRF/redirectguards, secreto24-64bytes solamente en custodia, identidaddeterminista y revocación porlectura. Luego entrega firmada/registro durable con presupuesto y resultado independiente; rescan plugin, suscripción ChatGPT real, recepciónoriginal y vínculo exacto a fuente/cloud/modelo antes del ensayo. Evitar usar código arbitrario enviado por evento y bucles de autogeneración. CLIcloudlegacy no encuentra entornoactual, no sustituirlo por APIpagada.
