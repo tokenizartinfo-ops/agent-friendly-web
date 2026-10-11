@@ -52,6 +52,7 @@ export class PrivateQaPreregistration extends DurableObject {
  installOwn(){return this.#reservation('install');}
  readOwnInstallationHistory(){return this.#reservation('installationHistory');}
  readOwnClosureScope(){return this.#reservation('closure');}
+ readOwnAdmissionScope(){return this.#reservation('admission');}
  async #reservation(method){let active=true,transaction,installStarted=false;const startedAt=Date.now(),env=this.configuration,base=this.#primaryStorage;
   const live=()=>{const t=Date.now();if(!active||t<startedAt||t-startedAt>5000)throw Error('Primary operation unavailable');};
   // Invocation-local scope: nested readers share the current primary tx.
@@ -59,19 +60,29 @@ export class PrivateQaPreregistration extends DurableObject {
   try{
    const initial=pins(env),creationRef=initial?.registration?.provisioning?.creationRef;if(!creationRef)return method==='install'?{state:'unavailable'}:null;
    const documentary=['history','installationHistory','closure'].includes(method),dispatcher=env.AFW_QA_OCCURRENCE_DISPATCH;
-   const configuration=()=>JSON.stringify({pins:pins(env),control:originalControl(env),provider:env.AFW_QA_PROVIDER_CONTEXT,providerEnabled:env.AFW_QA_PROVIDER_OBSERVATION_ENABLED,reservationEnabled:env.AFW_QA_PRIMARY_RESERVATION_ENABLED,installationEnabled:env.AFW_QA_INSTALLATION_ENABLED});
+   const configuration=()=>JSON.stringify({pins:pins(env),control:originalControl(env),provider:env.AFW_QA_PROVIDER_CONTEXT,providerEnabled:env.AFW_QA_PROVIDER_OBSERVATION_ENABLED,reservationEnabled:env.AFW_QA_PRIMARY_RESERVATION_ENABLED,installationEnabled:env.AFW_QA_INSTALLATION_ENABLED,admissionEnabled:env.AFW_QA_PRIMARY_ADMISSION_ENABLED});
    const fingerprint=configuration(),pinsFingerprint=JSON.stringify(initial);
-   const checked=()=>{live();if(JSON.stringify(pins(env))!==pinsFingerprint||(!documentary&&(env.AFW_QA_PRIMARY_RESERVATION_ENABLED!=='true'||configuration()!==fingerprint))||(method==='closure'&&env.AFW_QA_PRIMARY_CATALOG_ENABLED!=='true')||(method==='install'&&(env.AFW_QA_INSTALLATION_ENABLED!=='true'||env.AFW_QA_OCCURRENCE_DISPATCH!==dispatcher)))throw Error('Primary operation unavailable');};
+   const checked=()=>{live();if(JSON.stringify(pins(env))!==pinsFingerprint||(!documentary&&(env.AFW_QA_PRIMARY_RESERVATION_ENABLED!=='true'||configuration()!==fingerprint))||(method==='closure'&&env.AFW_QA_PRIMARY_CATALOG_ENABLED!=='true')||(method==='admission'&&env.AFW_QA_PRIMARY_ADMISSION_ENABLED!=='true')||(method==='install'&&(env.AFW_QA_INSTALLATION_ENABLED!=='true'||env.AFW_QA_OCCURRENCE_DISPATCH!==dispatcher)))throw Error('Primary operation unavailable');};
    checked();
    // Missing dispatcher stays closed before reservation or any D1 write.
    if(method==='install'&&(typeof dispatcher?.dispatch!=='function'||!env.AFW_QA_DB))return {state:'unavailable'};
    const actor=createPrivateQaPreregistration({storage,readPreregistration:()=>pins(env),readOriginalControl:()=>originalControl(env)}),challenge=createPrivateCustodyChallenge({storage,readInstallation:()=>pins(env)});
-   const installation=['install','closure'].includes(method)?createPrivateInstallationD1({db:env.AFW_QA_DB,now:()=>{checked();return Date.now();}}):null;
+   const installation=['install','closure','admission'].includes(method)?createPrivateInstallationD1({db:env.AFW_QA_DB,now:()=>{checked();return Date.now();}}):null;
    const producer=createPrivateQaProvisioning({storage,readPins:async()=>{checked();const p=await actor.read(),original=await actor.readOperatorObservation();checked();if(!p||!original)throw Error('Primary operation unavailable');return {...p,cloud:originalControl(env).cloud,provider:providerContext(env)};},readAdministrativeEvidence:async({signal})=>{checked();const provider=await observeProvider(actor,env,signal),original=await actor.readOperatorObservation();checked();if(!provider||!original)throw Error('Primary operation unavailable');return {provider,execution:original.correlation};},readChallengeObservation:async()=>{checked();const status=await challenge.status();checked();return {contract:'afw-private-qa-observation/v1',state:'observed',recordRef:initial.registration.plan.baselineRef,challenge:status};},readInstallationD1:installation?({occurrenceId})=>installation.read(occurrenceId):undefined});
    const ref=initial.registration.plan.baselineRef,r=initial.registration.resources;
    const prereg='afw-private-qa-preregistration/v1:current',originals='afw-private-qa-originals/v1:current',challengeKey='afw-private-custody-challenge/v1:current',reservation='afw-private-qa-provisioning-record/v1:',holds='afw-private-qa-resource-reservation/v1:',journal='afw-private-evidence-journal/v1:';
    const keys=[prereg,prereg+':withdrawn',originals,challengeKey,challengeKey+':withdrawn',reservation+'creation:'+creationRef,reservation+'record:'+ref,holds+'record:'+ref,...['token:'+r.tokenId,'application:'+r.applicationId,'policy:'+r.applicationId+':'+r.policyId,'worker:'+r.workerName].map(k=>holds+'owner:'+r.accountId+':'+k),journal+'head:'+ref,...Array.from({length:5},(_,i)=>journal+'entry:'+ref+':'+(i+1)),...['intent','finalization','consumption'].map(kind=>'afw-private-installation-'+kind+'/v1:'+ref)];
    const same=(a,b)=>a instanceof Map&&b instanceof Map&&JSON.stringify(keys.map(k=>a.get(k)))===JSON.stringify(keys.map(k=>b.get(k)));
+   const evidenceTime=(rows,original)=>{
+    const c=rows.get(challengeKey),o=original.originals;
+    return Math.min(o.context.observedAt,o.execution.observedAt,o.execution.turnStartedAt,o.execution.turnCompletedAt,c.issuedAt,c.consumedAt);
+   };
+   const freshnessLimit=(rows,original,history)=>Math.min(history.deadline,evidenceTime(rows,original)+30000);
+   const fresh=(rows,original,history)=>{
+    if(!original||rows.has(challengeKey+':withdrawn'))return false;
+    const t=Date.now();
+    return t>=original.correlation.observedAt&&t<freshnessLimit(rows,original,history);
+   };
    const checkpoint=async value=>{
     if(!value)return value;
     // Complete validation between atomic snapshots; no await follows final.
@@ -80,8 +91,7 @@ export class PrivateQaPreregistration extends DurableObject {
     const original=await actor.readOperatorObservation();if(!original)return null;
     const final=await storage.get(keys);checked();
     if(!same(before,final)||final.has(prereg+':withdrawn')||final.has(challengeKey+':withdrawn'))return null;
-    const c=final.get(challengeKey),o=original.originals,t=Date.now();
-    if(t>=history.deadline||t<original.correlation.observedAt||t>Math.min(o.context.observedAt,o.execution.observedAt,o.execution.turnStartedAt,o.execution.turnCompletedAt,c.issuedAt,c.consumedAt)+30000)return null;
+    if(!fresh(final,original,history))return null;
     return value;
    };
    const invoke=async(name,...args)=>{checked();const value=await producer[name](creationRef,...args);checked();return checkpoint(value);};
@@ -91,18 +101,23 @@ export class PrivateQaPreregistration extends DurableObject {
     const before=await storage.get(keys),value=await history(),final=await storage.get(keys);checked();
     return same(before,final)&&historyMatches(before,value)&&value.reservation?value:null;
    }
-   if(method==='closure'){
-    const before=await storage.get(keys),registered=await actor.readForClosure(),value=await history();checked();
+   if(method==='closure'||method==='admission'){
+    const admitting=method==='admission';
+    const before=await storage.get(keys),registered=await (admitting?actor.read():actor.readForClosure()),value=await history();checked();
     if(!historyMatches(before,value)||JSON.stringify(registered)!==pinsFingerprint||value.reservation?.state!=='reserved'||value.intent?.state!=='write_started'||!value.finalization)return null;
+    const original=admitting?await actor.readOperatorObservation():null;checked();
+    if(admitting&&(!original||value.consumption?.state!=='consumed'))return null;
     if(value.reservation.approvalPinsDigest!==await computeAdministrativeResultDigest(initial)||value.reservation.deadline!==initial.registration.plan.closeAt||JSON.stringify(before.get(holds+'record:'+ref)?.resources)!==JSON.stringify(r))return null;
     const first=await installation.read(initial.registration.plan.occurrenceId),clock=()=>{checked();return Date.now();};
-    if(!await matchPrivateInstallationD1(value.reservation,value.intent,initial.approval,first,clock,{allowRevoked:true}))return null;
+    if(!await matchPrivateInstallationD1(value.reservation,value.intent,initial.approval,first,clock,{allowRevoked:!admitting}))return null;
     const expected=await expectedPrivateInstallationDigests(value.reservation,value.intent,initial.approval,clock);
     if(!expected||value.finalization.approvalDigest!==expected.approvalDigest||value.finalization.provenanceDigest!==expected.provenanceDigest)return null;
     const second=await installation.read(initial.registration.plan.occurrenceId);if(JSON.stringify(first)!==JSON.stringify(second))return null;
     const final=await storage.get(keys);checked();
     if(!same(before,final)||final.has(prereg+':withdrawn')||JSON.stringify(final.get(reservation+'record:'+ref))!==JSON.stringify(value.reservation))return null;
-    // Historical authority for own closure only, never a live dispatch permit.
+    if(admitting&&!fresh(final,original,value.reservation))return null;
+    if(admitting)return {...structuredClone(initial),admission:{contract:'afw-primary-admission-observation/v1',observedAt:Date.now(),evidenceAt:evidenceTime(final,original),freshUntil:freshnessLimit(final,original,value.reservation)}};
+    // Admission validates current pins; neither read returns a dispatch permit.
     return structuredClone(initial);
    }
    if(method==='install'){
@@ -124,7 +139,7 @@ export class PrivateQaPreregistration extends DurableObject {
 export class PrivateQaBootstrap extends WorkflowEntrypoint {
  run(event,step){let params=event.payload;try{if(typeof params==='string'&&params.length<=8192){const decoded=JSON.parse(params);if(params.length<=256||decoded?.operation==='originals')params=decoded;}}catch{/* Strict handlers reject malformed payloads. */}
   if(params?.operation==='observe')return observePrivateQa(this.env,params);
-  return createPrivateAdminBootstrap({install:()=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).installOwn(),readControl:()=>control(this.env),readRegistered:async ref=>(await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).read())?.registration?.plan?.baselineRef===ref,register:ref=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).register(ref),appendOriginals:(ref,sequence,originals)=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).appendOperatorObservation(ref,sequence,originals),readOriginals:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).readOperatorObservation();try{return structuredClone(value);}finally{value?.[Symbol.dispose]?.();}}}).run(event.payload,step);}
+  return createPrivateAdminBootstrap({install:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).installOwn();try{return {state:value?.state};}finally{value?.[Symbol.dispose]?.();}},readControl:()=>control(this.env),readRegistered:async ref=>(await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).read())?.registration?.plan?.baselineRef===ref,register:ref=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).register(ref),appendOriginals:(ref,sequence,originals)=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).appendOperatorObservation(ref,sequence,originals),readOriginals:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).readOperatorObservation();try{return structuredClone(value);}finally{value?.[Symbol.dispose]?.();}}}).run(event.payload,step);}
 }
 export function observePrivateQa(env,params){const actor=()=>env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa'));
  // workerd adds a disposable RPC handle to otherwise plain metadata. Remove
