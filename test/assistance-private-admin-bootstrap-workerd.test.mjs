@@ -1,4 +1,7 @@
 import test from 'node:test';
+// Run the own native mount in this same test process, sequentially with primary
+// bootstrap. Its short authority window must not compete with a second runtime.
+import './assistance-primary-http-mount-workerd.native.mjs';
 import {readFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';

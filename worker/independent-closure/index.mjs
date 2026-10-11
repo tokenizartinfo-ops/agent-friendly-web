@@ -1,4 +1,5 @@
 import {computeAdministrativeResultDigest} from '../../lib/assistance-administrative-closure-readback.mjs';
+import {fetchOwnOccurrence} from './occurrence-host.mjs';
 import {createPrimaryQaInstaller} from '../../lib/assistance-private-qa-installer.mjs';
 import {createPrivateInstallationD1} from '../../lib/assistance-private-installation-d1.mjs';
 import {matchPrivateInstallationD1,expectedPrivateInstallationDigests} from '../../lib/assistance-private-installation-finalization.mjs';
@@ -178,5 +179,5 @@ export class IndependentClosure extends DurableObject {
  alarm(){return this.actor.alarm();}
  fetch(){return new Response(null,{status:404});}
 }
-const worker={async fetch(request,env){if(env?.AFW_QA_CHALLENGE_ENABLED!=='true'||!challengePath(request)||!env.AFW_QA_PREREGISTRY)return new Response(null,{status:404});try{return await env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa')).fetch(request);}catch{return Response.json({code:'unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});}}};
+const worker={async fetch(request,env){if(new URL(request.url).pathname.startsWith('/assistance/occurrences/'))return fetchOwnOccurrence(request,env);if(env?.AFW_QA_CHALLENGE_ENABLED!=='true'||!challengePath(request)||!env.AFW_QA_PREREGISTRY)return new Response(null,{status:404});try{return await env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa')).fetch(request);}catch{return Response.json({code:'unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});}}};
 export default worker;

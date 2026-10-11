@@ -58,7 +58,10 @@
       "class_name": "PrivateQaBootstrap"
     }
   ],
+  "ratelimits": [{"name":"AFW_QA_OCCURRENCE_RATE_LIMITER","namespace_id":"2026101003","simple":{"limit":10,"period":60}}],
   "vars": {
+    "AFW_QA_HTTP_ENABLED": "false",
+    "AFW_QA_HTTP_POLICY": "",
     "AFW_QA_BOOTSTRAP_ENABLED": "false",
     "AFW_QA_PREREGISTRATION": "",
     "AFW_QA_CHALLENGE_ENABLED": "false",
