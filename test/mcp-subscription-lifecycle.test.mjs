@@ -114,3 +114,82 @@ test('withdrawal during the final transport read ACK blocks both sender phases',
   }finally{f.close();}
  }
 });
+function nodeFixture(){
+ const f=fixture();let ready=true,verified=true,calls=0,controller;
+ const nodeHost={processGeneration:'f'.repeat(64),readReadiness:async()=>({purpose:'afw.mcp-node-readiness.v1',processGeneration:'f'.repeat(64),ready,expiresAt:601000}),readIdentity:async()=>({purpose:'afw.mcp-native-dispatch.v1',processGeneration:'f'.repeat(64),verified,expiresAt:601000}),send:async reference=>{
+  const handoff=await controller.consumeNodeDispatch(reference);assert.deepEqual(handoff.reference,reference);assert.ok(handoff.dispatchExpiresAt<=reference.expiresAt);assert.equal(f.rows().find(r=>r.value.phase===reference.phase).value.nodeStartedAt,1000);
+  calls++;return {status:200,body:JSON.stringify({challenge:JSON.parse(handoff.envelope.body).challenge})};
+ }};
+ return {...f,nodeHost,setController:c=>{controller=c;},setReady:v=>{ready=v;},setVerified:v=>{verified=v;},nativeCalls:()=>calls};
+}
+test('Node readiness is required before any durable challenge is spent',async()=>{
+ const {createMcpSubscriptionController}=await load(),f=nodeFixture();try{
+ f.setReady(false);const a=createMcpSubscriptionController({...f.config,nodeHost:f.nodeHost});f.setController(a);await assert.rejects(a.subscribe(params()));assert.equal(f.rows().length,0);assert.equal(f.sends(),0);assert.equal(f.nativeCalls(),0);
+ }finally{f.close();}
+});
+test('same phase journal consumes Node dispatch once for the fixed process; no downgrade or process replacement',async()=>{
+ const {createMcpSubscriptionController}=await load(),f=nodeFixture();try{
+ const a=createMcpSubscriptionController({...f.config,nodeHost:f.nodeHost});f.setController(a);const r=await a.subscribe(params());await a.deliver(r.id,signal());assert.equal(f.nativeCalls(),2);assert.equal(f.sends(),0);
+ const entries=f.rows().filter(r=>r.value.phase);assert.equal(entries.length,2);assert.ok(entries.every(r=>r.value.version===2&&r.value.nodeProcessGeneration==='f'.repeat(64)&&r.value.nodeStartedAt===1000&&r.value.nodeDeadline===6000));
+ for(const row of entries){const t=row.value,ref={id:t.id,generation:t.generation,phase:t.phase,digest:t.digest,processGeneration:t.nodeProcessGeneration,expiresAt:t.expiresAt};await assert.rejects(createMcpSubscriptionController({...f.config,nodeHost:f.nodeHost}).consumeNodeDispatch(ref));}
+ await assert.rejects(createMcpSubscriptionController(f.config).subscribe(params()));await assert.rejects(createMcpSubscriptionController({...f.config,nodeHost:{...f.nodeHost,processGeneration:'e'.repeat(64)}}).subscribe(params()));assert.equal(f.nativeCalls(),2);
+ }finally{f.close();}
+});
+test('unverified Node and unknown first consume ACK cannot obtain or reconstruct the envelope',async()=>{
+ const {createMcpSubscriptionController}=await load();for(const mode of ['identity','ack']){
+  const f=nodeFixture();try{
+   const a=createMcpSubscriptionController({...f.config,nodeHost:f.nodeHost});f.setController(a);let ref;
+   f.nodeHost.send=async r=>{ref=r;if(mode==='identity')f.setVerified(false);else f.loseAck();return a.consumeNodeDispatch(r);};
+   // Host callbacks are snapshotted: construct after installing the test sender.
+   const b=createMcpSubscriptionController({...f.config,nodeHost:f.nodeHost});f.setController(b);await assert.rejects(b.subscribe(params()));assert.ok(ref);assert.equal(f.nativeCalls(),0);assert.equal(f.sends(),0);
+   f.setVerified(true);const restarted=createMcpSubscriptionController({...f.config,nodeHost:f.nodeHost});
+   if(mode==='ack')await assert.rejects(restarted.consumeNodeDispatch(ref));
+   else await assert.rejects(restarted.consumeNodeDispatch({...ref,processGeneration:'e'.repeat(64)}));
+  }finally{f.close();}
+ }
+});
+test('a Node sender receipt without consuming the original native stage cannot confirm delivery',async()=>{
+ const {createMcpSubscriptionController}=await load(),f=nodeFixture();try{
+ const a=createMcpSubscriptionController({...f.config,nodeHost:f.nodeHost});f.setController(a);const r=await a.subscribe(params());
+ const fake=createMcpSubscriptionController({...f.config,nodeHost:{...f.nodeHost,send:async()=>({status:200,body:''})}});
+ await assert.rejects(fake.deliver(r.id,signal()));assert.equal(f.nativeCalls(),1);assert.equal(f.rows().find(r=>r.value.phase==='delivery').value.nodeStartedAt,null);
+ }finally{f.close();}
+});
+test('withdrawal, Node identity retirement and original expiry during native consume ACK disclose no envelope',async()=>{
+ const {createMcpSubscriptionController}=await load();for(const phase of ['verification','delivery'])for(const event of ['permission','identity','expiry']){
+  const f=nodeFixture();try{
+   const a=createMcpSubscriptionController({...f.config,nodeHost:f.nodeHost});f.setController(a);let r;if(phase==='delivery')r=await a.subscribe(params());const before=f.nativeCalls();
+   const original=f.config.storage.transaction;let changed=false;
+   f.config.storage.transaction=fn=>original(fn).then(value=>{if(value?.phase===phase&&value.nodeStartedAt!==null&&!changed){changed=true;if(event==='permission')f.setAuth({enabled:false});else if(event==='identity')f.setVerified(false);else f.setTime(6001);}return value;});
+   await assert.rejects(phase==='verification'?a.subscribe(params()):a.deliver(r.id,signal()));assert.equal(changed,true);assert.equal(f.nativeCalls(),before);
+  }finally{f.close();}
+ }
+});
+test('initial Node process and identity leases never extend when later observations report more time',async()=>{
+ const {createMcpSubscriptionController}=await load();for(const lease of ['process','identity']){
+  const f=nodeFixture();try{
+   let calls=0;const field=lease==='process'?'readReadiness':'readIdentity';const original=f.nodeHost[field];f.nodeHost[field]=async(...args)=>({...await original(...args),expiresAt:++calls===1?1002:601000});
+   const a=createMcpSubscriptionController({...f.config,nodeHost:f.nodeHost});f.setController(a);const r=await a.subscribe(params());
+   if(lease==='process')assert.equal(r.refreshBefore,new Date(1002).toISOString());
+   assert.equal(f.rows().find(r=>r.value.phase==='verification').value.nodeDeadline,1002);
+  }finally{f.close();}
+ }
+});
+test('Node stage is closed without a host and refuses caller destinations or accessor configuration',async()=>{
+ const {createMcpSubscriptionController}=await load(),f=fixture();try{
+ let calls=0;const original=f.config.storage.transaction;f.config.storage.transaction=fn=>{calls++;return original(fn);};
+ await assert.rejects(createMcpSubscriptionController(f.config).consumeNodeDispatch({}));assert.equal(calls,0);
+ const host={processGeneration:'f'.repeat(64),readReadiness:async()=>{},send:async()=>{}};Object.defineProperty(host,'readIdentity',{get(){calls++;throw Error('getter');},enumerable:true});assert.throws(()=>createMcpSubscriptionController({...f.config,nodeHost:host}));assert.equal(calls,0);
+ }finally{f.close();}
+ const n=nodeFixture();try{const a=createMcpSubscriptionController({...n.config,nodeHost:n.nodeHost});await assert.rejects(a.consumeNodeDispatch({id:'sub_'+'a'.repeat(64),generation:'b'.repeat(64),phase:'verification',digest:'c'.repeat(64),processGeneration:'f'.repeat(64),expiresAt:6000,url:'https://foreign.example'}));assert.equal(n.rows().length,0);}finally{n.close();}
+});
+test('cross-instance unsubscribe during final Node read ACK never discloses a handoff',async()=>{
+ const {createMcpSubscriptionController}=await load();for(const phase of ['verification','delivery']){
+  const f=nodeFixture();try{
+   const a=createMcpSubscriptionController({...f.config,nodeHost:f.nodeHost});f.setController(a);let r;if(phase==='delivery')r=await a.subscribe(params());const before=f.nativeCalls(),other=createMcpSubscriptionController({...f.config,nodeHost:f.nodeHost});
+   const original=f.config.storage.transaction;let changed=false;
+   f.config.storage.transaction=fn=>original(fn).then(async value=>{if(value?.s&&value?.t&&!changed){changed=true;await other.unsubscribe({name:params().name,arguments:params().arguments,delivery:{mode:'webhook',url:params().delivery.url}});}return value;});
+   await assert.rejects(phase==='verification'?a.subscribe(params()):a.deliver(r.id,signal()));assert.equal(changed,true);assert.equal(f.nativeCalls(),before);assert.equal(f.rows().find(r=>r.value.state).value.state,'withdrawn');
+  }finally{f.close();}
+ }
+});
