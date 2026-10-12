@@ -1,4 +1,6 @@
 import test from 'node:test';
+// Product port8080 checks share one native test process and run sequentially.
+import './mcp-original-container-runtime.native.mjs';
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {once} from 'node:events';
