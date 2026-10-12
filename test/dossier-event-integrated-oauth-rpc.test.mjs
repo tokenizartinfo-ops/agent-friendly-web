@@ -1,0 +1,24 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {registerHooks} from 'node:module';
+import {Client,StreamableHTTPClientTransport} from '@modelcontextprotocol/client';
+import {z} from 'zod';
+import {fixture as nodeFixture} from './fixtures/mcp-own-durable-host.mjs';
+import {localOAuthFixture,authorize,approve,exchange} from './fixtures/delegated-oauth-runtime.mjs';
+import {createDossierEventRpcAuthority} from '../lib/dossier-event-rpc-authority.mjs';
+import {createOwnDurableEventHost} from '../lib/mcp-own-durable-host.mjs';
+const hook=registerHooks({resolve(s,c,next){return s==='cloudflare:workers'?{url:'data:text/javascript,export class WorkerEntrypoint {}',shortCircuit:true}:next(s,c);}});
+const {createDelegatedOAuthWorker}=await import('../lib/delegated-oauth-worker.mjs');hook.deregister();
+test('actual local OAuth exchange and same primary RPC authority reach original signed Node event loop',async()=>{
+ const f=await localOAuthFixture(o=>createDelegatedOAuthWorker({...o,eventsAuthorityFactory:options=>createDossierEventRpcAuthority({enabled:true,...options})})),n=nodeFixture();let client;
+ try{const a=await authorize(f),approved=await approve(f,a),tokenResponse=await exchange(f,approved.headers.get('Location'),a.verifier),token=(await tokenResponse.json()).access_token;const grantId=f.sqlite.prepare('SELECT id FROM delegated_access_grants').get().id;
+ f.sqlite.exec('CREATE UNIQUE INDEX fixture_original_project_key ON site_projects(id)');f.sqlite.exec(readFileSync('db/dossier-monitoring-consent.sql','utf8'));f.sqlite.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.sqlite.exec('CREATE TABLE project_events(id TEXT PRIMARY KEY,project_id TEXT,user_id TEXT,type TEXT,created_at TEXT,payload_json TEXT);');
+ const startAt=Date.now()-1000,expiresAt=startAt+60000;f.sqlite.prepare('INSERT INTO dossier_monitoring_consent_events(grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)').run(grantId,'p-a','owner-a',f.client.clientId,f.resource,1,'grant','afw.dossier-monitoring.v1','11111111-1111-4111-8111-111111111111',startAt,expiresAt);
+ n.config.db=f.env.DB;n.config.context={grantId,subject:'owner-a',clientId:f.client.clientId,resource:f.resource,scopes:['afw:project:read','afw:evidence:read']};n.config.projectId='p-a';n.config.window={startAt,expiresAt};const host=createOwnDurableEventHost(n.config);n.setHost(host);
+ const policy={grantId,subject:'owner-a',projectId:'p-a',clientId:f.client.clientId,resource:f.resource,containerId:n.config.ctx.id.toString(),startAt,expiresAt};Object.assign(f.env,{AFW_DOSSIER_EVENTS_ENABLED:'true',AFW_DOSSIER_EVENTS_POLICY:JSON.stringify(policy),AFW_OAUTH_ISSUER:f.issuer,AFW_OAUTH_RESOURCE:f.resource,AFW_OAUTH_PILOT_PROJECT_ID:'p-a',AFW_DOSSIER_EVENTS_PROJECTION_SECRET:n.config.projectionSecret,AFW_DOSSIER_EVENTS_NODE:{idFromString(id){assert.equal(id,policy.containerId);return{toString:()=>id};},get(id){assert.equal(id.toString(),policy.containerId);return host;}}});
+ const fetch=async(input,init)=>{const request=new Request(input,init);request.headers.set('Authorization','Bearer '+token);request.headers.set('host',new URL(request.url).host);return f.worker.fetch(request,f.env,f.ctx);};client=new Client({name:'afw-local-original-oauth-rpc',version:'1'},{versionNegotiation:{mode:{pin:'2026-07-28'}}});await client.connect(new StreamableHTTPClientTransport(new URL(f.resource),{fetch}));
+ const catalog=await client.request({method:'events/list',params:{}},z.object({events:z.array(z.any())}));assert.equal(catalog.events.length,1);const projectRef=catalog.events[0].inputSchema.properties.projectRef.enum[0],params={name:'afw.dossier.changed',arguments:{projectRef},delivery:{mode:'webhook',url:'https://callback.agentfriendlyweb.dev/hook',secret:'whsec_'+Buffer.alloc(32,3).toString('base64')}};const receipt=await client.request({method:'events/subscribe',params},z.object({id:z.string()}));assert.equal(n.boots(),1);assert.equal(n.sends(),1);
+ f.sqlite.prepare('INSERT INTO project_events VALUES(?,?,?,?,?,?)').run('event-original','p-a','owner-a','project_updated',new Date().toISOString(),JSON.stringify({revision:1}));const delivery=await host.deliverSaved(receipt.id,'event-original');assert.equal(delivery.cloudReviewConfirmed,false);assert.equal(n.sends(),2);const {secret:ignored,...withdraw}=params.delivery;void ignored;await client.request({method:'events/unsubscribe',params:{name:params.name,arguments:params.arguments,delivery:withdraw}},z.object({}));assert.equal(n.config.ctx.container.running,false);assert.equal((await client.request({method:'events/list',params:{}},z.object({events:z.array(z.any())}))).events.length,0);assert.equal((await client.listTools()).tools.length,2);
+ }finally{if(client)await client.close();n.close();f.close();}
+});
