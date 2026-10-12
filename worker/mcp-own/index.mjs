@@ -2,6 +2,7 @@ import {DurableObject,WorkerEntrypoint} from 'cloudflare:workers';
 import {createDelegatedOAuthWorker} from '../../lib/delegated-oauth-worker.mjs';
 import {createOwnDurableEventHost} from '../../lib/mcp-own-durable-host.mjs';
 import {createDossierEventRpcAuthority,readDossierEventHostPolicy} from '../../lib/dossier-event-rpc-authority.mjs';
+import {runOwnEventSchedule} from '../../lib/mcp-own-event-schedule.mjs';
 const deny=()=>new Response('{"code":"unavailable"}',{status:404,headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
 const fail=()=>{throw Error('Private event Node unavailable');};
 // Build replaces these public program/revision literals; no key is embedded.
@@ -37,5 +38,5 @@ export class AfwNodeControl extends WorkerEntrypoint{
  }catch{return deny();}}
 }
 
-const worker={fetch(request,env,ctx){return createDelegatedOAuthWorker({issuer:env.AFW_OAUTH_ISSUER,resource:env.AFW_OAUTH_RESOURCE,eventsAuthorityFactory:options=>createDossierEventRpcAuthority({enabled:true,...options})}).fetch(request,env,ctx);}};
+const worker={fetch(request,env,ctx){return createDelegatedOAuthWorker({issuer:env.AFW_OAUTH_ISSUER,resource:env.AFW_OAUTH_RESOURCE,eventsAuthorityFactory:options=>createDossierEventRpcAuthority({enabled:true,...options})}).fetch(request,env,ctx);},scheduled(controller,env){return runOwnEventSchedule(controller,env);}};
 export default worker;
