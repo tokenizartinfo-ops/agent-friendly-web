@@ -2,10 +2,11 @@ import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
 import {createPrivateNodeBridge,createPrivateNodeDispatchHandler} from '../../lib/mcp-node-private-bridge.mjs';
 import {createNodeReadiness} from '../../lib/mcp-node-readiness.mjs';
-export function fixture(){
+export function fixture({receiptSchema=true}={}){
  const db=new DatabaseSync(':memory:'),durable=new DatabaseSync(':memory:');
  db.exec('CREATE TABLE site_projects(id TEXT PRIMARY KEY,user_id TEXT,revision INTEGER);CREATE TABLE delegated_access_grants(id TEXT PRIMARY KEY,user_id TEXT,client_id TEXT,project_id TEXT,resource TEXT,scopes_json TEXT,expires_at TEXT,revoked_at TEXT);');
  db.exec(readFileSync('db/dossier-monitoring-consent.sql','utf8'));db.exec(readFileSync('db/dossier-node-process.sql','utf8'));durable.exec('CREATE TABLE records(k TEXT PRIMARY KEY,v TEXT)');
+ if(receiptSchema)db.exec(readFileSync('db/dossier-subscription-receipt.sql','utf8'));
  const now=()=>Date.now(),startAt=now()-1000,context={grantId:'g',subject:'owner',clientId:'client',resource:'https://private.invalid/mcp',scopes:['afw:project:read']};
  db.prepare('INSERT INTO site_projects VALUES(?,?,?)').run('p','owner',1);db.prepare('INSERT INTO delegated_access_grants VALUES(?,?,?,?,?,?,?,?)').run('g','owner','client','p',context.resource,JSON.stringify(context.scopes),new Date(startAt+600000).toISOString(),'');
  const primary={prepare(sql){return{bind(...args){return{async first(){return db.prepare(sql).get(...args)??null;},async run(){const r=db.prepare(sql).run(...args);return{meta:{changes:Number(r.changes)}};}};}};}};
