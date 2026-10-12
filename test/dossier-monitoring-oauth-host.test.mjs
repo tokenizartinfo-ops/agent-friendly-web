@@ -83,6 +83,7 @@ test('policy mutation during signed Access verification cannot mint an owner for
  f.sqlite.exec(readFileSync('db/dossier-monitoring-consent.sql','utf8'));f.sqlite.exec(readFileSync('db/dossier-monitoring-owner-tickets.sql','utf8'));
  f.env.AFW_OAUTH_PILOT_PROJECT_ID='p-a';const a=await authorize(f);assert.equal((await approve(f,a)).status,302);
  const epoch=Date.now(),grantId=f.sqlite.prepare('SELECT id FROM delegated_access_grants').get().id;
+ f.setTime(new Date(epoch).toISOString());
  f.env.AFW_DOSSIER_MONITORING_OWNER_ENABLED='true';f.env.AFW_DOSSIER_MONITORING_OWNER_POLICY=JSON.stringify({grantId,projectId:'p-a',clientId:f.client.clientId,startAt:epoch-100,expiresAt:epoch+599900});
  mutate=()=>{f.env.AFW_DOSSIER_MONITORING_OWNER_POLICY='{}';};assert.equal((await f.request('/monitoring')).status,401);
  assert.equal(f.sqlite.prepare('SELECT count(*) n FROM dossier_monitoring_owner_tickets').get().n,0);
