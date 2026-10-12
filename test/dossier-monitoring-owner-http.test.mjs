@@ -24,6 +24,25 @@ test('disabled owner monitoring performs no verification or storage reads',async
  const handler=api.createDossierMonitoringOwnerHandler({issuer:origin,policy:{enabled:false},db:{prepare(){throw Error('read');}},accessVerifier(){throw Error('verify');}});
  assert.equal((await handler(new Request(origin+'/monitoring'))).status,404);
 });
+
+test('native consent forms preserve same-origin POST identity without sending cross-origin referrers',async()=>{
+ const f=fixture();try{
+  const response=await f.get();assert.equal(response.status,200);
+  // no-referrer gives native navigate-mode form POSTs an opaque Origin,
+  // which the required exact-origin CSRF guard must continue to reject.
+  assert.equal(response.headers.get('Referrer-Policy'),'same-origin');
+  assert.match(response.headers.get('Content-Security-Policy'),/form-action 'self'/);
+  assert.match(await response.text(),/<form method="post" action="\/monitoring\/grant">/);
+  const p=await f.page();
+  for(const suppliedOrigin of [undefined,'null','https://foreign.invalid']){
+   const headers={'Content-Type':'application/x-www-form-urlencoded',Cookie:p.cookie};
+   if(suppliedOrigin!==undefined)headers.Origin=suppliedOrigin;
+   assert.equal((await f.handler(new Request(origin+'/monitoring/grant',{method:'POST',headers,body:'handle='+p.handle}))).status,403);
+  }
+  assert.equal(f.sql.prepare('SELECT count(*) n FROM dossier_monitoring_consent_events').get().n,0);
+  assert.equal((await f.post(p.handle,p.cookie)).status,200);
+ }finally{f.sql.close();}
+});
 test('GET explains distinct metadata consent without granting; POST is idempotent and cannot renew',async()=>{
  assert.equal(typeof api.createDossierMonitoringOwnerHandler,'function');const f=fixture();try{
  const p=await f.page();assert.match(p.html,/Permitir avisos temporales/);assert.match(p.html,/No cambia datos ni publica/);assert.match(p.html,/Comic/);
