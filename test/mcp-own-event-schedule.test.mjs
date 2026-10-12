@@ -22,6 +22,10 @@ test('wrong minute/cron, expired delivery, malformed scope and flag-off cannot d
 test('close remains historical after live flags and window end, without delivery',async()=>{
  const {runOwnEventSchedule}=await load(),f=setup();f.setTime(end+10);f.env.AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED='false';f.env.AFW_DOSSIER_EVENTS_ENABLED='false';assert.deepEqual(await runOwnEventSchedule(f.control(end),f.env,{now:f.now}),{phase:'close',status:'requested'});assert.deepEqual(f.calls,[['close']]);
 });
+test('close-only original schedule can be armed before any subscription or saved-event receipt exists',async()=>{
+ const {runOwnEventSchedule}=await load(),f=setup();f.setTime(end+10);f.env.AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED='false';f.env.AFW_DOSSIER_EVENTS_ENABLED='false';f.env.AFW_DOSSIER_EVENTS_SCHEDULE=JSON.stringify({closeAt:end});assert.equal((await runOwnEventSchedule(f.control(end),f.env,{now:f.now})).phase,'close');assert.deepEqual(f.calls,[['close']]);
+ await assert.rejects(runOwnEventSchedule(f.control(start+60000),f.env,{now:f.now}));assert.equal(f.calls.length,1);
+});
 test('a delayed original close still retires the same process; delay never permits delivery',async()=>{
  const {runOwnEventSchedule}=await load(),f=setup();f.setTime(end+720000);f.env.AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED='false';f.env.AFW_DOSSIER_EVENTS_ENABLED='false';assert.equal((await runOwnEventSchedule(f.control(end),f.env,{now:f.now})).phase,'close');assert.deepEqual(f.calls,[['close']]);await assert.rejects(runOwnEventSchedule(f.control(),f.env,{now:f.now}));assert.equal(f.calls.length,1);
 });
@@ -45,5 +49,16 @@ test('scheduled source uses original SQL and durable budget: one delivery, no re
   await assert.rejects(runOwnEventSchedule(controller(minute),env,{now}));assert.equal(f.boots(),1);assert.equal(f.sends(),2);
   env.AFW_DOSSIER_EVENTS_ENABLED='false';env.AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED='false';offset=schedule.closeAt-Date.now()+10;
   assert.equal((await runOwnEventSchedule(controller(schedule.closeAt),env,{now})).phase,'close');assert.equal(f.config.ctx.container.running,false);assert.equal(f.db.prepare('SELECT count(*) n FROM dossier_node_process_closures').get().n,1);assert.equal(f.boots(),1);
+ }finally{f.close();}
+});
+test('close-only original retires a partially started process even without a subscription receipt',async()=>{
+ const {runOwnEventSchedule}=await load(),{fixture}=await import('./fixtures/mcp-own-durable-host.mjs'),{createOwnDurableEventHost}=await import('../lib/mcp-own-durable-host.mjs'),f=fixture();let offset=0,stops=0;const now=()=>Date.now()+offset;
+ try{
+  f.grant();f.config.now=now;const container=f.config.ctx.container,start=container.start,destroy=container.destroy;
+  container.start=async options=>{await start(options);throw Error('unknown start ACK');};container.destroy=async()=>{if(++stops===1)throw Error('stop temporarily unavailable');return destroy();};
+  const host=createOwnDurableEventHost(f.config);f.setHost(host);const projectRef=await host.list();await assert.rejects(host.subscribe({name:'afw.dossier.changed',arguments:{projectRef},delivery:{mode:'webhook',url:'https://callback.agentfriendlyweb.dev/hook',secret:'whsec_'+Buffer.alloc(32,3).toString('base64')}}));assert.equal(f.boots(),1);assert.equal(f.sends(),0);assert.equal(container.running,true);
+  const closeAt=Math.ceil(f.config.window.expiresAt/60000)*60000,p={...f.config.context,projectId:'p',containerId:'a'.repeat(64),...f.config.window};delete p.scopes;
+  const env={AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED:'false',AFW_DOSSIER_EVENTS_SCHEDULE:JSON.stringify({closeAt}),AFW_DOSSIER_EVENTS_ENABLED:'false',AFW_DOSSIER_EVENTS_POLICY:JSON.stringify(p),AFW_OAUTH_ISSUER:'https://private.invalid',AFW_OAUTH_RESOURCE:p.resource,AFW_OAUTH_PILOT_CLIENT_ID:'client',AFW_OAUTH_PILOT_PROJECT_ID:'p',DB:f.config.db,AFW_DOSSIER_EVENTS_PROJECTION_SECRET:f.config.projectionSecret,AFW_DOSSIER_EVENTS_NODE:{idFromString:id=>({toString:()=>id}),get:()=>host}},d=new Date(closeAt);offset=closeAt-Date.now()+10;
+  assert.equal((await runOwnEventSchedule({scheduledTime:closeAt,cron:`${d.getUTCMinutes()} ${d.getUTCHours()} ${d.getUTCDate()} ${d.getUTCMonth()+1} *`},env,{now})).phase,'close');assert.equal(container.running,false);assert.equal(f.boots(),1);assert.equal(f.db.prepare('SELECT count(*) n FROM dossier_node_process_closures').get().n,1);
  }finally{f.close();}
 });
