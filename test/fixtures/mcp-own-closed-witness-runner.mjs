@@ -1,0 +1,6 @@
+import {build} from 'esbuild';
+import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+const sourceRevision='a'.repeat(40),b=await build({entryPoints:['worker/mcp-own/index.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],define:{'globalThis.__AFW_NODE_SOURCE_REVISION__':JSON.stringify(sourceRevision)}});
+const bindings={AFW_DOSSIER_EVENTS_SCHEDULE_MODE:'stable-minute',...Object.fromEntries(['AFW_DELEGATED_OAUTH_ENABLED','AFW_DOSSIER_EVENTS_ENABLED','AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED','AFW_DOSSIER_MONITORING_OWNER_ENABLED','AFW_DOSSIER_OWN_SAVE_ENABLED','AFW_OAUTH_REFRESH_ENABLED'].map(k=>[k,'false'])),AFW_OAUTH_ISSUER:'https://private.invalid',AFW_OAUTH_RESOURCE:'https://private.invalid/mcp'};
+const mf=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:b.outputFiles[0].text,bindings}));
+try{const worker=await mf.getWorker(),at=Math.floor(Date.now()/60000)*60000;await worker.scheduled({scheduledTime:at,cron:'* * * * *'});const status=(await mf.dispatchFetch('https://private.invalid/mcp')).status;process.stdout.write(JSON.stringify({type:'fixture.finished',scheduledAt:new Date(at).toISOString(),status})+'\n');}finally{await mf.dispose();}
