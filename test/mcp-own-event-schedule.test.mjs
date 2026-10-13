@@ -15,6 +15,18 @@ test('unconfigured or disabled schedule reads no Node, policy, storage or secret
 test('dispatch selects only original node and references at the exact scheduled minute',async()=>{
  const {runOwnEventSchedule}=await load(),f=setup();assert.deepEqual(await runOwnEventSchedule(f.control(),f.env,{now:f.now}),{phase:'dispatch',status:'requested'});assert.deepEqual(f.calls,[['deliver',f.schedule.subscriptionId,f.schedule.eventId]]);
 });
+test('prewarmed minute schedule is idle except original dispatch and catches up only original closure',async()=>{
+ const {runOwnEventSchedule}=await load(),f=setup();f.env.AFW_DOSSIER_EVENTS_SCHEDULE_MODE='stable-minute';const tick=at=>({scheduledTime:at,cron:'* * * * *'});
+ assert.equal(await runOwnEventSchedule(tick(start),f.env,{now:f.now}),null);assert.equal(f.calls.length,0);assert.equal((await runOwnEventSchedule(tick(f.schedule.dispatchAt),f.env,{now:f.now})).phase,'dispatch');assert.equal(f.calls.length,1);
+ f.setTime(start+120010);assert.equal(await runOwnEventSchedule(tick(start+120000),f.env,{now:f.now}),null);assert.equal(f.calls.length,1);
+ f.setTime(end+120010);f.env.AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED='false';f.env.AFW_DOSSIER_EVENTS_ENABLED='false';assert.equal((await runOwnEventSchedule(tick(end+120000),f.env,{now:f.now})).phase,'close');assert.deepEqual(f.calls,[['deliver',f.schedule.subscriptionId,f.schedule.eventId],['close']]);
+});
+test('prewarmed close-only schedule never dispatches and rejects mode or cron drift',async()=>{
+ const {runOwnEventSchedule}=await load(),f=setup();f.env.AFW_DOSSIER_EVENTS_SCHEDULE_MODE='stable-minute';f.env.AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED='false';f.env.AFW_DOSSIER_EVENTS_SCHEDULE=JSON.stringify({closeAt:end});const tick=at=>({scheduledTime:at,cron:'* * * * *'});
+ assert.equal(await runOwnEventSchedule(tick(start+60000),f.env,{now:f.now}),null);assert.equal(f.calls.length,0);f.setTime(end+10);assert.equal((await runOwnEventSchedule(tick(end),f.env,{now:f.now})).phase,'close');assert.equal(f.calls.length,1);
+ const g=setup();g.env.AFW_DOSSIER_EVENTS_SCHEDULE_MODE='stable-minute';g.setHook(()=>{g.env.AFW_DOSSIER_EVENTS_SCHEDULE_MODE='exact';});await assert.rejects(runOwnEventSchedule(tick(g.schedule.dispatchAt),g.env,{now:g.now}));assert.equal(g.calls.length,1);
+ const h=setup();h.env.AFW_DOSSIER_EVENTS_SCHEDULE_MODE='unknown';await assert.rejects(runOwnEventSchedule(h.control(),h.env,{now:h.now}));assert.equal(h.calls.length,0);
+});
 test('wrong minute/cron, expired delivery, malformed scope and flag-off cannot dispatch',async()=>{
  const {runOwnEventSchedule}=await load();for(const change of [f=>f.env.AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED='false',f=>f.env.AFW_DOSSIER_EVENTS_ENABLED='false',f=>f.setTime(end),f=>f.schedule.dispatchAt++,f=>f.schedule.closeAt=end+120000,f=>f.schedule.subscriptionId='caller',f=>f.schedule.extra='callback']){const f=setup();change(f);f.env.AFW_DOSSIER_EVENTS_SCHEDULE=JSON.stringify(f.schedule);await assert.rejects(runOwnEventSchedule(f.control(),f.env,{now:f.now}));assert.equal(f.calls.length,0);}
  const f=setup();await assert.rejects(runOwnEventSchedule({...f.control(),cron:'* * * * *'},f.env,{now:f.now}));await assert.rejects(runOwnEventSchedule(f.control(start+120000),f.env,{now:f.now}));assert.equal(f.calls.length,0);
@@ -34,7 +46,7 @@ test('configuration drift at binding resolution and after RPC fails closed; no r
  const b=setup();b.setHook(()=>{b.env.AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED='false';});await assert.rejects(runOwnEventSchedule(b.control(),b.env,{now:b.now}));assert.equal(b.calls.length,1);
  const c=setup();c.setHook(()=>{throw Error('unknown ACK');});await assert.rejects(runOwnEventSchedule(c.control(),c.env,{now:c.now}));assert.equal(c.calls.length,1);
 });
-test('scheduled source uses original SQL and durable budget: one delivery, no restart, historical stop',async()=>{
+for(const mode of ['exact','stable-minute'])test(`scheduled ${mode} source uses original SQL and durable budget: one delivery, no restart, historical stop`,async()=>{
  const {runOwnEventSchedule}=await load(),{fixture}=await import('./fixtures/mcp-own-durable-host.mjs'),{createOwnDurableEventHost}=await import('../lib/mcp-own-durable-host.mjs');
  const f=fixture();let offset=0;const now=()=>Date.now()+offset,minute=Math.floor(Date.now()/60000)*60000;
  try{
@@ -44,7 +56,8 @@ test('scheduled source uses original SQL and durable budget: one delivery, no re
   f.db.prepare('INSERT INTO project_events VALUES(?,?,?,?,?,?)').run('event-scheduled','p','owner','project_updated',new Date().toISOString(),JSON.stringify({revision:1,privateText:'never forwarded'}));
   const schedule={subscriptionId:r.id,eventId:'event-scheduled',dispatchAt:minute,closeAt:minute+180000},policy={...f.config.context,projectId:'p',containerId:'a'.repeat(64),...f.config.window};delete policy.scopes;
   const env={AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED:'true',AFW_DOSSIER_EVENTS_SCHEDULE:JSON.stringify(schedule),AFW_DOSSIER_EVENTS_ENABLED:'true',AFW_DOSSIER_EVENTS_POLICY:JSON.stringify(policy),AFW_OAUTH_ISSUER:'https://private.invalid',AFW_OAUTH_RESOURCE:policy.resource,AFW_OAUTH_PILOT_CLIENT_ID:'client',AFW_OAUTH_PILOT_PROJECT_ID:'p',DB:f.config.db,AFW_DOSSIER_EVENTS_PROJECTION_SECRET:f.config.projectionSecret,AFW_DOSSIER_EVENTS_NODE:{idFromString:id=>({toString:()=>id}),get:()=>host}};
-  const controller=t=>{const d=new Date(t);return{scheduledTime:t,cron:`${d.getUTCMinutes()} ${d.getUTCHours()} ${d.getUTCDate()} ${d.getUTCMonth()+1} *`};};
+  env.AFW_DOSSIER_EVENTS_SCHEDULE_MODE=mode;
+  const controller=t=>{const d=new Date(t);return{scheduledTime:t,cron:mode==='stable-minute'?'* * * * *':`${d.getUTCMinutes()} ${d.getUTCHours()} ${d.getUTCDate()} ${d.getUTCMonth()+1} *`};};
   assert.equal((await runOwnEventSchedule(controller(minute),env,{now})).phase,'dispatch');assert.equal(f.boots(),1);assert.equal(f.sends(),2);
   await assert.rejects(runOwnEventSchedule(controller(minute),env,{now}));assert.equal(f.boots(),1);assert.equal(f.sends(),2);
   env.AFW_DOSSIER_EVENTS_ENABLED='false';env.AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED='false';offset=schedule.closeAt-Date.now()+10;

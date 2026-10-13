@@ -22,6 +22,12 @@ test('service deadline can shorten original expiry but cannot renew it',async()=
 test('another resource, live schedule, existing policy, plain secret or cron never yields a new draft',async()=>{
  const {prepareOwnMonitorConfig}=await load();for(const change of [f=>f.config.name='tokenizart-companion-agent',f=>f.config.d1_databases[0].database_id='other',f=>f.config.durable_objects.bindings[0].script_name='other-worker',f=>f.config.vars.AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED='true',f=>f.config.vars.AFW_DOSSIER_EVENTS_POLICY='{}',f=>f.config.vars.AFW_DOSSIER_EVENTS_CUSTODY_KEY='secret',f=>f.config.triggers={crons:['* * * * *']}]){const f=fixture();change(f);assert.throws(()=>prepare(prepareOwnMonitorConfig,f));}
 });
+test('explicit prewarmed minute mode preserves only its one original cron without renewing consent',async()=>{
+ const {prepareOwnMonitorConfig}=await load(),f=fixture();f.config.vars.AFW_DOSSIER_EVENTS_SCHEDULE_MODE='stable-minute';f.config.triggers={crons:['* * * * *']};
+ const r=prepare(prepareOwnMonitorConfig,f);assert.deepEqual(r.config.triggers,f.config.triggers);assert.equal(JSON.parse(r.config.vars.AFW_DOSSIER_EVENTS_POLICY).expiresAt,start+600000);assert.equal(r.summary.noConsentCreated,true);
+ for(const change of [f=>f.config.triggers.crons=[],f=>f.config.triggers.crons.push('* * * * *'),f=>f.config.triggers.crons=['1 * * * *'],f=>f.config.vars.AFW_DOSSIER_EVENTS_SCHEDULE_MODE='other']){const bad=fixture();bad.config.vars.AFW_DOSSIER_EVENTS_SCHEDULE_MODE='stable-minute';bad.config.triggers={crons:['* * * * *']};change(bad);assert.throws(()=>prepare(prepareOwnMonitorConfig,bad));}
+});
+
 test('CLI preserves existing draft, rejects path escape and prints no original owner/grant references',()=>{
  const dir=mkdtempSync(join(tmpdir(),'afw-own-monitor-cli-')),f=fixture(),t=Date.now()-1000;
  f.query[0].results[0].created_at=new Date(t).toISOString();f.query[0].results[0].expires_at=new Date(t+600000).toISOString();f.config.vars.AFW_OAUTH_PILOT_EXPIRES_AT=new Date(t+1800000).toISOString();
