@@ -3,6 +3,7 @@ import {createDelegatedOAuthWorker} from '../../lib/delegated-oauth-worker.mjs';
 import {createOwnDurableEventHost} from '../../lib/mcp-own-durable-host.mjs';
 import {createDossierEventRpcAuthority,readDossierEventHostPolicy} from '../../lib/dossier-event-rpc-authority.mjs';
 import {runOwnEventSchedule} from '../../lib/mcp-own-event-schedule.mjs';
+import {createOwnSyntheticSaveHost} from '../../lib/mcp-own-synthetic-save-host.mjs';
 const deny=()=>new Response('{"code":"unavailable"}',{status:404,headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
 const fail=()=>{throw Error('Private event Node unavailable');};
 // Build replaces these public program/revision literals; no key is embedded.
@@ -21,6 +22,8 @@ export class AfwOwnEventNode extends DurableObject{
  list(){return this.#call('list');}
  subscribe(value){return this.#call('subscribe',value);}
  unsubscribe(value){return this.#call('unsubscribe',value);}
+ // Trusted server observation only; never boots or refreshes the original.
+ readReadiness(){return this.#call('readReadiness');}
  // Private operator shutdown retains original scope/config/DO fences but
  // must not depend on the live monitoring flag or window. Never starts Node.
  async close(){try{const c=this.#host(true);c.current();const result=await c.host.close();c.current();return result;}catch{fail();}}
@@ -38,5 +41,5 @@ export class AfwNodeControl extends WorkerEntrypoint{
  }catch{return deny();}}
 }
 
-const worker={fetch(request,env,ctx){return createDelegatedOAuthWorker({issuer:env.AFW_OAUTH_ISSUER,resource:env.AFW_OAUTH_RESOURCE,eventsAuthorityFactory:options=>createDossierEventRpcAuthority({enabled:true,...options})}).fetch(request,env,ctx);},scheduled(controller,env){return runOwnEventSchedule(controller,env);}};
+const worker={fetch(request,env,ctx){if(new URL(request.url).pathname==='/qa/expediente')return createOwnSyntheticSaveHost({env,program,sourceRevision})(request);return createDelegatedOAuthWorker({issuer:env.AFW_OAUTH_ISSUER,resource:env.AFW_OAUTH_RESOURCE,eventsAuthorityFactory:options=>createDossierEventRpcAuthority({enabled:true,...options})}).fetch(request,env,ctx);},scheduled(controller,env){return runOwnEventSchedule(controller,env);}};
 export default worker;
