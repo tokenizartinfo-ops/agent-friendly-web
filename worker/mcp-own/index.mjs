@@ -24,6 +24,8 @@ export class AfwOwnEventNode extends DurableObject{
  unsubscribe(value){return this.#call('unsubscribe',value);}
  // Trusted server observation only; never boots or refreshes the original.
  readReadiness(){return this.#call('readReadiness');}
+ // Private read only, reached through the fixed own-QA Access handler.
+ observeSubscription(){return this.#call('observeSubscription');}
  // Private operator shutdown retains original scope/config/DO fences but
  // must not depend on the live monitoring flag or window. Never starts Node.
  async close(){try{const c=this.#host(true);c.current();const result=await c.host.close();c.current();return result;}catch{fail();}}
