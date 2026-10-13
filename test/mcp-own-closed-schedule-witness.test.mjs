@@ -15,7 +15,13 @@ test('any active or unresolved capability and any installed policy suppresses wi
  const read=await load();for(const flag of flags)for(const value of ['true',undefined]){const c=env();c[flag]=value;assert.equal(read(controller,c,{sourceRevision,now}),null);}
  for(const key of ['AFW_DOSSIER_EVENTS_SCHEDULE','AFW_DOSSIER_EVENTS_POLICY','AFW_DOSSIER_MONITORING_OWNER_POLICY']){const c=env();c[key]='{}';assert.equal(read(controller,c,{sourceRevision,now}),null);}
 });
-test('malformed clock, source or nonminute trigger never produces metadata',async()=>{
- const read=await load();for(const c of [{scheduledTime:at,cron:'other'},{scheduledTime:at+1,cron:'* * * * *'},{scheduledTime:NaN,cron:'* * * * *'}])assert.equal(read(c,env(),{sourceRevision,now}),null);
- assert.equal(read(controller,env(),{sourceRevision:'private',now}),null);assert.equal(read(controller,env(),{sourceRevision,now:()=>at-1}),null);assert.equal(read(controller,env(),{sourceRevision,now:()=>NaN}),null);
+test('documented nonaligned timestamp remains visible in closed diagnostic only',async()=>{
+ const read=await load(),planned=1745856238000,r=read({...controller,scheduledTime:planned},env(),{sourceRevision,now});assert.ok(r);assert.equal(r.scheduledAt,new Date(planned).toISOString());
+});
+test('closed diagnostic records clock order independently without inferring authority',async()=>{
+ const read=await load(),r=read(controller,env(),{sourceRevision,now:()=>at-1});assert.ok(r);assert.equal(r.observedAt,new Date(at-1).toISOString());assert.equal(r.scheduledAt,new Date(at).toISOString());
+});
+test('malformed clock, source or foreign trigger never produces metadata',async()=>{
+ const read=await load();for(const c of [{scheduledTime:at,cron:'other'},{scheduledTime:NaN,cron:'* * * * *'},{scheduledTime:-1,cron:'* * * * *'}])assert.equal(read(c,env(),{sourceRevision,now}),null);
+ assert.equal(read(controller,env(),{sourceRevision:'private',now}),null);assert.equal(read(controller,env(),{sourceRevision,now:()=>NaN}),null);assert.equal(read(controller,env(),{sourceRevision,now:()=>-1}),null);
 });
