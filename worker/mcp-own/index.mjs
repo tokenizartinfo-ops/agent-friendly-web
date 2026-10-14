@@ -1,4 +1,5 @@
 import {DurableObject,WorkerEntrypoint} from 'cloudflare:workers';
+import {readOwnSuccessorHost} from '../../lib/mcp-own-successor-host.mjs';
 import {observeOwnRetiredCustody} from '../../lib/mcp-own-retirement-host.mjs';
 import {createDelegatedOAuthWorker} from '../../lib/delegated-oauth-worker.mjs';
 import {createOwnDurableEventHost} from '../../lib/mcp-own-durable-host.mjs';
@@ -13,10 +14,11 @@ const program=globalThis.__AFW_NODE_PROGRAM__??'',sourceRevision=globalThis.__AF
 export class AfwOwnEventNode extends DurableObject{
  #host(historical=false){
   const config=readDossierEventHostPolicy({enabled:historical||this.env.AFW_DOSSIER_EVENTS_ENABLED==='true',env:this.env,historical}),p=config.policy;
+  const successor=historical?null:readOwnSuccessorHost({env:this.env,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt}});
   if(this.ctx.id.toString()!==p.containerId)fail();const secret=this.env.AFW_DOSSIER_EVENTS_CUSTODY_KEY;
   if(typeof secret!=='string'||secret.length!==44)fail();const key=Buffer.from(secret,'base64');if(key.length!==32||key.toString('base64')!==secret){key.fill(0);fail();}
-  let host;try{host=createOwnDurableEventHost({enabled:true,db:config.pins.DB,context:{grantId:p.grantId,subject:p.subject,clientId:p.clientId,resource:p.resource,scopes:['afw:project:read']},projectId:p.projectId,projectionSecret:config.pins.AFW_DOSSIER_EVENTS_PROJECTION_SECRET,custodyKey:key,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt},makeControl:props=>this.ctx.exports.AfwNodeControl({props}),now:Date.now});}finally{key.fill(0);}
-  return{host,current:config.current};
+  let host;try{host=createOwnDurableEventHost({...(successor?{successor:successor.successor}:{}),enabled:true,db:config.pins.DB,context:{grantId:p.grantId,subject:p.subject,clientId:p.clientId,resource:p.resource,scopes:['afw:project:read']},projectId:p.projectId,projectionSecret:config.pins.AFW_DOSSIER_EVENTS_PROJECTION_SECRET,custodyKey:key,ctx:this.ctx,program,sourceRevision,window:{startAt:p.startAt,expiresAt:p.expiresAt},makeControl:props=>this.ctx.exports.AfwNodeControl({props}),now:Date.now});}finally{key.fill(0);}
+  return{host,current:()=>{config.current();successor?.current();}};
  }
  async #call(method,...args){try{const c=this.#host();c.current();const result=await c.host[method](...args);c.current();return result;}catch{fail();}}
  fetch(){return deny();}
