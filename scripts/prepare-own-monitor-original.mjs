@@ -11,6 +11,10 @@ export function prepareOwnMonitorConfig({grantResultJson,configJson,now=Date.now
   if(typeof grantResultJson!=='string'||grantResultJson.length>65536||typeof configJson!=='string'||configJson.length>32768||!Number.isSafeInteger(now)||now<0)fail();
   const result=JSON.parse(grantResultJson),c=JSON.parse(configJson),g=result[0]?.results?.[0],v=c.vars;
   if(result.length!==1||result[0]?.success!==true||result[0]?.meta?.served_by_primary!==true||result[0]?.results?.length!==1||!g||!v||!['id','user_id'].every(k=>id(g[k])))fail();
+  // The fixed own namespace is a single attempt, not a reusable login slot.
+  // These totals must come from the same primary SELECT, across the own DB,
+  // not a WHERE grant_id filter that would hide a previously consumed grant.
+  if(['original_admissions','original_closures','original_receipts'].some(k=>g[k]!==0))fail();
   if(g.client_id!=='afw-chatgpt-pilot-20261003'||g.project_id!=='oauth-canary-owner'||g.resource!=='https://delegated-canary.agentfriendlyweb.dev/mcp'||g.scopes_json!=='["afw:project:read"]'||g.revoked_at!=='')fail();
   const startAt=date(g.created_at),originalEnd=date(g.expires_at),serviceEnd=date(v.AFW_OAUTH_PILOT_EXPIRES_AT),expiresAt=Math.min(originalEnd,serviceEnd);
   if(startAt>now||originalEnd<=startAt||originalEnd-startAt>600000||expiresAt<=now)fail();
