@@ -7,8 +7,34 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 const load=()=>import('../scripts/prepare-own-monitor-original.mjs');
 const start=Date.UTC(2026,9,12,16,5,3,932),now=start+60000;
-function fixture(){return{query:[{success:true,meta:{served_by_primary:true},results:[{id:'g',user_id:'owner',project_id:'oauth-canary-owner',client_id:'afw-chatgpt-pilot-20261003',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',scopes_json:'["afw:project:read"]',created_at:new Date(start).toISOString(),expires_at:new Date(start+600000).toISOString(),revoked_at:''}]}],config:{name:'agent-friendly-web-delegated-canary',account_id:'85d0d5dadac3341a564f22ce885e9eec',main:'output/accepted-original/index.mjs',workers_dev:false,preview_urls:false,routes:[{pattern:'delegated-canary.agentfriendlyweb.dev',custom_domain:true}],d1_databases:[{binding:'DB',database_id:'6a728254-1494-4039-802e-b39288a55fcc'}],kv_namespaces:[{binding:'OAUTH_KV',id:'6b94ff702e504e14a7730cee73a0f6ff'}],durable_objects:{bindings:[{name:'AFW_DOSSIER_EVENTS_NODE',class_name:'AfwOwnEventNode'}]},vars:{AFW_DELEGATED_OAUTH_ENABLED:'true',AFW_DOSSIER_EVENTS_ENABLED:'false',AFW_DOSSIER_MONITORING_OWNER_ENABLED:'false',AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED:'false',AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-one-occurrence-v1',AFW_OAUTH_REFRESH_ENABLED:'false',AFW_OAUTH_SERVICE_MODE:'window',AFW_OAUTH_PILOT_EXPIRES_AT:new Date(start+1800000).toISOString(),AFW_OAUTH_ISSUER:'https://delegated-canary.agentfriendlyweb.dev',AFW_OAUTH_RESOURCE:'https://delegated-canary.agentfriendlyweb.dev/mcp',AFW_OAUTH_PILOT_PROJECT_ID:'oauth-canary-owner',AFW_OAUTH_PILOT_CLIENT_ID:'afw-chatgpt-pilot-20261003'}}};}
+function fixture(){return{query:[{success:true,meta:{served_by_primary:true},results:[{original_admissions:0,original_closures:0,original_receipts:0,id:'g',user_id:'owner',project_id:'oauth-canary-owner',client_id:'afw-chatgpt-pilot-20261003',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',scopes_json:'["afw:project:read"]',created_at:new Date(start).toISOString(),expires_at:new Date(start+600000).toISOString(),revoked_at:''}]}],config:{name:'agent-friendly-web-delegated-canary',account_id:'85d0d5dadac3341a564f22ce885e9eec',main:'output/accepted-original/index.mjs',workers_dev:false,preview_urls:false,routes:[{pattern:'delegated-canary.agentfriendlyweb.dev',custom_domain:true}],d1_databases:[{binding:'DB',database_id:'6a728254-1494-4039-802e-b39288a55fcc'}],kv_namespaces:[{binding:'OAUTH_KV',id:'6b94ff702e504e14a7730cee73a0f6ff'}],durable_objects:{bindings:[{name:'AFW_DOSSIER_EVENTS_NODE',class_name:'AfwOwnEventNode'}]},vars:{AFW_DELEGATED_OAUTH_ENABLED:'true',AFW_DOSSIER_EVENTS_ENABLED:'false',AFW_DOSSIER_MONITORING_OWNER_ENABLED:'false',AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED:'false',AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-one-occurrence-v1',AFW_OAUTH_REFRESH_ENABLED:'false',AFW_OAUTH_SERVICE_MODE:'window',AFW_OAUTH_PILOT_EXPIRES_AT:new Date(start+1800000).toISOString(),AFW_OAUTH_ISSUER:'https://delegated-canary.agentfriendlyweb.dev',AFW_OAUTH_RESOURCE:'https://delegated-canary.agentfriendlyweb.dev/mcp',AFW_OAUTH_PILOT_PROJECT_ID:'oauth-canary-owner',AFW_OAUTH_PILOT_CLIENT_ID:'afw-chatgpt-pilot-20261003'}}};}
 const prepare=(fn,f,t=now)=>fn({grantResultJson:JSON.stringify(f.query),configJson:JSON.stringify(f.config),now:t});
+
+test('primary preparation SQL includes prior history even under a different grant',async()=>{
+ const {DatabaseSync}=await import('node:sqlite'),{prepareOwnMonitorConfig}=await load(),db=new DatabaseSync(':memory:');
+ try{
+  const f=fixture(),g=f.query[0].results[0],keys=['id','user_id','project_id','client_id','resource','scopes_json','created_at','expires_at','revoked_at'];
+  db.exec(`CREATE TABLE delegated_access_grants(${keys.map(k=>k+' TEXT').join(',')});`);
+  for(const table of ['dossier_node_process_admissions','dossier_node_process_closures','dossier_event_subscription_receipts'])db.exec(`CREATE TABLE ${table}(grant_id TEXT);`);
+  db.prepare(`INSERT INTO delegated_access_grants VALUES(${keys.map(()=>'?').join(',')})`).run(...keys.map(k=>g[k]));
+  const sql=readFileSync(new URL('../scripts/own-monitor-original.sql',import.meta.url),'utf8');
+  const check=()=>{f.query[0].results=[db.prepare(sql).get('g')];return prepare(prepareOwnMonitorConfig,f);};
+  assert.equal(check().summary.noConsentCreated,true);
+  for(const table of ['dossier_node_process_admissions','dossier_node_process_closures','dossier_event_subscription_receipts']){
+   db.prepare(`INSERT INTO ${table} VALUES(?)`).run('different-prior-grant');
+   assert.throws(check);db.exec(`DELETE FROM ${table}`);
+  }
+ }finally{db.close();}
+});
+
+test('consumed original namespace or missing history cannot prepare another monitoring window',async()=>{
+ const {prepareOwnMonitorConfig}=await load();
+ for(const key of ['original_admissions','original_closures','original_receipts'])for(const value of [1,2,-1,'0',null,undefined]){
+  const f=fixture();Object.assign(f.query[0].results[0],{original_admissions:0,original_closures:0,original_receipts:0});
+  if(value===undefined)delete f.query[0].results[0][key];else f.query[0].results[0][key]=value;
+  assert.throws(()=>prepare(prepareOwnMonitorConfig,f),`${key}: ${value}`);
+ }
+});
 test('raw UTC strings keep original day/month/timezone/milliseconds and clone only the own draft',async()=>{
  const {prepareOwnMonitorConfig}=await load(),f=fixture(),before=JSON.stringify(f),r=prepare(prepareOwnMonitorConfig,f),p=JSON.parse(r.config.vars.AFW_DOSSIER_EVENTS_POLICY);
  assert.equal(p.startAt,start);assert.equal(p.expiresAt,start+600000);assert.equal(new Date(p.startAt).toISOString(),'2026-10-12T16:05:03.932Z');assert.equal(r.config.vars.AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED,'false');assert.equal(JSON.stringify(f),before);assert.deepEqual(Object.keys(r.summary),['startAt','expiresAt','scope','noConsentCreated']);assert.equal(JSON.stringify(r.summary).includes('owner'),false);
