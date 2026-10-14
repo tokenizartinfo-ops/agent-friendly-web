@@ -6,7 +6,7 @@ import {join,dirname,basename} from 'node:path';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 
-test('native primary D1 admission survives DO loss and restart without granting another Node start',async()=>{
+for(const scenario of ['loss','retirement'])test('native primary D1 custody across restart: '+scenario,async()=>{
  const statements=file=>[...readFileSync(file,'utf8').matchAll(/CREATE TABLE[\s\S]*?\);|CREATE(?: UNIQUE)? INDEX[^\n]+;|CREATE TRIGGER[^\n]+;/g)].map(m=>m[0]);
  const monitor=statements('db/dossier-monitoring-consent.sql'),processSchema=statements('db/dossier-node-process.sql');assert.equal(monitor.length,4);assert.equal(processSchema.length,7);
  const startAt=Date.now()-1000,expiresAt=startAt+180000,contents=`
@@ -23,6 +23,10 @@ export class Own {
  if(path==='/ready')return Response.json(await a.readReadiness());
  if(path==='/bridge'){const b=await a.createBridge();return Response.json({bridge:typeof b.verify==='function'});}
  if(path==='/close')return Response.json(await a.close());
+ if(path==='/retired')return Response.json(await a.observeRetired());
+ if(path==='/withdraw'){
+ const t=Date.now();await this.env.DB.prepare("UPDATE delegated_access_grants SET revoked_at=? WHERE id='g'").bind(new Date(t).toISOString()).run();
+ await this.env.DB.prepare("INSERT INTO dossier_monitoring_consent_events(grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)").bind('g','p','owner','client',context.resource,1,'revoke','afw.dossier-monitoring.v1','22222222-2222-4222-8222-222222222222',t,t).run();return Response.json({});}
  if(path==='/erase'){await this.ctx.storage.deleteAll();return Response.json({});}
  return Response.json(await this.env.DB.prepare('SELECT launches,running FROM fixture_process').first());
  }catch{return Response.json({code:'unavailable'},{status:409});}
@@ -43,6 +47,11 @@ export default{async fetch(request,env){
  const bundle=await build({stdin:{resolveDir:process.cwd(),contents},bundle:true,write:false,format:'esm',platform:'neutral',external:['node:*']}),persist=mkdtempSync(join(tmpdir(),'afw-node-custody-'));
  const options=convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:bundle.outputFiles[0].text,d1Databases:{DB:'native-node-own'},durableObjects:{QA:{className:'Own',useSQLite:true}},resourcePersistencePath:persist});let runtime=new Miniflare(options);
  const call=async(path,status=200)=>{const r=await runtime.dispatchFetch('https://synthetic.invalid'+path,{method:'POST'});assert.equal(r.status,status);return r.json();};
- try{await call('/seed');const first=await call('/start');assert.equal(first.ready,true);assert.equal((await call('/state')).launches,1);await runtime.dispose();runtime=new Miniflare(options);assert.deepEqual(await call('/start'),first);assert.equal((await call('/state')).launches,1);assert.equal((await call('/bridge')).bridge,true);await call('/erase');await call('/start',409);assert.equal((await call('/state')).launches,1);await call('/close');await runtime.dispose();runtime=new Miniflare(options);await call('/start',409);assert.equal((await call('/state')).launches,1);assert.equal((await call('/state')).running,0);}
+ try{await call('/seed');const first=await call('/start');assert.equal(first.ready,true);assert.equal((await call('/state')).launches,1);await runtime.dispose();runtime=new Miniflare(options);assert.deepEqual(await call('/start'),first);assert.equal((await call('/state')).launches,1);assert.equal((await call('/bridge')).bridge,true);
+ if(scenario==='loss'){await call('/erase');await call('/start',409);}else{await call('/retired',409);}
+ assert.equal((await call('/state')).launches,1);await call('/close');
+ if(scenario==='retirement'){await call('/retired',409);await call('/withdraw');const r=await call('/retired');assert.equal(r.processGeneration,first.processGeneration);assert.equal(r.physicalStopVerified,false);assert.equal(r.mayStartSuccessor,false);}
+ await runtime.dispose();runtime=new Miniflare(options);await call('/start',409);assert.equal((await call('/state')).launches,1);assert.equal((await call('/state')).running,0);
+ if(scenario==='retirement'){assert.equal((await call('/retired')).processGeneration,first.processGeneration);await call('/erase');await call('/retired',409);}}
  finally{await runtime.dispose();const target=realpathSync(persist);assert.equal(dirname(target),realpathSync(tmpdir()));assert.ok(basename(target).startsWith('afw-node-custody-'));rmSync(target,{recursive:true});}
 });
