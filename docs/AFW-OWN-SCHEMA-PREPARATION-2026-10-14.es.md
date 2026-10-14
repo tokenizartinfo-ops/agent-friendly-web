@@ -10,7 +10,7 @@ Una consulta al catálogo de grupos de permisos de la cuenta fue rechazada con 9
 
 ## Instalación prevista
 
-Solo estos archivos, en orden: db/dossier-successor-reservation.sql, db/dossier-successor-launch.sql, db/dossier-publication-receipt.sql. Cuatro tablas y ocho triggers. No ejecutar la cadena general de migraciones de la web.
+Solo estos archivos, en orden: db/dossier-successor-reservation.sql, db/dossier-successor-launch.sql, db/dossier-publication-receipt.sql y db/dossier-activation-receipt.sql. Siete tablas y catorce triggers nuevos. La consulta histórica anterior no inventarió las tres tablas adicionales de activación; refrescar inventario antes de instalar. No ejecutar la cadena general de migraciones de la web.
 
 Antes de mutar: refrescar identidad de cuenta/base/binding, esquema existente, estado cerrado y recuperación disponible. Si alguno de los nombres ya existe, comparar estructura y triggers antes de continuar: IF NOT EXISTS no valida que una tabla ajena o antigua tenga la forma correcta. No modificar ni borrar automáticamente una estructura discordante.
 
@@ -24,4 +24,4 @@ El bookmark TimeTravel obtenido previamente es una referencia histórica, no una
 
 ## Ensayo local
 
-`test/mcp-own-schema-rehearsal-native.test.mjs` usa D1/workerd local y SQL de los archivos reales. Conserva filas originales de admisión/cierre, instala tres veces (antes y después de introducir registros sintéticos), comprueba igualdad de filas, rechazo de UPDATE/DELETE por triggers en las seis tablas y PRAGMA foreign_key_check vacío. El ensayo no inicia Container, llama a proveedor ni acredita estado remoto o PC-off.
+`test/mcp-own-schema-rehearsal-native.test.mjs` usa D1/workerd local y SQL de los archivos reales. Conserva filas originales de admisión/cierre, instala tres veces los cuatro archivos (antes y después de introducir registros sintéticos), comprueba igualdad de filas, rechazo de UPDATE/DELETE por triggers en las nueve tablas y PRAGMA foreign_key_check vacío. El ensayo no inicia Container, llama a proveedor ni acredita estado remoto o PC-off.

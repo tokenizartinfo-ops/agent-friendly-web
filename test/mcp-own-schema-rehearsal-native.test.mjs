@@ -10,7 +10,7 @@ const statements=name=>parseStatements(readFileSync('db/'+name+'.sql','utf8'));
 test('rehearsal rejects SQL that its statement extractor would otherwise omit',()=>{
  const schema=readFileSync('db/dossier-successor-reservation.sql','utf8');for(const extra of ['DELETE FROM dossier_node_process_closures;','DROP TABLE dossier_node_process_admissions;','ALTER TABLE dossier_publication_attempts ADD COLUMN ignored TEXT;','CREATE INDEX extra ON dossier_successor_reservations(state); DELETE FROM dossier_node_process_closures;'])assert.throws(()=>parseStatements(schema+'\n'+extra),/Unrehearsed SQL/);
 });
-const additions=['dossier-successor-reservation','dossier-successor-launch','dossier-publication-receipt'];
+const additions=['dossier-successor-reservation','dossier-successor-launch','dossier-publication-receipt','dossier-activation-receipt'];
 test('native additive install preserves original custody and immutable new records on replay',async()=>{
  const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:'export default {fetch(){return new Response(null,{status:404});}}',d1Databases:{DB:'schema-rehearsal'}}));
  try{
@@ -20,7 +20,7 @@ test('native additive install preserves original custody and immutable new recor
   const originalSchema=statements('dossier-node-process');assert.equal(originalSchema.length,7);for(const sql of originalSchema)await db.prepare(sql).run();
   await db.prepare('INSERT INTO dossier_node_process_admissions VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind('g','p','owner','client','https://synthetic.invalid/mcp',1,1000,61000,'a'.repeat(64),'b'.repeat(64),'c'.repeat(64),'d'.repeat(40),'cloudflare/debian-trixie',1000,61000).run();
   await db.prepare('INSERT INTO dossier_node_process_closures VALUES(?,?,?,?,?,?,?)').bind('g','b'.repeat(64),'a'.repeat(64),'c'.repeat(64),'d'.repeat(40),'cloudflare/debian-trixie',2000).run();
-  const install=async()=>{for(const [i,name] of additions.entries()){const sqls=statements(name);assert.equal(sqls.length,[3,3,6][i]);for(const sql of sqls)assert.equal((await db.prepare(sql).run()).success,true);}};
+  const install=async()=>{for(const [i,name] of additions.entries()){const sqls=statements(name);assert.equal(sqls.length,[3,3,6,9][i]);for(const sql of sqls)assert.equal((await db.prepare(sql).run()).success,true);}};
   // D1 metadata varies by query; compare actual row content, not duration/size.
   const rows=async table=>(await db.prepare('SELECT * FROM '+table).all()).results;
   const originalRows=[await rows('dossier_node_process_admissions'),await rows('dossier_node_process_closures')];
@@ -30,9 +30,12 @@ test('native additive install preserves original custody and immutable new recor
   await db.prepare('INSERT INTO dossier_successor_launch_claims VALUES(?,?,?,?,?,?)').bind('e'.repeat(64),'3'.repeat(64),'f'.repeat(64),'4'.repeat(64),'g',3100).run();
   await db.prepare('INSERT INTO dossier_publication_attempts VALUES(?,?,?,?,?,?,?,?)').bind('5'.repeat(64),'6'.repeat(32),'agent-friendly-web-delegated-canary','2'.repeat(40),'7'.repeat(40),'1'.repeat(64),'8'.repeat(64),3000).run();
   await db.prepare('INSERT INTO dossier_publication_receipts VALUES(?,?,?,?)').bind('5'.repeat(64),'11111111-1111-4111-8111-111111111111','9'.repeat(64),3200).run();
-  const tables=['dossier_successor_reservations','dossier_successor_launch_claims','dossier_publication_attempts','dossier_publication_receipts'],saved=await Promise.all(tables.map(rows));
+  await db.prepare('INSERT INTO dossier_activation_attempts VALUES(?,?,?,?,?,?,?,?)').bind('a'.repeat(64),'5'.repeat(64),'e'.repeat(64),'3'.repeat(64),'b'.repeat(64),3000,63000,3300).run();
+  await db.prepare('INSERT INTO dossier_activation_receipts VALUES(?,?,?,?,?)').bind('a'.repeat(64),'22222222-2222-4222-8222-222222222222','33333333-3333-4333-8333-333333333333','c'.repeat(64),3400).run();
+  await db.prepare('INSERT INTO dossier_activation_acceptances VALUES(?,?)').bind('a'.repeat(64),3500).run();
+  const tables=['dossier_successor_reservations','dossier_successor_launch_claims','dossier_publication_attempts','dossier_publication_receipts','dossier_activation_attempts','dossier_activation_receipts','dossier_activation_acceptances'],saved=await Promise.all(tables.map(rows));
   await install();assert.deepEqual(await Promise.all(tables.map(rows)),saved);
-  for(const [table,column] of [...tables.map(t=>[t,t==='dossier_successor_reservations'?'trial_id':t==='dossier_successor_launch_claims'?'trial_id':'artifact_key']),['dossier_node_process_admissions','grant_id'],['dossier_node_process_closures','grant_id']]){
+  for(const [table,column] of [...tables.map(t=>[t,t==='dossier_successor_reservations'?'trial_id':t==='dossier_successor_launch_claims'?'trial_id':t.startsWith('dossier_activation_')?'activation_key':'artifact_key']),['dossier_node_process_admissions','grant_id'],['dossier_node_process_closures','grant_id']]){
    await assert.rejects(db.prepare('UPDATE '+table+' SET '+column+'='+column).run(),/immutable_/);await assert.rejects(db.prepare('DELETE FROM '+table).run(),/immutable_/);
   }
   assert.deepEqual([await rows('dossier_node_process_admissions'),await rows('dossier_node_process_closures')],originalRows);assert.deepEqual(await Promise.all(tables.map(rows)),saved);
