@@ -1,0 +1,18 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "agent-friendly-web-release-operator",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "main": "output/mcp-release-operator/index.mjs",
+  "compatibility_date": "2026-09-07",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [],
+  "triggers": {"crons": []},
+  "vars": {"AFW_RELEASE_OPERATOR_ENABLED": "false"},
+  "d1_databases": [{
+    "binding": "RELEASE_DB",
+    "database_name": "agent-friendly-web-delegated-canary",
+    "database_id": "6a728254-1494-4039-802e-b39288a55fcc"
+  }]
+}
