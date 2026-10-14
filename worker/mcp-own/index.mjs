@@ -1,4 +1,5 @@
 import {DurableObject,WorkerEntrypoint} from 'cloudflare:workers';
+import {observeOwnRetiredCustody} from '../../lib/mcp-own-retirement-host.mjs';
 import {createDelegatedOAuthWorker} from '../../lib/delegated-oauth-worker.mjs';
 import {createOwnDurableEventHost} from '../../lib/mcp-own-durable-host.mjs';
 import {createDossierEventRpcAuthority,readDossierEventHostPolicy} from '../../lib/dossier-event-rpc-authority.mjs';
@@ -19,6 +20,8 @@ export class AfwOwnEventNode extends DurableObject{
  }
  async #call(method,...args){try{const c=this.#host();c.current();const result=await c.host[method](...args);c.current();return result;}catch{fail();}}
  fetch(){return deny();}
+ // Private original-custody observation; no caller selectors or live runtime.
+ async observeRetired(...args){try{if(args.length)fail();return await observeOwnRetiredCustody({env:this.env,ctx:this.ctx});}catch{fail();}}
  list(){return this.#call('list');}
  subscribe(value){return this.#call('subscribe',value);}
  unsubscribe(value){return this.#call('unsubscribe',value);}
