@@ -111,3 +111,13 @@ test('stalled closure persistence cannot prevent original runtime stop request',
  const result=await Promise.race([a.close().then(()=>false,()=>true),new Promise(resolve=>setTimeout(()=>resolve(false),6500))]);assert.equal(result,true,'close persistence remained pending');assert.equal(stops,1);assert.equal((await f.config.runtime.observe(f.boot())).running,false);
  }finally{f.close();}
 });
+
+test('retired-only facade exposes no execution methods and preserves original records',async()=>{
+ const {createRetiredCustodyReader}=await import('../lib/mcp-retired-custody-reader.mjs'),m=await load(),f=fixture();try{
+ f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();const active=m.createNodeProcessCustody(f.config);await active.start();await active.close();withdrawOriginal(f);f.expire();
+ const {runtime,enabled,...options}=f.config;void runtime;void enabled;
+ const before=JSON.stringify(f.rows()),reader=createRetiredCustodyReader(options);assert.deepEqual(Object.keys(reader),['observeRetired']);
+ const result=await reader.observeRetired();assert.equal(result.processGeneration,f.boot().processGeneration);assert.equal(result.mayStartSuccessor,false);assert.equal(JSON.stringify(f.rows()),before);assert.equal(f.launches(),1);
+ assert.throws(()=>createRetiredCustodyReader({...options,runtime:f.config.runtime}));
+ }finally{f.close();}
+});
