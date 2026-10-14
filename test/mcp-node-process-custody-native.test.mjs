@@ -11,19 +11,20 @@ for(const scenario of ['loss','retirement'])test('native primary D1 custody acro
  const monitor=statements('db/dossier-monitoring-consent.sql'),processSchema=statements('db/dossier-node-process.sql');assert.equal(monitor.length,4);assert.equal(processSchema.length,7);
  const startAt=Date.now()-1000,expiresAt=startAt+180000,contents=`
 import {createNodeProcessCustody} from './lib/mcp-node-process-custody.mjs';
+import {createRetiredCustodyReader} from './lib/mcp-retired-custody-reader.mjs';
 const context={grantId:'g',subject:'owner',clientId:'client',resource:'https://private.invalid/mcp',scopes:['afw:project:read']};
 export class Own {
  constructor(ctx,env){this.ctx=ctx;this.env=env;}
  async fetch(request){
  const path=new URL(request.url).pathname;
  const runtime={launch:async boot=>{const {key,...manifest}=boot;if(key.length!==32)throw Error('key unavailable');await this.env.DB.prepare('UPDATE fixture_process SET launches=launches+1,running=1,manifest=?').bind(JSON.stringify(manifest)).run();},observe:async()=>{const p=await this.env.DB.prepare('SELECT * FROM fixture_process').first();return{...JSON.parse(p.manifest),running:p.running===1};},close:async()=>{await this.env.DB.prepare('UPDATE fixture_process SET running=0').run();}};
- const a=createNodeProcessCustody({enabled:true,db:this.env.DB,context,projectId:'p',projectionSecret:'z'.repeat(32),storage:this.ctx.storage,custodyKey:Buffer.alloc(32,7),containerId:this.ctx.id.toString(),programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40),image:'cloudflare/debian-trixie',window:{startAt:${startAt},expiresAt:${expiresAt}},runtime,now:Date.now});
+ const options={enabled:true,db:this.env.DB,context,projectId:'p',projectionSecret:'z'.repeat(32),storage:this.ctx.storage,custodyKey:Buffer.alloc(32,7),containerId:this.ctx.id.toString(),programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40),image:'cloudflare/debian-trixie',window:{startAt:${startAt},expiresAt:${expiresAt}},runtime,now:Date.now};const a=createNodeProcessCustody(options);
  try{
  if(path==='/start')return Response.json(await a.start());
  if(path==='/ready')return Response.json(await a.readReadiness());
  if(path==='/bridge'){const b=await a.createBridge();return Response.json({bridge:typeof b.verify==='function'});}
  if(path==='/close')return Response.json(await a.close());
- if(path==='/retired')return Response.json(await a.observeRetired());
+ if(path==='/retired'){const {enabled,runtime,...original}=options;return Response.json(await createRetiredCustodyReader(original).observeRetired());}
  if(path==='/withdraw'){
  const t=Date.now();await this.env.DB.prepare("UPDATE delegated_access_grants SET revoked_at=? WHERE id='g'").bind(new Date(t).toISOString()).run();
  await this.env.DB.prepare("INSERT INTO dossier_monitoring_consent_events(grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)").bind('g','p','owner','client',context.resource,1,'revoke','afw.dossier-monitoring.v1','22222222-2222-4222-8222-222222222222',t,t).run();return Response.json({});}
