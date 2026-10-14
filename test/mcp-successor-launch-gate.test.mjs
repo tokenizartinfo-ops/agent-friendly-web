@@ -79,3 +79,10 @@ test('retirement aging during final checks prevents launch',async()=>{
  }finally{f.db.close();}
 });
 
+
+test('final closure read starts a fresh primary session',async()=>{
+ const {createSuccessorLaunchGate}=await load(),f=await fixture();try{const base=f.options.db;
+ f.options.db={...base,withSession(){let queried=false;return{prepare:sql=>({bind:(...args)=>{const q=base.prepare(sql).bind(...args);const fresh=!queried;queried=true;return{...q,first:async()=>sql.startsWith('SELECT grant_id FROM dossier_node_process_closures')?(fresh?{grant_id:'new'}:null):q.first()};}})}}};
+ await assert.rejects(createSuccessorLaunchGate(f.options)(f.boot,new AbortController().signal));assert.equal(f.launches(),0);
+ }finally{f.db.close();}
+});
