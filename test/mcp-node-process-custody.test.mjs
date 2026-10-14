@@ -4,6 +4,46 @@ import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
 const load=()=>import('../lib/mcp-node-process-custody.mjs');
 const ctx={grantId:'g',subject:'owner',clientId:'client',resource:'https://private.invalid/mcp',scopes:['afw:project:read']};
+function withdrawOriginal(f){
+ const t=f.config.now();
+ f.db.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?').run(new Date(t).toISOString(),'g');
+ f.db.prepare("INSERT INTO dossier_monitoring_consent_events(grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)").run('g','p','owner','client',ctx.resource,1,'revoke','afw.dossier-monitoring.v1','22222222-2222-4222-8222-222222222222',t,t);
+}
+
+test('retirement observation reads original closed custody after expiry without runtime calls or writes',async()=>{
+ const m=await load(),f=fixture();try{
+  f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();const a=m.createNodeProcessCustody(f.config);await a.start();await a.close();withdrawOriginal(f);f.expire();
+  const before=JSON.stringify(f.rows()),base=f.config.db;
+  const reader=m.createNodeProcessCustody({...f.config,db:{prepare(sql){assert.match(sql,/^SELECT/);return base.prepare(sql);}},runtime:{launch:()=>assert.fail('launch'),observe:()=>assert.fail('probe'),close:()=>assert.fail('close')}});
+  const result=await reader.observeRetired();
+  assert.equal(result.purpose,'afw.node-retirement-observation.v1');assert.equal(result.physicalStopVerified,false);assert.equal(result.mayStartSuccessor,false);
+  assert.equal(result.processGeneration,f.boot().processGeneration);assert.equal(result.observedAt,f.config.now());
+  assert.equal(JSON.stringify(f.rows()),before);assert.equal(f.launches(),1);
+  assert.equal(JSON.stringify(result).includes(f.boot().key.toString('base64')),false);
+ }finally{f.close();}
+});
+
+test('retirement observation rejects live permissions, missing custody and foreign source',async()=>{
+ const m=await load();for(const mode of ['ready','permissions','oauth-only','monitor-only','missing','source','key','window']){const f=fixture();try{
+  f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();const a=m.createNodeProcessCustody(f.config);await a.start();
+  if(mode!=='ready')await a.close();
+  if(!['permissions','oauth-only'].includes(mode))withdrawOriginal(f);
+  if(mode==='oauth-only')f.db.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?').run(new Date(f.config.now()).toISOString(),'g');
+  if(mode==='monitor-only')f.db.prepare("UPDATE delegated_access_grants SET revoked_at='' WHERE id=?").run('g');
+  if(mode==='missing')f.eraseDurable();f.expire();
+  const reader=m.createNodeProcessCustody({...f.config,...(mode==='source'?{sourceRevision:'d'.repeat(40)}:{}),...(mode==='key'?{custodyKey:Buffer.alloc(32,8)}:{}),...(mode==='window'?{window:{...f.config.window,startAt:f.config.window.startAt+1}}:{})});
+  await assert.rejects(reader.observeRetired());assert.equal(f.launches(),1);
+ }finally{f.close();}}
+});
+
+test('retirement observation rejects grant resurrection between primary reads',async()=>{
+ const m=await load(),f=fixture();try{
+  f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();const a=m.createNodeProcessCustody(f.config);await a.start();await a.close();withdrawOriginal(f);f.expire();
+  const base=f.config.db;let changed=false;
+  const reader=m.createNodeProcessCustody({...f.config,db:{prepare(sql){const p=base.prepare(sql);return{bind(...args){const q=p.bind(...args);return{async first(){const row=await q.first();if(!changed&&sql.includes('AS monitoring_revoked_at')){changed=true;f.db.prepare("UPDATE delegated_access_grants SET revoked_at='' WHERE id=?").run('g');}return row;},run:q.run};}};}}});
+  await assert.rejects(reader.observeRetired());assert.equal(changed,true);assert.equal(f.launches(),1);
+ }finally{f.close();}
+});
 function fixture(){
  const db=new DatabaseSync(':memory:');db.exec('CREATE TABLE site_projects(id TEXT PRIMARY KEY,user_id TEXT,revision INTEGER);CREATE TABLE delegated_access_grants(id TEXT PRIMARY KEY,user_id TEXT,client_id TEXT,project_id TEXT,resource TEXT,scopes_json TEXT,expires_at TEXT,revoked_at TEXT);');
  db.exec(readFileSync('db/dossier-monitoring-consent.sql','utf8'));let now=Date.now()-1000,launches=0,running=false,observed,boot,lostPrimary=false,lostDurable=false;
