@@ -4,6 +4,7 @@ import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 const load=()=>import('../lib/mcp-publication-journal.mjs');
+test('publication budget accepts a bounded upload window, not only GET latency',async()=>{const {createPublicationJournal}=await load(),f=fixture();try{assert.doesNotThrow(()=>createPublicationJournal({...f.options,timeoutMs:60000}));assert.throws(()=>createPublicationJournal({...f.options,timeoutMs:60001}));}finally{f.db.close();}});
 function fixture(){
  const db=new DatabaseSync(':memory:');db.exec(readFileSync('db/dossier-publication-receipt.sql','utf8'));let uploads=0;
  const script='export default {fetch(){return new Response(null,{status:404})}}',artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:createHash('sha256').update(script).digest('hex'),sourceCheck:'git-inputs-before-after-v1'};
