@@ -10,11 +10,16 @@ La versión remota cerrada `3a9d7a81-de23-4e8b-bf9d-843b02e47514` conserva los s
 
 ## Cambio local
 
-El host registra únicamente un diagnóstico de fallo con tres campos estáticos/acotados:
+El host registra únicamente un diagnóstico de fallo con campos estáticos/acotados:
 
 - `event`: `afw.own_subscription_failed`.
 - `stage`: `process_readiness`, `callback_verification`, `receipt_record` o `final_readiness`.
 - `closureCompleted`: indica que la operación de cierre retornó correctamente; no prueba la terminación física. Si es falso, el cierre no quedó confirmado, aunque su intento de detener el proceso puede haberse ejecutado.
+- `elapsedMs`: tiempo desde el comienzo de la preparación del proceso hasta el fallo, excluyendo autorización y preflight anteriores.
+- `stageElapsedMs`: tiempo dentro de la etapa que falló. Incluye sus consultas y esperas internas; no equivale a tiempo de red del callback.
+- `closureElapsedMs`: tiempo posterior al fallo dedicado al intento de cierre. No está incluido en los dos anteriores.
+
+Los tiempos usan reloj monotónico, se redondean hacia abajo y se saturan a 600000 ms. Son diagnóstico, nunca autoridad, vigencia ni un motivo para prolongar plazos. Se emiten únicamente en fallos; no permiten reconstruir las duraciones individuales de etapas previas.
 
 Cada etapa indica qué operación estaba en curso, no identifica por sí sola la causa. `callback_verification` incluye las comprobaciones previas del controlador; no significa que el callback haya recibido una petición.
 
@@ -37,3 +42,10 @@ Referencias consultadas: [MCP Events de OpenAI](https://developers.openai.com/pl
 `npm run lint` y `npm run build` terminaron con código cero (dos advertencias existentes de lint). La suite completa con concurrencia cuatro terminó con 1.810 aprobadas, tres fallidas y dos omitidas. Al aislar secuencialmente los archivos fallidos quedaron seis aprobadas y un fallo en `assistance-private-admin-bootstrap-workerd.test.mjs`, al esperar una llamada de dispatch y observar cero. Su causa no está demostrada; no se alteraron sus plazos ni se ocultó la aserción. Este cambio permanece local, sin commit ni despliegue, pendiente de cerrar la validación general. Los logs de trabajo se conservan bajo `output/afw-subscription-diagnostic-*20261014.log`.
 
 Comprobación posterior del 14oct: el caso native SAME-primary originals pasó solo (1/1); una copia ignorada del ensayo, instrumentada únicamente dentro del bundle local con etapa/tiempo, pasó4/4. Ejecutada junto a los ensayos de procedencia y runner pasó26/26, con1omitida. No se reprodujo el fallo y no se modificó la lógica/plazo del instalador. Se conserva la evidencia del fallo anterior; no se declara causa Windows ni causa raíz remota. El diagnóstico sigue limitado a etapas. Candidata destinada a revisión/CI, no a despliegue directo.
+
+## Actualización de continuidad y tiempos
+PR426 fue integrada en dfbe38e con CI38575092625 satisfactoria. PR427 fue integrada en 3ad495e con CI38576596752:1818 aprobadas,0fallos,1omitida; reduce lecturas522→362. Las referencias anteriores a candidata sin commit describen su momento histórico.
+
+La extensión temporal conserva un matiz: si start() hace limpieza antes de rechazar, ese tiempo pertenece a process_readiness y elapsedMs; closureElapsedMs solo cubre el cierre posterior del host. Pruebas con reloj simulado verifican valores exactos y reinicio de etapa, además de los cuatro fallos y logger roto.
+
+Repetición local con20ms artificiales por lectura completó esta vez (11345ms,362lecturas); no establecer un umbral causal determinista desde ensayos de carga. Con30ms falló: elapsedMs10314, callback_verification6539ms, cierre35ms;306lecturas. Estas duraciones son sintéticas y no demuestran latencia D1 ni fallo de servicio ChatGPT. No hubo operaciones remotas.
