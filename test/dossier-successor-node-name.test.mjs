@@ -29,7 +29,7 @@ test('historical close resolves same fixed actor after expiry without successor 
 
 test('native successor name matches actual ctx and remains distinct from original with zero stored rows',async()=>{
  const {build}=await import('esbuild'),{Miniflare,convertV4MiniflareOptions}=await import('miniflare'),f=fixture();
- const {DB,AFW_DOSSIER_EVENTS_NODE,...bindings}=f.env;
+ const bindings=Object.fromEntries(Object.entries(f.env).filter(([key])=>!['DB','AFW_DOSSIER_EVENTS_NODE'].includes(key)));
  const contents=`import {DurableObject} from 'cloudflare:workers';import {readDossierEventHostPolicy} from './lib/dossier-event-rpc-authority.mjs';
  export class Own extends DurableObject{async fetch(){const env={...${JSON.stringify(bindings)},DB:this.env.DB,AFW_DOSSIER_EVENTS_NODE:this.env.NODE};const manifest=JSON.parse(env.AFW_DOSSIER_SUCCESSOR_POLICY);manifest.original.containerId=this.env.NODE.idFromName('afw-own-event-one-occurrence-v1').toString();env.AFW_DOSSIER_SUCCESSOR_POLICY=JSON.stringify(manifest);const c=readDossierEventHostPolicy({enabled:true,env,now:()=>2000});return Response.json({same:c.policy.containerId===this.ctx.id.toString(),distinct:c.policy.containerId!==manifest.original.containerId,rows:(await this.ctx.storage.list()).size});}}
  export default{fetch(request,env){return env.NODE.get(env.NODE.idFromName('${name}')).fetch(request);}};`;
