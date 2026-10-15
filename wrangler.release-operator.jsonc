@@ -10,6 +10,11 @@
   "routes": [],
   "triggers": {"crons": []},
   "vars": {"AFW_RELEASE_OPERATOR_ENABLED": "false"},
+  "durable_objects": {"bindings": [{
+    "name": "AFW_RELEASE_EVENTS_NODE",
+    "class_name": "AfwOwnEventNode",
+    "script_name": "agent-friendly-web-delegated-canary"
+  }]},
   "d1_databases": [{
     "binding": "RELEASE_DB",
     "database_name": "agent-friendly-web-delegated-canary",
