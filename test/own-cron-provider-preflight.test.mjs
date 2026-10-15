@@ -24,6 +24,24 @@ test('ambiguous active Workers impact cannot certify provider clearance',()=>{
  const other={...incident('identified'),id:'newworkerissue',name:'Service delays',incident_updates:[{affected_components:[{name:'Workers'}]}]};
  assert.equal(assessCronProviderSnapshot(snapshot('resolved',[other]),{now}).providerGate,'unknown');
 });
+
+test('active runtime dependencies keep verification closed and identify the official incident',()=>{
+ for(const component of ['Durable Objects','Containers','D1','Workflows']){
+  const other={id:'9yl8m5h16g1z',name:'Regional service errors',status:'identified',updated_at:'2026-10-13T17:00:00Z',components:[{name:component}]};
+  const r=assessCronProviderSnapshot(snapshot('resolved',[other]),{now});
+  assert.equal(r.providerGate,'unknown');assert.equal(r.mayRunClosedVerification,false);assert.equal(r.operationalReadiness,false);
+  assert.equal(r.reason,'active_related_incident');assert.deepEqual(r.relatedIncidents,[{id:other.id,status:'identified',updatedAt:other.updated_at,url:'https://www.cloudflarestatus.com/incidents/9yl8m5h16g1z'}]);
+  assert.equal(r.impactAttribution,'not-established');
+ }
+});
+test('diagnostic never echoes arbitrary incident titles or unsafe identifiers',()=>{
+ const other={id:'https://private.invalid/SECRET',name:'PRIVATE_TEXT',status:'identified',updated_at:'2026-10-13T17:00:00Z',components:[{name:'Workers'}]};
+ const r=assessCronProviderSnapshot(snapshot('resolved',[other]),{now});assert.equal(r.providerGate,'unknown');assert.equal(JSON.stringify(r).includes('SECRET'),false);assert.equal(JSON.stringify(r).includes('PRIVATE_TEXT'),false);
+});
+test('dependency incident title is sufficient when component metadata is absent',()=>{
+ const other={id:'newdependency',name:'Increased Errors for Durable Objects',status:'identified',updated_at:'2026-10-13T17:00:00Z'};
+ assert.equal(assessCronProviderSnapshot(snapshot('resolved',[other]),{now}).providerGate,'unknown');
+});
 test('malformed affected component metadata is not silently discarded',()=>{
  const other={...incident('identified'),id:'newworkerissue',name:'Service delays',components:'Workers Cron Triggers'};
  assert.equal(assessCronProviderSnapshot(snapshot('resolved',[other]),{now}).providerGate,'unknown');
