@@ -91,3 +91,13 @@ test('concrete candidate cannot bypass gate by disabling flag or replacing polic
 });
 
 test('concrete successor does not launch with only a closed publication receipt',async()=>{const f=await mountedOwn({activation:false}),saved=globalThis.fetch;try{globalThis.fetch=f.fetchImpl;await assert.rejects(f.actor.subscribe(params(f.projectRef)));assert.equal(f.boots(),0);}finally{globalThis.fetch=saved;f.close();}});
+
+test('named successor uses release gate and closes after live manifest removal',async()=>{
+ for(const activation of [false,true]){const f=await mountedOwn({activation}),saved=globalThis.fetch;try{
+  globalThis.fetch=f.fetchImpl;const p=JSON.parse(f.env.AFW_DOSSIER_EVENTS_POLICY);delete p.containerId;
+  f.env.AFW_DOSSIER_EVENTS_POLICY=JSON.stringify(p);f.env.AFW_DOSSIER_EVENTS_NODE_NAME='afw-own-event-first-successor-v1';
+  if(activation){await f.actor.subscribe(params(f.projectRef));assert.equal(f.boots(),1);}else{await assert.rejects(f.actor.subscribe(params(f.projectRef)));assert.equal(f.boots(),0);}
+  f.env.AFW_DOSSIER_EVENTS_ENABLED='false';delete f.env.AFW_DOSSIER_SUCCESSOR_POLICY;delete f.env.AFW_DOSSIER_SUCCESSOR_ENABLED;delete f.env.AFW_DOSSIER_PROVIDER_READ_TOKEN;
+  await f.actor.close();assert.equal(f.config.ctx.container.running,false);
+ }finally{globalThis.fetch=saved;f.close();}}
+});
