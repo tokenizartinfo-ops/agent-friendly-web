@@ -8,7 +8,7 @@ function signals(x){
  const components=value=>{if(value===undefined||value===null)return;if(!Array.isArray(value))throw Error('unavailable');for(const c of value){if(typeof c?.name!=='string')throw Error('unavailable');names.push(c.name);}};
  components(x.components);
  if(x.incident_updates!==undefined&&x.incident_updates!==null){if(!Array.isArray(x.incident_updates))throw Error('unavailable');for(const u of x.incident_updates){if(!u||typeof u!=='object')throw Error('unavailable');components(u.affected_components);}}
- return{worker:names.some(s=>/Workers/i.test(s)),cron:names.some(s=>/Cron Trigger/i.test(s))};
+ return{worker:names.some(s=>/Workers/i.test(s)),cron:names.some(s=>/Cron Trigger/i.test(s)),dependency:names.some(s=>/\b(?:Durable Objects|Containers|D1|Workflows)\b/i.test(s))};
 }
 function receipt(providerGate,now){
  let checkedAt=null;try{if(Number.isSafeInteger(now)&&now>=0)checkedAt=new Date(now).toISOString();}catch{}
@@ -19,15 +19,16 @@ export function assessCronProviderSnapshot(snapshot,{now=Date.now()}={}){
  try{
   if(!receipt('unknown',now).checkedAt||snapshot?.page?.url!=='https://www.cloudflarestatus.com'||!Array.isArray(snapshot.incidents)||snapshot.incidents.length>50)return receipt('unknown',now);
   if(snapshot.incidents.some(x=>!x||typeof x.id!=='string'||typeof x.name!=='string'))return receipt('unknown',now);
-  const originals=snapshot.incidents.filter(x=>x.id===INCIDENT),relevant=snapshot.incidents.map(x=>({incident:x,...signals(x)})).filter(x=>x.worker||x.cron);
+  const originals=snapshot.incidents.filter(x=>x.id===INCIDENT),relevant=snapshot.incidents.map(x=>({incident:x,...signals(x)})).filter(x=>x.worker||x.cron||x.dependency);
   if(originals.length!==1||!signals(originals[0]).worker||!signals(originals[0]).cron||new Set(relevant.map(x=>x.incident.id)).size!==relevant.length)return receipt('unknown',now);
   for(const {incident:x} of relevant){
    const updated=Date.parse(x.updated_at);
-   if(!ACTIVE.has(x.status)&&!TERMINAL.has(x.status)||!Number.isSafeInteger(updated)||updated>now||!/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{3})?Z$/.test(x.updated_at))return receipt('unknown',now);
+   if(!/^[a-z0-9]{1,64}$/.test(x.id)||!ACTIVE.has(x.status)&&!TERMINAL.has(x.status)||!Number.isSafeInteger(updated)||updated>now||!/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{3})?Z$/.test(x.updated_at))return receipt('unknown',now);
    if(new Date(updated).toISOString()!==x.updated_at.replace(/Z$/,x.updated_at.includes('.')?'Z':'.000Z'))return receipt('unknown',now);
   }
   if(relevant.some(x=>x.worker&&x.cron&&ACTIVE.has(x.incident.status)))return receipt('blocked',now);
-  if(relevant.some(x=>ACTIVE.has(x.incident.status)))return receipt('unknown',now);
+  const active=relevant.filter(x=>ACTIVE.has(x.incident.status));
+  if(active.length)return Object.freeze({...receipt('unknown',now),reason:'active_related_incident',impactAttribution:'not-established',relatedIncidents:Object.freeze(active.map(({incident:x})=>Object.freeze({id:x.id,status:x.status,updatedAt:x.updated_at,url:'https://www.cloudflarestatus.com/incidents/'+x.id})))});
   return receipt('resolved',now);
  }catch{return receipt('unknown',now);}
 }
