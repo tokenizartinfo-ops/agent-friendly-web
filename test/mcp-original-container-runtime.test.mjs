@@ -9,3 +9,18 @@ test('original adapter starts once with private env and configures timeout only 
 test('lost start ACK, bad readiness, stopped process and lease cannot lead to another launch',async()=>{const {createOriginalContainerRuntime}=await load();for(const mode of ['lost-start','tamper','stopped']){const f=fixture(),r=createOriginalContainerRuntime(f.options),a=new AbortController();f.mode(mode);if(mode==='lost-start')await assert.rejects(r.launch(f.value,a.signal));else{await r.launch(f.value,a.signal);await assert.rejects(r.observe(f.original(),a.signal,f.probe));}await assert.rejects(r.launch(f.value,a.signal));assert.equal(f.boots(),1);await r.close();}const f=fixture(),r=createOriginalContainerRuntime(f.options);await r.launch(f.value,new AbortController().signal);f.expire();await assert.rejects(r.observe(f.original(),new AbortController().signal,f.probe));assert.equal(f.boots(),1);});
 test('port readiness retries do not restart the original process and cancellation settles hung port',async()=>{const {createOriginalContainerRuntime}=await load(),f=fixture(),r=createOriginalContainerRuntime(f.options),a=new AbortController();await r.launch(f.value,a.signal);f.mode('refused');assert.equal((await r.observe(f.original(),a.signal,f.probe)).running,true);assert.equal(f.boots(),1);f.mode('hung');const result=r.observe(f.original(),a.signal,f.probe);setTimeout(()=>a.abort(),25);await assert.rejects(result);assert.equal(f.boots(),1);await r.close();});
 test('cancelled readiness body releases its native reader without another boot',async()=>{const {createOriginalContainerRuntime}=await load(),f=fixture(),r=createOriginalContainerRuntime(f.options),a=new AbortController();await r.launch(f.value,a.signal);f.mode('hung-body');const result=r.observe(f.original(),a.signal,f.probe);setTimeout(()=>a.abort(),25);await assert.rejects(result);assert.equal(f.cancellations(),1);assert.equal(f.boots(),1);await r.close();});
+
+test('constructor failure observation identifies only fixed runtime prerequisites and never boots',async()=>{
+ const {createOriginalContainerRuntime}=await load();
+ const cases=[
+  ['native_runtime_options_invalid',o=>{o.extra='PRIVATE';}],
+  ['native_runtime_inputs_invalid',o=>{o.program='';}],
+  ['native_runtime_window_invalid',o=>{o.window={startAt:2,expiresAt:1};}],
+  ['native_runtime_identity_invalid',o=>{o.ctx.id={toString:()=> 'PRIVATE'};}],
+  ['native_runtime_context_invalid',o=>{o.ctx={...o.ctx,get container(){throw Error('PRIVATE');}};}],
+  ['native_container_absent',o=>{o.ctx.container=undefined;}],
+  ...[['start','native_container_start_unavailable'],['setInactivityTimeout','native_container_timeout_unavailable'],['interceptOutboundHttp','native_container_intercept_unavailable'],['getTcpPort','native_container_port_unavailable'],['destroy','native_container_destroy_unavailable']].map(([method,stage])=>[stage,o=>{o.ctx.container[method]=undefined;}]),
+ ];
+ for(const [stage,change]of cases){const f=fixture(),rows=[];change(f.options);assert.throws(()=>createOriginalContainerRuntime(f.options,r=>rows.push(r)),/unavailable/);assert.deepEqual(rows,[stage]);assert.equal(f.boots(),0);assert.equal(f.stops(),0);assert.ok(!JSON.stringify(rows).includes('PRIVATE'));}
+ const f=fixture();assert.doesNotThrow(()=>createOriginalContainerRuntime(f.options,()=>{throw Error('PRIVATE');}));assert.equal(f.boots(),0);
+});

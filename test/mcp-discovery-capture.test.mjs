@@ -48,3 +48,10 @@ test('request events-gate witnesses survive only as fixed stages, not configurat
  f.logs.push({message:[JSON.stringify({...row,stage:'events_enabled',count:undefined,env:'SECRET'})]});c.push(JSON.stringify(f));
  assert.deepEqual(rows.map(r=>r.stage),['events_enabled','events_not_enabled']);assert.ok(!JSON.stringify(rows).includes('SECRET'));c.finish();
 });
+
+test('native prerequisite failures remain fixed stages without runtime objects or error text',()=>{
+ const stages=['native_runtime_options_invalid','native_runtime_inputs_invalid','native_runtime_window_invalid','native_runtime_context_invalid','native_runtime_identity_invalid','native_container_absent','native_container_start_unavailable','native_container_timeout_unavailable','native_container_intercept_unavailable','native_container_port_unavailable','native_container_destroy_unavailable'];
+ const rows=[],c=capture(r=>rows.push(r)),f=frame();f.logs=stages.map(stage=>({message:[JSON.stringify({...row,stage,count:undefined})]}));
+ f.logs.push({message:[JSON.stringify({...row,stage:'native_container_absent',count:undefined,ctx:'SECRET'})]});c.push(JSON.stringify(f));
+ assert.deepEqual(rows.map(r=>r.stage),stages);assert.ok(!JSON.stringify(rows).includes('SECRET'));c.finish();
+});
