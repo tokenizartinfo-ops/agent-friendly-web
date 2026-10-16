@@ -19,3 +19,10 @@ Variables: AFW_MCP_DISCOVERY_DIAGNOSTIC_ENABLED, AFW_MCP_DISCOVERY_DIAGNOSTIC_ST
 El encabezado Mcp-Method es una etiqueta aportada por el cliente, no una prueba del método ejecutado. authenticated se emite solo al entrar en la fábrica de eventos ya autorizada; su ausencia no prueba rechazo OAuth si esa fábrica no se invocó. Esta observación no acredita ejecución de Container, suscripción, aviso útil, retirada nativa ni funcionamiento con PC apagada.
 
 Estado: implementación local; despliegue y diagnóstico remoto pendientes. El último cierre remoto conocido es bbea484a, comprobado el 16 de octubre a las 13:23:57Z; no se presume vigente sin nueva lectura.
+
+## Proyección local del tail
+`node scripts/filter-mcp-discovery-tail.mjs REVISION START_MS END_MS` consume únicamente stdin JSON de Wrangler y emite NDJSON saneado. No abre conexiones ni crea/elimina tails. El supervisor debe detener y eliminar el tail upstream y comprobarlo con la API; la terminación del filtro no acredita cierre remoto.
+
+Al preparar el proceso upstream fijar WRANGLER_WRITE_LOGS=false y WRANGLER_LOG_SANITIZE=true, desactivar métricas y mantener stderr privado (nunca imprimirlo en bruto). La implementación instalada de Wrangler permite desactivar archivos mediante WRANGLER_WRITE_LOGS; no basta con filtrar stdout. No guardar un archivo intermedio ni usar Tee-Object. Antes de usar el transporte comprobar su versión/formato y que el stdout sea JSON: cualquier banner o JSON incompleto hace fallar cerrado el filtro.
+
+Filtro local: servicio fijo delegated-canary, fuente exacta, ventana <=10 minutos, un MiB total, 256 KiB por frame, cien invocaciones, hasta cien entradas por frame. Descarta registros con campos extra/valores fuera de contrato. El número de invocación es local a esta captura, no un identificador global ni prueba de identidad. Cualquier límite o truncamiento vuelve inconclusa la cobertura. No guarda headers, URL, excepciones o mensajes ajenos.
