@@ -11,7 +11,7 @@ test('disabled composition, missing monitoring and invalid callback/project neve
 test('catalog diagnostics locate runtime rejection and preserve its closed behavior',async()=>{
  const {createOwnDurableEventHost}=await load(),f=fixture();try{
   f.grant();const stages=[];assert.throws(()=>createOwnDurableEventHost({...f.config,ctx:{...f.config.ctx,container:undefined}},stage=>stages.push(stage)));
-  assert.deepEqual(stages,['native_runtime_check']);assert.equal(f.boots(),0);
+  assert.deepEqual(stages,['native_runtime_check','native_container_absent']);assert.equal(f.boots(),0);
   const observed=[];const h=createOwnDurableEventHost(f.config,stage=>observed.push(stage));assert.match(await h.list(),/^[0-9a-f]{64}$/);
   assert.ok(observed.includes('native_runtime_ready'));assert.ok(observed.includes('native_authorization_ready'));assert.ok(observed.includes('native_closure_ready'));assert.equal(f.boots(),0);
   const quiet=createOwnDurableEventHost(f.config,()=>{throw Error('private sink error');});assert.match(await quiet.list(),/^[0-9a-f]{64}$/);
