@@ -36,6 +36,7 @@ export class AfwOwnEventNode extends DurableObject{
  async close(){try{const c=this.#host(true);c.current();const result=await c.host.close();c.current();return result;}catch{fail();}}
  // Internal producer reference only; never accept a caller-authored signal.
  deliverSaved(subscriptionId,eventId){return this.#call('deliverSaved',subscriptionId,eventId);}
+ deliverOwnSaved(eventId){return this.#call('deliverOwnSaved',eventId);}
  async consume(request,serverProps){try{return await this.#call('consume',request,serverProps);}catch{return deny();}}
 }
 
