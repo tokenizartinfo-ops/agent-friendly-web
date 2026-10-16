@@ -25,7 +25,7 @@ test('HTTP and authority observation preserves response, errors and subscription
  const rows=[],response=new Response('private body',{status:401}),failure=Error('private failure');
  const options={now:()=>1000,emit:r=>rows.push(r)};
  assert.equal(await observeMcpDiscoveryRequest({env,request,sourceRevision,...options},async()=>response),response);assert.equal(response.bodyUsed,false);
- assert.deepEqual(rows.map(r=>r.stage),['received','response']);assert.equal(rows[1].status,401);
+ assert.deepEqual(rows.map(r=>r.stage),['received','authorization_header_present','response']);assert.equal(rows[2].status,401);
  await assert.rejects(observeMcpDiscoveryRequest({env,request,sourceRevision,...options},async()=>{throw failure;}),e=>e===failure);
  const d=createMcpDiscoveryDiagnostic({env,request,sourceRevision,...options}),subscribe=()=>{},unsubscribe=()=>{};
  const authority=await observeMcpEventAuthority(d,()=>({list:async()=>'c'.repeat(64),subscribe,unsubscribe}));
@@ -49,4 +49,27 @@ test('private catalog RPC records only fixed native stages in the same bounded d
  d.record('native_received',{private:'SECRET'});d.record('native_runtime_check');d.record('native_failed');d.record('SECRET');
  assert.deepEqual(rows.map(r=>r.stage),['native_received','native_runtime_check','native_failed']);assert.ok(rows.every(r=>r.method==='events/list'));assert.ok(!JSON.stringify(rows).includes('SECRET'));
  const disabled=[];diagnostics.createMcpRpcCatalogDiagnostic({env:{...env,AFW_MCP_DISCOVERY_DIAGNOSTIC_ENABLED:'false'},sourceRevision,now:()=>1000,emit:r=>disabled.push(r)}).record('native_received');assert.deepEqual(disabled,[]);
+});
+
+test('token response observation distinguishes emission outcome without reading the body or credentials',async()=>{
+ for(const status of [200,400,503]){
+  const rows=[],request=new Request('https://example.invalid/token?SECRET',{method:'POST',headers:{Authorization:'SECRET','Mcp-Method':'SECRET',Cookie:'SECRET'},body:'code=SECRET&code_verifier=SECRET'}),response=new Response('SECRET',{status});
+  assert.equal(await observeMcpDiscoveryRequest({env,request,sourceRevision,now:()=>1000,emit:r=>rows.push(r)},async()=>response),response);
+  assert.deepEqual(rows.map(r=>[r.method,r.stage,r.status]),[['oauth/token','received',undefined],['oauth/token','response',status]]);
+  assert.equal(request.bodyUsed,false);assert.equal(response.bodyUsed,false);assert.ok(!JSON.stringify(rows).includes('SECRET'));
+ }
+});
+
+test('MCP authorization header presence is only a boolean stage, not token validation',async()=>{
+ for(const present of [true,false]){
+  const rows=[],request=new Request('https://example.invalid/mcp',{method:'POST',headers:present?{Authorization:'SECRET'}:{}});
+  await observeMcpDiscoveryRequest({env,request,sourceRevision,now:()=>1000,emit:r=>rows.push(r)},async()=>new Response(null,{status:401}));
+  assert.deepEqual(rows.map(r=>r.stage),['received',present?'authorization_header_present':'authorization_header_absent','response']);assert.ok(!JSON.stringify(rows).includes('SECRET'));
+ }
+ const rows=[];await observeMcpDiscoveryRequest({env:{...env,AFW_MCP_DISCOVERY_DIAGNOSTIC_ENABLED:'false'},request,sourceRevision,now:()=>1000,emit:r=>rows.push(r)},async()=>new Response(null,{status:401}));assert.deepEqual(rows,[]);
+});
+
+test('header inspection failure never prevents the real handler from running',async()=>{
+ const rows=[],request=new Request('https://example.invalid/mcp',{method:'POST'});request.headers.has=()=>{throw Error('PRIVATE');};const response=new Response(null,{status:401});
+ assert.equal(await observeMcpDiscoveryRequest({env,request,sourceRevision,now:()=>1000,emit:r=>rows.push(r)},async()=>response),response);assert.ok(!JSON.stringify(rows).includes('PRIVATE'));
 });

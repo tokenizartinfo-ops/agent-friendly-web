@@ -35,3 +35,9 @@ test('bounded native catalog stages survive the sanitizer without extra payload'
  const rows=[],c=capture(r=>rows.push(r)),f=frame();f.logs=[{message:[JSON.stringify({...row,stage:'native_runtime_check',count:undefined})]}];c.push(JSON.stringify(f));
  assert.equal(rows.length,1);assert.equal(rows[0].stage,'native_runtime_check');assert.ok(!JSON.stringify(rows).includes('SECRET'));
 });
+
+test('token status and MCP header-presence stages survive sanitization without private fields',()=>{
+ const rows=[],c=capture(r=>rows.push(r)),f=frame();
+ f.logs=[{message:[JSON.stringify({...row,method:'oauth/token',stage:'response',count:undefined,status:200})]},{message:[JSON.stringify({...row,stage:'authorization_header_absent',count:undefined})]}];c.push(JSON.stringify(f));
+ assert.deepEqual(rows.map(r=>[r.method,r.stage,r.status]),[['oauth/token','response',200],['events/list','authorization_header_absent',undefined]]);assert.ok(!JSON.stringify(rows).includes('SECRET'));
+});
