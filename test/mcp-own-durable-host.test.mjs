@@ -7,6 +7,16 @@ const withdrawal=p=>({name:p.name,arguments:p.arguments,delivery:{mode:'webhook'
 test('disabled composition, missing monitoring and invalid callback/project never boot Node',async()=>{
  const {createOwnDurableEventHost}=await load(),f=fixture();try{assert.throws(()=>createOwnDurableEventHost({...f.config,enabled:false}));const h=createOwnDurableEventHost(f.config);f.setHost(h);assert.equal(await h.list(),null);await assert.rejects(h.subscribe(params('a'.repeat(64))));f.grant();const projectRef=await h.list();assert.match(projectRef,/^[0-9a-f]{64}$/);await assert.rejects(h.subscribe({...params(projectRef),delivery:{...params(projectRef).delivery,url:'http://localhost/hook'}}));await assert.rejects(h.subscribe(params('0'.repeat(64))));assert.equal(f.boots(),0);}finally{f.close();}
 });
+
+test('catalog diagnostics locate runtime rejection and preserve its closed behavior',async()=>{
+ const {createOwnDurableEventHost}=await load(),f=fixture();try{
+  f.grant();const stages=[];assert.throws(()=>createOwnDurableEventHost({...f.config,ctx:{...f.config.ctx,container:undefined}},stage=>stages.push(stage)));
+  assert.deepEqual(stages,['native_runtime_check']);assert.equal(f.boots(),0);
+  const observed=[];const h=createOwnDurableEventHost(f.config,stage=>observed.push(stage));assert.match(await h.list(),/^[0-9a-f]{64}$/);
+  assert.ok(observed.includes('native_runtime_ready'));assert.ok(observed.includes('native_authorization_ready'));assert.ok(observed.includes('native_closure_ready'));assert.equal(f.boots(),0);
+  const quiet=createOwnDurableEventHost(f.config,()=>{throw Error('private sink error');});assert.match(await quiet.list(),/^[0-9a-f]{64}$/);
+ }finally{f.close();}
+});
 test('same queued SQLite custody/controller and signed Node control loop subscribe and deliver once',async()=>{
  const {createOwnDurableEventHost}=await load(),f=fixture();try{f.grant();const h=createOwnDurableEventHost(f.config);f.setHost(h);const projectRef=await h.list(),p=params(projectRef),receipt=await h.subscribe(p);assert.equal(f.boots(),1);assert.equal(f.sends(),1);const rebuilt=createOwnDurableEventHost(f.config);f.setHost(rebuilt);await assert.rejects(rebuilt.subscribe(p));assert.equal(f.boots(),1);assert.equal(f.sends(),1);const result=await rebuilt.deliver(receipt.id,{version:'afw-dossier-event-v1',eventId:'e'.repeat(64),projectRef,revision:1,kind:'project_updated',observedAt:new Date().toISOString()});assert.equal(result.cloudReviewConfirmed,false);assert.equal(f.sends(),2);await assert.rejects(h.deliver(receipt.id,{version:'afw-dossier-event-v1',eventId:'e'.repeat(64),projectRef,revision:1,kind:'project_updated',observedAt:new Date().toISOString()}));await h.unsubscribe(withdrawal(p));assert.equal(f.config.ctx.container.running,false);assert.equal(await h.list(),null);await assert.rejects(h.subscribe(p));assert.equal(f.boots(),1);}finally{f.close();}
 });
