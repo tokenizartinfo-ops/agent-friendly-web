@@ -12,6 +12,29 @@ function fixture(){const script='export default {}',artifact={script,sourceRevis
 test('closed upload inherits exact base UUID and never deploys',async()=>{const {createClosedVersionUpload}=await load(),f=fixture(),upload=createClosedVersionUpload(f.options);assert.deepEqual(await upload(f.artifact,new AbortController().signal),{versionId});const post=f.calls.find(c=>c.init.method==='POST');assert(post.url.endsWith('/versions?deploy=false'));const body=JSON.parse(post.init.body);assert.equal(Buffer.from(body.modules[0].content_base64,'base64').toString(),f.artifact.script);assert(body.bindings.every(b=>b.type==='inherit'&&b.version_id===baseVersionId));assert.equal(body.migrations,undefined);await assert.rejects(upload(f.artifact,new AbortController().signal));assert.equal(f.calls.filter(c=>c.init.method==='POST').length,1);});
 test('enabled flags, missing resource and altered artifact prevent POST',async()=>{const {createClosedVersionUpload}=await load();for(const mode of ['flag','resource','bytes']){const f=fixture();if(mode==='flag')f.baseline.bindings[0].text='true';if(mode==='resource')f.baseline.bindings=f.baseline.bindings.filter(b=>b.name!=='DB');if(mode==='bytes')f.artifact.script+='changed';await assert.rejects(createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal));assert.equal(f.calls.filter(c=>c.init.method==='POST').length,0);}});
 test('unknown POST acknowledgement is not retried',async()=>{const {createClosedVersionUpload}=await load(),f=fixture(),fetch=f.options.fetchImpl;f.options.fetchImpl=async(u,i)=>{const r=await fetch(u,i);if(i.method==='POST')throw Error('private provider detail');return r;};const upload=createClosedVersionUpload(f.options);await assert.rejects(upload(f.artifact,new AbortController().signal),{message:'Closed publication unavailable'});await assert.rejects(upload(f.artifact,new AbortController().signal));assert.equal(f.calls.filter(c=>c.init.method==='POST').length,1);});
+
+test('closed publication preserves the existing own Container attachment and named entrypoints',async()=>{
+ const {createClosedVersionUpload}=await load(),f=fixture();
+ f.baseline.exports={default:{type:'worker'},AfwNodeControl:{type:'worker'},...f.baseline.exports};
+ f.baseline.containers=[{class_name:'AfwOwnEventNode',name:'agent-friendly-web-delegated-canary-afwowneventnode'}];
+ const fetch=f.options.fetchImpl;
+ f.options.fetchImpl=async(u,i)=>{if(i.method==='POST'){const body=JSON.parse(i.body);assert.deepEqual(body.containers,[{class_name:'AfwOwnEventNode'}]);assert.deepEqual(body.exports,f.baseline.exports);}return fetch(u,i);};
+ assert.deepEqual(await createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal),{versionId});
+});
+
+test('missing Container attachment on publication readback cannot confirm the version',async()=>{
+ const {createClosedVersionUpload}=await load(),f=fixture();f.baseline.containers=[{class_name:'AfwOwnEventNode',name:'agent-friendly-web-delegated-canary-afwowneventnode'}];
+ const fetch=f.options.fetchImpl;f.options.fetchImpl=async(u,i)=>u.endsWith(versionId)?Response.json({success:true,errors:[],result:{...f.baseline,id:versionId,containers:[]}}):fetch(u,i);
+ await assert.rejects(createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal));assert.equal(f.calls.filter(c=>c.init.method==='POST').length,1);
+});
+
+test('foreign Container metadata prevents upload and provider normalized names preserve identity',async()=>{
+ const {createClosedVersionUpload}=await load();
+ for(const entry of [{class_name:'Foreign'},{class_name:'AfwOwnEventNode',name:'foreign'}]){const f=fixture();f.baseline.containers=[entry];await assert.rejects(createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal));assert.equal(f.calls.filter(c=>c.init.method==='POST').length,0);}
+ const f=fixture();f.baseline.containers=[{class_name:'AfwOwnEventNode'}];const fetch=f.options.fetchImpl;
+ f.options.fetchImpl=async(u,i)=>u.endsWith(versionId)?Response.json({success:true,errors:[],result:{...f.baseline,id:versionId,containers:[{class_name:'AfwOwnEventNode',name:'agent-friendly-web-delegated-canary-afwowneventnode'}]}}):fetch(u,i);
+ assert.deepEqual(await createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal),{versionId});
+});
 test('readback drift and timeout do not confirm publication',async()=>{const {createClosedVersionUpload}=await load(),f=fixture(),fetch=f.options.fetchImpl;f.options.fetchImpl=async(u,i)=>u.endsWith(versionId)?Response.json({success:true,errors:[],result:{...f.baseline,id:versionId,bindings:[]}}):fetch(u,i);await assert.rejects(createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal));await assert.rejects(createClosedVersionUpload({...fixture().options,timeoutMs:10,fetchImpl:()=>new Promise(()=>{})})(fixture().artifact,new AbortController().signal));});
 test('unsupported version settings reject before upload instead of resetting defaults',async()=>{const {createClosedVersionUpload}=await load();for(const key of ['limits','placement','assets','cache_options','future_setting']){const f=fixture();f.baseline[key]={enabled:true};if(key==='limits')f.baseline[key]={cpu_ms:20};await assert.rejects(createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal));assert.equal(f.calls.filter(c=>c.init.method==='POST').length,0);}});
 
