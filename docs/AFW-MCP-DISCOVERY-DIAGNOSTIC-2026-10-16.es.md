@@ -3,7 +3,7 @@
 ## Problema y alcance
 La lectura cloud del expediente sintético respondió 200 y el permiso de avisos quedó registrado. La consulta posterior de catálogo devolvió «no available webhook events». Esto no identifica por sí solo la causa. Actualizar herramientas y consultar en paralelo tampoco acredita una comprobación posterior a la actualización.
 
-El Worker incorpora observación desactivada por defecto: únicamente POST /mcp, revisión de fuente válida, flag explícito y ventana absoluta de hasta diez minutos. Registra etapas fijas, método de una lista cerrada, estado HTTP y catálogo cero/uno. No inspecciona cuerpo, credenciales, cookies, parámetros de URL ni texto de errores. No cambia permisos, respuestas, suscripciones ni publicaciones.
+El Worker incorpora observación desactivada por defecto: únicamente POST /mcp y POST /token, revisión de fuente válida, flag explícito y ventana absoluta de hasta diez minutos. Registra etapas fijas, método de una lista cerrada, estado HTTP y catálogo cero/uno. Para MCP registra únicamente presencia o ausencia del encabezado Authorization; nunca su valor. Para /token usa la etiqueta fija oauth/token, sin leer formulario o respuesta. No inspecciona cuerpo, credenciales, cookies, parámetros de URL ni texto de errores. No cambia permisos, respuestas, suscripciones ni publicaciones.
 
 Variables: AFW_MCP_DISCOVERY_DIAGNOSTIC_ENABLED, AFW_MCP_DISCOVERY_DIAGNOSTIC_START_AT y AFW_MCP_DISCOVERY_DIAGNOSTIC_EXPIRES_AT (milisegundos decimales). Ausentes o inválidas: silencio. Deriva de configuración, reloj regresivo y vencimiento: no registrar esa observación. No amplían ninguna ventana OAuth.
 
@@ -51,3 +51,13 @@ authority_ready únicamente construye el broker; no acredita su autorización pr
 Los sinks fallan sin alterar resultado/error. La validación estricta del runtime permanece antes del catálogo: instrumentarla no autoriza saltarla ni publicar eventos que el servicio no pueda atender. Faltar ctx.container es una hipótesis local reproducida; todavía no es causa remota demostrada. Otro fallo reproducido es la lectura de cierres. Las tablas necesarias existen remotamente y la app Container está asociada al namespace esperado, pero eso no acredita la forma de ctx ni el éxito de su llamada.
 
 Esta segunda instrumentación sí modifica el Worker y necesita su propia aceptación/publicación cerrada antes de observarla remotamente. No usar una captura con fuente antigua para acreditarla ni repetir planes de publicación consumidos. Hasta esa preparación, conservar el servicio cerrado y no pedir otro ingreso.
+
+## Intercambio OAuth y credencial presentada
+
+El campo D1 exchanged_at se escribe dentro del callback de intercambio, antes de que el proveedor cree y devuelva el token. No demuestra emisión completada ni que ChatGPT guardó o usó esa conexión. La observación de POST /token usa únicamente método fijo oauth/token y estado de la respuesta final; nunca su contenido. HTTP200 confirma terminación del endpoint, no recepción o uso del token por el asistente.
+
+En POST /mcp, authorization_header_present o authorization_header_absent solo indican que el encabezado existe. No demuestran que contenga un bearer válido ni identifican el permiso. El saneador admite únicamente estas etiquetas fijas; no admite valores, hashes de tokens, argumentos o errores. Ventana, fuente, límites, controles desactivados y cierre explícito de la captura siguen vigentes. Una excepción de inspección no impide ejecutar el handler.
+
+Antes de otro ensayo, conservar el callback hasta que la reconexión haya terminado de forma observable. La marca exchanged_at y un botón que vuelve a habilitarse no sustituyen el resultado del intercambio. Correlacionar estado HTTP del token, conexión del cliente, presentación de Authorization, handler autenticado y catálogo como hechos separados. Una captura sin requests a /token no permite concluir que faltó emisión si no cubrió esa fase.
+
+Fuentes oficiales: https://developers.openai.com/plugins/build/auth y https://developers.openai.com/plugins/deploy/troubleshooting, consultadas el16oct2026. El contrato exige presentar en MCP el token obtenido; no establece que un registro D1 local confirme adopción de credenciales en el cliente.
