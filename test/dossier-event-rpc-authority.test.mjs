@@ -9,3 +9,11 @@ test('original OAuth/context and server policy pin the single DO; no caller reso
 test('configuration drift during current authorization or RPC cannot return success',async()=>{const {createDossierEventRpcAuthority}=await load(),f=setup();try{const a=createDossierEventRpcAuthority(f.options);f.setHook(()=>{f.env.AFW_DOSSIER_EVENTS_ENABLED='false';});await assert.rejects(a.list());assert.equal(f.calls(),1);await assert.rejects(a.list());assert.equal(f.calls(),1);}finally{f.close();}});
 test('revoked original grant and expired window never call the DO',async()=>{const {createDossierEventRpcAuthority}=await load(),f=setup();try{const a=createDossierEventRpcAuthority(f.options);f.db.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?').run(new Date().toISOString(),'g');await assert.rejects(a.list());assert.equal(f.calls(),0);assert.throws(()=>createDossierEventRpcAuthority({...f.options,now:()=>f.policy.expiresAt}));}finally{f.close();}});
 test('binding resolution drift is observed before invoking the fixed DO',async()=>{const {createDossierEventRpcAuthority}=await load(),f=setup();try{const original=f.env.AFW_DOSSIER_EVENTS_NODE.get;f.env.AFW_DOSSIER_EVENTS_NODE.get=function(id){const stub=original.call(this,id);f.env.AFW_DOSSIER_EVENTS_ENABLED='false';return stub;};const a=createDossierEventRpcAuthority(f.options);await assert.rejects(a.list());assert.equal(f.calls(),0);}finally{f.close();}});
+
+test('broker catalog diagnostics distinguish primary authorization and the actual RPC call',async()=>{
+ const {createDossierEventRpcAuthority}=await load(),f=setup();try{
+  const stages=[],a=createDossierEventRpcAuthority({...f.options,diagnostic:{record:stage=>stages.push(stage)}});assert.match(await a.list(),/^[0-9a-f]{64}$/);
+  assert.deepEqual(stages,['broker_authorization_ready','broker_rpc_start','broker_rpc_returned']);
+  const quiet=createDossierEventRpcAuthority({...f.options,diagnostic:{record(){throw Error('private sink error');}}});assert.match(await quiet.list(),/^[0-9a-f]{64}$/);
+ }finally{f.close();}
+});

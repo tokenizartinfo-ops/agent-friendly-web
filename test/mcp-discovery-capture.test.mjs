@@ -30,3 +30,8 @@ test('real stdin CLI emits only sanitized NDJSON and rejects malformed input wit
 test('too many log entries fail instead of silently reporting complete coverage',()=>{
  const f=frame();f.logs=Array.from({length:101},()=>({message:['ignored']}));const c=capture(()=>{});assert.throws(()=>c.push(JSON.stringify(f)),/Capture unavailable/);
 });
+
+test('bounded native catalog stages survive the sanitizer without extra payload',()=>{
+ const rows=[],c=capture(r=>rows.push(r)),f=frame();f.logs=[{message:[JSON.stringify({...row,stage:'native_runtime_check',count:undefined})]}];c.push(JSON.stringify(f));
+ assert.equal(rows.length,1);assert.equal(rows[0].stage,'native_runtime_check');assert.ok(!JSON.stringify(rows).includes('SECRET'));
+});

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createMcpDiscoveryDiagnostic,observeMcpDiscoveryRequest,observeMcpEventAuthority} from '../lib/mcp-discovery-diagnostic.mjs';
+import * as diagnostics from '../lib/mcp-discovery-diagnostic.mjs';
 const env={AFW_MCP_DISCOVERY_DIAGNOSTIC_ENABLED:'true',AFW_MCP_DISCOVERY_DIAGNOSTIC_START_AT:'1000',AFW_MCP_DISCOVERY_DIAGNOSTIC_EXPIRES_AT:'601000'};
 const sourceRevision='a'.repeat(40);
 const request=new Request('https://example.invalid/mcp?private=secret',{method:'POST',headers:{'Mcp-Method':'events/list',Authorization:'Bearer secret',Cookie:'private=secret'},body:'{"private":"secret"}'});
@@ -40,4 +41,12 @@ test('non-MCP paths, invalid revisions and backward clocks produce no misleading
  }
  let t=2000;const rows=[],d=createMcpDiscoveryDiagnostic({env,request,sourceRevision,now:()=>t,emit:r=>rows.push(r)});
  d.record('received');t=1999;d.record('response',{status:200});assert.equal(rows.length,1);
+});
+
+test('private catalog RPC records only fixed native stages in the same bounded diagnostic window',()=>{
+ assert.equal(typeof diagnostics.createMcpRpcCatalogDiagnostic,'function');
+ const rows=[],d=diagnostics.createMcpRpcCatalogDiagnostic({env,sourceRevision,now:()=>1000,emit:r=>rows.push(r)});
+ d.record('native_received',{private:'SECRET'});d.record('native_runtime_check');d.record('native_failed');d.record('SECRET');
+ assert.deepEqual(rows.map(r=>r.stage),['native_received','native_runtime_check','native_failed']);assert.ok(rows.every(r=>r.method==='events/list'));assert.ok(!JSON.stringify(rows).includes('SECRET'));
+ const disabled=[];diagnostics.createMcpRpcCatalogDiagnostic({env:{...env,AFW_MCP_DISCOVERY_DIAGNOSTIC_ENABLED:'false'},sourceRevision,now:()=>1000,emit:r=>disabled.push(r)}).record('native_received');assert.deepEqual(disabled,[]);
 });
