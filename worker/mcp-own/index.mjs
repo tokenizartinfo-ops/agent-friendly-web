@@ -6,6 +6,7 @@ import {createOwnDurableEventHost} from '../../lib/mcp-own-durable-host.mjs';
 import {createDossierEventRpcAuthority,readDossierEventHostPolicy} from '../../lib/dossier-event-rpc-authority.mjs';
 import {runOwnEventSchedule,readClosedOwnScheduleWitness} from '../../lib/mcp-own-event-schedule.mjs';
 import {createOwnSyntheticSaveHost} from '../../lib/mcp-own-synthetic-save-host.mjs';
+import {observeMcpDiscoveryRequest,observeMcpEventAuthority} from '../../lib/mcp-discovery-diagnostic.mjs';
 const deny=()=>new Response('{"code":"unavailable"}',{status:404,headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
 const fail=()=>{throw Error('Private event Node unavailable');};
 // Build replaces these public program/revision literals; no key is embedded.
@@ -49,5 +50,11 @@ export class AfwNodeControl extends WorkerEntrypoint{
  }catch{return deny();}}
 }
 
-const worker={fetch(request,env,ctx){if(new URL(request.url).pathname==='/qa/expediente')return createOwnSyntheticSaveHost({env,program,sourceRevision})(request);return createDelegatedOAuthWorker({issuer:env.AFW_OAUTH_ISSUER,resource:env.AFW_OAUTH_RESOURCE,eventsAuthorityFactory:options=>createDossierEventRpcAuthority({enabled:true,...options})}).fetch(request,env,ctx);},async scheduled(controller,env){const result=await runOwnEventSchedule(controller,env);if(result===null){const witness=readClosedOwnScheduleWitness(controller,env,{sourceRevision});if(witness)console.info(JSON.stringify(witness));}return result;}};
+const worker={fetch(request,env,ctx){
+ if(new URL(request.url).pathname==='/qa/expediente')return createOwnSyntheticSaveHost({env,program,sourceRevision})(request);
+ return observeMcpDiscoveryRequest({request,env,sourceRevision},diagnostic=>createDelegatedOAuthWorker({
+  issuer:env.AFW_OAUTH_ISSUER,resource:env.AFW_OAUTH_RESOURCE,
+  eventsAuthorityFactory:options=>observeMcpEventAuthority(diagnostic,()=>createDossierEventRpcAuthority({enabled:true,...options})),
+ }).fetch(request,env,ctx));
+},async scheduled(controller,env){const result=await runOwnEventSchedule(controller,env);if(result===null){const witness=readClosedOwnScheduleWitness(controller,env,{sourceRevision});if(witness)console.info(JSON.stringify(witness));}return result;}};
 export default worker;
