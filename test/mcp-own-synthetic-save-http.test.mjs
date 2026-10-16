@@ -1,11 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {syntheticSaveFixture} from './fixtures/mcp-own-synthetic-save.mjs';
 const api=await import('../lib/mcp-own-synthetic-save-http.mjs').catch(()=>({}));
 const issuer='https://private.invalid';
-async function setup(){
+async function setup(extraOptions={}){
  const f=await syntheticSaveFixture();let subject='owner',clock=Date.now();
- const handler=api.createOwnSyntheticSaveHandler({enabled:true,issuer,writerOptions:{...f.options,now:()=>clock},signingKey:'z'.repeat(32),teamDomain:'own.cloudflareaccess.com',audience:'own',accessVerifier:async()=>({ok:true,identity:{userId:subject}})});
+ const handler=api.createOwnSyntheticSaveHandler({enabled:true,issuer,writerOptions:{...f.options,now:()=>clock},signingKey:'z'.repeat(32),teamDomain:'own.cloudflareaccess.com',audience:'own',accessVerifier:async()=>({ok:true,identity:{userId:subject}}),...extraOptions});
  const assertion=()=>'e30.'+Buffer.from(JSON.stringify({sub:subject,exp:Math.floor((f.options.window.expiresAt+10000)/1000)})).toString('base64url')+'.synthetic';
  const get=()=>handler(new Request(issuer+'/qa/expediente',{headers:{'Cf-Access-Jwt-Assertion':assertion()}}));
  const page=async()=>{const r=await get(),html=await r.text();assert.equal(r.status,200);return{html,ticket:html.match(/name="ticket" value="([^"]+)"/)?.[1],cookie:r.headers.get('Set-Cookie')?.split(';')[0]};};
@@ -14,6 +15,25 @@ async function setup(){
 }
 test('closed synthetic UI does not read identity, DB or signing material',async()=>{
  assert.equal(typeof api.createOwnSyntheticSaveHandler,'function');const handler=api.createOwnSyntheticSaveHandler({enabled:false});assert.equal((await handler(new Request(issuer+'/qa/expediente'))).status,404);
+});
+
+test('prepared server key binds the signed form to the planned event without accepting browser selectors',async()=>{
+ const key='11111111-1111-4111-8111-111111111111',f=await setup({preparedSaveKey:key});
+ try{
+  const p=await f.page(),payload=JSON.parse(Buffer.from(p.ticket.split('.')[0],'base64url'));
+  assert.equal(payload.idempotencyKey,key);
+  assert.notEqual((await f.post(p,{fields:{idempotencyKey:'22222222-2222-4222-8222-222222222222'}})).status,200);
+  assert.equal((await f.post(p)).status,200);
+  const expected=createHash('sha256').update(JSON.stringify(['afw.own-synthetic-save.v1','owner','p',key])).digest('hex');
+  assert.equal(f.db.prepare('SELECT id FROM project_events').get().id,expected);
+  assert.equal((await f.post(p)).status,200);assert.equal(f.db.prepare('SELECT count(*) n FROM project_events').get().n,1);
+ }finally{f.close();}
+});
+
+test('malformed prepared keys fail closed rather than falling back to random form keys',async()=>{
+ for(const preparedSaveKey of ['',null,'arbitrary', '11111111-1111-1111-8111-111111111111']){
+  const f=await setup({preparedSaveKey});try{assert.equal((await f.get()).status,503);}finally{f.close();}
+ }
 });
 test('one-question native form saves one revision and truthfully distinguishes cloud review',async()=>{
  const f=await setup();try{const p=await f.page();assert.match(p.html,/Ensayo sintético/);assert.match(p.html,/Comic/);assert.doesNotMatch(p.html,/grantId|whsec_|callback.agentfriendlyweb/);const r=await f.post(p);assert.equal(r.status,200);assert.match(await r.text(),/Esto todavía no confirma/);assert.equal(f.db.prepare('SELECT revision FROM site_projects').get().revision,2);assert.equal((await f.post(p)).status,200);assert.equal(f.db.prepare('SELECT count(*) n FROM project_events').get().n,1);}finally{f.close();}

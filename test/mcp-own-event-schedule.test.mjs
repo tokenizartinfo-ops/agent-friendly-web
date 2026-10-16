@@ -12,6 +12,15 @@ function setup(){
 test('unconfigured or disabled schedule reads no Node, policy, storage or secrets',async()=>{
  const {runOwnEventSchedule}=await load();for(const enabled of [undefined,'false']){let forbidden=0;const env=new Proxy({AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED:enabled},{get(o,k){if(k==='AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED'||k==='AFW_DOSSIER_EVENTS_SCHEDULE')return o[k];forbidden++;throw Error('dependency');}});assert.equal(await runOwnEventSchedule({},env),null);assert.equal(forbidden,0);}
 });
+
+test('prepared schedule resolves only the original receipt and rejects mixed selectors',async()=>{
+ const {runOwnEventSchedule}=await load(),f=setup();
+ f.env.AFW_DOSSIER_EVENTS_SCHEDULE=JSON.stringify({receipt:'original',eventId:f.schedule.eventId,dispatchAt:f.schedule.dispatchAt,closeAt:f.schedule.closeAt});
+ f.env.AFW_DOSSIER_EVENTS_NODE.get=()=>({async deliverOwnSaved(eventId){f.calls.push(['own',eventId]);},async close(){f.calls.push(['close']);}});
+ assert.equal((await runOwnEventSchedule(f.control(),f.env,{now:f.now})).phase,'dispatch');assert.deepEqual(f.calls,[['own',f.schedule.eventId]]);
+ f.env.AFW_DOSSIER_EVENTS_SCHEDULE=JSON.stringify({...JSON.parse(f.env.AFW_DOSSIER_EVENTS_SCHEDULE),subscriptionId:f.schedule.subscriptionId});
+ await assert.rejects(runOwnEventSchedule(f.control(),f.env,{now:f.now}));assert.equal(f.calls.length,1);
+});
 test('dispatch selects only original node and references at the exact scheduled minute',async()=>{
  const {runOwnEventSchedule}=await load(),f=setup();assert.deepEqual(await runOwnEventSchedule(f.control(),f.env,{now:f.now}),{phase:'dispatch',status:'requested'});assert.deepEqual(f.calls,[['deliver',f.schedule.subscriptionId,f.schedule.eventId]]);
 });
