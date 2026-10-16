@@ -41,3 +41,10 @@ test('token status and MCP header-presence stages survive sanitization without p
  f.logs=[{message:[JSON.stringify({...row,method:'oauth/token',stage:'response',count:undefined,status:200})]},{message:[JSON.stringify({...row,stage:'authorization_header_absent',count:undefined})]}];c.push(JSON.stringify(f));
  assert.deepEqual(rows.map(r=>[r.method,r.stage,r.status]),[['oauth/token','response',200],['events/list','authorization_header_absent',undefined]]);assert.ok(!JSON.stringify(rows).includes('SECRET'));
 });
+
+test('request events-gate witnesses survive only as fixed stages, not configuration payloads',()=>{
+ const rows=[],c=capture(r=>rows.push(r)),f=frame();
+ f.logs=['events_enabled','events_not_enabled'].map(stage=>({message:[JSON.stringify({...row,stage,count:undefined})]}));
+ f.logs.push({message:[JSON.stringify({...row,stage:'events_enabled',count:undefined,env:'SECRET'})]});c.push(JSON.stringify(f));
+ assert.deepEqual(rows.map(r=>r.stage),['events_enabled','events_not_enabled']);assert.ok(!JSON.stringify(rows).includes('SECRET'));c.finish();
+});
