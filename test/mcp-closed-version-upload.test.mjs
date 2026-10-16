@@ -18,7 +18,7 @@ test('closed publication preserves the existing own Container attachment and nam
  f.baseline.exports={default:{type:'worker'},AfwNodeControl:{type:'worker'},...f.baseline.exports};
  f.baseline.containers=[{class_name:'AfwOwnEventNode',name:'agent-friendly-web-delegated-canary-afwowneventnode'}];
  const fetch=f.options.fetchImpl;
- f.options.fetchImpl=async(u,i)=>{if(i.method==='POST'){const body=JSON.parse(i.body);assert.deepEqual(body.containers,[{class_name:'AfwOwnEventNode'}]);assert.deepEqual(body.exports,f.baseline.exports);}return fetch(u,i);};
+ f.options.fetchImpl=async(u,i)=>{if(i.method==='POST'){const body=JSON.parse(i.body);assert.deepEqual(body.containers,f.baseline.containers);assert.deepEqual(body.exports,f.baseline.exports);}return fetch(u,i);};
  assert.deepEqual(await createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal),{versionId});
 });
 
@@ -26,6 +26,20 @@ test('missing Container attachment on publication readback cannot confirm the ve
  const {createClosedVersionUpload}=await load(),f=fixture();f.baseline.containers=[{class_name:'AfwOwnEventNode',name:'agent-friendly-web-delegated-canary-afwowneventnode'}];
  const fetch=f.options.fetchImpl;f.options.fetchImpl=async(u,i)=>u.endsWith(versionId)?Response.json({success:true,errors:[],result:{...f.baseline,id:versionId,containers:[]}}):fetch(u,i);
  await assert.rejects(createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal));assert.equal(f.calls.filter(c=>c.init.method==='POST').length,1);
+});
+
+test('closed upload preserves the explicit export-to-named-container link and rejects its loss',async()=>{
+ const {createClosedVersionUpload}=await load(),name='agent-friendly-web-delegated-canary-afwowneventnode';
+ for(const lost of [false,true]){
+  const f=fixture();f.baseline.exports.AfwOwnEventNode.container=name;f.baseline.containers=[{class_name:'AfwOwnEventNode'}];
+  const fetch=f.options.fetchImpl;f.options.fetchImpl=async(u,i)=>{
+   if(i.method==='POST'){const body=JSON.parse(i.body);assert.equal(body.exports.AfwOwnEventNode.container,name);assert.deepEqual(body.containers,[{class_name:'AfwOwnEventNode',name}]);}
+   if(lost&&u.endsWith(versionId))return Response.json({success:true,errors:[],result:{...f.baseline,id:versionId,exports:{AfwOwnEventNode:{type:'durable-object',storage:'sqlite'}}}});
+   return fetch(u,i);
+  };
+  const task=createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal);
+  if(lost)await assert.rejects(task);else assert.deepEqual(await task,{versionId});
+ }
 });
 
 test('foreign Container metadata prevents upload and provider normalized names preserve identity',async()=>{

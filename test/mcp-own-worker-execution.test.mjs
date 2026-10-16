@@ -18,3 +18,12 @@ test('foreign, duplicate or lifecycle-changing execution declarations fail close
  for(const exports of [{...exportsMap,Foreign:{type:'worker'}},{AfwOwnEventNode:{type:'durable-object',storage:'sqlite',state:'deleted'}},{AfwOwnEventNode:{type:'durable-object',storage:'legacy-kv'}},{...exportsMap,AfwNodeControl:{type:'worker'}},{...exportsMap,default:{type:'worker',cache:{enabled:true}},AfwNodeControl:{type:'worker'}}])assert.throws(()=>snapshotOwnWorkerExecution({exports,containers:[attachment]}));
  let reads=0;assert.throws(()=>snapshotOwnWorkerExecution({exports:exportsMap,containers:[{get class_name(){reads++;return 'AfwOwnEventNode';}}]}));assert.equal(reads,0);
 });
+
+test('explicit own Container export link is retained and requires the same attachment',async()=>{
+ const {snapshotOwnWorkerExecution}=await load();
+ const linked={AfwOwnEventNode:{...exportsMap.AfwOwnEventNode,container:attachment.name}};
+ assert.deepEqual(snapshotOwnWorkerExecution({exports:linked,containers:[{class_name:attachment.class_name}]}),{exports:linked,containers:[attachment]});
+ for(const container of ['foreign','',null])assert.throws(()=>snapshotOwnWorkerExecution({exports:{AfwOwnEventNode:{...linked.AfwOwnEventNode,container}},containers:[attachment]}));
+ assert.throws(()=>snapshotOwnWorkerExecution({exports:linked,containers:[]}));
+ let reads=0;assert.throws(()=>snapshotOwnWorkerExecution({exports:{AfwOwnEventNode:{...exportsMap.AfwOwnEventNode,get container(){reads++;return attachment.name;}}},containers:[attachment]}));assert.equal(reads,0);
+});

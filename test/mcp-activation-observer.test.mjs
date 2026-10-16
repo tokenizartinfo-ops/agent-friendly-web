@@ -26,5 +26,6 @@ test('activation configuration binds the Container attachment in its hash',async
  const {activationConfigurationHash}=await import('../lib/mcp-activation-observer.mjs');
  const configuration={compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat','global_fetch_strictly_public'],main_module:'index.mjs',exports:{AfwOwnEventNode:{type:'durable-object',storage:'sqlite'}},bindings:[{name:'TOKEN',type:'secret_text'}],usage_model:'standard',containers:[]};
  const closed=activationConfigurationHash(configuration),attached=activationConfigurationHash({...configuration,containers:[{class_name:'AfwOwnEventNode'}]});assert.notEqual(closed,attached);
+ const linked=activationConfigurationHash({...configuration,containers:[{class_name:'AfwOwnEventNode'}],exports:{AfwOwnEventNode:{type:'durable-object',storage:'sqlite',container:'agent-friendly-web-delegated-canary-afwowneventnode'}}});assert.notEqual(linked,attached);
  assert.throws(()=>activationConfigurationHash({...configuration,containers:[{class_name:'foreign'}]}));
 });
