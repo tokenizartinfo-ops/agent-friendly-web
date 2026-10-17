@@ -468,6 +468,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const pilotCopilot = isCopilotProjectAllowed({ enabled: copilotEnabled, allowedProjectId: copilotProjectId, projectId }) && !rehearsal;
   const assistanceAvailable = isCopilotProjectAllowed({enabled:assistanceEnabled,allowedProjectId:assistanceProjectId,projectId}) && !rehearsal;
   const guidedView = isGuidedPilotView({ pilot: pilotCopilot, guidedEntry: true, loaded, requested: guidedViewRequested, conflict: Boolean(conflictReview), sessionRequired });
+  const helpTargetId = assistanceAvailable ? 'dossier-help' : guidedView && pilotCopilot ? 'dossier-copilot' : 'dossier-assistant';
   const updatesReadState=dossierUpdatesReadState({projectId,website:savedWebsite,ready:observationReadReady,failure:observationReadFailure});
   function retrySavedObservationRead(){
     setObservationReadReady(null);setObservationReadFailure(null);
@@ -481,7 +482,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const updates = dossierUpdates({ website: savedWebsite, history: currentObservations.history, monitoringPreference: savedSnapshot.monitoringPreference,readState:updatesReadState });
   return (
     <div className={guidedView ? 'intake-layout guided-pilot' : 'intake-layout'}>
-      <a className="dossier-help-dock" href={assistanceAvailable?'#dossier-help':guidedView && pilotCopilot ? '#dossier-copilot' : '#dossier-assistant'} onClick={()=>{const panel=document.getElementById(assistanceAvailable?'dossier-help':guidedView ? 'dossier-copilot' : 'dossier-assistant');if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
+      <a className="dossier-help-dock" href={`#${helpTargetId}`} onClick={()=>{const panel=document.getElementById(helpTargetId);if(panel instanceof HTMLDetailsElement)panel.open=true;}}>{localizedMessage(locale,'Necesito ayuda','I need help','Preciso de ajuda')}</a>
       {exitTarget && <DraftExitDialog locale={locale} saving={manualBusy} onStay={() => setExitTarget(null)} onSaveLeave={async () => {
         if (workingPending && !(await workingSave.current?.())) return false;
         const saved = hasPendingDraft({ ready: ready.current, draft: data, base: savedBase.current,
