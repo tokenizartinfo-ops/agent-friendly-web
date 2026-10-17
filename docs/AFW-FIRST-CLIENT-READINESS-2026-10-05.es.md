@@ -1,4 +1,30 @@
-## Estado vigente: 8 octubre de 2026
+# Estado vigente del primer piloto: 17 octubre de 2026
+
+La corrección de «Necesito ayuda» está publicada en producción: [recibo del 17 de octubre](AFW-DOSSIER-HELP-PRODUCTION-RELEASE-2026-10-17.es.md). El botón vuelve a abrir la guía breve cuando no hay copilot inteligente. La evidencia de guardado, entrega, aislamiento y correo de marca ya aceptada conserva su alcance; no se repite por esta actualización.
+
+El cierre pendiente es la cadena integrada de avisos y revisión desde la nube. En el ensayo del 16 de octubre funcionaron OAuth, lectura real y consentimiento separado de avisos; el catálogo falló con `native_container_absent`. No existe todavía una suscripción aceptada de ese recorrido. El caso Cloudflare 02382110 trata Containers/Durable Objects; 02375364 trata Cron. Una respuesta automática o el cierre del incidente Cron no acredita reparar el fallo de Container.
+
+| Tramo | Estado comprobado | Próximo cierre |
+| --- | --- | --- |
+| Ayuda y recorrido guiado | Corrección pública al 100%; interacción React local y versión/asset públicos comprobados | Si se valida de nuevo el clic privado en producción, usar sesión propia vigente; no crear un expediente de Max |
+| Acceso previsto del cliente | API17oct16:01UTC: destino `/expediente*`, audiencia correcta y allow del correo exacto, sin everyone ni exclusión del destinatario | Recepción de código e ingreso desde la sesión del cliente; la regla no prueba ninguno de los dos |
+| Correo desde hello@ | Ensayo visual propio recibido y cerrado; preview contextual14oct con saludo a Max, una pregunta, guía gradual y CTA directo a `/expediente` | Revisar la versión exacta destinada al cliente y obtener aprobación del primer envío; no enviar el paquete de preview del owner |
+| Catálogo y suscripción | Lectura y consentimiento separados funcionaron; catálogo nativo bloqueado | Diagnóstico técnico nuevo, reparación justificada y una verificación propia acotada antes del alta |
+| Aviso y revisión cloud | La cadena nativa actual no tiene entrega útil aceptada | Correlacionar aviso firmado, turno cloud y respuesta útil; después comprobar retirada nativa y cierre |
+| Ordenador apagado | Recorrido integrado actual sin aceptación PC-off | Acordar el intervalo solo después del cierre anterior; comprobar ejecución y recibos con el equipo efectivamente apagado |
+| Max / Sector de Sistemas | No se acredita todavía su incorporación | Invitación aprobada, sesión y consentimiento propios, objetivo y alcance proporcional, entrega y comparación verificables |
+
+La lectura de Access y la invitación no habilitan automáticamente el copilot inteligente para proyectos nuevos: producción conserva únicamente el pin propio existente. La incorporación de un cliente requiere un rollout acotado y autorizado para su expediente, sin sustituir el piloto actual ni inferir titularidad desde un correo. La guía local permanece disponible.
+
+El preview del 14 de octubre declara `hello@agentfriendlyweb.dev` como remitente y respuesta, incluye cinco paneles de marca y enlaza directamente a `https://agentfriendlyweb.dev/expediente`. Su hash es `37b1db65a66db3bc2189d722420f423aca6ca1640d73871cf5532f833de55f4f`. Está dirigido al owner y contiene un pie de vista previa: cambiar destinatario o pie exige un nuevo paquete/hash y decisión sobre esa versión. El flag estático `sent:false` del archivo de construcción no sustituye un recibo de envío ni acredita aprobación posterior. No prometer guardia permanente ni resolver la carga del expediente por correo.
+
+Orden de continuación: evidencia técnica nueva de Container → verificación propia y catálogo válido → alta nativa, aviso, revisión útil, retirada y cierre → ensayo PC-off acordado → preview/aprobación de invitación → recorrido personal de Max. Durante la espera pueden corregirse hallazgos independientes, sin reabrir por inercia OAuth, tokens o ensayos aceptados. La aplicación y el copilot acompañan dentro del producto; una guardia Codex cloud continua todavía no está acreditada.
+
+El objetivo del piloto es una mejora real, declarada y verificable según la necesidad del sitio. AF5, OAuth/A2A transaccional o 100 puntos externos no son requisitos. Hosting, responsables, accesos y permiso de publicación se acuerdan con el cliente antes de preparar la entrega. El uso como caso de estudio requiere consentimiento separado.
+
+## Registro histórico: 8 octubre de 2026
+
+Las secciones siguientes conservan su fecha y alcance. Sus «próximos pasos» y casillas describen ese momento; la tabla del 17 de octubre determina los pendientes actuales.
 
 Actualización posterior: AFW-OCCURRENCE-CLOUD-ADOPTION-2026-10-08.es.md acredita publicación6ac78bc y adopción ordinaria01a11b8a/source8eecaac,17pass/1skipWindows. El filesystem del chat no acredita persistencia entre instancias. AFW-GLOBAL-OCCURRENCE-IMPLEMENTATION-2026-10-08.es.md ordena el registro global D1 y su integración, todavía sin activar. No repetir la adopción de8eecaac como si probara una fuente posterior. AFW-FIRST-CLIENT-ACCESS-PREFLIGHT-2026-10-08.es.md confirma regla allow exacta para Max y destinoexpediente, sin everyone; login/OTP del cliente siguen pendientes.
 
