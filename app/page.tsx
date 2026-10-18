@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { MaturityMap } from './components/maturity-map';
-import { ComicCallHero, FutureArchive, HomeNextPaths } from './components/comic-home-intro';
+import { ComicCallHero, FutureArchive, HomeNextPaths, HomeServiceJourney } from './components/comic-home-intro';
 import { HomeMaturityComparison } from './components/maturity-demonstrator';
 import { PublicWebMcpRegistration } from './components/public-webmcp-registration';
 import { PublicFaq } from './components/public-faq';
@@ -67,6 +67,7 @@ export async function HomeExperience({ searchParams, locale = 'es' }: HomeProps 
       <SiteHeader locale={locale} routeKey="home" />
 
       <ComicCallHero locale={locale} />
+      <HomeServiceJourney locale={locale} />
       <MaturityMap locale={locale} />
       <ScanWorkspace initialSite={initialSite} locale={locale} />
       <HomeMaturityComparison locale={locale} />
