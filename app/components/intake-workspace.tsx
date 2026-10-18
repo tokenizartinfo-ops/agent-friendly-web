@@ -39,6 +39,7 @@ import { revealDossierDelivery } from '../../lib/dossier-delivery-navigation.mjs
 import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
 import { reconcileSavedDraft } from '../../lib/project-save-reconciliation.mjs';
 import { DossierAssistance } from './dossier-assistance';
+import {DossierFirstStep} from './dossier-first-step';
 
 type Intake = {
   organization: string; website: string; role: string; siteType: string; control: string;
@@ -481,6 +482,20 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
     const panel=document.getElementById('dossier-delivery');
     if(panel instanceof HTMLDetailsElement)revealDossierDelivery(panel,()=>setGuidedDeliveryRequested(true));
   }
+  function reviewObservation(){
+    reviewDelivery();
+    const section=document.getElementById('dossier-observation');
+    if(section){section.tabIndex=-1;section.focus({preventScroll:true});section.scrollIntoView({block:'start'});}
+  }
+  function continueFirstGuide(){
+    const requiredField=!data.website?'website':!data.goals.length?'goals':null;
+    if(requiredField&&data.deferredQuestions.includes(requiredField)){
+      setData(current=>({...current,deferredQuestions:current.deferredQuestions.filter(field=>field!==requiredField)}));
+      setAutosavePaused(false);setStatus('idle');
+    }
+    const panel=document.getElementById('dossier-assistant');
+    if(panel instanceof HTMLDetailsElement){panel.open=true;panel.querySelector<HTMLElement>('.coach-question h3,summary')?.focus();panel.scrollIntoView({block:'start'});}
+  }
   const updates = dossierUpdates({ website: savedWebsite, history: currentObservations.history, monitoringPreference: savedSnapshot.monitoringPreference,readState:updatesReadState });
   return (
     <div className={guidedView ? 'intake-layout guided-pilot' : 'intake-layout'}>
@@ -511,6 +526,10 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           ? localizedMessage(locale, 'Ver expediente completo', 'View full dossier', 'Ver dossiê completo')
           : localizedMessage(locale, 'Volver a la guía breve', 'Return to brief guide', 'Voltar ao guia breve')}</button></div> : null}
 
+        {guidedView?<DossierFirstStep loaded={loaded} projectId={projectId} draft={data} saved={savedSnapshot} locale={locale} sessionRequired={sessionRequired} conflict={Boolean(conflictReview)} saving={status==='saving'} reading={observationBusy} workingPending={workingPending}
+          observationState={observationReadFailure?.projectId===projectId&&observationReadFailure.website===savedWebsite?'failed':observationReadReady?.projectId===projectId&&observationReadReady.website===savedWebsite?'ready':'loading'} observation={currentObservations.observation}
+          onSave={()=>{void saveReviewedDraft();}} onGuide={continueFirstGuide}
+          onAudit={()=>{void saveObservation();}} onReview={reviewObservation} onRetryRead={retrySavedObservationRead}/>:null}
         <div hidden={guidedView}>
         <ScopeImport onReviewChange={setReviewedScope} onPrepareSeparate={setSeparateScope} onAvailableScopeChange={setAvailableScope} locale={locale} website={data.website} projectId={projectId || ""} revision={scopeRevision} canSave={Boolean(projectId && data.website === savedWebsite && status !== "saving")} request={request} onUseWebsite={website => {
           if(manualLock.current || data.website.trim())return;
@@ -632,7 +651,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           <p className="scope-note strong-note"><strong>{locale === 'en' ? 'It does not publish the profile automatically.' : locale === 'pt' ? 'Não publica o perfil automaticamente.' : 'No publica el perfil automáticamente.'}</strong> {copy.verifyBody}</p>
         </section>
 
-        <section className="form-section observation-section">
+        <section id="dossier-observation" className="form-section observation-section">
           <div className="verification-heading">
             <div className="form-section-title"><Radar size={20} /><div><strong>{copy.labels.observation}</strong><span>{copy.labels.observationSubtitle}</span></div></div>
             <span className="verification-status" data-status={currentObservations.observation ? 'verified' : 'unverified'}>
@@ -645,7 +664,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
             {historyComparison?<p>{localizedMessage(locale,'Entre las dos últimas lecturas:','Between the two latest readings:','Entre as duas últimas leituras:')} {historyComparison.delta>=0?'+':''}{historyComparison.delta} {localizedMessage(locale,'puntos. Es una señal técnica, no una garantía de visibilidad o ventas.','points. This is a technical signal, not a visibility or sales guarantee.','pontos. É um sinal técnico, não uma garantia de visibilidade ou vendas.')}</p>:<p>{localizedMessage(locale,'Las lecturas usan métodos distintos o faltan datos comparables; conservamos sus fechas sin afirmar una mejora.','The readings use different methods or lack comparable data; dates are retained without claiming an improvement.','As leituras usam métodos diferentes ou faltam dados comparáveis; mantemos as datas sem afirmar melhora.')}</p>}
             <ol>{currentObservations.history.map(item=><li key={item.id}><time dateTime={item.checkedAt}>{formatDate(item.checkedAt,locale)}</time> · {observationScoreLabel({score:item.score},locale)} {item.level?`· ${item.level}`:''}</li>)}</ol>
           </div>:null}
-          {currentObservations.observation?<SavedObservationEvidence observation={currentObservations.observation} locale={locale} control={data.control} unsaved={unconfirmedChanges} missingBasicCount={missingIntakeQuestions(data).length}/>:null}
+          {currentObservations.observation?<SavedObservationEvidence observation={currentObservations.observation} locale={locale} control={data.control} unsaved={unconfirmedChanges} missingBasicCount={missingIntakeQuestions(data,data.deferredQuestions).length}/>:null}
           <button className="primary-action" type="button" onClick={saveObservation} disabled={observationBusy || !observationWebsiteIsSaved}>
             {observationBusy ? <LoaderCircle className="spin" size={16} /> : <Radar size={16} />}
             {copy.labels.auditSave}

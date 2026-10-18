@@ -9,6 +9,7 @@ import './intake-question-coach.css';
 import {scopeQuestionGuide,SCOPE_QUESTION_COPY} from '../../lib/scope-question-guide.mjs';
 import type {ReviewedScope} from './scope-import';
 import {normalizeDeferredQuestions} from '../../lib/dossier-guide-continuity.mjs';
+import {FIRST_RESULT_QUESTION_ORDER} from '../../lib/dossier-first-step.mjs';
 type Locale='es'|'en'|'pt';
 type Draft=Record<string,string|string[]>;
 type Field=keyof typeof QUESTION_COPY.es.fields;
@@ -24,7 +25,7 @@ export function IntakeQuestionCoach({draft,locale,onApply,reviewedScope=null}:{d
  const moveFocus=useRef(false);
  const copy=QUESTION_COPY[locale];
  const missing=missingIntakeQuestions(draft);
- const field=missingIntakeQuestions(draft,deferred,guide?.order)[0] as Field|undefined;
+ const field=missingIntakeQuestions(draft,deferred,guide?.order||FIRST_RESULT_QUESTION_ORDER)[0] as Field|undefined;
  const pending=deferred.filter(item=>missing.includes(item));
  useEffect(()=>{if(moveFocus.current){region.current?.querySelector<HTMLElement>('.coach-question h3,.coach-done')?.focus();moveFocus.current=false;}},[field]);
  return <section ref={region} className="intake-question-coach" aria-labelledby="question-coach-title">
