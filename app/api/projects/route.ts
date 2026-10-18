@@ -164,7 +164,11 @@ export async function PUT(request: Request) {
     return Response.json({ code: 'invalid_idempotency_key' }, { status: 400, headers: { 'cache-control': 'no-store' } });
   }
   const eventId = requestKey ? await digest(JSON.stringify(['project-save-v1', user.userId, requestKey])) : crypto.randomUUID();
-  const fingerprint = requestKey ? await digest(JSON.stringify({ intake, id: requestedId, revision: raw.revision ?? null,
+  const fingerprintIntake = {...intake} as Record<string,unknown>;
+  // Omitted means preserve, while [] means resume. Keep the old canonical hash
+  // for old-client retries and distinguish those two intentions for new saves.
+  if(raw.deferredQuestions === undefined)delete fingerprintIntake.deferredQuestions;
+  const fingerprint = requestKey ? await digest(JSON.stringify({ intake: fingerprintIntake, id: requestedId, revision: raw.revision ?? null,
     ...(raw.sourceHints !== undefined ? { sourceHints: raw.sourceHints } : {}) })) : null;
   const recoverReceipt = async () => {
     if (!requestKey) return null;

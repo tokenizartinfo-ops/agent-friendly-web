@@ -16,7 +16,7 @@ test('private guide preferences persist in the native project API with CAS and o
   const db=await runtime.getD1Database('DB');
   const migrations=(await readdir('drizzle')).filter(name=>/^\d+.*\.sql$/.test(name)).sort();
   for(const name of migrations)for(const sql of (await readFile(`drizzle/${name}`,'utf8')).split('--> statement-breakpoint').map(v=>v.trim()).filter(Boolean))await db.prepare(sql).run();
-  const call=(method,owner,body,id)=>runtime.dispatchFetch(`http://localhost/api/projects${id?'?project='+encodeURIComponent(id):''}`,{method,headers:{...(owner?{'x-test-owner':owner}:{}),...(body?{'content-type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{})});
+  const call=(method,owner,body,id,key)=>runtime.dispatchFetch(`http://localhost/api/projects${id?'?project='+encodeURIComponent(id):''}`,{method,headers:{...(owner?{'x-test-owner':owner}:{}),...(body?{'content-type':'application/json'}:{}),...(key?{'idempotency-key':key}:{})},...(body?{body:JSON.stringify(body)}:{})});
   assert.equal((await call('GET',null)).status,401);
   const created=await call('PUT','owner-a',{website:'https://example.com',deferredQuestions:['hosting','cms']});
   assert.equal(created.status,200);
@@ -26,8 +26,10 @@ test('private guide preferences persist in the native project API with CAS and o
   assert.equal((await call('GET','owner-b',null,project.id)).status,404);
   // A deployed older client must preserve private preferences it cannot edit.
   const older={...project,organization:'Saved by older client'};delete older.deferredQuestions;
-  const olderResponse=await call('PUT','owner-a',older);
+  const legacyKey='00000000-0000-4000-8000-000000000001';
+  const olderResponse=await call('PUT','owner-a',older,undefined,legacyKey);
   assert.equal(olderResponse.status,200);
+  assert.equal((await call('PUT','owner-a',{...older,deferredQuestions:[]},undefined,legacyKey)).status,409,'omitted preference and explicit resume are distinct save intentions');
   const before=project;
   project=(await olderResponse.json()).project;
   assert.deepEqual(project.deferredQuestions,['hosting','cms']);
