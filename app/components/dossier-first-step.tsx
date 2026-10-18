@@ -9,5 +9,5 @@ const copy={
 export function DossierFirstStep(props:Props){
  const model=dossierFirstStep(props),labels=copy[props.locale],state=labels.states[model.state as keyof typeof labels.states];
  const actions:Record<string,()=>void>={save:props.onSave,guide:props.onGuide,audit:props.onAudit,review:props.onReview,retry_read:props.onRetryRead};
- return <section className="form-section dossier-first-step" data-state={model.state} aria-labelledby="first-step-title"><h2 id="first-step-title">{labels.title}</h2><div aria-live="polite"><strong>{state[0]}</strong><p>{state[1]}</p></div>{model.action?<button type="button" onClick={actions[model.action]}>{state[2]}</button>:null}</section>;
+ return <section className="form-section dossier-first-step" data-state={model.state} aria-labelledby="first-step-title"><h2 id="first-step-title">{labels.title}</h2><div aria-live="polite"><strong>{state[0]}</strong><p>{state[1]}</p></div>{model.action?<button type="button" className="primary-action" onClick={actions[model.action]}>{state[2]}</button>:null}</section>;
 }

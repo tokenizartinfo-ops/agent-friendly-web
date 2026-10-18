@@ -30,7 +30,7 @@ export function DossierTrustSummary(props:Props){
  const model=dossierTrustSummary({...props,fields:ready?record.fields:{}});
  const date=(value:string)=>new Date(value).toLocaleString(props.locale==='en'?'en-US':props.locale==='pt'?'pt-BR':'es-AR');
  return <details className="form-section dossier-trust-summary" onToggle={event=>setOpen(event.currentTarget.open)}><summary>{labels.title}</summary><p>{labels.intro}</p>
-  {failure===key?<p role="status">{labels.failed} <button type="button" onClick={()=>{setFailure('');setRecord(null);setAttempt(value=>value+1);}}>{labels.retry}</button></p>:!ready&&open?<p role="status">{labels.loading}</p>:null}
+  {failure===key?<p role="status">{labels.failed} <button type="button" className="secondary-action" onClick={()=>{setFailure('');setRecord(null);setAttempt(value=>value+1);}}>{labels.retry}</button></p>:!ready&&open?<p role="status">{labels.loading}</p>:null}
   <ul>{model.items.map(item=><li key={item.field}><strong>{names[item.field]||item.field}</strong>: {labels[item.kind as 'draft'|'copilot_reviewed'|'owner_declared']}{item.savedAt?<> · <time dateTime={item.savedAt}>{date(item.savedAt)}</time></>:null}</li>)}</ul>
   {model.observation?<p><strong>{labels.observed}</strong> · <time dateTime={model.observation.checkedAt}>{date(model.observation.checkedAt)}</time><br/>{model.observation.target}</p>:<p>{labels.none}</p>}<small>{labels.limit}</small>
  </details>;

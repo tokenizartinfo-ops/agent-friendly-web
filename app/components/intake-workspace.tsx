@@ -541,7 +541,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         <details id="dossier-assistant" className="dossier-assistant" open={!guidedView || !pilotCopilot}>
           <summary>{guidedView && pilotCopilot ? localizedMessage(locale, 'Seguir sin IA: una pregunta por vez', 'Continue without AI: one question at a time', 'Continuar sem IA: uma pergunta por vez') : DOSSIER_GUIDE_COPY[locale].assist}</summary>
           <p>{DOSSIER_GUIDE_COPY[locale].local}</p>
-          <IntakeAssistantPrototype locale={locale} draft={data} reviewedScope={reviewedScope} onApply={next => {
+          <IntakeAssistantPrototype locale={locale} draft={data} reviewedScope={reviewedScope} compact={guidedView} onApply={next => {
             if(manualLock.current)return;
             setAutosavePaused(false);setData(intakeFromProject(next));setStatus('idle');setMessage(DOSSIER_GUIDE_COPY[locale].draft);
           }} />
