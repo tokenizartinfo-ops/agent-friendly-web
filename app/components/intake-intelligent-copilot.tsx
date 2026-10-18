@@ -10,7 +10,7 @@ import { defaultCopilotSelection } from '../../lib/copilot-review-selection.mjs'
 import { appendVoiceSegment } from '../../lib/intake-copilot-audio.mjs';
 import { planCopilotNextTurn } from '../../lib/copilot-next-turn.mjs';
 import { previewCopilotNarrative } from '../../lib/copilot-narrative-draft.mjs';
-import { validateCopilotWorkingDraft } from '../../lib/copilot-working-draft.mjs';
+import { validateCopilotWorkingDraft, requestCopilotWorkingDraft } from '../../lib/copilot-working-draft.mjs';
 import { reviewedGoalProposal } from '../../lib/copilot-goal-contract.mjs';
 import { emptyCopilotSession, visibleSessionResult } from '../../lib/copilot-session.mjs';
 import { CopilotTurnAnswer } from './copilot-turn-answer';
@@ -130,24 +130,23 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
   }
   const workingInFlight = useRef<Promise<boolean> | null>(null);
   const workingCopy = {
-    es: { saved: 'Tu relato de trabajo está guardado en privado. Aún no es un dato del expediente.', pending: 'Guardando tu relato de trabajo…', error: 'No pude guardar este relato. Seguí en esta pestaña o reintentá; no se agregó al expediente.', sensitive: 'No guardé este texto porque podría contener claves o credenciales. Quitalas antes de continuar.', conflict: 'Otra pestaña cambió este relato. Elegí qué versión conservar antes de seguir.', keep: 'Conservar lo que escribí aquí', recover: 'Recuperar la otra versión', retry: 'Reintentar guardado', loading: 'Recuperando tu relato privado…', clear: 'Borrar relato de trabajo' },
-    en: { saved: 'Your working account is saved privately. It is not yet a dossier fact.', pending: 'Saving your working account…', error: 'I could not save this account. Keep this tab open or retry; it has not been added to the dossier.', sensitive: 'I did not save this text because it may contain credentials. Remove them to continue.', conflict: 'Another tab changed this account. Choose which version to keep.', keep: 'Keep what I wrote here', recover: 'Recover the other version', retry: 'Retry save', loading: 'Recovering your private account…', clear: 'Clear working account' },
-    pt: { saved: 'Seu relato de trabalho está salvo em privado. Ainda não é um dado do dossiê.', pending: 'Salvando seu relato de trabalho…', error: 'Não consegui salvar este relato. Mantenha esta aba aberta ou tente novamente; ele não foi adicionado ao dossiê.', sensitive: 'Não salvei este texto porque pode conter senhas ou credenciais. Remova-as para continuar.', conflict: 'Outra aba alterou este relato. Escolha qual versão manter.', keep: 'Manter o que escrevi aqui', recover: 'Recuperar a outra versão', retry: 'Tentar salvar novamente', loading: 'Recuperando seu relato privado…', clear: 'Apagar relato de trabalho' },
+    es: { saved: 'Tu relato de trabajo está guardado en privado. Aún no es un dato del expediente.', pending: 'Guardando tu relato de trabajo…', error: 'No pude confirmar el guardado del relato. Lo que escribiste sigue en esta pestaña. Comprobemos qué quedó guardado antes de continuar.', sensitive: 'No guardé este texto porque podría contener claves o credenciales. Quitalas antes de continuar.', conflict: 'El relato de esta pestaña y el guardado son distintos. Elegí cuál conservar antes de seguir.', keep: 'Conservar lo que escribí aquí', recover: 'Recuperar lo guardado', retry: 'Comprobar guardado', loading: 'Recuperando tu relato privado…', clear: 'Borrar relato de trabajo' },
+    en: { saved: 'Your working notes are saved privately. They are not yet dossier facts.', pending: 'Saving your working notes…', error: 'I could not confirm the saved notes. What you wrote is still in this tab. Let us check what was saved before continuing.', sensitive: 'I did not save this text because it may contain credentials. Remove them to continue.', conflict: 'The notes in this tab differ from the saved version. Choose which to keep.', keep: 'Keep what I wrote here', recover: 'Recover saved notes', retry: 'Check saved notes', loading: 'Recovering your private notes…', clear: 'Clear working notes' },
+    pt: { saved: 'Seu relato de trabalho está salvo em privado. Ainda não é um dado do dossiê.', pending: 'Salvando seu relato de trabalho…', error: 'Não consegui confirmar o salvamento do relato. O que você escreveu continua nesta aba. Vamos conferir o que foi salvo antes de continuar.', sensitive: 'Não salvei este texto porque pode conter senhas ou credenciais. Remova-as para continuar.', conflict: 'O relato nesta aba difere da versão salva. Escolha qual manter antes de continuar.', keep: 'Manter o que escrevi aqui', recover: 'Recuperar o que foi salvo', retry: 'Conferir salvamento', loading: 'Recuperando seu relato privado…', clear: 'Apagar relato de trabalho' },
   }[locale];
   useEffect(() => {
     if (!projectId) return;
     const controller = new AbortController();
-    fetch(`/api/projects/${projectId}/copilot/working-draft`, { cache: 'no-store', signal: controller.signal })
-      .then(async response => {
+    requestCopilotWorkingDraft(projectId, { signal: controller.signal })
+      .then(({ response, payload }) => {
         if (!response.ok) throw new Error('read_failed');
-        const payload = await response.json() as { draft?: Partial<WorkingDraft> };
         if (controller.signal.aborted) return;
         const recovered = { text: payload.draft?.text || '', revision: payload.draft?.revision || 0, session: payload.draft?.session || emptyCopilotSession() };
         setWorkingSaved(recovered);
         if (!currentNotes.current && !currentSession.current.pending && !currentSession.current.deferred.length && !currentSession.current.decisions.length) { currentNotes.current = recovered.text; setNotes(recovered.text); setSession(recovered.session); setWorkingState('ready'); }
         else if (currentNotes.current !== recovered.text || JSON.stringify(currentSession.current) !== JSON.stringify(recovered.session)) { setWorkingConflict(recovered); setWorkingState('conflict'); }
         else setWorkingState('ready');
-      }).catch(error => { if (!(error instanceof DOMException && error.name === 'AbortError')) setWorkingState('error'); });
+      }).catch(() => { if (!controller.signal.aborted) setWorkingState('error'); });
     return () => controller.abort();
   }, [projectId, workingRetry]);
   const saveWorkingNow = useCallback(async () => {
@@ -159,10 +158,9 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
     const write = (async () => {
       setWorkingState('saving');
       try {
-        const response = await fetch(`/api/projects/${projectId}/copilot/working-draft`, {
+        const { response, payload } = await requestCopilotWorkingDraft(projectId, {
           method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(input),
         });
-        const payload = await response.json() as { code?: string; draft?: WorkingDraft };
         if (response.status === 409 && payload.draft) { setWorkingConflict(payload.draft); setWorkingState('conflict'); return false; }
         if (!response.ok || !payload.draft) throw new Error(payload.code || 'save_failed');
         setWorkingSaved(payload.draft);
@@ -299,10 +297,10 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
   }
   return <section className="assistant-prototype" aria-label={t.title}>
       <p role="status" className="assistant-privacy">{workingState === 'loading' ? workingCopy.loading : workingState === 'saving' || workingState === 'ready' && workingDirty ? workingCopy.pending : workingState === 'conflict' ? workingCopy.conflict : workingState === 'error' ? validateCopilotWorkingDraft({ text: notes, revision: workingSaved.revision, mutationKey: '00000000-0000-4000-8000-000000000000', locale }).code === 'sensitive_working_draft' ? workingCopy.sensitive : workingCopy.error : workingCopy.saved}</p>
+      {workingState === 'error' ? <button type="button" className="secondary-action" onClick={() => { setWorkingState('loading'); setWorkingRetry(value => value + 1); }}>{workingCopy.retry}</button> : null}
     <details className="assistant-input-panel"><summary>{locale === 'en' ? 'Tell me in text or audio' : locale === 'pt' ? 'Contar por texto ou áudio' : 'Contármelo con texto o audio'}</summary><h2>{t.title}</h2><p>{t.intro}</p>
       <label>{t.title}<textarea rows={5} maxLength={5000} value={notes} onChange={event => { requestEpoch.current += 1; currentNotes.current = event.target.value; setNotes(event.target.value); setProcessingConsent(false); resetNarrativeDecisions(); setChanges(null); setNarrativeChanges(null); setNarrativeStatus(''); setStatus(''); setBusy(false); }} /></label>
 
-      {workingState === 'error' ? <button type="button" className="secondary-action" onClick={() => { setWorkingState('loading'); setWorkingRetry(value => value + 1); }}>{workingCopy.retry}</button> : null}
       {notes && workingState === 'ready' ? <button type="button" className="secondary-action" onClick={() => { currentNotes.current = ''; setNotes(''); setSession(emptyCopilotSession()); setChanges(null); setNarrativeChanges(null); }}>{workingCopy.clear}</button> : null}
       {workingState === 'conflict' && workingConflict ? <div className="assistant-guidance"><button type="button" className="secondary-action" onClick={recoverWorking}>{workingCopy.recover}</button><button type="button" className="secondary-action" onClick={() => { setWorkingSaved(workingConflict); setWorkingConflict(null); setWorkingState('ready'); }}>{workingCopy.keep}</button></div> : null}
       <button type="button" className="secondary-action" disabled={!notes.trim()} onClick={() => { try { const preview = previewCopilotNarrative(draft, notes, locale); narrativeEpoch.current = requestEpoch.current; setNarrativeChanges(preview); setNarrativeStatus(preview.length ? '' : n.duplicate); } catch (error) { setNarrativeChanges(null); setNarrativeStatus(error instanceof Error && error.message === 'too_long' ? n.tooLong : error instanceof Error && error.message === 'sensitive' ? n.sensitive : n.empty); } }}>{n.review}</button>
