@@ -92,6 +92,8 @@ Primer piloto testigo previsto: Sector de Sistemas. Sigue pendiente su incorpora
 
 No se activó tracking ni un CRM por este documento. Comenzar con revisión manual de recibos permitidos; diseñar instrumentación mínima y privacidad antes de recoger nuevos eventos. No copiar respuestas, textos de voz, correos, URLs privadas o identificadores de cuenta a herramientas de marketing. No fijar tasas objetivo sin una línea base.
 
+Preparación del18oct: ya están disponibles una [muestra de entrega identificada como ficticia](examples/delivery-sample-20261018/README.es.md) y una [ficha manual de aprendizaje](AFW-PILOT-LEARNING-RECORD-2026-10-18.es.md), todavía sin observaciones de clientes. La muestra distingue archivos preparados, decisiones pendientes e implementación ausente; no valida interés comercial ni hosting. La ficha convierte las medidas anteriores en un registro por etapa y rol, sin añadir formularios al usuario o activar instrumentación.
+
 ## Próximas acciones encadenadas
 
 | Orden | Acción y resultado esperado | Responsable propuesto | Momento / dependencia | Criterio de cierre |
