@@ -22,6 +22,16 @@ El [paquete de ejemplo](capsule.example.json) contiene una propuesta versionada 
 
 OpenAPI, MCP y skills aparecen como recursos solicitados que esta cápsula no implementa. Elegirlos no crea herramientas ni demuestra que estén disponibles. `llms.txt` es una propuesta comunitaria; no es un requisito universal ni garantiza que una IA recomiende el sitio.
 
+### Si todavía no sabés qué permitir
+
+Búsqueda y entrenamiento son decisiones separadas. Elegir «con límites» no significa permitir todo. Elegir «caso por caso» tampoco define una regla general para todos los rastreadores.
+
+El [ejemplo de políticas pendientes](robots-limits.example.txt), preparado con la fuente `f7d637a0013ea1b40e168c58b76dc4128c00fd09`, muestra qué ocurre al elegir búsqueda `limited` y entrenamiento `case_by_case`: solo hay comentarios para revisión, sin reglas activas. No cambia las decisiones ni los bytes del paquete de ejemplo anterior, que sí tenía opciones explícitas. No instalar este archivo ficticio como reemplazo de un `robots.txt` real.
+
+> Podemos dejarlo pendiente. Cuando quieras, revisamos qué parte te gustaría permitir y lo acordamos con quien mantiene tu sitio. Por ahora conservamos las reglas que ya tiene.
+
+Este texto es una pauta de acompañamiento para revisar; no acredita una respuesta del copilot, una preferencia del cliente o que un rastreador obedezca esas reglas.
+
 ## Quién hace cada parte
 
 El propietario revisa qué información quiere declarar y puede corregirla. AFW estructura la propuesta, explica sus límites y mantiene la versión revisable. Quien mantiene el sitio confirma dónde y cómo publicarla, conserva lo anterior y acuerda la reversión. Si es la misma persona, sigue necesitando distinguir esas decisiones.
