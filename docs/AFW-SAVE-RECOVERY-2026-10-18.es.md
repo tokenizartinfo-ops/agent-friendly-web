@@ -1,5 +1,27 @@
 # Recuperación de un guardado sin confirmación
 
+## Publicación aceptada del 18 de octubre
+
+La corrección está publicada en https://agentfriendlyweb.dev. La API primaria confirmó el 18 de octubre a las 22:27:24 UTC la versión `d94a1a33-4823-4ff6-bfde-fcf5b3f2eed5` al 100%, deployment `8b5168d4-6f29-4884-8cc2-d7b5e5946675`. Fuente pública exacta: `ae18a7823de868459af3fe9f7b81bb45cf1c093e`; no todo el main integral.
+
+| Comprobación | Resultado |
+| --- | --- |
+| Fuente revisada | `98e93301c8596220816f3c6ad69a68350842ca7c`, [PR 483](https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/483), merge main `068e18b6fe01d17f89cdc9b9071de42e37b17afc` |
+| CI integral | 39171729532 / job 117806023840: 2.026 PASS, cero fallos, una omitida; lint y build aprobados |
+| Backport mínimo | [PR 484](https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/484), merge público `a0d6214ca0edf07f6bb59daae564e688b955f1c7`; cuatro blobs iguales a la fuente revisada |
+| CI público | 39171834808 / job 117806338796: 1.148 PASS, cero fallos y cero omitidas; lint y build aprobados |
+| Comprobación posterior de main | 39172088152 / job 117807101313: 2.026 PASS, cero fallos, una omitida; lint y build aprobados |
+| Revisión independiente | Cero hallazgos; nueve pruebas dirigidas verificadas por el revisor |
+| Versión previa | `eaf0c739-0114-4b18-bb5d-b77dde928e35`: 16 páginas y tres assets exactos aprobados antes del upload, 22:25:28 UTC |
+| Candidata sin tráfico normal | Deployment `a8304501-84cf-4c4d-85e5-3aeb688c60f4`; 16 páginas, tres assets y smoke de Access aprobados con override, 22:26:29 UTC |
+| Tráfico normal | 16 páginas, tres assets y smoke de Access aprobados, 22:26:59 UTC |
+
+Se verificaron los 298 hashes del artefacto congelado y se preservaron los bindings, D1, AI, ASSETS, rate limiter 5/60, Access, runtime y observabilidad efectivos. El copilot conserva únicamente su pin propio anterior; publicación remota y diagnósticos siguen deshabilitados. No hubo migración, nuevas credenciales, activación cloud ni escritura en un expediente real.
+
+El asset publicado es `/_next/static/chunks/intake-workspace-DVeBZcho.js`, SHA-256 `6bacd01720f702c7fc27be08b86f70662fc471fb4170c331664abd2bfd83d9ee`. La comparación de configuración antes, en la candidata y después dio el mismo fingerprint saneado; sus valores privados no se copian al recibo. La versión previa permanece disponible para reversión; no se ejecutó un rollback.
+
+Las comprobaciones de páginas/assets acreditan la entrega de la versión pública. El caso de bloqueo, el ACK tardío y la recuperación se verificaron con el callback real del componente en pruebas locales; no se declara un nuevo recorrido autenticado remoto ni una aceptación visual a partir de esos smokes. El intento de QA visual local no se aceptó por un fallo del navegador de herramientas, y no se interpreta como un fallo del runtime AFW.
+
 ## Problema y alcance
 
 El formulario privado esperaba la respuesta de su PUT a `/api/projects` y después su JSON sin un límite propio. Si la conexión o el cuerpo de respuesta quedaban pendientes, también seguían pendientes el lock del formulario y la opción de guardar antes de salir. Una regresión sobre el callback real de `IntakeWorkspace` reprodujo esa espera; no fue necesario usar una cuenta o un expediente real.
