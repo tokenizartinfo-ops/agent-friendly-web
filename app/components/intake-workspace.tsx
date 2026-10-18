@@ -195,6 +195,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const [observationReadReady,setObservationReadReady]=useState<{projectId:string;website:string}|null>(null);
   const [observationLoadAttempt,setObservationLoadAttempt]=useState(0);
   const [observationBusy, setObservationBusy] = useState(false);
+  const [observationWriteFailure,setObservationWriteFailure]=useState<{projectId:string;website:string;message:string}|null>(null);
   const observationLock=useRef(false);
   const [observationAttempt]=useState(()=>createObservationSaveAttempt());
   const [observationMessage, setObservationMessage] = useState(localizedMessage(locale, 'La auditoría pública normalmente no guarda resultados.', 'The public audit normally stores no results.', 'A auditoria pública normalmente não armazena resultados.'));
@@ -445,6 +446,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
     observationLock.current=true;
     const attempt=observationAttempt.prepare(projectId,savedWebsite);
     setObservationBusy(true);
+    setObservationWriteFailure(null);
     setObservationMessage(localizedMessage(locale, 'Auditando recursos públicos y preparando una copia saneada...', 'Auditing public resources and preparing a sanitized copy...', 'Auditando recursos públicos e preparando uma cópia saneada...'));
     try {
       const response = await request(`/api/projects/${projectId}/observations`, attempt.request);
@@ -462,7 +464,9 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
       }catch{refreshFailed=true;setObservationHistory([]);setObservationReadFailure({projectId,website:savedWebsite});}
       setObservationMessage(refreshFailed?localizedMessage(locale,'La observación se guardó, pero no pude volver a consultar el historial. Usá “Reintentar consulta”; no hace falta auditar de nuevo.','The observation was saved, but I could not reload the history. Use “Retry saved read”; no new audit is needed.','A observação foi salva, mas não consegui atualizar o histórico. Use “Repetir consulta”; não é preciso auditar novamente.'):payload.replayed?localizedMessage(locale,'Recuperé la observación que ya se había guardado; no se duplicó.','I recovered the observation already saved; no duplicate was created.','Recuperei a observação já salva; não houve duplicação.'):localizedMessage(locale, 'Observación guardada. El escáner público sigue sin almacenar auditorías automáticas.', 'Observation saved. The public scanner still stores no automatic audits.', 'Observação salva. O scanner público continua sem armazenar auditorias automáticas.'));
     } catch (error) {
-      setObservationMessage(error instanceof TypeError?localizedMessage(locale,'No pude confirmar el resultado por la conexión. Tu próximo clic reintentará la misma solicitud antes de hacer otra auditoría.','I could not confirm the result because of the connection. Your next click will retry the same request before starting another audit.','Não consegui confirmar o resultado por causa da conexão. O próximo clique repetirá a mesma solicitação antes de iniciar outra auditoria.'):error instanceof Error ? error.message : localizedMessage(locale, 'No se pudo guardar la observación.', 'The observation could not be saved.', 'Não foi possível salvar a observação.'));
+      const failureMessage=error instanceof TypeError?localizedMessage(locale,'No pude confirmar el resultado por la conexión. Tu próximo clic reintentará la misma solicitud antes de hacer otra auditoría.','I could not confirm the result because of the connection. Your next click will retry the same request before starting another audit.','Não consegui confirmar o resultado por causa da conexão. O próximo clique repetirá a mesma solicitação antes de iniciar outra auditoria.'):error instanceof Error?error.message:localizedMessage(locale,'No se pudo guardar la observación.','The observation could not be saved.','Não foi possível salvar a observação.');
+      setObservationWriteFailure({projectId,website:savedWebsite,message:failureMessage});
+      setObservationMessage(failureMessage);
     } finally {
       observationLock.current=false;
       setObservationBusy(false);
@@ -529,6 +533,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           : localizedMessage(locale, 'Volver a la guía breve', 'Return to brief guide', 'Voltar ao guia breve')}</button></div> : null}
 
         {guidedView?<DossierFirstStep loaded={loaded} projectId={projectId} draft={data} saved={savedSnapshot} locale={locale} sessionRequired={sessionRequired} conflict={Boolean(conflictReview)} saving={status==='saving'} reading={observationBusy} workingPending={workingPending}
+          writeFailed={observationWriteFailure?.projectId===projectId&&observationWriteFailure.website===savedWebsite} feedback={observationWriteFailure?.projectId===projectId&&observationWriteFailure.website===savedWebsite?observationWriteFailure.message:undefined}
           observationState={observationReadFailure?.projectId===projectId&&observationReadFailure.website===savedWebsite?'failed':observationReadReady?.projectId===projectId&&observationReadReady.website===savedWebsite?'ready':'loading'} observation={currentObservations.observation}
           onSave={()=>{void saveDossierFirstStep({workingPending,saveWorking:workingSave.current,saveDossier:saveReviewedDraft,dossierPending:!projectId||dossierDirtyFields(data,savedSnapshot).length>0}).then(saved=>{if(!saved&&workingPending){const panel=document.getElementById('dossier-copilot');if(panel instanceof HTMLDetailsElement){panel.open=true;panel.scrollIntoView({block:'start'});panel.querySelector<HTMLElement>('summary')?.focus();}}});}} onGuide={continueFirstGuide}
           onAudit={()=>{void saveObservation();}} onReview={reviewObservation} onRetryRead={retrySavedObservationRead}/>:null}

@@ -29,6 +29,14 @@ test('missing objective or an invalid website stays in the guide',async()=>{
  assert.equal(dossierFirstStep({...base,saved:{website:''},draft:{website:''}}).action,'guide');
 });
 
+test('a failed explicit audit keeps the reason reachable instead of inviting a silent repeat',async()=>{
+ const {dossierFirstStep}=await load();
+ assert.equal(dossierFirstStep({...base,writeFailed:true}).state,'audit_failed');
+ assert.equal(dossierFirstStep({...base,writeFailed:true}).action,'review');
+ assert.equal(dossierFirstStep({...base,writeFailed:true,sessionRequired:true}).state,'session');
+ assert.equal(dossierFirstStep({...base,writeFailed:true,reading:true}).state,'reading');
+});
+
 test('first-step continuation saves the working draft first and stops on its failure',async()=>{
  const {saveDossierFirstStep}=await load();let writes=0,calls=[];
  const saveDossier=async()=>{calls.push('dossier');writes++;return true;};
