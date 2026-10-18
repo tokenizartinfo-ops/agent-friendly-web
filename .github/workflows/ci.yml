@@ -10,7 +10,9 @@ permissions:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    # Keep the OS family used by native workerd/SQLite acceptance.
+    # Qualify a new OS explicitly instead of following ubuntu-latest migration.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
