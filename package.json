@@ -32,7 +32,7 @@
     "web:compare:precutover-local": "node scripts/compare-cloudflare-native-public-origin.mjs --baseline-url https://agentfriendlyweb.dev --candidate-url http://127.0.0.1:8788",
     "web:types": "wrangler types --config wrangler.jsonc --env canary --env-interface CloudflareEnv",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern worker-configuration.d.ts",
-    "test": "node --test test/*.test.mjs",
+    "test": "node --test --test-reporter=spec test/*.test.mjs",
     "smoke:mcp": "node scripts/smoke-public-mcp.mjs",
     "mcp:dev": "npx --yes wrangler@4.127.0 dev --config wrangler.mcp.jsonc --env staging --port 8791",
     "mcp:deploy:dry-run": "npx --yes wrangler@4.127.0 deploy --config wrangler.mcp.jsonc --env staging --dry-run",
