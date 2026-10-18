@@ -41,6 +41,7 @@ import { reconcileSavedDraft } from '../../lib/project-save-reconciliation.mjs';
 import { DossierAssistance } from './dossier-assistance';
 import {DossierFirstStep} from './dossier-first-step';
 import {saveDossierFirstStep} from '../../lib/dossier-first-step.mjs';
+import {normalizeDomainAssociation} from '../../lib/project-domain-association.mjs';
 import {DossierTrustSummary} from './dossier-trust-summary';
 
 type Intake = {
@@ -76,7 +77,8 @@ type ObservationSummary = {
   evidence?: Record<string,boolean>;
 };
 type ObservationHistoryItem = {id:string;target:string;checkedAt:string;score:number|null;level:string;methodology:string};
-type ObservationPayload = { error?: string; code?: string; observation?: ObservationSummary | null; history?: ObservationHistoryItem[]; notice?: string; replayed?: boolean };
+type DomainAssociation={state:'available'|'current'|'own_other'|'other';origin:string;projectId?:string};
+type ObservationPayload = { error?: string; code?: string; observation?: ObservationSummary | null; history?: ObservationHistoryItem[]; notice?: string; replayed?: boolean;domainAssociation?:DomainAssociation|null };
 
 const emptyIntake: Intake = {
   organization: '', website: '', role: '', siteType: '', control: 'unknown', audience: '',
@@ -193,6 +195,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
   const [observationHistory,setObservationHistory]=useState<ObservationHistoryItem[]>([]);
   const [observationReadFailure,setObservationReadFailure]=useState<{projectId:string;website:string}|null>(null);
   const [observationReadReady,setObservationReadReady]=useState<{projectId:string;website:string}|null>(null);
+  const [domainAssociationSnapshot,setDomainAssociationSnapshot]=useState<{projectId:string;website:string;association:DomainAssociation|null}|null>(null);
   const [observationLoadAttempt,setObservationLoadAttempt]=useState(0);
   const [observationBusy, setObservationBusy] = useState(false);
   const [observationWriteFailure,setObservationWriteFailure]=useState<{projectId:string;website:string;message:string}|null>(null);
@@ -256,6 +259,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         if(controller.signal.aborted)return;
         setObservation(payload.observation || null);
         setObservationHistory(Array.isArray(payload.history)?payload.history:[]);
+        setDomainAssociationSnapshot({projectId,website:savedWebsite,association:payload.domainAssociation});
         setObservationReadFailure(null);
         setObservationReadReady({projectId,website:savedWebsite});
       })
@@ -451,6 +455,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
     try {
       const response = await request(`/api/projects/${projectId}/observations`, attempt.request);
       const payload = await response.json() as ObservationPayload;
+      if(payload.code==='domain_association_conflict')setDomainAssociationSnapshot({projectId,website:savedWebsite,association:normalizeDomainAssociation(payload.domainAssociation)});
       if (!response.ok || !payload.observation) throw new Error(payload.error || localizedMessage(locale, 'No se pudo guardar la observación.', 'The observation could not be saved.', 'Não foi possível salvar a observação.'));
       observationAttempt.confirmed(attempt.key);
       setObservation(payload.observation);
@@ -458,6 +463,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
       try {
         const recent=await readObservationSnapshot(projectId,request);
         setObservationHistory(recent.history);
+        setDomainAssociationSnapshot({projectId,website:savedWebsite,association:recent.domainAssociation});
         if(recent.observation)setObservation(recent.observation);
         setObservationReadFailure(null);
         setObservationReadReady({projectId,website:savedWebsite});
@@ -492,6 +498,10 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
     reviewDelivery();
     const section=document.getElementById('dossier-observation');
     if(section){section.tabIndex=-1;section.focus({preventScroll:true});section.scrollIntoView({block:'start'});}
+  }
+  function reviewProjectDirectory(){
+    setGuidedViewRequested(false);
+    window.requestAnimationFrame(()=>{const title=document.getElementById('project-directory-title');if(title){title.tabIndex=-1;title.focus();title.scrollIntoView({block:'start'});}});
   }
   function continueFirstGuide(){
     const requiredField=!data.website?'website':!data.goals.length?'goals':null;
@@ -533,6 +543,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           : localizedMessage(locale, 'Volver a la guía breve', 'Return to brief guide', 'Voltar ao guia breve')}</button></div> : null}
 
         {guidedView?<DossierFirstStep loaded={loaded} projectId={projectId} draft={data} saved={savedSnapshot} locale={locale} sessionRequired={sessionRequired} conflict={Boolean(conflictReview)} saving={status==='saving'} reading={observationBusy} workingPending={workingPending}
+          domainAssociation={domainAssociationSnapshot?.projectId===projectId&&domainAssociationSnapshot.website===savedWebsite?domainAssociationSnapshot.association:null} onDirectory={reviewProjectDirectory}
           writeFailed={observationWriteFailure?.projectId===projectId&&observationWriteFailure.website===savedWebsite} feedback={observationWriteFailure?.projectId===projectId&&observationWriteFailure.website===savedWebsite?observationWriteFailure.message:undefined}
           observationState={observationReadFailure?.projectId===projectId&&observationReadFailure.website===savedWebsite?'failed':observationReadReady?.projectId===projectId&&observationReadReady.website===savedWebsite?'ready':'loading'} observation={currentObservations.observation}
           onSave={()=>{void saveDossierFirstStep({workingPending,saveWorking:workingSave.current,saveDossier:saveReviewedDraft,dossierPending:!projectId||dossierDirtyFields(data,savedSnapshot).length>0}).then(saved=>{if(!saved&&workingPending){const panel=document.getElementById('dossier-copilot');if(panel instanceof HTMLDetailsElement){panel.open=true;panel.scrollIntoView({block:'start'});panel.querySelector<HTMLElement>('summary')?.focus();}}});}} onGuide={continueFirstGuide}
