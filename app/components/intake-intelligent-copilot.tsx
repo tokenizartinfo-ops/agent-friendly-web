@@ -64,8 +64,11 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
   const n = narrativeCopy[locale];
   const labels = dossierFieldLabels(locale);
   const label = (field: string) => field in labels ? labels[field as keyof typeof labels] : field;
-  const [notes, setNotes] = useState('');
-  const [session, setSession] = useState<Session>(emptyCopilotSession);
+  const workingEdited = useRef(false);
+  const [notes, setNotesState] = useState('');
+  const [session, setSessionState] = useState<Session>(emptyCopilotSession);
+  function setNotes(value: string) { workingEdited.current = true; setNotesState(value); }
+  function setSession(value: Session | ((current: Session) => Session)) { workingEdited.current = true; setSessionState(value); }
   const currentSession = useRef(session);
   useEffect(() => { currentSession.current = session; }, [session]);
   const recoveredResult = visibleSessionResult(session, draft);
@@ -143,7 +146,7 @@ export function IntakeIntelligentCopilot({ projectId, dossierRevision, locale, d
         if (controller.signal.aborted) return;
         const recovered = { text: payload.draft?.text || '', revision: payload.draft?.revision || 0, session: payload.draft?.session || emptyCopilotSession() };
         setWorkingSaved(recovered);
-        if (!currentNotes.current && !currentSession.current.pending && !currentSession.current.deferred.length && !currentSession.current.decisions.length) { currentNotes.current = recovered.text; setNotes(recovered.text); setSession(recovered.session); setWorkingState('ready'); }
+        if (!workingEdited.current && !currentNotes.current && !currentSession.current.pending && !currentSession.current.deferred.length && !currentSession.current.decisions.length) { currentNotes.current = recovered.text; setNotesState(recovered.text); setSessionState(recovered.session); setWorkingState('ready'); }
         else if (currentNotes.current !== recovered.text || JSON.stringify(currentSession.current) !== JSON.stringify(recovered.session)) { setWorkingConflict(recovered); setWorkingState('conflict'); }
         else setWorkingState('ready');
       }).catch(() => { if (!controller.signal.aborted) setWorkingState('error'); });

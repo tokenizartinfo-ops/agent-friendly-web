@@ -18,23 +18,25 @@ find(source);
 assert.ok(saveCallback); assert.ok(readEffect);
 
 // Real component callbacks; React setters and the network are the boundaries.
-function harness(fetch, mode = 'ready') {
+function harness(fetch, mode = 'ready', options = {}) {
   const session = emptyCopilotSession();
-  const state = { mode, notes: 'Tenemos una librería de barrio.', saved: null, conflict: null };
+  const state = { mode, notes: options.notes ?? 'Tenemos una librería de barrio.', saved: null, conflict: null };
   const inFlight = { current: null };
   const currentNotes = { current: state.notes };
   const bindings = {
     Error, DOMException, AbortController, crypto, JSON, fetch,
     requestCopilotWorkingDraft: (projectId, init) => working.requestCopilotWorkingDraft(projectId, init, { request: fetch, timeoutMs: 20 }),
     workingInFlight: inFlight, workingState: mode, workingDirty: true,
+    workingEdited: { current: options.edited ?? true },
     projectId: 'synthetic-own', locale: 'es', notes: state.notes, session,
-    workingSaved: { text: '', revision: 0, session }, currentNotes,
+    workingSaved: options.saved ?? { text: '', revision: 0, session }, currentNotes,
     currentSession: { current: session }, emptyCopilotSession,
     validateCopilotWorkingDraft: working.validateCopilotWorkingDraft,
     setWorkingState: value => { state.mode = value; },
     setWorkingSaved: value => { state.saved = value; },
     setWorkingConflict: value => { state.conflict = value; },
     setNotes: value => { state.notes = value; }, setSession() {},
+    setNotesState: value => { state.notes = value; }, setSessionState() {},
   };
   const compile = callback => vm.runInNewContext(ts.transpileModule(`(${callback.getText(source)})`, { compilerOptions: { target: ts.ScriptTarget.ES2022 } }).outputText, bindings);
   return { save: compile(saveCallback), read: compile(readEffect), state, inFlight, currentNotes };
@@ -180,4 +182,38 @@ test('successful reads remove their abort listener and timer; invalid scopes do 
   await assert.rejects(working.requestCopilotWorkingDraft('synthetic-own', {}, { request, timeoutMs: 0 }), /invalid_working_draft_request/);
   await assert.rejects(working.requestCopilotWorkingDraft('synthetic-own', { signal: parent.signal }, { request }), /working_draft_cancelled/);
   assert.equal(calls, 1);
+});
+
+test('clearing notes, losing the acknowledgement and recovering an older record never silently restores deleted text', async () => {
+  const saved = { text: 'Relato que quiero borrar', revision: 2, session: emptyCopilotSession() };
+  let release;
+  const methods = [];
+  const h = harness(async (_url, init) => {
+    methods.push(init.method || 'GET');
+    if (init.method === 'PUT') return new Promise(resolve => { release = () => resolve(Response.json({ draft: saved })); });
+    return Response.json({ draft: saved });
+  }, 'ready', { notes: '', edited: true, saved });
+  assert.equal(await h.save(), false);
+  const cleanup = h.read();
+  try {
+    await delay(10);
+    assert.equal(h.state.mode, 'conflict', 'An intentionally empty edit must be reviewed, not mistaken for initial hydration');
+    assert.equal(h.state.notes, '');
+    assert.equal(h.currentNotes.current, '');
+    assert.equal(h.state.conflict.text, saved.text);
+    assert.deepEqual(methods, ['PUT', 'GET']);
+  } finally { cleanup(); release?.(); }
+});
+
+test('an untouched initial load still restores saved notes and conversation decisions', async () => {
+  const saved = { text: 'Contexto para continuar', revision: 2, session: emptyCopilotSession() };
+  const h = harness(async () => Response.json({ draft: saved }), 'loading', { notes: '', edited: false });
+  const cleanup = h.read();
+  try {
+    await delay(10);
+    assert.equal(h.state.mode, 'ready');
+    assert.equal(h.state.notes, saved.text);
+    assert.equal(h.state.saved.revision, 2);
+    assert.equal(h.state.conflict, null);
+  } finally { cleanup(); }
 });

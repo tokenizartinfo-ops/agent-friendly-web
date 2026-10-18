@@ -14,6 +14,8 @@ El aviso explica que no se pudo confirmar y que el texto sigue en esta pestaña.
 
 Si el relato y sus decisiones ya coinciden con lo guardado, se recupera su revisión sin otro PUT. Si son distintos, se conserva lo escrito y se ofrece elegir una versión; no se atribuye esa diferencia necesariamente a otra pestaña. Solo después de elegir conservar el borrador puede reanudarse el guardado con la revisión actual y el control CAS existente.
 
+Vaciar el relato también es una edición. La carga inicial intacta puede recuperar el relato guardado; después de una edición, incluso si el resultado es vacío, una diferencia pide elegir en lugar de restaurar texto anterior sin preguntar. La misma marca protege las decisiones locales de la conversación antes de completar una primera lectura.
+
 La consulta se limita a `/api/projects/{projectId}/copilot/working-draft`; no abre un transporte a destinos arbitrarios. Conserva `cache: no-store` y evita seguir redirecciones de autenticación. Una sesión vencida, HTML, JSON inválido o un error de permisos no se convierten en un guardado confirmado. Un conflicto 409 mantiene su revisión separada.
 
 ## Límites de producto y autorización
