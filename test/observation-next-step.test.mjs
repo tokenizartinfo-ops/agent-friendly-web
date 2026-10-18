@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {observationNextStep} from '../lib/observation-next-step.mjs';
+import {missingIntakeQuestions} from '../lib/intake-question-coach.mjs';
+import {normalizeIntake} from '../lib/intake.mjs';
 
 const actions=[{id:'crawl',state:'not_detected'},{id:'answers',state:'not_detected'},{id:'documents',state:'not_detected'}];
 
@@ -26,6 +28,15 @@ test('known control picks a foundation and never forces advanced capabilities',(
 test('the private guide receives current basic gaps, control and unsaved-draft state',async()=>{
  const workspace=await readFile('app/components/intake-workspace.tsx','utf8');
  const guide=await readFile('app/components/saved-observation-evidence.tsx','utf8');
- assert.match(workspace,/missingBasicCount=\{missingIntakeQuestions\(data\)\.length\}/);
+ assert.match(workspace,/missingBasicCount=\{missingIntakeQuestions\(data,data\.deferredQuestions\)\.length\}/);
  assert.match(guide,/observationNextStep\(\{actions:plan\.actions,control,unsaved,missingBasicCount\}\)/);
+});
+
+test('deferred unknowns remain unknown without blocking the next control question',()=>{
+ const draft=normalizeIntake({website:'https://example.com',organization:'Example',goals:['discovery'],deferredQuestions:['siteType','audience','languages','cms','hosting']});
+ assert.equal(missingIntakeQuestions(draft).length,5);
+ const missingBasicCount=missingIntakeQuestions(draft,draft.deferredQuestions).length;assert.equal(missingBasicCount,0);
+ assert.equal(draft.hosting,'');
+ assert.equal(observationNextStep({actions,control:'unknown',missingBasicCount}).kind,'clarify_control');
+ assert.equal(observationNextStep({actions,control:'unknown',missingBasicCount,unsaved:true}).kind,'save_draft');
 });
