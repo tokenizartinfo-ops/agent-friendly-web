@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowRight, ClipboardList, FileText, FolderOpen, Route, ScanSearch } from './client-icons';
-import { COMIC_HOME_COPY } from '../../lib/home-copy.mjs';
+import { COMIC_HOME_COPY, SERVICE_JOURNEY_COPY } from '../../lib/home-copy.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 
 type Locale = 'es' | 'en' | 'pt';
@@ -33,6 +33,13 @@ export function ComicCallHero({ locale = 'es' }: { locale?: Locale }) {
         <span><span aria-hidden="true">01</span> {copy.eyebrow}</span>
         <h1 id="comic-call-title">{copy.title}</h1>
       </div>
+      <div className="comic-call-body">
+        <p>{copy.intro}</p>
+        <div className="comic-call-actions">
+          <a href="#tu-primer-paso">{copy.primary} <ArrowDown size={18} /></a>
+          <a href="#auditar">{copy.secondary} <ScanSearch size={18} /></a>
+        </div>
+      </div>
       <img
         className="comic-call-art"
         src="/images/agent-friendly-call-robots.webp"
@@ -40,13 +47,25 @@ export function ComicCallHero({ locale = 'es' }: { locale?: Locale }) {
         width={1680}
         height={941}
       />
-      <div className="comic-call-body">
-        <p>{copy.intro}</p>
-        <div className="comic-call-actions">
-          <a href="#auditar">{copy.primary} <ArrowDown size={18} /></a>
-          <a href="#ruta-de-madurez">{copy.secondary} <Route size={18} /></a>
-        </div>
+    </section>
+  );
+}
+
+export function HomeServiceJourney({ locale = 'es' }: { locale?: Locale }) {
+  const copy = SERVICE_JOURNEY_COPY[locale] || SERVICE_JOURNEY_COPY.es;
+  return (
+    <section className="home-service-journey" id="tu-primer-paso" aria-labelledby="home-service-title">
+      <header><span>{copy.eyebrow}</span><h2 id="home-service-title">{copy.title}</h2><p>{copy.intro}</p></header>
+      <ol>
+        {copy.steps.map((step, index) => <li key={step.title}><span aria-hidden="true">0{index + 1}</span><h3>{step.title}</h3><p>{step.detail}</p></li>)}
+      </ol>
+      <p className="home-service-difference">{copy.difference}</p>
+      <div className="home-service-start">
+        <a href={localizedPath('dossier', locale)} aria-describedby="home-entry-access">{copy.action} <ArrowRight size={18} aria-hidden="true" /></a>
+        <p id="home-entry-access">{copy.access}</p>
+        <a href="#auditar">{copy.audit} <ArrowDown size={16} aria-hidden="true" /></a>
       </div>
+      <details><summary>{copy.futureTitle}</summary><p>{copy.future}</p></details>
     </section>
   );
 }

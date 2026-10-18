@@ -75,7 +75,7 @@ export function ScanWorkspace({ initialSite, locale = 'es' }: ScanWorkspaceProps
       <section className="audit-band" id="auditar" aria-labelledby="audit-title">
         <div className="audit-copy">
           <div className="eyebrow"><Radar size={16} /> {copy.eyebrow}</div>
-          <h1 id="audit-title">{copy.title}</h1>
+          <h2 id="audit-title">{copy.title}</h2>
           <p>{copy.intro}</p>
           <form className="scan-form" onSubmit={runScan}>
             <label htmlFor="site-url">{copy.form.label}</label>
