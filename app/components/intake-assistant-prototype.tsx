@@ -20,7 +20,7 @@ type Locale = 'es' | 'en' | 'pt';
 type Draft = Record<string, string | string[]>;
 type Change = { field: string; before?: string | string[]; after: string | string[] };
 
-export function IntakeAssistantPrototype({ locale = 'es', draft, onApply, reviewedScope = null }: { locale?: Locale; draft?: Draft; reviewedScope?: ReviewedScope; onApply?: (draft: Draft) => void } = {}) {
+export function IntakeAssistantPrototype({ locale = 'es', draft, onApply, reviewedScope = null, compact = false }: { locale?: Locale; draft?: Draft; reviewedScope?: ReviewedScope; onApply?: (draft: Draft) => void; compact?:boolean } = {}) {
   const copy = publicToolsCopy(locale).intake;
   const draftCopy = intakeDraftCopy[locale];
   const guidance = {
@@ -87,6 +87,7 @@ export function IntakeAssistantPrototype({ locale = 'es', draft, onApply, review
   return (
     <>
     {draft && onApply ? <IntakeQuestionCoach draft={draft} locale={locale} reviewedScope={reviewedScope} onApply={onApply}/> : null}
+    <details className="assistant-optional-context" open={!compact}><summary>{locale==='en'?'I prefer to describe it in my own words':locale==='pt'?'Prefiro contar com minhas palavras':'Prefiero contarlo con mis palabras'}</summary>
     <section className="assistant-prototype">
       <div className="assistant-input-panel">
         <div className="assistant-panel-heading"><Sparkles size={20} /><div><span>{copy.freeContext}</span><h2>{copy.freeTitle}</h2></div></div>
@@ -128,6 +129,7 @@ export function IntakeAssistantPrototype({ locale = 'es', draft, onApply, review
         ) : null}
       </div>
     </section>
+    </details>
     </>
   );
 }

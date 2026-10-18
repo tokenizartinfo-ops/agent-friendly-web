@@ -35,3 +35,16 @@ test('unknown fields, malformed shapes and tampered plans never become draft upd
  assert.throws(()=>resolveDossierRebase(base,2,{...plan,changes:[{field:'role',before:'owner',after:'admin'}]},{}),/explicit_review_required/);
  const updated=resolveDossierRebase(base,2,plan,{});assert.equal(updated.notes,'Local');assert.equal(base.notes,'');
 });
+
+test('deferral and resume participate in CAS recovery without losing concurrent preferences',()=>{
+ const base=normalizeIntake({website:'https://example.com'}),draft={...base,deferredQuestions:['hosting']},current={...base,organization:'Remote'};
+ const plan=planDossierRebase(base,draft,current,2);
+ assert.deepEqual(resolveDossierRebase(current,2,plan,{}).deferredQuestions,['hosting']);
+ const deferred={...base,deferredQuestions:['hosting']};
+ const concurrent={...deferred,deferredQuestions:['hosting','cms']};
+ const resume=planDossierRebase(deferred,{...deferred,deferredQuestions:[]},concurrent,3);
+ assert.equal(resume.conflicts[0].field,'deferredQuestions');
+ assert.throws(()=>resolveDossierRebase(concurrent,3,resume,{}),/missing_choice/);
+ assert.deepEqual(resolveDossierRebase(concurrent,3,resume,{deferredQuestions:'local'}).deferredQuestions,[]);
+ assert.deepEqual(resolveDossierRebase(concurrent,3,resume,{deferredQuestions:'current'}).deferredQuestions,['hosting','cms']);
+});
