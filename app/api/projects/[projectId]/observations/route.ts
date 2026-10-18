@@ -6,6 +6,7 @@ import { runPublicAudit, sanitizeObservation } from '../../../../../lib/public-a
 import { summarizeObservationHistory } from '../../../../../lib/observation-history.mjs';
 import { observationRequestIds } from '../../../../../lib/observation-save-attempt.mjs';
 import { storedObservationEvidence } from '../../../../../lib/saved-observation-evidence.mjs';
+import { projectDomainAssociation } from '../../../../../lib/project-domain-association.mjs';
 
 type RouteContext = { params: Promise<{ projectId: string }> };
 const REQUEST_KEY = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -48,6 +49,9 @@ export async function GET(_request: Request, context: RouteContext) {
     .orderBy(desc(scanObservations.checkedAt))
     .limit(5) : [];
   const [observation] = rows;
+  const [linkedSite] = origin ? await getDb().select().from(registrySites)
+    .where(eq(registrySites.hostname,new URL(origin).hostname)).limit(1) : [];
+  const domainAssociation = origin ? await projectDomainAssociation(project,user.userId,linkedSite,ownedProject) : null;
 
   return Response.json({
     observation: observation ? {
@@ -58,6 +62,7 @@ export async function GET(_request: Request, context: RouteContext) {
       evidence: storedObservationEvidence(observation.evidenceJson),
     } : null,
     history: summarizeObservationHistory(rows, project.website),
+    domainAssociation,
   }, { headers: { 'cache-control': 'no-store' } });
 }
 
@@ -117,7 +122,8 @@ export async function POST(request: Request, context: RouteContext) {
     .where(eq(registrySites.hostname, requestedOrigin.hostname))
     .limit(1);
   if (!existingSite && hostnameOwner && hostnameOwner.projectId !== projectId) {
-    return Response.json({ error: 'Ese dominio ya pertenece a otro expediente.' }, { status: 409 });
+    const domainAssociation=await projectDomainAssociation(project,user.userId,hostnameOwner,ownedProject);
+    return Response.json({ code:'domain_association_conflict',error:'Ese dominio ya pertenece a otro expediente.',domainAssociation }, { status:409,headers:{'cache-control':'no-store'} });
   }
 
   let sanitized;

@@ -6,3 +6,4 @@
 .coach-scope{border-left:3px solid #7c5127;padding:12px 16px;background:#f5f0e7;margin-block:16px}.coach-scope ul{padding-left:20px}
 .intake-question-coach select{display:block;width:100%;min-height:44px;padding:10px;border:1px solid #8f8270;border-radius:5px;background:#fffaf0;font:inherit;color:inherit}
 .coach-option-help{margin-block:12px}.coach-option-help summary{cursor:pointer;min-height:44px;padding-block:10px}.coach-option-help dt{font-weight:700}.coach-option-help dd{margin:4px 0 12px}
+.coach-answer-review{margin-block:16px}.coach-answer-review summary{cursor:pointer;min-height:44px;padding-block:10px}.coach-answer-review dt{font-weight:700}.coach-answer-review dd{margin:4px 0 12px;white-space:pre-wrap}
