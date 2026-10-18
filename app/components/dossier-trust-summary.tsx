@@ -1,4 +1,5 @@
 'use client';
+import {formatDossierDate} from '../../lib/dossier-date.mjs';
 import {useEffect,useState} from 'react';
 import {dossierTrustSummary} from '../../lib/dossier-trust-summary.mjs';
 import {dossierFieldLabels} from '../../lib/dossier-field-labels.mjs';
@@ -28,7 +29,7 @@ export function DossierTrustSummary(props:Props){
  },[open,projectId,revision,request,key,attempt]);
  const ready=record?.key===key;
  const model=dossierTrustSummary({...props,fields:ready?record.fields:{}});
- const date=(value:string)=>new Date(value).toLocaleString(props.locale==='en'?'en-US':props.locale==='pt'?'pt-BR':'es-AR');
+ const date=(value:string)=>formatDossierDate(value,props.locale);
  return <details className="form-section dossier-trust-summary" onToggle={event=>setOpen(event.currentTarget.open)}><summary>{labels.title}</summary><p>{labels.intro}</p>
   {failure===key?<p role="status">{labels.failed} <button type="button" className="secondary-action" onClick={()=>{setFailure('');setRecord(null);setAttempt(value=>value+1);}}>{labels.retry}</button></p>:!ready&&open?<p role="status">{labels.loading}</p>:null}
   <ul>{model.items.map(item=><li key={item.field}><strong>{names[item.field]||item.field}</strong>: {labels[item.kind as 'draft'|'copilot_reviewed'|'owner_declared']}{item.savedAt?<> · <time dateTime={item.savedAt}>{date(item.savedAt)}</time></>:null}</li>)}</ul>
