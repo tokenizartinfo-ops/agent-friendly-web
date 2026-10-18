@@ -1,10 +1,12 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { deliveryAdvice, DELIVERY_ADVICE_COPY } from '../../lib/delivery-advisor.mjs';
+import {deliveryInstructions} from '../../lib/delivery-instructions.mjs';
 
 export type DeliveryScope={projectId:string;capsuleId:string;manifestSha256:string};
-export function DeliveryAdvisor({locale,scope}:{locale:'es'|'en'|'pt';scope?:DeliveryScope}) {
+export function DeliveryAdvisor({locale,scope,context={}}:{locale:'es'|'en'|'pt';scope?:DeliveryScope;context?:{cms?:string;hosting?:string}}) {
   const [capability, setCapability] = useState('');
+  const instructions=deliveryInstructions({...context,capability,locale});
   const [responsible,setResponsible]=useState('');
   const [revision,setRevision]=useState(0);
   const [phase,setPhase]=useState(scope?'loading':'informational');
@@ -48,6 +50,7 @@ export function DeliveryAdvisor({locale,scope}:{locale:'es'|'en'|'pt';scope?:Del
     </div>
       : <div><p>{copy.reassurance}</p><label>{copy.question}<select value={capability} disabled={phase==='loading'||phase==='saving'} onChange={event=>{setCapability(event.target.value);setPhase(value=>['unavailable','conflict'].includes(value)?value:'ready');}}><option value="">—</option>{Object.entries(copy.options).map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label></div>}
     {scope?<><p role="status">{phase==='saved'?labels.saved:phase==='loading'?labels.loading:phase==='saving'?labels.saving:phase==='failed'?labels.failed:phase==='unavailable'?labels.unavailable:phase==='conflict'?labels.conflict:capability?labels.pending:''}</p>{['unavailable','conflict'].includes(phase)?<button type="button" className="secondary-action" onClick={()=>{setPhase('loading');setReload(value=>value+1);}}>{labels.refresh}</button>:null}</>:null}
+    {path?<details className="delivery-instructions"><summary>{instructions.title}</summary><p>{instructions.context}</p><ol>{instructions.steps.map(step=><li key={step.id}>{step.text}</li>)}</ol><label>{locale==='en'?'Text for your maintainer':locale==='pt'?'Texto para o responsável':'Texto para quien mantiene tu web'}<textarea readOnly rows={5} value={instructions.text}/></label></details>:null}
     <p className="capsule-guidance-boundary">{scope?labels.boundary:copy.boundary}</p>
   </details>;
 }

@@ -13,18 +13,19 @@ export function DossierTrustSummary(props:Props){
  const [open,setOpen]=useState(false),[attempt,setAttempt]=useState(0);
  const [record,setRecord]=useState<{key:string;fields:Record<string,unknown>}|null>(null);
  const [failure,setFailure]=useState('');
- const key=`${props.projectId}:${props.revision}`,labels=copy[props.locale],names:Record<string,string>=dossierFieldLabels(props.locale);
+ const {projectId,revision,request}=props;
+ const key=`${projectId}:${revision}`,labels=copy[props.locale],names:Record<string,string>=dossierFieldLabels(props.locale);
  useEffect(()=>{
-  if(!open||!props.projectId)return;
+  if(!open||!projectId)return;
   const controller=new AbortController();
-  void props.request(`/api/projects/${encodeURIComponent(props.projectId)}/field-history`,{cache:'no-store',signal:controller.signal}).then(async response=>{
+  void request(`/api/projects/${encodeURIComponent(projectId)}/field-history`,{cache:'no-store',signal:controller.signal}).then(async response=>{
    if(!response.ok)throw Error('unavailable');
    const body=await response.json();
    if(!body.fields||typeof body.fields!=='object'||Array.isArray(body.fields))throw Error('unavailable');
    if(!controller.signal.aborted){setRecord({key,fields:body.fields});setFailure('');}
   }).catch(()=>{if(!controller.signal.aborted)setFailure(key);});
   return ()=>controller.abort();
- },[open,props.projectId,props.revision,props.request,key,attempt]);
+ },[open,projectId,revision,request,key,attempt]);
  const ready=record?.key===key;
  const model=dossierTrustSummary({...props,fields:ready?record.fields:{}});
  const date=(value:string)=>new Date(value).toLocaleString(props.locale==='en'?'en-US':props.locale==='pt'?'pt-BR':'es-AR');

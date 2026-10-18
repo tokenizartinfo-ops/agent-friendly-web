@@ -142,11 +142,13 @@ export function CapsuleReview({
   expectedDomain = '',
   allowBuild = false,
   locale = 'es',
+  deliveryContext,
 }: {
   projectId: string;
   expectedDomain?: string;
   allowBuild?: boolean;
   locale?: Locale;
+  deliveryContext?: {cms?:string;hosting?:string};
 }) {
   const copy = privateUiCopy(locale).capsule;
   const [capsule, setCapsule] = useState<Capsule | null>(null);
@@ -408,7 +410,7 @@ export function CapsuleReview({
         <div><strong>{copy.noWrite}</strong><span>{copy.noWriteBody}</span></div>
       </div>
 
-      <CapsuleGuidance deliveryScope={actorRole==='owner'&&capsule?{projectId,capsuleId:capsule.capsuleId,manifestSha256:capsule.integrity.manifestSha256}:undefined} locale={locale} hasCapsule={Boolean(capsule)} canRefresh={Boolean(projectId)&&!busy&&loadState!=='loading'} onRefresh={()=>{void loadCapsule();}} state={capsuleGuideState({projectId,loadState,status:capsule?.status||'',canDecide,allowBuild,comparisonState,filesObservedUnchanged:capsuleFilesObservedUnchanged(capsule,comparison),comparisonStatus:capsuleEvidenceMatches(capsule,comparison)?comparison?.status||'':''})}/>
+      <CapsuleGuidance deliveryContext={deliveryContext} deliveryScope={actorRole==='owner'&&capsule?{projectId,capsuleId:capsule.capsuleId,manifestSha256:capsule.integrity.manifestSha256}:undefined} locale={locale} hasCapsule={Boolean(capsule)} canRefresh={Boolean(projectId)&&!busy&&loadState!=='loading'} onRefresh={()=>{void loadCapsule();}} state={capsuleGuideState({projectId,loadState,status:capsule?.status||'',canDecide,allowBuild,comparisonState,filesObservedUnchanged:capsuleFilesObservedUnchanged(capsule,comparison),comparisonStatus:capsuleEvidenceMatches(capsule,comparison)?comparison?.status||'':''})}/>
 
       {!capsule ? (
         <div className="capsule-empty">
