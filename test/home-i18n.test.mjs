@@ -39,6 +39,7 @@ test('home experience passes locale through the comic shell and interactive audi
 test('home follows the approved human journey before opening the future archive', () => {
   const sequence = [
     '<ComicCallHero locale=',
+    '<HomeServiceJourney locale=',
     '<MaturityMap locale=',
     '<ScanWorkspace initialSite=',
     '<HomeMaturityComparison locale=',
