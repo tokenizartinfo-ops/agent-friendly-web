@@ -47,7 +47,9 @@ function present(project: typeof siteProjects.$inferSelect) {
     approverName: project.approverName,
     approverEmail: project.approverEmail,
     monitoringPreference: project.monitoringPreference,
+    deferredQuestions: decodeList(project.deferredQuestionsJson),
   };
+  intake.deferredQuestions=normalizeIntake(intake).deferredQuestions;
   const question = nextQuestion(intake);
   return {
     id: project.id,
@@ -162,7 +164,11 @@ export async function PUT(request: Request) {
     return Response.json({ code: 'invalid_idempotency_key' }, { status: 400, headers: { 'cache-control': 'no-store' } });
   }
   const eventId = requestKey ? await digest(JSON.stringify(['project-save-v1', user.userId, requestKey])) : crypto.randomUUID();
-  const fingerprint = requestKey ? await digest(JSON.stringify({ intake, id: requestedId, revision: raw.revision ?? null,
+  const fingerprintIntake = {...intake} as Record<string,unknown>;
+  // Omitted means preserve, while [] means resume. Keep the old canonical hash
+  // for old-client retries and distinguish those two intentions for new saves.
+  if(raw.deferredQuestions === undefined)delete fingerprintIntake.deferredQuestions;
+  const fingerprint = requestKey ? await digest(JSON.stringify({ intake: fingerprintIntake, id: requestedId, revision: raw.revision ?? null,
     ...(raw.sourceHints !== undefined ? { sourceHints: raw.sourceHints } : {}) })) : null;
   const recoverReceipt = async () => {
     if (!requestKey) return null;
@@ -203,6 +209,10 @@ export async function PUT(request: Request) {
     return Response.json({ code: 'project_selection_required', error: 'Abre el expediente guardado antes de continuar. No se modificaron sus datos.' }, { status: 409, headers: { 'cache-control': 'no-store' } });
   }
   const id = existing?.id || crypto.randomUUID();
+  // Old clients do not know this private preference and must not erase it.
+  if(existing && raw.deferredQuestions === undefined) {
+    intake.deferredQuestions=normalizeIntake({...intake,deferredQuestions:decodeList(existing.deferredQuestionsJson)}).deferredQuestions;
+  }
   if (existing && (!Number.isSafeInteger(expectedRevision) || expectedRevision < 1)) {
     return Response.json({ code: 'revision_required', error: 'Actualiza la sesion del expediente antes de guardar. Conserva tu borrador.' }, { status: 428, headers: { 'cache-control': 'no-store' } });
   }
@@ -234,6 +244,7 @@ export async function PUT(request: Request) {
       approverName: intake.approverName,
       approverEmail: intake.approverEmail,
       monitoringPreference: intake.monitoringPreference,
+      deferredQuestionsJson: JSON.stringify(intake.deferredQuestions),
       status: completion === 100 ? 'ready_for_review' : 'draft',
       completion,
       createdAt: now,
@@ -267,6 +278,7 @@ export async function PUT(request: Request) {
         approverName: intake.approverName,
         approverEmail: intake.approverEmail,
         monitoringPreference: intake.monitoringPreference,
+        deferredQuestionsJson: JSON.stringify(intake.deferredQuestions),
         status: completion === 100 ? 'ready_for_review' : 'draft',
         completion,
         updatedAt: now,

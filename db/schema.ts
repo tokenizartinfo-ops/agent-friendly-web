@@ -70,6 +70,7 @@ export const siteProjects = sqliteTable(
     approverName: text('approver_name').notNull().default(''),
     approverEmail: text('approver_email').notNull().default(''),
     monitoringPreference: text('monitoring_preference').notNull().default(''),
+    deferredQuestionsJson: text('deferred_questions_json').notNull().default('[]'),
     status: text('status').notNull().default('draft'),
     completion: integer('completion').notNull().default(0),
     revision: integer('revision').notNull().default(1),
