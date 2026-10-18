@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import test from 'node:test';
 
 import {
@@ -71,6 +72,41 @@ test('publication capsule never fabricates tools that require a real implementat
   );
   assert.ok(capsule.unsupportedResources.every((resource) => /real|verificable|contrato/i.test(resource.reason)));
   assert.equal(capsule.files.some((file) => /openapi|mcp|skill/i.test(file.packagePath)), false);
+});
+
+test('generated discovery files describe declarations without claiming a pending approval', () => {
+  const capsule = buildPublicationCapsule(baseInput);
+  assert.equal(capsule.approvals.owner, 'pending');
+  for (const path of ['files/llms.txt', 'files/llms-full.txt']) {
+    const {content} = capsule.files.find(file => file.packagePath === path);
+    assert.doesNotMatch(content, /datos aprobados|owner.approved|verified declarations/i);
+    assert.match(content, /declarad[oa]s/i);
+    assert.match(content, /revision y (?:la )?decision de publicacion[\s\S]*por separado/i);
+  }
+});
+
+test('discovery lists generated resources separately from requested tools not implemented by the capsule', () => {
+  const capsule = buildPublicationCapsule(baseInput);
+  const {content} = capsule.files.find(file => file.packagePath === 'files/llms-full.txt');
+  const prepared = content.match(/## Recursos de descubrimiento preparados en esta capsula\n([\s\S]*?)(?=\n## |$)/)?.[1];
+  assert.ok(prepared, 'the proposed-resource section must exist');
+  assert.deepEqual([...prepared.matchAll(/^- `([^`]+)`$/gm)].map(match => match[1]), ['llms', 'llms_full', 'robots', 'sitemap', 'jsonld']);
+  const unsupported = content.match(/## Recursos solicitados que esta capsula no implementa\n([\s\S]*?)(?=\n## |$)/)?.[1];
+  assert.ok(unsupported, 'requested tools must have a distinct unimplemented section');
+  assert.deepEqual([...unsupported.matchAll(/^- `([^`]+)`$/gm)].map(match => match[1]), ['openapi', 'mcp', 'skills']);
+  assert.match(unsupported, /no acredita.*disponibilidad/i);
+});
+
+test('a discovery-only capsule has no unimplemented tools section and hashes bind the delivered bytes', () => {
+  const capsule = buildPublicationCapsule({...baseInput, selectedResources: ['llms_full', 'llms']});
+  const {content} = capsule.files.find(file => file.packagePath === 'files/llms-full.txt');
+  assert.doesNotMatch(content, /## Recursos solicitados que esta capsula no implementa/);
+  for (const file of capsule.files) {
+    const digest = createHash('sha256').update(file.content).digest('hex');
+    assert.equal(file.sha256, digest);
+    assert.equal(capsule.manifest.files.find(item => item.packagePath === file.packagePath).sha256, digest);
+    assert.ok(capsule.checksums.includes(`${digest}  ${file.packagePath}\n`));
+  }
 });
 
 test('robots and sitemap remain manual integrations instead of destructive replacements', () => {
