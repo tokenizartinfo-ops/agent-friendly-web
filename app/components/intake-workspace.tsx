@@ -47,6 +47,7 @@ type Intake = {
   contentSources: string[]; desiredCapabilities: string[]; authorizedResources: string[];
   publicationPreference: string; crawlerSearchPolicy: string; crawlerTrainingPolicy: string;
   approverName: string; approverEmail: string; monitoringPreference: string;
+  deferredQuestions: string[];
 };
 
 type RoadmapItem = { id: string; title: string; reason: string; stage: string };
@@ -80,10 +81,11 @@ const emptyIntake: Intake = {
   maintainerEmail: '', dnsProvider: '', contentSources: [], desiredCapabilities: [],
   authorizedResources: [], publicationPreference: '', crawlerSearchPolicy: '',
   crawlerTrainingPolicy: '', approverName: '', approverEmail: '', monitoringPreference: '',
+  deferredQuestions: [],
 };
 
 const listFields = new Set<keyof Intake>([
-  'goals', 'languages', 'contentSources', 'desiredCapabilities', 'authorizedResources',
+  'goals', 'languages', 'contentSources', 'desiredCapabilities', 'authorizedResources', 'deferredQuestions',
 ]);
 
 function intakeFromProject(saved: Partial<Intake>): Intake {

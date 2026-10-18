@@ -47,7 +47,9 @@ function present(project: typeof siteProjects.$inferSelect) {
     approverName: project.approverName,
     approverEmail: project.approverEmail,
     monitoringPreference: project.monitoringPreference,
+    deferredQuestions: decodeList(project.deferredQuestionsJson),
   };
+  intake.deferredQuestions=normalizeIntake(intake).deferredQuestions;
   const question = nextQuestion(intake);
   return {
     id: project.id,
@@ -203,6 +205,10 @@ export async function PUT(request: Request) {
     return Response.json({ code: 'project_selection_required', error: 'Abre el expediente guardado antes de continuar. No se modificaron sus datos.' }, { status: 409, headers: { 'cache-control': 'no-store' } });
   }
   const id = existing?.id || crypto.randomUUID();
+  // Old clients do not know this private preference and must not erase it.
+  if(existing && raw.deferredQuestions === undefined) {
+    intake.deferredQuestions=normalizeIntake({...intake,deferredQuestions:decodeList(existing.deferredQuestionsJson)}).deferredQuestions;
+  }
   if (existing && (!Number.isSafeInteger(expectedRevision) || expectedRevision < 1)) {
     return Response.json({ code: 'revision_required', error: 'Actualiza la sesion del expediente antes de guardar. Conserva tu borrador.' }, { status: 428, headers: { 'cache-control': 'no-store' } });
   }
@@ -234,6 +240,7 @@ export async function PUT(request: Request) {
       approverName: intake.approverName,
       approverEmail: intake.approverEmail,
       monitoringPreference: intake.monitoringPreference,
+      deferredQuestionsJson: JSON.stringify(intake.deferredQuestions),
       status: completion === 100 ? 'ready_for_review' : 'draft',
       completion,
       createdAt: now,
@@ -267,6 +274,7 @@ export async function PUT(request: Request) {
         approverName: intake.approverName,
         approverEmail: intake.approverEmail,
         monitoringPreference: intake.monitoringPreference,
+        deferredQuestionsJson: JSON.stringify(intake.deferredQuestions),
         status: completion === 100 ? 'ready_for_review' : 'draft',
         completion,
         updatedAt: now,
