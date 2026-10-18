@@ -675,7 +675,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           <div className="verification-message" aria-live="polite"><CircleHelp size={17} /><span>{observationMessage}</span></div>
         </section>
 
-        {!rehearsal ? <div id="dossier-capsule"><CapsuleReview projectId={projectId} expectedDomain={hostname} allowBuild locale={locale} deliveryContext={{cms:savedSnapshot.cms,hosting:savedSnapshot.hosting}} /></div> : null}
+        {!rehearsal ? <div id="dossier-capsule"><CapsuleReview projectId={projectId} expectedDomain={hostname} allowBuild locale={locale} deliveryContext={{cms:savedSnapshot.cms,hosting:savedSnapshot.hosting}} observationHistory={currentObservations.history} /></div> : null}
         </details>
         </fieldset>
       </main>

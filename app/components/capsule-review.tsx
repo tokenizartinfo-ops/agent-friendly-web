@@ -21,6 +21,7 @@ import { capsuleBuildMessage } from '../../lib/capsule-build-message.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { ConnectorSandbox } from './connector-sandbox';
 import {CapsuleGuidance} from './capsule-guidance';
+import {CapsuleOutcome} from './capsule-outcome';
 import {capsuleGuideState,capsuleEvidenceMatches,capsuleFilesObservedUnchanged} from '../../lib/capsule-guidance.mjs';
 
 type Locale = 'es' | 'en' | 'pt';
@@ -143,12 +144,14 @@ export function CapsuleReview({
   allowBuild = false,
   locale = 'es',
   deliveryContext,
+  observationHistory = [],
 }: {
   projectId: string;
   expectedDomain?: string;
   allowBuild?: boolean;
   locale?: Locale;
   deliveryContext?: {cms?:string;hosting?:string};
+  observationHistory?: Array<{id:string;target:string;checkedAt:string;score:number|null;level:string;methodology:string}>;
 }) {
   const copy = privateUiCopy(locale).capsule;
   const [capsule, setCapsule] = useState<Capsule | null>(null);
@@ -411,6 +414,8 @@ export function CapsuleReview({
       </div>
 
       <CapsuleGuidance deliveryContext={deliveryContext} deliveryScope={actorRole==='owner'&&capsule?{projectId,capsuleId:capsule.capsuleId,manifestSha256:capsule.integrity.manifestSha256}:undefined} locale={locale} hasCapsule={Boolean(capsule)} canRefresh={Boolean(projectId)&&!busy&&loadState!=='loading'} onRefresh={()=>{void loadCapsule();}} state={capsuleGuideState({projectId,loadState,status:capsule?.status||'',canDecide,allowBuild,comparisonState,filesObservedUnchanged:capsuleFilesObservedUnchanged(capsule,comparison),comparisonStatus:capsuleEvidenceMatches(capsule,comparison)?comparison?.status||'':''})}/>
+
+      {capsule?<CapsuleOutcome capsule={capsule} comparison={comparison} comparisonState={comparisonState} history={observationHistory} locale={locale}/>:null}
 
       {!capsule ? (
         <div className="capsule-empty">
