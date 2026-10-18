@@ -1,4 +1,6 @@
-# Estado vigente del primer piloto: 17 octubre de 2026
+# Estado vigente del primer piloto: 18 octubre de 2026
+
+La continuidad guiada y los primeros resultados ya están publicados: [recibo del18oct](AFW-GUIDED-DOSSIER-RELEASE-2026-10-18.es.md). Se recuerdan preguntas pospuestas, basta sitio+objetivo para pedir la primera lectura, se explica la procedencia y se adaptan entrega/resumen. Migración0015 aplicada conservando los seis expedientes; copilot inteligente sigue solo en su pin propio. La interacción de estos cambios pasó localmente y la versión/asset pública se comprobaron; el nuevo clic privado en producción requiere sesión propia.
 
 La corrección de «Necesito ayuda» está publicada en producción: [recibo del 17 de octubre](AFW-DOSSIER-HELP-PRODUCTION-RELEASE-2026-10-17.es.md). El botón vuelve a abrir la guía breve cuando no hay copilot inteligente. La evidencia de guardado, entrega, aislamiento y correo de marca ya aceptada conserva su alcance; no se repite por esta actualización.
 
@@ -6,7 +8,7 @@ El cierre pendiente es la cadena integrada de avisos y revisión desde la nube. 
 
 | Tramo | Estado comprobado | Próximo cierre |
 | --- | --- | --- |
-| Ayuda y recorrido guiado | Corrección pública al 100%; interacción React local y versión/asset públicos comprobados | Si se valida de nuevo el clic privado en producción, usar sesión propia vigente; no crear un expediente de Max |
+| Ayuda y recorrido guiado | Cinco mejoras y corrección de ayuda públicas al100%; interacción React/API-D1 local y versión/asset públicos comprobados | Si se valida de nuevo el clic privado en producción, usar sesión propia vigente; no crear un expediente de Max |
 | Acceso previsto del cliente | API17oct16:01UTC: destino `/expediente*`, audiencia correcta y allow del correo exacto, sin everyone ni exclusión del destinatario | Recepción de código e ingreso desde la sesión del cliente; la regla no prueba ninguno de los dos |
 | Correo desde hello@ | Ensayo visual propio recibido y cerrado; preview contextual14oct con saludo a Max, una pregunta, guía gradual y CTA directo a `/expediente` | Revisar la versión exacta destinada al cliente y obtener aprobación del primer envío; no enviar el paquete de preview del owner |
 | Catálogo y suscripción | Lectura y consentimiento separados funcionaron; catálogo nativo bloqueado | Diagnóstico técnico nuevo, reparación justificada y una verificación propia acotada antes del alta |
@@ -24,7 +26,7 @@ El objetivo del piloto es una mejora real, declarada y verificable según la nec
 
 ## Registro histórico: 8 octubre de 2026
 
-Las secciones siguientes conservan su fecha y alcance. Sus «próximos pasos» y casillas describen ese momento; la tabla del 17 de octubre determina los pendientes actuales.
+Las secciones siguientes conservan su fecha y alcance. Sus «próximos pasos» y casillas describen ese momento; la tabla vigente del18 de octubre determina los pendientes actuales.
 
 Actualización posterior: AFW-OCCURRENCE-CLOUD-ADOPTION-2026-10-08.es.md acredita publicación6ac78bc y adopción ordinaria01a11b8a/source8eecaac,17pass/1skipWindows. El filesystem del chat no acredita persistencia entre instancias. AFW-GLOBAL-OCCURRENCE-IMPLEMENTATION-2026-10-08.es.md ordena el registro global D1 y su integración, todavía sin activar. No repetir la adopción de8eecaac como si probara una fuente posterior. AFW-FIRST-CLIENT-ACCESS-PREFLIGHT-2026-10-08.es.md confirma regla allow exacta para Max y destinoexpediente, sin everyone; login/OTP del cliente siguen pendientes.
 
