@@ -1,5 +1,7 @@
 # Initial Go-to-Market and Sales Motion v1
 
+Continuación fechada18oct2026: [plan comercial operativo](AFW-COMMERCIAL-OPERATING-PLAN-2026-10-18.es.md). Recupera la investigación de Chavo como borrador, concreta entregables y responsabilidades y propone medir valor/esfuerzo antes de precio o campañas. Este documento conserva sus hipótesis originales; no acredita demanda o una apertura general.
+
 **Estado:** hipotesis comercial para pilotos
 
 **Fecha:** 2026-08-31
