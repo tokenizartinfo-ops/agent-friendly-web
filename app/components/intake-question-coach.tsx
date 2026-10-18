@@ -9,7 +9,7 @@ import './intake-question-coach.css';
 import {scopeQuestionGuide,SCOPE_QUESTION_COPY} from '../../lib/scope-question-guide.mjs';
 import type {ReviewedScope} from './scope-import';
 import {normalizeDeferredQuestions} from '../../lib/dossier-guide-continuity.mjs';
-import {FIRST_RESULT_QUESTION_ORDER} from '../../lib/dossier-first-step.mjs';
+import {intakeNextStepAdvice} from '../../lib/intake-next-step-advice.mjs';
 type Locale='es'|'en'|'pt';
 type Draft=Record<string,string|string[]>;
 type Field=keyof typeof QUESTION_COPY.es.fields;
@@ -19,19 +19,20 @@ export function IntakeQuestionCoach({draft,locale,onApply,reviewedScope=null}:{d
  const deferred=normalizeDeferredQuestions(draft.deferredQuestions,draft);
  const [answers,setAnswers]=useState<Record<string,CachedAnswer>>({});
  const guide=scopeQuestionGuide(draft,reviewedScope,locale);
+ const advice=intakeNextStepAdvice(draft,locale);
  const scopeCopy=SCOPE_QUESTION_COPY[locale];
  const [message,setMessage]=useState('');
  const region=useRef<HTMLElement>(null);
  const moveFocus=useRef(false);
  const copy=QUESTION_COPY[locale];
  const missing=missingIntakeQuestions(draft);
- const field=missingIntakeQuestions(draft,deferred,guide?.order||FIRST_RESULT_QUESTION_ORDER)[0] as Field|undefined;
+ const field=missingIntakeQuestions(draft,deferred,guide?.order||advice.order)[0] as Field|undefined;
  const pending=deferred.filter(item=>missing.includes(item));
  useEffect(()=>{if(moveFocus.current){region.current?.querySelector<HTMLElement>('.coach-question h3,.coach-done')?.focus();moveFocus.current=false;}},[field]);
  return <section ref={region} className="intake-question-coach" aria-labelledby="question-coach-title">
   <h2 id="question-coach-title">{copy.title}</h2><p>{copy.intro}</p>
   {guide?<aside className="coach-scope" aria-label={scopeCopy.title}><strong>{scopeCopy.title}</strong><p>{scopeCopy.intro}</p><ul>{guide.actions.map(action=><li key={action}>{action}</li>)}</ul><p>{scopeCopy.limit}</p></aside>:null}
-  {field?<Answer key={field} cached={answers[field]} reason={guide?.reasons[field]} onRemember={value=>setAnswers(current=>({...current,[field]:value}))} field={field} draft={draft} locale={locale} onApply={next=>{moveFocus.current=true;onApply(next);setAnswers(current=>({...current,[field]:{text:"",languages:[]}}));setMessage(copy.applied);}} onSkip={()=>{moveFocus.current=true;onApply({...draft,deferredQuestions:normalizeDeferredQuestions([...deferred,field],draft)});setMessage(copy.applied);}}/>:<p className="coach-done" tabIndex={-1}>{copy.done}</p>}
+  {field?<Answer key={field} cached={answers[field]} reason={guide?.reasons[field]||advice.reasons[field]} onRemember={value=>setAnswers(current=>({...current,[field]:value}))} field={field} draft={draft} locale={locale} onApply={next=>{moveFocus.current=true;onApply(next);setAnswers(current=>({...current,[field]:{text:"",languages:[]}}));setMessage(copy.applied);}} onSkip={()=>{moveFocus.current=true;onApply({...draft,deferredQuestions:normalizeDeferredQuestions([...deferred,field],draft)});setMessage(copy.applied);}}/>:<p className="coach-done" tabIndex={-1}>{copy.done}</p>}
   {pending.length?<details className="coach-pending"><summary>{copy.pending} ({pending.length})</summary><ul>{pending.map(item=><li key={item}>{copy.fields[item as Field][0]}</li>)}</ul><button type="button" onClick={()=>{moveFocus.current=true;onApply({...draft,deferredQuestions:[]});setMessage(copy.applied);}}>{copy.resume}</button></details>:null}
   <p role="status">{message}</p><p>{copy.local}</p>
  </section>;
@@ -42,12 +43,15 @@ function Answer({field,draft,locale,onApply,onSkip,cached,onRemember,reason}:{fi
  const [changes,setChanges]=useState<Change[]|null>(null);
  const [error,setError]=useState('');
  const copy=QUESTION_COPY[locale];
+ const advice=intakeNextStepAdvice(draft,locale);
  function showError(reason:unknown){const key=reason instanceof Error?reason.message:'invalid';setError(copy.errors[key as keyof typeof copy.errors]||copy.errors.stale);}
  const form=privateUiCopy(locale).intake;
  const choices: [string,string][]=field==='goals'?form.goals:languageChoices(locale,[]);
  const display=(value:string|string[])=>Array.isArray(value)?choices.filter(([code])=>value.includes(code)).map(([,label])=>label).join(', '):field==='siteType'?(form.siteTypes.find(([code]:[string,string])=>code===value)?.[1]||value):value;
  return <div className="coach-question" data-field={field}>
   <h3 tabIndex={-1}>{copy.fields[field][1]}</h3><p id="coach-reason">{reason||copy.fields[field][2]}</p>
+  {field==='goals'?<><p>{advice.reassurance}</p>{advice.recommendedGoal?<button type="button" onClick={()=>{setError('');try{setChanges(previewIntakeAnswer(draft,'goals',[advice.recommendedGoal]));}catch(reason){setChanges(null);showError(reason);}}}>{advice.recommendAction}</button>:null}<details className="coach-option-help"><summary>{advice.helpTitle}</summary><dl>{form.goals.map(([code,label]:[string,string])=><div key={code}><dt>{label}</dt><dd>{advice.goalHelp[code as keyof typeof advice.goalHelp]}</dd></div>)}</dl></details></>:null}
+  {field in advice.help?<details className="coach-option-help"><summary>{advice.helpTitle}</summary><p>{advice.help[field as keyof typeof advice.help]}</p></details>:null}
   {field==='siteType'?<label>{copy.answer}<select value={answer} aria-describedby="coach-reason" onChange={event=>{setAnswer(event.target.value);onRemember({text:event.target.value,languages});setChanges(null);setError('');}}><option value="">—</option>{form.siteTypes.map(([code,label]:[string,string])=><option key={code} value={code}>{label}</option>)}</select></label>:field==='languages'||field==='goals'?<fieldset><legend>{copy.answer}</legend>{choices.map(([code,label])=><label className="coach-language" key={code}><input type="checkbox" checked={languages.includes(code)} onChange={()=>{const next=languages.includes(code)?languages.filter(item=>item!==code):[...languages,code];setLanguages(next);onRemember({text:answer,languages:next});setChanges(null);setError('');}}/>{label}</label>)}</fieldset>:<label>{copy.answer}<textarea id="coach-answer" value={answer} aria-describedby="coach-reason" rows={3} onChange={event=>{setAnswer(event.target.value);onRemember({text:event.target.value,languages});setChanges(null);setError('');}}/><small>{answer.length}/1200</small></label>}
   {error?<p role="alert">{error}</p>:null}
   <div className="coach-actions"><button type="button" onClick={()=>{setError('');try{setChanges(previewIntakeAnswer(draft,field,field==='languages'||field==='goals'?languages:answer));}catch(reason){setChanges(null);showError(reason);}}}>{copy.review}</button><button type="button" onClick={onSkip}>{copy.skip}</button></div>
