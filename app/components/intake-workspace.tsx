@@ -24,7 +24,7 @@ import { hasPendingDraft, attachDraftExitGuard } from '../../lib/draft-exit-guar
 import { DraftExitDialog } from './draft-exit-dialog';
 import { roadmapPresentation } from '../../lib/roadmap-presentation.mjs';
 import { proportionalTargetGuide } from '../../lib/proportional-target.mjs';
-import { readProjectSaveResponse } from '../../lib/project-save-response.mjs';
+import { saveProjectDraft } from '../../lib/project-save-response.mjs';
 import { createObservationSaveAttempt } from '../../lib/observation-save-attempt.mjs';
 import { currentOriginObservations, observationOrigin } from '../../lib/observation-current-origin.mjs';
 import { observationScoreLabel } from '../../lib/observation-score-copy.mjs';
@@ -279,9 +279,8 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
     setStatus('saving');
     const submittedSources = { ...sourceHints.current };
     try {
-      const response = await request('/api/projects', saveAttempt.prepare({ ...data, id: projectId, revision: savedRevision.current,
+      const { response, parsed } = await saveProjectDraft(request, saveAttempt.prepare({ ...data, id: projectId, revision: savedRevision.current,
         ...(Object.keys(submittedSources).length ? { sourceHints: submittedSources } : {}) }));
-      const parsed = await readProjectSaveResponse(response);
       if (parsed.sessionRequired) {
         setSessionRequired(true);
         setAutosavePaused(true);
