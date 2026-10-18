@@ -37,6 +37,17 @@ test('a failed explicit audit keeps the reason reachable instead of inviting a s
  assert.equal(dossierFirstStep({...base,writeFailed:true,reading:true}).state,'reading');
 });
 
+test('a current domain association offers a safe continuation before another audit',async()=>{
+ const {dossierFirstStep}=await load();
+ const domainAssociation={state:'own_other',origin:'https://example.com',projectId:'original-a'};
+ assert.equal(dossierFirstStep({...base,domainAssociation}).state,'associated');
+ assert.equal(dossierFirstStep({...base,domainAssociation}).action,'open_associated');
+ assert.equal(dossierFirstStep({...base,domainAssociation:{state:'other',origin:domainAssociation.origin}}).state,'association_help');
+ assert.equal(dossierFirstStep({...base,domainAssociation,saving:true}).state,'saving');
+ assert.equal(dossierFirstStep({...base,domainAssociation,workingPending:true}).action,'save');
+ assert.equal(dossierFirstStep({...base,domainAssociation:{...domainAssociation,origin:'https://old.example'}}).action,'audit');
+});
+
 test('first-step continuation saves the working draft first and stops on its failure',async()=>{
  const {saveDossierFirstStep}=await load();let writes=0,calls=[];
  const saveDossier=async()=>{calls.push('dossier');writes++;return true;};

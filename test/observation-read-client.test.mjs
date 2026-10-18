@@ -26,3 +26,10 @@ test('the private UI exposes a separate read retry instead of reusing the save a
  assert.match(source,/Reintentar consulta guardada/);
  assert.match(source,/onClick=\{saveObservation\}/);
 });
+
+test('a saved read preserves only validated domain continuation metadata',async()=>{
+ const association={state:'own_other',origin:'https://example.org',projectId:'original-a'};
+ const snapshot=await readObservationSnapshot('draft',async()=>Response.json({observation:null,history:[],domainAssociation:association}));
+ assert.deepEqual(snapshot.domainAssociation,association);
+ await assert.rejects(readObservationSnapshot('draft',async()=>Response.json({history:[],domainAssociation:{state:'other',origin:'https://example.org',projectId:'foreign'}})),/invalid_domain_association/);
+});

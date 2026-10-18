@@ -10,6 +10,7 @@ import {scopeQuestionGuide,SCOPE_QUESTION_COPY} from '../../lib/scope-question-g
 import type {ReviewedScope} from './scope-import';
 import {normalizeDeferredQuestions} from '../../lib/dossier-guide-continuity.mjs';
 import {intakeNextStepAdvice} from '../../lib/intake-next-step-advice.mjs';
+import {intakeAnswerReview} from '../../lib/intake-answer-review.mjs';
 type Locale='es'|'en'|'pt';
 type Draft=Record<string,string|string[]>;
 type Field=keyof typeof QUESTION_COPY.es.fields;
@@ -28,11 +29,14 @@ export function IntakeQuestionCoach({draft,locale,onApply,reviewedScope=null}:{d
  const missing=missingIntakeQuestions(draft);
  const field=missingIntakeQuestions(draft,deferred,guide?.order||advice.order)[0] as Field|undefined;
  const pending=deferred.filter(item=>missing.includes(item));
+ const review=intakeAnswerReview(draft,locale);
+ const reviewCopy={es:['Revisar estas respuestas','Esta es la base que decidimos. Son datos declarados; revisá el estado de guardado antes de salir.'],en:['Review these answers','This is the starting point we chose. These are declared details; check the save status before leaving.'],pt:['Revisar estas respostas','Esta é a base que escolhemos. São dados declarados; confira o estado de salvamento antes de sair.']}[locale];
  useEffect(()=>{if(moveFocus.current){region.current?.querySelector<HTMLElement>('.coach-question h3,.coach-done')?.focus();moveFocus.current=false;}},[field]);
  return <section ref={region} className="intake-question-coach" aria-labelledby="question-coach-title">
   <h2 id="question-coach-title">{copy.title}</h2><p>{copy.intro}</p>
   {guide?<aside className="coach-scope" aria-label={scopeCopy.title}><strong>{scopeCopy.title}</strong><p>{scopeCopy.intro}</p><ul>{guide.actions.map(action=><li key={action}>{action}</li>)}</ul><p>{scopeCopy.limit}</p></aside>:null}
   {field?<Answer key={field} cached={answers[field]} reason={guide?.reasons[field]||advice.reasons[field]} onRemember={value=>setAnswers(current=>({...current,[field]:value}))} field={field} draft={draft} locale={locale} onApply={next=>{moveFocus.current=true;onApply(next);setAnswers(current=>({...current,[field]:{text:"",languages:[]}}));setMessage(copy.applied);}} onSkip={()=>{moveFocus.current=true;onApply({...draft,deferredQuestions:normalizeDeferredQuestions([...deferred,field],draft)});setMessage(copy.applied);}}/>:<p className="coach-done" tabIndex={-1}>{copy.done}</p>}
+  {!field&&review.length?<details className="coach-answer-review"><summary>{reviewCopy[0]}</summary><p>{reviewCopy[1]}</p><dl>{review.map(row=><div key={row.field}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}</dl></details>:null}
   {pending.length?<details className="coach-pending"><summary>{copy.pending} ({pending.length})</summary><ul>{pending.map(item=><li key={item}>{copy.fields[item as Field][0]}</li>)}</ul><button type="button" onClick={()=>{moveFocus.current=true;onApply({...draft,deferredQuestions:[]});setMessage(copy.applied);}}>{copy.resume}</button></details>:null}
   <p role="status">{message}</p><p>{copy.local}</p>
  </section>;
