@@ -40,6 +40,7 @@ import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
 import { reconcileSavedDraft } from '../../lib/project-save-reconciliation.mjs';
 import { DossierAssistance } from './dossier-assistance';
 import {DossierFirstStep} from './dossier-first-step';
+import {DossierTrustSummary} from './dossier-trust-summary';
 
 type Intake = {
   organization: string; website: string; role: string; siteType: string; control: string;
@@ -530,6 +531,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
           observationState={observationReadFailure?.projectId===projectId&&observationReadFailure.website===savedWebsite?'failed':observationReadReady?.projectId===projectId&&observationReadReady.website===savedWebsite?'ready':'loading'} observation={currentObservations.observation}
           onSave={()=>{void saveReviewedDraft();}} onGuide={continueFirstGuide}
           onAudit={()=>{void saveObservation();}} onReview={reviewObservation} onRetryRead={retrySavedObservationRead}/>:null}
+        {loaded&&projectId?<DossierTrustSummary key={projectId} projectId={projectId} revision={scopeRevision} draft={data} saved={savedSnapshot} locale={locale} observation={currentObservations.observation} request={request}/>:null}
         <div hidden={guidedView}>
         <ScopeImport onReviewChange={setReviewedScope} onPrepareSeparate={setSeparateScope} onAvailableScopeChange={setAvailableScope} locale={locale} website={data.website} projectId={projectId || ""} revision={scopeRevision} canSave={Boolean(projectId && data.website === savedWebsite && status !== "saving")} request={request} onUseWebsite={website => {
           if(manualLock.current || data.website.trim())return;
