@@ -121,6 +121,36 @@ test('robots and sitemap remain manual integrations instead of destructive repla
   assert.match(sitemap.content, /https:\/\/museo\.example\/llms\.txt/);
 });
 
+test('limited or missing search policy never becomes blanket search permission in robots', () => {
+  for (const policy of ['limited', '', 'unknown', 'constructor']) {
+    const capsule = buildPublicationCapsule({...baseInput, crawlerSearchPolicy: policy});
+    const {content} = capsule.files.find(file => file.destinationPath === '/robots.txt');
+    assert.doesNotMatch(content, /^User-agent: (OAI-SearchBot|ChatGPT-User|Claude-SearchBot|Claude-User|PerplexityBot|Perplexity-User)$/m);
+    assert.match(content, /^# No search rules proposed:/m);
+    assert.match(content, /^User-agent: GPTBot\nDisallow: \/$/m, 'the separate explicit training reservation must remain');
+  }
+});
+
+test('case-by-case or missing training policy never fabricates a blanket training rule', () => {
+  for (const policy of ['case_by_case', '', 'unknown', 'constructor']) {
+    const capsule = buildPublicationCapsule({...baseInput, crawlerTrainingPolicy: policy});
+    const {content} = capsule.files.find(file => file.destinationPath === '/robots.txt');
+    assert.doesNotMatch(content, /^User-agent: (GPTBot|ClaudeBot)$/m);
+    assert.match(content, /^# No training rules proposed:/m);
+    assert.match(content, /^User-agent: OAI-SearchBot\nAllow: \/$/m, 'the separate explicit search choice must remain');
+  }
+});
+
+test('robots proposes only the exact supported explicit choices, with no active rules when both are pending', () => {
+  const snippets = (search, training) => buildPublicationCapsule({...baseInput, crawlerSearchPolicy: search, crawlerTrainingPolicy: training}).files.find(file => file.destinationPath === '/robots.txt').content;
+  // Accepted 18 October sample: explicit choices must retain their existing bytes.
+  assert.equal(createHash('sha256').update(snippets('allow', 'reserve')).digest('hex'), '6127d970d80dcc6a6eca9c8e93076eb6270ad3a8943143877b6d0fe67d1b5e52');
+  assert.match(snippets('deny', 'allow'), /^User-agent: OAI-SearchBot\nDisallow: \/$/m);
+  assert.match(snippets('deny', 'allow'), /^User-agent: GPTBot\nAllow: \/$/m);
+  const pending = snippets('', '');
+  assert.ok(pending.split('\n').every(line => !line.trim() || line.startsWith('#')), 'an undecided proposal must contain comments only');
+});
+
 test('capsule rejects missing generable resources, unsafe origins and probable secrets', () => {
   assert.throws(
     () => buildPublicationCapsule({ ...baseInput, selectedResources: ['openapi', 'mcp'] }),
