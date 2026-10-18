@@ -37,9 +37,20 @@ test('observation timeout cannot write a late activation receipt',async()=>{
 test('late primary receipt write after timeout cannot produce acceptance',async()=>{
  const {createActivationJournal}=await import('../lib/mcp-activation-journal.mjs'),f=fixture();try{
  const base=f.options.db;let release,late;
+ // Make the gap between the monotonic budget and its first authority-clock
+ // read explicit. Previously even a scheduler gap of ~1ms could expose it.
+ let firstClockRead=true;f.options.now=()=>{if(firstClockRead){firstClockRead=false;Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,75);}return Date.now();};
  f.options.db={withSession(){return{prepare(sql){return{bind(...args){const s=base.prepare(sql).bind(...args);return{...s,run:()=>sql.includes('INSERT INTO dossier_activation_receipts')?new Promise((resolve,reject)=>{release=()=>{late=s.run().then(resolve,reject);};}):s.run()};}};}};}};
- await assert.rejects(createActivationJournal({...f.options,timeoutMs:25}).confirm(new AbortController().signal));assert.equal(typeof release,'function');release();await late;await new Promise(r=>setImmediate(r));
+ await assert.rejects(createActivationJournal({...f.options,timeoutMs:200}).confirm(new AbortController().signal));assert.equal(typeof release,'function');release();await late;await new Promise(r=>setImmediate(r));
  assert.equal(f.db.prepare('SELECT COUNT(*) n FROM dossier_activation_acceptances').get().n,0);
  assert.equal(f.db.prepare('SELECT COUNT(*) n FROM dossier_activation_receipts').get().n,0);
+ }finally{f.db.close();}
+});
+
+test('a slow initial authority-clock read cannot renew the monotonic budget',async()=>{
+ const {createActivationJournal}=await import('../lib/mcp-activation-journal.mjs'),f=fixture();try{
+  f.options.now=()=>{Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,20);return Date.now();};
+  await assert.rejects(createActivationJournal({...f.options,timeoutMs:5}).confirm(new AbortController().signal));
+  assert.equal(f.reads(),0);assert.equal(f.db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').get().n,0);
  }finally{f.db.close();}
 });
