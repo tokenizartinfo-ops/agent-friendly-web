@@ -28,3 +28,14 @@ test('missing objective or an invalid website stays in the guide',async()=>{
  assert.equal(dossierFirstStep({...base,saved:{...base.saved,goals:[]},draft:{...base.draft,goals:[]}}).action,'guide');
  assert.equal(dossierFirstStep({...base,saved:{website:''},draft:{website:''}}).action,'guide');
 });
+
+test('first-step continuation saves the working draft first and stops on its failure',async()=>{
+ const {saveDossierFirstStep}=await load();let writes=0,calls=[];
+ const saveDossier=async()=>{calls.push('dossier');writes++;return true;};
+ assert.equal(await saveDossierFirstStep({workingPending:true,saveWorking:async()=>{calls.push('working');return false;},saveDossier,dossierPending:true}),false);
+ assert.deepEqual(calls,['working']);assert.equal(writes,0);calls=[];
+ assert.equal(await saveDossierFirstStep({workingPending:true,saveWorking:async()=>{calls.push('working');return true;},saveDossier,dossierPending:true}),true);
+ assert.deepEqual(calls,['working','dossier']);calls=[];
+ assert.equal(await saveDossierFirstStep({workingPending:true,saveWorking:async()=>true,saveDossier,dossierPending:false}),true);assert.equal(writes,1);
+ assert.equal(await saveDossierFirstStep({workingPending:true,saveDossier,dossierPending:true}),false);assert.equal(writes,1);
+});

@@ -40,6 +40,7 @@ import { shouldAutosaveProject } from '../../lib/project-autosave.mjs';
 import { reconcileSavedDraft } from '../../lib/project-save-reconciliation.mjs';
 import { DossierAssistance } from './dossier-assistance';
 import {DossierFirstStep} from './dossier-first-step';
+import {saveDossierFirstStep} from '../../lib/dossier-first-step.mjs';
 import {DossierTrustSummary} from './dossier-trust-summary';
 
 type Intake = {
@@ -529,7 +530,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
 
         {guidedView?<DossierFirstStep loaded={loaded} projectId={projectId} draft={data} saved={savedSnapshot} locale={locale} sessionRequired={sessionRequired} conflict={Boolean(conflictReview)} saving={status==='saving'} reading={observationBusy} workingPending={workingPending}
           observationState={observationReadFailure?.projectId===projectId&&observationReadFailure.website===savedWebsite?'failed':observationReadReady?.projectId===projectId&&observationReadReady.website===savedWebsite?'ready':'loading'} observation={currentObservations.observation}
-          onSave={()=>{void saveReviewedDraft();}} onGuide={continueFirstGuide}
+          onSave={()=>{void saveDossierFirstStep({workingPending,saveWorking:workingSave.current,saveDossier:saveReviewedDraft,dossierPending:!projectId||dossierDirtyFields(data,savedSnapshot).length>0}).then(saved=>{if(!saved&&workingPending){const panel=document.getElementById('dossier-copilot');if(panel instanceof HTMLDetailsElement){panel.open=true;panel.scrollIntoView({block:'start'});panel.querySelector<HTMLElement>('summary')?.focus();}}});}} onGuide={continueFirstGuide}
           onAudit={()=>{void saveObservation();}} onReview={reviewObservation} onRetryRead={retrySavedObservationRead}/>:null}
         {loaded&&projectId?<DossierTrustSummary key={projectId} projectId={projectId} revision={scopeRevision} draft={data} saved={savedSnapshot} locale={locale} observation={currentObservations.observation} request={request}/>:null}
         <div hidden={guidedView}>
