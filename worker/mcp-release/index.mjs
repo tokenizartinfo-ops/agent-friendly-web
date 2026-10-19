@@ -58,12 +58,15 @@ export class AfwReleaseWorkflow extends WorkflowEntrypoint {
    const payload=event?.payload;
    if(policy.operation!=='publish'||event?.schedule!==undefined||event?.instanceId!=='afw-release-'+expectedHash||!payload||Object.getPrototypeOf(payload)!==Object.prototype||Reflect.ownKeys(payload).length!==1||!Object.hasOwn(payload,'planHash')||payload.planHash!==expectedHash)return outcome('blocked');
   }catch{return outcome('blocked');}
-  const current=()=>{const now=Date.now();return env.AFW_RELEASE_OPERATOR_ENABLED==='true'&&env.AFW_RELEASE_WORKFLOW_ENABLED==='true'&&Number.isSafeInteger(now)&&now>=policy.startAt&&now<policy.expiresAt;};
+  const admittedAt=Date.now(),admittedMono=performance.now(),monotonicEnd=admittedMono+(policy.expiresAt-admittedAt);
+  let lastWall=admittedAt,lastMono=admittedMono;
+  const current=()=>{try{const now=Date.now(),mono=performance.now();if(env.AFW_RELEASE_OPERATOR_ENABLED!=='true'||env.AFW_RELEASE_WORKFLOW_ENABLED!=='true'||!Number.isSafeInteger(now)||!Number.isFinite(mono)||mono<lastMono||mono>=monotonicEnd||now<lastWall||now<policy.startAt||now>=policy.expiresAt)return false;lastWall=now;lastMono=mono;return true;}catch{return false;}};
+  const remaining=()=>Math.max(1,Math.floor(Math.min(policy.expiresAt-Date.now(),monotonicEnd-performance.now())));
   if(!current())return outcome('blocked');
   try{
-   return await step.do('publish-closed-release',{retries:{limit:0,delay:1000,backoff:'constant'},timeout:Math.max(1,Math.min(70000,policy.expiresAt-Date.now()))},async()=>{
+   return await step.do('publish-closed-release',{retries:{limit:0,delay:1000,backoff:'constant'},timeout:Math.min(70000,remaining())},async()=>{
     if(!current())return outcome('blocked');
-    const gate=await checkOwnCronProvider({fetchImpl:(url,init)=>fetch(url,{...init,redirect:'manual'}),timeoutMs:Math.max(1,Math.min(5000,policy.expiresAt-Date.now()))});
+    const gate=await checkOwnCronProvider({fetchImpl:(url,init)=>fetch(url,{...init,redirect:'manual'}),timeoutMs:Math.min(5000,remaining())});
     if(!current()||gate.providerGate!=='resolved'||gate.mayRunClosedVerification!==true)return outcome('blocked');
     try{
      const result=await runReleaseOperator(env,[expectedHash]);

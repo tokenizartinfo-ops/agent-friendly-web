@@ -37,3 +37,5 @@ Ruling: after Workflow registration, recovery must retain AfwReleaseWorkflow and
 Task1: implementation prepared, GREEN pending.
 
 First GREEN: b6513e6d/CI39299907042/job118222057506:2142PASS0FAIL1SKIP,lint0errors2existingwarnings/5builds. Packaging39299907352/job118222059847 SUCCESS. New hypothesis: a backward Date.now inside the absolute window must not admit a new journal after provider await; add native boundary test before any fix. No hosted clock claim.
+
+Clock RED: test-onlyb98e1df/CI39300508360/job118224160053,2142PASS1FAIL1SKIP; actualconfirmed/expectedblocked en retroceso de Date.now todavía dentro de la ventana, sin otros fallos. Corrección mínima: ancla monotónica original y rechaza retrocesos observados; presupuestos step/proveedor usan restante original más estricto, sin regenerar ventana. GREEN pendiente.

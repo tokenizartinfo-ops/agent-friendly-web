@@ -26,3 +26,5 @@ Fuentes primarias19oct: https://developers.cloudflare.com/workflows/build/trigge
 ## Recuperación compatible y reloj del ensayo
 Una vez registrado el Workflow, no restaurar una versión sin AfwReleaseWorkflow por inferencia. Antes de abrir una ventana real conservar y verificar una versión de esta fuente con ambas clases, dos flagsfalse y bundle inerte original; ella será la recuperación compatible, sin borrar Workflow/historia. La versión actualbcf9afc4 es recuperación solo ANTES de crear esa asociación.
 La prueba de vencimiento nativa controla Date.now del Worker al volver la lectura HTTP del proveedor: no depende de un sleep ni pretende demostrar reloj/latencia del hosting real. Cambia únicamente la frontera del reloj de la fixture, sin hooks en producción.
+
+El Workflow ancla también el tiempo restante al performance.now inicial: nunca amplía el plazo ante retroceso de Date.now. Después de cada espera rechaza reloj de pared o monotónico regresivo; step/proveedor se limitan al restante original más estricto. El test nativo de retroceso dentro de la ventana debe dar blocked con cero filas/POST, no confirmed.
