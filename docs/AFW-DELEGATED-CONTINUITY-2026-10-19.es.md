@@ -1,5 +1,6 @@
 # AFW: continuidad de lectura delegada — alcance acotado
 
+Estado: candidato interno en PR494. La aceptación exacta de CI/revisión/fusión se conserva en esa PR; no se presume por este documento.
 Fecha:19oct2026. Repositorio:tokenizartinfo-ops/agent-friendly-web. Base:1fa412351e1d15cdfdbda56e3358176a9903294c.
 Gabriel pide continuar el siguiente bloque y mantiene autorización para implementar decisiones ordinarias y trabajar por GitHub/cloud. Cambio acotado del flujo existente, ejecutado por el responsable AFW en esta conversación; una revisión independiente al final. No necesita nuevas credenciales o permisos.
 
@@ -32,3 +33,9 @@ TDD en GitHub Actions existente: primero comportamiento RED sin producto nuevo; 
 No OAuth nuevo, endpoints, consentimiento, precios, cargos, instalaciones, eventos, Container, guardia, Max ni PC-off. No cambios al Worker host/configuración/esquemas/runtime. Rollback de fuente por reversión revisada de esta PR; no hay recurso remoto que restaurar. Checkpoint en esta rama/PR y constancia de cierre, evitando archivos/builds/clones locales. Verificar cuenta/proyecto/revisión para cada operación.
 
 Ruling: la autorización continua del owner y la instrucción de avanzar el próximo bloque permiten estas decisiones acotadas; no se interpreta como autorización de un montaje o ensayo real. El ledger local se sustituye por el presente brief, commits y resultados CI remotos para respetar su preferencia de mínimo uso del PC. Si el catálogo no se monta, ningún agente externo obtiene nueva capacidad por fusionar esta fuente.
+
+## Constancia TDD y ejecución remota
+
+RED observado:222861498cd6f0504c0d11840a180d5576729787 / [Actions39270427987](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/39270427987):2084 pruebas,2066 aprobadas,17 fallos de comportamiento del bloque nuevo y1 omitida; ningún fallo ajeno. El catálogo por defecto conserva dos herramientas incluso antes de implementar. La implementación candidata se incorpora después de ese RED y deberá superar suite completa, lint, build y revisión independiente antes de fusionar. Consultar [PR494](https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/494) para head, resultados y estado final.
+
+El SELECT nativo une permiso/owner/revisión, pero no convierte la lectura en un bloqueo ni en una garantía sobre cambios posteriores. La identidad/token se verifican en el host OAuth por petición; el nuevo método vuelve a comprobar el permiso persistido y estado de proyecto, no firma tokens ni crea consentimiento. Su mapeo produce la misma pregunta guardada, sin modelo, auditoría o cobro. Node22/SQLite/MCP sintéticos no acreditan conexión de ChatGPT real, Worker/Container remoto ni PC-off. Siguiente gate independiente: diseño y aceptación del montaje específico en el host autorizado y prueba del cliente con una ventana propia vigente; no renovar credenciales o abrir el piloto por la fusión.
