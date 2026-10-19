@@ -40,4 +40,4 @@ Container02382110, recepción útil, baja nativa y PC-off siguen independientes 
 ## Ledger
 
 - Inicio: base61c9304c comprobada en main y rama remota tras reinicio. Fuente PR494 aceptada, sin cambios locales.
-- Task1: pruebas y brief preparados; pendiente RED en Actions.
+- Task1 complete: tests-first131b79bb; Actions39276604214 RED esperado21fallos nuevos,2093PASS,1SKIP. Sin errores de setup/import; default de dos herramientas y rechazo de timestamp inválido ya pasan. El siguiente paso implementa el montaje y sus límites; pendiente GREEN/revisión.
