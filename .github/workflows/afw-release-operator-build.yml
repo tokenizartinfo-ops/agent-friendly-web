@@ -1,0 +1,121 @@
+name: AFW release operator build only
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_version_id:
+        description: 'Exact closed canary version to inherit; never latest'
+        required: true
+        default: 'f8feb421-4ef7-4051-a508-1ee490737a7d'
+        type: string
+      start_at_ms:
+        description: 'Plan start in epoch milliseconds; 0 produces inert preparation'
+        required: true
+        default: '0'
+        type: string
+      expires_at_ms:
+        description: 'Original deadline, at most 10 minutes after start; 1 is inert'
+        required: true
+        default: '1'
+        type: string
+  pull_request:
+    paths:
+      - '.github/workflows/afw-release-operator-build.yml'
+      - 'scripts/build-mcp-release-operator.mjs'
+      - 'scripts/build-mcp-own-worker.mjs'
+      - 'scripts/build-mcp-node-program.mjs'
+      - 'scripts/mcp-release-source.mjs'
+      - 'worker/**'
+      - 'lib/**'
+      - 'package.json'
+      - 'package-lock.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: afw-release-operator-build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  compile:
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+       (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      AFW_BUILD_SOURCE_REVISION: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      AFW_PLAN_BASE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.base_version_id || 'f8feb421-4ef7-4051-a508-1ee490737a7d' }}
+      AFW_PLAN_START: ${{ github.event_name == 'workflow_dispatch' && inputs.start_at_ms || '0' }}
+      AFW_PLAN_EXPIRES: ${{ github.event_name == 'workflow_dispatch' && inputs.expires_at_ms || '1' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.AFW_BUILD_SOURCE_REVISION }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Prepare a fixed-target publish plan without credentials
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { mkdirSync, writeFileSync } from 'node:fs';
+          import { RELEASE_TARGET } from './lib/mcp-release-operator-policy.mjs';
+          const integer = value => {
+            assert.match(value,/^(0|[1-9][0-9]{0,15})$/);
+            const result = Number(value);
+            assert.ok(Number.isSafeInteger(result));
+            return result;
+          };
+          const startAt = integer(process.env.AFW_PLAN_START);
+          const expiresAt = integer(process.env.AFW_PLAN_EXPIRES);
+          assert.ok(expiresAt > startAt && expiresAt - startAt <= 600000);
+          const baseVersionId = process.env.AFW_PLAN_BASE_VERSION;
+          assert.match(baseVersionId,/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/);
+          const policy = { operation: 'publish', startAt, expiresAt, pins: { ...RELEASE_TARGET, baseVersionId } };
+          mkdirSync('output/mcp-release-operator',{recursive:true});
+          writeFileSync('output/mcp-release-operator/policy.json',JSON.stringify(policy,null,2)+'\n');
+          NODE
+      - name: Compile exact source without publishing or invoking
+        run: node scripts/build-mcp-release-operator.mjs "$AFW_BUILD_SOURCE_REVISION" output/mcp-release-operator/policy.json
+      - name: Verify compiled bytes, plan and provenance
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync } from 'node:fs';
+          import { execFileSync } from 'node:child_process';
+          import { createHash } from 'node:crypto';
+          const bytes = readFileSync('output/mcp-release-operator/index.mjs');
+          const manifest = JSON.parse(readFileSync('output/mcp-release-operator/build.json','utf8'));
+          const policy = JSON.parse(readFileSync('output/mcp-release-operator/policy.json','utf8'));
+          assert.equal(manifest.sourceRevision,process.env.AFW_BUILD_SOURCE_REVISION);
+          assert.equal(manifest.sourceTree,execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim());
+          assert.equal(manifest.operatorHash,createHash('sha256').update(bytes).digest('hex'));
+          assert.match(manifest.planHash,/^[a-f0-9]{64}$/);
+          assert.match(manifest.workerHash,/^[a-f0-9]{64}$/);
+          assert.equal(manifest.operation,'publish');
+          assert.equal(manifest.startAt,policy.startAt);
+          assert.equal(manifest.expiresAt,policy.expiresAt);
+          assert.equal(manifest.remotePublished,false);
+          assert.ok(bytes.length > 0);
+          if(process.env.GITHUB_EVENT_NAME === 'pull_request'){
+            assert.equal(policy.startAt,0);
+            assert.equal(policy.expiresAt,1);
+          }
+          console.log(JSON.stringify({...manifest,operatorBytes:bytes.length}));
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afw-release-operator-${{ env.AFW_BUILD_SOURCE_REVISION }}
+          path: |
+            output/mcp-release-operator/index.mjs
+            output/mcp-release-operator/build.json
+            output/mcp-release-operator/policy.json
+          if-no-files-found: error
+          retention-days: 7
