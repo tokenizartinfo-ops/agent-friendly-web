@@ -23,3 +23,7 @@ All outputs refreshAllowed/consentRecorded/grantIssued/executionAllowed/chargeAl
 Reviewed source revert only. No remote state or migration to reverse; preserve existing grants/history/custody/configuration.
 Step2 actual SDK code/PKCE/consent/store, Step3 visual form, Step4 mount, Step5 populated migration/real finite trial remain UNIMPLEMENTED by this policy.
 G2 CLOSED; no OTP/reconnect/catalog refresh/client widening. Container02382110, native event/usefulturn/withdrawal/PC-off and Max separate. operationalReadiness=false.
+
+## Execution receipt
+Task1 COMPLETE: tests-only b973d4b1697a1b7b253867f2ecfde9c00b7be909 / CI39344440666/job118373539524:2276PASS/16new assertionFAIL/1existingSKIP. All16 fail the missing helper assertion; baseline unaffected, no swallowed unexpected import. BasePR510 mainCI39344407412 also passed2276/0/1 with lint/build.
+Task2 implementation candidate added only after observed RED. Exact GREEN/review/integration to be recorded on carrying PR511/issue497; that final receipt supersedes pending task entries here without a docs-only rerun. Tasks2–3 pending actual verification.
