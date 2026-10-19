@@ -29,8 +29,8 @@ Guía ES distingue MCPpúblico, pilotos privados cerrados, contratos internos y 
 - Bytes de demo no deben convertirse en ahorro de tokens, tarifa, runtime o permiso.
 
 ## Task1 — paquete de referencia y guía (un entregable)
-- [ ] Escribir test/agent-consumer-reference.test.mjs antes de implementación; carga opcional como patrón existente para fallar en comportamiento, no imports.
-- [ ] Commit RED y PR; observar fallos esperados y ninguna regresión fuera de este paquete en CI.
+- [x] Escribir test/agent-consumer-reference.test.mjs antes de implementación; carga opcional como patrón existente para fallar en comportamiento, no imports.
+- [x] Commit RED y PR; observar fallos esperados y ninguna regresión fuera de este paquete en CI.
 - [ ] Implementar consumidor puro y demo. Probar bytesUTF8, salida del CLI, fuente interna real y ausencia de IO mediante ejecución con globals.fetch que falla si se llama.
 - [ ] Guía docs/AFW-AGENT-INTEGRATION-GUIDE.es.md y README del ejemplo; enlazar recibo G2, límites, públicos objetivo y datos pendientes de medir.
 - [ ] CI completo npmtest/lint/build GREEN, una revisión fresca de rama; hallazgos importantes con regresión RED→GREEN, sin segunda revisión.
@@ -40,4 +40,6 @@ Guía ES distingue MCPpúblico, pilotos privados cerrados, contratos internos y 
 - Ruling: rama GitHub+Actions sustituye worktree/workspace local de las skills por preferencia cloud explícita. Costo: no ejecutar test antes del push; RED/GREEN deben constar en CI.
 - Ruling: roadmap y autonomía aprobados por Gabriel permiten este paquete acotado del contrato existente sin otra ronda de confirmación. No permite las etapas económicas/de escritura/hosting futuras ni abrir servicio privado.
 - Baseline: main3d4e9d5d, CI39303697277 aceptado2144PASS/0FAIL/1SKIP; no repetir baseline. G2 real200/409/403 aceptado y cerrado19oct19:30UTC.
-- Task1: pendiente.
+- Task1 RED: 8e76c1c0 / CI39313143201 / job118267670494:15fallos nuevos esperados,2144PASS/15FAIL/1SKIP; todos en este paquete, por ausencia de comportamiento y sin import/setup failures. Implementación pendiente de GREEN.
+- Registro administrativo: update_ref no crea ramas pese al alias de su descripción; devolvió422sinmutación y el primer createPR rechazó head inexistente. Se usó create_branch explícito sobre el mismo commit, luego PR502 creada. No fuerza, duplicados o cambios en main.
+- Revisión del brief: consumidor produce decision/context copiadas para la demo; coincidencia de nombres y claves comprobada. La demo consume las tres bibliotecas existentes sin declarar runtime. Ruling: CLI y guía forman el mismo entregable, no un SDK de red ni un nuevo API. Costo: el integrador conserva autenticación/transporte/límites.
