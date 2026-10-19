@@ -112,3 +112,13 @@ Para estudiar precio, contabilizar trabajo humano de los tres roles, herramienta
 Chavo conserva la base de investigación y campañas; el responsable AFW traduce las hipótesis pertinentes en producto y valida contra su estado real. Mensaje enviado, respuesta recibida, recomendación y ejecución son estados distintos. La comunicación de este bloque fue análisis, sin delegación de infraestructura ni activación de guardia. Evitar consultas repetidas sin una decisión concreta que resolver.
 
 Siguiente decisión comercial útil: contrastar la muestra de entrega con el problema y los roles del primer recorrido, después de sus gates. Ninguna espera de soporte impide mejorar claridad, accesibilidad, documentación o experiencia pública de forma independiente.
+
+## Ampliación integrada para consumo agéntico — 19 de octubre de 2026
+
+Gabriel confirma una vertical del mismo AFW: personas y agentes externos comparten expedientes, cápsulas y comprobaciones; una empresa con sus propios agentes podrá acceder a la modalidad agéntica. El objetivo es una tarifa económica basada en menor trabajo humano y procesamiento reutilizable, con alcance, precio previo, presupuesto, pagos y restricciones transparentes. No se fijan importes ni se activa un medio de pago.
+
+El [diseño del primer bloque](superpowers/specs/2026-10-19-afw-agent-consumption-design.md) delimita catálogo, cotización indicativa y continuidad por referencias. El primer incremento es una biblioteca interna pura de catálogo, cotización y continuidad; su [constancia de fuente y pruebas](AFW-AGENT-CONSUMPTION-CONTRACTS-2026-10-19.es.md) conserva la evidencia. Sigue sin endpoints nuevos, cobros, publicación o instalación automática. Conserva la arquitectura y los recibos existentes.
+
+Ahorro de tokens/costo y descuentos por reuso son objetivos a medir, no resultados acreditados ni condiciones comerciales activas. El recorrido acompañado y el híbrido declaran su asistencia adicional; el acceso económico no depende de la marca del modelo ni excluye a empresas con agentes propios.
+
+La preparación se realiza por API en GitHub para reducir recursos del PC. La ejecución cloud futura requiere un entorno verificado; esta preferencia no acredita guardia permanente. El diagnóstico de Containers, los avisos nativos, retirada y ensayo PC-off mantienen sus criterios separados. Las propuestas de etapas posteriores requieren diseño y aceptación propios.
