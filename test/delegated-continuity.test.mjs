@@ -32,9 +32,9 @@ function fixture(t) {
     return { bind(...args) { return { first: async () => statement.get(...args) ?? null,
       all: async () => ({ results: statement.all(...args) }) }; } };
   } };
-  const repository = createDelegatedProjectRepository({ db, grantStore: createDelegatedOAuthStore(db) });
+  const repository = createDelegatedProjectRepository({ db, grantStore: createDelegatedOAuthStore(db), createPrimarySession: () => db });
   const context = { grantId: 'g-synthetic', subject: 'fixture.owner@example.invalid', clientId: 'c-synthetic', resource: RESOURCE, scopes: ['afw:project:read'] };
-  return { sqlite, repository, context, admission: repository.getProjectReadAdmission?.bind(repository), now: () => new Date(epoch).toISOString(), advance: delta => { epoch = START + delta; },
+  return { sqlite, db, repository, context, admission: repository.getProjectReadAdmission?.bind(repository), now: () => new Date(epoch).toISOString(), advance: delta => { epoch = START + delta; },
     queries: () => queries, read: extra => readDelegatedProject({ context, projectId: 'p-synthetic', operation: 'project_next_step', repository, resource: RESOURCE,
       now: () => new Date(epoch).toISOString(), ...extra }) };
 }
@@ -176,4 +176,28 @@ test('MCP continuation reports revision recovery without reconnecting and denies
     assert.equal(denied.structuredContent.code, 'delegated_access_denied');
     assert.equal(denied.structuredContent.data, undefined); assert.equal(denied._meta, undefined);
   });
+});
+
+for (const [name, mutation, want] of [
+  ['withdrawal', "UPDATE delegated_access_grants SET revoked_at='2026-10-19T14:00:00.000Z'", 'delegated_access_denied'],
+  ['owner transfer', "UPDATE site_projects SET user_id='foreign-owner'", 'delegated_access_denied'],
+  ['revision update', 'UPDATE site_projects SET revision=4', 'revision_conflict'],
+]) {
+  test('delegated admission reads the fresh primary instead of an earlier stale snapshot: ' + name, async t => {
+    const stale = fixture(t), primary = fixture(t);
+    primary.sqlite.exec(mutation);
+    const repository = createDelegatedProjectRepository({ db: stale.db, grantStore: createDelegatedOAuthStore(stale.db),
+      createPrimarySession: () => primary.db });
+    const result = await stale.read({ repository });
+    assert.equal(result.code, want); assert.equal(result.data, undefined);
+  });
+}
+test('delegated admission refuses missing or failed primary custody instead of falling back to old state', async t => {
+  const f = fixture(t);
+  const missing = createDelegatedProjectRepository({ db: f.db, grantStore: createDelegatedOAuthStore(f.db) });
+  assert.equal((await f.read({ repository: missing })).code, 'delegated_read_unavailable');
+  const failed = createDelegatedProjectRepository({ db: f.db, grantStore: createDelegatedOAuthStore(f.db),
+    createPrimarySession() { throw Error('PRIVATE_PRIMARY_FAILURE'); } });
+  const result = await f.read({ repository: failed });
+  assert.equal(result.code, 'delegated_read_unavailable'); assert.equal(JSON.stringify(result).includes('PRIVATE_'), false);
 });
