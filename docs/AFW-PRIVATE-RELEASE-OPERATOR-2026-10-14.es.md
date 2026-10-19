@@ -24,3 +24,21 @@ Preflight: proveedor, identidad/alcance, siete tablas y triggers reales, estado 
 ## Evidencia y límites
 
 Prueba nativa usa dos Workers operadores, invocador con RPC real y D1 workerd compartida. Verifica publicación única, confirmación única, negativa HTTP, argumento ajeno, flag cerrado, expiración, credencial ausente, build discordante, retirada y ACK de upload perdido sin reenvío. El proveedor y las credenciales son sintéticos. Esto acredita integración local, no publicación remota, permisos reales, suscripción ChatGPT ni PC-off. El ensayo continúa cerrado.
+
+
+## Preparación de corrección: interruptores de publicación cerrada (19 de octubre)
+
+La revisión previa a otra publicación encontró que el transporte verificaba seis interruptores históricos pero heredaba otros sin exigir su estado cerrado. La versión real inspeccionada el 19 de octubre conserva ocho interruptores false; no se ha detectado activación real. El nuevo host de continuidad añade otro opt-in, ausente en esa versión.
+
+Contrato candidato: todo binding cuyo nombre siga la convención AFW_*_ENABLED debe ser plain_text con la cadena exacta false antes de crear la versión. Se mantienen los seis campos históricos obligatorios; los opcionales ausentes no se inventan, y los opcionales presentes false se heredan de la versión fija. Estado activo, valor no canónico o tipo que no permite leerlo impiden el POST. Las demás variables conservan su contrato; no se convierten todas las variables de AFW en interruptores.
+
+Plan: regresión antes del cambio en el publisher real con proveedor simulado, RED observado en GitHub Actions; guard mínimo, suite completa/lint/build, una revisión de rama e integración exacta. La PR portadora conservará SHAs/resultados. No pruebas de texto ni nuevo subsistema. No se publica el operador o el canary ni se renueva una credencial desde este bloque; el operador desplegado conserva su versión y permanece deshabilitado. La aceptación fuente no demuestra despliegue o PC-off.
+
+El registro operativo único es [issue497](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497). La fuente histórica de este documento mantiene su fecha y alcance; este addendum aún es preparación hasta que la PR registre su aceptación.
+
+
+### Regresión observada y cambio candidato
+
+Tests-first c6954b24, CI39287459982/job118178540155: las nueve regresiones nuevas fallaron con Missing expected rejection; la herencia opcional false pasó. Suite: 2116PASS / 10FAIL / 1SKIP. El décimo fallo fue el existente OAuth HTTP retries only a read after primary failure using the same unmodified grant, que recibió HTTP503 en el transporte SDK; no se atribuye a este cambio ni se omite. Su diagnóstico queda separado; el siguiente suite completo debe comprobar también ese caso.
+
+Cambio mínimo candidato: antes de heredar, cualquier nombre que empiece por AFW_ y termine en _ENABLED debe ser plain_text false. La lista histórica sigue exigiendo sus seis campos, y los opcionales ausentes no se añaden. Se comprueba tanto el baseline antes del POST como el readback mediante el inspector existente. Pendiente GREEN y revisión; no se publica una versión real.
