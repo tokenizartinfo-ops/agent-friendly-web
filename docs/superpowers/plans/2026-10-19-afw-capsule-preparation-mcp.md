@@ -18,3 +18,7 @@ Ruling: JSON text más structuredContent conserva compatibilidad de clientes y c
 Ruling: lectura MCP no da preparación; scopes/consentimiento/migración/rollout remotos siguen gates separados. Sin OAuth Worker import, registro público, DDL, flags, custodia/token o dato de cliente nuevo. Revert solo fuente; nunca DROP/reset/historia.
 Review focus: salida isError no validada por SDK; prepared revision/ref/hashes/flags; getter/rawerror; excepción/lostACK y falta de reintentos; readOnly reconciliación; registro parcial y scopes metadata no autoridad; ausencia de montaje.
 G2 aceptado/cerrado no se repite. G3Container02382110, G4avisos/baja, G5PCoff y G6Max independientes. operationalReadiness=false.
+
+## Ejecución
+Task1 complete: REDf6e34f962099e656d0dfdf9025fe484b8eb054f6 / Actions39335241002/job118342972348:2226PASS/14FAIL esperados/1SKIP existente. Sin fallos previos ni errores de import/setup.
+Task2 in_progress: registrador desacoplado con schemas Zod4 explícitos, proyección cerrada tanto en éxito como error, recuperación estática y rollback de handles propios. Host finito inmutable existente conserva autorización y su presupuesto; este componente no añade un transporte ni promete cubrir el tiempo anterior al parsing/dispatch. GREEN pendiente.
