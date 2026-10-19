@@ -35,3 +35,7 @@ Task 2: in_progress — servicio interno y DDL fuera de migraciones; futura acti
 Ruling: read-only reconcile y replay exigen grant/scope/current owner/dominio vigentes — retirar permiso bloquea incluso la referencia; no borra hechos previamente aceptados.
 Ruling: una carrera humana conserva reserva pendiente, no reenumera ni publica — la ruta humana se preserva y el posible bloqueo requiere conciliación explícita futura.
 Ruling: el resolver del host debe validar el token OAuth y su vida útil antes de invocar el dominio; no se pretende verificar bearer/cookies en esta biblioteca sin transporte. El servicio revalida el grant en SQL.
+
+## Revisión y diagnóstico
+Revisión fresca completa en2909ad6:0Critical/1Important/0Minor. Ruling: aceptar P2 de carrera entre lectura de autoridad y lectura de intent; regresión separada antes de fix, luego una sola consulta primaria y vencimiento postawait. No nueva revisión en bucle.
+Primera candidata Actions39318956108:2180PASS/1FAIL/1SKIP; D1 nativo y21 casos nuevos en su mayoría aceptados. Fallo concreto en cambio sin incremento de revisión: returned revision_conflict en lugar de preparation_pending; se antepone la comprobación de estado persistido para diagnosticar sin relajar seguridad. No declarar GREEN ni modificar el comportamiento por inferencia.

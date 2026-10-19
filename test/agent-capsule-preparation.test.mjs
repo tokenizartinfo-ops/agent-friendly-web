@@ -17,7 +17,7 @@ function fixture(){
  sql.prepare("INSERT INTO registry_sites(id,project_id,user_id,hostname,canonical_origin,verification_status,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)").run('site-a','project-a','owner-a','example.org','https://example.org','verified',at,at);
  sql.prepare("INSERT INTO domain_claims(id,site_id,project_id,user_id,method,challenge_name,challenge_value,status,expires_at,verified_at,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)").run('claim-a','site-a','project-a','owner-a','dns_txt','_synthetic','not-a-real-token','verified',future,at,at);
  sql.prepare("INSERT INTO delegated_access_grants(id,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at,exchanged_at) VALUES(?,?,?,?,?,?,?,?,?,?)").run('grant-a','owner-a','client-a','project-a',authority.resource,'["afw:capsule:prepare"]',at,future,'',at);
- const f={sql,authority:{...authority},mono:0,reads:0,writes:0,batches:0,primaries:0,before:null,after:null,afterBatch:null};
+ const f={sql,authority:{...authority},mono:0,wallOffset:0,reads:0,writes:0,batches:0,primaries:0,before:null,after:null,afterBatch:null};
  function stmt(query,args=[]){return {bind(...values){return stmt(query,values);},_query:query,_args:args,
   async first(){f.reads++;await f.before?.(query,'first');const value=sql.prepare(query).get(...args)??null;await f.after?.(query,'first');return value;},
   async all(){f.reads++;return{results:sql.prepare(query).all(...args)};},
@@ -27,7 +27,7 @@ function fixture(){
   try{results=statements.map(s=>{const r=sql.prepare(s._query).run(...s._args);return{success:true,meta:{changes:Number(r.changes)}};});sql.exec('COMMIT');}catch(e){sql.exec('ROLLBACK');throw e;}
   await f.afterBatch?.();return results;
  }};
- f.service=factory({enabled:true,createPrimarySession:()=>{f.primaries++;return db;},resolveAuthority:async()=>f.authority,now:()=>Date.now(),monotonic:()=>f.mono});
+ f.service=factory({enabled:true,createPrimarySession:()=>{f.primaries++;return db;},resolveAuthority:async()=>f.authority,now:()=>Date.now()+f.wallOffset,monotonic:()=>f.mono});
  f.counts=()=>({intents:sql.prepare('SELECT count(*) AS n FROM agent_capsule_preparations').get().n,capsules:sql.prepare('SELECT count(*) AS n FROM publication_capsules').get().n,events:sql.prepare("SELECT count(*) AS n FROM project_events WHERE type='agent_capsule_prepared'").get().n});
  f.close=()=>sql.close();return f;
 }
@@ -125,9 +125,27 @@ test('a human writer winning the reserved version is not overwritten or silently
 }));
 test('an unversioned source change after reservation is rejected at atomic commit',()=>use(async f=>{
  f.before=async(q,op)=>{if(op==='batch')f.sql.exec("UPDATE site_projects SET organization='Changed after snapshot'");};
- const r=await f.service.prepare(input);assert.equal(r.code,'preparation_pending');assert.deepEqual(f.counts(),{intents:1,capsules:0,events:0});
+ const r=await f.service.prepare(input);assert.deepEqual(f.counts(),{intents:1,capsules:0,events:0},JSON.stringify({code:r.code,counts:f.counts()}));assert.equal(r.code,'preparation_pending');
 }));
 test('malformed and future-dated authority/domain records fail closed without a reservation',()=>use(async f=>{
  f.sql.exec("UPDATE delegated_access_grants SET scopes_json='not-json'");assert.equal((await f.service.prepare(input)).code,'delegated_access_denied');
  f.sql.exec("UPDATE delegated_access_grants SET scopes_json='[\"afw:capsule:prepare\"]';UPDATE domain_claims SET verified_at='2099-01-01T00:00:00.000Z'");assert.equal((await f.service.prepare(input)).code,'domain_unverified');assert.equal(f.writes,0);
+}));
+
+test('withdrawal at final artifact read denies replay and reconciliation without disclosing reference',async()=>{
+ for(const method of ['prepare','reconcile'])await use(async f=>{
+  assert.equal((await f.service.prepare(input)).code,'prepared');
+  f.before=async(q,op)=>{if(op==='first'&&q.includes('AS actual_manifest'))f.sql.exec("UPDATE delegated_access_grants SET revoked_at='2026-01-01T00:00:00.000Z'");};
+  const r=await f.service[method](input);assert.equal(r.code,'delegated_access_denied');assert.ok(!r.preparation);assert.deepEqual(f.counts(),{intents:1,capsules:1,events:1});
+ });
+});
+test('ownership transfer at the final postcommit artifact read prevents confirmation',()=>use(async f=>{
+ f.before=async(q,op)=>{if(f.batches>0&&op==='first'&&q.includes('AS actual_manifest'))f.sql.exec("UPDATE site_projects SET user_id='new-owner'");};
+ const r=await f.service.prepare(input);assert.equal(r.code,'delegated_access_denied');assert.ok(!r.preparation);assert.deepEqual(f.counts(),{intents:1,capsules:1,events:1});
+}));
+test('grant expiring during final artifact await is checked again before returning metadata',()=>use(async f=>{
+ assert.equal((await f.service.prepare(input)).code,'prepared');
+ f.sql.prepare('UPDATE delegated_access_grants SET expires_at=?').run(new Date(Date.now()+3000).toISOString());
+ f.after=async(q,op)=>{if(op==='first'&&q.includes('AS actual_manifest'))f.wallOffset=3500;};
+ const r=await f.service.reconcile(input);assert.equal(r.code,'delegated_access_denied');assert.ok(!r.preparation);
 }));
