@@ -18,3 +18,9 @@ Ruling: prueba de composición del bloque ya implementado, sin nueva ruta/scope.
 Ruling: owner autoriza encadenar fuente y decidir pasos acotados; ejecución GitHub/Actions en lugar de workspace/script local. Costo: latencia de CI; no clon/build/descarga local.
 Rollback solo fuente por PR, sin DROP/historia ni acciones remotas.
 G2 aceptado/cerrado no repetir OTP/cliente/grants. Container02382110, avisos/revisiónútil/bajanativa/PCoff/Max separados. operationalReadiness=false.
+
+## Diagnóstico primario
+Task1 first run779030fb CI39340606251/job118360901005:2264PASS/11FAIL/1SKIP; candidata10a687c4/CI39340791006/job118361537041 reprodujo mismo estado. Dos primeras entradas rechazadas correctamente, sin DB/auth; fallos posteriores mayormente cascada al no conectar.
+Causa1 fixture: dispatchFetch expone Host127.0.0.1 de proxy local; agents rechaza403 InvalidHost. Normalizar SOLO fixture Host desde URL efectiva; no añadirloopback al allowlist ni cambiar validación del producto.
+Causa2 producto: el SDK OAuth1.2.1 crea challenge401 con body null; frontera exige JSON/cuerpo en401 y lo convierte503. Fuente primaria exacta src/oauth-resource-server.ts v1.2.1/createBearerChallenge, más fallo nativo503vs401. Añadir unitRED:401vacío con Bearer challenge debe conservarse; vacío200/401sinchallenge/Basic no se aceptan. No cambiar5000ms/caps/permisos.
+Task2 in_progress: fijarRED acotado y ejecutar diagnóstico nativo con Host de fixture correcto antes de modificar producto.
