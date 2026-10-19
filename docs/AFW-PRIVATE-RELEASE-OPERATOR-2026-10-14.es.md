@@ -35,3 +35,10 @@ Contrato candidato: todo binding cuyo nombre siga la convención AFW_*_ENABLED d
 Plan: regresión antes del cambio en el publisher real con proveedor simulado, RED observado en GitHub Actions; guard mínimo, suite completa/lint/build, una revisión de rama e integración exacta. La PR portadora conservará SHAs/resultados. No pruebas de texto ni nuevo subsistema. No se publica el operador o el canary ni se renueva una credencial desde este bloque; el operador desplegado conserva su versión y permanece deshabilitado. La aceptación fuente no demuestra despliegue o PC-off.
 
 El registro operativo único es [issue497](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497). La fuente histórica de este documento mantiene su fecha y alcance; este addendum aún es preparación hasta que la PR registre su aceptación.
+
+
+### Regresión observada y cambio candidato
+
+Tests-first c6954b24, CI39287459982/job118178540155: las nueve regresiones nuevas fallaron con Missing expected rejection; la herencia opcional false pasó. Suite: 2116PASS / 10FAIL / 1SKIP. El décimo fallo fue el existente OAuth HTTP retries only a read after primary failure using the same unmodified grant, que recibió HTTP503 en el transporte SDK; no se atribuye a este cambio ni se omite. Su diagnóstico queda separado; el siguiente suite completo debe comprobar también ese caso.
+
+Cambio mínimo candidato: antes de heredar, cualquier nombre que empiece por AFW_ y termine en _ENABLED debe ser plain_text false. La lista histórica sigue exigiendo sus seis campos, y los opcionales ausentes no se añaden. Se comprueba tanto el baseline antes del POST como el readback mediante el inspector existente. Pendiente GREEN y revisión; no se publica una versión real.
