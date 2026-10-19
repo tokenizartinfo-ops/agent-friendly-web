@@ -111,3 +111,23 @@ test('reconciliation of absent intent reads only and durable history rejects mut
  assert.equal((await f.service.reconcile(input)).code,'preparation_not_found');assert.equal(f.writes,0);
  await f.service.prepare(input);assert.throws(()=>f.sql.exec("UPDATE agent_capsule_preparations SET user_id='other'"));assert.throws(()=>f.sql.exec('DELETE FROM agent_capsule_preparations'));assert.deepEqual(f.counts(),{intents:1,capsules:1,events:1});
 }));
+
+test('SQL deadline denies a reservation queued past the original lease; late ACK never resumes work',()=>use(async f=>{
+ let settled;const finished=new Promise(resolve=>{settled=resolve;});
+ f.before=async(q,op)=>{if(op==='run'&&q.includes('INSERT INTO agent_capsule_preparations'))await new Promise(resolve=>setTimeout(resolve,5100));};
+ f.after=async(q,op)=>{if(op==='run'&&q.includes('INSERT INTO agent_capsule_preparations'))settled();};
+ const r=await f.service.prepare(input);assert.equal(r.code,'unknown_ack');
+ await finished;assert.deepEqual(f.counts(),{intents:0,capsules:0,events:0});assert.equal(f.batches,0);
+}));
+test('a human writer winning the reserved version is not overwritten or silently renumbered',()=>use(async f=>{
+ f.before=async(q,op)=>{if(op==='batch')f.sql.prepare("INSERT INTO publication_capsules(id,site_id,project_id,user_id,version,contract_version,manifest_sha256,idempotency_key,capsule_json,expires_at,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)").run('human-capsule','site-a','project-a','owner-a',1,'legacy','a'.repeat(64),'human-existing','{}','2099-01-01T00:00:00.000Z','2026-01-01T00:00:00.000Z','2026-01-01T00:00:00.000Z');};
+ const r=await f.service.prepare(input);assert.equal(r.code,'preparation_pending');assert.deepEqual(f.counts(),{intents:1,capsules:1,events:0});assert.equal(f.sql.prepare('SELECT id FROM publication_capsules').get().id,'human-capsule');
+}));
+test('an unversioned source change after reservation is rejected at atomic commit',()=>use(async f=>{
+ f.before=async(q,op)=>{if(op==='batch')f.sql.exec("UPDATE site_projects SET organization='Changed after snapshot'");};
+ const r=await f.service.prepare(input);assert.equal(r.code,'preparation_pending');assert.deepEqual(f.counts(),{intents:1,capsules:0,events:0});
+}));
+test('malformed and future-dated authority/domain records fail closed without a reservation',()=>use(async f=>{
+ f.sql.exec("UPDATE delegated_access_grants SET scopes_json='not-json'");assert.equal((await f.service.prepare(input)).code,'delegated_access_denied');
+ f.sql.exec("UPDATE delegated_access_grants SET scopes_json='[\"afw:capsule:prepare\"]';UPDATE domain_claims SET verified_at='2099-01-01T00:00:00.000Z'");assert.equal((await f.service.prepare(input)).code,'domain_unverified');assert.equal(f.writes,0);
+}));

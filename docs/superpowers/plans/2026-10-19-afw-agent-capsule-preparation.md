@@ -27,3 +27,11 @@ Comandos existentes en Actions: npm test; npm run lint; npm run build. No nuevas
 - Fuente humana app/api/projects/[projectId]/deployment-capsules/route.ts en la base indicada.
 ## Reversión
 Cerrar rama o revertir commit de fuente. DDL no instalado: no DROP, borrado de historial, reset, nueva instancia ni rollback de datos. Runtime/custodia aceptados G2 quedan intactos. operationalReadiness=false.
+
+## Primera constancia de ejecución
+RED508cdc9cd252d2f5b21115dec6e67e766a039a0b / Actions39318023222 / job118284472616:2159PASS,18FAIL esperados por servicio ausente,1SKIP. Ningún error de import/setup ni fallo de la base anterior. GREEN pendiente.
+Task 1: complete — 17 casos SQLite/contrato +1 D1 nativo observados en RED. Se amplió verificación antes de GREEN con cola SQL más allá de5000ms, carrera de ruta humana, cambio sin revisión y datos malformados/futuros; sin nueva capacidad o relajación.
+Task 2: in_progress — servicio interno y DDL fuera de migraciones; futura activación aún no autorizada por fuente.
+Ruling: read-only reconcile y replay exigen grant/scope/current owner/dominio vigentes — retirar permiso bloquea incluso la referencia; no borra hechos previamente aceptados.
+Ruling: una carrera humana conserva reserva pendiente, no reenumera ni publica — la ruta humana se preserva y el posible bloqueo requiere conciliación explícita futura.
+Ruling: el resolver del host debe validar el token OAuth y su vida útil antes de invocar el dominio; no se pretende verificar bearer/cookies en esta biblioteca sin transporte. El servicio revalida el grant en SQL.
