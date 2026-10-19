@@ -27,3 +27,8 @@ Pre-flight: el parser se comparte para evitar que host y dominio acepten argumen
 npm test; npm run lint; npm run build en Actions existente. Ninguna dependencia/workflow o despliegue nuevo. Native Miniflare D1 prueba normalización real, sesiones first-primary, cero cambios por preflight y rechazo de trigger retirado; OAuth/contexto/limiter son sintéticos.
 Rollback: revertir fuente, no DROP/reset/borrado de historia. No invocar artefactos de build ni repetir G2/OTP o ensayos Containers.
 operationalReadiness=false.
+
+## Constancia RED
+ebd1b7ed9ce9de484b310774c38e5064bb8ee06f / Actions39324988225 / job118308360850:2184PASS/20FAIL esperados/1SKIP. Host/schema ausentes y notAfter aún ignorado;24 casos existentes del servicio y el D1 anterior preservados tras extraer fixture. No fallos de import/setup.
+Task1 complete. Task2 in_progress: host/schema en fuente, parser compartido y deadline absoluto, pendientes GREEN.
+Ruling: inspeccionar solo los tres objetos propios y compilar consultas LIMIT0; no recorrer otras tablas o filas. La validación exacta de esquema es puntual y asume DB confiable, no sustituye la autorización del grant.
