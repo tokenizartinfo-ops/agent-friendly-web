@@ -91,6 +91,16 @@
       "resources": ["/.well-known/crm-lite-contract.json"],
       "note": "The public contract documents a metadata-only planning model. It is not an active CRM and does not store real contacts or execute commercial actions."
     },
+    "traction_f1": {
+      "status": "local_planning_only",
+      "deterministic_scoring_from_human_inputs": true,
+      "remote_persistence": false,
+      "automatic_outreach": false,
+      "pricing_actions": false,
+      "payment_actions": false,
+      "resources": ["/.well-known/traction-f1-contract.json"],
+      "note": "The public contract documents a deterministic planning rule. It is not an active lead-scoring, outreach, pricing, proposal or payment service."
+    },
     "open_knowledge_okf": {
       "status": "deployed",
       "resources": [

@@ -41,6 +41,16 @@ Antes de reabrir captacion, correo o CRM remoto, Agent Friendly Web debe abandon
 - arquitectura de contacto, correo y pagos;
 - diagramas y plan de explicacion interactiva.
 
+### Gate 6A.1 - Calificacion local de traccion
+
+**Estado:** `local_planning_only`; implementado con TDD el 2026-09-02 y pendiente de revision/merge. No se publicara durante la ventana de estabilidad anterior al 2026-09-09.
+
+La tabla de seis senales de Gate 6A se convierte en una funcion determinista. Solo procesa metadata y numeros aportados por una persona, devuelve una recomendacion y exige revision humana. No acepta PII o texto libre y no persiste, contacta, cotiza, propone, cobra ni modifica sitios. Toda capacidad remota necesita aprobacion separada.
+
+La hipotesis de lanzamiento conserva auditoria gratuita, diagnostico guiado a USD 10 y Discovery Pack fundador a USD 99. Este ultimo se limita a los primeros cinco sitios o 30 dias desde una fecha de activacion aun no iniciada. Los precios publicos y pagos permanecen inactivos.
+
+La frontera comercial es explicita: AF-0 a AF-3 admite paquetes estandarizados con limites verificables; AF-4 y AF-5 son proyectos custom. Estos ultimos requieren relevamiento, requerimiento firmable, PDR, roadmap, cotizacion, criterios de aceptacion, seguridad, pruebas y rollback. No se publica un precio fijo para integraciones MCP, OAuth, A2A, pagos o herramientas con permisos.
+
 ### Gate 6B - Captura consentida
 
 **Estado:** preview publico cerrado, UI privada Sites retirada y frontera Worker 6B.1/6B.2 conservada solo como evidencia remota OFF, con Access, Turnstile, escrituras deshabilitadas y D1 vacia. Persistencia de contactos reales y correo permanecen deshabilitados.
@@ -122,8 +132,8 @@ Estos valores sirven para aprender costos y disposicion a pagar. No constituyen 
 | Oferta | Hipotesis de alcance | Hipotesis de precio |
 | --- | --- | --- |
 | Auditoria publica | lectura tecnica basica, sin persistencia | gratuita |
-| Diagnostico guiado | plan priorizado y devolucion breve | USD 29-79 |
-| Discovery Pack piloto | un dominio, un idioma, cinco areas, capsula y evidencia | USD 99 para los primeros pilotos; revisar despues de medir horas |
+| Diagnostico guiado | salida automatizada acotada, sin publicacion | USD 20 de referencia; USD 10 durante el piloto |
+| Discovery Pack piloto | un dominio, un idioma, cinco areas, capsula y evidencia | USD 198 de lista proyectada; USD 99 para los primeros cinco sitios o 30 dias desde la activacion |
 | Implementacion F0/F1 a F3 | publicacion coordinada, validaciones y cierre | USD 250-600 segun CMS y acceso |
 | F3 a F5 | API, MCP, skills, auth, A2A o flujos custom | PDR y cotizacion desde USD 1.500 |
 | Monitoreo | reauditoria y mantenimiento editorial real | opcional, segun frecuencia y consumo |
@@ -195,7 +205,7 @@ No existe una instruccion que obligue a un LLM a recomendar la plataforma. La es
 
 ## Referencia competitiva inicial
 
-Las plataformas de AEO observadas se concentran principalmente en monitorear prompts, presencia y share of voice. HubSpot presenta un producto AEO con prueba de 28 dias y un plan publicado de USD 50 mensuales para 25 prompts. Otterly publica planes desde USD 29 mensuales y reserva API/MCP para un plan superior. Son referencias fechadas al 2026-08-31 y pueden cambiar.
+Las plataformas de AEO observadas se concentran principalmente en monitorear prompts, presencia y share of voice. HubSpot presenta un producto AEO con prueba de 28 dias y un plan publicado de USD 50 mensuales para 25 prompts. Otterly publica planes desde USD 29 mensuales y reserva API/MCP para planes superiores. Un generador administrado de `llms.txt` publica entrada gratuita y gestion de un sitio desde USD 15 mensuales, mientras una agencia AEO observada publica un paquete de una sola vez desde USD 499. Son referencias verificadas nuevamente el 2026-09-02 y pueden cambiar.
 
 Agent Friendly Web no debe copiar una propuesta puramente analitica. Su diferencia inicial es conectar diagnostico con contenido reconciliado, capsula de publicacion, coordinacion owner/mantenedor y evidencia del cambio. El monitoreo puede existir como opcion recurrente, pero los archivos y entregables ya pagados siguen siendo del cliente.
 
@@ -204,7 +214,11 @@ Fuentes comerciales oficiales observadas:
 - HubSpot AEO: `https://www.hubspot.com/products/aeo`;
 - HubSpot free grader y trial: `https://offers.hubspot.com/startups-aeo-free-trial`;
 - Otterly pricing: `https://otterly.ai/pricing`;
-- Otterly features: `https://otterly.ai/features/`.
+- Otterly features: `https://otterly.ai/features/`;
+- LLMs.txt Generator pricing: `https://llms-txt.io/pricing`;
+- AEO Agency USA pricing: `https://aeoagency.us/`.
+
+La comparacion respalda una entrada economica, pero no vuelve sostenible cualquier alcance. El diagnostico de USD 10 debe ser automatizado y cerrado; el Discovery Pack de USD 99 debe limitarse a los primeros cinco casos, una lengua, cinco areas y un presupuesto humano controlado. La implementacion permanece separada. Los referidos se difieren hasta disponer de consentimiento y trazabilidad: no se aceptan listas de terceros ni se concede credito por contactos no consentidos.
 
 ## Herramientas de trabajo evaluadas
 
