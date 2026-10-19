@@ -66,6 +66,7 @@ npm run db:generate
 - [Especificacion funcional y tecnica](docs/SPECIFICATION.es.md)
 - [Metodologia AF-0 a AF-5](docs/METHODOLOGY.es.md)
 - [Seguridad](docs/SECURITY.md)
+- [Autenticacion y autorizacion publicas](public/auth.md)
 - [Caso Tokenizart](docs/TOKENIZART-CASE-2026-08-26.md)
 - [Roadmap agent-native](docs/AGENT-NATIVE-DISCOVERY-ROADMAP-2026-08-26.md)
 - [AEO y politica de crawlers](docs/AEO-AND-CRAWLER-POLICY.es.md)

@@ -27,7 +27,7 @@ La fotografia inicial de Cloudflare `isitagentready.com` del 2026-08-30 ubico a 
 
 AF-EV registra proveedor, fecha, origen, puntaje, checks, evidencia y vigencia. No se crea AF-6: AF-0 a AF-5 mide madurez propia y AF-EV mide observacion independiente. El detalle y los gates viven en `docs/CLOUDFLARE-EXTERNAL-READINESS-BASELINE-2026-08-30.md`.
 
-La prioridad inmediata ya no es agregar senales para elevar una nota. Es completar la ventana de estabilidad del origen Cloudflare-native, confirmar que D1 sigue sin escrituras imprevistas y decidir por separado el retiro del binding Sites. Despues se podran disenar `auth.md`, OAuth y una A2A Agent Card solamente junto con identidad y servicios reales; no se publicaran artefactos vacios para mejorar una medicion externa.
+La prioridad inmediata ya no es agregar senales para elevar una nota. Es completar la ventana de estabilidad del origen Cloudflare-native, confirmar que D1 sigue sin escrituras imprevistas y decidir por separado el retiro del binding Sites. `auth.md` documenta la identidad humana Cloudflare Access que ya existe y declara expresamente que OAuth y A2A no estan desplegados. OAuth y una A2A Agent Card solo se publicaran junto con identidad y servicios agenticos reales; no se publicaran artefactos vacios para mejorar una medicion externa.
 
 ## Estado verificable de esta entrega
 
