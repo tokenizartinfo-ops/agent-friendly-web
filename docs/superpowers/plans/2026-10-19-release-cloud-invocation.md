@@ -35,3 +35,5 @@ Task1 RED: d6a3d8f/CI39299305057/job118219969290 observed18:06UTC.2126PASS/16FAI
 Ruling: expiry-during-provider test uses controlled native Worker Date.now at HTTP return, instead of wall-clock delay vulnerable to suite contention. Same admission/zero-journal assertions, no production test hook; does not prove hosted timing.
 Ruling: after Workflow registration, recovery must retain AfwReleaseWorkflow and AfwReleaseOperator; pre-registrationbcf9afc4 alone is not assumed compatible. Verify inert closed accepted-source recovery before any real window.
 Task1: implementation prepared, GREEN pending.
+
+First GREEN: b6513e6d/CI39299907042/job118222057506:2142PASS0FAIL1SKIP,lint0errors2existingwarnings/5builds. Packaging39299907352/job118222059847 SUCCESS. New hypothesis: a backward Date.now inside the absolute window must not admit a new journal after provider await; add native boundary test before any fix. No hosted clock claim.
