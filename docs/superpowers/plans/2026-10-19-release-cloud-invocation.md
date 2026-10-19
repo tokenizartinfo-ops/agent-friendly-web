@@ -31,4 +31,7 @@ Consumes: compiled bundle and existing operator/publisher/journal; checkOwnCronP
 ## Ledger
 Preflight: basef7d2528a/treee3a66466; existing private operatorbcf9afc4 closed, canaryf8feb421 unchanged per dated receipt. Source-only implementation, no remote acceptance inferred.
 Ruling: skill filesystem helpers are not run on Gabriel's PC; GitHub commit/run/job/check receipts below replace local worktree/ledger helpers under explicit cloud-first instruction. No implementation subagents; only final reviewer required by skill.
-Task1: pending RED.
+Task1 RED: d6a3d8f/CI39299305057/job118219969290 observed18:06UTC.2126PASS/16FAIL/1SKIP; all new native cases fail because AfwReleaseWorkflow export is absent. Existing suite unchanged GREEN.
+Ruling: expiry-during-provider test uses controlled native Worker Date.now at HTTP return, instead of wall-clock delay vulnerable to suite contention. Same admission/zero-journal assertions, no production test hook; does not prove hosted timing.
+Ruling: after Workflow registration, recovery must retain AfwReleaseWorkflow and AfwReleaseOperator; pre-registrationbcf9afc4 alone is not assumed compatible. Verify inert closed accepted-source recovery before any real window.
+Task1: implementation prepared, GREEN pending.

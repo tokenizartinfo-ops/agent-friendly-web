@@ -22,3 +22,7 @@ Workflow resource futuro afw-release-administrative, mismo Worker/clase, sin cro
 operationalReadiness=false.
 
 Fuentes primarias19oct: https://developers.cloudflare.com/workflows/build/trigger-workflows/ ; https://developers.cloudflare.com/workflows/build/sleeping-and-retrying/ ; https://github.com/cloudflare/workers-sdk/blob/main/packages/miniflare/src/config/v4-schema.ts .
+
+## Recuperación compatible y reloj del ensayo
+Una vez registrado el Workflow, no restaurar una versión sin AfwReleaseWorkflow por inferencia. Antes de abrir una ventana real conservar y verificar una versión de esta fuente con ambas clases, dos flagsfalse y bundle inerte original; ella será la recuperación compatible, sin borrar Workflow/historia. La versión actualbcf9afc4 es recuperación solo ANTES de crear esa asociación.
+La prueba de vencimiento nativa controla Date.now del Worker al volver la lectura HTTP del proveedor: no depende de un sleep ni pretende demostrar reloj/latencia del hosting real. Cambia únicamente la frontera del reloj de la fixture, sin hooks en producción.

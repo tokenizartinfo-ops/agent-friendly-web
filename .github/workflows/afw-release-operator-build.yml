@@ -25,6 +25,7 @@ on:
       - 'scripts/build-mcp-own-worker.mjs'
       - 'scripts/build-mcp-node-program.mjs'
       - 'scripts/mcp-release-source.mjs'
+      - 'scripts/check-own-cron-provider.mjs'
       - 'worker/**'
       - 'lib/**'
       - 'package.json'
