@@ -27,11 +27,19 @@ Etapas separadas: diagnóstico público; aclaración de fuentes/objetivo; prepar
 
 ## Cálculo e interpretación
 
-Costo total por trabajo aceptado incluye: procesamiento del consumidor + procesamiento AFW + persistencia/verificación + intervención humana + mantenimiento de recetas atribuido con método explícito.
+Una ocurrencia es un encargo de la comparación con identidad de ensayo estable. Sus reintentos y recuperaciones pertenecen al mismo encargo; un replay idempotente no crea otro encargo ni otro resultado aceptado.
+
+Gasto total atribuido incluye: procesamiento del consumidor + procesamiento AFW + persistencia/verificación + intervención humana + mantenimiento de recetas atribuido con método explícito. Incluye el gasto de TODAS las ocurrencias comparables, también las fallidas, y sus reintentos/recuperaciones.
+
+- Costo por trabajo aceptado = gasto total atribuido / cantidad de encargos únicos aceptados.
+- Tasa de aceptación = cantidad de encargos únicos aceptados / cantidad total de encargos intentados.
+- Si no hay encargos aceptados, costo por trabajo aceptado=null (no disponible); conservar el gasto total observado, nunca presentarlo como costo cero.
+
+Ejemplo exclusivamente aritmético, sin moneda, tarifa ni resultado observado: cinco encargos intentados, dos aceptados y tres fallidos, con gasto total de50unidades ficticias, dan25unidades por trabajo aceptado y una tasa de aceptación de2/5=40%. Los reintentos ya están incluidos en ese gasto; no aumentan el número de encargos.
 Distinguir gasto marginal de asignación de costos fijos/suscripción. Consumir tokens de una suscripción no demuestra costo cero ni permite trasladar sin evidencia su precio a todos los clientes.
 
 Si falta un componente relevante, el total es incompleto y se declara; no rellenar cero. Un timeout puede haber consumido recursos: no ignorarlo ni ejecutar otra operación facturable sin conciliación.
-No excluir fallos del denominador ni presentar como ahorro la diferencia entre un encargo terminado y uno incompleto. Informar número de casos, dispersión, límites y cambios de versión.
+Incluir los costos de los fallos en el numerador del costo por trabajo aceptado; incluir todos los encargos intentados en el denominador de la tasa de aceptación. No presentar como ahorro la diferencia entre un encargo terminado y uno incompleto. Informar número de casos, dispersión, límites y cambios de versión.
 
 La demo examples/agent-consumer/demo.mjs mide SOLO fixtures y bytes, con modelTokens/providerCostnull/isEfficiencyEvidencefalse. No es benchmark de modelos, ahorro real, volumen o demanda.
 
