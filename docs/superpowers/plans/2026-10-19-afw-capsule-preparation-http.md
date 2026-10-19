@@ -20,3 +20,7 @@ Ruling: autorización vigente del owner para decidir/encadenar desarrollo de fue
 Ruling: API GitHub/Actions y ledger de fuente sustituyen scripts/workspace locales por preferencia cloud-first; no clon/build/dependencias locales. Costo: latencia CI.
 Rollback solo fuente por PR revisada, nunca datos/DDL/DROP.
 G2 cerrado; no OTP/grants/scopes reales/Container/eventos/PCoff/Max/modelos/cargos/despliegues. operationalReadiness=false.
+
+## Ejecución
+Task1 complete: REDd9bda3a9e868564a7b24360d637e88337e3a7168 / CI39337581983/job118350823313:2240PASS/18FAIL esperados/1SKIP existente, solo funcionalidades ausentes. El primer RED7265d9b4 se refinó antes de implementación: columna expires_at real y cancelación bloqueada añadida.
+Task2 in_progress: frontera/lease desacoplados, requestLease opcional en host y puente; ningún caller montado o DDL nuevo. GREEN pendiente.
