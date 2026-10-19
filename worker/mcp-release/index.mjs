@@ -10,7 +10,7 @@ import {validateReleaseOperatorBundle,resolveNamedActivationPlan,RELEASE_TARGET}
 const bundle=globalThis.__AFW_RELEASE_OPERATOR_BUNDLE__;
 const closedHttp={fetch(){return new Response(null,{status:404,headers:{'Cache-Control':'no-store'}});}};
 export default closedHttp;
-async function runReleaseOperator(env,args){
+async function runReleaseOperator(env,args,lease){
   const fail=()=>{throw Error('Release operator unavailable');};
   let timer;
   const controller=new AbortController();
@@ -20,8 +20,9 @@ async function runReleaseOperator(env,args){
    if(args[0]!==createHash('sha256').update(JSON.stringify(bundle)).digest('hex'))fail();
    const {artifact,policy}=bundle;
    let named;const namespace=env.AFW_RELEASE_EVENTS_NODE;
-   const check=()=>{const now=Date.now();if(env.AFW_RELEASE_OPERATOR_ENABLED!=='true'||controller.signal.aborted||now<policy.startAt||now>=policy.expiresAt)fail();if(named){if(env.AFW_RELEASE_EVENTS_NODE!==namespace)fail();named.current();}};
-   check();timer=setTimeout(()=>controller.abort(),policy.expiresAt-Date.now());
+   const check=()=>{const now=Date.now();if(env.AFW_RELEASE_OPERATOR_ENABLED!=='true'||controller.signal.aborted||now<policy.startAt||now>=policy.expiresAt||lease&&!lease.current())fail();if(named){if(env.AFW_RELEASE_EVENTS_NODE!==namespace)fail();named.current();}return now;};
+   const remaining=()=>Math.min(policy.expiresAt-Date.now(),lease?lease.remaining():Infinity);
+   check();timer=setTimeout(()=>controller.abort(),remaining());
    if(policy.operation==='confirm_named')named=resolveNamedActivationPlan(bundle,namespace);
    const db=env.RELEASE_DB;if(!db?.withSession)fail();
    const readCredential=async()=>{check();const value=env[policy.operation==='publish'?'AFW_RELEASE_PUBLISH_TOKEN':'AFW_RELEASE_READ_TOKEN'];if(typeof value!=='string'||!/^[-A-Za-z0-9_]{16,4096}$/.test(value))fail();return value;};
@@ -29,7 +30,7 @@ async function runReleaseOperator(env,args){
    // All provider requests remain under the same finite operator window.
    const fetchImpl=async(url,init)=>{check();const result=await fetch(url,init);check();return result;};
    if(policy.operation==='publish'){
-    const result=await createClosedPublication({db,artifact,pins:policy.pins,readCredential,fetchImpl,timeoutMs:Math.min(60000,policy.expiresAt-Date.now())}).publish(controller.signal);
+    const result=await createClosedPublication({db,artifact,pins:policy.pins,readCredential,fetchImpl,now:lease?check:undefined,timeoutMs:Math.min(60000,remaining())}).publish(controller.signal);
     check();return result;
    }
    // Do not confirm a receipt for a different build or administrative target.
@@ -69,7 +70,7 @@ export class AfwReleaseWorkflow extends WorkflowEntrypoint {
     const gate=await checkOwnCronProvider({fetchImpl:(url,init)=>fetch(url,{...init,redirect:'manual'}),timeoutMs:Math.min(5000,remaining())});
     if(!current()||gate.providerGate!=='resolved'||gate.mayRunClosedVerification!==true)return outcome('blocked');
     try{
-     const result=await runReleaseOperator(env,[expectedHash]);
+     const result=await runReleaseOperator(env,[expectedHash],{current,remaining});
      if(!current()||result?.mayDeploy!==false||typeof result.artifactKey!=='string'||!/^[a-f0-9]{64}$/.test(result.artifactKey)||typeof result.versionId!=='string'||!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(result.versionId))return outcome('uncertain');
      return {...outcome('confirmed'),receipt:{artifactKey:result.artifactKey,versionId:result.versionId}};
     }catch{return outcome('uncertain');}
