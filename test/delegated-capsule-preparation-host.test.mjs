@@ -12,13 +12,13 @@ function schema(f){assert.equal(typeof checkSchema,'function','missing closed pr
 async function use(run){const f=capsulePreparationFixture(createAgentCapsulePreparation);try{await run(f);}finally{f.close();}}
 function hostFixture(f){
  assert.equal(typeof createHost,'function','missing closed preparation host');
- const started=Date.now();f.limitCalls=[];f.authCalls=0;
+ const started=Date.now();f.started=started;f.limitCalls=[];f.authCalls=0;
  f.auth={context:{grantId:authority.grantId,subject:authority.subject,clientId:authority.clientId,resource:authority.resource,scopes:['afw:capsule:prepare']},projectId:authority.projectId,tokenExpiresAt:started+120000};
  f.env={AFW_DELEGATED_OAUTH_ENABLED:'true',AFW_DELEGATED_PREPARATION_ENABLED:'true',AFW_OAUTH_SERVICE_MODE:'window',
   AFW_OAUTH_PILOT_EXPIRES_AT:new Date(started+120000).toISOString(),AFW_OAUTH_PILOT_PROJECT_ID:authority.projectId,AFW_OAUTH_PILOT_CLIENT_ID:authority.clientId,
   ACCESS_TEAM_DOMAIN:'synthetic.cloudflareaccess.com',ACCESS_AUD:'synthetic-audience',DB:f.db,OAUTH_KV:{},
   DELEGATED_RATE_LIMITER:{async limit(value){f.limitCalls.push(value);await f.afterLimit?.();return f.limitResult??{success:true};}}};
- f.makeHost=()=>createHost({env:f.env,resource:authority.resource,resolveAuthorization:async()=>{f.authCalls++;await f.beforeAuth?.();return f.auth;},now:()=>Date.now()+f.wallOffset,monotonic:()=>f.mono});
+ f.makeHost=()=>createHost({env:f.env,resource:authority.resource,resolveAuthorization:async()=>{f.authCalls++;await f.beforeAuth?.();return f.auth;},now:()=>f.wallOverride??Date.now()+f.wallOffset,monotonic:()=>f.mono});
  f.host=f.makeHost();return f;
 }
 test('schema gate validates actual constraints without reading owner data or writing',()=>use(async f=>{
@@ -108,4 +108,45 @@ test('domain receives a trusted absolute notAfter and cannot extend it to a new 
  const until=Date.now()+1500;
  const service=createAgentCapsulePreparation({enabled:true,notAfter:until,createPrimarySession:()=>f.db.withSession('first-primary'),resolveAuthority:async()=>authority});
  const r=await service.prepare(input);assert.equal(r.code,'prepared');assert.equal(f.sql.prepare('SELECT expires_at FROM agent_capsule_preparations').get().expires_at,until);
+}));
+
+test('observed configuration, binding and clock closure cannot revive the same captured host',async()=>{
+ for(const type of ['flag','binding','clock'])await use(async f=>{
+  hostFixture(f);const old=f.host,method=f.db.withSession;
+  if(type==='flag')f.env.AFW_DELEGATED_PREPARATION_ENABLED='false';
+  if(type==='binding')f.db.withSession=()=>{throw Error('changed');};
+  if(type==='clock')f.mono=-1;
+  assert.equal((await old.prepare(input)).code,'unavailable');
+  f.env.AFW_DELEGATED_PREPARATION_ENABLED='true';f.db.withSession=method;f.mono=0;
+  assert.equal((await old.prepare(input)).code,'unavailable','restoring values must not revive an invalidated host');
+  assert.equal(f.authCalls,0);assert.equal(f.reads,0);assert.deepEqual(f.counts(),{intents:0,capsules:0,events:0});
+  assert.equal((await f.makeHost().prepare(input)).code,'prepared','a separately validated factory is distinct');
+ });
+});
+test('original finite host lifetime also expires by monotonic time between calls',()=>use(async f=>{
+ hostFixture(f);f.wallOverride=f.started+1;f.mono=120001;
+ assert.equal((await f.host.prepare(input)).code,'unavailable');
+ f.mono=0;assert.equal((await f.host.prepare(input)).code,'unavailable','observed expiry is terminal');
+ assert.equal(f.authCalls,0);assert.equal(f.reads,0);assert.equal(f.writes,0);
+}));
+test('verified token lifetime cannot reset between calls when wall time stalls',()=>use(async f=>{
+ hostFixture(f);f.wallOverride=f.started+1;f.auth.tokenExpiresAt=f.started+30000;f.mono=40000;
+ assert.equal((await f.host.prepare(input)).code,'delegated_access_denied');
+ assert.equal(f.limitCalls.length,0);assert.equal(f.reads,0);assert.equal(f.writes,0);
+ f.auth.tokenExpiresAt=f.started+110000;
+ assert.equal((await f.host.prepare(input)).code,'prepared','new valid token does not revive an expired token or close a valid host');
+}));
+test('remaining original host lifetime caps SQL lease when wall time stalls',()=>use(async f=>{
+ hostFixture(f);f.wallOverride=f.started+1;f.auth.tokenExpiresAt=f.started+180000;f.mono=119000;
+ assert.equal((await f.host.prepare(input)).code,'prepared');
+ const row=f.sql.prepare('SELECT reserved_at,expires_at FROM agent_capsule_preparations').get();
+ assert.ok(row.expires_at-row.reserved_at<=1100,'host lifetime remaining must cap the SQL lease');
+ assert.ok(row.reserved_at<f.started+1000,'preserve actual wall timestamps');
+}));
+test('remaining original token lifetime caps SQL lease when wall time stalls',()=>use(async f=>{
+ hostFixture(f);f.wallOverride=f.started+1;f.auth.tokenExpiresAt=f.started+30000;f.mono=29000;
+ assert.equal((await f.host.prepare(input)).code,'prepared');
+ const row=f.sql.prepare('SELECT reserved_at,expires_at FROM agent_capsule_preparations').get();
+ assert.ok(row.expires_at-row.reserved_at<=1100,'token lifetime remaining must cap the SQL lease');
+ assert.ok(row.reserved_at<f.started+1000,'preserve actual wall timestamps');
 }));
