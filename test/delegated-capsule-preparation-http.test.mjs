@@ -114,7 +114,14 @@ test('closed original HTTP lease prevents later use of a captured preparation ho
 }));
 test('remaining original budget reaches actual domain cutoff and success still prepares only once',()=>use(async f=>{
  f.mono=4000;const host=f.host(),r=await host.prepare(input);assert.equal(r.code,'prepared');
- const row=f.sql.prepare('SELECT not_after AS cutoff FROM agent_capsule_preparations').get();
- assert.ok(row);assert.ok(Date.parse(row.cutoff)<=f.started+1000,'domain cutoff must retain original monotonic remainder');
+ const row=f.sql.prepare('SELECT expires_at AS cutoff FROM agent_capsule_preparations').get();
+ assert.ok(row);assert.ok(row.cutoff<=f.started+1000,'domain cutoff must retain original monotonic remainder');
  assert.equal((await host.reconcile(input)).code,'prepared');assert.deepEqual(f.counts(),{intents:1,capsules:1,events:1});
 }));
+
+test('abort interrupts a stalled body even if underlying cancellation never settles',async()=>{
+ const h=harness();const ac=new AbortController();let canceled=false;
+ const stream=new ReadableStream({pull(){return new Promise(()=>{});},cancel(){canceled=true;return new Promise(()=>{});}});
+ const timer=setTimeout(()=>ac.abort(),20);
+ try{const response=await h.run(req(stream,{signal:ac.signal}));assert.equal(response.status,408);assert.equal(h.calls,0);assert.equal(canceled,true);}finally{clearTimeout(timer);}
+});
