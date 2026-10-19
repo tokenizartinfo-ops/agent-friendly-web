@@ -125,7 +125,7 @@ test('a human writer winning the reserved version is not overwritten or silently
 }));
 test('an unversioned source change after reservation is rejected at atomic commit',()=>use(async f=>{
  f.before=async(q,op)=>{if(op==='batch')f.sql.exec("UPDATE site_projects SET organization='Changed after snapshot'");};
- const r=await f.service.prepare(input);assert.deepEqual(f.counts(),{intents:1,capsules:0,events:0},JSON.stringify({code:r.code,counts:f.counts()}));assert.equal(r.code,'preparation_pending');
+ const r=await f.service.prepare(input);assert.deepEqual(f.counts(),{intents:1,capsules:0,events:0});assert.equal(f.sql.prepare('SELECT revision FROM site_projects').get().revision,2);assert.equal(r.code,'revision_conflict');
 }));
 test('malformed and future-dated authority/domain records fail closed without a reservation',()=>use(async f=>{
  f.sql.exec("UPDATE delegated_access_grants SET scopes_json='not-json'");assert.equal((await f.service.prepare(input)).code,'delegated_access_denied');

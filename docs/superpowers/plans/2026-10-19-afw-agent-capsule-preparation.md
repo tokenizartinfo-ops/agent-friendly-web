@@ -39,3 +39,10 @@ Ruling: el resolver del host debe validar el token OAuth y su vida útil antes d
 ## Revisión y diagnóstico
 Revisión fresca completa en2909ad6:0Critical/1Important/0Minor. Ruling: aceptar P2 de carrera entre lectura de autoridad y lectura de intent; regresión separada antes de fix, luego una sola consulta primaria y vencimiento postawait. No nueva revisión en bucle.
 Primera candidata Actions39318956108:2180PASS/1FAIL/1SKIP; D1 nativo y21 casos nuevos en su mayoría aceptados. Fallo concreto en cambio sin incremento de revisión: returned revision_conflict en lugar de preparation_pending; se antepone la comprobación de estado persistido para diagnosticar sin relajar seguridad. No declarar GREEN ni modificar el comportamiento por inferencia.
+
+## Una ronda de corrección
+Regresiones P2 en9881d89 / Actions39319584747 / job118289857865:2180PASS/4FAIL/1SKIP; tres fallos reales prepared vs delegated_access_denied (retirada, transferencia, vencimiento durante await) y la aserción previa ya diagnosticada. La comprobación añadida confirmó reserva1/cápsula0/evento0: no hubo escritura incorrecta en ese caso.
+Ruling: el fallo previo es expectativa errónea, no defecto de CAS — drizzle/0006 contiene trigger site_projects_legacy_revision_fence; exigir revision2 y revision_conflict conservando los conteos de no escritura.
+P2fix: unir autoridad actual/fuentes/intento/resultado en UNA lectura primaria; comprobar grant y dominio con reloj actual después del await. Punto de linealización de esa lectura, no garantía de estado eterno; la siguiente consulta revalida. Sin revisor adicional ni aperturas remotas.
+Task 2: pending final verification — corrección y25 pruebas nuevas (24SQLite/1D1); Actions exacta debe pasar antes de merge.
+Task 3: review complete, Important corregido pendiente de GREEN; runtime, scope/consentimiento real, migración remota, hosting/rate limit/recuperación administrativa/PCoff excluidos por alcance, no acreditados.

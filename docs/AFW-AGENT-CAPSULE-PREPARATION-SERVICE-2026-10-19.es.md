@@ -10,7 +10,7 @@ createAgentCapsulePreparation está cerrado por defecto. Con habilitación exact
 
 La reserva durable liga identidad, clave, revisión, hash de fuentes, generador, sitio, versión y deadline original de hasta cinco segundos. Se confirma su ACK antes de generar con buildPublicationCapsule. Una reserva incierta no se reanuda ni se renueva automáticamente. La misma clave recupera su estado; otra revisión/contrato/generador produce conflicto. Un hash o una clave no son permisos.
 
-Un batch transaccional guarda cápsula, resultado y evento, condicionado al estado original y a owner/revisión/fuentes/dominio/claim/grant actuales. Se comprueban tiempo SQL y presupuesto original a través de awaits. Tras guardar, otra lectura primaria controla la confirmación. Retirar un permiso impide la siguiente lectura, sin borrar un trabajo ya aceptado.
+Un batch transaccional guarda cápsula, resultado y evento, condicionado al estado original y a owner/revisión/fuentes/dominio/claim/grant actuales. Se comprueban tiempo SQL y presupuesto original a través de awaits. Tras guardar, otra lectura primaria une autoridad actual, fuentes e intento/resultado en una sola consulta. Grant y dominio se comprueban también con el reloj actual después de esperar la consulta; no se reutiliza una autorización obtenida en una lectura anterior. La validez se acredita en el punto de lectura, no para siempre. Retirar un permiso impide la siguiente lectura, sin borrar un trabajo ya aceptado.
 
 La respuesta incluye solo referencia de cápsula, versión, hash y revisión de origen. El contenido queda pendiente de aprobación humana. No devuelve archivos, respuestas del expediente, correos, claves o tokens; no permite instalar, publicar ni gastar.
 
