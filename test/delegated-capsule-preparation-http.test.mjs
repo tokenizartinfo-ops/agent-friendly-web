@@ -125,3 +125,30 @@ test('abort interrupts a stalled body even if underlying cancellation never sett
  const timer=setTimeout(()=>ac.abort(),20);
  try{const response=await h.run(req(stream,{signal:ac.signal}));assert.equal(response.status,408);assert.equal(h.calls,0);assert.equal(canceled,true);}finally{clearTimeout(timer);}
 });
+
+function reusedChunkStream(text){
+ const backing=bytes(text);let turns=0;
+ return new ReadableStream({pull(c){if(turns++===0)c.enqueue(backing);else{backing.fill(32);c.close();}}},{highWaterMark:0});
+}
+test('request bytes are owned before the producer reuses its mutable chunk',async()=>{
+ let observed;const h=harness(async request=>{observed=await request.json();return Response.json({ok:true});});
+ const r=await h.run(req(reusedChunkStream('{"value":1}')));assert.equal(r.status,200);assert.deepEqual(observed,{value:1});
+});
+test('response bytes are owned before the producer reuses its mutable chunk',async()=>{
+ const h=harness(()=>new Response(reusedChunkStream('{"ok":true}'),{headers:{'Content-Type':'application/json'}}));
+ const r=await h.run(req('{}'));assert.equal(r.status,200);assert.deepEqual(await r.json(),{ok:true});
+});
+test('rejected media response is canceled even before a bounded reader is acquired',async()=>{
+ let canceled=false;
+ const h=harness(()=>new Response(new ReadableStream({pull(){return new Promise(()=>{});},cancel(){canceled=true;return new Promise(()=>{});}}),{headers:{'Content-Type':'text/event-stream'}}));
+ const r=await h.run(req('{}'));assert.equal(r.status,503);assert.equal(canceled,true);
+});
+test('a protected response that arrives after abort is disposed without waiting for cancellation',async()=>{
+ let begin,finish,canceled=false;const begun=new Promise(resolve=>{begin=resolve;});
+ const pending=new Promise(resolve=>{finish=resolve;});
+ const h=harness(()=>{begin();return pending;}),ac=new AbortController();
+ const completion=h.run(req('{}',{signal:ac.signal}));await begun;ac.abort();
+ const r=await completion;assert.equal(r.status,503);
+ finish(new Response(new ReadableStream({cancel(){canceled=true;return new Promise(()=>{});}}),{headers:{'Content-Type':'application/json'}}));
+ await new Promise(resolve=>setTimeout(resolve,0));assert.equal(canceled,true);assert.equal(h.calls,1);
+});
