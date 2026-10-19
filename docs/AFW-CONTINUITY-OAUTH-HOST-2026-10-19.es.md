@@ -41,3 +41,7 @@ Container02382110, recepción útil, baja nativa y PC-off siguen independientes 
 
 - Inicio: base61c9304c comprobada en main y rama remota tras reinicio. Fuente PR494 aceptada, sin cambios locales.
 - Task1 complete: tests-first131b79bb; Actions39276604214 RED esperado21fallos nuevos,2093PASS,1SKIP. Sin errores de setup/import; default de dos herramientas y rechazo de timestamp inválido ya pasan. El siguiente paso implementa el montaje y sus límites; pendiente GREEN/revisión.
+
+- Task2 complete: source9c08d8e, Actions39277208166:2114PASS/0FAIL/1SKIP, lint/buildPASS; dos warnings existentes en archivos no modificados. Son pruebas sintéticas, no adopción remota.
+- Revisión independiente de61c9304c..9c08d8e:0Critical/1Important(P2)/0Minor. checkedNow comparaba solo con inicio; T→T+6000→T+1000 admitía respuesta fresca. Agregar regresiones HTTP3000/6000 antes de corregir, luego repetir suite completo. No segunda revisión de la rama: la pasada de fixes se verifica con regresiones RED/GREEN y suite según la skill de ejecución.
+- Ruling sobre exclusiones del revisor: routing real D1/Worker/ChatGPT permanece gate remoto, y cambios posteriores a la admisión no son protección serializable; ambos límites son deliberados y documentados, no se acreditan desde CI.

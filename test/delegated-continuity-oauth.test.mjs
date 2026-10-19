@@ -36,7 +36,7 @@ async function fixture(t) {
   // Native SQLite replicas model D1's documented first-query constraint.
   // A reused session deliberately serves its second query from an old copy.
   // The admission's result, rather than a factory call count, proves freshness.
-  f.routing=({beforeAdmission,afterAdmission}={})=>{
+  f.routing=({beforeAdmission,afterAdmission,afterProject}={})=>{
     const initial=f.env.DB,admissions=[],sessions=[];
     function snapshot() {
       const db=new DatabaseSync(':memory:');replicas.push(db);
@@ -57,6 +57,7 @@ async function fixture(t) {
         if(admission){admissions.push(primary);await beforeAdmission?.();}
         const row=db.prepare(sql).get(...args)??null;
         if(admission)await afterAdmission?.();
+        else if(/FROM site_projects p LEFT JOIN/.test(sql))await afterProject?.();
         return row;
       }};}};}};
     }};
@@ -166,3 +167,17 @@ test('OAuth HTTP rejects continuity after the actual human disconnect route with
   assert.equal(response.status,303);assert.ok(f.sqlite.prepare('SELECT revoked_at FROM delegated_access_grants').get().revoked_at);
   const denied=await read(c);assert.equal(denied.structuredContent.status,403);assert.equal(denied.structuredContent.data,undefined);
 });
+
+for(const advanced of [3000,6000]){
+  test('OAuth HTTP rejects backward clock movement after observing an intermediate advance of '+advanced+'ms',async t=>{
+    const f=await fixture(t);
+    f.routing({afterProject(){f.setTime(new Date(f.start+advanced).toISOString());},
+      afterAdmission(){f.setTime(new Date(f.start+1000).toISOString());}});
+    const c=await f.clientFor();await requireTool(c);
+    const result=await read(c);
+    assert.equal(result.structuredContent.status,503);
+    assert.equal(result.structuredContent.data,undefined);
+    assert.equal(result.structuredContent.recovery.action,'retry_read');
+    assert.equal(result.structuredContent.recovery.automaticReconnect,false);
+  });
+}
