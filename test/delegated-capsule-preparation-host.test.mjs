@@ -18,7 +18,7 @@ function hostFixture(f){
   AFW_OAUTH_PILOT_EXPIRES_AT:new Date(started+120000).toISOString(),AFW_OAUTH_PILOT_PROJECT_ID:authority.projectId,AFW_OAUTH_PILOT_CLIENT_ID:authority.clientId,
   ACCESS_TEAM_DOMAIN:'synthetic.cloudflareaccess.com',ACCESS_AUD:'synthetic-audience',DB:f.db,OAUTH_KV:{},
   DELEGATED_RATE_LIMITER:{async limit(value){f.limitCalls.push(value);await f.afterLimit?.();return f.limitResult??{success:true};}}};
- f.makeHost=()=>createHost({env:f.env,resource:authority.resource,resolveAuthorization:async()=>{f.authCalls++;await f.beforeAuth?.();return f.auth;},now:()=>f.wallOverride??Date.now()+f.wallOffset,monotonic:()=>f.mono});
+ f.makeHost=()=>createHost({env:f.env,resource:authority.resource,resolveAuthorization:async()=>{f.authCalls++;await f.beforeAuth?.();return f.auth;},now:()=>f.wallOverride??f.started+f.wallOffset,monotonic:()=>f.mono});
  f.host=f.makeHost();return f;
 }
 test('schema gate validates actual constraints without reading owner data or writing',()=>use(async f=>{
