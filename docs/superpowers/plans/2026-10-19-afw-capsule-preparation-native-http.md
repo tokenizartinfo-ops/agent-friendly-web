@@ -24,3 +24,6 @@ Task1 first run779030fb CI39340606251/job118360901005:2264PASS/11FAIL/1SKIP; can
 Causa1 fixture: dispatchFetch expone Host127.0.0.1 de proxy local; agents rechaza403 InvalidHost. Normalizar SOLO fixture Host desde URL efectiva; no añadirloopback al allowlist ni cambiar validación del producto.
 Causa2 producto: el SDK OAuth1.2.1 crea challenge401 con body null; frontera exige JSON/cuerpo en401 y lo convierte503. Fuente primaria exacta src/oauth-resource-server.ts v1.2.1/createBearerChallenge, más fallo nativo503vs401. Añadir unitRED:401vacío con Bearer challenge debe conservarse; vacío200/401sinchallenge/Basic no se aceptan. No cambiar5000ms/caps/permisos.
 Task2 in_progress: fijarRED acotado y ejecutar diagnóstico nativo con Host de fixture correcto antes de modificar producto.
+
+Task2 RED47362436/CI39341255896/job118363091656:2264PASS/12FAIL/1SKIP: regresión401vacío503vs401 confirmada; Host de fixture ya normalizado, legacy ahora falla503 (pendiente diagnóstico Content-Type del handler), modern conectó pero no encontró preparación por cascada. No afirmar GREEN.
+Fix acotado401: conservar solo401vacío con challengeBearer; vacío200/401sinchallenge/Basic siguenunknown. Instrumentar SOLO fixture status/type/body del handler para distinguir legacyJSON/SSE, sin tokens/cuerpos/headersAuth.

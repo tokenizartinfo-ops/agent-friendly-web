@@ -8,6 +8,7 @@ El fetch del cliente está adaptado únicamente a dispatchFetch(example.invalid)
 
 ## Qué sigue siendo sintético
 El validador devuelve identidad/token/contexto ficticios y el limiter es determinista. La prueba no verifica firmas, OAuth exchange, OTP, consentimiento humano, perfil real o autoridad de producción. El SDK sí construye ctx.auth y el código real proyecta/cerca ese contexto; eso no convierte el stub en autenticación real.
+Miniflare sustituye Host por su proxy local: la fixture restaura SOLO el host de su URL efectiva, manteniendo intacto el allowlist del producto. Esto no demuestra un proxy/host de producción.
 Headers x-ci y contadores son instrumentación exclusiva de la fixture. Los offsets monotónicos de4s/6s son inyección de tiempo, no latencia observada. Política/expiración sintéticas se fijan una vez al primer fetch y no se renuevan entre llamadas; cada request conserva su propio lease original.
 D1 instala las migraciones y el DDL propuesto SOLO en su base efímera del runner; no es una migración autorizada o aplicada al canary. Las flags true existen solo en la fixture y no cambian configuración de ningún servicio.
 
@@ -26,7 +27,7 @@ El consumidor fija misma-origin, onInsufficientScope:throw, maxStepUpRetries0 y 
 El fallo de ACK se introduce entre la respuesta del Worker y el SDK cliente. No acredita una falla de red de Internet ni de Cloudflare; sí ejercita la decisión de no repetir la escritura y de conciliar.
 
 ## Estado operativo
-Solo tests/documentación de fuente; ningún módulo o entrypoint de producción nuevo. CI/main/revisión y los límites aceptados constan en PR portadora/issue497. Si el ensayo revela una incompatibilidad real se documentará con RED antes de cambiar el producto.
+Ensayo de integración y corrección cerrada de compatibilidad: el SDK OAuth1.2.1 devuelve401sinbody con WWW-Authenticate Bearer; la frontera debe conservarlo, sin aceptar vacío200/401sinchallenge/Basic. No crea desafíos ni inicia auth; solo conserva el rechazo del SDK. Ningún nuevo entrypoint o montaje. CI/main/revisión y los límites aceptados constan en PR portadora/issue497. Si el ensayo revela una incompatibilidad real se documentará con RED antes de cambiar el producto.
 La siguiente etapa conserva consentimiento/scope de preparación real, schema/migración/reversión y montaje/rollout propios, con prueba de integración actual del cliente que lo consumirá. Esta fixture no abre catálogo, conexión o servicio.
 G2 aceptado/cerrado no se repite. Container02382110, suscripción/aviso/revisiónútil/bajanativa, PC-off y Max permanecen independientes. operationalReadiness=false.
 Revertir solo fuente mediante PR; no borrar ni recrear recursos, namespaces o historia remota. Ningún build/install/clon local, token/contratación/API de pago/correo a Max.
