@@ -24,3 +24,14 @@ Preflight: proveedor, identidad/alcance, siete tablas y triggers reales, estado 
 ## Evidencia y límites
 
 Prueba nativa usa dos Workers operadores, invocador con RPC real y D1 workerd compartida. Verifica publicación única, confirmación única, negativa HTTP, argumento ajeno, flag cerrado, expiración, credencial ausente, build discordante, retirada y ACK de upload perdido sin reenvío. El proveedor y las credenciales son sintéticos. Esto acredita integración local, no publicación remota, permisos reales, suscripción ChatGPT ni PC-off. El ensayo continúa cerrado.
+
+
+## Preparación de corrección: interruptores de publicación cerrada (19 de octubre)
+
+La revisión previa a otra publicación encontró que el transporte verificaba seis interruptores históricos pero heredaba otros sin exigir su estado cerrado. La versión real inspeccionada el 19 de octubre conserva ocho interruptores false; no se ha detectado activación real. El nuevo host de continuidad añade otro opt-in, ausente en esa versión.
+
+Contrato candidato: todo binding cuyo nombre siga la convención AFW_*_ENABLED debe ser plain_text con la cadena exacta false antes de crear la versión. Se mantienen los seis campos históricos obligatorios; los opcionales ausentes no se inventan, y los opcionales presentes false se heredan de la versión fija. Estado activo, valor no canónico o tipo que no permite leerlo impiden el POST. Las demás variables conservan su contrato; no se convierten todas las variables de AFW en interruptores.
+
+Plan: regresión antes del cambio en el publisher real con proveedor simulado, RED observado en GitHub Actions; guard mínimo, suite completa/lint/build, una revisión de rama e integración exacta. La PR portadora conservará SHAs/resultados. No pruebas de texto ni nuevo subsistema. No se publica el operador o el canary ni se renueva una credencial desde este bloque; el operador desplegado conserva su versión y permanece deshabilitado. La aceptación fuente no demuestra despliegue o PC-off.
+
+El registro operativo único es [issue497](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497). La fuente histórica de este documento mantiene su fecha y alcance; este addendum aún es preparación hasta que la PR registre su aceptación.

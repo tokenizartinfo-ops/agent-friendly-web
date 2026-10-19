@@ -61,3 +61,37 @@ test('integrated publication crosses real local HTTP and persists only verified 
  const receipt=await publisher.publish(new AbortController().signal);assert.equal(receipt.versionId,versionId);assert.equal(receipt.mayDeploy,false);assert.equal(posts,1);await assert.rejects(publisher.publish(new AbortController().signal));assert.equal(posts,1);assert.equal(db.prepare('SELECT COUNT(*) n FROM dossier_publication_receipts').get().n,1);
  }finally{server.closeAllConnections();await new Promise(resolve=>server.close(resolve));db.close();}
 });
+
+for(const name of ['AFW_DOSSIER_RETIREMENT_READ_ENABLED','AFW_DOSSIER_SUCCESSOR_ENABLED','AFW_DELEGATED_CONTINUITY_ENABLED','AFW_FUTURE_FEATURE_ENABLED']){
+ test('closed upload rejects active '+name+' before creating a version',async()=>{
+  const {createClosedVersionUpload}=await load(),f=fixture();
+  f.baseline.bindings.push({name,type:'plain_text',text:'true'});
+  await assert.rejects(createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal),{message:'Closed publication unavailable'});
+  assert.equal(f.calls.filter(c=>c.init.method==='POST').length,0);
+ });
+}
+for(const [label,binding] of [
+ ['uppercase false',{name:'AFW_FUTURE_FEATURE_ENABLED',type:'plain_text',text:'FALSE'}],
+ ['numeric string',{name:'AFW_FUTURE_FEATURE_ENABLED',type:'plain_text',text:'0'}],
+ ['boolean false',{name:'AFW_FUTURE_FEATURE_ENABLED',type:'plain_text',text:false}],
+ ['null text',{name:'AFW_FUTURE_FEATURE_ENABLED',type:'plain_text',text:null}],
+ ['unreadable secret',{name:'AFW_FUTURE_FEATURE_ENABLED',type:'secret_text'}],
+]){
+ test('closed upload rejects a noncanonical capability flag: '+label,async()=>{
+  const {createClosedVersionUpload}=await load(),f=fixture();
+  f.baseline.bindings.push(binding);
+  await assert.rejects(createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal),{message:'Closed publication unavailable'});
+  assert.equal(f.calls.filter(c=>c.init.method==='POST').length,0);
+ });
+}
+test('closed upload preserves optional disabled capabilities and unrelated service configuration',async()=>{
+ const {createClosedVersionUpload}=await load(),f=fixture();
+ const optional=['AFW_DOSSIER_RETIREMENT_READ_ENABLED','AFW_DOSSIER_SUCCESSOR_ENABLED','AFW_DELEGATED_CONTINUITY_ENABLED','AFW_FUTURE_FEATURE_ENABLED'];
+ for(const name of optional)f.baseline.bindings.push({name,type:'plain_text',text:'false'});
+ f.baseline.bindings.push({name:'AFW_SERVICE_MODE',type:'plain_text',text:'window'});
+ assert.deepEqual(await createClosedVersionUpload(f.options)(f.artifact,new AbortController().signal),{versionId});
+ const posts=f.calls.filter(c=>c.init.method==='POST');assert.equal(posts.length,1);
+ const body=JSON.parse(posts[0].init.body);
+ for(const name of [...optional,'AFW_SERVICE_MODE'])assert.deepEqual(body.bindings.find(b=>b.name===name),{name,type:'inherit',version_id:baseVersionId});
+ assert.equal(body.bindings.length,f.baseline.bindings.length);
+});
