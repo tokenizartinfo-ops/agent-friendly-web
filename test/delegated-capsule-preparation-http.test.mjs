@@ -152,3 +152,14 @@ test('a protected response that arrives after abort is disposed without waiting 
  finish(new Response(new ReadableStream({cancel(){canceled=true;return new Promise(()=>{});}}),{headers:{'Content-Type':'application/json'}}));
  await new Promise(resolve=>setTimeout(resolve,0));assert.equal(canceled,true);assert.equal(h.calls,1);
 });
+
+test('a valid empty OAuth Bearer challenge preserves 401 and its header; empty success and challenge-free rejection do not pass',async()=>{
+ const challenge='Bearer realm="OAuth", resource_metadata="https://example.invalid/.well-known/oauth-protected-resource/mcp"';
+ const h=harness(()=>new Response(null,{status:401,headers:{'WWW-Authenticate':challenge}}));
+ const r=await h.run(req('{}'));assert.equal(r.status,401);assert.equal(r.headers.get('WWW-Authenticate'),challenge);
+ assert.equal(await r.text(),'');assert.equal(r.headers.get('Cache-Control'),'no-store');assert.equal(h.calls,1);
+ for(const response of [new Response(null,{status:200}),new Response(null,{status:401}),new Response(null,{status:401,headers:{'WWW-Authenticate':'Basic realm="other"'}})]){
+  const bad=harness(()=>response),rejected=await bad.run(req('{}'));assert.equal(rejected.status,503);
+  assert.equal((await rejected.json()).code,'request_outcome_unknown');
+ }
+});
