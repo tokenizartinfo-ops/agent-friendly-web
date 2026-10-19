@@ -25,10 +25,8 @@ on:
       - 'scripts/build-mcp-own-worker.mjs'
       - 'scripts/build-mcp-node-program.mjs'
       - 'scripts/mcp-release-source.mjs'
-      - 'worker/mcp-release/**'
-      - 'lib/mcp-release-operator-policy.mjs'
-      - 'lib/mcp-closed-*.mjs'
-      - 'lib/mcp-publication-*.mjs'
+      - 'worker/**'
+      - 'lib/**'
       - 'package.json'
       - 'package-lock.json'
 

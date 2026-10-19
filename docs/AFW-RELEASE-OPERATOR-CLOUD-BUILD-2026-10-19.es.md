@@ -8,7 +8,7 @@ Es una preparación de código. No crea versiones Cloudflare, despliega, introdu
 
 ## Entradas y límites
 
-Workflow `.github/workflows/afw-release-operator-build.yml`: manual solo en main; PR solo del mismo repositorio y rutas relacionadas. Permisos GitHub contents:read, checkout exacto sin credenciales persistentes, Node22/Ubuntu24.04 y presupuesto15min. No usa secretos de GitHub ni Cloudflare.
+Workflow `.github/workflows/afw-release-operator-build.yml`: manual solo en main; PR solo del mismo repositorio y rutas de construcción, librerías lib/**, Workers worker/** y dependencias npm. La cobertura amplia evita omitir una dependencia transitiva del paquete; no concede permisos adicionales. Permisos GitHub contents:read, checkout exacto sin credenciales persistentes, Node22/Ubuntu24.04 y presupuesto15min. No usa secretos de GitHub ni Cloudflare.
 
 Se construye únicamente operation=publish con RELEASE_TARGET del contrato existente. La única referencia de herencia es un UUID explícito: nunca latest. start_at_ms y expires_at_ms son enteros decimales canónicos y seguros; el intervalo original no supera600000ms y el constructor vuelve a validar el plan.
 
