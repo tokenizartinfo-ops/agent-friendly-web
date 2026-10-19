@@ -117,7 +117,7 @@ Siguiente decisión comercial útil: contrastar la muestra de entrega con el pro
 
 Gabriel confirma una vertical del mismo AFW: personas y agentes externos comparten expedientes, cápsulas y comprobaciones; una empresa con sus propios agentes podrá acceder a la modalidad agéntica. El objetivo es una tarifa económica basada en menor trabajo humano y procesamiento reutilizable, con alcance, precio previo, presupuesto, pagos y restricciones transparentes. No se fijan importes ni se activa un medio de pago.
 
-El [diseño del primer bloque](superpowers/specs/2026-10-19-afw-agent-consumption-design.md) delimita catálogo, cotización indicativa y continuidad por referencias. El primer incremento previsto es una biblioteca interna pura; sigue sin endpoints nuevos, cobros, publicación o instalación automática. Conserva la arquitectura y los recibos existentes.
+El [diseño del primer bloque](superpowers/specs/2026-10-19-afw-agent-consumption-design.md) delimita catálogo, cotización indicativa y continuidad por referencias. El primer incremento es una biblioteca interna pura de catálogo, cotización y continuidad; su [constancia de fuente y pruebas](AFW-AGENT-CONSUMPTION-CONTRACTS-2026-10-19.es.md) conserva la evidencia. Sigue sin endpoints nuevos, cobros, publicación o instalación automática. Conserva la arquitectura y los recibos existentes.
 
 Ahorro de tokens/costo y descuentos por reuso son objetivos a medir, no resultados acreditados ni condiciones comerciales activas. El recorrido acompañado y el híbrido declaran su asistencia adicional; el acceso económico no depende de la marca del modelo ni excluye a empresas con agentes propios.
 

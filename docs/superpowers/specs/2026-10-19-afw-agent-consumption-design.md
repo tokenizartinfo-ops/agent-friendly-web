@@ -1,7 +1,7 @@
 # AFW: consumo agéntico integrado — diseño del primer bloque
 
 Fecha: 19 de octubre de 2026.
-Estado: propuesta escrita para revisión; Gabriel aprobó la dirección y el alcance del primer bloque en el chat AFW. Este documento no acredita implementación, tarifa, pago, permisos nuevos ni apertura comercial.
+Estado: diseño aprobado por Gabriel el19oct2026; primer incremento implementado como biblioteca interna pura. La [constancia de fuente y pruebas](../../AFW-AGENT-CONSUMPTION-CONTRACTS-2026-10-19.es.md) delimita su aceptación. No acredita servicio desplegado, tarifa, pago, permisos nuevos ni apertura comercial.
 Base examinada: `45f97c1de6b1f4d22d4d99035419b27345440390`, repositorio `tokenizartinfo-ops/agent-friendly-web`.
 
 ## Propósito y alcance
@@ -84,9 +84,9 @@ A2A coordinará encargos y artefactos cuando AFW implemente y pruebe esas capaci
 
 La futura capa de pagos se integrará con un proveedor adecuado para servicios AFW y mantendrá separados estado del trabajo y estado económico. El cliente podrá necesitar un checkout propio de AFW. No asumir elegibilidad de cobro dentro de ChatGPT: la documentación oficial consultada hoy limita la aprobación del checkout de plugins a bienes físicos. Tampoco asumir disponibilidad de un medio de pago por existir un estándar.
 
-## Aceptación del primer bloque a implementar
+## Aceptación del primer bloque en fuente
 
-Criterios todavía NO ejecutados en este documento:
+Criterios ejercitados con fixtures sintéticos en la biblioteca interna; los recibos y sus límites se conservan en la constancia enlazada. No son aceptación de un servicio o adaptador desplegado:
 
 | Caso | Resultado requerido |
 | --- | --- |
@@ -99,7 +99,7 @@ Criterios todavía NO ejecutados en este documento:
 | Resumen suficiente para el siguiente paso | Una acción breve y detalles referenciados, sin expediente completo |
 | Dos modalidades con distinto trabajo incluido | Diferencia económica explicada por líneas y alcance |
 
-En la implementación se comprobarán falta de política, expiración, revisiones cambiadas, límites de importes y ausencia de IO con fixtures sintéticos. El plan de implementación fijará firmas, límites exactos y comandos de prueba antes de codificar. Ninguna de estas filas acredita una prueba realizada.
+El [plan de implementación](../plans/2026-10-19-afw-agent-consumption.md) fija firmas y límites. Se comprobaron falta de política, expiración, revisiones cambiadas, límites de importes y ausencia de lectura de reloj/fetch con fixtures sintéticos. Los valores de dinero y las evidencias de despliegue de esos fixtures no son tarifas ni despliegues reales. El host futuro deberá autenticar y resolver autoridad, políticas y evidencia antes de invocar estas funciones.
 
 ## Etapas siguientes del mismo roadmap
 
@@ -127,4 +127,4 @@ Reversión documental: cerrar la propuesta sin fusionar o revertir su commit med
 - [OpenAI: monetización y límites actuales de checkout](https://developers.openai.com/plugins/build/monetization).
 - [A2A: especificación, tareas, capacidades e idempotencia](https://a2a-protocol.org/latest/specification/).
 
-Las fuentes oficiales se consultaron19oct2026. Los identificadores de contrato AFW aquí propuestos no son extensiones estándar ni capacidades publicadas. La propuesta queda lista para revisar antes de fijar el plan técnico; no afirma ahorro, demanda pagada o recomendación por modelos.
+Las fuentes oficiales se consultaron19oct2026. Los identificadores de contrato AFW aquí propuestos no son extensiones estándar ni capacidades publicadas. La primera biblioteca permanece interna y sin montaje; no afirma ahorro, demanda pagada o recomendación por modelos. Las etapas siguientes conservan diseño y aceptación propios.

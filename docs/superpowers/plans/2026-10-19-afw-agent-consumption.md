@@ -16,8 +16,8 @@
 - Host authorization and runtime evidence must be resolved externally. Inputs to these functions are NOT new public API parameters.
 - No network, filesystem, model, clock reads, timer, D1, side effects, payment, discount, persistence or deployment.
 - Explicit now epoch-milliseconds; dates canonical UTC ISO with milliseconds. Validity uses start <= now < end; future observations cannot establish runtime readiness.
-- Bounded inputs:32 catalog entries,64 policy lines,5 evidence refs; identifiers <=128 chars, descriptions <=280 chars, units1..1000000; integer monetary values and revisions must be safe, amounts nonnegative.
-- Strict plain data records reject unknown keys, symbols and accessor properties without reading getters; nested arrays are bounded and dense.
+- Bounded inputs:32 catalog entries,64 policy lines,5 evidence refs; identifiers <=128 chars, descriptions <=280 chars, units1..1000000; integer monetary values and revisions must be safe, amounts nonnegative. Currency exponent0..4; explicit clock0..8640000000000000ms.
+- Strict plain data records reject unknown keys, symbols and accessor properties without reading getters; nested arrays are bounded and dense. Reject oversized array length before key enumeration and oversized record key count before reading value descriptors; this is not a hostile-Proxy sandbox.
 - Published source/configuration, historical private receipts, permissions, rollback and Max are preserved.
 
 ## Interfaces and files
@@ -43,32 +43,40 @@ Continuity view: {projectRef,revision,observedAt,expiresAt,nextStep,missingInput
 
 ## Task1 — catalog boundary
 
-- [ ] Commit this plan and meaningful behavior tests before implementation; absent modules are loaded as empty only when their exact files do not exist, producing assertion failures rather than swallowed import errors.
-- [ ] Observe GitHub CI fail on the new behavior assertions; preserve run/head reference.
-- [ ] Implement strict data validators and describeAgentCatalog; retain source_only as source_only, downgrade invalid freshness, reject duplicate operation IDs and invalid/oversized schemas.
-- [ ] Test catalog closure/freshness/duplicate/accessor/bounds cases; no local execution.
+- [x] Commit this plan and meaningful behavior tests before implementation; absent modules are loaded as empty only when their exact files do not exist, producing assertion failures rather than swallowed import errors.
+- [x] Observe GitHub CI fail on the new behavior assertions; preserve run/head reference.
+- [x] Implement strict data validators and describeAgentCatalog; retain source_only as source_only, downgrade invalid freshness, reject duplicate operation IDs and invalid/oversized schemas.
+- [x] Test catalog closure/freshness/duplicate/accessor/bounds cases; no local execution.
 
 ## Task2 — indicative quote
 
-- [ ] Implement previewAgentQuote using the normalized catalog and trusted policy. Require current catalog/operation/version/unit/mode and fresh approved policy.
-- [ ] Compute fixed + units * unitMinor using integer-safe arithmetic, compare maxTotalMinor, and bound validity by policy and runtime evidence.
-- [ ] Return deterministic SHA256 of canonical scope descriptor; include catalog/policy revision, currency/exponent, two explicit price lines and closed authority fields.
-- [ ] Missing/unpriced policy returns pricing_unavailable and null; zero requires explicitly_free; mismatches, oversize/negative/fractional values, unknown keys and excess budget return sanitized blocked results.
-- [ ] Exercise deterministic scope/order/change, valid fixture, assisted difference, zero/unknown/expiry/overflow/mismatch and mutation rejection cases.
+- [x] Implement previewAgentQuote using the normalized catalog and trusted policy. Require current catalog/operation/version/unit/mode and fresh approved policy.
+- [x] Compute fixed + units * unitMinor using integer-safe arithmetic, compare maxTotalMinor, and bound validity by policy and runtime evidence.
+- [x] Return deterministic SHA256 of canonical scope descriptor; include catalog/policy revision, currency/exponent, two explicit price lines and closed authority fields.
+- [x] Missing/unpriced policy returns pricing_unavailable and null; zero requires explicitly_free; mismatches, oversize/negative/fractional values, unknown keys and excess budget return sanitized blocked results.
+- [x] Exercise deterministic scope/order/change, valid fixture, assisted difference, zero/unknown/expiry/overflow/mismatch and mutation rejection cases.
 
 ## Task3 — next-step projection
 
-- [ ] Validate trusted context before view; require authorized=true, exact project, current grant and expected revision.
-- [ ] Validate observed/expiry dates, one brief typed nextStep, optional one missingInput, max5 opaque evidence refs and optional capsuleRef.
-- [ ] Project only those bounded fields; never return principal, grant, whole answers or arbitrary payloads.
-- [ ] Exercise positive next step and foreign/revoked/expired/future/conflicting/accessor/oversized/extra field cases.
-- [ ] Observe full npm test/lint/build in existing GitHub CI; inspect exact head, no new hosted workflow required.
+- [x] Validate trusted context before view; require authorized=true, exact project, current grant and expected revision.
+- [x] Validate observed/expiry dates, one brief typed nextStep, optional one missingInput, max5 opaque evidence refs and optional capsuleRef.
+- [x] Project only those bounded fields; never return principal, grant, whole answers or arbitrary payloads.
+- [x] Exercise positive next step and foreign/revoked/expired/future/conflicting/accessor/oversized/extra field cases.
+- [x] Observe full npm test/lint/build in existing GitHub CI; inspect exact head, no new hosted workflow required.
 
 ## Final acceptance
 
-- [ ] Fresh read-only whole-branch review via GitHub source; no local clones/tests for reviewer.
-- [ ] Fix substantive findings with regression RED/GREEN and recheck cloud CI.
-- [ ] Record RED/GREEN/head/review and explicit unmounted scope in docs, update PR493 title/description around final result.
-- [ ] Merge only after accepted exact-head checks and review, preserving verified production; no deploy, activation, payment or customer writes.
+- [x] Fresh read-only whole-branch review via GitHub source; no local clones/tests for reviewer.
+- [x] Fix substantive findings with regression RED/GREEN and recheck cloud CI.
+- [x] Record RED/GREEN/head/review and explicit unmounted scope in docs, update PR493 title/description around final result.
+- [x] Prepare the exact-head integration gate: require accepted cloud checks and review before merging, preserving verified production; no deploy, activation, payment or customer writes. The resulting merge is recorded in PR493, not assumed by this checkbox.
 
 Ruling: conventional local scratch ledger is replaced by this remote plan and immutable Git/CI receipts because Gabriel explicitly requires minimizing local storage. Method and scope are already authorized; routine implementation choices remain within the approved first increment. Later runtime, pricing, payment and installation stages are not covered.
+
+## Execution receipt — 19 October2026
+
+Initial RED: b3ad2af38e3ba805e2b483b4f697ed5d7b67a73d / Actions39260813969,26new assertion failures,2037pass/1skip and no unrelated failure. First GREEN:8b1471283d5490db20deae709f4e30e508040cc7 /39261625832,2063pass/0fail/1skip; lint/build succeeded.
+
+Fresh source review found P2 (descriptor allocation before size checks). Regression RED:cc970b2112de87769011f99439d41d7ef7eee48a /39262296870,exactly2new failures/2063pass/1skip. Corrected head00961b24333de8cb3c8543f4f4233cb4a55bdf19 /39262836791:2065pass/0fail/1skip, lint0errors/2warnings in unchanged files, build succeeded. Same reviewer confirmed P2 resolved/no new source findings. Final documentation carrier must retain the same code/test blobs and pass its own CI/review before merge. Final integration status and exact accepted head are recorded on PR493.
+
+[Source-only scope and continuation](../../AFW-AGENT-CONSUMPTION-CONTRACTS-2026-10-19.es.md). No local tests/build/clone/output; no deployment, price policy, payment, grants, real dossier or PC-off acceptance. The28new behavior tests use synthetic fixtures. Later stages remain outside this increment.
