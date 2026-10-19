@@ -7,6 +7,7 @@ createCapsulePreparationHttpBoundary({enabled,issuer,handle,now,monotonic}) est�
 
 ## Entrada acotada
 Origen HTTPS canónico, ruta fija POST /mcp sin query; Origin, si existe, debe ser exactamente el issuer. Solo JSON UTF8 sin compresión. Antes de parsear se comprueba la declaración de longitud y se leen chunks reales hasta un máximo de4096bytes; una longitud mentirosa no evita el límite. Rechazar UTF8/JSON inválido, raíz no objeto y batches. Los schemas MCP posteriores conservan su validación de argumentos.
+Cada chunk aceptado se copia de inmediato antes de otro await: el reuso de buffers por el productor no puede cambiar bytes ya consumidos. También se aplica a la respuesta.
 Los headers de la petición quedan en memoria de esa petición para el servidor protegido; no se registran ni copian a DTO, Git o evidencia. El cuerpo se reconstruye con los bytes ya acotados, sin un segundo stream de entrada no limitado. No hay fetch saliente, URL aportada por tool ni nueva sesión.
 
 ## Un solo plazo
@@ -19,6 +20,7 @@ Cerrar la respuesta invalida ese lease y cualquier host que lo conserve. Cancela
 Antes de invocar handle: rechazo400/403/404/405/408/413/415 según formato/ruta/método/tiempo/tamaño. No se llega a autenticación o persistencia.
 Solo una invocación del servidor protegido. Su respuesta JSON debe terminar dentro del mismo plazo y hasta32768bytes; no se ofrece SSE ni reanudación/sesión desde esta frontera. Se preservan status/headers de protocolo válidos y se aplica Cache-Control:no-store.
 Si falla/vence después de invocar handle, no se puede inferir que no hubo escritura:503/request_outcome_unknown, recuperación por solicitud original, automaticRetry=false/automaticReconnect=false y tres flagsfalse. Nada de errores arbitrarios, referencias privadas o nueva clave. Este error de transporte no es el DTO de éxito de una herramienta ni una confirmación de borrador.
+Las Responses rechazadas antes de adquirir reader y las que lleguen después del abort/vencimiento se descartan con cancelación best effort, sin esperar un Promise bloqueado. No se abandonan solo por perder una carrera de Promises.
 Lectores se cancelan sin esperar indefinidamente el Promise de cancel. El lease detiene la espera aunque la fuente o la cancelación estén bloqueadas; una operación ya iniciada requiere su cierre/conciliación propios.
 
 ## Aceptación y límites

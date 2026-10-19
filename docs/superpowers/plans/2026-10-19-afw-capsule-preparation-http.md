@@ -24,3 +24,12 @@ G2 cerrado; no OTP/grants/scopes reales/Container/eventos/PCoff/Max/modelos/carg
 ## Ejecución
 Task1 complete: REDd9bda3a9e868564a7b24360d637e88337e3a7168 / CI39337581983/job118350823313:2240PASS/18FAIL esperados/1SKIP existente, solo funcionalidades ausentes. El primer RED7265d9b4 se refinó antes de implementación: columna expires_at real y cancelación bloqueada añadida.
 Task2 in_progress: frontera/lease desacoplados, requestLease opcional en host y puente; ningún caller montado o DDL nuevo. GREEN pendiente.
+
+Task2 firstGREEN:47467d0b / CI39337989102/job118352185944:2258PASS/0FAIL/1SKIP, lint0errores/2advertencias existentes,5buildscorrectos. No aceptación final porque revisión encontró2Important.
+Task3 review: una revisión fresca de8paths,0Critical/2Important/0Minor, PR508#issuecomment-6279153491.
+Final fix pass in_progress: RED66d527f6 / CI39338234974/job118353002093:2258PASS/4FAIL exactos/1SKIP; request/reponse mutable chunks400/503vs200 y2cancelacionesfalsevstrue. Fix1 snapshot de cada chunk antes de siguiente await. Fix2 dispose best effort de Response rechazada y tardía, sin esperar cancel. GREEN final pendiente; no re-review.
+Final: Ruling: ejecución CI no fue revisada independientemente; autor debe verificar logs exactos. Costo si error: no afirmar aceptación/merge.
+Final: Ruling: OAuth/consentimiento/nativeMCP/HTTP reales fuera de bloque desacoplado, no disponibles. Costo: composición nativa pendiente antes de montaje.
+Final: Ruling: sin deploy/migración/persistencia de producción/rollback ejecutado. Costo: rollout y recuperación propios aún pendientes.
+Final: Ruling: PCoff/Container/G2/Max independientes y G2 cerrado no se repite. Costo: operationalReadiness=false.
+Final: Ruling: timeout no revierte IO del proveedor ya enviado; se conserva incertidumbre y conciliación con solicitud original. Costo: estado desconocido requiere lectura antes de intentar.
