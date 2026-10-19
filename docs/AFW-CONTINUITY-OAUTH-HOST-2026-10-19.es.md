@@ -37,6 +37,12 @@ Tras aceptación de fuente, antes de UNA nueva ventana propia: verificar cuenta/
 
 Container02382110, recepción útil, baja nativa y PC-off siguen independientes y no acreditados. No se envía mail a Max; conserva preview/aprobación y recorrido propio. Catálogo/cotización internos siguen sin endpoint/precio/cobro. No prometer guardia cloud desde el éxito de Actions.
 
+## Comportamiento esperado del cliente
+
+Descubrir herramientas con permiso vigente; si la opción no está en el catálogo, conservar el recorrido actual y no inventar disponibilidad. Consultar un paso y su revisión/fecha; mantenerlo como contexto histórico cuando vence. Ante revision_conflict o indisponibilidad, ofrecer una sola nueva lectura explícita, sin bucles ni ampliación de permiso. Solo pedir evidencia cuando la persona la autorice. Una proyección no confirma guardado, aprobación, instalación o publicación.
+
+Medir futuras mejoras de eficiencia con el cliente real: número de lecturas necesarias, latencia, bytes y tokens efectivamente informados por ese cliente/modelo. El tamaño del JSON o una prueba sintética no demuestra ahorro de tokens ni permite publicar un porcentaje o precio.
+
 ## Ledger
 
 - Inicio: base61c9304c comprobada en main y rama remota tras reinicio. Fuente PR494 aceptada, sin cambios locales.
@@ -45,3 +51,5 @@ Container02382110, recepción útil, baja nativa y PC-off siguen independientes 
 - Task2 complete: source9c08d8e, Actions39277208166:2114PASS/0FAIL/1SKIP, lint/buildPASS; dos warnings existentes en archivos no modificados. Son pruebas sintéticas, no adopción remota.
 - Revisión independiente de61c9304c..9c08d8e:0Critical/1Important(P2)/0Minor. checkedNow comparaba solo con inicio; T→T+6000→T+1000 admitía respuesta fresca. Agregar regresiones HTTP3000/6000 antes de corregir, luego repetir suite completo. No segunda revisión de la rama: la pasada de fixes se verifica con regresiones RED/GREEN y suite según la skill de ejecución.
 - Ruling sobre exclusiones del revisor: routing real D1/Worker/ChatGPT permanece gate remoto, y cambios posteriores a la admisión no son protección serializable; ambos límites son deliberados y documentados, no se acreditan desde CI.
+
+- Task3 RED confirmado:78c4dca9/Actions39277857811/job118146607112,2114PASS/2FAIL/1SKIP; ambas regresiones recibieron200 cuando debían503, sin otros fallos. Corrección: cada muestra válida actualiza lastObserved y cualquier muestra menor se rechaza; conservar el límite original y no cancelar SQL por inferencia. Pendiente GREEN exacto/fusión.

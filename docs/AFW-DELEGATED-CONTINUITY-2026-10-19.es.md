@@ -1,3 +1,5 @@
+Continuación19oct2026: PR495 prepara el montaje de esta herramienta en el host OAuth únicamente con opt-in exacto, ventana/proyecto/cliente de servidor y nueva admisión primaria. Véase [montaje finito](AFW-CONTINUITY-OAUTH-HOST-2026-10-19.es.md). Los párrafos siguientes conservan el alcance original de PR494; el runtime/configuración desplegados no cambian por ninguna de estas PRs y no se presume disponibilidad real.
+
 # AFW: continuidad de lectura delegada — alcance acotado
 
 Estado: candidato interno en PR494. La aceptación exacta de CI/revisión/fusión se conserva en esa PR; no se presume por este documento.
