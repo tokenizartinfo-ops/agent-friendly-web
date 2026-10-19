@@ -16,3 +16,7 @@ Ruling: getter de contexto es dependencia confiable del servidor, no de argument
 Review focus: unidades y borde Date; getter/inherited/proxy; contexto reemplazado o mutado a través de awaits/relojes; default-null; token sin lectura; plazos originales/ACK; distinguir validador de test de verificación criptográfica; ausencia de montaje/activación.
 Rollback: revertir fuente, nunca borrar historial ni DROP; ningún recurso remoto por revertir.
 G2 aceptado/cerrado: no OTP/ensayo repetido. Container02382110/G4avisos/G5PC-off/Max separados. operationalReadiness=false.
+
+## Constancia de ejecución
+Task1 complete: RED0eaff54232edbec8839cc2c2d3926445f785976b / Actions39328890270/job118321714228:2209PASS/16FAIL esperados/1SKIP existente. Fallos por módulo/proyección/host faltantes, no por imports o setup; baseline anterior íntegro.
+Task2 in_progress: módulo desacoplado en lib/delegated-capsule-preparation-oauth.mjs y documento propio. Puente conserva referencias de autoridad sin leer token; clocks se protegen antes/después y resolver no genera autoridad nueva. GREEN pendiente.
