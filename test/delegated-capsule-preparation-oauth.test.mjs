@@ -100,3 +100,23 @@ test('server-context errors remain sanitized and no credential accessor is touch
  f.source={get auth(){throw Error('SECRET context');},props:f.source.props};
  assert.throws(()=>f.make(),{message:'Preparation host unavailable'});assert.equal(touched,0);
 }));
+
+test('resolver-boundary source drift or exception permanently closes the same request host',async()=>{
+ for(const failure of ['scope','exception'])await use(async f=>{
+  let armed=false,reads=0;
+  host(f,{getVerifiedContext:()=>{
+   // Fault injection after the clock fence reads, at authority resolution.
+   if(armed&&++reads===5){
+    if(failure==='scope')f.source.auth.scope=[];
+    else throw Error('SECRET provider context failure');
+   }
+   return f.source;
+  }});
+  armed=true;assert.equal((await f.host.prepare(input)).code,'unavailable');
+  assert.deepEqual(f.counts(),{intents:0,capsules:0,events:0});
+  armed=false;f.source.auth.scope=['afw:capsule:prepare'];
+  assert.equal((await f.host.prepare(input)).code,'unavailable','observed authority failure must never revive on this host');
+  assert.equal((await f.host.reconcile(input)).code,'unavailable');
+  assert.deepEqual(f.counts(),{intents:0,capsules:0,events:0});
+ });
+});
