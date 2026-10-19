@@ -75,6 +75,8 @@ En conexiones: distinguir “Resumen” de “Resumen y preparación de borrador
 11. Cada llamada comprueba owner, grant activo/intercambiado, cliente/resource/proyecto/scope, revisión, claim y presupuesto. Cambios o retirada durante awaits impiden nueva confirmación. Un resultado ya confirmado se conserva, no se borra para aparentar cancelación.
 12. Desconexión nativa y token revocation tienen que retirar la autoridad D1 y bloquear la siguiente llamada; comprobar también con cliente ya conectado. Listar la conexión no acredita esto.
 
+El fin absoluto persistido permite comparar solicitudes distintas; no persistir ni comparar performance.now() entre isolates o peticiones como si compartieran origen monotónico. Dentro de cada petición conservar su lease original de pared+monotónico. La política pura no verifica por sí sola el reloj del host ni sustituye ese lease.
+
 expiresAt y los permisos son datos de servidor. No aceptar la fecha, identidad, aprobación, monto, dominio, clientId o “permiso del gerente” desde argumentos de una tool.
 
 ## Montaje y persistencia: bloques separados
@@ -122,7 +124,9 @@ Estos gates NO son G3/G4/G5: preparar borradores no prueba Container, evento, su
 Fuente del repositorio fijada arriba: lib/delegated-oauth-worker.mjs, lib/delegated-oauth-store.mjs, lib/delegated-capsule-preparation-{host,oauth,mcp,http}.mjs, lib/agent-capsule-preparation.mjs y db/agent-capsule-preparations.sql.
 [PR509 y CI nativa](https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/509).
 [OAuthResourceServer1.2.1 primario](https://github.com/cloudflare/workers-oauth-provider/blob/v1.2.1/src/oauth-resource-server.ts).
-[SDK MCP createMcpHandler primario](https://ts.sdk.modelcontextprotocol.io/v2/api/@modelcontextprotocol/server/server/createMcpHandler.html).
+[Cloudflare Agents: handler importado de agents/mcp/server](https://developers.cloudflare.com/agents/model-context-protocol/apis/handler-api/).
+[SDK MCP: clasificador/transporte utilizados en la composición](https://ts.sdk.modelcontextprotocol.io/v2/api/@modelcontextprotocol/server/server/createMcpHandler.html).
+El paquete importado por Worker/fixture es agents@0.22.0 según la fuente fijada. La página de Cloudflare es documentación vigente consultada19oct, no un snapshot de ese tag; el comportamiento exacto de la combinación fijada se ensayó en PR509. Antes de implementar, volver a comprobar lockfile y fuente de cada paquete; no atribuir el wrapper de Agents al SDK MCP.
 [Plan de implementación](../plans/2026-10-19-afw-preparation-consent-mount.md).
 
 Decisión: reutilizar el mismo núcleo y los grants existentes con perfil explícito; no crear un servicio de autorización paralelo ni alterar ahora la lectura aceptada. Costo: requiere implementación, prueba de store/esquema y aceptación de montaje posterior. Investigación de Chavo y roadmap comercial siguen revisables; no constituyen consentimiento de un cliente.
