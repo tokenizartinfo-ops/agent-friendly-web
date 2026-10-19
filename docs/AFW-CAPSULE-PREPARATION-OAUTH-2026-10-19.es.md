@@ -12,7 +12,7 @@ Los [tipos versionados del proveedor](https://github.com/cloudflare/workers-oaut
 
 El host original verifica vigencia actual, ventana/proyecto/cliente/recurso, scope específico y grant/owner/dominio actuales en primaria. Mantiene su plazo original<=5s y el mínimo de tiempo restante de host/token/operación. La traducción no concede afw:capsule:prepare a una lectura.
 
-Una proyección inicial y las referencias del proveedor se comparan antes/después de cada lectura de reloj y del resolver usado por el host. Si la autoridad cambia durante un await, la instancia queda cerrada por el latch del host; restaurarla no la revive. Se requiere otra petición verificada para crear un host nuevo, conservando las reglas de conciliación del historial. Una copia congelada por sí sola no ocultará cambios de la fuente del proveedor.
+Una proyección inicial y las referencias del proveedor se comparan antes/después de cada lectura de reloj y del resolver usado por el host. Si la autoridad cambia durante un await, la instancia queda cerrada tanto por el guard propio del puente como por el latch del host; restaurarla no la revive. Un fallo observado al resolver autoridad también se retiene aunque ocurra fuera de la lectura de reloj. Se requiere otra petición verificada para crear un host nuevo, conservando las reglas de conciliación del historial. Una copia congelada por sí sola no ocultará cambios de la fuente del proveedor.
 
 Después de una reserva incierta se conserva unknown_ack sin regenerar. reconcile sigue sin escribir. No hay ejecución en hosting, aprobación, publicación ni gasto por preparar un borrador.
 
