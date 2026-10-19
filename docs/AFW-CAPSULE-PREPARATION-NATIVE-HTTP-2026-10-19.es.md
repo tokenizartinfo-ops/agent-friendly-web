@@ -3,7 +3,7 @@
 Estado de esta candidata: verificación en Actions pendiente; los recibos exactos de la PR/issue497, no este encabezado, determinan la aceptación.
 
 ## Qué se verifica
-Un Worker de prueba combina la fronteraHTTP508, lease request-local, OAuthResourceServer1.2.1, puente506/host505, registrador507 y dominio504 sobre D1 real de Miniflare/workerd. El servidor usa agents0.22.0/createMcpHandler y @modelcontextprotocol/server2.0.0. Clientes Client/StreamableHTTPClientTransport2.0.0 negocian legacy y pin2026-07-28.
+Un Worker de prueba combina la fronteraHTTP508, lease request-local, OAuthResourceServer1.2.1, puente506/host505, registrador507 y dominio504 sobre D1 real de Miniflare/workerd. El servidor usa agents0.22.0/createMcpHandler y @modelcontextprotocol/server2.0.0. El fallback legacy automático responde SSE por defecto: la fixture clasifica con isLegacyRequest oficial y usa WebStandardStreamableHTTPServerTransport(enableJsonResponse:true, sin sessionId) para ese camino; modern usa createMcpHandler(legacy:reject,responseMode:json). Misma factory, mismo host ya autorizado y lease para ambas eras. No se añade parser SSE, sesión o callback. Tras acotar/consumir la respuesta y cerrar lease, ctx.waitUntil cierra los objetos SDK propios. Clientes Client/StreamableHTTPClientTransport2.0.0 negocian legacy y pin2026-07-28.
 El fetch del cliente está adaptado únicamente a dispatchFetch(example.invalid) del runtime CI. Es HTTP real de los SDK sobre Request/Response/workerd, sin socket externo o hosting público. No se usa InMemoryTransport ni un falso resultado de herramienta. La DB/SQL/transactions/trigger de esta ocurrencia son los de D1 del runner.
 
 ## Qué sigue siendo sintético

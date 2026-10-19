@@ -27,3 +27,7 @@ Task2 in_progress: fijarRED acotado y ejecutar diagnóstico nativo con Host de f
 
 Task2 RED47362436/CI39341255896/job118363091656:2264PASS/12FAIL/1SKIP: regresión401vacío503vs401 confirmada; Host de fixture ya normalizado, legacy ahora falla503 (pendiente diagnóstico Content-Type del handler), modern conectó pero no encontró preparación por cascada. No afirmar GREEN.
 Fix acotado401: conservar solo401vacío con challengeBearer; vacío200/401sinchallenge/Basic siguenunknown. Instrumentar SOLO fixture status/type/body del handler para distinguir legacyJSON/SSE, sin tokens/cuerpos/headersAuth.
+
+Diagnóstico368dc1cc/CI39342281503/job118366456287 confirmó legacy inner200/text-event-stream. El rechazo de SSE por frontera es correcto; responseModejson de createMcpHandler no cambia el fallback stateless2025 (documentación SDK oficial).
+Ruling: fixturelegacy usará clasificadorisLegacyRequest oficial + WebStandardStreamableHTTPServerTransport(enableJsonResponse:true) y mismafactory/host; modern legacyreject. Sin parsearSSE ni ensancharfrontera/permisos. Costo: futuro montaje deberá conservar esta composición explícita, no asumirfallbackJSON.
+La primera corrección401 tenía escape regexdoble; unitRED permaneció rojo y se corrige literal antes de reclamarGREEN. Esto no es un permiso o un resultado aceptado.
