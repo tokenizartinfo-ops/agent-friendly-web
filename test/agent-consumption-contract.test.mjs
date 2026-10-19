@@ -9,6 +9,7 @@ async function loadIfPresent(path) {
 const C = await loadIfPresent('../lib/agent-consumption-catalog.mjs');
 const Q = await loadIfPresent('../lib/agent-consumption-quote.mjs');
 const P = await loadIfPresent('../lib/agent-consumption-continuity.mjs');
+const I = await loadIfPresent('../lib/agent-consumption-input.mjs');
 const NOW = Date.parse('2026-10-19T13:00:00.000Z');
 const time = offset => new Date(NOW + offset).toISOString();
 const closed = result => {
@@ -201,4 +202,21 @@ test('agent contracts reject unknown clocks and do not read a clock or call fetc
     assert.equal(quote()?.status, 'quoted_preview'); assert.equal(next()?.status, 'ok');
     assert.equal(clock.mock.callCount(), 0); assert.equal(fetch.mock.callCount(), 0);
   } finally { t.mock.restoreAll(); }
+});
+
+test('agent validators reject oversized lists before enumerating element descriptors', () => {
+  let enumerations = 0;
+  const oversized = new Proxy(Array(65).fill('fixture'), {
+    ownKeys(target) { enumerations++; return Reflect.ownKeys(target); },
+  });
+  assert.equal(I.readList?.(oversized, 64), null);
+  assert.equal(enumerations, 0);
+});
+test('agent validators reject oversized records before allocating value descriptors', () => {
+  let descriptors = 0;
+  const oversized = new Proxy(Object.fromEntries(Array.from({ length: 65 }, (_, index) => ['field' + index, index])), {
+    getOwnPropertyDescriptor(target, key) { descriptors++; return Reflect.getOwnPropertyDescriptor(target, key); },
+  });
+  assert.equal(I.readRecord?.(oversized, ['allowed']), null);
+  assert.equal(descriptors, 0);
 });
