@@ -157,5 +157,28 @@ class PublicCloudDeliveryTests(unittest.TestCase):
             with self.subTest(url=url):
                 self.assertEqual(self.m.allowed_download_url(url), allowed)
 
+    def test_receipt_identifies_verified_checkout_separately_from_event(self):
+        self.assertTrue(callable(getattr(self.m, "qualifier_context", None)), "Verified checkout receipt is missing")
+        env = {"AFW_QUALIFIER_REVISION": "a" * 40, "GITHUB_SHA": "b" * 40,
+               "GITHUB_RUN_ID": "39492480761", "GITHUB_RUN_ATTEMPT": "1"}
+        result = self.m.qualifier_context(env, "a" * 40)
+        self.assertEqual(result, {"qualifierRevision": "a" * 40, "eventRevision": "b" * 40,
+                                 "qualifierRun": "39492480761", "qualifierRunAttempt": "1"})
+
+    def test_receipt_rejects_wrong_checkout_missing_or_invalid_run_identity(self):
+        self.assertTrue(callable(getattr(self.m, "qualifier_context", None)), "Verified checkout receipt is missing")
+        base = {"AFW_QUALIFIER_REVISION": "a" * 40, "GITHUB_SHA": "b" * 40,
+                "GITHUB_RUN_ID": "20", "GITHUB_RUN_ATTEMPT": "1"}
+        for change in ["checkout", "missing", "run", "attempt", "event"]:
+            env = dict(base)
+            checkout = "a" * 40
+            if change == "checkout": checkout = "c" * 40
+            elif change == "missing": del env["AFW_QUALIFIER_REVISION"]
+            elif change == "run": env["GITHUB_RUN_ID"] = "invalid"
+            elif change == "attempt": env["GITHUB_RUN_ATTEMPT"] = "0"
+            elif change == "event": env["GITHUB_SHA"] = "bad"
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                self.m.qualifier_context(env, checkout)
+
 if __name__ == "__main__":
     unittest.main()
