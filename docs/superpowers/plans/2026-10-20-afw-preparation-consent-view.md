@@ -26,3 +26,6 @@ Rollback reviewed source revert; no current data/config/custody affected. Budget
 
 ## Observed RED
 Head d8170e6b7db64dbc47b707172783ae2598e117cb / CI39350046561/job118391837687:2312PASS/12FAIL/1existingSKIP. Only the 12 new renderer/summary behavior cases failed for missing functions; existing suite passed. Implement narrow view now; GREEN/review/main evidence still pending in carrying receipt.
+
+## Browser workflow startup diagnosis
+9955a99f / workflow39350559696 produced zero jobs: primary annotation lines31/32 rejected runner.temp at job-level env. GitHub Contexts reference confirms runner is available at step env, not jobs.env. Move ONLY the two tool/browser temp paths to their consuming steps; no UI/policy/security change and no provider attribution. Earlier CI/QA outcome retained, fresh exact-head checks mandatory.

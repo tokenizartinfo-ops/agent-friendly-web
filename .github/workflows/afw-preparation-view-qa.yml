@@ -28,8 +28,6 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
-      AFW_BROWSER_TOOLS: ${{ runner.temp }}/afw-consent-browser
-      PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/afw-consent-browsers
       AFW_QA_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@v4
@@ -40,12 +38,18 @@ jobs:
         with:
           node-version: 22
       - name: Install pinned browser tools only in runner temp
+        env:
+          AFW_BROWSER_TOOLS: ${{ runner.temp }}/afw-consent-browser
+          PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/afw-consent-browsers
         shell: bash
         run: |
           command -v npx >/dev/null
           npm install --prefix "$AFW_BROWSER_TOOLS" --ignore-scripts --no-audit --no-fund playwright@1.64.1
           node "$AFW_BROWSER_TOOLS/node_modules/playwright/cli.js" install --with-deps chromium
       - name: Check synthetic consent layout, keyboard and form decisions
+        env:
+          AFW_BROWSER_TOOLS: ${{ runner.temp }}/afw-consent-browser
+          PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/afw-consent-browsers
         run: node scripts/check-preparation-consent-view-browser.mjs
       - name: Preserve synthetic screenshots and sanitized receipt
         if: always()
