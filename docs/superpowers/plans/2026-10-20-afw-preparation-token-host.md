@@ -69,3 +69,5 @@ Task1 source contract complete; Task2 implementation candidate after ONE fix pas
 
 ## Full-suite integration finding / preservation repair
 4cdd9ea0/CI39431660264/job118657968694:2409PASS1FAIL1SKIP. All token/native minimum-TTL cases pass; full suite catches AGENTS.md hosting contract missing. Root: resumptive source fetch explicitly requested lines1-200 (79514chars), then candidate prefix was incorrectly prepended to that RANGE instead of the full immutable original blob. No intentional hosting policy change. Restore the exact full original e3b8bf4e AGENTS blob a41f9d016d0752d5e346ebf38b6d664353416b50 (141976UTF8bytes/421lines) beneath the candidate prefix, using full1-1000 read; do not weaken tests or truncate history. Source token fix unchanged. This is integration restoration within the same fix pass; full GREEN still required. No production change or additional reviewer.
+
+Full read/compare additionally revealed fetch_file range output omits the final LF:141975vs original141976UTF8bytes. Restore that one original trailing LF too; immutable historical suffix is now byte-size exact, not merely text-equivalent. No test/source behavior change.
