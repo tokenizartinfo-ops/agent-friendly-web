@@ -1,0 +1,26 @@
+name: AFW delivery recipe guidance checks
+on:
+  pull_request:
+    paths:
+      - 'lib/delivery-advisor.mjs'
+      - 'lib/delivery-instructions.mjs'
+      - 'lib/delivery-recipes.mjs'
+      - 'test/delivery-recipe-guidance.test.mjs'
+      - '.github/workflows/afw-delivery-recipe-guidance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test test/delivery-recipe-guidance.test.mjs test/delivery-instructions.test.mjs test/delivery-advisor.test.mjs
