@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "sourceRevision": "61e03107b0532de5591255180fc3916dbbaea0c8",
+  "sourceTree": "92fa02134ce78faf887ffcd495eb3c94cefec29f",
+  "publicMergeRevision": "d2c05337d67759a0fde8fa75434d34316a338034",
+  "artifact": {
+    "id": 12295001318,
+    "name": "afw-guide-qualified-dist-61e03107b0532de5591255180fc3916dbbaea0c8",
+    "runId": 39488908864,
+    "runAttempt": 1,
+    "workflow": ".github/workflows/afw-public-guide-start-qa.yml",
+    "bytes": 2760196,
+    "sha256": "7b87b58463dc91707ceb4052b3878048b7613c05a641e1b9238796279318ab70",
+    "expiresAt": "2026-10-27T20:06:08Z"
+  },
+  "inventoryPath": "docs/evidence/2026-10-20-guide-delivery/qualified-inventory.json",
+  "target": {
+    "accountId": "85d0d5dadac3341a564f22ce885e9eec",
+    "worker": "agent-friendly-web-web-production",
+    "origin": "https://agentfriendlyweb.dev",
+    "entrypoint": "server/index.js",
+    "assets": "client"
+  },
+  "baseline": {
+    "checkedAt": "2026-10-20T20:26:44.517Z",
+    "deploymentId": "88e25a5c-6b06-4074-80fd-59355a03de0d",
+    "versionId": "d19c3d49-205b-46d0-ae8c-7c9e6e52bbea",
+    "versionNumber": 76,
+    "bindingsSha256": "b59dc03f3b7b83a54ac71444bf4ac5cbbf252e508c760850455a7911f9bf9750",
+    "settingsSha256": "aa39596bf29a129c7cc803eb9fc8e2a7df6d4de995f4bd8de69c207456f09166",
+    "runtimeSha256": "d022a50e3aa634cb5b81066a014c552b59c82ca605ef7473d968cf8da07af739",
+    "bindingsCount": 10,
+    "hasSecretText": false,
+    "flagsPreserved": true,
+    "dbPreserved": true,
+    "ratePreserved": true,
+    "mutations": 0,
+    "previousRollbackVersion": "d8982d37-8966-4c6a-86fa-d265455d4df9",
+    "scope": "dated GET only; must be re-read before upload; fingerprints are not deployable configuration"
+  },
+  "limits": {
+    "maxZipBytes": 16777216,
+    "maxFiles": 1024,
+    "maxUncompressedBytes": 67108864,
+    "maxFileBytes": 16777216
+  },
+  "nativeQualification": {
+    "runId": 39488908864,
+    "jobId": 118856482135,
+    "cases": 6,
+    "states": 18,
+    "immutable": true,
+    "previewArtifactId": 12295056186
+  },
+  "allowedAction": "read_validate_and_prepare_only",
+  "operationalReadiness": false
+}
