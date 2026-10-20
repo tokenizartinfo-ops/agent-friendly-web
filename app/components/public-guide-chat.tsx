@@ -32,7 +32,12 @@ export function PublicGuideChat({ locale = 'es' }: { locale?: Locale } = {}) {
   const nextMessageIdRef = useRef(2);
 
   useEffect(() => {
-    if (messagesRef.current) messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    const container = messagesRef.current;
+    const latest = container?.lastElementChild;
+    if (!container || !latest) return;
+    // Keep the start of the new reply readable, even when its sources and
+    // quick replies are taller than the conversation viewport.
+    container.scrollTop += latest.getBoundingClientRect().top - container.getBoundingClientRect().top - 16;
   }, [messages]);
 
   const send = (value = draft) => {
