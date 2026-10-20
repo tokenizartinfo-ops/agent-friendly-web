@@ -285,6 +285,7 @@ This repository implements Gabriel Mucchiut's public Agent Friendly Web initiati
 - Treat WebMCP as a W3C Community Group draft until its status changes.
 - Only claim that an endpoint, MCP server, CLI, skill, payment rail, or integration exists after verifying its deployed surface.
 - Separate observed evidence, owner declarations, recommendations, and future roadmap.
+- Brand philosophy: fewer human clicks do not remove the value of a maintained first-party website. Explain declared purpose, audience, scope and verifiable value for humans and agents; declarations are not checks and never guarantee selection/citation. Apply docs/AFW-INTEGRAL-PHILOSOPHY-2026-10-07.es.md (owner addition20oct2026). Preserve comic identity and separate draft/source claims from live capability.
 
 ## Security
 

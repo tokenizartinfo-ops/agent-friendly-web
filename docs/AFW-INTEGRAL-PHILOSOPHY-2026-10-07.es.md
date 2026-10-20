@@ -23,3 +23,25 @@ Comunicar nuestro compromiso sin afirmar prácticas de competidores no comprobad
 - Validación: contrato del prompt y pruebas de guía/metodología. Integrar fuente no acredita publicación ni adopción en Codex cloud.
 
 Para demostrar el diferencial en cada caso: conservar línea de base, declaración, cambio, comprobación fechada y utilidad esperada. Medir la utilidad real cuando exista evidencia; no confundirla con una mejora del puntaje.
+
+## Fuente propia en una web mediada por agentes
+
+Directriz complementaria del owner, 20 de octubre de 2026. Amplía la filosofía y el branding de AFW; no declara una tendencia cuantificada ni una capacidad nueva desplegada.
+
+**Menos clics humanos no significa menos valor para una web propia.** Que una respuesta llegue mediante un asistente cambia la interfaz de acceso; no elimina el valor de disponer de una fuente de primera parte que su responsable pueda mantener, corregir y compartir.
+
+Una web puede servir a personas, profesionales, marcas y organizaciones para declarar quiénes son, qué aportan, a quién se dirigen, qué hacen y qué no hacen. Puede reunir propósito, fuentes, documentación compartible y herramientas que realmente funcionan. AFW acompaña a expresar ese valor con claridad y a hacerlo descubrible, comprensible y comprobable por capas.
+
+Declarar no convierte una afirmación en verdad. La fuente propia debe distinguir responsable, fecha, alcance, evidencia, incertidumbre y capacidades efectivamente disponibles. Su coherencia con la experiencia y la operación real importa más que multiplicar archivos o añadir la etiqueta «AI first».
+
+El diferencial buscado es ayudar a que personas y agentes puedan encontrar, interpretar, contrastar y evaluar lo que alguien aporta, con menos ambigüedad y coordinación innecesaria. La elegibilidad es un objetivo de claridad y adecuación a una necesidad; no una garantía de selección, cita, tráfico, ranking o venta.
+
+## Aplicación editorial y de marca
+
+- Mensaje central: «Aunque cambie quién hace clic, tu web puede seguir siendo tu fuente. AFW te ayuda a comunicar con claridad lo que aportás, para personas y agentes.»
+- Explicar el propósito y el valor del responsable antes de documentos, siglas, puntuaciones o herramientas. No todos necesitan una integración avanzada.
+- Mantener el tono cercano, guiado y amable y la identidad cómic existente: robots que se comunican, recorrido gradual y explicaciones comprensibles. No convertir la autonomía en una promesa de capacidades no disponibles.
+- Aplicar esta dirección a portada, versiones para agentes, presentaciones, cápsulas y futuros correos. Un nuevo texto de correo requiere su versión/hash y aprobación correspondientes; esta directriz no modifica ni envía paquetes anteriores.
+- No sostener que todos los agentes visitan siempre la web original, que la web es su única fuente o que crear una página basta para ser recomendado. No prometer menor costo de construcción o consumo de tokens sin una comparación vigente y medible.
+
+AFW no vende clics ni una puntuación como sustitutos del valor. Su compromiso es acompañar una presencia propia fiel a la realidad, útil para el público adecuado y capaz de evolucionar con evidencia y permisos proporcionales.
