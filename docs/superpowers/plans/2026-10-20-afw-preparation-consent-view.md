@@ -29,3 +29,6 @@ Head d8170e6b7db64dbc47b707172783ae2598e117cb / CI39350046561/job118391837687:23
 
 ## Browser workflow startup diagnosis
 9955a99f / workflow39350559696 produced zero jobs: primary annotation lines31/32 rejected runner.temp at job-level env. GitHub Contexts reference confirms runner is available at step env, not jobs.env. Move ONLY the two tool/browser temp paths to their consuming steps; no UI/policy/security change and no provider attribution. Earlier CI/QA outcome retained, fresh exact-head checks mandatory.
+
+## Single review and one fix pass
+Whole branch0643e98b:0Critical/1Important/1Minor. Important reproduced exact CI39350713754/job118393979305:2323PASS/1FAIL/1existingSKIP (same earlier9955/39350564908). Test24 wrongly required > immediately after action, rejecting intended aria-labelledby in renderer135. Fix assertion only: exactly one form; correct method/action/accessible heading binding independent of attribute order. No UI/authority change. Minor DEFER: second browser context only monitors pageerror, not console.error for later successful cases; do NOT claim universal console coverage. No re-review. Exact final CI+QA/main still required; carrying receipts close ledger.

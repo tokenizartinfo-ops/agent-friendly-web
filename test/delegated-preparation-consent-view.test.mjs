@@ -21,7 +21,11 @@ function summary(overrides={}){
 test('explicit read/drafts/cancel controls share one handle and never preselect or submit a scope',()=>{
  const view=render();
  assert.equal(view.code,'view_ready');assert.equal(view.status,200);
- assert.match(view.html,/<html lang="es">/);assert.match(view.html,/<form method="post" action="\/authorize">/);
+ assert.match(view.html,/<html lang="es">/);
+ const forms=[...view.html.matchAll(/<form\b[^>]*>/g)];assert.equal(forms.length,1);
+ assert.match(forms[0][0],/\bmethod="post"/);assert.match(forms[0][0],/\baction="\/authorize"/);
+ assert.match(forms[0][0],/\baria-labelledby="permission-choice"/);
+ assert.match(view.html,/<h2 id="permission-choice">[^<]+<\/h2>/);
  assert.deepEqual([...view.html.matchAll(/<button[^>]*name="decision" value="([^"]+)"/g)].map(x=>x[1]),['read','drafts','cancel']);
  assert.equal((view.html.match(/name="handle"/g)??[]).length,1);
  assert.doesNotMatch(view.html,/checked|selected|autofocus|name="scope"|evidence:read/);
