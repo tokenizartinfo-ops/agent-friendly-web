@@ -55,3 +55,22 @@ No se elige proveedor de pago, se contrata infraestructura, se crean claves, se 
 
 Plantilla lista para un futuro ensayo, sin afirmar resultado. Primer registro propio podrá usar diagnóstico/lectura ya habilitados, con límite y fuentes explícitos; no repetir OAuthG2, Container o PC-off como un benchmark.
 Los ensayos que incluyan escritura, instalación, cobro o datos de terceros requieren sus propios gates. Trabajo de mercado de Chavo puede ayudar a elegir segmentos/casos, con hipótesis separadas de observaciones.
+
+## Herramienta de registro20oct2026
+`examples/agent-consumer/trial-ledger.mjs` agrega una capa de validación/aritmética al método anterior. No consulta proveedores ni captura consumo automáticamente: modelo/versión, duración del recorrido, tiempo humano, condiciones y originales se conservan en el registro protegido de cada ensayo. El resumen usa referencias opacas a esas condiciones, aceptación y observaciones; no certifica su veracidad.
+
+Contrato de ejemplo de fuente `afw.efficiency-observations.v1`: trialRef, currency (tres letras como sintaxis, sin validar moneda/oferta), mode synthetic/declared_observation, cases<=200 y observations<=1000. No es un nuevo endpoint o esquema de facturación.
+
+Cada case es un encargo realmente iniciado, con caseRef estable, variante direct/afw, conditionsRef, outcome accepted/failed/pending y referencia de aceptación si fue aceptado. No cargar prospectos o planes como intentos. El mismo encargo/reintentos/replay conserva caseRef; una referencia de aceptación no sustituye la revisión humana. Condiciones distintas entre variantes del mismo caso bloquean el resumen, pero referencias iguales no prueban por sí mismas igualdad real de hosting, acceso, modelo u objetivo.
+
+Cada observación tiene ID estable, caso/variante, fechaUTC, categoría, attemptRef cuando existe una petición, costo en microunidades enteras, base y referencia; uso informado y su referencia se separan del costo. Categorías requeridas: consumidor, AFW, persistencia, verificación, intervención humana y mantenimiento de recetas. Falta de una categoría o costo desconocido produce total=null; se conserva subtotal conocido. La no aplicación requiere0 explícito, y no puede mezclarse con otra fila de gasto de esa categoría/caso.
+
+Costo observado o asignación aprobada requieren referencia. Una suscripción incluida no es costo cero: registrar método de asignación o desconocido. No imputar toda la cuenta compartida a AFW. Una unidad de moneda con tres letras no es tarifa aprobada. Valores negativos, fracciones, overflow, IDs contradictorios o campos de cabeceras/textos privados quedan fuera del resumen.
+
+Reentrega de una misma medición idéntica se deduplica por observationRef; el mismo ID cambiado bloquea. Una petición nueva o recuperación con consumo real conserva su propio attemptRef y gasto, aunque la operación idempotente devuelva la misma cápsula. recordedAttempts representa solo los intentos registrados, no una auditoría completa de llamadas del proveedor. Un timeout puede haber consumido recursos.
+
+Uso: inputTokens/outputTokens/cachedInputTokens/requestBytes/responseBytes, números enteros o null. Solo una observación de uso por intento; una asignación de costos no vuelve a sumar esos tokens. cachedInput es subconjunto de input, no se agrega otra vez; los bytes no estiman tokens. Un campo no informado permanece null aun si se conocen otros. El resumen retiene subtotales conocidos y faltantes por campo.
+
+Por variante: casos intentados/aceptados únicos, tasa exacta accepted/attempted, costo total o desconocido y costo por aceptado como fracción exacta numeratorMicros/denominator. Incluye fallos/reintentos en el numerador; sin aceptación o costo completo la fracción es null. No se calcula ahorro ni causalidad. declared_observation sigue como source_observations_unverified; isEfficiencyEvidencefalse incluso si la aritmética es válida.
+
+`node examples/agent-consumer/trial-demo.mjs` muestra cinco encargos ficticios, dos aceptados y gasto total50unidadesTST:25 por aceptado y2/5 de aceptación. Tokens no informados=null. No hay consumo de modelo, cotización o medición real. Ejecutar preferentemente en Actions/entorno cloud autorizado; no requiere nueva dependencia, permiso o servicio.
