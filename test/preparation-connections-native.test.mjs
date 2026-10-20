@@ -105,6 +105,18 @@ async function nativeConnections(t,history=false){
    assert.equal((await saved(a.grant.id)).revoked_at,'');assert.equal((await stats()).revocations,n.revocations);
    assert.ok(!(await review(await identity('owner-b'))).html.includes(a.grant.id));
   });
+  for(const change of ['get-withdraw','get-drift'])await t.test(change+' during actual nonce INSERT cannot hand off a stale target form',async()=>{
+   const a=await connection(),before=await stats();await mode(change,a.grant.id);
+   try{
+    const v=await review();assert.equal(v.response.status,200);
+    assert.ok(!v.html.includes('name="grant" value="'+a.grant.id+'"'),'GET must not expose the pre-wait target form');
+    if(change==='get-withdraw'){
+     assert.ok((await saved(a.grant.id)).revoked_at);
+     assert.equal((await a.client.callTool({name:'read_project_summary',arguments:{}})).structuredContent.code,'delegated_access_denied');
+    }else assert.equal((await saved(a.grant.id)).client_id,'foreign-client');
+    assert.equal((await stats()).revocations,before.revocations,'fixture mutation is not a host withdrawal');
+   }finally{await mode('');if(change==='get-drift')await db.prepare('UPDATE delegated_access_grants SET client_id=? WHERE id=?').bind(boot.clientId,a.grant.id).run();}
+  });
   await t.test('unknown nonce consume ACK never retries withdrawal or reports success',async()=>{
    const a=await connection(),view=await review(),n=await stats();await mode('unknown-consume');
    try{assert.equal((await revoke(view,a.grant.id)).status,503);}finally{await mode('');}

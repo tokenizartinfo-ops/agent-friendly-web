@@ -24,6 +24,11 @@ function database(raw){
   },async run(){
    const value=await stmt.run();
    if(sql.includes('INSERT INTO delegated_consent_sessions')){
+    if((mode==='get-withdraw'||mode==='get-drift')&&!tripped&&target){
+     tripped=true;
+     if(mode==='get-withdraw')await raw.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?').bind(new Date().toISOString(),target).run();
+     else await raw.prepare("UPDATE delegated_access_grants SET client_id='foreign-client' WHERE id=?").bind(target).run();
+    }
     stats.nonceCreates++;if(mode==='unknown-create'&&!tripped){tripped=true;throw Error('CI nonce creation ACK lost');}
    }return value;
   }});
