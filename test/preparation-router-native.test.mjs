@@ -113,7 +113,7 @@ test('integrated preparation router preserves consent token preparation and inde
    assert.equal((await dispatch('/__ci/probe/connections',{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);
    assert.equal((await dispatch('/__ci/probe-root/connections',{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);
    assert.equal((await dispatch('/__ci/probe/oauth/token',tokenInit(a))).status,503);
-   assert.equal((await dispatch('/__ci/probe/mcp',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+readToken.access_token},
+   assert.equal((await dispatch('/__ci/probe/mcp',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json, text/event-stream',Authorization:'Bearer '+readToken.access_token},
     body:'{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'})).status,408);
    assert.deepEqual(await counts(),before);assert.deepEqual(await stats(),calls);
    assert.equal((await saved(a)).exchanged_at,'');assert.equal((await redeem(a)).scope,READ);
@@ -124,11 +124,11 @@ test('integrated preparation router preserves consent token preparation and inde
     ['/__ci/borrow'+q.url,{headers:{'Cf-Access-Jwt-Assertion':assertion}}],
     ['/__ci/borrow/connections',{headers:{'Cf-Access-Jwt-Assertion':assertion}}],
     ['/__ci/borrow/oauth/token',tokenInit(a)],
-    ['/__ci/borrow/mcp',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+readToken.access_token},
+    ['/__ci/borrow/mcp',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json, text/event-stream',Authorization:'Bearer '+readToken.access_token},
      body:'{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'}],
    ];
    for(const [path,init]of requests){
-    const r=await dispatch(path,init);assert.equal(r.status,200);assert.equal(r.headers.get('X-CI-Parent-Open'),'true');await r.arrayBuffer();
+    const r=await dispatch(path,init);assert.equal(r.status,200,new URL(path,issuer).pathname);assert.equal(r.headers.get('X-CI-Parent-Open'),'true');await r.arrayBuffer();
    }
   });
   await t.test('drafts prepare once reconcile same result and human withdrawal denies connected MCP',async()=>{
@@ -166,14 +166,20 @@ test('integrated preparation router preserves consent token preparation and inde
    assert.equal((await withdraw(v,gid,'/__ci/history')).status,303);
    assert.equal((await dispatch('/__ci/history/oauth/token',tokenInit(read))).status,503);
   });
+  let pendingExchange;
   await t.test('initial issuance closure cannot dynamically activate and later closure keeps human withdrawal',async()=>{
-   const q=await query();assert.equal((await dispatch('/__ci/initial-closed'+q.url,{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);
+   pendingExchange=await approve();const q=await query();assert.equal((await dispatch('/__ci/initial-closed'+q.url,{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);
    await review('/__ci/initial-closed');
    await dispatch('/__ci/close-issuance',{method:'POST'});
    assert.equal((await dispatch(q.url,{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);
    const v=await review();assert.equal((await withdraw(v,(await saved(read)).id)).status,303);
    await dispatch('/__ci/restore-issuance',{method:'POST'});
    assert.equal((await dispatch(q.url,{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);
+  });
+  await t.test('observed issuance closure fences the token port after flags restore without consuming its grant',async()=>{
+   assert.equal((await saved(pendingExchange)).exchanged_at,'');
+   assert.equal((await dispatch('/oauth/token',tokenInit(pendingExchange))).status,503,'a different agent port must not reopen after observed closure');
+   assert.equal((await saved(pendingExchange)).exchanged_at,'');
   });
   await t.test('root configuration closure during genuine identity await is terminal across both purposes',async()=>{
    const before=await counts(),prior=await stats();await dispatch('/__ci/access-hold',{method:'POST'});
