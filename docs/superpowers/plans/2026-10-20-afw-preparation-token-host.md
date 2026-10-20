@@ -39,3 +39,7 @@ Create lib/delegated-preparation-token-host.mjs, docs/AFW-PREPARATION-TOKEN-HOST
 
 ## Stop conditions
 No remote source mounting, client creation/registration, migration, permissions, tokens, OAuth/login/OTP, Container/event/guard/PCoff/Max or support-monitor restart. Cloudflare follow-up authorized/sent separately in existing case02382110, receipt issue497#6290701263; do not resend automatically.
+
+## Observed initial RED
+4fcb1ce344b202003b6d4fedd3209fdc9e361d6c / CI39422697083/job118627395862:2389PASS1FAIL1existingSKIP. The explicit missing finite token host assertion fails before bundle; all existing suites pass. This is feature-absence RED, not individual guard mutation proof.
+Task1 complete; Task2 implementation now candidate pending complete native GREEN/review/main. Exact SDK v1.2.1 primary source checked: TokenExchangeCallbackOptions contains subjectClientId/grantId and callback invalid_grant auto-revocation; validateAccessToken(token,resource,env) returns integer Unix expiresAt. No package version change.

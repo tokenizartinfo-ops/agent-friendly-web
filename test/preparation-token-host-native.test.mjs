@@ -108,6 +108,11 @@ test('finite token host enforces original consent scope deadline and native with
    const g=await grant(a);await db.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?').bind(new Date().toISOString(),g.id).run();
    const denied=await c.callTool({name:'read_project_summary',arguments:{}});assert.equal(denied.structuredContent.code,'delegated_access_denied');
   });
+  await t.test('a drafts consent can be explicitly downscoped to read at token exchange',async()=>{
+   const {a,accepted}=await complete('drafts'),r=await redeem(a,accepted,{scope:READ});assert.equal(r.status,200);
+   const token=await r.json();assert.equal(token.scope,READ);const c=await connect(token);
+   assert.ok(!(await c.listTools()).tools.some(x=>x.name==='prepare_capsule_draft'));
+  });
   await t.test('refresh unknown fields duplicate fields and actual body cap never reach SDK or consumption',async()=>{
    const n=await counts(),s=await stats();
    for(const body of [new URLSearchParams({grant_type:'refresh_token',refresh_token:'not-a-token'}),
