@@ -24,3 +24,7 @@ Una revisión final fresca de rama completa antes de main. Publicación necesita
 ## RED observado antes de cambiar producto
 Commit18cde2e8 solo tests/QA: browser39485129937/job118843454855 falló “visible question anchor is present: es-1440”, actual0/expected1, después de compilar y abrir HTML real. Limpieza finally se ejecutó antes de preservar evidencia.
 CI39485129968/job118843455126:2470PASS/2FAIL/1SKIP. Falla esperada de pregunta natural “No sé cómo comenzar con mi sitio”:clarification!=getting_started. Además falló un test OAuthHTTP ajeno al diff con503; no atribuir a esta corrección ni declarar todoREDlimpio. El siguiente CI completo debe resolver/comprobar ese resultado sin relajar su test.
+
+## Diagnóstico del salto al campo
+La primera prueba tras la corrección mantuvo foco real, pero el casoEN390 situó el textarea en y=-0.078125px, alto66.59375px, scrollY1374. Diagnóstico39486193302/job118847106982 conserva geometría y captura; no se trató como pérdida de foco ni se relajó la aserción. Se añade scroll-margin-top16px al destino para que el borde y su indicador de foco queden dentro del viewport con margen. Sin JS de navegación ni scroll manual del arnés.
+CI39485816241/job118845819378 del primer producto corrected pasó2472/0/1,lint0errores/8advertencias previas/cinco builds, incluido el testOAuthHTTP sin modificación. El503 inicial no se reprodujo allí; causa todavía no acreditada, sin cambiar permisos ni afirmar reparación remota.
