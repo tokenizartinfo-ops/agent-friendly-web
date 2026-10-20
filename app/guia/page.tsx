@@ -18,6 +18,7 @@ export function PublicGuideExperience({ locale = 'es' }: { locale?: Locale } = {
       <section className="public-guide-hero">
         <div>
           <span><MessageCircleMore size={16} /> {copy.eyebrow}</span><h1>{copy.title}</h1><p>{copy.intro}</p>
+          <a className="public-guide-question-link" href="#public-guide-input">{copy.ask}</a>
         </div>
         <div className="public-guide-hero-note">
           <Bot size={28} /><strong>{copy.noteTitle}</strong><p>{copy.note}</p><span><ShieldCheck size={14} /> {copy.noteLimit}</span>

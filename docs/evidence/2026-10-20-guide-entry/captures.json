@@ -1,0 +1,84 @@
+{
+  "kind": "afw_guide_entry_visual_evidence",
+  "productRevision": "e3769457152785cfc1f413363c23beb68f3cc31b",
+  "nativeRun": 39487383811,
+  "nativeJob": 118851220960,
+  "artifact": 12294331600,
+  "archiveSha256": "92c9c3288275a7c6b3d9cc0c63153f625e65f41daf5601e4d62c83bd48bc10dd",
+  "negativeRevision": "e4bd18f38f793cd1099721ecae31e681e83b7b5d",
+  "negativeArtifact": 12294580141,
+  "negativePurpose": "weak geometry-only check passed; visual inspection exposed header occlusion and hidden answer; not accepted UX",
+  "images": [
+    {
+      "file": "contact-1440.jpg",
+      "phase": "after",
+      "sha": "21cb37f611a689bd73756adccaeb76c03be8222b",
+      "path": "docs/evidence/2026-10-20-guide-entry/contact-1440.jpg",
+      "source": "e3769457152785cfc1f413363c23beb68f3cc31b",
+      "name": "contact-1440.jpg",
+      "bytes": 228067,
+      "sha256": "a72002bf6d6b431ee8ed6160ddad10aeb3634508a60ce3c970d6819e46d4f94c"
+    },
+    {
+      "file": "contact-390.jpg",
+      "phase": "after",
+      "sha": "7384f3f2ecf5d84118c4180fce2130f635c8758a",
+      "path": "docs/evidence/2026-10-20-guide-entry/contact-390.jpg",
+      "source": "e3769457152785cfc1f413363c23beb68f3cc31b",
+      "name": "contact-390.jpg",
+      "bytes": 667436,
+      "sha256": "fe5c70f34eacd3a4a69c9e867d34374b0cb8725c6db6418e18c93e44646c2cbf"
+    },
+    {
+      "file": "guide-initial-es-390.jpg",
+      "phase": "after",
+      "sha": "25e541d58610fbc27b8c577307d4610e7930e25d",
+      "path": "docs/evidence/2026-10-20-guide-entry/guide-initial-es-390.jpg",
+      "source": "e3769457152785cfc1f413363c23beb68f3cc31b",
+      "name": "guide-initial-es-390.jpg",
+      "bytes": 56760,
+      "sha256": "b44edbef6b089f807a5892eaff9996d833b5cb4630066a30d60a9ef4229f27e9"
+    },
+    {
+      "file": "guide-composer-es-390.jpg",
+      "phase": "after",
+      "sha": "cae1f179353c08f8e7868c2429abfc0db6067fd9",
+      "path": "docs/evidence/2026-10-20-guide-entry/guide-composer-es-390.jpg",
+      "source": "e3769457152785cfc1f413363c23beb68f3cc31b",
+      "name": "guide-composer-es-390.jpg",
+      "bytes": 47352,
+      "sha256": "68952bacc7105c41d4679400b16ce5f30aa1d0e02aeae419fb8a9c6990f4cdf0"
+    },
+    {
+      "file": "guide-answer-es-390.jpg",
+      "phase": "after",
+      "sha": "e8416a7ead0ca51a3a1fa06dff867a2bda82d5d3",
+      "path": "docs/evidence/2026-10-20-guide-entry/guide-answer-es-390.jpg",
+      "source": "e3769457152785cfc1f413363c23beb68f3cc31b",
+      "name": "guide-answer-es-390.jpg",
+      "bytes": 49048,
+      "sha256": "903dc3a0b27dbe3a9cae42a592bae7c5e93ab61b50db331c3fe14b00885a6938"
+    },
+    {
+      "file": "before-composer-es-390.jpg",
+      "phase": "before",
+      "sha": "d6be046cbdd3fb71364e12aec122eb2c86814a8f",
+      "path": "docs/evidence/2026-10-20-guide-entry/before-composer-es-390.jpg",
+      "source": "e4bd18f38f793cd1099721ecae31e681e83b7b5d",
+      "name": "before-composer-es-390.jpg",
+      "bytes": 33714,
+      "sha256": "7604907a72f205bac675588fd0c8d8e7b7396a9c5b0c56b6d62fb87f1f0d3962"
+    },
+    {
+      "file": "before-answer-es-390.jpg",
+      "phase": "before",
+      "sha": "2b3f0eb13cee25e75b1a8b9e667a217d04c0b9e4",
+      "path": "docs/evidence/2026-10-20-guide-entry/before-answer-es-390.jpg",
+      "source": "e4bd18f38f793cd1099721ecae31e681e83b7b5d",
+      "name": "before-answer-es-390.jpg",
+      "bytes": 34059,
+      "sha256": "8f0865429fe272489c146b6f5156459fb2ce2f00ee5dd665926ea1da88101a81"
+    }
+  ],
+  "operationalReadiness": false
+}
