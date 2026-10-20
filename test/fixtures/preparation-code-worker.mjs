@@ -8,13 +8,16 @@ import {createDelegatedOAuthStore} from '../../lib/delegated-oauth-store.mjs';
 import {createDelegatedProjectRepository} from '../../lib/delegated-project-repository.mjs';
 import {createDelegatedProjectMcpServer} from '../../lib/delegated-project-mcp.mjs';
 import {evaluatePreparationConsentChoice} from '../../lib/delegated-preparation-consent-policy.mjs';
+import {createDelegatedPreparationConsentStore} from '../../lib/delegated-preparation-consent-store.mjs';
+import {createCapsulePreparationRequestLease,readCapsulePreparationRequestLease} from '../../lib/capsule-preparation-request-lease.mjs';
+import {renderPreparationConsentView,renderPreparationConnectionSummary} from '../../lib/delegated-preparation-consent-view.mjs';
 import {checkAgentCapsulePreparationSchema} from '../../lib/agent-capsule-preparation-schema.mjs';
 import {createCapsulePreparationHttpBoundary} from '../../lib/delegated-capsule-preparation-http.mjs';
 import {createDelegatedCapsulePreparationOAuthHost} from '../../lib/delegated-capsule-preparation-oauth.mjs';
 import {registerDelegatedCapsulePreparation} from '../../lib/delegated-capsule-preparation-mcp.mjs';
 
 const issuer='https://example.invalid',resource=issuer+'/mcp',callback=issuer+'/callback';
-const READ='afw:project:read',DRAFTS='afw:capsule:prepare',kind='ci-preparation-protocol-v1';
+const READ='afw:project:read',DRAFTS='afw:capsule:prepare';
 const projectId='project-a';
 let bootstrap,as,clientId,started;
 const hash=async value=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value))),x=>x.toString(16).padStart(2,'0')).join('');
@@ -62,59 +65,116 @@ async function ready(env){
  })();
  return bootstrap;
 }
+const consentProfile=()=>({profileId:'afw.preparation-consent.v1',projectId,clientId,resource,trialStartedAt:started,trialExpiresAt:started+180000});
+const originalPacket=auth=>JSON.stringify({responseType:auth.responseType,clientId:auth.clientId,redirectUri:auth.redirectUri,scope:auth.scope,
+ state:auth.state,codeChallenge:auth.codeChallenge,codeChallengeMethod:auth.codeChallengeMethod,resource:auth.resource,issuer:auth.issuer});
+async function originalRow(env,handleHash,actor){
+ return session(env).prepare("SELECT * FROM delegated_preparation_consents WHERE handle_hash=? AND user_id=? AND profile_id='afw.preparation-consent.v1' AND project_id=? AND client_id=? AND resource=? AND trial_started_at=? AND trial_expires_at=?")
+  .bind(handleHash,actor,projectId,clientId,resource,started,started+180000).first();
+}
+function consentStorage(env,requestLease,fault=''){
+ let failed=false;
+ const createPrimarySession=()=>{
+  const db=session(env);
+  // A synthetic ACK fault follows the actual D1 statement commit, not a fake result.
+  return {prepare(sql){const statement=db.prepare(sql);return {bind(...args){const bound=statement.bind(...args);
+   return {first:()=>bound.first(),all:()=>bound.all(),async run(){
+    const result=await bound.run();
+    if(!failed&&((fault==='reserve'&&sql.includes("SET state='reserved'"))||(fault==='admit'&&sql.includes("SET state='admitted'")))){
+     failed=true;throw Error('CI consent acknowledgment lost');
+    }return result;
+   }};
+  }};}};
+ };
+ return createDelegatedPreparationConsentStore({enabled:true,profile:consentProfile(),createPrimarySession,now:()=>Date.now(),requestLease});
+}
 async function authorize(request,env){
- const actor=request.headers.get('x-ci-actor');
+ const requestLease=createCapsulePreparationRequestLease({signal:request.signal}),control=readCapsulePreparationRequestLease(requestLease);
+ const wait=work=>control.wait(work),actor=request.headers.get('x-ci-actor');
  if(actor!=='owner-a')return bad(403);
- const api=as.getOAuthApi(env);
+ const api=as.getOAuthApi(env),persistence=consentStorage(env,requestLease,request.headers.get('x-ci-consent-ack-loss'));
+ if(!persistence)return bad(503);
  if(request.method==='GET'){
-  const entered=Date.now(),auth=await api.parseAuthRequest(request),ids=new URL(request.url).searchParams.getAll('project');
+  const entered=control.check().started,auth=await wait(()=>api.parseAuthRequest(request)),ids=new URL(request.url).searchParams.getAll('project');
   if(auth.clientId!==clientId||auth.resource!==resource||auth.codeChallengeMethod!=='S256'
    ||ids.length!==1||ids[0]!==projectId||!scopeSet(auth.scope))return bad();
-  if(!await schema(env))return bad(503);
-  if(!await owned(env,actor))return bad(403);
-  const candidate=evaluatePreparationConsentChoice({decision:'read'},policy(auth.scope,entered,entered+600000),{now:Date.now()});
+  if(!await wait(()=>schema(env)))return bad(503);
+  if(!await wait(()=>owned(env,actor)))return bad(403);
+  const source=await wait(()=>session(env).prepare("SELECT revision FROM site_projects WHERE id=? AND user_id=? AND role='owner'").bind(projectId,actor).first());
+  if(!source)return bad(403);
+  const originalEnd=Math.min(entered+600000,started+180000);
+  const candidate=evaluatePreparationConsentChoice({decision:'read'},policy(auth.scope,entered,originalEnd),{now:Date.now()});
   if(candidate.code!=='choice_valid')return bad(403);
-  const transaction=await api.beginConsent(auth);
-  // This CI-only record format defines startedAt as expiresAt-600000.
-  // It is not a production schema/profile persistence decision.
-  await store(env).createConsent({handleHash:await hash(transaction.handle),subject:actor,kind,projectId,clientId,resource,
-   scopes:auth.scope,expiresAt:new Date(entered+600000).toISOString()});
-  return Response.json({handle:transaction.handle,trialExpiresAt:started+180000},{headers:transaction.headers});
+  const transaction=await wait(()=>api.beginConsent(auth));
+  const saved=await persistence.begin({handleHash:await wait(()=>hash(transaction.handle)),requestHash:await wait(()=>hash(originalPacket(auth))),
+   subject:actor,requestedScopes:auth.scope,transactionStartedAt:entered,transactionExpiresAt:originalEnd,expectedRevision:source.revision});
+  if(saved.code!=='consent_pending')return bad(saved.code==='delegated_access_denied'||saved.code==='context_changed'?403:503);
+  if(request.headers.get('Accept')?.includes('text/html')){
+   const view=renderPreparationConsentView({locale:'es',projectName:'AFW CI dossier',clientName:'AFW CI protocol client',siteHost:'example.org',
+    handle:transaction.handle,styleNonce:crypto.randomUUID().replaceAll('-',''),policy:saved.transaction,clock:{now:Date.now()}});
+   const headers=new Headers(transaction.headers);for(const [key,value]of Object.entries(view.headers))headers.set(key,value);
+   return new Response(view.html,{status:view.status,headers});
+  }
+  return Response.json({handle:transaction.handle,trialStartedAt:started,trialExpiresAt:started+180000},{headers:transaction.headers});
  }
  if(request.method!=='POST'||request.headers.get('Origin')!==issuer
   ||request.headers.get('Content-Type')!=='application/x-www-form-urlencoded')return bad(403);
- const f=await request.formData();
+ const f=await wait(()=>request.formData());
  if([...f.keys()].some(key=>!['handle','decision'].includes(key)))return bad();
- const handle=one(f,'handle'),decision=one(f,'decision'),digest=await hash(handle);
- const consent=await store(env).getConsent(digest,actor,kind,new Date().toISOString());
- if(!consent||consent.projectId!==projectId||consent.clientId!==clientId||consent.resource!==resource)return bad(403);
- const end=Date.parse(consent.expiresAt);
- const candidate=evaluatePreparationConsentChoice({decision},policy(consent.scopes,end-600000,end),{now:Date.now()});
- if(candidate.code==='cancelled'){
-  const denied=await api.denyConsent(request,handle);
-  await store(env).consumeConsent(digest,actor,kind,new Date().toISOString());
-  return new Response(null,{status:302,headers:denied.headers});
+ const handle=one(f,'handle'),decision=one(f,'decision'),digest=await wait(()=>hash(handle)),row=await wait(()=>originalRow(env,digest,actor));
+ if(!row)return bad(403);
+ const reference={handleHash:digest,requestHash:row.request_hash,subject:actor};
+ if(decision==='cancel'){
+  const denied=await wait(()=>api.denyConsent(request,handle));
+  if(await wait(()=>hash(originalPacket(denied.request)))!==row.request_hash)return bad(403);
+  const cancelled=await persistence.decide({...reference,decision});
+  return cancelled.code==='cancelled'?new Response(null,{status:302,headers:denied.headers}):bad(503);
  }
+ const prior=await persistence.inspect(reference);
+ if(prior.code!=='consent_pending')return bad(prior.code==='unavailable'?503:403);
+ const candidate=evaluatePreparationConsentChoice({decision},prior.transaction,{now:Date.now()});
  if(candidate.code!=='choice_valid')return bad();
- if(!await schema(env))return bad(503);
- if(!await owned(env,actor))return bad(403);
- const approved=await api.approveConsent(request,handle,{scope:candidate.scopes});
- if(!await store(env).consumeConsent(digest,actor,kind,new Date().toISOString()))return bad(403);
- if(approved.request.clientId!==clientId||approved.request.resource!==resource||!await owned(env,actor))return bad(403);
- const grantId='ci-prep-'+digest;
+ if(!await wait(()=>schema(env)))return bad(503);
+ if(!await wait(()=>owned(env,actor)))return bad(403);
+ // No SDK scope override: compare the original cookie-bound request before application admission.
+ const approved=await wait(()=>api.approveConsent(request,handle));
+ if(await wait(()=>hash(originalPacket(approved.request)))!==row.request_hash)return bad(403);
+ const grantId=row.grant_id;
+ const admitted=await persistence.decide({...reference,decision});
+ // An uncertain/losing writer must never revoke a different fresh winner's grant.
+ // No SDK code is requested here; unknown store commits remain unexchanged and finite.
+ if(admitted.code!=='decision_saved'||admitted.freshDecision!==true||admitted.applicationGrantStored!==true
+  ||admitted.grantRef!==grantId||JSON.stringify(admitted.scopes)!==JSON.stringify(candidate.scopes))
+  return bad(admitted.code==='unknown_ack'||admitted.code==='unavailable'?503:403);
  try{
-  await store(env).createGrant({grantId,subject:actor,projectId,clientId,resource,scopes:candidate.scopes,
-   createdAt:new Date().toISOString(),expiresAt:new Date(candidate.expiresAt).toISOString()});
-  // Fault occurs AFTER the real D1 insert, before any code is requested.
+  // Existing test fault follows the actual admitted grant and before SDK completion.
   if(request.headers.get('x-ci-grant-ack-loss')==='true')throw Error('CI grant acknowledgment lost');
-  const completed=await api.completeAuthorization({request:approved.request,userId:actor,scope:candidate.scopes,metadata:{},
-   props:{applicationGrantId:grantId,userId:actor,projectId},revokeExistingGrants:false});
+  if(!await wait(()=>owned(env,actor))||!await wait(()=>schema(env))||Date.now()>=admitted.expiresAt)
+   throw Error('CI completion context changed');
+  const current=await wait(()=>store(env).getGrant(grantId));
+  if(!current||current.status!=='active'||current.subject!==actor||current.clientId!==clientId||current.projectId!==projectId
+   ||current.resource!==resource||Date.parse(current.expiresAt)!==admitted.expiresAt||JSON.stringify(current.scopes)!==JSON.stringify(admitted.scopes))
+   throw Error('CI grant unavailable');
+  const completed=await wait(()=>api.completeAuthorization({request:approved.request,userId:actor,scope:admitted.scopes,metadata:{},
+   props:{applicationGrantId:grantId,userId:actor,projectId},revokeExistingGrants:false}));
+  if(request.headers.get('x-ci-code-ack-loss')==='true')throw Error('CI completion acknowledgment lost');
+  control.check();
   const headers=new Headers(approved.headers);headers.set('Location',completed.redirectTo);headers.set('Cache-Control','no-store');
   return new Response(null,{status:302,headers});
  }catch{
+  // Privilege-reducing cleanup uses the original private scoped row, never a read-recovery completion.
   await store(env).revokeGrant(grantId,actor,new Date().toISOString());
   return bad(503);
  }
+}
+async function connection(request,env){
+ if(request.method!=='GET'||request.headers.get('x-ci-actor')!=='owner-a')return bad(403);
+ const handle=new URL(request.url).searchParams.get('handle');if(typeof handle!=='string'||handle.length>256)return bad();
+ const row=await originalRow(env,await hash(handle),'owner-a');
+ const grant=row?await store(env).getGrant(row.grant_id):null;if(!grant)return bad(404);
+ const summary=renderPreparationConnectionSummary({locale:'es',projectName:'AFW CI dossier',clientName:'AFW CI protocol client',scopes:grant.scopes,
+  status:grant.status==='active'?'active':grant.status==='revoked'?'revoked':'expired',expiresAt:Date.parse(grant.expiresAt)});
+ return summary?new Response(summary.html,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}}):bad(404);
 }
 async function token(request,env,ctx){
  const f=await request.clone().formData();
@@ -172,8 +232,9 @@ export default{async fetch(request,env,ctx){
  if(new URL(request.url).origin!==issuer)return bad(404);
  try{
   await ready(env);const path=new URL(request.url).pathname;
-  if(path==='/__ci/bootstrap'&&request.method==='POST')return Response.json({clientId,trialExpiresAt:started+180000});
+  if(path==='/__ci/bootstrap'&&request.method==='POST')return Response.json({clientId,trialStartedAt:started,trialExpiresAt:started+180000});
   if(path==='/authorize')return await authorize(request,env);
+  if(path==='/__ci/connection')return await connection(request,env);
   if(path==='/oauth/token'&&request.method==='POST')return await token(request,env,ctx);
   if(path==='/mcp')return await mcp(request,env,ctx);
   if(path==='/.well-known/oauth-authorization-server'){

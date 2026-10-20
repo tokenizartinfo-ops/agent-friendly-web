@@ -58,7 +58,7 @@ test('host validates strict arguments before authorization, limiter or DB',()=>u
 test('token scope, explicit verified expiry and server project/client/resource pins are mandatory',async()=>{
  const changes=[
   f=>{f.auth.context.scopes=['afw:project:read'];},
-  f=>{delete f.auth.tokenExpiresAt;},f=>{f.auth.tokenExpiresAt=Date.now()-1;},
+  f=>{delete f.auth.tokenExpiresAt;},f=>{f.auth.tokenExpiresAt=f.started-1;},
   f=>{f.auth.projectId='other';},f=>{f.auth.context.clientId='other';},f=>{f.auth.context.resource='https://other.invalid/mcp';}
  ];
  for(const change of changes)await use(async f=>{hostFixture(f);change(f);assert.notEqual((await f.host.prepare(input)).code,'prepared');assert.equal(f.limitCalls.length,0);assert.equal(f.reads,0);assert.equal(f.writes,0);});
