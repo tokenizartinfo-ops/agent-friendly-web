@@ -91,10 +91,19 @@ async function nativeHostSuite(t,profileMs=180000){
    code_verifier:a.verifier,resource,...extra})});
   const complete=async decision=>{const a=await begin(),accepted=await approve(a,decision);assert.equal(a.response.status,200);assert.equal(accepted.status,302);return {a,accepted};};
   const rawGrant=async a=>db.prepare('SELECT g.exchanged_at,g.revoked_at FROM delegated_access_grants g JOIN delegated_preparation_consents c ON c.grant_id=g.id WHERE c.handle_hash=?').bind(await hash(a.handle)).first();
-  if(profileMs===55000){
-   await t.test('a short original profile rejects before consuming or withdrawing the admitted permission',async()=>{
-    assert.equal(bootstrap.trialExpiresAt-bootstrap.trialStartedAt,55000);
+  if(profileMs!==180000){
+   await t.test('original profile respects the minimum TTL before consumption and preserves absolute expiry',async()=>{
+    assert.equal(bootstrap.trialExpiresAt-bootstrap.trialStartedAt,profileMs);
     const {a,accepted}=await complete('read'),before=await stats(),response=await redeem(a,accepted),after=await stats();
+    if(profileMs===70000){
+     assert.equal(response.status,200);const token=await response.json();
+     assert.equal(token.scope,READ);assert.equal(token.refresh_token,undefined);assert.ok(token.expires_in>0&&token.expires_in<=70);
+     assert.ok((await rawGrant(a)).exchanged_at);assert.equal((await rawGrant(a)).revoked_at,'');
+     assert.equal(after.consumed,before.consumed+1);assert.equal(after.revocations,before.revocations);
+     assert.equal(after.sdkTokensIssued,before.sdkTokensIssued+1);
+     const client=await connect(token);assert.notEqual((await client.callTool({name:'read_project_summary',arguments:{}})).isError,true);
+     return;
+    }
     assert.equal((await response.json()).access_token,undefined);
     assert.deepEqual(await rawGrant(a),{exchanged_at:'',revoked_at:''},'SDK minimum TTL must be checked before consuming the original permission');
     assert.equal(response.status,503);assert.equal(after.consumed,before.consumed);
@@ -197,4 +206,5 @@ async function nativeHostSuite(t,profileMs=180000){
  }finally{await Promise.allSettled(clients.map(c=>c.close()));await runtime.dispose();}
 }
 test('finite token host enforces original consent scope deadline and native withdrawal',{timeout:120000},nativeHostSuite);
-test('short original preparation window respects the native SDK minimum TTL',{timeout:30000},t=>nativeHostSuite(t,55000));
+for(const duration of [55000,59000,60000,70000])
+ test('original preparation window '+duration+'ms respects the native SDK minimum TTL',{timeout:30000},t=>nativeHostSuite(t,duration));

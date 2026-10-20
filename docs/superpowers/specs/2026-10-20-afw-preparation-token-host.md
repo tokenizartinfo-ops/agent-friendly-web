@@ -20,3 +20,6 @@ No remote DDL/client/scope/grant/token/permission/deploy/Container/event action.
 Actual pinned SDK1.2.1, workerd/D1/KV, ephemeral signed Access consent via PR518 fixture, real code/PKCE/token/MCP. New wrapper forwards real D1/KV/SDK calls; only failure/delay controls synthetic.
 Read downgrade and draft token use; expiry/no refresh; bad fields/refresh before SDK; changed owner/schema/source; unknown actual consume ACK without replay/foreign revocation; held original D1 lookup no late consumption and same-host recovery; late real KV token write with own withdrawal and application denial; terminal option drift; SDK bypass without original context closed.
 This is not real Cloudflare issuance/JWKS/human consent, remote hosting/schema/concurrency, complete production OAuth/withdrawal UI, Container or PCoff acceptance.
+
+## SDK minimum lifetime qualification
+Pinned provider1.2.1/KV require accessTokenTTL>=60s. Before consuming application permission, reserve the entire remaining ORIGINAL request budget inside the admitted absolute expiry; reject if fewer than60 whole seconds remain after that reserve. Recheck after async work; no rounding-up or renewal. Native original55/59/60s profiles reject without application consumption/withdrawal; original70s qualifies actual token/MCP. This deliberately closes new exchanges slightly earlier than grant expiry.
