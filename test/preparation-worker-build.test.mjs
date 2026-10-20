@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {Miniflare} from 'miniflare';
+import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 
 test('preparation build returns bounded exact bytes and its closed bundle runs without configuration',async()=>{
  const file=new URL('../scripts/build-preparation-worker.mjs',import.meta.url);
@@ -17,7 +17,7 @@ test('preparation build returns bounded exact bytes and its closed bundle runs w
  const bytes=Buffer.from(result.script,'utf8');assert.ok(bytes.length>0&&bytes.length<=2097152);
  assert.equal(result.workerHash,createHash('sha256').update(bytes).digest('hex'));
  assert.deepEqual(Object.keys(result).sort(),['script','sourceRevision','workerHash']);
- const runtime=new Miniflare({modules:true,script:result.script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']});
+ const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,script:result.script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}));
  try{
   const r=await runtime.dispatchFetch('https://example.invalid/mcp',{method:'POST',body:'not JSON'});
   assert.equal(r.status,404);assert.equal(r.headers.get('Cache-Control'),'no-store');
