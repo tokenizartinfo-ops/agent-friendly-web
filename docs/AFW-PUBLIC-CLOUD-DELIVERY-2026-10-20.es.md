@@ -26,3 +26,6 @@ El workflow canary existente no es un publicador público. El20oct se consultaro
 Pruebas negativas primero: commit0757dfcf, ejecución39492246139/job118868145102,14fallos esperados por comprobador ausente; descarga y subida de recibo omitidas. Después se implementa el comprobador y se contrasta contra el ZIP real en GitHub. La evidencia GREEN, revisión y merge se enlazan en #497.
 
 G2/OAuth ya aceptado no se repite. CF02382110 y G3–G6, alta→aviso→revisión útil→baja nativa, PC-off y Max siguen separados. `operationalReadiness=false`. No mail ni sesión de clientes.
+
+## Revisión y corrección de trazabilidad
+Revisión única en9230365:0Critical/1Important/1Minor. Important reproducido en bedb39f1, run39492965192/job118870612353:14PASS/2FAIL; la versión del evento PR puede ser el merge sintético y no el checkout real. Se registra HEAD verificado con git, cotejado con AFW_QUALIFIER_REVISION, y se conservan eventRevision y qualifierRunAttempt separados. Minor diferido: colisión ancestro archivo/directorio hipotética; no permite sustituir el ZIP de hash fijo ni afecta su inventario actual, y no se extrae. No segunda revisión.

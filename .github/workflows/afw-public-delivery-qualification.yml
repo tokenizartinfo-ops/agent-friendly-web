@@ -19,6 +19,8 @@ jobs:
     if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && (github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-24.04
     timeout-minutes: 5
+    env:
+      AFW_QUALIFIER_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@v4
         with:

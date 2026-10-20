@@ -5,6 +5,7 @@ import json
 import os
 import re
 import stat
+import subprocess
 import sys
 import time
 import urllib.error
@@ -176,10 +177,25 @@ def github_get(url, token, max_bytes, archive=False):
             response.close()
     raise ValueError("GitHub redirect limit")
 
+def qualifier_context(env, checked_out):
+    expected = env.get("AFW_QUALIFIER_REVISION", "")
+    event = env.get("GITHUB_SHA", "")
+    require(all(re.fullmatch("[a-f0-9]{40}", v or "") for v in (expected, checked_out, event)),
+            "qualifier revision")
+    require(checked_out == expected, "qualifier checkout mismatch")
+    run, attempt = env.get("GITHUB_RUN_ID", ""), env.get("GITHUB_RUN_ATTEMPT", "")
+    require(all(re.fullmatch("[1-9][0-9]*", v) for v in (run, attempt)), "qualifier run identity")
+    return {"qualifierRevision": checked_out, "eventRevision": event,
+            "qualifierRun": run, "qualifierRunAttempt": attempt}
+
 def main():
     require(os.environ.get("GITHUB_ACTIONS") == "true" and os.environ.get("GITHUB_REPOSITORY") == REPOSITORY,
             "GitHub runner identity")
     root = Path(__file__).resolve().parents[1]
+    checkout = subprocess.run(["git", "rev-parse", "--verify", "HEAD"], cwd=root,
+                              env={"PATH": os.environ["PATH"], "HOME": os.environ.get("HOME", "")},
+                              capture_output=True, text=True, check=True, timeout=5).stdout.strip()
+    qualifier = qualifier_context(os.environ, checkout)
     contract = json.loads((root / "config/public-cloud-delivery.v1.json").read_text())
     require(contract["project"] == "AFW" and contract["repository"] == REPOSITORY
             and contract["allowedAction"] == "read_validate_and_prepare_only"
@@ -210,7 +226,7 @@ def main():
     output.mkdir(parents=True)
     receipt = {"kind": "public_cloud_delivery_qualification", "checkedAt": datetime.now(timezone.utc).isoformat(),
                "repository": REPOSITORY, "sourceRevision": contract["sourceRevision"], "sourceTree": contract["sourceTree"],
-               "qualifierRevision": os.environ.get("GITHUB_SHA"), "qualifierRun": os.environ.get("GITHUB_RUN_ID"),
+               **qualifier,
                "artifactId": a["id"], "artifactExpiresAt": a["expiresAt"], **qualified,
                "target": contract["target"], "baseline": contract["baseline"], "baselineIsHistorical": True,
                "archiveExtracted": False, "appExecuted": False, "appRebuilt": False, "cloudflareMutations": 0,
@@ -220,7 +236,7 @@ def main():
     (output / "inventory.json").write_text(json.dumps(inventory, indent=2) + "\n")
     (output / "contract.json").write_text(json.dumps(contract, indent=2) + "\n")
     (output / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
-    print(json.dumps({k: receipt[k] for k in ("checkedAt", "sourceRevision", "artifactId", "files", "uncompressedBytes",
+    print(json.dumps({k: receipt[k] for k in ("checkedAt", "sourceRevision", "qualifierRevision", "eventRevision", "qualifierRun", "qualifierRunAttempt", "artifactId", "files", "uncompressedBytes",
                                            "zipSha256", "appRebuilt", "cloudflareMutations", "publicationReady",
                                            "operationalReadiness")}))
 
