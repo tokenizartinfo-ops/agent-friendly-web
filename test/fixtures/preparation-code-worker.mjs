@@ -35,7 +35,9 @@ function scopeSet(scopes){
 }
 async function ready(env){
  bootstrap??=(async()=>{
-  started=Date.now();
+  const duration=Number(env.CI_PREPARATION_PROFILE_MS??180000);
+  if(![55000,180000].includes(duration))throw Error('CI original profile duration');
+  profileDuration=duration;started=Date.now();
   as=new OAuthAuthorizationServer({issuer,resources:[resource],scopesSupported:[READ,DRAFTS],accessTokenTTL:90,
    clientIdMetadataDocumentEnabled:false,
    async tokenExchangeCallback(options){
