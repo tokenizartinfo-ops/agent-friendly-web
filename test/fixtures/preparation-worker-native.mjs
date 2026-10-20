@@ -47,7 +47,7 @@ const fixture={async fetch(request,env,ctx){
   if(mode==='bad-management')copy.AFW_PREPARATION_MANAGEMENT_EXPIRES_AT=new Date(management.startedAt).toISOString();
   if(mode==='wrong-resource')copy.AFW_OAUTH_RESOURCE='https://elsewhere.invalid/mcp';
   if(mode==='unknown-locale')copy.AFW_PREPARATION_LOCALE='other';
-  if(mode==='short-management')copy.AFW_PREPARATION_MANAGEMENT_EXPIRES_AT=new Date(Date.now()+30000).toISOString();
+  if(mode==='short-management')copy.AFW_PREPARATION_MANAGEMENT_EXPIRES_AT=new Date(management.startedAt+30000).toISOString();
   if(mode==='expired-profile'){
    const stamp=Date.now();copy.AFW_PREPARATION_TRIAL_STARTED_AT=new Date(stamp-200000).toISOString();
    copy.AFW_OAUTH_PILOT_EXPIRES_AT=new Date(stamp-10000).toISOString();
