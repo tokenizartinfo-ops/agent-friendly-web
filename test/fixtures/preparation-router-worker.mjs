@@ -59,10 +59,22 @@ const worker={async fetch(request,env,ctx){
   return Response.json({closed:createDelegatedPreparationRouter()===null,disabled:createDelegatedPreparationRouter(off)===null,touched});
  }
  const headers=new Headers(request.headers);headers.set('host','example.invalid');
- if(path.startsWith('/__ci/probe/')){
-  url.pathname=path.slice('/__ci/probe'.length);
+ if(path.startsWith('/__ci/probe-root/')){
+  url.pathname=path.slice('/__ci/probe-root'.length);
   const parent=createCapsulePreparationRequestLease();readCapsulePreparationRequestLease(parent).close();
-  return probes[url.pathname](new Request(url,request),tracked,parent);
+  return router(new Request(url,request),tracked,parent);
+ }
+ if(path.startsWith('/__ci/probe/')||path.startsWith('/__ci/borrow/')){
+  const closed=path.startsWith('/__ci/probe/');url.pathname=path.slice((closed?'/__ci/probe':'/__ci/borrow').length);
+  const parent=createCapsulePreparationRequestLease(),control=readCapsulePreparationRequestLease(parent);
+  if(closed)control.close();
+  try{
+   const response=await probes[url.pathname](new Request(url,request),tracked,parent);
+   if(closed)return response;
+   let open=false;try{open=control.check().remaining>0;}catch{/* report only the lifetime state */}
+   const h=new Headers(response.headers);h.set('X-CI-Parent-Open',String(open));
+   return new Response(response.body,{status:response.status,headers:h});
+  }finally{control.close();}
  }
  if(path==='/__ci/history-config'){
   if(!history){

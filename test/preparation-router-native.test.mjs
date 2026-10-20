@@ -107,15 +107,29 @@ test('integrated preparation router preserves consent token preparation and inde
    const c=await connect(readToken);assert.ok(!(await c.listTools()).tools.some(x=>x.name==='prepare_capsule_draft'));
    assert.notEqual((await c.callTool({name:'read_project_summary',arguments:{}})).isError,true);
   });
-  await t.test('all four real source ports reject a closed parent without body auth or state changes',async()=>{
+  await t.test('root and four real source ports reject a closed parent without body auth or state changes',async()=>{
    const a=await approve(),q=await query(),before=await counts(),calls=await stats();
    assert.equal((await dispatch('/__ci/probe'+q.url,{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);
    assert.equal((await dispatch('/__ci/probe/connections',{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);
+   assert.equal((await dispatch('/__ci/probe-root/connections',{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);
    assert.equal((await dispatch('/__ci/probe/oauth/token',tokenInit(a))).status,503);
    assert.equal((await dispatch('/__ci/probe/mcp',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+readToken.access_token},
     body:'{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'})).status,408);
    assert.deepEqual(await counts(),before);assert.deepEqual(await stats(),calls);
    assert.equal((await saved(a)).exchanged_at,'');assert.equal((await redeem(a)).scope,READ);
+  });
+  await t.test('successful real source borrowers return ownership of the still-live parent lifetime',async()=>{
+   const q=await query(),a=await approve();
+   const requests=[
+    ['/__ci/borrow'+q.url,{headers:{'Cf-Access-Jwt-Assertion':assertion}}],
+    ['/__ci/borrow/connections',{headers:{'Cf-Access-Jwt-Assertion':assertion}}],
+    ['/__ci/borrow/oauth/token',tokenInit(a)],
+    ['/__ci/borrow/mcp',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+readToken.access_token},
+     body:'{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'}],
+   ];
+   for(const [path,init]of requests){
+    const r=await dispatch(path,init);assert.equal(r.status,200);assert.equal(r.headers.get('X-CI-Parent-Open'),'true');await r.arrayBuffer();
+   }
   });
   await t.test('drafts prepare once reconcile same result and human withdrawal denies connected MCP',async()=>{
    const a=await approve('drafts'),token=await redeem(a),c=await connect(token),before=await counts();
@@ -161,9 +175,16 @@ test('integrated preparation router preserves consent token preparation and inde
    await dispatch('/__ci/restore-issuance',{method:'POST'});
    assert.equal((await dispatch(q.url,{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);
   });
-  await t.test('root configuration closure is terminal across both purposes',async()=>{
-   const before=await counts();await dispatch('/__ci/root-drift',{method:'POST'});
-   assert.equal((await dispatch('/connections',{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);
+  await t.test('root configuration closure during genuine identity await is terminal across both purposes',async()=>{
+   const before=await counts(),prior=await stats();await dispatch('/__ci/access-hold',{method:'POST'});
+   const pending=dispatch('/connections',{headers:{'Cf-Access-Jwt-Assertion':assertion}});
+   try{
+    const until=Date.now()+2000;let seen=false;
+    while(Date.now()<until){if((await stats()).accessStarted>prior.accessStarted){seen=true;break;}await new Promise(resolve=>setTimeout(resolve,10));}
+    assert.equal(seen,true,'actual Access verification must have started');
+    await dispatch('/__ci/root-drift',{method:'POST'});
+   }finally{await dispatch('/__ci/release',{method:'POST'});}
+   assert.equal((await pending).status,503);
    await dispatch('/__ci/root-restore',{method:'POST'});
    assert.equal((await dispatch('/connections',{headers:{'Cf-Access-Jwt-Assertion':assertion}})).status,503);assert.deepEqual(await counts(),before);
   });
