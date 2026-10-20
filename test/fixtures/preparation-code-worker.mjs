@@ -1,20 +1,15 @@
 // CI-ONLY protocol composition. Never referenced by a production entrypoint.
 // Actor headers, control routes and fault switches are synthetic test adapters,
 // not a human consent UI, authentication mechanism, or deployable OAuth profile.
-import {OAuthAuthorizationServer,OAuthResourceServer,OAuthError} from '@cloudflare/workers-oauth-provider';
-import {isLegacyRequest,WebStandardStreamableHTTPServerTransport} from '@modelcontextprotocol/server';
-import {createMcpHandler} from 'agents/mcp/server';
+import {OAuthAuthorizationServer,OAuthError} from '@cloudflare/workers-oauth-provider';
 import {createDelegatedOAuthStore} from '../../lib/delegated-oauth-store.mjs';
-import {createDelegatedProjectRepository} from '../../lib/delegated-project-repository.mjs';
-import {createDelegatedProjectMcpServer} from '../../lib/delegated-project-mcp.mjs';
 import {evaluatePreparationConsentChoice} from '../../lib/delegated-preparation-consent-policy.mjs';
 import {createDelegatedPreparationConsentStore} from '../../lib/delegated-preparation-consent-store.mjs';
 import {createCapsulePreparationRequestLease,readCapsulePreparationRequestLease} from '../../lib/capsule-preparation-request-lease.mjs';
 import {renderPreparationConsentView,renderPreparationConnectionSummary} from '../../lib/delegated-preparation-consent-view.mjs';
+import {McpServer} from '@modelcontextprotocol/server';
+import {createDelegatedPreparationMcpMount} from '../../lib/delegated-preparation-mcp-mount.mjs';
 import {checkAgentCapsulePreparationSchema} from '../../lib/agent-capsule-preparation-schema.mjs';
-import {createCapsulePreparationHttpBoundary} from '../../lib/delegated-capsule-preparation-http.mjs';
-import {createDelegatedCapsulePreparationOAuthHost} from '../../lib/delegated-capsule-preparation-oauth.mjs';
-import {registerDelegatedCapsulePreparation} from '../../lib/delegated-capsule-preparation-mcp.mjs';
 
 const issuer='https://example.invalid',resource=issuer+'/mcp',callback=issuer+'/callback';
 const READ='afw:project:read',DRAFTS='afw:capsule:prepare';
@@ -195,36 +190,62 @@ async function token(request,env,ctx){
  const headers=new Headers(response.headers);headers.delete('Content-Length');headers.set('Cache-Control','no-store');
  return Response.json(payload,{status:response.status,headers});
 }
+// CI-only lifecycle probes forward actual SDK methods. No production knobs.
+const observedServers=new Set(),serverFault=new WeakMap(),background=new Set();
+const holds={auth:new Set(),connect:new Set()};
+const metrics={authStarted:0,authCompleted:0,connectStarted:0,connectCompleted:0,closed:0};
+let currentServerFault='';
+const realRegister=McpServer.prototype.registerTool,realConnect=McpServer.prototype.connect,realClose=McpServer.prototype.close;
+McpServer.prototype.registerTool=function(...args){
+ if(!observedServers.has(this)){observedServers.add(this);serverFault.set(this,currentServerFault);}
+ return realRegister.apply(this,args);
+};
+const held=kind=>new Promise(resolve=>holds[kind].add(resolve));
+McpServer.prototype.connect=async function(...args){
+ metrics.connectStarted++;
+ if(serverFault.get(this)==='held-connect')await held('connect');
+ const value=await realConnect.apply(this,args);metrics.connectCompleted++;return value;
+};
+McpServer.prototype.close=async function(...args){
+ const value=await realClose.apply(this,args);metrics.closed++;return value;
+};
+const stats=()=>({...metrics,created:observedServers.size,connected:[...observedServers].filter(s=>typeof s.isConnected==='function'&&s.isConnected()).length,
+ unknownState:[...observedServers].filter(s=>typeof s.isConnected!=='function').length});
+async function lifecycleProbe(request){
+ const path=new URL(request.url).pathname;
+ if(path==='/__ci/mount-disabled'){
+  let touched=0;const options={enabled:false};Object.defineProperty(options,'env',{get(){touched++;throw Error('must not run');},enumerable:true});
+  return Response.json({closed:createDelegatedPreparationMcpMount()===null&&createDelegatedPreparationMcpMount(options)===null,touched});
+ }
+ if(path==='/__ci/release-mcp-hold'&&request.method==='POST'){
+  for(const set of Object.values(holds)){for(const resolve of set)resolve();set.clear();}
+  await Promise.allSettled([...background]);return Response.json(stats());
+ }
+ if(path==='/__ci/mcp-stats'){
+  if(!holds.auth.size&&!holds.connect.size)await Promise.allSettled([...background]);
+  return Response.json(stats());
+ }
+ return bad(404);
+}
 async function mcp(request,env,ctx){
- const cleanup=[];
+ const fault=request.headers.get('x-ci-mcp-fault')??'';
  const pins={...env,AFW_DELEGATED_OAUTH_ENABLED:'true',AFW_DELEGATED_PREPARATION_ENABLED:'true',AFW_OAUTH_SERVICE_MODE:'window',
   AFW_OAUTH_PILOT_EXPIRES_AT:new Date(started+180000).toISOString(),AFW_OAUTH_PILOT_PROJECT_ID:projectId,AFW_OAUTH_PILOT_CLIENT_ID:clientId,
   ACCESS_TEAM_DOMAIN:'synthetic.cloudflareaccess.com',ACCESS_AUD:'ci-only-aud',DELEGATED_RATE_LIMITER:{async limit(){return {success:true};}}};
- const boundary=createCapsulePreparationHttpBoundary({enabled:true,issuer,handle:(bounded,_env,_ctx,requestLease)=>{
-  const rs=new OAuthResourceServer({resourceMetadata:{resource,authorization_servers:[issuer]},requiredScopes:[READ],
-   validateToken:env=>(audience,token)=>as.validateToken(audience,token,env),
-   handler:{async fetch(authorized,environment,authCtx){
-    const context={grantId:authCtx.props.applicationGrantId,subject:authCtx.auth.userId,clientId:authCtx.auth.clientId,
-     resource:authCtx.auth.audience,scopes:authCtx.auth.scope};
-    const repository=createDelegatedProjectRepository({db:session(environment),grantStore:store(environment),
-     createPrimarySession:()=>session(environment)});
-    const host=createDelegatedCapsulePreparationOAuthHost({env:environment,resource,requestLease,
-     getVerifiedContext:()=>({auth:authCtx.auth,props:authCtx.props})});
-    const factory=()=>{
-     const server=createDelegatedProjectMcpServer({repository,resource,resolveAuthorization:async()=>({context,projectId})});
-     registerDelegatedCapsulePreparation(server,{enabled:context.scopes.includes(DRAFTS),host});return server;
-    };
-    if(await isLegacyRequest(authorized,undefined,{maxRequestBodySize:4096})){
-     const server=factory(),transport=new WebStandardStreamableHTTPServerTransport({sessionIdGenerator:undefined,enableJsonResponse:true});
-     cleanup.push(()=>server.close());await server.connect(transport);return transport.handleRequest(authorized);
-    }
-    return createMcpHandler(factory,{route:'/mcp',corsOptions:false,allowedHostnames:['example.invalid'],legacy:'reject',responseMode:'json'})(authorized,environment,authCtx);
-   }}});
-  return rs.fetch(bounded,pins,ctx);
- }});
- const response=await boundary(request,pins,ctx);
- ctx.waitUntil(Promise.allSettled(cleanup.map(close=>Promise.resolve().then(close))));
- return response;
+ const options={enabled:true,issuer,env:pins,validateAccessToken:environment=>async(audience,token)=>{
+  metrics.authStarted++;
+  if(fault==='held-auth')await held('auth');
+  const result=await as.validateToken(audience,token,environment);metrics.authCompleted++;
+  currentServerFault=fault;
+  if(fault==='config-changed')options.enabled=false;
+  return result;
+ }};
+ const mount=createDelegatedPreparationMcpMount(options);
+ const context={waitUntil(work){
+  const observed=Promise.resolve(work);background.add(observed);observed.then(()=>background.delete(observed),()=>background.delete(observed));
+  ctx.waitUntil(observed);
+ }};
+ return mount?mount(request,context):bad(503);
 }
 export default{async fetch(request,env,ctx){
  // Miniflare's proxy Host is normalized ONLY in the fixture.
@@ -237,6 +258,7 @@ export default{async fetch(request,env,ctx){
   if(path==='/__ci/connection')return await connection(request,env);
   if(path==='/oauth/token'&&request.method==='POST')return await token(request,env,ctx);
   if(path==='/mcp')return await mcp(request,env,ctx);
+  if(['/__ci/mount-disabled','/__ci/release-mcp-hold','/__ci/mcp-stats'].includes(path))return await lifecycleProbe(request);
   if(path==='/.well-known/oauth-authorization-server'){
    const response=await as.fetch(request,env,ctx),metadata=await response.json();
    metadata.grant_types_supported=['authorization_code'];return Response.json(metadata);

@@ -301,7 +301,7 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
   });
   for(const [label,mode]of [['legacy','legacy'],['modern',{pin:'2026-07-28'}]])
    await t.test(label+' real token authentication held past the original deadline cannot create a late MCP server',async()=>{
-    const fresh=await authorizeToken(),client=await connect(fresh.token,mode),before=await mountStats();
+    const fresh=await authorizeToken(),client=await connect(fresh.token,mode);await client.listTools();const before=await mountStats();
     const transmissionsBefore=transmissions.filter(x=>x.rpc==='tools/list').length;
     mcpFault='held-auth';
     try{
@@ -315,7 +315,7 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
     assert.deepEqual(await capsules(),{intents:2,capsules:2,events:2});
    });
   await t.test('legacy connect completing after timeout is closed again and never returns a tool response',async()=>{
-   const fresh=await authorizeToken(),client=await connect(fresh.token),before=await mountStats();
+   const fresh=await authorizeToken(),client=await connect(fresh.token);await client.listTools();const before=await mountStats();
    mcpFault='held-connect';
    try{
     await assert.rejects(client.listTools());assert.equal(transmissions.at(-1).status,503);
@@ -327,7 +327,7 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
    assert.deepEqual(await capsules(),{intents:2,capsules:2,events:2});
   });
   await t.test('configuration drift after actual token validation prevents any server creation',async()=>{
-   const fresh=await authorizeToken(),client=await connect(fresh.token),before=await mountStats();
+   const fresh=await authorizeToken(),client=await connect(fresh.token);await client.listTools();const before=await mountStats();
    mcpFault='config-changed';
    try{await assert.rejects(client.listTools());assert.equal(transmissions.at(-1).status,503);}
    finally{mcpFault='';await releaseHold();}

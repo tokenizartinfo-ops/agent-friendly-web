@@ -18,3 +18,7 @@ Interface rows: HTTP original opaque lease -> OAuth host budget (must preserve i
 
 ## Closure
 Only source/runner mount and late-work safety. G2CLOSED/noOTP; human host/migration/finite real preparation test and Container/event/nativewithdrawal/PCoff/Max unaccepted. operationalReadiness=false. No support mail/body/OTP/keys or remote operations in this block.
+
+## Observed RED
+f5e29d5cbba7cbd392cdcc5c8064a51ee9ff454b/CI39359154625/job118420957853:2357PASS/7FAIL/1existingSKIP. Six new subcases fail (disabled probe404, two held-auth/held-connect/config drift wrongly resolve instead of reject, missing real validation telemetry); parent aggregate is seventh. Existing behavior passes, including new actual-schema characterization. Implementation follows, no import-error-only RED.
+Ruling: local request lease failure must not poison a reusable mount; only observed configuration/global clock drift latches its configuration closed. Cost if wrong: a new request within the same original finite profile could be denied unnecessarily, never granted extra time.
