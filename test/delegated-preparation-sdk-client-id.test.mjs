@@ -29,7 +29,7 @@ for(const clientId of ['_sdk-client-01','-sdk-client-02']){
  });
 }
 test('client syntax compatibility preserves bounds, forbidden characters and other identity grammar',()=>{
- for(const clientId of ['', ' client','/client','client space','client\nid','x'.repeat(129)]){
+ for(const clientId of ['', ' client','/client','client space','client\nid','client\n','client\r','client\u2028','x'.repeat(129)]){
   const {f,create}=setup(clientId);try{assert.throws(create,/Preparation host unavailable/);assert.deepEqual(f.counts(),{intents:0,capsules:0,events:0});}finally{f.close();}
  }
  for(const mutate of [

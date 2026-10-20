@@ -28,3 +28,8 @@ G2 sigue aceptado/CLOSED; no OTP o reconexión. Container02382110, suscripción/
 
 ## Diagnóstico inicial
 Primer runf615fa90/CI39347113127 falló al intentar usar para MCP un token que el propio ensayo acababa de revocar indirectamente repitiendo su código. La implementación primaria del SDK exige esa revocación de familia. Se separa el replay con aserciones400+401 y se conserva otro flujo fresco para preparación; no se cambia el producto ni se suaviza la comprobación. Resultado final exacto pendiente en el recibo portador.
+
+## Compatibilidad de identificador del cliente
+La fuente primaria SDK1.2.1 createClient usa generateRandomString(16) con alfabeto Base64url. La gramática genérica AFW de identidades exigía primer carácter alfanumérico, por lo que rechazaba un clientId registrado que empezara '_' o '-'. Dos regresiones a través de proyección/host/dominio reprodujeron ese rechazo en30913561/CI39347978613; la composición nativa restante pasó.
+La corrección candidata introduce oauthClientRef acotado para el campo de cliente y su pin, conservando longitud128, caracteres admitidos y las coincidencias exactas servidor/token/grant. No altera el formato de propietario/proyecto/grant ni convierte una cadena en autoridad; URL clientId metadata permanece fuera del perfil. No es un scope, cliente real, acceso, montaje o permiso nuevo.
+El cambio/restauración del owner de la prueba aumentó correctamente la revisión mediante triggers. El ensayo conserva ese historial: primero exige conflicto de la revisión vieja y después obtiene la vigente por read_project_summary antes de preparar. No desactiva ni rebobina revisiones.

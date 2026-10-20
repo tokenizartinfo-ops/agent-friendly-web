@@ -185,7 +185,8 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
    assert.notEqual(summary.isError,true);
    const current=await db.prepare("SELECT revision FROM site_projects WHERE id='project-a'").first();
    assert.ok(Number.isSafeInteger(current.revision)&&current.revision>input.expectedRevision);
-   currentInput={...input,expectedRevision:current.revision};
+   assert.equal(summary.structuredContent.data.revision,current.revision);
+   currentInput={...input,expectedRevision:summary.structuredContent.data.revision};
    first=await call(legacy,prepare,currentInput);assert.equal(first.structuredContent.code,'prepared');
    for(const flag of ['executionAllowed','chargeAllowed','publicationAllowed'])assert.equal(first.structuredContent[flag],false);
    assert.equal(JSON.stringify(first).includes(sessionToken.token.access_token),false);
