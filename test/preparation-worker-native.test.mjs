@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile,readdir} from 'node:fs/promises';
+import {readFile} from 'node:fs/promises';
+import {readPreparationSchemaPackage} from '../scripts/preparation-schema-package.mjs';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {generateKeyPair,exportJWK,SignJWT} from 'jose';
@@ -22,10 +23,8 @@ test('production preparation Worker preserves original configuration and durable
   script:bundle.outputFiles[0].text,bindings:{CI_PUBLIC_JWK:JSON.stringify(jwk)},kvNamespaces:['OAUTH_KV'],d1Databases:{DB:'preparation-worker-ci-only'}}));
  try{
   const db=await runtime.getD1Database('DB');
-  for(const name of(await readdir('drizzle')).filter(n=>/^\d+.*\.sql$/.test(n)).sort())
-   for(const sql of(await readFile('drizzle/'+name,'utf8')).split('--> statement-breakpoint').map(x=>x.trim()).filter(Boolean))await db.prepare(sql).run();
-  for(const name of ['agent-capsule-preparations','delegated-preparation-consents'])
-   for(const sql of(await readFile('db/'+name+'.sql','utf8')).split('--> statement-breakpoint').map(x=>x.trim()).filter(Boolean))await db.prepare(sql).run();
+  const schema=await readPreparationSchemaPackage();
+  for(const row of schema.statements)await db.prepare(row.sql).run();
   const at=new Date(Date.now()-1000).toISOString(),future=new Date(Date.now()+600000).toISOString();
   await db.prepare("INSERT INTO site_projects(id,user_id,owner_email,organization,website,role,site_type,control,audience,goals_json,languages_json,authorized_resources_json,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
    .bind('project-a','owner-a','owner@example.invalid','Router private dossier','https://example.org','owner','services','owner','People','["explain_services"]','["es"]','["llms"]',at,at).run();
