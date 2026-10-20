@@ -6,16 +6,14 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {generateKeyPair,exportJWK,SignJWT} from 'jose';
 import {Client,StreamableHTTPClientTransport} from '@modelcontextprotocol/client';
 
-let factory;
-try{({createDelegatedPreparationConsentHttpHost:factory}=await import('../lib/delegated-preparation-consent-http.mjs'));}
-catch(error){if(error.code!=='ERR_MODULE_NOT_FOUND')throw error;}
+// Presence is asserted before bundling; the SDK-backed factory executes only in workerd.
+let source;
+try{source=await readFile('lib/delegated-preparation-consent-http.mjs','utf8');}
+catch(error){if(error.code!=='ENOENT')throw error;}
 const issuer='https://example.invalid',resource=issuer+'/mcp',callback='https://client.example.invalid/callback';
 const READ='afw:project:read',DRAFTS='afw:capsule:prepare';
 test('signed Access identity original SDK consent and finite D1 choice compose at the detached HTTP host',{timeout:120000},async t=>{
- assert.equal(typeof factory,'function','missing default-closed preparation consent HTTP host');
- assert.equal(factory(),null);
- let touched=0;const disabled={enabled:false};Object.defineProperty(disabled,'env',{get(){touched++;throw Error('must not execute');},enumerable:true});
- assert.equal(factory(disabled),null);assert.equal(touched,0);
+ assert.match(source??'',/export function createDelegatedPreparationConsentHttpHost\(/,'missing default-closed preparation consent HTTP host');
  const keys=await generateKeyPair('RS256'),other=await generateKeyPair('RS256');
  const publicJwk=await exportJWK(keys.publicKey);
  const jwt=async({subject='owner-a',audience='ci-preparation-audience',team='synthetic.cloudflareaccess.com',expiry=90,key=keys.privateKey}={})=>{
@@ -46,6 +44,7 @@ test('signed Access identity original SDK consent and finite D1 choice compose a
    .bind('claim-a','site-a','project-a','owner-a','dns_txt','_synthetic','not-a-token','verified',future,at,at).run();
   const dispatch=(path,init={})=>{const url=new URL(path,issuer);assert.equal(url.origin,issuer);return runtime.dispatchFetch(url,{...init,redirect:'manual'});};
   const bootstrap=await(await dispatch('/__ci/bootstrap',{method:'POST'})).json();let seq=0;
+  assert.deepEqual(await(await dispatch('/__ci/http-default')).json(),{defaultClosed:true,disabledClosed:true,touched:0});
   const counts=()=>db.prepare("SELECT(SELECT count(*) FROM delegated_preparation_consents) AS consents,(SELECT count(*) FROM delegated_access_grants) AS grants,(SELECT count(*) FROM publication_capsules) AS capsules").first();
   const stats=async()=>{const r=await dispatch('/__ci/http-stats');return r.json();};
   const mode=async value=>{const r=await dispatch('/__ci/http-mode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:value})});assert.equal(r.status,200);};
@@ -204,6 +203,21 @@ test('signed Access identity original SDK consent and finite D1 choice compose a
    const before=await counts(),s=await stats();await mode('config-drift');
    assert.equal((await begin()).response.status,503);await mode('');await dispatch('/__ci/http-restore',{method:'POST'});
    assert.equal((await begin()).response.status,503);assert.deepEqual(await counts(),before);assert.equal((await stats()).sdkBegins,s.sdkBegins);
+  });
+  await t.test('configuration drift after a known acknowledged admission revokes exactly its own grant',async()=>{
+   // A NEW fixture instance, same original profile/dates; never revives the old invalidated host.
+   assert.equal((await dispatch('/__ci/http-new-host',{method:'POST'})).status,200);
+   const a=await begin();assert.equal(a.response.status,200);
+   const before=await stats(),prior=(await db.prepare('SELECT id,revoked_at FROM delegated_access_grants ORDER BY id').all()).results;
+   await mode('acknowledged-drift');
+   try{
+    const r=await approve(a);assert.equal(r.status,503);assert.equal(r.headers.get('Location'),null);
+    const after=await stats(),g=await grant(a);
+    assert.equal((await row(a)).state,'admitted');assert.ok(g.revoked_at,'known acknowledged admission must be revoked after configuration drift');
+    assert.equal(g.exchanged_at,'');assert.equal(after.sdkCompletions,before.sdkCompletions);assert.equal(after.revocations,before.revocations+1);
+    const current=(await db.prepare('SELECT id,revoked_at FROM delegated_access_grants ORDER BY id').all()).results;
+    assert.deepEqual(current.filter(r=>prior.some(p=>p.id===r.id)),prior);
+   }finally{await mode('');}
   });
  }finally{await Promise.allSettled(clients.map(c=>c.close()));await runtime.dispose();}
 });

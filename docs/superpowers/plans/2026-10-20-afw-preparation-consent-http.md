@@ -40,3 +40,8 @@ No real login/OTP/grant renewal, active G2 reuse, Container/event/guard/PC-off t
 
 ## Observed RED
 35adc22af07225207c3ca7616e4a1dc81d3d2174/CI39417064451/job118608556323:2370PASS/1FAIL/1existingSKIP. New parent fails the explicit missing-factory assertion before bundle; all existing tests remain green. This is feature-absence RED, NOT individual guard mutation evidence. Full native crypto/SDK cases must pass after implementation.
+
+## Whole-branch review / harness diagnosis
+Review at2593c2d:0Critical/1Important/0Minor. Regrade Important accepted: fresh acknowledged admission ownership must be captured before the next configuration/request fence so failure cleanup can retire only that own grant.
+First full implementation CI39417947462:2370PASS/1FAIL/1existingSKIP. New test imported the Workers SDK in Node, failing with unsupported cloudflare: URL before native execution. This is a harness failure, not a product or credential failure. Move default-closed factory calls to actual workerd; keep explicit source-presence assertion before bundle.
+Next RED retains source unchanged and adds actual D1 admitted-row forwarding fault that changes host configuration after acknowledgment. A new CI-only factory instance preserves the SAME original profile/date interval after the old host's terminal drift assertion; it does not revive the old instance, extend permission, or exercise remote resources.

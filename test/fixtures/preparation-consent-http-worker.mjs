@@ -7,10 +7,18 @@ import {importJWK} from 'jose';
 let host,options,pub,mode='',accessHeld=false;
 const release=new Set(),background=new Set();
 const stats={accessStarted:0,accessCompleted:0,sdkBegins:0,sdkCompletions:0,revocations:0};
-const once={reserve:false,admit:false,complete:false};
+const once={reserve:false,admit:false,complete:false,acknowledged:false};
 function database(raw){
  const wrapSession=db=>{
-  const wrap=(stmt,sql)=>({bind(...args){return wrap(stmt.bind(...args),sql);},first:(...args)=>stmt.first(...args),all:()=>stmt.all(),
+  const wrap=(stmt,sql)=>({bind(...args){return wrap(stmt.bind(...args),sql);},async first(...args){
+    const value=await stmt.first(...args);
+    // Fault AFTER the actual store's admitted receipt row has been read.
+    // Return the unchanged real row; no fake successful admission or SDK result.
+    if(mode==='acknowledged-drift'&&!once.acknowledged&&sql.startsWith('SELECT d.*,p.user_id')&&value?.state==='admitted'){
+     once.acknowledged=true;options.enabled=false;
+    }
+    return value;
+   },all:()=>stmt.all(),
    async run(){
     const value=await stmt.run();
     if(sql.includes('UPDATE delegated_access_grants SET revoked_at'))stats.revocations++;
@@ -69,6 +77,15 @@ export default{async fetch(request,env,ctx){
  }
  if(path==='/__ci/http-stats'){if(!accessHeld)await Promise.allSettled([...background]);return Response.json(stats);}
  if(path==='/__ci/http-restore'&&request.method==='POST'){options.enabled=true;return Response.json({restored:true});}
+ if(path==='/__ci/http-new-host'&&request.method==='POST'){
+  options.enabled=true;host=createDelegatedPreparationConsentHttpHost(options);
+  return Response.json({created:true,trialStartedAt:options.profile.trialStartedAt,trialExpiresAt:options.profile.trialExpiresAt});
+ }
+ if(path==='/__ci/http-default'){
+  let touched=0;const disabled={enabled:false};Object.defineProperty(disabled,'env',{get(){touched++;throw Error('must not execute');},enumerable:true});
+  return Response.json({defaultClosed:createDelegatedPreparationConsentHttpHost()===null,
+   disabledClosed:createDelegatedPreparationConsentHttpHost(disabled)===null,touched});
+ }
  if(path==='/authorize'){
   // Miniflare proxy Host normalization is CI-only, as in the original fixture.
   const headers=new Headers(request.headers);headers.set('host',new URL(request.url).host);
