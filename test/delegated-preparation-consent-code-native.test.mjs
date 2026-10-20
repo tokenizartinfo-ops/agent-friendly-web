@@ -14,7 +14,7 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
   mainFields:['module','main'],conditions:['workerd','worker','browser'],target:'es2022',write:false,external:['cloudflare:workers','node:*']});
  const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],
   script:bundle.outputFiles[0].text,kvNamespaces:['OAUTH_KV'],d1Databases:{DB:'preparation-code-pkce-ci-only'}}));
- const clients=[];let loseMcpAck=false;const transmissions=[];let sequence=0;
+ const clients=[];let loseMcpAck=false,mcpFault='';const transmissions=[];let sequence=0;
  try{
   const db=await runtime.getD1Database('DB');
   for(const name of(await readdir('drizzle')).filter(n=>/^\d+.*\.sql$/.test(n)).sort())
@@ -74,6 +74,7 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
     assert.equal(new URL(url).origin,issuer);
     const packet=typeof init?.body==='string'?JSON.parse(init.body):null,headers=new Headers(init?.headers);
     headers.set('Authorization','Bearer '+token.access_token);headers.set('host','example.invalid');
+    if(mcpFault&&packet?.method==='tools/list')headers.set('x-ci-mcp-fault',mcpFault);
     const response=await dispatch(url,{...init,headers});
     transmissions.push({rpc:packet?.method??'',tool:packet?.params?.name??'',status:response.status});
     if(loseMcpAck&&packet?.method==='tools/call'&&packet.params.name===prepare){
@@ -290,6 +291,65 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
    assert.equal(refresh.status,400);
    const invalid=await dispatch(resource,{method:'POST',headers:{Authorization:'Bearer ci-not-a-token','Content-Type':'application/json'},
     body:'{"jsonrpc":"2.0","id":7,"method":"tools/list"}'});assert.equal(invalid.status,401);
+  });
+
+  const mountStats=async()=>{const r=await dispatch('/__ci/mcp-stats');return r.json();};
+  const releaseHold=async()=>{const r=await dispatch('/__ci/release-mcp-hold',{method:'POST'});return r.json();};
+  await t.test('detached mount stays absent without opt-in and never evaluates disabled dependency getters',async()=>{
+   const r=await dispatch('/__ci/mount-disabled');assert.equal(r.status,200);
+   assert.deepEqual(await r.json(),{closed:true,touched:0});
+  });
+  for(const [label,mode]of [['legacy','legacy'],['modern',{pin:'2026-07-28'}]])
+   await t.test(label+' real token authentication held past the original deadline cannot create a late MCP server',async()=>{
+    const fresh=await authorizeToken(),client=await connect(fresh.token,mode);await client.listTools();const before=await mountStats();
+    const transmissionsBefore=transmissions.filter(x=>x.rpc==='tools/list').length;
+    mcpFault='held-auth';
+    try{
+     await assert.rejects(client.listTools());
+     assert.equal(transmissions.at(-1).status,503);assert.equal(transmissions.filter(x=>x.rpc==='tools/list').length-transmissionsBefore,1);
+     const stopped=await mountStats();assert.equal(stopped.authStarted,before.authStarted+1);
+     assert.equal(stopped.authCompleted,before.authCompleted);assert.equal(stopped.created,before.created);
+    }finally{mcpFault='';await releaseHold();}
+    const after=await mountStats();assert.equal(after.authCompleted,before.authCompleted+1);
+    assert.equal(after.created,before.created);assert.equal(after.connected,0);assert.equal(after.unknownState,0);
+    assert.deepEqual(await capsules(),{intents:2,capsules:2,events:2});
+   });
+  await t.test('legacy connect completing after timeout is closed again and never returns a tool response',async()=>{
+   const fresh=await authorizeToken(),client=await connect(fresh.token);await client.listTools();const before=await mountStats();
+   mcpFault='held-connect';
+   try{
+    await assert.rejects(client.listTools());assert.equal(transmissions.at(-1).status,503);
+    const stopped=await mountStats();assert.equal(stopped.created,before.created+1);
+    assert.equal(stopped.connectStarted,before.connectStarted+1);assert.equal(stopped.connectCompleted,before.connectCompleted);
+   }finally{mcpFault='';await releaseHold();}
+   const after=await mountStats();assert.equal(after.connectCompleted,before.connectCompleted+1);
+   assert.equal(after.connected,0);assert.equal(after.unknownState,0);assert.ok(after.closed>before.closed);
+   assert.deepEqual(await capsules(),{intents:2,capsules:2,events:2});
+  });
+  await t.test('configuration drift after actual token validation prevents any server creation',async()=>{
+   const fresh=await authorizeToken(),client=await connect(fresh.token);await client.listTools();const before=await mountStats();
+   mcpFault='config-changed';
+   try{await assert.rejects(client.listTools());assert.equal(transmissions.at(-1).status,503);}
+   finally{mcpFault='';await releaseHold();}
+   const after=await mountStats();assert.equal(after.created,before.created);assert.equal(after.connected,0);
+   assert.deepEqual(await capsules(),{intents:2,capsules:2,events:2});
+  });
+  await t.test('actual UTF8 ingress cap rejects an issued token request before any SDK validation',async()=>{
+   const fresh=await authorizeToken(),before=await mountStats(),body='{"pad":"'+'á'.repeat(2048)+'"}';
+   assert.ok(body.length<4096);assert.ok(new TextEncoder().encode(body).byteLength>4096);
+   const response=await dispatch(resource,{method:'POST',headers:{Authorization:'Bearer '+fresh.token.access_token,'Content-Type':'application/json'},body});
+   assert.equal(response.status,413);const after=await mountStats();
+   assert.ok(Number.isSafeInteger(before.authStarted));assert.equal(after.authStarted,before.authStarted);assert.equal(after.created,before.created);
+   assert.deepEqual(await capsules(),{intents:2,capsules:2,events:2});
+  });
+  await t.test('both real-token protocol clients retain primary schema admission at their explicit mount',async()=>{
+   const fresh=await authorizeToken(),clientsByProtocol=[await connect(fresh.token),await connect(fresh.token,{pin:'2026-07-28'})];
+   await db.prepare('DROP TRIGGER agent_capsule_preparations_no_delete').run();
+   try{for(const client of clientsByProtocol){
+    const result=await call(client,prepare,{...currentInput,idempotencyKey:'native-mount-absent-schema'});
+    assert.equal(result.structuredContent.code,'unavailable');assert.equal(result.structuredContent.preparation,null);
+   }}finally{await db.prepare(ddl.find(x=>x.includes('agent_capsule_preparations_no_delete'))).run();}
+   assert.deepEqual(await capsules(),{intents:2,capsules:2,events:2});
   });
  }finally{await Promise.allSettled(clients.map(client=>client.close()));await runtime.dispose();}
 });
