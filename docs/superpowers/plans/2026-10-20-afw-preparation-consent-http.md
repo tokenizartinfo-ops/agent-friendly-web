@@ -28,9 +28,9 @@ Interfaces: original opaque lease -> store/control; SDK original request -> hash
 - Cleanup timeout cannot turn an unknown revocation into a success claim.
 
 ## Tasks
-1. [ ] Add native characterization/tests first (test/delegated-preparation-consent-http-native.test.mjs + CI fixture); missing factory produces a deliberate feature-absent assertion, no bundler/import-error-only RED. Existing source not changed yet. Existing Actions npm test -> expected RED.
+1. [x] Add native characterization/tests first (test/delegated-preparation-consent-http-native.test.mjs + CI fixture); missing factory produces a deliberate feature-absent assertion, no bundler/import-error-only RED. Existing source not changed yet. Existing Actions npm test -> expected RED.
 2. [ ] Implement lib/delegated-preparation-consent-http.mjs and wire ONLY CI wrapper. Reuse original fixture SDK context via a CI-only export. Existing full Actions tests/lint/five builds -> expected GREEN.
-3. [ ] One most-capable fresh-context whole-branch review. Important/Critical one RED->fix/GREEN pass; Minor ledger/defer. No reviewer loop.
+3. [x] One most-capable fresh-context whole-branch review. Important/Critical one RED->fix/GREEN pass; Minor ledger/defer. No reviewer loop.
 4. [ ] Exact tested/reviewed tree merge with expected SHA; fresh mainCI/artifact metadata only; issue497 closes ledger. No docs-only retest churn.
 
 Ruling: the server cannot know a network acknowledgment lost after response handoff; cleanup applies to SDK completion failure/detected pre-handoff abort only — no client-receipt claim.
@@ -45,3 +45,7 @@ No real login/OTP/grant renewal, active G2 reuse, Container/event/guard/PC-off t
 Review at2593c2d:0Critical/1Important/0Minor. Regrade Important accepted: fresh acknowledged admission ownership must be captured before the next configuration/request fence so failure cleanup can retire only that own grant.
 First full implementation CI39417947462:2370PASS/1FAIL/1existingSKIP. New test imported the Workers SDK in Node, failing with unsupported cloudflare: URL before native execution. This is a harness failure, not a product or credential failure. Move default-closed factory calls to actual workerd; keep explicit source-presence assertion before bundle.
 Next RED retains source unchanged and adds actual D1 admitted-row forwarding fault that changes host configuration after acknowledgment. A new CI-only factory instance preserves the SAME original profile/date interval after the old host's terminal drift assertion; it does not revive the old instance, extend permission, or exercise remote resources.
+
+## Important reproducer / one fix pass
+f9fc78dfe4588dc8e3b4fb786c96a92af9584f7d/CI39419055516/job118615155395:2387PASS/2FAIL/1existingSKIP (one intended child plus its parent). All other native HTTP cases passed. The real post-admission-row configuration fault returned503/no code, but revoked_at was empty and no own revocation happened: exact review finding reproduced.
+Single source fix: validate fresh acknowledged exact grant/scopes, capture own, THEN recheck current configuration/request state before any subsequent authorization action. Unknown/malformed/competing receipts remain unowned; no retry or new grant. Spec and documentation clarify this boundary. Full GREEN and exact-tree/main integration remain pending; carrying PR/issue497 close Tasks2+4 without documentation-only CI churn.
