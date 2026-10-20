@@ -98,9 +98,9 @@ try{
    await start.focus();await page.keyboard.press('Enter');
    await page.waitForFunction(()=>document.activeElement?.id==='public-guide-input',null,{timeout:5000});
    const inputBox=await input.boundingBox();
-   assert.ok(inputBox&&inputBox.y>=0&&inputBox.y+inputBox.height<=viewport.height,'anchor reveals focused composer: '+label);
-   assert.equal(new URL(page.url()).hash,'#public-guide-input');
    await capture(page,'guide-composer-'+label);
+   assert.ok(inputBox&&inputBox.y>=0&&inputBox.y+inputBox.height<=viewport.height,'anchor reveals focused composer: '+label+' '+JSON.stringify({inputBox,viewport,scrollY:await page.evaluate(()=>scrollY)}));
+   assert.equal(new URL(page.url()).hash,'#public-guide-input');
    const message=locale==='es'?'Quiero saber por dónde empezar':locale==='en'?'I want to know where to start':'Quero saber por onde começar';
    await input.fill(message);await page.keyboard.press('Enter');
    await page.waitForFunction(()=>document.querySelectorAll('.public-guide-message.is-guide').length===2,null,{timeout:5000});
