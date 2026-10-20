@@ -1,0 +1,113 @@
+name: AFW public copy artifact preview
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/check-public-copy-artifact-browser.mjs'
+      - '.github/workflows/afw-public-copy-preview.yml'
+      - 'docs/AFW-PUBLIC-COPY-PREVIEW-2026-10-20.es.md'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  compiled-public-preview:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      AFW_QA_REVISION: ${{ github.event.pull_request.head.sha }}
+      AFW_PREVIEW_SOURCE: 5a8376d5d70dbb007190cd2eae23b10651a70f49
+      AFW_PREVIEW_ARTIFACT: '12289664737'
+      AFW_PREVIEW_RUN: '39478721753'
+      AFW_PREVIEW_ZIP_SHA256: c9b53eaefa6b92818f480656da14017ac4564b25b56fc446f5e7e3ffe644e878
+      AFW_PREVIEW_ROOT: ${{ runner.temp }}/afw-public-copy-preview-dist
+      AFW_PREVIEW_ARCHIVE: ${{ runner.temp }}/afw-public-copy-preview.zip
+      AFW_PREVIEW_META: ${{ runner.temp }}/afw-public-copy-preview-metadata.json
+      AFW_BROWSER_TOOLS: ${{ runner.temp }}/afw-public-preview-browser
+      PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/afw-public-preview-browsers
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Obtain only the pinned accepted public build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = "tokenizartinfo-ops/agent-friendly-web"
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$AFW_PREVIEW_ARTIFACT" > "$AFW_PREVIEW_META"
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const e=process.env,m=JSON.parse(readFileSync(e.AFW_PREVIEW_META,'utf8'));
+          assert.equal(m.id,Number(e.AFW_PREVIEW_ARTIFACT));
+          assert.equal(m.name,'afw-build-'+e.AFW_PREVIEW_SOURCE);
+          assert.equal(m.workflow_run.head_sha,e.AFW_PREVIEW_SOURCE);
+          assert.equal(m.workflow_run.id,Number(e.AFW_PREVIEW_RUN));
+          assert.equal(m.workflow_run.head_branch,'release/web-production-20261017');
+          assert.equal(m.expired,false);assert.ok(Date.parse(m.expires_at)>Date.now());
+          assert.equal(m.digest,'sha256:'+e.AFW_PREVIEW_ZIP_SHA256);
+          assert.ok(m.size_in_bytes>0&&m.size_in_bytes<=16777216);
+          console.log(JSON.stringify({artifact:m.id,source:m.workflow_run.head_sha,bytes:m.size_in_bytes,expires:m.expires_at}));
+          NODE
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$AFW_PREVIEW_ARTIFACT/zip" > "$AFW_PREVIEW_ARCHIVE"
+      - name: Verify archive and extract bounded files only in runner temp
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,stat,zipfile
+          archive=pathlib.Path(os.environ['AFW_PREVIEW_ARCHIVE'])
+          root=pathlib.Path(os.environ['AFW_PREVIEW_ROOT']).resolve()
+          temp=pathlib.Path(os.environ['RUNNER_TEMP']).resolve()
+          assert temp in root.parents and not root.exists()
+          raw=archive.read_bytes()
+          assert 0<len(raw)<=16777216
+          assert hashlib.sha256(raw).hexdigest()==os.environ['AFW_PREVIEW_ZIP_SHA256']
+          root.mkdir()
+          total=0;seen=set();files=[]
+          with zipfile.ZipFile(archive) as z:
+            entries=z.infolist();assert 0<len(entries)<=1024
+            for e in entries:
+              name=e.filename
+              assert name and not name.startswith('/') and '\\' not in name and ':' not in name and '\x00' not in name
+              assert all(p not in ('.','..') for p in name.rstrip('/').split('/'))
+              assert name not in seen;seen.add(name)
+              assert not stat.S_ISLNK(e.external_attr>>16) and not e.flag_bits&1
+              assert e.compress_type in (zipfile.ZIP_STORED,zipfile.ZIP_DEFLATED)
+              assert 0<=e.file_size<=8388608
+              total+=e.file_size;assert total<=67108864
+              dest=(root/name).resolve();assert root in dest.parents
+              if e.is_dir():dest.mkdir(parents=True,exist_ok=True);continue
+              data=z.read(e);assert len(data)==e.file_size
+              dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(data);files.append(name)
+          assert (root/'client').is_dir() and (root/'server').is_dir()
+          print(json.dumps({'files':len(files),'uncompressedBytes':total,'roots':sorted(set(n.split('/')[0] for n in files)),'serverTop':sorted(p.name for p in (root/'server').iterdir())[:20]}))
+          PY
+      - name: Preview preflight
+        run: node scripts/check-public-copy-artifact-browser.mjs --preflight-only
+      - name: Install existing project dependencies in ephemeral runner
+        run: npm ci
+      - name: Install pinned browser tools in runner temp
+        shell: bash
+        run: |
+          command -v npx >/dev/null
+          npm install --prefix "$AFW_BROWSER_TOOLS" --ignore-scripts --no-audit --no-fund playwright@1.64.1
+          node "$AFW_BROWSER_TOOLS/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Inspect compiled public pages on isolated native runtime
+        run: node scripts/check-public-copy-artifact-browser.mjs
+      - name: Preserve public preview screenshots and sanitized receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-public-copy-preview-${{ github.event.pull_request.head.sha }}
+          path: output/playwright/public-copy/
+          if-no-files-found: ignore
+          retention-days: 7
