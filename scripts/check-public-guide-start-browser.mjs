@@ -58,7 +58,7 @@ const collect=b=>{nativeLog=(nativeLog+b.toString()).slice(-24000);};
 native.stdout.on('data',collect);native.stderr.on('data',collect);
 native.on('error',x=>{nativeError=x;});native.on('exit',()=>{exited=true;});
 const base='http://127.0.0.1:8896',pause=ms=>new Promise(r=>setTimeout(r,ms));
-const captures=[],cases=[],errors=[],blocked=[],httpErrors=[];let browser;
+const captures=[],cases=[],errors=[],blocked=[],httpErrors=[],visibilityFailures=[];let browser;
 const capture=async(page,name)=>{const file=name+'.jpg';await page.screenshot({path:path.join(out,file),type:'jpeg',quality:76,fullPage:false});captures.push(file);};
 try{
  const until=Date.now()+45000;let ready=false;
@@ -101,8 +101,9 @@ try{
    await capture(page,'guide-composer-'+label);
    assert.ok(inputBox&&inputBox.y>=0&&inputBox.y+inputBox.height<=viewport.height,'anchor reveals focused composer: '+label+' '+JSON.stringify({inputBox,viewport,scrollY:await page.evaluate(()=>scrollY)}));
    const headerBox=await page.locator('.site-header').boundingBox();
-   assert.ok(headerBox&&inputBox.y>=headerBox.y+headerBox.height+4,'composer is clear of sticky navigation: '+label+' '+JSON.stringify({inputBox,headerBox}));
-   assert.equal(await input.evaluate(el=>{const r=el.getBoundingClientRect();return el.contains(document.elementFromPoint(r.left+r.width/2,r.top+4));}),true,'focused question box is not covered by navigation');
+   const inputClear=headerBox&&inputBox.y>=headerBox.y+headerBox.height+4;
+   const inputHit=await input.evaluate(el=>{const r=el.getBoundingClientRect();return el.contains(document.elementFromPoint(r.left+r.width/2,r.top+4));});
+   if(!inputClear||!inputHit)visibilityFailures.push({case:label,kind:'composer_covered',inputBox,headerBox,inputHit});
    assert.equal(new URL(page.url()).hash,'#public-guide-input');
    const message=locale==='es'?'Quiero saber por dónde empezar':locale==='en'?'I want to know where to start':'Quero saber por onde começar';
    await input.fill(message);await page.keyboard.press('Enter');
@@ -111,6 +112,11 @@ try{
    assert.equal(answer.topic,'getting_started','natural novice question reaches first step: '+label);
    assert.equal(await page.locator('.public-guide-message.is-guide .public-guide-bubble > p').last().innerText(),answer.answer);
    assert.equal(await input.inputValue(),'');
+   const answerBox=await page.locator('.public-guide-message.is-guide .public-guide-bubble > p').last().boundingBox();
+   const messagesBox=await page.locator('.public-guide-messages').boundingBox();
+   const visibleTop=Math.max(headerBox.y+headerBox.height,messagesBox.y);
+   const answerClear=answerBox&&answerBox.y>=visibleTop+2&&answerBox.y+answerBox.height<=Math.min(messagesBox.y+messagesBox.height,viewport.height)-2;
+   if(!answerClear)visibilityFailures.push({case:label,kind:'answer_not_visible',answerBox,messagesBox,headerBox});
    const guideDimensions=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth}));
    assert.ok(guideDimensions.scroll<=guideDimensions.width,'guide has no horizontal overflow: '+label);
    await input.scrollIntoViewIfNeeded();
@@ -119,6 +125,7 @@ try{
    await context.close();
   }
  }
+ assert.deepEqual(visibilityFailures,[],'question and answer must be readable beyond sticky navigation and container clips');
  assert.deepEqual(blocked,[],'no request outside isolated GET preview');
  assert.deepEqual(errors,[],'no browser error');assert.deepEqual(httpErrors,[],'public preview assets/routes available');
  total=0;assert.deepEqual(await inventory(root),before,'compiled artifact unchanged by preview');
@@ -138,7 +145,7 @@ try{
  await writeFile(path.join(out,'receipt.json'),JSON.stringify({...sourceProof,checkedAt:new Date().toISOString(),cases,captures,errors,blocked,httpErrors,artifactUnchanged:true,limits:'isolated compiled UI only; not Cloudflare hosting, private flow, full accessibility or PC-off'},null,2));
  console.log(JSON.stringify({...sourceProof,cases:cases.length,screenshots:captures.length,artifactUnchanged:true}));
 }catch(err){
- await writeFile(path.join(out,'failure.json'),JSON.stringify({...sourceProof,error:String(err).slice(0,600),cases,captures,errors,blocked,httpErrors},null,2));
+ await writeFile(path.join(out,'failure.json'),JSON.stringify({...sourceProof,error:String(err).slice(0,600),cases,captures,errors,blocked,httpErrors,visibilityFailures},null,2));
  throw err;
 }finally{
  try{await browser?.close();}finally{
