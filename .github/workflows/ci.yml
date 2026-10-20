@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, release/web-production-20261017]
 
 permissions:
   contents: read
@@ -13,6 +13,7 @@ jobs:
     # Keep the OS family used by native workerd/SQLite acceptance.
     # Qualify a new OS explicitly instead of following ubuntu-latest migration.
     runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
