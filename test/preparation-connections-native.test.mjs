@@ -93,7 +93,7 @@ async function nativeConnections(t,history=false){
    assert.ok((await saved(a.grant.id)).revoked_at);assert.equal((await stats()).revocations,before.revocations+1);
    assert.equal((await a.client.callTool({name:'read_project_summary',arguments:{}})).structuredContent.code,'delegated_access_denied');
    const next=await review();assert.match(next.html,/Retirado/);const n=await stats();
-   assert.equal((await revoke(next,a.grant.id)).status,303);assert.equal((await stats()).revocations,n.revocations);
+   assert.equal((await revoke(view,a.grant.id)).status,303);assert.equal((await stats()).revocations,n.revocations);
   });
   await t.test('identity Origin cookie duplicate and unknown fields cannot withdraw',async()=>{
    const a=await connection(),view=await review(),n=await stats();

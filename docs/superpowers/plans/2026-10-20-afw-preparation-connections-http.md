@@ -38,3 +38,9 @@ Create lib/delegated-preparation-connections-http.mjs; extend lib/delegated-prep
 - [ ] Fresh whole-branch review base0289523868372b0d25bcbca5f1477baf84512361→candidate. Critical/Important native RED→ONE fix pass→GREEN; Minor ledger/defer.
 - [ ] Exact tested head/tree merge and fresh main CI/artifact metadata/current ref. Final issue497 receipt closes1–3 and supersedes stale plan boxes without docs-only CI churn.
 - [ ] Preserve explicit exclusions: synthetic CI not Cloudflare identity/human/remote proof; DDL remainsUNINSTALLED; no callback/G3/G4/G5/G6 activation.
+
+## Observed native RED / implementation rulings
+09817e8de12f952c27f41911901f25d977c849aa / Actions39435852276/job118672534321:2410PASS2FAIL1existingSKIP; two explicit missing-factory assertions BEFORE bundling. Baseline unaffected. Task1 RED observed; this is feature absence, not individual guard mutation proof.
+Ruling: CSRF kind digest binds BOTH original preparation profile and management window, so an old management receipt cannot carry into a new window. Management expiry is displayed; it never extends agent expiry. Return idempotent303 only after current primary revoked target plus valid same-subject original nonce/cookie; a consumed nonce can NOT retry an active target. Native duplicate uses the original acknowledged form, not a fabricated hidden nonce on an already-retired-only page.
+Ruling: GET creates nonce only if at least one unwithdrawn row needs a form; empty/allwithdrawn views remain metadata only. Fresh primary nonce receipt required before form handoff. No new owner project fields read at all. Specialized scoped SQL is necessary because generic revokeGrant only pins id/subject; new target/profile/date/scopes/deadline fences must be atomic.
+Task2 candidate introduced after observed RED, pending full GREEN/review. Cleanup tracks actual outstanding work but waits at most2s; no cancellation/physical-stop claim or new authorization budget.
