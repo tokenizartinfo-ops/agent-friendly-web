@@ -1,0 +1,36 @@
+# AFW detached preparation router implementation plan
+> For agentic workers: REQUIRED superpowers:executing-plans inline, TDD, one fresh most-capable whole-branch review; no per-task agents.
+Goal: same-AS route composition with original ingress lifetime and independent human withdrawal.
+Architecture: narrow source-only direct dispatcher, root guard clocks shared by four accepted hosts; optional opaque borrowed lease propagated into existing boundary and SQL cutoff. No new async proxy/handoff fence.
+Tech: pinned SDK1.2.1/Agents/MCP/jose/Miniflare/D1, no dependency/workflow/secret changes. GitHub APIs/Actions only.
+Spec: ../specs/2026-10-20-afw-preparation-router.md
+
+## Global constraints / rulings
+Source only, defaultclosed/unmounted, five fixed paths, no discovery/refresh/registration fallback. Existing <=10min original profile and independent <=10min management; original request<=5000ms, request4096/output32768/URL8192 inherited. G2CLOSED/noOTP; operationalReadiness=false. Cloud branch/spec/plan/PR/issue497 ledger substitutes local worktree/sdd to honor owner cloud-first; source revert is rollback. Owner has delegated routine artifact/implementation/merge decisions; live gates still separate. Root port initialization failure never enables an agent route or disables independently valid management. Borrower never closes upstream lease; no new async output proxy after child handoff.
+
+## Review focus
+1. Root drift during an await must reach child clocks/guard without adding a stale post-handoff success decision.
+2. Original agent expiry, issuance closure or failed construction must preserve valid own management; no later dynamic activation.
+3. Closed/forged/borrowed lease must not start a fresh5s or be closed by a borrower; same identity reaches SQL cutoff.
+4. Same AS validates tokens and original explicit scopes; no fallback into old synthetic/read-only Worker, SDK bypass or refresh/discovery publication.
+5. Late work/no ACK cannot gain authority or new response budget; cleanup may reduce only known-owned state, no cancellation claim.
+
+## Task1 — native RED contracts
+Files: test/preparation-router-native.test.mjs, test/fixtures/preparation-router-worker.mjs.
+Consumes actual existing HTTP boundary/lease and current source host signatures. Produces missing-factory assertion BEFORE bundling, plus real Request/Response borrowed closed-lease regression.
+- [ ] Write 'closed borrowed ingress lease cannot invoke HTTP handler or reset deadline': expected non200 and invoked0; valid borrowed request leaves parent control open until owner closes. Initial native unit RED must name ignored parent behavior, not import typo.
+- [ ] Write actual integrated source fixture and tests (read/drafts PKCE/prepare/reconcile/withdraw/MCPdenial, closed direct child leases, invalid routes/identity, flag/root drift, held original auth; explicit history seed for expired construction). Missing new export must fail before SDK bundle.
+- [ ] Existing Actions npm test. Expected old suite2422PASS1SKIP retained, named new RED failures only; observe full completed log before source implementation. Commit remote test-only head.
+
+## Task2 — propagation and direct router GREEN
+Modify lib/delegated-{preparation-consent-http,preparation-token-host,preparation-connections-http,preparation-mcp-mount,capsule-preparation-http}.mjs. Create lib/delegated-preparation-router.mjs + docs/AFW-PREPARATION-ROUTER-2026-10-20.es.md. Add minimal AGENTS prefix preserving complete original suffix if needed.
+Interfaces: existing optional last lease is trusted WeakMap identity; owned iff argument===undefined. Invalid supplied value is failure, never a default. MCP mount forwards lease as boundary's fourth argument. Each local context still closes itself; only creator closes lease. Router options exact per spec, sole original root lease; actual AS private, real validateToken binding, fixed paths only. Root guard wrappers ensure root drift reaches each existing child check across awaits.
+- [ ] Minimal optional lease changes; preserve standalone statuses, original request clock, body/output caps, cleanup semantics.
+- [ ] Implement exact dispatcher/flags/immutable configuration, independent management, construction-only agent ports, denied unknown routes and no metadata/client-registration exposure.
+- [ ] Native suite passes; actual drafts request prepares once and reconciles; same client denies after human withdrawal. Direct probes reject closed parent without consuming token/nonce. Expired history tests are labeled synthetic, no past OAuth claim.
+- [ ] Full Actions npm test/lint/fivebuilds expectedGREEN; inspect failures with systematic-debugging. No local commands/deploy/artifact download. Commit exact candidate.
+
+## Task3 — one review and integration
+- [ ] Fresh whole-branch review basefed5b20c→candidate, all modified host dependencies and review-focus conditions above. Important/Critical observed RED→ONE fix pass→full GREEN. Minor defer; no polishing/re-review loop.
+- [ ] Expected exact head merge, tree/parents/current main and fresh CI logs/artifact metadata. Final issue497 receipt closes1–3 and supersedes plan boxes without administrative CI churn.
+- [ ] Clear completion limits: source router+CI, NOT metadata discovery/live mount/schema/consent/client/Container/events/cloudguard/PC-off/Max. Existing runtime source unchanged; support case/monitor unchanged. Source rollback via revert; no rows or history removed.
