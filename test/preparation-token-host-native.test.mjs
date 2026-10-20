@@ -12,7 +12,7 @@ try{source=await readFile('lib/delegated-preparation-token-host.mjs','utf8');}
 catch(error){if(error.code!=='ENOENT')throw error;}
 const issuer='https://example.invalid',resource=issuer+'/mcp',callback='https://client.example.invalid/callback';
 const READ='afw:project:read',DRAFTS='afw:capsule:prepare';
-test('finite token host enforces original consent scope deadline and native withdrawal',{timeout:120000},async t=>{
+async function nativeHostSuite(t,profileMs=180000){
  assert.match(source??'',/export function createDelegatedPreparationAuthorizationHost\(/,'missing finite preparation token host');
  const keys=await generateKeyPair('RS256'),other=await generateKeyPair('RS256');
  const publicJwk=await exportJWK(keys.publicKey);
@@ -25,7 +25,7 @@ test('finite token host enforces original consent scope deadline and native with
  const bundle=await build({entryPoints:['test/fixtures/preparation-token-host-worker.mjs'],bundle:true,format:'esm',platform:'neutral',
   mainFields:['module','main'],conditions:['workerd','worker','browser'],target:'es2022',write:false,external:['cloudflare:workers','node:*']});
  const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],
-  script:bundle.outputFiles[0].text,bindings:{CI_PUBLIC_JWK:JSON.stringify(publicJwk)},kvNamespaces:['OAUTH_KV'],d1Databases:{DB:'preparation-http-identity-ci-only'}}));
+  script:bundle.outputFiles[0].text,bindings:{CI_PUBLIC_JWK:JSON.stringify(publicJwk),CI_PREPARATION_PROFILE_MS:String(profileMs)},kvNamespaces:['OAUTH_KV'],d1Databases:{DB:'preparation-http-identity-ci-only'}}));
  const clients=[];
  try{
   const db=await runtime.getD1Database('DB');
@@ -91,6 +91,18 @@ test('finite token host enforces original consent scope deadline and native with
    code_verifier:a.verifier,resource,...extra})});
   const complete=async decision=>{const a=await begin(),accepted=await approve(a,decision);assert.equal(a.response.status,200);assert.equal(accepted.status,302);return {a,accepted};};
   const rawGrant=async a=>db.prepare('SELECT g.exchanged_at,g.revoked_at FROM delegated_access_grants g JOIN delegated_preparation_consents c ON c.grant_id=g.id WHERE c.handle_hash=?').bind(await hash(a.handle)).first();
+  if(profileMs===55000){
+   await t.test('a short original profile rejects before consuming or withdrawing the admitted permission',async()=>{
+    assert.equal(bootstrap.trialExpiresAt-bootstrap.trialStartedAt,55000);
+    const {a,accepted}=await complete('read'),before=await stats(),response=await redeem(a,accepted),after=await stats();
+    assert.equal((await response.json()).access_token,undefined);
+    assert.deepEqual(await rawGrant(a),{exchanged_at:'',revoked_at:''},'SDK minimum TTL must be checked before consuming the original permission');
+    assert.equal(response.status,503);assert.equal(after.consumed,before.consumed);
+    assert.equal(after.revocations,before.revocations);assert.equal(after.sdkTokensIssued,before.sdkTokensIssued);
+    assert.equal(after.sdkTokenCalls,before.sdkTokenCalls+1);
+   });
+   return;
+  }
   await t.test('read choice issues an original-expiry token without refresh or preparation tools',async()=>{
    const {a,accepted}=await complete('read'),r=await redeem(a,accepted);assert.equal(r.status,200);
    const token=await r.json();assert.equal(token.scope,READ);assert.equal(token.refresh_token,undefined);assert.ok(token.expires_in>0&&token.expires_in<=90);
@@ -183,4 +195,6 @@ test('finite token host enforces original consent scope deadline and native with
    const next=await complete('read');assert.equal((await redeem(next.a,next.accepted)).status,503);assert.equal((await rawGrant(next.a)).exchanged_at,'');
   });
  }finally{await Promise.allSettled(clients.map(c=>c.close()));await runtime.dispose();}
-});
+}
+test('finite token host enforces original consent scope deadline and native withdrawal',{timeout:120000},nativeHostSuite);
+test('short original preparation window respects the native SDK minimum TTL',{timeout:30000},t=>nativeHostSuite(t,55000));

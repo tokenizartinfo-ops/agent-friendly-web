@@ -14,14 +14,14 @@ import {checkAgentCapsulePreparationSchema} from '../../lib/agent-capsule-prepar
 const issuer='https://example.invalid',resource=issuer+'/mcp',callback=issuer+'/callback';
 const READ='afw:project:read',DRAFTS='afw:capsule:prepare';
 const projectId='project-a';
-let bootstrap,as,clientId,started;
+let bootstrap,as,clientId,started,profileDuration=180000;
 const hash=async value=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value))),x=>x.toString(16).padStart(2,'0')).join('');
 const bad=(status=400)=>Response.json({code:'ci_request_rejected'},{status,headers:{'Cache-Control':'no-store'}});
 const session=env=>env.DB.withSession('first-primary');
 const store=env=>createDelegatedOAuthStore(session(env));
 const one=(form,key)=>{const values=form.getAll(key);if(values.length!==1||typeof values[0]!=='string'||!values[0]||values[0].length>1024)throw Error('field');return values[0];};
 const policy=(scopes,start,end)=>({enabled:true,requestedScopes:scopes,transactionStartedAt:start,transactionExpiresAt:end,
- trialStartedAt:started,trialExpiresAt:started+180000});
+ trialStartedAt:started,trialExpiresAt:started+profileDuration});
 async function owned(env,subject){
  const row=await session(env).prepare("SELECT p.revision,p.website,s.canonical_origin,s.hostname FROM site_projects p JOIN registry_sites s ON s.project_id=p.id AND s.user_id=p.user_id JOIN domain_claims c ON c.site_id=s.id AND c.project_id=p.id AND c.user_id=p.user_id WHERE p.id=? AND p.user_id=? AND p.role='owner' AND s.verification_status='verified' AND c.status='verified' AND julianday(c.verified_at)<=julianday('now') AND julianday(c.verified_at)+90>julianday('now') ORDER BY c.verified_at DESC,c.id DESC LIMIT 1")
   .bind(projectId,subject).first();
@@ -60,12 +60,12 @@ async function ready(env){
  })();
  return bootstrap;
 }
-const consentProfile=()=>({profileId:'afw.preparation-consent.v1',projectId,clientId,resource,trialStartedAt:started,trialExpiresAt:started+180000});
+const consentProfile=()=>({profileId:'afw.preparation-consent.v1',projectId,clientId,resource,trialStartedAt:started,trialExpiresAt:started+profileDuration});
 const originalPacket=auth=>JSON.stringify({responseType:auth.responseType,clientId:auth.clientId,redirectUri:auth.redirectUri,scope:auth.scope,
  state:auth.state,codeChallenge:auth.codeChallenge,codeChallengeMethod:auth.codeChallengeMethod,resource:auth.resource,issuer:auth.issuer});
 async function originalRow(env,handleHash,actor){
  return session(env).prepare("SELECT * FROM delegated_preparation_consents WHERE handle_hash=? AND user_id=? AND profile_id='afw.preparation-consent.v1' AND project_id=? AND client_id=? AND resource=? AND trial_started_at=? AND trial_expires_at=?")
-  .bind(handleHash,actor,projectId,clientId,resource,started,started+180000).first();
+  .bind(handleHash,actor,projectId,clientId,resource,started,started+profileDuration).first();
 }
 function consentStorage(env,requestLease,fault=''){
  let failed=false;
@@ -97,7 +97,7 @@ async function authorize(request,env){
   if(!await wait(()=>owned(env,actor)))return bad(403);
   const source=await wait(()=>session(env).prepare("SELECT revision FROM site_projects WHERE id=? AND user_id=? AND role='owner'").bind(projectId,actor).first());
   if(!source)return bad(403);
-  const originalEnd=Math.min(entered+600000,started+180000);
+  const originalEnd=Math.min(entered+600000,started+profileDuration);
   const candidate=evaluatePreparationConsentChoice({decision:'read'},policy(auth.scope,entered,originalEnd),{now:Date.now()});
   if(candidate.code!=='choice_valid')return bad(403);
   const transaction=await wait(()=>api.beginConsent(auth));
@@ -110,7 +110,7 @@ async function authorize(request,env){
    const headers=new Headers(transaction.headers);for(const [key,value]of Object.entries(view.headers))headers.set(key,value);
    return new Response(view.html,{status:view.status,headers});
   }
-  return Response.json({handle:transaction.handle,trialStartedAt:started,trialExpiresAt:started+180000},{headers:transaction.headers});
+  return Response.json({handle:transaction.handle,trialStartedAt:started,trialExpiresAt:started+profileDuration},{headers:transaction.headers});
  }
  if(request.method!=='POST'||request.headers.get('Origin')!==issuer
   ||request.headers.get('Content-Type')!=='application/x-www-form-urlencoded')return bad(403);
@@ -230,7 +230,7 @@ async function lifecycleProbe(request){
 async function mcp(request,env,ctx){
  const fault=request.headers.get('x-ci-mcp-fault')??'';
  const pins={...env,AFW_DELEGATED_OAUTH_ENABLED:'true',AFW_DELEGATED_PREPARATION_ENABLED:'true',AFW_OAUTH_SERVICE_MODE:'window',
-  AFW_OAUTH_PILOT_EXPIRES_AT:new Date(started+180000).toISOString(),AFW_OAUTH_PILOT_PROJECT_ID:projectId,AFW_OAUTH_PILOT_CLIENT_ID:clientId,
+  AFW_OAUTH_PILOT_EXPIRES_AT:new Date(started+profileDuration).toISOString(),AFW_OAUTH_PILOT_PROJECT_ID:projectId,AFW_OAUTH_PILOT_CLIENT_ID:clientId,
   ACCESS_TEAM_DOMAIN:'synthetic.cloudflareaccess.com',ACCESS_AUD:'ci-only-aud',DELEGATED_RATE_LIMITER:{async limit(){return {success:true};}}};
  const options={enabled:true,issuer,env:pins,validateAccessToken:environment=>async(audience,token)=>{
   metrics.authStarted++;
@@ -253,7 +253,7 @@ export default{async fetch(request,env,ctx){
  if(new URL(request.url).origin!==issuer)return bad(404);
  try{
   await ready(env);const path=new URL(request.url).pathname;
-  if(path==='/__ci/bootstrap'&&request.method==='POST')return Response.json({clientId,trialStartedAt:started,trialExpiresAt:started+180000});
+  if(path==='/__ci/bootstrap'&&request.method==='POST')return Response.json({clientId,trialStartedAt:started,trialExpiresAt:started+profileDuration});
   if(path==='/authorize')return await authorize(request,env);
   if(path==='/__ci/connection')return await connection(request,env);
   if(path==='/oauth/token'&&request.method==='POST')return await token(request,env,ctx);
