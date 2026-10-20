@@ -1,0 +1,42 @@
+name: AFW public delivery qualification
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/prepare-public-cloud-delivery.py'
+      - 'test/public_cloud_delivery_test.py'
+      - 'config/public-cloud-delivery.v1.json'
+      - 'docs/evidence/2026-10-20-guide-delivery/**'
+      - '.github/workflows/afw-public-delivery-qualification.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  qualify:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && (github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Test public package rejection and provenance checks
+        run: python3 -m unittest discover -s test -p 'public_cloud_delivery_test.py' -v
+      - name: Qualify exact frozen artifact in cloud
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python3 scripts/prepare-public-cloud-delivery.py
+      - name: Preserve validated handoff without deploying
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-public-qualified-handoff-${{ github.run_id }}-${{ github.run_attempt }}
+          path: output/public-cloud-delivery/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
