@@ -100,6 +100,9 @@ try{
    const inputBox=await input.boundingBox();
    await capture(page,'guide-composer-'+label);
    assert.ok(inputBox&&inputBox.y>=0&&inputBox.y+inputBox.height<=viewport.height,'anchor reveals focused composer: '+label+' '+JSON.stringify({inputBox,viewport,scrollY:await page.evaluate(()=>scrollY)}));
+   const headerBox=await page.locator('.site-header').boundingBox();
+   assert.ok(headerBox&&inputBox.y>=headerBox.y+headerBox.height+4,'composer is clear of sticky navigation: '+label+' '+JSON.stringify({inputBox,headerBox}));
+   assert.equal(await input.evaluate(el=>{const r=el.getBoundingClientRect();return el.contains(document.elementFromPoint(r.left+r.width/2,r.top+4));}),true,'focused question box is not covered by navigation');
    assert.equal(new URL(page.url()).hash,'#public-guide-input');
    const message=locale==='es'?'Quiero saber por dónde empezar':locale==='en'?'I want to know where to start':'Quero saber por onde começar';
    await input.fill(message);await page.keyboard.press('Enter');
