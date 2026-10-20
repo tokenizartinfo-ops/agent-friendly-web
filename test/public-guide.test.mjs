@@ -176,3 +176,42 @@ test('guide quick replies resolve to a concrete topic', () => {
     }
   }
 });
+
+
+test('a novice can ask where to begin naturally in each supported language', () => {
+  const cases = [
+    ['es', 'Quiero saber por dónde empezar', 'Sí, dale'],
+    ['es', 'No sé cómo comenzar con mi sitio', 'Sí, dale'],
+    ['en', 'I want to know where to start', 'Yes, please'],
+    ['en', 'Where do I begin with my website?', 'Yes, please'],
+    ['en', 'How can I start?', 'Yes, please'],
+    ['pt', 'Quero saber por onde começar', 'Sim, por favor'],
+    ['pt', 'Como posso começar com meu site?', 'Sim, por favor'],
+    ['pt', 'Por onde iniciar?', 'Sim, por favor'],
+  ];
+  for (const [locale, message, acknowledgement] of cases) {
+    const turn = respondToPublicGuide({ locale, message, context: PUBLIC_GUIDE_INITIAL_CONTEXT });
+    assert.equal(turn.topic, 'getting_started', locale + ': ' + message);
+    assert.equal(turn.blocked, false);
+    assert.equal(turn.next_context.pending_follow_up, 'audit_process');
+    assert.ok(turn.sources.some((source) => source.id === 'audit'));
+    const next = respondToPublicGuide({ locale, message: acknowledgement, context: turn.next_context });
+    assert.equal(next.topic, 'audit_process');
+  }
+});
+
+test('start questions keep specific intent and safety boundaries ahead of onboarding', () => {
+  for (const [locale, message, topic] of [
+    ['en', 'Where to start with pricing?', 'pricing'],
+    ['pt', 'Por onde começar a publicar os arquivos?', 'action_boundary'],
+    ['en', 'Where to start with a public audit?', 'audit_process'],
+    ['pt', 'Por onde começar com privacidade?', 'security'],
+    ['en', 'Where to start? My API key is sk-test-123456789-super-secret', 'security_block'],
+    ['en', 'The clock will start tomorrow', 'clarification'],
+    ['pt', 'Meu computador vai iniciar amanhã', 'clarification'],
+  ]) {
+    const turn = respondToPublicGuide({ locale, message, context: PUBLIC_GUIDE_INITIAL_CONTEXT });
+    assert.equal(turn.topic, topic, message);
+    assert.equal(turn.blocked, topic === 'security_block');
+  }
+});
