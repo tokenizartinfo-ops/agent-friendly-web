@@ -23,3 +23,6 @@ Cloud-only source and Actions. No local build, browser, dependencies or download
 This source slice closes renderer/summary and automated runner checks only. Production consent/store/absolute-original metadata/CAS/recovery, SDK-authenticated caller and UI/route integration, guarded MCP mount, populated migration and NEW finite human trial remain. No actual live permission offer.
 G2 CLOSED, no OTP/reconnection. Container02382110, event subscription/useful cloud turn/native withdrawal, PC-off/Max separate. operationalReadiness=false.
 Rollback reviewed source revert; no current data/config/custody affected. Budget browser job10min, one own runner, no recurring task/model/customer action; stop closed on failure.
+
+## Observed RED
+Head d8170e6b7db64dbc47b707172783ae2598e117cb / CI39350046561/job118391837687:2312PASS/12FAIL/1existingSKIP. Only the 12 new renderer/summary behavior cases failed for missing functions; existing suite passed. Implement narrow view now; GREEN/review/main evidence still pending in carrying receipt.
