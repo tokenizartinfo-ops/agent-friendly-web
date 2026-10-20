@@ -122,3 +122,11 @@ El [diseño del primer bloque](superpowers/specs/2026-10-19-afw-agent-consumptio
 Ahorro de tokens/costo y descuentos por reuso son objetivos a medir, no resultados acreditados ni condiciones comerciales activas. El recorrido acompañado y el híbrido declaran su asistencia adicional; el acceso económico no depende de la marca del modelo ni excluye a empresas con agentes propios.
 
 La preparación se realiza por API en GitHub para reducir recursos del PC. La ejecución cloud futura requiere un entorno verificado; esta preferencia no acredita guardia permanente. El diagnóstico de Containers, los avisos nativos, retirada y ensayo PC-off mantienen sus criterios separados. Las propuestas de etapas posteriores requieren diseño y aceptación propios.
+
+## Propósito y presencia propia — ampliación del20oct2026
+
+La [filosofía integral](AFW-INTEGRAL-PHILOSOPHY-2026-10-07.es.md#fuente-propia-en-una-web-mediada-por-agentes) incorpora una distinción de marca: menos clics humanos no elimina el valor de una fuente propia, mantenible y verificable. Una web puede comunicar el propósito de una persona, profesional, marca u organización también cuando el acceso ocurre mediante un asistente.
+
+Presentar AFW como acompañamiento para expresar qué aporta ese responsable, a quién, con qué alcance y qué evidencia. La información clara y coherente facilita su evaluación; no garantiza selección por modelos ni sustituye una necesidad del comprador. «AI first» y la cantidad de archivos no acreditan utilidad, disponibilidad de herramientas o veracidad.
+
+Aplicar esta dirección a futuras presentaciones y versiones de correo, sin cambiar paquetes históricos, aprobar envíos, añadir tracking o publicar precios por esta ampliación. Las comparaciones de costos, ahorro, demanda y alternativas siguen pendientes de medición. Se preserva la investigación comercial como hipótesis revisable.
