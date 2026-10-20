@@ -86,6 +86,7 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
   }
   const call=(client,name,args={})=>client.callTool({name,arguments:args});
   let sessionToken,legacy,modern,first;
+  let currentInput={...input};
 
   await t.test('unknown scopes and foreign project produce no consent or grant',async()=>{
    const before=await counts();
@@ -177,19 +178,27 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
   await t.test('issued KV token reaches legacy MCP and prepares an actual D1 capsule',async()=>{
    legacy=await connect(sessionToken.token);
    assert.ok((await legacy.listTools()).tools.some(x=>x.name===prepare));
-   first=await call(legacy,prepare,input);assert.equal(first.structuredContent.code,'prepared');
+   // The earlier owner changes legitimately advanced the dossier revision.
+   // Keep that history; prove stale input fails, then use a fresh authenticated read.
+   assert.equal((await call(legacy,prepare,input)).structuredContent.code,'revision_conflict');
+   const summary=await call(legacy,'read_project_summary');
+   assert.notEqual(summary.isError,true);
+   const current=await db.prepare("SELECT revision FROM site_projects WHERE id='project-a'").first();
+   assert.ok(Number.isSafeInteger(current.revision)&&current.revision>input.expectedRevision);
+   currentInput={...input,expectedRevision:current.revision};
+   first=await call(legacy,prepare,currentInput);assert.equal(first.structuredContent.code,'prepared');
    for(const flag of ['executionAllowed','chargeAllowed','publicationAllowed'])assert.equal(first.structuredContent[flag],false);
    assert.equal(JSON.stringify(first).includes(sessionToken.token.access_token),false);
    assert.deepEqual(await capsules(),{intents:1,capsules:1,events:1});
   });
   await t.test('modern MCP uses the same issued token and primary result without another preparation',async()=>{
    modern=await connect(sessionToken.token,{pin:'2026-07-28'});
-   const found=await call(modern,reconcile,input);assert.equal(found.structuredContent.code,'prepared');
+   const found=await call(modern,reconcile,currentInput);assert.equal(found.structuredContent.code,'prepared');
    assert.deepEqual(found.structuredContent.preparation,first.structuredContent.preparation);
    assert.deepEqual(await capsules(),{intents:1,capsules:1,events:1});
   });
   await t.test('lost HTTP ACK uses one write POST and explicit reconciliation under the same real token',async()=>{
-   const before=transmissions.filter(x=>x.rpc==='tools/call'&&x.tool===prepare).length,lost={...input,idempotencyKey:'code-native-lost-0001'};
+   const before=transmissions.filter(x=>x.rpc==='tools/call'&&x.tool===prepare).length,lost={...currentInput,idempotencyKey:'code-native-lost-0001'};
    loseMcpAck=true;await assert.rejects(call(legacy,prepare,lost),/CI MCP acknowledgment lost/);
    assert.equal(transmissions.filter(x=>x.rpc==='tools/call'&&x.tool===prepare).length-before,1);
    const found=await call(modern,reconcile,lost);assert.equal(found.structuredContent.code,'prepared');
@@ -199,7 +208,7 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
    await db.prepare("UPDATE delegated_access_grants SET revoked_at=? WHERE exchanged_at<>'' AND revoked_at='' AND scopes_json LIKE '%capsule:prepare%'")
     .bind(new Date().toISOString()).run();
    for(const client of [legacy,modern]){
-    const denied=await call(client,reconcile,input);assert.equal(denied.structuredContent.code,'delegated_access_denied');
+    const denied=await call(client,reconcile,currentInput);assert.equal(denied.structuredContent.code,'delegated_access_denied');
     assert.equal(denied.structuredContent.preparation,null);
    }
    assert.deepEqual(await capsules(),{intents:2,capsules:2,events:2});
