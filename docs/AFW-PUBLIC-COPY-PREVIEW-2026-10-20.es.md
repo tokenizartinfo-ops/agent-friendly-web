@@ -23,3 +23,8 @@ Primero workflow sin implementación: RED esperado por herramienta ausente antes
 
 ## Qué no acredita
 No certifica WCAG, lector de pantalla, prueba humana final, configuración/Access/identidad/D1/modelo real, hosting Cloudflare de la candidata, recepción de eventos, Containers, guardia Codex, PC-off o Max. G2 cerrado/noOTP; operationalReadiness=false. El programa/ZIP inspeccionado sigue5a8376d5 incluso si se integra después el arnés; no sustituirlo por todo main o por otro build. Nueva candidata futura necesita fingerprint y revisión explícitos.
+
+## Primera ejecución real y revisión visual
+B987d876, Actions39481514563/job118830993367,20oct19:13UTC:6casos reales de UI compilada,18capturas y2contactos; ZIP original337archivos/5471826bytes, inmutable antes/después. Sin errores de navegador, respuestasHTTP>=400 o solicitudes externas/de escritura en el navegador. CI separada39481514541:1158PASS/0FAIL/0SKIP, lint0errores/2advertencias previas, cinco builds. [Capturas e inspección](evidence/2026-10-20-public-copy-preview/README.md). Se conservan como evidencia de ESTE arnés y del producto5a8376d5, no de producción ni de una revisión futura.
+
+Auto-revisión posterior: finalmente anidado para que un rechazo de browser.close no omita la terminación nativa; se añade comprobación TCP de cierre del puerto propio. Exige nuevo ensayo de ese arnés; los recibos exactos quedan en PR527. No se recompila ni cambia el producto5a8376d5. Las capturas no validan equivalencia semántica multilingüe: ES respondió getting_started; EN/PT pidieron aclaración, comportamiento existente observado y pendiente de mejora aparte. Entrada/compositor móvil bajo el pliegue inicial es una oportunidad existente; no se rediseña aquí.

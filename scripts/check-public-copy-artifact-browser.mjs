@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
+import {connect as connectSocket} from 'node:net';
 import {mkdir,readFile,readdir,realpath,stat,writeFile,lstat} from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -162,8 +163,21 @@ try{
  await writeFile(path.join(out,'failure.json'),JSON.stringify({...sourceProof,error:String(err).slice(0,600),cases,captures,errors,blocked,httpErrors},null,2));
  throw err;
 }finally{
- await browser?.close();
- native.kill('SIGTERM');for(let n=0;n<30&&!exited;n++)await pause(100);
- if(!exited)native.kill('SIGKILL');
- await writeFile(path.join(out,'native-preview.log'),nativeLog.replace(/\x1b\[[0-9;]*m/g,''));
+ try{await browser?.close();}finally{
+  native.kill('SIGTERM');for(let n=0;n<30&&!exited;n++)await pause(100);
+  if(!exited)native.kill('SIGKILL');
+  let portClosed=false;
+  for(let n=0;n<10&&!portClosed;n++){
+   portClosed=await new Promise(resolve=>{
+    const socket=connectSocket({host:'127.0.0.1',port:8897});
+    socket.once('connect',()=>{socket.destroy();resolve(false);});
+    socket.once('error',err=>{socket.destroy();resolve(err.code==='ECONNREFUSED');});
+    socket.setTimeout(1000,()=>{socket.destroy();resolve(false);});
+   });
+   if(!portClosed)await pause(100);
+  }
+  await writeFile(path.join(out,'cleanup.json'),JSON.stringify({nativeExited:exited,loopbackPortClosed:portClosed,scope:'owned runner process only'},null,2));
+  await writeFile(path.join(out,'native-preview.log'),nativeLog.replace(/\x1b\[[0-9;]*m/g,''));
+  assert.ok(exited&&portClosed,'owned native preview must terminate and release its loopback port');
+ }
 }

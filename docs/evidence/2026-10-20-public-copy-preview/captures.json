@@ -1,0 +1,218 @@
+{
+  "productRevision": "5a8376d5d70dbb007190cd2eae23b10651a70f49",
+  "harnessRevision": "b987d8769aa676225226854e2c4521b90c1375ea",
+  "run": 39481514563,
+  "job": 118830993367,
+  "checkedAt": "2026-10-20T19:13:52.677Z",
+  "artifactId": 12291299713,
+  "artifactZipSha256": "52883b33d3683419c5611f2a7a0d7bfd522c4c6e17c1fbbbe6df172290fd0810",
+  "artifactExpires": "2026-10-27T19:13:52Z",
+  "scope": "compiled UI in isolated GitHub runner; not production",
+  "cases": [
+    {
+      "locale": "es",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "home": true,
+      "guide": true,
+      "answerTopic": "getting_started",
+      "keyboard": true,
+      "reducedMotion": true,
+      "overflow": false
+    },
+    {
+      "locale": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "home": true,
+      "guide": true,
+      "answerTopic": "clarification",
+      "keyboard": true,
+      "reducedMotion": true,
+      "overflow": false
+    },
+    {
+      "locale": "pt",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "home": true,
+      "guide": true,
+      "answerTopic": "clarification",
+      "keyboard": true,
+      "reducedMotion": true,
+      "overflow": false
+    },
+    {
+      "locale": "es",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "home": true,
+      "guide": true,
+      "answerTopic": "getting_started",
+      "keyboard": true,
+      "reducedMotion": true,
+      "overflow": false
+    },
+    {
+      "locale": "en",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "home": true,
+      "guide": true,
+      "answerTopic": "clarification",
+      "keyboard": true,
+      "reducedMotion": true,
+      "overflow": false
+    },
+    {
+      "locale": "pt",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "home": true,
+      "guide": true,
+      "answerTopic": "clarification",
+      "keyboard": true,
+      "reducedMotion": true,
+      "overflow": false
+    }
+  ],
+  "captures": [
+    {
+      "file": "contact-1440.jpg",
+      "bytes": 240010,
+      "sha256": "9ff8b39f639c3156dcff859bfc4ab8f1e32e065c732c10048f74dabd3fb9e5d8",
+      "gitBlob": "81eaee3e7000dd16658b89f3b1851188a4364c70"
+    },
+    {
+      "file": "contact-390.jpg",
+      "bytes": 684036,
+      "sha256": "428acc75a78653ee48e610936d608a73313a9e6d91f06aa05ac5cebff5cb20ae",
+      "gitBlob": "a9d2e885372972348abd828fdce7edfce307db25"
+    },
+    {
+      "file": "guide-answer-en-1440.jpg",
+      "bytes": 100312,
+      "sha256": "e4c9816745b5da5572486210b05c2fa69e3027e2da8a61f201a35005d7882481",
+      "gitBlob": "988bbb7ac46d677500bdf375c37f016b76c4a315"
+    },
+    {
+      "file": "guide-answer-en-390.jpg",
+      "bytes": 44159,
+      "sha256": "d1fa88809c54243ca37debcf78af9fa1cee2a09725db68007f170bd716ae42c9",
+      "gitBlob": "2eb4e59ba38477c4507292a95b886eee79e5a8b4"
+    },
+    {
+      "file": "guide-answer-es-1440.jpg",
+      "bytes": 110079,
+      "sha256": "eb091ede6f3dfa70d3ec632cf03955bb0e67ec252675d2dcc9cd67140ea2ec77",
+      "gitBlob": "0618f9bca949bbc9a7a210f5d7962bdf9ad68678"
+    },
+    {
+      "file": "guide-answer-es-390.jpg",
+      "bytes": 48379,
+      "sha256": "cbe07e417bf916204a4f4759cff91c156b6532a7cd972d5fee090161748ee6fb",
+      "gitBlob": "8ee54bd4a1da666767c5f7cb454b722eb75d89df"
+    },
+    {
+      "file": "guide-answer-pt-1440.jpg",
+      "bytes": 104347,
+      "sha256": "d2de4c0edbca36325f912e05d8315d1471118686270ddcadb1f9858d5e66e5d0",
+      "gitBlob": "481016269a12b2aa88f3f7e3c3e94b7a8430d841"
+    },
+    {
+      "file": "guide-answer-pt-390.jpg",
+      "bytes": 44123,
+      "sha256": "3df11394a6aa1211ece1a1e549db389c3dcc0cfb7bfe06cfd1612fe382dbb279",
+      "gitBlob": "43b8ddb41775af2d7d48f9a518403e6612744229"
+    },
+    {
+      "file": "guide-initial-en-1440.jpg",
+      "bytes": 156649,
+      "sha256": "3bbba78f7da19a5b71945d0354fb543374cf2b8d5b99707434f074d130bd6ee3",
+      "gitBlob": "90dc6ab0967228a97fe926c6fbfa1dc3e4c3af77"
+    },
+    {
+      "file": "guide-initial-en-390.jpg",
+      "bytes": 54696,
+      "sha256": "859446cba19f186c9f47c3720c23a1154ac5dcbb9d5ace59720d73caa24fc15e",
+      "gitBlob": "6f4c12cfb2351b858c7be8f23fe0f8521577110b"
+    },
+    {
+      "file": "guide-initial-es-1440.jpg",
+      "bytes": 158455,
+      "sha256": "f5cfcc7fd2a26b2f43c968e37fda73789ad727a89040060bbd7dd98b6c195c93",
+      "gitBlob": "1ecf2764992bb2d0ed06c2fe896e5a3c898d2216"
+    },
+    {
+      "file": "guide-initial-es-390.jpg",
+      "bytes": 54575,
+      "sha256": "51bc44017663fe2ece98a7816f026a08f1f457e70bd607194f9bca98c75f392b",
+      "gitBlob": "4624454624f9a5a91c2195a09a437d212ca65a3c"
+    },
+    {
+      "file": "guide-initial-pt-1440.jpg",
+      "bytes": 157520,
+      "sha256": "b80795fc280710aa45503be9d6038a4b3832e352e92cd1d975820efd0e0d47c7",
+      "gitBlob": "03fc8a20e54bc68254b47c3227c8b62f1ab10f69"
+    },
+    {
+      "file": "guide-initial-pt-390.jpg",
+      "bytes": 56103,
+      "sha256": "1f5a070b2d86421ae9fae4429c8798a330638a990bca3b3c1da12fa51e317029",
+      "gitBlob": "c6582143814925e57773af31925f89e535b07fee"
+    },
+    {
+      "file": "home-en-1440.jpg",
+      "bytes": 134819,
+      "sha256": "8a4441d8a1827a1cb6fc0f126e42652ae1aded49d9a4712f84806963cbc95fd3",
+      "gitBlob": "c9117e15c26dfe1faeaeacb69d8c711ed8eb2d75"
+    },
+    {
+      "file": "home-en-390.jpg",
+      "bytes": 59385,
+      "sha256": "ee3552d5d507e57cb647c3305bf5a1bd6e0ad0fabae3a059847ff2fd9f1b75d7",
+      "gitBlob": "3cfe111d1fa076375e861c0d4fe10e469a63af90"
+    },
+    {
+      "file": "home-es-1440.jpg",
+      "bytes": 136213,
+      "sha256": "ddcbc463b9cd1b69b5277a2213781d83a940181a993ad2c76d10554dd22f3acc",
+      "gitBlob": "9ff96741524e69658a3b1dddbdee8a5b151b7c3f"
+    },
+    {
+      "file": "home-es-390.jpg",
+      "bytes": 59987,
+      "sha256": "c70f028b6bafb185073827827bf05c77af1b2446d6fe3b42a1ab20e2f679ab97",
+      "gitBlob": "8af260905d92044375770d36fd2f1eed7aafc5a1"
+    },
+    {
+      "file": "home-pt-1440.jpg",
+      "bytes": 135023,
+      "sha256": "aba3ef56a73864966548eb3a9e463b86a86cabe466e3e9a39793bee0a2341f0b",
+      "gitBlob": "5d108d9ca3262a45abaa7394e586f06029185b8a"
+    },
+    {
+      "file": "home-pt-390.jpg",
+      "bytes": 59533,
+      "sha256": "f869da45b061c74e51b352c8887dfc0185d68fb4b427571ea9f05e1e8453906e",
+      "gitBlob": "df9f003d1de5c0772dff5a382585cbf664f009f1"
+    }
+  ],
+  "browserErrors": [],
+  "browserBlockedRequests": [],
+  "httpErrors": [],
+  "compiledArtifactUnchanged": true,
+  "operationalReadiness": false
+}
