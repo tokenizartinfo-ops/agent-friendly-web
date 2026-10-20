@@ -9,7 +9,7 @@ El cliente y las credenciales efímeras existen solo en la prueba; ningún clien
 
 ## Reutilización y límites
 Fuente real reutilizada: política de elección, store OAuth, schema checker, frontera original5s, puente del contexto SDK, host de preparación, registrar MCP, dominio/ledger y servidor de lectura. JSON explícito en legacy y moderno; ningún parser SSE nuevo.
-Las quince subpruebas observan rechazos, grants/cápsulas/eventos D1 y resultados de clientes HTTP reales. Un código/PKCE incorrecto o repetido no emite token. El token de lectura no obtiene tools de preparación. Conciliación de ACK perdido conserva clave/resultado y usa una consulta explícita. Retirada D1 y revocación del SDK se prueban separadamente.
+Las dieciséis subpruebas observan rechazos, grants/cápsulas/eventos D1 y resultados de clientes HTTP reales. Un código/PKCE incorrecto o repetido no emite token. El token de lectura no obtiene tools de preparación. Conciliación de ACK perdido conserva clave/resultado y usa una consulta explícita. Retirada D1 y revocación del SDK se prueban separadamente.
 
 El store de consentimiento/grant contiene escrituras separadas y carece de campos específicos de perfil/fecha inicial. El kind ci-preparation-protocol-v1 y la derivación de inicio desde fin-600000 pertenecen SOLO al fixture: no son una propuesta tácita de esquema o perfil de producción. La inyección de fallo después de INSERT prueba ese punto conocido, no atomicidad distribuida ni todos los ACK posibles. Una retirada sin ACK, caída durante SDK completion u otras recuperaciones aún requieren diseño/pruebas del host real.
 
@@ -25,3 +25,6 @@ Resultado de test, lint, build, revisión y merge se registran en el PR portador
 [Miniflare: KV del runner](https://developers.cloudflare.com/workers/testing/miniflare/storage/kv/).
 
 G2 sigue aceptado/CLOSED; no OTP o reconexión. Container02382110, suscripción/aviso/revisión útil/baja nativa, PC-off y Max separados. operationalReadiness=false. No despliegue, scope/client/grant real, migración, modelo, pago o correo.
+
+## Diagnóstico inicial
+Primer runf615fa90/CI39347113127 falló al intentar usar para MCP un token que el propio ensayo acababa de revocar indirectamente repitiendo su código. La implementación primaria del SDK exige esa revocación de familia. Se separa el replay con aserciones400+401 y se conserva otro flujo fresco para preparación; no se cambia el producto ni se suaviza la comprobación. Resultado final exacto pendiente en el recibo portador.

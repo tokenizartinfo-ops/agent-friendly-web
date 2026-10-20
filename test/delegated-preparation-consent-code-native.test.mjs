@@ -156,6 +156,15 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
    assert.equal((await approve(a)).status,403);assert.equal(await grantCount(),before+1);
    assert.deepEqual(await capsules(),{intents:0,capsules:0,events:0});
   });
+  await t.test('replaying a real code revokes its token family and cannot poison a separate fresh flow',async()=>{
+   const replayed=await authorizeToken('read',[READ]);
+   assert.equal((await exchange(replayed.a,replayed.redirect)).status,400);
+   const response=await dispatch(resource,{method:'POST',headers:{Authorization:'Bearer '+replayed.token.access_token,
+    'Content-Type':'application/json',Accept:'application/json, text/event-stream'},
+    body:JSON.stringify({jsonrpc:'2.0',id:91,method:'tools/list',params:{}})});
+   assert.equal(response.status,401);assert.match(response.headers.get('WWW-Authenticate'),/^Bearer/);
+   assert.deepEqual(await capsules(),{intents:0,capsules:0,events:0});
+  });
   await t.test('real SDK code exchange issues a bounded non-refresh token with only explicit draft scopes',async()=>{
    sessionToken=await authorizeToken();
    assert.equal(sessionToken.token.scope,[READ,DRAFTS].join(' '));assert.equal(sessionToken.token.refresh_token,undefined);
@@ -163,7 +172,6 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
    const row=await db.prepare("SELECT expires_at,exchanged_at,scopes_json FROM delegated_access_grants WHERE id=(SELECT id FROM delegated_access_grants WHERE exchanged_at<>'' AND revoked_at='' ORDER BY created_at DESC LIMIT 1)").first();
    assert.ok(row.exchanged_at);assert.equal(Date.parse(row.expires_at),bootstrap.trialExpiresAt);
    assert.deepEqual(JSON.parse(row.scopes_json),[READ,DRAFTS]);
-   assert.equal((await exchange(sessionToken.a,sessionToken.redirect)).status,400);
    assert.equal((await approve(sessionToken.a)).status,403);
   });
   await t.test('issued KV token reaches legacy MCP and prepares an actual D1 capsule',async()=>{

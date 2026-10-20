@@ -18,7 +18,7 @@ Human actor resolver, authorization UI/control routes, timing policy, limiter an
 Actual SDK code/PKCE/KV tokens are generated/consumed only inside ephemeral runner. No static token validator and no secret printing/artifact. Only metadata/counts/sanitized failure messages.
 
 ## Tasks
-1. Add test fixture +15subcases +this plan/docs, run existing CI and inspect actual result. Existing baseline tests remain mandatory; inspect logs after job completion.
+1. Add test fixture +16subcases +this plan/docs, run existing CI and inspect actual result. Existing baseline tests remain mandatory; inspect logs after job completion.
 2. Diagnose any mismatch from first primary failure, preserve distinction fixture vs product, narrowly repair and run same exact fullCI/lint/fivebuilds. No SSE fallback/scope widening/deadline renewal.
 3. One fresh whole-branch reviewer (most capable available), read-only GitHub. Re-grade: Important/Critical ONE RED→GREEN fix pass; Minor ledger/defer, no re-review. Merge exact tested tree/head; mainCI; issue497 checkpoint supersedes pending ledger.
 
@@ -37,3 +37,9 @@ Actual SDK code/PKCE/KV tokens are generated/consumed only inside ephemeral runn
 This increment can close ONLY protocol composition subset of Step2. It DOES NOT implement/accept production preparation consent/mount/UI, actual human/Cloudflare Access auth, additive schema migration, atomic grant issuance/recovery, native event subscription/usefulturn/withdrawal or PC-off/Max.
 G2 accepted/CLOSED; never repeat OTP, catalog refresh, old grants/clients. G3 needs new Container02382110 evidence; G4/G5/G6 separate. operationalReadiness=false.
 Exact initial/result/review/integration on carrying PR/issue497, no docs-only rerun loop.
+
+## Task1 observed native failure and diagnosis
+Firstf615fa90 / CI39347113127/job118382260623:2302PASS/6FAIL/1existingSKIP. Native scope/cookie/primary/PKCE/concurrent/ACK/code cases passed; legacy next request401 after main flow deliberately replayed its code; downstream MCP failures cascaded.
+Primary exact SDK1.2.1 src/oauth-provider.ts handleAuthorizationCodeGrant: already-used valid code revokes all first-exchange tokens (RFC6749§10.5). This is correct provider behavior, not a Cloudflare outage or production bug.
+Ruling: isolate malicious replay in its OWN issued-token flow and assert next native HTTP401; acquire a separate fresh code/token for valid MCP preparation. Keep original replay400 assertion and add family401; no weakening or synthetic token validator. Cost: one additional subcase/ephemeral grant in runner; no product/source runtime changes.
+Task2 fixture sequence correction in candidate, exact GREEN/review/main pending. All16subcases require actual acceptance; no claims from this ledger before receipts.
