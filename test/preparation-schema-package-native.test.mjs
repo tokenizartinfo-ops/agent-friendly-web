@@ -4,9 +4,9 @@ import {readFile,readdir} from 'node:fs/promises';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 
 test('isolated preparation DDL matches the necessary full-schema objects in real native D1',{timeout:60000},async()=>{
- const module=await import('../scripts/preparation-schema-package.mjs').catch(()=>null);
- assert.equal(typeof module?.readPreparationSchemaPackage,'function','Missing isolated schema packager');
- const p=await module.readPreparationSchemaPackage();
+ const schemaModule=await import('../scripts/preparation-schema-package.mjs').catch(()=>null);
+ assert.equal(typeof schemaModule?.readPreparationSchemaPackage,'function','Missing isolated schema packager');
+ const p=await schemaModule.readPreparationSchemaPackage();
  const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],
   script:'export default {fetch(){return new Response(null,{status:404})}};',d1Databases:{FULL_DB:'schema-full-ci-only',MINIMAL_DB:'schema-minimal-ci-only'}}));
  try{

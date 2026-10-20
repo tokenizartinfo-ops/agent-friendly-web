@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-const module=await import('../scripts/preparation-schema-package.mjs').catch(()=>null);
+const schemaModule=await import('../scripts/preparation-schema-package.mjs').catch(()=>null);
 const tables=["agent_capsule_preparations","copilot_working_drafts","delegated_access_grants","delegated_consent_sessions","delegated_preparation_consents","domain_claims","project_events","publication_capsules","registry_sites","scan_observations","site_projects"];
-const load=async()=>{assert.equal(typeof module?.readPreparationSchemaPackage,'function','Missing isolated schema packager');return module.readPreparationSchemaPackage();};
+const load=async()=>{assert.equal(typeof schemaModule?.readPreparationSchemaPackage,'function','Missing isolated schema packager');return schemaModule.readPreparationSchemaPackage();};
 
 test('preparation schema contains only its bounded D1 dependency closure and no data',async()=>{
  const p=await load();assert.deepEqual([...p.tables].sort(),tables);assert.ok(p.statements.length>tables.length);
@@ -26,12 +26,12 @@ test('schema package is deterministic and every source and statement carries pro
 
 test('source substitution missing input or widened input cannot yield a schema',async()=>{
  await load();
- const sources=Object.fromEntries(await Promise.all(module.PREPARATION_SCHEMA_INPUTS.map(async x=>[x.path,await readFile(x.path,'utf8')])));
- assert.equal(typeof module.buildPreparationSchemaPackage,'function');
- const [first]=module.PREPARATION_SCHEMA_INPUTS;
- assert.throws(()=>module.buildPreparationSchemaPackage({...sources,[first.path]:sources[first.path]+'\n-- drift'}));
- const missing={...sources};delete missing[first.path];assert.throws(()=>module.buildPreparationSchemaPackage(missing));
- assert.throws(()=>module.buildPreparationSchemaPackage({...sources,'drizzle/9999_other.sql':'CREATE TABLE unrelated(id TEXT)'}));
+ const sources=Object.fromEntries(await Promise.all(schemaModule.PREPARATION_SCHEMA_INPUTS.map(async x=>[x.path,await readFile(x.path,'utf8')])));
+ assert.equal(typeof schemaModule.buildPreparationSchemaPackage,'function');
+ const [first]=schemaModule.PREPARATION_SCHEMA_INPUTS;
+ assert.throws(()=>schemaModule.buildPreparationSchemaPackage({...sources,[first.path]:sources[first.path]+'\n-- drift'}));
+ const missing={...sources};delete missing[first.path];assert.throws(()=>schemaModule.buildPreparationSchemaPackage(missing));
+ assert.throws(()=>schemaModule.buildPreparationSchemaPackage({...sources,'drizzle/9999_other.sql':'CREATE TABLE unrelated(id TEXT)'}));
 });
 
 test('multi-statement trigger bodies remain intact and preserve append-only and revision fences',async()=>{
@@ -44,8 +44,8 @@ test('multi-statement trigger bodies remain intact and preserve append-only and 
 });
 
 test('a consumer cannot mutate the source allowlist or another generated package',async()=>{
- const p=await load();assert.ok(Object.isFrozen(module.PREPARATION_SCHEMA_INPUTS));
- assert.throws(()=>{module.PREPARATION_SCHEMA_INPUTS[0].path='other.sql';});
+ const p=await load();assert.ok(Object.isFrozen(schemaModule.PREPARATION_SCHEMA_INPUTS));
+ assert.throws(()=>{schemaModule.PREPARATION_SCHEMA_INPUTS[0].path='other.sql';});
  p.tables.push('unrelated');p.statements[0].sql='DROP TABLE site_projects;';
  const next=await load();assert.deepEqual([...next.tables].sort(),tables);assert.ok(!next.statements.some(x=>x.sql==='DROP TABLE site_projects;'));
 });
