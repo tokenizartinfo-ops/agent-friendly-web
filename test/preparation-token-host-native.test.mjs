@@ -113,6 +113,16 @@ test('finite token host enforces original consent scope deadline and native with
    const token=await r.json();assert.equal(token.scope,READ);const c=await connect(token);
    assert.ok(!(await c.listTools()).tools.some(x=>x.name==='prepare_capsule_draft'));
   });
+  await t.test('two simultaneous SDK exchanges keep their own consent scopes and grant identities',async()=>{
+   const read=await complete('read'),drafts=await complete('drafts');
+   const [one,two]=await Promise.all([redeem(read.a,read.accepted),redeem(drafts.a,drafts.accepted)]);
+   assert.equal(one.status,200);assert.equal(two.status,200);
+   const [readToken,draftToken]=await Promise.all([one.json(),two.json()]);
+   assert.equal(readToken.scope,READ);assert.deepEqual(draftToken.scope.split(' '),[READ,DRAFTS]);
+   assert.notEqual((await grant(read.a)).id,(await grant(drafts.a)).id);
+   assert.ok((await rawGrant(read.a)).exchanged_at);assert.ok((await rawGrant(drafts.a)).exchanged_at);
+   const client=await connect(readToken);assert.ok(!(await client.listTools()).tools.some(t=>t.name==='prepare_capsule_draft'));
+  });
   await t.test('refresh unknown fields duplicate fields and actual body cap never reach SDK or consumption',async()=>{
    const n=await counts(),s=await stats();
    for(const body of [new URLSearchParams({grant_type:'refresh_token',refresh_token:'not-a-token'}),
@@ -141,7 +151,7 @@ test('finite token host enforces original consent scope deadline and native with
    const {a,accepted}=await complete('drafts'),s=await stats(),n=await counts();await mode('unknown-consume');
    try{const r=await redeem(a,accepted);assert.equal(r.status,503);assert.equal((await r.json()).access_token,undefined);}
    finally{await mode('');}
-   const g=await rawGrant(a);assert.ok(g.exchanged_at);assert.equal(g.revoked_at,'');assert.equal((await stats()).revocations,s.revocations);
+   const g=await rawGrant(a);assert.ok(g.exchanged_at);assert.equal(g.revoked_at,'');assert.equal((await stats()).revocations,s.revocations);assert.equal((await stats()).sdkTokensIssued,s.sdkTokensIssued);
    assert.ok([400,503].includes((await redeem(a,accepted)).status));assert.deepEqual(await counts(),n);
   });
   await t.test('owner change after acknowledged consumption retires exactly its known-own grant',async()=>{
