@@ -1,0 +1,62 @@
+name: AFW public guide entry browser QA
+
+on:
+  pull_request:
+    paths:
+      - 'lib/public-guide.mjs'
+      - 'lib/public-tools-copy.mjs'
+      - 'app/guia/page.tsx'
+      - 'app/globals.css'
+      - 'scripts/check-public-guide-start-browser.mjs'
+      - '.github/workflows/afw-public-guide-start-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  guide-entry-browser:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      AFW_QA_REVISION: ${{ github.event.pull_request.head.sha }}
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Prepare runner-only browser paths
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {appendFileSync} from 'node:fs';
+          import path from 'node:path';
+          const temp=process.env.RUNNER_TEMP;
+          assert.ok(temp&&path.isAbsolute(temp));
+          appendFileSync(process.env.GITHUB_ENV,'AFW_BROWSER_TOOLS='+path.join(temp,'afw-guide-start-tools')+'\nPLAYWRIGHT_BROWSERS_PATH='+path.join(temp,'afw-guide-start-browsers')+'\n');
+          NODE
+      - name: Install project in ephemeral runner
+        run: npm ci
+      - name: Compile actual branch product
+        run: npm run build
+      - name: Install pinned browser tools only in runner
+        shell: bash
+        run: |
+          command -v npx >/dev/null
+          npm install --prefix "$AFW_BROWSER_TOOLS" --ignore-scripts --no-audit --no-fund playwright@1.64.1
+          node "$AFW_BROWSER_TOOLS/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Check guide entry on isolated native runtime
+        run: node scripts/check-public-guide-start-browser.mjs
+      - name: Preserve public browser evidence and compiled provenance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-guide-start-preview-${{ github.event.pull_request.head.sha }}
+          path: output/playwright/guide-start/
+          if-no-files-found: ignore
+          retention-days: 7
