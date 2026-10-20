@@ -1,0 +1,51 @@
+name: AFW isolated preparation release preflight
+on:
+  pull_request:
+    paths:
+      - 'scripts/prepare-preparation-canary-release.py'
+      - 'scripts/check-preparation-closed-package.mjs'
+      - 'scripts/prepare-public-cloud-delivery.py'
+      - 'test/preparation_release_test.py'
+      - 'config/preparation-canary-release.v1.json'
+      - '.github/workflows/afw-preparation-release-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  qualify:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && (github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      AFW_QUALIFIER_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.AFW_QUALIFIER_REVISION }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test release rejection boundaries
+        run: python3 -m unittest discover -s test -p 'preparation_release_test.py' -v
+      - name: Fetch and qualify the exact existing build
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python3 scripts/prepare-preparation-canary-release.py
+      - name: Install runtime test dependency in ephemeral runner
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Execute exact closed payload and recovery source on native runtime
+        env:
+          WRANGLER_SEND_METRICS: 'false'
+        run: node scripts/check-preparation-closed-package.mjs
+      - name: Preserve qualified closed release package
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-preparation-closed-release-${{ github.run_id }}-${{ github.run_attempt }}
+          path: output/preparation-canary-release/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
