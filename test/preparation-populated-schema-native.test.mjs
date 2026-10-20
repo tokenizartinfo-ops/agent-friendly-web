@@ -41,7 +41,8 @@ export default{async fetch(request,env){
  if(path==='/schema')return Response.json(await checkAgentCapsulePreparationSchema({createPrimarySession:primary}));
  const input=await request.json();
  if(path==='/begin'||path==='/decide'||path==='/inspect'){
-  const store=createDelegatedPreparationConsentStore({enabled:true,profile,createPrimarySession:primary,requestLease:createCapsulePreparationRequestLease()});
+  const now=()=>Date.now(),requestLease=createCapsulePreparationRequestLease({now});
+  const store=createDelegatedPreparationConsentStore({enabled:true,profile,createPrimarySession:primary,now,requestLease});
   const result=await store[path.slice(1)](input);
   if(path==='/decide'&&result.freshDecision===true&&result.code==='decision_saved')authority.grantId=result.grantRef;
   return Response.json(result);
