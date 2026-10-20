@@ -112,3 +112,12 @@ No hay incentivo, descuento o crédito activado por invocar la demo. Las modalid
 - Delegación asíncrona solo cuando aviso, revisión útil y retirada tengan aceptación propia.
 
 La demo y la guía no activan estos bloques. El incidente Container y los gates PC-off/Max se mantienen separados. Trabajo de investigación de Chavo puede alimentar decisiones comerciales; no constituye una tarifa, contrato o capacidad de runtime.
+
+## Actualización20oct2026: preparación y recuperación, fuente cerrada
+PR524 incorporó un paquete separado de Worker y compilación con procedencia en Actions. Reutiliza el router/AS/KV/D1 aceptados y fechas originales; no tiene destino/despliegue/DDL/cliente/permiso nuevo. Esa fuente no convierte la fila de preparación en un servicio público abierto. G2 de lectura ya está cerrado; no renovar OAuth para ejecutar una demo.
+
+El [consumidor de preparación](../examples/agent-consumer/preparation-client.mjs) acepta structuredContent + método + solicitud original. Separa borrador listo para revisión, permiso insuficiente/conflicto y resultado incierto. Ante ACK perdido conserva la MISMA revisión/clave y ofrece solo reconciliación manual. Ni preparation_not_found ni503 demuestran que una escritura no haya sucedido o que sea correcto crear otra clave.
+
+Sus referencias no autentican proyecto/cliente ni certifican la vigencia del borrador: corresponde al transporte vincular la respuesta con la llamada real, y al servicio comprobar identidad, permisos y estado actuales. El ejemplo no implementa autenticación/transporte, no ejecuta mensajes ni devuelve autoridad de publicar/cobrar. La demo y el ledger son sintéticos/de observación, no una API/MCP/A2A de contratación.
+
+Las [recetas por capacidad](recipes/2026-10-20/README.es.md) separan CMS/plugin/raíz/repositorio/mantenedor, con respaldo, decisión, comprobación y reversión. El [ledger de observaciones](../examples/agent-consumer/trial-ledger.mjs) mantiene costos desconocidos, fallos/reintentos y consumo informado sin inferir ahorro. No se anuncia precio, pago o instalación automática.

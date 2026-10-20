@@ -5,6 +5,7 @@ import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {generateKeyPair,exportJWK,SignJWT} from 'jose';
 import {Client,StreamableHTTPClientTransport} from '@modelcontextprotocol/client';
+import {consumeCapsulePreparation} from '../examples/agent-consumer/preparation-client.mjs';
 const issuer='https://example.invalid',resource=issuer+'/mcp',callback='https://client.example.invalid/callback';
 const READ='afw:project:read',DRAFTS='afw:capsule:prepare';
 test('production preparation Worker preserves original configuration and durable own withdrawal',{timeout:120000},async t=>{
@@ -105,8 +106,10 @@ test('production preparation Worker preserves original configuration and durable
    const input={contract:'agentfriendly.capsule-prepare.v1',expectedRevision:revision,idempotencyKey:'worker-native-preparation-0001'};
    const prepared=(await c.callTool({name:'prepare_capsule_draft',arguments:input})).structuredContent;
    assert.equal(prepared.code,'prepared');assert.equal(prepared.publicationAllowed,false);
+   const interpreted=consumeCapsulePreparation(prepared,{method:'prepare',request:input});assert.equal(interpreted.status,'draft_ready');assert.equal(interpreted.preparation.capsuleRef,prepared.preparation.capsuleRef);
    const recovered=(await c.callTool({name:'reconcile_capsule_preparation',arguments:input})).structuredContent;
    assert.equal(recovered.preparation.capsuleRef,prepared.preparation.capsuleRef);assert.equal((await counts()).capsules,before.capsules+1);
+   assert.equal(consumeCapsulePreparation(recovered,{method:'reconcile',request:input}).status,'draft_ready');
    const v=await review();assert.equal((await withdraw(v,(await saved(a)).id)).status,303);
    await dispatch('/__ci/recreate',{method:'POST'});
    assert.equal((await c.callTool({name:'read_project_summary',arguments:{}})).structuredContent.code,'delegated_access_denied');
