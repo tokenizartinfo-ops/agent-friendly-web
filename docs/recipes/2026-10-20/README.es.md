@@ -12,6 +12,9 @@ Elegir por la capacidad comprobada para el origen exacto, no por el logo del pro
 
 Estas tarjetas son guías para la persona operadora y futuros agentes; no son instaladores, skills con autoridad o adaptadores probados para todos los proveedores. No crean rutas, permisos, contratos de pago ni una API de recetas. La [plantilla de recibo](receipt.example.json) es sintética y distinta del payload del delivery-plan actual: no importarla como solicitud a una API ni como cápsula aprobada.
 
+## Integración con el acompañamiento
+La fuente de [delivery-recipes](../../../lib/delivery-recipes.mjs) reutiliza los cinco métodos existentes. [deliveryInstructions](../../../lib/delivery-instructions.mjs) incorpora preparación, evidencia y pausa específicas a los siete pasos y al texto copiable del desplegable actual; la pregunta viene de delivery-advisor en es/en/pt. No cambia el guardado del plan, su control de acceso o las decisiones del responsable. El código integrado no acredita publicación en la web: consultar el recibo de despliegue por separado. [Alcance y validación](../../AFW-DELIVERY-RECIPE-GUIDANCE-2026-10-20.es.md).
+
 ## Una sola pregunta para la persona
 Mostrar únicamente el siguiente paso necesario, con su motivo. Si no sabe, dejarlo pendiente y ofrecer coordinar con quien mantiene el sitio. El detalle técnico queda en el expediente de entrega; no mostrar toda esta lista como formulario obligatorio.
 
