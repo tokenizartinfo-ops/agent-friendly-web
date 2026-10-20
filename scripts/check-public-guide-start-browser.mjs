@@ -121,7 +121,7 @@ try{
    assert.ok(guideDimensions.scroll<=guideDimensions.width,'guide has no horizontal overflow: '+label);
    await input.scrollIntoViewIfNeeded();
    await capture(page,'guide-answer-'+label);
-   cases.push({locale,viewport,guide:true,questionAnchor:true,composerFocused:true,answerTopic:answer.topic,keyboard:true,reducedMotion:true,overflow:false});
+   cases.push({locale,viewport,guide:true,questionAnchor:true,composerFocused:true,answerReadable:true,headerClear:true,answerTopic:answer.topic,keyboard:true,reducedMotion:true,overflow:false});
    await context.close();
   }
  }

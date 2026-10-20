@@ -6,6 +6,7 @@ on:
       - 'lib/public-guide.mjs'
       - 'lib/public-tools-copy.mjs'
       - 'app/guia/page.tsx'
+      - 'app/components/public-guide-chat.tsx'
       - 'app/globals.css'
       - 'scripts/check-public-guide-start-browser.mjs'
       - '.github/workflows/afw-public-guide-start-qa.yml'
