@@ -18,3 +18,8 @@ Parent Steps2–3 of 2026-10-19-afw-preparation-consent-mount.md. Using executin
 
 ## Closure
 Accepts only synthetic native SDK/store/view/token/MCP composition. No actual production auth/migration/mount/runtime or PCoff. No support body/OTP, keys, real profile/scope/grant, live Container/events/guard, Max/email action. G2 CLOSED, operationalReadiness=false.
+
+Ruling before implementation: owner changes legitimately increment the dossier revision; restoring the owner does not revive an original consent. Assert403 for that old intent, cancel it, and use a new visible intent to isolate missing-schema503. Do not weaken the revision fence to retain the old CI adapter assumption.
+
+## Observed RED before fixture implementation
+Heada8f2fd3c4507e6a77e0c06778592e36fbd87be53/CI39355756383/job118410025131:2351PASS/6FAIL/1existingSKIP. Five NEW behavior subtests fail (missing explicit row, JSON instead of HTML, reserve/admit/code ACK faults ignored); their parent aggregate is the sixth failure. Existing behavior cases pass, including strengthened racing winner exchange. No module-import-error-only RED. Implementation follows; final CI/review/integration remain in carrying receipt.

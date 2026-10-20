@@ -181,10 +181,13 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
    await db.prepare("UPDATE site_projects SET user_id='owner-b' WHERE id='project-a'").run();
    try{assert.equal((await approve(a)).status,403);assert.equal(await grantCount(),before);}
    finally{await db.prepare("UPDATE site_projects SET user_id='owner-a' WHERE id='project-a'").run();}
+   assert.equal((await approve(a)).status,403,'restored ownership does not restore the original revision');
+   assert.equal((await approve(a,'cancel')).status,302);assert.equal(await grantCount(),before);
+   const fresh=await begin();assert.equal(fresh.response.status,200);
    await db.prepare('DROP TRIGGER agent_capsule_preparations_no_delete').run();
-   try{assert.equal((await approve(a)).status,503);assert.equal(await grantCount(),before);}
+   try{assert.equal((await approve(fresh)).status,503);assert.equal(await grantCount(),before);}
    finally{await db.prepare(ddl.find(x=>x.includes('agent_capsule_preparations_no_delete'))).run();}
-   assert.equal((await approve(a,'cancel')).status,302);
+   assert.equal((await approve(fresh,'cancel')).status,302);
   });
   await t.test('SDK rejects wrong PKCE and resource without issuing an access token',async()=>{
    for(const extra of [{code_verifier:'b'.repeat(64)},{resource:'https://other.invalid/mcp'}]){
@@ -206,8 +209,7 @@ test('native code PKCE consent and real KV tokens compose with preparation witho
   await t.test('lost grant ACK after real D1 commit closes without issuing a code or a second grant',async()=>{
    const a=await begin(),before=await grantCount(),response=await approve(a,'drafts',{ackLoss:true});
    assert.equal(response.status,503);assert.equal(response.headers.get('Location'),null);assert.equal(await grantCount(),before+1);
-   const row=await db.prepare("SELECT revoked_at,exchanged_at FROM delegated_access_grants WHERE id=?")
-    .bind('ci-prep-'+Buffer.from(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(a.data.handle))).toString('hex')).first();
+   const row=await consentGrant(a);
    assert.ok(row.revoked_at);assert.equal(row.exchanged_at,'');
    assert.equal((await approve(a)).status,403);assert.equal(await grantCount(),before+1);
    assert.deepEqual(await capsules(),{intents:0,capsules:0,events:0});
