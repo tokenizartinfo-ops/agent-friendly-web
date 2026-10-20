@@ -22,3 +22,6 @@ Only detached persisted consent/application-grant primitive and runner acceptanc
 Native D1 schema import uses exact source DDL in ephemeral runner; it is not remote migration permission. Preserve old grant/project/capsule history; no network beyond runner build dependencies, no model/payment.
 
 Ruling: an acknowledged pending->reserved attempt is required BEFORE the one-statement grant transition — unknown ACK cannot be retried from another request, even after a rejected grant insert rolled back. It stores a proposed choice only, not a grant. Cost if wrong: reserved attempts require explicit cancel/new visible consent; no automatic recovery/code issuance.
+
+## Task1 observed RED
+Headc781d8830afea1ffb86a59e00bba2c05d925d954 / CI39353246217/job118402091627:2324PASS/22newFAIL/1existingSKIP. All new cases fail explicit missing closed store assertion; no existing regression. Task2 implementation/native runner candidate now follows; final acceptance pending carrying receipt.
