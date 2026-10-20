@@ -37,3 +37,6 @@ Ruling: the server cannot know a network acknowledgment lost after response hand
 
 ## Stop/continuity
 No real login/OTP/grant renewal, active G2 reuse, Container/event/guard/PC-off test, Max data/mail or support-monitor restart. New operational trial requires current inventory/recovery, new client/profile, source provenance and human consent. This source increment alone never satisfies those gates.
+
+## Observed RED
+35adc22af07225207c3ca7616e4a1dc81d3d2174/CI39417064451/job118608556323:2370PASS/1FAIL/1existingSKIP. New parent fails the explicit missing-factory assertion before bundle; all existing tests remain green. This is feature-absence RED, NOT individual guard mutation evidence. Full native crypto/SDK cases must pass after implementation.
