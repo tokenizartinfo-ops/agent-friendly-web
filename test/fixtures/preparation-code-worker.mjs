@@ -54,7 +54,7 @@ async function ready(env){
      throw new OAuthError('invalid_grant',{description:'CI permission unavailable',statusCode:400});
     return {accessTokenTTL:Math.min(90,left),refreshTokenTTL:0};
    }});
-  const client=await as.getOAuthApi(env).createClient({clientName:'AFW CI protocol client',redirectUris:[callback],
+  const client=await as.getOAuthApi(env).createClient({clientName:'AFW CI protocol client',redirectUris:[callback,'https://client.example.invalid/callback'],
    grantTypes:['authorization_code'],responseTypes:['code'],tokenEndpointAuthMethod:'none'});
   clientId=client.clientId;
  })();
@@ -266,3 +266,6 @@ export default{async fetch(request,env,ctx){
   return bad(404);
  }catch{return bad();}
 }};
+
+// CI-ONLY context for an isolated signed-Access consent adapter test.
+export async function preparationCodeCiContext(env){await ready(env);return {authorizationServer:as,profile:consentProfile()};}
