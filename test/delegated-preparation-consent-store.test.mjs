@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {createCapsulePreparationRequestLease} from '../lib/capsule-preparation-request-lease.mjs';
 import {createDelegatedOAuthStore} from '../lib/delegated-oauth-store.mjs';
 import {preparationConsentStoreFixture} from './fixtures/preparation-consent-store.mjs';
-const module=await import('../lib/delegated-preparation-consent-store.mjs').catch(()=>null);
+const consentModule=await import('../lib/delegated-preparation-consent-store.mjs').catch(()=>null);
 const READ='afw:project:read',DRAFTS='afw:capsule:prepare';
-function factory(){assert.equal(typeof module?.createDelegatedPreparationConsentStore,'function','missing closed preparation consent store');return module.createDelegatedPreparationConsentStore;}
+function factory(){assert.equal(typeof consentModule?.createDelegatedPreparationConsentStore,'function','missing closed preparation consent store');return consentModule.createDelegatedPreparationConsentStore;}
 function setup(t){const f=preparationConsentStoreFixture(factory());t.after(()=>f.close());return f;}
 const choose=(f,decision='drafts')=>({...f.ref,decision});
 async function begin(f){const r=await f.open().store.begin(f.beginInput);assert.equal(r.code,'consent_pending');return r;}

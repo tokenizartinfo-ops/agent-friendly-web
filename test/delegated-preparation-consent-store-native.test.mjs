@@ -5,8 +5,8 @@ import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 const READ='afw:project:read',DRAFTS='afw:capsule:prepare';
 test('native D1 keeps explicit consent attempts atomic and unknown ACKs non-repeatable',{timeout:120000},async t=>{
- const module=await import('../lib/delegated-preparation-consent-store.mjs').catch(()=>null);
- assert.equal(typeof module?.createDelegatedPreparationConsentStore,'function','missing closed preparation consent store');
+ const consentModule=await import('../lib/delegated-preparation-consent-store.mjs').catch(()=>null);
+ assert.equal(typeof consentModule?.createDelegatedPreparationConsentStore,'function','missing closed preparation consent store');
  const bundle=await build({entryPoints:['test/fixtures/preparation-consent-store-worker.mjs'],bundle:true,format:'esm',platform:'neutral',
   mainFields:['module','main'],conditions:['workerd','worker','browser'],target:'es2022',write:false,external:['cloudflare:workers','node:*']});
  const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],
