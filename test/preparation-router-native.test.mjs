@@ -131,6 +131,31 @@ test('integrated preparation router preserves consent token preparation and inde
     const r=await dispatch(path,init);assert.equal(r.status,200,new URL(path,issuer).pathname);assert.equal(r.headers.get('X-CI-Parent-Open'),'true');await r.arrayBuffer();
    }
   });
+  await t.test('shorter human management never activates agent routes or creates consent authority',async()=>{
+   const own=await approve(),q=await query(),before=await counts();
+   // Explicit original 30s management vs the actual 180s agent profile, no renewal.
+   const response=await dispatch('/__ci/short-management'+q.url,{headers:{'Cf-Access-Jwt-Assertion':assertion}});
+   assert.equal(response.status,503,'agent issuance must stay absent when own withdrawal would expire first');
+   assert.deepEqual(await counts(),before);
+   const v=await review('/__ci/short-management');
+   assert.equal((await withdraw(v,(await saved(own)).id,'/__ci/short-management')).status,303);
+  });
+  for(const mode of ['issuance','expiry'])await t.test(mode+' closure while the actual MCP output is held prevents final HTTP disclosure',async()=>{
+   const a=await approve(),token=await redeem(a),before=await stats();
+   await dispatch('/__ci/output-config?mode='+mode,{method:'POST'});
+   const pending=dispatch('/__ci/output/mcp',{method:'POST',headers:{
+    'Content-Type':'application/json',Accept:'application/json, text/event-stream',Authorization:'Bearer '+token.access_token,'X-CI-Hold-Output':'true'},
+    body:'{"jsonrpc":"2.0","id":17,"method":"tools/list","params":{}}'});
+   let seen=false;
+   try{
+    const until=Date.now()+2000;
+    while(Date.now()<until){if((await stats()).outputStarted>before.outputStarted){seen=true;break;}await new Promise(resolve=>setTimeout(resolve,10));}
+    assert.equal(seen,true,'actual SDK body must reach the existing boundary output reader');
+    await dispatch('/__ci/output-drift',{method:'POST'});
+   }finally{await dispatch('/__ci/output-release',{method:'POST'});}
+   const response=await pending;assert.equal(response.status,503,'existing final HTTP boundary must observe closure before handoff');
+   const result=await response.json();assert.equal(result.code,'request_outcome_unknown');assert.equal(result.result,undefined);
+  });
   await t.test('drafts prepare once reconcile same result and human withdrawal denies connected MCP',async()=>{
    const a=await approve('drafts'),token=await redeem(a),c=await connect(token),before=await counts();
    const revision=(await db.prepare("SELECT revision FROM site_projects WHERE id='project-a'").first()).revision;

@@ -8,14 +8,28 @@ import {createDelegatedPreparationMcpMount} from '../../lib/delegated-preparatio
 import {createCapsulePreparationRequestLease,readCapsulePreparationRequestLease} from '../../lib/capsule-preparation-request-lease.mjs';
 import {verifyCloudflareAccessJwt} from '../../lib/cloudflare-access-identity.mjs';
 import {OAuthAuthorizationServer} from '@cloudflare/workers-oauth-provider';
+import {WebStandardStreamableHTTPServerTransport} from '@modelcontextprotocol/server';
 import {importJWK} from 'jose';
 let router,options,profile,management,pins,pub,probes,history,initialClosed,historyProfile;
 let holdAccess=false;
-const held=new Set(),background=new Set(),stats={accessStarted:0,tokenCalls:0};
+let shortManagement,outputMode,outputRouter,outputEnv,outputOffset=0,holdOutput=false;
+const heldOutput=new Set();
+const held=new Set(),background=new Set(),stats={accessStarted:0,tokenCalls:0,outputStarted:0};
 const sdkFetch=OAuthAuthorizationServer.prototype.fetch;
 OAuthAuthorizationServer.prototype.fetch=async function(request,...args){
  if(new URL(request.url).pathname==='/oauth/token')stats.tokenCalls++;
  return sdkFetch.call(this,request,...args);
+};
+const transportHandle=WebStandardStreamableHTTPServerTransport.prototype.handleRequest;
+WebStandardStreamableHTTPServerTransport.prototype.handleRequest=async function(request,...args){
+ const response=await transportHandle.call(this,request,...args);
+ if(request.headers.get('X-CI-Hold-Output')!=='true'||!response.body)return response;
+ const reader=response.body.getReader();
+ const stream=new ReadableStream({async pull(controller){
+  stats.outputStarted++;if(holdOutput)await new Promise(resolve=>heldOutput.add(resolve));
+  const item=await reader.read();if(item.done)controller.close();else controller.enqueue(item.value);
+ },cancel(reason){return reader.cancel(reason);}},{highWaterMark:0});
+ return new Response(stream,{status:response.status,statusText:response.statusText,headers:response.headers});
 };
 async function ready(env){
  if(router)return;
@@ -75,6 +89,30 @@ const worker={async fetch(request,env,ctx){
    const h=new Headers(response.headers);h.set('X-CI-Parent-Open',String(open));
    return new Response(response.body,{status:response.status,headers:h});
   }finally{control.close();}
+ }
+ if(path.startsWith('/__ci/short-management/')){
+  if(!shortManagement)shortManagement=createDelegatedPreparationRouter({...options,env:{...pins},management:{startedAt:Date.now(),expiresAt:Date.now()+30000}});
+  url.pathname=path.slice('/__ci/short-management'.length);return shortManagement(new Request(url,request),tracked);
+ }
+ if(path==='/__ci/output-config'&&request.method==='POST'){
+  outputMode=url.searchParams.get('mode');outputOffset=0;holdOutput=true;outputEnv={...pins};
+  let outputProfile=profile;
+  if(outputMode==='expiry'){
+   outputProfile={...profile,trialExpiresAt:Date.now()+1500};
+   outputEnv.AFW_OAUTH_PILOT_EXPIRES_AT=new Date(outputProfile.trialExpiresAt).toISOString();
+  }
+  outputRouter=createDelegatedPreparationRouter({...options,env:outputEnv,profile:outputProfile,now:()=>Date.now()+outputOffset,monotonic:()=>performance.now()+outputOffset});
+  return Response.json({ready:true});
+ }
+ if(path==='/__ci/output-drift'&&request.method==='POST'){
+  if(outputMode==='expiry')outputOffset=2000;else outputEnv.AFW_DELEGATED_OAUTH_ENABLED='false';
+  return Response.json({changed:true});
+ }
+ if(path==='/__ci/output-release'&&request.method==='POST'){
+  holdOutput=false;for(const resolve of heldOutput)resolve();heldOutput.clear();return Response.json({released:true});
+ }
+ if(path.startsWith('/__ci/output/')){
+  url.pathname=path.slice('/__ci/output'.length);return outputRouter(new Request(url,request),tracked);
  }
  if(path==='/__ci/history-config'){
   if(!history){
