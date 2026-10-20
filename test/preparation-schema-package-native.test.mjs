@@ -17,9 +17,12 @@ test('isolated preparation DDL matches the necessary full-schema objects in real
    for(const sql of(await readFile('db/'+name+'.sql','utf8')).split('--> statement-breakpoint').map(x=>x.trim()).filter(Boolean))await full.prepare(sql).run();
   for(const row of p.statements)await minimal.prepare(row.sql).run();
   const metadata=async db=>(await db.prepare("SELECT type,name,tbl_name,sql FROM sqlite_master WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name").all()).results;
-  const actual=await metadata(minimal),expected=(await metadata(full)).filter(x=>p.tables.includes(x.tbl_name));
-  assert.deepEqual(actual,expected);
-  assert.deepEqual(actual.filter(x=>x.type==='table').map(x=>x.name).sort(),[...p.tables].sort());
+  const actual=await metadata(minimal),fullMetadata=await metadata(full);
+  // D1 owns exactly this provider metadata table; compare it instead of hiding arbitrary extra objects.
+  assert.deepEqual(actual.filter(x=>x.name==='_cf_METADATA'),fullMetadata.filter(x=>x.name==='_cf_METADATA'));
+  const own=actual.filter(x=>x.name!=='_cf_METADATA'),expected=fullMetadata.filter(x=>p.tables.includes(x.tbl_name));
+  assert.deepEqual(own,expected);
+  assert.deepEqual(own.filter(x=>x.type==='table').map(x=>x.name).sort(),[...p.tables].sort());
   for(const table of p.tables){assert.equal((await minimal.prepare('SELECT count(*) AS n FROM '+table).first()).n,0);}
   assert.ok(!actual.some(x=>x.tbl_name==='contact_leads'||x.tbl_name==='delegated_refresh_uses'));
  }finally{await runtime.dispose();}
