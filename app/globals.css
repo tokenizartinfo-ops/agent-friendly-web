@@ -1890,6 +1890,10 @@ footer p { margin: 0; }
 }
 .public-guide-hero h1 { max-width: 760px; margin: 22px 0 16px; font-size: 48px; line-height: 1.03; }
 .public-guide-hero > div:first-child > p { max-width: 690px; margin: 0; color: #5e554b; font-size: 17px; line-height: 1.65; }
+.public-guide-question-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 20px; padding: 10px 15px; border: 2px solid var(--guide-ink); background: var(--guide-ink); color: var(--guide-paper); font-size: 14px; font-weight: 850; text-decoration: underline; text-underline-offset: 3px; }
+.public-guide-question-link:focus-visible { outline: 3px solid var(--guide-ink); outline-offset: 4px; }
+.public-guide-composer textarea:focus-visible { outline: 2px solid var(--guide-ink); outline-offset: -3px; }
+
 .public-guide-hero-note {
   position: relative;
   padding: 28px;
