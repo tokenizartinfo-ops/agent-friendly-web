@@ -22,11 +22,6 @@ jobs:
       AFW_PREVIEW_ARTIFACT: '12289664737'
       AFW_PREVIEW_RUN: '39478721753'
       AFW_PREVIEW_ZIP_SHA256: c9b53eaefa6b92818f480656da14017ac4564b25b56fc446f5e7e3ffe644e878
-      AFW_PREVIEW_ROOT: ${{ runner.temp }}/afw-public-copy-preview-dist
-      AFW_PREVIEW_ARCHIVE: ${{ runner.temp }}/afw-public-copy-preview.zip
-      AFW_PREVIEW_META: ${{ runner.temp }}/afw-public-copy-preview-metadata.json
-      AFW_BROWSER_TOOLS: ${{ runner.temp }}/afw-public-preview-browser
-      PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/afw-public-preview-browsers
       WRANGLER_SEND_METRICS: 'false'
     steps:
       - uses: actions/checkout@v4
@@ -36,6 +31,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Prepare paths from the allocated runner
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {appendFileSync} from 'node:fs';
+          import path from 'node:path';
+          const root=process.env.RUNNER_TEMP;
+          assert.ok(root&&path.isAbsolute(root));
+          const values={AFW_PREVIEW_ROOT:path.join(root,'afw-public-copy-preview-dist'),AFW_PREVIEW_ARCHIVE:path.join(root,'afw-public-copy-preview.zip'),AFW_PREVIEW_META:path.join(root,'afw-public-copy-preview-metadata.json'),AFW_BROWSER_TOOLS:path.join(root,'afw-public-preview-browser'),PLAYWRIGHT_BROWSERS_PATH:path.join(root,'afw-public-preview-browsers')};
+          appendFileSync(process.env.GITHUB_ENV,Object.entries(values).map(([k,v])=>k+'='+v).join('\n')+'\n');
+          NODE
       - name: Obtain only the pinned accepted public build
         env:
           GH_TOKEN: ${{ github.token }}
