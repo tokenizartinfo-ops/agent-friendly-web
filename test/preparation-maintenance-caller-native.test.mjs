@@ -21,7 +21,7 @@ test('native administrative Workflow calls actual private maintenance RPC',{time
   const {method,...maintenancePolicy}=policy;void method;delete maintenancePolicy.issuer;delete maintenancePolicy.resource;
   const common={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']};
   const mf=new Miniflare(convertV4MiniflareOptions({workers:[
-   {name:'caller',...common,script:caller.script.replace('const r = readRecord(value, RESULT);','console.log("CI_RECEIPT_SHAPE",JSON.stringify({protoObject:Object.getPrototypeOf(value)===Object.prototype,protoNull:Object.getPrototypeOf(value)===null,keys:Reflect.ownKeys(value).map(String),descriptors:Object.entries(Object.getOwnPropertyDescriptors(value)).map(([k,d])=>[k,Object.hasOwn(d,"value"),typeof d.value]),expectedManifest:manifestHash,gotManifest:value.manifestHash,start,end,observed:instant(value.observedAt),idLength:value.clientId.length,idValid:/^[A-Za-z0-9_-]{16,128}$/.test(value.clientId),redirectMatch:value.redirectUri===p.redirectUri,resourceMatch:value.configuredResource===p.resource,opMatch:value.operationId===p.operationId})); const r = readRecord(value, RESULT);'),bindings:{AFW_PREPARATION_MAINTENANCE_CALLER_ENABLED:String(enabled),
+   {name:'caller',...common,script:caller.script,bindings:{AFW_PREPARATION_MAINTENANCE_CALLER_ENABLED:String(enabled),
     ...(enabled?{AFW_PREPARATION_MAINTENANCE_CALLER_POLICY:JSON.stringify(policy)}:{})},
     ...(enabled?{serviceBindings:{PREPARATION_MAINTENANCE:'maintenance'}}:{}),
     workflows:{FLOW:{name:workflow,className:'AfwPreparationClientMaintenanceWorkflow'}}},
