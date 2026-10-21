@@ -8,6 +8,7 @@ on:
       - 'test/preparation_release_test.py'
       - 'test/preparation-closed-package-native.test.mjs'
       - 'config/preparation-canary-release.v1.json'
+      - 'config/preparation-canary-release.v2.json'
       - '.github/workflows/afw-preparation-release-preflight.yml'
   workflow_dispatch:
 permissions:
@@ -30,7 +31,7 @@ jobs:
           node-version: 22
       - name: Test release rejection boundaries
         run: python3 -m unittest discover -s test -p 'preparation_release_test.py' -v
-      - name: Fetch and qualify the exact existing build
+      - name: Fetch and qualify the two original immutable builds
         env:
           GH_TOKEN: ${{ github.token }}
           PYTHONDONTWRITEBYTECODE: '1'
@@ -39,7 +40,7 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Reject open source routes in candidate and rollback fixtures
         run: node --test test/preparation-closed-package-native.test.mjs
-      - name: Execute exact closed payload and recovery source on native runtime
+      - name: Execute exact candidate and retained rollback on native runtime
         env:
           WRANGLER_SEND_METRICS: 'false'
         run: node scripts/check-preparation-closed-package.mjs

@@ -23,7 +23,7 @@ test('closed release qualification rejects every open human source entry for can
    rollback=source(target==='rollback.mjs'?openPath:null,target==='rollback.mjs'?openMethod:null);
   await writeFile(join(out,'wrangler.closed.json'),JSON.stringify(profile));
   await writeFile(join(out,'index.mjs'),script);await writeFile(join(out,'rollback.mjs'),rollback);
-  await writeFile(join(out,'receipt.json'),JSON.stringify({workerHash:hash(script),rollbackHash:hash(rollback),nativeClosedQualified:false,closedUploadReady:false}));
+  await writeFile(join(out,'receipt.json'),JSON.stringify({workerHash:hash(script),rollbackHash:hash(rollback),rollbackKind:'retained_build_artifact',sourceRevision:'a'.repeat(40),rollbackSourceRevision:'b'.repeat(40),hostedRollbackPerformed:false,nativeClosedQualified:false,closedUploadReady:false}));
   return {script,rollback};
  }
  try{
@@ -44,7 +44,7 @@ test('closed release qualification rejects every open human source entry for can
    const result=JSON.parse(await readFile(join(out,'native-closed.json'),'utf8')),
     receipt=JSON.parse(await readFile(join(out,'receipt.json'),'utf8'));
    assert.equal(result.remoteMutations,0);assert.equal(result.operationalReadiness,false);
-   assert.equal(receipt.closedUploadReady,false);assert.equal(receipt.workerHash,hash(original.script));assert.equal(receipt.rollbackHash,hash(original.rollback));
+   assert.equal(receipt.closedUploadReady,false);assert.equal(receipt.hostedRollbackPerformed,false);assert.equal(receipt.rollbackKind,'retained_build_artifact');assert.equal(receipt.workerHash,hash(original.script));assert.equal(receipt.rollbackHash,hash(original.rollback));
    assert.equal(await readFile(join(out,'index.mjs'),'utf8'),original.script);assert.equal(await readFile(join(out,'rollback.mjs'),'utf8'),original.rollback);
    for(const filename of ['index.mjs','rollback.mjs'])for(const path of ['/source','/source/identity','/source/new'])for(const method of ['GET','POST'])
     assert.equal(result.cases.filter(x=>x.source===filename&&x.path===path&&x.method===method&&x.status===404&&x.closed===true).length,1);
