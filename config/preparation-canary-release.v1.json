@@ -3,23 +3,23 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "artifact": {
-    "id": 12294059251,
-    "name": "afw-preparation-worker-b2d5f2952a1761cd93a34560e3ea7d92bd8df071",
-    "runId": 39488774029,
+    "id": 12359259527,
+    "name": "afw-preparation-worker-53bb46a8de05fd0f617dbdb0c836f3d81226c816",
+    "runId": 39634317092,
     "runAttempt": 1,
     "workflow": ".github/workflows/afw-preparation-worker-build.yml",
     "event": "push",
     "branch": "main",
-    "bytes": 326745,
-    "sha256": "71f82fc387dd4149ced2bee2f6a09d9d57711ae4e51a7170659095380cb5c8da",
-    "expiresAt": "2026-10-27T20:04:31Z"
+    "bytes": 338856,
+    "sha256": "a667bf2e0f455e1c4de167e217b79a3953adf4432d0d17126d75912daaddd895",
+    "expiresAt": "2026-10-28T16:24:01Z"
   },
   "build": {
-    "sourceRevision": "b2d5f2952a1761cd93a34560e3ea7d92bd8df071",
-    "sourceTree": "e4147de72e1e4bbf5832a16516a54b7dc0bf43b6",
+    "sourceRevision": "53bb46a8de05fd0f617dbdb0c836f3d81226c816",
+    "sourceTree": "983d8610867f9c13dd275949cb9d31be3405f078",
     "sourceCheck": "git-inputs-before-after-v1",
-    "workerHash": "6185255e90e3f6800d2efc9b2a6463417b98c2edc53cbbbdc022afec9ec95cee",
-    "workerBytes": 1684646,
+    "workerHash": "502da57c4fc45bc90e2b363701fee6af841dbea9fce1cef26f3a824c5e616c89",
+    "workerBytes": 1734870,
     "buildOnly": true,
     "runtimeConfigIncluded": false
   },
@@ -30,22 +30,25 @@
     "proposedOrigin": "https://preparation-canary.agentfriendlyweb.dev"
   },
   "evidence": {
-    "checkedAt": "2026-10-20T21:05:56.854Z",
-    "workerAbsent": true,
-    "d1ExactNameAbsent": true,
-    "proposedWorkerDomainAbsent": true,
+    "checkedAt": "2026-10-21T16:20:16.173Z",
+    "workerAbsent": false,
+    "d1ExactNameAbsent": false,
+    "proposedWorkerDomainAbsent": false,
     "kvLookupPerformed": false,
-    "scope": "dated metadata only; repeat exact target checks before a mutation"
+    "scope": "dated read-only metadata of EXISTING closed preparation target; no row counts or recovery bytes proved; repeat exact checks before any mutation",
+    "workerVersionId": "4e7d7e2e-1cbd-4af2-9dc1-b78ef6565016",
+    "deploymentId": "3df60657-e67d-44de-8bea-ee6e6c50ccdd",
+    "sourcePathsCoveredByAccess": false
   },
   "allowedAction": "prepare_closed_profile_only",
   "activationReady": false,
   "operationalReadiness": false,
   "activationGates": [
-    "Dedicated D1/KV and exact schema with own synthetic fixture; do not bind public production or G2 stores",
-    "Own client/redirects/resource/PKCE registration and server custody",
-    "Hosted Access identity/audience and protected human routes",
-    "Reviewed original agent/human windows and explicit purpose consent",
-    "Closed rollback and current resource/config readback",
-    "Actual read/draft/reconcile/withdrawal acceptance; no inferred installation/payment/events/PC-off"
+    "Fresh exact-target and recoverable original configuration/bytes receipts before closed upload; preserve existing preparation D1/KV/schema/history",
+    "Dedicated server HMAC custody and same D1; do not reuse an Access assertion, OAuth token or API credential as CSRF material",
+    "Own source routes protected by hosted Access/audience with real verified server subject, distinct from a bootstrap identity",
+    "Reviewed original ten-minute window and purpose; explicit source save and read-only inspect/recovery acceptance",
+    "Own client/redirects/resource/PKCE and server custody; spent SDK registration journal must not be replayed",
+    "Actual read/draft/reconcile/withdrawal and useful cloud events independently evidenced; no inferred customer access/payment/events/PC-off"
   ]
 }
