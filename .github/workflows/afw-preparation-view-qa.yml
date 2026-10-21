@@ -8,6 +8,8 @@ on:
       - 'lib/agent-consumption-input.mjs'
       - 'test/delegated-preparation-consent-view.test.mjs'
       - 'scripts/check-preparation-consent-view-browser.mjs'
+      - 'lib/preparation-source-session-view.mjs'
+      - 'scripts/check-preparation-source-session-browser.mjs'
       - '.github/workflows/afw-preparation-view-qa.yml'
   push:
     branches: [main]
@@ -17,6 +19,8 @@ on:
       - 'lib/agent-consumption-input.mjs'
       - 'test/delegated-preparation-consent-view.test.mjs'
       - 'scripts/check-preparation-consent-view-browser.mjs'
+      - 'lib/preparation-source-session-view.mjs'
+      - 'scripts/check-preparation-source-session-browser.mjs'
       - '.github/workflows/afw-preparation-view-qa.yml'
 
 permissions:
@@ -51,6 +55,11 @@ jobs:
           AFW_BROWSER_TOOLS: ${{ runner.temp }}/afw-consent-browser
           PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/afw-consent-browsers
         run: node scripts/check-preparation-consent-view-browser.mjs
+      - name: Check source session presentation on desktop and mobile
+        env:
+          AFW_BROWSER_TOOLS: ${{ runner.temp }}/afw-consent-browser
+          PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/afw-consent-browsers
+        run: node scripts/check-preparation-source-session-browser.mjs
       - name: Preserve synthetic screenshots and sanitized receipt
         if: always()
         uses: actions/upload-artifact@v4
