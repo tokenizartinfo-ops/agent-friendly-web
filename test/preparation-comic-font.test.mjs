@@ -21,10 +21,11 @@ test('public font and full license retain exact unmodified upstream blobs',async
 });
 test('asset routing never touches private authority, body, clocks or environment in native workerd',async()=>{
  const fixture=`import {createDelegatedPreparationWorker} from './worker/mcp-preparation/index.mjs';
+ import {PREPARATION_COMIC_FONT_PATH,PREPARATION_COMIC_LICENSE_PATH} from './lib/preparation-comic-font.mjs';
  const worker=createDelegatedPreparationWorker({now(){throw Error('clock read');},monotonic(){throw Error('clock read');}});
  const forbidden=new Proxy({},{get(){throw Error('environment read');}});
  export default {fetch(request,env,ctx){
-  const path=new URL(request.url).pathname,asset=path.startsWith('/assets/afw-comic-neue-')&&!new URL(request.url).search;
+  const path=new URL(request.url).pathname,asset=[PREPARATION_COMIC_FONT_PATH,PREPARATION_COMIC_LICENSE_PATH].includes(path)&&!new URL(request.url).search;
   request.text=()=>{throw Error('body read');};request.arrayBuffer=()=>{throw Error('body read');};request.json=()=>{throw Error('body read');};
   return worker.fetch(request,asset?forbidden:{},ctx);
  }};`;
@@ -40,7 +41,7 @@ test('asset routing never touches private authority, body, clocks or environment
   for(const path of['/','/mcp',FONT+'?other=1',FONT+'/extra','/assets/private']){
    assert.equal(preparationComicAssetResponse(new Request(origin+path)),null);
    // Unknown exact static paths still enter the original disabled private gate.
-   if(!path.startsWith(FONT+'/'))assert.equal((await runtime.dispatchFetch(origin+path)).status,404);
+   assert.equal((await runtime.dispatchFetch(origin+path)).status,404);
   }
  }finally{await runtime.dispose();}
 });
