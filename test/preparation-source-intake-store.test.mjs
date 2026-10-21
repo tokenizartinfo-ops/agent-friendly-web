@@ -83,6 +83,29 @@ test('isolated own-source intake writes facts without verified claims or authori
   assert.equal((await a.create(input())).code,'source_unavailable');assert.equal(f.batches,0);
   const g=setup(t);g.wall=g.profile.expiresAt;assert.equal(g.open().store,null);
  });
+ await t.test('one overlapping call cannot extend the first call identity expiry',async t=>{
+  const f=setup(t),x=f.open(),firstExpiry=f.wall+1000;let identities=0,paused=false,release,entered;
+  const held=new Promise(r=>{release=r;}),reached=new Promise(r=>{entered=r;});
+  x.options.resolveIdentity=async()=>({...f.identity,expiresAt:++identities===1?firstExpiry:f.wall+100000});
+  const store=factory(x.options);
+  f.before=async(query,kind)=>{if(kind==='first'&&!paused){paused=true;entered();await held;}};
+  const pending=store.create(input());await reached;
+  const second=await store.create(input());assert.equal(second.code,'source_created');
+  f.wall=firstExpiry;release();
+  const first=await pending;closed(first);assert.equal(first.code,'source_unavailable');assert.equal(first.projectRef,null);assert.equal(f.rows().projects,1);
+ });
+ await t.test('expiry between native statements rolls back the receipt as well as the project',async t=>{
+  const f=setup(t);
+  f.sql.function('julianday',value=>2440587.5+(value==='now'?f.wall:Date.parse(value))/86400000);
+  f.db.batch=async statements=>{
+   f.batches++;f.sql.exec('BEGIN IMMEDIATE');
+   try{const results=statements.map((s,i)=>{if(i===1)f.wall=f.profile.expiresAt;const r=f.sql.prepare(s._query).run(...s._args);return {success:true,meta:{changes:Number(r.changes)}};});
+    f.sql.exec('COMMIT');return results;
+   }catch(e){f.sql.exec('ROLLBACK');throw e;}
+  };
+  const r=await f.open().store.create(input());closed(r);assert.equal(r.code,'unknown_ack');assert.equal(r.projectRef,null);
+  assert.equal(f.rows().projects,0);assert.equal(f.rows().events,0);
+ });
  await t.test('concurrent identical operations produce one project and event',async t=>{
   const f=setup(t),a=f.open().store,b=f.open().store;const r=await Promise.all([a.create(input()),b.create(input())]);r.forEach(closed);
   assert.ok(r.every(x=>['source_created','source_already_recorded'].includes(x.code)));assert.equal(r[0].projectRef,r[1].projectRef);
