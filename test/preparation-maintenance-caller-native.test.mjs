@@ -21,10 +21,10 @@ test('native administrative Workflow calls actual private maintenance RPC',{time
   const {method,...maintenancePolicy}=policy;void method;delete maintenancePolicy.issuer;delete maintenancePolicy.resource;
   const common={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']};
   const mf=new Miniflare(convertV4MiniflareOptions({workers:[
-   {name:'caller',...common,script:caller.script,bindings:{AFW_PREPARATION_MAINTENANCE_CALLER_ENABLED:String(enabled),
+   {name:'caller',...common,script:caller.script+`\nexport class Diagnostic extends WorkflowEntrypoint { async run(event,step){return step.do('probe',async()=>{const service=this.env.PREPARATION_MAINTENANCE,method=service.register;let callStatus=null,callError=false,applyStatus=null,applyError=false;try{callStatus=(await method.call(service)).status;}catch{callError=true;}try{applyStatus=(await Reflect.apply(method,service,[])).status;}catch{applyError=true;}return {callStatus,callError,applyStatus,applyError};});}}`,bindings:{AFW_PREPARATION_MAINTENANCE_CALLER_ENABLED:String(enabled),
     ...(enabled?{AFW_PREPARATION_MAINTENANCE_CALLER_POLICY:JSON.stringify(policy)}:{})},
     ...(enabled?{serviceBindings:{PREPARATION_MAINTENANCE:'maintenance'}}:{}),
-    workflows:{FLOW:{name:workflow,className:'AfwPreparationClientMaintenanceWorkflow'}}},
+    workflows:{FLOW:{name:workflow,className:'AfwPreparationClientMaintenanceWorkflow'},PROBE:{name:'afw-preparation-caller-probe',className:'Diagnostic'}}},
    {name:'maintenance',...common,script:callee.script,bindings:{AFW_PREPARATION_CLIENT_MAINTENANCE_ENABLED:'true',AFW_OAUTH_ISSUER:policy.issuer,
     AFW_OAUTH_RESOURCE:policy.resource,AFW_PREPARATION_CLIENT_MAINTENANCE_POLICY:JSON.stringify(maintenancePolicy),...Object.fromEntries(flags.map(k=>[k,'false']))},
     kvNamespaces:{OAUTH_KV:'caller-ci-kv'},d1Databases:{DB:'caller-ci-db'}},
@@ -32,6 +32,7 @@ test('native administrative Workflow calls actual private maintenance RPC',{time
   try{
    const db=await mf.getD1Database('DB','maintenance'),kv=await mf.getKVNamespace('OAUTH_KV','maintenance');await db.prepare(ddl).run();
    const bindings=await mf.getBindings('caller'),id='afw-prep-'+planHash;
+   if(enabled){const probe=await bindings.PROBE.create({id:'probe-ci',params:{}});console.log('CI_RPC_INVOCATION',JSON.stringify(await settled(probe)));}
    await run({mf,db,kv,flow:bindings.FLOW,id,planHash,policy});
   }finally{await mf.dispose();}
  }
