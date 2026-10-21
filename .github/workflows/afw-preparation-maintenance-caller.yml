@@ -1,0 +1,79 @@
+name: AFW preparation maintenance cloud caller
+on:
+  pull_request:
+    paths:
+      - 'worker/preparation-maintenance-caller/**'
+      - 'lib/preparation-client-maintenance.mjs'
+      - 'lib/preparation-maintenance-caller.mjs'
+      - 'lib/capsule-preparation-request-lease.mjs'
+      - 'lib/agent-consumption-input.mjs'
+      - 'db/preparation-client-bootstrap.sql'
+      - 'scripts/build-preparation-maintenance-caller.mjs'
+      - 'scripts/mcp-release-source.mjs'
+      - 'test/preparation-maintenance-caller-native.test.mjs'
+      - 'test/preparation-maintenance-caller.test.mjs'
+      - '.github/workflows/afw-preparation-maintenance-caller.yml'
+      - 'package*.json'
+  push:
+    branches: [main]
+    paths:
+      - 'worker/preparation-maintenance-caller/**'
+      - 'lib/preparation-client-maintenance.mjs'
+      - 'lib/capsule-preparation-request-lease.mjs'
+      - 'lib/agent-consumption-input.mjs'
+      - 'db/preparation-client-bootstrap.sql'
+      - 'scripts/build-preparation-maintenance-caller.mjs'
+      - 'scripts/mcp-release-source.mjs'
+      - 'test/preparation-maintenance-caller-native.test.mjs'
+      - 'test/preparation-maintenance-caller.test.mjs'
+      - '.github/workflows/afw-preparation-maintenance-caller.yml'
+      - 'package*.json'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      AFW_BUILD_SOURCE_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.AFW_BUILD_SOURCE_REVISION }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts
+      - run: node --test test/preparation-maintenance-caller.test.mjs test/preparation-maintenance-caller-native.test.mjs
+      - name: Compile exact source without publishing
+        run: node scripts/build-preparation-maintenance-caller.mjs "$AFW_BUILD_SOURCE_REVISION"
+      - name: Verify compiled bytes and provenance
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const bytes=readFileSync('output/preparation-maintenance-caller/index.mjs');
+          const m=JSON.parse(readFileSync('output/preparation-maintenance-caller/build.json','utf8'));
+          assert.equal(m.sourceRevision,process.env.AFW_BUILD_SOURCE_REVISION);
+          assert.equal(m.sourceCheck,'git-inputs-before-after-v1');
+          assert.match(m.sourceTree,/^[a-f0-9]{40}$/);
+          assert.equal(m.buildOnly,true);assert.equal(m.runtimeConfigIncluded,false);
+          assert.ok(bytes.length>0&&bytes.length<=2097152);
+          assert.equal(m.workerBytes,bytes.length);
+          assert.equal(m.workerHash,createHash('sha256').update(bytes).digest('hex'));
+          console.log(JSON.stringify(m));
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afw-preparation-maintenance-caller-${{ env.AFW_BUILD_SOURCE_REVISION }}
+          path: |
+            output/preparation-maintenance-caller/index.mjs
+            output/preparation-maintenance-caller/build.json
+          if-no-files-found: error
+          retention-days: 7
