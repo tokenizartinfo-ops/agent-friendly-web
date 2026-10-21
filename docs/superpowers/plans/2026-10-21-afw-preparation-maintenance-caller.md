@@ -20,10 +20,12 @@ Ruling: autorización owner para decidir/encadenar y cloudfirst prevalece sobre 
 ## Task 1: caller, entrada, pruebas y artefacto
 **Files:** Create lib/preparation-maintenance-caller.mjs; worker/preparation-maintenance-caller/index.mjs; scripts/build-preparation-maintenance-caller.mjs; test/preparation-maintenance-caller.test.mjs; test/preparation-maintenance-caller-native.test.mjs; .github/workflows/afw-preparation-maintenance-caller.yml.
 **Interfaces:** runPreparationMaintenanceCaller(env,event,step,clocks?) -> closed receipt; buildPreparationMaintenanceCaller({sourceRevision}) -> frozen script/hash. Workflowrun(env=this.env) no identidad/clock desde payload. PREPARATION_MAINTENANCE.register/reconcile() producen PB6receipt.
-- [ ] Tests unit/nativos primero: required-source assertion RED y pruebas detalladas del contrato. Nuevo workflowCI instala solo lockfile existente sin secrets.
-- [ ] Run CI en rama; verificar RED por fuente/build ausentes.
-- [ ] Implementar parser/pins/context/hash/lease/step/recibo y wrapper404. Compilar fuente exacta.
-- [ ] Run tests unit + native Workflow/servicebinding/D1/KV; verificar únicos slot/cliente y ceroqueries con disabled.
-- [ ] GitHub fullCI npm test,lint,build existente; commit y registrar SHA/tree/jobs/artifact.
-- [ ] Una revisión fresca wholebranch máscapaz; Critical/Important una pasadaRED/GREEN y suite; Minors diferidos. No rereview.
+- [x] Tests unit/nativos primero: required-source assertion RED y pruebas detalladas del contrato. Nuevo workflowCI instala solo lockfile existente sin secrets.
+- [x] Run CI en rama; verificar RED por fuente/build ausentes.
+- [x] Implementar parser/pins/context/hash/lease/step/recibo y wrapper404. Compilar fuente exacta.
+- [x] Run tests unit + native Workflow/servicebinding/D1/KV; verificar únicos slot/cliente y ceroqueries con disabled.
+- [x] GitHub fullCI npm test,lint,build existente; commit y registrar SHA/tree/jobs/artifact.
+- [x] Una revisión fresca wholebranch máscapaz; Critical/Important una pasadaRED/GREEN y suite; Minors diferidos. No rereview.
 - [ ] Merge expectedHEAD y verificar CI main; ledger final y checkpoint. Hosting/cliente/consentimiento separados.
+
+Author review pass: Important outer-step wait bounded by original lease; regression RED39598573962 (5250ms pending) precedes fix. Three Minor findings recorded in PR537 and deferred; no re-review. Hosted custody/client/consent and PC-off remain separate gates.
