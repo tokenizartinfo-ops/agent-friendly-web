@@ -8,7 +8,7 @@ Design: a pure buildPreparationMaintenanceApiPlan({policy,state,now?}) returns f
 Files: lib/preparation-maintenance-api-plan.mjs; test/preparation-maintenance-api-plan.test.mjs; .github/workflows/afw-preparation-maintenance-api-plan.yml. No dependencies; Node22 CI without npm install for focal tests, then existing full CI. Isolated remote branch from main171fc039; no local clone/build/install.
 Standing owner authorization to decide/advance in cloud overrides routine design approval/local-plan menus. Existing private registration and spent journal remain unchanged. No new live trial without a separate evidence-based plan.
 
-- [ ] Commit tests/workflow/plan first and observe missing-module RED in GitHub.
+- [x] Tests/workflow/plan first: missing-module RED39606942722/job119245473417 at3160fb59.
 - [ ] Implement pure builder and run focal + full CI.
 - [ ] One fresh whole-branch review; one author pass for Critical/Important, Minor ledgered; no re-review.
 - [ ] Merge expected head after checks; verify main CI and preserve checkpoint.
