@@ -1,0 +1,36 @@
+name: AFW preparation closed origin
+on:
+  push:
+    paths:
+      - scripts/check-preparation-closed-origin.mjs
+      - test/preparation-closed-origin.test.mjs
+      - .github/workflows/afw-preparation-closed-origin.yml
+  pull_request:
+    paths:
+      - scripts/check-preparation-closed-origin.mjs
+      - test/preparation-closed-origin.test.mjs
+      - .github/workflows/afw-preparation-closed-origin.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test test/preparation-closed-origin.test.mjs
+      - name: Observe only the fixed closed origin, without authentication
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: node scripts/check-preparation-closed-origin.mjs | tee "$RUNNER_TEMP/preparation-closed-origin.json"
+      - uses: actions/upload-artifact@v4
+        if: always() && github.event_name == 'workflow_dispatch'
+        with:
+          name: afw-preparation-closed-origin-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/preparation-closed-origin.json
+          if-no-files-found: error
+          retention-days: 7
