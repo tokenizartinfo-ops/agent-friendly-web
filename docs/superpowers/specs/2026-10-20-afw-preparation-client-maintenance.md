@@ -1,0 +1,29 @@
+# AFW preparation client maintenance — source-only design
+Date20oct2026 Argentina. Owner delegates routine AFW design/implementation choices and requests consecutive autonomous blocks. This extends the existing accepted SDK registration used in native CI; it does not activate a hosted maintenance port.
+
+## Outcome and boundary
+Prepare one real-SDK public ChatGPT client registration safely before an eventual own preparation trial. No credentials or customer identity are accepted/exported. Default disabled returns null without touching dependencies. No HTTP entrypoint, generic DCR/CIMD, production import, app creation, registration, DDL application, private event, Container or PC-off is included.
+
+## Selected approach
+SDK1.2.1 createClient ALWAYS generates a new ID and writes KV before returning. Therefore a KV-only or in-memory retry guard is insufficient. Add one separate operational D1 table preparation_client_bootstrap with a fixed single slot; a first-primary INSERT ON CONFLICT DO NOTHING is the sole creation admission. A lost claim ACK or SDK ACK leaves a durable pending slot, never permission to recreate a client. No reset/delete or new operation can replace the slot. This costs availability after an uncertain claim: explicit future lifecycle work is required instead of guessing/retrying.
+Rejected: raw SDK KV key fabrication; exposing CI bootstrap; generic registration endpoint; relying on listClients emptiness or Actions concurrency for atomic uniqueness.
+
+## API and trusted configuration
+lib/preparation-client-maintenance.mjs exports createPreparationClientMaintenance(options), returning null disabled or frozen {register,reconcile}. Server-only options are enabled,issuer,resource,redirectUri,operationId,startedAt,expiresAt,env,now,monotonic. They are NOT an authentication mechanism, request fields or a deployable operator.
+Issuer must be canonical HTTPS origin; resource exactly issuer+'/mcp'. Redirect is an exact HTTPS ChatGPT callback without query/fragment/userinfo/port: either /connector_platform_oauth_redirect or /connector/oauth/<bounded opaque ID>. It must come from the real future app panel; allowing syntax does not prove registration or issuer mix-up protection. operationId is a bounded opaque ref; clientName is deterministic AFW preparation plus operationId. Scopes are not client metadata: the existing consent/token hosts still authorize exact read/preparation scopes.
+Canonical ISO start/end, original window>0 and<=600000ms, current wall inside. All four preparation flags must remain the STRING false. DB and OAUTH_KV are trusted dedicated bindings; caller must separately prove account/resource ownership and authorization. SDK server is constructed here with fixed issuer/resource, no CIMD/DCR fetch or refresh registration.
+Each register/reconcile call uses the existing server request lease, original 5000ms monotonic/wall deadline. Config/env/method drift invalidates the factory. No fresh timeout after awaits. Async side effects already dispatched cannot be cancelled: a late SDK write is possible, remains unconfirmed, and can only be reconciled. No claim of zero effects from a timeout.
+
+## Journal and algorithm
+Separate SQL file db/preparation-client-bootstrap.sql; NOT part of the accepted11table package or an automatic migration. Fixed slot_id='preparation-client', operation_id, manifest_hash SHA256, claimed_at, nullable client_id+observed_at with paired-null constraint. No user/project/grant/code/token data. No remote DDL now.
+Manifest hash covers contract, operationId,issuer,resource,redirect,clientName,original dates and fixed authorization_code/code/none values.
+register: primary read; an existing different manifest blocks. Existing same manifest only reconciles. Before FIRST claim require actual SDK bounded complete client inventory empty. Atomic slot INSERT must return changes1; lost/error ACK cannot call createClient. Reread own exact claim. Call actual SDK createClient ONCE with one redirect, authorization_code only, code only, auth none. Validate exact public metadata and lookup/list readback, then record client ID with CAS and read back. Never output unexpected fields or provider error text.
+reconcile: no SDK create/update/delete, only bounded full inventory(max2, no cursor) and lookup. Empty/invisible/duplicate/unexpected/mismatched metadata is unconfirmed or blocked, not proof of absence. Exact same single client may CAS-fill the pending journal and return an observed receipt. Existing journal ID must agree. Concurrent workers can reconcile the same client; cannot claim creation twice. Configuration drift, deadline or original-window expiry forbids acceptance.
+Every result carries executionAllowed/chargeAllowed/publicationAllowed=false, authorizationGranted=false and operationalReadiness=false. Confirmation is metadata registration observed, never account consent, PKCE exchange, live client usability or lasting validity.
+
+## Acceptance
+Native workerd/Miniflare with actual SDK1.2.1 and ephemeral D1/KV only. Test disabled/malformed config; valid create/readback/repeat/new factory; concurrent creators; lost D1 claim ACK; lost SDK ACK with stale/incomplete inventory then explicit reconciliation; late SDK completion/deadline; drift/expiry; competing manifest; metadata tamper/duplicates; no secret export; no grant or project rows. CI-only fault wrappers forward real storage operations and do not replace SDK results.
+Run focused native CI then npm test/lint/build in GitHub. One fresh whole-branch reviewer, one Critical/Important fix pass; Minor ledger. No remote proof or new readiness inferred.
+
+## Future gates
+Separate scoped maintenance hosting/identity/custody and actual app callback before installing journal or registering a client. Own identity/site facts and consent after that. PB5 stays closed unchanged; accepted G2/Max/public runtime and Container case remain independent.
