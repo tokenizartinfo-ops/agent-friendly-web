@@ -203,7 +203,7 @@ def main():
     require(contract["target"] == {"accountId": "85d0d5dadac3341a564f22ce885e9eec",
             "worker": "agent-friendly-web-web-production", "origin": "https://agentfriendlyweb.dev",
             "entrypoint": "server/index.js", "assets": "client"}, "contract target")
-    inventory_path = root / "docs/evidence/2026-10-20-guide-delivery/qualified-inventory.json"
+    inventory_path = root / "docs/evidence/2026-10-21-a2a-delivery/qualified-inventory.json"
     require(contract["inventoryPath"] == str(inventory_path.relative_to(root)), "contract inventory")
     inventory = json.loads(inventory_path.read_text())
     require(inventory["sourceRevision"] == contract["sourceRevision"]

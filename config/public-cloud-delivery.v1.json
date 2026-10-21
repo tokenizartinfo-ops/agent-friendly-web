@@ -2,20 +2,20 @@
   "schemaVersion": 1,
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "sourceRevision": "61e03107b0532de5591255180fc3916dbbaea0c8",
-  "sourceTree": "92fa02134ce78faf887ffcd495eb3c94cefec29f",
-  "publicMergeRevision": "d2c05337d67759a0fde8fa75434d34316a338034",
+  "sourceRevision": "8057ee37f5b0cf02e5e14ab07b98145e07f977d0",
+  "sourceTree": "011e990830767adba70a65c1c1a9c4ea5c3f7e18",
+  "publicMergeRevision": "5f62a964d7e6783a383a8fdb713a71b05ab1f7bc",
   "artifact": {
-    "id": 12295001318,
-    "name": "afw-guide-qualified-dist-61e03107b0532de5591255180fc3916dbbaea0c8",
-    "runId": 39488908864,
+    "id": 12385851354,
+    "name": "afw-guide-qualified-dist-8057ee37f5b0cf02e5e14ab07b98145e07f977d0",
+    "runId": 39685119496,
     "runAttempt": 1,
     "workflow": ".github/workflows/afw-public-guide-start-qa.yml",
-    "bytes": 2760196,
-    "sha256": "7b87b58463dc91707ceb4052b3878048b7613c05a641e1b9238796279318ab70",
-    "expiresAt": "2026-10-27T20:06:08Z"
+    "bytes": 2760482,
+    "sha256": "4bc144f69e2a7ca16bc667ead76116e89eb780f57ddfa1eadd35db5e626c7d13",
+    "expiresAt": "2026-10-28T22:16:22Z"
   },
-  "inventoryPath": "docs/evidence/2026-10-20-guide-delivery/qualified-inventory.json",
+  "inventoryPath": "docs/evidence/2026-10-21-a2a-delivery/qualified-inventory.json",
   "target": {
     "accountId": "85d0d5dadac3341a564f22ce885e9eec",
     "worker": "agent-friendly-web-web-production",
@@ -24,11 +24,11 @@
     "assets": "client"
   },
   "baseline": {
-    "checkedAt": "2026-10-20T20:26:44.517Z",
-    "deploymentId": "88e25a5c-6b06-4074-80fd-59355a03de0d",
-    "versionId": "d19c3d49-205b-46d0-ae8c-7c9e6e52bbea",
-    "versionNumber": 76,
-    "bindingsSha256": "b59dc03f3b7b83a54ac71444bf4ac5cbbf252e508c760850455a7911f9bf9750",
+    "checkedAt": "2026-10-21T22:31:06.291Z",
+    "deploymentId": "4a7a9452-e843-408a-bd69-3d3990cc51ed",
+    "versionId": "8fc686dd-bcf4-4445-a8d9-fdb8fc3224ff",
+    "versionNumber": 78,
+    "bindingsSha256": "7347149d5e22db8d04ef7fcdefa82da44eb9e877b0efde2faa1f1c22d099cf74",
     "settingsSha256": "aa39596bf29a129c7cc803eb9fc8e2a7df6d4de995f4bd8de69c207456f09166",
     "runtimeSha256": "d022a50e3aa634cb5b81066a014c552b59c82ca605ef7473d968cf8da07af739",
     "bindingsCount": 10,
@@ -37,7 +37,7 @@
     "dbPreserved": true,
     "ratePreserved": true,
     "mutations": 0,
-    "previousRollbackVersion": "d8982d37-8966-4c6a-86fa-d265455d4df9",
+    "previousRollbackVersion": "9d4b1396-df9d-461d-adc5-a116ad2b005b",
     "scope": "dated GET only; must be re-read before upload; fingerprints are not deployable configuration"
   },
   "limits": {
@@ -47,12 +47,12 @@
     "maxFileBytes": 16777216
   },
   "nativeQualification": {
-    "runId": 39488908864,
-    "jobId": 118856482135,
+    "runId": 39685119496,
     "cases": 6,
     "states": 18,
     "immutable": true,
-    "previewArtifactId": 12295056186
+    "previewArtifactId": 12385786496,
+    "jobId": 119517093536
   },
   "allowedAction": "read_validate_and_prepare_only",
   "operationalReadiness": false
