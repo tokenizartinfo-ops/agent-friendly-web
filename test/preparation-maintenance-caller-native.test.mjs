@@ -21,11 +21,7 @@ test('native administrative Workflow calls actual private maintenance RPC',{time
   const {method,...maintenancePolicy}=policy;void method;delete maintenancePolicy.issuer;delete maintenancePolicy.resource;
   const common={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']};
   const mf=new Miniflare(convertV4MiniflareOptions({workers:[
-   {name:'caller',...common,script:caller.script
-    .replace('const r = readRecord(value, RESULT);','console.log("CI_RAW_RECEIPT",JSON.stringify(value)); const r = readRecord(value, RESULT);')
-    .replace('return normalize(value);','const normalized = normalize(value); console.log("CI_NORMALIZED",JSON.stringify(normalized)); return normalized;')
-    .replace('const persisted = readRecord(result,','console.log("CI_PERSISTED",JSON.stringify(result)); const persisted = readRecord(result,')
-    .replace(/}\s*catch\s*\{\s*return outcome\(admitted \? "unconfirmed" : "blocked"\);/,'} catch (e) {console.log("CI_CALLER_CATCH",JSON.stringify({name:e.name,message:String(e.message).slice(0,160)}));return outcome(admitted ? "unconfirmed" : "blocked");'),bindings:{AFW_PREPARATION_MAINTENANCE_CALLER_ENABLED:String(enabled),
+   {name:'caller',...common,script:caller.script.replace('const r = readRecord(value, RESULT);','console.log("CI_RECEIPT_SHAPE",JSON.stringify({protoObject:Object.getPrototypeOf(value)===Object.prototype,protoNull:Object.getPrototypeOf(value)===null,keys:Reflect.ownKeys(value).map(String),descriptors:Object.entries(Object.getOwnPropertyDescriptors(value)).map(([k,d])=>[k,Object.hasOwn(d,"value"),typeof d.value]),expectedManifest:manifestHash,gotManifest:value.manifestHash,start,end,observed:instant(value.observedAt),idLength:value.clientId.length,idValid:/^[A-Za-z0-9_-]{16,128}$/.test(value.clientId),redirectMatch:value.redirectUri===p.redirectUri,resourceMatch:value.configuredResource===p.resource,opMatch:value.operationId===p.operationId})); const r = readRecord(value, RESULT);'),bindings:{AFW_PREPARATION_MAINTENANCE_CALLER_ENABLED:String(enabled),
     ...(enabled?{AFW_PREPARATION_MAINTENANCE_CALLER_POLICY:JSON.stringify(policy)}:{})},
     ...(enabled?{serviceBindings:{PREPARATION_MAINTENANCE:'maintenance'}}:{}),
     workflows:{FLOW:{name:workflow,className:'AfwPreparationClientMaintenanceWorkflow'}}},
@@ -49,7 +45,7 @@ test('native administrative Workflow calls actual private maintenance RPC',{time
   const http=await mf.dispatchFetch('https://caller.invalid/register',{method:'POST',body:'PRIVATE'});assert.equal(http.status,404);assert.equal(http.headers.get('Cache-Control'),'no-store');
  }));
  await t.test('actual Workflow/service binding/SDK writes once and preserves native receipt',()=>own(true,async({mf,db,kv,flow,id,planHash,policy})=>{
-  const instance=await flow.create({id,params:{planHash}});const result=await settled(instance);if(result.status!=='confirmed')console.log('CI_NATIVE_STATE',JSON.stringify({rows:(await db.prepare('SELECT COUNT(*) AS count FROM preparation_client_bootstrap').first()).count,keys:(await kv.list()).keys.length}));assert.equal(result.status,'confirmed');
+  const instance=await flow.create({id,params:{planHash}});const result=await settled(instance);assert.equal(result.status,'confirmed');
   assert.equal(result.receipt.redirectUri,policy.redirectUri);assert.equal(result.receipt.configuredResource,policy.resource);assert.equal(result.operationalReadiness,false);
   assert.deepEqual((await (await flow.get(id)).status()).output,result);
   await assert.rejects(flow.create({id,params:{planHash}}));
