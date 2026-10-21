@@ -6,6 +6,8 @@ import io
 import json
 import os
 import re
+import selectors
+import signal
 import subprocess
 import sys
 import tempfile
@@ -162,16 +164,59 @@ def verify_files(root, inventory):
         body = (root / item["path"]).read_bytes()
         require(len(body) == item["bytes"] and hash_bytes(body) == item["sha256"], "package_changed")
 
-def child(command, cwd, token, timeout):
-    require(timeout > 0, "dispatch_expired")
+def child(command, cwd, token, deadline):
+    # Absolute original deadline: setup, pipe reads and wait never reset it.
+    require(deadline > time.monotonic(), "dispatch_expired")
+    deadline = min(deadline, time.monotonic()+180)
     env = {key: os.environ[key] for key in ("PATH", "HOME", "RUNNER_TEMP") if key in os.environ}
     env.update({"WRANGLER_SEND_METRICS": "false", "NO_COLOR": "1", "CI": "true"})
     if token:
         env["CLOUDFLARE_API_TOKEN"] = token
         env["CLOUDFLARE_ACCOUNT_ID"] = ACCOUNT
-    result = subprocess.run(command, cwd=cwd, env=env, capture_output=True, timeout=min(180, timeout), check=False)
-    require(len(result.stdout)+len(result.stderr) <= 2097152 and result.returncode == 0, "uploader_unavailable")
-    return result.stdout.decode("utf-8", "replace")  # Never printed or persisted.
+    process = subprocess.Popen(command, cwd=cwd, env=env, stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE, start_new_session=True)
+    selector = None
+    chunks, total = [], 0
+    try:
+        selector = selectors.DefaultSelector()
+        for stream, name in ((process.stdout, "stdout"), (process.stderr, "stderr")):
+            os.set_blocking(stream.fileno(), False)
+            selector.register(stream, selectors.EVENT_READ, name)
+        while selector.get_map():
+            left = deadline-time.monotonic()
+            if left <= 0:
+                raise TimeoutError("uploader_deadline")
+            events = selector.select(left)
+            if not events:
+                raise TimeoutError("uploader_deadline")
+            for key, _ in events:
+                try:
+                    block = os.read(key.fileobj.fileno(), 65536)
+                except BlockingIOError:
+                    continue
+                if not block:
+                    selector.unregister(key.fileobj)
+                    continue
+                total += len(block)
+                require(total <= 2097152, "uploader_output_limit")
+                if key.data == "stdout":
+                    chunks.append(block)  # stderr is drained/count-limited but never retained.
+        left = deadline-time.monotonic()
+        if left <= 0:
+            raise TimeoutError("uploader_deadline")
+        require(process.wait(timeout=left) == 0, "uploader_unavailable")
+        return b"".join(chunks).decode("utf-8", "replace")  # Never printed or persisted.
+    finally:
+        if selector is not None:
+            selector.close()
+        # New session/process group belongs exclusively to this invocation, including CLI shims.
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        process.wait(timeout=5)
+        process.stdout.close()
+        process.stderr.close()
 
 def main():
     mode = sys.argv[1] if len(sys.argv) == 2 else ""
@@ -235,11 +280,11 @@ def main():
         config.write_text(json.dumps(upload_config(), indent=2)+"\n")
         executable = ROOT/"node_modules/.bin/wrangler"
         require(executable.is_file(), "locked_uploader_unavailable")
-        version = child([str(executable), "--version"], ROOT, "", 15).strip()
+        version = child([str(executable), "--version"], ROOT, "", deadline=time.monotonic()+15).strip()
         require(version == "4.128.0", "locked_uploader_version")
         if mode == "verify_only":
             receipt["phase"] = "offline_dry_run"
-            child(wrangler_command(executable, config, tag, True), package, "", remaining())
+            child(wrangler_command(executable, config, tag, True), package, "", deadline=deadline)
             verify_files(package, inventory)
             receipt.update({"ok": True, "archiveExtractedInRunner": True, "files": inventory["files"],
                             "wranglerVersion": version, "remoteConfigurationChecked": False, "publicationReady": False})
@@ -254,7 +299,7 @@ def main():
                 require(remaining() > 0, "dispatch_expired")
                 receipt["uploadAttempted"] = True
                 save()  # A timeout/unknown ACK never causes an automatic retry.
-                stdout = child(wrangler_command(executable, config, tag, False), package, token, remaining())
+                stdout = child(wrangler_command(executable, config, tag, False), package, token, deadline=deadline)
                 ids = re.findall(r"Worker Version ID:\s*(" + UUID + ")", stdout)
                 require(len(ids) == 1, "upload_ack_unknown")
                 return ids[0]
