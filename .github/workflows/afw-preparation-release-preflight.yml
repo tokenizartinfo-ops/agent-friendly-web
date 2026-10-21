@@ -6,6 +6,7 @@ on:
       - 'scripts/check-preparation-closed-package.mjs'
       - 'scripts/prepare-public-cloud-delivery.py'
       - 'test/preparation_release_test.py'
+      - 'test/preparation-closed-package-native.test.mjs'
       - 'config/preparation-canary-release.v1.json'
       - '.github/workflows/afw-preparation-release-preflight.yml'
   workflow_dispatch:
@@ -36,6 +37,8 @@ jobs:
         run: python3 scripts/prepare-preparation-canary-release.py
       - name: Install runtime test dependency in ephemeral runner
         run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Reject open source routes in candidate and rollback fixtures
+        run: node --test test/preparation-closed-package-native.test.mjs
       - name: Execute exact closed payload and recovery source on native runtime
         env:
           WRANGLER_SEND_METRICS: 'false'
