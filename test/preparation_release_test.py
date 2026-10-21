@@ -125,6 +125,7 @@ class PreparationReleaseTests(unittest.TestCase):
             self.build={**saved_build,"sourceRevision":"d"*40,"sourceTree":"e"*40,
                         "workerHash":hashlib.sha256(rollback_script).hexdigest(),"workerBytes":len(rollback_script)}
             rollback_data,rollback=self.package()
+            rollback["build"]=copy.deepcopy(self.build)
         finally:
             self.script,self.build=saved_script,saved_build
         rollback["artifact"].update(id=13,runId=21)
