@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 const checker=await import('../scripts/check-preparation-closed-origin.mjs').catch(()=>null);
 const origin='https://preparation-canary.agentfriendlyweb.dev';
-const human=new Set(['/authorize','/connections','/connections/revoke']);
+const sources=['/source','/source/identity','/source/new'];
+const human=new Set(['/authorize','/connections','/connections/revoke',...sources]);
 const closed={code:'preparation_route_unavailable',executionAllowed:false,chargeAllowed:false,publicationAllowed:false};
 const json=(value=closed,headers={})=>Response.json(value,{status:404,headers:{'Cache-Control':'no-store',...headers}});
 const inspect=options=>{assert.equal(typeof checker?.inspectPreparationClosedOrigin,'function','Missing closed-origin checker');return checker.inspectPreparationClosedOrigin(options);};
@@ -13,7 +14,8 @@ test('checks only the fixed closed host without credentials, redirects, cookies 
  const f=fixture(),r=await inspect({fetcher:f.fetcher});
  assert.equal(r.contract,'afw.preparation.closed-origin.v1');assert.equal(r.origin,origin);
  assert.equal(r.closedSurfaceObserved,true);assert.equal(r.authenticatedIdentityAccepted,false);assert.equal(r.consentAccepted,false);assert.equal(r.operationalReadiness,false);
- assert.equal(f.calls.length,6);assert.equal(r.checks.length,6);
+ assert.equal(f.calls.length,9);assert.equal(r.checks.length,9);
+ assert.deepEqual(r.checks.map(x=>x.path),['/','/mcp','/oauth/token',...human]);
  for(const {url,options}of f.calls){assert.equal(new URL(url).origin,origin);assert.equal(options.method,'GET');assert.equal(options.redirect,'manual');assert.equal(options.credentials,'omit');assert.equal(options.cache,'no-store');assert.equal(options.body,undefined);assert.ok(options.signal instanceof AbortSignal);assert.deepEqual(Object.keys(options.headers),['Accept']);}
 });
 test('reports a team login redirect only as login, never as accepted identity',async()=>{
@@ -55,3 +57,17 @@ test('the same original timeout also bounds a stalled response body',async()=>{
 test('callers cannot substitute another origin or unbounded timeout',async()=>{
  const f=fixture();for(const extra of [{origin:'https://other.example'},{timeoutMs:0},{timeoutMs:21000}])await assert.rejects(inspect({fetcher:f.fetcher,...extra}),{message:'Closed preparation origin unavailable'});assert.equal(f.calls.length,0);
 });
+
+for(const path of sources){
+ test(`the unauthenticated source boundary rejects unexpected responses on ${path}`,async()=>{
+  for(const response of [
+   ()=>new Response('Private source content',{status:200}),
+   ()=>json(),
+   ()=>new Response(null,{status:302,headers:{Location:'https://other.cloudflareaccess.com/cdn-cgi/access/login/preparation-canary.agentfriendlyweb.dev'}})
+  ]){
+   const f=fixture(p=>p===path?response():null);
+   await assert.rejects(inspect({fetcher:f.fetcher}),{message:'Closed preparation origin unavailable'});
+   assert.equal(f.calls.at(-1).url,origin+path);
+  }
+ });
+}
