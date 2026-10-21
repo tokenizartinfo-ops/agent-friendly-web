@@ -19,3 +19,5 @@ Resultados congelados/code+projectRef mínimo: sourceRecorded solo tras lectura 
 ## Cierre, reversión y fuera de alcance
 RED previo al código; GREEN Node22 con SQLite real y CI existente cloud. Un revisor final fresco para la rama completa; Critical/Important una reparación del autor, Minor al ledger sin nueva revisión. Merge con HEAD esperado y aceptar main. Revertir fuente deshabilitada si fuera necesario; sin DROP, borrado de recibos o restauración de datos posteriores.
 No despliegue/binding/ruta/Access/cookie/OTP/cliente nuevo, no copiar datos reales o fixture, no DNS write/proof/claim verificado, no consentimiento ni gasto/publicación, no tocar público9d4b1396/G2/Container/FCO/Atelier/Max. Journal anterior permanece SPENT/unconfirmed. Esta fuente no prueba un flujo vivo ni PC-off.
+
+RED confirmado: tests-onlye7a71b2f/run39615050914/job119273736953 falló por missing own-source intake store (0PASS/1FAIL), no fallo de dependencias. Implementación se agrega después de esa evidencia.
