@@ -40,7 +40,7 @@ test('private own-source form requires real identity and explicit intent; uncert
   function post(f,{decision='save',confirm=true,token=f.token,fields={},headers={},path='/source/new',body}={}){
    const p=new URLSearchParams({csrf:f.csrf,website,organization:'Agent Friendly Web',decision});
    if(confirm)p.set('confirmCreate','yes');
-   for(const [k,v]of Object.entries(fields))v===null?p.delete(k):p.set(k,v);
+   for(const [k,v]of Object.entries(fields)){if(v===null)p.delete(k);else p.set(k,v);}
    return dispatch(path,{method:'POST',headers:{Origin:issuer,'Sec-Fetch-Site':'same-origin','Content-Type':'application/x-www-form-urlencoded',
     'Cf-Access-Jwt-Assertion':token,Cookie:f.cookie,...headers},body:body??p});
   }
