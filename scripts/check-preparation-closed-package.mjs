@@ -13,7 +13,7 @@ assert.equal(profile.keep_vars,false);assert.equal(profile.compatibility_date,'2
 assert.deepEqual(profile.compatibility_flags,['nodejs_compat']);
 assert.deepEqual(profile.vars,{AFW_DELEGATED_PREPARATION_ROUTER_ENABLED:'false',AFW_DELEGATED_PREPARATION_CONNECTIONS_ENABLED:'false',AFW_DELEGATED_OAUTH_ENABLED:'false',AFW_DELEGATED_PREPARATION_ENABLED:'false'});
 const sha=b=>createHash('sha256').update(b).digest('hex'),cases=[];
-const paths=['/','/authorize','/oauth/token','/mcp','/connections','/connections/revoke','/.well-known/oauth-authorization-server','/oauth/register'];
+const paths=['/','/authorize','/oauth/token','/mcp','/connections','/connections/revoke','/.well-known/oauth-authorization-server','/oauth/register','/source','/source/identity','/source/new'];
 for(const filename of ['index.mjs','rollback.mjs']){
  const bytes=await readFile(new URL(filename,root));
  assert.equal(sha(bytes),filename==='index.mjs'?receipt.workerHash:receipt.rollbackHash);
@@ -29,7 +29,7 @@ for(const filename of ['index.mjs','rollback.mjs']){
  }finally{await runtime.dispose();}
  assert.equal(sha(await readFile(new URL(filename,root))),sha(bytes));
 }
-assert.equal(cases.length,32);
+assert.equal(cases.length,44);
 const result={checkedAt:new Date().toISOString(),cases,tests:cases.length,compiledBytesUnchanged:true,rollbackBytesUnchanged:true,
  nativeClosedQualified:true,remoteMutations:0,hostedIdentityAcceptance:false,activationReady:false,operationalReadiness:false,
  scope:'native isolated closed package and recovery source only; no hosted HTTP/config/schema/client/consent/events or PC-off'};
