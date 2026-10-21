@@ -10,6 +10,8 @@ on:
       - 'scripts/check-preparation-consent-view-browser.mjs'
       - 'lib/preparation-source-session-view.mjs'
       - 'scripts/check-preparation-source-session-browser.mjs'
+      - 'lib/preparation-source-intake-view.mjs'
+      - 'scripts/check-preparation-source-intake-browser.mjs'
       - '.github/workflows/afw-preparation-view-qa.yml'
   push:
     branches: [main]
@@ -21,6 +23,8 @@ on:
       - 'scripts/check-preparation-consent-view-browser.mjs'
       - 'lib/preparation-source-session-view.mjs'
       - 'scripts/check-preparation-source-session-browser.mjs'
+      - 'lib/preparation-source-intake-view.mjs'
+      - 'scripts/check-preparation-source-intake-browser.mjs'
       - '.github/workflows/afw-preparation-view-qa.yml'
 
 permissions:
@@ -60,6 +64,11 @@ jobs:
           AFW_BROWSER_TOOLS: ${{ runner.temp }}/afw-consent-browser
           PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/afw-consent-browsers
         run: node scripts/check-preparation-source-session-browser.mjs
+      - name: Check explicit save and read-only inspection form on desktop and mobile
+        env:
+          AFW_BROWSER_TOOLS: ${{ runner.temp }}/afw-consent-browser
+          PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/afw-consent-browsers
+        run: node scripts/check-preparation-source-intake-browser.mjs
       - name: Preserve synthetic screenshots and sanitized receipt
         if: always()
         uses: actions/upload-artifact@v4

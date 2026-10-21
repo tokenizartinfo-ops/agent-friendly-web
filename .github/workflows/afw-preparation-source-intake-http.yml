@@ -1,0 +1,33 @@
+name: AFW preparation source intake HTTP
+on:
+  pull_request:
+    paths:
+      - 'lib/preparation-source-intake-*.mjs'
+      - 'lib/cloudflare-access-identity.mjs'
+      - 'lib/capsule-preparation-request-lease.mjs'
+      - 'test/preparation-source-intake-http-native.test.mjs'
+      - 'test/fixtures/preparation-source-intake-http-native.mjs'
+      - '.github/workflows/afw-preparation-source-intake-http.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'lib/preparation-source-intake-*.mjs'
+      - 'test/preparation-source-intake-http-native.test.mjs'
+      - 'test/fixtures/preparation-source-intake-http-native.mjs'
+      - '.github/workflows/afw-preparation-source-intake-http.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: node --test test/preparation-source-intake-http-native.test.mjs
