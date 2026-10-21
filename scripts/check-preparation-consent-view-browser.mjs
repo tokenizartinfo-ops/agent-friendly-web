@@ -1,3 +1,5 @@
+import {preparationComicAssetResponse} from '../lib/preparation-comic-font.mjs';
+import {observePreparationComicGlyphs} from './lib/check-preparation-comic-glyphs.mjs';
 // Synthetic UI acceptance ONLY in an ephemeral GitHub Actions runner.
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
@@ -39,6 +41,8 @@ const posts=[],connectionPosts=[],errors=[],external=[];
 const server=createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://127.0.0.1');
+ const asset=preparationComicAssetResponse(new Request('http://127.0.0.1'+req.url,{method:req.method}));
+ if(asset){res.writeHead(asset.status,Object.fromEntries(asset.headers));res.end(Buffer.from(await asset.arrayBuffer()));return;}
   if(req.method==='GET'&&url.pathname==='/favicon.ico'){res.writeHead(204).end();return;}
   if(req.method==='POST'&&url.pathname==='/connections/revoke'){
    let body='';for await(const chunk of req){body+=chunk;if(Buffer.byteLength(body,'utf8')>4096)throw Error('body bound');}
@@ -93,6 +97,7 @@ try{
     // Expected 404 closed-state responses are tested separately without treating
     // their network status console diagnostic as a script/runtime failure.
     await page.goto(origin+'/?lang='+locale+'&mode=drafts');
+    const glyphSamples=await Promise.all(['h1','p.guide','button'].map(selector=>observePreparationComicGlyphs(page,selector)));
     assert.equal(await page.locator('html').getAttribute('lang'),locale);
     assert.deepEqual(await page.locator('button').evaluateAll(nodes=>nodes.map(n=>n.value)),['read','drafts','cancel']);
     assert.equal(await page.locator('[checked],[selected],[autofocus]').count(),0);
@@ -115,7 +120,7 @@ try{
     await page.screenshot({path:out+'/'+locale+'-'+viewport.width+'-consent.png',fullPage:true});
     await Promise.all([page.waitForURL(origin+'/authorize'),page.locator('button[value="read"]').click()]);
     assert.equal(await page.locator('main').textContent(),'received:read');
-    checks.push({locale,width:viewport.width,case:'layout_keyboard_read_post',passed:true});
+    checks.push({locale,width:viewport.width,case:'layout_keyboard_read_post',glyphSamples,passed:true});
    }finally{await context.close();}
   }
  }
@@ -161,7 +166,7 @@ try{
     await page.screenshot({path:out+'/'+locale+'-'+viewport.width+'-connections.png',fullPage:true});
     await Promise.all([page.waitForURL(origin+'/connections/revoke'),page.locator('button').first().click()]);
     assert.equal(await page.locator('main').textContent(),'received:'+connectionIds.active);
-    checks.push({locale,width:viewport.width,case:'connections_layout_keyboard_branding_active_post',passed:true});
+    checks.push({locale,width:viewport.width,case:'connections_layout_keyboard_branding_active_post',glyphSamples,passed:true});
    }finally{await context.close();}
   }
  }
@@ -205,7 +210,7 @@ try{
  assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
  const report={contract:'agentfriendly.preparation-view-qa.v1',sourceRevision:process.env.AFW_QA_REVISION??null,
   browser:browser.version(),playwright:pkg.version,checks,postCounts:{read:6,drafts:1,cancel:1,withdrawActive:6,withdrawExpired:1},
-  connections:{presentationOnly:true,declaredFontPolicyOnly:true,liveAuthorization:false,humanPixelReview:false},
+  connections:{presentationOnly:true,declaredFontPolicyOnly:false,glyphSamplesVerified:true,liveAuthorization:false,humanPixelReview:false},
   pageErrors:errors.length,externalRequests:external.length,syntheticOnly:true,productionConsent:false,operationalReadiness:false};
  await writeFile(out+'/receipt.json',JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify({checks:checks.length,postCounts:report.postCounts,pageErrors:0,externalRequests:0,syntheticOnly:true}));
