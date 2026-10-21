@@ -116,4 +116,58 @@ class PreparationReleaseTests(unittest.TestCase):
             with self.subTest(field=field),self.assertRaises(ValueError):
                 self.m.check_build_provenance(self.contract,m,r,now)
 
+    def paired_package(self):
+        data,candidate=self.package()
+        rollback_script=b"export default {fetch(){return new Response('previous closed build',{status:404})}}"
+        saved_script,saved_build=self.script,self.build
+        try:
+            self.script=rollback_script
+            self.build={**saved_build,"sourceRevision":"d"*40,"sourceTree":"e"*40,
+                        "workerHash":hashlib.sha256(rollback_script).hexdigest(),"workerBytes":len(rollback_script)}
+            rollback_data,rollback=self.package()
+        finally:
+            self.script,self.build=saved_script,saved_build
+        rollback["artifact"].update(id=13,runId=21)
+        rollback.update(kind="retained_build_artifact",workerVersionId="d96a183a-2906-400b-93b2-977b5da21cbd")
+        contract={"schemaVersion":2,"project":"AFW","repository":self.m.REPOSITORY,
+                  "allowedAction":"prepare_closed_profile_only","activationReady":False,"operationalReadiness":False,
+                  "target":{"accountId":"85d0d5dadac3341a564f22ce885e9eec","worker":"agent-friendly-web-preparation-canary","origin":None},
+                  "evidence":{"workerVersionId":"74d94d12-85e2-4ab7-acda-84729d786ded"},
+                  **candidate,"rollback":rollback}
+        return data,rollback_data,contract,rollback_script
+
+    def test_retained_rollback_pair_preserves_both_exact_original_modules(self):
+        self.assertTrue(callable(getattr(self.m,"qualify_pair",None)),
+                        "Closed qualification must validate the retained rollback build, not generate a recovery stub")
+        candidate,rollback,contract,rollback_script=self.paired_package()
+        result=self.m.qualify_pair(candidate,rollback,contract)
+        self.assertEqual(result["candidate"]["script"],self.script)
+        self.assertEqual(result["rollback"]["script"],rollback_script)
+        self.assertEqual(result["rollback"]["build"],contract["rollback"]["build"])
+        self.assertNotEqual(result["candidate"]["script"],result["rollback"]["script"])
+
+    def test_rollback_substitution_alias_or_scope_cannot_qualify(self):
+        self.assertTrue(callable(getattr(self.m,"qualify_pair",None)),
+                        "Both immutable artifacts require one fail-closed pair qualifier")
+        candidate,rollback,contract,_=self.paired_package()
+        for case in ["generated_stub","candidate_as_rollback","aliased_artifact","aliased_run",
+                     "aliased_source","aliased_version","missing_version","unverified_kind",
+                     "runtime_config","not_build_only","wrong_project","open_readiness","shared_target"]:
+            c=copy.deepcopy(contract);r=rollback
+            if case=="generated_stub":r=b"export default {fetch(){return new Response('closed',{status:404})}}"
+            if case=="candidate_as_rollback":r=candidate
+            if case=="aliased_artifact":c["rollback"]["artifact"]["id"]=c["artifact"]["id"]
+            if case=="aliased_run":c["rollback"]["artifact"]["runId"]=c["artifact"]["runId"]
+            if case=="aliased_source":c["rollback"]["build"]["sourceRevision"]=c["build"]["sourceRevision"]
+            if case=="aliased_version":c["rollback"]["workerVersionId"]=c["evidence"]["workerVersionId"]
+            if case=="missing_version":del c["rollback"]["workerVersionId"]
+            if case=="unverified_kind":c["rollback"]["kind"]="generated_recovery"
+            if case=="runtime_config":c["rollback"]["build"]["runtimeConfigIncluded"]=True
+            if case=="not_build_only":c["rollback"]["build"]["buildOnly"]=False
+            if case=="wrong_project":c["project"]="Tokenizart"
+            if case=="open_readiness":c["operationalReadiness"]=True
+            if case=="shared_target":c["target"]["worker"]="tokenizart-worker"
+            with self.subTest(case=case),self.assertRaises(ValueError):
+                self.m.qualify_pair(candidate,r,c)
+
 if __name__=="__main__":unittest.main()
