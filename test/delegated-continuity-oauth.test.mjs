@@ -146,10 +146,16 @@ test('OAuth HTTP caps continuity at the original host deadline and rejects calle
   f.setTime(new Date(f.deadline).toISOString());assert.equal((await f.rpc()).status,404);
 });
 test('OAuth HTTP retries only a read after primary failure using the same unmodified grant',async t=>{
-  const f=await fixture(t);const {raw}=f.routing();const c=await f.clientFor();await requireTool(c);
-  const grant=f.sqlite.prepare('SELECT * FROM delegated_access_grants').get(),original=raw.withSession;
-  let queries=0,fail=true;raw.withSession=mode=>{if(fail&&++queries===2)throw Error('private storage diagnostic');return original(mode);};
+  const f=await fixture(t);let fail=false,admissionFailures=0;
+  f.routing({beforeAdmission(){if(fail){admissionFailures++;throw Error('private storage diagnostic');}}});
+  const c=await f.clientFor();await requireTool(c);
+  const grant=f.sqlite.prepare('SELECT * FROM delegated_access_grants').get();
+  fail=true;
+  // Catalog/initialization sessions are legitimate reads, not the primary
+  // continuity admission whose failure this test intends to exercise.
+  await requireTool(c);
   const unavailable=await read(c);assert.equal(unavailable.structuredContent.status,503);
+  assert.equal(admissionFailures,1,'fault must occur at the actual primary continuity query');
   assert.equal(unavailable.structuredContent.recovery.action,'retry_read');assert.equal(unavailable.structuredContent.recovery.automaticReconnect,false);
   assert.ok(!JSON.stringify(unavailable).includes('private storage diagnostic'));
   fail=false;const recovered=await read(c);assert.equal(recovered.structuredContent.status,200);
