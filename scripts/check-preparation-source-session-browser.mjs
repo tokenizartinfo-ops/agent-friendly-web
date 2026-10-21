@@ -9,6 +9,27 @@ const root=path.resolve(process.env.AFW_BROWSER_TOOLS??''),temp=path.resolve(pro
 assert.ok(process.env.AFW_BROWSER_TOOLS&&process.env.RUNNER_TEMP&&root.startsWith(temp+path.sep),'runner temp tools required');
 const pkg=JSON.parse(await readFile(path.join(root,'node_modules/playwright/package.json'),'utf8'));assert.equal(pkg.version,'1.64.1');
 const {chromium}=await import(pathToFileURL(path.join(root,'node_modules/playwright/index.mjs')).href);
+
+/** Read actual glyph use in this synthetic Chromium page. A CSS font-family
+ * declaration alone is not evidence that the corresponding font rendered.
+ * This samples only the guide paragraph, never certifies the whole corpus. */
+async function observeGuideFont(page){
+ const session=await page.context().newCDPSession(page);
+ try{
+  await session.send('DOM.enable');await session.send('CSS.enable');
+  const {root}=await session.send('DOM.getDocument',{depth:0});
+  const {nodeId}=await session.send('DOM.querySelector',{nodeId:root.nodeId,selector:'p.guide'});
+  assert.ok(Number.isInteger(nodeId)&&nodeId>0,'guide paragraph node required');
+  const {fonts}=await session.send('CSS.getPlatformFontsForNode',{nodeId});
+  assert.ok(Array.isArray(fonts)&&fonts.length>0,'platform font evidence required');
+  const used=fonts.filter(font=>font.glyphCount>0);
+  assert.ok(used.length>0&&used.every(font=>typeof font.familyName==='string'&&font.familyName.length>0
+   &&font.familyName.length<=200&&Number.isSafeInteger(font.glyphCount)),'valid rendered glyph evidence required');
+  return {scope:'guide-paragraph-only',families:[...new Set(used.map(font=>font.familyName))].sort(),
+   comicFamilyObserved:used.every(font=>/^(Comic Sans MS|Comic Neue)$/i.test(font.familyName))};
+ }finally{await session.detach();}
+}
+
 const modes=['bootstrap','pinned','400','401','403','404','405','410','429','503'],errors=[],external=[],checks=[];
 const server=createServer((req,res)=>{
  const url=new URL(req.url,'http://127.0.0.1');
@@ -45,14 +66,19 @@ try{
    await page.keyboard.press('Tab');assert.equal(await page.locator('.back').evaluate(el=>el===document.activeElement),true);
    let screenshot=null;
    if(['bootstrap','pinned','410'].includes(mode)){screenshot=mode+'-'+viewport.width+'.png';await page.screenshot({path:path.join(out,screenshot),fullPage:true});}
-   checks.push({mode,status:response.status(),viewport,overflow:false,comicCorpus:true,keyboard:true,reducedMotion:true,screenshot});
+   const glyphSample=await observeGuideFont(page);
+   checks.push({mode,status:response.status(),viewport,overflow:false,declaredComicFontStack:true,glyphSample,keyboard:true,reducedMotion:true,screenshot});
   }
   await context.close();
  }
  assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
  const receipt={contract:'afw.preparation-source-session-ui-qa.v1',sourceRevision:process.env.AFW_QA_REVISION,
-  synthetic:true,checks,errors:errors.length,externalRequests:external.length,actualAuthorization:false,operationalReadiness:false};
+  synthetic:true,checks,fontEvidenceScope:'guide paragraph in the current synthetic Chromium runner only',comicCorpusCertified:false,
+  errors:errors.length,externalRequests:external.length,actualAuthorization:false,operationalReadiness:false};
  assert.match(receipt.sourceRevision,/^[a-f0-9]{40}$/);
  await writeFile(path.join(out,'receipt.json'),JSON.stringify(receipt,null,2)+'\n');
- console.log(JSON.stringify({checks:checks.length,screenshots:checks.filter(x=>x.screenshot).length,errors:0,externalRequests:0,operationalReadiness:false}));
+ console.log(JSON.stringify({checks:checks.length,screenshots:checks.filter(x=>x.screenshot).length,
+  sampledFontFamilies:[...new Set(checks.flatMap(check=>check.glyphSample.families))].sort(),
+  comicGuideSamples:checks.filter(check=>check.glyphSample.comicFamilyObserved).length,comicCorpusCertified:false,
+  errors:0,externalRequests:0,operationalReadiness:false}));
 }finally{await browser?.close();await new Promise(resolve=>server.close(resolve));}
