@@ -95,6 +95,15 @@ test('signed Access identity original SDK consent and finite D1 choice compose a
   await t.test('valid signed foreign owner still cannot open this pinned dossier',async()=>{
    const before=await counts(),a=await begin([READ],{assertion:await jwt({subject:'foreign-owner'})});assert.equal(a.response.status,403);assert.deepEqual(await counts(),before);
   });
+  await t.test('signed record owner can open and cancel with blank or descriptive business relationship',async()=>{
+   const before=await counts();
+   try{for(const role of ['', 'Fundador y responsable']){
+    await db.prepare("UPDATE site_projects SET role=? WHERE id='project-a'").bind(role).run();
+    const a=await begin();assert.equal(a.response.status,200);assert.equal(typeof a.handle,'string');
+    assert.equal((await approve(a,'cancel')).status,302);assert.equal((await row(a)).state,'cancelled');
+    assert.equal((await counts()).grants,before.grants);assert.equal((await counts()).capsules,before.capsules);
+   }}finally{await db.prepare("UPDATE site_projects SET role='owner' WHERE id='project-a'").run();}
+  });
   await t.test('unknown scopes duplicate query and unregistered callback never create a consent',async()=>{
    const before=await counts();
    for(const extra of [{scope:READ+' afw:evidence:read'},{scope:DRAFTS},{redirect_uri:'https://foreign.example.invalid/callback'}]){
