@@ -1,3 +1,5 @@
+import {preparationComicAssetResponse} from '../lib/preparation-comic-font.mjs';
+import {observePreparationComicGlyphs} from './lib/check-preparation-comic-glyphs.mjs';
 // Synthetic presentation QA in an ephemeral GitHub Actions runner only.
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
@@ -13,26 +15,11 @@ const {chromium}=await import(pathToFileURL(path.join(root,'node_modules/playwri
 /** Read actual glyph use in this synthetic Chromium page. A CSS font-family
  * declaration alone is not evidence that the corresponding font rendered.
  * This samples only the guide paragraph, never certifies the whole corpus. */
-async function observeGuideFont(page){
- const session=await page.context().newCDPSession(page);
- try{
-  await session.send('DOM.enable');await session.send('CSS.enable');
-  const {root}=await session.send('DOM.getDocument',{depth:0});
-  const {nodeId}=await session.send('DOM.querySelector',{nodeId:root.nodeId,selector:'p.guide'});
-  assert.ok(Number.isInteger(nodeId)&&nodeId>0,'guide paragraph node required');
-  const {fonts}=await session.send('CSS.getPlatformFontsForNode',{nodeId});
-  assert.ok(Array.isArray(fonts)&&fonts.length>0,'platform font evidence required');
-  const used=fonts.filter(font=>font.glyphCount>0);
-  assert.ok(used.length>0&&used.every(font=>typeof font.familyName==='string'&&font.familyName.length>0
-   &&font.familyName.length<=200&&Number.isSafeInteger(font.glyphCount)),'valid rendered glyph evidence required');
-  return {scope:'guide-paragraph-only',families:[...new Set(used.map(font=>font.familyName))].sort(),
-   comicFamilyObserved:used.every(font=>/^(Comic Sans MS|Comic Neue)$/i.test(font.familyName))};
- }finally{await session.detach();}
-}
-
 const modes=['bootstrap','pinned','400','401','403','404','405','410','429','503'],errors=[],external=[],checks=[];
-const server=createServer((req,res)=>{
+const server=createServer(async(req,res)=>{
  const url=new URL(req.url,'http://127.0.0.1');
+ const asset=preparationComicAssetResponse(new Request('http://127.0.0.1'+req.url,{method:req.method}));
+ if(asset){res.writeHead(asset.status,Object.fromEntries(asset.headers));res.end(Buffer.from(await asset.arrayBuffer()));return;}
  if(url.pathname==='/favicon.ico'){res.writeHead(204).end();return;}
  const mode=url.searchParams.get('mode');if(req.method!=='GET'||url.pathname!=='/'||!modes.includes(mode)){res.writeHead(404).end();return;}
  const status=['bootstrap','pinned'].includes(mode)?200:Number(mode);
@@ -66,8 +53,10 @@ try{
    await page.keyboard.press('Tab');assert.equal(await page.locator('.back').evaluate(el=>el===document.activeElement),true);
    let screenshot=null;
    if(['bootstrap','pinned','410'].includes(mode)){screenshot=mode+'-'+viewport.width+'.png';await page.screenshot({path:path.join(out,screenshot),fullPage:true});}
-   const glyphSample=await observeGuideFont(page);
-   checks.push({mode,status:response.status(),viewport,overflow:false,declaredComicFontStack:true,glyphSample,keyboard:true,reducedMotion:true,screenshot});
+   const glyphSample=await observePreparationComicGlyphs(page,'p.guide');
+   const headingGlyphs=await observePreparationComicGlyphs(page,'h1');
+   assert.equal(glyphSample.comicFamilyObserved,true,'guide must render comic glyphs on a runner without installed comic fonts');
+   checks.push({mode,status:response.status(),viewport,overflow:false,declaredComicFontStack:true,glyphSample,headingGlyphs,keyboard:true,reducedMotion:true,screenshot});
   }
   await context.close();
  }

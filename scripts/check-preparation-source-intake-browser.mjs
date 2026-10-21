@@ -1,3 +1,5 @@
+import {preparationComicAssetResponse} from '../lib/preparation-comic-font.mjs';
+import {observePreparationComicGlyphs} from './lib/check-preparation-comic-glyphs.mjs';
 // Synthetic renderer/HTML behavior QA ONLY, runner-local HTTP, no live identity/DB.
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
@@ -22,6 +24,8 @@ function view(code,organization='Agent Friendly Web'){
 const server=createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://127.0.0.1');
+ const asset=preparationComicAssetResponse(new Request('http://127.0.0.1'+req.url,{method:req.method}));
+ if(asset){res.writeHead(asset.status,Object.fromEntries(asset.headers));res.end(Buffer.from(await asset.arrayBuffer()));return;}
   if(url.pathname==='/favicon.ico'){res.writeHead(204).end();return;}
   let result;
   if(req.method==='GET'&&url.pathname==='/'&&Object.hasOwn(modes,url.searchParams.get('mode'))){
@@ -49,6 +53,7 @@ try{
   page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(!r.url().startsWith(origin+'/'))external.push(r.url());});
   for(const [mode,status]of Object.entries(modes)){
    const response=await page.goto(origin+'/?mode='+mode,{waitUntil:'networkidle'});assert.equal(response.status(),status);
+   const glyphSamples=await Promise.all(['h1','p.guide',...(status===200?['label','button']:[])].map(selector=>observePreparationComicGlyphs(page,selector)));
    const layout=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth,font:getComputedStyle(document.body).fontFamily,
     reduced:matchMedia('(prefers-reduced-motion: reduce)').matches}));
    assert.equal(layout.overflow,false);assert.match(layout.font,/Comic Sans MS/);assert.equal(layout.reduced,true);
@@ -66,7 +71,7 @@ try{
     }
    }
    let screenshot=null;if(['form_ready','unknown_ack','escaped'].includes(mode)){screenshot=mode+'-'+viewport.width+'.png';await page.screenshot({path:path.join(out,screenshot),fullPage:true});}
-   checks.push({mode,status,viewport,overflow:false,keyboard:true,reducedMotion:true,screenshot});
+   checks.push({mode,status,viewport,overflow:false,glyphSamples,keyboard:true,reducedMotion:true,screenshot});
   }
   await page.goto(origin+'/?mode=form_ready');const before=posts.length;
   await page.locator('button[value=save]').click();await page.waitForTimeout(100);
