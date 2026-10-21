@@ -45,6 +45,23 @@ test('finite administrative preparation caller contract',{timeout:30000},async t
   assert.ok(stats.seenStep.options.timeout>0&&stats.seenStep.options.timeout<=5000);
   assert.deepEqual(Object.keys(r.receipt).sort(),['clientId','clientRegistrationObserved','configuredResource','manifestHash','observedAt','operationId','redirectUri'].sort());
  });
+ await t.test('native RPC disposer is consumed without treating transport decoration as data',async()=>{
+  const c=setup();let disposed=0;
+  c.setAction(async()=>Object.defineProperty(c.receipt(),Symbol.dispose,{value(){disposed++;}}));
+  const r=await run(c.env,c.event,c.step,c.clocks);safe(r);assert.equal(r.status,'confirmed');assert.equal(disposed,1);
+ });
+ await t.test('invalid RPC data still disposes its returned handle once',async()=>{
+  const c=setup();let disposed=0;
+  c.setAction(async()=>Object.defineProperty({...c.receipt(),unknown:'PRIVATE'},Symbol.dispose,{value(){disposed++;}}));
+  const r=await run(c.env,c.event,c.step,c.clocks);safe(r);assert.equal(r.status,'unconfirmed');assert.equal(disposed,1);
+ });
+ await t.test('unrelated symbols and disposer accessors remain rejected without running accessors',async()=>{
+  for(const accessor of [false,true]){
+   const c=setup();let getter=0;
+   c.setAction(async()=>{const r=c.receipt();if(accessor)Object.defineProperty(r,Symbol.dispose,{get(){getter++;throw Error('PRIVATE');}});else r[Symbol('PRIVATE')]=true;return r;});
+   const r=await run(c.env,c.event,c.step,c.clocks);safe(r);assert.equal(r.status,'unconfirmed');assert.equal(getter,0);
+  }
+ });
  const cases={
   'scheduled':c=>{c.event.schedule={cron:'* * * * *'};},
   'foreign workflow':c=>{c.event.workflowName='other';},
