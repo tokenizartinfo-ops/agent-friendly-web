@@ -2,6 +2,9 @@ import copy
 import importlib.util
 import io
 import json
+import os
+import sys
+import time
 import tempfile
 import unittest
 import zipfile
@@ -153,6 +156,34 @@ class InactiveUploadTests(unittest.TestCase):
             self.m.extract_qualified(raw, inv, self.m.hash_bytes(raw), dest)
             self.assertEqual((dest/"client/.assetsignore").read_bytes(), b"hidden")
             with self.assertRaises(ValueError): self.m.extract_qualified(raw, inv, self.m.hash_bytes(raw), dest)
+
+    def test_output_limit_stops_process_before_it_finishes_and_never_returns_output(self):
+        script = "import os,time; os.write(1,b'x'*3000000); time.sleep(60)"
+        started = time.monotonic()
+        with self.assertRaisesRegex(ValueError, "uploader_output_limit"):
+            self.m.child([sys.executable, "-c", script], ROOT, "", deadline=time.monotonic()+3)
+        self.assertLess(time.monotonic()-started, 3)
+
+    @unittest.skipUnless(os.name == "posix", "isolated hosted Linux process group")
+    def test_absolute_deadline_kills_owned_descendant(self):
+        with tempfile.TemporaryDirectory() as temp:
+            pidfile = Path(temp)/"child.pid"
+            script = ("import subprocess,sys,time,pathlib; "
+                      "p=subprocess.Popen([sys.executable,'-c','import time;time.sleep(60)']); "
+                      "pathlib.Path(sys.argv[1]).write_text(str(p.pid)); time.sleep(60)")
+            with self.assertRaises(TimeoutError):
+                self.m.child([sys.executable,"-c",script,str(pidfile)],ROOT,"",deadline=time.monotonic()+1)
+            self.assertTrue(pidfile.is_file())
+            pid = int(pidfile.read_text())
+            for _ in range(50):
+                proc = Path("/proc")/str(pid)/"stat"
+                if not proc.exists() or proc.read_text().split()[2] == "Z": break
+                time.sleep(0.02)
+            else: self.fail("Owned descendant survived uploader deadline")
+
+    def test_child_returns_only_bounded_success_output(self):
+        self.assertEqual(self.m.child([sys.executable,"-c","print('4.128.0')"],ROOT,"",
+                         deadline=time.monotonic()+3).strip(),"4.128.0")
 
 if __name__ == "__main__":
     unittest.main()
