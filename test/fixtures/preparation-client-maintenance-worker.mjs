@@ -1,18 +1,22 @@
 // CI ONLY: actual SDK/D1/KV with injected storage ACK faults; NEVER a runtime entry.
 import {OAuthAuthorizationServer} from '@cloudflare/workers-oauth-provider';
 import {createPreparationClientMaintenance} from '../../lib/preparation-client-maintenance.mjs';
-let host,options,mode='',offset=0,monoExtra=0,wallFrozen=null,writes=0,claimWrites=0,releasePut;
+let host,options,mode='',offset=0,monoExtra=0,wallFrozen=null,writes=0,claimWrites=0,releasePut,otherClientId,lastWrittenClientId;
 const issuer='https://preparation.example.invalid',resource=issuer+'/mcp';
 const flags=['AFW_DELEGATED_OAUTH_ENABLED','AFW_DELEGATED_PREPARATION_ENABLED','AFW_DELEGATED_PREPARATION_ROUTER_ENABLED','AFW_DELEGATED_PREPARATION_CONNECTIONS_ENABLED'];
 function ready(env){
  if(host)return;
  const kv={
   get:(...a)=>env.OAUTH_KV.get(...a),
-  list:async(...a)=>mode==='invisible'?{keys:[],list_complete:true}:mode==='incomplete'?{keys:[],list_complete:false,cursor:'ci-incomplete'}:env.OAUTH_KV.list(...a),
+  list:async(...a)=>{
+   const actual=await env.OAUTH_KV.list(...a);
+   if(mode==='ack-other')return {...actual,keys:actual.keys.filter(k=>writes>0&&k.name==='client:'+otherClientId)};
+   return mode==='invisible'?{keys:[],list_complete:true}:mode==='incomplete'?{keys:[],list_complete:false,cursor:'ci-incomplete'}:actual;
+  },
   async put(key,value,extra){
    await env.OAUTH_KV.put(key,value,extra);
    if(!key.startsWith('client:'))return;
-   writes++;
+   writes++;lastWrittenClientId=key.slice('client:'.length);
    if(mode==='sdk-ack-loss')throw Error('PRIVATE provider ACK detail must not escape');
    if(mode==='sdk-late')await new Promise(resolve=>{releasePut=resolve;});
    if(mode==='sdk-drift')options.env[flags[0]]='true';
@@ -71,6 +75,11 @@ export default {async fetch(request,env){
   ]){try{createPreparationClientMaintenance({...options,...changes});failures.push(false);}catch{failures.push(true);}}
   return Response.json({failures});
  }
+ if(path==='/__ci/other-visible-after-create'){
+  const api=new OAuthAuthorizationServer({issuer,resources:[resource],clientIdMetadataDocumentEnabled:false}).getOAuthApi({...options.env,OAUTH_KV:env.OAUTH_KV});
+  const other=await api.createClient({clientName:'AFW preparation '+options.operationId,redirectUris:[options.redirectUri],grantTypes:['authorization_code'],responseTypes:['code'],tokenEndpointAuthMethod:'none'});
+  otherClientId=other.clientId;mode='ack-other';return Response.json({otherClientId});
+ }
  if(path==='/__ci/tamper'||path==='/__ci/duplicate'){
   const api=new OAuthAuthorizationServer({issuer,resources:[resource],clientIdMetadataDocumentEnabled:false}).getOAuthApi(options.env);
   const list=await api.listClients({limit:2}),client=list.items[0];
@@ -80,7 +89,7 @@ export default {async fetch(request,env){
  }
  if(path==='/__ci/stats'){
   const keys=await env.OAUTH_KV.list();
-  return Response.json({writes,claimWrites,keyNames:keys.keys.map(k=>k.name),row:await env.DB.withSession('first-primary').prepare('SELECT * FROM preparation_client_bootstrap').first()});
+  return Response.json({writes,claimWrites,lastWrittenClientId,keyNames:keys.keys.map(k=>k.name),row:await env.DB.withSession('first-primary').prepare('SELECT * FROM preparation_client_bootstrap').first()});
  }
  return new Response(null,{status:404});
 }};

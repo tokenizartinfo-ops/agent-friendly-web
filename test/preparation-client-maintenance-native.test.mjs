@@ -39,6 +39,15 @@ test('preparation maintenance uses durable admission with actual SDK and storage
   const names=await db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE '_cf_%'").all();
   assert.deepEqual(names.results.map(x=>x.name),['preparation_client_bootstrap']);
  }));
+ await t.test('known SDK ACK never confirms or journals another matching client',()=>own(async call=>{
+  const {otherClientId}=await call('other-visible-after-create');
+  const r=await call('register');safe(r);assert.equal(r.status,'unconfirmed');
+  let stats=await call('stats');assert.equal(stats.writes,1);assert.equal(stats.claimWrites,1);
+  assert.notEqual(stats.lastWrittenClientId,otherClientId);assert.equal(stats.row.client_id,null);assert.equal(stats.row.observed_at,null);
+  assert.equal(stats.keyNames.length,2);
+  await call('mode',{mode:''});await call('recreate');const rec=await call('reconcile');safe(rec);assert.equal(rec.status,'unconfirmed');
+  stats=await call('stats');assert.equal(stats.writes,1);assert.equal(stats.row.client_id,null);
+ }));
  await t.test('independent calls contend on one primary slot',()=>own(async call=>{
   const values=await Promise.all([call('register-fresh'),call('register-fresh')]);values.forEach(safe);
   await call('recreate');const r=await call('reconcile');safe(r);assert.equal(r.status,'confirmed');
