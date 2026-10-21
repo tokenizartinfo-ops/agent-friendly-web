@@ -66,7 +66,9 @@ try{
    await page.keyboard.press('Tab');assert.equal(await page.locator('.back').evaluate(el=>el===document.activeElement),true);
    let screenshot=null;
    if(['bootstrap','pinned','410'].includes(mode)){screenshot=mode+'-'+viewport.width+'.png';await page.screenshot({path:path.join(out,screenshot),fullPage:true});}
+   await page.evaluate(()=>document.fonts.ready);
    const glyphSample=await observeGuideFont(page);
+   assert.equal(glyphSample.comicFamilyObserved,true,'guide must render comic glyphs on a runner without installed comic fonts');
    checks.push({mode,status:response.status(),viewport,overflow:false,declaredComicFontStack:true,glyphSample,keyboard:true,reducedMotion:true,screenshot});
   }
   await context.close();
