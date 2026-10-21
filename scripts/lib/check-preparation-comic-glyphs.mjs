@@ -12,7 +12,7 @@ export async function observePreparationComicGlyphs(page,selector){
   const used=fonts.filter(font=>font.glyphCount>0);
   assert.ok(used.length>0,'rendered glyph evidence required');
   assert.ok(used.every(font=>font.isCustomFont&&/^Comic ?Neue ?Angular$/i.test(font.familyName)),'actual bundled comic font required for '+selector);
-  return {selector,families:[...new Set(used.map(font=>font.familyName))].sort(),customComicObserved:true,
+  return {selector,families:[...new Set(used.map(font=>font.familyName))].sort(),customComicObserved:true,comicFamilyObserved:true,
    glyphCount:used.reduce((sum,font)=>sum+font.glyphCount,0)};
  }finally{await session.detach();}
 }
