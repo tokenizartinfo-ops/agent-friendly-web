@@ -2,7 +2,7 @@ import {pathToFileURL} from 'node:url';
 
 export const PREPARATION_CLOSED_ORIGIN='https://preparation-canary.agentfriendlyweb.dev';
 const TEAM='tokenizart.cloudflareaccess.com';
-const HUMAN=new Set(['/authorize','/connections','/connections/revoke']);
+const HUMAN=new Set(['/authorize','/connections','/connections/revoke','/source','/source/identity','/source/new']);
 const PATHS=['/','/mcp','/oauth/token',...HUMAN];
 const CONTRACT='afw.preparation.closed-origin.v1';
 const unavailable=()=>Error('Closed preparation origin unavailable');
