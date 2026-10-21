@@ -59,8 +59,9 @@ test('source session entry is signed, read-only and bounded in actual workerd',{
   });
   await t.test('unknown paths, query, hash, origin and methods never read identity/body',async()=>{
    await reset();
-   for(const path of ['/source/other','/authorize','/source?owner=owner-a','/source#owner','/source/identity?subject=owner-a'])
+   for(const path of ['/source/other','/authorize','/source?owner=owner-a','/source/identity?subject=owner-a'])
     assert.ok([400,404].includes((await get(path)).status),path);
+   assert.equal((await get('/__ci/request-fragment')).status,400); // Network strips fragments; inject only at trusted CI request boundary.
    assert.equal((await get('/source',good,{Origin:'https://foreign.invalid'})).status,403);
    assert.equal((await dispatch('/source/identity',{method:'PUT',body:'secret-not-read'})).status,405);
    assert.deepEqual(await stats(),{identity:0,limiter:0,body:0});

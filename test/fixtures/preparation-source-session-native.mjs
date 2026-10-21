@@ -34,7 +34,7 @@ export default {async fetch(request,runtimeEnv){
   const closed=disabled?await disabled(new Proxy(request,{get(target,k){if(k==='body'){bodyReads++;throw Error();}return target[k];}})):new Response(null,{status:404});
   return Response.json({status:closed.status,dependencyReads,bodyReads,clockReads});
  }
- if(path.startsWith('/__ci/')){
+ if(path.startsWith('/__ci/')&&path!=='/__ci/request-fragment'){
   const action=path.slice('/__ci/'.length);
   if(action==='pin'){original.subject='owner-a';make();}
   else if(action==='expire')offset=181000;
@@ -43,6 +43,6 @@ export default {async fetch(request,runtimeEnv){
   else mode=action;
   return new Response(null,{status:204});
  }
- const protectedRequest=new Proxy(request,{get(target,k){if(k==='body'){counts.body++;throw Error('body must not be read');}const value=Reflect.get(target,k,target);return typeof value==='function'?value.bind(target):value;}});
+ const protectedRequest=new Proxy(request,{get(target,k){if(k==='url'&&path==='/__ci/request-fragment')return issuer+'/source#owner';if(k==='body'){counts.body++;throw Error('body must not be read');}const value=Reflect.get(target,k,target);return typeof value==='function'?value.bind(target):value;}});
  return host(protectedRequest);
 }};
