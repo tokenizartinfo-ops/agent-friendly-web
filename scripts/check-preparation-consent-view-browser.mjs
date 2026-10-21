@@ -133,6 +133,7 @@ try{
     page.on('pageerror',()=>errors.push('connections_page_error'));
     page.on('console',msg=>{if(msg.type()==='error')errors.push('connections_console_error');});
     const response=await page.goto(origin+'/?lang='+locale+'&mode=connections');assert.equal(response.status(),200);
+    const glyphSamples=await Promise.all(['h1','p.guide','button'].map(selector=>observePreparationComicGlyphs(page,selector)));
     assert.equal(await page.locator('html').getAttribute('lang'),locale);
     assert.equal(await page.locator('img,script').count(),0);
     assert.ok((await page.locator('body').textContent()).includes(connectionClient));
