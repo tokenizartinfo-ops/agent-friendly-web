@@ -11,3 +11,6 @@ Official field names and public-client method checked21Oct: https://developers.o
 
 ## Acceptance
 RED missing-module test before code, GREEN focal Node22 (no npm install) and full existing CI, one final whole-branch fresh review; Critical/Important one author pass, Minor ledgered/no re-review. Merge exacthead after checks, verify main and preserve checkpoint. Test decoded sole project, exact routes/scopes/no credentials, original opaque identifiers/encoding, frozen output and invalid/malicious inputs. Revert reviewed source for rollback. No live mutation, OAuth/OTP, app create, data copying, Container/cron/Max/PC-off acceptance.
+
+
+RED: focal GitHub run39612830697/job119266006943, tests-only5e1cd9dd: missing preparation client draft builder (0PASS/1FAIL); not a dependency or import failure. Implementation follows on that parent. Live source, domain proof, callback and SDK registration still require independent current evidence before any concrete connection.
