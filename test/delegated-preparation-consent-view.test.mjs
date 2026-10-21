@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 const ui=await import('../lib/delegated-preparation-consent-view.mjs').catch(()=>null);
+import {PREPARATION_COMIC_FONT_PATH} from '../lib/preparation-comic-font.mjs';
 const READ='afw:project:read',PREPARE='afw:capsule:prepare';
 const T=Date.UTC(2026,9,20,0,0,0);
 function input(overrides={}){
@@ -69,9 +70,10 @@ test('nonce and security envelope forbid scripts, external assets, framing and f
  assert.equal(view.headers['Cache-Control'],'no-store');
  assert.equal(view.headers['Referrer-Policy'],'no-referrer');
  assert.equal(view.headers['X-Content-Type-Options'],'nosniff');
- assert.match(view.headers['Content-Security-Policy'],/default-src 'none'; style-src 'nonce-synthetic_style_nonce_0123456789'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'/);
+ assert.match(view.headers['Content-Security-Policy'],/default-src 'none'; style-src 'nonce-synthetic_style_nonce_0123456789'; font-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'/);
  assert.match(view.html,/<style nonce="synthetic_style_nonce_0123456789">/);
- assert.doesNotMatch(view.html,/<script|<img|<link|@import|url\(/);
+ assert.doesNotMatch(view.html,/<script|<img|<link|@import/);
+ assert.deepEqual([...view.html.matchAll(/url\("([^"]+)"\)/g)].map(x=>x[1]),[PREPARATION_COMIC_FONT_PATH]);
  assert.match(view.html,/href="#consent-main"/);assert.match(view.html,/<main id="consent-main"/);
 });
 test('invalid fields, bounds, origin-like host, nonce and unexpected authority fields fail closed',()=>{
