@@ -20,7 +20,20 @@ test('readiness manifest separates deployed capabilities from roadmap work', asy
   assert.equal(manifest.capabilities.openapi.status, 'deployed');
   assert.equal(manifest.capabilities.mcp.status, 'deployed');
   assert.match(manifest.capabilities.mcp.note, /public.*read-only/i);
-  assert.equal(manifest.capabilities.a2a.status, 'planned');
+  const a2a = manifest.capabilities.a2a;
+  assert.equal(a2a.status, 'deployed');
+  assert.equal(a2a.access, 'public-read-only');
+  assert.ok(a2a.resources.includes('/.well-known/agent-card.json'));
+  assert.ok(a2a.resources.includes('https://a2a.agentfriendlyweb.dev/a2a'));
+  for (const capability of ['private_dossiers', 'async_delegation', 'streaming', 'push_notifications']) {
+    assert.equal(a2a[capability], false, capability);
+  }
+  assert.match(a2a.note, /public.*read-only/i);
+  assert.match(a2a.note, /not.*new.*SendMessage/i);
+  assert.equal(a2a.verification.scope, 'agent_card_and_active_configuration_only');
+  assert.ok(Number.isFinite(Date.parse(a2a.verification.card_observed_at)));
+  assert.ok(Number.isFinite(Date.parse(a2a.verification.configuration_checked_at)));
+  assert.match(a2a.verification.worker_version, /^[a-f0-9-]{36}$/);
   assert.equal(manifest.capabilities.x402.status, 'research');
   assert.match(manifest.convention, /not an official standard/i);
 });

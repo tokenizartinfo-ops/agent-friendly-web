@@ -15,6 +15,11 @@ export async function GET() {
           ],
           item: [
             {
+              href: `${origin}/.well-known/agent-card.json`,
+              type: 'application/json',
+              title: 'Agent Friendly Web A2A public read-only diagnostic Agent Card',
+            },
+            {
               href: `${origin}/.well-known/agent-friendly-cli.json`,
               type: 'application/json',
               title: 'Agent Friendly Web CLI read-only manifest',

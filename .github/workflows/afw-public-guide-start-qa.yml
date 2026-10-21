@@ -3,6 +3,12 @@ name: AFW public guide entry browser QA
 on:
   pull_request:
     paths:
+      - 'public/.well-known/agent-readiness.json'
+      - 'app/api-catalog/route.ts'
+      - 'test/agent-discovery.test.mjs'
+      - 'test/public-a2a-discovery.test.mjs'
+      - 'test/public-guide-discovery.test.mjs'
+      - 'test/publication-capsule-discovery.test.mjs'
       - 'lib/public-guide.mjs'
       - 'lib/public-tools-copy.mjs'
       - 'app/guia/page.tsx'
