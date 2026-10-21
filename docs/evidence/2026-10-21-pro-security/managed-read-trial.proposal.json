@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "afw.pro-security-proposal.v1",
+  "state": "proposal_only",
+  "applyAllowed": false,
+  "sourceRevision": "6dd9d3d29f607b3097707384a60aef861c6f2bce",
+  "observedAt": "2026-10-21T23:34:13.889Z",
+  "target": {
+    "project": "AFW",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "environment": "public_web",
+    "origin": "https://agentfriendlyweb.dev",
+    "accountId": "85d0d5dadac3341a564f22ce885e9eec",
+    "zoneId": "4b1a3fe4b6dcb81e9d6a633174c5939f",
+    "zoneName": "agentfriendlyweb.dev",
+    "plan": "pro"
+  },
+  "observation": {
+    "phaseEntrypoints": {
+      "http_request_firewall_managed": "not_found_404",
+      "http_request_firewall_custom": "not_found_404",
+      "http_request_cache_settings": "not_found_404"
+    },
+    "bots": {
+      "enable_js": false,
+      "sbfm_definitely_automated": "allow",
+      "sbfm_likely_automated": null,
+      "sbfm_verified_bots": "allow",
+      "sbfm_static_resource_protection": false,
+      "ai_bots_protection": "disabled",
+      "fight_mode": null
+    },
+    "managedRuleset": {
+      "id": "efb7b8c949ac4650a09736fc376e9aee",
+      "name": "Cloudflare Managed Ruleset",
+      "versionObserved": "412"
+    },
+    "preserveOtherPhase": {
+      "id": "1864f999067c4c279a580ab6fc63158e",
+      "phase": "http_request_late_transform",
+      "versionObserved": "3"
+    }
+  },
+  "phase": "http_request_firewall_managed",
+  "window": {
+    "startUnixSeconds": 0,
+    "endUnixSeconds": 1,
+    "maxDurationSeconds": 900,
+    "expiredExample": true
+  },
+  "candidateRule": {
+    "ref": "afw_public_read_managed_trial_v1",
+    "description": "AFW public HTML read-only managed WAF trial; expired disabled proposal",
+    "action": "execute",
+    "enabled": false,
+    "expression": "(http.host eq \"agentfriendlyweb.dev\" and http.request.method in {\"GET\" \"HEAD\"} and http.request.uri.path in {\"/\" \"/guia\"} and http.request.timestamp.sec ge 0 and http.request.timestamp.sec lt 1)",
+    "action_parameters": {
+      "id": "efb7b8c949ac4650a09736fc376e9aee",
+      "overrides": {
+        "action": "block"
+      }
+    }
+  },
+  "deploymentReady": false,
+  "operationalReadiness": false,
+  "pcOffAccepted": false,
+  "providerValidation": {
+    "checkedAt": "2026-10-21T23:39:47.108Z",
+    "method": "POST",
+    "path": "/zones/4b1a3fe4b6dcb81e9d6a633174c5939f/rulesets",
+    "query": {
+      "dry_run": true
+    },
+    "validationRuleEnabled": true,
+    "status": 200,
+    "success": true,
+    "result": null,
+    "readbackAt": "2026-10-21T23:40:02.817Z",
+    "managedEntrypointStatusAfter": 404,
+    "trialRulesetCreated": false
+  }
+}

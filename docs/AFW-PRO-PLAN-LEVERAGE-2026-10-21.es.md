@@ -68,3 +68,7 @@ Los gates privados siguen siendo evidencia técnica de Access02389649 y Containe
 - [Planes y uso Workers separados de Pro](https://developers.cloudflare.com/workers/platform/pricing/).
 
 Las fuentes describen productos disponibles, no habilitación observada en esta cuenta. Documentación y planes pueden cambiar; verificar otra vez al preparar cada implementación. Este archivo es evaluación interna, no oferta de precios AFW ni garantía de prestaciones contratadas.
+
+## Propuesta técnica posterior del21oct
+
+La [candidata de seguridad compatible con agentes](AFW-PRO-AGENT-SAFE-SECURITY-CANDIDATE-2026-10-21.es.md) concreta el bloqueB con matriz de superficies, JSON desactivado y vencido, evidencia primaria de zona/rulesets, criterios de QA y recuperación por regla. No está instalada ni acredita protección nueva. Conserva defaults del proveedor y registra que Super Bot Fight Mode ya no admite modificación mediante Rulesets API. El siguiente gate es verificar la candidata por el proveedor y preparar copia recuperable/ventana de ensayo, sin ampliar automáticamente a APIs, otros hosts u OWASP.
