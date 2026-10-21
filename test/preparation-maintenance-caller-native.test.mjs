@@ -48,7 +48,7 @@ test('native administrative Workflow calls actual private maintenance RPC',{time
   const instance=await flow.create({id,params:{planHash}});const result=await settled(instance);assert.equal(result.status,'confirmed');
   assert.equal(result.receipt.redirectUri,policy.redirectUri);assert.equal(result.receipt.configuredResource,policy.resource);assert.equal(result.operationalReadiness,false);
   assert.deepEqual((await (await flow.get(id)).status()).output,result);
-  await assert.rejects(flow.create({id,params:{planHash}}));
+  const same=await flow.create({id,params:{planHash}});assert.equal(same.id,id);assert.deepEqual(await settled(same),result);
   const rows=(await db.prepare('SELECT * FROM preparation_client_bootstrap').all()).results;assert.equal(rows.length,1);assert.equal(rows[0].client_id,result.receipt.clientId);
   const keys=await kv.list();assert.equal(keys.keys.length,1);const metadata=await kv.get(keys.keys[0].name,'json');assert.equal(metadata.tokenEndpointAuthMethod,'none');
   const http=await mf.dispatchFetch('https://caller.invalid/mcp');assert.equal(http.status,404);
