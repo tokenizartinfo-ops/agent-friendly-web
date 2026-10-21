@@ -20,6 +20,8 @@ No se cambian observaciones del proveedor externo, puntaje, OAuth, precio, insta
 
 Las regresiones precedieron al cambio. RED77fd3fe0, CI39683851460/job119512808042:2735PASS/2FAIL/1SKIP existente. Fallaron exactamente planned frente a deployed y0 frente a1 tarjeta en el GET real del catálogo; no hubo error de import/transporte ni fallo fuera de ese alcance.
 
+Primera corrección d99fd54a/CI39684392842 resolvió ambas regresiones nuevas y dejó2735PASS/2FAIL/1SKIP: fallaron dos expectativas históricas planned en las pruebas de guía/cápsula. Búsqueda de fuente encontró exactamente tres expectativas A2A en total. Se alinean esas dos restantes con deployed/public-read-only, añadiendo exclusiones explícitas de expediente privado y delegación asíncrona; no se eliminan ni relajan las comprobaciones de guía o cápsula.
+
 Los siguientes resultados GREEN, revisión, integración y publicación se registran en la PR y tracker497 con revisiones concretas; este documento no los anticipa. Fuente por API GitHub, pruebas/builds en Actions, sin dependencias o compilación local.
 
 Publicación debe ser backport mínimo desde61e03107, con artefacto exacto, configuración/bindings/recuperación propios leídos nuevamente. No desplegar main o wranglerdefault. Antes del cambio remoto, comprobar material de rollback de9d4b1396 recuperable, tráfico y hashes; después, comprobar metadatos, catálogo, assets y Access sin login. No crear nuevas rutas o modificar el Worker A2A por esta corrección.
