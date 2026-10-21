@@ -1,3 +1,4 @@
+import {preparationComicAssetResponse} from '../../lib/preparation-comic-font.mjs';
 import {readRecord,ref,oauthClientRef,text,instant,clock as validWall} from '../../lib/agent-consumption-input.mjs';
 import {createCapsulePreparationRequestLease,readCapsulePreparationRequestLease} from '../../lib/capsule-preparation-request-lease.mjs';
 import {createDelegatedPreparationRouter} from '../../lib/delegated-preparation-router.mjs';
@@ -56,6 +57,7 @@ export function createDelegatedPreparationWorker(options={}){
  return Object.freeze({async fetch(request,env,ctx){
   let control;
   try{
+   const asset=preparationComicAssetResponse(request);if(asset)return asset;
    // Each exact human source entry has an independent gate from OAuth/agent paths.
    const path=new URL(request.url).pathname,sourceCreate=path==='/source/new',sourceEntry=['/source','/source/identity'].includes(path);
    const selectedFlag=sourceCreate?'AFW_PREPARATION_SOURCE_CREATE_ENABLED':sourceEntry?'AFW_PREPARATION_SOURCE_INTAKE_ENABLED':'AFW_DELEGATED_PREPARATION_ROUTER_ENABLED';
