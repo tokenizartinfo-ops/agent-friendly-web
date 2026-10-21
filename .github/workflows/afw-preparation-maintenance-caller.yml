@@ -19,6 +19,7 @@ on:
     paths:
       - 'worker/preparation-maintenance-caller/**'
       - 'lib/preparation-client-maintenance.mjs'
+      - 'lib/preparation-maintenance-caller.mjs'
       - 'lib/capsule-preparation-request-lease.mjs'
       - 'lib/agent-consumption-input.mjs'
       - 'db/preparation-client-bootstrap.sql'
