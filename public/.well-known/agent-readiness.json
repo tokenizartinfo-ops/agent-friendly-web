@@ -6,7 +6,7 @@
     "creator": "Gabriel Mucchiut"
   },
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "updated_at": "2026-09-01",
+  "updated_at": "2026-10-21",
   "human_languages": ["es", "en", "pt"],
   "human_route_strategy": "Spanish unprefixed canonical; English under /en; Portuguese under /pt; canonical and hreflang equivalents",
   "machine_routes_localized": false,
@@ -142,8 +142,24 @@
       "note": "Deployed private Block 5B workflow. It reads only allowlisted public resources, renders bounded diffs and prepares a downloadable technical plan. It does not create a GitHub PR, merge, deploy or modify the target website."
     },
     "a2a": {
-      "status": "planned",
-      "note": "No A2A Agent Card or A2A service is advertised by this release."
+      "status": "deployed",
+      "access": "public-read-only",
+      "resources": [
+        "/.well-known/agent-card.json",
+        "https://a2a.agentfriendlyweb.dev/.well-known/agent-card.json",
+        "https://a2a.agentfriendlyweb.dev/a2a"
+      ],
+      "private_dossiers": false,
+      "async_delegation": false,
+      "streaming": false,
+      "push_notifications": false,
+      "verification": {
+        "scope": "agent_card_and_active_configuration_only",
+        "card_observed_at": "2026-10-21T22:01:58.597Z",
+        "configuration_checked_at": "2026-10-21T22:02:49.450Z",
+        "worker_version": "3238969a-d5e8-45c6-9417-fc19452b762a"
+      },
+      "note": "Independent public read-only JSONRPC diagnostic. Service acceptance on 2026-10-02 is documented separately. These Agent Card and configuration observations are not a new SendMessage acceptance. No private dossiers, edits, payments, resumed tasks, callbacks or cloud supervision."
     },
     "cli": {
       "status": "deployed",

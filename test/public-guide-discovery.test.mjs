@@ -40,5 +40,8 @@ test('machine discovery exposes the deployed guide with bounded capabilities', a
   assert.match(readiness.capabilities.public_guide.note, /sin persistencia|no persistence/i);
   assert.equal(readiness.capabilities.mcp.status, 'deployed');
   assert.match(readiness.capabilities.mcp.note, /public.*read-only/i);
-  assert.equal(readiness.capabilities.a2a.status, 'planned');
+  assert.equal(readiness.capabilities.a2a.status, 'deployed');
+  assert.equal(readiness.capabilities.a2a.access, 'public-read-only');
+  assert.equal(readiness.capabilities.a2a.private_dossiers, false);
+  assert.equal(readiness.capabilities.a2a.async_delegation, false);
 });
