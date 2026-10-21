@@ -20,7 +20,10 @@ test('public discovery documents the deployed manual capsule without remote appl
   assert.equal(readiness.capabilities.publication_capsule.status, 'deployed');
   assert.equal(readiness.capabilities.publication_capsule.mode, 'manual_handoff');
   assert.equal(readiness.capabilities.publication_capsule.remote_apply, false);
-  assert.equal(readiness.capabilities.a2a.status, 'planned');
+  assert.equal(readiness.capabilities.a2a.status, 'deployed');
+  assert.equal(readiness.capabilities.a2a.access, 'public-read-only');
+  assert.equal(readiness.capabilities.a2a.private_dossiers, false);
+  assert.equal(readiness.capabilities.a2a.async_delegation, false);
 
   for (const path of [
     '/schemas/publication-capsule.v1.json',
