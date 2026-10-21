@@ -68,7 +68,7 @@ test('private own-source form requires real identity and explicit intent; uncert
    assert.equal(r.status,200);assert.equal(code(html),'source_created');assert.match(html,/Todavía falta comprobar el dominio/);
    const id=/data-project-ref="(project-[a-f0-9]{64})"/.exec(html)?.[1];assert.ok(id);
    const row=await db.prepare('SELECT user_id,owner_email,website,organization,revision,status FROM site_projects WHERE id=?').bind(id).first();
-   assert.deepEqual(row,{user_id:'owner-a',owner_email:'owner@example.invalid',website,organization:'Agent Friendly Web',revision:1,status:'draft'});
+   assert.deepEqual(row,{user_id:'owner-a',owner_email:'owner@example.invalid',website:new URL(website).href,organization:'Agent Friendly Web',revision:1,status:'draft'});
    assert.equal((await counts()).projects,before.projects+1);assert.equal((await counts()).events,before.events+1);
    assert.equal((await stats()).batches,1);const same=await snapshot();
    assert.equal(code(await(await post(f)).text()),'source_already_recorded');assert.equal((await stats()).batches,1);
