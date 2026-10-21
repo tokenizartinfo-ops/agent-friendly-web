@@ -2,7 +2,7 @@
 
 21 octubre 2026. Resultado de este bloque: propuesta concreta y desactivada, matriz de superficies, criterios de ensayo y recuperación. Continúa la [evaluación Pro](AFW-PRO-PLAN-LEVERAGE-2026-10-21.es.md). No instala reglas ni cambia tráfico, permisos, datos o contratos del producto.
 
-PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT public_web; ORIGIN https://agentfriendlyweb.dev; RESOURCE_TYPE futura regla WAF de zona; RESOURCE_ID zona4b1a3fe4b6dcb81e9d6a633174c5939f/cuenta85d0d5dadac3341a564f22ce885e9eec. ALLOWED_ACTION de este bloque: GET de configuración y propuesta en GitHub. ROLLBACK de este bloque: revertir solo el commit documental si hace falta; no hay cambio remoto que revertir. No son destinos Tokenizart/Atelier ni otros hosts de la cuenta.
+PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT public_web; ORIGIN https://agentfriendlyweb.dev; RESOURCE_TYPE futura regla WAF de zona; RESOURCE_ID zona4b1a3fe4b6dcb81e9d6a633174c5939f/cuenta85d0d5dadac3341a564f22ce885e9eec. ALLOWED_ACTION de este bloque: GET de configuración, una validación POST con dry_run=true sin persistencia y propuesta en GitHub. ROLLBACK de este bloque: revertir solo el commit documental si hace falta; no hay cambio remoto que revertir. No son destinos Tokenizart/Atelier ni otros hosts de la cuenta.
 
 ## Evidencia primaria y decisión
 
@@ -86,12 +86,23 @@ Cloudflare también desaconseja habilitar todas las reglas administradas mediant
 
 ## Verificación y continuidad del bloque documental
 
-Se comprobó JSON válido, estados cerrados, expresión de ejemplo vencida, ausencia de override enabled y ausencia de bypass por UA/score. Es revisión de estructura y fuente, no ejecución de un motor WAF ni validación de la expresión por Cloudflare. Sin nuevos paquetes, scripts, workflows, archivos locales o despliegues. Revisión/CI de la PR portadora se registran en su propio recibo.
+Se comprobó JSON válido, estados cerrados, expresión de ejemplo vencida, ausencia de override enabled y ausencia de bypass por UA/score. Es revisión de estructura y fuente, complementada por la validación sin persistencia indicada debajo; no es ejecución de detecciones ni enforcement WAF. Sin nuevos paquetes, scripts, workflows, archivos locales o despliegues. Revisión/CI de la PR portadora se registran en su propio recibo.
 
 La carga pública cloud ya aceptada queda en [recibo6328709349](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497#issuecomment-6328709349): no repetirla o promover su copia idéntica para probar esta propuesta. Lectura de soporte en este bloque no encontró mensajes nuevos de Cloudflare; Container02382110 conserva la última escalación técnica21oct12:20:40UTC y OTP02389649 el acuse21oct21:11:09UTC. No repetir OTP/consentimientos, renovar permisos o enviar a Max. operationalReadiness=false;PCoff=false; monitorPAUSED.
 
+## Validación real del proveedor sin instalar
+
+Después de preparar la propuesta se verificó la función oficial Rulesets dry-run, publicada17sept2026. Su esquema y documentación aceptan dry_run=true y describen validación de sintaxis/campos, acción/fase, permisos/plan/cuotas y referencias sin persistir configuración.
+
+Una única POST/zones/4b1a3fe4b6dcb81e9d6a633174c5939f/rulesets con query dry_run=true devolvió200/successtrue/resultnull/errors[] el21oct23:39:47.108UTC. El body contenía kindzone, fasehttp_request_firewall_managed y la misma regla del JSON con enabled=true SOLO en esa solicitud de validación; mantuvo la expresión vencida0→1 y el override block sin enabled. El JSON de propuesta continúa disabled/applyAllowedfalse.
+
+Readback independiente23:40:02.817UTC: managed entrypoint404, ningún ruleset con el nombre de validación y catálogo de ocho rulesets sin cambios de ID/fase/versión, incluido late_transform1864f999/version3. No se guardó/publicó una regla ni se utilizó el token temporal del uploader. La identidad administrativa existente fue suficiente para esta operación; no se amplió su alcance.
+
+Esto acredita la validación del proveedor de ese body exacto en esa cuenta/fecha. No demuestra detección, respuesta legítima bajo enforcement, cierre remoto o compatibilidad de una revisión futura con otros límites temporales. Una ventana vigente requiere nueva revisión y validación, snapshot, ensayo y recuperación; no convertir este resultado en autorización de publicar.
+
 ## Fuentes primarias consultadas21oct2026
 
+- [Rulesets dry-run sin persistencia](https://developers.cloudflare.com/ruleset-engine/rulesets-api/dry-run/), [anuncio17sept2026](https://developers.cloudflare.com/changelog/post/2026-09-17-rulesets-dry-run-validation/).
 - [Managed Rules: disponibilidad, overrides y actualizaciones](https://developers.cloudflare.com/waf/managed-rules/).
 - [Cloudflare Managed Ruleset: defaults y configuración](https://developers.cloudflare.com/waf/managed-rules/reference/cloudflare-managed-ruleset/).
 - [Recepción temporal http.request.timestamp.sec](https://developers.cloudflare.com/ruleset-engine/rules-language/fields/reference/http.request.timestamp.sec/).

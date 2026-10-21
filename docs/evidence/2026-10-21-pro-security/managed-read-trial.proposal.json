@@ -62,5 +62,20 @@
   },
   "deploymentReady": false,
   "operationalReadiness": false,
-  "pcOffAccepted": false
+  "pcOffAccepted": false,
+  "providerValidation": {
+    "checkedAt": "2026-10-21T23:39:47.108Z",
+    "method": "POST",
+    "path": "/zones/4b1a3fe4b6dcb81e9d6a633174c5939f/rulesets",
+    "query": {
+      "dry_run": true
+    },
+    "validationRuleEnabled": true,
+    "status": 200,
+    "success": true,
+    "result": null,
+    "readbackAt": "2026-10-21T23:40:02.817Z",
+    "managedEntrypointStatusAfter": 404,
+    "trialRulesetCreated": false
+  }
 }
