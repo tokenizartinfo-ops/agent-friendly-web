@@ -1,0 +1,21 @@
+name: AFW preparation maintenance API plan
+on:
+  pull_request:
+    paths: ['lib/preparation-maintenance-api-plan.mjs', 'lib/agent-consumption-input.mjs', 'test/preparation-maintenance-api-plan.test.mjs', '.github/workflows/afw-preparation-maintenance-api-plan.yml']
+  push:
+    branches: [main]
+    paths: ['lib/preparation-maintenance-api-plan.mjs', 'lib/agent-consumption-input.mjs', 'test/preparation-maintenance-api-plan.test.mjs', '.github/workflows/afw-preparation-maintenance-api-plan.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test test/preparation-maintenance-api-plan.test.mjs
