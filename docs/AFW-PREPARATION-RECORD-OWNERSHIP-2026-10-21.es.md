@@ -9,8 +9,8 @@ Use verified subject = site_projects.user_id, plus the existing exact project/si
 
 ## Scope and acceptance
 Modify only the two consent source adapters, add actual SQLite regression tests and a signed-Access/workerd HTTP regression; keep the existing owner-change/foreign-identity/claim-revocation/revision tests. Synthetic rows are CI fixtures only. No normal endpoint, bootstrap, data bridge, source copier or new onboarding service is implemented here.
-- [ ] RED: test legitimate record owner with blank/descriptive role and unchanged verified domain, plus negative foreign subject and current source mutation.
-- [ ] Minimal source fix; GREEN focal and full CI/native HTTP; preserve old schema exactly.
+- [x] RED: test legitimate record owner with blank/descriptive role and unchanged verified domain, plus negative foreign subject and current source mutation.
+RED39611492069/job119261214784 at f7e91a77: actual SQLite 1PASS/8FAIL, legitimate owner rejected as delegated_access_denied instead of consent_pending. No missing dependency/import failure.\n- [ ] Minimal source fix; GREEN focal and full CI/native HTTP; preserve old schema exactly.
 - [ ] One fresh final whole-branch review; one author pass Critical/Important, Minor ledgered, no re-review.
 - [ ] Merge exact head after checks and verify main; update continuity.
 
