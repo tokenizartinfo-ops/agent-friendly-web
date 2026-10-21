@@ -40,7 +40,7 @@ test('preparation maintenance uses durable admission with actual SDK and storage
   assert.deepEqual(names.results.map(x=>x.name),['preparation_client_bootstrap']);
  }));
  await t.test('independent calls contend on one primary slot',()=>own(async call=>{
-  const values=await Promise.all([call('register'),call('register')]);values.forEach(safe);
+  const values=await Promise.all([call('register-fresh'),call('register-fresh')]);values.forEach(safe);
   await call('recreate');const r=await call('reconcile');safe(r);assert.equal(r.status,'confirmed');
   const stats=await call('stats');assert.equal(stats.writes,1);assert.equal(stats.claimWrites,1);
  }));
@@ -50,7 +50,8 @@ test('preparation maintenance uses durable admission with actual SDK and storage
   const stats=await call('stats');assert.equal(stats.writes,0);assert.equal(stats.claimWrites,1);assert.ok(stats.row);assert.equal(stats.row.client_id,null);
  }));
  await t.test('lost SDK ACK and invisible/incomplete KV reconcile without recreation',()=>own(async call=>{
-  await call('mode',{mode:'sdk-ack-loss'});safe(await call('register'));
+  await call('mode',{mode:'sdk-ack-loss'});const lost=await call('register');safe(lost);assert.equal(lost.status,'unconfirmed');
+  assert.equal((await call('stats')).row.client_id,null);
   await call('mode',{mode:'invisible'});await call('recreate');const invisible=await call('register');safe(invisible);assert.equal(invisible.status,'unconfirmed');
   await call('mode',{mode:'incomplete'});const incomplete=await call('reconcile');safe(incomplete);assert.equal(incomplete.status,'unconfirmed');
   await call('mode',{mode:''});const recovered=await call('reconcile');safe(recovered);assert.equal(recovered.status,'confirmed');
@@ -67,6 +68,10 @@ test('preparation maintenance uses durable admission with actual SDK and storage
   await call('mode',{mode:'sdk-drift'});const r=await call('register');safe(r);assert.equal(r.status,'unconfirmed');
   await call('restore');await call('mode',{mode:''});await call('recreate');const rec=await call('reconcile');safe(rec);assert.equal(rec.status,'confirmed');
   assert.equal((await call('stats')).writes,1);
+ }));
+ for(const condition of ['flip','expire'])await t.test(condition+' before first registration dispatches no creation',()=>own(async call=>{
+  await call(condition);const r=await call('register');safe(r);assert.notEqual(r.status,'confirmed');
+  const stats=await call('stats');assert.equal(stats.writes,0);assert.equal(stats.claimWrites,0);assert.equal(stats.row,null);
  }));
  await t.test('expiry and competing manifest never create another client',()=>own(async call=>{
   const first=await call('register');assert.equal(first.status,'confirmed');

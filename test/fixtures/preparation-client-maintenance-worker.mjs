@@ -48,6 +48,7 @@ export default {async fetch(request,env){
  }
  ready(env);
  if(path==='/__ci/register')return Response.json(await host.register());
+ if(path==='/__ci/register-fresh')return Response.json(await createPreparationClientMaintenance(options).register());
  if(path==='/__ci/reconcile')return Response.json(await host.reconcile());
  if(path==='/__ci/mode'){mode=(await request.json()).mode;return Response.json({set:true});}
  if(path==='/__ci/recreate'){host=createPreparationClientMaintenance(options);return Response.json({created:true});}
