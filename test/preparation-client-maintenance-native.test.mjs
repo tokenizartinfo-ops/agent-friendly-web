@@ -69,7 +69,7 @@ test('preparation maintenance uses durable admission with actual SDK and storage
   await call('restore');await call('mode',{mode:''});await call('recreate');const rec=await call('reconcile');safe(rec);assert.equal(rec.status,'confirmed');
   assert.equal((await call('stats')).writes,1);
  }));
- for(const condition of ['flip','expire'])await t.test(condition+' before first registration dispatches no creation',()=>own(async call=>{
+ for(const condition of ['flip','expire','mono-expire','forward-clock'])await t.test(condition+' before first registration dispatches no creation',()=>own(async call=>{
   await call(condition);const r=await call('register');safe(r);assert.notEqual(r.status,'confirmed');
   const stats=await call('stats');assert.equal(stats.writes,0);assert.equal(stats.claimWrites,0);assert.equal(stats.row,null);
  }));

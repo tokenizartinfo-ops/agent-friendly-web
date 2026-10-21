@@ -1,7 +1,7 @@
 // CI ONLY: actual SDK/D1/KV with injected storage ACK faults; NEVER a runtime entry.
 import {OAuthAuthorizationServer} from '@cloudflare/workers-oauth-provider';
 import {createPreparationClientMaintenance} from '../../lib/preparation-client-maintenance.mjs';
-let host,options,mode='',offset=0,writes=0,claimWrites=0,releasePut;
+let host,options,mode='',offset=0,monoExtra=0,wallFrozen=null,writes=0,claimWrites=0,releasePut;
 const issuer='https://preparation.example.invalid',resource=issuer+'/mcp';
 const flags=['AFW_DELEGATED_OAUTH_ENABLED','AFW_DELEGATED_PREPARATION_ENABLED','AFW_DELEGATED_PREPARATION_ROUTER_ENABLED','AFW_DELEGATED_PREPARATION_CONNECTIONS_ENABLED'];
 function ready(env){
@@ -37,7 +37,7 @@ function ready(env){
  const start=Date.now()-1000;
  options={enabled:true,issuer,resource,redirectUri:'https://chatgpt.com/connector/oauth/ci_callback_1',operationId:'ci-preparation-1',
   startedAt:new Date(start).toISOString(),expiresAt:new Date(start+600000).toISOString(),env:{DB:db,OAUTH_KV:kv,...Object.fromEntries(flags.map(k=>[k,'false']))},
-  now:()=>Date.now()+offset,monotonic:()=>performance.now()+offset};
+  now:()=>wallFrozen??Date.now()+offset,monotonic:()=>performance.now()+offset+monoExtra};
  host=createPreparationClientMaintenance(options);
 }
 export default {async fetch(request,env){
@@ -53,6 +53,11 @@ export default {async fetch(request,env){
  if(path==='/__ci/mode'){mode=(await request.json()).mode;return Response.json({set:true});}
  if(path==='/__ci/recreate'){host=createPreparationClientMaintenance(options);return Response.json({created:true});}
  if(path==='/__ci/expire'){offset=700000;return Response.json({expired:true});}
+ if(path==='/__ci/mono-expire'){wallFrozen=Date.now();monoExtra=700000;return Response.json({expired:true});}
+ if(path==='/__ci/forward-clock'){
+  const future=Date.now()+3600000;options={...options,startedAt:new Date(future).toISOString(),expiresAt:new Date(future+600000).toISOString(),now:()=>Date.now()+3601000};
+  host=createPreparationClientMaintenance(options);return Response.json({changed:true});
+ }
  if(path==='/__ci/flip'){options.env[flags[0]]='true';return Response.json({flipped:true});}
  if(path==='/__ci/restore'){options.env[flags[0]]='false';return Response.json({restored:true});}
  if(path==='/__ci/change-operation'){options={...options,operationId:'ci-preparation-other'};host=createPreparationClientMaintenance(options);return Response.json({changed:true});}
