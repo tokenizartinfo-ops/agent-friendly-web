@@ -121,6 +121,17 @@ test('finite administrative preparation caller contract',{timeout:30000},async t
   const c=setup();c.step.do=async()=>{c.advance(599000);return c.receipt();};
   const r=await run(c.env,c.event,c.step,c.clocks);safe(r);assert.equal(r.status,'unconfirmed');assert.equal(c.stats().calls,0);
  });
+ await t.test('outer step queue and acknowledgement obey original five-second deadline',{timeout:8000},async()=>{
+  const c=setup();let releaseStep,lateCallback,timer;
+  c.step.do=async(_name,_options,callback)=>{lateCallback=callback;return new Promise(resolve=>{releaseStep=resolve;});};
+  const pending=run(c.env,c.event,c.step,c.clocks);
+  try{
+   const r=await Promise.race([pending,new Promise(resolve=>{timer=setTimeout(()=>resolve({status:'deadline_not_settled'}),5250);})]);
+   assert.equal(r.status,'unconfirmed');safe(r);assert.equal(c.stats().calls,0);
+   await assert.rejects(lateCallback());assert.equal(c.stats().calls,0);
+  }finally{clearTimeout(timer);releaseStep?.(undefined);await pending;}
+ });
+
  await t.test('queue delay before step callback cannot invoke expired operation',async()=>{
   const c=setup();c.step.do=async(_n,_o,cb)=>{c.advance(599000);return cb();};
   const r=await run(c.env,c.event,c.step,c.clocks);safe(r);assert.equal(r.status,'unconfirmed');assert.equal(c.stats().calls,0);
