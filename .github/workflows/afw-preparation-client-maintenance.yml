@@ -1,0 +1,33 @@
+name: AFW preparation client maintenance
+on:
+  pull_request:
+    paths:
+      - 'lib/preparation-client-maintenance.mjs'
+      - 'db/preparation-client-bootstrap.sql'
+      - 'test/preparation-client-maintenance-native.test.mjs'
+      - 'test/fixtures/preparation-client-maintenance-worker.mjs'
+      - '.github/workflows/afw-preparation-client-maintenance.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'lib/preparation-client-maintenance.mjs'
+      - 'db/preparation-client-bootstrap.sql'
+      - 'test/preparation-client-maintenance-native.test.mjs'
+      - 'test/fixtures/preparation-client-maintenance-worker.mjs'
+      - '.github/workflows/afw-preparation-client-maintenance.yml'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts
+      - run: node --test test/preparation-client-maintenance-native.test.mjs
