@@ -22,7 +22,7 @@ function reset(){
  offset=0;mode='';counts={identity:0,limiter:0,body:0};original={profileId:'afw.preparation-source-session.v1',
   operationKey:'source-session-ci-original-01',subject:null,startedAt:Date.now()-1000,expiresAt:Date.now()+180000};make();
 }
-export default {async fetch(request,runtimeEnv){
+const fixture={async fetch(request,runtimeEnv){
  keySet??=await importJWK(JSON.parse(runtimeEnv.CI_PUBLIC_JWK),'RS256');if(!host)reset();
  const path=new URL(request.url).pathname;
  if(path==='/__ci/stats')return Response.json(counts);
@@ -46,3 +46,4 @@ export default {async fetch(request,runtimeEnv){
  const protectedRequest=new Proxy(request,{get(target,k){if(k==='url'&&path==='/__ci/request-fragment')return issuer+'/source#owner';if(k==='body'){counts.body++;throw Error('body must not be read');}const value=Reflect.get(target,k,target);return typeof value==='function'?value.bind(target):value;}});
  return host(protectedRequest);
 }};
+export default fixture;
