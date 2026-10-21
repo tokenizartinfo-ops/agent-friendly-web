@@ -1,4 +1,4 @@
-// Exact artifact + closed profile only. No bootstrap, identity, KV/D1, real OAuth or network client.
+// Exact candidate and retained rollback artifacts + synthetic closed profile only. No bootstrap, identity, KV/D1, real OAuth or network client.
 import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
@@ -11,6 +11,9 @@ const receipt=JSON.parse(await readFile(new URL('receipt.json',root),'utf8'));
 assert.equal(profile.name,'agent-friendly-web-preparation-canary');assert.equal(profile.workers_dev,false);assert.equal(profile.preview_urls,false);
 assert.equal(profile.keep_vars,false);assert.equal(profile.compatibility_date,'2026-09-07');
 assert.deepEqual(profile.compatibility_flags,['nodejs_compat']);
+assert.equal(receipt.rollbackKind,'retained_build_artifact');
+assert.notEqual(receipt.sourceRevision,receipt.rollbackSourceRevision);
+assert.equal(receipt.hostedRollbackPerformed,false);
 assert.deepEqual(profile.vars,{AFW_DELEGATED_PREPARATION_ROUTER_ENABLED:'false',AFW_DELEGATED_PREPARATION_CONNECTIONS_ENABLED:'false',AFW_DELEGATED_OAUTH_ENABLED:'false',AFW_DELEGATED_PREPARATION_ENABLED:'false'});
 const sha=b=>createHash('sha256').update(b).digest('hex'),cases=[];
 const paths=['/','/authorize','/oauth/token','/mcp','/connections','/connections/revoke','/.well-known/oauth-authorization-server','/oauth/register','/source','/source/identity','/source/new'];
@@ -32,7 +35,7 @@ for(const filename of ['index.mjs','rollback.mjs']){
 assert.equal(cases.length,44);
 const result={checkedAt:new Date().toISOString(),cases,tests:cases.length,compiledBytesUnchanged:true,rollbackBytesUnchanged:true,
  nativeClosedQualified:true,remoteMutations:0,hostedIdentityAcceptance:false,activationReady:false,operationalReadiness:false,
- scope:'native isolated closed package and recovery source only; no hosted HTTP/config/schema/client/consent/events or PC-off'};
+ scope:'native isolated closed candidate and retained rollback modules only; no hosted HTTP/config/schema/client/consent/events, actual hosted rollback or PC-off'};
 receipt.nativeClosedQualified=true;
 receipt.nativeClosedReceipt='native-closed.json';
 receipt.closedUploadReady=false;

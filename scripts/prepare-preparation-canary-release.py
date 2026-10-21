@@ -64,6 +64,40 @@ def qualify_package(data,contract):
     require(canonical(build)==canonical(b),"build metadata")
     return {"script":script,"build":build}
 
+def validate_pair_contract(contract):
+    require(isinstance(contract,dict) and contract.get("schemaVersion")==2
+            and contract.get("project")=="AFW" and contract.get("repository")==REPOSITORY
+            and contract.get("allowedAction")=="prepare_closed_profile_only"
+            and contract.get("activationReady") is False and contract.get("operationalReadiness") is False,"contract scope")
+    profile=closed_profile()
+    target=contract.get("target",{})
+    require(target.get("accountId")==profile["account_id"] and target.get("worker")==profile["name"]
+            and target.get("origin") is None,"target profile")
+    rollback=contract.get("rollback",{})
+    require(rollback.get("kind")=="retained_build_artifact","rollback provenance kind")
+    def exact_hex(value,size):
+        return isinstance(value,str) and len(value)==size and all(c in "0123456789abcdef" for c in value)
+    def version(value):
+        return isinstance(value,str) and len(value)==36 and [len(p) for p in value.split("-")]==[8,4,4,4,12] and exact_hex(value.replace("-",""),32)
+    current=contract.get("evidence",{}).get("workerVersionId")
+    require(version(current) and version(rollback.get("workerVersionId"))
+            and current!=rollback["workerVersionId"],"rollback version identity")
+    for member in (contract,rollback):
+        b=member.get("build",{});a=member.get("artifact",{})
+        require(b.get("buildOnly") is True and b.get("runtimeConfigIncluded") is False
+                and b.get("sourceCheck")=="git-inputs-before-after-v1"
+                and exact_hex(b.get("sourceRevision"),40) and exact_hex(b.get("sourceTree"),40)
+                and exact_hex(b.get("workerHash"),64),"immutable build scope")
+        require(type(a.get("id")) is int and a["id"]>0 and type(a.get("runId")) is int and a["runId"]>0,"artifact reference")
+    require(contract["artifact"]["id"]!=rollback["artifact"]["id"]
+            and contract["artifact"]["runId"]!=rollback["artifact"]["runId"]
+            and contract["build"]["sourceRevision"]!=rollback["build"]["sourceRevision"],"rollback alias")
+
+def qualify_pair(candidate_data,rollback_data,contract):
+    validate_pair_contract(contract)
+    return {"candidate":qualify_package(candidate_data,contract),
+            "rollback":qualify_package(rollback_data,contract["rollback"])}
+
 def check_build_provenance(contract,artifact,run,now):
     a,b=contract["artifact"],contract["build"]
     require(artifact.get("id")==a["id"] and artifact.get("name")==a["name"],"artifact identity")
@@ -84,35 +118,44 @@ def main():
                             env={"PATH":os.environ["PATH"],"HOME":os.environ.get("HOME","")},
                             check=True,capture_output=True,text=True,timeout=5).stdout.strip()
     qualifier=reader.qualifier_context(os.environ,checkout)
-    contract=json.loads((ROOT/"config/preparation-canary-release.v1.json").read_text())
-    require(contract["project"]=="AFW" and contract["repository"]==REPOSITORY
-            and contract["allowedAction"]=="prepare_closed_profile_only"
-            and contract["activationReady"] is False and contract["operationalReadiness"] is False,"contract scope")
+    contract=json.loads((ROOT/"config/preparation-canary-release.v2.json").read_text())
+    validate_pair_contract(contract)
     profile=closed_profile();validate_closed_profile(profile)
-    require(contract["target"]["accountId"]==profile["account_id"] and contract["target"]["worker"]==profile["name"]
-            and contract["target"]["origin"] is None,"target profile")
     token=os.environ.get("GH_TOKEN","");require(bool(token),"GitHub reader unavailable")
-    a=contract["artifact"];base="https://api.github.com/repos/"+REPOSITORY+"/actions/"
-    artifact=json.loads(reader.github_get(base+"artifacts/"+str(a["id"]),token,1048576))
-    run=json.loads(reader.github_get(base+"runs/"+str(a["runId"]),token,1048576))
-    check_build_provenance(contract,artifact,run,datetime.now(timezone.utc))
-    data=reader.github_get(base+"artifacts/"+str(a["id"])+"/zip",token,a["bytes"],archive=True)
-    result=qualify_package(data,contract)
-    check_build_provenance(contract,artifact,run,datetime.now(timezone.utc))
+    base="https://api.github.com/repos/"+REPOSITORY+"/actions/"
+    packages={};provenance={}
+    for role,member in (("candidate",contract),("rollback",contract["rollback"])):
+        a=member["artifact"]
+        artifact=json.loads(reader.github_get(base+"artifacts/"+str(a["id"]),token,1048576))
+        run=json.loads(reader.github_get(base+"runs/"+str(a["runId"]),token,1048576))
+        check_build_provenance(member,artifact,run,datetime.now(timezone.utc))
+        packages[role]=reader.github_get(base+"artifacts/"+str(a["id"])+"/zip",token,a["bytes"],archive=True)
+        provenance[role]=(member,artifact,run)
+    result=qualify_pair(packages["candidate"],packages["rollback"],contract)
+    for member,artifact,run in provenance.values():
+        check_build_provenance(member,artifact,run,datetime.now(timezone.utc))
     output=ROOT/"output/preparation-canary-release"
     require(not output.exists() and not output.is_symlink(),"output already exists")
     output.mkdir(parents=True)
-    rollback=b'export default {fetch(){return Response.json({code:"preparation_route_unavailable",executionAllowed:false,chargeAllowed:false,publicationAllowed:false},{status:404,headers:{"Cache-Control":"no-store"}})}};\n'
-    receipt={"kind":"isolated_preparation_release_preflight","checkedAt":datetime.now(timezone.utc).isoformat(),**qualifier,
+    a=contract["artifact"];r=contract["rollback"];ra=r["artifact"]
+    candidate=result["candidate"];rollback=result["rollback"]
+    receipt={"kind":"isolated_preparation_release_pair_preflight","checkedAt":datetime.now(timezone.utc).isoformat(),**qualifier,
              "repository":REPOSITORY,"sourceRevision":contract["build"]["sourceRevision"],"sourceTree":contract["build"]["sourceTree"],
              "artifactId":a["id"],"artifactSha256":a["sha256"],"originalExpiresAt":a["expiresAt"],
-             "workerHash":contract["build"]["workerHash"],"workerBytes":len(result["script"]),"rollbackHash":sha256(rollback),
-             "profileSha256":sha256(canonical(profile).encode()),"target":contract["target"],"targetEvidence":contract["evidence"],
+             "workerHash":contract["build"]["workerHash"],"workerBytes":len(candidate["script"]),
+             "rollbackKind":r["kind"],"rollbackVersionId":r["workerVersionId"],
+             "rollbackSourceRevision":r["build"]["sourceRevision"],"rollbackSourceTree":r["build"]["sourceTree"],
+             "rollbackArtifactId":ra["id"],"rollbackArtifactSha256":ra["sha256"],"rollbackOriginalExpiresAt":ra["expiresAt"],
+             "rollbackHash":r["build"]["workerHash"],"rollbackBytes":len(rollback["script"]),
+             "profileSha256":sha256(canonical(profile).encode()),"profileScope":"synthetic closed execution only; NOT a hosted deployment configuration",
+             "target":contract["target"],"targetEvidence":contract["evidence"],
              "nativeClosedQualified":False,"closedUploadReady":False,"activationReady":False,"operationalReadiness":False,
-             "remoteMutations":0,"applicationRebuilt":False,"pendingActivationGates":contract["activationGates"]}
-    (output/"index.mjs").write_bytes(result["script"])
-    (output/"rollback.mjs").write_bytes(rollback)
-    for name,value in [("build.json",result["build"]),("contract.json",contract),("wrangler.closed.json",profile),("receipt.json",receipt)]:
+             "remoteMutations":0,"applicationRebuilt":False,"hostedRollbackPerformed":False,
+             "pendingActivationGates":contract["activationGates"]}
+    (output/"index.mjs").write_bytes(candidate["script"])
+    (output/"rollback.mjs").write_bytes(rollback["script"])
+    for name,value in [("build.json",candidate["build"]),("rollback-build.json",rollback["build"]),("contract.json",contract),
+                       ("wrangler.closed.json",profile),("receipt.json",receipt)]:
         (output/name).write_text(json.dumps(value,indent=2)+"\n")
     print(json.dumps({k:receipt[k] for k in ("sourceRevision","qualifierRevision","artifactId","workerHash","workerBytes","remoteMutations","activationReady")}))
 

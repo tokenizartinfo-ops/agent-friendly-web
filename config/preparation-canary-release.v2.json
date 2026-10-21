@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 2,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "artifact": {
+    "id": 12370391039,
+    "name": "afw-preparation-worker-5139c3333ad3e8958cf6af199ad2dfd980fcfe82",
+    "runId": 39651207576,
+    "runAttempt": 1,
+    "workflow": ".github/workflows/afw-preparation-worker-build.yml",
+    "event": "push",
+    "branch": "main",
+    "bytes": 356113,
+    "sha256": "59401f5457de8ab60030ea279a9b30ad33ee62cf71c77440f650574148bb4902",
+    "expiresAt": "2026-10-28T18:17:00Z"
+  },
+  "build": {
+    "sourceRevision": "5139c3333ad3e8958cf6af199ad2dfd980fcfe82",
+    "sourceTree": "5c56ae3538529eeeef84ff8e87e1c94c69a93479",
+    "sourceCheck": "git-inputs-before-after-v1",
+    "workerHash": "f792b863cf4140e35eadbd956e66442e01927cb5b405d8f44a1f68d039bf504f",
+    "workerBytes": 1760360,
+    "buildOnly": true,
+    "runtimeConfigIncluded": false
+  },
+  "target": {
+    "accountId": "85d0d5dadac3341a564f22ce885e9eec",
+    "worker": "agent-friendly-web-preparation-canary",
+    "origin": null,
+    "proposedOrigin": "https://preparation-canary.agentfriendlyweb.dev"
+  },
+  "evidence": {
+    "checkedAt": "2026-10-21T18:23:01.981Z",
+    "scope": "dated remote metadata of EXISTING closed target; qualifier does not read Cloudflare or prove current settings, retained secret, schema, signed identity or recovery execution",
+    "workerVersionId": "74d94d12-85e2-4ab7-acda-84729d786ded",
+    "deploymentId": "826ed7a7-867f-498e-b5a3-a3fa4a2e57d8",
+    "sourcePathsCoveredByAccess": true
+  },
+  "allowedAction": "prepare_closed_profile_only",
+  "activationReady": false,
+  "operationalReadiness": false,
+  "activationGates": [
+    "Fresh exact-target and recoverable original configuration/bytes receipts before closed upload; preserve existing preparation D1/KV/schema/history",
+    "Dedicated server HMAC custody and same D1; do not reuse an Access assertion, OAuth token or API credential as CSRF material",
+    "Own source routes protected by hosted Access/audience with real verified server subject, distinct from a bootstrap identity",
+    "Reviewed original ten-minute window and purpose; explicit source save and read-only inspect/recovery acceptance",
+    "Own client/redirects/resource/PKCE and server custody; spent SDK registration journal must not be replayed",
+    "Actual read/draft/reconcile/withdrawal and useful cloud events independently evidenced; no inferred customer access/payment/events/PC-off"
+  ],
+  "rollback": {
+    "kind": "retained_build_artifact",
+    "workerVersionId": "d96a183a-2906-400b-93b2-977b5da21cbd",
+    "artifact": {
+      "id": 12365784722,
+      "name": "afw-preparation-worker-452a70cb4c4d7a9f85b7b71ddbba05a885cc73d9",
+      "runId": 39645208790,
+      "runAttempt": 1,
+      "workflow": ".github/workflows/afw-preparation-worker-build.yml",
+      "event": "push",
+      "branch": "main",
+      "bytes": 339023,
+      "sha256": "ecb4b193ddba8ae367e3fc4623a7236983962ea7de94f21fb0a0eb416e46cba1",
+      "expiresAt": "2026-10-28T17:36:32Z"
+    },
+    "build": {
+      "sourceRevision": "452a70cb4c4d7a9f85b7b71ddbba05a885cc73d9",
+      "sourceTree": "098b59080d1d4e36f85923c32edd93bb9fe552c0",
+      "sourceCheck": "git-inputs-before-after-v1",
+      "workerHash": "b8e6fa0c36628cfbf451b66ecbcf4d717b4c8e5fbb31accc123fa2bce84dc3d9",
+      "workerBytes": 1735355,
+      "buildOnly": true,
+      "runtimeConfigIncluded": false
+    }
+  }
+}
