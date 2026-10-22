@@ -11,15 +11,12 @@ on:
   pull_request:
     paths:
       - '.github/workflows/afw-named-confirmation-package.yml'
-      - 'scripts/build-mcp-named-confirmation.mjs'
-      - 'scripts/mcp-confirmation-frozen-artifact.json'
-      - 'scripts/build-mcp-release-operator.mjs'
-      - 'scripts/mcp-release-source.mjs'
+      - 'scripts/**'
+      - 'lib/**'
+      - 'worker/**'
       - 'test/mcp-named-confirmation-package.native.mjs'
       - 'test/fixtures/inert-named-confirmation-policy.mjs'
-      - 'worker/mcp-release/**'
-      - 'lib/mcp-release-operator-policy.mjs'
-      - 'lib/mcp-activation-*.mjs'
+      - 'test/fixtures/named-confirmation-compile-fault.mjs'
       - 'package.json'
       - 'package-lock.json'
 
@@ -43,7 +40,6 @@ jobs:
         working-directory: source
     env:
       AFW_PACKAGE_SOURCE: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
-      AFW_POLICY_JSON: ${{ github.event_name == 'workflow_dispatch' && inputs.policy_json || '' }}
       AFW_FROZEN_ARTIFACT_PATH: ${{ github.workspace }}/source/output/mcp-release-confirmation/frozen-artifact.json
     steps:
       - uses: actions/checkout@v4
@@ -106,8 +102,9 @@ jobs:
           import {readFileSync,writeFileSync} from 'node:fs';
           import assert from 'node:assert/strict';
           import {inertNamedConfirmationPolicy} from './test/fixtures/inert-named-confirmation-policy.mjs';
-          const raw=process.env.AFW_POLICY_JSON;
-          assert.ok(Buffer.byteLength(raw)<=65536);
+          const event=JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
+          const raw=process.env.GITHUB_EVENT_NAME==='workflow_dispatch'?(event.inputs?.policy_json??''):'';
+          assert.equal(typeof raw,'string');assert.ok(Buffer.byteLength(raw)<=65536);
           const artifact=JSON.parse(readFileSync(process.env.AFW_FROZEN_ARTIFACT_PATH,'utf8'));
           const policy=raw?JSON.parse(raw):inertNamedConfirmationPolicy(artifact);
           if(process.env.GITHUB_EVENT_NAME==='pull_request'){assert.equal(policy.startAt,0);assert.equal(policy.expiresAt,1);}
