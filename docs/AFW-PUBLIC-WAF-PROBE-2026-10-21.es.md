@@ -16,9 +16,9 @@ Esto acota la espera del observador y su recibo, no demuestra que un proceso ext
 
 ## Resultado y correlación
 
--403 con Rayválido y sin challenge: `blocked_pending_correlation`. Permite continuar con la observación del evento, pero NO acepta enforcement.
--200: `not_blocked`; no se afirma que todo WAF esté roto o que el marcador deba activar cualquier selección de reglas.
--403 sin Rayválido, redirección, challenge, ventana cerrada, timeout o error de transporte: estados separados y saneados.
+- 403 con Rayválido y sin challenge: `blocked_pending_correlation`. Permite continuar con la observación del evento, pero NO acepta enforcement.
+- 200: `not_blocked`; no se afirma que todo WAF esté roto o que el marcador deba activar cualquier selección de reglas.
+- 403 sin Rayválido, redirección, challenge, ventana cerrada, timeout o error de transporte: estados separados y saneados.
 -`wafEnforcementAccepted`, `operationalReadiness` y `pcOffAccepted` permanecenfalse en todos los resultados.
 
 La aceptación posterior exige un evento mínimo de SecurityEvents que tenga el MISMO Ray, acción/componente esperados y un ruleID perteneciente al managedruleset observado. No inferirlo de403, del nombre de un ruleset o de una consulta vacía. No recopilar IP, UA, correo, cookies, query o cuerpos. El muestreo/retraso puede dejar detección pendiente.

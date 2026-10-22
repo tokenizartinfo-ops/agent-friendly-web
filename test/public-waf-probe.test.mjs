@@ -120,3 +120,15 @@ test('does not accept headers delivered after the monotonic deadline while timer
   assert.equal(r.outcome, 'request_timeout');
   assert.equal(r.ray_id, null);
 });
+
+test('rechecks the original window immediately before the network request', async (t) => {
+  let reads = 0;
+  let calls = 0;
+  t.mock.method(Date, 'now', () => reads++ === 0 ? now * 1000 : (now + 300) * 1000);
+  const r = await runPublicWafProbe({ ...window(), fetchImpl: () => {
+    calls++;
+    return new Response(null, { status: 403, headers: { 'cf-ray': 'abcdef0123456789-EZE' } });
+  } });
+  assert.equal(calls, 0);
+  assert.equal(r.outcome, 'window_closed');
+});
