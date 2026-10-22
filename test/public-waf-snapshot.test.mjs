@@ -139,3 +139,18 @@ test('receipt owns only safe scalars and does not retain mutable input reference
   assert.ok(!JSON.stringify(result).includes('action_parameters'));
   assert.ok(!JSON.stringify(result).includes('agentfriendlyweb.dev'));
 });
+
+test('calendar-invalid UTC dates never become trusted receipt dates', () => {
+  for (const at of ['2026-02-31T02:00:45.347Z', '2026-01-01T24:00:00Z', '2026-02-29T00:00:00Z']) {
+    const result = compare(fixture(), fixture(), at);
+    assert.equal(result.snapshotMatches, false, at);
+    assert.equal(result.checked_at, null, at);
+  }
+  assert.equal(compare(fixture(), fixture(), '2028-02-29T00:00:00Z').snapshotMatches, true);
+});
+test('invalid provider timestamps invalidate a baseline even when both inputs agree', () => {
+  const expected = fixture();
+  expected.entrypoint.last_updated = '2026-02-31T01:31:07.398593Z';
+  expected.entrypoint.rules[0].last_updated = expected.entrypoint.last_updated;
+  assert.ok(has(compare(structuredClone(expected), expected), 'expected', 'schema'));
+});
