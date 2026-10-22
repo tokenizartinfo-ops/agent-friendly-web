@@ -48,3 +48,13 @@ test('only the exact fixed response for the current condition is accepted', opts
  for(const bad of [wire.replace('0907','0929'),wire.replace('-v1','-v2'),JSON.stringify({marker:'afw-container-control-20261022-v1',caseName:'0907',approved:true}),'{}','null','[]','bad','x'.repeat(513)])assert.equal(api.verifyControlResponse(bad,'0907'),false);
  assert.equal(api.verifyControlResponse(wire,'other'),false);
 });
+
+test('admission headroom does not shorten an already admitted absolute window', opts, () => {
+ assert.equal(typeof api.continuingControlConfig,'function','continuation needs its own original-deadline guard');
+ const id='afw-20261022-0907',at=n+1200000-74000;
+ assert.equal(api.controlConfig(env(),at,id),null);
+ assert.equal(api.continuingControlConfig(env(),at,id).end,n+1200000);
+ assert.equal(api.continuingControlConfig(env(),n+1200000,id),null);
+ assert.equal(api.continuingControlConfig(env({AFW_CONTROL_ENABLED:'false'}),at,id),null);
+ assert.equal(api.continuingControlConfig(env(),at,'other'),null);
+});

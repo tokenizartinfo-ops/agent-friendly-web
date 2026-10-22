@@ -30,6 +30,13 @@ test('native diagnostic journal keeps consumed cases and original window across 
   assert.equal((await call('second')).stage,'native_container_absent');
   assert.equal((await call('second')).stage,'case_already_admitted');
   const final=await call('inspect');assert.deepEqual(final.cases.map(x=>x.caseName),['0907','0929']);
+  await mf.setOptions(config());
+  await call('cancel');await call('cancel');
+  const delayed=await call('late-first');
+  assert.equal(delayed.stage,'control_cancelled','closure fences an accepted but delayed Workflow before admission');
+  const cancelled=await call('cancelled-inspect');assert.equal(cancelled.cancelled,true);assert.equal(cancelled.cases.length,0);
+  await mf.setOptions(config('0907',end+1000));
+  assert.equal((await call('late-first')).stage,'control_cancelled','replacement cannot remove a durable cancellation fence');
   assert.equal(final.operationalReadiness,false);assert.equal(final.pcOffAccepted,false);assert.equal(final.physicalClosureAccepted,false);
  }finally{await mf.dispose();await rm(path,{recursive:true,force:true});}
 });
