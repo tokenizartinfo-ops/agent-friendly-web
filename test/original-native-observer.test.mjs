@@ -66,7 +66,7 @@ test('generated driver refuses closed config or a different Workflow id before t
 });
 test('generated driver uses one fixed RPC without selectors retries or untrusted output',opts,async t=>{
  t.mock.method(Date,'now',()=>n);const Driver=await driverClass();let calls=0,steps=0;
- const d=new Driver(),e=env();e.ORIGINAL={getByName(v){assert.equal(v,name);return {observeNativeForControl(...args){assert.equal(args.length,0);calls++;return {...api.observeOriginalNative(context(null),e,[],()=>n),raw:'private diagnostic text'};}};}};d.env=e;
+ const d=new Driver(),e=env();e.ORIGINAL={getByName(v){assert.equal(v,name);return {observeNativeForControl(...args){assert.equal(args.length,0);calls++;return {...api.observeOriginalNative(context(null),e,[],()=>n),checkedAt:new Date(n).toISOString(),raw:'private diagnostic text'};}};}};d.env=e;
  const step={do(label,options,fn){assert.equal(label,'original-native-context');assert.equal(options.retries.limit,0);steps++;return fn();}};
  const event={instanceId:'afw-20261022-original-native',get payload(){throw Error('caller payload read');}};
  const r=await d.run(event,step);assert.equal(r.stage,'native_context_observed');assert.equal(r.present,false);assert.equal(calls,1);assert.equal(steps,1);assert.ok(!JSON.stringify(r).includes('private diagnostic'));
@@ -85,4 +85,13 @@ test('generated driver RPC wait cannot outlive the original remaining window',op
   assert.equal(settled,true,'RPC timeout must use the original remaining window, not a fresh ten seconds');
   const r=await pending;assert.equal(r.stage,'observation_closed');assert.equal(r.present,undefined);
  }finally{t.mock.timers.tick(10001);await pending;t.mock.timers.reset();}
+});
+
+test('generated driver refuses noncanonical or out-of-window observed timestamps',opts,async t=>{
+ t.mock.method(Date,'now',()=>n);const Driver=await driverClass();
+ for(const stamp of [{private:'untrusted'},'untrusted text',new Date(n-1).toISOString(),new Date(n+300000).toISOString(),'2026-10-22T12:00:00+00:00']){
+  const d=new Driver(),e=env();e.ORIGINAL={getByName(){return {observeNativeForControl(){return {...api.observeOriginalNative(context(null),e,[],()=>n),checkedAt:stamp};}};}};d.env=e;
+  const r=await d.run({instanceId:'afw-20261022-original-native'},{do:(label,options,fn)=>fn()});
+  assert.equal(r.stage,'native_context_unconfirmed');assert.equal(r.observedAt,undefined);
+ }
 });
