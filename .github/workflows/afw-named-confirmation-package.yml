@@ -17,6 +17,7 @@ on:
       - 'test/mcp-named-confirmation-package.native.mjs'
       - 'test/fixtures/inert-named-confirmation-policy.mjs'
       - 'test/fixtures/named-confirmation-compile-fault.mjs'
+      - 'test/fixtures/named-confirmation-native-rehearsal.mjs'
       - 'package.json'
       - 'package-lock.json'
 
