@@ -6,6 +6,8 @@ on:
       - '.github/workflows/afw-public-edge-check.yml'
       - 'scripts/smoke-cloudflare-native-local.mjs'
       - 'test/cloudflare-native-parity.test.mjs'
+      - 'scripts/check-public-reading-contracts.mjs'
+      - 'test/public-reading-contracts.test.mjs'
   workflow_dispatch:
 
 permissions:
@@ -25,7 +27,7 @@ jobs:
         with:
           node-version: '22'
       - name: Verify the existing public and private boundary contracts with fixtures
-        run: node --test test/cloudflare-native-parity.test.mjs
+        run: node --test test/cloudflare-native-parity.test.mjs test/public-reading-contracts.test.mjs
       - name: Observe the fixed public origin without authentication
         if: github.event_name == 'workflow_dispatch'
         shell: bash
