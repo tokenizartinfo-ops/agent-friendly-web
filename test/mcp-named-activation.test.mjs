@@ -50,7 +50,7 @@ test('missing or inconsistent live event policy fails before consuming activatio
  }
 });
 
-test('native private operator resolves actual namespace and confirms exactly once',async()=>{
+for(const mode of ['rpc','workflow','workflow-closed','workflow-provider-denied'])test('native private operator confirms exactly once via '+mode,async()=>{
  const {Miniflare,convertV4MiniflareOptions}=await import('miniflare'),{readFileSync}=await import('node:fs'),{buildMcpReleaseOperator}=await import('../scripts/build-mcp-release-operator.mjs');
  const identity={name:'identity',modules:true,compatibilityDate:'2026-09-07',script:`import {DurableObject} from 'cloudflare:workers';export class Own extends DurableObject{fetch(){throw Error('Actor must not be invoked');}}export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:e.NODE.idFromName('afw-own-event-first-successor-v1').toString()});}}`,durableObjects:{NODE:{className:'Own',useSQLite:true}}};
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[identity]}));
@@ -60,7 +60,9 @@ test('native private operator resolves actual namespace and confirms exactly onc
   const window={startAt:Date.now()-1000,expiresAt:Date.now()+120000};Object.assign(p,window);Object.assign(p.plan,window);Object.assign(f.manifest.candidate,window);
   const events=p.observation.configuration.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_POLICY');events.text=JSON.stringify({...JSON.parse(events.text),...window});f.update();
   const compiled=await buildMcpReleaseOperator(f.bundle),config=p.observation.configuration,versionId=p.observation.versionId,deploymentId=p.observation.deploymentId,etag='f'.repeat(64),baseVersionId='33333333-3333-4333-8333-333333333333';let gets=0;
-  const outboundService=async request=>{gets++;assert.equal(request.method,'GET');assert.equal(request.headers.get('Authorization'),'Bearer synthetic_read_credential');let result;
+  const outboundService=async request=>{
+   if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents.json')return Response.json({page:{url:'https://www.cloudflarestatus.com'},incidents:[{id:'cbvocc87nsne',name:'Workers Cron Trigger Activation Issues',status:mode==='workflow-provider-denied'?'investigating':'resolved',updated_at:'2026-10-14T00:00:00Z',components:[],incident_updates:[]}]});
+   gets++;assert.equal(request.method,'GET');assert.equal(request.headers.get('Authorization'),'Bearer synthetic_read_credential');let result;
    if(request.url.endsWith('/deployments'))result={deployments:[{id:deploymentId,strategy:'percentage',versions:[{version_id:versionId,percentage:100}]}]};
    else if(request.url.includes('/containers/'))result={id:p.observation.applicationId,account_id:policyModule.RELEASE_TARGET.accountId,scheduling_policy:'durable_object',durable_objects:{namespace_id:p.observation.namespaceId}};
    else if(request.url.includes('/scripts/'))result={id:versionId,resources:{script:{etag},bindings:config.bindings}};
@@ -70,6 +72,11 @@ test('native private operator resolves actual namespace and confirms exactly onc
   const operator={name:'operator',modules:true,script:compiled.script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_RELEASE_OPERATOR_ENABLED:'true',AFW_RELEASE_READ_TOKEN:'synthetic_read_credential'},durableObjects:{AFW_RELEASE_EVENTS_NODE:{className:'Own',scriptName:'identity'}},d1Databases:{RELEASE_DB:'named-activation'},outboundService};
   const otherIdentity={...identity,name:'other-identity'},wrong={...operator,name:'wrong',durableObjects:{AFW_RELEASE_EVENTS_NODE:{className:'Own',scriptName:'other-identity'}}},closed={...operator,name:'closed',bindings:{...operator.bindings,AFW_RELEASE_OPERATOR_ENABLED:'false'}};
   const caller={name:'caller',modules:true,compatibilityDate:'2026-09-07',bindings:{HASH:compiled.planHash},serviceBindings:Object.fromEntries([['OP','operator'],['BAD','wrong'],['CLOSED','closed']].map(([key,name])=>[key,{name,entrypoint:'AfwReleaseOperator'}])),script:`export default{async fetch(r,e){try{const key=new URL(r.url).pathname.slice(1);return Response.json(await e[key].run(e.HASH));}catch{return new Response('unavailable',{status:409});}}}`};
+  if(mode!=='rpc'){
+   operator.bindings.AFW_RELEASE_WORKFLOW_ENABLED='true';
+   if(mode!=='workflow-closed')operator.bindings.AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED='true';
+   operator.workflows={FLOW:{name:'afw-named-confirmation-test',className:'AfwReleaseWorkflow'}};
+  }
   await mf.setOptions(convertV4MiniflareOptions({workers:[identity,otherIdentity,operator,wrong,closed,caller]}));
   const db=await mf.getD1Database('RELEASE_DB','operator');
   for(const name of ['publication','activation']){const sql=readFileSync('db/dossier-'+name+'-receipt.sql','utf8').replace(/^\s*--[^\r\n]*/gm,'');for(const m of sql.matchAll(/CREATE TABLE[\s\S]*?\);|CREATE (?:UNIQUE )?INDEX[^;\r\n]+;|CREATE TRIGGER[^\r\n]*? END;/g))await db.prepare(m[0]).run();}
@@ -79,10 +86,22 @@ test('native private operator resolves actual namespace and confirms exactly onc
   const c=await mf.getWorker('caller');
   for(const key of ['BAD','CLOSED'])assert.equal((await c.fetch('https://synthetic.invalid/'+key)).status,409);
   assert.equal(gets,0);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,0);
-  const r=await c.fetch('https://synthetic.invalid/OP');assert.equal(r.status,200);assert.equal((await r.json()).mayLaunch,false);
+  let instance,terminal;
+  if(mode==='rpc'){const r=await c.fetch('https://synthetic.invalid/OP');assert.equal(r.status,200);assert.equal((await r.json()).mayLaunch,false);}
+  else{
+   const {FLOW}=await mf.getBindings('operator');instance=await FLOW.create({id:'afw-release-'+compiled.planHash,params:{planHash:compiled.planHash}});
+   terminal=async()=>{const end=Date.now()+12000;let state;while(Date.now()<end){state=await instance.status();if(['complete','errored','terminated'].includes(state.status))return state;await new Promise(resolve=>setTimeout(resolve,25));}assert.fail('Confirmation Workflow did not finish');};
+   const state=await terminal();assert.equal(state.status,'complete');assert.equal(state.output.mayRetry,false);assert.equal(state.output.operationalReadiness,false);
+   if(mode!=='workflow'){assert.equal(state.output.status,'blocked');assert.equal(gets,0);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,0);return;}
+   assert.equal(state.output.status,'confirmed');assert.equal(state.output.receipt.activationKey,p.plan.activationKey);assert.equal(state.output.receipt.versionId,versionId);assert.equal(state.output.receipt.deploymentId,deploymentId);
+   assert.equal(JSON.stringify(state.output).includes('synthetic_read_credential'),false);
+  }
   const expected=resolveSuccessorPreparation({scope:f.manifest.scope,original:f.manifest.original,candidate:f.manifest.candidate,namespace:{idFromName:()=>({toString:()=>ids.candidate}),idFromString:id=>({toString:()=>id})}}).candidate.scopeHash;
   assert.equal((await db.prepare('SELECT scope_hash FROM dossier_activation_attempts').first()).scope_hash,expected);
   assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_acceptances').first()).n,1);
-  const before=gets;assert.equal((await c.fetch('https://synthetic.invalid/OP')).status,409);assert.equal(gets,before);
+  const before=gets;
+  if(mode==='rpc')assert.equal((await c.fetch('https://synthetic.invalid/OP')).status,409);
+  else{await instance.restart();const replay=await terminal();assert.equal(replay.status,'complete');assert.equal(replay.output.status,'uncertain');assert.equal(replay.output.mayRetry,false);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,1);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_acceptances').first()).n,1);}
+  assert.equal(gets,before);
  }finally{await mf.dispose();}
 });
