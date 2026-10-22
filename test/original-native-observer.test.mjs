@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
+import {registerHooks} from 'node:module';
 const path=new URL('../lib/mcp-own-native-observer.mjs',import.meta.url);
 const api=existsSync(path)?await import(path):null;
 test('original native observation helper exists before diagnostic deployment',()=>assert.ok(api,'Missing original native observer; original runtime must remain untouched'));
@@ -48,4 +49,40 @@ test('time or env closure during a synchronous native read cannot leak stale pre
   const clock=()=>mode==='clock'&&tick++?n+300000:n;
   const r=api.observeOriginalNative(ctx,e,[],clock);assert.equal(r.stage,'observation_closed',mode);assert.equal(r.present,undefined);
  }
+});
+
+async function driverClass(){
+ const hook=registerHooks({resolve(s,c,next){return s==='cloudflare:workers'?{url:'data:text/javascript,export class WorkflowEntrypoint {}',shortCircuit:true}:next(s,c);}});
+ try{return (await import('data:text/javascript;base64,'+Buffer.from(api.createOriginalObservationDriver()).toString('base64'))).AfwOriginalNativeObservation;}finally{hook.deregister();}
+}
+test('generated driver refuses closed config or a different Workflow id before touching RPC',opts,async t=>{
+ t.mock.method(Date,'now',()=>n);const Driver=await driverClass();let calls=0,steps=0;
+ const d=new Driver();d.env=env({ORIGINAL:{getByName(){calls++;throw Error('unexpected');}}});
+ const step={do(){steps++;throw Error('unexpected');}};
+ assert.equal((await d.run({instanceId:'other'},step)).stage,'observation_closed');
+ d.env.AFW_NATIVE_OBSERVATION_ENABLED='false';
+ assert.equal((await d.run({instanceId:'afw-20261022-original-native'},step)).stage,'observation_closed');
+ assert.equal(calls,0);assert.equal(steps,0);
+});
+test('generated driver uses one fixed RPC without selectors retries or untrusted output',opts,async t=>{
+ t.mock.method(Date,'now',()=>n);const Driver=await driverClass();let calls=0,steps=0;
+ const d=new Driver(),e=env();e.ORIGINAL={getByName(v){assert.equal(v,name);return {observeNativeForControl(...args){assert.equal(args.length,0);calls++;return {...api.observeOriginalNative(context(null),e,[],()=>n),raw:'private diagnostic text'};}};}};d.env=e;
+ const step={do(label,options,fn){assert.equal(label,'original-native-context');assert.equal(options.retries.limit,0);steps++;return fn();}};
+ const event={instanceId:'afw-20261022-original-native',get payload(){throw Error('caller payload read');}};
+ const r=await d.run(event,step);assert.equal(r.stage,'native_context_observed');assert.equal(r.present,false);assert.equal(calls,1);assert.equal(steps,1);assert.ok(!JSON.stringify(r).includes('private diagnostic'));
+});
+test('generated driver fences a response when its original window changes during RPC',opts,async t=>{
+ t.mock.method(Date,'now',()=>n);const Driver=await driverClass(),d=new Driver(),e=env();
+ e.ORIGINAL={getByName(){return {observeNativeForControl(){const r=api.observeOriginalNative(context(null),e,[],()=>n);e.AFW_NATIVE_OBSERVATION_END=String(n+299999);return r;}};}};d.env=e;
+ const r=await d.run({instanceId:'afw-20261022-original-native'},{do:(label,options,fn)=>fn()});
+ assert.equal(r.stage,'observation_closed');assert.equal(r.present,undefined);
+});
+test('generated driver RPC wait cannot outlive the original remaining window',opts,async t=>{
+ let clock=n;t.mock.method(Date,'now',()=>clock);t.mock.timers.enable({apis:['setTimeout']});
+ const Driver=await driverClass(),d=new Driver();d.env=env({AFW_NATIVE_OBSERVATION_END:String(n+50),ORIGINAL:{getByName(){return {observeNativeForControl(){return new Promise(()=>{});}};}}});
+ let settled=false;const pending=d.run({instanceId:'afw-20261022-original-native'},{do:(label,options,fn)=>fn()});pending.then(()=>{settled=true;});
+ try{await Promise.resolve();clock=n+51;t.mock.timers.tick(51);await new Promise(setImmediate);
+  assert.equal(settled,true,'RPC timeout must use the original remaining window, not a fresh ten seconds');
+  const r=await pending;assert.equal(r.stage,'observation_closed');assert.equal(r.present,undefined);
+ }finally{t.mock.timers.tick(10001);await pending;t.mock.timers.reset();}
 });
