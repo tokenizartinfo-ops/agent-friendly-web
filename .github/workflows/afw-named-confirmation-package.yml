@@ -102,6 +102,7 @@ jobs:
           import {readFileSync,writeFileSync} from 'node:fs';
           import assert from 'node:assert/strict';
           import {inertNamedConfirmationPolicy} from './test/fixtures/inert-named-confirmation-policy.mjs';
+          try{
           const event=JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
           const raw=process.env.GITHUB_EVENT_NAME==='workflow_dispatch'?(event.inputs?.policy_json??''):'';
           assert.equal(typeof raw,'string');assert.ok(Buffer.byteLength(raw)<=65536);
@@ -109,6 +110,7 @@ jobs:
           const policy=raw?JSON.parse(raw):inertNamedConfirmationPolicy(artifact);
           if(process.env.GITHUB_EVENT_NAME==='pull_request'){assert.equal(policy.startAt,0);assert.equal(policy.expiresAt,1);}
           writeFileSync('output/mcp-release-confirmation/policy.json',JSON.stringify(policy,null,2)+'\n');
+          }catch{throw Error('Named confirmation policy unavailable');}
           NODE
       - name: Qualify exact artifact packaging with native closed Workflow
         run: node --test test/mcp-named-confirmation-package.native.mjs

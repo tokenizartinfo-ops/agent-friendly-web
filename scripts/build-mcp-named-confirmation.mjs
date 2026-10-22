@@ -34,7 +34,7 @@ export async function buildMcpNamedConfirmation(input){
    if(/(?:_TOKEN|_SECRET|_KEY)$/.test(b.name)&&b.type!=='secret_text')fail();
   }
   const current=originalWindow(policy,started);current();
-  const built=await buildMcpReleaseOperator(bundle); // CI-ONLY intentional regression: omit post-await original window check.
+  const built=await buildMcpReleaseOperator(bundle);current();
   return Object.freeze({...built,operation:'confirm_named',startAt:policy.startAt,expiresAt:policy.expiresAt,inertPreparation:policy.startAt===0&&policy.expiresAt===1,artifactSourceRevision:artifact.sourceRevision,artifactSourceTree:artifact.sourceTree,programHash:artifact.programHash,workerHash:artifact.workerHash,artifactKey:policy.plan.artifactKey,recordedClosedVersion:pins.baseVersionId,artifactPinCheck:'recorded-frozen-artifact-v1',remotePublished:false,invoked:false});
  }catch{fail();}
 }
