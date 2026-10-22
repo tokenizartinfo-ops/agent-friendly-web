@@ -1,0 +1,61 @@
+{
+  "name": "afw-container-control-20261022",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-07",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "no_bundle": true,
+  "find_additional_modules": true,
+  "rules": [
+    {
+      "type": "ESModule",
+      "globs": [
+        "**/*.mjs"
+      ],
+      "fallthrough": true
+    }
+  ],
+  "vars": {
+    "AFW_CONTROL_ENABLED": "false",
+    "AFW_CONTROL_PLAN": "afw-container-control-20261022-v1",
+    "AFW_CONTROL_CASE": "0907",
+    "AFW_CONTROL_START": "0",
+    "AFW_CONTROL_END": "1"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "CONTROL",
+        "class_name": "AfwContainerControl"
+      }
+    ]
+  },
+  "exports": {
+    "AfwContainerControl": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
+  },
+  "containers": [
+    {
+      "class_name": "AfwContainerControl",
+      "scheduling_policy": "durable_object"
+    }
+  ],
+  "workflows": [
+    {
+      "name": "afw-container-control-20261022",
+      "binding": "CONTROL_RUN",
+      "class_name": "AfwContainerControlRun"
+    }
+  ],
+  "observability": {
+    "enabled": false
+  },
+  "logpush": false
+}
