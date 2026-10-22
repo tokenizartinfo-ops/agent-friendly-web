@@ -1,0 +1,70 @@
+name: AFW finite image dependency lock maintenance
+on:
+  push:
+    branches: [fix/afw-image-dependency-advisory-20261022]
+    paths: [.github/workflows/afw-finite-image-lock-maintenance.yml]
+permissions:
+  contents: write
+concurrency:
+  group: afw-finite-image-lock-maintenance
+  cancel-in-progress: false
+jobs:
+  lock:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify vulnerable baseline, regenerate lock, and verify corrected versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = 'fix/afw-image-dependency-advisory-20261022'
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          cat > "$RUNNER_TEMP/afw-image-advisory-check.mjs" <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync } from 'node:fs';
+          const lock = JSON.parse(readFileSync('package-lock.json', 'utf8'));
+          const compare = (a, b) => { for (let i=0;i<3;i++) { const d=(a[i]??0)-(b[i]??0); if(d) return d; } return 0; };
+          const entries = Object.entries(lock.packages ?? {}).filter(([path]) => /(^|\/)node_modules\/(next|sharp)$/.test(path));
+          assert(entries.some(([path]) => path.endsWith('/next')), 'Next resolution missing');
+          assert(entries.some(([path]) => path.endsWith('/sharp')), 'sharp resolution missing');
+          const unsafe = entries.filter(([path, value]) => {
+            assert.match(value.version, /^\d+\.\d+\.\d+$/, 'Unclassified dependency version');
+            const v=value.version.split('.').map(Number);
+            if(path.endsWith('/sharp')) return compare(v,[0,35,5])<0;
+            return (compare(v,[10,0,0])>=0 && compare(v,[15,5,27])<=0) || (compare(v,[16,0,0])>=0 && compare(v,[16,4,0])<=0);
+          });
+          console.log(JSON.stringify({ advisory:'GHSA-2464-fhr4-w9xw', resolutions:entries.map(([path,v])=>({path,version:v.version})), unsafe:unsafe.length }));
+          assert.equal(unsafe.length,0,'Affected image dependency resolution remains');
+          NODE
+          set +e
+          node "$RUNNER_TEMP/afw-image-advisory-check.mjs" > "$RUNNER_TEMP/afw-image-red.log" 2>&1
+          red_status=$?
+          set -e
+          test "$red_status" -ne 0
+          grep -F 'Affected image dependency resolution remains' "$RUNNER_TEMP/afw-image-red.log"
+          head -n 1 "$RUNNER_TEMP/afw-image-red.log"
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const p=JSON.parse(readFileSync('package.json','utf8'));
+          if(p.dependencies.next !== '^16.3.3' || p.overrides !== undefined) throw new Error('Baseline package changed; stop instead of overwriting');
+          p.dependencies.next='16.4.1';
+          p.overrides={sharp:'0.35.5'};
+          writeFileSync('package.json',JSON.stringify(p,null,2)+'\n');
+          NODE
+          npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+          node "$RUNNER_TEMP/afw-image-advisory-check.mjs"
+          test "$(git diff --name-only | LC_ALL=C sort | paste -sd, -)" = 'package-lock.json,package.json'
+          git diff --check
+          test "$(git ls-remote --heads origin "$GITHUB_REF_NAME" | cut -f1)" = "$GITHUB_SHA"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- package.json package-lock.json
+          git commit -m 'fix: update AFW image dependencies for GHSA-2464-fhr4-w9xw'
+          git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"
