@@ -90,7 +90,7 @@ for(const mode of ['rpc','workflow','workflow-closed','workflow-provider-denied'
   if(mode==='rpc'){const r=await c.fetch('https://synthetic.invalid/OP');assert.equal(r.status,200);assert.equal((await r.json()).mayLaunch,false);}
   else{
    const {FLOW}=await mf.getBindings('operator');instance=await FLOW.create({id:'afw-release-'+compiled.planHash,params:{planHash:compiled.planHash}});
-   terminal=async()=>{const end=Date.now()+12000;let state;while(Date.now()<end){state=await instance.status();if(['complete','errored','terminated'].includes(state.status))return state;await new Promise(resolve=>setTimeout(resolve,25));}assert.fail('Confirmation Workflow did not finish');};
+   terminal=async(want)=>{const end=Date.now()+12000;let state;while(Date.now()<end){state=await instance.status();if(state.status==='complete'&&(!want||state.output?.status===want)||['errored','terminated'].includes(state.status))return state;await new Promise(resolve=>setTimeout(resolve,25));}assert.fail('Confirmation Workflow did not finish');};
    const state=await terminal();assert.equal(state.status,'complete');assert.equal(state.output.mayRetry,false);assert.equal(state.output.operationalReadiness,false);
    if(mode!=='workflow'){assert.equal(state.output.status,'blocked');assert.equal(gets,0);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,0);return;}
    assert.equal(state.output.status,'confirmed');assert.equal(state.output.receipt.activationKey,p.plan.activationKey);assert.equal(state.output.receipt.versionId,versionId);assert.equal(state.output.receipt.deploymentId,deploymentId);
@@ -101,7 +101,7 @@ for(const mode of ['rpc','workflow','workflow-closed','workflow-provider-denied'
   assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_acceptances').first()).n,1);
   const before=gets;
   if(mode==='rpc')assert.equal((await c.fetch('https://synthetic.invalid/OP')).status,409);
-  else{await instance.restart();const replay=await terminal();assert.equal(replay.status,'complete');assert.equal(replay.output.status,'uncertain');assert.equal(replay.output.mayRetry,false);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,1);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_acceptances').first()).n,1);}
+  else{await instance.restart();const replay=await terminal('uncertain');assert.equal(replay.status,'complete');assert.equal(replay.output.status,'uncertain');assert.equal(replay.output.mayRetry,false);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,1);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_acceptances').first()).n,1);}
   assert.equal(gets,before);
  }finally{await mf.dispose();}
 });
