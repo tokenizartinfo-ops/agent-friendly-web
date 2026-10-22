@@ -31,6 +31,12 @@ export async function runPublicWafProbe({ startUnix, endUnix, fetchImpl = fetch,
   let timer;
   const timeoutMs = Math.min(requestTimeoutMs, endUnix * 1000 - nowMs);
   const operation = async () => {
+    const admissionMs = Date.now();
+    if (admissionMs < startUnix * 1000 || admissionMs >= endUnix * 1000) return;
+    if (performance.now() - startedMonotonic >= timeoutMs) {
+      result.outcome = 'request_timeout';
+      return;
+    }
     const response = await fetchImpl(new URL(TARGET), {
       method: 'GET', redirect: 'manual', credentials: 'omit', signal: controller.signal,
       headers: { accept: 'text/html', 'user-agent': 'AFW-Public-WAF-QA/1.0' },
