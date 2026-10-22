@@ -1,5 +1,5 @@
 import { DurableObject, WorkflowEntrypoint } from 'cloudflare:workers';
-import { controlConfig, sameControlPlan, verifyControlResponse } from './guard.mjs';
+import { controlConfig, continuingControlConfig, sameControlPlan, verifyControlResponse } from './guard.mjs';
 const MARKER='afw-container-control-20261022-v1';
 const OPTIONS={retries:{limit:0,delay:'1 second',backoff:'constant'},timeout:'90 seconds'};
 const receipt=(stage,extra={})=>({contract_version:'agentfriendly.independent-container-control.v1',
@@ -35,13 +35,16 @@ export class AfwContainerControl extends DurableObject {
   if(ctx.container?.running)void ctx.blockConcurrencyWhile(()=>this.close());
  }
  schema() {
+  this.ctx.storage.sql.exec('CREATE TABLE IF NOT EXISTS control_cancel (id INTEGER PRIMARY KEY CHECK(id=1),cancelledAt INTEGER NOT NULL)');
   this.ctx.storage.sql.exec('CREATE TABLE IF NOT EXISTS control_meta (id INTEGER PRIMARY KEY CHECK(id=1),planId TEXT NOT NULL,start INTEGER NOT NULL,end INTEGER NOT NULL)');
   this.ctx.storage.sql.exec('CREATE TABLE IF NOT EXISTS control_cases (caseName TEXT PRIMARY KEY CHECK(caseName IN (\'0907\',\'0929\')),stage TEXT NOT NULL,createdAt INTEGER NOT NULL,closedAt INTEGER)');
  }
+ cancelled(){return this.ctx.storage.sql.exec('SELECT id FROM control_cancel WHERE id=1').toArray().length===1;}
  stage(caseName,value){this.ctx.storage.sql.exec('UPDATE control_cases SET stage=? WHERE caseName=?',value,caseName);}
  async run(instanceId) {
   const cfg=controlConfig(this.env,Date.now(),instanceId);if(!cfg)return receipt('window_or_instance_closed');
   this.schema();
+  if(this.cancelled())return receipt('control_cancelled');
   this.ctx.storage.sql.exec('INSERT OR IGNORE INTO control_meta (id,planId,start,end) VALUES (1,?,?,?)',cfg.planId,cfg.start,cfg.end);
   const stored=this.ctx.storage.sql.exec('SELECT planId,start,end FROM control_meta WHERE id=1').toArray()[0];
   if(!sameControlPlan(stored,cfg))return receipt('original_window_changed');
@@ -56,10 +59,10 @@ export class AfwContainerControl extends DurableObject {
   const startedMono=performance.now(),deadline=Math.min(cfg.end-10000,Date.now()+60000);
   let outcome='native_error',startAttempted=false,ready=false,ack=false,closure;
   const live=()=>Date.now()<deadline&&performance.now()-startedMono<60000&&
-   controlConfig(this.env,Date.now(),instanceId)?.start===cfg.start&&
-   controlConfig(this.env,Date.now(),instanceId)?.end===cfg.end;
+   continuingControlConfig(this.env,Date.now(),instanceId)?.start===cfg.start&&
+   continuingControlConfig(this.env,Date.now(),instanceId)?.end===cfg.end;
   const request=async(method,path)=>{
-   if(!live())throw new Error('control_deadline');
+   if(!live()||this.cancelled())throw new Error('control_deadline');
    const controller=new AbortController();
    return bounded(async()=>{
     const r=await container.getTcpPort(8080).fetch('http://container'+path,{method,signal:controller.signal,
@@ -73,7 +76,7 @@ export class AfwContainerControl extends DurableObject {
    }else if(container.running){outcome='unexpected_running';}
    else {
     await bounded(()=>this.ctx.storage.setAlarm(deadline+5000),3000);
-    if(!live())throw new Error('control_deadline');
+    if(!live()||this.cancelled())throw new Error('control_deadline');
     this.stage(cfg.caseName,'start_attempted');startAttempted=true;
     container.start({image:'cloudflare/debian-trixie',entrypoint:['node','--eval',program(cfg.caseName)],instance:'lite',enableInternet:false});
     await bounded(()=>container.setInactivityTimeout(1000),3000);
@@ -92,12 +95,17 @@ export class AfwContainerControl extends DurableObject {
    }
   }catch{outcome=startAttempted?'start_or_transport_unconfirmed':'admission_unconfirmed';}
   finally {
-   closure=await this.close();
+   closure=await this.#destroy();
    try{this.stage(cfg.caseName,outcome);}catch{}
   }
   return receipt(outcome,{caseName:cfg.caseName,nativeContainerPresent:true,startAttempted,ready,syntheticAck:ack,closure});
  }
  async close() {
+  this.schema();
+  this.ctx.storage.sql.exec('INSERT OR IGNORE INTO control_cancel(id,cancelledAt) VALUES(1,?)',Date.now());
+  return this.#destroy();
+ }
+ async #destroy() {
   const c=this.ctx.container;let requested=false,ack=false;
   if(c&&typeof c.destroy==='function'){
    requested=true;try{await bounded(()=>c.destroy(),10000);ack=true;}catch{}
@@ -108,7 +116,7 @@ export class AfwContainerControl extends DurableObject {
  }
  async inspect() {
   this.schema();
-  return receipt('inspection',{nativeContainerPresent:!!this.ctx.container,nativeRunning:this.ctx.container?.running??null,
+  return receipt('inspection',{cancelled:this.cancelled(),nativeContainerPresent:!!this.ctx.container,nativeRunning:this.ctx.container?.running??null,
    cases:this.ctx.storage.sql.exec('SELECT caseName,stage,createdAt,closedAt FROM control_cases ORDER BY caseName').toArray()});
  }
  async alarm(){await this.close();}

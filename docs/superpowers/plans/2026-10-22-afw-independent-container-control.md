@@ -15,13 +15,13 @@ Focus: admission before start; original window never renewed; failure/unknownACK
 - [ ] Add spec/plan and behavioral tests only on isolated GitHub branch; focal cloud RED must show explicit missing diagnostic helper before code.
 - [ ] Implement helper, private Workflow/DO code and closed profile; synthetic15s Node program uses fixed virtual health/POST ACK only.
 - [ ] Green focal source tests + pinned Wrangler dry-run in GitHub; full required CI. No local install/build or credential movement.
-- [ ] Fresh whole-diff review; correct Important defects with a targeted RED->GREEN before deployment.
+- [ ] Fresh whole-diff review; correct Important defects with a targeted RED->GREEN before deployment. Public cancellation is a persisted terminal fence before any native destruction; private ordinary cleanup cannot reauthorize work. Admission75s headroom is distinct from continuation's original absolute/monotonic deadline.
 
 ## Task2 — actual closed native deployment and one original trial
 - [ ] Fresh absence/account/original-baseline checks; create only named control Worker via cachedWrangler4.149 + closed baseline.
 - [ ] Record active version, effective profile, namespace/application/workflow IDs and zeroinstances; verify original delegated baseline unchanged.
 - [ ] Choose one ORIGINAL future<=20min serverwindow after all preparation; activate condition0907 only; create ONE fixed private Workflow instance; unknown ACK inspectsameid, never recreate.
-- [ ] Record context/presence/start/readiness/fixedACK/nativeclosure separately. Close/zero before any secondcase.
+- [ ] Record context/presence/start/readiness/fixedACK/nativeclosure separately. Absence/no-start and independentzero before any secondcase; do not invoke terminal public close between native-absent0907 and optional0929.
 - [ ] Only if nativeabsence: compare0929 with samecode/controlnamespace/originalwindow and separateoneadmission; noother variation. Record if unable or expired, never extend.
 
 ## Task3 — closure and next original circuit

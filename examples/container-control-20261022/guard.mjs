@@ -1,6 +1,6 @@
 const PLAN='afw-container-control-20261022-v1';
 const CASES=new Set(['0907','0929']);
-export function controlConfig(env, now, instanceId) {
+function parsedConfig(env, now, instanceId, headroom) {
  if (!env || env.AFW_CONTROL_ENABLED!=='true' || env.AFW_CONTROL_PLAN!==PLAN ||
      !CASES.has(env.AFW_CONTROL_CASE) || instanceId!=='afw-20261022-'+env.AFW_CONTROL_CASE ||
      !Number.isSafeInteger(now) || now<0) return null;
@@ -8,9 +8,11 @@ export function controlConfig(env, now, instanceId) {
  if(!digits.test(env.AFW_CONTROL_START)||!digits.test(env.AFW_CONTROL_END))return null;
  const start=Number(env.AFW_CONTROL_START)*1000,end=Number(env.AFW_CONTROL_END)*1000;
  if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end)||end<=start||end-start>1200000||
-    now<start||now>=end||end-now<75000)return null;
+    now<start||now>=end||end-now<headroom)return null;
  return Object.freeze({planId:PLAN,caseName:env.AFW_CONTROL_CASE,instanceId,start,end});
 }
+export const controlConfig=(env,now,instanceId)=>parsedConfig(env,now,instanceId,75000);
+export const continuingControlConfig=(env,now,instanceId)=>parsedConfig(env,now,instanceId,0);
 export function sameControlPlan(stored, config) {
  if(!stored||typeof stored!=='object'||Array.isArray(stored))return false;
  const proto=Object.getPrototypeOf(stored);if(proto!==Object.prototype&&proto!==null)return false;
