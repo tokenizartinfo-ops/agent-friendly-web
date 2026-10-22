@@ -41,19 +41,29 @@ test('publication, manual identity and secret values are rejected without echoin
   if(mode==='extra')p.credential='synthetic_sensitive_value';
   if(mode==='secret'||mode==='plaintext-secret'){
    p.observation.configuration.bindings.push({name:'AFW_DOSSIER_PROVIDER_READ_TOKEN',type:mode==='secret'?'secret_text':'plain_text',text:'synthetic_sensitive_value'});
-   p.plan.configurationHash=activationConfigurationHash(p.observation.configuration);
+   if(mode==='plaintext-secret')p.plan.configurationHash=activationConfigurationHash(p.observation.configuration);
   }
   await assert.rejects(buildMcpNamedConfirmation({artifact,policy:p}),e=>e.message==='Named confirmation package unavailable');
  }
 });
 
-test('a retired real window cannot be repackaged as current authority',available,async()=>{
- const p=inertNamedConfirmationPolicy(artifact),window={startAt:2,expiresAt:3};
+
+function withWindow(p,window){
  Object.assign(p,window);Object.assign(p.plan,window);
  for(const name of ['AFW_DOSSIER_EVENTS_POLICY','AFW_DOSSIER_SUCCESSOR_POLICY']){
   const binding=p.observation.configuration.bindings.find(b=>b.name===name),value=JSON.parse(binding.text);
   Object.assign(name==='AFW_DOSSIER_SUCCESSOR_POLICY'?value.candidate:value,window);binding.text=JSON.stringify(value);
  }
- p.plan.configurationHash=activationConfigurationHash(p.observation.configuration);
+ p.plan.configurationHash=activationConfigurationHash(p.observation.configuration);return p;
+}
+test('a current real policy is packaged without changing its original window',available,async()=>{
+ const p=withWindow(inertNamedConfirmationPolicy(artifact),{startAt:Date.now()-1000,expiresAt:Date.now()+120000}),before=JSON.stringify(p);
+ const built=await buildMcpNamedConfirmation({artifact,policy:p});
+ assert.equal(JSON.stringify(p),before);assert.equal(built.startAt,p.startAt);assert.equal(built.expiresAt,p.expiresAt);assert.equal(built.inertPreparation,false);
+ assert.equal(built.planHash,hash(JSON.stringify({artifact,policy:p})));
+});
+
+test('a retired real window cannot be repackaged as current authority',available,async()=>{
+ const p=withWindow(inertNamedConfirmationPolicy(artifact),{startAt:2,expiresAt:3});
  await assert.rejects(buildMcpNamedConfirmation({artifact,policy:p}),/Named confirmation package unavailable/);
 });
