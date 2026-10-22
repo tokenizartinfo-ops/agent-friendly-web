@@ -1,0 +1,24 @@
+name: AFW original native observer source check
+on:
+  pull_request:
+    paths:
+      - 'lib/mcp-own-native-observer.mjs'
+      - 'test/original-native-observer*.mjs'
+      - '.github/workflows/afw-original-native-observer.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && (github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test test/original-native-observer.test.mjs
