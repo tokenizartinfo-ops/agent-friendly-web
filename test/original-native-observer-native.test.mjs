@@ -25,7 +25,7 @@ test('generated original wrapper preserves native private methods SQL data and d
  bindings:{...Object.fromEntries(flags.map(k=>[k,'false'])),AFW_NATIVE_OBSERVATION_ENABLED:enabled,AFW_NATIVE_OBSERVATION_PLAN:'afw.original-native-observation.20261022.v1',AFW_NATIVE_OBSERVATION_START:String(start),AFW_NATIVE_OBSERVATION_END:String(end),AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-first-successor-v1'}}),resourcePersistencePath:root});
  const mf=new Miniflare(config('false'));
  try{
- const call=async p=>{const r=await mf.dispatchFetch('http://fixture'+p);assert.equal(r.status,200);return r.json();};
+ const call=async p=>{const r=await mf.dispatchFetch('http://fixture'+p);const body=await r.text();assert.equal(r.status,200,p+': '+body.slice(0,1000));return JSON.parse(body);};
  assert.equal(await (await mf.dispatchFetch('http://fixture/')).text(),'original-default-preserved');
  assert.deepEqual(await call('/control'),{control:'preserved'});await call('/seed');const before=await call('/read');
  assert.equal((await call('/observe')).stage,'observation_closed');await mf.setOptions(config('true'));
