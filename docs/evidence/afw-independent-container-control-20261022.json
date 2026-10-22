@@ -1,0 +1,329 @@
+{
+  "contract": "agentfriendly.independent-container-control.receipt.v1",
+  "date": "2026-10-22",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "source": "f99a4ad0dd626e0c46882aeb2a7282987be8a27f",
+  "pr": 566,
+  "actualProvisioner": "Wrangler4.149.0 deploy --no-bundle --autoconfig=false",
+  "sourceQualification": {
+    "ci": 39778497264,
+    "job": 119823444272,
+    "pass": 2784,
+    "fail": 0,
+    "skip": 1,
+    "lintErrors": 0,
+    "lintWarnings": 12,
+    "builds": 5,
+    "focal": 39778497184,
+    "review": {
+      "critical": 0,
+      "important": 0,
+      "minorDeferred": 1
+    }
+  },
+  "target": {
+    "worker": "afw-container-control-20261022",
+    "class": "AfwContainerControl",
+    "workflowId": "f8c6d3c0-f73f-4061-9d5d-27fd45814417",
+    "namespace": "88bd4bc69e0a4ef5b8ac959f2fb9cef2",
+    "application": "88bd4bc69e0a4ef5b8ac959f2fb9cef2"
+  },
+  "originalWindow": {
+    "plan": "afw-container-control-20261022-v1",
+    "start": 1792672437,
+    "end": 1792673037,
+    "startUTC": "2026-10-22T12:33:57Z",
+    "endUTC": "2026-10-22T12:43:57Z"
+  },
+  "condition": {
+    "case": "0907",
+    "compatibilityDate": "2026-09-07",
+    "nativeStarts": 1,
+    "activeWorkerVersion": "5ff8ef9f-a68b-451c-8c56-d664636f9013",
+    "activeDeployment": "bbb7000f-f45f-4a26-8a89-c9b5b361a304",
+    "workflowInstance": "afw-20261022-0907",
+    "workflowVersion": "b6e52bdb-a991-4c1a-ae96-7532e98380d1",
+    "start": "2026-10-22T12:34:24.576Z",
+    "end": "2026-10-22T12:34:25.622Z",
+    "result": {
+      "contract_version": "agentfriendly.independent-container-control.v1",
+      "checkedAt": "2026-10-22T12:34:25.569Z",
+      "marker": "afw-container-control-20261022-v1",
+      "stage": "fixed_roundtrip_verified",
+      "caseName": "0907",
+      "nativeContainerPresent": true,
+      "startAttempted": true,
+      "ready": true,
+      "syntheticAck": true,
+      "closure": {
+        "checkedAt": "2026-10-22T12:34:25.569Z",
+        "nativeContainerPresent": true,
+        "closureRequested": true,
+        "closureAck": true,
+        "nativeRunningFalse": true,
+        "physicalClosureAccepted": false
+      },
+      "originalIncidentRepaired": false,
+      "physicalClosureAccepted": false,
+      "operationalReadiness": false,
+      "pcOffAccepted": false
+    },
+    "attempts": 1
+  },
+  "secondCondition": {
+    "executed": false,
+    "reason": "first_condition_positive; conditional comparison not due"
+  },
+  "physicalObservation": {
+    "checkedAt": "2026-10-22T12:34:50.288Z",
+    "activeInstances": [],
+    "placements": [
+      {
+        "id": "1f7f02e06a7774b07b80a3261c5a7071012c8ea6a98153a06c6a9bf899debcb3",
+        "status": {
+          "state": "stopped",
+          "updated_at": "2026-10-22T12:34:25.505Z",
+          "exit_code": 0
+        },
+        "image": "cloudflare/debian-trixie",
+        "started_at": "2026-10-22T12:34:25.078Z",
+        "location": {
+          "name": "atl08",
+          "region": "ENAM"
+        }
+      }
+    ]
+  },
+  "terminalObservation": {
+    "checkedAt": "2026-10-22T12:35:20.922Z",
+    "status": "complete",
+    "result": {
+      "contract_version": "agentfriendly.independent-container-control.v1",
+      "checkedAt": "2026-10-22T12:35:02.362Z",
+      "marker": "afw-container-control-20261022-v1",
+      "stage": "inspection",
+      "cancelled": true,
+      "nativeContainerPresent": true,
+      "nativeRunning": false,
+      "cases": [
+        {
+          "caseName": "0907",
+          "stage": "fixed_roundtrip_verified",
+          "createdAt": 1792672465072,
+          "closedAt": 1792672465569
+        }
+      ],
+      "originalIncidentRepaired": false,
+      "physicalClosureAccepted": false,
+      "operationalReadiness": false,
+      "pcOffAccepted": false
+    }
+  },
+  "finalObservation": {
+    "checkedAt": "2026-10-22T12:35:58.540Z",
+    "diagnostic": {
+      "deployment": "3b19fa2c-5fbc-4755-bcd3-d8e26e82f3c9",
+      "versions": [
+        {
+          "version_id": "0c94d94f-5575-491c-8046-0199235352c4",
+          "percentage": 100
+        }
+      ],
+      "runtime": {
+        "exports": {
+          "AfwContainerControl": {
+            "type": "durable-object",
+            "storage": "sqlite"
+          }
+        },
+        "compatibility_date": "2026-09-07",
+        "compatibility_flags": [
+          "nodejs_compat",
+          "global_fetch_strictly_public"
+        ],
+        "usage_model": "standard",
+        "containers": [
+          {
+            "class_name": "AfwContainerControl",
+            "name": "afw-container-control-20261022-afwcontainercontrol"
+          }
+        ]
+      },
+      "bindings": [
+        {
+          "name": "AFW_CONTROL_CASE",
+          "text": "0907",
+          "type": "plain_text"
+        },
+        {
+          "name": "AFW_CONTROL_ENABLED",
+          "text": "false",
+          "type": "plain_text"
+        },
+        {
+          "name": "AFW_CONTROL_END",
+          "text": "1",
+          "type": "plain_text"
+        },
+        {
+          "name": "AFW_CONTROL_PLAN",
+          "text": "afw-container-control-20261022-v1",
+          "type": "plain_text"
+        },
+        {
+          "name": "AFW_CONTROL_START",
+          "text": "0",
+          "type": "plain_text"
+        },
+        {
+          "class_name": "AfwContainerControl",
+          "name": "CONTROL",
+          "namespace_id": "88bd4bc69e0a4ef5b8ac959f2fb9cef2",
+          "type": "durable_object_namespace"
+        },
+        {
+          "class_name": "AfwContainerControlRun",
+          "name": "CONTROL_RUN",
+          "type": "workflow",
+          "workflow_name": "afw-container-control-20261022"
+        }
+      ],
+      "activeInstances": [],
+      "pagination": {
+        "per_page": 10
+      },
+      "subdomain": {
+        "enabled": false,
+        "previews_enabled": false
+      },
+      "cron": {
+        "schedules": []
+      }
+    },
+    "original": {
+      "deployment": "799ff2e0-3b83-4ba9-ab97-985279fa827c",
+      "versions": [
+        {
+          "version_id": "79593972-3200-464f-aff6-76f5864dd399",
+          "percentage": 100
+        }
+      ],
+      "runtime": {
+        "exports": {
+          "AfwOwnEventNode": {
+            "type": "durable-object",
+            "storage": "sqlite",
+            "container": "agent-friendly-web-delegated-canary-afwowneventnode"
+          }
+        },
+        "compatibility_date": "2026-09-07",
+        "compatibility_flags": [
+          "nodejs_compat",
+          "global_fetch_strictly_public"
+        ],
+        "usage_model": "standard",
+        "containers": [
+          {
+            "class_name": "AfwOwnEventNode",
+            "name": "agent-friendly-web-delegated-canary-afwowneventnode"
+          }
+        ]
+      },
+      "flags": [
+        {
+          "name": "AFW_DELEGATED_OAUTH_ENABLED",
+          "text": "false"
+        },
+        {
+          "name": "AFW_DOSSIER_EVENTS_ENABLED",
+          "text": "false"
+        },
+        {
+          "name": "AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED",
+          "text": "false"
+        },
+        {
+          "name": "AFW_DOSSIER_MONITORING_OWNER_ENABLED",
+          "text": "false"
+        },
+        {
+          "name": "AFW_DOSSIER_OWN_SAVE_ENABLED",
+          "text": "false"
+        },
+        {
+          "name": "AFW_DOSSIER_RETIREMENT_READ_ENABLED",
+          "text": "false"
+        },
+        {
+          "name": "AFW_DOSSIER_SUCCESSOR_ENABLED",
+          "text": "false"
+        },
+        {
+          "name": "AFW_OAUTH_REFRESH_ENABLED",
+          "text": "false"
+        }
+      ],
+      "namespace": [
+        {
+          "class_name": "AfwOwnEventNode",
+          "name": "AFW_DOSSIER_EVENTS_NODE",
+          "namespace_id": "d6fc71552de7494a863aca20365a572d",
+          "type": "durable_object_namespace"
+        }
+      ]
+    }
+  },
+  "workflowInstances": {
+    "checkedAt": "2026-10-22T12:37:31.889Z",
+    "instances": [
+      {
+        "id": "afw-20261022-inspect-01",
+        "status": "complete",
+        "started_on": "2026-10-22T12:35:02.000Z",
+        "ended_on": "2026-10-22T12:35:02.000Z",
+        "version_id": "d1739a99-3402-4551-8485-83c2c9894d6f"
+      },
+      {
+        "id": "afw-20261022-close-01",
+        "status": "complete",
+        "started_on": "2026-10-22T12:34:48.000Z",
+        "ended_on": "2026-10-22T12:34:48.000Z",
+        "version_id": "d1739a99-3402-4551-8485-83c2c9894d6f"
+      },
+      {
+        "id": "afw-20261022-0907",
+        "status": "complete",
+        "started_on": "2026-10-22T12:34:24.000Z",
+        "ended_on": "2026-10-22T12:34:25.000Z",
+        "version_id": "b6e52bdb-a991-4c1a-ae96-7532e98380d1"
+      },
+      {
+        "id": "afw-20261022-closed",
+        "status": "complete",
+        "started_on": "2026-10-22T12:33:27.000Z",
+        "ended_on": "2026-10-22T12:33:27.000Z",
+        "version_id": "b6e52bdb-a991-4c1a-ae96-7532e98380d1"
+      }
+    ]
+  },
+  "supportUpdate": {
+    "case": "02382110",
+    "message": "1a1639eea14d9ed1",
+    "thread": "1a159f50f9f90f94"
+  },
+  "limits": {
+    "dedicatedWorkerNotSameWorkerFreshClass": true,
+    "originalNamespaceInvoked": false,
+    "originalIncidentRepaired": false,
+    "fullAFWCircuitAccepted": false,
+    "operationalReadiness": false,
+    "pcOffAccepted": false,
+    "MaxContacted": false
+  },
+  "followup": {
+    "monitor": "PAUSED; no new automation",
+    "humanInterventionNow": false,
+    "required": "Preserve original namespace; scoped original runtime verification + fresh own authorization and subscription/useful cloud review/withdrawal before PC-off. No consumed trial/OTP/token replay."
+  }
+}

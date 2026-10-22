@@ -12,20 +12,23 @@ docs/AFW-INDEPENDENT-CONTAINER-CONTROL-2026-10-22.es.md: eventual dated run/clos
 Focus: admission before start; original window never renewed; failure/unknownACK no second start; closure independent of authority and no process-drain inference; wrong Workflow IDs never touch DO; no arbitrary command/network; exact namespace/version and conditional date comparison.
 
 ## Task1 — controlled source
-- [ ] Add spec/plan and behavioral tests only on isolated GitHub branch; focal cloud RED must show explicit missing diagnostic helper before code.
-- [ ] Implement helper, private Workflow/DO code and closed profile; synthetic15s Node program uses fixed virtual health/POST ACK only.
-- [ ] Green focal source tests + pinned Wrangler dry-run in GitHub; full required CI. No local install/build or credential movement.
-- [ ] Fresh whole-diff review; correct Important defects with a targeted RED->GREEN before deployment. Public cancellation is a persisted terminal fence before any native destruction; private ordinary cleanup cannot reauthorize work. Admission75s headroom is distinct from continuation's original absolute/monotonic deadline.
+- [x] Add spec/plan and behavioral tests only on isolated GitHub branch; focal cloud RED must show explicit missing diagnostic helper before code.
+- [x] Implement helper, private Workflow/DO code and closed profile; synthetic15s Node program uses fixed virtual health/POST ACK only.
+- [x] Green focal source tests + pinned Wrangler dry-run in GitHub; full required CI. No local install/build or credential movement.
+- [x] Fresh whole-diff review; correct Important defects with a targeted RED->GREEN before deployment. Public cancellation is a persisted terminal fence before any native destruction; private ordinary cleanup cannot reauthorize work. Admission75s headroom is distinct from continuation's original absolute/monotonic deadline.
 
 ## Task2 — actual closed native deployment and one original trial
-- [ ] Fresh absence/account/original-baseline checks; create only named control Worker via cachedWrangler4.149 + closed baseline.
-- [ ] Record active version, effective profile, namespace/application/workflow IDs and zeroinstances; verify original delegated baseline unchanged.
-- [ ] Choose one ORIGINAL future<=20min serverwindow after all preparation; activate condition0907 only; create ONE fixed private Workflow instance; unknown ACK inspectsameid, never recreate.
-- [ ] Record context/presence/start/readiness/fixedACK/nativeclosure separately. Absence/no-start and independentzero before any secondcase; do not invoke terminal public close between native-absent0907 and optional0929.
-- [ ] Only if nativeabsence: compare0929 with samecode/controlnamespace/originalwindow and separateoneadmission; noother variation. Record if unable or expired, never extend.
+- [x] Fresh absence/account/original-baseline checks; create only named control Worker via cachedWrangler4.149 + closed baseline.
+- [x] Record active version, effective profile, namespace/application/workflow IDs and zeroinstances; verify original delegated baseline unchanged.
+- [x] Choose one ORIGINAL future<=20min serverwindow after all preparation; activate condition0907 only; create ONE fixed private Workflow instance; unknown ACK inspectsameid, never recreate.
+- [x] Record context/presence/start/readiness/fixedACK/nativeclosure separately. Absence/no-start and independentzero before any secondcase; do not invoke terminal public close between native-absent0907 and optional0929.
+- [x] Only if nativeabsence: compare0929 with samecode/controlnamespace/originalwindow and separateoneadmission; noother variation. Record if unable or expired, never extend.
 
 ## Task3 — closure and next original circuit
-- [ ] Independently verifyzero own Container instances, close flags, restore verified baseline and inspect workflow terminal state; no premature success from timeout.
-- [ ] Save sane primary receipts in GitHub/canonical497; preserve original79593972/namespace/data and stop any owned local helper.
+- [x] Independently verifyzero own Container instances, close flags, restore verified baseline and inspect workflow terminal state; no premature success from timeout.
+- [x] Save sane primary receipts in GitHub/canonical497; preserve original79593972/namespace/data and stop any owned local helper.
 - [ ] If a positive control supplies new evidence, prepare original full AFW test with separate current eligibility/consent and closure; ask owner only at the final concrete human-auth step if required.
-- [ ] Update case02382110 once with actual new evidence under existing support authority; never claim platformrepair/rootcause or PC-off from thiscontrol.
+- [x] Update case02382110 once with actual new evidence under existing support authority; never claim platformrepair/rootcause or PC-off from thiscontrol.
+
+## Actual22Oct completion boundary
+Source f99a4ad0, CI39778497264 SUCCESS2784PASS0FAIL1SKIP and focal39778497184 PASS. Positive0907 native start/readiness/ACK and independent stop exit0;0929 not due. Closed exactbaseline0c94d94f restored3b19fa2c, terminal journal cancelled=true and allfour Workflow instances complete. Original79593972/namespace preserved. Support update1a1639eea14d9ed1 sent once. Technical control COMPLETE; next original full AFW trial is PENDING (not an executed circuit, not PC-off). See dated receipt for source, resource IDs, times, deferred Minor and unexplained previous OAuth test failure. No additional replay or activation.
