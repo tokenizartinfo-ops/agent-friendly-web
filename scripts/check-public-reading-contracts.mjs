@@ -112,15 +112,19 @@ export async function runPublicReadingCheck({
   const started = performance.now();
   const checkedAt = new Date().toISOString();
   const checks = [];
+  let windowExhausted = false;
   for (const item of REPRESENTATIONS) {
     for (const method of ['GET', 'HEAD']) {
       const remaining = Math.floor(totalTimeoutMs - (performance.now() - started));
-      if (remaining <= 0) {
+      if (windowExhausted || remaining <= 0) {
         checks.push({ id: item.id + '-' + method.toLowerCase(), path: item.path, method,
           accept: item.accept, status: null, content_type: null, bytes: 0, ok: false, error: 'window_exhausted' });
         continue;
       }
-      checks.push(await checkOne(item, method, fetchImpl, { maxBodyBytes }, Math.min(requestTimeoutMs, remaining)));
+      const check = await checkOne(item, method, fetchImpl, { maxBodyBytes }, Math.min(requestTimeoutMs, remaining));
+      checks.push(check);
+      // The last partial millisecond must not become a second request window.
+      if (check.error === 'request_timeout' && remaining <= requestTimeoutMs) windowExhausted = true;
     }
   }
   return {
