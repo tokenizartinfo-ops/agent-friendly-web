@@ -50,17 +50,19 @@ test('missing or inconsistent live event policy fails before consuming activatio
  }
 });
 
-test('native private operator resolves actual namespace and confirms exactly once',async()=>{
+for(const mode of ['rpc','workflow','workflow-closed','workflow-provider-denied','workflow-lease-withdraw','workflow-lease-rewind','workflow-lease-monotonic','workflow-lost-receipt-ack'])test('native private operator preserves confirmation authority via '+mode,async()=>{
  const {Miniflare,convertV4MiniflareOptions}=await import('miniflare'),{readFileSync}=await import('node:fs'),{buildMcpReleaseOperator}=await import('../scripts/build-mcp-release-operator.mjs');
  const identity={name:'identity',modules:true,compatibilityDate:'2026-09-07',script:`import {DurableObject} from 'cloudflare:workers';export class Own extends DurableObject{fetch(){throw Error('Actor must not be invoked');}}export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:e.NODE.idFromName('afw-own-event-first-successor-v1').toString()});}}`,durableObjects:{NODE:{className:'Own',useSQLite:true}}};
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[identity]}));
  try{
   const ids=await (await (await mf.getWorker('identity')).fetch('https://synthetic.invalid/ids')).json(),f=fixture(),p=f.bundle.policy;
   f.manifest.original.containerId=ids.original;
-  const window={startAt:Date.now()-1000,expiresAt:Date.now()+120000};Object.assign(p,window);Object.assign(p.plan,window);Object.assign(f.manifest.candidate,window);
+  const window={startAt:Date.now()-1000,expiresAt:Date.now()+(mode==='workflow-lease-monotonic'?15000:120000)};Object.assign(p,window);Object.assign(p.plan,window);Object.assign(f.manifest.candidate,window);
   const events=p.observation.configuration.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_POLICY');events.text=JSON.stringify({...JSON.parse(events.text),...window});f.update();
   const compiled=await buildMcpReleaseOperator(f.bundle),config=p.observation.configuration,versionId=p.observation.versionId,deploymentId=p.observation.deploymentId,etag='f'.repeat(64),baseVersionId='33333333-3333-4333-8333-333333333333';let gets=0;
-  const outboundService=async request=>{gets++;assert.equal(request.method,'GET');assert.equal(request.headers.get('Authorization'),'Bearer synthetic_read_credential');let result;
+  const outboundService=async request=>{
+   if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents.json')return Response.json({page:{url:'https://www.cloudflarestatus.com'},incidents:[{id:'cbvocc87nsne',name:'Workers Cron Trigger Activation Issues',status:mode==='workflow-provider-denied'?'investigating':'resolved',updated_at:'2026-10-14T00:00:00Z',components:[],incident_updates:[]}]});
+   gets++;assert.equal(request.method,'GET');assert.equal(request.headers.get('Authorization'),'Bearer synthetic_read_credential');let result;
    if(request.url.endsWith('/deployments'))result={deployments:[{id:deploymentId,strategy:'percentage',versions:[{version_id:versionId,percentage:100}]}]};
    else if(request.url.includes('/containers/'))result={id:p.observation.applicationId,account_id:policyModule.RELEASE_TARGET.accountId,scheduling_policy:'durable_object',durable_objects:{namespace_id:p.observation.namespaceId}};
    else if(request.url.includes('/scripts/'))result={id:versionId,resources:{script:{etag},bindings:config.bindings}};
@@ -68,10 +70,33 @@ test('native private operator resolves actual namespace and confirms exactly onc
    return Response.json({success:true,errors:[],result});
   };
   const operator={name:'operator',modules:true,script:compiled.script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_RELEASE_OPERATOR_ENABLED:'true',AFW_RELEASE_READ_TOKEN:'synthetic_read_credential'},durableObjects:{AFW_RELEASE_EVENTS_NODE:{className:'Own',scriptName:'identity'}},d1Databases:{RELEASE_DB:'named-activation'},outboundService};
+
+  // CI-only environment adapter: every statement still executes against native D1.
+  // The inherited Workflow and journal are unmodified; faults occur AFTER awaits.
+  if(mode.startsWith('workflow-lease-')||mode==='workflow-lost-receipt-ack'){
+   const {build}=await import('esbuild');
+   const harness = "import {AfwReleaseWorkflow as Base} from 'afw-compiled';export {default,AfwReleaseOperator} from 'afw-compiled';\n"+
+    "let injected=false,withdrawn=false;const originalWall=Date.now.bind(Date),originalMono=performance.now.bind(performance);let wallOverride,monoOffset=0;Date.now=()=>wallOverride??originalWall();Object.defineProperty(performance,'now',{value:()=>originalMono()+monoOffset});\n"+
+    "export class AfwReleaseWorkflow extends Base {constructor(ctx,env){const native=env.RELEASE_DB;const db={withSession(mode){const primary=native.withSession(mode);return {prepare(sql){const statement=primary.prepare(sql);return {bind(...args){const bound=statement.bind(...args);return {first:async()=>{const value=await bound.first();if(!injected&&sql.includes('JOIN dossier_publication_receipts')){"+
+    (mode==='workflow-lease-withdraw'?"injected=true;withdrawn=true;":
+     mode==='workflow-lease-rewind'?"injected=true;wallOverride="+window.startAt+"+1;":
+     mode==='workflow-lease-monotonic'?"injected=true;monoOffset="+window.expiresAt+"-originalWall()+50;":"")+
+    "}return value;},run:async()=>{const value=await bound.run();"+
+    (mode==='workflow-lost-receipt-ack'?"if(!injected&&sql.startsWith('INSERT INTO dossier_activation_receipts')){injected=true;throw Error('Synthetic lost receipt ACK');}":"")+
+    "return value;}};}};}};}};super(ctx,new Proxy(env,{get(target,key){if(key==='RELEASE_DB')return db;if(key==='AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED'&&withdrawn)return 'false';return Reflect.get(target,key);}}));}async run(event,step){const result=await super.run(event,step);await this.env.RELEASE_DB.withSession('first-primary').prepare('INSERT INTO afw_test_workflow_completions DEFAULT VALUES').bind().run();return result;}}\n";
+   const wrapped=await build({stdin:{contents:harness,sourcefile:'ci-confirmation-adapter.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],plugins:[{name:'actual-compiled-operator',setup(build){build.onResolve({filter:/^afw-compiled$/},()=>({path:'actual-operator',namespace:'afw-test'}));build.onLoad({filter:/.*/,namespace:'afw-test'},()=>({contents:compiled.script,loader:'js'}));}}]});
+   operator.script=wrapped.outputFiles[0].text;
+  }
   const otherIdentity={...identity,name:'other-identity'},wrong={...operator,name:'wrong',durableObjects:{AFW_RELEASE_EVENTS_NODE:{className:'Own',scriptName:'other-identity'}}},closed={...operator,name:'closed',bindings:{...operator.bindings,AFW_RELEASE_OPERATOR_ENABLED:'false'}};
   const caller={name:'caller',modules:true,compatibilityDate:'2026-09-07',bindings:{HASH:compiled.planHash},serviceBindings:Object.fromEntries([['OP','operator'],['BAD','wrong'],['CLOSED','closed']].map(([key,name])=>[key,{name,entrypoint:'AfwReleaseOperator'}])),script:`export default{async fetch(r,e){try{const key=new URL(r.url).pathname.slice(1);return Response.json(await e[key].run(e.HASH));}catch{return new Response('unavailable',{status:409});}}}`};
+  if(mode!=='rpc'){
+   operator.bindings.AFW_RELEASE_WORKFLOW_ENABLED='true';
+   if(mode!=='workflow-closed')operator.bindings.AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED='true';
+   operator.workflows={FLOW:{name:'afw-named-confirmation-test',className:'AfwReleaseWorkflow'}};
+  }
   await mf.setOptions(convertV4MiniflareOptions({workers:[identity,otherIdentity,operator,wrong,closed,caller]}));
   const db=await mf.getD1Database('RELEASE_DB','operator');
+  if(mode.startsWith('workflow-lease-')||mode==='workflow-lost-receipt-ack')await db.prepare('CREATE TABLE afw_test_workflow_completions(id INTEGER PRIMARY KEY AUTOINCREMENT)').run();
   for(const name of ['publication','activation']){const sql=readFileSync('db/dossier-'+name+'-receipt.sql','utf8').replace(/^\s*--[^\r\n]*/gm,'');for(const m of sql.matchAll(/CREATE TABLE[\s\S]*?\);|CREATE (?:UNIQUE )?INDEX[^;\r\n]+;|CREATE TRIGGER[^\r\n]*? END;/g))await db.prepare(m[0]).run();}
   const a=f.bundle.artifact,t=policyModule.RELEASE_TARGET;
   await db.prepare('INSERT INTO dossier_publication_attempts VALUES(?,?,?,?,?,?,?,?)').bind(p.plan.artifactKey,t.accountId,t.workerName,a.sourceRevision,a.sourceTree,a.programHash,a.workerHash,Date.now()).run();
@@ -79,10 +104,42 @@ test('native private operator resolves actual namespace and confirms exactly onc
   const c=await mf.getWorker('caller');
   for(const key of ['BAD','CLOSED'])assert.equal((await c.fetch('https://synthetic.invalid/'+key)).status,409);
   assert.equal(gets,0);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,0);
-  const r=await c.fetch('https://synthetic.invalid/OP');assert.equal(r.status,200);assert.equal((await r.json()).mayLaunch,false);
+  let instance,terminal;
+  if(mode==='rpc'){const r=await c.fetch('https://synthetic.invalid/OP');assert.equal(r.status,200);assert.equal((await r.json()).mayLaunch,false);}
+  else{
+   const {FLOW}=await mf.getBindings('operator');instance=await FLOW.create({id:'afw-release-'+compiled.planHash,params:{planHash:compiled.planHash}});
+   terminal=async(want)=>{const end=Date.now()+12000;let state;while(Date.now()<end){state=await instance.status();if(state.status==='complete'&&(!want||state.output?.status===want)||['errored','terminated'].includes(state.status))return state;await new Promise(resolve=>setTimeout(resolve,25));}assert.fail('Confirmation Workflow did not finish');};
+   const state=await terminal();assert.equal(state.status,'complete');assert.equal(state.output.mayRetry,false);assert.equal(state.output.operationalReadiness,false);
+   if(mode==='workflow-closed'||mode==='workflow-provider-denied'){assert.equal(state.output.status,'blocked');assert.equal(gets,0);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,0);return;}
+   if(mode.startsWith('workflow-lease-')){
+    assert.equal(state.output.status,'uncertain');assert.equal(gets,0);
+    for(const table of ['attempts','receipts','acceptances'])assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_'+table).first()).n,0,mode+' '+table);
+    return;
+   }
+   if(mode==='workflow-lost-receipt-ack'){
+    assert.equal(state.output.status,'uncertain');assert.ok(gets>0);
+    assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,1);
+    assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_receipts').first()).n,1);
+    assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_acceptances').first()).n,0);
+    assert.equal((await db.prepare('SELECT COUNT(*) n FROM afw_test_workflow_completions').first()).n,1);
+    const before=gets;await instance.restart();const end=Date.now()+12000;
+    while((await db.prepare('SELECT COUNT(*) n FROM afw_test_workflow_completions').first()).n<2){if(Date.now()>=end)assert.fail('Second native confirmation run did not complete');await new Promise(resolve=>setTimeout(resolve,25));}
+    const replay=await terminal('uncertain');
+    assert.equal(replay.output.mayRetry,false);assert.equal(replay.output.operationalReadiness,false);assert.equal(gets,before);
+    assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,1);
+    assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_receipts').first()).n,1);
+    assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_acceptances').first()).n,0);
+    return;
+   }
+   assert.equal(state.output.status,'confirmed');assert.equal(state.output.receipt.activationKey,p.plan.activationKey);assert.equal(state.output.receipt.versionId,versionId);assert.equal(state.output.receipt.deploymentId,deploymentId);
+   assert.equal(JSON.stringify(state.output).includes('synthetic_read_credential'),false);
+  }
   const expected=resolveSuccessorPreparation({scope:f.manifest.scope,original:f.manifest.original,candidate:f.manifest.candidate,namespace:{idFromName:()=>({toString:()=>ids.candidate}),idFromString:id=>({toString:()=>id})}}).candidate.scopeHash;
   assert.equal((await db.prepare('SELECT scope_hash FROM dossier_activation_attempts').first()).scope_hash,expected);
   assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_acceptances').first()).n,1);
-  const before=gets;assert.equal((await c.fetch('https://synthetic.invalid/OP')).status,409);assert.equal(gets,before);
+  const before=gets;
+  if(mode==='rpc')assert.equal((await c.fetch('https://synthetic.invalid/OP')).status,409);
+  else{await instance.restart();const replay=await terminal('uncertain');assert.equal(replay.status,'complete');assert.equal(replay.output.status,'uncertain');assert.equal(replay.output.mayRetry,false);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,1);assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_acceptances').first()).n,1);}
+  assert.equal(gets,before);
  }finally{await mf.dispose();}
 });

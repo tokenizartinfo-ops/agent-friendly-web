@@ -39,7 +39,7 @@ async function runReleaseOperator(env,args,lease){
    const expectedKey=createHash('sha256').update(JSON.stringify([row.account_id,row.worker_name,row.worker_hash])).digest('hex');if(expectedKey!==policy.plan.artifactKey)fail();
    const reader=createActivationObserver({...policy.observation,readCredential,fetchImpl});
    const observe=async(...args)=>{check();const result=await reader(...args);check();return result;};
-   const result=await createActivationJournal({db,plan:named?.plan??policy.plan,observe,timeoutMs:Math.min(20000,policy.expiresAt-Date.now())}).confirm(controller.signal);
+   const result=await createActivationJournal({db,plan:named?.plan??policy.plan,observe,now:lease?check:undefined,timeoutMs:Math.min(20000,remaining())}).confirm(controller.signal);
    check();return result;
   }catch{fail();}finally{clearTimeout(timer);controller.abort();}
 }
@@ -47,7 +47,8 @@ export class AfwReleaseOperator extends WorkerEntrypoint {
  run(...args){return runReleaseOperator(this.env,args);}
 }
 
-/** Administrative API adapter only. No schedule, HTTP or client event consumer. */
+/** Administrative API adapter only. Named confirmation requires its own opt-in.
+ * No schedule, HTTP or client event consumer. */
 export class AfwReleaseWorkflow extends WorkflowEntrypoint {
  async run(event,step){
   const outcome=status=>({status,mayRetry:false,operationalReadiness:false});
@@ -57,21 +58,26 @@ export class AfwReleaseWorkflow extends WorkflowEntrypoint {
    validateReleaseOperatorBundle(bundle);policy=bundle.policy;
    expectedHash=createHash('sha256').update(JSON.stringify(bundle)).digest('hex');
    const payload=event?.payload;
-   if(policy.operation!=='publish'||event?.schedule!==undefined||event?.instanceId!=='afw-release-'+expectedHash||!payload||Object.getPrototypeOf(payload)!==Object.prototype||Reflect.ownKeys(payload).length!==1||!Object.hasOwn(payload,'planHash')||payload.planHash!==expectedHash)return outcome('blocked');
+   if(policy.operation!=='publish'&&(policy.operation!=='confirm_named'||env.AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED!=='true')||event?.schedule!==undefined||event?.instanceId!=='afw-release-'+expectedHash||!payload||Object.getPrototypeOf(payload)!==Object.prototype||Reflect.ownKeys(payload).length!==1||!Object.hasOwn(payload,'planHash')||payload.planHash!==expectedHash)return outcome('blocked');
   }catch{return outcome('blocked');}
   const admittedAt=Date.now(),admittedMono=performance.now(),monotonicEnd=admittedMono+(policy.expiresAt-admittedAt);
   let lastWall=admittedAt,lastMono=admittedMono;
-  const current=()=>{try{const now=Date.now(),mono=performance.now();if(env.AFW_RELEASE_OPERATOR_ENABLED!=='true'||env.AFW_RELEASE_WORKFLOW_ENABLED!=='true'||!Number.isSafeInteger(now)||!Number.isFinite(mono)||mono<lastMono||mono>=monotonicEnd||now<lastWall||now<policy.startAt||now>=policy.expiresAt)return false;lastWall=now;lastMono=mono;return true;}catch{return false;}};
+  const current=()=>{try{const now=Date.now(),mono=performance.now();if(env.AFW_RELEASE_OPERATOR_ENABLED!=='true'||env.AFW_RELEASE_WORKFLOW_ENABLED!=='true'||policy.operation==='confirm_named'&&env.AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED!=='true'||!Number.isSafeInteger(now)||!Number.isFinite(mono)||mono<lastMono||mono>=monotonicEnd||now<lastWall||now<policy.startAt||now>=policy.expiresAt)return false;lastWall=now;lastMono=mono;return true;}catch{return false;}};
   const remaining=()=>Math.max(1,Math.floor(Math.min(policy.expiresAt-Date.now(),monotonicEnd-performance.now())));
   if(!current())return outcome('blocked');
   try{
-   return await step.do('publish-closed-release',{retries:{limit:0,delay:1000,backoff:'constant'},timeout:Math.min(70000,remaining())},async()=>{
+   return await step.do(policy.operation==='publish'?'publish-closed-release':'confirm-named-activation',{retries:{limit:0,delay:1000,backoff:'constant'},timeout:Math.min(70000,remaining())},async()=>{
     if(!current())return outcome('blocked');
     const gate=await checkOwnCronProvider({fetchImpl:(url,init)=>fetch(url,{...init,redirect:'manual'}),timeoutMs:Math.min(5000,remaining())});
     if(!current()||gate.providerGate!=='resolved'||gate.mayRunClosedVerification!==true)return outcome('blocked');
     try{
      const result=await runReleaseOperator(env,[expectedHash],{current,remaining});
-     if(!current()||result?.mayDeploy!==false||typeof result.artifactKey!=='string'||!/^[a-f0-9]{64}$/.test(result.artifactKey)||typeof result.versionId!=='string'||!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(result.versionId))return outcome('uncertain');
+     if(!current())return outcome('uncertain');
+     if(policy.operation==='confirm_named'){
+      if(result?.mayLaunch!==false||result.activationKey!==policy.plan.activationKey||result.versionId!==policy.observation.versionId||result.deploymentId!==policy.observation.deploymentId||!Number.isSafeInteger(result.confirmedAt)||result.confirmedAt<policy.startAt||result.confirmedAt>=policy.expiresAt||result.confirmedAt>Date.now())return outcome('uncertain');
+      return {...outcome('confirmed'),receipt:{activationKey:result.activationKey,versionId:result.versionId,deploymentId:result.deploymentId}};
+     }
+     if(result?.mayDeploy!==false||typeof result.artifactKey!=='string'||!/^[a-f0-9]{64}$/.test(result.artifactKey)||typeof result.versionId!=='string'||!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(result.versionId))return outcome('uncertain');
      return {...outcome('confirmed'),receipt:{artifactKey:result.artifactKey,versionId:result.versionId}};
     }catch{return outcome('uncertain');}
    });
