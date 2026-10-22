@@ -113,7 +113,7 @@ test('bounds streamed bytes, cancels overflow, and never includes bodies in the 
 
 test('deadline includes stalled bodies and does not wait for cancellation acknowledgement', async () => {
   let cancelled = 0;
-  const result = await runPublicReadingCheck({ requestTimeoutMs: 10, totalTimeoutMs: 500, fetchImpl: altered((url, options, response) =>
+  const result = await runPublicReadingCheck({ requestTimeoutMs: 10, fetchImpl: altered((url, options, response) =>
     options.method === 'GET' ? new Response(new ReadableStream({
       pull() { return new Promise(() => {}); },
       cancel() { cancelled++; return new Promise(() => {}); },
