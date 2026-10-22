@@ -39,7 +39,7 @@ async function runReleaseOperator(env,args,lease){
    const expectedKey=createHash('sha256').update(JSON.stringify([row.account_id,row.worker_name,row.worker_hash])).digest('hex');if(expectedKey!==policy.plan.artifactKey)fail();
    const reader=createActivationObserver({...policy.observation,readCredential,fetchImpl});
    const observe=async(...args)=>{check();const result=await reader(...args);check();return result;};
-   const result=await createActivationJournal({db,plan:named?.plan??policy.plan,observe,now:lease?check:undefined,timeoutMs:Math.min(20000,remaining())}).confirm(controller.signal);
+   const result=await createActivationJournal({db,plan:named?.plan??policy.plan,observe}).confirm(controller.signal);
    check();return result;
   }catch{fail();}finally{clearTimeout(timer);controller.abort();}
 }
