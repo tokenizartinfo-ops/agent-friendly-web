@@ -6,6 +6,8 @@ on:
       - '.github/workflows/afw-public-edge-check.yml'
       - 'scripts/smoke-cloudflare-native-local.mjs'
       - 'test/cloudflare-native-parity.test.mjs'
+      - 'scripts/check-public-reading-contracts.mjs'
+      - 'test/public-reading-contracts.test.mjs'
   workflow_dispatch:
 
 permissions:
@@ -15,7 +17,7 @@ jobs:
   verify:
     if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && (github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 4
     steps:
       - uses: actions/checkout@v4
         with:
@@ -25,18 +27,23 @@ jobs:
         with:
           node-version: '22'
       - name: Verify the existing public and private boundary contracts with fixtures
-        run: node --test test/cloudflare-native-parity.test.mjs
+        run: node --test test/cloudflare-native-parity.test.mjs test/public-reading-contracts.test.mjs
       - name: Observe the fixed public origin without authentication
         if: github.event_name == 'workflow_dispatch'
         shell: bash
         run: |
           set -o pipefail
-          node scripts/smoke-cloudflare-native-local.mjs --base-url https://agentfriendlyweb.dev --mode public-edge | tee "$RUNNER_TEMP/afw-public-edge.json"
+          status=0
+          node scripts/smoke-cloudflare-native-local.mjs --base-url https://agentfriendlyweb.dev --mode public-edge | tee "$RUNNER_TEMP/afw-public-edge.json" || status=1
+          node scripts/check-public-reading-contracts.mjs | tee "$RUNNER_TEMP/afw-public-reading.json" || status=1
+          exit "$status"
       - name: Preserve the dated run result without deploying
         if: always() && github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:
           name: afw-public-edge-${{ github.run_id }}-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/afw-public-edge.json
+          path: |
+            ${{ runner.temp }}/afw-public-edge.json
+            ${{ runner.temp }}/afw-public-reading.json
           if-no-files-found: error
           retention-days: 7
