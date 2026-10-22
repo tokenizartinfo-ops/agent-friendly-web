@@ -4,6 +4,8 @@ on:
     paths:
       - 'examples/container-control-20261022/**'
       - 'test/independent-container-control.test.mjs'
+      - 'test/independent-container-control-native.test.mjs'
+      - 'test/fixtures/independent-container-control-worker.mjs'
       - '.github/workflows/afw-independent-container-control.yml'
   workflow_dispatch:
 permissions:
