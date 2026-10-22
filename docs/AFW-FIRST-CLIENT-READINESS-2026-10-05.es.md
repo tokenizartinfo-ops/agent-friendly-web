@@ -1,3 +1,24 @@
+# Actualización de preparación del piloto — 22 de octubre de2026
+
+Este es un mapa de dependencias, no una autorización para abrir ensayos o invitar al cliente. La [continuidad operativa en issue497](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497) conserva versiones y recibos posteriores; el [cierre del22oct](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497#issuecomment-6339654501) documenta el último bloque público y de soporte.
+
+| Frente | Trabajo ya construido o comprobado | Pendiente para el piloto |
+| --- | --- | --- |
+| Recorrido humano y correo desde hello@ | Los recibos del18oct debajo acreditan guía, guardado y un borrador de invitación específico, todavía sin aprobar ni enviar | Sesión y objetivo propios de Max, rollout autorizado para su expediente y aprobación del primer envío sobre su versión exacta |
+| Consumo por agentes externos | Contratos, consumidor de referencia, preparación y recuperación por referencias probados en Actions; [guía de integración](AFW-AGENT-INTEGRATION-GUIDE.es.md) y paquete cerrado separados de la oferta comercial | Cliente/identidad/alcance reales y recorrido alojado aceptado; precios y pagos siguen sin aprobarse. No es un requisito añadir contratación agéntica al piloto humano |
+| Ingreso propio para nuevos ensayos privados | Soporte confirmó que el intento del21oct fue rechazado antes de generar un código; se envió una aclaración con la cronología y los eventos de auditoría | Correlacionar aplicación/política evaluada y preparar un ensayo nuevo solo con un plan vigente. No pedir más códigos por inercia; no se acredita la misma causa para el acceso de Max |
+| Avisos y revisión cloud | Fuente y ensayos históricos separados; el fallo nativo de Container conserva el caso02382110 | Evidencia técnica nueva y verificación propia del catálogo, alta, aviso firmado, revisión útil y retirada nativa |
+| Lectura pública y protección | WAF04:21comprobaciones pasaron durante y después; control403 observado y regla propia retirada. No hay correlación positiva del evento y apareció una diferencia de catálogo | No tomarlo como aceptación integral del WAF, arreglo de ingreso/Container, nuevo puntaje externo o vigilancia permanente |
+| Ordenador apagado | No hay aceptación del recorrido integrado actual | Primero la cadena privada anterior; después acordar el intervalo apagado y correlacionar ejecución y recibos con ese intervalo |
+
+El plan Pro del sitio no demuestra una ampliación de Zero Trust ni de Workers. No cambia por sí solo el alcance de los permisos o los gates pendientes.
+
+El avance de fuente y documentación puede continuar sin el cliente. La experiencia real exige sus propias decisiones y consentimiento; no crear su expediente ni atribuirle datos o permisos. El copilot de producto, un turno cloud concluido y una guardia permanente son capacidades diferentes. La automatización local de seguimiento está pausada; este documento no activa avisos.
+
+La sección del18oct y los registros anteriores se preservan como evidencia fechada. Sus casillas históricas no deben convertirse de nuevo en una lista de desarrollos pendientes ni sustituir los recibos posteriores.
+
+---
+
 # Estado vigente del primer piloto: 18 octubre de 2026
 
 Preparación autónoma consolidada: [cierre previo al ensayo](AFW-PRETRIAL-AUTONOMOUS-CLOSURE-2026-10-18.es.md). Se publicaron la recuperación del guardado de campos, del relato privado y la elección visible entre versiones; se preservan los permisos y el pin propio. El [nuevo borrador de invitación](AFW-FIRST-PILOT-INVITATION-DRAFT-2026-10-18.es.md), hash99c739cc, ya tiene destinatario, asunto y pie de cliente propios, cinco paneles y comprobación visual; permanece sin aprobar/enviar. No sustituye los gates cloud ni la sesión del cliente. El preview14oct descrito debajo se conserva como evidencia histórica del paquete del owner, no como el nuevo paquete destinado a Max.
