@@ -1,6 +1,6 @@
 # AFW para integradores de agentes
 
-19 de octubre de2026. Proyecto AFW, repositorio tokenizartinfo-ops/agent-friendly-web.
+19 de octubre de2026; guía revisada el 22 de octubre de2026. Proyecto AFW, repositorio tokenizartinfo-ops/agent-friendly-web.
 
 Este paquete es una referencia de código y una demo sintética: no abre el servicio privado a agentes externos ni ofrece tarifas. Ayuda a integrar operaciones pequeñas sobre el mismo expediente, con revisiones, decisiones y comprobaciones trazables. No reemplaza el consentimiento del titular ni convierte una respuesta del modelo en autorización.
 
@@ -21,7 +21,8 @@ Preparar, aprobar, instalar y verificar son estados distintos; un archivo genera
 | A2A público | diagnóstico JSONRPC SendMessage en a2a.agentfriendlyweb.dev/a2a | Recibo2oct2026: diagnóstico público; tarjeta excluye streaming, push y tareas reanudables. No es delegación comercial asíncrona. |
 | MCP privado de lectura | read_project_summary, read_saved_evidence y opt-in read_project_next_step | Pilotos restringidos por cliente/proyecto/identidad. G2 real19oct aceptó200/409/403; el runtime quedó cerrado. Otros integradores no obtienen acceso al copiar un ejemplo. Evidencia opcional requiere alcance propio. |
 | Núcleo de catálogo/cotización | afw.catalog.describe, afw.quote.preview | Contratos internos, sin endpoint de contratación ni cobro. Sin precio significa null, nunca cero. |
-| Preparación con escritura, instalación y pagos | borradores/cápsulas, aceptación durable, adaptadores de hosting | Roadmap: no hay permiso de ejecución por estas filas. |
+| Preparación de borradores/cápsulas | Consentimiento propio, preparación, reconciliación y retirada | Fuente implementada y probada con SDK/D1 en Actions; paquete de Worker cerrado preparado. No es un servicio abierto ni una conexión disponible para terceros. Ver la distinción de estados y los gates debajo. |
+| Instalación y pagos | Adaptadores de hosting, aceptación comercial durable y cobro | Etapas posteriores; no se concede permiso de ejecución, publicación o gasto desde esta guía. |
 | Eventos privados y supervisión cloud | aviso, revisión útil y baja nativa | Aceptación pendiente; no anunciar guardia permanente ni operación PC-off desde G2. |
 
 Los identificadores afw.* son nombres del dominio interno. No se invocan como si fueran nombres MCP publicados.
@@ -106,12 +107,29 @@ No hay incentivo, descuento o crédito activado por invocar la demo. Las modalid
 ## Próximos bloques
 
 - Montaje de un catálogo operativo con evidencia de versión y fecha antes de declarar disponibilidad.
-- Preparación de borradores/cápsulas con identidad, alcance de escritura, revisión optimista, idempotencia, auditoría y rollback propios.
+- Completar la aceptación alojada de la preparación ya construida: identidad y proyecto reales, registro del cliente, permiso específico, preparación/reconciliación, retirada y recuperación comprobadas. No repetir el desarrollo de fuente como si aún no existiera.
 - Política de costos/precios, aceptación durable y conciliación antes de cobros.
 - Primer adaptador de instalación autorizado y probado por plataforma/hosting.
 - Delegación asíncrona solo cuando aviso, revisión útil y retirada tengan aceptación propia.
 
 La demo y la guía no activan estos bloques. El incidente Container y los gates PC-off/Max se mantienen separados. Trabajo de investigación de Chavo puede alimentar decisiones comerciales; no constituye una tarifa, contrato o capacidad de runtime.
+
+## Estado de integración revisado — 22 de octubre de2026
+
+La tabla anterior distingue superficies y alcance; no constituye una oferta de acceso. Antes de diseñar una integración, separar estos cuatro estados:
+
+| Estado | Qué acredita | Qué falta para avanzar |
+| --- | --- | --- |
+| Fuente y pruebas | Contratos y comportamiento ejercitados en Actions, con fixtures o identidad de prueba | No acredita identidad humana, disponibilidad alojada o permiso real |
+| Paquete cerrado | Código compilado y perfil que impide operar por defecto | Confirmar el destino, su configuración efectiva y una recuperación compatible; un artefacto no acredita publicación |
+| Ensayo propio aceptado y retirado | El recibo fechado acredita solo el recorrido y los permisos probados | Otro integrador necesita su propio cliente, proyecto, alcance y aceptación; no hereda el permiso anterior |
+| Servicio disponible para ese consumidor | Exige evidencia vigente de despliegue y configuración, identidad, consentimiento y recorrido completo para ese alcance | Comprobarla en la conexión concreta antes de invocar; una etiqueta «Conectado» no sustituye esa lectura |
+
+Para preparación existen [el servicio y su recuperación por referencia](AFW-AGENT-CAPSULE-PREPARATION-SERVICE-2026-10-19.es.md), [el montaje MCP acotado](AFW-PREPARATION-MCP-MOUNT-2026-10-20.es.md), [el token host](AFW-PREPARATION-TOKEN-HOST-2026-10-20.es.md), [las conexiones y su retirada](AFW-PREPARATION-CONNECTIONS-HTTP-2026-10-20.es.md) y [el paquete cerrado](AFW-PREPARATION-WORKER-PACKAGE-2026-10-20.es.md). Sus pruebas y recibos tienen alcances distintos; estas referencias no acreditan una apertura comercial. El [borrador interno de cliente](AFW-PREPARATION-CLIENT-DRAFT-2026-10-21.es.md) conserva proyecto y rutas concretos: no registra un cliente, no concede consentimiento ni crea una conexión.
+
+La [continuidad operativa en issue497](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497) es la referencia para versiones, ensayos y cierres posteriores. En el [cierre del22oct](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497#issuecomment-6339654501), la autorización de ingreso sigue pendiente de correlación con soporte y Container conserva un caso separado. La lectura pública y un bloqueo403 del control WAF no prueban que funcione el flujo privado, ni la suscripción, la revisión útil, la retirada nativa o el ensayo con el ordenador apagado. No abrir OAuth ni reutilizar una ventana vencida para comprobar esta guía.
+
+La actualización del20oct que sigue conserva su fecha y alcance; sus pendientes describen aquel paquete, no niegan el trabajo posterior.
 
 ## Actualización20oct2026: preparación y recuperación, fuente cerrada
 PR524 incorporó un paquete separado de Worker y compilación con procedencia en Actions. Reutiliza el router/AS/KV/D1 aceptados y fechas originales; no tiene destino/despliegue/DDL/cliente/permiso nuevo. Esa fuente no convierte la fila de preparación en un servicio público abierto. G2 de lectura ya está cerrado; no renovar OAuth para ejecutar una demo.
