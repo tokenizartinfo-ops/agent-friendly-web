@@ -12,3 +12,9 @@ Cierre: caso positivo confirm_named guarda una aceptación primaria con scope de
 
 ## Regresión primaria
 CI39809096512/job119930153168 sobre0e0d33c224b2bd2cb38c9cf68ebab6d28cfd2227 reprodujo el hueco: el Workflow devolvió blocked donde el caso nativo exigía confirmed; RPC, opt-in ausente y proveedor bloqueado aprobaron. No fue un fallo de Cloudflare ni una credencial real. El lease del Workflow se propaga también al diario de confirmación mediante su now/check y remaining originales. Publicación conserva su flujo y recibo; confirm simple sigue rechazado.
+
+
+## Cierre del hallazgo de revisión
+La revisión independiente de eeb59ce pidió comprobar la autoridad dentro de los awaits del diario, no solo en su entrada/salida. La mutación deliberada a912d014 retiró únicamente el paso now/check/remaining al diario: CI39811433258/job119938424067 produjo exactamente dos fallos nuevos, retiro del tercer opt-in y agotamiento monotónico después del SELECT primario, ambos por consumir un intento que debía permanecer en cero. Rewind y pérdida del ACK del recibo también se ejercitaron con D1/Workflow nativos. Esta mutación nunca se despliega ni se integra; se restaura exactamente la fuente eeb59ce.
+
+El adaptador CI envuelve el entorno y reenvía todas las sentencias a D1 real; no altera el método run heredado ni el diario. El caso ACK perdido conserva un recibo primario pero cero aceptaciones. Una tabla exclusiva de fixture registra el fin real de cada run para que el control después de restart no lea por error el estado terminal anterior. El ensayo prueba estados sintéticos del entorno, no revocación dinámica de bindings alojados. La PR568 y tracker497 conservan el GREEN y veredicto finales, sin anticiparlos aquí.

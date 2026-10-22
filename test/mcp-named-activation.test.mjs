@@ -50,7 +50,7 @@ test('missing or inconsistent live event policy fails before consuming activatio
  }
 });
 
-for(const mode of ['rpc','workflow','workflow-closed','workflow-provider-denied','workflow-lease-withdraw','workflow-lease-rewind','workflow-lease-monotonic','workflow-lost-receipt-ack'])test('native private operator confirms exactly once via '+mode,async()=>{
+for(const mode of ['rpc','workflow','workflow-closed','workflow-provider-denied','workflow-lease-withdraw','workflow-lease-rewind','workflow-lease-monotonic','workflow-lost-receipt-ack'])test('native private operator preserves confirmation authority via '+mode,async()=>{
  const {Miniflare,convertV4MiniflareOptions}=await import('miniflare'),{readFileSync}=await import('node:fs'),{buildMcpReleaseOperator}=await import('../scripts/build-mcp-release-operator.mjs');
  const identity={name:'identity',modules:true,compatibilityDate:'2026-09-07',script:`import {DurableObject} from 'cloudflare:workers';export class Own extends DurableObject{fetch(){throw Error('Actor must not be invoked');}}export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:e.NODE.idFromName('afw-own-event-first-successor-v1').toString()});}}`,durableObjects:{NODE:{className:'Own',useSQLite:true}}};
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[identity]}));
@@ -83,7 +83,7 @@ for(const mode of ['rpc','workflow','workflow-closed','workflow-provider-denied'
      mode==='workflow-lease-monotonic'?"injected=true;monoOffset="+window.expiresAt+"-originalWall()+50;":"")+
     "}return value;},run:async()=>{const value=await bound.run();"+
     (mode==='workflow-lost-receipt-ack'?"if(!injected&&sql.startsWith('INSERT INTO dossier_activation_receipts')){injected=true;throw Error('Synthetic lost receipt ACK');}":"")+
-    "return value;}};}};}};}};super(ctx,new Proxy(env,{get(target,key){if(key==='RELEASE_DB')return db;if(key==='AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED'&&withdrawn)return 'false';return Reflect.get(target,key);}}));}}\n";
+    "return value;}};}};}};}};super(ctx,new Proxy(env,{get(target,key){if(key==='RELEASE_DB')return db;if(key==='AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED'&&withdrawn)return 'false';return Reflect.get(target,key);}}));}async run(event,step){const result=await super.run(event,step);await this.env.RELEASE_DB.withSession('first-primary').prepare('INSERT INTO afw_test_workflow_completions DEFAULT VALUES').bind().run();return result;}}\n";
    const wrapped=await build({stdin:{contents:harness,sourcefile:'ci-confirmation-adapter.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],plugins:[{name:'actual-compiled-operator',setup(build){build.onResolve({filter:/^afw-compiled$/},()=>({path:'actual-operator',namespace:'afw-test'}));build.onLoad({filter:/.*/,namespace:'afw-test'},()=>({contents:compiled.script,loader:'js'}));}}]});
    operator.script=wrapped.outputFiles[0].text;
   }
@@ -96,6 +96,7 @@ for(const mode of ['rpc','workflow','workflow-closed','workflow-provider-denied'
   }
   await mf.setOptions(convertV4MiniflareOptions({workers:[identity,otherIdentity,operator,wrong,closed,caller]}));
   const db=await mf.getD1Database('RELEASE_DB','operator');
+  if(mode.startsWith('workflow-lease-')||mode==='workflow-lost-receipt-ack')await db.prepare('CREATE TABLE afw_test_workflow_completions(id INTEGER PRIMARY KEY AUTOINCREMENT)').run();
   for(const name of ['publication','activation']){const sql=readFileSync('db/dossier-'+name+'-receipt.sql','utf8').replace(/^\s*--[^\r\n]*/gm,'');for(const m of sql.matchAll(/CREATE TABLE[\s\S]*?\);|CREATE (?:UNIQUE )?INDEX[^;\r\n]+;|CREATE TRIGGER[^\r\n]*? END;/g))await db.prepare(m[0]).run();}
   const a=f.bundle.artifact,t=policyModule.RELEASE_TARGET;
   await db.prepare('INSERT INTO dossier_publication_attempts VALUES(?,?,?,?,?,?,?,?)').bind(p.plan.artifactKey,t.accountId,t.workerName,a.sourceRevision,a.sourceTree,a.programHash,a.workerHash,Date.now()).run();
@@ -120,7 +121,10 @@ for(const mode of ['rpc','workflow','workflow-closed','workflow-provider-denied'
     assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,1);
     assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_receipts').first()).n,1);
     assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_acceptances').first()).n,0);
-    const before=gets;await instance.restart();const replay=await terminal('uncertain');
+    assert.equal((await db.prepare('SELECT COUNT(*) n FROM afw_test_workflow_completions').first()).n,1);
+    const before=gets;await instance.restart();const end=Date.now()+12000;
+    while((await db.prepare('SELECT COUNT(*) n FROM afw_test_workflow_completions').first()).n<2){if(Date.now()>=end)assert.fail('Second native confirmation run did not complete');await new Promise(resolve=>setTimeout(resolve,25));}
+    const replay=await terminal('uncertain');
     assert.equal(replay.output.mayRetry,false);assert.equal(replay.output.operationalReadiness,false);assert.equal(gets,before);
     assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_attempts').first()).n,1);
     assert.equal((await db.prepare('SELECT COUNT(*) n FROM dossier_activation_receipts').first()).n,1);
