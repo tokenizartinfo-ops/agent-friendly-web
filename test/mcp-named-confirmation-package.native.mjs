@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {registerHooks} from 'node:module';
+import {rehearseExactNamedConfirmation} from './fixtures/named-confirmation-native-rehearsal.mjs';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {activationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
 import {inertNamedConfirmationPolicy} from './fixtures/inert-named-confirmation-policy.mjs';
@@ -123,4 +124,25 @@ test('caller mutation during real compilation cannot change the captured authori
  assert.equal(built.planHash,hash(captured));assert.equal(built.expiresAt,originalExpiry);
  assert.equal(built.workerHash,artifact.workerHash);assert.ok(!built.script.includes('caller_mutation_must_not_compile'));
  assert.notEqual(JSON.stringify(input),captured,'caller mutation actually occurred');
+});
+
+test('exact historical bytes confirm through native Workflow and primary acceptance',available,async()=>{
+ const r=await rehearseExactNamedConfirmation({artifact,build:buildMcpNamedConfirmation,mode:'confirmed'});
+ assert.equal(r.httpStatus,404);
+ assert.deepEqual(r.output,{status:'confirmed',mayRetry:false,operationalReadiness:false,receipt:{activationKey:r.activationKey,versionId:r.versionId,deploymentId:r.deploymentId}});
+ assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
+ assert.equal(r.counters.providerReads,1);assert.equal(r.counters.apiReads,7);
+ assert.ok(r.counters.largestReplyBytes>2097152,'actual multi-megabyte historical module must cross the native reader');
+});
+test('last-byte corruption of the real historical artifact never creates acceptance',available,async()=>{
+ const r=await rehearseExactNamedConfirmation({artifact,build:buildMcpNamedConfirmation,mode:'tail-corrupt'});
+ assert.deepEqual(r.output,{status:'uncertain',mayRetry:false,operationalReadiness:false});
+ assert.deepEqual(r.counts,{attempts:1,receipts:0,acceptances:0});
+ assert.equal(r.counters.apiReads,1);assert.ok(r.counters.largestReplyBytes>2097152);
+});
+test('regional Workers incident blocks the exact package before API reads and journal admission',available,async()=>{
+ const r=await rehearseExactNamedConfirmation({artifact,build:buildMcpNamedConfirmation,mode:'regional-incident'});
+ assert.deepEqual(r.output,{status:'blocked',mayRetry:false,operationalReadiness:false});
+ assert.deepEqual(r.counts,{attempts:0,receipts:0,acceptances:0});
+ assert.deepEqual(r.counters,{providerReads:1,apiReads:0,largestReplyBytes:0});
 });
