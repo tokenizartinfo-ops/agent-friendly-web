@@ -57,7 +57,7 @@ Todos deben corresponder al mismo predecesor, intento, fuente y receptor:
 - Artefacto/despliegue y recuperación compatibles verificados para el nuevo plan.
 - Plan administrativo finito y disponibilidad pública del proveedor comprobados de nuevo.
 
-**Falta un cierre de evidencia:** el esquema actual de suscripción no persiste una aceptación durable de revisión útil del cliente. Antes de habilitar la segunda ocurrencia se deberá definir y probar un registro administrativo append-only ligado a esos recibos y al turno observado. Una declaración enviada en JSON por el cliente no puede satisfacerlo. Si la plataforma no ofrece prueba criptográfica del turno, el registro será una atestación explícita del operador sobre lectura autenticada, no una supuesta firma de OpenAI.
+**Faltan cierres de evidencia:** el recibo actual de suscripción acredita que el productor completó ese paso; no persiste la entrega y el ACK del receptor ni una aceptación durable de su revisión útil. Antes de habilitar la segunda ocurrencia, el contrato pendiente deberá definir y probar la procedencia confiable de esa entrega/ACK correlacionada y un registro administrativo append-only ligado a sus recibos y al turno observado. Una declaración enviada en JSON por el cliente no puede satisfacerlo. Si la plataforma no ofrece prueba criptográfica del turno, el registro será una atestación explícita del operador sobre lectura autenticada, no una supuesta firma de OpenAI.
 
 No se inventan aquí campos o endpoints de ese registro: su interfaz debe cerrarse después de observar el primer recorrido real y antes de implementar el gate adicional. Esa dependencia impide ejecutar este diseño tal como está.
 
