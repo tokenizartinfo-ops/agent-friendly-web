@@ -1,0 +1,10 @@
+{
+  "baseVersionId": "79593972-3200-464f-aff6-76f5864dd399",
+  "artifactKey": "c83433191c7e38a80ddf022de41723c15bdae248266c4b8d53d035b44c2235a6",
+  "sourceRevision": "3d4e9d5d20b6185a5d3dcfceae191046e921e1cb",
+  "sourceTree": "eaf5cfd62ba63e693dc944b7134981581cfc8ed8",
+  "programHash": "f6f517c3ac135cfa7b9853137e0487f768b8f24a11e24959a337cac4e28d42e6",
+  "workerHash": "26ec0366a57fcc2c6bbc832a85d79b24e23e4a1a55e5ab42ebbd28284ed4d4c2",
+  "workerBytes": 1792585,
+  "sourceCheck": "git-inputs-before-after-v1"
+}
