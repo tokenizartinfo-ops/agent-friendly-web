@@ -110,3 +110,13 @@ test('sanitizes transport errors and refuses invalid request deadlines without a
     assert.equal(result.outcome, 'invalid_limits');
   }
 });
+
+test('does not accept headers delivered after the monotonic deadline while timers were delayed', async () => {
+  const r = await runPublicWafProbe({ ...window(), requestTimeoutMs: 1, fetchImpl: () => {
+    const end = performance.now() + 5;
+    while (performance.now() < end) { /* Simulate a blocked event loop. */ }
+    return new Response(null, { status: 403, headers: { 'cf-ray': 'abcdef0123456789-EZE' } });
+  } });
+  assert.equal(r.outcome, 'request_timeout');
+  assert.equal(r.ray_id, null);
+});
