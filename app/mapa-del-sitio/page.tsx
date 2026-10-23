@@ -42,6 +42,7 @@ const humanRoutes = [
 ];
 
 const machineResources = [
+  { name: 'A2A public diagnostic', detail: 'Tarjeta del diagnostico publico JSONRPC; evidencia fechada, sin expedientes privados ni avisos push.', href: '/.well-known/agent-card.json', icon: Network },
   { name: 'robots.txt', detail: 'Politica publica de rastreo y Content Signals.', href: '/robots.txt', icon: Bot },
   { name: 'sitemap.xml', detail: 'Indice canonico de paginas HTML publicas.', href: '/sitemap.xml', icon: Map },
   { name: 'llms.txt', detail: 'Indice conciso propuesto para asistentes y agentes.', href: '/llms.txt', icon: FileText },
@@ -58,7 +59,7 @@ const machineResources = [
   { name: 'Comparison contract', detail: 'Contrato del comparador local de evidencia.', href: '/.well-known/readiness-comparison-contract.json', icon: Braces },
   { name: 'Assistant contract', detail: 'Limites machine-readable del prototipo de intake.', href: '/.well-known/intake-assistant-contract.json', icon: Braces },
   { name: 'Public guide contract', detail: 'Contrato machine-readable de la guia determinista y no persistente.', href: '/.well-known/public-guide-contract.json', icon: Braces },
-  { name: 'Email operations contract', detail: 'Plan local draft-only; no hay casilla, DNS, proveedor, lectura ni envio activos.', href: '/.well-known/email-operations-contract.json', icon: Braces },
+  { name: 'Email operations contract', detail: 'Plan de automatizacion, sin envio autonomo habilitado; pruebas asistidas previas separadas de disponibilidad actual no comprobada.', href: '/.well-known/email-operations-contract.json', icon: Braces },
   { name: 'CRM Lite contract', detail: 'Plan local metadata-only; no guarda contactos reales ni ejecuta acciones comerciales.', href: '/.well-known/crm-lite-contract.json', icon: Braces },
   { name: 'OKF v0.2 index', detail: 'Indice canonico del conocimiento publico versionado.', href: '/okf/v0.2/index.md', icon: FileText },
   { name: 'OKF manifest', detail: 'Inventario, version, licencia y hashes de distribucion.', href: '/okf/v0.2/manifest.json', icon: Braces },
@@ -95,10 +96,10 @@ const roadmap = [
   ['Markdown negociado', 'deployed', 'Desplegado con Vary: Accept y verificado externamente.'],
   ['WebMCP read-only', 'deployed', 'Tool in-page publica read-only desplegada; tecnologia experimental.'],
   ['Voz y guardado asistido', 'planned', 'Permanecen fuera del prototipo hasta contratos, consentimiento y auditoria.'],
-  ['Correo operativo', 'documented', 'Contrato de planificacion publicado; casilla, DNS, proveedor, lectura y envio siguen desactivados.'],
+  ['Correo operativo', 'documented', 'La automatizacion no esta habilitada por este contrato. Las pruebas asistidas previas no acreditan disponibilidad actual.'],
   ['CRM Lite', 'documented', 'Modelo metadata-only documentado; no hay persistencia remota, contactos reales ni acciones comerciales.'],
   ['Plugins y conectores', 'planned', 'Cada plataforma requiere un adaptador oficial y una capacidad verificable.'],
-  ['A2A', 'planned', 'No se publica Agent Card ni delegacion entre agentes.'],
+  ['A2A', 'deployed', 'Diagnostico publico con tarjeta observada el 21/10/2026; sin expedientes privados, streaming, push ni delegacion asincrona.'],
   ['x402', 'research', 'No hay recursos pagos ni flujo HTTP 402 activo.'],
 ];
 

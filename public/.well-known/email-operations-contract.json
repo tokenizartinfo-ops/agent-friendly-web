@@ -1,7 +1,10 @@
 {
   "contract": "agent-friendly-web.email-operations.v1",
   "status": "planned_draft_only",
-  "updated_at": "2026-08-31",
+  "updated_at": "2026-10-23",
+  "scope": "public_automation_contract",
+  "description": "Draft-only states, capability flags and candidate_not_configured address statuses describe automation or provisioning supplied by this contract only. They do not assert absence of an existing provider, DNS routing, aliases or prior assisted mail operations. This contract provides no autonomous mail API and authorizes no mail operation.",
+  "current_availability": "not_assessed",
   "canonical_address": {
     "address": "hello@agentfriendlyweb.dev",
     "status": "candidate_not_configured"
@@ -45,5 +48,24 @@
     "read_attachments"
   ],
   "requires_separate_remote_approval": true,
+  "historical_acceptance": [
+    {
+      "date": "2026-10-01",
+      "scope": "dated_assisted_mail_acceptance",
+      "summary": "Assisted sending and inbound routing reception were confirmed. A manual cloud mail-reading execution was observed separately. This is historical evidence, not current availability or autonomous reply acceptance.",
+      "references": [
+        "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/AFW-EMAIL-READINESS-2026-10-01.es.md",
+        "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/AFW-CLOUD-MAIL-ACCEPTANCE-2026-10-01.es.md"
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "scope": "dated_approved_own_cloud_mail_acceptance",
+      "summary": "An explicitly approved own cloud send produced a receipt and inbox reception; a duplicate was blocked and the service was closed afterward. This does not establish current availability, autonomous replies, customer use or PC-off.",
+      "references": [
+        "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/AFW-OWN-MAIL-ACCEPTANCE-2026-10-02.es.md"
+      ]
+    }
+  ],
   "documentation": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/BLOCK-6C-EMAIL-ROUTING-DRAFT-LOCAL-GATE-2026-08-31.md"
 }

@@ -4,6 +4,10 @@ on:
   pull_request:
     paths:
       - 'public/.well-known/agent-readiness.json'
+      - 'public/.well-known/email-operations-contract.json'
+      - 'app/mapa-del-sitio/page.tsx'
+      - 'package.json'
+      - 'package-lock.json'
       - 'app/api-catalog/route.ts'
       - 'test/agent-discovery.test.mjs'
       - 'test/public-a2a-discovery.test.mjs'
