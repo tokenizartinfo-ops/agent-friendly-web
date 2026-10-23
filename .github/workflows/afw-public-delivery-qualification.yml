@@ -8,6 +8,7 @@ on:
       - 'config/public-cloud-delivery.v1.json'
       - 'docs/evidence/2026-10-20-guide-delivery/**'
       - 'docs/evidence/2026-10-21-a2a-delivery/**'
+      - 'docs/evidence/2026-10-23-public-mail-a2a/**'
       - '.github/workflows/afw-public-delivery-qualification.yml'
   workflow_dispatch:
 

@@ -7,6 +7,7 @@ on:
       - 'test/public_inactive_upload_test.py'
       - 'config/public-cloud-delivery.v1.json'
       - 'docs/evidence/2026-10-21-a2a-delivery/**'
+      - 'docs/evidence/2026-10-23-public-mail-a2a/**'
       - '.github/workflows/afw-public-inactive-upload.yml'
   workflow_dispatch:
     inputs:

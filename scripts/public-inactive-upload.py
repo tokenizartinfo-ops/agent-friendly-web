@@ -131,9 +131,9 @@ def extract_qualified(data, inventory, expected_hash, destination):
                 output.write(archive.read(item["path"]))
 
 def wrangler_command(executable, config, tag, dry_run):
-    require(re.fullmatch(r"8057ee37-r[1-9][0-9]*-a1", tag) is not None, "upload_tag")
+    require(re.fullmatch(r"61909a58-r[1-9][0-9]*-a1", tag) is not None, "upload_tag")
     command = [str(executable), "versions", "upload", "--config", str(config), "--no-bundle", "--keep-vars",
-               "--tag", tag, "--message", "AFW exact8057ee37 inactive-only cloud package; no promotion"]
+               "--tag", tag, "--message", "AFW exact61909a58 inactive-only cloud package; no promotion"]
     if dry_run:
         command += ["--dry-run"]
     return command
@@ -245,7 +245,7 @@ def main():
         report = json.loads((handoff/"receipt.json").read_text())
         inventory = json.loads((handoff/"inventory.json").read_text())
         data = (handoff/"qualified-dist.zip").read_bytes()
-        require(contract["sourceRevision"] == "8057ee37f5b0cf02e5e14ab07b98145e07f977d0"
+        require(contract["sourceRevision"] == "61909a5805549abb9534679d1735c3be8745071f"
                 and contract["target"] == {"accountId": ACCOUNT, "worker": WORKER, "origin": "https://agentfriendlyweb.dev",
                                           "entrypoint": "server/index.js", "assets": "client"}, "package_scope")
         require(report["qualifierRevision"] == checkout and report["artifactId"] == contract["artifact"]["id"]
@@ -270,7 +270,7 @@ def main():
         # First attempt only is also used for the verification tag; reruns must not silently renew upload authority.
         run_id = os.environ.get("GITHUB_RUN_ID", "")
         require(re.fullmatch("[1-9][0-9]*", run_id), "run_identity")
-        tag = "8057ee37-r"+run_id+"-a1"
+        tag = "61909a58-r"+run_id+"-a1"
         runner = Path(os.environ.get("RUNNER_TEMP", ""))
         require(runner.is_absolute() and runner.is_dir(), "runner_temp")
         package = Path(tempfile.mkdtemp(prefix="afw-public-inactive-", dir=runner))/"package"

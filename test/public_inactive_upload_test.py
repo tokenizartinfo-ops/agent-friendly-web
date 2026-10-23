@@ -129,8 +129,12 @@ class InactiveUploadTests(unittest.TestCase):
         self.assertEqual(result, {"inactive": True})
         self.assertEqual(calls, ["read", "upload", ("post", "12345678-1234-4234-8234-123456789abc")])
 
+    def test_previous_package_tag_cannot_construct_an_upload_command(self):
+        with self.assertRaisesRegex(ValueError, "upload_tag"):
+            self.m.wrangler_command(Path("/runner/wrangler"), Path("/runner/config.json"), "8057ee37-r39600000-a1", False)
+
     def test_command_never_promotes_and_uses_exact_frozen_config(self):
-        cmd = self.m.wrangler_command(Path("/runner/wrangler"), Path("/runner/config.json"), "8057ee37-r39600000-a1", False)
+        cmd = self.m.wrangler_command(Path("/runner/wrangler"), Path("/runner/config.json"), "61909a58-r39600000-a1", False)
         self.assertEqual(cmd[1:3], ["versions", "upload"])
         self.assertNotIn("deploy", cmd)
         self.assertNotIn("--force", cmd)
