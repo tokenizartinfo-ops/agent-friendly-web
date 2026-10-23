@@ -89,7 +89,7 @@ test('native release Workflow publishes once and original D1 budget survives res
   try{
    const worker=await f.mf.getWorker('operator');assert.equal((await worker.fetch('https://private.invalid/')).status,404);
    const instance=await f.flow.create({id:f.id,params:{planHash:f.planHash}}),result=await terminal(instance);
-   assert.equal(result.output.status,lost?'uncertain':'confirmed');assert.equal(result.output.mayRetry,false);assert.equal(result.output.operationalReadiness,false);
+   assert.equal(result.output.status,lost?'uncertain':'confirmed');assert.equal(Object.hasOwn(result.output,'observation'),false);assert.equal(result.output.mayRetry,false);assert.equal(result.output.operationalReadiness,false);
    assert.equal(f.posts(),1);assert.equal(await rows(f,'dossier_publication_attempts'),1);assert.equal(await rows(f,'dossier_publication_receipts'),lost?0:1);
    if(!lost){assert.equal(result.output.receipt.versionId,versionId);assert.equal((await f.db.prepare('SELECT version_id FROM dossier_publication_receipts').first()).version_id,versionId);}
    assert.equal(JSON.stringify(result.output).includes('synthetic_publish_credential'),false);

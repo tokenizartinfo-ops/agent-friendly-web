@@ -44,3 +44,27 @@ Esta sonda acredita la lectura con la clave custodiada **a las 02:50**, no su es
 Primero terminar el diagnóstico diferencial con fixtures interceptados y lectores/journal reales. Una causa no reproducida sigue desconocida. Después preparar una nueva ventana autorizada y plan distintos, comprobar confirmación efectiva, catálogo y consumidor nativos, evento propio, revisión útil y retirada nativa/física. Solo tras aceptar esa cadena corresponde la ocurrencia separada PC-off de PR571, que continúa DRAFT. Max conserva su propio consentimiento y la aprobación del preview exacto del correo.
 
 Evidencia y continuidad: [issue497](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497#issuecomment-6346449127), [PR574](https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/574). Los artefactos de políticas reales permanecen privados; no adjuntar sus cuerpos a Actions públicos, Git ni correo.
+
+
+## Diagnóstico interno propuesto del Workflow (solo fuente)
+
+Solo `uncertain` de `confirm_named` añade `observation`: objeto fijo con
+`stage` de enum cerrado, `getIndex` (0–7 o null), `httpCode` (100–599 o null)
+y `durationMs` (entero 0–70000 o null). Es el último punto alcanzado, no una
+causa ni evidencia de aceptación. La duración mide fetch hasta cabeceras o
+rechazo, no la lectura posterior del stream; un HTTP 200 no acredita hash,
+configuración, deployment activo ni recibo. Las fases sin fetch reinician
+código/duración a null y conservan el índice del último GET.
+
+El colector vive solo en la invocación del Workflow. No devuelve URLs,
+headers, cuerpos, mensajes de error, identidades, hashes, credenciales ni
+argumentos. No se entrega a RPC; `AfwReleaseOperator.run` conserva su error
+genérico y HTTP permanece 404. Success, blocked y publish no añaden campos.
+No cambia lectores compartidos/congelados, consultas SQL, budgets, guards,
+relojes/lease, ventanas, timeouts, retries ni permisos; no agrega I/O.
+
+Regresión con operador compilado real, Worker histórico exacto, workerd y
+D1 efímero: metadata 403 en GET 3 y cambio en segunda lectura activa en GET 7
+producen observación saneada, un intento, cero recibos/aceptaciones y ningún
+GET adicional. RPC equivalente sigue genérico. Los fixtures son sintéticos;
+esto no identifica la causa del uncertain real ni autoriza otro ensayo.
