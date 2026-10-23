@@ -4,6 +4,9 @@ import {runNoticeCycle} from '../lib/operations-notice-cycle.mjs';
 
 export async function runOperationsClient(args, env = process.env, {fetchImpl,onDiagnostic} = {}) {
   const client = createOperationsClient({ env, onDiagnostic, ...(fetchImpl?{fetchImpl}:{}) });
+  if(args.length===1&&args[0]==='dossier-list')return {signals:await client.listDossiers()};
+  if(args.length===3&&args[0]==='dossier-claim')return {reservation:await client.claimDossier(args[1],args[2])};
+  if(args.length===3&&args[0]==='dossier-finish')return {outcome:await client.finishDossier(args[1],args[2])};
   if(args.length===1&&args[0]==='assistance-list')return {signals:await client.listAssistance()};
   if(args.length===3&&args[0]==='assistance-claim')return {reservation:await client.claimAssistance(args[1],args[2])};
   if(args.length===3&&args[0]==='assistance-finish')return {outcome:await client.finishAssistance(args[1],args[2])};
