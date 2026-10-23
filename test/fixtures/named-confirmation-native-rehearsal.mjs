@@ -7,8 +7,8 @@ import {inertNamedConfirmationPolicy} from './inert-named-confirmation-policy.mj
 
 // CI-only composition. Actual compiled operator, native Workflow/D1/namespace,
 // exact historical module bytes; ALL provider replies and identities synthetic.
-export async function rehearseExactNamedConfirmation({artifact,build,mode,payloadMode='object'}){
- if(!['confirmed','tail-corrupt','regional-incident'].includes(mode))throw Error('Unknown CI rehearsal');
+export async function rehearseExactNamedConfirmation({artifact,build,mode,payloadMode='object',invocation='workflow'}){
+ if(!['confirmed','tail-corrupt','regional-incident','metadata-reject','second-active'].includes(mode))throw Error('Unknown CI rehearsal');
  const identity={name:'identity',modules:true,compatibilityDate:'2026-09-07',script:`import {DurableObject} from 'cloudflare:workers';export class Own extends DurableObject{fetch(){throw Error('No actor launch in package qualification');}}export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-own-event-one-occurrence-v1').toString()});}}`,durableObjects:{NODE:{className:'Own',useSQLite:true}}};
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[identity]}));
  try{
@@ -36,7 +36,8 @@ export async function rehearseExactNamedConfirmation({artifact,build,mode,payloa
    assert.equal(request.headers.get('Authorization'),'Bearer synthetic_read_credential');
    assert.ok(Object.values(urls).includes(request.url),'unexpected provider target');counters.apiReads++;
    let result;
-   if(request.url===urls.deployments)result={deployments:[{id:deploymentId,strategy:'percentage',versions:[{version_id:versionId,percentage:100}]}]};
+   if(mode==='metadata-reject'&&request.url===urls.metadata)return Response.json({success:false,errors:[{message:'synthetic_sensitive_value'}]},{status:403});
+   if(request.url===urls.deployments)result={deployments:[{id:mode==='second-active'&&counters.apiReads===7?'33333333-3333-4333-8333-333333333333':deploymentId,strategy:'percentage',versions:[{version_id:versionId,percentage:100}]}]};
    else if(request.url===urls.application)result={id:RELEASE_TARGET.namespaceId,account_id:RELEASE_TARGET.accountId,scheduling_policy:'durable_object',durable_objects:{namespace_id:RELEASE_TARGET.namespaceId}};
    else if(request.url===urls.legacy)result={id:versionId,resources:{script:{etag},bindings:config.bindings}};
    else{
@@ -50,7 +51,8 @@ export async function rehearseExactNamedConfirmation({artifact,build,mode,payloa
    return new Response(encoded,{headers:{'Content-Type':'application/json'}});
   };
   const operator={name:'operator',modules:true,script:compiled.script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_RELEASE_OPERATOR_ENABLED:'true',AFW_RELEASE_WORKFLOW_ENABLED:'true',AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED:'true',AFW_RELEASE_READ_TOKEN:'synthetic_read_credential'},durableObjects:{AFW_RELEASE_EVENTS_NODE:{className:'Own',scriptName:'identity'}},d1Databases:{RELEASE_DB:'exact-named-rehearsal'},workflows:{FLOW:{name:'afw-exact-confirmation-qualification',className:'AfwReleaseWorkflow'}},outboundService};
-  await mf.setOptions(convertV4MiniflareOptions({workers:[identity,operator]}));
+  const caller={name:'rpc-caller',modules:true,compatibilityDate:'2026-09-07',bindings:{PLAN_HASH:compiled.planHash},serviceBindings:{OPERATOR:{name:'operator',entrypoint:'AfwReleaseOperator'}},script:'export default{async fetch(r,e){try{return Response.json(await e.OPERATOR.run(e.PLAN_HASH));}catch(error){return Response.json({error:error.message});}}}'};
+  await mf.setOptions(convertV4MiniflareOptions({workers:[identity,operator,caller]}));
   const db=await mf.getD1Database('RELEASE_DB','operator');
   for(const name of ['publication','activation']){
    const sql=readFileSync('db/dossier-'+name+'-receipt.sql','utf8').replace(/^\s*--[^\r\n]*/gm,'');
@@ -59,11 +61,16 @@ export async function rehearseExactNamedConfirmation({artifact,build,mode,payloa
   await db.prepare('INSERT INTO dossier_publication_attempts VALUES(?,?,?,?,?,?,?,?)').bind(policy.plan.artifactKey,RELEASE_TARGET.accountId,RELEASE_TARGET.workerName,artifact.sourceRevision,artifact.sourceTree,artifact.programHash,artifact.workerHash,Date.now()).run();
   await db.prepare('INSERT INTO dossier_publication_receipts VALUES(?,?,?,?)').bind(policy.plan.artifactKey,'79593972-3200-464f-aff6-76f5864dd399',etag,Date.now()).run();
   const httpStatus=(await (await mf.getWorker('operator')).fetch('https://synthetic.invalid/')).status;
+  let output;
+  if(invocation==='rpc')output=await (await (await mf.getWorker('rpc-caller')).fetch('https://synthetic.invalid/')).json();
+  else{
   const {FLOW}=await mf.getBindings('operator'),instance=await FLOW.create({id:'afw-release-'+compiled.planHash,params:payloadMode==='string'?JSON.stringify({planHash:compiled.planHash}):{planHash:compiled.planHash}});
   const end=Date.now()+12000;let state;
   do{state=await instance.status();if(['complete','errored','terminated'].includes(state.status))break;await new Promise(resolve=>setTimeout(resolve,25));}while(Date.now()<end);
   assert.equal(state.status,'complete','native qualification Workflow must actually complete');
+  output=state.output;
+  }
   const counts={};for(const suffix of ['attempts','receipts','acceptances'])counts[suffix]=(await db.prepare('SELECT COUNT(*) n FROM dossier_activation_'+suffix).first()).n;
-  return {httpStatus,output:state.output,counts,counters,activationKey:policy.plan.activationKey,versionId,deploymentId};
+  return {httpStatus,output,counts,counters,activationKey:policy.plan.activationKey,versionId,deploymentId};
  }finally{await mf.dispose();}
 }

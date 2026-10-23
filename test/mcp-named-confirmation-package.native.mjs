@@ -136,7 +136,8 @@ test('exact historical bytes confirm through native Workflow and primary accepta
 });
 test('last-byte corruption of the real historical artifact never creates acceptance',available,async()=>{
  const r=await rehearseExactNamedConfirmation({artifact,build:buildMcpNamedConfirmation,mode:'tail-corrupt'});
- assert.deepEqual(r.output,{status:'uncertain',mayRetry:false,operationalReadiness:false});
+ const {observation,...outcome}=r.output;assert.deepEqual(outcome,{status:'uncertain',mayRetry:false,operationalReadiness:false});
+ assert.equal(observation.stage,'artifact_modules');assert.equal(observation.getIndex,1);assert.equal(observation.httpCode,200);
  assert.deepEqual(r.counts,{attempts:1,receipts:0,acceptances:0});
  assert.equal(r.counters.apiReads,1);assert.ok(r.counters.largestReplyBytes>2097152);
 });
@@ -152,4 +153,25 @@ test('canonical REST string confirms exact frozen bytes through native Workflow'
  assert.equal(r.output.status,'confirmed');
  assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
  assert.equal(r.counters.providerReads,1);assert.equal(r.counters.apiReads,7);
+});
+
+for(const [mode,stage,getIndex,httpCode] of [['metadata-reject','activation_metadata',3,403],['second-active','deployment_second',7,200]]){
+ test('named Workflow uncertain reports only last reached point for '+mode,available,async()=>{
+  const r=await rehearseExactNamedConfirmation({artifact,build:buildMcpNamedConfirmation,mode,payloadMode:'string'});
+  assert.equal(r.output.status,'uncertain');assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);
+  const observation=r.output.observation;
+  assert.ok(observation,'uncertain named Workflow must expose a sanitized last-point observation');
+  assert.deepEqual(Object.keys(observation).sort(),['durationMs','getIndex','httpCode','stage']);
+  assert.deepEqual({...observation,durationMs:0},{stage,getIndex,httpCode,durationMs:0});
+  assert.ok(Number.isSafeInteger(observation.durationMs)&&observation.durationMs>=0&&observation.durationMs<=70000);
+  assert.deepEqual(r.counts,{attempts:1,receipts:0,acceptances:0});
+  assert.equal(r.counters.providerReads,1);assert.equal(r.counters.apiReads,getIndex);assert.equal(r.httpStatus,404);
+  const text=JSON.stringify(r.output);for(const secret of ['synthetic_sensitive_value','synthetic_read_credential','Authorization','https://',r.activationKey,r.versionId,r.deploymentId])assert.equal(text.includes(secret),false);
+ });
+}
+
+test('named operator RPC failure remains generic without Workflow observation',available,async()=>{
+ const r=await rehearseExactNamedConfirmation({artifact,build:buildMcpNamedConfirmation,mode:'metadata-reject',invocation:'rpc'});
+ assert.deepEqual(r.output,{error:'Release operator unavailable'});assert.equal(r.httpStatus,404);
+ assert.deepEqual(r.counts,{attempts:1,receipts:0,acceptances:0});assert.equal(r.counters.providerReads,0);assert.equal(r.counters.apiReads,3);
 });
