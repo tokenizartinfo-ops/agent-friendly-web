@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {setTimeout as delay} from 'node:timers/promises';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
@@ -28,8 +29,14 @@ test('real workerd limiter returns 429, foreign-origin POST cannot write, and cl
   const headers={'Cf-Access-Jwt-Assertion':jwt,'Sec-Fetch-Site':'same-origin'};
   const foreign=await runtime.dispatchFetch(origin+'/notices/review',{method:'POST',headers:{...headers,Origin:'https://foreign.example','content-type':'application/json'},body:'{}'});
   assert.equal(foreign.status,403);assert.deepEqual(await foreign.json(),{code:'same_origin_required'});
-  for(let i=0;i<10;i++)assert.equal((await runtime.dispatchFetch(origin+'/',{headers})).status,200);
-  const limited=await runtime.dispatchFetch(origin+'/',{headers});assert.equal(limited.status,429);assert.deepEqual(await limited.json(),{code:'try_later'});
+  // The native simulator uses real wall-clock buckets, not the handler's fixed now.
+  const periodMs=60000,remaining=periodMs-Date.now()%periodMs;
+  if(remaining<5000)await delay(remaining+10);
+  const epoch=Math.floor(Date.now()/periodMs);
+  const sameEpoch=()=>assert.equal(Math.floor(Date.now()/periodMs),epoch,'Rate limiter fixture crossed its counting bucket');
+  const countedFetch=async()=>{sameEpoch();const response=await runtime.dispatchFetch(origin+'/',{headers});sameEpoch();return response;};
+  for(let i=0;i<10;i++)assert.equal((await countedFetch()).status,200);
+  const limited=await countedFetch();assert.equal(limited.status,429);assert.deepEqual(await limited.json(),{code:'try_later'});
   assert.equal((await db.prepare('SELECT COUNT(*) n FROM operations_notice_reviews').first()).n,0);
   await runtime.setOptions(convertV4MiniflareOptions({...options,bindings:{...bindings,AFW_OPERATIONS_REVIEW_ENABLED:'false'}}));
   const closed=await runtime.dispatchFetch(origin+'/',{headers});assert.equal(closed.status,404);assert.deepEqual(await closed.json(),{code:'unavailable'});
