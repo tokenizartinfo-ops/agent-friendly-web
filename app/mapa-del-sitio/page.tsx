@@ -42,6 +42,7 @@ const humanRoutes = [
 ];
 
 const machineResources = [
+  { name: 'A2A public diagnostic', detail: 'Tarjeta del diagnostico publico JSONRPC; evidencia fechada, sin expedientes privados ni avisos push.', href: '/.well-known/agent-card.json', icon: Network },
   { name: 'robots.txt', detail: 'Politica publica de rastreo y Content Signals.', href: '/robots.txt', icon: Bot },
   { name: 'sitemap.xml', detail: 'Indice canonico de paginas HTML publicas.', href: '/sitemap.xml', icon: Map },
   { name: 'llms.txt', detail: 'Indice conciso propuesto para asistentes y agentes.', href: '/llms.txt', icon: FileText },
@@ -98,7 +99,7 @@ const roadmap = [
   ['Correo operativo', 'documented', 'La automatizacion no esta habilitada por este contrato. Las pruebas asistidas previas no acreditan disponibilidad actual.'],
   ['CRM Lite', 'documented', 'Modelo metadata-only documentado; no hay persistencia remota, contactos reales ni acciones comerciales.'],
   ['Plugins y conectores', 'planned', 'Cada plataforma requiere un adaptador oficial y una capacidad verificable.'],
-  ['A2A', 'planned', 'No se publica Agent Card ni delegacion entre agentes.'],
+  ['A2A', 'deployed', 'Diagnostico publico con tarjeta observada el 21/10/2026; sin expedientes privados, streaming, push ni delegacion asincrona.'],
   ['x402', 'research', 'No hay recursos pagos ni flujo HTTP 402 activo.'],
 ];
 
