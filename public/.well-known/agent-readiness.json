@@ -6,7 +6,7 @@
     "creator": "Gabriel Mucchiut"
   },
   "canonical_origin": "https://agentfriendlyweb.dev",
-  "updated_at": "2026-10-21",
+  "updated_at": "2026-10-23",
   "human_languages": ["es", "en", "pt"],
   "human_route_strategy": "Spanish unprefixed canonical; English under /en; Portuguese under /pt; canonical and hreflang equivalents",
   "machine_routes_localized": false,
@@ -79,7 +79,9 @@
       "dns_configured": false,
       "email_provider_configured": false,
       "resources": ["/.well-known/email-operations-contract.json"],
-      "note": "The public contract documents candidate addresses, consent boundaries and blocked actions. No mailbox, DNS route, provider, message read or send operation is active."
+      "scope": "public_automation_contract",
+      "current_availability": "not_assessed",
+      "note": "These states describe automation supplied by /.well-known/email-operations-contract.json, which provides no autonomous mail API or active mail operations. They do not assert absence of an existing provider, DNS routing or aliases. Dated assisted sending and routing acceptance on 2026-10-01 and approved own cloud sending on 2026-10-02 are documented in that contract; neither establishes current availability, autonomous replies or PC-off."
     },
     "crm_lite": {
       "status": "local_planning_only",
