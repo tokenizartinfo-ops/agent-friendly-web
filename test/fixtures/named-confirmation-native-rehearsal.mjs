@@ -7,7 +7,7 @@ import {inertNamedConfirmationPolicy} from './inert-named-confirmation-policy.mj
 
 // CI-only composition. Actual compiled operator, native Workflow/D1/namespace,
 // exact historical module bytes; ALL provider replies and identities synthetic.
-export async function rehearseExactNamedConfirmation({artifact,build,mode}){
+export async function rehearseExactNamedConfirmation({artifact,build,mode,payloadMode='object'}){
  if(!['confirmed','tail-corrupt','regional-incident'].includes(mode))throw Error('Unknown CI rehearsal');
  const identity={name:'identity',modules:true,compatibilityDate:'2026-09-07',script:`import {DurableObject} from 'cloudflare:workers';export class Own extends DurableObject{fetch(){throw Error('No actor launch in package qualification');}}export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-own-event-one-occurrence-v1').toString()});}}`,durableObjects:{NODE:{className:'Own',useSQLite:true}}};
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[identity]}));
@@ -59,7 +59,7 @@ export async function rehearseExactNamedConfirmation({artifact,build,mode}){
   await db.prepare('INSERT INTO dossier_publication_attempts VALUES(?,?,?,?,?,?,?,?)').bind(policy.plan.artifactKey,RELEASE_TARGET.accountId,RELEASE_TARGET.workerName,artifact.sourceRevision,artifact.sourceTree,artifact.programHash,artifact.workerHash,Date.now()).run();
   await db.prepare('INSERT INTO dossier_publication_receipts VALUES(?,?,?,?)').bind(policy.plan.artifactKey,'79593972-3200-464f-aff6-76f5864dd399',etag,Date.now()).run();
   const httpStatus=(await (await mf.getWorker('operator')).fetch('https://synthetic.invalid/')).status;
-  const {FLOW}=await mf.getBindings('operator'),instance=await FLOW.create({id:'afw-release-'+compiled.planHash,params:{planHash:compiled.planHash}});
+  const {FLOW}=await mf.getBindings('operator'),instance=await FLOW.create({id:'afw-release-'+compiled.planHash,params:payloadMode==='string'?JSON.stringify({planHash:compiled.planHash}):{planHash:compiled.planHash}});
   const end=Date.now()+12000;let state;
   do{state=await instance.status();if(['complete','errored','terminated'].includes(state.status))break;await new Promise(resolve=>setTimeout(resolve,25));}while(Date.now()<end);
   assert.equal(state.status,'complete','native qualification Workflow must actually complete');

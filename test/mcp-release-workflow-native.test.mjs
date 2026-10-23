@@ -114,3 +114,19 @@ test('native release Workflow consumes its attempt but never uploads after a clo
  const f=await fixture({rewindBase:true});
  try{const instance=await f.flow.create({id:f.id,params:{planHash:f.planHash}}),result=await terminal(instance);assert.deepEqual(result.output,{status:'uncertain',mayRetry:false,operationalReadiness:false});assert.equal(f.posts(),0);assert.equal(await rows(f,'dossier_publication_attempts'),1);assert.equal(await rows(f,'dossier_publication_receipts'),0);}finally{await f.mf.dispose();}
 });
+
+test('REST string admission rejects noncanonical payloads and preserves original guards without effects',async t=>{
+ for(const mode of ['wrong','double','space','extra','invalid','id','closed','expired','confirmation'])await t.test(mode,async()=>{
+  const f=await fixture(mode==='closed'?{operator:'false'}:mode==='expired'?{expired:true}:mode==='confirmation'?{confirm:true}:{});
+  try{
+   const canonical=JSON.stringify({planHash:f.planHash});
+   const params=mode==='wrong'?JSON.stringify({planHash:'0'.repeat(64)}):mode==='double'?JSON.stringify(canonical):mode==='space'?' '+canonical:mode==='extra'?JSON.stringify({planHash:f.planHash,extra:true}):mode==='invalid'?'invalid':canonical;
+   const instance=await f.flow.create({id:mode==='id'?'foreign-instance':f.id,params});
+   const result=await terminal(instance);
+   assert.deepEqual(result.output,{status:'blocked',mayRetry:false,operationalReadiness:false});
+   assert.equal(f.providerReads(),0);assert.equal(f.posts(),0);
+   assert.equal(await rows(f,'dossier_publication_attempts'),0);
+   assert.equal(await rows(f,'dossier_publication_receipts'),0);
+  }finally{await f.mf.dispose();}
+ });
+});

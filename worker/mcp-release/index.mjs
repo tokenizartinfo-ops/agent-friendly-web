@@ -57,7 +57,8 @@ export class AfwReleaseWorkflow extends WorkflowEntrypoint {
    if(env.AFW_RELEASE_OPERATOR_ENABLED!=='true'||env.AFW_RELEASE_WORKFLOW_ENABLED!=='true')return outcome('blocked');
    validateReleaseOperatorBundle(bundle);policy=bundle.policy;
    expectedHash=createHash('sha256').update(JSON.stringify(bundle)).digest('hex');
-   const payload=event?.payload;
+   const rawPayload=event?.payload;
+   const payload=typeof rawPayload==='string'&&rawPayload===JSON.stringify({planHash:expectedHash})?{planHash:expectedHash}:rawPayload;
    if(policy.operation!=='publish'&&(policy.operation!=='confirm_named'||env.AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED!=='true')||event?.schedule!==undefined||event?.instanceId!=='afw-release-'+expectedHash||!payload||Object.getPrototypeOf(payload)!==Object.prototype||Reflect.ownKeys(payload).length!==1||!Object.hasOwn(payload,'planHash')||payload.planHash!==expectedHash)return outcome('blocked');
   }catch{return outcome('blocked');}
   const admittedAt=Date.now(),admittedMono=performance.now(),monotonicEnd=admittedMono+(policy.expiresAt-admittedAt);
