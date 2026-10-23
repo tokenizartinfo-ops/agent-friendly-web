@@ -4,6 +4,10 @@ on:
   pull_request:
     paths:
       - 'public/.well-known/agent-readiness.json'
+      - 'public/.well-known/email-operations-contract.json'
+      - 'app/mapa-del-sitio/page.tsx'
+      - 'package.json'
+      - 'package-lock.json'
       - 'app/api-catalog/route.ts'
       - 'test/agent-discovery.test.mjs'
       - 'test/public-a2a-discovery.test.mjs'
@@ -52,11 +56,13 @@ jobs:
       - name: Compile actual branch product
         run: npm run build
       - name: Install pinned browser tools only in runner
+        timeout-minutes: 3
         shell: bash
         run: |
           command -v npx >/dev/null
           npm install --prefix "$AFW_BROWSER_TOOLS" --ignore-scripts --no-audit --no-fund playwright@1.64.1
-          node "$AFW_BROWSER_TOOLS/node_modules/playwright/cli.js" install --with-deps chromium
+          # Avoid redundant apt refresh; the pinned browser launch still requires system libraries.
+          node "$AFW_BROWSER_TOOLS/node_modules/playwright/cli.js" install chromium
       - name: Check guide entry on isolated native runtime
         run: node scripts/check-public-guide-start-browser.mjs
       - name: Preserve the exact qualified public build
