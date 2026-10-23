@@ -146,3 +146,10 @@ test('regional Workers incident blocks the exact package before API reads and jo
  assert.deepEqual(r.counts,{attempts:0,receipts:0,acceptances:0});
  assert.deepEqual(r.counters,{providerReads:1,apiReads:0,largestReplyBytes:0});
 });
+
+test('canonical REST string confirms exact frozen bytes through native Workflow',available,async()=>{
+ const r=await rehearseExactNamedConfirmation({artifact,build:buildMcpNamedConfirmation,mode:'confirmed',payloadMode:'string'});
+ assert.equal(r.output.status,'confirmed');
+ assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
+ assert.equal(r.counters.providerReads,1);assert.equal(r.counters.apiReads,7);
+});
