@@ -3,6 +3,8 @@ name: AFW public guide entry browser QA
 on:
   pull_request:
     paths:
+      - 'lib/public-mcp-http.mjs'
+      - 'test/public-mcp-http.test.mjs'
       - 'public/.well-known/agent-readiness.json'
       - 'public/.well-known/email-operations-contract.json'
       - 'app/mapa-del-sitio/page.tsx'
