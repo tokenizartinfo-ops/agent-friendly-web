@@ -188,7 +188,31 @@ def qualifier_context(env, checked_out):
     return {"qualifierRevision": checked_out, "eventRevision": event,
             "qualifierRun": run, "qualifierRunAttempt": attempt}
 
-def main():
+
+PACKET_INVENTORIES = {
+    "config/public-cloud-delivery.v1.json": "docs/evidence/2026-10-23-public-mail-a2a/qualified-inventory.json",
+    "config/public-json-budget-delivery.v1.json": "docs/evidence/2026-10-24-public-json-budget/qualified-inventory.json",
+}
+
+def load_delivery_packet(root, contract_path="config/public-cloud-delivery.v1.json"):
+    # Internal literal selection only; no CLI/environment filesystem input.
+    require(isinstance(contract_path, str) and contract_path in PACKET_INVENTORIES, "contract packet")
+    contract = json.loads((root / contract_path).read_text())
+    require(contract["project"] == "AFW" and contract["repository"] == REPOSITORY
+            and contract["allowedAction"] == "read_validate_and_prepare_only"
+            and contract["operationalReadiness"] is False, "contract scope")
+    require(contract["target"] == {"accountId": "85d0d5dadac3341a564f22ce885e9eec",
+            "worker": "agent-friendly-web-web-production", "origin": "https://agentfriendlyweb.dev",
+            "entrypoint": "server/index.js", "assets": "client"}, "contract target")
+    inventory_path = root / PACKET_INVENTORIES[contract_path]
+    require(contract["inventoryPath"] == str(inventory_path.relative_to(root)), "contract inventory")
+    inventory = json.loads(inventory_path.read_text())
+    require(inventory["sourceRevision"] == contract["sourceRevision"]
+            and inventory["productionAcceptance"] is False and inventory["operationalReadiness"] is False,
+            "inventory source")
+    return contract, inventory
+
+def main(contract_path="config/public-cloud-delivery.v1.json"):
     require(os.environ.get("GITHUB_ACTIONS") == "true" and os.environ.get("GITHUB_REPOSITORY") == REPOSITORY,
             "GitHub runner identity")
     root = Path(__file__).resolve().parents[1]
@@ -196,19 +220,7 @@ def main():
                               env={"PATH": os.environ["PATH"], "HOME": os.environ.get("HOME", "")},
                               capture_output=True, text=True, check=True, timeout=5).stdout.strip()
     qualifier = qualifier_context(os.environ, checkout)
-    contract = json.loads((root / "config/public-cloud-delivery.v1.json").read_text())
-    require(contract["project"] == "AFW" and contract["repository"] == REPOSITORY
-            and contract["allowedAction"] == "read_validate_and_prepare_only"
-            and contract["operationalReadiness"] is False, "contract scope")
-    require(contract["target"] == {"accountId": "85d0d5dadac3341a564f22ce885e9eec",
-            "worker": "agent-friendly-web-web-production", "origin": "https://agentfriendlyweb.dev",
-            "entrypoint": "server/index.js", "assets": "client"}, "contract target")
-    inventory_path = root / "docs/evidence/2026-10-23-public-mail-a2a/qualified-inventory.json"
-    require(contract["inventoryPath"] == str(inventory_path.relative_to(root)), "contract inventory")
-    inventory = json.loads(inventory_path.read_text())
-    require(inventory["sourceRevision"] == contract["sourceRevision"]
-            and inventory["productionAcceptance"] is False and inventory["operationalReadiness"] is False,
-            "inventory source")
+    contract, inventory = load_delivery_packet(root, contract_path)
     token = os.environ.get("GH_TOKEN", "")
     require(bool(token), "GitHub reader unavailable")
     base = "https://api.github.com/repos/" + REPOSITORY + "/actions/"
