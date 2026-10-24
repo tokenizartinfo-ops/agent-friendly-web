@@ -91,3 +91,57 @@ test("HTTP response sanitizer never reflects unknown tool or resource identifier
     assert.match(text, /requested capability is not available/i);
   }
 });
+
+
+test("public MCP ingress rejects deeply nested metadata below the byte cap", async () => {
+  const payload = '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{"_meta":'
+    + "[".repeat(100) + "0" + "]".repeat(100) + "}}";
+  assert.ok(new TextEncoder().encode(payload).byteLength < MAX_PUBLIC_MCP_REQUEST_BYTES);
+  const { request } = streamedRequest([payload.slice(0, 73), payload.slice(73)]);
+  await assert.rejects(
+    prepareBoundedPublicMcpRequest(request),
+    (error) => error instanceof PublicMcpHttpError
+      && error.status === 413 && error.code === "request_too_complex",
+  );
+});
+
+test("public MCP ingress rejects too many JSON values below the byte cap", async () => {
+  const payload = JSON.stringify(Array(4096).fill(0));
+  assert.ok(new TextEncoder().encode(payload).byteLength < MAX_PUBLIC_MCP_REQUEST_BYTES);
+  const { request } = streamedRequest([payload]);
+  await assert.rejects(
+    prepareBoundedPublicMcpRequest(request),
+    (error) => error instanceof PublicMcpHttpError
+      && error.status === 413 && error.code === "request_too_complex",
+  );
+});
+
+test("public MCP ingress preserves exact JSON depth and value-count boundaries", async () => {
+  for (const payload of [
+    "[".repeat(63) + "0" + "]".repeat(63),
+    JSON.stringify(Array(4095).fill(0)),
+  ]) {
+    const { request } = streamedRequest([payload]);
+    const bounded = await prepareBoundedPublicMcpRequest(request);
+    assert.equal(await bounded.text(), payload);
+  }
+  const { request } = streamedRequest(["[".repeat(64) + "0" + "]".repeat(64)]);
+  await assert.rejects(
+    prepareBoundedPublicMcpRequest(request),
+    (error) => error instanceof PublicMcpHttpError
+      && error.status === 413 && error.code === "request_too_complex",
+  );
+});
+
+test("public MCP ingress does not count braces inside strings or change protocol parsing", async () => {
+  const bodies = [
+    JSON.stringify({ jsonrpc: "2.0", id: 1, method: "initialize", params: { clientInfo: { name: "señal [{".repeat(100), version: "1" } } }),
+    JSON.stringify({ jsonrpc: "2.0", id: 2, method: "tools/call", params: { name: "get_afw_methodology", arguments: { section: "levels" } } }),
+    '{"jsonrpc":',
+  ];
+  for (const payload of bodies) {
+    const { request } = streamedRequest([payload]);
+    const bounded = await prepareBoundedPublicMcpRequest(request);
+    assert.equal(await bounded.text(), payload);
+  }
+});
