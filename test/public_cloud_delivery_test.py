@@ -180,5 +180,80 @@ class PublicCloudDeliveryTests(unittest.TestCase):
             with self.subTest(change=change), self.assertRaises(ValueError):
                 self.m.qualifier_context(env, checkout)
 
+
+class DeliveryPacketSelectionTests(unittest.TestCase):
+    paths = {
+        "config/public-cloud-delivery.v1.json": "docs/evidence/2026-10-23-public-mail-a2a/qualified-inventory.json",
+        "config/public-json-budget-delivery.v1.json": "docs/evidence/2026-10-24-public-json-budget/qualified-inventory.json",
+    }
+
+    def setUp(self):
+        spec = importlib.util.spec_from_file_location("public_delivery", MODULE)
+        self.m = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.m)
+        self.assertTrue(callable(getattr(self.m, "load_delivery_packet", None)),
+                        "Explicit delivery-packet selection is missing")
+
+    def fixture(self, root, relative):
+        contract = {"project": "AFW", "repository": "tokenizartinfo-ops/agent-friendly-web",
+                    "sourceRevision": "a" * 40, "inventoryPath": self.paths[relative],
+                    "target": {"accountId": "85d0d5dadac3341a564f22ce885e9eec",
+                               "worker": "agent-friendly-web-web-production", "origin": "https://agentfriendlyweb.dev",
+                               "entrypoint": "server/index.js", "assets": "client"},
+                    "allowedAction": "read_validate_and_prepare_only", "operationalReadiness": False}
+        inventory = {"sourceRevision": "a" * 40, "files": 1, "inventory": [],
+                     "productionAcceptance": False, "operationalReadiness": False}
+        for path, value in [(relative, contract), (self.paths[relative], inventory)]:
+            destination = root / path
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_text(json.dumps(value))
+        return contract, inventory
+
+    def test_both_declared_packets_load_without_crossing_their_inventory(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for relative in self.paths:
+                expected = self.fixture(root, relative)
+                self.assertEqual(self.m.load_delivery_packet(root, relative), expected)
+
+    def test_unknown_paths_are_rejected_before_any_file_read(self):
+        from unittest import mock
+        with mock.patch.object(Path, "read_text", side_effect=AssertionError("Unexpected file read")):
+            for relative in ["../contract.json", "/tmp/contract.json", "config/other.json", "", None]:
+                with self.subTest(relative=relative), self.assertRaises(ValueError):
+                    self.m.load_delivery_packet(Path("/unused"), relative)
+
+    def test_packet_cannot_substitute_the_other_inventory(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for relative, expected_path in self.paths.items():
+                contract, _ = self.fixture(root, relative)
+                contract["inventoryPath"] = next(p for p in self.paths.values() if p != expected_path)
+                (root / relative).write_text(json.dumps(contract))
+                with self.subTest(relative=relative), self.assertRaises(ValueError):
+                    self.m.load_delivery_packet(root, relative)
+
+    def test_scope_source_and_acceptance_drift_remain_closed(self):
+        import tempfile
+        relative = "config/public-json-budget-delivery.v1.json"
+        for change in ["project", "repository", "target", "action", "readiness", "source", "production", "inventory_readiness"]:
+            with tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                contract, inventory = self.fixture(root, relative)
+                if change == "project": contract["project"] = "other"
+                elif change == "repository": contract["repository"] = "other/repo"
+                elif change == "target": contract["target"]["worker"] = "other-worker"
+                elif change == "action": contract["allowedAction"] = "upload"
+                elif change == "readiness": contract["operationalReadiness"] = True
+                elif change == "source": inventory["sourceRevision"] = "b" * 40
+                elif change == "production": inventory["productionAcceptance"] = True
+                elif change == "inventory_readiness": inventory["operationalReadiness"] = True
+                (root / relative).write_text(json.dumps(contract))
+                (root / self.paths[relative]).write_text(json.dumps(inventory))
+                with self.subTest(change=change), self.assertRaises(ValueError):
+                    self.m.load_delivery_packet(root, relative)
+
 if __name__ == "__main__":
     unittest.main()
