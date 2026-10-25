@@ -1,6 +1,6 @@
 # AFW para integradores de agentes
 
-19 de octubre de2026; guía revisada el 22 de octubre de2026. Proyecto AFW, repositorio tokenizartinfo-ops/agent-friendly-web.
+19 de octubre de2026; guía revisada el 25 de octubre de2026. Proyecto AFW, repositorio tokenizartinfo-ops/agent-friendly-web.
 
 Este paquete es una referencia de código y una demo sintética: no abre el servicio privado a agentes externos ni ofrece tarifas. Ayuda a integrar operaciones pequeñas sobre el mismo expediente, con revisiones, decisiones y comprobaciones trazables. No reemplaza el consentimiento del titular ni convierte una respuesta del modelo en autorización.
 
@@ -28,6 +28,27 @@ Preparar, aprobar, instalar y verificar son estados distintos; un archivo genera
 Los identificadores afw.* son nombres del dominio interno. No se invocan como si fueran nombres MCP publicados.
 Fuentes: [diseño aprobado](superpowers/specs/2026-10-19-afw-agent-consumption-design.md), [contratos](AFW-AGENT-CONSUMPTION-CONTRACTS-2026-10-19.es.md), [A2A público](AFW-A2A-PUBLIC-RELEASE-2026-10-02.es.md), [recibo G2](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497#issuecomment-6275545264).
 Una constancia histórica no garantiza disponibilidad ahora. Este documento no contiene un catálogo operativo con vigencia renovable.
+
+## Primer recorrido público y compatibilidad de transporte
+
+Para explorar las capacidades públicas, el destino es https://agentfriendlyweb.dev/mcp. Esa superficie no entrega el expediente privado ni requiere el permiso delegado del piloto de lectura. El paso privado descrito más abajo necesita su propia conexión autorizada.
+
+Usar un cliente MCP compatible: completar su inicialización y consultar `tools/list` antes de elegir una herramienta. La [aceptación pública del25oct](AFW-PUBLIC-JSON-CLOUD-ACCEPTANCE-2026-10-25.es.md) comprobó inicialización y catálogo, junto con los límites de complejidad; no acredita cada `tools/call`, una auditoría de cualquier sitio ni una conexión privada vigente. El catálogo observado sirve para decidir qué invocar; no concede autorización para escribir, instalar o publicar.
+
+En Streamable HTTP, los mensajes se envían por POST con cuerpo JSON y el cliente debe anunciar `Accept: application/json, text/event-stream`. Debe decodificar la respuesta según su Content-Type: HTTP200 puede contener JSON o SSE. No aplicar `JSON.parse` directamente a bytes SSE ni confundir el SSE de una respuesta con una suscripción a avisos del expediente. La versión del protocolo se negocia al inicializar; una versión escrita en un ejemplo antiguo no acredita compatibilidad actual. [Especificación primaria del transporte](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports).
+
+Los límites de entrada de AFW se aplican al **sobre JSON completo**, incluidos argumentos y metadatos:
+
+| Condición | Respuesta de AFW | Recuperación del cliente |
+| --- | --- | --- |
+| Content-Type del POST distinto de application/json | HTTP415, `unsupported_media_type` | Corregir la codificación y el encabezado |
+| Cuerpo mayor de32768bytesUTF8 (32KiB) | HTTP413, `request_too_large` | Reducir los datos enviados; no reenviar el mismo cuerpo |
+| Profundidad mayor de64 o más de4096valores en el JSON | HTTP413, `request_too_complex` | Simplificar el sobre y sus metadatos; no insistir con la misma estructura |
+| JSON mal formado | HTTP400, código RPC -32700 en el recorrido comprobado | Corregir el JSON antes de volver a solicitar |
+
+Fuente de esos límites: [adaptador HTTP de la aplicación cualificada](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/d3b638a46d1f9ab559142222e181e9aae2e0a83e/lib/public-mcp-http.mjs). La aceptación remota del25oct comprobó los bordes de profundidad/valores y JSON inválido; esta actualización documental no ejecuta una nueva prueba remota de tamaño o media type.
+
+El cliente debe acotar su tiempo total y bytes de respuesta y tratar un timeout como resultado no confirmado. Los 10s,512KiB y50peticiones por fase del observador de aceptación son límites de ese observador, no un SLA o una cuota comercial prometidos a otros integradores. Una respuesta SSE pública, un catálogo visible o una recuperación del cliente no habilitan eventos privados, supervisión continua ni pagos.
 
 ## Integración de lectura, un paso a la vez
 
