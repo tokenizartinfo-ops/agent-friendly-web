@@ -91,7 +91,7 @@ test('transport error consumes the send and never retries or reflects its text',
   assert.doesNotMatch(JSON.stringify(r), /FAKE_PRIVATE_FIXTURE/);
 });
 
-for (const defect of ['id', 'isError', 'contract', 'generated_at', 'levels', 'sources', 'normative_status', 'blocked_actions']) {
+for (const defect of ['id', 'isError', 'contract', 'generated_at', 'levels', 'sources', 'normative_status', 'blocked_actions', 'partial_blocked_actions', 'level_label', 'level_ranges', 'category_label', 'category_weight', 'category_checks', 'empty_limits']) {
   test('functional response rejects ' + defect + ' without exposing its body', async () => {
     const run = await observer();
     const f = fixture({ change: (index, message) => {
@@ -106,6 +106,13 @@ for (const defect of ['id', 'isError', 'contract', 'generated_at', 'levels', 'so
         if (defect === 'sources') e.sources = [{ url: 'https://example.invalid/FAKE_PRIVATE_FIXTURE' }];
         if (defect === 'normative_status') e.result.normative_status = 'Official certification';
         if (defect === 'blocked_actions') e.blocked_actions = [];
+        if (defect === 'partial_blocked_actions') e.blocked_actions = ['private-expedients', 'publish', 'deploy', 'billing', 'payments', 'owner-data'];
+        if (defect === 'level_label') e.result.levels[0].label = '';
+        if (defect === 'level_ranges') e.result.levels.forEach(level => { level.score_min = 0; level.score_max = 0; });
+        if (defect === 'category_label') e.result.categories[0].label = '';
+        if (defect === 'category_weight') e.result.categories[0].weight = -1;
+        if (defect === 'category_checks') e.result.categories[0].checks = [null];
+        if (defect === 'empty_limits') e.limits = [''];
       }
       return message;
     } });
@@ -204,4 +211,21 @@ test('CLI refuses default windows, reruns and non-main context before HTTP', asy
     assert.equal(r.status, 'unconfirmed');
     assert.equal(out.stderr, '');
   }
+});
+
+for (const where of ['headers', 'body']) test('late timer cannot accept response after10s at ' + where, async () => {
+  const run = await observer();
+  let wall = T, mono = 0;
+  const late = () => { wall += 11000; mono += 11000; };
+  const f = fixture({ override: (index, message) => {
+    if (index !== 1) return null;
+    if (where === 'headers') { late(); return null; }
+    return new Response(new ReadableStream({ pull(controller) {
+      controller.enqueue(Buffer.from(JSON.stringify(message)));
+      late(); controller.close();
+    } }, { highWaterMark: 0 }), { headers: { 'content-type': 'application/json' } });
+  } });
+  const r = await run({ ...options(f.fetchImpl), now: () => wall, monotonic: () => mono });
+  assert.equal(r.status, 'unconfirmed');
+  assert.equal(f.calls.length, 1);
 });
