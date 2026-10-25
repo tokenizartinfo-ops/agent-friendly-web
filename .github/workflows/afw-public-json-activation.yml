@@ -1,0 +1,22 @@
+name: AFW public JSON cloud activation
+on:
+  pull_request:
+    paths:
+      - 'scripts/public-json-activate.py'
+      - 'scripts/public-json-acceptance.mjs'
+      - 'test/public_json_activation_test.py'
+      - 'test/public-json-acceptance.test.mjs'
+      - '.github/workflows/afw-public-json-activation.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - run: python3 -m unittest discover -s test -p 'public_json_activation_test.py' -v
