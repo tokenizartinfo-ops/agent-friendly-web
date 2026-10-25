@@ -120,6 +120,42 @@ class ActivationTests(unittest.TestCase):
         bad={**env,"GITHUB_REF":"refs/heads/other"}
         with self.assertRaises(ValueError):self.m.dispatch_context(bad,run,"a"*40,now)
 
+    def test_insufficient_recovery_budget_never_promotes(self):
+        for available in (180,239,359):
+            self.setUp()
+            def observe(phase,_):
+                if phase=="stage0":self.left=available
+                return {"ok":True}
+            self.run_it(observe=observe)
+            with self.subTest(available=available):
+                self.assertEqual(self.writes,["stage0"])
+                self.assertTrue(self.receipt["oldServing"])
+
+    def test_full_reserve_covers_late_acceptance_and_rollback_read_failures(self):
+        late={"promotion":0,"rollback":0}
+        def read():
+            if self.writes and self.writes[-1] in ("promote","rollback"):
+                phase=self.writes[-1]
+                self.left-=40
+                late["promotion" if phase=="promote" else "rollback"]+=1
+                if late["promotion" if phase=="promote" else "rollback"]==1:
+                    raise TimeoutError("last_metadata_read_failed")
+            return self.read()
+        def write(phase,versions):
+            if phase in ("promote","rollback"):
+                if self.left<60:raise TimeoutError("cannot_finish_single_write")
+                self.left-=60
+            return self.write(phase,versions)
+        def observe(phase,_):
+            if phase=="stage0":self.left=360
+            else:self.left-=30
+            return {"ok":True}
+        self.run_it(read=read,write=write,observe=observe)
+        self.assertEqual(self.writes,["stage0","promote","rollback"])
+        self.assertTrue(self.receipt["rollbackVerified"])
+        self.assertEqual(self.receipt["phase"],"rollback_reconciled")
+        self.assertGreaterEqual(self.left,50)
+
     def test_io_deadline_covers_the_entire_operation_and_restores_the_alarm(self):
         import signal,time
         prior=signal.getsignal(signal.SIGALRM)
