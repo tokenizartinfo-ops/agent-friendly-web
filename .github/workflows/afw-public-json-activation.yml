@@ -19,4 +19,8 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - run: python3 -m unittest discover -s test -p 'public_json_activation_test.py' -v
+      - run: |
+          status=0
+          python3 -m unittest discover -s test -p 'public_json_activation_test.py' -v || status=1
+          node --test test/public-json-acceptance.test.mjs || status=1
+          exit "$status"
