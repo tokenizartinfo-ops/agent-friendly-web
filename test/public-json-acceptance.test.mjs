@@ -57,3 +57,33 @@ test('directed requests hit exact JSON depth and value limits with valid method 
  assert.equal(measure(JSON.parse(bodies.values4097)).count,4097);
  for(const b of Object.values(bodies))assert.ok(Buffer.byteLength(b)<32768);
 });
+
+test('positive MCP responses accept explicit JSON or finite SSE with the same exact RPC identity',()=>{
+ const cases=[['initialize',1,{}],['toolsList',2,{tools:[]}],['depth64',3,{tools:[]}],['values4096',4,{tools:[]}]];
+ for(const[name,id,result]of cases){
+  const response={jsonrpc:'2.0',id,result};
+  const raw=JSON.stringify(response);
+  assert.equal(protocolResult(name,200,Buffer.from(raw),'application/json; charset=utf-8').ok,true);
+  assert.equal(protocolResult(name,200,Buffer.from('event: message\r\ndata: '+raw+'\r\n\r\n'),'text/event-stream; charset=utf-8').ok,true);
+ }
+});
+test('SSE supports comments, empty priming and multiline data without opening another stream',()=>{
+ const text=': keepalive\n\nid: fixture\ndata:\n\nevent: message\ndata: {"jsonrpc":"2.0",\ndata: "id":1,"result":{}}\n\n';
+ assert.equal(protocolResult('initialize',200,Buffer.from(text),'text/event-stream').ok,true);
+});
+test('protocol acceptance rejects incorrect MIME, truncated, ambiguous or unrelated SSE',()=>{
+ const good=JSON.stringify({jsonrpc:'2.0',id:1,result:{}});
+ assert.equal(protocolResult('initialize',200,Buffer.from(good),'text/html').ok,false);
+ assert.equal(protocolResult('initialize',200,Buffer.from('data: '+good+'\n\n'),'application/json').ok,false);
+ for(const text of [
+  'data: '+good+'\n',
+  'data: not-json\n\n',
+  'event: endpoint\ndata: '+good+'\n\n',
+  'data: '+good+'\n\ndata: '+good+'\n\n',
+  'data: '+JSON.stringify({jsonrpc:'2.0',id:2,result:{}})+'\n\n',
+  'data: '+JSON.stringify({jsonrpc:'2.0',id:1,error:{code:-32603}})+'\n\n',
+ ]){
+  assert.equal(protocolResult('initialize',200,Buffer.from(text),'text/event-stream').ok,false);
+ }
+ assert.equal(protocolResult('depth65',200,Buffer.from('data: '+JSON.stringify({error:{code:'request_too_complex'}})+'\n\n'),'text/event-stream').ok,false);
+});
