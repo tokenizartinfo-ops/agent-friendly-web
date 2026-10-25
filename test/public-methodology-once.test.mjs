@@ -7,12 +7,12 @@ import { executePublicMcpTool } from '../lib/public-mcp.mjs';
 const T = Date.parse('2026-10-25T19:00:00.000Z');
 const envelope = await executePublicMcpTool('get_afw_methodology', { section: 'overview' }, { now: () => new Date(T).toISOString() });
 async function observer() {
-  const module = await import('../scripts/check-public-methodology-once.mjs').catch(error => {
+  const loadedObserver = await import('../scripts/check-public-methodology-once.mjs').catch(error => {
     if (error.code === 'ERR_MODULE_NOT_FOUND') return {};
     throw error;
   });
-  assert.equal(typeof module.observeMethodologyOnce, 'function', 'bounded public methodology observer is not implemented');
-  return module.observeMethodologyOnce;
+  assert.equal(typeof loadedObserver.observeMethodologyOnce, 'function', 'bounded public methodology observer is not implemented');
+  return loadedObserver.observeMethodologyOnce;
 }
 const clone = value => JSON.parse(JSON.stringify(value));
 function fixture({ sse = false, change = (_index, value) => value, override } = {}) {
