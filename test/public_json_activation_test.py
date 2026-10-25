@@ -108,4 +108,13 @@ class ActivationTests(unittest.TestCase):
         bad={**env,"GITHUB_REF":"refs/heads/other"}
         with self.assertRaises(ValueError):self.m.dispatch_context(bad,run,"a"*40,now)
 
+    def test_io_deadline_covers_the_entire_operation_and_restores_the_alarm(self):
+        import signal,time
+        prior=signal.getsignal(signal.SIGALRM)
+        started=time.monotonic()
+        with self.assertRaises(TimeoutError):self.m.bounded_io(lambda:time.sleep(1),0.03)
+        self.assertLess(time.monotonic()-started,0.5)
+        self.assertEqual(signal.getsignal(signal.SIGALRM),prior)
+        self.assertEqual(signal.getitimer(signal.ITIMER_REAL),(0.0,0.0))
+
 if __name__=="__main__":unittest.main()
