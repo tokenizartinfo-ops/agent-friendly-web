@@ -244,4 +244,85 @@ class ActivationTests(unittest.TestCase):
         self.assertEqual(order,["metadata","final_deployment"])
         self.assertEqual(self.m.prewrite_fence(self.read,self.read,expected),expected)
 
+
+    def test_identifier_ack_is_provisional_and_never_invents_traffic(self):
+        versions=self.m.traffic(self.new,self.old)
+        identifier={"id":"00000000-0000-0000-0000-000000000007"}
+        for inner in (identifier,{**identifier,"versions":versions},{**identifier,"strategy":"percentage"}):
+            for payload in (inner,{"success":True,"result":inner}):
+                result=self.m.parse_deployment_ack(payload,versions)
+                self.assertEqual(result["id"],identifier["id"])
+                self.assertEqual(result["ackCompleteness"],"provisional")
+                self.assertEqual("versions" in result,"versions" in inner)
+                self.assertNotIn("strategy",result)
+
+    def test_provisional_ack_never_tolerates_conflicting_present_fields(self):
+        versions=self.m.traffic(self.new,self.old)
+        identifier={"id":"00000000-0000-0000-0000-000000000007"}
+        for change in ({"versions":None},{"versions":[]},{"versions":self.m.traffic(self.old,self.new)},
+                       {"strategy":None},{"strategy":"other"},{"id":""}):
+            for payload in ({**identifier,**change},{"success":True,"result":{**identifier,**change}}):
+                with self.subTest(change=change),self.assertRaises(ValueError):
+                    self.m.parse_deployment_ack(payload,versions)
+
+    def test_ack_diagnostic_distinguishes_absence_from_conflict_without_data(self):
+        versions=self.m.traffic(self.new,self.old)
+        identifier={"id":"00000000-0000-0000-0000-000000000007"}
+        absent=self.m.deployment_ack_diagnostic({"success":True,"result":identifier},versions)
+        conflict=self.m.deployment_ack_diagnostic({"success":True,"result":{**identifier,"versions":[],"strategy":"other","author_email":"private"}},versions)
+        self.assertFalse(absent["versionsPresent"])
+        self.assertFalse(absent["strategyPresent"])
+        self.assertTrue(conflict["versionsPresent"])
+        self.assertTrue(conflict["strategyPresent"])
+        self.assertFalse(conflict["versionsMatch"])
+        self.assertFalse(conflict["strategyMatches"])
+        self.assertNotIn("private",str(conflict))
+        self.assertNotIn("author_email",conflict)
+
+    def test_traffic_truth_waits_for_authoritative_readback_even_after_valid_ack(self):
+        for identifiers_only in (False,True):
+            self.setUp()
+            self.state={"id":self.m.STAGED,"versions":self.m.traffic(self.old,self.new),"owner":self.m.STAGED_OWNER}
+            def write(phase,versions):
+                state=self.write(phase,versions)
+                return {"id":state["id"]} if identifiers_only else state
+            def observe(phase,seconds):
+                if phase=="normal":
+                    self.assertIsNone(self.receipt["trafficPromotion"])
+                    self.assertFalse(self.receipt.get("trafficReadbackVerified",False))
+                return {"ok":True}
+            self.m.activate(self.read,write,observe,lambda:self.left,self.receipt,lambda:None,already_staged=True)
+            self.assertTrue(self.receipt["ok"])
+            self.assertTrue(self.receipt["trafficPromotion"])
+            self.assertTrue(self.receipt["trafficReadbackVerified"])
+            self.assertEqual(self.writes,["promote"])
+
+    def test_identifier_ack_with_different_final_id_cannot_be_accepted(self):
+        self.state={"id":self.m.STAGED,"versions":self.m.traffic(self.old,self.new),"owner":self.m.STAGED_OWNER}
+        def write(phase,versions):
+            state=self.write(phase,versions)
+            return {"id":"00000000-0000-0000-0000-000000000009"} if phase=="promote" else state
+        self.m.activate(self.read,write,self.observe,lambda:self.left,self.receipt,lambda:None,already_staged=True)
+        self.assertFalse(self.receipt["ok"])
+        self.assertEqual(self.receipt["failureReason"],"promotion_drift")
+        self.assertTrue(self.receipt["rollbackVerified"])
+        self.assertEqual(self.writes,["promote","rollback"])
+        self.assertFalse(self.receipt.get("trafficReadbackVerified",False))
+
+    def test_identifier_ack_never_overwrites_foreign_owner_or_traffic(self):
+        for foreign_change in ({"owner":"different_actor"},{"versions":self.m.traffic(self.old,self.new)}):
+            self.setUp()
+            self.state={"id":self.m.STAGED,"versions":self.m.traffic(self.old,self.new),"owner":self.m.STAGED_OWNER}
+            def write(phase,versions):
+                state=self.write(phase,versions)
+                return {"id":state["id"]}
+            def observe(phase,_):
+                if phase=="normal":self.state.update(foreign_change)
+                return {"ok":True}
+            self.m.activate(self.read,write,observe,lambda:self.left,self.receipt,lambda:None,already_staged=True)
+            self.assertFalse(self.receipt["ok"])
+            self.assertEqual(self.writes,["promote"])
+            self.assertTrue(self.receipt["foreignActivity"])
+            self.assertIsNone(self.receipt["trafficPromotion"])
+
 if __name__=="__main__":unittest.main()
