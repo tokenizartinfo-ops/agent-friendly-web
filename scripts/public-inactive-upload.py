@@ -89,14 +89,35 @@ def upload_config(_state=None):
             "d1_databases": [{"binding": "DB", "database_name": WORKER, "database_id": DB}],
             "logpush": False, "observability": copy.deepcopy(OBSERVABILITY)}
 
-def upload_context(env, run, checkout, now):
+def upload_packet(packet="legacy"):
+    # Closed profiles return new literals: callers cannot mutate another invocation.
+    if packet == "legacy":
+        return {"sourceRevision": "61909a5805549abb9534679d1735c3be8745071f",
+                "contractPath": "config/public-cloud-delivery.v1.json",
+                "workflow": ".github/workflows/afw-public-inactive-upload.yml",
+                "receiptPath": "output/public-upload-receipt.json"}
+    if packet == "json_budget":
+        return {"sourceRevision": "d3b638a46d1f9ab559142222e181e9aae2e0a83e",
+                "contractPath": "config/public-json-budget-delivery.v1.json",
+                "workflow": ".github/workflows/afw-public-json-inactive-upload.yml",
+                "receiptPath": "output/public-json-upload-receipt.json"}
+    raise ValueError("upload_packet")
+
+def check_packet_contract(contract, packet="legacy"):
+    profile = upload_packet(packet)
+    require(contract["sourceRevision"] == profile["sourceRevision"]
+            and contract["target"] == {"accountId": ACCOUNT, "worker": WORKER, "origin": "https://agentfriendlyweb.dev",
+                                      "entrypoint": "server/index.js", "assets": "client"}, "package_scope")
+
+def upload_context(env, run, checkout, now, packet="legacy"):
+    profile = upload_packet(packet)
     require(env.get("GITHUB_ACTIONS") == "true" and env.get("GITHUB_REPOSITORY") == REPO
             and env.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
             and env.get("GITHUB_REF") == "refs/heads/main" and env.get("GITHUB_RUN_ATTEMPT") == "1", "dispatch_scope")
     require(re.fullmatch("[a-f0-9]{40}", checkout or "") and env.get("GITHUB_SHA") == checkout
             and run.get("head_sha") == checkout and str(run.get("id")) == env.get("GITHUB_RUN_ID")
             and run.get("run_attempt") == 1 and run.get("event") == "workflow_dispatch"
-            and run.get("path") == ".github/workflows/afw-public-inactive-upload.yml", "dispatch_identity")
+            and run.get("path") == profile["workflow"], "dispatch_identity")
     require(all(run.get(key, {}).get("full_name") == REPO for key in ("repository", "head_repository")), "dispatch_repo")
     age = (now - qual.parse_time(run["created_at"])).total_seconds()
     require(0 <= age < 600, "dispatch_expired")
@@ -130,10 +151,11 @@ def extract_qualified(data, inventory, expected_hash, destination):
             with target.open("xb") as output:
                 output.write(archive.read(item["path"]))
 
-def wrangler_command(executable, config, tag, dry_run):
-    require(re.fullmatch(r"61909a58-r[1-9][0-9]*-a1", tag) is not None, "upload_tag")
+def wrangler_command(executable, config, tag, dry_run, packet="legacy"):
+    prefix = upload_packet(packet)["sourceRevision"][:8]
+    require(re.fullmatch(re.escape(prefix)+r"-r[1-9][0-9]*-a1", tag) is not None, "upload_tag")
     command = [str(executable), "versions", "upload", "--config", str(config), "--no-bundle", "--keep-vars",
-               "--tag", tag, "--message", "AFW exact61909a58 inactive-only cloud package; no promotion"]
+               "--tag", tag, "--message", "AFW exact"+prefix+" inactive-only cloud package; no promotion"]
     if dry_run:
         command += ["--dry-run"]
     return command
@@ -218,7 +240,8 @@ def child(command, cwd, token, deadline):
         process.stdout.close()
         process.stderr.close()
 
-def main():
+def main(packet="legacy"):
+    profile = upload_packet(packet)
     mode = sys.argv[1] if len(sys.argv) == 2 else ""
     require(mode in ("verify_only", "upload_inactive", "check_credential"), "operation")
     token = os.environ.get("CLOUDFLARE_API_TOKEN", "")
@@ -231,7 +254,7 @@ def main():
     def save():
         receipt["checkedAt"] = datetime.now(timezone.utc).isoformat()
         (ROOT/"output").mkdir(exist_ok=True)
-        (ROOT/"output/public-upload-receipt.json").write_text(json.dumps(receipt, indent=2)+"\n")
+        (ROOT/profile["receiptPath"]).write_text(json.dumps(receipt, indent=2)+"\n")
     try:
         require(os.environ.get("GITHUB_ACTIONS") == "true" and os.environ.get("GITHUB_REPOSITORY") == REPO, "runner_scope")
         checkout = subprocess.run(["git", "rev-parse", "--verify", "HEAD"], cwd=ROOT, capture_output=True,
@@ -239,15 +262,13 @@ def main():
         qual.qualifier_context(os.environ, checkout)
         if mode == "upload_inactive":
             require(bool(token.strip()), "credential_unavailable")  # Before all network/child/extraction.
-        contract = json.loads((ROOT/"config/public-cloud-delivery.v1.json").read_text())
+        contract = json.loads((ROOT/profile["contractPath"]).read_text())
+        check_packet_contract(contract, packet)
         expected = contract["baseline"]
         handoff = ROOT/"output/public-cloud-delivery"
         report = json.loads((handoff/"receipt.json").read_text())
         inventory = json.loads((handoff/"inventory.json").read_text())
         data = (handoff/"qualified-dist.zip").read_bytes()
-        require(contract["sourceRevision"] == "61909a5805549abb9534679d1735c3be8745071f"
-                and contract["target"] == {"accountId": ACCOUNT, "worker": WORKER, "origin": "https://agentfriendlyweb.dev",
-                                          "entrypoint": "server/index.js", "assets": "client"}, "package_scope")
         require(report["qualifierRevision"] == checkout and report["artifactId"] == contract["artifact"]["id"]
                 and report["zipSha256"] == contract["artifact"]["sha256"]
                 and report["sourceRevision"] == contract["sourceRevision"]
@@ -265,12 +286,12 @@ def main():
             require(bool(gh_token) and re.fullmatch("[1-9][0-9]*", run_id), "dispatch_identity")
             run = json.loads(qual.github_get("https://api.github.com/repos/"+REPO+"/actions/runs/"+run_id, gh_token, 1048576))
             original_mono = time.monotonic()
-            context = upload_context(os.environ, run, checkout, datetime.now(timezone.utc))
+            context = upload_context(os.environ, run, checkout, datetime.now(timezone.utc), packet)
             deadline = original_mono+context["remainingSeconds"]
         # First attempt only is also used for the verification tag; reruns must not silently renew upload authority.
         run_id = os.environ.get("GITHUB_RUN_ID", "")
         require(re.fullmatch("[1-9][0-9]*", run_id), "run_identity")
-        tag = "61909a58-r"+run_id+"-a1"
+        tag = profile["sourceRevision"][:8]+"-r"+run_id+"-a1"
         runner = Path(os.environ.get("RUNNER_TEMP", ""))
         require(runner.is_absolute() and runner.is_dir(), "runner_temp")
         package = Path(tempfile.mkdtemp(prefix="afw-public-inactive-", dir=runner))/"package"
@@ -284,7 +305,7 @@ def main():
         require(version == "4.128.0", "locked_uploader_version")
         if mode == "verify_only":
             receipt["phase"] = "offline_dry_run"
-            child(wrangler_command(executable, config, tag, True), package, "", deadline=deadline)
+            child(wrangler_command(executable, config, tag, True, packet), package, "", deadline=deadline)
             verify_files(package, inventory)
             receipt.update({"ok": True, "archiveExtractedInRunner": True, "files": inventory["files"],
                             "wranglerVersion": version, "remoteConfigurationChecked": False, "publicationReady": False})
@@ -299,7 +320,7 @@ def main():
                 require(remaining() > 0, "dispatch_expired")
                 receipt["uploadAttempted"] = True
                 save()  # A timeout/unknown ACK never causes an automatic retry.
-                stdout = child(wrangler_command(executable, config, tag, False), package, token, deadline=deadline)
+                stdout = child(wrangler_command(executable, config, tag, False, packet), package, token, deadline=deadline)
                 ids = re.findall(r"Worker Version ID:\s*(" + UUID + ")", stdout)
                 require(len(ids) == 1, "upload_ack_unknown")
                 return ids[0]
