@@ -73,6 +73,7 @@ class ActivationTests(unittest.TestCase):
         self.assertEqual(self.writes,["stage0","promote","rollback"])
         self.assertFalse(self.receipt["ok"])
         self.assertTrue(self.receipt["rollbackVerified"])
+        self.assertIs(self.receipt.get("trafficPromotion"),True)
     def test_original_expiry_prevents_every_mutation(self):
         self.left=0
         self.run_it()
