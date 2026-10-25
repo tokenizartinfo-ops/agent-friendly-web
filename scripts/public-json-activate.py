@@ -3,6 +3,7 @@ import importlib.util
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
 import time
@@ -38,14 +39,50 @@ def marker(receipt,phase):
 def owned(state,receipt,phase):
     return state.get("owner")==marker(receipt,phase)
 
+def bounded_io(action,seconds):
+    """Bound the whole Linux HTTP operation, including a slowly dripping body."""
+    upl.require(isinstance(seconds,(int,float)) and 0<seconds<=10,"io_deadline")
+    upl.require(signal.getitimer(signal.ITIMER_REAL)==(0.0,0.0),"existing_io_alarm")
+    prior=signal.getsignal(signal.SIGALRM)
+    def expired(*_):raise TimeoutError("provider_operation_deadline")
+    signal.signal(signal.SIGALRM,expired)
+    try:
+        signal.setitimer(signal.ITIMER_REAL,seconds)
+        return action()
+    finally:
+        signal.setitimer(signal.ITIMER_REAL,0)
+        signal.signal(signal.SIGALRM,prior)
+
+def same_snapshot(actual,expected):
+    return (isinstance(actual,dict) and isinstance(expected,dict)
+            and actual.get("id")==expected.get("id") and actual.get("owner")==expected.get("owner")
+            and same_traffic(actual.get("versions"),expected.get("versions")))
+
+def prewrite_fence(read_snapshot,read_deployment,expected):
+    """Final deployment GET follows every metadata read. API has no documented CAS."""
+    current=read_snapshot()
+    upl.require(same_snapshot(current,expected),"prewrite_metadata_drift")
+    final=read_deployment()
+    upl.require(same_snapshot(final,current),"prewrite_deployment_drift")
+    return final
+
+def deployment_view(dep):
+    return {"id":dep["id"],"versions":dep["versions"],"owner":dep.get("annotations",{}).get("workers/message","")}
+
 def activate(read,write,observe,remaining,receipt,save):
     """Trusted adapters; no retry of a mutation, including after an unknown ACK."""
     def mutate(phase,versions):
         upl.require(remaining()>0 and phase not in receipt["mutationAttempts"],"mutation_expired_or_repeated")
         receipt["mutationAttempts"].append(phase)
+        if phase=="promote":
+            receipt.update(trafficPromotionAttempted=True,trafficPromotion=None)
         receipt["phase"]=phase
         save()
-        return write(phase,versions)
+        result=write(phase,versions)
+        if phase=="promote":
+            receipt["trafficPromotion"]=True
+            save()
+        return result
     try:
         initial=read()
         upl.require(initial["id"]==INITIAL and same_traffic(initial["versions"],traffic(OLD,PREVIOUS)),"initial_drift")
@@ -74,8 +111,11 @@ def activate(read,write,observe,remaining,receipt,save):
             current=read()
             old_serving=same_traffic(current["versions"],traffic(OLD,NEW))
             if (current["id"]==INITIAL and same_traffic(current["versions"],traffic(OLD,PREVIOUS))) or (old_serving and (owned(current,receipt,"stage0") or owned(current,receipt,"rollback"))):
-                receipt.update(oldServing=True,phase="not_promoted_or_recovered")
-            elif owned(current,receipt,"promote") and same_traffic(current["versions"],traffic(NEW,OLD)) and remaining()>0:
+                receipt.update(oldServing=True,phase="unknown_promotion_ack_old_observed" if receipt.get("trafficPromotionAttempted") and receipt.get("trafficPromotion") is None else "not_promoted_or_recovered")
+            elif owned(current,receipt,"promote") and same_traffic(current["versions"],traffic(NEW,OLD)):
+                receipt["trafficPromotion"]=True
+                save()
+                upl.require(remaining()>0,"recovery_authority_expired")
                 try:
                     rolled=mutate("rollback",traffic(OLD,NEW))
                     current=read()
@@ -150,7 +190,9 @@ def main():
         remaining=lambda:deadline-time.monotonic()
         upl.require(datetime.now(timezone.utc)<upl.qual.parse_time(contract["artifact"]["expiresAt"]),"package_expired")
         # Immutable candidate read before any write. Credential never enters the observer.
-        candidate=upl.cf_get("/versions/"+NEW,token,10)
+        def provider_get(suffix):
+            return bounded_io(lambda:upl.cf_get(suffix,token,10),10)
+        candidate=provider_get("/versions/"+NEW)
         expected=contract["baseline"]
         upl.require(candidate["id"]==NEW and candidate.get("annotations",{}).get("workers/tag")==TAG
                     and upl.bindings_hash(candidate["resources"]["bindings"])==expected["bindingsSha256"]
@@ -158,16 +200,17 @@ def main():
         last={}
         ack={}
         def read():
-            dep=upl.cf_get("/deployments",token,10)["deployments"][0]
+            dep=provider_get("/deployments")["deployments"][0]
             positive=[v for v in dep["versions"] if v["percentage"]!=0]
             upl.require(len(positive)==1 and positive[0]["percentage"]==100 and positive[0]["version_id"] in (OLD,NEW),"traffic_scope")
             v=positive[0]["version_id"]
             exp={**expected,"versionId":v,"deploymentId":dep["id"]}
-            state={"deployment":dep,"version":upl.cf_get("/versions/"+v,token,10),
-                   "settings":upl.cf_get("/settings",token,10),"subdomain":upl.cf_get("/subdomain",token,10)}
+            state={"deployment":dep,"version":provider_get("/versions/"+v),
+                   "settings":provider_get("/settings"),"subdomain":provider_get("/subdomain")}
             upl.check_state(state,exp)
-            last.update(id=dep["id"])
-            return {"id":dep["id"],"versions":dep["versions"],"owner":dep.get("annotations",{}).get("workers/message","")}
+            view=deployment_view(dep)
+            last["snapshot"]=view
+            return view
         def observe(phase,seconds):
             # Normal deadline starts at the promotion ACK, not at observer start.
             end=min(deadline,ack["promote"]+30 if phase=="normal" else time.monotonic()+seconds)
@@ -181,21 +224,24 @@ def main():
         upl.require(receipt["baseline"].get("ok") is True,"public_baseline")
         def write(phase,versions):
             # Recheck configuration/current deployment immediately before this single POST.
-            expected_id=last.get("id")
-            current=read()
-            upl.require(current["id"]==expected_id and remaining()>0,"prewrite_drift_or_expiry")
+            expected_snapshot=last.get("snapshot")
+            prewrite_fence(read,lambda:deployment_view(provider_get("/deployments")["deployments"][0]),expected_snapshot)
+            upl.require(remaining()>0,"prewrite_expiry")
             upl.require(datetime.now(timezone.utc)<upl.qual.parse_time(contract["artifact"]["expiresAt"]),"package_expired")
             body={"strategy":"percentage","versions":versions,"annotations":{"workers/message":marker(receipt,phase)}}
             request=urllib.request.Request("https://api.cloudflare.com/client/v4"+upl.BASE+"/deployments",
                      data=json.dumps(body).encode(),headers={"Authorization":"Bearer "+token,"Content-Type":"application/json","Accept":"application/json"},method="POST")
             opener=urllib.request.build_opener(urllib.request.ProxyHandler({}),upl.qual.NoRedirect())
-            with opener.open(request,timeout=min(10,remaining())) as response:
-                data=response.read(1048577)
-                upl.require(response.status==200 and len(data)<=1048576,"deployment_ack_unknown")
-            result=json.loads(data)
-            upl.require(result.get("success") is True,"deployment_ack_unknown")
-            result=result["result"]
-            upl.require(re.fullmatch(upl.UUID,result.get("id","")) and same_traffic(result.get("versions"),versions),"deployment_ack_unknown")
+            def send_once():
+                with opener.open(request,timeout=min(10,remaining())) as response:
+                    data=response.read(1048577)
+                    upl.require(response.status==200 and len(data)<=1048576,"deployment_ack_unknown")
+                result=json.loads(data)
+                upl.require(result.get("success") is True,"deployment_ack_unknown")
+                result=result["result"]
+                upl.require(re.fullmatch(upl.UUID,result.get("id","")) and same_traffic(result.get("versions"),versions),"deployment_ack_unknown")
+                return result
+            result=bounded_io(send_once,min(10,remaining()))
             ack[phase]=time.monotonic()
             receipt[phase+"AckAt"]=datetime.now(timezone.utc).isoformat()
             if phase=="promote":receipt["trafficPromotion"]=True

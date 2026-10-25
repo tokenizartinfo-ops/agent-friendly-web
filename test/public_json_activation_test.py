@@ -74,6 +74,18 @@ class ActivationTests(unittest.TestCase):
         self.assertFalse(self.receipt["ok"])
         self.assertTrue(self.receipt["rollbackVerified"])
         self.assertIs(self.receipt.get("trafficPromotion"),True)
+    def test_lost_promotion_ack_with_old_observed_remains_unknown(self):
+        def write(phase,versions):
+            if phase=="promote":raise TimeoutError("not_observed")
+            return self.write(phase,versions)
+        self.run_it(write=write)
+        self.assertEqual(self.writes,["stage0"])
+        self.assertEqual(self.receipt["mutationAttempts"],["stage0","promote"])
+        self.assertTrue(self.receipt["trafficPromotionAttempted"])
+        self.assertIsNone(self.receipt["trafficPromotion"])
+        self.assertEqual(self.receipt["phase"],"unknown_promotion_ack_old_observed")
+        self.assertTrue(self.receipt["oldServing"])
+
     def test_original_expiry_prevents_every_mutation(self):
         self.left=0
         self.run_it()
