@@ -120,6 +120,71 @@ class ActivationTests(unittest.TestCase):
         bad={**env,"GITHUB_REF":"refs/heads/other"}
         with self.assertRaises(ValueError):self.m.dispatch_context(bad,run,"a"*40,now)
 
+    def test_documented_direct_ack_and_envelope_share_strict_validation(self):
+        versions=self.m.traffic(self.old,self.new)
+        direct={"id":"83207fc9-34d7-4a44-9ada-1ebf58a8c041","source":"api","strategy":"percentage","versions":versions,"created_on":"2026-10-25T13:09:44.144891Z","annotations":{"workers/message":"private_not_returned"},"author_email":"must_not_be_logged"}
+        for payload in (direct,{"success":True,"result":direct}):
+            result=self.m.parse_deployment_ack(payload,versions)
+            self.assertEqual(result["id"],direct["id"])
+            self.assertEqual(result["versions"],versions)
+            self.assertNotIn("author_email",result)
+            self.assertNotIn("annotations",result)
+        for payload in ({"success":False,"result":direct},{"success":True,"result":direct,"id":"ambiguous"},{**direct,"versions":self.m.traffic(self.new,self.old)},{**direct,"id":"not-a-uuid"},{**direct,"strategy":"other"}):
+            with self.subTest(payload=payload),self.assertRaises(ValueError):self.m.parse_deployment_ack(payload,versions)
+
+    def test_fixed_staged_continuation_never_replays_stage0(self):
+        self.state={"id":self.m.STAGED,"versions":self.m.traffic(self.old,self.new),"owner":self.m.STAGED_OWNER}
+        self.m.activate(self.read,self.write,self.observe,lambda:self.left,self.receipt,lambda:None,already_staged=True)
+        self.assertEqual(self.writes,["promote"])
+        self.assertTrue(self.receipt["ok"])
+        self.assertEqual(self.calls,[("stage0",60),("normal",30)])
+        self.assertEqual(self.receipt["adoptedStage0DeploymentId"],self.m.STAGED)
+
+    def test_staged_unknown_promotion_ack_preserves_unknown_or_recovers_owned_promotion(self):
+        for applied in (False,True):
+            self.setUp()
+            self.state={"id":self.m.STAGED,"versions":self.m.traffic(self.old,self.new),"owner":self.m.STAGED_OWNER}
+            def write(phase,versions):
+                if phase=="promote":
+                    if applied:self.write(phase,versions)
+                    raise TimeoutError("lost_ack")
+                return self.write(phase,versions)
+            self.m.activate(self.read,write,self.observe,lambda:self.left,self.receipt,lambda:None,already_staged=True)
+            with self.subTest(applied=applied):
+                self.assertFalse(self.receipt["ok"])
+                if applied:
+                    self.assertEqual(self.writes,["promote","rollback"])
+                    self.assertTrue(self.receipt["trafficPromotion"])
+                    self.assertTrue(self.receipt["rollbackVerified"])
+                else:
+                    self.assertEqual(self.writes,[])
+                    self.assertIsNone(self.receipt["trafficPromotion"])
+                    self.assertTrue(self.receipt["oldServing"])
+
+    def test_staged_interleaved_foreign_deployment_prevents_promotion(self):
+        self.state={"id":self.m.STAGED,"versions":self.m.traffic(self.old,self.new),"owner":self.m.STAGED_OWNER}
+        def observe(*_):
+            self.state["owner"]="other_actor"
+            return {"ok":True}
+        self.m.activate(self.read,self.write,observe,lambda:self.left,self.receipt,lambda:None,already_staged=True)
+        self.assertEqual(self.writes,[])
+        self.assertTrue(self.receipt["foreignActivity"])
+
+    def test_staged_continuation_rejects_other_id_owner_or_traffic(self):
+        correct={"id":self.m.STAGED,"versions":self.m.traffic(self.old,self.new),"owner":self.m.STAGED_OWNER}
+        for change in ({"id":self.m.INITIAL},{"owner":"someone_else"},{"versions":self.m.traffic(self.new,self.old)}):
+            self.setUp()
+            self.state={**correct,**change}
+            self.m.activate(self.read,self.write,self.observe,lambda:self.left,self.receipt,lambda:None,already_staged=True)
+            with self.subTest(change=change):self.assertEqual(self.writes,[])
+
+    def test_staged_failed_acceptance_retains_old_traffic_without_any_post(self):
+        self.state={"id":self.m.STAGED,"versions":self.m.traffic(self.old,self.new),"owner":self.m.STAGED_OWNER}
+        self.m.activate(self.read,self.write,lambda *_:{"ok":False},lambda:self.left,self.receipt,lambda:None,already_staged=True)
+        self.assertEqual(self.writes,[])
+        self.assertFalse(self.receipt["ok"])
+        self.assertTrue(self.receipt["oldServing"])
+
     def test_insufficient_recovery_budget_never_promotes(self):
         for available in (180,239,359):
             self.setUp()

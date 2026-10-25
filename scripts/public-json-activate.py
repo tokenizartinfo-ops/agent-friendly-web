@@ -19,6 +19,8 @@ OLD="29927b77-1e41-47df-9854-ab9830f84755"
 NEW="1772ceae-7e8d-4dbc-bc1d-0ade956a3e45"
 PREVIOUS="8fc686dd-bcf4-4445-a8d9-fdb8fc3224ff"
 INITIAL="3cec273c-50ef-4010-b813-f917c3b1169d"
+STAGED="83207fc9-34d7-4a44-9ada-1ebf58a8c041"
+STAGED_OWNER="AFW public-json r40196315783 a1 stage0"
 WORKFLOW=".github/workflows/afw-public-json-activation.yml"
 SMOKE_SHA="907bd74247f0b1a69bae7259101b311fa7357b8d94c27e3a14d491bb048f741e"
 INVENTORY_SHA="d008e8a79ff789dbe78b294fb7c7ebcb5915068cf15d54347fe6b3b747e4c4a2"
@@ -69,7 +71,27 @@ def prewrite_fence(read_snapshot,read_deployment,expected):
 def deployment_view(dep):
     return {"id":dep["id"],"versions":dep["versions"],"owner":dep.get("annotations",{}).get("workers/message","")}
 
-def activate(read,write,observe,remaining,receipt,save):
+def parse_deployment_ack(payload,versions):
+    """POST's documented direct deployment, or an explicitly successful envelope."""
+    upl.require(isinstance(payload,dict),"deployment_ack_schema")
+    if "success" in payload:
+        upl.require(payload.get("success") is True and isinstance(payload.get("result"),dict)
+                    and not any(k in payload for k in ("id","versions","strategy")),"deployment_ack_schema")
+        result=payload["result"]
+        shape="envelope"
+    else:
+        upl.require("result" not in payload,"deployment_ack_schema")
+        result=payload
+        shape="direct"
+    upl.require(isinstance(result.get("id"),str) and re.fullmatch(upl.UUID,result["id"]) and result.get("strategy")=="percentage"
+                and same_traffic(result.get("versions"),versions),"deployment_ack_schema")
+    return {"id":result["id"],"versions":result["versions"],"ackShape":shape}
+
+def staged_state(state,receipt,already_staged):
+    return (owned(state,receipt,"stage0") or
+            (already_staged and state.get("id")==STAGED and state.get("owner")==STAGED_OWNER))
+
+def activate(read,write,observe,remaining,receipt,save,already_staged=False):
     """Trusted adapters; no retry of a mutation, including after an unknown ACK."""
     def mutate(phase,versions):
         upl.require(remaining()>0 and phase not in receipt["mutationAttempts"],"mutation_expired_or_repeated")
@@ -85,16 +107,23 @@ def activate(read,write,observe,remaining,receipt,save):
         return result
     try:
         initial=read()
-        upl.require(initial["id"]==INITIAL and same_traffic(initial["versions"],traffic(OLD,PREVIOUS)),"initial_drift")
         upl.require(remaining()>=240,"insufficient_original_budget")
-        staged=mutate("stage0",traffic(OLD,NEW))
+        if already_staged:
+            upl.require(initial["id"]==STAGED and initial.get("owner")==STAGED_OWNER
+                        and same_traffic(initial["versions"],traffic(OLD,NEW)),"fixed_stage0_drift")
+            staged={"id":STAGED}
+            receipt["adoptedStage0DeploymentId"]=STAGED
+            save()
+        else:
+            upl.require(initial["id"]==INITIAL and same_traffic(initial["versions"],traffic(OLD,PREVIOUS)),"initial_drift")
+            staged=mutate("stage0",traffic(OLD,NEW))
         current=read()
-        upl.require(current["id"]==staged["id"] and owned(current,receipt,"stage0")
+        upl.require(current["id"]==staged["id"] and staged_state(current,receipt,already_staged)
                     and same_traffic(current["versions"],traffic(OLD,NEW)),"stage0_drift")
         receipt["stage0"]=observe("stage0",60)
         upl.require(receipt["stage0"].get("ok") is True,"stage0_acceptance")
         current=read()
-        upl.require(current["id"]==staged["id"] and owned(current,receipt,"stage0")
+        upl.require(current["id"]==staged["id"] and staged_state(current,receipt,already_staged)
                     and same_traffic(current["versions"],traffic(OLD,NEW)),"stage0_drift")
         # Worst bounded late-failure path: 60+30+40+40+60+40+40=310s.
         # Keep 50s additional margin inside the original, never-renewed authority.
@@ -106,13 +135,18 @@ def activate(read,write,observe,remaining,receipt,save):
         upl.require(current["id"]==promoted["id"] and owned(current,receipt,"promote")
                     and same_traffic(current["versions"],traffic(NEW,OLD)),"promotion_drift")
         receipt.update(ok=True,phase="accepted",activeDeploymentId=current["id"],activeVersion=NEW)
-    except Exception:
+    except Exception as error:
         receipt.update(ok=False,error="activation_or_acceptance_failed")
+        allowed_reasons={"deployment_ack_schema","deployment_ack_http_or_size","prewrite_metadata_drift",
+                         "prewrite_deployment_drift","fixed_stage0_drift","stage0_acceptance","normal_acceptance",
+                         "insufficient_recovery_budget","stage0_drift","promotion_drift"}
+        receipt["failureReason"]=str(error) if isinstance(error,ValueError) and str(error) in allowed_reasons else "unclassified"
+
         # Reads may close evidence after expiry, but they cannot renew mutation authority.
         try:
             current=read()
             old_serving=same_traffic(current["versions"],traffic(OLD,NEW))
-            if (current["id"]==INITIAL and same_traffic(current["versions"],traffic(OLD,PREVIOUS))) or (old_serving and (owned(current,receipt,"stage0") or owned(current,receipt,"rollback"))):
+            if (current["id"]==INITIAL and same_traffic(current["versions"],traffic(OLD,PREVIOUS))) or (old_serving and (staged_state(current,receipt,already_staged) or owned(current,receipt,"rollback"))):
                 receipt.update(oldServing=True,phase="unknown_promotion_ack_old_observed" if receipt.get("trafficPromotionAttempted") and receipt.get("trafficPromotion") is None else "not_promoted_or_recovered")
             elif owned(current,receipt,"promote") and same_traffic(current["versions"],traffic(NEW,OLD)):
                 receipt["trafficPromotion"]=True
@@ -161,7 +195,7 @@ def packet():
 
 def main():
     mode=sys.argv[1] if len(sys.argv)==2 else ""
-    upl.require(mode in ("verify_only","activate"),"operation")
+    upl.require(mode in ("verify_only","continue_staged"),"operation")
     contract,_=packet()
     receipt={"kind":"fixed_public_json_cloud_activation","mode":mode,"ok":False,"runId":os.environ.get("GITHUB_RUN_ID",""),
              "mutationAttempts":[],"trafficPromotion":False,"operationalReadiness":False,"privateAcceptance":False,
@@ -236,20 +270,28 @@ def main():
             opener=urllib.request.build_opener(urllib.request.ProxyHandler({}),upl.qual.NoRedirect())
             def send_once():
                 with opener.open(request,timeout=min(10,remaining())) as response:
+                    receipt[phase+"HttpStatus"]=response.status
                     data=response.read(1048577)
-                    upl.require(response.status==200 and len(data)<=1048576,"deployment_ack_unknown")
-                result=json.loads(data)
-                upl.require(result.get("success") is True,"deployment_ack_unknown")
-                result=result["result"]
-                upl.require(re.fullmatch(upl.UUID,result.get("id","")) and same_traffic(result.get("versions"),versions),"deployment_ack_unknown")
-                return result
+                    save()
+                    upl.require(response.status==200 and len(data)<=1048576,"deployment_ack_http_or_size")
+                payload=json.loads(data)
+                inner=payload.get("result") if isinstance(payload,dict) and "success" in payload else payload
+                receipt[phase+"Response"]={
+                    "shape":"envelope" if isinstance(payload,dict) and "success" in payload else "direct" if isinstance(payload,dict) and "id" in payload else "other",
+                    "successIsTrue":isinstance(payload,dict) and payload.get("success") is True,
+                    "idIsUuid":isinstance(inner,dict) and isinstance(inner.get("id"),str) and re.fullmatch(upl.UUID,inner["id"]) is not None,
+                    "versionsMatch":isinstance(inner,dict) and same_traffic(inner.get("versions"),versions),
+                    "strategyMatches":isinstance(inner,dict) and inner.get("strategy")=="percentage"}
+                save()
+                return parse_deployment_ack(payload,versions)
             result=bounded_io(send_once,min(10,remaining()))
+            receipt[phase+"AckShape"]=result["ackShape"]
             ack[phase]=time.monotonic()
             receipt[phase+"AckAt"]=datetime.now(timezone.utc).isoformat()
             if phase=="promote":receipt["trafficPromotion"]=True
             save()
             return result
-        activate(read,write,observe,remaining,receipt,save)
+        activate(read,write,observe,remaining,receipt,save,already_staged=True)
         print(json.dumps(receipt))
         if not receipt["ok"]: raise SystemExit(2)
     except SystemExit:
