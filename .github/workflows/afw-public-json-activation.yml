@@ -1,0 +1,86 @@
+name: AFW public JSON cloud activation
+on:
+  pull_request:
+    paths:
+      - 'scripts/public-json-activate.py'
+      - 'scripts/public-json-acceptance.mjs'
+      - 'scripts/public-inactive-upload.py'
+      - 'scripts/smoke-cloudflare-native-local.mjs'
+      - 'config/public-json-budget-delivery.v1.json'
+      - 'docs/evidence/2026-10-24-public-json-budget/**'
+      - 'test/public_json_activation_test.py'
+      - 'test/public-json-acceptance.test.mjs'
+      - '.github/workflows/afw-public-json-activation.yml'
+  workflow_dispatch:
+    inputs:
+      operation:
+        type: choice
+        description: Verify source only, or activate the one fixed already-uploaded public candidate
+        default: verify_only
+        options:
+          - verify_only
+          - activate
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: afw-public-inactive-upload
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && (github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      AFW_QUALIFIER_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test transition ownership, expiry, unknown ACK and recovery
+        run: python3 -m unittest discover -s test -p 'public_json_activation_test.py' -v
+      - name: Test bounded observer without network requests
+        run: node --test test/public-json-acceptance.test.mjs
+      - name: Check literal packet and smoke source without remote access
+        run: python3 scripts/public-json-activate.py verify_only
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afw-public-json-activation-source-${{ github.run_id }}-${{ github.run_attempt }}
+          path: output/public-json-activation-receipt.json
+          if-no-files-found: error
+          retention-days: 7
+  activate:
+    needs: verify
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.operation == 'activate'
+    environment: afw-public-release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 11
+    env:
+      AFW_QUALIFIER_REVISION: ${{ github.sha }}
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check, stage, verify, activate and close in this executor
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.AFW_PUBLIC_UPLOAD_TOKEN }}
+        run: python3 scripts/public-json-activate.py activate
+      - name: Retain sanitized result even after a closed failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-public-json-activation-result-${{ github.run_id }}-${{ github.run_attempt }}
+          path: output/public-json-activation-receipt.json
+          if-no-files-found: ignore
+          retention-days: 7
