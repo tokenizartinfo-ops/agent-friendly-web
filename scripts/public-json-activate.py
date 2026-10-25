@@ -202,8 +202,8 @@ def main():
             save()
             return result
         activate(read,write,observe,remaining,receipt,save)
-        if not receipt["ok"]: raise SystemExit(2)
         print(json.dumps(receipt))
+        if not receipt["ok"]: raise SystemExit(2)
     except SystemExit:
         raise
     except Exception:
