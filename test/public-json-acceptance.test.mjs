@@ -48,3 +48,12 @@ test('response reader enforces512KiB while streaming',async()=>{
  await assert.rejects(readCapped(response),/response_cap/);
  assert.equal(cancelled,true);
 });
+
+test('directed requests hit exact JSON depth and value limits with valid method metadata',()=>{
+ function measure(value){const pending=[[value,1]];let count=0,depth=0;while(pending.length){const[v,d]=pending.pop();count++;depth=Math.max(depth,d);if(v&&typeof v==='object')for(const c of Object.values(v))pending.push([c,d+1]);}return {count,depth};}
+ assert.equal(measure(JSON.parse(bodies.depth64)).depth,64);
+ assert.equal(measure(JSON.parse(bodies.depth65)).depth,65);
+ assert.equal(measure(JSON.parse(bodies.values4096)).count,4096);
+ assert.equal(measure(JSON.parse(bodies.values4097)).count,4097);
+ for(const b of Object.values(bodies))assert.ok(Buffer.byteLength(b)<32768);
+});

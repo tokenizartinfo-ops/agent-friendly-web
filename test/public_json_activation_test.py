@@ -86,4 +86,25 @@ class ActivationTests(unittest.TestCase):
         self.assertEqual(self.writes,["stage0"])
         self.assertTrue(self.receipt["oldServing"])
 
+    def test_unknown_rollback_ack_is_read_back_without_replaying_it(self):
+        def write(phase,versions):
+            state=self.write(phase,versions)
+            if phase=="rollback": raise TimeoutError("no_ack")
+            return state
+        self.run_it(write=write,observe=lambda phase,_:{"ok":phase=="stage0"})
+        self.assertEqual(self.writes,["stage0","promote","rollback"])
+        self.assertFalse(self.receipt["ok"])
+        self.assertTrue(self.receipt["rollbackVerified"])
+    def test_dispatch_ref_attempt_workflow_and_original_age_are_fenced(self):
+        from datetime import datetime,timedelta,timezone
+        now=datetime(2026,10,25,12,tzinfo=timezone.utc)
+        env={"GITHUB_ACTIONS":"true","GITHUB_REPOSITORY":self.m.upl.REPO,"GITHUB_EVENT_NAME":"workflow_dispatch","GITHUB_REF":"refs/heads/main","GITHUB_RUN_ATTEMPT":"1","GITHUB_SHA":"a"*40,"GITHUB_RUN_ID":"123"}
+        run={"id":123,"head_sha":"a"*40,"run_attempt":1,"event":"workflow_dispatch","path":self.m.WORKFLOW,"created_at":(now-timedelta(seconds=60)).isoformat(),"repository":{"full_name":self.m.upl.REPO},"head_repository":{"full_name":self.m.upl.REPO}}
+        self.assertEqual(self.m.dispatch_context(env,run,"a"*40,now),540)
+        for change in [{"path":".github/workflows/afw-public-inactive-upload.yml"},{"run_attempt":2},{"created_at":(now-timedelta(seconds=600)).isoformat()}]:
+            bad={**run,**change}
+            with self.subTest(change=change),self.assertRaises(ValueError):self.m.dispatch_context(env,bad,"a"*40,now)
+        bad={**env,"GITHUB_REF":"refs/heads/other"}
+        with self.assertRaises(ValueError):self.m.dispatch_context(bad,run,"a"*40,now)
+
 if __name__=="__main__":unittest.main()
