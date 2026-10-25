@@ -61,8 +61,43 @@ export async function readCapped(response){
  }finally{reader.releaseLock();}
  return Buffer.concat(chunks);
 }
-export function protocolResult(name,status,bytes){
- let json;try{json=JSON.parse(bytes.toString('utf8'));}catch{/* Protocol error remains a failed check. */}
+function decodeProtocol(bytes,contentType){
+ const mime=String(contentType).split(';')[0].trim().toLowerCase();
+ const text=new TextDecoder('utf-8',{fatal:true}).decode(bytes);
+ let value;
+ if(mime==='application/json')value=JSON.parse(text);
+ else if(mime==='text/event-stream'){
+  const frames=[];let data=[],event='message',hasData=false,count=0;
+  const lines=text.replace(/\r\n?/g,'\n').split('\n');
+  if(lines.pop()!=='')throw Error('truncated_event_line');
+  for(const line of lines){
+   if(line===''){
+    if(hasData){
+     if(++count>8)throw Error('event_limit');
+     const raw=data.join('\n');
+     if(raw.trim()){
+      if(event!==''&&event!=='message')throw Error('unexpected_event');
+      frames.push(JSON.parse(raw));
+     }
+    }
+    data=[];event='message';hasData=false;continue;
+   }
+   if(line.startsWith(':'))continue;
+   const colon=line.indexOf(':');const field=colon<0?line:line.slice(0,colon);
+   let part=colon<0?'':line.slice(colon+1);if(part.startsWith(' '))part=part.slice(1);
+   if(field==='data'){hasData=true;data.push(part);}
+   else if(field==='event')event=part;
+   // SSE id/retry/unknown fields never trigger resumption or another request.
+  }
+  if(hasData||frames.length!==1)throw Error('incomplete_or_ambiguous_events');
+  value=frames[0];
+ }else throw Error('unexpected_response_mime');
+ if(!value||typeof value!=='object'||Array.isArray(value))throw Error('rpc_response_shape');
+ return value;
+}
+export function protocolResult(name,status,bytes,contentType='application/json'){
+ let json;let decoded=false;
+ try{json=decodeProtocol(bytes,contentType);decoded=true;}catch{/* Decoding failures remain failed checks. */}
  const code=json?.error?.code;const complex=code==='request_too_complex';let ok=false;
  if(name==='depth65'||name==='values4097')ok=status===413&&complex;
  else if(name==='depth64'||name==='values4096'){
@@ -74,7 +109,9 @@ export function protocolResult(name,status,bytes){
   ok=status===200&&json?.jsonrpc==='2.0'&&json?.id===expectedId&&!!json.result&&!json.error;
   if(name==='toolsList')ok=ok&&Array.isArray(json.result.tools);
  }
- return {name,status,bytes:bytes.length,errorCode:typeof code==='number'||complex?code:null,ok:Boolean(ok)};
+ const media=String(contentType).split(';')[0].trim().toLowerCase();
+ return {name,status,bytes:bytes.length,contentType:media==='application/json'?'json':media==='text/event-stream'?'sse':'other',
+  errorCode:typeof code==='number'||complex?code:null,ok:Boolean(decoded&&ok)};
 }
 export async function observePublic({mode,notAfter,fetchImpl=fetch}){
  const guarded=makeGuardedFetch({mode,notAfter,fetchImpl});
@@ -101,7 +138,7 @@ export async function observePublic({mode,notAfter,fetchImpl=fetch}){
   if(probe.ok){
    protocols=await Promise.all(Object.entries(bodies).map(async([name,body])=>{
     try{const response=await guarded(ORIGIN+'/mcp',{method:'POST',headers:{accept:'application/json, text/event-stream','content-type':'application/json'},body});
-     return protocolResult(name,response.status,await readCapped(response));
+     return protocolResult(name,response.status,await readCapped(response),response.headers.get('content-type')||'');
     }catch{return {name,status:0,ok:false,error:'request_body_or_deadline_failure'};}
    }));
   }
