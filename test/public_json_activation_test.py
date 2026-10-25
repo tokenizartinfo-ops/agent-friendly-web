@@ -117,4 +117,18 @@ class ActivationTests(unittest.TestCase):
         self.assertEqual(signal.getsignal(signal.SIGALRM),prior)
         self.assertEqual(signal.getitimer(signal.ITIMER_REAL),(0.0,0.0))
 
+    def test_prewrite_rechecks_deployment_after_metadata_reads(self):
+        expected=self.read()
+        order=[]
+        def snapshot():order.append("metadata");return copy.deepcopy(expected)
+        def changed():
+            order.append("final_deployment")
+            state=copy.deepcopy(expected)
+            state["id"]="30000000-0000-0000-0000-000000000003"
+            state["owner"]="another_actor"
+            return state
+        with self.assertRaises(ValueError):self.m.prewrite_fence(snapshot,changed,expected)
+        self.assertEqual(order,["metadata","final_deployment"])
+        self.assertEqual(self.m.prewrite_fence(self.read,self.read,expected),expected)
+
 if __name__=="__main__":unittest.main()
