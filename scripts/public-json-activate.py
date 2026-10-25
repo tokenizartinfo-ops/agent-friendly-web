@@ -19,8 +19,8 @@ OLD="29927b77-1e41-47df-9854-ab9830f84755"
 NEW="1772ceae-7e8d-4dbc-bc1d-0ade956a3e45"
 PREVIOUS="8fc686dd-bcf4-4445-a8d9-fdb8fc3224ff"
 INITIAL="3cec273c-50ef-4010-b813-f917c3b1169d"
-STAGED="83207fc9-34d7-4a44-9ada-1ebf58a8c041"
-STAGED_OWNER="AFW public-json r40196315783 a1 stage0"
+STAGED="2359e295-0e30-4ede-a1d8-cfa5a87a05ac"
+STAGED_OWNER="AFW public-json r40203181801 a1 rollback"
 WORKFLOW=".github/workflows/afw-public-json-activation.yml"
 SMOKE_SHA="907bd74247f0b1a69bae7259101b311fa7357b8d94c27e3a14d491bb048f741e"
 INVENTORY_SHA="d008e8a79ff789dbe78b294fb7c7ebcb5915068cf15d54347fe6b3b747e4c4a2"
@@ -71,8 +71,20 @@ def prewrite_fence(read_snapshot,read_deployment,expected):
 def deployment_view(dep):
     return {"id":dep["id"],"versions":dep["versions"],"owner":dep.get("annotations",{}).get("workers/message","")}
 
+def deployment_ack_diagnostic(payload,versions):
+    """Safe shape/presence only; absent fields must not be mistaken for conflicts."""
+    inner=payload.get("result") if isinstance(payload,dict) and "success" in payload else payload
+    return {
+        "shape":"envelope" if isinstance(payload,dict) and "success" in payload else "direct" if isinstance(payload,dict) and "id" in payload else "other",
+        "successIsTrue":isinstance(payload,dict) and payload.get("success") is True,
+        "idIsUuid":isinstance(inner,dict) and isinstance(inner.get("id"),str) and re.fullmatch(upl.UUID,inner["id"]) is not None,
+        "versionsPresent":isinstance(inner,dict) and "versions" in inner,
+        "strategyPresent":isinstance(inner,dict) and "strategy" in inner,
+        "versionsMatch":isinstance(inner,dict) and same_traffic(inner.get("versions"),versions),
+        "strategyMatches":isinstance(inner,dict) and inner.get("strategy")=="percentage"}
+
 def parse_deployment_ack(payload,versions):
-    """POST's documented direct deployment, or an explicitly successful envelope."""
+    """An identifier ACK is provisional; actual traffic always requires readback."""
     upl.require(isinstance(payload,dict),"deployment_ack_schema")
     if "success" in payload:
         upl.require(payload.get("success") is True and isinstance(payload.get("result"),dict)
@@ -83,9 +95,13 @@ def parse_deployment_ack(payload,versions):
         upl.require("result" not in payload,"deployment_ack_schema")
         result=payload
         shape="direct"
-    upl.require(isinstance(result.get("id"),str) and re.fullmatch(upl.UUID,result["id"]) and result.get("strategy")=="percentage"
-                and same_traffic(result.get("versions"),versions),"deployment_ack_schema")
-    return {"id":result["id"],"versions":result["versions"],"ackShape":shape}
+    upl.require(isinstance(result.get("id"),str) and re.fullmatch(upl.UUID,result["id"]),"deployment_ack_schema")
+    upl.require("strategy" not in result or result["strategy"]=="percentage","deployment_ack_schema")
+    upl.require("versions" not in result or same_traffic(result["versions"],versions),"deployment_ack_schema")
+    ack={"id":result["id"],"ackShape":shape,
+         "ackCompleteness":"complete" if all(k in result for k in ("versions","strategy")) else "provisional"}
+    if "versions" in result:ack["versions"]=result["versions"]
+    return ack
 
 def staged_state(state,receipt,already_staged):
     return (owned(state,receipt,"stage0") or
@@ -101,9 +117,7 @@ def activate(read,write,observe,remaining,receipt,save,already_staged=False):
         receipt["phase"]=phase
         save()
         result=write(phase,versions)
-        if phase=="promote":
-            receipt["trafficPromotion"]=True
-            save()
+        # A returned identifier, even a complete ACK, is not provider readback.
         return result
     try:
         initial=read()
@@ -134,7 +148,8 @@ def activate(read,write,observe,remaining,receipt,save,already_staged=False):
         current=read()
         upl.require(current["id"]==promoted["id"] and owned(current,receipt,"promote")
                     and same_traffic(current["versions"],traffic(NEW,OLD)),"promotion_drift")
-        receipt.update(ok=True,phase="accepted",activeDeploymentId=current["id"],activeVersion=NEW)
+        receipt.update(ok=True,phase="accepted",activeDeploymentId=current["id"],activeVersion=NEW,
+                       trafficPromotion=True,trafficReadbackVerified=True)
     except Exception as error:
         receipt.update(ok=False,error="activation_or_acceptance_failed")
         allowed_reasons={"deployment_ack_schema","deployment_ack_http_or_size","prewrite_metadata_drift",
@@ -275,20 +290,14 @@ def main():
                     save()
                     upl.require(response.status==200 and len(data)<=1048576,"deployment_ack_http_or_size")
                 payload=json.loads(data)
-                inner=payload.get("result") if isinstance(payload,dict) and "success" in payload else payload
-                receipt[phase+"Response"]={
-                    "shape":"envelope" if isinstance(payload,dict) and "success" in payload else "direct" if isinstance(payload,dict) and "id" in payload else "other",
-                    "successIsTrue":isinstance(payload,dict) and payload.get("success") is True,
-                    "idIsUuid":isinstance(inner,dict) and isinstance(inner.get("id"),str) and re.fullmatch(upl.UUID,inner["id"]) is not None,
-                    "versionsMatch":isinstance(inner,dict) and same_traffic(inner.get("versions"),versions),
-                    "strategyMatches":isinstance(inner,dict) and inner.get("strategy")=="percentage"}
+                receipt[phase+"Response"]=deployment_ack_diagnostic(payload,versions)
                 save()
                 return parse_deployment_ack(payload,versions)
             result=bounded_io(send_once,min(10,remaining()))
             receipt[phase+"AckShape"]=result["ackShape"]
+            receipt[phase+"AckCompleteness"]=result["ackCompleteness"]
             ack[phase]=time.monotonic()
             receipt[phase+"AckAt"]=datetime.now(timezone.utc).isoformat()
-            if phase=="promote":receipt["trafficPromotion"]=True
             save()
             return result
         activate(read,write,observe,remaining,receipt,save,already_staged=True)
