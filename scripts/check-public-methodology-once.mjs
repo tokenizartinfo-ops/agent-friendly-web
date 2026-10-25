@@ -4,7 +4,9 @@ import { fileURLToPath } from 'node:url';
 const ENDPOINT = 'https://agentfriendlyweb.dev/mcp';
 const PROTOCOLS = new Set(['2024-11-05', '2025-03-26', '2025-06-18', '2025-11-25']);
 const SOURCES = ['https://agentfriendlyweb.dev/metodologia', 'https://agentfriendlyweb.dev/.well-known/agent-readiness.json'];
-const BLOCKED = ['private-expedients', 'publish', 'deploy', 'billing', 'payments', 'owner-data'];
+const BLOCKED = ['credentials', 'private-expedients', 'registry-write', 'publish', 'deploy', 'dns', 'billing', 'payments', 'owner-data', 'website-mutation'];
+const LEVEL_BOUNDS = [[0, 17], [18, 35], [36, 53], [54, 71], [72, 89], [90, 100]];
+const boundedText = (value, max) => typeof value === 'string' && value.trim().length > 0 && value.length <= max;
 const fail = code => { throw Object.assign(new Error(code), { observationCode: code }); };
 const requireThat = (condition, code) => { if (!condition) fail(code); };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -73,17 +75,19 @@ function methodologyResult(result, wallNow) {
   'methodology_unconfirmed');
   requireThat(Array.isArray(m.levels) && m.levels.length === 6
     && m.levels.every((level, index) => object(level) && level.id === 'AF-' + index
-      && typeof level.label === 'string' && Number.isFinite(level.score_min) && Number.isFinite(level.score_max)
-      && level.score_min >= 0 && level.score_max <= 100 && level.score_min <= level.score_max),
+      && boundedText(level.label, 200) && level.score_min === LEVEL_BOUNDS[index][0]
+      && level.score_max === LEVEL_BOUNDS[index][1]),
   'methodology_unconfirmed');
-  requireThat(Array.isArray(m.categories) && m.categories.length > 0
-    && m.categories.every(category => object(category) && typeof category.id === 'string'
-      && typeof category.label === 'string' && Number.isFinite(category.weight)
-      && Array.isArray(category.checks) && category.checks.length > 0), 'methodology_unconfirmed');
+  requireThat(Array.isArray(m.categories) && m.categories.length > 0 && m.categories.length <= 32
+    && m.categories.every(category => object(category) && boundedText(category.id, 64)
+      && boundedText(category.label, 200) && Number.isFinite(category.weight) && category.weight > 0 && category.weight <= 100
+      && Array.isArray(category.checks) && category.checks.length > 0 && category.checks.length <= 128
+      && category.checks.every(check => object(check) && boundedText(check.check, 100)
+        && Number.isFinite(check.points) && check.points >= 0 && check.points <= 100)), 'methodology_unconfirmed');
   requireThat(Array.isArray(e.sources) && e.sources.length === 2
     && SOURCES.every(url => e.sources.some(source => object(source) && source.url === url))
-    && Array.isArray(e.limits) && e.limits.length > 0 && e.limits.every(limit => typeof limit === 'string')
-    && Array.isArray(e.blocked_actions) && BLOCKED.every(action => e.blocked_actions.includes(action)),
+    && Array.isArray(e.limits) && e.limits.length > 0 && e.limits.length <= 32 && e.limits.every(limit => boundedText(limit, 1000))
+    && Array.isArray(e.blocked_actions) && e.blocked_actions.length === BLOCKED.length && BLOCKED.every(action => e.blocked_actions.includes(action)),
   'methodology_unconfirmed');
   const bytes = Buffer.from(JSON.stringify(e));
   return { schemaVerified: true, levels: m.levels.length, categories: m.categories.length,
@@ -93,7 +97,7 @@ function methodologyResult(result, wallNow) {
 export async function observeMethodologyOnce({ notBefore, notAfter, fetchImpl = fetch,
   now = Date.now, monotonic = () => performance.now() } = {}) {
   const report = { kind: 'afw_public_methodology_once', status: 'unconfirmed', origin: ENDPOINT,
-    requestsSent: 0, steps: [], toolInvoked: false, postRetries: 0, redirectsFollowed: false,
+    requestsSent: 0, steps: [], toolCallAttempted: false, postRetries: 0, redirectsFollowed: false,
     operationalReadiness: false, protocolVersion: null };
   let phase = 'preflight', totalBytes = 0, startWall, startMono, lastWall, lastMono;
   const guard = () => {
@@ -107,6 +111,11 @@ export async function observeMethodologyOnce({ notBefore, notAfter, fetchImpl = 
   async function send(name, message, id) {
     phase = name;
     const remaining = guard();
+    const sendWall = lastWall, sendMono = lastMono;
+    const stepGuard = () => {
+      guard();
+      requireThat(lastWall - sendWall < 10000 && lastMono - sendMono < 10000, 'deadline');
+    };
     requireThat(report.requestsSent < 4, 'request_budget');
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), Math.max(1, Math.floor(remaining)));
@@ -117,21 +126,21 @@ export async function observeMethodologyOnce({ notBefore, notAfter, fetchImpl = 
       const headers = { accept: 'application/json, text/event-stream', 'content-type': 'application/json' };
       if (report.protocolVersion) headers['mcp-protocol-version'] = report.protocolVersion;
       report.requestsSent++;
-      if (name === 'call') report.toolInvoked = true;
+      if (name === 'call') report.toolCallAttempted = true;
       const response = await raceAbort(Promise.resolve().then(() => fetchImpl(ENDPOINT, {
         method: 'POST', headers, body: JSON.stringify(message), credentials: 'omit',
         redirect: 'error', signal: controller.signal,
       })), controller.signal);
-      guard();
       step.status = response.status;
       reader = response.body?.getReader();
+      stepGuard();
       requireThat(!response.headers.get('mcp-session-id'), 'session_unconfirmed');
       const mime = (response.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
       const chunks = [];
       if (reader) for (;;) {
-        guard();
+        stepGuard();
         const part = await raceAbort(reader.read(), controller.signal);
-        guard();
+        stepGuard();
         if (part.done) { complete = true; break; }
         step.bytes += part.value.byteLength; totalBytes += part.value.byteLength;
         requireThat(step.bytes <= 65536 && totalBytes <= 262144, 'response_too_large');
@@ -146,7 +155,7 @@ export async function observeMethodologyOnce({ notBefore, notAfter, fetchImpl = 
         requireThat(response.status === 200, 'response_unconfirmed');
         result = decode(bytes, mime, id);
       }
-      guard(); step.ok = true;
+      stepGuard(); step.ok = true;
       return result;
     } finally {
       clearTimeout(timer); controller.abort();
