@@ -96,7 +96,9 @@ def activate(read,write,observe,remaining,receipt,save):
         current=read()
         upl.require(current["id"]==staged["id"] and owned(current,receipt,"stage0")
                     and same_traffic(current["versions"],traffic(OLD,NEW)),"stage0_drift")
-        upl.require(remaining()>=180,"insufficient_recovery_budget")
+        # Worst bounded late-failure path: 60+30+40+40+60+40+40=310s.
+        # Keep 50s additional margin inside the original, never-renewed authority.
+        upl.require(remaining()>=360,"insufficient_recovery_budget")
         promoted=mutate("promote",traffic(NEW,OLD))
         receipt["normal"]=observe("normal",30)
         upl.require(receipt["normal"].get("ok") is True,"normal_acceptance")
