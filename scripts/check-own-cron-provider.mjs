@@ -1,6 +1,7 @@
 import {pathToFileURL} from 'node:url';
 const SOURCE='https://www.cloudflarestatus.com/api/v2/incidents.json';
 const INCIDENT='cbvocc87nsne',MAX_BYTES=262144;
+const TRACKED_SOURCE='https://www.cloudflarestatus.com/api/v2/incidents/cbvocc87nsne.json';
 const ACTIVE=new Set(['investigating','identified','monitoring']);
 const TERMINAL=new Set(['resolved','postmortem']);
 function signals(x){
@@ -15,11 +16,17 @@ function receipt(providerGate,now,reason=providerGate==='unknown'?'invalid_snaps
  return Object.freeze({source:SOURCE,incidentId:INCIDENT,checkedAt,providerGate,...(reason?{reason}:{}),mayRunClosedVerification:providerGate==='resolved',operationalReadiness:false});
 }
 /** Public operator prerequisite only: never authorizes OAuth, Node, ONE or PC-off. */
-function assessCronProviderSnapshotAll(snapshot,{now=Date.now()}={}){
+function assessCronProviderSnapshotAll(snapshot,{now=Date.now(),trackedSnapshot}={}){
  try{
   if(!receipt('unknown',now).checkedAt||snapshot?.page?.url!=='https://www.cloudflarestatus.com'||!Array.isArray(snapshot.incidents)||snapshot.incidents.length>50)return receipt('unknown',now);
-  if(snapshot.incidents.some(x=>!x||typeof x.id!=='string'||typeof x.name!=='string'))return receipt('unknown',now);
-  const originals=snapshot.incidents.filter(x=>x.id===INCIDENT),relevant=snapshot.incidents.map(x=>({incident:x,...signals(x)})).filter(x=>x.worker||x.cron||x.dependency);
+  if(snapshot.incidents.some(x=>!x||typeof x.id!=='string'||typeof x.name!=='string')||new Set(snapshot.incidents.map(x=>x.id)).size!==snapshot.incidents.length)return receipt('unknown',now);
+  let incidents=snapshot.incidents,originals=incidents.filter(x=>x.id===INCIDENT);
+  if(!originals.length){
+   if(!trackedSnapshot)return receipt('unknown',now,'tracked_incident_absent');
+   if(trackedSnapshot.page?.url!=='https://www.cloudflarestatus.com'||trackedSnapshot.incident?.id!==INCIDENT||typeof trackedSnapshot.incident.name!=='string')return receipt('unknown',now,'invalid_tracked_snapshot');
+   originals=[trackedSnapshot.incident];incidents=[...incidents,trackedSnapshot.incident];
+  }
+  const relevant=incidents.map(x=>({incident:x,...signals(x)})).filter(x=>x.worker||x.cron||x.dependency);
   if(originals.length!==1||!signals(originals[0]).worker||!signals(originals[0]).cron||new Set(relevant.map(x=>x.incident.id)).size!==relevant.length)return receipt('unknown',now);
   for(const {incident:x} of relevant){
    const updated=Date.parse(x.updated_at);
@@ -51,9 +58,9 @@ function exclusivelyBuilds(x){
  return identifiedUpdate;
 }
 /** Narrow build-time dependency selection; never an authorization to publish. */
-export function assessCronProviderSnapshot(snapshot,{now=Date.now(),dependencyProfile='all-workers'}={}){
+export function assessCronProviderSnapshot(snapshot,{now=Date.now(),dependencyProfile='all-workers',trackedSnapshot}={}){
  if(!['all-workers',PREBUILT_PROFILE].includes(dependencyProfile))return receipt('unknown',now,'invalid_input');
- const conservative=assessCronProviderSnapshotAll(snapshot,{now});
+ const conservative=assessCronProviderSnapshotAll(snapshot,{now,trackedSnapshot});
  if(dependencyProfile==='all-workers')return conservative;
  const finish=(value,nonBlockingIncidents=[])=>Object.freeze({...value,dependencyProfile:PREBUILT_PROFILE,nonBlockingIncidents:Object.freeze(nonBlockingIncidents)});
  // The conservative pass validates all relevant IDs, statuses and timestamps FIRST.
@@ -62,35 +69,48 @@ export function assessCronProviderSnapshot(snapshot,{now=Date.now(),dependencyPr
   const excluded=snapshot.incidents.filter(x=>ACTIVE.has(x.status)&&exclusivelyBuilds(x));
   if(!excluded.length)return finish(conservative);
   const ids=new Set(excluded.map(x=>x.id));
-  const scoped=assessCronProviderSnapshotAll({...snapshot,incidents:snapshot.incidents.filter(x=>!ids.has(x.id))},{now});
+  const scoped=assessCronProviderSnapshotAll({...snapshot,incidents:snapshot.incidents.filter(x=>!ids.has(x.id))},{now,trackedSnapshot});
   return finish(scoped,conservative.relatedIncidents.filter(x=>ids.has(x.id)));
  }catch{return finish(receipt('unknown',now));}
 }
+const needsTrackedSnapshot=s=>s?.page?.url==='https://www.cloudflarestatus.com'&&Array.isArray(s.incidents)&&s.incidents.length<=50&&s.incidents.every(x=>x&&typeof x.id==='string'&&typeof x.name==='string')&&new Set(s.incidents.map(x=>x.id)).size===s.incidents.length&&!s.incidents.some(x=>x.id===INCIDENT);
 export async function checkOwnCronProvider({fetchImpl=globalThis.fetch,now=Date.now,timeoutMs=5000,dependencyProfile='all-workers'}={}){
- let at;try{at=now();}catch{return receipt('unknown',null,'invalid_input');}
- if(!['all-workers',PREBUILT_PROFILE].includes(dependencyProfile)||!receipt('unknown',at).checkedAt||!Number.isSafeInteger(timeoutMs)||timeoutMs<1||timeoutMs>5000)return receipt('unknown',at,'invalid_input');
- const controller=new AbortController();let reader,timer,httpStatus=null,receivedBytes=0,reason='request_failed';
- const diagnostic=result=>Object.freeze({...result,...(dependencyProfile===PREBUILT_PROFILE?{dependencyProfile:PREBUILT_PROFILE}:{}),httpStatus,receivedBytes});
+ let at,started;try{started=performance.now();at=now();}catch{return receipt('unknown',null,'invalid_input');}
+ if(!Number.isFinite(started)||!['all-workers',PREBUILT_PROFILE].includes(dependencyProfile)||!receipt('unknown',at).checkedAt||!Number.isSafeInteger(timeoutMs)||timeoutMs<1||timeoutMs>5000)return receipt('unknown',at,'invalid_input');
+ const controller=new AbortController();let reader,timer,httpStatus=null,receivedBytes=0,reason='request_failed',requestCount=0,trackedIncidentLookup=false;
+ const diagnostic=result=>Object.freeze({...result,...(dependencyProfile===PREBUILT_PROFILE?{dependencyProfile:PREBUILT_PROFILE}:{}),httpStatus,receivedBytes,requestCount,trackedIncidentLookup});
+ const cutoff=started+timeoutMs;let lastTick=started;
+ const budget=()=>{const tick=performance.now();if(!Number.isFinite(tick)||tick<lastTick||tick>=cutoff||controller.signal.aborted){reason='deadline_exceeded';controller.abort();throw Error('unavailable');}lastTick=tick;};
  try{
-  const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>{reason='deadline_exceeded';controller.abort();reject(Error('unavailable'));},timeoutMs);});
-  const request=(async()=>{
-   const r=await fetchImpl(SOURCE,{redirect:'error',signal:controller.signal,headers:{'User-Agent':'AFW-Diagnostic/1.0 (+https://agentfriendlyweb.dev)'}});
-   if(controller.signal.aborted)throw Error('unavailable');
+  budget();const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>{reason='deadline_exceeded';controller.abort();reject(Error('unavailable'));},Math.max(0,cutoff-lastTick));});
+  const readJson=async url=>{
+   budget();
+   reason='request_failed';requestCount++;
+   const r=await fetchImpl(url,{redirect:'error',signal:controller.signal,headers:{'User-Agent':'AFW-Diagnostic/1.0 (+https://agentfriendlyweb.dev)'}});
+   budget();
    const code=r.status;httpStatus=Number.isSafeInteger(code)&&code>=100&&code<=599?code:null;
    reason='http_status';if(!r.ok)throw Error('unavailable');
-   reason='unexpected_response_url';if(r.url&&r.url!==SOURCE)throw Error('unavailable');
+   reason='unexpected_response_url';if(r.url&&r.url!==url)throw Error('unavailable');
    reason='unexpected_content_type';if(!/^application\/json(?:;|$)/i.test(r.headers.get('Content-Type')??''))throw Error('unavailable');
    reason='body_unavailable';if(!r.body)throw Error('unavailable');
    reader=r.body.getReader();const decoder=new TextDecoder('utf-8',{fatal:true});let text='';
    while(true){
-    reason='body_read_failed';const part=await reader.read();if(controller.signal.aborted)throw Error('unavailable');if(part.done)break;
+    reason='body_read_failed';const part=await reader.read();budget();if(part.done)break;
     receivedBytes=Math.min(MAX_BYTES+1,receivedBytes+part.value.byteLength);
     reason='body_too_large';if(receivedBytes>MAX_BYTES)throw Error('unavailable');
     reason='invalid_utf8';text+=decoder.decode(part.value,{stream:true});
    }
-   reason='invalid_utf8';text+=decoder.decode();
-   reason='invalid_json';const snapshot=JSON.parse(text);
-   return diagnostic(assessCronProviderSnapshot(snapshot,{now:at,dependencyProfile}));
+   reason='invalid_utf8';text+=decoder.decode();reader.releaseLock();reader=null;
+   reason='invalid_json';const parsed=JSON.parse(text);budget();return parsed;
+  };
+  const request=(async()=>{
+   const snapshot=await readJson(SOURCE);
+   let trackedSnapshot;
+   if(needsTrackedSnapshot(snapshot)){
+    budget();
+    trackedIncidentLookup=true;trackedSnapshot=await readJson(TRACKED_SOURCE);
+   }
+   const assessed=assessCronProviderSnapshot(snapshot,{now:at,dependencyProfile,trackedSnapshot});budget();return diagnostic(assessed);
   })();
   return await Promise.race([request,deadline]);
  }catch{return diagnostic(receipt('unknown',at,reason));}

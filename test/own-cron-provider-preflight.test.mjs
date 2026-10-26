@@ -140,3 +140,76 @@ test('prebuilt profile uses the same single bounded credential-free provider GET
  const r=await checkOwnCronProvider({now:()=>now,dependencyProfile:'prebuilt-closed-publication',fetchImpl:async(url,options)=>{calls++;assert.equal(url,'https://www.cloudflarestatus.com/api/v2/incidents.json');assert.equal(options.redirect,'error');assert.deepEqual(Object.keys(options.headers),['User-Agent']);return response(snapshot('resolved',[buildsIncident()]));}});
  assert.equal(calls,1);assert.equal(r.providerGate,'resolved');assert.equal(r.dependencyProfile,'prebuilt-closed-publication');assert.equal(r.httpStatus,200);assert.equal(r.operationalReadiness,false);
 });
+
+const recentWithoutTracked=()=>({page:{url:'https://www.cloudflarestatus.com'},incidents:Array.from({length:50},(_,i)=>({id:'history'+i,name:'Network maintenance',status:'resolved',updated_at:'2026-10-13T17:00:00Z'}))});
+const trackedSnapshot=(status='resolved')=>({page:{url:'https://www.cloudflarestatus.com'},incident:incident(status)});
+test('rolling recent feed uses one exact historical lookup when the tracked incident ages out',async()=>{
+ const urls=[];const r=await checkOwnCronProvider({now:()=>now,fetchImpl:async(url,options)=>{urls.push(url);assert.equal(options.redirect,'error');assert.deepEqual(Object.keys(options.headers),['User-Agent']);return response(urls.length===1?recentWithoutTracked():trackedSnapshot());}});
+ assert.deepEqual(urls,['https://www.cloudflarestatus.com/api/v2/incidents.json','https://www.cloudflarestatus.com/api/v2/incidents/cbvocc87nsne.json']);
+ assert.equal(r.providerGate,'resolved');assert.equal(r.operationalReadiness,false);assert.equal(r.requestCount,2);assert.equal(r.trackedIncidentLookup,true);
+});
+test('tracked history cannot hide a new active cron incident in the current fifty',async()=>{
+ const current=recentWithoutTracked();current.incidents[0]={...incident('investigating'),id:'newactivecron'};
+ let calls=0;const r=await checkOwnCronProvider({now:()=>now,fetchImpl:async()=>response(++calls===1?current:trackedSnapshot())});
+ assert.equal(calls,2);assert.equal(r.providerGate,'blocked');assert.equal(r.reason,'active_cron_incident');
+});
+test('a supplemental tracked snapshot must have exact official page, identity, status and date',()=>{
+ const current=recentWithoutTracked();
+ for(const bad of [{...trackedSnapshot(),page:{url:'https://foreign.invalid'}},{...trackedSnapshot(),incident:{...incident('resolved'),id:'other'}},trackedSnapshot('mystery'),{...trackedSnapshot(),incident:{...incident('resolved'),updated_at:'2027-01-01T00:00:00Z'}}]){
+  const r=assessCronProviderSnapshot(current,{now,trackedSnapshot:bad});assert.equal(r.providerGate,'unknown');assert.equal(r.mayRunClosedVerification,false);
+ }
+ assert.equal(assessCronProviderSnapshot(current,{now,trackedSnapshot:trackedSnapshot()}).providerGate,'resolved');
+ assert.equal(assessCronProviderSnapshot(current,{now}).providerGate,'unknown');
+});
+test('oversized recent lists and malformed roots never request a historical fallback',async()=>{
+ for(const current of [{...recentWithoutTracked(),incidents:[...recentWithoutTracked().incidents,{...incident('resolved'),id:'fiftyone'}]},{page:{url:'https://foreign.invalid'},incidents:[]},{page:{url:'https://www.cloudflarestatus.com'},incidents:[null]}]){
+  let calls=0;const r=await checkOwnCronProvider({now:()=>now,fetchImpl:async()=>{calls++;return response(current);}});
+  assert.equal(calls,1);assert.equal(r.providerGate,'unknown');
+ }
+});
+test('failed historical HTTP never clears the gate or echoes provider response bodies',async()=>{
+ let calls=0;const r=await checkOwnCronProvider({now:()=>now,fetchImpl:async()=>++calls===1?response(recentWithoutTracked()):new Response('PRIVATE_TRACKED_BODY',{status:404})});
+ assert.equal(calls,2);assert.equal(r.providerGate,'unknown');assert.equal(r.reason,'http_status');assert.equal(JSON.stringify(r).includes('PRIVATE_TRACKED_BODY'),false);
+});
+test('the historical response shares the original cumulative byte cap',async()=>{
+ let calls=0,cancelled=false;const stream=new ReadableStream({pull(c){c.enqueue(new Uint8Array(262144));},cancel(){cancelled=true;}});
+ const r=await checkOwnCronProvider({now:()=>now,fetchImpl:async()=>++calls===1?response(recentWithoutTracked()):new Response(stream,{headers:{'Content-Type':'application/json'}})});
+ assert.equal(calls,2);assert.equal(r.providerGate,'unknown');assert.equal(r.reason,'body_too_large');assert.equal(cancelled,true);
+});
+test('historical lookup shares the original deadline and abort signal',async()=>{
+ let calls=0,firstSignal,cancelled=false;const r=await checkOwnCronProvider({now:()=>now,timeoutMs:35,fetchImpl:async(url,o)=>{calls++;if(calls===1){firstSignal=o.signal;await new Promise(resolve=>setTimeout(resolve,15));return response(recentWithoutTracked());}assert.equal(o.signal,firstSignal);return new Response(new ReadableStream({pull(){return new Promise(()=>{});},cancel(){cancelled=true;}}),{headers:{'Content-Type':'application/json'}});}});
+ assert.equal(calls,2);assert.equal(r.providerGate,'unknown');assert.equal(r.reason,'deadline_exceeded');assert.equal(firstSignal.aborted,true);assert.equal(cancelled,true);
+});
+test('late completion of the recent request cannot open a historical request after timeout',async()=>{
+ let calls=0,release;const held=new Promise(resolve=>{release=resolve;});
+ const r=await checkOwnCronProvider({now:()=>now,timeoutMs:5,fetchImpl:async()=>{calls++;await held;return response(recentWithoutTracked());}});
+ assert.equal(r.reason,'deadline_exceeded');release();await new Promise(resolve=>setTimeout(resolve,10));assert.equal(calls,1);
+});
+test('prebuilt profile still excludes only narrow Builds incidents after historical lookup',()=>{
+ const current=recentWithoutTracked();current.incidents[0]={id:'buildissue',name:'Workers Builds delays',status:'identified',updated_at:'2026-10-13T17:00:00Z',components:[{id:'vcpsk0w6g86k',name:'Workers Builds'}],incident_updates:[{affected_components:[{code:'vcpsk0w6g86k',name:'Cloudflare Sites and Services - Workers Builds'}]}]};
+ assert.equal(assessCronProviderSnapshot(current,{now,trackedSnapshot:trackedSnapshot(),dependencyProfile:'all-workers'}).providerGate,'unknown');
+ assert.equal(assessCronProviderSnapshot(current,{now,trackedSnapshot:trackedSnapshot(),dependencyProfile:'prebuilt-closed-publication'}).providerGate,'resolved');
+ current.incidents[1]={id:'runtimeissue',name:'Durable Objects errors',status:'identified',updated_at:'2026-10-13T17:00:00Z'};
+ assert.equal(assessCronProviderSnapshot(current,{now,trackedSnapshot:trackedSnapshot(),dependencyProfile:'prebuilt-closed-publication'}).providerGate,'unknown');
+});
+
+test('supplemental incident names must obey the recent-feed string schema',()=>{
+ for(const name of [undefined,null,42,{toString(){return 'Workers Cron Triggers';}}]){
+  const r=assessCronProviderSnapshot(recentWithoutTracked(),{now,trackedSnapshot:{...trackedSnapshot(),incident:{...incident('resolved'),name,components:[{name:'Workers Cron Triggers'}]}}});
+  assert.equal(r.providerGate,'unknown');assert.equal(r.mayRunClosedVerification,false);
+ }
+});
+test('duplicate unrelated recent IDs cannot be cleared by tracked history or trigger fallback',async()=>{
+ const current={...recentWithoutTracked(),incidents:Array.from({length:50},()=>recentWithoutTracked().incidents[0])};
+ assert.equal(assessCronProviderSnapshot(current,{now,trackedSnapshot:trackedSnapshot()}).providerGate,'unknown');
+ let calls=0;const r=await checkOwnCronProvider({now:()=>now,fetchImpl:async()=>{calls++;return response(current);}});
+ assert.equal(calls,1);assert.equal(r.providerGate,'unknown');
+});
+test('synchronous timer starvation cannot start a fallback after the original absolute cutoff',async()=>{
+ let calls=0;const r=await checkOwnCronProvider({now:()=>now,timeoutMs:5,fetchImpl:async()=>{calls++;const until=performance.now()+25;while(performance.now()<until){}return response(calls===1?recentWithoutTracked():trackedSnapshot());}});
+ assert.ok(calls<=1);assert.equal(r.reason,'deadline_exceeded');assert.equal(r.providerGate,'unknown');assert.equal(r.mayRunClosedVerification,false);
+});
+test('a historical response arriving after a starved deadline cannot clear the gate',async()=>{
+ let calls=0;const r=await checkOwnCronProvider({now:()=>now,timeoutMs:20,fetchImpl:async()=>{calls++;if(calls===2){const until=performance.now()+30;while(performance.now()<until){}}return response(calls===1?recentWithoutTracked():trackedSnapshot());}});
+ assert.ok(calls<=2);assert.equal(r.reason,'deadline_exceeded');assert.equal(r.providerGate,'unknown');
+});
