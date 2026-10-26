@@ -142,3 +142,15 @@ test('an otherwise valid live-window bundle cannot enter the public template bui
  assert.equal(validateReleaseOperatorBundle(b),true);
  await assert.rejects(builder.buildMcpPrivateConfirmationTemplate(b),fixedError);
 });
+
+
+test('caller mutation during actual compilation cannot replace the captured public artifact',async()=>{
+ const b=bundle(),before=JSON.stringify(b),originalWorkerHash=b.artifact.workerHash;
+ const pending=builder.buildMcpPrivateConfirmationTemplate(b);
+ b.artifact.script+='\n// CALLER_MUTATION_PRIVATE_SENTINEL';
+ b.artifact.workerHash=hash(b.artifact.script);
+ const p=await pending;
+ assert.notEqual(JSON.stringify(b),before,'caller mutation must actually occur');
+ assert.equal(p.manifest.workerHash,originalWorkerHash);
+ assert.equal(p.template.includes('CALLER_MUTATION_PRIVATE_SENTINEL'),false);
+});

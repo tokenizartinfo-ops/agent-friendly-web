@@ -11,3 +11,5 @@ Task1: RED40249264428/job121337352264 at head e441b248:2877tests/2862PASS/14FAIL
 Ruling: stdin/resolveDir replaces one known entrypoint token in memory instead of virtual inject: fewer plugin assumptions, same options/source/runtime and no FS write. Relative sourcefile preserves reproducible metadata.
 Ruling: output policyHash names SHA(policyJson); it is deliberately NOT runtime planHash=SHA(JSON.stringify(bundle)). Caller later computes the latter from the same frozen public artifact and canonical private policy. No receipt confusion.
 Task1: first implementation added after RED; GREEN pending. No deployment/real policy/new credentials.
+
+Task1 additional regression: suspected caller mutation across readFile/build awaits; add an actual compiler test before fixing. Initial native package40249805418/job121339015256 PASS; fullCI40249805397 still in progress at00:34UTC, not counted complete.
