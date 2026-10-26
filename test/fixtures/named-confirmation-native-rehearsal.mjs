@@ -65,7 +65,7 @@ export async function rehearseExactNamedConfirmation({artifact,build,mode,payloa
   if(reserve==='true'){
    await db.exec('CREATE TABLE dossier_node_process_admissions(grant_id TEXT,container_id TEXT,process_generation TEXT,program_hash TEXT,source_revision TEXT,image TEXT);CREATE TABLE dossier_node_process_closures(grant_id TEXT,container_id TEXT,process_generation TEXT,program_hash TEXT,source_revision TEXT,image TEXT,closed_at INTEGER);');
    const schema=readFileSync('db/dossier-successor-reservation.sql','utf8');
-   for(const statement of schema.matchAll(/CREATE TABLE[\\s\\S]*?\\);|CREATE TRIGGER[^\\n]+;/g))await db.prepare(statement[0]).run();
+   for(const statement of schema.matchAll(/CREATE TABLE[\s\S]*?\);|CREATE TRIGGER[^\n]+;/g))await db.prepare(statement[0]).run();
    await db.prepare('INSERT INTO dossier_node_process_admissions VALUES(?,?,?,?,?,?)').bind('original',ids.original,retired.processGeneration,retired.programHash,retired.sourceRevision,retired.image).run();
    await db.prepare('INSERT INTO dossier_node_process_closures VALUES(?,?,?,?,?,?,?)').bind('original',ids.original,retired.processGeneration,retired.programHash,retired.sourceRevision,retired.image,retired.closedAt).run();
   }
