@@ -7,6 +7,8 @@ import {rehearseExactNamedConfirmation} from './fixtures/named-confirmation-nati
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {activationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
 import {inertNamedConfirmationPolicy} from './fixtures/inert-named-confirmation-policy.mjs';
+import {buildMcpPrivateConfirmationTemplate,materializeMcpPrivateConfirmation} from '../scripts/build-mcp-release-operator.mjs';
+import {validateReleaseOperatorBundle} from '../lib/mcp-release-operator-policy.mjs';
 // This file runs only in the package Workflow, after an exact historical rebuild.
 const artifact=JSON.parse(readFileSync(process.env.AFW_FROZEN_ARTIFACT_PATH,'utf8'));
 let buildMcpNamedConfirmation;
@@ -174,4 +176,41 @@ test('named operator RPC failure remains generic without Workflow observation',a
  const r=await rehearseExactNamedConfirmation({artifact,build:buildMcpNamedConfirmation,mode:'metadata-reject',invocation:'rpc'});
  assert.deepEqual(r.output,{error:'Release operator unavailable'});assert.equal(r.httpStatus,404);
  assert.deepEqual(r.counts,{attempts:1,receipts:0,acceptances:0});assert.equal(r.counters.providerReads,0);assert.equal(r.counters.apiReads,3);
+});
+
+const publicTemplate=()=>publicTemplate.promise??=buildMcpPrivateConfirmationTemplate({artifact,policy:inertNamedConfirmationPolicy(artifact)});
+async function materializedFixture(input){
+ validateReleaseOperatorBundle(input);
+ const bundle=JSON.parse(JSON.stringify(input));
+ validateReleaseOperatorBundle(bundle);
+ const {template,manifest}=await publicTemplate();
+ const output=await materializeMcpPrivateConfirmation({template,manifest,policyJson:JSON.stringify(bundle.policy),expectedTemplateHash:manifest.templateHash});
+ return {...output,planHash:hash(JSON.stringify(bundle))};
+}
+
+test('materialized public template remains closed and the expired synthetic Workflow performs no network',async()=>{
+ const built=await materializedFixture({artifact,policy:inertNamedConfirmationPolicy(artifact)});let outbound=0;
+ assert.equal(built.planHash,hash(JSON.stringify({artifact,policy:inertNamedConfirmationPolicy(artifact)})));
+ assert.notEqual(built.planHash,built.policyHash,'bundle identity must not be the policy digest');
+ const mf=new Miniflare(convertV4MiniflareOptions({workers:[{name:'operator',modules:true,script:built.script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_RELEASE_OPERATOR_ENABLED:'true',AFW_RELEASE_WORKFLOW_ENABLED:'true',AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED:'true'},workflows:{FLOW:{name:'afw-inert-private-template',className:'AfwReleaseWorkflow'}},outboundService(){outbound++;throw Error('Inert materialization must not use the network');}}]}));
+ try{
+  assert.equal((await (await mf.getWorker('operator')).fetch('https://synthetic.invalid/')).status,404);
+  const {FLOW}=await mf.getBindings('operator'),instance=await FLOW.create({id:'afw-release-'+built.planHash,params:{planHash:built.planHash}});
+  const end=Date.now()+12000;let state;
+  do{state=await instance.status();if(['complete','errored','terminated'].includes(state.status))break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<end);
+  assert.equal(state.status,'complete');assert.deepEqual(state.output,{status:'blocked',mayRetry:false,operationalReadiness:false});assert.equal(outbound,0);
+ }finally{await mf.dispose();}
+});
+test('private assembly of exact historical bytes confirms through the native Workflow and primary acceptance',async()=>{
+ const r=await rehearseExactNamedConfirmation({artifact,build:materializedFixture,mode:'confirmed',payloadMode:'string'});
+ assert.equal(r.httpStatus,404);
+ assert.deepEqual(r.output,{status:'confirmed',mayRetry:false,operationalReadiness:false,receipt:{activationKey:r.activationKey,versionId:r.versionId,deploymentId:r.deploymentId}});
+ assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});assert.equal(r.counters.providerReads,1);assert.equal(r.counters.apiReads,7);
+ assert.ok(r.counters.largestReplyBytes>2097152);
+});
+test('private assembly preserves uncertain outcome and no acceptance after a second active deployment',async()=>{
+ const r=await rehearseExactNamedConfirmation({artifact,build:materializedFixture,mode:'second-active',payloadMode:'string'});
+ assert.equal(r.httpStatus,404);assert.equal(r.output.status,'uncertain');assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);
+ assert.deepEqual(r.counts,{attempts:1,receipts:0,acceptances:0});assert.equal(r.counters.apiReads,7);
+ assert.equal(r.output.observation.stage,'deployment_second');
 });
