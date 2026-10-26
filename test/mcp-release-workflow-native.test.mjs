@@ -130,3 +130,16 @@ test('REST string admission rejects noncanonical payloads and preserves original
   }finally{await f.mf.dispose();}
  });
 });
+
+test('native provider denial carries only the bounded safe diagnostic and still consumes no journal attempt',async()=>{
+ const f=await fixture({provider:'redirect'});
+ try{
+  const instance=await f.flow.create({id:f.id,params:{planHash:f.planHash}});
+  const result=await terminal(instance);
+  assert.deepEqual(result.output,{status:'blocked',mayRetry:false,operationalReadiness:false,providerCheck:{providerGate:'unknown',reason:'http_status',httpStatus:302,receivedBytes:0}});
+  assert.equal(f.providerReads(),1);assert.equal(f.posts(),0);
+  assert.equal(await rows(f,'dossier_publication_attempts'),0);assert.equal(await rows(f,'dossier_publication_receipts'),0);
+  assert.equal(JSON.stringify(result.output).includes('outside.invalid'),false);
+  assert.equal(JSON.stringify(result.output).includes('synthetic_publish_credential'),false);
+ }finally{await f.mf.dispose();}
+});
