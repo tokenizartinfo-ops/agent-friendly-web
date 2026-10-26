@@ -463,7 +463,7 @@ test('expired application permission requires fresh consent and never revives a 
     assert.equal((await oldClient.callTool({name:'read_project_summary',arguments:{}})).structuredContent.code,'delegated_access_denied');
     f.sqlite.prepare("UPDATE delegated_access_grants SET revoked_at='2026-10-03T00:00:00Z' WHERE id=?").run(oldGrant);
     const fresh=await authorize(f,{scope:'afw:project:read'});
-    assert.match(fresh.html,/El permiso dura diez minutos/);
+    assert.match(fresh.html,/El permiso dura hasta diez minutos/);
     const freshRedirect=await approve(f,fresh,{scope:['afw:project:read']});
     const renewed=await (await exchange(f,freshRedirect.headers.get('Location'),fresh.verifier)).json();
     assert.equal(renewed.refresh_token,undefined);
