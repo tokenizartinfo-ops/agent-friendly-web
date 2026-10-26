@@ -21,18 +21,18 @@ La plantilla vacía no es un operador desplegable; pruebas solo materializan fic
 Files: scripts/build-mcp-release-operator.mjs; new lib/mcp-private-confirmation-template.mjs; new test/mcp-private-confirmation-template.test.mjs.
 Consumes: bundle validado/inert0→1 y opciones/entrypoint existentes.
 Produces: buildMcpPrivateConfirmationTemplate(bundle) -> {template,manifest}; materializeMcpPrivateConfirmation({template,manifest,policyJson,expectedTemplateHash}) -> script/digests/no publicación.
-- [ ] Escribir primero tests del contrato nuevo, mutantes de hash/bytes/slot/caps, JSON canónico/inyección/Unicode y errores saneados. RED por export/funcionalidad ausente en CI, no por typo.
-- [ ] Implementar helper browser-safe y builder con stdin/resolveDir y sustitución única de su token global; builder actual intacto.
-- [ ] GREEN de tests nuevos y suite normal en Actions; sin instalaciones/builds locales. Confirmar no cambios en runtime/frozen pins.
+- [x] Escribir primero tests del contrato nuevo, mutantes de hash/bytes/slot/caps, JSON canónico/inyección/Unicode y errores saneados. RED por export/funcionalidad ausente en CI, no por typo.
+- [x] Implementar helper browser-safe y builder con stdin/resolveDir y sustitución única de su token global; builder actual intacto.
+- [x] GREEN de tests nuevos y suite normal en Actions; sin instalaciones/builds locales. Confirmar no cambios en runtime/frozen pins.
 
 ### Task2: paquete público y cualificación nativa
 Files: .github/workflows/afw-named-confirmation-package.yml; test/mcp-named-confirmation-package.native.mjs; docs/AFW-NAMED-CONFIRMATION-PACKAGE-2026-10-22.es.md.
 Consumes: plantilla/manifiesto/materializador de Task1.
 Produces: artefacto público solo ficticio y recibo de contrato nativo.
-- [ ] RED del flujo que permite entradas reales y prueba nativa de materialización en paquete con Worker histórico exacto.
-- [ ] Retirar input policy_json/lectura del evento; fixture sintético siempre. Agregar generación/verificación template + hashes y materializador al artefacto.
-- [ ] Verificar workerd404/bloqueo de fixture materializado,0I/O; suite/lint/cinco builds y paquete real en Actions.
-- [ ] Explicar cambio de interfaz pública, diferencia plantilla/ensamblaje privado y no publicación; conservar historia.
+- [x] RED del flujo que permite entradas reales y prueba nativa de materialización en paquete con Worker histórico exacto.
+- [x] Retirar input policy_json/lectura del evento; fixture sintético siempre. Agregar generación/verificación template + hashes y materializador al artefacto.
+- [x] Verificar workerd404/bloqueo de fixture materializado,0I/O; suite/lint/cinco builds y paquete real en Actions.
+- [x] Explicar cambio de interfaz pública, diferencia plantilla/ensamblaje privado y no publicación; conservar historia.
 
 ### Task3: revisión, integración y continuidad
 - [ ] Revisión completa fresca de la rama, SHA/diff y focus de spec; corregir hallazgos importantes con RED→GREEN, sin pulido ajeno.
