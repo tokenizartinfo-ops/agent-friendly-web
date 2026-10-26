@@ -4,7 +4,7 @@
 El ensayo nativo 15:15UTC terminó blocked/mayRetry=false antes del journal: cero intentos/cero recibos. No identifica fallo de clave ni Containers. Se cerró a15:18UTC, operador2033948b/Workflow8acb/canary002aa960. Plan a5ea5b8d consumido: no reiniciar. La API oficial todavía incluye cbvocc87nsne resuelto; la hipótesis de historial ausente NO quedó confirmada. Consulta Node local única agotó5s, y el ejecutor cloud no permite el host; no confundir estas observaciones con la petición del Workflow.
 
 ## Alcance autorizado y diseño
-Conservar destinos oficiales, un GET, límite262144bytes,5s total, cero redirecciones/reintentos y decisión fail-closed. Añadir únicamente razones enumeradas, HTTP numérico y bytes efectivamente recibidos al resultado saneado; nunca cabeceras, URL de respuesta, cuerpo, errores o mensajes arbitrarios. El Workflow proyecta ese diagnóstico SOLO cuando el proveedor bloquea la admisión. Reloj/admisión anterior no se reinterpretan como fallo de proveedor.
+Conservar destinos oficiales, un GET, límite262144bytes,5s total, cero redirecciones/reintentos y decisión fail-closed. Añadir únicamente razones enumeradas, HTTP numérico y contador de bytes observados, saturado en262145(límite+1; NO tamaño total de una respuesta excesiva) al resultado saneado; nunca cabeceras, URL de respuesta, cuerpo, errores o mensajes arbitrarios. El Workflow proyecta ese diagnóstico SOLO cuando el proveedor bloquea la admisión. Reloj/admisión anterior no se reinterpretan como fallo de proveedor.
 Añadir ejecución manual en GitHub para este GET público, sin secretos/dependencias/npm/recursosAFW. Su recibo saneado no acredita el entorno Cloudflare, publicación, consentimiento ni PC-off.
 
 ## Plan y cierre
