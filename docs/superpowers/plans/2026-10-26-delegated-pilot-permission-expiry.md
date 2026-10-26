@@ -32,8 +32,11 @@
 
 **Interfaces:** Existing createDelegatedOAuthWorker({issuer,resource,now,accessVerifier}), authorize/approve/exchange fixture helpers, SQL consent and application grant records. No new exported API.
 
-- [ ] Add independent failing tests: consent cap/visible date; late grant cap + token expires_in; stable ten minutes; pre-write and post-write latency; changed env deadline; <60s remaining; invalid/backward time.
-- [ ] Commit tests and docs on the isolated GitHub branch and open a PR. Observe the new assertions fail in CI against unmodified production code, not an infrastructure failure.
-- [ ] Add request-local original deadline calculation. Reuse bounded times for three consent/grant persistence sites; require grant minimum 60000ms; recheck before SDK completion with existing exact-own cleanup on failure. Update text to 'hasta diez minutos' and show the actual form expiry.
-- [ ] Run full GitHub CI: npm test, npm run lint, npm run build. Inspect assertions, count, skip, warnings and all builds. Commit the result ledger.
+- [x] Add independent failing tests: consent cap/visible date; late grant cap + token expires_in; stable ten minutes; pre-write and post-write latency; changed env deadline; <60s remaining; invalid/backward time.
+- [x] Commit tests and docs on the isolated GitHub branch and open a PR. Observe the new assertions fail in CI against unmodified production code, not an infrastructure failure.
+- [x] Add request-local original deadline calculation. Reuse bounded times for three consent/grant persistence sites; require grant minimum 60000ms; recheck before SDK completion with existing exact-own cleanup on failure. Update text to 'hasta diez minutos' and show the actual form expiry.
+- [x] Run full GitHub CI: npm test, npm run lint, npm run build. Inspect assertions, count, skip, warnings and all builds. Commit the result ledger.
 - [ ] Obtain one fresh whole-branch review against the pinned base/head. Fix Important/Critical in one RED→GREEN pass; ledger minors. Merge only after exact head and CI pass; inspect main CI and leave source/runtime boundaries explicit.
+
+
+Execution results and fixed review findings are in docs/AFW-DELEGATED-PILOT-EXPIRY-2026-10-26.es.md. The integration checkbox is a dated plan item; PR595 and issue497#6391041814 carry the final merge/main-CI receipt and supersede pending text here.

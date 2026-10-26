@@ -1,3 +1,18 @@
+## Source completion — 2026-10-26
+
+Task 1: complete (source commits3ff29aa..d082b847; npm test →2892PASS/0FAIL/1existingSkip; lint→0errors/12existingWarnings; five build phasesPASS in CI40264551784/job121383953185). Named package40264551796, operator40264551781 and preparation build40264551774 also passed. This closure document's commit must still pass its own CI before integration; merge/main receipts are authoritative in [PR595](https://github.com/tokenizartinfo-ops/agent-friendly-web/pull/595) and [current checkpoint](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497#issuecomment-6391041814).
+
+Final: fixed Important1 — intermediate approval clock regression RED→GREEN using canonical monotonic timestamps for lookup and consumption. Final: fixed Important2 — post-persistence and post-SDK empty-clock regressions RED→GREEN using nonempty last-validated exact-own retirement markers; unrelated row unchanged. Full suite2892/0/1. Review0Critical/2Important fixed/0Minor; declined-to-judge[]. No second reviewer. Fallback timestamp records a validated observation, not the exact physical commit instant. No automatic replay or authority extension.
+
+### Runtime boundary and next real trial
+This is a source correction, **not deployed** to the historical frozen canary module26ec0366/source3d4e9d5 or operator4522e617. The current deployment must be read again before any new action; last primary closure03:04:59Z was canary80b93af7/eightflagsfalse/cron0/tails0/fixedappactive0 and unchanged operator45fded93/threeflagsfalse. Own summary read02:52:09Z passed only from root's connector. Existing native and Work chats declined reads after their cutoff; no cloud private read or event acceptance.
+
+Do not invoke either consumed window or the public start0/expires1 package. Reader tokens expired26Oct02:59Z; do not auto-renew. A new real trial requires current scoped credentials/owner session and specific delegated consent. First qualify adoption of this code and its exact new frozen artifact/rollback; do not relabel the historical artifact or infer deployment from this merge. Warm the human Access session before opening a short pilot. After new consent, dispatch the already-authorized cloud reading check immediately, before writing narrative receipts; stop accepting new work early enough to reserve native withdrawal and primary physical closure inside the original window. Monitoring consent is separate from summary reading. Successful manual read is not events/subscribe, useful review, native unsubscribe, physical stop, scheduler or PC-off.
+
+The owner is asleep with PC on. No OTP, credential creation, new chat, data edits, Max mail, native consumer or scheduler was started by this source block. The next consent-bound runtime test waits for the owner; independent source/CI work completed in GitHub. [Support follow-up6407407084](https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/497#issuecomment-6407407084) is Cron advice, not a new Container resolution.
+
+---
+
 # Progress: docs/superpowers/plans/2026-10-26-delegated-pilot-permission-expiry.md
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT isolated GitHub branch; ORIGIN github.com; RESOURCE_TYPE source tree/PR/Actions; ALLOWED_ACTION source tests, scoped code/docs and hosted CI; ROLLBACK unmerged branch or additive revert, no runtime mutation.
