@@ -22,7 +22,7 @@ test('malformed reservation opt-in blocks before provider or journal admission',
  const r=await run({reserve:'TRUE'});assert.equal(r.output.status,'blocked');assert.deepEqual(r.counts,{attempts:0,receipts:0,acceptances:0});assert.equal(r.counters.apiReads,0);assert.equal(r.counters.providerReads,0);
 });
 test('reservation failure preserves accepted activation history and never reports ready or starts a process',async t=>{
- for(const retirement of ['running','stale','mismatch','absent','expired','rewind'])await t.test(retirement,async()=>{
+ for(const retirement of ['running','stale','future','mismatch','absent','expired','rewind'])await t.test(retirement,async()=>{
   const r=await run({reserve:'true',retirement});assert.equal(r.output.status,'uncertain');assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});assert.equal(r.reservationCount,0);assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);assert.equal(Object.hasOwn(r.output,'reservation'),false);assert.equal(JSON.stringify(r.output).includes('synthetic_read_credential'),false);
  });
 });
