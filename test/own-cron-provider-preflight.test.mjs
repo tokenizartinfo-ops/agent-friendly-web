@@ -75,3 +75,31 @@ test('native CLI exposes distinct hold and unknown exit codes without a live net
   assert.equal(child.status,code);assert.equal(JSON.parse(child.stdout).providerGate,gate);assert.equal(child.stderr,'');
  }
 });
+
+test('bounded provider diagnostics distinguish causes without granting authority or echoing response text',async()=>{
+ const privateText='SYNTHETIC_PRIVATE_DIAGNOSTIC_MUST_NOT_ESCAPE';
+ const cases=[
+  {reason:'http_status',httpStatus:302,receivedBytes:0,fetchImpl:async()=>new Response(privateText,{status:302,headers:{Location:'https://outside.invalid/'+privateText}})},
+  {reason:'unexpected_content_type',httpStatus:200,receivedBytes:0,fetchImpl:async()=>new Response(privateText,{headers:{'Content-Type':'text/html; '+privateText}})},
+  {reason:'invalid_json',httpStatus:200,receivedBytes:privateText.length,fetchImpl:async()=>new Response(privateText,{headers:{'Content-Type':'application/json'}})},
+  {reason:'invalid_snapshot',httpStatus:200,receivedBytes:null,fetchImpl:async()=>response({body:privateText})},
+  {reason:'request_failed',httpStatus:null,receivedBytes:0,fetchImpl:async()=>{throw Error(privateText);}}
+ ];
+ for(const c of cases){
+  const r=await checkOwnCronProvider({now:()=>now,fetchImpl:c.fetchImpl});
+  assert.equal(r.providerGate,'unknown');assert.equal(r.reason,c.reason);
+  assert.equal(r.httpStatus,c.httpStatus);
+  if(c.receivedBytes!==null)assert.equal(r.receivedBytes,c.receivedBytes);
+  assert.equal(r.mayRunClosedVerification,false);assert.equal(r.operationalReadiness,false);
+  assert.equal(JSON.stringify(r).includes(privateText),false);
+ }
+});
+test('body limit and timeout remain terminal with bounded diagnostic counts',async()=>{
+ let calls=0,cancelled=0;
+ const tooLarge=new ReadableStream({start(c){c.enqueue(new Uint8Array(262145));},cancel(){cancelled++;}});
+ const r=await checkOwnCronProvider({now:()=>now,fetchImpl:async()=>{calls++;return new Response(tooLarge,{headers:{'Content-Type':'application/json'}});}});
+ assert.equal(r.reason,'body_too_large');assert.equal(r.receivedBytes,262145);assert.equal(calls,1);assert.equal(cancelled,1);
+ const stalled=new ReadableStream({start(){},cancel(){cancelled++;}});
+ const timeout=await checkOwnCronProvider({now:()=>now,timeoutMs:10,fetchImpl:async()=>{calls++;return new Response(stalled,{headers:{'Content-Type':'application/json'}});}});
+ assert.equal(timeout.reason,'deadline_exceeded');assert.equal(timeout.receivedBytes,0);assert.equal(calls,2);assert.equal(cancelled,2);
+});

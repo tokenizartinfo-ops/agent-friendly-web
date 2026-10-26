@@ -77,8 +77,8 @@ export class AfwReleaseOperator extends WorkerEntrypoint {
  * No schedule, HTTP or client event consumer. */
 export class AfwReleaseWorkflow extends WorkflowEntrypoint {
  async run(event,step){
-  const env=this.env;let policy,expectedHash,observation;
-  const outcome=status=>({status,mayRetry:false,operationalReadiness:false,...(status==='uncertain'&&observation?{observation:observation.snapshot()}:{})});
+  const env=this.env;let policy,expectedHash,observation,providerCheck;
+  const outcome=status=>({status,mayRetry:false,operationalReadiness:false,...(status==='uncertain'&&observation?{observation:observation.snapshot()}:{}),...(status==='blocked'&&providerCheck?{providerCheck}:{})});
   try{
    if(env.AFW_RELEASE_OPERATOR_ENABLED!=='true'||env.AFW_RELEASE_WORKFLOW_ENABLED!=='true')return outcome('blocked');
    validateReleaseOperatorBundle(bundle);policy=bundle.policy;
@@ -98,7 +98,12 @@ export class AfwReleaseWorkflow extends WorkflowEntrypoint {
     if(!current())return outcome('blocked');
     observation?.point('provider_check');
     const gate=await checkOwnCronProvider({fetchImpl:(url,init)=>fetch(url,{...init,redirect:'manual'}),timeoutMs:Math.min(5000,remaining())});
-    if(!current()||gate.providerGate!=='resolved'||gate.mayRunClosedVerification!==true)return outcome('blocked');
+    if(!current())return outcome('blocked');
+    if(gate.providerGate!=='resolved'||gate.mayRunClosedVerification!==true){
+     const reasons=['invalid_input','invalid_snapshot','active_cron_incident','active_related_incident','request_failed','deadline_exceeded','http_status','unexpected_response_url','unexpected_content_type','body_unavailable','body_read_failed','body_too_large','invalid_utf8','invalid_json'];
+     providerCheck={providerGate:['unknown','blocked'].includes(gate.providerGate)?gate.providerGate:'unknown',reason:reasons.includes(gate.reason)?gate.reason:'invalid_snapshot',httpStatus:Number.isSafeInteger(gate.httpStatus)&&gate.httpStatus>=100&&gate.httpStatus<=599?gate.httpStatus:null,receivedBytes:Number.isSafeInteger(gate.receivedBytes)&&gate.receivedBytes>=0&&gate.receivedBytes<=262145?gate.receivedBytes:null};
+     return outcome('blocked');
+    }
     try{
      const result=await runReleaseOperator(env,[expectedHash],{current,remaining},observation);
      observation?.point('workflow_result');
