@@ -45,7 +45,7 @@ export async function checkOwnCronProvider({fetchImpl=globalThis.fetch,now=Date.
    const code=r.status;httpStatus=Number.isSafeInteger(code)&&code>=100&&code<=599?code:null;
    reason='http_status';if(!r.ok)throw Error('unavailable');
    reason='unexpected_response_url';if(r.url&&r.url!==SOURCE)throw Error('unavailable');
-   reason='unexpected_content_type';if(!/^application\\/json(?:;|$)/i.test(r.headers.get('Content-Type')??''))throw Error('unavailable');
+   reason='unexpected_content_type';if(!/^application\/json(?:;|$)/i.test(r.headers.get('Content-Type')??''))throw Error('unavailable');
    reason='body_unavailable';if(!r.body)throw Error('unavailable');
    reader=r.body.getReader();const decoder=new TextDecoder('utf-8',{fatal:true});let text='';
    while(true){
