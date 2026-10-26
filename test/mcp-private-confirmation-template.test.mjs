@@ -154,3 +154,17 @@ test('caller mutation during actual compilation cannot replace the captured publ
  assert.equal(p.manifest.workerHash,originalWorkerHash);
  assert.equal(p.template.includes('CALLER_MUTATION_PRIVATE_SENTINEL'),false);
 });
+
+
+test('caller mutation while hashing cannot change the captured materialization manifest',async()=>{
+ const p=await input();
+ p.manifest={...p.manifest};
+ const captured={...p,manifest:{...p.manifest}};
+ const pending=materialize(p);
+ p.manifest.slot='CALLER_MUTATION_SLOT';
+ p.manifest.artifactKey='f'.repeat(64);
+ p.policyJson='not JSON';
+ const out=await pending;
+ assert.equal(out.script,captured.template.replace(JSON.stringify(captured.manifest.slot),JSON.stringify(captured.policyJson)));
+ assert.equal(out.policyHash,hash(captured.policyJson));
+});

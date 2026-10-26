@@ -13,3 +13,5 @@ Ruling: output policyHash names SHA(policyJson); it is deliberately NOT runtime 
 Task1: first implementation added after RED; GREEN pending. No deployment/real policy/new credentials.
 
 Task1 additional regression: suspected caller mutation across readFile/build awaits; add an actual compiler test before fixing. Initial native package40249805418/job121339015256 PASS; fullCI40249805397 still in progress at00:34UTC, not counted complete.
+
+Task1 additional regression extends input capture to the WebCrypto await: mutable manifest must not change selected slot or artifact binding while digest resolves. Test written before fixing; existing production source unchanged.
