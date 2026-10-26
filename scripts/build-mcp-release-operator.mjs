@@ -29,7 +29,7 @@ export async function buildMcpPrivateConfirmationTemplate(bundle){
   const source=await readFile(entry,'utf8'),token='globalThis.__AFW_RELEASE_OPERATOR_BUNDLE__';
   if(source.split(token).length!==2)throw Error();
   const expression='({artifact:'+JSON.stringify(bundle.artifact)+',policy:JSON.parse('+JSON.stringify(PRIVATE_CONFIRMATION_SLOT)+')})';
-  const r=await build({stdin:{contents:source.replace(token,expression),resolveDir:dirname(entry),sourcefile:'worker/mcp-release/index.mjs',loader:'js'},
+  const r=await build({stdin:{contents:source.replace(token,()=>expression),resolveDir:dirname(entry),sourcefile:'worker/mcp-release/index.mjs',loader:'js'},
    bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',sourcemap:false});
   const template=r.outputFiles[0].text,literal=JSON.stringify(PRIVATE_CONFIRMATION_SLOT);
   if(Buffer.byteLength(template)>PRIVATE_CONFIRMATION_SCRIPT_CAP||template.split(literal).length!==2||template.split(PRIVATE_CONFIRMATION_SLOT).length!==2)throw Error();

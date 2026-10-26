@@ -168,3 +168,15 @@ test('caller mutation while hashing cannot change the captured materialization m
  assert.equal(out.script,captured.template.replace(JSON.stringify(captured.manifest.slot),JSON.stringify(captured.policyJson)));
  assert.equal(out.policyHash,hash(captured.policyJson));
 });
+
+test('dollar replacement metacharacters in the public artifact remain literal compiler input',async()=>{
+ const b=bundle();
+ b.artifact.script+='\n// dollar_markers: '+['$&','$'+String.fromCharCode(96),"$'","$$"].join(' ');
+ b.artifact.workerHash=hash(b.artifact.script);
+ b.policy=inertNamedConfirmationPolicy(b.artifact);
+ assert.equal(validateReleaseOperatorBundle(b),true);
+ const p=await builder.buildMcpPrivateConfirmationTemplate(b);
+ assert.equal(p.manifest.workerHash,b.artifact.workerHash);
+ assert.equal(p.manifest.templateHash,hash(p.template));
+ assert.equal(p.template.split(JSON.stringify(p.manifest.slot)).length-1,1);
+});
