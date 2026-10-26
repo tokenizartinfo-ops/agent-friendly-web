@@ -15,7 +15,7 @@ function receipt(providerGate,now,reason=providerGate==='unknown'?'invalid_snaps
  return Object.freeze({source:SOURCE,incidentId:INCIDENT,checkedAt,providerGate,...(reason?{reason}:{}),mayRunClosedVerification:providerGate==='resolved',operationalReadiness:false});
 }
 /** Public operator prerequisite only: never authorizes OAuth, Node, ONE or PC-off. */
-export function assessCronProviderSnapshot(snapshot,{now=Date.now()}={}){
+function assessCronProviderSnapshotAll(snapshot,{now=Date.now()}={}){
  try{
   if(!receipt('unknown',now).checkedAt||snapshot?.page?.url!=='https://www.cloudflarestatus.com'||!Array.isArray(snapshot.incidents)||snapshot.incidents.length>50)return receipt('unknown',now);
   if(snapshot.incidents.some(x=>!x||typeof x.id!=='string'||typeof x.name!=='string'))return receipt('unknown',now);
@@ -32,11 +32,45 @@ export function assessCronProviderSnapshot(snapshot,{now=Date.now()}={}){
   return receipt('resolved',now);
  }catch{return receipt('unknown',now);}
 }
-export async function checkOwnCronProvider({fetchImpl=globalThis.fetch,now=Date.now,timeoutMs=5000}={}){
+
+const PREBUILT_PROFILE='prebuilt-closed-publication',BUILDS_COMPONENT='vcpsk0w6g86k';
+const buildsTitles=new Set(['Cloudflare Workers build delays','Workers Builds delays','Workers Builds failures','Workers Builds errors','Workers Builds degraded performance']);
+function exclusivelyBuilds(x){
+ if(!buildsTitles.has(x.name)||!Array.isArray(x.components)||x.components.length!==1||!Array.isArray(x.incident_updates))return false;
+ const top=x.components[0];
+ if(top.id!==BUILDS_COMPONENT||top.name!=='Workers Builds'||top.code!==undefined&&top.code!==BUILDS_COMPONENT)return false;
+ let identifiedUpdate=false;
+ for(const u of x.incident_updates){
+  const affected=u.affected_components;if(affected===undefined||affected===null)continue;
+  if(!Array.isArray(affected))return false;
+  for(const c of affected){
+   if(c.code!==BUILDS_COMPONENT||c.name!=='Cloudflare Sites and Services - Workers Builds'||c.id!==undefined&&c.id!==BUILDS_COMPONENT)return false;
+   identifiedUpdate=true;
+  }
+ }
+ return identifiedUpdate;
+}
+/** Narrow build-time dependency selection; never an authorization to publish. */
+export function assessCronProviderSnapshot(snapshot,{now=Date.now(),dependencyProfile='all-workers'}={}){
+ if(!['all-workers',PREBUILT_PROFILE].includes(dependencyProfile))return receipt('unknown',now,'invalid_input');
+ const conservative=assessCronProviderSnapshotAll(snapshot,{now});
+ if(dependencyProfile==='all-workers')return conservative;
+ const finish=(value,nonBlockingIncidents=[])=>Object.freeze({...value,dependencyProfile:PREBUILT_PROFILE,nonBlockingIncidents:Object.freeze(nonBlockingIncidents)});
+ // The conservative pass validates all relevant IDs, statuses and timestamps FIRST.
+ if(conservative.providerGate!=='unknown'||conservative.reason!=='active_related_incident')return finish(conservative);
+ try{
+  const excluded=snapshot.incidents.filter(x=>ACTIVE.has(x.status)&&exclusivelyBuilds(x));
+  if(!excluded.length)return finish(conservative);
+  const ids=new Set(excluded.map(x=>x.id));
+  const scoped=assessCronProviderSnapshotAll({...snapshot,incidents:snapshot.incidents.filter(x=>!ids.has(x.id))},{now});
+  return finish(scoped,conservative.relatedIncidents.filter(x=>ids.has(x.id)));
+ }catch{return finish(receipt('unknown',now));}
+}
+export async function checkOwnCronProvider({fetchImpl=globalThis.fetch,now=Date.now,timeoutMs=5000,dependencyProfile='all-workers'}={}){
  let at;try{at=now();}catch{return receipt('unknown',null,'invalid_input');}
- if(!receipt('unknown',at).checkedAt||!Number.isSafeInteger(timeoutMs)||timeoutMs<1||timeoutMs>5000)return receipt('unknown',at,'invalid_input');
+ if(!['all-workers',PREBUILT_PROFILE].includes(dependencyProfile)||!receipt('unknown',at).checkedAt||!Number.isSafeInteger(timeoutMs)||timeoutMs<1||timeoutMs>5000)return receipt('unknown',at,'invalid_input');
  const controller=new AbortController();let reader,timer,httpStatus=null,receivedBytes=0,reason='request_failed';
- const diagnostic=result=>Object.freeze({...result,httpStatus,receivedBytes});
+ const diagnostic=result=>Object.freeze({...result,...(dependencyProfile===PREBUILT_PROFILE?{dependencyProfile:PREBUILT_PROFILE}:{}),httpStatus,receivedBytes});
  try{
   const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>{reason='deadline_exceeded';controller.abort();reject(Error('unavailable'));},timeoutMs);});
   const request=(async()=>{
@@ -56,7 +90,7 @@ export async function checkOwnCronProvider({fetchImpl=globalThis.fetch,now=Date.
    }
    reason='invalid_utf8';text+=decoder.decode();
    reason='invalid_json';const snapshot=JSON.parse(text);
-   return diagnostic(assessCronProviderSnapshot(snapshot,{now:at}));
+   return diagnostic(assessCronProviderSnapshot(snapshot,{now:at,dependencyProfile}));
   })();
   return await Promise.race([request,deadline]);
  }catch{return diagnostic(receipt('unknown',at,reason));}

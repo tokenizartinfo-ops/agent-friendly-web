@@ -1,4 +1,4 @@
-name: AFW public provider preflight only
+name: AFW prebuilt publication provider preflight only
 
 on:
   workflow_dispatch:
@@ -28,9 +28,9 @@ jobs:
           node --input-type=module <<'NODE'
           import {mkdirSync,writeFileSync} from 'node:fs';
           import {checkOwnCronProvider} from './scripts/check-own-cron-provider.mjs';
-          const result=await checkOwnCronProvider();
+          const result=await checkOwnCronProvider({dependencyProfile:'prebuilt-closed-publication'});
           // The helper emits only fixed public provenance and enum/numeric diagnostics.
-          const allowed=new Set(['source','incidentId','checkedAt','providerGate','mayRunClosedVerification','operationalReadiness','reason','impactAttribution','relatedIncidents','httpStatus','receivedBytes']);
+          const allowed=new Set(['source','incidentId','checkedAt','providerGate','mayRunClosedVerification','operationalReadiness','reason','impactAttribution','relatedIncidents','httpStatus','receivedBytes','dependencyProfile','nonBlockingIncidents']);
           if(Object.keys(result).some(k=>!allowed.has(k))||result.operationalReadiness!==false)throw Error('Unexpected diagnostic projection');
           const receipt={sourceRevision:process.env.GITHUB_SHA,...result};
           const text=JSON.stringify(receipt)+'\n';

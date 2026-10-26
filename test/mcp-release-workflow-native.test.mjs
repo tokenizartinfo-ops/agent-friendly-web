@@ -28,7 +28,7 @@ async function fixture({operator='true',workflow='true',provider='resolved',lost
   if(request.url==='https://www.cloudflarestatus.com/api/v2/incidents.json'){
    providerReads++;
    if(provider==='redirect')return new Response(null,{status:302,headers:{Location:'https://outside.invalid/'}});
-   return Response.json({page:{url:'https://www.cloudflarestatus.com'},incidents:[{id:'cbvocc87nsne',name:'Workers Cron Trigger Activation Issues',status:provider,updated_at:'2026-10-14T00:00:00Z',components:[],incident_updates:[]}]});
+   return Response.json({page:{url:'https://www.cloudflarestatus.com'},incidents:[{id:'cbvocc87nsne',name:'Workers Cron Trigger Activation Issues',status:provider.startsWith('builds-')?'resolved':provider,updated_at:'2026-10-14T00:00:00Z',components:[],incident_updates:[]},...(provider.startsWith('builds-')?[{id:'buildsonly',name:'Cloudflare Workers build delays',status:'monitoring',updated_at:'2026-10-14T00:00:00Z',components:[{id:'vcpsk0w6g86k',name:'Workers Builds'}],incident_updates:[{affected_components:[{code:provider==='builds-mixed'?'runtime':'vcpsk0w6g86k',name:provider==='builds-mixed'?'Cloudflare Sites and Services - Workers':'Cloudflare Sites and Services - Workers Builds'}]}]}]:[])]});
   }
   assert.ok(request.url.startsWith('https://api.cloudflare.com/client/v4/accounts/'+accountId+'/'));
   assert.equal(request.headers.get('Authorization'),'Bearer synthetic_publish_credential');
@@ -142,4 +142,19 @@ test('native provider denial carries only the bounded safe diagnostic and still 
   assert.equal(JSON.stringify(result.output).includes('outside.invalid'),false);
   assert.equal(JSON.stringify(result.output).includes('synthetic_publish_credential'),false);
  }finally{await f.mf.dispose();}
+});
+
+test('native prebuilt publish still requires its own budget while exclusive Builds can be nonblocking',async t=>{
+ for(const provider of ['builds-only','builds-mixed'])await t.test(provider,async()=>{
+  const f=await fixture({provider});
+  try{
+   const instance=await f.flow.create({id:f.id,params:{planHash:f.planHash}}),r=await terminal(instance);
+   const allowed=provider==='builds-only';
+   assert.equal(r.output.status,allowed?'confirmed':'blocked');assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);
+   assert.equal(f.providerReads(),1);assert.equal(f.posts(),allowed?1:0);
+   assert.equal(await rows(f,'dossier_publication_attempts'),allowed?1:0);assert.equal(await rows(f,'dossier_publication_receipts'),allowed?1:0);
+   if(allowed)assert.equal(r.output.receipt.versionId,versionId);
+   assert.equal(JSON.stringify(r.output).includes('synthetic_publish_credential'),false);
+  }finally{await f.mf.dispose();}
+ });
 });
