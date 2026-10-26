@@ -10,3 +10,7 @@ Ruling: use an isolated remote GitHub branch and this versioned ledger in place 
 Ruling: execute the known narrow fix inline without waking the owner for design/plan approval — explicit opt-out and overnight authorization; source remains reviewable and requires CI/fresh review before integration. No new runtime trial or permissions.
 
 Expected RED: new consent/grant deadline, async-expiry and short-window assertions fail against unchanged worker. Stable behavior should already pass. Actual evidence pending; no completion claim.
+
+Task 1: RED observed on head 6c388627495d5030430d6c4ab9648c50aaf42c0d, CI40262831734/job121378668996. npm test: 2890 tests, 2882 PASS, 7 FAIL, 1 existing skip. All seven failures are new regression assertions: window consent/grant deadlines, async owner lookup expiry, changed original env deadline, backward time, SDK-short remaining window, and persistence expiry. Stable mode passed. Lint/build skipped after expected test failure; no infrastructure failure. Source worker unchanged in RED.
+
+Implementation: original request-local hostDeadline; monotonic observed permission time; exact canonical createdAt/expiresAt; three bounded consent/grant writes; 60s minimum for new grants; check after persistence and SDK completion with existing exact-own revoke on failure. UI now says up to ten minutes and presents actual form expiry. No runtime resource or stored historical grant changed. GREEN pending.
