@@ -19,7 +19,7 @@ async function terminal(instance,want){
  while(Date.now()<end){status=await instance.status();if(status.status==='complete'&&(!want||status.output?.status===want))return status;if(['errored','terminated'].includes(status.status))assert.fail('Workflow failed: '+JSON.stringify(status));await wait(25);}
  assert.fail('Workflow did not finish with expected output: '+JSON.stringify(status));
 }
-async function fixture({operator='true',workflow='true',provider='resolved',lost=false,expired=false,slow=false,rewind=false,rewindBase=false,confirm=false}={}){
+async function fixture({operator='true',workflow='true',provider='resolved',lost=false,expired=false,slow=false,rewind=false,rewindBase=false,confirm=false,reservation=null}={}){
  const startAt=expired?0:Date.now()-1000,expiresAt=expired?1:Date.now()+120000;
  let policy={operation:'publish',startAt,expiresAt,pins:{accountId,workerName,namespaceId,databaseId,kvId,baseVersionId}};
  if(confirm)policy={operation:'confirm',startAt,expiresAt,plan:{activationKey:'d'.repeat(64),artifactKey:hash(JSON.stringify([accountId,workerName,artifact.workerHash])),trialId:'e'.repeat(64),scopeHash:'f'.repeat(64),configurationHash:activationConfigurationHash(configuration),startAt,expiresAt},observation:{versionId,deploymentId:'33333333-3333-4333-8333-333333333333',namespaceId,applicationId:namespaceId,configuration}};
@@ -44,6 +44,7 @@ async function fixture({operator='true',workflow='true',provider='resolved',lost
   return Response.json({success:true,errors:[],result});
  };
  const bindings={AFW_RELEASE_OPERATOR_ENABLED:operator,AFW_RELEASE_PUBLISH_TOKEN:'synthetic_publish_credential'};if(workflow!==null)bindings.AFW_RELEASE_WORKFLOW_ENABLED=workflow;
+ if(reservation!==null)bindings.AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED=reservation;
  const clock=slow||rewind||rewindBase?"const originalFetch=globalThis.fetch;globalThis.fetch=async(...args)=>{const response=await originalFetch(...args);if("+(rewindBase?"String(args[0]).endsWith('/versions/"+baseVersionId+"')":"String(args[0])==='https://www.cloudflarestatus.com/api/v2/incidents.json'")+")Date.now=()=>"+(rewind||rewindBase?startAt+1:expiresAt+1)+";return response;};\n":'';
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[{name:'operator',modules:true,script:clock+built.script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings,d1Databases:{RELEASE_DB:'release-workflow-native'},workflows:{FLOW:{name:'afw-release-test',className:'AfwReleaseWorkflow'}},outboundService}]}));
  try{
@@ -157,4 +158,10 @@ test('native prebuilt publish still requires its own budget while exclusive Buil
    assert.equal(JSON.stringify(r.output).includes('synthetic_publish_credential'),false);
   }finally{await f.mf.dispose();}
  });
+});
+
+
+test('publish Workflow cannot borrow the separate successor-reservation opt-in',async()=>{
+ const f=await fixture({reservation:'true'});
+ try{const i=await f.flow.create({id:f.id,params:{planHash:f.planHash}}),r=await terminal(i);assert.equal(r.output.status,'blocked');assert.equal(f.providerReads(),0);assert.equal(f.posts(),0);assert.equal(await rows(f,'dossier_publication_attempts'),0);}finally{await f.mf.dispose();}
 });
