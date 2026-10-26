@@ -214,3 +214,23 @@ test('private assembly preserves uncertain outcome and no acceptance after a sec
  assert.deepEqual(r.counts,{attempts:1,receipts:0,acceptances:0});assert.equal(r.counters.apiReads,7);
  assert.equal(r.output.observation.stage,'deployment_second');
 });
+
+test('actual historical template compiler boundary records only public sizes and slot counts',async()=>{
+ const target=new URL('../scripts/build-mcp-release-operator.mjs?ci-template-boundary=1',import.meta.url).href;
+ const wrapper=new URL('./fixtures/private-template-compile-observation.mjs',import.meta.url).href;
+ const key=Symbol.for('afw.ci.private-template.compile-observation');let sample;
+ globalThis[key]=value=>{sample=value;};
+ const hooks=registerHooks({resolve(specifier,context,nextResolve){
+  if(context.parentURL===target&&specifier==='esbuild')return {url:wrapper,shortCircuit:true};
+  return nextResolve(specifier,context);
+ }});
+ try{
+  const {buildMcpPrivateConfirmationTemplate:build}=await import(target);
+  let result;
+  try{result=await build({artifact,policy:inertNamedConfirmationPolicy(artifact)});}catch(error){assert.equal(error.message,'Private confirmation preparation unavailable');}
+  assert.ok(sample,'must reach the actual compiler');
+  console.log('AFW public template compiler boundary '+JSON.stringify(sample));
+  assert.equal(sample.rawSlots,1);assert.equal(sample.doubleQuotedSlots,1);assert.ok(sample.bytes<=2097152);
+  assert.ok(result);
+ }finally{hooks.deregister();delete globalThis[key];}
+});
