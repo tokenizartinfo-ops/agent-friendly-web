@@ -21,7 +21,10 @@
 
 ### Task 1: Private RPC boundary
 Files: lib/mcp-retired-rpc-observation.mjs (new), lib/mcp-own-successor-host.mjs (one caller), test/mcp-retired-rpc-observation.test.mjs, test/mcp-retired-rpc-observation-native.test.mjs.
-- [ ] Add unit/native cases and inspect RED in Actions before implementation.
-- [ ] Implement snapshotRetiredRpcObservation(value) and consume it only at the trusted RPC boundary.
+- [x] Add unit/native cases and inspect RED in Actions before implementation.
+- [x] Implement snapshotRetiredRpcObservation(value) and consume it only at the trusted RPC boundary.
 - [ ] Require GREEN, lint/build and one whole-branch source review; fix material findings with regression checks.
 - [ ] Merge and verify main; keep live resources closed and update PR601 dependency explicitly.
+
+## Qualification ledger
+RED b00b4fb, Actions40405925958/job121863528202: actual native record had Object.prototype, exactly12 string data fields plus own Symbol.dispose (data function, enumerablefalse). Existing readOwnSuccessorHost returned unavailable after1RPC/0providerGET; adapter export absent. This confirms the lifecycle boundary, not a provider/network/clock failure. Implementation follows this RED; GREEN/review/merge remain pending. No live mutation.
