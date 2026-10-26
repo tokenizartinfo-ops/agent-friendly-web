@@ -125,6 +125,7 @@ test('prebuilt profile rejects ambiguous Builds attribution and every runtime de
   {...builds,updated_at:'2027-01-01T00:00:00Z'},
   {...builds,status:'mystery'}
  ];
+ cases.push({...builds,incident_updates:[]},{...builds,incident_updates:[{affected_components:[{code:'wrong',name:'Cloudflare Sites and Services - Workers Builds'}]}]});
  for(const other of cases)assert.equal(assessCronProviderSnapshot(snapshot('resolved',[other]),{now,dependencyProfile:'prebuilt-closed-publication'}).providerGate,'unknown');
  for(const name of ['Workers','Workers Cron Triggers','Durable Objects','Containers','D1','Workflows']){
   const other={id:'runtime',name,status:'identified',updated_at:'2026-10-13T17:00:00Z'};
@@ -132,6 +133,7 @@ test('prebuilt profile rejects ambiguous Builds attribution and every runtime de
   assert.notEqual(r.providerGate,'resolved');assert.equal(r.mayRunClosedVerification,false);
  }
  assert.equal(assessCronProviderSnapshot(snapshot('resolved',[builds]),{now,dependencyProfile:'caller-bypass'}).providerGate,'unknown');
+ assert.equal(assessCronProviderSnapshot(snapshot('resolved'),{now,dependencyProfile:'caller-bypass'}).providerGate,'unknown');
 });
 test('prebuilt profile uses the same single bounded credential-free provider GET',async()=>{
  let calls=0;

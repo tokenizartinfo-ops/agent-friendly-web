@@ -97,7 +97,7 @@ export class AfwReleaseWorkflow extends WorkflowEntrypoint {
    return await step.do(policy.operation==='publish'?'publish-closed-release':'confirm-named-activation',{retries:{limit:0,delay:1000,backoff:'constant'},timeout:Math.min(70000,remaining())},async()=>{
     if(!current())return outcome('blocked');
     observation?.point('provider_check');
-    const gate=await checkOwnCronProvider({fetchImpl:(url,init)=>fetch(url,{...init,redirect:'manual'}),timeoutMs:Math.min(5000,remaining())});
+    const gate=await checkOwnCronProvider({fetchImpl:(url,init)=>fetch(url,{...init,redirect:'manual'}),timeoutMs:Math.min(5000,remaining()),dependencyProfile:policy.operation==='publish'?'prebuilt-closed-publication':'all-workers'});
     if(!current())return outcome('blocked');
     if(gate.providerGate!=='resolved'||gate.mayRunClosedVerification!==true){
      const reasons=['invalid_input','invalid_snapshot','active_cron_incident','active_related_incident','request_failed','deadline_exceeded','http_status','unexpected_response_url','unexpected_content_type','body_unavailable','body_read_failed','body_too_large','invalid_utf8','invalid_json'];
