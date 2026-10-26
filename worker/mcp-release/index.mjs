@@ -13,7 +13,7 @@ const closedHttp={fetch(){return new Response(null,{status:404,headers:{'Cache-C
 export default closedHttp;
 // Workflow-local last point only: never an authority decision or a cause.
 function namedObservation(policy){
- const stages=['unknown','workflow_admitted','provider_check','operator_admission','named_plan','publication_lookup','activation_journal','activation_observation','artifact_modules','artifact_legacy','activation_metadata','deployment_first','deployment_version','deployment_application','deployment_second','provider_get','activation_observed','journal_complete','successor_retirement','successor_reserved','workflow_result'];
+ const stages=['unknown','workflow_admitted','provider_check','operator_admission','named_plan','publication_lookup','activation_journal','activation_observation','artifact_modules','artifact_legacy','activation_metadata','deployment_first','deployment_version','deployment_application','deployment_second','provider_get','activation_observed','journal_complete','successor_retirement','successor_admission','successor_manifest','successor_reader','successor_reservation','successor_custody','successor_custody_returned','successor_primary','successor_reserved','workflow_result'];
  const root='https://api.cloudflare.com/client/v4/accounts/'+RELEASE_TARGET.accountId,worker=RELEASE_TARGET.workerName,version=policy.observation.versionId;
  const routes={modules:root+'/workers/workers/'+worker+'/versions/'+version+'?include=modules',legacy:root+'/workers/scripts/'+worker+'/versions/'+version,metadata:root+'/workers/workers/'+worker+'/versions/'+version,deployments:root+'/workers/scripts/'+worker+'/deployments',application:root+'/containers/applications/'+policy.observation.applicationId};
  let value={stage:'workflow_admitted',getIndex:0,httpCode:null,durationMs:null},generation=0,legacy=0,active=0,getCount=0;
@@ -70,7 +70,7 @@ async function runReleaseOperator(env,args,lease,observation){
    observation?.point('journal_complete');check();
    if(lease?.reserveSuccessor===true){
     observation?.point('successor_retirement');
-    const reservation=await reserveReleaseSuccessor({bundle,env,namespace,readCredential,fetchImpl,now:check,signal:controller.signal});
+    const reservation=await reserveReleaseSuccessor({bundle,env,namespace,readCredential,fetchImpl,now:check,signal:controller.signal,observation});
     observation?.point('successor_reserved');check();return {...result,reservation};
    }
    return result;
