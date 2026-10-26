@@ -20,7 +20,7 @@ La plantilla vacía no es un operador desplegable; pruebas solo materializan fic
 ### Task1: builder y materialización sin efectos
 Files: scripts/build-mcp-release-operator.mjs; new lib/mcp-private-confirmation-template.mjs; new test/mcp-private-confirmation-template.test.mjs.
 Consumes: bundle validado/inert0→1 y opciones/entrypoint existentes.
-Produces: buildMcpPrivateConfirmationTemplate(bundle) -> {template,manifest}; materializeMcpPrivateConfirmation({template,manifest,policyJson}) -> script/digests/no publicación.
+Produces: buildMcpPrivateConfirmationTemplate(bundle) -> {template,manifest}; materializeMcpPrivateConfirmation({template,manifest,policyJson,expectedTemplateHash}) -> script/digests/no publicación.
 - [ ] Escribir primero tests del contrato nuevo, mutantes de hash/bytes/slot/caps, JSON canónico/inyección/Unicode y errores saneados. RED por export/funcionalidad ausente en CI, no por typo.
 - [ ] Implementar helper browser-safe y builder con inject virtual/define-identificador; builder actual intacto.
 - [ ] GREEN de tests nuevos y suite normal en Actions; sin instalaciones/builds locales. Confirmar no cambios en runtime/frozen pins.
