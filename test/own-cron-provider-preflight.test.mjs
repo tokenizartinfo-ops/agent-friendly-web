@@ -103,3 +103,38 @@ test('body limit and timeout remain terminal with bounded diagnostic counts',asy
  const timeout=await checkOwnCronProvider({now:()=>now,timeoutMs:10,fetchImpl:async()=>{calls++;return new Response(stalled,{headers:{'Content-Type':'application/json'}});}});
  assert.equal(timeout.reason,'deadline_exceeded');assert.equal(timeout.receivedBytes,0);assert.equal(calls,2);assert.equal(cancelled,2);
 });
+
+const buildsIncident=()=>({id:'buildsonly',name:'Cloudflare Workers build delays',status:'monitoring',updated_at:'2026-10-13T17:00:00Z',components:[{id:'vcpsk0w6g86k',name:'Workers Builds'}],incident_updates:[{affected_components:[{code:'vcpsk0w6g86k',name:'Cloudflare Sites and Services - Workers Builds'}]}]});
+test('prebuilt closed publication scopes an exclusive Builds incident without changing default or claiming readiness',()=>{
+ const input=snapshot('resolved',[buildsIncident()]);
+ assert.equal(assessCronProviderSnapshot(input,{now}).providerGate,'unknown');
+ const r=assessCronProviderSnapshot(input,{now,dependencyProfile:'prebuilt-closed-publication'});
+ assert.equal(r.providerGate,'resolved');assert.equal(r.dependencyProfile,'prebuilt-closed-publication');
+ assert.equal(r.mayRunClosedVerification,true);assert.equal(r.operationalReadiness,false);
+ assert.deepEqual(r.nonBlockingIncidents,[{id:'buildsonly',status:'monitoring',updatedAt:'2026-10-13T17:00:00Z',url:'https://www.cloudflarestatus.com/incidents/buildsonly'}]);
+});
+test('prebuilt profile rejects ambiguous Builds attribution and every runtime dependency',()=>{
+ const builds=buildsIncident();
+ const cases=[
+  {...builds,components:[]},
+  {...builds,components:[{id:'wrong',name:'Workers Builds'}]},
+  {...builds,components:[{id:'vcpsk0w6g86k',name:'Workers'}]},
+  {...builds,name:'Workers Builds and API errors'},
+  {...builds,components:[...builds.components,{id:'runtime',name:'Workers'}]},
+  {...builds,incident_updates:[{affected_components:[{code:'runtime',name:'Cloudflare Sites and Services - Workers'}]}]},
+  {...builds,updated_at:'2027-01-01T00:00:00Z'},
+  {...builds,status:'mystery'}
+ ];
+ for(const other of cases)assert.equal(assessCronProviderSnapshot(snapshot('resolved',[other]),{now,dependencyProfile:'prebuilt-closed-publication'}).providerGate,'unknown');
+ for(const name of ['Workers','Workers Cron Triggers','Durable Objects','Containers','D1','Workflows']){
+  const other={id:'runtime',name,status:'identified',updated_at:'2026-10-13T17:00:00Z'};
+  const r=assessCronProviderSnapshot(snapshot('resolved',[builds,other]),{now,dependencyProfile:'prebuilt-closed-publication'});
+  assert.notEqual(r.providerGate,'resolved');assert.equal(r.mayRunClosedVerification,false);
+ }
+ assert.equal(assessCronProviderSnapshot(snapshot('resolved',[builds]),{now,dependencyProfile:'caller-bypass'}).providerGate,'unknown');
+});
+test('prebuilt profile uses the same single bounded credential-free provider GET',async()=>{
+ let calls=0;
+ const r=await checkOwnCronProvider({now:()=>now,dependencyProfile:'prebuilt-closed-publication',fetchImpl:async(url,options)=>{calls++;assert.equal(url,'https://www.cloudflarestatus.com/api/v2/incidents.json');assert.equal(options.redirect,'error');assert.deepEqual(Object.keys(options.headers),['User-Agent']);return response(snapshot('resolved',[buildsIncident()]));}});
+ assert.equal(calls,1);assert.equal(r.providerGate,'resolved');assert.equal(r.dependencyProfile,'prebuilt-closed-publication');assert.equal(r.httpStatus,200);assert.equal(r.operationalReadiness,false);
+});
