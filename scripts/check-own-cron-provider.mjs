@@ -19,11 +19,11 @@ function receipt(providerGate,now,reason=providerGate==='unknown'?'invalid_snaps
 function assessCronProviderSnapshotAll(snapshot,{now=Date.now(),trackedSnapshot}={}){
  try{
   if(!receipt('unknown',now).checkedAt||snapshot?.page?.url!=='https://www.cloudflarestatus.com'||!Array.isArray(snapshot.incidents)||snapshot.incidents.length>50)return receipt('unknown',now);
-  if(snapshot.incidents.some(x=>!x||typeof x.id!=='string'||typeof x.name!=='string'))return receipt('unknown',now);
+  if(snapshot.incidents.some(x=>!x||typeof x.id!=='string'||typeof x.name!=='string')||new Set(snapshot.incidents.map(x=>x.id)).size!==snapshot.incidents.length)return receipt('unknown',now);
   let incidents=snapshot.incidents,originals=incidents.filter(x=>x.id===INCIDENT);
   if(!originals.length){
    if(!trackedSnapshot)return receipt('unknown',now,'tracked_incident_absent');
-   if(trackedSnapshot.page?.url!=='https://www.cloudflarestatus.com'||trackedSnapshot.incident?.id!==INCIDENT)return receipt('unknown',now,'invalid_tracked_snapshot');
+   if(trackedSnapshot.page?.url!=='https://www.cloudflarestatus.com'||trackedSnapshot.incident?.id!==INCIDENT||typeof trackedSnapshot.incident.name!=='string')return receipt('unknown',now,'invalid_tracked_snapshot');
    originals=[trackedSnapshot.incident];incidents=[...incidents,trackedSnapshot.incident];
   }
   const relevant=incidents.map(x=>({incident:x,...signals(x)})).filter(x=>x.worker||x.cron||x.dependency);
@@ -73,19 +73,21 @@ export function assessCronProviderSnapshot(snapshot,{now=Date.now(),dependencyPr
   return finish(scoped,conservative.relatedIncidents.filter(x=>ids.has(x.id)));
  }catch{return finish(receipt('unknown',now));}
 }
-const needsTrackedSnapshot=s=>s?.page?.url==='https://www.cloudflarestatus.com'&&Array.isArray(s.incidents)&&s.incidents.length<=50&&s.incidents.every(x=>x&&typeof x.id==='string'&&typeof x.name==='string')&&!s.incidents.some(x=>x.id===INCIDENT);
+const needsTrackedSnapshot=s=>s?.page?.url==='https://www.cloudflarestatus.com'&&Array.isArray(s.incidents)&&s.incidents.length<=50&&s.incidents.every(x=>x&&typeof x.id==='string'&&typeof x.name==='string')&&new Set(s.incidents.map(x=>x.id)).size===s.incidents.length&&!s.incidents.some(x=>x.id===INCIDENT);
 export async function checkOwnCronProvider({fetchImpl=globalThis.fetch,now=Date.now,timeoutMs=5000,dependencyProfile='all-workers'}={}){
- let at;try{at=now();}catch{return receipt('unknown',null,'invalid_input');}
- if(!['all-workers',PREBUILT_PROFILE].includes(dependencyProfile)||!receipt('unknown',at).checkedAt||!Number.isSafeInteger(timeoutMs)||timeoutMs<1||timeoutMs>5000)return receipt('unknown',at,'invalid_input');
+ let at,started;try{started=performance.now();at=now();}catch{return receipt('unknown',null,'invalid_input');}
+ if(!Number.isFinite(started)||!['all-workers',PREBUILT_PROFILE].includes(dependencyProfile)||!receipt('unknown',at).checkedAt||!Number.isSafeInteger(timeoutMs)||timeoutMs<1||timeoutMs>5000)return receipt('unknown',at,'invalid_input');
  const controller=new AbortController();let reader,timer,httpStatus=null,receivedBytes=0,reason='request_failed',requestCount=0,trackedIncidentLookup=false;
  const diagnostic=result=>Object.freeze({...result,...(dependencyProfile===PREBUILT_PROFILE?{dependencyProfile:PREBUILT_PROFILE}:{}),httpStatus,receivedBytes,requestCount,trackedIncidentLookup});
+ const cutoff=started+timeoutMs;let lastTick=started;
+ const budget=()=>{const tick=performance.now();if(!Number.isFinite(tick)||tick<lastTick||tick>=cutoff||controller.signal.aborted){reason='deadline_exceeded';controller.abort();throw Error('unavailable');}lastTick=tick;};
  try{
-  const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>{reason='deadline_exceeded';controller.abort();reject(Error('unavailable'));},timeoutMs);});
+  budget();const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>{reason='deadline_exceeded';controller.abort();reject(Error('unavailable'));},Math.max(0,cutoff-lastTick));});
   const readJson=async url=>{
-   if(controller.signal.aborted)throw Error('unavailable');
+   budget();
    reason='request_failed';requestCount++;
    const r=await fetchImpl(url,{redirect:'error',signal:controller.signal,headers:{'User-Agent':'AFW-Diagnostic/1.0 (+https://agentfriendlyweb.dev)'}});
-   if(controller.signal.aborted)throw Error('unavailable');
+   budget();
    const code=r.status;httpStatus=Number.isSafeInteger(code)&&code>=100&&code<=599?code:null;
    reason='http_status';if(!r.ok)throw Error('unavailable');
    reason='unexpected_response_url';if(r.url&&r.url!==url)throw Error('unavailable');
@@ -93,22 +95,22 @@ export async function checkOwnCronProvider({fetchImpl=globalThis.fetch,now=Date.
    reason='body_unavailable';if(!r.body)throw Error('unavailable');
    reader=r.body.getReader();const decoder=new TextDecoder('utf-8',{fatal:true});let text='';
    while(true){
-    reason='body_read_failed';const part=await reader.read();if(controller.signal.aborted)throw Error('unavailable');if(part.done)break;
+    reason='body_read_failed';const part=await reader.read();budget();if(part.done)break;
     receivedBytes=Math.min(MAX_BYTES+1,receivedBytes+part.value.byteLength);
     reason='body_too_large';if(receivedBytes>MAX_BYTES)throw Error('unavailable');
     reason='invalid_utf8';text+=decoder.decode(part.value,{stream:true});
    }
    reason='invalid_utf8';text+=decoder.decode();reader.releaseLock();reader=null;
-   reason='invalid_json';return JSON.parse(text);
+   reason='invalid_json';const parsed=JSON.parse(text);budget();return parsed;
   };
   const request=(async()=>{
    const snapshot=await readJson(SOURCE);
    let trackedSnapshot;
    if(needsTrackedSnapshot(snapshot)){
-    if(controller.signal.aborted)throw Error('unavailable');
+    budget();
     trackedIncidentLookup=true;trackedSnapshot=await readJson(TRACKED_SOURCE);
    }
-   return diagnostic(assessCronProviderSnapshot(snapshot,{now:at,dependencyProfile,trackedSnapshot}));
+   const assessed=assessCronProviderSnapshot(snapshot,{now:at,dependencyProfile,trackedSnapshot});budget();return diagnostic(assessed);
   })();
   return await Promise.race([request,deadline]);
  }catch{return diagnostic(receipt('unknown',at,reason));}

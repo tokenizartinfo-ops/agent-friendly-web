@@ -192,3 +192,24 @@ test('prebuilt profile still excludes only narrow Builds incidents after histori
  current.incidents[1]={id:'runtimeissue',name:'Durable Objects errors',status:'identified',updated_at:'2026-10-13T17:00:00Z'};
  assert.equal(assessCronProviderSnapshot(current,{now,trackedSnapshot:trackedSnapshot(),dependencyProfile:'prebuilt-closed-publication'}).providerGate,'unknown');
 });
+
+test('supplemental incident names must obey the recent-feed string schema',()=>{
+ for(const name of [undefined,null,42,{toString(){return 'Workers Cron Triggers';}}]){
+  const r=assessCronProviderSnapshot(recentWithoutTracked(),{now,trackedSnapshot:{...trackedSnapshot(),incident:{...incident('resolved'),name,components:[{name:'Workers Cron Triggers'}]}}});
+  assert.equal(r.providerGate,'unknown');assert.equal(r.mayRunClosedVerification,false);
+ }
+});
+test('duplicate unrelated recent IDs cannot be cleared by tracked history or trigger fallback',async()=>{
+ const current={...recentWithoutTracked(),incidents:Array.from({length:50},()=>recentWithoutTracked().incidents[0])};
+ assert.equal(assessCronProviderSnapshot(current,{now,trackedSnapshot:trackedSnapshot()}).providerGate,'unknown');
+ let calls=0;const r=await checkOwnCronProvider({now:()=>now,fetchImpl:async()=>{calls++;return response(current);}});
+ assert.equal(calls,1);assert.equal(r.providerGate,'unknown');
+});
+test('synchronous timer starvation cannot start a fallback after the original absolute cutoff',async()=>{
+ let calls=0;const r=await checkOwnCronProvider({now:()=>now,timeoutMs:5,fetchImpl:async()=>{calls++;const until=performance.now()+25;while(performance.now()<until){}return response(calls===1?recentWithoutTracked():trackedSnapshot());}});
+ assert.equal(calls,1);assert.equal(r.reason,'deadline_exceeded');assert.equal(r.providerGate,'unknown');assert.equal(r.mayRunClosedVerification,false);
+});
+test('a historical response arriving after a starved deadline cannot clear the gate',async()=>{
+ let calls=0;const r=await checkOwnCronProvider({now:()=>now,timeoutMs:20,fetchImpl:async()=>{calls++;if(calls===2){const until=performance.now()+30;while(performance.now()<until){}}return response(calls===1?recentWithoutTracked():trackedSnapshot());}});
+ assert.equal(calls,2);assert.equal(r.reason,'deadline_exceeded');assert.equal(r.providerGate,'unknown');
+});
