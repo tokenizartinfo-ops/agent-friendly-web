@@ -16,7 +16,7 @@ test('native named Workflow reserves one immutable successor only under its sepa
  assert.equal(JSON.stringify(r.output).includes('synthetic_read_credential'),false);
 });
 test('absent or disabled reservation opt-in preserves confirmation without retirement calls or reservation',async()=>{
- for(const reserve of [null,'false']){const r=await run({reserve});assert.equal(r.output.status,'confirmed');assert.equal(r.reservationCount,0);assert.equal(r.counters.retirementReads,0);assert.equal(Object.hasOwn(r.output,'reservation'),false);}
+ for(const reserve of [null,'false']){const r=await run({reserve});assert.equal(r.output.status,'confirmed');assert.equal(r.reservationCount,0);assert.equal(r.counters.retirementReads??0,0);assert.equal(Object.hasOwn(r.output,'reservation'),false);}
 });
 test('malformed reservation opt-in blocks before provider or journal admission',async()=>{
  const r=await run({reserve:'TRUE'});assert.equal(r.output.status,'blocked');assert.deepEqual(r.counts,{attempts:0,receipts:0,acceptances:0});assert.equal(r.counters.apiReads,0);assert.equal(r.counters.providerReads,0);

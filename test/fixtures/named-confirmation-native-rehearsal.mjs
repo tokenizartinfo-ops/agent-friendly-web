@@ -23,7 +23,7 @@ export async function rehearseExactNamedConfirmation({artifact,build,mode,payloa
   config.containers=[{class_name:'AfwOwnEventNode',name:'agent-friendly-web-delegated-canary-afwowneventnode'}];
   policy.plan.configurationHash=activationConfigurationHash(config);
   const compiled=await build({artifact,policy}),{versionId,deploymentId}=policy.observation,etag='f'.repeat(64);
-  const counters={providerReads:0,apiReads:0,retirementReads:0,largestReplyBytes:0},root='https://api.cloudflare.com/client/v4/accounts/'+RELEASE_TARGET.accountId;
+  const counters={providerReads:0,apiReads:0,largestReplyBytes:0,...(reserve!==null?{retirementReads:0}:{})},root='https://api.cloudflare.com/client/v4/accounts/'+RELEASE_TARGET.accountId;
   const urls={module:root+'/workers/workers/'+RELEASE_TARGET.workerName+'/versions/'+versionId+'?include=modules',metadata:root+'/workers/workers/'+RELEASE_TARGET.workerName+'/versions/'+versionId,legacy:root+'/workers/scripts/'+RELEASE_TARGET.workerName+'/versions/'+versionId,deployments:root+'/workers/scripts/'+RELEASE_TARGET.workerName+'/deployments',application:root+'/containers/applications/'+RELEASE_TARGET.namespaceId,instance:root+'/containers/applications/'+RELEASE_TARGET.namespaceId+'/instances/'+ids.original};
   const outboundService=async request=>{
    assert.equal(request.method,'GET','qualification must never publish');
