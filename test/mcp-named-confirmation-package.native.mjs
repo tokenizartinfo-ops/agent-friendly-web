@@ -238,3 +238,11 @@ test('actual historical template compiler boundary records only public sizes and
   assert.ok(result);
  }finally{hooks.deregister();delete globalThis[key];}
 });
+
+
+test('exact frozen module confirms and reserves through the explicitly opted-in native Workflow',available,async()=>{
+ const r=await rehearseExactNamedConfirmation({artifact,build:buildMcpNamedConfirmation,mode:'confirmed',reserve:'true'});
+ assert.equal(r.output.status,'confirmed',JSON.stringify({output:r.output,counts:r.counts,counters:r.counters,reservationCount:r.reservationCount}));
+ assert.equal(r.httpStatus,404);assert.equal(r.reservationCount,1);assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
+ assert.equal(r.output.reservation.mayBoot,false);assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);assert.equal(r.counters.retirementReads,2);
+});
