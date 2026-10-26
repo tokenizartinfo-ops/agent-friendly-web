@@ -145,7 +145,11 @@ test('last-byte corruption of the real historical artifact never creates accepta
 });
 test('regional Workers incident blocks the exact package before API reads and journal admission',available,async()=>{
  const r=await rehearseExactNamedConfirmation({artifact,build:buildMcpNamedConfirmation,mode:'regional-incident'});
- assert.deepEqual(r.output,{status:'blocked',mayRetry:false,operationalReadiness:false});
+ const {providerCheck,...outcome}=r.output;
+ assert.deepEqual(outcome,{status:'blocked',mayRetry:false,operationalReadiness:false});
+ assert.deepEqual(Object.keys(providerCheck).sort(),['httpStatus','providerGate','reason','receivedBytes']);
+ assert.equal(providerCheck.providerGate,'unknown');assert.equal(providerCheck.reason,'active_related_incident');assert.equal(providerCheck.httpStatus,200);
+ assert.ok(Number.isSafeInteger(providerCheck.receivedBytes)&&providerCheck.receivedBytes>0&&providerCheck.receivedBytes<=262145);
  assert.deepEqual(r.counts,{attempts:0,receipts:0,acceptances:0});
  assert.deepEqual(r.counters,{providerReads:1,apiReads:0,largestReplyBytes:0});
 });
