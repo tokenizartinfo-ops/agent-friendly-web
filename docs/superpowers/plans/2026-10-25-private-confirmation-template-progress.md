@@ -6,3 +6,8 @@ Rulings: ver decisiones del plan. Feature aún NO implementada; RED/GREEN pendie
 
 Task1: RED contract written before implementation; new exports absent in existing builder. No production code written yet.
 Ruling: require independent expectedTemplateHash from qualified CI receipt; a self-consistent untrusted manifest cannot authenticate itself. Risk if omitted: substituted code/data destination could be accepted.
+
+Task1: RED40249264428/job121337352264 at head e441b248:2877tests/2862PASS/14FAIL(new exports absent)/1existingSkip; no unrelated failures. Verified logs before implementation.
+Ruling: stdin/resolveDir replaces one known entrypoint token in memory instead of virtual inject: fewer plugin assumptions, same options/source/runtime and no FS write. Relative sourcefile preserves reproducible metadata.
+Ruling: output policyHash names SHA(policyJson); it is deliberately NOT runtime planHash=SHA(JSON.stringify(bundle)). Caller later computes the latter from the same frozen public artifact and canonical private policy. No receipt confusion.
+Task1: first implementation added after RED; GREEN pending. No deployment/real policy/new credentials.

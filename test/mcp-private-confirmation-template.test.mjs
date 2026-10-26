@@ -38,7 +38,8 @@ test('private materialization changes only the reserved literal and records inde
  const expected=p.template.replace(JSON.stringify(p.manifest.slot),JSON.stringify(p.policyJson));
  assert.equal(out.script,expected);
  assert.equal(out.operatorHash,hash(expected));
- assert.equal(out.planHash,hash(p.policyJson));
+ assert.equal(out.policyHash,hash(p.policyJson));
+ assert.equal(Object.hasOwn(out,'planHash'),false);
  assert.equal(out.templateHash,p.expectedTemplateHash);
  assert.equal(out.remotePublished,false);
  assert.equal(out.materialized,true);
