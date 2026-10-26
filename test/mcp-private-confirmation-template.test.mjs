@@ -44,7 +44,7 @@ test('private materialization changes only the reserved literal and records inde
  assert.equal(out.remotePublished,false);
  assert.equal(out.materialized,true);
  assert.equal(out.script.includes(p.manifest.slot),false);
- const {script:ignored,...metadata}=out;
+ const metadata={...out};delete metadata.script;
  assert.equal(JSON.stringify(metadata).includes('ci-only-inert'),false);
  assert.equal(JSON.stringify(metadata).includes('ci-synthetic'),false);
  assert.equal(Object.hasOwn(out,'policyJson'),false);

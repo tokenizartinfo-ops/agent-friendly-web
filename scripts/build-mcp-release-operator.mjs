@@ -22,6 +22,8 @@ export async function buildMcpReleaseOperator(bundle){
 export async function buildMcpPrivateConfirmationTemplate(bundle){
  try{
   validateReleaseOperatorBundle(bundle);
+  bundle=JSON.parse(JSON.stringify(bundle));
+  validateReleaseOperatorBundle(bundle);
   if(bundle.policy.operation!=='confirm_named'||bundle.policy.startAt!==0||bundle.policy.expiresAt!==1)throw Error();
   const entry=fileURLToPath(new URL('../worker/mcp-release/index.mjs',import.meta.url));
   const source=await readFile(entry,'utf8'),token='globalThis.__AFW_RELEASE_OPERATOR_BUNDLE__';
