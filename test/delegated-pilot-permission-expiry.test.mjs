@@ -17,13 +17,13 @@ async function fixture(){
   f.setTime(new Date(start).toISOString());
   return f;
 }
-function afterOwnedRead(f,act){
+function afterOwnedRead(f,act,onFirst){
   const original=f.env.DB.prepare;let reads=0;
   f.env.DB.prepare=sql=>{
     const statement=original(sql);
     if(!/FROM site_projects/i.test(sql))return statement;
     return {bind(...args){const bound=statement.bind(...args);return {...bound,first:async()=>{
-      const row=await bound.first();if(++reads===2)act();return row;
+      const row=await bound.first();if(++reads===1)onFirst?.();if(reads===2)act();return row;
     }};}};
   };
   return {reads:()=>reads,restore:()=>{f.env.DB.prepare=original;}};
@@ -130,4 +130,58 @@ test('expiry during grant persistence returns no code and retires only the new o
     assert.equal(own.expires_at,f.deadline);assert.ok(own.revoked_at);
     assert.deepEqual(f.sqlite.prepare("SELECT * FROM delegated_access_grants WHERE id='untouched'").get(),before);
   }finally{f.env.DB.prepare=original;f.close();}
+});
+
+test('intermediate approval clock observations cannot be invalid or roll backward and then recover',async()=>{
+  for(const intermediate of ['empty','backward']){
+    const f=await fixture();let patch;try{
+      const a=await authorize(f,{scope:'afw:project:read'});
+      patch=afterOwnedRead(f,
+        ()=>f.setTime(new Date(f.start+500).toISOString()),
+        ()=>f.setTime(intermediate==='empty'?'':new Date(f.start+1000).toISOString()));
+      const approved=await approve(f,a,{scope:['afw:project:read']});
+      assert.ok(patch.reads()>=1);
+      assert.notEqual(approved.status,302);
+      assert.equal(f.sqlite.prepare('SELECT count(*) n FROM delegated_access_grants').get().n,0);
+    }finally{patch?.restore();f.close();}
+  }
+});
+
+test('an empty clock after grant persistence still retires only the new own grant',async()=>{
+  const f=await fixture(),original=f.env.DB.prepare;try{
+    const a=await authorize(f,{scope:'afw:project:read'});
+    f.sqlite.prepare("INSERT INTO delegated_access_grants(id,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at) VALUES(?,?,?,?,?,?,?,?,?)")
+      .run('unrelated','owner-b','foreign','p-b','https://foreign.invalid/mcp','[]',new Date(f.start).toISOString(),f.deadline,'');
+    const unrelated=f.sqlite.prepare("SELECT * FROM delegated_access_grants WHERE id='unrelated'").get();
+    f.env.DB.prepare=sql=>{
+      const stmt=original(sql);if(!/INSERT INTO delegated_access_grants/i.test(sql))return stmt;
+      return {bind(...args){const bound=stmt.bind(...args);return {...bound,run:async()=>{
+        const result=await bound.run();f.setTime('');return result;
+      }};}};
+    };
+    const approved=await approve(f,a,{scope:['afw:project:read']});assert.notEqual(approved.status,302);
+    const own=f.sqlite.prepare("SELECT created_at,revoked_at FROM delegated_access_grants WHERE id<>'unrelated'").get();
+    assert.ok(own.revoked_at);
+    assert.ok(Number.isFinite(Date.parse(own.revoked_at)));
+    assert.equal(own.revoked_at,own.created_at);
+    assert.deepEqual(f.sqlite.prepare("SELECT * FROM delegated_access_grants WHERE id='unrelated'").get(),unrelated);
+  }finally{f.env.DB.prepare=original;f.close();}
+});
+
+test('an empty clock after SDK completion cannot return its code or leave the grant active',async()=>{
+  const f=await fixture();try{
+    const a=await authorize(f,{scope:'afw:project:read'});
+    const original=f.worker.authorizationServer.getOAuthApi.bind(f.worker.authorizationServer);
+    f.worker.authorizationServer.getOAuthApi=env=>{
+      const api=original(env),wrapped=Object.create(api);
+      wrapped.completeAuthorization=async(...args)=>{
+        const completed=await api.completeAuthorization(...args);f.setTime('');return completed;
+      };
+      return wrapped;
+    };
+    const approved=await approve(f,a,{scope:['afw:project:read']});
+    assert.notEqual(approved.status,302);assert.equal(approved.headers.get('Location'),null);
+    const grant=f.sqlite.prepare('SELECT created_at,revoked_at FROM delegated_access_grants').get();
+    assert.ok(grant.revoked_at);assert.equal(grant.revoked_at,grant.created_at);
+  }finally{f.close();}
 });
