@@ -10,9 +10,9 @@ function signals(x){
  if(x.incident_updates!==undefined&&x.incident_updates!==null){if(!Array.isArray(x.incident_updates))throw Error('unavailable');for(const u of x.incident_updates){if(!u||typeof u!=='object')throw Error('unavailable');components(u.affected_components);}}
  return{worker:names.some(s=>/Workers/i.test(s)),cron:names.some(s=>/Cron Trigger/i.test(s)),dependency:names.some(s=>/\b(?:Durable Objects|Containers|D1|Workflows)\b/i.test(s))};
 }
-function receipt(providerGate,now){
+function receipt(providerGate,now,reason=providerGate==='unknown'?'invalid_snapshot':undefined){
  let checkedAt=null;try{if(Number.isSafeInteger(now)&&now>=0)checkedAt=new Date(now).toISOString();}catch{}
- return Object.freeze({source:SOURCE,incidentId:INCIDENT,checkedAt,providerGate,mayRunClosedVerification:providerGate==='resolved',operationalReadiness:false});
+ return Object.freeze({source:SOURCE,incidentId:INCIDENT,checkedAt,providerGate,...(reason?{reason}:{}),mayRunClosedVerification:providerGate==='resolved',operationalReadiness:false});
 }
 /** Public operator prerequisite only: never authorizes OAuth, Node, ONE or PC-off. */
 export function assessCronProviderSnapshot(snapshot,{now=Date.now()}={}){
@@ -26,27 +26,40 @@ export function assessCronProviderSnapshot(snapshot,{now=Date.now()}={}){
    if(!/^[a-z0-9]{1,64}$/.test(x.id)||!ACTIVE.has(x.status)&&!TERMINAL.has(x.status)||!Number.isSafeInteger(updated)||updated>now||!/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{3})?Z$/.test(x.updated_at))return receipt('unknown',now);
    if(new Date(updated).toISOString()!==x.updated_at.replace(/Z$/,x.updated_at.includes('.')?'Z':'.000Z'))return receipt('unknown',now);
   }
-  if(relevant.some(x=>x.worker&&x.cron&&ACTIVE.has(x.incident.status)))return receipt('blocked',now);
+  if(relevant.some(x=>x.worker&&x.cron&&ACTIVE.has(x.incident.status)))return receipt('blocked',now,'active_cron_incident');
   const active=relevant.filter(x=>ACTIVE.has(x.incident.status));
   if(active.length)return Object.freeze({...receipt('unknown',now),reason:'active_related_incident',impactAttribution:'not-established',relatedIncidents:Object.freeze(active.map(({incident:x})=>Object.freeze({id:x.id,status:x.status,updatedAt:x.updated_at,url:'https://www.cloudflarestatus.com/incidents/'+x.id})))});
   return receipt('resolved',now);
  }catch{return receipt('unknown',now);}
 }
 export async function checkOwnCronProvider({fetchImpl=globalThis.fetch,now=Date.now,timeoutMs=5000}={}){
- let at;try{at=now();}catch{return receipt('unknown',null);}
- if(!receipt('unknown',at).checkedAt||!Number.isSafeInteger(timeoutMs)||timeoutMs<1||timeoutMs>5000)return receipt('unknown',at);
- const controller=new AbortController();let reader,timer;
+ let at;try{at=now();}catch{return receipt('unknown',null,'invalid_input');}
+ if(!receipt('unknown',at).checkedAt||!Number.isSafeInteger(timeoutMs)||timeoutMs<1||timeoutMs>5000)return receipt('unknown',at,'invalid_input');
+ const controller=new AbortController();let reader,timer,httpStatus=null,receivedBytes=0,reason='request_failed';
+ const diagnostic=result=>Object.freeze({...result,httpStatus,receivedBytes});
  try{
-  const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('unavailable'));},timeoutMs);});
+  const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>{reason='deadline_exceeded';controller.abort();reject(Error('unavailable'));},timeoutMs);});
   const request=(async()=>{
    const r=await fetchImpl(SOURCE,{redirect:'error',signal:controller.signal,headers:{'User-Agent':'AFW-Diagnostic/1.0 (+https://agentfriendlyweb.dev)'}});
-   if(!r.ok||r.url&&r.url!==SOURCE||!/^application\/json(?:;|$)/i.test(r.headers.get('Content-Type')??'')||!r.body||controller.signal.aborted)throw Error('unavailable');
-   reader=r.body.getReader();const decoder=new TextDecoder('utf-8',{fatal:true});let size=0,text='';
-   while(true){const part=await reader.read();if(part.done)break;size+=part.value.byteLength;if(size>MAX_BYTES||controller.signal.aborted)throw Error('unavailable');text+=decoder.decode(part.value,{stream:true});}
-   text+=decoder.decode();return assessCronProviderSnapshot(JSON.parse(text),{now:at});
+   if(controller.signal.aborted)throw Error('unavailable');
+   const code=r.status;httpStatus=Number.isSafeInteger(code)&&code>=100&&code<=599?code:null;
+   reason='http_status';if(!r.ok)throw Error('unavailable');
+   reason='unexpected_response_url';if(r.url&&r.url!==SOURCE)throw Error('unavailable');
+   reason='unexpected_content_type';if(!/^application\\/json(?:;|$)/i.test(r.headers.get('Content-Type')??''))throw Error('unavailable');
+   reason='body_unavailable';if(!r.body)throw Error('unavailable');
+   reader=r.body.getReader();const decoder=new TextDecoder('utf-8',{fatal:true});let text='';
+   while(true){
+    reason='body_read_failed';const part=await reader.read();if(controller.signal.aborted)throw Error('unavailable');if(part.done)break;
+    receivedBytes=Math.min(MAX_BYTES+1,receivedBytes+part.value.byteLength);
+    reason='body_too_large';if(receivedBytes>MAX_BYTES)throw Error('unavailable');
+    reason='invalid_utf8';text+=decoder.decode(part.value,{stream:true});
+   }
+   reason='invalid_utf8';text+=decoder.decode();
+   reason='invalid_json';const snapshot=JSON.parse(text);
+   return diagnostic(assessCronProviderSnapshot(snapshot,{now:at}));
   })();
   return await Promise.race([request,deadline]);
- }catch{return receipt('unknown',at);}
+ }catch{return diagnostic(receipt('unknown',at,reason));}
  finally{clearTimeout(timer);controller.abort();if(reader){void reader.cancel().catch(()=>{});try{reader.releaseLock();}catch{/* A pending read is cancelled above. */}}}
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
