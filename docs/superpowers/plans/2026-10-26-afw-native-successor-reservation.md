@@ -36,3 +36,5 @@
 
 ## Review/verification ledger
 RED c007fd1 CI40400822455/job121845870046: expected missing reservation and guard assertions; legacy default passed. First implementation was accidentally added to a noncompiled path; review found one Important, and CI40401667749/job121848815492 stayed RED. Corrected entrypoint is worker/mcp-release/index.mjs, with duplicate removed. One whole-branch review: 0Critical/1Important/1Minor. Minor deferred: native composition does not yet inject lost post-insert ACK or mutation of flags/DB/namespace during await; existing primitive ACK tests and composed expiry/backward-clock tests remain. No second review requested; required GREEN and main verification still pending.
+
+Dependency: PR602 isolates the documented native RPC Symbol.dispose and updates the Worker-side retirement boundary; PR601 consumes that same strict snapshot. The synthetic-clock change did not resolve the failure, so the positive native fixture again uses actual Date.now and keeps explicit future-evidence denial. Frozen444d remains uncorrected; qualify a new accepted Worker source before live use. Do not merge PR601 until PR602 is accepted.
