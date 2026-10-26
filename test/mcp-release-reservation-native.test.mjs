@@ -8,7 +8,7 @@ const artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),p
 const run=options=>rehearseExactNamedConfirmation({artifact,build:buildMcpReleaseOperator,mode:'confirmed',...options});
 test('native named Workflow reserves one immutable successor only under its separate explicit opt-in',async()=>{
  const r=await run({reserve:'true'});
- assert.equal(r.httpStatus,404);assert.equal(r.output.status,'confirmed');
+ assert.equal(r.httpStatus,404);assert.equal(r.output.status,'confirmed',JSON.stringify({output:r.output,counts:r.counts,counters:r.counters,reservationCount:r.reservationCount}));
  assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
  assert.equal(r.reservationCount,1);
  assert.deepEqual(r.output.reservation,{purpose:'afw.successor-reservation.v1',trialId:'e'.repeat(64),state:'prepared',mayBoot:false});
