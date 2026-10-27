@@ -9,6 +9,7 @@ export function MaturityMap({ locale = 'es' }: { locale?: 'es' | 'en' | 'pt' } =
       <div className="maturity-map-intro">
         <span><Network size={16} /> {copy.eyebrow}</span>
         <h2 id="maturity-map-title">{copy.title}</h2>
+        <p className="maturity-map-guidance">{copy.guidance}</p>
         <p>{copy.intro}</p>
         <a href={localizedPath('evolution', locale) || '/evolucion-agentica'}>{copy.cta} <ArrowRight size={16} /></a>
       </div>

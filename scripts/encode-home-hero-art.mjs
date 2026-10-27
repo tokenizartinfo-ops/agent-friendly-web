@@ -2,12 +2,10 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
-import {createRequire} from 'node:module';
 import sharp from 'sharp';
 assert.equal(process.env.GITHUB_ACTIONS,'true');
 assert.equal(process.env.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');
-const require=createRequire(import.meta.url);
-assert.equal(require('sharp/package.json').version,'0.35.5');
+assert.equal(sharp.versions.sharp,'0.35.5');
 const c=JSON.parse(await readFile('config/home-hero-art-20261027.json','utf8'));
 assert.equal(c.repository,'tokenizartinfo-ops/agent-friendly-web');
 assert.equal(c.blob,'99713003ef36dca2788680fee9aa276634acd5b2');
