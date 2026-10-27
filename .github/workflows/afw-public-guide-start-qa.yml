@@ -94,3 +94,16 @@ jobs:
             output/playwright/home-opening/
           if-no-files-found: ignore
           retention-days: 7
+
+      - name: Preserve bounded home review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-home-review-${{ github.event.pull_request.head.sha }}
+          path: |
+            output/playwright/home-opening/home-start-es-*.jpg
+            output/playwright/home-opening/receipt.json
+            output/playwright/home-opening/failure.json
+            output/playwright/home-opening/cleanup.json
+          if-no-files-found: ignore
+          retention-days: 7
