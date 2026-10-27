@@ -43,7 +43,7 @@ export async function environment(){
   if(o.method==='POST'&&path===R+'/d1/database/6a728254-1494-4039-802e-b39288a55fcc/query'){assert.match(o.body.sql,/^SELECT /);return ok([{success:true,results:o.body.sql.includes('AS project_owner')?s.rows:[{reserved:s.reserved,active_grants:s.activeGrants}]}]);}
   const kv=R+'/storage/kv/namespaces/6b94ff702e504e14a7730cee73a0f6ff';
   if(o.method==='POST'&&path===kv+'/bulk/get'){assert.deepEqual(o.body,{keys:[KEY],type:'json',withMetadata:true});return ok({values:{[KEY]:s.client}});}
-  if(o.method==='PUT'&&path===kv+'/bulk'){assert.equal(o.body.length,1);const c=o.body[0];assert.equal(c.key,KEY);s.client={value:JSON.parse(c.value),metadata:c.metadata,expiration:c.expiration};return ok({successful_key_count:1,unsuccessful_keys:[]});}
+  if(o.method==='PUT'&&path===kv+'/bulk'){assert.equal(o.body.length,1);const c=o.body[0];assert.equal(c.key,KEY);s.client={value:JSON.parse(c.value),metadata:structuredClone(c.metadata),expiration:c.expiration};return ok({successful_key_count:1,unsuccessful_keys:[]});}
   if(o.method==='DELETE'&&path===kv+'/values/'+encodeURIComponent(KEY)){s.client=null;return ok(null);}
   throw Error('Unexpected synthetic API route '+o.method+' '+path);
  }

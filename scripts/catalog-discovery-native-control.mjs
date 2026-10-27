@@ -12,13 +12,13 @@ export async function runCatalogDiscoveryControl(input,context={}){
  const t=CONTROL_TARGET,R='/accounts/'+t.account,W=t.worker,OP=t.operator,F=t.workflow;
  const mutations={clientPut:0,versionPost:0,deploymentPost:0,clientDelete:0};
  let send;
- let stage='input',terminal=false,apiReads=0,selects=0,candidate=null,liveDeployment=null,intendedConfigurationHash=null,p,now,mono,lastW,lastM,endM,timeout;
+ let stage='input',terminal=false,apiReads=0,selects=0,registryObservations=0,candidate=null,liveDeployment=null,intendedConfigurationHash=null,p,now,mono,lastW,lastM,endM,timeout;
  const fail=()=>{throw Error('Own catalog control unavailable');};
  const hex=(x,n)=>typeof x==='string'&&new RegExp('^[a-f0-9]{'+n+'}$').test(x),uuid=x=>typeof x==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(x);
  const canon=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b))):x);
  const hash=async x=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',typeof x==='string'?new TextEncoder().encode(x):x))).map(x=>x.toString(16).padStart(2,'0')).join('');
  const exact=(x,keys)=>{if(!x||Object.getPrototypeOf(x)!==Object.prototype)fail();const d=Object.getOwnPropertyDescriptors(x);if(Reflect.ownKeys(d).length!==keys.length||keys.some(k=>!d[k]?.enumerable||!Object.hasOwn(d[k],'value')))fail();return Object.fromEntries(keys.map(k=>[k,d[k].value]));};
- const result=(status,extra={})=>({status,phase:p?.phase??null,stage,checkedAt:new Date().toISOString(),candidate,liveDeployment,configurationHash:intendedConfigurationHash,apiReads,selects,mutations:{...mutations},mayRetry:false,observedSnapshotOnly:true,apiCancellationSupported:false,operationalReadiness:false,...extra});
+ const result=(status,extra={})=>({status,phase:p?.phase??null,stage,checkedAt:new Date().toISOString(),candidate,liveDeployment,configurationHash:intendedConfigurationHash,apiReads,selects,registryObservations,mutations:{...mutations},mayRetry:false,observedSnapshotOnly:true,apiCancellationSupported:false,operationalReadiness:false,...extra});
  const anyWrite=()=>Object.values(mutations).some(Boolean);
  try{
   p=structuredClone(exact(input,['mode','phase','window','baseline','live']));
@@ -78,6 +78,20 @@ export async function runCatalogDiscoveryControl(input,context={}){
  const readClient=async()=>{const r=envelope(await call({method:'POST',path:kv+'/bulk/get',body:{keys:[clientKey],type:'json',withMetadata:true}}));if(!r?.values||Object.keys(r.values).length!==1||!Object.hasOwn(r.values,clientKey))fail();return r.values[clientKey];};
  let expectedClient=null,clientMetadata=null,base=null,baseVersion=null,window=null,expectedCurrent=null;
  const ownedClient=actual=>{if(!actual||canon(actual.value)!==canon(expectedClient.value)||actual.expiration!==expectedClient.expiration||canon(actual.metadata)!==canon(clientMetadata))fail();};
+ // KV visibility is eventual. Observe only after an acknowledged single write;
+ // never repeat that write, accept a foreign record, or renew any deadline.
+ const observeRegistry=async present=>{
+  const observationStage=present?'registry_readback':'client_delete_readback';
+  for(let n=0;n<9;n++){
+   stage=observationStage;check();registryObservations++;
+   const actual=await readClient();
+   if(actual!==null){ownedClient(actual);if(present)return;}
+   else if(!present)return;
+   const w=check();
+   if(n===8||endM-lastM<=7500||p.phase!=='close'&&w+7500>=p.window.expiresAt-90000){stage=observationStage+'_timeout';fail();}
+   await new Promise(resolve=>setTimeout(resolve,7500));check();
+  }
+ };
  const expectedConfig=async payload=>{
   const c={};for(const k of CONTROL_KEYS)if(Object.hasOwn(payload,k))c[k]=payload[k];
   c.bindings=payload.bindings.map(x=>{if(x.type!=='inherit')return structuredClone(x);if(x.version_id!==p.baseline.pin.baseVersionId)fail();const old=baseVersion.bindings.find(y=>y.name===x.name);if(!old)fail();return structuredClone(old);});return fingerprint(c);
@@ -104,7 +118,7 @@ export async function runCatalogDiscoveryControl(input,context={}){
    if(p.mode==='preflight')return result('preflight_passed',{alreadyClosed});
    if(!alreadyClosed)await promotion(closed.versionId,expectedCurrent.deploymentId);else liveDeployment=closed.deploymentId;
    stage='closed_readback';pointer(await current(W),closed.versionId,liveDeployment);await moduleProof(await version(W,closed.versionId),closed.versionId,p.baseline.pin.workerHash,p.baseline.pin.workerBytes,p.baseline.configurationHash);await passive();pointer(await current(OP),p.baseline.operatorVersion,p.baseline.operatorDeployment);
-   stage='client_cleanup';const record=await readClient();if(record!==null){ownedClient(record);await call({method:'DELETE',path:kv+'/values/'+encodeURIComponent(clientKey)},'clientDelete');if(await readClient()!==null)fail();}
+   stage='client_cleanup';const record=await readClient();if(record!==null){ownedClient(record);await call({method:'DELETE',path:kv+'/values/'+encodeURIComponent(clientKey)},'clientDelete');await observeRegistry(false);}
    const end=await counts();pointer(await current(W),closed.versionId,liveDeployment);
    return result(alreadyClosed?'already_closed':'closed',{versionId:closed.versionId,deploymentId:liveDeployment,configurationHash:p.baseline.configurationHash,activeOwnGrants:end.active_grants,permissionWithdrawalProven:false});
   }
@@ -127,8 +141,11 @@ export async function runCatalogDiscoveryControl(input,context={}){
   if(p.phase==='open'){
    stage='registry_admission';await assertPointers(expectedCurrent);await passive();if((await counts()).active_grants!==0||await readClient()!==null)fail();
    const a=envelope(await call({method:'PUT',path:kv+'/bulk',body:[{key:expectedClient.key,value:JSON.stringify(expectedClient.value),expiration:expectedClient.expiration,metadata:clientMetadata}]},'clientPut'));
-   if(a?.successful_key_count!==1||!Array.isArray(a.unsuccessful_keys)||a.unsuccessful_keys.length)fail();ownedClient(await readClient());
+   stage='registry_acknowledgement';if(a?.successful_key_count!==1||!Array.isArray(a.unsuccessful_keys)||a.unsuccessful_keys.length)fail();await observeRegistry(true);
   }
+  // The fixed version/promotion/readback tail needs27 API reads. Do not
+  // create a version when pagination and visibility observations spent them.
+  stage='version_budget_admission';if(apiReads+27>64)fail();
   stage='version_admission';await assertPointers(expectedCurrent);await phaseGrantSnapshot();ownedClient(await readClient());
   stage='inactive_version';const made=envelope(await call({method:'POST',path:R+'/workers/workers/'+W+'/versions',query:{deploy:false},body:payload},'versionPost'));candidate=made?.id;
   if(!uuid(candidate)||candidate===closed.versionId||made.exports_reconciliation!==undefined&&(!made.exports_reconciliation||Object.values(made.exports_reconciliation).some(x=>!Array.isArray(x)||x.length)))fail();
