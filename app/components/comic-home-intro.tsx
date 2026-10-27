@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowRight, ClipboardList, FileText, FolderOpen, Route, ScanSearch } from './client-icons';
-import { COMIC_HOME_COPY, SERVICE_JOURNEY_COPY } from '../../lib/home-copy.mjs';
+import { COMIC_HOME_COPY, HOME_VALUE_COPY, SERVICE_JOURNEY_COPY } from '../../lib/home-copy.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 
 type Locale = 'es' | 'en' | 'pt';
@@ -29,6 +29,14 @@ export function ComicCallHero({ locale = 'es' }: { locale?: Locale }) {
   const copy = COMIC_HOME_COPY[locale] || COMIC_HOME_COPY.es;
   return (
     <section className="comic-call-hero" aria-labelledby="comic-call-title">
+      <figure className="comic-call-scene">
+        <figcaption className="comic-call-dialogue" aria-label={copy.dialogueLabel}>
+          <p className="comic-call-bubble comic-call-bubble-left">{copy.dialogue[0]}</p>
+          <p className="comic-call-bubble comic-call-bubble-right">{copy.dialogue[1]}</p>
+        </figcaption>
+        <img className="comic-call-art" src="/images/agent-friendly-call-robots-screen.webp"
+          alt={copy.heroAlt} width={1672} height={941} fetchPriority="high" decoding="async" />
+      </figure>
       <div className="comic-call-heading">
         <span><span aria-hidden="true">01</span> {copy.eyebrow}</span>
         <h1 id="comic-call-title">{copy.title}</h1>
@@ -40,13 +48,18 @@ export function ComicCallHero({ locale = 'es' }: { locale?: Locale }) {
           <a href="#auditar">{copy.secondary} <ScanSearch size={18} /></a>
         </div>
       </div>
-      <img
-        className="comic-call-art"
-        src="/images/agent-friendly-call-robots.webp"
-        alt={copy.heroAlt}
-        width={1680}
-        height={941}
-      />
+
+    </section>
+  );
+}
+
+export function HomeValueIntroduction({ locale = 'es' }: { locale?: Locale }) {
+  const copy = HOME_VALUE_COPY[locale] || HOME_VALUE_COPY.es;
+  return (
+    <section className="home-value-intro" id="que-hacemos" aria-labelledby="home-value-title">
+      <span>{copy.eyebrow}</span>
+      <h2 id="home-value-title">{copy.title}</h2>
+      <p>{copy.intro}</p>
     </section>
   );
 }
