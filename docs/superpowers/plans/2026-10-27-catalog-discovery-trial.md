@@ -20,3 +20,5 @@ El consumidor de este contrato verifica antes de cualquier mutación punteros, c
 4. Preparar adaptador remoto de una ocurrencia y su cierre con baseline60d/DEP519,OP2033/DEP302,Workflow1d99. La publicación del helper no es fuente del Worker.
 5. A partir de16:00 y con la persona disponible, confirmar el consentimiento nuevo inmediatamente antes de su clic; recién entonces crear ventana original de hasta10min. Registro clienteKV efímero, permiso de lectura genuino, consentimiento de avisos genuino, rescan y una consulta Work. Ningún subscribe/automations_create.
 6. Retirar permiso desde UI y restaurar exactamente el baseline; si se pierde UI, cerrar el host y acreditar únicamente cierre/expiración, sin inventar eventos de consentimiento ni baja nativa.
+
+RED observado antes de implementación:6a84d00a/run40553726031/job122364047156,2965PASS/6nuevosFAILesperados/1existingSkip. Cada positivo falló en el scaffold puro; no se invocaron recursos. El descriptor final separa payload nativo de las declaraciones sin autoridad, y el fixture calcula la clave del artefacto del hash real de su módulo sintético.
