@@ -41,3 +41,23 @@ test('native instance pagination may omit page fields only with a complete match
 test('request function replacement after a read is fenced before the replacement runs',async()=>{
  const s=await environment();let substituted=0;s.interceptor=async(o,next)=>{const r=await next();s.ctx.request=async()=>{substituted++;throw Error('untrusted replacement');};return r;};const r=await runCatalogDiscoveryControl(s.params,s.ctx);assert.equal(r.status,'blocked');assert.equal(substituted,0);assert.equal(writes(s).length,0);
 });
+
+test('observed grant withdrawal or ambiguity fences catalog writes and the same grant must remain selected',async()=>{
+ for(const scenario of ['withdraw-before-version','replace-before-version','ambiguity-before-promotion']){
+  const s=await environment(),first=await runCatalogDiscoveryControl(s.params,s.ctx);s.wall=start+3000;s.rows=[s.grant()];s.activeGrants=1;s.calls=[];let grantReads=0,counts=0;
+  s.interceptor=async(o,next)=>{
+   if(o.method==='POST'&&o.path.endsWith('/query')){
+    if(o.body.sql.includes('AS project_owner')){grantReads++;if(scenario==='replace-before-version'&&grantReads===2)s.rows[0]={...s.rows[0],id:'different-current-grant'};}
+    else {counts++;if(scenario==='withdraw-before-version'&&counts===2){s.activeGrants=0;s.rows[0].revoked_at=new Date(start+2500).toISOString();}}
+   }
+   const r=await next();if(scenario==='ambiguity-before-promotion'&&o.method==='POST'&&o.path.endsWith('/versions')){s.activeGrants=2;s.rows=[s.grant(),{...s.grant(),id:'second-grant'}];}return r;
+  };
+  const r=await runCatalogDiscoveryControl({...s.params,phase:'catalog',live:live(first)},s.ctx);
+  assert.equal(r.status,scenario==='ambiguity-before-promotion'?'uncertain':'blocked');assert.equal(r.mutations.deploymentPost,0);assert.equal(r.mutations.versionPost,scenario==='ambiguity-before-promotion'?1:0);
+ }
+});
+test('grant withdrawal observed after promotion is uncertain and retains the intended hash for closure',async()=>{
+ const s=await environment(),first=await runCatalogDiscoveryControl(s.params,s.ctx);s.wall=start+3000;s.rows=[s.grant()];s.activeGrants=1;s.calls=[];
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='POST'&&o.path.endsWith('/deployments')){s.activeGrants=0;s.rows[0].revoked_at=new Date(start+2500).toISOString();}return r;};
+ const r=await runCatalogDiscoveryControl({...s.params,phase:'catalog',live:live(first)},s.ctx);assert.equal(r.status,'uncertain');assert.equal(r.mutations.deploymentPost,1);assert.match(r.configurationHash,/^[a-f0-9]{64}$/);assert.ok(r.candidate);assert.ok(r.liveDeployment);
+});
