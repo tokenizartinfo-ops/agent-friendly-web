@@ -200,3 +200,12 @@ test('version acknowledgement latency prevents promotion after the dispatch dead
  const r=await runCatalogDiscoveryControl({...s.params,phase:'catalog',live:live(first)},s.ctx);
  assert.equal(r.status,'uncertain',JSON.stringify(r));assert.equal(r.mutations.versionPost,1);assert.equal(r.mutations.deploymentPost,0);assert.equal(s.canary.versions[0].version_id,first.versionId);
 });
+
+test('time crossing after the final grant observation is fenced at the effect boundary',async()=>{
+ const s=await environment(),first=await runCatalogDiscoveryControl(s.params,s.ctx);s.wall=start+3000;s.rows=[s.grant()];s.activeGrants=1;s.calls=[];
+ let primary=0,armed=false,checks=0;
+ s.ctx.now=()=>armed?start+242000-(checks++<2?1:0):s.wall;
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='POST'&&o.path.endsWith('/query')&&o.body.sql.includes('AS project_owner')&&++primary===2)armed=true;return r;};
+ const r=await runCatalogDiscoveryControl({...s.params,phase:'catalog',live:live(first)},s.ctx);
+ assert.equal(r.status,'blocked',JSON.stringify(r));assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);
+});
