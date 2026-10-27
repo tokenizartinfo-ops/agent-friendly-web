@@ -1,0 +1,50 @@
+name: AFW public upload read diagnosis
+on:
+  pull_request:
+    paths:
+      - 'scripts/public-upload-read-probe.py'
+      - 'test/public_read_probe_test.py'
+      - '.github/workflows/afw-public-upload-read-probe.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: afw-public-inactive-upload
+  cancel-in-progress: false
+jobs:
+  test:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && (github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - run: python3 -m unittest discover -s test -p public_read_probe_test.py -v
+  read:
+    needs: test
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    environment: afw-public-release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Four fixed GETs only; never upload or promote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.AFW_PUBLIC_UPLOAD_TOKEN }}
+        run: python3 scripts/public-upload-read-probe.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-public-read-probe-${{ github.run_id }}-${{ github.run_attempt }}
+          path: output/public-upload-read-probe.json
+          if-no-files-found: ignore
+          retention-days: 7
