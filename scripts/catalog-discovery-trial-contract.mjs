@@ -25,8 +25,8 @@ export function createCatalogDiscoveryClient(window,{now}={}){
 }
 export async function inspectCatalogDiscoveryArtifact(value){
  try{
- const {v,pin,configurationHash}=exact(value,['v','pin','configurationHash']);
- exact(pin,['baseVersionId','artifactKey','sourceRevision','sourceTree','programHash','workerHash','workerBytes','sourceCheck']);
+ const input=exact(value,['v','pin','configurationHash']);
+ const pin=freeze(structuredClone(exact(input.pin,['baseVersionId','artifactKey','sourceRevision','sourceTree','programHash','workerHash','workerBytes','sourceCheck']))),v=freeze(structuredClone(input.v)),configurationHash=input.configurationHash;
  if(!uuid(pin.baseVersionId)||!['artifactKey','programHash','workerHash'].every(k=>hex(pin[k],64))||!hex(configurationHash,64)||!['sourceRevision','sourceTree'].every(k=>hex(pin[k],40))||pin.sourceCheck!=='git-inputs-before-after-v1'||!Number.isSafeInteger(pin.workerBytes)||pin.workerBytes<1||pin.workerBytes>2097152||v?.id!==pin.baseVersionId||v.main_module!=='index.mjs'||v.modules?.length!==1||v.modules[0].name!=='index.mjs'||v.modules[0].content_type!=='application/javascript+module'||typeof v.modules[0].content_base64!=='string'||!Array.isArray(v.urls)||v.urls.length||!Array.isArray(v.bindings)||v.bindings.length!==29||new Set(v.bindings.map(x=>x.name)).size!==29)fail();
  const raw=Uint8Array.from(atob(v.modules[0].content_base64),x=>x.charCodeAt(0));if(raw.length!==pin.workerBytes||await digest(raw)!==pin.workerHash||await digest(JSON.stringify([target.accountId,target.workerName,pin.workerHash]))!==pin.artifactKey)fail();
  for(const b of v.bindings){if(!id(b.name)||!id(b.type))fail();if(b.type==='secret_text')exact(b,['name','type']);}
