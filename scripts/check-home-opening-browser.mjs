@@ -57,7 +57,7 @@ const collect=b=>{nativeLog=(nativeLog+b.toString()).slice(-24000);};
 native.stdout.on('data',collect);native.stderr.on('data',collect);
 native.on('error',x=>{nativeError=x;});native.on('exit',()=>{exited=true;});
 const base='http://127.0.0.1:8896',pause=ms=>new Promise(r=>setTimeout(r,ms));
-const captures=[],cases=[],errors=[],blocked=[],httpErrors=[],visibilityFailures=[];let browser;
+const captures=[],cases=[],errors=[],blocked=[],httpErrors=[],visibilityFailures=[],geometry=[];let browser;
 const capture=async(page,name)=>{const file=name+'.jpg';await page.screenshot({path:path.join(out,file),type:'jpeg',quality:76,fullPage:false});captures.push(file);};
 try{
  const until=Date.now()+45000;let ready=false;
@@ -68,7 +68,7 @@ try{
  }
  assert.ok(ready,'compiled native preview must return public HTML');
  browser=await chromium.launch({headless:true,env:childEnv});
- for(const viewport of [{width:1440,height:900},{width:390,height:844}]){
+ for(const viewport of [{width:1440,height:900},{width:390,height:844},{width:621,height:900},{width:768,height:1024},{width:820,height:1180},{width:961,height:900}]){
   for(const locale of ['es','en','pt']){
    const context=await browser.newContext({viewport,reducedMotion:'reduce',serviceWorkers:'block'});
    await context.route('**/*',async route=>{
@@ -83,6 +83,7 @@ try{
    const label=locale+'-'+viewport.width;
    const response=await page.goto(base+localizedPath('home',locale),{waitUntil:'networkidle',timeout:30000});
    assert.equal(response.status(),200);await page.evaluate(()=>document.fonts.ready);
+   await capture(page,'home-start-'+label);
    assert.equal(await page.locator('h1').count(),1);assert.equal(await page.locator('main').getAttribute('lang'),locale);
    const art=page.locator('.comic-call-art'),balloons=page.locator('.comic-call-bubble');
    assert.equal(await balloons.count(),2);
@@ -95,17 +96,25 @@ try{
    for(let n=0;n<2;n++){
     const box=await balloons.nth(n).boundingBox();
     assert.ok(box&&box.x>=0&&box.x+box.width<=viewport.width,'dialogue fits horizontal viewport: '+label);
-    assert.equal(await balloons.nth(n).evaluate(el=>el.scrollHeight<=el.clientHeight+1),true,'dialogue is not clipped: '+label);
+    const text=await balloons.nth(n).evaluate(el=>{
+     const box=el.getBoundingClientRect(),range=document.createRange();range.selectNodeContents(el);
+     const rects=[...range.getClientRects()].map(r=>({left:r.left,right:r.right,top:r.top,bottom:r.bottom}));
+     return {clientHeight:el.clientHeight,scrollHeight:el.scrollHeight,
+      pseudoBottom:getComputedStyle(el,'::after').bottom,
+      textInside:rects.length>0&&rects.every(r=>r.left>=box.left+1&&r.right<=box.right-1&&r.top>=box.top+1&&r.bottom<=box.bottom-1),
+      box:{left:box.left,right:box.right,top:box.top,bottom:box.bottom},rects};
+    });
+    geometry.push({case:label,balloon:n,...text});
+    if(!text.textInside)visibilityFailures.push({case:label,kind:'dialogue_text_outside_bubble',balloon:n,text});
    }
    if(viewport.width===390)assert.ok(captionBox.y+captionBox.height<=artBox.y+1,'mobile dialogue stays above the full illustration: '+label);
-   else assert.ok(captionBox.y+captionBox.height<=artBox.y+artBox.height*0.29,'desktop dialogue clears robot faces: '+label);
+   else if(captionBox.y+captionBox.height>artBox.y+artBox.height*0.29)visibilityFailures.push({case:label,kind:'dialogue_over_robot_faces',captionBox,artBox});
    const order=await page.locator('main').evaluate(el=>['.home-value-intro','#ruta-de-madurez','#tu-primer-paso','#auditar'].map(selector=>el.querySelector(selector).getBoundingClientRect().top+scrollY));
    assert.ok(order.every((v,n)=>n===0||v>order[n-1]),'offer, layers, first step and audit keep approved visual order: '+label);
    assert.equal(await page.locator('#home-value-title').innerText(),HOME_VALUE_COPY[locale].title);
    assert.ok((await page.locator('.maturity-map-guidance').innerText()).length>0);
    const dimensions=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches}));
    assert.ok(dimensions.scroll<=dimensions.width,'home has no horizontal overflow: '+label);assert.equal(dimensions.reduced,true);
-   await capture(page,'home-start-'+label);
    await page.locator('#que-hacemos').scrollIntoViewIfNeeded();await capture(page,'home-offer-'+label);
    await page.locator('#ruta-de-madurez').scrollIntoViewIfNeeded();await capture(page,'home-layers-'+label);
    const action=page.locator('.comic-call-actions a').first();assert.equal(await action.getAttribute('href'),'#tu-primer-paso');
@@ -118,11 +127,11 @@ try{
    assert.equal(await entry.getAttribute('aria-describedby'),'home-entry-access');
    assert.ok((await page.locator('#home-entry-access').innerText()).length>0);
    await capture(page,'home-first-step-'+label);
-   cases.push({locale,viewport,sceneFirst:true,readableDialogues:true,fullImage:true,offerBeforeLayers:true,privateEntryCaveat:true,keyboard:true,reducedMotion:true,overflow:false});
+   cases.push({locale,viewport,sceneFirst:true,readableDialogues:!visibilityFailures.some(f=>f.case===label),fullImage:true,offerBeforeLayers:true,privateEntryCaveat:true,keyboard:true,reducedMotion:true,overflow:false});
    await context.close();
   }
  }
- assert.deepEqual(visibilityFailures,[],'home content must be readable beyond sticky navigation and container clips');
+ assert.deepEqual(visibilityFailures,[],'dialogue text and balloons must stay inside their available visible areas');
  assert.deepEqual(blocked,[],'no request outside isolated GET preview');
  assert.deepEqual(errors,[],'no browser error');assert.deepEqual(httpErrors,[],'public preview assets/routes available');
  total=0;assert.deepEqual(await inventory(root),before,'compiled artifact unchanged by preview');
@@ -139,10 +148,10 @@ try{
   await page.screenshot({path:path.join(out,'contact-'+width+'.jpg'),type:'jpeg',quality:80,fullPage:true});
   await context.close();
  }
- await writeFile(path.join(out,'receipt.json'),JSON.stringify({...sourceProof,checkedAt:new Date().toISOString(),cases,captures,errors,blocked,httpErrors,artifactUnchanged:true,limits:'isolated compiled UI only; not Cloudflare hosting, private flow, full accessibility or PC-off'},null,2));
+ await writeFile(path.join(out,'receipt.json'),JSON.stringify({...sourceProof,checkedAt:new Date().toISOString(),cases,captures,errors,blocked,httpErrors,geometry,artifactUnchanged:true,limits:'isolated compiled UI only; not Cloudflare hosting, private flow, full accessibility or PC-off'},null,2));
  console.log(JSON.stringify({...sourceProof,cases:cases.length,screenshots:captures.length,artifactUnchanged:true}));
 }catch(err){
- await writeFile(path.join(out,'failure.json'),JSON.stringify({...sourceProof,error:String(err).slice(0,600),cases,captures,errors,blocked,httpErrors,visibilityFailures},null,2));
+ await writeFile(path.join(out,'failure.json'),JSON.stringify({...sourceProof,error:String(err).slice(0,600),cases,captures,errors,blocked,httpErrors,visibilityFailures,geometry},null,2));
  throw err;
 }finally{
  try{await browser?.close();}finally{
