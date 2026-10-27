@@ -32,3 +32,30 @@ test('direct operator RPC cannot enter the reservation-enabled Workflow operatio
 test('restarting the consumed Workflow cannot reserve or confirm a second time',async()=>{
  const r=await run({reserve:'true',replay:true});assert.equal(r.output.status,'confirmed');assert.equal(r.reservationCount,1);assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});assert.equal(r.counters.retirementReads,2);
 });
+
+test('native reservation keeps its committed row terminal when its acknowledgement is lost',async()=>{
+ const r=await run({reserve:'true',fault:'reservation-ack-lost',replay:true});
+ assert.equal(r.httpStatus,404);
+ assert.equal(r.output.status,'uncertain');
+ assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
+ assert.equal(r.reservationCount,1);
+ assert.equal(r.counters.retirementReads,2);
+ assert.equal(r.output.mayRetry,false);
+ assert.equal(r.output.operationalReadiness,false);
+ assert.equal(Object.hasOwn(r.output,'reservation'),false);
+ assert.equal(JSON.stringify(r.output).includes('synthetic_read_credential'),false);
+ assert.equal(JSON.stringify(r.output).includes('synthetic_reservation_ack_lost'),false);
+});
+test('native reservation denies changed authority after the first retirement provider await',async t=>{
+ for(const fault of ['reservation-flag-drift','reservation-db-drift','reservation-namespace-drift'])await t.test(fault,async()=>{
+  const r=await run({reserve:'true',fault});
+  assert.equal(r.output.status,'uncertain');
+  assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
+  assert.equal(r.counters.retirementReads,1);
+  assert.equal(r.reservationCount,0);
+  assert.equal(r.output.mayRetry,false);
+  assert.equal(r.output.operationalReadiness,false);
+  assert.equal(Object.hasOwn(r.output,'reservation'),false);
+  assert.equal(JSON.stringify(r.output).includes('synthetic_read_credential'),false);
+ });
+});
