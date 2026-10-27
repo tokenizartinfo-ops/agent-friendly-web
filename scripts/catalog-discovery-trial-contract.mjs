@@ -46,7 +46,9 @@ export function inspectCatalogDiscoveryGrant(value){
  let scopes;try{scopes=JSON.parse(g.scopes_json);}catch{fail();}
  const created=iso(g.created_at),exchanged=iso(g.exchanged_at),expires=iso(g.expires_at);
  if(!id(g.id)||!id(g.user_id)||g.user_id!==g.project_owner||g.client_id!==target.clientId||g.project_id!==target.projectId||g.resource!==target.resource||g.revoked_at!==''||g.closure_count!==0||!Array.isArray(scopes)||scopes.length!==1||scopes[0]!=='afw:project:read'||created<window.startAt||created>now||exchanged<created||exchanged>now||expires!==window.expiresAt)fail();
- const out=freeze({grantId:g.id,subject:g.user_id,projectId:g.project_id,clientId:g.client_id,resource:g.resource,createdAt:created,expiresAt:expires});grants.set(out,{window});return out;
+ // Conservative coordination cutoff, not the SDK issuance time or token expiry.
+ const catalogDispatchBefore=Math.min(expires,exchanged+240000);if(now>=catalogDispatchBefore)fail();
+ const out=freeze({grantId:g.id,subject:g.user_id,projectId:g.project_id,clientId:g.client_id,resource:g.resource,createdAt:created,expiresAt:expires,exchangedAt:exchanged,catalogDispatchBefore});grants.set(out,{window});return out;
 }
 function successor(base,window){
  const text=base.v.bindings.find(x=>x.name==='AFW_DOSSIER_SUCCESSOR_POLICY');if(text?.type!=='plain_text'||typeof text.text!=='string'||text.text.length>8192)fail();
@@ -62,13 +64,14 @@ export function createCatalogDiscoveryVersion(value){
  const p=exact(value,keys),base=bases.get(p.base);if(!base||!['oauth','catalog'].includes(p.stage))fail();clock(p.window,p.now);
  const replacements={AFW_DELEGATED_OAUTH_ENABLED:'true',AFW_OAUTH_PILOT_EXPIRES_AT:new Date(p.window.expiresAt).toISOString()};
  if(p.stage==='catalog'){
-  if(grants.get(p.grant)?.window!==p.window)fail();
+  if(grants.get(p.grant)?.window!==p.window||p.now>=p.grant.catalogDispatchBefore)fail();
   replacements.AFW_DOSSIER_EVENTS_ENABLED='true';replacements.AFW_DOSSIER_MONITORING_OWNER_ENABLED='true';replacements.AFW_DOSSIER_SUCCESSOR_ENABLED='true';
   replacements.AFW_DOSSIER_EVENTS_POLICY=JSON.stringify({grantId:p.grant.grantId,subject:p.grant.subject,projectId:p.grant.projectId,clientId:p.grant.clientId,resource:p.grant.resource,startAt:p.window.startAt,expiresAt:p.window.expiresAt});
   replacements.AFW_DOSSIER_MONITORING_OWNER_POLICY=JSON.stringify({grantId:p.grant.grantId,projectId:p.grant.projectId,clientId:p.grant.clientId,startAt:p.window.startAt,expiresAt:p.window.expiresAt});
   replacements.AFW_DOSSIER_SUCCESSOR_POLICY=JSON.stringify(successor(base,p.window));
  }
  const body={main_module:base.v.main_module,modules:structuredClone(base.v.modules),bindings:base.v.bindings.map(b=>Object.hasOwn(replacements,b.name)?{name:b.name,type:'plain_text',text:replacements[b.name]}:{name:b.name,type:'inherit',version_id:base.pin.baseVersionId}),annotations:{'workers/tag':'afw-catalog-discovery-'+p.window.trialId.slice(0,16)+'-'+p.stage,'workers/message':'AFW finite metadata-only preparation; rollback '+base.pin.baseVersionId}};
- body.bindings.push({name:'AFW_DELEGATED_CONTINUITY_ENABLED',type:'plain_text',text:'true'});for(const k of configKeys)if(Object.hasOwn(base.v,k))body[k]=structuredClone(base.v[k]);
+ body.bindings.push({name:'AFW_DELEGATED_CONTINUITY_ENABLED',type:'plain_text',text:'true'});
+ body.bindings.push({name:'AFW_MCP_DISCOVERY_DIAGNOSTIC_ENABLED',type:'plain_text',text:'true'},{name:'AFW_MCP_DISCOVERY_DIAGNOSTIC_START_AT',type:'plain_text',text:String(p.window.startAt)},{name:'AFW_MCP_DISCOVERY_DIAGNOSTIC_EXPIRES_AT',type:'plain_text',text:String(p.window.expiresAt)});for(const k of configKeys)if(Object.hasOwn(base.v,k))body[k]=structuredClone(base.v[k]);
  return freeze({payload:body,maySubscribe:false,operationalReadiness:false,invoked:false});
 }

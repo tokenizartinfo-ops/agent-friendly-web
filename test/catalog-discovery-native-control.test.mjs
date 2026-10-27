@@ -172,3 +172,40 @@ for(const phase of ['open','catalog']){
   assert.equal(r.status,phase==='open'?'uncertain':'blocked');assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);assert.equal(s.canary.versions[0].version_id,p.live?.versionId??s.baseline.pin.baseVersionId);
  });
 }
+
+test('catalog receipt exposes the conservative dispatch deadline, closure removes diagnostics',async()=>{
+ const s=await environment(),first=await runCatalogDiscoveryControl(s.params,s.ctx);s.wall=start+3000;s.rows=[s.grant()];s.activeGrants=1;
+ const r=await runCatalogDiscoveryControl({...s.params,phase:'catalog',live:live(first)},s.ctx);
+ assert.equal(r.status,'catalog_attached',JSON.stringify(r));assert.equal(r.catalogDispatchBefore,start+242000);
+ const fields=s.versions.get(r.versionId).bindings.filter(b=>b.name.startsWith('AFW_MCP_DISCOVERY_DIAGNOSTIC_'));
+ assert.equal(fields.length,3);assert.equal(fields.find(b=>b.name.endsWith('_EXPIRES_AT')).text,String(end));
+ s.wall=end+1;s.activeGrants=0;s.calls=[];
+ const closed=await runCatalogDiscoveryControl({...s.params,phase:'close',live:live(r)},s.ctx);assert.equal(closed.status,'closed',JSON.stringify(closed));
+ const v=s.versions.get(s.canary.versions[0].version_id);assert.equal(v.bindings.length,29);assert.equal(v.bindings.some(b=>b.name.startsWith('AFW_MCP_DISCOVERY_DIAGNOSTIC_')),false);
+});
+test('late catalog admission stops without a new version or promotion despite an active ten-minute grant',async()=>{
+ const s=await environment(),first=await runCatalogDiscoveryControl(s.params,s.ctx);s.wall=start+242000;s.rows=[s.grant()];s.activeGrants=1;s.calls=[];
+ const r=await runCatalogDiscoveryControl({...s.params,phase:'catalog',live:live(first)},s.ctx);
+ assert.equal(r.status,'blocked',JSON.stringify(r));assert.equal(writes(s).length,0);assert.equal(s.canary.versions[0].version_id,first.versionId);
+});
+test('grant query latency consumes dispatch budget before version creation',async()=>{
+ const s=await environment(),first=await runCatalogDiscoveryControl(s.params,s.ctx);s.wall=start+3000;s.rows=[s.grant()];s.activeGrants=1;s.calls=[];let reads=0;
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='POST'&&o.path.endsWith('/query')&&o.body.sql.includes('AS project_owner')&&++reads===2)s.wall=start+242000;return r;};
+ const r=await runCatalogDiscoveryControl({...s.params,phase:'catalog',live:live(first)},s.ctx);
+ assert.equal(r.status,'blocked',JSON.stringify(r));assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);
+});
+test('version acknowledgement latency prevents promotion after the dispatch deadline',async()=>{
+ const s=await environment(),first=await runCatalogDiscoveryControl(s.params,s.ctx);s.wall=start+3000;s.rows=[s.grant()];s.activeGrants=1;s.calls=[];
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='POST'&&o.path.endsWith('/versions'))s.wall=start+242000;return r;};
+ const r=await runCatalogDiscoveryControl({...s.params,phase:'catalog',live:live(first)},s.ctx);
+ assert.equal(r.status,'uncertain',JSON.stringify(r));assert.equal(r.mutations.versionPost,1);assert.equal(r.mutations.deploymentPost,0);assert.equal(s.canary.versions[0].version_id,first.versionId);
+});
+
+test('time crossing after the final grant observation is fenced at the effect boundary',async()=>{
+ const s=await environment(),first=await runCatalogDiscoveryControl(s.params,s.ctx);s.wall=start+3000;s.rows=[s.grant()];s.activeGrants=1;s.calls=[];
+ let primary=0,armed=false,checks=0;
+ s.ctx.now=()=>armed?start+242000-(checks++<2?1:0):s.wall;
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='POST'&&o.path.endsWith('/query')&&o.body.sql.includes('AS project_owner')&&++primary===2)armed=true;return r;};
+ const r=await runCatalogDiscoveryControl({...s.params,phase:'catalog',live:live(first)},s.ctx);
+ assert.equal(r.status,'blocked',JSON.stringify(r));assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);
+});

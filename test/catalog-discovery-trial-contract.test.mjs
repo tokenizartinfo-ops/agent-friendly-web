@@ -38,11 +38,11 @@ test('new grant proof requires an unambiguous current owner, exchange, exact sco
  for(const mutate of [x=>x.user_id='someone-else',x=>x.project_id='other-project',x=>x.client_id='another-client',x=>x.resource='https://other.example/mcp',x=>x.revoked_at=new Date(start+2000).toISOString(),x=>x.exchanged_at='',x=>x.created_at=new Date(start-1).toISOString(),x=>x.expires_at=new Date(end+1).toISOString(),x=>x.scopes_json='["afw:project:read","afw:evidence:read"]',x=>x.closure_count=1]){const x=row();mutate(x);assert.throws(()=>inspectCatalogDiscoveryGrant({rows:[x],window:p,now:start+3000}));}
 });
 test('OAuth-only payload inherits every untouched binding and adds no callback or credential',async()=>{
- const f=await fixture(),b=await inspectCatalogDiscoveryArtifact(f),p=plan(),v=createCatalogDiscoveryVersion({stage:'oauth',base:b,window:p,now:start+3000});assert.equal(v.payload.bindings.length,30);assert.equal(v.payload.bindings.filter(x=>x.type==='inherit').length,27);assert.equal(v.payload.bindings.find(x=>x.name==='AFW_DELEGATED_OAUTH_ENABLED').text,'true');assert.equal(v.payload.bindings.find(x=>x.name==='AFW_DELEGATED_CONTINUITY_ENABLED').text,'true');assert.ok(v.payload.bindings.filter(x=>x.type==='inherit').every(x=>x.version_id===id));assert.equal(v.payload.modules[0].content_base64,f.v.modules[0].content_base64);assert.equal(JSON.stringify(v).includes('clientSecret'),false);
+ const f=await fixture(),b=await inspectCatalogDiscoveryArtifact(f),p=plan(),v=createCatalogDiscoveryVersion({stage:'oauth',base:b,window:p,now:start+3000});assert.equal(v.payload.bindings.length,33);assert.equal(v.payload.bindings.filter(x=>x.type==='inherit').length,27);assert.equal(v.payload.bindings.find(x=>x.name==='AFW_DELEGATED_OAUTH_ENABLED').text,'true');assert.equal(v.payload.bindings.find(x=>x.name==='AFW_DELEGATED_CONTINUITY_ENABLED').text,'true');assert.ok(v.payload.bindings.filter(x=>x.type==='inherit').every(x=>x.version_id===id));assert.equal(v.payload.modules[0].content_base64,f.v.modules[0].content_base64);assert.equal(JSON.stringify(v).includes('clientSecret'),false);
  assert.throws(()=>createCatalogDiscoveryVersion({stage:'oauth',base:{...b},window:p,now:start+3000}));
 });
 test('catalog payload binds the exact grant, preserves retirement and grants no delivery capability',async()=>{
- const f=await fixture(),base=await inspectCatalogDiscoveryArtifact(f),window=plan(),grant=inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+3000});const v=createCatalogDiscoveryVersion({stage:'catalog',base,window,grant,now:start+3000});assert.equal(v.payload.bindings.length,30);const values=Object.fromEntries(v.payload.bindings.filter(x=>x.type==='plain_text').map(x=>[x.name,x.text]));assert.equal(values.AFW_DOSSIER_EVENTS_ENABLED,'true');assert.equal(values.AFW_DOSSIER_MONITORING_OWNER_ENABLED,'true');assert.equal(values.AFW_DOSSIER_SUCCESSOR_ENABLED,'true');const policy=JSON.parse(values.AFW_DOSSIER_EVENTS_POLICY);assert.equal(policy.grantId,'own-grant');assert.equal(policy.expiresAt,end);assert.equal(policy.subject,'owner-one');const successor=JSON.parse(values.AFW_DOSSIER_SUCCESSOR_POLICY);assert.equal(successor.candidate.sourceRevision,f.pin.sourceRevision);assert.equal(successor.candidate.budget,1);assert.equal(successor.publication.artifactKey,f.pin.artifactKey);assert.equal(successor.original.containerId,'d'.repeat(64));assert.ok(v.payload.bindings.find(x=>x.name==='AFW_DOSSIER_RETIREMENT_POLICY').type==='inherit');for(const n of ['AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED','AFW_DOSSIER_OWN_SAVE_ENABLED','AFW_DOSSIER_RETIREMENT_READ_ENABLED','AFW_OAUTH_REFRESH_ENABLED'])assert.equal(v.payload.bindings.find(x=>x.name===n).type,'inherit');assert.equal(v.maySubscribe,false);assert.equal(v.operationalReadiness,false);
+ const f=await fixture(),base=await inspectCatalogDiscoveryArtifact(f),window=plan(),grant=inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+3000});const v=createCatalogDiscoveryVersion({stage:'catalog',base,window,grant,now:start+3000});assert.equal(v.payload.bindings.length,33);const values=Object.fromEntries(v.payload.bindings.filter(x=>x.type==='plain_text').map(x=>[x.name,x.text]));assert.equal(values.AFW_DOSSIER_EVENTS_ENABLED,'true');assert.equal(values.AFW_DOSSIER_MONITORING_OWNER_ENABLED,'true');assert.equal(values.AFW_DOSSIER_SUCCESSOR_ENABLED,'true');const policy=JSON.parse(values.AFW_DOSSIER_EVENTS_POLICY);assert.equal(policy.grantId,'own-grant');assert.equal(policy.expiresAt,end);assert.equal(policy.subject,'owner-one');const successor=JSON.parse(values.AFW_DOSSIER_SUCCESSOR_POLICY);assert.equal(successor.candidate.sourceRevision,f.pin.sourceRevision);assert.equal(successor.candidate.budget,1);assert.equal(successor.publication.artifactKey,f.pin.artifactKey);assert.equal(successor.original.containerId,'d'.repeat(64));assert.ok(v.payload.bindings.find(x=>x.name==='AFW_DOSSIER_RETIREMENT_POLICY').type==='inherit');for(const n of ['AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED','AFW_DOSSIER_OWN_SAVE_ENABLED','AFW_DOSSIER_RETIREMENT_READ_ENABLED','AFW_OAUTH_REFRESH_ENABLED'])assert.equal(v.payload.bindings.find(x=>x.name===n).type,'inherit');assert.equal(v.maySubscribe,false);assert.equal(v.operationalReadiness,false);
  assert.throws(()=>createCatalogDiscoveryVersion({stage:'catalog',base,window,grant:{...grant},now:start+3000}));assert.throws(()=>createCatalogDiscoveryVersion({stage:'subscribe',base,window,grant,now:start+3000}));assert.throws(()=>createCatalogDiscoveryVersion({stage:'catalog',base,window,grant,now:end}));
 });
 
@@ -53,4 +53,31 @@ test('caller mutation during asynchronous hashing cannot replace the verified mo
 });
 test('observed clock rewind terminally fences the same preparation window',()=>{
  const window=plan();createCatalogDiscoveryClient(window,{now:start+1});assert.throws(()=>createCatalogDiscoveryClient(window,{now:start}));assert.throws(()=>createCatalogDiscoveryClient(window,{now:start+2}));
+});
+
+test('temporary OAuth and catalog diagnostics use only the exact original window',async()=>{
+ for(const stage of ['oauth','catalog']){
+  const f=await fixture(),base=await inspectCatalogDiscoveryArtifact(f),window=plan();
+  const grant=stage==='catalog'?inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+3000}):null;
+  const v=createCatalogDiscoveryVersion({stage,base,window,...grant?{grant}:{},now:start+3000});
+  const diagnostics=v.payload.bindings.filter(b=>b.name.startsWith('AFW_MCP_DISCOVERY_DIAGNOSTIC_'));
+  assert.deepEqual(diagnostics,[{name:'AFW_MCP_DISCOVERY_DIAGNOSTIC_ENABLED',type:'plain_text',text:'true'},{name:'AFW_MCP_DISCOVERY_DIAGNOSTIC_START_AT',type:'plain_text',text:String(start)},{name:'AFW_MCP_DISCOVERY_DIAGNOSTIC_EXPIRES_AT',type:'plain_text',text:String(end)}]);
+  assert.equal(v.payload.bindings.length,33);assert.equal(v.payload.modules[0].content_base64,f.v.modules[0].content_base64);
+  assert.equal(v.payload.bindings.find(b=>b.name==='AFW_OAUTH_REFRESH_ENABLED').type,'inherit');
+  assert.equal(v.maySubscribe,false);assert.equal(v.operationalReadiness,false);
+ }
+});
+test('catalog coordination deadline is conservative, bounded, and exclusive',()=>{
+ const window=plan(),g=inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+3000});
+ assert.equal(g.exchangedAt,start+2000);assert.equal(g.catalogDispatchBefore,start+242000);
+ assert.ok(Object.isFrozen(g));assert.doesNotThrow(()=>inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+241999}));
+ assert.throws(()=>inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+242000}));
+ assert.throws(()=>inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+411000}));
+ const earlyEnd=start+90000,short=prepareCatalogDiscoveryWindow({startAt:start,expiresAt:earlyEnd,trialId:trial},{now:start});
+ const r={...row(),expires_at:new Date(earlyEnd).toISOString()},bounded=inspectCatalogDiscoveryGrant({rows:[r],window:short,now:start+3000});
+ assert.equal(bounded.catalogDispatchBefore,earlyEnd);assert.equal(bounded.expiresAt,earlyEnd);
+});
+test('retaining a valid grant proof cannot prepare a catalog after its dispatch deadline',async()=>{
+ const f=await fixture(),base=await inspectCatalogDiscoveryArtifact(f),window=plan(),grant=inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+3000});
+ assert.throws(()=>createCatalogDiscoveryVersion({stage:'catalog',base,window,grant,now:start+242000}));
 });
