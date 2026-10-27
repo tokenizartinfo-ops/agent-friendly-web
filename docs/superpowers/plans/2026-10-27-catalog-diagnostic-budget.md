@@ -23,9 +23,9 @@
 ### Task1: Preparación temporal y límite de despacho
 **Files:** scripts/catalog-discovery-trial-contract.mjs; scripts/catalog-discovery-native-control.mjs; test/catalog-discovery-trial-contract.test.mjs; test/catalog-discovery-native-control.test.mjs.
 **Interfaces:** inspectCatalogDiscoveryGrant devuelve exchangedAt/catalogDispatchBefore; createCatalogDiscoveryVersion usa ese proof inmutable; runCatalogDiscoveryControl mantiene entrada exacta y expone catalogDispatchBefore solo si catalog_attached.
-- [ ] Añadir regresiones: diagnóstico original en ambas fases; límite exacto/temprano; proof retenido más allá del límite; API demorada antes de versión/promoción; cierre sin diagnóstico y recibo válido.
-- [ ] Commit solo pruebas+diseño/plan y observar fallos esperados en Actions contra fuente sin cambio.
-- [ ] Implementar mínimo: tres bindings, comprobaciones de plazo, conteo33 y recibo de despacho.
+- [x] Añadir regresiones: diagnóstico original en ambas fases; límite exacto/temprano; proof retenido más allá del límite; API demorada antes de versión/promoción; cierre sin diagnóstico y recibo válido.
+- [x] Commit solo pruebas+diseño/plan:83055a4e, CI40582810683/job122466430585: siete regresiones fallaron por diagnóstico/fecha ausentes y efectos tardíos permitidos; sin fallo de infraestructura.
+- [x] Implementar mínimo: tres bindings, comprobaciones de plazo, conteo33 y recibo de despacho.
 - [ ] CI completo npm test/lint/build y paquete congelado en GitHub; leer fallos/conteos/skip/advertencias.
 - [ ] UNA revisión fresca de toda la rama; una pasada de correcciones importantes RED→GREEN si corresponde, sin rereview.
 - [ ] Integrar con leases, comprobar CI main y guardar continuidad saneada. No invocar ventanas consumidas ni declarar runtime actualizado.

@@ -151,12 +151,12 @@ export async function runCatalogDiscoveryControl(input,context={}){
   stage='version_budget_admission';if(apiReads+24>64)fail();
   stage='inactive_version';const made=envelope(await call({method:'POST',path:R+'/workers/workers/'+W+'/versions',query:{deploy:false},body:payload},'versionPost'));candidate=made?.id;
   if(!uuid(candidate)||candidate===closed.versionId||made.exports_reconciliation!==undefined&&(!made.exports_reconciliation||Object.values(made.exports_reconciliation).some(x=>!Array.isArray(x)||x.length)))fail();
-  const newV=await moduleProof(await version(W,candidate),candidate,p.baseline.pin.workerHash,p.baseline.pin.workerBytes,configurationHash);if(newV.bindings?.length!==30||newV.annotations?.['workers/tag']!==payload.annotations['workers/tag'])fail();
+  const newV=await moduleProof(await version(W,candidate),candidate,p.baseline.pin.workerHash,p.baseline.pin.workerBytes,configurationHash);if(newV.bindings?.length!==33||newV.annotations?.['workers/tag']!==payload.annotations['workers/tag'])fail();
   stage='promotion_admission';await observeRegistry(true,'promotion_registry_readback');stage='promotion_admission';await assertPointers(expectedCurrent);await passive();await phaseGrantSnapshot();
   stage='promotion_budget_admission';if(apiReads+12>64)fail();
   stage='promotion';const deploymentId=await promotion(candidate,expectedCurrent.deploymentId);
   stage='primary_readback';await moduleProof(await version(W,candidate),candidate,p.baseline.pin.workerHash,p.baseline.pin.workerBytes,configurationHash);await passive();await phaseGrantSnapshot();pointer(await current(OP),p.baseline.operatorVersion,p.baseline.operatorDeployment);pointer(await current(W),candidate,deploymentId);
-  return result(p.phase==='open'?'opened':'catalog_attached',{versionId:candidate,deploymentId,configurationHash,originalExpiresAt:p.window.expiresAt});
+  return result(p.phase==='open'?'opened':'catalog_attached',{versionId:candidate,deploymentId,configurationHash,originalExpiresAt:p.window.expiresAt,...grant?{catalogDispatchBefore:grant.catalogDispatchBefore}:{}});
  }catch{return result(anyWrite()?'uncertain':'blocked');}};
  let timer;try{return await Promise.race([work(),new Promise(resolve=>{timer=setTimeout(()=>{terminal=true;resolve(result(anyWrite()?'uncertain':'blocked',{deadlineExceeded:true}));},timeout);})]);}finally{clearTimeout(timer);terminal=true;}
 }
