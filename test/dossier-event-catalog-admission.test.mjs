@@ -4,10 +4,10 @@ import {fixture} from './fixtures/mcp-own-durable-host.mjs';
 import {createDossierMonitoringAuthorization} from '../lib/dossier-monitoring-authority.mjs';
 import {createDossierEventRpcAuthority} from '../lib/dossier-event-rpc-authority.mjs';
 
-function setup({consent=true}={}){
+function setup({consent=true,closureResponse=null}={}){
  const f=fixture();if(consent)f.grant();let gets=0,calls=0,primaryHook;
  const primary=f.config.db,prepare=primary.prepare.bind(primary);
- primary.prepare=sql=>{const query=prepare(sql);return{bind(...args){const st=query.bind(...args);return{...st,async first(){const row=await st.first();if(primaryHook)await primaryHook(sql);return row;}};}};};
+ primary.prepare=sql=>{const query=prepare(sql);return{bind(...args){const st=query.bind(...args);return{...st,async first(){const row=closureResponse!==null&&sql.includes('dossier_node_process_closures')?closureResponse:await st.first();if(primaryHook)await primaryHook(sql);return row;}};}};};
  const policy={grantId:'g',subject:'owner',projectId:'p',clientId:'client',resource:f.config.context.resource,containerId:'a'.repeat(64),...f.config.window};
  const reference=async()=> (await createDossierMonitoringAuthorization({db:primary,context:f.config.context,projectId:'p',projectionSecret:f.config.projectionSecret,now:Date.now})()).projectRef;
  const env={AFW_DOSSIER_EVENTS_ENABLED:'true',AFW_DOSSIER_EVENTS_POLICY:JSON.stringify(policy),AFW_OAUTH_ISSUER:'https://private.invalid',AFW_OAUTH_RESOURCE:policy.resource,AFW_OAUTH_PILOT_CLIENT_ID:'client',AFW_OAUTH_PILOT_PROJECT_ID:'p',DB:primary,AFW_DOSSIER_EVENTS_PROJECTION_SECRET:f.config.projectionSecret,AFW_DOSSIER_EVENTS_NODE:{idFromString(id){assert.equal(id,policy.containerId);return{toString:()=>id};},get(){gets++;return{async list(){calls++;return reference();},async subscribe(p){calls++;return{copied:p};},async unsubscribe(){calls++;return{};}};}}};
@@ -58,8 +58,22 @@ test('catalog preparation leaves subscription and withdrawal on the strict RPC p
  const f=setup();try{
   const projectRef=await f.authority.list();assert.equal(f.gets(),0);
   const params={name:'afw.dossier.changed',arguments:{projectRef},delivery:{mode:'webhook',url:'https://callback.agentfriendlyweb.dev/hook',secret:'whsec_'+Buffer.alloc(32,3).toString('base64')}};
-  assert.deepEqual(await f.authority.subscribe(params),{copied:params});assert.equal(f.gets(),1);assert.equal(f.calls(),1);
+  assert.deepEqual(await f.authority.subscribe(params),{copied:{...params,ttlMs:600000,cursor:null}});assert.equal(f.gets(),1);assert.equal(f.calls(),1);
   const {secret:ignored,...delivery}=params.delivery;void ignored;
   assert.deepEqual(await f.authority.unsubscribe({...params,delivery}),{});assert.equal(f.gets(),2);assert.equal(f.calls(),2);
  }finally{f.close();}
+});
+
+test('missing primary closure schema denies discovery without actor fallback',async()=>{
+ const f=setup();try{f.db.exec('DROP TABLE dossier_node_process_closures');await assert.rejects(f.authority.list(),{message:'Dossier event RPC unavailable'});assert.equal(f.gets(),0);}finally{f.close();}
+});
+
+test('a primary closure query failure stays generic and never falls back to RPC',async()=>{
+ const f=setup();try{f.setHook(sql=>{if(sql.includes('dossier_node_process_closures'))throw Error('SENSITIVE_CLOSURE_FAILURE_SENTINEL');});await assert.rejects(f.authority.list(),{message:'Dossier event RPC unavailable'});assert.equal(f.gets(),0);}finally{f.close();}
+});
+
+test('mismatched or malformed primary closure rows cannot advertise the catalog',async()=>{
+ for(const closureResponse of [{grant_id:'other'},{},false]){
+  const f=setup({closureResponse});try{await assert.rejects(f.authority.list(),{message:'Dossier event RPC unavailable'});assert.equal(f.gets(),0);}finally{f.close();}
+ }
 });
