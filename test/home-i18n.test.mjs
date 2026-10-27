@@ -39,8 +39,9 @@ test('home experience passes locale through the comic shell and interactive audi
 test('home follows the approved human journey before opening the future archive', () => {
   const sequence = [
     '<ComicCallHero locale=',
-    '<HomeServiceJourney locale=',
+    '<HomeValueIntroduction locale=',
     '<MaturityMap locale=',
+    '<HomeServiceJourney locale=',
     '<ScanWorkspace initialSite=',
     '<HomeMaturityComparison locale=',
     '<PublicFaq locale=',
@@ -52,10 +53,10 @@ test('home follows the approved human journey before opening the future archive'
 });
 
 test('comic home leads with the approved call, a responsive hero asset and a progressive future archive', () => {
-  assert.match(comicIntro, /src="\/images\/agent-friendly-call-robots\.webp"/);
+  assert.match(comicIntro, /src="\/images\/agent-friendly-call-robots-screen\.webp"/);
   assert.match(comicIntro, /<img[\s\S]*className="comic-call-art"/);
-  assert.ok(comicIntro.indexOf('id="comic-call-title"') < comicIntro.indexOf('className="comic-call-art"'));
-  assert.ok(comicIntro.indexOf('<p>{copy.intro}<\/p>') < comicIntro.indexOf('className="comic-call-art"'));
+  assert.ok(comicIntro.indexOf('className="comic-call-art"') < comicIntro.indexOf('id="comic-call-title"'));
+  assert.ok(comicIntro.indexOf('className="comic-call-art"') < comicIntro.indexOf('<p>{copy.intro}<\/p>'));
   assert.match(comicIntro, /id="archivo-del-futuro"/);
   assert.match(comicIntro, /<details className="archive-more"/);
   assert.match(comicIntro, /copy\.files\.slice\(0, 3\)/);
@@ -69,7 +70,8 @@ test('comic home leads with the approved call, a responsive hero asset and a pro
 test('hero CSS preserves the complete illustration alongside explanatory actions', () => {
   assert.doesNotMatch(styles, /\.comic-call-hero::before\s*\{/);
   assert.match(styles, /\.comic-call-art\s*\{[^}]*object-fit:\s*contain/s);
-  assert.match(styles, /@media \(max-width: 620px\)[\s\S]*\.comic-call-art\s*\{[^}]*aspect-ratio:\s*1680 \/ 941;/s);
+  assert.match(styles, /\.comic-call-art\s*\{[^}]*aspect-ratio:\s*1672 \/ 941;/s);
+  assert.match(styles, /@media \(max-width: 960px\)[\s\S]*\.comic-call-dialogue\s*\{[^}]*position:\s*static;/s);
   assert.match(styles, /@media \(max-width: 620px\)[\s\S]*\.comic-call-actions\s*\{[^}]*display:\s*grid;/s);
 });
 
