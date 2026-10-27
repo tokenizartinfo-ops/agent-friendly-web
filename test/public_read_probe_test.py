@@ -34,4 +34,17 @@ class ReadProbeTests(unittest.TestCase):
    def open_it(*a,**kw):raise exc
    result,body=self.m.probe_path("/settings","private-fixture",open_it)
    self.assertIsNone(body);self.assertEqual(result["error"],category);self.assertNotIn("private-fixture",json.dumps(result))
+
+ def test_wrapped_timeout_retains_its_category_without_exception_data(self):
+  def open_it(*a,**kw):raise urllib.error.URLError(TimeoutError("private-fixture"))
+  result,body=self.m.probe_path("/settings","private-fixture",open_it)
+  self.assertIsNone(body);self.assertEqual(result["error"],"timeout");self.assertNotIn("private-fixture",json.dumps(result))
+ def test_whole_read_deadline_records_the_endpoint_and_stops_the_sequence(self):
+  calls=[]
+  def open_it(r,timeout):calls.append(r);raise self.m.ProbeDeadline("private-fixture")
+  rows,values=self.m.probe_reads("private-fixture",open_it)
+  self.assertEqual(len(calls),1)
+  self.assertEqual(rows,[{"path":"active_version","status":0,"ok":False,"providerCodes":[],"error":"deadline"}])
+  self.assertNotIn("private-fixture",json.dumps(rows))
+
 if __name__=="__main__":unittest.main()
