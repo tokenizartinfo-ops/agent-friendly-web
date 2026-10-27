@@ -12,13 +12,13 @@ export async function runCatalogDiscoveryControl(input,context={}){
  const t=CONTROL_TARGET,R='/accounts/'+t.account,W=t.worker,OP=t.operator,F=t.workflow;
  const mutations={clientPut:0,versionPost:0,deploymentPost:0,clientDelete:0};
  let send;
- let stage='input',terminal=false,apiReads=0,selects=0,candidate=null,liveDeployment=null,p,now,mono,lastW,lastM,endM,timeout;
+ let stage='input',terminal=false,apiReads=0,selects=0,candidate=null,liveDeployment=null,intendedConfigurationHash=null,p,now,mono,lastW,lastM,endM,timeout;
  const fail=()=>{throw Error('Own catalog control unavailable');};
  const hex=(x,n)=>typeof x==='string'&&new RegExp('^[a-f0-9]{'+n+'}$').test(x),uuid=x=>typeof x==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(x);
  const canon=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b))):x);
  const hash=async x=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',typeof x==='string'?new TextEncoder().encode(x):x))).map(x=>x.toString(16).padStart(2,'0')).join('');
  const exact=(x,keys)=>{if(!x||Object.getPrototypeOf(x)!==Object.prototype)fail();const d=Object.getOwnPropertyDescriptors(x);if(Reflect.ownKeys(d).length!==keys.length||keys.some(k=>!d[k]?.enumerable||!Object.hasOwn(d[k],'value')))fail();return Object.fromEntries(keys.map(k=>[k,d[k].value]));};
- const result=(status,extra={})=>({status,phase:p?.phase??null,stage,checkedAt:new Date().toISOString(),candidate,liveDeployment,apiReads,selects,mutations:{...mutations},mayRetry:false,observedSnapshotOnly:true,apiCancellationSupported:false,operationalReadiness:false,...extra});
+ const result=(status,extra={})=>({status,phase:p?.phase??null,stage,checkedAt:new Date().toISOString(),candidate,liveDeployment,configurationHash:intendedConfigurationHash,apiReads,selects,mutations:{...mutations},mayRetry:false,observedSnapshotOnly:true,apiCancellationSupported:false,operationalReadiness:false,...extra});
  const anyWrite=()=>Object.values(mutations).some(Boolean);
  try{
   p=structuredClone(exact(input,['mode','phase','window','baseline','live']));
@@ -98,7 +98,7 @@ export async function runCatalogDiscoveryControl(input,context={}){
   // Reconstructing public registry data for closure never renews its deadline.
   const initial=p.mode==='preflight'||p.phase==='close'?p.window.startAt:check();
   window=prepareCatalogDiscoveryWindow(p.window,{now:initial});expectedClient=createCatalogDiscoveryClient(window,{now:initial});clientMetadata={purpose:'afw.catalog-discovery-public-client.v1',trialId:p.window.trialId,valueHash:await hash(canon(expectedClient.value))};check();
-  const existing=await readClient();if(p.phase==='open'){if(existing!==null)fail();}else if(existing!==null)ownedClient(existing);
+  const existing=await readClient();if(p.phase==='open'){if(existing!==null)fail();}else if(p.phase==='catalog'&&existing!==null)ownedClient(existing);
   if(p.phase==='close'){
    stage='close_admission';await assertPointers(expectedCurrent);await passive();
    if(p.mode==='preflight')return result('preflight_passed',{alreadyClosed});
@@ -109,26 +109,33 @@ export async function runCatalogDiscoveryControl(input,context={}){
    return result(alreadyClosed?'already_closed':'closed',{versionId:closed.versionId,deploymentId:liveDeployment,configurationHash:p.baseline.configurationHash,activeOwnGrants:end.active_grants,permissionWithdrawalProven:false});
   }
   let grant;
-  if(p.phase==='catalog'){
-   stage='primary_grant';ownedClient(existing);
+  const readPrimaryGrant=async()=>{
    const rows=envelope(await call({method:'POST',path:R+'/d1/database/'+t.db+'/query',body:{sql:CONTROL_GRANTS_SQL,params:[t.project,t.client,t.resource,new Date(p.window.startAt).toISOString(),new Date(p.window.expiresAt).toISOString()]}},'select'));
-   if(!Array.isArray(rows)||rows.length!==1||rows[0].success!==true||c.active_grants!==1)fail();
-   grant=inspectCatalogDiscoveryGrant({rows:rows[0].results,window,now:check()});
+   if(!Array.isArray(rows)||rows.length!==1||rows[0].success!==true)fail();
+   return inspectCatalogDiscoveryGrant({rows:rows[0].results,window,now:check()});
+  };
+  const phaseGrantSnapshot=async()=>{
+   const observed=await counts();if(observed.active_grants!==(p.phase==='open'?0:1))fail();
+   if(p.phase==='catalog'){const current=await readPrimaryGrant();if(canon(current)!==canon(grant))fail();}
+   return observed;
+  };
+  if(p.phase==='catalog'){
+   stage='primary_grant';ownedClient(existing);if(c.active_grants!==1)fail();grant=await readPrimaryGrant();
   }
-  stage='payload';const descriptor=createCatalogDiscoveryVersion({stage:p.phase==='open'?'oauth':'catalog',base,window,...grant?{grant}:{},now:p.mode==='preflight'?p.window.startAt:check()}),payload=descriptor.payload,configurationHash=await expectedConfig(payload);check();await noTag(payload.annotations['workers/tag']);
+  stage='payload';const descriptor=createCatalogDiscoveryVersion({stage:p.phase==='open'?'oauth':'catalog',base,window,...grant?{grant}:{},now:p.mode==='preflight'?p.window.startAt:check()}),payload=descriptor.payload,configurationHash=await expectedConfig(payload);intendedConfigurationHash=configurationHash;check();await noTag(payload.annotations['workers/tag']);
   if(p.mode==='preflight')return result('preflight_passed',{configurationHash});
   if(p.phase==='open'){
    stage='registry_admission';await assertPointers(expectedCurrent);await passive();if((await counts()).active_grants!==0||await readClient()!==null)fail();
    const a=envelope(await call({method:'PUT',path:kv+'/bulk',body:[{key:expectedClient.key,value:JSON.stringify(expectedClient.value),expiration:expectedClient.expiration,metadata:clientMetadata}]},'clientPut'));
    if(a?.successful_key_count!==1||!Array.isArray(a.unsuccessful_keys)||a.unsuccessful_keys.length)fail();ownedClient(await readClient());
   }
-  stage='version_admission';await assertPointers(expectedCurrent);await counts();ownedClient(await readClient());
+  stage='version_admission';await assertPointers(expectedCurrent);await phaseGrantSnapshot();ownedClient(await readClient());
   stage='inactive_version';const made=envelope(await call({method:'POST',path:R+'/workers/workers/'+W+'/versions',query:{deploy:false},body:payload},'versionPost'));candidate=made?.id;
   if(!uuid(candidate)||candidate===closed.versionId||made.exports_reconciliation!==undefined&&(!made.exports_reconciliation||Object.values(made.exports_reconciliation).some(x=>!Array.isArray(x)||x.length)))fail();
   const newV=await moduleProof(await version(W,candidate),candidate,p.baseline.pin.workerHash,p.baseline.pin.workerBytes,configurationHash);if(newV.bindings?.length!==30||newV.annotations?.['workers/tag']!==payload.annotations['workers/tag'])fail();
-  stage='promotion_admission';await assertPointers(expectedCurrent);await passive();await counts();ownedClient(await readClient());
+  stage='promotion_admission';await assertPointers(expectedCurrent);await passive();await phaseGrantSnapshot();ownedClient(await readClient());
   stage='promotion';const deploymentId=await promotion(candidate,expectedCurrent.deploymentId);
-  stage='primary_readback';await moduleProof(await version(W,candidate),candidate,p.baseline.pin.workerHash,p.baseline.pin.workerBytes,configurationHash);await passive();await counts();pointer(await current(OP),p.baseline.operatorVersion,p.baseline.operatorDeployment);pointer(await current(W),candidate,deploymentId);
+  stage='primary_readback';await moduleProof(await version(W,candidate),candidate,p.baseline.pin.workerHash,p.baseline.pin.workerBytes,configurationHash);await passive();await phaseGrantSnapshot();pointer(await current(OP),p.baseline.operatorVersion,p.baseline.operatorDeployment);pointer(await current(W),candidate,deploymentId);
   return result(p.phase==='open'?'opened':'catalog_attached',{versionId:candidate,deploymentId,configurationHash,originalExpiresAt:p.window.expiresAt});
  }catch{return result(anyWrite()?'uncertain':'blocked');}};
  let timer;try{return await Promise.race([work(),new Promise(resolve=>{timer=setTimeout(()=>{terminal=true;resolve(result(anyWrite()?'uncertain':'blocked',{deadlineExceeded:true}));},timeout);})]);}finally{clearTimeout(timer);terminal=true;}

@@ -26,8 +26,8 @@ export async function environment(){
  const page=rows=>ok(rows,{count:rows.length,total_count:rows.length,page:1,total_pages:1,per_page:100});
  async function route(o){
   const path=o.path;
-  if(o.method==='GET'&&path===R+'/workers/scripts/'+W+'/deployments')return ok(s.canary);
-  if(o.method==='GET'&&path===R+'/workers/scripts/'+OP+'/deployments')return ok(s.operator);
+  if(o.method==='GET'&&path===R+'/workers/scripts/'+W+'/deployments')return ok([s.canary]);
+  if(o.method==='GET'&&path===R+'/workers/scripts/'+OP+'/deployments')return ok([s.operator]);
   const v=path.match(new RegExp('^'+R+'/workers/workers/('+W+'|'+OP+')/versions/([a-f0-9-]+)$'));
   if(o.method==='GET'&&v){const value=s.versions.get(v[2]);assert.ok(value);return ok(value);}
   if(o.method==='GET'&&path===R+'/workers/workers/'+W+'/versions')return page([...s.versions.values()].filter(v=>v.id!==op.id).map(v=>({id:v.id,annotations:v.annotations??{}})));
