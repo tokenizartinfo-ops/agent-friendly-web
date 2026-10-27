@@ -2227,6 +2227,11 @@ footer p { margin: 0; }
   .archive-drawers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+@media (max-width: 960px) {
+  .comic-call-dialogue { position: static; padding: 0 0 18px; gap: 18px; }
+  .comic-call-bubble { font-size: 20px; }
+}
+
 @media (max-width: 620px) {
   .comic-call-hero { padding: 18px 18px 28px; }
   .comic-call-scene { width: calc(100% + 36px); max-width: none; margin: 0 -18px 22px; }

@@ -107,7 +107,7 @@ try{
     geometry.push({case:label,balloon:n,...text});
     if(!text.textInside)visibilityFailures.push({case:label,kind:'dialogue_text_outside_bubble',balloon:n,text});
    }
-   if(viewport.width===390)assert.ok(captionBox.y+captionBox.height<=artBox.y+1,'mobile dialogue stays above the full illustration: '+label);
+   if(viewport.width<=960)assert.ok(captionBox.y+captionBox.height<=artBox.y+1,'narrow-screen dialogue stays above the full illustration: '+label);
    else if(captionBox.y+captionBox.height>artBox.y+artBox.height*0.29)visibilityFailures.push({case:label,kind:'dialogue_over_robot_faces',captionBox,artBox});
    const order=await page.locator('main').evaluate(el=>['.home-value-intro','#ruta-de-madurez','#tu-primer-paso','#auditar'].map(selector=>el.querySelector(selector).getBoundingClientRect().top+scrollY));
    assert.ok(order.every((v,n)=>n===0||v>order[n-1]),'offer, layers, first step and audit keep approved visual order: '+label);
