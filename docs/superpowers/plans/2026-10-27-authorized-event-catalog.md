@@ -27,4 +27,4 @@ Referencia primaria: https://developers.openai.com/plugins/build/mcp-events (con
 
 ## Registro
 
-RED pendiente. No código de producción escrito todavía. Prueba propia01 de hoy quedó retirada y cerrada sin reserva ni avisos; su grant no se reutiliza. operationalReadiness=false; PR571 sigue draft; Max no enviado.
+RED verificado antes de producción: head9145b7ee/run40540904690/job122318688759, 2.951 PASS, cuatro fallos nuevos esperados y una omitida existente. Fallaron exactamente catálogo sin actor, cierre primario, revocación durante lectura primaria y preservación del camino de suscripción; ningún fallo ajeno. Implementación mínima añadida después: catálogo con autorización primaria antes/después y marca de cierre de la misma concesión, sin stub/RPC. subscribe/unsubscribe sin cambios de producción; sus pruebas conservan deriva y control de identidad. GREEN y revisión pendientes. Prueba propia01 de hoy quedó retirada y cerrada sin reserva ni avisos; su grant no se reutiliza. operationalReadiness=false; PR571 sigue draft; Max no enviado.
