@@ -99,3 +99,29 @@ test('visibility wait respects the original deadline and never starts a late ver
  const pending=runCatalogDiscoveryControl(s.params,s.ctx);await Promise.race([stale,pending]);s.wall=end-89999;await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);const r=await pending;
  assert.equal(r.status,'uncertain');assert.equal(r.mutations.clientPut,1);assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);assert.equal(r.mayRetry,false);
 });
+
+function delayedRegistryWithFourVersionPages(s,delays){
+ let written=false,reads=0;const releases=[],seen=Array.from({length:delays},()=>new Promise(resolve=>releases.push(resolve)));
+ s.interceptor=async(o,next)=>{
+  const r=await next();
+  if(o.method==='GET'&&o.path.endsWith('/workers/workers/agent-friendly-web-delegated-canary/versions')){
+   const all=[{id:s.baseline.pin.baseVersionId},...Array.from({length:300},(_,i)=>({id:(1000+i).toString(16).padStart(8,'0')+'-2222-4222-8222-222222222222'}))];
+   const page=o.query.page,rows=all.slice((page-1)*100,page*100);
+   return{...r,result:rows,result_info:{page,per_page:100,count:rows.length,total_count:301,total_pages:4}};
+  }
+  if(o.method==='PUT')written=true;
+  if(written&&o.path.endsWith('/bulk/get')&&++reads<=delays){releases[reads-1]();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':null}}};}
+  return r;
+ };
+ return seen;
+}
+test('four version pages and eight delayed observations stop before version creation when the final tail cannot fit',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});const s=await environment(),seen=delayedRegistryWithFourVersionPages(s,8);
+ const pending=runCatalogDiscoveryControl(s.params,s.ctx);for(const ready of seen){await Promise.race([ready,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);}
+ const r=await pending;assert.equal(r.status,'uncertain');assert.equal(r.stage,'version_budget_admission');assert.equal(r.mutations.clientPut,1);assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);assert.equal(s.canary.versions[0].version_id,s.baseline.pin.baseVersionId);assert.equal(r.mayRetry,false);
+});
+test('four version pages and seven delayed observations leave exactly64 reads for a complete successful opening',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});const s=await environment(),seen=delayedRegistryWithFourVersionPages(s,7);
+ const pending=runCatalogDiscoveryControl(s.params,s.ctx);for(const ready of seen){await Promise.race([ready,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);}
+ const r=await pending;assert.equal(r.status,'opened',JSON.stringify(r));assert.equal(r.apiReads,64);assert.equal(r.mutations.clientPut,1);assert.equal(r.mutations.versionPost,1);assert.equal(r.mutations.deploymentPost,1);assert.equal(r.originalExpiresAt,end);
+});

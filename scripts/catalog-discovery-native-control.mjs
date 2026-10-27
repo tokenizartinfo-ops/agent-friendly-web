@@ -143,6 +143,9 @@ export async function runCatalogDiscoveryControl(input,context={}){
    const a=envelope(await call({method:'PUT',path:kv+'/bulk',body:[{key:expectedClient.key,value:JSON.stringify(expectedClient.value),expiration:expectedClient.expiration,metadata:clientMetadata}]},'clientPut'));
    stage='registry_acknowledgement';if(a?.successful_key_count!==1||!Array.isArray(a.unsuccessful_keys)||a.unsuccessful_keys.length)fail();await observeRegistry(true);
   }
+  // The fixed version/promotion/readback tail needs27 API reads. Do not
+  // create a version when pagination and visibility observations spent them.
+  stage='version_budget_admission';if(apiReads+27>64)fail();
   stage='version_admission';await assertPointers(expectedCurrent);await phaseGrantSnapshot();ownedClient(await readClient());
   stage='inactive_version';const made=envelope(await call({method:'POST',path:R+'/workers/workers/'+W+'/versions',query:{deploy:false},body:payload},'versionPost'));candidate=made?.id;
   if(!uuid(candidate)||candidate===closed.versionId||made.exports_reconciliation!==undefined&&(!made.exports_reconciliation||Object.values(made.exports_reconciliation).some(x=>!Array.isArray(x)||x.length)))fail();

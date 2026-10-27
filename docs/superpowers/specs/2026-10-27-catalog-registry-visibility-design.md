@@ -10,3 +10,5 @@ Solo tras ACK exitoso exacto, hasta nueve observaciones del mismo registro a int
 El cierre restaura el host cerrado antes de tocar KV. Tras UN DELETE de la clave propia, una lectura aún propia puede observarse de nuevo con el mismo límite; un conflicto ajeno detiene sin borrarlo. ACK desconocido conserva uncertain/mayRetryfalse sin observaciones de continuación ni repetición. Etapas saneadas separan ACK, readback y agotamiento; no guardar valores, claves ni identificadores owner.
 
 No cambia contratos públicos, permisos, actor, reserva, cron, código desplegado, receptor o consentimiento. La prueba de catálogo necesitará nueva ventana tras aceptación de la corrección. PC-off y operationalReadiness siguen false.
+
+Antes de crear una versión, exigir además espacio para las27lecturas restantes del protocolo fijo. Con4páginas+8observaciones extra, detener antes de versión/promoción; con4páginas+7extras, completar en64lecturas. El fixture de red debe separar objetos por serialización: no compartir metadata del request con el registro persistido.
