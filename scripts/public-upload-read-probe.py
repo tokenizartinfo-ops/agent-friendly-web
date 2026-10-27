@@ -35,11 +35,23 @@ def probe_path(suffix,token,open_it):
   except ProbeDeadline:raise
   except Exception:pass
   finally:exc.close()
+ except urllib.error.URLError as exc:
+  result["error"]="timeout" if isinstance(exc.reason,(TimeoutError,socket.timeout)) else "transport_or_decode"
  except (TimeoutError,socket.timeout):
   result["error"]="timeout"
  except Exception:
   result["error"]="transport_or_decode"
  return result,None
+def probe_reads(token,open_it):
+ rows,values=[],{}
+ for suffix in PATHS:
+  try:result,payload=probe_path(suffix,token,open_it)
+  except ProbeDeadline:
+   rows.append({"path":PATHS[suffix],"status":0,"ok":False,"providerCodes":[],"error":"deadline"})
+   break
+  rows.append(result);values[PATHS[suffix]]=payload
+ return rows,values
+
 def main():
  report={"kind":"public_upload_read_diagnosis","ok":False,"reads":[],"configurationMatches":None,
   "uploadAttempted":False,"mutations":0,"operationalReadiness":False}
@@ -47,6 +59,8 @@ def main():
   report["checkedAt"]=datetime.now(timezone.utc).isoformat()
   (ROOT/"output").mkdir(exist_ok=True)
   (ROOT/"output/public-upload-read-probe.json").write_text(json.dumps(report,indent=2)+"\n")
+ def expired(*_):raise ProbeDeadline("probe_deadline")
+ previous=signal.signal(signal.SIGALRM,expired);signal.setitimer(signal.ITIMER_REAL,60)
  try:
   upl.require(os.environ.get("GITHUB_ACTIONS")=="true" and os.environ.get("GITHUB_REPOSITORY")==upl.REPO
    and os.environ.get("GITHUB_EVENT_NAME")=="workflow_dispatch" and os.environ.get("GITHUB_REF")=="refs/heads/main"
@@ -63,24 +77,21 @@ def main():
   expected=contract["baseline"]
   upl.require(expected["versionId"]=="1772ceae-7e8d-4dbc-bc1d-0ade956a3e45" and expected["deploymentId"]=="12373c27-9a52-4764-9064-7428887252a2","baseline_scope")
   opener=urllib.request.build_opener(urllib.request.ProxyHandler({}),upl.qual.NoRedirect())
-  def expired(*_):raise ProbeDeadline("probe_deadline")
-  previous=signal.signal(signal.SIGALRM,expired);signal.setitimer(signal.ITIMER_REAL,60)
-  values={}
-  try:
-   for suffix in PATHS:
-    result,payload=probe_path(suffix,token,opener.open);report["reads"].append(result);values[PATHS[suffix]]=payload;save()
-  finally:
-   signal.setitimer(signal.ITIMER_REAL,0);signal.signal(signal.SIGALRM,previous)
-  if all(x["ok"] for x in report["reads"]):
+  report["reads"],values=probe_reads(token,opener.open)
+  if len(report["reads"])==len(PATHS) and all(x["ok"] for x in report["reads"]):
    try:
     state={"version":values["active_version"],"settings":values["settings"],"deployment":values["deployments"]["deployments"][0],"subdomain":values["subdomain"]}
     upl.check_state(state,expected);report.update(ok=True,configurationMatches=True)
+   except ProbeDeadline:raise
    except Exception as exc:
     allowed={"binding_scope","binding_type","db_scope","rate_scope","flag_scope","binding_drift","settings_drift","version_drift","traffic_drift","preview_drift"}
     report.update(configurationMatches=False,configurationFailure=str(exc) if isinstance(exc,ValueError) and str(exc) in allowed else "shape_or_unclassified")
+ except ProbeDeadline:
+  report["error"]="deadline"
  except Exception:
   report["error"]="probe_unavailable"
  finally:
+  signal.setitimer(signal.ITIMER_REAL,0);signal.signal(signal.SIGALRM,previous)
   save()
  print(json.dumps(report))
  if not report["ok"]:sys.exit(2)
