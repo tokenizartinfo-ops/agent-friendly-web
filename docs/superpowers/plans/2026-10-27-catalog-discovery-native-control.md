@@ -15,3 +15,5 @@ Cerrar debe seguir siendo posible después del deadlineoriginal. Restaurar no de
 ## Verificación
 
 Primero RED con ocho escenarios adversariales en API sintética y cero destinos reales. Luego implementación; una revisión independiente y una pasada de fixes. CI requerido, calificación primaria preflight contra60d/DEP519,OP2033/DEP302,Workflow1d99, sin mutaciones y sin abrir ventana. Nada live hasta regreso delowner, confirmación puntual y Accesscomprobado. Estado operativofalse.
+
+RED previo40109988/run40557119535/job122376028976:2973PASS/8nuevosFAILesperados/1existingSkip. Solo faltó el adaptador puro en los ocho escenarios; no hubo fallo ajeno. Implementación posterior sin rutas de suscripción/admisión. La registración públicaKV usaPUTbulk de UN elemento ybulk/get de UNA clave; ACKincompleto bloquea antes de crearversión. No enviar el descriptor completo: solo.payload. Caller debe recuperar resultados inciertos por lectura, nunca repetir el write.
