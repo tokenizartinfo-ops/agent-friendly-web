@@ -54,3 +54,30 @@ test('caller mutation during asynchronous hashing cannot replace the verified mo
 test('observed clock rewind terminally fences the same preparation window',()=>{
  const window=plan();createCatalogDiscoveryClient(window,{now:start+1});assert.throws(()=>createCatalogDiscoveryClient(window,{now:start}));assert.throws(()=>createCatalogDiscoveryClient(window,{now:start+2}));
 });
+
+test('temporary OAuth and catalog diagnostics use only the exact original window',async()=>{
+ for(const stage of ['oauth','catalog']){
+  const f=await fixture(),base=await inspectCatalogDiscoveryArtifact(f),window=plan();
+  const grant=stage==='catalog'?inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+3000}):null;
+  const v=createCatalogDiscoveryVersion({stage,base,window,...grant?{grant}:{},now:start+3000});
+  const diagnostics=v.payload.bindings.filter(b=>b.name.startsWith('AFW_MCP_DISCOVERY_DIAGNOSTIC_'));
+  assert.deepEqual(diagnostics,[{name:'AFW_MCP_DISCOVERY_DIAGNOSTIC_ENABLED',type:'plain_text',text:'true'},{name:'AFW_MCP_DISCOVERY_DIAGNOSTIC_START_AT',type:'plain_text',text:String(start)},{name:'AFW_MCP_DISCOVERY_DIAGNOSTIC_EXPIRES_AT',type:'plain_text',text:String(end)}]);
+  assert.equal(v.payload.bindings.length,33);assert.equal(v.payload.modules[0].content_base64,f.v.modules[0].content_base64);
+  assert.equal(v.payload.bindings.find(b=>b.name==='AFW_OAUTH_REFRESH_ENABLED').type,'inherit');
+  assert.equal(v.maySubscribe,false);assert.equal(v.operationalReadiness,false);
+ }
+});
+test('catalog coordination deadline is conservative, bounded, and exclusive',()=>{
+ const window=plan(),g=inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+3000});
+ assert.equal(g.exchangedAt,start+2000);assert.equal(g.catalogDispatchBefore,start+242000);
+ assert.ok(Object.isFrozen(g));assert.doesNotThrow(()=>inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+241999}));
+ assert.throws(()=>inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+242000}));
+ assert.throws(()=>inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+411000}));
+ const earlyEnd=start+90000,short=prepareCatalogDiscoveryWindow({startAt:start,expiresAt:earlyEnd,trialId:trial},{now:start});
+ const r={...row(),expires_at:new Date(earlyEnd).toISOString()},bounded=inspectCatalogDiscoveryGrant({rows:[r],window:short,now:start+3000});
+ assert.equal(bounded.catalogDispatchBefore,earlyEnd);assert.equal(bounded.expiresAt,earlyEnd);
+});
+test('retaining a valid grant proof cannot prepare a catalog after its dispatch deadline',async()=>{
+ const f=await fixture(),base=await inspectCatalogDiscoveryArtifact(f),window=plan(),grant=inspectCatalogDiscoveryGrant({rows:[row()],window,now:start+3000});
+ assert.throws(()=>createCatalogDiscoveryVersion({stage:'catalog',base,window,grant,now:start+242000}));
+});
