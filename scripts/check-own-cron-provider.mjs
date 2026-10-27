@@ -57,7 +57,26 @@ function exclusivelyBuilds(x){
  }
  return identifiedUpdate;
 }
-/** Narrow build-time dependency selection; never an authorization to publish. */
+// This fixed prebuilt publisher does not invoke Workers AI. Keep all-workers
+// conservative, and require exclusive named service evidence before excluding.
+const WORKERS_AI_COMPONENT='zvm7mqn92xzc';
+function exclusivelyAiSafety(x){
+ if(x.name!=='Issues with AI Security for Apps'||!Array.isArray(x.components)||x.components.length!==1||!Array.isArray(x.incident_updates))return false;
+ const top=x.components[0];
+ if(top?.id!==WORKERS_AI_COMPONENT||top.name!=='Workers AI'||top.code!==undefined&&top.code!==WORKERS_AI_COMPONENT)return false;
+ let identifiedUpdate=false;
+ for(const u of x.incident_updates){
+  if(!u||typeof u!=='object'||Array.isArray(u))return false;
+  const affected=u.affected_components;if(affected===undefined||affected===null)continue;
+  if(!Array.isArray(affected))return false;
+  for(const c of affected){
+   if(c?.code!==WORKERS_AI_COMPONENT||c.name!=='Cloudflare Sites and Services - Workers AI'||c.id!==undefined&&c.id!==WORKERS_AI_COMPONENT)return false;
+   identifiedUpdate=true;
+  }
+ }
+ return identifiedUpdate;
+}
+/** Narrow fixed-publication dependencies; never an authorization to publish. */
 export function assessCronProviderSnapshot(snapshot,{now=Date.now(),dependencyProfile='all-workers',trackedSnapshot}={}){
  if(!['all-workers',PREBUILT_PROFILE].includes(dependencyProfile))return receipt('unknown',now,'invalid_input');
  const conservative=assessCronProviderSnapshotAll(snapshot,{now,trackedSnapshot});
@@ -66,7 +85,7 @@ export function assessCronProviderSnapshot(snapshot,{now=Date.now(),dependencyPr
  // The conservative pass validates all relevant IDs, statuses and timestamps FIRST.
  if(conservative.providerGate!=='unknown'||conservative.reason!=='active_related_incident')return finish(conservative);
  try{
-  const excluded=snapshot.incidents.filter(x=>ACTIVE.has(x.status)&&exclusivelyBuilds(x));
+  const excluded=snapshot.incidents.filter(x=>ACTIVE.has(x.status)&&(exclusivelyBuilds(x)||exclusivelyAiSafety(x)));
   if(!excluded.length)return finish(conservative);
   const ids=new Set(excluded.map(x=>x.id));
   const scoped=assessCronProviderSnapshotAll({...snapshot,incidents:snapshot.incidents.filter(x=>!ids.has(x.id))},{now,trackedSnapshot});
