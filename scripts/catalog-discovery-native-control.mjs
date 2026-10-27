@@ -138,14 +138,16 @@ export async function runCatalogDiscoveryControl(input,context={}){
   stage='payload';const descriptor=createCatalogDiscoveryVersion({stage:p.phase==='open'?'oauth':'catalog',base,window,...grant?{grant}:{},now:p.mode==='preflight'?p.window.startAt:check()}),payload=descriptor.payload,configurationHash=await expectedConfig(payload);intendedConfigurationHash=configurationHash;check();await noTag(payload.annotations['workers/tag']);
   if(p.mode==='preflight')return result('preflight_passed',{configurationHash});
   if(p.phase==='open'){
-   stage='registry_admission';await assertPointers(expectedCurrent);await passive();if((await counts()).active_grants!==0||await readClient()!==null)fail();
+   // The host is still the verified closed base. This write registers only
+   // public client metadata; fresh passive admission is at the version effect.
+   stage='registry_admission';await assertPointers(expectedCurrent);if((await counts()).active_grants!==0||await readClient()!==null)fail();
    const a=envelope(await call({method:'PUT',path:kv+'/bulk',body:[{key:expectedClient.key,value:JSON.stringify(expectedClient.value),expiration:expectedClient.expiration,metadata:clientMetadata}]},'clientPut'));
    stage='registry_acknowledgement';if(a?.successful_key_count!==1||!Array.isArray(a.unsuccessful_keys)||a.unsuccessful_keys.length)fail();await observeRegistry(true);
   }
-  // The fixed version/promotion/readback tail needs27 API reads. Do not
+  // The fixed version/passive/promotion/readback tail needs35 API reads. Do not
   // create a version when pagination and visibility observations spent them.
-  stage='version_budget_admission';if(apiReads+27>64)fail();
-  stage='version_admission';await observeRegistry(true,'version_registry_readback');stage='version_admission';await assertPointers(expectedCurrent);await phaseGrantSnapshot();
+  stage='version_budget_admission';if(apiReads+35>64)fail();
+  stage='version_admission';await observeRegistry(true,'version_registry_readback');stage='version_admission';await passive();await assertPointers(expectedCurrent);await phaseGrantSnapshot();
   stage='version_budget_admission';if(apiReads+24>64)fail();
   stage='inactive_version';const made=envelope(await call({method:'POST',path:R+'/workers/workers/'+W+'/versions',query:{deploy:false},body:payload},'versionPost'));candidate=made?.id;
   if(!uuid(candidate)||candidate===closed.versionId||made.exports_reconciliation!==undefined&&(!made.exports_reconciliation||Object.values(made.exports_reconciliation).some(x=>!Array.isArray(x)||x.length)))fail();

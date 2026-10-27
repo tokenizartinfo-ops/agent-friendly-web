@@ -13,7 +13,7 @@ Recursos exactos de617/618; máximo8rechecks compartidos,7500ms,64reads/110000ms
 ## Review Focus
 - Null→own no garantiza monotonicidad; todas las admisiones observan con el mismo contador.
 - Punteros/grant se revalidan después de cualquier espera.
-- Cola24antesdeversión y12antesdepromoción evita agotamiento tras efectos.
+- Cola35inicial,24antesdeversión y12antesdepromoción evita agotamiento tras efectos.
 - Valorajeno/transporte/ACK inválido no se resuelve por esperar o sobreescribir.
 - Catálogo no pierde la primera observación nula ni consulta un grant supuesto.
 
@@ -33,3 +33,9 @@ Pre-flight: single task, no shared interfaces.
 Ruling: GitHub branch/Actions replace localworktree/workspace per owner cloud-first preference; no local clone/build/temp, cost is cloud CI latency.
 RED/zero-real-API: accepted618 fails five flapping-admission cases. GREEN/zero-real-API: source handles all5; shared8limit stops beforeversion/read36; P4/K8late stops beforepromotion/read53 with inactiveversion1,traffic0; drift afterwait stops beforeversion. Inactiveversion is evidence, not activation.
 All real resources remain closed60d/519; prior two windows consumed, no grant or unique reservation used. Exact first stale value in ed21 unknown;0a392 provides realnull→own→null trace. Full CI/review pending.
+
+
+## Final review/fix ledger
+Una revisión fresca2569: Important passive() faltaba después de esperar y antes de versionPost; ningúnCritical/Minor,declinedtojudge[]. Dos regresiones reales del adaptador en API sintética open/catalog introducen Workflowactivo durante version_registry_readback: RED crea una versión inactiva→GREEN0version/0promotion. Sin rereview.
+Ruling: mover el passive() redundante del PUTpúblico a la admisión de versión, manteniendo el passive inicial, punteros/cuentas antes de PUT y hostcerrado — el registro público no inicia actividad ni concede datos; la primera versión y el tráfico sí necesitan snapshot pasivo posterior a esperar. Cost if wrong: puede quedar una escritura de metadata pública para limpiar si aparece actividad concurrente; nunca se crea versión ni tráfico en ese caso. No CAS/globalidad afirmados.
+Cola inicial35ahora incluye8lecturas pasivas, luego24/12. Mismo cap64/110000ms y8rechecks. Matriz CF0APIreales:5positivosGREEN(open55/catalog52 conunrecheck),8límitecompartido detiene read28antesversión; P4/K8late read53antespromoción; puntero0version; passiveopen/catalog0version; P4/K8initial read30antesversión yP4/K7opened64. Dos testsNode nuevos de actividad durante espera. FinalCI/package pendientes. Una sola pasada de fixes, no rereview.

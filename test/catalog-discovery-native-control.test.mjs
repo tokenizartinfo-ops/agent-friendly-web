@@ -156,3 +156,19 @@ test('later visibility observations reserve the promotion tail before changing t
  const pending=runCatalogDiscoveryControl(s.params,s.ctx);for(const ready of waits){await Promise.race([ready,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);}
  const r=await pending;assert.equal(r.status,'uncertain');assert.equal(r.stage,'promotion_budget_admission');assert.equal(r.mutations.clientPut,1);assert.equal(r.mutations.versionPost,1);assert.equal(r.mutations.deploymentPost,0);assert.equal(s.canary.versions[0].version_id,s.baseline.pin.baseVersionId);
 });
+
+for(const phase of ['open','catalog']){
+ test('passive activity appearing during '+phase+' version registry wait prevents inactive version creation',async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});const s=await environment();let p=s.params;
+  if(phase==='catalog'){const first=await runCatalogDiscoveryControl(p,s.ctx);s.wall=start+3000;s.rows=[s.grant()];s.activeGrants=1;s.calls=[];p={...p,phase:'catalog',live:live(first)};}
+  let written=phase==='catalog',read=0,active=false,release;const stale=new Promise(resolve=>{release=resolve;});
+  s.interceptor=async(o,next)=>{
+   const r=await next();if(o.method==='PUT')written=true;
+   if(written&&o.path.endsWith('/bulk/get')&&++read===2){active=true;release();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':null}}};}
+   if(active&&o.method==='GET'&&o.path.endsWith('/workflows/afw-release-administrative/instances'))return{...r,result:[{id:'new-active-workflow',status:'running'}],result_info:{page:1,per_page:100,count:1,total_count:1,total_pages:1}};
+   return r;
+  };
+  const pending=runCatalogDiscoveryControl(p,s.ctx);await Promise.race([stale,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);const r=await pending;
+  assert.equal(r.status,phase==='open'?'uncertain':'blocked');assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);assert.equal(s.canary.versions[0].version_id,p.live?.versionId??s.baseline.pin.baseVersionId);
+ });
+}
