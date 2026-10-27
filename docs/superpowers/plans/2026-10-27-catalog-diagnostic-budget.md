@@ -29,3 +29,7 @@
 - [ ] CI completo npm test/lint/build y paquete congelado en GitHub; leer fallos/conteos/skip/advertencias.
 - [ ] UNA revisión fresca de toda la rama; una pasada de correcciones importantes RED→GREEN si corresponde, sin rereview.
 - [ ] Integrar con leases, comprobar CI main y guardar continuidad saneada. No invocar ventanas consumidas ni declarar runtime actualizado.
+
+
+## Evidencia adicional de frontera
+La primera corrección6c62c7a7 pasó CI40583625087:3009PASS/0FAIL/1SKIP, lint0errors/13warnings existentes y cinco builds; paquete40583624843:23PASS. Una regresión adicional en f591dbab reprodujo el cruce entre la última observación y el POST: CI40584035081,3009PASS/1FAIL esperado/1SKIP. Se añade la misma fecha conservadora al guard de cada llamada, antes de contabilizar/enviar un efecto y después de cada await. No hay llamadas extra ni cancelación API prometida. Verificación final y revisión aún pendientes.

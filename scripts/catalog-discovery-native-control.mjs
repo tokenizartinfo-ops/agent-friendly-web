@@ -12,7 +12,7 @@ export async function runCatalogDiscoveryControl(input,context={}){
  const t=CONTROL_TARGET,R='/accounts/'+t.account,W=t.worker,OP=t.operator,F=t.workflow;
  const mutations={clientPut:0,versionPost:0,deploymentPost:0,clientDelete:0};
  let send;
- let stage='input',terminal=false,apiReads=0,selects=0,registryObservations=0,registryRechecks=0,candidate=null,liveDeployment=null,intendedConfigurationHash=null,p,now,mono,lastW,lastM,endM,timeout;
+ let stage='input',terminal=false,apiReads=0,selects=0,registryObservations=0,registryRechecks=0,candidate=null,liveDeployment=null,intendedConfigurationHash=null,catalogDispatchBefore=null,p,now,mono,lastW,lastM,endM,timeout;
  const fail=()=>{throw Error('Own catalog control unavailable');};
  const hex=(x,n)=>typeof x==='string'&&new RegExp('^[a-f0-9]{'+n+'}$').test(x),uuid=x=>typeof x==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(x);
  const canon=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b))):x);
@@ -34,7 +34,8 @@ export async function runCatalogDiscoveryControl(input,context={}){
  }catch{return result('blocked');}
  const check=()=>{
   const w=now(),m=mono();if(terminal||context.request!==send||context.accountId!==t.account||!Number.isSafeInteger(w)||w<0||!Number.isFinite(m)||w<lastW||m<lastM||m>=endM)fail();
-  if(p.mode==='live'&&p.phase!=='close'&&(w<p.window.startAt||w>=p.window.expiresAt))fail();lastW=w;lastM=m;return w;
+  if(p.mode==='live'&&p.phase!=='close'&&(w<p.window.startAt||w>=p.window.expiresAt))fail();
+  if(p.phase==='catalog'&&catalogDispatchBefore!==null&&w>=catalogDispatchBefore)fail();lastW=w;lastM=m;return w;
  };
  const envelope=r=>{if(r?.success!==true||!Number.isInteger(r.status)||r.status<200||r.status>=300||r.errors!=null&&(!Array.isArray(r.errors)||r.errors.length))fail();return r.result;};
  const call=async(o,kind='read')=>{
@@ -133,7 +134,7 @@ export async function runCatalogDiscoveryControl(input,context={}){
    return observed;
   };
   if(p.phase==='catalog'){
-   stage='primary_grant';await observeRegistry(true,'catalog_registry_readback');stage='primary_grant';if(c.active_grants!==1)fail();grant=await readPrimaryGrant();
+   stage='primary_grant';await observeRegistry(true,'catalog_registry_readback');stage='primary_grant';if(c.active_grants!==1)fail();grant=await readPrimaryGrant();catalogDispatchBefore=grant.catalogDispatchBefore;
   }
   stage='payload';const descriptor=createCatalogDiscoveryVersion({stage:p.phase==='open'?'oauth':'catalog',base,window,...grant?{grant}:{},now:p.mode==='preflight'?p.window.startAt:check()}),payload=descriptor.payload,configurationHash=await expectedConfig(payload);intendedConfigurationHash=configurationHash;check();await noTag(payload.annotations['workers/tag']);
   if(p.mode==='preflight')return result('preflight_passed',{configurationHash});
