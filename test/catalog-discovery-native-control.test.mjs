@@ -33,3 +33,11 @@ test('invalid scope, active reservation or clock rewind fail before any write',a
  const t=await environment();t.reserved=1;assert.equal((await runCatalogDiscoveryControl(t.params,t.ctx)).status,'blocked');assert.equal(writes(t).length,0);
  const u=await environment();u.interceptor=async(o,next)=>{const r=await next();u.wall=start-1;return r;};assert.equal((await runCatalogDiscoveryControl(u.params,u.ctx)).status,'blocked');assert.equal(writes(u).length,0);
 });
+
+test('native instance pagination may omit page fields only with a complete matching total',async()=>{
+ const s=await environment();s.interceptor=async(o,next)=>{const r=await next();if(o.method==='GET'&&o.path.endsWith('/instances')){delete r.result_info.page;delete r.result_info.total_pages;}return r;};assert.equal((await runCatalogDiscoveryControl({...s.params,mode:'preflight'},s.ctx)).status,'preflight_passed');assert.equal(writes(s).length,0);
+ for(const change of [r=>r.result_info.total_count=1,r=>delete r.result_info.total_count,r=>r.result_info.cursor='next',r=>r.result_info.has_more=true]){const t=await environment();t.interceptor=async(o,next)=>{const r=await next();if(o.method==='GET'&&o.path.endsWith('/instances')){delete r.result_info.page;delete r.result_info.total_pages;change(r);}return r;};assert.equal((await runCatalogDiscoveryControl(t.params,t.ctx)).status,'blocked');assert.equal(writes(t).length,0);}
+});
+test('request function replacement after a read is fenced before the replacement runs',async()=>{
+ const s=await environment();let substituted=0;s.interceptor=async(o,next)=>{const r=await next();s.ctx.request=async()=>{substituted++;throw Error('untrusted replacement');};return r;};const r=await runCatalogDiscoveryControl(s.params,s.ctx);assert.equal(r.status,'blocked');assert.equal(substituted,0);assert.equal(writes(s).length,0);
+});

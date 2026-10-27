@@ -11,7 +11,8 @@ const CONTROL_COUNTS_SQL="SELECT (SELECT COUNT(*) FROM dossier_successor_reserva
 export async function runCatalogDiscoveryControl(input,context={}){
  const t=CONTROL_TARGET,R='/accounts/'+t.account,W=t.worker,OP=t.operator,F=t.workflow;
  const mutations={clientPut:0,versionPost:0,deploymentPost:0,clientDelete:0};
- let stage='input',terminal=false,apiReads=0,selects=0,candidate=null,liveDeployment=null,p,now,mono,firstW,lastW,lastM,endM,timeout;
+ let send;
+ let stage='input',terminal=false,apiReads=0,selects=0,candidate=null,liveDeployment=null,p,now,mono,lastW,lastM,endM,timeout;
  const fail=()=>{throw Error('Own catalog control unavailable');};
  const hex=(x,n)=>typeof x==='string'&&new RegExp('^[a-f0-9]{'+n+'}$').test(x),uuid=x=>typeof x==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(x);
  const canon=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b))):x);
@@ -26,13 +27,13 @@ export async function runCatalogDiscoveryControl(input,context={}){
   const b=p.baseline;if(!['canaryDeployment','operatorVersion','operatorDeployment','workflowVersion'].every(k=>uuid(b[k]))||!hex(b.configurationHash,64)||!hex(b.operatorHash,64)||!hex(b.operatorConfigurationHash,64)||!Number.isSafeInteger(b.operatorBytes)||b.operatorBytes<1||b.operatorBytes>2097152)fail();
   if(p.live!==null){exact(p.live,['versionId','deploymentId','configurationHash']);if(!uuid(p.live.versionId)||!uuid(p.live.deploymentId)||!hex(p.live.configurationHash,64)||p.live.versionId===b.pin.baseVersionId)fail();}
   if(p.phase==='open'&&p.live!==null||p.phase==='catalog'&&p.live===null)fail();
-  now=context.now??Date.now;mono=context.monotonic??(()=>performance.now());timeout=context.timeoutMs??110000;
+  send=context.request;now=context.now??Date.now;mono=context.monotonic??(()=>performance.now());timeout=context.timeoutMs??110000;
   if(typeof now!=='function'||typeof mono!=='function'||!Number.isSafeInteger(timeout)||timeout<1||timeout>110000)fail();
-  firstW=lastW=now();lastM=mono();endM=lastM+timeout;
+  lastW=now();lastM=mono();endM=lastM+timeout;
   if(!Number.isSafeInteger(lastW)||lastW<0||!Number.isFinite(lastM))fail();
  }catch{return result('blocked');}
  const check=()=>{
-  const w=now(),m=mono();if(terminal||!Number.isSafeInteger(w)||w<0||!Number.isFinite(m)||w<lastW||m<lastM||m>=endM)fail();
+  const w=now(),m=mono();if(terminal||context.request!==send||context.accountId!==t.account||!Number.isSafeInteger(w)||w<0||!Number.isFinite(m)||w<lastW||m<lastM||m>=endM)fail();
   if(p.mode==='live'&&p.phase!=='close'&&(w<p.window.startAt||w>=p.window.expiresAt))fail();lastW=w;lastM=m;return w;
  };
  const envelope=r=>{if(r?.success!==true||!Number.isInteger(r.status)||r.status<200||r.status>=300||r.errors!=null&&(!Array.isArray(r.errors)||r.errors.length))fail();return r.result;};
@@ -40,7 +41,7 @@ export async function runCatalogDiscoveryControl(input,context={}){
   const w=check();if(kind==='select'){if(++selects>10||o.method!=='POST'||o.path!==R+'/d1/database/'+t.db+'/query'||!o.body.sql.startsWith('SELECT '))fail();}
   else if(kind==='read'){if(++apiReads>64||!['GET','POST'].includes(o.method)||o.method==='POST'&&!o.path.endsWith('/bulk/get'))fail();}
   else{if(p.mode!=='live'||!Object.hasOwn(mutations,kind)||mutations[kind]!==0||p.phase!=='close'&&w>=p.window.expiresAt-90000)fail();mutations[kind]=1;}
-  const r=await context.request(o);check();envelope(r);return r;
+  const r=await send(o);check();envelope(r);return structuredClone(r);
  };
  const get=(suffix,query)=>call({method:'GET',path:R+suffix,...query?{query}:{}});
  const current=async n=>{const r=envelope(await get('/workers/scripts/'+n+'/deployments'));return(Array.isArray(r)?r:r?.deployments)?.[0];};
@@ -52,13 +53,14 @@ export async function runCatalogDiscoveryControl(input,context={}){
  };
  const version=async(n,id)=>envelope(await get('/workers/workers/'+n+'/versions/'+id,{include:'modules'}));
  const complete=(r,optionalTotal=false)=>{
-  const rows=envelope(r),i=r.result_info;if(!Array.isArray(rows)||!i||i.page!==1||i.per_page!==100||i.total_pages!==1||i.count!==rows.length||rows.length>100||i.cursor||i.next_cursor||(!optionalTotal||i.total_count!==undefined)&&i.total_count!==rows.length)fail();return rows;
+  const rows=envelope(r),i=r.result_info;if(!Array.isArray(rows)||!i||i.per_page!==100||i.count!==rows.length||rows.length>100||i.cursor||i.next_cursor||i.has_more!==undefined&&i.has_more!==false||i.page!==undefined&&i.page!==1||i.total_pages!==undefined&&i.total_pages!==1)fail();
+  if(optionalTotal){if(i.page!==1||i.total_pages!==1||i.total_count!==undefined&&i.total_count!==rows.length)fail();}else if(i.total_count!==rows.length)fail();return rows;
  };
  const passive=async()=>{
   const f=envelope(await get('/workflows/'+F));if(f?.id!==t.workflowId||f.name!==F||f.script_name!==OP||f.class_name!=='AfwReleaseWorkflow'||f.script_deleted===true||f.schedules!==undefined&&(!Array.isArray(f.schedules)||f.schedules.length))fail();
   const vs=complete(await get('/workflows/'+F+'/versions',{page:1,per_page:100}),true),v=vs[0];if(v?.id!==p.baseline.workflowVersion||v.workflow_id!==t.workflowId||v.class_name!=='AfwReleaseWorkflow'||canon(v.limits)!==canon({steps:1})||canon(v.concurrency)!==canon({limit:1})||canon(v.default_retention)!==canon({success_retention:259200000,error_retention:259200000}))fail();
-  const xs=complete(await get('/workflows/'+F+'/instances',{per_page:100,direction:'desc'}));if(xs.some(x=>!['complete','terminated','errored'].includes(x.status)))fail();
-  const cr=await get('/containers/applications/'+t.application+'/instances-v2',{state:'active',per_page:100}),cs=envelope(cr);if(!Array.isArray(cs)||cs.length||cr.result_info?.cursor||cr.result_info?.next_cursor)fail();
+  const xs=complete(await get('/workflows/'+F+'/instances',{per_page:100,direction:'desc'}));const ids=new Set();for(const x of xs){const id=x.id??x.instance_id;if(typeof id!=='string'||!id.length||id.length>128||ids.has(id)||x.id!==undefined&&x.instance_id!==undefined&&x.id!==x.instance_id||!['complete','terminated','errored'].includes(x.status))fail();ids.add(id);}
+  const cr=await get('/containers/applications/'+t.application+'/instances-v2',{state:'active',per_page:100}),cs=envelope(cr);if(!Array.isArray(cs)||cs.length||cr.result_info?.cursor||cr.result_info?.next_cursor||cr.result_info?.count!==undefined&&cr.result_info.count!==0||cr.result_info?.total_count!==undefined&&cr.result_info.total_count!==0)fail();
   for(const n of [W,OP])for(const part of ['schedules','tails']){const r=envelope(await get('/workers/scripts/'+n+'/'+part)),rows=Array.isArray(r)?r:r?.[part];if(!Array.isArray(rows)||rows.length)fail();}
  };
  const counts=async()=>{
@@ -68,7 +70,7 @@ export async function runCatalogDiscoveryControl(input,context={}){
  const assertPointers=async expected=>{pointer(await current(W),expected.versionId,expected.deploymentId);pointer(await current(OP),p.baseline.operatorVersion,p.baseline.operatorDeployment);};
  const noTag=async tag=>{
   let page=1,total=null,seen=new Set();
-  for(;;){const r=await get('/workers/workers/'+W+'/versions',{page,per_page:100}),rows=envelope(r),i=r.result_info;if(!Array.isArray(rows)||!i||i.page!==page||i.per_page!==100||i.count!==rows.length||!Number.isSafeInteger(i.total_count)||i.total_count<0||i.cursor||i.next_cursor)fail();const pages=Math.max(1,Math.ceil(i.total_count/100));if(pages>20||i.total_pages!==undefined&&i.total_pages!==pages||rows.length!==Math.min(100,Math.max(0,i.total_count-(page-1)*100))||total!==null&&total!==i.total_count)fail();total=i.total_count;
+  for(;;){const r=await get('/workers/workers/'+W+'/versions',{page,per_page:100}),rows=envelope(r),i=r.result_info;if(!Array.isArray(rows)||!i||i.page!==page||i.per_page!==100||i.count!==rows.length||!Number.isSafeInteger(i.total_count)||i.total_count<0||i.cursor||i.next_cursor)fail();const pages=Math.max(1,Math.ceil(i.total_count/100));if(pages>10||i.total_pages!==undefined&&i.total_pages!==pages||rows.length!==Math.min(100,Math.max(0,i.total_count-(page-1)*100))||total!==null&&total!==i.total_count)fail();total=i.total_count;
    for(const v of rows){if(!uuid(v.id)||seen.has(v.id)||v.annotations?.['workers/tag']===tag)fail();seen.add(v.id);}if(page===pages)break;page++;
   }if(seen.size!==total)fail();
  };
