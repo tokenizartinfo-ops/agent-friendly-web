@@ -3,6 +3,13 @@ name: AFW public guide entry browser QA
 on:
   pull_request:
     paths:
+      - 'app/page.tsx'
+      - 'app/components/comic-home-intro.tsx'
+      - 'app/components/maturity-map.tsx'
+      - 'lib/home-copy.mjs'
+      - 'lib/home-markdown.mjs'
+      - 'public/images/agent-friendly-call-robots-screen.webp'
+      - 'scripts/check-home-opening-browser.mjs'
       - 'lib/public-mcp-http.mjs'
       - 'test/public-mcp-http.test.mjs'
       - 'public/.well-known/agent-readiness.json'
@@ -67,6 +74,8 @@ jobs:
           node "$AFW_BROWSER_TOOLS/node_modules/playwright/cli.js" install chromium
       - name: Check guide entry on isolated native runtime
         run: node scripts/check-public-guide-start-browser.mjs
+      - name: Check the scene-first home on the same immutable compiled artifact
+        run: node scripts/check-home-opening-browser.mjs
       - name: Preserve the exact qualified public build
         uses: actions/upload-artifact@v4
         with:
@@ -80,6 +89,21 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: afw-guide-start-preview-${{ github.event.pull_request.head.sha }}
-          path: output/playwright/guide-start/
+          path: |
+            output/playwright/guide-start/
+            output/playwright/home-opening/
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Preserve bounded home review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-home-review-${{ github.event.pull_request.head.sha }}
+          path: |
+            output/playwright/home-opening/home-start-es-*.jpg
+            output/playwright/home-opening/receipt.json
+            output/playwright/home-opening/failure.json
+            output/playwright/home-opening/cleanup.json
           if-no-files-found: ignore
           retention-days: 7

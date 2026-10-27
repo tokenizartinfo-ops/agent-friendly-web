@@ -50,7 +50,7 @@ test('comparison begins with the restaurant at AF-2', () => {
 
 test('hero renders the complete call illustration as semantic content', () => {
   assert.match(comicIntro, /<img[\s\S]*className="comic-call-art"/);
-  assert.match(comicIntro, /src="\/images\/agent-friendly-call-robots\.webp"/);
+  assert.match(comicIntro, /src="\/images\/agent-friendly-call-robots-screen\.webp"/);
   assert.match(comicIntro, /alt=\{copy\.heroAlt\}/);
   assert.doesNotMatch(styles, /\.comic-call-hero::before\s*\{/);
   assert.match(styles, /\.comic-call-art\s*\{[^}]*object-fit:\s*contain/s);

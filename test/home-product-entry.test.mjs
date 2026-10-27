@@ -28,7 +28,7 @@ function loadComponent(path) {
   new Function('require', 'module', 'exports', compiled)(realImports, compiledModule, compiledModule.exports);
   return compiledModule.exports;
 }
-const { ComicCallHero, HomeServiceJourney } = loadComponent(fileURLToPath(new URL('../app/components/comic-home-intro.tsx', import.meta.url)));
+const { ComicCallHero, HomeServiceJourney, HomeValueIntroduction } = loadComponent(fileURLToPath(new URL('../app/components/comic-home-intro.tsx', import.meta.url)));
 const { HomeExperience } = loadComponent(fileURLToPath(new URL('../app/page.tsx', import.meta.url)));
 
 for (const [locale, dossier] of [['es', '/expediente'], ['en', '/en/dossier'], ['pt', '/pt/dossie']]) {
@@ -38,7 +38,9 @@ for (const [locale, dossier] of [['es', '/expediente'], ['en', '/en/dossier'], [
       React.createElement(ComicCallHero, { locale }), React.createElement(HomeServiceJourney, { locale })));
     assert.match(html, /href="#tu-primer-paso"/);
     assert.match(html, /id="tu-primer-paso"/);
-    assert.ok(html.indexOf('href="#tu-primer-paso"') < html.indexOf('class="comic-call-art"'), 'the action must precede the large illustration');
+    assert.ok(html.indexOf('class="comic-call-art"') < html.indexOf('<h1'), 'the robot scene must precede the call heading');
+    assert.match(html, /<figcaption\b/);
+    assert.equal((html.match(/class="comic-call-bubble/g) || []).length, 2, 'both robots have selectable dialogue');
     assert.ok(html.includes(`href="${dossier}"`), `private entry should remain localized: ${dossier}`);
     assert.equal((html.match(/<h1\b/g) || []).length, 1);
     assert.equal((html.match(/<li\b/g) || []).length, 3, 'the explanation should have three ordered steps');
@@ -48,12 +50,16 @@ for (const [locale, dossier] of [['es', '/expediente'], ['en', '/en/dossier'], [
   });
 }
 
-test('the actual homepage includes the first step before maturity and keeps one main heading', async () => {
+test('the actual homepage explains the offer before layers and the guided first step', async () => {
   for (const locale of ['es', 'en', 'pt']) {
     const html = renderToStaticMarkup(await HomeExperience({ locale }));
     const step = html.indexOf('id="tu-primer-paso"');
     const maturity = html.indexOf('id="ruta-de-madurez"');
-    assert.ok(step >= 0 && maturity > step, `the homepage should explain the first step before the levels in ${locale}`);
+    const offer = html.indexOf('id="que-hacemos"');
+    assert.ok(offer >= 0 && maturity > offer && step > maturity, `offer, layers and guided first step must follow that order in ${locale}`);
+    assert.equal(typeof HomeValueIntroduction, 'function');
+    assert.match(html, /aria-labelledby="home-value-title"/);
+    assert.match(html, /class="maturity-map-guidance"/);
     assert.equal((html.match(/<h1\b/g) || []).length, 1, `one main heading in ${locale}`);
     assert.match(html, /<h2 id="audit-title"/);
   }
