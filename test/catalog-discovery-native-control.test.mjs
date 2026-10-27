@@ -125,3 +125,50 @@ test('four version pages and seven delayed observations leave exactly64 reads fo
  const pending=runCatalogDiscoveryControl(s.params,s.ctx);for(const ready of seen){await Promise.race([ready,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);}
  const r=await pending;assert.equal(r.status,'opened',JSON.stringify(r));assert.equal(r.apiReads,64);assert.equal(r.mutations.clientPut,1);assert.equal(r.mutations.versionPost,1);assert.equal(r.mutations.deploymentPost,1);assert.equal(r.originalExpiresAt,end);
 });
+
+for(const scenario of ['open-version','open-promotion','catalog-existing','catalog-version','catalog-promotion']){
+ test('transient public registry absence at '+scenario+' is observed without replaying writes',async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});const s=await environment();let p=s.params;
+  if(scenario.startsWith('catalog')){const first=await runCatalogDiscoveryControl(p,s.ctx);s.wall=start+3000;s.rows=[s.grant()];s.activeGrants=1;s.calls=[];p={...p,phase:'catalog',live:live(first)};}
+  let written=scenario.startsWith('catalog'),read=0,release;const stale=new Promise(resolve=>{release=resolve;});
+  const at=scenario==='open-version'||scenario==='catalog-version'?2:scenario==='catalog-existing'?1:3;
+  s.interceptor=async(o,next)=>{const r=await next();if(o.method==='PUT')written=true;if(written&&o.path.endsWith('/bulk/get')&&++read===at){release();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':null}}};}return r;};
+  const pending=runCatalogDiscoveryControl(p,s.ctx);await Promise.race([stale,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);const r=await pending;
+  assert.equal(r.status,scenario.startsWith('catalog')?'catalog_attached':'opened',JSON.stringify(r));assert.equal(r.mutations.clientPut,scenario.startsWith('catalog')?0:1);assert.equal(r.mutations.versionPost,1);assert.equal(r.mutations.deploymentPost,1);assert.equal(r.registryRechecks,1);assert.equal(r.originalExpiresAt,end);assert.ok(r.apiReads<=64);
+ });
+}
+test('registry rechecks share one budget across opening admission points',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});const s=await environment();let written=false,read=0,delayed=0;const releases=[],seen=Array.from({length:9},()=>new Promise(resolve=>releases.push(resolve)));
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='PUT')written=true;if(written&&o.path.endsWith('/bulk/get')){read++;if(read<=4||read>=6&&read<=10){releases[delayed++]?.();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':null}}};}}return r;};
+ const pending=runCatalogDiscoveryControl(s.params,s.ctx);for(const ready of seen){await Promise.race([ready,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);}
+ const r=await pending;assert.equal(r.status,'uncertain');assert.equal(r.registryRechecks,8);assert.equal(read,10);assert.equal(r.mutations.clientPut,1);assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);assert.equal(r.mayRetry,false);
+});
+test('pointer drift during a later registry wait is revalidated before version creation',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});const s=await environment();let written=false,read=0,release;const stale=new Promise(resolve=>{release=resolve;});
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='PUT')written=true;if(written&&o.path.endsWith('/bulk/get')&&++read===2){s.canary.id='99999999-1111-4111-8111-111111111111';release();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':null}}};}return r;};
+ const pending=runCatalogDiscoveryControl(s.params,s.ctx);await Promise.race([stale,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);const r=await pending;
+ assert.equal(r.status,'uncertain');assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);assert.equal(s.canary.id,'99999999-1111-4111-8111-111111111111');
+});
+test('later visibility observations reserve the promotion tail before changing traffic',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});const s=await environment(),seen=delayedRegistryWithFourVersionPages(s,0);void seen;
+ const pageRequest=s.interceptor;let written=false,read=0;const releases=[],waits=Array.from({length:8},()=>new Promise(resolve=>releases.push(resolve)));
+ s.interceptor=async(o,next)=>{const r=await pageRequest(o,next);if(o.method==='PUT')written=true;if(written&&o.path.endsWith('/bulk/get')&&++read>=3&&read<=10){releases[read-3]();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':null}}};}return r;};
+ const pending=runCatalogDiscoveryControl(s.params,s.ctx);for(const ready of waits){await Promise.race([ready,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);}
+ const r=await pending;assert.equal(r.status,'uncertain');assert.equal(r.stage,'promotion_budget_admission');assert.equal(r.mutations.clientPut,1);assert.equal(r.mutations.versionPost,1);assert.equal(r.mutations.deploymentPost,0);assert.equal(s.canary.versions[0].version_id,s.baseline.pin.baseVersionId);
+});
+
+for(const phase of ['open','catalog']){
+ test('passive activity appearing during '+phase+' version registry wait prevents inactive version creation',async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});const s=await environment();let p=s.params;
+  if(phase==='catalog'){const first=await runCatalogDiscoveryControl(p,s.ctx);s.wall=start+3000;s.rows=[s.grant()];s.activeGrants=1;s.calls=[];p={...p,phase:'catalog',live:live(first)};}
+  let written=phase==='catalog',read=0,active=false,release;const stale=new Promise(resolve=>{release=resolve;});
+  s.interceptor=async(o,next)=>{
+   const r=await next();if(o.method==='PUT')written=true;
+   if(written&&o.path.endsWith('/bulk/get')&&++read===2){active=true;release();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':null}}};}
+   if(active&&o.method==='GET'&&o.path.endsWith('/workflows/afw-release-administrative/instances'))return{...r,result:[{id:'new-active-workflow',status:'running'}],result_info:{page:1,per_page:100,count:1,total_count:1,total_pages:1}};
+   return r;
+  };
+  const pending=runCatalogDiscoveryControl(p,s.ctx);await Promise.race([stale,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);const r=await pending;
+  assert.equal(r.status,phase==='open'?'uncertain':'blocked');assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);assert.equal(s.canary.versions[0].version_id,p.live?.versionId??s.baseline.pin.baseVersionId);
+ });
+}

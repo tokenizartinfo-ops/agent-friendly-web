@@ -12,13 +12,13 @@ export async function runCatalogDiscoveryControl(input,context={}){
  const t=CONTROL_TARGET,R='/accounts/'+t.account,W=t.worker,OP=t.operator,F=t.workflow;
  const mutations={clientPut:0,versionPost:0,deploymentPost:0,clientDelete:0};
  let send;
- let stage='input',terminal=false,apiReads=0,selects=0,registryObservations=0,candidate=null,liveDeployment=null,intendedConfigurationHash=null,p,now,mono,lastW,lastM,endM,timeout;
+ let stage='input',terminal=false,apiReads=0,selects=0,registryObservations=0,registryRechecks=0,candidate=null,liveDeployment=null,intendedConfigurationHash=null,p,now,mono,lastW,lastM,endM,timeout;
  const fail=()=>{throw Error('Own catalog control unavailable');};
  const hex=(x,n)=>typeof x==='string'&&new RegExp('^[a-f0-9]{'+n+'}$').test(x),uuid=x=>typeof x==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(x);
  const canon=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b))):x);
  const hash=async x=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',typeof x==='string'?new TextEncoder().encode(x):x))).map(x=>x.toString(16).padStart(2,'0')).join('');
  const exact=(x,keys)=>{if(!x||Object.getPrototypeOf(x)!==Object.prototype)fail();const d=Object.getOwnPropertyDescriptors(x);if(Reflect.ownKeys(d).length!==keys.length||keys.some(k=>!d[k]?.enumerable||!Object.hasOwn(d[k],'value')))fail();return Object.fromEntries(keys.map(k=>[k,d[k].value]));};
- const result=(status,extra={})=>({status,phase:p?.phase??null,stage,checkedAt:new Date().toISOString(),candidate,liveDeployment,configurationHash:intendedConfigurationHash,apiReads,selects,registryObservations,mutations:{...mutations},mayRetry:false,observedSnapshotOnly:true,apiCancellationSupported:false,operationalReadiness:false,...extra});
+ const result=(status,extra={})=>({status,phase:p?.phase??null,stage,checkedAt:new Date().toISOString(),candidate,liveDeployment,configurationHash:intendedConfigurationHash,apiReads,selects,registryObservations,registryRechecks,mutations:{...mutations},mayRetry:false,observedSnapshotOnly:true,apiCancellationSupported:false,operationalReadiness:false,...extra});
  const anyWrite=()=>Object.values(mutations).some(Boolean);
  try{
   p=structuredClone(exact(input,['mode','phase','window','baseline','live']));
@@ -80,16 +80,15 @@ export async function runCatalogDiscoveryControl(input,context={}){
  const ownedClient=actual=>{if(!actual||canon(actual.value)!==canon(expectedClient.value)||actual.expiration!==expectedClient.expiration||canon(actual.metadata)!==canon(clientMetadata))fail();};
  // KV visibility is eventual. Observe only after an acknowledged single write;
  // never repeat that write, accept a foreign record, or renew any deadline.
- const observeRegistry=async present=>{
-  const observationStage=present?'registry_readback':'client_delete_readback';
+ const observeRegistry=async(present,observationStage=present?'registry_readback':'client_delete_readback')=>{
   for(let n=0;n<9;n++){
    stage=observationStage;check();registryObservations++;
    const actual=await readClient();
    if(actual!==null){ownedClient(actual);if(present)return;}
    else if(!present)return;
    const w=check();
-   if(n===8||endM-lastM<=7500||p.phase!=='close'&&w+7500>=p.window.expiresAt-90000){stage=observationStage+'_timeout';fail();}
-   await new Promise(resolve=>setTimeout(resolve,7500));check();
+   if(n===8||registryRechecks>=8||endM-lastM<=7500||p.phase!=='close'&&w+7500>=p.window.expiresAt-90000){stage=observationStage+'_timeout';fail();}
+   registryRechecks++;await new Promise(resolve=>setTimeout(resolve,7500));check();
   }
  };
  const expectedConfig=async payload=>{
@@ -112,7 +111,7 @@ export async function runCatalogDiscoveryControl(input,context={}){
   // Reconstructing public registry data for closure never renews its deadline.
   const initial=p.mode==='preflight'||p.phase==='close'?p.window.startAt:check();
   window=prepareCatalogDiscoveryWindow(p.window,{now:initial});expectedClient=createCatalogDiscoveryClient(window,{now:initial});clientMetadata={purpose:'afw.catalog-discovery-public-client.v1',trialId:p.window.trialId,valueHash:await hash(canon(expectedClient.value))};check();
-  const existing=await readClient();if(p.phase==='open'){if(existing!==null)fail();}else if(p.phase==='catalog'&&existing!==null)ownedClient(existing);
+  const existing=p.phase==='catalog'?null:await readClient();if(p.phase==='open'&&existing!==null)fail();
   if(p.phase==='close'){
    stage='close_admission';await assertPointers(expectedCurrent);await passive();
    if(p.mode==='preflight')return result('preflight_passed',{alreadyClosed});
@@ -134,23 +133,27 @@ export async function runCatalogDiscoveryControl(input,context={}){
    return observed;
   };
   if(p.phase==='catalog'){
-   stage='primary_grant';ownedClient(existing);if(c.active_grants!==1)fail();grant=await readPrimaryGrant();
+   stage='primary_grant';await observeRegistry(true,'catalog_registry_readback');stage='primary_grant';if(c.active_grants!==1)fail();grant=await readPrimaryGrant();
   }
   stage='payload';const descriptor=createCatalogDiscoveryVersion({stage:p.phase==='open'?'oauth':'catalog',base,window,...grant?{grant}:{},now:p.mode==='preflight'?p.window.startAt:check()}),payload=descriptor.payload,configurationHash=await expectedConfig(payload);intendedConfigurationHash=configurationHash;check();await noTag(payload.annotations['workers/tag']);
   if(p.mode==='preflight')return result('preflight_passed',{configurationHash});
   if(p.phase==='open'){
-   stage='registry_admission';await assertPointers(expectedCurrent);await passive();if((await counts()).active_grants!==0||await readClient()!==null)fail();
+   // The host is still the verified closed base. This write registers only
+   // public client metadata; fresh passive admission is at the version effect.
+   stage='registry_admission';await assertPointers(expectedCurrent);if((await counts()).active_grants!==0||await readClient()!==null)fail();
    const a=envelope(await call({method:'PUT',path:kv+'/bulk',body:[{key:expectedClient.key,value:JSON.stringify(expectedClient.value),expiration:expectedClient.expiration,metadata:clientMetadata}]},'clientPut'));
    stage='registry_acknowledgement';if(a?.successful_key_count!==1||!Array.isArray(a.unsuccessful_keys)||a.unsuccessful_keys.length)fail();await observeRegistry(true);
   }
-  // The fixed version/promotion/readback tail needs27 API reads. Do not
+  // The fixed version/passive/promotion/readback tail needs35 API reads. Do not
   // create a version when pagination and visibility observations spent them.
-  stage='version_budget_admission';if(apiReads+27>64)fail();
-  stage='version_admission';await assertPointers(expectedCurrent);await phaseGrantSnapshot();ownedClient(await readClient());
+  stage='version_budget_admission';if(apiReads+35>64)fail();
+  stage='version_admission';await observeRegistry(true,'version_registry_readback');stage='version_admission';await passive();await assertPointers(expectedCurrent);await phaseGrantSnapshot();
+  stage='version_budget_admission';if(apiReads+24>64)fail();
   stage='inactive_version';const made=envelope(await call({method:'POST',path:R+'/workers/workers/'+W+'/versions',query:{deploy:false},body:payload},'versionPost'));candidate=made?.id;
   if(!uuid(candidate)||candidate===closed.versionId||made.exports_reconciliation!==undefined&&(!made.exports_reconciliation||Object.values(made.exports_reconciliation).some(x=>!Array.isArray(x)||x.length)))fail();
   const newV=await moduleProof(await version(W,candidate),candidate,p.baseline.pin.workerHash,p.baseline.pin.workerBytes,configurationHash);if(newV.bindings?.length!==30||newV.annotations?.['workers/tag']!==payload.annotations['workers/tag'])fail();
-  stage='promotion_admission';await assertPointers(expectedCurrent);await passive();await phaseGrantSnapshot();ownedClient(await readClient());
+  stage='promotion_admission';await observeRegistry(true,'promotion_registry_readback');stage='promotion_admission';await assertPointers(expectedCurrent);await passive();await phaseGrantSnapshot();
+  stage='promotion_budget_admission';if(apiReads+12>64)fail();
   stage='promotion';const deploymentId=await promotion(candidate,expectedCurrent.deploymentId);
   stage='primary_readback';await moduleProof(await version(W,candidate),candidate,p.baseline.pin.workerHash,p.baseline.pin.workerBytes,configurationHash);await passive();await phaseGrantSnapshot();pointer(await current(OP),p.baseline.operatorVersion,p.baseline.operatorDeployment);pointer(await current(W),candidate,deploymentId);
   return result(p.phase==='open'?'opened':'catalog_attached',{versionId:candidate,deploymentId,configurationHash,originalExpiresAt:p.window.expiresAt});
