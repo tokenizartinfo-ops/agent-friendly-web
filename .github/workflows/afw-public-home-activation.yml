@@ -28,7 +28,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   verify:
-    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && (github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository)
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && ((github.event_name == 'workflow_dispatch' && inputs.operation == 'verify_only') || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository))
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
@@ -55,7 +55,6 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   activate:
-    needs: verify
     if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.operation == 'activate'
     environment: afw-public-release
     runs-on: ubuntu-24.04
@@ -71,6 +70,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Verify the controller and observer in this same executor before access
+        run: |
+          python3 -m unittest discover -s test -p public_home_activation_test.py -v
+          node --test test/public-home-acceptance.test.mjs
+          python3 scripts/public-home-activate.py verify_only
       - name: Check, stage, verify, activate and close in this executor
         env:
           GH_TOKEN: ${{ github.token }}

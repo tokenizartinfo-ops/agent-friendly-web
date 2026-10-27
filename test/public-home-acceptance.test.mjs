@@ -18,7 +18,7 @@ test('normal reads omit override while stage0 has only the fixed candidate',asyn
   let seen;const guarded=makeGuardedFetch({mode,notAfter:Date.now()+5000,fetchImpl:async(_,init)=>{seen=init;return new Response('{}');}});
   await guarded('https://agentfriendlyweb.dev/mcp',{method:'POST',headers:{accept:'application/json, text/event-stream','content-type':'application/json'},body:bodies.initialize});
   assert.equal(seen.redirect,'manual');assert.equal(seen.credentials,'omit');
-  assert.equal(seen.headers.get('Cloudflare-Workers-Version-Overrides'),mode==='stage0'?'agent-friendly-web-web-production="1772ceae-7e8d-4dbc-bc1d-0ade956a3e45"':null);
+  assert.equal(seen.headers.get('Cloudflare-Workers-Version-Overrides'),mode==='stage0'?'agent-friendly-web-web-production="73a52556-46d3-49e9-a09b-c195a9515ce6"':null);
  }
 });
 test('expired or unknown observation cannot emit a request',async()=>{
