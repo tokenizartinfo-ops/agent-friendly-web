@@ -190,6 +190,7 @@ def qualifier_context(env, checked_out):
 
 
 PACKET_INVENTORIES = {
+    "config/public-home-entry-delivery.v1.json": "docs/evidence/2026-10-27-public-home-entry/qualified-inventory.json",
     "config/public-cloud-delivery.v1.json": "docs/evidence/2026-10-23-public-mail-a2a/qualified-inventory.json",
     "config/public-json-budget-delivery.v1.json": "docs/evidence/2026-10-24-public-json-budget/qualified-inventory.json",
 }

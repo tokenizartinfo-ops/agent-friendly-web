@@ -1,0 +1,9 @@
+# Entrega pública AFW — apertura humana —27oct2026
+
+Alcance: solo Worker público agent-friendly-web-web-production/cuenta85d0d5dadac3341a564f22ce885e9eec. Gabriel aprobó la composición y publicar la mejora. No canary, operador, Container, OAuth, datos ni correo de Max.
+
+PR607 integral y PR608 backport mínimo. Public merge28ca8d49 tiene el mismo árbol3e929796 que la fuente3faff378. Nunca desplegar main. Tests: CI pública40515062209; browser40515061920 comprobó guía y home ES/EN/PT a1440/390/621/768/820/961,72capturas home,338archivos/5760153bytes inmutables, cierre proceso/puerto. Revisión única y corrección única documentadas en607. Imagen WebP274354bytes/1672x941; SHA256b6265be1ff69d378bfce32a91f50dcb4a3bbb397f8ab423c5d29f24647839337. Original preservado.
+
+Plan: agregar perfil cerrado home_entry, paquete/inventario exactos y workflow manual propio; conservar perfiles legacy/json_budget y rechazos. RED40515263626 rechazó home_entry antes de implementación (dos errores esperados,19otras pruebas verdes). Verificación offline en Actions, sin rebuild ni credenciales; una revisión independiente del adaptador y una pasada de corrección. Solo tras aceptación/merge: una carga inactiva con secreto existente AFW_PUBLIC_UPLOAD_TOKEN en environment afw-public-release; lectura de configuración vigente/rollback1772 antes y después, cero tráfico nuevo. El recibo fija candidata/tag para posterior activación acotada, nunca repetir upload por ACK desconocido. No invoke workflows antiguos consumidos. Caduca paquete3nov13:48UTC y permiso30oct23:59Argentina; no renovación automática.
+
+Baseline fechado1772/DEP12373:10bindings; hashes config en contrato, no valores privados. El cargador reconsulta settings/versión/deployment/subdomain y falla cerrado ante deriva. No grants/tokens nuevos ni producción privada. Preparación/carga no acreditan activación, guardia o PCoff. Registro de promoción y rollback se añadirá solo con evidencia.
