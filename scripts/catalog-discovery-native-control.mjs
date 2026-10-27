@@ -12,13 +12,13 @@ export async function runCatalogDiscoveryControl(input,context={}){
  const t=CONTROL_TARGET,R='/accounts/'+t.account,W=t.worker,OP=t.operator,F=t.workflow;
  const mutations={clientPut:0,versionPost:0,deploymentPost:0,clientDelete:0};
  let send;
- let stage='input',terminal=false,apiReads=0,selects=0,registryObservations=0,registryRechecks=0,candidate=null,liveDeployment=null,intendedConfigurationHash=null,catalogDispatchBefore=null,p,now,mono,lastW,lastM,endM,timeout;
+ let stage='input',terminal=false,invocationDeadlineReached=false,apiReads=0,selects=0,registryObservations=0,registryRechecks=0,candidate=null,liveDeployment=null,intendedConfigurationHash=null,catalogDispatchBefore=null,p,now,mono,lastW,lastM,endM,timeout;
  const fail=()=>{throw Error('Own catalog control unavailable');};
  const hex=(x,n)=>typeof x==='string'&&new RegExp('^[a-f0-9]{'+n+'}$').test(x),uuid=x=>typeof x==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(x);
  const canon=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b))):x);
  const hash=async x=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',typeof x==='string'?new TextEncoder().encode(x):x))).map(x=>x.toString(16).padStart(2,'0')).join('');
  const exact=(x,keys)=>{if(!x||Object.getPrototypeOf(x)!==Object.prototype)fail();const d=Object.getOwnPropertyDescriptors(x);if(Reflect.ownKeys(d).length!==keys.length||keys.some(k=>!d[k]?.enumerable||!Object.hasOwn(d[k],'value')))fail();return Object.fromEntries(keys.map(k=>[k,d[k].value]));};
- const result=(status,extra={})=>({status,phase:p?.phase??null,stage,checkedAt:new Date().toISOString(),candidate,liveDeployment,configurationHash:intendedConfigurationHash,apiReads,selects,registryObservations,registryRechecks,mutations:{...mutations},mayRetry:false,observedSnapshotOnly:true,apiCancellationSupported:false,operationalReadiness:false,...extra});
+ const result=(status,extra={})=>({status,phase:p?.phase??null,stage,checkedAt:new Date().toISOString(),candidate,liveDeployment,configurationHash:intendedConfigurationHash,apiReads,selects,registryObservations,registryRechecks,mutations:{...mutations},mayRetry:false,observedSnapshotOnly:true,apiCancellationSupported:false,operationalReadiness:false,...invocationDeadlineReached?{deadlineExceeded:true}:{},...extra});
  const anyWrite=()=>Object.values(mutations).some(Boolean);
  try{
   p=structuredClone(exact(input,['mode','phase','window','baseline','live']));
@@ -33,7 +33,7 @@ export async function runCatalogDiscoveryControl(input,context={}){
   if(!Number.isSafeInteger(lastW)||lastW<0||!Number.isFinite(lastM))fail();
  }catch{return result('blocked');}
  const check=()=>{
-  const w=now(),m=mono();if(terminal||context.request!==send||context.accountId!==t.account||!Number.isSafeInteger(w)||w<0||!Number.isFinite(m)||w<lastW||m<lastM||m>=endM)fail();
+  const w=now(),m=mono();if(Number.isFinite(m)&&Number.isFinite(endM)&&endM>lastM&&m>=endM)invocationDeadlineReached=true;if(terminal||context.request!==send||context.accountId!==t.account||!Number.isSafeInteger(w)||w<0||!Number.isFinite(m)||w<lastW||m<lastM||m>=endM)fail();
   if(p.mode==='live'&&p.phase!=='close'&&(w<p.window.startAt||w>=p.window.expiresAt))fail();
   if(p.phase==='catalog'&&catalogDispatchBefore!==null&&w>=catalogDispatchBefore)fail();lastW=w;lastM=m;return w;
  };
@@ -159,5 +159,5 @@ export async function runCatalogDiscoveryControl(input,context={}){
   stage='primary_readback';await moduleProof(await version(W,candidate),candidate,p.baseline.pin.workerHash,p.baseline.pin.workerBytes,configurationHash);await passive();await phaseGrantSnapshot();pointer(await current(OP),p.baseline.operatorVersion,p.baseline.operatorDeployment);pointer(await current(W),candidate,deploymentId);
   return result(p.phase==='open'?'opened':'catalog_attached',{versionId:candidate,deploymentId,configurationHash,originalExpiresAt:p.window.expiresAt,...grant?{catalogDispatchBefore:grant.catalogDispatchBefore}:{}});
  }catch{return result(anyWrite()?'uncertain':'blocked');}};
- let timer;try{return await Promise.race([work(),new Promise(resolve=>{timer=setTimeout(()=>{terminal=true;resolve(result(anyWrite()?'uncertain':'blocked',{deadlineExceeded:true}));},timeout);})]);}finally{clearTimeout(timer);terminal=true;}
+ let timer;try{return await Promise.race([work(),new Promise(resolve=>{timer=setTimeout(()=>{invocationDeadlineReached=true;terminal=true;resolve(result(anyWrite()?'uncertain':'blocked',{deadlineExceeded:true}));},timeout);})]);}finally{clearTimeout(timer);terminal=true;}
 }

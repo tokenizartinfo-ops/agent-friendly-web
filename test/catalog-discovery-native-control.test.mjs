@@ -209,3 +209,29 @@ test('time crossing after the final grant observation is fenced at the effect bo
  const r=await runCatalogDiscoveryControl({...s.params,phase:'catalog',live:live(first)},s.ctx);
  assert.equal(r.status,'blocked',JSON.stringify(r));assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);
 });
+
+test('observed invocation deadline after initial read is preserved in the blocked receipt',async()=>{
+ const s=await environment();s.interceptor=async(o,next)=>{const r=await next();s.mono=110000;return r;};
+ const r=await runCatalogDiscoveryControl(s.params,s.ctx);assert.equal(r.status,'blocked');assert.equal(r.deadlineExceeded,true);
+ assert.equal(writes(s).length,0);assert.equal(r.apiCancellationSupported,false);assert.equal(r.mayRetry,false);
+});
+test('observed invocation deadline after registry ACK stays uncertain without replay',async()=>{
+ const s=await environment();s.interceptor=async(o,next)=>{const r=await next();if(o.method==='PUT')s.mono=110000;return r;};
+ const r=await runCatalogDiscoveryControl(s.params,s.ctx);assert.equal(r.status,'uncertain');assert.equal(r.deadlineExceeded,true);
+ assert.equal(r.mutations.clientPut,1);assert.equal(r.mutations.versionPost,0);assert.equal(s.calls.filter(o=>o.method==='PUT').length,1);assert.ok(s.client);assert.equal(r.mayRetry,false);
+});
+test('observed invocation deadline reading the new module retains the inactive candidate',async()=>{
+ const s=await environment();let made;
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='POST'&&o.path.endsWith('/versions'))made=r.result.id;if(made&&o.method==='GET'&&o.path.endsWith('/versions/'+made))s.mono=110000;return r;};
+ const r=await runCatalogDiscoveryControl(s.params,s.ctx);assert.equal(r.status,'uncertain');assert.equal(r.stage,'inactive_version');assert.equal(r.deadlineExceeded,true);
+ assert.equal(r.candidate,made);assert.equal(r.mutations.versionPost,1);assert.equal(r.mutations.deploymentPost,0);assert.ok(s.versions.has(made));assert.equal(s.canary.versions[0].version_id,s.baseline.pin.baseVersionId);assert.equal(r.apiCancellationSupported,false);
+});
+test('business window and catalog dispatch cutoff are distinct from invocation timeout',async()=>{
+ const s=await environment();s.wall=end;const expired=await runCatalogDiscoveryControl(s.params,s.ctx);assert.equal(expired.status,'blocked');assert.notEqual(expired.deadlineExceeded,true);assert.equal(writes(s).length,0);
+ const t=await environment(),opened=await runCatalogDiscoveryControl(t.params,t.ctx);t.wall=start+242000;t.rows=[t.grant()];t.activeGrants=1;t.calls=[];
+ const cut=await runCatalogDiscoveryControl({...t.params,phase:'catalog',live:live(opened)},t.ctx);assert.equal(cut.status,'blocked');assert.notEqual(cut.deadlineExceeded,true);assert.equal(writes(t).length,0);
+});
+test('invalid or unrepresentable monotonic readings are not reported as elapsed budget',async()=>{
+ for(const value of [NaN,Infinity,-1]){const s=await environment();s.interceptor=async(o,next)=>{const r=await next();s.mono=value;return r;};const r=await runCatalogDiscoveryControl(s.params,s.ctx);assert.equal(r.status,'blocked');assert.notEqual(r.deadlineExceeded,true);assert.equal(writes(s).length,0);}
+ const s=await environment();s.ctx.monotonic=()=>1e308;const r=await runCatalogDiscoveryControl(s.params,s.ctx);assert.equal(r.status,'blocked');assert.notEqual(r.deadlineExceeded,true);assert.equal(writes(s).length,0);
+});
