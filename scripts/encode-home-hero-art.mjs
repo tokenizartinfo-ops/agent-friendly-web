@@ -22,6 +22,10 @@ assert.equal(meta.format,'webp');assert.equal(meta.width,1672);assert.equal(meta
 assert.ok(image.length>0&&image.length<450000,'mobile asset stays bounded');
 await mkdir('output/home-hero-art',{recursive:true});
 await writeFile('output/home-hero-art/agent-friendly-call-robots-screen.webp',image);
+try {
+ const committed=await readFile('public/images/agent-friendly-call-robots-screen.webp');
+ assert.deepEqual(committed,image,'committed illustration matches the qualified encoding');
+} catch(error) { if(error.code!=='ENOENT')throw error; }
 const receipt={source:c,bytes:image.length,sha256:hash(image),width:meta.width,height:meta.height,sourceRevision:process.env.AFW_QA_REVISION,runId:process.env.GITHUB_RUN_ID,published:false};
 await writeFile('output/home-hero-art/receipt.json',JSON.stringify(receipt,null,2)+'\n');
 console.log(JSON.stringify(receipt));
