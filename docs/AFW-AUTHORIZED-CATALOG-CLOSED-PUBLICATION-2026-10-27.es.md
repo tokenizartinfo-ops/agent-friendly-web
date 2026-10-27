@@ -1,0 +1,19 @@
+# AFW: catálogo autorizado y publicación cerrada · 27oct2026
+
+AFW · publicación cerrada y descubrimiento autorizado · 27oct2026,17:22UTC
+
+Fuente0b07456961564f3be99300e975c7884deba5745e/treee6849a8eca90e84c42f5834220d9ce5394a9560d integra PR613 (catálogo autorizado sin arrancar/admitir motor) y PR614 (dependencia exacta Workers AI para publicación precompilada). CI40547448347/40548847532 y paquete23casos pasaron. Publicación nativa nueva36262c5c, ventana original17:16:05.280–17:26:05.280UTC, CONSUMIDA: una instancia17:20:34.998–17:20:38.959, un intento/un recibo primario. No repetir ni extender.
+
+Worker confirmado y promovido una sola vez:60d113fb-06f0-427c-8085-29ccb62da908/DEP519743b9-8d0d-4bc8-815b-1c2eada565cb@100%; móduloSHA256c56b3e2c60a697df00a663cb1e195e8c17e5965df32b35cdb8e862ca3023ae06/1796229bytes, artifactKey2a415a83eed8f574fe72bb5b14cba21cbc61b928f9fb085d6d7eccdd2a7b24f9. Rollbacka75a6e3e-8945-42cf-977e-8a0d7ef0843b legible y verificado.29bindings/8flagsfalse/configbf1d2527f6ddc9b4d8f613c1b62b6474f82acb8f0fcefc81d500831e2509aa12 preservados.
+
+Cierre17:21:14.357:OP2033948b-087c-4cb0-bb73-554e2966e7a6/DEP302f8885-0fa9-4d88-9d2e-5b44c078d930; Workflow1d99dc2c-30a4-4e69-8f28-0466cc1e88d0. Readback17:22:07.661: cron/tails0 ambos, Workflowactivos0, Containerspropios0. No nuevo consentimiento, suscripción, entrega o reserva sucesora. operationalReadiness=false. La cuenta Access puede reutilizarse si sigue vigente, el grant propio retirado a16:10 no.
+
+Artefactos remotos7d:raw40548904536/12754226342,ZIP347652,SHAf2ebb530e2f14644db4f96d59d2086817e717bf4c820b239a668a79ef356d093; publicador40548967458/12753732506,ZIP370244,SHA c74397a1cb9e3eb42f966456b4e8c35674756a06f1e8f3831a7c2696af045c5d. Ambos verificados en RAM contra módulos/manifiestos/plan/procedencia, sin archivos locales. Calificador corrigió una expectativa de campo inexistente de raw; ninguna mutación. Admisión inicial local rechazó120001ms a0API; corregido presupuesto110000ms antes de crear la única instancia, sin repetir plan consumido.
+
+Sigue fijar esta versión exacta en paquete nativo y preparar descubrimiento de metadatos en sesión real sin gastar la reserva; después receptor/plataforma callback+secret, suscripción/challenge, entrega+revisión útil, baja/cierre físico y ensayoPCoff. No pedir apagar todavía. Sin correo nuevo enviado; soporteContainer sigue separado. Homepage pública aceptada sin cambio.
+
+La fuente corrige la dependencia del catálogo respecto del arranque: listar metadatos requiere el grant vigente y ausencia de cierre primario, pero no inicia un Durable Object, no reserva un sucesor, no crea una suscripción y no entrega eventos. Subscribe y unsubscribe conservan su autoridad nativa. La selección prebuilt-closed-publication distingue únicamente incidentes exclusivos de Workers AI con evidencia exacta; el perfil all-workers usado por la confirmación nominal sigue conservador.
+
+El pin fija la fuente histórica0b074569, no el futuro merge de este recibo. Los futuros paquetes deben reconstruirla con su propio lockfile y verificar sus bytes exactos. Fixture start0/expires1 es deliberadamente inerte: jamás invocarlo. Los planes36262c5c/3be5/2b395/107560/C01/133d y la ventana propia16:02–16:12 están consumidos o retirados; no reiniciar ni extender. Se conserva íntegro el recibo anterior de fuenteCF38 como evidencia histórica, no baseline vigente.
+
+El siguiente ensayo elegido es descubrimiento de metadatos propio, acotado y con consentimiento nuevo: debe preparar publicación cerrada, identidad, rollback, ventanas, retirada y comprobación primaria antes de pedir al owner ningún clic. Puede reutilizar la sesión Cloudflare Access si es válida; nunca un grantAFW retirado. No usar Max, crear una cuenta duplicada, inventar callbacks o secretos, activar cron/Containers/reserva antes de tener el receptor comprobado, ni acreditar PCoff desde este bloque.
