@@ -18,13 +18,13 @@ function setup({consent=true}={}){
 
 test('authorized catalog is readable before a native actor exists and never consumes execution',async()=>{
  const f=setup();try{
-  const before=f.db.totalChanges??null;
+  const before=f.db.prepare('SELECT total_changes() n').get().n;
   assert.equal(await f.authority.list(),await f.reference());
   assert.equal(await f.authority.list(),await f.reference());
   assert.equal(f.gets(),0);assert.equal(f.calls(),0);assert.equal(f.boots(),0);assert.equal(f.sends(),0);
   assert.equal(f.db.prepare('SELECT COUNT(*) n FROM dossier_node_process_admissions').get().n,0);
   assert.equal(f.rows().length,0);
-  if(before!==null)assert.equal(f.db.totalChanges,before);
+  assert.equal(f.db.prepare('SELECT total_changes() n').get().n,before);
  }finally{f.close();}
 });
 
