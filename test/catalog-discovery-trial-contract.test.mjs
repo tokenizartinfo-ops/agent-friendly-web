@@ -30,7 +30,7 @@ test('public client has only the fixed ChatGPT callback and a deadline-bounded K
 });
 test('artifact proof rejects mismatched bytes, malformed secrets, nonclosed flags and duplicate bindings',async()=>{
  const f=await fixture();const proof=await inspectCatalogDiscoveryArtifact(f);assert.equal(proof.versionId,id);assert.equal(proof.workerHash,f.pin.workerHash);
- for(const mutate of [x=>x.v.payload.modules[0].content_base64=Buffer.from('wrong').toString('base64'),x=>x.v.payload.bindings[0].text='true',x=>x.v.payload.bindings.push(x.v.payload.bindings[0]),x=>x.v.payload.bindings.find(b=>b.type==='secret_text').text='private-value',x=>x.v.urls=['https://unexpected.example'],x=>x.pin.workerBytes++]){const x=structuredClone(f);mutate(x);await assert.rejects(inspectCatalogDiscoveryArtifact(x));}
+ for(const mutate of [x=>x.v.modules[0].content_base64=Buffer.from('wrong').toString('base64'),x=>x.v.bindings[0].text='true',x=>x.v.bindings.push(x.v.bindings[0]),x=>x.v.bindings.find(b=>b.type==='secret_text').text='private-value',x=>x.v.urls=['https://unexpected.example'],x=>x.pin.workerBytes++]){const x=structuredClone(f);mutate(x);await assert.rejects(inspectCatalogDiscoveryArtifact(x));}
 });
 test('new grant proof requires an unambiguous current owner, exchange, exact scope and original deadline',()=>{
  const p=plan(),g=inspectCatalogDiscoveryGrant({rows:[row()],window:p,now:start+3000});assert.equal(g.projectId,'oauth-canary-owner');assert.equal(g.expiresAt,end);
