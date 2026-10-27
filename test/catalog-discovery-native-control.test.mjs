@@ -61,3 +61,41 @@ test('grant withdrawal observed after promotion is uncertain and retains the int
  s.interceptor=async(o,next)=>{const r=await next();if(o.method==='POST'&&o.path.endsWith('/deployments')){s.activeGrants=0;s.rows[0].revoked_at=new Date(start+2500).toISOString();}return r;};
  const r=await runCatalogDiscoveryControl({...s.params,phase:'catalog',live:live(first)},s.ctx);assert.equal(r.status,'uncertain',JSON.stringify(r));assert.equal(r.mutations.deploymentPost,1);assert.match(r.configurationHash,/^[a-f0-9]{64}$/);assert.ok(r.candidate);assert.ok(r.liveDeployment);
 });
+
+test('acknowledged public client may become visible on a later bounded read without another PUT',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});
+ const s=await environment();let written=false,read=0,release;
+ const stale=new Promise(resolve=>{release=resolve;});
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='PUT')written=true;if(written&&o.path.endsWith('/bulk/get')&&++read===1){release();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':null}}};}return r;};
+ const pending=runCatalogDiscoveryControl(s.params,s.ctx);await Promise.race([stale,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);
+ const r=await pending;assert.equal(r.status,'opened',JSON.stringify(r));assert.equal(s.calls.filter(o=>o.method==='PUT').length,1);assert.equal(r.mutations.versionPost,1);assert.equal(r.mutations.deploymentPost,1);assert.equal(s.client.expiration,Math.floor(end/1000));assert.equal(r.originalExpiresAt,end);
+});
+test('invisible acknowledged public client exhausts bounded observations without version, promotion or PUT replay',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});
+ const s=await environment();let written=false,read=0;const releases=[],seen=Array.from({length:9},()=>new Promise(resolve=>releases.push(resolve)));
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='PUT')written=true;if(written&&o.path.endsWith('/bulk/get')){releases[read++]?.();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':null}}};}return r;};
+ const pending=runCatalogDiscoveryControl(s.params,s.ctx);
+ for(let n=0;n<8;n++){await Promise.race([seen[n],pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);}
+ const r=await pending;assert.equal(r.status,'uncertain');assert.equal(r.stage,'registry_readback_timeout');assert.equal(read,9);assert.equal(s.calls.filter(o=>o.method==='PUT').length,1);assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);assert.equal(r.mayRetry,false);
+});
+test('foreign registry value after an absent observation is rejected without traffic changes',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});
+ const s=await environment();let written=false,read=0,release;const stale=new Promise(resolve=>{release=resolve;});
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='PUT')written=true;if(written&&o.path.endsWith('/bulk/get')){read++;if(read===1){release();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':null}}};}s.client.metadata.trialId='b'.repeat(64);return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':s.client}}};}return r;};
+ const pending=runCatalogDiscoveryControl(s.params,s.ctx);await Promise.race([stale,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);const r=await pending;
+ assert.equal(r.status,'uncertain');assert.equal(read,2);assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);assert.equal(s.client.metadata.trialId,'b'.repeat(64));assert.equal(r.mutations.clientDelete,0);
+});
+test('closure observes delayed tombstone after one DELETE while keeping the host closed',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});
+ const s=await environment(),opened=await runCatalogDiscoveryControl(s.params,s.ctx);s.wall=end+1;s.calls=[];let deleted=false,staleOnce=false,release,previous;const stale=new Promise(resolve=>{release=resolve;});
+ s.interceptor=async(o,next)=>{if(o.method==='DELETE')previous=structuredClone(s.client);const r=await next();if(o.method==='DELETE')deleted=true;if(deleted&&!staleOnce&&o.path.endsWith('/bulk/get')){staleOnce=true;release();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':previous}}};}return r;};
+ const pending=runCatalogDiscoveryControl({...s.params,phase:'close',live:live(opened)},s.ctx);await Promise.race([stale,pending]);await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);const r=await pending;
+ assert.equal(r.status,'closed',JSON.stringify(r));assert.equal(s.canary.versions[0].version_id,s.baseline.pin.baseVersionId);assert.equal(s.calls.filter(o=>o.method==='DELETE').length,1);assert.equal(s.client,null);assert.equal(r.permissionWithdrawalProven,false);
+});
+test('visibility wait respects the original deadline and never starts a late version write',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});
+ const s=await environment();let written=false,release;const stale=new Promise(resolve=>{release=resolve;});
+ s.interceptor=async(o,next)=>{const r=await next();if(o.method==='PUT')written=true;if(written&&o.path.endsWith('/bulk/get')){release();return{...r,result:{values:{'client:afw-chatgpt-pilot-20261003':null}}};}return r;};
+ const pending=runCatalogDiscoveryControl(s.params,s.ctx);await Promise.race([stale,pending]);s.wall=end-89999;await new Promise(resolve=>setImmediate(resolve));t.mock.timers.tick(7500);const r=await pending;
+ assert.equal(r.status,'uncertain');assert.equal(r.mutations.clientPut,1);assert.equal(r.mutations.versionPost,0);assert.equal(r.mutations.deploymentPost,0);assert.equal(r.mayRetry,false);
+});
