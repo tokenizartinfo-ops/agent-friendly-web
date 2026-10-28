@@ -81,3 +81,60 @@ jobs:
             output/mcp-publication-template/build.json
           if-no-files-found: error
           retention-days: 7
+
+  preserve:
+    needs: compile
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: afw-publication-template-${{ github.sha }}
+          path: public-package
+      - name: Preserve only verified public code in a create-only ref
+        uses: actions/github-script@v7
+        with:
+          retries: 0
+          script: |
+            const {readFile,readdir}=await import('node:fs/promises');
+            const {createHash}=await import('node:crypto');
+            const {pathToFileURL}=await import('node:url');
+            const {resolve}=await import('node:path');
+            const {createMcpPublicPublicationSnapshot}=await import(pathToFileURL(resolve('lib/mcp-publication-public-snapshot.mjs')).href);
+            const {owner,repo}=context.repo;
+            if(owner+'/'+repo!=='tokenizartinfo-ops/agent-friendly-web'||context.eventName!=='workflow_dispatch'||context.ref!=='refs/heads/main')throw Error('Public snapshot unavailable');
+            const commit=await github.rest.git.getCommit({owner,repo,commit_sha:context.sha});
+            const expected=['build.json','materializer.mjs','template.json','template.mjs'];
+            const found=(await readdir('public-package')).sort();
+            if(JSON.stringify(found)!==JSON.stringify(expected))throw Error('Public snapshot unavailable');
+            const files={};
+            for(const name of expected)files[name]=await readFile('public-package/'+name,'utf8');
+            const sourceMaterializer=await readFile('lib/mcp-private-publication-template.mjs');
+            const p=await createMcpPublicPublicationSnapshot({files,expectedSourceRevision:context.sha,expectedSourceTree:commit.data.tree.sha,
+              expectedMaterializerHash:createHash('sha256').update(sourceMaterializer).digest('hex')});
+            const made=await github.rest.git.createTree({owner,repo,tree:p.entries.map(({path,mode,type,content})=>({path,mode,type,content}))});
+            if(made.data.truncated||made.data.tree.length!==p.entries.length)throw Error('Public snapshot unavailable');
+            const actual=new Map(made.data.tree.map(e=>[e.path,e]));
+            if(p.entries.some(e=>{const a=actual.get(e.path);return !a||a.sha!==e.sha||a.mode!==e.mode||a.type!==e.type;}))throw Error('Public snapshot unavailable');
+            let current;
+            try{current=await github.rest.git.getRef({owner,repo,ref:p.ref.slice(5)});}catch(e){if(e.status!==404)throw Error('Public snapshot lookup unavailable');}
+            if(current){
+              const existing=await github.rest.git.getCommit({owner,repo,commit_sha:current.data.object.sha});
+              if(existing.data.tree.sha!==made.data.sha)throw Error('Existing public snapshot differs; overwrite denied');
+              core.info(JSON.stringify({sourceRevision:context.sha,tree:made.data.sha,ref:p.ref,created:false,reconciled:true,runtimePublished:false,operationalReadiness:false}));
+            }else{
+              const snapshot=await github.rest.git.createCommit({owner,repo,message:'Preserve public publication template '+context.sha,tree:made.data.sha,parents:[]});
+              await github.rest.git.createRef({owner,repo,ref:p.ref,sha:snapshot.data.sha});
+              core.info(JSON.stringify({sourceRevision:context.sha,tree:made.data.sha,commit:snapshot.data.sha,ref:p.ref,created:true,reconciled:false,runtimePublished:false,operationalReadiness:false}));
+            }

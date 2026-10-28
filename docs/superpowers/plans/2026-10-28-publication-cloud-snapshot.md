@@ -15,8 +15,8 @@
 ## Preflight
 Task1 tests→Task2 export createMcpPublicPublicationSnapshot→Task3 workflow consume mismo contrato; no conflicto. El materializador puro no otorga autoridad.
 ### Task1 RED
-- [ ] Tests de export, roundtrip, bytes/chunks, claves/archivos/caps, pins/flags/hashes, drift y getter.
-- [ ] Workflow targeted tests antes de compile; observar export ausente.
+- [x] Tests de export, roundtrip, bytes/chunks, claves/archivos/caps, pins/flags/hashes, drift y getter.
+- [x] Workflow targeted tests antes de compile; observar export ausente.
 ### Task2 GREEN
 - [ ] Helper puro y tests pasan; no escritura local del owner.
 ### Task3 aceptación
@@ -25,3 +25,5 @@ Task1 tests→Task2 export createMcpPublicPublicationSnapshot→Task3 workflow c
 - [ ] Dispatch main y comprobar nuevo ref/commit/blob hashes sin descargar paquete al PC.
 ## Ledger
 PR623 fuente aceptada, runtime congelado60d/2033 sigue cerrado según8GET28oct12:03UTC; source623mainCI pendiente al redactar. Trabajo sobre fuente no abre grant, consumidor o reserva. User Chrome ya responde y tarea de correo recibió apéndice de paginación/silencio verificado; no es la suscripción AFW.
+
+REDbe4cca64/Actions40685967581/job122808272897:1expectedFAIL exportundefined/function,9SKIP; sin error de sintaxis/import. Suite completa de RED40685967569 todavía en ejecución al observar el fallo dirigido; no se canceló ni reintentó. PR623mainCI40685050446 cerró3039PASS/0FAIL/1SKIP y lint/buildPASS, árbol de merge idéntico al revisado.
