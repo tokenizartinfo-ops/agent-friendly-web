@@ -26,10 +26,10 @@ test('mounted own Worker verifies synthetic remote JWKS, real D1 six phases and 
     async withdrawFixture(){await this.ctx.storage.put('withdrawn',true);}
    }
    export default {async fetch(request,env){if(new URL(request.url).pathname==='/fixture/withdraw'){await env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa')).withdrawFixture();return Response.json(true);}return original.fetch(request,env);}};
-  `},bundle:true,write:false,format:'esm',platform:'browser',external:['cloudflare:workers']});
+  `},bundle:true,write:false,format:'esm',platform:'browser',external:['cloudflare:workers','node:*']});
   let jwksCalls=0;
   const bindings={AFW_QA_HTTP_ENABLED:'false',AFW_QA_HTTP_POLICY:JSON.stringify(f.policy),AFW_QA_PREREGISTRATION:JSON.stringify(scope)};
-  const options={modules:true,compatibilityDate:'2026-09-07',script:bundle.outputFiles[0].text,bindings,d1Databases:{AFW_QA_DB:'synthetic-own-mount-'+crypto.randomUUID()},durableObjects:{AFW_QA_PREREGISTRY:{className:'FixturePrimary',useSQLite:true}},ratelimits:{AFW_QA_OCCURRENCE_RATE_LIMITER:{namespace_id:'synthetic-own-mount-'+crypto.randomUUID(),simple:{limit:10,period:60}}},outboundService:async request=>{assert.equal(request.url,'https://test.cloudflareaccess.com/cdn-cgi/access/certs');jwksCalls++;return Response.json({keys:[jwk]});}};
+  const options={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:bundle.outputFiles[0].text,bindings,d1Databases:{AFW_QA_DB:'synthetic-own-mount-'+crypto.randomUUID()},durableObjects:{AFW_QA_PREREGISTRY:{className:'FixturePrimary',useSQLite:true}},ratelimits:{AFW_QA_OCCURRENCE_RATE_LIMITER:{namespace_id:'synthetic-own-mount-'+crypto.randomUUID(),simple:{limit:10,period:60}}},outboundService:async request=>{assert.equal(request.url,'https://test.cloudflareaccess.com/cdn-cgi/access/certs');jwksCalls++;return Response.json({keys:[jwk]});}};
   runtime=new Miniflare(convertV4MiniflareOptions(options));
   const token=async(patch={})=>new SignJWT({type:'app',common_name:f.policy.auth.clientId,...patch}).setProtectedHeader({alg:'RS256',kid:jwk.kid}).setIssuer('https://test.cloudflareaccess.com').setAudience(f.policy.auth.audience).setSubject('').setExpirationTime('5m').sign(privateKey);
   const jwt=await token(),send=(phase,body,headers={})=>runtime.dispatchFetch(origin+'/assistance/occurrences/'+phase,{method:'POST',headers:{'content-type':'application/json','Cf-Access-Jwt-Assertion':jwt,...headers},body:JSON.stringify(body)});
