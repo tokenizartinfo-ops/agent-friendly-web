@@ -86,7 +86,7 @@ test('captured native RPC callable does not receive a synthetic remote call/appl
 
 test('native Workflow replay cannot accept a cached success after the ORIGINAL trigger plus five seconds',opt,async()=>{
  const f=fixture(),cached=await run(f);assert.equal(cached.status,'retired_verified');for(const k of Object.keys(f.calls))f.calls[k]=0;
- f.move(6000,6000);f.step.do=async()=>{f.calls.steps++;return cached;};
+ f.move(6000,6000);f.step.do=async()=>{f.calls.steps++;return JSON.stringify(cached);};
  const r=await run(f);assert.equal(r.status,'blocked');noEffects(f);
 });
 test('late first execution cannot acquire a fresh lease inside the ten-minute observation policy',opt,async()=>{
@@ -98,7 +98,13 @@ test('native trigger timestamp is required and must be inside the original polic
 });
 test('cached step output must keep exact own identity hash fields and observation time under the original lease',opt,async()=>{
  for(const mutate of [r=>r.evidence.containerId='e'.repeat(64),r=>r.observationHash='e'.repeat(64),r=>r.evidence.observedAt+=1000,r=>r.evidence.physicalStopVerified=false,r=>r.privatePolicy='PRIVATE_SENTINEL']){
- const f=fixture(),cached=structuredClone(await run(f));mutate(cached);for(const k of Object.keys(f.calls))f.calls[k]=0;f.step.do=async()=>{f.calls.steps++;return cached;};
+ const f=fixture(),cached=structuredClone(await run(f));mutate(cached);for(const k of Object.keys(f.calls))f.calls[k]=0;f.step.do=async()=>{f.calls.steps++;return JSON.stringify(cached);};
  const r=await run(f);assert.equal(r.status,'uncertain');assert.equal(r.evidence,undefined);assert.equal(f.calls.steps,1);assert.equal(f.calls.rpc,0);assert.equal(f.calls.gets,0);assert.equal(JSON.stringify(r).includes('PRIVATE_SENTINEL'),false);
  }
+});
+
+test('a valid cached primitive DTO is accepted only inside its SAME original native-trigger lease',opt,async()=>{
+ const f=fixture(),cached=await run(f);assert.equal(cached.status,'retired_verified');for(const k of Object.keys(f.calls))f.calls[k]=0;
+ f.move(100,100);f.step.do=async()=>{f.calls.steps++;return JSON.stringify(cached);};
+ const r=await run(f);assert.equal(r.status,'retired_verified');assert.equal(r.evidence.observedAt,cached.evidence.observedAt);assert.equal(f.calls.steps,1);assert.equal(f.calls.rpc,0);assert.equal(f.calls.gets,0);
 });
