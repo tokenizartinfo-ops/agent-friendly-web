@@ -38,3 +38,6 @@ Pre-flight: the handoff's false mayRestoreAdministration is deliberate; separate
 Ruling: remote Git branch/Actions replaces local skill workspace/worktree/build under the owner's explicit cloud-first preference. PR and issue497 are the durable ledger. No deployment or live control is authorized merely by this source block.
 
 RED observed8c94eedd/CI40728412939/job122957810303:3088PASS/13expected missing-featureFAIL/1existingSKIP. A scoped primary metadata GET28oct16:43:37UTC confirmed operator version855dc5c1 omits exports/containers, while canary6a0c97e9 declares only AfwOwnEventNode/linked Container; fixtures now model the optional operator fields and actual final two false canary flags. No runtime mutation. Implementation begins only after this RED; GREEN/full/native pending. Attachment failed at the app100-attachment cap; no unrelated artifact removed.
+
+
+Diagnostic follow-through: first implementation rejected valid five-group UUIDs before any provider read because its UUID expression omitted the fourth group. The cloud diagnostic confirmed blocked/calls0/puts0 and the validation site. Correct the expression and remove the temporary CI-only transformed-module diagnostic; existing end-to-end positive and uncertain-outcome cases must now pass without weakening the policy.

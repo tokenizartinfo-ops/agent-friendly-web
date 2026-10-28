@@ -81,15 +81,3 @@ test('original deadline includes final post-commit continuation and never report
  f.options.storage={transaction:async fn=>{const r=await base.transaction(fn);if(++n===3)queueMicrotask(()=>queueMicrotask(()=>queueMicrotask(()=>{tick=131;})));return r;}};
  const r=await createSuccessorCanaryRestorer({...f.options,timeoutMs:30}).advance();assert.equal(r.status,'uncertain');assert.equal(f.posts,1);
 });
-
-test('CI-only trace of the rejected synthetic restoration baseline',async()=>{
- const {readFile}=await import('node:fs/promises');
- let source=await readFile(new URL('../lib/mcp-successor-canary-restorer.mjs',import.meta.url),'utf8');
- source=source.replaceAll("from './","from '"+new URL('../lib/',import.meta.url).href);
- const marker="}catch{return outcome(issued?'uncertain':'blocked',planHash?{planHash}:{});}";
- assert.ok(source.includes(marker));
- source=source.replace(marker,"}catch(error){console.log('AFW_CI_DIAGNOSTIC_STACK',String(error.stack).replace(/data:text\\/javascript;base64,[A-Za-z0-9+/=]+/g,'ci-diagnostic'));return outcome(issued?'uncertain':'blocked',planHash?{planHash}:{});}");
- const m=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64')),f=restorationFixture(),r=await m.createSuccessorCanaryRestorer(f.options).advance();
- console.log('AFW_CI_DIAGNOSTIC_RESULT',JSON.stringify({status:r.status,calls:f.calls.length,puts:f.storage.puts}));
- assert.equal(r.status,'restored_observed');
-});
