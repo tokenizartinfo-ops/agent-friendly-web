@@ -57,3 +57,13 @@ test('opt-in denies before any storage access, and in-flight binding drift denie
  const f=await prepared();try{const {env}=f.input;env.AFW_DOSSIER_SUCCESSOR_RETIREMENT_READ_ENABLED='false';env.DB.prepare=()=>assert.fail('disabled SQL');await assert.rejects(observeOwnSuccessorRetiredCustody(f.input));}finally{f.close();}
  const g=await prepared();try{const {env,ctx}=g.input,base=ctx.storage;ctx.storage={transaction:async fn=>{const r=await base.transaction(fn);env.AFW_DOSSIER_SUCCESSOR_POLICY+=' ';return r;}};await assert.rejects(observeOwnSuccessorRetiredCustody(g.input));}finally{g.close();}
 });
+
+test('a stalled primary read has one original deadline and late completion cannot read custody',available,async t=>{
+ const f=await prepared();t.mock.timers.enable({apis:['setTimeout']});try{
+ const {env,ctx}=f.input,prepare=env.DB.prepare;let release,queries=0,reads=0;
+ env.DB.prepare=sql=>sql.includes('dossier_successor_reservations')?{bind:()=>({first:()=>{queries++;return new Promise(resolve=>{release=resolve;});}})}:prepare(sql);
+ ctx.storage={transaction:()=>{reads++;assert.fail('late custody read');}};
+ const pending=observeOwnSuccessorRetiredCustody(f.input);const rejected=assert.rejects(pending);t.mock.timers.tick(5001);await rejected;
+ release?.(null);await Promise.resolve();await Promise.resolve();assert.equal(queries,1);assert.equal(reads,0);
+ }finally{t.mock.timers.reset();f.close();}
+});

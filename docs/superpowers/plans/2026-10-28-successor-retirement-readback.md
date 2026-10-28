@@ -18,10 +18,10 @@
 
 ### Task1 — contrato y RED
 - [x] Registrar diseño/plan y fixtures de observación/casos negativos.
-- [ ] Inspeccionar fallo RED en Actions antes de implementar.
+- [x] Inspeccionar fallo RED en Actions antes de implementar.
 
 ### Task2 — host y RPC
-- [ ] Implementar lib/mcp-own-successor-retirement-host.mjs y el método privado del actor.
+- [x] Implementar lib/mcp-own-successor-retirement-host.mjs y el método privado del actor.
 - [ ] Pasar pruebas unitarias y composición nativa con D1/almacenamiento/RPC reales y autoridad sintética de CI.
 
 ### Task3 — aceptación de fuente
@@ -31,3 +31,5 @@
 
 ## Ledger
 Base00a942219aeb35fab57411d9e26452d3951b5ba8. Ensayo e417 cerrado; estado remoto fechado01:09:35UTC conserva60d/DEP59866a8a y reserva0. La preparación no presume ese estado para una mutación futura. Gabriel descansa hasta al menos28oct08:30ART; no abrir OTP/consentimientos ni solicitar intervención.
+
+RED nativo corregido a93b040f, CI40619221987/job122588871815:3015PASS/2FAIL/5SKIP; export ausente y RPC409 al pedir evidencia200 esperada. La ejecución nativa duró927ms; el tiempo adicional perteneció a la suite completa, NO se probó un bloqueo nativo/proveedor. Intento de cancelar al creer que seguía pendiente recibió completed/no cambio. 9c2df23c acota además solicitudes de la nueva fixture. Sin cambio operativo.
