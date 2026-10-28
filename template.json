@@ -1,0 +1,13 @@
+{
+  "format": "afw-private-confirmation-template-v1",
+  "templateHash": "7afa181c56eb14b064ca63e2f2922d351cb8bb83bd8da08c330762794e3180a8",
+  "templateBytes": 1959118,
+  "slot": "__AFW_PRIVATE_CONFIRMATION_POLICY_V1_7fbe62d8c5434d0c9b171f392c7780dd__",
+  "artifactKey": "075a2d2e01a2ac1f209a0a0f40c8ec3c443dce97ccf80b1b00fc23f43e4c41aa",
+  "workerHash": "1fb741e509edac22047202788f9889fbf8b432334a0e216c7beb977446ffbf98",
+  "programHash": "f6f517c3ac135cfa7b9853137e0487f768b8f24a11e24959a337cac4e28d42e6",
+  "artifactSourceRevision": "cd9161ebf4403bcbe24f03ed82a61c7606cef7f7",
+  "artifactSourceTree": "a4004534171ef12068abed55558ad6e01ebbb44c",
+  "materialized": false,
+  "remotePublished": false
+}
