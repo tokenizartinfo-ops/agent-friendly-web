@@ -13,7 +13,7 @@ test('native Workflow observes fixed successor RPC retirement while ordinary rel
  close(){throw Error('Read-only fixture must not close');}
  }
  export default{fetch(){return new Response(null,{status:404});}};`;
- const compiled=await build({entryPoints:['worker/mcp-release/index.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',sourcemap:false,define:{'globalThis.__AFW_RELEASE_OPERATOR_BUNDLE__':'undefined'});
+ const compiled=await build({entryPoints:['worker/mcp-release/index.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',sourcemap:false,define:{'globalThis.__AFW_RELEASE_OPERATOR_BUNDLE__':'undefined'}});
  let gets=0;
  const bindNode={className:'Own',scriptName:'own',useSQLite:true,uniqueKey:'afw-retirement-native-fixture'};
  const settings=bindings=>convertV4MiniflareOptions({workers:[
