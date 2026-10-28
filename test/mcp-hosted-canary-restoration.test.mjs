@@ -90,3 +90,21 @@ test('a rejected provider response releases its body before handoff can be accep
  const h=createPrivateCanaryRestorationHost(f.options);assert.equal((await h.arm(f.hash)).status,'armed');assert.equal((await h.restore(f.hash)).status,'blocked');
  await new Promise(r=>setTimeout(r,0));assert.equal(cancelled,1);assert.equal(f.f.posts,0);
 });
+
+test('native RPC disposal metadata is released while unexpected evidence remains rejected',async()=>{
+ const {createPrivateCanaryRestorationHost}=await load();
+ for(const mode of ['valid','extra','symbol','getter','dispose-failure']){
+  const f=fixture();let disposals=0,getterReads=0;const get=f.env.AFW_MCP_CLOSURE_NODE.get;
+  f.env.AFW_MCP_CLOSURE_NODE.get=id=>{const original=get(id);return{observeSuccessorRetired:async()=>{
+   const value=await original.observeSuccessorRetired();
+   Object.defineProperty(value,Symbol.dispose,{value(){disposals++;if(mode==='dispose-failure')throw Error('Synthetic disposal failure');}});
+   if(mode==='extra')value.extra=true;
+   if(mode==='symbol')Object.defineProperty(value,Symbol('foreign'),{value:true});
+   if(mode==='getter')Object.defineProperty(value,'programHash',{enumerable:true,get(){getterReads++;return f.f.policy.candidate.programHash;}});
+   return value;
+  }};};
+  const h=createPrivateCanaryRestorationHost(f.options);assert.equal((await h.arm(f.hash)).status,'armed');const result=await h.restore(f.hash);
+  assert.equal(result.status,mode==='valid'?'restored_observed':'blocked',mode);assert.equal(getterReads,0);
+  assert.equal(disposals,mode==='valid'?2:1);assert.equal(f.f.posts,mode==='valid'?1:0);
+ }
+});
