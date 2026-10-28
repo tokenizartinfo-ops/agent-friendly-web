@@ -10,6 +10,7 @@ on:
       - 'worker/**'
       - 'test/mcp-named-confirmation-package.native.mjs'
       - 'test/mcp-private-confirmation-*.test.mjs'
+      - 'test/mcp-named-template-snapshot.test.mjs'
       - 'test/fixtures/inert-named-confirmation-policy.mjs'
       - 'test/fixtures/named-confirmation-compile-fault.mjs'
       - 'test/fixtures/named-confirmation-native-rehearsal.mjs'
@@ -71,6 +72,8 @@ jobs:
       - run: npm ci
       - run: npm ci
         working-directory: frozen
+      - name: Verify public named snapshot contract
+        run: node --test test/mcp-named-template-snapshot.test.mjs
       - name: Rebuild the historical artifact with its own lockfile
         working-directory: frozen
         run: |
