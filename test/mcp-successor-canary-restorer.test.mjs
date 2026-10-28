@@ -81,3 +81,38 @@ test('original deadline includes final post-commit continuation and never report
  f.options.storage={transaction:async fn=>{const r=await base.transaction(fn);if(++n===3)queueMicrotask(()=>queueMicrotask(()=>queueMicrotask(()=>{tick=131;})));return r;}};
  const r=await createSuccessorCanaryRestorer({...f.options,timeoutMs:30}).advance();assert.equal(r.status,'uncertain');assert.equal(f.posts,1);
 });
+
+test('empty passive inventories cannot qualify incomplete or ambiguous primary pages',async t=>{
+ const {createSuccessorCanaryRestorer}=await load();
+ const cases=[
+  {suffix:'/instances-v2',missing:true},
+  {suffix:'/instances-v2',info:null},
+  {suffix:'/instances-v2',info:{per_page:100,page:2,total_pages:2}},
+  {suffix:'/instances-v2',info:{per_page:100,next_page_token:'remaining'}},
+  {suffix:'/instances-v2',info:{per_page:100,page_token:'previous'}},
+  {suffix:'/instances-v2',info:{per_page:1}},
+  {suffix:'/instances-v2',info:{per_page:100,total_count:1}},
+  ...[W,OP].flatMap(n=>['schedules','tails'].flatMap(part=>[
+   {suffix:'/workers/scripts/'+n+'/'+part,info:{page:2,total_pages:2}},
+   {suffix:'/workers/scripts/'+n+'/'+part,info:{has_more:true}},
+   {suffix:'/workers/scripts/'+n+'/'+part,info:{next_page_token:'remaining'}}
+  ]))
+ ];
+ for(const c of cases)await t.test(JSON.stringify(c),async()=>{
+  const f=restorationFixture();f.options.request=async x=>{const r=await f.request(x);if(x.path.endsWith(c.suffix)){if(c.missing)delete r.result_info;else r.result_info=c.info;}return r;};
+  const r=await createSuccessorCanaryRestorer(f.options).advance();
+  assert.equal(r.status,'blocked',JSON.stringify(c));assert.equal(f.posts,0);assert.equal(f.storage.puts,0);
+ });
+});
+
+test('partial passive readback after dispatch stays issued uncertain and cannot retry',async t=>{
+ const {createSuccessorCanaryRestorer}=await load();
+ for(const c of [
+  {suffix:'/instances-v2',info:{per_page:100,page_token:'previous'}},
+  {suffix:'/workers/scripts/'+W+'/tails',info:{next_cursor:'remaining'}}
+ ])await t.test(c.suffix,async()=>{
+  const f=restorationFixture();f.options.request=async x=>{const r=await f.request(x);if(f.posts>0&&x.path.endsWith(c.suffix))r.result_info=c.info;return r;};
+  const one=await createSuccessorCanaryRestorer(f.options).advance();assert.equal(one.status,'uncertain');assert.equal(f.posts,1);assert.equal(f.storage.rows.get(KEY).phase,'issued');
+  assert.equal((await createSuccessorCanaryRestorer(f.options).advance()).status,'uncertain');assert.equal(f.posts,1);assert.equal(f.storage.puts,1);
+ });
+});

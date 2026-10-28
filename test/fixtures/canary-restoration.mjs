@@ -42,7 +42,7 @@ export function restorationFixture({at=Date.UTC(2026,9,28,17),containerId='a'.re
   if([W,OP].some(n=>x.path===ROOT+'/workers/scripts/'+n+'/tails'))return ok([]);
   if(x.path===ROOT+'/workflows/afw-release-administrative')return ok({id:'0ee9231b-8952-46bd-8124-a0c5dbb06dd0',name:'afw-release-administrative',class_name:'AfwReleaseWorkflow',script_name:OP});
   if(x.path===ROOT+'/workflows/afw-release-administrative/instances')return ok([{id:'historical-instance',status:state.active?'running':'complete'}],{per_page:100,count:1,total_count:1});
-  if(x.path===ROOT+'/containers/applications/'+APP+'/instances-v2')return ok([]);
+  if(x.path===ROOT+'/containers/applications/'+APP+'/instances-v2')return ok([],{per_page:100});
   throw Error('Unexpected fixed read '+x.path);
  };
  const options={storage,namespace:{idFromName:name=>{if(name!=='afw-own-event-first-successor-v1')throw Error('Wrong name');return{toString:()=>containerId};},idFromString:id=>({toString:()=>id})},readControl:()=>({...control}),readHandoff:async()=>({...handoff,observedAt:wall}),request,now:()=>wall};
