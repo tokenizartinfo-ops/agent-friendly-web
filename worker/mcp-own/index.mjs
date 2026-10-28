@@ -1,5 +1,6 @@
 import {DurableObject,WorkerEntrypoint} from 'cloudflare:workers';
 import {readOwnSuccessorHost} from '../../lib/mcp-own-successor-host.mjs';
+import {observeOwnSuccessorRetiredCustody} from '../../lib/mcp-own-successor-retirement-host.mjs';
 import {observeOwnRetiredCustody} from '../../lib/mcp-own-retirement-host.mjs';
 import {createDelegatedOAuthWorker} from '../../lib/delegated-oauth-worker.mjs';
 import {createOwnDurableEventHost} from '../../lib/mcp-own-durable-host.mjs';
@@ -34,6 +35,8 @@ export class AfwOwnEventNode extends DurableObject{
  fetch(){return deny();}
  // Private original-custody observation; no caller selectors or live runtime.
  async observeRetired(...args){try{if(args.length)fail();return await observeOwnRetiredCustody({env:this.env,ctx:this.ctx});}catch{fail();}}
+ // Separate successor readback; preserves original observeRetired policy.
+ async observeSuccessorRetired(...args){try{if(args.length)fail();return await observeOwnSuccessorRetiredCustody({env:this.env,ctx:this.ctx,program,sourceRevision});}catch{fail();}}
  list(){return this.#call('list');}
  subscribe(value){return this.#call('subscribe',value);}
  unsubscribe(value){return this.#call('unsubscribe',value);}
