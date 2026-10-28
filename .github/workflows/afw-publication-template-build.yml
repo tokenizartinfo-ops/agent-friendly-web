@@ -9,6 +9,7 @@ on:
       - 'lib/**'
       - 'worker/**'
       - 'test/mcp-private-publication-template.test.mjs'
+      - 'test/mcp-publication-snapshot.test.mjs'
       - 'package.json'
       - 'package-lock.json'
 
@@ -40,6 +41,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Verify public snapshot contract before packaging
+        run: node --test test/mcp-publication-snapshot.test.mjs
       - name: Compile public code without a live policy or credentials
         run: node scripts/build-mcp-private-publication-template.mjs "$AFW_PACKAGE_SOURCE"
       - name: Verify exact public outputs and provenance
