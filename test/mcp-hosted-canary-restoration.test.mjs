@@ -83,3 +83,10 @@ test('host releases a late wrapped body when withdrawal wins before response own
  release();assert.equal((await pending).status,'uncertain');await new Promise(r=>setTimeout(r,0));
  assert.equal(cancelled,1);assert.equal(f.f.posts,0);
 });
+
+test('a rejected provider response releases its body before handoff can be accepted',async()=>{
+ const {createPrivateCanaryRestorationHost}=await load(),f=fixture();let cancelled=0;
+ f.options.fetchImpl=async()=>new Response(new ReadableStream({cancel(){cancelled++;}}),{status:302,headers:{'Content-Type':'application/json'}});
+ const h=createPrivateCanaryRestorationHost(f.options);assert.equal((await h.arm(f.hash)).status,'armed');assert.equal((await h.restore(f.hash)).status,'blocked');
+ await new Promise(r=>setTimeout(r,0));assert.equal(cancelled,1);assert.equal(f.f.posts,0);
+});
