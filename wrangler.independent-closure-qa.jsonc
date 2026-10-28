@@ -27,6 +27,11 @@
       {
         "name": "AFW_QA_PREREGISTRY",
         "class_name": "PrivateQaPreregistration"
+      },
+      {
+        "name": "AFW_MCP_CLOSURE_NODE",
+        "class_name": "AfwOwnEventNode",
+        "script_name": "agent-friendly-web-delegated-canary"
       }
     ]
   },
@@ -58,13 +63,27 @@
       "class_name": "PrivateQaBootstrap"
     }
   ],
-  "ratelimits": [{"name":"AFW_QA_OCCURRENCE_RATE_LIMITER","namespace_id":"2026101003","simple":{"limit":10,"period":60}}],
+  "ratelimits": [
+    {
+      "name": "AFW_QA_OCCURRENCE_RATE_LIMITER",
+      "namespace_id": "2026101003",
+      "simple": {
+        "limit": 10,
+        "period": 60
+      }
+    }
+  ],
   "vars": {
     "AFW_QA_HTTP_ENABLED": "false",
     "AFW_QA_HTTP_POLICY": "",
     "AFW_QA_BOOTSTRAP_ENABLED": "false",
     "AFW_QA_PREREGISTRATION": "",
     "AFW_QA_CHALLENGE_ENABLED": "false",
-    "AFW_QA_CHALLENGE_IDENTITY": ""
-  }
+    "AFW_QA_CHALLENGE_IDENTITY": "",
+    "AFW_MCP_CLOSURE_ENABLED": "false",
+    "AFW_MCP_CLOSURE_POLICY": ""
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
 }
