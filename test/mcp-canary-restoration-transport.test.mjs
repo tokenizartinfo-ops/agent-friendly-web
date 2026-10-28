@@ -6,7 +6,7 @@ const load=()=>import('../lib/mcp-canary-restoration-transport.mjs');
 const origin='https://api.cloudflare.com/client/v4',message='Canary restoration transport unavailable';
 function fixture(){
  const f=restorationFixture();let reads=0,publishes=0;const calls=[];
- const options={readControl:()=>({...f.control}),readReadCredential:async()=>{reads++;return 'synthetic-reader-token';},readPublishCredential:async()=>{publishes++;return 'synthetic-publisher-token';},now:()=>f.at,
+ const options={readControl:()=>({...f.control}),readReadCredential:async()=>{reads++;return 'synthetic-reader-token';},readPublishCredential:async()=>{publishes++;return 'synthetic-publisher-token';},now:f.options.now,
   fetchImpl:async(url,init)=>{calls.push({url,init});const u=new URL(url);assert.equal(u.origin,'https://api.cloudflare.com');const r=await f.request({method:init.method,path:u.pathname.replace('/client/v4',''),query:Object.fromEntries([...u.searchParams].map(([k,v])=>[k,k==='per_page'?Number(v):v])),body:init.body?JSON.parse(init.body):undefined});const{status,...body}=r;return Response.json(body,{status});}};
  const signal=()=>new AbortController().signal;
  const request=(method='GET',path=ROOT+'/workers/scripts/'+W+'/deployments',rest={})=>({method,path,signal:signal(),...rest});
@@ -85,4 +85,37 @@ test('version metadata projection preserves env names without returning secret v
  const {createCanaryRestorationTransport}=await load(),f=fixture();f.f.state.closed.env={PRIVATE:'do-not-return-this-value'};
  const r=await createCanaryRestorationTransport(f.options)(f.request('GET',ROOT+'/workers/workers/'+W+'/versions/'+f.f.ids.closed,{query:{include:'modules'}}));assert.deepEqual(r.result.env,{PRIVATE:null});assert.equal(JSON.stringify(r).includes('do-not-return-this-value'),false);
  const g=fixture();g.f.state.operatorVersion.bindings.find(b=>b.type==='secret_text').value='do-not-return-this-value';await assert.rejects(createCanaryRestorationTransport(g.options)(g.request('GET',ROOT+'/workers/workers/'+OP+'/versions/'+g.f.ids.operator,{query:{include:'modules'}})));
+});
+
+test('rejected late and timer-starved wrapped responses release unread bodies',{timeout:5000},async()=>{
+ const {createCanaryRestorationTransport}=await load();
+ for(const scenario of ['redirect','control','starved']){
+  const f=fixture();let cancelled=0;
+  f.options.fetchImpl=async()=>{
+   const response=new Response(new ReadableStream({cancel(){cancelled++;}}),{status:scenario==='redirect'?302:200,headers:{'Content-Type':'application/json'}});
+   if(scenario==='control')f.f.control.enabled=false;
+   if(scenario==='starved'){const end=performance.now()+45;while(performance.now()<end){/* Deny timer execution without changing clock authority. */}}
+   return response;
+  };
+  await assert.rejects(createCanaryRestorationTransport({...f.options,timeoutMs:30})(f.request()));
+  await new Promise(r=>setTimeout(r,0));assert.equal(cancelled,1,scenario);
+ }
+ const f=fixture();let resolveFetch,cancelled=0,started;const entered=new Promise(r=>{started=r;});
+ f.options.fetchImpl=()=>{started();return new Promise(r=>{resolveFetch=r;});};
+ const pending=createCanaryRestorationTransport({...f.options,timeoutMs:25})(f.request());
+ await entered;await assert.rejects(pending);
+ resolveFetch(new Response(new ReadableStream({cancel(){cancelled++;}}),{headers:{'Content-Type':'application/json'}}));
+ await new Promise(r=>setTimeout(r,0));assert.equal(cancelled,1,'late fetch body');
+});
+test('a final stream continuation cannot renew expired or withdrawn authority',async()=>{
+ const {createCanaryRestorationTransport}=await load();
+ for(const revoke of [false,true]){
+  const f=fixture(),bytes=new TextEncoder().encode(JSON.stringify({success:true,errors:[],result:[]}));let chunk=false;
+  f.options.fetchImpl=async()=>new Response(new ReadableStream({pull(c){
+   if(!chunk){chunk=true;c.enqueue(bytes);return;}
+   if(revoke)f.f.control.enabled=false;else f.f.advance(5001);
+   c.close();
+  }}),{headers:{'Content-Type':'application/json'}});
+  await assert.rejects(createCanaryRestorationTransport(f.options)(f.request()));
+ }
 });

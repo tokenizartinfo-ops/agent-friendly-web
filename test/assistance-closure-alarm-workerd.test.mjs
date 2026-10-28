@@ -28,8 +28,8 @@ test('native alarm actor is closed by default and actual repeated alarms recover
   const method=path.split('/').pop();if(!['arm','status','snapshot','duplicateDelivery'].includes(method))return new Response(null,{status:404});
   return Response.json(await stub[method]()??null);
  }};
- `},bundle:true,write:false,format:'esm',platform:'browser',external:['cloudflare:workers']});
- const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',bindings:{CLOSE_AT:String(Date.now()+2000)},script:bundle.outputFiles[0].text,durableObjects:{CLOSURES:{className:'Fixture',useSQLite:true},CLOSED:{className:'IndependentClosure',useSQLite:true}}}));
+ `},bundle:true,write:false,format:'esm',platform:'browser',external:['cloudflare:workers','node:*']});
+ const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{CLOSE_AT:String(Date.now()+2000)},script:bundle.outputFiles[0].text,durableObjects:{CLOSURES:{className:'Fixture',useSQLite:true},CLOSED:{className:'IndependentClosure',useSQLite:true}}}));
  try{
   assert.equal((await runtime.dispatchFetch('https://synthetic.invalid')).status,404);
   const call=async path=>{const r=await runtime.dispatchFetch('https://synthetic.invalid'+path);const body=await r.text();assert.equal(r.status,200,body);return JSON.parse(body);};

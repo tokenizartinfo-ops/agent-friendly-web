@@ -1,3 +1,4 @@
+import {createPrivateCanaryRestorationHost,isPrivateCanaryRestorationActor,runPrivateCanaryRestorationWorkflow} from '../../lib/mcp-hosted-canary-restoration.mjs';
 import {computeAdministrativeResultDigest} from '../../lib/assistance-administrative-closure-readback.mjs';
 import {fetchOwnOccurrence} from './occurrence-host.mjs';
 import {createPrimaryQaInstaller} from '../../lib/assistance-private-qa-installer.mjs';
@@ -139,6 +140,7 @@ export class PrivateQaPreregistration extends DurableObject {
 }
 export class PrivateQaBootstrap extends WorkflowEntrypoint {
  run(event,step){let params=event.payload;try{if(typeof params==='string'&&params.length<=8192){const decoded=JSON.parse(params);if(params.length<=256||decoded?.operation==='originals')params=decoded;}}catch{/* Strict handlers reject malformed payloads. */}
+  if(['mcp_canary_arm_restore','mcp_canary_withdraw_control','mcp_canary_status'].includes(params?.operation))return runPrivateCanaryRestorationWorkflow({env:this.env,event,step});
   if(params?.operation==='observe')return observePrivateQa(this.env,params);
   return createPrivateAdminBootstrap({install:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).installOwn();try{return {state:value?.state};}finally{value?.[Symbol.dispose]?.();}},readControl:()=>control(this.env),readRegistered:async ref=>(await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).read())?.registration?.plan?.baselineRef===ref,register:ref=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).register(ref),appendOriginals:(ref,sequence,originals)=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).appendOperatorObservation(ref,sequence,originals),readOriginals:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).readOperatorObservation();try{return structuredClone(value);}finally{value?.[Symbol.dispose]?.();}}}).run(event.payload,step);}
 }
@@ -164,6 +166,12 @@ export class PrivateQaCatalog extends DurableObject {
 // Private host only. Missing catalog/custody stays closed. No caller approval,
 // provisioning, registration, HTTP routes or implicit enrollment.
 export class IndependentClosure extends DurableObject {
+ #mcpRestoration;
+ #mcp(){return this.#mcpRestoration??=createPrivateCanaryRestorationHost({env:this.env,ctx:this.ctx});}
+ armOwnCanaryClosure(...args){return this.#mcp().arm(...args);}
+ restoreOwnCanary(...args){return this.#mcp().restore(...args);}
+ withdrawOwnCanaryClosure(...args){return this.#mcp().withdraw(...args);}
+ readOwnCanaryClosureControl(...args){return this.#mcp().status(...args);}
  constructor(ctx,env){
   super(ctx,env);
   const legacy=()=>env.AFW_QA_CATALOG.get(env.AFW_QA_CATALOG.idFromName('own-qa'));
@@ -174,9 +182,9 @@ export class IndependentClosure extends DurableObject {
    readIdentityCredential:async()=>env.AFW_QA_IDENTITY_API_TOKEN,
    readAdministrativeCredential:async()=>env.AFW_QA_ADMIN_READ_API_TOKEN});
  }
- arm(){return this.actor.arm();}
- status(){return this.actor.status();}
- alarm(){return this.actor.alarm();}
+ arm(){if(isPrivateCanaryRestorationActor(this.env,this.ctx))return Promise.resolve({state:'unavailable'});return this.actor.arm();}
+ status(){if(isPrivateCanaryRestorationActor(this.env,this.ctx))return Promise.resolve({state:'unavailable'});return this.actor.status();}
+ alarm(){if(isPrivateCanaryRestorationActor(this.env,this.ctx))return Promise.resolve({state:'unavailable'});return this.actor.alarm();}
  fetch(){return new Response(null,{status:404});}
 }
 const worker={async fetch(request,env){if(new URL(request.url).pathname.startsWith('/assistance/occurrences/'))return fetchOwnOccurrence(request,env);if(env?.AFW_QA_CHALLENGE_ENABLED!=='true'||!challengePath(request)||!env.AFW_QA_PREREGISTRY)return new Response(null,{status:404});try{return await env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa')).fetch(request);}catch{return Response.json({code:'unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});}}};
