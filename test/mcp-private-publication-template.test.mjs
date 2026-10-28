@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import * as builder from '../scripts/build-mcp-release-operator.mjs';
 import {RELEASE_TARGET,validateReleaseOperatorBundle} from '../lib/mcp-release-operator-policy.mjs';
-const module=await import('../lib/mcp-private-publication-template.mjs').catch(e=>{if(e.code==='ERR_MODULE_NOT_FOUND')return {};throw e;});
-const supported=typeof builder.buildMcpPrivatePublicationTemplate==='function'&&typeof module.materializeMcpPrivatePublication==='function';
+const publicationModule=await import('../lib/mcp-private-publication-template.mjs').catch(e=>{if(e.code==='ERR_MODULE_NOT_FOUND')return {};throw e;});
+const supported=typeof builder.buildMcpPrivatePublicationTemplate==='function'&&typeof publicationModule.materializeMcpPrivatePublication==='function';
 const opt={skip:!supported}, hash=x=>createHash('sha256').update(x).digest('hex');
 const script='export default {fetch(){return new Response("public synthetic")}};';
 const artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:hash(script),sourceCheck:'git-inputs-before-after-v1'};
@@ -13,15 +13,15 @@ const bundle=()=>({artifact:{...artifact},policy:{operation:'publish',startAt:0,
 let compiled;
 const prepared=()=>compiled??=builder.buildMcpPrivatePublicationTemplate(bundle());
 const input=async()=>{const p=await prepared();return {...p,policyJson:JSON.stringify(bundle().policy),expectedTemplateHash:p.manifest.templateHash};};
-const materialize=x=>module.materializeMcpPrivatePublication(x);
+const materialize=x=>publicationModule.materializeMcpPrivatePublication(x);
 const fixed=e=>e?.message==='Private publication preparation unavailable'&&!Object.hasOwn(e,'cause');
 const resign=(p,template)=>({...p,template,expectedTemplateHash:hash(template),manifest:{...p.manifest,templateHash:hash(template),templateBytes:Buffer.byteLength(template)}});
 
 test('publication template and materializer are exported separately from confirmation',()=>{
  assert.equal(typeof builder.buildMcpPrivatePublicationTemplate,'function');
- assert.equal(typeof module.materializeMcpPrivatePublication,'function');
+ assert.equal(typeof publicationModule.materializeMcpPrivatePublication,'function');
  assert.equal(typeof builder.buildMcpPrivateConfirmationTemplate,'function');
- if(supported)assert.deepEqual(module.PRIVATE_PUBLICATION_TARGET,RELEASE_TARGET);
+ if(supported)assert.deepEqual(publicationModule.PRIVATE_PUBLICATION_TARGET,RELEASE_TARGET);
 });
 test('public publication template omits seed policy and preserves public provenance',opt,async()=>{
  const p=await prepared();
