@@ -13,7 +13,7 @@ function fixture(){
  const native={async observeSuccessorRetired(){calls.rpc++;const r=proof();Object.defineProperty(r,Symbol.dispose,{value(){calls.dispose++;},enumerable:false});return r;}};
  const namespace={idFromName(name){assert.equal(name,'afw-own-event-first-successor-v1');return {toString:()=>id};},idFromString(value){assert.equal(value,id);return {toString:()=>id};},get(value){assert.equal(value.toString(),id);return native;}};
  const env={AFW_RELEASE_OPERATOR_ENABLED:'false',AFW_RELEASE_WORKFLOW_ENABLED:'false',AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED:'false',AFW_RELEASE_RETIREMENT_OBSERVATION_ENABLED:'true',AFW_RELEASE_RETIREMENT_OBSERVATION_POLICY:text,AFW_RELEASE_EVENTS_NODE:namespace,AFW_RELEASE_READ_TOKEN:'synthetic_read_credential'};
- const event={instanceId:'afw-successor-retired-'+observationHash,payload:{observationHash}};
+ const event={instanceId:'afw-successor-retired-'+observationHash,payload:{observationHash},timestamp:new Date(original)};
  const step={async do(name,options,fn){calls.steps++;assert.equal(name,'observe-retired-successor');assert.equal(options.retries.limit,0);return fn();}};
  const fetchImpl=async(url,init)=>{
  calls.gets++;assert.equal(url,'https://api.cloudflare.com/client/v4/accounts/'+account+'/containers/applications/'+app+'/instances/'+id);assert.equal(init.method,'GET');assert.equal(init.redirect,'manual');assert.equal(init.headers.Authorization,'Bearer synthetic_read_credential');
@@ -82,4 +82,23 @@ test('captured native RPC callable does not receive a synthetic remote call/appl
  const f=fixture(),original=f.step.do;
  Object.defineProperty(f.step,'do',{get(){return new Proxy(function(...args){return Reflect.apply(original,f.step,args);},{get(target,key,receiver){if(['call','apply','bind'].includes(key))throw Error('Native RPC receiver has no such method');return Reflect.get(target,key,receiver);}});}});
  const r=await run(f);assert.equal(r.status,'retired_verified');assert.equal(f.calls.steps,1);assert.equal(f.calls.gets,2);
+});
+
+test('native Workflow replay cannot accept a cached success after the ORIGINAL trigger plus five seconds',opt,async()=>{
+ const f=fixture(),cached=await run(f);assert.equal(cached.status,'retired_verified');for(const k of Object.keys(f.calls))f.calls[k]=0;
+ f.move(6000,6000);f.step.do=async()=>{f.calls.steps++;return cached;};
+ const r=await run(f);assert.equal(r.status,'blocked');noEffects(f);
+});
+test('late first execution cannot acquire a fresh lease inside the ten-minute observation policy',opt,async()=>{
+ const f=fixture();f.move(6000,6000);const r=await run(f);assert.equal(r.status,'blocked');noEffects(f);
+});
+test('native trigger timestamp is required and must be inside the original policy and not future or already five seconds old',opt,async()=>{
+ for(const stamp of [undefined,'not-a-native-Date',new Date(NaN),60000]){const f=fixture();f.event.timestamp=stamp;assert.equal((await run(f)).status,'blocked');noEffects(f);}
+ for(const offset of [1000,-6000]){const f=fixture();f.event.timestamp=new Date(f.wall()+offset);assert.equal((await run(f)).status,'blocked');noEffects(f);}
+});
+test('cached step output must keep exact own identity hash fields and observation time under the original lease',opt,async()=>{
+ for(const mutate of [r=>r.evidence.containerId='e'.repeat(64),r=>r.observationHash='e'.repeat(64),r=>r.evidence.observedAt+=1000,r=>r.evidence.physicalStopVerified=false,r=>r.privatePolicy='PRIVATE_SENTINEL']){
+ const f=fixture(),cached=structuredClone(await run(f));mutate(cached);for(const k of Object.keys(f.calls))f.calls[k]=0;f.step.do=async()=>{f.calls.steps++;return cached;};
+ const r=await run(f);assert.equal(r.status,'uncertain');assert.equal(r.evidence,undefined);assert.equal(f.calls.steps,1);assert.equal(f.calls.rpc,0);assert.equal(f.calls.gets,0);assert.equal(JSON.stringify(r).includes('PRIVATE_SENTINEL'),false);
+ }
 });
