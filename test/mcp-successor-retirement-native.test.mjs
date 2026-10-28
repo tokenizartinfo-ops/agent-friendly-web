@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 
-test('native successor retirement RPC reads original sealed DO/D1 state without a Container',async()=>{
+test('native successor retirement RPC reads original sealed DO/D1 state without a Container',{timeout:45000},async()=>{
  const statements=file=>[...readFileSync(file,'utf8').matchAll(/CREATE TABLE[\s\S]*?\);|CREATE(?: UNIQUE)? INDEX[^\n]+;|CREATE TRIGGER[^\n]+;/g)].map(m=>m[0]);
  const schemas=['dossier-monitoring-consent','dossier-node-process','dossier-successor-reservation'].flatMap(n=>statements('db/'+n+'.sql'));
  const startAt=Date.now()-1000,expiresAt=startAt+180000;
@@ -55,7 +55,7 @@ test('native successor retirement RPC reads original sealed DO/D1 state without 
  `;
  const bundle=await build({stdin:{contents,resolveDir:process.cwd(),sourcefile:'successor-retirement-native.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],define:{'globalThis.__AFW_NODE_PROGRAM__':JSON.stringify('CI-only custody program'),'globalThis.__AFW_NODE_SOURCE_REVISION__':JSON.stringify('c'.repeat(40))}});
  let outbound=0;const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundle.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],d1Databases:{DB:'native-successor-readback'},durableObjects:{NODE:{className:'Qa',useSQLite:true}},outboundService:()=>{outbound++;throw Error('no network capability');}}));
- const call=async(path,status=200)=>{const r=await runtime.dispatchFetch('https://synthetic.invalid'+path);assert.equal(r.status,status,await r.clone().text());return r.json();};
+ const call=async(path,status=200)=>{let timer;const r=await Promise.race([runtime.dispatchFetch('https://synthetic.invalid'+path),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('native fixture stalled at '+path)),10000);})]).finally(()=>clearTimeout(timer));assert.equal(r.status,status,await r.clone().text());return r.json();};
  try{
   const first=await call('/seed');await call('/read',409);await call('/withdraw');const before=await call('/state');
   const result=await call('/read');assert.equal(result.processGeneration,first.generation);assert.equal(result.physicalStopVerified,false);assert.equal(result.mayStartSuccessor,false);
