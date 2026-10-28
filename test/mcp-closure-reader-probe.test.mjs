@@ -87,3 +87,26 @@ test('private Workflow uses one fixed actor and zero retries and preserves cache
  const old=await runPrivateClosureReaderProbeWorkflow(args);assert.equal(old.status,'historical');assert.equal(old.observedAt,f.f.at);assert.equal(calls,1);assert.equal(f.calls.length,7);
  args.event={payload:{operation:'mcp_closure_reader_probe',planHash:f.hash,target:'foreign'}};assert.equal((await runPrivateClosureReaderProbeWorkflow(args)).status,'blocked');assert.equal(calls,1);
 });
+
+test('Workflow inventory requires explicit complete counts and consistent page evidence',async t=>{
+ const{createPrivateClosureReaderProbe}=await load();
+ const cases=[
+  {name:'full page without total evidence',count:100,info:{per_page:100},accepted:false},
+  {name:'truncated page with count only',count:1,info:{per_page:100,count:1},accepted:false},
+  {name:'nonempty inventory with zero total pages',count:1,info:{per_page:100,count:1,total_count:1,total_pages:0},accepted:false},
+  {name:'explicit complete full page',count:100,info:{per_page:100,page:1,count:100,total_count:100,total_pages:1},accepted:true}
+ ];
+ for(const c of cases)await t.test(c.name,async()=>{
+  const f=readerFixture(),fetch=f.options.fetchImpl;
+  f.options.fetchImpl=async(url,init)=>{const r=await fetch(url,init);if(!new URL(url).pathname.endsWith('/instances'))return r;const x=await r.json();x.result=Array.from({length:c.count},(_,i)=>({id:'terminal-'+i,status:'complete'}));x.result_info=c.info;return Response.json(x);};
+  const r=await createPrivateClosureReaderProbe(f.options).run(f.hash);assert.equal(r.status,c.accepted?'observed':'blocked');assert.equal(r.observations.find(x=>x.resource==='operator_instances').status,c.accepted?'matched':'mismatch');assert.equal(f.calls.length,7);
+ });
+});
+test('Workflow association explicitly marked deleted or malformed is never matched',async t=>{
+ const{createPrivateClosureReaderProbe}=await load();
+ for(const deleted of[true,'false',null,false])await t.test('script_deleted '+String(deleted),async()=>{
+  const f=readerFixture(),fetch=f.options.fetchImpl;
+  f.options.fetchImpl=async(url,init)=>{const r=await fetch(url,init);if(!new URL(url).pathname.endsWith('/afw-release-administrative'))return r;const x=await r.json();x.result.script_deleted=deleted;return Response.json(x);};
+  const r=await createPrivateClosureReaderProbe(f.options).run(f.hash);assert.equal(r.status,deleted===false?'observed':'blocked');assert.equal(r.observations.find(x=>x.resource==='operator_workflow').status,deleted===false?'matched':'mismatch');assert.equal(f.calls.length,7);
+ });
+});
