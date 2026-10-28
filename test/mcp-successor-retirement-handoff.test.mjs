@@ -82,3 +82,33 @@ test('backwards wall time and monotonic deadline overrun are rejected before per
  g.options.readInstance=async()=>{tick+=31;return structuredClone(g.instance);};
  assert.equal((await createSuccessorRetirementHandoff({...g.options,timeoutMs:30}).capture()).status,'blocked');assert.equal(g.db.writes,0);
 });
+
+test('capture cannot qualify one mutable provider start and persist another outside the original custody window',async()=>{
+ const {createSuccessorRetirementHandoff}=await load(),f=fixture(),valid=f.instance.started_at,outside=new Date(f.custody.createdAt-1000).toISOString();
+ f.options.readInstance=()=>{f.instance.started_at=outside;queueMicrotask(()=>queueMicrotask(()=>{f.instance.started_at=valid;}));return f.instance;};
+ assert.equal((await createSuccessorRetirementHandoff(f.options).capture()).status,'blocked');assert.equal(f.db.writes,0);
+});
+function lateStorage(base,after,depth,expire){
+ let calls=0;const queue=n=>queueMicrotask(()=>n===1?expire():queue(n-1));
+ return {transaction:async fn=>{const value=await base.transaction(fn);if(++calls===after)queue(depth);return value;}};
+}
+test('existing-record delivery rejects expiry after the transaction check but before fast-path continuation',async t=>{
+ const {createSuccessorRetirementHandoff}=await load(),f=fixture();await createSuccessorRetirementHandoff(f.options).capture();
+ let tick=100;t.mock.method(performance,'now',()=>tick);
+ const storage=lateStorage(f.db,1,2,()=>{tick=131;});
+ const r=await createSuccessorRetirementHandoff({...f.options,storage,timeoutMs:30}).capture();
+ assert.equal(r.status,'blocked');assert.equal(f.db.writes,1);
+});
+test('final observe result cannot escape after monotonic expiry while the timeout callback is starved',async t=>{
+ const {createSuccessorRetirementHandoff}=await load(),f=fixture();await createSuccessorRetirementHandoff(f.options).capture();
+ let tick=100;t.mock.method(performance,'now',()=>tick);
+ const storage=lateStorage(f.db,2,3,()=>{tick=131;});
+ const r=await createSuccessorRetirementHandoff({...f.options,storage,timeoutMs:30}).observe();
+ assert.equal(r.status,'blocked');assert.equal(r.physicalStopVerified,false);assert.equal(f.db.writes,1);
+});
+test('late post-write result stays uncertain instead of claiming an acknowledged capture',async t=>{
+ const {createSuccessorRetirementHandoff}=await load(),f=fixture();let tick=100;t.mock.method(performance,'now',()=>tick);
+ const storage=lateStorage(f.db,2,3,()=>{tick=131;});
+ const r=await createSuccessorRetirementHandoff({...f.options,storage,timeoutMs:30}).capture();
+ assert.equal(r.status,'uncertain');assert.equal(f.db.writes,1);
+});
