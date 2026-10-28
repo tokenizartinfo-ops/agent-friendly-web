@@ -81,7 +81,9 @@
     "AFW_QA_CHALLENGE_ENABLED": "false",
     "AFW_QA_CHALLENGE_IDENTITY": "",
     "AFW_MCP_CLOSURE_ENABLED": "false",
-    "AFW_MCP_CLOSURE_POLICY": ""
+    "AFW_MCP_CLOSURE_POLICY": "",
+    "AFW_MCP_READER_PROBE_ENABLED": "false",
+    "AFW_MCP_READER_PROBE_POLICY": ""
   },
   "compatibility_flags": [
     "nodejs_compat"

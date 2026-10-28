@@ -23,6 +23,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Qualify private reader boundary before full suite
+        run: node --test test/mcp-closure-reader-probe.test.mjs test/mcp-closure-reader-probe-native.test.mjs
       - run: npm test
       - run: npm run lint
       - run: npm run build
