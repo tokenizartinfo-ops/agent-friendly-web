@@ -15,7 +15,6 @@ function fixture(){
  const options={storage:db,original,now:()=>wall,readCustody:async()=>{custodyReads++;return {...custody,observedAt:wall};},readInstance:async input=>{reads++;assert.equal(input.containerId,original.containerId);assert.equal(input.applicationId,original.applicationId);assert.ok(input.signal instanceof AbortSignal);return structuredClone(instance);}};
  return {db,original,custody,instance,options,reads:()=>reads,custodyReads:()=>custodyReads,advance:ms=>{wall+=ms;}};
 }
-test('missing handoff feature is observed before implementation',async()=>{assert.equal(typeof(await load()).createSuccessorRetirementHandoff,'function');});
 test('capture preserves original proof and later observation never calls the retired RPC or rewrites history',async()=>{
  const {createSuccessorRetirementHandoff}=await load(),f=fixture(),h=createSuccessorRetirementHandoff(f.options);
  const c=await h.capture();assert.equal(c.status,'recorded');assert.equal(f.db.writes,1);assert.equal(f.reads(),2);

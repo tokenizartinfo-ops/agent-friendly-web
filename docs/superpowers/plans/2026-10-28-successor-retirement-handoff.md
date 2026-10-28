@@ -25,8 +25,8 @@ Files: create lib/mcp-successor-retirement-handoff.mjs, test/mcp-successor-retir
 Consumes: createRetirementEvidenceReader({original,readCustody,readInstance,now,timeoutMs}).observe(), RELEASE_TARGET.namespaceId, private storage.transaction.
 Produces: createSuccessorRetirementHandoff(...).capture()/observe(), exact dated non-authorizing DTOs.
 
-- [ ] Commit spec/plan and tests first. Test imports missing module inside a test so CI fails for the absent feature, not a harness syntax error.
-- [ ] Observe RED in Actions; preserve run/head and expected missing feature failure.
+- [x] Commit spec/plan and tests first. Test imports missing module inside a test so CI fails for the absent feature, not a harness syntax error.
+- [x] Observe RED in Actions; preserve run/head and expected missing feature failure.
 - [ ] Implement strict snapshots, original candidate validation, bounded callback signal, one original monotonic lease, immutable storage schema and transaction admission.
 - [ ] Implement capture using actual existing reader, compare both primary projections, atomic write-once match and explicit unknown ACK.
 - [ ] Implement observe with two storage and two provider observations, fresh process readback and preserved historical timestamp, never original RPC or provider mutation.
@@ -38,3 +38,5 @@ Produces: createSuccessorRetirementHandoff(...).capture()/observe(), exact dated
 ## Ledger
 Pre-flight: existing retirement reader establishes custody/provider proof; handoff adds private persistence without altering reader semantics. Independent controller/adapters and restoration authority are deliberately a later block, not implicitly implemented here.
 Ruling: Use an isolated remote branch and Actions rather than creating a local worktree, workspace, dependencies or build, honoring the owner's cloud-first instruction. Git commits and PR/issue497 are the durable ledger.
+
+Task1 RED: head3d3e2f5785d7e7c6a29ffd73ce5dbe3c867c38ad, CI40718908159/job122924095804:3074PASS/11expectedMissingFeatureFAIL/1existingSKIP. Native build and behavioral imports identify only the absent handoff module. The temporary trivial export sentinel is removed from final tests; substantive behavior/native cases remain.

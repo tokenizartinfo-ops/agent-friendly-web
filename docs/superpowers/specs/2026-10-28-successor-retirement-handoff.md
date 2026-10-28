@@ -30,3 +30,6 @@ capture returns status recorded/already_recorded/blocked/uncertain, dated origin
 RED before implementation, complete npm test/lint/build in GitHub Actions, plus actual Miniflare/workerd DO transaction/storage recreation acceptance. Synthetic provider/custody fixtures are not real Cloudflare permission/Container/D1 evidence. Fresh reviewer for the completed branch; fix material findings with RED/GREEN. No local dependencies, build or archive.
 
 Physical proof and both application revocations are established by the trusted original custody path, not by accepting an arbitrary boolean. This layer preserves that qualified observation; platform native unsubscribe and administrative restoration remain separate pending gates.
+
+## Primary storage reference
+[Cloudflare SQLite storage API](https://developers.cloudflare.com/durable-objects/api/sqlite-storage-api/) documents the private transactional storage used by this design. Native fixture acceptance is still required; documentation is not deployment evidence.
