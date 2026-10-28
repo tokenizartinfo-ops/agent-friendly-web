@@ -1,0 +1,6 @@
+# Native private successor retirement observation implementation
+Spec: docs/superpowers/specs/2026-10-28-successor-retirement-workflow.md.
+1. Add focused behavior/native tests plus design before lib/entry implementation; demonstrate expected RED failure. No local checkout/build/dependency; GitHub APIs and Actions only.
+2. Implement lib/mcp-successor-retirement-observation.mjs with original<=5s fenced Workflow and existing trusted readers, fixed no-argument successor RPC. Add one early explicit opt-in branch/import in worker/mcp-release/index.mjs. Preserve other modes/default closed; no new remote flags or credentials.
+3. Qualify pure+actual native Workflow/RPC with synthetic provider interception, unknown/late lifecycle/clock changes and no write/start authority. Existing fullCI/named exact frozen package qualification. One final read-only reviewer; record Minor/exclusions, fix material issues with RED/GREEN.
+4. Integrate exact reviewed tree and verify main. Source only: do not republish canary or open a fresh owner grant. Next independent restoration controller still needs its own scope/CAS/history/physical-stop proof and remote custody acceptance; preserve reservation0 catalog control and original C01 history.
