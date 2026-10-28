@@ -77,3 +77,9 @@ test('native-style fresh bound step method is captured once instead of compared 
  Object.defineProperty(f.step,'do',{get(){reads++;return function(...args){return original.apply(f.step,args);};}});
  const r=await run(f);assert.equal(r.status,'retired_verified');assert.equal(f.calls.steps,1);assert.equal(f.calls.gets,2);assert.equal(reads,2);
 });
+
+test('captured native RPC callable does not receive a synthetic remote call/apply/bind method',opt,async()=>{
+ const f=fixture(),original=f.step.do;
+ Object.defineProperty(f.step,'do',{get(){return new Proxy(function(...args){return Reflect.apply(original,f.step,args);},{get(target,key,receiver){if(['call','apply','bind'].includes(key))throw Error('Native RPC receiver has no such method');return Reflect.get(target,key,receiver);}});}});
+ const r=await run(f);assert.equal(r.status,'retired_verified');assert.equal(f.calls.steps,1);assert.equal(f.calls.gets,2);
+});
