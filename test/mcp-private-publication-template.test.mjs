@@ -21,6 +21,7 @@ test('publication template and materializer are exported separately from confirm
  assert.equal(typeof builder.buildMcpPrivatePublicationTemplate,'function');
  assert.equal(typeof module.materializeMcpPrivatePublication,'function');
  assert.equal(typeof builder.buildMcpPrivateConfirmationTemplate,'function');
+ if(supported)assert.deepEqual(module.PRIVATE_PUBLICATION_TARGET,RELEASE_TARGET);
 });
 test('public publication template omits seed policy and preserves public provenance',opt,async()=>{
  const p=await prepared();

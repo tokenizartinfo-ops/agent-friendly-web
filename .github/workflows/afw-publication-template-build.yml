@@ -1,0 +1,80 @@
+name: AFW publication template build only
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/afw-publication-template-build.yml'
+      - 'scripts/**'
+      - 'lib/**'
+      - 'worker/**'
+      - 'test/mcp-private-publication-template.test.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: afw-publication-template-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  compile:
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+       (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      AFW_PACKAGE_SOURCE: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.AFW_PACKAGE_SOURCE }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Compile public code without a live policy or credentials
+        run: node scripts/build-mcp-private-publication-template.mjs "$AFW_PACKAGE_SOURCE"
+      - name: Verify exact public outputs and provenance
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,readdirSync} from 'node:fs';
+          import {execFileSync} from 'node:child_process';
+          import {createHash} from 'node:crypto';
+          import {materializeMcpPrivatePublication} from './lib/mcp-private-publication-template.mjs';
+          import {RELEASE_TARGET} from './lib/mcp-release-operator-policy.mjs';
+          const directory='output/mcp-publication-template/',hash=x=>createHash('sha256').update(x).digest('hex');
+          assert.deepEqual(readdirSync(directory).sort(),['build.json','materializer.mjs','template.json','template.mjs']);
+          const m=JSON.parse(readFileSync(directory+'template.json')),r=JSON.parse(readFileSync(directory+'build.json'));
+          const template=readFileSync(directory+'template.mjs','utf8'),materializer=readFileSync(directory+'materializer.mjs');
+          assert.equal(r.operatorSourceRevision,process.env.AFW_PACKAGE_SOURCE);
+          assert.equal(r.operatorSourceTree,execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim());
+          assert.equal(r.artifactSourceRevision,r.operatorSourceRevision);assert.equal(r.artifactSourceTree,r.operatorSourceTree);
+          assert.equal(m.templateHash,hash(template));assert.equal(m.templateBytes,Buffer.byteLength(template));
+          assert.equal(r.templateHash,m.templateHash);assert.equal(r.templateBytes,m.templateBytes);
+          assert.equal(r.materializerHash,hash(materializer));assert.equal(r.materializerBytes,materializer.length);
+          assert.equal(r.workerHash,m.workerHash);assert.equal(r.programHash,m.programHash);assert.equal(r.artifactKey,m.artifactKey);
+          for(const k of ['materialized','realPolicyAccepted','remotePublished','invoked','operationalReadiness'])assert.equal(r[k],false);
+          const policy={operation:'publish',startAt:0,expiresAt:1,pins:{...RELEASE_TARGET,baseVersionId:'00000000-0000-4000-8000-000000000000'}};
+          const inert=await materializeMcpPrivatePublication({template,manifest:m,policyJson:JSON.stringify(policy),expectedTemplateHash:r.templateHash});
+          assert.equal(inert.operatorHash,hash(inert.script));assert.equal(inert.remotePublished,false);
+          console.log(JSON.stringify(r));
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afw-publication-template-${{ env.AFW_PACKAGE_SOURCE }}
+          path: |
+            output/mcp-publication-template/template.mjs
+            output/mcp-publication-template/materializer.mjs
+            output/mcp-publication-template/template.json
+            output/mcp-publication-template/build.json
+          if-no-files-found: error
+          retention-days: 7
