@@ -1,5 +1,0 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
-import {createHash} from 'node:crypto';
-const load=()=>import('../scripts/build-mcp-own-worker.mjs');
-test('own Worker build embeds exact product Node program and explicit revision, never credentials',async()=>{const {buildMcpOwnWorker}=await load();await assert.rejects(buildMcpOwnWorker({sourceRevision:'unknown'}));const r=await buildMcpOwnWorker({sourceRevision:'c'.repeat(40)});assert.equal(r.sourceRevision,'c'.repeat(40));assert.match(r.programHash,/^[0-9a-f]{64}$/);assert.equal(r.workerHash,createHash('sha256').update(r.script).digest('hex'));assert.ok(r.script.includes('AFW Node unavailable'));assert.ok(r.script.includes('c'.repeat(40)));assert.ok(r.script.includes('AfwOwnEventNode'));assert.equal(r.script.includes('__AFW_NODE_PROGRAM__'),false);assert.equal(r.script.includes('__AFW_NODE_SOURCE_REVISION__'),false);assert.equal(r.script.includes('whsec_'),true,'signing protocol remains in compiled source, not a real credential');assert.equal(r.script.includes('sourceMappingURL'),false);});

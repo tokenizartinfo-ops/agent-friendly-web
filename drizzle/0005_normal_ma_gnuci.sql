@@ -1,1 +1,0 @@
-ALTER TABLE `contact_leads` ADD `request_hash` text NOT NULL;

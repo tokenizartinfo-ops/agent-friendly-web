@@ -1,8 +1,0 @@
-# Agent Friendly Web proposal: merge these groups into the current robots.txt.
-# Do not replace existing security, private-path or crawler rules without review.
-
-# No search rules proposed: declared limits require separate manual review.
-# Keep current search rules until the owner and maintainer agree on the scope.
-
-# No training rules proposed: case-by-case decisions require separate manual review.
-# Keep current training rules; no general authorization or refusal is inferred.

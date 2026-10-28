@@ -1,1 +1,0 @@
-ALTER TABLE `site_projects` ADD `deferred_questions_json` text DEFAULT '[]' NOT NULL;
