@@ -207,7 +207,7 @@ jobs:
           retention-days: 7
 
   preserve:
-    needs: compile
+    needs: package
     if: >-
       github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
       github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
