@@ -1,0 +1,17 @@
+# Fixed Cloudflare transport for private canary restoration
+
+Base4b3d126e0e5606cf12c2bdd1de1fd9128d68317b after PR629/630. Source/CI only; no host, credential, binding, grant or runtime is installed.
+
+## Decision
+Implement the missing authenticated request capability of createSuccessorCanaryRestorer as a separate server-only transport. Reuse the original restoration control/pins, not a generic Cloudflare proxy. The core's durable issued journal remains the authority and deduplication layer. Do not broaden operator writes or accept arbitrary URLs, headers, credentials or body fields. The transport is NOT a public endpoint or a scheduler.
+
+Export createCanaryRestorationTransport({readControl,readReadCredential,readPublishCredential,fetchImpl=globalThis.fetch,now=Date.now,timeoutMs=5000}). Return a nonasync wrapper around an internal bounded request, accepting exactly method,path,signal and the per-route optional query/body. Each request uses the unchanged server control canonical policy string of core629; enabled must be true and original policy<=10minutes/unexpired. Capture original control on first request; no reconfiguration. Reject descriptor accessors and caller fields before credential/network access.
+
+Allow only core629's12 fixed GET shapes: both scripts' deployments, live/closed canary and pinned operator versions?include=modules, both scripts' schedules/tails, fixed Workflow and its first complete-page query, original application's active instances query. POST only fixed canary/deployments with the exact single approved closed version100%, percentage strategy and core629 plan-hash annotation. Read credential for GET; publish credential for POST. One attempted POST per transport instance, fenced before credential await; never reset/retry. This complements rather than replaces the durable core journal.
+
+All HTTP goes to https://api.cloudflare.com/client/v4 plus the already validated fixed path/query. Manual redirects, no-store cache and explicit no-cache headers; never inherit Authorization or credential from input. Native Response only; status200 for GET,200/201 for POST, application/json, no redirect, Age absent/0, CF-Cache-Status absent/DYNAMIC/BYPASS/MISS. Reject invalid/oversized declared Content-Length, stream beyond4MiB, invalid UTF8/JSON, false success or nonempty errors. Return only success/status/result/errors[]/optional result_info; no provider messages/body/errors in exceptions. Version metadata env values are not returned: preserve keys with null placeholders without reading those values. Reject secret_text bindings with fields beyond name/type.
+
+Each original per-call lease<=5000ms is capped by original absolute policy expiry; wall/monotonic/control checked across credential/fetch/stream/final continuations. Input abort, own deadline, late control withdrawal and timer starvation cannot produce successful late results. Stop consuming streams/cancel in finally; cancellation never proves rollback of a dispatched write. No retries. Exceptions use one generic message, never credentials, URLs/body/provider details.
+
+## Acceptance
+Behavioral RED before implementation. Full Actions test/lint/build and package checks, one fresh branch review, material RED/GREEN corrections and exact main verification. Test real Fetch Response/Headers/ReadableStream objects with synthetic provider and credentials, not real account access. Add actual closed-host wiring/native tests separately: this transport alone is not hosted, consent, provider execution, native unsubscribe or PC-off.
