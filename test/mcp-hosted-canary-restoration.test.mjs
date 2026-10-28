@@ -73,3 +73,13 @@ test('workflow uses only fixed actor and original absolute time with no automati
  assert.equal(r.status,'restored_observed');assert.equal(calls[1][0],'sleep');assert.equal(calls[1][2],f.f.policy.startAt);assert.deepEqual(calls.filter(x=>x[0]!=='sleep'),[['arm',hash],['restore',hash]]);assert.ok(steps.every(x=>x[1].retries.limit===0&&x[1].timeout<=35000));
  const count=calls.length;assert.equal((await runPrivateCanaryRestorationWorkflow({env:f.env,event:{payload:{operation:'mcp_canary_arm_restore',policyHash:hash,target:'foreign'}},step,now:f.f.options.now})).status,'blocked');assert.equal(calls.length,count);
 });
+
+test('host releases a late wrapped body when withdrawal wins before response ownership',async()=>{
+ const {createPrivateCanaryRestorationHost}=await load(),f=fixture();let release,started,cancelled=0;
+ const entered=new Promise(r=>{started=r;}),gate=new Promise(r=>{release=r;});
+ f.options.fetchImpl=async()=>{started();await gate;return new Response(new ReadableStream({cancel(){cancelled++;}}),{headers:{'Content-Type':'application/json'}});};
+ const h=createPrivateCanaryRestorationHost(f.options);assert.equal((await h.arm(f.hash)).status,'armed');
+ const pending=h.restore(f.hash);await entered;assert.equal((await h.withdraw(f.hash)).status,'withdrawn');
+ release();assert.equal((await pending).status,'uncertain');await new Promise(r=>setTimeout(r,0));
+ assert.equal(cancelled,1);assert.equal(f.f.posts,0);
+});
