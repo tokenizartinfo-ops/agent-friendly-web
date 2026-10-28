@@ -74,3 +74,10 @@ test('control and provider accessors are rejected without invoking getters',asyn
  assert.equal((await createSuccessorCanaryRestorer(f.options).advance()).status,'blocked');assert.equal(used,false);assert.equal(f.posts,0);
  const g=restorationFixture();g.options.request=async x=>{const r=await g.request(x);if(x.path.endsWith('/versions/'+g.ids.closed))Object.defineProperty(r.result,'bindings',{enumerable:true,get(){used=true;return [];} });return r;};assert.equal((await createSuccessorCanaryRestorer(g.options).advance()).status,'blocked');assert.equal(used,false);assert.equal(g.posts,0);
 });
+
+test('original deadline includes final post-commit continuation and never reports a late success',async t=>{
+ const {createSuccessorCanaryRestorer}=await load(),f=restorationFixture(),base=f.storage;let tick=100,n=0;
+ t.mock.method(performance,'now',()=>tick);
+ f.options.storage={transaction:async fn=>{const r=await base.transaction(fn);if(++n===3)queueMicrotask(()=>queueMicrotask(()=>queueMicrotask(()=>{tick=131;})));return r;}};
+ const r=await createSuccessorCanaryRestorer({...f.options,timeoutMs:30}).advance();assert.equal(r.status,'uncertain');assert.equal(f.posts,1);
+});

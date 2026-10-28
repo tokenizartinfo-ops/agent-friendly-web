@@ -36,3 +36,5 @@ Produces: createSuccessorCanaryRestorer(...).advance(), restorationConfiguration
 ## Ledger
 Pre-flight: the handoff's false mayRestoreAdministration is deliberate; separate private finite control supplies restoration authority. The ordinary operator must already be closed, so no dependency on self-redeployment remains.
 Ruling: remote Git branch/Actions replaces local skill workspace/worktree/build under the owner's explicit cloud-first preference. PR and issue497 are the durable ledger. No deployment or live control is authorized merely by this source block.
+
+RED observed8c94eedd/CI40728412939/job122957810303:3088PASS/13expected missing-featureFAIL/1existingSKIP. A scoped primary metadata GET28oct16:43:37UTC confirmed operator version855dc5c1 omits exports/containers, while canary6a0c97e9 declares only AfwOwnEventNode/linked Container; fixtures now model the optional operator fields and actual final two false canary flags. No runtime mutation. Implementation begins only after this RED; GREEN/full/native pending. Attachment failed at the app100-attachment cap; no unrelated artifact removed.
