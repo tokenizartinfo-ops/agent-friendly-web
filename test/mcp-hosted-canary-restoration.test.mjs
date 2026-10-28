@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {restorationFixture,ROOT,W} from './fixtures/canary-restoration.mjs';
+import {restorationFixture} from './fixtures/canary-restoration.mjs';
 const load=()=>import('../lib/mcp-hosted-canary-restoration.mjs');
 const SLOT='afw-own-successor-closure-v1',KEY='afw.canary-restoration-control.v1';
 function fixture(){
