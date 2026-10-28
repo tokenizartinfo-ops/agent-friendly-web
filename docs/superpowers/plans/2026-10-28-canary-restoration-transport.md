@@ -12,3 +12,5 @@ Files: lib/mcp-canary-restoration-transport.mjs; test/mcp-canary-restoration-tra
 
 Review focus: arbitrary target/extra input/accessors must have zero credential/network calls; write ACK uncertainty and late credential completion cannot retry; streaming/cache/redirect/error handling must not leak secrets or accept stale/late data; exact pins and original authority cannot change across awaits; env/secret metadata projection must not return credential values.
 Ruling: GitHub isolated branch/Actions replaces local skill workspace under owner cloud-first delegation. Existing issue497/PR ledger records evidence. No token is created/read from current accounts and no live API is invoked by this source block. Rollback is revert of the carrying source PR.
+
+RED observed2c6b8ba0/CI40742855051/job123008772443:3126PASS/7expected missing-moduleFAIL/1existingSKIP. Implement only after this observed RED. First implementation enforces exact control/pins/routes/body, split server credentials and one write attempt; fetch/stream/cache/redirect/secret projection remain bounded. GREEN/full/review pending.
