@@ -108,3 +108,30 @@ test('native RPC disposal metadata is released while unexpected evidence remains
   assert.equal(disposals,mode==='valid'?2:1);assert.equal(f.f.posts,mode==='valid'?1:0);
  }
 });
+
+test('resumed primary refresh cannot dispatch beyond original parent or nested leases',{timeout:25000},async t=>{
+ const {createPrivateCanaryRestorationHost}=await load();
+ for(const [boundary,mode] of [['rpc','expire'],['post','expire'],['post','disable'],['rpc','child-timeout'],['post','child-timeout']]){
+  await t.test(boundary+' '+mode,async()=>{
+   const f=fixture(),clock=f.options.now;let directChecks=0,injected=0,publish=false;
+   const token=f.env.AFW_MCP_CLOSURE_PUBLISH_TOKEN;
+   Object.defineProperty(f.env,'AFW_MCP_CLOSURE_PUBLISH_TOKEN',{get(){publish=true;return token;}});
+   f.options.now=()=>{
+    const n=clock(),stack=new Error().stack??'',caller=boundary==='rpc'?'readCustody':'fetchGuarded';
+    const direct=new RegExp('at current[^\\n]*\\n\\s+at (?:async )?fresh[^\\n]*\\n\\s+at (?:async )?'+caller+'\\b').test(stack);
+    if(!injected&&direct&&(boundary==='rpc'||publish)&&++directChecks===2){
+     injected++;queueMicrotask(()=>{
+      if(mode==='expire')f.f.advance(f.f.policy.expiresAt-clock());
+      else if(mode==='disable')f.env.AFW_MCP_CLOSURE_ENABLED='false';
+      else{const end=performance.now()+5100;while(performance.now()<end){/* Deliberately keep child timer callbacks queued in cloud CI. */}}
+     });
+    }
+    return n;
+   };
+   const h=createPrivateCanaryRestorationHost(f.options);assert.equal((await h.arm(f.hash)).status,'armed');
+   const result=await h.restore(f.hash);assert.equal(injected,1,'race boundary must be reached');
+   assert.notEqual(result.status,'restored_observed');assert.equal(f.f.posts,0,'no post after lost authority/deadline');
+   if(boundary==='rpc')assert.equal(f.originalReads,0,'no RPC after lost authority/deadline');
+  });
+ }
+});
