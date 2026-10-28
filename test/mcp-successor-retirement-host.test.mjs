@@ -67,3 +67,14 @@ test('a stalled primary read has one original deadline and late completion canno
  release?.(null);await Promise.resolve();await Promise.resolve();assert.equal(queries,1);assert.equal(reads,0);
  }finally{t.mock.timers.reset();f.close();}
 });
+
+for(const discordant of [false,true])test('each reservation snapshot starts at primary; discordant='+discordant,available,async()=>{
+ const f=await prepared();try{
+ const {env}=f.input,prepare=env.DB.prepare;let session=0;const observed=[];
+ env.DB.withSession=function(mode){assert.equal(mode,'first-primary');const id=++session;let first=true;
+  return {prepare(sql){const q=prepare(sql);return {bind(...args){const b=q.bind(...args);return {async first(){const original=await b.first();const primaryRead=first;first=false;if(sql.includes('FROM dossier_successor_reservations')){observed.push(id);if(discordant&&observed.length===2&&primaryRead)return {...original,predecessor_generation:'0'.repeat(64)};}return original;}};}};}}
+ };
+ if(discordant)await assert.rejects(observeOwnSuccessorRetiredCustody(f.input));else await observeOwnSuccessorRetiredCustody(f.input);
+ assert.equal(observed.length,2);assert.equal(new Set(observed).size,2,'both reservation observations must be the first query of distinct sessions');
+ }finally{f.close();}
+});
