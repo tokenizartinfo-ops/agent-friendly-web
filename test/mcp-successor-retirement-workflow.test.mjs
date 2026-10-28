@@ -71,3 +71,9 @@ test('stalled provider body is bounded and never becomes late successful evidenc
  const f=fixture();f.policy.expiresAt=f.wall()+80;f.rehash();f.options.fetchImpl=async()=>{f.calls.gets++;return new Response(new ReadableStream({start(){}}),{headers:{'Content-Type':'application/json'}});};
  const r=await run(f);assert.equal(r.status,'uncertain');assert.equal(r.evidence,undefined);assert.equal(f.calls.gets,1);
 });
+
+test('native-style fresh bound step method is captured once instead of compared by property identity',opt,async()=>{
+ const f=fixture(),original=f.step.do;let reads=0;
+ Object.defineProperty(f.step,'do',{get(){reads++;return function(...args){return original.apply(f.step,args);};}});
+ const r=await run(f);assert.equal(r.status,'retired_verified');assert.equal(f.calls.steps,1);assert.equal(f.calls.gets,2);assert.equal(reads,2);
+});

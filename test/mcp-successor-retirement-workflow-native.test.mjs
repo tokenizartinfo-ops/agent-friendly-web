@@ -2,8 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {build} from 'esbuild';
-import {readFileSync} from 'node:fs';
-import {dirname} from 'node:path';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 // Synthetic custody/provider authority ONLY. Real native Workflow and cross-script
 // RPC serialization/lifecycle, not production D1/Container/consent acceptance.
@@ -15,7 +13,7 @@ test('native Workflow observes fixed successor RPC retirement while ordinary rel
  close(){throw Error('Read-only fixture must not close');}
  }
  export default{fetch(){return new Response(null,{status:404});}};`;
- const compiled=await build({entryPoints:['worker/mcp-release/index.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',sourcemap:false,define:{'globalThis.__AFW_RELEASE_OPERATOR_BUNDLE__':'undefined'},plugins:[{name:'ci-only-retirement-error-location',setup(b){b.onLoad({filter:/mcp-successor-retirement-observation[.]mjs$/},({path})=>{const original=readFileSync(path,'utf8'),needle="}catch{return outcome(entered?'uncertain':wall===undefined?'blocked':'uncertain');}";assert.equal(original.split(needle).length,2);return{contents:original.replace("const current=()=>{","var ciIdentityDiagnostics;const current=()=>{").replace("const n=now(),m=monotonicNow();","const n=now(),m=monotonicNow();ciIdentityDiagnostics={namespace:env.AFW_RELEASE_EVENTS_NODE===namespace,step:step.do===doStep,credential:env.AFW_RELEASE_READ_TOKEN===credential,nameMethod:namespace.idFromName===methods.idFromName,stringMethod:namespace.idFromString===methods.idFromString,getMethod:namespace.get===methods.get,enabled:env[enabled]==='true',policy:env[policyKey]===raw,flags:flags.every(k=>env[k]==='false'),wall:time(n)&&n>=lastWall&&n>=p.startAt&&n<p.expiresAt,mono:Number.isFinite(m)&&m>=lastMono&&m<endMono};").replace(needle,"}catch(error){return {...outcome(entered?'uncertain':wall===undefined?'blocked':'uncertain'),ciErrorLocation:String(error?.stack).slice(0,1600),ciIdentityDiagnostics};}"),loader:'js',resolveDir:dirname(path)};});}}]});
+ const compiled=await build({entryPoints:['worker/mcp-release/index.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',sourcemap:false,define:{'globalThis.__AFW_RELEASE_OPERATOR_BUNDLE__':'undefined'});
  let gets=0;
  const bindNode={className:'Own',scriptName:'own',useSQLite:true,uniqueKey:'afw-retirement-native-fixture'};
  const settings=bindings=>convertV4MiniflareOptions({workers:[
