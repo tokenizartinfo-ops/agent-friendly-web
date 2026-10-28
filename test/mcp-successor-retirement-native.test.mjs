@@ -16,6 +16,7 @@ test('native successor retirement RPC reads original sealed DO/D1 state without 
  import {snapshotRetiredRpcObservation} from './lib/mcp-retired-rpc-observation.mjs';
  const context={grantId:'g',subject:'owner',clientId:'client',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',scopes:['afw:project:read']};
  const program='CI-only custody program',sourceRevision='c'.repeat(40),programHash=createHash('sha256').update(program).digest('hex'),window={startAt:${startAt},expiresAt:${expiresAt}};
+ const {startAt,expiresAt}=window;
  function settings(env){
   const namespace=env.NODE,scope={accountId:'1'.repeat(32),workerName:'agent-friendly-web-delegated-canary',namespaceId:'2'.repeat(32),applicationId:'ci-own',ownerRef:'3'.repeat(64),projectRef:'4'.repeat(64),resource:context.resource};
   const original={containerId:namespace.idFromName('afw-own-event-one-occurrence-v1').toString(),applicationId:scope.applicationId,programHash:'d'.repeat(64),sourceRevision:'e'.repeat(40)},candidate={trialId:'f'.repeat(64),programHash,sourceRevision,...window,budget:1};
