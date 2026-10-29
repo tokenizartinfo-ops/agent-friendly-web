@@ -19,11 +19,11 @@ OLD="73a52556-46d3-49e9-a09b-c195a9515ce6"
 NEW="0fd30778-70ce-406f-8757-69bb29a21c09"
 PREVIOUS="1772ceae-7e8d-4dbc-bc1d-0ade956a3e45"
 INITIAL="c049e399-4f7c-4b20-aaf4-658767e7c043"
-STAGED="no-adopted-home-stage"
-STAGED_OWNER="no-adopted-home-stage-owner"
+STAGED="46aa4b5b-3c53-44b7-9a5a-c68b997450b6"
+STAGED_OWNER="AFW public-journey r40932028845 a1 rollback"
 WORKFLOW=".github/workflows/afw-public-journey-activation.yml"
 SMOKE_SHA="907bd74247f0b1a69bae7259101b311fa7357b8d94c27e3a14d491bb048f741e"
-OBSERVER_SHA="447c7192bca614de1d418407a6eff3628887f157f8427f59a19ae7f189d0e419"
+OBSERVER_SHA="4383b97e172eb7e02e0ba9054890ce62d0147554e03538db4de72dc899a50766"
 INVENTORY_SHA="3177ed418921327b32d8acd6a18baa5e81265bb2ca0bace432360bf7dbf9dc56"
 TAG="cace1d9c-r40930579961-a1"
 
@@ -302,7 +302,7 @@ def main():
             receipt[phase+"AckAt"]=datetime.now(timezone.utc).isoformat()
             save()
             return result
-        activate(read,write,observe,remaining,receipt,save,already_staged=False)
+        activate(read,write,observe,remaining,receipt,save,already_staged=True)
         print(json.dumps(receipt))
         if not receipt["ok"]: raise SystemExit(2)
     except SystemExit:
