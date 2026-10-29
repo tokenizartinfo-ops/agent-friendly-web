@@ -69,8 +69,8 @@ jobs:
           assert.equal(config.workers_dev,false);
           assert.equal(config.preview_urls,false);
           assert.deepEqual(config.triggers.crons,[]);
-          for(const name of ['AFW_QA_HTTP_ENABLED','AFW_QA_BOOTSTRAP_ENABLED','AFW_QA_CHALLENGE_ENABLED','AFW_MCP_CLOSURE_ENABLED','AFW_MCP_READER_PROBE_ENABLED'])assert.equal(config.vars[name],'false');
-          for(const name of ['AFW_QA_HTTP_POLICY','AFW_QA_PREREGISTRATION','AFW_QA_CHALLENGE_IDENTITY','AFW_MCP_CLOSURE_POLICY','AFW_MCP_READER_PROBE_POLICY'])assert.equal(config.vars[name],'');
+          for(const name of ['AFW_QA_HTTP_ENABLED','AFW_QA_BOOTSTRAP_ENABLED','AFW_QA_CHALLENGE_ENABLED','AFW_MCP_CLOSURE_ENABLED','AFW_MCP_READER_PROBE_ENABLED','AFW_MCP_PUBLISHER_PROBE_ENABLED'])assert.equal(config.vars[name],'false');
+          for(const name of ['AFW_QA_HTTP_POLICY','AFW_QA_PREREGISTRATION','AFW_QA_CHALLENGE_IDENTITY','AFW_MCP_CLOSURE_POLICY','AFW_MCP_READER_PROBE_POLICY','AFW_MCP_PUBLISHER_PROBE_POLICY'])assert.equal(config.vars[name],'');
           assert.ok(config.compatibility_flags.includes('nodejs_compat'));
           const directory='output/independent-closure',modules=[];
           async function walk(relative=''){
