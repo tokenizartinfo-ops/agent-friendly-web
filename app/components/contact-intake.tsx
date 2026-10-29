@@ -90,7 +90,7 @@ export function ContactIntake({
   if (!open) {
     return (
       <button className="contact-intake-open" type="button" onClick={() => setOpen(true)}>
-        <Mail size={17} aria-hidden="true" /> {copy.open}
+        <Mail size={17} aria-hidden="true" /> {captureEnabled ? copy.open : copy.previewOpen}
       </button>
     );
   }
@@ -98,7 +98,7 @@ export function ContactIntake({
   return (
     <section className="contact-intake" aria-labelledby="contact-intake-title">
       <header>
-        <div><span>{copy.eyebrow}</span><h3 id="contact-intake-title">{copy.title}</h3><p>{copy.intro}</p></div>
+        <div><span>{copy.eyebrow}</span><h3 id="contact-intake-title">{captureEnabled ? copy.title : copy.previewTitle}</h3><p>{captureEnabled ? copy.intro : copy.previewIntro}</p></div>
         <button type="button" className="icon-button" aria-label={copy.close} title={copy.close} onClick={() => setOpen(false)}><X size={18} /></button>
       </header>
       <div className="contact-preview-notice"><LockKeyhole size={16} /><strong>{copy.previewNotice}</strong></div>

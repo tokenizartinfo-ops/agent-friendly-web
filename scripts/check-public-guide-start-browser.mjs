@@ -89,6 +89,23 @@ try{
    assert.equal(await page.locator('main').getAttribute('lang'),locale);
    assert.equal(await page.locator('.public-guide-hero > div > p').first().innerText(),publicToolsCopy(locale).guide.intro);
    assert.equal(await page.locator('.public-guide-message.is-guide').count(),1);
+   // Keyboard path through the real shared navigation before the guide.
+   const skip=page.locator('.skip-link');
+   assert.equal(await skip.count(),1,'skip navigation is available: '+label);
+   await skip.focus();await page.keyboard.press('Enter');
+   assert.equal(await page.locator('#afw-main-content').evaluate(el=>el===document.activeElement),true);
+   if(viewport.width===390){
+    const menu=page.locator('.menu-button');
+    await menu.click();assert.equal(await menu.getAttribute('aria-expanded'),'true');
+    const advanced=page.locator('.site-resources > summary');
+    await advanced.click();assert.equal(await page.locator('.site-resources').getAttribute('open'),'');
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('.site-resources').getAttribute('open'),null);
+    assert.equal(await advanced.evaluate(el=>el===document.activeElement),true);
+    await page.keyboard.press('Escape');
+    assert.equal(await menu.getAttribute('aria-expanded'),'false');
+    assert.equal(await menu.evaluate(el=>el===document.activeElement),true);
+   }
    const start=page.locator('.public-guide-question-link'),input=page.locator('#public-guide-input');
    assert.equal(await start.count(),1,'visible question anchor is present: '+label);
    assert.equal(await start.getAttribute('href'),'#public-guide-input');
@@ -122,6 +139,24 @@ try{
    await input.scrollIntoViewIfNeeded();
    await capture(page,'guide-answer-'+label);
    cases.push({locale,viewport,guide:true,questionAnchor:true,composerFocused:true,answerReadable:true,headerClear:true,answerTopic:answer.topic,keyboard:true,reducedMotion:true,overflow:false});
+
+   // Same compiled product, no real account or API calls.
+   const assistant=await page.goto(base+localizedPath('assistant',locale),{waitUntil:'networkidle'});
+   assert.equal(assistant.status(),200);
+   await page.getByRole('button',{name:publicToolsCopy(locale).intake.review,exact:true}).click();
+   const languages=page.locator('.assistant-suggestion-list label').filter({has:page.locator('strong',{hasText:publicToolsCopy(locale).intake.fields.languages})});
+   assert.equal(await languages.locator('small').innerText(),'es, en, pt','published example keeps all declared languages: '+label);
+   assert.equal(await page.locator('.assistant-next-step a').first().getAttribute('href'),localizedPath('dossier',locale));
+   await capture(page,'assistant-reviewed-'+label);
+   const comparison=await page.goto(base+localizedPath('measurement',locale),{waitUntil:'networkidle'});
+   assert.equal(comparison.status(),200);
+   assert.equal(await page.locator('.comparison-input-notice').innerText(),publicToolsCopy(locale).comparison.exampleNotice);
+   await page.locator('.comparison-tool input[type=number]').first().fill('30');
+   assert.equal(await page.locator('.comparison-input-notice').innerText(),publicToolsCopy(locale).comparison.inputNotice);
+   assert.equal(await page.locator('.comparison-result strong').first().innerText(),'+25');
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth),'comparison has no horizontal overflow: '+label);
+   await capture(page,'comparison-declared-'+label);
+   cases.push({locale,viewport,publishedExampleLanguages:true,exampleLabeled:true,declaredValuesLabeled:true});
    await context.close();
   }
  }

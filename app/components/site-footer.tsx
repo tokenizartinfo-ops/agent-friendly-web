@@ -54,6 +54,7 @@ export function SiteFooter({ locale = 'es' }: { locale?: Locale } = {}) {
       <div className="footer-column">
         <strong>{copy.project}</strong>
         <a href={localizedPath('dossier', locale) || '/expediente'}>{copy.dossier}</a>
+        <a href="mailto:hello@agentfriendlyweb.dev">{copy.help}</a>
         <a href="/.well-known/security.txt">{copy.security}</a>
         <a href="https://github.com/tokenizartinfo-ops/agent-friendly-web" target="_blank" rel="noreferrer">
           {copy.repository} <ArrowUpRight size={13} />

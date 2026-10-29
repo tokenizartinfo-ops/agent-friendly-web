@@ -1,3 +1,4 @@
+import { MATURITY_STAGES } from '../../lib/maturity-copy.mjs';
 import { ArrowRight, Bot, FileCheck2, ShieldCheck } from './client-icons';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 import { publicPageCopy } from '../../lib/public-page-copy.mjs';
@@ -38,6 +39,11 @@ export function LocalizedPublicPage({ pageKey, locale }: { pageKey: string; loca
         ))}
       </section>
 
+      {pageKey === 'methodology' ? <section className="maturity-section">
+        <h2>{locale === 'en' ? 'Maturity stages' : locale === 'pt' ? 'Etapas de maturidade' : 'Niveles de madurez'}</h2>
+        <p>{locale === 'en' ? 'These names describe the product journey. Historical auditor v1 results retain their original labels, including “AF-5 transactional”. A high score does not prove payments or permission to act.' : locale === 'pt' ? 'Estes nomes descrevem a jornada do produto. Resultados históricos do auditor v1 mantêm seus rótulos originais, incluindo “AF-5 transacional”. Uma pontuação alta não comprova pagamentos nem permissão para agir.' : 'Estos nombres describen la ruta del producto. Los resultados históricos del auditor v1 conservan sus etiquetas originales. Un puntaje alto no acredita pagos ni permisos para actuar.'}</p>
+        <div className="maturity-list">{MATURITY_STAGES[locale].map(([level, title, detail]) => <div key={level}><span>{level}</span><strong>{title}</strong><p>{detail}</p></div>)}</div>
+      </section> : null}
       <section className="localized-comic-limits">
         <div><ShieldCheck size={22} /><strong>{locale === 'en' ? 'Visible boundaries' : locale === 'pt' ? 'Limites visíveis' : 'Límites visibles'}</strong></div>
         <ul>{page.limits.map((limit: string) => <li key={limit}>{limit}</li>)}</ul>

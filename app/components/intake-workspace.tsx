@@ -526,7 +526,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         workingExit.current?.();
         window.location.assign(exitTarget);
       }} />}
-      <main className="intake-main">
+      <div className="intake-main">
         {assistanceAvailable?<DossierAssistance key={projectId} projectId={projectId} revision={scopeRevision} canRequest={Boolean(loaded&&scopeRevision>0&&!unconfirmedChanges&&!conflictReview&&!sessionRequired&&status!=='saving'&&!workingPending)} locale={locale} request={request} goalProposalEnabled={assistanceGoalProposalEnabled} goalConsentEnabled={assistanceGoalConsentEnabled}/>:null}
         <fieldset disabled={Boolean(manualBusy || conflictReview || !loaded)} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
         <div className="page-title">
@@ -694,7 +694,7 @@ export function IntakeWorkspace({ userName, userEmail, locale = 'es', rehearsal,
         {!rehearsal ? <div id="dossier-capsule"><CapsuleReview projectId={projectId} expectedDomain={hostname} allowBuild locale={locale} deliveryContext={{cms:savedSnapshot.cms,hosting:savedSnapshot.hosting}} observationHistory={currentObservations.history} /></div> : null}
         </details>
         </fieldset>
-      </main>
+      </div>
 
       <aside className="intake-aside">
         <details className="dossier-assistant"><summary>{localizedMessage(locale, 'Novedades de tu expediente', 'Dossier updates', 'Novidades do dossiê')}</summary>
