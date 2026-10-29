@@ -65,3 +65,17 @@ test('host passes the fixed close stage authority and deadline into custody',asy
  };
  await assert.rejects(()=>withdrawOwnPermissions({...x.options,close}));assert.equal(called,1);
 });
+
+test('original host rejects a foreign policy hash or an extended dispatch deadline before mutation',async t=>{
+ for(const boundary of [{policyHash:'0'.repeat(64),expiresAt:Date.now()+1000},{policyHash:null,expiresAt:Date.now()+31000}]){
+  const x=setup();t.after(()=>x.f.close());
+  if(boundary.policyHash===null)boundary.policyHash=createHash('sha256').update(x.env.AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY).digest('hex');
+  await assert.rejects(()=>withdrawOwnPermissions(x.options,boundary));assert.equal(x.read(),'');assert.equal(x.closes(),0);
+ }
+});
+test('original host passes a shorter caller deadline to the actual close authority',async t=>{
+ const x=setup();t.after(()=>x.f.close());const expiresAt=Date.now()+2000;
+ const boundary={policyHash:createHash('sha256').update(x.env.AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY).digest('hex'),expiresAt};
+ const result=await withdrawOwnPermissions({...x.options,close:async(signal,assertCurrent,end)=>{assert.equal(signal.aborted,false);assertCurrent();assert.equal(end,expiresAt);return{closed:true,runtimeStopRequested:true};}},boundary);
+ assert.equal(result.permissionsWithdrawn,true);
+});
