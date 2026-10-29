@@ -108,7 +108,7 @@ def staged_state(state,receipt,already_staged):
     return (owned(state,receipt,"stage0") or
             (already_staged and state.get("id")==STAGED and state.get("owner")==STAGED_OWNER))
 
-def activate(read,write,observe,remaining,receipt,save,already_staged=True):
+def activate(read,write,observe,remaining,receipt,save,already_staged=False):
     """Trusted adapters; no retry of a mutation, including after an unknown ACK."""
     def mutate(phase,versions):
         upl.require(remaining()>0 and phase not in receipt["mutationAttempts"],"mutation_expired_or_repeated")
@@ -302,7 +302,7 @@ def main():
             receipt[phase+"AckAt"]=datetime.now(timezone.utc).isoformat()
             save()
             return result
-        activate(read,write,observe,remaining,receipt,save,already_staged=False)
+        activate(read,write,observe,remaining,receipt,save,already_staged=True)
         print(json.dumps(receipt))
         if not receipt["ok"]: raise SystemExit(2)
     except SystemExit:
