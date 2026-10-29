@@ -1,0 +1,29 @@
+# AFW: coherencia y recorrido público — plan de corrección
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+
+**Goal:** Corregir los hallazgos aprobados de #639 sin alterar capacidades privadas ni la portada aprobada.
+**Architecture:** Reutilizar contratos, copys ES/EN/PT y componentes existentes. Centralizar solo las declaraciones que hoy divergen; separar ejemplo público de evidencia real.
+**Tech Stack:** Node 22, React/Vinext, GitHub Actions.
+**Spec:** https://github.com/tokenizartinfo-ops/agent-friendly-web/issues/639 — aprobada por Gabriel el29oct2026 en este chat.
+
+## Global Constraints
+- PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT rama aislada fix/public-journey-audit-20261029; ORIGIN GitHub; RESOURCE_TYPE Git tree/commit/PR; ALLOWED_ACTION fuente, pruebas y CI; ROLLBACK revertir commits propios antes de cualquier publicación.
+- No modificar imagen, permisos, secretos, datos históricos, scoring ni protocolos privados. No afirmar publicación desde CI.
+- GitHub/Actions para ejecución: sin nuevo clone, instalación, servidor o build local.
+- Ruling: usar este registro en Git y #639 como ledger, en lugar de scratch local de la skill; la preferencia cloud del owner prevalece.
+- Ruling: la auditoría contiene el diseño y sus criterios y el owner aprobó ejecutarlos sin volver a consultar decisiones rutinarias. No repetir aprobación de diseño.
+- Los ensayos privados tienen baseline, ventana y cierre separados; esta rama no los habilita.
+
+## Review Focus
+Preguntas mezcladas y negación de conocimientos técnicos; secretos junto a intención de inicio; idiomas con tildes/combinantes; diferencias ES/EN/PT; ejemplos que aparentan evidencia.
+
+## Tasks
+- [ ] 1. A2/A3: test/public-journey-audit.test.mjs reproduce el ejemplo publicado (es/en/pt + citas), variantes y palabras parciales; pregunta novata de inicio+costo en tres idiomas y guardrails. RED en CI antes de cambiar lib/intake-assistant.mjs/lib/public-guide.mjs. Luego GREEN junto a test/public-guide.test.mjs y test/intake-assistant-contract.test.mjs.
+- [ ] 2. A1/A5: conciliar guía/FAQ/método con capacidades públicas fechadas; no elevar puntuación histórica. Etiquetar comparador como ejemplo/cálculo de datos no verificados en las tres traducciones. Probar la distinción A2A diagnóstico público vs delegación privada y conservar límites de pagos/mutaciones.
+- [ ] 3. A4/A7: explicar acceso por invitación, ayuda real y límites del prototipo/captura; no activar correo, formularios, cuentas o tarifas. Revisión de enlaces y textos en tres idiomas.
+- [ ] 4. A6: simplificar navegación avanzada y mejorar teclado/salto/landmarks preservando portada. Verificación de componentes reales 390/1440, Escape/foco, ES/EN/PT en runner aislado.
+- [ ] 5. A8: reducir duplicación tocada y añadir índice breve vigente; preservar historial. Revisión independiente de rama completa, CI npm test/lint/build, preparación de release público separada de aceptación privada.
+
+## Progress
+- Base main 0be2c3eb97078f544349e2a6bf6b80b85bffe235 verificada29oct2026.
+- Auditoría y aceptación #639; inicio por fallos reproducibles, sin cambiar runtime.
