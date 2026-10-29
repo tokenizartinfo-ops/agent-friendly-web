@@ -18,7 +18,7 @@
 Preguntas mezcladas y negación de conocimientos técnicos; secretos junto a intención de inicio; idiomas con tildes/combinantes; diferencias ES/EN/PT; ejemplos que aparentan evidencia.
 
 ## Tasks
-- [ ] 1. A2/A3: test/public-journey-audit.test.mjs reproduce el ejemplo publicado (es/en/pt + citas), variantes y palabras parciales; pregunta novata de inicio+costo en tres idiomas y guardrails. RED en CI antes de cambiar lib/intake-assistant.mjs/lib/public-guide.mjs. Luego GREEN junto a test/public-guide.test.mjs y test/intake-assistant-contract.test.mjs.
+- [x] 1. A2/A3: test/public-journey-audit.test.mjs reproduce el ejemplo publicado (es/en/pt + citas), variantes y palabras parciales; pregunta novata de inicio+costo en tres idiomas y guardrails. RED en CI antes de cambiar lib/intake-assistant.mjs/lib/public-guide.mjs. Luego GREEN junto a test/public-guide.test.mjs y test/intake-assistant-contract.test.mjs.
 - [ ] 2. A1/A5: conciliar guía/FAQ/método con capacidades públicas fechadas; no elevar puntuación histórica. Etiquetar comparador como ejemplo/cálculo de datos no verificados en las tres traducciones. Probar la distinción A2A diagnóstico público vs delegación privada y conservar límites de pagos/mutaciones.
 - [ ] 3. A4/A7: explicar acceso por invitación, ayuda real y límites del prototipo/captura; no activar correo, formularios, cuentas o tarifas. Revisión de enlaces y textos en tres idiomas.
 - [ ] 4. A6: simplificar navegación avanzada y mejorar teclado/salto/landmarks preservando portada. Verificación de componentes reales 390/1440, Escape/foco, ES/EN/PT en runner aislado.
@@ -27,3 +27,6 @@ Preguntas mezcladas y negación de conocimientos técnicos; secretos junto a int
 ## Progress
 - Base main 0be2c3eb97078f544349e2a6bf6b80b85bffe235 verificada29oct2026.
 - Auditoría y aceptación #639; inicio por fallos reproducibles, sin cambiar runtime.
+
+- Task1 RED: CI40924481591/job123626212439 on fd8fa48c reproduced four assertion failures (pt lost, variants, novice routing, action precedence);19 existing tests passed. GREEN verification pending next commit. No production change.
+- Ruling: canonicalizing the historical AF-5 wording needs a separate version-aware change; do not silently reinterpret persisted scores while fixing guide routing.
