@@ -16,6 +16,7 @@ test('materialization admits the exact nonsecret prepared-save UUID as data, nev
  assert.equal(r.script,input.template.replace(JSON.stringify(PRIVATE_CONFIRMATION_SLOT),JSON.stringify(input.policyJson)));
 });
 for(const binding of [
+ ...['00000000-0000-0000-0000-000000000000','aaaaaaaa-aaaa-3aaa-8aaa-aaaaaaaaaaaa','aaaaaaaa-aaaa-4aaa-7aaa-aaaaaaaaaaaa'].map(text=>({name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text})),
  {name:'AFW_OTHER_KEY',type:'plain_text',text:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'},
  {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:'sensitive-value'},
  {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',value:'sensitive-value'},

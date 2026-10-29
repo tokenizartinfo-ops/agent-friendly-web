@@ -23,12 +23,12 @@ test('prepared dispatch uses current pinned snapshot and durable one-effect clai
  assert.equal(r.status,'dispatch_requested');assert.equal(r.operationalReadiness,false);assert.equal(r.cloudReviewConfirmed,false);assert.equal(x.rpc.length,1);assert.equal(x.f.posts,0);
  assert.equal((await dispatch(createPrivateCanaryRestorationHost(x.options),x)).status,'dispatch_requested');assert.equal(x.rpc.length,1);
 });
-for(const mode of ['off','hash','unarmed','too-early','expired','event','schedule','key','code','pointer','operator','unknown-policy']){
+for(const mode of ['off','hash','unarmed','too-early','expired','event','schedule','key','key-version','key-variant','code','pointer','operator','unknown-policy']){
  test('prepared dispatch rejects '+mode+' before native call',async()=>{
   const x=fixture();
-  if(['event','schedule','key'].includes(mode)){
-   const n=mode==='key'?'AFW_DOSSIER_OWN_SAVE_KEY':'AFW_DOSSIER_EVENTS_SCHEDULE',b=x.f.state.live.bindings.find(b=>b.name===n);
-   if(mode==='key')b.text='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb';
+  if(['event','schedule','key','key-version','key-variant'].includes(mode)){
+   const n=mode.startsWith('key')?'AFW_DOSSIER_OWN_SAVE_KEY':'AFW_DOSSIER_EVENTS_SCHEDULE',b=x.f.state.live.bindings.find(b=>b.name===n);
+   if(mode.startsWith('key'))b.text=mode==='key'?'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb':mode==='key-version'?'aaaaaaaa-aaaa-3aaa-8aaa-aaaaaaaaaaaa':'aaaaaaaa-aaaa-4aaa-7aaa-aaaaaaaaaaaa';
    else{const p=JSON.parse(b.text);if(mode==='event')p.eventId='0'.repeat(64);else p.dispatchAt+=60000;b.text=JSON.stringify(p);}
    x.rehash();
   }
