@@ -28,7 +28,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: afw-public-inactive-upload
+  group: ${{ github.event_name == 'pull_request' && format('afw-public-journey-verify-{0}', github.event.pull_request.number) || 'afw-public-inactive-upload' }}
   cancel-in-progress: false
 
 jobs:
