@@ -114,7 +114,7 @@ test('composed Workflow preserves consumed uncertainty across final journal ACK 
   const count=f.calls.length;await runPrivateClosurePublisherProbeWorkflow(args);assert.equal(f.f.posts,1,failure);assert.equal(f.calls.length,count,failure);
  }
 });
-test('Workflow never accepts malformed undated uncertainty or relabels cached success as fresh',async()=>{
+test('Workflow never exports malformed undated uncertainty',async()=>{
  const{runPrivateClosurePublisherProbeWorkflow}=await load(),f=publisherFixture();
  const r={purpose:'afw.closure-publisher-probe.v1',status:'uncertain',planHash:f.hash,observedAt:null,observations:[],observedSnapshotOnly:false,mayRetry:false,operationalReadiness:false,selectedDeploymentId:null};
  f.env.AFW_INDEPENDENT_CLOSURE.get=()=>({runOwnClosurePublisherProbe:async()=>JSON.stringify({...r,mayRetry:true,privateDetail:'MUST NOT ESCAPE'})});
