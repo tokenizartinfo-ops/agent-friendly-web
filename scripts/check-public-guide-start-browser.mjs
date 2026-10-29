@@ -89,6 +89,23 @@ try{
    assert.equal(await page.locator('main').getAttribute('lang'),locale);
    assert.equal(await page.locator('.public-guide-hero > div > p').first().innerText(),publicToolsCopy(locale).guide.intro);
    assert.equal(await page.locator('.public-guide-message.is-guide').count(),1);
+   // Keyboard path through the real shared navigation before the guide.
+   const skip=page.locator('.skip-link');
+   assert.equal(await skip.count(),1,'skip navigation is available: '+label);
+   await skip.focus();await page.keyboard.press('Enter');
+   assert.equal(await page.locator('#afw-main-content').evaluate(el=>el===document.activeElement),true);
+   if(viewport.width===390){
+    const menu=page.locator('.menu-button');
+    await menu.click();assert.equal(await menu.getAttribute('aria-expanded'),'true');
+    const advanced=page.locator('.site-resources > summary');
+    await advanced.click();assert.equal(await page.locator('.site-resources').getAttribute('open'),'');
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('.site-resources').getAttribute('open'),null);
+    assert.equal(await advanced.evaluate(el=>el===document.activeElement),true);
+    await page.keyboard.press('Escape');
+    assert.equal(await menu.getAttribute('aria-expanded'),'false');
+    assert.equal(await menu.evaluate(el=>el===document.activeElement),true);
+   }
    const start=page.locator('.public-guide-question-link'),input=page.locator('#public-guide-input');
    assert.equal(await start.count(),1,'visible question anchor is present: '+label);
    assert.equal(await start.getAttribute('href'),'#public-guide-input');

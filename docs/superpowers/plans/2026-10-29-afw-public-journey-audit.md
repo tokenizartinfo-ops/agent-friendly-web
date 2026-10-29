@@ -33,3 +33,5 @@ Preguntas mezcladas y negación de conocimientos técnicos; secretos junto a int
 
 - Task1: candidate cc039 CI40925042060 passed22/23 focused tests; remaining assertion was too narrow for the existing English wording “audit the public domain”. Ruling: accept both equivalent audit phrasings; do not alter product copy to satisfy a literal regex. Browser QA40925042026 passed.
 - Task2: shared public capability copy now separates A2A public diagnostics from private monitoring; comparison labels fictional defaults and subsequent user inputs explicitly. Scoring/history remain unchanged.
+
+- Task4 RED: add browser assertions for skip navigation, advanced menu Escape/focus and mobile menu Escape/focus before changing header. Ruling: preserve existing main layout and place the skip target immediately after the header; remove only the nested private main landmark.
