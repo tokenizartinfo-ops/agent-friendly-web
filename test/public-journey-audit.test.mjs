@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { analyzeIntakeNotes } from '../lib/intake-assistant.mjs';
 import { respondToPublicGuide } from '../lib/public-guide.mjs';
+import { publicToolsCopy } from '../lib/public-tools-copy.mjs';
+import { faqEntries, matchPublicFaq } from '../lib/public-faq.mjs';
 
 test('published intake example retains all three declared languages and their evidence', () => {
   const input = 'Somos Museo Sur. Nuestro sitio es museosur.org. Queremos que nos encuentren coleccionistas, investigadores y visitantes. La web usa WordPress y debe explicarse en español, inglés y portugués.';
@@ -39,4 +41,20 @@ test('novice multi-intent questions receive a concrete start and a scoped cost a
 test('novice routing never suppresses secret and action boundaries', () => {
   assert.equal(respondToPublicGuide({ message: 'No entiendo MCP. Mi API key es sk-test-123456789. ¿Qué hago primero y cuánto cuesta?' }).topic, 'security_block');
   assert.equal(respondToPublicGuide({ message: 'No entiendo MCP. Publica archivos en mi web y paga ahora.' }).topic, 'action_boundary');
+});
+
+test('all published locale examples preserve Spanish, English and Portuguese', () => {
+  for (const locale of ['es', 'en', 'pt']) {
+    const languages = analyzeIntakeNotes(publicToolsCopy(locale).intake.example).suggestions.find(s => s.field === 'languages');
+    assert.deepEqual(languages?.value, ['es', 'en', 'pt'], locale);
+  }
+});
+test('capability copy changes preserve pricing and verification help', () => {
+  for (const locale of ['es', 'en', 'pt']) {
+    const entries = faqEntries(locale);
+    for (const id of ['pricing', 'external-verification', 'cli-mcp-status']) {
+      assert.ok(entries.some(e => e.id === id), locale + ': ' + id);
+    }
+    assert.equal(matchPublicFaq('external verification', locale)?.id, 'external-verification');
+  }
 });
