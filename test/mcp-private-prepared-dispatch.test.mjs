@@ -99,3 +99,25 @@ test('expired dispatch and malformed dispatch inputs never grant a new issue win
  assert.equal(r.status,'restored_observed');assert.equal(r.dispatchStatus,'blocked');assert.deepEqual(calls,['restore']);
  const bad=await runPrivateCanaryRestorationWorkflow({env:x.env,event:{payload:{...payload,callback:'https://evil.invalid'}},step,now:x.f.options.now});assert.equal(bad.status,'blocked');
 });
+
+for(const mode of ['disabled','removed','replaced','malformed']){
+ test('Workflow replay retains cached original closure when dispatch is '+mode+' before entry',async()=>{
+  const x=fixture(),calls=[];
+  // Emulate a native replay after the arm step has already committed.
+  x.f.advance(x.f.dispatch.dispatchAt-x.f.options.now());
+  if(mode==='disabled')x.env.AFW_MCP_CLOSURE_DISPATCH_ENABLED='false';
+  if(mode==='removed')delete x.env.AFW_MCP_CLOSURE_DISPATCH_POLICY;
+  if(mode==='replaced')x.env.AFW_MCP_CLOSURE_DISPATCH_POLICY=JSON.stringify({...x.f.dispatch,eventId:'0'.repeat(64)});
+  if(mode==='malformed')x.env.AFW_MCP_CLOSURE_DISPATCH_POLICY='{';
+  x.env.AFW_INDEPENDENT_CLOSURE.get=()=>({
+   armOwnCanaryClosure:async()=>{throw Error('Cached arm must not rerun');},
+   readOwnCanaryClosureControl:async()=>({status:'armed',planHash:x.f.planHash}),
+   dispatchOwnPreparedEvent:async()=>{calls.push('dispatch');throw Error('No dispatch authority');},
+   reduceOwnCanaryPermissions:async()=>{calls.push('reduce');return{status:'permissions_reduced',nativeWithdrawalVerified:false,operationalReadiness:false};},
+   restoreOwnCanary:async()=>{calls.push('restore');return{status:'restored_observed',observedAt:x.f.options.now(),nativeWithdrawalVerified:false,operationalReadiness:false};}
+  });
+  const step={do:async(name,_options,fn)=>name==='arm-own-canary-closure'?{status:'armed'}:fn(),sleepUntil:async(_name,date)=>x.f.advance(date.getTime()-x.f.options.now())};
+  const r=await runPrivateCanaryRestorationWorkflow({env:x.env,event:{payload:{operation:'mcp_canary_dispatch_reduce_restore',policyHash:x.f.planHash,withdrawalPolicyHash:x.f.withdrawalHash,dispatchPolicyHash:x.f.dispatchHash}},step,now:x.f.options.now});
+  assert.equal(r.status,'restored_observed');assert.equal(r.dispatchStatus,'blocked');assert.equal(r.operationalReadiness,false);assert.deepEqual(calls,['reduce','restore']);
+ });
+}
