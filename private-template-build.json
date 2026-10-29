@@ -1,0 +1,19 @@
+{
+  "operatorSourceRevision": "09b854f7db6552bead0b7634784a894f415b6662",
+  "operatorSourceTree": "43507fe78401cb42ddc88c07f4f20a285832865e",
+  "templateHash": "23896d0f6e11c5c7890ada2f51861366842aa0110e6355a6aa81f7865b257f0d",
+  "templateBytes": 1988402,
+  "materializerHash": "470e9ffef8c5fe43f56c4c23a9b478f34305272b0faa34480fb1606303926f29",
+  "materializerBytes": 3941,
+  "artifactJsonHash": "be9385bd5299ed056b704d0336e03bf54783aefaa522eb05398151c208ad3787",
+  "artifactJsonBytes": 1907015,
+  "artifactSourceRevision": "0be2c3eb97078f544349e2a6bf6b80b85bffe235",
+  "artifactSourceTree": "9d7dc420bc49671e1d8c19f4f4d0a5e5c4062d4d",
+  "artifactKey": "af89e4b4355d7fc8e07f496c1cc976857cd783f11fd47139466902e1d69721dc",
+  "workerHash": "c981400c178c0cc4ee29c9138a18b5d7412a42204155abda17cb7ff9a033255b",
+  "programHash": "f6f517c3ac135cfa7b9853137e0487f768b8f24a11e24959a337cac4e28d42e6",
+  "materialized": false,
+  "realPolicyAccepted": false,
+  "remotePublished": false,
+  "invoked": false
+}
