@@ -180,3 +180,14 @@ test('dollar replacement metacharacters in the public artifact remain literal co
  assert.equal(p.manifest.templateHash,hash(p.template));
  assert.equal(p.template.split(JSON.stringify(p.manifest.slot)).length-1,1);
 });
+
+test('exact compiled template carries a nonsecret prepared save UUID under the configuration hash',async()=>{
+ const p=await input(),policy=JSON.parse(p.policyJson);
+ policy.observation.configuration.bindings.push({name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'});
+ policy.plan.configurationHash=activationConfigurationHash(policy.observation.configuration);
+ assert.equal(validateReleaseOperatorBundle({artifact,policy}),true);
+ p.policyJson=JSON.stringify(policy);
+ const out=await materialize(p);
+ assert.equal(out.script,p.template.replace(JSON.stringify(p.manifest.slot),JSON.stringify(p.policyJson)));
+ assert.equal(out.remotePublished,false);
+});
