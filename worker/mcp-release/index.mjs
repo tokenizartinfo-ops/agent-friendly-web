@@ -20,7 +20,14 @@ function namedObservation(policy){
  const root='https://api.cloudflare.com/client/v4/accounts/'+RELEASE_TARGET.accountId,worker=RELEASE_TARGET.workerName,version=policy.observation.versionId;
  const routes={modules:root+'/workers/workers/'+worker+'/versions/'+version+'?include=modules',legacy:root+'/workers/scripts/'+worker+'/versions/'+version,metadata:root+'/workers/workers/'+worker+'/versions/'+version,deployments:root+'/workers/scripts/'+worker+'/deployments',application:root+'/containers/applications/'+policy.observation.applicationId};
  let value={stage:'workflow_admitted',getIndex:0,httpCode:null,durationMs:null},generation=0,legacy=0,active=0,getCount=0;
- const point=stage=>{try{generation++;value={stage:stages.includes(stage)?stage:'unknown',getIndex:value.getIndex,httpCode:null,durationMs:null};}catch{/* Observation cannot change admission. */}};
+ const point=(stage,detail)=>{try{
+   generation++;let custodyClock;
+   if(stage==='successor_custody_future'){
+    const remoteObservedAt=detail?.remoteObservedAt,receivedAt=detail?.receivedAt;
+    if([remoteObservedAt,receivedAt].every(n=>Number.isSafeInteger(n)&&n>=0&&n<=8640000000000000)&&remoteObservedAt>receivedAt)custodyClock={remoteObservedAt,receivedAt,deltaMs:remoteObservedAt-receivedAt};
+   }
+   value={stage:stages.includes(stage)?stage:'unknown',getIndex:value.getIndex,httpCode:null,durationMs:null,...(custodyClock?{custodyClock}:{})};
+  }catch{/* Observation cannot change admission. */}};
  return {
   point,
   before(url,init){try{

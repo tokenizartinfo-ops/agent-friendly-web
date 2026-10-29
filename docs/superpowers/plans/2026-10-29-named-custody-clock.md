@@ -8,3 +8,5 @@ Base6257fb7ac0238f15f6b69d67fbfda920a175b0c1; remote isolated branch diag/named-
 Ledger / Ruling: owner cloud-first instruction overrides local workspace scripts; source/ledger/tests/builds stay on GitHub/Actions. No local clone/build/dependencies.
 Pre-flight: reservation trace produces two clock values; existing named observation consumes numeric-only detail. Both components must change together; snapshot resets per-stage metrics. Existing future/staleness admission and disposal remain outside the change.
 Task1 prepared RED tests, no production implementation. No remote trial or deploy by this branch.
+
+RED40965986321/job123770496034,22:29:36UTC: exact built native named Workflow remained uncertain/future, but custodyClock keys were empty instead of deltaMs/receivedAt/remoteObservedAt. Invalid string/out-of-range future cases already denied with no metric. Implement only the two-value trace and numeric-only stage projection; normal reader unchanged.
