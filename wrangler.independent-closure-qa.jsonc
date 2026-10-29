@@ -85,7 +85,9 @@
     "AFW_MCP_READER_PROBE_ENABLED": "false",
     "AFW_MCP_READER_PROBE_POLICY": "",
     "AFW_MCP_PUBLISHER_PROBE_ENABLED": "false",
-    "AFW_MCP_PUBLISHER_PROBE_POLICY": ""
+    "AFW_MCP_PUBLISHER_PROBE_POLICY": "",
+    "AFW_MCP_CLOSURE_DISPATCH_ENABLED": "false",
+    "AFW_MCP_CLOSURE_DISPATCH_POLICY": ""
   },
   "compatibility_flags": [
     "nodejs_compat"
