@@ -30,9 +30,9 @@
 ## Task 1 — private identity observation
 Files: lib/mcp-release-identity-observation.mjs; worker/mcp-release/index.mjs; test/mcp-release-identity-observation-native.test.mjs; test/mcp-release-identity-observation.test.mjs; .github/workflows/ci.yml.
 Interface: runReleaseIdentityObservation({env,event,step,now,monotonicNow}) returns blocked/uncertain or observed with identityHash, namespaceId, originalContainerId, successorContainerId, observedAt and three false capability flags.
-- [ ] Add a native test against the real current operator; expect observed, currently blocked. Assert zero actor starts and network calls.
-- [ ] Run the new early CI step and inspect the expected RED.
-- [ ] Add the isolated handler and opt-in dispatch, plus boundary tests before final implementation.
+- [x] Add a native test against the real current operator; expect observed, currently blocked. Assert zero actor starts and network calls.
+- [x] Run the new early CI step and inspect the expected RED.
+- [x] Add the isolated handler and opt-in dispatch, plus boundary tests before final implementation.
 - [ ] Run native and directed tests, full npm test/lint/build, and named-confirmation package CI.
 - [ ] Independent whole-branch review; address actionable findings and preserve the evidence.
 - [ ] Merge only with accepted checks. Remote execution remains a separately bounded read-only preparation step.
@@ -40,3 +40,5 @@ Interface: runReleaseIdentityObservation({env,event,step,now,monotonicNow}) retu
 ## Execution ledger
 Base09b854f7db6552bead0b7634784a894f415b6662. Ruling: use an isolated remote branch and Actions instead of a new local worktree/build, per owner's cloud-first instruction. No shared interface changes beyond the private dispatcher.
 Diagnosis: failed Access return is separate from this preparation gap. Login was allowed19:33:16UTC; no grant created. Trial closed66c68da4 at19:36:31UTC. This change does not claim to repair Access.
+
+RED verified: CI40943139428/job123691433338,29Oct19:47:25UTC: expected observed, actual blocked. Implementation now added; GREEN and integration checks remain pending.
