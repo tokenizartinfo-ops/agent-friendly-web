@@ -76,3 +76,16 @@ test('a foreign grant and its audit remain intact',async t=>{
  const x=setup();t.after(()=>x.f.close());x.f.db.prepare("INSERT INTO delegated_access_grants SELECT 'foreign',user_id,client_id,project_id,resource,scopes_json,expires_at,revoked_at FROM delegated_access_grants WHERE id='g'").run();
  await createOwnPermissionWithdrawal(x.o).withdraw();assert.equal(x.f.db.prepare("SELECT revoked_at FROM delegated_access_grants WHERE id='foreign'").get().revoked_at,'');
 });
+
+async function boundedResult(work){
+ let timer;try{return await Promise.race([work,new Promise(resolve=>{timer=setTimeout(()=>resolve('stalled'),7000);})]);}finally{clearTimeout(timer);}
+}
+for(const stalled of ['INSERT INTO dossier_monitoring','UPDATE delegated_access'])test('unsettled '+stalled+' does not starve independent reduction and stop',async t=>{
+ const x=setup();t.after(()=>x.f.close());const r=await boundedResult(createOwnPermissionWithdrawal({...x.o,db:wrapped(x.o.db,{beforeRun:async sql=>{if(sql.startsWith(stalled))await new Promise(()=>{});}})}).withdraw());
+ assert.notEqual(r,'stalled');assert.equal(r.permissionsWithdrawn,false);assert.equal(r.runtimeStopRequested,true);assert.equal(x.closes(),1);
+ assert.equal(r.readWithdrawn,stalled.startsWith('INSERT'));assert.equal(r.monitoringWithdrawn,stalled.startsWith('UPDATE'));limited(r);
+});
+test('unsettled initial primary read returns unconfirmed without effects',async t=>{
+ const x=setup();t.after(()=>x.f.close());const db={prepare(){return{bind(){return{first:()=>new Promise(()=>{})};}};}};
+ const r=await boundedResult(createOwnPermissionWithdrawal({...x.o,db}).withdraw());assert.notEqual(r,'stalled');assert.equal(r.permissionsWithdrawn,false);assert.equal(x.closes(),0);assert.equal(x.revoked(),'');limited(r);
+});
