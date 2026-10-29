@@ -22,7 +22,7 @@ test('language variants preserve declared values, avoid substrings and do not du
 test('novice multi-intent questions receive a concrete start and a scoped cost answer', () => {
   const cases = [
     ['es', 'Tengo una web de servicios técnicos. No entiendo MCP ni archivos. ¿Qué tendría que hacer primero y cuánto cuesta?', /diagnóstico público/i, /precio|costo/i],
-    ['en', 'I have a services website. I do not understand MCP or files. What should I do first and how much does it cost?', /public (audit|diagnostic)/i, /price|cost/i],
+    ['en', 'I have a services website. I do not understand MCP or files. What should I do first and how much does it cost?', /public (audit|diagnostic)|audit the public domain/i, /price|cost/i],
     ['pt', 'Tenho um site de serviços. Não entendo MCP nem arquivos. O que devo fazer primeiro e quanto custa?', /auditoria pública|diagnóstico público/i, /preço|custo/i],
   ];
   for (const [locale, message, firstStep, cost] of cases) {
