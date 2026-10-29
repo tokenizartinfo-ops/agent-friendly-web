@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-const module=await import('../lib/mcp-release-custody-clock-observation.mjs').catch(()=>null);
-const run=module?.runReleaseCustodyClockObservation;
+const clockModule=await import('../lib/mcp-release-custody-clock-observation.mjs').catch(()=>null);
+const run=clockModule?.runReleaseCustodyClockObservation;
 test('private original clock sampler is available',()=>assert.equal(typeof run,'function'));
 const enabled=!!run,original='1'.repeat(64),program='3'.repeat(64),source='a'.repeat(40),ns='d6fc71552de7494a863aca20365a572d';
 function fixture(){
@@ -41,4 +41,18 @@ test('unknown RPC acknowledgement is terminal and has no retry',{skip:!enabled},
 test('foreign cached outputs and local re-entry never create new reads',{skip:!enabled},async()=>{
  const f=fixture();f.step.do=async()=>JSON.stringify({status:'observed'});assert.equal((await run(f)).status,'uncertain');assert.equal(f.calls(),0);
  const g=fixture();g.step.do=async(n,o,fn)=>{const r=await fn();await assert.rejects(fn);return r;};assert.equal((await run(g)).status,'observed');assert.equal(g.calls(),2);
+});
+
+test('invocation identity remains pinned after the first RPC',{skip:!enabled},async()=>{
+ for(const change of [f=>f.event.instanceId='changed',f=>f.event.payload.observationHash='f'.repeat(64),f=>f.event.payload.extra=true,f=>f.event.schedule={}]){
+  const f=fixture(),get=f.namespace.get;f.namespace.get=id=>{const target=get(id);return{async observeRetired(){const r=await target.observeRetired();change(f);return r;}};};
+  const r=await run(f);assert.equal(r.status,'uncertain');assert.equal(f.calls(),1);assert.equal(f.disposed(),1);
+ }
+});
+test('timer wins a held RPC and the late result is disposed without changing the returned snapshot',{skip:!enabled},async()=>{
+ const f=fixture();const p=JSON.parse(f.env.AFW_RELEASE_CUSTODY_CLOCK_OBSERVATION_POLICY);p.expiresAt=10020;f.env.AFW_RELEASE_CUSTODY_CLOCK_OBSERVATION_POLICY=JSON.stringify(p);f.rebind();
+ let release,calls=0,disposed=0;f.namespace.get=()=>({observeRetired(){calls++;return new Promise(resolve=>{release=resolve;});}});
+ const r=await run(f),before=JSON.stringify(r);assert.equal(r.status,'uncertain');assert.equal(r.samples.length,0);assert.equal(calls,1);
+ const late=f.answer();Object.defineProperty(late,Symbol.dispose,{value(){disposed++;}});release(late);await new Promise(resolve=>setTimeout(resolve,10));
+ assert.equal(disposed,1);assert.equal(calls,1);assert.equal(JSON.stringify(r),before);
 });
