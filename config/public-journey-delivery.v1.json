@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "sourceRevision": "cace1d9c6049862401191fa9abf5a9160eeb915c",
+  "sourceTree": "3b9f53127fda5b717de2d143a3d2cb33cbe27a21",
+  "publicMergeRevision": "99863a0c2d76ddc0da635810496c8fae5853c0c7",
+  "artifact": {
+    "id": 12921157580,
+    "name": "afw-guide-qualified-dist-cace1d9c6049862401191fa9abf5a9160eeb915c",
+    "runId": 40927730281,
+    "runAttempt": 1,
+    "workflow": ".github/workflows/afw-public-guide-start-qa.yml",
+    "bytes": 3049915,
+    "sha256": "1d5cf320e9f1081b041f0f1883e7a87462508e0d71216ba56f2d2c6a7c2bddc3",
+    "expiresAt": "2026-11-05T18:08:29Z"
+  },
+  "inventoryPath": "docs/evidence/2026-10-29-public-journey/qualified-inventory.json",
+  "target": {
+    "accountId": "85d0d5dadac3341a564f22ce885e9eec",
+    "worker": "agent-friendly-web-web-production",
+    "origin": "https://agentfriendlyweb.dev",
+    "entrypoint": "server/index.js",
+    "assets": "client"
+  },
+  "baseline": {
+    "checkedAt": "2026-10-29T18:09:51.778Z",
+    "deploymentId": "c049e399-4f7c-4b20-aaf4-658767e7c043",
+    "versionId": "73a52556-46d3-49e9-a09b-c195a9515ce6",
+    "versionNumber": 82,
+    "bindingsSha256": "7347149d5e22db8d04ef7fcdefa82da44eb9e877b0efde2faa1f1c22d099cf74",
+    "settingsSha256": "aa39596bf29a129c7cc803eb9fc8e2a7df6d4de995f4bd8de69c207456f09166",
+    "runtimeSha256": "d022a50e3aa634cb5b81066a014c552b59c82ca605ef7473d968cf8da07af739",
+    "bindingsCount": 10,
+    "hasSecretText": false,
+    "flagsPreserved": true,
+    "dbPreserved": true,
+    "ratePreserved": true,
+    "mutations": 0,
+    "previousRollbackVersion": "1772ceae-7e8d-4dbc-bc1d-0ade956a3e45",
+    "scope": "dated GET only; must be re-read before upload; fingerprints are not deployable configuration"
+  },
+  "limits": {
+    "maxZipBytes": 16777216,
+    "maxFiles": 1024,
+    "maxUncompressedBytes": 67108864,
+    "maxFileBytes": 16777216
+  },
+  "nativeQualification": {
+    "runId": 40927730281,
+    "homeCases": 18,
+    "guideCases": 12,
+    "immutable": true,
+    "previewArtifactId": 12920928109,
+    "reviewArtifactId": 12921910701,
+    "jobId": 123637611809
+  },
+  "allowedAction": "read_validate_and_prepare_only",
+  "operationalReadiness": false
+}

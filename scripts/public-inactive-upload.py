@@ -106,6 +106,11 @@ def upload_packet(packet="legacy"):
                 "contractPath": "config/public-home-entry-delivery.v1.json",
                 "workflow": ".github/workflows/afw-public-home-inactive-upload.yml",
                 "receiptPath": "output/public-home-upload-receipt.json"}
+    if packet == "journey_audit":
+        return {"sourceRevision": "cace1d9c6049862401191fa9abf5a9160eeb915c",
+                "contractPath": "config/public-journey-delivery.v1.json",
+                "workflow": ".github/workflows/afw-public-journey-inactive-upload.yml",
+                "receiptPath": "output/public-journey-upload-receipt.json"}
     raise ValueError("upload_packet")
 
 def check_packet_contract(contract, packet="legacy"):

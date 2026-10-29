@@ -1,0 +1,111 @@
+name: AFW public journey inactive upload
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/public-inactive-upload.py'
+      - 'scripts/public-journey-inactive-upload.py'
+      - 'scripts/prepare-public-cloud-delivery.py'
+      - 'scripts/prepare-public-journey-delivery.py'
+      - 'test/public_inactive_upload_test.py'
+      - 'test/public_journey_upload_test.py'
+      - 'test/public_cloud_delivery_test.py'
+      - 'config/public-journey-delivery.v1.json'
+      - 'docs/evidence/2026-10-29-public-journey/**'
+      - '.github/workflows/afw-public-journey-inactive-upload.yml'
+  workflow_dispatch:
+    inputs:
+      operation:
+        type: choice
+        description: Verify only, or explicitly upload one inactive public version
+        default: verify_only
+        options:
+          - verify_only
+          - upload_inactive
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('afw-public-journey-verify-{0}', github.event.pull_request.number) || 'afw-public-inactive-upload' }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && (github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      AFW_QUALIFIER_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+      WRANGLER_SEND_METRICS: 'false'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test inactive boundary before preparing bytes
+        run: python3 -m unittest discover -s test -p 'public*upload_test.py' -v
+      - name: Test existing package rejection
+        run: python3 -m unittest discover -s test -p 'public_cloud_delivery_test.py' -v
+      - name: Install locked tools only in ephemeral runner
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Qualify frozen package without rebuilding
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/prepare-public-journey-delivery.py
+      - name: Check exact package with Wrangler without remote mutation
+        run: python3 scripts/public-journey-inactive-upload.py verify_only
+      - name: Retain sanitized verification only
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-public-journey-upload-verification-${{ github.run_id }}-${{ github.run_attempt }}
+          path: output/public-journey-upload-receipt.json
+          if-no-files-found: error
+          retention-days: 7
+
+  upload:
+    needs: verify
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.operation == 'upload_inactive'
+    environment: afw-public-release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      AFW_QUALIFIER_REVISION: ${{ github.sha }}
+      WRANGLER_SEND_METRICS: 'false'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Require dedicated private identity without printing it
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.AFW_PUBLIC_UPLOAD_TOKEN }}
+        run: python3 scripts/public-journey-inactive-upload.py check_credential
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install locked uploader in ephemeral runner
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Recheck original package in this runner
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/prepare-public-journey-delivery.py
+      - name: Upload one inactive version and verify preserved state
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.AFW_PUBLIC_UPLOAD_TOKEN }}
+        run: python3 scripts/public-journey-inactive-upload.py upload_inactive
+      - name: Retain sanitized receipt only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-public-journey-inactive-receipt-${{ github.run_id }}-${{ github.run_attempt }}
+          path: output/public-journey-upload-receipt.json
+          if-no-files-found: ignore
+          retention-days: 7
