@@ -81,11 +81,23 @@ async function boundedResult(work){
  let timer;try{return await Promise.race([work,new Promise(resolve=>{timer=setTimeout(()=>resolve('stalled'),7000);})]);}finally{clearTimeout(timer);}
 }
 for(const stalled of ['INSERT INTO dossier_monitoring','UPDATE delegated_access'])test('unsettled '+stalled+' does not starve independent reduction and stop',async t=>{
- const x=setup();t.after(()=>x.f.close());const r=await boundedResult(createOwnPermissionWithdrawal({...x.o,db:wrapped(x.o.db,{beforeRun:async sql=>{if(sql.startsWith(stalled))await new Promise(()=>{});}})}).withdraw());
+ const x=setup();t.after(()=>x.f.close());let release;const gate=new Promise(resolve=>{release=resolve;});const r=await boundedResult(createOwnPermissionWithdrawal({...x.o,db:wrapped(x.o.db,{beforeRun:async sql=>{if(sql.startsWith(stalled))await gate;}})}).withdraw());
  assert.notEqual(r,'stalled');assert.equal(r.permissionsWithdrawn,false);assert.equal(r.runtimeStopRequested,true);assert.equal(x.closes(),1);
  assert.equal(r.readWithdrawn,stalled.startsWith('INSERT'));assert.equal(r.monitoringWithdrawn,stalled.startsWith('UPDATE'));limited(r);
+ release();await new Promise(resolve=>setTimeout(resolve,30));assert.equal(x.events().length,stalled.startsWith('INSERT')?1:2);assert.equal(!!x.revoked(),stalled.startsWith('INSERT'));
 });
 test('unsettled initial primary read returns unconfirmed without effects',async t=>{
  const x=setup();t.after(()=>x.f.close());const db={prepare(){return{bind(){return{first:()=>new Promise(()=>{})};}};}};
  const r=await boundedResult(createOwnPermissionWithdrawal({...x.o,db}).withdraw());assert.notEqual(r,'stalled');assert.equal(r.permissionsWithdrawn,false);assert.equal(x.closes(),0);assert.equal(x.revoked(),'');limited(r);
+});
+
+test('unsettled pre-close identity read returns separate unconfirmed stop',async t=>{
+ const x=setup();t.after(()=>x.f.close());let reads=0;
+ const db={prepare(sql){return{bind(...args){const p=x.o.db.prepare(sql).bind(...args);return{run:()=>p.run(),first:()=>sql.startsWith('SELECT g.revoked_at')&&++reads===4?new Promise(()=>{}):p.first()};}};}};
+ const r=await boundedResult(createOwnPermissionWithdrawal({...x.o,db}).withdraw());assert.notEqual(r,'stalled');assert.equal(r.permissionsWithdrawn,true);assert.equal(r.runtimeStopRequested,false);assert.equal(x.closes(),0);limited(r);
+});
+test('close ACK after the five-second stage deadline is rejected even before the admin expiry',async t=>{
+ const x=setup();t.after(()=>x.f.close());let now=Date.now();
+ const r=await createOwnPermissionWithdrawal({...x.o,now:()=>now,close:async()=>{now+=5001;return{closed:true,runtimeStopRequested:true};}}).withdraw();
+ assert.equal(r.permissionsWithdrawn,true);assert.equal(r.runtimeStopRequested,false);limited(r);
 });

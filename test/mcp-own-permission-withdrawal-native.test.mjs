@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync,mkdtempSync,realpathSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join,dirname,basename} from 'node:path';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 
@@ -45,13 +47,16 @@ export default{async fetch(request,env){
 }};
 `;
  const bundle=await build({stdin:{resolveDir:process.cwd(),contents},bundle:true,write:false,format:'esm',platform:'neutral',external:['node:*']});
- const mf=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:bundle.outputFiles[0].text,d1Databases:{DB:'private-withdrawal-native'},durableObjects:{QA:{className:'Own',useSQLite:true}}}));
+ const persist=mkdtempSync(join(tmpdir(),'afw-withdrawal-native-'));
+ const options=convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:bundle.outputFiles[0].text,d1Databases:{DB:'private-withdrawal-native'},durableObjects:{QA:{className:'Own',useSQLite:true}},resourcePersistencePath:persist});let mf=new Miniflare(options);
  const call=async(path,status=200)=>{const r=await mf.dispatchFetch('https://synthetic.invalid'+path,{method:'POST'});assert.equal(r.status,status);return r.json();};
  try{
  await call('/seed');const ready=await call('/start');assert.equal(ready.ready,true);await call('/retired',409);
  const r=await call('/withdraw');assert.equal(r.permissionsWithdrawn,true);assert.equal(r.runtimeStopRequested,true);assert.equal(r.physicalStopVerified,false);assert.equal(r.nativeWithdrawalVerified,false);
  const retired=await call('/retired');assert.equal(retired.processGeneration,ready.processGeneration);assert.equal(retired.mayStartSuccessor,false);assert.equal(retired.physicalStopVerified,false);
  await call('/start',409);const first=await call('/state');assert.equal(first.launches,1);assert.equal(first.running,0);assert.equal(first.total,2);assert.ok(first.revoked_at);
+ await mf.dispose();mf=new Miniflare(options);assert.deepEqual(await call('/state'),first);
+ await call('/start',409);assert.equal((await call('/retired')).processGeneration,ready.processGeneration);
  await call('/withdraw');assert.deepEqual(await call('/state'),first);
- }finally{await mf.dispose();}
+ }finally{await mf.dispose();const target=realpathSync(persist);assert.equal(dirname(target),realpathSync(tmpdir()));assert.ok(basename(target).startsWith('afw-withdrawal-native-'));rmSync(target,{recursive:true});}
 });
