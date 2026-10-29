@@ -54,3 +54,14 @@ test('namespace method replacement during a read cannot reach close',async t=>{
 test('source method accepts no caller-selected options beyond the host contract',async t=>{
  const x=setup();t.after(()=>x.f.close());await assert.rejects(()=>withdrawOwnPermissions({...x.options,grantId:'foreign'}));assert.equal(x.read(),'');assert.equal(x.closes(),0);
 });
+
+test('host passes the fixed close stage authority and deadline into custody',async t=>{
+ const x=setup();t.after(()=>x.f.close());let called=0;
+ const close=async(signal,assertCurrent,expiresAt)=>{
+  assert.equal(signal.aborted,false);assert.equal(typeof assertCurrent,'function');
+  const at=assertCurrent();assert.ok(expiresAt>at&&expiresAt-at<=5000);
+  x.env.AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED='false';
+  assert.throws(assertCurrent);called++;return{closed:true,runtimeStopRequested:true};
+ };
+ await assert.rejects(()=>withdrawOwnPermissions({...x.options,close}));assert.equal(called,1);
+});

@@ -33,7 +33,7 @@ export class Own {
  const env={DB:db,AFW_DOSSIER_EVENTS_NODE:this.env.QA,AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-one-occurrence-v1',AFW_DOSSIER_EVENTS_ENABLED:'false',AFW_DOSSIER_EVENTS_POLICY:JSON.stringify(event),
  AFW_OAUTH_ISSUER:'https://private.invalid',AFW_OAUTH_RESOURCE:context.resource,AFW_OAUTH_PILOT_CLIENT_ID:'client',AFW_OAUTH_PILOT_PROJECT_ID:'p',
  AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED:'true',AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY:JSON.stringify(policy)};
- return Response.json(await withdrawOwnPermissions({env,ctx:this.ctx,program,sourceRevision:'c'.repeat(40),close:()=>a.close(),now:Date.now}));
+ return Response.json(await withdrawOwnPermissions({env,ctx:this.ctx,program,sourceRevision:'c'.repeat(40),close:(signal,assertCurrent,expiresAt)=>a.close({signal,assertCurrent,expiresAt}),now:Date.now}));
  }
  const p=await db.prepare('SELECT launches,running FROM fixture_process').first();
  const g=await db.prepare("SELECT revoked_at FROM delegated_access_grants WHERE id='g'").first();

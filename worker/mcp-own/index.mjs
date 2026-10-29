@@ -52,7 +52,7 @@ export class AfwOwnEventNode extends DurableObject{
  async withdrawPermissions(...args){try{
   if(args.length)fail();
   return await withdrawOwnPermissions({env:this.env,ctx:this.ctx,program,sourceRevision,now:Date.now,
-   close:async signal=>{if(signal.aborted)fail();const c=this.#host(true);c.current();const result=await c.host.close();c.current();if(signal.aborted)fail();return result;}});
+   close:async(signal,assertStage,expiresAt)=>{const c=this.#host(true);const assertCurrent=()=>{assertStage();c.current();if(signal.aborted)fail();};assertCurrent();const result=await c.host.close({signal,assertCurrent,expiresAt});assertCurrent();return result;}});
  }catch{fail();}}
  // Internal producer reference only; never accept a caller-authored signal.
  deliverSaved(subscriptionId,eventId){return this.#call('deliverSaved',subscriptionId,eventId);}
