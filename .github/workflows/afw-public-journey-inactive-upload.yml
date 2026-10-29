@@ -11,7 +11,7 @@ on:
       - 'test/public_journey_upload_test.py'
       - 'test/public_cloud_delivery_test.py'
       - 'config/public-journey-delivery.v1.json'
-      - 'docs/evidence/2026-10-27-public-journey/**'
+      - 'docs/evidence/2026-10-29-public-journey/**'
       - '.github/workflows/afw-public-journey-inactive-upload.yml'
   workflow_dispatch:
     inputs:
