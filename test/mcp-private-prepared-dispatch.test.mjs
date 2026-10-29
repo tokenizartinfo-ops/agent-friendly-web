@@ -30,6 +30,11 @@ for(const mode of ['off','hash','unarmed','too-early','expired','event','schedul
    const n=mode.startsWith('key')?'AFW_DOSSIER_OWN_SAVE_KEY':'AFW_DOSSIER_EVENTS_SCHEDULE',b=x.f.state.live.bindings.find(b=>b.name===n);
    if(mode.startsWith('key'))b.text=mode==='key'?'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb':mode==='key-version'?'aaaaaaaa-aaaa-3aaa-8aaa-aaaaaaaaaaaa':'aaaaaaaa-aaaa-4aaa-7aaa-aaaaaaaaaaaa';
    else{const p=JSON.parse(b.text);if(mode==='event')p.eventId='0'.repeat(64);else p.dispatchAt+=60000;b.text=JSON.stringify(p);}
+   if(['key-version','key-variant'].includes(mode)){
+    const eventId=digest(JSON.stringify(['afw.own-synthetic-save.v1','owner','own',b.text]));
+    const scheduled=x.f.state.live.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_SCHEDULE'),plan=JSON.parse(scheduled.text);
+    plan.eventId=eventId;scheduled.text=JSON.stringify(plan);x.f.dispatch.eventId=eventId;
+   }
    x.rehash();
   }
   const h=createPrivateCanaryRestorationHost(x.options);if(mode!=='unarmed')await h.arm(x.f.planHash);
