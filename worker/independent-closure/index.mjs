@@ -143,7 +143,7 @@ export class PrivateQaBootstrap extends WorkflowEntrypoint {
  run(event,step){let params=event.payload;try{if(typeof params==='string'&&params.length<=8192){const decoded=JSON.parse(params);if(params.length<=256||decoded?.operation==='originals')params=decoded;}}catch{/* Strict handlers reject malformed payloads. */}
   if(params?.operation==='mcp_closure_publisher_probe')return runPrivateClosurePublisherProbeWorkflow({env:this.env,event,step});
   if(params?.operation==='mcp_closure_reader_probe')return runPrivateClosureReaderProbeWorkflow({env:this.env,event,step});
-  if(['mcp_canary_arm_restore','mcp_canary_withdraw_control','mcp_canary_status'].includes(params?.operation))return runPrivateCanaryRestorationWorkflow({env:this.env,event,step});
+  if(['mcp_canary_reduce_restore','mcp_canary_arm_restore','mcp_canary_withdraw_control','mcp_canary_status'].includes(params?.operation))return runPrivateCanaryRestorationWorkflow({env:this.env,event,step});
   if(params?.operation==='observe')return observePrivateQa(this.env,params);
   return createPrivateAdminBootstrap({install:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).installOwn();try{return {state:value?.state};}finally{value?.[Symbol.dispose]?.();}},readControl:()=>control(this.env),readRegistered:async ref=>(await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).read())?.registration?.plan?.baselineRef===ref,register:ref=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).register(ref),appendOriginals:(ref,sequence,originals)=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).appendOperatorObservation(ref,sequence,originals),readOriginals:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).readOperatorObservation();try{return structuredClone(value);}finally{value?.[Symbol.dispose]?.();}}}).run(event.payload,step);}
 }
@@ -179,6 +179,7 @@ export class IndependentClosure extends DurableObject {
  #mcp(){return this.#mcpRestoration??=createPrivateCanaryRestorationHost({env:this.env,ctx:this.ctx});}
  armOwnCanaryClosure(...args){return this.#mcp().arm(...args);}
  restoreOwnCanary(...args){return this.#mcp().restore(...args);}
+ reduceOwnCanaryPermissions(...args){return this.#mcp().reduce(...args);}
  withdrawOwnCanaryClosure(...args){return this.#mcp().withdraw(...args);}
  readOwnCanaryClosureControl(...args){return this.#mcp().status(...args);}
  constructor(ctx,env){
