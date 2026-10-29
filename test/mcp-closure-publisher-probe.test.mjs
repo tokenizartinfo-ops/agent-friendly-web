@@ -77,7 +77,7 @@ test('wrong ACK or final selection and changed metadata never qualify or trigger
  for(const mode of['ack_id','ack_annotation','final_id','final_version','final_module','final_active']){
   const f=publisherFixture(),fetch=f.options.fetchImpl;
   f.options.fetchImpl=async(url,init)=>{const r=await fetch(url,init),x=await r.json(),u=new URL(url);
-   if(init.method==='POST'){if(mode==='ack_id')x.result.id=f.policy.canary.deploymentId;if(mode==='ack_annotation')x.result.annotations['workers/message']='unrelated';}
+   if(init.method==='POST'){if(mode==='ack_id')x.result.id=f.policy.canary.deploymentId;if(mode==='ack_annotation')x.result.annotations={'workers/message':'unrelated'};}
    else if(f.f.posts){if(u.pathname.endsWith('/'+W+'/deployments')){if(mode==='final_id')x.result.deployments[0].id=f.policy.canary.deploymentId;if(mode==='final_version')x.result.deployments[0].versions[0].version_id=f.f.ids.live;}
     if(u.pathname.includes('/versions/')&&mode==='final_module')x.result.modules[0].content_base64=Buffer.from('wrong').toString('base64');
     if(u.pathname.endsWith('/instances-v2')&&mode==='final_active')x.result=[{id:'active'}];
@@ -121,4 +121,26 @@ test('Workflow never exports malformed undated uncertainty',async()=>{
  const args={env:f.env,event:{payload:{operation:'mcp_closure_publisher_probe',planHash:f.hash}},step:{do:async(_n,_o,fn)=>fn()},now:f.f.options.now};
  const value=await runPrivateClosurePublisherProbeWorkflow(args);
  assert.equal(value.mayRetry,false);assert.equal(JSON.stringify(value).includes('privateDetail'),false);assert.equal(value.operationalReadiness,false);
+});
+
+test('minimal ACK never substitutes primary deployment identity selection or annotation',async()=>{
+ const{createPrivateClosurePublisherProbe}=await load();
+ for(const mode of['full_ack','missing_readback','wrong_annotation','wrong_id','wrong_version']){
+  const f=publisherFixture(),fetch=f.options.fetchImpl;
+  f.options.fetchImpl=async(url,init)=>{
+   const r=await fetch(url,init),x=await r.json(),u=new URL(url);
+   if(init.method==='POST'&&mode==='full_ack')x.result=structuredClone(f.f.state.canary);
+   if(init.method==='GET'&&f.f.posts&&u.pathname.endsWith('/'+W+'/deployments')){
+    if(mode==='missing_readback')x.result={deployments:[]};
+    if(mode==='wrong_annotation')x.result.deployments[0].annotations['workers/message']='another operation';
+    if(mode==='wrong_id')x.result.deployments[0].id=f.policy.canary.deploymentId;
+    if(mode==='wrong_version')x.result.deployments[0].versions[0].version_id=f.f.ids.live;
+   }
+   return Response.json(x);
+  };
+  const r=await createPrivateClosurePublisherProbe(f.options).run(f.hash);
+  assert.equal(r.status,mode==='full_ack'?'qualified':'uncertain',mode);
+  assert.equal(f.f.posts,1,mode);assert.equal(r.mayRetry,false);assert.equal(r.operationalReadiness,false);
+  const count=f.calls.length;await createPrivateClosurePublisherProbe(f.options).run(f.hash);assert.equal(f.calls.length,count,mode);assert.equal(f.f.posts,1,mode);
+ }
 });

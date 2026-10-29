@@ -17,7 +17,7 @@ export function publisherFixture(options){
    if(body.strategy!=='percentage'||body.versions.length!==1||body.versions[0].version_id!==f.policy.canary.versionId||body.versions[0].percentage!==100||body.annotations['workers/message']!=='AFW closed publisher qualification '+f.hash)throw Error('Wrong write');
    await f.f.request({method:'POST',path:ROOT+'/workers/scripts/'+W+'/deployments',body});
    f.f.state.canary={id:next,strategy:'percentage',versions:[{version_id:f.policy.canary.versionId,percentage:100}],annotations:body.annotations};
-   return Response.json({success:true,errors:[],result:structuredClone(f.f.state.canary)});
+   return Response.json({success:true,errors:[],result:{id:next}});
   }
   if(init.body!==undefined)throw Error('Unexpected read body');
   const response=await f.f.request({method:'GET',path:u.pathname.replace('/client/v4',''),query:Object.fromEntries([...u.searchParams].map(([k,v])=>[k,k==='per_page'?Number(v):v]))});
