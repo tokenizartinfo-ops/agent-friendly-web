@@ -6,27 +6,34 @@ import {join,dirname,basename} from 'node:path';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 
-test('native workerd D1/DO permission reduction enables only historical retirement observation',async()=>{
+test('native fixed host D1/DO reduction survives restart without native or physical claims',async()=>{
  const statements=file=>[...readFileSync(file,'utf8').matchAll(/CREATE TABLE[\s\S]*?\);|CREATE(?: UNIQUE)? INDEX[^\n]+;|CREATE TRIGGER[^\n]+;/g)].map(m=>m[0]);
  const schemas=[...statements('db/dossier-monitoring-consent.sql'),...statements('db/dossier-node-process.sql')];
  const startAt=Date.now()-1000,expiresAt=startAt+180000;
  const contents=`
 import {createNodeProcessCustody} from './lib/mcp-node-process-custody.mjs';
-import {createOwnPermissionWithdrawal} from './lib/mcp-own-permission-withdrawal.mjs';
+import {withdrawOwnPermissions} from './lib/mcp-own-permission-withdrawal-host.mjs';
+import {createHash} from 'node:crypto';
+const program='synthetic own Node host',programHash=createHash('sha256').update(program).digest('hex');
 const context={grantId:'g',subject:'owner',clientId:'client',resource:'https://private.invalid/mcp',scopes:['afw:project:read']};
 export class Own {
  constructor(ctx,env){this.ctx=ctx;this.env=env;}
  async fetch(request){
  const db=this.env.DB,path=new URL(request.url).pathname;
  const runtime={launch:async boot=>{const {key,...manifest}=boot;if(key.length!==32)throw Error('key unavailable');await db.prepare('UPDATE fixture_process SET launches=launches+1,running=1,manifest=?').bind(JSON.stringify(manifest)).run();},observe:async()=>{const p=await db.prepare('SELECT * FROM fixture_process').first();return{...JSON.parse(p.manifest),running:p.running===1};},close:async()=>{await db.prepare('UPDATE fixture_process SET running=0').run();}};
- const a=createNodeProcessCustody({enabled:true,db,context,projectId:'p',projectionSecret:'z'.repeat(32),storage:this.ctx.storage,custodyKey:Buffer.alloc(32,7),containerId:this.ctx.id.toString(),programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40),image:'cloudflare/debian-trixie',window:{startAt:${startAt},expiresAt:${expiresAt}},runtime,now:Date.now});
+ const a=createNodeProcessCustody({enabled:true,db,context,projectId:'p',projectionSecret:'z'.repeat(32),storage:this.ctx.storage,custodyKey:Buffer.alloc(32,7),containerId:this.ctx.id.toString(),programHash,sourceRevision:'c'.repeat(40),image:'cloudflare/debian-trixie',window:{startAt:${startAt},expiresAt:${expiresAt}},runtime,now:Date.now});
  try{
  if(path==='/start')return Response.json(await a.start());
  if(path==='/retired')return Response.json(await a.observeRetired());
  if(path==='/withdraw'){
  const c=await db.prepare("SELECT * FROM dossier_monitoring_consent_events WHERE grant_id='g' AND action='grant'").first();
- const x=createOwnPermissionWithdrawal({enabled:true,db,context:{grantId:'g',subject:'owner',projectId:'p',clientId:'client',resource:context.resource},originalConsent:{sequence:c.sequence,revision:c.revision,issuedAt:c.issued_at,expiresAt:c.expires_at},window:{startAt:${startAt},expiresAt:${expiresAt}},requestId:'22222222-2222-4222-8222-222222222222',close:()=>a.close(),now:Date.now});
- return Response.json(await x.withdraw());
+ const event={grantId:'g',subject:'owner',projectId:'p',clientId:'client',resource:context.resource,startAt:${startAt},expiresAt:${expiresAt}};
+ const policy={purpose:'afw.private-permission-withdrawal.v1',requestId:'22222222-2222-4222-8222-222222222222',startAt:${startAt},expiresAt:${expiresAt},
+ originalConsent:{sequence:c.sequence,revision:c.revision,issuedAt:c.issued_at,expiresAt:c.expires_at},containerId:this.ctx.id.toString(),programHash,sourceRevision:'c'.repeat(40)};
+ const env={DB:db,AFW_DOSSIER_EVENTS_NODE:this.env.QA,AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-one-occurrence-v1',AFW_DOSSIER_EVENTS_ENABLED:'false',AFW_DOSSIER_EVENTS_POLICY:JSON.stringify(event),
+ AFW_OAUTH_ISSUER:'https://private.invalid',AFW_OAUTH_RESOURCE:context.resource,AFW_OAUTH_PILOT_CLIENT_ID:'client',AFW_OAUTH_PILOT_PROJECT_ID:'p',
+ AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED:'true',AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY:JSON.stringify(policy)};
+ return Response.json(await withdrawOwnPermissions({env,ctx:this.ctx,program,sourceRevision:'c'.repeat(40),close:()=>a.close(),now:Date.now}));
  }
  const p=await db.prepare('SELECT launches,running FROM fixture_process').first();
  const g=await db.prepare("SELECT revoked_at FROM delegated_access_grants WHERE id='g'").first();
@@ -43,7 +50,7 @@ export default{async fetch(request,env){
  await env.DB.prepare("INSERT INTO dossier_monitoring_consent_events(grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)").bind('g','p','owner','client',context.resource,1,'grant','afw.dossier-monitoring.v1','11111111-1111-4111-8111-111111111111',${startAt},${expiresAt}).run();
  await env.DB.prepare('INSERT INTO fixture_process VALUES(0,0,?)').bind('{}').run();return Response.json({});
  }
- return env.QA.get(env.QA.idFromName('fixed-original')).fetch(request);
+ return env.QA.get(env.QA.idFromName('afw-own-event-one-occurrence-v1')).fetch(request);
 }};
 `;
  const bundle=await build({stdin:{resolveDir:process.cwd(),contents},bundle:true,write:false,format:'esm',platform:'neutral',external:['node:*']});
