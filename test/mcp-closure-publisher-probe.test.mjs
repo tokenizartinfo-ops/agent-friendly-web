@@ -94,3 +94,31 @@ test('publisher Workflow uses fixed actor primitive JSON and zero retry; cached 
  assert.equal((await runPrivateClosurePublisherProbeWorkflow(args)).status,'qualified');f.advance(1000);assert.equal((await runPrivateClosurePublisherProbeWorkflow(args)).status,'historical');assert.equal(calls,1);
  args.event.payload.target='foreign';assert.equal((await runPrivateClosurePublisherProbeWorkflow(args)).status,'blocked');assert.equal(calls,1);
 });
+
+test('composed Workflow preserves consumed uncertainty across final journal ACK loss or withdrawal',async()=>{
+ const{createPrivateClosurePublisherProbe,runPrivateClosurePublisherProbeWorkflow}=await load();
+ for(const failure of['ack','disabled','policy','key']){
+  const f=publisherFixture(),tx=f.ctx.storage.transaction;let changed=false;
+  f.ctx.storage.transaction=async fn=>{const before=f.ctx.storage.puts,r=await Reflect.apply(tx,f.ctx.storage,[fn]);
+   if(!changed&&f.ctx.storage.puts>before&&f.ctx.storage.puts===2){changed=true;
+    if(failure==='ack')throw Error('Final committed ACK lost');
+    if(failure==='disabled')f.env.AFW_MCP_PUBLISHER_PROBE_ENABLED='false';
+    if(failure==='policy')f.env.AFW_MCP_PUBLISHER_PROBE_POLICY+=' ';
+    if(failure==='key')f.env.AFW_MCP_CLOSURE_PUBLISH_TOKEN='changed-publisher-token';
+   }return r;
+  };
+  f.env.AFW_INDEPENDENT_CLOSURE.get=()=>({runOwnClosurePublisherProbe:async hash=>JSON.stringify(await createPrivateClosurePublisherProbe(f.options).run(hash))});
+  const args={env:f.env,event:{payload:{operation:'mcp_closure_publisher_probe',planHash:f.hash}},step:{do:async(_name,_options,fn)=>fn()},now:f.f.options.now};
+  const r=await runPrivateClosurePublisherProbeWorkflow(args);
+  assert.equal(r.status,'uncertain',failure);assert.equal(r.planHash,f.hash,failure);assert.equal(r.observedAt,null,failure);assert.equal(r.mayRetry,false);assert.equal(r.operationalReadiness,false);assert.equal(f.f.posts,1,failure);
+  const count=f.calls.length;await runPrivateClosurePublisherProbeWorkflow(args);assert.equal(f.f.posts,1,failure);assert.equal(f.calls.length,count,failure);
+ }
+});
+test('Workflow never accepts malformed undated uncertainty or relabels cached success as fresh',async()=>{
+ const{runPrivateClosurePublisherProbeWorkflow}=await load(),f=publisherFixture();
+ const r={purpose:'afw.closure-publisher-probe.v1',status:'uncertain',planHash:f.hash,observedAt:null,observations:[],observedSnapshotOnly:false,mayRetry:false,operationalReadiness:false,selectedDeploymentId:null};
+ f.env.AFW_INDEPENDENT_CLOSURE.get=()=>({runOwnClosurePublisherProbe:async()=>JSON.stringify({...r,mayRetry:true,privateDetail:'MUST NOT ESCAPE'})});
+ const args={env:f.env,event:{payload:{operation:'mcp_closure_publisher_probe',planHash:f.hash}},step:{do:async(_n,_o,fn)=>fn()},now:f.f.options.now};
+ const value=await runPrivateClosurePublisherProbeWorkflow(args);
+ assert.equal(value.mayRetry,false);assert.equal(JSON.stringify(value).includes('privateDetail'),false);assert.equal(value.operationalReadiness,false);
+});
