@@ -1,3 +1,4 @@
+import {withdrawOwnPermissions} from '../../lib/mcp-own-permission-withdrawal-host.mjs';
 import {DurableObject,WorkerEntrypoint} from 'cloudflare:workers';
 import {readOwnSuccessorHost} from '../../lib/mcp-own-successor-host.mjs';
 import {observeOwnSuccessorRetiredCustody} from '../../lib/mcp-own-successor-retirement-host.mjs';
@@ -47,6 +48,12 @@ export class AfwOwnEventNode extends DurableObject{
  // Private operator shutdown retains original scope/config/DO fences but
  // must not depend on the live monitoring flag or window. Never starts Node.
  async close(){try{const c=this.#host(true);c.current();const result=await c.host.close();c.current();return result;}catch{fail();}}
+ // Finite, server-fixed reduction. No RPC arguments or live grant renewal.
+ async withdrawPermissions(...args){try{
+  if(args.length)fail();
+  return await withdrawOwnPermissions({env:this.env,ctx:this.ctx,program,sourceRevision,now:Date.now,
+   close:async(signal,assertStage,expiresAt)=>{const c=this.#host(true);const assertCurrent=()=>{assertStage();c.current();if(signal.aborted)fail();};assertCurrent();const result=await c.host.close({signal,assertCurrent,expiresAt});assertCurrent();return result;}});
+ }catch{fail();}}
  // Internal producer reference only; never accept a caller-authored signal.
  deliverSaved(subscriptionId,eventId){return this.#call('deliverSaved',subscriptionId,eventId);}
  deliverOwnSaved(eventId){return this.#call('deliverOwnSaved',eventId);}
