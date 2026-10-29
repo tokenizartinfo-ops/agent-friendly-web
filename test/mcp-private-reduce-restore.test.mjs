@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {restorationFixture,fixtureConfigHash} from './fixtures/canary-restoration.mjs';
 const load=()=>import('../lib/mcp-hosted-canary-restoration.mjs');
-const SLOT='afw-own-successor-closure-v1',KEY='afw.canary-restoration-control.v1';
-function fixture(){
- const f=restorationFixture();let originalReads=0,instanceReads=0;const flags={original:true,running:false};
+const SLOT='afw-own-successor-closure-v1';
+function fixture(options){
+ const f=restorationFixture(options);let originalReads=0,instanceReads=0;const flags={original:true,running:false};
  const original={...f.options.namespace,get:id=>{if(id.toString()!==f.policy.candidate.containerId)throw Error('Wrong original');return{observeSuccessorRetired:async()=>{originalReads++;if(!flags.original)throw Error('Original context removed');return{purpose:'afw.node-retirement-observation.v1',containerId:f.policy.candidate.containerId,programHash:f.policy.candidate.programHash,sourceRevision:f.policy.candidate.sourceRevision,processGeneration:'d'.repeat(64),image:'cloudflare/debian-trixie',createdAt:f.at-60000,expiresAt:f.at-10000,closedAt:f.at-20000,observedAt:f.options.now(),physicalStopVerified:false,mayStartSuccessor:false};}};}};
  const ctx={storage:f.storage,id:{toString:()=>'9'.repeat(64)}};
  const env={AFW_INDEPENDENT_CLOSURE:{idFromName:name=>{if(name!==SLOT)throw Error('Wrong private slot');return{toString:()=>'9'.repeat(64)};}},AFW_MCP_CLOSURE_ENABLED:'true',AFW_MCP_CLOSURE_POLICY:f.control.policy,AFW_MCP_CLOSURE_NODE:original,AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-reader-token',AFW_MCP_CLOSURE_PUBLISH_TOKEN:'synthetic-publisher-token'};
@@ -18,8 +18,10 @@ function fixture(){
  }};
  return{f,ctx,env,options,calls,flags,hash:createHash('sha256').update(env.AFW_MCP_CLOSURE_POLICY).digest('hex'),get originalReads(){return originalReads;},get instanceReads(){return instanceReads;}};
 }
-function reductionFixture(){
- const x=fixture(),raw=JSON.stringify({purpose:'synthetic-withdrawal-policy'}),withdrawalHash=createHash('sha256').update(raw).digest('hex');
+function reductionFixture(options){
+ const x=fixture(options),raw=JSON.stringify({purpose:'afw.private-permission-withdrawal.v1',requestId:'22222222-2222-4222-8222-222222222222',
+ startAt:x.f.at-1000,expiresAt:x.f.at+120000,originalConsent:{sequence:1,revision:1,issuedAt:x.f.at-60000,expiresAt:x.f.at+120000},
+ containerId:x.f.policy.candidate.containerId,programHash:x.f.policy.candidate.programHash,sourceRevision:x.f.policy.candidate.sourceRevision}),withdrawalHash=createHash('sha256').update(raw).digest('hex');
  x.env.AFW_MCP_CLOSURE_REDUCTION_ENABLED='true';
  x.env.AFW_MCP_CLOSURE_REDUCTION_POLICY_HASH=withdrawalHash;
  x.f.state.live.bindings.push({name:'AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED',type:'plain_text',text:'true'},{name:'AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY',type:'plain_text',text:raw});
@@ -83,4 +85,61 @@ test('workflow reduction is an explicit no-retry stage before restoration',async
  assert.ok(steps.every(s=>s.retries.limit===0&&s.timeout<=35000));
  calls.length=0;x.env.AFW_INDEPENDENT_CLOSURE.get=()=>({armOwnCanaryClosure:async()=>({status:'armed'}),readOwnCanaryClosureControl:async()=>({status:'armed',planHash:x.hash}),reduceOwnCanaryPermissions:async()=>({status:'uncertain'})});
  assert.equal((await runPrivateCanaryRestorationWorkflow({env:x.env,event,step,now:x.f.options.now})).status,'uncertain');assert.equal(calls.length,0);
+});
+
+for(const target of ['canary','operator'])test('pointer drift during issued journal commit stops original RPC: '+target,async()=>{
+ const {createPrivateCanaryRestorationHost}=await load(),x=reductionFixture(),base=x.ctx.storage.transaction;
+ x.ctx.storage.transaction=async fn=>{
+  const result=await Reflect.apply(base,x.ctx.storage,[fn]);
+  if(x.ctx.storage.rows.get('afw.private-reduction-dispatch.v1')?.phase==='issued')x.f.state[target].id='77777777-7777-4777-8777-777777777777';
+  return result;
+ };
+ const h=createPrivateCanaryRestorationHost(x.options);await h.arm(x.hash);
+ assert.equal((await h.reduce(x.hash,x.withdrawalHash)).status,'uncertain');assert.equal(x.reductions(),0);assert.equal(x.f.posts,0);
+ assert.equal((await createPrivateCanaryRestorationHost(x.options).reduce(x.hash,x.withdrawalHash)).status,'uncertain');assert.equal(x.reductions(),0);
+});
+test('dispatch intersects a shorter original expiry through the real withdrawal host and custody',async()=>{
+ const [{createPrivateCanaryRestorationHost},{withdrawOwnPermissions},{createOwnDurableEventHost},{fixture:ownFixture}]=await Promise.all([
+  load(),import('../lib/mcp-own-permission-withdrawal-host.mjs'),import('../lib/mcp-own-durable-host.mjs'),import('./fixtures/mcp-own-durable-host.mjs')]);
+ const original=ownFixture();original.grant();
+ try{
+  const x=reductionFixture({at:Date.now()}),c=original.db.prepare("SELECT * FROM dossier_monitoring_consent_events WHERE action='grant'").get();
+  const program=original.config.program,sourceRevision=original.config.sourceRevision,id=original.config.ctx.id;
+  const programHash=createHash('sha256').update(program).digest('hex');
+  x.f.policy.candidate.programHash=programHash;
+  const policy={purpose:'afw.private-permission-withdrawal.v1',requestId:'22222222-2222-4222-8222-222222222222',startAt:Date.now()-500,expiresAt:Date.now()+10000,
+   originalConsent:{sequence:c.sequence,revision:c.revision,issuedAt:c.issued_at,expiresAt:c.expires_at},containerId:id.toString(),programHash,sourceRevision};
+  const raw=JSON.stringify(policy),hash=createHash('sha256').update(raw).digest('hex'),ctx=original.config.ctx;
+  const ns={idFromName:()=>id,idFromString:()=>id,get:()=>{throw Error('unexpected');}};
+  const env={AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED:'true',AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY:raw,
+   AFW_DOSSIER_EVENTS_ENABLED:'false',AFW_DOSSIER_EVENTS_POLICY:JSON.stringify({grantId:'g',subject:'owner',projectId:'p',clientId:'client',resource:original.config.context.resource,...original.config.window}),
+   AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-first-successor-v1',AFW_DOSSIER_EVENTS_NODE:ns,
+   AFW_OAUTH_ISSUER:'https://private.invalid',AFW_OAUTH_RESOURCE:original.config.context.resource,AFW_OAUTH_PILOT_CLIENT_ID:'client',AFW_OAUTH_PILOT_PROJECT_ID:'p',
+   DB:{...original.config.db,withSession:()=>original.config.db}};
+  x.f.state.live.bindings.find(b=>b.name==='AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY').text=raw;
+  x.f.policy.live.configurationHash=fixtureConfigHash(x.f.state.live);x.f.savePolicy();x.env.AFW_MCP_CLOSURE_POLICY=x.f.control.policy;
+  x.hash=createHash('sha256').update(x.env.AFW_MCP_CLOSURE_POLICY).digest('hex');x.withdrawalHash=hash;x.env.AFW_MCP_CLOSURE_REDUCTION_POLICY_HASH=hash;
+  let seen;
+  x.env.AFW_MCP_CLOSURE_NODE.get=()=>({withdrawPermissionsForPlan:async boundary=>{
+   seen=boundary;return withdrawOwnPermissions({env,ctx,program,sourceRevision,now:Date.now,
+    close:(signal,assertCurrent,expiresAt)=>createOwnDurableEventHost(original.config).close({signal,assertCurrent,expiresAt})},boundary);
+  }});
+  const h=createPrivateCanaryRestorationHost(x.options);await h.arm(x.hash);
+  assert.equal((await h.reduce(x.hash,hash)).status,'permissions_reduced');
+  assert.equal(seen.expiresAt,policy.expiresAt);
+  assert.ok(original.db.prepare("SELECT revoked_at FROM delegated_access_grants WHERE id='g'").get().revoked_at);
+  assert.equal(original.db.prepare("SELECT COUNT(*) AS n FROM dossier_monitoring_consent_events WHERE action='revoke'").get().n,1);
+  assert.equal(original.boots(),0);
+ }finally{original.close();}
+});
+test('malformed or expired original policy is denied before dispatch is reserved',async()=>{
+ const {createPrivateCanaryRestorationHost}=await load();
+ for(const mode of ['malformed','expired']){
+  const x=reductionFixture(),binding=x.f.state.live.bindings.find(b=>b.name==='AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY');
+  const p=JSON.parse(binding.text);binding.text=mode==='malformed'?'{}':JSON.stringify({...p,startAt:x.f.at-2000,expiresAt:x.f.at-1000});
+  x.withdrawalHash=createHash('sha256').update(binding.text).digest('hex');x.env.AFW_MCP_CLOSURE_REDUCTION_POLICY_HASH=x.withdrawalHash;
+  x.f.policy.live.configurationHash=fixtureConfigHash(x.f.state.live);x.f.savePolicy();x.env.AFW_MCP_CLOSURE_POLICY=x.f.control.policy;x.hash=createHash('sha256').update(x.env.AFW_MCP_CLOSURE_POLICY).digest('hex');
+  const h=createPrivateCanaryRestorationHost(x.options);await h.arm(x.hash);assert.equal((await h.reduce(x.hash,x.withdrawalHash)).status,'blocked');
+  assert.equal(x.ctx.storage.rows.has('afw.private-reduction-dispatch.v1'),false);assert.equal(x.reductions(),0);
+ }
 });
