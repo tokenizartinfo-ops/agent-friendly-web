@@ -8,6 +8,7 @@ import {validateReleaseOperatorBundle,resolveNamedActivationPlan,RELEASE_TARGET}
 import {runSuccessorRetirementObservation} from '../../lib/mcp-successor-retirement-observation.mjs';
 import {reserveReleaseSuccessor} from '../../lib/mcp-release-successor-reservation.mjs';
 import {runReleaseIdentityObservation} from '../../lib/mcp-release-identity-observation.mjs';
+import {runReleaseCustodyClockObservation} from '../../lib/mcp-release-custody-clock-observation.mjs';
 
 // Build-time inputs, not RPC arguments or public environment metadata.
 const bundle=globalThis.__AFW_RELEASE_OPERATOR_BUNDLE__;
@@ -86,6 +87,7 @@ export class AfwReleaseOperator extends WorkerEntrypoint {
  * No schedule, HTTP or client event consumer. */
 export class AfwReleaseWorkflow extends WorkflowEntrypoint {
  async run(event,step){
+  if(this.env.AFW_RELEASE_CUSTODY_CLOCK_OBSERVATION_ENABLED==='true')return runReleaseCustodyClockObservation({env:this.env,event,step});
   if(this.env.AFW_RELEASE_IDENTITY_OBSERVATION_ENABLED==='true')return runReleaseIdentityObservation({env:this.env,event,step});
   if(this.env.AFW_RELEASE_RETIREMENT_OBSERVATION_ENABLED==='true')return runSuccessorRetirementObservation({env:this.env,event,step});
   const env=this.env;let policy,expectedHash,observation,providerCheck,reservationFlag,reserveSuccessor=false;
