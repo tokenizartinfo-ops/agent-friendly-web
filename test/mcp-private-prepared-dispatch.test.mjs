@@ -26,7 +26,6 @@ test('prepared dispatch uses current pinned snapshot and durable one-effect clai
 for(const mode of ['off','hash','unarmed','too-early','expired','event','schedule','key','code','pointer','operator','unknown-policy']){
  test('prepared dispatch rejects '+mode+' before native call',async()=>{
   const x=fixture();
-  if(mode==='event')JSON.parse(x.f.state.live.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_SCHEDULE').text);
   if(['event','schedule','key'].includes(mode)){
    const n=mode==='key'?'AFW_DOSSIER_OWN_SAVE_KEY':'AFW_DOSSIER_EVENTS_SCHEDULE',b=x.f.state.live.bindings.find(b=>b.name===n);
    if(mode==='key')b.text='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb';
