@@ -33,6 +33,8 @@ jobs:
         run: node --test test/mcp-private-reduce-restore.test.mjs test/mcp-private-reduce-restore-native.test.mjs test/mcp-own-guarded-close.test.mjs test/mcp-own-permission-withdrawal-host.test.mjs test/mcp-own-permission-withdrawal-rpc-native.test.mjs test/mcp-own-permission-withdrawal.test.mjs test/mcp-own-permission-withdrawal-native.test.mjs
       - name: Qualify original custody clock observation
         run: node --test test/mcp-release-custody-clock-observation.test.mjs test/mcp-release-custody-clock-observation-native.test.mjs
+      - name: Qualify named custody clock diagnostic
+        run: node --test --test-name-pattern='custody clock' test/mcp-release-reservation-native.test.mjs
       - name: Qualify private publisher boundary before full suite
         run: node --test test/mcp-closure-publisher-probe.test.mjs test/mcp-closure-publisher-probe-native.test.mjs
       - name: Qualify private reader boundary before full suite
