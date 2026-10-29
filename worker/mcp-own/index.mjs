@@ -49,7 +49,7 @@ export class AfwOwnEventNode extends DurableObject{
  // must not depend on the live monitoring flag or window. Never starts Node.
  async close(){try{const c=this.#host(true);c.current();const result=await c.host.close();c.current();return result;}catch{fail();}}
  // Finite, server-fixed reduction. No RPC arguments or live grant renewal.
- async withdrawPermissionsForPlan(...args){if(args.length!==1)fail();return this.#withdraw(args[0]);}
+ async withdrawPermissionsForPlan(...args){if(args.length!==1||args[0]===undefined)fail();return this.#withdraw(args[0]);}
  async withdrawPermissions(...args){if(args.length)fail();return this.#withdraw();}
  async #withdraw(boundary){try{
   return await withdrawOwnPermissions({env:this.env,ctx:this.ctx,program,sourceRevision,now:Date.now,
