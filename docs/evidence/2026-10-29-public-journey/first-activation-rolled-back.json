@@ -1,0 +1,761 @@
+{
+  "kind": "fixed_public_journey_cloud_activation",
+  "mode": "activate",
+  "ok": false,
+  "runId": "40932028845",
+  "mutationAttempts": [
+    "stage0",
+    "promote",
+    "rollback"
+  ],
+  "trafficPromotion": true,
+  "operationalReadiness": false,
+  "privateAcceptance": false,
+  "sourceRevision": "cace1d9c6049862401191fa9abf5a9160eeb915c",
+  "candidateId": "0fd30778-70ce-406f-8757-69bb29a21c09",
+  "rollbackVersionId": "73a52556-46d3-49e9-a09b-c195a9515ce6",
+  "phase": "rolled_back",
+  "controllerRevision": "5cd781300be16e80710b7a578284a030313a323f",
+  "baseline": {
+    "kind": "fixed_public_journey_acceptance",
+    "mode": "baseline",
+    "origin": "https://agentfriendlyweb.dev",
+    "startedAt": "2026-10-29T18:34:17.298Z",
+    "finishedAt": "2026-10-29T18:34:19.435Z",
+    "notAfter": 1793298917264,
+    "smoke": {
+      "contract_version": "agentfriendly.cloudflare-native-smoke.v1",
+      "mode": "public-edge",
+      "origin": "https://agentfriendlyweb.dev",
+      "ok": true,
+      "checks": [
+        {
+          "path": "/",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 107885,
+          "ok": true
+        },
+        {
+          "path": "/robots.txt",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/plain",
+          "bytes": 899,
+          "ok": true
+        },
+        {
+          "path": "/llms.txt",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/plain",
+          "bytes": 5256,
+          "ok": true
+        },
+        {
+          "path": "/index.md",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/markdown; charset=utf-8",
+          "bytes": 3954,
+          "ok": true
+        },
+        {
+          "path": "/.well-known/agent-readiness.json",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/json",
+          "bytes": 9055,
+          "ok": true
+        },
+        {
+          "path": "/.well-known/infrastructure-status.json",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/json",
+          "bytes": 6552,
+          "ok": true
+        },
+        {
+          "path": "/okf/v0.2/manifest.json",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/json",
+          "bytes": 4465,
+          "ok": true
+        },
+        {
+          "path": "/api-catalog",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/linkset+json; charset=utf-8",
+          "bytes": 1250,
+          "ok": true
+        },
+        {
+          "path": "/expediente",
+          "boundary": "cloudflare_access",
+          "status": 302,
+          "ok": true
+        },
+        {
+          "path": "/api/projects",
+          "boundary": "cloudflare_access",
+          "status": 302,
+          "ok": true
+        },
+        {
+          "path": "/api/projects/probe",
+          "boundary": "cloudflare_access",
+          "status": 302,
+          "ok": true
+        }
+      ]
+    },
+    "assets": [],
+    "protocols": [],
+    "homes": [],
+    "journeys": [],
+    "convergenceProbes": [],
+    "postRetries": 0,
+    "redirectsFollowed": false,
+    "operationalReadiness": false,
+    "ok": true
+  },
+  "checkedAt": "2026-10-29T18:34:40.518218+00:00",
+  "stage0HttpStatus": 200,
+  "stage0Response": {
+    "shape": "envelope",
+    "successIsTrue": true,
+    "idIsUuid": true,
+    "versionsPresent": false,
+    "strategyPresent": false,
+    "versionsMatch": false,
+    "strategyMatches": false
+  },
+  "stage0AckShape": "envelope",
+  "stage0AckCompleteness": "provisional",
+  "stage0AckAt": "2026-10-29T18:34:24.633981+00:00",
+  "stage0": {
+    "kind": "fixed_public_journey_acceptance",
+    "mode": "stage0",
+    "origin": "https://agentfriendlyweb.dev",
+    "startedAt": "2026-10-29T18:34:25.929Z",
+    "finishedAt": "2026-10-29T18:34:29.379Z",
+    "notAfter": 1793298925894,
+    "smoke": {
+      "contract_version": "agentfriendly.cloudflare-native-smoke.v1",
+      "mode": "public-edge",
+      "origin": "https://agentfriendlyweb.dev",
+      "ok": true,
+      "checks": [
+        {
+          "path": "/",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 108814,
+          "ok": true
+        },
+        {
+          "path": "/robots.txt",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/plain",
+          "bytes": 899,
+          "ok": true
+        },
+        {
+          "path": "/llms.txt",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/plain",
+          "bytes": 5256,
+          "ok": true
+        },
+        {
+          "path": "/index.md",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/markdown; charset=utf-8",
+          "bytes": 3954,
+          "ok": true
+        },
+        {
+          "path": "/.well-known/agent-readiness.json",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/json",
+          "bytes": 9055,
+          "ok": true
+        },
+        {
+          "path": "/.well-known/infrastructure-status.json",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/json",
+          "bytes": 6552,
+          "ok": true
+        },
+        {
+          "path": "/okf/v0.2/manifest.json",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/json",
+          "bytes": 4465,
+          "ok": true
+        },
+        {
+          "path": "/api-catalog",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/linkset+json; charset=utf-8",
+          "bytes": 1250,
+          "ok": true
+        },
+        {
+          "path": "/expediente",
+          "boundary": "cloudflare_access",
+          "status": 302,
+          "ok": true
+        },
+        {
+          "path": "/api/projects",
+          "boundary": "cloudflare_access",
+          "status": 302,
+          "ok": true
+        },
+        {
+          "path": "/api/projects/probe",
+          "boundary": "cloudflare_access",
+          "status": 302,
+          "ok": true
+        }
+      ]
+    },
+    "assets": [
+      {
+        "path": "/_next/static/a4c5f75b-9756-4d4b-88f5-1cc380fd6694/_buildManifest.js",
+        "status": 200,
+        "bytes": 159,
+        "sha256": "47f02b34be6dc481257b6efce4c19e19111f37ef5c437f8ffed44f0da97fa9bb",
+        "ok": true
+      },
+      {
+        "path": "/.well-known/agent-readiness.json",
+        "status": 200,
+        "bytes": 9055,
+        "sha256": "9eeac1d632dea81c23174e50faca9fbc576f20a3d7f4997f1b3c056e9e02286a",
+        "ok": true
+      },
+      {
+        "path": "/.well-known/email-operations-contract.json",
+        "status": 200,
+        "bytes": 3508,
+        "sha256": "d44ef2f90243adf82fe84fb7c4ef7a524fc1eb5d3d01c4b602b8056fddaf1bfc",
+        "ok": true
+      },
+      {
+        "path": "/_next/static/a4c5f75b-9756-4d4b-88f5-1cc380fd6694/_ssgManifest.js",
+        "status": 200,
+        "bytes": 76,
+        "sha256": "653f3e53e89b4f8548ff86c19e92bb3c6b84b6be7485a320b1e00893ed877479",
+        "ok": true
+      },
+      {
+        "path": "/_next/static/css/layout.Db7zsvw5.css",
+        "status": 200,
+        "bytes": 155128,
+        "sha256": "578f7ee89855df5f8940db84710a4182246cf678c04f47b65e7032e4f0ae69d4",
+        "ok": true
+      },
+      {
+        "path": "/images/agent-friendly-call-robots-screen.webp",
+        "status": 200,
+        "bytes": 274354,
+        "sha256": "b6265be1ff69d378bfce32a91f50dcb4a3bbb397f8ab423c5d29f24647839337",
+        "ok": true
+      }
+    ],
+    "protocols": [
+      {
+        "name": "depth65",
+        "status": 413,
+        "bytes": 110,
+        "contentType": "json",
+        "errorCode": "request_too_complex",
+        "ok": true
+      },
+      {
+        "name": "depth64",
+        "status": 200,
+        "bytes": 1958,
+        "contentType": "sse",
+        "errorCode": null,
+        "ok": true
+      },
+      {
+        "name": "values4097",
+        "status": 413,
+        "bytes": 110,
+        "contentType": "json",
+        "errorCode": "request_too_complex",
+        "ok": true
+      },
+      {
+        "name": "values4096",
+        "status": 200,
+        "bytes": 1958,
+        "contentType": "sse",
+        "errorCode": null,
+        "ok": true
+      },
+      {
+        "name": "invalid",
+        "status": 400,
+        "bytes": 89,
+        "contentType": "json",
+        "errorCode": -32700,
+        "ok": true
+      },
+      {
+        "name": "initialize",
+        "status": 200,
+        "bytes": 236,
+        "contentType": "sse",
+        "errorCode": null,
+        "ok": true
+      },
+      {
+        "name": "toolsList",
+        "status": 200,
+        "bytes": 1958,
+        "contentType": "sse",
+        "errorCode": null,
+        "ok": true
+      }
+    ],
+    "homes": [
+      {
+        "locale": "es",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "locale": "en",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "locale": "pt",
+        "status": 200,
+        "ok": true
+      }
+    ],
+    "journeys": [
+      {
+        "route": "guide",
+        "locale": "es",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "assistant",
+        "locale": "es",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "measurement",
+        "locale": "es",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "guide",
+        "locale": "en",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "assistant",
+        "locale": "en",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "measurement",
+        "locale": "en",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "guide",
+        "locale": "pt",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "assistant",
+        "locale": "pt",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "measurement",
+        "locale": "pt",
+        "status": 200,
+        "ok": true
+      }
+    ],
+    "convergenceProbes": [
+      {
+        "path": "/_next/static/a4c5f75b-9756-4d4b-88f5-1cc380fd6694/_buildManifest.js",
+        "status": 404,
+        "bytes": 9,
+        "sha256": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
+        "ok": false,
+        "checkedAt": "2026-10-29T18:34:26.286Z"
+      },
+      {
+        "path": "/_next/static/a4c5f75b-9756-4d4b-88f5-1cc380fd6694/_buildManifest.js",
+        "status": 200,
+        "bytes": 159,
+        "sha256": "47f02b34be6dc481257b6efce4c19e19111f37ef5c437f8ffed44f0da97fa9bb",
+        "ok": true,
+        "checkedAt": "2026-10-29T18:34:27.358Z"
+      }
+    ],
+    "postRetries": 0,
+    "redirectsFollowed": false,
+    "operationalReadiness": false,
+    "ok": true
+  },
+  "trafficPromotionAttempted": true,
+  "promoteHttpStatus": 200,
+  "promoteResponse": {
+    "shape": "envelope",
+    "successIsTrue": true,
+    "idIsUuid": true,
+    "versionsPresent": false,
+    "strategyPresent": false,
+    "versionsMatch": false,
+    "strategyMatches": false
+  },
+  "promoteAckShape": "envelope",
+  "promoteAckCompleteness": "provisional",
+  "promoteAckAt": "2026-10-29T18:34:32.602670+00:00",
+  "normal": {
+    "kind": "fixed_public_journey_acceptance",
+    "mode": "normal",
+    "origin": "https://agentfriendlyweb.dev",
+    "startedAt": "2026-10-29T18:34:32.636Z",
+    "finishedAt": "2026-10-29T18:34:36.139Z",
+    "notAfter": 1793298902602,
+    "smoke": {
+      "contract_version": "agentfriendly.cloudflare-native-smoke.v1",
+      "mode": "public-edge",
+      "origin": "https://agentfriendlyweb.dev",
+      "ok": true,
+      "checks": [
+        {
+          "path": "/",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "bytes": 107885,
+          "ok": true
+        },
+        {
+          "path": "/robots.txt",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/plain",
+          "bytes": 899,
+          "ok": true
+        },
+        {
+          "path": "/llms.txt",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/plain",
+          "bytes": 5256,
+          "ok": true
+        },
+        {
+          "path": "/index.md",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "text/markdown; charset=utf-8",
+          "bytes": 3954,
+          "ok": true
+        },
+        {
+          "path": "/.well-known/agent-readiness.json",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/json",
+          "bytes": 9055,
+          "ok": true
+        },
+        {
+          "path": "/.well-known/infrastructure-status.json",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/json",
+          "bytes": 6552,
+          "ok": true
+        },
+        {
+          "path": "/okf/v0.2/manifest.json",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/json",
+          "bytes": 4465,
+          "ok": true
+        },
+        {
+          "path": "/api-catalog",
+          "boundary": "public",
+          "status": 200,
+          "content_type": "application/linkset+json; charset=utf-8",
+          "bytes": 1250,
+          "ok": true
+        },
+        {
+          "path": "/expediente",
+          "boundary": "cloudflare_access",
+          "status": 302,
+          "ok": true
+        },
+        {
+          "path": "/api/projects",
+          "boundary": "cloudflare_access",
+          "status": 302,
+          "ok": true
+        },
+        {
+          "path": "/api/projects/probe",
+          "boundary": "cloudflare_access",
+          "status": 302,
+          "ok": true
+        }
+      ]
+    },
+    "assets": [
+      {
+        "path": "/_next/static/a4c5f75b-9756-4d4b-88f5-1cc380fd6694/_buildManifest.js",
+        "status": 200,
+        "bytes": 159,
+        "sha256": "47f02b34be6dc481257b6efce4c19e19111f37ef5c437f8ffed44f0da97fa9bb",
+        "ok": true
+      },
+      {
+        "path": "/.well-known/agent-readiness.json",
+        "status": 200,
+        "bytes": 9055,
+        "sha256": "9eeac1d632dea81c23174e50faca9fbc576f20a3d7f4997f1b3c056e9e02286a",
+        "ok": true
+      },
+      {
+        "path": "/.well-known/email-operations-contract.json",
+        "status": 200,
+        "bytes": 3508,
+        "sha256": "d44ef2f90243adf82fe84fb7c4ef7a524fc1eb5d3d01c4b602b8056fddaf1bfc",
+        "ok": true
+      },
+      {
+        "path": "/_next/static/a4c5f75b-9756-4d4b-88f5-1cc380fd6694/_ssgManifest.js",
+        "status": 200,
+        "bytes": 76,
+        "sha256": "653f3e53e89b4f8548ff86c19e92bb3c6b84b6be7485a320b1e00893ed877479",
+        "ok": true
+      },
+      {
+        "path": "/_next/static/css/layout.Db7zsvw5.css",
+        "status": 404,
+        "bytes": 9,
+        "sha256": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
+        "ok": false
+      },
+      {
+        "path": "/images/agent-friendly-call-robots-screen.webp",
+        "status": 200,
+        "bytes": 274354,
+        "sha256": "b6265be1ff69d378bfce32a91f50dcb4a3bbb397f8ab423c5d29f24647839337",
+        "ok": true
+      }
+    ],
+    "protocols": [
+      {
+        "name": "depth65",
+        "status": 413,
+        "bytes": 110,
+        "contentType": "json",
+        "errorCode": "request_too_complex",
+        "ok": true
+      },
+      {
+        "name": "depth64",
+        "status": 200,
+        "bytes": 1958,
+        "contentType": "sse",
+        "errorCode": null,
+        "ok": true
+      },
+      {
+        "name": "values4097",
+        "status": 413,
+        "bytes": 110,
+        "contentType": "json",
+        "errorCode": "request_too_complex",
+        "ok": true
+      },
+      {
+        "name": "values4096",
+        "status": 200,
+        "bytes": 1958,
+        "contentType": "sse",
+        "errorCode": null,
+        "ok": true
+      },
+      {
+        "name": "invalid",
+        "status": 400,
+        "bytes": 89,
+        "contentType": "json",
+        "errorCode": -32700,
+        "ok": true
+      },
+      {
+        "name": "initialize",
+        "status": 200,
+        "bytes": 236,
+        "contentType": "sse",
+        "errorCode": null,
+        "ok": true
+      },
+      {
+        "name": "toolsList",
+        "status": 200,
+        "bytes": 1958,
+        "contentType": "sse",
+        "errorCode": null,
+        "ok": true
+      }
+    ],
+    "homes": [
+      {
+        "locale": "es",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "locale": "en",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "locale": "pt",
+        "status": 200,
+        "ok": true
+      }
+    ],
+    "journeys": [
+      {
+        "route": "guide",
+        "locale": "es",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "assistant",
+        "locale": "es",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "measurement",
+        "locale": "es",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "guide",
+        "locale": "en",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "assistant",
+        "locale": "en",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "measurement",
+        "locale": "en",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "guide",
+        "locale": "pt",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "assistant",
+        "locale": "pt",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "measurement",
+        "locale": "pt",
+        "status": 200,
+        "ok": true
+      }
+    ],
+    "convergenceProbes": [
+      {
+        "path": "/_next/static/a4c5f75b-9756-4d4b-88f5-1cc380fd6694/_buildManifest.js",
+        "status": 404,
+        "bytes": 9,
+        "sha256": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
+        "ok": false,
+        "checkedAt": "2026-10-29T18:34:33.103Z"
+      },
+      {
+        "path": "/_next/static/a4c5f75b-9756-4d4b-88f5-1cc380fd6694/_buildManifest.js",
+        "status": 200,
+        "bytes": 159,
+        "sha256": "47f02b34be6dc481257b6efce4c19e19111f37ef5c437f8ffed44f0da97fa9bb",
+        "ok": true,
+        "checkedAt": "2026-10-29T18:34:34.213Z"
+      }
+    ],
+    "postRetries": 0,
+    "redirectsFollowed": false,
+    "operationalReadiness": false,
+    "ok": false
+  },
+  "error": "activation_or_acceptance_failed",
+  "failureReason": "normal_acceptance",
+  "rollbackHttpStatus": 200,
+  "rollbackResponse": {
+    "shape": "envelope",
+    "successIsTrue": true,
+    "idIsUuid": true,
+    "versionsPresent": false,
+    "strategyPresent": false,
+    "versionsMatch": false,
+    "strategyMatches": false
+  },
+  "rollbackAckShape": "envelope",
+  "rollbackAckCompleteness": "provisional",
+  "rollbackAckAt": "2026-10-29T18:34:39.580460+00:00",
+  "rollbackVerified": true,
+  "oldServing": true
+}

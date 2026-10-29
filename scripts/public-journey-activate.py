@@ -19,11 +19,11 @@ OLD="73a52556-46d3-49e9-a09b-c195a9515ce6"
 NEW="0fd30778-70ce-406f-8757-69bb29a21c09"
 PREVIOUS="1772ceae-7e8d-4dbc-bc1d-0ade956a3e45"
 INITIAL="c049e399-4f7c-4b20-aaf4-658767e7c043"
-STAGED="no-adopted-home-stage"
-STAGED_OWNER="no-adopted-home-stage-owner"
+STAGED="46aa4b5b-3c53-44b7-9a5a-c68b997450b6"
+STAGED_OWNER="AFW public-journey r40932028845 a1 rollback"
 WORKFLOW=".github/workflows/afw-public-journey-activation.yml"
 SMOKE_SHA="907bd74247f0b1a69bae7259101b311fa7357b8d94c27e3a14d491bb048f741e"
-OBSERVER_SHA="7dd0bea790fc3c618f4b169df1f8bef8db30cb271810b065bf82be515ae6504c"
+OBSERVER_SHA="4383b97e172eb7e02e0ba9054890ce62d0147554e03538db4de72dc899a50766"
 INVENTORY_SHA="3177ed418921327b32d8acd6a18baa5e81265bb2ca0bace432360bf7dbf9dc56"
 TAG="cace1d9c-r40930579961-a1"
 
@@ -108,7 +108,7 @@ def staged_state(state,receipt,already_staged):
     return (owned(state,receipt,"stage0") or
             (already_staged and state.get("id")==STAGED and state.get("owner")==STAGED_OWNER))
 
-def activate(read,write,observe,remaining,receipt,save,already_staged=False):
+def activate(read,write,observe,remaining,receipt,save,already_staged=True):
     """Trusted adapters; no retry of a mutation, including after an unknown ACK."""
     def mutate(phase,versions):
         upl.require(remaining()>0 and phase not in receipt["mutationAttempts"],"mutation_expired_or_repeated")

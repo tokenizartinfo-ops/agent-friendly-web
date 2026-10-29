@@ -161,15 +161,26 @@ export function journeyResult(route,locale,status,bytes){
 }
 
 export async function settleAssets({assets,readAsset,notAfter,mode,clock=Date.now,wait=ms=>new Promise(resolve=>setTimeout(resolve,ms))}){
- const unique=assets.find(x=>x.path.endsWith('/_buildManifest.js'));
+ // 34 asset GETs + 11 smoke + 3 home + 9 journey + 7 protocol = 64 total.
+ // Only 404 may converge. A wrong digest, other status or lost response fails closed.
  const probeEnd=notAfter-(mode==='normal'?8000:15000);
- const probes=[];let probe;
- for(let n=0;n<20;n++){
-  probe=await readAsset(unique);probes.push({...probe,checkedAt:new Date(clock()).toISOString()});
-  if(probe.ok||probe.status!==404||clock()+1000>=probeEnd)break;
+ const probes=[];let requests=0;
+ const read=async expected=>{
+  requests++;
+  const result=await readAsset(expected);
+  probes.push({...result,checkedAt:new Date(clock()).toISOString()});
+  return result;
+ };
+ const results=await Promise.all(assets.map(read));
+ for(let round=0;round<20;round++){
+  if(results.every(x=>x.ok)||results.some(x=>!x.ok&&x.status!==404))break;
+  const pending=results.flatMap((x,i)=>x.ok?[]:[i]);
+  if(requests>=34||clock()+1000>=probeEnd)break;
   await wait(Math.min(1000,Math.max(1,probeEnd-clock())));
+  if(clock()>=probeEnd)break;
+  await Promise.all(pending.slice(0,34-requests).map(async i=>{results[i]=await read(assets[i]);}));
  }
- return {assets:[probe,...await Promise.all(assets.filter(x=>x!==unique).map(readAsset))],probes};
+ return {assets:results,probes};
 }
 
 export async function observePublic({mode,notAfter,fetchImpl=fetch}){
@@ -186,7 +197,7 @@ export async function observePublic({mode,notAfter,fetchImpl=fetch}){
  if(mode!=='baseline'){
   const settled=await settleAssets({assets:ASSETS,readAsset:asset,notAfter,mode});
   assets=settled.assets;probes.push(...settled.probes);
-  if(assets[0]?.ok){
+  if(assets.every(x=>x.ok)){
    homes=await Promise.all(['es','en','pt'].map(async locale=>{
     try{const r=await guarded(ORIGIN+localizedPath('home',locale),{method:'GET'});return homeResult(locale,r.status,await readCapped(r));}
     catch{return {locale,status:0,ok:false,error:'request_body_or_deadline_failure'};}

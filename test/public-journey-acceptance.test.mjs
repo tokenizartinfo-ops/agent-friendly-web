@@ -140,3 +140,9 @@ test('asset settling never accepts a persistent404, retries an integrity mismatc
   if(status!==404)assert.equal(calls,2);
  }
 });
+
+test('all missing assets share a strict34GET budget rather than renewing one allowance per file',async()=>{
+ const {settleAssets}=await import('../scripts/public-journey-acceptance.mjs');
+ let now=0,calls=0;const out=await settleAssets({assets:Array.from({length:6},(_,i)=>({path:'/asset'+i})),mode:'normal',notAfter:30000,clock:()=>now,wait:async ms=>{now+=ms;},readAsset:async x=>{calls++;return {path:x.path,status:404,ok:false};}});
+ assert.equal(calls,34);assert.equal(out.assets.every(x=>x.ok),false);assert.ok(now<30000);
+});
