@@ -36,3 +36,5 @@ Owner explicitly delegates routine design and uninterrupted execution and prefer
 Preparation only. RED/GREEN/review receipts will be appended during execution.
 
 29oct12:07UTC RED: commit a3e6354, CI40870562353/job123436212600:9FAIL (publisher factory missing),1PASS (existing reader no publisher getter). No implementation existed. Shared interfaces: Workflow calls fixed DO method returning primitive JSON; distinct policy/journal mode pins preserve reader contract. Remote workspace branch substitutes local scripts under owner cloud-first instruction.
+
+29oct12:11UTC initial GREEN attempt a602746 failed in focused CI40870982677/job123437660305 before HTTP. Root cause: inherited monotonic-local variable m shadowed the new mode configuration m in current(). Renamed the configuration settings; the already-failing positive reader and publisher/native tests reproduce this exactly. No runtime deployment.
