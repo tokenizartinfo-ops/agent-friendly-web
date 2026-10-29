@@ -1,4 +1,4 @@
-import {createPrivateClosureReaderProbe,runPrivateClosureReaderProbeWorkflow} from '../../lib/mcp-closure-reader-probe.mjs';
+import {createPrivateClosureReaderProbe,runPrivateClosureReaderProbeWorkflow,createPrivateClosurePublisherProbe,runPrivateClosurePublisherProbeWorkflow} from '../../lib/mcp-closure-reader-probe.mjs';
 import {createPrivateCanaryRestorationHost,isPrivateCanaryRestorationActor,runPrivateCanaryRestorationWorkflow} from '../../lib/mcp-hosted-canary-restoration.mjs';
 import {computeAdministrativeResultDigest} from '../../lib/assistance-administrative-closure-readback.mjs';
 import {fetchOwnOccurrence} from './occurrence-host.mjs';
@@ -141,6 +141,7 @@ export class PrivateQaPreregistration extends DurableObject {
 }
 export class PrivateQaBootstrap extends WorkflowEntrypoint {
  run(event,step){let params=event.payload;try{if(typeof params==='string'&&params.length<=8192){const decoded=JSON.parse(params);if(params.length<=256||decoded?.operation==='originals')params=decoded;}}catch{/* Strict handlers reject malformed payloads. */}
+  if(params?.operation==='mcp_closure_publisher_probe')return runPrivateClosurePublisherProbeWorkflow({env:this.env,event,step});
   if(params?.operation==='mcp_closure_reader_probe')return runPrivateClosureReaderProbeWorkflow({env:this.env,event,step});
   if(['mcp_canary_arm_restore','mcp_canary_withdraw_control','mcp_canary_status'].includes(params?.operation))return runPrivateCanaryRestorationWorkflow({env:this.env,event,step});
   if(params?.operation==='observe')return observePrivateQa(this.env,params);
@@ -168,6 +169,9 @@ export class PrivateQaCatalog extends DurableObject {
 // Private host only. Missing catalog/custody stays closed. No caller approval,
 // provisioning, registration, HTTP routes or implicit enrollment.
 export class IndependentClosure extends DurableObject {
+ #mcpPublisher;
+ #publisher(){return this.#mcpPublisher??=createPrivateClosurePublisherProbe({env:this.env,ctx:this.ctx});}
+ async runOwnClosurePublisherProbe(...args){return JSON.stringify(await this.#publisher().run(...args));}
  #mcpReader;
  #reader(){return this.#mcpReader??=createPrivateClosureReaderProbe({env:this.env,ctx:this.ctx});}
  async runOwnClosureReaderProbe(...args){return JSON.stringify(await this.#reader().run(...args));}

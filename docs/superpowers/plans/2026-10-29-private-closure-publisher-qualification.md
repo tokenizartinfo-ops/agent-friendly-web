@@ -21,7 +21,7 @@ Fixed AFW resources;10minute policy;30second original deadline;5second request c
 **Modify:** lib/mcp-closure-reader-probe.mjs; worker/independent-closure/index.mjs.
 **Create:** test/fixtures/closure-publisher-probe.mjs; test/mcp-closure-publisher-probe.test.mjs; test/mcp-closure-publisher-probe-native.test.mjs.
 **Interfaces:** createPrivateClosurePublisherProbe({env,ctx,fetchImpl,now}).run(planHash) returns sanitized data; runPrivateClosurePublisherProbeWorkflow({env,event,step,now}) accepts only operation mcp_closure_publisher_probe and planHash. DO runOwnClosurePublisherProbe returns JSON string. No public route.
-- [ ] Add failing assertions for absent factory/Workflow; focused CI must show missing callable, not import/tool failure.
+- [x] Add failing assertions for absent factory/Workflow; focused CI must show missing callable, not import/tool failure.
 - [ ] Add minimal separately scoped mode, preserving reader defaults. Match fixed snapshots and fresh deployment before one POST, then independent readback.
 - [ ] Verify positive qualification, closed/wrong scope, drift, active processes, schedules/tails, concurrency, dropped ACK, timeout/control change, receipt mismatch, sanitization and readonly regression.
 - [ ] Exercise actual production Workflow/DO/SQLite through Miniflare; default closed, onePOST and recreated history, HTTP404.
@@ -34,3 +34,5 @@ Owner explicitly delegates routine design and uninterrupted execution and prefer
 
 ## Ledger
 Preparation only. RED/GREEN/review receipts will be appended during execution.
+
+29oct12:07UTC RED: commit a3e6354, CI40870562353/job123436212600:9FAIL (publisher factory missing),1PASS (existing reader no publisher getter). No implementation existed. Shared interfaces: Workflow calls fixed DO method returning primitive JSON; distinct policy/journal mode pins preserve reader contract. Remote workspace branch substitutes local scripts under owner cloud-first instruction.
