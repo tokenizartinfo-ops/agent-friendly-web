@@ -158,7 +158,7 @@ test('guide distinguishes current capabilities from future protocols', () => {
   });
 
   assert.equal(turn.topic, 'roadmap');
-  assert.match(turn.answer, /no estan desplegados|todavia no/i);
+  assert.match(turn.answer, /no est[aá]n desplegados|todav[ií]a no/i);
   assert.doesNotMatch(turn.answer, /MCP disponible en produccion/i);
 });
 

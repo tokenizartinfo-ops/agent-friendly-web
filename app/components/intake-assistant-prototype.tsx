@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Check, Clipboard, FileSearch, ShieldAlert, Sparkles } from 'lucide-react';
 import { analyzeIntakeNotes } from '../../lib/intake-assistant.mjs';
+import { localizedPath } from '../../lib/site-i18n.mjs';
 import { publicToolsCopy } from '../../lib/public-tools-copy.mjs';
 import { previewIntakeDraft, applyIntakeDraft } from '../../lib/intake-draft-review.mjs';
 import { intakeDraftCopy } from '../../lib/intake-draft-copy.mjs';
@@ -113,6 +114,10 @@ export function IntakeAssistantPrototype({ locale = 'es', draft, onApply, review
             </div>
             <button className="secondary-action" type="button" onClick={copyReviewed} disabled={!selectedSuggestions.length}><Clipboard size={16} /> {copied ? copy.copied : copy.copy}</button>
             <p className="assistant-contract-note">{draft ? guidance.contract : copy.contract}</p>
+            {!draft ? <div className="assistant-next-step">
+              <a className="secondary-action" href={localizedPath('dossier', locale) || '/expediente'}>{copy.nextStep}</a>
+              <p>{copy.accessHelp} <a href="mailto:hello@agentfriendlyweb.dev">{copy.help}</a></p>
+            </div> : null}
             {draft && onApply ? <>
               <button className="secondary-action" type="button" disabled={!selectedSuggestions.length} onClick={() => { setChanges(previewIntakeDraft(draft, result, selected)); setDraftMessage(''); }}><FileSearch size={16} /> {draftCopy.preview}</button>
               {changes ? <div className="assistant-suggestion-list">

@@ -35,3 +35,8 @@ Preguntas mezcladas y negación de conocimientos técnicos; secretos junto a int
 - Task2: shared public capability copy now separates A2A public diagnostics from private monitoring; comparison labels fictional defaults and subsequent user inputs explicitly. Scoring/history remain unchanged.
 
 - Task4 RED: add browser assertions for skip navigation, advanced menu Escape/focus and mobile menu Escape/focus before changing header. Ruling: preserve existing main layout and place the skip target immediately after the header; remove only the nested private main landmark.
+
+- Task4 RED confirmed: compiled-browser run40926283505/job123632543841 failed because skip link count was0. Implemented grouped navigation, Escape/focus restoration, outside-click closure, skip target and nested-main removal. Browser checks now also cover published intake example and comparison input provenance in ES/EN/PT at390/1440.
+- Task1 tests: Portuguese audit wording and accented “todavía” were equivalent-copy assertion defects; broadened only those regexes. Topic, safety, cost, evidence and length checks remain mandatory.
+- Task3: public entry explains invitation email and hello@ help; standalone preparation now offers an explicit next step; disabled contact capture identifies itself as a preview before collecting anything. No backend flag or auth setting changed.
+- Task2 ruling: shared product maturity labels align home and methodology; an explicit version note preserves the auditor v1 historical names and says score does not establish payments/permission. No scoring code or stored data changed.

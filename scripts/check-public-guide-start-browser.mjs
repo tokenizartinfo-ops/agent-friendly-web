@@ -139,6 +139,24 @@ try{
    await input.scrollIntoViewIfNeeded();
    await capture(page,'guide-answer-'+label);
    cases.push({locale,viewport,guide:true,questionAnchor:true,composerFocused:true,answerReadable:true,headerClear:true,answerTopic:answer.topic,keyboard:true,reducedMotion:true,overflow:false});
+
+   // Same compiled product, no real account or API calls.
+   const assistant=await page.goto(base+localizedPath('assistant',locale),{waitUntil:'networkidle'});
+   assert.equal(assistant.status(),200);
+   await page.getByRole('button',{name:publicToolsCopy(locale).intake.review,exact:true}).click();
+   const languages=page.locator('.assistant-suggestion-list label').filter({has:page.locator('strong',{hasText:publicToolsCopy(locale).intake.fields.languages})});
+   assert.equal(await languages.locator('small').innerText(),'es, en, pt','published example keeps all declared languages: '+label);
+   assert.equal(await page.locator('.assistant-next-step a').first().getAttribute('href'),localizedPath('dossier',locale));
+   await capture(page,'assistant-reviewed-'+label);
+   const comparison=await page.goto(base+localizedPath('measurement',locale),{waitUntil:'networkidle'});
+   assert.equal(comparison.status(),200);
+   assert.equal(await page.locator('.comparison-input-notice').innerText(),publicToolsCopy(locale).comparison.exampleNotice);
+   await page.locator('.comparison-tool input[type=number]').first().fill('30');
+   assert.equal(await page.locator('.comparison-input-notice').innerText(),publicToolsCopy(locale).comparison.inputNotice);
+   assert.equal(await page.locator('.comparison-result strong').first().innerText(),'+25');
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth),'comparison has no horizontal overflow: '+label);
+   await capture(page,'comparison-declared-'+label);
+   cases.push({locale,viewport,publishedExampleLanguages:true,exampleLabeled:true,declaredValuesLabeled:true});
    await context.close();
   }
  }

@@ -3,6 +3,15 @@ name: AFW public guide entry browser QA
 on:
   pull_request:
     paths:
+      - 'app/components/site-header.tsx'
+      - 'app/components/site-footer.tsx'
+      - 'app/components/readiness-comparison.tsx'
+      - 'app/components/intake-assistant-prototype.tsx'
+      - 'lib/public-capability-copy.mjs'
+      - 'lib/public-faq.mjs'
+      - 'lib/site-copy.mjs'
+      - 'lib/maturity-copy.mjs'
+      - 'lib/intake-assistant.mjs'
       - 'app/page.tsx'
       - 'app/components/comic-home-intro.tsx'
       - 'app/components/maturity-map.tsx'

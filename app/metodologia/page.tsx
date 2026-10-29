@@ -1,3 +1,4 @@
+import { MATURITY_STAGES } from '../../lib/maturity-copy.mjs';
 import type { Metadata } from 'next';
 import { ArrowRight, Beaker, CheckCircle2, FileCheck2, ShieldCheck } from '../components/client-icons';
 import { localizedRouteMetadata } from '../../lib/localized-route-metadata.mjs';
@@ -7,14 +8,7 @@ import { publicPageCopy } from '../../lib/public-page-copy.mjs';
 
 export const metadata: Metadata = localizedRouteMetadata('methodology', 'es') as Metadata;
 
-const layers = [
-  ['AF-0', 'Invisible', 'No hay señales suficientes para descubrir o interpretar el sitio.'],
-  ['AF-1', 'Descubrible', 'Rastreo y sitemap permiten localizar contenidos publicos.'],
-  ['AF-2', 'Legible', 'El contenido ofrece respuestas claras, estructura y formatos accesibles.'],
-  ['AF-3', 'Con herramientas', 'APIs, MCP o skills cuentan con contratos publicos verificables.'],
-  ['AF-4', 'Delegable', 'Un agente puede actuar con identidad, permisos, limites y auditoria.'],
-  ['AF-5', 'Transaccional', 'Puede completar operaciones y pagos con seguridad y consentimiento.'],
-];
+const layers = MATURITY_STAGES.es;
 
 export default function MethodologyPage() {
   const purpose = publicPageCopy('methodology', 'es').sections[0];
@@ -52,6 +46,7 @@ export default function MethodologyPage() {
       </section>
       <section className="maturity-section">
         <div className="section-heading plain"><div><span>Roadmap</span><h2>Niveles de madurez</h2></div></div>
+        <p>Estos nombres describen la ruta del producto. Los resultados históricos del auditor v1 conservan sus etiquetas originales, incluida «AF-5 transaccional». Un puntaje alto no acredita pagos ni permisos para actuar.</p>
         <div className="maturity-list">{layers.map(([level, title, detail]) => <div key={level}><span>{level}</span><strong>{title}</strong><p>{detail}</p></div>)}</div>
       </section>
       <section className="source-band">
