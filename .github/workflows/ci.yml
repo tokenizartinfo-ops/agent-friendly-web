@@ -24,7 +24,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Qualify private withdrawal before full suite
-        run: node --test test/mcp-own-permission-withdrawal.test.mjs test/mcp-own-permission-withdrawal-native.test.mjs
+        run: node --test test/mcp-own-permission-withdrawal-host.test.mjs test/mcp-own-permission-withdrawal.test.mjs test/mcp-own-permission-withdrawal-native.test.mjs
       - name: Qualify private publisher boundary before full suite
         run: node --test test/mcp-closure-publisher-probe.test.mjs test/mcp-closure-publisher-probe-native.test.mjs
       - name: Qualify private reader boundary before full suite
