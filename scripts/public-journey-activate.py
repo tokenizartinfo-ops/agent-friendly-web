@@ -23,7 +23,7 @@ STAGED="no-adopted-home-stage"
 STAGED_OWNER="no-adopted-home-stage-owner"
 WORKFLOW=".github/workflows/afw-public-journey-activation.yml"
 SMOKE_SHA="907bd74247f0b1a69bae7259101b311fa7357b8d94c27e3a14d491bb048f741e"
-OBSERVER_SHA="447c7192bca614de1d418407a6eff3628887f157f8427f59a19ae7f189d0e419"
+OBSERVER_SHA="7dd0bea790fc3c618f4b169df1f8bef8db30cb271810b065bf82be515ae6504c"
 INVENTORY_SHA="3177ed418921327b32d8acd6a18baa5e81265bb2ca0bace432360bf7dbf9dc56"
 TAG="cace1d9c-r40930579961-a1"
 

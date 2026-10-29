@@ -160,6 +160,18 @@ export function journeyResult(route,locale,status,bytes){
  }catch{return {route,locale,status,ok:false};}
 }
 
+export async function settleAssets({assets,readAsset,notAfter,mode,clock=Date.now,wait=ms=>new Promise(resolve=>setTimeout(resolve,ms))}){
+ const unique=assets.find(x=>x.path.endsWith('/_buildManifest.js'));
+ const probeEnd=notAfter-(mode==='normal'?8000:15000);
+ const probes=[];let probe;
+ for(let n=0;n<20;n++){
+  probe=await readAsset(unique);probes.push({...probe,checkedAt:new Date(clock()).toISOString()});
+  if(probe.ok||probe.status!==404||clock()+1000>=probeEnd)break;
+  await wait(Math.min(1000,Math.max(1,probeEnd-clock())));
+ }
+ return {assets:[probe,...await Promise.all(assets.filter(x=>x!==unique).map(readAsset))],probes};
+}
+
 export async function observePublic({mode,notAfter,fetchImpl=fetch}){
  const guarded=makeGuardedFetch({mode,notAfter,fetchImpl});
  const startedAt=new Date().toISOString();const probes=[];
@@ -172,17 +184,9 @@ export async function observePublic({mode,notAfter,fetchImpl=fetch}){
  }
  let assets=[],protocols=[],homes=[],journeys=[];
  if(mode!=='baseline'){
-  // Unique manifest404 permits only finite GET convergence; it never retries a POST.
-  const unique=ASSETS.find(x=>x.path.endsWith('/_buildManifest.js'));
-  const probeEnd=notAfter-(mode==='normal'?8000:15000);
-  let probe;
-  for(let n=0;n<20;n++){
-   probe=await asset(unique);probes.push({...probe,checkedAt:new Date().toISOString()});
-   if(probe.ok||probe.status!==404||Date.now()+1000>=probeEnd)break;
-   await new Promise(resolve=>setTimeout(resolve,Math.min(1000,Math.max(1,probeEnd-Date.now()))));
-  }
-  assets=[probe,...await Promise.all(ASSETS.filter(x=>x!==unique).map(asset))];
-  if(probe.ok){
+  const settled=await settleAssets({assets:ASSETS,readAsset:asset,notAfter,mode});
+  assets=settled.assets;probes.push(...settled.probes);
+  if(assets[0]?.ok){
    homes=await Promise.all(['es','en','pt'].map(async locale=>{
     try{const r=await guarded(ORIGIN+localizedPath('home',locale),{method:'GET'});return homeResult(locale,r.status,await readCapped(r));}
     catch{return {locale,status:0,ok:false,error:'request_body_or_deadline_failure'};}
