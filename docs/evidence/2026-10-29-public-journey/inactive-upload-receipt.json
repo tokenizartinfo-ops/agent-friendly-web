@@ -1,0 +1,22 @@
+{
+  "kind": "public_inactive_cloud_upload",
+  "mode": "upload_inactive",
+  "ok": true,
+  "uploadAttempted": true,
+  "trafficPromotion": false,
+  "operationalReadiness": false,
+  "privateAcceptance": false,
+  "phase": "complete",
+  "sourceRevision": "cace1d9c6049862401191fa9abf5a9160eeb915c",
+  "artifactId": 12921157580,
+  "packageSha256": "1d5cf320e9f1081b041f0f1883e7a87462508e0d71216ba56f2d2c6a7c2bddc3",
+  "qualifierRevision": "c3661b127b4a973b864f8f2ffaa8b5c43d2a10b8",
+  "checkedAt": "2026-10-29T18:26:10.242746+00:00",
+  "versionId": "0fd30778-70ce-406f-8757-69bb29a21c09",
+  "tag": "cace1d9c-r40930579961-a1",
+  "activeDeploymentId": "c049e399-4f7c-4b20-aaf4-658767e7c043",
+  "configurationPreserved": true,
+  "files": 338,
+  "wranglerVersion": "4.128.0",
+  "publicationReady": false
+}

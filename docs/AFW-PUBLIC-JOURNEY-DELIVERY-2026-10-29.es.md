@@ -13,3 +13,7 @@ El workflow manual permite verify_only o una sola carga inactiva. Conserva el gr
 ## Límites
 
 Esta entrega no modifica el canary privado, operador, QA, permisos, D1, cron, OAuth, pagos ni datos de Max. No acredita sesión autenticada, asistencia continua ni PC-off. El incidente público de Cloudflare se resolvió, pero el ensayo privado requiere preparación nueva y aceptación propia. operationalReadiness=false.
+
+## Carga inactiva aceptada
+
+Run40930579961, 29oct18:26:10UTC: versión 0fd30778-70ce-406f-8757-69bb29a21c09, tag cace1d9c-r40930579961-a1; configuración conservada y deployment original c049e399 al100% de73a52556. Una carga, sin promoción. El controlador siguiente admite exclusivamente esa candidata, la fuente e inventario ya verificados y la reversión73a52556. Comprueba baseline, etapa0%, once rutas públicas/protegidas, seis archivos exactos, siete límites de protocolo público, tres portadas y nueve páginas de guía/asistente/comparación antes y después de promover. Deadline original, no reintento de POST, exclusión compartida y rollback solo sobre tráfico de esta ejecución.
