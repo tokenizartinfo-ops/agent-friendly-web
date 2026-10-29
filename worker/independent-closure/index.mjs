@@ -140,7 +140,7 @@ export class PrivateQaPreregistration extends DurableObject {
  fetch(request){if(this.configuration.AFW_QA_CHALLENGE_ENABLED!=='true'||!challengePath(request))return new Response(null,{status:404});return this.challenge.fetch(request);}
 }
 export class PrivateQaBootstrap extends WorkflowEntrypoint {
- run(event,step){let params=event.payload;try{if(typeof params==='string'&&params.length<=8192){const decoded=JSON.parse(params);if(params.length<=256||decoded?.operation==='originals')params=decoded;}}catch{/* Strict handlers reject malformed payloads. */}
+ run(event,step){let params=event.payload;try{if(typeof params==='string'&&params.length<=8192){const decoded=JSON.parse(params);if(params.length<=256||decoded?.operation==='originals'||decoded?.operation==='mcp_canary_dispatch_reduce_restore'&&params.length<=512)params=decoded;}}catch{/* Strict handlers reject malformed payloads. */}
   if(params?.operation==='mcp_closure_publisher_probe')return runPrivateClosurePublisherProbeWorkflow({env:this.env,event,step});
   if(params?.operation==='mcp_closure_reader_probe')return runPrivateClosureReaderProbeWorkflow({env:this.env,event,step});
   if(['mcp_canary_dispatch_reduce_restore','mcp_canary_reduce_restore','mcp_canary_arm_restore','mcp_canary_withdraw_control','mcp_canary_status'].includes(params?.operation))return runPrivateCanaryRestorationWorkflow({env:this.env,event,step});

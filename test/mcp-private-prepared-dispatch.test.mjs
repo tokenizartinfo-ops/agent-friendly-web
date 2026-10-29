@@ -72,3 +72,30 @@ for(const failure of ['none','throw','uncertain','disabled-at-dispatch']){
   assert.equal(r.dispatchStatus,failure==='none'?'dispatch_requested':failure==='disabled-at-dispatch'?'blocked':'uncertain');
  });
 }
+
+test('prepared transport cannot publish or read unrelated inventory before closure',async()=>{
+ const {createCanaryRestorationTransport}=await import('../lib/mcp-canary-restoration-transport.mjs');
+ const {ROOT,W,OP}=await import('./fixtures/canary-restoration.mjs');
+ const x=fixture();x.f.advance(x.f.dispatch.dispatchAt-x.f.options.now());let credentials=0,requests=0;
+ const transport=createCanaryRestorationTransport({readControl:()=>({enabled:true,policy:x.f.control.policy}),readReadCredential:()=>{credentials++;return 'synthetic-reader-token';},readPublishCredential:()=>{credentials++;throw Error('No publishing');},fetchImpl:()=>{requests++;throw Error('No outbound');},now:x.f.options.now,
+ preparedDispatch:{policy:x.f.dispatchRaw,policyHash:x.f.dispatchHash,withdrawalPolicyHash:x.f.withdrawalHash}});
+ for(const input of [{method:'POST',path:ROOT+'/workers/scripts/'+W+'/deployments',body:{strategy:'percentage',versions:[{version_id:x.f.policy.closed.versionId,percentage:100}],annotations:{'workers/message':'AFW closed canary restoration '+x.f.planHash}}},
+ {method:'GET',path:ROOT+'/workers/scripts/'+OP+'/schedules'},
+ {method:'GET',path:ROOT+'/workers/workers/'+W+'/versions/'+x.f.policy.closed.versionId,query:{include:'modules'}}]){
+  await assert.rejects(transport({...input,signal:new AbortController().signal}));
+ }
+ assert.equal(credentials,0);assert.equal(requests,0);
+});
+test('expired dispatch and malformed dispatch inputs never grant a new issue window',async()=>{
+ const x=fixture();x.f.advance(x.f.dispatch.expiresAt-x.f.options.now());const calls=[];
+ x.env.AFW_INDEPENDENT_CLOSURE.get=()=>({
+ armOwnCanaryClosure:async()=>({status:'armed'}),readOwnCanaryClosureControl:async()=>({status:'armed',planHash:x.f.planHash}),
+ dispatchOwnPreparedEvent:async()=>{calls.push('dispatch');throw Error('Expired');},
+ reduceOwnCanaryPermissions:async()=>({status:'permissions_reduced',nativeWithdrawalVerified:false,operationalReadiness:false}),
+ restoreOwnCanary:async()=>{calls.push('restore');return {status:'restored_observed',observedAt:x.f.options.now(),nativeWithdrawalVerified:false,operationalReadiness:false};}});
+ const step={do:async(_n,_o,fn)=>fn(),sleepUntil:async(_n,date)=>x.f.advance(date.getTime()-x.f.options.now())},
+ payload={operation:'mcp_canary_dispatch_reduce_restore',policyHash:x.f.planHash,withdrawalPolicyHash:x.f.withdrawalHash,dispatchPolicyHash:x.f.dispatchHash};
+ const r=await runPrivateCanaryRestorationWorkflow({env:x.env,event:{payload},step,now:x.f.options.now});
+ assert.equal(r.status,'restored_observed');assert.equal(r.dispatchStatus,'blocked');assert.deepEqual(calls,['restore']);
+ const bad=await runPrivateCanaryRestorationWorkflow({env:x.env,event:{payload:{...payload,callback:'https://evil.invalid'}},step,now:x.f.options.now});assert.equal(bad.status,'blocked');
+});
