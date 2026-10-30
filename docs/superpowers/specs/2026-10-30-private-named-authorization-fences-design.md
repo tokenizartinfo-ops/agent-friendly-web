@@ -28,7 +28,7 @@ Authorization lookup and D1 are not a distributed transaction: already-admitted/
 
 Native workerd/SQLite: an always-true hook preserves accepted named confirmation/reservation; false admission blocks before provider or attempts. False at activation attempt/receipt/acceptance and successor write produces the exact primary prefix already committed, with no later row or retry. Advance the original monotonic clock at activation/successor write fences while remaining inside the parent window: child deadlines must still block SQL. Confirm_named-only admission rejects a publication bundle supplied with a hook.
 
-Tests must demonstrate the hook was actually reached/applied, not pass from setup errors. Existing full suite and five build/package workflows must pass. New source is not deployed by this plan.
+Tests must demonstrate the hook was actually reached/applied, not pass from setup errors. The metadata stage in createActivationObserver currently has only a five-second timer, not an original monotonic end check after readCredential. The new await exposes that latent gap: add a dedicated native RED at credential3, then an original monotonic end assertion before fetch and after awaited response/body reads. Do not restart its five seconds. Existing full suite and five build/package workflows must pass. New source is not deployed by this plan.
 
 ## Integration still pending
 
