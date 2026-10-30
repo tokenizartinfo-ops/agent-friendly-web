@@ -1,3 +1,4 @@
+import {createRetiredRpcReceipt,readRetiredRpcReceipt} from '../lib/mcp-retired-rpc-receipt.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 const load=()=>import('../lib/mcp-successor-retirement-handoff.mjs');
@@ -111,4 +112,11 @@ test('late post-write result stays uncertain instead of claiming an acknowledged
  const storage=lateStorage(f.db,2,3,()=>{tick=131;});
  const r=await createSuccessorRetirementHandoff({...f.options,storage,timeoutMs:30}).capture();
  assert.equal(r.status,'uncertain');assert.equal(f.db.writes,1);
+});
+
+test('challenged successor handoff preserves history with observer clock21ms ahead',async()=>{
+ const {createSuccessorRetirementHandoff}=await load(),f=fixture(),options={...f.options};delete options.readCustody;
+ options.readCustodyReceipt=async({signal},assertCurrent)=>readRetiredRpcReceipt({signal,now:options.now,assertCurrent,invoke:async challenge=>({value:await createRetiredRpcReceipt({challenge,now:()=>options.now()+21,observe:async()=>({value:{...f.custody,observedAt:options.now()+21}})})})});
+ const h=createSuccessorRetirementHandoff(options),r=await h.capture();assert.equal(r.status,'recorded');assert.equal(f.db.writes,1);
+ const preserved=structuredClone(f.db.rows.get(KEY));f.advance(60000);assert.equal((await h.observe()).status,'retired_handoff_observed');assert.deepEqual(f.db.rows.get(KEY),preserved);
 });

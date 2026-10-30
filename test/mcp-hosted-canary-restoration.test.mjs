@@ -1,3 +1,4 @@
+import {createRetiredRpcReceipt} from '../lib/mcp-retired-rpc-receipt.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -134,4 +135,10 @@ test('resumed primary refresh cannot dispatch beyond original parent or nested l
    if(boundary==='rpc')assert.equal(f.originalReads,0,'no RPC after lost authority/deadline');
   });
  }
+});
+
+test('private restoration uses challenged successor custody before its preserved handoff',async()=>{
+ const {createPrivateCanaryRestorationHost}=await load(),f=fixture(),namespace=f.env.AFW_MCP_CLOSURE_NODE,originalGet=namespace.get;
+ namespace.get=id=>{const original=originalGet(id);return{observeSuccessorRetiredReceipt:challenge=>createRetiredRpcReceipt({challenge,now:()=>f.options.now()+21,observe:async()=>{const value=await original.observeSuccessorRetired();value.observedAt=f.options.now()+21;return {value};}})};};
+ const host=createPrivateCanaryRestorationHost(f.options);assert.equal((await host.arm(f.hash)).status,'armed');assert.equal((await host.restore(f.hash)).status,'restored_observed');assert.equal(f.f.posts,1);assert.equal(f.originalReads,2);
 });

@@ -1,3 +1,4 @@
+import {createRetiredRpcReceipt} from '../lib/mcp-retired-rpc-receipt.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -107,4 +108,10 @@ test('a valid cached primitive DTO is accepted only inside its SAME original nat
  const f=fixture(),cached=await run(f);assert.equal(cached.status,'retired_verified');for(const k of Object.keys(f.calls))f.calls[k]=0;
  f.move(100,100);f.step.do=async()=>{f.calls.steps++;return JSON.stringify(cached);};
  const r=await run(f);assert.equal(r.status,'retired_verified');assert.equal(r.evidence.observedAt,cached.evidence.observedAt);assert.equal(f.calls.steps,1);assert.equal(f.calls.rpc,0);assert.equal(f.calls.gets,0);
+});
+
+test('successor Workflow uses challenged receipt with independently ahead observer clock',opt,async()=>{
+ const f=fixture();delete f.native.observeSuccessorRetired;
+ f.native.observeSuccessorRetiredReceipt=challenge=>createRetiredRpcReceipt({challenge,now:()=>f.wall()+21,observe:async()=>{f.calls.rpc++;return {value:{...f.proof(),observedAt:f.wall()+21}};}});
+ const r=await run(f);assert.equal(r.status,'retired_verified',JSON.stringify(r));assert.equal(f.calls.rpc,2);assert.equal(f.calls.gets,2);assert.equal(r.operationalReadiness,false);
 });
