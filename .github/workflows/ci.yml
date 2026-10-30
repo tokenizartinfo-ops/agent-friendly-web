@@ -30,7 +30,7 @@ jobs:
       - name: Qualify pure QA execution pin
         run: node --test test/mcp-qa-execution-identity.test.mjs test/mcp-release-runtime-native.test.mjs
       - name: Qualify exact known cancellation history
-        run: node --test test/mcp-known-cancellation-native.test.mjs
+        run: node --test test/mcp-known-cancellation-native.test.mjs test/mcp-qa-arm-eligibility.test.mjs
       - name: Qualify permissions-only separation
         run: node --test test/mcp-own-permissions-only-reduction.test.mjs test/mcp-own-permissions-only-reduction-native.test.mjs test/mcp-own-permission-withdrawal.test.mjs test/mcp-own-permission-withdrawal-native.test.mjs
       - name: Qualify explicit finite execution context

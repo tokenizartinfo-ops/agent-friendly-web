@@ -33,3 +33,8 @@ test('wall regression after primary response and expiry remain false',async()=>{
  const f=fixture(),at=f.wall;f.answer=async()=>{f.wall=at-1;return{eligible:1};};assert.equal(await make(f).check(),false);
  const g=fixture(),o=g.options();g.wall=o.window.expiresAt;assert.equal(await api.createPrivateQaArmEligibility(o).check(),false);assert.equal(g.reads,0);
 });
+
+for(const stage of ['before-read','after-read'])test('original wall deadline rejects forward jump '+stage+' while the grant remains live',async()=>{
+ const f=fixture(),at=f.wall;if(stage==='before-read')f.authorize=async()=>{f.wall=at+5000;return true;};else f.answer=async()=>{f.wall=at+5000;return{eligible:1};};
+ assert.equal(await make(f).check(),false);assert.equal(f.reads,stage==='before-read'?0:1);
+});
