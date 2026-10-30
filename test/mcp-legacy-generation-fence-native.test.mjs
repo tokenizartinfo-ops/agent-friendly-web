@@ -44,7 +44,7 @@ export default{async fetch(request,env){const body=await request.json(),stub=env
  const call=async(kind,args=[],injectKey='')=>{const response=await mf.dispatchFetch('https://fixture.invalid/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({kind,args,injectKey})});assert.equal(response.status,200);return response.json();};
  const p=await call('policy');raw=JSON.stringify(p);provider=restorationFixture({at,containerId:p.candidate.containerId});await mf.setOptions(options());const hash=createHash('sha256').update(raw).digest('hex');assert.equal((await call('arm',[hash])).status,'armed');const before=await call('rows');
  for(const [kind,args,key]of [['restore',[hash],'afw.successor-retirement-handoff.v1'],['reduce',[hash,'1'.repeat(64)],'afw.private-reduction-dispatch.v1']]){
- await call('clear');const result=await call(kind,args,key);assert.ok(['blocked','uncertain'].includes(result.status));assert.deepEqual(await call('rows'),before,'injected orphan and journal must roll back in '+kind);assert.equal(provider.posts,0);
+ await call('clear');const result=await call(kind,args,key);assert.ok(['blocked','uncertain'].includes(result.status),JSON.stringify({kind,result}));assert.deepEqual(await call('rows'),before,'injected orphan and journal must roll back in '+kind);assert.equal(provider.posts,0);
  }
  }finally{await mf.dispose();}
 });
