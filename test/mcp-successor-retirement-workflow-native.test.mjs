@@ -8,16 +8,19 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 test('native Workflow observes fixed successor RPC retirement while ordinary release and HTTP stay closed',async()=>{
  const sourceRevision='c'.repeat(40),programHash='b'.repeat(64),app='d6fc71552de7494a863aca20365a572d',now=Date.now(),createdAt=now-20000,expiresAt=now-10000,closedAt=now-9000;
  const own=`import {DurableObject} from 'cloudflare:workers';
+ import {createRetiredRpcReceipt} from './lib/mcp-retired-rpc-receipt.mjs';
  export class Own extends DurableObject{
+ observeSuccessorRetiredReceipt(challenge){return createRetiredRpcReceipt({challenge,observe:async()=>({value:this.observeSuccessorRetired()})});}
  observeSuccessorRetired(...args){if(args.length)throw Error('Unexpected selector');return{purpose:'afw.node-retirement-observation.v1',containerId:this.ctx.id.toString(),processGeneration:'d'.repeat(64),programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40),image:'cloudflare/debian-trixie',...JSON.parse(this.env.TIMES),observedAt:Date.now(),physicalStopVerified:false,mayStartSuccessor:false};}
  close(){throw Error('Read-only fixture must not close');}
  }
  export default{fetch(){return new Response(null,{status:404});}};`;
+ const compiledOwn=await build({stdin:{contents:own,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*']});
  const compiled=await build({entryPoints:['worker/mcp-release/index.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',sourcemap:false,define:{'globalThis.__AFW_RELEASE_OPERATOR_BUNDLE__':'undefined'}});
  let gets=0;
  const bindNode={className:'Own',scriptName:'own',useSQLite:true,uniqueKey:'afw-retirement-native-fixture'};
  const settings=bindings=>convertV4MiniflareOptions({workers:[
- {name:'own',modules:true,script:own,compatibilityDate:'2026-09-07',durableObjects:{NODE:{className:'Own',useSQLite:true,uniqueKey:'afw-retirement-native-fixture'}},bindings:{TIMES:JSON.stringify({createdAt,expiresAt,closedAt})}},
+ {name:'own',modules:true,script:compiledOwn.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],durableObjects:{NODE:{className:'Own',useSQLite:true,uniqueKey:'afw-retirement-native-fixture'}},bindings:{TIMES:JSON.stringify({createdAt,expiresAt,closedAt})}},
  {name:'operator',modules:true,script:compiled.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings,
  durableObjects:{AFW_RELEASE_EVENTS_NODE:bindNode},workflows:{FLOW:{name:'afw-successor-retired-native',className:'AfwReleaseWorkflow'}},
  outboundService:async request=>{gets++;assert.equal(request.method,'GET');assert.ok(request.url.startsWith('https://api.cloudflare.com/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/containers/applications/'+app+'/instances/'));assert.equal(request.headers.get('Authorization'),'Bearer synthetic_read_credential');

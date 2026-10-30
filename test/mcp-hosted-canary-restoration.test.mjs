@@ -1,3 +1,5 @@
+import {withChallengedCustody} from './fixtures/challenged-custody.mjs';
+import {createRetiredRpcReceipt} from '../lib/mcp-retired-rpc-receipt.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -6,7 +8,7 @@ const load=()=>import('../lib/mcp-hosted-canary-restoration.mjs');
 const SLOT='afw-own-successor-closure-v1',KEY='afw.canary-restoration-control.v1';
 function fixture(){
  const f=restorationFixture();let originalReads=0,instanceReads=0;const flags={original:true,running:false};
- const original={...f.options.namespace,get:id=>{if(id.toString()!==f.policy.candidate.containerId)throw Error('Wrong original');return{observeSuccessorRetired:async()=>{originalReads++;if(!flags.original)throw Error('Original context removed');return{purpose:'afw.node-retirement-observation.v1',containerId:f.policy.candidate.containerId,programHash:f.policy.candidate.programHash,sourceRevision:f.policy.candidate.sourceRevision,processGeneration:'d'.repeat(64),image:'cloudflare/debian-trixie',createdAt:f.at-60000,expiresAt:f.at-10000,closedAt:f.at-20000,observedAt:f.options.now(),physicalStopVerified:false,mayStartSuccessor:false};}};}};
+ const original={...f.options.namespace,get:id=>{if(id.toString()!==f.policy.candidate.containerId)throw Error('Wrong original');return withChallengedCustody({observeSuccessorRetired:async()=>{originalReads++;if(!flags.original)throw Error('Original context removed');return{purpose:'afw.node-retirement-observation.v1',containerId:f.policy.candidate.containerId,programHash:f.policy.candidate.programHash,sourceRevision:f.policy.candidate.sourceRevision,processGeneration:'d'.repeat(64),image:'cloudflare/debian-trixie',createdAt:f.at-60000,expiresAt:f.at-10000,closedAt:f.at-20000,observedAt:f.options.now(),physicalStopVerified:false,mayStartSuccessor:false};}},f.options.now,'successor');}};
  const ctx={storage:f.storage,id:{toString:()=>'9'.repeat(64)}};
  const env={AFW_INDEPENDENT_CLOSURE:{idFromName:name=>{if(name!==SLOT)throw Error('Wrong private slot');return{toString:()=>'9'.repeat(64)};}},AFW_MCP_CLOSURE_ENABLED:'true',AFW_MCP_CLOSURE_POLICY:f.control.policy,AFW_MCP_CLOSURE_NODE:original,AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-reader-token',AFW_MCP_CLOSURE_PUBLISH_TOKEN:'synthetic-publisher-token'};
  const calls=[];
@@ -95,14 +97,14 @@ test('native RPC disposal metadata is released while unexpected evidence remains
  const {createPrivateCanaryRestorationHost}=await load();
  for(const mode of ['valid','extra','symbol','getter','dispose-failure']){
   const f=fixture();let disposals=0,getterReads=0;const get=f.env.AFW_MCP_CLOSURE_NODE.get;
-  f.env.AFW_MCP_CLOSURE_NODE.get=id=>{const original=get(id);return{observeSuccessorRetired:async()=>{
+  f.env.AFW_MCP_CLOSURE_NODE.get=id=>{const original=get(id);return withChallengedCustody({observeSuccessorRetired:async()=>{
    const value=await original.observeSuccessorRetired();
    Object.defineProperty(value,Symbol.dispose,{value(){disposals++;if(mode==='dispose-failure')throw Error('Synthetic disposal failure');}});
    if(mode==='extra')value.extra=true;
    if(mode==='symbol')Object.defineProperty(value,Symbol('foreign'),{value:true});
    if(mode==='getter')Object.defineProperty(value,'programHash',{enumerable:true,get(){getterReads++;return f.f.policy.candidate.programHash;}});
    return value;
-  }};};
+  }},f.options.now,'successor');};
   const h=createPrivateCanaryRestorationHost(f.options);assert.equal((await h.arm(f.hash)).status,'armed');const result=await h.restore(f.hash);
   assert.equal(result.status,mode==='valid'?'restored_observed':'blocked',mode);assert.equal(getterReads,0);
   assert.equal(disposals,mode==='valid'?2:1);assert.equal(f.f.posts,mode==='valid'?1:0);
@@ -117,7 +119,7 @@ test('resumed primary refresh cannot dispatch beyond original parent or nested l
    const token=f.env.AFW_MCP_CLOSURE_PUBLISH_TOKEN;
    Object.defineProperty(f.env,'AFW_MCP_CLOSURE_PUBLISH_TOKEN',{get(){publish=true;return token;}});
    f.options.now=()=>{
-    const n=clock(),stack=new Error().stack??'',caller=boundary==='rpc'?'readCustody':'fetchGuarded';
+    const n=clock(),stack=new Error().stack??'',caller=boundary==='rpc'?'assertCurrent':'fetchGuarded';
     const direct=new RegExp('at current[^\\n]*\\n\\s+at (?:async )?fresh[^\\n]*\\n\\s+at (?:async )?'+caller+'\\b').test(stack);
     if(!injected&&direct&&(boundary==='rpc'||publish)&&++directChecks===2){
      injected++;queueMicrotask(()=>{
@@ -134,4 +136,10 @@ test('resumed primary refresh cannot dispatch beyond original parent or nested l
    if(boundary==='rpc')assert.equal(f.originalReads,0,'no RPC after lost authority/deadline');
   });
  }
+});
+
+test('private restoration uses challenged successor custody before its preserved handoff',async()=>{
+ const {createPrivateCanaryRestorationHost}=await load(),f=fixture(),namespace=f.env.AFW_MCP_CLOSURE_NODE,originalGet=namespace.get;
+ namespace.get=id=>{const original=originalGet(id);return{observeSuccessorRetiredReceipt:challenge=>createRetiredRpcReceipt({challenge,now:()=>f.options.now()+21,observe:async()=>{const value=await original.observeSuccessorRetired();value.observedAt=f.options.now()+21;return {value};}})};};
+ const host=createPrivateCanaryRestorationHost(f.options);assert.equal((await host.arm(f.hash)).status,'armed');assert.equal((await host.restore(f.hash)).status,'restored_observed');assert.equal(f.f.posts,1);assert.equal(f.originalReads,2);
 });

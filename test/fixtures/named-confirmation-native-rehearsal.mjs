@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {build as compileFixture} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {activationConfigurationHash} from '../../lib/mcp-activation-observer.mjs';
 import {RELEASE_TARGET} from '../../lib/mcp-release-operator-policy.mjs';
@@ -10,7 +11,21 @@ import {reservationFaultHarness} from './reservation-fault-harness.mjs';
 // exact historical module bytes; ALL provider replies and identities synthetic.
 export async function rehearseExactNamedConfirmation({artifact,build,mode,payloadMode='object',invocation='workflow',reserve=null,retirement='stopped',replay=false,fault=null}){
  if(!['confirmed','tail-corrupt','regional-incident','metadata-reject','second-active'].includes(mode))throw Error('Unknown CI rehearsal');
- const identity={name:'identity',modules:true,compatibilityDate:'2026-09-07',script:`import {DurableObject} from 'cloudflare:workers';export class Own extends DurableObject{observeRetired(){if(!this.env.RETIRED)throw Error('No custody');const r=JSON.parse(this.env.RETIRED);return {...r,observedAt:this.env.RETIREMENT==='future-string'?String(Date.now()+1000):this.env.RETIREMENT==='future-unsafe'?8640000000000001:Date.now()+(this.env.RETIREMENT==='stale'?-31000:this.env.RETIREMENT==='future'?1000:0),...(this.env.RETIREMENT==='mismatch'?{programHash:'0'.repeat(64)}:{})};}fetch(){throw Error('No actor launch in package qualification');}}export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-own-event-one-occurrence-v1').toString()});}}`,durableObjects:{NODE:{className:'Own',useSQLite:true}}};
+ const compiledIdentity=await compileFixture({stdin:{resolveDir:process.cwd(),sourcefile:'named-custody-fixture.mjs',contents:`
+import {DurableObject} from 'cloudflare:workers';
+import {createRetiredRpcReceipt} from './lib/mcp-retired-rpc-receipt.mjs';
+export class Own extends DurableObject{
+ serverNow(){return Date.now()+(this.env.RETIREMENT==='server-ahead'?21:0);}
+ observeRetired(){
+  if(!this.env.RETIRED)throw Error('No custody');const r=JSON.parse(this.env.RETIRED);
+  return {...r,observedAt:this.env.RETIREMENT==='future-string'?String(this.serverNow()+1000):this.env.RETIREMENT==='future-unsafe'?8640000000000001:this.serverNow()+(this.env.RETIREMENT==='stale'?-31000:this.env.RETIREMENT==='future'?1000:0),...(this.env.RETIREMENT==='mismatch'?{programHash:'0'.repeat(64)}:{})};
+ }
+ observeRetiredReceipt(challenge){return createRetiredRpcReceipt({challenge,now:()=>this.serverNow(),observe:async()=>({value:this.observeRetired()})});}
+ fetch(){throw Error('No actor launch in package qualification');}
+}
+export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-own-event-one-occurrence-v1').toString()});}}
+`},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',mainFields:['module','main'],external:['node:*','cloudflare:*'],legalComments:'none'});
+ const identity={name:'identity',modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:compiledIdentity.outputFiles[0].text,durableObjects:{NODE:{className:'Own',useSQLite:true}}};
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[identity]}));
  try{
   const ids=await (await (await mf.getWorker('identity')).fetch('https://synthetic.invalid/ids')).json();

@@ -2,6 +2,7 @@ import {withdrawOwnPermissions} from '../../lib/mcp-own-permission-withdrawal-ho
 import {DurableObject,WorkerEntrypoint} from 'cloudflare:workers';
 import {readOwnSuccessorHost} from '../../lib/mcp-own-successor-host.mjs';
 import {observeOwnSuccessorRetiredCustody} from '../../lib/mcp-own-successor-retirement-host.mjs';
+import {createRetiredRpcReceipt} from '../../lib/mcp-retired-rpc-receipt.mjs';
 import {observeOwnRetiredCustody} from '../../lib/mcp-own-retirement-host.mjs';
 import {createDelegatedOAuthWorker} from '../../lib/delegated-oauth-worker.mjs';
 import {createOwnDurableEventHost} from '../../lib/mcp-own-durable-host.mjs';
@@ -36,6 +37,9 @@ export class AfwOwnEventNode extends DurableObject{
  fetch(){return deny();}
  // Private original-custody observation; no caller selectors or live runtime.
  async observeRetired(...args){try{if(args.length)fail();return await observeOwnRetiredCustody({env:this.env,ctx:this.ctx});}catch{fail();}}
+ // Fixed read-only challenged wrappers. No selectors, fallback or new authority.
+ async observeRetiredReceipt(...args){try{if(args.length!==1)fail();return await createRetiredRpcReceipt({challenge:args[0],observe:async()=>({value:await this.observeRetired()})});}catch{fail();}}
+ async observeSuccessorRetiredReceipt(...args){try{if(args.length!==1)fail();return await createRetiredRpcReceipt({challenge:args[0],observe:async()=>({value:await this.observeSuccessorRetired()})});}catch{fail();}}
  // Separate successor readback; preserves original observeRetired policy.
  async observeSuccessorRetired(...args){try{if(args.length)fail();return await observeOwnSuccessorRetiredCustody({env:this.env,ctx:this.ctx,program,sourceRevision});}catch{fail();}}
  list(){return this.#call('list');}
