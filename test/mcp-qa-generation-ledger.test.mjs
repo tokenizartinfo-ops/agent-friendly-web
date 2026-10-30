@@ -38,7 +38,7 @@ test('expired or non-withdrawn exact legacy never opens a generation',async()=>{
  for(const mutate of [r=>r.withdrawnAt=null,r=>r.armedAt=null,r=>r.planHash='0'.repeat(64),r=>r.extra=true]){
   const f=generationFixture();mutate(f.rows.get(LEGACY));assert.equal((await make(f).arm()).status,'blocked');assert.equal(f.rows.size,1);
  }
- const f=generationFixture();const p=JSON.parse(f.legacy.policy);p.expiresAt=f.now()+5000;p.startAt=f.now()-5000;const r={...f.legacy,policy:JSON.stringify(p),planHash:hash(JSON.stringify(p)),armedAt:f.now()-4000,withdrawnAt:f.now()-2000};f.rows.set(LEGACY,r);f.capsule.predecessor.control=JSON.stringify(r);assert.equal((await make(f).arm()).status,'blocked');assert.equal(f.rows.size,1);
+ const f=generationFixture();const p=JSON.parse(f.legacy.policy);p.expiresAt=f.now()+5000;p.startAt=f.now()-5000;const r={...f.legacy,policy:JSON.stringify(p),planHash:hash(JSON.stringify(p)),armedAt:f.now()-4000,withdrawnAt:f.now()-2000};f.rows.set(LEGACY,r);f.capsule.predecessor.control=JSON.stringify(r);assert.throws(()=>make(f));assert.equal(f.rows.size,1);
 });
 test('withdraw absent target does not create a permanent fence or HEAD',async()=>{
  const f=generationFixture(),r=await make(f).withdraw();assert.equal(r.status,'absent');flags(r);assert.equal(f.rows.size,1);assert.equal(f.rows.has(HEAD),false);
