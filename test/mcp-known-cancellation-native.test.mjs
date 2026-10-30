@@ -5,10 +5,10 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {createSuccessorReservation} from '../lib/mcp-successor-reservation.mjs';
 
 const IMAGE='cloudflare/debian-trixie',PURPOSE='afw.successor-known-cancellations.v1';
-async function fixture(mode='valid',{cancel=true}={}){
+async function fixture(mode='valid',{cancel=true,offset=0}={}){
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:'export default{fetch(){return new Response(null,{status:404});}}',d1Databases:{DB:'known-cancellation',OTHER:'known-cancellation'}}));
  try{
- const db=await mf.getD1Database('DB'),other=await mf.getD1Database('OTHER'),now=Date.now(),iso=n=>new Date(n).toISOString();
+ const db=await mf.getD1Database('DB'),other=await mf.getD1Database('OTHER'),now=Date.now()+offset,iso=n=>new Date(n).toISOString();
  await db.exec('CREATE TABLE site_projects(id TEXT PRIMARY KEY,user_id TEXT NOT NULL);CREATE TABLE delegated_access_grants(id TEXT PRIMARY KEY,user_id TEXT NOT NULL,client_id TEXT NOT NULL,project_id TEXT NOT NULL,resource TEXT NOT NULL,scopes_json TEXT NOT NULL,created_at TEXT NOT NULL,expires_at TEXT NOT NULL,revoked_at TEXT NOT NULL DEFAULT "",exchanged_at TEXT NOT NULL DEFAULT "");');
  await db.prepare('INSERT INTO site_projects VALUES(?,?)').bind('project',mode==='changed-project-owner'?'foreign':'owner').run();
  for(const name of ['node-process','monitoring-consent','successor-reservation']){
@@ -23,7 +23,7 @@ async function fixture(mode='valid',{cancel=true}={}){
  await addGrant('original',{revokedAt:iso(now-79000),expiresAt:now-80000,exchangedAt:iso(now-85000)});
  await addGrant('cancelled',{exchangedAt:iso(now-35000),user:mode==='foreign-cancellation'?'foreign':scope.user,revokedAt:mode==='unrevoked-cancellation'?'':iso(mode==='future-cancellation'?now+29990:now-30010)});
  await addGrant('current',{user:mode==='foreign-current'?'foreign':scope.user,revokedAt:mode==='revoked-current'?iso(now-100):'',expiresAt:mode==='short-current'?now+5000:now+120000,exchangedAt:mode==='unexchanged-current'?'':mode==='invalid-exchange'?'junk':iso(mode==='future-exchange'?now+1000:mode==='exchange-before-created'?now-110000:now-2000),scopes:mode==='extra-scope'?['afw:project:read','afw:evidence:read']:mode==='empty-scope'?[]:mode==='duplicate-scope'?['afw:project:read','afw:project:read']:mode==='object-scope'?{read:'afw:project:read'}:['afw:project:read']});
- await db.prepare('INSERT INTO dossier_node_process_admissions(grant_id,project_id,user_id,client_id,resource,consent_sequence,consent_issued_at,consent_expires_at,container_id,process_generation,program_hash,source_revision,image,created_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind('original',scope.project,scope.user,scope.client,scope.resource,1,now-90000,now-80000,original.containerId,evidence.processGeneration,original.programHash,original.sourceRevision,IMAGE,now-90000,now-80000).run();
+ await db.prepare('INSERT INTO dossier_node_process_admissions(grant_id,project_id,user_id,client_id,resource,consent_sequence,consent_issued_at,consent_expires_at,container_id,process_generation,program_hash,source_revision,image,created_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind('original',scope.project,scope.user,scope.client,scope.resource,1,now-90000,mode==='original-consent-live'?now+10000:now-80000,original.containerId,evidence.processGeneration,original.programHash,original.sourceRevision,IMAGE,now-90000,mode==='original-admission-live'?now+10000:now-80000).run();
  await db.prepare('INSERT INTO dossier_node_process_closures(grant_id,process_generation,container_id,program_hash,source_revision,image,closed_at) VALUES(?,?,?,?,?,?,?)').bind('original',evidence.processGeneration,original.containerId,original.programHash,original.sourceRevision,IMAGE,evidence.closedAt).run();
  const addConsent=async(grant,sequence,action,issuedAt,expiresAt)=>db.prepare('INSERT INTO dossier_monitoring_consent_events VALUES(?,?,?,?,?,?,?,?,?,?,?,?)').bind(sequence,grant,scope.project,(mode==='foreign-current-monitor'&&grant==='current'||mode==='foreign-past-monitor'&&grant==='cancelled'&&sequence===3)?'foreign':scope.user,scope.client,scope.resource,1,action,'afw.dossier-monitoring.v1','request-'+sequence,issuedAt,expiresAt).run();
  await addConsent('original',1,'grant',now-90000,now-80000);
@@ -121,4 +121,25 @@ test('V2 authorization must return exact true for an otherwise valid history',as
 
 test('V2 requires a primary session even for an empty exact set',async()=>{
  const f=await fixture('valid',{cancel:false});try{assert.throws(()=>f.make({db:{prepare:f.db.prepare.bind(f.db)}}));assert.equal(await f.count(),0);}finally{await f.mf.dispose();}
+});
+
+const loadArmEligibility=async()=>{const api=await import('../lib/mcp-qa-arm-eligibility.mjs').catch(()=>null);assert.equal(typeof api?.createPrivateQaArmEligibility,'function','read-only primary ARM eligibility interface required');return api.createPrivateQaArmEligibility;};
+const armOptions=f=>({db:f.db,original:{containerId:f.original.containerId,processGeneration:f.evidence.processGeneration,programHash:f.original.programHash,sourceRevision:f.original.sourceRevision,closedAt:f.evidence.closedAt},window:{grantId:'current',startAt:f.candidate.startAt,expiresAt:f.candidate.expiresAt},cancellationHistory:JSON.stringify(f.history),authorize:async()=>true,now:Date.now,timeoutMs:5000});
+test('primary ARM eligibility reads exact known history twice and denies a consumed global budget',async()=>{
+ const create=await loadArmEligibility(),f=await fixture();try{const before=await f.snapshot(),check=create(armOptions(f));assert.equal(await check.check(),true);assert.equal(await check.check(),true);assert.equal(await f.count(),0);assert.deepEqual(await f.snapshot(),before);await f.make().reserve();assert.equal(await check.check(),false);assert.equal(await f.count(),1);assert.deepEqual(await f.snapshot(),before);}finally{await f.mf.dispose();}
+});
+for(const mode of ['unknown-cancellation','changed-pin','extra-generation','unrevoked-cancellation','foreign-cancellation','monitoring-not-revoked','foreign-current','revoked-current','short-current','unexchanged-current','extra-scope','revoked-current-monitor','invalid-exchange','future-exchange','exchange-before-created','empty-scope','duplicate-scope','object-scope','foreign-current-monitor','foreign-past-monitor','changed-project-owner','future-current-monitor','short-current-monitor','future-cancellation','original-consent-live','original-admission-live'])test('primary ARM eligibility denies '+mode+' without writes',async()=>{
+ const create=await loadArmEligibility(),f=await fixture(mode);try{const before=await f.snapshot();assert.equal(await create(armOptions(f)).check(),false);assert.equal(await f.count(),0);assert.deepEqual(await f.snapshot(),before);}finally{await f.mf.dispose();}
+});
+test('primary SQL clock rejects an expired window despite an earlier application clock',async()=>{
+ const create=await loadArmEligibility(),f=await fixture('valid',{cancel:false,offset:-300000});try{const before=await f.snapshot();assert.equal(await create({...armOptions(f),now:()=>f.evidence.observedAt}).check(),false);assert.equal(await f.count(),0);assert.deepEqual(await f.snapshot(),before);}finally{await f.mf.dispose();}
+});
+test('primary original pins must match independently of valid grant history',async()=>{
+ const create=await loadArmEligibility(),f=await fixture();try{for(const key of ['containerId','processGeneration','programHash','sourceRevision','closedAt']){const o=armOptions(f);o.original[key]=key==='closedAt'?o.original[key]-1:'0'.repeat(key==='sourceRevision'?40:64);assert.equal(await create(o).check(),false);}assert.equal(await f.count(),0);}finally{await f.mf.dispose();}
+});
+test('a global reservation appearing after metadata pending prevents armed promotion',async()=>{
+ const create=await loadArmEligibility(),f=await fixture();try{
+ const {createPrivateQaGenerationLedger}=await import('../lib/mcp-qa-generation-ledger.mjs'),{generationFixture}=await import('./fixtures/qa-generation-ledger.mjs');const g=generationFixture();g.setNow(f.evidence.observedAt);g.capsule={...g.capsule,trialId:f.candidate.trialId,grantId:'current',startAt:f.candidate.startAt,expiresAt:f.candidate.expiresAt};const check=create(armOptions(f));let n=0;
+ const ledger=createPrivateQaGenerationLedger({...g.options(),checkEligibility:async()=>{if(++n===2)await f.make().reserve();return check.check();}});assert.equal((await ledger.arm()).status,'uncertain');assert.equal((await ledger.status()).status,'pending');assert.equal((await ledger.readArmed()).status,'blocked');assert.equal(await f.count(),1);assert.equal((await ledger.withdraw()).status,'withdrawn');
+ }finally{await f.mf.dispose();}
 });
