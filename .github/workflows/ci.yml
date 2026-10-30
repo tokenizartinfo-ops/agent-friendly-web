@@ -24,7 +24,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Qualify retirement receipt integration
-        run: node --test test/mcp-retirement-receipt-integration.test.mjs
+        run: node --test test/mcp-retirement-receipt-integration.test.mjs test/mcp-retirement-receipt-integration-native.test.mjs
       - name: Qualify challenged retired RPC receipt
         run: node --test test/mcp-retired-rpc-receipt.test.mjs test/mcp-retired-rpc-receipt-native.test.mjs
       - name: Qualify private prepared dispatch
