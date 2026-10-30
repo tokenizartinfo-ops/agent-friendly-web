@@ -16,7 +16,7 @@ export class Observer extends DurableObject{
    if(this.env.MODE==='held'){let interval;try{await new Promise(resolve=>{this.release=resolve;interval=setInterval(()=>{},100);});}finally{clearInterval(interval);}}
    this.completed++;
    if(this.env.MODE==='raw')return observation();
-   const result=await createRetiredRpcReceipt({challenge,now:()=>3021,observe:async()=>({...observation(),...this.env.MODE==='stale'?{observedAt:3020}:{}})});
+   const result=await createRetiredRpcReceipt({challenge,now:()=>3021,observe:async()=>({value:{...observation(),...this.env.MODE==='stale'?{observedAt:3020}:{}}})});
    if(this.env.MODE==='echo')return {...result,challenge:'f'.repeat(64)};
    if(['extra','held'].includes(this.env.MODE))return {...result,witness:new Witness(this)};
    return result;
@@ -32,7 +32,7 @@ export default{async fetch(request,env){
  let nativeLifecycle=false;
  try{
   const result=await readRetiredRpcReceipt({now:()=>3000,timeoutMs:env.MODE==='held'?50:5000,assertCurrent(){},invoke:async(nonce)=>{
-   const r=await stub.receipt(nonce);nativeLifecycle=typeof Object.getOwnPropertyDescriptor(r,Symbol.dispose)?.value==='function';return r;
+   const r=await stub.receipt(nonce);nativeLifecycle=typeof Object.getOwnPropertyDescriptor(r,Symbol.dispose)?.value==='function';return {value:r};
   }});
   return Response.json({result,nativeLifecycle});
  }catch{return Response.json({denied:true,nativeLifecycle},{status:409});}
