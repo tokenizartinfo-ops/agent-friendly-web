@@ -38,3 +38,12 @@ for(const stage of ['before-read','after-read'])test('original wall deadline rej
  const f=fixture(),at=f.wall;if(stage==='before-read')f.authorize=async()=>{f.wall=at+5000;return true;};else f.answer=async()=>{f.wall=at+5000;return{eligible:1};};
  assert.equal(await make(f).check(),false);assert.equal(f.reads,stage==='before-read'?0:1);
 });
+
+test('primary reader rejects regression immediately after entry capture',async()=>{
+ const f=fixture(),at=f.wall;let n=0;assert.equal(await make(f,{now:()=>++n===1?at+1:at}).check(),false);assert.equal(f.reads,0);
+});
+for(const initial of [NaN,-1])test('primary reader rejects invalid monotonic origin '+String(initial),async()=>{
+ const f=fixture(),original=Object.getOwnPropertyDescriptor(performance,'now'),real=performance.now.bind(performance);let n=0;
+ Object.defineProperty(performance,'now',{configurable:true,value:()=>++n===1?initial:real()});
+ try{assert.equal(await make(f).check(),false);assert.equal(f.reads,0);}finally{if(original)Object.defineProperty(performance,'now',original);else delete performance.now;}
+});
