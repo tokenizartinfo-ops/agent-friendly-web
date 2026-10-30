@@ -10,7 +10,7 @@ Lectura primaria propia 18:40/18:52 UTC: una admisión original, dos cierres (un
 
 Añadir únicamente un argumento privado de constructor cancellationHistory a createSuccessorReservation. Ausente conserva exactamente el SQL legacy. Presente requiere authorize interno y un JSON estricto de hasta 16 KiB con propósito afw.successor-known-cancellations.v1, currentGrant y como máximo ocho cancelaciones únicas. No se expone por HTTP, RPC, payload Workflow, MCP o formulario. La integración futura al confirmador QA queda fuera de este incremento.
 
-Cada cancelación fija grant, container, programa, revisión, imagen, fecha de cierre, revocación OAuth y secuencia/revisión/fecha de último revoke de avisos. Ningún grant cancelado puede ser el actual. Fechas de revocación no posteriores al cierre; todos los cierres cancelados anteriores al inicio candidato. El conjunto vacío es válido solo si realmente no hay cancelaciones.
+Cada cancelación fija grant, container, programa, revisión, imagen, fecha de cierre, revocación OAuth y secuencia/revisión/fecha de último revoke de avisos. Ningún grant cancelado puede ser el actual. Fechas de revocación no posteriores al cierre; todos los cierres cancelados anteriores al inicio candidato y no posteriores al reloj SQL primario. El conjunto vacío es válido solo si realmente no hay cancelaciones.
 
 ## Invariante atómico
 
