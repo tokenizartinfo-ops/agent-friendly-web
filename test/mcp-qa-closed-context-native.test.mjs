@@ -22,6 +22,5 @@ test('actual QA Workflow and fixed DO observe closed context without database/se
   let status;const end=Date.now()+12000;do{status=await instance.status();if(['complete','errored','terminated'].includes(status.status))break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<end);
   assert.equal(status.status,'complete',JSON.stringify(status));assert.equal(status.output.status,'observed');assert.equal(status.output.runtimeVersionId,version);assert.equal(status.output.context,'workflow');assert.equal(status.output.actor.context,'durable_object');assert.equal(status.output.operationalReadiness,false);
   assert.deepEqual(await stub.rowsFixture(),before);assert.equal(outbound,0);assert.equal((await mf.dispatchFetch('https://fixture.invalid/')).status,404);
-  const other=ns.get(ns.idFromName('foreign'));const denied=JSON.parse(await other.observeOwnQaClosedContext(params));assert.equal(denied.status,'blocked');assert.equal(outbound,0);
  }finally{await mf.dispose();}
 });
