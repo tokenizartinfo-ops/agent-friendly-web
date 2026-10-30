@@ -1,0 +1,18 @@
+{
+  "operatorSourceRevision": "2a4773737764c5038aaa0b3528b43df2a0572441",
+  "operatorSourceTree": "637af253296ac1c771cb73ea353cb960a2e59204",
+  "artifactSourceRevision": "2a4773737764c5038aaa0b3528b43df2a0572441",
+  "artifactSourceTree": "637af253296ac1c771cb73ea353cb960a2e59204",
+  "artifactKey": "ff3fa4b405b9009466253f2af0c0a6a2a11ac769cc324df1d1a817d575a4a991",
+  "workerHash": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3",
+  "programHash": "f6f517c3ac135cfa7b9853137e0487f768b8f24a11e24959a337cac4e28d42e6",
+  "templateHash": "2352bf84b0a57b42e629fb05e2de6f3d9398735ae172e3be73193be03b927c97",
+  "templateBytes": 2019168,
+  "materializerHash": "bf34a5bf8d967c76a2a9e5b62489adf9f27c9337f81a85124bdd1999e902caf1",
+  "materializerBytes": 4068,
+  "materialized": false,
+  "realPolicyAccepted": false,
+  "remotePublished": false,
+  "invoked": false,
+  "operationalReadiness": false
+}

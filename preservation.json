@@ -1,0 +1,245 @@
+{
+  "format": "afw-public-publication-snapshot-v1",
+  "sourceRevision": "2a4773737764c5038aaa0b3528b43df2a0572441",
+  "sourceTree": "637af253296ac1c771cb73ea353cb960a2e59204",
+  "templateHash": "2352bf84b0a57b42e629fb05e2de6f3d9398735ae172e3be73193be03b927c97",
+  "templateBytes": 2019168,
+  "materializerHash": "bf34a5bf8d967c76a2a9e5b62489adf9f27c9337f81a85124bdd1999e902caf1",
+  "materializerBytes": 4068,
+  "files": [
+    {
+      "path": "template-0000.b64",
+      "sha": "d6463b008478000f8e9c871e0026470278e9ab7a",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0001.b64",
+      "sha": "7d5e2c1cb2be54bc8c8494fe63ae461e5724649c",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0002.b64",
+      "sha": "f1b6acf621a811aeadf00c8ed42f8c5920bb882c",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0003.b64",
+      "sha": "cebe77196339fd9abe3c9e8d9b428c08a967935d",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0004.b64",
+      "sha": "4aaa11a90f01dac096a78906279a5a04f102a95c",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0005.b64",
+      "sha": "ff484cf3b54fb3651595a35c632e0c5eb12064a6",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0006.b64",
+      "sha": "3513c9c20da1d979dbaa83e305be79f0c515e916",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0007.b64",
+      "sha": "b1eecaab904f28d09b3013e59b42151f39f767ed",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0008.b64",
+      "sha": "6299297ab2e3c80bd032890a67c330e0cc001985",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0009.b64",
+      "sha": "b7b7d0ed5ea005e4265d0b16fe32101238b6948b",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0010.b64",
+      "sha": "c8f842d828ccfc583ad7b2ffbcca5456e4fa68bd",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0011.b64",
+      "sha": "1824861f898268fbcb3b8fb24de4137a854485ed",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0012.b64",
+      "sha": "926d6c964b84c287fa1a28bf2bec683bb2489f68",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0013.b64",
+      "sha": "032436a4693e77ce7fa04f8396756d44e5bf137a",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0014.b64",
+      "sha": "93ddb834975749318ca9cd89bf023a80271d053e",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0015.b64",
+      "sha": "f33fcc3471342b983b51cce2c14060e3d3d3d6e1",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0016.b64",
+      "sha": "31a7a81ed16caa87d638e78c1bffa3a4ba6e88be",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0017.b64",
+      "sha": "b9529fbe2d07e302e2132172847e29a69a0701f9",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0018.b64",
+      "sha": "d467446d81f278ae01d6112dc1e8141afe59a1b5",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0019.b64",
+      "sha": "99b9299d8c5a0b9ca31326f058847e924f14dc66",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0020.b64",
+      "sha": "8a082e2b869c1f9e497145506f1554987895055f",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0021.b64",
+      "sha": "4fbcb24938f23a970f2122e88b87413cd78b8457",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0022.b64",
+      "sha": "7fb8f2093513db80bb559eaefcfab2f69fe86383",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0023.b64",
+      "sha": "ff168d8be8033116d1d2d3c63821998888240241",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0024.b64",
+      "sha": "24ae760c6d91ac1494073a7e4584363a00b3b414",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0025.b64",
+      "sha": "c2f58e8ecd877094c4aee07eca2922a1a5cc406f",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0026.b64",
+      "sha": "8afee6065d65fa8004efb280f419f4fa6682a788",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0027.b64",
+      "sha": "0f4c42d41dd389f0dbe7aec32f245ae1f0ec65c1",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0028.b64",
+      "sha": "8efde68618bdf1e34303473fb70c9f303e3bcc28",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0029.b64",
+      "sha": "32e5a70c626f6c68e20db73fd45e50ce7885bd32",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0030.b64",
+      "sha": "7c46bc968864f60cde7aaa7c4763fa719e2b088a",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0031.b64",
+      "sha": "e28a0ea0184c7092f9951e64000d1d752ac1003c",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0032.b64",
+      "sha": "20ff6e8b75c9e29efa8d79b0aaf537e17d3a463c",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0033.b64",
+      "sha": "4cd5e9c7bccd7601f335d81e1d280d7bdc13f1fe",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0034.b64",
+      "sha": "5e650ad6f08d8c452fa4e921b57ae2139c172a83",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0035.b64",
+      "sha": "a6550cc91a0aa2c980c1b9f7beb60115dc0a5045",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0036.b64",
+      "sha": "6a9232b315423bca7ec6006700fc062a3de163e1",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0037.b64",
+      "sha": "2171640059f1908e3c9593fffdb023aefb2f84ae",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0038.b64",
+      "sha": "8d5baed2a3156c4e4f9b99eb7336d763425464ab",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0039.b64",
+      "sha": "34f8e7a06c6097701e1a38263079581f582ebc7e",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0040.b64",
+      "sha": "c2848829d0d310492e284de536bb72933783a2fc",
+      "bytes": 65536
+    },
+    {
+      "path": "template-0041.b64",
+      "sha": "aa56cbc29b6c3a15a2af534b720c5512ee4f5c3d",
+      "bytes": 5248
+    },
+    {
+      "path": "materializer.b64",
+      "sha": "0f7597270eb8ed0e796ab383f25cbea6919644ce",
+      "bytes": 5424
+    },
+    {
+      "path": "template.json",
+      "sha": "d99ff5b1ed1c58b3e19dd603a7fa2dab70b17dfd",
+      "bytes": 699
+    },
+    {
+      "path": "build.json",
+      "sha": "b6cce02b698430b2de263e5ffcfd5142554c7b80",
+      "bytes": 907
+    },
+    {
+      "path": "README.md",
+      "sha": "2b5cdeaec25c344bee9bf6ae323db725c560319c",
+      "bytes": 489
+    }
+  ],
+  "materialized": false,
+  "remotePublished": false,
+  "invoked": false,
+  "operationalReadiness": false
+}
