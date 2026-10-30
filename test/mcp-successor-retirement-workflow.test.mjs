@@ -1,3 +1,4 @@
+import {withChallengedCustody} from './fixtures/challenged-custody.mjs';
 import {createRetiredRpcReceipt} from '../lib/mcp-retired-rpc-receipt.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -12,6 +13,7 @@ function fixture(){
  const policy={startAt:wall-1000,expiresAt:wall+60000,candidate},text=JSON.stringify(policy),observationHash=hash(text);
  const proof=()=>({purpose:'afw.node-retirement-observation.v1',containerId:id,processGeneration:'d'.repeat(64),programHash:candidate.programHash,sourceRevision:candidate.sourceRevision,image:'cloudflare/debian-trixie',createdAt:original-20000,expiresAt:original-10000,closedAt:original-9000,observedAt:wall,physicalStopVerified:false,mayStartSuccessor:false});
  const native={async observeSuccessorRetired(){calls.rpc++;const r=proof();Object.defineProperty(r,Symbol.dispose,{value(){calls.dispose++;},enumerable:false});return r;}};
+ withChallengedCustody(native,()=>wall,'successor');
  const namespace={idFromName(name){assert.equal(name,'afw-own-event-first-successor-v1');return {toString:()=>id};},idFromString(value){assert.equal(value,id);return {toString:()=>id};},get(value){assert.equal(value.toString(),id);return native;}};
  const env={AFW_RELEASE_OPERATOR_ENABLED:'false',AFW_RELEASE_WORKFLOW_ENABLED:'false',AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED:'false',AFW_RELEASE_RETIREMENT_OBSERVATION_ENABLED:'true',AFW_RELEASE_RETIREMENT_OBSERVATION_POLICY:text,AFW_RELEASE_EVENTS_NODE:namespace,AFW_RELEASE_READ_TOKEN:'synthetic_read_credential'};
  const event={instanceId:'afw-successor-retired-'+observationHash,payload:{observationHash},timestamp:new Date(original)};

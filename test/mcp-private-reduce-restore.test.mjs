@@ -1,3 +1,4 @@
+import {withChallengedCustody} from './fixtures/challenged-custody.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -6,7 +7,7 @@ const load=()=>import('../lib/mcp-hosted-canary-restoration.mjs');
 const SLOT='afw-own-successor-closure-v1';
 function fixture(settings){
  const f=restorationFixture(settings);let originalReads=0,instanceReads=0;const flags={original:true,running:false};
- const original={...f.options.namespace,get:id=>{if(id.toString()!==f.policy.candidate.containerId)throw Error('Wrong original');return{observeSuccessorRetired:async()=>{originalReads++;if(!flags.original)throw Error('Original context removed');return{purpose:'afw.node-retirement-observation.v1',containerId:f.policy.candidate.containerId,programHash:f.policy.candidate.programHash,sourceRevision:f.policy.candidate.sourceRevision,processGeneration:'d'.repeat(64),image:'cloudflare/debian-trixie',createdAt:f.at-60000,expiresAt:f.at-10000,closedAt:f.at-20000,observedAt:f.options.now(),physicalStopVerified:false,mayStartSuccessor:false};}};}};
+ const original={...f.options.namespace,get:id=>{if(id.toString()!==f.policy.candidate.containerId)throw Error('Wrong original');return withChallengedCustody({observeSuccessorRetired:async()=>{originalReads++;if(!flags.original)throw Error('Original context removed');return{purpose:'afw.node-retirement-observation.v1',containerId:f.policy.candidate.containerId,programHash:f.policy.candidate.programHash,sourceRevision:f.policy.candidate.sourceRevision,processGeneration:'d'.repeat(64),image:'cloudflare/debian-trixie',createdAt:f.at-60000,expiresAt:f.at-10000,closedAt:f.at-20000,observedAt:f.options.now(),physicalStopVerified:false,mayStartSuccessor:false};}},f.options.now,'successor');}};
  const ctx={storage:f.storage,id:{toString:()=>'9'.repeat(64)}};
  const env={AFW_INDEPENDENT_CLOSURE:{idFromName:name=>{if(name!==SLOT)throw Error('Wrong private slot');return{toString:()=>'9'.repeat(64)};}},AFW_MCP_CLOSURE_ENABLED:'true',AFW_MCP_CLOSURE_POLICY:f.control.policy,AFW_MCP_CLOSURE_NODE:original,AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-reader-token',AFW_MCP_CLOSURE_PUBLISH_TOKEN:'synthetic-publisher-token'};
  const calls=[];

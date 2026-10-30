@@ -25,6 +25,8 @@ jobs:
       - run: npm ci
       - name: Qualify retirement parent lease
         run: node --test --test-name-pattern='original monotonic assertion|original deadline after deployment|independent SQL clock|observer clock ahead|challenged successor handoff|independently ahead observer clock|challenged successor custody' test/mcp-successor-reservation.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-release-reservation-native.test.mjs test/mcp-successor-retirement-handoff.test.mjs test/mcp-successor-retirement-workflow.test.mjs test/mcp-hosted-canary-restoration.test.mjs
+      - name: Qualify challenged successor consumers
+        run: node --test test/mcp-successor-host.test.mjs test/mcp-successor-retirement-workflow.test.mjs test/mcp-successor-retirement-workflow-native.test.mjs test/mcp-successor-retirement-handoff.test.mjs test/mcp-hosted-canary-restoration.test.mjs test/mcp-hosted-canary-restoration-native.test.mjs test/mcp-private-reduce-restore.test.mjs test/mcp-release-reservation-native.test.mjs
       - name: Qualify retirement receipt integration
         run: node --test test/mcp-retirement-receipt-integration.test.mjs test/mcp-retirement-receipt-integration-native.test.mjs
       - name: Qualify challenged retired RPC receipt

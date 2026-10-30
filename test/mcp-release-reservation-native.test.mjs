@@ -60,20 +60,13 @@ test('native reservation denies changed authority after the first retirement pro
  });
 });
 
-test('named custody clock diagnostic exposes only the numeric future boundary and preserves rejection',async()=>{
+test('server-owned future custody is rejected before any challenged receipt is accepted',async()=>{
  const r=await run({reserve:'true',retirement:'future'});
- assert.equal(r.output.status,'uncertain');
- assert.equal(r.output.observation.stage,'successor_custody_future');
- const clock=r.output.observation.custodyClock;
- assert.deepEqual(Object.keys(clock??{}).sort(),['deltaMs','receivedAt','remoteObservedAt']);
- assert.ok(Number.isSafeInteger(clock.remoteObservedAt)&&Number.isSafeInteger(clock.receivedAt));
- assert.ok(clock.deltaMs>0&&clock.deltaMs<=2000);
- assert.equal(clock.deltaMs,clock.remoteObservedAt-clock.receivedAt);
- assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
- assert.equal(r.reservationCount,0);assert.equal(r.output.mayRetry,false);
- assert.equal(r.output.operationalReadiness,false);
- assert.equal(JSON.stringify(r.output).includes('synthetic_read_credential'),false);
+ assert.equal(r.output.status,'uncertain');assert.equal(Object.hasOwn(r.output.observation,'custodyClock'),false);
+ assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});assert.equal(r.reservationCount,0);
+ assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);
 });
+
 test('named custody clock diagnostic omits malformed times without weakening admission',async t=>{
  for(const retirement of ['future-string','future-unsafe'])await t.test(retirement,async()=>{
   const r=await run({reserve:'true',retirement});
