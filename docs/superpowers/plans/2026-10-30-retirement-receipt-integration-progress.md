@@ -15,3 +15,7 @@
 
 - Task2 first wired7393aca4 passed all7 focused new parent/clock/closure cases; remaining old fixture failures named their missing new RPC. Migrated CI-only adapters through actual createRetiredRpcReceipt, preserving old methods/faults/counters instead of adding runtime fallback. Lifecycle test overrides and the refresh race now target the new challenged adapter boundary.
 - Original native future payload test now expects server-bracket denial before a client receipt, while a separate valid independent+21ms server clock must reserve1. No weakening of malformed/stale/future-in-server checks.
+
+- Final independent review at126c1274:0Critical,2Important,0Minor. Both reproduced in d17c4694/CI41081396581/job124151168036: final pre-RPC microtask issued1 call after parent expiry; local receipts older than30s accepted after final provider wall jump.
+- One fix pass: all4 adapters synchronously assert parent/current immediately inside invoke before native dispatch; common reader retains each custody freshness timestamp (local sentAt in challenged mode, legacy observedAt in raw mode) and rechecks at final acceptance. No remote timestamp comparison/normalization added.
+- Runtime/credentials/live consent/physical stop/PC-off/Task3 were explicitly not assessed by reviewer and remain gates. Root must verify final CI. No Minor deferred.
