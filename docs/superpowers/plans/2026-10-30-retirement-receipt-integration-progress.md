@@ -12,3 +12,6 @@
 - Task2 RED ac4667df/CI41078837648/job124142205884 reproduced missing parent lease callbacks and native+21ms reservation denial.
 - Task2 extended RED0ff114e3/CI41079208922 qualifies missing challenged successor observation/handoff/restoration. The named-package build failure at this test-only head is expected from the new native requirement, not a runtime/provider result.
 - Task2 production candidate now wires all fixed paths; SQL strings and row grammar remain unchanged. Parent callbacks gain only a second sync assertion argument. No new flag, fallback, binding or schema.
+
+- Task2 first wired7393aca4 passed all7 focused new parent/clock/closure cases; remaining old fixture failures named their missing new RPC. Migrated CI-only adapters through actual createRetiredRpcReceipt, preserving old methods/faults/counters instead of adding runtime fallback. Lifecycle test overrides and the refresh race now target the new challenged adapter boundary.
+- Original native future payload test now expects server-bracket denial before a client receipt, while a separate valid independent+21ms server clock must reserve1. No weakening of malformed/stale/future-in-server checks.

@@ -97,14 +97,14 @@ test('native RPC disposal metadata is released while unexpected evidence remains
  const {createPrivateCanaryRestorationHost}=await load();
  for(const mode of ['valid','extra','symbol','getter','dispose-failure']){
   const f=fixture();let disposals=0,getterReads=0;const get=f.env.AFW_MCP_CLOSURE_NODE.get;
-  f.env.AFW_MCP_CLOSURE_NODE.get=id=>{const original=get(id);return{observeSuccessorRetired:async()=>{
+  f.env.AFW_MCP_CLOSURE_NODE.get=id=>{const original=get(id);return withChallengedCustody({observeSuccessorRetired:async()=>{
    const value=await original.observeSuccessorRetired();
    Object.defineProperty(value,Symbol.dispose,{value(){disposals++;if(mode==='dispose-failure')throw Error('Synthetic disposal failure');}});
    if(mode==='extra')value.extra=true;
    if(mode==='symbol')Object.defineProperty(value,Symbol('foreign'),{value:true});
    if(mode==='getter')Object.defineProperty(value,'programHash',{enumerable:true,get(){getterReads++;return f.f.policy.candidate.programHash;}});
    return value;
-  }};};
+  }},f.options.now,'successor');};
   const h=createPrivateCanaryRestorationHost(f.options);assert.equal((await h.arm(f.hash)).status,'armed');const result=await h.restore(f.hash);
   assert.equal(result.status,mode==='valid'?'restored_observed':'blocked',mode);assert.equal(getterReads,0);
   assert.equal(disposals,mode==='valid'?2:1);assert.equal(f.f.posts,mode==='valid'?1:0);
@@ -119,7 +119,7 @@ test('resumed primary refresh cannot dispatch beyond original parent or nested l
    const token=f.env.AFW_MCP_CLOSURE_PUBLISH_TOKEN;
    Object.defineProperty(f.env,'AFW_MCP_CLOSURE_PUBLISH_TOKEN',{get(){publish=true;return token;}});
    f.options.now=()=>{
-    const n=clock(),stack=new Error().stack??'',caller=boundary==='rpc'?'readCustody':'fetchGuarded';
+    const n=clock(),stack=new Error().stack??'',caller=boundary==='rpc'?'assertCurrent':'fetchGuarded';
     const direct=new RegExp('at current[^\\n]*\\n\\s+at (?:async )?fresh[^\\n]*\\n\\s+at (?:async )?'+caller+'\\b').test(stack);
     if(!injected&&direct&&(boundary==='rpc'||publish)&&++directChecks===2){
      injected++;queueMicrotask(()=>{
