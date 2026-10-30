@@ -11,7 +11,7 @@ for(const context of ['workflow','durable_object'])test('pure execution pin snap
 });
 for(const value of [undefined,null,0,'','not-a-version',VERSION.toUpperCase()])test('expected UUID rejects '+String(value),()=>assert.throws(()=>createPrivateQaExecutionPin({...input(),expectedVersionId:value}),/Private QA execution pin unavailable/));
 test('foreign runtime UUID is denied before a pin is returned',()=>{const o=input();o.env.AFW_QA_VERSION.id=OTHER;assert.throws(()=>createPrivateQaExecutionPin(o));});
-test('missing or non-data metadata cannot be mistaken for native origin',()=>{
+test('missing or non-data metadata cannot form a coherent execution pin',()=>{
  for(const env of [{},{AFW_QA_VERSION:null},{AFW_QA_VERSION:[]},{AFW_QA_VERSION:{id:0}},{AFW_QA_VERSION:Object.create({id:VERSION})},Object.create({AFW_QA_VERSION:{id:VERSION}})])assert.throws(()=>createPrivateQaExecutionPin({...input(),env}));
 });
 for(const field of ['env','expectedVersionId','sourceRevision','context'])test('observed '+field+' drift closes the pin permanently',()=>{
