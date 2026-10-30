@@ -23,6 +23,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Qualify permissions-only separation
+        run: node --test test/mcp-own-permissions-only-reduction.test.mjs test/mcp-own-permissions-only-reduction-native.test.mjs test/mcp-own-permission-withdrawal.test.mjs test/mcp-own-permission-withdrawal-native.test.mjs
       - name: Qualify explicit finite execution context
         run: node --test test/mcp-release-runtime-native.test.mjs test/mcp-named-authorization-native.test.mjs
       - name: Qualify retirement review fences
@@ -41,8 +43,6 @@ jobs:
         run: node --test test/mcp-release-identity-observation.test.mjs test/mcp-release-identity-observation-native.test.mjs
       - name: Qualify public journey audit regressions
         run: node --test test/public-journey-audit.test.mjs test/public-guide.test.mjs test/intake-assistant-contract.test.mjs
-      - name: Qualify permissions-only separation
-        run: node --test test/mcp-own-permissions-only-reduction.test.mjs test/mcp-own-permissions-only-reduction-native.test.mjs test/mcp-own-permission-withdrawal.test.mjs test/mcp-own-permission-withdrawal-native.test.mjs
       - name: Qualify private withdrawal before full suite
         run: node --test test/mcp-private-reduce-restore.test.mjs test/mcp-private-reduce-restore-native.test.mjs test/mcp-own-guarded-close.test.mjs test/mcp-own-permission-withdrawal-host.test.mjs test/mcp-own-permission-withdrawal-rpc-native.test.mjs test/mcp-own-permission-withdrawal.test.mjs test/mcp-own-permission-withdrawal-native.test.mjs
       - name: Qualify original custody clock observation
