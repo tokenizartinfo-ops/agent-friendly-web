@@ -32,7 +32,7 @@ test('named-only internal authorization is required before admission and cannot 
 });
 
 test('authorization requires exact true and sanitizes a rejected internal fence',async t=>{
- for(const returned of ['undefined','null',"Promise.reject(Error('synthetic_private_guard_detail'))"])await t.test(returned,async()=>{
+ for(const returned of ['undefined','null',"Promise.reject(Error('synthetic_private_guard_detail'))",'new Promise(()=>{})'])await t.test(returned,async()=>{
   const r=await run({returned});assert.equal(r.output.status,'blocked');assert.deepEqual(r.counts,{attempts:0,receipts:0,acceptances:0});assert.equal(r.reservationCount,0);assert.equal(r.counters.providerReads,0);
   assert.equal(JSON.stringify(r.output).includes('synthetic_private_guard_detail'),false);
  });
