@@ -1,0 +1,15 @@
+# Execution ledger — plan: docs/superpowers/plans/2026-10-30-retired-rpc-receipt.md
+
+- Baseline c5f9d8f33e2e279135086265d3fd4f0e7f428013; source-only isolated GitHub branch. No local checkout or build. Tasks 1→2 share the two helper signatures and exact result shapes.
+- Ruling: use the isolated GitHub branch and this durable ledger instead of local sdd scripts/worktree — owner requires cloud-first work; no local filesystem artifact is needed. Cost if wrong: less local tooling automation, not wider authority.
+- Ruling: explicit late cleanup is guaranteed only in a live execution context; native cleanup/cancellation owns a terminated context — no callback can execute after its context ends. Integration must provide a lifetime owner if it needs observed post-response cleanup. Cost if wrong: integration cannot claim cleanup based solely on this primitive.
+- Task 1 in progress: RED unit tests before implementation; both production helpers stay unmounted.
+
+- Task 1 RED observed: d1d435c8, CI41070479002/job124112918940; only helper-availability assertion failed (undefined vs function); other new cases skipped until module exists. Existing preceding qualification steps passed. No typo/import failure inferred.
+- Task 1 GREEN candidate and Task 2 native qualification now committed; no production imports/mounts changed.
+
+- Task 1 initial GREEN: head093e922a, CI41071095447/job124115108997, 17 focused tests and full3378PASS/0FAIL/1existingSKIP; lint0errors/14existingwarnings and build passed. Five package build-only workflows passed. This was superseded by review regression, not accepted as final.
+- Final review: one Important thenable-assimilation finding, no Critical/Minor. RED a97e34c3/CI41073080766/job124121961096 reproduced both resolving getters being accepted and throwing getters invoked, before cleanup. Fix pass only: synchronously snapshot direct values; genuine asynchronous Promise must carry a plain local {value:domain} box. Tests for both helpers cover resolving/throwing then getters, boxed domain preservation and rejection/disposal of unboxed async results.
+- Ruling: a trusted async adapter must box the domain result BEFORE promise resolution and must not assimilate it earlier — the helper cannot inspect execution that happened before its boundary. Cost if wrong: a future adapter could violate provenance; mounted integration must qualify this contract.
+- GitHub control-plane note: connector ref updates returned GraphQL errors; branch readback stayed093. REST update via installed gh moved the isolated branch to a97 without local files. PR metadata stayed093 until one close/reopen reconciled it and triggered the RED run. No runtime resources changed.
+- Final review exclusions ruled on: root verifies final CI and unchanged production diff; identity/custody pinning, D1 time domains, physical handoff, deployed clock cause, context lifetime ownership and actual operational acceptance remain explicit later gates. Malicious Proxy traps/overridden intrinsics/adversarial adapter implementations are outside this trusted internal transport primitive; no protection against them is claimed.
