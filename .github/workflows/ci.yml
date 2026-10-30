@@ -26,7 +26,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Qualify generation metadata without runtime effects
-        run: node --test test/mcp-qa-generation-ledger.test.mjs test/mcp-qa-generation-ledger-native.test.mjs test/mcp-hosted-canary-restoration-native.test.mjs
+        run: node --test test/mcp-qa-generation-ledger.test.mjs test/mcp-qa-generation-ledger-native.test.mjs test/mcp-qa-generation-observer.test.mjs test/mcp-qa-generation-observer-native.test.mjs test/mcp-hosted-canary-restoration-native.test.mjs
       - name: Qualify pure QA execution pin
         run: node --test test/mcp-qa-execution-identity.test.mjs test/mcp-release-runtime-native.test.mjs
       - name: Qualify legacy transaction fence
