@@ -23,6 +23,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Qualify explicit finite execution context
+        run: node --test test/mcp-release-runtime-native.test.mjs
       - name: Qualify retirement review fences
         run: node --test --test-name-pattern='final pre-RPC microtask|stay fresh through final provider' test/mcp-successor-host.test.mjs test/mcp-retirement-receipt-integration.test.mjs
       - name: Qualify retirement parent lease
