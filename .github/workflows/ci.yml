@@ -31,6 +31,8 @@ jobs:
         run: node --test test/mcp-qa-execution-identity.test.mjs test/mcp-release-runtime-native.test.mjs
       - name: Qualify legacy transaction fence
         run: node --test test/mcp-legacy-generation-fence-native.test.mjs
+      - name: Qualify server-owned named history bridge
+        run: node --test test/mcp-named-known-history-native.test.mjs
       - name: Qualify exact known cancellation history
         run: node --test test/mcp-known-cancellation-native.test.mjs test/mcp-qa-arm-eligibility.test.mjs
       - name: Qualify permissions-only separation
