@@ -23,6 +23,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Qualify exact known cancellation history
+        run: node --test test/mcp-known-cancellation-native.test.mjs
       - name: Qualify permissions-only separation
         run: node --test test/mcp-own-permissions-only-reduction.test.mjs test/mcp-own-permissions-only-reduction-native.test.mjs test/mcp-own-permission-withdrawal.test.mjs test/mcp-own-permission-withdrawal-native.test.mjs
       - name: Qualify explicit finite execution context
