@@ -40,8 +40,9 @@
 - [x] Fence admission/credential/primary lookup and pass hook to journal/reservation.
 - [x] Before each journal/reservation primary action, await hook only when present; invoke original component check immediately afterward and before native call. Recheck after await and before exposing completion. Keep SQL strings and deadlines byte-for-byte.
 - [x] Inside qualified native receipt invoke, await hook before existing current/assertReader and unchanged boxed native call.
-- [x] Observe the separate metadata-child RED after hooks exist; fix its original five-second monotonic fence before metadata GET and after response/body awaits, with no renewed timer.\n- [ ] Run focused native regression, existing full suite, lint/build and separate package builds in Actions; inspect real primary prefixes, sanitized outputs and clockApplied diagnostics.
-- [ ] Independent branch review; fix findings; merge only with accepted checks. Update cloud continuity; no deploy.
+- [x] Observe the separate metadata-child RED after hooks exist; fix its original five-second monotonic fence before metadata GET and after response/body awaits, with no renewed timer.
+- [x] Run focused native regression, existing full suite, lint/build and separate package builds in Actions; inspect real primary prefixes, sanitized outputs and clockApplied diagnostics.
+- [x] Independent branch review; fix findings; merge only with accepted checks. Accepted PR654 / main4a5c38c, CI3427PASS/0FAIL/1priorSKIP; cloud continuity recorded, no deploy.
 
 ## Continuity
 
