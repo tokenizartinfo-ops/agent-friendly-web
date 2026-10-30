@@ -130,3 +130,16 @@ test('canonical field order cannot manufacture another plan identity',()=>{
  const inner=structuredClone(c);inner.predecessor={control:inner.predecessor.control,kind:'legacy',trialId:inner.predecessor.trialId,grantId:inner.predecessor.grantId,eventId:inner.predecessor.eventId};assert.throws(()=>make(f,{capsule:JSON.stringify(inner)}));
  const old=structuredClone(c),r=f.legacy;old.predecessor.control=JSON.stringify({planHash:r.planHash,purpose:r.purpose,policy:r.policy,armedAt:r.armedAt,withdrawnAt:r.withdrawnAt});assert.throws(()=>api.createPrivateQaGenerationLedger({...o,capsule:JSON.stringify(old)}));
 });
+
+for(const stage of [1,2])test('hung eligibility '+stage+' returns at original deadline and ignores late completion',async()=>{
+ const f=generationFixture();let release;const gate=new Promise(resolve=>{release=resolve;});f.eligibility=async n=>n===stage?gate:true;
+ const ledger=make(f,{timeoutMs:30});let result;
+ try{result=await Promise.race([ledger.arm(),new Promise(resolve=>setTimeout(()=>resolve('no deadline'),200))]);assert.notEqual(result,'no deadline');assert.equal(result.status,stage===1?'blocked':'uncertain');flags(result);const before=copy(f.rows);release(true);await new Promise(resolve=>setTimeout(resolve,10));assert.deepEqual(copy(f.rows),before);if(stage===2)assert.equal((await ledger.status()).status,'pending');}
+ finally{release(true);}
+});
+test('hung storage read returns without allowing late writes',async()=>{
+ const f=generationFixture(),base=f.storage;let release;const gate=new Promise(resolve=>{release=resolve;});let first=true;
+ const storage={transaction:fn=>base.transaction(t=>fn({...t,get:async key=>{if(first){first=false;await gate;}return t.get(key);}}))};
+ try{const result=await Promise.race([make(f,{storage,timeoutMs:30}).arm(),new Promise(resolve=>setTimeout(()=>resolve('no deadline'),200))]);assert.notEqual(result,'no deadline');assert.equal(result.status,'blocked');release();await new Promise(resolve=>setTimeout(resolve,10));assert.equal(f.rows.size,1);}
+ finally{release();}
+});
