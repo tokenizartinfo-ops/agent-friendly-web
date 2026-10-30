@@ -8,8 +8,8 @@ const IMAGE='cloudflare/debian-trixie',PURPOSE='afw.successor-known-cancellation
 async function fixture(mode='valid',{cancel=true}={}){
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:'export default{fetch(){return new Response(null,{status:404});}}',d1Databases:{DB:'known-cancellation',OTHER:'known-cancellation'}}));
  const db=await mf.getD1Database('DB'),other=await mf.getD1Database('OTHER'),now=Date.now(),iso=n=>new Date(n).toISOString();
- await db.exec('CREATE TABLE site_projects(id TEXT PRIMARY KEY);CREATE TABLE delegated_access_grants(id TEXT PRIMARY KEY,user_id TEXT NOT NULL,client_id TEXT NOT NULL,project_id TEXT NOT NULL,resource TEXT NOT NULL,scopes_json TEXT NOT NULL,created_at TEXT NOT NULL,expires_at TEXT NOT NULL,revoked_at TEXT NOT NULL DEFAULT "",exchanged_at TEXT NOT NULL DEFAULT "");');
- await db.prepare('INSERT INTO site_projects VALUES(?)').bind('project').run();
+ await db.exec('CREATE TABLE site_projects(id TEXT PRIMARY KEY,user_id TEXT NOT NULL);CREATE TABLE delegated_access_grants(id TEXT PRIMARY KEY,user_id TEXT NOT NULL,client_id TEXT NOT NULL,project_id TEXT NOT NULL,resource TEXT NOT NULL,scopes_json TEXT NOT NULL,created_at TEXT NOT NULL,expires_at TEXT NOT NULL,revoked_at TEXT NOT NULL DEFAULT "",exchanged_at TEXT NOT NULL DEFAULT "");');
+ await db.prepare('INSERT INTO site_projects VALUES(?,?)').bind('project',mode==='changed-project-owner'?'foreign':'owner').run();
  for(const name of ['node-process','monitoring-consent','successor-reservation']){
   const source=readFileSync('db/dossier-'+name+'.sql','utf8');
   for(const statement of source.matchAll(/CREATE TABLE[\s\S]*?\);|CREATE (?:UNIQUE )?INDEX[^;\r\n]+;|CREATE TRIGGER[^\r\n]*? END;/g))await db.prepare(statement[0]).run();
@@ -28,13 +28,13 @@ async function fixture(mode='valid',{cancel=true}={}){
  await addConsent('original',1,'grant',now-90000,now-80000);
  if(mode!=='missing-past-grant')await addConsent('cancelled',2,'grant',now-40000,now+10000);
  await addConsent('cancelled',3,mode==='monitoring-not-revoked'?'grant':'revoke',now-30020,mode==='monitoring-not-revoked'?now+10000:now-30020);
- await addConsent('current',4,'grant',now-1000,now+120000);
+ await addConsent('current',4,'grant',mode==='future-current-monitor'?now+1000:now-1000,mode==='short-current-monitor'?now+5000:now+120000);
  if(mode==='revoked-current-monitor')await addConsent('current',5,'revoke',now-100,now-100);
  const closed={grantId:'cancelled',containerId:'4'.repeat(64),programHash:'5'.repeat(64),sourceRevision:'6'.repeat(40),image:IMAGE,closedAt:now-30000,revokedAt:iso(now-30010),monitorSequence:3,monitorRevision:1,monitorRevokedAt:now-30020};
  const addClosure=async(record=closed,generation=null)=>{await db.prepare('INSERT OR IGNORE INTO delegated_access_grants SELECT ?,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at,exchanged_at FROM delegated_access_grants WHERE id=?').bind(record.grantId,'cancelled').run();return db.prepare('INSERT INTO dossier_node_process_closures(grant_id,process_generation,container_id,program_hash,source_revision,image,closed_at) VALUES(?,?,?,?,?,?,?)').bind(record.grantId,generation,record.containerId,record.programHash,record.sourceRevision,record.image,record.closedAt).run();};
  if(cancel)await addClosure({...closed,...(mode==='changed-pin'?{programHash:'7'.repeat(64)}:{})},mode==='extra-generation'?'8'.repeat(64):null);
  if(mode==='unknown-cancellation')await addClosure({...closed,grantId:'unknown'});
- const history={purpose:PURPOSE,currentGrant:{grantId:'current',consentSequence:4,consentRevision:1,issuedAt:now-1000,expiresAt:now+120000},cancellations:cancel?[closed]:[]};
+ const history={purpose:PURPOSE,currentGrant:{grantId:'current',consentSequence:4,consentRevision:1,issuedAt:mode==='future-current-monitor'?now+1000:now-1000,expiresAt:mode==='short-current-monitor'?now+5000:now+120000},cancellations:cancel?[closed]:[]};
  const snapshot=async()=>Object.fromEntries(await Promise.all(['delegated_access_grants','dossier_node_process_admissions','dossier_node_process_closures','dossier_monitoring_consent_events'].map(async table=>[table,(await db.prepare('SELECT * FROM '+table+' ORDER BY 1').all()).results])));
  const count=async()=>Number((await db.prepare('SELECT COUNT(*) AS n FROM dossier_successor_reservations').first()).n);
  const make=(options={})=>createSuccessorReservation({db,original,candidate,readRetirement:async()=>evidence,authorize:async()=>true,cancellationHistory:JSON.stringify(history),...options});
@@ -56,7 +56,7 @@ test('legacy still blocks known NULL history and works unchanged with one closur
   assert.equal(await f.count(),cancel?0:1);
  }finally{await f.mf.dispose();}}
 });
-for(const mode of ['unknown-cancellation','changed-pin','extra-generation','unrevoked-cancellation','foreign-cancellation','monitoring-not-revoked','missing-past-grant','foreign-current','revoked-current','short-current','unexchanged-current','extra-scope','revoked-current-monitor','invalid-exchange','future-exchange','exchange-before-created','empty-scope','duplicate-scope','object-scope','foreign-current-monitor','foreign-past-monitor']){
+for(const mode of ['unknown-cancellation','changed-pin','extra-generation','unrevoked-cancellation','foreign-cancellation','monitoring-not-revoked','missing-past-grant','foreign-current','revoked-current','short-current','unexchanged-current','extra-scope','revoked-current-monitor','invalid-exchange','future-exchange','exchange-before-created','empty-scope','duplicate-scope','object-scope','foreign-current-monitor','foreign-past-monitor','changed-project-owner','future-current-monitor','short-current-monitor']){
  test('V2 denies '+mode+' without erasing or reserving',async()=>{const f=await fixture(mode);try{const before=await f.snapshot();await assert.rejects(f.make().reserve());assert.equal(await f.count(),0);assert.deepEqual(await f.snapshot(),before);}finally{await f.mf.dispose();}});
 }
 test('known-set pins and primary current consent must match exactly',async()=>{
@@ -106,4 +106,12 @@ test('UTF-8 byte ceiling is checked before JSON parsing',async()=>{
   try{assert.throws(()=>f.make({cancellationHistory:raw}));}finally{JSON.parse=parse;}
   assert.equal(calls,0);assert.equal(await f.count(),0);
  }finally{await f.mf.dispose();}
+});
+
+test('V2 authorization must return exact true for an otherwise valid history',async()=>{
+ const f=await fixture();try{await assert.rejects(f.make({authorize:async()=>({allowed:true})}).reserve());assert.equal(await f.count(),0);}finally{await f.mf.dispose();}
+});
+
+test('V2 requires a primary session even for an empty exact set',async()=>{
+ const f=await fixture('valid',{cancel:false});try{assert.throws(()=>f.make({db:{prepare:f.db.prepare.bind(f.db)}}));assert.equal(await f.count(),0);}finally{await f.mf.dispose();}
 });

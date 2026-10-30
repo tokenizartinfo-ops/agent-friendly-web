@@ -16,7 +16,7 @@ Cada cancelación fija grant, container, programa, revisión, imagen, fecha de c
 
 Dentro del mismo INSERT SELECT de reserva, conservar la evidencia física reciente del único predecesor admitido. Exigir una admisión global, un único cierre con generación unido íntegramente a ella y un total de cierres igual a uno más el conjunto aprobado. Cada elemento aprobado debe corresponder exactamente a un cierre con generación NULL, un grant revocado del mismo owner/proyecto/cliente/resource del original, sin admisión, y un último consentimiento revoke exacto de ese alcance, con un grant anterior. Cualquier elemento ausente, extra, cambiado o no clasificado bloquea.
 
-El grant actual debe ser distinto, activo, intercambiado, del alcance original, con único scope afw:project:read, expiry suficiente y último consentimiento grant exactamente fijado; ningún revoke de ese grant es admisible. Las condiciones se evalúan en SQL primario, no por una lectura previa seguida de escritura incondicional.
+El grant actual debe ser distinto, activo, intercambiado con timestamp canónico entre creación y reloj SQL, del alcance original, con único scope afw:project:read, expiry suficiente y último consentimiento grant exactamente fijado, ya emitido y con cobertura de la expiración candidata; ningún revoke de ese grant es admisible. El proyecto debe conservar el owner original. Las condiciones se evalúan en SQL primario, no por una lectura previa seguida de escritura incondicional.
 
 ## Límites preservados
 
