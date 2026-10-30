@@ -32,7 +32,7 @@ jobs:
       - name: Qualify legacy transaction fence
         run: node --test test/mcp-legacy-generation-fence-native.test.mjs
       - name: Qualify server-owned named history bridge
-        run: node --test test/mcp-named-known-history-native.test.mjs
+        run: node --test test/mcp-named-known-history.test.mjs test/mcp-named-known-history-native.test.mjs
       - name: Qualify exact known cancellation history
         run: node --test test/mcp-known-cancellation-native.test.mjs test/mcp-qa-arm-eligibility.test.mjs
       - name: Qualify permissions-only separation
