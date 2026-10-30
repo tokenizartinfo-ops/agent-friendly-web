@@ -4,7 +4,8 @@ ProyectoAFW / repoagent-friendly-web. Rama cloud aislada; Actions y APIs propias
 
 ## A. Contratos y procedencia
 
-- [ ] Revisión del diseño completo y orden de presupuesto, incluidos límites entre control/confirmación/limpieza.
+- [x] Revisión inicial: primer incremento aprobado SOLO pin puro UUID/revisión QA/contexto y assertCurrent, sin I/O/autoridad. Diseño completo sigue condicionado a la matriz de fases, close real con admisión, cutoffs absolutos y prueba acotada por recorrido.
+- [ ] TDD del pin puro local de ejecución, sin clase/binding/adapter/control: lectura estricta, snapshot, drift/retiro latch y ausencia de efectos. El UUID coherente no prueba procedencia externa ni autorización.
 - [ ] Cápsula estricta servidor y adaptador mínimo de entorno; validar operación/hash/bindings y flags cerrados antes de effects. No publicador al nominal.
 - [ ] Lector version_metadata en ambos contextos; argumento expectedUUID estrecha, no autoriza. Guardar correlación de source/module/config antes de ARM.
 
