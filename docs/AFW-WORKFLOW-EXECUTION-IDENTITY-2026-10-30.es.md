@@ -4,7 +4,7 @@ Status: closed diagnostic; operationalReadiness=false. Source baseline96b8896b3f
 
 ## Evidence and its limit
 
-The real synthetic trial7305 ended with named confirmation19fc blocked before step0. Its exact immutable bundle and plan hash validated independently after closure. Guardd56 automatically revoked the reading and monitoring grants at16:41UTC; its delivery ACK was uncertain, event count was0 and successor reservation count was0. No receiver subscription/task was created. The guard was subsequently withdrawn, preserving its record and dispatch history. These are separate outcomes; neither native unsubscribe, physical process stop nor PC-off was demonstrated.
+The real synthetic trial7305 ended with named confirmation19fc blocked before step0. Its exact immutable bundle and plan hash validated independently after closure. Guardd56 automatically revoked the reading and monitoring grants at16:41UTC; the guard’s dispatch result was uncertain, event count was0 and successor reservation count was0. No receiver subscription/task was created. The guard was subsequently withdrawn, preserving its record and dispatch history. These are separate outcomes; neither native unsubscribe, physical process stop nor PC-off was demonstrated.
 
 The operational sequence had selected the finite named operator3730, declared Workflow8113, and restored closed operator855 BEFORE starting named confirmation. The pure bundle check cannot establish which module/bindings the Workflow actually used. Public Workflow version metadata does not expose a Worker version pin.
 
@@ -37,7 +37,7 @@ Before B, A was selected and Workflow65087eac declared; B was then selected WITH
 - Full paginated administrative Workflow list12/12 and QA list6/6 terminal; no deletion/reset or restart.
 - Administrative comparison started17:01:55.808UTC and closed before17:06:55.808UTC; payload deadline was never renewed.
 
-The first restore-definition PUT was rejected400 because concurrency was scalar. Schema correction to concurrency:{limit:1} succeeded; no instance/effect was retried. This is not a provider incident or credential failure.
+During the closure of A, the first restore-definition PUT was rejected400 because concurrency was scalar. Schema correction to concurrency:{limit:1} succeeded; no instance/effect was retried. This is not a provider incident or credential failure.
 
 ## Consequences for the next preparation
 
