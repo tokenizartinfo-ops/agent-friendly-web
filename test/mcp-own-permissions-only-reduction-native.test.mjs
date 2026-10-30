@@ -6,6 +6,7 @@ import * as withdrawal from '../lib/mcp-own-permission-withdrawal.mjs';
 const make=o=>{assert.equal(typeof withdrawal.createOwnPermissionsOnlyReduction,'function');return withdrawal.createOwnPermissionsOnlyReduction(o);};
 async function fixture(admitted=false){
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:'export default{fetch(){return new Response(null,{status:404});}}',d1Databases:{DB:'permissions-only',OTHER:'permissions-only'}}));
+ try{
  const db=await mf.getD1Database('DB'),other=await mf.getD1Database('OTHER'),now=Date.now(),startAt=now-1000,expiresAt=now+120000;
  await db.exec('CREATE TABLE site_projects(id TEXT PRIMARY KEY,user_id TEXT,revision INTEGER);CREATE TABLE delegated_access_grants(id TEXT PRIMARY KEY,user_id TEXT,client_id TEXT,project_id TEXT,resource TEXT,scopes_json TEXT,created_at TEXT,expires_at TEXT,revoked_at TEXT,exchanged_at TEXT);');
  for(const file of ['db/dossier-monitoring-consent.sql','db/dossier-node-process.sql'])for(const statement of readFileSync(file,'utf8').matchAll(/CREATE TABLE[\s\S]*?\);|CREATE (?:UNIQUE )?INDEX[^;\r\n]+;|CREATE TRIGGER[^\r\n]*? END;/g))await db.prepare(statement[0]).run();
@@ -22,6 +23,10 @@ async function fixture(admitted=false){
  const history=async()=>({admissions:(await db.prepare('SELECT * FROM dossier_node_process_admissions ORDER BY grant_id').all()).results,closures:(await db.prepare('SELECT * FROM dossier_node_process_closures ORDER BY grant_id').all()).results});
  const permissions=async()=>({grant:await db.prepare("SELECT revoked_at FROM delegated_access_grants WHERE id='g'").first(),monitor:(await db.prepare("SELECT * FROM dossier_monitoring_consent_events WHERE grant_id='g' ORDER BY sequence").all()).results});
  return{mf,db,other,options,history,permissions};
+ }catch(error){
+  await mf.dispose();
+  throw error;
+ }
 }
 for(const admitted of [false,true])test('native permissions-only preserves admission='+admitted+' and all closure history',async()=>{
  const f=await fixture(admitted);try{
