@@ -19,8 +19,8 @@ async function fixture(mode='valid',{cancel=true}={}){
  const evidence={purpose:'afw.retirement-evidence.v1',...original,processGeneration:'3'.repeat(64),closedAt:now-79000,stoppedAt:now-79500,observedAt:now,physicalStopVerified:true,mayStartSuccessor:false};
  const scope={user:'owner',client:'client',project:'project',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp'};
  const addGrant=async(id,{user=scope.user,revokedAt='',expiresAt=now+120000,exchangedAt=iso(now-2000),scopes=['afw:project:read']}={})=>db.prepare('INSERT INTO delegated_access_grants VALUES(?,?,?,?,?,?,?,?,?,?)').bind(id,user,scope.client,scope.project,scope.resource,JSON.stringify(scopes),iso(now-100000),iso(expiresAt),revokedAt,exchangedAt).run();
- await addGrant('original',{revokedAt:iso(now-79000),expiresAt:now-80000});
- await addGrant('cancelled',{user:mode==='foreign-cancellation'?'foreign':scope.user,revokedAt:mode==='unrevoked-cancellation'?'':iso(mode==='future-cancellation'?now+29990:now-30010)});
+ await addGrant('original',{revokedAt:iso(now-79000),expiresAt:now-80000,exchangedAt:iso(now-85000)});
+ await addGrant('cancelled',{exchangedAt:iso(now-35000),user:mode==='foreign-cancellation'?'foreign':scope.user,revokedAt:mode==='unrevoked-cancellation'?'':iso(mode==='future-cancellation'?now+29990:now-30010)});
  await addGrant('current',{user:mode==='foreign-current'?'foreign':scope.user,revokedAt:mode==='revoked-current'?iso(now-100):'',expiresAt:mode==='short-current'?now+5000:now+120000,exchangedAt:mode==='unexchanged-current'?'':mode==='invalid-exchange'?'junk':iso(mode==='future-exchange'?now+1000:mode==='exchange-before-created'?now-110000:now-2000),scopes:mode==='extra-scope'?['afw:project:read','afw:evidence:read']:mode==='empty-scope'?[]:mode==='duplicate-scope'?['afw:project:read','afw:project:read']:mode==='object-scope'?{read:'afw:project:read'}:['afw:project:read']});
  await db.prepare('INSERT INTO dossier_node_process_admissions(grant_id,project_id,user_id,client_id,resource,consent_sequence,consent_issued_at,consent_expires_at,container_id,process_generation,program_hash,source_revision,image,created_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind('original',scope.project,scope.user,scope.client,scope.resource,1,now-90000,now-80000,original.containerId,evidence.processGeneration,original.programHash,original.sourceRevision,IMAGE,now-90000,now-80000).run();
  await db.prepare('INSERT INTO dossier_node_process_closures(grant_id,process_generation,container_id,program_hash,source_revision,image,closed_at) VALUES(?,?,?,?,?,?,?)').bind('original',evidence.processGeneration,original.containerId,original.programHash,original.sourceRevision,IMAGE,evidence.closedAt).run();
@@ -37,16 +37,18 @@ async function fixture(mode='valid',{cancel=true}={}){
  const history={purpose:PURPOSE,currentGrant:{grantId:'current',consentSequence:4,consentRevision:1,issuedAt:mode==='future-current-monitor'?now+1000:now-1000,expiresAt:mode==='short-current-monitor'?now+5000:now+120000},cancellations:cancel?[closed]:[]};
  const snapshot=async()=>Object.fromEntries(await Promise.all(['delegated_access_grants','dossier_node_process_admissions','dossier_node_process_closures','dossier_monitoring_consent_events'].map(async table=>[table,(await db.prepare('SELECT * FROM '+table+' ORDER BY 1').all()).results])));
  const count=async()=>Number((await db.prepare('SELECT COUNT(*) AS n FROM dossier_successor_reservations').first()).n);
- const make=(options={})=>createSuccessorReservation({db,original,candidate,readRetirement:async()=>evidence,authorize:async()=>true,cancellationHistory:JSON.stringify(history),...options});
- return{mf,db,other,original,candidate,evidence,history,snapshot,count,make,addClosure};
+ const diagnostics={};
+ const audited={prepare:db.prepare.bind(db),withSession(...args){const primary=db.withSession(...args);return{prepare(sql){const statement=primary.prepare(sql);return{bind(...values){const bound=statement.bind(...values);return{async run(){try{const result=await bound.run();diagnostics.last={success:result.success,changes:result.meta?.changes};return result;}catch(error){diagnostics.last={sqlError:error.message};throw error;}}};}};}};}};
+ const make=(options={})=>createSuccessorReservation({db:audited,original,candidate,readRetirement:async()=>evidence,authorize:async()=>true,cancellationHistory:JSON.stringify(history),...options});
+ return{mf,db,other,original,candidate,evidence,history,snapshot,count,make,addClosure,diagnostics};
 }
 test('V2 exact known cancellation reserves once and preserves every historical row',async()=>{
  const f=await fixture();try{
   const before=await f.snapshot();
-  const result=await f.make().reserve();assert.equal(result.state,'prepared');assert.equal(result.mayBoot,false);assert.equal(await f.count(),1);assert.deepEqual(await f.snapshot(),before);
+  let result;try{result=await f.make().reserve();}catch{assert.fail(JSON.stringify(f.diagnostics));}assert.equal(result.state,'prepared');assert.equal(result.mayBoot,false);assert.equal(await f.count(),1);assert.deepEqual(await f.snapshot(),before);
   await assert.rejects(f.db.prepare('DELETE FROM dossier_successor_reservations').run());
   await assert.rejects(f.db.prepare('UPDATE dossier_node_process_closures SET closed_at=0').run());
-  await assert.rejects(f.make().reserve());assert.deepEqual(await f.snapshot(),before);
+  await assert.rejects(async()=>f.make().reserve());assert.deepEqual(await f.snapshot(),before);
  }finally{await f.mf.dispose();}
 });
 test('legacy still blocks known NULL history and works unchanged with one closure',async()=>{
@@ -57,7 +59,7 @@ test('legacy still blocks known NULL history and works unchanged with one closur
  }finally{await f.mf.dispose();}}
 });
 for(const mode of ['unknown-cancellation','changed-pin','extra-generation','unrevoked-cancellation','foreign-cancellation','monitoring-not-revoked','missing-past-grant','foreign-current','revoked-current','short-current','unexchanged-current','extra-scope','revoked-current-monitor','invalid-exchange','future-exchange','exchange-before-created','empty-scope','duplicate-scope','object-scope','foreign-current-monitor','foreign-past-monitor','changed-project-owner','future-current-monitor','short-current-monitor','future-cancellation']){
- test('V2 denies '+mode+' without erasing or reserving',async()=>{const f=await fixture(mode);try{const before=await f.snapshot();await assert.rejects(f.make().reserve());assert.equal(await f.count(),0);assert.deepEqual(await f.snapshot(),before);}finally{await f.mf.dispose();}});
+ test('V2 denies '+mode+' without erasing or reserving',async()=>{const f=await fixture(mode);try{const before=await f.snapshot();await assert.rejects(async()=>f.make().reserve());assert.equal(await f.count(),0);assert.deepEqual(await f.snapshot(),before);}finally{await f.mf.dispose();}});
 }
 test('known-set pins and primary current consent must match exactly',async()=>{
  const changes=[
@@ -82,7 +84,7 @@ test('two primary bindings retain one reservation and exact historical rows',asy
 });
 test('lost acknowledgement preserves the one reservation and does not permit retry',async()=>{
  const f=await fixture();try{const before=await f.snapshot(),primary=f.db.withSession('first-primary'),wrapped={prepare(){throw Error('must use primary');},withSession(){return{prepare(sql){const statement=primary.prepare(sql);return{bind(...values){const bound=statement.bind(...values);return{async run(){await bound.run();throw Error('synthetic lost acknowledgement');}};}};}};}};
- await assert.rejects(f.make({db:wrapped}).reserve());assert.equal(await f.count(),1);await assert.rejects(f.make().reserve());assert.deepEqual(await f.snapshot(),before);}finally{await f.mf.dispose();}
+ await assert.rejects(f.make({db:wrapped}).reserve());assert.equal(await f.count(),1);await assert.rejects(async()=>f.make().reserve());assert.deepEqual(await f.snapshot(),before);}finally{await f.mf.dispose();}
 });
 
 test('V2 empty exact cancellation set preserves the ordinary positive path',async()=>{
