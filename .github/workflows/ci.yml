@@ -29,6 +29,8 @@ jobs:
         run: node --test test/mcp-qa-generation-ledger.test.mjs test/mcp-qa-generation-ledger-native.test.mjs test/mcp-hosted-canary-restoration-native.test.mjs
       - name: Qualify pure QA execution pin
         run: node --test test/mcp-qa-execution-identity.test.mjs test/mcp-release-runtime-native.test.mjs
+      - name: Qualify legacy transaction fence
+        run: node --test test/mcp-legacy-generation-fence-native.test.mjs
       - name: Qualify exact known cancellation history
         run: node --test test/mcp-known-cancellation-native.test.mjs test/mcp-qa-arm-eligibility.test.mjs
       - name: Qualify permissions-only separation

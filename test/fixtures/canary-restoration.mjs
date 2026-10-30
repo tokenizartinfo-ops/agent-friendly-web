@@ -7,7 +7,7 @@ export const digest=x=>createHash('sha256').update(x).digest('hex');
 export const fixtureConfigHash=v=>{const c=Object.fromEntries(cfgKeys.filter(k=>Object.hasOwn(v,k)).map(k=>[k,v[k]]));c.bindings=v.bindings.map(b=>b.type==='secret_text'?{name:b.name,type:b.type}:b).sort((a,b)=>a.name<b.name?-1:a.name>b.name?1:0);return digest('afw.canary-restoration-configuration.v1\n'+stable(c));};
 export function memoryStorage(){
  const rows=new Map();let chain=Promise.resolve(),puts=0;
- return {rows,get puts(){return puts;},transaction(fn){const p=chain.then(()=>fn({get:async k=>structuredClone(rows.get(k)),put:async(k,v)=>{puts++;rows.set(k,structuredClone(v));}}));chain=p.catch(()=>{});return p;}};
+ return {rows,get puts(){return puts;},transaction(fn){const p=chain.then(()=>fn({get:async k=>structuredClone(rows.get(k)),put:async(k,v)=>{puts++;rows.set(k,structuredClone(v));},list:async({prefix,limit})=>new Map([...rows].filter(([k])=>k.startsWith(prefix)).sort(([a],[b])=>a<b?-1:a>b?1:0).slice(0,limit))}));chain=p.catch(()=>{});return p;}};
 }
 export function restorationFixture({at=Date.UTC(2026,9,28,17),containerId='a'.repeat(64)}={}){
  const ids={live:'11111111-1111-4111-8111-111111111111',closed:'22222222-2222-4222-8222-222222222222',operator:'33333333-3333-4333-8333-333333333333',liveDep:'44444444-4444-4444-8444-444444444444',closedDep:'55555555-5555-4555-8555-555555555555',opDep:'66666666-6666-4666-8666-666666666666'};

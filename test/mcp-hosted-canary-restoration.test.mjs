@@ -143,3 +143,18 @@ test('private restoration uses challenged successor custody before its preserved
  namespace.get=id=>{const original=originalGet(id);return{observeSuccessorRetiredReceipt:challenge=>createRetiredRpcReceipt({challenge,now:()=>f.options.now()+21,observe:async()=>{const value=await original.observeSuccessorRetired();value.observedAt=f.options.now()+21;return {value};}})};};
  const host=createPrivateCanaryRestorationHost(f.options);assert.equal((await host.arm(f.hash)).status,'armed');assert.equal((await host.restore(f.hash)).status,'restored_observed');assert.equal(f.f.posts,1);assert.equal(f.originalReads,2);
 });
+
+for(const value of [null,false,{}, {purpose:'afw.qa-generation-head.v2'}])test('defined V2 HEAD blocks legacy writers even when malformed: '+JSON.stringify(value),async()=>{
+ const {createPrivateCanaryRestorationHost}=await load(),f=fixture();f.ctx.storage.rows.set('afw.qa-generation-head.v2',value);const before=structuredClone([...f.ctx.storage.rows]),host=createPrivateCanaryRestorationHost(f.options);
+ for(const method of ['arm','withdraw','restore'])assert.equal((await host[method](f.hash)).status,'blocked');
+ assert.deepEqual([...f.ctx.storage.rows],before);assert.equal(f.calls.length,0);assert.equal(f.originalReads,0);
+});
+for(const prefix of ['afw.qa-generation-info.v2:','afw.qa-generation-control.v2:'])test('orphan '+prefix+' fences legacy writes without a HEAD',async()=>{
+ const {createPrivateCanaryRestorationHost}=await load(),f=fixture();f.ctx.storage.rows.set(prefix+'a'.repeat(64),{orphan:true});const before=structuredClone([...f.ctx.storage.rows]),host=createPrivateCanaryRestorationHost(f.options);assert.equal((await host.arm(f.hash)).status,'blocked');assert.equal((await host.withdraw(f.hash)).status,'blocked');assert.deepEqual([...f.ctx.storage.rows],before);assert.equal(f.calls.length,0);
+});
+test('V2 fence preserves historical V1 status without permitting a new legacy effect',async()=>{
+ const {createPrivateCanaryRestorationHost}=await load(),f=fixture(),host=createPrivateCanaryRestorationHost(f.options);assert.equal((await host.arm(f.hash)).status,'armed');assert.equal((await host.withdraw(f.hash)).status,'withdrawn');f.ctx.storage.rows.set('afw.qa-generation-head.v2',{newGeneration:true});const before=structuredClone([...f.ctx.storage.rows]);assert.equal((await host.status(f.hash)).status,'withdrawn');assert.equal((await host.withdraw(f.hash)).status,'blocked');assert.deepEqual([...f.ctx.storage.rows],before);
+});
+test('legacy writers fail closed if bounded prefix discovery is unavailable',async()=>{
+ const {createPrivateCanaryRestorationHost}=await load(),f=fixture(),base=f.ctx.storage.transaction;f.ctx.storage.transaction=fn=>Reflect.apply(base,f.ctx.storage,[t=>fn({get:t.get,put:t.put})]);const before=structuredClone([...f.ctx.storage.rows]);assert.equal((await createPrivateCanaryRestorationHost(f.options).arm(f.hash)).status,'blocked');assert.deepEqual([...f.ctx.storage.rows],before);
+});
