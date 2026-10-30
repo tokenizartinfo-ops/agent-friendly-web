@@ -49,3 +49,10 @@ test('unsealed source cannot use a request or metadata as compiled revision',asy
  const m=await import('../lib/mcp-qa-closed-context.mjs?unsealed');const f=fixture();f.setModule(m);
  assert.equal((await m.runPrivateQaClosedContext(f)).status,'blocked');assert.equal(f.calls.step,0);
 });
+
+test('original deadline timer is installed before entering the step callback',async()=>{
+ const m=await api(),f=fixture();f.setModule(m);const actual=setTimeout;let installed=false;
+ globalThis.setTimeout=(fn,ms,...args)=>{assert.ok(ms>0&&ms<=5000);installed=true;return actual(fn,ms,...args);};
+ const step=f.step.do;f.step.do=(...args)=>{assert.equal(installed,true,'deadline must predate any work');return step(...args);};
+ try{assert.equal((await m.runPrivateQaClosedContext(f)).status,'observed');}finally{globalThis.setTimeout=actual;}
+});
