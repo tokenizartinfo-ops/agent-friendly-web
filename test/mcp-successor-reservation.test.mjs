@@ -65,3 +65,23 @@ test('primary expiration boundary excludes equality even when local clock lags',
  await assert.rejects(createSuccessorReservation({...f.options,now:()=>f.candidate.expiresAt-1}).reserve());assert.equal(f.rows().length,0);
  }finally{f.db.close();}}
 });
+
+test('reservation passes its original monotonic assertion before a retirement child can begin',async t=>{
+ const {createSuccessorReservation}=await load(),f=fixture();let tick=0,parent,childReads=0;t.mock.method(performance,'now',()=>tick);
+ try{
+  const reader=async(_input,assertParent)=>{parent=assertParent;tick=31;if(assertParent)assertParent();childReads++;return f.evidence;};
+  await assert.rejects(createSuccessorReservation({...f.options,timeoutMs:30,readRetirement:reader}).reserve());
+  assert.equal(typeof parent,'function');assert.equal(childReads,0);assert.equal(f.rows().length,0);
+ }finally{f.db.close();}
+});
+test('independent SQL clock retains its strict future predicate',async()=>{
+ const {createSuccessorReservation}=await load();
+ for(const delta of [-21,21]){
+  const f=fixture(),local=f.evidence.observedAt,sqlTime=local+delta;
+  try{
+   f.db.function('strftime',(format,input)=>{assert.equal(input,'now');return format==='%s'?String(Math.floor(sqlTime/1000)):String(new Date(sqlTime).getUTCSeconds()).padStart(2,'0')+'.'+String(sqlTime%1000).padStart(3,'0');});
+   const run=createSuccessorReservation({...f.options,now:()=>local}).reserve();
+   if(delta<0){await assert.rejects(run);assert.equal(f.rows().length,0);}else{await run;assert.equal(f.rows().length,1);}
+  }finally{f.db.close();}
+ }
+});

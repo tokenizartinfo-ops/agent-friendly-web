@@ -86,3 +86,13 @@ test('final closure read starts a fresh primary session',async()=>{
  await assert.rejects(createSuccessorLaunchGate(f.options)(f.boot,new AbortController().signal));assert.equal(f.launches(),0);
  }finally{f.db.close();}
 });
+
+test('launch passes original deadline after deployment and before a retirement child starts',async t=>{
+ const {createSuccessorLaunchGate}=await load(),f=await fixture();let tick=0,parent,childReads=0;t.mock.method(performance,'now',()=>tick);
+ try{
+  const reader=async(_input,assertParent)=>{parent=assertParent;tick=31;if(assertParent)assertParent();childReads++;return f.evidence;};
+  await assert.rejects(createSuccessorLaunchGate({...f.options,timeoutMs:30,readRetirement:reader})(f.boot,new AbortController().signal));
+  assert.equal(typeof parent,'function');assert.equal(childReads,0);assert.equal(f.launches(),0);
+  assert.equal(f.db.prepare('SELECT COUNT(*) AS n FROM dossier_successor_launch_claims').get().n,0);
+ }finally{f.db.close();}
+});

@@ -84,3 +84,10 @@ test('named custody clock diagnostic omits malformed times without weakening adm
   assert.equal(r.output.operationalReadiness,false);
  });
 });
+
+test('native named confirmation accepts a challenged observer clock ahead by21ms',async()=>{
+ const r=await run({reserve:'true',retirement:'server-ahead'});
+ assert.equal(r.output.status,'confirmed',JSON.stringify(r.output));assert.equal(r.reservationCount,1);
+ assert.equal(r.counters.retirementReads,2);assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
+ assert.equal(r.output.operationalReadiness,false);
+});

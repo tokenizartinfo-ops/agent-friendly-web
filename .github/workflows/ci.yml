@@ -23,6 +23,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Qualify retirement parent lease
+        run: node --test --test-name-pattern='original monotonic assertion|original deadline after deployment|independent SQL clock|observer clock ahead' test/mcp-successor-reservation.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-release-reservation-native.test.mjs
       - name: Qualify retirement receipt integration
         run: node --test test/mcp-retirement-receipt-integration.test.mjs test/mcp-retirement-receipt-integration-native.test.mjs
       - name: Qualify challenged retired RPC receipt

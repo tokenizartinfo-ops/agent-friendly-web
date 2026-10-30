@@ -8,9 +8,9 @@ import {AfwOwnEventNode} from './worker/mcp-own/index.mjs';
 import {createRetirementEvidenceReader} from './lib/mcp-retirement-evidence.mjs';
 import {readRetiredRpcReceipt} from './lib/mcp-retired-rpc-receipt.mjs';
 export {AfwOwnEventNode};
-const nativeNow=Date.now;
+
 export class Observer extends AfwOwnEventNode{
- constructor(ctx,env){super(ctx,env);Date.now=()=>nativeNow()+21;}
+ constructor(ctx,env){super(ctx,env);Date.now=()=>30021;}
  calls=0;
  raw(){this.calls++;return{purpose:'afw.node-retirement-observation.v1',containerId:this.ctx.id.toString(),processGeneration:'d'.repeat(64),programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40),image:'cloudflare/debian-trixie',createdAt:1000,expiresAt:2000,closedAt:2500,observedAt:Date.now(),physicalStopVerified:false,mayStartSuccessor:false};}
  observeRetired(){return this.raw();}
@@ -26,8 +26,8 @@ export default{async fetch(request,env){
   if(path==='/extra'){await stub.observeRetiredReceipt('e'.repeat(64),{selector:'foreign'});throw Error('unexpected extra acceptance');}
   const method=path==='/successor'?'observeSuccessorRetiredReceipt':'observeRetiredReceipt',id=env.OBS.idFromName('own').toString();
   let remoteAt=0;
-  const reader=createRetirementEvidenceReader({original:{containerId:id,applicationId:'fixed-own-application',programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40)},
-   readCustodyReceipt:async({signal},assertCurrent)=>{const r=await readRetiredRpcReceipt({signal,assertCurrent,invoke:async challenge=>({value:await stub[method](challenge)})});remoteAt=r.observation.observedAt;return r;},
+  const reader=createRetirementEvidenceReader({now:()=>30000,original:{containerId:id,applicationId:'fixed-own-application',programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40)},
+   readCustodyReceipt:async({signal},assertCurrent)=>{const r=await readRetiredRpcReceipt({signal,assertCurrent,now:()=>30000,invoke:async challenge=>({value:await stub[method](challenge)})});remoteAt=r.observation.observedAt;return r;},
    readInstance:async()=>({id,application_id:'fixed-own-application',image:'cloudflare/debian-trixie',started_at:new Date(1500).toISOString(),status:{state:'stopped',exit_code:0,updated_at:new Date(2600).toISOString()}})});
   const result=await reader.observe();return Response.json({result,remoteAt});
  }catch{return Response.json({denied:true},{status:409});}
