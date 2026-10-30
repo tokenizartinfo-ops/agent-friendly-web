@@ -74,8 +74,8 @@ test('metadata observer retains its original five-second deadline across credent
  // Credential1 is operator admission,2 artifact bytes,3 the metadata reader.
  const r=await run({shiftStage:'operator_credential',shiftOccurrence:3,shiftMs:6000});
  assert.equal(r.output.clockApplied,true,'must advance the metadata child clock');
- assert.equal(r.output.authorizationStages.filter(s=>s==='operator_credential').length,3);
- assert.equal(r.output.status,'uncertain',JSON.stringify(r.output));assert.deepEqual(r.counts,{attempts:1,receipts:0,acceptances:0});assert.equal(r.reservationCount,0);
+ assert.equal(r.output.status,'uncertain',JSON.stringify({output:r.output,counters:r.counters,counts:r.counts,reservationCount:r.reservationCount}));
+ assert.equal(r.output.authorizationStages.filter(s=>s==='operator_credential').length,3);assert.deepEqual(r.counts,{attempts:1,receipts:0,acceptances:0});assert.equal(r.reservationCount,0);
  assert.equal(r.counters.apiReads,2,'only module bytes and legacy etag reads precede metadata');
  assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);
 });

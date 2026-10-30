@@ -1,14 +1,12 @@
 # Private named authorization fence progress
 
-Baseb625b787. PR654/source-only branch feat/private-named-authorization-fences-20261030.
-- RED7bcb9dae / run41102780207/job124223557924: callback ignored, native named result confirmed where blocked/uncertain required;5PASS16FAIL in the focused qualification.
-- Expanded REDb5c5a030 / run41103886859/job124227873296: adds non-resolving admission;5PASS17FAIL, expected assertions, no setup/import failure.
-- Intermediate implementation adds constructor-only exact-true named hooks inside runtime/journal/reservation; pre-step admission bounded by min5s/originalremaining. Original child checks run after every added await before SQL/RPC. SQL strings/predicates unchanged. Qualified native RPC return remains boxed; no proxy.
-- Intermediate native qualification pending. The metadata observer five-second monotonic gap is DELIBERATELY still present so its separate RED can be observed after the hooks work, then fixed.
-- Lightweight in-memory syntax check passed for4files; not a native/CI acceptance.
+Baseb625b787, PR654, source-only branch feat/private-named-authorization-fences-20261030.
+- RED7bcb9dae /41102780207/job124223557924: ignored hook,5PASS16FAIL.
+- Expanded REDb5c5a030 /41103886859/job124227873296: non-resolving admission added,5PASS17FAIL; real native assertions, no setup failure.
+- Intermediate5b32b745 /41104480046/job124230218681: hooks worked;21PASS1FAIL. Isolated metadata test actually advanced its clock, then reached6 credential reads where3 required. This exposed missing original5s monotonic check in metadata observer while parent budgets remained live.
+- Candidate now fixes metadata observer with an end captured BEFORE credential await, checked before GET/after awaited headers/body and before completion. Original5s timer, SQL and predicates unchanged. No raw RPC adapter; qualified native boxing retained.
+- New native suite/full CI/lint/build/5packages and whole-branch review pending. In-memory syntax checks are not acceptance.
 
-Main source extraction b625b787 independently confirmed GREEN by filtered run endpoint exclude_pull_requests=true: CI41099192334 SUCCESS (3410PASS0FAIL1SKIP in logs, lint/build/artifact success). Earlier unfiltered metadata differed; no generic cache/root-cause assertion. No rerun was used.
+Earlier extraction mainb625b787 is GREEN by documented filtered run endpoint exclude_pull_requests=true:41099192334SUCCESS,3410PASS0FAIL1SKIP, lint/build/artifact verified. Earlier unfiltered metadata differed; no global cache/GitHub root cause asserted and no rerun used.
 
-Review of design accepted, including original child budgets, unchanged native boxing and bounded initial callback. Whole implementation review/full CI pending.
-
-No runtime, binding, secret, OAuth, guard record/history, reservations or Max action. Runtime last closed proof17:02:41UTC remains dated. Later QA/new D1 capacity, additive generation+uncertain-effect reconciliation, version_metadata proof in DO+Workflow, size/compatible rollback and fresh human window remain separate gates. operationalReadiness=false.
+No runtime, bindings, credentials, OAuth, guard/history, successor budget or Max action. Last native closed runtime proof17:02:41UTC remains dated. QA class/capacity, additive guard reconciliation, closed module+binding provenance, size/compatible rollback and a fresh human window remain future gates. operationalReadiness=false.

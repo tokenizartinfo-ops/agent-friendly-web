@@ -28,19 +28,19 @@
 **Files:** create test/mcp-named-authorization-native.test.mjs; extend the focused CI command with this file; reuse fixture named-confirmation-native-rehearsal unchanged.
 **Interface:** fixture build callback emits an alternate native Workflow calling runReleaseWorkflow({bundle,env,event,step,authorize}).
 
-- [ ] Write native assertions: always true yields confirmed/reservation1; false/undefined/rejected/non-resolving admission blocked/provider0/attempts0; stage-specific false preserves exact attempt/receipt/acceptance prefix and prevents successor row; child clock shifts leave parent live yet block SQL. Expose test-only reached/clockApplied diagnostics in the alternate fixture output to exclude setup-error false positives.
-- [ ] Commit tests before source; observe concrete RED because existing runtime ignores the callback.
+- [x] Write native assertions: always true yields confirmed/reservation1; false/undefined/rejected/non-resolving admission blocked/provider0/attempts0; stage-specific false preserves exact attempt/receipt/acceptance prefix and prevents successor row; child clock shifts leave parent live yet block SQL. Expose test-only reached/clockApplied diagnostics in the alternate fixture output to exclude setup-error false positives.
+- [x] Commit tests before source; observe concrete RED because existing runtime ignores the callback.
 
 ### Task 2: Fence within existing components
 
 **Files:** lib/mcp-release-runtime.mjs; lib/mcp-activation-journal.mjs; lib/mcp-successor-reservation.mjs; lib/mcp-release-successor-reservation.mjs; lib/mcp-activation-observer.mjs.
 **Interfaces:** optional authorize(stage,signal) -> Promise<true> in the spec's constructor signatures.
 
-- [ ] Bound pre-step admission by min(5000ms, original remaining parent window), abort its signal on completion/timeout, and recheck original parent clock afterward. Validate hook type; reject supplied hook for non-named operation before effects.
-- [ ] Fence admission/credential/primary lookup and pass hook to journal/reservation.
-- [ ] Before each journal/reservation primary action, await hook only when present; invoke original component check immediately afterward and before native call. Recheck after await and before exposing completion. Keep SQL strings and deadlines byte-for-byte.
-- [ ] Inside qualified native receipt invoke, await hook before existing current/assertReader and unchanged boxed native call.
-- [ ] Observe the separate metadata-child RED after hooks exist; fix its original five-second monotonic fence before metadata GET and after response/body awaits, with no renewed timer.\n- [ ] Run focused native regression, existing full suite, lint/build and separate package builds in Actions; inspect real primary prefixes, sanitized outputs and clockApplied diagnostics.
+- [x] Bound pre-step admission by min(5000ms, original remaining parent window), abort its signal on completion/timeout, and recheck original parent clock afterward. Validate hook type; reject supplied hook for non-named operation before effects.
+- [x] Fence admission/credential/primary lookup and pass hook to journal/reservation.
+- [x] Before each journal/reservation primary action, await hook only when present; invoke original component check immediately afterward and before native call. Recheck after await and before exposing completion. Keep SQL strings and deadlines byte-for-byte.
+- [x] Inside qualified native receipt invoke, await hook before existing current/assertReader and unchanged boxed native call.
+- [x] Observe the separate metadata-child RED after hooks exist; fix its original five-second monotonic fence before metadata GET and after response/body awaits, with no renewed timer.\n- [ ] Run focused native regression, existing full suite, lint/build and separate package builds in Actions; inspect real primary prefixes, sanitized outputs and clockApplied diagnostics.
 - [ ] Independent branch review; fix findings; merge only with accepted checks. Update cloud continuity; no deploy.
 
 ## Continuity
