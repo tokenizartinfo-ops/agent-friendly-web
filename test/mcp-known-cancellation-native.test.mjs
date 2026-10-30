@@ -7,6 +7,7 @@ import {createSuccessorReservation} from '../lib/mcp-successor-reservation.mjs';
 const IMAGE='cloudflare/debian-trixie',PURPOSE='afw.successor-known-cancellations.v1';
 async function fixture(mode='valid',{cancel=true}={}){
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',script:'export default{fetch(){return new Response(null,{status:404});}}',d1Databases:{DB:'known-cancellation',OTHER:'known-cancellation'}}));
+ try{
  const db=await mf.getD1Database('DB'),other=await mf.getD1Database('OTHER'),now=Date.now(),iso=n=>new Date(n).toISOString();
  await db.exec('CREATE TABLE site_projects(id TEXT PRIMARY KEY,user_id TEXT NOT NULL);CREATE TABLE delegated_access_grants(id TEXT PRIMARY KEY,user_id TEXT NOT NULL,client_id TEXT NOT NULL,project_id TEXT NOT NULL,resource TEXT NOT NULL,scopes_json TEXT NOT NULL,created_at TEXT NOT NULL,expires_at TEXT NOT NULL,revoked_at TEXT NOT NULL DEFAULT "",exchanged_at TEXT NOT NULL DEFAULT "");');
  await db.prepare('INSERT INTO site_projects VALUES(?,?)').bind('project',mode==='changed-project-owner'?'foreign':'owner').run();
@@ -41,6 +42,10 @@ async function fixture(mode='valid',{cancel=true}={}){
  const audited={prepare:db.prepare.bind(db),withSession(...args){const primary=db.withSession(...args);return{prepare(sql){const statement=primary.prepare(sql);return{bind(...values){const bound=statement.bind(...values);return{async run(){try{const result=await bound.run();diagnostics.last={success:result.success,changes:result.meta?.changes};return result;}catch(error){diagnostics.last={sqlError:error.message};throw error;}}};}};}};}};
  const make=(options={})=>createSuccessorReservation({db:audited,original,candidate,readRetirement:async()=>evidence,authorize:async()=>true,cancellationHistory:JSON.stringify(history),...options});
  return{mf,db,other,original,candidate,evidence,history,snapshot,count,make,addClosure,diagnostics};
+ }catch(error){
+  await mf.dispose();
+  throw error;
+ }
 }
 test('V2 exact known cancellation reserves once and preserves every historical row',async()=>{
  const f=await fixture();try{

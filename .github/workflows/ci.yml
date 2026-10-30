@@ -13,6 +13,8 @@ jobs:
     # Keep the OS family used by native workerd/SQLite acceptance.
     # Qualify a new OS explicitly instead of following ubuntu-latest migration.
     runs-on: ubuntu-24.04
+    # Native fixture setup failures must not occupy a runner indefinitely.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
