@@ -1,0 +1,11 @@
+# Plan: retirada exclusiva de permisos
+
+Preparación AFW exclusivamente; GitHub/Actions, sin builds ni dependencias locales.
+
+- [x] Leer helper y consumidores actuales, definir contrato de recibo y límites; revisión de diseño independiente aceptada.
+- [x] Crear rama remota desde main aceptado e incorporar pruebas de constructor/nativo. RED8487abaaa / CI41115955390/job124270121632:30PASS13FAIL por constructor nuevo ausente; ambos positivos legacy nativos PASS.
+- [x] Extraer núcleo privado con selección interna fija. Conservar semántica legacy y omitir completamente la parada en el wrapper nuevo.
+- [ ] Dirigidas nativas + suite + lint/build/paquetes. Revisar evidencia real y límites.
+- [ ] Revisión independiente; resolver hallazgos, integrar head exacto y guardar continuidad.
+
+No montarlo en HTTP/RPC ni agregar binding o abrir permisos. La integración QA/generaciones/version metadata/restauración fallback y el nuevo ensayo humano siguen separados.
