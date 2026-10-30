@@ -17,10 +17,12 @@ export class LedgerFixture extends DurableObject{
  const executionPin=createPrivateQaExecutionPin({env,expectedVersionId:env.AFW_QA_VERSION.id,sourceRevision:'a'.repeat(40),context:'durable_object'});
  return createPrivateQaGenerationLedger({storage:this.ctx.storage,capsule,executionPin,checkEligibility:async()=>true,now:()=>Number(this.env.AT),timeoutMs:5000})[method]();}
  async rowsFixture(){return [...await this.ctx.storage.list()];}
+ async orphanFixture(prefix){for(const [key]of await this.ctx.storage.list())if(key!=='afw.canary-restoration-control.v1')await this.ctx.storage.delete(key);await this.ctx.storage.put(prefix+'f'.repeat(64),{orphan:true});}
 }
 export default {async fetch(request,env){const body=await request.json(),stub=env.LEDGER.get(env.LEDGER.idFromName('fixed-fixture'));
 if(body.method==='seed'){await stub.seedFixture(body.legacy);return Response.json({seeded:true});}
 if(body.method==='rows')return Response.json(await stub.rowsFixture());
+if(body.method==='orphan'){await stub.orphanFixture(body.prefix);return Response.json({prepared:true});}
 return Response.json(await stub.commandFixture(body.method,body.capsule));}};`;
  const built=await build({stdin:{contents:entry,resolveDir:process.cwd(),sourcefile:'qa-generation-ledger-fixture.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none'});
  const f=generationFixture();let at=f.now();const options=()=>convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AT:String(at)},durableObjects:{LEDGER:{className:'LedgerFixture',useSQLite:true,uniqueKey:'qa-generation-ledger-native'}}});
@@ -32,5 +34,6 @@ return Response.json(await stub.commandFixture(body.method,body.capsule));}};`;
  const second={...f.capsule,predecessor:{kind:'generation',planHash:original.planHash,infoHash:original.infoHash,sequence:original.sequence},trialId:'8'.repeat(64),grantId:'native-next',eventId:'9'.repeat(64),startAt:at+70000,expiresAt:at+130000};
  assert.equal((await call('arm',second)).status,'blocked');at+=71000;await mf.setOptions(options());const next=await call('arm',second);assert.equal(next.status,'armed');assert.equal(next.sequence,2);
  const before=new Map(await call('rows'));await call('withdraw');const after=new Map(await call('rows'));assert.deepEqual(after.get(HEAD),before.get(HEAD));assert.deepEqual(after.get(CONTROL+next.planHash),before.get(CONTROL+next.planHash));assert.deepEqual(after.get(LEGACY),f.legacy);assert.equal((await call('readArmed',second)).status,'armed');
+ for(const prefix of ['afw.qa-generation-info.v2:','afw.qa-generation-control.v2:']){const response=await mf.dispatchFetch('https://fixture.invalid/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({method:'orphan',prefix})});assert.equal(response.status,200);assert.equal((await call('arm')).status,'blocked');assert.equal((await call('status')).status,'blocked');}
  }finally{await mf.dispose();}
 });

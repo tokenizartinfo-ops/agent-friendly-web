@@ -15,7 +15,7 @@ Later predecessor: {kind:"generation",planHash,infoHash,sequence}. Sequence <=32
 planHash = SHA256("afw.qa-generation-plan.v2\\n" + canonicalCapsule).
 INFO includes purpose, sequence, planHash, capsule, execution snapshot and preparedAt. infoHash = SHA256("afw.qa-generation-info.v2\\n" + canonicalINFO); not stored inside INFO. Snapshot is exactly the pure pin's DO context; root must separately prove native binding and module/config/source correlation before ARM.
 
-Only new keys: afw.qa-generation-head.v2; afw.qa-generation-info.v2:<planHash>; afw.qa-generation-control.v2:<planHash>. The v1 key and all journals are read-only. No delete/list/reset/rename.
+Only new keys: afw.qa-generation-head.v2; afw.qa-generation-info.v2:<planHash>; afw.qa-generation-control.v2:<planHash>. The v1 key and all journals are read-only. No delete/reset/rename. If HEAD is absent, two internal fixed-prefix INFO/CONTROL scans (limit33 each) in the same transaction must be empty; any orphan blocks legacy initialization. With HEAD present, those bounded scans must equal the complete <=32-member lineage, also rejecting a HEAD rolled back to a valid ancestor. No caller list/cursor API. Canonical field order is literally the constructor grammar order listed above; nested predecessor and legacy fields have their listed order. Reordered JSON is rejected, never a second plan identity. txn.list availability is documented at https://developers.cloudflare.com/durable-objects/api/legacy-kv-storage-api/#transaction .
 
 ## State transitions
 

@@ -76,3 +76,57 @@ for(const broken of ['head-absent','info-absent','control-absent','head-corrupt'
  const f=generationFixture(),ledger=make(f),r=await ledger.arm();const key=broken.startsWith('head')?HEAD:broken.startsWith('info')?INFO+r.planHash:CONTROL+r.planHash;if(broken.endsWith('absent'))f.rows.delete(key);else f.rows.set(key,{foreign:true});const before=copy(f.rows);
  for(const method of ['arm','readArmed','status','withdraw'])assert.equal((await ledger[method]()).status,'blocked');assert.deepEqual(copy(f.rows),before);
 });
+
+for(const prefix of [INFO,CONTROL])test('missing HEAD with an unrelated '+prefix+' orphan cannot restart legacy',async()=>{
+ const f=generationFixture();f.rows.set(prefix+'f'.repeat(64),{orphan:true});const before=copy(f.rows);for(const method of ['arm','status','withdraw','readArmed'])assert.equal((await make(f)[method]()).status,'blocked');assert.deepEqual(copy(f.rows),before);
+});
+
+test('eligibility stays outside storage callbacks and is rechecked after pending commit',async()=>{
+ const f=generationFixture();f.eligibility=async n=>{assert.equal(f.storage.transactions,n-1);return true;};assert.equal((await make(f).arm()).status,'armed');
+});
+for(const stage of [1,2])test('original monotonic lease bounds delayed eligibility '+stage,async()=>{
+ const f=generationFixture();f.eligibility=async n=>{if(n===stage)await new Promise(resolve=>setTimeout(resolve,70));return true;};assert.equal((await make(f,{timeoutMs:40}).arm()).status,stage===1?'blocked':'uncertain');assert.equal(f.rows.size,stage===1?1:4);
+});
+async function advance(f,previous,number){
+ f.setNow(f.capsule.expiresAt+1);f.capsule={...f.capsule,predecessor:{kind:'generation',planHash:previous.planHash,infoHash:previous.infoHash,sequence:previous.sequence},trialId:number.toString(16).padStart(64,'0'),grantId:'generation-'+number,eventId:(number+100).toString(16).padStart(64,'0'),startAt:f.now(),expiresAt:f.now()+1000};
+ const ledger=make(f),r=await ledger.arm();assert.equal(r.status,'armed');await ledger.withdraw();return r;
+}
+for(const field of ['trialId','grantId','eventId'])test('G3 cannot reuse a non-immediate G1 '+field,async()=>{
+ const f=generationFixture(),firstCapsule=structuredClone(f.capsule),ledger=make(f),first=await ledger.arm();await ledger.withdraw();const second=await advance(f,first,2);
+ f.setNow(f.capsule.expiresAt+1);f.capsule={...f.capsule,predecessor:{kind:'generation',planHash:second.planHash,infoHash:second.infoHash,sequence:2},trialId:'b'.repeat(64),grantId:'generation-3',eventId:'c'.repeat(64),startAt:f.now(),expiresAt:f.now()+1000,[field]:firstCapsule[field]};
+ const before=copy(f.rows);assert.equal((await make(f).arm()).status,'blocked');assert.deepEqual(copy(f.rows),before);
+});
+test('lineage admits sequence32 and rejects33 without reset',async()=>{
+ const f=generationFixture(),ledger=make(f);let r=await ledger.arm();await ledger.withdraw();
+ for(let n=2;n<=32;n++)r=await advance(f,r,n);
+ assert.equal(r.sequence,32);const before=copy(f.rows);f.capsule={...f.capsule,predecessor:{kind:'generation',planHash:r.planHash,infoHash:r.infoHash,sequence:32},trialId:'b'.repeat(64),grantId:'generation-33',eventId:'c'.repeat(64),startAt:f.now(),expiresAt:f.now()+1000};assert.throws(()=>make(f));assert.deepEqual(copy(f.rows),before);
+});
+for(const corrupted of [INFO,CONTROL])test('corruption of an ancestor '+corrupted+' blocks a well-formed HEAD',async()=>{
+ const f=generationFixture(),ledger=make(f),first=await ledger.arm();await ledger.withdraw();const second=await advance(f,first,2);f.rows.set(corrupted+first.planHash,{foreign:true});const before=copy(f.rows);
+ for(const method of ['status','withdraw','readArmed','arm'])assert.equal((await make(f)[method]()).status,'blocked');assert.deepEqual(copy(f.rows),before);assert.equal(f.rows.get(HEAD).planHash,second.planHash);
+});
+test('self-referencing or inconsistent sequence capsule is rejected by chain validation',async()=>{
+ const f=generationFixture(),ledger=make(f),first=await ledger.arm();await ledger.withdraw();const info=f.rows.get(INFO+first.planHash);info.capsule=JSON.stringify({...JSON.parse(info.capsule),predecessor:{kind:'generation',planHash:first.planHash,infoHash:first.infoHash,sequence:1}});
+ const before=copy(f.rows);for(const method of ['status','withdraw','readArmed','arm'])assert.equal((await ledger[method]()).status,'blocked');assert.deepEqual(copy(f.rows),before);
+});
+test('all observation paths stay explicitly non-authorizing',async()=>{
+ const f=generationFixture(),ledger=make(f);flags(await ledger.status());flags(await ledger.readArmed());flags(await ledger.withdraw());flags(await ledger.arm());flags(await ledger.readArmed());flags(await ledger.status());flags(await ledger.withdraw());flags(await ledger.status());flags(await ledger.readArmed());flags(await ledger.arm());
+});
+
+test('valid HEAD rolled back to an ancestor cannot hide later metadata',async()=>{
+ const f=generationFixture(),ledger=make(f),first=await ledger.arm();await ledger.withdraw();await advance(f,first,2);f.rows.set(HEAD,{purpose:HEAD,sequence:first.sequence,planHash:first.planHash,infoHash:first.infoHash});
+ const before=copy(f.rows);for(const method of ['arm','status','withdraw','readArmed'])assert.equal((await ledger[method]()).status,'blocked');assert.deepEqual(copy(f.rows),before);
+});
+test('expired but still armed predecessor independently blocks the next ARM',async()=>{
+ const f=generationFixture(),ledger=make(f),first=await ledger.arm();f.setNow(f.capsule.expiresAt+1);f.capsule={...f.capsule,predecessor:{kind:'generation',planHash:first.planHash,infoHash:first.infoHash,sequence:1},trialId:'8'.repeat(64),grantId:'next-grant',eventId:'9'.repeat(64),startAt:f.now(),expiresAt:f.now()+1000};
+ const before=copy(f.rows);assert.equal((await make(f).arm()).status,'blocked');assert.deepEqual(copy(f.rows),before);
+});
+test('matching expired legacy without withdrawal is invalid independently of byte mismatch',()=>{
+ const f=generationFixture();f.legacy.withdrawnAt=null;f.rows.set(LEGACY,f.legacy);f.capsule.predecessor.control=JSON.stringify(f.legacy);assert.throws(()=>make(f));assert.equal(f.rows.size,1);
+});
+test('canonical field order cannot manufacture another plan identity',()=>{
+ const f=generationFixture(),c=f.capsule,o=f.options();const reordered={predecessor:c.predecessor,purpose:c.purpose,...Object.fromEntries(Object.entries(c).filter(([k])=>!['purpose','predecessor'].includes(k)))};
+ assert.throws(()=>make(f,{capsule:JSON.stringify(reordered)}));
+ const inner=structuredClone(c);inner.predecessor={control:inner.predecessor.control,kind:'legacy',trialId:inner.predecessor.trialId,grantId:inner.predecessor.grantId,eventId:inner.predecessor.eventId};assert.throws(()=>make(f,{capsule:JSON.stringify(inner)}));
+ const old=structuredClone(c),r=f.legacy;old.predecessor.control=JSON.stringify({planHash:r.planHash,purpose:r.purpose,policy:r.policy,armedAt:r.armedAt,withdrawnAt:r.withdrawnAt});assert.throws(()=>api.createPrivateQaGenerationLedger({...o,capsule:JSON.stringify(old)}));
+});

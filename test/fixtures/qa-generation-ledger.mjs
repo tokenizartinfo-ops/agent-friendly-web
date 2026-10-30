@@ -9,7 +9,7 @@ export function generationFixture(){
  const capsule={purpose:'afw.qa-generation-capsule.v2',predecessor:{kind:'legacy',control:JSON.stringify(legacy),trialId:'1'.repeat(64),grantId:'legacy-grant',eventId:'2'.repeat(64)},trialId:'3'.repeat(64),grantId:'current-grant',eventId:'4'.repeat(64),closurePolicyHash:'5'.repeat(64),bundleHash:'6'.repeat(64),cancellationHistoryHash:'7'.repeat(64),startAt:at-1000,expiresAt:at+60000};
  let chain=Promise.resolve(),transactions=0,puts=0;const rows=new Map([[LEGACY,structuredClone(legacy)]]),lost=new Set();
  const storage={rows,get transactions(){return transactions;},get puts(){return puts;},transaction(fn){
-  const p=chain.then(async()=>{const n=++transactions,copy=new Map([...rows].map(([k,v])=>[k,structuredClone(v)]));const value=await fn({get:async k=>structuredClone(copy.get(k)),put:async(k,v)=>{puts++;copy.set(k,structuredClone(v));}});rows.clear();for(const [k,v]of copy)rows.set(k,v);if(lost.has(n))throw Error('synthetic lost ACK');return value;});chain=p.catch(()=>{});return p;
+  const p=chain.then(async()=>{const n=++transactions,copy=new Map([...rows].map(([k,v])=>[k,structuredClone(v)]));const value=await fn({get:async k=>structuredClone(copy.get(k)),put:async(k,v)=>{puts++;copy.set(k,structuredClone(v));},list:async({prefix,limit})=>new Map([...copy].filter(([k])=>k.startsWith(prefix)).slice(0,limit))});rows.clear();for(const [k,v]of copy)rows.set(k,v);if(lost.has(n))throw Error('synthetic lost ACK');return value;});chain=p.catch(()=>{});return p;
  }};
  const env={AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'}};
  const pinOptions={env,expectedVersionId:env.AFW_QA_VERSION.id,sourceRevision:'a'.repeat(40),context:'durable_object'};
