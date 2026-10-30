@@ -26,12 +26,12 @@
 
 ### Task 1: Explicit runtime and unchanged wrappers
 
-**Files:** create lib/mcp-release-runtime.mjs; modify worker/mcp-release/index.mjs; create test/mcp-release-runtime-native.test.mjs.
+**Files:** create lib/mcp-release-runtime.mjs; modify worker/mcp-release/index.mjs; create test/mcp-release-runtime-native.test.mjs; add one focused early qualification in .github/workflows/ci.yml without removing existing checks.
 **Interfaces:** runReleaseOperator(bundle,env,args,lease,observation); runReleaseWorkflow({bundle,env,event,step}).
 
-- [ ] Add native test that imports the helper and builds an alternate Workflow with a valid explicit publication bundle while the ambient bundle is foreign; assert confirmed + one native D1 attempt/receipt, then restart returns uncertain with no second POST. Test closed, expired and foreign payload yields blocked with provider0/journal0.
-- [ ] Commit test first; open draft PR and observe Actions failure at missing runtime export before implementation.
-- [ ] Move current helpers into the library; add explicit bundle parameter, no algorithm rewrite. Keep observer routing in the original wrapper; delegate its ordinary Workflow and RPC paths.
+- [x] Add native test that imports the helper and builds an alternate Workflow with a valid explicit publication bundle while the ambient bundle is foreign; assert confirmed + one native D1 attempt/receipt, then restart returns uncertain with no second POST. Test closed, expired and foreign payload yields blocked with provider0/journal0.
+- [x] Commit test first; open draft PR and observe Actions failure at missing runtime export before implementation.
+- [x] Move current helpers into the library; add explicit bundle parameter, no algorithm rewrite. Keep observer routing in the original wrapper; delegate its ordinary Workflow and RPC paths.
 - [ ] Run targeted native tests plus npm test, lint and build in Actions. Require original wrappers and templates to pass unchanged.
 - [ ] Independent whole-branch review; fix findings, verify final head, record source-only result. Merge only after required checks; no runtime deployment.
 
