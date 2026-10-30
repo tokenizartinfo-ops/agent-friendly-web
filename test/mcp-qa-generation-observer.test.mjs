@@ -36,3 +36,12 @@ test('observer has no mutators or pin-bypass option and rejects selectors',async
 test('observer retains original wall deadline across storage reads',async()=>{
  const f=generationFixture();await api.createPrivateQaGenerationLedger(f.options()).arm();const at=f.now(),storage={transaction:fn=>f.storage.transaction(t=>fn({get:async(...args)=>{const r=await t.get(...args);f.setNow(at+5000);return r;},list:t.list}))};assert.equal((await observer(f,{storage}).read()).status,'blocked');
 });
+
+test('observer rejects regression between initial wall capture and first check',async()=>{
+ const f=generationFixture(),at=f.now();let n=0;const now=()=>++n===1?at+1:at;assert.equal((await observer(f,{now}).read()).status,'blocked');
+});
+for(const initial of [NaN,-1])test('observer rejects invalid monotonic origin '+String(initial),async()=>{
+ const f=generationFixture(),original=Object.getOwnPropertyDescriptor(performance,'now'),real=performance.now.bind(performance);let n=0;
+ Object.defineProperty(performance,'now',{configurable:true,value:()=>++n===1?initial:real()});
+ try{assert.equal((await observer(f).read()).status,'blocked');}finally{if(original)Object.defineProperty(performance,'now',original);else delete performance.now;}
+});
