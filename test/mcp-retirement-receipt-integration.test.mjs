@@ -61,3 +61,10 @@ test('expired original parent assertion blocks custody before a child lease can 
  await assert.rejects(createRetirementEvidenceReader(f.config).observe({assertCurrent(){checks++;throw Error('original deadline expired');}}));
  assert.ok(checks>0);assert.deepEqual(f.counts(),{custody:0,providers:0});
 });
+
+test('challenged local receipts stay fresh through final provider acceptance',async()=>{
+ const f=fixture();let wall=10000,providers=0;f.config.now=()=>wall;
+ f.config.readInstance=async()=>{if(++providers===2)wall+=30001;return instance();};
+ await assert.rejects(createRetirementEvidenceReader(f.config).observe());
+ assert.equal(providers,2);assert.equal(f.counts().custody,2);
+});

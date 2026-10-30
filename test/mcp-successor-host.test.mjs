@@ -102,3 +102,19 @@ test('named successor uses release gate and closes after live manifest removal',
   await f.actor.close();assert.equal(f.config.ctx.container.running,false);
  }finally{globalThis.fetch=saved;f.close();}}
 });
+
+test('own successor adapter rechecks the original parent in the final pre-RPC microtask',async()=>{
+ const {readOwnSuccessorHost}=await import('../lib/mcp-own-successor-host.mjs'),f=await mountedOwn();
+ let parentTick=0,queued=false;
+ try{
+  const h=readOwnSuccessorHost({env:f.env,ctx:f.config.ctx,program:f.config.program,sourceRevision:f.config.sourceRevision,window:f.config.window,now:Date.now});
+  const parent=()=>{
+   if(parentTick>=1)throw Error('Original parent deadline expired');
+   if(!queued&&(new Error().stack??'').includes('mcp-retired-rpc-receipt.mjs')){
+    queued=true;queueMicrotask(()=>{parentTick=1;});
+   }
+  };
+  await assert.rejects(h.successor.readRetirement({signal:new AbortController().signal},parent));
+  assert.equal(queued,true,'the final helper assertion must be exercised');assert.equal(f.reads(),0,'no custody dispatch after original deadline');
+ }finally{f.close();}
+});
