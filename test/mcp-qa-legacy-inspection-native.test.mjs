@@ -57,5 +57,5 @@ for(const mode of ['open','expired','cached','late'])test('closed inspection rej
  const f=await fixture(mode);try{assert.equal((await f.run()).status,'blocked');assert.equal(await f.stub.rowsFixture(),f.before);assert.equal(f.outbound,0);}finally{await f.mf.dispose();}
 });
 test('inspection target, argument and deadline cannot be selected by a caller',async()=>{
- const f=await fixture();try{for(const args of [[],['f'.repeat(64),Date.now()+5000],[id,Date.now()+6000],[id,0],[id,Date.now()+5000,{}]])assert.equal(JSON.parse(await f.stub.readLegacyInspection(...args)).status,'blocked');const foreign=f.ns.get(f.ns.idFromName('foreign-actor'));await assert.rejects(foreign.readLegacyInspection(id,Date.now()+4000),/forbidden data or authority/);assert.equal(await f.stub.rowsFixture(),f.before);assert.equal(f.outbound,0);}finally{await f.mf.dispose();}
+ const f=await fixture();try{for(const args of [[],['f'.repeat(64),Date.now()+5000],[id,Date.now()+6000],[id,0],[id,Date.now()+5000,{}]])assert.equal(JSON.parse(await f.stub.readLegacyInspection(...args)).status,'blocked');await assert.rejects(async()=>{const foreign=f.ns.get(f.ns.idFromName('foreign-actor'));return await foreign.readLegacyInspection(id,Date.now()+4000);},/forbidden data or authority/);assert.equal(await f.stub.rowsFixture(),f.before);assert.equal(f.outbound,0);}finally{await f.mf.dispose();}
 });
