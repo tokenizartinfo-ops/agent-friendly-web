@@ -61,7 +61,6 @@ for(const binding of [
  {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:saveRef.replace('-4c32-','-1c32-')},
  {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'kv_namespace',text:saveRef},
  {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:saveRef,extra:'forbidden'},
- {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'secret_text',text:saveRef},
  {name:'AFW_OTHER_KEY',type:'plain_text',text:saveRef}
 ])test('prepared-save exception remains exact '+JSON.stringify(binding),()=>{
  const f=namedDataPacketFixture();recommitSaveKey(f,binding);assert.throws(()=>assemble(f),{message:'Private QA named assembly unavailable'});
@@ -71,4 +70,9 @@ test('shared metadata validator is pure and preserves the standalone materialize
  const bindings=[{name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:saveRef},{name:'AFW_PRIVATE_TOKEN',type:'secret_text'},{name:'AFW_OTHER_TEXT',type:'plain_text',text:'safe'}],before=structuredClone(bindings);
  assert.equal(bindingMetadata.validatePrivateConfirmationBindingMetadata(bindings),undefined);assert.deepEqual(bindings,before);
  for(const bad of [[{name:'AFW_OTHER_KEY',type:'plain_text',text:saveRef}],[{name:'AFW_SECRET',type:'secret_text',text:'never'}],[{name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:saveRef+' '}]])assert.throws(()=>bindingMetadata.validatePrivateConfirmationBindingMetadata(bad),{message:'Private confirmation preparation unavailable'});
+});
+
+test('secret values never receive a fabricated valid activation fingerprint',()=>{
+ const f=namedDataPacketFixture();f.policy.observation.configuration.bindings.push({name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'secret_text',text:'synthetic-sensitive-value'});assert.throws(()=>activationConfigurationHash(f.policy.observation.configuration));
+ f.f.capsule.bundleHash=packetHash(JSON.stringify({artifact:f.artifact,policy:f.policy}));f.expectedCapsule=JSON.stringify(f.f.capsule);Object.assign(f.packet,{generationCapsule:f.expectedCapsule,namedPolicy:JSON.stringify(f.policy)});assert.throws(()=>assemble(f),{message:'Private QA named assembly unavailable'});
 });
