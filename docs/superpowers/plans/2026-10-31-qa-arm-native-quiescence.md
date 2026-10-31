@@ -22,9 +22,11 @@
 ### Task1: quiescencia HTTP readonly
 Files: lib/mcp-qa-cloud-closed-http.mjs, lib/mcp-fixed-terminal-workflows.mjs, test/fixtures/qa-closed-http.mjs, test/mcp-qa-arm-http.test.mjs.
 Consumes fixed closed pins + source/nativeUUID y parent lease; produces createPrivateQaArmHttpAdapters(options).readSnapshot(parentSignal), sin claim/deploy/GH.
-- [ ] RED: self exacto+otras terminales, readonly; ataques de inventario, selfID/estado, false version_id, plazos.
-- [ ] GREEN: compartir core con modo legacy intacto, mantener budgets y módulos2MiB.
-- [ ] EnfocadoHTTP + compatibilidad antigua.
+- [x] RED: self exacto+otras terminales, readonly; ataques de inventario, selfID/estado, false version_id, plazos.
+- [x] GREEN: compartir core con modo legacy intacto, mantener budgets y módulos2MiB.
+- [x] EnfocadoHTTP + compatibilidad antigua: CI41243253502,14sealed/680focused/4195fullPASS,0FAIL,1skip previo. Dos imports de prueba sin uso retirados; validar el head final.
+
+Task1 complete: implementación789f3f56; legacy rollback/HTTP conserva su contrato y la ruta nativa solo observa.
 
 ### Task2: ARM del paquete en actor nativo
 Files: lib/mcp-qa-generation-arm.mjs, lib/mcp-qa-named-preflight.mjs, worker/independent-closure/index.mjs, wrangler.independent-closure-qa*.jsonc; tests unit/native.
@@ -41,3 +43,5 @@ Consumes Task1 + packet/assembler/pins681/eligibility/ledger; produces RPC armOw
 ## Ledger
 Ruling: owner delegó decisiones/ejecución encadenada; se preserva autorización sin pedir revisión intermedia de este plan. Fuente aislada remota en lugar de worktree/build local.
 Pre-flight: Task2 necesita pin real de wrapper para la excepción Task1; no puede inferirlo de la API. Task1 no verifica el módulo propio QA: root debe correlacionarlo antes del ARM real.
+
+Ruling: Task2 requiere leer primero el control legacy REAL. Su presencia y armedAt no están acreditados por los fixtures; no asumir migración ni fabricar un control para ajustarlo al ledger. Cerrar Task1 como PR acotada y realizar una inspección nativa temporal read-only, con QA cerrado y rollback verificado, antes de escoger el predecesor de ARM. Task2/3 de integración completa siguen pendientes; este corte no monta ARM.

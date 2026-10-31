@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createPrivateQaCloudClosedRollback} from '../lib/mcp-qa-cloud-closed-rollback.mjs';
 import {createQaCloudClosedHttpAdapters} from '../lib/mcp-qa-cloud-closed-http.mjs';
 import {AFW_FIXED_WORKFLOWS} from '../lib/mcp-fixed-terminal-workflows.mjs';
-import {qaClosedHttpFixture as fixture,hash,canonical,names,ids,deployments} from './fixtures/qa-closed-http.mjs';
+import {qaClosedHttpFixture as fixture,names,ids,deployments} from './fixtures/qa-closed-http.mjs';
 const posts=f=>f.requests.filter(r=>r.init.method==='POST');
 const safe=r=>{assert.equal(r.operationalReadiness,false);assert.equal(r.mayRetry,false);assert.equal(JSON.stringify(r).includes('synthetic-'),false);};
 test('fixed real HTTP adapter verifies source/config/native inventories, claims before one fixed restore and reads independently',async()=>{
