@@ -59,3 +59,11 @@ test('old acknowledged-shaped rows keep their original reservation freshness rat
 for(const extra of [{stopped_at:-1},{stopped_at:0.5},{reserved_at:'future'}])test('schema-permitted invalid primary timestamp is rejected '+JSON.stringify(extra),async()=>{
  const f=await fixture();try{await insertOwn(f,extra.reserved_at==='future'?{reserved_at:Date.now()+2000}:extra);const before=await f.snapshot();assert.equal(await f.call('/check'),false);assert.deepEqual(await f.snapshot(),before);}finally{await f.mf.dispose();}
 });
+
+test('actual candidate admission ends named-phase eligibility without refunding or removing its reservation',async()=>{
+ const f=await fixture();try{
+ await f.call('/reserve');assert.equal(await f.call('/check'),true);const p=f.pins,e=f.history.events;
+ await f.db.prepare('INSERT INTO dossier_node_process_admissions(grant_id,project_id,user_id,client_id,resource,consent_sequence,consent_issued_at,consent_expires_at,container_id,process_generation,program_hash,source_revision,image,created_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(e.grantId,e.projectId,e.subject,e.clientId,e.resource,4,p.window.startAt,p.window.expiresAt,p.candidate.containerId,'8'.repeat(64),p.candidate.programHash,p.candidate.sourceRevision,'cloudflare/debian-trixie',Date.now(),p.candidate.expiresAt).run();
+ const admitted=await f.snapshot();assert.equal(admitted.dossier_node_process_admissions.length,2);assert.equal(admitted.dossier_successor_reservations.length,1);assert.equal(await f.call('/check'),false);assert.equal(await f.call('/arm'),false);assert.deepEqual(await f.snapshot(),admitted);
+ }finally{await f.mf.dispose();}
+});
