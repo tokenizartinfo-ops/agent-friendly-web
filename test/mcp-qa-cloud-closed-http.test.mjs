@@ -120,3 +120,23 @@ for(const field of ['githubToken','credential'])test('bounded opaque '+field+' s
 for(const field of ['githubToken','credential'])for(const value of ['', 'space inside', 'newline\ninside', 'carriage\rreturn', 'nul\0inside', 'tab\tinside', 'nonascii-é', 'x'.repeat(8193)])test('opaque '+field+' still rejects empty, unsafe or over-budget header input '+JSON.stringify(value.slice(0,24)),()=>{
  const f=fixture();assert.throws(()=>createQaCloudClosedHttpAdapters({...f.options(),[field]:value}),/unavailable/i);assert.equal(f.requests.length,0);
 });
+
+test('HTTP diagnostic is frozen non-authorizing metadata, excluded from effect callback spread',async()=>{
+ const f=fixture(),a=createQaCloudClosedHttpAdapters(f.options());assert.equal(typeof a.readDiagnostic,'function');assert.deepEqual(Object.keys(a).sort(),['claim','deploy','readSnapshot']);
+ const core=createPrivateQaCloudClosedRollback({plan:f.plan,pins:{candidateVersionId:ids[0],closedVersionId:ids[1]},...a,now:()=>f.wall,timeoutMs:30000,signal:f.parent.signal});
+ assert.equal((await core.run('inspect')).status,'closed_candidate_observed');const d=a.readDiagnostic();assert.equal(d.purpose,'afw.qa-cloud-closed-http-diagnostic.v1');assert.equal(d.stage,'complete');assert.equal(d.reason,'none');assert.equal(d.httpStatus,null);assert.ok(d.reads>0&&d.reads<=128);assert.equal(d.authorizesEffects,false);assert.equal(d.operationalReadiness,false);assert.equal(Object.isFrozen(d),true);
+});
+for(const status of [401,403,404,429,500])test('HTTP diagnostic records only the first fixed resource group and status '+status,async()=>{
+ const f=fixture();f.mutate=({response})=>{response.status=status;response.body={success:false,errors:[{message:'never-log-provider-body synthetic-cf-token synthetic-gh-token'}]};};
+ const a=createQaCloudClosedHttpAdapters(f.options());await assert.rejects(a.readSnapshot(f.parent.signal));const d=a.readDiagnostic();assert.equal(d.stage,'active_deployments');assert.equal(d.reason,'http_status');assert.equal(d.httpStatus,status);assert.ok(d.reads<=2);assert.equal(d.authorizesEffects,false);assert.equal(d.operationalReadiness,false);assert.doesNotMatch(JSON.stringify(d),/synthetic|never-log|Authorization|85d0d5|https:/);
+});
+test('proof rejection and transport rejection remain distinct safe diagnostic outcomes',async()=>{
+ const f=fixture();f.mutate=attacks['code fingerprint'];const a=createQaCloudClosedHttpAdapters(f.options());await assert.rejects(a.readSnapshot(f.parent.signal));assert.equal(a.readDiagnostic().stage,'version_profiles');assert.equal(a.readDiagnostic().reason,'proof_rejected');assert.equal(a.readDiagnostic().httpStatus,null);
+ const g=fixture(),o=g.options();o.fetchImpl=async()=>{throw Error('never-log-private-token-header');};const b=createQaCloudClosedHttpAdapters(o);await assert.rejects(b.readSnapshot(g.parent.signal));assert.equal(b.readDiagnostic().stage,'active_deployments');assert.equal(b.readDiagnostic().reason,'request_failed');assert.equal(b.readDiagnostic().httpStatus,null);assert.doesNotMatch(JSON.stringify(b.readDiagnostic()),/never-log/);
+});
+test('response freshness rejection is observable without returning a header or body',async()=>{
+ const f=fixture();f.mutate=attacks['stale response'];const a=createQaCloudClosedHttpAdapters(f.options());await assert.rejects(a.readSnapshot(f.parent.signal));const d=a.readDiagnostic();assert.equal(d.stage,'active_deployments');assert.equal(d.reason,'response_date');assert.equal(d.httpStatus,200);assert.doesNotMatch(JSON.stringify(d),/1970|headers/i);
+});
+test('CLI retains only the fixed diagnostic object alongside a blocked result',async()=>{
+ const cli=await (await import('node:fs/promises')).readFile(new URL('../scripts/run-qa-cloud-closed-rollback.mjs',import.meta.url),'utf8');assert.match(cli,/httpDiagnostic:adapters\.readDiagnostic\(\)/);assert.doesNotMatch(cli,/catch\s*\(\s*(?:error|err)\s*\)[\s\S]*console\./);
+});
