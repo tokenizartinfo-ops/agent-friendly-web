@@ -165,3 +165,8 @@ for(const target of ['deployments','versions','schedules','tails','subdomain','i
  const f=fixture();f.mutate=({url,response})=>{if(url.pathname.endsWith('/'+target)||target==='versions'&&url.pathname.includes('/versions/')){response.body.errors=null;response.body.messages=null;}};
  const r=await f.run('restore_known_closed_candidate');assert.equal(r.status,'blocked');assert.equal(posts(f).length,0);
 });
+
+for(const mode of ['missing-class','foreign-class'])test('missing namespace ID cannot match an unknown expected class '+mode,async()=>{
+ const f=fixture();f.mutate=({url,response})=>{if(!url.pathname.endsWith('/workers/durable_objects/namespaces'))return;delete response.body.result[0].id;if(mode==='missing-class')delete response.body.result[0].class;else response.body.result[0].class='OtherClass';};
+ const r=await f.run('restore_known_closed_candidate');assert.equal(r.status,'blocked');assert.equal(posts(f).length,0);
+});

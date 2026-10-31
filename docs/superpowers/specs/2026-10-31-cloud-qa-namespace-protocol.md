@@ -9,3 +9,5 @@ Normalize ONLY null errors/messages on the exact fixed Cloudflare GET /workers/d
 Namespace total_pages is optional only when page1/perpage1000 and count==rows.length==total_count prove completeness within1000rows. If supplied, require1 for this nonempty own-preservation proof; reject zero/unknown remainder/incomplete totals or missing total_count. Preserve exact own IDs/classes/SQLite and all other safeguards.
 
 TDD reproduces provider-shaped nullable metadata and missing optional page count plus the contradictory zero-page case, then fixes narrow protocol predicates. Exact CI/lint/build/review and accepted tree precede one fresh read-only inspection. No re-run of consumed windows; no new token/OTP/grant/namespace/Workflow/instance/Container or first-successor budget. operationalReadiness=false.
+
+Identity audit: require expected.has(namespace.class) before comparing the ID. A missing ID and missing/foreign class must never match through undefined===undefined; add two pre-fix regressions. The complete own class/ID set is required, not just two different values.
