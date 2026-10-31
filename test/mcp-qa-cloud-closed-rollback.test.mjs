@@ -62,3 +62,10 @@ test('unknown operations/selectors and repeated invocations cannot widen this cl
 test('constructor rejects arbitrary resources, unlimited clocks and caller-added targets',()=>{
  const f=fixture(),o=f.options();for(const bad of [{...o,extra:true},{...o,timeoutMs:30001},{...o,plan:{...o.plan,workerName:'foreign'}},{...o,plan:{...o.plan,expiresAt:o.plan.startAt+600001}},{...o,pins:{...o.pins,closedVersionId:o.pins.candidateVersionId}}])assert.throws(()=>createPrivateQaCloudClosedRollback(bad));
 });
+
+for(const mode of ['inspect','already','restore'])test('abort at final observation settlement cannot certify '+mode,async()=>{
+ const f=fixture();if(mode==='already'){f.qaVersionId=closed;f.qaDeploymentId=after;}
+ f.mutate=(_r,n)=>{if(n===(mode==='restore'?3:1)){let pending=Promise.resolve();for(let i=0;i<4;i++)pending=pending.then(()=>{});pending.then(()=>f.parent.abort());}};
+ const r=await make(f).run(mode==='inspect'?'inspect':'restore_known_closed_candidate');
+ assert.equal(r.status,mode==='restore'?'uncertain':'blocked');assert.equal(f.counts.deploys,mode==='restore'?1:0);flags(r);
+});
