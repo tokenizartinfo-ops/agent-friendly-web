@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {generationFixture,INFO,HEAD,CONTROL,hash} from './fixtures/qa-generation-ledger.mjs';
+import {generationFixture,INFO,HEAD,CONTROL} from './fixtures/qa-generation-ledger.mjs';
 import {createPrivateQaGenerationLedger} from '../lib/mcp-qa-generation-ledger.mjs';
 const api=await import('../lib/mcp-qa-generation-resolver.mjs').catch(()=>({}));
 const slot='afw-own-successor-closure-v1',actor='f'.repeat(64),version='11111111-1111-4111-8111-111111111111';
