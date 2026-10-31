@@ -59,3 +59,11 @@ test('clock regression, nominal expiry and final settlement do not return expire
  await assert.rejects(createPrivateQaOriginalPinsReader(f.options).read());
  }
 });
+
+test('future preparation may read metadata before nominal start but never before its preparation bound',async()=>{
+ const f=fixture();f.setWall(f.options.window.startAt-1);assert.deepEqual(await createPrivateQaOriginalPinsReader(f.options).read(),f.row);
+ const g=fixture();g.setWall(g.options.window.startAt-600001);await assert.rejects(createPrivateQaOriginalPinsReader(g.options).read());assert.equal(g.sessions,0);
+});
+test('construction and callback overhead belong to the original lease',async()=>{
+ const f=fixture();let count=0;f.options.now=()=>f.options.window.startAt+(count++?50:0);await assert.rejects(createPrivateQaOriginalPinsReader(f.options).read());assert.equal(f.sessions,0);
+});
