@@ -1,0 +1,17 @@
+# Finite external closed-QA rollback qualification —31 October 2026
+
+AFW only; source preparation, not dispatch or live custody. Keep the accepted no-new-Worker topology. Use manual GitHub Actions main/attempt1, finite original<=10min, no npm install, cloud execution and one scoped environment.
+
+This FIRST increment is a closed-artifact diagnostic only. It does not implement or claim the complete real-trial finalizer. Its two immutable QA profiles are existing0771c5f5 (PR666 closed native diagnostic) and compatiblec570b60b. Source/module/config/bindings/flags and namespaces must match qualified fingerprints; canary2607/operator855 remain exact closed baselines. Every own QA Workflow, including bootstrap, is terminal; no active own Container/cron/tails/exposure. No OAuth/grants/D1/events/subscriber/process launch, upload or arbitrary target.
+
+Inputs only sessionId and original window; operation inspect or restore_known_closed_candidate. Read, claim acknowledged issued marker, reread exact candidate deployment, ONE fixed QA closed deployment, independent readback. Unknown ACK never retries. Claim key is domain hash of fixed QA/candidate UUID/actual candidate deployment UUID, NOT session name, preventing rename-based budget refund. Durable create-once Git ref points to the trusted workflow source SHA; never move/delete marker. Contents:write only for the manual effect job in the AFW repo. No token/secret in refs, plan, logs or artifacts.
+
+Original wall+monotonic clock survives all awaits. Per-action bounded timeout<=30s; HTTP child<=5s. Require>=180s original remaining before intent and again before effect. Callback, pin or epoch drift blocks. Readback after unknown provider ACK may report closed_observed_uncertain, never acknowledged restoration or retry permission. Result always diagnosticOnly=true/operationalReadiness=false.
+
+Private server adapters must independently verify real profiles and native inventories; their internal DTO is not caller evidence. Transport has fixed API origins/resources/methods, strict JSON/byte/cache/deadline caps, no redirects and no generic proxy. Scoped account-owned token: Editor only for QA, content read only for required AFW peers, relevant metadata/Containers read as actually verified. No credential assumed present or narrow from broad desktop MCP authorization. Custody/setup happens only after source/CI/review is concrete; prefer a single scoped private save if policy permits.
+
+Existing evidence profiles measured via exact-version GET31oct14:19UTC; hashes in source, no code/secret bodies retained locally. Cloudflare supports individual Worker token roles: https://developers.cloudflare.com/workers/authorization/workers/ . This does not itself create access.
+
+Qualification: loadable RED closed placeholder, state/clock/ACK/epoch cases; real bounded HTTP adapter and hostile-input tests; fixed CLI wiring; manual workflow defaults inspect; complete CI/lint/build and independent review; accepted tree. Only then fresh one-attempt closed roundtrip plan with recoverablec570, real cloud execution/custody. Preserve original consumed plans and first-successor budget.
+
+Later real-trial integration still requires its generation/infoHash/server-branch proof, native client cleanup, pre-human startup/late materialization and exclusive coordinator. Native withdrawal unknown must not block otherwise proved safe QA closure; it keeps full acceptance false. Do not present this diagnostic as that finalizer or PCoff acceptance.
