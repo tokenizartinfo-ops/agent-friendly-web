@@ -47,3 +47,17 @@ for(const initial of [NaN,-1])test('primary reader rejects invalid monotonic ori
  Object.defineProperty(performance,'now',{configurable:true,value:()=>++n===1?initial:real()});
  try{assert.equal(await make(f).check(),false);assert.equal(f.reads,0);}finally{if(original)Object.defineProperty(performance,'now',original);else delete performance.now;}
 });
+
+for(const drift of ['deadline','binding'])test('ARM eligibility rechecks '+drift+' after successful promise settlement',async()=>{
+ const f=fixture(),o=f.options(),reader=api.createPrivateQaArmEligibility(o),original=Promise.race,at=f.wall;let changed=false;
+ Promise.race=function(values){return Reflect.apply(original,this,[values]).then(r=>{if(r===true&&!changed){changed=true;if(drift==='deadline')f.wall=at+5000;else o.db.withSession=()=>{throw Error('binding changed');};}return r;});};
+ try{assert.equal(await reader.check(),false);assert.equal(changed,true);assert.equal(f.reads,1);}finally{Promise.race=original;}
+});
+
+test('ARM eligibility checks the exact selected statement after successful settlement',async()=>{
+ const f=fixture(),o=f.options(),sessionFactory=o.db.withSession;let selectedBound;
+ o.db.withSession=function(mode){const s=Reflect.apply(sessionFactory,this,[mode]),prepare=s.prepare;return{prepare(...args){const statement=Reflect.apply(prepare,s,args),bind=statement.bind;return{bind(...params){selectedBound=Reflect.apply(bind,statement,params);return selectedBound;}};}};};
+ const reader=api.createPrivateQaArmEligibility(o),original=Promise.race;let changed=false;
+ Promise.race=function(values){return Reflect.apply(original,this,[values]).then(r=>{if(r===true&&!changed){changed=true;selectedBound.first=async()=>({eligible:1});}return r;});};
+ try{assert.equal(await reader.check(),false);assert.equal(changed,true);assert.equal(f.reads,1);}finally{Promise.race=original;}
+});

@@ -143,3 +143,41 @@ test('hung storage read returns without allowing late writes',async()=>{
  try{const result=await Promise.race([make(f,{storage,timeoutMs:30}).arm(),new Promise(resolve=>setTimeout(()=>resolve('no deadline'),200))]);assert.notEqual(result,'no deadline');assert.equal(result.status,'blocked');release();await new Promise(resolve=>setTimeout(resolve,10));assert.equal(f.rows.size,1);}
  finally{release();}
 });
+
+for(const drift of ['deadline','native-identity'])test('committed ARM reports uncertainty after '+drift+' at settlement without refund or replay',async()=>{
+ const f=generationFixture(),ledger=make(f),legacy=copy(f.rows),original=Promise.race,at=f.now();let changed=false;
+ Promise.race=function(values){return Reflect.apply(original,this,[values]).then(r=>{if(!changed&&r?.purpose==='afw.qa-generation-observation.v2'&&r.status==='armed'){changed=true;if(drift==='deadline')f.setNow(at+5000);else f.env.AFW_QA_VERSION={id:'22222222-2222-4222-8222-222222222222'};}return r;});};
+ try{const r=await ledger.arm();assert.equal(changed,true);assert.equal(r.status,'uncertain');flags(r);assert.equal(f.calls,2);assert.equal(f.storage.puts,4);const head=f.rows.get(HEAD);assert.equal(f.rows.get(CONTROL+head.planHash).phase,'armed');for(const[k,v]of legacy)assert.deepEqual(f.rows.get(k),v);const after=copy(f.rows);await Promise.resolve();assert.deepEqual(copy(f.rows),after);}finally{Promise.race=original;}
+});
+for(const method of ['status','readArmed'])test('metadata '+method+' rejects late settlement without any write',async()=>{
+ const f=generationFixture(),ledger=make(f);await ledger.arm();const before=copy(f.rows),puts=f.storage.puts,original=Promise.race,at=f.now();let changed=false;
+ Promise.race=function(values){return Reflect.apply(original,this,[values]).then(r=>{if(!changed&&r?.purpose==='afw.qa-generation-observation.v2'&&r.status==='armed'){changed=true;f.setNow(at+5000);}return r;});};
+ try{const r=await ledger[method]();assert.equal(changed,true);assert.equal(r.status,'blocked');flags(r);assert.equal(f.storage.puts,puts);assert.deepEqual(copy(f.rows),before);}finally{Promise.race=original;}
+});
+test('committed withdrawal reports uncertainty after late settlement and preserves the terminal control',async()=>{
+ const f=generationFixture(),ledger=make(f),armed=await ledger.arm(),original=Promise.race,at=f.now();let changed=false;
+ Promise.race=function(values){return Reflect.apply(original,this,[values]).then(r=>{if(!changed&&r?.purpose==='afw.qa-generation-observation.v2'&&r.status==='withdrawn'){changed=true;f.setNow(at+5000);}return r;});};
+ try{const r=await ledger.withdraw();assert.equal(changed,true);assert.equal(r.status,'uncertain');flags(r);assert.equal(f.rows.get(CONTROL+armed.planHash).phase,'withdrawn');assert.equal(f.storage.puts,5);assert.equal(f.calls,2);}finally{Promise.race=original;}
+});
+for(const drift of ['deadline','binding'])test('stored-generation observer rejects '+drift+' at settlement',async()=>{
+ const f=generationFixture();await make(f).arm();const before=copy(f.rows),o={storage:f.storage,capsule:JSON.stringify(f.capsule),now:f.now,timeoutMs:5000},observer=api.createPrivateQaGenerationObserver(o),original=Promise.race,at=f.now();let changed=false;
+ Promise.race=function(values){return Reflect.apply(original,this,[values]).then(r=>{if(!changed&&r?.purpose==='afw.qa-generation-resolution.v2'&&r.status==='armed'){changed=true;if(drift==='deadline')f.setNow(at+5000);else o.storage={};}return r;});};
+ try{const r=await observer.read();assert.equal(changed,true);assert.equal(r.status,'blocked');flags(r);assert.deepEqual(copy(f.rows),before);}finally{Promise.race=original;}
+});
+
+for(const method of ['arm','readArmed'])test(method+' cannot cross capsule expiry at settlement inside the remaining 5s lease',async()=>{
+ const f=generationFixture(),at=f.now();f.capsule.expiresAt=at+1000;const ledger=make(f);
+ if(method==='readArmed')await ledger.arm();const original=Promise.race;let changed=false;
+ Promise.race=function(values){return Reflect.apply(original,this,[values]).then(r=>{if(!changed&&r?.purpose==='afw.qa-generation-observation.v2'&&r.status==='armed'){changed=true;f.setNow(at+1001);}return r;});};
+ try{const r=await ledger[method]();assert.equal(changed,true);assert.equal(r.status,method==='arm'?'uncertain':'blocked');flags(r);assert.equal(f.rows.get(CONTROL+f.rows.get(HEAD).planHash).phase,'armed');assert.equal(f.storage.puts,4);}finally{Promise.race=original;}
+});
+for(const method of ['status','withdraw'])test('historical '+method+' survives nominal expiry when its own lease remains valid',async()=>{
+ const f=generationFixture(),at=f.now();f.capsule.expiresAt=at+1000;const ledger=make(f);await ledger.arm();const original=Promise.race;let changed=false;
+ Promise.race=function(values){return Reflect.apply(original,this,[values]).then(r=>{if(!changed&&r?.purpose==='afw.qa-generation-observation.v2'&&r.status===(method==='status'?'armed':'withdrawn')){changed=true;f.setNow(at+1001);}return r;});};
+ try{const r=await ledger[method]();assert.equal(changed,true);assert.equal(r.status,method==='status'?'armed':'withdrawn');flags(r);assert.equal(f.storage.puts,method==='status'?4:5);}finally{Promise.race=original;}
+});
+test('observer never returns a cached withinWindow true after capsule expiry inside its original lease',async()=>{
+ const f=generationFixture(),at=f.now();f.capsule.expiresAt=at+1000;await make(f).arm();const before=copy(f.rows),observer=api.createPrivateQaGenerationObserver({storage:f.storage,capsule:JSON.stringify(f.capsule),now:f.now,timeoutMs:5000}),original=Promise.race;let changed=false;
+ Promise.race=function(values){return Reflect.apply(original,this,[values]).then(r=>{if(!changed&&r?.purpose==='afw.qa-generation-resolution.v2'&&r.withinWindow===true){changed=true;f.setNow(at+1001);}return r;});};
+ try{const r=await observer.read();assert.equal(changed,true);assert.equal(r.status,'blocked');assert.equal(r.withinWindow,false);flags(r);assert.deepEqual(copy(f.rows),before);}finally{Promise.race=original;}
+});
