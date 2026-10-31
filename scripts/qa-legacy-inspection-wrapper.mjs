@@ -25,12 +25,12 @@ function lease(env,id,parentEnd){
  const c=fields(inspection,['purpose','id','sourceRevision','baselineVersionId','baselineModuleHash','startAt','expiresAt']);
  if(c.purpose!=='afw.qa-legacy-inspection-context.v1'||!hex(c.id)||id!==c.id||!hex(c.sourceRevision,40)||c.baselineVersionId!=='c570b60b-95dc-48e1-89f3-9c4651691dbc'||c.baselineModuleHash!=='4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f'||!time(c.startAt)||!time(c.expiresAt)||c.expiresAt<=c.startAt||c.expiresAt-c.startAt>600000)fail();
  const wall=Date.now(),mono=performance.now(),version=data(data(env,'AFW_QA_VERSION'),'id');
- if(!uuid(version)||!time(parentEnd)||parentEnd<=wall||parentEnd-wall>5000)fail();
- const end=Math.min(parentEnd,c.expiresAt,wall+5000);let lastWall=wall,lastMono=mono,done=false;
- const check=()=>{const w=Date.now(),m=performance.now();if(done||!time(w)||!Number.isFinite(m)||w<lastWall||m<lastMono||w<c.startAt||w>=end||m-mono>=5000||data(data(env,'AFW_QA_VERSION'),'id')!==version)fail();lastWall=w;lastMono=m;for(const k of flags)if(data(env,k)!=='false')fail();for(const k of policies)if(data(env,k)!=='')fail();return w;};
- check();return {check,end,version,remaining:()=>{check();return Math.min(end-Date.now(),5000-(performance.now()-mono));},finish:()=>{done=true;}};
+ if(!time(wall)||!Number.isFinite(mono)||mono<0||!uuid(version)||!time(parentEnd)||parentEnd<=wall||parentEnd-wall>5000)fail();
+ const end=Math.min(parentEnd,c.expiresAt,wall+5000),monoEnd=mono+(end-wall);let lastWall=wall,lastMono=mono,done=false;
+ const check=()=>{const w=Date.now(),m=performance.now();if(done||!time(w)||!Number.isFinite(m)||w<lastWall||m<lastMono||w<c.startAt||w>=end||m>=monoEnd||data(data(env,'AFW_QA_VERSION'),'id')!==version)fail();lastWall=w;lastMono=m;for(const k of flags)if(data(env,k)!=='false')fail();for(const k of policies)if(data(env,k)!=='')fail();return w;};
+ check();return {check,end,version,remaining:()=>{check();return Math.min(end-Date.now(),monoEnd-performance.now());},finish:()=>{done=true;}};
 }
-async function bounded(l,work){let timer;try{const remaining=l.remaining();if(!(remaining>0))fail();return await Promise.race([work(),new Promise((_,reject)=>{timer=setTimeout(()=>{l.finish();reject(Error('Closed inspection deadline'));},remaining);})]);}finally{clearTimeout(timer);l.finish();}}
+async function bounded(l,work){let timer;try{const remaining=l.remaining();if(!(remaining>0))fail();const result=await Promise.race([work(),new Promise((_,reject)=>{timer=setTimeout(()=>{l.finish();reject(Error('Closed inspection deadline'));},remaining);})]);l.check();return result;}finally{clearTimeout(timer);l.finish();}}
 function legacyPolicy(raw){
  const p=fields(json(raw,8192),['operation','startAt','expiresAt','candidate','live','closed','operator']);
  fields(p.candidate,['containerId','applicationId','programHash','sourceRevision']);fields(p.live,['versionId','deploymentId','configurationHash']);fields(p.closed,['versionId','moduleHash','moduleBytes','configurationHash']);fields(p.operator,['versionId','deploymentId','moduleHash','moduleBytes','configurationHash']);
