@@ -1,3 +1,4 @@
+import {readPrivateQaCurrentGeneration} from '../../lib/mcp-qa-generation-resolver.mjs';
 import {observePrivateQaClosedActor,runPrivateQaClosedContext} from '../../lib/mcp-qa-closed-context.mjs';
 import {createPrivateClosureReaderProbe,runPrivateClosureReaderProbeWorkflow,createPrivateClosurePublisherProbe,runPrivateClosurePublisherProbeWorkflow} from '../../lib/mcp-closure-reader-probe.mjs';
 import {createPrivateCanaryRestorationHost,isPrivateCanaryRestorationActor,runPrivateCanaryRestorationWorkflow} from '../../lib/mcp-hosted-canary-restoration.mjs';
@@ -173,6 +174,7 @@ export class PrivateQaCatalog extends DurableObject {
 // Private host only. Missing catalog/custody stays closed. No caller approval,
 // provisioning, registration, HTTP routes or implicit enrollment.
 export class IndependentClosure extends DurableObject {
+ readOwnQaGeneration(...args){return readPrivateQaCurrentGeneration({env:this.env,ctx:this.ctx,args});}
  observeOwnQaClosedContext(payload){return JSON.stringify(observePrivateQaClosedActor({env:this.env,ctx:this.ctx,payload}));}
  #mcpPublisher;
  #publisher(){return this.#mcpPublisher??=createPrivateClosurePublisherProbe({env:this.env,ctx:this.ctx});}
