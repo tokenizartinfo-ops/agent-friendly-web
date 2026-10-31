@@ -99,3 +99,9 @@ test('abort queued after the final work check but before race settlement cannot 
  options.readGeneration=async()=>{const raw=JSON.stringify(await observer.read());queueMicrotask(()=>queueMicrotask(()=>parent.abort()));return raw;};
  const a=make();assert.equal(await invoke(a,'workflow_admission',parent.signal),false);assert.equal(await invoke(a),false);
 });
+
+test('concurrent invalidation during successful race settlement fences both results',async()=>{
+ const {options,observer,make}=await setup();let a,second,reads=0;
+ options.readGeneration=async()=>{reads++;const raw=JSON.stringify(await observer.read());if(reads===1)Promise.resolve().then(()=>{}).then(()=>{second=invoke(a,'operator_credential');});return raw;};
+ a=make();const first=invoke(a);assert.equal(await first,false);assert.equal(await second,false);assert.equal(reads,1);
+});
