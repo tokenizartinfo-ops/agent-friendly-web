@@ -1,0 +1,43 @@
+# ARM V2 con quiescencia — Implementation Plan
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox syntax for tracking.
+**Goal:** montar ARM metadata privado con paquete tardío y comprobaciones primarias de quiescencia.
+**Architecture:** reutilizar adaptadores/validadores HTTP cerrados y ledger. Ruta nativa nueva estrictamente de metadata, con presupuesto/lease compartido y cero efectos nominales.
+**Tech Stack:** Node22, workerd/Miniflare, D1, Durable Objects, Workflows, esbuild; GitHub Actions.
+**Spec:** docs/superpowers/specs/2026-10-31-qa-arm-native-quiescence-design.md
+
+## Global Constraints
+- Actor/source/UUID fijos; nada de facades que oculten V2 al legacy.
+- Solo código/CI remoto; no credenciales nuevas ni reensayo remoto.
+- La excepción self usa identidad del wrapper, jamás workflow.version_id como Worker UUID.
+- Completar registro/paginación e inventarios; presupuesto agotado bloquea.
+- Conservar issued/ACK inciertos, fuente315 y límites legacy2MiB.
+
+## Review Focus
+- Bootstrap vigente junto a una cuarta definición QA: bloquear por registry completo.
+- Cambio de source/metadata nativa mientras el API dice un version_id coincidente: bloquear por pin real.
+- Timeout/clock después de pendingCAS: conservar registros y uncertain, sin devolución de presupuesto.
+- Proceso/consentimiento reservado entre observaciones: elegibilidad primaria falla y no arma.
+- Código/config externos cambiados con API o inventarios parciales: bloquear.
+
+### Task1: quiescencia HTTP readonly
+Files: lib/mcp-qa-cloud-closed-http.mjs, lib/mcp-fixed-terminal-workflows.mjs, test/fixtures/qa-closed-http.mjs, test/mcp-qa-arm-http.test.mjs.
+Consumes fixed closed pins + source/nativeUUID y parent lease; produces createPrivateQaArmHttpAdapters(options).readSnapshot(parentSignal), sin claim/deploy/GH.
+- [ ] RED: self exacto+otras terminales, readonly; ataques de inventario, selfID/estado, false version_id, plazos.
+- [ ] GREEN: compartir core con modo legacy intacto, mantener budgets y módulos2MiB.
+- [ ] EnfocadoHTTP + compatibilidad antigua.
+
+### Task2: ARM del paquete en actor nativo
+Files: lib/mcp-qa-generation-arm.mjs, lib/mcp-qa-named-preflight.mjs, worker/independent-closure/index.mjs, wrangler.independent-closure-qa*.jsonc; tests unit/native.
+Consumes Task1 + packet/assembler/pins681/eligibility/ledger; produces RPC armOwnQaGeneration(H,absoluteEnd) y bootstrap arm_generation exacto.
+- [ ] RED: paquete→pins→eligibilidad→pending/armed en verdadero actor/D1/Workflow; sin contextoprevio bloquea.
+- [ ] GREEN: lease padre y snapshots/journals inmutables; source bindings explícitos y rollback.
+- [ ] Negativos de permisos/history/reserva, nativopin, cross-H, cachedstep, expiry y ACKperdido; receipts sin datos privados.
+
+### Task3: aceptación de rama
+- [ ] Full CI/lint/build y paquete frozen315.
+- [ ] Revisión independiente de todo el head, corregir findings con RED/GREEN.
+- [ ] Merge por head exacto/árbol idéntico y checkpoint issue497; nada de publish ni afirmar PCoff.
+
+## Ledger
+Ruling: owner delegó decisiones/ejecución encadenada; se preserva autorización sin pedir revisión intermedia de este plan. Fuente aislada remota en lugar de worktree/build local.
+Pre-flight: Task2 necesita pin real de wrapper para la excepción Task1; no puede inferirlo de la API. Task1 no verifica el módulo propio QA: root debe correlacionarlo antes del ARM real.
