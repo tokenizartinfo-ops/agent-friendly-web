@@ -6,11 +6,11 @@ async function api(){globalThis.__AFW_QA_SOURCE_REVISION__=revision;try{return a
 const payload=()=>({operation:'observe_closed_context',expectedVersionId:version,expectedSourceRevision:revision});
 function fixture(){
  const id='b'.repeat(64),ctx={id:{toString:()=>id}},env={AFW_QA_VERSION:{id:version},...Object.fromEntries(flags.map(k=>[k,'false']))};
- const calls={rpc:0,step:0};let module;
- const stub={observeOwnQaClosedContext:async p=>{calls.rpc++;return JSON.stringify(module.observePrivateQaClosedActor({env,ctx,payload:p}));}};
+ const calls={rpc:0,step:0};let actorApi;
+ const stub={observeOwnQaClosedContext:async p=>{calls.rpc++;return JSON.stringify(actorApi.observePrivateQaClosedActor({env,ctx,payload:p}));}};
  env.AFW_INDEPENDENT_CLOSURE={idFromName:name=>{assert.equal(name,slot);return {toString:()=>id};},get:()=>stub};
  for(const key of ['AFW_QA_DB','AFW_MCP_CLOSURE_READ_TOKEN','AFW_MCP_CLOSURE_PUBLISH_TOKEN','AFW_QA_ADMIN_READ_API_TOKEN'])Object.defineProperty(env,key,{enumerable:true,get(){assert.fail('closed context must not read '+key);}});
- return {env,ctx,calls,stub,setModule:m=>module=m,event:{payload:payload(),instanceId:'afw-qa-context-'+version+'-'+revision.slice(0,16)},step:{async do(name,options,fn){calls.step++;assert.equal(options.retries.limit,0);assert.equal(options.timeout,'5 seconds');return fn();}}};
+ return {env,ctx,calls,stub,setModule:m=>actorApi=m,event:{payload:payload(),instanceId:'afw-qa-context-'+version+'-'+revision.slice(0,16)},step:{async do(name,options,fn){calls.step++;assert.equal(options.retries.limit,0);assert.equal(options.timeout,'5 seconds');return fn();}}};
 }
 test('closed Workflow and fixed actor observe only matching compiled/native identities',async()=>{
  const m=await api();assert.equal(typeof m.runPrivateQaClosedContext,'function');const f=fixture();f.setModule(m);
