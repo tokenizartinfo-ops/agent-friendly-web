@@ -56,3 +56,23 @@ test('original deadline timer is installed before entering the step callback',as
  const step=f.step.do;f.step.do=(...args)=>{assert.equal(installed,true,'deadline must predate any work');return step(...args);};
  try{assert.equal((await m.runPrivateQaClosedContext(f)).status,'observed');}finally{globalThis.setTimeout=actual;}
 });
+
+test('Workflow accepts the one bounded JSON text layer sent by the native REST API',async t=>{
+ const m=await api();
+ for(const mode of ['api-json','exact256'])await t.test(mode,async()=>{
+  const f=fixture();f.setModule(m);let raw=JSON.stringify(payload());if(mode==='exact256')raw+=' '.repeat(256-Buffer.byteLength(raw));f.event.payload=raw;
+  const out=await m.runPrivateQaClosedContext(f);assert.equal(out.status,'observed');assert.equal(out.actor.context,'durable_object');assert.equal(out.authorizesEffects,false);assert.equal(f.calls.rpc,1);assert.equal(f.calls.step,1);
+ });
+});
+test('API JSON normalization rejects nested malformed extra and oversized input before work',async t=>{
+ const m=await api();
+ const inputs=[JSON.stringify(JSON.stringify(payload())),'{bad','null','[]',JSON.stringify({...payload(),extra:true}),JSON.stringify(payload())+' '.repeat(257),JSON.stringify({operation:'observe_closed_context',expectedVersionId:version,expectedSourceRevision:'é'.repeat(100)})];
+ for(const [i,raw] of inputs.entries())await t.test(String(i),async()=>{
+  const f=fixture();f.setModule(m);f.event.payload=raw;assert.equal((await m.runPrivateQaClosedContext(f)).status,'blocked');assert.equal(f.calls.step,0);assert.equal(f.calls.rpc,0);
+ });
+});
+test('oversized API text is rejected before JSON parsing; actor RPC still accepts only objects',async()=>{
+ const m=await api(),f=fixture();f.setModule(m);f.event.payload=JSON.stringify(payload())+' '.repeat(257);const parse=JSON.parse;let calls=0;JSON.parse=(...args)=>{calls++;return parse(...args);};
+ try{assert.equal((await m.runPrivateQaClosedContext(f)).status,'blocked');assert.equal(calls,0);}finally{JSON.parse=parse;}
+ assert.equal(m.observePrivateQaClosedActor({env:f.env,ctx:f.ctx,payload:JSON.stringify(payload())}).status,'blocked');
+});
