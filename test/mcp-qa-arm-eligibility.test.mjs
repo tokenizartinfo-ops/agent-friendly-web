@@ -47,3 +47,9 @@ for(const initial of [NaN,-1])test('primary reader rejects invalid monotonic ori
  Object.defineProperty(performance,'now',{configurable:true,value:()=>++n===1?initial:real()});
  try{assert.equal(await make(f).check(),false);assert.equal(f.reads,0);}finally{if(original)Object.defineProperty(performance,'now',original);else delete performance.now;}
 });
+
+for(const drift of ['deadline','binding'])test('ARM eligibility rechecks '+drift+' after successful promise settlement',async()=>{
+ const f=fixture(),o=f.options(),reader=api.createPrivateQaArmEligibility(o),original=Promise.race,at=f.wall;let changed=false;
+ Promise.race=function(values){return Reflect.apply(original,this,[values]).then(r=>{if(r===true&&!changed){changed=true;if(drift==='deadline')f.wall=at+5000;else o.db.withSession=()=>{throw Error('binding changed');};}return r;});};
+ try{assert.equal(await reader.check(),false);assert.equal(changed,true);assert.equal(f.reads,1);}finally{Promise.race=original;}
+});
