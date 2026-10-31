@@ -1,0 +1,11 @@
+# Private late generation preparation plan
+31oct2026; owner authorized chained own QA/source decisions. Remote isolated branch; no local build/dependencies.
+Specification: ../specs/2026-10-31-private-generation-preparation.md
+
+- [ ] Task1: pure private historical predecessor materializer + actual pinned hash context; full control/policy/journal grammar and private literal identity derivation. RED missing behavior, then GREEN; no I/O/RPC/ARM authority.
+- [ ] Task2: concrete primary historical identity reader and independent late-draft schema/reader keyed by namedBundleHash; no domain change to table676, no remote DDL.
+- [ ] Task3: finite native preparation composition: compiled artifact/historical contexts shared once, primary draft→storage→materialization→D1→stable re-read; <=5s original wall/monotonic lease, metadata-only wrapper.
+- [ ] Task4: native tests/frozen315 package/profile limits, full review and source integration. No remote promotion until source/context/bindings/schema/preservation gates independently qualify.
+- [ ] Later ARM reuses preparation but rereads every input and adds683 quiescence +681 originalpins/zero-reservation eligibility before/after CAS. Existing HEAD/INFO/CONTROL rules and nominal/retained resolvers remain unchanged.
+
+Do not mark the complete plan achieved after Task1. Source-only completion never proves live subscription, useful delivery, native withdrawal, guard or PC-off. operationalReadiness=false.
