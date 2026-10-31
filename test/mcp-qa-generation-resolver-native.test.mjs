@@ -17,6 +17,7 @@ export class FixedFixture extends IndependentClosure{
  const executionPin=createPrivateQaExecutionPin({env:this.env,expectedVersionId:this.env.AFW_QA_VERSION.id,sourceRevision:'a'.repeat(40),context:'durable_object'});
  return createPrivateQaGenerationLedger({storage:this.ctx.storage,capsule,executionPin,checkEligibility:async()=>true,now:Date.now,timeoutMs:5000}).arm();}
  async rowsFixture(){return [...await this.ctx.storage.list()];}
+ async withdrawFixture(capsule){const executionPin=createPrivateQaExecutionPin({env:this.env,expectedVersionId:this.env.AFW_QA_VERSION.id,sourceRevision:'a'.repeat(40),context:'durable_object'});return createPrivateQaGenerationLedger({storage:this.ctx.storage,capsule,executionPin,checkEligibility:async()=>{throw Error('no eligibility read during withdrawal');},now:Date.now,timeoutMs:5000}).withdraw();}
 }
 export default{fetch(){return new Response(null,{status:404});}};`;
  const built=await build({stdin:{contents:entry,resolveDir:process.cwd(),sourcefile:'qa-generation-resolver-native.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',define:{'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify(revision)}});
@@ -27,7 +28,13 @@ export default{fetch(){return new Response(null,{status:404});}};`;
  assert.equal(typeof stub.readOwnQaGeneration,'function');let result=await stub.readOwnQaGeneration(plan);assert.equal(typeof result,'string');let r=JSON.parse(result);assert.equal(r.status,'armed');assert.equal(r.runtimeVersionId,version);assert.equal(r.sourceRevision,revision);assert.equal(r.storedContext,'durable_object');assert.equal(r.authorizesEffects,false);assert.equal(r.operationalReadiness,false);assert.deepEqual(await stub.rowsFixture(),before);
  const executionPin=createPrivateQaExecutionPin({env:{AFW_QA_VERSION:{id:version}},expectedVersionId:version,sourceRevision:revision,context:'workflow'}),authorization=createPrivateQaNamedAuthorization({executionPin,readGeneration:async()=>stub.readOwnQaGeneration(plan),pins:{planHash:plan,sequence:1,startAt:f.capsule.startAt,expiresAt:f.capsule.expiresAt},now:Date.now,timeoutMs:5000});assert.equal(await authorization.authorize('workflow_admission',new AbortController().signal),true);
  assert.equal(JSON.parse(await stub.readOwnQaGeneration(f.capsule.bundleHash)).status,'blocked');
- await mf.setOptions(options('22222222-2222-4222-8222-222222222222'));ns=(await mf.getBindings()).AFW_INDEPENDENT_CLOSURE;stub=ns.get(ns.idFromName('afw-own-successor-closure-v1'));assert.equal(JSON.parse(await stub.readOwnQaGeneration(plan)).status,'blocked');assert.deepEqual(await stub.rowsFixture(),before);
+ assert.equal(typeof stub.readOwnQaRetainedGeneration,'function');
+ const retained=JSON.parse(await stub.readOwnQaRetainedGeneration(plan));assert.equal(retained.purpose,'afw.qa-retained-generation-resolution.v2');assert.equal(retained.status,'armed');assert.equal(retained.withinWindow,true);assert.deepEqual(await stub.rowsFixture(),before);
+ assert.equal((await stub.withdrawFixture(raw)).status,'withdrawn');const withdrawn=await stub.rowsFixture();
+ const historical=JSON.parse(await stub.readOwnQaRetainedGeneration(plan));assert.equal(historical.purpose,'afw.qa-retained-generation-resolution.v2');assert.equal(historical.status,'withdrawn');assert.equal(historical.authorizesEffects,false);assert.equal(historical.guardLivenessVerified,false);
+ assert.equal(JSON.parse(await stub.readOwnQaGeneration(plan)).status,'blocked');assert.deepEqual(await stub.rowsFixture(),withdrawn);
+ 
+ await mf.setOptions(options('22222222-2222-4222-8222-222222222222'));ns=(await mf.getBindings()).AFW_INDEPENDENT_CLOSURE;stub=ns.get(ns.idFromName('afw-own-successor-closure-v1'));assert.equal(JSON.parse(await stub.readOwnQaGeneration(plan)).status,'blocked');assert.deepEqual(await stub.rowsFixture(),withdrawn);assert.equal(JSON.parse(await stub.readOwnQaRetainedGeneration(plan)).status,'blocked');
  assert.equal(outbound,0);assert.equal((await mf.dispatchFetch('https://fixture.invalid/')).status,404);
  }finally{await mf.dispose();}
 });

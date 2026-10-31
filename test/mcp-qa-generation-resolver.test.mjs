@@ -4,8 +4,8 @@ import {generationFixture,INFO,HEAD,CONTROL} from './fixtures/qa-generation-ledg
 import {createPrivateQaGenerationLedger} from '../lib/mcp-qa-generation-ledger.mjs';
 const api=await import('../lib/mcp-qa-generation-resolver.mjs').catch(()=>({}));
 const slot='afw-own-successor-closure-v1',actor='f'.repeat(64),version='11111111-1111-4111-8111-111111111111';
-async function fixture(){
- const f=generationFixture(),armed=await createPrivateQaGenerationLedger(f.options()).arm();assert.equal(armed.status,'armed');
+async function fixture({remaining=60000,startOffset=-1000}={}){
+ const f=generationFixture();f.capsule.startAt=f.now()+startOffset;f.capsule.expiresAt=f.now()+remaining;const armed=await createPrivateQaGenerationLedger(f.options()).arm();assert.equal(armed.status,'armed');
  const namespace={idFromName(name){assert.equal(name,slot);return{toString:()=>actor};}};
  f.env.AFW_INDEPENDENT_CLOSURE=namespace;const ctx={storage:f.storage,id:{toString:()=>actor}};
  return {f,armed,ctx,options:{env:f.env,ctx,sourceRevision:'a'.repeat(40),now:f.now,timeoutMs:5000}};
@@ -15,7 +15,7 @@ const flags=r=>{for(const k of ['authorizesEffects','guardLivenessVerified','ope
 const read=async(o,plan)=>{const raw=await o.read(plan);assert.equal(typeof raw,'string');assert.ok(Buffer.byteLength(raw)<=2048);const r=JSON.parse(raw);flags(r);return r;};
 test('fixed resolver reads primary capsule and current native identity without writes or private content',async()=>{
  const {f,armed,options}=await fixture(),before=structuredClone([...f.rows]),puts=f.storage.puts,o=make(options);
- assert.deepEqual(Object.keys(o),['read']);const r=await read(o,armed.planHash);
+ assert.deepEqual(Object.keys(o),['read','readRetained']);const r=await read(o,armed.planHash);
  assert.equal(r.status,'armed');assert.equal(r.planHash,armed.planHash);assert.equal(r.runtimeVersionId,version);assert.equal(r.sourceRevision,'a'.repeat(40));assert.equal(r.storedContext,'durable_object');assert.equal(r.isHead,true);assert.equal(r.withinWindow,true);
  assert.deepEqual([...f.rows],before);assert.equal(f.storage.puts,puts);const raw=JSON.stringify(r);for(const denied of ['capsule','grantId','current-grant','closurePolicyHash','predecessor','executionPin'])assert.equal(raw.includes(denied),false);
 });
@@ -91,4 +91,52 @@ for(const drift of ['deadline','metadata'])test('settlement after inner success 
  const {f,armed,options}=await fixture(),original=Promise.race,at=f.now();let changed=false;
  Promise.race=function(values){return Reflect.apply(original,this,[values]).then(value=>{if(!changed&&typeof value==='string'&&JSON.parse(value).status==='armed'){changed=true;if(drift==='deadline')f.setNow(at+5000);else f.env.AFW_QA_VERSION={id:f.env.AFW_QA_VERSION.id};}return value;});};
  try{const r=await read(make(options),armed.planHash);assert.equal(changed,true);assert.equal(r.status,'blocked');}finally{Promise.race=original;}
+});
+
+const retainedPurpose='afw.qa-retained-generation-resolution.v2';
+const retained=async(o,plan)=>{assert.equal(typeof o.readRetained,'function');const raw=await o.readRetained(plan);assert.equal(typeof raw,'string');assert.ok(Buffer.byteLength(raw)<=2048);const r=JSON.parse(raw);flags(r);assert.equal(r.purpose,retainedPurpose);return r;};
+for(const phase of ['armed','pending','withdrawn','expired','before-start'])test('retained plan selection reads '+phase+' without becoming nominal or effect authority',async()=>{
+ const {f,armed,options}=await fixture(phase==='before-start'?{startOffset:1000}:{}),o=make(options);
+ if(phase==='pending'){const c=f.rows.get(CONTROL+armed.planHash);c.phase='pending';c.armedAt=null;}
+ if(phase==='withdrawn')await createPrivateQaGenerationLedger(f.options()).withdraw();
+ if(phase==='expired')f.setNow(f.capsule.expiresAt);
+ // A separate valid record can have been armed before its nominal start.
+ const before=structuredClone([...f.rows]),puts=f.storage.puts;
+ const r=await retained(o,armed.planHash);
+ assert.equal(r.status,phase==='pending'?'pending':phase==='withdrawn'?'withdrawn':'armed');
+ assert.equal(r.isHead,true);assert.equal(r.withinWindow,!['expired','before-start'].includes(phase));
+ assert.equal(r.runtimeVersionId,version);assert.equal(r.storedContext,'durable_object');
+ assert.deepEqual([...f.rows],before);assert.equal(f.storage.puts,puts);
+ if(phase!=='armed')assert.equal((await read(o,armed.planHash)).status,'blocked');
+ for(const denied of ['current-grant','capsule','closurePolicy','predecessor'])assert.equal(JSON.stringify(r).includes(denied),false);
+});
+test('retained status never supplies a named authorization receipt',async()=>{
+ const {f,armed,options}=await fixture(),o=make(options);
+ const {createPrivateQaNamedAuthorization}=await import('../lib/mcp-qa-named-authorization.mjs');
+ const {createPrivateQaExecutionPin}=await import('../lib/mcp-qa-execution-identity.mjs');
+ const executionPin=createPrivateQaExecutionPin({env:f.env,expectedVersionId:version,sourceRevision:options.sourceRevision,context:'workflow'});
+ const a=createPrivateQaNamedAuthorization({executionPin,readGeneration:()=>o.readRetained(armed.planHash),pins:{planHash:armed.planHash,sequence:1,startAt:f.capsule.startAt,expiresAt:f.capsule.expiresAt},now:f.now,timeoutMs:5000});
+ assert.equal(await a.authorize('workflow_admission',new AbortController().signal),false);
+});
+for(const state of ['foreign-plan','corrupt-info','orphan','native-version','source','extra-arg'])test('retained resolver rejects '+state+' and preserves storage',async()=>{
+ const {f,armed,options}=await fixture();let plan=armed.planHash;
+ if(state==='foreign-plan')plan='0'.repeat(64);
+ if(state==='corrupt-info')f.rows.get(INFO+plan).extra=true;
+ if(state==='orphan')f.rows.set(INFO+'e'.repeat(64),{orphan:true});
+ if(state==='native-version')f.env.AFW_QA_VERSION={id:'22222222-2222-4222-8222-222222222222'};
+ if(state==='source')options.sourceRevision='b'.repeat(40);
+ const before=structuredClone([...f.rows]),o=make(options);
+ const r=state==='extra-arg'?JSON.parse(await o.readRetained(plan,{})):await retained(o,plan);
+ assert.equal(r.status,'blocked');assert.equal(r.purpose,retainedPurpose);assert.deepEqual([...f.rows],before);
+});
+test('retained historical generation cannot cross the next valid HEAD',async()=>{
+ const {f,armed,options}=await fixture(),old=armed.planHash;await createPrivateQaGenerationLedger(f.options()).withdraw();f.setNow(f.capsule.expiresAt+1);
+ f.capsule={...f.capsule,predecessor:{kind:'generation',planHash:armed.planHash,infoHash:armed.infoHash,sequence:1},trialId:'8'.repeat(64),grantId:'next-grant',eventId:'9'.repeat(64),startAt:f.now(),expiresAt:f.now()+60000};
+ const n=await createPrivateQaGenerationLedger(f.options()).arm();assert.equal(n.status,'armed');const o=make(options),before=structuredClone([...f.rows]);
+ assert.equal((await retained(o,old)).status,'blocked');assert.equal((await retained(o,n.planHash)).status,'armed');assert.deepEqual([...f.rows],before);
+});
+for(const mode of ['nominal','retained'])test(mode+' resolver rechecks nominal-window classification at its own final settlement',async()=>{
+ const {f,armed,options}=await fixture({remaining:1000}),o=make(options),race=Promise.race;let changed=false;
+ Promise.race=function(values){return Reflect.apply(race,this,[values]).then(value=>{if(!changed&&typeof value==='string'&&JSON.parse(value).status==='armed'){changed=true;f.setNow(f.capsule.expiresAt);}return value;});};
+ try{const r=mode==='nominal'?await read(o,armed.planHash):await retained(o,armed.planHash);assert.equal(changed,true);assert.equal(r.status,'blocked');}finally{Promise.race=race;}
 });
