@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import * as bindingMetadata from '../lib/mcp-private-confirmation-template.mjs';
 import {namedDataPacketFixture,packetHash} from './fixtures/qa-named-data-packet.mjs';
 import {activationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
 import {restorationConfigurationHash} from '../lib/mcp-successor-canary-restorer.mjs';
@@ -44,4 +45,30 @@ test('packet rejects actual secret values even after hashes are recomputed',()=>
 });
 test('combined UTF8 envelope and exact data grammar reject extras, script and oversize',()=>{
  const f=namedDataPacketFixture(),o=f.options();assert.throws(()=>api.assemblePrivateQaNamedPacket({...o,extra:true}),{message:'Private QA named assembly unavailable'});assert.throws(()=>api.assemblePrivateQaNamedPacket({...o,packetJson:JSON.stringify({...f.packet,script:'never'})}),{message:'Private QA named assembly unavailable'});assert.throws(()=>api.assemblePrivateQaNamedPacket({...o,packetJson:JSON.stringify({...f.packet,cancellationHistory:'é'.repeat(33000)})}),{message:'Private QA named assembly unavailable'});assert.throws(()=>api.assemblePrivateQaNamedPacket({...o,packetJson:o.packetJson+'\n'}),{message:'Private QA named assembly unavailable'});
+});
+
+function recommitSaveKey(f,binding){
+ f.policy.observation.configuration.bindings.push(binding);f.policy.plan.configurationHash=activationConfigurationHash(f.policy.observation.configuration);f.closure.live.configurationHash=restorationConfigurationHash(f.policy.observation.configuration);
+ f.f.capsule.bundleHash=packetHash(JSON.stringify({artifact:f.artifact,policy:f.policy}));f.f.capsule.closurePolicyHash=packetHash(JSON.stringify(f.closure));f.expectedCapsule=JSON.stringify(f.f.capsule);Object.assign(f.packet,{generationCapsule:f.expectedCapsule,namedPolicy:JSON.stringify(f.policy),closurePolicy:JSON.stringify(f.closure)});
+}
+const saveRef='78194191-9aa9-4c32-a77a-123456789abc';
+test('canonical nonsecret prepared-save UUID remains compatible with the accepted private materializer',()=>{
+ const f=namedDataPacketFixture();recommitSaveKey(f,{name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:saveRef});assert.equal(assemble(f).namedBundleHash,f.f.capsule.bundleHash);
+});
+for(const binding of [
+ {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:'not-a-uuid'},
+ {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:saveRef.toUpperCase()},
+ {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:saveRef.replace('-4c32-','-1c32-')},
+ {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'kv_namespace',text:saveRef},
+ {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:saveRef,extra:'forbidden'},
+ {name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'secret_text',text:saveRef},
+ {name:'AFW_OTHER_KEY',type:'plain_text',text:saveRef}
+])test('prepared-save exception remains exact '+JSON.stringify(binding),()=>{
+ const f=namedDataPacketFixture();recommitSaveKey(f,binding);assert.throws(()=>assemble(f),{message:'Private QA named assembly unavailable'});
+});
+test('shared metadata validator is pure and preserves the standalone materializer contract',()=>{
+ assert.equal(typeof bindingMetadata.validatePrivateConfirmationBindingMetadata,'function','one shared private metadata validator required');
+ const bindings=[{name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:saveRef},{name:'AFW_PRIVATE_TOKEN',type:'secret_text'},{name:'AFW_OTHER_TEXT',type:'plain_text',text:'safe'}],before=structuredClone(bindings);
+ assert.equal(bindingMetadata.validatePrivateConfirmationBindingMetadata(bindings),undefined);assert.deepEqual(bindings,before);
+ for(const bad of [[{name:'AFW_OTHER_KEY',type:'plain_text',text:saveRef}],[{name:'AFW_SECRET',type:'secret_text',text:'never'}],[{name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:saveRef+' '}]])assert.throws(()=>bindingMetadata.validatePrivateConfirmationBindingMetadata(bad),{message:'Private confirmation preparation unavailable'});
 });
