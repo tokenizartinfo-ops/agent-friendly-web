@@ -28,7 +28,7 @@ jobs:
       - name: Qualify sealed closed QA source without publication
         run: node --test test/mcp-qa-sealed-build.test.mjs test/mcp-qa-sealed-build-native.test.mjs
       - name: Qualify private QA identity and generation fences
-        run: node --test test/mcp-qa-closed-context.test.mjs test/mcp-qa-closed-context-native.test.mjs test/mcp-qa-named-authorization.test.mjs test/mcp-qa-named-authorization-native.test.mjs
+        run: node --test test/mcp-qa-closed-context.test.mjs test/mcp-qa-closed-context-native.test.mjs test/mcp-qa-named-authorization.test.mjs test/mcp-qa-named-authorization-native.test.mjs test/mcp-qa-named-eligibility.test.mjs test/mcp-qa-named-eligibility-native.test.mjs
       # The full top-level test glob covers every historical focused file.
       # Keep the two short closed-QA checks above for fast failure feedback.
       - run: npm test
