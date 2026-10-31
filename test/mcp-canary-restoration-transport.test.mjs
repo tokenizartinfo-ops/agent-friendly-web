@@ -22,12 +22,13 @@ test('fixed restoration transport authenticates approved reads and one exact clo
   [ROOT+'/workers/workers/'+OP+'/versions/'+f.f.ids.operator,{include:'modules'}],
   ...[W,OP].flatMap(n=>['schedules','tails'].map(k=>[ROOT+'/workers/scripts/'+n+'/'+k])),
   [ROOT+'/workflows/afw-release-administrative'],[ROOT+'/workflows/afw-release-administrative/instances',{per_page:100,direction:'desc'}],
+  [ROOT+'/workflows/afw-own-qa-private-confirmation'],[ROOT+'/workflows/afw-own-qa-private-confirmation/instances',{per_page:100,direction:'desc'}],
   [ROOT+'/containers/applications/'+f.f.policy.candidate.applicationId+'/instances-v2',{state:'active',per_page:100}]
  ];
  for(const [path,query] of paths){const r=await run(f.request('GET',path,query?{query}:{}));assert.equal(r.success,true);assert.equal(r.status,200);}
- const r=await run(f.request('POST',ROOT+'/workers/scripts/'+W+'/deployments',{body:f.body()}));assert.equal(r.result.id,f.f.ids.closedDep);assert.equal(f.reads,12);assert.equal(f.publishes,1);
+ const r=await run(f.request('POST',ROOT+'/workers/scripts/'+W+'/deployments',{body:f.body()}));assert.equal(r.result.id,f.f.ids.closedDep);assert.equal(f.reads,14);assert.equal(f.publishes,1);
  for(const c of f.calls){assert.ok(c.url.startsWith(origin+ROOT+'/'));assert.equal(c.init.redirect,'manual');assert.equal(c.init.cache,'no-store');assert.equal(c.init.headers.Authorization,c.init.method==='GET'?'Bearer synthetic-reader-token':'Bearer synthetic-publisher-token');assert.ok(c.init.signal instanceof AbortSignal);}
- await assert.rejects(run(f.request('POST',ROOT+'/workers/scripts/'+W+'/deployments',{body:f.body()})),e=>e.message===message);assert.equal(f.calls.length,13);
+ await assert.rejects(run(f.request('POST',ROOT+'/workers/scripts/'+W+'/deployments',{body:f.body()})),e=>e.message===message);assert.equal(f.calls.length,15);
 });
 test('foreign paths methods headers query body and input accessors never touch credentials or network',async t=>{
  const {createCanaryRestorationTransport}=await load();
@@ -117,5 +118,13 @@ test('a final stream continuation cannot renew expired or withdrawn authority',a
    c.close();
   }}),{headers:{'Content-Type':'application/json'}});
   await assert.rejects(createCanaryRestorationTransport(f.options)(f.request()));
+ }
+});
+
+test('pagination remains bounded to the two fixed workflow list routes without widening query selectors',async()=>{
+ const {createCanaryRestorationTransport}=await load();
+ for(const name of ['afw-release-administrative','afw-own-qa-private-confirmation']){
+  const f=fixture(),run=createCanaryRestorationTransport(f.options),path=ROOT+'/workflows/'+name+'/instances';await run(f.request('GET',path,{query:{per_page:100,direction:'desc',cursor:'opaque-next-page'}}));assert.equal(f.calls.length,1);
+  for(const query of [{per_page:100,direction:'desc',cursor:''},{per_page:100,direction:'desc',cursor:'x'.repeat(1025)},{per_page:100,direction:'desc',cursor:'next\npage'},{per_page:100,direction:'desc',cursor:'next',page:2},{per_page:100,direction:'desc',status:'running'},{per_page:1,direction:'desc',cursor:'next'}]){const before=f.calls.length;await assert.rejects(run(f.request('GET',path,{query})),e=>e.message===message);assert.equal(f.calls.length,before);}
  }
 });

@@ -40,6 +40,8 @@ export function restorationFixture({at=Date.UTC(2026,9,28,17),containerId='a'.re
   for(const [worker,id,key] of [[W,ids.live,'live'],[W,ids.closed,'closed'],[OP,ids.operator,'operatorVersion']])if(x.path===ROOT+'/workers/workers/'+worker+'/versions/'+id){if(x.query?.include!=='modules')throw Error('Missing module proof');return ok(structuredClone(state[key]));}
   if([W,OP].some(n=>x.path===ROOT+'/workers/scripts/'+n+'/schedules'))return ok({schedules:[]});
   if([W,OP].some(n=>x.path===ROOT+'/workers/scripts/'+n+'/tails'))return ok([]);
+  if(x.path===ROOT+'/workflows/afw-own-qa-private-confirmation')return ok({id:'707e5440-2af3-4a0c-8fff-d40efc9895c4',name:'afw-own-qa-private-confirmation',class_name:'PrivateQaNamedConfirmation',script_name:'agent-friendly-web-independent-closure-qa'});
+  if(x.path===ROOT+'/workflows/afw-own-qa-private-confirmation/instances')return ok([{id:'qa-historical-instance',status:'complete'}],{per_page:100,count:1,total_count:1});
   if(x.path===ROOT+'/workflows/afw-release-administrative')return ok({id:'0ee9231b-8952-46bd-8124-a0c5dbb06dd0',name:'afw-release-administrative',class_name:'AfwReleaseWorkflow',script_name:OP});
   if(x.path===ROOT+'/workflows/afw-release-administrative/instances')return ok([{id:'historical-instance',status:state.active?'running':'complete'}],{per_page:100,count:1,total_count:1});
   if(x.path===ROOT+'/containers/applications/'+APP+'/instances-v2')return ok([],{per_page:100});

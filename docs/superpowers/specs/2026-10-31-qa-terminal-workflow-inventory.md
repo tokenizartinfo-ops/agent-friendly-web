@@ -1,0 +1,9 @@
+# Closed canary restoration: terminal QA inventory —31 October 2026
+
+AFW source only. The private QA confirmation Workflow707e5440 now exists. Restoration must not change the canary while its nominal confirmation is nonterminal. Extend fixed read-only inventory to exactly afw-own-qa-private-confirmation / agent-friendly-web-independent-closure-qa / PrivateQaNamedConfirmation / its actual fixedID, alongside existing administrative Workflow. Do not require the separate bootstrap guard executing closure to be terminal first; its generation-specific identity belongs to the later V2 integration.
+
+Follow opaque server cursors for these two fixed lists only: per_page100/directiondesc, at most4pages/400unique IDs per Workflow, no repeated cursors/IDs, no caller-selected status or resource. Read all pages before any restoration intent/write; any nonterminal/unknown status or incomplete/ambiguous inventory blocks. Preserve outer64GET cap, 5s transport child limits, original window and issued-before-effect unknownACK semantics. Deprecated total_count is not proof of completeness for cursor pagination; reject a claimed missing remainder conservatively at terminal page. Do not treat Workflow versionId/classname as code provenance.
+
+Transport adds only exact QA definition/list GET and bounded cursor on these two list routes. No generic query, other Workflow, mutation, permissions or credential changes. Actual metadata observation31oct13:35UTC: own QA list2complete and administrative10complete (retention count is dated, not a deletion diagnosis), no cursor on either. This is not a runtime activation.
+
+TDD adds active later-page/definition/pagination/budget cases before production changes. Existing native journal/concurrency/unknownACK cases must still pass with the fixed extra Workflow fixture. Complete CI/lint/build, independent review, exact accepted tree. Source-only rollback; no remote write/deploy/engine action.
