@@ -17,7 +17,7 @@ for(const representation of ['object','api-json'])test('actual Workflow and fixe
  export {PrivateQaNamedConfirmation};
  import {WorkflowEntrypoint} from 'cloudflare:workers';
  import {runPrivateQaGenerationPreparation} from './lib/mcp-qa-generation-preparation.mjs';
- export class CachedPreparation extends WorkflowEntrypoint{run(event){return runPrivateQaGenerationPreparation({env:this.env,event,step:{do:async()=>JSON.parse(await this.env.AFW_INDEPENDENT_CLOSURE.get(this.env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1')).readOwnQaGenerationPreparation(event.payload.namedBundleHash))}});}}
+ export class CachedPreparation extends WorkflowEntrypoint{run(event){return runPrivateQaGenerationPreparation({env:this.env,event,step:{do:async()=>this.env.AFW_INDEPENDENT_CLOSURE.get(this.env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1')).readOwnQaGenerationPreparation(event.payload.namedBundleHash)}});}}
  export class StalePreparation extends WorkflowEntrypoint{run(event,step){return runPrivateQaGenerationPreparation({env:this.env,event:{...event,timestamp:new Date(Date.now()-5001)},step});}}
  export class FixedPreparation extends IndependentClosure{
   constructor(ctx,env){const x=generationPreparationFixture({at:Number(env.FIXTURE_AT)});super(ctx,{...env,AFW_MCP_CLOSURE_NODE:x.p.namespace});}
