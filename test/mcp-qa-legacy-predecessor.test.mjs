@@ -41,7 +41,7 @@ for(const mode of ['null_control','unwithdrawn','unarmed','future_expiry','contr
  if(mode==='getter')Object.defineProperty(o.control,'armedAt',{enumerable:true,get(){throw Error('PRIVATE-NO-ERROR-OUTPUT');}});
  assert.throws(()=>materializePrivateQaLegacyPredecessor(o),/Private historical QA material unavailable/);
 });
-for(const mode of ['bad_issued_time','bad_complete_time','unknown_fields','issued_has_ack','wrong_hash_link','wrong_purpose'])test('fully parses retained journals despite a matching outer fingerprint '+mode,()=>{
+for(const mode of ['bad_issued_time','bad_complete_time','unknown_fields','issued_has_ack','wrong_hash_link','wrong_purpose','late_dispatch_issue','late_dispatch_ack'])test('fully parses retained journals despite a matching outer fingerprint '+mode,()=>{
  const f=fixture(),o=f.options,r=o.journals.preparedDispatch,z=o.journals.reductionDispatch;
  if(mode==='bad_issued_time')r.issuedAt=JSON.parse(o.dispatchPolicyJson).dispatchAt-1;
  if(mode==='bad_complete_time')z.completedAt=f.closure.expiresAt;
@@ -49,6 +49,8 @@ for(const mode of ['bad_issued_time','bad_complete_time','unknown_fields','issue
  if(mode==='issued_has_ack')r.completedAt=r.issuedAt+1;
  if(mode==='wrong_hash_link')r.planHash='f'.repeat(64);
  if(mode==='wrong_purpose')z.purpose='unrelated';
+ if(mode==='late_dispatch_issue')r.issuedAt=JSON.parse(o.dispatchPolicyJson).expiresAt;
+ if(mode==='late_dispatch_ack'){r.phase='complete';r.completedAt=JSON.parse(o.dispatchPolicyJson).expiresAt;}
  f.historicalContext.journalHashes.preparedDispatch=hash(JSON.stringify(r));f.historicalContext.journalHashes.reductionDispatch=hash(JSON.stringify(z));
  assert.throws(()=>materializePrivateQaLegacyPredecessor(o),/Private historical QA material unavailable/);
 });
