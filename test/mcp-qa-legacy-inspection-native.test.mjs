@@ -21,7 +21,7 @@ async function fixture(mode='absent'){
   async seedFixture(legacy,journal,generation,nullLegacy){await this.ctx.storage.put('history-sentinel',{preserve:'PRIVATE-NO-OUTPUT'});if(nullLegacy)await this.ctx.storage.put('afw.canary-restoration-control.v1',null);else if(legacy!==null)await this.ctx.storage.put('afw.canary-restoration-control.v1',legacy);if(journal)await this.ctx.storage.put('afw.successor-canary-restoration.v1',journal);if(generation){await this.ctx.storage.put('afw.qa-generation-head.v2',{purpose:'afw.qa-generation-head.v2',sequence:1,planHash:'b'.repeat(64),infoHash:'c'.repeat(64)});await this.ctx.storage.put('afw.qa-generation-info.v2:'+'b'.repeat(64),{capsule:'PRIVATE-CAPSULE-NO-OUTPUT'});await this.ctx.storage.put('afw.qa-generation-control.v2:'+'b'.repeat(64),{phase:'withdrawn'});}}
   async rowsFixture(){return JSON.stringify([...await this.ctx.storage.list()]);}
   async readLegacyInspection(...args){const raw=await super.readLegacyInspection(...args);if(this.env.SYNTHETIC_MODE==='late')await new Promise(r=>setTimeout(r,5100));if(this.env.SYNTHETIC_MODE==='drift'){const r=JSON.parse(raw);if(r.status==='observed'){r.legacy.shape='PRIVATE-LEAK';return JSON.stringify(r);}}return raw;}
-  inheritedFixture(){return{alarm:typeof this.alarm,arm:typeof this.armOwnCanaryClosure,status:typeof this.readOwnCanaryClosureControl};}
+  inheritedFixture(){return JSON.stringify({alarm:typeof this.alarm,arm:typeof this.armOwnCanaryClosure,status:typeof this.readOwnCanaryClosureControl});}
  }
  export default{fetch(){return new Response(null,{status:404});}};`;
  const built=await build({stdin:{contents:entry,resolveDir:process.cwd(),sourcefile:'qa-legacy-inspection-native.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',plugins:[{name:'native-original-and-admin-context',setup(b){
@@ -44,7 +44,7 @@ async function fixture(mode='absent'){
 }
 for(const mode of ['absent','armed','permuted','null','unarmed','uncertain','generation','malformed'])test('actual inherited closed DO and Workflow inspect '+mode+' technical history without touching it',async()=>{
  const f=await fixture(mode);try{
- assert.deepEqual(await f.stub.inheritedFixture(),{alarm:'function',arm:'function',status:'function'});
+ assert.deepEqual(JSON.parse(await f.stub.inheritedFixture()),{alarm:'function',arm:'function',status:'function'});
  const r=await f.run();assert.equal(r.status,'observed');assert.equal(r.purpose,'afw.qa-legacy-inspection.v1');assert.equal(r.context,'workflow');assert.equal(r.actorContext,'durable_object');assert.equal(r.runtimeVersionId,version);
  assert.equal(r.qaConfigurationClosed,true);assert.equal(r.selectedHistoryStable,true);assert.equal(r.storageWritesIssued,false);
  for(const key of ['authorizesEffects','guardLivenessVerified','operationalReadiness','mayRetry'])assert.equal(r[key],false);
