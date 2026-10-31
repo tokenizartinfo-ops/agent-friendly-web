@@ -12,7 +12,7 @@ export default{async fetch(request,env){const input=await request.json();const r
  const compiled=await build({stdin:{contents:entry,resolveDir:process.cwd(),sourcefile:'qa-packet-primary-native.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none'});
  let outbound=0;const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:compiled.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],d1Databases:{QA_DB:'afw-private-packet-isolated-native'},outboundService:()=>{outbound++;throw Error('outbound forbidden');}}));
  try{
- const db=await mf.getD1Database('QA_DB'),parts=schema.split('\n-- afw-statement --\n');assert.equal(parts.length,4);await db.batch(parts.map(sql=>db.prepare(sql)));
+ const db=await mf.getD1Database('QA_DB'),parts=schema.split('\n-- afw-statement --\n');assert.equal(parts.length,4);for(let i=0;i<parts.length;i++){try{await db.prepare(parts[i]).run();}catch{throw Error('Native packet schema statement '+i+' was not accepted');}}
  await db.prepare('CREATE TABLE unrelated_history (id TEXT PRIMARY KEY,value TEXT)').run();await db.prepare('INSERT INTO unrelated_history VALUES(?,?)').bind('preserve','history').run();
  const key='a'.repeat(64),raw='{"purpose":"afw.qa-named-data-packet.v1","generationCapsule":"fixture","namedPolicy":"fixture","closurePolicy":"fixture","cancellationHistory":"fixture"}';
  const insert=(k,v)=>db.prepare('INSERT INTO afw_qa_named_packets_v1(generation_plan_hash,packet_json) VALUES(?,?)').bind(k,v).run();
