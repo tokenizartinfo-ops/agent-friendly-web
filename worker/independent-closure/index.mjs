@@ -1,5 +1,5 @@
 import {readPrivateQaNamedPacket,runPrivateQaNamedPacketObservation} from '../../lib/mcp-qa-named-preflight.mjs';
-import {readPrivateQaCurrentGeneration} from '../../lib/mcp-qa-generation-resolver.mjs';
+import {readPrivateQaCurrentGeneration,readPrivateQaRetainedGeneration} from '../../lib/mcp-qa-generation-resolver.mjs';
 import {observePrivateQaClosedActor,runPrivateQaClosedContext} from '../../lib/mcp-qa-closed-context.mjs';
 import {createPrivateClosureReaderProbe,runPrivateClosureReaderProbeWorkflow,createPrivateClosurePublisherProbe,runPrivateClosurePublisherProbeWorkflow} from '../../lib/mcp-closure-reader-probe.mjs';
 import {createPrivateCanaryRestorationHost,isPrivateCanaryRestorationActor,runPrivateCanaryRestorationWorkflow} from '../../lib/mcp-hosted-canary-restoration.mjs';
@@ -177,6 +177,7 @@ export class PrivateQaCatalog extends DurableObject {
 export class IndependentClosure extends DurableObject {
  readOwnQaNamedPacket(...args){return readPrivateQaNamedPacket({env:this.env,ctx:this.ctx,args});}
  readOwnQaGeneration(...args){return readPrivateQaCurrentGeneration({env:this.env,ctx:this.ctx,args});}
+ readOwnQaRetainedGeneration(...args){return readPrivateQaRetainedGeneration({env:this.env,ctx:this.ctx,args});}
  observeOwnQaClosedContext(payload){return JSON.stringify(observePrivateQaClosedActor({env:this.env,ctx:this.ctx,payload}));}
  #mcpPublisher;
  #publisher(){return this.#mcpPublisher??=createPrivateClosurePublisherProbe({env:this.env,ctx:this.ctx});}
