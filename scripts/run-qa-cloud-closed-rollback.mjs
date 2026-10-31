@@ -10,7 +10,7 @@ try{
  const {plan,pins,sourceSha,runId,operation}=invocation;
  const adapters=createQaCloudClosedHttpAdapters({plan,pins,credential:process.env.AFW_QA_CLOSED_TOKEN,githubToken:process.env.GITHUB_TOKEN,sourceSha,fetchImpl:globalThis.fetch,now:Date.now});
  const executor=createPrivateQaCloudClosedRollback({plan,pins:{candidateVersionId:pins.qaCandidate.id,closedVersionId:pins.qaClosed.id},...adapters,now:Date.now,timeoutMs:30000,signal:abort.signal});
- result={...await executor.run(operation),sourceSha,runId,sessionId:plan.sessionId,observedAt:new Date().toISOString()};
+ result={...await executor.run(operation),httpDiagnostic:adapters.readDiagnostic(),sourceSha,runId,sessionId:plan.sessionId,observedAt:new Date().toISOString()};
 }catch{/* No provider error, header, credential or response body is retained. */}
 finally{process.removeListener('SIGINT',stop);process.removeListener('SIGTERM',stop);abort.abort();}
 if(!['closed_candidate_observed','already_closed_observed','restored_observed'].includes(result.status))process.exitCode=1;
