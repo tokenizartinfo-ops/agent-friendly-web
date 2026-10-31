@@ -46,7 +46,8 @@ function legacyMetadata(value,at){
  }catch{/* Unknown stored shape remains present; never repair or reflect it. */}
  return out;
 }
-function journalMetadata(role,key,value){const p=packed(value);const recognizedPurpose=p.present&&value!==null&&typeof value==='object'&&Object.getOwnPropertyDescriptor(value,'purpose')?.value===key;const phase=p.present&&['issued','complete'].includes(Object.getOwnPropertyDescriptor(value??{},'phase')?.value)?value.phase:p.present?'unsupported':'absent';return {key:role,present:p.present,hash:p.hash,bytes:p.bytes,phase,recognizedPurpose,uncertain:p.present&&(!recognizedPurpose||phase!=='complete')};}
+// A recognized phase is only descriptive. Full journal validation remains a separate gate.
+function journalMetadata(role,key,value){const p=packed(value);const recognizedPurpose=p.present&&value!==null&&typeof value==='object'&&Object.getOwnPropertyDescriptor(value,'purpose')?.value===key;const phase=p.present&&['issued','complete'].includes(Object.getOwnPropertyDescriptor(value??{},'phase')?.value)?value.phase:p.present?'unsupported':'absent';return {key:role,present:p.present,hash:p.hash,bytes:p.bytes,phase,recognizedPurpose,uncertain:p.present};}
 async function snapshot(storage,l){
  return storage.transaction(async t=>{l.check();const values=[];for(const k of [legacyKey,...journalKeys.map(x=>x[1]),headKey]){values.push(await t.get(k));l.check();}
  const info=await t.list({prefix:infoPrefix,limit:33});l.check();const controls=await t.list({prefix:controlPrefix,limit:33});l.check();if(!(info instanceof Map)||!(controls instanceof Map))fail();
@@ -64,7 +65,7 @@ function validateReceipt(raw,l){
  const x=fields(r.legacy,['present','shape','timeShapeReady','hash','armedAt','withdrawnAt','startAt','expiresAt']);
  if(typeof x.present!=='boolean'||!['absent','unsupported','recognized'].includes(x.shape)||typeof x.timeShapeReady!=='boolean'||(x.present?!hex(x.hash):x.hash!==null)||x.present===(x.shape==='absent')||['armedAt','withdrawnAt','startAt','expiresAt'].some(k=>x[k]!==null&&!time(x[k]))||x.shape!=='recognized'&&[x.armedAt,x.withdrawnAt,x.startAt,x.expiresAt].some(v=>v!==null)||x.timeShapeReady&&(x.shape!=='recognized'||!time(x.armedAt)||!time(x.withdrawnAt)))fail();
  if(!Array.isArray(r.journals)||r.journals.length!==4)fail();
- r.journals.forEach((j,i)=>{fields(j,['key','present','hash','bytes','phase','recognizedPurpose','uncertain']);if(j.key!==journalKeys[i][0]||typeof j.present!=='boolean'||(j.present?!hex(j.hash):j.hash!==null)||!Number.isSafeInteger(j.bytes)||j.bytes<0||j.bytes>1048576||!['absent','unsupported','issued','complete'].includes(j.phase)||typeof j.recognizedPurpose!=='boolean'||typeof j.uncertain!=='boolean'||j.present===(j.phase==='absent')||j.uncertain!==(j.present&&(!j.recognizedPurpose||j.phase!=='complete')))fail();});
+ r.journals.forEach((j,i)=>{fields(j,['key','present','hash','bytes','phase','recognizedPurpose','uncertain']);if(j.key!==journalKeys[i][0]||typeof j.present!=='boolean'||(j.present?!hex(j.hash):j.hash!==null)||!Number.isSafeInteger(j.bytes)||j.bytes<0||j.bytes>1048576||!['absent','unsupported','issued','complete'].includes(j.phase)||typeof j.recognizedPurpose!=='boolean'||typeof j.uncertain!=='boolean'||j.present===(j.phase==='absent')||j.uncertain!==j.present)fail();});
  if(r.hasUncertainJournal!==r.journals.some(j=>j.uncertain))fail();
  const g=fields(r.generation,['headPresent','infoCount','controlCount','inventoryComplete','requiresReview','hash']);
  if(typeof g.headPresent!=='boolean'||[g.infoCount,g.controlCount].some(n=>!Number.isSafeInteger(n)||n<0||n>33)||g.inventoryComplete!==(g.infoCount<33&&g.controlCount<33)||g.requiresReview!==(g.headPresent||g.infoCount>0||g.controlCount>0)||!hex(g.hash))fail();return r;
