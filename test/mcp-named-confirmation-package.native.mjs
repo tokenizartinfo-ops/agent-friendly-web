@@ -246,3 +246,8 @@ test('exact frozen module confirms and reserves through the explicitly opted-in 
  assert.equal(r.httpStatus,404);assert.equal(r.reservationCount,1);assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
  assert.equal(r.output.reservation.mayBoot,false);assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);assert.equal(r.counters.retirementReads,2);
 });
+
+test('real frozen builder preserves the canonical nonsecret prepared-save reference',available,async()=>{
+ const policy=inertNamedConfirmationPolicy(artifact),key='78194191-9aa9-4c32-a77a-123456789abc';policy.observation.configuration.bindings.push({name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:key});policy.plan.configurationHash=activationConfigurationHash(policy.observation.configuration);
+ const built=await buildMcpNamedConfirmation({artifact,policy});assert.equal(built.workerHash,artifact.workerHash);assert.equal(built.artifactSourceRevision,artifact.sourceRevision);assert.equal(built.inertPreparation,true);assert.equal(built.startAt,0);assert.equal(built.expiresAt,1);assert.equal(built.remotePublished,false);
+});
