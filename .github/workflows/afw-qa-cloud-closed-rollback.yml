@@ -1,0 +1,97 @@
+name: AFW finite closed QA cloud rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Inspect, or restore only the fixed already-qualified CLOSED QA candidate
+        required: true
+        type: choice
+        default: inspect
+        options: [inspect, restore_known_closed_candidate]
+      session_id:
+        description: Opaque 64-character lowercase hex diagnostic session
+        required: true
+        type: string
+      start_ms:
+        description: Original UTC epoch milliseconds; queued time consumes this window
+        required: true
+        type: string
+      expires_ms:
+        description: Original expiry epoch milliseconds, at most 10 minutes after start
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: afw-qa-cloud-closed-rollback
+  cancel-in-progress: false
+
+env:
+  AFW_QA_CLOSED_ENVIRONMENT: afw-qa-cloud-closed-rollback
+  AFW_QA_CLOSED_OPERATION: ${{ inputs.operation }}
+  AFW_QA_CLOSED_SESSION_ID: ${{ inputs.session_id }}
+  AFW_QA_CLOSED_START_MS: ${{ inputs.start_ms }}
+  AFW_QA_CLOSED_EXPIRES_MS: ${{ inputs.expires_ms }}
+
+jobs:
+  inspect:
+    if: ${{ github.ref == 'refs/heads/main' && github.run_attempt == '1' && inputs.operation == 'inspect' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: afw-qa-cloud-closed-rollback
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Inspect fixed closed AFW profiles without writes
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/run-qa-cloud-closed-rollback.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-qa-cloud-closed-${{ github.run_id }}-${{ github.run_attempt }}
+          path: afw-qa-cloud-closed-result.json
+          if-no-files-found: error
+          retention-days: 7
+
+  restore:
+    if: ${{ github.ref == 'refs/heads/main' && github.run_attempt == '1' && inputs.operation == 'restore_known_closed_candidate' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: afw-qa-cloud-closed-rollback
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Claim once, verify again, restore one fixed closed QA artifact
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/run-qa-cloud-closed-rollback.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-qa-cloud-closed-${{ github.run_id }}-${{ github.run_attempt }}
+          path: afw-qa-cloud-closed-result.json
+          if-no-files-found: error
+          retention-days: 7
+
