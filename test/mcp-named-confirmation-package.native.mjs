@@ -261,3 +261,16 @@ test('exact historical artifact builds the separate current QA context within it
  try{assert.equal((await mf.dispatchFetch('https://fixture.invalid/')).status,404);assert.equal(outbound,0);}finally{await mf.dispose();}
  console.log('FIXED_QA_CONTEXT_MEASURED',JSON.stringify(m));
 });
+
+for(const path of ['wrangler.independent-closure-qa.jsonc','wrangler.independent-closure-qa.rollback.jsonc'])test('fixed QA context detects config byte drift across the final real compiler: '+path,async()=>{
+ const {readFile,writeFile}=await import('node:fs/promises'),{execFileSync}=await import('node:child_process');
+ const revision=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),before=await readFile(path),key=Symbol.for('afw.ci.qa-fixed-context.compile-drift');
+ const target=new URL('../scripts/build-private-qa-named-context.mjs?ci-config-drift='+encodeURIComponent(path),import.meta.url).href,wrapper=new URL('./fixtures/qa-fixed-context-compile-drift.mjs',import.meta.url).href;let crossed=0;
+ globalThis[key]=async()=>{crossed++;await writeFile(path,Buffer.concat([before,Buffer.from('\n')]));};
+ const hooks=registerHooks({resolve(specifier,context,nextResolve){if(context.parentURL===target&&specifier==='esbuild')return{url:wrapper,shortCircuit:true};return nextResolve(specifier,context);}});
+ try{
+ const {buildPrivateQaNamedContext}=await import(target);
+ await assert.rejects(()=>buildPrivateQaNamedContext({cwd:process.cwd(),sourceRevision:revision,artifact}),{message:'Fixed QA artifact context build unavailable'});
+ assert.equal(crossed,1,'must cross exactly the final actual compiler, not the preceding closed builds');
+ }finally{hooks.deregister();delete globalThis[key];await writeFile(path,before);assert.deepEqual(await readFile(path),before);}
+});
