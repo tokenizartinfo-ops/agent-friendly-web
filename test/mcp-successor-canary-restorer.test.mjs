@@ -116,3 +116,28 @@ test('partial passive readback after dispatch stays issued uncertain and cannot 
   assert.equal((await createSuccessorCanaryRestorer(f.options).advance()).status,'uncertain');assert.equal(f.posts,1);assert.equal(f.storage.puts,1);
  });
 });
+
+const QF=ROOT+'/workflows/afw-own-qa-private-confirmation';
+for(const status of ['queued','running','paused','unknown','waitingForPause','waiting','rollingBack'])test('new private QA confirmator must be terminal before canary restore: '+status,async()=>{
+ const {createSuccessorCanaryRestorer}=await load(),f=restorationFixture();f.options.request=async x=>{const r=await f.request(x);if(x.path===QF+'/instances')r.result[0].status=status;return r;};
+ assert.equal((await createSuccessorCanaryRestorer(f.options).advance()).status,'blocked');assert.equal(f.posts,0);assert.equal(f.storage.puts,0);
+});
+for(const change of [f=>f.id='77777777-7777-4777-8777-777777777777',f=>f.script_name=OP,f=>f.class_name='PrivateQaBootstrap',f=>f.script_deleted=true,f=>f.schedules=['unexpected']])test('foreign or scheduled private QA definition is never restoration evidence '+change.toString(),async()=>{
+ const {createSuccessorCanaryRestorer}=await load(),f=restorationFixture();f.options.request=async x=>{const r=await f.request(x);if(x.path===QF)change(r.result);return r;};assert.equal((await createSuccessorCanaryRestorer(f.options).advance()).status,'blocked');assert.equal(f.posts,0);
+});
+test('bounded cursor inventory reads every terminal page for both fixed workflows before restore',async()=>{
+ const {createSuccessorCanaryRestorer}=await load(),f=restorationFixture();f.options.request=async x=>{const r=await f.request(x);if([QF+'/instances',ROOT+'/workflows/afw-release-administrative/instances'].includes(x.path)){const second=!!x.query.cursor;r.result=[{id:(x.path===QF+'/instances'?'qa':'admin')+'-page-'+(second?'2':'1'),workflow_id:x.path===QF+'/instances'?'707e5440-2af3-4a0c-8fff-d40efc9895c4':'0ee9231b-8952-46bd-8124-a0c5dbb06dd0',status:'complete'}];r.result_info={per_page:100,count:1,total_count:2,...second?{}:{cursor:'next-page'}};}return r;};
+ assert.equal((await createSuccessorCanaryRestorer(f.options).advance()).status,'restored_observed');assert.equal(f.posts,1);assert.ok(f.calls.some(x=>x.path===QF+'/instances'&&x.query?.cursor==='next-page'));assert.ok(f.calls.some(x=>x.path.includes('afw-release-administrative/instances')&&x.query?.cursor==='next-page'));
+});
+for(const bad of ['second-active','duplicate-id','repeated-cursor','over-four-pages','oversized-cursor','missing-next-cursor'])test('ambiguous or active later QA page blocks before issue: '+bad,async()=>{
+ const {createSuccessorCanaryRestorer}=await load(),f=restorationFixture();f.options.request=async x=>{const r=await f.request(x);if(x.path!==QF+'/instances')return r;const n=x.query.cursor?Number(x.query.cursor.split('-').at(-1)):0;
+ r.result=[{id:bad==='duplicate-id'?'same-id':'qa-page-'+n,workflow_id:'707e5440-2af3-4a0c-8fff-d40efc9895c4',status:bad==='second-active'&&n?'running':'complete'}];r.result_info={per_page:100,count:1,total_count:bad==='over-four-pages'?5:2};
+ if(!n)r.result_info.cursor=bad==='oversized-cursor'?'x'.repeat(1025):'next-1';
+ else if(bad==='repeated-cursor')r.result_info.cursor='next-1';else if(bad==='over-four-pages')r.result_info.cursor='next-'+(n+1);
+ if(bad==='missing-next-cursor')delete r.result_info.cursor;return r;};
+ assert.equal((await createSuccessorCanaryRestorer(f.options).advance()).status,'blocked');assert.equal(f.posts,0);assert.equal(f.storage.puts,0);assert.ok(f.calls.filter(x=>x.path===QF+'/instances').length<=4);
+});
+
+for(const path of [QF+'/instances',ROOT+'/workflows/afw-release-administrative/instances'])for(const variant of ['foreign','absent'])test('listed instance must belong to the exact fixed definition '+path+' '+variant,async()=>{
+ const {createSuccessorCanaryRestorer}=await load(),f=restorationFixture();f.options.request=async x=>{const r=await f.request(x);if(x.path===path){if(variant==='foreign')r.result[0].workflow_id='77777777-7777-4777-8777-777777777777';else delete r.result[0].workflow_id;}return r;};assert.equal((await createSuccessorCanaryRestorer(f.options).advance()).status,'blocked');assert.equal(f.posts,0);assert.equal(f.storage.puts,0);
+});
