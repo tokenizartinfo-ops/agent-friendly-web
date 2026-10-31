@@ -4,8 +4,8 @@ import {generationFixture,INFO,HEAD,CONTROL} from './fixtures/qa-generation-ledg
 import {createPrivateQaGenerationLedger} from '../lib/mcp-qa-generation-ledger.mjs';
 const api=await import('../lib/mcp-qa-generation-resolver.mjs').catch(()=>({}));
 const slot='afw-own-successor-closure-v1',actor='f'.repeat(64),version='11111111-1111-4111-8111-111111111111';
-async function fixture({remaining=60000}={}){
- const f=generationFixture();f.capsule.expiresAt=f.now()+remaining;const armed=await createPrivateQaGenerationLedger(f.options()).arm();assert.equal(armed.status,'armed');
+async function fixture({remaining=60000,startOffset=-1000}={}){
+ const f=generationFixture();f.capsule.startAt=f.now()+startOffset;f.capsule.expiresAt=f.now()+remaining;const armed=await createPrivateQaGenerationLedger(f.options()).arm();assert.equal(armed.status,'armed');
  const namespace={idFromName(name){assert.equal(name,slot);return{toString:()=>actor};}};
  f.env.AFW_INDEPENDENT_CLOSURE=namespace;const ctx={storage:f.storage,id:{toString:()=>actor}};
  return {f,armed,ctx,options:{env:f.env,ctx,sourceRevision:'a'.repeat(40),now:f.now,timeoutMs:5000}};
@@ -96,12 +96,11 @@ for(const drift of ['deadline','metadata'])test('settlement after inner success 
 const retainedPurpose='afw.qa-retained-generation-resolution.v2';
 const retained=async(o,plan)=>{assert.equal(typeof o.readRetained,'function');const raw=await o.readRetained(plan);assert.equal(typeof raw,'string');assert.ok(Buffer.byteLength(raw)<=2048);const r=JSON.parse(raw);flags(r);assert.equal(r.purpose,retainedPurpose);return r;};
 for(const phase of ['armed','pending','withdrawn','expired','before-start'])test('retained plan selection reads '+phase+' without becoming nominal or effect authority',async()=>{
- const {f,armed,options}=await fixture(),o=make(options);
+ const {f,armed,options}=await fixture(phase==='before-start'?{startOffset:1000}:{}),o=make(options);
  if(phase==='pending'){const c=f.rows.get(CONTROL+armed.planHash);c.phase='pending';c.armedAt=null;}
  if(phase==='withdrawn')await createPrivateQaGenerationLedger(f.options()).withdraw();
  if(phase==='expired')f.setNow(f.capsule.expiresAt);
  // A separate valid record can have been armed before its nominal start.
- if(phase==='before-start')f.setNow(f.capsule.startAt-1);
  const before=structuredClone([...f.rows]),puts=f.storage.puts;
  const r=await retained(o,armed.planHash);
  assert.equal(r.status,phase==='pending'?'pending':phase==='withdrawn'?'withdrawn':'armed');
