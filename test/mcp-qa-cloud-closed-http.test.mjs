@@ -37,7 +37,7 @@ function fixture(){
    else if(p.endsWith('/subdomain'))body=answer({enabled:false,previews_enabled:false});
    else if(p==='/workers/durable_objects/namespaces')body=answer([{id:'070c4a7708eb4592a3ded7c117a88225',class:'IndependentClosure',script:names[0],use_sqlite:true},{id:'6f30104244424152b800bc64d5f4cfac',class:'PrivateQaPreregistration',script:names[0],use_sqlite:true}],{page:1,per_page:1000,count:2,total_count:2,total_pages:1});
    else if(p.endsWith('/instances-v2'))body=answer([],{per_page:100});
-   else if(p==='/workflows')body=answer(structuredClone(AFW_FIXED_WORKFLOWS.map(s=>({id:s.id,name:s.name,script_name:s.script,class_name:s.className,script_deleted:false,schedules:[]}))),info(AFW_FIXED_WORKFLOWS));
+   else if(p==='/workflows')body=answer(structuredClone(AFW_FIXED_WORKFLOWS.map(s=>({id:s.id,name:s.name,script_name:s.script,class_name:s.className,script_deleted:false,schedules:[]}))),{...info(AFW_FIXED_WORKFLOWS),page:1,total_pages:1});
    else if(p.startsWith('/workflows/')){
     const s=AFW_FIXED_WORKFLOWS.find(s=>p.startsWith('/workflows/'+s.name));assert.ok(s);
     body=p.endsWith('/instances')?answer([{id:'terminal-'+s.name,status:'complete',workflow_id:s.id}],info([1])):answer({id:s.id,name:s.name,script_name:s.script,class_name:s.className,script_deleted:false,schedules:[]});
