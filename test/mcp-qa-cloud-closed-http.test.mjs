@@ -110,3 +110,13 @@ test('untrusted caller cannot add a target or arbitrary request option',()=>{
  const f=fixture();assert.throws(()=>createQaCloudClosedHttpAdapters({...f.options(),target:'foreign'}));assert.throws(()=>createQaCloudClosedHttpAdapters({...f.options(),pins:{...f.pins,qaCandidate:{...f.pins.qaCandidate,name:'other'}}}));
 });
 export {fixture};
+
+for(const field of ['githubToken','credential'])test('bounded opaque '+field+' supports current long dotted credentials without parsing or truncation',async()=>{
+ const f=fixture(),base=f.options,opaque='ghs_12345_'+'x'.repeat(310)+'.'+'y'.repeat(190)+'.z';f.options=()=>({...base(),[field]:opaque});
+ const r=await f.run('restore_known_closed_candidate');assert.equal(r.status,'restored_observed');assert.equal(posts(f).length,2);
+ const origin=field==='githubToken'?'https://api.github.com':'https://api.cloudflare.com';
+ assert.ok(f.requests.filter(x=>x.url.origin===origin).every(x=>x.init.headers.Authorization==='Bearer '+opaque));safe(r);
+});
+for(const field of ['githubToken','credential'])for(const value of ['', 'space inside', 'newline\ninside', 'carriage\rreturn', 'nul\0inside', 'tab\tinside', 'nonascii-é', 'x'.repeat(8193)])test('opaque '+field+' still rejects empty, unsafe or over-budget header input '+JSON.stringify(value.slice(0,24)),()=>{
+ const f=fixture();assert.throws(()=>createQaCloudClosedHttpAdapters({...f.options(),[field]:value}),/unavailable/i);assert.equal(f.requests.length,0);
+});
