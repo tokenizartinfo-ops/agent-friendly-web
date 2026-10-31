@@ -64,6 +64,12 @@ test('future preparation may read metadata before nominal start but never before
  const f=fixture();f.setWall(f.options.window.startAt-1);assert.deepEqual(await createPrivateQaOriginalPinsReader(f.options).read(),f.row);
  const g=fixture();g.setWall(g.options.window.startAt-600001);await assert.rejects(createPrivateQaOriginalPinsReader(g.options).read());assert.equal(g.sessions,0);
 });
-test('construction and callback overhead belong to the original lease',async()=>{
+test('entry and callback overhead belong to the original lease',async()=>{
  const f=fixture();let count=0;f.options.now=()=>f.options.window.startAt+(count++?50:0);await assert.rejects(createPrivateQaOriginalPinsReader(f.options).read());assert.equal(f.sessions,0);
+});
+
+for(const drift of ['deadline','binding','statement'])test('original metadata rechecks '+drift+' after successful Promise.race settlement',async()=>{
+ const f=fixture(),reader=createPrivateQaOriginalPinsReader(f.options),race=Promise.race;let changed=false;
+ Promise.race=function(values){return Reflect.apply(race,this,[values]).then(r=>{if(r?.processGeneration&&!changed){changed=true;if(drift==='deadline')f.setWall(f.options.window.expiresAt);else if(drift==='binding')f.options.db.withSession=()=>{};else f.bound.first=()=>{};}return r;});};
+ try{await assert.rejects(reader.read(),/Private QA original pins unavailable/);assert.equal(changed,true);assert.equal(f.calls,1);}finally{Promise.race=race;}
 });

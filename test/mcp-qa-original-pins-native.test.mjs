@@ -28,6 +28,7 @@ async function fixture(mode='valid'){
  let outbound=0;const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{PINS:JSON.stringify(pins)},d1Databases:{DB:'qa-original-pins'},outboundService:()=>{outbound++;throw Error('no outbound');}}));
  const db=await mf.getD1Database('DB'),setup={};
  if(mode==='consent-active')setup.consentExpiresAt=at+30000;
+ if(mode==='consent-before-process-expiry')setup.consentExpiresAt=retired.expiresAt-1;
  if(mode==='missing-close')setup.originalClosure=null;
  if(mode==='null-generation')setup.originalClosure={...retired,processGeneration:null};
  if(mode.startsWith('join-')){const key=mode.slice(5);setup.originalClosure={...retired,[key]:key==='grantId'?e.grantId:key==='image'?'different/image':key==='sourceRevision'?'f'.repeat(40):'e'.repeat(64)};}
@@ -45,6 +46,6 @@ test('actual primary D1 metadata supplies original pins to zero-reservation ARM 
  assert.equal(before.dossier_node_process_closures.length,2);assert.deepEqual(await f.snapshot(),before);assert.equal(f.outbound,0);
  }finally{await f.mf.dispose();}
 });
-for(const mode of ['process-active','future-close','close-before-creation','malformed-generation','wrong-program','wrong-source','second-admission','consent-active','missing-close','null-generation','join-grantId','join-containerId','join-processGeneration','join-programHash','join-sourceRevision','join-image'])test('native original derivation denies '+mode+' with all history retained',async()=>{
+for(const mode of ['process-active','future-close','close-before-creation','malformed-generation','wrong-program','wrong-source','second-admission','consent-active','consent-before-process-expiry','missing-close','null-generation','join-grantId','join-containerId','join-processGeneration','join-programHash','join-sourceRevision','join-image'])test('native original derivation denies '+mode+' with all history retained',async()=>{
  const f=await fixture(mode);try{const before=await f.snapshot();assert.deepEqual(await f.read(),{status:'blocked'});assert.deepEqual(await f.snapshot(),before);assert.equal(f.outbound,0);}finally{await f.mf.dispose();}
 });
