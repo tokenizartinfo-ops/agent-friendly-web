@@ -78,3 +78,18 @@ test('constructor refuses unexpected scope and malformed options',async()=>{
  const {options}=await setup();for(const delta of [{timeoutMs:5001},{timeoutMs:0},{extra:true},{readGeneration:null}])assert.throws(()=>createPrivateQaNamedAuthorization({...options,...delta}));
  for(const delta of [{planHash:'bad'},{sequence:0},{expiresAt:options.pins.startAt},{expiresAt:options.pins.startAt+600001}])assert.throws(()=>createPrivateQaNamedAuthorization({...options,pins:{...options.pins,...delta}}));
 });
+
+test('successful stages release the old parent listener before the runtime aborts that child signal',async()=>{
+ const {make}=await setup(),a=make(),parent=new AbortController();assert.equal(await invoke(a,'workflow_admission',parent.signal),true);parent.abort();assert.equal(await invoke(a,'operator_credential'),true);
+});
+test('ARM before the named start remains valid once the original named window begins',async()=>{
+ const f=generationFixture(),at=f.now();f.capsule.startAt=at+1000;const ledger=createPrivateQaGenerationLedger(f.options()),armed=await ledger.arm();assert.equal(armed.status,'armed');f.setNow(at+1000);
+ const observer=createPrivateQaGenerationObserver({storage:f.storage,capsule:JSON.stringify(f.capsule),now:f.now,timeoutMs:5000});
+ const a=createPrivateQaNamedAuthorization({executionPin:createPrivateQaExecutionPin({...f.pinOptions,context:'workflow'}),readGeneration:async()=>JSON.stringify(await observer.read()),pins:{planHash:armed.planHash,sequence:armed.sequence,startAt:f.capsule.startAt,expiresAt:f.capsule.expiresAt},now:f.now,timeoutMs:5000});assert.equal(await invoke(a),true);
+});
+test('overlapping calls latch both unavailable without a second metadata read',async()=>{
+ const {options,observer,make}=await setup();let release,reads=0;const gate=new Promise(r=>{release=r;});options.readGeneration=async()=>{reads++;await gate;return JSON.stringify(await observer.read());};const a=make(),first=invoke(a);assert.equal(await invoke(a,'operator_credential'),false);assert.equal(await Promise.race([first,new Promise(r=>setTimeout(()=>r('hung'),180))]),false);release();assert.equal(await first,false);assert.equal(reads,1);
+});
+test('UTF8 receipt cap precedes parsing, and malformed text never invokes accessors',async()=>{
+ const {options,make}=await setup();options.readGeneration=async()=>JSON.stringify({value:'é'.repeat(1100)});assert.equal(await invoke(make()),false);
+});

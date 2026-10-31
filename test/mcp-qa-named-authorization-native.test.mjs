@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {generationFixture} from './fixtures/qa-generation-ledger.mjs';
+import {createHash} from 'node:crypto';
+import {rehearseExactNamedConfirmation} from './fixtures/named-confirmation-native-rehearsal.mjs';
 const entry=`import {DurableObject,WorkflowEntrypoint} from 'cloudflare:workers';
 import {createPrivateQaGenerationLedger,createPrivateQaGenerationObserver} from './lib/mcp-qa-generation-ledger.mjs';
 import {createPrivateQaExecutionPin} from './lib/mcp-qa-execution-identity.mjs';
@@ -35,4 +37,25 @@ test('native Workflow rereads actual DO generation through JSON RPC and detects 
    if(mode!=='withdraw')assert.equal(await stub.rows(),before);
   }assert.equal(outbound,0);assert.equal((await mf.dispatchFetch('https://fixture.invalid/')).status,404);
  }finally{await mf.dispose();}
+});
+
+const digest=x=>createHash('sha256').update(x).digest('hex');
+const inertScript='export default{fetch(){return new Response(null,{status:404});}}';
+const artifact={script:inertScript,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:digest(inertScript),sourceCheck:'git-inputs-before-after-v1'};
+function nominalBuild(deny){
+ return async bundle=>{
+  const source="import {WorkflowEntrypoint} from 'cloudflare:workers';\nimport {runReleaseWorkflow} from './lib/mcp-release-runtime.mjs';\nimport {createPrivateQaNamedAuthorization} from './lib/mcp-qa-named-authorization.mjs';\nimport {createPrivateQaGenerationLedger,createPrivateQaGenerationObserver} from './lib/mcp-qa-generation-ledger.mjs';\nimport {createPrivateQaExecutionPin} from './lib/mcp-qa-execution-identity.mjs';\nimport {generationFixture} from './test/fixtures/qa-generation-ledger.mjs';\nexport {AfwReleaseOperator} from './worker/mcp-release/index.mjs';\nconst bundle="+JSON.stringify(bundle)+";\nexport class AfwReleaseWorkflow extends WorkflowEntrypoint{async run(event,step){const f=generationFixture();f.capsule.startAt=bundle.policy.startAt;f.capsule.expiresAt=bundle.policy.expiresAt;f.now=Date.now;const ledger=createPrivateQaGenerationLedger(f.options()),armed=await ledger.arm();if(armed.status!=='armed')throw Error('fixture ARM unavailable');const observer=createPrivateQaGenerationObserver({storage:f.storage,capsule:JSON.stringify(f.capsule),now:Date.now,timeoutMs:5000}),pin=createPrivateQaExecutionPin({...f.pinOptions,context:'workflow'}),stages=[];const fence=createPrivateQaNamedAuthorization({executionPin:pin,readGeneration:async()=>JSON.stringify(await observer.read()),pins:{planHash:armed.planHash,sequence:armed.sequence,startAt:f.capsule.startAt,expiresAt:f.capsule.expiresAt},now:Date.now,timeoutMs:5000});const authorize=async(stage,signal)=>{stages.push(stage);if(stage==="+JSON.stringify(deny)+")await ledger.withdraw();return fence.authorize(stage,signal);};const output=await runReleaseWorkflow({bundle,env:this.env,event,step,authorize});return{...output,authorizationStages:stages};}}\nexport default{fetch(){return new Response(null,{status:404});}};";
+  const built=await build({stdin:{contents:source,resolveDir:process.cwd(),sourcefile:'qa-named-runtime-fence.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',mainFields:['module','main'],external:['node:*','cloudflare:*'],legalComments:'none',define:{'globalThis.__AFW_RELEASE_OPERATOR_BUNDLE__':JSON.stringify(bundle)}});
+  return{script:built.outputFiles[0].text,planHash:digest(JSON.stringify(bundle))};
+ };
+}
+test('unmounted native named runtime traverses all18 hooks and continues through its own immutable reservation',async()=>{
+ const r=await rehearseExactNamedConfirmation({artifact,build:nominalBuild(null),mode:'confirmed',reserve:'true'});
+ assert.equal(r.output.status,'confirmed',JSON.stringify(r.output));assert.equal(r.reservationCount,1);assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});assert.equal(new Set(r.output.authorizationStages).size,18);assert.ok(r.output.authorizationStages.includes('successor_after_write'));assert.equal(r.output.operationalReadiness,false);
+});
+test('unmounted native named runtime stops at actual generation withdrawal while preserving admitted effects',async()=>{
+ for(const [stage,counts,reservations]of [['activation_before_attempt',{attempts:0,receipts:0,acceptances:0},0],['successor_after_write',{attempts:1,receipts:1,acceptances:1},1]]){
+  const r=await rehearseExactNamedConfirmation({artifact,build:nominalBuild(stage),mode:'confirmed',reserve:'true'});
+  assert.equal(r.output.status,'uncertain',JSON.stringify(r.output));assert.deepEqual(r.counts,counts);assert.equal(r.reservationCount,reservations);assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);
+ }
 });
