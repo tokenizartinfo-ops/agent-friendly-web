@@ -36,13 +36,14 @@ async function fixture(mode='absent'){
  if(mode==='unarmed')row.armedAt=null;
  if(mode==='permuted'){row.policy=JSON.stringify(Object.fromEntries(Object.entries(JSON.parse(row.policy)).reverse()));row.planHash=createHash('sha256').update(row.policy).digest('hex');}
  if(mode==='malformed')row={purpose:legacy,private:'PRIVATE-LEGACY-NO-OUTPUT',policy:'PRIVATE-POLICY-NO-OUTPUT'};
+ if(mode==='incomplete_complete')journal={purpose:restore,phase:'complete'};
  if(mode==='uncertain')journal={purpose:restore,planHash:f.legacy.planHash,phase:'issued',proofHash:'f'.repeat(64),issuedAt:JSON.parse(f.legacy.policy).startAt+1,deploymentId:null,completedAt:null};
  await stub.seedFixture(row,journal,mode==='generation',mode==='null');
  const before=await stub.rowsFixture();
  const run=async()=>{const instance=await FLOW.create({id:'afw-qa-legacy-inspect-'+id,params:{operation:'inspect_legacy',inspectionId:id}});let state;const end=Date.now()+12000;do{state=await instance.status();if(['complete','errored','terminated'].includes(state.status))break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<end);assert.equal(state.status,'complete',JSON.stringify(state));return state.output;};
  return{mf,stub,run,before,row,journal,ns,context,get outbound(){return outbound;}};
 }
-for(const mode of ['absent','armed','permuted','null','unarmed','uncertain','generation','malformed'])test('actual inherited closed DO and Workflow inspect '+mode+' technical history without touching it',async()=>{
+for(const mode of ['absent','armed','permuted','null','unarmed','uncertain','generation','malformed','incomplete_complete'])test('actual inherited closed DO and Workflow inspect '+mode+' technical history without touching it',async()=>{
  const f=await fixture(mode);try{
  assert.deepEqual(JSON.parse(await f.stub.inheritedFixture()),{alarm:'function',arm:'function',status:'function'});
  const r=await f.run();assert.equal(r.status,'observed');assert.equal(r.purpose,'afw.qa-legacy-inspection.v1');assert.equal(r.context,'workflow');assert.equal(r.actorContext,'durable_object');assert.equal(r.runtimeVersionId,version);
@@ -52,6 +53,7 @@ for(const mode of ['absent','armed','permuted','null','unarmed','uncertain','gen
  if(mode==='armed'||mode==='permuted'){assert.equal(r.legacy.present,true);assert.equal(r.legacy.timeShapeReady,true);assert.equal(r.legacy.armedAt,f.row.armedAt);}
  if(mode==='unarmed'){assert.equal(r.legacy.present,true);assert.equal(r.legacy.timeShapeReady,false);assert.equal(r.legacy.armedAt,null);}
  if(mode==='uncertain'){assert.equal(r.hasUncertainJournal,true);assert.equal(r.journals.find(x=>x.key==='restoration').phase,'issued');}
+ if(mode==='incomplete_complete'){assert.equal(r.hasUncertainJournal,true);assert.equal(r.journals.find(x=>x.key==='restoration').uncertain,true);}
  if(mode==='generation'){assert.equal(r.generation.headPresent,true);assert.equal(r.generation.infoCount,1);assert.equal(r.generation.controlCount,1);assert.equal(r.generation.requiresReview,true);}
  if(mode==='null'){assert.equal(r.legacy.present,true);assert.equal(r.legacy.shape,'unsupported');assert.equal(r.legacy.timeShapeReady,false);}
  if(mode==='malformed'){assert.equal(r.legacy.shape,'unsupported');assert.equal(r.legacy.timeShapeReady,false);}
