@@ -25,6 +25,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Qualify sealed closed QA source without publication
+        run: node --test test/mcp-qa-sealed-build.test.mjs test/mcp-qa-sealed-build-native.test.mjs
       - name: Qualify closed QA context without authority
         run: node --test test/mcp-qa-closed-context.test.mjs test/mcp-qa-closed-context-native.test.mjs
       - name: Qualify generation metadata without runtime effects
