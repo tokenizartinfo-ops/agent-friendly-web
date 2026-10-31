@@ -141,3 +141,13 @@ for(const bad of ['second-active','duplicate-id','repeated-cursor','over-four-pa
 for(const path of [QF+'/instances',ROOT+'/workflows/afw-release-administrative/instances'])for(const variant of ['foreign','absent'])test('listed instance must belong to the exact fixed definition '+path+' '+variant,async()=>{
  const {createSuccessorCanaryRestorer}=await load(),f=restorationFixture();f.options.request=async x=>{const r=await f.request(x);if(x.path===path){if(variant==='foreign')r.result[0].workflow_id='77777777-7777-4777-8777-777777777777';else delete r.result[0].workflow_id;}return r;};assert.equal((await createSuccessorCanaryRestorer(f.options).advance()).status,'blocked');assert.equal(f.posts,0);assert.equal(f.storage.puts,0);
 });
+
+for(const path of [QF+'/instances',ROOT+'/workflows/afw-release-administrative/instances'])for(const variant of ['undercount','changed-total','changed-pages'])test('shared complete inventory must reject '+variant+' before canary issue '+path,async()=>{
+ const {createSuccessorCanaryRestorer}=await load(),f=restorationFixture();f.options.request=async x=>{
+  const r=await f.request(x);if(x.path!==path)return r;const second=!!x.query?.cursor;
+  r.result=[{id:second?'second':'first',workflow_id:path===QF+'/instances'?'707e5440-2af3-4a0c-8fff-d40efc9895c4':'0ee9231b-8952-46bd-8124-a0c5dbb06dd0',status:'complete'}];
+  r.result_info={per_page:100,count:1,total_count:variant==='undercount'?0:variant==='changed-total'&&second?0:2,...variant==='changed-pages'?{page:second?2:1,total_pages:second?2:3}:{}};
+  if(variant!=='undercount'&&!second)r.result_info.cursor='next-page';return r;
+ };
+ assert.equal((await createSuccessorCanaryRestorer(f.options).advance()).status,'blocked');assert.equal(f.posts,0);assert.equal(f.storage.puts,0);
+});
