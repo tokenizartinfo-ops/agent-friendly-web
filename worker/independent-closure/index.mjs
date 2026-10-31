@@ -1,3 +1,4 @@
+import {readPrivateQaNamedPacket,runPrivateQaNamedPacketObservation} from '../../lib/mcp-qa-named-preflight.mjs';
 import {readPrivateQaCurrentGeneration} from '../../lib/mcp-qa-generation-resolver.mjs';
 import {observePrivateQaClosedActor,runPrivateQaClosedContext} from '../../lib/mcp-qa-closed-context.mjs';
 import {createPrivateClosureReaderProbe,runPrivateClosureReaderProbeWorkflow,createPrivateClosurePublisherProbe,runPrivateClosurePublisherProbeWorkflow} from '../../lib/mcp-closure-reader-probe.mjs';
@@ -150,7 +151,7 @@ export class PrivateQaBootstrap extends WorkflowEntrypoint {
   return createPrivateAdminBootstrap({install:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).installOwn();try{return {state:value?.state};}finally{value?.[Symbol.dispose]?.();}},readControl:()=>control(this.env),readRegistered:async ref=>(await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).read())?.registration?.plan?.baselineRef===ref,register:ref=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).register(ref),appendOriginals:(ref,sequence,originals)=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).appendOperatorObservation(ref,sequence,originals),readOriginals:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).readOperatorObservation();try{return structuredClone(value);}finally{value?.[Symbol.dispose]?.();}}}).run(event.payload,step);}
 }
 export class PrivateQaNamedConfirmation extends WorkflowEntrypoint {
- run(event,step){return runPrivateQaClosedContext({env:this.env,event,step});}
+ run(event,step){let p=event?.payload;try{if(typeof p==='string'&&p.length<=256)p=JSON.parse(p);}catch{/* Strict handlers remain closed. */}if(p?.operation==='observe_named_packet')return runPrivateQaNamedPacketObservation({env:this.env,event,step});return runPrivateQaClosedContext({env:this.env,event,step});}
 }
 export function observePrivateQa(env,params){const actor=()=>env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa'));
  // workerd adds a disposable RPC handle to otherwise plain metadata. Remove
@@ -174,6 +175,7 @@ export class PrivateQaCatalog extends DurableObject {
 // Private host only. Missing catalog/custody stays closed. No caller approval,
 // provisioning, registration, HTTP routes or implicit enrollment.
 export class IndependentClosure extends DurableObject {
+ readOwnQaNamedPacket(...args){return readPrivateQaNamedPacket({env:this.env,ctx:this.ctx,args});}
  readOwnQaGeneration(...args){return readPrivateQaCurrentGeneration({env:this.env,ctx:this.ctx,args});}
  observeOwnQaClosedContext(payload){return JSON.stringify(observePrivateQaClosedActor({env:this.env,ctx:this.ctx,payload}));}
  #mcpPublisher;
