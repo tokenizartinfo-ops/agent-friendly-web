@@ -10,11 +10,13 @@ async function fixture(mode='absent'){
  const now=Date.now(),context={purpose:'afw.qa-legacy-inspection-context.v1',id,sourceRevision:'a'.repeat(40),baselineVersionId:'c570b60b-95dc-48e1-89f3-9c4651691dbc',baselineModuleHash:'4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f',startAt:now-1000,expiresAt:now+300000};
  if(mode==='expired')context.expiresAt=now-1;
  const entry=`import {IndependentClosure,PrivateQaBootstrap,PrivateQaPreregistration,PrivateQaNamedConfirmation} from './scripts/qa-legacy-inspection-wrapper.mjs';
- export {PrivateQaBootstrap,PrivateQaPreregistration,PrivateQaNamedConfirmation};
+ export {PrivateQaPreregistration,PrivateQaNamedConfirmation};
+ export class FixtureBootstrap extends PrivateQaBootstrap{async run(event,step){if(this.env.SYNTHETIC_MODE==='cached'){const ns=this.env.AFW_INDEPENDENT_CLOSURE,raw=await ns.get(ns.idFromName('afw-own-successor-closure-v1')).readLegacyInspection('e'.repeat(64),Date.now()+4000);return super.run(event,{do:async()=>raw});}return super.run(event,step);}}
  export class FixtureClosure extends IndependentClosure{
   constructor(ctx,env){const e={...env};for(const key of ['AFW_QA_DB','AFW_QA_DOSSIER_DB','AFW_MCP_CLOSURE_NODE','AFW_MCP_CLOSURE_READ_TOKEN','AFW_MCP_CLOSURE_PUBLISH_TOKEN'])Object.defineProperty(e,key,{enumerable:true,get(){throw Error('forbidden data or authority');}});super(ctx,e);}
   async seedFixture(legacy,journal,generation){await this.ctx.storage.put('history-sentinel',{preserve:'PRIVATE-NO-OUTPUT'});if(legacy!==null)await this.ctx.storage.put('afw.canary-restoration-control.v1',legacy);if(journal)await this.ctx.storage.put('afw.successor-canary-restoration.v1',journal);if(generation){await this.ctx.storage.put('afw.qa-generation-head.v2',{purpose:'afw.qa-generation-head.v2',sequence:1,planHash:'b'.repeat(64),infoHash:'c'.repeat(64)});await this.ctx.storage.put('afw.qa-generation-info.v2:'+'b'.repeat(64),{capsule:'PRIVATE-CAPSULE-NO-OUTPUT'});await this.ctx.storage.put('afw.qa-generation-control.v2:'+'b'.repeat(64),{phase:'withdrawn'});}}
   async rowsFixture(){return JSON.stringify([...await this.ctx.storage.list()]);}
+  async readLegacyInspection(...args){const raw=await super.readLegacyInspection(...args);if(this.env.SYNTHETIC_MODE==='late')await new Promise(r=>setTimeout(r,5100));return raw;}
   inheritedFixture(){return{alarm:typeof this.alarm,arm:typeof this.armOwnCanaryClosure,status:typeof this.readOwnCanaryClosureControl};}
  }
  export default{fetch(){return new Response(null,{status:404});}};`;
@@ -23,8 +25,8 @@ async function fixture(mode='absent'){
  b.onResolve({filter:/^\.\/inspection-context\.mjs$/},()=>({path:'context',namespace:'inspection-fixture'}));
  b.onLoad({filter:/.*/,namespace:'inspection-fixture'},args=>({contents:args.path==='context'?'export const inspection=Object.freeze('+JSON.stringify(context)+');':"export {IndependentClosure,PrivateQaBootstrap,PrivateQaPreregistration,PrivateQaNamedConfirmation,default} from './worker/independent-closure/index.mjs';",resolveDir:process.cwd(),loader:'js'}));
  }}]});
- let outbound=0;const bindings={AFW_QA_VERSION:{id:version},...Object.fromEntries(PRIVATE_QA_CLOSED_FLAGS.map(k=>[k,'false'])),...Object.fromEntries(policyKeys.map(k=>[k,'']))};if(mode==='open')bindings.AFW_MCP_CLOSURE_ENABLED='true';
- const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings,durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'FixtureClosure',useSQLite:true,uniqueKey:'legacy-inspection-fixed'},AFW_QA_PREREGISTRY:{className:'PrivateQaPreregistration',useSQLite:true,uniqueKey:'legacy-inspection-prereg'}},workflows:{FLOW:{name:'afw-own-qa-private-bootstrap',className:'PrivateQaBootstrap'}},outboundService:()=>{outbound++;throw Error('outbound forbidden');}}));
+ let outbound=0;const bindings={SYNTHETIC_MODE:mode,AFW_QA_VERSION:{id:version},...Object.fromEntries(PRIVATE_QA_CLOSED_FLAGS.map(k=>[k,'false'])),...Object.fromEntries(policyKeys.map(k=>[k,'']))};if(mode==='open')bindings.AFW_MCP_CLOSURE_ENABLED='true';
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings,durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'FixtureClosure',useSQLite:true,uniqueKey:'legacy-inspection-fixed'},AFW_QA_PREREGISTRY:{className:'PrivateQaPreregistration',useSQLite:true,uniqueKey:'legacy-inspection-prereg'}},workflows:{FLOW:{name:'afw-own-qa-private-bootstrap',className:'FixtureBootstrap'}},outboundService:()=>{outbound++;throw Error('outbound forbidden');}}));
  const {AFW_INDEPENDENT_CLOSURE:ns,FLOW}=await mf.getBindings(),stub=ns.get(ns.idFromName(slot)),f=generationFixture();
  let row=mode==='absent'?null:structuredClone(f.legacy),journal=null;
  if(mode==='unarmed')row.armedAt=null;
@@ -51,9 +53,9 @@ for(const mode of ['absent','armed','unarmed','uncertain','generation','malforme
  assert.equal(await f.stub.rowsFixture(),f.before);assert.equal(f.outbound,0);assert.equal((await f.mf.dispatchFetch('https://fixture.invalid')).status,404);
  }finally{await f.mf.dispose();}
 });
-for(const mode of ['open','expired'])test('closed inspection rejects '+mode+' without changing history',async()=>{
+for(const mode of ['open','expired','cached','late'])test('closed inspection rejects '+mode+' without changing history',async()=>{
  const f=await fixture(mode);try{assert.equal((await f.run()).status,'blocked');assert.equal(await f.stub.rowsFixture(),f.before);assert.equal(f.outbound,0);}finally{await f.mf.dispose();}
 });
 test('inspection target, argument and deadline cannot be selected by a caller',async()=>{
- const f=await fixture();try{for(const args of [[],['f'.repeat(64),Date.now()+5000],[id,Date.now()+6000],[id,0],[id,Date.now()+5000,{}]])assert.equal(JSON.parse(await f.stub.readLegacyInspection(...args)).status,'blocked');const foreign=f.ns.get(f.ns.idFromName('foreign-actor'));assert.equal(JSON.parse(await foreign.readLegacyInspection(id,Date.now()+4000)).status,'blocked');assert.equal(await f.stub.rowsFixture(),f.before);assert.equal(f.outbound,0);}finally{await f.mf.dispose();}
+ const f=await fixture();try{for(const args of [[],['f'.repeat(64),Date.now()+5000],[id,Date.now()+6000],[id,0],[id,Date.now()+5000,{}]])assert.equal(JSON.parse(await f.stub.readLegacyInspection(...args)).status,'blocked');const foreign=f.ns.get(f.ns.idFromName('foreign-actor'));await assert.rejects(foreign.readLegacyInspection(id,Date.now()+4000),/forbidden data or authority/);assert.equal(await f.stub.rowsFixture(),f.before);assert.equal(f.outbound,0);}finally{await f.mf.dispose();}
 });
