@@ -86,3 +86,9 @@ for(const initial of [NaN,-1])test('outer clock rejects invalid monotonic origin
  Object.defineProperty(performance,'now',{configurable:true,value:()=>++n===1?initial:real()});
  try{assert.equal((await read(make(options),armed.planHash)).status,'blocked');}finally{if(original)Object.defineProperty(performance,'now',original);else delete performance.now;}
 });
+
+for(const drift of ['deadline','metadata'])test('settlement after inner success revalidates '+drift,async()=>{
+ const {f,armed,options}=await fixture(),original=Promise.race,at=f.now();let changed=false;
+ Promise.race=function(values){return Reflect.apply(original,this,[values]).then(value=>{if(!changed&&typeof value==='string'&&JSON.parse(value).status==='armed'){changed=true;if(drift==='deadline')f.setNow(at+5000);else f.env.AFW_QA_VERSION={id:f.env.AFW_QA_VERSION.id};}return value;});};
+ try{const r=await read(make(options),armed.planHash);assert.equal(changed,true);assert.equal(r.status,'blocked');}finally{Promise.race=original;}
+});
