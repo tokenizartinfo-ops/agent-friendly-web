@@ -77,3 +77,12 @@ test('primary HEAD narrows INFO lookup and read path never accesses put',async()
  const {f,armed,options}=await fixture(),original=f.storage,keys=[];options.ctx.storage={transaction:fn=>original.transaction(t=>fn(Object.defineProperty({get:async k=>{keys.push(k);return t.get(k);},list:t.list},'put',{get(){throw Error('put forbidden');}})))};
  const o=make(options);assert.equal((await read(o,'e'.repeat(64))).status,'blocked');assert.deepEqual(keys,[HEAD]);keys.length=0;assert.equal((await read(o,armed.planHash)).status,'armed');assert.equal(keys[0],HEAD);assert.equal(keys[1],INFO+armed.planHash);
 });
+
+test('outer clock rejects regression before primary lookup',async()=>{
+ const {f,armed,options}=await fixture(),at=f.now();let n=0;options.now=()=>++n===1?at+1:at;const before=f.storage.transactions;assert.equal((await read(make(options),armed.planHash)).status,'blocked');assert.equal(f.storage.transactions,before);
+});
+for(const initial of [NaN,-1])test('outer clock rejects invalid monotonic origin '+String(initial),async()=>{
+ const {armed,options}=await fixture(),original=Object.getOwnPropertyDescriptor(performance,'now'),real=performance.now.bind(performance);let n=0;
+ Object.defineProperty(performance,'now',{configurable:true,value:()=>++n===1?initial:real()});
+ try{assert.equal((await read(make(options),armed.planHash)).status,'blocked');}finally{if(original)Object.defineProperty(performance,'now',original);else delete performance.now;}
+});

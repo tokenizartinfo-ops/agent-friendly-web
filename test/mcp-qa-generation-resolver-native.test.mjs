@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {generationFixture,hash} from './fixtures/qa-generation-ledger.mjs';
+import {createPrivateQaExecutionPin} from '../lib/mcp-qa-execution-identity.mjs';
+import {createPrivateQaNamedAuthorization} from '../lib/mcp-qa-named-authorization.mjs';
 test('actual IndependentClosure resolves only its fixed current native generation without writes or outbound',async()=>{
  const api=await import('../lib/mcp-qa-generation-resolver.mjs').catch(()=>({}));assert.equal(typeof api.createPrivateQaGenerationResolver,'function','resolver required before native build');
  const revision='a'.repeat(40),version='11111111-1111-4111-8111-111111111111';
@@ -23,6 +25,7 @@ export default{fetch(){return new Response(null,{status:404});}};`;
  const f=generationFixture(),at=Date.now();f.capsule.startAt=at-1000;f.capsule.expiresAt=at+60000;const raw=JSON.stringify(f.capsule),plan=hash('afw.qa-generation-plan.v2\n'+raw);
  let ns=(await mf.getBindings()).AFW_INDEPENDENT_CLOSURE,stub=ns.get(ns.idFromName('afw-own-successor-closure-v1'));assert.equal((await stub.seedFixture(raw,f.legacy)).status,'armed');const before=await stub.rowsFixture();
  assert.equal(typeof stub.readOwnQaGeneration,'function');let result=await stub.readOwnQaGeneration(plan);assert.equal(typeof result,'string');let r=JSON.parse(result);assert.equal(r.status,'armed');assert.equal(r.runtimeVersionId,version);assert.equal(r.sourceRevision,revision);assert.equal(r.storedContext,'durable_object');assert.equal(r.authorizesEffects,false);assert.equal(r.operationalReadiness,false);assert.deepEqual(await stub.rowsFixture(),before);
+ const executionPin=createPrivateQaExecutionPin({env:{AFW_QA_VERSION:{id:version}},expectedVersionId:version,sourceRevision:revision,context:'workflow'}),authorization=createPrivateQaNamedAuthorization({executionPin,readGeneration:async()=>stub.readOwnQaGeneration(plan),pins:{planHash:plan,sequence:1,startAt:f.capsule.startAt,expiresAt:f.capsule.expiresAt},now:Date.now,timeoutMs:5000});assert.equal(await authorization.authorize('workflow_admission',new AbortController().signal),true);
  const foreign=ns.get(ns.idFromName('foreign'));assert.equal(JSON.parse(await foreign.readOwnQaGeneration(plan)).status,'blocked');assert.equal(JSON.parse(await stub.readOwnQaGeneration(f.capsule.bundleHash)).status,'blocked');
  await mf.setOptions(options('22222222-2222-4222-8222-222222222222'));ns=(await mf.getBindings()).AFW_INDEPENDENT_CLOSURE;stub=ns.get(ns.idFromName('afw-own-successor-closure-v1'));assert.equal(JSON.parse(await stub.readOwnQaGeneration(plan)).status,'blocked');assert.deepEqual(await stub.rowsFixture(),before);
  assert.equal(outbound,0);assert.equal((await mf.dispatchFetch('https://fixture.invalid/')).status,404);
