@@ -251,3 +251,26 @@ test('real frozen builder preserves the canonical nonsecret prepared-save refere
  const policy=inertNamedConfirmationPolicy(artifact),key='78194191-9aa9-4c32-a77a-123456789abc';policy.observation.configuration.bindings.push({name:'AFW_DOSSIER_OWN_SAVE_KEY',type:'plain_text',text:key});policy.plan.configurationHash=activationConfigurationHash(policy.observation.configuration);
  const built=await buildMcpNamedConfirmation({artifact,policy});assert.equal(built.workerHash,artifact.workerHash);assert.equal(built.artifactSourceRevision,artifact.sourceRevision);assert.equal(built.inertPreparation,true);assert.equal(built.startAt,0);assert.equal(built.expiresAt,1);assert.equal(built.remotePublished,false);
 });
+
+test('exact historical artifact builds the separate current QA context within its own cap',async()=>{
+ const {buildPrivateQaNamedContext}=await import('../scripts/build-private-qa-named-context.mjs');
+ const {execFileSync}=await import('node:child_process'),revision=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+ const built=await buildPrivateQaNamedContext({cwd:process.cwd(),sourceRevision:revision,artifact}),m=built.manifest,pins=JSON.parse(readFileSync('scripts/mcp-confirmation-frozen-artifact.json','utf8'));
+ assert.equal(m.sourceRevision,revision);assert.equal(m.artifactSourceRevision,pins.sourceRevision);assert.equal(m.artifactWorkerHash,pins.workerHash);assert.equal(m.artifactWorkerBytes,pins.workerBytes);assert.equal(m.module.sha256,hash(built.script));assert.equal(m.module.bytes,Buffer.byteLength(built.script));assert.equal(m.module.maximumBytes,3145728);assert.ok(m.module.bytes<=3145728);assert.ok(m.module.bytes>pins.workerBytes);assert.equal(m.rollback.sha256,hash(built.rollbackScript));assert.ok(m.rollback.bytes<=1048576);assert.equal(m.containsLatePolicy,false);assert.equal(m.containsGrant,false);assert.equal(m.containsPacket,false);assert.equal(m.remotePublished,false);assert.equal(m.invoked,false);assert.equal(m.operationalReadiness,false);
+ let outbound=0;const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:built.script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],outboundService(){outbound++;throw Error('fixed context build cannot request outbound');}}));
+ try{assert.equal((await mf.dispatchFetch('https://fixture.invalid/')).status,404);assert.equal(outbound,0);}finally{await mf.dispose();}
+ console.log('FIXED_QA_CONTEXT_MEASURED',JSON.stringify(m));
+});
+
+for(const path of ['wrangler.independent-closure-qa.jsonc','wrangler.independent-closure-qa.rollback.jsonc'])test('fixed QA context detects config byte drift across the final real compiler: '+path,async()=>{
+ const {readFile,writeFile}=await import('node:fs/promises'),{execFileSync}=await import('node:child_process');
+ const revision=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),before=await readFile(path),key=Symbol.for('afw.ci.qa-fixed-context.compile-drift');
+ const target=new URL('../scripts/build-private-qa-named-context.mjs?ci-config-drift='+encodeURIComponent(path),import.meta.url).href,wrapper=new URL('./fixtures/qa-fixed-context-compile-drift.mjs',import.meta.url).href;let crossed=0;
+ globalThis[key]=async()=>{crossed++;await writeFile(path,Buffer.concat([before,Buffer.from('\n')]));};
+ const hooks=registerHooks({resolve(specifier,context,nextResolve){if(context.parentURL===target&&specifier==='esbuild')return{url:wrapper,shortCircuit:true};return nextResolve(specifier,context);}});
+ try{
+ const {buildPrivateQaNamedContext}=await import(target);
+ await assert.rejects(()=>buildPrivateQaNamedContext({cwd:process.cwd(),sourceRevision:revision,artifact}),{message:'Fixed QA artifact context build unavailable'});
+ assert.equal(crossed,1,'must cross exactly the final actual compiler, not the preceding closed builds');
+ }finally{hooks.deregister();delete globalThis[key];await writeFile(path,before);assert.deepEqual(await readFile(path),before);}
+});

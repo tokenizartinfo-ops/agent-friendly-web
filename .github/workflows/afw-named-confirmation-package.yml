@@ -145,6 +145,8 @@ jobs:
           writeFileSync(directory+'private-template-build.json',JSON.stringify(receipt,null,2)+'\n');
           console.log(JSON.stringify(receipt));
           NODE
+      - name: Build the separate fixed artifact QA context without late data
+        run: node scripts/build-private-qa-named-context.mjs "$AFW_PACKAGE_SOURCE" output/mcp-release-confirmation/frozen-artifact.json
       - name: Qualify exact artifact packaging with native closed Workflow
         run: node --test test/mcp-named-confirmation-package.native.mjs
       - name: Compile the current operator around the frozen artifact
@@ -193,6 +195,12 @@ jobs:
         with:
           name: afw-named-public-template-${{ env.AFW_PACKAGE_SOURCE }}
           path: source/output/mcp-named-public-template/
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afw-qa-fixed-context-${{ env.AFW_PACKAGE_SOURCE }}
+          path: source/output/qa-fixed-artifact/
           if-no-files-found: error
           retention-days: 7
       - uses: actions/upload-artifact@v4
