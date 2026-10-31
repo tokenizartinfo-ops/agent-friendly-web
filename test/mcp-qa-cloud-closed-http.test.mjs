@@ -140,3 +140,28 @@ test('response freshness rejection is observable without returning a header or b
 test('CLI retains only the fixed diagnostic object alongside a blocked result',async()=>{
  const cli=await (await import('node:fs/promises')).readFile(new URL('../scripts/run-qa-cloud-closed-rollback.mjs',import.meta.url),'utf8');assert.match(cli,/httpDiagnostic:adapters\.readDiagnostic\(\)/);assert.doesNotMatch(cli,/catch\s*\(\s*(?:error|err)\s*\)[\s\S]*console\./);
 });
+
+for(const mode of ['provider-shaped','errors-null','messages-null','pages-omitted'])test('fixed namespace GET accepts the complete observed legacy shape '+mode,async()=>{
+ const f=fixture();f.mutate=({url,response})=>{if(!url.pathname.endsWith('/workers/durable_objects/namespaces'))return;if(['provider-shaped','errors-null'].includes(mode))response.body.errors=null;if(['provider-shaped','messages-null'].includes(mode))response.body.messages=null;if(['provider-shaped','pages-omitted'].includes(mode))delete response.body.result_info.total_pages;};
+ const r=await f.run('restore_known_closed_candidate');assert.equal(r.status,'restored_observed');assert.equal(posts(f).length,2);safe(r);
+});
+test('a nonempty namespace page cannot claim zero total pages',async()=>{
+ const f=fixture();f.mutate=({url,response})=>{if(url.pathname.endsWith('/namespaces'))response.body.result_info.total_pages=0;};const r=await f.run('restore_known_closed_candidate');assert.equal(r.status,'blocked');assert.equal(posts(f).length,0);
+});
+for(const mode of ['false-success','error-entry','missing-errors','wrong-errors','missing-messages','wrong-messages','missing-total-count','incomplete-total','unknown-remainder'])test('namespace compatibility does not accept '+mode,async()=>{
+ const f=fixture();f.mutate=({url,response})=>{
+  if(!url.pathname.endsWith('/workers/durable_objects/namespaces'))return;response.body.errors=null;response.body.messages=null;delete response.body.result_info.total_pages;
+  if(mode==='false-success')response.body.success=false;
+  if(mode==='error-entry')response.body.errors=[{code:10000,message:'never-log-private-message'}];
+  if(mode==='missing-errors')delete response.body.errors;if(mode==='wrong-errors')response.body.errors={code:0};
+  if(mode==='missing-messages')delete response.body.messages;if(mode==='wrong-messages')response.body.messages='invalid';
+  if(mode==='missing-total-count')delete response.body.result_info.total_count;
+  if(mode==='incomplete-total')response.body.result_info.total_count++;
+  if(mode==='unknown-remainder')response.body.result_info.next_page_token='more';
+ };
+ const r=await f.run('restore_known_closed_candidate');assert.equal(r.status,'blocked');assert.equal(posts(f).length,0);safe(r);
+});
+for(const target of ['deployments','versions','schedules','tails','subdomain','instances-v2','workflows'])test('legacy null envelope metadata is not accepted on other fixed GETs '+target,async()=>{
+ const f=fixture();f.mutate=({url,response})=>{if(url.pathname.endsWith('/'+target)||target==='versions'&&url.pathname.includes('/versions/')){response.body.errors=null;response.body.messages=null;}};
+ const r=await f.run('restore_known_closed_candidate');assert.equal(r.status,'blocked');assert.equal(posts(f).length,0);
+});
