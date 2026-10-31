@@ -43,3 +43,7 @@ test('wall regression or an already expired named window prevents success',async
 test('abort queued during successful result settlement cannot escape as true',async()=>{
  const f=fixture(),parent=new AbortController();f.answer=async()=>{queueMicrotask(()=>queueMicrotask(()=>parent.abort()));return{eligible:1};};assert.equal(await check(make(f),parent.signal),false);
 });
+
+test('a broken clock is a sanitized false result before any primary session',async()=>{
+ const f=fixture();assert.equal(await check(make(f,{now:()=>{throw Error('private clock detail');}})),false);assert.equal(f.sessions,0);
+});
