@@ -45,3 +45,6 @@ Ruling: owner delegó decisiones/ejecución encadenada; se preserva autorizació
 Pre-flight: Task2 necesita pin real de wrapper para la excepción Task1; no puede inferirlo de la API. Task1 no verifica el módulo propio QA: root debe correlacionarlo antes del ARM real.
 
 Ruling: Task2 requiere leer primero el control legacy REAL. Su presencia y armedAt no están acreditados por los fixtures; no asumir migración ni fabricar un control para ajustarlo al ledger. Cerrar Task1 como PR acotada y realizar una inspección nativa temporal read-only, con QA cerrado y rollback verificado, antes de escoger el predecesor de ARM. Task2/3 de integración completa siguen pendientes; este corte no monta ARM.
+
+
+31oct22:24:57UTC — Prerrequisito real cerrado: ver docs/AFW-QA-LEGACY-NATIVE-INSPECTION-2026-10-31.es.md. PR684/main834fc5c4, BASE exacta18/18 en41247253336 y una inspección nativa de KV aceptada sin escrituras; restaurado c570/DEP2e1a, readback25GET,19WFterminales. Legacy presente/armado/retirado/vencido, V2ausente; prepared_dispatchissued y reduction_dispatchcomplete conservados inciertos, sin reset. Ya no asumir ausencia o armedAtnull. Task2 debe resolver el canal privado de preparación/control literal y la separación de journals sin exponerlos en RPC ni ocultar V2 al legacy; ARM y Task3 de integración siguen pendientes. operationalReadiness=false.
