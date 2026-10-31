@@ -9,8 +9,8 @@ import {RELEASE_TARGET} from '../../lib/mcp-release-operator-policy.mjs';
 export const packetHash=s=>createHash('sha256').update(s).digest('hex');
 /** Synthetic coherence fixture. Its short script is NOT frozen artifact315.
  * Package/native qualification must separately use that actual recorded artifact. */
-export function namedDataPacketFixture(){
- const f=generationFixture(),at=Date.UTC(2026,9,31,17);f.setNow(at);
+export function namedDataPacketFixture({at=Date.UTC(2026,9,31,17)}={}){
+ const f=generationFixture();f.setNow(at);
  const script='export default{fetch(){return new Response(null,{status:404})}};';
  // Deliberately retain this non-schema property order; runtime hashes JSON bytes.
  const artifact={sourceRevision:'c'.repeat(40),sourceTree:'e'.repeat(40),programHash:'d'.repeat(64),script,workerHash:packetHash(script),sourceCheck:'git-inputs-before-after-v1'};
