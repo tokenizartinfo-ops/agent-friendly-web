@@ -9,3 +9,5 @@ Specification: ../specs/2026-10-31-private-generation-preparation.md
 - [ ] Later ARM reuses preparation but rereads every input and adds683 quiescence +681 originalpins/zero-reservation eligibility before/after CAS. Existing HEAD/INFO/CONTROL rules and nominal/retained resolvers remain unchanged.
 
 Do not mark the complete plan achieved after Task1. Source-only completion never proves live subscription, useful delivery, native withdrawal, guard or PC-off. operationalReadiness=false.
+
+Task1 progress: REDc4337357/CI41249491944/job124679826607 proved the two missing positive paths (720PASS/2FAIL). Review P2 short-dispatch cutoff independently reproduced RED3793a5cb/CI41250076289/job124681554692 (722PASS/2FAIL: issuedAt==dispatch.expiresAt, completedAt==that cutoff with matching outer fingerprints). Historical producer itself clamps endWall to dispatch.expiresAt; the materializer must retain that tighter bound for both timestamps. Reduction keeps closure.expiresAt. Final validation/review pending; no source Task2/3/4 or live-body/D1 acceptance implied.

@@ -59,3 +59,5 @@ test('preserves literal policy and record property order',()=>{
  const h=o.historicalContext;h.closurePolicyHash=o.control.planHash;h.controlHash=hash(JSON.stringify(o.control));h.dispatchPolicyHash=hash(o.dispatchPolicyJson);h.journalHashes.preparedDispatch=hash(JSON.stringify(o.journals.preparedDispatch));h.journalHashes.reductionDispatch=hash(JSON.stringify(o.journals.reductionDispatch));
  assert.equal(materializePrivateQaLegacyPredecessor(o).predecessor.control,JSON.stringify(o.control));
 });
+
+test('a historical dispatch completion before its original cutoff remains descriptive and uncertain',()=>{const f=fixture(),r=f.options.journals.preparedDispatch;r.phase='complete';r.completedAt=JSON.parse(f.options.dispatchPolicyJson).expiresAt-1;f.historicalContext.journalHashes.preparedDispatch=hash(JSON.stringify(r));const result=materializePrivateQaLegacyPredecessor(f.options);assert.equal(result.journalBodiesVerified,true);assert.equal(result.retainedUncertainty,true);assert.equal(result.authorizesEffects,false);});
