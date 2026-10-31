@@ -93,3 +93,9 @@ test('overlapping calls latch both unavailable without a second metadata read',a
 test('UTF8 receipt cap precedes parsing, and malformed text never invokes accessors',async()=>{
  const {options,make}=await setup();options.readGeneration=async()=>JSON.stringify({value:'é'.repeat(1100)});assert.equal(await invoke(make()),false);
 });
+
+test('abort queued after the final work check but before race settlement cannot escape as true',async()=>{
+ const {options,observer,make}=await setup(),parent=new AbortController();
+ options.readGeneration=async()=>{const raw=JSON.stringify(await observer.read());queueMicrotask(()=>queueMicrotask(()=>parent.abort()));return raw;};
+ const a=make();assert.equal(await invoke(a,'workflow_admission',parent.signal),false);assert.equal(await invoke(a),false);
+});

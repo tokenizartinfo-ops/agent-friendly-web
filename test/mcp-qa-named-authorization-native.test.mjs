@@ -20,7 +20,7 @@ export class FenceFixture extends WorkflowEntrypoint{
  const pin=createPrivateQaExecutionPin({env:this.env,expectedVersionId:this.env.AFW_QA_VERSION.id,sourceRevision:p.sourceRevision,context:'workflow'});
  const fence=createPrivateQaNamedAuthorization({executionPin:pin,readGeneration:async()=>{reads++;return stub.readText(p.capsule,p.withdraw&&reads===1);},pins:p.pins,now:()=>Number(this.env.AT),timeoutMs:5000});
  try{const first=await fence.authorize('workflow_admission',controller.signal);if(!first)return{first:false,second:false,reads};
- return step.do('exercise-generation-fence',{retries:{limit:0,delay:'1 second',backoff:'constant'},timeout:'5 seconds'},async()=>({first,second:await fence.authorize('successor_after_write',controller.signal),reads}));}finally{controller.abort();}
+ return await step.do('exercise-generation-fence',{retries:{limit:0,delay:'1 second',backoff:'constant'},timeout:'5 seconds'},async()=>({first,second:await fence.authorize('successor_after_write',controller.signal),reads}));}finally{controller.abort();}
  }
 }
 export default{fetch(){return new Response(null,{status:404});}};
@@ -33,7 +33,7 @@ test('native Workflow rereads actual DO generation through JSON RPC and detects 
    const stub=LEDGER.get(LEDGER.idFromName(mode)),capsule=JSON.stringify(f.capsule),armed=await stub.seed(capsule,f.legacy),before=await stub.rows();assert.equal(armed.status,'armed');
    const instance=await FLOW.create({id:'native-named-fence-'+mode,params:{slot:mode,capsule,withdraw:mode==='withdraw',sourceRevision:(mode==='wrong-source'?'b':'a').repeat(40),pins:{planHash:armed.planHash,sequence:armed.sequence,startAt:f.capsule.startAt,expiresAt:f.capsule.expiresAt}}});
    let status;const end=Date.now()+12000;do{status=await instance.status();if(['complete','errored','terminated'].includes(status.status))break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<end);
-   assert.equal(status.status,'complete',JSON.stringify(status));assert.equal(status.output.first,mode!=='wrong-source');assert.equal(status.output.second,mode==='current');assert.equal(status.output.reads,mode==='wrong-source'?1:2);
+   assert.equal(status.status,'complete',JSON.stringify(status));assert.equal(status.output.first,mode!=='wrong-source',mode+':'+JSON.stringify(status.output));assert.equal(status.output.second,mode==='current',mode+':'+JSON.stringify(status.output));assert.equal(status.output.reads,mode==='wrong-source'?1:2);
    if(mode!=='withdraw')assert.equal(await stub.rows(),before);
   }assert.equal(outbound,0);assert.equal((await mf.dispatchFetch('https://fixture.invalid/')).status,404);
  }finally{await mf.dispose();}
