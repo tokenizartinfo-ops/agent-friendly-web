@@ -28,6 +28,14 @@ for(const representation of ['object','api-json'])test('actual Named diagnostic 
    await this.env.AFW_QA_DB.prepare('INSERT INTO afw_qa_named_packets_v1(generation_plan_hash,packet_json) VALUES(?,?)').bind(planHash,JSON.stringify(p.packet)).run();
    return{bundleHash:p.f.capsule.bundleHash,planHash};
   }
+  async debugFixture(planHash){
+ const {createPrivateQaGenerationResolver}=await import('./lib/mcp-qa-generation-resolver.mjs'),{createPrivateQaNamedPacketReader}=await import('./lib/mcp-qa-named-packet-reader.mjs'),{assemblePrivateQaNamedPacket}=await import('./lib/mcp-qa-named-packet-assembly.mjs');
+ const result={};
+ result.generation=JSON.parse(await createPrivateQaGenerationResolver({env:this.env,ctx:this.ctx,sourceRevision:'a'.repeat(40),now:Date.now,timeoutMs:5000}).read(planHash)).status;
+ const raw=await createPrivateQaNamedPacketReader({db:this.env.AFW_QA_DB,now:Date.now,timeoutMs:5000}).read(planHash,new AbortController().signal);result.packet=typeof raw==='string';
+ try{const info=await this.ctx.storage.get('afw.qa-generation-info.v2:'+planHash),p=namedDataPacketFixture();assemblePrivateQaNamedPacket({packetJson:raw,expectedCapsule:info.capsule,artifact:p.artifact,receipt:p.receipt,namespace:p.namespace});result.assembly='observed';}catch{result.assembly='blocked';}
+ return result;
+}
   async rowsFixture(){return [...await this.ctx.storage.list()];}
  }
  export default{fetch(){return new Response(null,{status:404});}};`;
@@ -35,7 +43,7 @@ for(const representation of ['object','api-json'])test('actual Named diagnostic 
  let outbound=0;const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_QA_VERSION:{id:version},...Object.fromEntries(PRIVATE_QA_CLOSED_FLAGS.map(k=>[k,'false'])),...Object.fromEntries(policyKeys.map(k=>[k,'']))},d1Databases:{AFW_QA_DB:'qa-named-packet-native'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'FixedFixture',useSQLite:true,uniqueKey:'named-packet-fixed'}},workflows:{FLOW:{name:'named-packet-diagnostic-native',className:'PrivateQaNamedConfirmation'}},outboundService:()=>{outbound++;throw Error('outbound forbidden');}}));
  try{
  const {FLOW,AFW_INDEPENDENT_CLOSURE:ns}=await mf.getBindings(),stub=ns.get(ns.idFromName('afw-own-successor-closure-v1')),seed=await stub.seedFixture(),before=await stub.rowsFixture();
- const raw=await stub.readOwnQaNamedPacket(seed.bundleHash),r=JSON.parse(raw);assert.equal(r.status,'observed');assert.equal(r.context,'durable_object');assert.equal(r.generationPlanHash,seed.planHash);assert.ok(Buffer.byteLength(raw)<=2048);assert.equal(JSON.parse(await stub.readOwnQaNamedPacket(seed.planHash)).status,'blocked');
+ const raw=await stub.readOwnQaNamedPacket(seed.bundleHash),r=JSON.parse(raw);assert.equal(r.status,'observed',JSON.stringify(await stub.debugFixture(seed.planHash)));assert.equal(r.context,'durable_object');assert.equal(r.generationPlanHash,seed.planHash);assert.ok(Buffer.byteLength(raw)<=2048);assert.equal(JSON.parse(await stub.readOwnQaNamedPacket(seed.planHash)).status,'blocked');
  const params={operation:'observe_named_packet',namedBundleHash:seed.bundleHash},instance=await FLOW.create({id:'afw-qa-named-preflight-'+seed.bundleHash,params:representation==='api-json'?JSON.stringify(params):params});
  let status;const end=Date.now()+12000;do{status=await instance.status();if(['complete','errored','terminated'].includes(status.status))break;await new Promise(r=>setTimeout(r,25));}while(Date.now()<end);
  assert.equal(status.status,'complete',JSON.stringify(status));assert.equal(status.output.status,'observed');assert.equal(status.output.context,'workflow');assert.equal(status.output.actorContext,'durable_object');assert.equal(status.output.namedBundleHash,seed.bundleHash);assert.equal(status.output.operationalReadiness,false);
