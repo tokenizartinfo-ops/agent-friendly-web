@@ -1,6 +1,5 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createHash} from 'node:crypto';
 import {createPrivateQaCloudClosedRollback} from '../lib/mcp-qa-cloud-closed-rollback.mjs';
 import {createQaCloudClosedHttpAdapters} from '../lib/mcp-qa-cloud-closed-http.mjs';
 import {AFW_FIXED_WORKFLOWS} from '../lib/mcp-fixed-terminal-workflows.mjs';

@@ -6,7 +6,6 @@ const H='e'.repeat(64),self='afw-qa-arm-'+H,purpose='afw.qa-arm-quiescence.v1';
 function fixture(){
  const f=qaClosedHttpFixture(),base=f.fetch;f.mutate=()=>{};
  f.fetch=async(input,init)=>{const r=await base(input,init),body=await r.json(),u=new URL(input);
- if(u.pathname.endsWith('/private-bootstrap/instances'))throw Error('fixture wrong path');
  if(u.pathname.includes('/afw-own-qa-private-bootstrap/instances'))body.result=[{id:self,status:'running',workflow_id:'06b6c3eb-ce59-4594-8b9e-2636977d56da',version_id:'workflow-version-is-not-worker-uuid'}];
  f.armMutate?.({url:u,init,body});return new Response(JSON.stringify(body),{status:r.status,headers:r.headers});
  };

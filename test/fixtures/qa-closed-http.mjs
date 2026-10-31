@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {createPrivateQaCloudClosedRollback} from '../lib/mcp-qa-cloud-closed-rollback.mjs';
-import {createQaCloudClosedHttpAdapters} from '../lib/mcp-qa-cloud-closed-http.mjs';
-import {AFW_FIXED_WORKFLOWS} from '../lib/mcp-fixed-terminal-workflows.mjs';
+import {createPrivateQaCloudClosedRollback} from '../../lib/mcp-qa-cloud-closed-rollback.mjs';
+import {createQaCloudClosedHttpAdapters} from '../../lib/mcp-qa-cloud-closed-http.mjs';
+import {AFW_FIXED_WORKFLOWS} from '../../lib/mcp-fixed-terminal-workflows.mjs';
 export const hash=x=>createHash('sha256').update(x).digest('hex');
 export const canonical=x=>JSON.stringify(x&&typeof x==='object'?Array.isArray(x)?x.map(y=>JSON.parse(canonical(y))):Object.fromEntries(Object.keys(x).sort().map(k=>[k,JSON.parse(canonical(x[k]))])):x);
 export const names=['agent-friendly-web-independent-closure-qa','agent-friendly-web-delegated-canary','agent-friendly-web-release-operator'];
