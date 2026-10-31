@@ -29,46 +29,8 @@ jobs:
         run: node --test test/mcp-qa-sealed-build.test.mjs test/mcp-qa-sealed-build-native.test.mjs
       - name: Qualify closed QA context without authority
         run: node --test test/mcp-qa-closed-context.test.mjs test/mcp-qa-closed-context-native.test.mjs
-      - name: Qualify generation metadata without runtime effects
-        run: node --test test/mcp-qa-generation-ledger.test.mjs test/mcp-qa-generation-ledger-native.test.mjs test/mcp-qa-generation-observer.test.mjs test/mcp-qa-generation-observer-native.test.mjs test/mcp-qa-arm-eligibility.test.mjs test/mcp-hosted-canary-restoration-native.test.mjs
-      - name: Qualify pure QA execution pin
-        run: node --test test/mcp-qa-execution-identity.test.mjs test/mcp-release-runtime-native.test.mjs
-      - name: Qualify legacy transaction fence
-        run: node --test test/mcp-legacy-generation-fence-native.test.mjs
-      - name: Qualify server-owned named history bridge
-        run: node --test test/mcp-named-known-history.test.mjs test/mcp-named-known-history-native.test.mjs
-      - name: Qualify exact known cancellation history
-        run: node --test test/mcp-known-cancellation-native.test.mjs test/mcp-qa-arm-eligibility.test.mjs
-      - name: Qualify permissions-only separation
-        run: node --test test/mcp-own-permissions-only-reduction.test.mjs test/mcp-own-permissions-only-reduction-native.test.mjs test/mcp-own-permission-withdrawal.test.mjs test/mcp-own-permission-withdrawal-native.test.mjs
-      - name: Qualify explicit finite execution context
-        run: node --test test/mcp-release-runtime-native.test.mjs test/mcp-named-authorization-native.test.mjs
-      - name: Qualify retirement review fences
-        run: node --test --test-name-pattern='final pre-RPC microtask|stay fresh through final provider' test/mcp-successor-host.test.mjs test/mcp-retirement-receipt-integration.test.mjs
-      - name: Qualify retirement parent lease
-        run: node --test --test-name-pattern='original monotonic assertion|original deadline after deployment|independent SQL clock|observer clock ahead|challenged successor handoff|independently ahead observer clock|challenged successor custody' test/mcp-successor-reservation.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-release-reservation-native.test.mjs test/mcp-successor-retirement-handoff.test.mjs test/mcp-successor-retirement-workflow.test.mjs test/mcp-hosted-canary-restoration.test.mjs
-      - name: Qualify challenged successor consumers
-        run: node --test test/mcp-retired-rpc-observation-native.test.mjs test/mcp-successor-host.test.mjs test/mcp-successor-retirement-workflow.test.mjs test/mcp-successor-retirement-workflow-native.test.mjs test/mcp-successor-retirement-handoff.test.mjs test/mcp-hosted-canary-restoration.test.mjs test/mcp-hosted-canary-restoration-native.test.mjs test/mcp-private-reduce-restore.test.mjs test/mcp-release-reservation-native.test.mjs
-      - name: Qualify retirement receipt integration
-        run: node --test test/mcp-retirement-receipt-integration.test.mjs test/mcp-retirement-receipt-integration-native.test.mjs
-      - name: Qualify challenged retired RPC receipt
-        run: node --test test/mcp-retired-rpc-receipt.test.mjs test/mcp-retired-rpc-receipt-native.test.mjs
-      - name: Qualify private prepared dispatch
-        run: node --test test/mcp-private-prepared-materialization.test.mjs test/mcp-private-confirmation-template.test.mjs test/mcp-private-prepared-dispatch.test.mjs test/mcp-private-prepared-dispatch-native.test.mjs
-      - name: Qualify private identity preflight
-        run: node --test test/mcp-release-identity-observation.test.mjs test/mcp-release-identity-observation-native.test.mjs
-      - name: Qualify public journey audit regressions
-        run: node --test test/public-journey-audit.test.mjs test/public-guide.test.mjs test/intake-assistant-contract.test.mjs
-      - name: Qualify private withdrawal before full suite
-        run: node --test test/mcp-private-reduce-restore.test.mjs test/mcp-private-reduce-restore-native.test.mjs test/mcp-own-guarded-close.test.mjs test/mcp-own-permission-withdrawal-host.test.mjs test/mcp-own-permission-withdrawal-rpc-native.test.mjs test/mcp-own-permission-withdrawal.test.mjs test/mcp-own-permission-withdrawal-native.test.mjs
-      - name: Qualify original custody clock observation
-        run: node --test test/mcp-release-custody-clock-observation.test.mjs test/mcp-release-custody-clock-observation-native.test.mjs
-      - name: Qualify named custody clock diagnostic
-        run: node --test --test-name-pattern='custody clock' test/mcp-release-reservation-native.test.mjs
-      - name: Qualify private publisher boundary before full suite
-        run: node --test test/mcp-closure-publisher-probe.test.mjs test/mcp-closure-publisher-probe-native.test.mjs
-      - name: Qualify private reader boundary before full suite
-        run: node --test test/mcp-closure-reader-probe.test.mjs test/mcp-closure-reader-probe-native.test.mjs
+      # The full top-level test glob covers every historical focused file.
+      # Keep the two short closed-QA checks above for fast failure feedback.
       - run: npm test
       - run: npm run lint
       - run: npm run build
