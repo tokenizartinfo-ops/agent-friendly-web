@@ -61,6 +61,11 @@
       "name": "afw-own-qa-private-bootstrap",
       "binding": "AFW_QA_BOOTSTRAP",
       "class_name": "PrivateQaBootstrap"
+    },
+    {
+      "name": "afw-own-qa-private-confirmation",
+      "binding": "AFW_QA_NAMED_CONFIRMATION",
+      "class_name": "PrivateQaNamedConfirmation"
     }
   ],
   "ratelimits": [
@@ -87,9 +92,19 @@
     "AFW_MCP_PUBLISHER_PROBE_ENABLED": "false",
     "AFW_MCP_PUBLISHER_PROBE_POLICY": "",
     "AFW_MCP_CLOSURE_DISPATCH_ENABLED": "false",
-    "AFW_MCP_CLOSURE_DISPATCH_POLICY": ""
+    "AFW_MCP_CLOSURE_DISPATCH_POLICY": "",
+    "AFW_QA_ORIGINALS_ENABLED": "false",
+    "AFW_QA_PROVIDER_OBSERVATION_ENABLED": "false",
+    "AFW_QA_PRIMARY_RESERVATION_ENABLED": "false",
+    "AFW_QA_INSTALLATION_ENABLED": "false",
+    "AFW_QA_PRIMARY_CATALOG_ENABLED": "false",
+    "AFW_QA_PRIMARY_ADMISSION_ENABLED": "false",
+    "AFW_MCP_CLOSURE_REDUCTION_ENABLED": "false"
   },
   "compatibility_flags": [
     "nodejs_compat"
-  ]
+  ],
+  "version_metadata": {
+    "binding": "AFW_QA_VERSION"
+  }
 }

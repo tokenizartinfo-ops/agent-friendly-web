@@ -6,7 +6,11 @@ on:
     paths:
       - '.github/workflows/afw-independent-closure-build.yml'
       - 'wrangler.independent-closure-qa.jsonc'
-      - 'worker/independent-closure/**'
+      - 'wrangler.independent-closure-qa.rollback.jsonc'
+      - 'scripts/**'
+      - 'worker/**'
+      - 'tsconfig.json'
+      - '.npmrc'
       - 'lib/**'
       - 'package.json'
       - 'package-lock.json'
@@ -15,7 +19,11 @@ on:
     paths:
       - '.github/workflows/afw-independent-closure-build.yml'
       - 'wrangler.independent-closure-qa.jsonc'
-      - 'worker/independent-closure/**'
+      - 'wrangler.independent-closure-qa.rollback.jsonc'
+      - 'scripts/**'
+      - 'worker/**'
+      - 'tsconfig.json'
+      - '.npmrc'
       - 'lib/**'
       - 'package.json'
       - 'package-lock.json'
@@ -50,9 +58,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Compile closed source only; never upload or invoke
-        run: npx wrangler deploy --config wrangler.independent-closure-qa.jsonc --dry-run --outdir output/independent-closure
-      - name: Verify closed configuration and preserve source/module hashes
+      - name: Seal closed source and compatible rollback; never upload
+        run: node scripts/build-private-qa-closed-context.mjs "$AFW_BUILD_SOURCE_REVISION"
+      - name: Qualify exact sealed candidate with Wrangler; no network upload
+        run: npx wrangler deploy output/qa-sealed/index.mjs --no-bundle --config wrangler.independent-closure-qa.jsonc --dry-run --outdir output/independent-closure
+      - name: Qualify exact sealed rollback with Wrangler; no network upload
+        run: npx wrangler deploy output/qa-sealed/closed-rollback.mjs --no-bundle --config wrangler.independent-closure-qa.rollback.jsonc --dry-run --outdir output/independent-closure-rollback
+      - name: Verify exact modules and preserve both closed configuration hashes
         run: |
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
@@ -60,38 +72,41 @@ jobs:
           import { execFileSync } from 'node:child_process';
           import { createHash } from 'node:crypto';
           const sha = bytes => createHash('sha256').update(bytes).digest('hex');
-          const revision = process.env.AFW_BUILD_SOURCE_REVISION;
+          const revision=process.env.AFW_BUILD_SOURCE_REVISION,manifest=JSON.parse(await readFile('output/qa-sealed/build.json','utf8'));
           assert.equal(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),revision);
-          assert.equal(execFileSync('git',['diff','--name-only','HEAD','--','worker','lib','wrangler.independent-closure-qa.jsonc','package.json','package-lock.json'],{encoding:'utf8'}).trim(),'');
-          const configBytes = await readFile('wrangler.independent-closure-qa.jsonc');
-          const config = JSON.parse(configBytes);
-          assert.equal(config.name,'agent-friendly-web-independent-closure-qa');
-          assert.equal(config.workers_dev,false);
-          assert.equal(config.preview_urls,false);
-          assert.deepEqual(config.triggers.crons,[]);
-          for(const name of ['AFW_QA_HTTP_ENABLED','AFW_QA_BOOTSTRAP_ENABLED','AFW_QA_CHALLENGE_ENABLED','AFW_MCP_CLOSURE_ENABLED','AFW_MCP_READER_PROBE_ENABLED','AFW_MCP_PUBLISHER_PROBE_ENABLED','AFW_MCP_CLOSURE_DISPATCH_ENABLED'])assert.equal(config.vars[name],'false');
-          for(const name of ['AFW_QA_HTTP_POLICY','AFW_QA_PREREGISTRATION','AFW_QA_CHALLENGE_IDENTITY','AFW_MCP_CLOSURE_POLICY','AFW_MCP_READER_PROBE_POLICY','AFW_MCP_PUBLISHER_PROBE_POLICY','AFW_MCP_CLOSURE_DISPATCH_POLICY'])assert.equal(config.vars[name],'');
-          assert.ok(config.compatibility_flags.includes('nodejs_compat'));
-          const directory='output/independent-closure',modules=[];
-          async function walk(relative=''){
-            for(const entry of await readdir(directory+(relative?'/'+relative:''),{withFileTypes:true})){
-              const name=(relative?relative+'/':'')+entry.name;
-              assert.equal(entry.isSymbolicLink(),false);
-              if(entry.isDirectory()){await walk(name);continue;}
-              if(!/\.(?:m?js|wasm)$/.test(name))continue;
-              const bytes=await readFile(directory+'/'+name);
-              modules.push({name,sha256:sha(bytes),bytes:bytes.length});
+          assert.equal(manifest.sourceRevision,revision);
+          assert.equal(manifest.sourceTree,execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim());
+          assert.equal(manifest.purpose,'afw.qa-closed-context-build.v1');
+          assert.equal(manifest.remotePublished,false);assert.equal(manifest.invoked,false);assert.equal(manifest.remoteConfigurationPreserved,false);assert.equal(manifest.operationalReadiness,false);
+          assert.equal(sha(await readFile('wrangler.independent-closure-qa.jsonc')),manifest.configurationHash);
+          assert.equal(sha(await readFile('wrangler.independent-closure-qa.rollback.jsonc')),manifest.rollbackConfigurationHash);
+          assert.equal(sha(await readFile('.github/workflows/afw-independent-closure-build.yml')),manifest.workflowHash);
+          const results=[];
+          for(const [kind,directory] of [['module','output/independent-closure'],['rollback','output/independent-closure-rollback']]){
+            const modules=[];
+            async function walk(relative=''){
+              for(const entry of await readdir(directory+(relative?'/'+relative:''),{withFileTypes:true})){
+                const name=(relative?relative+'/':'')+entry.name;assert.equal(entry.isSymbolicLink(),false);
+                if(entry.isDirectory()){await walk(name);continue;}
+                if(!/\.(?:m?js|wasm)$/.test(name))continue;
+                const bytes=await readFile(directory+'/'+name);modules.push({name,sha256:sha(bytes),bytes:bytes.length});
+              }
             }
+            await walk();assert.equal(modules.length,1);
+            assert.equal(modules[0].sha256,manifest[kind].sha256);assert.equal(modules[0].bytes,manifest[kind].bytes);assert.equal(modules[0].name,manifest[kind].name);
+            assert.ok((await readFile(directory+'/'+modules[0].name)).equals(await readFile('output/qa-sealed/'+manifest[kind].name)));
+            results.push({kind,directory,modules});
           }
-          await walk();modules.sort((a,b)=>a.name.localeCompare(b.name));assert.ok(modules.length>0);
-          const manifest={purpose:'afw.independent-closure-build.v1',sourceRevision:revision,sourceTree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),configurationHash:sha(configBytes),modules,remotePublished:false,operationalReadiness:false};
-          await writeFile(directory+'/build.json',JSON.stringify(manifest,null,2)+'\n');
-          console.log(JSON.stringify(manifest));
+          const result={...manifest,wranglerDryRunVerified:true,dryRuns:results};
+          await writeFile('output/independent-closure/build.json',JSON.stringify(result,null,2)+'\n');
+          console.log(JSON.stringify(result));
           NODE
       - uses: actions/upload-artifact@v4
         with:
           name: afw-independent-closure-${{ env.AFW_BUILD_SOURCE_REVISION }}
           path: |
             output/independent-closure/
+            output/independent-closure-rollback/
+            output/qa-sealed/
           if-no-files-found: error
           retention-days: 7
