@@ -1,3 +1,4 @@
+import {observePrivateQaClosedActor,runPrivateQaClosedContext} from '../../lib/mcp-qa-closed-context.mjs';
 import {createPrivateClosureReaderProbe,runPrivateClosureReaderProbeWorkflow,createPrivateClosurePublisherProbe,runPrivateClosurePublisherProbeWorkflow} from '../../lib/mcp-closure-reader-probe.mjs';
 import {createPrivateCanaryRestorationHost,isPrivateCanaryRestorationActor,runPrivateCanaryRestorationWorkflow} from '../../lib/mcp-hosted-canary-restoration.mjs';
 import {computeAdministrativeResultDigest} from '../../lib/assistance-administrative-closure-readback.mjs';
@@ -147,6 +148,9 @@ export class PrivateQaBootstrap extends WorkflowEntrypoint {
   if(params?.operation==='observe')return observePrivateQa(this.env,params);
   return createPrivateAdminBootstrap({install:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).installOwn();try{return {state:value?.state};}finally{value?.[Symbol.dispose]?.();}},readControl:()=>control(this.env),readRegistered:async ref=>(await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).read())?.registration?.plan?.baselineRef===ref,register:ref=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).register(ref),appendOriginals:(ref,sequence,originals)=>this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).appendOperatorObservation(ref,sequence,originals),readOriginals:async()=>{const value=await this.env.AFW_QA_PREREGISTRY.get(this.env.AFW_QA_PREREGISTRY.idFromName('own-qa')).readOperatorObservation();try{return structuredClone(value);}finally{value?.[Symbol.dispose]?.();}}}).run(event.payload,step);}
 }
+export class PrivateQaNamedConfirmation extends WorkflowEntrypoint {
+ run(event,step){return runPrivateQaClosedContext({env:this.env,event,step});}
+}
 export function observePrivateQa(env,params){const actor=()=>env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa'));
  // workerd adds a disposable RPC handle to otherwise plain metadata. Remove
  // only transport machinery before the strict schema validation, then release.
@@ -169,6 +173,7 @@ export class PrivateQaCatalog extends DurableObject {
 // Private host only. Missing catalog/custody stays closed. No caller approval,
 // provisioning, registration, HTTP routes or implicit enrollment.
 export class IndependentClosure extends DurableObject {
+ observeOwnQaClosedContext(payload){return JSON.stringify(observePrivateQaClosedActor({env:this.env,ctx:this.ctx,payload}));}
  #mcpPublisher;
  #publisher(){return this.#mcpPublisher??=createPrivateClosurePublisherProbe({env:this.env,ctx:this.ctx});}
  async runOwnClosurePublisherProbe(...args){return JSON.stringify(await this.#publisher().run(...args));}
@@ -185,6 +190,8 @@ export class IndependentClosure extends DurableObject {
  readOwnCanaryClosureControl(...args){return this.#mcp().status(...args);}
  constructor(ctx,env){
   super(ctx,env);
+  // Fixed private actor never constructs the legacy QA_DB/credential host.
+  if(isPrivateCanaryRestorationActor(env,ctx))return;
   const legacy=()=>env.AFW_QA_CATALOG.get(env.AFW_QA_CATALOG.idFromName('own-qa'));
   const primaryScope=async()=>{if(env.AFW_QA_PRIMARY_CATALOG_ENABLED!=='true')return null;const value=await env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa')).readOwnClosureScope();try{return structuredClone(value);}finally{value?.[Symbol.dispose]?.();}};
   const catalog=()=>env.AFW_QA_PRIMARY_CATALOG_ENABLED==='true'?{read:async()=>(await primaryScope())?.registration??null,readOccurrenceApproval:async()=>(await primaryScope())?.approval??null}:legacy();
