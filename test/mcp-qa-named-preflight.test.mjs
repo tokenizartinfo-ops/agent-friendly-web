@@ -45,3 +45,9 @@ for(const wrong of ['version','namespace','db','source','flags','deadline'])test
 test('a hung packet reader cannot restart the original budget',async()=>{const x=await fixture();let release;const gate=new Promise(r=>{release=r;});x.options.timeoutMs=25;x.f.env.AFW_QA_DB={prepare(){},withSession(){return{prepare(){return{bind(){return{first:()=>gate};}};}};}};const promise=read(x);try{assert.equal((await promise).status,'blocked');}finally{release({packet_json:JSON.stringify(x.p.packet)});}});
 test('post-success settlement rechecks the original lease',async()=>{const x=await fixture(),race=Promise.race;let changed=false;Promise.race=function(v){return Reflect.apply(race,this,[v]).then(r=>{if(!changed&&typeof r==='string'&&r.includes('"status":"observed"')){changed=true;x.f.setNow(x.f.now()+5000);}return r;});};try{assert.equal((await read(x)).status,'blocked');assert.equal(changed,true);}finally{Promise.race=race;}});
 test('extra RPC arguments do not grant an alternate path',async()=>{const x=await fixture();assert.equal(JSON.parse(await make(x.options).read(x.f.capsule.bundleHash,{})).status,'blocked');assert.ok(x.f.rows.has(HEAD));});
+
+for(const point of [1,3])test('context validation time belongs to original lease before primary IO: '+point,async()=>{
+ const x=await fixture(),base=x.options.artifactContext;let calls=0,advanced=false;
+ x.options.artifactContext=new Proxy(base,{ownKeys(t){if(++calls===point){advanced=true;x.f.setNow(x.f.now()+5000);}return Reflect.ownKeys(t);}});
+ const before=x.f.storage.transactions,r=await read(x);assert.equal(advanced,true);assert.equal(r.status,'blocked');assert.equal(x.f.storage.transactions,before);assert.equal(x.reads,0);
+});
