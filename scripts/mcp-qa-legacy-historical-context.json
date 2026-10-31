@@ -1,0 +1,28 @@
+{
+  "purpose": "afw.qa-legacy-historical-context.v1",
+  "controlHash": "3791d920451c8530b69d3a15a5dd7ceeee2035760a0f2516a8c984023c64fda1",
+  "closurePolicyHash": "d56b5e850d24cc23058a024d73bae4c830a91c1fb9659f2e96282854ccae2c04",
+  "namedPolicyHash": "cb7fd3ad1cfa1b47a3277bf1637a23ed21b35faf5b761366fc85bfa91f7deef4",
+  "namedBundleHash": "19fc438f9d33938c2320ea99add9d9c99cda5e0e56690ca44f59225f86f38dec",
+  "dispatchPolicyHash": "52c457716c00d01023130055a3cd909c7b0d96f8553505c29222a6b060a44884",
+  "withdrawalPolicyHash": "ec3a1f1c83ae35f9dd005a65c455196b336b422f102c776a5ccd3afdd84bb42e",
+  "trialIdHash": "357b3a752ab4e499bfe92c91499f10bc197ee97ffbde4dc5d3828c4ed95f7ac1",
+  "grantIdHash": "ce9e51b8a106cc3e627953a20fca5e1df3efc1999a51a9e2f8c0d22f46db179d",
+  "eventIdHash": "c84c29f251192db60e029178ca2d480f53f108d872305d7df5f8100620540c0f",
+  "journalHashes": {
+    "restoration": null,
+    "retirement": null,
+    "preparedDispatch": "2ae51fb3ee0891295ae5166b51bb82bfba9969791ca16571fabe81fb35cef72a",
+    "reductionDispatch": "91a48a933c3a88fd341e64222644e786b7303597227351618ff0776bf3fe49eb"
+  },
+  "artifactSourceRevision": "2a4773737764c5038aaa0b3528b43df2a0572441",
+  "artifactSourceTree": "637af253296ac1c771cb73ea353cb960a2e59204",
+  "artifactProgramHash": "f6f517c3ac135cfa7b9853137e0487f768b8f24a11e24959a337cac4e28d42e6",
+  "artifactWorkerHash": "315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3",
+  "evidence": {
+    "qaVersionId": "01ac6aa0-3ec8-43a7-bf19-31e46cad82d9",
+    "operatorVersionId": "3730b006-12e3-4025-bd6e-3591d65f0bc2",
+    "operatorModuleHash": "332bae2f0d35b16c0ebd31d1151414ca0606eed26b6670b9bf9fa8aed9966fc5",
+    "operatorModuleBytes": 2027132
+  }
+}
