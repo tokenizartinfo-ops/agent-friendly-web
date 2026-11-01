@@ -187,3 +187,31 @@ test('nominal immutable claim retains narrower primary expiry and cannot refund 
 test('native pin invalidates when an unrelated closed QA flag is opened',async()=>{
  const f=finiteFixture(),c=control(f);f.env.AFW_QA_HTTP_ENABLED='true';assert.equal((await c.prepare()).status,'blocked');assert.equal(f.puts,0);
 });
+
+for(const kind of ['close','qa_restore'])test('late '+kind+' claim ACK at original cleanup expiry is uncertain and consumed',{timeout:5000},async()=>{
+ const f=finiteFixture();let controlHash,claim,receiptMode=false,release,entered;
+ const held=new Promise(resolve=>{release=resolve;}),started=new Promise(resolve=>{entered=resolve;});
+ const original=f.storage.transaction;
+ f.storage.transaction=async fn=>{
+  const result=await original.call(f.storage,fn);
+  if(result?.claim?.kind===kind){claim=result.claim;entered();await held;}
+  return result;
+ };
+ f.primary.effect=async selected=>receiptMode?{
+  purpose:'afw.qa-finite-effect-receipt.v1',intentId:f.plan.intentId,controlHash,kind:selected,
+  claimHash:hash(ROOT+':effect\n'+JSON.stringify(claim)),receiptHash:'3'.repeat(64),observedAt:f.now(),outcome:'complete'
+ }:{
+  purpose:'afw.qa-finite-effect-eligibility.v1',intentId:f.plan.intentId,controlHash,kind:selected,
+  proofHash:'1'.repeat(64),observedAt:f.now(),eligible:true,evidenceHash:'2'.repeat(64)
+ };
+ const c=control(f);controlHash=(await c.prepare()).controlHash;
+ const end=kind==='qa_restore'?f.plan.R1:f.plan.C1;f.setNow(end-1);
+ const pending=c.claimEffect(kind);await started;
+ const key=ROOT+':'+f.plan.intentId+':effect:'+kind,retained=structuredClone(f.rows.get(key)),puts=f.puts;
+ assert.equal(retained.phase,'issued');assert.equal(retained.issuedAt,end-1);assert.equal(retained.deadline,end);
+ f.setNow(end);release();assert.equal((await pending).status,'uncertain');
+ assert.deepEqual(f.rows.get(key),retained);assert.equal(f.puts,puts);
+ assert.equal((await c.claimEffect(kind)).status,'reconcile_only');assert.equal(f.puts,puts);
+ receiptMode=true;f.setNow(end+1);assert.equal((await c.reconcileEffect(kind)).status,'reconciled');
+ assert.deepEqual(f.rows.get(key),retained);assert.equal(f.puts,puts);
+});
