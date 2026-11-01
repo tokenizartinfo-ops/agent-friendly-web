@@ -3,11 +3,11 @@ import {finiteFinalizerFixture} from './finite-finalizer.mjs';
 import {githubFixture} from './finite-github.mjs';
 import {qaClosedConfigurationHash} from '../../lib/mcp-restoration-configuration.mjs';
 import {AFW_FIXED_WORKFLOWS} from '../../lib/mcp-fixed-terminal-workflows.mjs';
-import {createPrivateQaFiniteRestoreHttp,createPrivateQaFiniteObserverHttp} from '../../lib/mcp-qa-finite-http.mjs';
+
 const QA='agent-friendly-web-independent-closure-qa',ROOT='/accounts/85d0d5dadac3341a564f22ce885e9eec';
 export async function cfFiniteFixture({at,configure=()=>{}}={}){
  const versions={};
- const base=await finiteFinalizerFixture({at,configure:(p,f)=>{
+ const base=await finiteFinalizerFixture({at,authenticatedIntent:true,configure:(p,f)=>{
   for(const key of ['qaLive','qaClosed']){
    const pin=p.deployments[key],bytes=Buffer.from('export default '+JSON.stringify({profile:key})+';');
    const meta={id:pin.versionId,main_module:'index.mjs',compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat'],usage_model:'standard',urls:[],modules:[{name:'index.mjs',content_type:'application/javascript+module',content_base64:bytes.toString('base64')}],bindings:[{name:'AFW_INDEPENDENT_CLOSURE',type:'durable_object_namespace',class_name:'IndependentClosure',namespace_id:'070c4a7708eb4592a3ded7c117a88225'}]};
@@ -46,6 +46,6 @@ export async function cfFiniteFixture({at,configure=()=>{}}={}){
   const r=await base.request({method:init.method,path,query,signal:init.signal});return response({...r,messages:[]},r.status);
  };
  const options={plan:p,credential:'synthetic_cf_custody',githubToken:'synthetic_github',fetchImpl,now:base.f.now,signal:new AbortController().signal};
- const observer=()=>createPrivateQaFiniteObserverHttp({admission:{intentId:v.intentId,sourceRevision:v.sourceRevision,T0:v.T0,R1:v.R1},source:{qaLive:p.deployments.qaLive,custody:p.custody},credential:options.credential,githubToken:options.githubToken,fetchImpl,now:base.f.now,signal:options.signal});
- return {base,p,v,state,gh,requests,fetchImpl,observer,adapters:()=>createPrivateQaFiniteRestoreHttp(options)};
+ const observer=()=>gh.api.createPrivateQaFiniteObserverHttp({admission:{intentId:v.intentId,sourceRevision:v.sourceRevision,T0:v.T0,R1:v.R1},source:{qaLive:p.deployments.qaLive,custody:p.custody},credential:options.credential,githubToken:options.githubToken,fetchImpl,now:base.f.now,signal:options.signal});
+ return {base,p,v,state,gh,requests,fetchImpl,observer,adapters:()=>gh.api.createPrivateQaFiniteRestoreHttp(options)};
 }

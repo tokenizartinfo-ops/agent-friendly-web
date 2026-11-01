@@ -56,6 +56,7 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
   if(plan.preview.intentId!==admission.intentId||plan.preview.sourceRevision!==admission.sourceRevision||JSON.stringify(plan.finalizer)!==JSON.stringify(finalizer))fail();
   validateFiniteObserverOutput(observed.output,plan);
   const adapters=createPrivateQaFiniteRestoreHttp({plan,credential,githubToken,fetchImpl,now,signal});
+  await adapters.github.admitOriginalExecution({admission,output:observed.output});
   const result=await createPrivateQaFiniteTrialFinalizer({plan,readSnapshot:adapters.readSnapshot,claim:adapters.claim,deployClosed:adapters.deployClosed,now,signal}).run();
   await write('afw-finite-result.json',JSON.stringify(result));return result;
  }catch{

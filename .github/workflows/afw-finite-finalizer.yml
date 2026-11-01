@@ -77,10 +77,16 @@ jobs:
         with:
           node-version: 22
       - name: Restore exact QA candidate once under original R1
+        id: finite_restore_once
         env:
           AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
-        run: node scripts/run-qa-finite-trial-finalizer.mjs restore
+        shell: bash
+        run: |
+          # Trusted once-launched attempt1 entry. No retry/supervisor or recovery
+          # wrapper may regenerate this coherence marker.
+          export AFW_FINITE_RESTORE_ORIGINAL_PID=$
+          exec node scripts/run-qa-finite-trial-finalizer.mjs restore
       - uses: actions/upload-artifact@v4
         if: always()
         with:

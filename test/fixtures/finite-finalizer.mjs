@@ -1,10 +1,11 @@
+import {validateQaFiniteConfirmationCommand} from '../../lib/mcp-qa-cloud-lifecycle-admission.mjs';
 import {finiteRestorationFixture} from './finite-restoration.mjs';
 import {finiteHash as hash} from '../../lib/mcp-finite-evidence.mjs';
 import {projectPrivateQaFiniteReferences} from '../../lib/mcp-qa-finite-trial-control.mjs';
 import {projectFiniteExternalPlan,validateFiniteObserverOutput} from '../../lib/mcp-qa-finite-external-contract.mjs';
 import {finiteObserverInstanceId} from '../../lib/mcp-qa-finite-observer.mjs';
-export async function finiteFinalizerFixture({configure=()=>{},at}={}){
- const base=await finiteRestorationFixture({at,configure:(p,f)=>{p.intentId='a'.repeat(64);p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});configure(p,f);}});
+export async function finiteFinalizerFixture({configure=()=>{},at,authenticatedIntent=false}={}){
+ const base=await finiteRestorationFixture({at,configure:(p,f)=>{const actor={id:290715446,login:'tokenizartinfo-ops',type:'User'};p.intentId=authenticatedIntent?validateQaFiniteConfirmationCommand({event:{action:'created',repository:{id:1347578006,full_name:'tokenizartinfo-ops/agent-friendly-web'},issue:{number:497},sender:actor,comment:{id:123,body:'/afw-qa-finite-confirmation v1 '+p.source.revision,created_at:new Date(p.T0).toISOString(),author_association:'OWNER',user:actor}},context:{repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'11',runAttempt:'1',sourceRevision:p.source.revision},now:()=>p.T0}).intentId:'a'.repeat(64);p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});configure(p,f);}});
  const {f,identity,store,ctl}=base,p=f.plan,v=projectPrivateQaFiniteReferences(identity),retained=base.retained.record;
  const policy=[{effect:'allow',resources:{'com.cloudflare.api.account.85d0d5dadac3341a564f22ce885e9eec':'*'},permission_groups:[{id:'1'.repeat(32)},{id:'2'.repeat(32)}]}];
  const custody={id:'a'.repeat(32),expiresAt:p.R1,policyHash:hash(policy),permissionGroupIds:['1'.repeat(32),'2'.repeat(32)]};

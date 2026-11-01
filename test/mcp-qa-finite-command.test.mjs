@@ -40,3 +40,11 @@ test('external poll covers late original C1 completion without exhausting at C0 
  const result=await runFiniteFinalizerCli({phase:'poll',env,resolveSource:async()=>f.p,now:f.base.f.now,read:async path=>JSON.stringify(path==='event.json'?command.event:f.p),write:async()=>{},sleep:async ms=>f.base.f.setNow(f.base.f.now()+ms),fetchImpl:async(...args)=>{if(f.base.f.now()>=f.v.C1+1)f.state.observerStatus='complete';return f.fetchImpl(...args);}});
  assert.equal(result.status,'observer_complete');assert.ok(f.base.f.now()>f.v.C1);assert.ok(f.base.f.now()<f.v.R1);assert.equal(f.state.posts,0);
 });
+
+test('fixed restore launcher sets one coherence marker and execs once without a retry wrapper',async()=>{
+ const yaml=await readFile('.github/workflows/afw-finite-finalizer.yml','utf8'),restore=yaml.split('  restore:')[1];
+ assert.match(restore,/id: finite_restore_once/);
+ assert.equal((restore.match(/export AFW_FINITE_RESTORE_ORIGINAL_PID=\$\$/g)??[]).length,1);
+ assert.equal((restore.match(/exec node scripts\/run-qa-finite-trial-finalizer\.mjs restore/g)??[]).length,1);
+ assert.doesNotMatch(restore,/while |until |for .* in |retry:/);
+});
