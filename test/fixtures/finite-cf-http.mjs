@@ -1,3 +1,4 @@
+import {seedPrimaryFixture,SEED_GH} from './finite-seed-primary.mjs';
 import {createHash} from 'node:crypto';
 import {finiteFinalizerFixture} from './finite-finalizer.mjs';
 import {githubFixture} from './finite-github.mjs';
@@ -18,14 +19,19 @@ export async function cfFiniteFixture({at,configure=()=>{}}={}){
  const gh=await githubFixture(base),p=base.plan,v=p.preview,def=AFW_FIXED_WORKFLOWS.find(x=>x.className==='PrivateQaBootstrap'),workflowVersion='77777777-7777-4777-8777-777777777777',requests=[];
  base.restorationState.observer='complete';base.old.state.canary={...base.old.state.canary,versions:[{version_id:p.deployments.canaryClosed.versionId,percentage:100}],id:p.deployments.canaryClosed.deploymentId};
  const state={mode:'normal',observerStatus:'complete',qaVersion:p.deployments.qaLive.versionId,qaDeployment:p.deployments.qaLive.deploymentId,annotation:null,posts:0};
- const ref='refs/tags/afw-finite-observer-create/'+v.intentId;gh.rows.set(ref,{ref,object:{type:'commit',sha:v.sourceRevision}});
+ const seedFixture=await seedPrimaryFixture({T0:v.T0,sourceRevision:v.sourceRevision,commandId:p.commandId,qaLive:p.deployments.qaLive});
+ seedFixture.seed.qaPublication.observedAt=v.T0;seedFixture.refresh();
+ const ref=seedFixture.ref;gh.rows.set(ref,seedFixture.map.get('/git/ref/tags/afw-finite-observer-create/'+v.intentId));gh.tags.set(seedFixture.tagSha,seedFixture.map.get('/git/tags/'+seedFixture.tagSha));
  const response=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{date:new Date(base.f.now()).toUTCString(),'content-type':'application/json'}});
  const answer=(result,result_info)=>({success:true,errors:[],messages:[],result,...result_info?{result_info}:{}});
  const fetchImpl=async(url,init)=>{
-  requests.push({url,method:init.method});if(url.startsWith('https://api.github.com/'))return gh.fetchImpl(url,init);
+  requests.push({url,method:init.method});if(url.startsWith('https://api.github.com/')){
+   const path=url.slice(SEED_GH.length);
+   if(path.startsWith('/git/commits/')||path.startsWith('/contents/')||path.startsWith('/actions/artifacts/')||path==='/actions/runs/101')return response(seedFixture.map.get(path));
+   return gh.fetchImpl(url,init);
+  }
   const u=new URL(url),path=u.pathname.slice('/client/v4'.length),query=Object.fromEntries([...u.searchParams].map(([k,x])=>[k,/^\d+$/.test(x)?Number(x):x]));
-  if(path==='/user/tokens/verify')return response(answer({id:state.mode==='bad-token'?'b'.repeat(32):p.custody.id,status:'active',expires_on:new Date(p.custody.expiresAt).toISOString()}));
-  if(path==='/user/tokens/'+p.custody.id)return response(answer({id:p.custody.id,status:'active',expires_on:new Date(p.custody.expiresAt).toISOString(),policies:state.mode==='bad-scope'?[]:base.policy}));
+  if(path===ROOT+'/tokens/verify')return response(answer({id:state.mode==='bad-token'?'b'.repeat(32):p.custody.id,status:state.mode==='bad-scope'?'disabled':'active',expires_on:new Date(p.custody.expiresAt).toISOString()}));
   if(path===ROOT+'/workers/workers/'+QA+'/versions/'+p.deployments.qaLive.versionId||path===ROOT+'/workers/workers/'+QA+'/versions/'+p.deployments.qaClosed.versionId)return response(answer(versions[path.split('/').at(-1)]));
   if(path===ROOT+'/workflows/'+def.name+'/versions/'+workflowVersion)return response(answer({id:workflowVersion,workflow_id:def.id,class_name:def.className,language:'javascript'}));
   if(path===ROOT+'/workflows/'+def.name+'/instances/'+p.workflows.bootstrap){

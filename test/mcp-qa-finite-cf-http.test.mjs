@@ -20,7 +20,7 @@ test('successful first-step output is readable while observer stays active; tech
  const f=await cfFiniteFixture();f.state.observerStatus='running';const preview=await f.observer().preview();assert.equal(preview.controlHash,f.v.controlHash);assert.equal(JSON.stringify(preview).includes('selectors'),false);
 });
 test('caller ready boolean cannot create observer and consume a native occurrence',async()=>{
- const f=await cfFiniteFixture();await assert.rejects(f.observer().create(true));assert.equal(f.requests.length,0);
+ const f=await cfFiniteFixture();assert.equal(f.observer().create,undefined);assert.equal(f.requests.length,0);
 });
 
 test('parent abort after first custody response cannot start further authenticated reads',async()=>{
@@ -31,34 +31,9 @@ test('parent abort after first custody response cannot start further authenticat
  await assert.rejects(o.qualifyCustody(parent.signal,()=>{}));assert.equal(calls,1);
 });
 
-test('lost Workflow create ACK reconciles the exact instance and never sends a replacement',async()=>{
- const {validateQaFiniteConfirmationCommand}=await import('../lib/mcp-qa-cloud-lifecycle-admission.mjs');
- const {claimFiniteObserverCreation,createPrivateQaFiniteObserverHttp,createPrivateQaFiniteGithub}=await import('../lib/mcp-qa-finite-http.mjs');
- const {finiteObserverInstanceId}=await import('../lib/mcp-qa-finite-observer.mjs');
- const at=Date.now(),sha='b'.repeat(40),actor={id:290715446,login:'tokenizartinfo-ops',type:'User'};
- const event={action:'created',repository:{id:1347578006,full_name:'tokenizartinfo-ops/agent-friendly-web'},issue:{number:497},sender:{...actor},comment:{id:123,body:'/afw-qa-finite-confirmation v1 '+sha,created_at:new Date(at).toISOString(),author_association:'OWNER',user:{...actor}}};
- const context={repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'11',runAttempt:'1',sourceRevision:sha};
- let observed=at+100;
- const admission=validateQaFiniteConfirmationCommand({event,context,now:()=>observed});
- const f=await cfFiniteFixture({at,configure:p=>{p.intentId=admission.intentId;p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});}});
- f.base.f.setNow(at+100);f.state.observerStatus='running';f.gh.rows.delete('refs/tags/afw-finite-observer-create/'+admission.intentId);
- let sends=0;
- const fetchImpl=async(url,init)=>{if(init.method==='POST'&&url.includes('api.cloudflare.com')){sends++;const body=JSON.parse(init.body);assert.equal(body.id,f.p.workflows.bootstrap);assert.deepEqual(body.params,{operation:'finite_cleanup_observer',intentId:admission.intentId,sourceRevision:sha});throw Error('synthetic lost create ACK');}return f.fetchImpl(url,init);};
- const signal=new AbortController().signal,options={githubToken:'synthetic_gh',fetchImpl,now:f.base.f.now,signal};
- const token=await claimFiniteObserverCreation({admission,...options});
- const observer=createPrivateQaFiniteObserverHttp({admission:{intentId:admission.intentId,sourceRevision:sha,T0:at,R1:at+480000},source:{qaLive:f.p.deployments.qaLive,custody:f.p.custody},credential:'synthetic_cf',...options});
- assert.equal((await observer.create(token)).status,'running');assert.equal(sends,1);
- await assert.rejects(observer.create(token));await assert.rejects(claimFiniteObserverCreation({admission,...options}));
- assert.equal((await observer.read()).preview.controlHash,f.v.controlHash);assert.equal(sends,1);
- const ready=createPrivateQaFiniteGithub({plan:f.p,...options});
- assert.equal((await ready.persistAdmission('synthetic_cf',admission)).controlPlanHash,f.v.planHash);
- const beforeRefs=f.gh.refPosts,beforeTags=f.gh.tagPosts;
- const late=createPrivateQaFiniteGithub({plan:f.p,...options,fetchImpl:async(url,init)=>{
-  const response=await fetchImpl(url,init);
-  if(url.endsWith('/git/tags')&&init.method==='POST'){observed=at+120001;f.base.f.setNow(observed);}
-  return response;
- }});
- await assert.rejects(late.persistAdmission('synthetic_cf',admission));
- assert.equal(f.gh.tagPosts,beforeTags+1);assert.equal(f.gh.refPosts,beforeRefs);
+test('finite GHA ingress is GET-only even when exact observer is absent',async()=>{
+ const f=await cfFiniteFixture(),o=f.observer();assert.equal(o.create,undefined);
+ const {claimFiniteObserverCreation}=await import('../lib/mcp-qa-finite-http.mjs');assert.equal(claimFiniteObserverCreation,undefined);
+ await o.read();assert.equal(f.requests.filter(x=>x.method==='POST').length,0);
+ assert(!f.requests.some(x=>x.url.includes('/user/tokens')));
 });
-

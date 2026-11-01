@@ -1,0 +1,34 @@
+import {createHash} from 'node:crypto';
+import {readFile} from 'node:fs/promises';
+import {encodeFiniteMaterialSeed,hashFinitePackageManifest} from '../../lib/mcp-qa-finite-seed.mjs';
+export const SEED_GH='https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web';
+export const digest=x=>createHash('sha256').update(x).digest('hex');
+export const seedFile=(path,text)=>({type:'file',path,encoding:'base64',size:Buffer.byteLength(text),sha:createHash('sha1').update('blob '+Buffer.byteLength(text)+'\0').update(text).digest('hex'),content:Buffer.from(text).toString('base64')});
+export async function seedPrimaryFixture({T0=Date.parse('2026-11-01T18:00:00Z'),sourceRevision='b'.repeat(40),commandId='123',qaLive,manifest:inputManifest,build:inputBuild}={}){
+ const sourceTree='c'.repeat(40),actor={id:290715446,login:'tokenizartinfo-ops',type:'User'},repository={id:1347578006,full_name:'tokenizartinfo-ops/agent-friendly-web'};
+ const intentId=digest('afw.qa-finite-confirmation-command.v1\n1347578006\n'+commandId+'\n'+sourceRevision+'\n'+T0);
+ const buildPath='.github/workflows/afw-finite-native-package.yml',workflow='name: Synthetic package\non:\n  push:\n    branches: [main]\n',finalizerPath='.github/workflows/afw-finite-finalizer.yml';
+ const module={name:'index.mjs',sha256:'1'.repeat(64),bytes:1,exports:[]};
+ const manifest=inputManifest??{purpose:'afw.finite-native-package.v1',sourceRevision,sourceTree,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:digest(workflow),modules:Object.fromEntries(['qaLive','qaClosed','canaryLive','canaryClosed','operatorClosed'].map(role=>[role,{sourceRevision:role==='operatorClosed'?'d'.repeat(40):sourceRevision,sourceTree:role==='operatorClosed'?'e'.repeat(40):sourceTree,module:{...module,name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',...(role==='qaLive'&&qaLive?qaLive.module:{})},configurationHash:role==='qaLive'&&qaLive?qaLive.configurationHash:'2'.repeat(64),profileHash:'3'.repeat(64),bindingsHash:'4'.repeat(64)}])),compatibility:Object.fromEntries(['qaClassesPreserved','qaNamespacesPreserved','canaryClassesPreserved','canaryNamespacesPreserved','closedEntrypointsDenied','legacyContainmentQualified'].map(k=>[k,true]))};
+ const build=inputBuild??{workflowPath:buildPath,runId:101,attempt:1,artifactId:202,artifactName:'afw-finite-native-package-'+sourceRevision,artifactDigest:'sha256:'+'5'.repeat(64),manifestHash:hashFinitePackageManifest(manifest)};
+ const live={versionId:qaLive?.versionId??'11111111-1111-4111-8111-111111111111',deploymentId:qaLive?.deploymentId??'22222222-2222-4222-8222-222222222222'},closedId='c570b60b-95dc-48e1-89f3-9c4651691dbc';
+ const pubRole=role=>Object.fromEntries(['module','configurationHash','profileHash','bindingsHash'].map(k=>[k,structuredClone(manifest.modules[role][k])]));
+ const seed={purpose:'afw.finite-material-seed.v1',repository:repository.full_name,repositoryId:repository.id,intentId,sourceRevision,commandId,finalizer:{runId:11,attempt:1,jobId:12,workflowPath:finalizerPath,seedStep:'seed-material'},build,manifest,qaPublication:{purpose:'afw.finite-qa-publication.v1',accountId:'85d0d5dadac3341a564f22ce885e9eec',workerName:'agent-friendly-web-independent-closure-qa',qaLive:{...live,...pubRole('qaLive')},qaClosed:{versionId:closedId,...pubRole('qaClosed')},observedAt:T0+1000}};
+ const ref='refs/tags/afw-finite-observer-create/'+intentId,tagSha='f'.repeat(40),map=new Map();
+ map.set('/git/ref/tags/afw-finite-observer-create/'+intentId,{ref,object:{type:'tag',sha:tagSha}});
+ map.set('/git/tags/'+tagSha,{sha:tagSha,tag:'afw-finite-observer-seed-'+intentId,object:{type:'commit',sha:sourceRevision},message:encodeFiniteMaterialSeed(seed)});
+ map.set('/issues/comments/'+commandId,{id:Number(commandId),body:'/afw-qa-finite-confirmation v1 '+sourceRevision,created_at:new Date(T0).toISOString(),user:actor,author_association:'OWNER',issue_url:SEED_GH+'/issues/497'});
+ map.set('/git/ref/heads/main',{ref:'refs/heads/main',object:{type:'commit',sha:sourceRevision}});
+ map.set('/actions/runs/11',{id:11,run_attempt:1,head_sha:sourceRevision,head_branch:'main',event:'issue_comment',path:finalizerPath,repository,head_repository:repository,actor,triggering_actor:actor,display_title:'AFW finite finalizer comment-'+commandId+' source-'+sourceRevision,status:'in_progress'});
+ const seedStep={name:'seed-material',number:3,status:'completed',conclusion:'success',started_at:new Date(T0).toISOString(),completed_at:new Date(T0+2000).toISOString()};
+ map.set('/actions/runs/11/attempts/1/jobs?per_page=100',{total_count:1,jobs:[{id:12,run_id:11,head_sha:sourceRevision,name:'admit',status:'in_progress',conclusion:null,started_at:new Date(T0).toISOString(),steps:[seedStep]}]});
+ map.set('/git/commits/'+sourceRevision,{sha:sourceRevision,tree:{sha:manifest.sourceTree}});
+ map.set('/actions/runs/101',{id:101,run_attempt:1,head_sha:sourceRevision,head_branch:'main',event:'push',path:buildPath,repository,head_repository:repository,status:'completed',conclusion:'success'});
+ map.set('/actions/artifacts/202',{id:202,name:build.artifactName,digest:build.artifactDigest,expired:false,expires_at:new Date(T0+86400000).toISOString(),size_in_bytes:1000,workflow_run:{id:101,repository_id:repository.id,head_repository_id:repository.id,head_sha:sourceRevision,head_branch:'main'}});
+ map.set('/contents/'+buildPath+'?ref='+sourceRevision,seedFile(buildPath,workflow));
+ map.set('/contents/'+finalizerPath+'?ref='+sourceRevision,seedFile(finalizerPath,await readFile(finalizerPath,'utf8')));
+ let at=T0+3000;const calls=[];
+ const response=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{date:new Date(at).toUTCString(),'content-type':'application/json'}});
+ const fetchImpl=async(url,init)=>{calls.push({url,init});if(init.method!=='GET'||!url.startsWith(SEED_GH))throw Error('synthetic fixed GET');const path=url.slice(SEED_GH.length);return response(map.get(path)??{},map.has(path)?200:404);};
+ return {T0,seed,map,seedStep,tagSha,ref,actor,repository,live,workflow,buildPath,calls,response,fetchImpl,now:()=>at,setNow:value=>{at=value;},refresh(){map.get('/git/tags/'+tagSha).message=encodeFiniteMaterialSeed(seed);},options:{intentId,sourceRevision,fetchImpl,now:()=>at,signal:new AbortController().signal}};
+}

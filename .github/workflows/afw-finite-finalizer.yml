@@ -45,6 +45,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: seed-material
+        id: finite_seed_once
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          export AFW_FINITE_SEED_ORIGINAL_PID=$
+          exec node scripts/run-qa-finite-trial-finalizer.mjs seed-material
       - name: admit-and-ready
         env:
           AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
