@@ -1,3 +1,4 @@
+import {finiteLauncherInstanceId} from '../../lib/mcp-qa-finite-launch-records.mjs';
 import {finiteCleanupPolicyHash} from '../../lib/mcp-finite-cleanup-policy.mjs';
 import {createHash} from 'node:crypto';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../../lib/mcp-qa-closed-context.mjs';
@@ -24,7 +25,8 @@ export function finiteFixture({at:override}={}){
  canaryContainment:{sourceRevision:'f'.repeat(40),runtimeVersionId:pin(3).versionId,moduleHash:'0'.repeat(64),profileHash:'1'.repeat(64),bindingsHash:'2'.repeat(64)},
  selectors:{grantId:'current-grant',subject:'subject',projectId:'project',clientId:'client',resource:'https://fixed.invalid/mcp',consentHash:'a'.repeat(64),programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40),startAt:T0,expiresAt:N1,saveIdempotencyKey:'11111111-1111-4111-8111-111111111111',expectedProjectRevision:1,goal:'discovery'},
  withdrawalPolicyHash:'1'.repeat(64),closePolicyHash:'2'.repeat(64),
- workflows:{confirmation:'afw-release-'+'6'.repeat(64),bootstrap:'fixed-bootstrap'},
+ launchPolicy:{armAckBy:T0+90000,launchAt:T0+150000,lastCreateAt:T0+160000},
+ workflows:{confirmation:'afw-release-'+'6'.repeat(64),bootstrap:'fixed-bootstrap',launcher:finiteLauncherInstanceId({intentId:'finite-test-001',sourceRevision:'b'.repeat(40)})},
  finalizer:{repository:'tokenizartinfo-ops/agent-friendly-web',runId:11,attempt:1,jobId:12,workflow:'afw-finite-finalizer',sourceRevision:'b'.repeat(40),readyStep:'admit-and-ready'},
  legacy:{control:JSON.stringify(legacy),controlHash:hash(JSON.stringify(legacy)),preparedDispatch:JSON.stringify(prepared),preparedDispatchHash:hash(JSON.stringify(prepared)),reductionDispatch:JSON.stringify(reduction),reductionDispatchHash:hash(JSON.stringify(reduction)),restoration:null,retirement:null,sourceRevision:'d'.repeat(40),sourceHash:'e'.repeat(64)}
  };
