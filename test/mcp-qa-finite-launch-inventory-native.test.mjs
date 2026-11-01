@@ -175,3 +175,17 @@ test('prelaunch checks the actual sole C0 alarm as well as guard metadata',async
 
 test('orphan guard without a finite HEAD is not an unspent launch',async()=>{assert.equal((await native('orphan-guard')).result.kind,'unavailable');});
 test('actual cleanup permission claim prevents a new prelaunch observation',async()=>{assert.equal((await native('cleanup-started')).result.kind,'unavailable');});
+
+test('one parent retains narrower absolute ends and rejects reversal, expiry and reuse',()=>{
+ let at=1000;const p=inventoryApi.createPrivateQaFiniteLaunchParent({now:()=>at,deadline:1100});
+ assert.equal(p.deadline,1100);assert.equal(p.check(),1000);at=999;assert.throws(()=>p.check());at=1000;assert.throws(()=>p.check());
+ const q=inventoryApi.createPrivateQaFiniteLaunchParent({now:()=>at,deadline:20000});assert.equal(q.deadline,6000);at=6000;assert.throws(()=>q.check());
+});
+test('snapshot rejects a DTO native pin, orphan ACK and an old missing-policy plan',async()=>{
+ const f=finiteFixture(),o=f.options(controlApi),parent={check:f.now,signal:new AbortController().signal,deadline:f.now()+5000};
+ const read=changes=>controlApi.readPrivateQaFiniteControlSnapshot({storage:f.storage,nativePin:o.nativePin,plan:o.plan,parent,...changes});
+ await assert.rejects(read({nativePin:{}}));
+ const old=JSON.parse(o.plan);delete old.launchPolicy;await assert.rejects(read({plan:JSON.stringify(old)}));
+ f.rows.set('afw.qa-finite-child-create.v1:'+f.plan.intentId+':ack',{purpose:'afw.qa-finite-child-create-ack.v1',intentId:f.plan.intentId,controlHash:'1'.repeat(64),sendHash:'2'.repeat(64),nominalId:f.plan.workflows.confirmation,acknowledgedAt:f.now()});
+ await assert.rejects(read({}));
+});
