@@ -118,3 +118,48 @@ test('lost armed CAS ACK never grants nominal authority after reconstruction',as
 test('successful prepare does not revive nominal after instance reconstruction',async()=>{
  const f=finiteFixture();assert.equal((await control(f).prepare()).status,'armed');assert.equal((await control(f).claimEffect('nominal')).status,'blocked');
 });
+
+test('separate QA and canary source tuples are bound without fabricated equal hashes',async()=>{
+ const f=finiteFixture();assert.notEqual(f.plan.source.moduleHash,f.plan.canaryContainment.moduleHash);const c=control(f);assert.equal((await c.prepare()).status,'armed');
+ const g=finiteFixture(),original=g.primary.admission;g.primary.admission=async()=>{const v=await original();v.containment.sourceHash=g.plan.source.moduleHash;return v;};
+ assert.equal((await control(g).prepare()).status,'blocked');
+});
+test('saved fact capture rechecks primary subscription/process against retained facts',async()=>{
+ const f=finiteFixture();for(const k of ['subscription','process','saved_event'])f.primary[k==='saved_event'?'savedEvent':k]=async()=>f.facts[k]();
+ const c=control(f);await c.prepare();await c.captureObservedFacts('subscription');await c.captureObservedFacts('process');
+ const old=f.facts.subscription;f.facts.subscription=()=>({...old(),receiptHash:'f'.repeat(64)});const n=f.puts;
+ assert.equal((await c.captureObservedFacts('saved_event')).status,'blocked');assert.equal(f.puts,n);
+});
+test('late commit after bounded timeout preserves pending and cannot arm',async()=>{
+ const f=finiteFixture(),original=f.storage.transaction;
+ f.storage.transaction=async fn=>{const result=await original.call(f.storage,fn);await new Promise(r=>setTimeout(r,40));return result;};
+ const options=f.options(api);options.timeoutMs=10;const c=api.createPrivateQaFiniteTrialControl(options);
+ assert.equal((await c.prepare()).status,'uncertain');await new Promise(r=>setTimeout(r,60));
+ const row=f.rows.get(ROOT+':'+f.plan.intentId+':control');assert.equal(row.phase,'pending');assert.equal(row.armedAt,null);
+ assert.equal((await c.claimEffect('nominal')).status,'blocked');
+});
+test('captured facts and immutable claims reject corrupted or unknown stored records',async()=>{
+ for(const suffix of ['unexpected','effect:close']){
+ const f=finiteFixture(),c=control(f);await c.prepare();f.rows.set(ROOT+':'+f.plan.intentId+':'+suffix,{phase:'complete'});assert.equal((await c.read()).status,'blocked');}
+});
+test('capture expiry and changed native profile do not move any original deadline',async()=>{
+ const f=finiteFixture();f.primary.subscription=async()=>f.facts.subscription();const c=control(f);await c.prepare();const n=f.puts;f.setNow(f.plan.N1);
+ assert.equal((await c.captureObservedFacts('subscription')).status,'blocked');assert.equal(f.puts,n);assert.equal(f.alarm,f.plan.C0);
+});
+
+test('narrow primary consent never widens or survives an awaited finalizer expiry',async()=>{
+ for(const operation of ['prepare','claimEffect','captureObservedFacts']){
+ const f=finiteFixture();let expire=false;
+ const base=f.primary.admission;f.primary.admission=async()=>{const v=await base();v.consent.expiresAt=f.plan.T0+10;return v;};
+ const finalizer=f.primary.finalizer;f.primary.finalizer=async()=>{const v=await finalizer();if(expire)f.setNow(f.plan.T0+10);return v;};
+ f.primary.subscription=async()=>{const v=f.facts.subscription();if(expire)f.setNow(f.plan.T0+10);return v;};
+ const c=control(f);if(operation!=='prepare')await c.prepare();const n=f.puts;expire=true;
+ const r=await (operation==='prepare'?c.prepare():operation==='claimEffect'?c.claimEffect('nominal'):c.captureObservedFacts('subscription'));
+ assert.equal(r.status,'blocked');assert.equal(f.puts,n);
+ }
+});
+test('consent expiry inside pending transaction prevents acknowledgment/nominal arm',async()=>{
+ const f=finiteFixture(),base=f.primary.admission;f.primary.admission=async()=>{const v=await base();v.consent.expiresAt=f.plan.T0+10;return v;};
+ const original=f.storage.transaction;f.storage.transaction=fn=>original.call(f.storage,async t=>fn({...t,put:async(k,v)=>{await t.put(k,v);if(k.endsWith(':info'))f.setNow(f.plan.T0+10);}}));
+ const c=control(f);assert.equal((await c.prepare()).status,'uncertain');assert.equal((await c.claimEffect('nominal')).status,'blocked');
+});

@@ -3,8 +3,8 @@ import {generationFixture} from './qa-generation-ledger.mjs';
 export const hash=v=>createHash('sha256').update(v).digest('hex');
 export const ROOT='afw.qa-finite-trial.v1',HEAD=ROOT+':head';
 export const digest=(domain,v)=>hash(domain+'\n'+JSON.stringify(v));
-export function finiteFixture(){
- const old=generationFixture();let at=old.now()+1000000;
+export function finiteFixture({at:override}={}){
+ const old=generationFixture();let at=override??old.now()+1000000;
  const T0=at,N1=T0+300000,C0=N1-60000,C1=N1+120000,R1=N1+180000;
  const version='11111111-1111-4111-8111-111111111111',actorId='a'.repeat(64);
  const legacy=old.legacy,closure=JSON.parse(legacy.policy);
@@ -19,6 +19,7 @@ export function finiteFixture(){
  T0,N1,C0,C1,R1,
  resources:{actorId,containerId:'7'.repeat(64),applicationId:version,namespaceId:'8'.repeat(32),qaD1Id:version,releaseD1Id:version.replace(/^1/,'2'),canaryActorId:'9'.repeat(64)},
  deployments:{qaLive:{...pin(1),versionId:version},qaClosed:pin(2),canaryLive:pin(3),canaryClosed:pin(4),operatorClosed:pin(5)},
+ canaryContainment:{sourceRevision:'f'.repeat(40),runtimeVersionId:pin(3).versionId,moduleHash:'0'.repeat(64),profileHash:'1'.repeat(64),bindingsHash:'2'.repeat(64)},
  selectors:{grantId:'current-grant',subject:'subject',projectId:'project',clientId:'client',resource:'https://fixed.invalid/mcp',consentHash:'a'.repeat(64),programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40),startAt:T0,expiresAt:N1,saveIdempotencyKey:'11111111-1111-4111-8111-111111111111',expectedProjectRevision:1,goal:'discovery'},
  withdrawalPolicyHash:'1'.repeat(64),closePolicyHash:'2'.repeat(64),
  workflows:{confirmation:'afw-release-'+'6'.repeat(64),bootstrap:'fixed-bootstrap',nominalRunId:10},
@@ -44,7 +45,7 @@ export function finiteFixture(){
  const fingerprint=hash(JSON.stringify(['afw.own-synthetic-save.v1',plan.selectors.grantId,1,'discovery']));
  const identity=()=>({intentId:plan.intentId,sourceRevision:plan.source.revision,runtimeVersionId:version,actorId:plan.resources.actorId,planHash:digest(plan.purpose,plan)});
  const admission=()=>({purpose:'afw.qa-finite-primary.v1',...identity(),observedAt:at,command:structuredClone(plan.command),source:structuredClone(plan.source),resources:structuredClone(plan.resources),deployments:structuredClone(plan.deployments),legacyControlHash:plan.legacy.controlHash,legacyPreparedHash:plan.legacy.preparedDispatchHash,legacyReductionHash:plan.legacy.reductionDispatchHash,legacySourceHash:plan.legacy.sourceHash,retainedUncertainty:true,
- containment:{entrypoint:'legacy_saved_event',finiteEntrypoint:'finite_trial_event',sourceHash:plan.source.moduleHash,profileHash:plan.source.profileHash,bindingsHash:plan.source.bindingsHash,denyBeforeAccess:true,enteredWritersIsolated:true,signedPacketsFenced:true,separateLegacyWritersTerminal:true,legacyGrantRevoked:true,legacyMonitorExpired:true,evidenceHash:'1'.repeat(64)},
+ containment:{entrypoint:'legacy_saved_event',finiteEntrypoint:'finite_trial_event',sourceRevision:plan.canaryContainment.sourceRevision,runtimeVersionId:plan.canaryContainment.runtimeVersionId,sourceHash:plan.canaryContainment.moduleHash,profileHash:plan.canaryContainment.profileHash,bindingsHash:plan.canaryContainment.bindingsHash,denyBeforeAccess:true,enteredWritersIsolated:true,signedPacketsFenced:true,separateLegacyWritersTerminal:true,legacyGrantRevoked:true,legacyMonitorExpired:true,evidenceHash:'1'.repeat(64)},
  quiescence:{currentWriters:0,newScopeWriters:0,unresolvedWrites:0,completeInventory:true,inventoryHash:'2'.repeat(64),receiptsHash:'3'.repeat(64),snapshotHash:'4'.repeat(64)},
  consent:{grantHash:plan.grantHash,monitorHash:plan.monitorHash,selectorsHash:digest('afw.qa-finite-selectors.v1',plan.selectors),valid:true,expiresAt:N1}});
  const finalizer=()=>({purpose:'afw.qa-finite-finalizer-ready.v1',...identity(),observedAt:at,repository:plan.finalizer.repository,runId:11,attempt:1,sourceRevision:plan.source.revision,intentId:plan.intentId,workflow:plan.finalizer.workflow,status:'in_progress',job:{id:12,status:'in_progress',startedAt:T0,steps:[{name:'admit-and-ready',status:'completed',conclusion:'success',startedAt:T0,completedAt:T0}]},admission:{commandId:'123',controlPlanHash:identity().planHash,R1,resourceHash:digest('afw.qa-finite-resources.v1',plan.resources),custodyHash:'5'.repeat(64),validatedAt:T0},evidenceHash:'6'.repeat(64)});
