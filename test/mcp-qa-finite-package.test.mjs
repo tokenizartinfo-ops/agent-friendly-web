@@ -6,10 +6,10 @@ import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {encodeFinitePackageManifest,hashFinitePackageManifest} from '../lib/mcp-qa-finite-seed.mjs';
-import {resolvePrivateQaFiniteExternalSource} from '../lib/mcp-qa-finite-source.mjs';
+import {resolvePrivateQaFiniteExternalSource,resolveFiniteNativePackage as syntheticResolver} from './fixtures/finite-package-resolver.mjs';
 
 let resolver;
-try{({resolveFiniteNativePackage:resolver}=await import('../lib/mcp-qa-finite-package.mjs'));}catch{/* RED: implementation absent. */}
+resolver=syntheticResolver;
 const REPO='tokenizartinfo-ops/agent-friendly-web',ID=1347578006;
 const API='https://api.github.com/repos/'+REPO;
 const M='a'.repeat(40),TREE='b'.repeat(40),OLD='c'.repeat(40),OLDTREE='d'.repeat(40);
@@ -136,7 +136,7 @@ for(const name of ['zero','duplicate','overflow','incomplete']){
 for(const [name,edit] of [
  ['wrong source',m=>{m.sourceRevision=OLD;}],['wrong tree',m=>{m.sourceTree=OLDTREE;}],
  ['workflow hash',m=>{m.buildWorkflowHash='0'.repeat(64);}],['module hash',m=>{m.modules.qaLive.module.sha256='0'.repeat(64);}],
- ['module size',m=>{m.modules.qaLive.module.bytes++;}],['private field',m=>{m.token='private';}],
+ ['module size',m=>{m.modules.qaLive.module.bytes++;}],['literal historical module mismatch',m=>{m.modules.qaClosed.module.sha256='0'.repeat(64);}],['private field',m=>{m.token='private';}],
  ['nested unknown field',m=>{m.modules.qaLive.policy={};}],['historical operator relabeled current M',m=>{m.modules.operatorClosed.sourceRevision=M;m.modules.operatorClosed.sourceTree=TREE;}],
  ['unknown historical source tree',m=>{m.modules.operatorClosed.sourceTree=TREE;}],['untrue structural assertion',m=>{m.compatibility.legacyContainmentQualified=false;}],
  ['module traversal',m=>{m.modules.qaLive.module.name='../index.mjs';}],

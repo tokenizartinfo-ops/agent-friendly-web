@@ -29,10 +29,12 @@ jobs:
         run: node --test test/mcp-qa-finite-http.test.mjs test/mcp-qa-finite-cf-http.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-read-rpc-native.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-profile.mjs lib/mcp-qa-finite-source-authority.mjs lib/mcp-qa-finite-seed.mjs lib/mcp-qa-finite-package.mjs lib/mcp-qa-finite-publication.mjs lib/mcp-qa-finite-seed-issuer.mjs lib/mcp-qa-finite-http.mjs lib/mcp-activation-observer.mjs scripts/build-finite-native-package.mjs worker/independent-closure/finite.mjs worker/mcp-own/finite.mjs test/mcp-qa-finite-profile.test.mjs test/build-finite-native-package.test.mjs test/mcp-qa-finite-profile-native.test.mjs test/fixtures/finite-v2.mjs test/fixtures/finite-seed-world.mjs test/fixtures/finite-seed-primary.mjs test/mcp-qa-finite-seed.test.mjs test/mcp-qa-finite-package.test.mjs
+        run: npx eslint lib/mcp-qa-finite-profile.mjs lib/mcp-qa-finite-source-authority.mjs lib/mcp-qa-finite-seed.mjs lib/mcp-qa-finite-package.mjs lib/mcp-qa-finite-publication.mjs lib/mcp-qa-finite-seed-issuer.mjs lib/mcp-qa-finite-http.mjs lib/mcp-activation-observer.mjs scripts/build-finite-native-package.mjs worker/independent-closure/finite.mjs worker/mcp-own/finite.mjs test/mcp-qa-finite-profile.test.mjs test/build-finite-native-package.test.mjs test/mcp-qa-finite-profile-native.test.mjs test/fixtures/finite-v2.mjs test/fixtures/finite-seed-world.mjs test/fixtures/finite-seed-primary.mjs test/mcp-qa-finite-seed.test.mjs test/mcp-qa-finite-package.test.mjs test/fixtures/finite-package-resolver.mjs test/mcp-qa-finite-cf-http.test.mjs
       - name: Actual isolated staging bytes
         if: always()
-        run: node scripts/build-finite-native-package.mjs --staging "${{ github.sha }}"
+        run: |
+          node scripts/build-finite-native-package.mjs --staging "${{ github.sha }}"
+          cat output/finite-native-staging/staging.json
       - name: Wrangler actual staging byte dry runs
         run: |
           sha256sum output/finite-native-staging/qaLive/index.mjs output/finite-native-staging/canaryLive/index.mjs > "$RUNNER_TEMP/finite-staging-before.sha256"

@@ -9,6 +9,11 @@ test('real fixed HTTP adapters recover terminal proof, perform one QA POST and s
  assert.ok(f.requests.some(x=>x.url.includes('/versions/77777777-7777-4777-8777-777777777777')));
  const cfPosts=f.requests.filter(x=>x.method==='POST'&&x.url.includes('api.cloudflare.com'));
  assert.equal(cfPosts.length,1);assert.ok(cfPosts[0].url.endsWith('/workers/scripts/agent-friendly-web-independent-closure-qa/deployments'));
+ const canary='agent-friendly-web-delegated-canary';
+ const pointerIndex=f.requests.findIndex(x=>x.url.includes('/scripts/'+canary+'/deployments'));
+ const metadataIndex=f.requests.findIndex(x=>x.url.includes('/workers/'+canary+'/versions/'+f.p.deployments.canaryClosed.versionId));
+ assert(pointerIndex>=0&&metadataIndex>pointerIndex);
+ assert(!f.requests.some(x=>x.url.includes('/workers/'+canary+'/versions/'+f.p.deployments.canaryLive.versionId)));
  assert.equal(f.requests.some(x=>/\/d1\/|\/durable_objects\/.*\/invoke/.test(x.url)),false);
 });
 for(const mode of ['bad-token','bad-scope','wrong-first','wrong-native'])test('actual CF grammar rejects '+mode+' before GitHub effect fence',async()=>{

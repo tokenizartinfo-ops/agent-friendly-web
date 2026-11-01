@@ -102,7 +102,9 @@ class ArchiveTests(unittest.TestCase):
         self.assertEqual(r.stderr, b"")
 
     def test_exact_manifest_boundary(self):
-        text = json.dumps({"x": "a" * 24568}, separators=(",", ":"))
+        base = {"purpose": "afw.finite-native-package.v2", "x": ""}
+        base["x"] = "a" * (24576 - len(json.dumps(base, separators=(",", ":"))))
+        text = json.dumps(base, separators=(",", ":"))
         self.assertEqual(len(text), 24576)
         self.assertEqual(self.invoke(make_archive(json.loads(text))).returncode, 0)
 

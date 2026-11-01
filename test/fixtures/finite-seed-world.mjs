@@ -1,3 +1,4 @@
+import {QA_CLOUD_CLOSED_PINS} from '../../lib/mcp-qa-cloud-closed-pins.mjs';
 Error.stackTraceLimit=0;
 import {readFileSync} from 'node:fs';
 import {build} from 'esbuild';
@@ -33,7 +34,7 @@ export async function seedWorld({sourceAuthority=true}={}){
  const artifact=f.map.get('/actions/artifacts/202');artifact.digest=f.seed.build.artifactDigest;artifact.size_in_bytes=zip.length;
  f.seedStep.status='in_progress';f.seedStep.conclusion=null;f.seedStep.completed_at=null;f.setNow(f.T0+1000);
  f.map.delete('/git/ref/tags/afw-finite-observer-create/'+f.seed.intentId);f.map.delete('/git/tags/'+f.tagSha);
- const pins={qaClosed:{name:QA,id:closedId,configurationHash:f.seed.qaPublication.qaClosed.configurationHash,bindingCount:1,flagCount:0,module:{name:'closed-rollback.mjs',bytes:MODULE.length,sha256:digest(MODULE)}}};
+ const pins={...QA_CLOUD_CLOSED_PINS,qaClosed:{name:QA,id:closedId,configurationHash:f.seed.qaPublication.qaClosed.configurationHash,bindingCount:1,flagCount:0,module:{name:'closed-rollback.mjs',bytes:MODULE.length,sha256:digest(MODULE)}}};
  const syntheticAuthority=`
  import assert from 'node:assert/strict';
  const expected=${JSON.stringify(m)},versions=${JSON.stringify(versions)};
@@ -48,7 +49,7 @@ export async function seedWorld({sourceAuthority=true}={}){
  `;
  const authorityPath=resolve('lib/mcp-qa-finite-source-authority.mjs'),pinsPath=resolve('lib/mcp-qa-cloud-closed-pins.mjs');
  const bundle=await build({stdin:{contents:"export * from './lib/mcp-qa-finite-seed-issuer.mjs';export * from './lib/mcp-qa-finite-seed-http.mjs';export * from './lib/mcp-qa-finite-publication-bridge.mjs';export * from './lib/mcp-qa-cloud-lifecycle-admission.mjs';export * from './scripts/run-qa-finite-trial-finalizer.mjs';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node',external:['node:*'],banner:{js:"import {createRequire as __createRequire} from 'node:module'; const require = __createRequire(process.cwd()+'/package.json');"},plugins:[{name:'explicit-synthetic-source-authority',setup(b){
-  b.onResolve({filter:/mcp-qa-finite-package\.mjs$/},()=>({path:pathToFileURL(resolve('lib/mcp-qa-finite-package.mjs')).href,external:true}));
+  b.onResolve({filter:/mcp-qa-finite-package\.mjs$/},()=>({path:pathToFileURL(resolve('test/fixtures/finite-package-resolver.mjs')).href,external:true}));
   b.onLoad({filter:/mcp-qa-finite-source-authority\.mjs$/},async args=>args.path===authorityPath&&sourceAuthority?{contents:syntheticAuthority,loader:'js'}:undefined);
   b.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},async args=>args.path===pinsPath&&sourceAuthority?{contents:'export const QA_CLOUD_CLOSED_PINS='+JSON.stringify(pins)+';',loader:'js'}:undefined);
  }}]});
