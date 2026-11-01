@@ -1,3 +1,4 @@
+import {finiteFields as finiteReadFields} from '../../lib/mcp-finite-evidence.mjs';
 import {readFiniteTrialCleanupProofHead,readRetainedFiniteCleanupProof,readFiniteTrialCleanupCompletion} from '../../lib/mcp-qa-finite-cleanup-store.mjs';
 import {runPrivateQaFiniteTrialAlarm,readPrivateQaFiniteNominalControl} from '../../lib/mcp-qa-finite-trial-guard.mjs';
 import {readPrivateQaGenerationPreparation,runPrivateQaGenerationPreparation} from '../../lib/mcp-qa-generation-preparation.mjs';
@@ -178,11 +179,11 @@ export class PrivateQaCatalog extends DurableObject {
 // Private host only. Missing catalog/custody stays closed. No caller approval,
 // provisioning, registration, HTTP routes or implicit enrollment.
 export class IndependentClosure extends DurableObject {
- async #finiteRead(fn,args){if(args.length!==1||!isPrivateCanaryRestorationActor(this.env,this.ctx))throw Error('Finite read unavailable');return fn({...args[0],storage:this.ctx.storage});}
+ async #finiteRead(fn,args,keys){if(args.length!==1||!isPrivateCanaryRestorationActor(this.env,this.ctx))throw Error('Finite read unavailable');const refs=finiteReadFields(args[0],keys);return fn({...refs,storage:this.ctx.storage});}
  async readFiniteTrialNominalControl(...args){if(args.length!==1||!isPrivateCanaryRestorationActor(this.env,this.ctx))throw Error('Finite nominal control unavailable');return readPrivateQaFiniteNominalControl({ctx:this.ctx,env:this.env,refs:args[0]});}
- readFiniteTrialCleanupProofHead(...args){return this.#finiteRead(readFiniteTrialCleanupProofHead,args);}
- readRetainedFiniteCleanupProof(...args){return this.#finiteRead(readRetainedFiniteCleanupProof,args);}
- readFiniteTrialCleanupCompletion(...args){return this.#finiteRead(readFiniteTrialCleanupCompletion,args);}
+ readFiniteTrialCleanupProofHead(...args){return this.#finiteRead(readFiniteTrialCleanupProofHead,args,['intentId','controlHash']);}
+ readRetainedFiniteCleanupProof(...args){return this.#finiteRead(readRetainedFiniteCleanupProof,args,['intentId','proofHash']);}
+ readFiniteTrialCleanupCompletion(...args){return this.#finiteRead(readFiniteTrialCleanupCompletion,args,['intentId','controlHash','proofHash']);}
  readOwnQaGenerationPreparation(...args){return readPrivateQaGenerationPreparation({env:this.env,ctx:this.ctx,args});}
  readOwnQaNamedPacket(...args){return readPrivateQaNamedPacket({env:this.env,ctx:this.ctx,args});}
  readOwnQaGeneration(...args){return readPrivateQaCurrentGeneration({env:this.env,ctx:this.ctx,args});}
