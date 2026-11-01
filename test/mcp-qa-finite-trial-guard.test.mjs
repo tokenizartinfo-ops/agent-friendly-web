@@ -1,3 +1,4 @@
+import {finiteHash} from '../lib/mcp-finite-evidence.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as controls from '../lib/mcp-qa-finite-trial-control.mjs';
@@ -17,7 +18,7 @@ async function setup({missing}={}){
  const calls=[],receipts=new Map();
  const withdrawal={purpose:'afw.own-permissions-only-reduction.v1',monitoringWithdrawn:true,readWithdrawn:true,permissionsWithdrawn:true,runtimeStopRequested:false,physicalStopVerified:false,nativeWithdrawalVerified:false,operationalReadiness:false};
  const values={withdraw:withdrawal,close:{closed:true,runtimeStopRequested:true},seal:{sealHash:proof.proof.sealHash,sealedAt:f.plan.C0}};
- const capabilities={identity:proof.control,readPrimary:f.primary.admission,proof:{read:()=>store.capture(async challenge=>({proof:{...proof.proof,proofChallenge:challenge},support:proof.support}))}};
+ const capabilities={identity:proof.control,readPrimary:f.primary.admission,proof:{read:()=>store.capture(async challenge=>({proof:{...proof.proof,proofChallenge:challenge,evidenceHash:finiteHash({proofChallenge:challenge,sealHash:proof.proof.sealHash,support:proof.support})},support:proof.support}))}};
  for(const kind of ['withdraw','close','seal','canary_restore'])capabilities[kind]={
   execute:async({claim,proofHash})=>{
    calls.push(kind);assert.equal(claim.phase,'issued');

@@ -1,3 +1,4 @@
+import {finiteHash} from '../lib/mcp-finite-evidence.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as controls from '../lib/mcp-qa-finite-trial-control.mjs';
@@ -14,7 +15,7 @@ test('retained proof APIs are fixed and available',()=>{
 });
 test('capture once, independent readback, two factual consumers and restart after former live observer closes',async()=>{
  const {f,proof,store}=await setup();let calls=0;
- const observed=await store.capture(async challenge=>{calls++;return {proof:{...proof.proof,proofChallenge:challenge},support:proof.support};});
+ const observed=await store.capture(async challenge=>{calls++;return {proof:{...proof.proof,proofChallenge:challenge,evidenceHash:finiteHash({proofChallenge:challenge,sealHash:proof.proof.sealHash,support:proof.support})},support:proof.support};});
  assert.equal(observed.status,'observed');assert.equal(calls,1);
  const refs={storage:f.storage,intentId:f.plan.intentId,controlHash:proof.control.controlHash};
  const head=await api.readFiniteTrialCleanupProofHead(refs);assert.equal(head.proofHash,observed.record.proofHash);
