@@ -163,3 +163,27 @@ test('consent expiry inside pending transaction prevents acknowledgment/nominal 
  const original=f.storage.transaction;f.storage.transaction=fn=>original.call(f.storage,async t=>fn({...t,put:async(k,v)=>{await t.put(k,v);if(k.endsWith(':info'))f.setNow(f.plan.T0+10);}}));
  const c=control(f);assert.equal((await c.prepare()).status,'uncertain');assert.equal((await c.claimEffect('nominal')).status,'blocked');
 });
+
+test('consumed expired finite head cannot be reset, reused or advanced to another intent',async()=>{
+ const f=finiteFixture(),c=control(f);await c.prepare();await c.claimEffect('nominal');await c.withdrawNominal();f.setNow(f.plan.R1+1);
+ const old=[...f.rows].map(([k,v])=>[k,JSON.stringify(v)]);assert.equal((await control(f).prepare()).status,'blocked');
+ const g=finiteFixture({at:f.plan.R1+1});g.plan.intentId='next-intent';g.rows.clear();for(const [k,v]of f.rows)g.rows.set(k,structuredClone(v));
+ assert.equal((await control(g).prepare()).status,'blocked');assert.equal(g.puts,0);assert.deepEqual([...g.rows].map(([k,v])=>[k,JSON.stringify(v)]),old);
+});
+test('restore claims are distinct, bound to the same retained proof and reconciled read-only',async()=>{
+ const f=finiteFixture();let controlHash,proofHash='1'.repeat(64),mode='eligibility',claim;
+ f.primary.effect=async kind=>mode==='eligibility'?{purpose:'afw.qa-finite-effect-eligibility.v1',intentId:f.plan.intentId,controlHash,kind,proofHash,observedAt:f.now(),eligible:true,evidenceHash:'2'.repeat(64)}:{purpose:'afw.qa-finite-effect-receipt.v1',intentId:f.plan.intentId,controlHash,kind,claimHash:hash(ROOT+':effect\n'+JSON.stringify(claim)),receiptHash:'3'.repeat(64),observedAt:f.now(),outcome:'complete'};
+ const c=control(f);controlHash=(await c.prepare()).controlHash;
+ const canary=await c.claimEffect('canary_restore');assert.equal(canary.status,'issued');
+ proofHash='4'.repeat(64);assert.equal((await c.claimEffect('qa_restore')).status,'blocked');proofHash='1'.repeat(64);
+ const qa=await c.claimEffect('qa_restore');assert.equal(qa.status,'issued');assert.notDeepEqual(canary.claim,qa.claim);
+ claim=qa.claim;mode='receipt';const n=f.puts;assert.equal((await c.reconcileEffect('qa_restore')).status,'reconciled');assert.equal(f.puts,n);
+});
+test('nominal immutable claim retains narrower primary expiry and cannot refund its eligibility',async()=>{
+ const f=finiteFixture(),original=f.primary.admission;f.primary.admission=async()=>{const v=await original();v.consent.expiresAt=f.plan.T0+100;return v;};
+ const c=control(f);await c.prepare();const r=await c.claimEffect('nominal');assert.equal(r.claim.deadline,f.plan.T0+100);
+ assert.equal((await c.read()).nominalEligible,false);assert.equal((await c.claimEffect('nominal')).status,'reconcile_only');
+});
+test('native pin invalidates when an unrelated closed QA flag is opened',async()=>{
+ const f=finiteFixture(),c=control(f);f.env.AFW_QA_HTTP_ENABLED='true';assert.equal((await c.prepare()).status,'blocked');assert.equal(f.puts,0);
+});

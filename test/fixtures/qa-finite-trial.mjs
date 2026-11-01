@@ -1,4 +1,5 @@
 import {createHash} from 'node:crypto';
+import {PRIVATE_QA_CLOSED_FLAGS} from '../../lib/mcp-qa-closed-context.mjs';
 import {generationFixture} from './qa-generation-ledger.mjs';
 export const hash=v=>createHash('sha256').update(v).digest('hex');
 export const ROOT='afw.qa-finite-trial.v1',HEAD=ROOT+':head';
@@ -7,7 +8,7 @@ export function finiteFixture({at:override}={}){
  const old=generationFixture();let at=override??old.now()+1000000;
  const T0=at,N1=T0+300000,C0=N1-60000,C1=N1+120000,R1=N1+180000;
  const version='11111111-1111-4111-8111-111111111111',actorId='a'.repeat(64);
- const legacy=old.legacy,closure=JSON.parse(legacy.policy);
+ const legacy=old.legacy;
  const prepared={purpose:'afw.private-prepared-dispatch.v1',planHash:legacy.planHash,withdrawalHash:'1'.repeat(64),phase:'issued',issuedAt:legacy.armedAt+1000,completedAt:null,dispatchPolicyHash:'2'.repeat(64)};
  const reduction={purpose:'afw.private-reduction-dispatch.v1',planHash:legacy.planHash,withdrawalHash:'1'.repeat(64),phase:'complete',issuedAt:legacy.armedAt+1000,completedAt:legacy.armedAt+2000};
  const pin=n=>({versionId:version.replace(/^1/,String(n)),deploymentId:version.replace(/^1/,String(n+1)),configurationHash:String(n).repeat(64)});
@@ -40,6 +41,7 @@ export function finiteFixture({at:override}={}){
  const namespace={idFromName:name=>({toString:()=>name==='afw-own-successor-closure-v1'?actorId:'0'.repeat(64)})};
  const env={AFW_QA_VERSION:{id:version},AFW_INDEPENDENT_CLOSURE:namespace,RELEASE_DB:{},AFW_RELEASE_EVENTS_NODE:{},AFW_RELEASE_READ_TOKEN:'not-accessed'};
  for(const k of ['AFW_RELEASE_OPERATOR_ENABLED','AFW_RELEASE_WORKFLOW_ENABLED','AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED','AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED'])env[k]='true';
+ for(const k of PRIVATE_QA_CLOSED_FLAGS)env[k]='false';
  const ctx={storage,id:{toString:()=>actorId}};
  const eventId=hash(JSON.stringify(['afw.own-synthetic-save.v1',plan.selectors.subject,plan.selectors.projectId,plan.selectors.saveIdempotencyKey]));
  const fingerprint=hash(JSON.stringify(['afw.own-synthetic-save.v1',plan.selectors.grantId,1,'discovery']));
