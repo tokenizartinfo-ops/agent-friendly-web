@@ -1,0 +1,25 @@
+{
+  "purpose": "afw.finite-gha-custody-receipt.v1",
+  "accountId": "85d0d5dadac3341a564f22ce885e9eec",
+  "tokenKind": "account",
+  "tokenId": "9db7901af95faf07e6f7ef378045328e",
+  "metadataObservedAt": "2026-11-01T17:25:31.664Z",
+  "identityObservedAt": "2026-11-01T17:22:52.954Z",
+  "notBefore": null,
+  "expiresAt": "2026-11-08T02:59:59Z",
+  "policyHash": "340050c28f3f4b3d05515d7191a9246f4cfbaa8d73671ee7571c2203519a752b",
+  "permissionGroupIds": [
+    "1b68681d11f443a4979c6d08c3211f13",
+    "7e79ec33834341f28dd431ab73884400",
+    "cfd39eebc07c4e3ea849e4b3d2644637",
+    "da1261c3d38544a4bba805b22566f8b6"
+  ],
+  "sourceQualification": "dated-static-policy-with-unchanged-policy-operator-assumption",
+  "scopeVerified": false,
+  "identityEvidence": {
+    "runId": 41331162110,
+    "jobId": 124921374025,
+    "artifactId": 13093321173
+  },
+  "metadataEvidence": "issue497#6561492793 / root primary2026-11-01T17:25:31.664Z"
+}
