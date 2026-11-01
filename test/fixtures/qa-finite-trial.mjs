@@ -38,7 +38,7 @@ export function finiteFixture({at:override}={}){
  getAlarm:async()=>alarm,
  transaction(fn){const p=chain.then(async()=>{
   const n=++transactions,copy=new Map([...rows].map(([k,v])=>[k,structuredClone(v)]));let nextAlarm=alarm;
-  const result=await fn({get:async k=>structuredClone(copy.get(k)),put:async(k,v)=>{puts++;copy.set(k,structuredClone(v));},list:async({prefix,limit})=>new Map([...copy].filter(([k])=>k.startsWith(prefix)).slice(0,limit)),setAlarm:async v=>{nextAlarm=v;}});
+  const result=await fn({get:async k=>structuredClone(copy.get(k)),put:async(k,v)=>{puts++;copy.set(k,structuredClone(v));},list:async({prefix,limit})=>new Map([...copy].filter(([k])=>k.startsWith(prefix)).slice(0,limit)),setAlarm:async v=>{nextAlarm=v;},getAlarm:async()=>nextAlarm});
   rows.clear();for(const [k,v]of copy)rows.set(k,v);alarm=nextAlarm;if(lost.has(n))throw Error('lost ACK');return result;
  });chain=p.catch(()=>{});return p;}
  };
