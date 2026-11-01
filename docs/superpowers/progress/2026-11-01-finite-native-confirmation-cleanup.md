@@ -238,3 +238,7 @@ Fixed source-authority4C mounts intentionally unavailable: production missing se
 Unaccepted initial harness run41340592762/job124949542852 still reportedin_progress, jobstarted19:12:57Z/completed_at:null at19:25:45UTC, declared8min timeout/no project secrets. It is not final evidence or runtime authority; full totals unavailable and tool exposes no cancel action. Root owns one bounded follow-up; no invented cancel endpoint or indefinite wait.
 
 Root fresh review pending; final documentation checkpoint/readback receipt follows.
+
+
+## Task4B Task3 — exact documentation HEAD receipt
+Documentation checkpoint HEAD `94dca586b44178ef45ac84f5827fd1c997bb9f27`, parent qualified code `eaefd5aabf5ebf3c08da29c2ad6d1eb699af39f8`. This receipt changes docs only; FINAL350PASS/lint evidence remains run41341399674/job124951985828. Its own final SHA is returned to root after exact CAS/readback; writes then STOP for root fresh review. No 4C/runtime readiness inferred.

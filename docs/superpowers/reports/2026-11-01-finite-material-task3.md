@@ -9,7 +9,7 @@ PROJECT Agent Friendly Web; REPOSITORY tokenizartinfo-ops/agent-friendly-web (13
 
 BASE: `f9c70a3f13540ea693350179e9fdf3d2356cbc1f`.
 Final code/qualification HEAD: `eaefd5aabf5ebf3c08da29c2ad6d1eb699af39f8`.
-Documentation checkpoint HEAD is recorded in the following documentation receipt; its final CAS/readback SHA is delivered to root. All branch writes used exact expected-head CAS followed by primary ref readback. Other history and accepted Task1/Task2 code remain preserved.
+Documentation checkpoint HEAD: `94dca586b44178ef45ac84f5827fd1c997bb9f27`, parent qualified code `eaefd5aabf5ebf3c08da29c2ad6d1eb699af39f8`. This documentation-only receipt records that exact checkpoint; its own final CAS/readback SHA is delivered to root. All branch writes used exact expected-head CAS followed by primary ref readback. Other history and accepted Task1/Task2 code remain preserved.
 
 Only cloud GitHub source APIs and GitHub-hosted Actions were used. No local source files, dependencies, builds, models or persistent processes were created. No Cloudflare/provider/private probe, workflow REST creation, live command/trial, deploy, token/role/policy/OAuth/DDL/Max change or main merge occurred.
 
