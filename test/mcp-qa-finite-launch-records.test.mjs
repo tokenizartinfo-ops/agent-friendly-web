@@ -56,3 +56,9 @@ test('ACK accepts only safe factual timestamp and exact nominal identity grammar
  assert.throws(()=>api.validateFiniteChildCreateAck({...ack,acknowledgedAt:NaN}));
  assert.throws(()=>api.validateFiniteChildCreateAck({...ack,nominalId:launcherId}));
 });
+
+test('record domain lookup excludes inherited property names and UUID coercion',()=>{
+ for(const purpose of ['constructor','toString','__proto__'])assert.throws(()=>api.hashFiniteLaunchRecord({purpose}));
+ const qaVersionId={toString(){throw Error('coercion executed');}};
+ assert.throws(()=>api.validateFiniteLaunchPrepared({...prepared,qaVersionId}),/unavailable/);
+});
