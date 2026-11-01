@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {readFileSync} from 'node:fs';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import * as runtime from '../lib/mcp-release-runtime.mjs';
@@ -71,7 +72,6 @@ for(const mode of ['hash','instance','payload-extra','history-input','authorize-
  }finally{await f.mf.dispose();}
 });
 const faults={
- 'missing-current':"DELETE FROM delegated_access_grants WHERE id='ci-only-inert'",
  'revoked-current':"UPDATE delegated_access_grants SET revoked_at='2026-01-01T00:00:00.000Z' WHERE id='ci-only-inert'",
  'expired-current':"UPDATE delegated_access_grants SET expires_at='2026-01-01T00:00:00.000Z' WHERE id='ci-only-inert'",
  'wrong-current-owner':"UPDATE delegated_access_grants SET user_id='foreign' WHERE id='ci-only-inert'",
@@ -79,8 +79,7 @@ const faults={
  'wrong-cancelled-owner':"UPDATE delegated_access_grants SET user_id='foreign' WHERE id='fixture-cancelled'",
  'unexchanged-current':"UPDATE delegated_access_grants SET exchanged_at='' WHERE id='ci-only-inert'",
  'future-current-exchange':"UPDATE delegated_access_grants SET exchanged_at='2099-01-01T00:00:00.000Z' WHERE id='ci-only-inert'",
- 'extra-current-scope':"UPDATE delegated_access_grants SET scopes_json='[\"afw:project:read\",\"afw:evidence:read\"]' WHERE id='ci-only-inert'",
- 'missing-cancellation-join':"DELETE FROM delegated_access_grants WHERE id='fixture-cancelled'"
+ 'extra-current-scope':"UPDATE delegated_access_grants SET scopes_json='[\"afw:project:read\",\"afw:evidence:read\"]' WHERE id='ci-only-inert'"
 };
 for(const [mode,sql] of Object.entries(faults))test('complete primary authority denies '+mode+' without runtime',async()=>{
  const f=await fixture();try{await f.db.prepare(sql).run();assert.deepEqual(await call(f),blocked);assert.equal(f.steps,0);assert.equal(f.credentials,0);}finally{await f.mf.dispose();}
@@ -93,7 +92,7 @@ test('current monitoring revocation after the first snapshot cannot be adopted a
 });
 test('unknown NULL-generation history cannot be hidden by missing joins',async()=>{
  const f=await fixture();try{
- const r=f.retired;await f.db.prepare('INSERT INTO dossier_node_process_closures VALUES(?,?,?,?,?,?,?)').bind('unknown',null,'7'.repeat(64),r.programHash,r.sourceRevision,r.image,r.closedAt).run();
+ const r=f.retired;await f.db.prepare("INSERT INTO delegated_access_grants SELECT 'unknown',user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at,exchanged_at FROM delegated_access_grants WHERE id='fixture-cancelled'").run();await f.db.prepare('INSERT INTO dossier_node_process_closures VALUES(?,?,?,?,?,?,?)').bind('unknown',null,'7'.repeat(64),r.programHash,r.sourceRevision,r.image,r.closedAt).run();
  assert.deepEqual(await call(f),blocked);assert.equal(f.steps,0);
  }finally{await f.mf.dispose();}
 });
@@ -131,4 +130,57 @@ test('late reservation acknowledgement preserves the committed row and all journ
  const r=await rehearseExactNamedConfirmation({artifact,build:nativeBuild,mode:'confirmed',reserve:'true',historyFixture:true,fault:'reservation-ack-lost'});
  assert.equal(r.output.status,'uncertain');assert.equal(r.reservationCount,1);assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
  assert.equal(JSON.stringify(r.output).includes('synthetic_read_credential'),false);
+});
+
+test('absent projected current grant blocks before eligibility or runtime',async()=>{
+ const f=await fixture();try{f.afterRead=async(sql,r)=>{if(sql.includes('WHERE g.id=?'))r.results=[];};assert.deepEqual(await call(f),blocked);assert.equal(f.steps,0);}finally{await f.mf.dispose();}
+});
+// White-box closure tests only. The separate native composition above uses the
+// unmodified module and never injects an authorization callback or lease mint.
+let harnessSerial=0;
+async function closureHarness(capture){
+ const url=new URL('../lib/mcp-release-runtime.mjs',import.meta.url);
+ let source=readFileSync(url,'utf8');
+ const anchor='const result=await runReleaseWorkflow({bundle,env,event,step:Object.freeze({do:(...args)=>Reflect.apply(stepDo,step,args)}),authorize,cancellationHistory:first.raw,requestLease});';
+ assert.ok(source.includes(anchor));
+ source=source.replace(anchor,'const result=await globalThis.__knownAdapterCapture({bundle,env,event,step,authorize,cancellationHistory:first.raw,requestLease,runReleaseWorkflow});');
+ source=source.replace(/from '([^']+)'/g,(whole,path)=>path.startsWith('.')?"from '"+new URL(path,url).href+"'":whole);
+ globalThis.__knownAdapterCapture=capture;
+ return import('data:text/javascript;base64,'+Buffer.from(source+'\n// harness '+(++harnessSerial)).toString('base64'));
+}
+const stages=['workflow_admission','operator_credential','operator_primary_read','operator_primary_result','activation_before_read','activation_after_read','activation_before_attempt','activation_after_attempt','activation_before_receipt','activation_after_receipt','activation_before_acceptance','activation_complete','successor_rpc','successor_rpc_complete','successor_before_retirement','successor_after_retirement','successor_before_write','successor_after_write'];
+test('private closure rechecks complete primary eligibility at all 18 fixed hooks and retires its lease',async()=>{
+ const f=await fixture();let captured;
+ try{
+ const h=await closureHarness(async args=>{captured=args;for(const stage of stages)assert.equal(await args.authorize(stage,new AbortController().signal),true,stage);return blocked;});
+ assert.deepEqual(await h.runKnownCancellationReleaseWorkflow(f.input),blocked);
+ assert.equal(f.reads.filter(s=>s.includes('SELECT 1 AS eligible')).length,19);
+ assert.deepEqual(await captured.runReleaseWorkflow({...f.input,requestLease:captured.requestLease}),blocked);
+ assert.deepEqual(await captured.runReleaseWorkflow({...f.input,requestLease:{...captured.requestLease}}),blocked);
+ assert.equal(await captured.authorize('operator_credential',new AbortController().signal),false);
+ }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
+});
+test('arbitrary stage permanently invalidates the internal closure',async()=>{
+ const f=await fixture();try{const h=await closureHarness(async args=>{
+ assert.equal(await args.authorize('subscription_send',new AbortController().signal),false);
+ assert.equal(await args.authorize('operator_credential',new AbortController().signal),false);return blocked;
+ });assert.equal((await h.runKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');assert.equal(f.reads.filter(s=>s.includes('SELECT 1 AS eligible')).length,1);
+ }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
+});
+test('concurrent hook reentry invalidates both checks without refreshing authority',async()=>{
+ const f=await fixture();try{const h=await closureHarness(async args=>{
+ let release;const gate=new Promise(r=>{release=r;});f.afterRead=async sql=>{if(sql.includes('SELECT 1 AS eligible'))await gate;};
+ const first=args.authorize('operator_credential',new AbortController().signal);
+ assert.equal(await args.authorize('operator_primary_read',new AbortController().signal),false);release();
+ assert.equal(await first,false);return blocked;
+ });assert.equal((await h.runKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');
+ }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
+});
+test('grant drift after initial admission blocks the next fixed hook permanently',async()=>{
+ const f=await fixture();try{const h=await closureHarness(async args=>{
+ await f.db.prepare(faults['revoked-current']).run();
+ assert.equal(await args.authorize('operator_credential',new AbortController().signal),false);
+ assert.equal(await args.authorize('operator_primary_read',new AbortController().signal),false);return blocked;
+ });assert.equal((await h.runKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');assert.equal(f.credentials,0);
+ }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
