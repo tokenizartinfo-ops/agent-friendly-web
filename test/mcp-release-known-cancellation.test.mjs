@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
+import {resolveSuccessorPreparation} from '../lib/mcp-successor-manifest.mjs';
+import {createSuccessorReservation} from '../lib/mcp-successor-reservation.mjs';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import * as runtime from '../lib/mcp-release-runtime.mjs';
@@ -116,13 +118,14 @@ test('a shape-compatible or copied request lease is rejected before its methods 
 });
 async function nativeBuild(bundle){
  const fixtureHistory=namedHistoryFixture(bundle),planHash=hash(JSON.stringify(bundle));
- const source="import {WorkflowEntrypoint} from 'cloudflare:workers';import {runKnownCancellationReleaseWorkflow} from './lib/mcp-release-runtime.mjs';const bundle="+JSON.stringify(bundle)+";export class AfwReleaseWorkflow extends WorkflowEntrypoint{async run(event,step){return runKnownCancellationReleaseWorkflow({bundle,env:this.env,event,step});}}export default{fetch(){return new Response(null,{status:404});}};";
+ const source="import {WorkflowEntrypoint,WorkerEntrypoint} from 'cloudflare:workers';import {runKnownCancellationReleaseWorkflow,runReleaseOperator} from './lib/mcp-release-runtime.mjs';const bundle="+JSON.stringify(bundle)+";export class AfwReleaseOperator extends WorkerEntrypoint{run(...args){return runReleaseOperator(bundle,this.env,args);}}export class AfwReleaseWorkflow extends WorkflowEntrypoint{async run(event,step){const started=Date.now(),db=this.env.RELEASE_DB;let checks=0;const env=Object.create(this.env);env.RELEASE_DB={prepare:db.prepare.bind(db),withSession(mode){const s=db.withSession(mode);return{prepare(sql){if(sql.startsWith('SELECT 1 AS eligible'))checks++;return s.prepare(sql);}};}};const result=await runKnownCancellationReleaseWorkflow({bundle,env,event,step});return {...result,qualification:{checks,elapsedMs:Date.now()-started}};}}export default{fetch(){return new Response(null,{status:404});}};";
  const compiled=await build({stdin:{contents:source,resolveDir:process.cwd(),sourcefile:'adapter-native-test.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none'});
  return{script:compiled.outputFiles[0].text,planHash,fixtureHistory};
 }
 test('actual native Workflow/D1/retirement composition reserves exactly once with the fixed adapter',async()=>{
  const r=await rehearseExactNamedConfirmation({artifact,build:nativeBuild,mode:'confirmed',reserve:'true',historyFixture:true});
  assert.equal(r.output.status,'confirmed',JSON.stringify(r.output));
+ assert.ok(r.output.qualification.checks>=19);assert.ok(r.output.qualification.elapsedMs<70000);console.log('native-adapter-measurement',JSON.stringify(r.output.qualification));assert.equal(r.historyPreserved,true);
  assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});assert.equal(r.reservationCount,1);
  assert.equal(r.counters.retirementReads,2);assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);
 });
@@ -161,26 +164,70 @@ test('private closure rechecks complete primary eligibility at all 18 fixed hook
  }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
 test('arbitrary stage permanently invalidates the internal closure',async()=>{
- const f=await fixture();try{const h=await closureHarness(async args=>{
- assert.equal(await args.authorize('subscription_send',new AbortController().signal),false);
- assert.equal(await args.authorize('operator_credential',new AbortController().signal),false);return blocked;
- });assert.equal((await h.runKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');assert.equal(f.reads.filter(s=>s.includes('SELECT 1 AS eligible')).length,1);
+ const f=await fixture(),answers=[];try{const h=await closureHarness(async args=>{
+ answers.push(await args.authorize('subscription_send',new AbortController().signal));
+ answers.push(await args.authorize('operator_credential',new AbortController().signal));return blocked;
+ });assert.equal((await h.runKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');assert.deepEqual(answers,[false,false]);assert.equal(f.reads.filter(s=>s.includes('SELECT 1 AS eligible')).length,1);
  }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
 test('concurrent hook reentry invalidates both checks without refreshing authority',async()=>{
- const f=await fixture();try{const h=await closureHarness(async args=>{
+ const f=await fixture(),answers=[];try{const h=await closureHarness(async args=>{
  let release;const gate=new Promise(r=>{release=r;});f.afterRead=async sql=>{if(sql.includes('SELECT 1 AS eligible'))await gate;};
  const first=args.authorize('operator_credential',new AbortController().signal);
- assert.equal(await args.authorize('operator_primary_read',new AbortController().signal),false);release();
- assert.equal(await first,false);return blocked;
- });assert.equal((await h.runKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');
+ answers.push(await args.authorize('operator_primary_read',new AbortController().signal));release();
+ answers.push(await first);return blocked;
+ });assert.equal((await h.runKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');assert.deepEqual(answers,[false,false]);
  }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
 test('grant drift after initial admission blocks the next fixed hook permanently',async()=>{
- const f=await fixture();try{const h=await closureHarness(async args=>{
+ const f=await fixture(),answers=[];try{const h=await closureHarness(async args=>{
  await f.db.prepare(faults['revoked-current']).run();
- assert.equal(await args.authorize('operator_credential',new AbortController().signal),false);
- assert.equal(await args.authorize('operator_primary_read',new AbortController().signal),false);return blocked;
- });assert.equal((await h.runKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');assert.equal(f.credentials,0);
+ answers.push(await args.authorize('operator_credential',new AbortController().signal));
+ answers.push(await args.authorize('operator_primary_read',new AbortController().signal));return blocked;
+ });assert.equal((await h.runKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');assert.deepEqual(answers,[false,false]);assert.equal(f.credentials,0);
+ }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
+});
+
+for(const kind of ['original','current','cancellation'])test('future primary '+kind+' dates deny before runtime',async()=>{
+ const f=await fixture();try{f.afterRead=async(sql,r)=>{
+ if(kind==='original'&&sql.startsWith('SELECT a.grant_id'))r.results[0].closed_at=Date.now()+50000;
+ if(kind==='current'&&sql.includes('WHERE g.id=?'))r.results[0].issued_at=Date.now()+50000;
+ if(kind==='cancellation'&&sql.includes('LIMIT 9'))r.results[0].closed_at=Date.now()+50000;
+ };assert.deepEqual(await call(f),blocked);assert.equal(f.steps,0);}finally{await f.mf.dispose();}
+});
+test('the second primary snapshot must byte-match the first original history',async()=>{
+ const f=await fixture();let originals=0;try{f.afterRead=async(sql,r)=>{if(sql.startsWith('SELECT a.grant_id')&&++originals===2)r.results[0].process_generation='7'.repeat(64);};assert.deepEqual(await call(f),blocked);assert.equal(originals,2);assert.equal(f.steps,0);}finally{await f.mf.dispose();}
+});
+test('ninth cancellation and oversized own-data rows are not truncated into authority',async()=>{
+ for(const mode of ['ninth','oversized','extra-field']){
+ const f=await fixture();try{f.afterRead=async(sql,r)=>{if(sql.includes('LIMIT 9')){
+ if(mode==='ninth')r.results=Array.from({length:9},()=>({...r.results[0]}));
+ if(mode==='oversized')r.results[0].resource='x'.repeat(201);
+ if(mode==='extra-field')r.results[0].hidden='private';
+ }};assert.deepEqual(await call(f),blocked);assert.equal(f.steps,0);}finally{await f.mf.dispose();}
+ }
+});
+test('hung projection consumes the original event budget; late success never resumes runtime',async()=>{
+ const f=await fixture();let release;try{
+ f.input.event.timestamp=new Date(Date.now()-69800);const gate=new Promise(r=>{release=r;});f.afterRead=()=>gate;
+ const start=performance.now(),pending=call(f);assert.deepEqual(await pending,blocked);assert.ok(performance.now()-start<1000);release();
+ await new Promise(r=>setTimeout(r,20));assert.equal(f.steps,0);assert.deepEqual(await pending,blocked);
+ }finally{release?.();await f.mf.dispose();}
+});
+test('wall clock regression during primary projection cannot renew the request',async()=>{
+ const f=await fixture(),realNow=Date.now;try{const at=Date.now();f.afterRead=async()=>{Date.now=()=>at-1;};assert.deepEqual(await call(f),blocked);assert.equal(f.steps,0);}finally{Date.now=realNow;await f.mf.dispose();}
+});
+for(const own of [true,false])test('adapter hook after a '+(own?'matching':'foreign')+' reservation retains exact own-row rules',async()=>{
+ const f=await fixture(),answers=[];try{
+ const h=await closureHarness(async args=>{
+ const manifest=JSON.parse(f.bundle.policy.observation.configuration.bindings.find(b=>b.name==='AFW_DOSSIER_SUCCESSOR_POLICY').text);
+ const resolved=resolveSuccessorPreparation({scope:manifest.scope,original:manifest.original,candidate:manifest.candidate,namespace:f.input.env.AFW_RELEASE_EVENTS_NODE});
+ const candidate={...resolved.candidate,...(own?{}:{scopeHash:'0'.repeat(64)})};
+ const r=await createSuccessorReservation({db:f.db,original:resolved.original,candidate,cancellationHistory:args.cancellationHistory,authorize:async()=>true,now:Date.now,timeoutMs:5000,readRetirement:async()=>({purpose:'afw.retirement-evidence.v1',...resolved.original,processGeneration:f.retired.processGeneration,closedAt:f.retired.closedAt,stoppedAt:f.retired.closedAt+1,observedAt:Date.now(),physicalStopVerified:true,mayStartSuccessor:false})}).reserve();
+ answers.push(r.state,await args.authorize('successor_after_write',new AbortController().signal));return blocked;
+ });
+ const r=await h.runKnownCancellationReleaseWorkflow(f.input);
+ assert.deepEqual(answers,['prepared',own]);assert.equal(r.status,own?'blocked':'uncertain');
+ assert.equal((await f.db.prepare('SELECT COUNT(*) AS n FROM dossier_successor_reservations').first()).n,1);
  }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
