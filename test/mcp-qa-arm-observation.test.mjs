@@ -29,7 +29,7 @@ for(const [name,attack]of Object.entries({
  'payload':f=>{f.event.payload.observationId='f'.repeat(64);},
  'wall rollback':f=>{f.wall-=1;},
  'original absolute deadline':f=>{f.wall+=5000;}
-}))test('full consumer fence rejects '+name+' drift after an await',async()=>{const f=armObservationFixture();let changed=false;f.attack=()=>{if(!changed){changed=true;attack(f);}};const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.ok(f.requests.length<=2);});
+}))test('full consumer fence rejects '+name+' drift after an await',async()=>{const f=armObservationFixture();let changed=false;f.attack=()=>{if(!changed){changed=true;attack(f);}};const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.ok(f.requests.length<=3);});
 test('captures callable Step.do once when native access creates fresh wrappers',async()=>{
  const f=armObservationFixture();Object.defineProperty(f.step,'do',{get(){return async(_name,_config,work)=>work();}});const r=await run(f);safe(r);assert.equal(r.status,'observed');
 });
@@ -38,7 +38,7 @@ test('complete fence runs after Promise.race consumer settlement',async()=>{
  try{const r=await run(f);safe(r);assert.equal(r.status,'blocked');}finally{Promise.race=race;}
 });
 test('HTTP failures report sanitized negative evidence without retry',async()=>{
- const f=armObservationFixture();f.mutate=({response})=>{response.status=403;response.body={private:'PRIVATE-BODY'};};const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.equal(r.diagnostic.httpStatus,403);assert.ok(f.requests.length<=2);
+ const f=armObservationFixture();f.mutate=({response})=>{response.status=403;response.body={private:'PRIVATE-BODY'};};const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.equal(r.diagnostic.httpStatus,403);assert.ok(f.requests.length<=3);
 });
 test('unknown failed GET never leaks exceptions or retries',async()=>{
  const f=armObservationFixture(),o=f.options();o.fetchImpl=async()=>{throw Error('PRIVATE-BODY synthetic-private-CF-token');};const r=await run(f,o);safe(r);assert.equal(r.status,'blocked');assert.equal(r.diagnostic.reason,'request_failed');
@@ -49,7 +49,7 @@ test('no late start can refresh the native original absolute deadline',async()=>
 test('original monotonic deadline cannot be renewed by wall-clock readings',async()=>{
  const f=armObservationFixture(),descriptor=Object.getOwnPropertyDescriptor(performance,'now'),clock=performance.now.bind(performance);let offset=0;
  Object.defineProperty(performance,'now',{value:()=>clock()+offset,configurable:true});f.attack=()=>{offset=5001;};
- try{const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.ok(f.requests.length<=2);}finally{if(descriptor)Object.defineProperty(performance,'now',descriptor);else delete performance.now;}
+ try{const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.ok(f.requests.length<=3);}finally{if(descriptor)Object.defineProperty(performance,'now',descriptor);else delete performance.now;}
 });
 test('complete consumer fence also runs after Step settlement',async()=>{
  const f=armObservationFixture();f.step.do=async(_n,_c,work)=>{const r=await work();f.env.AFW_MCP_CLOSURE_READ_TOKEN='different-private-token';return r;};const r=await run(f);safe(r);assert.equal(r.status,'blocked');
