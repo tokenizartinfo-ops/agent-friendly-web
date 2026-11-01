@@ -1,3 +1,4 @@
+import {finiteCleanupPolicyHash} from '../../lib/mcp-finite-cleanup-policy.mjs';
 import {createHash} from 'node:crypto';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../../lib/mcp-qa-closed-context.mjs';
 import {generationFixture} from './qa-generation-ledger.mjs';
@@ -11,7 +12,7 @@ export function finiteFixture({at:override}={}){
  const legacy=old.legacy;
  const prepared={purpose:'afw.private-prepared-dispatch.v1',planHash:legacy.planHash,withdrawalHash:'1'.repeat(64),phase:'issued',issuedAt:legacy.armedAt+1000,completedAt:null,dispatchPolicyHash:'2'.repeat(64)};
  const reduction={purpose:'afw.private-reduction-dispatch.v1',planHash:legacy.planHash,withdrawalHash:'1'.repeat(64),phase:'complete',issuedAt:legacy.armedAt+1000,completedAt:legacy.armedAt+2000};
- const pin=n=>({versionId:version.replace(/^1/,String(n)),deploymentId:version.replace(/^1/,String(n+1)),configurationHash:String(n).repeat(64)});
+ const pin=n=>({versionId:version.replace(/^1/,String(n)),deploymentId:version.replace(/^1/,String(n+1)),configurationHash:String(n).repeat(64),module:{name:'worker.mjs',sha256:n===1?'d'.repeat(64):n===3?'0'.repeat(64):String(n).repeat(64),bytes:1024}});
  const plan={
  purpose:'afw.qa-finite-trial-plan.v1',intentId:'finite-test-001',
  command:{kind:'finite_native_confirmation',id:'123',createdAt:T0,repository:'tokenizartinfo-ops/agent-friendly-web',sourceRevision:'b'.repeat(40)},
@@ -27,6 +28,7 @@ export function finiteFixture({at:override}={}){
  finalizer:{repository:'tokenizartinfo-ops/agent-friendly-web',runId:11,attempt:1,jobId:12,workflow:'afw-finite-finalizer',sourceRevision:'b'.repeat(40),readyStep:'admit-and-ready'},
  legacy:{control:JSON.stringify(legacy),controlHash:hash(JSON.stringify(legacy)),preparedDispatch:JSON.stringify(prepared),preparedDispatchHash:hash(JSON.stringify(prepared)),reductionDispatch:JSON.stringify(reduction),reductionDispatchHash:hash(JSON.stringify(reduction)),restoration:null,retirement:null,sourceRevision:'d'.repeat(40),sourceHash:'e'.repeat(64)}
  };
+ plan.closePolicyHash=finiteCleanupPolicyHash(plan);
  let alarm=null,transactions=0,puts=0,chain=Promise.resolve();
  const rows=new Map([['afw.canary-restoration-control.v1',legacy],['afw.private-prepared-dispatch.v1',prepared],['afw.private-reduction-dispatch.v1',reduction]]),lost=new Set();
  const storage={

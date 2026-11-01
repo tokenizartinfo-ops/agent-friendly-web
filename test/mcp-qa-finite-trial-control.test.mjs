@@ -1,3 +1,4 @@
+import {finiteCleanupPolicyHash} from '../lib/mcp-finite-cleanup-policy.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {finiteFixture,ROOT,HEAD,hash} from './fixtures/qa-finite-trial.mjs';
@@ -31,7 +32,7 @@ test('withdraw nominal leaves cleanup claims and original alarm intact',async()=
  assert.equal((await c.read()).nominalEligible,false);
 });
 test('fresh per-intent head rejects a second intent and V2/orphan histories',async()=>{
- const f=finiteFixture();await control(f).prepare();const head=structuredClone(f.rows.get(HEAD));f.plan.intentId='other';assert.equal((await control(f).prepare()).status,'blocked');assert.deepEqual(f.rows.get(HEAD),head);
+ const f=finiteFixture();await control(f).prepare();const head=structuredClone(f.rows.get(HEAD));f.plan.intentId='other';f.plan.closePolicyHash=finiteCleanupPolicyHash(f.plan);assert.equal((await control(f).prepare()).status,'blocked');assert.deepEqual(f.rows.get(HEAD),head);
  for(const key of ['afw.qa-generation-head.v2','afw.qa-generation-info.v2:orphan',ROOT+':orphan:info']){
  const g=finiteFixture();g.rows.set(key,{});assert.equal((await control(g).prepare()).status,'blocked');assert.equal(g.puts,0);}
 });
@@ -167,7 +168,7 @@ test('consent expiry inside pending transaction prevents acknowledgment/nominal 
 test('consumed expired finite head cannot be reset, reused or advanced to another intent',async()=>{
  const f=finiteFixture(),c=control(f);await c.prepare();await c.claimEffect('nominal');await c.withdrawNominal();f.setNow(f.plan.R1+1);
  const old=[...f.rows].map(([k,v])=>[k,JSON.stringify(v)]);assert.equal((await control(f).prepare()).status,'blocked');
- const g=finiteFixture({at:f.plan.R1+1});g.plan.intentId='next-intent';g.rows.clear();for(const [k,v]of f.rows)g.rows.set(k,structuredClone(v));
+ const g=finiteFixture({at:f.plan.R1+1});g.plan.intentId='next-intent';g.plan.closePolicyHash=finiteCleanupPolicyHash(g.plan);g.rows.clear();for(const [k,v]of f.rows)g.rows.set(k,structuredClone(v));
  assert.equal((await control(g).prepare()).status,'blocked');assert.equal(g.puts,0);assert.deepEqual([...g.rows].map(([k,v])=>[k,JSON.stringify(v)]),old);
 });
 test('restore claims are distinct, bound to the same retained proof and reconciled read-only',async()=>{
@@ -214,4 +215,15 @@ for(const kind of ['close','qa_restore'])test('late '+kind+' claim ACK at origin
  assert.equal((await c.claimEffect(kind)).status,'reconcile_only');assert.equal(f.puts,puts);
  receiptMode=true;f.setNow(end+1);assert.equal((await c.reconcileEffect(kind)).status,'reconciled');
  assert.deepEqual(f.rows.get(key),retained);assert.equal(f.puts,puts);
+});
+
+test('finite plan pins exact closed module bytes and canonical cleanup policy',()=>{
+ for(const mode of ['missing','hash','bytes','name','policy']){const f=finiteFixture();
+  if(mode==='missing')delete f.plan.deployments.qaClosed.module;
+  if(mode==='hash')f.plan.deployments.qaLive.module.sha256='0'.repeat(64);
+  if(mode==='bytes')f.plan.deployments.canaryClosed.module.bytes=0;
+  if(mode==='name')f.plan.deployments.canaryClosed.module.name='../worker';
+  if(mode==='policy')f.plan.closePolicyHash='0'.repeat(64);
+  assert.throws(()=>control(f));
+ }
 });
