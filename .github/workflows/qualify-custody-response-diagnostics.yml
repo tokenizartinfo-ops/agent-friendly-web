@@ -1,0 +1,22 @@
+name: Custody response source qualification
+on:
+  push:
+    branches: [qualify/qa-custody-response-diagnostics-20261101]
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Focused inspector and CLI tests
+        run: node --test test/mcp-qa-bootstrap-custody-inspection.test.mjs
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Scoped lint
+        run: npx --no-install eslint lib/mcp-qa-bootstrap-custody-inspection.mjs scripts/qa-bootstrap-custody-inspection.mjs test/mcp-qa-bootstrap-custody-inspection.test.mjs
