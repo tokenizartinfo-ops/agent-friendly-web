@@ -83,3 +83,33 @@ No build/deploy command or provider probe was run. GitHub setup-action Node20 de
 ## Handoff limits
 
 Root must review BASE through final documentation receipt, including the explicit seed grammar amendment. This report is source qualification, not activation. Actual policy equivalence remains the trusted unchanged-policy operator assumption; successful selfverify/fixed GETs do not prove current scope. No public/private operator observer was created. No future completion timestamp, native identity, QA direct-code proof, compatible package, runtime install, guard liveness, operation with PC off or new actual occurrence is asserted. operationalReadiness=false.
+
+
+## Review fix round1/5 — strict admit-job start evidence
+
+Baseline `28e96f962fb6abfa09ed60af8bb07f37826102d2`. Fresh-review P2: reject malformed admit-job start timestamps in `lib/mcp-qa-finite-seed-primary.mjs`. Missing/invalid `started_at` parsed as NaN; the previous two interval comparisons both returnedfalse. A one-element array with a valid ISO date was also coerced and accepted. This is an unknown-primary typing correction within the existing contract, not an architecture change.
+
+Finding recorded BEFORE implementation in ledger commit `c344ba426ee8274f6db1fc7ece29f2cf6550b08d`. RED tests commit `d8626b13704e24c30872b374617de14ca1c0237c`; minimal fix/codeHEAD `f2b35826f12f646b3a25064213c5203f88d6f531`. Exact expected-head CAS and primary ref readback verified for each commit.
+
+The fix requires `typeof j.started_at === 'string'`, parses it once into `jobStartedAt`, requires `Number.isSafeInteger(jobStartedAt)`, then applies the unchanged `T0 <= jobStartedAt <= seedStepStartedAt` checks. No original clocks, margins, fences, custody, source-authority gates or runtime behavior outside rejecting unknown evidence were changed.
+
+Nine regressions exercise missing, malformed and nonstring-array values through the actual public seed reader, original seed issuer and native publication bridge. Issuer negatives require zero tag/ref POST; reader/bridge negatives remain GET-only. Positive source-authority fixtures remain explicitly SYNTHETIC and execute the existing real transports/parsers/hashes.
+
+| Phase | Run / job | Result |
+|---|---|---|
+| RED `d8626b13704e24c30872b374617de14ca1c0237c` |41342133220 /124954198695 |72 tests:63PASS/9FAIL/0SKIP/0CANCELLED. Every new negative failed with “Missing expected rejection.” Scoped lint passed. |
+| GREEN `f2b35826f12f646b3a25064213c5203f88d6f531` |[41342221090](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41342221090) /124954468465 |72PASS/0FAIL/0SKIP/0CANCELLED. Scoped lint passed. |
+
+GREEN primary verified repo1347578006, isolated branch feat/finite-native-cleanup-20261101, exact codeHEAD, push/attempt1/completed-success, updated2026-11-01T19:32:46Z. The existing temporary qualifier was narrowed to these three affected files and changed-code/test ESLint; it remains no-secret/contents-read/EXCLUDED integration. No whole350 or full suite was rerun.
+
+Exact hosted commands:
+
+```sh
+npm ci --ignore-scripts --no-audit --no-fund
+node --test test/mcp-qa-finite-seed-http.test.mjs test/mcp-qa-finite-seed-issuer.test.mjs test/mcp-qa-finite-publication-bridge.test.mjs
+npx eslint lib/mcp-qa-finite-seed-primary.mjs test/mcp-qa-finite-seed-http.test.mjs test/mcp-qa-finite-seed-issuer.test.mjs test/mcp-qa-finite-publication-bridge.test.mjs
+```
+
+Root's separate dated housekeeping observation records old harness run41340592762 completed/cancelled, updated2026-11-01T19:25:58Z. Earlier as-of in_progress statements remain historical evidence. No cause is attributed and this cancellation is not test success.
+
+Cloud source/Actions only; no local code/dependencies/build, runtime/custody/source/provider probe, main change or subagents. operationalReadiness=false; missing4C semantic/native mounts remain unavailable. Documentation receipts skip CI and stop after exact CAS/readback for scoped root re-review. The final documentation commit SHA is delivered with that readback.

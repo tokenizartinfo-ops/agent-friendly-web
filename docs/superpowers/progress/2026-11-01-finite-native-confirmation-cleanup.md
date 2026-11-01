@@ -251,3 +251,7 @@ Baseline `28e96f962fb6abfa09ed60af8bb07f37826102d2`. Fresh-review P2: **Reject m
 Round scope: focused hosted RED for new public-reader/issuer/native-bridge negatives, minimal implementation GREEN, scoped ESLint; no whole350/full-suite repetition, architecture/runtime/custody/source probe/main change or subagents. Preserve original clocks, fences, source4C unavailability and operationalReadiness=false. Report/readback then stop writes for scoped re-review.
 
 Dated housekeeping closure supplied by ROOT's primary follow-up: old harness run41340592762 is now completed/cancelled, updated2026-11-01T19:25:58Z. Preserve earlier as-of in_progress evidence above; no cause is attributed, and cancellation is not test success.
+
+
+## Task4B Task3 — review fix round1/5 result
+Finding-before-code `c344ba426ee8274f6db1fc7ece29f2cf6550b08d`; RED `d8626b13704e24c30872b374617de14ca1c0237c` run41342133220/job124954198695:72tests63PASS9FAIL0SKIP (all9 “Missing expected rejection”),lintpass. Minimal codeHEAD `f2b35826f12f646b3a25064213c5203f88d6f531`: require string, parse admit-job started_at once, require safeinteger before existing interval. GREEN run41342221090/job124954468465:72PASS0FAIL0SKIP0CANCELLED,scopedlintpass, exacthead/push/attempt1/repo1347578006 verified, updated2026-11-01T19:32:46Z. Three affected files only, no whole350/fullsuite. Full round report appended to reports/2026-11-01-finite-material-task3.md. No authority/runtime scope change; operationalReadiness=false. Docs receipt skips CI; stopwrites after CAS/readback for scoped root re-review.
