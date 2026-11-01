@@ -49,3 +49,23 @@ test('fixed restore launcher sets one coherence marker and execs once without a 
  assert.equal((restore.match(/exec node scripts\/run-qa-finite-trial-finalizer\.mjs restore/g)??[]).length,1);
  assert.doesNotMatch(restore,/while |until |for .* in |retry:/);
 });
+
+test('fixed CLI adopts preview and persists existing ready without Workflow create',async()=>{
+ const {cfFiniteFixture}=await import('./fixtures/finite-cf-http.mjs');
+ const {finiteObserverInstanceId}=await import('../lib/mcp-qa-finite-observer.mjs');
+ const {finiteCliSyntheticSource}=await import('./fixtures/finite-http-module.mjs');
+ const command=fixture(),a=validateQaFiniteConfirmationCommand({event:command.event,context:command.context,now:command.now});
+ const f=await cfFiniteFixture({at:command.at,configure:p=>{p.intentId=a.intentId;p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});}});
+ f.base.f.setNow(command.at+100);f.state.observerStatus='running';f.gh.state.admitStatus='in_progress';
+ const env={GITHUB_EVENT_PATH:'event.json',GITHUB_REPOSITORY:command.context.repository,GITHUB_REPOSITORY_ID:command.context.repositoryId,GITHUB_REF:command.context.ref,GITHUB_EVENT_NAME:command.context.eventName,GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:command.context.sourceRevision,GITHUB_TOKEN:'synthetic_gh',AFW_QA_CLOSED_TOKEN:'synthetic_cf'},writes=[];
+ const synthetic=await finiteCliSyntheticSource(f.p),result=await synthetic.runFiniteFinalizerCli({phase:'admit',env,now:f.base.f.now,read:async()=>JSON.stringify(command.event),write:async(path,value)=>writes.push({path,value}),fetchImpl:f.fetchImpl});
+ assert.equal(result.status,'ready');assert(writes.some(x=>x.path==='afw-finite-plan.json'));
+ assert.equal(f.requests.filter(x=>x.method==='POST'&&x.url.includes('api.cloudflare.com')).length,0);
+ assert.equal(f.gh.tagPosts,1);assert.equal(f.gh.refPosts,1);
+});
+test('caller source callback cannot replace missing fixed production constructor',async()=>{
+ const f=fixture();let called=0,network=0;
+ const env={GITHUB_EVENT_PATH:'event.json',GITHUB_REPOSITORY:f.context.repository,GITHUB_REPOSITORY_ID:f.context.repositoryId,GITHUB_REF:f.context.ref,GITHUB_EVENT_NAME:f.context.eventName,GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:f.context.sourceRevision};
+ const r=await runFiniteFinalizerCli({phase:'admit',env,resolveSource:async()=>{called++;return {};},read:async()=>JSON.stringify(f.event),write:async()=>{},now:f.now,fetchImpl:async()=>{network++;}});
+ assert.equal(r.status,'admin_pending');assert.equal(called,0);assert.equal(network,0);
+});

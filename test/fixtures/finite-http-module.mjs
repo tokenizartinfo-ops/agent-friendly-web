@@ -18,6 +18,6 @@ export function syntheticCommand(api,f){
 /** Explicit test SOURCE composition only; production CLI accepts no factory. */
 export async function finiteCliSyntheticSource(plan){
  const source='export async function resolvePrivateQaFiniteExternalSource(){return '+JSON.stringify(plan)+';}';
- const b=await build({stdin:{contents:"export {runFiniteFinalizerCli} from './scripts/run-qa-finite-trial-finalizer.mjs';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node',external:['node:*'],banner:{js:"import {createRequire as __createRequire} from 'node:module'; const require = __createRequire(process.cwd()+'/package.json');"},plugins:[{name:'synthetic-source-module-only',setup(builder){builder.onLoad({filter:/mcp-qa-finite-source\\.mjs$/},()=>({contents:source,loader:'js'}));}}]});
+ const b=await build({stdin:{contents:"export {runFiniteFinalizerCli} from './scripts/run-qa-finite-trial-finalizer.mjs';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node',external:['node:*'],banner:{js:"import {createRequire as __createRequire} from 'node:module'; const require = __createRequire(process.cwd()+'/package.json');"},plugins:[{name:'synthetic-source-module-only',setup(builder){builder.onLoad({filter:/mcp-qa-finite-source\.mjs$/},()=>({contents:source,loader:'js'}));}}]});
  return import('data:text/javascript;base64,'+Buffer.from(b.outputFiles[0].text).toString('base64')+'#'+randomUUID());
 }

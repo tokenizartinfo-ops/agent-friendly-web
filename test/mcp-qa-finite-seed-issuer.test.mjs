@@ -49,3 +49,9 @@ test('changed primary after tag ACK cannot send the ref',async()=>{
  const f=await seedWorld();f.state.hook=async url=>{if(f.state.tagPosts&&url.endsWith('/git/ref/heads/main'))f.map.get('/git/ref/heads/main').object.sha='0'.repeat(40);};
  await assert.rejects(f.api.issueFiniteMaterialSeed(f.options));assert.equal(f.state.tagPosts,1);assert.equal(f.state.refPosts,0);
 });
+
+test('lost ref ACK permits completed-primary GET reconciliation but never refunds issuer',async()=>{
+ const f=await seedWorld();f.state.mode='ref-lost';await assert.rejects(f.api.issueFiniteMaterialSeed(f.options));f.state.mode='normal';f.complete();
+ const r=await f.api.readFiniteMaterialSeed({intentId:f.seed.intentId,sourceRevision:f.seed.sourceRevision,fetchImpl:f.fetchImpl,now:f.now,signal:f.options.signal});assert.equal(r.seed.intentId,f.seed.intentId);
+ await assert.rejects(f.api.issueFiniteMaterialSeed(f.options));assert.equal(f.state.tagPosts,1);assert.equal(f.state.refPosts,1);
+});
