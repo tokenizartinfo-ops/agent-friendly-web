@@ -27,3 +27,15 @@ for(const mode of ['version','binding','source','in-progress','pointer-between-a
 test('default missing native custody/source receipt remains unavailable before network',async()=>{
  let calls=0;await assert.rejects(readFiniteQaPublicationBridge({ctx:{},env:{},intentId:'a'.repeat(64),sourceRevision:'b'.repeat(40),signal:new AbortController().signal,fetchImpl:async()=>{calls++;}}));assert.equal(calls,0);
 });
+
+for(const mode of ['malformed-notbefore','extra-token-field','wrong-native-id','inactive-native','expired-native'])test('native account identity rejects '+mode,async()=>{
+ const f=await seedWorld();await f.api.issueFiniteMaterialSeed(f.options);f.complete();
+ f.state.hook=async(url,init)=>{
+  if(url.endsWith('/tokens/verify')&&init.headers.Authorization==='Bearer synthetic-native'){
+   const result={id:'a'.repeat(32),status:'active',expires_on:new Date(f.T0+86400000).toISOString(),not_before:null};
+   if(mode==='malformed-notbefore')result.not_before='garbage';if(mode==='extra-token-field')result.unapproved=true;if(mode==='wrong-native-id')result.id='b'.repeat(32);if(mode==='inactive-native')result.status='disabled';if(mode==='expired-native')result.expires_on=new Date(f.T0).toISOString();
+   return f.response({success:true,errors:[],messages:[],result});
+  }
+ };
+ await assert.rejects(f.api.readFiniteQaPublicationBridge(f.nativeOptions()));
+});
