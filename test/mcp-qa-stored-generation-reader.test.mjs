@@ -23,14 +23,14 @@ async function fixture({startOffset=-1000,duration=60000,ancestor=false}={}){
   f.capsule={...f.capsule,predecessor:{kind:'generation',planHash:first.planHash,infoHash:first.infoHash,sequence:1},trialId:'8'.repeat(64),grantId:'next-grant',eventId:'9'.repeat(64),startAt:f.now(),expiresAt:f.now()+60000};
   last=await createPrivateQaGenerationLedger(f.options()).arm();assert.equal(last.status,'armed');
  }
- f.env.AFW_QA_VERSION={id:version};
+ f.env.AFW_QA_VERSION={id:version};f.pinOptions.expectedVersionId=version;f.pinOptions.sourceRevision=source;
  f.env.AFW_INDEPENDENT_CLOSURE={idFromName(name){assert.equal(name,'afw-own-successor-closure-v1');return{toString:()=>actor};}};
  const ctx={storage:f.storage,id:{toString:()=>actor}},options={env:f.env,ctx,sourceRevision:source,now:f.now,timeoutMs:5000};
  return {f,first,last,ledger,ctx,options};
 }
 function wrap(f,ctx,after,adapt=t=>t){
  const base=f.storage;let n=0;
- ctx.storage={transaction:fn=>base.transaction(async t=>{const r=await fn(adapt(t));await after?.(++n,r);return r;})};
+ ctx.storage={transaction:fn=>base.transaction(t=>fn(adapt(t))).then(async r=>{await after?.(++n,r);return r;})};
 }
 async function selected(o,plan){
  const r=await make(o).read(plan,undefined);assert.equal(r.status,'selected');flags(r);
@@ -57,10 +57,10 @@ test('actual ledger ancestor selection separates stored and current identity and
  assert.equal(await named.authorize('workflow_admission',new AbortController().signal),false);
 });
 for(const phase of ['pending','armed','withdrawn','expired','before-start'])test('valid current facts: '+phase,async()=>{
- const {f,first,ledger,options}=await fixture(phase==='before-start'?{startOffset:1000}:{});
+ const {f,first,options}=await fixture(phase==='before-start'?{startOffset:1000}:{});
  const c=f.rows.get(CONTROL+first.planHash);
  if(phase==='pending'){c.phase='pending';c.armedAt=null;}
- if(phase==='withdrawn')await ledger.withdraw();
+ if(phase==='withdrawn')await createPrivateQaGenerationLedger(f.options()).withdraw();
  if(phase==='expired')f.setNow(f.capsule.expiresAt);
  const r=await selected(options,first.planHash);assert.equal(r.target.phase,phase==='pending'?'pending':phase==='withdrawn'?'withdrawn':'armed');
  assert.equal(r.isHead,true);assert.equal(r.withinWindow,!['expired','before-start'].includes(phase));assert.equal(r.observedAt,f.now());
@@ -85,7 +85,9 @@ for(const drift of ['head-control','target','ancestor','advance','legacy'])test(
   if(drift==='legacy')f.rows.get(LEGACY).withdrawnAt++;
   if(drift==='advance'){
    // A complete, legitimate newer state is prepared on the base storage outside this callback.
-   const row=f.rows.get(CONTROL+last.planHash);row.phase='withdrawn';row.withdrawnAt=f.now();
+   await createPrivateQaGenerationLedger(f.options()).withdraw();f.setNow(f.capsule.expiresAt+1);
+   f.capsule={...f.capsule,predecessor:{kind:'generation',planHash:last.planHash,infoHash:last.infoHash,sequence:2},trialId:'c'.repeat(64),grantId:'third-grant',eventId:'d'.repeat(64),startAt:f.now(),expiresAt:f.now()+60000};
+   assert.equal((await createPrivateQaGenerationLedger(f.options()).arm()).status,'armed');
   }
  });
  assert.deepEqual(await make(options).read(plan,undefined),blocked);
