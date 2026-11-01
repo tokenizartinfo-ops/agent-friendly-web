@@ -40,7 +40,7 @@ for(const mutation of [
  p=>{p.N1++;},p=>{p.C0++;},p=>{p.C1++;},p=>{p.R1++;},p=>{p.T0++;},
  p=>{p.command.kind='closed';},p=>{p.command.repository='other/repo';},p=>{p.source.extra=true;},
  p=>{p.selectors.subscriptionId='future';},p=>{p.selectors.expectedProjectRevision=0;},p=>{p.workflows.confirmation='other';},
- p=>{p.finalizer.runId=p.workflows.nominalRunId;},p=>{p.legacy.preparedDispatchHash='0'.repeat(64);}
+ p=>{p.finalizer.runId=0;},p=>{p.legacy.preparedDispatchHash='0'.repeat(64);}
 ])test('strict immutable plan rejects '+mutation.toString(),()=>{const f=finiteFixture();mutation(f.plan);assert.throws(()=>control(f));});
 for(const [label,mutate]of [
  ['future T0',f=>f.setNow(f.plan.T0-1)],['less than 180s remaining',f=>f.setNow(f.plan.N1-179999)],
@@ -233,4 +233,28 @@ test('first finalizer readiness failure leaves durable pending control and origi
  assert.equal((await c.prepare()).status,'uncertain');assert.equal(f.alarm,f.plan.C0);
  const r=await control(f).read();assert.equal(r.phase,'pending');assert.equal(r.nominalEligible,false);
  assert.equal((await control(f).claimEffect('nominal')).status,'blocked');assert.equal((await control(f).claimEffect('close')).status,'issued');
+});
+
+test('native nominal identity needs no fictitious GHA run; legacy field is rejected',async()=>{
+ const f=finiteFixture();assert.deepEqual(Object.keys(f.plan.workflows),['confirmation','bootstrap']);
+ const c=control(f);assert.equal((await c.prepare()).status,'armed');
+ assert.equal((await c.claimEffect('nominal')).status,'issued');
+ const g=finiteFixture();g.plan.workflows.nominalRunId=10;assert.throws(()=>control(g));
+});
+for(const [name,mutate] of [
+ ['run',v=>v.runId++],['attempt',v=>v.attempt++],['job',v=>v.job.id++],
+ ['workflow',v=>v.workflow='other'],['repository',v=>v.repository='other/repo'],
+])test('exact finalizer primary still required: '+name,async()=>{
+ const f=finiteFixture(),base=f.primary.finalizer;f.primary.finalizer=async()=>{const v=await base();mutate(v);return v;};
+ const c=control(f);assert.equal((await c.prepare()).status,'uncertain');assert.equal((await c.claimEffect('nominal')).status,'blocked');
+});
+test('external projection removes nominal GHA identity and preserves exact finalizer fields',async()=>{
+ const {finiteFinalizerFixture}=await import('./fixtures/finite-finalizer.mjs');
+ const {validateFiniteExternalPlan}=await import('../lib/mcp-qa-finite-external-contract.mjs');
+ const f=await finiteFinalizerFixture();assert.deepEqual(Object.keys(f.plan.workflows),['confirmation','bootstrap']);
+ assert.deepEqual(f.plan.finalizer,f.f.plan.finalizer);assert.doesNotThrow(()=>validateFiniteExternalPlan(f.plan));
+ const old=structuredClone(f.plan);old.workflows.nominalRunId=10;assert.throws(()=>validateFiniteExternalPlan(old));
+ for(const [key,value] of [['runId',0],['jobId',0],['attempt',2],['workflow','other'],['sourceRevision','0'.repeat(40)]]){
+  const p=structuredClone(f.plan);p.finalizer[key]=value;assert.throws(()=>validateFiniteExternalPlan(p));
+ }
 });

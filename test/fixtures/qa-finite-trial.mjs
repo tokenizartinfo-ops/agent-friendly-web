@@ -24,7 +24,7 @@ export function finiteFixture({at:override}={}){
  canaryContainment:{sourceRevision:'f'.repeat(40),runtimeVersionId:pin(3).versionId,moduleHash:'0'.repeat(64),profileHash:'1'.repeat(64),bindingsHash:'2'.repeat(64)},
  selectors:{grantId:'current-grant',subject:'subject',projectId:'project',clientId:'client',resource:'https://fixed.invalid/mcp',consentHash:'a'.repeat(64),programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40),startAt:T0,expiresAt:N1,saveIdempotencyKey:'11111111-1111-4111-8111-111111111111',expectedProjectRevision:1,goal:'discovery'},
  withdrawalPolicyHash:'1'.repeat(64),closePolicyHash:'2'.repeat(64),
- workflows:{confirmation:'afw-release-'+'6'.repeat(64),bootstrap:'fixed-bootstrap',nominalRunId:10},
+ workflows:{confirmation:'afw-release-'+'6'.repeat(64),bootstrap:'fixed-bootstrap'},
  finalizer:{repository:'tokenizartinfo-ops/agent-friendly-web',runId:11,attempt:1,jobId:12,workflow:'afw-finite-finalizer',sourceRevision:'b'.repeat(40),readyStep:'admit-and-ready'},
  legacy:{control:JSON.stringify(legacy),controlHash:hash(JSON.stringify(legacy)),preparedDispatch:JSON.stringify(prepared),preparedDispatchHash:hash(JSON.stringify(prepared)),reductionDispatch:JSON.stringify(reduction),reductionDispatchHash:hash(JSON.stringify(reduction)),restoration:null,retirement:null,sourceRevision:'d'.repeat(40),sourceHash:'e'.repeat(64)}
  };
