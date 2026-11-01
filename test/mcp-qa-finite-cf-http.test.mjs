@@ -33,12 +33,13 @@ test('parent abort after first custody response cannot start further authenticat
 
 test('lost Workflow create ACK reconciles the exact instance and never sends a replacement',async()=>{
  const {validateQaFiniteConfirmationCommand}=await import('../lib/mcp-qa-cloud-lifecycle-admission.mjs');
- const {claimFiniteObserverCreation,createPrivateQaFiniteObserverHttp}=await import('../lib/mcp-qa-finite-http.mjs');
+ const {claimFiniteObserverCreation,createPrivateQaFiniteObserverHttp,createPrivateQaFiniteGithub}=await import('../lib/mcp-qa-finite-http.mjs');
  const {finiteObserverInstanceId}=await import('../lib/mcp-qa-finite-observer.mjs');
  const at=Date.now(),sha='b'.repeat(40),actor={id:290715446,login:'tokenizartinfo-ops',type:'User'};
  const event={action:'created',repository:{id:1347578006,full_name:'tokenizartinfo-ops/agent-friendly-web'},issue:{number:497},sender:{...actor},comment:{id:123,body:'/afw-qa-finite-confirmation v1 '+sha,created_at:new Date(at).toISOString(),author_association:'OWNER',user:{...actor}}};
  const context={repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'11',runAttempt:'1',sourceRevision:sha};
- const admission=validateQaFiniteConfirmationCommand({event,context,now:()=>at+100});
+ let observed=at+100;
+ const admission=validateQaFiniteConfirmationCommand({event,context,now:()=>observed});
  const f=await cfFiniteFixture({at,configure:p=>{p.intentId=admission.intentId;p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});}});
  f.base.f.setNow(at+100);f.state.observerStatus='running';f.gh.rows.delete('refs/tags/afw-finite-observer-create/'+admission.intentId);
  let sends=0;
@@ -49,4 +50,15 @@ test('lost Workflow create ACK reconciles the exact instance and never sends a r
  assert.equal((await observer.create(token)).status,'running');assert.equal(sends,1);
  await assert.rejects(observer.create(token));await assert.rejects(claimFiniteObserverCreation({admission,...options}));
  assert.equal((await observer.read()).preview.controlHash,f.v.controlHash);assert.equal(sends,1);
+ const ready=createPrivateQaFiniteGithub({plan:f.p,...options});
+ assert.equal((await ready.persistAdmission('synthetic_cf',admission)).controlPlanHash,f.v.planHash);
+ const beforeRefs=f.gh.refPosts,beforeTags=f.gh.tagPosts;
+ const late=createPrivateQaFiniteGithub({plan:f.p,...options,fetchImpl:async(url,init)=>{
+  const response=await fetchImpl(url,init);
+  if(url.endsWith('/git/tags')&&init.method==='POST'){observed=at+120001;f.base.f.setNow(observed);}
+  return response;
+ }});
+ await assert.rejects(late.persistAdmission('synthetic_cf',admission));
+ assert.equal(f.gh.tagPosts,beforeTags+1);assert.equal(f.gh.refPosts,beforeRefs);
 });
+

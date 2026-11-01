@@ -27,12 +27,12 @@ test('material first, deterministic observation slots and one separately named j
  assert.ok(installed);const f=await fixture();f.setReady(f.v.C1-1000);
  const r=await runPrivateQaFiniteObserver(f);assert.equal(r.purpose,'afw.finite-observer-output.v1');
  assert.equal(f.names[0],FINITE_PREVIEW_STEP);assert.equal(f.names.at(-2),FINITE_CLAIM_STEP);assert.equal(f.names.at(-1),'finite-final-primary');
- assert.ok(f.samples>1&&f.samples<=31);assert.ok(f.sleeps.at(-1).at>=f.v.C1-1000);assert.equal(f.claims,1);assert.equal(f.finalReads,1);
+ assert.ok(f.samples>1&&f.samples<=30);assert.ok(f.sleeps.at(-1).at>=f.v.C1-1000);assert.equal(f.claims,1);assert.equal(f.finalReads,1);
  assert.equal(new Set(f.names).size,f.names.length);assert.ok(f.options.every(x=>x.retries.limit===0));assert.equal(r.provenance.runtimeVersionId,f.v.runtimeVersionId);
 });
 test('absent proof is sampled through original capture window, never forever cached or resealed',async()=>{
  const f=await fixture();f.setReady(f.v.R1);
- const r=await runPrivateQaFiniteObserver(f);assert.equal(r.status,'admin_pending');assert.equal(f.samples,31);assert.equal(f.claims,0);assert.ok(f.sleeps.at(-1).at>f.v.C1);
+ const r=await runPrivateQaFiniteObserver(f);assert.equal(r.status,'admin_pending');assert.equal(f.samples,30);assert.equal(f.claims,0);assert.ok(f.sleeps.at(-1).at>f.v.C1);
 });
 for(const mode of ['wrong-source','wrong-instance','extra-selector','claim-lost','claim-existing','primary-writer'])test('observer closes for '+mode,async()=>{
  const f=await fixture();
