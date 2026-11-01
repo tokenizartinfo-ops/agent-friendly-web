@@ -311,3 +311,10 @@ test('incomplete error JSON and invalid UTF8 never yield numeric codes',async()=
   }}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:[]});assert.equal(r.outcomes.createWorkflow,'denied');
  }
 });
+
+test('eight unique numeric error codes are retained at the accepted array bound',async()=>{
+ const codes=[0,1,2,3,4,5,6,2147483647],x=await fixture({effect:q=>q.kind==='createWorkflow'?deniedResponse(q.f,403,codes.map(code=>({code}))):undefined}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:codes});assert.equal(r.outcomes.createWorkflow,'denied');
+});
+test('response-shaped status is not evidence of a genuine HTTP response',async()=>{
+ const x=await fixture({effect:q=>q.kind==='createWorkflow'?{status:403}:undefined}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:null,errorCodes:[]});assert.equal(r.outcomes.createWorkflow,'unknown');
+});
