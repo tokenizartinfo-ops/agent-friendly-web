@@ -71,3 +71,41 @@ for(const attack of ['native','credential','db-method','external-pin','deadline'
  };
  const r=await x.run();assert.ok(['blocked','uncertain'].includes(r.status));checks(r);assert.equal(x.f.storage.puts,0);
 });
+
+for(const phase of ['pending','armed'])test('late '+phase+' transaction ACK cannot turn aborted parent into blocked or successful authority',async()=>{
+ const x=generationArmFixture(),transaction=x.f.storage.transaction;let release,held=false;
+ x.f.storage.transaction=async fn=>{
+  const value=await Reflect.apply(transaction,x.f.storage,[fn]),head=x.f.rows.get(HEAD);
+  if(!held&&head&&x.f.rows.get(CONTROL+head.planHash).phase===phase){held=true;const waiting=new Promise(resolve=>{release=resolve;});queueMicrotask(()=>x.parent.abort());await waiting;}
+  return value;
+ };
+ const r=await x.run();assert.equal(r.status,'uncertain');checks(r);assert.equal(r.writeMayHaveOccurred,true);
+ const h=x.f.rows.get(HEAD),puts=x.f.storage.puts;assert.equal(x.f.rows.get(CONTROL+h.planHash).phase,phase);
+ release();await new Promise(resolve=>setTimeout(resolve,10));assert.equal(x.f.storage.puts,puts);assert.equal(x.f.rows.get(CONTROL+h.planHash).phase,phase);
+});
+test('expired original clock after armed commit preserves armed row but reports uncertainty',async()=>{
+ const x=generationArmFixture(),transaction=x.f.storage.transaction;x.f.storage.transaction=async fn=>{
+  const value=await Reflect.apply(transaction,x.f.storage,[fn]),head=x.f.rows.get(HEAD);
+  if(head&&x.f.rows.get(CONTROL+head.planHash).phase==='armed')x.f.setNow(x.f.now()+5000);return value;
+ };
+ const r=await x.run();assert.equal(r.status,'uncertain');checks(r);const h=x.f.rows.get(HEAD);assert.equal(x.f.rows.get(CONTROL+h.planHash).phase,'armed');
+});
+test('settlement drift after armed DTO assembly remains uncertain',async()=>{
+ const x=generationArmFixture(),race=Promise.race;Promise.race=function(values){return Reflect.apply(race,this,[values]).then(value=>{
+  if(value?.purpose==='afw.qa-generation-arm.v1'&&value.status==='armed')x.options.env.AFW_QA_VERSION={id:x.http.version};return value;
+ });};
+ try{const r=await x.run();assert.equal(r.status,'uncertain');checks(r);const h=x.f.rows.get(HEAD);assert.equal(x.f.rows.get(CONTROL+h.planHash).phase,'armed');}finally{Promise.race=race;}
+});
+test('remaining parent budget is never replenished by draft/primary stages',async()=>{
+ const x=generationArmFixture(),original=x.options.now;let calls=0;x.options.timeoutMs=7;x.options.now=()=>original()+Math.floor(calls++/4);
+ const r=await x.run();assert.equal(r.status,'blocked');checks(r);assert.equal(x.f.storage.puts,0);
+});
+test('getter on declared native identity is rejected without invoking it',async()=>{
+ const x=generationArmFixture();let reads=0;Object.defineProperty(x.options.nativeInvocation,'instanceId',{enumerable:true,get(){reads++;return 'afw-qa-arm-'+x.namedBundleHash;}});
+ const r=await x.run();assert.equal(r.status,'blocked');assert.equal(reads,0);assert.equal(x.f.storage.puts,0);
+});
+test('concurrent invocations consume one host and admit only one ledger chain',async()=>{
+ assert.equal(typeof api.createPrivateQaGenerationArm,'function');const x=generationArmFixture(),host=api.createPrivateQaGenerationArm(x.options);
+ const r=await Promise.all([host.arm(x.namedBundleHash,x.parent.signal),host.arm(x.namedBundleHash,x.parent.signal)]);
+ assert.deepEqual(r.map(v=>v.status),['armed','blocked']);assert.equal([...x.f.rows.keys()].filter(k=>k.startsWith(INFO)).length,1);assert.equal(x.eligibilityReads,2);
+});
