@@ -102,7 +102,7 @@ async function fixture(){
 }
 
 test('native closed lifecycle creates one correlated metadata Workflow, restores once and proves all terminal',async()=>{
- const x=await fixture(),r=await x.run();assert.equal(r.status,'verified');assert.equal(r.purpose,'afw.qa-cloud-native-observation.v1');assert.equal(r.nativeMetadataObservationVerified,true);assert.equal(r.nativeResult.runtimeVersionId,CANDIDATE);assert.equal(r.finalClosedVerified,true);assert.equal(r.finalReadback.reads,25);assert.equal(x.workflowPosts,1);assert.equal(x.terminatePosts,0);assert.deepEqual(x.posts,{upload:1,activate:1,restore:1});assert.equal(r.posts.createWorkflow,1);assert.equal(r.posts.terminateWorkflow,0);
+ const x=await fixture(),r=await x.run();assert.equal(r.status,'verified',JSON.stringify(r));assert.equal(r.purpose,'afw.qa-cloud-native-observation.v1');assert.equal(r.nativeMetadataObservationVerified,true);assert.equal(r.nativeResult.runtimeVersionId,CANDIDATE);assert.equal(r.finalClosedVerified,true);assert.equal(r.finalReadback.reads,25);assert.equal(x.workflowPosts,1);assert.equal(x.terminatePosts,0);assert.deepEqual(x.posts,{upload:1,activate:1,restore:1});assert.equal(r.posts.createWorkflow,1);assert.equal(r.posts.terminateWorkflow,0);
  for(const k of ['armEligibilityVerified','authorizesEffects','guardLivenessVerified','nativeWithdrawalVerified','operationalReadiness','mayRetry'])assert.equal(r[k],false);
  assert.equal(JSON.stringify(r).includes('PRIVATE'),false);assert.equal(JSON.stringify(r).includes('content_base64'),false);
 });
