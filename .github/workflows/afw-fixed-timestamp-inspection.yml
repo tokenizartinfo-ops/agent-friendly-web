@@ -1,0 +1,39 @@
+name: AFW fixed timestamp evidence only
+on:
+  push:
+    branches: [diagnostic/fixed-timestamp-inspection-20261101]
+    paths: [.github/workflows/afw-fixed-timestamp-inspection.yml]
+permissions:
+  contents: read
+  issues: read
+jobs:
+  observe:
+    if: github.repository_id == '1347578006' && github.actor_id == '290715446'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Read one fixed own comment and sanitized server time
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: |
+          node --input-type=module <<'NODE'
+          const before=Date.now(),mono=performance.now();
+          const out={purpose:'afw.fixed-timestamp-evidence.v1',readCount:1,observedBefore:new Date(before).toISOString(),observedAfter:null,elapsedMs:null,httpStatus:null,serverDate:null,commentId:null,commentCreatedAt:null,createdAfterOriginalLogTime:null,originalLogTime:'2026-11-01T08:48:09.000Z',readOnly:true,authorizesEffects:false,operationalReadiness:false};
+          try{
+            const r=await fetch('https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues/comments/6555713570',{redirect:'error',signal:AbortSignal.timeout(5000),headers:{Accept:'application/vnd.github+json',Authorization:'Bearer '+process.env.GH_READ_TOKEN,'X-GitHub-Api-Version':'2022-11-28'}});
+            out.httpStatus=r.status;
+            const d=Date.parse(r.headers.get('date')??'');if(Number.isFinite(d))out.serverDate=new Date(d).toISOString();
+            if(r.status===200){
+              const reader=r.body.getReader();let total=0;const chunks=[];
+              for(;;){const p=await reader.read();if(p.done)break;total+=p.value.byteLength;if(total>16384){void reader.cancel().catch(()=>{});throw Error();}chunks.push(p.value);}
+              const v=JSON.parse(Buffer.concat(chunks).toString('utf8'));if(v.id!==6555713570||typeof v.created_at!=='string'||v.created_at.length>32)throw Error();
+              const c=Date.parse(v.created_at);if(!Number.isSafeInteger(c))throw Error();
+              out.commentId=v.id;out.commentCreatedAt=new Date(c).toISOString();out.createdAfterOriginalLogTime=c>Date.parse(out.originalLogTime);
+            }
+          }catch{/* Fixed sanitized unknown output; no retry or reflected error. */}
+          out.observedAfter=new Date().toISOString();out.elapsedMs=Math.ceil(performance.now()-mono);
+          console.log('AFW_FIXED_TIMESTAMP_EVIDENCE '+JSON.stringify(out));
+          NODE
