@@ -1,4 +1,4 @@
-name: Finite Task1 temporary source qualifier
+name: Finite Task2 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -19,6 +19,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Task2 focused RED GREEN
+        run: node --test --test-reporter=spec test/mcp-own-finite-admission-gate.test.mjs
       - name: Task1 focused RED GREEN
         run: node --test --test-reporter=spec test/mcp-qa-finite-trial-control.test.mjs
       - name: Task1 native persistence
