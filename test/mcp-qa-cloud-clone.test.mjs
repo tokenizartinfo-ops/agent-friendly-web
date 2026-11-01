@@ -16,7 +16,7 @@ async function fixture(){
   const url=new URL(input),p=url.pathname;
   if(url.origin==='https://www.cloudflarestatus.com'){
    f.requests.push({url,init});assert.equal(p,'/api/v2/incidents/unresolved.json');assert.equal(init.method,'GET');assert.equal(Object.keys(init.headers).some(k=>k.toLowerCase()==='authorization'),false);
-   return new Response(JSON.stringify({incidents:mode==='providerIncident'?[{id:'synthetic',name:'Workers errors',status:'investigating'}]:[]}),{status:200,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}});
+   return new Response(JSON.stringify({incidents:mode==='providerIncident'?[{id:'synthetic',name:'Workers errors',status:'investigating'}]:mode==='unrelatedIncident'?[{id:'other',name:'Email routing statistics',status:'investigating',components:[{name:'Email Routing'}]}]:[]}),{status:200,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}});
   }
   if(url.origin==='https://api.cloudflare.com'&&init.method==='POST'){
    f.requests.push({url,init});assert.equal(init.redirect,'error');assert.equal(init.cache,'no-store');assert.ok(init.signal instanceof AbortSignal);
@@ -30,7 +30,7 @@ async function fixture(){
     if(mode==='moduleDrift')v.modules[0].content_base64=Buffer.from('PRIVATE_WRONG_MODULE').toString('base64');
     if(mode==='openFlag')v.bindings[0].text='true';
     if(mode==='unexpectedActivation'){f.version=CANDIDATE;f.deployment=ACTIVATE;annotation=body.annotations['workers/message'];}
-    if(mode==='uploadUnknown')throw Error('PRIVATE_UPLOAD_ACK');
+    if(mode==='uploadUnknown')throw Error('PRIVATE_UPLOAD_ACK');if(mode==='uploadNeverSettles')return new Promise(()=>{});
     return response({id:mode==='candidateEqualsBase'?f.pins.qaClosed.id:CANDIDATE});
    }
    assert.equal(p,'/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/'+f.pins.qaClosed.name+'/deployments');
@@ -89,3 +89,9 @@ test('duplicate delivery cannot acquire another effect budget',async()=>{
 test('same admission object cannot reuse claim after successful run',async()=>{const x=await fixture();await x.run();const before={...x.posts};const r=await x.run();assert.notEqual(r.status,'verified');assert.deepEqual(x.posts,before);});
 test('preflight drift denies claim and every CF write',async()=>{const x=await fixture();x.f.mutate=({url,response})=>{if(url.pathname.endsWith('/instances-v2'))response.body.result=[{id:'PRIVATE'}];};const r=await x.run();assert.notEqual(r.status,'verified');assert.deepEqual(x.posts,{upload:0,activate:0,restore:0});assert.equal(x.f.claims.size,0);});
 test('low remaining nominal budget cannot claim or publish',async()=>{const x=await fixture();x.f.wall=x.admission.expiresAt-179999;const r=await x.run();assert.notEqual(r.status,'verified');assert.deepEqual(x.posts,{upload:0,activate:0,restore:0});assert.equal(x.f.claims.size,0);});
+
+test('noncooperative upload is bounded, remains uncertain and cannot be retried',async()=>{
+ const x=await fixture();x.setMode('uploadNeverSettles');const r=await x.run();assert.equal(r.status,'uncertain');assert.equal(x.posts.upload,1);assert.equal(x.posts.activate,0);assert.equal(x.posts.restore,0);assert.equal(r.finalClosedVerified,true);assert.equal(r.mayRetry,false);
+});
+
+test('unrelated provider product does not become an AFW runtime fault or block the fixed closed proof',async()=>{const x=await fixture();x.setMode('unrelatedIncident');const r=await x.run();assert.equal(r.status,'verified');assert.equal(r.otherIncidentCount,1);assert.equal(r.providerChecked,true);});
