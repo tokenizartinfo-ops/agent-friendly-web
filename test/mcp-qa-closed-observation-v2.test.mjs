@@ -89,3 +89,7 @@ test('v2 rejects the v1 operation or context rather than selecting a timing mode
 test('actual generation ARM refuses an observed v2 DTO as eligibility and writes nothing',async()=>{
  const f=armObservationFixture(),r=await run(f);safe(r);assert.equal(r.status,'observed');const g=generationFixture(),before=structuredClone([...g.rows]);g.eligibility=async()=>r;const ledger=createPrivateQaGenerationLedger(g.options());assert.equal((await ledger.arm()).status,'blocked');assert.deepEqual([...g.rows],before);
 });
+
+test('v2 queue-age boundary is enforced independently of the compiled window',async()=>{
+ for(const age of [4999,5000]){const f=armObservationFixture();f.context.startAt=f.wall-10000;f.event.timestamp=new Date(f.wall-age);const r=await run(f);safe(r);assert.equal(r.status,age===4999?'observed':'blocked');if(age===5000)assert.equal(f.requests.length,0);else assert.equal(r.enqueueAgeMs,4999);}
+});
