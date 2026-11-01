@@ -89,3 +89,32 @@ No closed module bytes, original C570 source SHA, historical artifact locator, r
 Native5 actual launcher/journal/inventory; 4C2 private material/primary/custody/guard/observer/cleanup factories and direct closure-read alias selection; 4C3 actual nominal/receiver path, pending-writer and old-await containment, closed rollback class/namespace/history compatibility; privacy-qualified normalized historical metadata and literal module bytes, approved exact run/head/attempt/artifact/digest/receipt locator; actual Container attachment and all source/publication/custody eligibility. Main/publish/runtime approval remains separate.
 
 Original4args/18stages/70s, child5s/20s and outerT0/N1/C0/C1/R1 are untouched. No source success proves publication, custody, consent, liveness, live capability or PC-off. Stop writes after documentation CAS/readback for root fresh review.
+
+
+## Task4C1 — fix round1/5: executing checkout identity
+
+Review BASE525d992ccdfa24bdd4f6b71c4873a990d900142f. Exact finding: [P2] Bind embedded Node compilation to the verified checkout — scripts/build-finite-native-package.mjs:37. Spec Changes requested, quality1P2/noP1. The exported compiler verified checkout B and its Worker inputs while imported buildMcpNodeProgram() selected Node source beside the executing compiler in checkout A.
+
+Finding and root ruling were committed BEFORE production implementation in bb1a92711b350fed51bc5f60c331d41b16e6a677. Root selected the narrow source-owned restriction: reject a different canonical executing repository root before any build; no generic builder injection, dynamic import or relabeling.
+
+Production fix codeHEAD b2481cdb4dcaef72eb353a0db97938538d7f4aef: resolve requested cwd with realpath, compare against the realpath of the executing compiler repository root derived from import.meta.url, and use the resolved canonical cwd for all subsequent source/configuration/Worker build checks. The existing imported Node builder therefore belongs to the same verified physical checkout. A symlink alias of that checkout is accepted and then discarded in favor of its canonical target; another checkout is refused.
+
+The hosted regression creates an actual temporary Git worktree B, commits a distinct Node server source, supplies a dependency directory symlink solely on the hosted runner, proves B is independently clean/verified with verifyMcpReleaseSource, then calls the real compiler imported from A with cwd=B/revisionB. RED fails with Missing expected rejection, not a fixture/setup error. A separate same-root symlink case remains accepted. Both bounded temporary directories and the worktree are removed after tests; no owner-local source/deps/build was created.
+
+RED bb1a92711b350fed51bc5f60c331d41b16e6a677: run41347409966/job124970096074; node --test test/build-finite-native-package.test.mjs; 5 tests,4PASS/1FAIL,0SKIP/0CANCELLED. Sole failure is the cross-checkout Missing expected rejection; actual same-root staging and same-root symlink pass.
+
+GREEN b2481cdb4dcaef72eb353a0db97938538d7f4aef, source tree68f1c0253b2e678194714c9a9068503a08e53280: run41347509630/job124970396983, independently read back completed/success, exact head, push, attempt1, branchfeat/finite-native-cleanup-20261101, repository1347578006. 18PASS/0FAIL/0SKIP/0CANCELLED; scoped lint PASS; canonical same-root actual staging PASS; both actual generated-byte Wrangler dry-runs PASS; SHA256 before/after both OK; eligible manifest absent; artifact count0.
+
+Covering commands after hosted npm ci --ignore-scripts --no-audit --no-fund on Node22:
+- node --test test/build-finite-native-package.test.mjs test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-profile-native.test.mjs
+- npx eslint scripts/build-finite-native-package.mjs test/build-finite-native-package.test.mjs
+- node scripts/build-finite-native-package.mjs --staging b2481cdb4dcaef72eb353a0db97938538d7f4aef
+- npx wrangler deploy output/finite-native-staging/qaLive/index.mjs --config wrangler.independent-closure-qa.finite.jsonc --dry-run --no-bundle --outdir output/finite-dry-qa
+- npx wrangler deploy output/finite-native-staging/canaryLive/index.mjs --config wrangler.mcp-own.finite.jsonc --dry-run --no-bundle --outdir output/finite-dry-canary
+- sha256sum before and --check after; output both index.mjs: OK. test ! -e output/finite-native-package/manifest.json passed.
+
+Fresh staging module evidence at the fix codeHEAD: qaLive685470B/SHA25687c44bdf66bd6f223ee4cddc0b819dc7fd55abd3c29671aa89b0057be122062b; canaryLive1843504B/SHA256af90e6c5354d87506a7f356b92056d2171b771d7b3c4ee10513c391a2798a8d0. These supersede only staging evidence for their own M; older dated evidence is preserved. No343/fullsuite rerun claimed.
+
+Round1/5 implementation disposition: 1 addressed by this candidate,0 unimplemented; root scoped re-review pending. Production change only canonical root restriction and use of canonical cwd; tests, temporary branch qualifier and this receipt/ledger are supporting changes. The temporary qualifier remains excluded from integration. Exact documentation receipt HEAD is supplied by final CAS/readback handoff; prior receipt docHEAD525d992ccdfa24bdd4f6b71c4873a990d900142f remains unchanged.
+
+No provider/private probe, runtime, artifact upload, permission/credential change, deployment, merge, subagent or owner-local build. Every existing complete-package/source/custody/history gate remains unavailable. operationalReadiness=false. STOP WRITES after documentation CAS/readback for scoped re-review.
