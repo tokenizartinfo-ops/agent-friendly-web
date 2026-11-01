@@ -97,7 +97,7 @@ test('effect reconciliation is read only, receipts supplied as facts are rejecte
  assert.equal((await c.reconcileEffect('nominal')).status,'unresolved');assert.equal(f.puts,n);
 });
 test('clock reversal invalidates current instance; original expiry survives reconstruction',async()=>{
- const f=finiteFixture(),c=control(f);await c.prepare();f.setNow(f.plan.T0+1);await c.read();f.setNow(f.plan.T0);assert.equal((await c.claimEffect('nominal')).status,'blocked');
+ const f=finiteFixture(),c=control(f);await c.prepare();f.setNow(f.plan.T0+1);await c.read();f.setNow(f.plan.T0);assert.equal((await c.claimEffect('nominal')).status,'blocked');f.setNow(f.plan.T0+2);assert.equal((await c.claimEffect('nominal')).status,'blocked');
  f.setNow(f.plan.N1);assert.equal((await control(f).claimEffect('nominal')).status,'blocked');assert.equal((await control(f).read()).nominalEligible,false);
 });
 test('changed native tuple and primary capability fail closed',async()=>{
