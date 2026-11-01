@@ -3,7 +3,7 @@
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development or superpowers:executing-plans task-by-task.
 
 **Goal:** retain safe numerical evidence for native effect failures without changing their authority or cleanup.
-**Architecture:** native-only fixed diagnostic accumulator in existing closed controller; old clone unchanged, bounded JSON decoding reuses original request budget.
+**Architecture:** native-only fixed diagnostic accumulator in existing closed controller; old clone unchanged, bounded JSON decoding reuses original request budget; a separate diagnostic status never changes the existing post-current() classification latch.
 **Tech Stack:** Node22, existing controller/ESM CLI/tests, GitHub Actions.
 **Spec:** docs/superpowers/specs/2026-11-01-native-effect-http-diagnostics.md
 
@@ -25,7 +25,7 @@
 ### Task1: real-controller RED/GREEN
 Files: lib/mcp-qa-cloud-clone.mjs; test/mcp-qa-cloud-native-observation.test.mjs. No shared CI/AGENTS edits in implementer task.
 - [ ] RED actual synthetic403 result lacks required effectHttp; cover all classes above with real controller.
-- [ ] Implement fixed private accumulators, bounded native error-body decode, descriptor-safe numeric selection; freeze final owned maps/arrays.
+- [ ] Implement fixed private accumulators, bounded native error-body decode, descriptor-safe numeric selection; fence late writes and freeze detached final owned maps/arrays; best-effort cancellation cannot replace failure or delay cleanup.
 - [ ] Run focused native+oldclone+actualCLI/workflow suites plus targeted eslint in secret-free Actions, explicit checkoutgithub.sha.
 - [ ] Independent task review and fix loop. Return only owned source/test blobs; no runtime/source-main merge.
 
