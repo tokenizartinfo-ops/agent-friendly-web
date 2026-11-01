@@ -3,7 +3,7 @@ import {randomUUID} from 'node:crypto';
 // Synthetic source-private process worlds. Each bundle has independent module
 // state; no production reset hook, environment flag or DTO can reset a cap.
 export async function finiteHttpModule(){
- const b=await build({stdin:{contents:"export * from './lib/mcp-qa-finite-http.mjs';export {validateQaFiniteConfirmationCommand} from './lib/mcp-qa-cloud-lifecycle-admission.mjs';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node',external:['node:*']});
+ const b=await build({stdin:{contents:"export * from './lib/mcp-qa-finite-http.mjs';export {validateQaFiniteConfirmationCommand} from './lib/mcp-qa-cloud-lifecycle-admission.mjs';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node',external:['node:*'],banner:{js:"import {createRequire as __createRequire} from 'node:module'; const require = __createRequire(process.cwd()+'/package.json');"}});
  return import('data:text/javascript;base64,'+Buffer.from(b.outputFiles[0].text).toString('base64')+'#'+randomUUID());
 }
 export function syntheticOriginalEnvironment(plan,{pid=process.pid,attempt='1'}={}){
