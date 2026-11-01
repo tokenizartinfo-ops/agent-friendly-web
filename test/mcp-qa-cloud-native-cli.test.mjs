@@ -18,6 +18,7 @@ async function execute(mode='normal',{prepare=false}={}){
  if(mode==='badEvent')event.comment.body+=';echo PRIVATE_EVENT';
  if(mode==='oldCommand')event.comment.body='/afw-qa-deploy-observe-restore v1 '+source;
  if(mode==='stale')event.comment.created_at=new Date(wall-300000).toISOString();
+ if(mode==='future')event.comment.created_at=new Date(wall+1).toISOString();
  const env={GITHUB_ACTIONS:'true',RUNNER_TEMP:runner,GITHUB_EVENT_PATH:'/synthetic/event.json',GITHUB_REPOSITORY:'tokenizartinfo-ops/agent-friendly-web',GITHUB_REPOSITORY_ID:'1347578006',GITHUB_REF:'refs/heads/main',GITHUB_EVENT_NAME:'issue_comment',GITHUB_RUN_ID:'41200000199',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:source,AFW_QA_CLOSED_TOKEN:'PRIVATE_CF_TOKEN_123456789012345',GITHUB_TOKEN:'ghs_PRIVATE_SYNTHETIC_'+'a'.repeat(200)+'.'+'b'.repeat(280)};
  if(mode==='attempt2')env.GITHUB_RUN_ATTEMPT='2';
  if(mode==='notActions')env.GITHUB_ACTIONS='false';
@@ -53,8 +54,9 @@ async function execute(mode='normal',{prepare=false}={}){
   writeFile:async(path,text,options)=>{if(mode==='existingOutput')throw Error('PRIVATE_EEXIST');writes.push({path,text:Buffer.isBuffer(text)?text.toString():text,options});}
  };
  const api={
-  request:async o=>{requests.push(JSON.parse(JSON.stringify(o)));if(mode==='forbidden')throw Error('PRIVATE_403');if(mode==='staleAfterRead')wall+=300000;return{result:{modules:[{content_base64:baselineBytes.toString('base64')}]}};},
+  request:async o=>{requests.push(JSON.parse(JSON.stringify(o)));if(mode==='forbidden'||mode==='privateFetch')throw Error('PRIVATE_403');if(mode==='staleAfterRead')wall+=300000;return{result:{modules:[{content_base64:baselineBytes.toString('base64')}]}};},
   assertCurrent:()=>{if(mode==='expiredApi')throw Error('PRIVATE_EXPIRED');},
+  readDiagnostic:()=>({purpose:'afw.own-closed-read-transport.v1',state:requests.length?'blocked':'idle',httpStatus:mode==='forbidden'?403:null,reads:requests.length,PRIVATE:'PRIVATE_TRANSPORT_BODY',authorizesEffects:false,operationalReadiness:false}),
   close:()=>closed++
  };
  const __run=async({admission,credential,githubCredential,artifact:loaded})=>{
@@ -82,7 +84,7 @@ async function execute(mode='normal',{prepare=false}={}){
    api:'export const createOwnClosedReadbackApi=globalThis.__createApi;'
   }[o.path]}));
  }}]});
- const ClockDate=class extends Date{static now(){return wall;}};
+ const ClockDate=class extends Date{static now(){if(mode==='privateClock')throw Error('PRIVATE_ADMISSION_EXCEPTION');return wall;}};
  await runInNewContext('(async()=>{'+built.outputFiles[0].text+'})()',{process,Date:ClockDate,performance:{now:()=>mono},Buffer,Response,AbortController,TextDecoder,setTimeout,clearTimeout,fetch:async()=>{throw Error('Unexpected network');},console:{log:s=>logs.push(s),error:s=>logs.push(s)},__fs:fs,__path:posix,__crypto:{createHash},__run,__createApi:({credential})=>{apiCalls++;assert.equal(credential,env.AFW_QA_CLOSED_TOKEN);return api;},__validate:v=>{validated++;if(mode==='wrongProfile')throw Error('PRIVATE_PROFILE');return v;}});
  return{process,writes,logs,runs,apiCalls,validated,closed,requests,reads,baselineBytes};
 }
@@ -116,9 +118,35 @@ test('real preparer uses stateless exact event, one fixed GET/profile check and 
  const marker=r.logs.find(s=>s.startsWith('AFW_NATIVE_BASE_PREPARATION ')),out=JSON.parse(marker.slice('AFW_NATIVE_BASE_PREPARATION '.length));assert.equal(out.readOnly,true);assert.equal(out.authorizesEffects,false);assert.equal(out.operationalReadiness,false);assert.equal(out.sourceRevision,source);assert.ok(out.intentId);safe(r);
 });
 for(const mode of ['badEvent','oldCommand','stale','attempt2','malformedEvent','notActions','extraArg','relativeRunner','runnerAlias','runnerSymlink','forbidden','wrongProfile','expiredApi','staleAfterRead','existingOutput'])test('real preparer rejects '+mode+' without writes or effects',async()=>{
- const r=await execute(mode,{prepare:true});assert.equal(r.process.exitCode,1);assert.equal(r.runs,0);assert.equal(r.writes.length,0);assert.ok(r.requests.length<=1);assert.ok(r.requests.every(r=>r.method==='GET'));assert.equal(r.logs.length,1);assert.equal(r.logs[0],'AFW native baseline preparation blocked; no remote writes or retry.');assert.equal(r.closed,r.apiCalls);safe(r);
+ const r=await execute(mode,{prepare:true});assert.equal(r.process.exitCode,1);assert.equal(r.runs,0);assert.equal(r.writes.length,0);assert.ok(r.requests.length<=1);assert.ok(r.requests.every(r=>r.method==='GET'));assert.equal(r.logs.length,1);assert.ok(r.logs[0].startsWith('AFW_NATIVE_BASE_PREPARATION_RESULT '));assert.equal(r.closed,r.apiCalls);safe(r);
 });
 
 for(const mode of ['diagnosticResult','diagnosticAtCap'])test('real CLI serializes bounded numerical diagnostics '+mode+' under unchanged caps',async()=>{
  const r=await execute(mode);assert.equal(r.process.exitCode,0);assert.equal(r.writes.length,1);const out=output(r);assert.equal(out.effectHttp.purpose,'afw.qa-native-effect-http.v1');assert.deepEqual(out.effectHttp.createWorkflow.errorCodes,[2147483640,2147483641,2147483642,2147483643,2147483644,2147483645,2147483646,2147483647]);assert.ok(Buffer.byteLength(r.writes[0].text)<=16384);if(mode==='diagnosticAtCap')assert.equal(Buffer.byteLength(r.writes[0].text),15001);safe(r);
+});
+
+const preparationFailure=r=>{
+ assert.equal(r.process.exitCode,1);assert.equal(r.runs,0);assert.equal(r.writes.length,0);assert.equal(r.logs.length,1);
+ const prefix='AFW_NATIVE_BASE_PREPARATION_RESULT ';assert.ok(r.logs[0].startsWith(prefix));assert.ok(Buffer.byteLength(r.logs[0])<=512);
+ const out=JSON.parse(r.logs[0].slice(prefix.length));
+ assert.deepEqual(Object.keys(out).sort(),['purpose','status','stage','admissionStatus','transport','readOnly','authorizesEffects','operationalReadiness','mayRetry'].sort());
+ assert.equal(out.purpose,'afw.qa-native-base-preparation-failure.v1');assert.equal(out.status,'blocked');assert.equal(out.readOnly,true);
+ for(const k of ['authorizesEffects','operationalReadiness','mayRetry'])assert.equal(out[k],false);
+ assert.equal(r.closed,r.apiCalls);assert.ok(r.requests.length<=1);assert.ok(r.requests.every(q=>q.method==='GET'));safe(r);return out;
+};
+// Removing or misplacing a stage must fail: these exercise the bundled real entry,
+// real JSON event parser and admission parser, with only external I/O/profile mocked.
+for(const [mode,stage,admissionStatus,calls]of [
+ ['notActions','event_file',null,0],['relativeRunner','event_file',null,0],
+ ['malformedEvent','event_parse',null,0],['badEvent','admission','denied',0],
+ ['future','admission','denied',0],['stale','admission','denied',0],
+ ['privateClock','admission','exception',0],['forbidden','metadata_get',null,1],
+ ['privateFetch','metadata_get',null,1],['expiredApi','metadata_current',null,1],
+ ['wrongProfile','baseline_correlation',null,1],['staleAfterRead','readmission','denied',1],
+ ['existingOutput','baseline_write',null,1]
+])test('preparer reports sanitized stage without effects for '+mode,async()=>{
+ const r=await execute(mode,{prepare:true}),out=preparationFailure(r);
+ assert.equal(out.stage,stage);assert.equal(out.admissionStatus,admissionStatus);assert.equal(r.requests.length,calls);
+ assert.equal(out.transport?.httpStatus??null,mode==='forbidden'?403:null);
+ if(calls)assert.deepEqual(out.transport,{state:'blocked',httpStatus:mode==='forbidden'?403:null,reads:1});else assert.equal(out.transport,null);
 });
