@@ -59,7 +59,7 @@ async function fixture(){
   if(mode==='finalReadbackFailure'&&posts.restore&&p.endsWith('/tails'))return response([{id:'PRIVATE_ACTIVE_TAIL'}]);
   return normal(input,init);
  };
- return{f,api,admission,admissionMono,posts,fetchImpl,setMode(v){mode=v;},run:()=>api.runQaClosedCloudClone({admission,credential:'PRIVATE-cf-token-for-test',githubCredential:'PRIVATE-gh-token-for-test',fetchImpl,now}),event,context,now};
+ return{f,api,admission,admissionMono,posts,fetchImpl,setMode(v){mode=v;},run:()=>api.runQaClosedCloudClone({admission,credential:'PRIVATE-cf-token-for-test',githubCredential:mode==='modernGithubCredential'?'ghs_SYNTHETIC_APPID_'+'a'.repeat(200)+'.'+'b'.repeat(280)+'.'+'c'.repeat(100):'PRIVATE-gh-token-for-test',fetchImpl,now}),event,context,now};
 }
 test('literal closed clone performs only upload/activate/restore once and independently closes all profiles',async()=>{
  const x=await fixture(),r=await x.run();assert.equal(r.purpose,'afw.qa-closed-cloud-clone.v1');assert.equal(r.status,'verified');assert.equal(r.controlPlaneOnly,true);assert.equal(r.nativeExecutionVerified,false);assert.equal(r.candidateVersionId,CANDIDATE);assert.equal(r.candidateObserved,true);assert.equal(r.restorationAcknowledged,true);assert.equal(r.finalClosedVerified,true);assert.equal(r.finalReadback.status,'closed');assert.equal(r.finalReadback.reads,25);assert.equal(r.finalReadback.profiles.qa.versionId,x.f.pins.qaClosed.id);assert.deepEqual(x.posts,{upload:1,activate:1,restore:1});assert.deepEqual(r.posts,x.posts);
@@ -113,3 +113,5 @@ for(const phase of ['nominal','cleanup'])test('stalled wall clock and original '
   assert.notEqual(r.status,'verified');assert.equal(x.posts.upload,1);assert.equal(x.posts.activate,phase==='nominal'?0:1);assert.equal(x.posts.restore,phase==='nominal'?0:1);assert.equal(r.mayRetry,false);
  }finally{JSON.parse=nativeParse;Object.defineProperty(globalThis,'performance',descriptor);}
 });
+
+test('full fixed clone route accepts current opaque Actions credential without new key or scope',async()=>{const x=await fixture();x.setMode('modernGithubCredential');const r=await x.run();assert.equal(r.status,'verified');assert.deepEqual(x.posts,{upload:1,activate:1,restore:1});assert.equal(r.finalClosedVerified,true);assert.equal(r.operationalReadiness,false);assert.equal(JSON.stringify(r).includes('ghs_SYNTHETIC'),false);});

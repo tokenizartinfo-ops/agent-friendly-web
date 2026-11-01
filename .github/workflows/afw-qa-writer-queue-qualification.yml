@@ -21,4 +21,4 @@ jobs:
         with:
           node-version: 22
       - name: Qualify writer queue and finite admission with synthetic data only
-        run: node --test test/mcp-qa-cloud-lifecycle-admission.test.mjs
+        run: node --test test/mcp-qa-cloud-lifecycle-admission.test.mjs test/mcp-qa-github-opaque-credential.test.mjs
