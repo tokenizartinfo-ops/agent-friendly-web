@@ -233,3 +233,16 @@ test('CLI entry denial includes only the complete fixed DTO field contract',()=>
   assert.equal(dto.responseSchema,null);assert.equal(dto.responseShape,null);safe(dto);
  }finally{rmSync(directory,{recursive:true,force:true});}
 });
+
+test('observed successful envelope with own informational type null verifies synthetic identity', async()=>{
+ const f=fixture();
+ const envelope={success:true,errors:[],messages:[{code:10000,message:'This API Token is valid and active. CREDENTIAL_SENTINEL',type:null}],result:{...f.result}};
+ let requests=0;
+ f.args.fetchImpl=async()=>{requests++;return diagnosticResponse(f,envelope);};
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'verified');assert.equal(dto.failure,null);assert.equal(dto.httpStatus,200);
+ assert.equal(dto.tokenId,ID);assert.equal(dto.expectedTokenMatch,true);assert.equal(dto.tokenStatus,'active');
+ assert.equal(dto.notBefore,f.result.not_before);assert.equal(dto.expiresAt,f.result.expires_on);
+ assert.deepEqual(dto.errorCodes,[]);assert.equal(dto.responseSchema,null);assert.equal(dto.responseShape,null);
+ assert.equal(requests,1);assert.equal(f.counts.reads,1);safe(dto);
+});
