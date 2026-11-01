@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {mkdtempSync, rmSync, readFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import {URL, fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {runQaBootstrapCustodyInspection} from '../lib/mcp-qa-bootstrap-custody-inspection.mjs';
 const SHA='a'.repeat(40), ID='9db7901af95faf07e6f7ef378045328e';
@@ -92,4 +92,22 @@ test('successful informational message code 10000 is not an error', async () => 
  f.args.fetchImpl = async () => new Response(JSON.stringify({success:true,errors:[],messages:[{code:10000,message:'This API Token is valid and active. CREDENTIAL_SENTINEL'}],result:f.result}),{headers:{date:new Date(START).toUTCString()}});
  const dto = await runQaBootstrapCustodyInspection(f.args);
  assert.equal(dto.status,'verified'); assert.deepEqual(dto.errorCodes,[]); assert.equal(dto.expectedTokenMatch,true); safe(dto);
+});
+test('clock reversal during transport cannot retain metadata', async () => {
+ const f=fixture();
+ f.args.fetchImpl=async()=>{f.clock.wall--;return f.response();};
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked'); assert.equal(dto.tokenId,null); safe(dto);
+});
+test('monotonic request end cannot be extended by a stationary wall clock', async () => {
+ const f=fixture();
+ f.args.fetchImpl=async()=>{f.clock.mono+=5000;return f.response();};
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked'); assert.equal(dto.tokenId,null); safe(dto);
+});
+test('malformed informational messages remain secret-free failures', async () => {
+ const f=fixture();
+ f.args.fetchImpl=async()=>new Response(JSON.stringify({success:true,errors:[],messages:[{code:'10000',message:'CREDENTIAL_SENTINEL'}],result:f.result}),{headers:{date:new Date(START).toUTCString()}});
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked'); safe(dto);
 });
