@@ -122,7 +122,7 @@ for(const mode of ['workflow403','absence403','preexisting','wrongCreateId','wro
 }
 test('lost Workflow create ACK retains uncertainty after full closed restoration',async()=>{const x=await fixture();x.setMode('createUnknown');const r=await x.run();assert.equal(r.uncertain,true);assert.equal(r.status,'uncertain');assert.equal(x.workflowPosts,1);assert.equal(x.posts.restore,1);assert.equal(r.finalClosedVerified,true);});
 test('observed paused instance is preserved and does not prevent owned Worker restoration',async()=>{const x=await fixture();x.setMode('workflowPaused');const r=await x.run();assert.notEqual(r.status,'verified');assert.equal(r.conflict,true);assert.equal(x.terminatePosts,0);assert.equal(x.posts.restore,1);assert.equal(r.finalClosedVerified,false);});
-test('bounded poll cutoff terminates only own running Workflow then restores independently',async()=>{const x=await fixture();x.setMode('workflowRunning');const r=await x.run();assert.notEqual(r.status,'verified');assert.equal(x.terminatePosts,1);assert.equal(x.posts.restore,1);assert.equal(r.finalClosedVerified,true);assert.ok(x.polls<=16);});
+test('bounded poll cutoff terminates only own running Workflow then restores independently',async()=>{const x=await fixture();x.setMode('workflowRunning');const r=await x.run();assert.notEqual(r.status,'verified');assert.equal(x.terminatePosts,1);assert.equal(x.posts.restore,1);assert.equal(r.finalClosedVerified,true);assert.ok(x.polls<=16);assert.deepEqual(r.effectHttp.terminateWorkflow,{httpStatus:200,errorCodes:[]});});
 test('unknown termination ACK never causes second mutation or blocks Worker restoration',async()=>{const x=await fixture();x.setMode('terminateUnknown');const r=await x.run();assert.equal(r.uncertain,true);assert.equal(x.terminatePosts,1);assert.equal(x.posts.restore,1);assert.notEqual(r.status,'verified');});
 for(const mode of ['activationUnknown','restoreUnknown','foreignPointer','nominalExpires','cleanupExpires']){
  test(mode+' preserves original clone safety semantics in native route',async()=>{const x=await fixture();x.setMode(mode);const r=await x.run();assert.notEqual(r.status,'verified');assert.ok(Object.values(x.posts).every(n=>n<=1));if(mode==='foreignPointer')assert.equal(x.posts.restore,0);if(mode==='nominalExpires')assert.equal(x.posts.restore,1);if(mode==='cleanupExpires')assert.equal(x.posts.restore,0);});
@@ -285,4 +285,29 @@ test('timely4xx hanging body uses original request timer and keeps denied classi
 test('deferred fetch after final return cannot mutate detached diagnostic or outcomes',async()=>{
  let release,response;
  const x=await fixture({effect:q=>{if(q.kind==='createWorkflow'){response=deniedResponse(q.f);return new Promise(resolve=>{release=resolve;});}}}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:null,errorCodes:[]});assert.equal(r.outcomes.createWorkflow,'unknown');const captured=JSON.stringify(r);release(response);await new Promise(resolve=>setImmediate(resolve));assert.equal(JSON.stringify(r),captured);
+});
+
+test('old clone has no effectHttp and never consumes denied effect body',async()=>{
+ let bodyReads=0;
+ const x=await fixture({effect:q=>{if(q.kind==='upload'){const r=deniedResponse(q.f);Object.defineProperty(r,'body',{value:{getReader(){bodyReads++;throw Error('PRIVATE_PROVIDER');}}});return r;}}});
+ const admission=x.api.validateQaLifecycleCommand({event:{...x.event,comment:{...x.event.comment,body:'/afw-qa-deploy-observe-restore v1 '+x.context.sourceRevision}},context:x.context,now:x.now});
+ const r=await x.api.runQaClosedCloudClone({admission,credential:'PRIVATE-cf-token-for-test',githubCredential:'PRIVATE-gh-token-for-test',fetchImpl:x.fetchImpl,now:x.now});assert.equal(Object.hasOwn(r,'effectHttp'),false);assert.equal(r.outcomes.upload,'denied');assert.equal(bodyReads,0);assert.equal(r.posts.upload,1);assert.equal(r.mayRetry,false);
+});
+test('genuine create201 is observed honestly without inferring native completion',async()=>{
+ const x=await fixture({effect:q=>q.kind==='createWorkflow'?q.response({id:'afw-qa-arm-'+q.admission.intentId,workflow_id:'06b6c3eb-ce59-4594-8b9e-2636977d56da',version_id:'opaque-create-ref'},201):undefined}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:201,errorCodes:[]});assert.equal(r.workflowCreateAcknowledged,true);assert.notEqual(r.status,'verified');assert.equal(r.posts.createWorkflow,1);
+});
+for(const bytes of [8192,8193])test('exact '+bytes+' byte error envelope enforces diagnostic cap',async()=>{
+ const envelope={success:false,errors:[{code:7,message:'PRIVATE_PROVIDER'}],messages:[],padding:''};envelope.padding='X'.repeat(bytes-Buffer.byteLength(JSON.stringify(envelope)));const raw=JSON.stringify(envelope);assert.equal(Buffer.byteLength(raw),bytes);
+ const x=await fixture({effect:q=>q.kind==='createWorkflow'?deniedResponse(q.f,403,undefined,{},raw):undefined}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:bytes===8192?[7]:[]});assert.equal(r.outcomes.createWorkflow,'denied');
+});
+for(const raw of ['[]','{"success":false,"errors":[{"code":7}]}','{"success":false,"errors":[],"messages":[]}','{"success":true,"errors":[{"code":7}],"messages":[]}'])test('unknown envelope shape is never projected '+raw,async()=>{
+ const x=await fixture({effect:q=>q.kind==='createWorkflow'?deniedResponse(q.f,403,undefined,{},raw):undefined}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:[]});
+});
+test('incomplete error JSON and invalid UTF8 never yield numeric codes',async()=>{
+ for(const malformed of [false,true]){
+  let reads=0;const x=await fixture({effect:q=>{
+   if(q.kind!=='createWorkflow')return;
+   const r=deniedResponse(q.f);Object.defineProperty(r,'body',{value:{getReader:()=>({read:async()=>{if(reads++===0)return{done:false,value:malformed?new Uint8Array([255]):new TextEncoder().encode('{"success":false,"errors":[{"code":7}],"messages":[]}')};if(!malformed)throw Error('PRIVATE_PROVIDER');return{done:true};},cancel:async()=>{}})}});return r;
+  }}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:[]});assert.equal(r.outcomes.createWorkflow,'denied');
+ }
 });
