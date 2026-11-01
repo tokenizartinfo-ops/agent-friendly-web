@@ -242,3 +242,12 @@ Root fresh review pending; final documentation checkpoint/readback receipt follo
 
 ## Task4B Task3 — exact documentation HEAD receipt
 Documentation checkpoint HEAD `94dca586b44178ef45ac84f5827fd1c997bb9f27`, parent qualified code `eaefd5aabf5ebf3c08da29c2ad6d1eb699af39f8`. This receipt changes docs only; FINAL350PASS/lint evidence remains run41341399674/job124951985828. Its own final SHA is returned to root after exact CAS/readback; writes then STOP for root fresh review. No 4C/runtime readiness inferred.
+
+
+## Task4B Task3 — review fix round1/5 recorded BEFORE implementation
+
+Baseline `28e96f962fb6abfa09ed60af8bb07f37826102d2`. Fresh-review P2: **Reject malformed admit-job start timestamps.** In `lib/mcp-qa-finite-seed-primary.mjs:25`, `Date.parse(j.started_at)` is checked only with `<T0` and `>startedAt`; missing/invalid values become NaN and both comparisons are false, accepting unknown primary evidence in issuer/reader qualification. Required correction: require a string, parse once, require a safe integer, then preserve the existing interval checks. Include missing, malformed and nonstring/coercible-array negatives.
+
+Round scope: focused hosted RED for new public-reader/issuer/native-bridge negatives, minimal implementation GREEN, scoped ESLint; no whole350/full-suite repetition, architecture/runtime/custody/source probe/main change or subagents. Preserve original clocks, fences, source4C unavailability and operationalReadiness=false. Report/readback then stop writes for scoped re-review.
+
+Dated housekeeping closure supplied by ROOT's primary follow-up: old harness run41340592762 is now completed/cancelled, updated2026-11-01T19:25:58Z. Preserve earlier as-of in_progress evidence above; no cause is attributed, and cancellation is not test success.
