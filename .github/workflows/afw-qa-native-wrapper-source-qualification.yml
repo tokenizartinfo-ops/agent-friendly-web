@@ -1,0 +1,30 @@
+name: AFW native wrapper source qualification
+on:
+  push:
+    branches: [feat/native-wrapper-artifact-20261101]
+  pull_request:
+    paths:
+      - 'lib/mcp-qa-native*.mjs'
+      - 'scripts/qa-native-wrapper-build.mjs'
+      - 'scripts/qa-closed-quiescence-wrapper-v2.mjs'
+      - 'test/mcp-qa-native-artifact.test.mjs'
+      - '.github/workflows/afw-qa-native-wrapper-source-qualification.yml'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Source-only artifact tests without credentials
+        run: node --test test/mcp-qa-native-artifact.test.mjs
