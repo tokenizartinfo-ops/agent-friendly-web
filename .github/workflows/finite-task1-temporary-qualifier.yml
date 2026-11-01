@@ -21,3 +21,9 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Task3 focused contracts
         run: node --test --test-reporter=spec test/mcp-qa-finite-finalizer.test.mjs
+      - name: Preserved finite and closed-only regressions
+        run: node --test --test-reporter=spec test/mcp-qa-finite-trial-control.test.mjs test/mcp-qa-finite-trial-guard.test.mjs test/mcp-qa-finite-cleanup-store.test.mjs test/mcp-qa-finite-canary-restorer.test.mjs test/mcp-qa-cloud-lifecycle-admission.test.mjs test/mcp-qa-cloud-closed-rollback.test.mjs
+      - name: Actual fixed native RPC regression
+        run: node --test --test-reporter=spec test/mcp-qa-finite-read-rpc-native.test.mjs
+      - name: Scoped lint
+        run: npx eslint lib/mcp-qa-finite-*.mjs lib/mcp-own-finite-cleanup-proof.mjs scripts/run-qa-finite-trial-finalizer.mjs test/mcp-qa-finite-finalizer.test.mjs test/fixtures/finite-finalizer.mjs

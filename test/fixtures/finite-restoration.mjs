@@ -6,11 +6,12 @@ import {finiteHash} from '../../lib/mcp-finite-evidence.mjs';
 import * as controls from '../../lib/mcp-qa-finite-trial-control.mjs';
 import {createPrivateQaFiniteCleanupStore} from '../../lib/mcp-qa-finite-cleanup-store.mjs';
 import {AFW_FIXED_WORKFLOWS} from '../../lib/mcp-fixed-terminal-workflows.mjs';
-export async function finiteRestorationFixture(){
+export async function finiteRestorationFixture({configure=()=>{}}={}){
  const f=finiteFixture(),old=restorationFixture({at:f.plan.C0+3,containerId:f.plan.resources.containerId}),p=f.plan;
  const pin=(v,dep)=>({versionId:v.id,deploymentId:dep,configurationHash:fixtureConfigHash(v),module:{name:v.main_module,sha256:old.policy.closed.moduleHash,bytes:old.policy.closed.moduleBytes}});
  p.deployments.canaryLive=pin(old.state.live,old.ids.liveDep);p.deployments.canaryClosed=pin(old.state.closed,old.ids.closedDep);p.deployments.operatorClosed=pin(old.state.operatorVersion,old.ids.opDep);
  p.canaryContainment.runtimeVersionId=p.deployments.canaryLive.versionId;p.canaryContainment.moduleHash=p.deployments.canaryLive.module.sha256;p.closePolicyHash=finiteCleanupPolicyHash(p);
+ configure(p);
  let store,identity;
  f.primary.effect=async kind=>{const r=await store.read();return {purpose:'afw.qa-finite-effect-eligibility.v1',intentId:p.intentId,controlHash:identity.controlHash,kind,proofHash:r.record.proofHash,observedAt:f.now(),eligible:true,evidenceHash:'a'.repeat(64)};};
  const ctl=controls.createPrivateQaFiniteTrialControl(f.options(controls)),armed=await ctl.prepare();if(armed.status!=='armed')throw Error('fixture control '+armed.status);
@@ -35,5 +36,5 @@ export async function finiteRestorationFixture(){
   if(x.path.includes('/instances-v2')){if(Object.hasOwn(x.query,'state'))throw Error('must enumerate all states');return state.providerRunning?ok([{id:p.resources.containerId,application_id:p.resources.applicationId,image:'cloudflare/debian-trixie',status:{state:'running'}}],{per_page:100}):ok([],{per_page:100});}
   return old.request(x);
  };
- return {f,old,state,identity,store,retained,qualifiedExecution,request,get posts(){return posts;},input:{claim:issued.claim,proofHash:retained.record.proofHash},options:{storage:f.storage,control:identity,proofStore:store,request,primaryRead:async()=>({...proof.support.primary,observedAt:f.now()}),qualifiedExecution,now:f.now},ROOT,W,OP};
+ return {f,old,state,identity,store,retained,ctl,qualifiedExecution,request,get posts(){return posts;},input:{claim:issued.claim,proofHash:retained.record.proofHash},options:{storage:f.storage,control:identity,proofStore:store,request,primaryRead:async()=>({...proof.support.primary,observedAt:f.now()}),qualifiedExecution,now:f.now},ROOT,W,OP};
 }

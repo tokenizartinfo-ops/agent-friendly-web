@@ -1,3 +1,5 @@
+import {runPrivateQaFiniteObserver,FINITE_OBSERVER_OPERATION} from '../../lib/mcp-qa-finite-observer.mjs';
+import {previewPrivateQaFiniteTrialMaterial,claimPrivateQaFiniteTrialRestore,readPrivateQaFiniteFinalPrimary} from '../../lib/mcp-qa-finite-observer-native.mjs';
 import {finiteFields as finiteReadFields} from '../../lib/mcp-finite-evidence.mjs';
 import {readFiniteTrialCleanupProofHead,readRetainedFiniteCleanupProof,readFiniteTrialCleanupCompletion} from '../../lib/mcp-qa-finite-cleanup-store.mjs';
 import {runPrivateQaFiniteTrialAlarm,readPrivateQaFiniteNominalControl} from '../../lib/mcp-qa-finite-trial-guard.mjs';
@@ -148,6 +150,7 @@ export class PrivateQaPreregistration extends DurableObject {
 }
 export class PrivateQaBootstrap extends WorkflowEntrypoint {
  run(event,step){let params=event.payload;try{if(typeof params==='string'&&params.length<=8192){const decoded=JSON.parse(params);if(params.length<=256||decoded?.operation==='originals'||decoded?.operation==='mcp_canary_dispatch_reduce_restore'&&params.length<=512)params=decoded;}}catch{/* Strict handlers reject malformed payloads. */}
+  if(params?.operation===FINITE_OBSERVER_OPERATION)return runPrivateQaFiniteObserver({env:this.env,event,step});
   if(params?.operation==='mcp_closure_publisher_probe')return runPrivateClosurePublisherProbeWorkflow({env:this.env,event,step});
   if(params?.operation==='mcp_closure_reader_probe')return runPrivateClosureReaderProbeWorkflow({env:this.env,event,step});
   if(['mcp_canary_dispatch_reduce_restore','mcp_canary_reduce_restore','mcp_canary_arm_restore','mcp_canary_withdraw_control','mcp_canary_status'].includes(params?.operation))return runPrivateCanaryRestorationWorkflow({env:this.env,event,step});
@@ -179,6 +182,9 @@ export class PrivateQaCatalog extends DurableObject {
 // Private host only. Missing catalog/custody stays closed. No caller approval,
 // provisioning, registration, HTTP routes or implicit enrollment.
 export class IndependentClosure extends DurableObject {
+ readFiniteTrialFinalPrimary(...args){if(args.length!==1)throw Error('Finite primary unavailable');return readPrivateQaFiniteFinalPrimary({ctx:this.ctx,env:this.env,refs:args[0]});}
+ previewFiniteTrialMaterial(...args){if(args.length!==1)throw Error('Finite preview unavailable');return previewPrivateQaFiniteTrialMaterial({ctx:this.ctx,env:this.env,refs:args[0]});}
+ claimFiniteTrialQaRestore(...args){if(args.length!==1)throw Error('Finite claim unavailable');return claimPrivateQaFiniteTrialRestore({ctx:this.ctx,env:this.env,refs:args[0]});}
  async #finiteRead(fn,args,keys){if(args.length!==1||!isPrivateCanaryRestorationActor(this.env,this.ctx))throw Error('Finite read unavailable');const refs=finiteReadFields(args[0],keys);return fn({...refs,storage:this.ctx.storage});}
  async readFiniteTrialNominalControl(...args){if(args.length!==1||!isPrivateCanaryRestorationActor(this.env,this.ctx))throw Error('Finite nominal control unavailable');return readPrivateQaFiniteNominalControl({ctx:this.ctx,env:this.env,refs:args[0]});}
  readFiniteTrialCleanupProofHead(...args){return this.#finiteRead(readFiniteTrialCleanupProofHead,args,['intentId','controlHash']);}
