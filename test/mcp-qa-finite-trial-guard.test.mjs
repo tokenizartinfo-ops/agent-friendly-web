@@ -10,8 +10,10 @@ test('finite guard and fixed native alarm adapter are available',()=>{
 });
 async function setup({missing}={}){
  const f=finiteFixture(),base=f.storage.transaction;f.storage.transaction=fn=>base.call(f.storage,tx=>fn({...tx,deleteAlarm:()=>tx.setAlarm(null)}));
- let control=controls.createPrivateQaFiniteTrialControl(f.options(controls)),armed=await control.prepare();assert.equal(armed.status,'armed');
- const proof=finiteProofFixture({fixture:f,controlHash:armed.controlHash}),store=stores.createPrivateQaFiniteCleanupStore({storage:f.storage,control:proof.control,now:f.now});
+ let store,armed;
+ f.primary.effect=async kind=>{const r=await store.read();if(r.status!=='observed')return null;return {purpose:'afw.qa-finite-effect-eligibility.v1',intentId:f.plan.intentId,controlHash:armed.controlHash,kind,proofHash:r.record.proofHash,observedAt:f.now(),eligible:true,evidenceHash:'a'.repeat(64)};};
+ let control=controls.createPrivateQaFiniteTrialControl(f.options(controls));armed=await control.prepare();assert.equal(armed.status,'armed');
+ const proof=finiteProofFixture({fixture:f,controlHash:armed.controlHash});store=stores.createPrivateQaFiniteCleanupStore({storage:f.storage,control:proof.control,now:f.now});
  const calls=[],receipts=new Map();
  const withdrawal={purpose:'afw.own-permissions-only-reduction.v1',monitoringWithdrawn:true,readWithdrawn:true,permissionsWithdrawn:true,runtimeStopRequested:false,physicalStopVerified:false,nativeWithdrawalVerified:false,operationalReadiness:false};
  const values={withdraw:withdrawal,close:{closed:true,runtimeStopRequested:true},seal:{sealHash:proof.proof.sealHash,sealedAt:f.plan.C0}};
@@ -27,7 +29,7 @@ async function setup({missing}={}){
   },
   reconcile:async()=>receipts.get(kind)??null
  };
- f.primary.effect=async kind=>{const r=await store.read();if(r.status!=='observed')return null;return {purpose:'afw.qa-finite-effect-eligibility.v1',intentId:f.plan.intentId,controlHash:armed.controlHash,kind,proofHash:r.record.proofHash,observedAt:f.now(),eligible:true,evidenceHash:'a'.repeat(64)};};
+ 
  const options=()=>({ctx:f.ctx,env:f.env,control,capabilities,now:f.now});
  return {f,store,calls,capabilities,options,reconstruct:()=>{control=controls.createPrivateQaFiniteTrialControl(f.options(controls));},control};
 }
