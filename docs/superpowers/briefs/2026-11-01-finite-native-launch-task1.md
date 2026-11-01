@@ -20,6 +20,11 @@ SEND EXACT fields: purpose='afw.qa-finite-child-create-send.v1',intentId,finiteP
 ACK EXACT fields: purpose='afw.qa-finite-child-create-ack.v1',intentId,controlHash,sendHash,nominalId,acknowledgedAt. Actual timely matching create response only; ACK is not execution/settlement proof.
 Nominal ID afw-release-<bundleHash>, distinct from launcher/observer. SEND is NOT Task1 nominal permission claim and is separate from reservation/admission/launch process-writer kinds.
 
+## New handoff prerequisite (Task3/C2 ownership)
+Root's order is seed primary success -> separate post-T0 private-policy setup completed/qualified -> operator exact observer -> bounded GET-only GHA adoption/preview/ready -> launcher. Proposed setupBy50s/original30s budget; GHA max36 absolute2s slots through70s, child5s clipped to original parent; ARM90 unchanged. No missing-seed wait, CF create/writer lock or new clock. Task1 does NOT implement that wait or publisher.
+
+Consume only C2's immutable qualified setup context/completion receipt (afw.finite-policy-installed.v1 and exact identity from final private-policy-setup spec; draft b23d11c3 owner-locator amendment pending). Setup is ONE extra existing-Bootstrap prearm instance, already terminal before first preview/full inventory. It consumes no finite HEAD. Missing source dependency stays unavailable; no boolean, guessed receipt or old probe proves completion. Keep no whole-definition exclusion; observer32 reads/claim unchanged.
+
 ## Actual source boundary / no deadlock
 Add readPrivateQaFiniteControlSnapshot({storage,nativePin,plan,parent}) inside trial-control; reuse its nativePin WeakMap and strict plan/legacy/state decoding. Reads actual storage; computes exact canonical references BEFORE HEAD exists; missing HEAD/SEND must be true absence, never fabricated armed state. Pure serializable snapshot is evidence data, not authority.
 

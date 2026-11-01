@@ -4,7 +4,7 @@
 
 **Goal:** Implement three Native5 source primitives for one delayed nominal Workflow without REST creation or fabricated authority.
 
-**Architecture:** A fixed DO owns source-qualified control, coordinator and durable child-create SEND; a separate Bootstrap launcher sleeps and invokes that DO. Missing C2 factories stay unavailable, while actual primitives/native paths are testable. Preserve independent observer/finalizer and C0 guard.
+**Architecture:** A fixed DO owns source-qualified control, coordinator and durable child-create SEND; a separate Bootstrap launcher sleeps and invokes that DO. Missing C2 factories stay unavailable, while actual primitives/native paths are testable. Preserve independent observer/finalizer and C0 guard; separate C2 private-policy setup must complete before observer creation/preview.
 
 **Tech Stack:** Node22 ESM, existing workerd/Workflow/DO/D1 fixtures and GitHub Actions; no new dependency.
 
@@ -32,6 +32,11 @@ Add internal readPrivateQaFiniteControlSnapshot({storage,nativePin,plan,parent})
 
 C2 seam: resolvePrivateQaFiniteLaunchContext({ctx,env,refs,parent}) in a fixed source module, default unavailable until C2 installs real composition. No runtime registration/public success DTO. Its qualified private context is retained in module WeakMaps; methods receive references only. Tests substitute external provenance boundary at compile-time and exercise real constructors/storage/decoders, explicitly SYNTHETIC; no production bypass.
 
+## Root post-seed orchestration ruling
+Current seed-material -> immediate admit races root's attended setup/observer creation. Order is actual seed-step success -> separate4C2 private-policy setup COMPLETED with immutable qualified receipt/provider terminal -> operator observer creation -> bounded GET adoption/preview/ready -> launcher. Exact setup identity/afw.finite-policy-installed.v1 receipt follows the final private-policy-setup spec (draft b23d11c3, owner-locator amendment pending); consume through C2's fixed native reader. No caller boolean or old publisher-probe substitution. Proposed setupBy50s/original30s budget leaves20s to adoption70s; no finite HEAD is spent by setup. Extra prearm instance is terminal before first preview; no definition exclusion.
+
+adoptBy=min(T0+70000,N1-180000). At most36 slots T0+2000*k,k=0..35; skip elapsed slots without bursts. Each child<=5000ms clipped by SAME original parent/end; final70s slot starts no network with zero budget. Wait only after primary seed success, for exact qualified not-yet404 or explicitly validated pending preview; schema/identity/source/auth/unknown/uncertainty fail without regrant. Success ends waiting; actual ready precedes ARM<=90s. No CF create, newobserver/run/clock or QA writer lock; observer32 observations/one claim unchanged. This supersedes the private-setup draft's14-slot paragraph. Private publisher/owner locator are C2, not Native5.
+
 ## Review focus
 
 1. Preview before HEAD and prepare's inventory await must neither invent stored state nor reenter control.read (Task1).
@@ -58,7 +63,7 @@ C2 seam: resolvePrivateQaFiniteLaunchContext({ctx,env,refs,parent}) in a fixed s
 
 **Interfaces:** runPrivateQaFiniteLaunchOperation({ctx,env,operation,refs,parent}) is source-internal with fixed operation dispatch; RPC methods prepareFiniteNominalLaunch({intentId,sourceRevision}), createFiniteNominalChild({intentId,controlHash}), readFiniteNominalLaunch({intentId,controlHash}) validate exact arity/fields. ctx MUST be this.ctx of IndependentClosure. Caller cannot supply operation/source/context/binding. Read returns facts, not authority.
 
-- [ ] Test real control.prepare -> guard.arm/readback -> NEW control.claimEffect('nominal') on SAME object; guard.arm currently never calls prepare. Cover90s boundary, unknown prepare/receipt ACK, reconstruction, old head, altered seed/readiness/consent/pin and Workflow-context misuse.
+- [ ] Test real control.prepare -> guard.arm/readback -> NEW control.claimEffect('nominal') on SAME object; guard.arm currently never calls prepare. Cover90s boundary, unknown prepare/receipt ACK, reconstruction, old head, missing/unsettled private-setup completion, altered seed/readiness/consent/pin and Workflow-context misuse.
 - [ ] Test actual transaction+storage SEND, independent readback, one native binding create with exact ID/payload. Cover149999/150000/160000, clock expiry after EVERY await, lost/late transaction/create ACK, duplicate ID, reconstructed callers/provider404, queued coordinator and held remote create. Unknown creates remain separate native-create writers.
 - [ ] RED: node --test test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-qa-finite-trial-guard.test.mjs test/mcp-finite-nominal-control.test.mjs.
 - [ ] Implement DO fixed mounts and live shared-parent budget before source hydration. Persist/read prepared only after same-object claim and C0 guard ACK. Source context resolves actual AFW_QA_NAMED_CONFIRMATION and fixed target metadata. Atomically append SEND; only NEW acknowledged transaction yields process-local once-send capability. Recheck parent before native create; never retry outstanding native call.
@@ -67,14 +72,15 @@ C2 seam: resolvePrivateQaFiniteLaunchContext({ctx,env,refs,parent}) in a fixed s
 
 ## Task3 — real Bootstrap sleep and original nominal entry/inventory integration
 
-**Files:** create lib/mcp-qa-finite-launcher.mjs and lib/mcp-qa-finite-confirmation.mjs; modify Bootstrap/NamedConfirmation mounts, exact phase inventory consumers and closed-compatibility tests. Do not alter accepted business wrapper implementation.
+**Files:** create lib/mcp-qa-finite-launcher.mjs and lib/mcp-qa-finite-confirmation.mjs; modify Bootstrap/NamedConfirmation mounts, exact phase inventory consumers, finalizer CLI/fixed observer GET adapter and closed-compatibility tests. Add test/mcp-qa-finite-adoption-wait.test.mjs. Do not alter accepted business wrapper implementation.
 **Interfaces:** runPrivateQaFiniteLauncher({env,event,step}) and runPrivateQaFiniteConfirmation({env,event,step}); both source-selected only. Bootstrap operation finite_nominal_launcher, payload EXACT {operation,intentId,sourceRevision}; uses fixed namespace RPC, never Workflow ctx as storage. Nominal entry consumes C2's source-qualified original bundle, never caller policy.
 
+- [ ] Test actual GHA admit orchestration: successful seed prerequisite; operator observer absent until50s then valid;36 absolute slots/skip elapsed/no burst; clipped child near70s; zero budget; missingseed/auth/schema/unknown not benign404; noCF POST/writer lock. Require typed C2 setup completion/terminal receipt before preview; unavailable locator fails closed, no publisher implementation here.
 - [ ] Test actual exported Workflow under workerd: exact seed/ready prerequisites; prepare step success by90s; finite-launch-prepare/create retries0; sleepUntil absolute150s; replays do not repeat effects; no missing-seed polling, start alarm or GHA REST create.
 - [ ] Test nominal original event creation interval[150000,160000]+T0, wrong/future timestamp/payload/ID/source, delayed provider acceptance, queue exceeding70s and held5s/20s child boundaries. Spy only to assert SAME event reference/four keys; accepted wrapper tests verify18 original stages and cancellation behavior. Add bounded outer provenance result without mutating inner result.
 - [ ] Test full phase inventory: true source never-issued permits prelaunch absence; SEND+absence unresolved; exact launcher/observer only; both restores require nominal AND launcher terminal, QA additionally observer complete. Never-created stays admin-pending. Held D1/process/native-create writers block; all binding holders and create paths must route through journal/coordinator.
-- [ ] RED/GREEN: node --test test/mcp-qa-finite-launcher-native.test.mjs test/mcp-qa-finite-confirmation-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-release-known-cancellation.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-read-rpc-native.test.mjs.
-- [ ] Implement exact class dispatch and fixed source C2 context consumption; propagate original nominal parent lease across hydration before calling the unchanged wrapper. Extend provider status handling conservatively: queued/unknown/late create are unresolved, not terminal. Preserve old closed routes and rollback denial.
+- [ ] RED/GREEN: node --test test/mcp-qa-finite-adoption-wait.test.mjs test/mcp-qa-finite-launcher-native.test.mjs test/mcp-qa-finite-confirmation-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-release-known-cancellation.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-read-rpc-native.test.mjs.
+- [ ] Implement bounded passive GET-only adoption in the existing admit phase after primary seed success; retain original parent/deadline through preview and existing readiness checks. Consume C2 setup completion via fixed source dependency, not caller authority. Implement exact class dispatch and fixed source C2 context consumption; propagate original nominal parent lease across hydration before calling the unchanged wrapper. Extend provider status handling conservatively: queued/unknown/late create are unresolved, not terminal. Preserve old closed routes and rollback denial.
 - [ ] GREEN/scoped lint, report docs/superpowers/reports/2026-11-01-finite-native-launch-task3.md and ledger; commit and root review. Actual C2 attachment/private bundle/profile/full route and provider acceptance remain pending.
 
 ## Self-review / handoff
