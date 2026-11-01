@@ -1,0 +1,4 @@
+# QA custody informational null-type fix — one task
+Spec: ../specs/2026-11-01-qa-custody-null-type-compatibility.md
+BASE main7c8013e494bd193ecf5bfea6dfb2cd1a894b9434, isolatedbranch fix/qa-custody-null-type-20261101.
+Task1: readspec+pinnedAGENTS; meaningfulobserved-shapeRED ->minimumvalidator+sharedallowedkeychange ->focusedexisting+newtests/scopedlint ->newreport/ledger docs/superpowers/{reports,progress}/2026-11-01-qa-custody-null-type-compatibility.md. Keep lib/testonly source changes; noCLI/workflow/sharedfinite code. TDD withtemporary no-secretqualifier excluded; exactBASE/code/head/run/job/counts/commands +limits. NoPR/reviewer/liveprobe byimplementer. Rootcombinedtask+wholebranchreview/fullPRCI/mainmerge, laterONEnewGETifqualified. No localwork/subagents/credentials/roles/runtime. Task independent ofactivefiniteTask3. Historicaldiagnosticdocs describetheirdatedparser andremainunchanged; newrootrule supersedes type:null rejection only.
