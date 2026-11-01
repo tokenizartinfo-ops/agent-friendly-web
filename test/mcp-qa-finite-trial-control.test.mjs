@@ -237,7 +237,7 @@ test('first finalizer readiness failure leaves durable pending control and origi
 });
 
 test('native nominal identity needs no fictitious GHA run; legacy field is rejected',async()=>{
- const f=finiteFixture();assert.deepEqual(Object.keys(f.plan.workflows),['confirmation','bootstrap']);
+ const f=finiteFixture();assert.deepEqual(Object.keys(f.plan.workflows),['confirmation','bootstrap','launcher']);
  const c=control(f);assert.equal((await c.prepare()).status,'armed');
  assert.equal((await c.claimEffect('nominal')).status,'issued');
  const g=finiteFixture();g.plan.workflows.nominalRunId=10;assert.throws(()=>control(g));
@@ -252,7 +252,7 @@ for(const [name,mutate] of [
 test('external projection removes nominal GHA identity and preserves exact finalizer fields',async()=>{
  const {finiteFinalizerFixture}=await import('./fixtures/finite-finalizer.mjs');
  const {validateFiniteExternalPlan}=await import('../lib/mcp-qa-finite-external-contract.mjs');
- const f=await finiteFinalizerFixture();assert.deepEqual(Object.keys(f.plan.workflows),['confirmation','bootstrap']);
+ const f=await finiteFinalizerFixture();assert.deepEqual(Object.keys(f.plan.workflows),['confirmation','bootstrap','launcher']);
  assert.deepEqual(f.plan.finalizer,f.f.plan.finalizer);assert.doesNotThrow(()=>validateFiniteExternalPlan(f.plan));
  const old=structuredClone(f.plan);old.workflows.nominalRunId=10;assert.throws(()=>validateFiniteExternalPlan(old));
  for(const [key,value] of [['runId',0],['jobId',0],['attempt',2],['workflow','other'],['sourceRevision','0'.repeat(40)]]){
