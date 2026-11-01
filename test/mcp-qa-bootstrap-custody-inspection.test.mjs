@@ -1,6 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {mkdtempSync, rmSync, readFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {runQaBootstrapCustodyInspection} from '../lib/mcp-qa-bootstrap-custody-inspection.mjs';
 const SHA='a'.repeat(40), ID='9db7901af95faf07e6f7ef378045328e';
@@ -73,4 +77,13 @@ for (const where of ['fetch', 'body']) test('abort releases held ' + where, asyn
 test('request watchdog settles ignored abort transport within five seconds',async()=>{const f=fixture();f.args.fetchImpl=()=>new Promise(()=>{});const began=performance.now();const dto=await runQaBootstrapCustodyInspection(f.args);assert.equal(dto.status,'blocked');assert.ok(performance.now()-began<6500);safe(dto);});
 test('provider exception and credential rejection are sanitized',async()=>{for(const where of ['readCredential','fetchImpl']){const f=fixture();f.args[where]=async()=>{throw Error('CREDENTIAL_SENTINEL');};safe(await runQaBootstrapCustodyInspection(f.args));}});
 test('source workflow and CLI remain fixed and credential lazy',async()=>{const workflow=await readFile(new URL('../.github/workflows/afw-qa-bootstrap-custody-inspection.yml',import.meta.url),'utf8');assert.match(workflow,/issue_comment:/);assert.match(workflow,/types: \[created\]/);assert.match(workflow,/timeout-minutes: 5/);assert.match(workflow,/environment: afw-qa-cloud-closed-rollback/);assert.match(workflow,/contents: read/);assert.doesNotMatch(workflow,/contents: write|workflow_dispatch:|schedule:|npm ci|wrangler|GITHUB_TOKEN:/);assert.match(workflow,/retention-days: 7/);assert.match(workflow,/path: afw-qa-bootstrap-custody-inspection\/result.json/);assert.match(workflow,/persist-credentials: false/);const cli=await readFile(new URL('../scripts/qa-bootstrap-custody-inspection.mjs',import.meta.url),'utf8');assert.match(cli,/readCredential: \(\) => process.env.AFW_QA_CLOSED_TOKEN/);assert.doesNotMatch(cli,/console\.|process.stdout|process.stderr/);});
-test('CLI rejects arguments without exposing data',()=>{const p=spawnSync(process.execPath,['scripts/qa-bootstrap-custody-inspection.mjs','bad'],{env:{PATH:process.env.PATH},encoding:'utf8'});assert.equal(p.status,1);assert.equal(p.stdout,'');assert.equal(p.stderr,'');});
+test('CLI rejects arguments with only a fixed sanitized artifact', () => {
+ const directory = mkdtempSync(join(tmpdir(), 'afw-custody-entry-test-'));
+ try {
+  const cli = fileURLToPath(new URL('../scripts/qa-bootstrap-custody-inspection.mjs', import.meta.url));
+  const p = spawnSync(process.execPath, [cli, 'bad'], {cwd:directory,env:{PATH:process.env.PATH},encoding:'utf8'});
+  assert.equal(p.status,1); assert.equal(p.stdout,''); assert.equal(p.stderr,'');
+  const dto = JSON.parse(readFileSync(join(directory,'afw-qa-bootstrap-custody-inspection/result.json'),'utf8'));
+  assert.equal(dto.status,'blocked'); safe(dto);
+ } finally { rmSync(directory,{recursive:true,force:true}); }
+});
