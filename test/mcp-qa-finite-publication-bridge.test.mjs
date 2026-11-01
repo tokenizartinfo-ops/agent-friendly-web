@@ -39,3 +39,13 @@ for(const mode of ['malformed-notbefore','extra-token-field','wrong-native-id','
  };
  await assert.rejects(f.api.readFiniteQaPublicationBridge(f.nativeOptions()));
 });
+
+for(const mode of ['missing','malformed','nonstring-array'])test('native bridge rejects '+mode+' admit job start',async()=>{
+ const f=await seedWorld();await f.api.issueFiniteMaterialSeed(f.options);f.complete();
+ const job=f.map.get('/actions/runs/11/attempts/1/jobs?per_page=100').jobs[0];
+ if(mode==='missing')delete job.started_at;
+ else job.started_at=mode==='malformed'?'not-a-date':[job.started_at];
+ f.calls.length=0;
+ await assert.rejects(f.api.readFiniteQaPublicationBridge(f.nativeOptions()));
+ assert(f.calls.every(x=>x.init.method==='GET'));
+});

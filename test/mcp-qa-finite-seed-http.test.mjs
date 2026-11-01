@@ -35,3 +35,11 @@ for(const mode of ['rate','overflow','truncated','stale','abort','late','redirec
  await assert.rejects(readFiniteMaterialSeed({...f.options,fetchImpl,signal:controller.signal}));assert.equal(f.calls.length,1);
 });
 test('caller URL/credential/seed cannot replace fixed read authority',async()=>{const f=await seedPrimaryFixture();for(const key of ['url','credential','seed'])await assert.rejects(readFiniteMaterialSeed({...f.options,[key]:'caller'}));assert.equal(f.calls.length,0);});
+
+for(const mode of ['missing','malformed','nonstring-array'])test('public primary rejects '+mode+' admit job start',async()=>{
+ const f=await seedPrimaryFixture(),job=f.map.get('/actions/runs/11/attempts/1/jobs?per_page=100').jobs[0];
+ if(mode==='missing')delete job.started_at;
+ else job.started_at=mode==='malformed'?'not-a-date':[job.started_at];
+ await assert.rejects(readFiniteMaterialSeed(f.options));
+ assert(f.calls.every(x=>x.init.method==='GET'));
+});

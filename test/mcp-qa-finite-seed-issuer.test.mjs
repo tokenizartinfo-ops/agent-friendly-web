@@ -55,3 +55,11 @@ test('lost ref ACK permits completed-primary GET reconciliation but never refund
  const r=await f.api.readFiniteMaterialSeed({intentId:f.seed.intentId,sourceRevision:f.seed.sourceRevision,fetchImpl:f.fetchImpl,now:f.now,signal:f.options.signal});assert.equal(r.seed.intentId,f.seed.intentId);
  await assert.rejects(f.api.issueFiniteMaterialSeed(f.options));assert.equal(f.state.tagPosts,1);assert.equal(f.state.refPosts,1);
 });
+
+for(const mode of ['missing','malformed','nonstring-array'])test('issuer rejects '+mode+' admit job start before POST',async()=>{
+ const f=await seedWorld(),job=f.map.get('/actions/runs/11/attempts/1/jobs?per_page=100').jobs[0];
+ if(mode==='missing')delete job.started_at;
+ else job.started_at=mode==='malformed'?'not-a-date':[job.started_at];
+ await assert.rejects(f.api.issueFiniteMaterialSeed(f.options));
+ assert.equal(f.state.tagPosts,0);assert.equal(f.state.refPosts,0);
+});
