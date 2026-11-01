@@ -86,8 +86,8 @@ test('CLI writes only fixed private runner files, omits base64 and refuses overw
  const env={...process.env,GITHUB_ACTIONS:'true',RUNNER_TEMP:runner,GITHUB_SHA:sourceRevision};
  const call=(args=[])=>spawnSync(process.execPath,['scripts/qa-native-wrapper-build.mjs',...args],{cwd:resolve('.'),env,encoding:'utf8'});
  const good=call();assert.equal(good.status,0,good.stderr);assert.ok(good.stdout.length<1024);assert.ok(!good.stdout.includes(a.base64.slice(0,64)));
- const dir=join(runner,'afw-native-observation'),module=await readFile(join(dir,'index.mjs'));
- assert.equal(module.toString('base64'),a.base64);const manifest=JSON.parse(await readFile(join(dir,'wrapper-manifest.json'),'utf8'));
+ const dir=join(runner,'afw-native-observation'),entryModule=await readFile(join(dir,'index.mjs'));
+ assert.equal(entryModule.toString('base64'),a.base64);const manifest=JSON.parse(await readFile(join(dir,'wrapper-manifest.json'),'utf8'));
  assert.equal(Object.hasOwn(manifest,'base64'),false);assert.equal(manifest.sha256,a.sha256);
  if(process.platform!=='win32'){assert.equal((await stat(join(dir,'index.mjs'))).mode&0o777,0o600);assert.equal((await stat(join(dir,'wrapper-manifest.json'))).mode&0o777,0o600);}
  assert.notEqual(call().status,0);assert.notEqual(call(['--output','elsewhere']).status,0);

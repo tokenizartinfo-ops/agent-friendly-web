@@ -28,3 +28,5 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Source-only artifact tests without credentials
         run: node --test test/mcp-qa-native-artifact.test.mjs
+      - name: Lint native artifact tests
+        run: npx eslint test/mcp-qa-native-artifact.test.mjs
