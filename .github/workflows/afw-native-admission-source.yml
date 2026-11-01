@@ -1,0 +1,19 @@
+name: Native admission source qualification
+on:
+  pull_request:
+    paths:
+      - 'lib/mcp-qa-cloud-lifecycle-admission.mjs'
+      - 'test/mcp-qa-native-admission.test.mjs'
+      - '.github/workflows/afw-native-admission-source.yml'
+permissions:
+  contents: read
+jobs:
+  native-admission:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test test/mcp-qa-cloud-lifecycle-admission.test.mjs test/mcp-qa-github-opaque-credential.test.mjs test/mcp-qa-native-admission.test.mjs
