@@ -4,7 +4,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: afw-qa-cloud-closed-rollback
+  group: afw-qa-source-qualification-${{ github.workflow }}
   cancel-in-progress: false
 jobs:
   qualify:
