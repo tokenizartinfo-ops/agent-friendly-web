@@ -37,6 +37,7 @@ export class AfwOwnEventNode extends DurableObject{
  }
  fetch(){return deny();}
  // Private fixed finite methods; closed profiles have no compiled factory.
+ async readFiniteTrialAdmissionJournal(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.readFiniteTrialAdmissionJournal(args[0]);}
  async beginFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.beginFiniteTrialReservation(args[0]);}
  async settleFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.settleFiniteTrialReservation(args[0]);}
  async sealFiniteTrialAdmission(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.sealFiniteTrialAdmission(args[0]);}

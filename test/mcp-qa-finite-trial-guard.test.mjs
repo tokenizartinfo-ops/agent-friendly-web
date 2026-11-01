@@ -9,11 +9,12 @@ const stores=await import('../lib/mcp-qa-finite-cleanup-store.mjs').catch(()=>({
 test('finite guard and fixed native alarm adapter are available',()=>{
  for(const k of ['createPrivateQaFiniteTrialGuard','runPrivateQaFiniteTrialAlarm'])assert.equal(typeof api[k],'function');
 });
-async function setup({missing}={}){
+async function setup({missing,pending=false}={}){
  const f=finiteFixture(),base=f.storage.transaction;f.storage.transaction=fn=>base.call(f.storage,tx=>fn({...tx,deleteAlarm:()=>tx.setAlarm(null)}));
  let store,armed;
  f.primary.effect=async kind=>{const r=await store.read();if(r.status!=='observed')return null;return {purpose:'afw.qa-finite-effect-eligibility.v1',intentId:f.plan.intentId,controlHash:armed.controlHash,kind,proofHash:r.record.proofHash,observedAt:f.now(),eligible:true,evidenceHash:'a'.repeat(64)};};
- let control=controls.createPrivateQaFiniteTrialControl(f.options(controls));armed=await control.prepare();assert.equal(armed.status,'armed');
+ if(pending)f.primary.finalizer=async()=>{throw Error('synthetic unavailable first finalizer');};
+ let control=controls.createPrivateQaFiniteTrialControl(f.options(controls));armed=await control.prepare();assert.equal(armed.status,pending?'uncertain':'armed');if(pending)armed=await control.read();
  const proof=finiteProofFixture({fixture:f,controlHash:armed.controlHash});store=stores.createPrivateQaFiniteCleanupStore({storage:f.storage,control:proof.control,now:f.now});
  const calls=[],receipts=new Map();
  const withdrawal={purpose:'afw.own-permissions-only-reduction.v1',monitoringWithdrawn:true,readWithdrawn:true,permissionsWithdrawn:true,runtimeStopRequested:false,physicalStopVerified:false,nativeWithdrawalVerified:false,operationalReadiness:false};
@@ -65,4 +66,13 @@ test('delayed synthetic STOP is observed on second delivery without spending pro
  x.reconstruct();x.f.setNow(x.f.plan.C0+60003);
  assert.equal((await api.createPrivateQaFiniteTrialGuard(x.options()).alarm()).status,'complete');
  assert.equal(observations,2);assert.deepEqual(x.calls,['withdraw','close','seal','canary_restore']);assert.equal(x.f.alarm,null);
+});
+
+test('unavailable first finalizer leaves pending native cleanup, never nominal authority',async()=>{
+ const x=await setup({pending:true});assert.equal(x.f.alarm,x.f.plan.C0);assert.equal((await x.control.claimEffect('nominal')).status,'blocked');
+ x.reconstruct();x.f.setNow(x.f.plan.C0+3);
+ assert.equal((await api.createPrivateQaFiniteTrialGuard(x.options()).alarm()).status,'complete');
+ assert.deepEqual(x.calls,['withdraw','close','seal','canary_restore']);assert.equal((await x.store.completion()).status,'complete');
+ const key='afw.qa-finite-guard.v1:'+x.f.plan.intentId+':effect:close',row=x.f.rows.get(key);x.f.rows.set(key,{...row,phase:'issued'});
+ await assert.rejects(()=>x.store.completion());
 });

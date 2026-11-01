@@ -1,3 +1,5 @@
+import {finiteProofFixture} from './fixtures/finite-cleanup-proof.mjs';
+import {finiteHash} from '../lib/mcp-finite-evidence.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createFiniteAdmissionGate} from '../lib/mcp-own-finite-admission-gate.mjs';
@@ -28,3 +30,27 @@ for(const mode of ['pending','missing_claim','withdrawn','wrong_source','expiry'
   assert.equal((await gate.read()).unresolvedWriters,0);assert.equal((await gate.seal()).status,'sealed');
  });
 }
+
+test('child primary permits exact pending own admission, rejects identical counts for another writer',async()=>{
+ const f=finiteFixture();let nativeJournal,writers;
+ f.primary.nominal=async()=>{const primary=f.admission();primary.quiescence={currentWriters:1,newScopeWriters:1,unresolvedWrites:1,completeInventory:true,inventoryHash:finiteHash(writers),receiptsHash:finiteHash(nativeJournal),snapshotHash:'1'.repeat(64)};return {purpose:'afw.qa-finite-child-primary.v1',primary,nativeJournal,writers};};
+ const ctl=controlApi.createPrivateQaFiniteTrialControl(f.options(controlApi));const armed=await ctl.prepare();await ctl.claimEffect('nominal');
+ const proof=finiteProofFixture({fixture:f,controlHash:armed.controlHash}),g=structuredClone(proof.support.gate),p=f.plan;
+ g.sealed=false;g.seal=null;g.sealHash=null;
+ const claim={purpose:'afw.own-finite-admission.v1:writer',identityHash:g.identityHash,kind:'admission',issuedAt:p.T0,deadline:p.N1};
+ g.writers.admission={claim,settlement:null};g.unresolvedWriters=1;nativeJournal=g;
+ const own={intentId:p.intentId,controlHash:armed.controlHash,actorId:p.resources.containerId,kind:'admission',claimHash:finiteHash(claim),phase:'issued',current:true,newScope:true,unresolved:true};writers=[own];
+ assert.equal((await ctl.readNominalControl()).status,'observed');
+ for(const patch of [{actorId:'f'.repeat(64)},{controlHash:'f'.repeat(64)},{kind:'launch'},{claimHash:'f'.repeat(64)},{phase:'unknown'}]){
+  writers=[{...own,...patch}];assert.equal((await ctl.readNominalControl()).status,'blocked');
+ }
+ writers=[own,{...own,kind:'launch'}];assert.equal((await ctl.readNominalControl()).status,'blocked');
+});
+test('candidate independently matches child exclusions against its own exact journal',async()=>{
+ const f=finiteGateFixture(),g=createFiniteAdmissionGate(f.options);assert.equal((await g.beginAdmission()).status,'issued');
+ assert.equal((await g.beginLaunch()).status,'issued');
+ const h=finiteGateFixture(),base=h.options.readNominalControl;
+ h.options.readNominalControl=async()=>{const v=await base();return {...v,ownedWriters:v.ownedWriters.map(x=>({...x,actorId:'f'.repeat(64)}))};};
+ const other=createFiniteAdmissionGate(h.options);assert.equal((await other.beginAdmission()).status,'issued');assert.equal((await other.beginLaunch()).status,'blocked');
+ assert.equal((await other.read()).writers.launch,null);
+});

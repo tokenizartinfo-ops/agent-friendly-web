@@ -38,6 +38,8 @@ jobs:
         run: node --test --test-reporter=spec test/mcp-qa-finite-trial-control-native.test.mjs
       - name: Nearby strict ledger and execution pin
         run: node --test --test-reporter=spec test/mcp-qa-generation-ledger.test.mjs test/mcp-qa-execution-identity.test.mjs test/mcp-own-synthetic-save.test.mjs
+      - name: Nearby native and legacy restoration
+        run: node --test --test-reporter=spec test/mcp-canary-restoration-transport.test.mjs test/mcp-successor-canary-restorer.test.mjs test/mcp-successor-canary-restorer-native.test.mjs test/mcp-own-worker-native.test.mjs test/mcp-own-worker-build.test.mjs test/mcp-own-closed-rollback-native.test.mjs test/mcp-own-permissions-only-reduction-native.test.mjs test/mcp-invocation-storage-native.test.mjs test/mcp-known-cancellation-native.test.mjs
       - name: Scoped lint
         if: ${{ hashFiles('lib/mcp-qa-finite-trial-control.mjs') != '' }}
-        run: npx eslint lib/mcp-qa-finite-trial-control.mjs test/mcp-qa-finite-trial-control*.test.mjs test/fixtures/qa-finite-trial.mjs
+        run: npx eslint lib/mcp-*finite*.mjs lib/mcp-node-process-custody.mjs lib/mcp-successor-launch-gate.mjs lib/mcp-successor-reservation.mjs lib/mcp-release-successor-reservation.mjs lib/mcp-own-durable-host.mjs lib/mcp-fixed-terminal-workflows.mjs lib/mcp-canary-restoration-transport.mjs worker/mcp-own/index.mjs worker/independent-closure/index.mjs test/*finite*.test.mjs test/fixtures/*finite*.mjs

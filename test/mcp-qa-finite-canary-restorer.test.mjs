@@ -49,3 +49,10 @@ test('finite-only transport keeps fixed all-state inventory and restoration body
  assert.equal((await request({method:'GET',path:f.ROOT+'/workflows',query:{per_page:100,page:1},signal:x.signal})).result.length,3);
  const restorer=api.createPrivateQaFiniteCanaryRestorer({...f.options,request});assert.equal((await restorer.execute(f.input)).proofHash,f.input.proofHash);assert.equal(f.posts,1);
 });
+
+test('expired parent lease forbids a child restore POST even within the child C1 window',async()=>{
+ const f=await finiteRestorationFixture();let expired=false;
+ const request=async(...args)=>{const r=await f.request(...args);expired=true;return r;};
+ await assert.rejects(()=>api.createPrivateQaFiniteCanaryRestorer({...f.options,request}).execute(f.input,()=>{if(expired)throw Error('original guard lease ended');}));
+ assert.equal(f.posts,0);
+});
