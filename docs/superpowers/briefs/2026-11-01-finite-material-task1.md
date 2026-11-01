@@ -12,6 +12,10 @@ Create lib/mcp-qa-finite-seed.mjs:
 - encodeFiniteMaterialSeed(seed) -> canonical envelope string.
 - decodeFiniteMaterialSeed(text) -> validated immutable {seed,seedHash}.
 - validateFinitePackageManifest(value) -> immutable structural manifest.
+- encodeFinitePackageManifest(value) -> canonical manifest UTF-8 string.
+- hashFinitePackageManifest(value) -> domain-separated lowercase64hex using afw.finite-native-manifest.v1 plus newline.
+
+Root interface clarification (2026-11-01): these two specific pure manifest helpers share the SAME private validation/canonicalizer; Task2 resolver and4C builder must not copy it or fabricate a dummy seed. No generic caller schema, I/O or authority.
 
 No I/O, credentials, runtime authority or generic caller schemas.
 Modify lib/mcp-qa-finite-trial-control.mjs, lib/mcp-qa-finite-external-contract.mjs and affected canonical projections/fixtures ONLY for removal of nominalRunId/inequality. Search bounded references before edits; preserve other finalizer/native rules.
