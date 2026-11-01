@@ -1,0 +1,20 @@
+# Closed quiescence v2: separate bounded queue age and active diagnostics
+PROJECT AFW; repo tokenizartinfo-ops/agent-friendly-web; source-only scope. No new credential, grant, consumer, reservation, Container, cron or live action from this design.
+
+## Evidence and distinction
+PR693/main dcfde7fc60dfb96bcae21e98c50f2739db42ca60 has14/952/4400PASS and exactBASE29PASS. Finite0fbb intent CLOSED/CONSUMED, receipt497#6552451638: queue3552ms +execution1448ms =exact5000ms; blocked/schedules/request_failed/httpnull/reads18. Restoredc570/DEP32861206; independent02:40:35.236UTC25GET confirms all3closed,22WFterminal, Container/cron/tails empty, namespaces/exposure preserved. No replay.
+V1 intentionally includes enqueue in event.timestamp+5000. Preserve its module/wrapper/workflow/tests and every actual ARM or effect contract. V2 is a DISTINCT closed metadata diagnostic, never an ARM eligibility/provenance witness. Its success cannot prove that ARM can meet v1's original deadline.
+
+## Fixed v2 boundary
+New module mcp-qa-closed-observation-v2.mjs exports runPrivateQaClosedObservation. Compiled context purpose afw.qa-closed-quiescence-context.v2, exact8 fields asv1; result purpose afw.qa-closed-quiescence-observation.v2; exact operation inspect_closed_quiescence. Keep nonce-bound native self instance afw-qa-arm-H because the fixed inventory's existing self exception already constrains it. No caller clock/mode/concurrency/resource/deadline selector.
+At first server entry capture monotonic origin BEFORE wall enteredAt once. Require event.timestamp original Date, within original compiled<=10min context, not future, enqueueAge=enteredAt-stamp in[0,5000). Fix end=min(enteredAt+5000,stamp+10000,originalContext.expiresAt), monoEnd=origin+(end-enteredAt). Capture BEFORE Step.do. Every Step wait, callback, GET, both snapshots and final Step/race settlement uses the same end; never restart at callback/retry/RPC.
+HTTP helper stays UNCHANGED <=5000; pass active plan startAt=enteredAt/end. Original timestamp remains fenced in outer v2. V1/ARM helper spans are not widened.
+Preserve strict closed14false/7empty, source/native execution pin, originalcontext/pins/credential/event/payload/method capture, no cached result/executedHere proof, exact primitive issuedJSON, no-follow, response freshness/cache/body/envelope/budgets, parent abort, fixed resources, native fanout13/large2, two full snapshots/all46GETs/128readcap.
+Result<=2048, all existing false authorities plus armEligibilityVerified:false. Metadata enqueueAgeMs and executionBudgetMs=end-enteredAt; capturedTotalAgeMs is labelled as callback capture at observedAt, not delivery latency. Finalconsumer still enforces unchanged end. No data or capsule/secret exposure. No consumer may convert this result to ARM bool authority; strict existing bool/receipt contracts stay unchanged and regression-tested.
+
+## Packaging
+Distinct scripts/qa-closed-quiescence-wrapper-v2.mjs + sibling closed-observation-context-v2.mjs; inherit exactBASEc570, override ONLY exactnewoperation, default/classes unchanged. Separate main/attempt1 workflow afw-qa-closed-observation-v2-qualification.yml using existing restricted GH environment and reader secret, GETexactBASE only; actual build emits<=131072B, five exports and only exactBASE/context/node:crypto siblings. V1 workflow untouched.
+
+## Verification
+API-addition RED before implementation; v1 control must remain blocked when3552ms queue+2000ms Step delay exhausts its lease. V2 must accept that bounded diagnostic and report distinct purpose/no ARM authority; actual native realfetch fixture with6header slots100ms. Reject enqueue>=5000/future/outsidecontext with0outbound; callback>=active5s and earlier compiledexpiry beforeGET; expiry crossing Step/race settlement; inherited drift/monotonic/cache/borrowed-object/HTTP403/302 cases. All v1tests preserved.
+Exact-head independent design review0P1/P2 subject to above clarifications. Require focused/fullCI/lint/build/packages, exactheadreview, exactBASE qualification before any separate finite runtime intent. operationalReadiness=false.
