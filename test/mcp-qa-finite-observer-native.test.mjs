@@ -41,14 +41,30 @@ export class Native extends IndependentClosure{
  async release(){this.releaseWrite();await this.pendingWrite;return this.env.RELEASE_DB.prepare('SELECT pending,writes FROM held_writer WHERE id=1').first();}
 }
 export {PrivateQaBootstrap};
-export default {fetch(){return new Response(null,{status:404});}};
+export default {async fetch(request,env){
+ if(request.method!=='POST')return new Response(null,{status:404});
+ const x=await request.json(),actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));
+ try{
+  if(x.method==='seed')return Response.json(await actor.seed());
+  if(x.method==='refs')return Response.json(await actor.refs());
+  if(x.method==='hold')return Response.json(await actor.hold());
+  if(x.method==='release')return Response.json(await actor.release());
+  if(x.method==='claim')return Response.json(await actor.claimFiniteTrialQaRestore(x.refs));
+  if(x.method==='primary')return Response.json(await actor.readFiniteTrialFinalPrimary(x.refs));
+  return new Response(null,{status:404});
+ }catch(error){return Response.json({error:String(error)},{status:409});}
+}};
 `;
 async function fixture(){
  const b=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*']});
  const T0=Date.now()-240100,flags=Object.fromEntries(PRIVATE_QA_CLOSED_FLAGS.map(k=>[k,'false']));
  for(const k of ['AFW_RELEASE_OPERATOR_ENABLED','AFW_RELEASE_WORKFLOW_ENABLED','AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED','AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED'])flags[k]='true';
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:b.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{...flags,T0:String(T0),AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'}},d1Databases:{RELEASE_DB:'finite-final-primary-native'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'Native',useSQLite:true,uniqueKey:'finite-final-native'},AFW_RELEASE_EVENTS_NODE:{className:'Native',useSQLite:true,uniqueKey:'finite-candidate-native'}},workflows:{FLOW:{name:'finite-observer-test',className:'PrivateQaBootstrap'}}}));
- try{const env=await mf.getBindings(),actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1')),seed=await actor.seed();return {mf,env,actor,seed};}catch(error){await mf.dispose();throw error;}
+ try{
+  const env=await mf.getBindings(),call=async(method,refs)=>{const response=await mf.dispatchFetch('https://fixture.invalid/',{method:'POST',body:JSON.stringify({method,refs})});const body=await response.json();if(response.status!==200)throw Error(JSON.stringify(body));return body;};
+  const actor={seed:()=>call('seed'),refs:()=>call('refs'),hold:()=>call('hold'),release:()=>call('release'),claimFiniteTrialQaRestore:refs=>call('claim',refs),readFiniteTrialFinalPrimary:refs=>call('primary',refs)};
+  const seed=await actor.seed();return {mf,env,actor,seed};
+ }catch(error){await mf.dispose();throw error;}
 }
 test('actual native Workflow carries one real journal claim then bounded first-primary receipt',{timeout:30000},async()=>{
  const f=await fixture();

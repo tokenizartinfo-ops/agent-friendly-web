@@ -22,3 +22,11 @@ test('successful first-step output is readable while observer stays active; tech
 test('caller ready boolean cannot create observer and consume a native occurrence',async()=>{
  const f=await cfFiniteFixture();await assert.rejects(f.observer().create(true));assert.equal(f.requests.length,0);
 });
+
+test('parent abort after first custody response cannot start further authenticated reads',async()=>{
+ const f=await cfFiniteFixture(),parent=new AbortController(),original=f.fetchImpl;let calls=0;
+ // The named read operation propagates its parent through both custody GETs.
+ const {createPrivateQaFiniteObserverHttp}=await import('../lib/mcp-qa-finite-http.mjs');
+ const o=createPrivateQaFiniteObserverHttp({admission:{intentId:f.v.intentId,sourceRevision:f.v.sourceRevision,T0:f.v.T0,R1:f.v.R1},source:{qaLive:f.p.deployments.qaLive,custody:f.p.custody},credential:'synthetic_cf',githubToken:'synthetic_gh',fetchImpl:async(...args)=>{calls++;const r=await original(...args);parent.abort();return r;},now:f.base.f.now,signal:new AbortController().signal});
+ await assert.rejects(o.qualifyCustody(parent.signal,()=>{}));assert.equal(calls,1);
+});
