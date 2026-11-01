@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
-import {readFile} from 'node:fs/promises';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+import {createPrivateQaFiniteTrialFinalizer} from '../lib/mcp-qa-finite-trial-finalizer.mjs';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
 const entry=`
-import {IndependentClosure,PrivateQaBootstrap as BaseBootstrap} from './worker/independent-closure/index.mjs';
+import {IndependentClosure,PrivateQaBootstrap} from './worker/independent-closure/index.mjs';
 import {installPrivateQaFiniteMaterialFactory} from './lib/mcp-qa-finite-observer-native.mjs';
 import {installPrivateQaFiniteObserverSource} from './lib/mcp-qa-finite-observer.mjs';
 import {createPrivateQaFiniteTrialNativePin} from './lib/mcp-qa-finite-trial-control.mjs';
@@ -27,7 +27,7 @@ export class Native extends IndependentClosure{
   for(const[k,v]of f.f.rows)await this.ctx.storage.put(k,v);
   await this.ctx.storage.delete('afw.qa-finite-trial.v1:'+f.preview.intentId+':effect:qa_restore');
   await this.env.RELEASE_DB.exec('CREATE TABLE held_writer (id INTEGER PRIMARY KEY, pending INTEGER, writes INTEGER); INSERT INTO held_writer VALUES (1,0,0);');
-  return {preview:f.preview,instanceId:f.plan.workflows.bootstrap};
+  return {preview:f.preview,instanceId:f.plan.workflows.bootstrap,plan:f.plan};
  }
  // Synthetic approved preview/primary authority; actual native dispatcher,
  // Workflow engine, claim journal and bound D1 are exercised below.
@@ -41,12 +41,7 @@ export class Native extends IndependentClosure{
  }
  async release(){this.releaseWrite();await this.pendingWrite;return this.env.RELEASE_DB.prepare('SELECT pending,writes FROM held_writer WHERE id=1').first();}
 }
-export class PrivateQaBootstrap extends BaseBootstrap{
- async run(event,step){
-  console.log('synthetic workflow input',JSON.stringify(event));
-  return super.run(event,{sleepUntil:(...args)=>step.sleepUntil(...args),do:(name,options,fn)=>step.do(name,options,async()=>{try{const value=await fn();console.log('synthetic step complete',name,name==='finite-qa-restore-claim'?JSON.stringify(value):'');return value;}catch(error){console.log('synthetic step failed',name,String(error),error.stack);throw error;}})});
- }
-}
+export {PrivateQaBootstrap};
 export default {async fetch(request,env){
  if(request.method!=='POST')return new Response(null,{status:404});
  const x=await request.json(),actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));
@@ -62,7 +57,7 @@ export default {async fetch(request,env){
 }};
 `;
 async function fixture(){
- const b=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:[{name:'synthetic-failure-location',setup(builder){builder.onLoad({filter:/mcp-qa-finite-observer\.mjs$/},async args=>({contents:(await readFile(args.path,'utf8')).replace('}catch{/* Sanitized:',"}catch(error){console.log('synthetic observer failure',String(error),error.stack);/* Sanitized:"),loader:'js'}));}}]});
+ const b=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*']});
  const T0=Date.now()-240100,flags=Object.fromEntries(PRIVATE_QA_CLOSED_FLAGS.map(k=>[k,'false']));
  for(const k of ['AFW_RELEASE_OPERATOR_ENABLED','AFW_RELEASE_WORKFLOW_ENABLED','AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED','AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED'])flags[k]='true';
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:b.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{...flags,T0:String(T0),AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'}},d1Databases:{RELEASE_DB:'finite-final-primary-native'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'Native',useSQLite:true,uniqueKey:'finite-final-native'},AFW_RELEASE_EVENTS_NODE:{className:'Native',useSQLite:true,uniqueKey:'finite-candidate-native'}},workflows:{FLOW:{name:'finite-observer-test',className:'PrivateQaBootstrap'}}}));
@@ -90,6 +85,9 @@ test('actual held D1 writer after claim blocks terminal evidence while later wri
   const refs=await f.actor.refs(),claim=await f.actor.claimFiniteTrialQaRestore(refs);assert.equal(claim.claim.kind,'qa_restore');
   await f.actor.hold();
   await assert.rejects(f.actor.readFiniteTrialFinalPrimary({...refs,claimHash:claim.claimHash}));
+  let sendClaims=0,posts=0;
+  const result=await createPrivateQaFiniteTrialFinalizer({plan:f.seed.plan,readSnapshot:()=>f.actor.readFiniteTrialFinalPrimary({...refs,claimHash:claim.claimHash}),claim:async()=>{sendClaims++;return 'issued';},deployClosed:async()=>{posts++;},now:Date.now,signal:new AbortController().signal}).run();
+  assert.equal(result.status,'admin_pending');assert.equal(sendClaims,0);assert.equal(posts,0);
   // This is why empty provider/Workflow state cannot be substituted for a
   // complete writer fence: the outstanding real D1 operation later commits.
   assert.deepEqual(await f.actor.release(),{pending:0,writes:1});
