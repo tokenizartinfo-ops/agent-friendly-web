@@ -45,3 +45,5 @@ jobs:
           NODE
       - name: Qualify exact committed source after restoration
         run: node --test test/mcp-qa-cloud-native-cli.test.mjs test/mcp-qa-cloud-native-workflow.test.mjs
+      - name: Lint the native CLI fixture
+        run: npx eslint test/mcp-qa-cloud-native-cli.test.mjs
