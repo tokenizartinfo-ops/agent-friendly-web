@@ -157,3 +157,85 @@ test('rejected response with documented error extras keeps numeric code only', a
  assert.equal(dto.status,'blocked');assert.equal(dto.httpStatus,401);assert.deepEqual(dto.errorCodes,[10000]);safe(dto);
  assert.doesNotMatch(JSON.stringify(dto),/example.invalid|documentation_url|pointer/);
 });
+
+const neutralShape = () => ({
+ envelopeExtraFields:0, messageExtraFields:0, messagesWithNullType:0, resultExtraFields:0,
+ notBeforeIsNull:false, expiryIsNull:false, errorsNonempty:false,
+});
+function diagnosticResponse(f, envelope) {
+ return new Response(JSON.stringify(envelope), {headers:{date:new Date(f.clock.wall).toUTCString()}});
+}
+for (const [name, mutate, group, shape] of [
+ ['own null type',e=>e.messages=[{code:10000,message:'CREDENTIAL_SENTINEL',type:null}],'messages',{messageExtraFields:1,messagesWithNullType:1}],
+ ['string type',e=>e.messages=[{code:10000,message:'CREDENTIAL_SENTINEL',type:'CREDENTIAL_SENTINEL'}],'messages',{messageExtraFields:1}],
+ ['null timestamps',e=>{e.result.not_before=null;e.result.expires_on=null;},'timestamps',{notBeforeIsNull:true,expiryIsNull:true}],
+ ['unknown envelope and result',e=>{e.CREDENTIAL_SENTINEL='CREDENTIAL_SENTINEL';e.result.CREDENTIAL_SENTINEL='CREDENTIAL_SENTINEL';},'envelope',{envelopeExtraFields:1,resultExtraFields:1}],
+ ['malformed message slots',e=>e.messages=[null,[],1],'messages',{}],
+ ['nonempty errors',e=>e.errors=[{code:10000,message:'CREDENTIAL_SENTINEL'}],'envelope',{errorsNonempty:true}],
+ ['bad result status',e=>e.result.status='CREDENTIAL_SENTINEL','result',{}],
+ ['bad timestamp',e=>e.result.expires_on='CREDENTIAL_SENTINEL','timestamps',{}],
+ ['nonobject envelope',()=>{},'envelope',{}],
+]) test('diagnoses fixed structural group: '+name, async()=>{
+ const f=fixture(), e={success:true,errors:[],messages:[],result:{...f.result}}; mutate(e);
+ f.args.fetchImpl=async()=>diagnosticResponse(f,name==='nonobject envelope'?[]:e);
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked'); assert.equal(dto.failure,'invalid_response');assert.equal(dto.httpStatus,200);
+ assert.equal(dto.responseSchema,group);assert.deepEqual(dto.responseShape,{...neutralShape(),...shape});
+ assert.equal(dto.tokenId,null);safe(dto);
+});
+for(const [name, make, group] of [
+ ['headers',f=>f.response(f.result,200,{age:'1'}),'headers'],
+ ['stream',()=>({status:200,headers:new Headers({date:new Date(START).toUTCString()}),body:{getReader:()=>({read:async()=>({done:false,value:'CREDENTIAL_SENTINEL'}),cancel:async()=>{},releaseLock(){}})}}),'stream'],
+ ['json',()=>new Response('{CREDENTIAL_SENTINEL',{headers:{date:new Date(START).toUTCString()}}),'json'],
+])test('diagnosis before parsed JSON: '+name,async()=>{
+ const f=fixture(); f.args.fetchImpl=async()=>make(f);
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked');assert.equal(dto.responseSchema,group);assert.equal(dto.responseShape,null);safe(dto);
+});
+test('diagnosis counts saturate without exposing unknown names or values',async()=>{
+ const f=fixture(),e={success:true,errors:[],messages:[],result:{...f.result}};
+ for(let i=0;i<20;i++){e['CREDENTIAL_SENTINEL'+i]=i;e.result['CREDENTIAL_SENTINEL'+i]=i;e.messages.push({code:1,message:'CREDENTIAL_SENTINEL',type:null,['CREDENTIAL_SENTINEL'+i]:i});}
+ f.args.fetchImpl=async()=>diagnosticResponse(f,e);
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked');assert.equal(dto.responseSchema,'envelope');
+ assert.deepEqual(dto.responseShape,{...neutralShape(),envelopeExtraFields:16,messageExtraFields:16,messagesWithNullType:16,resultExtraFields:16});safe(dto);
+});
+test('diagnosis helper ignores accessors and inherited nulls without evaluating them',async()=>{
+ const source=await readFile(new URL('../lib/mcp-qa-bootstrap-custody-inspection.mjs',import.meta.url),'utf8');
+ const {diagnoseResponseShape}=await import('data:text/javascript,'+encodeURIComponent(source+'\nexport {diagnoseResponseShape};'));
+ let invoked=0; const getter={get(){invoked++;throw Error('CREDENTIAL_SENTINEL');},enumerable:true};
+ const result={id:ID,status:'active'};Object.defineProperty(result,'not_before',getter);Object.defineProperty(result,'expires_on',getter);
+ const message={code:1,message:'CREDENTIAL_SENTINEL'};Object.defineProperty(message,'type',getter);
+ const e={success:true,errors:[],messages:[message],result};Object.defineProperty(e,'CREDENTIAL_SENTINEL',getter);
+ assert.deepEqual(diagnoseResponseShape(e),{...neutralShape(),envelopeExtraFields:1,messageExtraFields:1});
+ for(const key of ['messages','errors','result'])Object.defineProperty(e,key,getter);
+ assert.deepEqual(diagnoseResponseShape(e),{...neutralShape(),envelopeExtraFields:1});
+ assert.deepEqual(diagnoseResponseShape(Object.create({result:{not_before:null,expires_on:null},errors:[1]})),neutralShape());
+ assert.equal(invoked,0);
+});
+test('successful and pre-response outcomes expose no documentary response evidence',async()=>{
+ for(const where of ['success','admission','credential','fetch']){
+  const f=fixture();if(where==='admission')f.context.actorId='1';if(where==='credential')f.args.readCredential=()=>'';if(where==='fetch')f.args.fetchImpl=async()=>{throw Error('CREDENTIAL_SENTINEL');};
+  const dto=await runQaBootstrapCustodyInspection(f.args);
+  assert.equal(dto.status,where==='success'?'verified':'blocked');assert.equal(dto.responseSchema,null);assert.equal(dto.responseShape,null);safe(dto);
+ }
+});
+for(const kind of ['expiry','abort'])test('settlement diagnosis cannot retain verified metadata after '+kind,async()=>{
+ const f=fixture(),controller=new AbortController();f.args.signal=controller.signal;
+ f.args.fetchImpl=async()=>{const response=f.response(),reader=response.body.getReader();return {status:response.status,headers:response.headers,body:{getReader:()=>({read:()=>reader.read(),cancel:()=>reader.cancel(),releaseLock(){reader.releaseLock();if(kind==='expiry'){f.clock.wall+=5000;f.clock.mono+=5000;}else controller.abort();}})}};};
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked');assert.equal(dto.responseSchema,'settlement');assert.deepEqual(dto.responseShape,neutralShape());
+ for(const key of ['observedAt','tokenId','tokenStatus','expiresAt','notBefore','expectedTokenMatch'])assert.equal(dto[key],null);safe(dto);
+});
+test('CLI entry denial includes only the complete fixed DTO field contract',()=>{
+ const directory=mkdtempSync(join(tmpdir(),'afw-custody-diagnostic-test-'));
+ try{
+  const cli=fileURLToPath(new URL('../scripts/qa-bootstrap-custody-inspection.mjs',import.meta.url));
+  const p=spawnSync(process.execPath,[cli,'bad'],{cwd:directory,env:{PATH:process.env.PATH},encoding:'utf8'});
+  assert.equal(p.status,1);assert.equal(p.stdout,'');assert.equal(p.stderr,'');
+  const bytes=readFileSync(join(directory,'afw-qa-bootstrap-custody-inspection/result.json'));
+  assert.ok(bytes.byteLength<=4096);const dto=JSON.parse(bytes);
+  assert.deepEqual(Object.keys(dto).sort(),['purpose','status','failure','observedAt','sourceRevision','commentId','runId','tokenId','tokenStatus','notBefore','expiresAt','expectedTokenMatch','readOnly','scopeVerified','workflowCreateVerified','operationalReadiness','mayRetry','httpStatus','errorCodes','responseSchema','responseShape'].sort());
+  assert.equal(dto.responseSchema,null);assert.equal(dto.responseShape,null);safe(dto);
+ }finally{rmSync(directory,{recursive:true,force:true});}
+});
