@@ -18,7 +18,7 @@ async function setup({missing}={}){
  const calls=[],receipts=new Map();
  const withdrawal={purpose:'afw.own-permissions-only-reduction.v1',monitoringWithdrawn:true,readWithdrawn:true,permissionsWithdrawn:true,runtimeStopRequested:false,physicalStopVerified:false,nativeWithdrawalVerified:false,operationalReadiness:false};
  const values={withdraw:withdrawal,close:{closed:true,runtimeStopRequested:true},seal:{sealHash:proof.proof.sealHash,sealedAt:f.plan.C0}};
- const capabilities={identity:proof.control,readPrimary:f.primary.admission,proof:{read:()=>store.capture(async challenge=>({proof:{...proof.proof,proofChallenge:challenge,evidenceHash:finiteHash({proofChallenge:challenge,sealHash:proof.proof.sealHash,support:proof.support})},support:proof.support}))}};
+ const capabilities={identity:proof.control,readPrimary:f.primary.admission,proof:{read:()=>store.capture(async challenge=>{const at=f.now(),support={...proof.support,primary:{...proof.support.primary,observedAt:at},providerBefore:{...proof.support.providerBefore,observedAt:at},providerAfter:{...proof.support.providerAfter,observedAt:at}};return {proof:{...proof.proof,proofChallenge:challenge,observedAt:at,primarySnapshotHash:finiteHash(support.primary),providerAbsenceHash:finiteHash([support.providerBefore,support.providerAfter]),evidenceHash:finiteHash({proofChallenge:challenge,sealHash:proof.proof.sealHash,support})},support};})}};
  for(const kind of ['withdraw','close','seal','canary_restore'])capabilities[kind]={
   execute:async({claim,proofHash})=>{
    calls.push(kind);assert.equal(claim.phase,'issued');

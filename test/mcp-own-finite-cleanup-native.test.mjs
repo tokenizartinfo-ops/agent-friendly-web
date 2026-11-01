@@ -40,7 +40,7 @@ test('native finite seal survives restart and accounts for every held writer',as
   try{return Response.json(await stub.fixture(x.method,x.value));}catch{return Response.json({status:'denied'},{status:409});}
  }};
  `;
- const b=await build({stdin:{contents,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',external:['node:*','cloudflare:*']});
+ const b=await build({stdin:{contents,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*']});
  for(const mode of ['none','Reservation','Admission','Launch']){
   const T0=Date.now(),options=rev=>convertV4MiniflareOptions({modules:true,script:b.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{T0:String(T0),REV:rev,AFW_FINITE_TRIAL_VERSION:{id:'31111111-1111-4111-8111-111111111111'}},durableObjects:{AFW_DOSSIER_EVENTS_NODE:{className:'Native',useSQLite:true,uniqueKey:'finite-native-'+mode}},d1Databases:{DB:'finite-db-'+mode}});
   const mf=new Miniflare(options('first'));
