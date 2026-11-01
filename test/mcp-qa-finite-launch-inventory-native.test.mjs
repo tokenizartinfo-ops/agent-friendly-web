@@ -29,6 +29,10 @@ import {DurableObject} from 'cloudflare:workers';
 import * as inventory from './lib/mcp-qa-finite-launch-inventory.mjs';
 import {resolvePrivateQaFiniteLaunchContext} from './lib/mcp-qa-finite-launch-source.mjs';
 import {fixture} from './test/fixtures/finite-launch-native.mjs';
+import {digest} from './test/fixtures/qa-finite-trial.mjs';
+import {createPrivateQaFiniteTrialGuard} from './lib/mcp-qa-finite-trial-guard.mjs';
+import {hashFiniteLaunchRecord} from './lib/mcp-qa-finite-launch-records.mjs';
+import {finiteHash} from './lib/mcp-finite-evidence.mjs';
 import {createPrivateQaFiniteTrialControl,createPrivateQaFiniteTrialNativePin,readPrivateQaFiniteControlSnapshot} from './lib/mcp-qa-finite-trial-control.mjs';
 export class LaunchFixture extends DurableObject{
  async run(mode){
@@ -45,6 +49,37 @@ export class LaunchFixture extends DurableObject{
   if(mode==='provider-nominal')f.providerNominal='running';
   if(mode==='provider-expired')f.onRequest=async()=>{f.setNow(f.now()+5000);};
   if(mode==='snapshot-change')f.onRequest=async()=>{await this.ctx.storage.put('afw.qa-finite-child-create.v1:'+f.plan.intentId+':send',{purpose:'uncertain'});};
+  if(['prelaunch','issued','ack','prepared-tamper','alarm-tamper','reconstruct-pending'].includes(mode)){
+   f.launcher=true;const admission=f.primary.admission;
+   f.primary.admission=async()=>{const r=await i.observeBeforeCreation();if(r.kind!=='never_issued')throw Error('inventory unavailable');return admission();};
+   if(mode==='reconstruct-pending')f.primary.finalizer=async()=>{throw Error('lost finalizer');};
+   const control=createPrivateQaFiniteTrialControl({storage:this.ctx.storage,nativePin,plan:JSON.stringify(f.plan),readPrimary:f.primary,now:parent.check,timeoutMs:5000});
+   const armed=await control.prepare();
+   if(mode==='reconstruct-pending'){
+    const p2=inventory.createPrivateQaFiniteLaunchParent({now:f.now,deadline:f.now()+5000}),c2=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent:p2});
+    const i2=await inventory.createPrivateQaFiniteLaunchInventory({ctx:this.ctx,env:this.env,context:c2,parent:p2});return {armed,result:await i2.observeBeforeCreation()};
+   }
+   if(armed.status!=='armed')throw Error('fixture native prepare '+armed.status);
+   const state=await snapshot(),effects=Object.fromEntries(['withdraw','close','seal','canary_restore'].map(k=>[k,{execute:async()=>{throw Error('unused effect');},reconcile:async()=>null}]));
+   const guard=createPrivateQaFiniteTrialGuard({ctx:this.ctx,env:this.env,control,capabilities:{identity:state.control,readPrimary:f.primary.admission,...effects,proof:{read:async()=>{throw Error('unused proof');}}},now:parent.check});
+   const guarded=await guard.arm();if(guarded.status!=='armed')throw Error('fixture native guard '+guarded.status);
+   const claimed=await control.claimEffect('nominal');if(claimed.status!=='issued')throw Error('fixture native claim '+claimed.status);
+   const after=await snapshot(),p=f.plan;
+   const identity={intentId:p.intentId,finitePlanHash:after.control.planHash,controlHash:after.control.controlHash,sourceRevision:p.source.revision,qaVersionId:p.deployments.qaLive.versionId,actorId:p.resources.actorId,launcherId:p.workflows.launcher,nominalId:p.workflows.confirmation,bundleHash:p.bundleHash,nominalClaimHash:digest('afw.qa-finite-trial.v1:effect',claimed.claim)};
+   const prepared={purpose:'afw.qa-finite-launch-prepared.v1',...identity,guardStateHash:finiteHash(after.guard),preparedAt:f.now(),...p.launchPolicy};
+   const prefix='afw.qa-finite-child-create.v1:'+p.intentId+':';
+   await this.ctx.storage.transaction(async tx=>{await tx.put(prefix+'prepared',prepared);});
+   if(mode==='alarm-tamper')await this.ctx.storage.setAlarm(p.C0+1);
+   if(mode==='prepared-tamper')await this.ctx.storage.put(prefix+'prepared',{...prepared,nominalClaimHash:'0'.repeat(64)});
+   if(mode==='prelaunch'||mode==='prepared-tamper'||mode==='alarm-tamper')return {result:await i.observeBeforeCreation(),prepared,claim:claimed.claim};
+   f.setNow(p.launchPolicy.launchAt);
+   const p2=inventory.createPrivateQaFiniteLaunchParent({now:f.now,deadline:f.now()+5000}),c2=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent:p2});
+   const i2=await inventory.createPrivateQaFiniteLaunchInventory({ctx:this.ctx,env:this.env,context:c2,parent:p2});
+   const send={purpose:'afw.qa-finite-child-create-send.v1',...identity,preparedHash:hashFiniteLaunchRecord(prepared),bindingHash:'8'.repeat(64),issuedAt:f.now(),deadline:p.launchPolicy.lastCreateAt};
+   await inventory.withPrivateQaFiniteLaunchCoordinator({ctx:this.ctx,env:this.env,context:c2,parent:p2},async check=>{check();await this.ctx.storage.transaction(async tx=>{check();await tx.put(prefix+'send',send);check();});check();});
+   if(mode==='ack')await this.ctx.storage.put(prefix+'ack',{purpose:'afw.qa-finite-child-create-ack.v1',intentId:p.intentId,controlHash:identity.controlHash,sendHash:hashFiniteLaunchRecord(send),nominalId:p.workflows.confirmation,acknowledgedAt:f.now()});
+   return {result:await i2.observeBeforeCreation(),prepared,send,claim:claimed.claim};
+  }
   if(mode==='nested'||mode==='pending'){
    const original=f.primary.admission;
    f.primary.admission=async()=>{const observation=await i.observeBeforeCreation();f.observations.push(observation);if(observation.kind!=='never_issued')throw Error('inventory unavailable');return original();};
@@ -52,6 +87,13 @@ export class LaunchFixture extends DurableObject{
    const control=createPrivateQaFiniteTrialControl({storage:this.ctx.storage,nativePin,plan:JSON.stringify(f.plan),readPrimary:f.primary,now:parent.check,timeoutMs:5000});
    const prepared=await control.prepare();
    return {prepared,observations:f.observations,after:await snapshot(),paths:f.paths};
+  }
+  if(mode==='storage-expired'){
+   const storage=this.ctx.storage,original=storage.transaction;let enter,release,once=true;
+   const reached=new Promise(r=>{enter=r;}),held=new Promise(r=>{release=r;});
+   storage.transaction=async fn=>{const result=await original.call(storage,fn);if(once){once=false;enter();await held;}return result;};
+   const observing=i.observeBeforeCreation();await reached;f.setNow(f.now()+5000);release();
+   const result=await observing;storage.transaction=original;return {result};
   }
   if(mode==='race'||mode==='queue-expired'){
    let release,entered;const reached=new Promise(r=>{entered=r;}),held=new Promise(r=>{release=r;});let once=true,written=false;
@@ -113,3 +155,18 @@ test('returned point-in-time fact DTO cannot be replayed after coordinator relea
  const r=await native('before');assert.equal(r.result.kind,'never_issued');
  assert.throws(()=>consumePrivateFiniteLaunchInventory(r.result));
 });
+
+test('actual same-object prepare guard claim and prepared journal qualify prelaunch',async()=>{
+ const r=await native('prelaunch');assert.equal(r.result.kind,'never_issued');assert.equal(r.result.phase,'prelaunch');
+ const {digest}=await import('./fixtures/qa-finite-trial.mjs');assert.equal(r.prepared.nominalClaimHash,digest('afw.qa-finite-trial.v1:effect',r.claim));
+});
+for(const mode of ['issued','ack'])test('durable '+mode+' with provider absence remains issued and unresolved',async()=>{
+ const r=await native(mode);assert.equal(r.result.kind,'issued');assert.equal(r.result.provider,null);assert.match(r.result.sendHash,/^[a-f0-9]{64}$/);assert.equal(Object.hasOwn(r.result,'ackHash'),mode==='ack');
+});
+test('tampered prepared claim linkage cannot qualify prelaunch',async()=>{assert.equal((await native('prepared-tamper')).result.kind,'unavailable');});
+test('reconstructed pending is factual uncertainty, never new arm authority',async()=>{
+ const r=await native('reconstruct-pending');assert.equal(r.armed.status,'uncertain');assert.equal(r.result.kind,'unavailable');
+});
+
+test('actual storage transaction ACK after parent expiry releases no observation',async()=>{assert.equal((await native('storage-expired')).result.kind,'unavailable');});
+test('prelaunch checks the actual sole C0 alarm as well as guard metadata',async()=>{assert.equal((await native('alarm-tamper')).result.kind,'unavailable');});
