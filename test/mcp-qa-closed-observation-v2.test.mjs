@@ -1,0 +1,95 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {armObservationFixture as baseFixture} from './fixtures/qa-arm-observation.mjs';
+import {generationFixture} from './fixtures/qa-generation-ledger.mjs';
+import {createPrivateQaGenerationLedger} from '../lib/mcp-qa-generation-ledger.mjs';
+import {runPrivateQaArmObservation as v1} from '../lib/mcp-qa-arm-observation.mjs';
+const observationPurpose='afw.qa-closed-quiescence-observation.v2';
+function armObservationFixture(){const f=baseFixture();f.context.purpose='afw.qa-closed-quiescence-context.v2';f.event.payload.operation='inspect_closed_quiescence';return f;}
+const api=await import('../lib/mcp-qa-closed-observation-v2.mjs').catch(()=>({}));
+async function run(f,o=f.options()){assert.equal(typeof api.runPrivateQaClosedObservation,'function');return api.runPrivateQaClosedObservation(o);}
+function safe(r){assert.equal(r.purpose,observationPurpose);assert.ok(Buffer.byteLength(JSON.stringify(r))<=2048);for(const k of ['armEligibilityVerified','authorizesEffects','guardLivenessVerified','nativeWithdrawalVerified','operationalReadiness','mayRetry'])assert.equal(r[k],false);for(const secret of ['synthetic-private-CF-token','PRIVATE-BODY','Authorization','bindings','closed-rollback.mjs'])assert.equal(JSON.stringify(r).includes(secret),false);}
+test('native read-only composition qualifies two snapshots under one fixed active lease',async()=>{
+ const f=armObservationFixture(),r=await run(f);safe(r);assert.equal(r.status,'observed');assert.equal(r.snapshotsVerified,2);assert.equal(r.runtimeVersionId,f.version);assert.equal(r.sourceRevision,f.context.sourceRevision);assert.ok(r.reads>20&&r.reads<=128);assert.equal(r.qaCodeProvenanceVerified,false);
+ assert.ok(f.requests.every(x=>x.init.method==='GET'&&x.url.origin==='https://api.cloudflare.com'));assert.equal(f.requests.filter(x=>x.url.pathname.includes('/versions/')).length,2);
+ assert.equal(f.requests.some(x=>/github|d1|oauth|token/.test(x.url.href)),false);
+});
+for(const [name,attack] of Object.entries({
+ 'stale event':f=>{f.event.timestamp=new Date(f.wall-5000);},
+ 'future event':f=>{f.event.timestamp=new Date(f.wall+1);},
+ 'wrong native instance':f=>{f.event.instanceId='afw-qa-arm-'+'f'.repeat(64);},
+ 'open flag':f=>{f.env.AFW_MCP_CLOSURE_ENABLED='true';},
+ 'nonempty policy':f=>{f.env.AFW_MCP_CLOSURE_POLICY='PRIVATE-BODY';},
+ 'unknown extra flag':f=>{f.env.AFW_QA_UNKNOWN_ENABLED='false';},
+ 'expired compiled context':f=>{f.context.expiresAt=f.wall;},
+ 'caller resource selection':f=>{f.event.payload.url='https://example.com';},
+ 'credential accessor':f=>{Object.defineProperty(f.env,'AFW_MCP_CLOSURE_READ_TOKEN',{get(){throw Error('PRIVATE-BODY');},enumerable:true});},
+ 'cached Step result':f=>{f.step.do=async()=>({purpose:observationPurpose,status:'observed'});}
+}))test('closed observation rejects '+name+' before outgoing calls',async()=>{const f=armObservationFixture();attack(f);const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.equal(f.requests.length,0);});
+for(const [name,attack]of Object.entries({
+ 'credential':f=>{f.env.AFW_MCP_CLOSURE_READ_TOKEN='different-private-token';},
+ 'metadata':f=>{f.env.AFW_QA_VERSION={id:f.version};},
+ 'context':f=>{f.context.sourceRevision='b'.repeat(40);},
+ 'external pin':f=>{f.pins.operator.module.sha256='f'.repeat(64);},
+ 'payload':f=>{f.event.payload.observationId='f'.repeat(64);},
+ 'wall rollback':f=>{f.wall-=1;},
+ 'original absolute deadline':f=>{f.wall+=5000;}
+}))test('full consumer fence rejects '+name+' drift after an await',async()=>{const f=armObservationFixture();let changed=false;f.attack=()=>{if(!changed){changed=true;attack(f);}};const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.ok(f.requests.length<=3);});
+test('captures callable Step.do once when native access creates fresh wrappers',async()=>{
+ const f=armObservationFixture();Object.defineProperty(f.step,'do',{get(){return async(_name,_config,work)=>work();}});const r=await run(f);safe(r);assert.equal(r.status,'observed');
+});
+test('complete fence runs after Promise.race consumer settlement',async()=>{
+ const f=armObservationFixture(),race=Promise.race;Promise.race=function(values){return Reflect.apply(race,this,[values]).then(v=>{if(v?.purpose===observationPurpose&&v.status==='observed')f.env.AFW_QA_VERSION={id:f.version};return v;});};
+ try{const r=await run(f);safe(r);assert.equal(r.status,'blocked');}finally{Promise.race=race;}
+});
+test('HTTP failures report sanitized negative evidence without retry',async()=>{
+ const f=armObservationFixture();f.mutate=({response})=>{response.status=403;response.body={private:'PRIVATE-BODY'};};const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.equal(r.diagnostic.httpStatus,403);assert.ok(f.requests.length<=3);
+});
+test('unknown failed GET never leaks exceptions or retries',async()=>{
+ const f=armObservationFixture(),o=f.options();o.fetchImpl=async()=>{throw Error('PRIVATE-BODY synthetic-private-CF-token');};const r=await run(f,o);safe(r);assert.equal(r.status,'blocked');assert.equal(r.diagnostic.reason,'request_failed');
+});
+test('no late callback can refresh the fixed active deadline',async()=>{
+ const f=armObservationFixture(),o=f.options();f.event.timestamp=new Date(f.wall-4500);o.now=()=>{const at=f.wall;f.wall+=100;return at;};const r=await run(f,o);safe(r);assert.equal(r.status,'blocked');assert.ok(f.requests.length<25);
+});
+test('original monotonic deadline cannot be renewed by wall-clock readings',async()=>{
+ const f=armObservationFixture(),descriptor=Object.getOwnPropertyDescriptor(performance,'now'),clock=performance.now.bind(performance);let offset=0;
+ Object.defineProperty(performance,'now',{value:()=>clock()+offset,configurable:true});f.attack=()=>{offset=5001;};
+ try{const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.ok(f.requests.length<=3);}finally{if(descriptor)Object.defineProperty(performance,'now',descriptor);else delete performance.now;}
+});
+test('complete consumer fence also runs after Step settlement',async()=>{
+ const f=armObservationFixture();f.step.do=async(_n,_c,work)=>{const r=await work();f.env.AFW_MCP_CLOSURE_READ_TOKEN='different-private-token';return r;};const r=await run(f);safe(r);assert.equal(r.status,'blocked');
+});
+test('Step transports only a strict bounded primitive, never a borrowed metadata object',async()=>{
+ const f=armObservationFixture();let primitive;
+ f.step.do=async(_n,_c,work)=>{primitive=await work();assert.equal(typeof primitive,'string');assert.ok(Buffer.byteLength(primitive)<=2048);return primitive;};
+ const r=await run(f);safe(r);assert.equal(r.status,'observed');assert.deepEqual(JSON.parse(primitive),r);
+});
+test('a borrowed or substituted Step object remains rejected after real local work',async()=>{
+ const f=armObservationFixture();f.step.do=async(_n,_c,work)=>{const v=await work(),o=JSON.parse(v);Object.defineProperty(o,Symbol.dispose,{value(){}});return o;};const r=await run(f);safe(r);assert.equal(r.status,'blocked');
+});
+
+test('v1 retains its original enqueue-inclusive five-second contract',async()=>{
+ const f=baseFixture();f.context.startAt=f.wall-10000;f.event.timestamp=new Date(f.wall-3552);f.step.do=async(_n,_c,work)=>{f.wall+=2000;return work();};const r=await v1(f.options());assert.equal(r.purpose,'afw.qa-arm-http-observation.v1');assert.equal(r.status,'blocked');assert.equal(f.requests.length,0);
+});
+test('v2 allows bounded queue plus Step wait under one active budget without ARM authority',async()=>{
+ const f=armObservationFixture();f.context.startAt=f.wall-10000;f.event.timestamp=new Date(f.wall-3552);f.step.do=async(_n,_c,work)=>{f.wall+=2000;return work();};
+ const r=await run(f);safe(r);assert.equal(r.status,'observed');assert.equal(r.reads,46);assert.equal(r.enqueueAgeMs,3552);assert.equal(r.executionBudgetMs,5000);assert.equal(r.capturedTotalAgeMs,5552);assert.equal(r.observedAt,f.wall);assert.equal(r.armEligibilityVerified,false);
+});
+for(const mode of ['late-callback','earlier-context','step-settlement','race-settlement'])test('v2 fixed deadline rejects '+mode+' without renewal',async()=>{
+ const f=armObservationFixture();if(mode==='earlier-context')f.context.expiresAt=f.wall+1000;
+ if(mode==='late-callback'||mode==='earlier-context')f.step.do=async(_n,_c,work)=>{f.wall+=mode==='earlier-context'?1000:5000;return work();};
+ if(mode==='step-settlement')f.step.do=async(_n,_c,work)=>{const v=await work();f.wall+=5000;return v;};
+ const race=Promise.race;if(mode==='race-settlement')Promise.race=function(values){return Reflect.apply(race,this,[values]).then(v=>{if(v?.purpose===observationPurpose&&v.status==='observed')f.wall+=5000;return v;});};
+ try{const r=await run(f);safe(r);assert.equal(r.status,'blocked');if(['late-callback','earlier-context'].includes(mode))assert.equal(f.requests.length,0);}finally{Promise.race=race;}
+});
+test('v2 rejects the v1 operation or context rather than selecting a timing mode',async()=>{
+ for(const change of [f=>{f.context.purpose='afw.qa-arm-http-observation-context.v1';},f=>{f.event.payload.operation='inspect_arm_quiescence';},f=>{f.event.payload.mode='active';}]){const f=armObservationFixture();change(f);const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.equal(f.requests.length,0);}
+});
+
+test('actual generation ARM refuses an observed v2 DTO as eligibility and writes nothing',async()=>{
+ const f=armObservationFixture(),r=await run(f);safe(r);assert.equal(r.status,'observed');const g=generationFixture(),before=structuredClone([...g.rows]);g.eligibility=async()=>r;const ledger=createPrivateQaGenerationLedger(g.options());assert.equal((await ledger.arm()).status,'blocked');assert.deepEqual([...g.rows],before);
+});
+
+test('v2 queue-age boundary is enforced independently of the compiled window',async()=>{
+ for(const age of [4999,5000]){const f=armObservationFixture();f.context.startAt=f.wall-10000;f.event.timestamp=new Date(f.wall-age);const r=await run(f);safe(r);assert.equal(r.status,age===4999?'observed':'blocked');if(age===5000)assert.equal(f.requests.length,0);else assert.equal(r.enqueueAgeMs,4999);}
+});
