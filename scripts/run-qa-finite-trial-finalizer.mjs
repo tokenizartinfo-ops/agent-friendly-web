@@ -9,7 +9,7 @@ import {resolvePrivateQaFiniteExternalSource} from '../lib/mcp-qa-finite-source.
 const fail=()=>{throw Error('Finite finalizer unavailable');};
 /** Fixed phase CLI. Source implementation may be installed only in reviewed code.
  * Environment contributes GitHub's authenticated event/context, never a plan. */
-export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile,write=writeFile,append=appendFile,resolveSource=resolvePrivateQaFiniteExternalSource,fetchImpl=fetch,now=Date.now,sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms))}={}){
+export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile,write=writeFile,append=appendFile,fetchImpl=fetch,now=Date.now,sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms))}={}){
  const signal=AbortSignal.timeout(480000);
  try{
   if(!['admission','seed-material','admit','poll','restore'].includes(phase))fail();
@@ -19,11 +19,10 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
   assertQaFiniteConfirmationAdmission(admission,phase==='admission'||phase==='seed-material'||phase==='admit'?'nominal':'cleanup');
   if(phase==='admission'){await append(env.GITHUB_OUTPUT,'intent_id='+admission.intentId+'\n');return {status:'admitted',operationalReadiness:false};}
   if(phase==='seed-material'){
-   if(resolveSource!==resolvePrivateQaFiniteExternalSource)fail();
    return await issueFiniteMaterialSeed({admission,githubToken:env.GITHUB_TOKEN,credential:env.AFW_QA_CLOSED_TOKEN,fetchImpl,now,signal});
   }
   // Missing actual Task4 constructor fails before reading CF custody.
-  const source=await resolveSource({admission,phase,sourceRevision:admission.sourceRevision,githubToken:env.GITHUB_TOKEN,fetchImpl,now,signal});
+  const source=await resolvePrivateQaFiniteExternalSource({admission,phase,sourceRevision:admission.sourceRevision,githubToken:env.GITHUB_TOKEN,fetchImpl,now,signal});
   assertQaFiniteConfirmationAdmission(admission,phase==='admit'?'nominal':'cleanup');
   const githubToken=env.GITHUB_TOKEN,finalizer=await readFiniteFinalizerGithubContext({admission,githubToken,fetchImpl,now,signal});
   assertQaFiniteConfirmationAdmission(admission,phase==='admit'?'nominal':'cleanup');

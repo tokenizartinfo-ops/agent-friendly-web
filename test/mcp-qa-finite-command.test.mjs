@@ -37,7 +37,8 @@ test('external poll covers late original C1 completion without exhausting at C0 
  const f=await cfFiniteFixture({at:command.at,configure:p=>{p.intentId=a.intentId;p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});}});
  f.base.f.setNow(command.at+100);f.state.observerStatus='running';f.gh.state.admitStatus='in_progress';
  const env={GITHUB_EVENT_PATH:'event.json',GITHUB_REPOSITORY:command.context.repository,GITHUB_REPOSITORY_ID:command.context.repositoryId,GITHUB_REF:command.context.ref,GITHUB_EVENT_NAME:command.context.eventName,GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:command.context.sourceRevision,GITHUB_TOKEN:'synthetic_gh',AFW_QA_CLOSED_TOKEN:'synthetic_cf'};
- const result=await runFiniteFinalizerCli({phase:'poll',env,resolveSource:async()=>f.p,now:f.base.f.now,read:async path=>JSON.stringify(path==='event.json'?command.event:f.p),write:async()=>{},sleep:async ms=>f.base.f.setNow(f.base.f.now()+ms),fetchImpl:async(...args)=>{if(f.base.f.now()>=f.v.C1+1)f.state.observerStatus='complete';return f.fetchImpl(...args);}});
+ const {finiteCliSyntheticSource}=await import('./fixtures/finite-http-module.mjs');const synthetic=await finiteCliSyntheticSource(f.p);
+ const result=await synthetic.runFiniteFinalizerCli({phase:'poll',env,now:f.base.f.now,read:async path=>JSON.stringify(path==='event.json'?command.event:f.p),write:async()=>{},sleep:async ms=>f.base.f.setNow(f.base.f.now()+ms),fetchImpl:async(...args)=>{if(f.base.f.now()>=f.v.C1+1)f.state.observerStatus='complete';return f.fetchImpl(...args);}});
  assert.equal(result.status,'observer_complete');assert.ok(f.base.f.now()>f.v.C1);assert.ok(f.base.f.now()<f.v.R1);assert.equal(f.state.posts,0);
 });
 

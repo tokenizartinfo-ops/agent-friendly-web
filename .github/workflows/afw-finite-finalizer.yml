@@ -52,7 +52,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          export AFW_FINITE_SEED_ORIGINAL_PID=$
+          export AFW_FINITE_SEED_ORIGINAL_PID=$$
           exec node scripts/run-qa-finite-trial-finalizer.mjs seed-material
       - name: admit-and-ready
         env:

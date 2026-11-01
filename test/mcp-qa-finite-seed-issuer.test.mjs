@@ -44,3 +44,8 @@ test('actual workflow has sole seed launcher before ready and preserves restore 
  assert.equal((text.match(/exec node scripts\/run-qa-finite-trial-finalizer.mjs seed-material/g)??[]).length,1);
  assert.match(text,/id: finite_seed_once/);assert.match(text,/id: finite_restore_once/);
 });
+
+test('changed primary after tag ACK cannot send the ref',async()=>{
+ const f=await seedWorld();f.state.hook=async url=>{if(f.state.tagPosts&&url.endsWith('/git/ref/heads/main'))f.map.get('/git/ref/heads/main').object.sha='0'.repeat(40);};
+ await assert.rejects(f.api.issueFiniteMaterialSeed(f.options));assert.equal(f.state.tagPosts,1);assert.equal(f.state.refPosts,0);
+});
