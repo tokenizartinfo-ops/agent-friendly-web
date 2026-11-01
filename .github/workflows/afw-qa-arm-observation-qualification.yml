@@ -54,6 +54,19 @@ jobs:
         env:
           AFW_QA_INSPECTION_BASE_MODULE: ${{ runner.temp }}/afw-qa-legacy-exact-base.mjs
         run: node --test test/mcp-qa-legacy-inspection-native.test.mjs test/mcp-qa-arm-observation-native.test.mjs
+      - name: Preserve the small source-only wrapper for native publication review
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {build} from 'esbuild';
+          import {createHash} from 'node:crypto';
+          const built=await build({entryPoints:['scripts/qa-arm-observation-wrapper.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*','./closed-rollback.mjs','./observation-context.mjs'],legalComments:'none',metafile:true});
+          const text=built.outputFiles[0].text,bytes=Buffer.from(text),out=Object.values(built.metafile.outputs);
+          if(bytes.length>131072||out.length!==1||out[0].imports.some(x=>!x.external||!['./closed-rollback.mjs','./observation-context.mjs','node:crypto'].includes(x.path)))throw Error('Unexpected wrapper bundle boundary');
+          const expected=['IndependentClosure','PrivateQaBootstrap','PrivateQaNamedConfirmation','PrivateQaPreregistration','default'];
+          if(JSON.stringify([...out[0].exports].sort())!==JSON.stringify(expected.sort()))throw Error('Unexpected wrapper exports');
+          console.log('CLOSED_ARM_WRAPPER_SOURCE '+JSON.stringify({purpose:'afw.qa-arm-http-observation-wrapper.v1',sourceRevision:process.env.GITHUB_SHA,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex'),base64:bytes.toString('base64'),remotePublished:false,authorizesEffects:false,operationalReadiness:false}));
+          NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
