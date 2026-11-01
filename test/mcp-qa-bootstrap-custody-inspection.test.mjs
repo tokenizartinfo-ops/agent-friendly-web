@@ -118,6 +118,7 @@ function infoResponse(f, message, status=200) {
 }
 for (const [name, change] of [
  ['documented extras',()=>{}],
+ ['null type with documented extras',message=>message.type=null],
  ['documentation only',message=>delete message.source],
  ['source only',message=>delete message.documentation_url],
  ['empty source',message=>message.source={}],
@@ -166,8 +167,8 @@ function diagnosticResponse(f, envelope) {
  return new Response(JSON.stringify(envelope), {headers:{date:new Date(f.clock.wall).toUTCString()}});
 }
 for (const [name, mutate, group, shape] of [
- ['own null type',e=>e.messages=[{code:10000,message:'CREDENTIAL_SENTINEL',type:null}],'messages',{messageExtraFields:1,messagesWithNullType:1}],
- ['string type',e=>e.messages=[{code:10000,message:'CREDENTIAL_SENTINEL',type:'CREDENTIAL_SENTINEL'}],'messages',{messageExtraFields:1}],
+ ['unsupported extra with own null type',e=>e.messages=[{code:10000,message:'CREDENTIAL_SENTINEL',type:null,extra:'CREDENTIAL_SENTINEL'}],'messages',{messageExtraFields:1,messagesWithNullType:1}],
+ ['string type',e=>e.messages=[{code:10000,message:'CREDENTIAL_SENTINEL',type:'CREDENTIAL_SENTINEL'}],'messages',{}],
  ['null timestamps',e=>{e.result.not_before=null;e.result.expires_on=null;},'timestamps',{notBeforeIsNull:true,expiryIsNull:true}],
  ['unknown envelope and result',e=>{e.CREDENTIAL_SENTINEL='CREDENTIAL_SENTINEL';e.result.CREDENTIAL_SENTINEL='CREDENTIAL_SENTINEL';},'envelope',{envelopeExtraFields:1,resultExtraFields:1}],
  ['malformed message slots',e=>e.messages=[null,[],1],'messages',{}],
@@ -232,4 +233,45 @@ test('CLI entry denial includes only the complete fixed DTO field contract',()=>
   assert.deepEqual(Object.keys(dto).sort(),['purpose','status','failure','observedAt','sourceRevision','commentId','runId','tokenId','tokenStatus','notBefore','expiresAt','expectedTokenMatch','readOnly','scopeVerified','workflowCreateVerified','operationalReadiness','mayRetry','httpStatus','errorCodes','responseSchema','responseShape'].sort());
   assert.equal(dto.responseSchema,null);assert.equal(dto.responseShape,null);safe(dto);
  }finally{rmSync(directory,{recursive:true,force:true});}
+});
+
+test('observed successful envelope with own informational type null verifies synthetic identity', async()=>{
+ const f=fixture();
+ const envelope={success:true,errors:[],messages:[{code:10000,message:'This API Token is valid and active. CREDENTIAL_SENTINEL',type:null}],result:{...f.result}};
+ let requests=0;
+ f.args.fetchImpl=async()=>{requests++;return diagnosticResponse(f,envelope);};
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'verified');assert.equal(dto.failure,null);assert.equal(dto.httpStatus,200);
+ assert.equal(dto.tokenId,ID);assert.equal(dto.expectedTokenMatch,true);assert.equal(dto.tokenStatus,'active');
+ assert.equal(dto.notBefore,f.result.not_before);assert.equal(dto.expiresAt,f.result.expires_on);
+ assert.deepEqual(dto.errorCodes,[]);assert.equal(dto.responseSchema,null);assert.equal(dto.responseShape,null);
+ assert.equal(requests,1);assert.equal(f.counts.reads,1);safe(dto);
+});
+
+for(const [name,type] of [
+ ['string','CREDENTIAL_SENTINEL'],['empty string',''],['number',1],['zero',0],['negative',-1],
+ ['true',true],['false',false],['object',{value:'CREDENTIAL_SENTINEL'}],['array',[]],['nonempty array',['CREDENTIAL_SENTINEL']],
+])test('rejects nonnull informational type: '+name,async()=>{
+ const f=fixture();
+ f.args.fetchImpl=async()=>infoResponse(f,{...infoMessage(),type});
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked');assert.equal(dto.failure,'invalid_response');assert.equal(dto.responseSchema,'messages');
+ assert.deepEqual(dto.responseShape,neutralShape());assert.equal(dto.tokenId,null);assert.deepEqual(dto.errorCodes,[]);safe(dto);
+});
+test('undefined informational type is malformed JSON, never an accepted null',async()=>{
+ const f=fixture();
+ const text=JSON.stringify({success:true,errors:[],messages:[{code:10000,message:'CREDENTIAL_SENTINEL',type:null}],result:f.result}).replace('"type":null','"type":undefined');
+ f.args.fetchImpl=async()=>new Response(text,{headers:{date:new Date(START).toUTCString()}});
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked');assert.equal(dto.failure,'invalid_response');assert.equal(dto.responseSchema,'json');
+ assert.equal(dto.responseShape,null);assert.equal(dto.tokenId,null);safe(dto);
+});
+for(const count of [16,17])test('null type preserves informational message count bound: '+count,async()=>{
+ const f=fixture(),envelope={success:true,errors:[],messages:Array.from({length:count},()=>({code:10000,message:'CREDENTIAL_SENTINEL',type:null})),result:f.result};
+ f.args.fetchImpl=async()=>diagnosticResponse(f,envelope);
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,count===16?'verified':'blocked');assert.equal(dto.tokenId,count===16?ID:null);
+ if(count===16){assert.equal(dto.responseSchema,null);assert.equal(dto.responseShape,null);}
+ else{assert.equal(dto.responseSchema,'envelope');assert.deepEqual(dto.responseShape,{...neutralShape(),messagesWithNullType:16});}
+ safe(dto);
 });
