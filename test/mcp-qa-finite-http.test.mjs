@@ -92,3 +92,10 @@ test('cached 404 cannot authorize the original tag POST or refund the consumed c
  assert.equal(await x.make().claimSend(x.record(),new AbortController().signal,()=>{}),'uncertain');
  assert.equal(x.tagPosts,0);assert.equal(x.refPosts,0);
 });
+
+test('fixed export-and-exec launcher retains actual PID and admits one original synthetic send',async()=>{
+ const {spawnSync}=await import('node:child_process');
+ const code="import {githubFixture} from './test/fixtures/finite-github.mjs';const x=await githubFixture(undefined,{origin:'none'});const client=x.make(),admitted=await client.admitOriginalExecution({admission:x.admission,output:x.f.output});const send=await client.claimSend(x.record(),new AbortController().signal,()=>{});process.stdout.write(JSON.stringify({admitted,send,tagPosts:x.tagPosts,refPosts:x.refPosts,pidMatches:String(process.pid)===process.env.AFW_FINITE_RESTORE_ORIGINAL_PID}));";
+ const child=spawnSync('bash',['-c','export AFW_FINITE_RESTORE_ORIGINAL_PID=$$; exec "$@"','finite-fixture',process.execPath,'--input-type=module','-e',code],{encoding:'utf8',timeout:20000,env:{...process.env,GITHUB_JOB:'restore',GITHUB_ACTION:'finite_restore_once',GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:'b'.repeat(40)}});
+ assert.equal(child.status,0,child.stderr);assert.deepEqual(JSON.parse(child.stdout),{admitted:true,send:'issued',tagPosts:1,refPosts:1,pidMatches:true});
+});
