@@ -19,8 +19,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Task4 finite receiver RED
-        run: node --test --test-reporter=spec test/mcp-own-finite-entrypoints.test.mjs
+      - name: Task4 finite receiver contracts
+        run: node --test --test-reporter=spec test/mcp-own-finite-entrypoints.test.mjs test/mcp-own-finite-entrypoints-native.test.mjs test/mcp-own-worker-native.test.mjs test/mcp-own-worker-historical-close.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint test/mcp-own-finite-entrypoints.test.mjs
+        run: npx eslint worker/mcp-own/index.mjs test/mcp-own-finite-entrypoints.test.mjs test/mcp-own-finite-entrypoints-native.test.mjs
