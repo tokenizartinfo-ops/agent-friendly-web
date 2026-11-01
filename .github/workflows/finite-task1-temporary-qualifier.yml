@@ -1,0 +1,31 @@
+name: Finite Task1 temporary source qualifier
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+permissions:
+  contents: read
+jobs:
+  focused:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Task1 focused RED GREEN
+        run: node --test --test-reporter=spec test/mcp-qa-finite-trial-control.test.mjs
+      - name: Task1 native persistence
+        if: ${{ hashFiles('test/mcp-qa-finite-trial-control-native.test.mjs') != '' }}
+        run: node --test --test-reporter=spec test/mcp-qa-finite-trial-control-native.test.mjs
+      - name: Nearby strict ledger and execution pin
+        run: node --test --test-reporter=spec test/mcp-qa-generation-ledger.test.mjs test/mcp-qa-execution-identity.test.mjs test/mcp-own-synthetic-save.test.mjs
+      - name: Scoped lint
+        if: ${{ hashFiles('lib/mcp-qa-finite-trial-control.mjs') != '' }}
+        run: npx eslint lib/mcp-qa-finite-trial-control.mjs test/mcp-qa-finite-trial-control*.test.mjs test/fixtures/qa-finite-trial.mjs
