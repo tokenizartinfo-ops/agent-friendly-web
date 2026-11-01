@@ -146,3 +146,19 @@ test('finite settled admission reuse observes readiness without another writer o
   await gate.seal();await assert.rejects(a.start());assert.equal(f.launches(),1);
  }finally{f.close();}
 });
+
+test('finite custody retains the narrow deadline after a held admission read and permits independent close',async()=>{
+ const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ const {finiteWriterFixture}=await import('./fixtures/finite-admission-gate.mjs');
+ const {createHash}=await import('node:crypto');const f=fixture();try{
+  f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();
+  let at=f.config.now(),held=false;const deadline=at+20000;
+  const g=finiteWriterFixture({now:()=>at,deadline,identity:{containerId:f.config.containerId,grantHash:createHash('sha256').update(ctx.grantId).digest('hex')}});
+  const storage=f.config.storage;
+  const a=(await load()).createNodeProcessCustody({...f.config,now:()=>at,finiteGate:createFiniteAdmissionGate(g.options),storage:{transaction:fn=>storage.transaction(tx=>fn({...tx,get:async k=>{const v=await tx.get(k);if(!held){await Promise.resolve();held=true;at=deadline;}return v;}}))}});
+  await assert.rejects(a.start());assert.equal(held,true);assert.equal(f.launches(),0);
+  assert.equal(f.db.prepare('SELECT count(*) n FROM dossier_node_process_admissions').get().n,0);
+  assert.equal((await a.close()).closed,true);
+  assert.equal(g.rows.get('afw.own-finite-admission.v1:head').writers.admission.settlement,null);
+ }finally{f.close();}
+});

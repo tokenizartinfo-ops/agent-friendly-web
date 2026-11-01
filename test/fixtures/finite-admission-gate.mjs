@@ -9,3 +9,13 @@ export function finiteGateFixture(atValue=1000){
  const nominal=nominalFixture(identity);const options={storage,identity,readPrimary:primary,readNominalControl:async()=>({...nominal.value,observedAt:at,ownedWriters:['reservation','admission','launch'].filter(k=>rows.get('afw.own-finite-admission.v1:head')?.writers[k]).map(kind=>{const w=rows.get('afw.own-finite-admission.v1:head').writers[kind];return {intentId:identity.intentId,controlHash:identity.controlHash,actorId:identity.containerId,kind,claimHash:finiteHash(w.claim),phase:w.settlement===null?'issued':'settled'};})}),nominalIdentity:nominal.nominalIdentity,now:()=>at,timeoutMs:1000};
  return {options,identity,primary,rows,setTime:v=>{at=v;},lose:()=>{lost=true;},get alarm(){return alarm;}};
 }
+
+/** Synthetic fixed control/primary fixture for real consumer continuation tests. */
+export function finiteWriterFixture({identity={},now,deadline}){
+ const g=finiteGateFixture(now());Object.assign(g.identity,identity);g.options.now=now;
+ g.options.readNominalControl=async()=>{
+  const n=nominalFixture(g.identity,{...g.options.nominalIdentity,consentExpiresAt:deadline},now());
+  const raw=g.rows.get('afw.own-finite-admission.v1:head');
+  return {...n.value,ownedWriters:['reservation','admission','launch'].filter(k=>raw?.writers[k]).map(kind=>({intentId:g.identity.intentId,controlHash:g.identity.controlHash,actorId:g.identity.containerId,kind,claimHash:finiteHash(raw.writers[kind].claim),phase:raw.writers[kind].settlement===null?'issued':'settled'}))};
+ };return g;
+}

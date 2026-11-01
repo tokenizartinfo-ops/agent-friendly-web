@@ -106,3 +106,20 @@ test('finite seal blocks actual successor launch claim and runtime launch',async
  assert.equal(f.db.prepare('SELECT COUNT(*) AS n FROM dossier_successor_launch_claims').get().n,0);
  }finally{f.db.close();}
 });
+
+test('finite launch retains the narrower nominal deadline through held continuations',async()=>{
+ const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ const {finiteWriterFixture}=await import('./fixtures/finite-admission-gate.mjs');
+ for(const held of ['deployment','retirement','primary']){
+  const f=await fixture();try{
+   let at=f.boot.createdAt,heldCount=0;const deadline=at+20000;
+   const g=finiteWriterFixture({now:()=>at,deadline,identity:{containerId:f.boot.containerId,trialId:f.plan.candidate.trialId,grantHash:createHash('sha256').update('new').digest('hex')}});
+   const options={...f.options,now:()=>at,finiteGate:createFiniteAdmissionGate(g.options)};
+   for(const [mode,name] of [['deployment','readDeployment'],['retirement','readRetirement']])if(held===mode){const read=options[name];options[name]=async(...args)=>{const value=await read(...args);await Promise.resolve();heldCount++;at=deadline;return value;};}
+   if(held==='primary'){const db=options.db;options.db={withSession(){return this;},prepare(sql){const q=db.prepare(sql);return{bind(...args){const r=q.bind(...args);return{first:r.first,async run(){const value=await r.run();await Promise.resolve();heldCount++;at=deadline;return value;}};}};}};}
+   await assert.rejects((await load()).createSuccessorLaunchGate(options)(f.boot,new AbortController().signal));
+   assert.equal(heldCount,1);assert.equal(f.launches(),0,held+' must not launch after finite deadline');
+   assert.equal(g.rows.get('afw.own-finite-admission.v1:head').writers.launch.settlement,null);
+  }finally{f.db.close();}
+ }
+});

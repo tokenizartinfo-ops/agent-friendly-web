@@ -63,7 +63,7 @@ test('actual Task1 narrower observed consent claim admits before its deadline an
  const claim=await ctl.claimEffect('nominal');assert.equal(claim.claim.deadline,end);assert.ok(end<f.plan.selectors.expiresAt);
  const identity=finiteAdmissionIdentity({plan:f.plan,planHash:armed.planHash,controlHash:armed.controlHash}),g=finiteGateFixture(f.plan.T0);
  const gate=createFiniteAdmissionGate({...g.options,identity,nominalIdentity:{sourceRevision:f.plan.source.revision,runtimeVersionId:f.plan.deployments.qaLive.versionId,actorId:f.plan.resources.actorId,monitorHash:f.plan.monitorHash,consentExpiresAt:f.plan.selectors.expiresAt},readNominalControl:async()=>(await ctl.readNominalControl()).value,now:f.now});
- assert.equal((await gate.beginReservation()).status,'issued');const before=JSON.stringify([...g.rows]);
+ const begun=await gate.beginReservation();assert.equal(begun.status,'issued');assert.equal(begun.claim.deadline,end);const before=JSON.stringify([...g.rows]);
  f.setNow(end);assert.equal((await gate.beginAdmission()).status,'blocked');assert.equal(JSON.stringify([...g.rows]),before);
  assert.equal((await gate.read()).writers.admission,null);
 });

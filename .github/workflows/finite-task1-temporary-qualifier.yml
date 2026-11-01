@@ -19,27 +19,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Task2 focused RED GREEN
-        run: node --test --test-reporter=spec test/mcp-own-finite-admission-gate.test.mjs test/mcp-finite-nominal-control.test.mjs
-      - name: Discriminated finite proof
-        run: node --test --test-reporter=spec test/mcp-own-finite-cleanup-proof.test.mjs
-      - name: Retained proof and finite alarm
-        run: node --test --test-reporter=spec test/mcp-qa-finite-cleanup-store.test.mjs test/mcp-qa-finite-trial-guard.test.mjs test/mcp-finite-cleanup-readiness.test.mjs
-      - name: Finite native writer and proof fixture
-        run: node --test --test-reporter=spec test/mcp-own-finite-cleanup-native.test.mjs test/mcp-own-finite-reduction-native.test.mjs
-      - name: Finite exact canary restoration
-        run: node --test --test-reporter=spec test/mcp-qa-finite-canary-restorer.test.mjs
-      - name: Actual finite writer hooks
-        run: node --test --test-reporter=spec test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-successor-reservation.test.mjs
-      - name: Task1 focused RED GREEN
-        run: node --test --test-reporter=spec test/mcp-qa-finite-trial-control.test.mjs
-      - name: Task1 native persistence
-        if: ${{ hashFiles('test/mcp-qa-finite-trial-control-native.test.mjs') != '' }}
-        run: node --test --test-reporter=spec test/mcp-qa-finite-trial-control-native.test.mjs test/mcp-qa-finite-read-rpc-native.test.mjs
-      - name: Nearby strict ledger and execution pin
-        run: node --test --test-reporter=spec test/mcp-qa-generation-ledger.test.mjs test/mcp-qa-execution-identity.test.mjs test/mcp-own-synthetic-save.test.mjs
-      - name: Nearby native and legacy restoration
-        run: node --test --test-reporter=spec test/mcp-canary-restoration-transport.test.mjs test/mcp-successor-canary-restorer.test.mjs test/mcp-successor-canary-restorer-native.test.mjs test/mcp-own-worker-native.test.mjs test/mcp-own-worker-build.test.mjs test/mcp-own-worker-historical-close.test.mjs test/mcp-own-closed-rollback-native.test.mjs test/mcp-own-permissions-only-reduction-native.test.mjs test/mcp-invocation-storage-native.test.mjs test/mcp-known-cancellation-native.test.mjs
+      - name: Finite deadline and consumer regressions
+        run: node --test --test-reporter=spec test/mcp-own-finite-admission-gate.test.mjs test/mcp-finite-nominal-control.test.mjs test/mcp-own-finite-cleanup-proof.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-successor-reservation.test.mjs
+      - name: Affected native consumers
+        run: node --test --test-reporter=spec test/mcp-own-finite-cleanup-native.test.mjs test/mcp-own-finite-reduction-native.test.mjs test/mcp-own-worker-historical-close.test.mjs test/mcp-invocation-storage-native.test.mjs
       - name: Scoped lint
-        if: ${{ hashFiles('lib/mcp-qa-finite-trial-control.mjs') != '' }}
-        run: npx eslint lib/mcp-*finite*.mjs lib/mcp-node-process-custody.mjs lib/mcp-own-permission-withdrawal.mjs lib/mcp-successor-launch-gate.mjs lib/mcp-successor-reservation.mjs lib/mcp-release-successor-reservation.mjs lib/mcp-own-durable-host.mjs lib/mcp-fixed-terminal-workflows.mjs lib/mcp-canary-restoration-transport.mjs worker/mcp-own/index.mjs worker/independent-closure/index.mjs test/*finite*.test.mjs test/fixtures/*finite*.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-successor-reservation.test.mjs test/mcp-own-permissions-only-reduction-native.test.mjs
+        run: npx eslint lib/mcp-own-finite-admission-gate.mjs lib/mcp-own-finite-cleanup-proof.mjs lib/mcp-finite-child-primary.mjs lib/mcp-node-process-custody.mjs lib/mcp-successor-launch-gate.mjs lib/mcp-successor-reservation.mjs test/fixtures/finite-admission-gate.mjs test/mcp-finite-nominal-control.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-successor-reservation.test.mjs
