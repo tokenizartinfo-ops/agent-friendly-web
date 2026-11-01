@@ -1,0 +1,12 @@
+# Native private generation preparation
+31oct2026. AFW only. Composes accepted materializer686, immutable bundle-keyed draft687, primary historical reader688 and original pins681. This is read-only preparation, not ARM or scheduling.
+
+Shared compiled context module holds exactly one occurrence of artifact315/receipt and the separately committed hash-only historical context. Production builder verifies committed inputs, artifact pins and source tree, preserves artifact property order and <=3MiB QA-only module profile. Existing2MiB external/historical limits unchanged.
+
+Private constructor binds actual native DO source/runtime, fixed slot, all14flagsfalse and7empty policies, explicit isolated QA draft DB and separate AFW_QA_DOSSIER_DB with no fallback, closure namespace for pure identity resolution, immutable contexts and original <=5s wall/monotonic lease. RPC input only namedBundleHash. No credential, callback or owner fields.
+
+Flow: one primary immutable draft read; transactional literal legacy/control/journals and empty V2 HEAD/INFO/CONTROL inventory; materialize historical predecessor; canonical capsule and packet assembled with existing validation; derive original primary pins and correlate primary historical identity; exact stable storage/draft reread. All work shares parent abort and remaining original deadline, including final settlement. Return PRIVATE packet/capsule only internally, never RPC. RPC emits hashes/source/runtime metadata <=2048bytes, retainedUncertainty=true, D1IdentityCorrelationVerified=true and all authority/liveness/withdrawal/readiness/retry flagsfalse.
+
+First cut is strict first legacy generation only, with no V2 records. Unknown or orphan history blocks. No D1 packet writer, storage writes, fresh grant, install, reservation, Container, scheduler, callback or public route. Future ARM must independently add681 eligibility before/after CAS and683 full quiescence; nominal path must privately reconstruct against the retained capsule and use explicit per-generation journals, preserving every legacy fence.
+
+Native Workflow has its own distinct operation/instance ID, zero retries, original event.timestamp+5s deadline and a callback-executed-here requirement. Only fixed DO metadata accepted; cached, stale, source/runtime/profile drift or uncertain results block. New readonly wrappers preserve constructor/alarm/legacy methods and default closed404 behavior. Native Miniflare tests prove composition with synthetic contexts/identities, not actual grants, frozen315 provenance, remote publication or PC-off.
