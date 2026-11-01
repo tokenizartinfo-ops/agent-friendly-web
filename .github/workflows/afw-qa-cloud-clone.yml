@@ -1,0 +1,43 @@
+name: AFW finite closed QA clone
+run-name: AFW finite closed QA clone comment-${{ github.event.comment.id }} source-${{ github.sha }}
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+jobs:
+  clone:
+    if: >-
+      ${{ github.event_name == 'issue_comment' && github.event.action == 'created' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.repository.id == 1347578006 && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event.issue.number == 497 && !github.event.issue.pull_request && github.event.comment.user.id == 290715446 && github.event.comment.user.login == 'tokenizartinfo-ops' && github.event.comment.user.type == 'User' && github.event.sender.id == 290715446 && github.event.sender.login == 'tokenizartinfo-ops' && github.event.sender.type == 'User' && github.event.comment.author_association == 'OWNER' && startsWith(github.event.comment.body, '/afw-qa-deploy-observe-restore v1 ') }}
+    concurrency:
+      group: afw-qa-cloud-closed-rollback
+      queue: max
+      cancel-in-progress: false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    environment: afw-qa-cloud-closed-rollback
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Copy, observe and restore the one exact CLOSED QA artifact
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/qa-cloud-clone.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-qa-closed-clone-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            afw-qa-closed-clone-result.json
+            afw-qa-closed-clone-entry-failure.json
+          if-no-files-found: error
+          retention-days: 7
