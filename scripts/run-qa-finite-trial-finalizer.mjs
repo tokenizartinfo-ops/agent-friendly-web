@@ -22,7 +22,7 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
   assertQaFiniteConfirmationAdmission(admission,phase==='admit'?'nominal':'cleanup');
   const githubToken=env.GITHUB_TOKEN,finalizer=await readFiniteFinalizerGithubContext({admission,githubToken,fetchImpl,now,signal});
   const credential=env.AFW_QA_CLOSED_TOKEN;
-  const observer=createPrivateQaFiniteObserverHttp({admission:{intentId:admission.intentId,sourceRevision:admission.sourceRevision,T0:admission.createdAt,R1:admission.cleanupExpiresAt},source:{qaLive:source.deployments.qaLive,custody:source.custody},credential,fetchImpl,now,signal});
+  const observer=createPrivateQaFiniteObserverHttp({admission:{intentId:admission.intentId,sourceRevision:admission.sourceRevision,T0:admission.createdAt,R1:admission.cleanupExpiresAt},source:{qaLive:source.deployments.qaLive,custody:source.custody},credential,githubToken,fetchImpl,now,signal});
   if(phase==='admit'){
    await observer.qualifyCustody();assertQaFiniteConfirmationAdmission(admission);
    let created=false;

@@ -3,8 +3,8 @@ import {finiteHash as hash} from '../../lib/mcp-finite-evidence.mjs';
 import {projectPrivateQaFiniteReferences} from '../../lib/mcp-qa-finite-trial-control.mjs';
 import {projectFiniteExternalPlan,validateFiniteObserverOutput} from '../../lib/mcp-qa-finite-external-contract.mjs';
 import {finiteObserverInstanceId} from '../../lib/mcp-qa-finite-observer.mjs';
-export async function finiteFinalizerFixture(){
- const base=await finiteRestorationFixture({configure:p=>{p.intentId='a'.repeat(64);p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});}});
+export async function finiteFinalizerFixture({configure=()=>{},at}={}){
+ const base=await finiteRestorationFixture({at,configure:p=>{p.intentId='a'.repeat(64);p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});configure(p);}});
  const {f,identity,store,ctl}=base,p=f.plan,v=projectPrivateQaFiniteReferences(identity),retained=base.retained.record;
  const policy=[{effect:'allow',resources:{'com.cloudflare.api.account.85d0d5dadac3341a564f22ce885e9eec':'*'},permission_groups:[{id:'1'.repeat(32)},{id:'2'.repeat(32)}]}];
  const custody={id:'a'.repeat(32),expiresAt:p.R1,policyHash:hash(policy),permissionGroupIds:['1'.repeat(32),'2'.repeat(32)]};
@@ -20,7 +20,7 @@ export async function finiteFinalizerFixture(){
  const primary={...retained.support.primary,observedAt:f.now()},writers={purpose:'afw.finite-writer-exclusion.v1',controlHash:v.controlHash,sealHash:retained.proof.sealHash,settledWriterHash:hash(retained.support.gate.writers),sourceRevision:p.canaryContainment.sourceRevision,closedModuleHash:p.deployments.canaryClosed.module.sha256,inventoryHash:'c'.repeat(64),knownActive:0,knownPending:0,unresolvedRemoteWrites:0,legacyContained:true,closedSourceQualified:true,observedAt:f.now()};
  const body={purpose:'afw.finite-final-primary.v1',intentId:p.intentId,controlHash:v.controlHash,planHash:v.planHash,proofHash:retained.proofHash,completionHash:completed.receipt.receiptHash,nativeClaimHash:qaClaim.claimHash,sealHash:retained.proof.sealHash,sourceRevision:v.sourceRevision,runtimeVersionId:v.runtimeVersionId,actorId:v.actorId,closedCanaryVersionId:p.deployments.canaryClosed.versionId,closedCanaryModuleHash:p.deployments.canaryClosed.module.sha256,primary,writers,observedAt:f.now()};
  const primaryReceipt={...body,receiptHash:hash(body)};
- const output={purpose:'afw.finite-observer-output.v1',instanceId:p.workflows.bootstrap,preview:v,retained,completion:completed.receipt,qaClaim,plan,primaryReceipt};
+ const output={purpose:'afw.finite-observer-output.v1',instanceId:p.workflows.bootstrap,provenance:{purpose:'afw.finite-observer-provenance.v1',instanceId:p.workflows.bootstrap,sourceRevision:v.sourceRevision,runtimeVersionId:v.runtimeVersionId},preview:v,retained,completion:completed.receipt,qaClaim,plan,primaryReceipt};
  validateFiniteObserverOutput(output,plan);
  let posts=0,claims=0,version=p.deployments.qaLive.versionId,deployment=p.deployments.qaLive.deploymentId,send;
  const state={output:structuredClone(output),jobId:99,claimMode:'issued',lostPost:false,late:false,blocked:false};
