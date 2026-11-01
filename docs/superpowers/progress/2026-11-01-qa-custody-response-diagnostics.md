@@ -1,0 +1,14 @@
+# SDD ledger — plan: docs/superpowers/plans/2026-11-01-qa-custody-response-diagnostics.md
+2026-11-01 UTC. Spec: docs/superpowers/specs/2026-11-01-qa-custody-response-diagnostics.md.
+BASE f6be907b96ad919916bc3e5aa53f22354a9ac2ee; main parent abed6474df8e5ffdab3962af605f6bfb7247279b.
+Isolated source branch feat/qa-custody-response-diagnostics-20261101. Source rollback only.
+Pre-flight: one standalone inspector/CLI/test task; no shared files with active finite-finalizer work.
+
+Task1: RED source8b5284dfe957e8fb69943ebf586b7b820855de45; qualifierd9d257632fbb30cea58486f10276a18fcea3a1a3; Actions41327740816/job124911139233/attempt1. node --test test/mcp-qa-bootstrap-custody-inspection.test.mjs ->94tests/76PASS/18FAIL/0cancelled/0skip. All18 new cases failed on absent diagnostic fields, original76 preserved.
+Task1: GREEN source/code HEADb3065bed225041522946af872cb7acbb560dcf64/treead64f7c1e981ab982ca363df1e5794f7daf1b4d0; qualifier2bccc80f1177f6fe8b8eec59e4aa607c85eefbb6; Actions41327872847/job124911537814/attempt1 SUCCESS. node --test test/mcp-qa-bootstrap-custody-inspection.test.mjs ->94PASS/0FAIL/0cancelled/0skip. npm ci --ignore-scripts --no-audit --no-fund ->exit0 (hosted only). npx --no-install eslint lib/mcp-qa-bootstrap-custody-inspection.mjs scripts/qa-bootstrap-custody-inspection.mjs test/mcp-qa-bootstrap-custody-inspection.test.mjs ->exit0/no diagnostics.
+Task1: exact source/qualifier blob readbacks matched all3files (hashes in report). Production workflow unchanged. Temporary qualifier workflow delivery-excluded; no environment/secrets/live effects.
+Task1: Ruling: no private-helper API or source-transform seam for tests; public malformed/getter exception boundary tested, helper input guaranteed own-data by actual bounded JSON.parse. Descriptor use inspectable; artificial parsed getter injection not exercised. Cost if wrong: diagnostic/source rework, no parser acceptance or authority expansion.
+Task1: Ruling: explicit cloud-only scope replaces local worktree/workspace/task scripts; GitHub source+hosted Actions only, no local code/temps/deps/build. Root owns final fresh combined review and normal PR/full CI before merge. Cost if wrong: qualification scheduling/source rework; no runtime effect.
+Task1: complete (BASEf6be907b96ad919916bc3e5aa53f22354a9ac2ee..codeb3065bed225041522946af872cb7acbb560dcf64; tests94PASS; scopedlint0). Final report+ledger are documentation-only after verified code HEAD; exact resulting delivery HEAD is externally read back in completion contract.
+Report: docs/superpowers/reports/2026-11-01-qa-custody-response-diagnostics.md.
+Final review: pending root fresh independent task+wholebranchreview; full PR CI pending. No PR/reviewer/live GET/token/role/credential/runtime/schema/Max action. operationalReadiness=false. Stop branch writes after this commit.
