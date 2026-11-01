@@ -32,7 +32,9 @@ def make_archive(manifest, mutation=None):
         with zipfile.ZipFile(stream, "w", compression=zipfile.ZIP_DEFLATED) as z:
             z.writestr("manifest.json", text)
             for role in ROLES:
-                name = role + "/index.mjs"
+                name = role + ("/closed-rollback.mjs" if role == "qaClosed" else "/index.mjs")
+                if role == "qaClosed" and mutation == "qa-closed-renamed":
+                    name = "qaClosed/index.mjs"
                 if role == "qaLive" and mutation in ("traversal", "absolute", "backslash"):
                     name = {"traversal": "../qaLive/index.mjs", "absolute": "/qaLive/index.mjs",
                             "backslash": "qaLive\\index.mjs"}[mutation]
@@ -94,7 +96,7 @@ class ArchiveTests(unittest.TestCase):
         self.assertEqual(result["manifest"], {"purpose": "fixture"})
         self.assertEqual(len(result["files"]), 5)
         for role in ROLES:
-            self.assertEqual(result["files"][role + "/index.mjs"],
+            self.assertEqual(result["files"][role + ("/closed-rollback.mjs" if role == "qaClosed" else "/index.mjs")],
                              {"sha256": hashlib.sha256(MODULE).hexdigest(), "bytes": len(MODULE)})
         self.assertNotIn(b"ARCHIVE_MUST_NEVER_EXECUTE", r.stdout)
         self.assertEqual(r.stderr, b"")
@@ -123,7 +125,7 @@ def rejection_test(mutation):
 for case in ("traversal", "absolute", "backslash", "symlink", "fifo", "extra", "directory",
              "duplicate", "entry-overflow", "crc", "declared-short", "declared-long",
              "encrypted", "unsupported", "nul", "bomb", "duplicate-json", "noncanonical",
-             "bad-json", "manifest-overflow"):
+             "bad-json", "manifest-overflow", "qa-closed-renamed"):
     setattr(ArchiveTests, "test_reject_" + case.replace("-", "_"), rejection_test(case))
 
 if __name__ == "__main__":

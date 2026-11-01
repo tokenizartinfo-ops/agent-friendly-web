@@ -23,7 +23,7 @@ const blob=b=>createHash('sha1').update('blob '+Buffer.byteLength(b)+'\0').updat
 const clone=o=>structuredClone(o);
 function fixture(){
  const manifest={purpose:'afw.finite-native-package.v1',sourceRevision:M,sourceTree:TREE,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:sha(WORKFLOW_TEXT),modules:{},compatibility:{}};
- for(const role of ROLES)manifest.modules[role]={sourceRevision:role==='operatorClosed'?OLD:M,sourceTree:role==='operatorClosed'?OLDTREE:TREE,module:{name:'index.mjs',sha256:sha(MODULE),bytes:MODULE.length,exports:[]},configurationHash:'1'.repeat(64),profileHash:'2'.repeat(64),bindingsHash:'3'.repeat(64)};
+ for(const role of ROLES)manifest.modules[role]={sourceRevision:role==='operatorClosed'?OLD:M,sourceTree:role==='operatorClosed'?OLDTREE:TREE,module:{name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',sha256:sha(MODULE),bytes:MODULE.length,exports:[]},configurationHash:'1'.repeat(64),profileHash:'2'.repeat(64),bindingsHash:'3'.repeat(64)};
  for(const k of ['qaClassesPreserved','qaNamespacesPreserved','canaryClassesPreserved','canaryNamespacesPreserved','closedEntrypointsDenied','legacyContainmentQualified'])manifest.compatibility[k]=true;
  const run={id:101,workflow_id:11,path:WORKFLOW,head_sha:M,head_branch:'main',event:'push',status:'completed',conclusion:'success',run_attempt:1,repository:{id:ID,full_name:REPO},head_repository:{id:ID,full_name:REPO}};
  const f={manifest,run,pages:null,artifact:null,calls:[],mutation:null,hook:null,workflowText:WORKFLOW_TEXT};
@@ -178,3 +178,16 @@ test('body read timeout is bounded even when stream ignores abort',async()=>{
 test('original elapsed clock cannot be reset by successful reads',async()=>{const f=fixture();let ticks=0;f.options.now=()=>AT+(ticks++>6?30001:0);await denied(f);});
 test('unknown/backwards time fails closed',async()=>{for(const value of [NaN,AT-1]){const f=fixture();let first=true;f.options.now=()=>first?(first=false,AT):value;await denied(f);}});
 test('parent abort remains active across actual archive subprocess',async()=>{const f=fixture(),c=new AbortController();f.options.signal=c.signal;f.hook=async url=>{if(url===SIGNED)setTimeout(()=>c.abort(),1);return null;};await denied(f);});
+
+test('closed QA archive cannot be silently renamed to index.mjs',async()=>{
+ const f=fixture();f.mutation='qa-closed-renamed';await denied(f);
+});
+test('provider signature query may contain escaped slash without weakening raw path limits',async()=>{
+ const f=fixture(),signed=SIGNED.replace('SYNTHETIC_PRIVATE_SIGNATURE','SYNTHETIC%2FPRIVATE%2BSIGNATURE%3D');
+ f.hook=async(url,init)=>{
+  if(url.endsWith('/202/zip'))return new Response(null,{status:302,headers:{location:signed}});
+  if(url===signed){assert.equal(init.headers.Authorization,undefined);return new Response(f.zip);}
+  return null;
+ };
+ assert.equal((await resolve(f)).manifest.modules.qaClosed.module.name,'closed-rollback.mjs');
+});

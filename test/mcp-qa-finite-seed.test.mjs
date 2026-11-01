@@ -8,8 +8,8 @@ const canonical=v=>Array.isArray(v)?'['+v.map(canonical).join(',')+']':v&&typeof
 const digest=(domain,v)=>createHash('sha256').update(domain+'\n'+canonical(v)).digest('hex');
 const roles=['qaLive','qaClosed','canaryLive','canaryClosed','operatorClosed'];
 function fixture(){
- const descriptor=()=>({sourceRevision:'c'.repeat(40),sourceTree:'d'.repeat(40),module:{name:'index.mjs',sha256:'e'.repeat(64),bytes:3145728,exports:['$export','A','_export','z']},configurationHash:'1'.repeat(64),profileHash:'2'.repeat(64),bindingsHash:'3'.repeat(64)});
- const manifest={purpose:'afw.finite-native-package.v1',sourceRevision:'b'.repeat(40),sourceTree:'f'.repeat(40),sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:'4'.repeat(64),modules:Object.fromEntries(roles.map(role=>[role,descriptor()])),compatibility:Object.fromEntries(['qaClassesPreserved','qaNamespacesPreserved','canaryClassesPreserved','canaryNamespacesPreserved','closedEntrypointsDenied','legacyContainmentQualified'].map(k=>[k,true]))};
+ const descriptor=role=>({sourceRevision:'c'.repeat(40),sourceTree:'d'.repeat(40),module:{name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',sha256:'e'.repeat(64),bytes:3145728,exports:['$export','A','_export','z']},configurationHash:'1'.repeat(64),profileHash:'2'.repeat(64),bindingsHash:'3'.repeat(64)});
+ const manifest={purpose:'afw.finite-native-package.v1',sourceRevision:'b'.repeat(40),sourceTree:'f'.repeat(40),sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:'4'.repeat(64),modules:Object.fromEntries(roles.map(role=>[role,descriptor(role)])),compatibility:Object.fromEntries(['qaClassesPreserved','qaNamespacesPreserved','canaryClassesPreserved','canaryNamespacesPreserved','closedEntrypointsDenied','legacyContainmentQualified'].map(k=>[k,true]))};
  return {purpose:'afw.finite-material-seed.v1',repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:1347578006,intentId:'a'.repeat(64),sourceRevision:'b'.repeat(40),commandId:'123',finalizer:{runId:11,attempt:1,jobId:12,workflowPath:'.github/workflows/afw-finite-finalizer.yml',seedStep:'seed-material'},build:{workflowPath:'.github/workflows/afw-finite-native-package.yml',runId:13,attempt:1,artifactId:14,artifactName:'afw-finite-native-package-'+'b'.repeat(40),artifactDigest:'sha256:'+'5'.repeat(64),manifestHash:digest('afw.finite-native-manifest.v1',manifest)},manifest};
 }
 const envelope=seed=>canonical({purpose:'afw.finite-material-seed-envelope.v1',seed,seedHash:digest('afw.finite-material-seed.v1',seed)});
@@ -140,4 +140,17 @@ test('envelope UTF8 byte bound, depth and node bounds fail closed',()=>{
  assert.throws(()=>api.validateFinitePackageManifest(nested),/Finite material/);
  assert.throws(()=>api.validateFinitePackageManifest({x:Array(2049).fill(1)}),/Finite material/);
  assert.throws(()=>api.decodeFiniteMaterialSeed(text.slice(0,-1)),/Finite material/);
+});
+
+test('fixed QA closed basename preserves closed-rollback.mjs and rejects relabeling',()=>{
+ const manifest=fixture().manifest;
+ assert.equal(api.validateFinitePackageManifest(manifest).modules.qaClosed.module.name,'closed-rollback.mjs');
+ manifest.modules.qaClosed.module.name='index.mjs';
+ assert.throws(()=>api.validateFinitePackageManifest(manifest),/Finite material/);
+});
+test('other fixed roles cannot adopt the QA closed module basename',()=>{
+ for(const role of roles.filter(r=>r!=='qaClosed')){
+  const manifest=fixture().manifest;manifest.modules[role].module.name='closed-rollback.mjs';
+  assert.throws(()=>api.validateFinitePackageManifest(manifest),/Finite material/);
+ }
 });
