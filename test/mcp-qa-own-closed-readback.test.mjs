@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import {qaClosedHttpFixture} from './fixtures/qa-closed-http.mjs';
+const transport=await import('../lib/mcp-qa-own-closed-api.mjs').catch(()=>({}));
+async function fixture(){const f=qaClosedHttpFixture();f.version=f.pins.qaClosed.id;const p=f.pins;
+ const built=await build({entryPoints:['lib/mcp-qa-own-closed-readback.mjs'],bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'compiled-test-pins-only',setup(b){b.onResolve({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({path:'pins',namespace:'test-pins'}));b.onLoad({filter:/.*/,namespace:'test-pins'},()=>({contents:'export const QA_CLOUD_CLOSED_PINS=Object.freeze('+JSON.stringify(p)+');',loader:'js'}));}}]});
+ const api=await import('data:text/javascript;base64,'+Buffer.from(built.outputFiles[0].text).toString('base64'));assert.equal(typeof api.readOwnClosedRuntime,'function');assert.equal(typeof transport.createOwnClosedReadbackApi,'function');const c=transport.createOwnClosedReadbackApi({credential:'PRIVATE-synthetic-read-token',fetchImpl:f.fetch,now:()=>f.wall});return{f,c,run:()=>api.readOwnClosedRuntime({request:c.request,now:()=>f.wall})};}
+test('complete closed proof is metadata-only and uses only fixedGETs',async()=>{const x=await fixture();try{const r=await x.run();assert.equal(r.status,'closed');assert.equal(r.readOnly,true);assert.equal(r.allOwnWorkflowsTerminal,true);assert.equal(r.reads,25);assert.equal(r.workflowInstances,3);for(const k of ['authorizesEffects','guardLivenessVerified','nativeWithdrawalVerified','operationalReadiness','mayRetry'])assert.equal(r[k],false);assert.ok(x.f.requests.every(r=>r.init.method==='GET'));assert.equal(JSON.stringify(r).includes('PRIVATE'),false);assert.equal(JSON.stringify(r).includes('SYNTHETIC_SECRET'),false);}finally{x.c.close();}});
+for(const [name,attack]of Object.entries({
+ 'unknown namespace with absentid':({url,response})=>{if(url.pathname.endsWith('/namespaces'))response.body.result[1]={class:'Unknown',script:'agent-friendly-web-independent-closure-qa',use_sqlite:true};},
+ 'module drift':({url,response})=>{if(url.pathname.includes('/versions/'))response.body.result.modules[0].content_base64=Buffer.from('PRIVATE').toString('base64');},
+ 'open flag':({url,response})=>{if(url.pathname.includes('/versions/'))response.body.result.bindings[0].text='true';},
+ 'secret value leaked by provider':({url,response})=>{if(url.pathname.includes('/versions/'))response.body.result.bindings[1].text='PRIVATE';},
+ 'active Workflow':({url,response})=>{if(url.pathname.endsWith('/instances'))response.body.result[0].status='running';},
+ 'incomplete registry':({url,response})=>{if(url.pathname.endsWith('/workflows'))response.body.result_info.total_count++;},
+ 'active Container':({url,response})=>{if(url.pathname.endsWith('/instances-v2'))response.body.result=[{id:'PRIVATE'}];}
+}))test('closed proof rejects '+name,async()=>{const x=await fixture();x.f.mutate=attack;try{await assert.rejects(x.run(),e=>!String(e).includes('PRIVATE'));}finally{x.c.close();}});
+for(const script of ['agent-friendly-web-independent-closure-qa','agent-friendly-web-release-operator','agent-friendly-web-delegated-canary'])test('unknown owned Workflow rejects script '+script,async()=>{const x=await fixture();x.f.mutate=({url,response})=>{if(url.pathname.endsWith('/workflows')){response.body.result.push({id:'99999999-9999-4999-8999-999999999999',name:'unknown-own',script_name:script,class_name:'Unknown',script_deleted:false,schedules:[]});response.body.result_info.count++;response.body.result_info.total_count++;}};try{await assert.rejects(x.run());}finally{x.c.close();}});
+test('final active pointer drift blocks and performs no write',async()=>{const x=await fixture();let qa=0;x.f.mutate=({url,response})=>{if(url.pathname.endsWith('/agent-friendly-web-independent-closure-qa/deployments')&&++qa===2)response.body.result.deployments[0].id='99999999-9999-4999-8999-999999999999';};try{await assert.rejects(x.run());assert.ok(x.f.requests.every(r=>r.init.method==='GET'));}finally{x.c.close();}});
