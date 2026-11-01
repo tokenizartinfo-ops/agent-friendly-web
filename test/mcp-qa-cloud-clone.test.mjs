@@ -9,6 +9,7 @@ async function fixture(){
  const api=await import('data:text/javascript;base64,'+Buffer.from(built.outputFiles[0].text).toString('base64'));
  const event={action:'created',repository:{id:1347578006,full_name:'tokenizartinfo-ops/agent-friendly-web'},issue:{number:497},sender:{id:290715446,login:'tokenizartinfo-ops',type:'User'},comment:{id:6550000100,body:'/afw-qa-deploy-observe-restore v1 '+source,created_at:new Date(at-1000).toISOString(),author_association:'OWNER',user:{id:290715446,login:'tokenizartinfo-ops',type:'User'}}};
  const context={repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'41200000100',runAttempt:'1',sourceRevision:source};
+ const admissionMono=performance.now();
  const admission=api.validateQaLifecycleCommand({event,context,now});
  const normal=f.fetch,posts={upload:0,activate:0,restore:0};let annotation=null;
  let mode=null;const response=(result,status=200)=>new Response(JSON.stringify({success:true,errors:[],messages:[],result}),{status,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}});
@@ -53,10 +54,12 @@ async function fixture(){
   if(url.origin==='https://api.cloudflare.com'&&p.endsWith('/'+f.pins.qaClosed.name+'/deployments')){
    f.requests.push({url,init});return response({deployments:[{id:f.deployment,strategy:'percentage',versions:[{version_id:f.version,percentage:100}],annotations:annotation?{'workers/message':annotation}:{}}]});
   }
+  if(mode==='nominalNeverSettles'&&p.endsWith('/versions/'+CANDIDATE))return new Promise(()=>{});
+  if(mode==='cleanupNeverSettles'&&posts.restore&&p.endsWith('/'+f.pins.qaClosed.name+'/deployments'))return new Promise(()=>{});
   if(mode==='finalReadbackFailure'&&posts.restore&&p.endsWith('/tails'))return response([{id:'PRIVATE_ACTIVE_TAIL'}]);
   return normal(input,init);
  };
- return{f,api,admission,posts,fetchImpl,setMode(v){mode=v;},run:()=>api.runQaClosedCloudClone({admission,credential:'PRIVATE-cf-token-for-test',githubCredential:'PRIVATE-gh-token-for-test',fetchImpl,now}),event,context,now};
+ return{f,api,admission,admissionMono,posts,fetchImpl,setMode(v){mode=v;},run:()=>api.runQaClosedCloudClone({admission,credential:'PRIVATE-cf-token-for-test',githubCredential:'PRIVATE-gh-token-for-test',fetchImpl,now}),event,context,now};
 }
 test('literal closed clone performs only upload/activate/restore once and independently closes all profiles',async()=>{
  const x=await fixture(),r=await x.run();assert.equal(r.purpose,'afw.qa-closed-cloud-clone.v1');assert.equal(r.status,'verified');assert.equal(r.controlPlaneOnly,true);assert.equal(r.nativeExecutionVerified,false);assert.equal(r.candidateVersionId,CANDIDATE);assert.equal(r.candidateObserved,true);assert.equal(r.restorationAcknowledged,true);assert.equal(r.finalClosedVerified,true);assert.equal(r.finalReadback.status,'closed');assert.equal(r.finalReadback.reads,25);assert.equal(r.finalReadback.profiles.qa.versionId,x.f.pins.qaClosed.id);assert.deepEqual(x.posts,{upload:1,activate:1,restore:1});assert.deepEqual(r.posts,x.posts);
@@ -97,3 +100,16 @@ test('noncooperative upload is bounded, remains uncertain and cannot be retried'
 test('unrelated provider product does not become an AFW runtime fault or block the fixed closed proof',async()=>{const x=await fixture();x.setMode('unrelatedIncident');const r=await x.run();assert.equal(r.status,'verified');assert.equal(r.otherIncidentCount,1);assert.equal(r.providerChecked,true);});
 
 test('cleanup of an owned unexpectedly active candidate must not depend on its nominal closed-profile proof',async()=>{const x=await fixture();x.setMode('unexpectedOpenActivation');const r=await x.run();assert.notEqual(r.status,'verified');assert.equal(x.posts.activate,0);assert.equal(x.posts.restore,1);assert.equal(r.finalClosedVerified,true);assert.equal(r.mayRetry,false);});
+
+for(const phase of ['nominal','cleanup'])test('stalled wall clock and original '+phase+' mono cutoff stop a noncooperative fetch promptly',async()=>{
+ const descriptor=Object.getOwnPropertyDescriptor(globalThis,'performance'),native=performance,nativeParse=JSON.parse,realOrigin=native.now();let offset=100,jumped=false,x;
+ Object.defineProperty(globalThis,'performance',{configurable:true,value:{now:()=>native.now()-realOrigin+offset}});
+ try{
+  x=await fixture();x.setMode(phase==='nominal'?'nominalNeverSettles':'cleanupNeverSettles');
+  const trigger=phase==='nominal'?CANDIDATE:RESTORE,end=phase==='nominal'?x.admission.expiresAt:x.admission.cleanupExpiresAt;
+  JSON.parse=(...args)=>{const value=nativeParse(...args);if(value?.result?.id===trigger)Object.defineProperty(value.result,'id',{enumerable:true,get(){if(!jumped){const target=x.admissionMono+(end-x.admission.admittedAt)-30;offset+=target-(native.now()-realOrigin+offset);jumped=true;}return trigger;}});return value;};
+  const begin=native.now(),r=await x.run(),elapsed=native.now()-begin;
+  assert.equal(jumped,true);assert.ok(elapsed<500,'original deadline must stop the operation, elapsed='+elapsed);
+  assert.notEqual(r.status,'verified');assert.equal(x.posts.upload,1);assert.equal(x.posts.activate,phase==='nominal'?0:1);assert.equal(x.posts.restore,phase==='nominal'?0:1);assert.equal(r.mayRetry,false);
+ }finally{JSON.parse=nativeParse;Object.defineProperty(globalThis,'performance',descriptor);}
+});
