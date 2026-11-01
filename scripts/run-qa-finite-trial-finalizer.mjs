@@ -21,18 +21,20 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
   const source=await resolveSource({admission,phase,now});
   assertQaFiniteConfirmationAdmission(admission,phase==='admit'?'nominal':'cleanup');
   const githubToken=env.GITHUB_TOKEN,finalizer=await readFiniteFinalizerGithubContext({admission,githubToken,fetchImpl,now,signal});
+  assertQaFiniteConfirmationAdmission(admission,phase==='admit'?'nominal':'cleanup');
   const credential=env.AFW_QA_CLOSED_TOKEN;
   const observer=createPrivateQaFiniteObserverHttp({admission:{intentId:admission.intentId,sourceRevision:admission.sourceRevision,T0:admission.createdAt,R1:admission.cleanupExpiresAt},source:{qaLive:source.deployments.qaLive,custody:source.custody},credential,githubToken,fetchImpl,now,signal});
   if(phase==='admit'){
-   await observer.qualifyCustody();assertQaFiniteConfirmationAdmission(admission);
+   const check=()=>assertQaFiniteConfirmationAdmission(admission);
+   await observer.qualifyCustody(signal,check);check();
    let created=false;
    try{const token=await claimFiniteObserverCreation({admission,githubToken,fetchImpl,now,signal});await observer.create(token);created=true;}catch{/* exact GET only after existing/uncertain creation */}
-   if(!created)await observer.read();
+   if(!created)await observer.read(signal,check);
    let preview;
-   for(let i=0;i<12;i++){assertQaFiniteConfirmationAdmission(admission);try{preview=await observer.preview();break;}catch{if(i===11)fail();await sleep(1000);}}
+   for(let i=0;i<12;i++){assertQaFiniteConfirmationAdmission(admission);try{preview=await observer.preview(signal,check);break;}catch{if(i===11)fail();await sleep(1000);}}
    const plan=validateFiniteExternalPlan({...source,preview,commandId:admission.commentId,finalizer});
    const github=createPrivateQaFiniteGithub({plan,githubToken,fetchImpl,now,signal});
-   await github.persistAdmission(credential);assertQaFiniteConfirmationAdmission(admission);
+   await github.persistAdmission(credential,admission);assertQaFiniteConfirmationAdmission(admission);
    await write('afw-finite-plan.json',JSON.stringify(plan));return {status:'ready',operationalReadiness:false};
   }
   if(phase==='poll'){

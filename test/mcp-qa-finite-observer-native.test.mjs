@@ -43,7 +43,7 @@ export class Native extends IndependentClosure{
 export class PrivateQaBootstrap extends BaseBootstrap{
  async run(event,step){
   console.log('synthetic workflow input',JSON.stringify(event));
-  return super.run(event,{sleepUntil:(...args)=>step.sleepUntil(...args),do:(name,options,fn)=>step.do(name,options,async()=>{try{const value=await fn();console.log('synthetic step complete',name);return value;}catch(error){console.log('synthetic step failed',name,String(error),error.stack);throw error;}})});
+  return super.run(event,{sleepUntil:(...args)=>step.sleepUntil(...args),do:(name,options,fn)=>step.do(name,options,async()=>{try{const value=await fn();console.log('synthetic step complete',name,name==='finite-qa-restore-claim'?JSON.stringify(value):'');return value;}catch(error){console.log('synthetic step failed',name,String(error),error.stack);throw error;}})});
  }
 }
 export default {async fetch(request,env){
