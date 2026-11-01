@@ -24,7 +24,7 @@ export async function githubFixture(base,{origin='original'}={}){
    if(state.mode==='lost')throw Error('fixture secret');if(state.mode==='late')f.f.setNow(v.R1);
    return response(value,201);
   }
-  if(path.startsWith('/git/ref/'))return response(rows.get('refs/'+path.slice('/git/ref/'.length))??{},rows.has('refs/'+path.slice('/git/ref/'.length))?200:404);
+  if(path.startsWith('/git/ref/')){const r=response(rows.get('refs/'+path.slice('/git/ref/'.length))??{},rows.has('refs/'+path.slice('/git/ref/'.length))?200:404);if(state.mode==='cached-404'&&r.status===404)r.headers.set('age','10');return r;}
   if(path.startsWith('/git/tags/'))return response(tags.get(path.split('/').at(-1)));
   throw Error('unexpected fixed path');
  };

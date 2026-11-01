@@ -85,7 +85,7 @@ jobs:
         run: |
           # Trusted once-launched attempt1 entry. No retry/supervisor or recovery
           # wrapper may regenerate this coherence marker.
-          export AFW_FINITE_RESTORE_ORIGINAL_PID=$
+          export AFW_FINITE_RESTORE_ORIGINAL_PID=$$
           exec node scripts/run-qa-finite-trial-finalizer.mjs restore
       - uses: actions/upload-artifact@v4
         if: always()

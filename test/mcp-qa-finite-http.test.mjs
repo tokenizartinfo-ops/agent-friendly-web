@@ -85,3 +85,10 @@ test('actual child process inheriting original PID marker cannot admit a send ca
  const child=spawnSync(process.execPath,['--input-type=module','-e',code],{encoding:'utf8',timeout:20000});
  assert.equal(child.status,0,child.stderr);assert.deepEqual(JSON.parse(child.stdout),{admitted:false,requests:0,child:true});
 });
+
+test('cached 404 cannot authorize the original tag POST or refund the consumed capability',async()=>{
+ const x=await fixture();x.state.mode='cached-404';
+ assert.equal(await x.make().claimSend(x.record(),new AbortController().signal,()=>{}),'uncertain');x.state.mode='normal';
+ assert.equal(await x.make().claimSend(x.record(),new AbortController().signal,()=>{}),'uncertain');
+ assert.equal(x.tagPosts,0);assert.equal(x.refPosts,0);
+});
