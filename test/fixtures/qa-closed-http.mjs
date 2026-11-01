@@ -9,7 +9,7 @@ export const names=['agent-friendly-web-independent-closure-qa','agent-friendly-
 export const ids=['0771c5f5-88b1-428a-b700-d51aa726b35f','c570b60b-95dc-48e1-89f3-9c4651691dbc','2607abae-cec3-4e35-89eb-8b8572262b54','855dc5c1-e757-49aa-a6f5-cb02f8d03ea4'];
 export const deployments=['11111111-1111-4111-8111-111111111111','22222222-2222-4222-8222-222222222222','33333333-3333-4333-8333-333333333333','44444444-4444-4444-8444-444444444444'];
 export function qaClosedHttpFixture(){
- const start=Date.now(),parent=new AbortController(),f={wall:start,version:ids[0],deployment:deployments[0],requests:[],claims:new Set(),mutate:()=>{},cfAckLost:false,claimAckLost:false,bodyMode:null};
+ const start=Date.now(),parent=new AbortController(),f={expectedRedirect:'error',wall:start,version:ids[0],deployment:deployments[0],requests:[],claims:new Set(),mutate:()=>{},cfAckLost:false,claimAckLost:false,bodyMode:null};
  const moduleBytes=Buffer.from('export default {};'),versions=Object.fromEntries(ids.map(id=>[id,{id,compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat','global_fetch_strictly_public'],main_module:'index.mjs',usage_model:'standard',bindings:[{name:'AFW_TEST_ENABLED',type:'plain_text',text:'false'},{name:'SYNTHETIC_SECRET',type:'secret_text'}],modules:[{name:'index.mjs',content_type:'application/javascript+module',content_base64:moduleBytes.toString('base64')}],urls:[]}]));
  const pin=(name,id,deploymentId)=>({name,id,configurationHash:hash('afw.qa-closed-rollback-configuration.v1\n'+canonical(Object.fromEntries(['compatibility_date','compatibility_flags','main_module','usage_model','bindings'].map(k=>[k,versions[id][k]])))),bindingCount:2,module:{name:'index.mjs',bytes:moduleBytes.length,sha256:hash(moduleBytes)},flagCount:1,...deploymentId?{deploymentId}:{}});
  f.parent=parent;f.pins={qaCandidate:pin(names[0],ids[0]),qaClosed:pin(names[0],ids[1]),canary:pin(names[1],ids[2],deployments[1]),operator:pin(names[2],ids[3],deployments[2])};f.versions=versions;
@@ -17,7 +17,7 @@ export function qaClosedHttpFixture(){
  const answer=(result,result_info)=>({success:true,errors:[],messages:[],result,...result_info?{result_info}:{}});
  f.fetch=async(input,init)=>{
   const url=new URL(input),path=url.pathname;f.requests.push({url,init});
-  assert.equal(init.redirect,'error');assert.equal(init.cache,'no-store');assert.ok(init.signal instanceof AbortSignal);assert.equal(init.signal.aborted,false);
+  assert.equal(init.redirect,f.expectedRedirect);assert.equal(init.cache,'no-store');assert.ok(init.signal instanceof AbortSignal);assert.equal(init.signal.aborted,false);
   let status=200,body;
   if(url.origin==='https://api.github.com'){
    assert.equal(path,'/repos/tokenizartinfo-ops/agent-friendly-web/git/refs');assert.equal(init.method,'POST');

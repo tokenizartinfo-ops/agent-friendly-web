@@ -13,3 +13,7 @@ El mock anterior sustituía global fetch y no construía un Request real de Work
 Primero reproducir en Workflow/Miniflare con fetch nativo real y outboundService fijo: probar que Request error rechaza sin envío, exigir dos snapshots completos por el transporte real, y un302 que nunca visite su Location. El backend de prueba devuelve respuestas sintéticas y no llama la red. Después, solo el modo nativo del adaptador usa manual; cualquier status distinto200 sigue rechazado antes del cuerpo. Modo Node/GHA conserva error; cabeceras/no-store/fecha/caché/tamaño/128GETs/2concurrentes/original5s/AbortSignal/pins/fences sin cambios. No follow, nuevo URL o scope.
 
 Pruebas dirigidas y completas/lint/build/revisión antes de merge. Nueva cualificación de fuente y nuevo intento técnico separado solo tras esa evidencia; no reutilizar ventana05a8 ni pedir un grant humano. operationalReadinessfalse; no ARM/guard/retirada/PCoff por esta corrección.
+
+## RED nativo comprobado
+
+b12dd2fe/CI41261765916/job124716297829:944PASS2FAIL. El constructor real rechaza error sin envío; el transporte real reproduce EXACTAMENTE blocked/active_deployments/request_failed/httpStatusnull/reads2 antes de llegar al backend, y el caso302 tampoco llega a enviar. Los mocks anteriores y el paquete siguen pasando. Corrección propuesta: solo native true→manual; Node/GHA false→error. El servidor sintético hace explícita la expectativa por modo y la prueba de fetch real usa también global_fetch_strictly_public como producción. No redirecciones seguidas, cambios de URL o plazos.
