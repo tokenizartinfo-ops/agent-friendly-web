@@ -17,6 +17,13 @@ const fail=()=>{throw Error('Private event Node unavailable');};
 const program=globalThis.__AFW_NODE_PROGRAM__??'',sourceRevision=globalThis.__AFW_NODE_SOURCE_REVISION__??'';
 
 export class AfwOwnEventNode extends DurableObject{
+ #finite(){
+  const nativeCleanup=Object.freeze({program,programSourceRevision:sourceRevision,close:async boundary=>{
+   const c=this.#host(true),assertCurrent=()=>{boundary.assertCurrent();c.current();if(boundary.signal.aborted)fail();};
+   assertCurrent();const result=await c.host.close({...boundary,assertCurrent});assertCurrent();return result;
+  }});
+  return resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env,nativeCleanup});
+ }
  #host(historical=false,diagnostic){
   const trace=stage=>{try{diagnostic?.record(stage);}catch{}};
   const config=readDossierEventHostPolicy({enabled:historical||this.env.AFW_DOSSIER_EVENTS_ENABLED==='true',env:this.env,historical}),p=config.policy;
@@ -37,12 +44,15 @@ export class AfwOwnEventNode extends DurableObject{
  }
  fetch(){return deny();}
  // Private fixed finite methods; closed profiles have no compiled factory.
- async readFiniteTrialAdmissionJournal(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.readFiniteTrialAdmissionJournal(args[0]);}
- async beginFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.beginFiniteTrialReservation(args[0]);}
- async settleFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.settleFiniteTrialReservation(args[0]);}
- async sealFiniteTrialAdmission(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.sealFiniteTrialAdmission(args[0]);}
- async readFiniteTrialCleanupReadiness(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.readFiniteTrialCleanupReadiness(args[0]);}
- async observeFiniteTrialCleanup(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.observeFiniteTrialCleanup(args[0]);}
+ async withdrawFiniteTrialPermissions(...args){if(args.length!==1)fail();const h=await this.#finite();return h.withdrawFiniteTrialPermissions(args[0]);}
+ async closeFiniteTrial(...args){if(args.length!==1)fail();const h=await this.#finite();return h.closeFiniteTrial(args[0]);}
+ async readFiniteTrialReductionReceipts(...args){if(args.length!==1)fail();const h=await this.#finite();return h.readFiniteTrialReductionReceipts(args[0]);}
+ async readFiniteTrialAdmissionJournal(...args){if(args.length!==1)fail();const h=await this.#finite();return h.readFiniteTrialAdmissionJournal(args[0]);}
+ async beginFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await this.#finite();return h.beginFiniteTrialReservation(args[0]);}
+ async settleFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await this.#finite();return h.settleFiniteTrialReservation(args[0]);}
+ async sealFiniteTrialAdmission(...args){if(args.length!==1)fail();const h=await this.#finite();return h.sealFiniteTrialAdmission(args[0]);}
+ async readFiniteTrialCleanupReadiness(...args){if(args.length!==1)fail();const h=await this.#finite();return h.readFiniteTrialCleanupReadiness(args[0]);}
+ async observeFiniteTrialCleanup(...args){if(args.length!==1)fail();const h=await this.#finite();return h.observeFiniteTrialCleanup(args[0]);}
  // Private original-custody observation; no caller selectors or live runtime.
  async observeRetired(...args){try{if(args.length)fail();return await observeOwnRetiredCustody({env:this.env,ctx:this.ctx});}catch{fail();}}
  // Fixed read-only challenged wrappers. No selectors, fallback or new authority.
