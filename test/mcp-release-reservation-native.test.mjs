@@ -10,7 +10,7 @@ test('native named Workflow reserves one immutable successor only under its sepa
  const r=await run({reserve:'true'});
  assert.equal(r.httpStatus,404);assert.equal(r.output.status,'confirmed',JSON.stringify({output:r.output,counts:r.counts,counters:r.counters,reservationCount:r.reservationCount}));
  assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
- assert.equal(r.reservationCount,1);
+ assert.equal(r.reservationCount,1);assert.equal(r.historyPreserved,true);assert.equal(r.immutableHistoryPreserved,true);
  assert.deepEqual(r.output.reservation,{purpose:'afw.successor-reservation.v1',trialId:'e'.repeat(64),state:'prepared',mayBoot:false});
  assert.equal(r.counters.retirementReads,2);assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);
  assert.equal(JSON.stringify(r.output).includes('synthetic_read_credential'),false);

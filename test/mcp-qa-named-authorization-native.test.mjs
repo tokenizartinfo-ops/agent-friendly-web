@@ -50,12 +50,12 @@ function nominalBuild(deny){
  };
 }
 test('unmounted native named runtime traverses all18 hooks and continues through its own immutable reservation',async()=>{
- const r=await rehearseExactNamedConfirmation({artifact,build:nominalBuild(null),mode:'confirmed',reserve:'true'});
+ const r=await rehearseExactNamedConfirmation({artifact,build:nominalBuild(null),mode:'confirmed',reserve:'true',historyMode:'original_only'});
  assert.equal(r.output.status,'confirmed',JSON.stringify(r.output));assert.equal(r.reservationCount,1);assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});assert.equal(new Set(r.output.authorizationStages).size,18);assert.ok(r.output.authorizationStages.includes('successor_after_write'));assert.equal(r.output.operationalReadiness,false);
 });
 test('unmounted native named runtime stops at actual generation withdrawal while preserving admitted effects',async()=>{
  for(const [stage,counts,reservations]of [['activation_before_attempt',{attempts:0,receipts:0,acceptances:0},0],['successor_after_write',{attempts:1,receipts:1,acceptances:1},1]]){
-  const r=await rehearseExactNamedConfirmation({artifact,build:nominalBuild(stage),mode:'confirmed',reserve:'true'});
+  const r=await rehearseExactNamedConfirmation({artifact,build:nominalBuild(stage),mode:'confirmed',reserve:'true',historyMode:'original_only'});
   assert.equal(r.output.status,'uncertain',JSON.stringify(r.output));assert.deepEqual(r.counts,counts);assert.equal(r.reservationCount,reservations);assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);
  }
 });

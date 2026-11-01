@@ -17,7 +17,7 @@ function guardedBuild({deny=null,shiftStage=null,shiftOccurrence=1,shiftMs=0,ret
   return {script:result.outputFiles[0].text,planHash:hash(JSON.stringify(bundle))};
  };
 }
-const run=(guard,extra={})=>rehearseExactNamedConfirmation({artifact,build:guardedBuild(guard),mode:'confirmed',reserve:'true',...extra});
+const run=(guard,extra={})=>rehearseExactNamedConfirmation({artifact,build:guardedBuild(guard),mode:'confirmed',reserve:'true',historyMode:'original_only',...extra});
 
 test('named-only internal authorization is required before admission and cannot be borrowed by publication',async()=>{
  const r=await run({deny:'workflow_admission'});

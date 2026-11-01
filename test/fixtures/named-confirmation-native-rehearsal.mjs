@@ -6,11 +6,14 @@ import {activationConfigurationHash} from '../../lib/mcp-activation-observer.mjs
 import {RELEASE_TARGET} from '../../lib/mcp-release-operator-policy.mjs';
 import {inertNamedConfirmationPolicy} from './inert-named-confirmation-policy.mjs';
 import {reservationFaultHarness} from './reservation-fault-harness.mjs';
-import {seedNamedHistoryFixture} from './named-known-cancellation.mjs';
+import {knownCancellationNativeHarness,seedKnownCancellationFault} from './known-cancellation-native-harness.mjs';
+import {namedHistoryFixture,seedNamedHistoryFixture} from './named-known-cancellation.mjs';
 
 // CI-only composition. Actual compiled operator, native Workflow/D1/namespace,
 // exact historical module bytes; ALL provider replies and identities synthetic.
-export async function rehearseExactNamedConfirmation({artifact,build,mode,payloadMode='object',invocation='workflow',reserve=null,retirement='stopped',replay=false,fault=null,historyFixture=false}){
+export async function rehearseExactNamedConfirmation({artifact,build,mode,payloadMode='object',invocation='workflow',reserve=null,retirement='stopped',replay=false,fault=null,historyFixture=false,historyMode='known_cancellation',nativeFault=null,measure=false,replayExpected='uncertain'}){
+ assert.ok(['known_cancellation','original_only'].includes(historyMode),'Unknown native history fixture mode');
+ const completeHistory=reserve==='true'||historyFixture;
  if(!['confirmed','tail-corrupt','regional-incident','metadata-reject','second-active'].includes(mode))throw Error('Unknown CI rehearsal');
  const compiledIdentity=await compileFixture({stdin:{resolveDir:process.cwd(),sourcefile:'named-custody-fixture.mjs',contents:`
 import {DurableObject} from 'cloudflare:workers';
@@ -70,6 +73,7 @@ export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-
   };
   const operator={name:'operator',modules:true,script:compiled.script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_RELEASE_OPERATOR_ENABLED:'true',AFW_RELEASE_WORKFLOW_ENABLED:'true',AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED:'true',AFW_RELEASE_READ_TOKEN:'synthetic_read_credential'},durableObjects:{AFW_RELEASE_EVENTS_NODE:{className:'Own',scriptName:'identity'}},d1Databases:{RELEASE_DB:'exact-named-rehearsal'},workflows:{FLOW:{name:'afw-exact-confirmation-qualification',className:'AfwReleaseWorkflow'}},outboundService};
   if(reserve!==null)operator.bindings.AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED=reserve;
+  if(measure||nativeFault!==null)operator.script+='\n'+knownCancellationNativeHarness({fault:nativeFault,policyExpiresAt:window.expiresAt,grantId:JSON.parse(events.text).grantId});
   if(fault!==null)operator.script+='\n'+reservationFaultHarness(fault);
   const retired={purpose:'afw.node-retirement-observation.v1',containerId:ids.original,programHash:manifest.original.programHash,sourceRevision:manifest.original.sourceRevision,processGeneration:'8'.repeat(64),image:'cloudflare/debian-trixie',createdAt:window.startAt-10000,expiresAt:window.startAt-5000,closedAt:window.startAt-3000,observedAt:window.startAt-2000,physicalStopVerified:false,mayStartSuccessor:false};
   identity.bindings={RETIREMENT:retirement,...(retirement==='absent'?{}:{RETIRED:JSON.stringify(retired)})};
@@ -82,21 +86,18 @@ export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-
    for(const statement of sql.matchAll(/CREATE TABLE[\s\S]*?\);|CREATE (?:UNIQUE )?INDEX[^;\r\n]+;|CREATE TRIGGER[^\r\n]*? END;/g))await db.prepare(statement[0]).run();
   }
   let alternativeGrantEligible=null;
-  if(reserve==='true'&&historyFixture){alternativeGrantEligible=await seedNamedHistoryFixture(db,compiled.fixtureHistory,retired);}
-  if(reserve==='true'&&!historyFixture){
-   await db.exec('CREATE TABLE dossier_node_process_admissions(grant_id TEXT,container_id TEXT,process_generation TEXT,program_hash TEXT,source_revision TEXT,image TEXT);CREATE TABLE dossier_node_process_closures(grant_id TEXT,container_id TEXT,process_generation TEXT,program_hash TEXT,source_revision TEXT,image TEXT,closed_at INTEGER);');
-   const schema=readFileSync('db/dossier-successor-reservation.sql','utf8');
-   for(const statement of schema.matchAll(/CREATE TABLE[\s\S]*?\);|CREATE TRIGGER[^\n]+;/g))await db.prepare(statement[0]).run();
-   await db.prepare('INSERT INTO dossier_node_process_admissions VALUES(?,?,?,?,?,?)').bind('original',ids.original,retired.processGeneration,retired.programHash,retired.sourceRevision,retired.image).run();
-   await db.prepare('INSERT INTO dossier_node_process_closures VALUES(?,?,?,?,?,?,?)').bind('original',ids.original,retired.processGeneration,retired.programHash,retired.sourceRevision,retired.image,retired.closedAt).run();
+  if(reserve==='true'){
+   const fixtureHistory=compiled.fixtureHistory??namedHistoryFixture({artifact,policy});
+   alternativeGrantEligible=await seedNamedHistoryFixture(db,fixtureHistory,retired,{historyMode,omitCurrent:nativeFault==='missing-current'});
+   await seedKnownCancellationFault(db,nativeFault,fixtureHistory,retired);
   }
   await db.prepare('INSERT INTO dossier_publication_attempts VALUES(?,?,?,?,?,?,?,?)').bind(policy.plan.artifactKey,RELEASE_TARGET.accountId,RELEASE_TARGET.workerName,artifact.sourceRevision,artifact.sourceTree,artifact.programHash,artifact.workerHash,Date.now()).run();
   await db.prepare('INSERT INTO dossier_publication_receipts VALUES(?,?,?,?)').bind(policy.plan.artifactKey,'79593972-3200-464f-aff6-76f5864dd399',etag,Date.now()).run();
   const preserveTables=['delegated_access_grants','dossier_monitoring_consent_events','dossier_node_process_admissions','dossier_node_process_closures'];
-  const snapshotHistory=async()=>historyFixture?Object.fromEntries(await Promise.all(preserveTables.map(async table=>[table,(await db.prepare('SELECT * FROM '+table+' ORDER BY 1').all()).results]))):null;
+  const snapshotHistory=async()=>completeHistory?Object.fromEntries(await Promise.all(preserveTables.map(async table=>[table,(await db.prepare('SELECT * FROM '+table+' ORDER BY 1').all()).results]))):null;
   const initialHistory=await snapshotHistory();
   const httpStatus=(await (await mf.getWorker('operator')).fetch('https://synthetic.invalid/')).status;
-  let output;
+  let output,replayOutput;
   if(invocation==='rpc')output=await (await (await mf.getWorker('rpc-caller')).fetch('https://synthetic.invalid/')).json();
   else{
   const {FLOW}=await mf.getBindings('operator'),instance=await FLOW.create({id:'afw-release-'+compiled.planHash,params:payloadMode==='string'?JSON.stringify({planHash:compiled.planHash}):{planHash:compiled.planHash}});
@@ -104,10 +105,11 @@ export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-
   do{state=await instance.status();if(['complete','errored','terminated'].includes(state.status))break;await new Promise(resolve=>setTimeout(resolve,25));}while(Date.now()<end);
   assert.equal(state.status,'complete','native qualification Workflow must actually complete');
   output=state.output;
-  if(replay){await instance.restart();let again;const replayEnd=Date.now()+12000;do{again=await instance.status();if(['complete','errored','terminated'].includes(again.status)&&again.output?.status==='uncertain')break;await new Promise(resolve=>setTimeout(resolve,25));}while(Date.now()<replayEnd);assert.equal(again.status,'complete');assert.equal(again.output?.status,'uncertain');}
+  if(replay){await instance.restart();let again;const replayEnd=Date.now()+12000;do{again=await instance.status();if(['complete','errored','terminated'].includes(again.status)&&again.output?.status===replayExpected)break;await new Promise(resolve=>setTimeout(resolve,25));}while(Date.now()<replayEnd);assert.equal(again.status,'complete');assert.equal(again.output?.status,replayExpected);replayOutput=again.output;}
   }
   const counts={};for(const suffix of ['attempts','receipts','acceptances'])counts[suffix]=(await db.prepare('SELECT COUNT(*) n FROM dossier_activation_'+suffix).first()).n;
+  const finalHistory=await snapshotHistory();
   const reservationCount=reserve==='true'?(await db.prepare('SELECT COUNT(*) n FROM dossier_successor_reservations').first()).n:0;
-  return {httpStatus,output,counts,counters,reservationCount,activationKey:policy.plan.activationKey,versionId,deploymentId,...(historyFixture?{historyPreserved:JSON.stringify(initialHistory)===JSON.stringify(await snapshotHistory()),alternativeGrantEligible}:{})};
+  return {httpStatus,output,counts,counters,reservationCount,activationKey:policy.plan.activationKey,versionId,deploymentId,replayOutput,...(completeHistory?{historyPreserved:JSON.stringify(initialHistory)===JSON.stringify(await snapshotHistory()),immutableHistoryPreserved:JSON.stringify(['dossier_node_process_admissions','dossier_node_process_closures','dossier_monitoring_consent_events'].map(k=>initialHistory[k]))===JSON.stringify(['dossier_node_process_admissions','dossier_node_process_closures','dossier_monitoring_consent_events'].map(k=>(finalHistory??{})[k])),alternativeGrantEligible}:{})};
  }finally{await mf.dispose();}
 }

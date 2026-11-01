@@ -1,5 +1,5 @@
 import {WorkerEntrypoint,WorkflowEntrypoint} from 'cloudflare:workers';
-import {runReleaseOperator,runReleaseWorkflow} from '../../lib/mcp-release-runtime.mjs';
+import {runReleaseOperator,runReleaseWorkflow,runKnownCancellationReleaseWorkflow} from '../../lib/mcp-release-runtime.mjs';
 import {runSuccessorRetirementObservation} from '../../lib/mcp-successor-retirement-observation.mjs';
 import {runReleaseIdentityObservation} from '../../lib/mcp-release-identity-observation.mjs';
 import {runReleaseCustodyClockObservation} from '../../lib/mcp-release-custody-clock-observation.mjs';
@@ -19,6 +19,7 @@ export class AfwReleaseWorkflow extends WorkflowEntrypoint {
   if(this.env.AFW_RELEASE_CUSTODY_CLOCK_OBSERVATION_ENABLED==='true')return runReleaseCustodyClockObservation({env:this.env,event,step});
   if(this.env.AFW_RELEASE_IDENTITY_OBSERVATION_ENABLED==='true')return runReleaseIdentityObservation({env:this.env,event,step});
   if(this.env.AFW_RELEASE_RETIREMENT_OBSERVATION_ENABLED==='true')return runSuccessorRetirementObservation({env:this.env,event,step});
+  if(bundle?.policy?.operation==='confirm_named'&&this.env.AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED==='true')return runKnownCancellationReleaseWorkflow({bundle,env:this.env,event,step});
   return runReleaseWorkflow({bundle,env:this.env,event,step});
  }
 }
