@@ -68,3 +68,9 @@ Preserve original 4args/18stages/70s/5s/20s and outer clocks/history. Source cla
 ## Root execution addendum
 BASE is assigned by the following root dispatch; previous B3 is now accepted througha776e115 (fixcodef2b35826,72coveringPASS/scopedreviewclean). Preserve the strict job-start string/safe-integer check.
 This task is source compiler/profile staging only. Sourceauthoritydefaultfullpackagequalification stays unavailable until actualNative5/4C2/4C3 mounts and privacy-qualifiedhistoricalinputs exist. No artifact claims from function presence, compatibility=true fixtures or an unattested readiness flag. Positive staging uses actual compiled classes and source-owned templates; no production caller/pins/true-witness/registration bypass. No schema/DDL/remote preservation or metadata probe. Prior data/journals/history are never reinterpreted duringv2codec change.
+
+## Root C1 scope addition: finite withdrawal profile (2026-11-01)
+
+Source audit requires AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED='true': createFiniteOwnNativeCleanupHost.withdrawFiniteTrialPermissions calls createFiniteOwnReductionActions, whose construction and every current() verify the actual flag, exact raw withdrawalPolicyHash, own container/program/source, original consent and C0/C1. Preserve those predicates.
+
+Root authorizes a finite-entrypoint-only subclass of the actual SQLite AfwOwnEventNode denying legacy withdrawPermissions and withdrawPermissionsForPlan before env/host/auth/storage/budget/transport; preserve constructor/namespace and inherited finite path. Ordinary entrypoint remains unchanged. Use hosted meaningful RED/GREEN poisoned-env tests and actual compiled class dry-run. This is not entered-old-await or cross-generation compatibility proof; those remain C3. RETIREMENT_READ_ENABLED stays false: finite retirement uses createSuccessorRetirementHandoff with its separate finite journal prefix. Whole-package source qualification remains unavailable.

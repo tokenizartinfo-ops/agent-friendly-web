@@ -6,6 +6,10 @@ test('historical_content_never_claims_M',()=>{
  const versions={qaClosed:'c570b60b-95dc-48e1-89f3-9c4651691dbc',canaryClosed:'2607abae-cec3-4e35-89eb-8b8572262b54',operatorClosed:'855dc5c1-e757-49aa-a6f5-cb02f8d03ea4'},keys={qaClosed:'qaClosed',canaryClosed:'canary',operatorClosed:'operator'};
  const manifest={purpose:'afw.finite-native-package.v2',sourceRevision:M,sourceTree:tree,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:'c'.repeat(64),modules:Object.fromEntries(roles.map(role=>[role,{provenance:versions[role]?{kind:'historical-content-pin.v1',receiptPath:'lib/mcp-qa-cloud-closed-pins.mjs',receiptBlobSha:'26213123304eea25e652a52d808d25b7e0e3475e',receiptKey:keys[role],versionId:versions[role]}:{kind:'compiled-source.v1',sourceRevision:M,sourceTree:tree},module:{name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',bytes:1,sha256:'d'.repeat(64),exports:[]},publicStatic:{purpose:'afw.finite-public-static-profile.v1',configurationHash:'1'.repeat(64),profileHash:'2'.repeat(64),bindingsHash:'3'.repeat(64)}}])),compatibility:Object.fromEntries(['qaClassesPreserved','qaNamespacesPreserved','canaryClassesPreserved','canaryNamespacesPreserved','closedEntrypointsDenied','legacyContainmentQualified'].map(k=>[k,true]))};
  assert.deepEqual(validateFinitePackageManifest(manifest),manifest);
+ const historical=structuredClone(manifest),hp=historical.modules.canaryClosed.provenance;
+ Object.assign(hp,{kind:'historical-source-pin.v1',sourceRevision:'2a4773737764c5038aaa0b3528b43df2a0572441',sourceTree:'637af253296ac1c771cb73ea353cb960a2e59204'});
+ assert.deepEqual(validateFinitePackageManifest(historical),historical);
+ hp.sourceRevision=M;assert.throws(()=>validateFinitePackageManifest(historical));
  for(const mutate of [
   m=>m.modules.qaClosed.provenance.sourceRevision=M,
   m=>m.modules.operatorClosed.provenance={kind:'compiled-source.v1',sourceRevision:M,sourceTree:tree},
@@ -19,12 +23,12 @@ import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 // Actual compiled Worker/DO entrypoints under workerd. No provider, credentials,
 // Container or grant is provisioned; all trap instrumentation is fixture-only.
-test('native finite legacy delivery and schedule cannot enter any host capability',async()=>{
+test('native finite legacy delivery, withdrawal and schedule cannot enter any host capability',async t=>{
  const contents=`
  import worker,{AfwOwnEventNode} from './worker/mcp-own/finite.mjs';
  export class Native extends AfwOwnEventNode{
   constructor(ctx,env){const touches=[];super(ctx,new Proxy(env,{get(_v,k){touches.push(String(k));throw Error('host forbidden');}}));this.touches=touches;}
-  async fixture(method){try{await this[method]('old-event','old-subscription');return {denied:false,touches:this.touches};}catch{return {denied:true,touches:this.touches};}}
+  async fixture(method){const present=typeof this[method]==='function',args=method==='withdrawPermissions'?[]:method==='withdrawPermissionsForPlan'?[{policyHash:'a'.repeat(64),expiresAt:1}]:['old-event','old-subscription'];try{await this[method](...args);return {present,denied:false,touches:this.touches};}catch{return {present,denied:true,touches:this.touches};}}
  }
  export default{async fetch(request,env){const method=new URL(request.url).pathname.slice(1);
   if(method==='schedule'){const touches=[];const result=await worker.scheduled({scheduledTime:Date.now()},new Proxy(env,{get(_v,k){touches.push(String(k));throw Error('host forbidden');}}));return Response.json({result,touches});}
@@ -34,7 +38,31 @@ test('native finite legacy delivery and schedule cannot enter any host capabilit
  const b=await build({stdin:{contents,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],define:{'globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__':'"finite_trial_event"'}});
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:b.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],durableObjects:{NODE:{className:'Native',useSQLite:true}}}));
  try{
-  for(const method of ['deliverOwnSaved','deliverSaved'])assert.deepEqual(await (await mf.dispatchFetch('https://fixture.invalid/'+method)).json(),{denied:true,touches:[]});
+  for(const method of ['deliverOwnSaved','deliverSaved','withdrawPermissions','withdrawPermissionsForPlan','withdrawFiniteTrialPermissions'])await t.test(method,async()=>assert.deepEqual(await (await mf.dispatchFetch('https://fixture.invalid/'+method)).json(),{present:true,denied:true,touches:[]}));
   assert.deepEqual(await (await mf.dispatchFetch('https://fixture.invalid/schedule')).json(),{result:null,touches:[]});
+ }finally{await mf.dispose();}
+});
+
+test('actual finite QA class constructs fixed actor and retains closed diagnostic without material authority',async()=>{
+ const sourceRevision='b'.repeat(40);
+ const contents=`
+ import {IndependentClosure,PrivateQaPreregistration,PrivateQaCatalog,PrivateQaBootstrap,PrivateQaNamedConfirmation} from './worker/independent-closure/finite.mjs';
+ export {IndependentClosure,PrivateQaPreregistration,PrivateQaCatalog,PrivateQaBootstrap,PrivateQaNamedConfirmation};
+ export default {async fetch(request,env){
+  const actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));
+  const closed=JSON.parse(await actor.observeOwnQaClosedContext({operation:'observe_closed_context',expectedVersionId:env.AFW_QA_VERSION.id,expectedSourceRevision:'${sourceRevision}'}));
+  let material=false;try{await actor.previewFiniteTrialMaterial({intentId:'a'.repeat(64),sourceRevision:'${sourceRevision}'});material=true;}catch{}
+  return Response.json({closed,material});
+ }};
+ `;
+ const b=await build({stdin:{contents,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],define:{'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify(sourceRevision)}});
+ const {finiteWranglerProfileTemplate}=await import('../lib/mcp-qa-finite-profile.mjs');
+ // Synthetic version ID; actual workerd SQLite namespace/class construction.
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:b.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{...finiteWranglerProfileTemplate('qaLive').vars,AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'}},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'IndependentClosure',useSQLite:true}}}));
+ try{
+  const r=await(await mf.dispatchFetch('https://fixture.invalid')).json();
+  assert.equal(r.closed.status,'observed');assert.equal(r.closed.allClosed,true);
+  assert.equal(r.closed.authorizesEffects,false);assert.equal(r.closed.operationalReadiness,false);
+  assert.equal(r.material,false);
  }finally{await mf.dispose();}
 });
