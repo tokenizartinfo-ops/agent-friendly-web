@@ -1,4 +1,4 @@
-name: Finite material Task1 temporary source qualifier
+name: Finite material Task2 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -19,10 +19,13 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Task1 finite codec and identity
-        run: node --test test/mcp-qa-finite-seed.test.mjs test/mcp-qa-finite-phase-inventory.test.mjs test/mcp-qa-finite-trial-control.test.mjs test/mcp-qa-finite-trial-control-native.test.mjs test/mcp-finite-nominal-control.test.mjs
-      - name: Direct external-plan consumers
-        run: node --test test/mcp-qa-finite-finalizer.test.mjs test/mcp-qa-finite-http.test.mjs
-      - name: Scoped lint
+      - name: Task2 real archive resolver
+        run: node --test test/mcp-qa-finite-package.test.mjs
+      - name: Python archive adversarial cases
         if: always()
-        run: npx eslint lib/mcp-qa-finite-seed.mjs lib/mcp-qa-finite-trial-control.mjs lib/mcp-qa-finite-external-contract.mjs test/mcp-qa-finite-seed.test.mjs test/mcp-qa-finite-phase-inventory.test.mjs test/mcp-qa-finite-trial-control.test.mjs test/fixtures/qa-finite-trial.mjs
+        run: python -m unittest discover -s test -p 'finite_archive_test.py'
+      - name: Scoped lint and Python compile
+        if: always()
+        run: |
+          npx eslint lib/mcp-qa-finite-package.mjs lib/mcp-qa-finite-source.mjs test/mcp-qa-finite-package.test.mjs
+          python -m py_compile scripts/verify-qa-finite-archive.py test/finite_archive_test.py
