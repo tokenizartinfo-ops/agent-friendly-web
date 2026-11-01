@@ -53,7 +53,7 @@ for(const [label,mutate]of [
  ['wrong job',f=>{const fn=f.primary.finalizer;f.primary.finalizer=async()=>{const v=await fn();v.job.id++;return v;};}],
  ['changed legacy',f=>{f.rows.get('afw.private-prepared-dispatch.v1').phase='complete';}],
  ['present restoration',f=>{f.rows.set('afw.successor-canary-restoration.v1',null);}]
-])test('arm denies '+label,async()=>{const f=finiteFixture();mutate(f);assert.equal((await control(f).prepare()).status,'blocked');assert.equal(f.puts,0);});
+])test('arm denies '+label,async()=>{const f=finiteFixture();mutate(f);const pending=['queued finalizer','ready boolean','unfinished admit','wrong source','wrong job'].includes(label);assert.equal((await control(f).prepare()).status,pending?'uncertain':'blocked');if(pending){assert.ok(f.puts>0);assert.equal(f.alarm,f.plan.C0);}else assert.equal(f.puts,0);});
 test('unknown initial commit stays pending, read does not arm or retry',async()=>{
  const f=finiteFixture();f.lost.add(1);const c=control(f);assert.equal((await c.prepare()).status,'uncertain');const n=f.puts;
  assert.equal((await control(f).read()).phase,'pending');assert.equal((await control(f).read()).nominalEligible,false);assert.equal((await control(f).prepare()).status,'blocked');assert.equal(f.puts,n);
@@ -156,7 +156,7 @@ test('narrow primary consent never widens or survives an awaited finalizer expir
  f.primary.subscription=async()=>{const v=f.facts.subscription();if(expire)f.setNow(f.plan.T0+10);return v;};
  const c=control(f);if(operation!=='prepare')await c.prepare();const n=f.puts;expire=true;
  const r=await (operation==='prepare'?c.prepare():operation==='claimEffect'?c.claimEffect('nominal'):c.captureObservedFacts('subscription'));
- assert.equal(r.status,'blocked');assert.equal(f.puts,n);
+ assert.equal(r.status,operation==='prepare'?'uncertain':'blocked');if(operation==='prepare'){assert.ok(f.puts>n);assert.equal(f.alarm,f.plan.C0);}else assert.equal(f.puts,n);
  }
 });
 test('consent expiry inside pending transaction prevents acknowledgment/nominal arm',async()=>{
@@ -226,4 +226,11 @@ test('finite plan pins exact closed module bytes and canonical cleanup policy',(
   if(mode==='policy')f.plan.closePolicyHash='0'.repeat(64);
   assert.throws(()=>control(f));
  }
+});
+
+test('first finalizer readiness failure leaves durable pending control and original alarm',async()=>{
+ const f=finiteFixture();f.primary.finalizer=async()=>{throw Error('synthetic unavailable resource admission');};const c=control(f);
+ assert.equal((await c.prepare()).status,'uncertain');assert.equal(f.alarm,f.plan.C0);
+ const r=await control(f).read();assert.equal(r.phase,'pending');assert.equal(r.nominalEligible,false);
+ assert.equal((await control(f).claimEffect('nominal')).status,'blocked');assert.equal((await control(f).claimEffect('close')).status,'issued');
 });
