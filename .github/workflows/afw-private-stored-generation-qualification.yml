@@ -1,0 +1,27 @@
+name: Private stored generation qualification
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  qualify:
+    if: github.head_ref == 'feat/private-stored-generation-reader-20261101'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Stored generation and authority regressions
+        run: node --test test/mcp-qa-stored-generation-reader.test.mjs test/mcp-qa-generation-ledger.test.mjs test/mcp-qa-generation-resolver.test.mjs test/mcp-qa-named-authorization.test.mjs
+      - name: Existing native observers and preparation
+        run: node --test test/mcp-qa-generation-resolver-native.test.mjs test/mcp-qa-generation-preparation.test.mjs test/mcp-qa-generation-preparation-native.test.mjs test/mcp-qa-historical-identity-native.test.mjs
+      - name: Target lint
+        run: npx --no-install eslint lib/mcp-qa-generation-ledger.mjs lib/mcp-qa-stored-generation-reader.mjs test/mcp-qa-stored-generation-reader.test.mjs
