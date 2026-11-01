@@ -6,3 +6,5 @@ Verified GitHub main7163bde8a956f82fe1a55bae1116123c3ee72371 before writing this
 Status: spec/plan drafted; ROOT fresh design review pending, implementation NOT STARTED. Known-cancellation adapter remains a separate active dependency. No tests run for these prose-only additions; native/source acceptance belongs to the proposed tasks.
 
 No runtime/source implementation edits, grants, credentials, DDL, deployments, commands/trials, local files/dependencies or subagents. Existing closed runtimes and legacy history were not mutated. operationalReadiness=false; physical stop, native unsubscribe, useful review and PC-off remain unproved by this design.
+
+One consolidated design fix wave after root fresh review: concrete native seal/writer-terminal/no-admission proof and discriminated finite consumers; strict legacy stopped-instance contract preserved; Task4 bound to accepted known-cancellation wrapper/original event; mandatory phase-aware complete inventory; separate finalizer workflow/run/concurrency without readiness-lock cycle. Scoped root rereview pending. No implementation/runtime changes.
