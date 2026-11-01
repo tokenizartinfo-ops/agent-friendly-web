@@ -1,5 +1,5 @@
 import {readFiniteTrialCleanupProofHead,readRetainedFiniteCleanupProof,readFiniteTrialCleanupCompletion} from '../../lib/mcp-qa-finite-cleanup-store.mjs';
-import {runPrivateQaFiniteTrialAlarm} from '../../lib/mcp-qa-finite-trial-guard.mjs';
+import {runPrivateQaFiniteTrialAlarm,readPrivateQaFiniteNominalControl} from '../../lib/mcp-qa-finite-trial-guard.mjs';
 import {readPrivateQaGenerationPreparation,runPrivateQaGenerationPreparation} from '../../lib/mcp-qa-generation-preparation.mjs';
 import {readPrivateQaNamedPacket,runPrivateQaNamedPacketObservation} from '../../lib/mcp-qa-named-preflight.mjs';
 import {readPrivateQaCurrentGeneration,readPrivateQaRetainedGeneration} from '../../lib/mcp-qa-generation-resolver.mjs';
@@ -179,6 +179,7 @@ export class PrivateQaCatalog extends DurableObject {
 // provisioning, registration, HTTP routes or implicit enrollment.
 export class IndependentClosure extends DurableObject {
  async #finiteRead(fn,args){if(args.length!==1||!isPrivateCanaryRestorationActor(this.env,this.ctx))throw Error('Finite read unavailable');return fn({...args[0],storage:this.ctx.storage});}
+ async readFiniteTrialNominalControl(...args){if(args.length!==1||!isPrivateCanaryRestorationActor(this.env,this.ctx))throw Error('Finite nominal control unavailable');return readPrivateQaFiniteNominalControl({ctx:this.ctx,env:this.env,refs:args[0]});}
  readFiniteTrialCleanupProofHead(...args){return this.#finiteRead(readFiniteTrialCleanupProofHead,args);}
  readRetainedFiniteCleanupProof(...args){return this.#finiteRead(readRetainedFiniteCleanupProof,args);}
  readFiniteTrialCleanupCompletion(...args){return this.#finiteRead(readFiniteTrialCleanupCompletion,args);}

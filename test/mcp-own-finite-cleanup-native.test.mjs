@@ -11,12 +11,15 @@ test('native finite seal survives restart and accounts for every held writer',as
  const contents=`
  import {AfwOwnEventNode} from './worker/mcp-own/index.mjs';
  import {createFiniteOwnNativeCleanupHost,installFiniteOwnNativeCleanupFactory} from './lib/mcp-own-finite-cleanup-host.mjs';
+ import {nominalFixture} from './test/fixtures/finite-nominal-control.mjs';
+ import {finiteAdmissionIdentity} from './lib/mcp-own-finite-cleanup-proof.mjs';
  import {finiteFixture,digest} from './test/fixtures/qa-finite-trial.mjs';
  async function make(ctx,env){
   const f=finiteFixture({at:Number(env.T0)}),p=f.plan;p.resources.containerId=env.AFW_DOSSIER_EVENTS_NODE.idFromName('afw-own-event-first-successor-v1').toString();
   const clock=await ctx.storage.get('fixture:clock')??p.T0;
   const control={plan:p,planHash:digest(p.purpose,p),controlHash:'1'.repeat(64)};
-  const options={ctx,env,control,sourceRevision:p.canaryContainment.sourceRevision,now:()=>clock,providerRead:async()=>({purpose:'afw.finite-provider-inventory.v1',applicationId:p.resources.applicationId,observedAt:clock,instances:[],totalCount:0}),readCustody:async()=>{throw Error('synthetic absent custody');},readInstance:async()=>{throw Error('synthetic absent instance');}};
+  const nominal=nominalFixture(finiteAdmissionIdentity(control),{sourceRevision:p.source.revision,runtimeVersionId:p.deployments.qaLive.versionId,actorId:p.resources.actorId,monitorHash:p.monitorHash,consentExpiresAt:p.selectors.expiresAt},clock);
+  const options={ctx,env,control,readNominalControl:async()=>nominal.value,sourceRevision:p.canaryContainment.sourceRevision,now:()=>clock,providerRead:async()=>({purpose:'afw.finite-provider-inventory.v1',applicationId:p.resources.applicationId,observedAt:clock,instances:[],totalCount:0}),readCustody:async()=>{throw Error('synthetic absent custody');},readInstance:async()=>{throw Error('synthetic absent instance');}};
   return createFiniteOwnNativeCleanupHost(options);
  }
  installFiniteOwnNativeCleanupFactory(({ctx,env})=>make(ctx,env));
