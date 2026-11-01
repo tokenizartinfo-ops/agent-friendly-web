@@ -214,3 +214,17 @@ for(const kind of ['storage','get','list'])test('private snapshot refuses method
  else wrap(f,ctx,null,t=>Object.defineProperty({...t},kind,{enumerable:true,get(){touched++;throw Error('accessor');}}));
  assert.deepEqual(await make(options).read(first.planHash,undefined),blocked);assert.equal(touched,0);
 });
+
+test('first completed snapshot cannot be relabeled across the await continuation microtask gap',async()=>{
+ const {f,first,ctx,options}=await fixture({startOffset:1,duration:1}),base=f.storage;
+ let firstTxReturned=false,queued=false,crossed=false,transactions=0;
+ ctx.storage={transaction:fn=>base.transaction(fn).then(r=>{if(++transactions===1)firstTxReturned=true;return r;})};
+ options.now=()=>{
+  const at=f.now();
+  if(firstTxReturned&&!queued){queued=true;queueMicrotask(()=>{crossed=true;f.setNow(f.capsule.expiresAt);});}
+  return at;
+ };
+ const result=await make(options).read(first.planHash,undefined);
+ assert.equal(queued,true);assert.equal(crossed,true);assert.equal(result.status,'blocked');
+ assert.deepEqual(result,blocked);
+});
