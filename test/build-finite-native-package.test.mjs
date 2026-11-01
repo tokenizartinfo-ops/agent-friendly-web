@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {existsSync} from 'node:fs';
+import {mkdtemp,readFile,appendFile,symlink,rm,realpath} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join,resolve} from 'node:path';
+import {verifyMcpReleaseSource} from '../scripts/mcp-release-source.mjs';
 let api;
 try{api=await import('../scripts/build-finite-native-package.mjs');}catch{/* Explicit missing compiler RED. */}
 const sourceRevision=()=>execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
@@ -33,4 +37,35 @@ test('actual compiler staging hashes final bytes and retains source classes with
  assert.deepEqual(r.modules.canaryLive.module.exports,['AfwNodeControl','AfwOwnEventNode','default']);
  assert(r.modules.qaLive.module.exports.includes('IndependentClosure'));
  assert.equal(existsSync('output/finite-native-package/manifest.json'),false);
+});
+
+test('compiler imported from checkout A rejects independently verified checkout B with different Node source',async t=>{
+ const ownerRoot=await realpath(process.cwd()),temporary=await mkdtemp(join(tmpdir(),'afw-finite-checkout-boundary-')),other=join(temporary,'checkout-b');
+ let added=false;
+ t.after(async()=>{
+  if(added)execFileSync('git',['worktree','remove','--force',other],{cwd:ownerRoot,stdio:'pipe'});
+  assert.equal(resolve(temporary).startsWith(resolve(tmpdir())+'/afw-finite-checkout-boundary-'),true);
+  await rm(temporary,{recursive:true,force:true});
+ });
+ execFileSync('git',['worktree','add','--detach',other,sourceRevision()],{cwd:ownerRoot,stdio:'pipe'});added=true;
+ const nodePath='worker/mcp-node/server.mjs';
+ await appendFile(join(other,nodePath),'\nconsole.info("SYNTHETIC_CHECKOUT_B_NODE_PROGRAM");\n');
+ execFileSync('git',['add','--',nodePath],{cwd:other,stdio:'pipe'});
+ execFileSync('git',['-c','user.name=AFW synthetic test','-c','user.email=synthetic@example.invalid','-c','core.hooksPath=/dev/null','commit','-m','test-only divergent Node source'],{cwd:other,stdio:'pipe'});
+ await symlink(join(ownerRoot,'node_modules'),join(other,'node_modules'),'dir');
+ const revision=execFileSync('git',['rev-parse','HEAD'],{cwd:other,encoding:'utf8'}).trim();
+ assert.notEqual(revision,sourceRevision());
+ assert.notEqual(await readFile(join(other,nodePath),'utf8'),await readFile(join(ownerRoot,nodePath),'utf8'));
+ // B is a real clean, independently verified checkout. The rejection must be
+ // the executing-compiler boundary, not invalid Git/configuration/dependencies.
+ assert.equal((await verifyMcpReleaseSource({cwd:other,sourceRevision:revision})).sourceRevision,revision);
+ await assert.rejects(api.compileFiniteNativeStaging({cwd:other,sourceRevision:revision}),{message:'Finite native package unavailable'});
+});
+test('canonical symlink alias of executing checkout remains the same trusted root',async t=>{
+ const temporary=await mkdtemp(join(tmpdir(),'afw-finite-root-alias-')),alias=join(temporary,'same-checkout');
+ t.after(async()=>{assert.equal(resolve(temporary).startsWith(resolve(tmpdir())+'/afw-finite-root-alias-'),true);await rm(temporary,{recursive:true,force:true});});
+ await symlink(await realpath(process.cwd()),alias,'dir');
+ const staged=await api.compileFiniteNativeStaging({cwd:alias,sourceRevision:sourceRevision()});
+ assert.equal(staged.completePackage,false);assert.equal(staged.sourceRevision,sourceRevision());
+ assert(staged.files['canaryLive/index.mjs'].length>0);
 });
