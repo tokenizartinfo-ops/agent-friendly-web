@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {build} from 'esbuild';
 import {rehearseExactNamedConfirmation} from './fixtures/named-confirmation-native-rehearsal.mjs';
+import {namedHistoryFixture} from './fixtures/named-known-cancellation.mjs';
 import {runReleaseWorkflow} from '../lib/mcp-release-runtime.mjs';
 import {RELEASE_TARGET} from '../lib/mcp-release-operator-policy.mjs';
 
@@ -14,7 +15,7 @@ function guardedBuild({deny=null,shiftStage=null,shiftOccurrence=1,shiftMs=0,ret
  return async bundle=>{
   const source="import {WorkflowEntrypoint} from 'cloudflare:workers';\nimport {runReleaseWorkflow} from './lib/mcp-release-runtime.mjs';\nexport {AfwReleaseOperator} from './worker/mcp-release/index.mjs';\nconst bundle="+JSON.stringify(bundle)+";\nconst stages=[],counts={};let clockApplied=false;const nativeNow=performance.now.bind(performance);\nasync function authorize(stage){stages.push(stage);counts[stage]=(counts[stage]||0)+1;if(stage==="+JSON.stringify(shiftStage)+"&&counts[stage]==="+shiftOccurrence+"){await Promise.resolve();Object.defineProperty(performance,'now',{configurable:true,value:()=>nativeNow()+"+shiftMs+"});clockApplied=performance.now()-nativeNow()>="+(shiftMs-1)+";}if(stage==="+JSON.stringify(deny)+")return false;return "+returned+";}\nexport class AfwReleaseWorkflow extends WorkflowEntrypoint {async run(event,step){const output=await runReleaseWorkflow({bundle,env:this.env,event,step,authorize});return {...output,authorizationStages:[...stages],clockApplied};}}\nexport default{fetch(){return new Response(null,{status:404});}};";
   const result=await build({stdin:{contents:source,resolveDir:fileURLToPath(new URL('..',import.meta.url)),sourcefile:'guarded-named-native.mjs',loader:'js'},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',define:{'globalThis.__AFW_RELEASE_OPERATOR_BUNDLE__':JSON.stringify(bundle)}});
-  return {script:result.outputFiles[0].text,planHash:hash(JSON.stringify(bundle))};
+  return {script:result.outputFiles[0].text,planHash:hash(JSON.stringify(bundle)),fixtureHistory:namedHistoryFixture(bundle,'generic-without-history')};
  };
 }
 const run=(guard,extra={})=>rehearseExactNamedConfirmation({artifact,build:guardedBuild(guard),mode:'confirmed',reserve:'true',...extra});
