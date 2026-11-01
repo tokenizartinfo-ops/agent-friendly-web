@@ -172,7 +172,7 @@ for(const boundary of ['start','expiry','short'])test('interval segments reject 
  assert.deepEqual(await make(options).read(first.planHash,undefined),blocked);
 });
 for(const drift of ['wall','version','abort','short','expiry','mono'])test('outer final settlement fence '+drift,async()=>{
- const input=drift==='short'?{startOffset:1,duration:1}:drift==='expiry'?{duration:1000}:{};
+ const input=drift==='short'?{startOffset:1,duration:1}:drift==='expiry'?{duration:2000}:{};
  const {f,first,options}=await fixture(input),parent=new AbortController(),race=Promise.race,at=f.now(),original=Object.getOwnPropertyDescriptor(performance,'now');let changed=false;
  Promise.race=function(values){return Reflect.apply(race,this,[values]).then(r=>{if(!changed&&r?.purpose===purpose&&r.status==='selected'){changed=true;
   if(drift==='wall')f.setNow(at+5000);
