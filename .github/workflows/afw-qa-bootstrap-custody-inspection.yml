@@ -1,0 +1,34 @@
+name: AFW bootstrap custody inspection
+run-name: AFW bootstrap custody inspection comment-${{ github.event.comment.id }} source-${{ github.sha }}
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    if: >-
+      ${{ github.event_name == 'issue_comment' && github.event.action == 'created' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.repository.id == 1347578006 && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event.issue.number == 497 && !github.event.issue.pull_request && github.event.repository.owner.id == 290715446 && github.event.repository.owner.login == 'tokenizartinfo-ops' && github.event.repository.owner.type == 'User' && github.event.comment.user.id == 290715446 && github.event.comment.user.login == 'tokenizartinfo-ops' && github.event.comment.user.type == 'User' && github.event.sender.id == 290715446 && github.event.sender.login == 'tokenizartinfo-ops' && github.event.sender.type == 'User' && github.event.comment.author_association == 'OWNER' && github.event.comment.body == format('/afw-qa-bootstrap-custody-inspect v1 {0}', github.sha) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment: afw-qa-cloud-closed-rollback
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Inspect actual token identity without resource authority
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+        run: node scripts/qa-bootstrap-custody-inspection.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-qa-bootstrap-custody-inspection-${{ github.run_id }}-${{ github.run_attempt }}
+          path: afw-qa-bootstrap-custody-inspection/result.json
+          if-no-files-found: error
+          retention-days: 7
