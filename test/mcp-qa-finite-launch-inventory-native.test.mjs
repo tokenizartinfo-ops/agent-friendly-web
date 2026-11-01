@@ -45,11 +45,12 @@ export class LaunchFixture extends DurableObject{
   const snapshot=()=>readPrivateQaFiniteControlSnapshot({storage:this.ctx.storage,nativePin,plan:JSON.stringify(f.plan),parent});
   const before=await snapshot();
   if(mode==='foreign-head')await this.ctx.storage.put('afw.qa-finite-trial.v1:head',{intentId:'foreign'});
+  if(mode==='orphan-guard')await this.ctx.storage.put('afw.qa-finite-guard.v1:'+f.plan.intentId+':state',{purpose:'afw.finite-guard-state.v1',controlHash:before.control.controlHash,deliveries:0,state:'armed',nextAt:f.plan.C0});
   if(mode==='incomplete')f.incomplete=true;
   if(mode==='provider-nominal')f.providerNominal='running';
   if(mode==='provider-expired')f.onRequest=async()=>{f.setNow(f.now()+5000);};
   if(mode==='snapshot-change')f.onRequest=async()=>{await this.ctx.storage.put('afw.qa-finite-child-create.v1:'+f.plan.intentId+':send',{purpose:'uncertain'});};
-  if(['prelaunch','issued','ack','prepared-tamper','alarm-tamper','reconstruct-pending'].includes(mode)){
+  if(['prelaunch','issued','ack','prepared-tamper','alarm-tamper','cleanup-started','reconstruct-pending'].includes(mode)){
    f.launcher=true;const admission=f.primary.admission;
    f.primary.admission=async()=>{const r=await i.observeBeforeCreation();if(r.kind!=='never_issued')throw Error('inventory unavailable');return admission();};
    if(mode==='reconstruct-pending')f.primary.finalizer=async()=>{throw Error('lost finalizer');};
@@ -69,9 +70,10 @@ export class LaunchFixture extends DurableObject{
    const prepared={purpose:'afw.qa-finite-launch-prepared.v1',...identity,guardStateHash:finiteHash(after.guard),preparedAt:f.now(),...p.launchPolicy};
    const prefix='afw.qa-finite-child-create.v1:'+p.intentId+':';
    await this.ctx.storage.transaction(async tx=>{await tx.put(prefix+'prepared',prepared);});
+   if(mode==='cleanup-started')await control.claimEffect('close');
    if(mode==='alarm-tamper')await this.ctx.storage.setAlarm(p.C0+1);
    if(mode==='prepared-tamper')await this.ctx.storage.put(prefix+'prepared',{...prepared,nominalClaimHash:'0'.repeat(64)});
-   if(mode==='prelaunch'||mode==='prepared-tamper'||mode==='alarm-tamper')return {result:await i.observeBeforeCreation(),prepared,claim:claimed.claim};
+   if(mode==='prelaunch'||mode==='prepared-tamper'||mode==='alarm-tamper'||mode==='cleanup-started')return {result:await i.observeBeforeCreation(),prepared,claim:claimed.claim};
    f.setNow(p.launchPolicy.launchAt);
    const p2=inventory.createPrivateQaFiniteLaunchParent({now:f.now,deadline:f.now()+5000}),c2=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent:p2});
    const i2=await inventory.createPrivateQaFiniteLaunchInventory({ctx:this.ctx,env:this.env,context:c2,parent:p2});
@@ -170,3 +172,6 @@ test('reconstructed pending is factual uncertainty, never new arm authority',asy
 
 test('actual storage transaction ACK after parent expiry releases no observation',async()=>{assert.equal((await native('storage-expired')).result.kind,'unavailable');});
 test('prelaunch checks the actual sole C0 alarm as well as guard metadata',async()=>{assert.equal((await native('alarm-tamper')).result.kind,'unavailable');});
+
+test('orphan guard without a finite HEAD is not an unspent launch',async()=>{assert.equal((await native('orphan-guard')).result.kind,'unavailable');});
+test('actual cleanup permission claim prevents a new prelaunch observation',async()=>{assert.equal((await native('cleanup-started')).result.kind,'unavailable');});
