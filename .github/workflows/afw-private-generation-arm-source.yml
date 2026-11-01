@@ -1,0 +1,23 @@
+name: Private generation ARM source qualification
+on:
+  push:
+    branches: [feat/private-generation-arm-host-20261101]
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Directed private ARM composition
+        run: node --test test/mcp-qa-generation-arm*.test.mjs
+      - name: Existing composition regression
+        run: node --test test/mcp-qa-generation-ledger*.test.mjs test/mcp-qa-generation-material.test.mjs test/mcp-qa-generation-preparation*.test.mjs test/mcp-qa-arm-eligibility.test.mjs test/mcp-qa-arm-http.test.mjs
+      - name: Focused lint
+        run: npx eslint lib/mcp-qa-generation-arm.mjs test/mcp-qa-generation-arm*.test.mjs test/fixtures/qa-generation-arm*.mjs
