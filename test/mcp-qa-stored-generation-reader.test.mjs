@@ -20,7 +20,7 @@ async function fixture({startOffset=-1000,duration=60000,ancestor=false}={}){
  let last=first;
  if(ancestor){
   await ledger.withdraw();f.setNow(f.capsule.expiresAt+1);
-  f.capsule={...f.capsule,predecessor:{kind:'generation',planHash:first.planHash,infoHash:first.infoHash,sequence:1},trialId:'8'.repeat(64),grantId:'next-grant',eventId:'9'.repeat(64),startAt:f.now(),expiresAt:f.now()+60000};
+  f.capsule={...f.capsule,predecessor:{kind:'generation',planHash:first.planHash,infoHash:first.infoHash,sequence:1},trialId:'8'.repeat(64),grantId:'next-grant',eventId:'9'.repeat(64),startAt:f.now(),expiresAt:f.now()+1000};
   last=await createPrivateQaGenerationLedger(f.options()).arm();assert.equal(last.status,'armed');
  }
  f.env.AFW_QA_VERSION={id:version};f.pinOptions.expectedVersionId=version;f.pinOptions.sourceRevision=source;
@@ -168,7 +168,8 @@ for(const stage of [1,2])test('hung transaction '+stage+' returns at original mo
 });
 for(const boundary of ['start','expiry','short'])test('interval segments reject '+boundary+' crossing between snapshots',async()=>{
  const input=boundary==='expiry'?{duration:2000}:boundary==='short'?{startOffset:1,duration:1}:{startOffset:1000};
- const {f,first,ctx,options}=await fixture(input);wrap(f,ctx,n=>{if(n===1)f.setNow(boundary==='start'?f.capsule.startAt:f.capsule.expiresAt);});
+ const {f,first,ctx,options}=await fixture(input),base=f.storage;let n=0;
+ ctx.storage={transaction:fn=>{if(++n===2)f.setNow(boundary==='start'?f.capsule.startAt:f.capsule.expiresAt);return base.transaction(fn);}};
  assert.deepEqual(await make(options).read(first.planHash,undefined),blocked);
 });
 for(const drift of ['wall','version','abort','short','expiry','mono'])test('outer final settlement fence '+drift,async()=>{
