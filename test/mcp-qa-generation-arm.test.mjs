@@ -109,3 +109,9 @@ test('concurrent invocations consume one host and admit only one ledger chain',a
  const r=await Promise.all([host.arm(x.namedBundleHash,x.parent.signal),host.arm(x.namedBundleHash,x.parent.signal)]);
  assert.deepEqual(r.map(v=>v.status),['armed','blocked']);assert.equal([...x.f.rows.keys()].filter(k=>k.startsWith(INFO)).length,1);assert.equal(x.eligibilityReads,2);
 });
+
+test('malformed factory reflection cannot expose private exception text',()=>{
+ assert.equal(typeof api.createPrivateQaGenerationArm,'function');
+ const hostile=new Proxy({}, {getPrototypeOf(){throw Error('synthetic-private-factory-detail');}});
+ assert.throws(()=>api.createPrivateQaGenerationArm(hostile),{message:'Private QA generation ARM unavailable'});
+});
