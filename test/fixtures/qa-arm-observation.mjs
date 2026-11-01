@@ -3,7 +3,7 @@ import {PRIVATE_QA_CLOSED_FLAGS} from '../../lib/mcp-qa-closed-context.mjs';
 export const observationId='e'.repeat(64),observationPurpose='afw.qa-arm-http-observation.v1';
 export const observationPolicies=['AFW_QA_HTTP_POLICY','AFW_QA_PREREGISTRATION','AFW_QA_CHALLENGE_IDENTITY','AFW_MCP_CLOSURE_POLICY','AFW_MCP_READER_PROBE_POLICY','AFW_MCP_PUBLISHER_PROBE_POLICY','AFW_MCP_CLOSURE_DISPATCH_POLICY'];
 export function armObservationFixture(){
- const f=qaClosedHttpFixture(),original=f.fetch,self='afw-qa-arm-'+observationId;
+ const f=qaClosedHttpFixture(),original=f.fetch,self='afw-qa-arm-'+observationId;f.expectedRedirect='manual';
  f.fetch=async(input,init)=>{const response=await original(input,init),body=await response.json(),url=new URL(input);
  if(url.pathname.includes('/afw-own-qa-private-bootstrap/instances'))body.result=[{id:self,status:'running',workflow_id:'06b6c3eb-ce59-4594-8b9e-2636977d56da',version_id:'opaque-workflow-version'}];
  f.attack?.({url,init,body});return new Response(JSON.stringify(body),{status:response.status,headers:response.headers});};
