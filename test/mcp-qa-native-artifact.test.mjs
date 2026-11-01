@@ -1,12 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {readFile, mkdtemp, mkdir, stat} from 'node:fs/promises';
+import {readFile, mkdtemp, mkdir, stat, writeFile, symlink} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 import {tmpdir} from 'node:os';
 import {join, resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
 
-const sourceRevision='a'.repeat(40);
+const sourceRevision=process.env.GITHUB_SHA??'a'.repeat(40);
 async function api(){
  const builder=await import('../lib/mcp-qa-native-wrapper-build.mjs').catch(()=>null);
  const validator=await import('../lib/mcp-qa-native-artifact.mjs').catch(()=>null);
@@ -32,10 +33,11 @@ test('separate context keeps wrapper bytes identical for distinct source revisio
 });
 test('builder rejects caller-selected inputs and malformed source revisions',async()=>{
  const {buildQaNativeWrapper}=await api();
- for(const o of [{sourceRevision:'main'},{sourceRevision:sourceRevision.toUpperCase()},{sourceRevision,entryPoint:'anything'},{sourceRevision,get path(){throw Error('getter');}}])await assert.rejects(()=>buildQaNativeWrapper(o));
+ for(const o of [{sourceRevision:'main'},{sourceRevision:'A'.repeat(40)},{sourceRevision,entryPoint:'anything'},{sourceRevision,get path(){throw Error('getter');}}])await assert.rejects(()=>buildQaNativeWrapper(o));
 });
 for(const [name,change] of [
  ['noncanonical base64',a=>replace(a,'base64',a.base64+'\n')],
+ ['byte count',a=>replace(a,'bytes',a.bytes-1)],
  ['bad hash',a=>replace(a,'sha256','0'.repeat(64))],
  ['wrong source',a=>replace(a,'sourceRevision','b'.repeat(40))],
  ['unknown key',a=>({...a,forged:true})],
@@ -64,9 +66,24 @@ test('validator is importable with builtins alone and performs no source evaluat
  const {validateQaNativeArtifact}=await api();assert.throws(()=>validateQaNativeArtifact({artifact:awaitNever(),sourceRevision}));
  function awaitNever(){return {get base64(){throw Error('do not execute');}};}
 });
+test('validator runs in a standalone child without any npm module tree',async()=>{
+ const a=await artifact(),dir=await mkdtemp(join(tmpdir(),'afw-native-validator-'));
+ for(const name of ['mcp-qa-native-artifact.mjs','mcp-qa-native-wrapper-pin.mjs'])await writeFile(join(dir,name),await readFile('lib/'+name));
+ const code="import {readFileSync} from 'node:fs';const {validateQaNativeArtifact}=await import("+JSON.stringify(pathToFileURL(join(dir,'mcp-qa-native-artifact.mjs')).href)+");validateQaNativeArtifact(JSON.parse(readFileSync(0,'utf8')));console.log('validated');";
+ const result=spawnSync(process.execPath,['--input-type=module','-e',code],{cwd:dir,input:JSON.stringify({artifact:a,sourceRevision}),encoding:'utf8',env:{PATH:process.env.PATH}});
+ assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'validated');
+});
+test('CLI rejects missing runner, invalid source, and symlink runner roots',async()=>{
+ const runner=await mkdtemp(join(tmpdir(),'afw-native-cli-root-')),link=runner+'-link';
+ await symlink(runner,link,'dir');
+ for(const changed of [{RUNNER_TEMP:''},{RUNNER_TEMP:'relative'},{RUNNER_TEMP:link},{GITHUB_SHA:'main'},{GITHUB_ACTIONS:'false'}]){
+  const result=spawnSync(process.execPath,['scripts/qa-native-wrapper-build.mjs'],{env:{...process.env,GITHUB_ACTIONS:'true',RUNNER_TEMP:runner,GITHUB_SHA:sourceRevision,...changed},encoding:'utf8'});
+  assert.notEqual(result.status,0);assert.equal(result.stdout,'');assert.ok(result.stderr.length<128);
+ }
+});
 test('CLI writes only fixed private runner files, omits base64 and refuses overwrite',async()=>{
  const a=await artifact(),runner=await mkdtemp(join(tmpdir(),'afw-native-test-'));
- const env={...process.env,RUNNER_TEMP:runner,GITHUB_SHA:sourceRevision};
+ const env={...process.env,GITHUB_ACTIONS:'true',RUNNER_TEMP:runner,GITHUB_SHA:sourceRevision};
  const call=(args=[])=>spawnSync(process.execPath,['scripts/qa-native-wrapper-build.mjs',...args],{cwd:resolve('.'),env,encoding:'utf8'});
  const good=call();assert.equal(good.status,0,good.stderr);assert.ok(good.stdout.length<1024);assert.ok(!good.stdout.includes(a.base64.slice(0,64)));
  const dir=join(runner,'afw-native-observation'),module=await readFile(join(dir,'index.mjs'));
