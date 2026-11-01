@@ -19,3 +19,6 @@ A correlated v2 DTO can prove only native metadata observation. ARM eligibility,
 - Root transport RED41282425757,22expectedfail; active-profile wiring diagnosed in41282632995; qualification41282835144,25PASS. Old clone route remains covered independently.
 - Actual CLI/workflow qualification41282935047/job124778375024:57PASS0FAIL plus validator-bypass mutant RED; task review0P1/P2.
 - Whole-branch/interim review identified3P2; fix7067e655 reproduced53PASS8FAIL then61PASS0FAIL (native+oldclone). Native alone34PASS, clone qualification35PASS. Scoped re-review closed all3P2+Minor, no newP1/P2. Two test-only lint bindings then renamed by original implementers; focused57/20PASS+ESLint verified in41283953447/41283956331. Final-head full CI remains required; no merge/live intent.
+
+## Poll cadence regression
+The accepted old native v2 took7867ms including queue. Twelve500ms polls could terminate a healthy result at~5.5s. The synthetic7800ms provider regression was RED then GREEN with1000ms cadence (8033ms/zero termination), still12GET/20s and originalN1/mono. This is no latency guarantee or clock extension. New final-head CI and scoped review are required before merge/live.
