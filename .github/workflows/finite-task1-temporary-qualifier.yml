@@ -19,5 +19,19 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: C1 round1 alternate verified checkout RED
-        run: node --test test/build-finite-native-package.test.mjs
+      - name: C1 round1 compiler and profile covering tests
+        run: node --test test/build-finite-native-package.test.mjs test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-profile-native.test.mjs
+      - name: C1 round1 scoped lint
+        if: always()
+        run: npx eslint scripts/build-finite-native-package.mjs test/build-finite-native-package.test.mjs
+      - name: Canonical same-root actual staging
+        run: |
+          node scripts/build-finite-native-package.mjs --staging "${{ github.sha }}"
+          cat output/finite-native-staging/staging.json
+      - name: Actual staging bytes preserved across dry-run
+        run: |
+          sha256sum output/finite-native-staging/qaLive/index.mjs output/finite-native-staging/canaryLive/index.mjs > "$RUNNER_TEMP/finite-staging-before.sha256"
+          npx wrangler deploy output/finite-native-staging/qaLive/index.mjs --config wrangler.independent-closure-qa.finite.jsonc --dry-run --no-bundle --outdir output/finite-dry-qa
+          npx wrangler deploy output/finite-native-staging/canaryLive/index.mjs --config wrangler.mcp-own.finite.jsonc --dry-run --no-bundle --outdir output/finite-dry-canary
+          sha256sum --check "$RUNNER_TEMP/finite-staging-before.sha256"
+          test ! -e output/finite-native-package/manifest.json

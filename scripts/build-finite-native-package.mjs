@@ -4,7 +4,7 @@ import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
-import {readFile,mkdir,writeFile} from 'node:fs/promises';
+import {readFile,mkdir,writeFile,realpath} from 'node:fs/promises';
 import {build} from 'esbuild';
 import {verifyMcpReleaseSource} from './mcp-release-source.mjs';
 import {buildMcpNodeProgram} from './build-mcp-node-program.mjs';
@@ -34,7 +34,12 @@ async function inputs(cwd,revision){
  * No provider, private policy, callback, caller pins or readiness flag accepted. */
 export async function compileFiniteNativeStaging(input){
  try{
-  const {cwd,sourceRevision}=options(input),before=await verifyMcpReleaseSource({cwd,sourceRevision}),inputBefore=await inputs(cwd,sourceRevision);
+  const {cwd:requestedCwd,sourceRevision}=options(input),cwd=await realpath(requestedCwd);
+  // Imported Node builder resolves its source beside this compiler. Restrict
+  // the exported API to that same physical checkout before any compilation;
+  // use the canonical path throughout so a caller alias cannot retarget inputs.
+  if(cwd!==await realpath(fileURLToPath(new URL('..',import.meta.url))))fail();
+  const before=await verifyMcpReleaseSource({cwd,sourceRevision}),inputBefore=await inputs(cwd,sourceRevision);
   const node=await buildMcpNodeProgram(),files={},modules={},metafiles={};
   for(const role of roles){
    const config=finiteWranglerProfileTemplate(role),entry=config.main;
