@@ -52,9 +52,7 @@ test('actual ledger ancestor selection separates stored and current identity and
  const resolver=createPrivateQaGenerationResolver(options);
  assert.equal(JSON.parse(await resolver.read(first.planHash)).status,'blocked');assert.equal(JSON.parse(await resolver.readRetained(first.planHash)).status,'blocked');
  assert.equal((await ledger.readArmed()).status,'blocked');
- const pin=createPrivateQaExecutionPin({env:f.env,expectedVersionId:version,sourceRevision:source,context:'workflow'});
- const named=createPrivateQaNamedAuthorization({executionPin:pin,readGeneration:async()=>JSON.stringify(r),pins:{planHash:first.planHash,sequence:1,startAt:JSON.parse(r.capsule).startAt,expiresAt:JSON.parse(r.capsule).expiresAt},now:f.now,timeoutMs:5000});
- assert.equal(await named.authorize('workflow_admission',new AbortController().signal),false);
+
 });
 for(const phase of ['pending','armed','withdrawn','expired','before-start'])test('valid current facts: '+phase,async()=>{
  const {f,first,options}=await fixture(phase==='before-start'?{startOffset:1000}:{});
@@ -196,4 +194,23 @@ test('returned data remains detached from subsequent primary mutation',async()=>
  const {f,first,options}=await fixture(),r=await selected(options,first.planHash),before=JSON.stringify(r);
  f.rows.get(INFO+first.planHash).execution.sourceRevision='e'.repeat(40);f.rows.get(CONTROL+first.planHash).phase='pending';
  assert.equal(JSON.stringify(r),before);assert.throws(()=>{r.target.phase='pending';});
+});
+
+test('a valid current private selection cannot substitute for a nominal named receipt',async()=>{
+ const {f,first,options}=await fixture(),r=await selected(options,first.planHash);
+ const pin=createPrivateQaExecutionPin({env:f.env,expectedVersionId:version,sourceRevision:source,context:'workflow'});
+ const named=createPrivateQaNamedAuthorization({executionPin:pin,readGeneration:async()=>JSON.stringify(r),pins:{planHash:first.planHash,sequence:1,startAt:f.capsule.startAt,expiresAt:f.capsule.expiresAt},now:f.now,timeoutMs:5000});
+ assert.equal(await named.authorize('workflow_admission',new AbortController().signal),false);
+});
+for(const invalid of [NaN,-1])test('invalid monotonic origin blocks before primary '+invalid,async()=>{
+ const {f,first,options}=await fixture(),before=f.storage.transactions,original=Object.getOwnPropertyDescriptor(performance,'now');
+ Object.defineProperty(performance,'now',{configurable:true,value:()=>invalid});
+ try{assert.deepEqual(await make(options).read(first.planHash,undefined),blocked);assert.equal(f.storage.transactions,before);}
+ finally{if(original)Object.defineProperty(performance,'now',original);else delete performance.now;}
+});
+for(const kind of ['storage','get','list'])test('private snapshot refuses method accessors without invoking them '+kind,async()=>{
+ const {f,first,ctx,options}=await fixture();let touched=0;
+ if(kind==='storage')Object.defineProperty(ctx.storage,'transaction',{configurable:true,get(){touched++;throw Error('accessor');}});
+ else wrap(f,ctx,null,t=>Object.defineProperty({...t},kind,{enumerable:true,get(){touched++;throw Error('accessor');}}));
+ assert.deepEqual(await make(options).read(first.planHash,undefined),blocked);assert.equal(touched,0);
 });
