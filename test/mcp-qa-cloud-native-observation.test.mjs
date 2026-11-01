@@ -51,6 +51,7 @@ async function fixture(){
    if(mode==='nativeBlocked'||mode==='lateWorkflowCleanup')output.status='blocked';
    if(mode==='nativeTooSlow')output.elapsedMs=5000;
    workflow={params:b.params,status:'complete',output,versionId:'opaque-native-version'};
+   if(mode==='createDeniedRace403'||mode==='createDeniedRace409'){workflow.status='running';return response(null,mode==='createDeniedRace403'?403:409);}
    if(mode==='createUnknown')throw Error('PRIVATE_CREATE_ACK');
    return response({id:mode==='wrongCreateId'?'foreign':'afw-qa-arm-'+admission.intentId,workflow_id:'06b6c3eb-ce59-4594-8b9e-2636977d56da',version_id:'opaque-create-ref'});
   }
@@ -181,4 +182,9 @@ test('queued native poll sleeps only until the original nominal cutoff before cl
 });
 test('real native controller includes original comment and run correlation',async()=>{
  const x=await fixture(),r=await x.run();assert.equal(r.commentId,x.admission.commentId);assert.equal(r.runId,x.admission.runId);
+});
+
+for(const status of [403,409])test('denied Workflow create '+status+' never terminates a concurrent matching instance',async()=>{
+ const x=await fixture();x.setMode('createDeniedRace'+status);const r=await x.run();
+ assert.equal(x.workflowPosts,1);assert.equal(r.outcomes.createWorkflow,'denied');assert.equal(x.terminatePosts,0);assert.equal(x.posts.restore,1);assert.notEqual(r.status,'verified');assert.equal(r.finalClosedVerified,false);assert.equal(r.mayRetry,false);
 });
