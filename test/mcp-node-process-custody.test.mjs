@@ -132,3 +132,17 @@ test('finite seal blocks actual custody admission before primary or launch',asyn
  assert.equal(f.launches(),0);assert.equal(f.db.prepare('SELECT COUNT(*) AS n FROM dossier_node_process_admissions').get().n,0);
  }finally{f.close();}
 });
+
+test('finite settled admission reuse observes readiness without another writer or launch',async()=>{
+ const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs'),{finiteGateFixture}=await import('./fixtures/finite-admission-gate.mjs'),{nominalFixture}=await import('./fixtures/finite-nominal-control.mjs'),{finiteHash}=await import('../lib/mcp-finite-evidence.mjs'),{createHash}=await import('node:crypto');
+ const m=await load(),f=fixture(),g=finiteGateFixture(Date.now()-1000);
+ try{
+  f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();g.identity.containerId=f.config.containerId;g.identity.grantHash=createHash('sha256').update(ctx.grantId).digest('hex');g.options.now=Date.now;
+  g.options.readNominalControl=async()=>{const q=nominalFixture(g.identity,g.options.nominalIdentity,Date.now()),raw=g.rows.get('afw.own-finite-admission.v1:head');return {...q.value,ownedWriters:['reservation','admission','launch'].filter(k=>raw?.writers[k]).map(kind=>({intentId:g.identity.intentId,controlHash:g.identity.controlHash,actorId:g.identity.containerId,kind,claimHash:finiteHash(raw.writers[kind].claim),phase:raw.writers[kind].settlement===null?'issued':'settled'}))};};
+  g.primary.admission=async({identityHash,claimHash})=>({purpose:'afw.own-finite-admission.v1:settled',identityHash,kind:'admission',claimHash,primaryRowHash:finiteHash(f.db.prepare('SELECT * FROM dossier_node_process_admissions WHERE grant_id=?').get(ctx.grantId)),settledAt:Date.now()});
+  const gate=createFiniteAdmissionGate(g.options),a=m.createNodeProcessCustody({...f.config,finiteGate:gate});
+  const first=await a.start(),before=JSON.stringify(f.rows());assert.equal(first.ready,true);
+  assert.deepEqual(await a.start(),first);assert.equal(JSON.stringify(f.rows()),before);assert.equal(f.launches(),1);
+  await gate.seal();await assert.rejects(a.start());assert.equal(f.launches(),1);
+ }finally{f.close();}
+});
