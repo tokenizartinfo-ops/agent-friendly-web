@@ -13,7 +13,7 @@ function builder({variant='valid',history=true,authorize=true}={}){
  const r=await build({stdin:{contents:entry,resolveDir:process.cwd(),sourcefile:'named-known-history-fixture.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none'});const script=r.outputFiles[0].text;return{script,operatorHash:hash(script),planHash:hash(JSON.stringify(bundle)),fixtureHistory};
  };
 }
-const run=(options={},fixture={})=>rehearseExactNamedConfirmation({artifact,build:builder(options),mode:'confirmed',reserve:'true',historyFixture:true,...fixture});
+const run=(options={},fixture={})=>rehearseExactNamedConfirmation({artifact,build:builder(options),mode:'confirmed',reserve:'true',historyFixture:true,historyMode:'known_cancellation',...fixture});
 test('server-owned known history reaches native final reservation without altering history',async()=>{
  const r=await run();assert.equal(r.output.status,'confirmed',JSON.stringify(r.output));assert.equal(r.reservationCount,1);assert.equal(r.historyPreserved,true);assert.equal(r.output.reservation.mayBoot,false);assert.equal(r.output.operationalReadiness,false);assert.deepEqual(r.counts,{attempts:1,receipts:1,acceptances:1});
 });

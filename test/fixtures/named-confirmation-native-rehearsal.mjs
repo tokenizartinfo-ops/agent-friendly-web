@@ -11,7 +11,8 @@ import {namedHistoryFixture,seedNamedHistoryFixture} from './named-known-cancell
 
 // CI-only composition. Actual compiled operator, native Workflow/D1/namespace,
 // exact historical module bytes; ALL provider replies and identities synthetic.
-export async function rehearseExactNamedConfirmation({artifact,build,mode,payloadMode='object',invocation='workflow',reserve=null,retirement='stopped',replay=false,fault=null,historyFixture=false,nativeFault=null,measure=false,replayExpected='uncertain'}){
+export async function rehearseExactNamedConfirmation({artifact,build,mode,payloadMode='object',invocation='workflow',reserve=null,retirement='stopped',replay=false,fault=null,historyFixture=false,historyMode='known_cancellation',nativeFault=null,measure=false,replayExpected='uncertain'}){
+ assert.ok(['known_cancellation','original_only'].includes(historyMode),'Unknown native history fixture mode');
  const completeHistory=reserve==='true'||historyFixture;
  if(!['confirmed','tail-corrupt','regional-incident','metadata-reject','second-active'].includes(mode))throw Error('Unknown CI rehearsal');
  const compiledIdentity=await compileFixture({stdin:{resolveDir:process.cwd(),sourcefile:'named-custody-fixture.mjs',contents:`
@@ -87,7 +88,7 @@ export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-
   let alternativeGrantEligible=null;
   if(reserve==='true'){
    const fixtureHistory=compiled.fixtureHistory??namedHistoryFixture({artifact,policy});
-   alternativeGrantEligible=await seedNamedHistoryFixture(db,fixtureHistory,retired,{omitCurrent:nativeFault==='missing-current'});
+   alternativeGrantEligible=await seedNamedHistoryFixture(db,fixtureHistory,retired,{historyMode,omitCurrent:nativeFault==='missing-current'});
    await seedKnownCancellationFault(db,nativeFault,fixtureHistory,retired);
   }
   await db.prepare('INSERT INTO dossier_publication_attempts VALUES(?,?,?,?,?,?,?,?)').bind(policy.plan.artifactKey,RELEASE_TARGET.accountId,RELEASE_TARGET.workerName,artifact.sourceRevision,artifact.sourceTree,artifact.programHash,artifact.workerHash,Date.now()).run();
