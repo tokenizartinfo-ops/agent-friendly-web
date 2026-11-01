@@ -1,0 +1,29 @@
+name: Known cancellation source qualification
+on:
+  push:
+    branches: [feat/native-known-cancellation-adapter-20261101]
+    paths:
+      - lib/mcp-release-runtime.mjs
+      - test/mcp-release-known-cancellation.test.mjs
+      - .github/workflows/known-cancellation-source-qualification.yml
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Adapter qualification
+        run: node --test test/mcp-release-known-cancellation.test.mjs
+      - name: Related regressions
+        run: node --test test/mcp-known-cancellation-native.test.mjs test/mcp-qa-named-eligibility.test.mjs test/mcp-qa-named-eligibility-native.test.mjs test/mcp-release-workflow-native.test.mjs test/mcp-release-reservation-native.test.mjs
+      - name: Scoped lint
+        run: npx eslint lib/mcp-release-runtime.mjs test/mcp-release-known-cancellation.test.mjs
