@@ -1,0 +1,54 @@
+name: AFW finite native closed observation
+run-name: AFW finite native closed observation comment-${{ github.event.comment.id }} source-${{ github.sha }}
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+jobs:
+  observe:
+    if: >-
+      ${{ github.event_name == 'issue_comment' && github.event.action == 'created' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.repository.id == 1347578006 && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event.issue.number == 497 && !github.event.issue.pull_request && github.event.comment.user.id == 290715446 && github.event.comment.user.login == 'tokenizartinfo-ops' && github.event.comment.user.type == 'User' && github.event.sender.id == 290715446 && github.event.sender.login == 'tokenizartinfo-ops' && github.event.sender.type == 'User' && github.event.comment.author_association == 'OWNER' && startsWith(github.event.comment.body, '/afw-qa-native-observe-restore v1 ') }}
+    concurrency:
+      group: afw-qa-cloud-closed-rollback
+      queue: max
+      cancel-in-progress: false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    environment: afw-qa-cloud-closed-rollback
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Read the exact immutable historical baseline without effects authority
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+        run: node scripts/qa-native-baseline-prepare.mjs
+      - name: Qualify inherited and metadata-only native behavior without credentials
+        env:
+          AFW_QA_INSPECTION_BASE_MODULE: ${{ runner.temp }}/afw-qa-legacy-exact-base.mjs
+        run: node --test test/mcp-qa-legacy-inspection-native.test.mjs test/mcp-qa-arm-observation-native.test.mjs test/mcp-qa-closed-observation-v2-native.test.mjs
+      - name: Build only the committed pinned wrapper without credentials
+        run: node scripts/qa-native-wrapper-build.mjs
+      - name: Observe native closed metadata and independently restore exact BASE
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/qa-cloud-native-observation.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-qa-native-observation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            afw-qa-native-observation-result.json
+            afw-qa-native-observation-entry-failure.json
+          if-no-files-found: error
+          retention-days: 7

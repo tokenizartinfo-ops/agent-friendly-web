@@ -25,7 +25,7 @@ async function fixture(){
   if(url.origin==='https://api.cloudflare.com'&&p.includes('/workflows/afw-own-qa-private-bootstrap/instances/')){
    f.requests.push({url,init});const own='/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workflows/afw-own-qa-private-bootstrap/instances/afw-qa-arm-'+admission.intentId;
    assert.ok(p===own||p===own+'/status');
-   if(init.method==='PATCH'){assert.equal(p,own+'/status');assert.deepEqual(JSON.parse(init.body),{status:'terminate',rollback:false});terminatePosts++;if(mode==='terminateUnknown')throw Error('PRIVATE_TERM');workflow.status='terminated';return response({status:'terminated'});}
+   if(init.method==='PATCH'){assert.equal(p,own+'/status');assert.deepEqual(JSON.parse(init.body),{status:'terminate',rollback:false});terminatePosts++;if(mode==='terminateUnknown')throw Error('PRIVATE_TERM');workflow.status='terminated';return response({status:'terminated',timestamp:new Date(f.wall).toISOString()});}
    assert.equal(init.method,'GET');
    if(!workflow)return mode==='absence403'?response(null,403):new Response(JSON.stringify({success:false,errors:[{code:10000,message:'not found'}],messages:[],result:null}),{status:404,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}});
    if(mode==='preexisting'&&workflowPosts===0)workflow.status='complete';
