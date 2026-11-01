@@ -47,3 +47,15 @@ test('constructor rejects replacement intent and never resets retained gate',asy
  const options={...f.options,identity:{...f.identity,intentId:'replacement'}};
  assert.equal((await api.createFiniteAdmissionGate(options).read()).status,'blocked');
 });
+
+test('narrow writer deadline survives reconstruction while settlement keeps original C1',async()=>{
+ const {finiteWriterFixture}=await import('./fixtures/finite-admission-gate.mjs');let at=1000;
+ const f=finiteWriterFixture({now:()=>at,deadline:2000});
+ f.primary.reservation=async({identityHash,claimHash})=>({purpose:'afw.own-finite-admission.v1:settled',identityHash,kind:'reservation',claimHash,primaryRowHash:'a'.repeat(64),settledAt:at});
+ const g=api.createFiniteAdmissionGate(f.options),begun=await g.beginReservation();
+ assert.equal(begun.status,'issued');assert.equal(begun.claim.deadline,2000);
+ at=2000;const restored=api.createFiniteAdmissionGate(f.options);assert.equal((await restored.beginLaunch()).status,'blocked');
+ assert.equal((await restored.read()).writers.reservation.claim.deadline,2000);
+ assert.equal((await restored.settleReservation()).status,'settled');
+ assert.equal((await restored.read()).unresolvedWriters,0);
+});

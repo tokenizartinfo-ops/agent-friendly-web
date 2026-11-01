@@ -94,7 +94,7 @@ Root fresh design review, task/source review and exact CI precede any code promo
 ## Root execution ruling — concrete bounded retained-proof observer
 Fresh focused review of the following order found no remaining P1/P2; this is source design, not an installed transport or custody qualification.
 
-Use one exact precreated PrivateQaBootstrap observer instance and the fixed IndependentClosure actor, through the existing authorized QA custody only after actual scope/resource/expiry qualification. Its fixed payload contains only the operation and exact intent/control references; original material and clocks are resolved by server code. No public HTTP, generic Durable Object management GET, caller-selected actor/method/URL or new credential is assumed.
+Use one exact precreated PrivateQaBootstrap observer instance and the fixed IndependentClosure actor, through the existing authorized QA custody only after actual scope/resource/expiry qualification. Its exact fixed payload is `{operation,intentId,sourceRevision}`; the native read-only material-preview first step derives the plan/control references and original clocks, avoiding a future-controlHash payload cycle. Successful first-step output supplies those plan/control references for admit-and-ready before prepare. No public HTTP, generic Durable Object management GET, caller-selected actor/method/URL or new credential is assumed.
 
 A fixed server-owned head lookup for exact intentId/controlHash resolves only that control's once-appended retained proofHash. Then readRetainedFiniteCleanupProof({intentId,proofHash}) reads the exact bounded immutable proof/support. Missing means not_yet_observed; conflict blocks. Never precompute a future proof hash or select a global/latest proof.
 

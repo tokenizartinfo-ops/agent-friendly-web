@@ -37,7 +37,7 @@ for(const mode of ['unresolved','launch','provider','source','challenge','tamper
 test('retired process proof requires genuine handoff, settled writers and exact stopped instance',()=>{
  const f=fixture(),p=f.control.plan,g=f.support.gate;
  for(const [i,kind] of ['reservation','admission','launch'].entries()){
-  const claim={purpose:'afw.own-finite-admission.v1:writer',identityHash:g.identityHash,kind,issuedAt:p.T0+1,deadline:p.N1};
+  const claim={purpose:'afw.own-finite-admission.v1:writer',identityHash:g.identityHash,kind,issuedAt:p.T0+1,deadline:p.N1-10000};
   const primaryRowHash=String(i+3).repeat(64);g.writers[kind]={claim,settlement:{purpose:'afw.own-finite-admission.v1:settled',identityHash:g.identityHash,kind,claimHash:hash(claim),primaryRowHash,settledAt:p.T0+2}};f.support.primary[kind+'Hash']=primaryRowHash;
  }
  g.launchNeverIssued=false;f.support.primary.closureHash='6'.repeat(64);f.support.primary.processGeneration='7'.repeat(64);

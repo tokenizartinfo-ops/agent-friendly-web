@@ -105,7 +105,7 @@ test('finite reservation SQL fences a held send at the narrower nominal deadline
   f.options.original.applicationId=g.identity.applicationId;f.evidence.applicationId=g.identity.applicationId;
   const db=f.options.db;const primary={withSession(){return this;},prepare(sql){const q=db.prepare(sql);return{bind(...args){const r=q.bind(...args);return{async run(){
    await Promise.resolve();held=true;at=deadline;
-   f.db.function('strftime',(...v)=>v[0]==='%s'?String(Math.floor(at/1000)):v[0]==='%f'?String(at%60000/1000).padStart(6,'0'):null);
+   f.db.function('strftime',(...v)=>v[0]==='%s'?String(Math.floor(at/1000)):v[0]==='%f'?(at%60000/1000).toFixed(3).padStart(6,'0'):null);
    return r.run();
   }};}};}};
   await assert.rejects((await load()).createSuccessorReservation({...f.options,db:primary,now:()=>at,finiteGate:createFiniteAdmissionGate(g.options)}).reserve());
