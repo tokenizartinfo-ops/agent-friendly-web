@@ -108,3 +108,13 @@ test('no future saved evidence is synthesized or selected by latest',async()=>{
  const f=finiteFixture(),c=control(f);await c.prepare();const n=f.puts;assert.equal((await c.captureObservedFacts('saved_event')).status,'not_yet_observed');assert.equal(f.puts,n);
  assert.equal(hash(JSON.stringify(f.plan)).length,64);
 });
+
+test('lost armed CAS ACK never grants nominal authority after reconstruction',async()=>{
+ const f=finiteFixture();f.lost.add(2);const c=control(f);assert.equal((await c.prepare()).status,'uncertain');
+ const n=f.puts,recovered=control(f);assert.equal((await recovered.read()).phase,'armed');assert.equal((await recovered.read()).nominalEligible,false);
+ assert.equal((await recovered.claimEffect('nominal')).status,'blocked');assert.equal(f.puts,n);
+ assert.equal((await recovered.claimEffect('close')).status,'issued');
+});
+test('successful prepare does not revive nominal after instance reconstruction',async()=>{
+ const f=finiteFixture();assert.equal((await control(f).prepare()).status,'armed');assert.equal((await control(f).claimEffect('nominal')).status,'blocked');
+});

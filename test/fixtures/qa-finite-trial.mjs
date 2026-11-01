@@ -42,7 +42,7 @@ export function finiteFixture(){
  const ctx={storage,id:{toString:()=>actorId}};
  const eventId=hash(JSON.stringify(['afw.own-synthetic-save.v1',plan.selectors.subject,plan.selectors.projectId,plan.selectors.saveIdempotencyKey]));
  const fingerprint=hash(JSON.stringify(['afw.own-synthetic-save.v1',plan.selectors.grantId,1,'discovery']));
- const identity=()=>({intentId:plan.intentId,sourceRevision:plan.source.revision,runtimeVersionId:version,actorId,planHash:digest(plan.purpose,plan)});
+ const identity=()=>({intentId:plan.intentId,sourceRevision:plan.source.revision,runtimeVersionId:version,actorId:plan.resources.actorId,planHash:digest(plan.purpose,plan)});
  const admission=()=>({purpose:'afw.qa-finite-primary.v1',...identity(),observedAt:at,command:structuredClone(plan.command),source:structuredClone(plan.source),resources:structuredClone(plan.resources),deployments:structuredClone(plan.deployments),legacyControlHash:plan.legacy.controlHash,legacyPreparedHash:plan.legacy.preparedDispatchHash,legacyReductionHash:plan.legacy.reductionDispatchHash,legacySourceHash:plan.legacy.sourceHash,retainedUncertainty:true,
  containment:{entrypoint:'legacy_saved_event',finiteEntrypoint:'finite_trial_event',sourceHash:plan.source.moduleHash,profileHash:plan.source.profileHash,bindingsHash:plan.source.bindingsHash,denyBeforeAccess:true,enteredWritersIsolated:true,signedPacketsFenced:true,separateLegacyWritersTerminal:true,legacyGrantRevoked:true,legacyMonitorExpired:true,evidenceHash:'1'.repeat(64)},
  quiescence:{currentWriters:0,newScopeWriters:0,unresolvedWrites:0,completeInventory:true,inventoryHash:'2'.repeat(64),receiptsHash:'3'.repeat(64),snapshotHash:'4'.repeat(64)},
