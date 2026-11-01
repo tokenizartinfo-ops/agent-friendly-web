@@ -14,6 +14,9 @@ import {observeMcpDiscoveryRequest,observeMcpEventAuthority,createMcpRpcCatalogD
 const deny=()=>new Response('{"code":"unavailable"}',{status:404,headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
 const fail=()=>{throw Error('Private event Node unavailable');};
 // Build replaces these public program/revision literals; no key is embedded.
+// Entrypoint family is fixed in compiled bytes, never read from caller/env.
+// Metadata and source qualification must still prove this profile before ARM.
+const finiteEntrypoint=globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__==='finite_trial_event';
 const program=globalThis.__AFW_NODE_PROGRAM__??'',sourceRevision=globalThis.__AFW_NODE_SOURCE_REVISION__??'';
 
 export class AfwOwnEventNode extends DurableObject{
@@ -78,8 +81,8 @@ export class AfwOwnEventNode extends DurableObject{
    close:async(signal,assertStage,expiresAt)=>{const c=this.#host(true);const assertCurrent=()=>{assertStage();c.current();if(signal.aborted)fail();};assertCurrent();const result=await c.host.close({signal,assertCurrent,expiresAt});assertCurrent();return result;}},boundary);
  }catch{fail();}}
  // Internal producer reference only; never accept a caller-authored signal.
- deliverSaved(subscriptionId,eventId){return this.#call('deliverSaved',subscriptionId,eventId);}
- deliverOwnSaved(eventId){return this.#call('deliverOwnSaved',eventId);}
+ async deliverSaved(subscriptionId,eventId){if(finiteEntrypoint)fail();return this.#call('deliverSaved',subscriptionId,eventId);}
+ async deliverOwnSaved(eventId){if(finiteEntrypoint)fail();return this.#call('deliverOwnSaved',eventId);}
  async consume(request,serverProps){try{return await this.#call('consume',request,serverProps);}catch{return deny();}}
 }
 
@@ -98,5 +101,5 @@ const worker={fetch(request,env,ctx){
   issuer:env.AFW_OAUTH_ISSUER,resource:env.AFW_OAUTH_RESOURCE,
   eventsAuthorityFactory:options=>observeMcpEventAuthority(diagnostic,()=>createDossierEventRpcAuthority({enabled:true,...options,diagnostic})),
  }).fetch(request,env,ctx));
-},async scheduled(controller,env){const result=await runOwnEventSchedule(controller,env);if(result===null){const witness=readClosedOwnScheduleWitness(controller,env,{sourceRevision});if(witness)console.info(JSON.stringify(witness));}return result;}};
+},async scheduled(controller,env){if(finiteEntrypoint)return null;const result=await runOwnEventSchedule(controller,env);if(result===null){const witness=readClosedOwnScheduleWitness(controller,env,{sourceRevision});if(witness)console.info(JSON.stringify(witness));}return result;}};
 export default worker;
