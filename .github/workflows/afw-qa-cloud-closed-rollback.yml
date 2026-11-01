@@ -27,6 +27,7 @@ permissions:
 
 concurrency:
   group: afw-qa-cloud-closed-rollback
+  queue: max
   cancel-in-progress: false
 
 env:
