@@ -8,13 +8,13 @@ test('native observation hook has exact owner/repository/issue/main/attempt gate
  assert.deepEqual(w.on,{issue_comment:{types:['created']}});assert.deepEqual(w.permissions,{contents:'read'});assert.deepEqual(Object.keys(w.jobs),['observe']);
  for(const gate of ["github.event_name == 'issue_comment'","github.event.action == 'created'","github.ref == 'refs/heads/main'","github.run_attempt == '1'",'github.event.repository.id == 1347578006',"github.repository == 'tokenizartinfo-ops/agent-friendly-web'",'github.event.issue.number == 497','!github.event.issue.pull_request','github.event.comment.user.id == 290715446',"github.event.comment.user.login == 'tokenizartinfo-ops'","github.event.comment.user.type == 'User'",'github.event.sender.id == 290715446',"github.event.sender.login == 'tokenizartinfo-ops'","github.event.sender.type == 'User'","github.event.comment.author_association == 'OWNER'","startsWith(github.event.comment.body, '/afw-qa-native-observe-restore v1 ')"])assert.ok(j.if.includes(gate),gate);
  assert.doesNotMatch(j.if,/\|\|/);assert.equal(j['runs-on'],'ubuntu-24.04');assert.equal(j['timeout-minutes'],12);assert.equal(j.environment,'afw-qa-cloud-closed-rollback');assert.deepEqual(j.permissions,{contents:'write'});assert.deepEqual(j.concurrency,{group:'afw-qa-cloud-closed-rollback',queue:'max','cancel-in-progress':false});
- for(const name of ['afw-qa-cloud-clone.yml','afw-qa-cloud-closed-rollback.yml']){const old=parse(await readFile('.github/workflows/'+name,'utf8'));assert.ok(Object.values(old.jobs).some(job=>job.concurrency?.group===j.concurrency.group&&job.concurrency?.queue==='max'&&job.concurrency?.['cancel-in-progress']===false),name);}
+ for(const name of ['afw-qa-cloud-clone.yml','afw-qa-cloud-closed-rollback.yml']){const old=parse(await readFile('.github/workflows/'+name,'utf8'));assert.ok([old,...Object.values(old.jobs)].some(scope=>scope.concurrency?.group===j.concurrency.group&&scope.concurrency?.queue==='max'&&scope.concurrency?.['cancel-in-progress']===false),name);}
  assert.equal(w.env,undefined);assert.equal(j.env,undefined);assert.doesNotMatch(text,/workflow_dispatch:|schedule:|pull_request_target:|AFW_RELEASE_PUBLISH_TOKEN|secrets: inherit|id-token:|environment: production|continue-on-error:|shell:/);
 });
 test('native hook checks out exact source and exposes only existing credentials to the two trusted entries',async()=>{
  const w=parse(await readFile('.github/workflows/afw-qa-cloud-native-observation.yml','utf8')),steps=w.jobs.observe.steps;
  const checkout=steps.filter(s=>s.uses?.startsWith('actions/checkout@'));assert.equal(checkout.length,1);assert.equal(checkout[0].uses,'actions/checkout@v4');assert.deepEqual(checkout[0].with,{ref:expression('github.sha'),'persist-credentials':false,'fetch-depth':1});
- const node=steps.find(s=>s.uses==='actions/setup-node@v4');assert.equal(node.with['node-version'],22);
+ const node=steps.find(s=>s.uses==='actions/setup-node@v4');assert.deepEqual(node.with,{'node-version':22});
  const run=steps.filter(s=>s.run);assert.deepEqual(run.map(s=>s.run),[
   'npm ci --ignore-scripts --no-audit --no-fund',
   'node scripts/qa-native-baseline-prepare.mjs',
@@ -22,6 +22,7 @@ test('native hook checks out exact source and exposes only existing credentials 
   'node scripts/qa-native-wrapper-build.mjs',
   'node scripts/qa-cloud-native-observation.mjs'
  ]);
+ assert.deepEqual(steps.filter(s=>s.env).map(s=>s.run),[run[1].run,run[2].run,run[4].run]);
  assert.equal(run[0].env,undefined);
  assert.deepEqual(run[1].env,{AFW_QA_CLOSED_TOKEN:expression('secrets.AFW_QA_CLOSED_TOKEN')});
  assert.deepEqual(run[2].env,{AFW_QA_INSPECTION_BASE_MODULE:expression('runner.temp')+'/afw-qa-legacy-exact-base.mjs'});
