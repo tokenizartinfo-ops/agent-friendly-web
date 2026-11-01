@@ -53,7 +53,23 @@ for(const [name,make]of [
 ])test('reject response '+name,async()=>{const f=fixture();f.args.fetchImpl=async()=>make(f);const dto=await runQaBootstrapCustodyInspection(f.args);assert.equal(dto.status,'blocked');assert.equal(dto.tokenId,null);safe(dto);});
 for(const where of ['credential','fetch','body'])test('late '+where+' cannot settle verified',async()=>{const f=fixture();const late=()=>{f.clock.wall+=5000;f.clock.mono+=5000;};if(where==='credential')f.args.readCredential=async()=>{late();return 'opaque-CREDENTIAL_SENTINEL';};if(where==='fetch')f.args.fetchImpl=async()=>{late();return f.response();};if(where==='body')f.args.fetchImpl=async()=>({status:200,headers:new Headers({date:new Date(START).toUTCString()}),body:{getReader:()=>({read:async()=>{late();return {done:true};},cancel:async()=>{},releaseLock(){}})}});const dto=await runQaBootstrapCustodyInspection(f.args);assert.equal(dto.status,'blocked');assert.equal(dto.tokenId,null);safe(dto);});
 test('original queued command deadline limits request',async()=>{const f=fixture();f.event.comment.created_at=new Date(START-299999).toISOString();f.args.fetchImpl=async()=>{f.clock.wall++;f.clock.mono++;return f.response();};const dto=await runQaBootstrapCustodyInspection(f.args);assert.equal(dto.status,'blocked');safe(dto);});
-for(const where of ['fetch','body'])test('abort releases held '+where,async()=>{const f=fixture();const controller=new AbortController();f.args.signal=controller.signal;let observedSignal;if(where==='fetch')f.args.fetchImpl=async(_u,init)=>{observedSignal=init.signal;return new Promise(()=>{});};else f.args.fetchImpl=async(_u,init)=>{observedSignal=init.signal;return {status:200,headers:new Headers({date:new Date(START).toUTCString()}),body:{getReader:()=>({read:()=>new Promise(()=>{}),cancel:async()=>{},releaseLock(){}})}};const pending=runQaBootstrapCustodyInspection(f.args);setTimeout(()=>controller.abort(),5);const dto=await pending;assert.equal(dto.status,'blocked');assert.equal(observedSignal.aborted,true);safe(dto);});
+for (const where of ['fetch', 'body']) test('abort releases held ' + where, async () => {
+ const f = fixture(), controller = new AbortController();
+ f.args.signal = controller.signal;
+ let observedSignal;
+ f.args.fetchImpl = async (_url, init) => {
+  observedSignal = init.signal;
+  if (where === 'fetch') return new Promise(() => {});
+  return {
+   status: 200, headers: new Headers({date: new Date(START).toUTCString()}),
+   body: {getReader: () => ({read: () => new Promise(() => {}), cancel: async () => {}, releaseLock() {}})},
+  };
+ };
+ const pending = runQaBootstrapCustodyInspection(f.args);
+ setTimeout(() => controller.abort(), 5);
+ const dto = await pending;
+ assert.equal(dto.status, 'blocked'); assert.equal(observedSignal.aborted, true); safe(dto);
+});
 test('request watchdog settles ignored abort transport within five seconds',async()=>{const f=fixture();f.args.fetchImpl=()=>new Promise(()=>{});const began=performance.now();const dto=await runQaBootstrapCustodyInspection(f.args);assert.equal(dto.status,'blocked');assert.ok(performance.now()-began<6500);safe(dto);});
 test('provider exception and credential rejection are sanitized',async()=>{for(const where of ['readCredential','fetchImpl']){const f=fixture();f.args[where]=async()=>{throw Error('CREDENTIAL_SENTINEL');};safe(await runQaBootstrapCustodyInspection(f.args));}});
 test('source workflow and CLI remain fixed and credential lazy',async()=>{const workflow=await readFile(new URL('../.github/workflows/afw-qa-bootstrap-custody-inspection.yml',import.meta.url),'utf8');assert.match(workflow,/issue_comment:/);assert.match(workflow,/types: \[created\]/);assert.match(workflow,/timeout-minutes: 5/);assert.match(workflow,/environment: afw-qa-cloud-closed-rollback/);assert.match(workflow,/contents: read/);assert.doesNotMatch(workflow,/contents: write|workflow_dispatch:|schedule:|npm ci|wrangler|GITHUB_TOKEN:/);assert.match(workflow,/retention-days: 7/);assert.match(workflow,/path: afw-qa-bootstrap-custody-inspection\/result.json/);assert.match(workflow,/persist-credentials: false/);const cli=await readFile(new URL('../scripts/qa-bootstrap-custody-inspection.mjs',import.meta.url),'utf8');assert.match(cli,/readCredential: \(\) => process.env.AFW_QA_CLOSED_TOKEN/);assert.doesNotMatch(cli,/console\.|process.stdout|process.stderr/);});
