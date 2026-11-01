@@ -11,7 +11,7 @@ async function fixture(){
  const context={repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'41200000100',runAttempt:'1',sourceRevision:source};
  const admissionMono=performance.now();
  const admission=api.validateQaLifecycleCommand({event,context,now});
- const normal=f.fetch,posts={upload:0,activate:0,restore:0};let annotation=null;
+ const normal=f.fetch,posts={upload:0,activate:0,restore:0};let annotation=null,postRestoreQaReads=0;
  let mode=null;const response=(result,status=200)=>new Response(JSON.stringify({success:true,errors:[],messages:[],result}),{status,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}});
  const fetchImpl=async(input,init)=>{
   const url=new URL(input),p=url.pathname;
@@ -52,10 +52,10 @@ async function fixture(){
    if(mode==='restoreUnknown')throw Error('PRIVATE_RESTORE_ACK');return response({id:RESTORE});
   }
   if(url.origin==='https://api.cloudflare.com'&&p.endsWith('/'+f.pins.qaClosed.name+'/deployments')){
+   if(mode==='cleanupNeverSettles'&&posts.restore&&++postRestoreQaReads>1)return new Promise(()=>{});
    f.requests.push({url,init});return response({deployments:[{id:f.deployment,strategy:'percentage',versions:[{version_id:f.version,percentage:100}],annotations:annotation?{'workers/message':annotation}:{}}]});
   }
   if(mode==='nominalNeverSettles'&&p.endsWith('/versions/'+CANDIDATE))return new Promise(()=>{});
-  if(mode==='cleanupNeverSettles'&&posts.restore&&p.endsWith('/'+f.pins.qaClosed.name+'/deployments'))return new Promise(()=>{});
   if(mode==='finalReadbackFailure'&&posts.restore&&p.endsWith('/tails'))return response([{id:'PRIVATE_ACTIVE_TAIL'}]);
   return normal(input,init);
  };
