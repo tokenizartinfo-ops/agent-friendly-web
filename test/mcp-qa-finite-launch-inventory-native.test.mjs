@@ -21,6 +21,7 @@ test('default fixed launch context and caller DTO cannot mint absence',async()=>
 
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+import {consumePrivateFiniteLaunchInventory} from '../lib/mcp-fixed-terminal-workflows.mjs';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
 import {readFile} from 'node:fs/promises';
 const entry=`
@@ -99,4 +100,16 @@ test('source hydration cannot refresh the original parent lifetime',async()=>{
 });
 test('default source has no registration or positive authority escape',async()=>{
  const source=await readFile(new URL('../lib/mcp-qa-finite-launch-source.mjs',import.meta.url),'utf8');assert.doesNotMatch(source,/export (?:function|const) (?:install|register)/);
+});
+
+test('copied actual snapshot and fabricated provider DTO cannot mint an absence result',async()=>{
+ const f=finiteFixture(),o=f.options(controlApi),parent={check:f.now,signal:new AbortController().signal,deadline:f.now()+5000};
+ const snapshot=await controlApi.readPrivateQaFiniteControlSnapshot({storage:f.storage,nativePin:o.nativePin,plan:o.plan,parent});
+ const execution={intentId:f.plan.intentId,controlHash:snapshot.control.controlHash,sourceRevision:f.plan.source.revision,moduleHash:f.plan.source.moduleHash,confirmationId:f.plan.workflows.confirmation,observerId:f.plan.workflows.bootstrap,admissionHash:'e'.repeat(64),launcherId:f.plan.workflows.launcher};
+ const inventory={workflowCount:3,instanceCount:1,instances:[{definition:'06b6c3eb-ce59-4594-8b9e-2636977d56da',id:f.plan.workflows.bootstrap,status:'running'}]};
+ assert.throws(()=>consumePrivateFiniteLaunchInventory({inventory,snapshot,execution,observedAt:f.now()}));
+});
+test('returned point-in-time fact DTO cannot be replayed after coordinator release',async()=>{
+ const r=await native('before');assert.equal(r.result.kind,'never_issued');
+ assert.throws(()=>consumePrivateFiniteLaunchInventory(r.result));
 });
