@@ -23,7 +23,7 @@ Files: modify lib/mcp-qa-generation-ledger.mjs; create lib/mcp-qa-stored-generat
 - [ ] Add failing tests using actual existing ledger fixtures; verify RED in secret-free Actions before implementation.
 - [ ] Implement the narrow snapshot helper by reusing createMetadataReader, strict owned commitment/output and private reader from spec.
 - [ ] Include meaningful mutation/clock/parent/lineage tests, historical identity separation and unchanged current/retained/named authority rejection.
-- [ ] GREEN focused tests: node --test test/mcp-qa-stored-generation-reader.test.mjs test/mcp-qa-generation-ledger.test.mjs test/mcp-qa-generation-resolver.test.mjs test/mcp-qa-generation-authorization.test.mjs (verify actual existing filenames before constructing job).
+- [ ] GREEN focused tests: node --test test/mcp-qa-stored-generation-reader.test.mjs test/mcp-qa-generation-ledger.test.mjs test/mcp-qa-generation-resolver.test.mjs test/mcp-qa-named-authorization.test.mjs (verify actual existing filenames before constructing job).
 - [ ] Run targeted ESLint and related existing native observer/preparation suites.
 - [ ] Independent fresh task review; fix findings and scoped re-review.
 
