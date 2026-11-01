@@ -33,4 +33,4 @@ export class GenerationArmFixture extends DurableObject{
   return{result,requests:http.requests.map(r=>({method:r.init.method,path:r.url.pathname})),syntheticInvocationDeclaration:true};
  }
 }
-export default{fetch(){return new Response(null,{status:404});}};
+const worker={fetch(){return new Response(null,{status:404});}};export default worker;
