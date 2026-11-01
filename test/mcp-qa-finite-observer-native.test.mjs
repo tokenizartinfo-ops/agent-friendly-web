@@ -51,7 +51,7 @@ async function fixture(){
  const env=await mf.getBindings(),actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1')),seed=await actor.seed();
  return {mf,env,actor,seed};
 }
-test('actual native Workflow carries one real journal claim then bounded first-primary receipt',async()=>{
+test('actual native Workflow carries one real journal claim then bounded first-primary receipt',{timeout:30000},async()=>{
  const f=await fixture();
  try{
   const wf=await f.env.FLOW.create({id:f.seed.instanceId,params:{operation:'finite_cleanup_observer',intentId:f.seed.preview.intentId,sourceRevision:f.seed.preview.sourceRevision}});
@@ -63,7 +63,7 @@ test('actual native Workflow carries one real journal claim then bounded first-p
   assert.equal((await (await f.mf.getWorker()).fetch('https://synthetic.invalid')).status,404);
  }finally{await f.mf.dispose();}
 });
-test('actual held D1 writer after claim blocks terminal evidence while later write can still commit',async()=>{
+test('actual held D1 writer after claim blocks terminal evidence while later write can still commit',{timeout:30000},async()=>{
  const f=await fixture();
  try{
   const refs=await f.actor.refs(),claim=await f.actor.claimFiniteTrialQaRestore(refs);assert.equal(claim.claim.kind,'qa_restore');
