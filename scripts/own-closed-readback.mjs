@@ -10,9 +10,9 @@ try{
  stage='command';
  admission=validateOwnClosedReadbackCommand({event,context:{repository:process.env.GITHUB_REPOSITORY,repositoryId:process.env.GITHUB_REPOSITORY_ID,ref:process.env.GITHUB_REF,eventName:process.env.GITHUB_EVENT_NAME,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,sourceRevision:process.env.GITHUB_SHA},now:Date.now});
  stage='transport';client=createOwnClosedReadbackApi({credential:process.env.AFW_QA_CLOSED_TOKEN,fetchImpl:fetch,now:Date.now});
- stage='proof';const proof=await readOwnClosedRuntime({request:client.request,now:Date.now});
+ stage='proof';const proof=await readOwnClosedRuntime({request:client.request,now:Date.now});client.assertCurrent();
  if(proof.purpose!=='afw.own-closed-readback.v1'||proof.status!=='closed'||proof.readOnly!==true||proof.authorizesEffects!==false||proof.operationalReadiness!==false)throw Error('unavailable');
- result={...proof,sourceRevision:admission.sourceRevision,commentId:admission.commentId,runId:admission.runId,eventCreatedAt:new Date(admission.createdAt).toISOString(),eventAdmittedAt:new Date(admission.admittedAt).toISOString()};
+ result={...proof,sourceRevision:admission.sourceRevision,commentId:admission.commentId,runId:admission.runId,eventCreatedAt:new Date(admission.createdAt).toISOString(),eventAdmittedAt:new Date(admission.admittedAt).toISOString()};client.assertCurrent();
 }catch{
  result={purpose:'afw.own-closed-readback.v1',status:'blocked',stage,observedAt:new Date().toISOString(),sourceRevision:admission?.sourceRevision??'unknown',commentId:admission?.commentId??'unknown',runId:admission?.runId??'unknown',diagnostic:client?.readDiagnostic()??null,readOnly:true,authorizesEffects:false,guardLivenessVerified:false,nativeWithdrawalVerified:false,operationalReadiness:false,mayRetry:false};process.exitCode=1;
 }finally{client?.close();}
