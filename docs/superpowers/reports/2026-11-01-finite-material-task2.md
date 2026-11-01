@@ -32,7 +32,6 @@ Existing temporary file `.github/workflows/finite-task1-temporary-qualifier.yml`
 | --- | --- | --- | --- |
 | RED | a167611cc63f787a7de87c2aaff58242e32c2886 | [41338258762](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41338258762) / [124942585176](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41338258762/job/124942585176) | Node103FAIL0PASS0SKIP; Python23FAIL. Expected missing concrete resolver assertion / missing actual parser. Scoped lint also rejected missing implementation. |
 | Initial GREEN (superseded grammar) | 44221801cfcc9a23a09ccde1291e0553c9bcf655 | [41338469061](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41338469061) / [124943205564](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41338469061/job/124943205564) | Node103PASS0FAIL0CANCEL0SKIP (14150.033ms); Python23PASS0FAIL (0.827s); scoped ESLint clean; Python compile passed. Job/run SUCCESS, attempt1, push, exact branch/head verified; completed18:48:52Z. |
-
 | Correction RED | f3ae28cee4eefdc64c945f7c48fcb009686e3375 | [41338886494](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41338886494) / [124944451818](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41338886494/job/124944451818) | Resolver105 tests:100PASS5FAIL; codec77:73PASS4FAIL; Python24:21PASS3FAIL;0SKIP. Expected valid closed-rollback name rejection, old-name archive acceptance and escaped-signature query rejection. Lint/compile passed. |
 | FINAL GREEN | a391a530bf8b4490b767764c1d33946fccc9807c | [41339000993](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41339000993) / [124944799259](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41339000993/job/124944799259) | Resolver105PASS0FAIL0SKIP (15595.470806ms), amended codec77PASS0FAIL0SKIP (178.05259ms), Python24PASS0FAIL (1.044s): TOTAL206PASS0FAIL0SKIP. Scoped lint clean and Python compile passed. Exact source/branch/push/attempt1 verified; run SUCCESS at18:55:19Z. |
 
@@ -69,3 +68,7 @@ The amendment RED showed the expected valid-new-name failures, while Python's ol
 
 ## Documentation checkpoint receipt
 The follow-up documentation-only receipt records this report/brief/ledger checkpoint SHA and returns the final branch HEAD to root. Tests above qualify the exact code HEAD; documentation-only commits do not change that code or its evidence.
+
+
+## Exact documentation HEAD receipt
+Documentation checkpoint HEAD: `36d7d9e7d3fd3ab242ffa5ba44c25b985bdd1101`, parent qualified code `a391a530bf8b4490b767764c1d33946fccc9807c`. This final documentation-only receipt records that checkpoint; its own final SHA is delivered to root after independent CAS ref readback. Neither documentation commit changes source/tests/workflow or the206-test final qualification. Root review range is BASE`1d49771a3bfb06433cb006db8d2d6c97c2673822` through final receipt HEAD, including the explicit ROOT codec/spec amendment. Branch writes stop after that readback; Task3/4C/Task5 and operationalReadiness=false remain unchanged.
