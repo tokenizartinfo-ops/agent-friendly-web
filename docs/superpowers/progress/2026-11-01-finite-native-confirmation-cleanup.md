@@ -86,3 +86,11 @@ Ruling: use this fixed channel rather than a new public/native transport or cred
 2026-11-01 UTC. Reviewer verdict on round 1: **NOT_ADDRESSED (partial fix), 0 addressed / 1 open**. The same original P2 remains open: the retained deadline was checked only after actual runtime.launch returned; its nested makeControl await could still resume into container.start after D. This is a residual of the existing finding, not a new Task3/Task4 feature.
 
 Round 2 FIX_BASE is c79cc3834231f532591652cddc594c40d1de6985; root's documentation-only child c1e643db608074d5afc4784055c0c916e695dc30 is preserved as the editing parent. The fix will propagate the internal narrowing assertion through the actual runtime continuation and prove zero native starts after a held makeControl crosses D. Legacy absence and independent C1 cleanup remain required. No Task3 implementation, runtime/credential action or new authorization.
+
+
+## Task2 review fix round 2 — implementation ready for scoped rereview
+2026-11-01 UTC. Same original P2; previous scoped verdict remains 0 addressed / 1 open pending rereview. FIX_BASE c79cc3834231f532591652cddc594c40d1de6985; root documentation child c1e643db608074d5afc4784055c0c916e695dc30 preserved. Final round-2 code `f8780ba3552412b82ead3b79d78b81de4927b87b`.
+
+The retained narrowing assertion now crosses the actual custody → fixed host successor adapter → launch gate → original Container runtime boundary. The runtime checks it after makeControl and each subsequent launch-side await, before the next native send. No new RPC/public authority or known-workflow argument; absent finite assertion preserves legacy behavior, and independent cleanup retains C1.
+
+Tests-only RED1bef2107/Actions41326569433/job124907651117: 46 PASS / 2 FAIL, both actual-runtime compositions emitting one native start after held makeControl crossed D. Final [Actions41326751931/job124908186503](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41326751931/job/124908186503): **50 focused + 6 native = 56 PASS / 0 FAIL / 0 SKIP**, scoped lint clean. The report's round-2 appendix contains exact commands, the retained consumed journals and limits. No full-suite rerun, live/runtime/credential action, local build or subagent. Root owns scoped rereview and Task3; branch handback follows this documentation receipt. operationalReadiness=false.

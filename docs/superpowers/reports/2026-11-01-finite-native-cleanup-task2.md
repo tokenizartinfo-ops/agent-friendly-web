@@ -119,3 +119,47 @@ The earlier spec's Root execution ruling sentence now explicitly states observer
 Implementation addresses the assigned P2; independent scoped rereview remains root-owned and pending, not self-approved. Self-review checked all three begin consumers, SQL time fences versus immutable row identity, settled/read-only reconstruction, bound equality, legacy absence of finiteGate, key clearing and separate cleanup authority. Captured D never renews after awaits or on a later read.
 
 A write or launch emitted before D can still have an unknown/lost/late ACK; these changes do not atomically cancel cross-DO/D1/provider effects. Its fixed issued record remains consumed and unresolved until exact read-only settlement is available. No replay, history erasure, deadline extension or false physical-stop proof is introduced. Operational readiness, Task3/4 factory/profile/credential qualification and the Workflow POST401 promotion gate remain unchanged. All edits used leased GitHub tree/commit/ref; tests ran in GitHub Actions. No local source/dependencies/build, child agent, runtime action, new credentials/grants, remote schema or trial occurred. The branch-only temporary qualifier must still be excluded from eventual integration. Source rollback is revert only. operationalReadiness=false.
+
+
+## Task2 review fix round 2 — retained lease inside actual Container launch
+2026-11-01 UTC. This appendix supersedes round 1's implementation-status statement, while preserving all earlier evidence.
+
+### Review identity and verdict
+Round 1 scoped reviewer verdict was **NOT_ADDRESSED (partial fix), 0 addressed / 1 open**, for the same original P2. The residual was that `createOriginalContainerRuntime().launch()` awaited `makeControl()` using only the broader manifest/window expiry, so a begin before D could still call `container.start()` after D before the outer assertion rejected. This is the original deadline finding, not a separate Task3/Task4 request.
+
+Assigned FIX_BASE: `c79cc3834231f532591652cddc594c40d1de6985`.
+Preserved root documentation child/editing parent: `c1e643db608074d5afc4784055c0c916e695dc30`.
+Final round-2 code: `f8780ba3552412b82ead3b79d78b81de4927b87b`.
+Exact-code [Actions41326751931/job124908186503](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41326751931/job/124908186503): **56 PASS / 0 FAIL / 0 SKIP**, comprising 50 focused and 6 affected native tests; scoped ESLint clean. Independent scoped rereview remains pending and root-owned.
+
+### Concrete propagation and preserved boundaries
+Custody passes its already retained internal `assertCurrent` through its private runtime invocation helper. The fixed durable-host successor adapter forwards it to the launch gate. The gate combines that parent assertion with its retained finite writer deadline and original request/manifest/namespace checks, and passes the combined assertion to the actual original runtime.
+
+The actual runtime's internal `launch(value,signal,assertCurrent)` accepts only an optional function that narrows authority. It invokes it at entry, after `makeControl()` and before native start, after native start and before outbound-control interception, after interception and before inactivity timeout, and after the timeout await. Core source/manifest/window/signal/one-attempt predicates still run; a no-op assertion cannot override them. A runtime that resumes after D now rejects before the next native business send, not merely after the whole launch returns.
+
+The fixed host adapter forwards the argument; it is not a fifth known-workflow argument, constructor authorization flag, RPC payload field, public endpoint or caller-supplied permission. The existing `runKnownCancellationReleaseWorkflow({bundle,env,event,step})` contract is untouched. When no finite/parent assertion exists, the gate and custody invoke the original two-argument launch path. Independent close retains its original separate cleanup authority and does not call the expired nominal assertion.
+
+Round-1 durable narrow claims, reservation/admission/launch SQL fences, claim/proof validation, original C1 settlement and unknown-effect journals are preserved. Root's Task3 claim-handoff ruling/brief and other documentation from the parent child are preserved; no Task3 behavior was implemented.
+
+### Meaningful RED / GREEN and exact commands
+Tests-only `1bef2107b557a1c47cb12e5455b5477cdec24c99`, [Actions41326569433/job124907651117](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41326569433/job/124907651117): **46 PASS / 2 FAIL / 0 SKIP** against unchanged round-1 production. Both new compositions used the real `createOriginalContainerRuntime` adapter. In one, the successor launch gate entered the actual runtime; in the other, actual custody did. Each held `makeControl()`, advanced the synthetic wall clock exactly to D while still before the broader manifest expiry, then released it. Both observed native `start` count **1 instead of 0**, directly reproducing the residual.
+
+Final code passes both cases with zero starts. The successor's already-issued primary launch claim remains consumed and its finite journal unresolved; a second call still cannot launch. Custody still performs its independent failure close, and explicit close remains usable after D. Additional actual-runtime cases cross the parent deadline during start, outbound-control interception and inactivity-timeout ACKs, rejecting before the next effect/success. A valid narrower parent permits launch, a malformed assertion denies, and a no-op assertion cannot bypass original expiry. Existing no-assertion runtime/host cases remain passing.
+
+```text
+node --test --test-reporter=spec test/mcp-original-container-runtime.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-own-durable-host.test.mjs
+tests 50; pass 50; fail 0; cancelled 0; skipped 0
+
+node --test --test-reporter=spec test/mcp-own-finite-cleanup-native.test.mjs test/mcp-own-finite-reduction-native.test.mjs test/mcp-own-worker-historical-close.test.mjs test/mcp-invocation-storage-native.test.mjs
+tests 6; pass 6; fail 0; cancelled 0; skipped 0
+
+npx eslint lib/mcp-original-container-runtime.mjs lib/mcp-node-process-custody.mjs lib/mcp-successor-launch-gate.mjs lib/mcp-own-durable-host.mjs test/mcp-original-container-runtime.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs
+exit 0; no ESLint findings
+```
+
+This round ran only the focused actual-runtime/consumer/host checks and affected native checks. Native workerd/DO/D1 fixtures remain source fixtures; the new regression's Container object, provider inputs, custody fixtures and clock are synthetic. “Actual runtime” identifies the production adapter under test, not a live Container or deployed finite profile.
+
+### Scoped self-review and limitations
+Self-review traced the argument across custody, the actual fixed host wrapper, successor gate and original runtime, then checked each awaited launch stage and the independent close path. This fixes the demonstrated residual in implementation; only independent scoped review may close the original P2. No self-approval or zero-open verdict is asserted.
+
+An effect sent before D can still have a lost or late ACK. The parent assertion prevents a later new send or nominal success after D; it does not retract an already-emitted provider request, reset attempted/issued history, prove physical termination or broaden C1. All prior source-only/Task3/Task4/promotion limitations remain. No live action, credential/grant/custody/schema mutation, local source/dependency/build or child agent occurred. GitHub writes used expected-head leases and executions used GitHub Actions. The temporary source qualifier remains excluded from eventual integration. operationalReadiness=false.
