@@ -20,7 +20,7 @@ Root's Work receiver discovery at 12:22:40-44 UTC found AFW event afw.dossier.ch
 | createDossierMonitoringAuthorization / createDossierEventRpcAuthority | Requires OAuth-validated request context | Do not fabricate context from a bundle. OAuth client subscription remains separate. |
 
 ## Authority, exact host interface and data producer
-Create lib/mcp-release-known-cancellation.mjs with ONLY exported host function:
+Add ONE host export to the existing lib/mcp-release-runtime.mjs (alongside its two current exports):
 ```js
 runKnownCancellationReleaseWorkflow({bundle,env,event,step})
 ```
@@ -41,14 +41,18 @@ Use fixed SQL/bound parameters, strict own-data row/byte bounds and no SELECT * 
 
 Keep the resulting history bytes private and immutable. An internal unexported authorize(stage,signal) accepts ONLY the 18 existing stages, rejects reentry/abort/drift, invokes the existing complete primary eligibility reader under the SAME request lease, and permanently fails closed after any denial. Initial authorization before calling runtime plus its workflow_admission hook are both charged to that lease. No authorize callback comes from payload/config/caller and no callback/token is returned. Pass the fixed internal closure and raw history to:
 ```js
-runReleaseWorkflow({bundle,env,event,step,authorize,cancellationHistory})
+runReleaseWorkflow({bundle,env,event,step,authorize,cancellationHistory,requestLease})
 ```
+Keep the adapter in the SAME runtime module so requestLease can be truly module-private: mint an exact owned {current,remaining} object, register its identity in an unexported WeakSet before the first await, and require membership whenever the optional requestLease parameter is present. No lease factory/registry/accessor is exported. Shape-compatible objects, JSON/DTO copies and foreign leases are rejected; direct legacy calls with the parameter absent keep current behavior. The adapter invalidates/removes its lease at final settlement; it cannot be replayed. requestLease is not a payload/RPC input. A minimal additive runtime parameter conjoins this parent lease in runReleaseWorkflow's current() and remaining(); existing runReleaseOperator already inherits these functions. Without this plumbing, stage checks alone could let the runtime continue under its longer policy window, so it is REQUIRED. Validate and pin the internal lease methods; absent preserves older trusted calls. Only the new same-module mounted adapter creates it; it cannot extend any child deadline.
+
 The final reservation INSERT SELECT STILL repeats the complete known-history/current-consent predicates atomically; pre-read authorization does not replace that write fence. No changes to mcp-successor-cancellation-history.mjs or reservation SQL are planned.
 
 ## Original budget and exact 18 hooks
+Source anchor: at baseline abdb917, lib/mcp-release-runtime.mjs line116 already caps the named step at Math.min(70000,remaining()); lines102-105 bound the Workflow by policy.expiresAt. That is NOT an existing global70s-from-event guarantee. This design deliberately NARROWS the existing route by starting that ceiling at the original native event time, including queue/projection. Existing reservation5s (lib/mcp-release-successor-reservation.mjs line27) and activation20s (runtime line75) remain narrower child budgets. This is not the optional QA ARM path and does not replace/extend its5s lease. If mounting inherits ANY tighter parent deadline, it must be conjoined; unavailable/unverifiable inherited authority blocks rather than allocating70s.
+
 Capture one budget BEFORE projection/first await: end=min(sealed policy.expiresAt, native event.timestamp+70000), using the existing named step maximum as a narrowing ceiling, plus a monotonic deadline derived once from that original end at entry. Reject queue-expired/future events; never recompute end from later now. policy.startAt remains unchanged. This adds no time beyond the original nominal N1; packaging must ensure policy expiry is within the original authorized N1. R1 cleanup authority/deadline is separate and unchanged; nominal consent failure must not suppress authorized finite cleanup.
 
-All projection, initialization, hooks, provider/RPC waits and final serialization consume this SAME deadline. Reader timeout is min(5000, remaining ORIGINAL budget), a per-operation ceiling inside one fixed budget, not a renewed five-second request window. The adapter's original fenced clock feeds eligibility. On its expiry, permanently invalidate; race adapter output to bounded uncertainty, do not claim remote cancellation. Existing step/activation/reservation sub-budgets continue to narrow it. A hook cannot extend the whole path by up to 18*5 seconds. Do not claim 18 checks plus HTTP fit until native elapsed timing proves it.
+All projection, initialization, hooks, provider/RPC waits and final serialization consume this SAME deadline. Reader timeout is min(5000, remaining ORIGINAL budget), a per-operation ceiling inside one fixed budget, not a renewed five-second request window. The adapter's original fenced clock feeds eligibility. On its expiry, permanently invalidate; race adapter output to bounded uncertainty, do not claim remote cancellation. The internal requestLease propagates the fixed end into runtime current/remaining; existing step/activation/reservation sub-budgets continue to narrow it. A hook cannot extend the whole path by up to 18*5 seconds. Do not claim 18 checks plus HTTP fit until native elapsed timing proves it.
 
 | # | Stage producer | Runtime consumer boundary |
 | --- | --- | --- |
@@ -74,7 +78,7 @@ All projection, initialization, hooks, provider/RPC waits and final serializatio
 These are 18 unique stage names, NOT 18 guaranteed invocations or 18 SQL calls. Credential/custody checks may recur. Each consumes the single original budget; measured actual count and elapsed time must be recorded. After the own INSERT, eligibility accepts only that same prepared row/trial/container/scope/window; no generic 'one row is okay' rule.
 
 ## Failure and preservation
-Before runtime entry return existing blocked outcome. After runtime handoff, any adapter timeout/unknown late result is conservatively uncertain/mayRetryfalse, preserving all activation attempts/receipts/acceptances and any reservation. Check lease again after outer runtime/step settlement; no late confirmed result. This does not add Workflow durable retry semantics, reset consumed intent, or prove ACK cancellation.
+Before runtime entry return existing blocked outcome. The deadline gates local authorization/decision and fresh effect admission, not the atomic remote commit time. An already issued SQL/RPC operation can settle/commit late. Classification/row/parser failures return fixed sanitized errors/outcomes with no raw D1/provider/policy data. After runtime handoff, any adapter timeout/unknown late result is conservatively uncertain/mayRetryfalse, preserving all activation attempts/receipts/acceptances and any reservation. Check lease again after outer runtime/step settlement; no late confirmed result. This does not add Workflow durable retry semantics, reset consumed intent, or prove ACK cancellation.
 
 Never delete/rewrite closures, grants, monitoring history, activation journals, fixed global reservation slot, launch claims, actor custody or DO budget. NULL generation remains cancellation-without-admission, never physical stop. Native retirement evidence remains required. D1 counts do not prove original/successor DO availability.
 

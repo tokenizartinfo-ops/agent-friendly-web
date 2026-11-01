@@ -10,3 +10,7 @@
 - Remaining live gates: fresh own exact OAuth grant plus separate monitoring consent, actual current bindings/custody/once budget, compatible finite executor/independent cleanup and closed rollback under original N1/R1, real consented receiver subscription/producer/delivery/review/withdrawal.
 - Cloud-only remote docs writes; no local files/source/dependencies/builds, no runtime/D1/perms/keys/OAuth/cron/Workflow/grant/consumer/Max changes. operationalReadiness=false.
 - Rollback: leave isolated docs branch unmerged or additive revert; preserve all accepted source/history and consumed intents.
+
+- Design self-review correction: existing70000ms is a step ceiling (runtime:116), not global event deadline. Proposed original-event70s is a narrowing only; reservation5s/activation20s remain. Required minimal internal requestLease plumbing conjoins adapter current/remaining with runtime, avoiding a stage-only deadline gap. Decision deadline never promises atomic remote commit/cancellation.
+
+- Final placement ruling: adapter lives in existing runtime module so a private WeakSet can brand requestLease without exporting a capability factory. Legacy parameter-absent callers retain behavior; forged/copied/retired leases deny. Root accepted narrowing/child-budget distinction; fresh full design review still required.
