@@ -50,7 +50,7 @@ export class LaunchFixture extends DurableObject{
   if(mode==='provider-nominal')f.providerNominal='running';
   if(mode==='provider-expired')f.onRequest=async()=>{f.setNow(f.now()+5000);};
   if(mode==='snapshot-change')f.onRequest=async()=>{await this.ctx.storage.put('afw.qa-finite-child-create.v1:'+f.plan.intentId+':send',{purpose:'uncertain'});};
-  if(['prelaunch','issued','ack','prepared-tamper','alarm-tamper','cleanup-started','reconstruct-pending'].includes(mode)){
+  if(['prelaunch','issued','ack','send-race','prepared-tamper','alarm-tamper','cleanup-started','reconstruct-pending'].includes(mode)){
    f.launcher=true;const admission=f.primary.admission;
    f.primary.admission=async()=>{const r=await i.observeBeforeCreation();if(r.kind!=='never_issued')throw Error('inventory unavailable');return admission();};
    if(mode==='reconstruct-pending')f.primary.finalizer=async()=>{throw Error('lost finalizer');};
@@ -78,7 +78,16 @@ export class LaunchFixture extends DurableObject{
    const p2=inventory.createPrivateQaFiniteLaunchParent({now:f.now,deadline:f.now()+5000}),c2=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent:p2});
    const i2=await inventory.createPrivateQaFiniteLaunchInventory({ctx:this.ctx,env:this.env,context:c2,parent:p2});
    const send={purpose:'afw.qa-finite-child-create-send.v1',...identity,preparedHash:hashFiniteLaunchRecord(prepared),bindingHash:'8'.repeat(64),issuedAt:f.now(),deadline:p.launchPolicy.lastCreateAt};
-   await inventory.withPrivateQaFiniteLaunchCoordinator({ctx:this.ctx,env:this.env,context:c2,parent:p2},async check=>{check();await this.ctx.storage.transaction(async tx=>{check();await tx.put(prefix+'send',send);check();});check();});
+   const appendSend=()=>inventory.withPrivateQaFiniteLaunchCoordinator({ctx:this.ctx,env:this.env,context:c2,parent:p2},async check=>{check();await this.ctx.storage.transaction(async tx=>{check();if(await tx.get(prefix+'send')!==undefined)throw Error('fixture append-only');check();await tx.put(prefix+'send',send);check();});check();});
+   if(mode==='send-race'){
+    let enter,release,once=true;const reached=new Promise(r=>{enter=r;}),held=new Promise(r=>{release=r;});
+    f.onRequest=async()=>{if(once){once=false;enter();await held;}};
+    const observation=i2.observeBeforeCreation();await reached;const writing=appendSend();
+    await Promise.resolve();const whileHeld=await this.ctx.storage.get(prefix+'send')??null;
+    release();const observed=await observation;await writing;
+    return {whileHeld,observed,after:await i2.observeBeforeCreation(),stored:await this.ctx.storage.get(prefix+'send')};
+   }
+   await appendSend();
    if(mode==='ack')await this.ctx.storage.put(prefix+'ack',{purpose:'afw.qa-finite-child-create-ack.v1',intentId:p.intentId,controlHash:identity.controlHash,sendHash:hashFiniteLaunchRecord(send),nominalId:p.workflows.confirmation,acknowledgedAt:f.now()});
    return {result:await i2.observeBeforeCreation(),prepared,send,claim:claimed.claim};
   }
@@ -188,4 +197,8 @@ test('snapshot rejects a DTO native pin, orphan ACK and an old missing-policy pl
  const old=JSON.parse(o.plan);delete old.launchPolicy;await assert.rejects(read({plan:JSON.stringify(old)}));
  f.rows.set('afw.qa-finite-child-create.v1:'+f.plan.intentId+':ack',{purpose:'afw.qa-finite-child-create-ack.v1',intentId:f.plan.intentId,controlHash:'1'.repeat(64),sendHash:'2'.repeat(64),nominalId:f.plan.workflows.confirmation,acknowledgedAt:f.now()});
  await assert.rejects(read({}));
+});
+
+test('actual append-only SEND transaction waits for full inventory and synchronous consumption',async()=>{
+ const r=await native('send-race');assert.equal(r.whileHeld,null);assert.equal(r.observed.kind,'never_issued');assert.equal(r.after.kind,'issued');assert.equal(r.stored.purpose,'afw.qa-finite-child-create-send.v1');
 });
