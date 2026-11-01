@@ -17,4 +17,5 @@ A correlated v2 DTO can prove only native metadata observation. ARM eligibility,
 - Admission RED41282309160 → GREEN41282344714,97PASS; task review0P1/P2.
 - Wrapper RED41282318508; pin0 RED41282383977; GREEN41282445234/job124776936226,20PASS; task review0P1/P2.
 - Root transport RED41282425757,22expectedfail; active-profile wiring diagnosed in41282632995; qualification41282835144,25PASS. Old clone route remains covered independently.
-- Complete CLI/workflow qualification, full CI, whole-branch review, merge and live intent remain pending in the plan ledger.
+- Actual CLI/workflow qualification41282935047/job124778375024:57PASS0FAIL plus validator-bypass mutant RED; task review0P1/P2.
+- Whole-branch/interim review identified3P2; fix7067e655 reproduced53PASS8FAIL then61PASS0FAIL (native+oldclone). Native alone34PASS, clone qualification35PASS. Scoped re-review and final-head full CI still pending; no merge/live intent.

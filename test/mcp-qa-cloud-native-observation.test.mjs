@@ -13,7 +13,7 @@ async function fixture(){
  const context={repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'41200000100',runAttempt:'1',sourceRevision:source};
  const admissionMono=performance.now();
  const admission=api.validateQaNativeObservationCommand({event,context,now});
- const normal=f.fetch,posts={upload:0,activate:0,restore:0};let annotation=null,postRestoreQaReads=0,workflow=null,workflowPosts=0,terminatePosts=0,polls=0;
+ const normal=f.fetch,posts={upload:0,activate:0,restore:0};let annotation=null,postRestoreQaReads=0,workflow=null,workflowPosts=0,terminatePosts=0,polls=0,lateCleanupReached=false,restoreProbeDelayed=false;
  const artifact={purpose:'test-fixed-native-wrapper',moduleName:'index.mjs',base64:Buffer.from('export default {}; // test wrapper').toString('base64')};
  let mode=null;const response=(result,status=200)=>new Response(JSON.stringify({success:true,errors:[],messages:[],result}),{status,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}});
  const fetchImpl=async(input,init)=>{
@@ -31,6 +31,8 @@ async function fixture(){
    if(mode==='preexisting'&&workflowPosts===0)workflow.status='complete';
    if(mode==='pollNeverSettles'&&workflowPosts&&polls++===0)return new Promise(()=>{});
    if(workflowPosts)polls++;
+   if(mode==='lateWorkflowCleanup'&&polls===2){f.wall=admission.cleanupExpiresAt-125010;lateCleanupReached=true;}
+   if(mode==='workflowQueued'&&workflow.status!=='terminated')workflow.status='queued';
    if(mode==='workflowPaused')workflow.status='paused';
    if((mode==='workflowRunning'||mode==='terminateUnknown')&&workflow.status!=='terminated')workflow.status='running';
    if(mode==='wrongParams')workflow.params=JSON.stringify({operation:'inspect_closed_quiescence',observationId:'0'.repeat(64)});
@@ -46,9 +48,10 @@ async function fixture(){
    if(mode==='wrongSource')output.sourceRevision='b'.repeat(40);
    if(mode==='authorityTrue')output.armEligibilityVerified=true;
    if(mode==='extraDTO')output.privateRaw='PRIVATE_DTO';
-   if(mode==='nativeBlocked')output.status='blocked';
+   if(mode==='nativeBlocked'||mode==='lateWorkflowCleanup')output.status='blocked';
    if(mode==='nativeTooSlow')output.elapsedMs=5000;
    workflow={params:b.params,status:'complete',output,versionId:'opaque-native-version'};
+   if(mode==='createDeniedRace403'||mode==='createDeniedRace409'){workflow.status='running';return response(null,mode==='createDeniedRace403'?403:409);}
    if(mode==='createUnknown')throw Error('PRIVATE_CREATE_ACK');
    return response({id:mode==='wrongCreateId'?'foreign':'afw-qa-arm-'+admission.intentId,workflow_id:'06b6c3eb-ce59-4594-8b9e-2636977d56da',version_id:'opaque-create-ref'});
   }
@@ -91,6 +94,7 @@ async function fixture(){
    if(mode==='restoreUnknown')throw Error('PRIVATE_RESTORE_ACK');return response({id:RESTORE});
   }
   if(url.origin==='https://api.cloudflare.com'&&p.endsWith('/'+f.pins.qaClosed.name+'/deployments')){
+   if(mode==='lateWorkflowCleanup'&&lateCleanupReached&&!restoreProbeDelayed){f.wall+=20;restoreProbeDelayed=true;}
    if(mode==='cleanupNeverSettles'&&posts.restore&&++postRestoreQaReads>1)return new Promise(()=>{});
    f.requests.push({url,init});return response({deployments:[{id:f.deployment,strategy:'percentage',versions:[{version_id:f.version,percentage:100}],annotations:annotation?{'workers/message':annotation}:{}}]});
   }
@@ -98,7 +102,7 @@ async function fixture(){
   if(mode==='finalReadbackFailure'&&posts.restore&&p.endsWith('/tails'))return response([{id:'PRIVATE_ACTIVE_TAIL'}]);
   return normal(input,init);
  };
- return{f,api,admission,admissionMono,posts,get workflowPosts(){return workflowPosts;},get terminatePosts(){return terminatePosts;},get polls(){return polls;},fetchImpl,setMode(v){mode=v;},run:()=>api.runQaNativeMetadataObservation({admission,credential:'PRIVATE-cf-token-for-test',githubCredential:mode==='modernGithubCredential'?'ghs_SYNTHETIC_APPID_'+'a'.repeat(200)+'.'+'b'.repeat(280)+'.'+'c'.repeat(100):'PRIVATE-gh-token-for-test',fetchImpl,now,artifact}),event,context,now};
+ return{f,api,admission,admissionMono,posts,get workflowPosts(){return workflowPosts;},get terminatePosts(){return terminatePosts;},get polls(){return polls;},get workflowStatus(){return workflow?.status;},fetchImpl,setMode(v){mode=v;},run:()=>api.runQaNativeMetadataObservation({admission,credential:'PRIVATE-cf-token-for-test',githubCredential:mode==='modernGithubCredential'?'ghs_SYNTHETIC_APPID_'+'a'.repeat(200)+'.'+'b'.repeat(280)+'.'+'c'.repeat(100):'PRIVATE-gh-token-for-test',fetchImpl,now,artifact}),event,context,now};
 }
 
 test('native closed lifecycle creates one correlated metadata Workflow, restores once and proves all terminal',async()=>{
@@ -148,4 +152,39 @@ test('genuine old and native admissions cannot cross controller kinds before pro
  const common={credential:'PRIVATE-cf-token-for-test',githubCredential:'PRIVATE-gh-token-for-test',fetchImpl:async()=>{calls++;},now:x.now};
  await assert.rejects(x.api.runQaNativeMetadataObservation({...common,admission:old,artifact:{purpose:'test-fixed-native-wrapper'}}));
  await assert.rejects(x.api.runQaClosedCloudClone({...common,admission:x.admission}));assert.equal(calls,0);
+});
+
+for(const boundary of ['dtoSubBudget','dtoNominal','recipientNominal']){
+ test('native settlement rejects '+boundary+' expiry and still restores once',async()=>{
+  const x=await fixture(),parse=JSON.parse;let reached=false;
+  try{
+   JSON.parse=(...args)=>{const value=parse(...args);if(!reached&&value?.purpose==='afw.qa-closed-quiescence-observation.v2'){
+    reached=true;
+    if(boundary==='recipientNominal')queueMicrotask(()=>{x.f.wall=x.admission.expiresAt;});
+    else x.f.wall=boundary==='dtoSubBudget'?x.f.wall+20000:x.admission.expiresAt;
+   }return value;};
+   const r=await x.run();assert.equal(reached,true);assert.notEqual(r.status,'verified');assert.equal(r.nativeMetadataObservationVerified,false);assert.equal(x.workflowPosts,1);assert.equal(x.posts.restore,1);assert.equal(r.finalClosedVerified,true);assert.equal(r.mayRetry,false);
+  }finally{JSON.parse=parse;}
+ });
+}
+test('late failed Workflow cleanup keeps a full best-effort restore budget above the final-proof reserve',async()=>{
+ const x=await fixture();x.setMode('lateWorkflowCleanup');const r=await x.run();
+ assert.equal(r.workflowCleanupFailure,true);assert.equal(x.posts.restore,1);assert.equal(x.f.version,x.f.pins.qaClosed.id);assert.equal(r.finalClosedVerified,true);assert.notEqual(r.status,'verified');assert.equal(r.mayRetry,false);assert.ok(Object.values(r.posts).every(n=>n<=1));
+});
+test('queued native poll sleeps only until the original nominal cutoff before cleanup',async()=>{
+ const x=await fixture(),parse=JSON.parse;let reached=false,armed=false,cutoff,started=0;x.setMode('workflowQueued');
+ try{
+  JSON.parse=(...args)=>{const value=parse(...args);if(!armed&&value?.result?.status==='queued'){
+   armed=true;let reads=0;Object.defineProperty(value.result,'status',{enumerable:true,get(){if(++reads===3){reached=true;x.f.wall=x.admission.expiresAt-100;started=performance.now();cutoff=setTimeout(()=>{x.f.wall=x.admission.expiresAt;},100);}return 'queued';}});
+  }return value;};
+  const r=await x.run(),elapsed=performance.now()-started;assert.equal(reached,true);assert.ok(elapsed<300,'cleanup took '+elapsed+'ms after 100ms nominal cutoff');assert.notEqual(r.status,'verified');assert.equal(x.terminatePosts,1);assert.equal(x.posts.restore,1);assert.equal(r.finalClosedVerified,true);assert.equal(r.mayRetry,false);
+ }finally{clearTimeout(cutoff);JSON.parse=parse;}
+});
+test('real native controller includes original comment and run correlation',async()=>{
+ const x=await fixture(),r=await x.run();assert.equal(r.commentId,x.admission.commentId);assert.equal(r.runId,x.admission.runId);
+});
+
+for(const status of [403,409])test('denied Workflow create '+status+' never terminates a concurrent matching instance',async()=>{
+ const x=await fixture();x.setMode('createDeniedRace'+status);const r=await x.run();
+ assert.equal(x.workflowPosts,1);assert.equal(r.outcomes.createWorkflow,'denied');assert.equal(x.terminatePosts,0);assert.equal(x.workflowStatus,'running');assert.equal(x.posts.restore,1);assert.notEqual(r.status,'verified');assert.equal(r.finalClosedVerified,false);assert.equal(r.mayRetry,false);
 });
