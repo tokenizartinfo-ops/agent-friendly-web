@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {generationFixture,hash,HEAD,INFO,CONTROL,LEGACY} from './fixtures/qa-generation-ledger.mjs';
-import {createPrivateQaGenerationLedger,readPrivateQaStoredGenerationSnapshot} from '../lib/mcp-qa-generation-ledger.mjs';
-import {createPrivateQaStoredGenerationReader} from '../lib/mcp-qa-stored-generation-reader.mjs';
+import * as ledgerApi from '../lib/mcp-qa-generation-ledger.mjs';
+const {createPrivateQaGenerationLedger}=ledgerApi;
+const api=await import('../lib/mcp-qa-stored-generation-reader.mjs').catch(()=>({}));
+const readPrivateQaStoredGenerationSnapshot=o=>{assert.equal(typeof ledgerApi.readPrivateQaStoredGenerationSnapshot,'function','private snapshot helper required');return ledgerApi.readPrivateQaStoredGenerationSnapshot(o);};
 import {createPrivateQaGenerationResolver} from '../lib/mcp-qa-generation-resolver.mjs';
 import {createPrivateQaExecutionPin} from '../lib/mcp-qa-execution-identity.mjs';
 import {createPrivateQaNamedAuthorization} from '../lib/mcp-qa-named-authorization.mjs';
@@ -11,7 +13,7 @@ const purpose='afw.qa-stored-generation-selection.v1';
 const denied=['authorizesEffects','guardLivenessVerified','nativeWithdrawalVerified','operationalReadiness','mayRetry'];
 const blocked={purpose,status:'blocked',isHead:false,withinWindow:false,...Object.fromEntries(denied.map(k=>[k,false]))};
 const flags=r=>{for(const k of denied)assert.equal(r[k],false);};
-const make=o=>createPrivateQaStoredGenerationReader(o);
+const make=o=>{assert.equal(typeof api.createPrivateQaStoredGenerationReader,'function','private stored selection reader required');return api.createPrivateQaStoredGenerationReader(o);};
 async function fixture({startOffset=-1000,duration=60000,ancestor=false}={}){
  const f=generationFixture(),at=f.now();f.capsule.startAt=at+startOffset;f.capsule.expiresAt=at+startOffset+duration;
  const ledger=createPrivateQaGenerationLedger(f.options()),first=await ledger.arm();assert.equal(first.status,'armed');
@@ -37,7 +39,7 @@ async function selected(o,plan){
  return r;
 }
 test('actual ledger ancestor selection separates stored and current identity and remains private and read only',async()=>{
- const {f,first,last,options,ctx}=await fixture({ancestor:true}),rows=structuredClone([...f.rows]),puts=f.storage.puts;
+ const {f,first,last,options,ctx,ledger}=await fixture({ancestor:true}),rows=structuredClone([...f.rows]),puts=f.storage.puts;
  for(const k of ['AFW_QA_DB','AFW_QA_DOSSIER_DB','AFW_MCP_CLOSURE_PUBLISH_TOKEN'])Object.defineProperty(f.env,k,{get(){throw Error('forbidden');}});
  wrap(f,ctx,null,t=>Object.defineProperty({get:t.get,list:t.list},'put',{get(){throw Error('write forbidden');}}));
  const r=await selected(options,first.planHash);
@@ -49,7 +51,7 @@ test('actual ledger ancestor selection separates stored and current identity and
  assert.deepEqual([...f.rows],rows);assert.equal(f.storage.puts,puts);
  const resolver=createPrivateQaGenerationResolver(options);
  assert.equal(JSON.parse(await resolver.read(first.planHash)).status,'blocked');assert.equal(JSON.parse(await resolver.readRetained(first.planHash)).status,'blocked');
- assert.equal((await createPrivateQaGenerationLedger(f.options()).readArmed()).status,'blocked');
+ assert.equal((await ledger.readArmed()).status,'blocked');
  const pin=createPrivateQaExecutionPin({env:f.env,expectedVersionId:version,sourceRevision:source,context:'workflow'});
  const named=createPrivateQaNamedAuthorization({executionPin:pin,readGeneration:async()=>JSON.stringify(r),pins:{planHash:first.planHash,sequence:1,startAt:JSON.parse(r.capsule).startAt,expiresAt:JSON.parse(r.capsule).expiresAt},now:f.now,timeoutMs:5000});
  assert.equal(await named.authorize('workflow_admission',new AbortController().signal),false);
@@ -181,8 +183,8 @@ for(const drift of ['wall','version','abort','short','expiry','mono'])test('oute
  finally{Promise.race=race;if(original)Object.defineProperty(performance,'now',original);else delete performance.now;}
 });
 test('snapshot execution uses the separately owned value actually hashed, never mutable info.execution',async()=>{
- const {f,first,options}=await fixture(),base=f.storage;let raw;
- const storage={transaction:fn=>base.transaction(t=>fn({get:async k=>{const v=await t.get(k);if(k===INFO+first.planHash)raw=v;return v;},list:async o=>{const r=await t.list(o);if(raw)raw.execution.sourceRevision='e'.repeat(40);return r;}}))};
+ const {f,first,options}=await fixture(),base=f.storage;let raw;const cache=new Map();
+ const storage={transaction:fn=>base.transaction(t=>fn({get:async k=>{if(!cache.has(k))cache.set(k,await t.get(k));const v=cache.get(k);if(k===INFO+first.planHash)raw=v;return v;},list:async o=>{const r=await t.list(o);if(raw)raw.execution.sourceRevision='e'.repeat(40);return r;}}))};
  const s=await readPrivateQaStoredGenerationSnapshot({storage,generationPlanHash:first.planHash,current:options.now});
  assert.equal(s.storedExecution.sourceRevision,'a'.repeat(40));assert.equal(raw.execution.sourceRevision,'e'.repeat(40));assert.equal(Object.isFrozen(raw.execution),false);
  assert.throws(()=>{s.storedExecution.sourceRevision='f'.repeat(40);});
