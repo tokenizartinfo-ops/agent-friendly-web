@@ -25,6 +25,10 @@ jobs:
         run: node --test --test-reporter=spec test/mcp-own-finite-cleanup-proof.test.mjs
       - name: Retained proof and finite alarm
         run: node --test --test-reporter=spec test/mcp-qa-finite-cleanup-store.test.mjs test/mcp-qa-finite-trial-guard.test.mjs test/mcp-finite-cleanup-readiness.test.mjs
+      - name: Finite native writer and proof fixture
+        run: node --test --test-reporter=spec test/mcp-own-finite-cleanup-native.test.mjs
+      - name: Finite exact canary restoration
+        run: node --test --test-reporter=spec test/mcp-qa-finite-canary-restorer.test.mjs
       - name: Actual finite writer hooks
         run: node --test --test-reporter=spec test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-successor-reservation.test.mjs
       - name: Task1 focused RED GREEN
