@@ -50,9 +50,9 @@ test('unknown issued effects reconcile read only across at most three deliveries
  assert.equal((await x.store.completion()).status,'not_yet_observed');
 });
 test('guard rejects unqualified actual profile and inherited-history substitution before arm',async()=>{
- for(const mode of ['profile','history','containment']){const x=await setup();
+ for(const mode of ['profile','history','containment','resources']){const x=await setup();
   if(mode==='profile')x.f.env.AFW_RELEASE_OPERATOR_ENABLED='false';
-  else {const primary=x.capabilities.readPrimary;x.capabilities.readPrimary=async()=>{const p=await primary();if(mode==='history')p.legacyPreparedHash='0'.repeat(64);else p.containment.denyBeforeAccess=false;return p;};}
+  else {const primary=x.capabilities.readPrimary;x.capabilities.readPrimary=async()=>{const p=await primary();if(mode==='history')p.legacyPreparedHash='0'.repeat(64);else if(mode==='resources')p.resources.containerId='0'.repeat(64);else p.containment.denyBeforeAccess=false;return p;};}
   assert.equal((await api.createPrivateQaFiniteTrialGuard(x.options()).arm()).status,'admin_pending');assert.equal(x.calls.length,0);
  }
 });

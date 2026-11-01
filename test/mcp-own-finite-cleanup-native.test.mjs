@@ -33,29 +33,45 @@ test('native finite seal survives restart and accounts for every held writer',as
    if(method==='ready')return this.readFiniteTrialCleanupReadiness(refs);
    if(method==='proof')return this.observeFiniteTrialCleanup({...refs,proofChallenge:'2'.repeat(64)});
    if(method==='badshape')return this.sealFiniteTrialAdmission({...refs,proofChallenge:'2'.repeat(64)});
+   if(method==='reservation'){
+    const p=c.plan,at=p.T0;
+    await this.env.DB.prepare('INSERT INTO dossier_successor_reservations VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind('afw.own-successor.v1',p.trialId,'e'.repeat(64),'d'.repeat(64),p.selectors.programHash,p.selectors.sourceRevision,p.resources.applicationId,p.resources.containerId,p.selectors.programHash,p.selectors.sourceRevision,'a'.repeat(64),p.selectors.startAt,p.selectors.expiresAt,1,at,at,at,at,'prepared').run();return {};
+   }
+   if(method==='admission'){
+    const p=c.plan,s=p.selectors;
+    await this.env.DB.prepare('INSERT INTO dossier_node_process_admissions VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(s.grantId,s.projectId,s.subject,s.clientId,s.resource,1,p.T0,s.expiresAt,p.resources.containerId,'8'.repeat(64),s.programHash,s.sourceRevision,'cloudflare/debian-trixie',p.T0,s.expiresAt).run();return {};
+   }
    if(method==='settle')return this.settleFiniteTrialReservation({intentId:c.plan.intentId,controlHash:c.controlHash});
    throw Error('fixture');
   }
  }
  export default {async fetch(r,e){const x=await r.json();
-  if(x.method==='seed'){for(const sql of ${JSON.stringify(schemas)})await e.DB.prepare(sql).run();return Response.json({});}
+  if(x.method==='seed'){
+   await e.DB.exec('CREATE TABLE site_projects(id TEXT PRIMARY KEY,user_id TEXT,revision INTEGER);CREATE TABLE delegated_access_grants(id TEXT PRIMARY KEY,user_id TEXT,client_id TEXT,project_id TEXT,resource TEXT,scopes_json TEXT,expires_at TEXT,revoked_at TEXT);');
+   const f=finiteFixture({at:Number(e.T0)}),p=f.plan,s=p.selectors;
+   await e.DB.prepare('INSERT INTO site_projects VALUES(?,?,?)').bind(s.projectId,s.subject,1).run();
+   await e.DB.prepare('INSERT INTO delegated_access_grants VALUES(?,?,?,?,?,?,?,?)').bind(s.grantId,s.subject,s.clientId,s.projectId,s.resource,'[]',new Date(s.expiresAt).toISOString(),'').run();
+   for(const sql of ${JSON.stringify(schemas)})await e.DB.prepare(sql).run();return Response.json({});}
   const stub=e.AFW_DOSSIER_EVENTS_NODE.get(e.AFW_DOSSIER_EVENTS_NODE.idFromName(x.actor??'afw-own-event-first-successor-v1'));
   try{return Response.json(await stub.fixture(x.method,x.value));}catch{return Response.json({status:'denied'},{status:409});}
  }};
  `;
  const b=await build({stdin:{contents,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*']});
- for(const mode of ['none','Reservation','Admission','Launch']){
+ for(const mode of ['none','Reservation','Admission','Launch','reservation_settled','reservation_late','admission_late']){
   const T0=Date.now(),options=rev=>convertV4MiniflareOptions({modules:true,script:b.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{T0:String(T0),REV:rev,AFW_FINITE_TRIAL_VERSION:{id:'31111111-1111-4111-8111-111111111111'}},durableObjects:{AFW_DOSSIER_EVENTS_NODE:{className:'Native',useSQLite:true,uniqueKey:'finite-native-'+mode}},d1Databases:{DB:'finite-db-'+mode}});
   const mf=new Miniflare(options('first'));
   const call=async(method,value,status=200,actor)=>{const r=await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify({method,value,actor})});assert.equal(r.status,status);return r.json();};
   try{
-   await call('seed');if(mode!=='none')assert.equal((await call('begin',mode)).status,'issued');
+   await call('seed');if(mode!=='none')assert.equal((await call('begin',mode.startsWith('reservation_')?'Reservation':mode==='admission_late'?'Admission':mode)).status,'issued');
+   if(mode==='reservation_settled'){await call('reservation');assert.equal((await call('settle')).status,'settled');}
    await call('clock',T0+240003);assert.equal((await call('seal')).status,'sealed');
    await call('badshape',null,409);await call('read',null,409,'wrong-actor');
    await mf.setOptions(options('recreated'));assert.equal((await call('read')).sealed,true);
-   assert.equal((await call('begin','Reservation')).status,mode==='Reservation'?'reconcile_only':'blocked');
-   if(mode==='none'){assert.equal((await call('ready')).status,'ready_for_capture');assert.equal((await call('proof')).proof.kind,'sealed_without_admission');await call('proof',null,409);}
-   else {assert.equal((await call('ready')).status,'not_yet_observed');assert.equal((await call('read')).unresolvedWriters,1);assert.ok(['admin_pending','blocked'].includes((await call('settle')).status));}
+   assert.equal((await call('begin','Reservation')).status,mode==='Reservation'||mode.startsWith('reservation_')?'reconcile_only':'blocked');
+   if(mode==='none'||mode==='reservation_settled'){assert.equal((await call('ready')).status,'ready_for_capture');assert.equal((await call('proof')).proof.kind,'sealed_without_admission');await call('proof',null,409);}
+   else {assert.equal((await call('ready')).status,'not_yet_observed');
+    if(mode==='admission_late'){await call('admission');assert.equal((await call('ready')).status,'not_yet_observed');}
+    if(mode==='reservation_late'){await call('reservation');assert.equal((await call('ready')).status,'not_yet_observed');assert.equal((await call('settle')).status,'settled');assert.equal((await call('ready')).status,'ready_for_capture');assert.equal((await call('proof')).proof.kind,'sealed_without_admission');continue;}assert.equal((await call('read')).unresolvedWriters,1);assert.ok(['admin_pending','blocked'].includes((await call('settle')).status));}
   }finally{await mf.dispose();}
  }
 });
