@@ -1,4 +1,4 @@
-name: Finite Task3 round1 temporary source qualifier
+name: Finite Task4 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -19,8 +19,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Task3 round1 covering contracts
-        run: node --test --test-reporter=spec test/mcp-qa-finite-finalizer.test.mjs test/mcp-qa-finite-http.test.mjs test/mcp-qa-finite-cf-http.test.mjs test/mcp-qa-finite-command.test.mjs
+      - name: Task4 finite receiver RED
+        run: node --test --test-reporter=spec test/mcp-own-finite-entrypoints.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-http.mjs lib/mcp-qa-finite-trial-finalizer.mjs scripts/run-qa-finite-trial-finalizer.mjs test/mcp-qa-finite-http.test.mjs test/fixtures/finite-github.mjs
+        run: npx eslint test/mcp-own-finite-entrypoints.test.mjs
