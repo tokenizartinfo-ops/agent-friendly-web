@@ -1,3 +1,6 @@
+import {createHash} from 'node:crypto';
+import {inertNamedConfirmationPolicy} from './fixtures/inert-named-confirmation-policy.mjs';
+import {validateReleaseOperatorBundle} from '../lib/mcp-release-operator-policy.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {activationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
@@ -11,8 +14,17 @@ function fixture(){
  return v;
 }
 test('private_projection_preserves_full_fingerprint',()=>{
- const a=fixture(),b=structuredClone(a);
- b.bindings.find(x=>x.name==='AFW_DOSSIER_EVENTS_POLICY').text='SYNTHETIC-DIFFERENT-PRIVATE-POLICY';
+ const script='export default {fetch(){return new Response(null,{status:404})}}';
+ const artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:createHash('sha256').update(script).digest('hex'),sourceCheck:'git-inputs-before-after-v1'};
+ const policy=inertNamedConfirmationPolicy(artifact),a=fixture();
+ for(const binding of a.bindings){const original=policy.observation.configuration.bindings.find(x=>x.name===binding.name);if(original&&binding.type==='plain_text'&&original.type==='plain_text')binding.text=original.text;}
+ const b=structuredClone(a),event=b.bindings.find(x=>x.name==='AFW_DOSSIER_EVENTS_POLICY');
+ const changed=JSON.parse(event.text);changed.grantId='ci-only-second-inert';event.text=JSON.stringify(changed);
+ for(const configuration of [a,b]){const p=structuredClone(policy);p.observation.configuration=configuration;p.plan.configurationHash=activationConfigurationHash(configuration);assert.equal(validateReleaseOperatorBundle({artifact,policy:p}),true);}
+ const bad=structuredClone(b),raw=bad.bindings.find(x=>x.name==='AFW_DOSSIER_EVENTS_POLICY'),invalid=JSON.parse(raw.text);invalid.clientId='wrong-private-client';raw.text=JSON.stringify(invalid);
+ const invalidPolicy=structuredClone(policy);invalidPolicy.observation.configuration=bad;invalidPolicy.plan.configurationHash=activationConfigurationHash(bad);
+ assert.deepEqual(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:b}),api.projectFinitePublicConfiguration({role:'canaryLive',metadata:bad}));
+ assert.throws(()=>validateReleaseOperatorBundle({artifact,policy:invalidPolicy}),/Release operator plan unavailable/);
  assert.deepEqual(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:a}),api.projectFinitePublicConfiguration({role:'canaryLive',metadata:b}));
  assert.notEqual(activationConfigurationHash(a),activationConfigurationHash(b));
  assert.notEqual(restorationConfigurationHash(a),restorationConfigurationHash(b));
@@ -33,8 +45,11 @@ test('actual_version_metadata_required',()=>{
 });
 test('exact public roles reject missing slots, accessors, flags, resource substitution and raw QA policies',()=>{
  const a=fixture();
+ assert.equal(a.bindings.find(b=>b.name==='AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED').text,'true');
+ assert.equal(a.bindings.find(b=>b.name==='AFW_DOSSIER_RETIREMENT_READ_ENABLED').text,'false');
  for(const mutate of [
   v=>v.bindings.pop(),
+  v=>v.limits={cpu_ms:10},
   v=>v.bindings.find(b=>b.name==='DB').id='00000000-0000-0000-0000-000000000000',
   v=>v.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_ENABLED').text='false',
   v=>v.bindings.find(b=>b.name==='AFW_FINITE_TRIAL_VERSION').type='plain_text',
@@ -46,4 +61,11 @@ test('exact public roles reject missing slots, accessors, flags, resource substi
  assert.equal(qa.bindings.filter(b=>b.name.startsWith('AFW_RELEASE_')&&b.text==='true').length,4);
  qa.bindings.push({name:'AFW_DOSSIER_EVENTS_POLICY',type:'plain_text',text:'private'});
  assert.throws(()=>api.projectFinitePublicConfiguration({role:'qaLive',metadata:qa}));
+});
+
+test('projection rejects caller extras and accessor without invocation',()=>{
+ let invoked=false;const input={role:'qaLive'};
+ Object.defineProperty(input,'metadata',{enumerable:true,get(){invoked=true;throw Error('getter');}});
+ assert.throws(()=>api.projectFinitePublicConfiguration(input));assert.equal(invoked,false);
+ assert.throws(()=>api.projectFinitePublicConfiguration({role:'qaLive',metadata:api.finitePublicProfileTemplate('qaLive'),allow:true}));
 });

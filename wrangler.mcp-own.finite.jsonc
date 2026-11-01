@@ -25,10 +25,12 @@
     "AFW_OAUTH_RESOURCE": "https://delegated-canary.agentfriendlyweb.dev/mcp",
     "AFW_DOSSIER_EVENTS_ENABLED": "true",
     "AFW_DOSSIER_SUCCESSOR_ENABLED": "true",
-    "AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED": "false",
-    "AFW_DOSSIER_RETIREMENT_ENABLED": "false",
+    "AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED": "true",
     "AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED": "false",
-    "AFW_DOSSIER_SYNTHETIC_SAVE_ENABLED": "false"
+    "AFW_DOSSIER_RETIREMENT_READ_ENABLED": "false",
+    "AFW_DOSSIER_OWN_SAVE_ENABLED": "false",
+    "AFW_DOSSIER_MONITORING_OWNER_ENABLED": "false",
+    "AFW_DOSSIER_EVENTS_NODE_NAME": "afw-own-event-first-successor-v1"
   },
   "d1_databases": [
     {

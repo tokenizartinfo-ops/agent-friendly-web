@@ -28,11 +28,11 @@ test('native finite legacy delivery, withdrawal and schedule cannot enter any ho
  import worker,{AfwOwnEventNode} from './worker/mcp-own/finite.mjs';
  export class Native extends AfwOwnEventNode{
   constructor(ctx,env){const touches=[];super(ctx,new Proxy(env,{get(_v,k){touches.push(String(k));throw Error('host forbidden');}}));this.touches=touches;}
-  async fixture(method){const present=typeof this[method]==='function',args=method==='withdrawPermissions'?[]:method==='withdrawPermissionsForPlan'?[{policyHash:'a'.repeat(64),expiresAt:1}]:['old-event','old-subscription'];try{await this[method](...args);return {present,denied:false,touches:this.touches};}catch{return {present,denied:true,touches:this.touches};}}
+  async fixture(method){const present=typeof this[method]==='function',args=method==='withdrawPermissions'?[]:method==='withdrawPermissionsForPlan'?[{policyHash:'a'.repeat(64),expiresAt:1}]:method==='withdrawFiniteTrialPermissions'?[{intentId:'a'.repeat(64),controlHash:'b'.repeat(64)}]:['old-event','old-subscription'];try{await this[method](...args);return {present,denied:false,touches:this.touches};}catch{return {present,denied:true,touches:this.touches};}}
  }
  export default{async fetch(request,env){const method=new URL(request.url).pathname.slice(1);
   if(method==='schedule'){const touches=[];const result=await worker.scheduled({scheduledTime:Date.now()},new Proxy(env,{get(_v,k){touches.push(String(k));throw Error('host forbidden');}}));return Response.json({result,touches});}
-  return Response.json(await env.NODE.get(env.NODE.idFromName('receiver')).fixture(method));
+  return Response.json(await env.NODE.get(env.NODE.idFromName(method)).fixture(method));
  }};
  `;
  const b=await build({stdin:{contents,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],define:{'globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__':'"finite_trial_event"'}});
