@@ -1,3 +1,5 @@
+import {readFiniteTrialCleanupProofHead,readRetainedFiniteCleanupProof,readFiniteTrialCleanupCompletion} from '../../lib/mcp-qa-finite-cleanup-store.mjs';
+import {runPrivateQaFiniteTrialAlarm} from '../../lib/mcp-qa-finite-trial-guard.mjs';
 import {readPrivateQaGenerationPreparation,runPrivateQaGenerationPreparation} from '../../lib/mcp-qa-generation-preparation.mjs';
 import {readPrivateQaNamedPacket,runPrivateQaNamedPacketObservation} from '../../lib/mcp-qa-named-preflight.mjs';
 import {readPrivateQaCurrentGeneration,readPrivateQaRetainedGeneration} from '../../lib/mcp-qa-generation-resolver.mjs';
@@ -176,6 +178,10 @@ export class PrivateQaCatalog extends DurableObject {
 // Private host only. Missing catalog/custody stays closed. No caller approval,
 // provisioning, registration, HTTP routes or implicit enrollment.
 export class IndependentClosure extends DurableObject {
+ async #finiteRead(fn,args){if(args.length!==1||!isPrivateCanaryRestorationActor(this.env,this.ctx))throw Error('Finite read unavailable');return fn({...args[0],storage:this.ctx.storage});}
+ readFiniteTrialCleanupProofHead(...args){return this.#finiteRead(readFiniteTrialCleanupProofHead,args);}
+ readRetainedFiniteCleanupProof(...args){return this.#finiteRead(readRetainedFiniteCleanupProof,args);}
+ readFiniteTrialCleanupCompletion(...args){return this.#finiteRead(readFiniteTrialCleanupCompletion,args);}
  readOwnQaGenerationPreparation(...args){return readPrivateQaGenerationPreparation({env:this.env,ctx:this.ctx,args});}
  readOwnQaNamedPacket(...args){return readPrivateQaNamedPacket({env:this.env,ctx:this.ctx,args});}
  readOwnQaGeneration(...args){return readPrivateQaCurrentGeneration({env:this.env,ctx:this.ctx,args});}
@@ -209,7 +215,7 @@ export class IndependentClosure extends DurableObject {
  }
  arm(){if(isPrivateCanaryRestorationActor(this.env,this.ctx))return Promise.resolve({state:'unavailable'});return this.actor.arm();}
  status(){if(isPrivateCanaryRestorationActor(this.env,this.ctx))return Promise.resolve({state:'unavailable'});return this.actor.status();}
- alarm(){if(isPrivateCanaryRestorationActor(this.env,this.ctx))return Promise.resolve({state:'unavailable'});return this.actor.alarm();}
+ async alarm(){if(isPrivateCanaryRestorationActor(this.env,this.ctx)){const finite=await runPrivateQaFiniteTrialAlarm({ctx:this.ctx,env:this.env});return finite??{state:'unavailable'};}return this.actor.alarm();}
  fetch(){return new Response(null,{status:404});}
 }
 const worker={async fetch(request,env){if(new URL(request.url).pathname.startsWith('/assistance/occurrences/'))return fetchOwnOccurrence(request,env);if(env?.AFW_QA_CHALLENGE_ENABLED!=='true'||!challengePath(request)||!env.AFW_QA_PREREGISTRY)return new Response(null,{status:404});try{return await env.AFW_QA_PREREGISTRY.get(env.AFW_QA_PREREGISTRY.idFromName('own-qa')).fetch(request);}catch{return Response.json({code:'unavailable'},{status:503,headers:{'Cache-Control':'no-store'}});}}};
