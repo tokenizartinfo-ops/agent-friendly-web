@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {armObservationFixture as baseFixture} from './fixtures/qa-arm-observation.mjs';
+import {generationFixture} from './fixtures/qa-generation-ledger.mjs';
+import {createPrivateQaGenerationLedger} from '../lib/mcp-qa-generation-ledger.mjs';
 import {runPrivateQaArmObservation as v1} from '../lib/mcp-qa-arm-observation.mjs';
 const observationPurpose='afw.qa-closed-quiescence-observation.v2';
 function armObservationFixture(){const f=baseFixture();f.context.purpose='afw.qa-closed-quiescence-context.v2';f.event.payload.operation='inspect_closed_quiescence';return f;}
@@ -82,4 +84,8 @@ for(const mode of ['late-callback','earlier-context','step-settlement','race-set
 });
 test('v2 rejects the v1 operation or context rather than selecting a timing mode',async()=>{
  for(const change of [f=>{f.context.purpose='afw.qa-arm-http-observation-context.v1';},f=>{f.event.payload.operation='inspect_arm_quiescence';},f=>{f.event.payload.mode='active';}]){const f=armObservationFixture();change(f);const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.equal(f.requests.length,0);}
+});
+
+test('actual generation ARM refuses an observed v2 DTO as eligibility and writes nothing',async()=>{
+ const f=armObservationFixture(),r=await run(f);safe(r);assert.equal(r.status,'observed');const g=generationFixture(),before=structuredClone([...g.rows]);g.eligibility=async()=>r;const ledger=createPrivateQaGenerationLedger(g.options());assert.equal((await ledger.arm()).status,'blocked');assert.deepEqual([...g.rows],before);
 });
