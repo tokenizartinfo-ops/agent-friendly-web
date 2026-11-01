@@ -73,3 +73,49 @@ Non-atomic remote/D1 writes can still leave admin-pending. The seal never claims
 Task3 must implement the actual external finalizer, exact precreated bootstrap observer/terminal output and bounded transport/credential identity. Its accepted preview ruling breaks the ready/controlHash cycle using {operation,intentId,sourceRevision} and a read-only native first-step material receipt; this report/spec records the ruling but Task2 does not implement it. Task4 must mount actual profile/resolver/delivery, deny legacy delivery before host access, preserve the original runtime contract and package real compatible closed artifacts/bindings. Current Workflow POST401/code10000 remains an actual promotion gate; token metadata and source CI do not prove permission, custody or autonomous initiation.
 
 Exclude .github/workflows/finite-task1-temporary-qualifier.yml from eventual integration. It is source-only scaffolding, not the finalizer. Source rollback is revert only; no history/reset or remote rollback was performed. operationalReadiness=false.
+
+
+## Task2 review fix round 1 — finite nominal continuation deadline
+2026-11-01 UTC. This appendix supersedes the initial code identity above for the scoped fix; it preserves that earlier qualification as history.
+
+FIX_BASE: `340aca28d86bd4609fb0f077842f515b06ebf69a`.
+Final fix code: `75c71b2394c44e880b3238c4866136b707158315`.
+Exact-code Actions: [41325873588](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41325873588) / [job124905564368](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41325873588/job/124905564368): **78 PASS, 0 FAIL, 0 SKIP** (72 focused and 6 affected native tests); scoped ESLint clean.
+
+### Finding and implementation
+Assigned finding: **[P2] Preserve the finite nominal deadline beyond beginLaunch() — lib/mcp-successor-launch-gate.mjs:29.** The begin hook had checked only status, while the durable writer claim carried N1 and subsequent child checks retained broader manifest/candidate expiry. A valid begin immediately before narrower D could therefore continue into a later business effect after D.
+
+The candidate gate now persists the effective minimum of its original N1, exact existing nominal claim deadline and observed current consent expiry in each issued writer claim. The claim is immutable; reconstruction, child-primary validation and cleanup-proof validation accept only a bounded deadline strictly after issuance and no later than the original applicable bound. This is a narrowing of existing authority, never a renewed nominal claim.
+
+The shared private `retainFiniteWriterDeadline(gate, claim, kind, now, until)` validates the module-branded gate, exact identity/kind/claim shape and original bounds, then returns an immutable `{deadline,assertCurrent}`. Reservation and successor launch retain that lease through their existing checks, after awaits and immediately before business sends. Their primary SQL predicates also use the retained deadline, while original row identity/manifest expiry commitments remain unchanged. Launch does not accept a late ACK as success or settle its finite journal after D.
+
+Custody retains the same lease in an invocation-local AsyncLocalStorage context covering its nested admission, persistence and runtime helpers. This avoids mutable constructor-global authority and keeps concurrent/independent cleanup outside the nominal lease. Admission's primary SQL time predicate is narrowed too. Nominal durable writes and runtime sends check the lease immediately before and after awaits. Existing best-effort failure close exits the nominal context; independent close and fixed immutable settlement keep their original cleanup authority. No public constructor flag, caller authority callback, fifth wrapper argument or RPC payload extension was added.
+
+### RED / GREEN evidence
+- Tests-only `37d88301b8af1d598a3f6c4f39f8f70227c648e2`, Actions41325432765/job124904258877: 67 PASS / 4 FAIL. The new actual custody and reservation continuations crossed D and still emitted a launch/INSERT. The first launch assertion counted repeated deployment reads before checking the business call, so the next tests-only checkpoint made that assertion direct.
+- Tests-only `ba992668481de930afbd7222602ff707eb073100`, [Actions41325554517/job124904625120](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41325554517/job/124904625120): 67 PASS / 4 FAIL against unchanged production FIX_BASE. The four failures were the actual Task1 narrowed claim still returning N1, custody launch count 1 instead of 0 after D, successor runtime launch count 1 instead of 0 after a held deployment read, and reservation row count 1 instead of 0.
+- First implementation `54f11e3bd943f2fb495945c9e352a527e544ee07`, Actions41325748276/job124905202083: 70 PASS / 2 FAIL. Both remaining failures were fixture clock inconsistencies: the positive custody fixture used Date.now in the gate but Date.now-minus-one-second in custody; the reservation SQLite override had arity zero and did not replace the two-argument built-in. Final code aligns the synthetic clocks and declares the exact SQL clock arity; production checks were not relaxed. It also rejects an invalid initial continuation clock.
+- Final exact code/run above: 72 focused + 6 native PASS, zero failures/skips. The broader Task2 415-test checkpoint remains historical; this round intentionally ran only covering and affected native checks.
+
+Commands and outputs:
+
+```text
+node --test --test-reporter=spec test/mcp-own-finite-admission-gate.test.mjs test/mcp-finite-nominal-control.test.mjs test/mcp-own-finite-cleanup-proof.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-successor-reservation.test.mjs
+tests 72; pass 72; fail 0; cancelled 0; skipped 0
+
+node --test --test-reporter=spec test/mcp-own-finite-cleanup-native.test.mjs test/mcp-own-finite-reduction-native.test.mjs test/mcp-own-worker-historical-close.test.mjs test/mcp-invocation-storage-native.test.mjs
+tests 6; pass 6; fail 0; cancelled 0; skipped 0
+
+npx eslint lib/mcp-own-finite-admission-gate.mjs lib/mcp-own-finite-cleanup-proof.mjs lib/mcp-finite-child-primary.mjs lib/mcp-node-process-custody.mjs lib/mcp-successor-launch-gate.mjs lib/mcp-successor-reservation.mjs test/fixtures/finite-admission-gate.mjs test/mcp-finite-nominal-control.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-successor-reservation.test.mjs
+exit 0; no ESLint findings
+```
+
+Covering cases include held deployment, retirement, primary-ACK and queued-primary-send launch continuations; queued reservation SQL at exact D; custody admission read held across D followed by usable independent close; the actual Task1 narrower claim's retained deadline; narrow claim reconstruction and settlement after D under C1; and cleanup-proof acceptance of genuinely settled narrower claims. Native workerd/DO/D1 fixtures confirm the affected source consumers and historical cleanup still load and execute. Provider/custody inputs and clocks in source fixtures remain explicitly synthetic; no real physical stop or profile activation is inferred.
+
+### Requested doc-only consistency correction
+The earlier spec's Root execution ruling sentence now explicitly states observer payload `{operation,intentId,sourceRevision}`, with the native read-only material-preview first step deriving plan/control references and original clocks. Successful first-step output supplies those references for admit-and-ready before prepare. This aligns the older sentence with the already accepted later Task2/3 ruling; no observer behavior or Task3 implementation was added.
+
+### Scoped self-review and remaining boundary
+Implementation addresses the assigned P2; independent scoped rereview remains root-owned and pending, not self-approved. Self-review checked all three begin consumers, SQL time fences versus immutable row identity, settled/read-only reconstruction, bound equality, legacy absence of finiteGate, key clearing and separate cleanup authority. Captured D never renews after awaits or on a later read.
+
+A write or launch emitted before D can still have an unknown/lost/late ACK; these changes do not atomically cancel cross-DO/D1/provider effects. Its fixed issued record remains consumed and unresolved until exact read-only settlement is available. No replay, history erasure, deadline extension or false physical-stop proof is introduced. Operational readiness, Task3/4 factory/profile/credential qualification and the Workflow POST401 promotion gate remain unchanged. All edits used leased GitHub tree/commit/ref; tests ran in GitHub Actions. No local source/dependencies/build, child agent, runtime action, new credentials/grants, remote schema or trial occurred. The branch-only temporary qualifier must still be excluded from eventual integration. Source rollback is revert only. operationalReadiness=false.

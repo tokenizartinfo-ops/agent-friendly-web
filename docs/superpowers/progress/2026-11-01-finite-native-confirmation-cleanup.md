@@ -60,3 +60,15 @@ Dependency corrections/rulings are appended to spec and plan: five exact module 
 Task3 still owns actual bootstrap material preview/observer/GHA transport/custody; Task4 owns the actual fixed constructors, complete primary inventory/resolver/delivery containment and approved artifact/profile packaging. Source factories are not installed by default. Original known-cancellation wrapper shape/event/stage/deadline contract is preserved. Pre-arm setup stays operator-attended; missing proof/native/credential authority remains admin-pending. Workflow POST401 remains a promotion gate, not an inferred permission fix.
 
 No runtime/profile/binding, credential/token/grant/custody, remote schema or trial action occurred. No local source/dependencies/build, no child agents. Branch-only .github/workflows/finite-task1-temporary-qualifier.yml must be excluded from eventual integration. Source rollback is revert only; legacy journals/history and uncertainty remain intact. operationalReadiness=false.
+
+
+## Task2 review fix round 1 — ready for scoped rereview
+2026-11-01 UTC. FIX_BASE `340aca28d86bd4609fb0f077842f515b06ebf69a`; final fix code `75c71b2394c44e880b3238c4866136b707158315`. The single assigned P2, “Preserve the finite nominal deadline beyond beginLaunch()”, is addressed in implementation; root independent scoped rereview remains pending.
+
+Durable fixed writer claims retain the effective nominal/consent deadline. A shared branded internal continuation check carries it through reservation, custody and successor launch awaits and business sends; all three primary write predicates are bounded too. Custody's invocation-local nominal context does not constrain separate cleanup; immutable settlement retains original C1. Unknown emitted effects remain consumed/unresolved, never retried.
+
+Meaningful tests-only RED `ba992668481de930afbd7222602ff707eb073100`, Actions41325554517/job124904625120: 67 PASS / 4 FAIL including actual late launch/INSERT and lost narrow claim deadline. Final [Actions41325873588/job124905564368](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41325873588/job/124905564368): 72 focused + 6 affected native = **78 PASS / 0 FAIL / 0 SKIP**, scoped lint clean. The report appendix records the initial assertion/fixture clock corrections and exact commands; no broader full-suite rerun was substituted for focused coverage.
+
+Doc-only clarification: the older Root execution ruling now agrees with the accepted exact observer payload `{operation,intentId,sourceRevision}` and first-step native material-preview plan/control references for admit-and-ready before prepare. No Task3 behavior or new ruling implemented. Root owns subsequent Task3 document changes after branch handback.
+
+Report: [Task2 report, fix round 1 appendix](../reports/2026-11-01-finite-native-cleanup-task2.md). Existing Task1 acceptance/report and Task2 history preserved. No runtime/credential/grant/schema/trial action, local source/dependency/build or child agent. Exclude branch-only temporary qualifier from eventual integration; source rollback by revert only. operationalReadiness=false.
