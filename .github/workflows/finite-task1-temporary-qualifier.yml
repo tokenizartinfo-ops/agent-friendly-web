@@ -19,8 +19,5 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Task3 review round1 primary timestamp regression
-        run: node --test test/mcp-qa-finite-seed-http.test.mjs test/mcp-qa-finite-seed-issuer.test.mjs test/mcp-qa-finite-publication-bridge.test.mjs
-      - name: Task3 scoped lint
-        if: always()
-        run: npx eslint lib/mcp-qa-finite-seed-primary.mjs test/mcp-qa-finite-seed-http.test.mjs test/mcp-qa-finite-seed-issuer.test.mjs test/mcp-qa-finite-publication-bridge.test.mjs
+      - name: Task4C1 meaningful RED profile compiler provenance
+        run: node --test test/mcp-qa-finite-profile.test.mjs test/build-finite-native-package.test.mjs test/mcp-qa-finite-profile-native.test.mjs
