@@ -6,7 +6,6 @@ import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {armObservationFixture,observationId,observationPolicies} from './fixtures/qa-arm-observation.mjs';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
-const helperSource=await readFile('lib/mcp-qa-arm-observation.mjs','utf8');
 const baseFile=process.env.AFW_QA_INSPECTION_BASE_MODULE,exactBase=baseFile?await readFile(baseFile):null;
 if(exactBase){assert.equal(exactBase.length,395915);assert.equal(createHash('sha256').update(exactBase).digest('hex'),'4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f');}
 async function fixture(mode){
@@ -34,7 +33,6 @@ async function fixture(mode){
  b.onResolve({filter:/^\.\/closed-rollback\.mjs$/},()=>({path:'base',namespace:'observation-fixture'}));
  b.onResolve({filter:/^\.\/observation-context\.mjs$/},()=>({path:'context',namespace:'observation-fixture'}));
  b.onResolve({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({path:'pins',namespace:'observation-fixture'}));
- b.onLoad({filter:/mcp-qa-arm-observation\.mjs$/},()=>({contents:helperSource.replace('}catch{return blocked(adapter);}',"}catch(error){console.log('SYNTHETIC_CLOSED_OBSERVER_FAILURE '+String(error?.stack??''));return blocked(adapter);}"),resolveDir:process.cwd()+'/lib',loader:'js'}));
  b.onLoad({filter:/.*/,namespace:'observation-fixture'},args=>({contents:args.path==='context'?'export const observation=Object.freeze('+JSON.stringify(context)+');':args.path==='pins'?'export const QA_CLOUD_CLOSED_PINS=Object.freeze('+JSON.stringify(pins)+');':exactBase?exactBase.toString('utf8'):"export {IndependentClosure,PrivateQaBootstrap,PrivateQaPreregistration,PrivateQaNamedConfirmation,default} from './worker/independent-closure/index.mjs';",resolveDir:process.cwd(),loader:'js'}));
  }}]});
  const bindings={MODE:mode,AFW_QA_VERSION:{id:seed.version},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-private-CF-token',...Object.fromEntries(PRIVATE_QA_CLOSED_FLAGS.map(k=>[k,'false'])),...Object.fromEntries(observationPolicies.map(k=>[k,'']))};if(mode==='open')bindings.AFW_QA_HTTP_ENABLED='true';

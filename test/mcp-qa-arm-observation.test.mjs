@@ -54,3 +54,11 @@ test('original monotonic deadline cannot be renewed by wall-clock readings',asyn
 test('complete consumer fence also runs after Step settlement',async()=>{
  const f=armObservationFixture();f.step.do=async(_n,_c,work)=>{const r=await work();f.env.AFW_MCP_CLOSURE_READ_TOKEN='different-private-token';return r;};const r=await run(f);safe(r);assert.equal(r.status,'blocked');
 });
+test('Step transports only a strict bounded primitive, never a borrowed metadata object',async()=>{
+ const f=armObservationFixture();let primitive;
+ f.step.do=async(_n,_c,work)=>{primitive=await work();assert.equal(typeof primitive,'string');assert.ok(Buffer.byteLength(primitive)<=2048);return primitive;};
+ const r=await run(f);safe(r);assert.equal(r.status,'observed');assert.deepEqual(JSON.parse(primitive),r);
+});
+test('a borrowed or substituted Step object remains rejected after real local work',async()=>{
+ const f=armObservationFixture();f.step.do=async(_n,_c,work)=>{const v=await work(),o=JSON.parse(v);Object.defineProperty(o,Symbol.dispose,{value(){}});return o;};const r=await run(f);safe(r);assert.equal(r.status,'blocked');
+});
