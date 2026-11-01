@@ -1,0 +1,21 @@
+name: Native effect HTTP source qualification
+on:
+  push:
+    branches: [feat/native-effect-http-diagnostics-20261101]
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --test test/mcp-qa-cloud-native-observation.test.mjs test/mcp-qa-cloud-clone.test.mjs test/mcp-qa-cloud-native-cli.test.mjs test/mcp-qa-cloud-native-workflow.test.mjs
+      - run: npx --no-install eslint lib/mcp-qa-cloud-clone.mjs test/mcp-qa-cloud-native-observation.test.mjs test/mcp-qa-cloud-native-cli.test.mjs

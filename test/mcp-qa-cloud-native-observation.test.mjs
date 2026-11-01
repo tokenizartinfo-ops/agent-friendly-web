@@ -4,7 +4,7 @@ import {build} from 'esbuild';
 import {qaClosedConfigurationHash} from '../lib/mcp-restoration-configuration.mjs';
 import {qaClosedHttpFixture} from './fixtures/qa-closed-http.mjs';
 const CANDIDATE='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',ACTIVATE='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',RESTORE='cccccccc-cccc-4ccc-8ccc-cccccccccccc';
-async function fixture(){
+async function fixture({effect,transport}={}){
  const f=qaClosedHttpFixture();f.version=f.pins.qaClosed.id;
  const base=f.versions[f.pins.qaClosed.id];base.main_module='closed-rollback.mjs';base.modules[0].name='closed-rollback.mjs';f.pins.qaClosed.module.name='closed-rollback.mjs';f.pins.qaClosed.configurationHash=qaClosedConfigurationHash(base);const at=f.wall,source='a'.repeat(40),now=()=>f.wall;
  const built=await build({stdin:{contents:"export {validateQaLifecycleCommand,validateQaNativeObservationCommand,assertQaLifecycleWindow} from './lib/mcp-qa-cloud-lifecycle-admission.mjs';export {runQaClosedCloudClone,runQaNativeMetadataObservation} from './lib/mcp-qa-cloud-clone.mjs';",resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'test-compiled-pins',setup(b){b.onResolve({filter:/mcp-qa-native-artifact\.mjs$/},()=>({path:'artifact',namespace:'test-artifact'}));b.onLoad({filter:/.*/,namespace:'test-artifact'},()=>({contents:"export function validateQaNativeArtifact({artifact}){if(artifact?.purpose!=='test-fixed-native-wrapper')throw Error('bad test artifact');return artifact;}",loader:'js'}));b.onResolve({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({path:'pins',namespace:'test-pins'}));b.onLoad({filter:/.*/,namespace:'test-pins'},()=>({contents:'export const QA_CLOUD_CLOSED_PINS=Object.freeze('+JSON.stringify(f.pins)+');',loader:'js'}));}}]});
@@ -18,6 +18,11 @@ async function fixture(){
  let mode=null;const response=(result,status=200)=>new Response(JSON.stringify({success:true,errors:[],messages:[],result}),{status,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}});
  const fetchImpl=async(input,init)=>{
   const url=new URL(input),p=url.pathname;
+  if(transport){const intercepted=await transport({url,init,f,admission,response});if(intercepted!==undefined)return intercepted;}
+  if(effect&&['POST','PATCH'].includes(init.method)&&url.origin==='https://api.cloudflare.com'){
+   const b=JSON.parse(init.body),kind=init.method==='PATCH'?'terminateWorkflow':p.endsWith('/versions')?'upload':p.endsWith('/instances')?'createWorkflow':b.versions?.[0]?.version_id===CANDIDATE?'activate':'restore';
+   const intercepted=await effect({kind,url,init,f,admission,response});if(intercepted!==undefined)return intercepted;
+  }
   if(url.origin==='https://www.cloudflarestatus.com'){
    f.requests.push({url,init});assert.equal(p,'/api/v2/incidents/unresolved.json');assert.equal(init.method,'GET');assert.equal(Object.keys(init.headers).some(k=>k.toLowerCase()==='authorization'),false);
    return new Response(JSON.stringify({incidents:mode==='providerIncident'?[{id:'synthetic',name:'Workers errors',status:'investigating'}]:mode==='unrelatedIncident'?[{id:'other',name:'Email routing statistics',status:'investigating',components:[{name:'Email Routing'}]}]:[]}),{status:200,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}});
@@ -194,4 +199,11 @@ for(const status of [403,409])test('denied Workflow create '+status+' never term
 test('healthy native metadata completion near eight seconds is observed before exhausting twelve polls',async()=>{
  const x=await fixture();x.setMode('nativeCompletesAfter7800');const started=performance.now(),r=await x.run(),elapsed=performance.now()-started;
  assert.equal(r.status,'verified',JSON.stringify({status:r.status,polls:x.polls,terminatePosts:x.terminatePosts,elapsed}));assert.equal(r.nativeMetadataObservationVerified,true);assert.equal(r.finalClosedVerified,true);assert.equal(x.terminatePosts,0);assert.equal(x.workflowPosts,1);assert.equal(x.posts.restore,1);assert.ok(x.polls<=12);assert.ok(elapsed>=7800);assert.equal(r.nativeResult.capturedTotalAgeMs,7867);assert.equal(r.mayRetry,false);
+});
+
+
+test('native diagnostic records actual denied create HTTP and safe codes without authority',async()=>{
+ const x=await fixture({effect:({kind,f})=>kind==='createWorkflow'?new Response(JSON.stringify({success:false,errors:[{code:10000,message:'PRIVATE_PROVIDER'}],messages:[],result:null}),{status:403,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}}):undefined});
+ const r=await x.run();assert.equal(r.effectHttp?.purpose,'afw.qa-native-effect-http.v1');
+ assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:[10000]});assert.equal(r.outcomes.createWorkflow,'denied');assert.equal(r.posts.terminateWorkflow,0);assert.equal(r.posts.restore,1);assert.doesNotMatch(JSON.stringify(r),/PRIVATE_PROVIDER/);
 });
