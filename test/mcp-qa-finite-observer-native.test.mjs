@@ -4,7 +4,7 @@ import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
 const entry=`
-import {IndependentClosure,PrivateQaBootstrap} from './worker/independent-closure/index.mjs';
+import {IndependentClosure,PrivateQaBootstrap as BaseBootstrap} from './worker/independent-closure/index.mjs';
 import {installPrivateQaFiniteMaterialFactory} from './lib/mcp-qa-finite-observer-native.mjs';
 import {installPrivateQaFiniteObserverSource} from './lib/mcp-qa-finite-observer.mjs';
 import {createPrivateQaFiniteTrialNativePin} from './lib/mcp-qa-finite-trial-control.mjs';
@@ -40,7 +40,12 @@ export class Native extends IndependentClosure{
  }
  async release(){this.releaseWrite();await this.pendingWrite;return this.env.RELEASE_DB.prepare('SELECT pending,writes FROM held_writer WHERE id=1').first();}
 }
-export {PrivateQaBootstrap};
+export class PrivateQaBootstrap extends BaseBootstrap{
+ async run(event,step){
+  console.log('synthetic workflow input',JSON.stringify(event));
+  return super.run(event,{sleepUntil:(...args)=>step.sleepUntil(...args),do:(name,options,fn)=>step.do(name,options,async()=>{try{const value=await fn();console.log('synthetic step complete',name);return value;}catch(error){console.log('synthetic step failed',name,String(error),error.stack);throw error;}})});
+ }
+}
 export default {async fetch(request,env){
  if(request.method!=='POST')return new Response(null,{status:404});
  const x=await request.json(),actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));

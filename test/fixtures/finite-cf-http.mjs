@@ -5,15 +5,15 @@ import {qaClosedConfigurationHash} from '../../lib/mcp-restoration-configuration
 import {AFW_FIXED_WORKFLOWS} from '../../lib/mcp-fixed-terminal-workflows.mjs';
 import {createPrivateQaFiniteRestoreHttp,createPrivateQaFiniteObserverHttp} from '../../lib/mcp-qa-finite-http.mjs';
 const QA='agent-friendly-web-independent-closure-qa',ROOT='/accounts/85d0d5dadac3341a564f22ce885e9eec';
-export async function cfFiniteFixture(){
+export async function cfFiniteFixture({at,configure=()=>{}}={}){
  const versions={};
- const base=await finiteFinalizerFixture({configure:p=>{
+ const base=await finiteFinalizerFixture({at,configure:(p,f)=>{
   for(const key of ['qaLive','qaClosed']){
    const pin=p.deployments[key],bytes=Buffer.from('export default '+JSON.stringify({profile:key})+';');
    const meta={id:pin.versionId,main_module:'index.mjs',compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat'],usage_model:'standard',urls:[],modules:[{name:'index.mjs',content_type:'application/javascript+module',content_base64:bytes.toString('base64')}],bindings:[{name:'AFW_INDEPENDENT_CLOSURE',type:'durable_object_namespace',class_name:'IndependentClosure',namespace_id:'070c4a7708eb4592a3ded7c117a88225'}]};
    pin.module={name:'index.mjs',sha256:createHash('sha256').update(bytes).digest('hex'),bytes:bytes.length};pin.configurationHash=qaClosedConfigurationHash(meta);versions[pin.versionId]=meta;
   }
-  p.source.moduleHash=p.deployments.qaLive.module.sha256;
+  p.source.moduleHash=p.deployments.qaLive.module.sha256;configure(p,f);
  }});
  const gh=await githubFixture(base),p=base.plan,v=p.preview,def=AFW_FIXED_WORKFLOWS.find(x=>x.className==='PrivateQaBootstrap'),workflowVersion='77777777-7777-4777-8777-777777777777',requests=[];
  base.restorationState.observer='complete';base.old.state.canary={...base.old.state.canary,versions:[{version_id:p.deployments.canaryClosed.versionId,percentage:100}],id:p.deployments.canaryClosed.deploymentId};

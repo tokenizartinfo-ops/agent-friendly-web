@@ -17,7 +17,7 @@ export async function githubFixture(base){
   if(path==='/git/tags'&&init.method==='POST'){tagPosts++;const sha=String(tagPosts).padStart(40,'a'),tag={sha,message:body.message,object:{type:body.type,sha:body.object}};tags.set(sha,tag);return response(tag,201);}
   if(path==='/git/refs'&&init.method==='POST'){
    refPosts++;if(rows.has(body.ref))return response({},422);
-   const value={ref:body.ref,object:{type:'tag',sha:body.sha}};rows.set(body.ref,value);
+   const value={ref:body.ref,object:{type:tags.has(body.sha)?'tag':'commit',sha:body.sha}};rows.set(body.ref,value);
    if(state.mode==='lost')throw Error('fixture secret');if(state.mode==='late')f.f.setNow(v.R1);
    return response(value,201);
   }
