@@ -1,3 +1,4 @@
+import {resolveFiniteOwnNativeCleanupHost} from '../../lib/mcp-own-finite-cleanup-host.mjs';
 import {withdrawOwnPermissions} from '../../lib/mcp-own-permission-withdrawal-host.mjs';
 import {DurableObject,WorkerEntrypoint} from 'cloudflare:workers';
 import {readOwnSuccessorHost} from '../../lib/mcp-own-successor-host.mjs';
@@ -35,6 +36,12 @@ export class AfwOwnEventNode extends DurableObject{
   catch{diagnostic?.record('native_failed');fail();}
  }
  fetch(){return deny();}
+ // Private fixed finite methods; closed profiles have no compiled factory.
+ async beginFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.beginFiniteTrialReservation(args[0]);}
+ async settleFiniteTrialReservation(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.settleFiniteTrialReservation(args[0]);}
+ async sealFiniteTrialAdmission(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.sealFiniteTrialAdmission(args[0]);}
+ async readFiniteTrialCleanupReadiness(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.readFiniteTrialCleanupReadiness(args[0]);}
+ async observeFiniteTrialCleanup(...args){if(args.length!==1)fail();const h=await resolveFiniteOwnNativeCleanupHost({ctx:this.ctx,env:this.env});return h.observeFiniteTrialCleanup(args[0]);}
  // Private original-custody observation; no caller selectors or live runtime.
  async observeRetired(...args){try{if(args.length)fail();return await observeOwnRetiredCustody({env:this.env,ctx:this.ctx});}catch{fail();}}
  // Fixed read-only challenged wrappers. No selectors, fallback or new authority.

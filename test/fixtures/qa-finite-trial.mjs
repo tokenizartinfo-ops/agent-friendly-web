@@ -19,7 +19,7 @@ export function finiteFixture({at:override}={}){
  source:{revision:'b'.repeat(40),tree:'c'.repeat(40),moduleHash:'d'.repeat(64),profileHash:'e'.repeat(64),bindingsHash:'f'.repeat(64)},
  trialId:'3'.repeat(64),grantHash:hash('current-grant'),monitorHash:'4'.repeat(64),eventPlanHash:'5'.repeat(64),bundleHash:'6'.repeat(64),
  T0,N1,C0,C1,R1,
- resources:{actorId,containerId:'7'.repeat(64),applicationId:version,namespaceId:'8'.repeat(32),qaD1Id:version,releaseD1Id:version.replace(/^1/,'2'),canaryActorId:'9'.repeat(64)},
+ resources:{actorId,containerId:'7'.repeat(64),applicationId:'d6fc71552de7494a863aca20365a572d',namespaceId:'8'.repeat(32),qaD1Id:version,releaseD1Id:version.replace(/^1/,'2'),canaryActorId:'9'.repeat(64)},
  deployments:{qaLive:{...pin(1),versionId:version},qaClosed:pin(2),canaryLive:pin(3),canaryClosed:pin(4),operatorClosed:pin(5)},
  canaryContainment:{sourceRevision:'f'.repeat(40),runtimeVersionId:pin(3).versionId,moduleHash:'0'.repeat(64),profileHash:'1'.repeat(64),bindingsHash:'2'.repeat(64)},
  selectors:{grantId:'current-grant',subject:'subject',projectId:'project',clientId:'client',resource:'https://fixed.invalid/mcp',consentHash:'a'.repeat(64),programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40),startAt:T0,expiresAt:N1,saveIdempotencyKey:'11111111-1111-4111-8111-111111111111',expectedProjectRevision:1,goal:'discovery'},

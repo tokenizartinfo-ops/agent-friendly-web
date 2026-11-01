@@ -55,3 +55,14 @@ test('guard rejects unqualified actual profile and inherited-history substitutio
   assert.equal((await api.createPrivateQaFiniteTrialGuard(x.options()).arm()).status,'admin_pending');assert.equal(x.calls.length,0);
  }
 });
+
+test('delayed synthetic STOP is observed on second delivery without spending proof early or resending close',async()=>{
+ const x=await setup(),base=x.capabilities.proof.read;let observations=0;
+ x.capabilities.proof.read=async()=>{observations++;if(x.f.now()<x.f.plan.C0+45000)return {status:'not_yet_observed'};return base();};
+ await api.createPrivateQaFiniteTrialGuard(x.options()).arm();x.f.setNow(x.f.plan.C0+3);
+ assert.equal((await api.createPrivateQaFiniteTrialGuard(x.options()).alarm()).status,'admin_pending');
+ assert.equal(x.f.alarm,x.f.plan.C0+60000);assert.equal(x.f.rows.has('afw.qa-finite-cleanup.v1:'+x.f.plan.intentId+':capture'),false);
+ x.reconstruct();x.f.setNow(x.f.plan.C0+60003);
+ assert.equal((await api.createPrivateQaFiniteTrialGuard(x.options()).alarm()).status,'complete');
+ assert.equal(observations,2);assert.deepEqual(x.calls,['withdraw','close','seal','canary_restore']);assert.equal(x.f.alarm,null);
+});
