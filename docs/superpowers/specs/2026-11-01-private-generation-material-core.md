@@ -17,7 +17,7 @@ New lib/mcp-qa-generation-material.mjs exports:
 assemblePrivateQaGenerationDraftMaterial({
  namedBundleHash,draftJson,legacySnapshot,artifact,receipt,historicalContext,namespace,at
 })
-All exact own data fields. Synchronous only; no Promise, I/O, storage, clock acquisition, host selector, callback authorization, policy override or execution pin.
+Exactly eight own fields. All are literal private data except namespace, the existing opaque trusted native identity adapter. Preserve its existing local identity-method calls; never copy it into returned data or inject authorization callbacks. The host pins that binding before/after the synchronous core under its original lease. Synchronous only; no Promise, I/O, storage, clock acquisition, host selector, callback authorization, policy override or execution pin.
 Inputs are private server-owned data: legacySnapshot literal shape {control,journals}; historicalContext and compiled artifact/receipt retain their original validators and order; namespace is the existing native namespace binding consumed by the packet assembler. at is the caller's already-checked instant and is not authority.
 
 Algorithm is moved, not reinvented, from createPrivateQaGenerationPreparation.prepare:
@@ -32,7 +32,7 @@ purpose:'afw.qa-generation-draft-material.v1',
 packetJson,capsuleJson,namedBundleHash,generationPlanHash,packetHash,
 original,historicalScope,historicalCandidate,window,
 retainedUncertainty:true,authorizesEffects:false,guardLivenessVerified:false,nativeWithdrawalVerified:false,operationalReadiness:false,mayRetry:false.
-Private fields are NOT a public DTO or a fresh consent/history/zero-reservation/provenance witness. Deep literal owned copies of returned data avoid retaining mutable policy objects. No secrets/raw values in tests' error output.
+Private fields are NOT a public DTO or a fresh consent/history/zero-reservation/provenance witness. Deep literal owned copies of original, historicalScope, historicalCandidate and window avoid retaining mutable policy objects, without freezing or mutating caller input. No secrets/raw values in tests' error output.
 
 ## Existing host invariants MUST remain
 Modify only preparation host composition to call this core and use returned original/historicalScope/historicalCandidate/window for existing primary readers.
