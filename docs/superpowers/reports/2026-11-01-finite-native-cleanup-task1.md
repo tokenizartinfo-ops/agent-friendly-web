@@ -6,7 +6,7 @@
 - Branch: feat/finite-native-cleanup-20261101.
 - Assigned BASE: 8b3ebb647edca8249aa1c8f237c047c996ba858d.
 - Accepted dependency: main cd13d3de95e32adaef0411e94b5665dae3cdbcc2 / PR709.
-- Final code head: a5cefc7df7c6644bcb9bb94f2b8ba1e851216dc8.
+- Final code head after independent-review fix round 1/5: 3b11c580c721f545e6497490792c9d1d092b01a9.
 - No existing runtime, wrapper, guard, finalizer, profile, custody, grant, schema or default behavior changed. No local source/dependencies/builds or child agents. All edits used remote Git trees/commits with expected-head leases; all execution used GitHub Actions.
 - Rollback is source revert only. No storage deletion, budget refund, historical rewrite or intent reuse.
 
@@ -58,3 +58,19 @@ Full integrated suite/build/source promotion is root's later gate, not claimed h
 Self-review corrected ACK-local acknowledgment timing, exact stored capture/effect grammar, unknown prefix records, fresh subscription/process correlation, same-proof separate restoration claims, actual narrow claim deadline, consumed nominal eligibility and sticky clock reversal invalidation. Root interim source checks corrected distinct QA/canary artifact tuples and preserving narrower consent across awaited finalizer/fact/storage operations.
 
 Root independently reviews this exact Task1 code head next. Remaining tasks must supply real trusted primary producers, containment/native admission seal, guard and retained cleanup proof/completion, bounded fixed transport and independent finalizer, and actual wrapper/profile. No live mutation, finalizer readiness, physical stop, PC-off or operational-readiness credit follows from these tests.
+
+## Independent review fix round 1/5 — cleanup claim ACK deadline
+One P2 finding, no other findings: close/canary cleanup claims could return issued if their awaited write/ACK crossed original C1, and qa_restore could do so across R1. This round started from c888e156216013ae3a41bc704eb4ff7b2b9e54e6 and preserves root's subsequent spec/plan/ledger rulings.
+
+The new cleanup claim records an invocation-wide cleanupEnd before its first write. Every current() boundary, including post-write, transaction ACK and final return, checks that unchanged C1/R1. A potentially committed late write returns uncertain; the issued journal remains consumed, with no refund/retry. Existing-claim reads return before this mutation lease is selected, and reconcileEffect remains GET-only after expiry. No deadlines were extended and no native/profile/runtime code changed.
+
+RED fa2bc42aa83e9da5dffcbb54556d5c18ad5f2326, Actions41315656840/job124875021543:55 tests,53PASS2FAIL0SKIP. Both close(C1−1→C1) and qa_restore(R1−1→R1) returned actual issued instead of expected uncertain. The regressions hold the already-committed claim ACK until the exact original end, then verify immutable retained rows/no additional puts, reconcile_only on repeat and successful read-only receipt reconciliation after expiry.
+
+GREEN code 3b11c580c721f545e6497490792c9d1d092b01a9, [Actions41315740901](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41315740901)/[job124875264618](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41315740901/job/124875264618):55 focused+2 existing native+89 nearby=146PASS,0FAIL0SKIP; scoped ESLint clean. Exact commands remain:
+```sh
+node --test --test-reporter=spec test/mcp-qa-finite-trial-control.test.mjs
+node --test --test-reporter=spec test/mcp-qa-finite-trial-control-native.test.mjs
+node --test --test-reporter=spec test/mcp-qa-generation-ledger.test.mjs test/mcp-qa-execution-identity.test.mjs test/mcp-own-synthetic-save.test.mjs
+npx eslint lib/mcp-qa-finite-trial-control.mjs test/mcp-qa-finite-trial-control*.test.mjs test/fixtures/qa-finite-trial.mjs
+```
+Only the new control and focused test file changed in source; the real workerd persistence suite ran unchanged. Full suite was not run. Root scoped rereview remains pending; all first-intent/same-instance/source-only limitations above remain. operationalReadiness=false.
