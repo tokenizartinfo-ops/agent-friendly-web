@@ -23,6 +23,8 @@ jobs:
         run: node --test --test-reporter=spec test/mcp-own-finite-admission-gate.test.mjs
       - name: Discriminated finite proof
         run: node --test --test-reporter=spec test/mcp-own-finite-cleanup-proof.test.mjs
+      - name: Retained proof and finite alarm
+        run: node --test --test-reporter=spec test/mcp-qa-finite-cleanup-store.test.mjs test/mcp-qa-finite-trial-guard.test.mjs
       - name: Actual finite writer hooks
         run: node --test --test-reporter=spec test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-successor-reservation.test.mjs
       - name: Task1 focused RED GREEN
