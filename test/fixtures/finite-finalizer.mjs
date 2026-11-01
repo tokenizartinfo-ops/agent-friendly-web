@@ -4,7 +4,7 @@ import {projectPrivateQaFiniteReferences} from '../../lib/mcp-qa-finite-trial-co
 import {projectFiniteExternalPlan,validateFiniteObserverOutput} from '../../lib/mcp-qa-finite-external-contract.mjs';
 import {finiteObserverInstanceId} from '../../lib/mcp-qa-finite-observer.mjs';
 export async function finiteFinalizerFixture({configure=()=>{},at}={}){
- const base=await finiteRestorationFixture({at,configure:p=>{p.intentId='a'.repeat(64);p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});configure(p);}});
+ const base=await finiteRestorationFixture({at,configure:(p,f)=>{p.intentId='a'.repeat(64);p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});configure(p,f);}});
  const {f,identity,store,ctl}=base,p=f.plan,v=projectPrivateQaFiniteReferences(identity),retained=base.retained.record;
  const policy=[{effect:'allow',resources:{'com.cloudflare.api.account.85d0d5dadac3341a564f22ce885e9eec':'*'},permission_groups:[{id:'1'.repeat(32)},{id:'2'.repeat(32)}]}];
  const custody={id:'a'.repeat(32),expiresAt:p.R1,policyHash:hash(policy),permissionGroupIds:['1'.repeat(32),'2'.repeat(32)]};

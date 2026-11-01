@@ -21,7 +21,7 @@ installPrivateQaFiniteMaterialFactory(async({ctx,env})=>{
 });
 export class Native extends IndependentClosure{
  async seed(){
-  const f=await finiteFinalizerFixture({at:Number(this.env.T0),configure:p=>{p.resources.actorId=this.ctx.id.toString();}});
+  const f=await finiteFinalizerFixture({at:Number(this.env.T0),configure:(p,f)=>{p.resources.actorId=this.ctx.id.toString();f.ctx.id={toString:()=>p.resources.actorId};f.env.AFW_INDEPENDENT_CLOSURE={idFromName:()=>({toString:()=>p.resources.actorId})};}});
   fixtures.set(this.ctx.id.toString(),f);
   for(const[k,v]of f.f.rows)await this.ctx.storage.put(k,v);
   await this.ctx.storage.delete('afw.qa-finite-trial.v1:'+f.preview.intentId+':effect:qa_restore');
