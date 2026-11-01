@@ -36,7 +36,7 @@ for(const [name,mutate] of denied)test('denies before credential: '+name,async()
 test('one fixed GET observes actual identity and limits authority',async()=>{const f=fixture();const dto=await runQaBootstrapCustodyInspection(f.args);assert.equal(dto.status,'verified');assert.equal(dto.tokenId,ID);assert.equal(dto.expectedTokenMatch,true);assert.equal(dto.expiresAt,f.result.expires_on);assert.equal(dto.sourceRevision,SHA);assert.equal(dto.commentId,'123');assert.equal(dto.runId,'456');assert.equal(f.counts.reads,1);assert.equal(f.calls.length,1);const {url,init}=f.calls[0];assert.equal(url,'https://api.cloudflare.com/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/tokens/verify');assert.equal(init.method,'GET');assert.equal(init.redirect,'error');assert.equal(init.body,undefined);assert.equal(init.headers.Authorization,'Bearer opaque-CREDENTIAL_SENTINEL');safe(dto);});
 for(const [name,change,expected] of [
  ['mismatch',r=>r.id='b'.repeat(32),{expectedTokenMatch:false}],
- ['expired',r=>{r.status='expired';r.expires_on='2026-10-31T16:00:00Z';},{tokenStatus:'expired'}],
+ ['expired',r=>{r.status='expired';r.expires_on='2026-10-31T16:00:00Z';r.not_before='2026-10-30T16:00:00Z';},{tokenStatus:'expired'}],
  ['disabled',r=>r.status='disabled',{tokenStatus:'disabled'}],
  ['missing expiry',r=>{delete r.expires_on;delete r.not_before;},{expiresAt:null,notBefore:null}],
 ])test('truthful '+name,async()=>{const f=fixture();change(f.result);f.args.fetchImpl=async()=>f.response();const dto=await runQaBootstrapCustodyInspection(f.args);assert.equal(dto.status,'verified');for(const [k,v]of Object.entries(expected))assert.equal(dto[k],v);safe(dto);});
@@ -86,4 +86,10 @@ test('CLI rejects arguments with only a fixed sanitized artifact', () => {
   const dto = JSON.parse(readFileSync(join(directory,'afw-qa-bootstrap-custody-inspection/result.json'),'utf8'));
   assert.equal(dto.status,'blocked'); safe(dto);
  } finally { rmSync(directory,{recursive:true,force:true}); }
+});
+test('successful informational message code 10000 is not an error', async () => {
+ const f = fixture();
+ f.args.fetchImpl = async () => new Response(JSON.stringify({success:true,errors:[],messages:[{code:10000,message:'This API Token is valid and active. CREDENTIAL_SENTINEL'}],result:f.result}),{headers:{date:new Date(START).toUTCString()}});
+ const dto = await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'verified'); assert.deepEqual(dto.errorCodes,[]); assert.equal(dto.expectedTokenMatch,true); safe(dto);
 });
