@@ -1,0 +1,63 @@
+name: AFW closed ARM observation baseline qualification
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: afw-qa-cloud-closed-rollback
+  cancel-in-progress: false
+jobs:
+  qualify:
+    if: ${{ github.ref == 'refs/heads/main' && github.run_attempt == '1' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    environment: afw-qa-cloud-closed-rollback
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Read only the exact immutable baseline into this ephemeral runner
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import {writeFile} from 'node:fs/promises';
+          import {join} from 'node:path';
+          const fail=()=>{throw Error('Exact closed QA baseline unavailable');};
+          try{
+            const token=process.env.AFW_QA_CLOSED_TOKEN;
+            if(typeof token!=='string'||!/^[A-Za-z0-9_-]{20,512}$/.test(token))fail();
+            const url='https://api.cloudflare.com/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/workers/agent-friendly-web-independent-closure-qa/versions/c570b60b-95dc-48e1-89f3-9c4651691dbc?include=modules';
+            const response=await fetch(url,{method:'GET',headers:{Authorization:'Bearer '+token,Accept:'application/json'},redirect:'error',signal:AbortSignal.timeout(15000)});
+            if(response.status!==200)fail();
+            const raw=await response.text();if(Buffer.byteLength(raw)>1048576)fail();
+            const envelope=JSON.parse(raw),v=envelope.result;
+            if(envelope.success!==true||!Array.isArray(envelope.errors)||envelope.errors.length||v?.id!=='c570b60b-95dc-48e1-89f3-9c4651691dbc'||v.main_module!=='closed-rollback.mjs'||!Array.isArray(v.modules)||v.modules.length!==1)fail();
+            const m=v.modules[0];if(m.name!=='closed-rollback.mjs'||m.content_type!=='application/javascript+module'||typeof m.content_base64!=='string')fail();
+            const source=Buffer.from(m.content_base64,'base64'),sha256=createHash('sha256').update(source).digest('hex');
+            if(source.toString('base64')!==m.content_base64||source.length!==395915||sha256!=='4b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f')fail();
+            await writeFile(join(process.env.RUNNER_TEMP,'afw-qa-legacy-exact-base.mjs'),source,{flag:'wx',mode:0o600});
+            const receipt={purpose:'afw.qa-legacy-baseline-qualification.v1',sourceRevision:process.env.GITHUB_SHA,baselineVersionId:v.id,moduleBytes:source.length,moduleHash:sha256,readOnly:true,operationalReadiness:false};
+            await writeFile('afw-qa-arm-observation-baseline-result.json',JSON.stringify(receipt)+'\n',{flag:'wx'});
+            console.log(JSON.stringify(receipt));
+          }catch{console.error('Exact closed QA baseline qualification failed; no remote writes or retry.');process.exitCode=1;}
+          NODE
+      - name: Run both inherited inspection and closed ARM observation tests against exact baseline bytes
+        env:
+          AFW_QA_INSPECTION_BASE_MODULE: ${{ runner.temp }}/afw-qa-legacy-exact-base.mjs
+        run: node --test test/mcp-qa-legacy-inspection-native.test.mjs test/mcp-qa-arm-observation-native.test.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-qa-arm-observation-baseline-${{ github.run_id }}-${{ github.run_attempt }}
+          path: afw-qa-arm-observation-baseline-result.json
+          if-no-files-found: error
+          retention-days: 7

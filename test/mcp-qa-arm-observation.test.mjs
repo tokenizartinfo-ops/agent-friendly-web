@@ -46,3 +46,11 @@ test('unknown failed GET never leaks exceptions or retries',async()=>{
 test('no late start can refresh the native original absolute deadline',async()=>{
  const f=armObservationFixture(),o=f.options();f.event.timestamp=new Date(f.wall-4500);o.now=()=>{const at=f.wall;f.wall+=100;return at;};const r=await run(f,o);safe(r);assert.equal(r.status,'blocked');assert.ok(f.requests.length<25);
 });
+test('original monotonic deadline cannot be renewed by wall-clock readings',async()=>{
+ const f=armObservationFixture(),descriptor=Object.getOwnPropertyDescriptor(performance,'now'),clock=performance.now.bind(performance);let offset=0;
+ Object.defineProperty(performance,'now',{value:()=>clock()+offset,configurable:true});f.attack=()=>{offset=5001;};
+ try{const r=await run(f);safe(r);assert.equal(r.status,'blocked');assert.ok(f.requests.length<=2);}finally{if(descriptor)Object.defineProperty(performance,'now',descriptor);else delete performance.now;}
+});
+test('complete consumer fence also runs after Step settlement',async()=>{
+ const f=armObservationFixture();f.step.do=async(_n,_c,work)=>{const r=await work();f.env.AFW_MCP_CLOSURE_READ_TOKEN='different-private-token';return r;};const r=await run(f);safe(r);assert.equal(r.status,'blocked');
+});
