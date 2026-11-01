@@ -25,9 +25,9 @@ async function execute(mode='normal',{prepare=false}={}){
  const process={env,argv:['node',prepare?'scripts/qa-native-baseline-prepare.mjs':'scripts/qa-cloud-native-observation.mjs'],exitCode:0};
  if(mode==='extraArg')process.argv.push('--output=PRIVATE');
  const a=await artifact(),{base64,...manifest}=a;
- let module=Buffer.from(base64,'base64');
- if(mode==='mutatedBytes'||mode==='mutatedBytesAndHash'){module=Buffer.from(module);module[0]^=1;}
- if(mode==='mutatedBytesAndHash')manifest.sha256=createHash('sha256').update(module).digest('hex');
+ let entryModule=Buffer.from(base64,'base64');
+ if(mode==='mutatedBytes'||mode==='mutatedBytesAndHash'){entryModule=Buffer.from(entryModule);entryModule[0]^=1;}
+ if(mode==='mutatedBytesAndHash')manifest.sha256=createHash('sha256').update(entryModule).digest('hex');
  if(mode==='wrongHash')manifest.sha256='0'.repeat(64);
  if(mode==='wrongArtifactSource')manifest.sourceRevision='b'.repeat(40);
  if(mode==='wrongBaseline')manifest.baselineVersionId='00000000-0000-0000-0000-000000000000';
@@ -42,13 +42,13 @@ async function execute(mode='normal',{prepare=false}={}){
   lstat:async p=>{
    assert.ok([runner,dir,dir+'/index.mjs',dir+'/wrapper-manifest.json'].includes(p),p);
    const isModule=p===dir+'/index.mjs',isManifest=p===dir+'/wrapper-manifest.json';
-   return{size:isModule?(mode==='moduleOversize'?131073:module.length):isManifest?(mode==='manifestOversize'?4097:manifestBytes.length):0,nlink:mode==='hardlink'&&isModule?2:1,mode:mode==='nonprivate'&&isModule?0o644:0o600,isFile:()=>!(mode==='notFile'&&isModule),isSymbolicLink:()=>mode==='symlink'&&isModule||mode==='runnerSymlink'&&p===runner||mode==='directorySymlink'&&p===dir};
+   return{size:isModule?(mode==='moduleOversize'?131073:entryModule.length):isManifest?(mode==='manifestOversize'?4097:manifestBytes.length):0,nlink:mode==='hardlink'&&isModule?2:1,mode:mode==='nonprivate'&&isModule?0o644:0o600,isFile:()=>!(mode==='notFile'&&isModule),isSymbolicLink:()=>mode==='symlink'&&isModule||mode==='runnerSymlink'&&p===runner||mode==='directorySymlink'&&p===dir};
   },
   readFile:async(p,encoding)=>{
    reads.push(p);
    if(p===env.GITHUB_EVENT_PATH){assert.equal(encoding,'utf8');return mode==='eventReadOversize'?' '.repeat(1048577):eventRaw;}
    assert.ok([dir+'/index.mjs',dir+'/wrapper-manifest.json'].includes(p),p);
-   return p.endsWith('/index.mjs')?(mode==='moduleReadOversize'?Buffer.alloc(131073):module):manifestBytes;
+   return p.endsWith('/index.mjs')?(mode==='moduleReadOversize'?Buffer.alloc(131073):entryModule):manifestBytes;
   },
   writeFile:async(path,text,options)=>{if(mode==='existingOutput')throw Error('PRIVATE_EEXIST');writes.push({path,text:Buffer.isBuffer(text)?text.toString():text,options});}
  };
