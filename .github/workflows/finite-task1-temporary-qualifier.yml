@@ -1,4 +1,4 @@
-name: Finite Task2 temporary source qualifier
+name: Finite Task3 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -19,9 +19,5 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Finite deadline and consumer regressions
-        run: node --test --test-reporter=spec test/mcp-original-container-runtime.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-own-durable-host.test.mjs
-      - name: Affected native consumers
-        run: node --test --test-reporter=spec test/mcp-own-finite-cleanup-native.test.mjs test/mcp-own-finite-reduction-native.test.mjs test/mcp-own-worker-historical-close.test.mjs test/mcp-invocation-storage-native.test.mjs
-      - name: Scoped lint
-        run: npx eslint lib/mcp-original-container-runtime.mjs lib/mcp-node-process-custody.mjs lib/mcp-successor-launch-gate.mjs lib/mcp-own-durable-host.mjs test/mcp-original-container-runtime.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs
+      - name: Task3 focused contracts
+        run: node --test --test-reporter=spec test/mcp-qa-finite-finalizer.test.mjs
