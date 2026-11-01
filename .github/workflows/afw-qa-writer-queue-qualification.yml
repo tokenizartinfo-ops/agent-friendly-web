@@ -1,0 +1,24 @@
+name: AFW writer queue source qualification
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    concurrency:
+      group: afw-qa-writer-queue-contract-${{ github.sha }}
+      queue: max
+      cancel-in-progress: false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Qualify writer queue and finite admission with synthetic data only
+        run: node --test test/mcp-qa-cloud-lifecycle-admission.test.mjs

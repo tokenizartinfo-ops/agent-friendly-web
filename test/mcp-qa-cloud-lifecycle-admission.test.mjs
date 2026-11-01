@@ -67,3 +67,20 @@ test('existing writer and real source qualification use documented max queue wit
  assert.match(probe,/queue: max/);assert.match(probe,/cancel-in-progress: false/);assert.doesNotMatch(probe,/secrets\.|environment:|contents: write|workflow_dispatch/);assert.match(probe,/pull_request:/);
  const readback=await readFile('.github/workflows/afw-own-closed-readback.yml','utf8');assert.match(readback,/group: afw-own-closed-readback/);
 });
+
+test('concurrent claim calls consume before the first await',async()=>{
+ const f=fixture(),a=admit(f);let calls=0,release;const waiting=new Promise(resolve=>{release=resolve;});
+ const fetchImpl=async()=>{calls++;await waiting;return response(a,f);};
+ const first=claim(f,a,fetchImpl);await assert.rejects(claim(f,a,fetchImpl));release();assert.equal((await first).claimed,true);assert.equal(calls,1);
+});
+test('monotonic deadline cannot be renewed by a stalled wall clock',()=>{
+ const descriptor=Object.getOwnPropertyDescriptor(globalThis,'performance');let mono=100;
+ Object.defineProperty(globalThis,'performance',{configurable:true,value:{now:()=>mono}});
+ try{const f=fixture(),a=admit(f);mono+=479000;assert.throws(()=>api.assertQaLifecycleWindow(a,'cleanup'));}
+ finally{Object.defineProperty(globalThis,'performance',descriptor);}
+});
+test('noncooperative fetch is stopped by the independent finite claim timer',async()=>{
+ const f=fixture(),a=admit(f);let calls=0,signal;
+ await assert.rejects(claim(f,a,async(_url,init)=>{calls++;signal=init.signal;return new Promise(()=>{});}));
+ assert.equal(calls,1);assert.equal(signal.aborted,true);assert.throws(()=>api.assertQaLifecycleClaim(a));await assert.rejects(claim(f,a,async()=>{calls++;return response(a,f);}));assert.equal(calls,1);
+});
