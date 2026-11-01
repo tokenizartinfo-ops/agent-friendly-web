@@ -1,0 +1,20 @@
+name: Native controller source qualification
+on:
+  pull_request:
+    branches: [feat/closed-native-cloud-observation-20261101]
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --test test/mcp-qa-cloud-native-observation.test.mjs test/mcp-qa-cloud-clone.test.mjs
