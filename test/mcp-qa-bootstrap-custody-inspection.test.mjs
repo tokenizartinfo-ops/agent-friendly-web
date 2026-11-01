@@ -111,3 +111,49 @@ test('malformed informational messages remain secret-free failures', async () =>
  const dto=await runQaBootstrapCustodyInspection(f.args);
  assert.equal(dto.status,'blocked'); safe(dto);
 });
+
+const infoMessage = () => ({code:10000,message:'This API Token is valid and active',documentation_url:'https://example.invalid/CREDENTIAL_SENTINEL',source:{pointer:'/CREDENTIAL_SENTINEL'}});
+function infoResponse(f, message, status=200) {
+ return new Response(JSON.stringify({success:status===200,errors:status===200?[]:[message],messages:status===200?[message]:[],result:status===200?f.result:null}),{status,headers:{date:new Date(START).toUTCString()}});
+}
+for (const [name, change] of [
+ ['documented extras',()=>{}],
+ ['documentation only',message=>delete message.source],
+ ['source only',message=>delete message.documentation_url],
+ ['empty source',message=>message.source={}],
+ ['bounded strings',message=>{message.documentation_url='x'.repeat(2048);message.source.pointer='y'.repeat(2048);}],
+]) test('accepts informational message '+name+' without following or echoing fields', async()=>{
+ const f=fixture(), message=infoMessage(); change(message);
+ let requests=0;
+ f.args.fetchImpl=async()=>{requests++;return infoResponse(f,message);};
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'verified');assert.equal(dto.tokenId,ID);assert.deepEqual(dto.errorCodes,[]);assert.equal(requests,1);safe(dto);
+ assert.doesNotMatch(JSON.stringify(dto),/example.invalid|documentation_url|pointer/);
+});
+for (const [name, change] of [
+ ['unknown key',message=>message.extra=true],
+ ['documentation null',message=>message.documentation_url=null],
+ ['documentation object',message=>message.documentation_url={}],
+ ['documentation oversized',message=>message.documentation_url='x'.repeat(2049)],
+ ['source null',message=>message.source=null],
+ ['source array',message=>message.source=[]],
+ ['source string',message=>message.source='CREDENTIAL_SENTINEL'],
+ ['source unknown key',message=>message.source={path:'CREDENTIAL_SENTINEL'}],
+ ['pointer null',message=>message.source.pointer=null],
+ ['pointer number',message=>message.source.pointer=1],
+ ['pointer oversized',message=>message.source.pointer='x'.repeat(2049)],
+ ['missing code',message=>delete message.code],
+ ['missing message',message=>delete message.message],
+]) test('rejects malformed informational optional field '+name, async()=>{
+ const f=fixture(),message=infoMessage();change(message);
+ f.args.fetchImpl=async()=>infoResponse(f,message);
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked');assert.equal(dto.tokenId,null);assert.deepEqual(dto.errorCodes,[]);safe(dto);
+});
+test('rejected response with documented error extras keeps numeric code only', async()=>{
+ const f=fixture();
+ f.args.fetchImpl=async()=>infoResponse(f,infoMessage(),401);
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked');assert.equal(dto.httpStatus,401);assert.deepEqual(dto.errorCodes,[10000]);safe(dto);
+ assert.doesNotMatch(JSON.stringify(dto),/example.invalid|documentation_url|pointer/);
+});
