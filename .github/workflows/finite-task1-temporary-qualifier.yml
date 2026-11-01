@@ -1,4 +1,4 @@
-name: Finite material Task2 temporary source qualifier
+name: Finite material Task3 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -19,16 +19,5 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Task2 real archive resolver
-        run: node --test test/mcp-qa-finite-package.test.mjs
-      - name: Task1 amended fixed-role manifest codec
-        if: always()
+      - name: Task3 seed contract RED
         run: node --test test/mcp-qa-finite-seed.test.mjs
-      - name: Python archive adversarial cases
-        if: always()
-        run: python -m unittest discover -s test -p 'finite_archive_test.py'
-      - name: Scoped lint and Python compile
-        if: always()
-        run: |
-          npx eslint lib/mcp-qa-finite-seed.mjs test/mcp-qa-finite-seed.test.mjs lib/mcp-qa-finite-package.mjs lib/mcp-qa-finite-source.mjs test/mcp-qa-finite-package.test.mjs
-          python -m py_compile scripts/verify-qa-finite-archive.py test/finite_archive_test.py
