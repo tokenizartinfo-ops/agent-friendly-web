@@ -102,7 +102,7 @@ async function fixture(){
   if(mode==='finalReadbackFailure'&&posts.restore&&p.endsWith('/tails'))return response([{id:'PRIVATE_ACTIVE_TAIL'}]);
   return normal(input,init);
  };
- return{f,api,admission,admissionMono,posts,get workflowPosts(){return workflowPosts;},get terminatePosts(){return terminatePosts;},get polls(){return polls;},fetchImpl,setMode(v){mode=v;},run:()=>api.runQaNativeMetadataObservation({admission,credential:'PRIVATE-cf-token-for-test',githubCredential:mode==='modernGithubCredential'?'ghs_SYNTHETIC_APPID_'+'a'.repeat(200)+'.'+'b'.repeat(280)+'.'+'c'.repeat(100):'PRIVATE-gh-token-for-test',fetchImpl,now,artifact}),event,context,now};
+ return{f,api,admission,admissionMono,posts,get workflowPosts(){return workflowPosts;},get terminatePosts(){return terminatePosts;},get polls(){return polls;},get workflowStatus(){return workflow?.status;},fetchImpl,setMode(v){mode=v;},run:()=>api.runQaNativeMetadataObservation({admission,credential:'PRIVATE-cf-token-for-test',githubCredential:mode==='modernGithubCredential'?'ghs_SYNTHETIC_APPID_'+'a'.repeat(200)+'.'+'b'.repeat(280)+'.'+'c'.repeat(100):'PRIVATE-gh-token-for-test',fetchImpl,now,artifact}),event,context,now};
 }
 
 test('native closed lifecycle creates one correlated metadata Workflow, restores once and proves all terminal',async()=>{
@@ -172,10 +172,10 @@ test('late failed Workflow cleanup keeps a full best-effort restore budget above
  assert.equal(r.workflowCleanupFailure,true);assert.equal(x.posts.restore,1);assert.equal(x.f.version,x.f.pins.qaClosed.id);assert.equal(r.finalClosedVerified,true);assert.notEqual(r.status,'verified');assert.equal(r.mayRetry,false);assert.ok(Object.values(r.posts).every(n=>n<=1));
 });
 test('queued native poll sleeps only until the original nominal cutoff before cleanup',async()=>{
- const x=await fixture(),parse=JSON.parse;let reached=false,cutoff,started=0;x.setMode('workflowQueued');
+ const x=await fixture(),parse=JSON.parse;let reached=false,armed=false,cutoff,started=0;x.setMode('workflowQueued');
  try{
-  JSON.parse=(...args)=>{const value=parse(...args);if(!reached&&value?.result?.status==='queued'){
-   reached=true;x.f.wall=x.admission.expiresAt-100;started=performance.now();cutoff=setTimeout(()=>{x.f.wall=x.admission.expiresAt;},100);
+  JSON.parse=(...args)=>{const value=parse(...args);if(!armed&&value?.result?.status==='queued'){
+   armed=true;let reads=0;Object.defineProperty(value.result,'status',{enumerable:true,get(){if(++reads===3){reached=true;x.f.wall=x.admission.expiresAt-100;started=performance.now();cutoff=setTimeout(()=>{x.f.wall=x.admission.expiresAt;},100);}return 'queued';}});
   }return value;};
   const r=await x.run(),elapsed=performance.now()-started;assert.equal(reached,true);assert.ok(elapsed<300,'cleanup took '+elapsed+'ms after 100ms nominal cutoff');assert.notEqual(r.status,'verified');assert.equal(x.terminatePosts,1);assert.equal(x.posts.restore,1);assert.equal(r.finalClosedVerified,true);assert.equal(r.mayRetry,false);
  }finally{clearTimeout(cutoff);JSON.parse=parse;}
@@ -186,5 +186,5 @@ test('real native controller includes original comment and run correlation',asyn
 
 for(const status of [403,409])test('denied Workflow create '+status+' never terminates a concurrent matching instance',async()=>{
  const x=await fixture();x.setMode('createDeniedRace'+status);const r=await x.run();
- assert.equal(x.workflowPosts,1);assert.equal(r.outcomes.createWorkflow,'denied');assert.equal(x.terminatePosts,0);assert.equal(x.posts.restore,1);assert.notEqual(r.status,'verified');assert.equal(r.finalClosedVerified,false);assert.equal(r.mayRetry,false);
+ assert.equal(x.workflowPosts,1);assert.equal(r.outcomes.createWorkflow,'denied');assert.equal(x.terminatePosts,0);assert.equal(x.workflowStatus,'running');assert.equal(x.posts.restore,1);assert.notEqual(r.status,'verified');assert.equal(r.finalClosedVerified,false);assert.equal(r.mayRetry,false);
 });
