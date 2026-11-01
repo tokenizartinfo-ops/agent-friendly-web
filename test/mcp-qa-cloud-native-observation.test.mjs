@@ -29,10 +29,10 @@ async function fixture(){
    assert.equal(init.method,'GET');
    if(!workflow)return mode==='absence403'?response(null,403):new Response(JSON.stringify({success:false,errors:[{code:10000,message:'not found'}],messages:[],result:null}),{status:404,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}});
    if(mode==='preexisting'&&workflowPosts===0)workflow.status='complete';
-   if(mode==='pollNeverSettles'&&workflowPosts)return new Promise(()=>{});
+   if(mode==='pollNeverSettles'&&workflowPosts&&polls++===0)return new Promise(()=>{});
    if(workflowPosts)polls++;
    if(mode==='workflowPaused')workflow.status='paused';
-   if(mode==='workflowRunning'||mode==='terminateUnknown')workflow.status='running';
+   if((mode==='workflowRunning'||mode==='terminateUnknown')&&workflow.status!=='terminated')workflow.status='running';
    if(mode==='wrongParams')workflow.params=JSON.stringify({operation:'inspect_closed_quiescence',observationId:'0'.repeat(64)});
    return response(workflow);
   }
@@ -118,4 +118,27 @@ for(const mode of ['activationUnknown','restoreUnknown','foreignPointer','nomina
 }
 test('old kind and forged native metadata cannot reach even provider GET',async()=>{
  const x=await fixture();let calls=0;await assert.rejects(x.api.runQaNativeMetadataObservation({admission:{...x.admission},credential:'PRIVATE-cf-token-for-test',githubCredential:'PRIVATE-gh-token-for-test',fetchImpl:async()=>{calls++;},now:x.now,artifact:{purpose:'test-fixed-native-wrapper'}}));assert.equal(calls,0);
+});
+
+test('403 Workflow create uses no broader credential or retry and restores exact BASE',async()=>{
+ const x=await fixture();x.setMode('workflow403');const r=await x.run();assert.equal(x.workflowPosts,1);assert.equal(x.posts.restore,1);assert.equal(r.outcomes.createWorkflow,'denied');assert.equal(r.finalClosedVerified,true);assert.equal(r.status,'blocked');
+ assert.ok(x.f.requests.filter(q=>q.url.origin==='https://api.cloudflare.com').every(q=>q.init.headers.Authorization==='Bearer PRIVATE-cf-token-for-test'));assert.equal(r.operationalReadiness,false);
+});
+test('stalled wall and original nominal mono deadline fence a noncooperative native poll while cleanup remains independent',async()=>{
+ const descriptor=Object.getOwnPropertyDescriptor(globalThis,'performance'),native=performance,parse=JSON.parse,realOrigin=native.now();let offset=100,jumped=false,x;
+ Object.defineProperty(globalThis,'performance',{configurable:true,value:{now:()=>native.now()-realOrigin+offset}});
+ try{
+  x=await fixture();x.setMode('pollNeverSettles');
+  JSON.parse=(...args)=>{const value=parse(...args);if(value?.result?.id==='afw-qa-arm-'+x.admission.intentId)Object.defineProperty(value.result,'id',{enumerable:true,get(){if(!jumped){const target=x.admissionMono+(x.admission.expiresAt-x.admission.admittedAt)-30;offset+=target-(native.now()-realOrigin+offset);jumped=true;}return 'afw-qa-arm-'+x.admission.intentId;}});return value;};
+  const begin=native.now(),r=await x.run();assert.equal(jumped,true);assert.ok(native.now()-begin<500);assert.notEqual(r.status,'verified');assert.equal(x.workflowPosts,1);assert.equal(x.posts.restore,1);assert.equal(r.finalClosedVerified,true);
+ }finally{JSON.parse=parse;Object.defineProperty(globalThis,'performance',descriptor);}
+});
+test('stalled wall and original cleanup mono deadline reject late final proof without replay',async()=>{
+ const descriptor=Object.getOwnPropertyDescriptor(globalThis,'performance'),native=performance,parse=JSON.parse,realOrigin=native.now();let offset=100,jumped=false,x;
+ Object.defineProperty(globalThis,'performance',{configurable:true,value:{now:()=>native.now()-realOrigin+offset}});
+ try{
+  x=await fixture();
+  JSON.parse=(...args)=>{const value=parse(...args);if(value?.result?.id===RESTORE)Object.defineProperty(value.result,'id',{enumerable:true,get(){if(!jumped){const target=x.admissionMono+(x.admission.cleanupExpiresAt-x.admission.admittedAt)-30;offset+=target-(native.now()-realOrigin+offset);jumped=true;}return RESTORE;}});return value;};
+  const begin=native.now(),r=await x.run();assert.equal(jumped,true);assert.ok(native.now()-begin<500);assert.notEqual(r.status,'verified');assert.equal(x.posts.restore,1);assert.equal(r.finalClosedVerified,false);assert.equal(r.mayRetry,false);
+ }finally{JSON.parse=parse;Object.defineProperty(globalThis,'performance',descriptor);}
 });
