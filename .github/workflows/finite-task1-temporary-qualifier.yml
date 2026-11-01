@@ -20,8 +20,8 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Finite deadline and consumer regressions
-        run: node --test --test-reporter=spec test/mcp-own-finite-admission-gate.test.mjs test/mcp-finite-nominal-control.test.mjs test/mcp-own-finite-cleanup-proof.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-successor-reservation.test.mjs
+        run: node --test --test-reporter=spec test/mcp-original-container-runtime.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-own-durable-host.test.mjs
       - name: Affected native consumers
         run: node --test --test-reporter=spec test/mcp-own-finite-cleanup-native.test.mjs test/mcp-own-finite-reduction-native.test.mjs test/mcp-own-worker-historical-close.test.mjs test/mcp-invocation-storage-native.test.mjs
       - name: Scoped lint
-        run: npx eslint lib/mcp-own-finite-admission-gate.mjs lib/mcp-own-finite-cleanup-proof.mjs lib/mcp-finite-child-primary.mjs lib/mcp-node-process-custody.mjs lib/mcp-successor-launch-gate.mjs lib/mcp-successor-reservation.mjs test/fixtures/finite-admission-gate.mjs test/mcp-finite-nominal-control.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-successor-reservation.test.mjs
+        run: npx eslint lib/mcp-original-container-runtime.mjs lib/mcp-node-process-custody.mjs lib/mcp-successor-launch-gate.mjs lib/mcp-own-durable-host.mjs test/mcp-original-container-runtime.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-successor-launch-gate.test.mjs

@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {projectDossierEvent} from '../lib/dossier-supervision.mjs';
 import {resolveSuccessorPreparation} from '../lib/mcp-successor-manifest.mjs';
 const load=()=>import('../lib/mcp-successor-launch-gate.mjs');
-async function fixture(retirementAge=0){
+async function fixture(retirementAge=0,programHash='e'.repeat(64)){
  const db=new DatabaseSync(':memory:'),now=Date.now(),secret='z'.repeat(32),context={grantId:'new',subject:'owner',clientId:'client',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',scopes:['afw:project:read']};
  db.exec('CREATE TABLE site_projects(id TEXT PRIMARY KEY,user_id TEXT);CREATE TABLE delegated_access_grants(id TEXT PRIMARY KEY,user_id TEXT,client_id TEXT,project_id TEXT,resource TEXT,scopes_json TEXT,expires_at TEXT,revoked_at TEXT);');
  for(const path of ['dossier-monitoring-consent','dossier-node-process','dossier-successor-reservation','dossier-successor-launch'])db.exec(readFileSync('db/'+path+'.sql','utf8'));
@@ -14,7 +14,7 @@ async function fixture(retirementAge=0){
  db.prepare('INSERT INTO dossier_monitoring_consent_events(grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)').run('new','p','owner','client',context.resource,1,'grant','afw.dossier-monitoring.v1','11111111-1111-4111-8111-111111111111',now-1000,now+60000);
  const projected=await projectDossierEvent({id:'x',projectId:'p',type:'project_created',revision:1,createdAt:'1970-01-01T00:00:00.000Z'},secret);
  const scope={accountId:'1'.repeat(32),workerName:'agent-friendly-web-delegated-canary',namespaceId:'2'.repeat(32),applicationId:'own-app',ownerRef:createHash('sha256').update(JSON.stringify(['afw.dossier-monitoring.v1','principal','owner','client'])).digest('hex'),projectRef:projected.projectRef,resource:context.resource};
- const original={containerId:'a'.repeat(64),applicationId:'own-app',programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40)},candidate={trialId:'d'.repeat(64),programHash:'e'.repeat(64),sourceRevision:'f'.repeat(40),startAt:now-1000,expiresAt:now+30000,budget:1};
+ const original={containerId:'a'.repeat(64),applicationId:'own-app',programHash:'b'.repeat(64),sourceRevision:'c'.repeat(40)},candidate={trialId:'d'.repeat(64),programHash,sourceRevision:'f'.repeat(40),startAt:now-1000,expiresAt:now+30000,budget:1};
  const namespace={idFromName:()=>({toString:()=> '9'.repeat(64)}),idFromString:v=>({toString:()=>v})},plan={scope,original,candidate,namespace},p=resolveSuccessorPreparation(plan);
  const evidence={purpose:'afw.retirement-evidence.v1',...original,processGeneration:'8'.repeat(64),closedAt:now-retirementAge-1000,stoppedAt:now-retirementAge-1000,observedAt:now-retirementAge,physicalStopVerified:true,mayStartSuccessor:false};
  const columns=['slot','trial_id','predecessor_container_id','predecessor_generation','predecessor_program_hash','predecessor_source_revision','application_id','container_id','program_hash','source_revision','scope_hash','start_at','expires_at','budget','closed_at','stopped_at','observed_at','reserved_at','state'];
@@ -122,4 +122,25 @@ test('finite launch retains the narrower nominal deadline through held continuat
    assert.equal(g.rows.get('afw.own-finite-admission.v1:head').writers.launch.settlement,null);
   }finally{f.db.close();}
  }
+});
+
+test('finite launch holds the REAL runtime makeControl across D without starting a Container',async()=>{
+ const {createOriginalContainerRuntime}=await import('../lib/mcp-original-container-runtime.mjs');
+ const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ const {finiteWriterFixture}=await import('./fixtures/finite-admission-gate.mjs');
+ const program='/* fixed synthetic Container source */',f=await fixture(0,createHash('sha256').update(program).digest('hex'));
+ try{
+  let at=f.boot.createdAt,starts=0,running=false,releaseControl,enteredControl;
+  const entered=new Promise(resolve=>{enteredControl=resolve;}),held=new Promise(resolve=>{releaseControl=resolve;}),deadline=at+20000;
+  const container={get running(){return running;},async start(){starts++;running=true;},async setInactivityTimeout(){},async interceptOutboundHttp(){},getTcpPort(){throw Error('no readiness expected');},async destroy(){running=false;}};
+  const runtime=createOriginalContainerRuntime({enabled:true,ctx:{id:{toString:()=>f.boot.containerId},container},program,sourceRevision:f.boot.sourceRevision,window:{startAt:f.plan.candidate.startAt,expiresAt:f.boot.expiresAt},makeControl:async()=>{enteredControl();await held;return{fetch:async()=>new Response(null,{status:404})};},now:()=>at});
+  const g=finiteWriterFixture({now:()=>at,deadline,identity:{containerId:f.boot.containerId,trialId:f.plan.candidate.trialId,grantHash:createHash('sha256').update('new').digest('hex')}});
+  const launch=(await load()).createSuccessorLaunchGate({...f.options,now:()=>at,finiteGate:createFiniteAdmissionGate(g.options),launch:runtime.launch});
+  const pending=launch(f.boot,new AbortController().signal);await entered;at=deadline;releaseControl();
+  await assert.rejects(pending);assert.equal(starts,0,'makeControl must not resume into container.start at D');
+  assert.equal(f.db.prepare('SELECT count(*) n FROM dossier_successor_launch_claims').get().n,1);
+  assert.equal(g.rows.get('afw.own-finite-admission.v1:head').writers.launch.settlement,null);
+  await assert.rejects(launch(f.boot,new AbortController().signal));assert.equal(starts,0);
+  await runtime.close();assert.equal(running,false);
+ }finally{f.db.close();}
 });

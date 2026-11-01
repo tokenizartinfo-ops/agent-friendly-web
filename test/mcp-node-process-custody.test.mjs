@@ -162,3 +162,23 @@ test('finite custody retains the narrow deadline after a held admission read and
   assert.equal(g.rows.get('afw.own-finite-admission.v1:head').writers.admission.settlement,null);
  }finally{f.close();}
 });
+
+test('finite custody passes its retained lease into REAL runtime makeControl continuation',async()=>{
+ const {createOriginalContainerRuntime}=await import('../lib/mcp-original-container-runtime.mjs');
+ const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ const {finiteWriterFixture}=await import('./fixtures/finite-admission-gate.mjs');
+ const {createHash}=await import('node:crypto');const f=fixture();
+ try{
+  f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();
+  let at=f.config.now(),starts=0,running=false,releaseControl,enteredControl,stops=0;const deadline=at+20000;
+  const entered=new Promise(resolve=>{enteredControl=resolve;}),held=new Promise(resolve=>{releaseControl=resolve;}),program='/* fixed synthetic Container source */';
+  const container={get running(){return running;},async start(){starts++;running=true;},async setInactivityTimeout(){},async interceptOutboundHttp(){},getTcpPort(){throw Error('no readiness expected');},async destroy(){stops++;running=false;}};
+  const runtime=createOriginalContainerRuntime({enabled:true,ctx:{id:{toString:()=>f.config.containerId},container},program,sourceRevision:f.config.sourceRevision,window:f.config.window,makeControl:async()=>{enteredControl();await held;return{fetch:async()=>new Response(null,{status:404})};},now:()=>at});
+  const g=finiteWriterFixture({now:()=>at,deadline,identity:{containerId:f.config.containerId,grantHash:createHash('sha256').update(ctx.grantId).digest('hex')}});
+  const a=(await load()).createNodeProcessCustody({...f.config,programHash:createHash('sha256').update(program).digest('hex'),now:()=>at,runtime,finiteGate:createFiniteAdmissionGate(g.options)});
+  const pending=a.start();await entered;at=deadline;releaseControl();await assert.rejects(pending);
+  assert.equal(starts,0,'custody lease must survive nested runtime await');assert.ok(stops>=1);
+  assert.equal((await a.close()).closed,true);assert.equal(running,false);
+  assert.equal(g.rows.get('afw.own-finite-admission.v1:head').writers.admission.settlement,null);
+ }finally{f.close();}
+});
