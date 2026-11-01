@@ -20,7 +20,9 @@ Artifact pin is a transport/data validation boundary, not remote attestation aga
 Owner unavailable before 2026-11-01T12:45:00Z. No OTP or new grants.
 ## Status
 - Design preflight reviewed: 0 P1/P2 with precisions captured in spec.
-- Task1 admission: pending.
-- Task2 pinned wrapper artifact: pending.
-- Task3 integration/entry/workflow: pending.
+- Task1 admission: implemented05b5ec34, cloud focused97PASS; independent task review0P1/P2.
+- Task2 pinned wrapper artifact: implemented5db1655, cloud focused20PASS; wrapper48388B/SHA5b06e201...; independent task review0P1/P2.
+- Task3 integration/entry/workflow: implemented on PR700; root source-only RED22fail; controller corrected to validate the three-module profile both inactive and active. Cloud qualification41282835144 now25PASS, including403, original clocks, unknown ACK and independent restore; old clone qualification also passes. Real CLI/guard contract tests delegated separately.
 - Source CI, exact-head review, merge, new live intent: pending.
+
+Ruling: source pin obtained by actual cloud build receipt41282383977, checked again41282445234; no raw modules in artifact/log. Root independently read job12477693622620PASS, correcting an accidental concatenated job-ID/20PASS in reviewer brief.
