@@ -10,12 +10,12 @@ function fixture(){
  return {at,event,context,now:()=>at};
 }
 test('new exact command has separate domain and original clocks through cleanup restart',()=>{
- const f=fixture(),a=validateQaFiniteConfirmationCommand(f);assert.equal(a.purpose,'afw.qa-finite-confirmation-command.v1');assert.equal(a.createdAt,f.at);assert.equal(a.cleanupExpiresAt,f.at+480000);
+ const f=fixture(),a=validateQaFiniteConfirmationCommand({event:f.event,context:f.context,now:f.now});assert.equal(a.purpose,'afw.qa-finite-confirmation-command.v1');assert.equal(a.createdAt,f.at);assert.equal(a.cleanupExpiresAt,f.at+480000);
  assertQaFiniteConfirmationAdmission(a);f.now=()=>f.at+300001;
- const restored=validateQaFiniteConfirmationCommand(f);assertQaFiniteConfirmationAdmission(restored,'cleanup');assert.throws(()=>assertQaFiniteConfirmationAdmission(restored));
+ const restored=validateQaFiniteConfirmationCommand({event:f.event,context:f.context,now:f.now});assertQaFiniteConfirmationAdmission(restored,'cleanup');assert.throws(()=>assertQaFiniteConfirmationAdmission(restored));
 });
 for(const[mode,attack]of Object.entries({actor:f=>{f.event.sender.id=1;},owner:f=>{f.event.comment.user.type='Bot';},issue:f=>{f.event.issue.number=498;},branch:f=>{f.context.ref='refs/heads/feature';},attempt:f=>{f.context.runAttempt='2';},source:f=>{f.context.sourceRevision='c'.repeat(40);},extraCommand:f=>{f.event.comment.body+='\n';},oldKind:f=>{f.event.comment.body='/afw-qa-native-observe-restore v1 '+f.context.sourceRevision;},future:f=>{f.event.comment.created_at=new Date(f.at+1).toISOString();},expired:f=>{f.event.comment.created_at=new Date(f.at-480000).toISOString();}}))test('finite command denies '+mode,()=>{
- const f=fixture();attack(f);assert.throws(()=>validateQaFiniteConfirmationCommand(f));
+ const f=fixture();attack(f);assert.throws(()=>validateQaFiniteConfirmationCommand({event:f.event,context:f.context,now:f.now}));
 });
 test('uninstalled actual source constructor blocks before secret access, transport or effects',async()=>{
  const f=fixture(),env={GITHUB_EVENT_PATH:'event.json',GITHUB_REPOSITORY:f.context.repository,GITHUB_REPOSITORY_ID:f.context.repositoryId,GITHUB_REF:f.context.ref,GITHUB_EVENT_NAME:f.context.eventName,GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:f.context.sourceRevision};

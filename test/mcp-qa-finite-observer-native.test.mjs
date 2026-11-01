@@ -48,8 +48,7 @@ async function fixture(){
  const T0=Date.now()-240100,flags=Object.fromEntries(PRIVATE_QA_CLOSED_FLAGS.map(k=>[k,'false']));
  for(const k of ['AFW_RELEASE_OPERATOR_ENABLED','AFW_RELEASE_WORKFLOW_ENABLED','AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED','AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED'])flags[k]='true';
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:b.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{...flags,T0:String(T0),AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'}},d1Databases:{RELEASE_DB:'finite-final-primary-native'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'Native',useSQLite:true,uniqueKey:'finite-final-native'},AFW_RELEASE_EVENTS_NODE:{className:'Native',useSQLite:true,uniqueKey:'finite-candidate-native'}},workflows:{FLOW:{name:'finite-observer-test',className:'PrivateQaBootstrap'}}}));
- const env=await mf.getBindings(),actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1')),seed=await actor.seed();
- return {mf,env,actor,seed};
+ try{const env=await mf.getBindings(),actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1')),seed=await actor.seed();return {mf,env,actor,seed};}catch(error){await mf.dispose();throw error;}
 }
 test('actual native Workflow carries one real journal claim then bounded first-primary receipt',{timeout:30000},async()=>{
  const f=await fixture();

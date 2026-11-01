@@ -26,4 +26,5 @@ jobs:
       - name: Actual fixed native RPC regression
         run: timeout 90s node --test --test-reporter=spec test/mcp-qa-finite-read-rpc-native.test.mjs test/mcp-qa-finite-observer-native.test.mjs
       - name: Scoped lint
+        if: always()
         run: npx eslint lib/mcp-qa-finite-*.mjs lib/mcp-own-finite-cleanup-proof.mjs scripts/run-qa-finite-trial-finalizer.mjs test/mcp-qa-finite-finalizer.test.mjs test/fixtures/finite-finalizer.mjs
