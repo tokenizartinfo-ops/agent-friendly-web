@@ -115,3 +115,22 @@ test('malformed factory reflection cannot expose private exception text',()=>{
  const hostile=new Proxy({}, {getPrototypeOf(){throw Error('synthetic-private-factory-detail');}});
  assert.throws(()=>api.createPrivateQaGenerationArm(hostile),{message:'Private QA generation ARM unavailable'});
 });
+
+test('genuine signal cleanup override cannot escape fixed DTO after armed commit',async()=>{
+ const x=generationArmFixture();x.parent.signal.removeEventListener=()=>{throw Error('synthetic-private-cleanup-detail');};
+ const r=await x.run();assert.equal(r.status,'armed');checks(r);const h=x.f.rows.get(HEAD);assert.equal(x.f.rows.get(CONTROL+h.planHash).phase,'armed');
+});
+test('forged AbortSignal prototype cannot admit metadata writes',async()=>{
+ const x=generationArmFixture(),fake=Object.create(AbortSignal.prototype);
+ Object.defineProperty(fake,'aborted',{value:false});fake.addEventListener=()=>{};fake.removeEventListener=()=>{};
+ const r=await api.createPrivateQaGenerationArm(x.options).arm(x.namedBundleHash,fake);assert.equal(r.status,'blocked');checks(r);assert.equal(x.f.storage.puts,0);
+});
+test('genuine already aborted signal cannot conceal its native state with an own field',async()=>{
+ const x=generationArmFixture();x.parent.abort();Object.defineProperty(x.parent.signal,'aborted',{value:false});
+ const r=await x.run();assert.equal(r.status,'blocked');checks(r);assert.equal(x.f.storage.puts,0);
+});
+test('genuine signal own listener overrides cannot hide cancellation after pending commit',async()=>{
+ const x=generationArmFixture();Object.defineProperty(x.parent.signal,'aborted',{value:false});x.parent.signal.addEventListener=()=>{};x.parent.signal.removeEventListener=()=>{};
+ x.afterEligibility=async n=>{if(n===2)x.parent.abort();};
+ const r=await x.run();assert.equal(r.status,'uncertain');checks(r);const h=x.f.rows.get(HEAD);assert.equal(x.f.rows.get(CONTROL+h.planHash).phase,'pending');
+});
