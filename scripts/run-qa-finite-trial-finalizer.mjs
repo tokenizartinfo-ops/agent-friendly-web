@@ -42,9 +42,11 @@ export async function runFiniteFinalizerCli({phase,env=process.env,read=readFile
    if(plan.preview.intentId!==admission.intentId||plan.preview.sourceRevision!==admission.sourceRevision||JSON.stringify(plan.finalizer)!==JSON.stringify(finalizer))fail();
    for(let i=0;i<48;i++){
     assertQaFiniteConfirmationAdmission(admission,'cleanup');
+    const target=admission.createdAt+Math.floor(i*(admission.cleanupExpiresAt-admission.createdAt-5000)/47);
+    if(now()<target)await sleep(target-now());
+    assertQaFiniteConfirmationAdmission(admission,'cleanup');
     const result=await observer.read();
     if(result.status==='complete'){const output=validateFiniteObserverOutput(result.output,plan);await write('afw-finite-terminal.json',JSON.stringify(output));return {status:'observer_complete',operationalReadiness:false};}
-    await sleep(Math.min(5000,Math.max(1,admission.cleanupExpiresAt-now())));
    }fail();
   }
   // Restart/restore loads the exact ORIGINAL observer primary output. No live

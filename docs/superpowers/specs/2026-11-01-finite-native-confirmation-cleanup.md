@@ -171,3 +171,5 @@ Total read-only `step.do` calls are bounded to 32 INCLUDING the first preview: a
 External readiness persists only while the original authenticated command retains its minimum nominal margin, including every awaited custody/provenance/tag/ref boundary. No later run, job queue, step, or read refreshes T0/R1. All source qualification fixtures are synthetic; default source/material/compiled-observer factories remain unavailable. operationalReadiness=false.
 
 Root confirmed the conservative total of 32 read-only step.do calls on 2026-11-01. Sleeps do not count as provider observations. Cost: slightly coarser sampling and possible admin-pending if evidence is late; no extra authority or clock extension. Clone/release applies only to owned returned RPC/step results, never env or shared bindings.
+
+The external admit/poll job uses 48 deterministic observation slots spanning ORIGINAL T0 through R1-5000, with each await checked against original admission expiry. It does not run only 48x5s from readiness (which could exhaust near C0), and it never grants a new duration after setup/queue/restart.
