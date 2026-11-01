@@ -1,3 +1,4 @@
+Error.stackTraceLimit=0;
 import {build} from 'esbuild';
 import {randomUUID} from 'node:crypto';
 // Synthetic source-private process worlds. Each bundle has independent module

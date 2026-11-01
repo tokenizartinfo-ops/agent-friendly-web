@@ -1,3 +1,4 @@
+Error.stackTraceLimit=0;
 import {build} from 'esbuild';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath,pathToFileURL} from 'node:url';

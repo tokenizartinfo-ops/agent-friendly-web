@@ -17,7 +17,7 @@ for(const mode of ['bad-token','bad-scope','wrong-first','wrong-native'])test('a
  assert.equal(r.status,'admin_pending');assert.equal(f.gh.refPosts,0);assert.equal(f.state.posts,0);
 });
 test('successful first-step output is readable while observer stays active; technical only',async()=>{
- const f=await cfFiniteFixture();f.state.observerStatus='running';const preview=await f.observer().preview();assert.equal(preview.controlHash,f.v.controlHash);assert.equal(JSON.stringify(preview).includes('selectors'),false);
+ const f=await cfFiniteFixture();f.state.observerStatus='running';let preview;try{preview=await f.observer().preview();}catch{assert.fail('synthetic seed path stopped at '+f.requests.at(-1)?.url);}assert.equal(preview.controlHash,f.v.controlHash);assert.equal(JSON.stringify(preview).includes('selectors'),false);
 });
 test('caller ready boolean cannot create observer and consume a native occurrence',async()=>{
  const f=await cfFiniteFixture();assert.equal(f.observer().create,undefined);assert.equal(f.requests.length,0);
