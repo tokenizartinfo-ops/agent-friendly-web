@@ -121,3 +121,14 @@ test('retired-only facade exposes no execution methods and preserves original re
  assert.throws(()=>createRetiredCustodyReader({...options,runtime:f.config.runtime}));
  }finally{f.close();}
 });
+
+test('finite seal blocks actual custody admission before primary or launch',async()=>{
+ const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ const {finiteGateFixture}=await import('./fixtures/finite-admission-gate.mjs');
+ const m=await load(),f=fixture(),g=finiteGateFixture(Date.now()-1000);
+ try{f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();
+ const gate=createFiniteAdmissionGate(g.options);await gate.seal();
+ await assert.rejects(m.createNodeProcessCustody({...f.config,finiteGate:gate}).start());
+ assert.equal(f.launches(),0);assert.equal(f.db.prepare('SELECT COUNT(*) AS n FROM dossier_node_process_admissions').get().n,0);
+ }finally{f.close();}
+});

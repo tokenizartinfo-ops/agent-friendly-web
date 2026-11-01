@@ -85,3 +85,13 @@ test('independent SQL clock retains its strict future predicate',async()=>{
   }finally{f.db.close();}
  }
 });
+
+test('finite seal blocks the actual administrative reservation INSERT',async()=>{
+ const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ const {finiteGateFixture}=await import('./fixtures/finite-admission-gate.mjs');
+ const {createSuccessorReservation}=await load(),f=fixture(),g=finiteGateFixture(Date.now()-1000);
+ try{const gate=createFiniteAdmissionGate(g.options);await gate.seal();
+ await assert.rejects(createSuccessorReservation({...f.options,finiteGate:gate}).reserve());
+ assert.equal(f.rows().length,0);assert.equal((await gate.read()).sealed,true);
+ }finally{f.db.close();}
+});

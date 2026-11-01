@@ -96,3 +96,13 @@ test('launch passes original deadline after deployment and before a retirement c
   assert.equal(f.db.prepare('SELECT COUNT(*) AS n FROM dossier_successor_launch_claims').get().n,0);
  }finally{f.db.close();}
 });
+
+test('finite seal blocks actual successor launch claim and runtime launch',async()=>{
+ const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
+ const {finiteGateFixture}=await import('./fixtures/finite-admission-gate.mjs');
+ const m=await load(),f=await fixture(),g=finiteGateFixture(Date.now()-1000);
+ try{const gate=createFiniteAdmissionGate(g.options);await gate.seal();
+ await assert.rejects(m.createSuccessorLaunchGate({...f.options,finiteGate:gate})(f.boot,new AbortController().signal));
+ assert.equal(f.db.prepare('SELECT COUNT(*) AS n FROM dossier_successor_launch_claims').get().n,0);
+ }finally{f.db.close();}
+});
