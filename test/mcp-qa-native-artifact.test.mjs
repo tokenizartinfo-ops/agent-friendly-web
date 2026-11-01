@@ -22,9 +22,9 @@ test('actual build validates against source-committed pin and is immutable',asyn
  assert.equal(a.purpose,'afw.qa-native-wrapper-artifact.v1');assert.equal(a.moduleName,'index.mjs');
  assert.ok(Object.isFrozen(a));assert.ok(a.bytes>0&&a.bytes<=131072);
  assert.equal(a.authorizesEffects,false);assert.equal(a.operationalReadiness,false);
+ console.log('AFW_NATIVE_WRAPPER_PIN_RECEIPT',JSON.stringify({sourceRevision,sha256:a.sha256,bytes:a.bytes}));
  assert.deepEqual(validateQaNativeArtifact({artifact:a,sourceRevision}),a);
  assert.ok(Object.isFrozen(validateQaNativeArtifact({artifact:a,sourceRevision})));
- console.log('AFW_NATIVE_WRAPPER_PIN_RECEIPT',JSON.stringify({sourceRevision,sha256:a.sha256,bytes:a.bytes}));
 });
 test('separate context keeps wrapper bytes identical for distinct source revisions',async()=>{
  const {buildQaNativeWrapper}=await api(),a=await artifact(),b=await buildQaNativeWrapper({sourceRevision:'b'.repeat(40)});
