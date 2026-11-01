@@ -1,0 +1,22 @@
+name: AFW cloud clone source qualification
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Qualify only finite cloud-clone source with synthetic transport and filesystem
+        run: node --test test/mcp-qa-cloud-clone.test.mjs test/mcp-qa-cloud-clone-workflow.test.mjs test/mcp-qa-cloud-clone-cli.test.mjs

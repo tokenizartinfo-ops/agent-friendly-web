@@ -28,8 +28,8 @@ async function fixture(){
     const v=structuredClone(f.versions[f.pins.qaClosed.id]);v.id=CANDIDATE;v.annotations=body.annotations;f.versions[CANDIDATE]=v;
     if(mode==='tagMismatch')v.annotations['workers/tag']='x'.repeat(64);
     if(mode==='moduleDrift')v.modules[0].content_base64=Buffer.from('PRIVATE_WRONG_MODULE').toString('base64');
-    if(mode==='openFlag')v.bindings[0].text='true';
-    if(mode==='unexpectedActivation'){f.version=CANDIDATE;f.deployment=ACTIVATE;annotation=body.annotations['workers/message'];}
+    if(mode==='openFlag'||mode==='unexpectedOpenActivation')v.bindings[0].text='true';
+    if(mode==='unexpectedActivation'||mode==='unexpectedOpenActivation'){f.version=CANDIDATE;f.deployment=ACTIVATE;annotation=body.annotations['workers/message'];}
     if(mode==='uploadUnknown')throw Error('PRIVATE_UPLOAD_ACK');if(mode==='uploadNeverSettles')return new Promise(()=>{});
     return response({id:mode==='candidateEqualsBase'?f.pins.qaClosed.id:CANDIDATE});
    }
@@ -95,3 +95,5 @@ test('noncooperative upload is bounded, remains uncertain and cannot be retried'
 });
 
 test('unrelated provider product does not become an AFW runtime fault or block the fixed closed proof',async()=>{const x=await fixture();x.setMode('unrelatedIncident');const r=await x.run();assert.equal(r.status,'verified');assert.equal(r.otherIncidentCount,1);assert.equal(r.providerChecked,true);});
+
+test('cleanup of an owned unexpectedly active candidate must not depend on its nominal closed-profile proof',async()=>{const x=await fixture();x.setMode('unexpectedOpenActivation');const r=await x.run();assert.notEqual(r.status,'verified');assert.equal(x.posts.activate,0);assert.equal(x.posts.restore,1);assert.equal(r.finalClosedVerified,true);assert.equal(r.mayRetry,false);});
