@@ -1,3 +1,4 @@
+import {v2Manifest} from './fixtures/finite-v2.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -9,18 +10,19 @@ const digest=(domain,v)=>createHash('sha256').update(domain+'\n'+canonical(v)).d
 const roles=['qaLive','qaClosed','canaryLive','canaryClosed','operatorClosed'];
 function fixture(){
  const descriptor=role=>({sourceRevision:'c'.repeat(40),sourceTree:'d'.repeat(40),module:{name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',sha256:'e'.repeat(64),bytes:3145728,exports:['$export','A','_export','z']},configurationHash:'1'.repeat(64),profileHash:'2'.repeat(64),bindingsHash:'3'.repeat(64)});
- const manifest={purpose:'afw.finite-native-package.v1',sourceRevision:'b'.repeat(40),sourceTree:'f'.repeat(40),sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:'4'.repeat(64),modules:Object.fromEntries(roles.map(role=>[role,descriptor(role)])),compatibility:Object.fromEntries(['qaClassesPreserved','qaNamespacesPreserved','canaryClassesPreserved','canaryNamespacesPreserved','closedEntrypointsDenied','legacyContainmentQualified'].map(k=>[k,true]))};
- return {purpose:'afw.finite-material-seed.v1',repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:1347578006,intentId:'a'.repeat(64),sourceRevision:'b'.repeat(40),commandId:'123',finalizer:{runId:11,attempt:1,jobId:12,workflowPath:'.github/workflows/afw-finite-finalizer.yml',seedStep:'seed-material'},build:{workflowPath:'.github/workflows/afw-finite-native-package.yml',runId:13,attempt:1,artifactId:14,artifactName:'afw-finite-native-package-'+'b'.repeat(40),artifactDigest:'sha256:'+'5'.repeat(64),manifestHash:digest('afw.finite-native-manifest.v1',manifest)},manifest,qaPublication:{purpose:'afw.finite-qa-publication.v1',accountId:'85d0d5dadac3341a564f22ce885e9eec',workerName:'agent-friendly-web-independent-closure-qa',qaLive:{versionId:'11111111-1111-4111-8111-111111111111',deploymentId:'22222222-2222-4222-8222-222222222222',...Object.fromEntries(['module','configurationHash','profileHash','bindingsHash'].map(k=>[k,structuredClone(manifest.modules.qaLive[k])]))},qaClosed:{versionId:'c570b60b-95dc-48e1-89f3-9c4651691dbc',...Object.fromEntries(['module','configurationHash','profileHash','bindingsHash'].map(k=>[k,structuredClone(manifest.modules.qaClosed[k])]))},observedAt:Date.parse('2026-11-01T20:00:00Z')}};
+ const manifest={purpose:'afw.finite-native-package.v2',sourceRevision:'b'.repeat(40),sourceTree:'f'.repeat(40),sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:'4'.repeat(64),modules:Object.fromEntries(roles.map(role=>[role,descriptor(role)])),compatibility:Object.fromEntries(['qaClassesPreserved','qaNamespacesPreserved','canaryClassesPreserved','canaryNamespacesPreserved','closedEntrypointsDenied','legacyContainmentQualified'].map(k=>[k,true]))};
+ v2Manifest(manifest);
+ return {purpose:'afw.finite-material-seed.v2',repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:1347578006,intentId:'a'.repeat(64),sourceRevision:'b'.repeat(40),commandId:'123',finalizer:{runId:11,attempt:1,jobId:12,workflowPath:'.github/workflows/afw-finite-finalizer.yml',seedStep:'seed-material'},build:{workflowPath:'.github/workflows/afw-finite-native-package.yml',runId:13,attempt:1,artifactId:14,artifactName:'afw-finite-native-package-'+'b'.repeat(40),artifactDigest:'sha256:'+'5'.repeat(64),manifestHash:digest('afw.finite-native-manifest.v2',manifest)},manifest,qaPublication:{purpose:'afw.finite-qa-publication.v1',accountId:'85d0d5dadac3341a564f22ce885e9eec',workerName:'agent-friendly-web-independent-closure-qa',qaLive:{configurationHash:'1'.repeat(64),versionId:'11111111-1111-4111-8111-111111111111',deploymentId:'22222222-2222-4222-8222-222222222222',...Object.fromEntries(['module','publicStatic'].map(k=>[k,structuredClone(manifest.modules.qaLive[k])]))},qaClosed:{configurationHash:'1'.repeat(64),versionId:'c570b60b-95dc-48e1-89f3-9c4651691dbc',...Object.fromEntries(['module','publicStatic'].map(k=>[k,structuredClone(manifest.modules.qaClosed[k])]))},observedAt:Date.parse('2026-11-01T20:00:00Z')}};
 }
-const envelope=seed=>canonical({purpose:'afw.finite-material-seed-envelope.v1',seed,seedHash:digest('afw.finite-material-seed.v1',seed)});
+const envelope=seed=>canonical({purpose:'afw.finite-material-seed-envelope.v2',seed,seedHash:digest('afw.finite-material-seed.v2',seed)});
 function frozen(v){if(v&&typeof v==='object'){assert.equal(Object.isFrozen(v),true);for(const x of Object.values(v))frozen(x);}}
 test('canonical roundtrip uses independent domains, immutable copy, historical descriptor provenance',()=>{
  const seed=fixture(),before=structuredClone(seed),text=api.encodeFiniteMaterialSeed(seed);
  assert.equal(text,envelope(seed));assert.equal(text.includes('\n'),false);
  const result=api.decodeFiniteMaterialSeed(text);
- assert.deepEqual(result,{seed,seedHash:digest('afw.finite-material-seed.v1',seed)});frozen(result);
+ assert.deepEqual(result,{seed,seedHash:digest('afw.finite-material-seed.v2',seed)});frozen(result);
  assert.notEqual(result.seed,seed);assert.deepEqual(seed,before);
- assert.notEqual(seed.manifest.modules.operatorClosed.sourceRevision,seed.sourceRevision);
+ assert.notEqual(seed.manifest.modules.operatorClosed.provenance.sourceRevision,seed.sourceRevision);
  const reversed=Object.fromEntries(Object.entries(seed).reverse());assert.equal(api.encodeFiniteMaterialSeed(reversed),text);
  const manifest=api.validateFinitePackageManifest(seed.manifest);frozen(manifest);assert.notEqual(manifest,seed.manifest);
  assert.equal(api.encodeFinitePackageManifest(seed.manifest),canonical(seed.manifest));
@@ -33,7 +35,7 @@ const cases={
  'foreign publication worker':s=>s.qaPublication.workerName='foreign',
  'unknown publication field':s=>s.qaPublication.token='secret',
  'wrong closed locator':s=>s.qaPublication.qaClosed.versionId=s.qaPublication.qaLive.versionId,
- 'profile mismatch':s=>s.qaPublication.qaLive.profileHash='0'.repeat(64),
+ 'profile mismatch':s=>s.qaPublication.qaLive.publicStatic.profileHash='0'.repeat(64),
  'module mismatch':s=>s.qaPublication.qaClosed.module.bytes++,
  'noninteger publication date':s=>s.qaPublication.observedAt=1.5,
  'wrong repository':s=>s.repository='other/repo',
@@ -65,11 +67,11 @@ const cases={
  'manifest workflow hash':s=>s.manifest.buildWorkflowHash='A'.repeat(64),
  'missing role':s=>delete s.manifest.modules.qaClosed,
  'extra role':s=>s.manifest.modules.extra=s.manifest.modules.qaLive,
- 'missing descriptor provenance':s=>delete s.manifest.modules.operatorClosed.sourceRevision,
- 'bad descriptor tree':s=>s.manifest.modules.qaLive.sourceTree='x'.repeat(40),
- 'bad configuration hash':s=>s.manifest.modules.qaLive.configurationHash='x'.repeat(64),
- 'bad profile hash':s=>s.manifest.modules.qaLive.profileHash=null,
- 'bad binding hash':s=>s.manifest.modules.qaLive.bindingsHash=1,
+ 'missing descriptor provenance':s=>delete s.manifest.modules.operatorClosed.provenance.receiptKey,
+ 'bad descriptor tree':s=>s.manifest.modules.qaLive.provenance.sourceTree='x'.repeat(40),
+ 'bad configuration hash':s=>s.manifest.modules.qaLive.publicStatic.configurationHash='x'.repeat(64),
+ 'bad profile hash':s=>s.manifest.modules.qaLive.publicStatic.profileHash=null,
+ 'bad binding hash':s=>s.manifest.modules.qaLive.publicStatic.bindingsHash=1,
  'module basename':s=>s.manifest.modules.qaLive.module.name='qaLive/index.mjs',
  'module zero bytes':s=>s.manifest.modules.qaLive.module.bytes=0,
  'module over cap':s=>s.manifest.modules.qaLive.module.bytes=3145729,
@@ -117,13 +119,13 @@ test('empty and 128 valid exports accepted; maximum safe IDs preserved',()=>{
  const seed=fixture();seed.finalizer.runId=Number.MAX_SAFE_INTEGER;seed.manifest.modules.qaLive.module.exports=[];
  seed.manifest.modules.qaClosed.module.exports=Array.from({length:128},(_,i)=>'a'+String(i).padStart(3,'0'));
  for(const role of ['qaLive','qaClosed'])seed.qaPublication[role].module=structuredClone(seed.manifest.modules[role].module);
- seed.build.manifestHash=digest('afw.finite-native-manifest.v1',seed.manifest);
+ seed.build.manifestHash=digest('afw.finite-native-manifest.v2',seed.manifest);
  assert.deepEqual(api.decodeFiniteMaterialSeed(api.encodeFiniteMaterialSeed(seed)).seed,seed);
 });
 test('decode rejects duplicate keys including escaped duplicates and nested duplicates',()=>{
  const text=envelope(fixture());for(const bad of [
- text.replace('"purpose":"afw.finite-material-seed-envelope.v1"','"purpose":"ignored","purpose":"afw.finite-material-seed-envelope.v1"'),
- text.replace('"purpose":"afw.finite-material-seed-envelope.v1"','"pur\\u0070ose":"ignored","purpose":"afw.finite-material-seed-envelope.v1"'),
+ text.replace('"purpose":"afw.finite-material-seed-envelope.v2"','"purpose":"ignored","purpose":"afw.finite-material-seed-envelope.v2"'),
+ text.replace('"purpose":"afw.finite-material-seed-envelope.v2"','"pur\\u0070ose":"ignored","purpose":"afw.finite-material-seed-envelope.v2"'),
  text.replace('"attempt":1','"attempt":2,"attempt":1'),
  ])assert.throws(()=>api.decodeFiniteMaterialSeed(bad),/Finite material/);
 });

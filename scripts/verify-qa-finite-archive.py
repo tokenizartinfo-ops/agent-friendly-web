@@ -129,7 +129,7 @@ def inspect_archive(raw):
                 files[name] = {"sha256": digest.hexdigest(), "bytes": actual}
         require(end == central_start)
     manifest = json.loads(manifest_text, object_pairs_hook=pairs, parse_constant=invalid_constant)
-    require(isinstance(manifest, dict))
+    require(isinstance(manifest, dict) and manifest.get("purpose") == "afw.finite-native-package.v2")
     require(json.dumps(manifest, sort_keys=True, separators=(",", ":"), ensure_ascii=False) == manifest_text)
     return {"manifest": manifest, "manifestText": manifest_text, "files": files}
 

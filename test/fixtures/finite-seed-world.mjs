@@ -1,4 +1,5 @@
 Error.stackTraceLimit=0;
+import {readFileSync} from 'node:fs';
 import {build} from 'esbuild';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath,pathToFileURL} from 'node:url';
@@ -18,29 +19,30 @@ export async function seedWorld({sourceAuthority=true}={}){
  for(const role of Object.keys(m.modules)){
   const d=m.modules[role];d.module={name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',sha256:digest(MODULE),bytes:MODULE.length,exports:['default']};
   const v={id:role==='qaClosed'?closedId:liveId,main_module:d.module.name,compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat'],usage_model:'standard',urls:[],exports:['default'],modules:[{name:d.module.name,content_type:'application/javascript+module',content_base64:MODULE.toString('base64')}],bindings:[{name:'AFW_INDEPENDENT_CLOSURE',type:'durable_object_namespace',class_name:'IndependentClosure',namespace_id:'070c4a7708eb4592a3ded7c117a88225'}]};
-  d.configurationHash=qaClosedConfigurationHash(v);
+  d.publicStatic.configurationHash=digest('PUBLIC-CONFIG:'+role);
   // Explicit SYNTHETIC commitments. Production semantics remain unimplemented.
-  d.profileHash=digest('SYNTHETIC-PROFILE:'+role);d.bindingsHash=digest('SYNTHETIC-BINDINGS:'+role);
+  d.publicStatic.profileHash=digest('SYNTHETIC-PROFILE:'+role);d.publicStatic.bindingsHash=digest('SYNTHETIC-BINDINGS:'+role);
   if(['qaLive','qaClosed'].includes(role))versions[v.id]=v;
  }
  const built=spawnSync('python3',[fileURLToPath(new URL('../finite_archive_test.py',import.meta.url)),'--fixture'],{input:JSON.stringify({manifest:m}),maxBuffer:67108864,timeout:5000});
  if(built.status!==0)throw Error('synthetic ZIP failed');const zip=built.stdout;
  f.seed.build.manifestHash=hashFinitePackageManifest(m);f.seed.build.artifactDigest='sha256:'+digest(zip);
- for(const role of ['qaLive','qaClosed'])for(const key of ['module','configurationHash','profileHash','bindingsHash'])f.seed.qaPublication[role][key]=structuredClone(m.modules[role][key]);
+ for(const role of ['qaLive','qaClosed'])for(const key of ['module','publicStatic'])f.seed.qaPublication[role][key]=structuredClone(m.modules[role][key]);
+ for(const role of ['qaLive','qaClosed'])f.seed.qaPublication[role].configurationHash=qaClosedConfigurationHash(versions[f.seed.qaPublication[role].versionId]);
  f.refresh();
  const artifact=f.map.get('/actions/artifacts/202');artifact.digest=f.seed.build.artifactDigest;artifact.size_in_bytes=zip.length;
  f.seedStep.status='in_progress';f.seedStep.conclusion=null;f.seedStep.completed_at=null;f.setNow(f.T0+1000);
  f.map.delete('/git/ref/tags/afw-finite-observer-create/'+f.seed.intentId);f.map.delete('/git/tags/'+f.tagSha);
- const pins={qaClosed:{name:QA,id:closedId,configurationHash:m.modules.qaClosed.configurationHash,bindingCount:1,flagCount:0,module:{name:'closed-rollback.mjs',bytes:MODULE.length,sha256:digest(MODULE)}}};
+ const pins={qaClosed:{name:QA,id:closedId,configurationHash:f.seed.qaPublication.qaClosed.configurationHash,bindingCount:1,flagCount:0,module:{name:'closed-rollback.mjs',bytes:MODULE.length,sha256:digest(MODULE)}}};
  const syntheticAuthority=`
  import assert from 'node:assert/strict';
  const expected=${JSON.stringify(m)},versions=${JSON.stringify(versions)};
  const fail=()=>{throw Error('synthetic source authority mismatch');};
- export function qualifyFiniteSourcePackage({manifest}){assert.deepEqual(manifest,expected);}
- export function qualifyFiniteSourceRoleMetadata({manifest,role,metadata}){qualifyFiniteSourcePackage({manifest});const v=versions[metadata.id];if(!['qaLive','qaClosed'].includes(role)||!v||JSON.stringify(metadata)!==JSON.stringify(v))fail();}
+ export function qualifyFiniteSourcePackage({manifest}){assert.deepEqual(manifest,expected);return expected.modules;}
+ export function qualifyFiniteSourceRoleMetadata({manifest,role,metadata}){qualifyFiniteSourcePackage({manifest});const v=versions[role==='qaLive'?"11111111-1111-4111-8111-111111111111":"c570b60b-95dc-48e1-89f3-9c4651691dbc"];const config=Object.fromEntries(['compatibility_date','compatibility_flags','main_module','usage_model','containers','exports','bindings'].map(k=>[k,v[k]??(k==='containers'?[]:undefined)]));if(!['qaLive','qaClosed'].includes(role)||JSON.stringify(metadata)!==JSON.stringify(config))fail();return {publicStatic:expected.modules[role].publicStatic};}
  export function qualifyFiniteNativeSourceContext({ctx,env,intentId,sourceRevision,seed}){
   if(ctx.id.toString()!=='synthetic-actor'||env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1').toString()!=='synthetic-actor'||env.AFW_QA_VERSION.id!==${JSON.stringify(liveId)}||env.SOURCE_TEMPLATE!==${JSON.stringify(m.sourceRevision)}||sourceRevision!==env.SOURCE_TEMPLATE||intentId!==${JSON.stringify(f.seed.intentId)})fail();
-  if(seed){qualifyFiniteSourcePackage({manifest:seed.manifest});if(seed.qaPublication.qaLive.profileHash!==expected.modules.qaLive.profileHash||seed.qaPublication.qaLive.bindingsHash!==expected.modules.qaLive.bindingsHash)fail();}
+  if(seed){qualifyFiniteSourcePackage({manifest:seed.manifest});if(seed.qaPublication.qaLive.publicStatic.profileHash!==expected.modules.qaLive.publicStatic.profileHash||seed.qaPublication.qaLive.publicStatic.bindingsHash!==expected.modules.qaLive.publicStatic.bindingsHash)fail();}
  }
  export function readFiniteNativeCustody(){return {id:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',tokenKind:'account',expiresAt:${f.T0+86400000}};}
  `;
@@ -71,6 +73,7 @@ export async function seedWorld({sourceAuthority=true}={}){
   }
   if(!url.startsWith(SEED_GH))throw Error('unexpected synthetic origin');
   const path=url.slice(SEED_GH.length);
+  if(path==='/contents/lib/mcp-qa-cloud-closed-pins.mjs?ref='+m.sourceRevision){const text=readFileSync('lib/mcp-qa-cloud-closed-pins.mjs','utf8');return respond({type:'file',path:'lib/mcp-qa-cloud-closed-pins.mjs',sha:'26213123304eea25e652a52d808d25b7e0e3475e',size:Buffer.byteLength(text),encoding:'base64',content:Buffer.from(text).toString('base64')});}
   if(path==='/actions/workflows/afw-finite-native-package.yml')return respond({id:7,path:f.buildPath,state:'active'});
   if(path.startsWith('/actions/workflows/afw-finite-native-package.yml/runs?'))return respond({total_count:1,workflow_runs:[{...f.map.get('/actions/runs/101'),workflow_id:7}]});
   if(path==='/actions/runs/101/artifacts?per_page=100&page=1')return respond({total_count:1,artifacts:[artifact]});

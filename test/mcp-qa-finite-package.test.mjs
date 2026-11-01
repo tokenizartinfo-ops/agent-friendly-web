@@ -1,3 +1,5 @@
+import {readFileSync} from 'node:fs';
+import {v2Manifest} from './fixtures/finite-v2.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -22,15 +24,17 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 const blob=b=>createHash('sha1').update('blob '+Buffer.byteLength(b)+'\0').update(b).digest('hex');
 const clone=o=>structuredClone(o);
 function fixture(){
- const manifest={purpose:'afw.finite-native-package.v1',sourceRevision:M,sourceTree:TREE,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:sha(WORKFLOW_TEXT),modules:{},compatibility:{}};
+ const manifest={purpose:'afw.finite-native-package.v2',sourceRevision:M,sourceTree:TREE,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:sha(WORKFLOW_TEXT),modules:{},compatibility:{}};
  for(const role of ROLES)manifest.modules[role]={sourceRevision:role==='operatorClosed'?OLD:M,sourceTree:role==='operatorClosed'?OLDTREE:TREE,module:{name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',sha256:sha(MODULE),bytes:MODULE.length,exports:[]},configurationHash:'1'.repeat(64),profileHash:'2'.repeat(64),bindingsHash:'3'.repeat(64)};
  for(const k of ['qaClassesPreserved','qaNamespacesPreserved','canaryClassesPreserved','canaryNamespacesPreserved','closedEntrypointsDenied','legacyContainmentQualified'])manifest.compatibility[k]=true;
+ v2Manifest(manifest);
  const run={id:101,workflow_id:11,path:WORKFLOW,head_sha:M,head_branch:'main',event:'push',status:'completed',conclusion:'success',run_attempt:1,repository:{id:ID,full_name:REPO},head_repository:{id:ID,full_name:REPO}};
  const f={manifest,run,pages:null,artifact:null,calls:[],mutation:null,hook:null,workflowText:WORKFLOW_TEXT};
  f.options={sourceRevision:M,githubToken:TOKEN,now:()=>AT,fetchImpl:async(url,init)=>{
   f.calls.push({url,init});
   if(f.hook){const r=await f.hook(url,init);if(r)return r;}
   const json=value=>new Response(JSON.stringify(value),{headers:{'content-type':'application/json'}});
+  if(url===API+'/contents/lib/mcp-qa-cloud-closed-pins.mjs?ref='+M){const text=readFileSync('lib/mcp-qa-cloud-closed-pins.mjs','utf8');return json({type:'file',path:'lib/mcp-qa-cloud-closed-pins.mjs',sha:blob(text),size:Buffer.byteLength(text),encoding:'base64',content:Buffer.from(text).toString('base64')});}
   if(url===API+'/git/commits/'+M)return json({sha:M,tree:{sha:TREE}});
   if(url===API+'/git/commits/'+OLD)return json({sha:OLD,tree:{sha:OLDTREE}});
   if(url===API+'/contents/'+WORKFLOW+'?ref='+M)return json({type:'file',path:WORKFLOW,sha:blob(f.workflowText),size:Buffer.byteLength(f.workflowText),encoding:'base64',content:Buffer.from(f.workflowText).toString('base64')});
@@ -66,10 +70,11 @@ test('real ZIP through actual Python subprocess yields immutable technical mater
  assert.deepEqual(result.build,{workflowPath:WORKFLOW,runId:101,attempt:1,artifactId:202,artifactName:'afw-finite-native-package-'+M,artifactDigest:'sha256:'+sha(f.zip),manifestHash:hashFinitePackageManifest(f.manifest)});
  assert.equal(encodeFinitePackageManifest(result.manifest),encodeFinitePackageManifest(f.manifest));
  assert(Object.isFrozen(result));assert(Object.isFrozen(result.build));assert(Object.isFrozen(result.manifest.modules.operatorClosed.module));
- assert.equal(result.manifest.modules.operatorClosed.sourceRevision,OLD);
+ assert.equal(result.manifest.modules.operatorClosed.provenance.kind,'historical-content-pin.v1');
  assert.deepEqual(Object.keys(result).sort(),['build','manifest']);
  assert(!JSON.stringify(result).includes(TOKEN));assert(!JSON.stringify(result).includes('ARCHIVE_MUST_NEVER_EXECUTE'));
- assert(f.calls.some(x=>x.url===API+'/git/commits/'+OLD));
+ assert(!f.calls.some(x=>x.url===API+'/git/commits/'+OLD));
+ assert(f.calls.some(x=>x.url===API+'/contents/lib/mcp-qa-cloud-closed-pins.mjs?ref='+M));
  for(const {url,init} of f.calls){assert.equal(init.method,'GET');assert.equal(init.redirect,'manual');assert.equal(init.headers.Authorization,url===SIGNED?undefined:'Bearer '+TOKEN);}
 });
 test('source constructor invokes concrete resolver only during seed-material',async()=>{
@@ -133,7 +138,7 @@ for(const [name,edit] of [
  ['workflow hash',m=>{m.buildWorkflowHash='0'.repeat(64);}],['module hash',m=>{m.modules.qaLive.module.sha256='0'.repeat(64);}],
  ['module size',m=>{m.modules.qaLive.module.bytes++;}],['private field',m=>{m.token='private';}],
  ['nested unknown field',m=>{m.modules.qaLive.policy={};}],['historical operator relabeled current M',m=>{m.modules.operatorClosed.sourceRevision=M;m.modules.operatorClosed.sourceTree=TREE;}],
- ['role tree disagrees with primary',m=>{m.modules.operatorClosed.sourceTree=TREE;}],['untrue structural assertion',m=>{m.compatibility.legacyContainmentQualified=false;}],
+ ['unknown historical source tree',m=>{m.modules.operatorClosed.sourceTree=TREE;}],['untrue structural assertion',m=>{m.compatibility.legacyContainmentQualified=false;}],
  ['module traversal',m=>{m.modules.qaLive.module.name='../index.mjs';}],
 ]){
  test('reject manifest '+name,async()=>{const f=fixture();edit(f.manifest);await denied(f);});

@@ -1,0 +1,74 @@
+{
+  "name": "agent-friendly-web-delegated-canary",
+  "account_id": "85d0d5dadac3341a564f22ce885e9eec",
+  "main": "worker/mcp-own/finite.mjs",
+  "compatibility_date": "2026-09-07",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [],
+  "triggers": {
+    "crons": []
+  },
+  "tail_consumers": [],
+  "observability": {
+    "enabled": false
+  },
+  "vars": {
+    "AFW_DELEGATED_OAUTH_ENABLED": "false",
+    "AFW_OAUTH_REFRESH_ENABLED": "false",
+    "AFW_OAUTH_SERVICE_MODE": "window",
+    "AFW_OAUTH_ISSUER": "https://delegated-canary.agentfriendlyweb.dev",
+    "AFW_OAUTH_RESOURCE": "https://delegated-canary.agentfriendlyweb.dev/mcp",
+    "AFW_DOSSIER_EVENTS_ENABLED": "true",
+    "AFW_DOSSIER_SUCCESSOR_ENABLED": "true",
+    "AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED": "false",
+    "AFW_DOSSIER_RETIREMENT_ENABLED": "false",
+    "AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED": "false",
+    "AFW_DOSSIER_SYNTHETIC_SAVE_ENABLED": "false"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "agent-friendly-web-delegated-canary",
+      "database_id": "6a728254-1494-4039-802e-b39288a55fcc"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "OAUTH_KV",
+      "id": "6b94ff702e504e14a7730cee73a0f6ff"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "AFW_DOSSIER_EVENTS_NODE",
+        "class_name": "AfwOwnEventNode"
+      },
+      {
+        "name": "AFW_FINITE_TRIAL_CONTROL",
+        "class_name": "IndependentClosure",
+        "script_name": "agent-friendly-web-independent-closure-qa"
+      }
+    ]
+  },
+  "version_metadata": {
+    "binding": "AFW_FINITE_TRIAL_VERSION"
+  },
+  "exports": {
+    "default": {
+      "type": "worker"
+    },
+    "AfwNodeControl": {
+      "type": "worker"
+    },
+    "AfwOwnEventNode": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
+  }
+}

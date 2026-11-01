@@ -19,5 +19,24 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Task4C1 meaningful RED profile compiler provenance
-        run: node --test test/mcp-qa-finite-profile.test.mjs test/build-finite-native-package.test.mjs test/mcp-qa-finite-profile-native.test.mjs
+      - name: Task4C1 profiles compiler codec transport
+        run: node --test test/mcp-qa-finite-profile.test.mjs test/build-finite-native-package.test.mjs test/mcp-qa-finite-profile-native.test.mjs test/mcp-qa-finite-seed.test.mjs test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-seed-http.test.mjs test/mcp-qa-finite-seed-issuer.test.mjs test/mcp-qa-finite-publication-bridge.test.mjs
+      - name: Archive v2 parser
+        if: always()
+        run: python3 -m unittest discover -s test -p finite_archive_test.py
+      - name: Native and restore regressions
+        if: always()
+        run: node --test test/mcp-qa-finite-http.test.mjs test/mcp-qa-finite-cf-http.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-read-rpc-native.test.mjs
+      - name: Scoped lint
+        if: always()
+        run: npx eslint lib/mcp-qa-finite-profile.mjs lib/mcp-qa-finite-source-authority.mjs lib/mcp-qa-finite-seed.mjs lib/mcp-qa-finite-package.mjs lib/mcp-qa-finite-publication.mjs lib/mcp-qa-finite-seed-issuer.mjs lib/mcp-qa-finite-http.mjs lib/mcp-activation-observer.mjs scripts/build-finite-native-package.mjs worker/independent-closure/finite.mjs worker/mcp-own/finite.mjs test/mcp-qa-finite-profile.test.mjs test/build-finite-native-package.test.mjs test/mcp-qa-finite-profile-native.test.mjs test/fixtures/finite-v2.mjs test/fixtures/finite-seed-world.mjs test/fixtures/finite-seed-primary.mjs test/mcp-qa-finite-seed.test.mjs test/mcp-qa-finite-package.test.mjs
+      - name: Actual isolated staging bytes
+        if: always()
+        run: node scripts/build-finite-native-package.mjs --staging "${{ github.sha }}"
+      - name: Wrangler actual staging byte dry runs
+        run: |
+          sha256sum output/finite-native-staging/qaLive/index.mjs output/finite-native-staging/canaryLive/index.mjs > "$RUNNER_TEMP/finite-staging-before.sha256"
+          npx wrangler deploy output/finite-native-staging/qaLive/index.mjs --config wrangler.independent-closure-qa.finite.jsonc --dry-run --no-bundle --outdir output/finite-dry-qa
+          npx wrangler deploy output/finite-native-staging/canaryLive/index.mjs --config wrangler.mcp-own.finite.jsonc --dry-run --no-bundle --outdir output/finite-dry-canary
+          sha256sum --check "$RUNNER_TEMP/finite-staging-before.sha256"
+          test ! -e output/finite-native-package/manifest.json

@@ -19,7 +19,7 @@ MODULE = b"throw new Error('ARCHIVE_MUST_NEVER_EXECUTE');\n"
 def make_archive(manifest, mutation=None):
     text = json.dumps(manifest, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     if mutation == "duplicate-json":
-        text = text[:-1] + ',"purpose":"afw.finite-native-package.v1"}'
+        text = text[:-1] + ',"purpose":"afw.finite-native-package.v2"}'
     if mutation == "noncanonical":
         text += "\n"
     if mutation == "bad-json":
@@ -90,10 +90,10 @@ class ArchiveTests(unittest.TestCase):
         return subprocess.run([sys.executable, str(SCRIPT)], input=data, capture_output=True, timeout=8)
 
     def test_valid_archive_is_inspected_not_executed(self):
-        r = self.invoke(make_archive({"purpose": "fixture"}))
+        r = self.invoke(make_archive({"purpose": "afw.finite-native-package.v2"}))
         self.assertEqual(r.returncode, 0, r.stderr)
         result = json.loads(r.stdout)
-        self.assertEqual(result["manifest"], {"purpose": "fixture"})
+        self.assertEqual(result["manifest"], {"purpose": "afw.finite-native-package.v2"})
         self.assertEqual(len(result["files"]), 5)
         for role in ROLES:
             self.assertEqual(result["files"][role + ("/closed-rollback.mjs" if role == "qaClosed" else "/index.mjs")],
@@ -118,7 +118,7 @@ class ArchiveTests(unittest.TestCase):
 
 def rejection_test(mutation):
     def run(self):
-        self.assert_rejected(make_archive({"purpose": "fixture"}, mutation))
+        self.assert_rejected(make_archive({"purpose": "afw.finite-native-package.v2"}, mutation))
     return run
 
 
