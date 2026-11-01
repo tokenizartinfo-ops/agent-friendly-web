@@ -3,6 +3,10 @@ on:
   push:
     branches: [feat/native-known-cancellation-adapter-20261101]
     paths:
+      - worker/mcp-release/index.mjs
+      - test/fixtures/**
+      - test/mcp-release-known-cancellation-native.test.mjs
+      - test/mcp-release-reservation-native.test.mjs
       - lib/mcp-release-runtime.mjs
       - test/mcp-release-known-cancellation.test.mjs
       - .github/workflows/known-cancellation-source-qualification.yml
@@ -21,9 +25,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Mounted native qualification
+        run: node --test test/mcp-release-known-cancellation-native.test.mjs
       - name: Adapter qualification
         run: node --test test/mcp-release-known-cancellation.test.mjs
       - name: Related regressions
-        run: node --test test/mcp-known-cancellation-native.test.mjs test/mcp-qa-named-eligibility.test.mjs test/mcp-qa-named-eligibility-native.test.mjs test/mcp-release-workflow-native.test.mjs test/mcp-release-reservation-native.test.mjs
+        run: node --test test/mcp-known-cancellation-native.test.mjs test/mcp-qa-named-eligibility.test.mjs test/mcp-qa-named-eligibility-native.test.mjs test/mcp-release-workflow-native.test.mjs test/mcp-release-reservation-native.test.mjs test/mcp-release-runtime-native.test.mjs test/mcp-named-authorization-native.test.mjs
       - name: Scoped lint
-        run: npx eslint lib/mcp-release-runtime.mjs test/mcp-release-known-cancellation.test.mjs
+        run: npx eslint worker/mcp-release/index.mjs test/mcp-release-known-cancellation-native.test.mjs test/mcp-release-reservation-native.test.mjs test/fixtures/named-confirmation-native-rehearsal.mjs test/fixtures/named-known-cancellation.mjs test/fixtures/known-cancellation-native-harness.mjs
