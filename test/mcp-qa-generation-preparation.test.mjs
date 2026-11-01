@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {generationPreparationFixture,PREPARATION_POLICIES} from './fixtures/qa-generation-preparation.mjs';
+import {generationPreparationFixture} from './fixtures/qa-generation-preparation.mjs';
 import {packetHash} from './fixtures/qa-named-data-packet.mjs';
 import {materializePrivateQaLegacyPredecessor} from '../lib/mcp-qa-legacy-predecessor.mjs';
 import {assemblePrivateQaNamedPacket} from '../lib/mcp-qa-named-packet-assembly.mjs';
