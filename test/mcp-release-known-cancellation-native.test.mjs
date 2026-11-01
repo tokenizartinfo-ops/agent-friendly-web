@@ -33,13 +33,15 @@ test('observation-only instrumented native witness executes all 18 actual hooks 
   const compiled=await buildMcpReleaseOperator(bundle);
   const anchor=/const authorize = async \(stage, signal\) => \{/g;
   assert.equal([...compiled.script.matchAll(anchor)].length,1,'only observe the existing private closure');
-  return {...compiled,script:compiled.script.replace(anchor,match=>match+' globalThis.__knownStageWitness?.push(stage);')};
+  const settled=/active = false;\s*if \(onAbort\)/g;
+  assert.equal([...compiled.script.matchAll(settled)].length,1);
+  return {...compiled,script:compiled.script.replace(anchor,match=>match+' const __stageStart=performance.now(); globalThis.__knownStageWitness?.push(stage);').replace(settled,match=>'globalThis.__knownHookMs += performance.now()-__stageStart; '+match)};
  };
  const r=await run({build});safe(r);
  assert.equal(r.output.status,'confirmed');assert.deepEqual(r.counts,journals);assert.equal(r.reservationCount,1);
  assert.equal(r.historyPreserved,true);assert.equal(r.counters.retirementReads,2);
  const q=r.output.qualification;assert.deepEqual(q.uniqueStages,stages);
- assert.equal(q.stageInvocations.length,q.eligibilityChecks);assert.ok(q.stageInvocations.length>18);
+ assert.equal(q.stageInvocations.length,q.eligibilityChecks);assert.ok(q.stageInvocations.length>18);assert.ok(q.hookMs>=q.eligibilityMs);
  assert.ok(q.remainingOriginalMs>0);
  console.log('instrumented-mounted-native-hook-witness',JSON.stringify(q));
 });

@@ -20,7 +20,7 @@ AfwReleaseWorkflow.prototype.run=async function(event,step){
  const measurement={nativeDate:event.timestamp instanceof Date,workflowName:event.workflowName,
   payloadKeys:Object.keys(event.payload),identityMatches:event.instanceId==='afw-release-'+event.payload.planHash,
   projectionReads:0,projectionMs:0,eligibilityChecks:0,eligibilityMs:0,providerReads:0,providerMs:0,rpcReads:0,rpcMs:0};
- globalThis.__knownStageWitness=[];
+ globalThis.__knownStageWitness=[];globalThis.__knownHookMs=0;
  const forward=(target,overrides={})=>{
   const methods=new Map();
   return new Proxy(target,{get(value,key){
@@ -80,9 +80,9 @@ AfwReleaseWorkflow.prototype.run=async function(event,step){
  try{
   const result=await __knownNativeRun.call({env},event,outerStep);
   const stageInvocations=[...globalThis.__knownStageWitness];
-  return {...result,qualification:{...measurement,stageInvocations,uniqueStages:[...new Set(stageInvocations)].sort(),
+  return {...result,qualification:{...measurement,stageInvocations,hookMs:stageInvocations.length?globalThis.__knownHookMs:null,uniqueStages:[...new Set(stageInvocations)].sort(),
    elapsedMs:performance.now()-started,remainingOriginalMs:originalEnd-Date.now()}};
- }finally{Date.now=realNow;globalThis.fetch=originalFetch;delete globalThis.__knownStageWitness;}
+ }finally{Date.now=realNow;globalThis.fetch=originalFetch;delete globalThis.__knownStageWitness;delete globalThis.__knownHookMs;}
 };
 `;
 }
