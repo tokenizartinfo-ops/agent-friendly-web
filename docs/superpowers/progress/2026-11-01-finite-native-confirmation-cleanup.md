@@ -72,3 +72,11 @@ Meaningful tests-only RED `ba992668481de930afbd7222602ff707eb073100`, Actions413
 Doc-only clarification: the older Root execution ruling now agrees with the accepted exact observer payload `{operation,intentId,sourceRevision}` and first-step native material-preview plan/control references for admit-and-ready before prepare. No Task3 behavior or new ruling implemented. Root owns subsequent Task3 document changes after branch handback.
 
 Report: [Task2 report, fix round 1 appendix](../reports/2026-11-01-finite-native-cleanup-task2.md). Existing Task1 acceptance/report and Task2 history preserved. No runtime/credential/grant/schema/trial action, local source/dependency/build or child agent. Exclude branch-only temporary qualifier from eventual integration; source rollback by revert only. operationalReadiness=false.
+
+
+## Root Task3 preflight — concrete native claim transport
+Task2 fix code75c71b23/HEADc79cc383 has covering78PASS0FAIL0SKIP/scopedlint0 (41325873588/job124905564368); scoped independent rereview is pending, so Task3 code has NOT started.
+
+A focused architecture/source review found no native qa_restore claim channel from GHA after its proof observer becomes terminal. Root accepts the smallest cycle-free handoff now documented in spec and Task3 brief: same exact observer performs one acknowledged native qa_restore claim journal step after guard completion, returns immutable technical claim facts, reaches provider complete; actual external finalizer under its late writer lock makes a separate unique append-only GitHub send claim and one QA POST. Existing/unknown native/send claims reconcile only; originalR1 and source/job/resource/proof binding remain mandatory. No bearer/token/newroute or process-local-only fence. Dedicated technical plan projection avoids copying private selectors/consent to GHA artifacts. Admit/poll and later fixed restore jobs are exact phase-correlated within same finalizer run.
+
+Ruling: use this fixed channel rather than a new public/native transport or credential — addresses a real source plan dependency without a terminal-observer claim cycle — cost if wrong is source rework/admin-pending, never authority to repeat effects. Live WorkflowPOST401 scope remains unresolved; no grants, runtime, policies, credentials, instances or remote schema changed. operationalReadiness=false.
