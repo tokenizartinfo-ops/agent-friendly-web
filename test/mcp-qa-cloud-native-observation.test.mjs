@@ -13,7 +13,7 @@ async function fixture(){
  const context={repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'41200000100',runAttempt:'1',sourceRevision:source};
  const admissionMono=performance.now();
  const admission=api.validateQaNativeObservationCommand({event,context,now});
- const normal=f.fetch,posts={upload:0,activate:0,restore:0};let annotation=null,postRestoreQaReads=0,workflow=null,workflowPosts=0,terminatePosts=0,polls=0,lateCleanupReached=false,restoreProbeDelayed=false;
+ const normal=f.fetch,posts={upload:0,activate:0,restore:0};let annotation=null,postRestoreQaReads=0,workflow=null,workflowPosts=0,terminatePosts=0,polls=0,workflowAckAt=null,lateCleanupReached=false,restoreProbeDelayed=false;
  const artifact={purpose:'test-fixed-native-wrapper',moduleName:'index.mjs',base64:Buffer.from('export default {}; // test wrapper').toString('base64')};
  let mode=null;const response=(result,status=200)=>new Response(JSON.stringify({success:true,errors:[],messages:[],result}),{status,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString()}});
  const fetchImpl=async(input,init)=>{
@@ -33,6 +33,7 @@ async function fixture(){
    if(workflowPosts)polls++;
    if(mode==='lateWorkflowCleanup'&&polls===2){f.wall=admission.cleanupExpiresAt-125010;lateCleanupReached=true;}
    if(mode==='workflowQueued'&&workflow.status!=='terminated')workflow.status='queued';
+   if(mode==='nativeCompletesAfter7800'&&workflow.status!=='terminated')workflow.status=performance.now()-workflowAckAt>=7800?'complete':'running';
    if(mode==='workflowPaused')workflow.status='paused';
    if((mode==='workflowRunning'||mode==='terminateUnknown')&&workflow.status!=='terminated')workflow.status='running';
    if(mode==='wrongParams')workflow.params=JSON.stringify({operation:'inspect_closed_quiescence',observationId:'0'.repeat(64)});
@@ -50,7 +51,8 @@ async function fixture(){
    if(mode==='extraDTO')output.privateRaw='PRIVATE_DTO';
    if(mode==='nativeBlocked'||mode==='lateWorkflowCleanup')output.status='blocked';
    if(mode==='nativeTooSlow')output.elapsedMs=5000;
-   workflow={params:b.params,status:'complete',output,versionId:'opaque-native-version'};
+   if(mode==='nativeCompletesAfter7800'){output.enqueueAgeMs=3845;output.elapsedMs=4022;output.capturedTotalAgeMs=7867;}
+   workflow={params:b.params,status:'complete',output,versionId:'opaque-native-version'};workflowAckAt=performance.now();
    if(mode==='createDeniedRace403'||mode==='createDeniedRace409'){workflow.status='running';return response(null,mode==='createDeniedRace403'?403:409);}
    if(mode==='createUnknown')throw Error('PRIVATE_CREATE_ACK');
    return response({id:mode==='wrongCreateId'?'foreign':'afw-qa-arm-'+admission.intentId,workflow_id:'06b6c3eb-ce59-4594-8b9e-2636977d56da',version_id:'opaque-create-ref'});
@@ -187,4 +189,9 @@ test('real native controller includes original comment and run correlation',asyn
 for(const status of [403,409])test('denied Workflow create '+status+' never terminates a concurrent matching instance',async()=>{
  const x=await fixture();x.setMode('createDeniedRace'+status);const r=await x.run();
  assert.equal(x.workflowPosts,1);assert.equal(r.outcomes.createWorkflow,'denied');assert.equal(x.terminatePosts,0);assert.equal(x.workflowStatus,'running');assert.equal(x.posts.restore,1);assert.notEqual(r.status,'verified');assert.equal(r.finalClosedVerified,false);assert.equal(r.mayRetry,false);
+});
+
+test('healthy native metadata completion near eight seconds is observed before exhausting twelve polls',async()=>{
+ const x=await fixture();x.setMode('nativeCompletesAfter7800');const started=performance.now(),r=await x.run(),elapsed=performance.now()-started;
+ assert.equal(r.status,'verified',JSON.stringify({status:r.status,polls:x.polls,terminatePosts:x.terminatePosts,elapsed}));assert.equal(r.nativeMetadataObservationVerified,true);assert.equal(r.finalClosedVerified,true);assert.equal(x.terminatePosts,0);assert.equal(x.workflowPosts,1);assert.equal(x.posts.restore,1);assert.ok(x.polls<=12);assert.ok(elapsed>=7800);assert.equal(r.nativeResult.capturedTotalAgeMs,7867);assert.equal(r.mayRetry,false);
 });
