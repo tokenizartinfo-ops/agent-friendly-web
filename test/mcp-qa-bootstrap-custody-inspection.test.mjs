@@ -200,18 +200,12 @@ test('diagnosis counts saturate without exposing unknown names or values',async(
  assert.equal(dto.status,'blocked');assert.equal(dto.responseSchema,'envelope');
  assert.deepEqual(dto.responseShape,{...neutralShape(),envelopeExtraFields:16,messageExtraFields:16,messagesWithNullType:16,resultExtraFields:16});safe(dto);
 });
-test('diagnosis helper ignores accessors and inherited nulls without evaluating them',async()=>{
- const source=await readFile(new URL('../lib/mcp-qa-bootstrap-custody-inspection.mjs',import.meta.url),'utf8');
- const {diagnoseResponseShape}=await import('data:text/javascript,'+encodeURIComponent(source+'\nexport {diagnoseResponseShape};'));
- let invoked=0; const getter={get(){invoked++;throw Error('CREDENTIAL_SENTINEL');},enumerable:true};
- const result={id:ID,status:'active'};Object.defineProperty(result,'not_before',getter);Object.defineProperty(result,'expires_on',getter);
- const message={code:1,message:'CREDENTIAL_SENTINEL'};Object.defineProperty(message,'type',getter);
- const e={success:true,errors:[],messages:[message],result};Object.defineProperty(e,'CREDENTIAL_SENTINEL',getter);
- assert.deepEqual(diagnoseResponseShape(e),{...neutralShape(),envelopeExtraFields:1,messageExtraFields:1});
- for(const key of ['messages','errors','result'])Object.defineProperty(e,key,getter);
- assert.deepEqual(diagnoseResponseShape(e),{...neutralShape(),envelopeExtraFields:1});
- assert.deepEqual(diagnoseResponseShape(Object.create({result:{not_before:null,expires_on:null},errors:[1]})),neutralShape());
- assert.equal(invoked,0);
+test('provider getter exception never exposes exception properties in diagnosis',async()=>{
+ const f=fixture();let exceptionReads=0;
+ const thrown=Object.defineProperty({},'message',{get(){exceptionReads++;throw Error('CREDENTIAL_SENTINEL');}});
+ f.args.fetchImpl=async()=>Object.defineProperty({},'status',{get(){throw thrown;}});
+ const dto=await runQaBootstrapCustodyInspection(f.args);
+ assert.equal(dto.status,'blocked');assert.equal(dto.responseSchema,'headers');assert.equal(dto.responseShape,null);assert.equal(exceptionReads,0);safe(dto);
 });
 test('successful and pre-response outcomes expose no documentary response evidence',async()=>{
  for(const where of ['success','admission','credential','fetch']){
