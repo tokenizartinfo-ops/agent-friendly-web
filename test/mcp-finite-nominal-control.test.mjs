@@ -1,3 +1,4 @@
+import {finiteAdmissionIdentity} from '../lib/mcp-own-finite-cleanup-proof.mjs';
 import {finiteProofFixture} from './fixtures/finite-cleanup-proof.mjs';
 import {finiteHash} from '../lib/mcp-finite-evidence.mjs';
 import test from 'node:test';
@@ -53,4 +54,16 @@ test('candidate independently matches child exclusions against its own exact jou
  h.options.readNominalControl=async()=>{const v=await base();return {...v,ownedWriters:v.ownedWriters.map(x=>({...x,actorId:'f'.repeat(64)}))};};
  const other=createFiniteAdmissionGate(h.options);assert.equal((await other.beginAdmission()).status,'issued');assert.equal((await other.beginLaunch()).status,'blocked');
  assert.equal((await other.read()).writers.launch,null);
+});
+
+test('actual Task1 narrower observed consent claim admits before its deadline and never extends it',async()=>{
+ const f=finiteFixture(),original=f.primary.admission,end=f.plan.T0+250000;
+ f.primary.admission=async()=>{const p=await original();p.consent.expiresAt=end;return p;};
+ const ctl=controlApi.createPrivateQaFiniteTrialControl(f.options(controlApi));const armed=await ctl.prepare();assert.equal(armed.status,'armed');
+ const claim=await ctl.claimEffect('nominal');assert.equal(claim.claim.deadline,end);assert.ok(end<f.plan.selectors.expiresAt);
+ const identity=finiteAdmissionIdentity({plan:f.plan,planHash:armed.planHash,controlHash:armed.controlHash}),g=finiteGateFixture(f.plan.T0);
+ const gate=createFiniteAdmissionGate({...g.options,identity,nominalIdentity:{sourceRevision:f.plan.source.revision,runtimeVersionId:f.plan.deployments.qaLive.versionId,actorId:f.plan.resources.actorId,monitorHash:f.plan.monitorHash,consentExpiresAt:f.plan.selectors.expiresAt},readNominalControl:async()=>(await ctl.readNominalControl()).value,now:f.now});
+ assert.equal((await gate.beginReservation()).status,'issued');const before=JSON.stringify([...g.rows]);
+ f.setNow(end);assert.equal((await gate.beginAdmission()).status,'blocked');assert.equal(JSON.stringify([...g.rows]),before);
+ assert.equal((await gate.read()).writers.admission,null);
 });
