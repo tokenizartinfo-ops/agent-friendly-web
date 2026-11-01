@@ -1,3 +1,5 @@
+import {createCanaryRestorationTransport} from '../lib/mcp-canary-restoration-transport.mjs';
+import {finiteCleanupPolicy} from '../lib/mcp-finite-cleanup-policy.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {finiteRestorationFixture} from './fixtures/finite-restoration.mjs';
@@ -36,4 +38,14 @@ test('exact approved module digest alone does not grant static closed-profile co
  const f=await finiteRestorationFixture(),v=structuredClone(f.old.state.closed),pin=f.identity.plan.deployments.canaryClosed;
  assert.equal(inventory.qualifyFiniteWorkerVersion({metadata:v,pin,role:'canary',closed:true}).moduleHash,pin.module.sha256);
  v.bindings.push({name:'NEW_ENABLED',type:'plain_text',text:'true'});assert.throws(()=>inventory.qualifyFiniteWorkerVersion({metadata:v,pin,role:'canary',closed:true}));
+});
+
+test('finite-only transport keeps fixed all-state inventory and restoration body allowlists',async()=>{
+ const f=await finiteRestorationFixture(),raw=JSON.stringify(finiteCleanupPolicy(f.identity.plan));let sends=0;
+ const request=createCanaryRestorationTransport({finiteTrial:f.identity,readControl:()=>({enabled:true,policy:raw}),readReadCredential:async()=>'synthetic-reader-token',readPublishCredential:async()=>'synthetic-publisher-token',now:f.f.now,fetchImpl:async(url,init)=>{sends++;const u=new URL(url),r=await f.request({method:init.method,path:u.pathname.replace('/client/v4',''),query:Object.fromEntries([...u.searchParams].map(([k,v])=>[k,['per_page','page'].includes(k)?Number(v):v])),...(init.body?{body:JSON.parse(init.body)}:{})});const {status,...body}=r;return Response.json(body,{status});}});
+ const x={method:'GET',path:f.ROOT+'/containers/applications/'+f.identity.plan.resources.applicationId+'/instances-v2',query:{per_page:100},signal:new AbortController().signal};
+ assert.equal((await request(x)).result.length,0);
+ await assert.rejects(()=>request({...x,query:{state:'active',per_page:100}}));assert.equal(sends,1);
+ assert.equal((await request({method:'GET',path:f.ROOT+'/workflows',query:{per_page:100,page:1},signal:x.signal})).result.length,3);
+ const restorer=api.createPrivateQaFiniteCanaryRestorer({...f.options,request});assert.equal((await restorer.execute(f.input)).proofHash,f.input.proofHash);assert.equal(f.posts,1);
 });
