@@ -63,6 +63,8 @@ async function execute(mode='normal',{prepare=false}={}){
   assert.equal(loaded.base64,a.base64);assert.equal(loaded.sourceRevision,source);
   assert.equal(admission.purpose,'afw.qa-native-observation-command.v1');
   const r={purpose:'afw.qa-cloud-native-observation.v1',status:'verified',intentId:admission.intentId,sourceRevision:source,commentId:admission.commentId,runId:admission.runId,candidateVersionId:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',workflowInstanceId:'afw-qa-arm-'+admission.intentId,nativeMetadataObservationVerified:true,finalClosedVerified:true,finalReadback:{observedAt:new Date(wall).toISOString()},authorizesEffects:false,armEligibilityVerified:false,guardLivenessVerified:false,nativeWithdrawalVerified:false,operationalReadiness:false,mayRetry:false};
+  if(['diagnosticResult','diagnosticAtCap','diagnosticOverCap'].includes(mode))r.effectHttp={purpose:'afw.qa-native-effect-http.v1',...Object.fromEntries(['upload','activate','createWorkflow','restore','terminateWorkflow'].map(k=>[k,{httpStatus:599,errorCodes:[2147483640,2147483641,2147483642,2147483643,2147483644,2147483645,2147483646,2147483647]}]))};
+  if(['diagnosticAtCap','diagnosticOverCap'].includes(mode)){r.padding='';r.padding='X'.repeat((mode==='diagnosticAtCap'?15000:15001)-Buffer.byteLength(JSON.stringify(r)));}
   if(mode==='wrongResultSource')r.sourceRevision='b'.repeat(40);
   if(mode==='wrongResultIntent')r.intentId='b'.repeat(64);
   if(mode==='oversizeResult')r.extra='X'.repeat(15001);
@@ -100,7 +102,7 @@ for(const [stage,modes]of [
  ['admission',['badEvent','oldCommand','stale','attempt2']],
  ['artifact_load',['relativeRunner','runnerAlias','runnerSymlink','directoryAlias','directorySymlink','mutatedBytes','mutatedBytesAndHash','wrongHash','wrongArtifactSource','wrongBaseline','manifestUnknown','manifestBase64','malformedManifest','symlink','hardlink','nonprivate','notFile','moduleOversize','manifestOversize','moduleReadOversize']],
  ['controller',['controllerThrows']],
- ['settlement',['wrongResultSource','wrongResultIntent','oversizeResult','resultAuthority']]
+ ['settlement',['wrongResultSource','wrongResultIntent','oversizeResult','resultAuthority','diagnosticOverCap']]
 ])for(const mode of modes)test('real native CLI safely blocks '+mode+' at '+stage,async()=>{
  const r=await execute(mode);assert.equal(r.process.exitCode,1);assert.equal(r.runs,['controller','settlement'].includes(stage)?1:0);assert.equal(r.apiCalls,0);assert.equal(r.writes[0].path,'afw-qa-native-observation-entry-failure.json');const out=output(r);assert.equal(out.stage,stage);assert.equal(out.status,'blocked');assert.deepEqual(Object.keys(out).sort(),['purpose','status','stage','authorizesEffects','operationalReadiness','mayRetry'].sort());const marker=r.logs.find(s=>s.startsWith('AFW_QA_NATIVE_OBSERVATION_ENTRY_RESULT '));assert.deepEqual(JSON.parse(marker.slice('AFW_QA_NATIVE_OBSERVATION_ENTRY_RESULT '.length)),out);safe(r);
 });
@@ -115,4 +117,8 @@ test('real preparer uses stateless exact event, one fixed GET/profile check and 
 });
 for(const mode of ['badEvent','oldCommand','stale','attempt2','malformedEvent','notActions','extraArg','relativeRunner','runnerAlias','runnerSymlink','forbidden','wrongProfile','expiredApi','staleAfterRead','existingOutput'])test('real preparer rejects '+mode+' without writes or effects',async()=>{
  const r=await execute(mode,{prepare:true});assert.equal(r.process.exitCode,1);assert.equal(r.runs,0);assert.equal(r.writes.length,0);assert.ok(r.requests.length<=1);assert.ok(r.requests.every(r=>r.method==='GET'));assert.equal(r.logs.length,1);assert.equal(r.logs[0],'AFW native baseline preparation blocked; no remote writes or retry.');assert.equal(r.closed,r.apiCalls);safe(r);
+});
+
+for(const mode of ['diagnosticResult','diagnosticAtCap'])test('real CLI serializes bounded numerical diagnostics '+mode+' under unchanged caps',async()=>{
+ const r=await execute(mode);assert.equal(r.process.exitCode,0);assert.equal(r.writes.length,1);const out=output(r);assert.equal(out.effectHttp.purpose,'afw.qa-native-effect-http.v1');assert.deepEqual(out.effectHttp.createWorkflow.errorCodes,[2147483640,2147483641,2147483642,2147483643,2147483644,2147483645,2147483646,2147483647]);assert.ok(Buffer.byteLength(r.writes[0].text)<=16384);if(mode==='diagnosticAtCap')assert.equal(Buffer.byteLength(r.writes[0].text),15001);safe(r);
 });
