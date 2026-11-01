@@ -1,0 +1,47 @@
+name: Native CLI contract qualification
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'test/mcp-qa-cloud-native-cli.test.mjs'
+      - 'test/mcp-qa-cloud-native-workflow.test.mjs'
+      - '.github/workflows/afw-native-cli-contract-qualification.yml'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Prove the real entry regression test rejects a bypassed artifact validator
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile,writeFile} from 'node:fs/promises';
+          import {spawnSync} from 'node:child_process';
+          import assert from 'node:assert/strict';
+          const path='scripts/qa-cloud-native-observation.mjs',original=await readFile(path,'utf8');
+          const before="import {validateQaNativeArtifact} from '../lib/mcp-qa-native-artifact.mjs';";
+          assert.ok(original.includes(before));
+          try {
+            await writeFile(path,original.replace(before,'const validateQaNativeArtifact=({artifact})=>artifact;'));
+            const r=spawnSync(process.execPath,['--test','--test-name-pattern=real native CLI safely blocks mutatedBytesAndHash','test/mcp-qa-cloud-native-cli.test.mjs'],{encoding:'utf8',timeout:60000});
+            assert.equal(r.signal,null);
+            assert.notEqual(r.status,0,'artifact-validation bypass must be detected');
+            assert.match(r.stdout,/not ok/,'must fail a test assertion');
+            console.log('AFW_NATIVE_CLI_RED_MUTANT_DETECTED status='+r.status);
+          } finally {
+            await writeFile(path,original);
+          }
+          assert.equal(await readFile(path,'utf8'),original);
+          NODE
+      - name: Qualify exact committed source after restoration
+        run: node --test test/mcp-qa-cloud-native-cli.test.mjs test/mcp-qa-cloud-native-workflow.test.mjs
