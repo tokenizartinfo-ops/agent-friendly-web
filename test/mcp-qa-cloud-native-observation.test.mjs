@@ -207,3 +207,82 @@ test('native diagnostic records actual denied create HTTP and safe codes without
  const r=await x.run();assert.equal(r.effectHttp?.purpose,'afw.qa-native-effect-http.v1');
  assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:[10000]});assert.equal(r.outcomes.createWorkflow,'denied');assert.equal(r.posts.terminateWorkflow,0);assert.equal(r.posts.restore,1);assert.doesNotMatch(JSON.stringify(r),/PRIVATE_PROVIDER/);
 });
+
+const effectNames=['upload','activate','createWorkflow','restore','terminateWorkflow'];
+const deniedResponse=(f,status=403,errors=[{code:10000,message:'PRIVATE_PROVIDER'}],headers={},raw)=>new Response(raw??JSON.stringify({success:false,errors,messages:[],result:null}),{status,headers:{'content-type':'application/json',date:new Date(f.wall).toUTCString(),...headers}});
+const diagnosticSafe=r=>{
+ assert.deepEqual(Object.keys(r.effectHttp),['purpose',...effectNames]);assert.ok(Object.isFrozen(r.effectHttp));
+ for(const kind of effectNames){const e=r.effectHttp[kind];assert.deepEqual(Object.keys(e),['httpStatus','errorCodes']);assert.ok(Object.isFrozen(e));assert.ok(Object.isFrozen(e.errorCodes));}
+ assert.doesNotMatch(JSON.stringify(r),/PRIVATE_PROVIDER|PRIVATE_NETWORK|PRIVATE_ACCESSOR/);
+};
+test('native normal lifecycle has honest success statuses and null skipped termination',async()=>{
+ const x=await fixture(),r=await x.run();diagnosticSafe(r);
+ for(const kind of effectNames)assert.deepEqual(r.effectHttp[kind],{httpStatus:kind==='terminateWorkflow'?null:200,errorCodes:[]});
+ assert.throws(()=>{r.effectHttp.upload.errorCodes.push(1);});
+});
+test('native skipped effects remain null after preflight block',async()=>{
+ const x=await fixture();x.setMode('providerIncident');const r=await x.run();diagnosticSafe(r);for(const kind of effectNames)assert.deepEqual(r.effectHttp[kind],{httpStatus:null,errorCodes:[]});
+});
+for(const kind of effectNames)test('actual '+kind+' effect has bounded numeric denial metadata',async()=>{
+ let cut=false;
+ const x=await fixture({effect:q=>q.kind===kind?deniedResponse(q.f,409,[{code:0},{code:2147483647},{code:0}]):undefined,transport:({url,init,f})=>{
+  if(kind==='terminateWorkflow'&&!cut&&init.method==='GET'&&url.pathname.endsWith('/instances/afw-qa-arm-'+x.admission.intentId)&&x.workflowPosts){cut=true;f.wall+=20001;}
+ }});
+ if(kind==='terminateWorkflow')x.setMode('workflowRunning');
+ const r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp[kind],{httpStatus:409,errorCodes:[0,2147483647]});assert.equal(r.outcomes[kind],'denied');assert.equal(r.posts[kind],1);assert.ok(Object.values(r.posts).every(n=>n<=1));
+ if(kind==='createWorkflow')assert.equal(r.posts.terminateWorkflow,0);
+});
+for(const [status,outcome]of [[400,'denied'],[403,'denied'],[409,'denied'],[500,'unknown']])test('HTTP '+status+' observation preserves '+outcome+' classification',async()=>{
+ const x=await fixture({effect:q=>q.kind==='createWorkflow'?deniedResponse(q.f,status):undefined}),r=await x.run();diagnosticSafe(r);assert.equal(r.effectHttp.createWorkflow.httpStatus,status);assert.equal(r.outcomes.createWorkflow,outcome);assert.equal(r.uncertain,outcome==='unknown');assert.equal(r.posts.restore,1);
+});
+test('network exception has null HTTP and no provider text',async()=>{
+ const x=await fixture({effect:q=>{if(q.kind==='createWorkflow')throw Error('PRIVATE_NETWORK');}}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:null,errorCodes:[]});assert.equal(r.outcomes.createWorkflow,'unknown');
+});
+for(const errors of [[{code:'403'}],[{code:1.1}],[{code:-1}],[{code:2147483648}],[{code:null}],Array.from({length:9},()=>({code:1})),[{message:'PRIVATE_PROVIDER'}]])test('invalid numerical code envelope '+JSON.stringify(errors)+' is suppressed',async()=>{
+ const x=await fixture({effect:q=>q.kind==='createWorkflow'?deniedResponse(q.f,403,errors):undefined}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:[]});assert.equal(r.outcomes.createWorkflow,'denied');
+});
+for(const [label,headers,raw]of [
+ ['stale Date',{date:'Thu, 01 Jan 1970 00:00:00 GMT'}],
+ ['invalid Date',{date:'PRIVATE_PROVIDER'}],
+ ['cache age',{age:'1'}],
+ ['cache hit',{'cf-cache-status':'HIT'}],
+ ['HTML',{'content-type':'text/html'},'<html>PRIVATE_PROVIDER</html>'],
+ ['malformed JSON',{},'{PRIVATE_PROVIDER'],
+ ['oversize length',{'content-length':'8193'}],
+ ['invalid length',{'content-length':'PRIVATE_PROVIDER'}],
+ ['oversize chunked',{},JSON.stringify({success:false,errors:[{code:1}],messages:[],padding:'X'.repeat(8200)})]
+])test(label+' preserves HTTP but suppresses codes',async()=>{
+ const x=await fixture({effect:q=>q.kind==='createWorkflow'?deniedResponse(q.f,403,undefined,headers,raw):undefined}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:[]});assert.equal(r.outcomes.createWorkflow,'denied');
+});
+test('descriptor-safe numeric selection never invokes code getters',async()=>{
+ const parse=JSON.parse;let invoked=0;
+ try{
+  JSON.parse=(...args)=>{const e=parse(...args);if(e?.success===false&&e.errors?.[0]?.message==='PRIVATE_PROVIDER')Object.defineProperty(e.errors[0],'code',{enumerable:true,get(){invoked++;throw Error('PRIVATE_ACCESSOR');}});return e;};
+  const x=await fixture({effect:q=>q.kind==='createWorkflow'?deniedResponse(q.f):undefined}),r=await x.run();diagnosticSafe(r);assert.equal(invoked,0);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:[]});
+ }finally{JSON.parse=parse;}
+});
+for(const padding of [0,8200])test('HTTP200 soft failure remains unknown with '+padding+' padding bytes',async()=>{
+ const x=await fixture({effect:q=>q.kind==='createWorkflow'?deniedResponse(q.f,200,undefined,{},JSON.stringify({success:false,errors:[{code:10000,message:'PRIVATE_PROVIDER'}],messages:[],padding:'X'.repeat(padding)})):undefined}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:200,errorCodes:padding?[]:[10000]});assert.equal(r.outcomes.createWorkflow,'unknown');assert.equal(r.workflowCreateAcknowledged,false);
+});
+test('late4xx is observable but never moves original classification latch',async()=>{
+ const x=await fixture({effect:q=>{if(q.kind==='createWorkflow'){q.f.wall+=5001;return deniedResponse(q.f);}}}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:[]});assert.equal(r.outcomes.createWorkflow,'unknown');assert.equal(r.uncertain,true);assert.equal(r.posts.restore,1);
+});
+for(const cancelMode of ['throw','reject','hang'])test('diagnostic reader cancel '+cancelMode+' is contained and non-awaited',async()=>{
+ let cancels=0;
+ const x=await fixture({effect:q=>{
+  if(q.kind!=='createWorkflow')return;
+  const r=deniedResponse(q.f);Object.defineProperty(r,'body',{value:{getReader:()=>({read:async()=>({done:false,value:new Uint8Array(8193)}),cancel(){cancels++;if(cancelMode==='throw')throw Error('PRIVATE_PROVIDER');return cancelMode==='reject'?Promise.reject(Error('PRIVATE_PROVIDER')):new Promise(()=>{});}})}});return r;
+ }}),started=performance.now(),r=await x.run();diagnosticSafe(r);assert.ok(performance.now()-started<1500);assert.equal(cancels,1);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:[]});assert.equal(r.posts.restore,1);
+});
+test('timely4xx hanging body uses original request timer and keeps denied classification',async()=>{
+ let release,cancels=0;
+ const x=await fixture({effect:q=>{
+  if(q.kind!=='createWorkflow')return;
+  const r=deniedResponse(q.f);Object.defineProperty(r,'body',{value:{getReader:()=>({read:()=>new Promise(resolve=>{release=resolve;}),cancel:()=>{cancels++;return new Promise(()=>{});}})}});return r;
+ }}),started=performance.now(),r=await x.run();diagnosticSafe(r);assert.ok(performance.now()-started<6500);assert.equal(r.outcomes.createWorkflow,'denied');assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:403,errorCodes:[]});assert.equal(r.posts.terminateWorkflow,0);assert.equal(r.posts.restore,1);assert.equal(cancels,1);
+ const captured=JSON.stringify(r);release({done:false,value:new TextEncoder().encode(JSON.stringify({success:false,errors:[{code:999}],messages:[]}))});await new Promise(resolve=>setImmediate(resolve));assert.equal(JSON.stringify(r),captured);
+});
+test('deferred fetch after final return cannot mutate detached diagnostic or outcomes',async()=>{
+ let release,response;
+ const x=await fixture({effect:q=>{if(q.kind==='createWorkflow'){response=deniedResponse(q.f);return new Promise(resolve=>{release=resolve;});}}}),r=await x.run();diagnosticSafe(r);assert.deepEqual(r.effectHttp.createWorkflow,{httpStatus:null,errorCodes:[]});assert.equal(r.outcomes.createWorkflow,'unknown');const captured=JSON.stringify(r);release(response);await new Promise(resolve=>setImmediate(resolve));assert.equal(JSON.stringify(r),captured);
+});
