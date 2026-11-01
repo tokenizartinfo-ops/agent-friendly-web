@@ -7,7 +7,7 @@ test('durable unique ref fences changed job/reconstructed client; tag object alo
  assert.throws(()=>client.consumeNewSend(record));assert.equal(await client.claimSend(record,new AbortController().signal,()=>{}),'issued');
  assert.deepEqual(await client.readSend(),record);client.consumeNewSend(record);assert.throws(()=>client.consumeNewSend(record));
  x.state.job=100;const restarted=x.make();assert.equal(await restarted.claimSend(x.record(),new AbortController().signal,()=>{}),'existing');assert.throws(()=>restarted.consumeNewSend(x.record()));
- assert.equal(x.refPosts,2);assert.equal(x.requests.filter(x=>['PATCH','DELETE','PUT'].includes(x.method)).length,0);
+ assert.equal(x.refPosts,1);assert.equal(x.tagPosts,1);assert.equal(x.requests.filter(x=>['PATCH','DELETE','PUT'].includes(x.method)).length,0);
 });
 for(const mode of ['lost','late'])test('send fence '+mode+' ACK never becomes POST authority',async()=>{
  const x=await fixture();x.state.mode=mode;const client=x.make(),r=x.record();
@@ -20,4 +20,13 @@ for(const[mode,attack]of Object.entries({attempt:x=>{x.state.attempt=2;},source:
 test('ready phase requires admit job in progress; restore phase requires it terminal',async()=>{
  const x=await fixture(),g=x.make();await assert.rejects(g.inspect('ready'));assert.equal((await g.inspect('restore')).restoreJobId,99);
  x.state.admitStatus='in_progress';assert.equal((await g.inspect('ready')).jobId,12);await assert.rejects(g.inspect('restore'));
+});
+
+test('lost send-ref ACK remains GET-only after reconstructing the GitHub client',async()=>{
+ const x=await fixture();x.state.mode='lost';const record=x.record();
+ assert.equal(await x.make().claimSend(record,new AbortController().signal,()=>{}),'uncertain');
+ const before=x.requests.length,refPosts=x.refPosts,tagPosts=x.tagPosts;x.state.mode='normal';
+ assert.equal(await x.make().claimSend(record,new AbortController().signal,()=>{}),'existing');
+ assert.equal(x.refPosts,refPosts);assert.equal(x.tagPosts,tagPosts);
+ assert.ok(x.requests.slice(before).every(r=>r.method==='GET'));
 });
