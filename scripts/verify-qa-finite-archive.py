@@ -17,7 +17,9 @@ EXPANDED_LIMIT = 128 * 1024 * 1024
 MODULE_LIMIT = 3145728
 MANIFEST_LIMIT = 24576
 ROLES = ("qaLive", "qaClosed", "canaryLive", "canaryClosed", "operatorClosed")
-NAMES = {"manifest.json"} | {role + "/index.mjs" for role in ROLES}
+NAMES = {"manifest.json"} | {
+    role + ("/closed-rollback.mjs" if role == "qaClosed" else "/index.mjs") for role in ROLES
+}
 
 
 def require(condition):
