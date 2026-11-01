@@ -171,12 +171,12 @@ test('arbitrary stage permanently invalidates the internal closure',async()=>{
  }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
 test('concurrent hook reentry invalidates both checks without refreshing authority',async()=>{
- const f=await fixture(),answers=[];try{const h=await closureHarness(async args=>{
+ const f=await fixture(),answers=[];let task;try{const h=await closureHarness(args=>(task=(async()=>{
  let release;const gate=new Promise(r=>{release=r;});f.afterRead=async sql=>{if(sql.includes('SELECT 1 AS eligible'))await gate;};
  const first=args.authorize('operator_credential',new AbortController().signal);
  answers.push(await args.authorize('operator_primary_read',new AbortController().signal));release();
  answers.push(await first);return blocked;
- });assert.equal((await h.runKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');assert.deepEqual(answers,[false,false]);
+ })()));assert.equal((await h.runKnownCancellationReleaseWorkflow(f.input)).status,'uncertain');await task;assert.deepEqual(answers,[false,false]);
  }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
 test('grant drift after initial admission blocks the next fixed hook permanently',async()=>{
