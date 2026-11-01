@@ -11,6 +11,7 @@ const blocked = () => ({
   tokenId: null, tokenStatus: null, notBefore: null, expiresAt: null, expectedTokenMatch: null,
   readOnly: true, scopeVerified: false, workflowCreateVerified: false,
   operationalReadiness: false, mayRetry: false, httpStatus: null, errorCodes: [],
+  responseSchema: null, responseShape: null,
 });
 let result = blocked(), lastWall = Date.now(), lastMono = performance.now(), end, monoEnd;
 const current = () => {
