@@ -10,7 +10,7 @@
 - ALLOWED_ACTION: reversible Task 2 source changes and synthetic secret-free cloud qualification only. No runtime, provider request, remote SQL, grant, OAuth, permission, key, consumer, deployment or Max action.
 - ROLLBACK: revert the three Task 2 implementation/test commits on this branch. No runtime or data was changed.
 - BASE: d61e29f60eca41e258ee92d309549f9fc71a9cdb, tree 6686812f5d7584c64eeefdb0f88459c09655fa6e.
-- Qualified source HEAD: 68b4f9e9a8a444f7d98963614929eae04e4936de, tree 52245a22a4994b7d8e64f514aa310a4c600430c9.
+- Initial Task 2 qualified source HEAD: 68b4f9e9a8a444f7d98963614929eae04e4936de, tree 52245a22a4994b7d8e64f514aa310a4c600430c9.
 - The final documentation checkpoint is the commit carrying this report; its source/test blobs are unchanged from the qualified HEAD.
 
 ## Implementation and compatibility
@@ -20,7 +20,7 @@ The Task 1 runtime and tests are unchanged: runtime blob2420c760af1485e39aa53ff7
 
 Every mounted reservation rehearsal now seeds the complete synthetic original identity/admission, admitted closure, NULL-generation cancellation, current grant and immutable monitoring schemas. The abbreviated-schema branch is removed. Existing retirement failure, clock, flag/binding drift, lost ACK, journal retention and non-reservation tests keep their assertions. The primary mounted success uses buildMcpReleaseOperator and the actual AfwReleaseWorkflow export. No custom Workflow injects authorize, history or identity.
 
-One pre-existing custom GENERIC runtime test intentionally calls runReleaseWorkflow with authorize but WITHOUT cancellationHistory/requestLease. It explicitly marks its fixture generic-without-history and keeps its original single admitted closure, using the full schemas. The actual production builder never emits this fixture marker. This is test-data compatibility for the unchanged generic API, not a mounted fallback.
+The two pre-existing custom GENERIC runtime suites call runReleaseWorkflow with authorize but WITHOUT cancellationHistory/requestLease. They explicitly select fixture historyMode original_only, retaining their original single admitted closure with full schemas. The default known_cancellation mode includes the NULL cancellation and is retained by the mounted builder and known-history tests. This fixture-only data mode replaces the initial ad hoc generic-without-history variant marker; no production dispatch, payload or authority behavior changes. See the post-composition correction below.
 
 ## Native evidence and observer boundaries
 Actual native WorkflowEvent Date, workflowName metadata, instance afw-release-<bundleHash> and sole object payload {planHash} are observed and forwarded unchanged. Native providers, identities and challenged DO retirement custody remain SYNTHETIC. All test SQL is delegated to actual isolated D1 with the existing immutable schemas; no fixture treats empty D1 as proof of DO budget.
@@ -57,3 +57,20 @@ The retained temporary workflow uses Ubuntu24.04/Node22, contents:read, checkout
 Self-review checked narrow dispatch/diagnostic precedence, unchanged unique builder token/closed HTTP/direct RPC, complete mounted schema migration, preserved generic absent-lease behavior, all18 observed native hook names versus26 actual invocations, original deadline consumption and outer settlement, exact own/foreign reservation behavior, immutable history/journal retention and sanitized outcomes. No Task 1 production runtime, validators, reservation SQL or production ledgers changed.
 
 Synthetic source qualification is not live provider latency, deployed binding provenance, grant/monitoring consent, physical stop, native custody availability, DO once-budget, delivery, subscription, guard, cleanup, PC-off or Max evidence. Original N1/R1, compatible operator/cleanup arrangements and any future promotion remain separate. No PR was created and no Task 3 publication/integration was performed.
+
+## Post-composition fixture correction — 2026-11-01 UTC
+Root's broader PR709 CI RED at candidate 25bfb704, [run41310613467](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41310613467), job124860004653, found 1401 PASS/2 FAIL before full tests/lint/build. Both failures were in mcp-qa-named-authorization-native.test.mjs: unmounted generic confirmation and withdrawal at successor_after_write.
+
+Source diagnosis: nominalBuild passes authorize but no cancellationHistory/requestLease. createSuccessorReservation therefore retains its existing literal COUNT(dossier_node_process_closures)=1 predicate. The newly migrated shared default seeded two closures. INSERT SELECT consequently changed zero rows, still called successor_after_write, then rejected meta.changes!==1. This explains both failures without a production defect. No runtime, SQL predicate, authorization, deadline or original test expectation was relaxed.
+
+Single source correction 28d4798b0a53a24497c468929c8dfee2f75a835a makes the shared fixture data mode explicit and validated:
+- known_cancellation remains the default, with original admission/admitted closure, NULL cancellation, cancellation grant/monitoring history, current grant and complete immutable schemas.
+- original_only is selected explicitly in both direct generic/no-history suites: mcp-named-authorization-native and mcp-qa-named-authorization-native. It omits only the cancellation-specific grant/closure/monitor rows, retaining complete schemas and original/current identity data.
+- The direct generic known-history suite explicitly selects known_cancellation. Its intentional two-closure case WITHOUT the history argument still denies, proving this correction did not bypass the legacy predicate.
+- The prior builder variant string marker is removed. No production files change in this fix.
+
+Cloud source inventory identified all 12 test consumers of rehearseExactNamedConfirmation/seedNamedHistoryFixture. All 11 ordinary .test.mjs consumers run in the 65-file union of the existing broad CI focused list and the adapter/mounted/history/generic/ARM cases. The remaining exact-artifact mcp-named-confirmation-package.native.mjs requires AFW_FROZEN_ARTIFACT_PATH and stays the separate package gate; no artifact was fabricated.
+
+The first qualification attempt [41311153017](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41311153017) stopped at inventory before tests because rg was absent (exit127). Workflow-only 110a44c443132defded839dfa5a79b57952d1b8f switches to available git grep. Final qualified source HEAD 110a44c443132defded839dfa5a79b57952d1b8f, tree a7ff04608149368fee39e6d855beb0f9001a06c3; [GREEN 41311289585](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41311289585), job 124862044468: 1553 PASS, 0 FAIL, 0 SKIP; scoped lint success with no diagnostics. Both previously failing cases, unchanged generic confirmation, deliberate two-closure denial and mounted native qualification pass. The source correction is five test/helper files; the sixth changed file is the temporary qualifier, still excluded from final integration. Full CI/package acceptance and fresh scoped review remain root's final composition gates.
+
+The documentation checkpoint carrying this appendix changes no code/tests after that GREEN. No local source, files, dependency, clone, build or process was used; no runtime/provider/data/permission/grant operation occurred.
