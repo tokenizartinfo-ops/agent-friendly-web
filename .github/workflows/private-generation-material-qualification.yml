@@ -1,0 +1,24 @@
+name: Private generation material qualification
+on:
+  push:
+    branches: [feat/private-generation-material-core-20261101]
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Private material and unchanged native host
+        run: node --test test/mcp-qa-generation-material.test.mjs test/mcp-qa-generation-preparation.test.mjs test/mcp-qa-generation-preparation-native.test.mjs test/mcp-qa-legacy-predecessor.test.mjs test/mcp-qa-named-packet-assembly.test.mjs test/mcp-qa-original-pins.test.mjs test/mcp-qa-historical-identity.test.mjs
+      - name: Targeted lint
+        run: npx --no-install eslint lib/mcp-qa-generation-material.mjs lib/mcp-qa-generation-preparation.mjs test/mcp-qa-generation-material.test.mjs
