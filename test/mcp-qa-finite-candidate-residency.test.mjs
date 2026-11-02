@@ -35,6 +35,12 @@ test('real compiler creates QA-only exact candidate residency without hash cycle
  assert.deepEqual(e.module,{name:'index.mjs',sha256:sha(c),bytes:c.length});
  assert.equal(e.sourceRevision,M);assert.equal(e.sourceTree,r.sourceTree);assert.equal(e.programHash,n.programHash);assert.equal(e.sourceCheck,'git-inputs-before-after-v1');
  const zipped=Buffer.from(e.content,'base64');assert.equal(zipped.length,e.compressedBytes);assert.equal(sha(zipped),e.compressedSha256);assert.deepEqual(gunzipSync(zipped),c);assert.deepEqual(gzipSync(c,{level:9,mtime:0}),zipped);
+ for(const role of ['qaLive','canaryLive']){
+  const graph=r.metafiles[role],paths=Object.keys(graph.inputs),imports=[...Object.values(graph.inputs),...Object.values(graph.outputs)].flatMap(v=>v.imports??[]).map(v=>v.path);
+  assert.equal(paths.some(p=>/bootstrap-issuer|build-finite-native-package|node_modules\/esbuild/.test(p)),false,'issuer/compiler/esbuild forbidden in runtime graph');
+  assert.equal(imports.some(p=>/^(?:node:)?fs(?:\/|$)|(?:^|\/)esbuild(?:\/|$)/.test(p)),false,'filesystem/esbuild imports forbidden in runtime graph');
+  console.info('B2a runtime graph '+JSON.stringify({role,inputs:paths.length,issuerCompilerFsEsbuildAbsent:true}));
+ }
  assert(r.metafiles.qaLive.inputs[decoder]);assert.equal(r.metafiles.canaryLive.inputs[decoder],undefined);
  assert(q.includes(Buffer.from(e.content)));assert.equal(c.includes(Buffer.from(e.content)),false);
  assert.equal(r.completePackage,false);assert.equal(r.manifest,undefined);assert.equal(r.operationalReadiness,false);
