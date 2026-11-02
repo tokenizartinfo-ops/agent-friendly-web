@@ -4,6 +4,8 @@ export async function readPrivateQaFiniteOwnerSource({ctx,env,parent,preconnecti
  parent.assertCurrent();
  if(env.RELEASE_DB===env.DB)throw Error('synthetic wrong release binding');
  const source=await ctx.storage.get('fixture:source');
+ const delay=await ctx.storage.get('fixture:delay');
+ if(delay){delay.calls++;if(delay.calls===delay.atCall){delay.fired=true;await ctx.storage.put('fixture:delay',delay);await new Promise(resolve=>setTimeout(resolve,delay.ms));}else await ctx.storage.put('fixture:delay',delay);}
  parent.assertCurrent();
  if(!source)throw Error('synthetic source absent');
  if(source.phase!=='closed_ui'&&preconnectionId===null)throw Error('exact later-stage source ref required');

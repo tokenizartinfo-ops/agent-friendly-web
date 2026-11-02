@@ -27,7 +27,7 @@ async function native(t,mode='normal'){
   const sqls=[...readFileSync(path,'utf8').matchAll(/CREATE TABLE[\s\S]*?\);|CREATE INDEX[^\n]+;|CREATE TRIGGER[^\n]+;/g)].map(x=>x[0]);
   for(const sql of sqls)await db.prepare(sql).run();
  }
- const jwt=(subject='owner',aud='finite-owner')=>new SignJWT({email:'fixture@example.invalid'}).setProtectedHeader({alg:'RS256',kid:jwk.kid}).setSubject(subject).setIssuer('https://finite-fixture.cloudflareaccess.com').setAudience(aud).setIssuedAt().setExpirationTime('30m').sign(privateKey);
+ const jwt=(subject='owner',aud='finite-owner',expires='30m')=>new SignJWT({email:'fixture@example.invalid'}).setProtectedHeader({alg:'RS256',kid:jwk.kid}).setSubject(subject).setIssuer('https://finite-fixture.cloudflareaccess.com').setAudience(aud).setIssuedAt().setExpirationTime(expires).sign(privateKey);
  const token=await jwt();
  const call=(path,options={})=>runtime.dispatchFetch(origin+path,{...options,headers:{'Cf-Access-Jwt-Assertion':token,...options.headers}});
  const json=(path,value)=>call(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value)}).then(r=>r.json());
@@ -191,4 +191,15 @@ test('unqualified product source and forwarding constructors remain unavailable 
  for(const name of ['readPrivateQaFiniteOwnerSource','forwardPrivateQaFiniteOwnerAuthorization','forwardPrivateQaFiniteOwnerGrant','forwardPrivateQaFiniteOwnerNotice']){
   assert.throws(()=>source[name]({ctx:{},env:{enabled:true,verified:true},sourceRevision:'b'.repeat(40),identity:{subject:'owner'}},{signal:new AbortController().signal,assertCurrent(){}}),/unavailable/);
  }
+});
+
+test('the same verified Access expiration remains a fence across asynchronous primary preparation',async t=>{
+ const f=await native(t);await f.json('/fixture/delay',{atCall:5,ms:2200});
+ const token=await f.jwt('owner','finite-owner',Math.floor(Date.now()/1000)+2);
+ const result=await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':token}});
+ const delay=await f.json('/fixture/delay-state',{});
+ assert.equal(delay.fired,true,'the native source delay must occur after signature verification');
+ assert.equal(result.status,401);
+ assert.equal(result.headers.get('Set-Cookie'),null);
+ assert.equal((await rows(f)).length,0,'expired proof cannot append even an initial source snapshot');
 });

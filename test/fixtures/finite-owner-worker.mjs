@@ -13,6 +13,8 @@ export class FiniteOwnerFixture extends DurableObject{
    await this.ctx.storage.put('fixture:source',source);
    return Response.json({initialized:true});
   }
+  if(path==='/fixture/delay'){await this.ctx.storage.put('fixture:delay',{...await request.json(),calls:0,fired:false});return Response.json({configured:true});}
+  if(path==='/fixture/delay-state')return Response.json(await this.ctx.storage.get('fixture:delay'));
   if(path==='/fixture/source'){
    const source=await this.ctx.storage.get('fixture:source'),changes=await request.json();
    await this.ctx.storage.put('fixture:source',{...source,...changes});return Response.json({changed:true});
