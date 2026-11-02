@@ -70,7 +70,7 @@ test('Task4 actual native wrapper DO store and two-effect engine installs only a
  assert.equal(JSON.stringify(outcome).includes('SYNTHETIC_OWNER'),false);
  assert.equal((await f.run(true)).status,'admin_pending');assert.equal(f.posts(),2);
 });
-for(const mode of ['owner_incomplete','seed_incomplete','changed_grant','changed_revision','changed_selection','publisher_unavailable','queue_expired','setup_expired','original_queue_budget','command_at_boundary','head_touched','oversize','foreign_pointer']){
+for(const mode of ['actual_facts_unavailable','owner_incomplete','seed_incomplete','changed_grant','changed_revision','changed_selection','publisher_unavailable','queue_expired','setup_expired','original_queue_budget','command_at_boundary','head_touched','oversize','foreign_pointer']){
  test('Task4 native setup denies '+mode+' before SEND',async t=>{
   const f=await policyFixture(t,mode);assert.equal((await f.run()).status,'admin_pending');assert.equal(f.posts(),0);assert.equal((await f.rows()).filter(([k])=>k.endsWith(':send')).length,0);
  });

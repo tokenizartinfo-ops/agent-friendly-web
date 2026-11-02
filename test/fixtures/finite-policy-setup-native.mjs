@@ -3,15 +3,16 @@ import {readFileSync} from 'node:fs';
 import {randomUUID} from 'node:crypto';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
-let bundle;
+const bundles=new Map();
 export async function policyFixture(t,mode='normal'){
- if(!bundle)bundle=(await build({entryPoints:['test/fixtures/finite-policy-setup-worker.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:[{name:'SYNTHETIC-fixed-qualification',setup(b){
-  b.onLoad({filter:/mcp-qa-finite-owner-preparation\.mjs$/},args=>({contents:readFileSync(args.path,'utf8').replace('export async function readFiniteOwnerSetupFacts','async function unusedActualSetupFacts')+"\nexport {syntheticFacts as readFiniteOwnerSetupFacts} from '"+process.cwd()+"/test/fixtures/finite-policy-setup-worker.mjs';",resolveDir:process.cwd()+'/lib',loader:'js'}));
-  b.onLoad({filter:/mcp-qa-finite-policy-setup-source\.mjs$/},()=>({contents:"export {syntheticEntry as readPrivateQaFinitePolicyEntry} from '"+process.cwd()+"/test/fixtures/finite-policy-setup-worker.mjs';export function readPrivateQaFinitePolicySource(){throw Error('SYNTHETIC separately supplied qualification');}",loader:'js'}));
- }}]})).outputFiles[0].text;
+ const actualFacts=mode==='actual_facts_unavailable';
+ if(!bundles.has(actualFacts))bundles.set(actualFacts,(await build({entryPoints:['test/fixtures/finite-policy-setup-worker.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:[{name:'SYNTHETIC-fixed-qualification',setup(b){
+  if(!actualFacts)b.onLoad({filter:/mcp-qa-finite-owner-preparation\.mjs$/},args=>({contents:readFileSync(args.path,'utf8').replace('export async function readFiniteOwnerSetupFacts','async function unusedActualSetupFacts')+"\nexport {syntheticFacts as readFiniteOwnerSetupFacts} from '"+process.cwd()+"/test/fixtures/finite-policy-setup-worker.mjs';",resolveDir:process.cwd()+'/lib',loader:'js'}));
+  b.onLoad({filter:/mcp-qa-finite-policy-setup-source\.mjs$/},args=>({contents:readFileSync(args.path,'utf8').replace('export async function readPrivateQaFinitePolicyEntry','async function unusedActualEntry')+"\nexport {syntheticEntry as readPrivateQaFinitePolicyEntry} from '"+process.cwd()+"/test/fixtures/finite-policy-setup-worker.mjs';",resolveDir:process.cwd()+'/lib',loader:'js'}));
+ }}]})).outputFiles[0].text);
  let state,pointer,versionId,deploymentId,posts=0;const requests=[],versions=new Map(),reads=[];
  const envelope=result=>Response.json({success:true,errors:[],messages:[],result});
- const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundle,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'SetupFixture',useSQLite:true,uniqueKey:'finite-policy-setup'},AFW_RELEASE_EVENTS_NODE:{className:'SetupFixture',useSQLite:true,uniqueKey:'finite-policy-events'}},d1Databases:{RELEASE_DB:'SYNTHETIC_RELEASE'},bindings:{AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'},AFW_MCP_CLOSURE_READ_TOKEN:'SYNTHETIC_READER_00000000000000',AFW_MCP_CLOSURE_PUBLISH_TOKEN:'SYNTHETIC_PUBLISHER_000000000000'},outboundService:async request=>{
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundles.get(actualFacts),compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'SetupFixture',useSQLite:true,uniqueKey:'finite-policy-setup'},AFW_RELEASE_EVENTS_NODE:{className:'SetupFixture',useSQLite:true,uniqueKey:'finite-policy-events'}},d1Databases:{RELEASE_DB:'SYNTHETIC_RELEASE'},bindings:{AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'},AFW_MCP_CLOSURE_READ_TOKEN:'SYNTHETIC_READER_00000000000000',AFW_MCP_CLOSURE_PUBLISH_TOKEN:'SYNTHETIC_PUBLISHER_000000000000'},outboundService:async request=>{
   const url=new URL(request.url),root='/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/';assert.equal(url.origin,'https://api.cloudflare.com');
   assert(request.headers.get('Authorization').startsWith('Bearer SYNTHETIC_'));
   if(request.method==='POST'){
