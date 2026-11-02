@@ -78,6 +78,7 @@ test('workerd enforces bounded inflate and canonical single gzip member with act
   const e={...r.candidateResidency,content:bytes.toString('base64'),compressedBytes:bytes.length,compressedSha256:sha(bytes)};
   const script=await bundle(e,n.program,r.sourceTree,true);
   const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}));
-  try{await assert.rejects(mf.ready,/runtime failed to start|unavailable/i);}finally{await mf.dispose();}
+  const rejected=e=>{assert.equal(e.code,'ERR_RUNTIME_FAILURE');assert.match(e.message,/Finite candidate residency unavailable/);return true;};
+  try{await assert.rejects(mf.ready,rejected);}finally{try{await mf.dispose();}catch(e){rejected(e);}}
  });
 });
