@@ -26,4 +26,4 @@ jobs:
         run: node --test test/mcp-qa-finite-profile-native.test.mjs test/mcp-qa-finite-profile.test.mjs
       - name: Scoped changed-source lint
         if: always()
-        run: npx eslint scripts/build-finite-native-package.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-candidate-residency.test.mjs
+        run: npx eslint lib/mcp-qa-finite-candidate-residency.mjs scripts/build-finite-native-package.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-candidate-residency.test.mjs

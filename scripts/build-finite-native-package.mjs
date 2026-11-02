@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {gzipSync} from 'node:zlib';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {fileURLToPath} from 'node:url';
@@ -12,7 +13,8 @@ import {finiteWranglerProfileTemplate,finitePublicStaticExpectation} from '../li
 const exec=promisify(execFile),hash=x=>createHash('sha256').update(x).digest('hex');
 const fail=()=>{throw Error('Finite native package unavailable');};
 const workflow='.github/workflows/afw-finite-native-package.yml';
-const roles=['qaLive','canaryLive'];
+// Acyclic residency: nodeM -> canaryM -> QA; never embed QA/package hashes.
+const roles=['canaryLive','qaLive'];
 const paths={qaLive:'wrangler.independent-closure-qa.finite.jsonc',canaryLive:'wrangler.mcp-own.finite.jsonc'};
 const expectedExports={qaLive:['IndependentClosure','PrivateQaBootstrap','PrivateQaCatalog','PrivateQaNamedConfirmation','PrivateQaPreregistration','default','observePrivateQa'],canaryLive:['AfwNodeControl','AfwOwnEventNode','default']};
 function options(v){
@@ -41,13 +43,20 @@ export async function compileFiniteNativeStaging(input){
   if(cwd!==await realpath(fileURLToPath(new URL('..',import.meta.url))))fail();
   const before=await verifyMcpReleaseSource({cwd,sourceRevision}),inputBefore=await inputs(cwd,sourceRevision);
   const node=await buildMcpNodeProgram(),files={},modules={},metafiles={};
+  if(hash(node.program)!==node.programHash)fail();
+  let candidateResidency;
   for(const role of roles){
    const config=finiteWranglerProfileTemplate(role),entry=config.main;
+   if(role==='qaLive'&&!candidateResidency)fail();
    const compiled=await build({absWorkingDir:cwd,entryPoints:[entry],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',sourcemap:false,metafile:true,define:{
     'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify(sourceRevision),
     'globalThis.__AFW_NODE_SOURCE_REVISION__':JSON.stringify(sourceRevision),
     'globalThis.__AFW_NODE_PROGRAM__':JSON.stringify(node.program),
     'globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__':JSON.stringify('finite_trial_event'),
+    ...(role==='qaLive'?{
+     'globalThis.__AFW_FINITE_CANDIDATE_RESIDENCY__':JSON.stringify(candidateResidency),
+     'globalThis.__AFW_FINITE_SOURCE_TREE__':JSON.stringify(before.tree),
+    }:{}),
    }});
    const out=Object.values(compiled.metafile.outputs);
    if(compiled.outputFiles.length!==1||out.length!==1)fail();
@@ -55,13 +64,20 @@ export async function compileFiniteNativeStaging(input){
    const original=role==='qaLive'?'worker/independent-closure/index.mjs':'worker/mcp-own/index.mjs';
    if(!compiled.metafile.inputs[entry]||!compiled.metafile.inputs[original])fail();
    const bytes=compiled.outputFiles[0].contents;
-   if(bytes.length<1||bytes.length>3145728)fail();
+   if(bytes.length<1||bytes.length>(role==='canaryLive'?2097152:3145728))fail();
+   const decoder='lib/mcp-qa-finite-candidate-residency.mjs';
+   if(role==='canaryLive'){
+    if(compiled.metafile.inputs[decoder])fail();
+    const compressed=gzipSync(bytes,{level:9,mtime:0});
+    if(compressed.length>2098176)fail();
+    candidateResidency=Object.freeze({purpose:'afw.finite-candidate-residency.v1',encoding:'gzip-base64.v1',sourceRevision,sourceTree:before.tree,sourceCheck:'git-inputs-before-after-v1',programHash:node.programHash,module:Object.freeze({name:'index.mjs',sha256:hash(bytes),bytes:bytes.length}),compressedSha256:hash(compressed),compressedBytes:compressed.length,content:compressed.toString('base64')});
+   }else if(!compiled.metafile.inputs[decoder]||!Buffer.from(bytes).includes(Buffer.from(candidateResidency.content)))fail();
    files[role+'/index.mjs']=Buffer.from(bytes);
    modules[role]={provenance:{kind:'compiled-source.v1',sourceRevision,sourceTree:before.tree},module:{name:'index.mjs',sha256:hash(bytes),bytes:bytes.length,exports:out[0].exports.slice().sort()},publicStatic:finitePublicStaticExpectation(role)};
    metafiles[role]=compiled.metafile;
   }
   const after=await verifyMcpReleaseSource({cwd,sourceRevision});assert.deepEqual(after,before);assert.deepEqual(await inputs(cwd,sourceRevision),inputBefore);
-  return {purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree:after.tree,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:inputBefore[workflow],modules,files,metafiles,completePackage:false,operationalReadiness:false};
+  return {purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree:after.tree,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:inputBefore[workflow],modules,files,metafiles,candidateResidency,completePackage:false,operationalReadiness:false};
  }catch{fail();}
 }
 /** Complete-package boundary. Deliberately no positive path until separately
@@ -82,5 +98,5 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  // Separate isolated staging namespace; never eligible artifact name/layout.
  const root=resolve(cwd,staging?'output/finite-native-staging':'output/finite-native-package');
  for(const [path,bytes] of Object.entries(built.files)){const target=resolve(root,path);await mkdir(resolve(target,'..'),{recursive:true});await writeFile(target,bytes);}
- if(staging){const evidence={...built};delete evidence.files;delete evidence.metafiles;await writeFile(resolve(root,'staging.json'),JSON.stringify(evidence,null,2)+'\n');}
+ if(staging){const evidence={...built};delete evidence.files;delete evidence.metafiles;evidence.candidateResidency={...built.candidateResidency};delete evidence.candidateResidency.content;await writeFile(resolve(root,'staging.json'),JSON.stringify(evidence,null,2)+'\n');}
 }

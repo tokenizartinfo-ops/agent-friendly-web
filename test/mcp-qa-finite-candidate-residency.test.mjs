@@ -68,3 +68,16 @@ test('real workerd executes decoder with actual emitted candidate and exposes me
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}));
  try{const response=await mf.dispatchFetch('https://fixture.invalid');assert.equal(response.status,200);const x=await response.json();assert.deepEqual(x.module,r.candidateResidency.module);assert.equal(x.decodedHash,sha(r.files['canaryLive/index.mjs']));assert.equal(x.programHash,n.programHash);assert.equal(x.sourceRevision,M);assert.equal(x.sourceTree,r.sourceTree);assert.equal(x.bytes,undefined);assert.equal(x.script,undefined);assert.equal(x.content,undefined);}finally{await mf.dispose();}
 });
+
+test('workerd enforces bounded inflate and canonical single gzip member with actual decoder',async t=>{
+ const r=await compiled,n=await node;
+ for(const [name,bytes] of [
+  ['inflate cap',gzipSync(Buffer.alloc(2097153,65),{level:9,mtime:0})],
+  ['trailing gzip data',Buffer.concat([Buffer.from(r.candidateResidency.content,'base64'),Buffer.from([0])])],
+ ])await t.test(name,async()=>{
+  const e={...r.candidateResidency,content:bytes.toString('base64'),compressedBytes:bytes.length,compressedSha256:sha(bytes)};
+  const script=await bundle(e,n.program,r.sourceTree,true);
+  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}));
+  try{await assert.rejects(mf.ready,/runtime failed to start|unavailable/i);}finally{await mf.dispose();}
+ });
+});

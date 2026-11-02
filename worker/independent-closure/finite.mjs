@@ -1,3 +1,4 @@
+import '../../lib/mcp-qa-finite-candidate-residency.mjs';
 import {runFinitePrivatePolicySetup,createPrivateQaFinitePolicySetup,FINITE_POLICY_SETUP_OPERATION} from '../../lib/mcp-qa-finite-policy-setup.mjs';
 // SOURCE-selected finite composition. Ordinary index.mjs stays closed.
 import {PrivateQaBootstrap as ClosedBootstrap,PrivateQaNamedConfirmation as ClosedConfirmation,IndependentClosure as ClosedIndependentClosure} from './index.mjs';
