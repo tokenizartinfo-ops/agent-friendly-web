@@ -7,13 +7,14 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {generateKeyPair,exportJWK,SignJWT} from 'jose';
 import {hashFinitePreparationRecord,hashFiniteOwnerPreparationProject,hashFiniteOwnerEvidence} from '../lib/mcp-qa-finite-preparation-records.mjs';
 import {finitePublicProfileTemplate} from '../lib/mcp-qa-finite-profile.mjs';
+const qaLimiterBinding=finitePublicProfileTemplate('qaLive').bindings.find(b=>b.type==='ratelimit').name;
 const qaVersionBinding=finitePublicProfileTemplate('qaLive').bindings.find(b=>b.type==='version_metadata').name;
 const origin='https://delegated-canary.agentfriendlyweb.dev';
-async function native(t,mode='normal',versionBinding=qaVersionBinding){
+async function native(t,mode='normal',versionBinding=qaVersionBinding,limiterBinding='DELEGATED_RATE_LIMITER'){
  const {privateKey,publicKey}=await generateKeyPair('RS256'),jwk={...await exportJWK(publicKey),kid:'finite-source-native',alg:'RS256'};
  const bundle=await build({entryPoints:['test/fixtures/finite-owner-worker.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],plugins:[{name:'synthetic-fixed-source',setup(b){b.onResolve({filter:/mcp-qa-finite-owner-source\.mjs$/},()=>({path:process.cwd()+'/test/fixtures/finite-owner-source.mjs'}));}}]});
  let jwksReads=0;
- const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundle.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],durableObjects:{FIXTURE:{className:'FiniteOwnerFixture',useSQLite:true,uniqueKey:'finite-owner-task2'}},d1Databases:{DB:'qa-private',FIXTURE_RELEASE_DB:'release-primary',...(mode==='missing'?{}:{RELEASE_DB:mode==='wrong'?'qa-private':'release-primary'})},ratelimits:{DELEGATED_RATE_LIMITER:{namespace_id:'99122',simple:{limit:1000,period:60}}},bindings:{[versionBinding]:{id:'11111111-1111-4111-8111-111111111111'}},outboundService:async request=>{
+ const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundle.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],durableObjects:{FIXTURE:{className:'FiniteOwnerFixture',useSQLite:true,uniqueKey:'finite-owner-task2'}},d1Databases:{DB:'qa-private',FIXTURE_RELEASE_DB:'release-primary',...(mode==='missing'?{}:{RELEASE_DB:mode==='wrong'?'qa-private':'release-primary'})},ratelimits:{[limiterBinding]:{namespace_id:'99122',simple:{limit:1000,period:60}}},bindings:{[versionBinding]:{id:'11111111-1111-4111-8111-111111111111'}},outboundService:async request=>{
   assert.equal(request.url,'https://finite-fixture.cloudflareaccess.com/cdn-cgi/access/certs');jwksReads++;
   return Response.json({keys:[jwk]});
  }}));
@@ -264,14 +265,21 @@ for(const mode of ['before','after'])test('child timeout '+mode+' native transac
  assert.equal(result.firstPresent,mode==='after',mode==='before'?'expired child must not append after original consent consumption':'timeout must preserve already-committed uncertain facts');
 });
 
-test('accepted qaLive profile version binding alone qualifies actual owner source',async t=>{
+test('accepted qaLive profile version and limiter bindings alone qualify actual owner source',async t=>{
  assert.equal(qaVersionBinding,'AFW_QA_VERSION');
- const f=await native(t,'normal',qaVersionBinding),s=await f.screen();
+ assert.equal(qaLimiterBinding,'AFW_QA_OCCURRENCE_RATE_LIMITER');
+ const f=await native(t,'normal',qaVersionBinding,qaLimiterBinding),s=await f.screen();
  assert.match(s.handle,/^[a-f0-9]{64}$/);
  assert.equal((await f.submit(s)).status,202);
 });
 test('obsolete QA_VERSION alone cannot qualify actual owner source',async t=>{
  const f=await native(t,'normal','QA_VERSION');
+ assert.equal((await f.call('/connections/finite-prepare')).status,503);
+ assert.deepEqual(await f.json('/fixture/rows',{}),[]);
+});
+
+test('canary DELEGATED_RATE_LIMITER alone cannot qualify private QA owner preparation',async t=>{
+ const f=await native(t,'normal',qaVersionBinding,'DELEGATED_RATE_LIMITER');
  assert.equal((await f.call('/connections/finite-prepare')).status,503);
  assert.deepEqual(await f.json('/fixture/rows',{}),[]);
 });
