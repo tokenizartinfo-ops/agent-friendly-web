@@ -1,3 +1,4 @@
+import {decodeFiniteMaterialSeed} from '../../lib/mcp-qa-finite-seed.mjs';
 import {seedPrimaryFixture,SEED_GH} from './finite-seed-primary.mjs';
 import {createHash} from 'node:crypto';
 import {finiteFinalizerFixture} from './finite-finalizer.mjs';
@@ -53,5 +54,5 @@ export async function cfFiniteFixture({at,configure=()=>{}}={}){
  };
  const options={plan:p,credential:'synthetic_cf_custody',githubToken:'synthetic_github',fetchImpl,now:base.f.now,signal:new AbortController().signal};
  const observer=()=>gh.api.createPrivateQaFiniteObserverHttp({admission:{intentId:v.intentId,sourceRevision:v.sourceRevision,T0:v.T0,R1:v.R1},source:{qaLive:p.deployments.qaLive,custody:p.custody},credential:options.credential,githubToken:options.githubToken,fetchImpl,now:base.f.now,signal:options.signal});
- return {base,p,v,state,gh,requests,fetchImpl,observer,adapters:()=>gh.api.createPrivateQaFiniteRestoreHttp(options)};
+ return {base,p,v,state,gh,requests,fetchImpl,observer,seedHash:decodeFiniteMaterialSeed(seedFixture.map.get('/git/tags/'+seedFixture.tagSha).message).seedHash,adapters:()=>gh.api.createPrivateQaFiniteRestoreHttp(options)};
 }

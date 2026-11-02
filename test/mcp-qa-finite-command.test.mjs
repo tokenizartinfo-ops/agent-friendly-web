@@ -37,7 +37,7 @@ test('external poll covers late original C1 completion without exhausting at C0 
  const f=await cfFiniteFixture({at:command.at,configure:p=>{p.intentId=a.intentId;p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});}});
  f.base.f.setNow(command.at+100);f.state.observerStatus='running';f.gh.state.admitStatus='in_progress';
  const env={GITHUB_EVENT_PATH:'event.json',GITHUB_REPOSITORY:command.context.repository,GITHUB_REPOSITORY_ID:command.context.repositoryId,GITHUB_REF:command.context.ref,GITHUB_EVENT_NAME:command.context.eventName,GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:command.context.sourceRevision,GITHUB_TOKEN:'synthetic_gh',AFW_QA_CLOSED_TOKEN:'synthetic_cf'};
- const {finiteCliSyntheticSource}=await import('./fixtures/finite-http-module.mjs');const synthetic=await finiteCliSyntheticSource(f.p);
+ const {finiteCliSyntheticSource}=await import('./fixtures/finite-http-module.mjs');const synthetic=await finiteCliSyntheticSource(f.p,{seedHash:f.seedHash});
  const result=await synthetic.runFiniteFinalizerCli({phase:'poll',env,now:f.base.f.now,read:async path=>JSON.stringify(path==='event.json'?command.event:f.p),write:async()=>{},sleep:async ms=>f.base.f.setNow(f.base.f.now()+ms),fetchImpl:async(...args)=>{if(f.base.f.now()>=f.v.C1+1)f.state.observerStatus='complete';return f.fetchImpl(...args);}});
  assert.equal(result.status,'observer_complete');assert.ok(f.base.f.now()>f.v.C1);assert.ok(f.base.f.now()<f.v.R1);assert.equal(f.state.posts,0);
 });
@@ -58,7 +58,7 @@ test('fixed CLI adopts preview and persists existing ready without Workflow crea
  const f=await cfFiniteFixture({at:command.at,configure:p=>{p.intentId=a.intentId;p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:p.source.revision});}});
  f.base.f.setNow(command.at+100);f.state.observerStatus='running';f.gh.state.admitStatus='in_progress';
  const env={GITHUB_EVENT_PATH:'event.json',GITHUB_REPOSITORY:command.context.repository,GITHUB_REPOSITORY_ID:command.context.repositoryId,GITHUB_REF:command.context.ref,GITHUB_EVENT_NAME:command.context.eventName,GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:command.context.sourceRevision,GITHUB_TOKEN:'synthetic_gh',AFW_QA_CLOSED_TOKEN:'synthetic_cf'},writes=[];
- const synthetic=await finiteCliSyntheticSource(f.p),result=await synthetic.runFiniteFinalizerCli({phase:'admit',env,now:f.base.f.now,read:async()=>JSON.stringify(command.event),write:async(path,value)=>writes.push({path,value}),fetchImpl:f.fetchImpl});
+ const synthetic=await finiteCliSyntheticSource(f.p,{seedHash:f.seedHash}),result=await synthetic.runFiniteFinalizerCli({phase:'admit',env,now:f.base.f.now,read:async()=>JSON.stringify(command.event),write:async(path,value)=>writes.push({path,value}),sleep:async ms=>f.base.f.setNow(f.base.f.now()+ms),fetchImpl:f.fetchImpl});
  assert.equal(result.status,'ready');assert(writes.some(x=>x.path==='afw-finite-plan.json'));
  assert.equal(f.requests.filter(x=>x.method==='POST'&&x.url.includes('api.cloudflare.com')).length,0);
  assert.equal(f.gh.tagPosts,1);assert.equal(f.gh.refPosts,1);

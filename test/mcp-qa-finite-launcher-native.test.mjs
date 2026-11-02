@@ -22,12 +22,12 @@ export class Native extends IndependentClosure {
  report(){return state.calls;}
 }
 export class Launcher extends PrivateQaBootstrap{
- run(event,step){
+ async run(event,step){
   const adapted={
    do:async(name,options,fn)=>{state.calls.steps.push({name,options});const r=await step.do(name,options,fn);if(name==='finite-launch-prepare'&&state.mode==='late-step')state.f.setNow(state.f.plan.launchPolicy.armAckBy+1);return r;},
    sleepUntil:async(name,date)=>{state.calls.sleeps.push({name,at:date.getTime()});state.f.prepareSuccess=true;state.f.setNow(date.getTime()+(state.mode==='late-wake'?10000:0));try{return await step.sleepUntil(name,new Date(new Date().getTime()+25));}catch(error){state.calls.sleepError=String(error);throw error;}}
   };
-  return super.run(event,adapted);
+  const first=await super.run(event,adapted);return state.mode==='replay'?super.run(event,adapted):first;
  }
 }
 export {PrivateQaNamedConfirmation};
@@ -54,3 +54,5 @@ test('actual finite Bootstrap prepares with readback, absolute sleep and one jou
 for(const mode of ['missing-seed','lost-prepare','late-readback','late-step','late-wake'])test('actual launcher denies '+mode+' without a child or retry',async()=>{
  const r=await native(mode);assert.equal(r.status.output?.status,'admin_pending');assert.equal(r.report.create,0);assert.ok(r.report.prepare<=1);
 });
+
+test('actual native recorded step replay does not repeat prepare or native create',async()=>{const r=await native('replay');assert.equal(r.status.output.status,'acknowledged',JSON.stringify(r.report));assert.equal(r.report.prepare,1);assert.equal(r.report.read,1);assert.equal(r.report.create,1);});

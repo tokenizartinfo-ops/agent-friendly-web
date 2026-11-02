@@ -25,12 +25,14 @@ async function fixture(mode='normal',offset=100){
    if(['authmask','generic404','extra404','oversize404'].includes(mode))return response({success:false,messages:[],errors:[{code:mode==='authmask'?10000:10400,message:mode==='generic404'?'not found':'workflows.api.error.instance.not_found'}],result:null,...(mode==='extra404'?{extra:true}:{}),...(mode==='oversize404'?{padding:'x'.repeat(3000)}:{})},404);
    if(mode==='bad404')return new Response('not json',{status:404,headers:{date:new Date(f.base.f.now()).toUTCString()}});
    if(mode==='skip'&&reads.length===1)f.base.f.setNow(T0+5700);
-   if(f.base.f.now()<T0+50000||mode==='never'||mode==='clip')return response({success:false,messages:[],errors:[{code:10400,message:'workflows.api.error.instance.not_found'}],result:null},404);
+   if(mode==='clip'){const start=performance.now();await new Promise(resolve=>init.signal.addEventListener('abort',resolve,{once:true}));reads.push({abortedAfter:performance.now()-start});throw Error('clipped child');}
+   if(mode==='pending'&&f.base.f.now()<T0+50000){const response=await f.fetchImpl(url,init),body=await response.json();body.result.steps=[];body.result.step_count=0;return new Response(JSON.stringify(body),{status:200,headers:response.headers});}
+   if(f.base.f.now()<T0+50000&&mode!=='pending'||mode==='never')return response({success:false,messages:[],errors:[{code:10400,message:'workflows.api.error.instance.not_found'}],result:null},404);
   }
   return f.fetchImpl(url,init);
  };
  const response=(v,status=200)=>new Response(JSON.stringify(v),{status,headers:{date:new Date(f.base.f.now()).toUTCString(),'content-type':'application/json'}});
- const result=await api.runFiniteFinalizerCli({phase:'admit',env,now:f.base.f.now,read:async()=>JSON.stringify(event),write:async(path,value)=>writes.push({path,value}),fetchImpl,sleep:async ms=>{sleeps.push(ms);f.base.f.setNow(f.base.f.now()+ms);}});
+ const result=await api.runFiniteFinalizerCli({phase:'admit',env,now:f.base.f.now,read:async()=>JSON.stringify(event),write:async(path,value)=>writes.push({path,value}),fetchImpl,sleep:async ms=>{sleeps.push(ms);if(mode!=='early-wake')f.base.f.setNow(f.base.f.now()+ms);}});
  return {result,reads,sleeps,writes,all,f,hash};
 }
 test('actual CLI waits for attended observer until 50s after successful primary seed; GET only',async()=>{
@@ -40,3 +42,8 @@ test('absolute slots skip elapsed time without catch-up bursts',async()=>{const 
 test('never observed consumes at most 35 nonzero-budget slots; 70s starts no network',async()=>{const r=await fixture('never');assert.equal(r.result.status,'admin_pending');assert.deepEqual(r.reads,Array.from({length:34},(_,i)=>(i+1)*2000));});
 test('zero original budget starts no network',async()=>{const r=await fixture('normal',70000);assert.equal(r.result.status,'admin_pending');assert.equal(r.all.length,0);});
 for(const mode of ['missing-seed','auth','unknown','bad404','authmask','generic404','extra404','oversize404','transport','setup-missing','setup-running','setup-bad-hash'])test('adoption denies '+mode+' without catch-all retry',async()=>{const r=await fixture(mode,50000);assert.equal(r.result.status,'admin_pending');assert.equal(r.sleeps.length,0);assert.ok(r.reads.length<=1);assert.equal(r.all.some(x=>x.method!=='GET'&&x.url.includes('api.cloudflare.com')),false);});
+
+test('genuine qualified preview pending waits without expanding observer budget',async()=>{const r=await fixture('pending');assert.equal(r.result.status,'ready');assert.equal(r.reads[0],2000);assert.ok(r.reads.includes(50000));});
+test('last eligible slot clips child to remaining original two seconds',async()=>{const r=await fixture('clip',68000);assert.equal(r.result.status,'admin_pending');assert.equal(r.reads[0],68000);assert.ok(r.reads[1].abortedAfter<3000);assert.equal(r.all.some(x=>x.method!=='GET'&&x.url.includes('api.cloudflare.com')),false);});
+
+test('early sleep wake cannot spend a future absolute slot',async()=>{const r=await fixture('early-wake',50001);assert.equal(r.result.status,'admin_pending');assert.equal(r.reads.length,0);});
