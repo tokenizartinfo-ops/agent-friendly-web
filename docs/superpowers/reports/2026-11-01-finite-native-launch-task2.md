@@ -87,3 +87,50 @@ Self-review checked the exact delta against BASE, original claim/hash domains, n
 - This report.
 
 C2 actual owner/setup/primary/custody implementation remains the separate later five-task plan; no actual producer was guessed. Task3 remains future work. Root owns fresh scoped review before subsequent product writing. STOP WRITES after documentation CAS/readback.
+
+
+## Fix round 1/5 — preserve current consent through final storage await
+
+Status: DONE, source-only fix; scoped root re-review pending. This section supersedes the earlier no-known-defect statement for the finding below. Reviewed/write BASE98d2e5dc7df12fe5fea2ee2e5fc564fbf652d17b/tree00b303646de1db435a606d75fb979a66b20a250f. Final code/test HEAD07edebb0192929357de4122acf40fb442740418a/tree14acc77c7703a982b73dc848a3817ec7ff419d78. Exact documentation HEAD is the enclosing documentation commit, supplied after CAS/readback in the return.
+
+Finding, verbatim: **[P1] Preserve current consent expiry through final storage await** — lib/mcp-qa-finite-launch.mjs115–118 at reviewed HEAD. fresh() discarded readLaunchControl().value.consent.expiresAt; its subsequent snapshot could settle after current consent expired while critical() still accepted the original parent and lastCreateAt. The persisted nominal claim's wider deadline was not the current primary consent expiry. This was initially a static finding, then reproduced in the hosted RED below.
+
+The installed subagent-driven-development fix-loop instructions were read through one explicitly permitted tiny read-only local instruction access. No local project files, clone, dependencies, test/build or persistent process was created. Finding and round were recorded BEFORE test/product edits in71a222e824c8409a8451786d96f03c027ae83718. Original implementer, round1/5; no subagent or self-appointed reviewer. Same source-only authorization and forward-revert rollback boundaries.
+
+### Minimal change
+
+After a successful strict readLaunchControl result and exact claim/control correlation, fresh() now calls the EXISTING narrow(value.value.consent.expiresAt) before awaiting its storage snapshot. That helper takes the minimum of the prior phase bound and new expiry, clips its remaining timer against the original parent, and checks the original parent's clock. A subsequent broader primary expiry cannot widen the retained bound. No parent/context/start is replaced, no new five seconds, no claim/hash/schema/source-operation interface change.
+
+critical() already runs after the snapshot and immediately before native create; it now sees the retained current-consent end. Expiry denies the effect and returns admin_pending while preserving the already committed SEND. The narrowed caller timer does not abort, detach or release outstanding storage/native work: the unchanged Task1 coordinator retains the actual callback promise until settlement. C2 remains default unavailable; no actual consent/grant or runtime was read or changed.
+
+### Covering native tests
+
+The synthetic external primary retains a persisted nominal claim deadline of T0+300000, then provides a narrower CURRENT consent expiry at create time. Real exported DO/control/SQLite/Workflow paths are unchanged.
+
+- current-consent-crossing: the first fresh read uses the original expiry; the SECOND real readLaunchControl returns current expiryT0+150100. After SEND, the SECOND fresh snapshot's actual native transaction settles and the acknowledgement wrapper advances time to150101 before returning. RED called native create once; GREEN calls it zero times and retains unchanged SEND with no ACK/retry.
+- current-consent-no-widen: the first fresh primary reports expiry151000; the second reports the wider original300000. The second fresh snapshot advances to151001. GREEN retains the first narrower expiry and denies native create, confirming monotonic-only narrowing.
+- current-consent-held-snapshot: the second current expiry is150500; its actual native snapshot acknowledgement is held beyond that narrower bound. The caller returns admin_pending in under2000ms (500ms bound, versus original5000ms), with underlying work still unsettled. A distinct fresh parent cannot enter the coordinator until actual settlement. Releasing the old snapshot after consent expiry yields zero native calls and unresolved SEND. No cancellation or renewed authority is inferred.
+
+The storage wrapper awaits the REAL native transaction before delaying its acknowledgement, so it exercises the outstanding API promise without blocking workerd timer delivery inside a SQLite transaction. Existing nominal-control and native-inventory tests cover the surrounding consent/claim/coordinator behavior; no160-test/full-suite repetition.
+
+### Exact hosted RED/GREEN
+
+| Revision | Run / job | Result |
+| --- | --- | --- |
+| ffe21c16cb69cbe602f4ed9e2051b0f453a40ab5 | 41370718670 / 125040404933 | Meaningful RED91tests89PASS2FAIL,0SKIP0CANCELLED. Both fail intended nativecalls assertion: expected0,actual1. Production unchanged. |
+| 07edebb0192929357de4122acf40fb442740418a | 41370885088 / 125040906128 | GREEN91PASS0FAIL0SKIP0CANCELLED; scoped lintPASS. |
+
+Both attempt1. Final [run41370885088](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41370885088), [job125040906128](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41370885088/job/125040906128): completed/success, push, exact codeHEAD/branch/repository1347578006 verified; hosted Nodev22.23.4; artifacts0. Existing npm dependencies only; temporary qualifier still excluded from integration. Dependency/action deprecation notices remain (url.parse and Node20 actions forced to Node24); no scoped ESLint finding and no test failure.
+
+Commands:
+
+```sh
+node --test test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-finite-nominal-control.test.mjs
+npx eslint lib/mcp-qa-finite-launch.mjs test/mcp-qa-finite-launch-native.test.mjs
+```
+
+Output: tests91,pass91,fail0,cancelled0,skipped0; lint step success. Existing hosted npm ci --ignore-scripts --no-audit --no-fund; eight-minute job ceiling.
+
+Four changed paths before this report (launch source, native test, temporary qualifier, ledger) were independently fetched at final codeHEAD and matched exact authored contents; independent branch HEAD/tree and run/head/attempt verified. Report/ledger append CAS and readback follow. Self-review confirms the only product delta is retaining already-validated consent expiry via existing monotonic narrowing; all hashes, source defaults, current control decoder, native once-send and actual-settlement exclusion remain unchanged.
+
+Task2 fix round1/5: implementer considers1 addressed,0 open — current consent expiry through final storage await; commits98d2e5d..07edebb0. Root decides ADDRESSED/NOT ADDRESSED in the scoped re-review. No provider/private probe, credential/role/scope/OAuth, deploy/DDL/cron/Containers, real finite HEAD/occurrence, Max or main merge. operationalReadiness=false. STOP WRITES after documentation CAS/readback.
