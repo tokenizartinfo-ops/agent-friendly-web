@@ -462,3 +462,6 @@ Root C2 Task1 additional exactness ruling: policies has exactly AFW_DOSSIER_EVEN
 
 
 Root C2 Task1 identity ruling: Failure.identityHash and journal key derive SHA256('afw.finite-policy-effect-identity.v1\n'+ASCII-canonical EXACT validated identity union INCLUDING kind/effect). Connection union is {kind:'connection',preconnectionId,sourceRevision,stage,effect}; policy union is {kind:'policy',intentId,sourceRevision,setupInstanceId,effect}. Sibling upload replaces only effect with literal upload and hashes same union/domain. No caller key or omitted dimension; afw.finite-connection-stage.v1 remains separate. Shared factual identity helper may be exported; digest never creates send authority. Unknown/late SEND remains outstanding.
+
+
+Root C2 Task1 program provenance ruling: OwnerPreparation.sourceRevision and approval.sourceRevision are runtime/sourceM and MUST match. programContext.sourceRevision is the actual program revision, potentially distinct from M; T1 checks 40hex plus programHash/originalContextHash shape. T2/T4 must correlate all three values with current primary program and exact selected project/goal. No equality to runtimeM, substituted current program or synthesized source authority.
