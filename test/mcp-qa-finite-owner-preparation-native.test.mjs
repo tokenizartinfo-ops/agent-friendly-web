@@ -5,6 +5,7 @@ import {createHash,randomBytes,randomUUID} from 'node:crypto';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {generateKeyPair,exportJWK,SignJWT} from 'jose';
+import {hashFinitePreparationRecord,hashFiniteOwnerPreparationProject,hashFiniteOwnerEvidence} from '../lib/mcp-qa-finite-preparation-records.mjs';
 const origin='https://delegated-canary.agentfriendlyweb.dev';
 async function native(t,mode='normal'){
  const {privateKey,publicKey}=await generateKeyPair('RS256'),jwk={...await exportJWK(publicKey),kid:'finite-source-native',alg:'RS256'};
@@ -86,10 +87,10 @@ async function connection(t){
  const stage=async phase=>f.json('/fixture/source',{phase,currentPublication:{stage:phase==='read_consent'?'connection':'notices',versionId:initial.initialBaseline.versionId,deploymentId:initial.initialBaseline.deploymentId,receiptHash:'f'.repeat(64)}});
  await stage('read_consent');
  const handle=randomBytes(32).toString('base64url'),authorizationHash=sha(handle),until=new Date(Date.now()+590000).toISOString();
- await f.db.prepare('INSERT INTO delegated_consent_sessions(handle_hash,user_id,kind,project_id,client_id,resource,scopes_json,expires_at,consumed_at) VALUES(?,?,?,?,?,?,?,?,?)').bind(authorizationHash,'owner','authorize','synthetic-owned','synthetic-client',origin+'/mcp','["afw:project:read"]',until,'').run();
+ await f.db.prepare('INSERT INTO delegated_consent_sessions(handle_hash,user_id,kind,project_id,client_id,resource,scopes_json,expires_at,consumed_at) VALUES(?,?,?,?,?,?,?,?,?)').bind(authorizationHash,'owner','authorize','synthetic-owned','synthetic-client',origin+'/mcp','["afw:project:read","afw:evidence:read"]',until,'').run();
  const link=(kind,refs,request)=>f.json('/fixture/link',{kind,...refs,...request});
  const headers={'Cf-Access-Jwt-Assertion':f.token,Cookie:screen.cookie};
- const authRequest={url:origin+'/authorize?'+new URLSearchParams({client_id:'synthetic-client',resource:origin+'/mcp',project:'synthetic-owned',scope:'afw:project:read'}),headers};
+ const authRequest={url:origin+'/authorize?'+new URLSearchParams({client_id:'synthetic-client',resource:origin+'/mcp',project:'synthetic-owned',scope:'afw:project:read afw:evidence:read'}),headers};
  return {...f,screen,initial,stage,handle,authorizationHash,until,link,headers,authRequest};
 }
 async function granted(t){
@@ -141,4 +142,31 @@ test('expired original parent cannot record authorization or reconstruct a new l
  const f=await connection(t);
  assert.equal((await f.json('/fixture/link',{kind:'authorization',authorizationHash:f.authorizationHash,...f.authRequest,expired:true})).rejected,true);
  assert.equal((await rows(f)).filter(([k])=>k.startsWith('connection-authorization:')).length,0);
+});
+
+test('internal selected preparation rereads exact current owner grant notices and rejects changed sourceM',async t=>{
+ const f=await granted(t);await f.stage('notice_consent');
+ const monitorHandle=randomBytes(32).toString('base64url'),requestId=randomUUID(),at=Date.now(),expires=Math.min(Date.parse(f.until),at+580000);
+ await f.db.prepare('INSERT INTO dossier_monitoring_owner_tickets VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(sha(monitorHandle),requestId,'owner','accepted-grant','synthetic-owned','synthetic-client',origin+'/mcp','afw.dossier-monitoring-owner.v1','grant',1,0,at,expires,expires).run();
+ const ack=await f.json('/fixture/monitoring',{requestId,action:'grant',expectedSequence:0,expiresAt:expires});
+ const request={url:origin+'/monitoring/grant',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:f.screen.cookie+'; __Host-afw-monitoring-owner='+monitorHandle},body:'handle='+monitorHandle};
+ assert.equal((await f.link('notice',{requestId,sequence:ack.sequence},request)).result?.status,'recorded');
+ const saved=await rows(f),pre=saved.find(([k])=>k.endsWith(':record'))[1],approval=saved.find(([k])=>k.startsWith('connection-approval:'))[1],notice=saved.find(([k])=>k.endsWith(':notice'))[1];
+ const raw=await f.db.prepare('SELECT * FROM delegated_consent_sessions WHERE handle_hash=?').bind(f.authorizationHash).first();
+ const consentHash=hashFiniteOwnerEvidence('consent',{handle_hash:raw.handle_hash,user_id:raw.user_id,kind:raw.kind,project_id:raw.project_id,client_id:raw.client_id,resource:raw.resource,scopes:JSON.parse(raw.scopes_json),expires_at:raw.expires_at,consumed_at:raw.consumed_at});
+ const now=Date.now(),connectionRef=randomBytes(32).toString('hex'),map={connectionRef,subject:'owner',grantId:'accepted-grant',clientId:'synthetic-client',projectId:'synthetic-owned',resource:origin+'/mcp',issuedAt:now,expiresAt:expires};
+ assert.equal((await f.json('/fixture/store',{method:'putConnectionRef',arg:map})).result?.status,'recorded');
+ const prep={purpose:'afw.finite-owner-preparation.v1',prepId:pre.preconnectionId,sourceRevision:pre.sourceRevision,actorId:pre.actorId,selectedAt:now,expiresAt:pre.expiresAt,commandBy:expires-510000,owner:pre.owner,connection:{connectionRef,grantId:'accepted-grant',clientId:'synthetic-client',resource:origin+'/mcp',grantHash:sha('accepted-grant'),consentHash,noticesHash:notice.eventHash,permissionExpiresAt:expires},project:pre.project,goal:'discovery',programContext:f.initial.programContext,approval:{purpose:'afw.own-synthetic-policy-preparation.v1',decision:'approve',sourceRevision:pre.sourceRevision,projectHash:hashFiniteOwnerPreparationProject(pre.project),goal:'discovery',approvedAt:approval.approvedAt,expiresAt:approval.expiresAt,csrfReceiptHash:approval.csrfReceiptHash},auditHash:'a'.repeat(64)};
+ prep.preparationHash=hashFinitePreparationRecord('OwnerPreparation',prep);
+ const selection={purpose:'afw.finite-owner-selection.v1',sourceRevision:pre.sourceRevision,prepId:pre.preconnectionId,preparationHash:prep.preparationHash,selectedAt:now,sequence:1,previousSelectionHash:null};
+ selection.selectionHash=hashFinitePreparationRecord('Selection',selection);
+ assert.equal((await f.json('/fixture/store',{method:'publishSelection',arg:{preparation:prep,selection,expectedHeadHash:null}})).result?.status,'recorded');
+ await f.json('/fixture/source',{phase:'finite_prearm',currentPublication:{stage:'finite',versionId:f.initial.initialBaseline.versionId,deploymentId:f.initial.initialBaseline.deploymentId,receiptHash:'e'.repeat(64)}});
+ const found=await f.json('/fixture/read',{sourceRevision:pre.sourceRevision});
+ assert.equal(found.result?.preparation.prepId,pre.preconnectionId);
+ await f.json('/fixture/source',{sourceRevision:'e'.repeat(40)});
+ assert.equal((await f.json('/fixture/read',{sourceRevision:pre.sourceRevision})).rejected,true);
+ await f.json('/fixture/source',{sourceRevision:pre.sourceRevision});
+ await f.db.prepare("UPDATE delegated_access_grants SET revoked_at=? WHERE id='accepted-grant'").bind(new Date().toISOString()).run();
+ assert.equal((await f.json('/fixture/read',{sourceRevision:pre.sourceRevision})).rejected,true);
 });

@@ -2,7 +2,7 @@ import {recordDossierMonitoringConsent} from '../../lib/dossier-monitoring-autho
 import {DurableObject} from 'cloudflare:workers';
 import {createFiniteOwnerPreparationHost} from '../../lib/mcp-qa-finite-owner-http.mjs';
 import {createFiniteOwnerPreparationStore} from '../../lib/mcp-qa-finite-preparation-store.mjs';
-import {recordFinitePreparationGrant,recordFinitePreparationNotice,recordFinitePreparationAuthorization} from '../../lib/mcp-qa-finite-owner-preparation.mjs';
+import {readFiniteOwnerPreparation,recordFinitePreparationGrant,recordFinitePreparationNotice,recordFinitePreparationAuthorization} from '../../lib/mcp-qa-finite-owner-preparation.mjs';
 const origin='https://delegated-canary.agentfriendlyweb.dev';
 const H='a'.repeat(64),M='b'.repeat(40),U='11111111-1111-4111-8111-111111111111';
 export class FiniteOwnerFixture extends DurableObject{
@@ -24,6 +24,9 @@ export class FiniteOwnerFixture extends DurableObject{
   if(path==='/fixture/store'){
    const {method,arg}=await request.json(),store=createFiniteOwnerPreparationStore({storage:this.ctx.storage,now:Date.now}),lease={signal:new AbortController().signal,assertCurrent(){}};
    try{return Response.json({result:await store[method](arg,lease)});}catch{return Response.json({rejected:true});}
+  }
+  if(path==='/fixture/read'){
+   const input=await request.json();try{return Response.json({result:await readFiniteOwnerPreparation({ctx:this.ctx,env:this.env,...input,signal:request.signal})});}catch{return Response.json({rejected:true});}
   }
   if(path==='/fixture/monitoring'){
    const input=await request.json(),now=Date.now();
