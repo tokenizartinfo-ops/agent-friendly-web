@@ -326,3 +326,5 @@ Execution BASE `757223ebc920c46e3df77995d7ba017ea3b9884e`; factual binding corre
 
 No relabelling M script with original Q revision, weakening Known four args/18 stages/70s/5s/20s, compiler changes, actual provider/private reads, credential/role/OAuth/window action, runtime/DDL/deploy/cron/Container, finite HEAD or Task5/C3 implementation. Compiler source currently does not establish separate retained program mapping; default source remains unavailable until qualified. SYNTHETIC fixtures establish source-contract behavior only, never actual custody/byte residency/platform cross-RPC provenance.
 
+
+Root Task4 final pre-effect checks: actual native eventTimestamp AND queuedAt must be >= actual material.primaryEvidence.seedStepCompletedAt >= original T0; completed-success seed is required BEFORE setup creation. No invented event/queue equality/tolerance. Candidate upload cap3MiB never relaxes Known artifact.script<=2MiB; validate exact artifact bytes/hash/M/tree/sourceCheck/candidate correspondence BEFORE publication, then full resolveNamedActivationPlan only after actual new UUID/config readback. Default actual source remains unavailable until Task5.
