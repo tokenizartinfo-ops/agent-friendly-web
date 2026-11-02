@@ -271,6 +271,7 @@ test('Task3 stage approval is immutable exact lookup over actual original owner 
 for(const mode of ['original','wrong','finished'])test('Task3 source admission consumed once by '+mode+' original request lease',async t=>{
  const f=await native(t),s=await f.screen();
  const r=await f.json('/fixture/admission',{url:origin+'/connections/finite-prepare',headers:{'Cf-Access-Jwt-Assertion':f.token,Origin:origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:s.cookie},body:new URLSearchParams({handle:s.handle,projectRef:s.projectRef,decision:'approve'}).toString(),wrong:mode==='wrong',finish:mode==='finished'});
+ assert.equal(r.deadlineBound,true);assert.equal(r.cloneDenied,true);assert.equal(r.finishedDenied,true);
  assert.equal(r.prepared,true);assert.equal(r.first,mode==='original');assert.equal(r.qualified,mode==='original');assert.equal(r.second,false);assert.equal(r.wrong,false);assert.equal(r.expired,true);
  const stored=await rows(f);assert.equal(stored.filter(([k])=>k.endsWith(':connection:approval')).length,1);
  assert.notEqual((await f.submit(s)).status,202);

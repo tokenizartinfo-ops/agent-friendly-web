@@ -12,7 +12,9 @@ export class FiniteOwnerFixture extends DurableObject{
   const path=new URL(request.url).pathname;
   if(path==='/fixture/admission'){
    const input=await request.json(),original=new Request(input.url,{method:'POST',headers:input.headers,body:input.body}),parent=ownerPreparation.createFiniteOwnerRequestLease(original);
-   let result,first=false,second=false,wrong=false,expired=false,qualified=false;
+   let result,first=false,second=false,wrong=false,expired=false,qualified=false,deadlineBound=false,cloneDenied=false,finishedDenied=false;
+   try{const end=ownerPreparation.readFiniteOwnerRequestDeadline(parent.lease);deadlineBound=Number.isSafeInteger(end)&&end>Date.now()&&end<=Date.now()+30000;}catch{}
+   try{ownerPreparation.readFiniteOwnerRequestDeadline({...parent.lease});}catch{cloneDenied=true;}
    try{
     result=await ownerPreparation.prepareFiniteOwnerChoice({ctx:this.ctx,env:this.env,request:original},parent.lease);
     const refs={ctx:this.ctx,env:this.env,preconnectionId:result.preconnectionId,stage:result.stage};
@@ -22,7 +24,8 @@ export class FiniteOwnerFixture extends DurableObject{
     try{ownerPreparation.consumeFiniteOwnerStageAdmission(refs,parent.lease);second=true;}catch{}
     parent.finish();
     expired=parent.lease.signal.aborted;
-    return Response.json({prepared:result.status===202,first,second,wrong,expired,qualified});
+    try{ownerPreparation.readFiniteOwnerRequestDeadline(parent.lease);}catch{finishedDenied=true;}
+    return Response.json({prepared:result.status===202,first,second,wrong,expired,qualified,deadlineBound,cloneDenied,finishedDenied});
    }catch{return Response.json({rejected:true});}finally{parent.finish();}
   }
   if(path==='/fixture/init'){
