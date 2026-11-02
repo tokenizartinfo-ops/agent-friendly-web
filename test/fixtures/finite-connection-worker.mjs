@@ -1,6 +1,6 @@
 import {FiniteOwnerFixture} from './finite-owner-worker.mjs';
 import {createFiniteOwnerRequestLease,prepareFiniteOwnerChoice} from '../../lib/mcp-qa-finite-owner-preparation.mjs';
-import {createFinitePolicyTransport} from '../../lib/mcp-qa-finite-policy-transport.mjs';
+import {createFiniteConnectionPreparation} from '../../lib/mcp-qa-finite-connection-preparation.mjs';
 import {initializeSyntheticConnectionMaterial} from './finite-connection-source.mjs';
 export class FiniteConnectionFixture extends FiniteOwnerFixture{
  async fetch(request){
@@ -10,8 +10,8 @@ export class FiniteConnectionFixture extends FiniteOwnerFixture{
    const input=await request.json(),original=new Request(input.url,{method:'POST',headers:input.headers,body:input.body}),parent=createFiniteOwnerRequestLease(original);
    try{
     const result=await prepareFiniteOwnerChoice({ctx:this.ctx,env:this.env,request:original},parent.lease);
-    const answer=await createFinitePolicyTransport({ctx:this.ctx,env:this.env}).run({preconnectionId:result.preconnectionId,stage:result.stage},parent.lease);
-    return Response.json(answer.outcome);
+    const answer=await createFiniteConnectionPreparation({ctx:this.ctx,env:this.env}).run({preconnectionId:result.preconnectionId,stage:result.stage},parent.lease);
+    return Response.json(answer);
    }catch{return Response.json({status:'admin_pending',mayRetry:false,operationalReadiness:false});}finally{parent.finish();}
   }
   return super.fetch(request);

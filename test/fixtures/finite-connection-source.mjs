@@ -1,4 +1,5 @@
 // SYNTHETIC PRIVATE SOURCE/CUSTODY ONLY. Static esbuild substitution; never runtime evidence.
+import {hashFinitePolicyEffectIdentity} from '../../lib/mcp-qa-finite-preparation-records.mjs';
 import {createHash} from 'node:crypto';
 import {finitePublicProfileTemplate,finitePublicStaticExpectation} from '../../lib/mcp-qa-finite-profile.mjs';
 import {activationConfigurationHash} from '../../lib/mcp-activation-observer.mjs';
@@ -21,7 +22,7 @@ export function syntheticPreparation(phase,source){
 export async function initializeSyntheticConnectionMaterial(ctx){
  const source=await ctx.storage.get('fixture:source'),configuration=syntheticPreparation('closed_ui',source);
  source.initialBaseline={...source.initialBaseline,moduleHash:descriptor.sha256,configurationHash:activationConfigurationHash(configuration),bindingsHash:sha(JSON.stringify(configuration.bindings))};
- await ctx.storage.put('fixture:source',source);
+ await ctx.storage.put('fixture:source',source);await ctx.storage.put('fixture:configuration',configuration);
  return {source,configuration,script,module:descriptor,restorationHash:restorationConfigurationHash(configuration)};
 }
 export async function readPrivateQaFiniteConnectionSource({ctx,env,preconnectionId,stage},lease){
@@ -29,14 +30,31 @@ export async function readPrivateQaFiniteConnectionSource({ctx,env,preconnection
  const source=await ctx.storage.get('fixture:source'),pre=await ctx.storage.get('connection-preparation:'+preconnectionId+':record');
  if(!source||!pre||env.RELEASE_DB===env.DB)throw Error('SYNTHETIC material missing original source');
  const initial=await ctx.storage.get('connection-preparation:'+preconnectionId+':source'),original=JSON.parse(initial).source;
- const baseline={versionId:source.currentPublication.versionId,deploymentId:source.currentPublication.deploymentId,module:descriptor,configuration:syntheticPreparation(source.phase,source)};
+ const baseline={versionId:source.currentPublication.versionId,deploymentId:source.currentPublication.deploymentId,module:descriptor,configuration:await ctx.storage.get('fixture:configuration')};
  const rollback={versionId:original.initialBaseline.versionId,deploymentId:original.initialBaseline.deploymentId,module:descriptor,configuration:syntheticPreparation('closed_ui',original)};
  const candidateConfiguration=stage==='finite'?structuredClone(finitePublicProfileTemplate('canaryLive')):syntheticPreparation(stage==='connection'?'read_consent':'notice_consent',source);
+ if(stage==='notices'){
+  const link=JSON.parse(await ctx.storage.get('connection-preparation:'+preconnectionId+':grant')),grant=await env.RELEASE_DB.prepare('SELECT expires_at FROM delegated_access_grants WHERE id=?').bind(link.grantId).first();
+  candidateConfiguration.bindings.find(b=>b.name==='AFW_DOSSIER_MONITORING_OWNER_POLICY').text=JSON.stringify({grantId:link.grantId,projectId:source.project.projectId,clientId:source.clientId,startAt:link.acceptedAt,expiresAt:Date.parse(grant.expires_at)});
+ }
  for(const b of candidateConfiguration.bindings)if(b.privateSlot){delete b.privateSlot;b.text='SYNTHETIC-PRIVATE-'+b.name;}
  const candidate={sourceRevision:source.sourceRevision,role:stage==='finite'?'canaryLive':'preparation',module:descriptor,configuration:candidateConfiguration,publicStatic:stage==='finite'?finitePublicStaticExpectation('canaryLive'):null};
+ await ctx.storage.put('fixture:candidate:'+preconnectionId+':'+stage,candidateConfiguration);
  const storage=ctx.storage,db=env.RELEASE_DB,core=v=>JSON.stringify(Object.fromEntries(Object.entries(v).filter(([k])=>!['phase','currentPublication'].includes(k))));
  return freeze({ownerSource:source,baseline,rollback,candidate,bytes:{baseline:new TextEncoder().encode(script),rollback:new TextEncoder().encode(script),candidate:new TextEncoder().encode(script)},async assertCurrent(child){
   child.assertCurrent();if(ctx.storage!==storage||env.RELEASE_DB!==db||env.AFW_QA_VERSION?.id!==source.qaVersionId)throw Error('SYNTHETIC custody drift');
   const latest=await storage.get('fixture:source');child.assertCurrent();if(core(latest)!==core(source))throw Error('SYNTHETIC source drift');
  }});
+}
+
+export async function synchronizeSyntheticConnectionSource(ctx,preconnectionId){
+ if(!preconnectionId)return;
+ const source=await ctx.storage.get('fixture:source'),stages=['connection','notices','finite'],phases=['read_consent','notice_consent','finite_prearm'];
+ for(let i=2;i>=0;i--){
+  const identity={kind:'connection',preconnectionId,sourceRevision:source.sourceRevision,stage:stages[i],effect:'activation'},prefix='afw.finite-policy-effect.v1:'+hashFinitePolicyEffectIdentity(identity)+':';
+  const raw=await ctx.storage.get(prefix+'receipt');if(!raw)continue;const receipt=JSON.parse(raw),candidate=await ctx.storage.get('fixture:candidate:'+preconnectionId+':'+stages[i]);
+  if(!candidate)throw Error('SYNTHETIC acknowledged configuration missing');
+  await ctx.storage.put('fixture:source',{...source,phase:phases[i],currentPublication:{stage:stages[i],versionId:receipt.versionId,deploymentId:receipt.deploymentId,receiptHash:receipt.receiptHash}});
+  await ctx.storage.put('fixture:configuration',candidate);return;
+ }
 }

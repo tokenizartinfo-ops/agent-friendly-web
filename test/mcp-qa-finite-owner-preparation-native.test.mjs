@@ -116,7 +116,7 @@ test('expired original parent cannot record authorization or reconstruct a new l
  assert.equal((await rows(f)).filter(([k])=>k.startsWith('connection-authorization:')).length,0);
 });
 
-test('internal selected preparation rereads exact current owner grant notices and rejects changed sourceM',async t=>{
+test('factual selected preparation without actual stage receipts and audit cannot become qualified',async t=>{
  const f=await granted(t);await f.stage('notice_consent');
  const monitorHandle=randomBytes(32).toString('base64url'),requestId=randomUUID(),at=Date.now(),expires=Math.min(Date.parse(f.until),at+580000);
  await f.db.prepare('INSERT INTO dossier_monitoring_owner_tickets VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(sha(monitorHandle),requestId,'owner','accepted-grant','synthetic-owned','synthetic-client',origin+'/mcp','afw.dossier-monitoring-owner.v1','grant',1,0,at,expires,expires).run();
@@ -137,7 +137,7 @@ test('internal selected preparation rereads exact current owner grant notices an
  assert.equal((await f.json('/fixture/store',{method:'publishSelection',arg:{preparation:prep,selection,expectedHeadHash:null}})).result?.status,'recorded');
  await f.json('/fixture/source',{phase:'finite_prearm',currentPublication:{stage:'finite',versionId:f.initial.initialBaseline.versionId,deploymentId:f.initial.initialBaseline.deploymentId,receiptHash:'e'.repeat(64)}});
  const found=await f.json('/fixture/read',{sourceRevision:pre.sourceRevision});
- assert.equal(found.result?.preparation.prepId,pre.preconnectionId);
+ assert.equal(found.rejected,true);
  await f.json('/fixture/source',{sourceRevision:'e'.repeat(40)});
  assert.equal((await f.json('/fixture/read',{sourceRevision:pre.sourceRevision})).rejected,true);
  await f.json('/fixture/source',{sourceRevision:pre.sourceRevision});
