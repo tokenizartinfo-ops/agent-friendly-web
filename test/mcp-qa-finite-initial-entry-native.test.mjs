@@ -58,7 +58,7 @@ for(const mode of ['wrong-owner','edited','wrong-source','wrong-qa','command-dri
 
 for(const fault of ['lost-ack','post-reject-sync'])test('B1 actual persisted SQLite actor restart after '+fault+' never recollects',()=>using('restart',async f=>{
  await f.stub.configure(fault);pending(await f.stub.invoke(f.refs));const before=await f.stub.snapshot();assert.ok(before.some(([k])=>k===KEY));
- await f.restart();await f.stub.configure('normal');pending(await f.stub.invoke(f.refs));assert.deepEqual(await f.stub.snapshot(),before);assert.equal((await f.stub.stats()).syncs,0);
+ await f.restart();assert.deepEqual(await f.stub.snapshot(),before,'persisted snapshot before restarted invocation');await f.stub.configure('normal');pending(await f.stub.invoke(f.refs));assert.deepEqual(await f.stub.snapshot(),before);assert.equal((await f.stub.stats()).syncs,0);
 }));
 test('B1 held actual sync expires at child5s despite cached entry readback',()=>using('normal',async f=>{
  await f.stub.configure('hold-sync');const began=Date.now(),operation=f.stub.invoke(f.refs);
