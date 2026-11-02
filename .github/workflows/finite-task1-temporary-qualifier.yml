@@ -1,9 +1,9 @@
-# Branch-only C1 fix1 source qualifier; EXCLUDE from eventual integration.
-name: Finite PRE-T0 QA provenance fix1 temporary qualifier
+# Branch-only C2-A initial material source qualifier; EXCLUDE from eventual integration.
+name: Finite C2-A initial material temporary qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-bootstrap-primary.mjs', 'test/mcp-qa-finite-bootstrap-issuer.test.mjs', 'test/mcp-qa-finite-bootstrap-primary.test.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-initial-*.mjs', 'test/mcp-qa-finite-initial-*.test.mjs', 'test/fixtures/finite-initial-*.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: C1 fix1 actual issuer and affected primary
-        run: node --test test/mcp-qa-finite-bootstrap-issuer.test.mjs test/mcp-qa-finite-bootstrap-primary.test.mjs
+      - name: C2-A actual native material and strict records
+        run: node --test test/mcp-qa-finite-initial-material-native.test.mjs test/mcp-qa-finite-initial-material-records.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-bootstrap-primary.mjs test/mcp-qa-finite-bootstrap-issuer.test.mjs test/mcp-qa-finite-bootstrap-primary.test.mjs
+        run: npx eslint test/mcp-qa-finite-initial-material-native.test.mjs test/mcp-qa-finite-initial-material-records.test.mjs test/fixtures/finite-initial-history-world.mjs
