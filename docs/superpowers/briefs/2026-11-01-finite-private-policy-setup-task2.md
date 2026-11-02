@@ -1,0 +1,57 @@
+# Private policy setup Task2 — actual Access owner and genuine consent links
+
+SOURCE ONLY. Root will assign qualified BASE after C2 Task1 review; do not start from a historical docs commit. No subagents or self-appointed reviewer. One writer on branch; expected-head CAS/readback. Read this brief first, then only the exact interfaces/records of the accepted C2 spec and Task1 report needed for this integration.
+
+## Global constraints
+
+- Source-only cloud work. No provider/private read, secret value, role/key/scope, OAuth action, deploy, DDL, live comment, occurrence, local dependencies/build or automatic recovery.
+- Original connection window<=900000ms; each request parent<=30000ms including queue, child<=5000ms clipped by parent/window. commandBy=min(actualReadExpiry,noticeExpiry,AccessProofExpiry,approvalExpiry,connectionWindowEnd)-480000-30000. Never renew ten-minute grants.
+- Post-T0 setupBy=T0+50000; adoption70s/ARM90s; original Known4args/18stages/70s/5s/20s and C0/C1/R1/history/uncertainty unchanged. No finite HEAD before all actual read-only eligibility checks.
+- PREPARATION uses real qualified Access realm/limiter/client/project/window bindings and independent profile grammar. C1 finite profile keeps OAuth/monitoring-owner closed and currently lacks those Access bindings. Never fake env flags or claim it already handles MCP.
+- Raw policy/context/JWT/cookies never logs/GHA/public artifacts; JWT/cookies never persist. Secret inheritance EXACT {name,type:'inherit',version_id:baselineVersionId}; no old_name/latest/omission/script-upload substitution.
+- Initial preparation publication, custody/API permission, actual baseline bytes/privacy and future runbook approval remain gates. Root's20:39:33.726UTC historical version GETs prove shape only: QA31bindings/14false/two SQLite classes; canary29/8false/AfwOwnEventNodeSQLite/container execution; OP7/3false/no export. They prove no current pointer/source lineage/secret value/artifact availability. Qualify actual copy descriptors before use.
+- Publisher metadata candidate only: root 20:45:01.750UTC exact-name account token 05718105dcdfc92e55cc3624172c2740, notBefore2026-10-28T03:00:00Z, expiry2026-11-03T02:59:00Z; one allow group 7e79ec33834341f28dd431ab73884400 on fixed canary script7d96bc137a854faa875ee0f160119810. AFW_MCP_CLOSURE_PUBLISH_TOKEN secret match/uploadability UNPROVED; future correct account verify and dated-policy trust mandatory, scopeVerified=false. Never substitute GHA9db or reader9aa; no repeat probe here.
+- operationalReadiness=false. No additional namespace, credential, public QA ingress or general URL/RPC authority.
+
+
+
+## Task2: actual Access owner selection and genuine consent links
+
+**Create:** lib/mcp-qa-finite-owner-preparation.mjs, lib/mcp-qa-finite-owner-http.mjs; test/mcp-qa-finite-owner-preparation-native.test.mjs.
+**Modify:** scoped source integrations in lib/delegated-oauth-worker.mjs and lib/dossier-monitoring-owner-http.mjs, preserving ordinary flows/default closure.
+**Consumes:** T1; verifyCloudflareAccessJwtWithExpiry; createDelegatedOAuthStore(db).getGrant; createDelegatedProjectRepository({db,grantStore}).getOwnedProject; lib/dossier-monitoring-authority.mjs recordDossierMonitoringConsent.
+**Produces:** createFiniteOwnerPreparationHost({ctx,env}).fetch(request)->bounded Response; internal readFiniteOwnerPreparation({ctx,env,sourceRevision,intentId?,signal})->{preparation,selection,binding}|throw. Constructors resolve fixed source dependencies, not caller verifier/pins. Internal recordFinitePreparationGrant({ctx,env,request,grantId},lease) and recordFinitePreparationNotice({ctx,env,request,requestId,sequence},lease) return MutationObservation; request is the bounded preserved original request, other fields actual server-created grant/ack values. They reconstruct/link exact transaction evidence and fresh primary rows, never accept arbitrary external DTOs.
+
+- [ ] RED with real signature-verified synthetic JWT/JWKS and actual ephemeral D1: source/audience/owner/origin/cookie/ticket mismatch; no grant needed for initial owned-project choice; exact newly accepted grant versus latest; consent/notice revocation; sourceM pointer changed; raw IDs rejected.
+- [ ] Implement fixed /connections/finite-prepare request grammar and plain human purpose/bounds. QA independently verifies forwarded original request; source-qualified binding holders only. Every logical primary read uses fresh db.withSession('first-primary'); do not mistake listConsentProjects ORDER BY for selection.
+- [ ] Add fixed source calls after genuine createGrant+completeAuthorization success and after acknowledged monitoring consent. Produce GrantLink/NoticeLink only from original transaction plus exact current primary reread; no generic success callback/registration. Monitoring acknowledgement contains sequence/action/expiresAt, not eventHash: compute eventHash from the exact requestId/sequence primary row. Link failure keeps setup unavailable; never repeat grant creation or change ordinary consent/revocation semantics. Existing functions validate/create genuine consent, not provisioning. Missing publisher stage remains unavailable, not simulated success: Task2 tests prove authentication/records, not publication; Task3 supplies the fixed producer without caller registration.
+- [ ] GREEN T2 and existing OAuth/monitoring native suites; scoped lint; fresh review. Ordinary read permission never becomes configuration authority.
+
+
+
+## Root carry-forward
+
+- Task1 records/journals are factual only. Actual request signature/audience/expiry, current owned synthetic project, source, bounded ticket and exact primary records are required by this source constructor. Record/selected/installed/hash are never authority.
+- Read the actual Task1 accepted report/brief for strict enum/hash/domain/nullability/lease interfaces; do not redefine weaker schema/hash algorithms. Project digest helper correlates exact {projectId,revision,synthetic}, not browser labels/latest rows.
+- Initial owned-project selection needs NO existing OAuth grant. Genuine read-consent completion and genuine monitoring acknowledgement alone produce exact grant and notice links, after independent primary re-read; link failure leaves flow unavailable and never repeats grant creation. Do not use latest grant, eventHash from a nonexistent acknowledgement field, identity DTO or server success boolean.
+- Keep actual Access assertion/cookie transient. Never store/log/artifact JWT/cookies/credentials or expose raw owner/project/grant IDs in new public output. Server-issued opaque handles do not mint permission. Original same-origin request has bounded body and original lease across forwarding; QA independently verifies it. Fixed actor/source-qualified binding only; no URL/target injection/public general QA ingress.
+- The user sees plain purpose/next step and separate controls for bounded configuration preparation, reading and notices; describe the original one known-goal Save as a distinct action in its authorized rehearsal configuration/runbook. READ never becomes edit permission. No surprise publish or invented real-user choice; this remains own-synthetic preparation.
+- Source producers missing publication/baseline/material/custody qualification remain unavailable until their owning task. T2 proves actual signature/primary/record linking in synthetic native fixtures, not installed code/policy/receiver/runtime or PC-off. No positive runtime authority placeholder or caller-selected factory.
+
+## Evidence and finish
+
+Hosted Node22 existing lockfile only. Genuine behavioral RED then GREEN for Task2 plus existing OAuth/monitoring/access-expiry commands in plan, scoped lint. No local project/deps/build, provider/private probe, secrets/roles/token/OAuth actions, DDL/deploy, command/finite HEAD/occurrence, main merge or Max. Temporary branch qualifier narrowed to covering commands/no secrets/artifacts/deploy, excluded eventual integration; docs-only changes don't repeat runs. Report docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task2.md, append existing finite progress ledger, include exact BASE/code/docHEAD/runs/jobs/attempts/counts/commands/fixtures/source boundaries/CAS/readback; stop writes for root fresh task review. operationalReadiness=false.
+
+## Targeted dependency inspection at Task1 BASE
+
+Existing verifyCloudflareAccessJwtWithExpiry returns immutable identity {subject,email,expiresAt} from the SAME verified signature payload; ordinary verifyCloudflareAccessJwt has a different userId shape. Use the expiry helper's actual subject, never guessed aliases. Existing delegated-project-repository getOwnedProject returns id/userId/revision/intake but no synthetic marker. Consequently an owned row or synthetic-looking title alone does not prove synthetic scope: require the actual source-qualified own-synthetic project pin/program provenance, and fail unavailable when absent. listConsentProjects ordering is enumeration only, never implicit selection; every logical read gets fresh first-primary.
+
+Existing monitoring acknowledgement is {status:200,sequence,action,expiresAt}; exact requestId/sequence primary event supplies eventHash, not an invented acknowledgement member. Preserve its original one-grant/terminal-revoke/current revision/commit window rules. No new table/DDL or broad query/other-project output for these integrations.
+
+Targeted OAuth integration warning: current successful completeAuthorization lives inside a catch that revokes the just-created grant on an authorization failure. A new preparation-link failure must NOT accidentally enter that existing revoke path, repeat createGrant/completeAuthorization, change the ordinary302 or manufacture a link. Isolate preparation-link unavailability as its own factual pending result after genuine success and exact primary correlation, under the original bounded request; ordinary unrelated consent remains unchanged. Monitoring likewise links only an actual acknowledged grant action and exact event, never a failed write/revoke as a new permission. Cover link failure/reconstruction with real existing consent history unchanged.
+
+## Accepted T1 exact source interface
+
+C2/1 accepted at7b2e448b4ddf0d4765de4eff93045c77642e366b after one review fix. Actual fixed PascalCase record kinds are in preparation-records.mjs; reuse encode/decode/hashFinitePreparationRecord and factual hashFiniteOwnerPreparationProject/validateFinitePolicyEffectIdentity/hashFinitePolicyEffectIdentity. createFiniteOwnerPreparationStore({storage,now}) owns source-derived keys, original lease and after-head-ACK witness. No direct caller-selected storage path or bypass of publishSelection/bindSelection; readSelected and recorded/existing/uncertain are factual, not a send capability. Original user-authority producers must supply real native ctx/env/storage and a source-owned actual clock/lease, not caller values. Source program revision can differ from runtimeM but both correlate actual immutable/current program evidence. Any extra exact record/mapping/source interface required for real initial project selection must be raised concretely to Root and ruled before implementation; do not silently invent a positive authority registry or latest lookup.
+
+Report final STOP WRITES after CAS/readback. Root owns a fresh task-scoped spec+quality review. Owner is asleep; do not open any actual auth/consent/request window or ask the owner to intervene during this source task.
