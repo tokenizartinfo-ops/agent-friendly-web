@@ -120,3 +120,40 @@ test('lost_witness_ack_keeps_actual_witness_and_history',async t=>{
  assert.deepEqual(await call('rows'),before);
  assert.equal((await call('bindSelection',f.binding,{now:30})).result.status,'recorded');
 });
+
+test('consume_ticket_snapshots_argument_across_actual_native_get',async t=>{
+ const {call,f}=await native(t),A=f.ticket.ticketHash,B='b'.repeat(64),R='c'.repeat(64);
+ assert.equal((await call('putTicket',f.ticket)).result.status,'recorded');
+ assert.equal((await call('putTicket',{...f.ticket,ticketHash:B})).result.status,'recorded');
+ const first=await call('consumeTicket',{ticketHash:A,recordHash:R},{mutateArgumentAfterGet:{key:'owner-ticket:'+A+':use',changes:{ticketHash:B}}});
+ assert.equal(first.argumentMutations,1);assert.equal(first.result.status,'recorded');
+ assert.equal((await call('consumeTicket',{ticketHash:B,recordHash:R})).result.status,'recorded');
+ const rows=new Map(await call('rows')),aUse=JSON.parse(rows.get('owner-ticket:'+A+':use')),bUse=JSON.parse(rows.get('owner-ticket:'+B+':use'));
+ assert.equal(aUse.ticketHash,A);assert.equal(bUse.ticketHash,B);
+ assert.equal([aUse,bUse].filter(use=>use.ticketHash===B).length,1);
+ const before=await call('rows');
+ assert.equal((await call('consumeTicket',{ticketHash:A,recordHash:R})).result.status,'existing');
+ assert.equal((await call('consumeTicket',{ticketHash:B,recordHash:'d'.repeat(64)})).rejected,true);
+ assert.deepEqual(await call('rows'),before);
+});
+test('notice_kind_mutation_cannot_skip_actual_grant_predecessor',async t=>{
+ const {call,f}=await native(t);
+ await call('putPreconnection',f.preconnection);
+ const notice={preconnectionId:f.preconnection.preconnectionId,grantHash:'d'.repeat(64),eventHash:'e'.repeat(64),sequence:1,acceptedAt:30};
+ const before=await call('rows');
+ const r=await call('putLink',{kind:'notice',record:notice},{mutateArgumentAfterGet:{key:'connection-preparation:'+notice.preconnectionId+':record',changes:{kind:'grant'}}});
+ assert.equal(r.argumentMutations,1);assert.equal(r.rejected,true);
+ assert.deepEqual(await call('rows'),before);
+});
+test('notice_kind_mutation_cannot_change_native_append_key',async t=>{
+ const {call,f}=await native(t);
+ await call('putPreconnection',f.preconnection);
+ const grant={preconnectionId:f.preconnection.preconnectionId,authorizationHash:'c'.repeat(64),grantId:'grant',grantHash:'d'.repeat(64),acceptedAt:20};
+ const notice={preconnectionId:grant.preconnectionId,grantHash:grant.grantHash,eventHash:'e'.repeat(64),sequence:1,acceptedAt:30};
+ await call('putLink',{kind:'grant',record:grant});
+ const r=await call('putLink',{kind:'notice',record:notice},{mutateArgumentAfterGet:{key:'connection-preparation:'+notice.preconnectionId+':record',changes:{kind:'grant'}}});
+ assert.equal(r.argumentMutations,1);assert.equal(r.result?.status,'recorded');
+ const rows=new Map(await call('rows'));
+ assert.deepEqual(JSON.parse(rows.get('connection-preparation:'+notice.preconnectionId+':grant')),grant);
+ assert.deepEqual(JSON.parse(rows.get('connection-preparation:'+notice.preconnectionId+':notice')),notice);
+});

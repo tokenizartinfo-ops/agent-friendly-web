@@ -36,10 +36,15 @@ export class FinitePreparationFixture extends DurableObject{
   const b=await request.json();let at=b.now??100,assertions=0;
   const controller=new AbortController();
   const lease={signal:controller.signal,assertCurrent(){assertions++;if(controller.signal.aborted||b.expireAtAssertion===assertions)throw Error('synthetic lease expired');}};
-  let committed=false,transactions=0;
+  let committed=false,transactions=0,argumentMutations=0;
   const storage={get:(...a)=>this.ctx.storage.get(...a),transaction:async fn=>{
    const ordinal=++transactions;
-   const result=await this.ctx.storage.transaction(async tx=>{const r=await fn(tx);if(b.holdFirstCommitUntil&&ordinal===1){await new Promise(resolve=>setTimeout(resolve,20));at=b.holdFirstCommitUntil;}return r;});committed=true;
+   const result=await this.ctx.storage.transaction(async tx=>{
+    const interleaved=b.mutateArgumentAfterGet?{
+     async get(key){const pending=tx.get(key),value=await pending;if(key===b.mutateArgumentAfterGet.key&&argumentMutations===0){await Promise.resolve();Object.assign(b.arg,b.mutateArgumentAfterGet.changes);argumentMutations++;}return value;},
+     put:(...args)=>tx.put(...args)
+    }:tx;
+    const r=await fn(interleaved);if(b.holdFirstCommitUntil&&ordinal===1){await new Promise(resolve=>setTimeout(resolve,20));at=b.holdFirstCommitUntil;}return r;});committed=true;
    if(b.loseCommitAck||b.loseCommitNumber===ordinal)throw Error('synthetic lost response AFTER native transaction commit');
    return result;
   }};
@@ -56,8 +61,8 @@ export class FinitePreparationFixture extends DurableObject{
    }
    if(b.reseal){b.arg.preparation=seal('OwnerPreparation',b.arg.preparation,'preparationHash');b.arg.selection=seal('Selection',{...b.arg.selection,preparationHash:b.arg.preparation.preparationHash},'selectionHash');}
    const result=await (b.op==='read'?target.read(lease):target[b.op](b.arg,lease));
-   return Response.json({result,committed,assertions});
-  }catch{return Response.json({rejected:true,committed,assertions});}
+   return Response.json({result,committed,assertions,argumentMutations});
+  }catch{return Response.json({rejected:true,committed,assertions,argumentMutations});}
  }
 }
 const handler={async fetch(request,env){

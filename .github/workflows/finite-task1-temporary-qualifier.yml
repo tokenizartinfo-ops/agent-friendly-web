@@ -1,9 +1,9 @@
 # Branch-only source qualifier; EXCLUDE from eventual integration.
-name: Finite C2 Task1 temporary source qualifier
+name: Finite C2 Task1 round1 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-preparation-*.mjs', 'lib/mcp-qa-finite-policy-journal.mjs', 'lib/mcp-qa-finite-trial-control.mjs', 'test/mcp-qa-finite-preparation-*.test.mjs', 'test/mcp-qa-finite-policy-journal-native.test.mjs', 'test/fixtures/finite-preparation-store-worker.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-preparation-store.mjs', 'test/mcp-qa-finite-preparation-store-native.test.mjs', 'test/fixtures/finite-preparation-store-worker.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -20,11 +20,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: C2 Task1 focused RED GREEN
-        run: node --test test/mcp-qa-finite-preparation-store-native.test.mjs test/mcp-qa-finite-policy-journal-native.test.mjs test/mcp-qa-finite-preparation-records.test.mjs
-      - name: Existing finite control native decoder
+      - name: C2 Task1 round1 store-native RED GREEN
+        run: node --test test/mcp-qa-finite-preparation-store-native.test.mjs
+      - name: Task1 round1 scoped lint
         if: always()
-        run: node --test test/mcp-qa-finite-trial-control-native.test.mjs
-      - name: Task1 scoped lint
-        if: always()
-        run: npx eslint test/fixtures/finite-preparation-store-worker.mjs test/mcp-qa-finite-preparation-store-native.test.mjs test/mcp-qa-finite-policy-journal-native.test.mjs test/mcp-qa-finite-preparation-records.test.mjs lib/mcp-qa-finite-preparation-records.mjs lib/mcp-qa-finite-preparation-store.mjs lib/mcp-qa-finite-policy-journal.mjs lib/mcp-qa-finite-trial-control.mjs
+        run: npx eslint lib/mcp-qa-finite-preparation-store.mjs test/mcp-qa-finite-preparation-store-native.test.mjs test/fixtures/finite-preparation-store-worker.mjs
