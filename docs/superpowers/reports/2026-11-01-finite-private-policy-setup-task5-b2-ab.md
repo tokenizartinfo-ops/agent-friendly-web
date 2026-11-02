@@ -68,3 +68,43 @@ Final run primary verified completed/success/attempt1/head5b087d0a3090935327b7ae
 Every commit used expected-head CAS with independent branch ref and every changed-file exact content readback. Final BASE..codeHEAD compare and all affected files checked; report/ledger doc commit readback included in final handoff. No branch mutation after STOP report.
 
 Pending: real native code identity/permission/binding-source qualification, actual custody scope/stored-secret match, approved initial selector/realm/project/goal/window, pre-T0 QA provenance bridge, bootstrap once/capsule/new intentions, retained cleanup/material/Workflow/GHA mounts/all writers, initial attended publication/tool byte ingress, C3 and all runtime/PC-off gates. Existing draft tables/writers unchanged; no new store/DDL. Complete package still false/throws. This block is not initial owner preparation or full Task5 completion.
+
+## B2-AB fix round 1 — reproducible synthetic custody boundary (2026-11-02)
+
+Finding: initial fresh review at `bd9cb210721213b06a8c762c5e96000bf11f11c1` was source specPASS / qualityNEEDS_FIXES: the native fixture inherited production's dated custody ceiling, so ordinary qualification would fail after 2026-11-03T02:59:00Z. Root recorded the bounded test-only ruling before this fix in plan/ledger/review at execution BASE `2de006396e4a44a3460da29c295519d0dfde38a0`. Original implementer, round 1/5; no new product implementation or C3 work.
+
+Qualified testHEAD: `f68d360aac8d789024e2a4da1f1bd951bb71c7bb`. Compare execution BASE through testHEAD changes exactly two files: `test/mcp-qa-finite-historical-source-native.test.mjs` and temporary qualifier `.github/workflows/finite-task1-temporary-qualifier.yml`. Product reader and its exact approved `CEILING=Date.parse('2026-11-03T02:59:00Z')` are unchanged, independently read back byte-for-byte. No production signature, caller clock/pin/key override, registration, approval extension or dependency changes. No 256-regression/B1 rerun was warranted or performed.
+
+The test-only esbuild boundary asserts the exact production ceiling declaration occurs once. Ordinary positive fixtures replace only that source-held datum in their in-memory test bundle with `max(Date.now()+86400000, Date.parse('2026-11-04T00:00:00Z'))`, and supply an explicitly SYN token expiry 60000ms later. Replacement absence/uniqueness is asserted. All ordinary Date.now(), performance clock, original request lease, CF-response freshness and actual native D1/SQLite clocks remain real. This is dynamic synthetic approval data with an expiry beyond the production ceiling, not evidence of real post-date execution or renewed production permission.
+
+The production-historical-pin negative uses that same SYN custody boundary while retaining real committed historical pins; it requires the exact `metadata` error AND an observed call to the fixed historical-version endpoint. An earlier deadline cannot masquerade as historical-pin proof.
+
+One focused expiry test retains the unchanged production ceiling and substitutes the seven known Date.now() call sites ONLY inside the reader bundle with a constant, asserting the exact call count/removal and preserved ceiling declaration. Its paired controls are:
+- Constant CEILING−1: initial check admits the first SYN provider invocation.
+- Constant exact CEILING: `deadline`, zero provider invocations.
+
+The CEILING−1 control has no 1ms IO budget: entered and every reader wall-clock check are frozen at the same constant; they do not advance toward expiry. The real parent and monotonic clocks still enforce their original bounds. It proves initial guard passage, not completion of metadata/D1 under a 1ms deadline. At exact CEILING, entered==at==lastWall and wall elapsed==0; the same native input/real parent has passed the control; the initial check's `at>=effectiveExpiry` is the boundary that denies before `gate='custody'` and token fetch. Later HTTP freshness/history are not claimed by this negative. No global clock modification or product override exists.
+
+### Hosted RED and GREEN
+
+Both attempt 1 runs used Ubuntu24.04, Node22.23.4, existing lockfile, branch-only push, contents:read, no secrets/artifacts/deploy. Exact commands:
+```text
+npm ci --ignore-scripts --no-audit --no-fund
+node --test test/mcp-qa-finite-historical-source-native.test.mjs
+npx eslint test/mcp-qa-finite-historical-source-native.test.mjs
+```
+
+| Phase | Exact head | Run / job | Actual output |
+| --- | --- | --- | --- |
+| RED temporal reproduction | 9793f0d9f853c758242415f031abe5cd0044980e | [41500063202](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41500063202) / 125464938529 | 22 tests, 13 pass, 9 fail, 0 cancelled/skipped; lint success |
+| GREEN corrected fixture | f68d360aac8d789024e2a4da1f1bd951bb71c7bb | [41500276455](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41500276455) / 125465668561 | 22 tests, 22 pass, 0 fail/cancelled/skipped/todo; duration 14483.535724ms; lint success |
+
+RED deliberately instrumented the OLD fixture reader clock at exact production expiry across its existing paths. Six positive/retention cases and the historical-pin negative failed behaviorally at deadline; the parent aggregate also failed. The ninth failure was separate test-fixture bookkeeping: deepEqual compared a native RPC result proxy with a plain object in the newly added expiry case. GREEN compares its actual fields; no product fix was involved. RED is instrumented temporal reproduction, not an actual future wall-clock run, and that proxy assertion failure is not counted as behavioral expiry evidence.
+
+GREEN's positive actual new reader, Worker/DO, storage, D1/SQLite, native methods and parsing execute under the explicit SYN CF/custody/historical-commitment boundary. Production historical pins and unchanged production ceiling are tested separately as above. No whole owner-to-provider integration or actual key/scope/source identity is claimed. Existing local-continuation retention qualification retains its prior limitation: not remote writer settlement.
+
+Primary run API confirmed GREEN actual head, attempt1, completed/success; job and exact commands/log summary matched. Artifacts API returned zero for both runs. Logs include preexisting punycode/npm dependency deprecations and actions v4 Node20-target deprecation (runner forces those actions onto Node24); the qualification test runtime itself is Node22.23.4. No claim of warning-free output and no unrelated upgrades.
+
+Self-review: reviewed the complete two-file diff, exact/unique fixture substitutions, paired initial-ceiling controls, genuine metadata endpoint assertion, preserved production file, and workflow scope. No new product dependencies, native graph measurement, broad suite or runtime proof was needed. CAS on each commit plus independent branch-ref and every changed-file exact readback matched. Report/ledger-only follow-up commit is the fixDocHEAD, supplied separately after creation to avoid a self-hash cycle; both documents and final test/workflow/product are read back there. Docs-only pushes are excluded by the qualifier paths; temporary workflow remains EXCLUDED from eventual integration.
+
+STOP WRITES after this report for fresh scoped rereview FIX_BASE `bd9cb210721213b06a8c762c5e96000bf11f11c1` through fixDocHEAD. B2-AB acceptance remains Root's decision; Task5 and B2 bootstrap remain incomplete. Source authority, historical runtime availability, QA bridge/bootstrap, mounts, forwarding, C3, activation and operational readiness remain separate/unavailable. `operationalReadiness=false`. No local source/build/dependencies, actual provider/private read, credential operation, owner step, runtime mutation, main merge or C3 implementation occurred.

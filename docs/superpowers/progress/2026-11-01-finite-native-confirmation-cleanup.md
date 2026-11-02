@@ -920,3 +920,13 @@ Originalimplementer owns fixround1/5, report covering exacttests/commands/output
 Independent C3 read-only preflight recorded in reports/2026-11-02-finite-c3-consumer-preflight.md: existing OAuth/continuity/owner gates, missing actualfiniteGate and prematureadmission-before-reservation bug; actualclient timing/nativeunsubscribe vs readrevocation unproved. OfficialMCPEventsWorkCloud/dotssupport verified, account/AFWbinding not. No C3code/runtime action.
 
 Owner remains absent until16:00Argentina2Nov, PC ON. No humanstep/OTP/window beforereturn.
+
+## B2-AB fix round 1 STOP — 2026-11-02
+
+One P2 dated native fixture corrected within Root's recorded test-only ruling. Execution BASE2de006396e4a44a3460da29c295519d0dfde38a0; qualified testHEADf68d360aac8d789024e2a4da1f1bd951bb71c7bb. Only native test and temporary targeted workflow changed; production reader/2026-11-03T02:59:00Z ceiling byte-for-byte unchanged. Full [fix round 1 evidence](../reports/2026-11-01-finite-private-policy-setup-task5-b2-ab.md#b2-ab-fix-round-1--reproducible-synthetic-custody-boundary-2026-11-02).
+
+Regular positives use explicit SYN dynamic approval/token datum, real Date/performance/parent/D1/SQLite. Production historical-pin negative retains real pins, requires metadata and observed fixed-version request. Focused unchanged-production-ceiling test freezes reader-only clock at CEILING−1 (first provider invocation admitted) and exact CEILING (deadline, zero requests). Before-control is a constant clock, NOT 1ms available IO. Exact/unique substitutions asserted; no product clock/pin/key override or approval extension.
+
+RED9793f0d9/run41500063202/job125464938529/attempt1:22tests13pass9fail/lintsuccess. Instrumented future reader clock reproduces seven behavioral deadline failures plus parent aggregate; ninth RPC-proxy deepEqual assertion separately disclosed/repaired. GREENf68d360a/run41500276455/job125465668561/attempt1 completed-success:22PASS0fail/cancel/skip/todo/lintsuccess, artifactsAPI0. Node22/existinglockfile; only affected native file and lint, no256/B1 rerun. Preexisting dependency/punycode/actions deprecation warnings disclosed. Actual native reader/storage/D1 with SYN external custody/CF commitments, not real future date or provider access.
+
+Two-file self-review, expected-headCAS/ref/every changed-file exact readbacks; report/ledger docs-only follow-up fixDocHEAD supplied separately and read back. Temporary qualifier contents:read/no-secrets/artifacts/deploy, docs-only excluded, EXCLUDE integration. STOP for fresh scoped rereview FIX_BASEbd9cb210..fixDocHEAD. Task5/B2bootstrap incomplete; no C3/runtime/main/owner step. operationalReadiness=false.
