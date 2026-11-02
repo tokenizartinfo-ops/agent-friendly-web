@@ -47,7 +47,7 @@ async function native(mode){
  }finally{await mf.dispose();}
 }
 test('actual finite Bootstrap prepares with readback, absolute sleep and one journaled native child',async()=>{
- const r=await native('success');assert.equal(r.status.status,'complete');assert.equal(r.report.prepare,1,'finite source must dispatch launcher');assert.equal(r.report.read,1,JSON.stringify({status:r.status,report:r.report}));assert.equal(r.report.create,1,JSON.stringify(r));
+ const r=await native('success');console.log('finite-native-event-metadata',JSON.stringify({workflowName:r.report.workflowName}));assert.equal(r.status.status,'complete');assert.equal(r.report.prepare,1,'finite source must dispatch launcher');assert.equal(r.report.read,1,JSON.stringify({status:r.status,report:r.report}));assert.equal(r.report.create,1,JSON.stringify(r));
  assert.deepEqual(r.report.sleeps,[{name:'finite-launch-wait',at:r.seed.plan.launchPolicy.launchAt}]);
  assert.deepEqual(r.report.steps.map(x=>x.name),['finite-launch-prepare','finite-launch-create']);for(const s of r.report.steps)assert.equal(s.options.retries.limit,0);
  assert.equal(r.status.output.status,'acknowledged');assert.equal(r.status.output.authorizesEffects,false);
