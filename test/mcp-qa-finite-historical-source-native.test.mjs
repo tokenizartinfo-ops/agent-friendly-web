@@ -187,7 +187,7 @@ test('shared historical byte boundary agrees for backup and native reader withou
   });
   const cases=[
    ['missing module',v=>v.modules=[]],
-   ['extra module',v=>v.modules.push({...v.modules[0]})],
+   ['extra module',v=>v.modules.push({...v.modules[0],content_base64:''})],
    ['wrong module type',v=>v.modules[0].content_type='text/plain'],
    ['wrong module name',v=>v.modules[0].name='other.mjs'],
    ['noncanonical base64',v=>v.modules[0].content_base64+='\n'],
