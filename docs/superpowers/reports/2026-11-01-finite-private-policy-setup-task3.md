@@ -122,3 +122,64 @@ Static esbuild replacement is confined to test fixtures. Synthetic RS256 JWT/JWK
 Root must independently review the final BASE..docHEAD source/spec/quality range. Required remaining runtime gates are the actual T5 material/residency/custody/primary/exposure/writer inventory/mounts, T4 native setup and C3 business/withdrawal path, plus separately authorized actual publication, credentials/scope verification, original consent/window and attended acceptance. Source/hash/status/CI results confer no owner or send authority.
 
 Every commit used GitHub tree+commit APIs with expected-head CAS and an independent branch-ref readback; each changed file was reread from the exact new commit and compared with intended bytes before the next write. No concurrent writer or CAS conflict occurred. Prior commits remain rollback material; no source history rewrite or delete occurred. The final handoff supplies exact docHEAD after this report/ledger readback. STOP WRITES for Root review.
+
+## Fix round1/5 — whole-stage settlement (2026-11-02)
+
+Status: FIX IMPLEMENTED, independent re-review PENDING. The original Task3 submission was NOT accepted: spec FAIL, quality needs fixes, one Important finding, no Critical/Minor. This appendix supersedes any reading of the earlier handoff as acceptance. operationalReadiness=false.
+
+Review range for Root: `423c1bfafc863d97114848e66edbea8e97ea0429`..fix-docHEAD. Writer resumed from Root's review/ruling commit `a6dab6603693731f40e38927157041d6e828aefa`. Final fix codeHEAD: `62fb4122ab2991eb3d4781187369269ceb849623`. The documentation-only fix-docHEAD is supplied by independent ref/file readback in the handoff; this report cannot embed its own commit hash.
+
+### Original finding, verbatim
+
+> **Important — final preparation work does not hold the publication barrier.**
+> 
+> At lib/mcp-qa-finite-connection-preparation.mjs:13–16, transport.run() executes before the producer checks its separate nativeWork registry. Meanwhile, the transport marks its work complete before returning to that producer (transport:155–161) and removes its barrier when the original parent finishes (transport:39–43).
+> 
+> - Trigger: finite activation and its receipt complete, then publishSelection or subsequent producer storage work remains physically pending past its child timeout. The producer returns admin_pending; HTTP parent.finish() removes the transport barrier although producer work remains outstanding.
+> - Impact: another admitted invocation can enter the fixed transport without consulting that outstanding producer work. The journal’s predecessor activation already has an ACK/receipt; its factual writer-head check does not supply the missing settlement barrier. nativeWork.has(ctx) is reached only after the new transport has performed its effects. This violates the explicit requirement to retain and gate on the entire admitted stage, rather than only the transport portion.
+> - Related loss within the same boundary: producer tracking at connection-preparation:30 retains the factual-reader promise, but that reader invokes nested child() operations through resolve/step. owner-preparation:63 races—and does not retain—the underlying promise. On timeout, the wrapper can settle while its actual source/storage operation remains pending.
+> - Fix: maintain one source-owned, admission-lineage barrier through transport, final producer, and nested factual IO; test it before any subsequent SEND. Release only after original-request completion and actual settlement of all underlying work. Add focused behavioral coverage holding final selection storage and a nested factual operation, then attempting another writer before releasing them. Preserve invalidated child guards and avoid exposing a new admission/mint API.
+> 
+
+The full independent review is [2026-11-01-finite-private-policy-setup-task3.md](../reviews/2026-11-01-finite-private-policy-setup-task3.md). Root recorded the whole-stage ruling before this round's product code at a6dab660. Root then accepted the narrow internal shared retention design; its implementation boundary/reference/limits were appended to brief, shared plan and ledger in `f51d65fa25ba3358ea7bd0b51d4067278109f56d`, before product commit62fb4122.
+
+### Change and authority boundary
+
+One internal `mcp-qa-finite-stage-work.mjs` owns the per-actual-ctx outstanding-work WeakMap. It identifies the lineage by the exact already-consumed admission object plus original lease, env, native storage and release-primary references. It returns no admission, permission or send capability. A different admission is denied before transport source IO/SEND; matching record values or a reconstructed object cannot continue that lineage.
+
+Transport and final producer enter the same retained scope. Every actual native operation is registered before the caller races its timeout, including the underlying promises started by owner-preparation.child inside resolve/step. Completion of the race wrapper does not remove its underlying operation. A promise is removed only on fulfillment/rejection; the ctx entry is removed only when the original request has ended AND the actual work set is empty. Thus parent.finish after producer admin_pending cannot expose a free transport slot while final storage or nested factual IO remains outstanding. The previous independent transport/producer registries were removed.
+
+The internal scope uses only AsyncLocalStorage.run/getStore and native Promise chains. [Cloudflare's AsyncLocalStorage reference](https://developers.cloudflare.com/workers/runtime-apis/nodejs/asynclocalstorage/) was checked and supplied by Root; enterWith/disable are not used. Propagation is verified inside actual Miniflare/workerd through nested native source/storage awaits. No RPC/isolate propagation, arbitrary thenable propagation, provider restart or real remote settlement is claimed. T5 durable/all-path legacy writer inventory remains a separate required unavailable gate.
+
+Public transport/preparation signatures, original consume-only admission, actual source qualifiers, source/owner/window/expiry checks, original30s and child5s captured guards, NEW SEND/ACK requirements, hashes, journal/head semantics and grant/notice decisions are unchanged. There is no clear/reset/force/refund/send/mint API. No profile or compatibility flag/date was changed. No real provider/private operation, credential/auth/consent/window, runtime deploy, local build, finite HEAD or Task4 action occurred.
+
+### Behavioral RED and covering GREEN
+
+The new native tests configure two explicit synthetic holds AFTER actual finite activation/receipt:
+
+1. The real publishSelection head transaction commits into native SQLite, but its actual storage-return promise stays held beyond the producer child timeout and original parent.finish. Committed selection facts remain; the hold grants no witness or renewed guard.
+2. A nested actual source/storage operation within the factual reader stays held after the outer producer and inner owner child race wrappers have timed out. This specifically exercises the formerly unretained nested operation.
+
+For each case, the static test fixture presents a separate synthetic closed baseline to isolate the settlement boundary; it does not mutate original journal/history or override production source. A second actual owner POST independently verifies the synthetic Access JWT/primary owner, consumes a new ticket and acknowledges a fourth actual StageApproval. While the first work remains held, GREEN requires admin_pending, exactly six existing SENDs/provider POSTs and no extra publication. After the test explicitly releases the native hold, invalidated child guards must make no late writes and all committed factual history must remain unchanged. The fixture is not a production reconciliation or retry mechanism.
+
+RED at `05bfb64dc6b71190fe4f9313f82ebc4c7c226ac8`: [run41465306769/job125344480872](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41465306769/job/125344480872), attempt1, **55 tests:53 pass/2 fail**, cancelled0/skipped0, lint clean, artifacts0. Both new cases failed behaviorally: the competing invocation returned installed instead of admin_pending while the earlier native operation remained held. These are genuine publication-barrier failures, not fixture/import failures.
+
+GREEN at `62fb4122ab2991eb3d4781187369269ceb849623`: [run41466161397/job125347499185](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41466161397/job/125347499185), attempt1, **55 tests:55 pass/0 fail**, cancelled0/skipped0, scoped ESLint clean, artifacts0. Both held-final-work cases pass, along with the existing complete three-stage path, actual wire/hash vector, late/unknown provider and source work, original owner-admission negatives, delayed claim budget and actual Miniflare/SQLite restart journal coverage.
+
+Exact hosted commands, Node22 / Ubuntu24.04 / existing unchanged lockfile:
+
+```sh
+npm ci --ignore-scripts --no-audit --no-fund
+node --test test/mcp-qa-finite-connection-preparation-native.test.mjs test/mcp-qa-finite-policy-transport.test.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs test/mcp-qa-finite-policy-journal-native.test.mjs
+npx eslint lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-policy-transport.mjs lib/mcp-qa-finite-connection-preparation.mjs lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-connection-preparation-native.test.mjs test/fixtures/finite-connection-worker.mjs test/fixtures/finite-transport-native.mjs
+```
+
+No unchanged profile/compiler/full120 rerun occurred in this fix round. Actual native test bundling and workerd execution cover the new node:async_hooks dependency; no compatibility/profile change was needed. The branch-only qualifier remains contents:read/no secrets/artifact upload/deploy and docs-filtered; exclude it from integration.
+
+### Selfreview, CAS and handoff
+
+Selfreview traced the same exact consumed admission from transport into producer, then through nested owner source/storage children. It checked that the competing invocation is denied before effects, actual promises survive both timeout and parent finish, actual settlement alone removes operations, original guards still reject late writes, and no private admission/scoped state is projected over HTTP/RPC/JSON. The native held-source case demonstrates propagation beyond a Node-only unit test. Existing successful three-stage progression still releases settled request work normally; the journal restart test remains separate durable evidence.
+
+All four source/docs checkpoints before this appendix used expected-head CAS plus independent branch-ref and exact-file readback: Root writer BASEa6dab660 -> RED05bfb64d -> boundary-docf51d65fa -> GREEN62fb4122. Final report/ledger documentation commit receives the same CAS/readback and will be named exactly in the handoff. No CAS conflict, local project/source/deps/build, subagent or unrelated task change occurred.
+
+This is implementer evidence, not independent acceptance. STOP WRITES after final documentation readback. Root will send the same reviewer the scoped423c1bf..fix-docHEAD range. T4/T5/C3, private actual material/residency/custody/exposure/all-path inventory, attended publication/consent and runtime/PC-off acceptance remain outstanding. operationalReadiness=false.
