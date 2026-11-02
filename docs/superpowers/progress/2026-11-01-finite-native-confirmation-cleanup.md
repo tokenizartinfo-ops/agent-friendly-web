@@ -449,3 +449,10 @@ Ruling: C2 Task1 is only strict factual records/native transactions. Existence, 
 Ruling: preserve separate explicit own-synthetic configuration preparation and the original known-goal Save authorization in later owner UI/runbook; a read/notices grant never authorizes the Save by implication — owner approved overall rehearsal, but the concrete authenticated server proof must describe its action — if omitted the rehearsal must remain unavailable, not silently save under READ.
 
 C2 Task1 next only after Task3 review acceptance. No runtime/readiness/consent/provider/Container/PC-off claim; no source promotion or occurrence from this preflight.
+
+
+## Root C2 Task1 exact-contract rulings (2026-11-02, before implementation)
+
+Source-only BASE 6c3b0f951d2c7a63cbf9abfd4aea81222bf1cd9a. Root approved narrow read-only validatePrivateQaFiniteLegacy({legacy,T0}) in mcp-qa-finite-trial-control.mjs, factoring the exact existing previous-field/hash/source validator and reusing legacy(plan,T0); exact own-data pair, immutable legacy only. No fabricated full plan/weaker duplicate; old finite-control native command joins GREEN. Baseline/rollback module is actual validateFiniteModule EXACT {name,sha256,bytes}; exports belong to configuration.exports/profile qualification, never a fourth descriptor field. Configuration is checked with actual activationConfigurationHash (seven keys, secret_text name/type only) AND separately fingerprinted with restorationConfigurationHash. Full source/binding correctness remains T3/T5.
+
+GrantLink and NoticeLink keep exact spec field lists WITHOUT purpose/selfhash. Their digest domains are afw.finite-grant-link.v1 and afw.finite-notice-link.v1 plus newline plus ASCII-key-sorted canonical full record. ConnectionRef map likewise has no purpose/selfhash; domain afw.finite-connection-ref.v1. Other record domains use actual purpose and exclude only their named selfdigest. Root accepted explicit fail-closed RED shells with actual SQLite mounts and behavioral assertions; missing dependencies/syntax/mounts are not qualifying RED. No positive authority placeholder.
