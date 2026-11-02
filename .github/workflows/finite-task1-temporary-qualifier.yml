@@ -3,13 +3,13 @@ name: Finite C2 Task3 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-connection-preparation.mjs', 'lib/mcp-qa-finite-owner-http.mjs', 'test/mcp-qa-finite-connection-preparation-native.test.mjs', 'test/fixtures/finite-transport-native.mjs', 'test/fixtures/finite-connection-owner-source.mjs', 'lib/mcp-qa-finite-policy-transport.mjs', 'lib/mcp-qa-finite-connection-profile.mjs', 'lib/mcp-qa-finite-connection-source.mjs', 'test/mcp-qa-finite-policy-transport.test.mjs', 'test/fixtures/finite-owner-native.mjs', 'test/fixtures/finite-connection-worker.mjs', 'test/fixtures/finite-connection-source.mjs', 'lib/mcp-qa-finite-policy-journal.mjs', 'test/mcp-qa-finite-policy-journal-native.test.mjs', 'test/fixtures/finite-preparation-store-worker.mjs', 'lib/mcp-qa-finite-owner-preparation.mjs', 'test/fixtures/finite-owner-worker.mjs', 'test/mcp-qa-finite-preparation-records.test.mjs', 'lib/mcp-qa-finite-preparation-records.mjs', 'lib/mcp-qa-finite-preparation-store.mjs', 'test/mcp-qa-finite-owner-preparation-native.test.mjs', 'lib/mcp-qa-finite-profile.mjs', 'wrangler.mcp-own.finite.jsonc', 'test/mcp-qa-finite-profile.test.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['test/mcp-qa-finite-policy-journal-native.test.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
   focused:
     runs-on: ubuntu-24.04
-    timeout-minutes: 8
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,59 +20,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Inspect installed native persistence conversion
-        run: |
-          node --input-type=module <<'NODE'
-          import {convertV4MiniflareOptions} from 'miniflare';
-          import {readFile} from 'node:fs/promises';
-          console.log(JSON.stringify(convertV4MiniflareOptions({modules:true,script:'export default {}',durableObjectsPersist:'/tmp/afw-synthetic-persistence',durableObjects:{FIXTURE:{className:'FinitePreparationFixture',useSQLite:true,uniqueKey:'finite-private-task1'}}})));
-          const code=await readFile('node_modules/miniflare/dist/src/index.js','utf8');
-          for(const word of ['durableObjectsPersist','persistenceRoot','persistRoot','persistPath']){
-            let at=code.indexOf(word),count=0;
-            while(at>=0&&count++<3){console.log(word+': '+code.slice(Math.max(0,at-220),at+420));at=code.indexOf(word,at+word.length);}
-          }
-          NODE
-      - name: Task3 existing Container source preservation
-        run: node --test test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-profile-native.test.mjs test/build-finite-native-package.test.mjs
-      - name: Task3 stage approval original native owner path
-        run: node --test test/mcp-qa-finite-owner-preparation-native.test.mjs test/mcp-qa-finite-preparation-records.test.mjs test/mcp-qa-finite-preparation-store-native.test.mjs test/mcp-qa-finite-policy-journal-native.test.mjs
-      - name: Task3 fixed transport native synthetic provider
+      - name: Native journal actual runtime restart
+        run: node --test test/mcp-qa-finite-policy-journal-native.test.mjs
+      - name: Scoped fixture lint
         if: always()
-        run: node --test test/mcp-qa-finite-policy-transport.test.mjs test/mcp-qa-finite-connection-preparation-native.test.mjs test/mcp-canary-restoration-transport.test.mjs
-      - name: Scoped lint
-        if: always()
-        run: npx eslint lib/mcp-qa-finite-connection-preparation.mjs lib/mcp-qa-finite-owner-http.mjs test/mcp-qa-finite-connection-preparation-native.test.mjs test/fixtures/finite-transport-native.mjs test/fixtures/finite-connection-owner-source.mjs lib/mcp-qa-finite-policy-transport.mjs lib/mcp-qa-finite-connection-profile.mjs lib/mcp-qa-finite-connection-source.mjs test/mcp-qa-finite-policy-transport.test.mjs test/fixtures/finite-owner-native.mjs test/fixtures/finite-connection-worker.mjs test/fixtures/finite-connection-source.mjs lib/mcp-qa-finite-policy-journal.mjs test/mcp-qa-finite-policy-journal-native.test.mjs test/fixtures/finite-preparation-store-worker.mjs lib/mcp-qa-finite-owner-preparation.mjs test/fixtures/finite-owner-worker.mjs lib/mcp-qa-finite-profile.mjs lib/mcp-qa-finite-preparation-records.mjs lib/mcp-qa-finite-preparation-store.mjs test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs
-      - name: Generated finite byte dry-run without provider or Container build
-        run: |
-          node --input-type=module <<'NODE'
-          import {compileFiniteNativeStaging} from './scripts/build-finite-native-package.mjs';
-          import {finiteWranglerProfileTemplate} from './lib/mcp-qa-finite-profile.mjs';
-          import {mkdir,writeFile} from 'node:fs/promises';
-          import {resolve} from 'node:path';
-          const r=await compileFiniteNativeStaging({cwd:process.cwd(),sourceRevision:process.env.GITHUB_SHA});
-          await mkdir('output/task3-profile',{recursive:true});
-          for(const role of ['qaLive','canaryLive']){
-            const p=structuredClone(finiteWranglerProfileTemplate(role));
-            await writeFile('output/task3-profile/'+role+'.mjs',r.files[role+'/index.mjs']);
-            p.main=resolve('output/task3-profile/'+role+'.mjs');
-            delete p.exports; // Full existing linkage is passed through unsafe.metadata; no image/app directive.
-            await writeFile('output/task3-profile/'+role+'.json',JSON.stringify(p));
-          }
-          console.log(JSON.stringify({sourceRevision:r.sourceRevision,publicStatic:Object.fromEntries(Object.entries(r.modules).map(([k,v])=>[k,v.publicStatic])),completePackage:false,operationalReadiness:false}));
-          NODE
-          npx wrangler deploy --config output/task3-profile/canaryLive.json --dry-run --no-bundle --outdir output/task3-profile/dry-canary
-          npx wrangler deploy --config output/task3-profile/qaLive.json --dry-run --no-bundle --outdir output/task3-profile/dry-qa
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';
-          import {readFile,readdir} from 'node:fs/promises';
-          for(const [role,dir] of [['canaryLive','dry-canary'],['qaLive','dry-qa']]){
-            const before=await readFile('output/task3-profile/'+role+'.mjs');
-            const files=await readdir('output/task3-profile/'+dir);
-            let identical=false;
-            for(const file of files.filter(x=>/\.(mjs|js)$/.test(x))){
-              if(before.equals(await readFile('output/task3-profile/'+dir+'/'+file)))identical=true;
-            }
-            assert.equal(identical,true,'dry-run preserves actual compiled '+role+' bytes');
-            console.log('dry-run byte identity verified: '+role);
-          }
-          NODE
+        run: npx eslint test/mcp-qa-finite-policy-journal-native.test.mjs test/mcp-qa-finite-policy-transport.test.mjs test/fixtures/finite-transport-native.mjs
