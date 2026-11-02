@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
+import {createHash} from 'node:crypto';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
 const entry=`
@@ -81,7 +82,7 @@ export class Native extends IndependentClosure{
    let seen=0;
    this.ctx.storage.transaction=async fn=>{
     const result=await originalTx.call(this.ctx.storage,fn);
-    if(await originalGet.call(this.ctx.storage,prefix+(mode.includes('ack')?'ack':'send'))){
+    if(await originalGet.call(this.ctx.storage,prefix+(mode.startsWith('late-ack')?'ack':'send'))){
      if(mode.startsWith('late-')){if(!mode.endsWith('readback')||++seen===2)f.setNow(f.now()+5000);}else throw Error('SYNTHETIC lost SEND ACK');
     }return result;
    };
@@ -89,6 +90,7 @@ export class Native extends IndependentClosure{
   if(mode==='duplicate-id'){await originalCreate.call(this.env.AFW_QA_NAMED_CONFIRMATION,{id:f.plan.workflows.confirmation,params:{planHash:f.plan.bundleHash}});f.providerNominal='complete';}
   if(mode==='held-create'){
    f.hydrate=async()=>{f.setNow(f.now()+4500);f.hydrate=null;};
+   if(mode==='held-send'){let heldOnce=false;this.ctx.storage.transaction=async fn=>{const r=await originalTx.call(this.ctx.storage,fn);if(!heldOnce&&await originalGet.call(this.ctx.storage,prefix+'send')){heldOnce=true;enter();await held;settled=true;}return r;};}
    const first=this.createFiniteNominalChild(refs);await Promise.race([reached,first.then(r=>{throw Error('did not reach native create '+r.status);})]);const firstResult=await first,settledAtReturn=settled;
    const parent=createPrivateQaFiniteLaunchParent({deadline:f.now()+5000}),context=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent});
    let enteredFresh=false;const fresh=withPrivateQaFiniteLaunchCoordinator({ctx:this.ctx,env:this.env,context,parent},async check=>{check();enteredFresh=true;return true;});
@@ -117,6 +119,11 @@ test('actual native prepare arms C0 guard then consumes same-object nominal once
 });
 test('actual native binding creates exact fixed child once; receipt/read/reconstruction grant no send',async()=>{
  const r=await native('create');assert.equal(r.created.status,'acknowledged');assert.equal(r.calls,1);assert.deepEqual(r.callArgs,{id:r.plan.workflows.confirmation,params:{planHash:r.plan.bundleHash}});assert.ok(r.journal.send);assert.ok(r.journal.ack);assert.equal(r.unchanged,true);assert.equal(r.again.authorizesEffects,false);assert.equal(r.read.operationalReadiness,false);
+ const identity={accountId:'85d0d5dadac3341a564f22ce885e9eec',bindingName:'AFW_QA_NAMED_CONFIRMATION',className:'PrivateQaNamedConfirmation',definitionName:'afw-own-qa-private-confirmation',qaVersionId:r.plan.deployments.qaLive.versionId,scriptName:'agent-friendly-web-independent-closure-qa',sourceModuleHash:r.plan.source.moduleHash,sourceProfileHash:r.plan.source.profileHash,sourceRevision:r.plan.source.revision};
+ const hash=s=>createHash('sha256').update(s).digest('hex');
+ assert.equal(r.journal.send.bindingHash,hash('afw.finite-native-child-binding.v1\n'+JSON.stringify(Object.fromEntries(Object.keys(identity).sort().map(k=>[k,identity[k]])))));
+ assert.equal(r.journal.prepared.guardStateHash,hash(JSON.stringify(r.journal.guard)));
+ assert.equal(r.journal.prepared.nominalClaimHash,hash('afw.qa-finite-trial.v1:effect\n'+JSON.stringify(r.journal.claim)));
 });
 test('RPC exact arity/fields reject caller source and operation',async()=>{assert.deepEqual((await native('invalid-args')).results,[true,true,true,true]);});
 test('default unqualified C2 denies before storage/effects',async()=>{const r=await native('prepare',false);assert.equal(r.prepared.status,'admin_pending');assert.equal(r.journal.prepared,null);assert.equal(r.journal.claim,null);assert.equal(r.calls,0);});
@@ -126,7 +133,9 @@ for(const mode of ['create-149999','create-160000','consent-changed','readiness-
 for(const mode of ['lost-send','late-send','late-send-readback','create-primary-expired'])test('durable '+mode+' consumes SEND without native invocation/refund',async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.ok(r.journal.send);assert.equal(r.journal.ack,null);assert.equal(r.calls,0);assert.equal(r.unchanged,true);});
 for(const mode of ['lost-create','late-create','wrong-create'])test('one-shot '+mode+' retains unresolved SEND without retry',async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.ok(r.journal.send);assert.equal(r.journal.ack,null);assert.equal(r.calls,1);assert.equal(r.unchanged,true);});
 
-test('preexisting actual native child denies SEND even though native create is idempotent',async()=>{const r=await native('duplicate-id');assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,0);assert.equal(r.journal.send,null);});
+test('preexisting actual native child denies SEND even though Miniflare create returns its existing ID',async()=>{const r=await native('duplicate-id');assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,0);assert.equal(r.journal.send,null);});
 test('Workflow context cannot replace actual DO storage context',async()=>{const r=await native('workflow-context');assert.equal(r.outcome.status,'admin_pending');assert.equal(r.calls,0);});
 test('held actual native create retains coordinator after caller expiry against a fresh parent',async()=>{const r=await native('held-create');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);assert.equal(r.enteredBeforeSettlement,false);assert.equal(r.calls,1);assert.ok(r.journal.send);assert.equal(r.journal.ack,null);});
 for(const mode of ['late-ack','late-ack-readback'])test('late actual ACK persistence remains factual after '+mode,async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,1);assert.ok(r.journal.send);assert.ok(r.journal.ack);assert.equal(r.unchanged,true);});
+
+test('held actual SEND transaction retains coordinator after caller expiry against fresh parent',async()=>{const r=await native('held-send');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);assert.equal(r.enteredBeforeSettlement,false);assert.equal(r.calls,0);assert.ok(r.journal.send);assert.equal(r.journal.ack,null);});
