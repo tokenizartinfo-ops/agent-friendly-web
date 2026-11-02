@@ -109,3 +109,46 @@ Publisher B2 must independently resolve current global Workflow/native/D1 writer
 Temporary `.github/workflows/finite-task1-temporary-qualifier.yml` is branch/path scoped, contents:read only, no secrets/artifacts/deploy, no documentation-only trigger, and **EXCLUDED from eventual integration**. Root must preserve that exclusion.
 
 STOP: bounded source work and hosted qualification complete; fresh independent spec and quality review are still required. No operational or publisher action is authorized by this report.
+
+
+## Fix round 1/5 — native method prerequisites (2026-11-02)
+
+The [same review](../reviews/2026-11-02-finite-initial-native-entry.md) found that actual A requires `RELEASE_DB.withSession` and `AFW_RELEASE_EVENTS_NODE.idFromString` at construction, but the entry gate did not capture/require/recheck them before permanently committing Entry. Missing either consumed admission before a failure detectable in advance. Root authorized this exact correction, with no reset/refund or broader feature work.
+
+Revision boundaries:
+- Reviewer FIX_BASE: `722a45ccd2eaf058bceb048158fe4db9d98a7b55`.
+- Actual fix starting HEAD: `6af20d18bebe98738374dbb030e5cb0026a27a85`, tree `1a03861db9414fa4d519512634fdc1279a52db52`. Root's intervening review package, review, C3 plan/refinement and ledger content were preserved.
+- RED tests/fixture/scoped qualifier: `6e0ac6f85b274e62ff40d459a59c05cc7725c078`.
+- Qualified fix code HEAD: `28d2bd6f977980944bb7288baba35a2fb547107d`, tree `1a8beb4f319a89f67d6a378463287612afb3c169`.
+- Documentation HEAD is the subsequent commit containing this append and the append-only ledger update; its exact SHA is recorded in the final CAS/readback handoff. The documentation commit is not a separately compiled source revision.
+
+Production change is exactly three lines in `lib/mcp-qa-finite-initial-entry.mjs` (70, 71, 74): capture both actual methods; require both callable before entry; recheck both identities in existing holder validation, including the transaction's check before its first get/put. No new imports, bindings, routes, resources, record fields, clocks, IDs, Entry deletion/replacement/refund or effect authority. The previously approved base/actor-narrowed clock distinction and all false flags remain unchanged.
+
+The existing native-holder cases now cover both methods absent and noncallable. Two further cases replace each with a distinct callable forwarding function immediately before the actual native transaction callback/CAS, then require pending, Entry absent and exactly one transaction invocation. The replacements are SYN fault injection against actual workerd D1/DO holders; the transaction/get/put/sync and finite actor implementation remain real. The fixture restores original methods during test cleanup. No stored Entry is reset to regain admission.
+
+Meaningful RED on unchanged production:
+- [Run 41532294450](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41532294450), job `125575296424`, attempt 1, exact head `6e0ac6f85b274e62ff40d459a59c05cc7725c078`.
+- 35 tests: **29 pass, 6 fail, 0 cancelled, 0 skipped**; scoped lint PASS; artifacts 0.
+- Four absent/noncallable tests failed because Entry was present (`true !== false`).
+- Two callable-drift tests failed because the old implementation returned `material_recorded` instead of `admin_pending`. Thus they detect missing identity rechecks, not merely noncallability.
+
+Focused GREEN:
+- [Run 41532541570](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41532541570), job `125576141961`, attempt 1, exact head `28d2bd6f977980944bb7288baba35a2fb547107d`.
+- **35 tests, 35 pass, 0 fail, 0 cancelled, 0 skipped**; scoped lint PASS; artifacts 0.
+- Run/head/attempt/job/logs and artifact inventory were fetched; all four changed source/test/qualifier files and branch ref were read back exactly.
+
+Exact commands, hosted Ubuntu 24.04, Node 22 and unchanged lockfile:
+
+```text
+npm ci --ignore-scripts --no-audit --no-fund
+node --test test/mcp-qa-finite-initial-entry-native.test.mjs
+npx eslint lib/mcp-qa-finite-initial-entry.mjs test/mcp-qa-finite-initial-entry-native.test.mjs test/fixtures/finite-initial-entry-world.mjs
+```
+
+Changed files in this fix: `lib/mcp-qa-finite-initial-entry.mjs`, `test/mcp-qa-finite-initial-entry-native.test.mjs`, `test/fixtures/finite-initial-entry-world.mjs`, the temporary qualifier, this report append and the shared ledger append. No unrelated accepted unit was modified. All branch writes used expected-SHA CAS with force:false.
+
+The compiler byte/hash measurements earlier in this report belong ONLY to `e95b4cf1b1f4d098c3c4e412678b79a3a389a8f7`. They are dated prior-source evidence, **not measurements of 28d2bd6f977980944bb7288baba35a2fb547107d**. This three-line guard patch changes no imports/runtime graph, so Root explicitly declined an unrelated compiler/profile/residency rerun. Eventual composed full-package CI must compile its exact new source. The native fixture still compiles the actual finite class for these covering tests.
+
+Observed baseline noise in this focused GREEN: npm deprecation warning for unsupported eslint@9.39.4, punycode deprecation and Actions v4 Node 20-to-24 host warning. The ESLint dependency warning is deferred baseline maintenance; no unrelated lockfile or dependency update was made. The earlier SDK CIMD-disabled message remains historical evidence from the broader run; it was not present in this focused log. No compatibility/configuration/permission change was made to silence warnings.
+
+STOP after fix round 1 for the same reviewer's scoped re-review. No acceptance is claimed before that review. C3 implementation waits. Temporary qualifier remains EXCLUDED from integration, contents:read, no secrets/artifacts/deploy/docs-only trigger. All operational/full-package/PC-off flags remain false; no provider/runtime/publication/main/Max action occurred.

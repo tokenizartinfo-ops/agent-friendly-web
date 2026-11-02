@@ -1045,3 +1045,16 @@ C3 readonly followup confirmed lazy admission-source resolution; previous eager 
 ## 2026-11-02 — B1 independent review opens fix round1/5
 
 Fresh /root/review_initial_native_entry SpecFAIL/NeedsFixes,1Important: entry70–74 lacks RELEASE_DB.withSession/node.idFromString requiredbyactualA17–18; detectbeforeirreversibleEntry, notafter. Exactreview reviews/2026-11-02-finite-initial-native-entry.md. Rootacceptsfinding; originalimplementerround1capture/require/recheckbothmethods+missing/noncallable/holderdrift-beforeCAS nativespecimens, focusedhostedtests/lint, same-reviewerscopedre-review. NoEntryrefund/clockwiden/fullfeatureextension. Baseline lognoise minor deferred; actualruntimegates remainoutside, notsourceapproval. B1notaccepted/C3productnotstarted. Source-only/main/runtime/Maxunchanged.
+
+
+## 2026-11-02 — C2-B1 fix round 1/5 qualified; same-reviewer STOP
+
+Reviewer FIX_BASE722a45ccd2eaf058bceb048158fe4db9d98a7b55; fix began at Root HEAD6af20d18bebe98738374dbb030e5cb0026a27a85 with all intervening review/C3 documentation preserved. Exact Important finding: missing RELEASE_DB.withSession and AFW_RELEASE_EVENTS_NODE.idFromString checks could consume permanent Entry before actual A constructor failed.
+
+RED6e0ac6f85b274e62ff40d459a59c05cc7725c078/run41532294450/job125575296424/attempt1:35tests,29PASS,6FAIL,0cancel/skip; lintPASS/artifacts0. Four absent/noncallable methods left Entry present; two callable replacements before CAS reached material_recorded. Three-line production correction captures/requires/rechecks both actual native methods before entry.
+
+GREEN code28d2bd6f977980944bb7288baba35a2fb547107d/tree1a8beb4f319a89f67d6a378463287612afb3c169; run41532541570/job125576141961/attempt1:35PASS,0fail/cancel/skip, scoped lint clean, artifacts0. Exact command: node --test test/mcp-qa-finite-initial-entry-native.test.mjs; lint covers changed production/test/fixture. Four source/test/qualifier files and ref exactly read back; expected-SHA non-force CAS. [Same report append](../reports/2026-11-02-finite-initial-native-entry.md) records commands/evidence/heads and final documentation handoff.
+
+No imports/runtime graph changed; no unrelated compiler/profile/residency rerun. Earlier e95 compiler sizes/hashes are prior-source evidence only, not28d2 measurements; eventual full-package CI must compile exact new source. No Entry reset/refund, deadline widening or feature expansion. Baseline unsupported eslint@9.39.4 npm warning, punycode and Actions host warnings preserved without configuration/dependency/lockfile change; dependency maintenance is deferred.
+
+STOP for same reviewer's scoped re-review; C3 product waits. Temporary qualifier EXCLUDED from integration. No provider/runtime/publication/main/Max action; operational/full-package/PC-off flags false.
