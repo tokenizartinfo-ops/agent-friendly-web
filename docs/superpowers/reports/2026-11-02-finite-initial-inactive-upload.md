@@ -1,6 +1,6 @@
 # C2-B2a initial inactive upload — source implementation evidence
 
-Status: implementation in progress; SOURCE ONLY. Binding spec and plan: ../specs/2026-11-02-finite-initial-inactive-upload.md and ../plans/2026-11-02-finite-initial-inactive-upload.md.
+Status: source qualified; independent review fix round1 pending; SOURCE ONLY. Binding spec and plan: ../specs/2026-11-02-finite-initial-inactive-upload.md and ../plans/2026-11-02-finite-initial-inactive-upload.md.
 BASE c4696911f8895ae605da0512c77dc8d1a0e5acd0 / tree30646c600c01160b731a5ed834991e9be413fe78, branch feat/finite-native-cleanup-20261101, tokenizartinfo-ops/agent-friendly-web. Branch ref read back equal BASE before changes. Root is review owner; this task is sole writer.
 
 ## Pre-code actual constructor / wire / journal / precondition / test table
@@ -103,3 +103,13 @@ Final documentation commit appends this report and the shared ledger only, paren
 
 STOP / release sole writer for FRESH independent spec + quality review. No reviewer or subagent spawned by this task. No main/provider/runtime/actual initial command/native Workflow CREATE/upload/deploy/activation/rollback/grant/token/role/Container/Max/mail/chat/automation action; no local source/clone/dependencies/build/temp/download/process.
 operationalReadiness=false; completePackage=false; PCoff=false.
+
+## Independent review fix round1/5 — shared historical byte qualification
+
+Review scope starts at previous-reviewedHEAD39f0b726; Root dispatch BASE185f4dbb2c99f08165ebf80ca4ef44e888b5f684/tree50cb93f0136d7bef00d57c846c693430d3e6da88, ref read back exactly. Root retained all intervening review/ledger work. SpecPASS/QualityNeedsFixes,0Critical,1Important.
+
+Accepted Important: verbatim configuration/module/base64/byte-hash/receipt/historical-linkage validation existed twice in mcp-qa-finite-historical-source.mjs (initial backup qualifier and historical version consumer). No present behavioral divergence was found. Selected correction: a single nonexported pure internal qualifier returns validated configuration, metadata proof and bytes; each existing caller retains its own backup projection or historical policy/history responsibilities. No new import/export/capability, runtime dispatch, provider operation or permission. The report's stale line3 status is corrected separately; baseline tool warnings remain deferred.
+
+Behavioral regression is a native shared-input matrix, not source-text or function-call-count assertions: both public pure backup qualification and actual native historical reader receive the same metadata, verify exact bytes and source linkage, and reject module shape/encoding/hash, secret values, unknown config and physical namespace changes. A corrupted native legacy journal must reject the historical reader while the pure baseline qualifier still succeeds; this protects the intentionally different responsibilities. Loaded receipt-version and source-link mismatches must deny both.
+
+Because this is behavior-preserving extraction, the new matrix first establishes baseline GREEN, then runs unchanged after extraction; no fabricated behavioral RED is claimed. Existing upload-native winner/backup/pre-send/wrong-module consumers also run. No compiler rebuild is planned because dependency graph/imports/exports and source constraints are unchanged; earlier5705 measurements remain earlier-source evidence only.

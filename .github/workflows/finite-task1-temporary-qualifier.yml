@@ -3,7 +3,7 @@ name: Finite initial inactive upload temporary qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-initial-*.mjs', 'lib/mcp-qa-finite-historical-source.mjs', 'test/mcp-qa-finite-initial-*.test.mjs', 'test/mcp-qa-finite-candidate-residency.test.mjs', 'test/fixtures/finite-initial-*.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-initial-*.mjs', 'lib/mcp-qa-finite-historical-source.mjs', 'test/mcp-qa-finite-initial-*.test.mjs', 'test/mcp-qa-finite-historical-source-native.test.mjs', 'test/fixtures/finite-initial-*.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -20,8 +20,10 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Final actual compiler and candidate residency
-        run: node --test test/mcp-qa-finite-candidate-residency.test.mjs
+      - name: Shared historical boundary native baseline and regression
+        run: |
+          node --test test/mcp-qa-finite-historical-source-native.test.mjs
+          node --test --test-name-pattern='actual native winner|private backup|fresh pre-send|wrong-uploaded-module' test/mcp-qa-finite-initial-upload-native.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-initial-*.mjs lib/mcp-qa-finite-historical-source.mjs test/mcp-qa-finite-initial-upload-*.test.mjs test/mcp-qa-finite-initial-entry-native.test.mjs test/fixtures/finite-initial-*.mjs test/mcp-qa-finite-candidate-residency.test.mjs
+        run: npx eslint lib/mcp-qa-finite-historical-source.mjs test/mcp-qa-finite-historical-source-native.test.mjs

@@ -37,10 +37,12 @@ async function seed(db,x){
  for(const [id,generation,container,program,source,closed]of [['original','e'.repeat(64),x.original.containerId,x.original.programHash,x.original.sourceRevision,x.at+15000],['cancelled-old',null,x.ids.candidate,x.candidate.programHash,x.candidate.sourceRevision,x.start+5000]])await db.prepare('INSERT INTO dossier_node_process_closures VALUES(?,?,?,?,?,?,?)').bind(id,generation,container,program,source,'cloudflare/debian-trixie',closed).run();
  for(const [sequence,id,action,issued,expires]of [[1,'original','grant',x.at,x.at+10000],[2,'cancelled-old','grant',x.start,x.end],[3,'cancelled-old','revoke',x.start+4000,x.start+4000]])await db.prepare('INSERT INTO dossier_monitoring_consent_events VALUES(?,?,?,?,?,?,?,?,?,?,?,?)').bind(sequence,id,'synthetic-project','owner','client',x.events.resource,1,action,'afw.dossier-monitoring.v1','request-'+sequence,issued,expires).run();
 }
-async function harness(actualPins=false,productionExpiry=null){
+async function harness(actualPins=false,productionExpiry=null,commitmentFault=null){
  const base={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_QA_VERSION:{id:QA},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-native-reader'},d1Databases:{RELEASE_DB:'history'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'History',useSQLite:true,uniqueKey:'history-b2'},AFW_RELEASE_EVENTS_NODE:{className:'Node',useSQLite:true,uniqueKey:'history-node-b2'}}};
  const mf=new Miniflare(convertV4MiniflareOptions({...base,script:'import{DurableObject}from"cloudflare:workers";export class History extends DurableObject{} export class Node extends DurableObject{} export default{fetch(){return new Response(null,{status:404})}};'}));
  const first=await mf.getBindings(),ns=first.AFW_RELEASE_EVENTS_NODE,ids={original:ns.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()},x=fixture(ids);x.ids=ids;
+ if(commitmentFault==='receipt-version')x.receipt.baseVersionId='22222222-2222-4222-8222-222222222222';
+ if(commitmentFault==='source-link')x.historical.artifactSourceRevision='f'.repeat(40);
  let source;try{source=await readFile('lib/mcp-qa-finite-historical-source.mjs','utf8');}catch{source='export async function readPrivateQaFiniteHistoricalSource(){throw Error("Finite historical source unavailable:input");}';}
  // Explicit test-only build boundary: no product API or caller-clock override.
  assert.equal(source.split(CEILING_DECLARATION).length,2,'exact production approval datum occurs once');
@@ -60,17 +62,21 @@ async function harness(actualPins=false,productionExpiry=null){
   assert.equal(source.includes(CEILING_DECLARATION),false);
   assert.equal(source.split('CEILING='+fixtureApproval).length,2);
  }
- const entry=String.raw`import{DurableObject}from'cloudflare:workers';import{readPrivateQaFiniteHistoricalSource as read}from'./lib/mcp-qa-finite-historical-source.mjs';import{createFiniteOwnerRequestLease}from'./lib/mcp-qa-finite-owner-preparation.mjs';import{observeFiniteOwnerStageWork}from'./lib/mcp-qa-finite-stage-work.mjs';
+ const entry=String.raw`import{DurableObject}from'cloudflare:workers';import{readPrivateQaFiniteHistoricalSource as read,qualifyFiniteInitialHistoricalBaseline as baseline}from'./lib/mcp-qa-finite-historical-source.mjs';import{createHash}from'node:crypto';import{createFiniteOwnerRequestLease}from'./lib/mcp-qa-finite-owner-preparation.mjs';import{observeFiniteOwnerStageWork}from'./lib/mcp-qa-finite-stage-work.mjs';
  export class Node extends DurableObject{}
  export class History extends DurableObject{
  async seed(rows){for(const[k,v]of rows)await this.ctx.storage.put(k,v);return true;}
  async snapshot(){return[...await this.ctx.storage.list()];}
+ async qualifyBaseline(metadata){
+ try{const value=baseline(metadata);return{ok:true,keys:Object.keys(value).sort(),moduleHash:createHash('sha256').update(value.bytes).digest('hex'),moduleBytes:value.bytes.length,sourceRevision:value.sourceRevision,sourceTree:value.sourceTree,metadataProof:value.metadataProof};}
+ catch(e){return{ok:false,message:e.message};}
+ }
  async removeFixture(key){await this.ctx.storage.delete(key);}
  async read(mode='normal'){
  const controller=new AbortController(),parent=createFiniteOwnerRequestLease(new Request('https://fixture.invalid/',{signal:controller.signal}));let signalTimer;
  if(mode==='abort')signalTimer=setTimeout(()=>controller.abort(),5);
  const lease=mode==='expired'?{signal:controller.signal,assertCurrent(){throw Error('expired');}}:parent.lease;
- try{const result=await read({ctx:this.ctx,env:this.env},lease);return{ok:true,keys:Object.keys(result).sort(),artifactBytes:new TextEncoder().encode(result.artifact.script).length,escapedBytes:JSON.stringify(result.artifact).length,history:result.history,metadataProof:result.metadataProof,legacy:result.legacy,claims:[result.sourceIdentityVerified,result.scopeVerified,result.authorizesEffects,result.operationalReadiness]};}catch(e){return{ok:false,message:e.message};}finally{clearTimeout(signalTimer);parent.finish();}
+ try{const result=await read({ctx:this.ctx,env:this.env},lease);return{ok:true,keys:Object.keys(result).sort(),artifactBytes:new TextEncoder().encode(result.artifact.script).length,artifactHash:createHash('sha256').update(result.artifact.script).digest('hex'),escapedBytes:JSON.stringify(result.artifact).length,history:result.history,metadataProof:result.metadataProof,legacy:result.legacy,claims:[result.sourceIdentityVerified,result.scopeVerified,result.authorizesEffects,result.operationalReadiness]};}catch(e){return{ok:false,message:e.message};}finally{clearTimeout(signalTimer);parent.finish();}
  }
  async retention(){
  // Test-only held continuation AFTER the REAL native transaction settles. This ctx
@@ -164,4 +170,52 @@ test('unchanged production custody ceiling denies exactly at expiry before provi
    else{assert.equal(r.ok,false);assert.equal(r.message,'Finite historical source unavailable:deadline');assert.equal(f.requests.length,0);}
   }finally{await f.mf.dispose();}
  }
+});
+
+test('shared historical byte boundary agrees for backup and native reader without conflating their policies',async t=>{
+ const f=await harness();try{
+  const original=structuredClone(f.x.metadata),originalRows=await f.stub.snapshot();
+  await t.test('both consumers qualify exact source bytes and keep distinct output responsibilities',async()=>{
+   const backup=await f.stub.qualifyBaseline(original),reader=await f.stub.read();
+   assert.equal(backup.ok,true,JSON.stringify(backup));assert.equal(reader.ok,true,JSON.stringify(reader));
+   assert.equal(backup.moduleHash,sha(f.x.script));assert.equal(reader.artifactHash,sha(f.x.script));
+   assert.equal(backup.moduleBytes,Buffer.byteLength(f.x.script));assert.equal(reader.artifactBytes,Buffer.byteLength(f.x.script));
+   assert.equal(backup.sourceRevision,f.x.receipt.sourceRevision);assert.equal(backup.sourceTree,f.x.receipt.sourceTree);
+   assert.deepEqual(backup.metadataProof,reader.metadataProof);
+   assert.deepEqual(backup.keys,['bytes','configuration','metadataProof','rawConfiguration','sourceRevision','sourceTree']);
+   assert.equal(reader.keys.includes('rawConfiguration'),false);assert.equal(reader.keys.includes('bytes'),false);assert.equal(reader.keys.includes('history'),true);
+  });
+  const cases=[
+   ['missing module',v=>v.modules=[]],
+   ['extra module',v=>v.modules.push({...v.modules[0]})],
+   ['wrong module type',v=>v.modules[0].content_type='text/plain'],
+   ['wrong module name',v=>v.modules[0].name='other.mjs'],
+   ['noncanonical base64',v=>v.modules[0].content_base64+='\n'],
+   ['wrong byte hash',v=>v.modules[0].content_base64=Buffer.from('foreign module').toString('base64')],
+   ['unknown metadata field',v=>v.assets={}],
+   ['secret value',v=>v.bindings.find(b=>b.type==='secret_text').text='SYN-MUST-NOT-ESCAPE'],
+   ['namespace drift',v=>v.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_NODE').namespace_id='f'.repeat(32)],
+  ];
+  for(const [name,change]of cases)await t.test(name+' is rejected by both consumers',async()=>{
+   const metadata=structuredClone(original);change(metadata);f.x.metadata=metadata;
+   for(const response of [await f.stub.qualifyBaseline(metadata),await f.stub.read()]){
+    assert.equal(response.ok,false,name);assert.equal(response.message,'Finite historical source unavailable:metadata');assert.equal(JSON.stringify(response).includes('SYN-MUST-NOT-ESCAPE'),false);
+   }
+   f.x.metadata=original;
+  });
+  await t.test('native legacy evidence remains required only by historical reader',async()=>{
+   await f.stub.seed([[keys[1],{...f.x.rows[1][1],phase:'complete',completedAt:f.x.start+1}]]);
+   assert.equal((await f.stub.qualifyBaseline(original)).ok,true);
+   const reader=await f.stub.read();assert.equal(reader.ok,false);assert.equal(reader.message,'Finite historical source unavailable:legacy');
+   await f.stub.seed([f.x.rows[1]]);assert.equal((await f.stub.read()).ok,true);
+  });
+  assert.deepEqual(await f.stub.snapshot(),originalRows);
+ }finally{await f.mf.dispose();}
+});
+for(const fault of ['receipt-version','source-link'])test('both historical consumers reject loaded '+fault+' commitment mismatch',async()=>{
+ const f=await harness(false,null,fault);try{
+  for(const response of [await f.stub.qualifyBaseline(f.x.metadata),await f.stub.read()]){
+   assert.equal(response.ok,false);assert.equal(response.message,'Finite historical source unavailable:metadata');
+  }
+ }finally{await f.mf.dispose();}
 });
