@@ -1,8 +1,9 @@
+import {createDelegatedOAuthStore} from '../../lib/delegated-oauth-store.mjs';
 import {recordDossierMonitoringConsent} from '../../lib/dossier-monitoring-authority.mjs';
 import {DurableObject} from 'cloudflare:workers';
 import {createFiniteOwnerPreparationHost} from '../../lib/mcp-qa-finite-owner-http.mjs';
 import {createFiniteOwnerPreparationStore} from '../../lib/mcp-qa-finite-preparation-store.mjs';
-import {readFiniteOwnerPreparation,recordFinitePreparationGrant,recordFinitePreparationNotice,recordFinitePreparationAuthorization} from '../../lib/mcp-qa-finite-owner-preparation.mjs';
+import {createFiniteOwnerRequestLease,readFiniteOwnerPreparation,recordFinitePreparationGrant,recordFinitePreparationNotice,recordFinitePreparationAuthorization} from '../../lib/mcp-qa-finite-owner-preparation.mjs';
 const origin='https://delegated-canary.agentfriendlyweb.dev';
 const H='a'.repeat(64),M='b'.repeat(40),U='11111111-1111-4111-8111-111111111111';
 export class FiniteOwnerFixture extends DurableObject{
@@ -33,6 +34,46 @@ export class FiniteOwnerFixture extends DurableObject{
   if(path==='/fixture/monitoring'){
    const input=await request.json(),now=Date.now();
    return Response.json(await recordDossierMonitoringConsent({db:this.env.RELEASE_DB,subject:'owner',grantId:'accepted-grant',projectId:'synthetic-owned',expectedRevision:1,expectedSequence:input.expectedSequence,requestId:input.requestId,action:input.action,now,expiresAt:input.expiresAt,expectedClientId:'synthetic-client',expectedResource:origin+'/mcp'}));
+  }
+  if(path==='/fixture/held-child'){
+   const parent=createFiniteOwnerRequestLease(request);
+   try{
+    const {mode,authorizationHash,secondHash,url,headers}=await request.json(),actual=this.ctx.storage;
+    let releaseFirst,releaseSecond,secondEnteredResolve,firstSettledResolve,firstCommitted=false,transactions=0;
+    const firstGate=new Promise(resolve=>{releaseFirst=resolve;}),secondGate=new Promise(resolve=>{releaseSecond=resolve;});
+    const secondEntered=new Promise(resolve=>{secondEnteredResolve=resolve;}),firstSettled=new Promise(resolve=>{firstSettledResolve=resolve;});
+    const storage={get:(...a)=>actual.get(...a),put:(...a)=>actual.put(...a),transaction:async fn=>{
+     const number=++transactions;
+     if(number===1){
+      try{
+       if(mode==='before')await firstGate;
+       const result=await actual.transaction(fn);firstCommitted=true;
+       if(mode==='after')await firstGate;
+       return result;
+      }finally{firstSettledResolve();}
+     }
+     if(number===2){secondEnteredResolve();await secondGate;}
+     return actual.transaction(fn);
+    }};
+    const ctx={id:this.ctx.id,storage},original=()=>new Request(url,{headers});
+    let hookRejected=false;
+    try{await recordFinitePreparationAuthorization({ctx,env:this.env,request:original(),authorizationHash},parent.lease);}catch{hookRejected=true;}
+    parent.lease.assertCurrent();
+    const now=new Date().toISOString(),grantStore=createDelegatedOAuthStore(this.env.RELEASE_DB.withSession('first-primary'));
+    const consumed=await grantStore.consumeConsent(authorizationHash,'owner','authorize',now);
+    await grantStore.createGrant({grantId:'held-child-grant',subject:'owner',clientId:'synthetic-client',projectId:'synthetic-owned',resource:origin+'/mcp',scopes:['afw:project:read'],createdAt:now,expiresAt:new Date(Date.now()+300000).toISOString()});
+    // A later child of the SAME still-live parent remains outstanding while the
+    // first one resumes; mutable shared current-child aliases must not revive it.
+    const second=recordFinitePreparationAuthorization({ctx,env:this.env,request:original(),authorizationHash:secondHash},parent.lease).then(r=>({result:r}),()=>({rejected:true}));
+    await secondEntered;await new Promise(resolve=>setTimeout(resolve,1000));
+    parent.lease.assertCurrent();const committedBeforeRelease=firstCommitted;
+    releaseFirst();await firstSettled;
+    releaseSecond();const secondResult=await second;
+    parent.lease.assertCurrent();
+    const first=await actual.get('connection-authorization:'+authorizationHash),other=await actual.get('connection-authorization:'+secondHash);
+    const grant=await createDelegatedOAuthStore(this.env.RELEASE_DB.withSession('first-primary')).getGrant('held-child-grant');
+    return Response.json({hookRejected,transactions,parentAlive:true,committedBeforeRelease,firstPresent:first!==undefined,secondPresent:other!==undefined,secondStatus:secondResult.result?.status,consumed:!!consumed,grantActive:grant?.status==='active'&&!grant.revokedAt});
+   }finally{parent.finish();}
   }
   if(path==='/fixture/link'){
    const {kind,grantId,requestId,sequence,authorizationHash,url,headers,body,expired}=await request.json();

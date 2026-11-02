@@ -246,3 +246,18 @@ test('pre-existing GrantLink without a pair is not a new allocation opportunity'
  assert.equal(result.result?.status,'uncertain');
  assert.equal((await rows(f)).filter(([k])=>k.endsWith(':connection')||k.startsWith('owner-connection-ref:')).length,0);
 });
+
+for(const mode of ['before','after'])test('child timeout '+mode+' native transaction settles without reviving its captured deadline',async t=>{
+ const f=await connection(t),secondHash=sha(randomBytes(32).toString('base64url'));
+ await f.db.prepare('INSERT INTO delegated_consent_sessions(handle_hash,user_id,kind,project_id,client_id,resource,scopes_json,expires_at,consumed_at) VALUES(?,?,?,?,?,?,?,?,?)').bind(secondHash,'owner','authorize','synthetic-owned','synthetic-client',origin+'/mcp','["afw:project:read"]',f.until,'').run();
+ const result=await f.json('/fixture/held-child',{mode,authorizationHash:f.authorizationHash,secondHash,...f.authRequest});
+ assert.equal(result.hookRejected,true);
+ assert.equal(result.parentAlive,true);
+ assert.equal(result.transactions,2);
+ assert.equal(result.consumed,true);
+ assert.equal(result.grantActive,true);
+ assert.equal(result.committedBeforeRelease,mode==='after');
+ assert.equal(result.secondStatus,'recorded');
+ assert.equal(result.secondPresent,true);
+ assert.equal(result.firstPresent,mode==='after',mode==='before'?'expired child must not append after original consent consumption':'timeout must preserve already-committed uncertain facts');
+});
