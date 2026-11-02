@@ -826,3 +826,10 @@ Cannot-verify resolution: actual entry/source constructors intentionally remain 
 Report docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task4.md; full independent review recorded in docs/superpowers/reviews/2026-11-01-finite-private-policy-setup-task4.md. Temporary qualifier excluded integration. No main/runtime publication, provider/private probe, new credentials/consent/window, actual finite HEAD, Max or email. operationalReadiness=false.
 
 Task C2.5 next: read scoped Task5 brief; propose actual fixed source/forwarding/residency/context/writer ownership before code. Fresh implementer/BASE supplied by Root after this docs commit CAS/ref/file qualification; Task4 implementer and reviewer stopped.
+
+
+## Root Task5 subdivision and T5-B1 ruling — 2026-11-02
+
+Pre-code BASE `1057ce94a77df9edd8119f74c516d5512add3cf0`. The [complete preflight tables](../reports/2026-11-01-finite-private-policy-setup-task5-preflight.md) identify actual signatures, source/program/byte provenance, native versus GHA callers, missing bootstrap, forwarding/abort limitations, original cleanup and ALL writer families. Root rules sequential subdivision because these are missing producers, not one constructor.
+
+Start ONLY B1: actual nodeM→canaryM→bounded deterministic compressed candidate→QA-only embedding and fixed private decoder, candidate<=2MiB, QA<=3MiB measured. Exact module3keys plus compiler-derived programM/sourceRevision/sourceTree/sourceCheck; no selfhash cycle, original-Q relabelling, private/historical bytes, path/URL/callback/boolean initializer. Preserve physical-checkout before/after, exports/profile/Container/backend. Strict canonical decoder and actual byte SHA; private in-process only. Complete package stays false/throw. No other seam/bootstrap/mount/forwarding/C3/settlement implementation. Hosted meaningful RED/GREEN, scoped lint, compiler measurements and separate B1 report; STOP for fresh Root review. All runtime gates remain, operationalReadiness=false.
