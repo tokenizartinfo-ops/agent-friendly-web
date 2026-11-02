@@ -47,10 +47,13 @@ async function harness(mode='normal'){
    result=await producer.collect({commandId:9001},lease);
    if(result?.purpose!=='afw.finite-initial-material-result.v1')return{ok:false,status:result?.status};
    producer.assertCurrent(result,lease);
-   let cloneDenied=false,otherDenied=false;
+   let cloneDenied=false,otherDenied=false,otherLeaseDenied=false,mutatedDenied=false,expiredDenied=false;
    try{producer.assertCurrent(structuredClone(result),lease);}catch{cloneDenied=true;}
    try{createPrivateQaFiniteInitialMaterial({ctx:this.ctx,env:this.env}).assertCurrent(result,lease);}catch{otherDenied=true;}
-   return{ok:true,claims:[result.sourceIdentityVerified,result.scopeVerified,result.authorizesEffects,result.completePackage,result.operationalReadiness],cloneDenied,otherDenied,material:result.material,scriptHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(result.originalContext.artifact.script)).then(v=>[...new Uint8Array(v)].map(b=>b.toString(16).padStart(2,'0')).join('')),candidateBytes:result.candidateBytes.length,storageSame:storage===this.ctx.storage};
+   try{producer.assertCurrent(result,{...lease});}catch{otherLeaseDenied=true;}
+   result.candidateBytes[0]^=1;try{producer.assertCurrent(result,lease);}catch{mutatedDenied=true;}result.candidateBytes[0]^=1;
+   abort.abort();try{producer.assertCurrent(result,lease);}catch{expiredDenied=true;}
+   return{ok:true,otherLeaseDenied,mutatedDenied,expiredDenied,claims:[result.sourceIdentityVerified,result.scopeVerified,result.authorizesEffects,result.completePackage,result.operationalReadiness],cloneDenied,otherDenied,material:result.material,scriptHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(result.originalContext.artifact.script)).then(v=>[...new Uint8Array(v)].map(b=>b.toString(16).padStart(2,'0')).join('')),candidateBytes:result.candidateBytes.length,storageSame:storage===this.ctx.storage};
   }catch(e){return{ok:false,error:e.message};}finally{clearTimeout(timer);abort.abort();storage.transaction=nativeTransaction;}
  }
  async holdReady(){return typeof this.releaseHeld==='function';}
@@ -60,7 +63,7 @@ async function harness(mode='normal'){
   const lease={signal:abort.signal,assertCurrent(){if(abort.signal.aborted)throw Error('expired');}};
   let count=0;
   storage.transaction=(...args)=>{count++;const n=count;
-   if(mode==='ack-write-failed'&&n===3)return Promise.reject(Error('SYN unavailable before ack transaction'));
+   if(mode==='claim-not-committed'&&n===1||mode==='ack-write-failed'&&n===3)return Promise.reject(Error('SYN unavailable before ack transaction'));
    return Reflect.apply(native,storage,args).then(value=>{
     if(mode==='claim-ack-unknown'&&n===1||mode==='material-ack-unknown'&&n===2)throw Error('SYN actual transaction ACK lost');
     return value;
@@ -73,7 +76,7 @@ async function harness(mode='normal'){
     return{fulfilled:results.filter(r=>r.status==='fulfilled').length,rows:[...await storage.list()]};
    }
    let claim,firstDenied=false;try{claim=await store.claim(intent,commandHash,deadline,lease);}catch{firstDenied=true;}
-   if(mode==='claim-ack-unknown'){
+   if(mode==='claim-ack-unknown'||mode==='claim-not-committed'){
     const before=[...await storage.list()];let replayDenied=false;try{await store.claim({...intent,sourceRevision:'e'.repeat(40)},commandHash,deadline,lease);}catch{replayDenied=true;}
     return{firstDenied,replayDenied,before,after:[...await storage.list()]};
    }
@@ -134,7 +137,7 @@ async function harness(mode='normal'){
 test('C2-A actual native B1+B2+C1 composition retains private factual material, never authority',async()=>{
  const f=await harness();try{
   const before=await f.stub.snapshot(),r=await f.stub.run();assert.equal(r.ok,true,J(r));
-  assert.deepEqual(r.claims,[false,false,false,false,false]);assert.ok(r.cloneDenied&&r.otherDenied&&r.storageSame);
+  assert.deepEqual(r.claims,[false,false,false,false,false]);assert.ok(r.cloneDenied&&r.otherDenied&&r.otherLeaseDenied&&r.mutatedDenied&&r.expiredDenied&&r.storageSame);
   assert.equal(r.material.intent.sourceRevision,M);assert.equal(r.material.originalContext.artifact.sourceRevision,M);assert.equal(r.material.originalContext.original.sourceRevision,'2'.repeat(40));
   assert.equal(r.material.originalContext.legacy.sourceRevision,M);assert.equal(r.material.ownerSelection.project.synthetic,true);assert.equal(r.material.ownerSelection.project.revision,1);
   assert.equal(r.material.originalContext.retirementPolicy,J({...f.x.events,grantId:'original',containerId:f.x.original.containerId,startAt:f.x.at,expiresAt:f.x.at+10000,programHash:f.x.original.programHash,sourceRevision:f.x.original.sourceRevision}));
@@ -163,13 +166,13 @@ test('C2-A actual native B1+B2+C1 composition retains private factual material, 
   assert.equal(after.some(x=>x[0]==='afw.qa-finite-trial.v1:head'),false);
   assert.equal(f.requests.filter(x=>x.startsWith(GH)).length,13);assert.equal(f.requests.filter(x=>x.startsWith(CF)).length,6);
   assert.equal(after.filter(x=>x[0].startsWith('afw.finite-initial-preparation.v1:')).length,4);
-  for(const mode of ['concurrent','claim-ack-unknown','material-ack-unknown','ack-write-failed']){
+  for(const mode of ['concurrent','claim-ack-unknown','claim-not-committed','material-ack-unknown','ack-write-failed']){
    const stub=f.namespace.get(f.namespace.idFromName('SYN-store-'+mode));
    const outcome=await stub.storageCase(mode,r.material);
    if(mode==='concurrent'){assert.equal(outcome.fulfilled,1);assert.equal(outcome.rows.length,1);}
    else{
     assert.equal(outcome.replayDenied,true,mode);assert.deepEqual(outcome.after,outcome.before,mode);
-    if(mode==='claim-ack-unknown'){assert.equal(outcome.firstDenied,true);assert.equal(outcome.after.length,1);}
+    if(mode==='claim-ack-unknown'||mode==='claim-not-committed'){assert.equal(outcome.firstDenied,true);assert.equal(outcome.after.length,mode==='claim-not-committed'?0:1);}
     else{assert.equal(outcome.denied,true);assert.equal(outcome.after.length,3);assert.equal(outcome.after.some(x=>x[0].endsWith(':ack')),false);}
    }
   }
