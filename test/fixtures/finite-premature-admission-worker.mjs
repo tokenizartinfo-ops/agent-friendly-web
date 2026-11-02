@@ -22,11 +22,12 @@ export class Native {
  constructor(ctx,env){this.ctx=ctx;this.env=env;}
  async fetch(request){
   const {mode='missing',field,value}=await request.json(),nativeDb=this.env.DB,ctx=this.ctx;
-  let offset=0,launches=0,closes=0,callbacks=0,reads=0,runs=0,rerun=false,held=null,release;
+  let offset=0,launches=0,closes=0,callbacks=0,reads=0,runs=0,rerun=false,held=null,release,heldRead=false,heldControl=false,pendingObservation=null,sourceChecks=[],reused=null,reuseBefore=null,reuseAfter=null,sealedDenied=false;
   const now=()=>Date.now()+offset,T0=Number(this.env.T0);
   const f=finiteFixture({at:T0}),p=f.plan,s=p.selectors;
   s.resource='https://delegated-canary.agentfriendlyweb.dev/mcp';s.programHash=sha(program);
   p.resources.containerId=ctx.id.toString();
+  const originalDeadline=T0+20000;
   const context={grantId:s.grantId,subject:s.subject,clientId:s.clientId,resource:s.resource,scopes:['afw:project:read']};
   const sqlTime=async()=> (await nativeDb.prepare("SELECT CAST(strftime('%s','now') AS INTEGER)*1000+CAST(substr(strftime('%f','now'),4,3) AS INTEGER) AS t").first()).t;
   await nativeDb.prepare('INSERT INTO site_projects VALUES(?,?,?)').bind(s.projectId,s.subject,1).run();
@@ -64,6 +65,7 @@ export class Native {
      if(mode==='successfalse')return {success:false,meta:{changes:0}};
      if(mode==='malformed')return {success:true,meta:{}};
      if(mode==='pending'){held=new Promise(resolve=>{release=resolve;});await held;}
+     if(mode==='unique')await q.run();
      const result=await q.run();
      if(mode==='lostack'||mode==='rerun-unknown-zero'&&runs===1)throw Error('SYN lost admission ACK');
      if(mode==='postinsert')await nativeDb.prepare("UPDATE delegated_access_grants SET revoked_at=? WHERE id=?").bind(new Date().toISOString(),s.grantId).run();
@@ -82,15 +84,15 @@ export class Native {
   const primary=createFiniteNativePrimaryReader({db,control,now,nativeAdmission});
   const identity=finiteAdmissionIdentity(control);
   const readNominalControl=async()=>{
-   const n=nominalFixture(identity,{sourceRevision:p.source.revision,runtimeVersionId:p.deployments.qaLive.versionId,actorId:p.resources.actorId,monitorHash:p.monitorHash,consentExpiresAt:s.expiresAt},now());
+   const n=nominalFixture(identity,{sourceRevision:p.source.revision,runtimeVersionId:p.deployments.qaLive.versionId,actorId:p.resources.actorId,monitorHash:p.monitorHash,consentExpiresAt:['read-held','runtime-held','pending'].includes(mode)?originalDeadline:s.expiresAt},now());
    const raw=await ctx.storage.get(HEAD);
    return {...n.value,ownedWriters:['reservation','admission','launch'].filter(k=>raw?.writers[k]).map(kind=>({intentId:p.intentId,controlHash:control.controlHash,actorId:p.resources.containerId,kind,claimHash:finiteHash(raw.writers[kind].claim),phase:raw.writers[kind].settlement===null?'issued':'settled'}))};
   };
   const gateOptions={storage:ctx.storage,identity,readPrimary:{reservation:primary.reservation,admission:primary.admission,launch:primary.launch},readNominalControl,nominalIdentity:{sourceRevision:p.source.revision,runtimeVersionId:p.deployments.qaLive.versionId,actorId:p.resources.actorId,monitorHash:p.monitorHash,consentExpiresAt:s.expiresAt},now,timeoutMs:5000};
   // Baseline has no source helper: omit the optional field for meaningful causal RED.
-  const gate=createFiniteAdmissionGate({...gateOptions,...(primary.admissionSource?{admissionSource:primary.admissionSource}:{})});
+  const gate=createFiniteAdmissionGate({...gateOptions,...(primary.admissionSource&&mode!=='no-source'?{admissionSource:primary.admissionSource}:{})});
   const reserve=()=>createSuccessorReservation({db:nativeDb,original,candidate:resolved.candidate,readRetirement:retirement,now}).reserve();
-  if(!['missing','reservation-pending','prior-admission','prior-launch','prior-custody'].includes(mode))await reserve();
+  if(!['missing','reservation-pending','prior-admission','prior-launch','prior-custody','prior-row','prior-launch-row','source-shapes'].includes(mode))await reserve();
   if(mode==='wrong-row'){
    await nativeDb.prepare('DROP TRIGGER dossier_successor_no_update').run();
    await nativeDb.prepare('PRAGMA ignore_check_constraints = ON').run();
@@ -99,6 +101,8 @@ export class Native {
   if(mode==='reservation-pending')await gate.beginReservation();
   if(mode==='prior-admission')await gate.beginAdmission();
   if(mode==='prior-launch')await gate.beginLaunch();
+  if(mode==='prior-row')await nativeDb.prepare('INSERT INTO dossier_node_process_admissions VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(s.grantId,s.projectId,s.subject,s.clientId,s.resource,1,T0,s.expiresAt,p.resources.containerId,'f'.repeat(64),s.programHash,sourceRevision,'cloudflare/debian-trixie',T0,s.expiresAt).run();
+  if(mode==='prior-launch-row')await nativeDb.prepare('INSERT INTO dossier_successor_launch_claims VALUES(?,?,?,?,?,?)').bind(p.trialId,resolved.candidate.scopeHash,p.resources.containerId,'f'.repeat(64),s.grantId,T0).run();
   if(mode==='prior-custody')await ctx.storage.put('afw.node-process-custody.v1:original',{malformed:true});
   let manifest,key,server,nodeControl,host;
   const container={running:false,
@@ -109,29 +113,38 @@ export class Native {
    getTcpPort(){return {fetch:async request=>{if(new URL(request.url).pathname==='/ready'){const proof=createNodeReadiness({key,manifest,now}).respond({body:await request.text(),signature:request.headers.get('x-afw-node-signature')});return new Response(proof.body,{headers:{'Content-Type':'application/json','X-AFW-Node-Signature':proof.signature}});}return server(request);}};},
    async destroy(){closes++;this.running=false;}
   };
+  const guardedStorage={transaction:fn=>ctx.storage.transaction(tx=>fn({get:async k=>{const v=await tx.get(k);if(mode==='read-held'&&!heldRead&&k==='afw.node-process-custody.v1:original'&&(await ctx.storage.get(HEAD))?.writers.admission){await Promise.resolve();heldRead=true;offset=originalDeadline-Date.now()+1;}return v;},put:async(k,v)=>{if(mode==='persist-fail'&&k==='afw.node-process-custody.v1:original')throw Error('SYN custody persistence failure');return tx.put(k,v);}}))};
   const storage=mode.startsWith('rerun-')?{transaction:async fn=>{
    if(rerun)return ctx.storage.transaction(fn);
    try{return await ctx.storage.transaction(async tx=>{const out=await fn(tx);if(runs===1){rerun=true;throw Error('SYN retriable callback abort after insert');}return out;});}
    catch(error){if(!rerun&&runs!==1)throw error;rerun=true;return ctx.storage.transaction(fn);}
-  }}:ctx.storage;
+  }}:['read-held','persist-fail'].includes(mode)?guardedStorage:ctx.storage;
   const hostCtx={storage,id:ctx.id,container};
   const config={enabled:true,db,context,projectId:s.projectId,projectionSecret:'z'.repeat(32),custodyKey:Buffer.alloc(32,7),ctx:hostCtx,program,sourceRevision,window:{startAt:s.startAt,expiresAt:s.expiresAt},
-   makeControl:async props=>({fetch:r=>host.consume(r,props)}),now,
+   makeControl:async props=>{if(mode==='runtime-held'){await Promise.resolve();heldControl=true;offset=originalDeadline-Date.now()+1;}return {fetch:r=>host.consume(r,props)};},now,
    successor:{version:'afw.successor-host.v1',plan,readRetirement:retirement,readDeployment:async()=>({scopeHash:resolved.candidate.scopeHash,sourceRevision,programHash:s.programHash,observedAt:await sqlTime()})},
    ...(mode==='ordinary'?{}:{finiteGate:gate})};
   host=createOwnDurableEventHost(config);
   const tables=['site_projects','delegated_access_grants','dossier_monitoring_consent_events','dossier_node_process_admissions','dossier_node_process_closures','dossier_successor_reservations','dossier_successor_launch_claims','dossier_event_subscription_receipts'];
   const snapshot=async()=>({do:[...await ctx.storage.list()],d1:Object.fromEntries(await Promise.all(tables.map(async name=>[name,(await nativeDb.prepare('SELECT * FROM '+name).all()).results])))});
   const before=await snapshot();let error=null,result=null,laterReservation=null,constructed=null;
-  if(mode==='historical'){
+  if(mode==='source-shapes'){
+   const variants=[{}, {...nativeAdmission,program:''},{...nativeAdmission,programSourceRevision:'f'.repeat(40)},{...nativeAdmission,ctx:{...ctx,id:{toString:()=> '0'.repeat(64)}}},{...nativeAdmission,env:{...env,DB:{}}},{...nativeAdmission,env:{...env,AFW_FINITE_TRIAL_VERSION:{id:'00000000-0000-4000-8000-000000000000'}}}];
+   for(const native of variants){let denied=false;try{createFiniteNativePrimaryReader({db,control,now,nativeAdmission:native});}catch{denied=true;}sourceChecks.push({denied});}
+   for(const options of [{...gateOptions,admissionSource:{}},{...gateOptions,identity:{...identity,controlHash:'0'.repeat(64)},admissionSource:primary.admissionSource}]){let denied=false;try{createFiniteAdmissionGate(options);}catch{denied=true;}sourceChecks.push({denied});}
+  }else if(mode==='historical'){
    offset=p.N1-Date.now()+1;env.AFW_DOSSIER_EVENTS_ENABLED='false';env.AFW_DOSSIER_SUCCESSOR_ENABLED='false';
    await nativeDb.prepare("UPDATE delegated_access_grants SET revoked_at=? WHERE id=?").bind(new Date().toISOString(),s.grantId).run();
    const h=createFiniteOwnNativeCleanupHost({ctx,env,control,sourceRevision:p.canaryContainment.sourceRevision,providerRead:async()=>{throw Error('SYN no provider');},readCustody:async()=>{throw Error('SYN no custody');},readInstance:async()=>{throw Error('SYN no provider');},readNominalControl,nativeCleanup:{program,programSourceRevision:sourceRevision,close:host.close},now});
    constructed={read:await h.gate.read(),seal:await h.gate.seal(),primary:await primary.read()};
    await host.close();
-  }else if(['valid','ordinary'].includes(mode)){
-   const direct=createNodeProcessCustody({...(mode==='valid'?{finiteGate:gate}:{}),enabled:true,db,context,projectId:s.projectId,projectionSecret:'z'.repeat(32),storage:ctx.storage,custodyKey:Buffer.alloc(32,7),containerId:ctx.id.toString(),programHash:s.programHash,sourceRevision,image:'cloudflare/debian-trixie',window:config.window,now,runtime:{launch:async boot=>{const {key:ignored,...m}=boot;void ignored;manifest=m;launches++;},observe:async()=>({...manifest,running:true}),close:async()=>{closes++;}}});
-   try{result=await direct.start();}catch(e){error=e.message;}
+  }else if(['valid','ordinary','reuse'].includes(mode)){
+   const direct=createNodeProcessCustody({...(mode!=='ordinary'?{finiteGate:gate}:{}),enabled:true,db,context,projectId:s.projectId,projectionSecret:'z'.repeat(32),storage:ctx.storage,custodyKey:Buffer.alloc(32,7),containerId:ctx.id.toString(),programHash:s.programHash,sourceRevision,image:'cloudflare/debian-trixie',window:config.window,now,runtime:{launch:async boot=>{const {key:ignored,...m}=boot;void ignored;manifest=m;launches++;},observe:async()=>({...manifest,running:true}),close:async()=>{closes++;}}});
+   try{result=await direct.start();if(mode==='reuse'){reuseBefore=await snapshot();reused=await direct.start();reuseAfter=await snapshot();await gate.seal();try{await direct.start();}catch{sealedDenied=true;}}}catch(e){error=e.message;}
+  }else if(mode==='pending'){
+   let settled=false;const work=host.subscribe(params(auth.projectRef)).then(v=>{result=v;settled=true;},e=>{error=e.message;settled=true;});
+   while(!release&&!settled)await new Promise(resolve=>setTimeout(resolve,1));
+   pendingObservation={settled,closes,launches};offset=originalDeadline-Date.now()+1;release?.();await work;
   }else{
    try{result=await host.subscribe(params(auth.projectRef));}catch(e){error=e.message;}
   }
@@ -139,7 +152,7 @@ export class Native {
   if(['missing','reservation-pending'].includes(mode)){try{laterReservation=await reserve();}catch(e){laterReservation={error:e.message};}}
   // Direct custody is an alternate trusted composition; no host suppression logic.
   if(release)release();
-  return Response.json({mode,before,after,error,result,laterReservation,constructed,launches,closes,callbacks,reads,runs,rerun});
+  return Response.json({mode,before,after,error,result,laterReservation,constructed,launches,closes,callbacks,reads,runs,rerun,heldRead,heldControl,pendingObservation,sourceChecks,reused,reuseBefore,reuseAfter,sealedDenied,originalDeadline});
  }
 }
 const worker={fetch(request,env){return env.AFW_DOSSIER_EVENTS_NODE.get(env.AFW_DOSSIER_EVENTS_NODE.idFromName('afw-own-event-first-successor-v1')).fetch(request);}};

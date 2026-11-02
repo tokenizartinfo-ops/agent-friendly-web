@@ -3,7 +3,7 @@ name: Finite C3 premature admission temporary qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-own-finite-primary.mjs', 'lib/mcp-own-finite-admission-gate.mjs', 'lib/mcp-own-finite-cleanup-host.mjs', 'lib/mcp-own-durable-host.mjs', 'lib/mcp-node-process-custody.mjs', 'test/mcp-own-finite-premature-admission-native.test.mjs', 'test/fixtures/finite-premature-admission-worker.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-own-finite-primary.mjs', 'lib/mcp-own-finite-admission-gate.mjs', 'lib/mcp-own-finite-cleanup-host.mjs', 'lib/mcp-own-durable-host.mjs', 'lib/mcp-node-process-custody.mjs', 'test/mcp-own-finite-premature-admission-native.test.mjs', 'test/fixtures/finite-premature-admission-*.mjs', 'test/mcp-node-process-custody.test.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -21,7 +21,7 @@ jobs:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: C3 causal native regressions
-        run: node --test test/mcp-own-finite-premature-admission-native.test.mjs
+        run: node --test test/mcp-own-finite-premature-admission-native.test.mjs test/mcp-node-process-custody.test.mjs test/mcp-node-process-custody-native.test.mjs test/mcp-own-durable-host.test.mjs test/mcp-own-finite-admission-gate.test.mjs test/mcp-own-finite-cleanup-native.test.mjs test/mcp-own-finite-reduction-native.test.mjs test/mcp-successor-launch-gate.test.mjs test/mcp-successor-reservation-native.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-own-finite-primary.mjs lib/mcp-own-finite-admission-gate.mjs lib/mcp-own-finite-cleanup-host.mjs lib/mcp-own-durable-host.mjs lib/mcp-node-process-custody.mjs test/mcp-own-finite-premature-admission-native.test.mjs test/fixtures/finite-premature-admission-worker.mjs
+        run: npx eslint lib/mcp-own-finite-primary.mjs lib/mcp-own-finite-admission-gate.mjs lib/mcp-own-finite-cleanup-host.mjs lib/mcp-own-durable-host.mjs lib/mcp-node-process-custody.mjs test/mcp-own-finite-premature-admission-native.test.mjs test/fixtures/finite-premature-admission-worker.mjs test/fixtures/finite-premature-admission-native.mjs test/mcp-node-process-custody.test.mjs

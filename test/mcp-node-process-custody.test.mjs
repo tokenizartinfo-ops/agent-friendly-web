@@ -133,52 +133,21 @@ test('finite seal blocks actual custody admission before primary or launch',asyn
  }finally{f.close();}
 });
 
+
 test('finite settled admission reuse observes readiness without another writer or launch',async()=>{
- const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs'),{finiteGateFixture}=await import('./fixtures/finite-admission-gate.mjs'),{nominalFixture}=await import('./fixtures/finite-nominal-control.mjs'),{finiteHash}=await import('../lib/mcp-finite-evidence.mjs'),{createHash}=await import('node:crypto');
- const m=await load(),f=fixture(),g=finiteGateFixture(Date.now()-1000);
- try{
-  f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();g.identity.containerId=f.config.containerId;g.identity.grantHash=createHash('sha256').update(ctx.grantId).digest('hex');g.options.now=Date.now;f.config.now=Date.now;
-  g.options.readNominalControl=async()=>{const q=nominalFixture(g.identity,g.options.nominalIdentity,Date.now()),raw=g.rows.get('afw.own-finite-admission.v1:head');return {...q.value,ownedWriters:['reservation','admission','launch'].filter(k=>raw?.writers[k]).map(kind=>({intentId:g.identity.intentId,controlHash:g.identity.controlHash,actorId:g.identity.containerId,kind,claimHash:finiteHash(raw.writers[kind].claim),phase:raw.writers[kind].settlement===null?'issued':'settled'}))};};
-  g.primary.admission=async({identityHash,claimHash})=>({purpose:'afw.own-finite-admission.v1:settled',identityHash,kind:'admission',claimHash,primaryRowHash:finiteHash(f.db.prepare('SELECT * FROM dossier_node_process_admissions WHERE grant_id=?').get(ctx.grantId)),settledAt:Date.now()});
-  const gate=createFiniteAdmissionGate(g.options),a=m.createNodeProcessCustody({...f.config,finiteGate:gate});
-  const first=await a.start(),before=JSON.stringify(f.rows());assert.equal(first.ready,true);
-  assert.deepEqual(await a.start(),first);assert.equal(JSON.stringify(f.rows()),before);assert.equal(f.launches(),1);
-  await gate.seal();await assert.rejects(a.start());assert.equal(f.launches(),1);
- }finally{f.close();}
+ const {exercise}=await import('./fixtures/finite-premature-admission-native.mjs');
+ const r=await exercise('reuse');
+ assert.equal(r.error,null);assert.equal(r.result.ready,true);assert.deepEqual(r.reused,r.result);assert.deepEqual(r.reuseBefore,r.reuseAfter);assert.equal(r.launches,1);assert.equal(r.sealedDenied,true);
 });
-
 test('finite custody retains the narrow deadline after a held admission read and permits independent close',async()=>{
- const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
- const {finiteWriterFixture}=await import('./fixtures/finite-admission-gate.mjs');
- const {createHash}=await import('node:crypto');const f=fixture();try{
-  f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();
-  let at=f.config.now(),held=false;const deadline=at+20000;
-  const g=finiteWriterFixture({now:()=>at,deadline,identity:{containerId:f.config.containerId,grantHash:createHash('sha256').update(ctx.grantId).digest('hex')}});
-  const storage=f.config.storage;
-  const a=(await load()).createNodeProcessCustody({...f.config,now:()=>at,finiteGate:createFiniteAdmissionGate(g.options),storage:{transaction:fn=>storage.transaction(tx=>fn({...tx,get:async k=>{const v=await tx.get(k);if(!held){await Promise.resolve();held=true;at=deadline;}return v;}}))}});
-  await assert.rejects(a.start());assert.equal(held,true);assert.equal(f.launches(),0);
-  assert.equal(f.db.prepare('SELECT count(*) n FROM dossier_node_process_admissions').get().n,0);
-  assert.equal((await a.close()).closed,true);
-  assert.equal(g.rows.get('afw.own-finite-admission.v1:head').writers.admission.settlement,null);
- }finally{f.close();}
+ const {exercise}=await import('./fixtures/finite-premature-admission-native.mjs');
+ const r=await exercise('read-held');
+ assert.equal(r.heldRead,true);assert.equal(r.error,'Own durable event host unavailable');assert.equal(r.launches,0);assert.equal(r.runs,0);assert.equal(r.closes,1);
+ const raw=r.after.do.find(([k])=>k==='afw.own-finite-admission.v1:head')[1];assert.equal(raw.writers.admission.settlement,null);
 });
-
 test('finite custody passes its retained lease into REAL runtime makeControl continuation',async()=>{
- const {createOriginalContainerRuntime}=await import('../lib/mcp-original-container-runtime.mjs');
- const {createFiniteAdmissionGate}=await import('../lib/mcp-own-finite-admission-gate.mjs');
- const {finiteWriterFixture}=await import('./fixtures/finite-admission-gate.mjs');
- const {createHash}=await import('node:crypto');const f=fixture();
- try{
-  f.db.exec(readFileSync('db/dossier-node-process.sql','utf8'));f.grant();
-  let at=f.config.now(),starts=0,running=false,releaseControl,enteredControl,stops=0;const deadline=at+20000;
-  const entered=new Promise(resolve=>{enteredControl=resolve;}),held=new Promise(resolve=>{releaseControl=resolve;}),program='/* fixed synthetic Container source */';
-  const container={get running(){return running;},async start(){starts++;running=true;},async setInactivityTimeout(){},async interceptOutboundHttp(){},getTcpPort(){throw Error('no readiness expected');},async destroy(){stops++;running=false;}};
-  const runtime=createOriginalContainerRuntime({enabled:true,ctx:{id:{toString:()=>f.config.containerId},container},program,sourceRevision:f.config.sourceRevision,window:f.config.window,makeControl:async()=>{enteredControl();await held;return{fetch:async()=>new Response(null,{status:404})};},now:()=>at});
-  const g=finiteWriterFixture({now:()=>at,deadline,identity:{containerId:f.config.containerId,grantHash:createHash('sha256').update(ctx.grantId).digest('hex')}});
-  const a=(await load()).createNodeProcessCustody({...f.config,programHash:createHash('sha256').update(program).digest('hex'),now:()=>at,runtime,finiteGate:createFiniteAdmissionGate(g.options)});
-  const pending=a.start();await entered;at=deadline;releaseControl();await assert.rejects(pending);
-  assert.equal(starts,0,'custody lease must survive nested runtime await');assert.ok(stops>=1);
-  assert.equal((await a.close()).closed,true);assert.equal(running,false);
-  assert.equal(g.rows.get('afw.own-finite-admission.v1:head').writers.admission.settlement,null);
- }finally{f.close();}
+ const {exercise}=await import('./fixtures/finite-premature-admission-native.mjs');
+ const r=await exercise('runtime-held');
+ assert.equal(r.heldControl,true);assert.equal(r.error,'Own durable event host unavailable');assert.equal(r.launches,0);assert.ok(r.closes>=1);
+ const raw=r.after.do.find(([k])=>k==='afw.own-finite-admission.v1:head')[1];assert.equal(raw.writers.admission.settlement,null);
 });
