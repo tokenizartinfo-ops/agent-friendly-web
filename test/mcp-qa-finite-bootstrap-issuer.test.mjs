@@ -90,7 +90,7 @@ test('actual fixed CLI consumes event file and original environment without fake
 
 test('original QA observation survives cumulative post-observation latency beyond5s inside original Pend',async()=>{
  const f=await fixture('cumulative-latency');try{
-  let result,error;try{result=await f.api.issueFiniteQaBootstrap(f.options);}catch(e){error=e;}
+  let result,error;try{result=await f.api.issueFiniteQaBootstrap(f.options);}catch(e){error=e.message;}
   const original=f.state.observation;assert(original,'actual final CF observation was reached');
   const elapsedWall=Date.now()-original.wall,elapsedMono=performance.now()-original.mono;
   assert(elapsedWall>5000&&elapsedMono>5000,'actual original clocks crossed5s');
