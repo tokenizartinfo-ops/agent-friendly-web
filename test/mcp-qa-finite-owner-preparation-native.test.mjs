@@ -10,7 +10,7 @@ import {finitePublicProfileTemplate} from '../lib/mcp-qa-finite-profile.mjs';
 const qaLimiterBinding=finitePublicProfileTemplate('qaLive').bindings.find(b=>b.type==='ratelimit').name;
 const qaVersionBinding=finitePublicProfileTemplate('qaLive').bindings.find(b=>b.type==='version_metadata').name;
 const origin='https://delegated-canary.agentfriendlyweb.dev';
-async function native(t,mode='normal',versionBinding=qaVersionBinding,limiterBinding='DELEGATED_RATE_LIMITER'){
+async function native(t,mode='normal',versionBinding=qaVersionBinding,limiterBinding=qaLimiterBinding){
  const {privateKey,publicKey}=await generateKeyPair('RS256'),jwk={...await exportJWK(publicKey),kid:'finite-source-native',alg:'RS256'};
  const bundle=await build({entryPoints:['test/fixtures/finite-owner-worker.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],plugins:[{name:'synthetic-fixed-source',setup(b){b.onResolve({filter:/mcp-qa-finite-owner-source\.mjs$/},()=>({path:process.cwd()+'/test/fixtures/finite-owner-source.mjs'}));}}]});
  let jwksReads=0;
