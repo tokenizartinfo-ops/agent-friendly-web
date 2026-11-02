@@ -113,3 +113,32 @@ Accepted Important: verbatim configuration/module/base64/byte-hash/receipt/histo
 Behavioral regression is a native shared-input matrix, not source-text or function-call-count assertions: both public pure backup qualification and actual native historical reader receive the same metadata, verify exact bytes and source linkage, and reject module shape/encoding/hash, secret values, unknown config and physical namespace changes. A corrupted native legacy journal must reject the historical reader while the pure baseline qualifier still succeeds; this protects the intentionally different responsibilities. Loaded receipt-version and source-link mismatches must deny both.
 
 Because this is behavior-preserving extraction, the new matrix first establishes baseline GREEN, then runs unchanged after extraction; no fabricated behavioral RED is claimed. Existing upload-native winner/backup/pre-send/wrong-module consumers also run. No compiler rebuild is planned because dependency graph/imports/exports and source constraints are unchanged; earlier5705 measurements remain earlier-source evidence only.
+
+Baseline run0f5bf8f6f3148b6f2b7b49a25bd964a1d38c717f/Actions41548494439/job125629860406/attempt1:36tests,34PASS/2FAIL (one failing subtest plus enclosing test); lintPASS. Fixture issue, not a product divergence: duplicating the entire1.83MiB module made HTTP metadata exceed its3MiB cap, so the native reader correctly rejected at http before the shared module-count boundary, while the pure qualifier rejected metadata. The extra-module specimen now adds an empty second module, staying within the transport cap and reaching the intended count check. No production source changed in this correction; original HTTP cap and error classification preserved. Upload command did not execute because the first command failed.
+
+Corrected baselinea911a379aff6fb9f3205c8f624841544701e394b/treed88a8641e5814a032aa09426d7c6493ef87a5dca, Actions41548722146/job125630625238/attempt1:36historical/native-parity+9upload-consumer PASS,0fail/cancel/skip; scoped lint clean. The extraction follows this established baseline; no production behavior changed before these observations.
+
+### Fix round1 post-extraction qualification and same-reviewer handoff
+
+Single product extraction56c04288a7b4a3574511e8013d37e0483e6b94ea/tree96243b28db890f8f27a34ff31543e9a705e4c722. New PRIVATE nonexported qualifyHistoricalVersionMaterial contains the one original validation block and returns {configuration,metadataProof,bytes}. qualifyFiniteInitialHistoricalBaseline retains its sanitized raw metadata projection, defensive Uint8Array copy and receipt source fields; version retains UTF8/script conversion, original manifest/policy validation and later legacy/D1 history. No import/export/caller/effect or configuration change.
+
+Actual final [Actions41548928626](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41548928626), job125631300881, attempt1, exact head56c04288:36historical/native parity +9upload-native tests PASS (45total),0fail/0cancel/0skip. Scoped lint0errors/0warnings. Artifact inventory0 for this and both preceding fix runs. Baseline and post-extraction run the same assertions; the only earlier failure was the recorded transport-cap fixture mismatch.
+
+Exact covering commands, hosted ubuntu24.04 / Node22:
+- `npm ci --ignore-scripts --no-audit --no-fund`
+- `node --test test/mcp-qa-finite-historical-source-native.test.mjs` —36PASS,0fail/cancel/skip.
+- `node --test --test-name-pattern='actual native winner|private backup|fresh pre-send|wrong-uploaded-module' test/mcp-qa-finite-initial-upload-native.test.mjs` —9PASS,0fail/cancel/skip; runs actual uploader through shared historical qualification and JSON wire/readback.
+- `npx eslint lib/mcp-qa-finite-historical-source.mjs test/mcp-qa-finite-historical-source-native.test.mjs` —clean.
+
+ACTUAL native workerd/DO/SQLite/D1, qualified bytes/configuration/error behavior and actual outgoing upload serialization; SYN external source receipts/pins, provider responses/credentials/approval ceiling and workflow delivery remain explicit, unchanged boundaries. No cloud runtime/provider probe or actual initial intent. The test-only qualifyBaseline method is confined to a generated fixture class; no new production RPC. The parity matrix is behavioral and does not grep implementation text, count helper calls or mock the qualifier.
+
+Existing npm esbuild-kit/eslint9.39.4 deprecations, punycode/Actions Node20-runtime migration and Git notices are unchanged deferred baseline noise. No dependencies/lockfile/tool upgrades. No unrelated compiler/profile/residency rebuild: dependency imports/exports are unchanged. Earlier5705 exact compiled sizes/hashes remain earlier-source evidence and are NOT asserted for56c04288.
+
+Exact code/test/qualifier readbacks at56c04288:
+- lib/mcp-qa-finite-historical-source.mjs — 3f0bf487efd72aa2356fd9982f98a938d328e72d exact
+- test/mcp-qa-finite-historical-source-native.test.mjs — a4464db2b94ad1b7825f032d3d54a8b990e881b8 exact
+- .github/workflows/finite-task1-temporary-qualifier.yml — 96d9c247f69792940f875e0abb49d7064d07734f exact
+
+Every ref used expectedSHA/force:false. Re-review FIX_BASE resolves to39f0b7265c21b3b847e41989655f263c02160bf5; Root185f4dbb review+ledger additions are preserved. This implementer changes4 files relative to185f4dbb: production historical source, its native test, temporary qualifier and THIS report. Final docs-only commit records this evidence; resulting docHEAD/tree/ref and exact file readbacks are returned in handoff. No self-embedded future commit hash or fresh build claim for the docs commit.
+
+Task C2-B2a fix round1/5: implementation addresses the duplicated validation block and stale report status; same-reviewer verdict PENDING. STOP / release writer for scoped review39f0b726..fixDocHEAD. No main/runtime/provider/grant/permission/token/role/initialcommand/ownerSource/activation/rollback/Container/Max/mail/chat/automation action; no local source/clone/deps/build/temp/download/service. operationalReadiness=false;completePackage=false;PCoff=false.
