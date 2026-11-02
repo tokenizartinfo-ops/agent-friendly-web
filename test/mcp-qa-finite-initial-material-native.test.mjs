@@ -19,12 +19,14 @@ async function harness(mode='normal'){
  const b=await mf.getBindings(),ns=b.AFW_RELEASE_EVENTS_NODE,x=initialHistoryFixture({original:ns.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()});x.ids={original:x.original.containerId,candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()};
  const program='SYNTHETIC actual resident candidate program',script='// SYNTHETIC B1 candidate bytes\nexport default{};',bytes=Buffer.from(script),compressed=gzipSync(bytes,{level:9,mtime:0}),resident={purpose:'afw.finite-candidate-residency.v1',encoding:'gzip-base64.v1',sourceRevision:M,sourceTree:TREE,sourceCheck:'git-inputs-before-after-v1',programHash:sha(program),module:{name:'index.mjs',sha256:sha(bytes),bytes:bytes.length},compressedSha256:sha(compressed),compressedBytes:compressed.length,content:compressed.toString('base64')};
  const w=await bootstrapWorld({sourceRevision:M,sourceTree:TREE,modules:{qaLive:{module:{name:'index.mjs',sha256:sha('export default{};'),bytes:17,exports:[...finitePublicProfileTemplate('qaLive').exports]}}},files:{'qaLive/index.mjs':'export default{};'}});
- const created=new Date(Math.floor((Date.now()-1000)/1000)*1000).toISOString(),command={id:COMMAND,user:{id:290715446,login:'tokenizartinfo-ops',type:'User'},author_association:'OWNER',body:'/afw-qa-finite-prepare v1 '+M+' '+UUID,created_at:created,updated_at:created,issue_url:GH+'/issues/497'};w.map.set('/issues/comments/'+COMMAND,command);
+ const created=new Date(Math.floor((Date.now()-1000)/1000)*1000).toISOString().replace('.000Z','Z'),command={id:COMMAND,user:{id:290715446,login:'tokenizartinfo-ops',type:'User'},author_association:'OWNER',body:'/afw-qa-finite-prepare v1 '+M+' '+UUID,created_at:created,updated_at:created,issue_url:GH+'/issues/497'};w.map.set('/issues/comments/'+COMMAND,command);
  const approval=Date.now()+86400000;
  const f={mf,x,w,command,requests:[],mode,held:null,release:null,commandReads:0,approval};
  const entry=String.raw`
  import{DurableObject}from'cloudflare:workers';
  import{createPrivateQaFiniteInitialMaterial}from'./lib/mcp-qa-finite-initial-material.mjs';
+ import{createFiniteInitialMaterialStore}from'./lib/mcp-qa-finite-initial-material-store.mjs';
+ import{hashFiniteInitialMaterialRecord}from'./lib/mcp-qa-finite-initial-material-records.mjs';
  import{observeFiniteOwnerStageWork}from'./lib/mcp-qa-finite-stage-work.mjs';
  export class Node extends DurableObject{}
  export class Initial extends DurableObject{
@@ -34,6 +36,8 @@ async function harness(mode='normal'){
   const abort=new AbortController(),entered=Date.now(),mono=performance.now(),end=entered+(mode==='held-parent'?120:30000);
   const lease=Object.freeze({signal:abort.signal,assertCurrent(){if(abort.signal.aborted||Date.now()>=end||performance.now()-mono>=end-entered)throw Error('parent expired');}});
   const timer=setTimeout(()=>abort.abort(),end-entered),storage=this.ctx.storage;
+  const nativeTransaction=storage.transaction;
+  if(mode==='held-parent')storage.transaction=(...args)=>Reflect.apply(nativeTransaction,storage,args).then(value=>new Promise(resolve=>{this.releaseHeld=()=>resolve(value);}));
   const producer=createPrivateQaFiniteInitialMaterial({ctx:this.ctx,env:this.env});
   let result;
   try{
@@ -45,7 +49,41 @@ async function harness(mode='normal'){
    try{producer.assertCurrent(structuredClone(result),lease);}catch{cloneDenied=true;}
    try{createPrivateQaFiniteInitialMaterial({ctx:this.ctx,env:this.env}).assertCurrent(result,lease);}catch{otherDenied=true;}
    return{ok:true,claims:[result.sourceIdentityVerified,result.scopeVerified,result.authorizesEffects,result.completePackage,result.operationalReadiness],cloneDenied,otherDenied,material:result.material,scriptHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(result.originalContext.artifact.script)).then(v=>[...new Uint8Array(v)].map(b=>b.toString(16).padStart(2,'0')).join('')),candidateBytes:result.candidateBytes.length,storageSame:storage===this.ctx.storage};
-  }catch(e){return{ok:false,error:e.message};}finally{clearTimeout(timer);abort.abort();}
+  }catch(e){return{ok:false,error:e.message};}finally{clearTimeout(timer);abort.abort();storage.transaction=nativeTransaction;}
+ }
+ async holdReady(){return typeof this.releaseHeld==='function';}
+ async releaseHold(){this.releaseHeld?.();this.releaseHeld=null;}
+ async storageCase(mode,template){
+  const storage=this.ctx.storage,native=storage.transaction,abort=new AbortController();
+  const lease={signal:abort.signal,assertCurrent(){if(abort.signal.aborted)throw Error('expired');}};
+  let count=0;
+  storage.transaction=(...args)=>{count++;const n=count;
+   if(mode==='ack-write-failed'&&n===3)return Promise.reject(Error('SYN unavailable before ack transaction'));
+   return Reflect.apply(native,storage,args).then(value=>{
+    if(mode==='claim-ack-unknown'&&n===1||mode==='material-ack-unknown'&&n===2)throw Error('SYN actual transaction ACK lost');
+    return value;
+   });
+  };
+  try{
+   const store=createFiniteInitialMaterialStore({storage}),intent=template.intent,deadline=Date.now()+20000,commandHash='f'.repeat(64);
+   if(mode==='concurrent'){
+    const results=await Promise.allSettled([store.claim(intent,commandHash,deadline,lease),store.claim(intent,commandHash,deadline,lease)]);
+    return{fulfilled:results.filter(r=>r.status==='fulfilled').length,rows:[...await storage.list()]};
+   }
+   let claim,firstDenied=false;try{claim=await store.claim(intent,commandHash,deadline,lease);}catch{firstDenied=true;}
+   if(mode==='claim-ack-unknown'){
+    const before=[...await storage.list()];let replayDenied=false;try{await store.claim({...intent,sourceRevision:'e'.repeat(40)},commandHash,deadline,lease);}catch{replayDenied=true;}
+    return{firstDenied,replayDenied,before,after:[...await storage.list()]};
+   }
+   const context=structuredClone(template.originalContext);
+   Object.assign(context,{trialId:claim.ids.trialId,withdrawalRequestId:claim.ids.withdrawalRequestId,saveIdempotencyKey:claim.ids.saveIdempotencyKey});
+   context.publication.activationKey=claim.ids.activationKey;
+   const material={...template,claimHash:claim.claimHash,preconnectionId:claim.ids.preconnectionId,originalContext:context,observedAt:Date.now()};
+   material.materialHash=hashFiniteInitialMaterialRecord('InitialMaterial',material);
+   let denied=false;try{await store.publish(claim,material,lease);}catch{denied=true;}
+   const before=[...await storage.list()];let replayDenied=false;try{await store.publish(claim,material,lease);}catch{replayDenied=true;}
+   return{denied,replayDenied,before,after:[...await storage.list()]};
+  }finally{abort.abort();storage.transaction=native;}
  }
  async blocked(){
   const abort=new AbortController(),lease={signal:abort.signal,assertCurrent(){if(abort.signal.aborted)throw Error('expired');}};
@@ -71,7 +109,6 @@ async function harness(mode='normal'){
  const built=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],plugins:[plugin],define:{'globalThis.__AFW_FINITE_CANDIDATE_RESIDENCY__':J(resident),'globalThis.__AFW_QA_SOURCE_REVISION__':J(M),'globalThis.__AFW_FINITE_SOURCE_TREE__':J(TREE),'globalThis.__AFW_NODE_PROGRAM__':J(program),'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':J(w.expected)}});
  await mf.setOptions(convertV4MiniflareOptions({...base,script:built.outputFiles[0].text,outboundService:async req=>{
   f.requests.push(req.url);assert.equal(req.method,'GET');
-  if(f.mode==='held-parent'&&req.url===GH+'/issues/comments/'+COMMAND)await new Promise(resolve=>{f.release=resolve;});
   let value;
   if(req.url.startsWith(GH)){
    assert.equal(req.headers.get('authorization'),null);value=structuredClone(await w.get(req.url.slice(GH.length)));
@@ -88,7 +125,7 @@ async function harness(mode='normal'){
  }}));
  const bindings=await mf.getBindings();f.stub=bindings.AFW_INDEPENDENT_CLOSURE.get(bindings.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB');
  await seedInitialHistory(f.db,x);await f.stub.seed(x.rows);f.resident=resident;
- return f;
+ f.namespace=bindings.AFW_INDEPENDENT_CLOSURE;return f;
 }
 test('C2-A actual native B1+B2+C1 composition retains private factual material, never authority',async()=>{
  const f=await harness();try{
@@ -104,7 +141,7 @@ test('C2-A actual native B1+B2+C1 composition retains private factual material, 
   const original=finiteFields({...r.material.originalContext,artifact:{script:'private script',...r.material.originalContext.artifact}},['artifact','scope','original','publication','cancellations','retirementPolicy','withdrawalRequestId','saveIdempotencyKey','legacy','trialId']);
   const identity=Object.fromEntries(['sourceRevision','sourceTree','programHash','workerHash','sourceCheck'].map(k=>[k,original.artifact[k]]));
   const projection=finiteData({...original,artifact:identity});
-  const task4=sha('afw.finite-original-context.v1\\n'+initialCanonical(projection));
+  const task4=sha('afw.finite-original-context.v1\n'+initialCanonical(projection));
   assert.equal(initialHash('afw.finite-original-context.v1',finiteData(decoded.originalContext)),task4);
   const oversized=structuredClone(decoded);oversized.originalContext.legacy.control+=' '.repeat(33000);
   assert.ok(Buffer.byteLength(initialCanonical(oversized))<65536,'whole material still below 64KiB');
@@ -114,6 +151,16 @@ test('C2-A actual native B1+B2+C1 composition retains private factual material, 
   assert.equal(after.some(x=>x[0]==='afw.qa-finite-trial.v1:head'),false);
   assert.equal(f.requests.filter(x=>x.startsWith(GH)).length,13);assert.equal(f.requests.filter(x=>x.startsWith(CF)).length,6);
   assert.equal(after.filter(x=>x[0].startsWith('afw.finite-initial-preparation.v1:')).length,4);
+  for(const mode of ['concurrent','claim-ack-unknown','material-ack-unknown','ack-write-failed']){
+   const stub=f.namespace.get(f.namespace.idFromName('SYN-store-'+mode));
+   const outcome=await stub.storageCase(mode,r.material);
+   if(mode==='concurrent'){assert.equal(outcome.fulfilled,1);assert.equal(outcome.rows.length,1);}
+   else{
+    assert.equal(outcome.replayDenied,true,mode);assert.deepEqual(outcome.after,outcome.before,mode);
+    if(mode==='claim-ack-unknown'){assert.equal(outcome.firstDenied,true);assert.equal(outcome.after.length,1);}
+    else{assert.equal(outcome.denied,true);assert.equal(outcome.after.length,3);assert.equal(outcome.after.some(x=>x[0].endsWith(':ack')),false);}
+   }
+  }
   const claim=after.find(x=>x[0]===ONCE)[1],calls=f.requests.length;const replay=await f.stub.run();assert.equal(replay.ok,false);assert.equal((await f.stub.snapshot()).find(x=>x[0]===ONCE)[1],claim);assert.ok(f.requests.length-calls<=1);
  }finally{await f.mf.dispose();}
 });
@@ -123,10 +170,10 @@ for(const mode of ['wrong-owner','edited','expired-command','command-drift'])tes
 test('C2-A partially consumed original parent aborts held child, retains real promise and writes nothing late',async()=>{
  const f=await harness('held-parent');try{
   const before=await f.stub.snapshot(),running=f.stub.run('held-parent');
-  for(let n=0;n<100&&!f.release;n++)await new Promise(r=>setTimeout(r,10));
-  assert.equal(typeof f.release,'function');const r=await running;assert.equal(r.ok,false);
-  assert.equal(await f.stub.blocked(),true,'underlying provider promise retained after parent expiry');
-  f.release();await new Promise(r=>setTimeout(r,80));
+  let held=false;for(let n=0;n<100&&!held;n++){held=await f.stub.holdReady();if(!held)await new Promise(r=>setTimeout(r,10));}
+  assert.equal(held,true);const r=await running;assert.equal(r.ok,false);
+  assert.equal(await f.stub.blocked(),true,'actual native storage ACK promise retained after parent expiry');
+  await f.stub.releaseHold();await new Promise(r=>setTimeout(r,80));
   assert.equal(await f.stub.blocked(),false);assert.deepEqual(await f.stub.snapshot(),before);
- }finally{f.release?.();await f.mf.dispose();}
+ }finally{await f.stub.releaseHold();await f.mf.dispose();}
 });
