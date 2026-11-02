@@ -111,3 +111,42 @@ Further self-review REDs closed copied-DTO authority, inherited domain lookup/UU
 No known unresolved Task1 code issue. Actual complete package/private source context/custody/default native material remain unmounted C2 gates. Source coverage qualifies only the implemented primitives under synthetic external provenance; it does not attest installed provider bindings, the private setup completion, a finite occurrence, cloud liveness or PC-off. All future SEND paths must use the shared coordinator and actual once-send/source gates in Task2; Task3 owns sleep/adoption and full phase/cleanup composition. Original C0 sole alarm, four-argument18-stage business wrapper and70s/5s/20s semantics are unchanged.
 
 STOP WRITES after documentation CAS/readback. Root performs fresh scoped review before another product writer.
+
+
+## Fix round 1/5 — coordinator settlement (2026-11-02 UTC)
+
+Status: DONE, source-only implementation; scoped root re-review pending. This section supersedes the prior no-known-issue statement for the review finding and records its fix. Review HEAD087f6427004ecabd89e9989dd87d0d4fde449424; write BASEef30cf6c3c69df97d5c5944ea3cf153bc5fac038 (tree960e195ae016a824bcfd87d0853d296434d33da7), verified pause-documentation-only descendant. Final code/test HEAD5cf7a373457b313397aa0fa249385d02ef610146; final documentation HEAD is this report's enclosing commit, supplied after exact CAS/readback in the implementer return. Repository tokenizartinfo-ops/agent-friendly-web, branch feat/finite-native-cleanup-20261101; all five changed paths read back exactly at code HEAD. Rollback remains a forward revert preserving other work.
+
+Finding: **[P2] Keep coordinator occupied until underlying work settles**, original lib/mcp-qa-finite-launch-inventory.mjs:69. bounded() can reject its caller while operation(check) still awaits storage/provider. Unconditional release let a distinct unexpired parent enter the same actor section. Deadline checks cannot cancel already-issued work. Root approved including the nested snapshot timeout race in the same finding/round; rulings were ledgered before production edits.
+
+### Change and limits
+
+withPrivateQaFiniteLaunchCoordinator now separately retains the actual callback promise. Caller failure remains bounded by its original parent, but slot release occurs on callback fulfillment or rejection. Both settlement outcomes are observed. Queue timeout releases only its own gate; the predecessor chain still prevents bypass. No clock, parent budget, authority lifetime or cancellation assumption is renewed.
+
+readPrivateQaFiniteControlSnapshot keeps its original bounded public behavior. Shared private readFiniteControlSnapshot preserves all decoding, identity, hash and deadline checks. The new source-internal readPrivateQaFiniteControlSnapshotUnderCoordinator(options) uses the same exact {storage,nativePin,plan,parent} inputs and awaits the actual transaction promise without an inner timeout race. Only the inventory coordinator imports that variant. Its outer caller still fails within the original parent; late transaction returns must pass the unchanged original-parent checks before yielding any result. No caller flag, settlement DTO or registration is added to the public snapshot interface. Inspection of the complete fixed workflow enumeration path found sequential direct awaits and no additional nested timeout race.
+
+An outstanding callback that never settles can keep this actor's coordinator occupied indefinitely. That is deliberate exclusion of unknown work, with unavailable/admin_pending handling; it is not evidence of cancellation, safe restoration, or renewed execution authority. Future source transport/SEND callbacks must await their actual work, not detach it behind a new timeout wrapper. C2 context and default source guards remain unavailable; no business method, provider operation, runtime or occurrence was added.
+
+### Covering tests and hosted evidence
+
+The added native cases hold the active provider transport, direct storage callback and nested snapshot storage acknowledgement beyond a narrower original500ms parent. A distinct original5s parent/context is prepared before the hold; its coordinator entry is attempted only after the first caller has returned unavailable. Tests assert the old work is still unsettled then, the fresh invocation cannot enter before actual settlement, the slot eventually releases, the fresh write succeeds, late expired work cannot write, and no unhandled rejection occurs. The storage holds execute actual workerd/SQLite transactions and delay the acknowledgement outside their transaction callback. This retains the unresolved storage API promise while allowing workerd timer events. Existing queued-expiry, nested-prepare and protected SEND race tests remain included. External provenance/provider data remain explicitly synthetic; actual native storage, pins, decoder, parser and coordinator are exercised.
+
+| Revision | Hosted run / job | Evidence |
+| --- | --- | --- |
+| 481f7c658cb5b23b491388ef0c49e8837038b5af | docs only, skip CI | Finding and round recorded before edits. |
+| 9bd1764f96646c5a018acd289cae74e554cff694 | 41367768265 / 125031491775 | Initial42tests39PASS3FAIL; provider overlap assertion valid; storage/snapshot harness held inside native transaction, blocked workerd timer events and hit its30s blockConcurrencyWhile reset. Those two failures were harness errors, not accepted RED evidence. LintPASS. |
+| 65f54dc12a81aa9931527493117cabc4049f1981 | 41367995719 / 125032185984 | Meaningful RED42tests39PASS3FAIL,0SKIP/CANCELLED; all three fail the intended “fresh parent must not enter while expired callback is outstanding” assertion, true !== false. LintPASS; production unchanged. |
+| 5cf7a373457b313397aa0fa249385d02ef610146 | 41368143785 / 125032621637 | GREEN42PASS0FAIL0SKIP0CANCELLED; scoped lintPASS. |
+
+Final [run41368143785](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41368143785), [job125032621637](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41368143785/job/125032621637): completed/success, push, attempt1, exact codeHEAD, branch and repository1347578006 verified; hosted Nodev22.23.4, artifacts0. Existing dependencies only: npm ci --ignore-scripts --no-audit --no-fund. Workflow action runtime emitted its existing Node20 deprecation/forced Node24 warning; test runtime was Node22 as verified. No test warnings/errors in final qualification.
+
+Commands:
+
+```sh
+node --test test/mcp-qa-finite-launch-records.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-qa-finite-trial-control-native.test.mjs
+npx eslint lib/mcp-qa-finite-launch-inventory.mjs lib/mcp-qa-finite-trial-control.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs
+```
+
+Output: tests42, pass42, fail0, cancelled0, skipped0; lint step success. Temporary qualifier was narrowed to those commands per root scope and remains excluded from integration. No164-test/full-suite repetition, local clone/files/deps/build, private/provider probes, credentials, OAuth, deployment, main merge or HEAD occurrence. No code beyond the two source modules changed; the native test, temporary qualifier and ledger/report comprise the remaining fix delta.
+
+Task1 fix round1/5: implementer considers1 addressed,0 open, pending root scoped re-review; range ef30cf6..5cf7a37. STOP WRITES after final documentation CAS/readback.
