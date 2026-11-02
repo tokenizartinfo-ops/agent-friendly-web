@@ -18,7 +18,7 @@ export async function setup(t,mode='normal'){
     const secrets=body.bindings.filter(b=>b.type==='inherit');
     assert.equal(secrets.length,2);for(const b of secrets)assert.deepEqual(Object.keys(b).sort(),['name','type','version_id']);
     for(const b of secrets)assert.equal(b.version_id,current.versions[0].version_id);
-    uploads++;latestV=[V,'44444444-4444-4444-8444-444444444444','66666666-6666-4666-8666-666666666666'][uploads-1];latestD=[D,'55555555-5555-4555-8555-555555555555','77777777-7777-4777-8777-777777777777'][uploads-1];versions.set(latestV,body);if(mode==='lost')throw Error('SYNTHETIC lost upload ACK');
+    uploads++;latestV=[V,'44444444-4444-4444-8444-444444444444','66666666-6666-4666-8666-666666666666','88888888-8888-4888-8888-888888888888'][uploads-1];latestD=[D,'55555555-5555-4555-8555-555555555555','77777777-7777-4777-8777-777777777777','99999999-9999-4999-8999-999999999999'][uploads-1];versions.set(latestV,body);if(mode==='lost')throw Error('SYNTHETIC lost upload ACK');
     if(mode==='late')await new Promise(r=>setTimeout(r,6000));
     if(mode==='not_found')return Response.json({success:false,errors:[{code:1000,message:'SYNTHETIC missing'}],result:null},{status:404});
     return envelope({id:latestV,...(mode==='unexpected_reconciliation'?{exports_reconciliation:{created:['UNEXPECTED_SYNTHETIC_CONTAINER']}}:{})});
@@ -39,5 +39,14 @@ export async function setup(t,mode='normal'){
  if(mode==='held_claim')await f.json('/fixture/hold-claim',{});
  if(mode==='held_source')await f.json('/fixture/hold-source',{});
  const publish=async screen=>f.json('/fixture/publish',{url:O+'/connections/finite-prepare',headers:{'Cf-Access-Jwt-Assertion':f.token,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:screen.cookie},body:new URLSearchParams({handle:screen.handle,projectRef:screen.projectRef,decision:'approve'}).toString()});
- return {...f,publish,calls,requests,posts:()=>posts};
+ // SYNTHETIC alternate qualified baseline for the competing-writer barrier test.
+ // No product source override and no journal/history mutation.
+ const separateSyntheticChoice=async()=>{
+  const currentPublication={stage:null,versionId:material.source.initialBaseline.versionId,deploymentId:material.source.initialBaseline.deploymentId,receiptHash:null};
+  await f.json('/fixture/source',{phase:'closed_ui',currentPublication});
+  material=await f.json('/fixture/material',{});
+  current={id:currentPublication.deploymentId,strategy:'percentage',versions:[{version_id:currentPublication.versionId,percentage:100}]};
+  return f.screen();
+ };
+ return {...f,publish,calls,requests,separateSyntheticChoice,posts:()=>posts};
 }

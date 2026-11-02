@@ -1,9 +1,9 @@
-# Branch-only Task3 qualifier; EXCLUDE from eventual integration.
+# Branch-only Task3 fix-round1 qualifier; EXCLUDE from eventual integration.
 name: Finite C2 Task3 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['test/mcp-qa-finite-policy-journal-native.test.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-stage-work.mjs', 'lib/mcp-qa-finite-policy-transport.mjs', 'lib/mcp-qa-finite-connection-preparation.mjs', 'lib/mcp-qa-finite-owner-preparation.mjs', 'test/mcp-qa-finite-connection-preparation-native.test.mjs', 'test/mcp-qa-finite-policy-transport.test.mjs', 'test/mcp-qa-finite-owner-preparation-native.test.mjs', 'test/fixtures/finite-connection-worker.mjs', 'test/fixtures/finite-transport-native.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Native journal actual runtime restart
-        run: node --test test/mcp-qa-finite-policy-journal-native.test.mjs
-      - name: Scoped fixture lint
+      - name: Whole-stage actual native retention
+        run: node --test test/mcp-qa-finite-connection-preparation-native.test.mjs test/mcp-qa-finite-policy-transport.test.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs test/mcp-qa-finite-policy-journal-native.test.mjs
+      - name: Scoped changed-source lint
         if: always()
-        run: npx eslint test/mcp-qa-finite-policy-journal-native.test.mjs test/mcp-qa-finite-policy-transport.test.mjs test/fixtures/finite-transport-native.mjs
+        run: npx eslint lib/mcp-qa-finite-policy-transport.mjs lib/mcp-qa-finite-connection-preparation.mjs lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-connection-preparation-native.test.mjs test/fixtures/finite-connection-worker.mjs test/fixtures/finite-transport-native.mjs
