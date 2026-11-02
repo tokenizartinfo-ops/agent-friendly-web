@@ -3,7 +3,7 @@ import {createFiniteOwnerPreparationStore} from '../../lib/mcp-qa-finite-prepara
 import {createFinitePolicyEffectJournal} from '../../lib/mcp-qa-finite-policy-journal.mjs';
 import {hashFinitePreparationRecord} from '../../lib/mcp-qa-finite-preparation-records.mjs';
 // SYNTHETIC clock/leases/identity, actual native SQLite transactions. No source authority.
-export const H='a'.repeat(64),M='b'.repeat(40),U='11111111-1111-4111-8111-111111111111';
+const H='a'.repeat(64),M='b'.repeat(40),U='11111111-1111-4111-8111-111111111111';
 const domain=(kind,value)=>hashFinitePreparationRecord(kind,value);
 const seal=(kind,value,key)=>({...value,[key]:domain(kind,value)});
 function fixtures(){
@@ -46,7 +46,8 @@ export class FinitePreparationFixture extends DurableObject{
   }catch{return Response.json({rejected:true,committed,assertions});}
  }
 }
-export default {async fetch(request,env){
+const handler={async fetch(request,env){
  const stub=env.FIXTURE.get(env.FIXTURE.idFromName(new URL(request.url).pathname));
  return stub.fetch(request);
 }};
+export default handler;
