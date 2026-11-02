@@ -975,3 +975,8 @@ Fresh review againsta609..b7:specFAIL/qualityNEEDSFIXES, Important1P2 cumulative
 ## C1 fix round1 ready for same-reviewer re-review — 2026-11-02
 
 Root pre-code ruling at6335b5d accepted P2 cumulative observedAt-age defect. REDd052b35d/run41512903562/job125508988847/attempt1:44PASS4FAIL; actual6518ms original elapsed, everyrequest<=654ms,2POST,unchangedtimestamp/livePend. Fix21087916f3967b92ec0ef7f6905aeaa5642c8511 changes only issuer historical primary predicate to finite/originalstep/Pend/notfuture, retaining all transport5s/Date freshness/originalclock/cap/unknownACK semantics. GREEN41513188777/job125509965448/attempt1:48PASS0fail/cancel/skip/lintsuccess/artifacts0; actual6518ms elapsed,maxrequest653ms,2POST,unchangedobservedAt,repeatzeroHTTP. Productioncustody/native/compiler unchanged; prior81+34 evidence retained. See [updated report](../reports/2026-11-02-finite-pre-t0-qa-provenance.md). CAS/ref/exactreadbacks verified. STOP for SAMEreviewer b7ca96be..fixDocHEAD; no acceptance/runtime/windows/publication/PCoff claim.
+
+
+## C1 Root acceptance after scoped round1 — 2026-11-02
+
+Task T5-B2-C1: complete SOURCE ONLY (BASEa609c1f3..DocHEADf933dc19/code21087916; freshreviewP2ADDRESSED/APPROVED). Root actual48PASS fix41513188777/job125509965448/attempt1/lintsuccess/artifacts0 andprevious81+34PASS retained; no reruns. No newbreakage. Exactscopedreview andcannotverifyowninggates in reviews/2026-11-02-finite-pre-t0-qa-provenance.md. C2initialREADONLYpreflight/refinement stillunderRootruling beforeanyproduct; fullTask5/C3/runtime/PCoffincomplete. Updated readablecontinuation reports/2026-11-02-finite-cloud-continuation.es.md. No localcode/build/provider/resource/custody/window/Maxaction.

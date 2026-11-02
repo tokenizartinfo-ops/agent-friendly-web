@@ -25,3 +25,10 @@ Single focused outside-diff check: mcp-qa-finite-seed-wire.mjs:8 original admiss
 Ruling: accept P2 as a genuine source correctness gap. Original P0/Pend and per-request response freshness/5s transport remain; remove the undocumented requirement that the HISTORICAL QA observation stays younger than5s through POST/readbacks/finalprimary. observedAt must remain original, not regenerated/backdated; validate it is finite and within actual original step/Pend/not future when relevant. Native reader still requires genuine completed-success at original step/job deadlines. No retry, reset, replacement, wider role, new public purpose or owner clock.
 
 Original implementer owns round1 with focused actual issuer regression cumulative post-observation latency>5s, each child<5s, originalPend stillvalid, unchangedrecord timestamp, exactly2POST and oncecap/unknownACK guarantees. Actual newbehaviorRED beforefix, thenGREEN issuer+affectedprimary tests/scopedlint; no reflexcompiler/native rerun unless dependency changes. No weakeningtests/runtime probes. Same reviewer re-reviews only b7ca96be..fixDocHEAD plus thisP2/newdiffbreakage. Source-only; no acceptance yet.
+
+
+## Scoped re-review round1 — APPROVED, source only
+
+Same reviewer assessed previousDocHEADb7ca96be..fixDocHEADf933dc192c8a8c2d13cd1f3580a7e6a9042a34c1. P2 ADDRESSED: primary:35 now checks safe integer/originalstep/Pend/notfuture, no cumulativeage5s. Issuer test:91 measures actualelapsed6518ms/maxrequest653ms, exactly2POST, unchangedoriginaltimestamp/P0/Pend andzeroextraHTTPonrepeat. No introduced Critical/Important/Minor breakage. No rerun. Remainingparent/provider/runtime owninggates explicitly separate.
+
+Root independently verified exact actualGREEN41513188777/job125509965448/attempt1/head21087916f3967b92ec0ef7f6905aeaa5642c8511:48PASS0fail/cancel/skip, lintsuccess/artifacts0, actual regressionoutput6518ms/maxrequest653ms/exact2POST/timestampunchanged. Previous actual81+34PASS remains applicable to unchangedotherlogic. Root accepts C1 SOURCE ONLY; no tag/dispatch/publication/window/runtime acceptance. Task5/C3/fullpackage/PCoff remain incomplete.

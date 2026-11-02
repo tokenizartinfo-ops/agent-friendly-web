@@ -1,69 +1,61 @@
-# AFW — continuidad tras la desconexión
+# AFW: continuación cloud del 2 de noviembre de 2026
 
-Guardado el 2 de noviembre de 2026, 18:36 UTC (15:36 Argentina), por pedido de Gabriel antes de trasladarse. No cerrar pestañas ni iniciar permisos o ensayos. Tener la PC encendida no acredita una prueba con la PC apagada.
+Comprobación documental de Root: 2026-11-02 19:54 UTC. Este documento conserva el estado de trabajo, no acredita el estado remoto actual de Cloudflare.
 
 ## Dónde continuar
 
-Repositorio: tokenizartinfo-ops/agent-friendly-web.
-Rama aislada: feat/finite-native-cleanup-20261101.
-Plan: docs/superpowers/plans/2026-11-01-finite-private-policy-setup.md.
-Ledger: docs/superpowers/progress/2026-11-01-finite-native-confirmation-cleanup.md.
+Repositorio: tokenizartinfo-ops/agent-friendly-web. Rama aislada: feat/finite-native-cleanup-20261101. Main no se ha modificado en estos bloques. Código C1 final: 21087916f3967b92ec0ef7f6905aeaa5642c8511; informe C1 y corrección: f933dc192c8a8c2d13cd1f3580a7e6a9042a34c1. El commit que contiene este checkpoint agrega únicamente documentación de aceptación. No reconstruir ni repetir bloques aceptados.
 
-El HEAD anterior a este checkpoint es fbe117a63ae1e55f64c104e274aa90f9df28118d. El commit de este checkpoint se identifica por CAS y lectura posterior; no puede incluir su propio hash.
+Leer este checkpoint y después solo el bloque pertinente del ledger docs/superpowers/progress/2026-11-01-finite-native-confirmation-cleanup.md. No cargar todo el historial. Trabajo por GitHub API y Actions; no hay clon, dependencias, build, contenedor o proceso nuevo en el PC.
 
-No hubo merge a main, despliegues, consultas privadas al proveedor, nuevos permisos, credenciales ni ventanas de ensayo en estos bloques. El trabajo y las verificaciones quedaron en GitHub y Actions; no hay archivos locales pendientes de guardar.
+## Completado como código, no como operación
 
-## Bloques terminados: no repetir
+- C2 Tasks1–4: aceptadas previamente. Registros privados, decisiones/consentimiento con Access, tres fases de transporte, configuración posterior a T0 y retención del trabajo real; no repetir.
+- T5-B1: residencia privada de los bytes nuevos del canary dentro del QA compilado, con límites y verificación de procedencia. Aceptada en Root70408e38.
+- T5-B2-AB: lector nativo de hechos históricos, configuración y snapshots reales de almacenamiento/D1; diferencia artefacto antiguo, programa originalQ y candidataM. Aceptado en Root44a54157 después de corrección de fixtures fechados, sin extender autorización de producción.
+- T5-B2-C1: puente técnico de procedencia QA ANTES de preparar el permiso del usuario. Comando/finalizador separados; compilador real comprueba bytes; lector nativo usa solo verificación de token y punteros de deployment, más fuentes públicas de GitHub. Referencias Git mutables: conserva una hipótesis expresa de gobernanza de escritores del repositorio, no una prueba de inmutabilidad histórica ni de identidad del publicador.
 
-C2 Tasks 1–4 ya estaban aceptadas. Task5-B1, compilador y recuperación privada del código candidato, fue aceptada por revisión independiente; constancia Root70408e38 e informe task5-b1.
+C1 tuvo un P2: el reconciliador exigía que una observación histórica continuase teniendo menos de5segundos después de escribir el tag/ref. Se corrigió sin renovar el reloj ni repetir escrituras. La misma revisión independiente lo declaró ADDRESSED/APPROVED; no quedan hallazgos abiertos de ese bloque. Informes y revisión:
+- docs/superpowers/reports/2026-11-02-finite-pre-t0-qa-provenance.md
+- docs/superpowers/reviews/2026-11-02-finite-pre-t0-qa-provenance.md
 
-B2 A+B, lector histórico fijo y comprobación de registros D1/legacy, quedó aceptado después de la corrección 1. Código de producción: 5b087d0a3090935327b7aee37bcad175bbac4be4. Tests: f68d360aac8d789024e2a4da1f1bd951bb71c7bb. Documentación: fbe117a63ae1e55f64c104e274aa90f9df28118d.
+## Evidencia de Actions comprobada por Root
 
-Root verificó directamente:
+C1 previo a la corrección: run41511052481/job125502671941/attempt1, código d22d5366:81 pruebas nuevas+34 relacionadas PASS,0fallos/cancelaciones/skips, lint correcto,0artefactos. QA1762180B y canary1942384B en esa revisión exacta.
 
-- Run41497210626, job125455183793, intento1: 21 pruebas nuevas, 256 relacionadas y 28 del compilador; todas pasaron, lint aprobado y cero artefactos.
-- Corrección solo de fixture/workflow: run41500276455, job125465668561, intento1: 22 pruebas aprobadas, cero fallos/cancelaciones/skips, lint aprobado y cero artefactos.
+Corrección C1: run41513188777/job125509965448/attempt1, código21087916:48PASS,0fallos/cancelaciones/skips, lint correcto,0artefactos. Regresión con relojes transcurridos reales:6518ms acumulados,653ms máximos por respuesta SYN,2POST exactos, timestamp/P0/Pend originales intactos y ninguna solicitud extra al repetir. CF/GitHub/custodia son límites SYN de prueba; el compilador y lector workerd/DO sí ejecutan código real. Advertencias previas punycode/Actionsv4 preservadas.
 
-El mismo revisor marcó el hallazgo P2 como ADDRESSED y aprobó la corrección, sin defectos nuevos. La prueba dejaba de funcionar después del vencimiento de la credencial; ahora usa datos sintéticos de custodia y relojes reales. Un caso separado comprueba el vencimiento exacto con un reloj instrumentado, declarado como sintético. La fecha de producción sigue siendo 3 de noviembre a las 02:59 UTC: no se amplió ni renovó ningún permiso.
+No repetir estas suites porque pasaron: ampliar solo ante un cambio o riesgo concreto. El workflow temporal finite-task1-temporary-qualifier.yml se excluye de la integración final.
 
-Informe: docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task5-b2-ab.md.
-Revisión: docs/superpowers/reviews/2026-11-01-finite-private-policy-setup-task5-b2-ab.md.
+## Bloque siguiente en preparación
 
-Los problemas de FK, proxy RPC y cierre del fixture ya están explicados y corregidos; no reabrirlos. El candidato midió 1.942.384 bytes, con margen de 154.768 bytes; QA midió 1.761.077 bytes, en la revisión 5b087d0a. No son una garantía para código futuro. El workflow temporal debe EXCLUIRSE de la integración.
+T5-B2-C2: inicializador privado, selector inmutable y contexto ANTES del primer ticket de consentimiento. Brief docs/superpowers/briefs/2026-11-02-finite-initial-preparation-source.md. Agente /root/initial_preparation_source efectuó preflight READONLY; Root está afinando contratos antes de cualquier código. No hay escritor de producto activo después de C1.
 
-Los agentes private_policy_task5, review_private_policy_task5_b2_ab y finite_c3_readonly_preflight terminaron y están detenidos. No hay despliegue, código sin guardar, OTP ni ventana de permiso pendientes.
+Hallazgos reales:
+- Falta el inicializador y su registro privado de una sola preparación; el snapshot existente depende de resolver previamente ese contexto.
+- Los resultados históricos no prueban que M produjese el historial antiguo. La propuesta es un compromiso explícito de evidencia leído por M, con dominio separado y semántica inequívoca.
+- La selección sintética se debe fijar al proyecto propio exacto de la configuración histórica aprobada y correlacionar con propiedad/revisión actuales; no inferirla desde un nombre/correo.
+- No insertar 3CF+11GH de C1 alrededor de cada paso. GitHub documenta60consultas anónimas/IP/hora; el diseño debe contemplar el recorrido completo sin claves/proxies ni autoridad inferida de caché. El registro privado puede conservar hechos inmutables; la autoridad y los estados actuales requieren comprobaciones propias.
+- Workflow binding get(id).status() da estado/output, no caller identity ni queuedAt. I0 del comando inicial, P0 del puente y T0 posterior son distintos. No inventar timestamps ni modificar el contrato posterior por esta investigación.
 
-## Siguiente bloque autónomo
+Root debe persistir el preflight y la tabla/ruling exactos de entrada, reloj, selector, custodia, publicación inicial y sesión antes de autorizar producto. Un solo escritor; revisión fresca después. El agente de preflight no tiene permiso para mutar ni ejecutar recursos.
 
-Preparar el puente de procedencia QA ANTES de T0, separado del seed que se crea después de T0. El lector nativo9aa no tiene lectura de código QA; GHA9db dispone de una ruta separada, ya identificada. Evaluar un productor GHA que compruebe el UUID QA real, sus bytes, build M y metadatos, y emita una referencia inmutable por UUID completo. La lectura nativa posterior debe verificar la ejecución y el paso realmente completados, además del puntero actual.
+## Lo que aún falta hacia PC apagada
 
-El readFiniteQaPublication existente exige el paquete completo y el seed posterior; no autoriza por sí solo una preparación anterior. Mantener direct qaCodeProvenanceVerified=false y distinguir la evidencia del puente de una lectura directa. No inventar APIs, tokens, identidad del llamador, commits históricos ni permisos.
+1. Inicialización privada y procedencia/contexto reales, publicación inicial por el canal autorizado y fuente actual de las pantallas de preparación.
+2. Material, conexiones y montajes restantes con inventario y retención de todos los escritores; constructor completo y finalizador/restauración independientes.
+3. C3: ruta finita para el grant existente, gate antes de reservar/admitir, acción Save del operador separada del lector, retirada temprana y orden de suscripción/entrega/revisión útil/baja. Ver docs/superpowers/reports/2026-11-02-finite-c3-consumer-preflight.md.
+4. Pruebas compuestas, privacidad, CI completo, revisión de la rama y promoción controlada.
+5. Recorrido real: receptor cloud efectivo, entrega útil, baja nativa, retirada y cierre físico verificados. Solo entonces preparar una ocurrencia genuina con el PC apagado. Max requiere preview y aprobación; no se ha utilizado.
 
-Primero definir contrato y ruling; después implementar. No ejecutar workflows, crear tags reales ni abrir un ensayo por este checkpoint.
+No es solo esperar un mail de Cloudflare: quedan estos trabajos de integración. No prometer un plazo fijo ni atribuir un fallo futuro al proveedor sin evidencia.
 
-Todavía faltan la inicialización privada una sola vez; selección de realm/proyecto/objetivo/ventana e identidades nuevas; contexto retenido; material, confirmación, GHA y forwarding; montajes y comprobación de todos los escritores. Las identidades nuevas de Save/withdraw/trial requieren un productor aprobado antes de la primera elección y no pueden fingir historia.
+## Límites y custodia
 
-No usar el hash histórico19fc como selector de un nuevo draft ni reconstruir políticas desde hashes. El artefacto frozen315/source2a477, el proceso original Q comprobado por manifest+D1 y el candidato M son identidades distintas. B1/B2 producen datos verificables; todavía no constituyen la autoridad del recorrido completo. Los constructores pendientes siguen unavailable y el paquete completo sigue false/throw.
+No se abrió ventana, grant, OAuth, token, rol, esquema, cron, Container o Workflow real en este bloque. No se creó ningún tag ni se ejecutó el nuevo workflow de producción. No se alteraron otros proyectos ni se envió correo/Max.
 
-## C3 y receptor: problemas concretos pendientes
+Custodia nativa fechada9aa/057 conserva el límite3nov02:59UTC; el permiso GHA9db conserva8nov02:59:59UTC. Las fechas no prueban identidad, vigencia o alcance actual: comprobar cuando el paso real esté preparado, sin autorrenovar/repetir pegados ni ampliar por inferencia.
 
-Informe duradero: docs/superpowers/reports/2026-11-02-finite-c3-consumer-preflight.md.
+La última lectura completa de cierre fue1nov14:30:52UTC; la lectura2nov12:35 fue solo metadata QA/canary, no cierre completo. No presentar ninguna como comprobación actual. Runtime, guardia cloud permanente y PC-off no se acreditan con Actions o este seguimiento local.
 
-- OAuth=false bloquea el SDK/MCP y la retirada del propietario; continuidad tiene su propio gate.
-- El host real omite finiteGate. Una suscripción prematura puede registrar una admisión antes de detectar que falta la reserva y bloquear la reserva posterior. Rechazar ANTES de escribir; no usar subscribe como un sondeo inocuo.
-- El callback actual necesita el Container después de ARM y de la reserva del nominal, prevista a T0+150–160 s. Falta acreditar la secuencia entre callback, apagado y Save/event.
-- El Known workflow inspeccionado confirma activación/reserva; el CLI admission/seed/admit/poll/restore no produce Save. Se necesita un productor separado, autorizado para ese objetivo específico. No esconder escritura en el plugin de lectura.
-- events/unsubscribe debe acreditarse mientras el permiso de lectura siga válido. C0 retira avisos y después lectura; eso puede impedir una baja posterior del cliente. Cierre del servidor o solicitud de stop no prueban baja nativa ni terminación física.
-- La lectura debe seguir siendo independiente del permiso de avisos. Un permiso de lectura nunca autoriza Save o configuración.
-
-Preservar los 18 hooks, cuatro argumentos, 70s/5s/20s, C0/C1/N1/R1 y primer HEAD. No cambiar tiempos ni repetir el primer HEAD por inferencia.
-
-Root buscó y abrió [OpenAI MCP Events](https://developers.openai.com/plugins/build/mcp-events). Documenta Work web, Work con Cloud y dots; ChatGPT proporciona el callback y su secreto al suscribirse. Esto establece una ruta compatible, no una conexión efectiva de la cuenta/chat/AFW Operations ni una suscripción o turno útil. La ausencia de una herramienta en este chat no demuestra incompatibilidad de la plataforma. No se creó ningún callback, secreto, chat, consumidor, scheduler o monitor.
-
-## Límites de continuidad
-
-Priorizar GitHub/Actions/Cloudflare autorizados; no generar clones, dependencias, builds, temporales o procesos persistentes locales. No repetir custodia, rotaciones, entregas aceptadas o intentos consumidos. No pedir OTP ni abrir permisos hasta tener un paso concreto preparado y al propietario disponible.
-
-Gabriel indicó previamente que volvería a estar disponible a las 16:00 Argentina; el último mensaje pide guardar por una desconexión breve. No cerrar sus pestañas. El FYI de Ops sobre el cron de Atelier no requiere respuesta ni acción AFW y no autoriza mezclar recursos.
-
-operationalReadiness=false; PCoff=false. Quedan composición completa, privacidad histórica/paquete, CI y revisión global, promoción aprobada y la prueba externa real con recepción útil, baja y cierre comprobados. No solicitar apagar la PC todavía. Max permanece sin datos, contacto ni correo. No hay una guardia cloud permanente acreditada.
+operationalReadiness=false. completePackage=false. PCoff=false. Max sin intervención.
