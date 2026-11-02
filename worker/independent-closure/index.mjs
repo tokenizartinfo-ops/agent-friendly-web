@@ -1,3 +1,5 @@
+import {runPrivateQaFiniteLaunchOperation} from '../../lib/mcp-qa-finite-launch.mjs';
+import {createPrivateQaFiniteLaunchParent} from '../../lib/mcp-qa-finite-launch-inventory.mjs';
 import {runPrivateQaFiniteObserver,FINITE_OBSERVER_OPERATION} from '../../lib/mcp-qa-finite-observer.mjs';
 import {previewPrivateQaFiniteTrialMaterial,claimPrivateQaFiniteTrialRestore,readPrivateQaFiniteFinalPrimary} from '../../lib/mcp-qa-finite-observer-native.mjs';
 import {finiteFields as finiteReadFields} from '../../lib/mcp-finite-evidence.mjs';
@@ -182,6 +184,15 @@ export class PrivateQaCatalog extends DurableObject {
 // Private host only. Missing catalog/custody stays closed. No caller approval,
 // provisioning, registration, HTTP routes or implicit enrollment.
 export class IndependentClosure extends DurableObject {
+ #finiteLaunch(operation,args,keys){
+  const parent=createPrivateQaFiniteLaunchParent({deadline:Date.now()+5000});
+  if(args.length!==1)throw Error('Finite launch unavailable');
+  const refs=finiteReadFields(args[0],keys);
+  return runPrivateQaFiniteLaunchOperation({ctx:this.ctx,env:this.env,operation,refs,parent});
+ }
+ prepareFiniteNominalLaunch(...args){return this.#finiteLaunch('prepare',args,['intentId','sourceRevision']);}
+ createFiniteNominalChild(...args){return this.#finiteLaunch('create',args,['intentId','controlHash']);}
+ readFiniteNominalLaunch(...args){return this.#finiteLaunch('read',args,['intentId','controlHash']);}
  readFiniteTrialFinalPrimary(...args){if(args.length!==1)throw Error('Finite primary unavailable');return readPrivateQaFiniteFinalPrimary({ctx:this.ctx,env:this.env,refs:args[0]});}
  previewFiniteTrialMaterial(...args){if(args.length!==1)throw Error('Finite preview unavailable');return previewPrivateQaFiniteTrialMaterial({ctx:this.ctx,env:this.env,refs:args[0]});}
  claimFiniteTrialQaRestore(...args){if(args.length!==1)throw Error('Finite claim unavailable');return claimPrivateQaFiniteTrialRestore({ctx:this.ctx,env:this.env,refs:args[0]});}

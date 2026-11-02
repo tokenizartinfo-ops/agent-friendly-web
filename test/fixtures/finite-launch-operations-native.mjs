@@ -3,7 +3,7 @@
 import {fixture,resolvePrivateQaFiniteLaunchContext as resolve,readPrivateQaFiniteLaunchMaterial} from './finite-launch-native.mjs';
 import {finiteAdmissionIdentity} from '../../lib/mcp-own-finite-cleanup-proof.mjs';
 import {finiteHash} from '../../lib/mcp-finite-evidence.mjs';
-import {createPrivateQaFiniteTrialNativePin,readPrivateQaFiniteControlSnapshot} from '../../lib/mcp-qa-finite-trial-control.mjs';
+import {createPrivateQaFiniteTrialNativePin,readPrivateQaFiniteControlSnapshotUnderCoordinator} from '../../lib/mcp-qa-finite-trial-control.mjs';
 export {fixture,readPrivateQaFiniteLaunchMaterial};
 export async function resolvePrivateQaFiniteLaunchContext(options){
  const {ctx,env,refs,parent}=options,f=await fixture(ctx,env);parent.check();
@@ -14,12 +14,12 @@ export async function resolvePrivateQaFiniteLaunchContext(options){
  return context;
 }
 export async function readPrivateQaFiniteLaunchOperations(options){
- const {ctx,env,context,parent}=options,m=readPrivateQaFiniteLaunchMaterial(options),f=await fixture(ctx,env);parent.check();
+ const {ctx,env,parent}=options,m=readPrivateQaFiniteLaunchMaterial(options),f=await fixture(ctx,env);parent.check();
  if(f.operationsUnavailable)throw Error('SYNTHETIC operations unavailable');
  const original=f.primary.admission;
  const nominal=async()=>{
   const nativePin=createPrivateQaFiniteTrialNativePin({ctx,env,sourceRevision:f.plan.source.revision});
-  const s=await readPrivateQaFiniteControlSnapshot({storage:ctx.storage,nativePin,plan:m.plan,parent});parent.check();
+  const s=await readPrivateQaFiniteControlSnapshotUnderCoordinator({storage:ctx.storage,nativePin,plan:m.plan,parent});parent.check();
   const identity=finiteAdmissionIdentity(s.control),nativeJournal={status:'observed',identity,identityHash:finiteHash({purpose:'afw.own-finite-admission.v1',identity}),sealed:!!f.sealed,seal:null,sealHash:null,writers:{reservation:null,admission:null,launch:null},unresolvedWriters:0,launchNeverIssued:true,authorizesEffects:false,operationalReadiness:false};
   const primary=await original();parent.check();
   primary.quiescence={currentWriters:0,newScopeWriters:0,unresolvedWrites:0,completeInventory:true,inventoryHash:finiteHash([]),receiptsHash:finiteHash(nativeJournal),snapshotHash:'1'.repeat(64)};
