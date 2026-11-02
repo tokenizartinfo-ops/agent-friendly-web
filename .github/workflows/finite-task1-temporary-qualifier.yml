@@ -1,4 +1,4 @@
-name: Finite Native5 Task2 temporary source qualifier
+name: Finite Native5 Task3 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -19,8 +19,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Native5 Task2 focused RED GREEN
-        run: node --test test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-finite-nominal-control.test.mjs
+      - name: Native5 Task3 focused RED GREEN
+        run: node --test test/mcp-qa-finite-adoption-wait.test.mjs test/mcp-qa-finite-launcher-native.test.mjs test/mcp-qa-finite-confirmation-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-release-known-cancellation.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-read-rpc-native.test.mjs
       - name: Native5 scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-launch.mjs test/mcp-qa-finite-launch-native.test.mjs
+        run: npx eslint test/mcp-qa-finite-adoption-wait.test.mjs test/mcp-qa-finite-launcher-native.test.mjs test/mcp-qa-finite-confirmation-native.test.mjs
