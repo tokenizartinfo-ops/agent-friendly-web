@@ -199,7 +199,7 @@ test('the same verified Access expiration remains a fence across asynchronous pr
  const result=await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':token}});
  const delay=await f.json('/fixture/delay-state',{});
  assert.equal(delay.fired,true,'the native source delay must occur after signature verification');
+ assert.equal((await rows(f)).length,0,'expired proof cannot append even an initial source snapshot');
  assert.equal(result.status,401);
  assert.equal(result.headers.get('Set-Cookie'),null);
- assert.equal((await rows(f)).length,0,'expired proof cannot append even an initial source snapshot');
 });
