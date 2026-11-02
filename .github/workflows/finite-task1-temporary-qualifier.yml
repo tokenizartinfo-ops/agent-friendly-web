@@ -24,4 +24,4 @@ jobs:
         run: node --test test/mcp-qa-finite-connection-preparation-native.test.mjs test/mcp-qa-finite-policy-transport.test.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs test/mcp-qa-finite-policy-journal-native.test.mjs
       - name: Scoped changed-source lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-policy-transport.mjs lib/mcp-qa-finite-connection-preparation.mjs lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-connection-preparation-native.test.mjs test/fixtures/finite-connection-worker.mjs test/fixtures/finite-transport-native.mjs
+        run: npx eslint lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-policy-transport.mjs lib/mcp-qa-finite-connection-preparation.mjs lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-connection-preparation-native.test.mjs test/fixtures/finite-connection-worker.mjs test/fixtures/finite-transport-native.mjs
