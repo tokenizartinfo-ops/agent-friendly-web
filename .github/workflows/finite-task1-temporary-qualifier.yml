@@ -21,7 +21,7 @@ jobs:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Initial inactive upload causal native RED GREEN
-        run: node --test test/mcp-qa-finite-initial-upload-native.test.mjs
+        run: node --test test/mcp-qa-finite-initial-upload-native.test.mjs test/mcp-qa-finite-initial-upload-records.test.mjs test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-entry-records.test.mjs test/mcp-qa-finite-initial-material-records.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-initial-*.mjs test/mcp-qa-finite-initial-upload-native.test.mjs test/fixtures/finite-initial-entry-world.mjs
+        run: npx eslint lib/mcp-qa-finite-initial-*.mjs lib/mcp-qa-finite-historical-source.mjs test/mcp-qa-finite-initial-upload-*.test.mjs test/mcp-qa-finite-initial-entry-native.test.mjs test/fixtures/finite-initial-*.mjs
