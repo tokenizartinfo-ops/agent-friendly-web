@@ -960,3 +960,8 @@ BASE a609c1f3296177f73468ca8c708b9333330f1d32. Root approved the complete [C1 co
 ## C1 implemented; awaiting independent review — 2026-11-02
 
 CodeHEAD d22d5366069ff569e428bc051a3e524f93abeed0. [C1 report](../reports/2026-11-02-finite-pre-t0-qa-provenance.md) records pre-code contract1ae574eb, behavioral RED370a6913/2c5da36a and actual GREEN41511052481/job125502671941/attempt1:81new+34affectedPASS0fail/cancel/skip, lintsuccess/artifacts0, QA1762180B/canary1942384B. Actual native workerd/DO and Node issuer/real compiler execute under explicit SYN provider/GH/custody boundaries. Source-only immutable-object/current-ref facts retain TRUSTED repo-writer governance assumption; historical ref nonmutation and full publisher/source identity remain false. No source seam/fullpackage opening, credential extension, actual tag/dispatch/publication, window or runtime. Stop writes for fresh Root review; Task5/C3/PCoff incomplete.
+
+
+## C1 independent review; C2 initial-source preflight — 2026-11-02
+
+Root independently verified actual C1 run41511052481/job125502671941/attempt1 atd22d5366:81+34PASS0fail/cancel/skip, lintsuccess/artifacts0; exact compiler sizes documented. C1 review is READONLY against BASEa609c1f3..DocHEADb7ca96be; no acceptance yet. Next independent READONLY preflight uses briefs/2026-11-02-finite-initial-preparation-source.md, no product/writes before C1 acceptance and Root's actual source/clock/selector/issuer ruling. This parallelism shares no mutable state; only Root writes these docs. Existing source/custody/runtime gates and false readiness preserved.
