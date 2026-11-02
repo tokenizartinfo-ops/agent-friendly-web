@@ -965,3 +965,8 @@ CodeHEAD d22d5366069ff569e428bc051a3e524f93abeed0. [C1 report](../reports/2026-1
 ## C1 independent review; C2 initial-source preflight — 2026-11-02
 
 Root independently verified actual C1 run41511052481/job125502671941/attempt1 atd22d5366:81+34PASS0fail/cancel/skip, lintsuccess/artifacts0; exact compiler sizes documented. C1 review is READONLY against BASEa609c1f3..DocHEADb7ca96be; no acceptance yet. Next independent READONLY preflight uses briefs/2026-11-02-finite-initial-preparation-source.md, no product/writes before C1 acceptance and Root's actual source/clock/selector/issuer ruling. This parallelism shares no mutable state; only Root writes these docs. Existing source/custody/runtime gates and false readiness preserved.
+
+
+## C1 independent review — fix round1/5, before code
+
+Fresh review againsta609..b7:specFAIL/qualityNEEDSFIXES, Important1P2 cumulativeobservedAt5s incorrectlyconsumes otherwisevalid publication aftertag/ref; Critical0/Minor0. Root accepts genuinegap; exactreview+scope/cannotverifyresolution in reviews/2026-11-02-finite-pre-t0-qa-provenance.md. Ruling: preserve originalobservedAt/P0/Pend/transport5s, remove unintendedcumulativeage requirement aftermutation; focusedreal-latencyRED/GREEN byoriginalimplementer, same scopedreviewer b7..fixDocHEAD. C2initialsource preflight READONLY maycontinue, no product/writes whilefixwriteractive. No auth/runtime/ownerwindow/PCoff.
