@@ -55,6 +55,10 @@ export class FinitePreparationFixture extends DurableObject{
    const store=createFiniteOwnerPreparationStore({storage,now:()=>at});
    const journal=createFinitePolicyEffectJournal({storage,identity:b.identity??fixtures().identity,now:()=>at});
    const target=b.target==='journal'?journal:store;
+   if(b.op==='concurrentJournal'){
+    const outcomes=await Promise.allSettled(b.args.map(x=>createFinitePolicyEffectJournal({storage,identity:x.identity,now:()=>at}).issue(x.send,lease)));
+    return Response.json(outcomes.map(x=>x.status==='fulfilled'?x.value:{rejected:true}));
+   }
    if(b.op==='concurrent'){
     const outcomes=await Promise.allSettled(b.args.map(args=>{args.preparation=seal('OwnerPreparation',args.preparation,'preparationHash');args.selection=seal('Selection',{...args.selection,preparationHash:args.preparation.preparationHash},'selectionHash');return store.publishSelection(args,lease);}));
     return Response.json(outcomes.map(x=>x.status==='fulfilled'?x.value:{rejected:true}));

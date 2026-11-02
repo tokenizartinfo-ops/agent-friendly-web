@@ -64,3 +64,22 @@ test('connection_stage_and_effect_identity_isolation',async t=>{
  assert.equal((await call('issue',{...send,stage:'notices'},extra)).rejected,true);
  assert.equal((await call('read',null,{target:'journal'})).result.state,'absent');
 });
+
+test('Task3 actor writer head blocks different preparations after unknown commit and reconstruction',async t=>{
+ const {call,f}=await native(t);
+ assert.equal((await call('issue',f.send,{target:'journal',loseCommitAck:true})).result.status,'uncertain');
+ const other={...f.identity,intentId:'different-original',setupInstanceId:'different-setup'},send={...f.send,intentId:other.intentId,setupInstanceId:other.setupInstanceId};
+ assert.equal((await call('issue',send,{target:'journal',identity:other})).rejected,true);
+ const before=await call('rows');
+ assert.equal(before.filter(([key])=>key==='afw.finite-policy-effect.v1:writer-head').length,1);
+ assert.equal((await call('issue',f.send,{target:'journal'})).result.status,'existing');
+ assert.deepEqual(await call('rows'),before);
+});
+test('Task3 native concurrent new journals atomically admit only one actor writer',async t=>{
+ const {call,f}=await native(t);
+ const args=[0,1].map(n=>({identity:{...f.identity,intentId:'original-'+n,setupInstanceId:'setup-'+n},send:{...f.send,intentId:'original-'+n,setupInstanceId:'setup-'+n}}));
+ const outcomes=await call('concurrentJournal',null,{args});
+ assert.equal(outcomes.filter(x=>x.status==='recorded').length,1);
+ assert.equal(outcomes.filter(x=>x.rejected).length,1);
+ assert.equal((await call('rows')).filter(([key])=>key.endsWith(':send')).length,1);
+});
