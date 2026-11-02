@@ -154,8 +154,10 @@ test('internal selected preparation rereads exact current owner grant notices an
  const saved=await rows(f),pre=saved.find(([k])=>k.endsWith(':record'))[1],approval=saved.find(([k])=>k.startsWith('connection-approval:'))[1],notice=saved.find(([k])=>k.endsWith(':notice'))[1];
  const raw=await f.db.prepare('SELECT * FROM delegated_consent_sessions WHERE handle_hash=?').bind(f.authorizationHash).first();
  const consentHash=hashFiniteOwnerEvidence('consent',{handle_hash:raw.handle_hash,user_id:raw.user_id,kind:raw.kind,project_id:raw.project_id,client_id:raw.client_id,resource:raw.resource,scopes:JSON.parse(raw.scopes_json),expires_at:raw.expires_at,consumed_at:raw.consumed_at});
- const now=Date.now(),connectionRef=randomBytes(32).toString('hex'),map={connectionRef,subject:'owner',grantId:'accepted-grant',clientId:'synthetic-client',projectId:'synthetic-owned',resource:origin+'/mcp',issuedAt:now,expiresAt:expires};
- assert.equal((await f.json('/fixture/store',{method:'putConnectionRef',arg:map})).result?.status,'recorded');
+ const now=Date.now(),relation=saved.find(([k])=>k.endsWith(':connection'))?.[1];
+ assert.ok(relation,'actual genuine grant producer must supply the exact next-stage relation');
+ const connectionRef=relation.connectionRef,map=saved.find(([k])=>k==='owner-connection-ref:'+connectionRef)?.[1];
+ assert.equal(map?.grantId,'accepted-grant');
  const prep={purpose:'afw.finite-owner-preparation.v1',prepId:pre.preconnectionId,sourceRevision:pre.sourceRevision,actorId:pre.actorId,selectedAt:now,expiresAt:pre.expiresAt,commandBy:expires-510000,owner:pre.owner,connection:{connectionRef,grantId:'accepted-grant',clientId:'synthetic-client',resource:origin+'/mcp',grantHash:sha('accepted-grant'),consentHash,noticesHash:notice.eventHash,permissionExpiresAt:expires},project:pre.project,goal:'discovery',programContext:f.initial.programContext,approval:{purpose:'afw.own-synthetic-policy-preparation.v1',decision:'approve',sourceRevision:pre.sourceRevision,projectHash:hashFiniteOwnerPreparationProject(pre.project),goal:'discovery',approvedAt:approval.approvedAt,expiresAt:approval.expiresAt,csrfReceiptHash:approval.csrfReceiptHash},auditHash:'a'.repeat(64)};
  prep.preparationHash=hashFinitePreparationRecord('OwnerPreparation',prep);
  const selection={purpose:'afw.finite-owner-selection.v1',sourceRevision:pre.sourceRevision,prepId:pre.preconnectionId,preparationHash:prep.preparationHash,selectedAt:now,sequence:1,previousSelectionHash:null};
@@ -202,4 +204,45 @@ test('the same verified Access expiration remains a fence across asynchronous pr
  assert.equal((await rows(f)).length,0,'expired proof cannot append even an initial source snapshot');
  assert.equal(result.status,401);
  assert.equal(result.headers.get('Set-Cookie'),null);
+});
+
+async function pairFixture(t){
+ const f=await connection(t),pre=(await rows(f)).find(([k])=>k.endsWith(':record'))[1],at=Date.now();
+ const grant={preconnectionId:pre.preconnectionId,authorizationHash:f.authorizationHash,grantId:'paired-grant',grantHash:sha('paired-grant'),acceptedAt:at};
+ assert.equal((await f.json('/fixture/store',{method:'putLink',arg:{kind:'grant',record:grant}})).result?.status,'recorded');
+ const make=()=>{const linkedAt=Date.now(),connectionRef=randomBytes(32).toString('hex');return {relation:{preconnectionId:pre.preconnectionId,connectionRef,grantHash:grant.grantHash,linkedAt},connection:{connectionRef,subject:pre.owner.subject,grantId:grant.grantId,clientId:pre.clientId,projectId:pre.project.projectId,resource:pre.resource,issuedAt:linkedAt,expiresAt:pre.expiresAt}};};
+ return {...f,pre,make};
+}
+test('native relation transaction accepts one competing pair without orphan connection maps',async t=>{
+ const f=await pairFixture(t),a=f.make(),b=f.make();
+ const results=await Promise.all([a,b].map(arg=>f.json('/fixture/store',{method:'putPreconnectionConnection',arg})));
+ assert.equal(results.filter(r=>r.result?.status==='recorded').length,1);
+ assert.equal(results.filter(r=>r.rejected).length,1);
+ const stored=await rows(f),relation=stored.find(([k])=>k.endsWith(':connection'))[1];
+ assert.ok([a.relation.connectionRef,b.relation.connectionRef].includes(relation.connectionRef));
+ assert.equal(stored.filter(([k])=>k.startsWith('owner-connection-ref:')).length,1);
+ assert.equal(stored.find(([k])=>k==='owner-connection-ref:'+relation.connectionRef)[1].grantId,'paired-grant');
+});
+test('native pair lost ACK preserves one exact retrievable relation and idempotent reconstruction',async t=>{
+ const f=await pairFixture(t),arg=f.make();
+ const lost=await f.json('/fixture/store',{method:'putPreconnectionConnection',arg,loseAck:true});
+ assert.equal(lost.result?.status,'uncertain');
+ const relation=await f.json('/fixture/store',{method:'readPreconnectionConnection',arg:{preconnectionId:f.pre.preconnectionId}});
+ assert.deepEqual(relation.result?.record,arg.relation);
+ const before=await rows(f);
+ assert.equal((await f.json('/fixture/store',{method:'putPreconnectionConnection',arg})).result?.status,'existing');
+ assert.deepEqual(await rows(f),before);
+ assert.equal((await f.json('/fixture/store',{method:'putPreconnectionConnection',arg:f.make()})).rejected,true);
+ assert.deepEqual(await rows(f),before);
+});
+test('pre-existing GrantLink without a pair is not a new allocation opportunity',async t=>{
+ const f=await connection(t),at=new Date().toISOString(),pre=(await rows(f)).find(([k])=>k.endsWith(':record'))[1];
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},f.authRequest)).result?.status,'recorded');
+ await f.db.prepare('UPDATE delegated_consent_sessions SET consumed_at=? WHERE handle_hash=?').bind(at,f.authorizationHash).run();
+ await f.db.prepare('INSERT INTO delegated_access_grants(id,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at) VALUES(?,?,?,?,?,?,?,?,?)').bind('accepted-grant','owner','synthetic-client','synthetic-owned',origin+'/mcp','["afw:project:read"]',at,f.until,'').run();
+ await f.json('/fixture/store',{method:'putLink',arg:{kind:'grant',record:{preconnectionId:pre.preconnectionId,authorizationHash:f.authorizationHash,grantId:'accepted-grant',grantHash:sha('accepted-grant'),acceptedAt:Date.now()}}});
+ const request={url:origin+'/authorize',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:f.handle,decision:'approve',scope:'afw:project:read'}).toString()};
+ const result=await f.link('grant',{grantId:'accepted-grant'},request);
+ assert.equal(result.result?.status,'uncertain');
+ assert.equal((await rows(f)).filter(([k])=>k.endsWith(':connection')||k.startsWith('owner-connection-ref:')).length,0);
 });

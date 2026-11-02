@@ -24,7 +24,7 @@ export class FiniteOwnerFixture extends DurableObject{
    return Response.json(rows);
   }
   if(path==='/fixture/store'){
-   const {method,arg}=await request.json(),store=createFiniteOwnerPreparationStore({storage:this.ctx.storage,now:Date.now}),lease={signal:new AbortController().signal,assertCurrent(){}};
+   const {method,arg,loseAck}=await request.json(),actual=this.ctx.storage,storage=loseAck?{get:(...a)=>actual.get(...a),transaction:async fn=>{await actual.transaction(fn);throw Error('synthetic lost pair ACK');}}:actual,store=createFiniteOwnerPreparationStore({storage,now:Date.now}),lease={signal:new AbortController().signal,assertCurrent(){}};
    try{return Response.json({result:await store[method](arg,lease)});}catch{return Response.json({rejected:true});}
   }
   if(path==='/fixture/read'){
