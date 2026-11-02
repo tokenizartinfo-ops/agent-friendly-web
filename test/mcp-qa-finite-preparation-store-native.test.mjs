@@ -54,3 +54,30 @@ test('lease_expiry_rolls_back_native_transaction',async t=>{
  assert.equal(r.rejected===true||r.result?.status==='uncertain',true);
  assert.deepEqual(await call('rows'),before);
 });
+
+test('preconnection_links_are_immutable_and_notice_requires_exact_grant',async t=>{
+ const {call,f}=await native(t);
+ assert.equal((await call('putPreconnection',f.preconnection)).result.status,'recorded');
+ const grant={preconnectionId:f.preconnection.preconnectionId,authorizationHash:'c'.repeat(64),grantId:'grant',grantHash:'d'.repeat(64),acceptedAt:20};
+ const notice={preconnectionId:grant.preconnectionId,grantHash:grant.grantHash,eventHash:'e'.repeat(64),sequence:1,acceptedAt:30};
+ assert.equal((await call('putLink',{kind:'notice',record:notice})).rejected,true);
+ assert.equal((await call('putLink',{kind:'grant',record:grant})).result.status,'recorded');
+ assert.equal((await call('putLink',{kind:'notice',record:{...notice,grantHash:'f'.repeat(64)}})).rejected,true);
+ assert.equal((await call('putLink',{kind:'notice',record:notice})).result.status,'recorded');
+ const before=await call('rows');
+ assert.equal((await call('putLink',{kind:'grant',record:grant})).result.status,'existing');
+ assert.equal((await call('putLink',{kind:'grant',record:{...grant,grantId:'replacement'}})).rejected,true);
+ assert.deepEqual(await call('rows'),before);
+});
+test('context_is_bound_to_original_selection_and_read_by_exact_refs',async t=>{
+ const {call,f}=await native(t),c=f.context,now=c.T0+10;
+ assert.equal((await call('putContext',c,{now})).rejected,true);
+ assert.equal((await call('publishSelection',{preparation:c.ownerPreparation,selection:f.contextSelection,expectedHeadHash:null},{now})).result.status,'recorded');
+ assert.equal((await call('bindSelection',f.contextBinding,{now})).result.status,'recorded');
+ assert.equal((await call('putContext',c,{now})).result.status,'recorded');
+ assert.deepEqual((await call('readContext',{intentId:c.intentId,sourceRevision:c.sourceRevision},{now})).result,c);
+ const before=await call('rows');
+ assert.equal((await call('putContext',{...c,seedHash:'f'.repeat(64)},{now})).rejected,true);
+ assert.equal((await call('readContext',{intentId:c.intentId,sourceRevision:'c'.repeat(40)},{now})).rejected,true);
+ assert.deepEqual(await call('rows'),before);
+});

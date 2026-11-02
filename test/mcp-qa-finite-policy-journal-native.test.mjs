@@ -39,3 +39,28 @@ test('admin_pending_keeps_outstanding_send',async t=>{
  assert.equal((await call('acknowledge',f.ack,extra)).rejected,true);
  assert.deepEqual(await call('rows'),before);
 });
+
+test('receipt_requires_both_actual_acks_and_exact_resource_ids',async t=>{
+ const {call,f}=await native(t),extra={target:'journal'},activation={...f.send,effect:'activation',issuedAt:40},act={...extra,identity:{...f.identity,effect:'activation'}};
+ assert.equal((await call('finish',f.receipt,act)).rejected,true);
+ await call('issue',f.send,extra);await call('acknowledge',f.ack,extra);
+ await call('issue',activation,act);
+ assert.equal((await call('finish',f.receipt,act)).rejected,true);
+ const activationHash=await call('recordHash',{kind:'PolicySend',record:activation});
+ const ack={...f.ack,sendHash:activationHash.result,acknowledgedAt:50};
+ assert.equal((await call('acknowledge',ack,act)).result.status,'recorded');
+ const wrong=await call('recordHash',{kind:'PolicyReceipt',record:{...f.receipt,versionId:'22222222-2222-4222-8222-222222222222'}});
+ assert.equal((await call('finish',{...f.receipt,versionId:'22222222-2222-4222-8222-222222222222',receiptHash:wrong.result},act)).rejected,true);
+ assert.equal((await call('finish',f.receipt,act)).result.status,'recorded');
+ assert.equal((await call('read',null,act)).result.state,'installed');
+ assert.equal((await call('finish',f.receipt,act)).result.status,'existing');
+});
+test('connection_stage_and_effect_identity_isolation',async t=>{
+ const {call,f}=await native(t),identity={kind:'connection',preconnectionId:f.preparation.prepId,sourceRevision:f.preparation.sourceRevision,stage:'connection',effect:'upload'};
+ const send={purpose:'afw.finite-connection-send.v1',preconnectionId:identity.preconnectionId,sourceRevision:identity.sourceRevision,stage:'connection',contextHash:'a'.repeat(64),effect:'upload',baselineVersionId:f.ack.resourceId,baselineDeploymentId:f.ack.resourceId,requestHash:'a'.repeat(64),issuedAt:30,deadline:5000};
+ const extra={target:'journal',identity};
+ assert.equal((await call('issue',send,extra)).result.status,'recorded');
+ assert.equal((await call('read',null,{...extra,identity:{...identity,stage:'notices'}})).result.state,'absent');
+ assert.equal((await call('issue',{...send,stage:'notices'},extra)).rejected,true);
+ assert.equal((await call('read',null,{target:'journal'})).result.state,'absent');
+});

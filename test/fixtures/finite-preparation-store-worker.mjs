@@ -1,3 +1,5 @@
+import {finiteFixture} from './qa-finite-trial.mjs';
+import {finitePublicProfileTemplate} from '../../lib/mcp-qa-finite-profile.mjs';
 import {createHash} from 'node:crypto';
 import {DurableObject} from 'cloudflare:workers';
 import {createFiniteOwnerPreparationStore} from '../../lib/mcp-qa-finite-preparation-store.mjs';
@@ -19,7 +21,15 @@ function fixtures(){
  const identity={kind:'policy',intentId:'intent-1',sourceRevision:M,setupInstanceId:'setup-1',effect:'upload'};
  const send={purpose:'afw.finite-policy-send.v1',intentId:'intent-1',sourceRevision:M,setupInstanceId:'setup-1',contextHash:H,effect:'upload',requestHash:H,issuedAt:30,deadline:5000};
  const ack={purpose:'afw.finite-policy-ack.v1',sendHash:domain('PolicySend',send),resourceId:U,acknowledgedAt:35};
- return {preparation,selection,binding,ticket,identity,send,ack};
+ const preconnection=seal('Preconnection',{purpose:'afw.finite-connection-preparation.v1',preconnectionId:H,sourceRevision:M,actorId:H,owner,project,clientId:'client',resource:'https://fixture.invalid/mcp',startedAt:1,expiresAt:900000,approvalHash:H,baselineHash:H},'recordHash');
+ const receipt=seal('PolicyReceipt',{purpose:'afw.finite-policy-installed.v1',intentId:'intent-1',sourceRevision:M,setupInstanceId:'setup-1',qaVersionId:U,seedHash:H,contextHash:H,baselineVersionId:U,baselineDeploymentId:U,versionId:U,deploymentId:U,moduleHash:H,publicStaticHash:H,activationHash:H,restorationHash:H,bindingsHash:H,installedAt:100},'receiptHash');
+ const {legacy,T0}=finiteFixture().plan,contextPreparation=structuredClone(preparation);
+ contextPreparation.selectedAt=T0-10;contextPreparation.expiresAt=T0+900000;contextPreparation.commandBy=T0+390000;contextPreparation.owner.accessVerifiedAt=T0-100;contextPreparation.owner.accessExpiresAt=T0+900000;contextPreparation.connection.permissionExpiresAt=T0+900000;contextPreparation.approval.approvedAt=T0-100;contextPreparation.approval.expiresAt=T0+900000;contextPreparation.preparationHash=domain('OwnerPreparation',contextPreparation);
+ const contextSelection=seal('Selection',{...selection,preparationHash:contextPreparation.preparationHash,selectedAt:T0-10},'selectionHash');
+ const contextBinding={...binding,T0,boundAt:T0+1,preparationHash:contextPreparation.preparationHash,selectionHash:contextSelection.selectionHash};
+ const config=structuredClone(finitePublicProfileTemplate('canaryLive'));for(const b of config.bindings)if(b.privateSlot){delete b.privateSlot;b.text='synthetic';}
+ const context={purpose:'afw.finite-policy-context.v1',intentId:'intent-1',sourceRevision:M,seedHash:H,preparationHash:contextPreparation.preparationHash,selectionHash:contextSelection.selectionHash,bindingHash:domain('Binding',contextBinding),T0,C0:T0+240000,C1:T0+420000,ownerPreparation:contextPreparation,baselineProjectRevision:1,goal:'discovery',saveIdempotencyKey:U,legacy,policies:{AFW_DOSSIER_EVENTS_POLICY:'synthetic',AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY:'synthetic',AFW_DOSSIER_RETIREMENT_POLICY:'synthetic',AFW_DOSSIER_SUCCESSOR_POLICY:'synthetic',AFW_OAUTH_PILOT_CLIENT_ID:'client',AFW_OAUTH_PILOT_PROJECT_ID:'project'},baseline:{versionId:U,deploymentId:U,module:{name:'index.mjs',sha256:H,bytes:1024},configuration:config},rollback:{versionId:U,deploymentId:U,module:{name:'index.mjs',sha256:H,bytes:1024},configuration:config},expectedFull:{activationHash:H,restorationHash:H,bindingsHash:H}};
+ return {preparation,selection,binding,ticket,identity,send,ack,preconnection,receipt,context,contextSelection,contextBinding};
 }
 export class FinitePreparationFixture extends DurableObject{
  async fetch(request){
@@ -34,6 +44,7 @@ export class FinitePreparationFixture extends DurableObject{
   }};
   try{
    if(b.op==='fixtures')return Response.json(fixtures());
+   if(b.op==='recordHash')return Response.json({result:domain(b.arg.kind,b.arg.record)});
    if(b.op==='rows')return Response.json([...await this.ctx.storage.list()]);
    const store=createFiniteOwnerPreparationStore({storage,now:()=>at});
    const journal=createFinitePolicyEffectJournal({storage,identity:b.identity??fixtures().identity,now:()=>at});
