@@ -5,7 +5,9 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {PRIVATE_QA_CLOSED_FLAGS} from '../lib/mcp-qa-closed-context.mjs';
 const entry=`
 import {IndependentClosure,PrivateQaNamedConfirmation} from './worker/independent-closure/index.mjs';
-import {fixture} from './test/fixtures/finite-launch-operations-native.mjs';
+import {fixture,resolvePrivateQaFiniteLaunchContext} from './test/fixtures/finite-launch-operations-native.mjs';
+import {createPrivateQaFiniteLaunchParent,withPrivateQaFiniteLaunchCoordinator} from './lib/mcp-qa-finite-launch-inventory.mjs';
+import {runPrivateQaFiniteLaunchOperation} from './lib/mcp-qa-finite-launch.mjs';
 export {PrivateQaNamedConfirmation};
 export class Native extends IndependentClosure{
  async run(mode){
@@ -16,10 +18,12 @@ export class Native extends IndependentClosure{
   const prepareRefs={intentId:f.plan.intentId,sourceRevision:f.plan.source.revision};
   const prefix='afw.qa-finite-child-create.v1:'+f.plan.intentId+':',controlPrefix='afw.qa-finite-trial.v1:'+f.plan.intentId+':';
   const originalTx=this.ctx.storage.transaction,originalGet=this.ctx.storage.get,originalCreate=this.env.AFW_QA_NAMED_CONFIRMATION.create;
-  let calls=0,callArgs=null,armedAt=null;
+  let calls=0,callArgs=null,armedAt=null,enter,release,settled=false;
+  const reached=new Promise(r=>{enter=r;}),held=new Promise(r=>{release=r;});
   this.env.AFW_QA_NAMED_CONFIRMATION.create=async options=>{
    calls++;callArgs=options;
    const actual=await originalCreate.call(this.env.AFW_QA_NAMED_CONFIRMATION,options);
+   if(mode==='held-create'){enter();await held;settled=true;}
    if(mode==='lost-create')throw Error('SYNTHETIC lost create ACK');
    if(mode==='late-create')f.setNow(f.now()+5000);
    if(mode==='wrong-create')return {id:'foreign'};
@@ -30,20 +34,24 @@ export class Native extends IndependentClosure{
   if(mode==='altered-seed')f.seed='changed';
   if(mode==='source-unavailable')f.sourceUnavailable=true;
   if(mode==='operations-unavailable')f.operationsUnavailable=true;
+  if(mode==='workflow-context'){const parent=createPrivateQaFiniteLaunchParent({deadline:f.now()+5000});return {outcome:await runPrivateQaFiniteLaunchOperation({ctx:{},env:this.env,operation:'prepare',refs:prepareRefs,parent}),calls};}
   if(mode==='prepare-90000')f.setNow(f.plan.T0+90000);
   if(mode==='hydrate-expiry')f.hydrate=async()=>{f.setNow(f.now()+5000);};
   if(mode==='old-head')await this.ctx.storage.put('afw.qa-finite-trial.v1:head',{intentId:'old'});
+  if(mode==='prepare-phase-hydration'){f.setNow(f.plan.T0+89900);f.hydrate=async()=>{f.setNow(f.plan.launchPolicy.armAckBy);};}
+  if(mode==='binding-after-await'){const original=f.primary.finalizer;f.primary.finalizer=async()=>{const r=await original();this.env.AFW_QA_NAMED_CONFIRMATION.create=async()=>{throw Error('foreign');};return r;};}
   if(mode==='invalid-args'){
    const cases=[[],[prepareRefs,{}],[{...prepareRefs,source:{}}],[{...prepareRefs,operation:'create'}]];
    const results=[];for(const a of cases){try{await this.prepareFiniteNominalLaunch(...a);results.push(false);}catch{results.push(true);}}
    return {results,calls};
   }
-  if(mode==='lost-prepare'||mode==='lost-prepared'||mode==='late-prepared'){
+  if(['lost-prepare','lost-prepared','late-prepared','late-guard','late-claim','late-prepared-readback'].includes(mode)){
+   let seen=0;
    this.ctx.storage.transaction=async fn=>{
     const r=await originalTx.call(this.ctx.storage,fn);
-    const state=await originalGet.call(this.ctx.storage,mode==='lost-prepare'?controlPrefix+'control':prefix+'prepared');
+    const state=await originalGet.call(this.ctx.storage,mode==='lost-prepare'?controlPrefix+'control':mode==='late-guard'?'afw.qa-finite-guard.v1:'+f.plan.intentId+':state':mode==='late-claim'?controlPrefix+'effect:nominal':prefix+'prepared');
     if(state&&(mode!=='lost-prepare'||state.phase==='armed')){
-     if(mode==='late-prepared')f.setNow(f.now()+5000);else throw Error('SYNTHETIC unknown transaction ACK');
+     if(mode.startsWith('late-')){if(mode!=='late-prepared-readback'||++seen===2)f.setNow(f.now()+5000);}else throw Error('SYNTHETIC unknown transaction ACK');
     }return r;
    };
   }
@@ -57,19 +65,36 @@ export class Native extends IndependentClosure{
   f.setNow(f.plan.T0+(mode==='create-149999'?149999:mode==='create-160000'?160000:150000));
   if(mode==='consent-changed'){const original=f.primary.admission;f.primary.admission=async()=>{const p=await original();p.consent.valid=false;return p;};}
   if(mode==='readiness-changed')f.primary.finalizer=async()=>{throw Error('SYNTHETIC not READY');};
+  if(['readiness-missing','readiness-stale','readiness-after-await','create-primary-expired'].includes(mode)){
+   const original=f.primary.finalizer;let n=0;f.primary.finalizer=async()=>{
+    const r=await original();n++;if(mode==='readiness-missing')return null;
+    if(mode==='readiness-stale')r.observedAt=f.now()-5001;
+    if(mode==='readiness-after-await'||mode==='create-primary-expired'&&n===2)f.setNow(f.now()+5000);
+    return r;
+   };
+  }
   if(mode==='prepare-step-failed')f.prepareSuccess=false;
   if(mode==='sealed')f.sealed=true;
   if(mode==='withdrawn'){const c=await this.ctx.storage.get(controlPrefix+'control');await this.ctx.storage.put(controlPrefix+'control',{...c,withdrawnAt:f.now()});}
   if(mode==='pin-changed')this.env.AFW_QA_VERSION={id:'22222222-2222-4222-8222-222222222222'};
-  if(mode==='lost-send'||mode==='late-send'){
+  if(['lost-send','late-send','late-send-readback','late-ack','late-ack-readback'].includes(mode)){
+   let seen=0;
    this.ctx.storage.transaction=async fn=>{
     const result=await originalTx.call(this.ctx.storage,fn);
-    if(await originalGet.call(this.ctx.storage,prefix+'send')){
-     if(mode==='late-send')f.setNow(f.now()+5000);else throw Error('SYNTHETIC lost SEND ACK');
+    if(await originalGet.call(this.ctx.storage,prefix+(mode.includes('ack')?'ack':'send'))){
+     if(mode.startsWith('late-')){if(!mode.endsWith('readback')||++seen===2)f.setNow(f.now()+5000);}else throw Error('SYNTHETIC lost SEND ACK');
     }return result;
    };
   }
-  if(mode==='duplicate-id')await originalCreate.call(this.env.AFW_QA_NAMED_CONFIRMATION,{id:f.plan.workflows.confirmation,params:{planHash:f.plan.bundleHash}});
+  if(mode==='duplicate-id'){await originalCreate.call(this.env.AFW_QA_NAMED_CONFIRMATION,{id:f.plan.workflows.confirmation,params:{planHash:f.plan.bundleHash}});f.providerNominal='complete';}
+  if(mode==='held-create'){
+   f.hydrate=async()=>{f.setNow(f.now()+4500);f.hydrate=null;};
+   const first=this.createFiniteNominalChild(refs);await Promise.race([reached,first.then(r=>{throw Error('did not reach native create '+r.status);})]);const firstResult=await first,settledAtReturn=settled;
+   const parent=createPrivateQaFiniteLaunchParent({deadline:f.now()+5000}),context=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent});
+   let enteredFresh=false;const fresh=withPrivateQaFiniteLaunchCoordinator({ctx:this.ctx,env:this.env,context,parent},async check=>{check();enteredFresh=true;return true;});
+   await new Promise(r=>setTimeout(r,30));const enteredBeforeSettlement=enteredFresh;release();await fresh;
+   const again=await this.createFiniteNominalChild(refs);return {firstResult,settledAtReturn,enteredBeforeSettlement,again,journal:await journal(),calls};
+  }
   const created=await this.createFiniteNominalChild(refs);
   this.ctx.storage.transaction=originalTx;
   const before=await journal();
@@ -95,8 +120,13 @@ test('actual native binding creates exact fixed child once; receipt/read/reconst
 });
 test('RPC exact arity/fields reject caller source and operation',async()=>{assert.deepEqual((await native('invalid-args')).results,[true,true,true,true]);});
 test('default unqualified C2 denies before storage/effects',async()=>{const r=await native('prepare',false);assert.equal(r.prepared.status,'admin_pending');assert.equal(r.journal.prepared,null);assert.equal(r.journal.claim,null);assert.equal(r.calls,0);});
-for(const mode of ['missing-setup','unsettled-setup','altered-seed','source-unavailable','operations-unavailable','prepare-90000','hydrate-expiry','old-head','lost-prepare','lost-prepared','late-prepared'])test('prepare denies '+mode,async()=>{const r=await native(mode);assert.equal(r.prepared.status,'admin_pending');assert.equal(r.calls,0);assert.equal(r.journal.send,null);});
+for(const mode of ['missing-setup','unsettled-setup','altered-seed','source-unavailable','operations-unavailable','prepare-90000','hydrate-expiry','prepare-phase-hydration','binding-after-await','old-head','lost-prepare','lost-prepared','late-prepared','late-guard','late-claim','late-prepared-readback'])test('prepare denies '+mode,async()=>{const r=await native(mode);assert.equal(r.prepared.status,'admin_pending');assert.equal(r.calls,0);assert.equal(r.journal.send,null);});
 test('reconstructed prepare never acquires same-object claim again',async()=>{const r=await native('reprepare');assert.equal(r.again.status,'admin_pending');assert.equal(r.calls,0);});
-for(const mode of ['create-149999','create-160000','consent-changed','readiness-changed','prepare-step-failed','sealed','withdrawn','pin-changed'])test('create denies '+mode,async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,0);assert.equal(r.journal.send,null);});
-for(const mode of ['lost-send','late-send'])test('durable '+mode+' consumes SEND without native invocation/refund',async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.ok(r.journal.send);assert.equal(r.journal.ack,null);assert.equal(r.calls,0);assert.equal(r.unchanged,true);});
-for(const mode of ['lost-create','late-create','wrong-create','duplicate-id'])test('one-shot '+mode+' retains unresolved SEND without retry',async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.ok(r.journal.send);assert.equal(r.journal.ack,null);assert.equal(r.calls,1);assert.equal(r.unchanged,true);});
+for(const mode of ['create-149999','create-160000','consent-changed','readiness-changed','readiness-missing','readiness-stale','readiness-after-await','prepare-step-failed','sealed','withdrawn','pin-changed'])test('create denies '+mode,async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,0);assert.equal(r.journal.send,null);});
+for(const mode of ['lost-send','late-send','late-send-readback','create-primary-expired'])test('durable '+mode+' consumes SEND without native invocation/refund',async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.ok(r.journal.send);assert.equal(r.journal.ack,null);assert.equal(r.calls,0);assert.equal(r.unchanged,true);});
+for(const mode of ['lost-create','late-create','wrong-create'])test('one-shot '+mode+' retains unresolved SEND without retry',async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.ok(r.journal.send);assert.equal(r.journal.ack,null);assert.equal(r.calls,1);assert.equal(r.unchanged,true);});
+
+test('preexisting actual native child denies SEND even though native create is idempotent',async()=>{const r=await native('duplicate-id');assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,0);assert.equal(r.journal.send,null);});
+test('Workflow context cannot replace actual DO storage context',async()=>{const r=await native('workflow-context');assert.equal(r.outcome.status,'admin_pending');assert.equal(r.calls,0);});
+test('held actual native create retains coordinator after caller expiry against a fresh parent',async()=>{const r=await native('held-create');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);assert.equal(r.enteredBeforeSettlement,false);assert.equal(r.calls,1);assert.ok(r.journal.send);assert.equal(r.journal.ack,null);});
+for(const mode of ['late-ack','late-ack-readback'])test('late actual ACK persistence remains factual after '+mode,async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,1);assert.ok(r.journal.send);assert.ok(r.journal.ack);assert.equal(r.unchanged,true);});
