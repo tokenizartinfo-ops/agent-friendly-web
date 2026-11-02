@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: C2-B1 native entry and final compiler profile residency qualification
-        run: node --test --test-concurrency=1 test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-entry-records.test.mjs test/build-finite-native-package.test.mjs test/mcp-qa-finite-bootstrap-compiler.test.mjs test/mcp-qa-finite-candidate-residency.test.mjs test/mcp-qa-finite-profile-native.test.mjs
+      - name: C2-B1 fix round 1 native method prerequisites
+        run: node --test test/mcp-qa-finite-initial-entry-native.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-initial-entry.mjs lib/mcp-qa-finite-initial-entry-records.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-entry-records.test.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-bootstrap-compiler.test.mjs
+        run: npx eslint lib/mcp-qa-finite-initial-entry.mjs test/mcp-qa-finite-initial-entry-native.test.mjs test/fixtures/finite-initial-entry-world.mjs

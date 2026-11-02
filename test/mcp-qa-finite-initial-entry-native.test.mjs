@@ -73,7 +73,7 @@ test('B1 held post-A sync cannot report success before durability barrier',()=>u
  assert.ok(claimed(await f.stub.snapshot()));pending(await operation);await f.stub.release();pending(await f.stub.invoke(f.refs));
 }));
 
-for(const fault of ['missing-sync','missing-db','missing-node'])test('B1 missing native holder '+fault+' fails before entry',()=>using('normal',async f=>{
+for(const fault of ['missing-sync','missing-db','missing-node','missing-db-with-session','noncallable-db-with-session','missing-node-id-from-string','noncallable-node-id-from-string'])test('B1 missing native holder '+fault+' fails before entry',()=>using('normal',async f=>{
  await f.stub.configure(fault);pending(await f.stub.invoke(f.refs));assert.equal((await f.stub.snapshot()).some(([k])=>k===KEY),false);
 }));
 test('B1 changed actual sync holder after transaction cannot enter A',()=>using('normal',async f=>{
@@ -82,4 +82,8 @@ test('B1 changed actual sync holder after transaction cannot enter A',()=>using(
 test('B1 Workflow callback reentry cannot reconstruct winning admission',()=>using('normal',async f=>{
  await f.stub.configure('normal');const first=await f.workflow(f.refs);assert.equal(first.result.status,'material_recorded');
  const rows=await f.stub.snapshot();pending((await f.workflow(f.refs)).result);assert.deepEqual(await f.stub.snapshot(),rows);
+}));
+
+for(const fault of ['changed-db-with-session','changed-node-id-from-string'])test('B1 native method drift before CAS '+fault+' leaves entry absent',()=>using('normal',async f=>{
+ await f.stub.configure(fault);pending(await f.stub.invoke(f.refs));assert.equal((await f.stub.snapshot()).some(([k])=>k===KEY),false);assert.equal((await f.stub.stats()).transactions,1);
 }));
