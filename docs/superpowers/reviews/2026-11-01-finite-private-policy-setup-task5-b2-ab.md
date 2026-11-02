@@ -10,3 +10,13 @@ Strengths: fixedlocator/custody/actualhash/normalizationwitness/falseauthority, 
 Named unchanged reads: committedhistoricalcontext/predecessor/hash/restorationparser/stagework/originalpins/successorparser/configfingerprint. No broadcrawl/writes/local/provider/auth/workflows/retests. Root actualfinal41497210626/job125455183793/attempt1 code5b087:21+256+28PASS/lintsuccess/artifacts0 separatelyverified. Source tests notruntime.
 
 Later ownership: actualsourceidentity/custodyscope/historicalslotavailability/bootstrapQAbridge/writers/mounts/C3/deploy/PCoff unchanged. Root keeps B2-AB acceptance PENDING until fix round1 and scoped rereview.
+
+## Scoped re-review, round 1 — accepted
+
+The original reviewer /root/review_private_policy_task5_b2_ab inspected bd9cb210721213b06a8c762c5e96000bf11f11c1 through fbe117a63ae1e55f64c104e274aa90f9df28118d. P2: ADDRESSED. Fix: APPROVED. No new actionable breakage.
+
+Regular fixtures replace the exact synthetic custody datum while preserving real elapsed, D1 and lease clocks. The production historical-pin negative reaches metadata. The separate unchanged production-ceiling controls deny at expiry with zero calls; no 1 ms IO requirement or production approval change is implied.
+
+Root independently verified run41500276455/job125465668561/attempt1, headf68d360a:22PASS, zero fail/cancel/skip, successful lint, artifacts0. No broad retest was needed for a fixture-only fix. The earlier source dependency qualification remains dated evidence.
+
+The C3 preflight document was outside this scoped re-review. B2-AB source is accepted; Task5/C3/runtime remain incomplete and operationalReadiness=false.
