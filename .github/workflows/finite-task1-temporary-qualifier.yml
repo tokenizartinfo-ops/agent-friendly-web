@@ -1,9 +1,9 @@
-# Branch-only C2-B1 initial native entry source qualifier; EXCLUDE from eventual integration.
-name: Finite C2-B1 initial native entry temporary qualifier
+# Branch-only C3 source qualifier; EXCLUDE from eventual integration.
+name: Finite C3 premature admission temporary qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-initial-*.mjs', 'test/mcp-qa-finite-initial-*.test.mjs', 'test/fixtures/finite-initial-*.mjs', 'worker/independent-closure/finite.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-own-finite-primary.mjs', 'lib/mcp-own-finite-admission-gate.mjs', 'lib/mcp-own-finite-cleanup-host.mjs', 'lib/mcp-own-durable-host.mjs', 'lib/mcp-node-process-custody.mjs', 'test/mcp-own-finite-premature-admission-native.test.mjs', 'test/fixtures/finite-premature-admission-worker.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: C2-B1 fix round 1 native method prerequisites
-        run: node --test test/mcp-qa-finite-initial-entry-native.test.mjs
+      - name: C3 causal native regressions
+        run: node --test test/mcp-own-finite-premature-admission-native.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-initial-entry.mjs test/mcp-qa-finite-initial-entry-native.test.mjs test/fixtures/finite-initial-entry-world.mjs
+        run: npx eslint lib/mcp-own-finite-primary.mjs lib/mcp-own-finite-admission-gate.mjs lib/mcp-own-finite-cleanup-host.mjs lib/mcp-own-durable-host.mjs lib/mcp-node-process-custody.mjs test/mcp-own-finite-premature-admission-native.test.mjs test/fixtures/finite-premature-admission-worker.mjs
