@@ -20,7 +20,7 @@ test('selection_cas_one_winner',async t=>{
 });
 test('preparation_cannot_bind_second_intent',async t=>{
  const {call,f}=await native(t);
- assert.equal((await call('publishSelection',{preparation:f.preparation,selection:f.selection,expectedHeadHash:null})).result.status,'recorded');
+ assert.equal((await call('publishSelection',{preparation:f.preparation,selection:f.selection,expectedHeadHash:null},{now:15})).result.status,'recorded');
  assert.equal((await call('bindSelection',f.binding)).result.status,'recorded');
  const before=await call('rows');
  assert.equal((await call('bindSelection',{...f.binding,intentId:'intent-2'})).rejected,true);
@@ -77,7 +77,7 @@ test('preconnection_links_are_immutable_and_notice_requires_exact_grant',async t
 test('context_is_bound_to_original_selection_and_read_by_exact_refs',async t=>{
  const {call,f}=await native(t),c=f.context,now=c.T0+10;
  assert.equal((await call('putContext',c,{now})).rejected,true);
- assert.equal((await call('publishSelection',{preparation:c.ownerPreparation,selection:f.contextSelection,expectedHeadHash:null},{now})).result.status,'recorded');
+ assert.equal((await call('publishSelection',{preparation:c.ownerPreparation,selection:f.contextSelection,expectedHeadHash:null},{now:c.T0-5})).result.status,'recorded');
  assert.equal((await call('bindSelection',f.contextBinding,{now})).result.status,'recorded');
  assert.equal((await call('putContext',c,{now})).result.status,'recorded');
  assert.deepEqual((await call('readContext',{intentId:c.intentId,sourceRevision:c.sourceRevision},{now})).result,c);
