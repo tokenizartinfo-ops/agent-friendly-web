@@ -28,7 +28,7 @@ export async function finiteRestorationFixture({configure=()=>{},at}={}){
   for(const spec of AFW_FIXED_WORKFLOWS){
    if(x.path===ROOT+'/workflows/'+spec.name)return ok({name:spec.name,id:spec.id,script_name:spec.script,class_name:spec.className});
    if(x.path===ROOT+'/workflows/'+spec.name+'/instances'){
-    const rows=spec.className==='PrivateQaNamedConfirmation'?[{id:p.workflows.confirmation,status:state.nominal,workflow_id:spec.id}]:spec.className==='PrivateQaBootstrap'?[{id:p.workflows.bootstrap,status:state.observer,workflow_id:spec.id}]:[];
+    const rows=spec.className==='PrivateQaNamedConfirmation'?[{id:p.workflows.confirmation,status:state.nominal,workflow_id:spec.id}]:spec.className==='PrivateQaBootstrap'?[{id:p.workflows.bootstrap,status:state.observer,workflow_id:spec.id},...(state.launcher===null?[]:[{id:p.workflows.launcher,status:state.launcher??'complete',workflow_id:spec.id}])]:[];
     if(state.extra&&spec.className==='PrivateQaBootstrap')rows.push({id:'another-active-observer',status:'running',workflow_id:spec.id});
     return ok(rows,{per_page:100,count:rows.length,total_count:rows.length});
    }

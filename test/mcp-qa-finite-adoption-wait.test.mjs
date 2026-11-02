@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {readFiniteMaterialSeed} from '../lib/mcp-qa-finite-seed-http.mjs';
 import {cfFiniteFixture} from './fixtures/finite-cf-http.mjs';
 import {finiteCliSyntheticSource} from './fixtures/finite-http-module.mjs';
 import {finiteObserverInstanceId} from '../lib/mcp-qa-finite-observer.mjs';
@@ -12,7 +13,7 @@ async function fixture(mode='normal',offset=0){
  const a=validateQaFiniteConfirmationCommand({event,context,now:()=>T0}),f=await cfFiniteFixture({at:T0,configure:p=>{p.intentId=a.intentId;p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:sha});}});
  f.base.f.setNow(T0+offset);f.state.observerStatus='running';f.gh.state.admitStatus='in_progress';
  const env={GITHUB_EVENT_PATH:'event.json',GITHUB_REPOSITORY:context.repository,GITHUB_REPOSITORY_ID:context.repositoryId,GITHUB_REF:context.ref,GITHUB_EVENT_NAME:context.eventName,GITHUB_RUN_ID:'11',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:sha,GITHUB_TOKEN:'synthetic_gh',AFW_QA_CLOSED_TOKEN:'synthetic_cf'};
- const reads=[],sleeps=[],writes=[],all=[];const api=await finiteCliSyntheticSource(f.p,{setupMode:mode});
+ const reads=[],sleeps=[],writes=[],all=[];const material=await readFiniteMaterialSeed({intentId:a.intentId,sourceRevision:sha,fetchImpl:f.fetchImpl,now:f.base.f.now});const api=await finiteCliSyntheticSource(f.p,{setupMode:mode,seedHash:material.seedHash});
  const fetchImpl=async(url,init)=>{
   all.push({url,method:init.method,at:f.base.f.now()-T0});
   if(mode==='missing-seed'&&url.includes('/git/ref/tags/afw-finite-observer-create/'))return response({},404);
@@ -21,9 +22,10 @@ async function fixture(mode='normal',offset=0){
    if(mode==='unknown')return response({success:true,errors:[],result:{status:'unknown'}});
    if(mode==='auth')return response({},401);
    if(mode==='transport')throw Error('synthetic transport');
+   if(['authmask','generic404','extra404','oversize404'].includes(mode))return response({success:false,messages:[],errors:[{code:mode==='authmask'?10000:10400,message:mode==='generic404'?'not found':'workflows.api.error.instance.not_found'}],result:null,...(mode==='extra404'?{extra:true}:{}),...(mode==='oversize404'?{padding:'x'.repeat(3000)}:{})},404);
    if(mode==='bad404')return new Response('not json',{status:404,headers:{date:new Date(f.base.f.now()).toUTCString()}});
    if(mode==='skip'&&reads.length===1)f.base.f.setNow(T0+5700);
-   if(f.base.f.now()<T0+50000||mode==='never'||mode==='clip')return response({success:false,errors:[{code:10203,message:'instance.not_found'}],result:null},404);
+   if(f.base.f.now()<T0+50000||mode==='never'||mode==='clip')return response({success:false,messages:[],errors:[{code:10400,message:'workflows.api.error.instance.not_found'}],result:null},404);
   }
   return f.fetchImpl(url,init);
  };
@@ -37,4 +39,4 @@ test('actual CLI waits for attended observer until 50s after successful primary 
 test('absolute slots skip elapsed time without catch-up bursts',async()=>{const r=await fixture('skip');assert.equal(r.result.status,'ready');assert.equal(r.reads[0],0);assert.equal(r.reads[1],6000);});
 test('never observed consumes at most 35 nonzero-budget slots; 70s starts no network',async()=>{const r=await fixture('never');assert.equal(r.result.status,'admin_pending');assert.deepEqual(r.reads,Array.from({length:35},(_,i)=>i*2000));});
 test('zero original budget starts no network',async()=>{const r=await fixture('normal',70000);assert.equal(r.result.status,'admin_pending');assert.equal(r.all.length,0);});
-for(const mode of ['missing-seed','auth','unknown','bad404','transport','setup-missing','setup-running','setup-bad-hash'])test('adoption denies '+mode+' without catch-all retry',async()=>{const r=await fixture(mode,50000);assert.equal(r.result.status,'admin_pending');assert.equal(r.sleeps.length,0);assert.ok(r.reads.length<=1);assert.equal(r.all.some(x=>x.method!=='GET'&&x.url.includes('api.cloudflare.com')),false);});
+for(const mode of ['missing-seed','auth','unknown','bad404','authmask','generic404','extra404','oversize404','transport','setup-missing','setup-running','setup-bad-hash'])test('adoption denies '+mode+' without catch-all retry',async()=>{const r=await fixture(mode,50000);assert.equal(r.result.status,'admin_pending');assert.equal(r.sleeps.length,0);assert.ok(r.reads.length<=1);assert.equal(r.all.some(x=>x.method!=='GET'&&x.url.includes('api.cloudflare.com')),false);});
