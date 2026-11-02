@@ -23,3 +23,13 @@ Reviewer reviewed13patches; Root actual run41530593619/head e95b/job125569445138
 ## Root fix-round 1 instruction
 
 Finding is load-bearing and accepted as concrete. Preserve original spec/ruling; no widening, refunded Entry or additional source feature. Same implementer fixes exact captured native methods/holder checks, adds meaningful missing/noncallable/changed-before-CAS tests, runs covering native entry tests and scoped lint. Compiler already passed; rerun fullgraph only if actual imports/runtime graph change creates an unresolved concern. Original reviewer will scope re-review to this finding/fixdiff. B1 notaccepted, C3product waits.
+
+## Fix round 1 — scoped re-review and Root source acceptance
+
+Same reviewer /root/review_initial_native_entry: ADDRESSED; SpecCompliancePASS; TaskQualityApproved. initial-entry70–74 captures/requires/rechecks both methods before transaction firstget/put. native test77–79,87–89 covers absent/noncallable/beforeCASdrift; fixture26 native transaction injection. NewCritical/Importantbreakage:none. Allsixpatches reviewedonce, no testrerun. PriorcompilermeasurementsONLYe95b.
+
+Root independently verified actual run41532541570/head28d2bd6f977980944bb7288baba35a2fb547107d/attempt1/job125576141961:35PASS0fail/cancel/skip, scopedlintclean,artifacts0; fullcoveringcommand/logs andsixfilediffpresent. Prior broader41530593619 at e95b:68PASS andactualgraph/bytes remain datedsourceevidence, notnewsourcebytes. Source-only acceptance; exactnewcomposedpackage mustcompileagainatitsactualfutureHEAD.
+
+Cannot-verify resolution: actualWorkflowdelivery/providerdiskscheduling/livecustody/publisher are explicitly outside B1's source contract and remain owningfuturegates; nooperationalapproval claimed. Sourcegovernancetrust/SYNboundaries/heldACKlimits/actor-onlynarrowing remainexplicit. Deferredminors: baseline dependency/host/SDKnoise and earlierA independentTask4canonicaloracle forintegration/finalreview. NoCritical/Importantopen.
+
+Task C2-B1: complete (commits f61ec7b..23115f7, review clean after fixround1). Runtime/fullpackage/PCofffalse; Maxuntouched.

@@ -1,61 +1,46 @@
 # AFW: continuación cloud — 2 de noviembre de 2026
 
-Checkpoint Root20:45UTC. Fuente y pruebas de preparación; no acredita estado remoto actual ni operación con PC apagado.
+Checkpoint Root21:59UTC. Trabajar por GitHub/Actions, sin nuevos clones/dependencias/builds/temporales del PC. Repositorio tokenizartinfo-ops/agent-friendly-web, rama feat/finite-native-cleanup-20261101. No repetir unidades aceptadas ni cargar todo el historial. Este checkpoint reemplaza el anterior de20:45, preservado en f61ec7b2251672cc34016715c45dd3ecf085c14c.
 
-Repositorio tokenizartinfo-ops/agent-friendly-web, rama feat/finite-native-cleanup-20261101. Root de aceptación más reciente:44dde8d14fd2ae9ab69d1c38a3599157d590bcd4. Main no se ha modificado. Trabajo por GitHub/Actions; no hay clon, dependencias, build o proceso nuevo en el PC. No repetir bloques aceptados ni cargar todo el historial.
+## Unidades de código aceptadas
 
-## Completado como código
+C2Tasks1–4, residencia B1 y hechos históricos B2-AB conservan sus aceptaciones previas. C1 puente QA PRE-T0 aceptado6038db5; C2-A material privado inicial aceptado44dde8d. C1actual48PASS/41513188777 y A19PASS/41520147197, revisiones independientes; no repetir.
 
-- C2Tasks1–4, residencia B1 y hechos históricos B2-AB: aceptados previamente; Root70408e38/44a54157 conservan sus evidencias.
-- C1 puente de procedencia QA PRE-T0: aceptado en6038db5. Código21087916, informe f933dc19, revisión independiente y re-reviewP2ADDRESSED/APPROVED. Actions41513188777/job125509965448/attempt1:48PASS0fail/cancel/skip, lint correcto,0artefactos. Conserva anterior81+34PASS. La corrección quita antigüedad acumulada indebida de una observación, sin ampliar plazos ni repetir escrituras.
-- C2-A material privado inicial: aceptado en44dde8d. Código/pruebas2ab571bd; informe119f21f; revisión frescaPASS/Approved. Root comprobó Actions41520147197/job125533756257/attempt1:19PASS0fail/cancel/skip, lint limpio,0artefactos.
+C2-B1 ingreso nativo inicial ACEPTADO como código tras revisión+fixround1:
+- BASE f61ec7b2251672cc34016715c45dd3ecf085c14c.
+- Código inicial e95b4cf1b1f4d098c3c4e412678b79a3a389a8f7, docs722a45c. Root verificó41530593619/job125569445138/attempt1:68PASS0fail/cancel/skip,lintlimpio,0artefactos. Compilación de ESAfuente: canary1942384B/QA1875803B/residente381302B; caps2MiB/3MiB.
+- Revisión fresca halló métodos nativos faltantes antes de Entry: db.withSession/node.idFromString. Fix28d2bd6f977980944bb7288baba35a2fb547107d, docs23115f706bce5cc7e1e81740c61dccdfbf02d5e4. Root verificó41532541570/job125576141961/attempt1:35PASS0fail/cancel/skip/lintlimpio/0artefactos; RED29PASS6FAIL previo. Mismo reviewerADDRESSED/PASS/Approved,0Critical/Important.
+- Informe reports/2026-11-02-finite-initial-native-entry.md y revisión reviews/2026-11-02-finite-initial-native-entry.md. Paquetes completos y scopedfix en reviews/packages.
+- El fix cambia tres líneas de guard, sin imports/grafo nuevos. Bytes/hashes anteriores siguen atribuidosSOLOa e95b; futuro CIcompuesto debecompilarfuenteexactanueva.
 
-A agrega solo tres módulos SIN montar: composición real de B1/B2/C1, registros estrictos y once/material/selector/ACK en el almacenamiento del actor existente. Las pruebas usan DO/SQLite/D1 y productores reales con límites externos explícitamente SYN. Ningún resultado de prueba acredita custodia o publicación real.
+B1 usa transacción nativa finalRETURN → storage.sync → readbackexacto → una colecciónA real → assertCurrent/sync. Entrada existente/ACKincierto/reinicio nunca reconstruye permiso. Solo un CASpreefecto que nunca comprometió admite un contendiente determinista bajo la MISMA intención/plazo. Esto NO permite reenviar CREATE/upload/deploy con ACKincierto. SourcefactualsafeDATA no autoridad.
 
-Hay un minor no bloqueante anotado: reforzar el oráculo de compatibilidad de hash con canonicalizador Task4 independiente o vector fijo. La compatibilidad actual es correcta por inspección del código real. Llevarlo a integración/revisión final, no olvidarlo.
+Pruebasactuales: SQLiteDO/D1, Worker→DO RPC/disposer, dos reinicios con persistencia nativa, compilador/producores reales. SYN: respuestasexternas/pins/custodia/ownercommand/evento+stepWorkflow/ACKs controlados. ACKretenido no es discofísico forzado acommitardespuésni paradafísica. Gobernanza de fuente/cuenta/bindings confiada; DTO no atestigua callercript.
 
-## Distinciones obligatorias
+RulingPOSTimplementación explícito: wrapper y actor heredan baseoriginal min(nativecreatedAt+30s,ceiling); actorademás reduceI0+300s/custodia y conserva toda continuación. Exactoutput sin deadline puede llegar comoDATAtardíobajo basedelwrapper, jamáscomoefecto/permiso. No renovación de vida. Los campos de histórico315/2a477, Qoriginal y Mcandidata siguen separados.
 
-El artefacto histórico315/fuente2a477 no es Q original ni M candidata. El nuevo compromiso de historial bajo M significa origen del lector, no que M produjo el historial antiguo. Los hashes de contexto Task4 siguen su canonicalización ordenada v1 y límites32KiB/depth12/nodes2048 dentro del material64KiB; no hubo cambio de semántica.
+## Siguiente unidad C3 seleccionada, aún sin producto
 
-El registro once DURABLE protege solo si se comprometió y conserva. El WeakSet privado solo evita reintentos en el mismo isolate/almacenamiento, incluso con otro constructor; NO prueba consumo o asentamiento tras reinicio del actor cuando falta evidencia durable. A es DATA/factual y no concede efectos, autoridad de fuente, permisos o nueva vida. B debe resolver el ingreso nativo y resultados inciertos antes de publicar.
+Corregir suscripción prematura que puede insertar una admisión/cierre antes de reserva y bloquearla. Requisitos reports/2026-11-02-finite-admission-preflight.md + reports/2026-11-02-finite-admission-refinement.md; plan plans/2026-11-02-finite-premature-admission.md.
 
-C1 usa confianza expresa en gobernanza de escritores del repositorio: refs Git son mutables. No afirmar inmutabilidad histórica, identidad completa de publicador o autoridad de negocio por sus hashes.
+Helper opaco de fuente nativa, resoluciónLAZY soloalusaradmisión; construircleanup trasSave/revoke/N1 sigueposible. CondiciónEXISTS exacta+atómica D1 de reservaprepared/predecesor/cierre/pins/reloj; noDTOready. Errorprivado porcustodia/start distingue rechazo fresco/ALLACKsuccess:truechanges0 sinpendiente/unknown/launch del resultadoincierto querequierecleanup. Acumular estadofuera decallbackDOretriable. No refund/reset de marcador. MontajeWorker real/factoryqualificación esotra puerta, noreclamarla desde librería. Un escritor, pruebas hosted proporcionales y revisión fresca.
 
-## Siguiente bloque activo
+## Pendientes reales hacia PC apagada
 
-Agente nuevo /root/initial_publication: PREFLIGHT SOLO LECTURA, contra44dde8d. Brief docs/superpowers/briefs/2026-11-02-finite-initial-publication.md. Debe devolver tabla concreta de ingreso/issuer, reloj, fuente/custodia, todos los escritores, bytes/publicación inicial closed_ui, preservación/rollback y cápsula privada. No tiene permiso de escribir producto hasta ruling Root persistido. No hay escritor de producto activo durante ese preflight.
+1. Publicacióninicial B2: fuente/todoslosescritores actuales/globalWorkflow/nativeD1, capacidadREST realdelector9aa, custodiapublicador/baselinerecuperable/journal/rollback/cápsula/ownerSource. Nunca sustituir ausencia de escritores por un hash o DTO.
+2. Forwarding/sesiones/etapas/material/montajes/finalizadorindependiente. AretieneDATA, noautoridad. LímiteanónimoGH60/IP/h impide repetir11consultas porpantalla; presupuesto53/10sesiones NOcualificado.
+3. C3admisión y wiring, Save separado, callback/suscripción/entregaútil/revisión/bajanativa, retirada temprana y tiempos.
+4. Paquetecompleto/privacidad/CIcompuesto/revisión derama/promocióncontrolada.
+5. Recorridoreal conconsumidorcloud, entregaútil, bajanativa y cierrefísico; DESPUÉSunaocurrenciagenuinaPCoff. Maxrequierepreview/aprobación y no sehausado.
 
-La creación futura se propone mediante un único CREATE de CloudflareMCP autorizado, ID/payload deterministas; no asumir permiso WorkflowCreate enGHA. ACK desconocido soloGET del mismoID, no reenvío/restart/ID alternativo. NativeWorkflow.timestamp documenta creación/disparo; status ofrece estado/output, no identidad del llamador ni queuedAt independiente. No compensar relojes ni modificar el contrato posterior sin ruling concreto.
+No es solo esperar Cloudflare. No prometer plazo fijo ni nueva guardiaautomática.
 
-## Otros hallazgos ya conservados
+## Recursos, custodia y runtime
 
-C3 fuente: reports/2026-11-02-finite-admission-preflight.md. Suscripción temprana puede insertar admisión antes de existir reserva y bloquear la reserva posterior. Además catch llama a close aunque start fallase sin admisión; close puede crear cierre y solicitar parada. Una simple comprobación temprana no basta: se necesitan condición atómica D1 y distinción interna fiable entre rechazo/ACK0 y resultado incierto, sin refund de marcador. Preflight realizado; NO arreglado ni probado todavía.
+Último cierreCOMPLETO1nov14:30:52UTC; lectura2nov12:35 solometadataQA/canary. No sonestadoactualgarantizado. UnúnicoGETmetadata del token9aa2nov20:34:58.485Z declaróactive/vencimiento3nov02:59UTC, ContentReadOnlycanary+OP, Metadata/Containerscuenta, sinTailReadobservado. NOpruebaclavesecretoguardada ni endpointREST. SinsondeoWorkflow/rotación/renovación. Lector9aa/publicador057 techo3nov02:59UTC; GHA9db8nov02:59:59UTC. Norenovarautomáticamente.
 
-Guardar el estado de intento fuera del callback de transacción DO: su reejecución no puede olvidar un INSERT o ACK desconocido previo. Solo resultado nativo resuelto success:true/meta.changes:0 de TODOS los intentos, ninguno pendiente y sin launch, permite omitir cierre de ese intento. Errores públicos/DTOs no pueden fabricar esa clasificación. La integración finiteGate real sigue pendiente.
+No hubo tagreal, produccióndispatch, instanciaWorkflow nativa, OAuth/grant/ventana, upload/deploy/activación, secreto/rol/DDL/cron/Container, correo/Max o mutaciónmain desdeeste trabajo. Solo fuentes/rama/Actions. Calificadortemporal EXCLUIDO de integración. SeguimientoLOCALpausado; noguardiacloudpermanente ni PCoff.
 
-## Lector existente: una lectura de metadata
-
-Root realizó UN GET de metadata del token9aa vía CloudflareMCP; timestamp de herramienta2026-11-02T20:34:58.485Z. Fuente reports/2026-11-02-reader-metadata-preparation.es.md. Estado declarado active, vencimiento3nov02:59UTC sin extensión. Código solo canary+operador; metadata/Containers cuenta. No apareceTailRead. Esto NO demuestra contenido de secreto guardado, permiso efectivo de endpoint, cierre ni disponibilidad actual; no hubo sondeo Workflow ni acceso a clave.
-
-Native057 conserva límite3nov02:59UTC; GHA9db conserva8nov02:59:59UTC. No autorrenovar/ampliar/repetir pegados. Comprobar identidad/capacidad actual cuando esté listo el paso real, sin atribuir401/403 a claves por inferencia.
-
-## Resto hacia el ensayo con PC apagada
-
-1. B ingreso nativo/issuer/resultado incierto y publicación inicial/cápsula con restauración recuperable.
-2. Fuente real de preparación y forwarding/sesiones/etapas, material y montajes restantes, inventario y retención de todos los escritores, finalizador independiente.
-3. C3 ruta finita de grant existente, admisión/reserva, Save separado del lector, callback/suscripción/entrega útil/revisión/baja, retirada temprana y tiempos.
-4. Paquete completo, privacidad, CI compuesto, revisión de rama y promoción controlada.
-5. Recorrido real con consumidor cloud efectivo, entrega útil, baja nativa y cierre físico. Después UNA ocurrencia genuina con PC apagado. Max requiere preview/aprobación; no se ha usado.
-
-La limitación anónima de GitHub60consultas/IP/hora hace inviable repetir11lecturas alrededor de cada pantalla. A retiene datos técnicos, nunca autoridad; el recorrido completo y estado actual deben verificarse con presupuesto real. No se aprobó el presupuesto hipotético53/10sesiones ni nuevo token/proxy.
-
-No es solo esperar a Cloudflare: estos bloques de integración siguen abiertos. No prometer plazo fijo ni nueva guardia automática.
-
-## Runtime y exclusiones
-
-Última lectura COMPLETA de cierre1nov14:30:52UTC; lectura2nov12:35 solo metadata QA/canary. Son fechas históricas, no garantía actual. El GET de token2nov20:34 tampoco es cierre.
-
-No hubo tag real, producción workflow dispatch, instancia nativa, OAuth/grant/ventana, upload/deploy/activación, secreto/rol/DDL/cron/Container, correo/Max o cambio a otros proyectos. Los workflows temporales de cualificación se excluyen de integración final. El seguimiento local está pausado; no representa guardia permanente ni ejecución PC-off.
+Minorsdeferred: oráculoTask4independiente deA y mantenimiento baselineeslint@9.39.4/punycode/Actionsv4/CIMD; norelajarconfigparasilenciarlos.
 
 operationalReadiness=false. completePackage=false. PCoff=false.
