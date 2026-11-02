@@ -33,3 +33,25 @@ test('Task3 preparation grammar preserves Access/limiter and closed business fla
  }
  assert.throws(()=>qualifyFiniteConnectionProfile({phase:'finite_prearm',metadata:syntheticPreparation('closed_ui',source)}));
 });
+
+test('Task3 actual native SEND claim ACK consumes the same child budget before any HTTP send',async t=>{
+ const f=await setup(t,'held_claim'),answer=await f.publish(await f.screen());
+ assert.equal(answer.status,'admin_pending');assert.equal(f.posts(),0);
+ let rows=await f.json('/fixture/rows',{});const send=JSON.parse(rows.find(([k])=>k.endsWith(':send'))[1]);
+ assert(send.deadline-send.issuedAt<=5000);assert(send.deadline<=Date.now());
+ assert.equal(rows.filter(([k])=>k.endsWith(':ack')).length,0);
+ assert.equal((await f.publish(await f.screen())).status,'admin_pending');assert.equal(f.posts(),0);
+ await new Promise(r=>setTimeout(r,1300));
+ assert.equal((await f.publish(await f.screen())).status,'admin_pending');assert.equal(f.posts(),0);
+ rows=await f.json('/fixture/rows',{});assert.equal(rows.filter(([k])=>k.endsWith(':send')).length,1);
+});
+for(const mode of ['extra_binding','namespace'])test('Task3 actual primary '+mode+' drift prevents any durable SEND',async t=>{
+ const f=await setup(t,mode);assert.equal((await f.publish(await f.screen())).status,'admin_pending');assert.equal(f.posts(),0);
+ assert.equal((await f.json('/fixture/rows',{})).filter(([k])=>k.endsWith(':send')).length,0);
+});
+test('Task3 acknowledged upload with rejected private secret readback blocks another preparation',async t=>{
+ const f=await setup(t,'wrong_secret');
+ assert.equal((await f.publish(await f.screen())).status,'admin_pending');assert.equal(f.posts(),1);
+ assert.equal((await f.publish(await f.screen())).status,'admin_pending');assert.equal(f.posts(),1);
+ const rows=await f.json('/fixture/rows',{});assert.equal(rows.filter(([k])=>k.endsWith(':send')).length,1);assert.equal(rows.filter(([k])=>k.endsWith(':ack')).length,1);
+});

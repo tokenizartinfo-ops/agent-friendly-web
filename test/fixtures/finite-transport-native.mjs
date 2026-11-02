@@ -29,9 +29,13 @@ export async function setup(t,mode='normal'){
   if(url.pathname===root+'scripts/agent-friendly-web-delegated-canary/deployments')return envelope({deployments:[mode==='foreign'?{...current,id:D}:current]});
   const id=url.pathname.split('/').at(-1),isNew=versions.has(id),version=versions.get(id),cfg=isNew?{...version,bindings:version.bindings.map(b=>b.type==='inherit'?{name:b.name,type:'secret_text'}:b)}:material.configuration;
   const {modules:unused,...configuration}=cfg;void unused;
+  if(mode==='wrong_secret'&&isNew)configuration.bindings=configuration.bindings.map(b=>b.type==='secret_text'?{...b,name:b.name+'_FOREIGN'}:b);
+  if(mode==='extra_binding'&&!isNew)configuration.bindings=[...configuration.bindings,{name:'UNAPPROVED',type:'plain_text',text:'x'}];
+  if(mode==='namespace'&&!isNew)configuration.bindings=configuration.bindings.map(b=>b.type==='durable_object_namespace'?{...b,namespace_id:'f'.repeat(32)}:b);
   return envelope({id,...configuration,containers:configuration.containers.map(b=>({...b,name:'agent-friendly-web-delegated-canary-afwowneventnode'})),urls:[],modules:isNew?version.modules:[{name:'index.mjs',content_type:'application/javascript+module',content_base64:Buffer.from(material.script).toString('base64')}]});
  }});
  material=await f.json('/fixture/material',{});current={id:material.source.currentPublication.deploymentId,strategy:'percentage',versions:[{version_id:material.source.currentPublication.versionId,percentage:100}]};
+ if(mode==='held_claim')await f.json('/fixture/hold-claim',{});
  const publish=async screen=>f.json('/fixture/publish',{url:O+'/connections/finite-prepare',headers:{'Cf-Access-Jwt-Assertion':f.token,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:screen.cookie},body:new URLSearchParams({handle:screen.handle,projectRef:screen.projectRef,decision:'approve'}).toString()});
  return {...f,publish,calls,posts:()=>posts};
 }

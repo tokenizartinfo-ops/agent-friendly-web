@@ -4,7 +4,7 @@ import {createHash,randomBytes,randomUUID} from 'node:crypto';
 import {setup} from './fixtures/finite-transport-native.mjs';
 import {hashFinitePreparationRecord as hash,hashFiniteOwnerPreparationAudit as audit} from '../lib/mcp-qa-finite-preparation-records.mjs';
 const O='https://delegated-canary.agentfriendlyweb.dev',sha=v=>createHash('sha256').update(v).digest('hex');
-const rows=async f=>(await f.json('/fixture/rows',{})).map(([k,v])=>[k,JSON.parse(v)]);
+const rows=async f=>(await f.json('/fixture/rows',{})).map(([k,v])=>[k,v.startsWith('{')?JSON.parse(v):v]);
 test('three actual native owner approvals and acknowledged stages precede final selection and audit',async t=>{
  const f=await setup(t),first=await f.screen();
  assert.equal((await f.publish(first)).status,'installed');
