@@ -24,4 +24,4 @@ jobs:
         run: node --test test/mcp-qa-finite-initial-material-native.test.mjs test/mcp-qa-finite-initial-material-records.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint test/mcp-qa-finite-initial-material-native.test.mjs test/mcp-qa-finite-initial-material-records.test.mjs test/fixtures/finite-initial-history-world.mjs
+        run: npx eslint lib/mcp-qa-finite-initial-material.mjs lib/mcp-qa-finite-initial-material-records.mjs lib/mcp-qa-finite-initial-material-store.mjs test/mcp-qa-finite-initial-material-native.test.mjs test/mcp-qa-finite-initial-material-records.test.mjs test/fixtures/finite-initial-history-world.mjs

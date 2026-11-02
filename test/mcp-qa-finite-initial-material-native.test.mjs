@@ -8,6 +8,8 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {bootstrapWorld,UUID,GH,CF} from './fixtures/finite-bootstrap-world.mjs';
 import {initialHistoryFixture,seedInitialHistory} from './fixtures/finite-initial-history-world.mjs';
 import {QA_CLOUD_CLOSED_PINS as realPins} from '../lib/mcp-qa-cloud-closed-pins.mjs';
+import {finiteData,finiteFields} from '../lib/mcp-finite-evidence.mjs';
+import {initialCanonical,initialHash,validateFiniteInitialOriginalContext,encodeFiniteInitialMaterialRecord,decodeFiniteInitialMaterialRecord} from '../lib/mcp-qa-finite-initial-material-records.mjs';
 import {finitePublicProfileTemplate} from '../lib/mcp-qa-finite-profile.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex'),J=JSON.stringify;
 const M='c'.repeat(40),TREE='d'.repeat(40),COMMAND=9001,ONCE='afw.finite-initial-preparation.v1:once';
@@ -36,7 +38,7 @@ async function harness(mode='normal'){
   let result;
   try{
    if(mode==='held-parent')await new Promise(r=>setTimeout(r,60));
-   result=await observeFiniteOwnerStageWork({ctx:this.ctx,env:this.env,admission:{lease},originalLease:lease},()=>producer.collect({commandId:9001},lease));
+   result=await producer.collect({commandId:9001},lease);
    if(result?.purpose!=='afw.finite-initial-material-result.v1')return{ok:false,status:result?.status};
    producer.assertCurrent(result,lease);
    let cloneDenied=false,otherDenied=false;
@@ -53,13 +55,14 @@ async function harness(mode='normal'){
  `;
  let product;try{product=await readFile('lib/mcp-qa-finite-initial-material.mjs','utf8');}catch{product='export function createPrivateQaFiniteInitialMaterial(){return{collect:async()=>({status:"admin_pending"}),assertCurrent(){throw Error("missing original factual producer");}};}';}
  const approvalDecl="CEILING=Date.parse('2026-11-03T02:59:00Z')";
+ if(product.includes(approvalDecl)){assert.equal(product.split(approvalDecl).length,2);product=product.replace(approvalDecl,'CEILING='+approval);}
  const sources=new Map();
  for(const p of ['mcp-qa-finite-historical-source.mjs','mcp-qa-finite-bootstrap-native.mjs']){
   const s=await readFile('lib/'+p,'utf8');assert.equal(s.split(approvalDecl).length,2);sources.set(p,s.replace(approvalDecl,'CEILING='+approval));
  }
  const plugin={name:'explicit-SYN-external-data-not-whole-facts',setup(b){
   b.onLoad({filter:/mcp-qa-finite-initial-material\.mjs$/},()=>({contents:product,loader:'js'}));
-  b.onResolve({filter:/mcp-qa-finite-initial-material\.mjs$/},args=>({path:process.cwd()+'/lib/mcp-qa-finite-initial-material.mjs'}));
+  b.onResolve({filter:/mcp-qa-finite-initial-material\.mjs$/},()=>({path:process.cwd()+'/lib/mcp-qa-finite-initial-material.mjs'}));
   b.onLoad({filter:/mcp-qa-finite-(historical-source|bootstrap-native)\.mjs$/},args=>({contents:sources.get(args.path.split('/').at(-1)),loader:'js'}));
   b.onLoad({filter:/mcp-confirmation-frozen-artifact\.json$/},()=>({contents:J(x.receipt),loader:'json'}));
   b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));
@@ -95,6 +98,18 @@ test('C2-A actual native B1+B2+C1 composition retains private factual material, 
   assert.equal(r.material.originalContext.legacy.sourceRevision,M);assert.equal(r.material.ownerSelection.project.synthetic,true);assert.equal(r.material.ownerSelection.project.revision,1);
   assert.equal(r.material.originalContext.retirementPolicy,J({...f.x.events,grantId:'original',containerId:f.x.original.containerId,startAt:f.x.at,expiresAt:f.x.at+10000,programHash:f.x.original.programHash,sourceRevision:f.x.original.sourceRevision}));
   assert.equal(r.scriptHash,f.resident.module.sha256);assert.equal(r.candidateBytes,f.resident.module.bytes);assert.equal(Object.hasOwn(r.material.originalContext.artifact,'script'),false);
+  const decoded=decodeFiniteInitialMaterialRecord('InitialMaterial',encodeFiniteInitialMaterialRecord('InitialMaterial',r.material));
+  // Reconstruct the actual Task4 projection and digest formula; script is only
+  // in the private full context and excluded by the exact artifact fields.
+  const original=finiteFields({...r.material.originalContext,artifact:{script:'private script',...r.material.originalContext.artifact}},['artifact','scope','original','publication','cancellations','retirementPolicy','withdrawalRequestId','saveIdempotencyKey','legacy','trialId']);
+  const identity=Object.fromEntries(['sourceRevision','sourceTree','programHash','workerHash','sourceCheck'].map(k=>[k,original.artifact[k]]));
+  const projection=finiteData({...original,artifact:identity});
+  const task4=sha('afw.finite-original-context.v1\\n'+initialCanonical(projection));
+  assert.equal(initialHash('afw.finite-original-context.v1',finiteData(decoded.originalContext)),task4);
+  const oversized=structuredClone(decoded);oversized.originalContext.legacy.control+=' '.repeat(33000);
+  assert.ok(Buffer.byteLength(initialCanonical(oversized))<65536,'whole material still below 64KiB');
+  assert.throws(()=>validateFiniteInitialOriginalContext(oversized.originalContext));
+  assert.throws(()=>encodeFiniteInitialMaterialRecord('InitialMaterial',oversized));
   const after=await f.stub.snapshot();for(const pair of before)assert.deepEqual(after.find(x=>x[0]===pair[0]),pair);
   assert.equal(after.some(x=>x[0]==='afw.qa-finite-trial.v1:head'),false);
   assert.equal(f.requests.filter(x=>x.startsWith(GH)).length,13);assert.equal(f.requests.filter(x=>x.startsWith(CF)).length,6);
