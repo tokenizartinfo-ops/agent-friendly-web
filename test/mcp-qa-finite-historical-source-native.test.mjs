@@ -59,7 +59,7 @@ async function harness(actualPins=false){
  const parent=createFiniteOwnerRequestLease(new Request('https://fixture.invalid/')),a={lease:parent.lease};
  try{await observeFiniteOwnerStageWork({ctx,env:this.env,admission:a,originalLease:parent.lease},()=>read({ctx,env:this.env},parent.lease));}catch{}finally{parent.finish();}
  async function tryEntry(env){const next=createFiniteOwnerRequestLease(new Request('https://fixture.invalid/'));let entered=false;try{await observeFiniteOwnerStageWork({ctx,env,admission:{lease:next.lease},originalLease:next.lease},async()=>{entered=true;});}catch{}finally{next.finish();}return entered;}
- const blocked=!(await tryEntry(this.env));await new Promise(resolve=>setTimeout(resolve,700));const released=await tryEntry(this.env);return{blocked,released};
+ const blocked=!(await tryEntry(this.env));await new Promise(resolve=>setTimeout(resolve,700));const released=await tryEntry(this.env);return JSON.stringify({blocked,released});
  }
  }export default{fetch(){return new Response(null,{status:404})}};`;
  const plugin={name:'explicit-synthetic-external-source-commitments',setup(b){b.onResolve({filter:/mcp-qa-finite-historical-source\.mjs$/},()=>({path:'historical-reader',namespace:'b2-source'}));b.onLoad({filter:/.*/,namespace:'b2-source'},()=>({contents:source,loader:'js',resolveDir:process.cwd()+'/lib'}));if(actualPins)return;b.onLoad({filter:/mcp-confirmation-frozen-artifact\.json$/},()=>({contents:J(x.receipt),loader:'json'}));b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));b.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({contents:'export const QA_CLOUD_CLOSED_PINS='+J({...REAL_PINS,canary:x.pin})+';',loader:'js'}));}};
@@ -123,7 +123,7 @@ test('B2-AB actual native historical reader, private CF boundary is synthetic',a
 
  await t.test('later active new grant and Save do not gate historical reads',async()=>{await f.db.prepare('INSERT INTO delegated_access_grants VALUES(?,?,?,?,?,?,?,?,?,?)').bind('new-active','owner','client','synthetic-project',f.x.events.resource,'["afw:project:read"]',new Date().toISOString(),new Date(Date.now()+100000).toISOString(),'',new Date().toISOString()).run();assert.equal((await f.stub.read()).ok,true);await f.db.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?').bind(new Date().toISOString(),'new-active').run();assert.equal((await f.stub.read()).ok,true);});
  await t.test('original aborted or expired parent denies without a renewed lease',async()=>{const n=f.requests.length;assert.equal((await f.stub.read('expired')).ok,false);assert.equal(f.requests.length,n);f.delay=30;assert.equal((await f.stub.read('abort')).ok,false);f.delay=0;});
- await t.test('original termination retains the held native continuation until settlement',async()=>{const r=await f.stub.retention();assert.deepEqual(r,{blocked:true,released:true});});
+ await t.test('original termination retains the held native continuation until settlement',async()=>{const r=JSON.parse(await f.stub.retention());assert.deepEqual(r,{blocked:true,released:true});});
  assert.deepEqual(await f.stub.snapshot(),before);assert.deepEqual((await f.db.prepare('SELECT * FROM dossier_node_process_closures ORDER BY grant_id').all()).results,dbBefore);assert.equal((await f.mf.dispatchFetch('https://fixture.invalid')).status,404);
  }finally{await f.mf.dispose();}
 });
