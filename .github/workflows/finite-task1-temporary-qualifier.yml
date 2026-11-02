@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: C2-A actual native material and strict records
+      - name: C2-B1 actual native entry and strict records
         run: node --test test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-entry-records.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-entry-records.test.mjs test/fixtures/finite-initial-entry-world.mjs
+        run: npx eslint lib/mcp-qa-finite-initial-entry.mjs lib/mcp-qa-finite-initial-entry-records.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-entry-records.test.mjs test/fixtures/finite-initial-entry-world.mjs
