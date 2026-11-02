@@ -1,3 +1,4 @@
+import {createHash} from 'node:crypto';
 import {DurableObject} from 'cloudflare:workers';
 import {createFiniteOwnerPreparationStore} from '../../lib/mcp-qa-finite-preparation-store.mjs';
 import {createFinitePolicyEffectJournal} from '../../lib/mcp-qa-finite-policy-journal.mjs';
@@ -9,7 +10,8 @@ const seal=(kind,value,key)=>({...value,[key]:domain(kind,value)});
 function fixtures(){
  const owner={subject:'synthetic-subject',accessRealmHash:H,accessVerifiedAt:1,accessExpiresAt:900000};
  const project={projectId:'synthetic-project',revision:1,synthetic:true};
- const approval={purpose:'afw.own-synthetic-policy-preparation.v1',decision:'approve',sourceRevision:M,projectHash:H,goal:'discovery',approvedAt:1,expiresAt:900000,csrfReceiptHash:H};
+ const projectHash=createHash('sha256').update('afw.finite-owner-project.v1\n'+JSON.stringify({projectId:project.projectId,revision:project.revision,synthetic:project.synthetic})).digest('hex');
+ const approval={purpose:'afw.own-synthetic-policy-preparation.v1',decision:'approve',sourceRevision:M,projectHash,goal:'discovery',approvedAt:1,expiresAt:900000,csrfReceiptHash:H};
  const preparation=seal('OwnerPreparation',{purpose:'afw.finite-owner-preparation.v1',prepId:H,sourceRevision:M,actorId:H,selectedAt:10,expiresAt:900000,commandBy:390000,owner,connection:{connectionRef:H,grantId:'grant',clientId:'client',resource:'https://fixture.invalid/mcp',grantHash:H,consentHash:H,noticesHash:H,permissionExpiresAt:900000},project,goal:'discovery',programContext:{programHash:H,sourceRevision:M,originalContextHash:H},approval,auditHash:H},'preparationHash');
  const selection=seal('Selection',{purpose:'afw.finite-owner-selection.v1',sourceRevision:M,prepId:H,preparationHash:preparation.preparationHash,selectedAt:10,sequence:1,previousSelectionHash:null},'selectionHash');
  const binding={purpose:'afw.finite-owner-binding.v1',prepId:H,preparationHash:preparation.preparationHash,selectionHash:selection.selectionHash,intentId:'intent-1',sourceRevision:M,T0:20,boundAt:30};

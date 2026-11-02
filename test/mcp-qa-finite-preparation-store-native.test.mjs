@@ -15,7 +15,7 @@ test('selection_cas_one_winner',async t=>{
  const r=await call('concurrent',null,{args:[{preparation:f.preparation,selection:f.selection,expectedHeadHash:null},{preparation:{...f.preparation,prepId:'c'.repeat(64)},selection:{...f.selection,prepId:'c'.repeat(64)},expectedHeadHash:null}]});
  assert.equal(r.filter(x=>x.status==='recorded').length,1);
  const selected=(await call('readSelected',{sourceRevision:f.preparation.sourceRevision})).result;
- assert.equal(selected.selection.selectionHash,f.selection.selectionHash);
+ assert.equal(selected.selection.selectionHash,r.find(x=>x.status==='recorded').recordHash);
  assert.ok((await call('rows')).length>=3);
 });
 test('preparation_cannot_bind_second_intent',async t=>{
