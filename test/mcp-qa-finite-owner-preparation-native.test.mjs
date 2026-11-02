@@ -179,3 +179,16 @@ test('same-origin SDK-approved POST can map exact unconsumed transaction when in
  assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},post)).result?.status,'existing');
  assert.equal((await rows(f)).filter(([k])=>k.startsWith('connection-authorization:')).length,1);
 });
+
+test('lost original snapshot acknowledgement returns no handle and preserves committed native facts',async t=>{
+ const f=await native(t),result=await f.call('/connections/finite-prepare',{headers:{'X-Fixture-Lose-Ack':'true'}});
+ assert.equal(result.status,503);assert.equal(result.headers.get('Set-Cookie'),null);assert.doesNotMatch(await result.text(),/name="handle"/);
+ const stored=await rows(f);assert.equal(stored.filter(([k])=>k.endsWith(':source')).length,1);
+ assert.equal(stored.filter(([k])=>k.startsWith('owner-ticket:')||k.startsWith('connection-approval:')).length,0);
+});
+test('unqualified product source and forwarding constructors remain unavailable despite caller DTOs',async()=>{
+ const source=await import('../lib/mcp-qa-finite-owner-source.mjs');
+ for(const name of ['readPrivateQaFiniteOwnerSource','forwardPrivateQaFiniteOwnerAuthorization','forwardPrivateQaFiniteOwnerGrant','forwardPrivateQaFiniteOwnerNotice']){
+  assert.throws(()=>source[name]({ctx:{},env:{enabled:true,verified:true},sourceRevision:'b'.repeat(40),identity:{subject:'owner'}},{signal:new AbortController().signal,assertCurrent(){}}),/unavailable/);
+ }
+});

@@ -40,7 +40,13 @@ export class FiniteOwnerFixture extends DurableObject{
     return Response.json({result:await op({ctx:this.ctx,env:this.env,request:original,...(kind==='grant'?{grantId}:kind==='notice'?{requestId,sequence}:{authorizationHash})},lease)});
    }catch{return Response.json({rejected:true});}
   }
-  return createFiniteOwnerPreparationHost({ctx:this.ctx,env:this.env}).fetch(request);
+  let ctx=this.ctx;
+  if(request.headers.get('X-Fixture-Lose-Ack')==='true'){
+   const actual=this.ctx.storage;let lost=false;
+   const storage={get:(...a)=>actual.get(...a),transaction:async fn=>{const result=await actual.transaction(fn);if(!lost){lost=true;throw Error('synthetic lost native transaction acknowledgement');}return result;}};
+   ctx={id:this.ctx.id,storage};
+  }
+  return createFiniteOwnerPreparationHost({ctx,env:this.env}).fetch(request);
  }
 }
 const worker={fetch(request,env){
