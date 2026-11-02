@@ -11,7 +11,7 @@ test('Task3 actual owner admission and native journal issue fixed Beta JSON uplo
  const canonical=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a<b?-1:1)):x);
  for(const request of f.requests){
   const effect=request.url.includes('/versions?')?'upload':'activation',send=rows.filter(([k])=>k.endsWith(':send')).map(([,v])=>JSON.parse(v)).find(v=>v.effect===effect);
-  const expected=createHash('sha256').update('afw.finite-connection-request.v1\\n'+canonical({method:request.method,path:request.url,body:request.body})).digest('hex');
+  const expected=createHash('sha256').update('afw.finite-connection-request.v1'+String.fromCharCode(10)+canonical({method:request.method,path:request.url,body:request.body})).digest('hex');
   assert.equal(send.requestHash,expected,'actual complete wire body, inherited UUID vector and bytes are committed');
  }
  assert.equal((await f.publish(screen)).status,'admin_pending');assert.equal(f.posts(),2);
