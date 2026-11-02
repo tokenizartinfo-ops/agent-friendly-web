@@ -1,6 +1,6 @@
 # Task5-B2-C1 — PRE-T0 QA provenance implementation
 
-SOURCE ONLY. Implementation complete for independent review; not accepted/promoted by this report. Task5, C3 and runtime remain incomplete.
+SOURCE ONLY. Latest fix round1 codeHEAD21087916f3967b92ec0ef7f6905aeaa5642c8511 is ready for SAME-reviewer scoped re-review; see the appended fix receipt. Not accepted/promoted by this report. Task5, C3 and runtime remain incomplete.
 
 ## Revisions, authorization and preservation
 
@@ -72,3 +72,27 @@ Initial publication must carry actual compiler bytes through separately authoriz
 Anonymous GitHub rate/availability and3CF+11GH within the real parent (future owner wrapper may clip it to5s) remain actual deployment-usability gates. No cache or new key was invented. Source/context authority, original private initializer, all-writer material/mounts, C3 useful consumer/baja/closure, complete package and runtime remain pending.
 
 STOP WRITES for fresh Root spec and quality review. operationalReadiness=false; completePackage=false; PCoff=false.
+
+
+## C1 review fix round1 — original observation lifetime
+
+Root's pre-code ruling and exact P2 are in [the independent review](../reviews/2026-11-02-finite-pre-t0-qa-provenance.md), committed before this fix. FixBASE6335b5d2410527b5ebf6beb4dc628205cde73045 contains only Root documentation after original DocHEADb7ca96be80da939ad906c52e5b2ab900e901e4cd.
+
+The finding was valid: final issuer primary reconciliation treated original observedAt as a response that must remain younger than5s. Multiple individually valid requests could create/read back the tag/ref within original Pend, then fail the job only because the observation aged. That unnecessarily consumed the write-once publication.
+
+Production change is confined to mcp-qa-finite-bootstrap-primary.mjs issuer historical-observation predicate and explanatory comment. It now requires a safe integer observedAt within original step/Pend and not after the primary observation time. It does NOT impose cumulative age<=5s. The original timestamp remains unchanged. Per-response Date freshness, transport child5s, original admission wall/monotonic clock, P0/Pend, source/job/step checks, spent cap, unknown-ACK behavior, credentials and native reader phase are unchanged. No extension, retry/reset/replacement or owner window.
+
+Focused RED: testHEAD d052b35d7cf008892dd82119b48655e17c45ffc2, [run41512903562](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41512903562), job125508988847, attempt1. 48tests:44PASS/4FAIL,0cancel/skip. The actual issuer regression measured original elapsed wall6518ms/monotonic6518ms, max individual SYN HTTP response654ms, exactly2POST, original observedAt unchanged and original Pend still live; old final reconciliation rejected. Direct historical-primary positive also rejected; NaN and a future observation within5s were wrongly accepted by the previous absolute-age predicate. These cases implement Root's explicit finite/not-future requirement.
+
+Fix codeHEAD21087916f3967b92ec0ef7f6905aeaa5642c8511. [GREEN41513188777](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41513188777), job125509965448, attempt1, exact codeHEAD verified: **48PASS,0FAIL/0cancel/0skip**, scoped lint success, artifacts0. Regression measured wall6518ms/monotonic6518ms, max request653ms, exactly2POST and unchanged original observedAt; successful result and zero extra HTTP/POST on repeat invocation. This uses actual elapsed original clocks, not a simulated deadline or production-approval extension. Individual transport/body limits remain independently enforced by the unchanged real transport.
+
+Exact focused commands:
+- npm ci --ignore-scripts --no-audit --no-fund
+- node --test test/mcp-qa-finite-bootstrap-issuer.test.mjs test/mcp-qa-finite-bootstrap-primary.test.mjs
+- npx eslint lib/mcp-qa-finite-bootstrap-primary.mjs test/mcp-qa-finite-bootstrap-issuer.test.mjs test/mcp-qa-finite-bootstrap-primary.test.mjs
+
+The actual Node issuer/CLI and real same-checkout compiler execute inside the existing issuer tests; CF/GitHub/custody remain SYN. Delay650ms is applied only to SYN GitHub responses after actual QA observation, with fresh response Date. No whole-source success mock, clock rewrite or new product injection hook. A test failure records only its sanitized message rather than the bundled data-URL stack. Production native source and compiler were unchanged; the prior81+34 qualification is retained, with no reflex native/compiler regression rerun. Existing Actions/punycode warnings remain as recorded above.
+
+The temporary branch/path-scoped qualifier was narrowed to these two test files and primary source; contents:read, no secrets/artifacts/deploy/dispatch/docs-only trigger. EXCLUDE it from integration. RED commit CAS/ref/all3 exact file readbacks and fix commit CAS/ref/all2 exact readbacks verified; final report/ledger DocHEAD is emitted in the final CAS/ref receipt. No other writer or runtime action.
+
+STOP WRITES for SAME reviewer, scoped originalDocHEADb7ca96be..fixDocHEAD plus P2/new-diff breakage. No source or runtime acceptance is claimed. All other C1 governance assumptions and Task5/C3/source-context/full-package/publication/consumer/PCoff gates remain.

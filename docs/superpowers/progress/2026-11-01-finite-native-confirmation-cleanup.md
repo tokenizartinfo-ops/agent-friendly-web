@@ -970,3 +970,8 @@ Root independently verified actual C1 run41511052481/job125502671941/attempt1 at
 ## C1 independent review — fix round1/5, before code
 
 Fresh review againsta609..b7:specFAIL/qualityNEEDSFIXES, Important1P2 cumulativeobservedAt5s incorrectlyconsumes otherwisevalid publication aftertag/ref; Critical0/Minor0. Root accepts genuinegap; exactreview+scope/cannotverifyresolution in reviews/2026-11-02-finite-pre-t0-qa-provenance.md. Ruling: preserve originalobservedAt/P0/Pend/transport5s, remove unintendedcumulativeage requirement aftermutation; focusedreal-latencyRED/GREEN byoriginalimplementer, same scopedreviewer b7..fixDocHEAD. C2initialsource preflight READONLY maycontinue, no product/writes whilefixwriteractive. No auth/runtime/ownerwindow/PCoff.
+
+
+## C1 fix round1 ready for same-reviewer re-review — 2026-11-02
+
+Root pre-code ruling at6335b5d accepted P2 cumulative observedAt-age defect. REDd052b35d/run41512903562/job125508988847/attempt1:44PASS4FAIL; actual6518ms original elapsed, everyrequest<=654ms,2POST,unchangedtimestamp/livePend. Fix21087916f3967b92ec0ef7f6905aeaa5642c8511 changes only issuer historical primary predicate to finite/originalstep/Pend/notfuture, retaining all transport5s/Date freshness/originalclock/cap/unknownACK semantics. GREEN41513188777/job125509965448/attempt1:48PASS0fail/cancel/skip/lintsuccess/artifacts0; actual6518ms elapsed,maxrequest653ms,2POST,unchangedobservedAt,repeatzeroHTTP. Productioncustody/native/compiler unchanged; prior81+34 evidence retained. See [updated report](../reports/2026-11-02-finite-pre-t0-qa-provenance.md). CAS/ref/exactreadbacks verified. STOP for SAMEreviewer b7ca96be..fixDocHEAD; no acceptance/runtime/windows/publication/PCoff claim.
