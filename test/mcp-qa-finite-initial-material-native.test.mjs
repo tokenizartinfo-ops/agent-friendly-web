@@ -26,7 +26,7 @@ async function harness(mode='normal'){
  import{DurableObject}from'cloudflare:workers';
  import{createPrivateQaFiniteInitialMaterial}from'./lib/mcp-qa-finite-initial-material.mjs';
  import{createFiniteInitialMaterialStore}from'./lib/mcp-qa-finite-initial-material-store.mjs';
- import{hashFiniteInitialMaterialRecord}from'./lib/mcp-qa-finite-initial-material-records.mjs';
+ import{hashFiniteInitialMaterialRecord,initialInstanceId}from'./lib/mcp-qa-finite-initial-material-records.mjs';
  import{observeFiniteOwnerStageWork}from'./lib/mcp-qa-finite-stage-work.mjs';
  export class Node extends DurableObject{}
  export class Initial extends DurableObject{
@@ -73,12 +73,16 @@ async function harness(mode='normal'){
    const store=createFiniteInitialMaterialStore({storage}),intent=template.intent,deadline=Date.now()+20000,commandHash='f'.repeat(64);
    if(mode==='concurrent'){
     const results=await Promise.allSettled([store.claim(intent,commandHash,deadline,lease),store.claim(intent,commandHash,deadline,lease)]);
-    return{fulfilled:results.filter(r=>r.status==='fulfilled').length,rows:[...await storage.list()]};
+    return{attempts:count,fulfilled:results.filter(r=>r.status==='fulfilled').length,rows:[...await storage.list()]};
    }
    let claim,firstDenied=false;try{claim=await store.claim(intent,commandHash,deadline,lease);}catch{firstDenied=true;}
    if(mode==='claim-ack-unknown'||mode==='claim-not-committed'){
-    const before=[...await storage.list()];let replayDenied=false;try{await store.claim({...intent,sourceRevision:'e'.repeat(40)},commandHash,deadline,lease);}catch{replayDenied=true;}
-    return{firstDenied,replayDenied,before,after:[...await storage.list()]};
+    const before=[...await storage.list()],nextIntent={...intent,sourceRevision:'e'.repeat(40),qaVersionId:'44444444-4444-4444-8444-444444444444'};
+    nextIntent.initialInstanceId=initialInstanceId(nextIntent);
+    // A new constructor, same actual native storage: neither new M/QA nor
+    // an unknown/uncommitted transaction ACK permits a second claim attempt.
+    const fresh=createFiniteInitialMaterialStore({storage});let replayDenied=false;try{await fresh.claim(nextIntent,commandHash,deadline,lease);}catch{replayDenied=true;}
+    return{attempts:count,firstDenied,replayDenied,before,after:[...await storage.list()]};
    }
    const context=structuredClone(template.originalContext);
    Object.assign(context,{trialId:claim.ids.trialId,withdrawalRequestId:claim.ids.withdrawalRequestId,saveIdempotencyKey:claim.ids.saveIdempotencyKey});
@@ -169,10 +173,10 @@ test('C2-A actual native B1+B2+C1 composition retains private factual material, 
   for(const mode of ['concurrent','claim-ack-unknown','claim-not-committed','material-ack-unknown','ack-write-failed']){
    const stub=f.namespace.get(f.namespace.idFromName('SYN-store-'+mode));
    const outcome=await stub.storageCase(mode,r.material);
-   if(mode==='concurrent'){assert.equal(outcome.fulfilled,1);assert.equal(outcome.rows.length,1);}
+   if(mode==='concurrent'){assert.equal(outcome.attempts,1);assert.equal(outcome.fulfilled,1);assert.equal(outcome.rows.length,1);}
    else{
     assert.equal(outcome.replayDenied,true,mode);assert.deepEqual(outcome.after,outcome.before,mode);
-    if(mode==='claim-ack-unknown'||mode==='claim-not-committed'){assert.equal(outcome.firstDenied,true);assert.equal(outcome.after.length,mode==='claim-not-committed'?0:1);}
+    if(mode==='claim-ack-unknown'||mode==='claim-not-committed'){assert.equal(outcome.attempts,1);assert.equal(outcome.firstDenied,true);assert.equal(outcome.after.length,mode==='claim-not-committed'?0:1);}
     else{assert.equal(outcome.denied,true);assert.equal(outcome.after.length,3);assert.equal(outcome.after.some(x=>x[0].endsWith(':ack')),false);}
    }
   }
