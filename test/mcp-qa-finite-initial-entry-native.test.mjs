@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
 const KEY='afw.finite-initial-preparation.v1:entry',ONCE='afw.finite-initial-preparation.v1:once';
 const pending=r=>assert.equal(r.status,'admin_pending',JSON.stringify(r));
-async function using(mode,fn){const f=await initialEntryHarness(mode);try{await fn(f);}finally{await f.stub.restoreMethods();await f.mf.dispose();}}
+async function using(mode,fn){const f=await initialEntryHarness(mode);try{await fn(f);}finally{await f.stub.restoreMethods();await f.mf.dispose();await f.cleanup();}}
 const claimed=rows=>rows.some(([k])=>k===ONCE);
 test('B1 actual finite actor durable entry composes A and returns only safe references',()=>using('normal',async f=>{
  const before=await f.stub.snapshot();await f.stub.configure('normal');const r=await f.stub.invoke(f.refs);
@@ -25,7 +25,7 @@ test('B1 concurrent actual SQLite contenders admit one A',()=>using('normal',asy
  assert.equal((await f.stub.snapshot()).filter(([k])=>k===KEY).length,1);
 }));
 test('B1 actual Workflow class calls fixed actor with safe result',()=>using('normal',async f=>{
- await f.stub.configure('normal');const r=await f.stub.workflow(f.refs);
+ await f.stub.configure('normal');const r=await f.workflow(f.refs);
  assert.equal(r.result.status,'material_recorded',JSON.stringify(r));
  assert.equal(r.config.options.retries.limit,0);
 }));
@@ -44,7 +44,7 @@ test('B1 A completed but post-sync unknown returns pending and never recollects'
 }));
 for(const mode of ['hold-sync','held-transaction'])test('B1 partial original deadline fences '+mode+' and late ACK',()=>using('partial',async f=>{
  await f.stub.configure(mode);const r=await f.stub.invoke(f.refs);pending(r);
- const rows=await f.stub.snapshot();assert.equal(claimed(rows),false);await f.stub.release();
+ const rows=await f.stub.snapshot();assert.equal(claimed(rows),false);assert.ok(rows.some(([k])=>k===KEY));assert.equal((await f.stub.stats()).held,true);await f.stub.release();
  await new Promise(resolve=>setTimeout(resolve,20));assert.equal(claimed(await f.stub.snapshot()),false);
  pending(await f.stub.invoke(f.refs));
 }));
@@ -54,4 +54,21 @@ for(const change of [r=>r.workflowName='other',r=>r.initialInstanceId+='x',r=>r.
 }));
 for(const mode of ['wrong-owner','edited','wrong-source','wrong-qa','command-drift'])test('B1 independent command rejects '+mode,()=>using(mode,async f=>{
  await f.stub.configure('normal');pending(await f.stub.invoke(f.refs));assert.equal(claimed(await f.stub.snapshot()),false);
+}));
+
+for(const fault of ['lost-ack','post-reject-sync'])test('B1 actual persisted SQLite actor restart after '+fault+' never recollects',()=>using('restart',async f=>{
+ await f.stub.configure(fault);pending(await f.stub.invoke(f.refs));const before=await f.stub.snapshot();assert.ok(before.some(([k])=>k===KEY));
+ await f.restart();await f.stub.configure('normal');pending(await f.stub.invoke(f.refs));assert.deepEqual(await f.stub.snapshot(),before);assert.equal((await f.stub.stats()).syncs,0);
+}));
+test('B1 held actual sync expires at child5s despite cached entry readback',()=>using('normal',async f=>{
+ await f.stub.configure('hold-sync');const began=Date.now(),operation=f.stub.invoke(f.refs);
+ let observed=false;for(let i=0;i<100;i++){if((await f.stub.stats()).held){observed=true;break;}await new Promise(resolve=>setTimeout(resolve,20));}assert.ok(observed);
+ const cached=await f.stub.snapshot();assert.ok(cached.some(([k])=>k===KEY));assert.equal(claimed(cached),false);
+ pending(await operation);assert.ok(Date.now()-began>=4900);assert.ok(Date.now()-began<12000);
+ await f.stub.release();pending(await f.stub.invoke(f.refs));assert.equal(claimed(await f.stub.snapshot()),false);
+}));
+test('B1 held post-A sync cannot report success before durability barrier',()=>using('normal',async f=>{
+ await f.stub.configure('post-hold-sync');const operation=f.stub.invoke(f.refs);
+ let held=false;for(let i=0;i<100;i++){if((await f.stub.stats()).held){held=true;break;}await new Promise(resolve=>setTimeout(resolve,20));}assert.ok(held);
+ assert.ok(claimed(await f.stub.snapshot()));pending(await operation);await f.stub.release();pending(await f.stub.invoke(f.refs));
 }));
