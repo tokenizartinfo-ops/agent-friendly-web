@@ -732,3 +732,33 @@ RED `05bfb64dc6b71190fe4f9313f82ebc4c7c226ac8`: run41465306769/job125344480872/a
 The final storage hold and nested factual hold survive parent.finish while a separately verified owner POST consumes a new ticket/approval. No additional SEND/provider effect occurs until settlement; committed history remains and expired children make no late writes. Provider/source authority remains explicitly synthetic. AsyncLocalStorage uses supported run/getStore only; no RPC/isolate assumption or replacement for unavailable T5 durable/all-path inventory.
 
 Full finding, ruling, exact commands/output, RED/GREEN evidence and selfreview are appended to [Task3 report](../reports/2026-11-01-finite-private-policy-setup-task3.md). Every commit used expected-head CAS plus independent ref/file readback. Fix implementation is NOT independent acceptance. STOP WRITES after final docs readback for Root's same-reviewer scoped review. No Task4, actual provider/private/auth/credential/runtime/local source/build action. All T4/T5/C3 and attended/runtime gates remain; operationalReadiness=false.
+
+
+## Root C2 Task3 accepted after fix round1 (2026-11-02)
+
+Task C2.3: fix round1/5 (1 addressed,0 open — whole-stage publication barrier now includes final producer and nested actual promises; commits423c1bf..43ebcacd).
+Task C2.3: complete (commits2e80783..43ebcacd, fresh spec+quality review clean after scoped correction).
+
+Original fresh reviewer /root/review_private_policy_task3 reported one Important at423c1bf; Root recorded it/ruling at a6dab660 and resumed original implementer. Same reviewer re-reviewed only423c1bfafc863d97114848e66edbea8e97ea0429..43ebcacd9a3455a0c44f3f55ee6a1d7ed10366d2: ADDRESSED both final-selection and nested-IO paths; scoped spec PASS, quality approved; no new Critical/Important/Minor or separate out-of-scope finding. Evidence lines: shared stage-work7–20 and27–38; transport36–40; producer15–24; owner-preparation64–66; native covering tests53–74. The common component is retention/denial only and does not mint admission.
+
+Root independently read GREEN run41466161397 actual head62fb4122ab2991eb3d4781187369269ceb849623/attempt1/completed-success, job125347499185 log55PASS0FAIL0cancel0skip and scoped lint exit success; artifacts list0; final ref43ebcacd exact. Both new behavioral tests are visible in logs. Prior full scoped120PASS ec83c42f/run41457985200 and actual restart7PASS72ab2aea/run41460645920 remain separately dated evidence; no false claim of new full120 at fix head.
+
+Cannot-verify resolution against owning plan/brief: actual M-qualified resident bytes/source/custody/current primary/exposure/all previous writer lineages are explicitly owned by T5 and remain default unavailable; initial preparation publication/recoverable rollback and real runtime identity/consent/PCoff are attended gates. T4 setup and C3 business/early withdrawal are separately unimplemented tasks. These are not silently accepted as runtime evidence or parked Task3 defects. Task3 required composition/settlement seam is implemented and now reviewed; no overall C2/package/runtime readiness claimed.
+
+Report docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task3.md; review docs/superpowers/reviews/2026-11-01-finite-private-policy-setup-task3.md. Temporary qualifier excluded integration. No main merge/runtime/source promotion, provider/private probe, credentials, consent/window, occurrence/finite HEAD, Max or email. operationalReadiness=false.
+
+Task C2.4 is next, prepared in its scoped brief and dispatched only after this documentation commit's CAS/ref/file qualification. Original Task3 implementer remains stopped; fresh implementer/BASE supplied by Root dispatch.
+
+## Root C2 Task4 integration preflight (2026-11-02, before source work)
+
+Ruling: preserve strict pre-T0 selection/approval behavior while implementing a fixed native-source-qualified post-T0 factual path. Immutable selection requires selectedAt<=actual original T0<commandBy. A command just before commandBy may validly be processed after it while current permission/R1/setup/original-parent bounds still hold; never use observedNow<commandBy as a substitute for original command chronology. No caller T0/bypass boolean or refreshed parent/consent. T4 must propose the smallest exact actual native-entry/source/admission/material table before affected code; owning T5 source qualifiers may remain unavailable, not fake positive DTOs.
+
+The original native setup clock must include forwarding/queue and clip all child/SEND/ACK work. Official WorkflowEvent timestamp is the native triggered Date; fixed instance GET schema exposes queued/start, not created_on. No equality between those clocks was verified by the documentation lookup. Resolve source-owned provenance/narrowing before code, not a fresh30s in a later DO or a caller deadline argument. Actual four Known args/18stages/70s/5s/20s and setupBy50/ARM90 remain unchanged.
+
+Original pre-T0 ownerSource.currentPublication/ConnectionReceipt sequence is historical preparation provenance after the approved post-T0 policy activation, not permission to report the old prearm pointer as the current provider pointer. Native setup/prepare must separately qualify the actual current pointer/config/code against SetupContext/PolicyReceipt and fresh owned-primary facts, preserving original selection/snapshot/receipts. Use the narrowly expected own transition after actual ACK/readback, no rewritten baseline, new preparation-stage enum or generic pointer bypass. Propose exact contract before code.
+
+Source material-residency gate remains T5: compiler currently has single qaLive/canaryLive outputs; native QA has no GitHub download credential. Root considered a possible canary-first compiler DAG with QA-only compressed M-qualified canary bytes, but this is NOT selected/implemented/authority and requires exact design/size/privacy/hash-cycle qualification. No new key/public artifact/general module RPC by inference.
+
+C3 current-source preflight at423c1bf/bcf54a5c: delegated-oauth-worker143 returns paused on OAuth=false before ordinary owner connections/revoke295–319; monitoring has its own gate144. Separately qualify narrow existing-grant business/early withdrawal before live; C0 cleanup does not establish early owner withdrawal. This is future C3 work, not a reopened Task3 review.
+
+References checked without resource probes: https://developers.cloudflare.com/workflows/build/events-and-parameters/ ; https://developers.cloudflare.com/workflows/build/workers-api/ ; https://developers.cloudflare.com/api/resources/workflows/subresources/instances/methods/get/ .
