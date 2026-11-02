@@ -1,6 +1,6 @@
 # AFW: continuación cloud — 2 de noviembre de 2026
 
-Checkpoint Root21:59UTC. Trabajar por GitHub/Actions, sin nuevos clones/dependencias/builds/temporales del PC. Repositorio tokenizartinfo-ops/agent-friendly-web, rama feat/finite-native-cleanup-20261101. No repetir unidades aceptadas ni cargar todo el historial. Este checkpoint reemplaza el anterior de20:45, preservado en f61ec7b2251672cc34016715c45dd3ecf085c14c.
+Checkpoint Root22:35UTC. Trabajar por GitHub/Actions, sin nuevos clones/dependencias/builds/temporales del PC. Repositorio tokenizartinfo-ops/agent-friendly-web, rama feat/finite-native-cleanup-20261101. No repetir unidades aceptadas ni cargar todo el historial. Este checkpoint reemplaza el anterior de20:45, preservado en f61ec7b2251672cc34016715c45dd3ecf085c14c.
 
 ## Unidades de código aceptadas
 
@@ -19,11 +19,19 @@ Pruebasactuales: SQLiteDO/D1, Worker→DO RPC/disposer, dos reinicios con persis
 
 RulingPOSTimplementación explícito: wrapper y actor heredan baseoriginal min(nativecreatedAt+30s,ceiling); actorademás reduceI0+300s/custodia y conserva toda continuación. Exactoutput sin deadline puede llegar comoDATAtardíobajo basedelwrapper, jamáscomoefecto/permiso. No renovación de vida. Los campos de histórico315/2a477, Qoriginal y Mcandidata siguen separados.
 
-## Siguiente unidad C3 seleccionada, aún sin producto
+## C3 admisión prematura: código aceptado
 
-Corregir suscripción prematura que puede insertar una admisión/cierre antes de reserva y bloquearla. Requisitos reports/2026-11-02-finite-admission-preflight.md + reports/2026-11-02-finite-admission-refinement.md; plan plans/2026-11-02-finite-premature-admission.md.
+Código06e424666e7cc1fcf277024aaed463f7d764dc24; docs c452b7c18b7ec34609ffd90fe25e06e6e46ae2d5. Revisión independiente PASS/Approved,0Critical/Important. Root verificó41537047289/job125591439327/attempt1:65pruebasafectadas+23compilador/residencia=88PASS0fail/cancel/skip,lintlimpio,0artefactos. Canary1948550B/QA1878261B/residente382785B, medidas de ESTAfuente, límites intactos.
 
-Helper opaco de fuente nativa, resoluciónLAZY soloalusaradmisión; construircleanup trasSave/revoke/N1 sigueposible. CondiciónEXISTS exacta+atómica D1 de reservaprepared/predecesor/cierre/pins/reloj; noDTOready. Errorprivado porcustodia/start distingue rechazo fresco/ALLACKsuccess:truechanges0 sinpendiente/unknown/launch del resultadoincierto querequierecleanup. Acumular estadofuera decallbackDOretriable. No refund/reset de marcador. MontajeWorker real/factoryqualificación esotra puerta, noreclamarla desde librería. Un escritor, pruebas hosted proporcionales y revisión fresca.
+Helper opaco fuente nativa LAZY; guardas host/custodia antes de admisión; EXISTS exacto de reserva/predecesor/cierre/pins/reloj agregado al INSERTatómico. Rechazo fresco/ALLACKsuccess:truechanges0 sin incertidumbre puede omitir cierre; cualquiercustodia/resultadoambiguo permaneceunsafe aunque luegohaya cero. Estadoacumulado fuera decallbackretriable. Reserva-onlypendiente no inicia proceso ni justificaenvenenar sufinalización. Norefund/reset.
+
+Construir/leer/settle/seal/limpiar despuésSave/revoke/N1 sigueposible. No-source deniega la composiciónhost/custody. Standalonelaunch API sepreservó; montajeWorker/factoryreal siguePENDIENTE. Informe/review docs/superpowers/{reports,reviews}/2026-11-02-finite-premature-admission.md.
+
+## Próximo bloque de publicación e integración
+
+B2 aún requiere contrato de publicacióninicial, mismo-targetwriter/SENDjournals, custodia/rollback/cápsula/ownerSource. reports/2026-11-02-finite-initial-writer-boundary.md distingue legacydispatch/withdraw oldgrant/event/history de restorerPOST que sícambia mismodeployment. No universalizar vieja incertidumbre: mantenerla sin declararla resuelta, comprobar conflictosrelevantes y gatear aparte la reutilización del Containercompartido. Actual9aaRESTcapability y relaciónterminal deldestroyold siguen sin nuevoensayo positivo.
+
+Revisión concreta de envelopesRPC en reports/2026-11-02-finite-native-rpc-boundaries.md nohallóotro rechazo demostrable en consumidores inspeccionados. Reservationclient lifecycle/actualtransportcoverage y futuraadaptación cleanupCollector permanecen comprobaciones deintegración; no inventar defecto montado.
 
 ## Pendientes reales hacia PC apagada
 
