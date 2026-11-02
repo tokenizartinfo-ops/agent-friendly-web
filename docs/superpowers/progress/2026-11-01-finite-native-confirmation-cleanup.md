@@ -413,3 +413,39 @@ Status DONE_WITH_CONCERNS. BASE d5a76d6309e1067add15d9b103c0719f8ca4bfd9; final 
 Actual finite source launcher/nominal class mounts, original-event hydration/four-key Known call, bounded technical-result grammar, source-qualified10400 passive GET-only adoption and exact nominal+launcher terminal restoration consumers implemented. Original70s/5s/20s/18stages and observer32/oneclaim preserved. No real C2 producer/private bundle/owner context/consent/custody/native-create settlement barrier installed; ROOT5 C2 Task5 gate remains mandatory. Cached native-step-output DELIVERY and clocks/provenance are synthetic; no provider restart/real occurrence/PC-off claim. Native Bootstrap workflowName observed in final hosted log.
 
 Task3 finding fixed: early sleep could observe before its absolute slot. Covering RED639afc4/run41373959042 returned ready; GREENb7f95b4 and final reject without an observer GET. Other early failures were separately identified fixture issues (ExecutionContext, seed completedAt/hash, native sleep epoch, engine ordinal misidentified as replay), not hidden product regressions. Root2/3/4/5 rulings above remain binding. Temporary qualifier excluded from integration; its path filter avoids documentation-only reruns. operationalReadiness=false. STOP WRITES after this report/ledger CAS/readback; root owns fresh review.
+
+## Native5 Task3 accepted — next C2 Task1 source-only
+
+Task Native5/3: complete (commits d5a76d6309e1067add15d9b103c0719f8ca4bfd9..86d566e5c1712d3e9a7f043f2305edc32cab2eee, review clean). Fresh independent reviewer /root/review_native_launch_task3: spec PASS, quality PASS, no actionable P1/P2. Reviewed launcher timing/replay, original nominal event/same-reference four-key Known handoff, fixed setup/observer ordering/10400 grammar and both restoration consumers. It did not claim C2 producers, actual native-create writer settlement, production provider replay/PC-off or qualifier integration. Actual C2 Task5 remains mandatory; default source factories unavailable.
+
+Root independently read Actions41374675156: head dc37acb35060c7fd8955403dfe4d30fdfeccd9fa, completed/success/attempt1. Report retains exact127 focused+64 affected=191PASS and scoped lint, native/synthetic limits. No duplicate tests/provider read/trial performed for acceptance. Temporary qualifier remains excluded from integration. C2 Task1 BASE is this documentation commit after expected-head CAS/readback; one new implementer then independent review, no parallel product writers. Source only: no main merge, deploy, keys, roles, OAuth, live command/first HEAD, Max or PC-off; operationalReadiness=false.
+
+## C2 preflight — private-policy setup source plan (prepared after Native5 Task3)
+
+Plan docs/superpowers/plans/2026-11-01-finite-private-policy-setup.md; accepted spec ec08eda2f986fad608f7b1c113aa0dd877d378d8. Its original DESIGN ONLY/pending heading is historical; the prior design acceptance and subsequent root dispatch govern source execution, never runtime permission.
+
+| Pair/task | Producer -> consumer / consistency checked | Finding / resolution |
+|---|---|---|
+| T1 self | Seven new codec/store/journal/fixture files; named behavior tests consume the exact constructors and lease; no product mount. | Consistent; pure records are factual only. Native fixture mounts remain test-only. |
+| T2 self | Actual Access/JWKS + owned D1 + original request/ticket; genuine grant/notice links; fixed host. | Consistent; unavailable publication before T3 is explicit, never positive placeholder. |
+| T3 self | Fixed Beta upload/version inheritance + activation; three preconnection stages; original leases and journals. | Consistent; six pre-T0 effects remain distinct from post-T0 two; current token/module availability is a later runtime gate. |
+| T4 self | Original seed/context selection + T1/T3 transport; two post-T0 effects; receipt cannot certify self-terminal. | Consistent; setup50s and request30s/child5s constrain the same original lifetime. |
+| T5 self | Fixed native mounts/source factories/primary + barrier; default closure until full composition. | Plan needs explicit carry-forward of accepted Native5 source interfaces and ROOT5 actual writer-settlement ownership; record below. |
+| T1/T2 | Strict selection/tickets/link records -> actual authenticated owner producer. | Exact plan signatures; authentication happens only T2. No data record or hash grants a send. |
+| T1/T3 | Connection journal SEND/ACK/receipt -> one-shot actual private publisher. | Exact union/stage/effect identity; actual invocation capability remains source-private and must not be reconstructed from factual status. |
+| T1/T4 | Policy journal/immutable selected binding/context -> actual post-T0 setup. | Exact intent/source/original T0 binding; no finite HEAD, latest row or replay refund. |
+| T1/T5 | Private storage codecs/context -> fixed native material/primary constructors. | Same actual DO storage and source namespace; no caller storage path/boolean authority. |
+| T2/T3 | Owner stage host + genuine exact grant/notice links -> source-fixed phase publisher. | T2 cannot claim publication before T3; Task3 owns only the bounded producer. Original request lease retained. |
+| T2/T4 | OwnerPreparation/selection/binding + current primary owner -> setup authorization. | Bounded commandBy and exact synthetic project/revision/goal; READ remains separate from configuration and Save authority. |
+| T2/T5 | Access-protected original request forwarding and source-qualified holder -> actual QA mount. | No arbitrary QA ingress/identity DTO. Every forwarded request independently verified at QA. |
+| T3/T4 | Shared fixed private transport/module/profile/custody -> two-effect post-T0 policy setup. | No general URL, latest inheritance or configuration/code substitution. Original qualified baseline/version descriptors required. |
+| T3/T5 | Private phase producer + module/profile boundary -> source-approved actual mounts. | Actual module bytes may not reside in <=64KiB context; qualification/residency remains source-only implementation and later acceptance gate. |
+| T4/T5 | Installed receipt/context -> actual completed-success provider/source primary -> material factory. | Receipt alone cannot prove terminal or settlement. Must match Native5 exact completed setup envelope/output hash and default-unavailable seams. |
+
+Ruling: carry accepted Native5 Task1/2/3 interfaces into C2 Task5 without widening the plan — actual fixed constructors must provide the currently unavailable launch context/material/operations, nominal confirmation material and setup-completion seams; nominal result remains facts-only and both terminal inventory plus actual native-create coordinator/SEND/ACK/writer settlement are mandatory — the older plan predates these mounted names — a missed correlation would keep source unavailable or permit unsafe restoration, so default closure and held-work negatives must remain explicit.
+
+Ruling: C2 Task1 is only strict factual records/native transactions. Existence, observed/recorded status, digests, ticket use or installed receipts never mint source invocation/native send authority; runtime publishers must separately own the acknowledged uninterrupted operation — prevents journal replay from becoming permission — if wrong, later producers need contract rework rather than a runtime bypass.
+
+Ruling: preserve separate explicit own-synthetic configuration preparation and the original known-goal Save authorization in later owner UI/runbook; a read/notices grant never authorizes the Save by implication — owner approved overall rehearsal, but the concrete authenticated server proof must describe its action — if omitted the rehearsal must remain unavailable, not silently save under READ.
+
+C2 Task1 next only after Task3 review acceptance. No runtime/readiness/consent/provider/Container/PC-off claim; no source promotion or occurrence from this preflight.
