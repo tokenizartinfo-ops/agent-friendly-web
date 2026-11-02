@@ -123,3 +123,12 @@ operationalReadiness=false; completePackage=false; PCoff=false. Owner15min/read1
 ## Later Root factual note, future B/Task4 only
 
 Official WorkflowEvent.timestamp is the Date when the Workflow instance was created/triggered; instanceId and associated workflowName are documented. This supports genuine Workflow.run creation/trigger-origin timing, not a separate enqueue timestamp or existing Task4 queuedAt qualification. No A/Task4 scope change: future owning ruling may rename/clarify creation-origin semantics, never invent status fields. Root consulted official docs only; no resource query.
+
+
+## Root exact-contract acceptance and corrected bounds clarification — 2026-11-02, BEFORE product
+
+Root accepts ba452cffcf10def0263164a18551372ba15ffd82 contract with this clarification. Initial review mistakenly described Task4 original-context digest as unsorted schema-order JSON and requested a shared helper; Root independently rechecked policy-setup.mjs:18–19,72–73 and WITHDREW that assertion/helper request. Actual v1 digest recursively sorts keys, AFTER existing finiteData validation. Preserve it exactly; do not invent a sorted-vs-Task4 hash difference or change v1 meaning.
+
+Required correction ONLY: stored script-free originalContext must pass the existing finiteData bounds (whole projection<=32768 UTF8 bytes, depth<=12, nodes<=2048) even though the enclosing material may be<=65536. Then use existing sorted domain hash afw.finite-original-context.v1. Verify actual codec-decoded material.originalContext after canonical roundtrip; rehydrate script only from B1. Regression must demonstrate actual Task4 digest equivalence and projection32KiB overflow rejection despite totalmaterial<64KiB. Default leave Task4 product unchanged, no shared helper or reflex Task4 rerun.
+
+Exact C2-A contract is now APPROVED subject this recorded clarification. Proceed sole writer with meaningful hosted RED→GREEN, actual native full B1/B2/C1 fixture composition under explicit external SYN boundaries, and mandatory partially consumed original-parent held-child test with actual timer/abort/retained promise/no after-deadline writes. All unmounted/factual/no-effects/no-source-authority/no-owner-window scope remains unchanged. No additional permission required for this bounded source/test implementation. Fresh review after report remains mandatory.
