@@ -32,7 +32,7 @@ export async function policyFixture(t,mode='normal'){
   }
   reads.push(request.url);
   if(url.pathname===root+'scripts/agent-friendly-web-delegated-canary/deployments'){
-   const observed=mode==='foreign_pointer'?{...pointer,id:randomUUID()}:pointer;
+   const observed=(mode==='foreign_pointer'||mode==='foreign_after_upload'&&posts>0)?{...pointer,id:randomUUID()}:pointer;
    return envelope({deployments:[observed]});
   }
   const id=url.pathname.split('/').at(-1),uploaded=versions.get(id),pin=id===state.rollback.versionId?state.rollback:state.baseline;
@@ -45,5 +45,5 @@ export async function policyFixture(t,mode='normal'){
  t.after(()=>mf.dispose());
  const json=async(path,value={})=>{const r=await mf.dispatchFetch('https://fixture.invalid'+path,{method:'POST',body:JSON.stringify(value)});assert.equal(r.status,200,await r.clone().text());return r.json();};
  state=await json('/init',{mode});pointer={id:state.baseline.deploymentId,strategy:'percentage',versions:[{version_id:state.baseline.versionId,percentage:100}]};
- return {run:(direct=false)=>json('/run',{T0:state.T0,direct}),rows:()=>json('/rows'),posts:()=>posts,requests,reads,state,actual:()=>({versionId,deploymentId})};
+ return {run:(direct=false)=>json('/run',{T0:state.T0,direct}),rows:()=>json('/rows'),hydration:()=>json('/hydration'),posts:()=>posts,requests,reads,state,actual:()=>({versionId,deploymentId})};
 }

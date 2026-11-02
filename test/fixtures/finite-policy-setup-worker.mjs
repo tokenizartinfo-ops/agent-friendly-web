@@ -1,3 +1,4 @@
+import {retainFiniteOwnerStagePromise} from '../../lib/mcp-qa-finite-stage-work.mjs';
 import {createHash} from 'node:crypto';
 import {PrivateQaBootstrap,IndependentClosure} from '../../worker/independent-closure/finite.mjs';
 import {narrowFinitePolicySetupClock} from '../../lib/mcp-qa-finite-policy-setup.mjs';
@@ -13,7 +14,7 @@ const sha=v=>createHash('sha256').update(v).digest('hex');
 const canonical=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a<b?-1:a>b?1:0)):x);
 const seal=(kind,value,key)=>({...value,[key]:hash(kind,value)});
 const script='export class AfwOwnEventNode{};export class AfwNodeControl{};export default {fetch(){return new Response(null,{status:404})}};';
-const refs={intentId:H,sourceRevision:M};
+const refs={intentId:H,sourceRevision:M},hydrations=new WeakMap();
 function native(T0){return {setupInstanceId:'afw-finite-policy-'+sha('afw.finite-private-policy-setup.v1\n'+canonical(refs)),sourceRevision:M,qaVersionId:U,eventTimestamp:T0+200,queuedAt:T0+100,startedAt:T0+300,T0};}
 function make(env,T0,mode){
  const config=structuredClone(finitePublicProfileTemplate('canaryLive'));for(const b of config.bindings)if(b.privateSlot){delete b.privateSlot;b.text='SYNTHETIC_PREARM';}
@@ -26,7 +27,7 @@ function make(env,T0,mode){
  const {script:unused,...artifactIdentity}=artifact;void unused;
  const originalContextHash=sha('afw.finite-original-context.v1\n'+canonical({...originalContext,artifact:artifactIdentity}));
  const project={projectId:'SYNTHETIC_OWN_PROJECT',revision:1,synthetic:true},expiry=T0+510001;
- const preparation=seal('OwnerPreparation',{purpose:'afw.finite-owner-preparation.v1',prepId:H,sourceRevision:M,actorId:env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1').toString(),selectedAt:T0-100,expiresAt:expiry,commandBy:T0+1,owner:{subject:'SYNTHETIC_OWNER',accessRealmHash:H,accessVerifiedAt:T0-1000,accessExpiresAt:expiry},connection:{connectionRef:H,grantId:'SYNTHETIC_GRANT',clientId:'SYNTHETIC_CLIENT',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',grantHash:H,consentHash:H,noticesHash:H,permissionExpiresAt:expiry},project,goal:'discovery',programContext:{programHash:'f'.repeat(64),sourceRevision:Q,originalContextHash},approval:{purpose:'afw.own-synthetic-policy-preparation.v1',decision:'approve',sourceRevision:M,projectHash:hashFiniteOwnerPreparationProject(project),goal:'discovery',approvedAt:T0-1000,expiresAt:expiry,csrfReceiptHash:H},auditHash:H},'preparationHash');
+ const preparation=seal('OwnerPreparation',{purpose:'afw.finite-owner-preparation.v1',prepId:H,sourceRevision:M,actorId:env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1').toString(),selectedAt:T0-100,expiresAt:expiry,commandBy:mode==='command_at_boundary'?T0:T0+1,owner:{subject:'SYNTHETIC_OWNER',accessRealmHash:H,accessVerifiedAt:T0-1000,accessExpiresAt:expiry},connection:{connectionRef:H,grantId:'SYNTHETIC_GRANT',clientId:'SYNTHETIC_CLIENT',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',grantHash:H,consentHash:H,noticesHash:H,permissionExpiresAt:expiry},project,goal:'discovery',programContext:{programHash:'f'.repeat(64),sourceRevision:Q,originalContextHash},approval:{purpose:'afw.own-synthetic-policy-preparation.v1',decision:'approve',sourceRevision:M,projectHash:hashFiniteOwnerPreparationProject(project),goal:'discovery',approvedAt:T0-1000,expiresAt:expiry,csrfReceiptHash:H},auditHash:H},'preparationHash');
  const selection=seal('Selection',{purpose:'afw.finite-owner-selection.v1',sourceRevision:M,prepId:H,preparationHash:preparation.preparationHash,selectedAt:T0-100,sequence:1,previousSelectionHash:null},'selectionHash');
  const descriptor={name:'index.mjs',sha256:artifact.workerHash,bytes:Buffer.byteLength(artifact.script)};
  const baseline={versionId:V,deploymentId:D,module:descriptor,configuration:config},rollback={versionId:R,deploymentId:U,module:descriptor,configuration:closed};
@@ -34,6 +35,12 @@ function make(env,T0,mode){
 }
 export async function syntheticFacts({ctx,env,intentId,sourceRevision},lease){
  lease.assertCurrent();const x=await ctx.storage.get('fixture:scenario');lease.assertCurrent();
+ if(x.mode==='held_hydration'){
+  const state=hydrations.get(ctx)??{reads:0,lateDenied:0};hydrations.set(ctx,state);state.reads++;
+  const underlying=retainFiniteOwnerStagePromise((async()=>{await new Promise(r=>setTimeout(r,6500));try{lease.assertCurrent();await ctx.storage.put('fixture:late-write',true);}catch{state.lateDenied++;}})());
+  await Promise.race([underlying,new Promise((_,reject)=>setTimeout(()=>reject(Error('SYNTHETIC source pending')),100))]);
+  throw Error('SYNTHETIC held qualification unavailable');
+ }
  if(intentId!==H||sourceRevision!==M||x.mode==='owner_incomplete'||x.mode==='seed_incomplete')throw Error('SYNTHETIC qualification denied');
  const n=native(x.T0);if(x.mode==='queue_expired')n.queuedAt=Date.now()-30001;if(x.mode==='setup_expired')n.T0=Date.now()-50001;
  narrowFinitePolicySetupClock(lease,n,refs,env);
@@ -49,17 +56,19 @@ export async function syntheticFacts({ctx,env,intentId,sourceRevision},lease){
 export async function syntheticEntry({env,event},lease){lease.assertCurrent();return {...native(event.timestamp.getTime()-200),qaVersionId:env.AFW_QA_VERSION.id};}
 export class SetupFixture extends IndependentClosure{
  async initialize(mode){
-  const T0=Date.now()-1000,x=make(this.env,T0,mode);await this.ctx.storage.put('fixture:scenario',x);
+  const T0=Date.now()-(mode==='original_queue_budget'?22000:1000),x=make(this.env,T0,mode);await this.ctx.storage.put('fixture:scenario',x);
   const lease={signal:new AbortController().signal,assertCurrent(){}},store=createFiniteOwnerPreparationStore({storage:this.ctx.storage,now:()=>T0-50});
   await store.publishSelection({preparation:x.preparation,selection:x.selection,expectedHeadHash:null},lease);
   if(mode==='head_touched')await this.ctx.storage.put('afw.qa-finite-trial.v1:head',{SYNTHETIC:true});
   return {T0,baseline:x.baseline,rollback:x.rollback,script:x.originalContext.artifact.script};
  }
+ async hydrationState(){return hydrations.get(this.ctx)??{reads:0,lateDenied:0};}
  async rows(){return [...await this.ctx.storage.list()].filter(([k])=>k!=='fixture:scenario');}
 }
 const worker={async fetch(request,env,ctx){
  const path=new URL(request.url).pathname,actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));
  if(path==='/init')return Response.json(await actor.initialize((await request.json()).mode));
+ if(path==='/hydration')return Response.json(await actor.hydrationState());
  if(path==='/rows')return Response.json(await actor.rows());
  const {T0,direct}=await request.json();if(direct)return Response.json(await actor.setupFinitePrivatePolicy(refs));
  const event={timestamp:new Date(T0+200),instanceId:native(T0).setupInstanceId,workflowName:'afw-own-qa-private-bootstrap',payload:{operation:'finite_private_policy_setup',...refs}};
