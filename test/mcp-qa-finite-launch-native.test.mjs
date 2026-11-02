@@ -113,11 +113,11 @@ export class Native extends IndependentClosure{
   if(['held-create','held-send','current-consent-held-snapshot'].includes(mode)){
    if(mode!=='current-consent-held-snapshot')f.hydrate=async()=>{f.setNow(f.now()+4500);f.hydrate=null;};
    if(mode==='held-send'){let heldOnce=false;this.ctx.storage.transaction=async fn=>{const r=await originalTx.call(this.ctx.storage,fn);if(!heldOnce&&await originalGet.call(this.ctx.storage,prefix+'send')){heldOnce=true;enter();await held;settled=true;}return r;};}
-   const first=this.createFiniteNominalChild(refs);await Promise.race([reached,first.then(r=>{throw Error('did not reach native create '+r.status);})]);const firstResult=await first,settledAtReturn=settled;
+   const enteredAt=performance.now(),first=this.createFiniteNominalChild(refs);await Promise.race([reached,first.then(r=>{throw Error('did not reach native create '+r.status);})]);const firstResult=await first,settledAtReturn=settled,elapsedAtReturn=performance.now()-enteredAt;
    const parent=createPrivateQaFiniteLaunchParent({deadline:f.now()+5000}),context=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent});
    let enteredFresh=false;const fresh=withPrivateQaFiniteLaunchCoordinator({ctx:this.ctx,env:this.env,context,parent},async check=>{check();enteredFresh=true;return true;});
    await new Promise(r=>setTimeout(r,30));const enteredBeforeSettlement=enteredFresh;release();await fresh;
-   const again=await this.createFiniteNominalChild(refs);return {firstResult,settledAtReturn,enteredBeforeSettlement,again,journal:await journal(),calls};
+   const again=await this.createFiniteNominalChild(refs);return {firstResult,settledAtReturn,elapsedAtReturn,enteredBeforeSettlement,again,journal:await journal(),calls};
   }
   const created=await this.createFiniteNominalChild(refs);
   this.ctx.storage.transaction=originalTx;
@@ -170,6 +170,6 @@ for(const mode of ['current-consent-crossing','current-consent-no-widen'])test('
  assert.ok(r.journal.send);assert.equal(r.journal.ack,null);assert.equal(r.unchanged,true);assert.equal(r.journal.claim.deadline,r.plan.N1,'persisted claim is deliberately wider than current consent');
 });
 test('narrowed current consent timeout retains actual second snapshot work against a fresh parent',async()=>{
- const r=await native('current-consent-held-snapshot');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);
+ const r=await native('current-consent-held-snapshot');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);assert.ok(r.elapsedAtReturn<2000,'500ms current consent narrows the caller timeout without waiting for original 5s');
  assert.equal(r.enteredBeforeSettlement,false);assert.equal(r.calls,0);assert.ok(r.journal.send);assert.equal(r.journal.ack,null);
 });
