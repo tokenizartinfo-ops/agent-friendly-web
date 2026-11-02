@@ -1,9 +1,9 @@
-# Branch-only C3 source qualifier; EXCLUDE from eventual integration.
-name: Finite C3 premature admission temporary qualifier
+# Branch-only C2-B2a source qualifier; EXCLUDE from eventual integration.
+name: Finite initial inactive upload temporary qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-own-finite-primary.mjs', 'lib/mcp-own-finite-admission-gate.mjs', 'lib/mcp-own-finite-cleanup-host.mjs', 'lib/mcp-own-durable-host.mjs', 'lib/mcp-node-process-custody.mjs', 'test/mcp-own-finite-premature-admission-native.test.mjs', 'test/fixtures/finite-premature-admission-*.mjs', 'test/mcp-node-process-custody.test.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-initial-*.mjs', 'lib/mcp-qa-finite-historical-source.mjs', 'test/mcp-qa-finite-initial-*.test.mjs', 'test/fixtures/finite-initial-*.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -20,10 +20,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: C3 causal native regressions
-        run: node --test test/mcp-own-finite-premature-admission-native.test.mjs test/mcp-node-process-custody.test.mjs
-      - name: Final actual compiler and candidate residency
-        run: node --test test/mcp-qa-finite-candidate-residency.test.mjs
+      - name: Initial inactive upload causal native RED GREEN
+        run: node --test test/mcp-qa-finite-initial-upload-native.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-own-finite-primary.mjs lib/mcp-own-finite-admission-gate.mjs lib/mcp-own-finite-cleanup-host.mjs lib/mcp-own-durable-host.mjs lib/mcp-node-process-custody.mjs test/mcp-own-finite-premature-admission-native.test.mjs test/fixtures/finite-premature-admission-worker.mjs test/fixtures/finite-premature-admission-native.mjs test/mcp-node-process-custody.test.mjs
+        run: npx eslint lib/mcp-qa-finite-initial-*.mjs test/mcp-qa-finite-initial-upload-native.test.mjs test/fixtures/finite-initial-entry-world.mjs
