@@ -79,6 +79,27 @@ export class Native extends IndependentClosure{
   if(mode==='sealed')f.sealed=true;
   if(mode==='withdrawn'){const c=await this.ctx.storage.get(controlPrefix+'control');await this.ctx.storage.put(controlPrefix+'control',{...c,withdrawnAt:f.now()});}
   if(mode==='pin-changed')this.env.AFW_QA_VERSION={id:'22222222-2222-4222-8222-222222222222'};
+  if(mode.startsWith('current-consent-')){
+   const admission=f.primary.admission,finalizer=f.primary.finalizer;let primaryReads=0,finalizerReads=0,crossed=false;
+   const expiresAt=f.plan.T0+150000+(mode==='current-consent-no-widen'?1000:mode==='current-consent-held-snapshot'?500:100);
+   f.primary.admission=async()=>{const value=await admission();primaryReads++;value.consent.expiresAt=mode==='current-consent-no-widen'?(primaryReads===1?expiresAt:f.plan.N1):(primaryReads===1?f.plan.N1:expiresAt);return value;};
+   f.primary.finalizer=async()=>{const value=await finalizer();finalizerReads++;return value;};
+   this.ctx.storage.transaction=async fn=>{
+    let journalWithSend=false;
+    const result=await originalTx.call(this.ctx.storage,tx=>fn({
+     get:tx.get.bind(tx),put:tx.put.bind(tx),setAlarm:tx.setAlarm.bind(tx),getAlarm:tx.getAlarm.bind(tx),
+     list:async options=>{const rows=await tx.list(options);if(options.prefix==='afw.qa-finite-child-create.v1:'&&rows.has(prefix+'send'))journalWithSend=true;return rows;}
+    }));
+    // SECOND fresh() snapshot, after acknowledged SEND and the second real
+    // readLaunchControl() result. The claim retains its older wider deadline.
+    if(!crossed&&journalWithSend&&finalizerReads===2){
+     crossed=true;f.consentCrossed=true;
+     if(mode==='current-consent-held-snapshot'){enter();await held;settled=true;}
+     f.setNow(expiresAt+1);
+    }
+    return result;
+   };
+  }
   if(['lost-send','late-send','late-send-readback','late-ack','late-ack-readback'].includes(mode)){
    let seen=0;
    this.ctx.storage.transaction=async fn=>{
@@ -89,8 +110,8 @@ export class Native extends IndependentClosure{
    };
   }
   if(mode==='duplicate-id'){await originalCreate.call(this.env.AFW_QA_NAMED_CONFIRMATION,{id:f.plan.workflows.confirmation,params:{planHash:f.plan.bundleHash}});f.providerNominal='running';}
-  if(['held-create','held-send'].includes(mode)){
-   f.hydrate=async()=>{f.setNow(f.now()+4500);f.hydrate=null;};
+  if(['held-create','held-send','current-consent-held-snapshot'].includes(mode)){
+   if(mode!=='current-consent-held-snapshot')f.hydrate=async()=>{f.setNow(f.now()+4500);f.hydrate=null;};
    if(mode==='held-send'){let heldOnce=false;this.ctx.storage.transaction=async fn=>{const r=await originalTx.call(this.ctx.storage,fn);if(!heldOnce&&await originalGet.call(this.ctx.storage,prefix+'send')){heldOnce=true;enter();await held;settled=true;}return r;};}
    const first=this.createFiniteNominalChild(refs);await Promise.race([reached,first.then(r=>{throw Error('did not reach native create '+r.status);})]);const firstResult=await first,settledAtReturn=settled;
    const parent=createPrivateQaFiniteLaunchParent({deadline:f.now()+5000}),context=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent});
@@ -102,7 +123,7 @@ export class Native extends IndependentClosure{
   this.ctx.storage.transaction=originalTx;
   const before=await journal();
   const again=await this.createFiniteNominalChild(refs),read=await this.readFiniteNominalLaunch(refs);
-  return {prepared,created,again,read,journal:await journal(),unchanged:JSON.stringify(before)===JSON.stringify(await journal()),calls,callArgs,armedAt,plan:f.plan};
+  return {prepared,created,again,read,journal:await journal(),unchanged:JSON.stringify(before)===JSON.stringify(await journal()),calls,callArgs,armedAt,plan:f.plan,consentCrossed:f.consentCrossed??false};
  }
 }
 export default{async fetch(r,e){const {mode}=await r.json();const s=e.AFW_INDEPENDENT_CLOSURE.get(e.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));try{return Response.json(await s.run(mode));}catch(error){return Response.json({error:String(error)},{status:500});}}};
@@ -142,3 +163,13 @@ for(const mode of ['late-ack','late-ack-readback'])test('late actual ACK persist
 test('held actual SEND transaction retains coordinator after caller expiry against fresh parent',async()=>{const r=await native('held-send');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);assert.equal(r.enteredBeforeSettlement,false);assert.equal(r.calls,0);assert.ok(r.journal.send);assert.equal(r.journal.ack,null);});
 
 test('lost prepared ACK cannot reconstruct launch from its durable receipt without source step success',async()=>{const r=await native('lost-prepared-reconstruction');assert.equal(r.prepared.status,'admin_pending');assert.equal(r.created.status,'admin_pending');assert.ok(r.journal.prepared);assert.equal(r.journal.send,null);assert.equal(r.calls,0);});
+
+for(const mode of ['current-consent-crossing','current-consent-no-widen'])test('current consent expiry survives second fresh storage await: '+mode,async()=>{
+ const r=await native(mode);assert.equal(r.consentCrossed,true,'cross the independently read current expiry during second fresh snapshot after SEND');
+ assert.equal(r.calls,0,'expired current consent must prevent native create');assert.equal(r.created.status,'admin_pending');
+ assert.ok(r.journal.send);assert.equal(r.journal.ack,null);assert.equal(r.unchanged,true);assert.equal(r.journal.claim.deadline,r.plan.N1,'persisted claim is deliberately wider than current consent');
+});
+test('narrowed current consent timeout retains actual second snapshot work against a fresh parent',async()=>{
+ const r=await native('current-consent-held-snapshot');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);
+ assert.equal(r.enteredBeforeSettlement,false);assert.equal(r.calls,0);assert.ok(r.journal.send);assert.equal(r.journal.ack,null);
+});

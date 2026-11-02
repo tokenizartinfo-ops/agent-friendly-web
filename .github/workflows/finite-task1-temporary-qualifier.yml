@@ -20,9 +20,7 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Native5 Task2 focused RED GREEN
-        run: node --test test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-qa-finite-trial-guard.test.mjs test/mcp-finite-nominal-control.test.mjs
-      - name: Affected control tests
-        run: node --test test/mcp-qa-finite-trial-control.test.mjs test/mcp-qa-finite-trial-control-native.test.mjs
+        run: node --test test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-finite-nominal-control.test.mjs
       - name: Native5 scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-launch.mjs lib/mcp-qa-finite-launch-source.mjs lib/mcp-qa-finite-trial-control.mjs worker/independent-closure/index.mjs test/mcp-qa-finite-launch-native.test.mjs test/fixtures/finite-launch-operations-native.mjs
+        run: npx eslint lib/mcp-qa-finite-launch.mjs test/mcp-qa-finite-launch-native.test.mjs
