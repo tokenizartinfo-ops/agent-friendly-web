@@ -50,14 +50,14 @@ export default {async fetch(request,env,ctx){
  return Response.json({result,calls:state.calls,reads:state.reads,same:state.same,keys:state.keys,preserved:result?.result===state.result});
 }};
 `;
-let bundled;
-async function run(mode){
- if(!bundled)bundled=(await build({stdin:{contents:"export {default} from 'synthetic-entry';",resolveDir:process.cwd(),sourcefile:'synthetic-confirmation-entry.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:[{name:'synthetic-source-and-identity-spy',setup(b){
- b.onLoad({filter:/mcp-qa-finite-confirmation-source\.mjs$/},()=>({contents:"export {material as readPrivateQaFiniteConfirmationMaterial} from 'synthetic-entry';",loader:'js'}));
+const bundles={};
+async function run(mode,source=true){
+ if(!bundles[source])bundles[source]=(await build({stdin:{contents:"export {default} from 'synthetic-entry';",resolveDir:process.cwd(),sourcefile:'synthetic-confirmation-entry.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:[{name:'synthetic-source-and-identity-spy',setup(b){
+ if(source)b.onLoad({filter:/mcp-qa-finite-confirmation-source\.mjs$/},()=>({contents:"export {material as readPrivateQaFiniteConfirmationMaterial} from 'synthetic-entry';",loader:'js'}));
  b.onResolve({filter:/^synthetic-entry$/},()=>({path:'entry',namespace:'synthetic'}));b.onLoad({filter:/.*/,namespace:'synthetic'},()=>({contents:entry,resolveDir:process.cwd(),loader:'js'}));
  b.onLoad({filter:/mcp-release-runtime\.mjs$/},()=>({contents:"export {known as runKnownCancellationReleaseWorkflow} from 'synthetic-entry'; export async function runReleaseWorkflow(){return {status:'blocked'}};export async function runReleaseOperator(){return {status:'blocked'}};",loader:'js'}));
  }}]})).outputFiles[0].text;
- const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundled,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}));
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundles[source],compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}));
  try{const r=await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify({mode})});assert.equal(r.status,200,await r.clone().text());return r.json();}finally{await mf.dispose();}
 }
 for(const mode of ['success','at-last-create'])test('finite nominal original event handoff '+mode,async()=>{
@@ -75,3 +75,5 @@ test('finite technical result reader is strict, bounded and preserves actual Kno
  assert.equal(api.validatePrivateQaFiniteConfirmationResult(value,e).result,result);
  for(const alter of [v=>({...v,extra:true}),v=>({...v,provenance:{...v.provenance,sendHash:'f'.repeat(64)}}),v=>({...v,result:Object.create({hidden:true})}),v=>({...v,result:{padding:'x'.repeat(65536)}}),v=>{const c={};c.self=c;return {...v,result:c};},v=>({...v,result:{get status(){throw Error('must not invoke getter');}}})])assert.throws(()=>api.validatePrivateQaFiniteConfirmationResult(alter(value),e));
 });
+
+test('actual uninstalled confirmation source stays closed before Known',async()=>{const r=await run('success',false);assert.equal(r.calls,0);assert.equal(r.reads,0);assert.equal(r.result.status,'blocked');assert.equal(r.result.purpose,undefined);});

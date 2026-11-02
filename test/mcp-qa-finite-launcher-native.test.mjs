@@ -25,10 +25,10 @@ export class Launcher extends PrivateQaBootstrap{
  async run(event,step){
   state.calls.workflowName=event.workflowName??null;
   const adapted={
-   do:async(name,options,fn)=>{state.calls.steps.push({name,options});if(state.replaying)return structuredClone(state.cache.get(name));const r=await step.do(name,options,fn);state.cache.set(name,structuredClone(r));if(name==='finite-launch-prepare'&&state.mode==='late-step')state.f.setNow(state.f.plan.launchPolicy.armAckBy+1);return r;},
-   sleepUntil:async(name,date)=>{if(state.replaying)return;state.calls.sleeps.push({name,at:date.getTime()});state.f.prepareSuccess=true;state.f.setNow(date.getTime()+(state.mode==='late-wake'?10000:0));try{return await step.sleepUntil(name,new Date(new Date().getTime()+25));}catch(error){state.calls.sleepError=String(error);throw error;}}
+   do:async(name,options,fn)=>{state.calls.steps.push({name,options});if(state.replaying&&state.cache.has(name))return structuredClone(state.cache.get(name));const r=await step.do(name,options,fn);state.cache.set(name,structuredClone(r));if(name==='finite-launch-prepare'&&state.mode==='late-step')state.f.setNow(state.f.plan.launchPolicy.armAckBy+1);return r;},
+   sleepUntil:async(name,date)=>{if(state.replaying)return;state.calls.sleeps.push({name,at:date.getTime()});state.f.prepareSuccess=true;state.f.setNow(date.getTime()+(state.mode==='late-wake'?10000:state.mode==='early-wake'?-1:0));if(state.mode==='replay-prepare')throw Error('SYNTHETIC delivery suspended after actual recorded prepare');try{return await step.sleepUntil(name,new Date(new Date().getTime()+25));}catch(error){state.calls.sleepError=String(error);throw error;}}
   };
-  const first=await super.run(event,adapted);if(state.mode==='replay'){state.replaying=true;return super.run(event,adapted);}return first;
+  const first=await super.run(event,adapted);if(['replay','replay-prepare'].includes(state.mode)){state.replaying=true;return super.run(event,adapted);}return first;
  }
 }
 export {PrivateQaNamedConfirmation};
@@ -52,7 +52,7 @@ test('actual finite Bootstrap prepares with readback, absolute sleep and one jou
  assert.deepEqual(r.report.steps.map(x=>x.name),['finite-launch-prepare','finite-launch-create']);for(const s of r.report.steps)assert.equal(s.options.retries.limit,0);
  assert.equal(r.status.output.status,'acknowledged');assert.equal(r.status.output.authorizesEffects,false);
 });
-for(const mode of ['missing-seed','lost-prepare','late-readback','late-step','late-wake'])test('actual launcher denies '+mode+' without a child or retry',async()=>{
+for(const mode of ['missing-seed','lost-prepare','late-readback','late-step','late-wake','early-wake'])test('actual launcher denies '+mode+' without a child or retry',async()=>{
  const r=await native(mode);assert.equal(r.status.output?.status,'admin_pending');assert.equal(r.report.create,0);assert.ok(r.report.prepare<=1);
 });
 
@@ -60,3 +60,5 @@ for(const mode of ['missing-seed','lost-prepare','late-readback','late-step','la
 test('recorded native successful outputs replay without prepare or native create',async()=>{const r=await native('replay');assert.equal(r.status.output.status,'acknowledged',JSON.stringify(r.report));assert.equal(r.report.prepare,1);assert.equal(r.report.read,1);assert.equal(r.report.create,1);});
 
 test('lost native create RPC acknowledgement terminalizes without retry',async()=>{const r=await native('lost-create-response');assert.equal(r.status.output.status,'admin_pending');assert.equal(r.report.prepare,1);assert.equal(r.report.create,1);});
+
+test('cached successful prepare resumes at original150s and performs only first create',async()=>{const r=await native('replay-prepare');assert.equal(r.status.output.status,'acknowledged',JSON.stringify(r.report));assert.equal(r.report.prepare,1);assert.equal(r.report.read,1);assert.equal(r.report.create,1);});
