@@ -1,0 +1,38 @@
+# C2-B preflight — initial native entry, publication and private capsule
+
+Read first. AFW repository tokenizartinfo-ops/agent-friendly-web; isolated feat/finite-native-cleanup-20261101. C1 acceptedRoot6038; A code2ab571bd/docs119f21f reviewedPASS/qualityapproved, sourceonly. One writer, no subagents, firstREADONLYpreflight/no code untilRootactualcontractruling. B is not an API/platform rewrite or all ofTask5/C3.
+
+## Bounded useful next result to make exact
+
+Source-owned initial native Workflow entry+existing privateactor, original owner-command/once/unknown-outcome fencing, current source/custody/all-writer preconditions BEFORE any Aclaim/effect where possible, actual initial canary closed_ui publication with recoverable rollback and journals, retained immutable private preparation capsule. A's factualresult/data/localWeakSet never grants effectpermission or provesrestartconsumption. ActualownerHTTPforwarding/source-session/three-stage mounts may be separately bounded if the actual dependency table requires; no fake source success todeclare allavailable.
+
+FIRST return exact actual-supported issuer/entry/clock/source/custody/primitive/effect/journal/rollback/table and minimal proposed API/result/storage contract. Mark which next seams canreally beimplemented/whichremainunavailable. Root decides thenpersistsruling beforeproduct. No actualcommand, instance, tag, grant, window, publication or provider probe by this preflight.
+
+## Read narrowly
+
+- reports/2026-11-02-finite-initial-material.md, specs/2026-11-02-finite-initial-material.md; full initialpreparationpreflight only pertinentsections.
+- Actual three lib/mcp-qa-finite-initial-material*.mjs, B1residency, C1bootstrap source/native/publication, B2historical source only specificfactpaths.
+- worker/independent-closure/finite.mjs and actualclasses inindex.mjs; actual fixed bootstrap binding inwranglerprofile.
+- Existing actual native originalentry/DOtransport and canary upload/activation/restoration helpers, connection-profile, policy-transport/source seams. ActualAllwriter source/gate only relatedmethods. Don'tdump ledger/AGENTS/history or unrelatedprojects.
+- reports/2026-11-02-reader-metadata-preparation.es.md (new primarymetadata, NOT capabilityproof).
+- Existingowner-source/owner-preparation/HTTP exact interfaces where capsule/readsession musteventuallyfit.
+
+## Binding decisions and concrete risks
+
+1. Future creator is Root's already-authorized CloudflareMCPadminAPI, one deterministic WorkflowID/payload, not assumedGHAWorkflowCreate or transferredtoken. UnknownCREATEACK: onlyGETreconcileexactID, no alternateID/retry/restart. Initialconfigurationpermission derives actualfixedownercomment, not callerDTO/MCPidentity.
+2. Actual nativeWorkflow.run event timestamp documented as instancecreated(triggered), with instanceId/workflowName; source https://developers.cloudflare.com/workflows/build/workers-api/ . No nativecaller-script attestation or separatequeuedAt from status. Original I0=actualinitialcomment time, includes allqueue; C1P0/Pend and laterbusinessT0/N1/C0/C1/R1 remain distinct. No Rootclock compensation. Explicit originaloperation/childtimers; Aparent<=30s/child<=5. Don't silently renew A/budget onread/phase/Workflowretry.
+3. Trust boundary: actual deployedsourcecallgraph plusaccount/bindinggovernance, independent compiledM/tree/C1 hashes andcurrentQA/version/pointers. repositoryWriterTrustAssumedtrue/historicalRefNonmutationVerifiedfalse acceptedtechnicalboundary, no publisheridentity/physicalsettlement claim. Need independentlyqualified actualnativeentry originalissuer/currentcontrol; no registry/caller-enrolledsuccess/context DTO.
+4. Aglobalcommittedonce fences evenlostACK; localstorageWeakSet onlysameisolate. Iffirstclaimnevercommitted, absentdurablerecordafterrestart proves neitherconsumption norphysicalsettlement. B must own this; don't hidebehindAflag or regenerateIDs afterunknown. Define nativeentrydurability/terminal+originalwriter proof, step retries/callbackreruns/failure-readonlyreconciliation.
+5. Initialoldcanary baseline/rollback fixed historical2607 rawmodule/config fromactual9aa supportedread; newcandidate onlyactualA/B1bytes underM. Initialpreparedclosed_ui profile exactAccess/limiter/client/project/absoluteexpiry, allEnabledfalse/privatepoliciesempty asactualconnection-profile. A has no speculativecurrentbaseline/currentPublication. ActualversionreturnedonlyafterPOST; no predictedUUID. Reuse actual supported uploadmultipart/inherit-secret logic, no secretvalue read/copy or wrongsecret_textdescriptor upload. Uploadversion != deployment.
+6. Native057 editoronlycanary; native9aa readonlycanary/operator+Metadata/Containers; GHA9dbQAeditor for distinctQApublication, nevertransferkey. Productionexpiry3Nov02:59UTC9aa/057 unchanged/minactual. TokenmetadataRootGET2Nov20:34active/roles notstoredkeymatch/endpointproof. NoTailReadgroupobserved; RESTWorkflowlist/status native9aa capabilityUNVERIFIED, don'tderivefromMetadataRead/OpenAPI/adminMCPsuccess. Bindingget.status ownexactinstance availabledocumented, notlist orqueuedAt.
+7. BEFORE mutation/once wherepossible, actualsupported current QA/canary/operator pointers/exposure/globalwriter inventory and allnative/D1writer settlement. Identify precisefixedendpoints, scope, source versus physicallimits; currentownBWorkflowexception onlyactualidentity, not arbitrarynonterminalignore. No trustedboolean/oldRootsnapshot ascurrentproof. Ifcapabilitymissing, failbeforeeffects; propose actualsupportedverificationgate, not automatic newtoken/role/proxy.
+8. Keep owner15min fromoriginalI0/custodybound andread10min separate; nowindowscreatednow. Capsule/witness strictlyprivate<=64KiB/noscript; useAprojection32KiB sortedv1hash. Exactapprovedpinnedoldsyntheticproject+freshownedrow; goalcontent sourcepreference notgrant. Initialcommandconfigapproval neverreadergrant/notices/Saveapproval.
+9. Fullownerflow current source/readSource repeatedchild5 +C1anon11GH causesrate/latency problem. C1fullread onceinit; retainedtechnicalevidenceDATA, laterconstructor mustfreshactualsource/currentmain/tag/pointers/privateDB/ownerdecision, not cachedauthority. NOhard10sessionbudget/53flowqualification untilactualforwardedhookphysicalsessioncomposition tested; GitHub60/IP/hour/sharedquota. StatewhatBcanimplementnowvsowningforwardinggate.
+10. Retained oldretirementpolicyhistorical=true preservesoriginalsource/target/key/window/rows; nonewT0/newgrant rewrite/physicalstop or flagenable. LaterC3 Save/callback/unsubscribe/earlywithdraw/timing remainseparate; preserveKnown4args18hooks70s/5s/20s andfirstfiniteHEADunspent.
+11. A reviewminor (nonblocking) testcompat expectedcanonicalizer sharesinitialCanonical; carry independentTask4canonical/knownanswer or actualend-to-endproductiondigest test inowningintegration/finalreview, no unrelatedretestwave.
+
+## Required proposal and later tests
+
+Exact API/own-data grammars/sourceauthority boundaries, originalclock/effectdeadline/onceSENDACK/readback/unknown paths, actualprivatebyteingress+baselinepreservation/rollback eligibility, currentallwriters/custody/API budget and preciseowninggaps. No genericruntime wiring by callerfacts. MeaningfulnativeDO/D1/Workflow/actualtransport/source tests underexplicitSYNexternalboundary, not wholefactsuccess; actualcompilerwhenentryprofilechanges. ProportionalhostedNode22/existinglockfile/temporaryqualifier/no-secrets/artifacts/deploy, no actualproduction workflow dispatch/sourcecommands. Freshindependentreview afteroneboundedproductunit, sourceonly; allreadinessflagsfalse.
+
+This brief itself authorizes no resource/profile/permission/credential/runtime action. Returncompact actualsupportedtable first; Rootpersistsbeforecode.
