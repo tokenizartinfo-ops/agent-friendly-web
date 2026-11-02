@@ -8,6 +8,8 @@ import {restorationConfigurationHash} from '../lib/mcp-restoration-configuration
 import {QA_CLOUD_CLOSED_PINS as REAL_PINS} from '../lib/mcp-qa-cloud-closed-pins.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex'),J=JSON.stringify;
 const ACCOUNT='85d0d5dadac3341a564f22ce885e9eec',APP='d6fc71552de7494a863aca20365a572d',VERSION='2607abae-cec3-4e35-89eb-8b8572262b54',QA='11111111-1111-4111-8111-111111111111';
+const PRODUCTION_CEILING=Date.parse('2026-11-03T02:59:00Z');
+const CEILING_DECLARATION="CEILING=Date.parse('2026-11-03T02:59:00Z')";
 const keys=['afw.canary-restoration-control.v1','afw.private-prepared-dispatch.v1','afw.private-reduction-dispatch.v1','afw.successor-canary-restoration.v1','afw.successor-retirement-handoff.v1'];
 function fixture(ids){
  const at=Date.now()-600000,start=at+20000,end=start+60000,script='//'+('"'.repeat(1830100))+'\nexport default{};',hash=sha(script),original={containerId:ids.original,applicationId:APP,programHash:'1'.repeat(64),sourceRevision:'2'.repeat(40)},candidate={trialId:'3'.repeat(64),programHash:'4'.repeat(64),sourceRevision:'5'.repeat(40),startAt:start,expiresAt:end,budget:1};
@@ -35,11 +37,20 @@ async function seed(db,x){
  for(const [id,generation,container,program,source,closed]of [['original','e'.repeat(64),x.original.containerId,x.original.programHash,x.original.sourceRevision,x.at+15000],['cancelled-old',null,x.ids.candidate,x.candidate.programHash,x.candidate.sourceRevision,x.start+5000]])await db.prepare('INSERT INTO dossier_node_process_closures VALUES(?,?,?,?,?,?,?)').bind(id,generation,container,program,source,'cloudflare/debian-trixie',closed).run();
  for(const [sequence,id,action,issued,expires]of [[1,'original','grant',x.at,x.at+10000],[2,'cancelled-old','grant',x.start,x.end],[3,'cancelled-old','revoke',x.start+4000,x.start+4000]])await db.prepare('INSERT INTO dossier_monitoring_consent_events VALUES(?,?,?,?,?,?,?,?,?,?,?,?)').bind(sequence,id,'synthetic-project','owner','client',x.events.resource,1,action,'afw.dossier-monitoring.v1','request-'+sequence,issued,expires).run();
 }
-async function harness(actualPins=false){
+async function harness(actualPins=false,productionExpiry=false){
  const base={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_QA_VERSION:{id:QA},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-native-reader'},d1Databases:{RELEASE_DB:'history'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'History',useSQLite:true,uniqueKey:'history-b2'},AFW_RELEASE_EVENTS_NODE:{className:'Node',useSQLite:true,uniqueKey:'history-node-b2'}}};
  const mf=new Miniflare(convertV4MiniflareOptions({...base,script:'import{DurableObject}from"cloudflare:workers";export class History extends DurableObject{} export class Node extends DurableObject{} export default{fetch(){return new Response(null,{status:404})}};'}));
  const first=await mf.getBindings(),ns=first.AFW_RELEASE_EVENTS_NODE,ids={original:ns.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()},x=fixture(ids);x.ids=ids;
  let source;try{source=await readFile('lib/mcp-qa-finite-historical-source.mjs','utf8');}catch{source='export async function readPrivateQaFiniteHistoricalSource(){throw Error("Finite historical source unavailable:input");}';}
+ // Explicit test-only build boundary: no product API or caller-clock override.
+ assert.equal(source.split(CEILING_DECLARATION).length,2,'exact production approval datum occurs once');
+ const fixtureApproval=Math.max(Date.now()+86400000,Date.parse('2026-11-04T00:00:00Z'));
+ // RED temporal reproduction: the old fixture still reaches the production ceiling.
+ // The final fix will confine this instrumented clock to productionExpiry.
+ const clockCalls=source.match(/Date\.now\(\)/g);
+ assert.equal(clockCalls?.length,7,'known reader-only clock call sites');
+ source=source.replaceAll('Date.now()',String(PRODUCTION_CEILING));
+ assert.equal(productionExpiry||source.includes(CEILING_DECLARATION),true);
  const entry=String.raw`import{DurableObject}from'cloudflare:workers';import{readPrivateQaFiniteHistoricalSource as read}from'./lib/mcp-qa-finite-historical-source.mjs';import{createFiniteOwnerRequestLease}from'./lib/mcp-qa-finite-owner-preparation.mjs';import{observeFiniteOwnerStageWork}from'./lib/mcp-qa-finite-stage-work.mjs';
  export class Node extends DurableObject{}
  export class History extends DurableObject{
@@ -64,7 +75,7 @@ async function harness(actualPins=false){
  }export default{fetch(){return new Response(null,{status:404})}};`;
  const plugin={name:'explicit-synthetic-external-source-commitments',setup(b){b.onResolve({filter:/mcp-qa-finite-historical-source\.mjs$/},()=>({path:'historical-reader',namespace:'b2-source'}));b.onLoad({filter:/.*/,namespace:'b2-source'},()=>({contents:source,loader:'js',resolveDir:process.cwd()+'/lib'}));if(actualPins)return;b.onLoad({filter:/mcp-confirmation-frozen-artifact\.json$/},()=>({contents:J(x.receipt),loader:'json'}));b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));b.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({contents:'export const QA_CLOUD_CLOSED_PINS='+J({...REAL_PINS,canary:x.pin})+';',loader:'js'}));}};
  const built=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],plugins:[plugin]});
- const f={x,mf,requests:[],mode:'normal',delay:0,versionReads:0};
+ const f={x,mf,requests:[],mode:'normal',delay:0,versionReads:0,fixtureApproval};
  await mf.setOptions(convertV4MiniflareOptions({...base,script:built.outputFiles[0].text,outboundService:async req=>{
  const u=new URL(req.url);f.requests.push(u.pathname);assert.equal(req.method,'GET');assert.equal(req.headers.get('Authorization'),'Bearer synthetic-native-reader');
  if(f.delay)await new Promise(r=>setTimeout(r,f.delay));
@@ -130,4 +141,11 @@ test('B2-AB actual native historical reader, private CF boundary is synthetic',a
 
 test('production fixed commitments reject synthetic historical bytes; no external pin override',async()=>{
  const f=await harness(true);try{const r=await f.stub.read();assert.equal(r.ok,false);assert.equal(r.message,'Finite historical source unavailable:metadata');}finally{await f.mf.dispose();}
+});
+
+test('unchanged production custody ceiling denies exactly at expiry before provider reads',async()=>{
+ const f=await harness(false,true);try{
+  const r=await f.stub.read();assert.deepEqual(r,{ok:false,message:'Finite historical source unavailable:deadline'});
+  assert.equal(f.requests.length,0);
+ }finally{await f.mf.dispose();}
 });
