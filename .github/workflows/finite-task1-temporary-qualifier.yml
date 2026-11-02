@@ -25,6 +25,7 @@ jobs:
       - name: Task3 stage approval original native owner path
         run: node --test test/mcp-qa-finite-owner-preparation-native.test.mjs test/mcp-qa-finite-preparation-records.test.mjs test/mcp-qa-finite-preparation-store-native.test.mjs test/mcp-qa-finite-policy-journal-native.test.mjs
       - name: Task3 fixed transport native synthetic provider
+        if: always()
         run: node --test test/mcp-qa-finite-policy-transport.test.mjs test/mcp-qa-finite-connection-preparation-native.test.mjs test/mcp-canary-restoration-transport.test.mjs
       - name: Scoped lint
         if: always()
