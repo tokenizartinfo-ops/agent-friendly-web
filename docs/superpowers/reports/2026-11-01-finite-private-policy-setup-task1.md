@@ -89,3 +89,33 @@ FIX_BASE/reviewedHEAD224693b91b7a66d331f5996f1ddc178823e4d485. Fresh independent
 Verbatim: **[P2] Snapshot ticket-consumption input before asynchronous storage work. lib/mcp-qa-finite-preparation-store.mjs:67–72. fields() validates and returns the caller’s original mutable object. consumeTicket derives the use key before its first await, then rereads value.ticketHash and spreads value after awaits. Deterministic reproduction: persist valid tickets A and B; call consumeTicket({ticketHash:A,recordHash:R}, lease); suspend get(A:use); change the original argument’s ticketHash to B; resume. The transaction validates B but stores TicketUse(ticketHash=B) under A:use. A subsequent ordinary consumption of B succeeds under B:use, consuming B twice. This breaks the Task1 one-use/exact-record invariant without an expired lease or forged stored record. Capture a validated immutable argument snapshot before any await and cover this interleaving. The same retained-wrapper pattern appears in putLink at lines76–82: changing value.kind during the preconnection read can skip the notice→grant check and select a different storage suffix; snapshot the discriminator too.**
 
 Reviewer reproduction is source-derived, not previously executed. Root assigned original sole implementer fix round1/5; no subagents. Scope is both mutable-wrapper boundaries, meaningful actual native RED before minimal fix, unchanged lease/schema/chronology and exact source-only limits. Covering command: node --test test/mcp-qa-finite-preparation-store-native.test.mjs. Scoped lint only changed product/store-native/fixture JS; temporary qualifier narrowed to avoid repeating unchanged suites. No whole-suite, runtime/provider/custody/identity/consent/OAuth/OTP/window operation; owner asleep. Root owns scoped re-review224693b..fixHEAD and next-task gate.
+
+
+## Fix round 1/5 — implementation complete / scoped root re-review pending
+
+Implementer assessment: P2 ADDRESSED at both sites; no open implementation finding identified in this scoped self-review. Root retains independent re-review. FIX_BASE `224693b91b7a66d331f5996f1ddc178823e4d485`; covering RED `eb8a594cd359b026e5f7b2dbbca108e587da2b99`; minimal product fix/codeHEAD `7307b75959f177f1ff4684bd95be263dcb4c52c3`, tree `163c1019a5856728d5392d43ef227252908a3b5a`. Documentation HEAD is this enclosing append-only report/ledger commit, supplied after CAS/readback in the handoff. Original Task1 evidence above remains historical and unchanged.
+
+The two-line product fix copies and freezes each validated consumeTicket/putLink wrapper before the first await. It freezes a NEW object and leaves the caller's original object mutable. All ticket hash/record hash reads and TicketUse construction use that original invocation snapshot; link kind/precursor/suffix stay pinned to its original discriminator, while the existing record decoder retains its immutable record copy. No change to record codecs, lease/deadline semantics, actual publication witness chronology, source authority, keys or accepted history.
+
+The test-only Worker interleaving wraps actual SQLite transaction get, awaits its real native result and a microtask, then mutates the original call argument before resolving get to the product. It does not fabricate a stored record or expire a lease. Each covering test asserts exactly one argument mutation actually happened. It proves:
+- Valid tickets A and B: mutation A→B while get(A:use) is suspended must leave TicketUse(A) under A:use; subsequent ordinary B consumption produces exactly one TicketUse(B) under B:use; repeats preserve one-use history.
+- Notice→grant kind mutation during the actual preconnection read cannot skip the absent-grant prerequisite; no row is appended.
+- With actual grant present, the same mutation cannot redirect the notice append into the grant key; the original GrantLink stays byte-equivalent and NoticeLink appears only under notice.
+
+Exact hosted commands for both RED and GREEN, Node22.23.4, ubuntu-24.04:
+
+```sh
+npm ci --ignore-scripts --no-audit --no-fund
+node --test test/mcp-qa-finite-preparation-store-native.test.mjs
+npx eslint lib/mcp-qa-finite-preparation-store.mjs test/mcp-qa-finite-preparation-store-native.test.mjs test/fixtures/finite-preparation-store-worker.mjs
+```
+
+RED `eb8a594`: run41378343786/job125063437194, attempt1, 14tests:11PASS/3FAIL/0SKIP/0CANCELLED. Failures were the exact three interleavings above: TicketUse(B) observed under A:use after ordinary B consumption succeeded; missing-grant notice incorrectly recorded; valid-grant notice append failed after the changed discriminator selected the wrong key. Actual native mount/fixture/dependencies/syntax and original11 tests passed. These are genuine behavioral failures; no failing fixture is counted. Scoped lint0errors/0warnings.
+
+GREEN `7307b759`: run41378417492/job125063662829, attempt1, completed/success, 14PASS/0FAIL/0SKIP/0CANCELLED; scoped lint0errors/0warnings; artifacts0. Same covering command and unaltered regression assertions. No whole-suite, prior records/journal/old-decoder suite repetition or lint broadening. Temporary branch-only qualifier was narrowed to this exact command and these three changed JS paths, retaining contents:read/no secrets/artifacts/deploy and documentation-only push filtering; EXCLUDE integration.
+
+Self-review verified both asynchronous closures reference the copied wrapper, nested link record is already decoded before awaits, and the original caller mutation still occurs in GREEN. Original lease checks, transaction atomicity, one-use append-only semantics and the accepted after-head-ACK witness behavior remain intact; all11 prior store-native tests pass. FIX_BASE..codeHEAD compare is ahead2/behind0, six scoped paths, with product diff exactly2additions/2deletions in preparation-store. Six changed paths independently fetched and matched at codeHEAD. Both commits used exact expected-head CAS and independent branch/content readback; final Actions head/tree/attempt/job/conclusion and empty artifacts were independently verified. Final documentation CAS/readback is in the handoff.
+
+Only this bounded source review fix was executed. Native storage is real; argument scheduling, clock/lease/identity/source authority and all external/provider boundaries remain SYNTHETIC. No deployment/runtime/provider/private read, credentials/roles/OAuth/OTP/consent/window change, local project/source/dependencies/build/temp downloads, first finite HEAD/owner action/main merge/Max or next-task implementation. No subagents or self-appointed reviewer. operationalReadiness=false.
+
+STOP WRITES after final documentation CAS/readback. Root scoped re-review224693b..fixHEAD required before Task2.
