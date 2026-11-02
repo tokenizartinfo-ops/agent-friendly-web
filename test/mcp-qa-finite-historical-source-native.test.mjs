@@ -37,7 +37,7 @@ async function seed(db,x){
  for(const [id,generation,container,program,source,closed]of [['original','e'.repeat(64),x.original.containerId,x.original.programHash,x.original.sourceRevision,x.at+15000],['cancelled-old',null,x.ids.candidate,x.candidate.programHash,x.candidate.sourceRevision,x.start+5000]])await db.prepare('INSERT INTO dossier_node_process_closures VALUES(?,?,?,?,?,?,?)').bind(id,generation,container,program,source,'cloudflare/debian-trixie',closed).run();
  for(const [sequence,id,action,issued,expires]of [[1,'original','grant',x.at,x.at+10000],[2,'cancelled-old','grant',x.start,x.end],[3,'cancelled-old','revoke',x.start+4000,x.start+4000]])await db.prepare('INSERT INTO dossier_monitoring_consent_events VALUES(?,?,?,?,?,?,?,?,?,?,?,?)').bind(sequence,id,'synthetic-project','owner','client',x.events.resource,1,action,'afw.dossier-monitoring.v1','request-'+sequence,issued,expires).run();
 }
-async function harness(actualPins=false,productionExpiry=false){
+async function harness(actualPins=false,productionExpiry=null){
  const base={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_QA_VERSION:{id:QA},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-native-reader'},d1Databases:{RELEASE_DB:'history'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'History',useSQLite:true,uniqueKey:'history-b2'},AFW_RELEASE_EVENTS_NODE:{className:'Node',useSQLite:true,uniqueKey:'history-node-b2'}}};
  const mf=new Miniflare(convertV4MiniflareOptions({...base,script:'import{DurableObject}from"cloudflare:workers";export class History extends DurableObject{} export class Node extends DurableObject{} export default{fetch(){return new Response(null,{status:404})}};'}));
  const first=await mf.getBindings(),ns=first.AFW_RELEASE_EVENTS_NODE,ids={original:ns.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()},x=fixture(ids);x.ids=ids;
@@ -45,12 +45,21 @@ async function harness(actualPins=false,productionExpiry=false){
  // Explicit test-only build boundary: no product API or caller-clock override.
  assert.equal(source.split(CEILING_DECLARATION).length,2,'exact production approval datum occurs once');
  const fixtureApproval=Math.max(Date.now()+86400000,Date.parse('2026-11-04T00:00:00Z'));
- // RED temporal reproduction: the old fixture still reaches the production ceiling.
- // The final fix will confine this instrumented clock to productionExpiry.
- const clockCalls=source.match(/Date\.now\(\)/g);
- assert.equal(clockCalls?.length,7,'known reader-only clock call sites');
- source=source.replaceAll('Date.now()',String(PRODUCTION_CEILING));
- assert.equal(productionExpiry||source.includes(CEILING_DECLARATION),true);
+ if(productionExpiry!==null){
+  assert.ok(['before','at'].includes(productionExpiry));
+  // Only this focused boundary case freezes the reader clock. The parent lease,
+  // performance clock, native storage and D1 keep their actual clocks.
+  assert.equal(source.match(/Date\.now\(\)/g)?.length,7,'known reader-only clock call sites');
+  source=source.replaceAll('Date.now()',String(PRODUCTION_CEILING-(productionExpiry==='before'?1:0)));
+  assert.equal(source.includes('Date.now()'),false);
+  assert.equal(source.split(CEILING_DECLARATION).length,2,'production ceiling remains unchanged');
+ }else{
+  // Synthetic approval is renewed for the test bundle, never for production.
+  // This also applies when historical pins remain real in the metadata negative.
+  source=source.replace(CEILING_DECLARATION,'CEILING='+fixtureApproval);
+  assert.equal(source.includes(CEILING_DECLARATION),false);
+  assert.equal(source.split('CEILING='+fixtureApproval).length,2);
+ }
  const entry=String.raw`import{DurableObject}from'cloudflare:workers';import{readPrivateQaFiniteHistoricalSource as read}from'./lib/mcp-qa-finite-historical-source.mjs';import{createFiniteOwnerRequestLease}from'./lib/mcp-qa-finite-owner-preparation.mjs';import{observeFiniteOwnerStageWork}from'./lib/mcp-qa-finite-stage-work.mjs';
  export class Node extends DurableObject{}
  export class History extends DurableObject{
@@ -80,7 +89,7 @@ async function harness(actualPins=false,productionExpiry=false){
  const u=new URL(req.url);f.requests.push(u.pathname);assert.equal(req.method,'GET');assert.equal(req.headers.get('Authorization'),'Bearer synthetic-native-reader');
  if(f.delay)await new Promise(r=>setTimeout(r,f.delay));
  let result;
- if(u.pathname.endsWith('/tokens/verify'))result={id:f.mode==='wrong-token'?'9db7901af95faf07e6f7ef378045328e':'9aa97ad1fc9afe3021cf69ea497d5190',status:'active',expires_on:f.mode==='expired-token'?'2020-01-01T00:00:00Z':'2026-11-03T02:59:59Z',not_before:null};
+ if(u.pathname.endsWith('/tokens/verify'))result={id:f.mode==='wrong-token'?'9db7901af95faf07e6f7ef378045328e':'9aa97ad1fc9afe3021cf69ea497d5190',status:'active',expires_on:f.mode==='expired-token'?'2020-01-01T00:00:00Z':new Date(fixtureApproval+60000).toISOString(),not_before:null};
  else{assert.equal(u.pathname,'/client/v4/accounts/'+ACCOUNT+'/workers/workers/'+x.pin.name+'/versions/'+VERSION);assert.equal(u.search,'?include=modules');result=structuredClone(x.metadata);f.versionReads++;
  if(f.mode==='defaults'||f.mode==='drift'&&f.versionReads%2===0){for(const e of Object.values(result.exports))e.state='created';result.exports.default.cache={enabled:false};result.cache_options={enabled:false,cross_version_cache:false};}
  if(f.mode==='transfer')result.exports.AfwOwnEventNode={...result.exports.AfwOwnEventNode,state:'expecting-transfer',transfer_from:'foreign'};
@@ -96,6 +105,7 @@ async function harness(actualPins=false,productionExpiry=false){
 }
 test('B2-AB actual native historical reader, private CF boundary is synthetic',async t=>{
  const f=await harness();try{
+ assert.ok(f.fixtureApproval>PRODUCTION_CEILING);assert.ok(f.fixtureApproval>Date.now());
  const before=await f.stub.snapshot(),dbBefore=(await f.db.prepare('SELECT * FROM dossier_node_process_closures ORDER BY grant_id').all()).results;
  await t.test('real positive path preserves Q distinct from historical artifact and returns actual cancellation rows',async()=>{const r=await f.stub.read();assert.equal(r.ok,true,J(r));assert.equal(r.artifactBytes,Buffer.byteLength(f.x.script));assert.ok(r.escapedBytes>2097152,'escaped private script is not a wire cap');assert.equal(r.history.originalAdmission.sourceRevision,'2'.repeat(40));assert.equal(r.history.cancellations[0].sourceRevision,'5'.repeat(40));assert.equal(r.history.cancellations[0].grantId,'cancelled-old');assert.deepEqual(r.claims,[false,false,false,false]);assert.deepEqual(r.metadataProof.normalizations,[]);assert.equal(r.legacy.preparedDispatch,JSON.stringify(f.x.rows[1][1]));});
  await t.test('documented defaults normalize with independent raw fingerprint',async()=>{f.mode='defaults';const r=await f.stub.read();assert.equal(r.ok,true,J(r));assert.notEqual(r.metadataProof.rawConfigurationHash,r.metadataProof.normalizedConfigurationHash);assert.deepEqual(r.metadataProof.normalizations,['cache_options','exports.AfwNodeControl.state','exports.AfwOwnEventNode.state','exports.default.cache','exports.default.state']);f.mode='normal';});
@@ -140,12 +150,18 @@ test('B2-AB actual native historical reader, private CF boundary is synthetic',a
 });
 
 test('production fixed commitments reject synthetic historical bytes; no external pin override',async()=>{
- const f=await harness(true);try{const r=await f.stub.read();assert.equal(r.ok,false);assert.equal(r.message,'Finite historical source unavailable:metadata');}finally{await f.mf.dispose();}
+ const f=await harness(true);try{const r=await f.stub.read();assert.equal(r.ok,false);assert.equal(r.message,'Finite historical source unavailable:metadata');assert.ok(f.requests.some(p=>p.endsWith('/versions/'+VERSION)),'historical metadata was actually read');}finally{await f.mf.dispose();}
 });
 
 test('unchanged production custody ceiling denies exactly at expiry before provider reads',async()=>{
- const f=await harness(false,true);try{
-  const r=await f.stub.read();assert.deepEqual(r,{ok:false,message:'Finite historical source unavailable:deadline'});
-  assert.equal(f.requests.length,0);
- }finally{await f.mf.dispose();}
+ // At ceiling-1 the same unchanged guard admits the first provider read. At
+ // ceiling it denies before any read: this distinguishes expiry from parent,
+ // wall drift, monotonic or native-input rejection.
+ for(const boundary of ['before','at']){
+  const f=await harness(false,boundary);try{
+   const r=await f.stub.read();
+   if(boundary==='before')assert.ok(f.requests.length>0,'one millisecond before expiry passes initial custody ceiling');
+   else{assert.equal(r.ok,false);assert.equal(r.message,'Finite historical source unavailable:deadline');assert.equal(f.requests.length,0);}
+  }finally{await f.mf.dispose();}
+ }
 });
