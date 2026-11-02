@@ -61,3 +61,13 @@ Additionally AFTERactualA.collect ANDA.assertCurrent awaitstorage.sync again und
 NativeWorkflowevent toactorfields is explicit reviewedsourcecallgraph/account/bindinggovernance correlation, NOTcryptographiccallerscriptidentity. Nofake registration/DTOsuccess/sourceauthoritydefaultchange. Initialoperationandactormethod onlyfiniteentry; no newbinding/export/profile/resource/role/key/HTTP. Preserveordinaryhandlers/firstfiniteHEAD. Noactualinvocationuntilfullsourceisready.
 
 HostedNode22/existinglockfile/temporaryscopedqualifier/contents:read/noSecretsArtifactsDeploy/docs-onlytriggerexcluded; meaningfulRED→GREEN actualSQLiteDO+sync/D1/A/B1/B2/C1 +explicitSYNexternalpins/approval/eventdelivery ifnativeWorkflowruntimeabsent. Actualcompiler/profile/residency regressions justifiedbyentrychange; canary2MiB/QA3MiB capsunchanged. Freshindependentspec+qualityreviewafterboundedunit. All operational/fullpackage/PCoffflagsfalse.
+
+## Subsequent native evidence and explicit post-implementation ruling
+
+The preflight above was committed before product at 69e338a3378d3fafaf8593def21802aac78308f0. It remains the original supported table and ruling chronology. The [bounded native-entry report](2026-11-02-finite-initial-native-entry.md) records subsequent actual RPC, persisted SQLite restart, prerequisite RED and final source qualification.
+
+Actual RPC exposed the system-added own Symbol.dispose on object results, documented by [Cloudflare lifecycle](https://developers.cloudflare.com/workers/runtime-apis/rpc/lifecycle/). Root approved only exact native-boundary normalization and synchronous finally-disposal, without record parser relaxation, caller authority, remote drain or settlement claims.
+
+AFTER implementation observation, Root approved an explicit clock distinction: wrapper and actor share unchanged min(native createdAt+30s,fixed ceiling); actor additionally narrows by original I0+300s and actual custody expiry and owns all A/continuation. The exact safe DATA output carries no deadline, so delayed factual receipt can outlast the tighter actor bound but never grants effect permission or resumable admission. This amends the original identical-operationDeadline wording openly; fresh reviewers assess the actual contract. No original base is widened.
+
+Held native transaction ACK and SYN-controlled retry scheduling do not force or observe delayed physical disk commit. Root accepted that honest validation limit plus the native serializability argument; no additional fixture wave or physical-settlement claim was made. Final source e95b4cf1b1f4d098c3c4e412678b79a3a389a8f7 passed 68 tests and lint in hosted run41530593619/attempt1, artifacts0. All operational/full-package/PC-off flags remain false.

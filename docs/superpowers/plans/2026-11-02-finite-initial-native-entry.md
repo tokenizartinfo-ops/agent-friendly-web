@@ -21,12 +21,12 @@ Exactrecord/entry/clock/output perapprovedspec. Fixedceiling unchanged. Noeffect
 ## One bounded task
 Files create lib/mcp-qa-finite-initial-entry.mjs, lib/mcp-qa-finite-initial-entry-records.mjs, test/mcp-qa-finite-initial-entry-native.test.mjs, test/mcp-qa-finite-initial-entry-records.test.mjs; extendnativefixture narrowlyifneeded; modifyworker/independent-closure/finite.mjs andtemporaryqualifier. Actualcompilerregression fixtures onlyasneeded.
 Interfaces: runPrivateQaFiniteInitialPreparation({env,event,step}); createPrivateQaFiniteInitialEntry({ctx,env}).run(exactrefs); EntryClaimcodec; existingfiniteactormethodprepareFiniteInitialMaterial(refs). ExistingA API unchanged.
-- [ ] Persist preflight/spec/plan/ledger BEFOREproduct, CAS/ref/exactreadback.
-- [ ] AddmeaningfulREDnative/recordtests, scopedtemporaryhostedqualifier; verifyfeature-missingbehavior failurewithworkingharness.
-- [ ] Implementstrictrecord andfixednativewinnergate; actualsync/readback beforeA, postAactualsync, safeoutput; mountfiniteonly.
-- [ ] HostedGREENnativeunit/relatedA/C1/compiler/profile/residencychecks, lint; inspectactualrun/head/attempt/logs/counts/bytes/artifacts0.
-- [ ] Fixonlyobservedfailures; no genericrewrite/testwave; preserveoriginalceilings/identities.
-- [ ] Recordexactbase/code/docsheads, commands/run/job/counts/bytes/actualvsSYN/CAS/readbacks/remaininggates; appendledger; STOPfreshindependentspec+qualityreview.
+- [x] Persist preflight/spec/plan/ledger BEFOREproduct, CAS/ref/exactreadback.
+- [x] AddmeaningfulREDnative/recordtests, scopedtemporaryhostedqualifier; verifyfeature-missingbehavior failurewithworkingharness.
+- [x] Implementstrictrecord andfixednativewinnergate; actualsync/readback beforeA, postAactualsync, safeoutput; mountfiniteonly.
+- [x] HostedGREENnativeunit/relatedA/C1/compiler/profile/residencychecks, lint; inspectactualrun/head/attempt/logs/counts/bytes/artifacts0.
+- [x] Fixonlyobservedfailures; no genericrewrite/testwave; preserveoriginalceilings/identities.
+- [x] Recordexactbase/code/docsheads, commands/run/job/counts/bytes/actualvsSYN/CAS/readbacks/remaininggates; appendledger; STOPfreshindependentspec+qualityreview.
 
 Commands planned:
 npm ci --ignore-scripts --no-audit --no-fund
@@ -35,3 +35,11 @@ node --test test/build-finite-native-package.test.mjs test/mcp-qa-finite-bootstr
 npx eslint <changed source/test files>
 
 No actualproductionworkflowdispatch/sourcecommands. Hostedtests sourceonly, no promotion/readiness/PCoff proof.
+
+## Executed result and plan refinements
+
+Final qualified source: e95b4cf1b1f4d098c3c4e412678b79a3a389a8f7. Run41530593619/job125569445138/attempt1: 68/68, 0 failures/cancellations/skips, scoped lint pass, artifacts0. Exact commands, intermediate RED and causal fixes, actual-versus-SYN boundaries, compiler bytes and CAS/readbacks are in the [final report](../reports/2026-11-02-finite-initial-native-entry.md).
+
+Actual A/B1/B2/C1 composition was tested through the new real native fixture; standalone accepted A suites listed in the original plan were not unnecessarily repeated. Final compiler/profile/residency checks ran once after source stabilized. Root approved the disclosed common native base versus actor-only I0/custody narrowing after implementation observation; the amended spec and report preserve this chronology and the delayed-factual-output limitation.
+
+Work stops for fresh independent spec and quality reviewers. Review itself is outstanding. No provider/runtime/publisher action, branch integration or main update is part of this completion.
