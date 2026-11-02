@@ -38,7 +38,7 @@ async function native(t,mode='normal'){
 }
 test('initial owned synthetic selection needs no OAuth grant and uses release primary',async t=>{
  const f=await native(t),s=await f.screen();
- assert.match(s.html,/discovery/);assert.match(s.html,/configuración/i);assert.doesNotMatch(s.html,/synthetic-owned|synthetic-client/);
+ assert.match(s.html,/discovery/);assert.match(s.html,/configuración/i);assert.match(s.html,/quince minutos/);assert.match(s.html,/<time datetime=/);assert.doesNotMatch(s.html,/synthetic-owned|synthetic-client/);
  assert.match(s.handle,/^[a-f0-9]{64}$/);assert.match(s.projectRef,/^[a-f0-9]{64}$/);
  assert.equal((await f.db.prepare('SELECT COUNT(*) n FROM delegated_access_grants').first()).n,0);
  assert.ok(f.jwksReads()>0);
