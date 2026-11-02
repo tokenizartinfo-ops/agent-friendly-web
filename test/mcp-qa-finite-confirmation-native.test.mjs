@@ -23,7 +23,7 @@ export function material({env,event,step,parent}){
  return value;
 }
 export async function known(input){state.calls++;state.same=input.env===state.env&&input.event===state.event&&input.step===state.step;state.keys=Object.keys(input).sort();if(state.mode==='known-throws')throw Error('synthetic Known throw');state.result={status:'blocked',mayRetry:false,operationalReadiness:false};return state.result;}
-export default {async fetch(request){
+export default {async fetch(request,env,ctx){
  const {mode}=await request.json();state.mode=mode;state.calls=0;state.reads=0;
  const real=Date.now(),f=finiteFixture({at:real+600000}),p=f.plan;state.at=p.T0+150000;Date.now=()=>state.at;
  const script='export default {fetch(){return new Response(null,{status:404})}}',artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:hash(script),sourceCheck:'git-inputs-before-after-v1'},policy=inertNamedConfirmationPolicy(artifact);
@@ -45,7 +45,7 @@ export default {async fetch(request){
  if(mode==='timestamp-not-date')event.timestamp=state.at;
  if(mode==='at-last-create'){state.at=p.T0+160000;event.timestamp=new Date(state.at);execution.createdAt=state.at;}
  state.env={AFW_QA_VERSION:{id:p.deployments.qaLive.versionId},AFW_INDEPENDENT_CLOSURE:{idFromName:()=>({toString:()=>p.resources.actorId})}};state.event=event;state.step={do(){throw Error('no added business stage');}};
- const workflow=new PrivateQaNamedConfirmation({},state.env),result=await workflow.run(event,state.step);
+ const workflow=new PrivateQaNamedConfirmation(ctx,state.env),result=await workflow.run(event,state.step);
  return Response.json({result,calls:state.calls,reads:state.reads,same:state.same,keys:state.keys,preserved:result?.result===state.result});
 }};
 `;
