@@ -170,3 +170,12 @@ test('internal selected preparation rereads exact current owner grant notices an
  await f.db.prepare("UPDATE delegated_access_grants SET revoked_at=? WHERE id='accepted-grant'").bind(new Date().toISOString()).run();
  assert.equal((await f.json('/fixture/read',{sourceRevision:pre.sourceRevision})).rejected,true);
 });
+
+test('same-origin SDK-approved POST can map exact unconsumed transaction when initial GET omitted preparation cookie',async t=>{
+ const f=await connection(t);
+ const post={url:origin+'/authorize',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:f.handle,decision:'approve',scope:'afw:project:read',project:'synthetic-owned'}).toString()};
+ assert.equal((await f.link('authorization',{authorizationHash:sha('wrong-handle')},post)).rejected,true);
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},post)).result?.status,'recorded');
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},post)).result?.status,'existing');
+ assert.equal((await rows(f)).filter(([k])=>k.startsWith('connection-authorization:')).length,1);
+});

@@ -17,7 +17,7 @@ async function observe(kind,args,lease){
  state.events.push(event);
  const original=Date.now;if(state.late)Date.now=()=>original()+30001;
  try{lease.assertCurrent();event.leaseActive=true;
-  event.preserved=args.request instanceof Request&&args.request.headers.has('Cookie')&&(kind==='authorization'?args.request.method==='GET':(await args.request.text()).includes('decision=approve'));
+  event.preserved=args.request instanceof Request&&args.request.headers.has('Cookie')&&(args.request.method==='GET'||(await args.request.text()).includes('decision=approve'));
   throw Error('synthetic preparation link failure after genuine SDK success');
  }finally{Date.now=original;}
 }
@@ -581,7 +581,7 @@ test('fixed preparation link failure preserves genuine completed OAuth grant and
   assert.equal(approved.status,302);
   const grant=f.sqlite.prepare('SELECT * FROM delegated_access_grants').get();
   assert.equal(grant.revoked_at,'');assert.deepEqual(JSON.parse(grant.scopes_json),['afw:project:read']);
-  assert.deepEqual(finiteHookState.events.map(e=>({kind:e.kind,leaseActive:e.leaseActive,preserved:e.preserved})),[{kind:'authorization',leaseActive:true,preserved:true},{kind:'grant',leaseActive:true,preserved:true}]);
+  assert.deepEqual(finiteHookState.events.map(e=>({kind:e.kind,leaseActive:e.leaseActive,preserved:e.preserved})),[{kind:'authorization',leaseActive:true,preserved:true},{kind:'authorization',leaseActive:true,preserved:true},{kind:'grant',leaseActive:true,preserved:true}]);
   assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM delegated_access_grants').get().n,1);
   assert.equal((await exchange(f,approved.headers.get('Location'),a.verifier)).status,200);
  }finally{f.close();finiteHookState.events=[];}
@@ -594,6 +594,22 @@ test('late preparation hook cannot replace the original request lease and does n
   const a=await authorize(f);finiteHookState.events=[];finiteHookState.late=true;
   const approved=await approve(f,a,{scope:['afw:project:read']});
   assert.equal(approved.status,302);assert.equal(f.sqlite.prepare('SELECT revoked_at FROM delegated_access_grants').get().revoked_at,'');
-  assert.deepEqual(finiteHookState.events.map(e=>({kind:e.kind,leaseActive:e.leaseActive})),[{kind:'grant',leaseActive:false}]);
+  assert.deepEqual(finiteHookState.events.map(e=>({kind:e.kind,leaseActive:e.leaseActive})),[{kind:'authorization',leaseActive:false},{kind:'grant',leaseActive:false}]);
  }finally{finiteHookState.late=false;finiteHookState.events=[];f.close();}
+});
+
+test('cross-site initial consent without prep cookie binds only the genuine same-origin pregrant POST',async()=>{
+ finiteHookState.events=[];finiteHookState.late=false;
+ const f=await localOAuthFixture(createDelegatedOAuthWorker),base=f.request;
+ f.request=(path,options={},identity='owner-a')=>base(path,{...options,headers:{...options.headers,...(options.method==='POST'?{Cookie:[options.headers?.Cookie,'__Host-afw-finite-prepare='+'a'.repeat(64)].filter(Boolean).join('; ')}:{})}},identity);
+ try{
+  const a=await authorize(f);
+  assert.equal(a.response.status,200);assert.deepEqual(finiteHookState.events,[]);
+  const wrong=await f.request('/authorize',{method:'POST',headers:{Origin:f.issuer,Cookie:a.cookie,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:'unrelated-sdk-handle',decision:'approve',project:'p-a',scope:'afw:project:read'})});
+  assert.notEqual(wrong.status,302);assert.deepEqual(finiteHookState.events,[]);
+  const result=await approve(f,a,{scope:['afw:project:read']});assert.equal(result.status,302);
+  assert.deepEqual(finiteHookState.events.map(e=>({kind:e.kind,leaseActive:e.leaseActive,preserved:e.preserved})),[{kind:'authorization',leaseActive:true,preserved:true},{kind:'grant',leaseActive:true,preserved:true}]);
+  assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM delegated_access_grants').get().n,1);
+  assert.equal(f.sqlite.prepare('SELECT revoked_at FROM delegated_access_grants').get().revoked_at,'');
+ }finally{f.close();finiteHookState.events=[];}
 });
