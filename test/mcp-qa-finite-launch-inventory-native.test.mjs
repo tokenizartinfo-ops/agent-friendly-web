@@ -99,6 +99,38 @@ export class LaunchFixture extends DurableObject{
    const prepared=await control.prepare();
    return {prepared,observations:f.observations,after:await snapshot(),paths:f.paths};
   }
+  if(['active-provider-expired','active-storage-expired','active-snapshot-expired'].includes(mode)){
+   // Distinct original lifetimes: only the first invocation has a narrower end.
+   const shortParent=inventory.createPrivateQaFiniteLaunchParent({now:f.now,deadline:f.now()+500});
+   const shortContext=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent:shortParent});
+   const freshParent=inventory.createPrivateQaFiniteLaunchParent({now:f.now,deadline:f.now()+5000});
+   const freshContext=await resolvePrivateQaFiniteLaunchContext({ctx:this.ctx,env:this.env,refs,parent:freshParent});
+   let enter,release,settled=false,enteredFresh=false,lateEffect=false,unhandled=0;
+   const reached=new Promise(r=>{enter=r;}),held=new Promise(r=>{release=r;});
+   const onUnhandled=()=>{unhandled++;};addEventListener('unhandledrejection',onUnhandled);
+   const pause=async()=>{enter();try{await held;}finally{settled=true;}};
+   let first;const originalTransaction=this.ctx.storage.transaction;
+   if(mode!=='active-storage-expired'){
+    if(mode==='active-provider-expired')f.onRequest=pause;
+    else this.ctx.storage.transaction=fn=>originalTransaction.call(this.ctx.storage,async tx=>{const result=await fn(tx);await pause();return result;});
+    const observing=await inventory.createPrivateQaFiniteLaunchInventory({ctx:this.ctx,env:this.env,context:shortContext,parent:shortParent});
+    first=observing.observeBeforeCreation();
+   }else{
+    first=inventory.withPrivateQaFiniteLaunchCoordinator({ctx:this.ctx,env:this.env,context:shortContext,parent:shortParent},async check=>{
+     check();await this.ctx.storage.transaction(async tx=>{check();await tx.get('fixture:late-effect');check();await pause();check();lateEffect=true;await tx.put('fixture:late-effect',true);check();});check();
+    }).then(()=>({kind:'unexpected-success'}),()=>({kind:'unavailable'}));
+   }
+   await reached;
+   const firstResult=await first,settledAtReturn=settled;
+   const fresh=inventory.withPrivateQaFiniteLaunchCoordinator({ctx:this.ctx,env:this.env,context:freshContext,parent:freshParent},async check=>{
+    check();enteredFresh=true;await this.ctx.storage.put('fixture:fresh-entry',true);check();return 'entered';
+   });
+   // Allow queued work to enter if the expired caller incorrectly released it.
+   await new Promise(r=>setTimeout(r,30));const enteredBeforeSettlement=enteredFresh;
+   release();const freshResult=await fresh;this.ctx.storage.transaction=originalTransaction;
+   await new Promise(r=>setTimeout(r,10));removeEventListener('unhandledrejection',onUnhandled);
+   return {firstResult,settledAtReturn,enteredBeforeSettlement,freshResult,settled,lateEffect,lateStored:await this.ctx.storage.get('fixture:late-effect')??null,freshStored:await this.ctx.storage.get('fixture:fresh-entry'),unhandled};
+  }
   if(mode==='storage-expired'){
    const storage=this.ctx.storage,original=storage.transaction;let enter,release,once=true;
    const reached=new Promise(r=>{enter=r;}),held=new Promise(r=>{release=r;});
@@ -201,4 +233,12 @@ test('snapshot rejects a DTO native pin, orphan ACK and an old missing-policy pl
 
 test('actual append-only SEND transaction waits for full inventory and synchronous consumption',async()=>{
  const r=await native('send-race');assert.equal(r.whileHeld,null);assert.equal(r.observed.kind,'never_issued');assert.equal(r.after.kind,'issued');assert.equal(r.stored.purpose,'afw.qa-finite-child-create-send.v1');
+});
+
+for(const boundary of ['provider','storage','snapshot'])test('expired active '+boundary+' callback keeps coordinator until actual settlement',async()=>{
+ const r=await native('active-'+boundary+'-expired');
+ assert.equal(r.firstResult.kind,'unavailable');assert.equal(r.settledAtReturn,false,'caller must fail before held work settles');
+ assert.equal(r.enteredBeforeSettlement,false,'fresh parent must not enter while expired callback is outstanding');
+ assert.equal(r.freshResult,'entered');assert.equal(r.settled,true);assert.equal(r.freshStored,true);
+ assert.equal(r.lateEffect,false);assert.equal(r.lateStored,null);assert.equal(r.unhandled,0);
 });
