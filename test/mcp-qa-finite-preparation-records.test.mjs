@@ -99,3 +99,20 @@ test('journal_admin_pending_rejects_accessor_without_invoking_it',async()=>{
  const lease={signal:new AbortController().signal,assertCurrent(){}};
  await assert.rejects(()=>journal.markAdminPending(value,lease));assert.equal(reads,0);assert.equal(transactions,0);
 });
+
+test('Task3 final audit commits every actual stage and original factual relation without self-cycle',()=>{
+ assert.equal(typeof records.hashFiniteOwnerPreparationAudit,'function');
+ const v={preconnectionId:H,sourceRevision:M,sourceHash:H,preconnectionHash:H,stageApprovalHashes:{connection:H,notices:H,finite:H},stageReceiptHashes:{connection:H,notices:H,finite:H},grantLinkHash:H,noticeLinkHash:H,connectionRelationHash:H,connectionRefHash:H};
+ const expected=createHash('sha256').update('afw.finite-owner-preparation-audit.v1\n'+canonical(v)).digest('hex');
+ assert.equal(records.hashFiniteOwnerPreparationAudit(v),expected);
+ for(const key of ['sourceHash','preconnectionHash','grantLinkHash','noticeLinkHash','connectionRelationHash','connectionRefHash']){
+  assert.notEqual(records.hashFiniteOwnerPreparationAudit({...v,[key]:'c'.repeat(64)}),expected);
+ }
+ for(const key of ['stageApprovalHashes','stageReceiptHashes'])for(const stage of ['connection','notices','finite']){
+  assert.notEqual(records.hashFiniteOwnerPreparationAudit({...v,[key]:{...v[key],[stage]:'c'.repeat(64)}}),expected);
+  const missing=structuredClone(v);delete missing[key][stage];assert.throws(()=>records.hashFiniteOwnerPreparationAudit(missing));
+ }
+ for(const key of ['preparationHash','selectionHash','jwt'])assert.throws(()=>records.hashFiniteOwnerPreparationAudit({...v,[key]:H}));
+ const getter={...v};Object.defineProperty(getter,'sourceHash',{enumerable:true,get(){throw Error('must not invoke');}});
+ assert.throws(()=>records.hashFiniteOwnerPreparationAudit(getter));
+});
