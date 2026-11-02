@@ -14,7 +14,7 @@ const node=buildMcpNodeProgram();
 const decoder='lib/mcp-qa-finite-candidate-residency.mjs';
 async function bundle(envelope,program,tree,native=false){
  const contents=native?
-  `import {readPrivateQaFiniteCandidate} from './${decoder}';import {createHash} from 'node:crypto';export default {fetch(){const x=readPrivateQaFiniteCandidate();return Response.json({module:x.module,sourceRevision:x.sourceRevision,sourceTree:x.sourceTree,sourceCheck:x.sourceCheck,programHash:x.programHash,decodedHash:createHash('sha256').update(x.bytes).digest('hex')});}};`:
+  `import {readPrivateQaFiniteCandidate} from './${decoder}';import {createHash} from 'node:crypto';import {gzipSync,gunzipSync} from 'node:zlib';export default {fetch(){const x=readPrivateQaFiniteCandidate(),probe=gzipSync(new Uint8Array(4096)),unbounded=gunzipSync(probe).length;let boundedRejected=false;try{gunzipSync(probe,{maxOutputLength:16});}catch{boundedRejected=true;}return Response.json({nativeInflate:{unbounded,boundedRejected},module:x.module,sourceRevision:x.sourceRevision,sourceTree:x.sourceTree,sourceCheck:x.sourceCheck,programHash:x.programHash,decodedHash:createHash('sha256').update(x.bytes).digest('hex')});}};`:
   `export {readPrivateQaFiniteCandidate} from './${decoder}';`;
  const b=await build({stdin:{contents,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',external:['node:*','cloudflare:*'],define:{
   'globalThis.__AFW_FINITE_CANDIDATE_RESIDENCY__':JSON.stringify(envelope),
@@ -27,7 +27,7 @@ let sequence=0;
 async function reader(e,program,tree){const code=await bundle(e,program,tree);return import('data:text/javascript;base64,'+Buffer.from(code+'\n//instance'+sequence++).toString('base64'));}
 test('real compiler creates QA-only exact candidate residency without hash cycle',async()=>{
  const r=await compiled,n=await node,c=r.files['canaryLive/index.mjs'],q=r.files['qaLive/index.mjs'];
- console.info('B1 measured '+JSON.stringify({sourceRevision:M,sourceTree:r.sourceTree,canaryBytes:c.length,qaBytes:q.length,programHash:n.programHash}));
+ console.info('B1 measured '+JSON.stringify({sourceRevision:M,sourceTree:r.sourceTree,canaryBytes:c.length,qaBytes:q.length,canarySha256:sha(c),qaSha256:sha(q),programHash:n.programHash}));
  assert(c.length<=2097152,'Known candidate 2MiB cap');assert(q.length<=3145728,'QA 3MiB cap');
  const e=r.candidateResidency;assert(e,'actual source compiler must produce residency');
  assert.deepEqual(Object.keys(e).sort(),['compressedBytes','compressedSha256','content','encoding','module','programHash','purpose','sourceCheck','sourceRevision','sourceTree']);
@@ -66,7 +66,7 @@ test('fixed decoder rejects malformed encoding, metadata, limits and gzip ambigu
 test('real workerd executes decoder with actual emitted candidate and exposes metadata only in test fixture',async()=>{
  const r=await compiled,n=await node,script=await bundle(r.candidateResidency,n.program,r.sourceTree,true);
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}));
- try{const response=await mf.dispatchFetch('https://fixture.invalid');assert.equal(response.status,200);const x=await response.json();assert.deepEqual(x.module,r.candidateResidency.module);assert.equal(x.decodedHash,sha(r.files['canaryLive/index.mjs']));assert.equal(x.programHash,n.programHash);assert.equal(x.sourceRevision,M);assert.equal(x.sourceTree,r.sourceTree);assert.equal(x.bytes,undefined);assert.equal(x.script,undefined);assert.equal(x.content,undefined);}finally{await mf.dispose();}
+ try{const response=await mf.dispatchFetch('https://fixture.invalid');assert.equal(response.status,200);const x=await response.json();assert.deepEqual(x.nativeInflate,{unbounded:4096,boundedRejected:true});assert.deepEqual(x.module,r.candidateResidency.module);assert.equal(x.decodedHash,sha(r.files['canaryLive/index.mjs']));assert.equal(x.programHash,n.programHash);assert.equal(x.sourceRevision,M);assert.equal(x.sourceTree,r.sourceTree);assert.equal(x.bytes,undefined);assert.equal(x.script,undefined);assert.equal(x.content,undefined);}finally{await mf.dispose();}
 });
 
 test('workerd enforces bounded inflate and canonical single gzip member with actual decoder',async t=>{
