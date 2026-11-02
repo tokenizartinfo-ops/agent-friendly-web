@@ -25,6 +25,7 @@ const hash=v=>createHash('sha256').update(v).digest('hex');
 export async function readPrivateQaFiniteSetupCompletion({intentId,sourceRevision,parent}){
  const p=${JSON.stringify(plan)},mode=${JSON.stringify(setupMode)};
  if(mode==='setup-missing')throw Error('synthetic missing setup');
+ if(mode==='setup-held'){await new Promise(resolve=>parent.signal.addEventListener('abort',resolve,{once:true}));parent.check();}
  const seedHash=${JSON.stringify(seedHash??'6'.repeat(64))};
  const receipt={purpose:'afw.finite-policy-installed.v1',intentId,sourceRevision,setupInstanceId:'afw-finite-policy-'+hash('afw.finite-private-policy-setup.v1\\n'+canonical({intentId,sourceRevision})),qaVersionId:p.deployments.qaLive.versionId,seedHash,contextHash:'1'.repeat(64),baselineVersionId:p.deployments.canaryClosed.versionId,baselineDeploymentId:p.deployments.canaryClosed.deploymentId,versionId:p.deployments.canaryLive.versionId,deploymentId:p.deployments.canaryLive.deploymentId,moduleHash:p.deployments.canaryLive.module.sha256,publicStaticHash:'2'.repeat(64),activationHash:'3'.repeat(64),restorationHash:'4'.repeat(64),bindingsHash:'5'.repeat(64),installedAt:p.preview.T0};
  receipt.receiptHash=hash(receipt.purpose+'\\n'+canonical(receipt));

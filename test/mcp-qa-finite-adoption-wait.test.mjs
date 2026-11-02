@@ -47,3 +47,5 @@ test('genuine qualified preview pending waits without expanding observer budget'
 test('last eligible slot clips child to remaining original two seconds',async()=>{const r=await fixture('clip',68000);assert.equal(r.result.status,'admin_pending');assert.equal(r.reads[0],68000);assert.ok(r.reads[1].abortedAfter<3000);assert.equal(r.all.some(x=>x.method!=='GET'&&x.url.includes('api.cloudflare.com')),false);});
 
 test('early sleep wake cannot spend a future absolute slot',async()=>{const r=await fixture('early-wake',50001);assert.equal(r.result.status,'admin_pending');assert.equal(r.reads.length,0);});
+
+test('held source setup read is bounded by the original five-second child',async()=>{const entered=performance.now(),r=await fixture('setup-held',50000);assert.equal(r.result.status,'admin_pending');assert.ok(performance.now()-entered<7000);assert.equal(r.reads.length,1);assert.equal(r.sleeps.length,0);});

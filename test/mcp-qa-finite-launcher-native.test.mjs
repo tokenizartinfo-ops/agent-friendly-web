@@ -11,23 +11,24 @@ import {fixture} from './test/fixtures/finite-launch-operations-native.mjs';
 const state={};
 export class Native extends IndependentClosure {
  async seed(mode){
-  const f=await fixture(this.ctx,this.env);state.f=f;state.mode=mode;state.calls={prepare:0,read:0,create:0,sleeps:[],steps:[]};
+  const f=await fixture(this.ctx,this.env);state.f=f;state.mode=mode;state.calls={prepare:0,read:0,create:0,sleeps:[],steps:[]};state.cache=new Map();state.replaying=false;
   f.setup='completed';f.seed='original';f.launcher=true;f.setNow(f.plan.T0+1000);Date.now=f.now;
   if(mode==='missing-seed')f.seed='missing';
   return {id:f.plan.workflows.launcher,payload:{operation:'finite_nominal_launcher',intentId:f.plan.intentId,sourceRevision:f.plan.source.revision},plan:f.plan};
  }
  async prepareFiniteNominalLaunch(refs){state.calls.prepare++;const r=await super.prepareFiniteNominalLaunch(refs);state.calls.preparedStatus=r.status;if(state.mode==='lost-prepare')throw Error('synthetic lost acknowledgement');return r;}
  async readFiniteNominalLaunch(refs){state.calls.read++;const r=await super.readFiniteNominalLaunch(refs);state.calls.readStatus=r.status;if(state.mode==='late-readback')state.f.setNow(state.f.plan.launchPolicy.armAckBy+1);return r;}
- async createFiniteNominalChild(refs){state.calls.create++;return super.createFiniteNominalChild(refs);}
+ async createFiniteNominalChild(refs){state.calls.create++;const r=await super.createFiniteNominalChild(refs);if(state.mode==='lost-create-response')throw Error('synthetic lost create RPC');return r;}
  report(){return state.calls;}
 }
 export class Launcher extends PrivateQaBootstrap{
  async run(event,step){
+  state.calls.workflowName=event.workflowName??null;
   const adapted={
-   do:async(name,options,fn)=>{state.calls.steps.push({name,options});const r=await step.do(name,options,fn);if(name==='finite-launch-prepare'&&state.mode==='late-step')state.f.setNow(state.f.plan.launchPolicy.armAckBy+1);return r;},
-   sleepUntil:async(name,date)=>{state.calls.sleeps.push({name,at:date.getTime()});state.f.prepareSuccess=true;state.f.setNow(date.getTime()+(state.mode==='late-wake'?10000:0));try{return await step.sleepUntil(name,new Date(new Date().getTime()+25));}catch(error){state.calls.sleepError=String(error);throw error;}}
+   do:async(name,options,fn)=>{state.calls.steps.push({name,options});if(state.replaying)return structuredClone(state.cache.get(name));const r=await step.do(name,options,fn);state.cache.set(name,structuredClone(r));if(name==='finite-launch-prepare'&&state.mode==='late-step')state.f.setNow(state.f.plan.launchPolicy.armAckBy+1);return r;},
+   sleepUntil:async(name,date)=>{if(state.replaying)return;state.calls.sleeps.push({name,at:date.getTime()});state.f.prepareSuccess=true;state.f.setNow(date.getTime()+(state.mode==='late-wake'?10000:0));try{return await step.sleepUntil(name,new Date(new Date().getTime()+25));}catch(error){state.calls.sleepError=String(error);throw error;}}
   };
-  const first=await super.run(event,adapted);return state.mode==='replay'?super.run(event,adapted):first;
+  const first=await super.run(event,adapted);if(state.mode==='replay'){state.replaying=true;return super.run(event,adapted);}return first;
  }
 }
 export {PrivateQaNamedConfirmation};
@@ -55,4 +56,7 @@ for(const mode of ['missing-seed','lost-prepare','late-readback','late-step','la
  const r=await native(mode);assert.equal(r.status.output?.status,'admin_pending');assert.equal(r.report.create,0);assert.ok(r.report.prepare<=1);
 });
 
-test('actual native recorded step replay does not repeat prepare or native create',async()=>{const r=await native('replay');assert.equal(r.status.output.status,'acknowledged',JSON.stringify(r.report));assert.equal(r.report.prepare,1);assert.equal(r.report.read,1);assert.equal(r.report.create,1);});
+// Replay DELIVERY is synthetic: use unchanged actual native successful outputs.
+test('recorded native successful outputs replay without prepare or native create',async()=>{const r=await native('replay');assert.equal(r.status.output.status,'acknowledged',JSON.stringify(r.report));assert.equal(r.report.prepare,1);assert.equal(r.report.read,1);assert.equal(r.report.create,1);});
+
+test('lost native create RPC acknowledgement terminalizes without retry',async()=>{const r=await native('lost-create-response');assert.equal(r.status.output.status,'admin_pending');assert.equal(r.report.prepare,1);assert.equal(r.report.create,1);});

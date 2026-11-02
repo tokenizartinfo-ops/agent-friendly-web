@@ -44,3 +44,5 @@ test('finite GHA ingress is GET-only even when exact observer is absent',async()
 });
 
 for(const launcher of [null,'running','queued','unknown'])test('actual QA restoration refuses unresolved launcher '+launcher,async()=>{const f=await cfFiniteFixture();f.base.restorationState.launcher=launcher;await assert.rejects(()=>f.adapters().readSnapshot(new AbortController().signal,()=>{}));assert.equal(f.state.posts,0);});
+
+test('default unavailable C2 setup cannot qualify a finite preview for admission',async()=>{const f=await cfFiniteFixture();f.state.observerStatus='running';const now=f.base.f.now(),parent={check:()=>now,signal:new AbortController().signal,deadline:now+5000};await assert.rejects(()=>f.observer().adopt(parent,parent.signal,parent.check));assert.equal(f.state.posts,0);});
