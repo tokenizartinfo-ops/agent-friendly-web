@@ -192,3 +192,11 @@ Root extends the same actual-role dependency correction: `finitePublicProfileTem
 ### C2 Task2 fix round 1 — final source checkpoint (2026-11-02)
 
 codeHEAD `33ade9569fe0f5d770a4ee2a9ed59cb6f68c6b22`; final hosted run41444334695/job125273592435 attempt1: 59PASS/0FAIL/0CANCELLED/0SKIP; scoped lint0/0; artifacts0. Child guard captures each operation and cannot be revived; already committed uncertain facts preserved. QA role exclusively uses existing `AFW_QA_VERSION` and `AFW_QA_OCCURRENCE_RATE_LIMITER`, with profile-derived native positive and obsolete-alias negatives. Full RED/GREEN, exact commands, CAS/readbacks and limits appended to the Task2 report and finite progress ledger. No runtime qualification; source/forwarding remain unavailable pending T3/T5. STOP WRITES after enclosing docs commit/readback; Root fresh scoped review of reviewed docHEAD3aead938..fixHEAD.
+
+## C2T3 preflight — schema and existing resource preservation
+
+Ruling: use the documented Beta JSON modules payload on the fixed explicit-version-inheritance endpoint, not classic multipart — public API schema now inspected directly — a wrong wire format would fail upload, so pin tests before effects. Source API payload, normalized actual configuration and request fingerprints stay distinct.
+
+Ruling: preserve the existing declared AfwOwnEventNode SQLite/Container linkage in preparation AND finite profiles; amend the source canaryLive container projection/expectations instead of publishing its staging containers[] marker as if it preserved attachment — Root four GETs at2Nov12:35UTC observed exact current UUID metadata with existing attachment — wrong preservation could detach the existing app or trigger export reconciliation, so no new namespaces/migrations/transfer/delete and reject any unknown reconciliation. Source metadata does not prove ctx.container physical ability. Fixture/profile/dry-run coverage must show preservation without provisioning/building an app/image.
+
+Primary/schema report docs/superpowers/reports/2026-11-02-preparation-provider-schema.es.md. Public docs: https://developers.cloudflare.com/api/resources/workers/subresources/beta/subresources/workers/subresources/versions/methods/create/. No further provider probe from this source task. All actual custody/baseline bytes/privacy/source qualification and runtime acceptance remain gates.
