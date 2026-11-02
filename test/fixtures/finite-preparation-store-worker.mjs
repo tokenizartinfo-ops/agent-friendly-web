@@ -36,10 +36,11 @@ export class FinitePreparationFixture extends DurableObject{
   const b=await request.json();let at=b.now??100,assertions=0;
   const controller=new AbortController();
   const lease={signal:controller.signal,assertCurrent(){assertions++;if(controller.signal.aborted||b.expireAtAssertion===assertions)throw Error('synthetic lease expired');}};
-  let committed=false;
+  let committed=false,transactions=0;
   const storage={get:(...a)=>this.ctx.storage.get(...a),transaction:async fn=>{
-   const result=await this.ctx.storage.transaction(fn);committed=true;
-   if(b.loseCommitAck)throw Error('synthetic lost response AFTER native transaction commit');
+   const ordinal=++transactions;
+   const result=await this.ctx.storage.transaction(async tx=>{const r=await fn(tx);if(b.holdFirstCommitUntil&&ordinal===1){await new Promise(resolve=>setTimeout(resolve,20));at=b.holdFirstCommitUntil;}return r;});committed=true;
+   if(b.loseCommitAck||b.loseCommitNumber===ordinal)throw Error('synthetic lost response AFTER native transaction commit');
    return result;
   }};
   try{

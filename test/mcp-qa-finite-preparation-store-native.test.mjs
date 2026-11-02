@@ -86,3 +86,37 @@ test('context_is_bound_to_original_selection_and_read_by_exact_refs',async t=>{
  assert.equal((await call('readContext',{intentId:c.intentId,sourceRevision:'c'.repeat(40)},{now})).rejected,true);
  assert.deepEqual(await call('rows'),before);
 });
+
+test('backdated_selection_published_after_T0_cannot_bind',async t=>{
+ const {call,f}=await native(t);
+ assert.equal((await call('publishSelection',{preparation:f.preparation,selection:f.selection,expectedHeadHash:null},{now:25})).result.status,'recorded');
+ assert.equal((await call('bindSelection',f.binding,{now:30})).rejected,true);
+ const before=await call('rows');
+ assert.equal((await call('publishSelection',{preparation:f.preparation,selection:f.selection,expectedHeadHash:null},{now:31})).result.status,'existing');
+ assert.deepEqual(await call('rows'),before);
+});
+test('head_transaction_held_across_T0_cannot_backdate_publication',async t=>{
+ const {call,f}=await native(t);
+ const r=await call('publishSelection',{preparation:f.preparation,selection:f.selection,expectedHeadHash:null},{now:15,holdFirstCommitUntil:25});
+ assert.equal(r.result.status,'recorded');assert.equal(r.committed,true);
+ assert.equal((await call('bindSelection',f.binding,{now:30})).rejected,true);
+});
+test('lost_head_ack_never_manufactures_publication_witness',async t=>{
+ const {call,f}=await native(t),value={preparation:f.preparation,selection:f.selection,expectedHeadHash:null};
+ const lost=await call('publishSelection',value,{now:15,loseCommitAck:true});
+ assert.equal(lost.committed,true);assert.equal(lost.result.status,'uncertain');
+ const before=await call('rows');assert.ok(before.length>=3);
+ assert.equal((await call('publishSelection',value,{now:16})).result.status,'uncertain');
+ assert.deepEqual(await call('rows'),before);
+ assert.equal((await call('bindSelection',f.binding,{now:30})).rejected,true);
+});
+test('lost_witness_ack_keeps_actual_witness_and_history',async t=>{
+ const {call,f}=await native(t),value={preparation:f.preparation,selection:f.selection,expectedHeadHash:null};
+ const lost=await call('publishSelection',value,{now:15,loseCommitNumber:2});
+ assert.equal(lost.committed,true);assert.equal(lost.result.status,'uncertain');
+ const before=await call('rows');assert.ok(before.length>=4);
+ // Exact durable readback can recover facts, never send authorization or a new witness.
+ assert.equal((await call('publishSelection',value,{now:16})).result.status,'existing');
+ assert.deepEqual(await call('rows'),before);
+ assert.equal((await call('bindSelection',f.binding,{now:30})).result.status,'recorded');
+});
