@@ -21,7 +21,9 @@ jobs:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: C3 causal native regressions
-        run: node --test --test-name-pattern='pending underlying|prior-launch-row|rerun-zero-prior' test/mcp-own-finite-premature-admission-native.test.mjs
+        run: node --test test/mcp-own-finite-premature-admission-native.test.mjs test/mcp-node-process-custody.test.mjs
+      - name: Final actual compiler and candidate residency
+        run: node --test test/mcp-qa-finite-candidate-residency.test.mjs
       - name: Scoped lint
         if: always()
         run: npx eslint lib/mcp-own-finite-primary.mjs lib/mcp-own-finite-admission-gate.mjs lib/mcp-own-finite-cleanup-host.mjs lib/mcp-own-durable-host.mjs lib/mcp-node-process-custody.mjs test/mcp-own-finite-premature-admission-native.test.mjs test/fixtures/finite-premature-admission-worker.mjs test/fixtures/finite-premature-admission-native.mjs test/mcp-node-process-custody.test.mjs
