@@ -17,4 +17,6 @@ export class FiniteConnectionFixture extends FiniteOwnerFixture{
   return super.fetch(request);
  }
 }
-export default {fetch(request,env){return env.FIXTURE.get(env.FIXTURE.idFromName('owner')).fetch(request);}};
+const worker={fetch(request,env){return env.FIXTURE.get(env.FIXTURE.idFromName('owner')).fetch(request);}};
+
+export default worker;
