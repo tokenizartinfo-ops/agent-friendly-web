@@ -35,7 +35,9 @@ export class FiniteOwnerFixture extends DurableObject{
   return createFiniteOwnerPreparationHost({ctx:this.ctx,env:this.env}).fetch(request);
  }
 }
-export default{fetch(request,env){
+const worker={fetch(request,env){
  const name=request.headers.get('X-Fixture-Actor')||'owner';
  return env.FIXTURE.get(env.FIXTURE.idFromName(name)).fetch(request);
 }};
+
+export default worker;
