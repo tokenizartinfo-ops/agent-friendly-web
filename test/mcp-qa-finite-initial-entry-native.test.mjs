@@ -72,3 +72,14 @@ test('B1 held post-A sync cannot report success before durability barrier',()=>u
  let held=false;for(let i=0;i<100;i++){if((await f.stub.stats()).held){held=true;break;}await new Promise(resolve=>setTimeout(resolve,20));}assert.ok(held);
  assert.ok(claimed(await f.stub.snapshot()));pending(await operation);await f.stub.release();pending(await f.stub.invoke(f.refs));
 }));
+
+for(const fault of ['missing-sync','missing-db','missing-node'])test('B1 missing native holder '+fault+' fails before entry',()=>using('normal',async f=>{
+ await f.stub.configure(fault);pending(await f.stub.invoke(f.refs));assert.equal((await f.stub.snapshot()).some(([k])=>k===KEY),false);
+}));
+test('B1 changed actual sync holder after transaction cannot enter A',()=>using('normal',async f=>{
+ await f.stub.configure('changed-sync');pending(await f.stub.invoke(f.refs));assert.equal(claimed(await f.stub.snapshot()),false);
+}));
+test('B1 Workflow callback reentry cannot reconstruct winning admission',()=>using('normal',async f=>{
+ await f.stub.configure('normal');const first=await f.workflow(f.refs);assert.equal(first.result.status,'material_recorded');
+ const rows=await f.stub.snapshot();pending((await f.workflow(f.refs)).result);assert.deepEqual(await f.stub.snapshot(),rows);
+}));
