@@ -1,0 +1,31 @@
+# C2 Task5-B2 — actual pre-T0 source/bootstrap origin
+
+SOURCE ONLY. Sequential continuation of accepted B1, NOT the entire Task5 and NOT runtime authorization. Owner PC stays on but unavailable until16:00 Argentina2Nov; no human interaction/OTP/window/token steps. Execute GitHub/Actions only, same isolated branch; no local source/dependencies/build/temp. Sole implementer, no subagents. BASE is the Root acceptance commit containing this brief, supplied in dispatch.
+
+## Before product: concrete supported source map
+
+Read Task5 preflight report and narrower B1 report plus appended spec/plan rulings at BASE. B1 candidate byte residency exists and is accepted; do not redo B1. Original Task5 default-unavailable seams and completePackage false remain. Start with B2 architecture/dataflow investigation ONLY. Propose exact producer/locator and contract table to Root; do not write product until Root ruling. This is engineering clarification, no owner question or permission request. Root will decide, record ruling and continue.
+
+Bounded outcome: independently verifiable source of initial owner configuration BEFORE first OwnerSourceSnapshot/ticket and BEFORE post-T0 seed. Map original Q/context versus compiled candidate M, actual project/client/goal/realm/window, baseline/rollback/code/privacy, and retained history. Native private values are data, not authority; actual source/provenance/current binding/custody+authenticated owner still needed. A success DTO/parser/default-throw removal or source-looking object is not a producer.
+
+Inspect exact existing source before introducing another store: lib/mcp-qa-private-context.mjs globals default null; lib/mcp-qa-generation-draft-reader.mjs needs exact approved namedBundleHash, not latest; lib/mcp-qa-generation-material.mjs/preparation.mjs, lib/mcp-qa-original-pins.mjs, actual ctx.storage legacy control/journals; fixed closed-canary private metadata/bindings can provide selectors ONLY if actual source/grammar shows them. No provider/private reads during this source task. Existing dated resource pins in Task5 brief are references, not current facts.
+
+Every required datum row MUST name: exact current accepted validator shape; actual producer/function with file:line; exact immutable locator/key or source-qualified derivation; initialization chronology/authority and issuer; native/GHA environment/custody path; original clock/cancel/settlement ownership; privacy/output boundary; unresolved condition and smallest supported remedy. Distinguish old real Q/closed histories from new proposed save/withdraw/trial intentions; never fabricate history. If new intentions need generation before initial choice, propose exact source-owned immutable transaction and why it is authorized; Root ruling required before code. New original15min window cannot renew on GET/replay/cleanup.
+
+## QA code proof chicken-and-egg: evaluate one existing-custody route
+
+Native reader9aa permits canary+OP code/metadata/Containers, NOT QA code. GHA9db separate QA code bridge exists after seed; post-T0 seed cannot authorize pre-T0 owner preparation. Evaluate factoring existing actual GHA publication reader/bridge as a separately purposed PRE-T0 provenance producer. Native may derive exact bridge locator from actual AFW_QA_VERSION.id rather than caller/latest/one resettable sourceM tag. Bridge would bind actual QA UUID/code hash/sourceM/tree/config and exact approved bootstrap selector to actual trusted owner command/run/job/step; separate original command/purpose and completed-success primary before owner GET. A tag body/hash is factual, not issuer authority; independently check real public GitHub/CF primary under original clock. A producer cannot attest its own future job terminal. Do not decide/implement this hypothesis silently; compare to supported existing alternatives, choose smallest with Root.
+
+No new native QA CodeRead scope, GHA token in Worker, shared-secret signing key, generic public RPC/HTTP payload, raw module/policy artifact or sixth package role by inference. Initial canary/QA publication actual delivery path must be named separately: GHA9db lacks canaryEdit, native057 publisher is separate and matched/uploadable not yet verified. A later attended runbook can own initial publication; current source must not invent an API/tool/callback/credential to bridge it.
+
+## Composition limits
+
+The later native confirmation constructor has no ctx; do not return raw private bundles over new public RPC or fabricate env/ctx. Consider direct retained nativeQA_DB read ONLY if a real source-produced capsule and exact approved selector/grammar/immutable producer are concretely supported. Existing packet/draft SQL installed state is dated; no DDL/new table, row update/replacement or bypass of old exact decoder. Any new use of existing immutable table needs explicit Root ruling and owning source writer, not a free parser.
+
+Forwarding remains separate: Request/RpcTarget supported, no documented sender-script identity/AbortSignal serialization. Original30s starts canary receipt beforeIO and must never reset; source lifetime capability narrowing only, independent backend JWT/Origin/Strict/ticket/currentD1/source+binding-holder qualification remains. Rpc disposal/client timeout/Workflow terminal cannot certify remote writers settled. No forwarding code in this B2 preflight.
+
+C2 later setup/material/current-primary/all-writer/launch/confirmation/GHA adoption plus C3 existing-grant business and early withdrawal remain separate. No complete-package success, finite HEAD/reset, OAuth/cron/Container activation/Max/data/emails/automation/newchat.
+
+## Deliverable / decision
+
+Prepare exact bounded B2 proposal in docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task5-b2-preflight.md, append ledger only after agreed Root design/ruling. Before that send compact table+recommendation and STOP PRODUCT for Root decision; public docs/API lookup allowed if actually needed, primary only/targeted. No repeated scan/full reports or tests before implementation. If present code cannot supply datum, say exactly what producer/selector is missing and a concrete supported source-only remedy rather than inventing a runtime fact. Root may refine B2 into a smaller implementable substep with its own RED/GREEN and review.
