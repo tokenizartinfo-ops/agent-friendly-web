@@ -18,6 +18,7 @@ const issuer='https://private.example.invalid',keySet=createLocalJWKSet({keys:[$
 const worker=createDelegatedOAuthWorker({issuer,resource:issuer+'/mcp',accessVerifier:o=>verifyCloudflareAccessJwt({...o,keySet})});
 let policy;
 export default{async fetch(request,env,ctx){
+ if(new URL(request.url).pathname==='/fixture/notice-hooks')return Response.json(globalThis[Symbol.for('finite.notice.hooks')]??[]);
  if(new URL(request.url).pathname==='/seed'){
   const epoch=Date.now();policy=JSON.stringify({startAt:epoch-100,expiresAt:epoch+299900,projectId:'p',grantId:'g',clientId:'client'});
   await env.DB.exec('CREATE TABLE site_projects(id TEXT PRIMARY KEY,user_id TEXT,revision INTEGER,organization TEXT);CREATE TABLE delegated_access_grants(id TEXT PRIMARY KEY,user_id TEXT,client_id TEXT,project_id TEXT,resource TEXT,scopes_json TEXT,expires_at TEXT,revoked_at TEXT);');
@@ -27,9 +28,21 @@ export default{async fetch(request,env,ctx){
  }
  return worker.fetch(request,{...env,AFW_DOSSIER_MONITORING_OWNER_POLICY:policy,AFW_DOSSIER_MONITORING_OWNER_ENABLED:request.headers.get('X-Fixture-Enabled')==='true'?'true':'false'},ctx);
 }};`;
- const bundle=await build({stdin:{resolveDir:process.cwd(),contents},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],conditions:['workerd','worker','browser'],external:['node:*','cloudflare:*']});
+ const bundle=await build({stdin:{resolveDir:process.cwd(),contents},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],conditions:['workerd','worker','browser'],external:['node:*','cloudflare:*'],plugins:[{name:'fixed-synthetic-notice-source',setup(b){
+ b.onResolve({filter:/mcp-qa-finite-owner-source\.mjs$/},()=>({path:'finite-notice-source',namespace:'synthetic'}));
+ b.onLoad({filter:/.*/,namespace:'synthetic'},()=>({loader:'js',contents:`
+ export function readPrivateQaFiniteOwnerSource(){throw Error('synthetic source unavailable');}
+ export function forwardPrivateQaFiniteOwnerAuthorization(){throw Error('unused');}
+ export function forwardPrivateQaFiniteOwnerGrant(){throw Error('unused');}
+ export async function forwardPrivateQaFiniteOwnerNotice(args,lease){
+  lease.assertCurrent();const body=await args.request.text();lease.assertCurrent();
+  const events=globalThis[Symbol.for('finite.notice.hooks')]??=[];
+  events.push({method:args.request.method,path:new URL(args.request.url).pathname,preserved:body.startsWith('handle='),sequence:args.sequence,requestIdPresent:typeof args.requestId==='string'});
+  throw Error('synthetic link unavailable after real acknowledgement');
+ }`}));
+ }}]});
  const runtime=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],script:bundle.outputFiles[0].text,d1Databases:{DB:'monitor-oauth-native'},kvNamespaces:['OAUTH_KV'],ratelimits:{DELEGATED_RATE_LIMITER:{namespace_id:'88390',simple:{limit:30,period:60}}},bindings:{AFW_DELEGATED_OAUTH_ENABLED:'true',AFW_OAUTH_SERVICE_MODE:'stable',AFW_OAUTH_PILOT_PROJECT_ID:'p',AFW_OAUTH_PILOT_CLIENT_ID:'client',ACCESS_TEAM_DOMAIN:'own.cloudflareaccess.com',ACCESS_AUD:'own'}}));
- const call=(path,token,enabled=true,body,cookie)=>runtime.dispatchFetch('https://private.example.invalid'+path,{method:body?'POST':'GET',headers:{'Cf-Access-Jwt-Assertion':token??'','X-Fixture-Enabled':String(enabled),...(body?{Origin:'https://private.example.invalid','Content-Type':'application/x-www-form-urlencoded',Cookie:cookie}:{})},...(body?{body}:{})});
+ const call=(path,token,enabled=true,body,cookie)=>runtime.dispatchFetch('https://private.example.invalid'+path,{method:body?'POST':'GET',headers:{'Cf-Access-Jwt-Assertion':token??'','X-Fixture-Enabled':String(enabled),...(body?{Origin:'https://private.example.invalid','Content-Type':'application/x-www-form-urlencoded',Cookie:cookie+'; __Host-afw-finite-prepare='+'a'.repeat(64)}:{})},...(body?{body}:{})});
  const form=async()=>{const r=await call('/monitoring',owner);assert.equal(r.status,200);const html=await r.text();return{handle:html.match(/name="handle" value="([^"]+)"/)?.[1],cookie:r.headers.get('Set-Cookie').split(';')[0]};};
  try{
   assert.equal((await call('/seed')).status,200);assert.equal((await call('/monitoring',owner,false)).status,404);
@@ -37,5 +50,8 @@ export default{async fetch(request,env,ctx){
   const p=await form();assert.equal((await call('/monitoring/grant',owner,true,'handle='+p.handle,p.cookie)).status,200);assert.equal((await call('/monitoring/grant',owner,true,'handle='+p.handle,p.cookie)).status,200);
   const revoke=await form();assert.equal((await call('/monitoring/revoke',owner,true,'handle='+revoke.handle,revoke.cookie)).status,200);
   assert.match(await (await call('/monitoring',owner)).text(),/Retiraste los avisos/);
+  const hooks=await (await call('/fixture/notice-hooks')).json();
+  assert.equal(hooks.length,2);
+  assert.ok(hooks.every(h=>h.method==='POST'&&h.path==='/monitoring/grant'&&h.preserved&&h.requestIdPresent&&h.sequence===1));
  }finally{await runtime.dispose();}
 });
