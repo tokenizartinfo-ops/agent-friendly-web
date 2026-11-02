@@ -1,4 +1,5 @@
 import {createHash} from 'node:crypto';
+import {createNodeProcessCustody} from '../../lib/mcp-node-process-custody.mjs';
 import {createOwnDurableEventHost} from '../../lib/mcp-own-durable-host.mjs';
 import {createFiniteOwnNativeCleanupHost} from '../../lib/mcp-own-finite-cleanup-host.mjs';
 import {createFiniteNativePrimaryReader} from '../../lib/mcp-own-finite-primary.mjs';
@@ -128,6 +129,9 @@ export class Native {
    const h=createFiniteOwnNativeCleanupHost({ctx,env,control,sourceRevision:p.canaryContainment.sourceRevision,providerRead:async()=>{throw Error('SYN no provider');},readCustody:async()=>{throw Error('SYN no custody');},readInstance:async()=>{throw Error('SYN no provider');},readNominalControl,nativeCleanup:{program,programSourceRevision:sourceRevision,close:host.close},now});
    constructed={read:await h.gate.read(),seal:await h.gate.seal(),primary:await primary.read()};
    await host.close();
+  }else if(['valid','ordinary'].includes(mode)){
+   const direct=createNodeProcessCustody({...(mode==='valid'?{finiteGate:gate}:{}),enabled:true,db,context,projectId:s.projectId,projectionSecret:'z'.repeat(32),storage:ctx.storage,custodyKey:Buffer.alloc(32,7),containerId:ctx.id.toString(),programHash:s.programHash,sourceRevision,image:'cloudflare/debian-trixie',window:config.window,now,runtime:{launch:async boot=>{const {key:ignored,...m}=boot;void ignored;manifest=m;launches++;},observe:async()=>({...manifest,running:true}),close:async()=>{closes++;}}});
+   try{result=await direct.start();}catch(e){error=e.message;}
   }else{
    try{result=await host.subscribe(params(auth.projectRef));}catch(e){error=e.message;}
   }
@@ -138,4 +142,5 @@ export class Native {
   return Response.json({mode,before,after,error,result,laterReservation,constructed,launches,closes,callbacks,reads,runs,rerun});
  }
 }
-export default {fetch(request,env){return env.AFW_DOSSIER_EVENTS_NODE.get(env.AFW_DOSSIER_EVENTS_NODE.idFromName('afw-own-event-first-successor-v1')).fetch(request);}};
+const worker={fetch(request,env){return env.AFW_DOSSIER_EVENTS_NODE.get(env.AFW_DOSSIER_EVENTS_NODE.idFromName('afw-own-event-first-successor-v1')).fetch(request);}};
+export default worker;

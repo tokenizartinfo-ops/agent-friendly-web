@@ -20,12 +20,12 @@ for(const mode of ['missing','reservation-pending'])test('premature '+mode+' lea
  const r=await exercise(mode);assert.equal(r.error,'Own durable event host unavailable');assert.deepEqual(r.after,r.before);assert.equal(r.launches,0);assert.equal(r.closes,0);assert.equal(r.callbacks,0);assert.equal(r.runs,0);assert.equal(r.laterReservation.state,'prepared');
 });
 test('atomic prepared reservation predicate denies mutation after both guards; marker stays unresolved',async()=>{
- const r=await exercise('race-reservation');assert.ok(r.reads>=2);assert.deepEqual(additions(r),{admissions:0,closures:0});assert.equal(r.closes,0);assert.equal(r.launches,0);assert.equal(r.callbacks,0);assert.equal(r.runs,1);const raw=r.after.do.find(([k])=>k==='afw.own-finite-admission.v1:head')[1];assert.ok(raw.writers.admission);assert.equal(raw.writers.admission.settlement,null);
+ const r=await exercise('race-reservation');assert.deepEqual(additions(r),{admissions:0,closures:0});assert.ok(r.reads>=2);assert.equal(r.closes,0);assert.equal(r.launches,0);assert.equal(r.callbacks,0);assert.equal(r.runs,1);const raw=r.after.do.find(([k])=>k==='afw.own-finite-admission.v1:head')[1];assert.ok(raw.writers.admission);assert.equal(raw.writers.admission.settlement,null);
 });
 test('historical construction, primary read, seal and close survive revoked policy and N1',async()=>{
  const r=await exercise('historical');assert.equal(r.constructed.read.status,'observed');assert.equal(r.constructed.seal.status,'sealed');assert.equal(r.launches,0);assert.equal(r.closes,1);
 });
-test('valid exact prepared reservation traverses actual host custody gate and launch once',async()=>{
- const r=await exercise('valid');assert.equal(r.error,null);assert.equal(r.launches,1);assert.equal(r.callbacks,1);assert.equal(r.closes,0);assert.deepEqual(additions(r),{admissions:1,closures:0});
+test('valid exact prepared reservation traverses actual custody and gate once under SYN runtime',async()=>{
+ const r=await exercise('valid');assert.equal(r.error,null);assert.equal(r.launches,1);assert.equal(r.callbacks,0);assert.equal(r.closes,0);assert.deepEqual(additions(r),{admissions:1,closures:0});
 });
-test('ordinary nonfinite host remains successful',async()=>{const r=await exercise('ordinary');assert.equal(r.error,null);assert.equal(r.launches,1);assert.equal(r.callbacks,1);});
+test('ordinary nonfinite custody remains successful',async()=>{const r=await exercise('ordinary');assert.equal(r.error,null);assert.equal(r.launches,1);assert.equal(r.callbacks,1);});
