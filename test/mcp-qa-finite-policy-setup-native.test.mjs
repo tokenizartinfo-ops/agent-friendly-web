@@ -46,3 +46,37 @@ for(const mode of ['extra','future','expired','non_date','wrong_id','wrong_name'
 test('Task4 actual unavailable source cannot mint setup authority',async t=>{
  const r=await run(t,'normal',false);assert.equal(r.reads,0);assert.equal(r.outcome.status,'admin_pending');assert.equal(r.outcome.receipt,undefined);
 });
+
+import {policyFixture} from './fixtures/finite-policy-setup-native.mjs';
+import {hashFinitePreparationRecord as recordHash,decodeFinitePreparationRecord} from '../lib/mcp-qa-finite-preparation-records.mjs';
+test('Task4 actual native wrapper DO store and two-effect engine installs only actual ACK versions',async t=>{
+ const f=await policyFixture(t),outcome=await f.run();assert.equal(outcome.status,'installed');assert.equal(f.posts(),2);
+ assert.equal(outcome.receipt.versionId,f.actual().versionId);assert.equal(outcome.receipt.deploymentId,f.actual().deploymentId);
+ assert.equal(outcome.receipt.receiptHash,recordHash('PolicyReceipt',outcome.receipt));
+ const rows=await f.rows(),context=decodeFinitePreparationRecord('SetupContext',rows.find(([k])=>k.endsWith(':context'))[1]);
+ assert.equal(context.ownerPreparation.programContext.sourceRevision,'c'.repeat(40));assert.equal(context.sourceRevision,'b'.repeat(40));
+ assert(context.T0<context.ownerPreparation.commandBy);assert(outcome.receipt.installedAt>context.ownerPreparation.commandBy);
+ assert.equal(context.C0,context.T0+240000);assert.equal(context.C1,context.T0+420000);
+ const withdrawal=JSON.parse(context.policies.AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY);assert.equal(withdrawal.startAt,context.C0);assert.equal(withdrawal.expiresAt,context.C1);
+ assert.equal(rows.filter(([k])=>k.endsWith(':send')).length,2);assert.equal(rows.filter(([k])=>k.endsWith(':ack')).length,2);
+ assert.equal(rows.some(([k])=>k==='afw.qa-finite-trial.v1:head'),false);
+ assert.equal(JSON.stringify(outcome).includes('SYNTHETIC_OWNER'),false);
+ assert.equal((await f.run(true)).status,'admin_pending');assert.equal(f.posts(),2);
+});
+for(const mode of ['owner_incomplete','seed_incomplete','changed_grant','changed_revision','changed_selection','publisher_unavailable','queue_expired','setup_expired','head_touched','oversize','foreign_pointer']){
+ test('Task4 native setup denies '+mode+' before SEND',async t=>{
+  const f=await policyFixture(t,mode);assert.equal((await f.run()).status,'admin_pending');assert.equal(f.posts(),0);assert.equal((await f.rows()).filter(([k])=>k.endsWith(':send')).length,0);
+ });
+}
+for(const mode of ['lost_ack','late_upload','provider404','wrong_bytes','wrong_full']){
+ test('Task4 native upload '+mode+' preserves issued state without activation or resend',async t=>{
+  const f=await policyFixture(t,mode);assert.equal((await f.run()).status,'admin_pending');assert.equal(f.posts(),1);
+  assert.equal((await f.run(true)).status,'admin_pending');assert.equal(f.posts(),1);
+  assert.equal((await f.rows()).filter(([k])=>k.endsWith(':send')).length,1);
+ });
+}
+test('Task4 lost activation ACK cannot produce installed receipt or repeat effects',async t=>{
+ const f=await policyFixture(t,'lost_activation');assert.equal((await f.run()).status,'admin_pending');assert.equal(f.posts(),2);
+ assert.equal((await f.rows()).filter(([k])=>k.endsWith(':receipt')).length,0);
+ assert.equal((await f.run(true)).status,'admin_pending');assert.equal(f.posts(),2);
+});
