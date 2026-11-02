@@ -46,7 +46,7 @@ export class Native extends IndependentClosure{
    const results=[];for(const a of cases){try{await this.prepareFiniteNominalLaunch(...a);results.push(false);}catch{results.push(true);}}
    return {results,calls};
   }
-  if(['lost-prepare','lost-prepared','late-prepared','late-guard','late-claim','late-prepared-readback'].includes(mode)){
+  if(['lost-prepare','lost-prepared','late-prepared','late-guard','late-claim','late-prepared-readback','lost-prepared-reconstruction'].includes(mode)){
    let seen=0;
    this.ctx.storage.transaction=async fn=>{
     const r=await originalTx.call(this.ctx.storage,fn);
@@ -59,6 +59,7 @@ export class Native extends IndependentClosure{
   const prepared=await this.prepareFiniteNominalLaunch(prepareRefs);
   this.ctx.storage.transaction=originalTx;
   const journal=async()=>({prepared:await this.ctx.storage.get(prefix+'prepared')??null,send:await this.ctx.storage.get(prefix+'send')??null,ack:await this.ctx.storage.get(prefix+'ack')??null,claim:await this.ctx.storage.get(controlPrefix+'effect:nominal')??null,guard:await this.ctx.storage.get('afw.qa-finite-guard.v1:'+f.plan.intentId+':state')??null,alarm:await this.ctx.storage.getAlarm()});
+  if(mode==='lost-prepared-reconstruction'){const s=await journal();f.prepareSuccess=false;f.setNow(f.plan.launchPolicy.launchAt);const created=await this.createFiniteNominalChild({intentId:f.plan.intentId,controlHash:s.prepared.controlHash});return {prepared,created,journal:await journal(),calls};}
   if(prepared.status!=='prepared'||mode==='prepare')return {prepared,journal:await journal(),calls};
   armedAt=f.now();f.prepareSuccess=true;
   const refs={intentId:f.plan.intentId,controlHash:prepared.prepared.controlHash};
@@ -87,8 +88,8 @@ export class Native extends IndependentClosure{
     }return result;
    };
   }
-  if(mode==='duplicate-id'){await originalCreate.call(this.env.AFW_QA_NAMED_CONFIRMATION,{id:f.plan.workflows.confirmation,params:{planHash:f.plan.bundleHash}});f.providerNominal='complete';}
-  if(mode==='held-create'){
+  if(mode==='duplicate-id'){await originalCreate.call(this.env.AFW_QA_NAMED_CONFIRMATION,{id:f.plan.workflows.confirmation,params:{planHash:f.plan.bundleHash}});f.providerNominal='running';}
+  if(['held-create','held-send'].includes(mode)){
    f.hydrate=async()=>{f.setNow(f.now()+4500);f.hydrate=null;};
    if(mode==='held-send'){let heldOnce=false;this.ctx.storage.transaction=async fn=>{const r=await originalTx.call(this.ctx.storage,fn);if(!heldOnce&&await originalGet.call(this.ctx.storage,prefix+'send')){heldOnce=true;enter();await held;settled=true;}return r;};}
    const first=this.createFiniteNominalChild(refs);await Promise.race([reached,first.then(r=>{throw Error('did not reach native create '+r.status);})]);const firstResult=await first,settledAtReturn=settled;
@@ -139,3 +140,5 @@ test('held actual native create retains coordinator after caller expiry against 
 for(const mode of ['late-ack','late-ack-readback'])test('late actual ACK persistence remains factual after '+mode,async()=>{const r=await native(mode);assert.equal(r.created.status,'admin_pending');assert.equal(r.calls,1);assert.ok(r.journal.send);assert.ok(r.journal.ack);assert.equal(r.unchanged,true);});
 
 test('held actual SEND transaction retains coordinator after caller expiry against fresh parent',async()=>{const r=await native('held-send');assert.equal(r.firstResult.status,'admin_pending');assert.equal(r.settledAtReturn,false);assert.equal(r.enteredBeforeSettlement,false);assert.equal(r.calls,0);assert.ok(r.journal.send);assert.equal(r.journal.ack,null);});
+
+test('lost prepared ACK cannot reconstruct launch from its durable receipt without source step success',async()=>{const r=await native('lost-prepared-reconstruction');assert.equal(r.prepared.status,'admin_pending');assert.equal(r.created.status,'admin_pending');assert.ok(r.journal.prepared);assert.equal(r.journal.send,null);assert.equal(r.calls,0);});
