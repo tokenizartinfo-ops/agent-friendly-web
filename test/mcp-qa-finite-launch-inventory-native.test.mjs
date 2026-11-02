@@ -112,12 +112,12 @@ export class LaunchFixture extends DurableObject{
    let first;const originalTransaction=this.ctx.storage.transaction;
    if(mode!=='active-storage-expired'){
     if(mode==='active-provider-expired')f.onRequest=pause;
-    else this.ctx.storage.transaction=fn=>originalTransaction.call(this.ctx.storage,async tx=>{const result=await fn(tx);await pause();return result;});
+    else this.ctx.storage.transaction=async fn=>{const result=await originalTransaction.call(this.ctx.storage,fn);await pause();return result;};
     const observing=await inventory.createPrivateQaFiniteLaunchInventory({ctx:this.ctx,env:this.env,context:shortContext,parent:shortParent});
     first=observing.observeBeforeCreation();
    }else{
     first=inventory.withPrivateQaFiniteLaunchCoordinator({ctx:this.ctx,env:this.env,context:shortContext,parent:shortParent},async check=>{
-     check();await this.ctx.storage.transaction(async tx=>{check();await tx.get('fixture:late-effect');check();await pause();check();lateEffect=true;await tx.put('fixture:late-effect',true);check();});check();
+     check();await this.ctx.storage.transaction(async tx=>{check();const value=await tx.get('fixture:late-effect');check();return value;}).then(async value=>{await pause();return value;});check();lateEffect=true;await this.ctx.storage.put('fixture:late-effect',true);check();
     }).then(()=>({kind:'unexpected-success'}),()=>({kind:'unavailable'}));
    }
    await reached;
