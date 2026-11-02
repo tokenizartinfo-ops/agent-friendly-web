@@ -396,3 +396,8 @@ Originalimplementer owns fixround1/5, report covering exacttests/commands/output
 ## B2-AB source acceptance after round1
 
 Task B2-AB completeSOURCEONLY atproduct5b087/testf68d360a/docsfbe117a6; originalreviewerscopedP2ADDRESSED/approved. Rootactual22PASSfix +prior21/256/28PASS/lint/artifacts0. Task5/bootstrap/C3 remainincomplete; nextpre-T0QAbridgebeforeinitialownerwindow, contract/rulingbeforeproduct. See checkpoint2026-11-02-finite-cloud-continuation.es.md andledger. No runtime/permissions/grants/main/PCoff/Max.
+
+
+## Root Task5-B2-C1 ruling — PRE-T0 QA provenance, 2026-11-02
+
+BASE a609c1f3296177f73468ca8c708b9333330f1d32. Root approved the complete [C1 contract](../specs/2026-11-02-finite-pre-t0-qa-provenance.md) BEFORE tests/product. Dedicated owner command and actual compiler/GHA producer, fullQAUUID create-only source tag, native supported token+pointer reads and public completed-success provenance; P0+300s original issuer deadline, no business window. Independently tracked workflow/CLI hashes embedded QA-only. Git ref mutability explicitly remains trusted repository-writer governance assumption, not historical nonmutation/publisher identity/business authority. No custody extension, source seam replacement, full package bypass, initial publication, runtime or C3. Source-only hosted meaningful RED/GREEN then STOP for fresh independent review; no owner intervention.

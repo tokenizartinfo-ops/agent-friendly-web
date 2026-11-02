@@ -950,3 +950,8 @@ Read reports/2026-11-02-finite-cloud-continuation.es.md first onreturn. Nextauto
 ## Resume: Task5-B2-C1 source proof before owner preparation
 
 Owner renewed autonomous continuation after the short disconnect. Resume from acceptedB1/B2-AB at44a54157; do not redispatch completed blocks or testfix1. Next bounded source unit is PRE-T0 QA publication provenance, distinct from post-T0seed. Brief: briefs/2026-11-02-finite-pre-t0-qa-provenance.md. Exact source-supported contract/ruling precedes product; no workflow/tag/provider/runtime/credential/consent action now. Initial capsule/source authority/material/C3 remain separate. One implementer and fresh review, GitHub/Actions only. operationalReadiness=false.
+
+
+## Root Task5-B2-C1 ruling — PRE-T0 QA provenance, 2026-11-02
+
+BASE a609c1f3296177f73468ca8c708b9333330f1d32. Root approved the complete [C1 contract](../specs/2026-11-02-finite-pre-t0-qa-provenance.md) BEFORE tests/product. Dedicated owner command and actual compiler/GHA producer, fullQAUUID create-only source tag, native supported token+pointer reads and public completed-success provenance; P0+300s original issuer deadline, no business window. Independently tracked workflow/CLI hashes embedded QA-only. Git ref mutability explicitly remains trusted repository-writer governance assumption, not historical nonmutation/publisher identity/business authority. No custody extension, source seam replacement, full package bypass, initial publication, runtime or C3. Source-only hosted meaningful RED/GREEN then STOP for fresh independent review; no owner intervention.
