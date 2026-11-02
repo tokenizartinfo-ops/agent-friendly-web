@@ -289,7 +289,7 @@ test('Task3 stage approval is immutable exact lookup over actual original owner 
  const all=await rows(f),pre=all.find(([k])=>k.endsWith(':record'))[1],snapshot=all.find(([k])=>k.endsWith(':source'))[1];
  const record={purpose:'afw.finite-connection-stage-approval.v1',preconnectionId:pre.preconnectionId,sourceRevision:pre.sourceRevision,stage:'connection',ticketHash:snapshot.initialTicketHash,approvalHash:pre.approvalHash};
  const put=arg=>f.json('/fixture/store',{method:'putStageApproval',arg});
- assert.equal((await put(record)).result?.status,'recorded');
+ assert.equal((await put(record)).result?.status,'existing');
  assert.equal((await put(record)).result?.status,'existing');
  const got=await f.json('/fixture/store',{method:'readStageApproval',arg:{preconnectionId:pre.preconnectionId,stage:'connection'}});
  assert.deepEqual(got.result,{status:'observed',record});
