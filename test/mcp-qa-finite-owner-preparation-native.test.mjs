@@ -272,6 +272,6 @@ test('accepted qaLive profile version binding alone qualifies actual owner sourc
 });
 test('obsolete QA_VERSION alone cannot qualify actual owner source',async t=>{
  const f=await native(t,'normal','QA_VERSION');
- assert.equal((await f.call('/connections/finite-prepare')).status,403);
+ assert.equal((await f.call('/connections/finite-prepare')).status,503);
  assert.deepEqual(await f.json('/fixture/rows',{}),[]);
 });
