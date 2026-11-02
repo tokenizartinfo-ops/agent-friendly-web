@@ -20,18 +20,6 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Inspect pinned native namespace persistence schema
-        run: |
-          node --input-type=module <<'NODE'
-          import {readFile} from 'node:fs/promises';
-          for(const path of ['node_modules/miniflare/dist/src/index.d.ts','node_modules/miniflare/dist/src/index.js']){
-            const code=await readFile(path,'utf8');
-            for(const word of ['isolatedResourcePersistencePath','ephemeral local storage','namespaceKey =','uniqueKey','localPersistence']){
-              let at=code.indexOf(word),count=0;
-              while(at>=0&&count++<5){console.log(path+' '+word+': '+code.slice(Math.max(0,at-500),at+700));at=code.indexOf(word,at+word.length);}
-            }
-          }
-          NODE
       - name: Native journal actual runtime restart
         run: node --test test/mcp-qa-finite-policy-journal-native.test.mjs
       - name: Scoped fixture lint

@@ -8,7 +8,7 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 async function native(t,persistent=false){
  const built=await build({entryPoints:['test/fixtures/finite-preparation-store-worker.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none'});
  const directory=persistent?await mkdtemp(join(tmpdir(),'afw-task3-journal-')):null;
- const options=()=>({...convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],durableObjects:{FIXTURE:{className:'FinitePreparationFixture',useSQLite:true,uniqueKey:'finite-private-task1'}}}),...(directory?{isolatedResourcePersistencePath:directory}:{})});
+ const options=()=>({...convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],durableObjects:{FIXTURE:{className:'FinitePreparationFixture',useSQLite:true,uniqueKey:'finite-private-task1'}}}),...(directory?{resourcePersistencePath:directory}:{})});
  let mf=new Miniflare(options());
  t.after(async()=>{try{await mf.dispose();}finally{if(directory)await rm(directory,{recursive:true,force:true});}});let path='/'+t.name.replace(/[^a-z0-9_]/gi,'');
  const call=async(op,arg,extra={})=>{const r=await mf.dispatchFetch('https://fixture.invalid'+path,{method:'POST',body:JSON.stringify({op,arg,...extra})});assert.equal(r.status,200);return r.json();};
