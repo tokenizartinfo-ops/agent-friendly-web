@@ -1,3 +1,4 @@
+import {recordDossierMonitoringConsent} from '../../lib/dossier-monitoring-authority.mjs';
 import {DurableObject} from 'cloudflare:workers';
 import {createFiniteOwnerPreparationHost} from '../../lib/mcp-qa-finite-owner-http.mjs';
 import {createFiniteOwnerPreparationStore} from '../../lib/mcp-qa-finite-preparation-store.mjs';
@@ -24,10 +25,14 @@ export class FiniteOwnerFixture extends DurableObject{
    const {method,arg}=await request.json(),store=createFiniteOwnerPreparationStore({storage:this.ctx.storage,now:Date.now}),lease={signal:new AbortController().signal,assertCurrent(){}};
    try{return Response.json({result:await store[method](arg,lease)});}catch{return Response.json({rejected:true});}
   }
+  if(path==='/fixture/monitoring'){
+   const input=await request.json(),now=Date.now();
+   return Response.json(await recordDossierMonitoringConsent({db:this.env.RELEASE_DB,subject:'owner',grantId:'accepted-grant',projectId:'synthetic-owned',expectedRevision:1,expectedSequence:input.expectedSequence,requestId:input.requestId,action:input.action,now,expiresAt:input.expiresAt,expectedClientId:'synthetic-client',expectedResource:origin+'/mcp'}));
+  }
   if(path==='/fixture/link'){
-   const {kind,grantId,requestId,sequence,authorizationHash,url,headers,body}=await request.json();
+   const {kind,grantId,requestId,sequence,authorizationHash,url,headers,body,expired}=await request.json();
    const original=new Request(url,{method:body?'POST':'GET',headers,body:body||undefined});
-   const lease={signal:new AbortController().signal,assertCurrent(){}};
+   const lease={signal:new AbortController().signal,assertCurrent(){if(expired)throw Error('expired original parent');}};
    try{const op={grant:recordFinitePreparationGrant,notice:recordFinitePreparationNotice,authorization:recordFinitePreparationAuthorization}[kind];
     return Response.json({result:await op({ctx:this.ctx,env:this.env,request:original,...(kind==='grant'?{grantId}:kind==='notice'?{requestId,sequence}:{authorizationHash})},lease)});
    }catch{return Response.json({rejected:true});}

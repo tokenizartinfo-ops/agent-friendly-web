@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,readdirSync} from 'node:fs';
+import {createHash,randomBytes,randomUUID} from 'node:crypto';
 import {build} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {generateKeyPair,exportJWK,SignJWT} from 'jose';
@@ -75,4 +76,69 @@ for(const field of ['goal','programContext','initialBaseline','window','project'
 for(const mode of ['missing','wrong'])test('missing or wrong release primary cannot fall back '+mode,async t=>{
  const f=await native(t,mode);assert.equal((await f.call('/connections/finite-prepare')).status,503);
  assert.equal((await f.json('/fixture/rows',{})).length,0);
+});
+
+const sha=v=>createHash('sha256').update(v).digest('hex');
+const rows=async f=>(await f.json('/fixture/rows',{})).map(([key,value])=>[key,JSON.parse(value)]);
+async function connection(t){
+ const f=await native(t),screen=await f.screen();assert.equal((await f.submit(screen)).status,202);
+ const initial=(await rows(f)).find(([k])=>k.endsWith(':source'))[1].source;
+ const stage=async phase=>f.json('/fixture/source',{phase,currentPublication:{stage:phase==='read_consent'?'connection':'notices',versionId:initial.initialBaseline.versionId,deploymentId:initial.initialBaseline.deploymentId,receiptHash:'f'.repeat(64)}});
+ await stage('read_consent');
+ const handle=randomBytes(32).toString('base64url'),authorizationHash=sha(handle),until=new Date(Date.now()+590000).toISOString();
+ await f.db.prepare('INSERT INTO delegated_consent_sessions(handle_hash,user_id,kind,project_id,client_id,resource,scopes_json,expires_at,consumed_at) VALUES(?,?,?,?,?,?,?,?,?)').bind(authorizationHash,'owner','authorize','synthetic-owned','synthetic-client',origin+'/mcp','["afw:project:read"]',until,'').run();
+ const link=(kind,refs,request)=>f.json('/fixture/link',{kind,...refs,...request});
+ const headers={'Cf-Access-Jwt-Assertion':f.token,Cookie:screen.cookie};
+ const authRequest={url:origin+'/authorize?'+new URLSearchParams({client_id:'synthetic-client',resource:origin+'/mcp',project:'synthetic-owned',scope:'afw:project:read'}),headers};
+ return {...f,screen,initial,stage,handle,authorizationHash,until,link,headers,authRequest};
+}
+async function granted(t){
+ const f=await connection(t);
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},f.authRequest)).result?.status,'recorded');
+ const at=new Date().toISOString();
+ await f.db.prepare('UPDATE delegated_consent_sessions SET consumed_at=? WHERE handle_hash=?').bind(at,f.authorizationHash).run();
+ for(const [id,created] of [['accepted-grant',at],['later-unrelated-grant',new Date(Date.now()+1).toISOString()]]){
+  await f.db.prepare('INSERT INTO delegated_access_grants(id,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at) VALUES(?,?,?,?,?,?,?,?,?)').bind(id,'owner','synthetic-client','synthetic-owned',origin+'/mcp','["afw:project:read"]',created,f.until,'').run();
+ }
+ const grantRequest={url:origin+'/authorize',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:f.handle,decision:'approve',project:'synthetic-owned',scope:'afw:project:read'}).toString()};
+ assert.equal((await f.link('grant',{grantId:'accepted-grant'},grantRequest)).result?.status,'recorded');
+ return {...f,grantRequest};
+}
+test('exact original authorization and server accepted grant win over newer matching grant',async t=>{
+ const f=await granted(t),stored=await rows(f),grant=stored.find(([k])=>k.endsWith(':grant'))[1];
+ assert.equal(grant.grantId,'accepted-grant');assert.equal(grant.grantHash,sha('accepted-grant'));assert.equal(grant.authorizationHash,f.authorizationHash);
+ assert.equal((await f.link('grant',{grantId:'later-unrelated-grant'},f.grantRequest)).rejected,true);
+ const snapshot=await rows(f);
+ await f.db.prepare("UPDATE delegated_access_grants SET revoked_at=? WHERE id='accepted-grant'").bind(new Date().toISOString()).run();
+ assert.equal((await f.link('grant',{grantId:'accepted-grant'},f.grantRequest)).rejected,true);
+ assert.deepEqual(await rows(f),snapshot);
+});
+test('unmapped or unconsumed authorization cannot create a link and reconstructed exact map survives',async t=>{
+ const f=await connection(t),request={url:origin+'/authorize',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle:f.handle,decision:'approve',scope:'afw:project:read'}).toString()};
+ assert.equal((await f.link('grant',{grantId:'unmapped'},request)).rejected,true);
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},f.authRequest)).result?.status,'recorded');
+ assert.equal((await f.link('authorization',{authorizationHash:f.authorizationHash},f.authRequest)).result?.status,'existing');
+ assert.equal((await f.link('grant',{grantId:'unmapped'},request)).rejected,true);
+ assert.equal((await rows(f)).filter(([k])=>k.endsWith(':grant')).length,0);
+});
+test('notice producer rereads exact acknowledged primary event and terminal revocation denies relinking',async t=>{
+ const f=await granted(t);await f.stage('notice_consent');
+ const monitorHandle=randomBytes(32).toString('base64url'),requestId=randomUUID(),at=Date.now(),expires=Math.min(Date.parse(f.until),at+500000);
+ await f.db.prepare('INSERT INTO dossier_monitoring_owner_tickets VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind(sha(monitorHandle),requestId,'owner','accepted-grant','synthetic-owned','synthetic-client',origin+'/mcp','afw.dossier-monitoring-owner.v1','grant',1,0,at,expires,expires).run();
+ const ack=await f.json('/fixture/monitoring',{requestId,action:'grant',expectedSequence:0,expiresAt:expires});
+ assert.equal(ack.status,200);assert.equal(ack.eventHash,undefined);
+ const request={url:origin+'/monitoring/grant',headers:{...f.headers,Origin:origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:f.screen.cookie+'; __Host-afw-monitoring-owner='+monitorHandle},body:'handle='+monitorHandle};
+ assert.equal((await f.link('notice',{requestId,sequence:ack.sequence+1},request)).rejected,true);
+ assert.equal((await f.link('notice',{requestId,sequence:ack.sequence},request)).result?.status,'recorded');
+ const snapshot=await rows(f),notice=snapshot.find(([k])=>k.endsWith(':notice'))[1];
+ assert.equal(notice.sequence,ack.sequence);assert.equal(notice.grantHash,sha('accepted-grant'));assert.match(notice.eventHash,/^[a-f0-9]{64}$/);
+ const revoked=await f.json('/fixture/monitoring',{requestId:randomUUID(),action:'revoke',expectedSequence:ack.sequence,expiresAt:Date.now()});
+ assert.equal(revoked.status,200);
+ assert.equal((await f.link('notice',{requestId,sequence:ack.sequence},request)).rejected,true);
+ assert.deepEqual(await rows(f),snapshot);
+});
+test('expired original parent cannot record authorization or reconstruct a new lease',async t=>{
+ const f=await connection(t);
+ assert.equal((await f.json('/fixture/link',{kind:'authorization',authorizationHash:f.authorizationHash,...f.authRequest,expired:true})).rejected,true);
+ assert.equal((await rows(f)).filter(([k])=>k.startsWith('connection-authorization:')).length,0);
 });
