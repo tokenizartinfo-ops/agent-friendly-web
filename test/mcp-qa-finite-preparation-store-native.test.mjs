@@ -157,3 +157,26 @@ test('notice_kind_mutation_cannot_change_native_append_key',async t=>{
  assert.deepEqual(JSON.parse(rows.get('connection-preparation:'+notice.preconnectionId+':grant')),grant);
  assert.deepEqual(JSON.parse(rows.get('connection-preparation:'+notice.preconnectionId+':notice')),notice);
 });
+
+test('post_T0_binding_after_commandBy_keeps_original_chronology',async t=>{
+ const {call,f}=await native(t),p=f.preparation,T0=p.commandBy-1,at=p.commandBy+10;
+ assert.equal((await call('publishSelection',{preparation:p,selection:f.selection,expectedHeadHash:null},{now:15})).result.status,'recorded');
+ const binding={...f.binding,T0,boundAt:at};
+ assert.equal((await call('bindSelection',binding,{now:at})).result?.status,'recorded');
+ const selected=(await call('readSelected',{sourceRevision:p.sourceRevision},{now:at})).result;
+ assert.deepEqual(selected.binding,binding);
+ assert.equal(selected.preparation.commandBy,p.commandBy);
+ assert.equal((await call('bindSelection',binding,{now:at+1})).result.status,'existing');
+ assert.equal((await call('rows')).some(([key])=>key==='afw.qa-finite-trial.v1:head'),false);
+});
+for(const mode of ['command_at_boundary','command_after_boundary','stored_permission_expired','late_publication','future_boundAt']){
+ test('post_T0_binding_denies_'+mode,async t=>{
+  const {call,f}=await native(t),p=f.preparation;
+  const T0=mode==='command_at_boundary'?p.commandBy:mode==='command_after_boundary'?p.commandBy+1:p.commandBy-1;
+  const at=mode==='stored_permission_expired'?p.connection.permissionExpiresAt:p.commandBy+10;
+  assert.equal((await call('publishSelection',{preparation:p,selection:f.selection,expectedHeadHash:null},{now:mode==='late_publication'?T0+1:15})).result.status,'recorded');
+  const before=await call('rows'),binding={...f.binding,T0,boundAt:mode==='future_boundAt'?at+1:at};
+  assert.equal((await call('bindSelection',binding,{now:at})).rejected,true);
+  assert.deepEqual(await call('rows'),before);
+ });
+}
