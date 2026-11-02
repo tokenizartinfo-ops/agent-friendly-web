@@ -43,3 +43,15 @@ test('issuer cannot claim its own future step/job completion',async()=>{
  assert.equal(p.stepCompletedAt,undefined);
  await assert.rejects(read(f));
 });
+
+test('issuer primary treats original observation as historical within step and Pend',async()=>{
+ const f=await world();f.issuer();
+ assert(Date.now()-f.record.observedAt>5000);
+ const result=await api.readFiniteQaBootstrapPrimary({get:f.get,record:f.record,phase:'issuer',now:Date.now,expected:f.expected});
+ assert.equal(result.stepStartedAt,f.record.stepStartedAt);
+});
+for(const value of ['nan','infinity','future','before-step','at-Pend'])test('issuer historical observation still rejects '+value,async()=>{
+ const f=await world();f.issuer();
+ f.record.observedAt=value==='nan'?NaN:value==='infinity'?Infinity:value==='future'?Date.now()+3000:value==='before-step'?f.record.stepStartedAt-1:f.record.Pend;
+ await assert.rejects(api.readFiniteQaBootstrapPrimary({get:f.get,record:f.record,phase:'issuer',now:Date.now,expected:f.expected}));
+});

@@ -20,7 +20,7 @@ async function fixture(mode='normal'){
   b.onLoad({filter:/mcp-qa-finite-custody-receipt\.json$/},()=>({contents:JSON.stringify(receipt),loader:'json'}));
  }}]});
  const api=await import('data:text/javascript;base64,'+Buffer.from(bundle.outputFiles[0].text).toString('base64')+'#'+randomUUID());
- const originalFetch=globalThis.fetch,oldEnv={...process.env},calls=[],state={tagPosts:0,refPosts:0,pointers:0};const sha='f'.repeat(40);
+ const originalFetch=globalThis.fetch,oldEnv={...process.env},calls=[],state={tagPosts:0,refPosts:0,pointers:0,requestDurations:[],observation:null};const sha='f'.repeat(40);
  Object.assign(process.env,{GITHUB_JOB:'publish',GITHUB_ACTION:'finite_bootstrap_once',GITHUB_RUN_ID:'456',GITHUB_RUN_ATTEMPT:'1',GITHUB_SHA:staged.sourceRevision,GITHUB_REPOSITORY:'tokenizartinfo-ops/agent-friendly-web',GITHUB_REPOSITORY_ID:'1347578006',GITHUB_REF:'refs/heads/main',GITHUB_EVENT_NAME:'issue_comment',AFW_FINITE_BOOTSTRAP_ORIGINAL_PID:String(process.pid)});
  if(mode==='marker')process.env.AFW_FINITE_BOOTSTRAP_ORIGINAL_PID='0';
  if(mode==='wrong-action')process.env.GITHUB_ACTION='finite_seed_once';
@@ -29,7 +29,11 @@ async function fixture(mode='normal'){
  if(mode==='completed')w.run.status=w.job.status=w.step.status='completed';
  if(mode==='existing')w.refresh();
  globalThis.fetch=async(url,init)=>{
-  calls.push({url,method:init.method});let value,status=200;
+  calls.push({url,method:init.method});const requestStarted=performance.now();let value,status=200;
+  // Real elapsed SYN transport latency, never a clock/deadline substitution.
+  // Ten sequential waves after the QA observation cumulatively exceed5s;
+  // every individual response remains fresh and well within its own5s child.
+  if(mode==='cumulative-latency'&&state.observation&&url.startsWith(GH))await new Promise(resolve=>setTimeout(resolve,650));
   if(url.startsWith(CF)){
    assert.equal(init.headers.Authorization,'Bearer SYN-gha-token');assert.equal(init.method,'GET');
    if(url===CF+'/tokens/verify')value={id:mode==='wrong-token'?'9aa97ad1fc9afe3021cf69ea497d5190':receipt.tokenId,status:'active',expires_on:receipt.expiresAt,not_before:null};
@@ -53,7 +57,9 @@ async function fixture(mode='normal'){
    }else if(path===w.refPath&&!w.map.has(path)){status=404;value={message:'Not Found'};}
    else value=await w.get(path);
   }
-  return new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json',Date:new Date().toUTCString()}});
+  const response=new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json',Date:new Date().toUTCString()}});
+  if(url.startsWith(CF)&&url.includes('/deployments?')&&state.pointers===2)state.observation={observedAt:Date.parse(response.headers.get('date')),wall:Date.now(),mono:performance.now()};
+  state.requestDurations.push(performance.now()-requestStarted);return response;
  };
  const admission=api.validateQaBootstrapCommand({event:w.event,context:w.context,now:Date.now}),options={admission,githubToken:'SYN-github-token',credential:'SYN-gha-token',signal:new AbortController().signal};
  return {api,options,w,calls,state,async close(){globalThis.fetch=originalFetch;for(const k of Object.keys(process.env))if(!Object.hasOwn(oldEnv,k))delete process.env[k];Object.assign(process.env,oldEnv);}};
@@ -80,4 +86,24 @@ test('actual fixed CLI consumes event file and original environment without fake
   const path=join(dir,'event.json');await writeFile(path,JSON.stringify(f.w.event));process.env.GITHUB_EVENT_PATH=path;process.env.GITHUB_TOKEN='SYN-github-token';process.env.AFW_QA_CLOSED_TOKEN='SYN-gha-token';
   const r=await f.api.runFiniteQaBootstrapCli();assert.equal(r.status,'qa_bootstrap_created');assert.equal(f.state.refPosts,1);
  }finally{await f.close();assert(dir.startsWith(join(tmpdir(),'afw-bootstrap-event-')));await rm(dir,{recursive:true,force:true});}
+});
+
+test('original QA observation survives cumulative post-observation latency beyond5s inside original Pend',async()=>{
+ const f=await fixture('cumulative-latency');try{
+  let result,error;try{result=await f.api.issueFiniteQaBootstrap(f.options);}catch(e){error=e;}
+  const original=f.state.observation;assert(original,'actual final CF observation was reached');
+  const elapsedWall=Date.now()-original.wall,elapsedMono=performance.now()-original.mono;
+  assert(elapsedWall>5000&&elapsedMono>5000,'actual original clocks crossed5s');
+  assert(Date.now()<f.options.admission.Pend,'original unextended Pend remains live');
+  assert(f.state.requestDurations.every(ms=>ms<5000),'every actual request stayed within5s');
+  assert.equal(f.state.tagPosts,1);assert.equal(f.state.refPosts,1);
+  const tag=f.w.map.get('/git/tags/'+f.w.tagSha),record=JSON.parse(tag.message).record;
+  assert.equal(record.observedAt,original.observedAt,'original observation was never rewritten');
+  assert.equal(record.P0,f.options.admission.P0);assert.equal(record.Pend,f.options.admission.Pend);
+  const calls=f.calls.length;await assert.rejects(f.api.issueFiniteQaBootstrap(f.options));
+  assert.equal(f.calls.length,calls);assert.equal(f.state.tagPosts+f.state.refPosts,2);
+  console.log('SYN cumulative elapsed wall='+elapsedWall+'ms mono='+Math.floor(elapsedMono)+'ms maxRequest='+Math.ceil(Math.max(...f.state.requestDurations))+'ms POSTs=2 originalObservedAtUnchanged=true');
+  assert.equal(error,undefined,'valid original publication must reconcile successfully');
+  assert.equal(result.status,'qa_bootstrap_created');
+ }finally{await f.close();}
 });
