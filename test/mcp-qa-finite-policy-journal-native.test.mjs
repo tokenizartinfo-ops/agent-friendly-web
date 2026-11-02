@@ -1,13 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
+import {mkdtemp,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
-async function native(t){
+async function native(t,persistent=false){
  const built=await build({entryPoints:['test/fixtures/finite-preparation-store-worker.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none'});
- const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],durableObjects:{FIXTURE:{className:'FinitePreparationFixture',useSQLite:true,uniqueKey:'finite-private-task1'}}}));
- t.after(()=>mf.dispose());let path='/'+t.name.replace(/[^a-z0-9_]/gi,'');
+ const directory=persistent?await mkdtemp(join(tmpdir(),'afw-task3-journal-')):null;
+ const options=()=>convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],...(directory?{durableObjectsPersist:directory}:{}),durableObjects:{FIXTURE:{className:'FinitePreparationFixture',useSQLite:true,uniqueKey:'finite-private-task1'}}});
+ let mf=new Miniflare(options());
+ t.after(async()=>{try{await mf.dispose();}finally{if(directory)await rm(directory,{recursive:true,force:true});}});let path='/'+t.name.replace(/[^a-z0-9_]/gi,'');
  const call=async(op,arg,extra={})=>{const r=await mf.dispatchFetch('https://fixture.invalid'+path,{method:'POST',body:JSON.stringify({op,arg,...extra})});assert.equal(r.status,200);return r.json();};
- return {call,f:await call('fixtures')};
+ return {call,f:await call('fixtures'),async restart(){if(!directory)throw Error('Restart requires hosted test persistence');await mf.dispose();mf=new Miniflare(options());}};
 }
 
 test('lost_issue_ack_retains_issued',async t=>{
@@ -65,9 +70,11 @@ test('connection_stage_and_effect_identity_isolation',async t=>{
  assert.equal((await call('read',null,{target:'journal'})).result.state,'absent');
 });
 
-test('Task3 actor writer head blocks different preparations after unknown commit and reconstruction',async t=>{
- const {call,f}=await native(t);
+test('Task3 actor writer head blocks different preparations after unknown commit and actual native runtime restart',async t=>{
+ const {call,f,restart}=await native(t,true);
  assert.equal((await call('issue',f.send,{target:'journal',loseCommitAck:true})).result.status,'uncertain');
+ await restart();
+ assert.equal((await call('read',null,{target:'journal'})).result.state,'issued');
  const other={...f.identity,intentId:'different-original',setupInstanceId:'different-setup'},send={...f.send,intentId:other.intentId,setupInstanceId:other.setupInstanceId};
  assert.equal((await call('issue',send,{target:'journal',identity:other})).rejected,true);
  const before=await call('rows');
