@@ -1,9 +1,9 @@
-# Branch-only C2-A initial material source qualifier; EXCLUDE from eventual integration.
-name: Finite C2-A initial material temporary qualifier
+# Branch-only C2-B1 initial native entry source qualifier; EXCLUDE from eventual integration.
+name: Finite C2-B1 initial native entry temporary qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-initial-*.mjs', 'test/mcp-qa-finite-initial-*.test.mjs', 'test/fixtures/finite-initial-*.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-initial-*.mjs', 'test/mcp-qa-finite-initial-*.test.mjs', 'test/fixtures/finite-initial-*.mjs', 'worker/independent-closure/finite.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -21,7 +21,7 @@ jobs:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: C2-A actual native material and strict records
-        run: node --test test/mcp-qa-finite-initial-material-native.test.mjs test/mcp-qa-finite-initial-material-records.test.mjs
+        run: node --test test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-entry-records.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-initial-material.mjs lib/mcp-qa-finite-initial-material-records.mjs lib/mcp-qa-finite-initial-material-store.mjs test/mcp-qa-finite-initial-material-native.test.mjs test/mcp-qa-finite-initial-material-records.test.mjs test/fixtures/finite-initial-history-world.mjs
+        run: npx eslint test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-entry-records.test.mjs test/fixtures/finite-initial-entry-world.mjs
