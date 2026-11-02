@@ -13,6 +13,7 @@ import {finiteWranglerProfileTemplate,finitePublicStaticExpectation} from '../li
 const exec=promisify(execFile),hash=x=>createHash('sha256').update(x).digest('hex');
 const fail=()=>{throw Error('Finite native package unavailable');};
 const workflow='.github/workflows/afw-finite-native-package.yml';
+const bootstrapPaths={workflowHash:'.github/workflows/afw-finite-qa-bootstrap.yml',cliHash:'scripts/run-qa-finite-bootstrap.mjs'};
 // Acyclic residency: nodeM -> canaryM -> QA; never embed QA/package hashes.
 const roles=['canaryLive','qaLive'];
 const paths={qaLive:'wrangler.independent-closure-qa.finite.jsonc',canaryLive:'wrangler.mcp-own.finite.jsonc'};
@@ -26,7 +27,7 @@ async function inputs(cwd,revision){
  const result={};
  const origin=(await exec('git',['remote','get-url','origin'],{cwd,encoding:'utf8',timeout:10000})).stdout.trim();
  if(!['https://github.com/tokenizartinfo-ops/agent-friendly-web','https://github.com/tokenizartinfo-ops/agent-friendly-web.git'].includes(origin))fail();
- for(const path of [workflow,...Object.values(paths)]){
+ for(const path of [workflow,...Object.values(paths),...Object.values(bootstrapPaths)]){
   const bytes=await readFile(resolve(cwd,path)),tracked=(await exec('git',['show',revision+':'+path],{cwd,encoding:null,timeout:10000,maxBuffer:1048576})).stdout;
   if(!bytes.equals(tracked))fail();result[path]=hash(bytes);
   const role=roles.find(r=>paths[r]===path);if(role)assert.deepEqual(JSON.parse(bytes),finiteWranglerProfileTemplate(role));
@@ -56,6 +57,7 @@ export async function compileFiniteNativeStaging(input){
     ...(role==='qaLive'?{
      'globalThis.__AFW_FINITE_CANDIDATE_RESIDENCY__':JSON.stringify(candidateResidency),
      'globalThis.__AFW_FINITE_SOURCE_TREE__':JSON.stringify(before.tree),
+     'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':JSON.stringify({sourceRevision,sourceTree:before.tree,...Object.fromEntries(Object.entries(bootstrapPaths).map(([k,p])=>[k,inputBefore[p]]))}),
     }:{}),
    }});
    const out=Object.values(compiled.metafile.outputs);
@@ -64,6 +66,11 @@ export async function compileFiniteNativeStaging(input){
    const original=role==='qaLive'?'worker/independent-closure/index.mjs':'worker/mcp-own/index.mjs';
    if(!compiled.metafile.inputs[entry]||!compiled.metafile.inputs[original])fail();
    const bytes=compiled.outputFiles[0].contents;
+   const bootstrapInput='lib/mcp-qa-finite-bootstrap-source.mjs';
+   if(role==='qaLive'){
+    if(!compiled.metafile.inputs[bootstrapInput]||Object.values(bootstrapPaths).some(p=>!Buffer.from(bytes).includes(Buffer.from(inputBefore[p]))))fail();
+   }else if(compiled.metafile.inputs[bootstrapInput])fail();
+   if(Object.keys(compiled.metafile.inputs).some(p=>/bootstrap-issuer|build-finite-native-package|node_modules\\/esbuild/.test(p)))fail();
    if(bytes.length<1||bytes.length>(role==='canaryLive'?2097152:3145728))fail();
    const decoder='lib/mcp-qa-finite-candidate-residency.mjs';
    if(role==='canaryLive'){
@@ -77,7 +84,7 @@ export async function compileFiniteNativeStaging(input){
    metafiles[role]=compiled.metafile;
   }
   const after=await verifyMcpReleaseSource({cwd,sourceRevision});assert.deepEqual(after,before);assert.deepEqual(await inputs(cwd,sourceRevision),inputBefore);
-  return {purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree:after.tree,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:inputBefore[workflow],modules,files,metafiles,candidateResidency,completePackage:false,operationalReadiness:false};
+  return {purpose:'afw.finite-native-compiler-staging.v1',sourceRevision,sourceTree:after.tree,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:inputBefore[workflow],bootstrapSource:{sourceRevision,sourceTree:after.tree,...Object.fromEntries(Object.entries(bootstrapPaths).map(([k,p])=>[k,inputBefore[p]]))},modules,files,metafiles,candidateResidency,completePackage:false,operationalReadiness:false};
  }catch{fail();}
 }
 /** Complete-package boundary. Deliberately no positive path until separately

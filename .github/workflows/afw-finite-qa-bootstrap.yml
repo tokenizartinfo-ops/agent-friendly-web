@@ -1,0 +1,37 @@
+# SOURCE definition only; separate owner command after approved initial publication.
+name: afw-finite-qa-bootstrap
+run-name: AFW finite QA bootstrap comment-${{ github.event.comment.id }} source-${{ github.sha }}
+on:
+  issue_comment:
+    types: [created]
+permissions:
+  contents: read
+jobs:
+  publish:
+    if: >-
+      ${{ github.event_name == 'issue_comment' && github.event.action == 'created' && github.ref == 'refs/heads/main' && github.run_attempt == '1' && github.event.repository.id == 1347578006 && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event.issue.number == 497 && !github.event.issue.pull_request && github.event.comment.user.id == 290715446 && github.event.comment.user.login == 'tokenizartinfo-ops' && github.event.comment.user.type == 'User' && github.event.sender.id == 290715446 && github.event.sender.login == 'tokenizartinfo-ops' && github.event.sender.type == 'User' && github.event.comment.author_association == 'OWNER' && github.event.comment.body == format('/afw-qa-finite-bootstrap v1 {0}', github.sha) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment: afw-qa-cloud-closed-rollback
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: qa-bootstrap-provenance
+        id: finite_bootstrap_once
+        env:
+          AFW_QA_CLOSED_TOKEN: ${{ secrets.AFW_QA_CLOSED_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          export AFW_FINITE_BOOTSTRAP_ORIGINAL_PID=$$
+          exec node scripts/run-qa-finite-bootstrap.mjs

@@ -3,7 +3,7 @@ name: Finite PRE-T0 QA provenance temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-bootstrap-*.mjs', 'scripts/run-qa-finite-bootstrap.mjs', 'scripts/build-finite-native-package.mjs', 'test/*finite-bootstrap*.mjs', 'test/fixtures/*finite-bootstrap*.mjs', '.github/workflows/afw-finite-qa-bootstrap.yml', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-bootstrap-*.mjs', 'scripts/run-qa-finite-bootstrap.mjs', 'scripts/build-finite-native-package.mjs', 'worker/independent-closure/finite.mjs', 'test/*finite-bootstrap*.mjs', 'test/fixtures/*finite-bootstrap*.mjs', '.github/workflows/afw-finite-qa-bootstrap.yml', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -22,6 +22,8 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Actual new bootstrap behavior
         run: node --test test/*finite-bootstrap*.mjs
+      - name: Actual compiler and affected profile regressions
+        run: node --test test/build-finite-native-package.test.mjs test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-candidate-residency.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint test/mcp-qa-finite-bootstrap.test.mjs
+        run: npx eslint lib/mcp-qa-finite-bootstrap-*.mjs scripts/run-qa-finite-bootstrap.mjs scripts/build-finite-native-package.mjs worker/independent-closure/finite.mjs test/*finite-bootstrap*.mjs test/fixtures/finite-bootstrap-world.mjs
