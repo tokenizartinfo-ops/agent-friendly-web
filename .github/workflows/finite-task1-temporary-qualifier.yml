@@ -3,7 +3,7 @@ name: Finite C2 Task2 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-owner-*.mjs', 'lib/mcp-qa-finite-preparation-*.mjs', 'lib/delegated-oauth-worker.mjs', 'lib/dossier-monitoring-owner-http.mjs', 'test/mcp-qa-finite-owner-preparation-native.test.mjs', 'test/fixtures/finite-owner-*.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-owner-*.mjs', 'lib/mcp-qa-finite-preparation-*.mjs', 'lib/delegated-oauth-worker.mjs', 'lib/dossier-monitoring-owner-http.mjs', 'test/mcp-qa-finite-owner-preparation-native.test.mjs', 'test/delegated-oauth-flow.test.mjs', 'test/fixtures/finite-owner-*.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -27,4 +27,4 @@ jobs:
         run: node --test test/cloudflare-access-identity-expiry.test.mjs test/delegated-oauth-flow.test.mjs test/dossier-monitoring-oauth-native.test.mjs test/dossier-monitoring-owner-native.test.mjs test/mcp-qa-finite-preparation-records.test.mjs test/mcp-qa-finite-preparation-store-native.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-owner-source.mjs lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-owner-http.mjs test/fixtures/finite-owner-source.mjs test/fixtures/finite-owner-worker.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs lib/mcp-qa-finite-preparation-records.mjs lib/mcp-qa-finite-preparation-store.mjs lib/delegated-oauth-worker.mjs lib/dossier-monitoring-owner-http.mjs
+        run: npx eslint lib/mcp-qa-finite-owner-source.mjs lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-owner-http.mjs test/fixtures/finite-owner-source.mjs test/fixtures/finite-owner-worker.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs lib/mcp-qa-finite-preparation-records.mjs lib/mcp-qa-finite-preparation-store.mjs lib/delegated-oauth-worker.mjs lib/dossier-monitoring-owner-http.mjs test/delegated-oauth-flow.test.mjs

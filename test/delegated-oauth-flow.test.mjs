@@ -7,7 +7,29 @@ import { localOAuthFixture,authorize,approve,exchange,handle,cookies } from './f
 
 // Provider imports only the WorkerEntrypoint base; crypto/protocol/storage are real.
 // Actual workerd bundling/runtime is a separate check, not represented by this shim.
-const hook=registerHooks({resolve(s,c,next){return s==='cloudflare:workers'?{url:'data:text/javascript,export class WorkerEntrypoint {}',shortCircuit:true}:next(s,c);}});
+// Static source-module replacement only; no production hook registration.
+const finiteHookState={events:[],late:false};
+globalThis[Symbol.for('afw.finite.synthetic-hooks')]=finiteHookState;
+const finiteSource=`
+export function readPrivateQaFiniteOwnerSource(){throw Error('synthetic source unavailable');}
+async function observe(kind,args,lease){
+ const state=globalThis[Symbol.for('afw.finite.synthetic-hooks')],event={kind,leaseActive:false,preserved:false};
+ state.events.push(event);
+ const original=Date.now;if(state.late)Date.now=()=>original()+30001;
+ try{lease.assertCurrent();event.leaseActive=true;
+  event.preserved=args.request instanceof Request&&args.request.headers.has('Cookie')&&(kind==='authorization'?args.request.method==='GET':(await args.request.text()).includes('decision=approve'));
+  throw Error('synthetic preparation link failure after genuine SDK success');
+ }finally{Date.now=original;}
+}
+export const forwardPrivateQaFiniteOwnerAuthorization=(args,lease)=>observe('authorization',args,lease);
+export const forwardPrivateQaFiniteOwnerGrant=(args,lease)=>observe('grant',args,lease);
+export const forwardPrivateQaFiniteOwnerNotice=(args,lease)=>observe('notice',args,lease);
+`;
+const hook=registerHooks({resolve(s,c,next){
+ if(s==='cloudflare:workers')return {url:'data:text/javascript,export class WorkerEntrypoint {}',shortCircuit:true};
+ if(s.endsWith('/mcp-qa-finite-owner-source.mjs'))return {url:'data:text/javascript,'+encodeURIComponent(finiteSource),shortCircuit:true};
+ return next(s,c);
+}});
 const {createDelegatedOAuthWorker}=await import('../lib/delegated-oauth-worker.mjs');
 hook.deregister();
 
@@ -548,4 +570,30 @@ test('stable service requires a functioning edge guard and keeps consent duratio
     f.env.AFW_DELEGATED_OAUTH_ENABLED='false';
     assert.equal((await f.request('/.well-known/oauth-authorization-server',{},null)).status,404);
   }finally{await client.close();f.close();}
+});
+
+test('fixed preparation link failure preserves genuine completed OAuth grant and ordinary redirect',async()=>{
+ finiteHookState.events=[];finiteHookState.late=false;
+ const f=await localOAuthFixture(createDelegatedOAuthWorker),base=f.request;
+ f.request=(path,options={},identity='owner-a')=>base(path,{...options,headers:{...options.headers,Cookie:[options.headers?.Cookie,'__Host-afw-finite-prepare='+'a'.repeat(64)].filter(Boolean).join('; ')}},identity);
+ try{
+  const a=await authorize(f),approved=await approve(f,a,{scope:['afw:project:read']});
+  assert.equal(approved.status,302);
+  const grant=f.sqlite.prepare('SELECT * FROM delegated_access_grants').get();
+  assert.equal(grant.revoked_at,'');assert.deepEqual(JSON.parse(grant.scopes_json),['afw:project:read']);
+  assert.deepEqual(finiteHookState.events.map(e=>({kind:e.kind,leaseActive:e.leaseActive,preserved:e.preserved})),[{kind:'authorization',leaseActive:true,preserved:true},{kind:'grant',leaseActive:true,preserved:true}]);
+  assert.equal(f.sqlite.prepare('SELECT COUNT(*) n FROM delegated_access_grants').get().n,1);
+  assert.equal((await exchange(f,approved.headers.get('Location'),a.verifier)).status,200);
+ }finally{f.close();finiteHookState.events=[];}
+});
+test('late preparation hook cannot replace the original request lease and does not revoke SDK success',async()=>{
+ finiteHookState.events=[];finiteHookState.late=false;
+ const f=await localOAuthFixture(createDelegatedOAuthWorker),base=f.request;
+ f.request=(path,options={},identity='owner-a')=>base(path,{...options,headers:{...options.headers,Cookie:[options.headers?.Cookie,'__Host-afw-finite-prepare='+'a'.repeat(64)].filter(Boolean).join('; ')}},identity);
+ try{
+  const a=await authorize(f);finiteHookState.events=[];finiteHookState.late=true;
+  const approved=await approve(f,a,{scope:['afw:project:read']});
+  assert.equal(approved.status,302);assert.equal(f.sqlite.prepare('SELECT revoked_at FROM delegated_access_grants').get().revoked_at,'');
+  assert.deepEqual(finiteHookState.events.map(e=>({kind:e.kind,leaseActive:e.leaseActive})),[{kind:'grant',leaseActive:false}]);
+ }finally{finiteHookState.late=false;finiteHookState.events=[];f.close();}
 });
