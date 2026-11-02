@@ -346,3 +346,14 @@ Start ONLY B1: actual nodeM→canaryM→bounded deterministic compressed candida
 ## B1 accepted; next B2 source origin
 
 B1 source review PASS/qualityapproved at21b679ce/codee93037e; Root logs28+14PASS/lint/artifacts0. B1 complete, Task5 incomplete. Follow scoped B2 brief before any source replacement; exact bootstrap/issuer/locator table and Root ruling precede product. No runtime action; operationalReadiness=false. Owner absent until16:00 Argentina2Nov. See ledger and reviews/2026-11-01-finite-private-policy-setup-task5-b1.md.
+
+
+## Root Task5-B2 A+B ruling — 2026-11-02, before product
+
+BASE70408e380551ac7dc70d3e88ec9f5b75172fbe75. Complete exact preflight table1/2, original recommendation, source/API limitations and Root ruling: [B2 preflight](../reports/2026-11-01-finite-private-policy-setup-task5-b2-preflight.md). B1 accepted; Task5/B2 incomplete, completePackage=false, operationalReadiness=false.
+
+Root selects ONE coherent read-only factual producer: fixed fullUUID closed-canary historical bytes/private metadata plus exact native control/four-journal snapshot plus bounded first-primary RELEASE_DB originalQ/cancellation rows derived ONLY from qualified manifest.original/scope. Historical frozen315/source2a477 != originalQ != candidateM. No caller pins/URL/callback/credential, latest, reconstructed oldpolicy, invented history or empty cancellation defaults. Actual fixed1830202byte/SHA/receipt/config validation; missing private strings are sanitized unavailable gate. Existing helper10min contracts unchanged; no15min relabel. <=8 cancellation rows; reject overflow/missing/ambiguity/foreign identities/times. Readonly exact known storage keys, no scans/write/newstore/DDL. Private in-process only, no HTTP/RPC/log/artifact/embedding. No unavailable seam replacement or native code/permission/admission claim.
+
+Fixed env credential privately consumed with approved dated custody descriptor + actual verify, never globalenv/noarg success. All read children<=5s clipped same original30s wall/mono/abort; actual promise retention under existing stage scope, never timeout/dispose=settlement. Explicit writable metadata normalization before code; rejecttransfer/destructive/cache-on/unknownextras, existing fingerprints unchanged. Consolidated exact args/returns/queries/bounds must be validated by Root AFTER this ruling documentation and BEFORE product.
+
+Keep pre-T0 QA bridge/bootstrap-once/capsule/newintents, custody/sourceauthority, forwarding/mounts/publication/C3/all-writer composition separate. No drafttable misuse19fc… or owner question. Hosted Node22 behavioral RED/GREEN, actual workerd/DO/D1/SQLite newlogic with explicitly SYNTHETIC provider/custody boundary; scoped regressions/lint only. Temporary branch contents:read/no-secrets/no-artifacts qualifier EXCLUDED integration; separate B2-AB report with exact CAS/readbacks and STOP for fresh review. No runtime/provider/private reads/main/DDL/keys/window/Max/local work.
