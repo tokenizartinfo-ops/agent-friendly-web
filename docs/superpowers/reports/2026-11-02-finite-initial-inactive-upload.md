@@ -1,0 +1,23 @@
+# C2-B2a initial inactive upload — source implementation evidence
+
+Status: implementation in progress; SOURCE ONLY. Binding spec and plan: ../specs/2026-11-02-finite-initial-inactive-upload.md and ../plans/2026-11-02-finite-initial-inactive-upload.md.
+BASE c4696911f8895ae605da0512c77dc8d1a0e5acd0 / tree30646c600c01160b731a5ed834991e9be413fe78, branch feat/finite-native-cleanup-20261101, tokenizartinfo-ops/agent-friendly-web. Branch ref read back equal BASE before changes. Root is review owner; this task is sole writer.
+
+## Pre-code actual constructor / wire / journal / precondition / test table
+
+| Boundary | Actual supported source and selected implementation |
+|---|---|
+| Constructor and only call | mcp-qa-finite-initial-entry.mjs: existing public constructor stays; private nonexported publishInitialClosedVersion(ctx,env,entry,producer,result,parent) is invoked only after actual collect/assertCurrent/post-sync/assertCurrent. No stored data continuation or effect export. |
+| Source / bytes | Actual A result candidateBytes + script and compiled residency identity; assertCurrent original parent before every effect barrier. Distinct fixed historical baseline2607/7b5, QA_CLOUD_CLOSED_PINS.canary module315 and existing frozen historical receipt2a477. Pure baseline metadata qualification may be extracted/reused without adding any factual reader. |
+| Wire | Existing finitePublicProfileTemplate(canaryLive), qualifyFiniteConnectionProfile(closed_ui); exact existing export/SQLite/Container/resource IDs. Populate Access/client/project/limiter from actual A; original intent.initialDeadline expiry. Empty private policies, every enabled flag false; A-retained IDs remain bound in private manifest/SEND, no fresh IDs/window. JSON content_base64, exact baseline inherit descriptors, containers class_name only. Deny unknown raw/config/export fields. |
+| Preservation | Sanitized raw baseline metadata, normalized config and baseline module bytes are private append-only bounded deterministic chunks. Exact codec fields, hash-stamped manifests and chunks <=64KiB; no secret values or body in A/RPC/log/artifact. Native transaction final return -> actual sync -> exact readback; preserve existing keys/history. |
+| Journal | New afw.finite-initial-upload.v1 domain, deterministic keys per Entry/material. Distinct SEND, ACK, receipt. Final transaction return is sole new-SEND admission. No callback HTTP or outer inserted flag. Existing/unknown SEND denies another POST; exact readback after captured sync. ACK only actual successful returned UUID; GET same UUID and module/config/resource equality before receipt. |
+| Lifetime / promises | Existing original native30s/child<=5s/I0/custody/ceiling. Add parent retain API internal only; underlying native transaction/sync/get/fetch/body promises retained before races. Sticky unknown cannot become a new effect admission. No old45s helper. |
+| Static / live preconditions | Reader and publisher bindings both present/valid before Entry; capture/recheck transport, storage, env and source holders. Fixed actual token verify IDs9aa/057/status/not_before/expiry under original lease, narrowed custody. Fixed canary pointer before SEND and after uploaded readback, dated observations only. |
+| Tests | Extend real finite Workflow->DO SQLite+D1/A/residency fixture, actual JSON serialization with explicit SYN CF/GH/token/source pins/approval ceiling. RED for missing real upload and pre-Entry publisher; native faults at distinct upload SEND/sync/ACK/readback, restart/replay, original/child budget and immutable/private chunk stamping. Preserve B1 assertions, adapt its intentional extra sync count and fixture routes. Pure strict wire/codec rejection tests plus one stable actual compiler/residency/profile qualification. |
+
+PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT source-only branch / GitHub-hosted Node22; ORIGIN GitHub; RESOURCE_TYPE Git branch/tree and Actions; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION bounded code/test/docs commits and branch-only qualification; ROLLBACK retained exact BASE and append-only commits, no main change or provider mutation.
+
+Root scope ruling preserved: deploy=false immutable version creation does not require activation's global writer-drain / Workflow list-status gate. Old uncertainty is unchanged. Future activation, rollback, ownerSource and capsule must independently qualify inside the same winning invocation before return. No actual initial command until full composition, to avoid spending Entry on partial work. Latest/last100 catalog effects exist; pointers are dated observations, not future foreign-write proof.
+
+operationalReadiness=false; completePackage=false; PCoff=false.
