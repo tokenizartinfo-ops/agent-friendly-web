@@ -283,3 +283,18 @@ test('canary DELEGATED_RATE_LIMITER alone cannot qualify private QA owner prepar
  assert.equal((await f.call('/connections/finite-prepare')).status,503);
  assert.deepEqual(await f.json('/fixture/rows',{}),[]);
 });
+
+test('Task3 stage approval is immutable exact lookup over actual original owner decision',async t=>{
+ const f=await native(t),s=await f.screen();assert.equal((await f.submit(s)).status,202);
+ const all=await rows(f),pre=all.find(([k])=>k.endsWith(':record'))[1],snapshot=all.find(([k])=>k.endsWith(':source'))[1];
+ const record={purpose:'afw.finite-connection-stage-approval.v1',preconnectionId:pre.preconnectionId,sourceRevision:pre.sourceRevision,stage:'connection',ticketHash:snapshot.initialTicketHash,approvalHash:pre.approvalHash};
+ const put=arg=>f.json('/fixture/store',{method:'putStageApproval',arg});
+ assert.equal((await put(record)).result?.status,'recorded');
+ assert.equal((await put(record)).result?.status,'existing');
+ const got=await f.json('/fixture/store',{method:'readStageApproval',arg:{preconnectionId:pre.preconnectionId,stage:'connection'}});
+ assert.deepEqual(got.result,{status:'observed',record});
+ for(const change of [{stage:'notices'},{sourceRevision:'e'.repeat(40)},{ticketHash:'e'.repeat(64)},{approvalHash:'e'.repeat(64)},{preconnectionId:'e'.repeat(64)}]){
+  assert.equal((await put({...record,...change})).rejected,true);
+ }
+ assert.equal((await f.json('/fixture/store',{method:'readStageApproval',arg:{preconnectionId:pre.preconnectionId,stage:'notices'}})).result?.status,'absent');
+});
