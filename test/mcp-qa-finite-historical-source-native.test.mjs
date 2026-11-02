@@ -35,7 +35,7 @@ async function seed(db,x){
  for(const [id,generation,container,program,source,closed]of [['original','e'.repeat(64),x.original.containerId,x.original.programHash,x.original.sourceRevision,x.at+15000],['cancelled-old',null,x.ids.candidate,x.candidate.programHash,x.candidate.sourceRevision,x.start+5000]])await db.prepare('INSERT INTO dossier_node_process_closures VALUES(?,?,?,?,?,?,?)').bind(id,generation,container,program,source,'cloudflare/debian-trixie',closed).run();
  for(const [sequence,id,action,issued,expires]of [[1,'original','grant',x.at,x.at+10000],[2,'cancelled-old','grant',x.start,x.end],[3,'cancelled-old','revoke',x.start+4000,x.start+4000]])await db.prepare('INSERT INTO dossier_monitoring_consent_events VALUES(?,?,?,?,?,?,?,?,?,?,?,?)').bind(sequence,id,'synthetic-project','owner','client',x.events.resource,1,action,'afw.dossier-monitoring.v1','request-'+sequence,issued,expires).run();
 }
-async function harness(){
+async function harness(actualPins=false){
  const base={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_QA_VERSION:{id:QA},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-native-reader'},d1Databases:{RELEASE_DB:'history'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'History',useSQLite:true,uniqueKey:'history-b2'},AFW_RELEASE_EVENTS_NODE:{className:'Node',useSQLite:true,uniqueKey:'history-node-b2'}}};
  const mf=new Miniflare(convertV4MiniflareOptions({...base,script:'import{DurableObject}from"cloudflare:workers";export class History extends DurableObject{} export class Node extends DurableObject{} export default{fetch(){return new Response(null,{status:404})}};'}));
  const first=await mf.getBindings(),ns=first.AFW_RELEASE_EVENTS_NODE,ids={original:ns.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()},x=fixture(ids);x.ids=ids;
@@ -45,6 +45,7 @@ async function harness(){
  export class History extends DurableObject{
  async seed(rows){for(const[k,v]of rows)await this.ctx.storage.put(k,v);return true;}
  async snapshot(){return[...await this.ctx.storage.list()];}
+ async removeFixture(key){await this.ctx.storage.delete(key);}
  async read(mode='normal'){
  const controller=new AbortController(),parent=createFiniteOwnerRequestLease(new Request('https://fixture.invalid/',{signal:controller.signal}));let signalTimer;
  if(mode==='abort')signalTimer=setTimeout(()=>controller.abort(),5);
@@ -53,7 +54,7 @@ async function harness(){
  }
  async retention(){const parent=createFiniteOwnerRequestLease(new Request('https://fixture.invalid/')),a={lease:parent.lease};try{await observeFiniteOwnerStageWork({ctx:this.ctx,env:this.env,admission:a,originalLease:parent.lease},()=>read({ctx:this.ctx,env:this.env},parent.lease));}catch{}finally{parent.finish();}const next=createFiniteOwnerRequestLease(new Request('https://fixture.invalid/'));let blocked=false;try{await observeFiniteOwnerStageWork({ctx:this.ctx,env:this.env,admission:{lease:next.lease},originalLease:next.lease},async()=>{});}catch{blocked=true;}finally{next.finish();}return{blocked};}
  }export default{fetch(){return new Response(null,{status:404})}};`;
- const plugin={name:'explicit-synthetic-external-source-commitments',setup(b){b.onResolve({filter:/mcp-qa-finite-historical-source\.mjs$/},()=>({path:'historical-reader',namespace:'b2-source'}));b.onLoad({filter:/.*/,namespace:'b2-source'},()=>({contents:source,loader:'js',resolveDir:process.cwd()+'/lib'}));b.onLoad({filter:/mcp-confirmation-frozen-artifact\.json$/},()=>({contents:J(x.receipt),loader:'json'}));b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));b.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({contents:'export const QA_CLOUD_CLOSED_PINS='+J({...REAL_PINS,canary:x.pin})+';',loader:'js'}));}};
+ const plugin={name:'explicit-synthetic-external-source-commitments',setup(b){b.onResolve({filter:/mcp-qa-finite-historical-source\.mjs$/},()=>({path:'historical-reader',namespace:'b2-source'}));b.onLoad({filter:/.*/,namespace:'b2-source'},()=>({contents:source,loader:'js',resolveDir:process.cwd()+'/lib'}));if(actualPins)return;b.onLoad({filter:/mcp-confirmation-frozen-artifact\.json$/},()=>({contents:J(x.receipt),loader:'json'}));b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));b.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({contents:'export const QA_CLOUD_CLOSED_PINS='+J({...REAL_PINS,canary:x.pin})+';',loader:'js'}));}};
  const built=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],plugins:[plugin]});
  const f={x,mf,requests:[],mode:'normal',delay:0,versionReads:0};
  await mf.setOptions(convertV4MiniflareOptions({...base,script:built.outputFiles[0].text,outboundService:async req=>{
@@ -81,8 +82,43 @@ test('B2-AB actual native historical reader, private CF boundary is synthetic',a
  await t.test('documented defaults normalize with independent raw fingerprint',async()=>{f.mode='defaults';const r=await f.stub.read();assert.equal(r.ok,true,J(r));assert.notEqual(r.metadataProof.rawConfigurationHash,r.metadataProof.normalizedConfigurationHash);assert.deepEqual(r.metadataProof.normalizations,['cache_options','exports.AfwNodeControl.state','exports.AfwOwnEventNode.state','exports.default.cache','exports.default.state']);f.mode='normal';});
  for(const mode of ['wrong-token','expired-token','transfer','cache-on','secret-value','unknown','corrupt-code','missing-slot','redirect','drift'])await t.test('deny '+mode,async()=>{f.mode=mode;f.versionReads=0;const r=await f.stub.read();assert.equal(r.ok,false);assert.match(r.message,/^Finite historical source unavailable:/);assert.equal(r.message.includes('NEVER-HASH'),false);f.mode='normal';});
  await t.test('extra foreign closure is not filtered away',async()=>{await f.db.prepare('INSERT INTO delegated_access_grants SELECT ?,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at,exchanged_at FROM delegated_access_grants WHERE id=?').bind('foreign','cancelled-old').run();await f.db.prepare('INSERT INTO dossier_node_process_closures VALUES(?,?,?,?,?,?,?)').bind('foreign',null,'a'.repeat(64),'b'.repeat(64),'c'.repeat(40),'cloudflare/debian-trixie',Date.now()-1000).run();assert.equal((await f.stub.read()).ok,false);await f.db.exec('DROP TRIGGER dossier_node_process_close_no_delete');await f.db.prepare('DELETE FROM dossier_node_process_closures WHERE grant_id=?').bind('foreign').run();});
+
+ await t.test('actual D1 rejects foreign scope, malformed chronology and nonlatest monitor',async()=>{
+  for(const [column,bad]of [['user_id','foreign'],['scopes_json','["afw:evidence:read"]'],['revoked_at',''],['expires_at','2099-01-01T00:00:00.000Z']]){
+   const old=(await f.db.prepare('SELECT '+column+' AS v FROM delegated_access_grants WHERE id=?').bind('cancelled-old').first()).v;
+   await f.db.prepare('UPDATE delegated_access_grants SET '+column+'=? WHERE id=?').bind(bad,'cancelled-old').run();
+   assert.equal((await f.stub.read()).ok,false,column);
+   await f.db.prepare('UPDATE delegated_access_grants SET '+column+'=? WHERE id=?').bind(old,'cancelled-old').run();
+  }
+  await f.db.prepare('INSERT INTO dossier_monitoring_consent_events VALUES(?,?,?,?,?,?,?,?,?,?,?,?)').bind(4,'cancelled-old','synthetic-project','owner','client',f.x.events.resource,2,'grant','afw.dossier-monitoring.v1','late-grant',f.x.start+6000,f.x.end).run();
+  assert.equal((await f.stub.read()).ok,false,'a later grant supersedes the prior revoke');
+  await f.db.exec('DROP TRIGGER dossier_monitoring_no_delete');await f.db.prepare('DELETE FROM dossier_monitoring_consent_events WHERE sequence=4').run();
+ });
+ await t.test('exactly eight actual cancellations qualify; ninth is rejected without filtering',async()=>{
+  const added=[];
+  for(let n=0;n<8;n++){
+   const grant='historical-'+n;added.push(grant);
+   await f.db.prepare('INSERT INTO delegated_access_grants SELECT ?,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at,exchanged_at FROM delegated_access_grants WHERE id=?').bind(grant,'cancelled-old').run();
+   await f.db.prepare('INSERT INTO dossier_node_process_closures VALUES(?,?,?,?,?,?,?)').bind(grant,null,String(n+1).repeat(64),'a'.repeat(64),'b'.repeat(40),'cloudflare/debian-trixie',f.x.start+5000).run();
+   for(const [offset,action,issued,expires]of [[0,'grant',f.x.start,f.x.end],[1,'revoke',f.x.start+4000,f.x.start+4000]])await f.db.prepare('INSERT INTO dossier_monitoring_consent_events VALUES(?,?,?,?,?,?,?,?,?,?,?,?)').bind(10+n*2+offset,grant,'synthetic-project','owner','client',f.x.events.resource,1,action,'afw.dossier-monitoring.v1','history-'+n+'-'+offset,issued,expires).run();
+   if(n===6){const r=await f.stub.read();assert.equal(r.ok,true,JSON.stringify(r));assert.equal(r.history.cancellations.length,8);assert.equal(r.history.cancellations.find(z=>z.grantId==='historical-0').programHash,'a'.repeat(64),'each cancellation keeps its own actual program');}
+  }
+  assert.equal((await f.stub.read()).ok,false);
+  for(const grant of added){await f.db.prepare('DELETE FROM dossier_monitoring_consent_events WHERE grant_id=?').bind(grant).run();await f.db.prepare('DELETE FROM dossier_node_process_closures WHERE grant_id=?').bind(grant).run();await f.db.prepare('DELETE FROM delegated_access_grants WHERE id=?').bind(grant).run();}
+ });
+ await t.test('stored null and corrupted actual legacy journal never become absent history',async()=>{
+  await f.stub.seed([[keys[3],null]]);assert.equal((await f.stub.read()).ok,false);
+  await f.stub.removeFixture(keys[3]);
+  await f.stub.seed([[keys[1],{...f.x.rows[1][1],phase:'complete',completedAt:f.x.start+1}]]);assert.equal((await f.stub.read()).ok,false);
+  await f.stub.seed([f.x.rows[1]]);assert.equal((await f.stub.read()).ok,true);
+ });
+
  await t.test('later active new grant and Save do not gate historical reads',async()=>{await f.db.prepare('INSERT INTO delegated_access_grants VALUES(?,?,?,?,?,?,?,?,?,?)').bind('new-active','owner','client','synthetic-project',f.x.events.resource,'["afw:project:read"]',new Date().toISOString(),new Date(Date.now()+100000).toISOString(),'',new Date().toISOString()).run();assert.equal((await f.stub.read()).ok,true);await f.db.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?').bind(new Date().toISOString(),'new-active').run();assert.equal((await f.stub.read()).ok,true);});
  await t.test('original aborted or expired parent denies without a renewed lease',async()=>{const n=f.requests.length;assert.equal((await f.stub.read('expired')).ok,false);assert.equal(f.requests.length,n);f.delay=30;assert.equal((await f.stub.read('abort')).ok,false);f.delay=0;});
  assert.deepEqual(await f.stub.snapshot(),before);assert.deepEqual((await f.db.prepare('SELECT * FROM dossier_node_process_closures ORDER BY grant_id').all()).results,dbBefore);assert.equal((await f.mf.dispatchFetch('https://fixture.invalid')).status,404);
  }finally{await f.mf.dispose();}
+});
+
+test('production fixed commitments reject synthetic historical bytes; no external pin override',async()=>{
+ const f=await harness(true);try{const r=await f.stub.read();assert.equal(r.ok,false);assert.equal(r.message,'Finite historical source unavailable:metadata');}finally{await f.mf.dispose();}
 });

@@ -24,6 +24,8 @@ jobs:
         run: node --test test/mcp-qa-finite-historical-source-native.test.mjs
       - name: Scoped historical and metadata regressions
         run: node --test test/mcp-qa-original-pins.test.mjs test/mcp-qa-historical-identity.test.mjs test/mcp-qa-legacy-predecessor.test.mjs test/mcp-qa-cloud-closed-http.test.mjs test/mcp-release-known-cancellation.test.mjs test/dossier-event-rpc-authority.test.mjs test/mcp-successor-retirement-host.test.mjs test/mcp-qa-original-pins-native.test.mjs test/mcp-qa-historical-identity-native.test.mjs
+      - name: Affected B1 compiler and native decoder graph measurement
+        run: node --test test/mcp-qa-finite-candidate-residency.test.mjs test/build-finite-native-package.test.mjs
       - name: Scoped lint
         if: always()
         run: npx eslint lib/mcp-qa-finite-historical-source.mjs lib/dossier-event-policy-data.mjs lib/dossier-event-rpc-authority.mjs lib/mcp-own-retirement-host.mjs test/mcp-qa-finite-historical-source-native.test.mjs
