@@ -1,15 +1,15 @@
-# Branch-only Task4 source qualifier; EXCLUDE from eventual integration.
-name: Finite C2 Task4 temporary source qualifier
+# Branch-only T5-B1 source qualifier; EXCLUDE from eventual integration.
+name: Finite T5-B1 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-policy-setup*.mjs', 'lib/mcp-qa-finite-policy-transport.mjs', 'lib/mcp-qa-finite-owner-preparation.mjs', 'lib/mcp-qa-finite-preparation-store.mjs', 'worker/independent-closure/finite.mjs', 'test/mcp-qa-finite-policy-setup*.test.mjs', 'test/fixtures/finite-owner-native.mjs', 'test/fixtures/finite-transport-native.mjs', 'test/mcp-qa-finite-preparation-store-native.test.mjs', 'test/fixtures/finite-policy-setup*.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['scripts/build-finite-native-package.mjs', 'lib/mcp-qa-finite-candidate-residency.mjs', 'worker/independent-closure/finite.mjs', 'test/mcp-qa-finite-candidate-residency.test.mjs', 'test/build-finite-native-package.test.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
   focused:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 7
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,10 +20,10 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Task4 setup and affected contracts
-        run: node --test test/mcp-qa-finite-policy-setup-facts-native.test.mjs test/mcp-qa-finite-policy-setup-native.test.mjs test/mcp-qa-finite-seed-http.test.mjs test/mcp-qa-finite-publication-bridge.test.mjs test/mcp-qa-finite-trial-control-native.test.mjs test/mcp-qa-finite-preparation-store-native.test.mjs
-      - name: Shared engine and factual reader regression
-        run: node --test test/mcp-qa-finite-policy-transport.test.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs
+      - name: B1 actual compiler and private native decoder
+        run: node --test test/mcp-qa-finite-candidate-residency.test.mjs test/build-finite-native-package.test.mjs
+      - name: Existing source profile and native closed entrypoints
+        run: node --test test/mcp-qa-finite-profile-native.test.mjs test/mcp-qa-finite-profile.test.mjs
       - name: Scoped changed-source lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-policy-setup.mjs lib/mcp-qa-finite-policy-setup-source.mjs lib/mcp-qa-finite-policy-transport.mjs lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-preparation-store.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-policy-setup-native.test.mjs test/fixtures/finite-policy-setup-worker.mjs test/fixtures/finite-policy-setup-native.mjs test/fixtures/finite-policy-setup-facts-worker.mjs test/fixtures/finite-policy-setup-facts-source.mjs test/fixtures/finite-policy-setup-facts-seed.mjs test/fixtures/finite-owner-native.mjs test/fixtures/finite-transport-native.mjs test/mcp-qa-finite-policy-setup-facts-native.test.mjs
+        run: npx eslint scripts/build-finite-native-package.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-candidate-residency.test.mjs
