@@ -16,7 +16,7 @@ const M='c'.repeat(40),TREE='d'.repeat(40),COMMAND=9001,ONCE='afw.finite-initial
 async function harness(mode='normal'){
  const base={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_QA_VERSION:{id:UUID},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-native-reader'},d1Databases:{RELEASE_DB:'initial-db'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'Initial',useSQLite:true,uniqueKey:'initial-c2a'},AFW_RELEASE_EVENTS_NODE:{className:'Node',useSQLite:true,uniqueKey:'initial-node'}}};
  const mf=new Miniflare(convertV4MiniflareOptions({...base,script:'import{DurableObject}from"cloudflare:workers";export class Initial extends DurableObject{} export class Node extends DurableObject{} export default{fetch(){return new Response(null,{status:404})}};'}));
- const b=await mf.getBindings(),ns=b.AFW_RELEASE_EVENTS_NODE,x=initialHistoryFixture({original:ns.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()});x.ids={original:x.original.containerId,candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()};
+ const b=await mf.getBindings(),ns=b.AFW_RELEASE_EVENTS_NODE,x=initialHistoryFixture({original:ns.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()},mode);x.ids={original:x.original.containerId,candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()};
  const program='SYNTHETIC actual resident candidate program',script='// SYNTHETIC B1 candidate bytes\nexport default{};',bytes=Buffer.from(script),compressed=gzipSync(bytes,{level:9,mtime:0}),resident={purpose:'afw.finite-candidate-residency.v1',encoding:'gzip-base64.v1',sourceRevision:M,sourceTree:TREE,sourceCheck:'git-inputs-before-after-v1',programHash:sha(program),module:{name:'index.mjs',sha256:sha(bytes),bytes:bytes.length},compressedSha256:sha(compressed),compressedBytes:compressed.length,content:compressed.toString('base64')};
  const w=await bootstrapWorld({sourceRevision:M,sourceTree:TREE,modules:{qaLive:{module:{name:'index.mjs',sha256:sha('export default{};'),bytes:17,exports:[...finitePublicProfileTemplate('qaLive').exports]}}},files:{'qaLive/index.mjs':'export default{};'}});
  const created=new Date(Math.floor((Date.now()-1000)/1000)*1000).toISOString().replace('.000Z','Z'),command={id:COMMAND,user:{id:290715446,login:'tokenizartinfo-ops',type:'User'},author_association:'OWNER',body:'/afw-qa-finite-prepare v1 '+M+' '+UUID,created_at:created,updated_at:created,issue_url:GH+'/issues/497'};w.map.set('/issues/comments/'+COMMAND,command);
@@ -42,6 +42,8 @@ async function harness(mode='normal'){
   let result;
   try{
    if(mode==='held-parent')await new Promise(r=>setTimeout(r,60));
+   if(mode==='aborted')abort.abort();
+   if(mode==='holder-drift')this.env.AFW_QA_VERSION={id:this.env.AFW_QA_VERSION.id};
    result=await producer.collect({commandId:9001},lease);
    if(result?.purpose!=='afw.finite-initial-material-result.v1')return{ok:false,status:result?.status};
    producer.assertCurrent(result,lease);
@@ -112,7 +114,7 @@ async function harness(mode='normal'){
   let value;
   if(req.url.startsWith(GH)){
    assert.equal(req.headers.get('authorization'),null);value=structuredClone(await w.get(req.url.slice(GH.length)));
-   if(req.url===GH+'/issues/comments/'+COMMAND){f.commandReads++;if(mode==='wrong-owner')value.user.id=1;if(mode==='edited')value.updated_at=new Date(Date.parse(created)+1).toISOString();if(mode==='expired-command')value.created_at=value.updated_at=new Date(Date.now()-300001).toISOString();if(mode==='command-drift'&&f.commandReads===2)value.body+=' '; }
+   if(req.url===GH+'/issues/comments/'+COMMAND){f.commandReads++;if(mode==='wrong-owner')value.user.id=1;if(mode==='wrong-repository')value.issue_url='https://api.github.com/repos/other/repo/issues/497';if(mode==='wrong-issue')value.issue_url=GH+'/issues/498';if(mode==='wrong-source')value.body=value.body.replace(M,'e'.repeat(40));if(mode==='wrong-qa')value.body=value.body.replace(UUID,'44444444-4444-4444-8444-444444444444');if(mode==='edited')value.updated_at=new Date(Date.parse(created)+1).toISOString();if(mode==='expired-command')value.created_at=value.updated_at=new Date(Date.now()-300001).toISOString();if(mode==='command-drift'&&f.commandReads===2)value.body+=' '; }
   }else{
    assert.equal(req.headers.get('authorization'),'Bearer synthetic-native-reader');
    let result;
@@ -125,6 +127,8 @@ async function harness(mode='normal'){
  }}));
  const bindings=await mf.getBindings();f.stub=bindings.AFW_INDEPENDENT_CLOSURE.get(bindings.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB');
  await seedInitialHistory(f.db,x);await f.stub.seed(x.rows);f.resident=resident;
+ if(mode==='invalid-owned-revision')await f.db.prepare('UPDATE site_projects SET revision=0').run();
+ if(mode==='wrong-owned-subject')await f.db.prepare("UPDATE site_projects SET user_id='another-owner'").run();
  f.namespace=bindings.AFW_INDEPENDENT_CLOSURE;return f;
 }
 test('C2-A actual native B1+B2+C1 composition retains private factual material, never authority',async()=>{
@@ -143,6 +147,14 @@ test('C2-A actual native B1+B2+C1 composition retains private factual material, 
   const projection=finiteData({...original,artifact:identity});
   const task4=sha('afw.finite-original-context.v1\n'+initialCanonical(projection));
   assert.equal(initialHash('afw.finite-original-context.v1',finiteData(decoded.originalContext)),task4);
+  for(const mutate of [
+   x=>x.originalContext.artifact.script='unexpected',
+   x=>x.qaBootstrap.primaryEvidence.jobId++,
+   x=>x.qaBootstrap.currentPointer.versionId='44444444-4444-4444-8444-444444444444',
+   x=>x.historicalEvidence.reader.sourceRevision='e'.repeat(40),
+   x=>x.ownerSelection.extra=true,
+   x=>x.materialHash='f'.repeat(64)
+  ]){const invalid=structuredClone(decoded);mutate(invalid);assert.throws(()=>encodeFiniteInitialMaterialRecord('InitialMaterial',invalid));}
   const oversized=structuredClone(decoded);oversized.originalContext.legacy.control+=' '.repeat(33000);
   assert.ok(Buffer.byteLength(initialCanonical(oversized))<65536,'whole material still below 64KiB');
   assert.throws(()=>validateFiniteInitialOriginalContext(oversized.originalContext));
@@ -164,8 +176,8 @@ test('C2-A actual native B1+B2+C1 composition retains private factual material, 
   const claim=after.find(x=>x[0]===ONCE)[1],calls=f.requests.length;const replay=await f.stub.run();assert.equal(replay.ok,false);assert.equal((await f.stub.snapshot()).find(x=>x[0]===ONCE)[1],claim);assert.ok(f.requests.length-calls<=1);
  }finally{await f.mf.dispose();}
 });
-for(const mode of ['wrong-owner','edited','expired-command','command-drift'])test('C2-A denies '+mode+' without material/selector/ACK',async()=>{
- const f=await harness(mode);try{const r=await f.stub.run();assert.equal(r.ok,false);const rows=await f.stub.snapshot();assert.equal(rows.some(x=>/:(?:selector|ack)$/.test(x[0])),false);}finally{await f.mf.dispose();}
+for(const mode of ['wrong-owner','wrong-repository','wrong-issue','wrong-source','wrong-qa','edited','expired-command','command-drift','missing-access','missing-limiter','invalid-limiter','invalid-owned-revision','wrong-owned-subject','aborted','holder-drift'])test('C2-A denies '+mode+' without material/selector/ACK',async()=>{
+ const f=await harness(mode);try{const r=await f.stub.run(mode);assert.equal(r.ok,false);const rows=await f.stub.snapshot();assert.equal(rows.some(x=>/:(?:selector|ack)$/.test(x[0])),false);}finally{await f.mf.dispose();}
 });
 test('C2-A partially consumed original parent aborts held child, retains real promise and writes nothing late',async()=>{
  const f=await harness('held-parent');try{

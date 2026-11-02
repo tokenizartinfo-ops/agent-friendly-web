@@ -6,7 +6,7 @@ import {restorationConfigurationHash} from '../../lib/mcp-restoration-configurat
 const sha=x=>createHash('sha256').update(x).digest('hex'),J=JSON.stringify;
 const ACCOUNT='85d0d5dadac3341a564f22ce885e9eec',APP='d6fc71552de7494a863aca20365a572d',VERSION='2607abae-cec3-4e35-89eb-8b8572262b54',QA='11111111-1111-4111-8111-111111111111';
 const keys=['afw.canary-restoration-control.v1','afw.private-prepared-dispatch.v1','afw.private-reduction-dispatch.v1','afw.successor-canary-restoration.v1','afw.successor-retirement-handoff.v1'];
-export function initialHistoryFixture(ids){
+export function initialHistoryFixture(ids,mode){
  const at=Date.now()-600000,start=at+20000,end=start+60000,script='//'+('"'.repeat(1830100))+'\nexport default{};',hash=sha(script),original={containerId:ids.original,applicationId:APP,programHash:'1'.repeat(64),sourceRevision:'2'.repeat(40)},candidate={trialId:'3'.repeat(64),programHash:'4'.repeat(64),sourceRevision:'5'.repeat(40),startAt:start,expiresAt:end,budget:1};
  const events={grantId:'cancelled-old',subject:'owner',projectId:'synthetic-project',clientId:'client',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',startAt:start,expiresAt:end};
  const scope={accountId:ACCOUNT,workerName:'agent-friendly-web-delegated-canary',namespaceId:APP,applicationId:APP,ownerRef:'6'.repeat(64),projectRef:'7'.repeat(64),resource:events.resource};
@@ -15,6 +15,9 @@ export function initialHistoryFixture(ids){
  const bindings=[...Object.entries({AFW_DOSSIER_SUCCESSOR_POLICY:J(successor),AFW_DOSSIER_EVENTS_POLICY:J(events),AFW_DOSSIER_RETIREMENT_POLICY:J(retirement),AFW_OAUTH_PILOT_CLIENT_ID:events.clientId,AFW_OAUTH_PILOT_PROJECT_ID:events.projectId,AFW_OAUTH_RESOURCE:events.resource,AFW_OAUTH_ISSUER:'https://delegated-canary.agentfriendlyweb.dev',AFW_DOSSIER_EVENTS_NODE_NAME:'afw-own-event-first-successor-v1'}).map(([name,text])=>({name,type:'plain_text',text})),{name:'DB',type:'d1',id:'6a728254-1494-4039-802e-b39288a55fcc'},{name:'AFW_DOSSIER_EVENTS_NODE',type:'durable_object_namespace',class_name:'AfwOwnEventNode',namespace_id:APP},{name:'OAUTH_KV',type:'kv_namespace',namespace_id:'6b94ff702e504e14a7730cee73a0f6ff'},{name:'AFW_DOSSIER_EVENTS_CUSTODY_KEY',type:'secret_text'}];
  for(const name of ['AFW_DELEGATED_OAUTH_ENABLED','AFW_OAUTH_REFRESH_ENABLED','AFW_DOSSIER_EVENTS_ENABLED','AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED','AFW_DOSSIER_MONITORING_OWNER_ENABLED','AFW_DOSSIER_OWN_SAVE_ENABLED','AFW_DOSSIER_SUCCESSOR_ENABLED','AFW_DOSSIER_RETIREMENT_READ_ENABLED'])bindings.push({name,type:'plain_text',text:'false'});
  bindings.push({name:'ACCESS_TEAM_DOMAIN',type:'plain_text',text:'synthetic-team.cloudflareaccess.com'},{name:'ACCESS_AUD',type:'plain_text',text:'synthetic-audience'},{name:'DELEGATED_RATE_LIMITER',type:'ratelimit',namespace_id:'12345',simple:{limit:10,period:60}});
+ if(mode==='missing-access')bindings.splice(bindings.findIndex(b=>b.name==='ACCESS_AUD'),1);
+ if(mode==='missing-limiter')bindings.splice(bindings.findIndex(b=>b.name==='DELEGATED_RATE_LIMITER'),1);
+ if(mode==='invalid-limiter')bindings.find(b=>b.name==='DELEGATED_RATE_LIMITER').simple.period=42;
  while(bindings.length<29)bindings.push({name:'HISTORICAL_EXTRA_'+bindings.length,type:'plain_text',text:''});
  const container='agent-friendly-web-delegated-canary-afwowneventnode';
  const cfg={compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat','global_fetch_strictly_public'],main_module:'index.mjs',usage_model:'standard',containers:[{class_name:'AfwOwnEventNode',name:container}],exports:{default:{type:'worker'},AfwNodeControl:{type:'worker'},AfwOwnEventNode:{type:'durable-object',storage:'sqlite',container}},bindings};
