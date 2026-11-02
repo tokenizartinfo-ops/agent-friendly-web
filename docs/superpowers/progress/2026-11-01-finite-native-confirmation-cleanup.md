@@ -1106,3 +1106,8 @@ Root timing clarification preserved: inactive closed_ui uses original I0+5min, n
 ## 2026-11-02 — B2a fresh review; fix round 1/5 opened
 
 Fresh reviewer SpecPASS/QualityNeedsFixes, noCritical. Important: verbatim historical qualification duplicated in lib/mcp-qa-finite-historical-source.mjs; extract one private pure qualifier, preserve callers' outputs/policy. No observed behavioral divergence, no spec conflict; Root accepts finding and resumes original implementer. Cover amended historical-source and upload-wire/native consumers proportionally, record commands/output in same report before scoped same-reviewer re-review. Minor baseline warnings deferred to wholebranch; inconsistent report status included in doc correction. BASE previous-reviewhead39f0b726. No main/runtime/provider/Max action; allreadinessfalse.
+
+
+## 2026-11-02 — B2a fix round 1 implemented; scoped review pending
+
+Code56c04288a7b4a3574511e8013d37e0483e6b94ea/docs893d29409886b1af7b825f9a3175f5083385b831. Root actual41548928626/job125631300881/attempt1/head56c04288SUCCESS:36historical/parity+9actualuploadconsumersPASS0fail/cancel/skip/lintclean/artifacts0. One pure private historical qualifier shared bybothcallers; unchangedimports/exports, distinctoutputs/policy preserved. Statusdoc corrected. Existingwarningsdeferred. No newcompile;5705bytes stayearliersource evidence. Fullscoped6filepatch39f0b726..893d294 packaged; same reviewer pending. Historical primary/source/build andexactguardresult qualified separately in reports/2026-11-02-finite-historical-writer-qualification.es.md: thisrestoreinvocationBLOCKEDbeforeSEND, olddispatchuncertainretained. No universaldrain or9aacapability claim. No runtime/main/Maxeffects.
