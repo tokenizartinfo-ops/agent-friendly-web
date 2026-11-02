@@ -7,7 +7,7 @@ import {finiteCliSyntheticSource} from './fixtures/finite-http-module.mjs';
 import {finiteObserverInstanceId} from '../lib/mcp-qa-finite-observer.mjs';
 import {validateQaFiniteConfirmationCommand} from '../lib/mcp-qa-cloud-lifecycle-admission.mjs';
 const hash=s=>createHash('sha256').update(s).digest('hex');
-async function fixture(mode='normal',offset=0){
+async function fixture(mode='normal',offset=100){
  const T0=Date.now(),sha='b'.repeat(40),actor={id:290715446,login:'tokenizartinfo-ops',type:'User'},context={repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/main',eventName:'issue_comment',runId:'11',runAttempt:'1',sourceRevision:sha};
  const event={action:'created',repository:{id:1347578006,full_name:context.repository},issue:{number:497},sender:actor,comment:{id:123,body:'/afw-qa-finite-confirmation v1 '+sha,created_at:new Date(T0).toISOString(),author_association:'OWNER',user:actor}};
  const a=validateQaFiniteConfirmationCommand({event,context,now:()=>T0}),f=await cfFiniteFixture({at:T0,configure:p=>{p.intentId=a.intentId;p.workflows.bootstrap=finiteObserverInstanceId({intentId:p.intentId,sourceRevision:sha});}});
@@ -34,9 +34,9 @@ async function fixture(mode='normal',offset=0){
  return {result,reads,sleeps,writes,all,f,hash};
 }
 test('actual CLI waits for attended observer until 50s after successful primary seed; GET only',async()=>{
- const r=await fixture();assert.equal(r.result.status,'ready');assert.deepEqual(r.reads.slice(0,26),Array.from({length:26},(_,i)=>i*2000));assert.ok(r.writes.some(x=>x.path==='afw-finite-plan.json'));assert.equal(r.all.some(x=>x.method!=='GET'&&x.url.includes('api.cloudflare.com')),false);
+ const r=await fixture();assert.equal(r.result.status,'ready');assert.deepEqual(r.reads.slice(0,25),Array.from({length:25},(_,i)=>(i+1)*2000));assert.ok(r.writes.some(x=>x.path==='afw-finite-plan.json'));assert.equal(r.all.some(x=>x.method!=='GET'&&x.url.includes('api.cloudflare.com')),false);
 });
-test('absolute slots skip elapsed time without catch-up bursts',async()=>{const r=await fixture('skip');assert.equal(r.result.status,'ready');assert.equal(r.reads[0],0);assert.equal(r.reads[1],6000);});
-test('never observed consumes at most 35 nonzero-budget slots; 70s starts no network',async()=>{const r=await fixture('never');assert.equal(r.result.status,'admin_pending');assert.deepEqual(r.reads,Array.from({length:35},(_,i)=>i*2000));});
+test('absolute slots skip elapsed time without catch-up bursts',async()=>{const r=await fixture('skip');assert.equal(r.result.status,'ready');assert.equal(r.reads[0],2000);assert.equal(r.reads[1],6000);});
+test('never observed consumes at most 35 nonzero-budget slots; 70s starts no network',async()=>{const r=await fixture('never');assert.equal(r.result.status,'admin_pending');assert.deepEqual(r.reads,Array.from({length:34},(_,i)=>(i+1)*2000));});
 test('zero original budget starts no network',async()=>{const r=await fixture('normal',70000);assert.equal(r.result.status,'admin_pending');assert.equal(r.all.length,0);});
 for(const mode of ['missing-seed','auth','unknown','bad404','authmask','generic404','extra404','oversize404','transport','setup-missing','setup-running','setup-bad-hash'])test('adoption denies '+mode+' without catch-all retry',async()=>{const r=await fixture(mode,50000);assert.equal(r.result.status,'admin_pending');assert.equal(r.sleeps.length,0);assert.ok(r.reads.length<=1);assert.equal(r.all.some(x=>x.method!=='GET'&&x.url.includes('api.cloudflare.com')),false);});
