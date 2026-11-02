@@ -65,3 +65,13 @@ for(const mode of ['success','at-last-create'])test('finite nominal original eve
 });
 for(const mode of ['early','late','future','queued-expired','wrong-payload','wrong-id','schedule','wrong-name','timestamp-not-date','missing-source','hydration-expired','mutated-event','wrong-source','wrong-plan'])test('finite nominal rejects '+mode+' before Known',async()=>{const r=await run(mode);assert.equal(r.calls,0);assert.equal(r.result.status,'blocked');assert.equal(r.result.purpose,undefined);});
 test('Known throw cannot fabricate finite result envelope',async()=>{const r=await run('known-throws');assert.equal(r.calls,1);assert.equal(r.result.purpose,undefined);});
+
+test('finite technical result reader is strict, bounded and preserves actual Known result',async()=>{
+ const api=await import('../lib/mcp-qa-finite-confirmation.mjs');
+ assert.equal(typeof api.validatePrivateQaFiniteConfirmationResult,'function','finite output reader must exist');
+ const {finiteLauncherInstanceId}=await import('../lib/mcp-qa-finite-launch-records.mjs'),intentId='result-fixture',sourceRevision='b'.repeat(40),bundleHash='6'.repeat(64);
+ const e={intentId,finitePlanHash:'1'.repeat(64),controlHash:'2'.repeat(64),sourceRevision,qaVersionId:'11111111-1111-4111-8111-111111111111',actorId:'a'.repeat(64),launcherId:finiteLauncherInstanceId({intentId,sourceRevision}),nominalId:'afw-release-'+bundleHash,bundleHash,preparedHash:'3'.repeat(64),sendHash:'4'.repeat(64),bindingHash:'5'.repeat(64),createdAt:123000};
+ const provenance=Object.fromEntries(Object.entries(e).filter(([k])=>!['actorId','launcherId'].includes(k))),result={status:'blocked',mayRetry:false,operationalReadiness:false},value={purpose:'afw.finite-confirmation-result.v1',provenance,result};
+ assert.equal(api.validatePrivateQaFiniteConfirmationResult(value,e).result,result);
+ for(const alter of [v=>({...v,extra:true}),v=>({...v,provenance:{...v.provenance,sendHash:'f'.repeat(64)}}),v=>({...v,result:Object.create({hidden:true})}),v=>({...v,result:{padding:'x'.repeat(65536)}}),v=>{const c={};c.self=c;return {...v,result:c};},v=>({...v,result:{get status(){throw Error('must not invoke getter');}}})])assert.throws(()=>api.validatePrivateQaFiniteConfirmationResult(alter(value),e));
+});
