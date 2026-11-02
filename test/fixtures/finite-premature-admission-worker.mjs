@@ -59,12 +59,13 @@ export class Native {
     async run(){
      if(!sql.startsWith('INSERT INTO dossier_node_process_admissions'))return q.run();
      runs++;
+     if(mode==='rerun-zero-prior'&&runs===1)await mutate();
      if(['race-reservation','rerun-inserted-zero','rerun-unknown-zero'].includes(mode)&&runs===(mode==='race-reservation'?1:2))await mutate();
      if(mode==='race-consent')await nativeDb.prepare("UPDATE delegated_access_grants SET revoked_at=? WHERE id=?").bind(new Date().toISOString(),s.grantId).run();
      if(mode==='throw')throw Object.assign(Error('SYN knownNoAdmissionFailure'),{code:'known_no_admission',knownNoAdmission:true});
      if(mode==='successfalse')return {success:false,meta:{changes:0}};
      if(mode==='malformed')return {success:true,meta:{}};
-     if(mode==='pending'){held=new Promise(resolve=>{release=resolve;});await held;}
+     if(mode==='pending'){held=new Promise(resolve=>{release=resolve;});pendingObservation={settled:false,closes,launches};queueMicrotask(()=>{offset=originalDeadline-Date.now()+1;release();});await held;}
      if(mode==='unique')await q.run();
      const result=await q.run();
      if(mode==='lostack'||mode==='rerun-unknown-zero'&&runs===1)throw Error('SYN lost admission ACK');
@@ -92,7 +93,7 @@ export class Native {
   // Baseline has no source helper: omit the optional field for meaningful causal RED.
   const gate=createFiniteAdmissionGate({...gateOptions,...(primary.admissionSource&&mode!=='no-source'?{admissionSource:primary.admissionSource}:{})});
   const reserve=()=>createSuccessorReservation({db:nativeDb,original,candidate:resolved.candidate,readRetirement:retirement,now}).reserve();
-  if(!['missing','reservation-pending','prior-admission','prior-launch','prior-custody','prior-row','prior-launch-row','source-shapes'].includes(mode))await reserve();
+  if(!['missing','reservation-pending','prior-admission','prior-launch','prior-custody','prior-row','source-shapes'].includes(mode))await reserve();
   if(mode==='wrong-row'){
    await nativeDb.prepare('DROP TRIGGER dossier_successor_no_update').run();
    await nativeDb.prepare('PRAGMA ignore_check_constraints = ON').run();
@@ -117,7 +118,7 @@ export class Native {
   const storage=mode.startsWith('rerun-')?{transaction:async fn=>{
    if(rerun)return ctx.storage.transaction(fn);
    try{return await ctx.storage.transaction(async tx=>{const out=await fn(tx);if(runs===1){rerun=true;throw Error('SYN retriable callback abort after insert');}return out;});}
-   catch(error){if(!rerun&&runs!==1)throw error;rerun=true;return ctx.storage.transaction(fn);}
+   catch(error){if(!rerun&&runs!==1)throw error;if(mode==='rerun-zero-prior')await ctx.storage.put('afw.node-process-custody.v1:original',{malformed:true});rerun=true;return ctx.storage.transaction(fn);}
   }}:['read-held','persist-fail'].includes(mode)?guardedStorage:ctx.storage;
   const hostCtx={storage,id:ctx.id,container};
   const config={enabled:true,db,context,projectId:s.projectId,projectionSecret:'z'.repeat(32),custodyKey:Buffer.alloc(32,7),ctx:hostCtx,program,sourceRevision,window:{startAt:s.startAt,expiresAt:s.expiresAt},
@@ -141,10 +142,6 @@ export class Native {
   }else if(['valid','ordinary','reuse'].includes(mode)){
    const direct=createNodeProcessCustody({...(mode!=='ordinary'?{finiteGate:gate}:{}),enabled:true,db,context,projectId:s.projectId,projectionSecret:'z'.repeat(32),storage:ctx.storage,custodyKey:Buffer.alloc(32,7),containerId:ctx.id.toString(),programHash:s.programHash,sourceRevision,image:'cloudflare/debian-trixie',window:config.window,now,runtime:{launch:async boot=>{const {key:ignored,...m}=boot;void ignored;manifest=m;launches++;},observe:async()=>({...manifest,running:true}),close:async()=>{closes++;}}});
    try{result=await direct.start();if(mode==='reuse'){reuseBefore=await snapshot();reused=await direct.start();reuseAfter=await snapshot();await gate.seal();try{await direct.start();}catch{sealedDenied=true;}}}catch(e){error=e.message;}
-  }else if(mode==='pending'){
-   let settled=false;const work=host.subscribe(params(auth.projectRef)).then(v=>{result=v;settled=true;},e=>{error=e.message;settled=true;});
-   while(!release&&!settled)await new Promise(resolve=>setTimeout(resolve,1));
-   pendingObservation={settled,closes,launches};offset=originalDeadline-Date.now()+1;release?.();await work;
   }else{
    try{result=await host.subscribe(params(auth.projectRef));}catch(e){error=e.message;}
   }

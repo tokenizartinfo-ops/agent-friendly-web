@@ -39,3 +39,7 @@ for(const mode of ['unique','persist-fail','prior-row','prior-launch-row'])test(
  const r=await exercise(mode);assert.equal(r.error,'Own durable event host unavailable');assert.equal(r.closes,1);assert.equal(r.launches,0);assert.equal(additions(r).closures,1);
 });
 test('native source absence never permits finite custody',async()=>{const r=await exercise('no-source');assert.equal(r.error,'Own durable event host unavailable');assert.equal(r.launches,0);assert.equal(r.runs,0);});
+
+test('rerun-zero-prior: unreadable custody after ACK0 disqualifies no-admission classification',async()=>{
+ const r=await exercise('rerun-zero-prior');assert.equal(r.runs,1);assert.equal(r.rerun,true);assert.equal(r.error,'Own durable event host unavailable');assert.equal(r.closes,1);assert.equal(additions(r).admissions,0);assert.equal(additions(r).closures,1);
+});
