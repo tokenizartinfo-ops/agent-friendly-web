@@ -70,7 +70,30 @@
     },
     "AfwOwnEventNode": {
       "type": "durable-object",
-      "storage": "sqlite"
+      "storage": "sqlite",
+      "container": "agent-friendly-web-delegated-canary-afwowneventnode"
+    }
+  },
+  "unsafe": {
+    "metadata": {
+      "exports": {
+        "default": {
+          "type": "worker"
+        },
+        "AfwNodeControl": {
+          "type": "worker"
+        },
+        "AfwOwnEventNode": {
+          "type": "durable-object",
+          "storage": "sqlite",
+          "container": "agent-friendly-web-delegated-canary-afwowneventnode"
+        }
+      },
+      "containers": [
+        {
+          "class_name": "AfwOwnEventNode"
+        }
+      ]
     }
   }
 }
