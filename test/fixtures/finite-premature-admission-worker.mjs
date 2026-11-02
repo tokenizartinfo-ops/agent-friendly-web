@@ -99,7 +99,7 @@ export class Native {
   if(mode==='reservation-pending')await gate.beginReservation();
   if(mode==='prior-admission')await gate.beginAdmission();
   if(mode==='prior-launch')await gate.beginLaunch();
-  if(mode==='prior-custody')await ctx.storage.put('afw.node-process-custody.v1',{malformed:true});
+  if(mode==='prior-custody')await ctx.storage.put('afw.node-process-custody.v1:original',{malformed:true});
   let manifest,key,server,nodeControl,host;
   const container={running:false,
    async start(options){launches++;const boot=JSON.parse(options.env.AFW_NODE_BOOTSTRAP);manifest=boot.manifest;key=Buffer.from(boot.key,'base64');this.running=true;
