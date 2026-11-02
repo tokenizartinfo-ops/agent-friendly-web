@@ -20,6 +20,18 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Inspect installed native persistence conversion
+        run: |
+          node --input-type=module <<'NODE'
+          import {convertV4MiniflareOptions} from 'miniflare';
+          import {readFile} from 'node:fs/promises';
+          console.log(JSON.stringify(convertV4MiniflareOptions({modules:true,script:'export default {}',durableObjectsPersist:'/tmp/afw-synthetic-persistence',durableObjects:{FIXTURE:{className:'FinitePreparationFixture',useSQLite:true,uniqueKey:'finite-private-task1'}}})));
+          const code=await readFile('node_modules/miniflare/dist/src/index.js','utf8');
+          for(const word of ['durableObjectsPersist','persistenceRoot','persistRoot','persistPath']){
+            let at=code.indexOf(word),count=0;
+            while(at>=0&&count++<3){console.log(word+': '+code.slice(Math.max(0,at-220),at+420));at=code.indexOf(word,at+word.length);}
+          }
+          NODE
       - name: Task3 existing Container source preservation
         run: node --test test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-profile-native.test.mjs test/build-finite-native-package.test.mjs
       - name: Task3 stage approval original native owner path
