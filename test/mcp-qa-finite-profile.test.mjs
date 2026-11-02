@@ -69,3 +69,20 @@ test('projection rejects caller extras and accessor without invocation',()=>{
  assert.throws(()=>api.projectFinitePublicConfiguration(input));assert.equal(invoked,false);
  assert.throws(()=>api.projectFinitePublicConfiguration({role:'qaLive',metadata:api.finitePublicProfileTemplate('qaLive'),allow:true}));
 });
+
+test('finite canary source preserves existing SQLite Container relationship and hashes that relationship',()=>{
+ const p=api.finitePublicProfileTemplate('canaryLive'),w=api.finiteWranglerProfileTemplate('canaryLive');
+ const node={type:'durable-object',storage:'sqlite',container:'agent-friendly-web-delegated-canary-afwowneventnode'};
+ assert.deepEqual(p.exports.AfwOwnEventNode,node);
+ assert.deepEqual(p.containers,[{class_name:'AfwOwnEventNode',name:node.container}]);
+ assert.deepEqual(w.exports.AfwOwnEventNode,node);
+ assert.equal(w.containers,undefined,'source does not create an app/image');
+ assert.equal(w.migrations,undefined,'source does not create a namespace');
+ assert.deepEqual(w.unsafe.metadata,{exports:p.exports,containers:[{class_name:'AfwOwnEventNode'}]});
+ const actual=fixture(),detached=structuredClone(actual);
+ delete detached.exports.AfwOwnEventNode.container;detached.containers=[];
+ assert.throws(()=>api.projectFinitePublicConfiguration({role:'canaryLive',metadata:detached}));
+ assert.notEqual(activationConfigurationHash(actual),activationConfigurationHash(detached));
+ assert.notEqual(restorationConfigurationHash(actual),restorationConfigurationHash(detached));
+ assert.equal(p.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_NODE').namespace_id,'d6fc71552de7494a863aca20365a572d');
+});

@@ -1,9 +1,9 @@
-# Branch-only fix qualifier; EXCLUDE from eventual integration.
-name: Finite C2 Task2 round1 temporary source qualifier
+# Branch-only Task3 qualifier; EXCLUDE from eventual integration.
+name: Finite C2 Task3 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-owner-preparation.mjs', 'test/mcp-qa-finite-owner-preparation-native.test.mjs', 'test/fixtures/finite-owner-worker.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-profile.mjs', 'wrangler.mcp-own.finite.jsonc', 'test/mcp-qa-finite-profile.test.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -20,8 +20,28 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Task2 round1 child and original OAuth monitoring leases
-        run: node --test test/mcp-qa-finite-owner-preparation-native.test.mjs test/delegated-oauth-flow.test.mjs test/dossier-monitoring-oauth-native.test.mjs
-      - name: Round1 scoped lint
+      - name: Task3 existing Container source preservation
+        run: node --test test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-profile-native.test.mjs test/build-finite-native-package.test.mjs
+      - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs test/fixtures/finite-owner-worker.mjs
+        run: npx eslint lib/mcp-qa-finite-profile.mjs test/mcp-qa-finite-profile.test.mjs
+      - name: Generated finite byte dry-run without provider or Container build
+        run: |
+          node --input-type=module <<'NODE'
+          import {compileFiniteNativeStaging} from './scripts/build-finite-native-package.mjs';
+          import {finiteWranglerProfileTemplate} from './lib/mcp-qa-finite-profile.mjs';
+          import {mkdir,writeFile} from 'node:fs/promises';
+          import {resolve} from 'node:path';
+          const r=await compileFiniteNativeStaging({cwd:process.cwd(),sourceRevision:process.env.GITHUB_SHA});
+          await mkdir('output/task3-profile',{recursive:true});
+          for(const role of ['qaLive','canaryLive']){
+            const p=structuredClone(finiteWranglerProfileTemplate(role));
+            await writeFile('output/task3-profile/'+role+'.mjs',r.files[role+'/index.mjs']);
+            p.main=resolve('output/task3-profile/'+role+'.mjs');
+            delete p.exports;
+            await writeFile('output/task3-profile/'+role+'.json',JSON.stringify(p));
+          }
+          console.log(JSON.stringify({sourceRevision:r.sourceRevision,publicStatic:Object.fromEntries(Object.entries(r.modules).map(([k,v])=>[k,v.publicStatic])),completePackage:false,operationalReadiness:false}));
+          NODE
+          npx wrangler deploy --config output/task3-profile/canaryLive.json --dry-run --no-bundle --outdir output/task3-profile/dry-canary
+          npx wrangler deploy --config output/task3-profile/qaLive.json --dry-run --no-bundle --outdir output/task3-profile/dry-qa
