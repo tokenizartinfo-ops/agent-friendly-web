@@ -90,3 +90,12 @@ test('context_uses_actual_legacy_module_and_configuration_grammars',()=>{
  ]){const c=structuredClone(context);change(c);assert.throws(()=>encode('SetupContext',c));}
  assert.equal(typeof records.hashFiniteOwnerPreparationProject,'function');assert.equal(records.hashFiniteOwnerPreparationProject(project),projectHash);
 });
+
+import {createFinitePolicyEffectJournal} from '../lib/mcp-qa-finite-policy-journal.mjs';
+test('journal_admin_pending_rejects_accessor_without_invoking_it',async()=>{
+ let reads=0,transactions=0;
+ const journal=createFinitePolicyEffectJournal({storage:{async transaction(){transactions++;throw Error('must not enter storage');}},identity:{kind:'policy',intentId:'intent',sourceRevision:M,setupInstanceId:'setup',effect:'upload'},now:()=>100});
+ const value={observedAt:100};Object.defineProperty(value,'reasonCode',{enumerable:true,get(){reads++;return 'validation';}});
+ const lease={signal:new AbortController().signal,assertCurrent(){}};
+ await assert.rejects(()=>journal.markAdminPending(value,lease));assert.equal(reads,0);assert.equal(transactions,0);
+});
