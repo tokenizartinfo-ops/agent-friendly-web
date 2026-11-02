@@ -28,9 +28,9 @@ function make(env,T0,mode){
  const project={projectId:'SYNTHETIC_OWN_PROJECT',revision:1,synthetic:true},expiry=T0+510001;
  const preparation=seal('OwnerPreparation',{purpose:'afw.finite-owner-preparation.v1',prepId:H,sourceRevision:M,actorId:env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1').toString(),selectedAt:T0-100,expiresAt:expiry,commandBy:T0+1,owner:{subject:'SYNTHETIC_OWNER',accessRealmHash:H,accessVerifiedAt:T0-1000,accessExpiresAt:expiry},connection:{connectionRef:H,grantId:'SYNTHETIC_GRANT',clientId:'SYNTHETIC_CLIENT',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',grantHash:H,consentHash:H,noticesHash:H,permissionExpiresAt:expiry},project,goal:'discovery',programContext:{programHash:'f'.repeat(64),sourceRevision:Q,originalContextHash},approval:{purpose:'afw.own-synthetic-policy-preparation.v1',decision:'approve',sourceRevision:M,projectHash:hashFiniteOwnerPreparationProject(project),goal:'discovery',approvedAt:T0-1000,expiresAt:expiry,csrfReceiptHash:H},auditHash:H},'preparationHash');
  const selection=seal('Selection',{purpose:'afw.finite-owner-selection.v1',sourceRevision:M,prepId:H,preparationHash:preparation.preparationHash,selectedAt:T0-100,sequence:1,previousSelectionHash:null},'selectionHash');
- const module={name:'index.mjs',sha256:artifact.workerHash,bytes:Buffer.byteLength(artifact.script)};
- const baseline={versionId:V,deploymentId:D,module,configuration:config},rollback={versionId:R,deploymentId:U,module,configuration:closed};
- return {T0,mode,preparation,selection,originalContext,baseline,rollback,module};
+ const descriptor={name:'index.mjs',sha256:artifact.workerHash,bytes:Buffer.byteLength(artifact.script)};
+ const baseline={versionId:V,deploymentId:D,module:descriptor,configuration:config},rollback={versionId:R,deploymentId:U,module:descriptor,configuration:closed};
+ return {T0,mode,preparation,selection,originalContext,baseline,rollback,module:descriptor};
 }
 export async function syntheticFacts({ctx,env,intentId,sourceRevision},lease){
  lease.assertCurrent();const x=await ctx.storage.get('fixture:scenario');lease.assertCurrent();
@@ -57,7 +57,7 @@ export class SetupFixture extends IndependentClosure{
  }
  async rows(){return [...await this.ctx.storage.list()].filter(([k])=>k!=='fixture:scenario');}
 }
-export default {async fetch(request,env,ctx){
+const worker={async fetch(request,env,ctx){
  const path=new URL(request.url).pathname,actor=env.AFW_INDEPENDENT_CLOSURE.get(env.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));
  if(path==='/init')return Response.json(await actor.initialize((await request.json()).mode));
  if(path==='/rows')return Response.json(await actor.rows());
@@ -66,3 +66,5 @@ export default {async fetch(request,env,ctx){
  const step={async do(name,options,fn){return fn();}};
  return Response.json(await new PrivateQaBootstrap(ctx,env).run(event,step));
 }};
+
+export default worker;

@@ -50,7 +50,7 @@ test('Task4 actual unavailable source cannot mint setup authority',async t=>{
 import {policyFixture} from './fixtures/finite-policy-setup-native.mjs';
 import {hashFinitePreparationRecord as recordHash,decodeFinitePreparationRecord} from '../lib/mcp-qa-finite-preparation-records.mjs';
 test('Task4 actual native wrapper DO store and two-effect engine installs only actual ACK versions',async t=>{
- const f=await policyFixture(t),outcome=await f.run();assert.equal(outcome.status,'installed');assert.equal(f.posts(),2);
+ const f=await policyFixture(t),outcome=await f.run();assert.equal(outcome.status,'installed',JSON.stringify({posts:f.posts(),reads:f.reads,keys:(await f.rows()).map(([k])=>k)}));assert.equal(f.posts(),2);
  assert.equal(outcome.receipt.versionId,f.actual().versionId);assert.equal(outcome.receipt.deploymentId,f.actual().deploymentId);
  assert.equal(outcome.receipt.receiptHash,recordHash('PolicyReceipt',outcome.receipt));
  const rows=await f.rows(),context=decodeFinitePreparationRecord('SetupContext',rows.find(([k])=>k.endsWith(':context'))[1]);

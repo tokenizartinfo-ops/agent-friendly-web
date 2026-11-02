@@ -6,6 +6,7 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 let bundle;
 export async function policyFixture(t,mode='normal'){
  if(!bundle)bundle=(await build({entryPoints:['test/fixtures/finite-policy-setup-worker.mjs'],bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:[{name:'SYNTHETIC-fixed-qualification',setup(b){
+  b.onLoad({filter:/mcp-qa-finite-policy-setup\.mjs$/},args=>({contents:readFileSync(args.path,'utf8').replaceAll("catch{return pending();}","catch(error){console.log('SYNTHETIC SETUP TRACE '+error.stack);return pending();}"),resolveDir:process.cwd()+'/lib',loader:'js'}));
   b.onLoad({filter:/mcp-qa-finite-owner-preparation\.mjs$/},args=>({contents:readFileSync(args.path,'utf8').replace('export async function readFiniteOwnerSetupFacts','async function unusedActualSetupFacts')+"\nexport {syntheticFacts as readFiniteOwnerSetupFacts} from '"+process.cwd()+"/test/fixtures/finite-policy-setup-worker.mjs';",resolveDir:process.cwd()+'/lib',loader:'js'}));
   b.onLoad({filter:/mcp-qa-finite-policy-setup-source\.mjs$/},()=>({contents:"export {syntheticEntry as readPrivateQaFinitePolicyEntry} from '"+process.cwd()+"/test/fixtures/finite-policy-setup-worker.mjs';export function readPrivateQaFinitePolicySource(){throw Error('SYNTHETIC separately supplied qualification');}",loader:'js'}));
  }}]})).outputFiles[0].text;
