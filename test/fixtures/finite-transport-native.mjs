@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import {native} from './finite-owner-native.mjs';
 const O='https://delegated-canary.agentfriendlyweb.dev',V='22222222-2222-4222-8222-222222222222',D='33333333-3333-4333-8333-333333333333';
-export async function setup(t,mode='normal'){
+export async function setup(t,mode='normal',options={}){
  let material,current,posts=0,uploads=0,latestV=V,latestD=D;const calls=[],requests=[],versions=new Map();
  const envelope=result=>Response.json({success:true,errors:[],messages:[{code:10000,message:'SYNTHETIC informational',type:null}],result});
- const f=await native(t,'normal',undefined,undefined,{outbound:async request=>{
+ const f=await native(t,'normal',undefined,undefined,{...options,outbound:async request=>{
   const url=new URL(request.url);calls.push({method:request.method,path:url.pathname,query:url.search});assert.equal(url.origin,'https://api.cloudflare.com');
   const root='/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/';
   assert(request.headers.get('Authorization').startsWith('Bearer SYNTHETIC_'));
