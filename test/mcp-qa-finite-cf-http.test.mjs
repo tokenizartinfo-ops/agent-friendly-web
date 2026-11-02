@@ -42,3 +42,5 @@ test('finite GHA ingress is GET-only even when exact observer is absent',async()
  await o.read();assert.equal(f.requests.filter(x=>x.method==='POST').length,0);
  assert(!f.requests.some(x=>x.url.includes('/user/tokens')));
 });
+
+for(const launcher of [null,'running','queued','unknown'])test('actual QA restoration refuses unresolved launcher '+launcher,async()=>{const f=await cfFiniteFixture();f.base.restorationState.launcher=launcher;await assert.rejects(()=>f.adapters().readSnapshot(new AbortController().signal,()=>{}));assert.equal(f.state.posts,0);});

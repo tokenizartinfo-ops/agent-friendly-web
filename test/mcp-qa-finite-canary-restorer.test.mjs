@@ -30,8 +30,8 @@ for(const mode of ['running','nominal','extra','pointer','module','closedflag','
 }
 test('phase inventory allows exact observer during canary restore, requires its completion for QA',async()=>{
  const f=await finiteRestorationFixture(),options={read:async(path,query)=>{const r=await f.request({method:'GET',path:f.ROOT+path,query});return {value:r.result,info:r.result_info};},assertCurrent:()=>{},phase:'canary_restore',confirmationId:f.identity.plan.workflows.confirmation,observerId:f.identity.plan.workflows.bootstrap,qualifiedExecution:f.qualifiedExecution};
- assert.equal((await readFiniteTrialAfwWorkflows(options)).instanceCount,2);
- await assert.rejects(()=>readFiniteTrialAfwWorkflows({...options,phase:'qa_restore'}));f.state.observer='complete';assert.equal((await readFiniteTrialAfwWorkflows({...options,phase:'qa_restore'})).instanceCount,2);
+ assert.equal((await readFiniteTrialAfwWorkflows(options)).instanceCount,3);
+ await assert.rejects(()=>readFiniteTrialAfwWorkflows({...options,phase:'qa_restore'}));f.state.observer='complete';assert.equal((await readFiniteTrialAfwWorkflows({...options,phase:'qa_restore'})).instanceCount,3);
  f.state.extra=true;await assert.rejects(()=>readFiniteTrialAfwWorkflows(options));
 });
 test('exact approved module digest alone does not grant static closed-profile compatibility',async()=>{
@@ -56,3 +56,5 @@ test('expired parent lease forbids a child restore POST even within the child C1
  await assert.rejects(()=>api.createPrivateQaFiniteCanaryRestorer({...f.options,request}).execute(f.input,()=>{if(expired)throw Error('original guard lease ended');}));
  assert.equal(f.posts,0);
 });
+
+for(const launcher of [null,'running','waiting','queued','unknown'])test('actual canary restoration denies absent or unresolved launcher '+launcher,async()=>{const f=await finiteRestorationFixture();f.state.launcher=launcher;await assert.rejects(()=>api.createPrivateQaFiniteCanaryRestorer(f.options).execute(f.input));assert.equal(f.posts,0);});

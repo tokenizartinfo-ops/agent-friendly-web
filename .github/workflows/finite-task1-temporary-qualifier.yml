@@ -23,7 +23,8 @@ jobs:
       - name: Native5 Task3 focused RED GREEN
         run: node --test test/mcp-qa-finite-adoption-wait.test.mjs test/mcp-qa-finite-launcher-native.test.mjs test/mcp-qa-finite-confirmation-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-release-known-cancellation.test.mjs test/mcp-qa-finite-observer-native.test.mjs test/mcp-qa-finite-read-rpc-native.test.mjs
       - name: Affected finite consumers
+        if: always()
         run: node --test test/mcp-qa-finite-command.test.mjs test/mcp-qa-finite-cf-http.test.mjs test/mcp-qa-finite-canary-restorer.test.mjs test/mcp-qa-finite-phase-inventory.test.mjs test/mcp-qa-finite-profile-native.test.mjs
       - name: Native5 scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-launcher.mjs lib/mcp-qa-finite-adoption.mjs lib/mcp-qa-finite-adoption-source.mjs scripts/run-qa-finite-trial-finalizer.mjs test/mcp-qa-finite-adoption-wait.test.mjs lib/mcp-qa-finite-trial-control.mjs lib/mcp-qa-finite-confirmation-source.mjs lib/mcp-qa-finite-confirmation.mjs worker/independent-closure/finite.mjs lib/mcp-fixed-terminal-workflows.mjs lib/mcp-qa-finite-canary-restorer.mjs test/fixtures/finite-restoration.mjs lib/mcp-qa-finite-http.mjs test/mcp-qa-finite-confirmation-native.test.mjs
+        run: npx eslint lib/mcp-qa-finite-launcher.mjs lib/mcp-qa-finite-adoption.mjs lib/mcp-qa-finite-adoption-source.mjs scripts/run-qa-finite-trial-finalizer.mjs test/mcp-qa-finite-adoption-wait.test.mjs lib/mcp-qa-finite-trial-control.mjs lib/mcp-qa-finite-confirmation-source.mjs lib/mcp-qa-finite-confirmation.mjs worker/independent-closure/finite.mjs lib/mcp-fixed-terminal-workflows.mjs lib/mcp-qa-finite-canary-restorer.mjs test/fixtures/finite-restoration.mjs lib/mcp-qa-finite-http.mjs test/mcp-qa-finite-confirmation-native.test.mjs test/mcp-qa-finite-canary-restorer.test.mjs test/mcp-qa-finite-cf-http.test.mjs test/mcp-qa-finite-launcher-native.test.mjs

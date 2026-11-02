@@ -25,7 +25,7 @@ export class Launcher extends PrivateQaBootstrap{
  run(event,step){
   const adapted={
    do:async(name,options,fn)=>{state.calls.steps.push({name,options});const r=await step.do(name,options,fn);if(name==='finite-launch-prepare'&&state.mode==='late-step')state.f.setNow(state.f.plan.launchPolicy.armAckBy+1);return r;},
-   sleepUntil:async(name,date)=>{state.calls.sleeps.push({name,at:date.getTime()});state.f.prepareSuccess=true;state.f.setNow(date.getTime()+(state.mode==='late-wake'?10000:0));return step.sleepUntil(name,new Date(0));}
+   sleepUntil:async(name,date)=>{state.calls.sleeps.push({name,at:date.getTime()});state.f.prepareSuccess=true;state.f.setNow(date.getTime()+(state.mode==='late-wake'?10000:0));try{return await step.sleepUntil(name,new Date(new Date().getTime()+25));}catch(error){state.calls.sleepError=String(error);throw error;}}
   };
   return super.run(event,adapted);
  }
@@ -46,7 +46,7 @@ async function native(mode){
  }finally{await mf.dispose();}
 }
 test('actual finite Bootstrap prepares with readback, absolute sleep and one journaled native child',async()=>{
- const r=await native('success');assert.equal(r.status.status,'complete');assert.equal(r.report.prepare,1,'finite source must dispatch launcher');assert.equal(r.report.read,1,JSON.stringify(r));assert.equal(r.report.create,1,JSON.stringify(r));
+ const r=await native('success');assert.equal(r.status.status,'complete');assert.equal(r.report.prepare,1,'finite source must dispatch launcher');assert.equal(r.report.read,1,JSON.stringify({status:r.status,report:r.report}));assert.equal(r.report.create,1,JSON.stringify(r));
  assert.deepEqual(r.report.sleeps,[{name:'finite-launch-wait',at:r.seed.plan.launchPolicy.launchAt}]);
  assert.deepEqual(r.report.steps.map(x=>x.name),['finite-launch-prepare','finite-launch-create']);for(const s of r.report.steps)assert.equal(s.options.retries.limit,0);
  assert.equal(r.status.output.status,'acknowledged');assert.equal(r.status.output.authorizesEffects,false);
