@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Task4 factual binding GREEN
-        run: node --test test/mcp-qa-finite-preparation-store-native.test.mjs
+      - name: Task4 original native entry RED
+        run: node --test test/mcp-qa-finite-policy-setup-native.test.mjs
       - name: Scoped changed-source lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-preparation-store.mjs test/mcp-qa-finite-preparation-store-native.test.mjs
+        run: npx eslint test/mcp-qa-finite-policy-setup-native.test.mjs
