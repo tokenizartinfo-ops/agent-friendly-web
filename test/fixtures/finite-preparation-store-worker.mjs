@@ -53,7 +53,7 @@ export class FinitePreparationFixture extends DurableObject{
     const outcomes=await Promise.allSettled(b.args.map(args=>{args.preparation=seal('OwnerPreparation',args.preparation,'preparationHash');args.selection=seal('Selection',{...args.selection,preparationHash:args.preparation.preparationHash},'selectionHash');return store.publishSelection(args,lease);}));
     return Response.json(outcomes.map(x=>x.status==='fulfilled'?x.value:{rejected:true}));
    }
-   if(b.reseal){b.arg.preparation=seal('OwnerPreparation',b.arg.preparation,'preparationHash');b.arg.selection=seal('Selection',b.arg.selection,'selectionHash');}
+   if(b.reseal){b.arg.preparation=seal('OwnerPreparation',b.arg.preparation,'preparationHash');b.arg.selection=seal('Selection',{...b.arg.selection,preparationHash:b.arg.preparation.preparationHash},'selectionHash');}
    const result=await (b.op==='read'?target.read(lease):target[b.op](b.arg,lease));
    return Response.json({result,committed,assertions});
   }catch{return Response.json({rejected:true,committed,assertions});}

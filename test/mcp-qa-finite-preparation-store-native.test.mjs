@@ -31,9 +31,14 @@ test('selection_changed_after_T0_no_fallback',async t=>{
  const {call,f}=await native(t);
  await call('publishSelection',{preparation:f.preparation,selection:f.selection,expectedHeadHash:null});
  // Fixture can supply correctly hashed subsequent selections using actual codecs.
- const second={...f.selection,selectedAt:25,sequence:2,previousSelectionHash:f.selection.selectionHash};
- const away=await call('publishSelection',{preparation:f.preparation,selection:second,expectedHeadHash:f.selection.selectionHash},{reseal:true});
+ const prepAway={...f.preparation,prepId:'c'.repeat(64)};
+ const second={...f.selection,prepId:prepAway.prepId,selectedAt:25,sequence:2,previousSelectionHash:f.selection.selectionHash};
+ const away=await call('publishSelection',{preparation:prepAway,selection:second,expectedHeadHash:f.selection.selectionHash},{reseal:true});
  assert.equal(away.result.status,'recorded');
+ const back=await call('publishSelection',{preparation:f.preparation,selection:{...f.selection,selectedAt:30,sequence:3,previousSelectionHash:away.result.recordHash},expectedHeadHash:away.result.recordHash},{reseal:true});
+ assert.equal(back.result.status,'recorded');
+ const selected=(await call('readSelected',{sourceRevision:f.preparation.sourceRevision})).result;
+ assert.equal(selected.preparation.prepId,f.preparation.prepId);
  assert.equal((await call('bindSelection',f.binding)).rejected,true);
 });
 test('consumed_ticket_is_not_refunded',async t=>{
