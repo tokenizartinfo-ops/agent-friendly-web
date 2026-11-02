@@ -70,7 +70,7 @@ export async function compileFiniteNativeStaging(input){
    if(role==='qaLive'){
     if(!compiled.metafile.inputs[bootstrapInput]||Object.values(bootstrapPaths).some(p=>!Buffer.from(bytes).includes(Buffer.from(inputBefore[p]))))fail();
    }else if(compiled.metafile.inputs[bootstrapInput])fail();
-   if(Object.keys(compiled.metafile.inputs).some(p=>/bootstrap-issuer|build-finite-native-package|node_modules\\/esbuild/.test(p)))fail();
+   if(Object.keys(compiled.metafile.inputs).some(p=>['bootstrap-issuer','build-finite-native-package','node_modules/esbuild'].some(name=>p.includes(name))))fail();
    if(bytes.length<1||bytes.length>(role==='canaryLive'?2097152:3145728))fail();
    const decoder='lib/mcp-qa-finite-candidate-residency.mjs';
    if(role==='canaryLive'){
