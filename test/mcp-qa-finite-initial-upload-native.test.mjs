@@ -77,3 +77,11 @@ for(const fault of ['held-http','held-body'])test('B2a retained underlying '+fau
  assert.equal((await operation).status,'admin_pending');assert.equal(f.uploads.length,1);f.release();await new Promise(resolve=>setTimeout(resolve,50));
  assert.equal(has(await f.stub.snapshot(),'ack'),false);assert.equal(has(await f.stub.snapshot(),'receipt'),false);assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.equal(f.uploads.length,1);
 }));
+
+for(const mode of ['baseline-secret','baseline-new-resource','baseline-unknown','baseline-cache','baseline-module','publisher-revoked-before-send'])test('B2a fresh pre-send '+mode+' never dispatches or persists secret values',()=>using(mode,async f=>{
+ await f.stub.configure('normal');assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.equal(f.uploads.length,0);assert.equal(has(await f.stub.snapshot(),'send'),false);
+ assert.equal(JSON.stringify(await f.stub.snapshot()).includes('SYNTHETIC_SHOULD_NEVER_PERSIST'),false);
+}));
+test('B2a upload-config-tamper invalidates actual private baseline preservation before SEND',()=>using('normal',async f=>{
+ await f.stub.configure('upload-config-tamper');assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.equal(f.uploads.length,0);assert.equal(has(await f.stub.snapshot(),'send'),false);
+}));
