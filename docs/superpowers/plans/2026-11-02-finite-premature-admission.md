@@ -27,3 +27,9 @@ PROJECT Agent Friendly Web; REPOSITORY tokenizartinfo-ops/agent-friendly-web; EN
 No #finite/#host/cleanup factory recursion. Current low-level successor resolver constructs provider readers but does not execute provider calls; new guards never call readRetirement/readDeployment or nativeCleanup.close. Settlement/read/seal paths never invoke live admission helper. Source-package helpers B1/C1/A and original finite HEAD unchanged. Actual Worker finite mounting, callback readiness/useful turn and full package remain owning gates.
 
 Root explicitly approved the reservation-only distinction before product: it supersedes the ambiguous blanket finite-writer wording in refinement; any unreadable/malformed/ambiguous prior state still disqualifies. Cost if wrong is missed possible-process cleanup, tested with actual source ownership and reservation-pending completion.
+
+## Implementation checkpoint — 2026-11-02
+
+Bounded implementation and hosted qualification finished at code06e424666e7cc1fcf277024aaed463f7d764dc24. Final65 affected native/custody tests +23 actual compiler/residency tests passed, lint clean, artifacts0 (run41537047289/job125591439327/attempt1). Meaningful initial RED and the additional ACK0/unreadable retry-state RED are preserved in [full report](../reports/2026-11-02-finite-premature-admission.md). Three legacy finite custody tests migrated to the actual native source fixture while retaining their reconciliation and original-deadline assertions. Existing standalone launch API/lease tests were preserved.
+
+All source/test/qualifier files were exactly read back at code head; expected-SHA non-force ref writes only. Source acceptance is PENDING fresh independent spec/quality review. STOP/release sole writer. Runtime/actual Worker mounting, publisher/full package, callback/useful turn and owner steps remain outside this unit. operationalReadiness=false; completePackage=false; PCoff=false.
