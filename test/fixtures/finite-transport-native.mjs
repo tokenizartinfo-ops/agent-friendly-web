@@ -2,14 +2,14 @@ import assert from 'node:assert/strict';
 import {native} from './finite-owner-native.mjs';
 const O='https://delegated-canary.agentfriendlyweb.dev',V='22222222-2222-4222-8222-222222222222',D='33333333-3333-4333-8333-333333333333';
 export async function setup(t,mode='normal'){
- let material,current,posts=0,uploads=0,latestV=V,latestD=D;const calls=[],versions=new Map();
+ let material,current,posts=0,uploads=0,latestV=V,latestD=D;const calls=[],requests=[],versions=new Map();
  const envelope=result=>Response.json({success:true,errors:[],messages:[{code:10000,message:'SYNTHETIC informational',type:null}],result});
  const f=await native(t,'normal',undefined,undefined,{outbound:async request=>{
   const url=new URL(request.url);calls.push({method:request.method,path:url.pathname,query:url.search});assert.equal(url.origin,'https://api.cloudflare.com');
   const root='/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/';
   assert(request.headers.get('Authorization').startsWith('Bearer SYNTHETIC_'));
   if(request.method==='POST'){
-   posts++;const body=await request.json();
+   posts++;const body=await request.json();requests.push({method:request.method,url:request.url,body});
    if(url.pathname===root+'workers/agent-friendly-web-delegated-canary/versions'){
     assert.equal(url.search,'?deploy=false');
     assert.equal(request.headers.get('Content-Type'),'application/json');
@@ -39,5 +39,5 @@ export async function setup(t,mode='normal'){
  if(mode==='held_claim')await f.json('/fixture/hold-claim',{});
  if(mode==='held_source')await f.json('/fixture/hold-source',{});
  const publish=async screen=>f.json('/fixture/publish',{url:O+'/connections/finite-prepare',headers:{'Cf-Access-Jwt-Assertion':f.token,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:screen.cookie},body:new URLSearchParams({handle:screen.handle,projectRef:screen.projectRef,decision:'approve'}).toString()});
- return {...f,publish,calls,posts:()=>posts};
+ return {...f,publish,calls,requests,posts:()=>posts};
 }

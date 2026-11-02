@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 const V='22222222-2222-4222-8222-222222222222',D='33333333-3333-4333-8333-333333333333';
 import {setup} from './fixtures/finite-transport-native.mjs';
 
@@ -7,6 +8,12 @@ test('Task3 actual owner admission and native journal issue fixed Beta JSON uplo
  const f=await setup(t),screen=await f.screen(),r=await f.publish(screen);
  assert.equal(r.status,'installed');assert.equal(r.receipt.versionId,V);assert.equal(r.receipt.deploymentId,D);assert.equal(f.posts(),2);
  const rows=await f.json('/fixture/rows',{});assert.equal(rows.filter(([k])=>k.endsWith(':send')).length,2);assert.equal(rows.filter(([k])=>k.endsWith(':ack')).length,2);
+ const canonical=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a<b?-1:1)):x);
+ for(const request of f.requests){
+  const effect=request.url.includes('/versions?')?'upload':'activation',send=rows.filter(([k])=>k.endsWith(':send')).map(([,v])=>JSON.parse(v)).find(v=>v.effect===effect);
+  const expected=createHash('sha256').update('afw.finite-connection-request.v1\\n'+canonical({method:request.method,path:request.url,body:request.body})).digest('hex');
+  assert.equal(send.requestHash,expected,'actual complete wire body, inherited UUID vector and bytes are committed');
+ }
  assert.equal((await f.publish(screen)).status,'admin_pending');assert.equal(f.posts(),2);
 });
 for(const mode of ['lost','late','not_found','unexpected_reconciliation'])test('Task3 '+mode+' actual upload ACK never activates or resends from another preparation',async t=>{
