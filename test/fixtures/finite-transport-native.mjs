@@ -20,7 +20,8 @@ export async function setup(t,mode='normal'){
     for(const b of secrets)assert.equal(b.version_id,current.versions[0].version_id);
     uploads++;latestV=[V,'44444444-4444-4444-8444-444444444444','66666666-6666-4666-8666-666666666666'][uploads-1];latestD=[D,'55555555-5555-4555-8555-555555555555','77777777-7777-4777-8777-777777777777'][uploads-1];versions.set(latestV,body);if(mode==='lost')throw Error('SYNTHETIC lost upload ACK');
     if(mode==='late')await new Promise(r=>setTimeout(r,6000));
-    return envelope({id:latestV});
+    if(mode==='not_found')return Response.json({success:false,errors:[{code:1000,message:'SYNTHETIC missing'}],result:null},{status:404});
+    return envelope({id:latestV,...(mode==='unexpected_reconciliation'?{exports_reconciliation:{created:['UNEXPECTED_SYNTHETIC_CONTAINER']}}:{})});
    }
    assert.equal(url.pathname,root+'scripts/agent-friendly-web-delegated-canary/deployments');
    assert.deepEqual(body,{strategy:'percentage',versions:[{version_id:latestV,percentage:100}]});
@@ -36,6 +37,7 @@ export async function setup(t,mode='normal'){
  }});
  material=await f.json('/fixture/material',{});current={id:material.source.currentPublication.deploymentId,strategy:'percentage',versions:[{version_id:material.source.currentPublication.versionId,percentage:100}]};
  if(mode==='held_claim')await f.json('/fixture/hold-claim',{});
+ if(mode==='held_source')await f.json('/fixture/hold-source',{});
  const publish=async screen=>f.json('/fixture/publish',{url:O+'/connections/finite-prepare',headers:{'Cf-Access-Jwt-Assertion':f.token,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:screen.cookie},body:new URLSearchParams({handle:screen.handle,projectRef:screen.projectRef,decision:'approve'}).toString()});
  return {...f,publish,calls,posts:()=>posts};
 }

@@ -5,6 +5,8 @@ import {initializeSyntheticConnectionMaterial} from './finite-connection-source.
 export class FiniteConnectionFixture extends FiniteOwnerFixture{
  async fetch(request){
   const path=new URL(request.url).pathname;
+  if(path==='/fixture/hold-source'){await this.ctx.storage.put('fixture:source-hold',{used:false,settled:false});return Response.json({configured:true});}
+  if(path==='/fixture/source-hold-state')return Response.json(await this.ctx.storage.get('fixture:source-hold'));
   if(path==='/fixture/hold-claim'){
    const actual=this.ctx.storage;let held=false;
    const storage={get:(...a)=>actual.get(...a),put:(...a)=>actual.put(...a),transaction:async fn=>{

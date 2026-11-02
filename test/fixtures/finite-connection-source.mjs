@@ -27,6 +27,14 @@ export async function initializeSyntheticConnectionMaterial(ctx){
 }
 export async function readPrivateQaFiniteConnectionSource({ctx,env,preconnectionId,stage},lease){
  lease.assertCurrent();
+ const delay=await ctx.storage.get('fixture:source-hold');
+ if(delay&&!delay.used){
+  await ctx.storage.put('fixture:source-hold',{used:true,settled:false});
+  await new Promise(r=>setTimeout(r,6000));
+  // Test instrumentation records physical settlement; it grants no authority.
+  await ctx.storage.put('fixture:source-hold',{used:true,settled:true});
+  lease.assertCurrent();
+ }
  const source=await ctx.storage.get('fixture:source'),pre=await ctx.storage.get('connection-preparation:'+preconnectionId+':record');
  if(!source||!pre||env.RELEASE_DB===env.DB)throw Error('SYNTHETIC material missing original source');
  const initial=await ctx.storage.get('connection-preparation:'+preconnectionId+':source'),original=JSON.parse(initial).source;

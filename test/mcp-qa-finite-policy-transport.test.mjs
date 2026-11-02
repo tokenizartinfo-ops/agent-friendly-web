@@ -9,7 +9,7 @@ test('Task3 actual owner admission and native journal issue fixed Beta JSON uplo
  const rows=await f.json('/fixture/rows',{});assert.equal(rows.filter(([k])=>k.endsWith(':send')).length,2);assert.equal(rows.filter(([k])=>k.endsWith(':ack')).length,2);
  assert.equal((await f.publish(screen)).status,'admin_pending');assert.equal(f.posts(),2);
 });
-for(const mode of ['lost','late'])test('Task3 '+mode+' actual upload ACK never activates or resends from another preparation',async t=>{
+for(const mode of ['lost','late','not_found','unexpected_reconciliation'])test('Task3 '+mode+' actual upload ACK never activates or resends from another preparation',async t=>{
  const f=await setup(t,mode),r=await f.publish(await f.screen());
  assert.equal(r.status,'admin_pending');assert.equal(f.posts(),1);
  assert.equal((await f.publish(await f.screen())).status,'admin_pending');assert.equal(f.posts(),1);
@@ -54,4 +54,15 @@ test('Task3 acknowledged upload with rejected private secret readback blocks ano
  assert.equal((await f.publish(await f.screen())).status,'admin_pending');assert.equal(f.posts(),1);
  assert.equal((await f.publish(await f.screen())).status,'admin_pending');assert.equal(f.posts(),1);
  const rows=await f.json('/fixture/rows',{});assert.equal(rows.filter(([k])=>k.endsWith(':send')).length,1);assert.equal(rows.filter(([k])=>k.endsWith(':ack')).length,1);
+});
+
+test('Task3 original parent finish retains actual pending source work even without a durable SEND',async t=>{
+ const f=await setup(t,'held_source');
+ assert.equal((await f.publish(await f.screen())).status,'admin_pending');assert.equal(f.posts(),0);
+ assert.deepEqual(await f.json('/fixture/source-hold-state',{}),{used:true,settled:false});
+ assert.equal((await f.publish(await f.screen())).status,'admin_pending');assert.equal(f.posts(),0);
+ assert.equal((await f.json('/fixture/rows',{})).filter(([k])=>k.endsWith(':send')).length,0);
+ await new Promise(r=>setTimeout(r,1400));
+ assert.deepEqual(await f.json('/fixture/source-hold-state',{}),{used:true,settled:true});
+ assert.equal(f.posts(),0);assert.equal((await f.json('/fixture/rows',{})).filter(([k])=>k.endsWith(':send')).length,0);
 });
