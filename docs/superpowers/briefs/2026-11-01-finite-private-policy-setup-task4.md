@@ -94,3 +94,11 @@ C3 current-source preflight at423c1bf/bcf54a5c: delegated-oauth-worker143 return
 References checked without resource probes: https://developers.cloudflare.com/workflows/build/events-and-parameters/ ; https://developers.cloudflare.com/workflows/build/workers-api/ ; https://developers.cloudflare.com/api/resources/workflows/subresources/instances/methods/get/ .
 
 Use actual accepted shared mcp-qa-finite-stage-work.mjs for denial/retention where appropriate, without reusing owner-POST admission as native setup authority. Source-owned native admission/clock must be separately constructed and scoped. Read relevant actual Task3 source/interfaces/report fix appendix; do not replay Task3 tests or reimplement the fixed publisher. Any shared fixed transport extension requires a precise native contract before affected code, never a generic send callback.
+
+## Root Task4 factual binding correction — 2026-11-02
+
+Execution BASE `757223ebc920c46e3df77995d7ba017ea3b9884e`. SOURCE ONLY; operationalReadiness=false.
+
+`bindSelection(binding,lease)` is already the intended post-T0 factual API. Preserve strict pre-T0 approval/selection/read APIs. Correct only its observed `at>=commandBy` predicate to require `observedAt<min(preparation.expiresAt,owner.accessExpiresAt,connection.permissionExpiresAt,approval.expiresAt)`. Retain actual-record `selectedAt<=T0<commandBy`, exact current selection/head, durable publication witness `selectedAt<=publishedAt<=T0`, `T0<=boundAt<=observedAt`, immutable once binding and original lease guards. Stored expiries are facts, not current consent or native authority. No new record, hash, key, API or bypass variant. The fixed native setup must independently qualify original primary T0, current owner/consent, R1/setup and original parent before this call.
+
+Required native RED/GREEN: command just before commandBy with binding observed after commandBy and original unexpired bounds; command at/after commandBy, expired stored bounds, late witness and current-head drift denied. Original native source/clock/material table is still under Root ruling; no affected product implementation before that ruling. Known four args/18 stages/70s/5s/20s and Task5/C3 boundaries unchanged.
