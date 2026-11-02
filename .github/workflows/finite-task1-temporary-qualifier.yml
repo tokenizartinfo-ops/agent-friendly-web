@@ -3,7 +3,7 @@ name: Finite C2 Task3 temporary source qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['test/mcp-qa-finite-preparation-records.test.mjs', 'lib/mcp-qa-finite-preparation-records.mjs', 'lib/mcp-qa-finite-preparation-store.mjs', 'test/mcp-qa-finite-owner-preparation-native.test.mjs', 'lib/mcp-qa-finite-profile.mjs', 'wrangler.mcp-own.finite.jsonc', 'test/mcp-qa-finite-profile.test.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-owner-preparation.mjs', 'test/fixtures/finite-owner-worker.mjs', 'test/mcp-qa-finite-preparation-records.test.mjs', 'lib/mcp-qa-finite-preparation-records.mjs', 'lib/mcp-qa-finite-preparation-store.mjs', 'test/mcp-qa-finite-owner-preparation-native.test.mjs', 'lib/mcp-qa-finite-profile.mjs', 'wrangler.mcp-own.finite.jsonc', 'test/mcp-qa-finite-profile.test.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -26,7 +26,7 @@ jobs:
         run: node --test test/mcp-qa-finite-owner-preparation-native.test.mjs test/mcp-qa-finite-preparation-records.test.mjs test/mcp-qa-finite-preparation-store-native.test.mjs test/mcp-qa-finite-policy-journal-native.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-profile.mjs lib/mcp-qa-finite-preparation-records.mjs lib/mcp-qa-finite-preparation-store.mjs test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs
+        run: npx eslint lib/mcp-qa-finite-owner-preparation.mjs test/fixtures/finite-owner-worker.mjs lib/mcp-qa-finite-profile.mjs lib/mcp-qa-finite-preparation-records.mjs lib/mcp-qa-finite-preparation-store.mjs test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs
       - name: Generated finite byte dry-run without provider or Container build
         run: |
           node --input-type=module <<'NODE'
@@ -40,9 +40,24 @@ jobs:
             const p=structuredClone(finiteWranglerProfileTemplate(role));
             await writeFile('output/task3-profile/'+role+'.mjs',r.files[role+'/index.mjs']);
             p.main=resolve('output/task3-profile/'+role+'.mjs');
+            delete p.exports; // Full existing linkage is passed through unsafe.metadata; no image/app directive.
             await writeFile('output/task3-profile/'+role+'.json',JSON.stringify(p));
           }
           console.log(JSON.stringify({sourceRevision:r.sourceRevision,publicStatic:Object.fromEntries(Object.entries(r.modules).map(([k,v])=>[k,v.publicStatic])),completePackage:false,operationalReadiness:false}));
           NODE
           npx wrangler deploy --config output/task3-profile/canaryLive.json --dry-run --no-bundle --outdir output/task3-profile/dry-canary
           npx wrangler deploy --config output/task3-profile/qaLive.json --dry-run --no-bundle --outdir output/task3-profile/dry-qa
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFile,readdir} from 'node:fs/promises';
+          for(const [role,dir] of [['canaryLive','dry-canary'],['qaLive','dry-qa']]){
+            const before=await readFile('output/task3-profile/'+role+'.mjs');
+            const files=await readdir('output/task3-profile/'+dir);
+            let identical=false;
+            for(const file of files.filter(x=>/\.(mjs|js)$/.test(x))){
+              if(before.equals(await readFile('output/task3-profile/'+dir+'/'+file)))identical=true;
+            }
+            assert.equal(identical,true,'dry-run preserves actual compiled '+role+' bytes');
+            console.log('dry-run byte identity verified: '+role);
+          }
+          NODE

@@ -1,3 +1,4 @@
+import * as ownerPreparation from '../../lib/mcp-qa-finite-owner-preparation.mjs';
 import {createDelegatedOAuthStore} from '../../lib/delegated-oauth-store.mjs';
 import {recordDossierMonitoringConsent} from '../../lib/dossier-monitoring-authority.mjs';
 import {DurableObject} from 'cloudflare:workers';
@@ -9,6 +10,21 @@ const H='a'.repeat(64),M='b'.repeat(40),U='11111111-1111-4111-8111-111111111111'
 export class FiniteOwnerFixture extends DurableObject{
  async fetch(request){
   const path=new URL(request.url).pathname;
+  if(path==='/fixture/admission'){
+   const input=await request.json(),original=new Request(input.url,{method:'POST',headers:input.headers,body:input.body}),parent=ownerPreparation.createFiniteOwnerRequestLease(original);
+   let result,first=false,second=false,wrong=false,expired=false,qualified=false;
+   try{
+    result=await ownerPreparation.prepareFiniteOwnerChoice({ctx:this.ctx,env:this.env,request:original},parent.lease);
+    const refs={ctx:this.ctx,env:this.env,preconnectionId:result.preconnectionId,stage:result.stage};
+    if(input.finish)parent.finish();
+    if(input.wrong)try{ownerPreparation.consumeFiniteOwnerStageAdmission({...refs,preconnectionId:'e'.repeat(64)},parent.lease);wrong=true;}catch{}
+    try{const admission=ownerPreparation.consumeFiniteOwnerStageAdmission(refs,parent.lease);admission.lease.assertCurrent();first=true;qualified=Object.isFrozen(admission)&&admission.ownerSource.actorId===this.ctx.id.toString()&&/^[a-f0-9]{64}$/.test(admission.stageApprovalHash);}catch{}
+    try{ownerPreparation.consumeFiniteOwnerStageAdmission(refs,parent.lease);second=true;}catch{}
+    parent.finish();
+    expired=parent.lease.signal.aborted;
+    return Response.json({prepared:result.status===202,first,second,wrong,expired,qualified});
+   }catch{return Response.json({rejected:true});}finally{parent.finish();}
+  }
   if(path==='/fixture/init'){
    const at=Date.now(),source={sourceRevision:M,actorId:this.ctx.id.toString(),qaNamespaceId:'c'.repeat(32),qaVersionId:U,origin,phase:'closed_ui',access:{teamDomain:'finite-fixture.cloudflareaccess.com',audience:'finite-owner'},clientId:'synthetic-client',resource:origin+'/mcp',project:{projectId:'synthetic-owned',revision:1,synthetic:true},goal:'discovery',programContext:{programHash:H,sourceRevision:'d'.repeat(40),originalContextHash:H},initialBaseline:{versionId:U,deploymentId:U,moduleHash:H,configurationHash:H,bindingsHash:H},currentPublication:{stage:null,versionId:U,deploymentId:U,receiptHash:null},window:{startedAt:at-100,expiresAt:at+899000}};
    await this.ctx.storage.put('fixture:source',source);
