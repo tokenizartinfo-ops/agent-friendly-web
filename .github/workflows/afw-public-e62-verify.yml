@@ -1,0 +1,44 @@
+name: AFW e62 public artifact verify only
+
+on:
+  push:
+    branches: [docs/public-e62-release-preflight-20261103]
+    paths:
+      - 'scripts/qualify-public-e62-artifact.py'
+      - 'test/public_e62_qualification_test.py'
+      - '.github/workflows/afw-public-e62-verify.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  qualify:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify boundary and existing archive checks
+        run: python3 -m unittest discover -s test -p 'public*delivery_test.py' -v && python3 -m unittest discover -s test -p 'public_e62_qualification_test.py' -v
+      - name: Verify case and guide contracts
+        run: node --test test/tokenizart-case-freshness.test.mjs test/public-faq.test.mjs test/public-guide.test.mjs
+      - name: Qualify exact main artifact without Cloudflare
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/qualify-public-e62-artifact.py
+      - name: Retain only inventory and sanitized receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-e62-public-qualification-${{ github.run_id }}-${{ github.run_attempt }}
+          path: output/public-e62-qualification/
+          if-no-files-found: error
+          retention-days: 7
