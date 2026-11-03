@@ -8,6 +8,12 @@ Cloudflare presenta AI Index como un índice administrado para dominios y ofrece
 
 AI Search es un producto distinto para construir una búsqueda sobre fuentes configuradas. Su fuente de sitio web exige un dominio incorporado a la misma cuenta de Cloudflare. Crear una instancia de AI Search no acredita participación en AI Index. [Fuente web de AI Search](https://developers.cloudflare.com/ai-search/configuration/data-source/website/)
 
+## Base de preparación antes de recomendar una solicitud o habilitación
+
+AFW comienza por la información de origen. El responsable aporta y revisa sus declaraciones, y AFW las contrasta con el contenido público observado. Antes de proponer AI Index, revisar que las páginas canónicas y sus fechas sean actuales, que productos y servicios se expliquen de forma coherente y que cada herramienta se describa según su alcance realmente comprobado. Delimitar con el responsable qué contenido público puede compartirse y mantener pendientes las contradicciones o hechos sin corroborar.
+
+Una vez disponible y utilizado el servicio, consultar resultados recuperados en un cliente permitido, contrastarlos otra vez con las fuentes canónicas y registrar fecha, alcance, límites y discrepancias para corregir o revisar. Esta distribución complementa la preparación verificable y no garantiza indexación, selección, cita ni recomendación.
+
 ## Acompañamiento en AFW
 
 1. Confirmar el dominio exacto, su responsable y la cuenta asociada. Una cuenta compartida no une los recursos de AFW, Tokenizart ni los de clientes.

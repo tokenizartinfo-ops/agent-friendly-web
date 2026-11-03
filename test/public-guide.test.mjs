@@ -229,6 +229,13 @@ test('guide explains Cloudflare AI Index without claiming account access or inde
     const detail = respondToPublicGuide({ locale, message: locale === 'en' ? 'More detail' : locale === 'pt' ? 'Mais detalhes' : 'Más detalle', context: turn.next_context });
     assert.match(detail.answer, /AI Search/);
     assert.match(detail.answer, /Cloudflare/);
+    const expected = {
+      es: [/declarado/i, /contenido público/i, /canónicas/i, /alcance real/i, /información pública/i, /comprobar/i],
+      en: [/declarations/i, /public content/i, /canonical/i, /actual scope/i, /public information/i, /check.*again/i],
+      pt: [/declarações/i, /conteúdo público/i, /canônicas/i, /alcance real/i, /informações públicas/i, /verificamos novamente/i],
+    };
+    for (const evidence of expected[locale]) assert.match(detail.answer, evidence, locale);
+
   }
   for (const [locale, message] of [
     ['es', 'Publica AI Index en mi sitio'],
