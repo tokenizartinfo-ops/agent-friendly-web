@@ -34,8 +34,8 @@ async function fixture(mode='normal'){
  }
  export {PrivateQaBootstrap};export default base;`;
  const built=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],plugins:[{name:'synthetic-base-and-context',setup(b){
-  b.onResolve({filter:/^\\.\\/closed-rollback\\.mjs$/},()=>({path:'base',namespace:'fixture'}));
-  b.onResolve({filter:/^\\.\\/pre-entry-custody-context\\.mjs$/},()=>({path:'context',namespace:'fixture'}));
+  b.onResolve({filter:/^\.\//closed-rollback\.mjs$/},()=>({path:'base',namespace:'fixture'}));
+  b.onResolve({filter:/^\.\//pre-entry-custody-context\.mjs$/},()=>({path:'context',namespace:'fixture'}));
   b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path==='context'?'export const custodyContext=Object.freeze('+JSON.stringify(context)+');':exact?exact.toString('utf8'):"export {IndependentClosure,PrivateQaBootstrap,PrivateQaPreregistration,PrivateQaNamedConfirmation,default} from './worker/independent-closure/closed-rollback.mjs';",resolveDir:process.cwd(),loader:'js'}));
  }}]});
  let calls=[],release,held=false;
