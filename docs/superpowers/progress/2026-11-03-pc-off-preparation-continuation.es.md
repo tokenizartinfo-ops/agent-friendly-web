@@ -41,3 +41,9 @@ Actor native reader9aa97ad1fc9afe3021cf69ea497d5190 and publisher05718105dcdfc92
 Owner window and technical window remain anchored to sameI0: technical<=300s, owner<=900s/custody, C0=I0+900s,C1=C0+180s. Read/notice permissions keep their own10min duration. No old expired command/plan may be replayed.
 
 Work runs in isolated GitHub branches/Actions, no local clones/builds/dependencies or new monitors. No current OTP, browser action or credential paste pending.
+
+## Update — activation source accepted
+
+Initial activation fix codebd460633e3a8b39cad9cc5b63555aed034678013 passed Actions41691101695:108focused/83consumer/23compiler+lint, nofail/cancel/skip. Same reviewer marked original Important retention finding ADDRESSED and approved scoped fix. Durable acceptance and immutable capsule brief now committed on finite branch006bf8578ad27fd7f20abc00a9418f369b2a8b4c. Task source complete, no deployment/readiness claim. Next capsule unit's private append keeps actual M and A identifiers; closed_ui reader/mount remain separate.
+
+Closed pre-Entry host work narrowed to unitA: fixed wrapper+native Workflow+artifact/source gate, reviewed independently before controller/command unitB. Exact historical module testing remains explicit pre-promotion gate if absent from credential-free runner. Version/settings compare each own expected baseline, never each other. No actor token renewal requested while source incomplete.
