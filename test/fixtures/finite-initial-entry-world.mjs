@@ -54,7 +54,10 @@ export async function initialEntryHarness(mode='normal'){
    assert.ok(['Bearer synthetic-native-reader','Bearer synthetic-native-publisher'].includes(req.headers.get('authorization')));
    let result;
    if(req.url===CF+'/tokens/verify')result={id:req.headers.get('authorization')==='Bearer synthetic-native-reader'?'9aa97ad1fc9afe3021cf69ea497d5190':'05718105dcdfc92e55cc3624172c2740',status:'active',expires_on:new Date(approval+60000).toISOString(),not_before:null};
-   else if(req.url===CF+'/workers/scripts/agent-friendly-web-independent-closure-qa/deployments?per_page=1')result=w.pointer;
+   else if(req.url===CF+'/workers/scripts/agent-friendly-web-independent-closure-qa/deployments?per_page=1'){
+    result=structuredClone(w.pointer);
+    if(f.uploads.length>0){f.gateReached=true;if(f.gateMode==='qa')result.deployments[0].id='99999999-9999-4999-8999-999999999999';}
+   }
    else if(req.url===CF+'/workers/scripts/agent-friendly-web-release-operator/deployments?per_page=1')result={deployments:[{id:opPin.deploymentId,strategy:'percentage',versions:[{version_id:opPin.id,percentage:100}]}]};
    else if(req.url===CF+'/workers/workers/agent-friendly-web-release-operator/versions/'+opPin.id+'?include=modules')result=structuredClone(opMetadata);
    else if(req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/versions?deployable=true&per_page=100&page=1'){
@@ -124,7 +127,7 @@ export async function initialEntryHarness(mode='normal'){
     if(mode==='new-migration')result.migrations=[];
     if(mode==='enabled-cache')result.exports.default.cache={enabled:true};
    }
-   else{assert.equal(req.method,'GET');assert.equal(req.url,CF+'/workers/workers/agent-friendly-web-delegated-canary/versions/2607abae-cec3-4e35-89eb-8b8572262b54?include=modules');result=structuredClone(x.metadata);f.baselineReads++;
+   else{assert.equal(req.method,'GET');assert.equal(req.url,CF+'/workers/workers/agent-friendly-web-delegated-canary/versions/2607abae-cec3-4e35-89eb-8b8572262b54?include=modules');result=structuredClone(x.metadata);f.baselineReads++;if(f.gateMode==='history'&&f.uploads.length>0)result.modules[0].content_base64=Buffer.from('SYN drift').toString('base64');
     if(f.baselineReads>=3){
      if(mode==='baseline-secret')result.bindings.find(b=>b.type==='secret_text').text='SYNTHETIC_SHOULD_NEVER_PERSIST';
      if(mode==='baseline-new-resource')result.bindings.find(b=>b.name==='OAUTH_KV').namespace_id='f'.repeat(32);
@@ -134,6 +137,7 @@ export async function initialEntryHarness(mode='normal'){
     }
    }
    if(req.url===CF+'/tokens/verify'){
+    if(f.gateMode==='custody'&&f.gateReached)result.status='disabled';
     if(mode==='short-cleanup-custody')result.expires_on=new Date(Date.parse(created)+1000000).toISOString();
     if(f.alarmMode==='custody-drift')result.expires_on=new Date(approval+60001).toISOString();
     f.tokenReads++;const role=req.headers.get('authorization')==='Bearer synthetic-native-reader'?'reader':'publisher';
