@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "sourceRevision": "e62cd321f38e07926659c52a59a220a4e0ea865e",
+  "sourceTree": "9810e6df5b3b6e53b8befddcaf45abdf042b6422",
+  "publicMergeRevision": "e62cd321f38e07926659c52a59a220a4e0ea865e",
+  "artifact": {
+    "id": 13240978655,
+    "name": "afw-build-e62cd321f38e07926659c52a59a220a4e0ea865e",
+    "runId": 41658579964,
+    "runAttempt": 1,
+    "workflow": ".github/workflows/ci.yml",
+    "bytes": 3054694,
+    "sha256": "5e664841173f3193e902ee4562815f622c27ecceb6d8e38fa44e33207bcd4693",
+    "expiresAt": "2026-11-10T15:05:31Z"
+  },
+  "inventoryPath": "docs/evidence/2026-11-03-public-e62/qualified-inventory.json",
+  "target": {
+    "accountId": "85d0d5dadac3341a564f22ce885e9eec",
+    "worker": "agent-friendly-web-web-production",
+    "origin": "https://agentfriendlyweb.dev",
+    "entrypoint": "server/index.js",
+    "assets": "client"
+  },
+  "baseline": {
+    "checkedAt": "2026-11-03T15:23:22.558Z",
+    "deploymentId": "37fe1838-b871-4b98-818c-990d61667dbb",
+    "versionId": "0fd30778-70ce-406f-8757-69bb29a21c09",
+    "bindingsSha256": "7347149d5e22db8d04ef7fcdefa82da44eb9e877b0efde2faa1f1c22d099cf74",
+    "settingsSha256": "aa39596bf29a129c7cc803eb9fc8e2a7df6d4de995f4bd8de69c207456f09166",
+    "runtimeSha256": "d022a50e3aa634cb5b81066a014c552b59c82ca605ef7473d968cf8da07af739",
+    "bindingsCount": 10,
+    "previousRollbackVersion": "73a52556-46d3-49e9-a09b-c195a9515ce6",
+    "scope": "dated GET only; re-read before upload; fingerprints are not deployable configuration"
+  },
+  "limits": {
+    "maxZipBytes": 16777216,
+    "maxFiles": 1024,
+    "maxUncompressedBytes": 67108864,
+    "maxFileBytes": 16777216
+  },
+  "nativeQualification": {
+    "runId": 41662447007,
+    "artifactId": 13242836747,
+    "staticOnly": true,
+    "productionAcceptance": false
+  },
+  "allowedAction": "read_validate_and_prepare_only",
+  "operationalReadiness": false
+}

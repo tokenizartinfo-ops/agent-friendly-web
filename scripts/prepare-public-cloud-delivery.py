@@ -117,7 +117,12 @@ def check_provenance(contract, artifact, run, now):
     require(arun.get("id") == expected["runId"] and arun.get("head_sha") == source, "provenance artifact run")
     require(run.get("id") == expected["runId"] and run.get("run_attempt") == expected["runAttempt"], "provenance run")
     require(run.get("status") == "completed" and run.get("conclusion") == "success", "provenance run success")
-    require(run.get("head_sha") == source and run.get("event") == "pull_request", "provenance source")
+    if source == "e62cd321f38e07926659c52a59a220a4e0ea865e" and expected["id"] == 13240978655:
+        require(run.get("head_sha") == source and run.get("event") == "push"
+                and run.get("head_branch") == "main" and arun.get("head_branch") == "main",
+                "provenance source")
+    else:
+        require(run.get("head_sha") == source and run.get("event") == "pull_request", "provenance source")
     require(run.get("path") == expected["workflow"], "provenance workflow")
     require(all(run.get(k, {}).get("full_name") == contract["repository"]
                 for k in ("repository", "head_repository")), "provenance repository")
@@ -190,6 +195,7 @@ def qualifier_context(env, checked_out):
 
 
 PACKET_INVENTORIES = {
+    "config/public-e62-delivery.v1.json": "docs/evidence/2026-11-03-public-e62/qualified-inventory.json",
     "config/public-journey-delivery.v1.json": "docs/evidence/2026-10-29-public-journey/qualified-inventory.json",
     "config/public-home-entry-delivery.v1.json": "docs/evidence/2026-10-27-public-home-entry/qualified-inventory.json",
     "config/public-cloud-delivery.v1.json": "docs/evidence/2026-10-23-public-mail-a2a/qualified-inventory.json",

@@ -106,6 +106,11 @@ def upload_packet(packet="legacy"):
                 "contractPath": "config/public-home-entry-delivery.v1.json",
                 "workflow": ".github/workflows/afw-public-home-inactive-upload.yml",
                 "receiptPath": "output/public-home-upload-receipt.json"}
+    if packet == "e62_case":
+        return {"sourceRevision": "e62cd321f38e07926659c52a59a220a4e0ea865e",
+                "contractPath": "config/public-e62-delivery.v1.json",
+                "workflow": ".github/workflows/afw-public-e62-inactive-upload.yml",
+                "receiptPath": "output/public-e62-upload-receipt.json"}
     if packet == "journey_audit":
         return {"sourceRevision": "cace1d9c6049862401191fa9abf5a9160eeb915c",
                 "contractPath": "config/public-journey-delivery.v1.json",
@@ -118,6 +123,20 @@ def check_packet_contract(contract, packet="legacy"):
     require(contract["sourceRevision"] == profile["sourceRevision"]
             and contract["target"] == {"accountId": ACCOUNT, "worker": WORKER, "origin": "https://agentfriendlyweb.dev",
                                       "entrypoint": "server/index.js", "assets": "client"}, "package_scope")
+    if packet == "e62_case":
+        artifact = contract.get("artifact", {})
+        baseline = contract.get("baseline", {})
+        require(contract.get("sourceTree") == "9810e6df5b3b6e53b8befddcaf45abdf042b6422"
+                and artifact.get("id") == 13240978655 and artifact.get("runId") == 41658579964
+                and artifact.get("sha256") == "5e664841173f3193e902ee4562815f622c27ecceb6d8e38fa44e33207bcd4693"
+                and artifact.get("expiresAt") == "2026-11-10T15:05:31Z"
+                and baseline.get("versionId") == "0fd30778-70ce-406f-8757-69bb29a21c09"
+                and baseline.get("deploymentId") == "37fe1838-b871-4b98-818c-990d61667dbb"
+                and baseline.get("bindingsSha256") == "7347149d5e22db8d04ef7fcdefa82da44eb9e877b0efde2faa1f1c22d099cf74"
+                and baseline.get("settingsSha256") == "aa39596bf29a129c7cc803eb9fc8e2a7df6d4de995f4bd8de69c207456f09166"
+                and baseline.get("runtimeSha256") == "d022a50e3aa634cb5b81066a014c552b59c82ca605ef7473d968cf8da07af739",
+                "package_scope")
+
 
 def upload_context(env, run, checkout, now, packet="legacy"):
     profile = upload_packet(packet)
