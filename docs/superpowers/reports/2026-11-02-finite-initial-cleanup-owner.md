@@ -16,3 +16,7 @@ PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT isola
 | Native qualification | Existing initialEntryHarness compiles actual finite Workflow/DO/RPC/SQLite/D1; Miniflare native storage setAlarm/getAlarm/reconstruction | External GH/CF/custody/source pins/ceilings remain SYN. Manual test invocation of actual finite alarm explicitly SYN delivery unless genuine native scheduler proven. RED before product. Hosted Node22/lock only. |
 
 Source ceiling remains 2026-11-03T02:59:00Z; no retiming/renewal/current custody claim. Future handoff/owner window/OAuth expiry reconciliation and external QA finalizer remain unavailable. operationalReadiness=false;completePackage=false;PCoff=false.
+
+## RED evidence
+Test-only5e27057/run41550880993/job125637869758 failed fixture parsing: actual newlines inserted inside the generated JS string. Corrected only escaping at a0c354aec4b63652a1a1ff4eed3500b6e6ff119f; not claimed behavioral RED.
+Meaningful RED a0c354ae/tree71232c32d67785378515dc73e80aa885f499ff57: Actions41550992919/job125638239264/attempt1,3tests0PASS3FAIL (missing persisted actual plan; foreign native alarm incorrectly returned material_recorded; orphan owner fragment incorrectly delegated). Scope lint PASS. No product code preceded this RED.
