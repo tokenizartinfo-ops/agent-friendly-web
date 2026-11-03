@@ -93,10 +93,10 @@ test('late primary headers cancel open response body after sibling failure',()=>
  assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
  f.release();
  let cancelled=false;
- for(let n=0;n<200&&!cancelled;n++){cancelled=f.bodyCancelled===true;if(!cancelled)await new Promise(resolve=>setTimeout(resolve,10));}
+ for(let n=0;n<200&&!cancelled;n++){cancelled=(await f.stub.stats()).bodyCancelled===true;if(!cancelled)await new Promise(resolve=>setTimeout(resolve,10));}
  assert.equal(cancelled,true,'the actual late body is cancelled');
  let available=false;
  for(let n=0;n<200&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,10));}
  assert.equal(available,true,'the body cancellation has settled');
  assert.deepEqual(await f.stub.snapshot(),rows);
-}));
+},'late-body-observe'));
