@@ -15,6 +15,8 @@ CI main [41658579964](https://github.com/tokenizartinfo-ops/agent-friendly-web/a
 
 El calificador existente `scripts/prepare-public-cloud-delivery.py` exige que el run origen tenga evento `pull_request`. El artefacto e62 procede de un `push` en main, por lo que ese calificador lo rechazará. Crear una verificación específica que exija explícitamente el evento push, la rama main, revisión e62 y run exitoso, o demostrar que un artefacto de PR tiene exactamente el árbol final antes de reutilizarlo. No cambiar el evento esperado por suposición.
 
+El campo de contrato `allowedAction=read_validate_and_prepare_only` limita la calificación del paquete. El campo `inactiveUpload` describe por separado una única carga inactiva mediante dispatch manual en main, sin promoción de tráfico. La presencia de cualquiera de los campos no demuestra que el secreto sea válido o que se haya ejecutado la carga.
+
 Estos metadatos identifican el ZIP, no certifican su inventario ni el módulo desplegado. Calificar descarga, hash, tamaño, entradas, contenido, rutas y hashes pertinentes en un runner cloud antes de usarlo. Verificar revisión, árbol y vigencia sin reconstruir ni sustituir el paquete.
 
 ## Última evidencia primaria aportada por la operación AFW

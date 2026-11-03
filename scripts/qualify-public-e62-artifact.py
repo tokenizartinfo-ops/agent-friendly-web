@@ -63,6 +63,8 @@ def check_profile_contract(contract):
                  and contract.get("inventoryPath") == "docs/evidence/2026-11-03-public-e62/qualified-inventory.json"
                  and contract.get("allowedAction") == "read_validate_and_prepare_only"
                  and contract.get("operationalReadiness") is False
+                 and contract.get("inactiveUpload") == {"availability": "separate_manual_main_dispatch",
+                                                         "maxAttemptsPerDispatch": 1, "trafficPromotion": False}
                  and all(baseline.get(k) == v for k, v in expected_baseline.items()), "package scope")
 
 

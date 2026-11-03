@@ -47,5 +47,10 @@
     "productionAcceptance": false
   },
   "allowedAction": "read_validate_and_prepare_only",
-  "operationalReadiness": false
+  "operationalReadiness": false,
+  "inactiveUpload": {
+    "availability": "separate_manual_main_dispatch",
+    "maxAttemptsPerDispatch": 1,
+    "trafficPromotion": false
+  }
 }

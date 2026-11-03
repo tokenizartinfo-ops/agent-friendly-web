@@ -38,6 +38,10 @@ class PublicE62UploadTests(unittest.TestCase):
             self.upload.check_packet_contract({**self.contract, "baseline": {**self.contract["baseline"], "versionId": "another"}}, "e62_case")
         with self.assertRaises(ValueError):
             self.upload.check_packet_contract({**self.contract, "artifact": {**self.contract["artifact"], "sha256": "0" * 64}}, "e62_case")
+        with self.assertRaises(ValueError):
+            self.upload.check_packet_contract({**self.contract, "inactiveUpload": {**self.contract["inactiveUpload"], "trafficPromotion": True}}, "e62_case")
+        with self.assertRaises(ValueError):
+            self.upload.check_packet_contract({key: value for key, value in self.contract.items() if key != "inactiveUpload"}, "e62_case")
 
     def test_main_push_artifact_provenance_is_fixed(self):
         a = self.contract["artifact"]
