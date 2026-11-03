@@ -78,7 +78,7 @@ for(const fault of ['operator-pointer','operator-version','canary-pointer','tail
  assert.equal(r.status,'admin_pending',fault);
  assert.equal(f.uploads.length,1);
  assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'));
- const target=fault==='operator-pointer'?'/release-operator/deployments?':fault==='operator-version'?'/release-operator/versions/':fault==='canary-pointer'?'/delegated-canary/deployments?':'/tails';
+ const target=fault==='operator-pointer'?'agent-friendly-web-release-operator/deployments?':fault==='operator-version'?'agent-friendly-web-release-operator/versions/':fault==='canary-pointer'?'agent-friendly-web-delegated-canary/deployments?':'/tails';
  assert.ok(f.requests.some(url=>url.includes(target)),fault+' reached its primary read');
  assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
  assert.equal(f.restores.length,0);
