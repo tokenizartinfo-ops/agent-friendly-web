@@ -100,3 +100,12 @@ for(const [key,mode] of [['activation-send','delete'],['activation-ack','delete'
  const plan=await prepared(f);await f.future();assert.equal((await f.alarmAt(plan.C0+1)).status,'restored');await f.stub.mutateCleanup(key,mode);const rows=await f.stub.snapshot(),before=f.requests.length;
  assert.equal((await f.alarmAt(plan.C0+60001)).status,'admin_pending');assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.requests.length,before);assert.equal(f.restores.length,1);
 }));
+
+
+test('initial winner durably records actual activation after one fixed POST',()=>using(async f=>{
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.ok(record(rows,'activation-send'),'live winner must persist SEND');
+ assert.ok(record(rows,'activation-ack'),'actual provider response must yield ACK');
+ assert.ok(record(rows,'activation-completion'),'primary readback must yield Completion');
+ assert.equal(r.status,'material_recorded');
+}));
