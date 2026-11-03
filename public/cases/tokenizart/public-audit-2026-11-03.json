@@ -1,0 +1,72 @@
+{
+  "reviewedAt": "2026-11-03",
+  "endpoint": "https://agentfriendlyweb.dev/api/scan",
+  "methodology": "Gabriel Mucchiut Agent Friendly Web Method v1",
+  "runtimeSourceRevision": null,
+  "observations": [
+    {
+      "origin": "https://tokenizart.com",
+      "checkedAt": "2026-11-03T14:41:02.617Z",
+      "score": 87,
+      "level": "AF-4 delegable",
+      "llmsStatus": 200,
+      "sitemapStatus": 200,
+      "detectedPublicSignals": [
+        "llms",
+        "sitemap",
+        "linkHeaders",
+        "structuredData",
+        "markdown",
+        "openapi",
+        "apiCatalog",
+        "aiCatalog",
+        "skills"
+      ]
+    },
+    {
+      "origin": "https://atelier.tokenizart.com",
+      "checkedAt": "2026-11-03T14:40:59.143Z",
+      "score": 87,
+      "level": "AF-4 delegable",
+      "llmsStatus": 200,
+      "sitemapStatus": 200,
+      "detectedPublicSignals": [
+        "llms",
+        "sitemap",
+        "linkHeaders",
+        "structuredData",
+        "markdown",
+        "openapi",
+        "apiCatalog",
+        "aiCatalog",
+        "skills"
+      ]
+    },
+    {
+      "origin": "https://agentfriendlyweb.dev",
+      "checkedAt": "2026-11-03T14:40:59.560Z",
+      "score": 95,
+      "level": "AF-5 transaccional",
+      "llmsStatus": 200,
+      "sitemapStatus": 200,
+      "detectedPublicSignals": [
+        "llms",
+        "sitemap",
+        "linkHeaders",
+        "structuredData",
+        "markdown",
+        "openapi",
+        "apiCatalog",
+        "aiCatalog",
+        "skills",
+        "mcp"
+      ]
+    }
+  ],
+  "limits": [
+    "Resumen de una auditoria publica por origen, no monitor continuo.",
+    "Puntajes y etiquetas calculados por AFW; no son certificaciones ni acreditan delegacion, pagos, indexacion o funcionamiento privado.",
+    "No se verifico la revision del runtime del auditor ni equivalencia de reglas con las mediciones historicas. No calcular mejoras atribuibles restando puntajes.",
+    "No se siguieron redirecciones ni se solicitaron credenciales."
+  ]
+}
