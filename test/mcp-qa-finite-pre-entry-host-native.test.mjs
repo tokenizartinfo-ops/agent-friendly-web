@@ -30,6 +30,7 @@ async function fixture(mode='normal'){
  const entry=`import base,{IndependentClosure,PrivateQaBootstrap} from './scripts/qa-finite-pre-entry-custody-wrapper.mjs';
  import {observeFiniteOwnerStageWork} from './lib/mcp-qa-finite-stage-work.mjs';
  export class Actor extends IndependentClosure{
+  async readPreEntryCustody(...args){if(this.env.SYNTHETIC_MODE==='forged')return JSON.stringify({purpose:'afw.qa-pre-entry-custody.v1',status:'observed',guardVerified:true,scopeVerified:false,authorizesEffects:false,operationalReadiness:false,mayRetry:false,reader:{status:'active'},publisher:{status:'active'},extra:'untrusted'});return super.readPreEntryCustody(...args);}
   async snapshot(){return JSON.stringify([...await this.ctx.storage.list()]);}
   async availability(){const c=new AbortController(),lease={signal:c.signal,assertCurrent(){}};try{await observeFiniteOwnerStageWork({ctx:this.ctx,env:this.env,admission:{lease},originalLease:lease},async()=>true);return true;}catch{return false;}finally{c.abort();}}
   async inherited(){return JSON.stringify({alarm:await this.alarm(),arm:await this.arm(),status:await this.status()});}
@@ -41,7 +42,7 @@ async function fixture(mode='normal'){
   b.onLoad({filter:/.*/,namespace:'fixture'},a=>({contents:a.path==='context'?'export const custodyContext=Object.freeze('+JSON.stringify(context)+');':exact?exact.toString('utf8'):"export {IndependentClosure,PrivateQaBootstrap,PrivateQaPreregistration,PrivateQaNamedConfirmation,default} from './worker/independent-closure/closed-rollback.mjs';",resolveDir:process.cwd(),loader:'js'}));
  }}]});
  let calls=[],release,held=false;
- const bindings={AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-native-reader',AFW_MCP_CLOSURE_PUBLISH_TOKEN:'synthetic-native-publisher',...Object.fromEntries(PRIVATE_QA_CLOSED_FLAGS.map(k=>[k,'false'])),...Object.fromEntries(policies.map(k=>[k,'']))};
+ const bindings={SYNTHETIC_MODE:mode,AFW_QA_VERSION:{id:'11111111-1111-4111-8111-111111111111'},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-native-reader',AFW_MCP_CLOSURE_PUBLISH_TOKEN:'synthetic-native-publisher',...Object.fromEntries(PRIVATE_QA_CLOSED_FLAGS.map(k=>[k,'false'])),...Object.fromEntries(policies.map(k=>[k,'']))};
  if(mode==='open')bindings.AFW_MCP_CLOSURE_ENABLED='true';
  if(mode==='missing-holder')delete bindings.AFW_MCP_CLOSURE_PUBLISH_TOKEN;
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings,d1Databases:{RELEASE_DB:'custody-db'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'Actor',useSQLite:true,uniqueKey:'pre-entry-fixture'}},workflows:{FLOW:{name:'afw-own-qa-private-bootstrap',className:'PrivateQaBootstrap'}},outboundService:async req=>{
@@ -79,3 +80,5 @@ hostTest('pending read remains exclusive after timeout until underlying operatio
 
 hostTest('loaded wrong credential identity fails closed without mutations',async()=>{const f=await fixture('wrong-holder');try{const before=await f.stub.snapshot();assert.notEqual((await f.run()).status,'observed');assert.equal(await f.stub.snapshot(),before);assert.equal(f.calls.every(x=>x.method==='GET'),true);}finally{await f.mf.dispose();}});
 hostTest('Workflow rejects extra selectors before actor access',async()=>{const f=await fixture();try{const r=await f.run({operation:'inspect_pre_entry_custody',observationId:id,target:'foreign'});assert.equal(r.status,'blocked');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
+
+hostTest('Workflow rejects a malformed actor receipt instead of forwarding it',async()=>{const f=await fixture('forged');try{const r=await f.run();assert.equal(r.status,'blocked');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
