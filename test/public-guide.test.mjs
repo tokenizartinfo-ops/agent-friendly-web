@@ -215,3 +215,34 @@ test('start questions keep specific intent and safety boundaries ahead of onboar
     assert.equal(turn.blocked, topic === 'security_block');
   }
 });
+
+test('guide explains Cloudflare AI Index without claiming account access or indexing', () => {
+  for (const [locale, question] of [
+    ['es', '¿Qué es Cloudflare AI Index?'],
+    ['en', 'What is Cloudflare AI Index?'],
+    ['pt', 'O que é Cloudflare AI Index?'],
+  ]) {
+    const turn = respondToPublicGuide({ locale, message: question });
+    assert.equal(turn.topic, 'faq:cloudflare-ai-index');
+    assert.match(turn.answer, /beta/i);
+    assert.ok(turn.sources.some((source) => source.url === 'https://www.cloudflare.com/aiindex-signup/'));
+    const detail = respondToPublicGuide({ locale, message: locale === 'en' ? 'More detail' : locale === 'pt' ? 'Mais detalhes' : 'Más detalle', context: turn.next_context });
+    assert.match(detail.answer, /AI Search/);
+    assert.match(detail.answer, /Cloudflare/);
+    const expected = {
+      es: [/declarado/i, /contenido público/i, /canónicas/i, /alcance real/i, /información pública/i, /comprobar/i],
+      en: [/declarations/i, /public content/i, /canonical/i, /actual scope/i, /public information/i, /check.*again/i],
+      pt: [/declarações/i, /conteúdo público/i, /canônicas/i, /alcance real/i, /informações públicas/i, /verificamos novamente/i],
+    };
+    for (const evidence of expected[locale]) assert.match(detail.answer, evidence, locale);
+
+  }
+  for (const [locale, message] of [
+    ['es', 'Publica AI Index en mi sitio'],
+    ['en', 'Enable AI Index for my website'],
+    ['pt', 'Ative AI Index no meu site'],
+  ]) {
+    const action = respondToPublicGuide({ locale, message });
+    assert.equal(action.topic, 'action_boundary', message);
+  }
+});

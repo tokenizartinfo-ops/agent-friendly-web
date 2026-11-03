@@ -1,5 +1,5 @@
 import { ArrowRight, HelpCircle } from './client-icons';
-import { faqEntries, faqSourceLabel, PUBLIC_FAQ_COPY } from '../../lib/public-faq.mjs';
+import { CLOUDFLARE_AI_INDEX_URL, faqEntries, faqSourceLabel, PUBLIC_FAQ_COPY } from '../../lib/public-faq.mjs';
 import { localizedPath } from '../../lib/site-i18n.mjs';
 
 type Locale = 'es' | 'en' | 'pt';
@@ -22,7 +22,7 @@ export function PublicFaq({ locale = 'es', limit }: { locale?: Locale; limit?: n
               <p>{entry.detailedAnswer}</p>
               <nav aria-label={copy.source}>
                 {entry.sources.map((routeKey: string) => (
-                  <a href={localizedPath(routeKey, locale) || '/'} key={routeKey}>{copy.source}: {faqSourceLabel(routeKey, locale)} <ArrowRight size={13} /></a>
+                  <a href={routeKey === 'cloudflareAiIndex' ? CLOUDFLARE_AI_INDEX_URL : localizedPath(routeKey, locale) || '/'} key={routeKey}>{copy.source}: {faqSourceLabel(routeKey, locale)} <ArrowRight size={13} /></a>
                 ))}
               </nav>
             </div>

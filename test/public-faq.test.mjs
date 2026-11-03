@@ -77,3 +77,9 @@ test('FAQ document hero keeps readable foreground and background after shared he
   assert.match(globalStyles, /\.document-hero\.faq-hero\s*\{[^}]*background:\s*var\(--ink\)[^}]*color:\s*var\(--white\)/s);
   assert.match(globalStyles, /\.document-hero\.faq-hero\s+p\s*\{[^}]*color:\s*#c5d0cd/s);
 });
+
+test('AI Index FAQ links to the official application page', () => {
+  const entry = faqEntries('es').find((item) => item.id === 'cloudflare-ai-index');
+  assert.ok(entry.sources.includes('cloudflareAiIndex'));
+  assert.match(faqComponentSource, /CLOUDFLARE_AI_INDEX_URL/);
+});
