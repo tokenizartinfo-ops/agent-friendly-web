@@ -1,5 +1,5 @@
-# Branch-only C2-B2a source qualifier; EXCLUDE from eventual integration.
-name: Finite initial inactive upload temporary qualifier
+# Branch-only B2b source qualifier; EXCLUDE from eventual integration.
+name: Finite initial cleanup temporary qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -20,10 +20,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Shared historical boundary native baseline and regression
-        run: |
-          node --test test/mcp-qa-finite-historical-source-native.test.mjs
-          node --test --test-name-pattern='actual native winner|private backup|fresh pre-send|wrong-uploaded-module' test/mcp-qa-finite-initial-upload-native.test.mjs
+      - name: B2b native RED
+        run: node --test test/mcp-qa-finite-initial-cleanup-native.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-historical-source.mjs test/mcp-qa-finite-historical-source-native.test.mjs
+        run: npx eslint test/mcp-qa-finite-initial-cleanup-native.test.mjs test/fixtures/finite-initial-entry-world.mjs
