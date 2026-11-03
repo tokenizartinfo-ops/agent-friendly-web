@@ -1,0 +1,19 @@
+name: Finite read-only preflight source qualification
+on:
+  push:
+    branches: [feat/finite-readonly-preflight-20261103]
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --test test/mcp-qa-finite-initial-custody-probe-native.test.mjs test/mcp-qa-finite-initial-scope.test.mjs
