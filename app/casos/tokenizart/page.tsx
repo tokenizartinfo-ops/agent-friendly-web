@@ -155,14 +155,14 @@ export default function TokenizartCasePage() {
       <section className="case-progress" aria-labelledby="evolution-title">
         <div className="section-heading plain">
           <div><span>Evolución documentada</span><h2 id="evolution-title">Cómo aparecen las capas de descubrimiento</h2></div>
-          <p>Las fechas indican cuándo se observó o reporto cada capa, no cuándo se instaló. Los saltos entre mediciones no prueban causalidad ni equivalencia entre motores.</p>
+          <p>Las fechas indican cuándo se observó o reportó cada capa, no cuándo se instaló. Los saltos entre mediciones no prueban causalidad ni equivalencia entre motores.</p>
         </div>
         <ol className="phase-list" style={{ listStyle: 'none', padding: 0 }}>
           <li><article><span>01</span><div><h3><time dateTime="2026-08-26">26 agosto 2026</time> · Baseline histórico</h3><p>Tokenizart: robots y sitemap. Atelier: robots, sin sitemap ni llms detectados en aquel baseline. AFW: documentos, catálogos y herramientas públicas descritos en el informe original. Puntajes y escalas conservados arriba.</p></div><strong>Registro histórico</strong></article></li>
-          <li><article><span>02</span><div><h3><time dateTime="2026-09-09">9 septiembre 2026</time> · Documentación pública</h3><p>Tokenizart: guia, llms.txt, llms-full.txt e índice de recursos registrados en esa revisión. Atelier: llms.txt devolvió 404 entonces. El 36/100 fue reportado por Gabriel, sin una medición independiente reproducible.</p></div><strong>Observado / declarado</strong></article></li>
-          <li><article><span>03</span><div><h3><time dateTime="2026-11-03">3 noviembre 2026</time> · Nueva observación por origen</h3><p>Tokenizart y Atelier: el auditor detectó llms, sitemap, cabeceras Link, JSON-LD, Markdown, OpenAPI, catálogos y un índice de skills. Atelier ya respondió 200 en llms.txt y sitemap.xml. AFW: estas señales y catálogos MCP detectados. No se probaron operaciónes de esas herramientas.</p></div><strong>Auditoría pública AFW</strong></article></li>
+          <li><article><span>02</span><div><h3><time dateTime="2026-09-09">9 septiembre 2026</time> · Documentación pública</h3><p>Tokenizart: guía, llms.txt, llms-full.txt e índice de recursos registrados en esa revisión. Atelier: llms.txt devolvió 404 entonces. El 36/100 fue reportado por Gabriel, sin una medición independiente reproducible.</p></div><strong>Observado / declarado</strong></article></li>
+          <li><article><span>03</span><div><h3><time dateTime="2026-11-03">3 noviembre 2026</time> · Nueva observación por origen</h3><p>Tokenizart y Atelier: el auditor detectó llms, sitemap, cabeceras Link, JSON-LD, Markdown, OpenAPI, catálogos y un índice de skills. Atelier ya respondió 200 en llms.txt y sitemap.xml. AFW: estas señales y catálogos MCP detectados. No se probaron operaciones de esas herramientas.</p></div><strong>Auditoría pública AFW</strong></article></li>
         </ol>
-        <p>Una capa detectada es una pista para revisar: no valida el contenido completo del contrato ni concede acceso. La fecha exacta de incorporación de cada recurso y la operación privada siguen fuera de esta comprobacion.</p>
+        <p>Una capa detectada es una pista para revisar: no valida el contenido completo del contrato ni concede acceso. La fecha exacta de incorporación de cada recurso y la operación privada siguen fuera de esta comprobación.</p>
       </section>
 
       <section className="atelier-explainer">
