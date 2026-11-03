@@ -1111,3 +1111,10 @@ Fresh reviewer SpecPASS/QualityNeedsFixes, noCritical. Important: verbatim histo
 ## 2026-11-02 — B2a fix round 1 implemented; scoped review pending
 
 Code56c04288a7b4a3574511e8013d37e0483e6b94ea/docs893d29409886b1af7b825f9a3175f5083385b831. Root actual41548928626/job125631300881/attempt1/head56c04288SUCCESS:36historical/parity+9actualuploadconsumersPASS0fail/cancel/skip/lintclean/artifacts0. One pure private historical qualifier shared bybothcallers; unchangedimports/exports, distinctoutputs/policy preserved. Statusdoc corrected. Existingwarningsdeferred. No newcompile;5705bytes stayearliersource evidence. Fullscoped6filepatch39f0b726..893d294 packaged; same reviewer pending. Historical primary/source/build andexactguardresult qualified separately in reports/2026-11-02-finite-historical-writer-qualification.es.md: thisrestoreinvocationBLOCKEDbeforeSEND, olddispatchuncertainretained. No universaldrain or9aacapability claim. No runtime/main/Maxeffects.
+
+
+## 2026-11-02 — Root accepts B2a; next cleanup design
+
+TaskB2a complete (c4696911..893d2940, reviewclean). Fixround1/5:1Important addressed,0open; commits39f0b726..893d2940; same reviewer SpecPASS/Approved/no newbreakage. Rootactual45PASS/head56c04288/run41548928626 asabove. Initialinactiveupload sourceaccepted, NOTactivated/live/fullpackage. Compilation5705remainsolderhead; futurechangedgraphgetsownbuild.
+
+Ruling nextB2b: existingDOalarm overnewWorkflowCREATE; actualfinite.mjs subclassmount, private survivingwinnerarm beforeactivation, immutablecleanup-only C0=I0+900s/C1=C0+180s/threeboundeddeliveries, custody mustcoverC1. TechnicalI0+300/native30/child5unchanged; noowner/grantlifetimeextended. Costifwrong: prematurealarmcollisionorlateforwardwritecouldleaveopenresource; source/nativefailurematrix+freshreviewrequired, noactualinitialintentuntilfullchain. No ownerSource/forwardactivation/handoff inthisunit, futurebusinessstagesmustfirstqualifycleanuptransfer. Spec/plan/brief2026-11-02-finite-initial-cleanup-owner persisted forbuildercheckBEFOREimplementation. No approvalsrequestedfromowner forroutineauthorizedsourcechoices. No live/runtime/main/Maxeffects.

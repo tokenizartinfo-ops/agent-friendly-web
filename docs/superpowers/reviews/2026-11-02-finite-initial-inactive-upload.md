@@ -16,3 +16,7 @@ Root ruling: real maintainability gap at the trust boundary, no conflict with bi
 ## Scope and limits
 
 All 13 patches inspected; additional bounded codec/profile contexts checked. Existing revision-separated primary qualification accepted without aggregation. No tests/provider/writes by reviewer. Live acceptance, custody, production-size latency, activation/rollback and readiness remain unverified owning gates. operationalReadiness=false; completePackage=false; PCoff=false.
+
+## Fix round 1/5 — same-reviewer verdict
+
+Spec PASS; Quality Approved. Important ADDRESSED: historical-source87–104 one private qualifier, both consumers retain output/policy responsibilities; no export/authority. Stale statusMinor ADDRESSED. ExistingwarningsMinor DEFERRED/nonblocking. NewCritical/Important/Minor NONE. Nativeparitytest175–221 validates sharedaccept/reject anddistinctlegacybehavior. Rootverifiedactual41548928626/job125631300881/attempt1/code56c04288:36+9PASS0fail/cancel/skip/lintclean/artifacts0. No reviewer rerun/mutation. Previous5705 compilermeasurements remainpreviousheadonly. ROOT ACCEPTS SOURCE unit, alloperationalclaimsfalse.
