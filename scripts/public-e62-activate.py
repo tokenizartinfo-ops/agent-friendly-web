@@ -201,6 +201,16 @@ def packet():
                 and contract["artifact"]["sha256"]=="5e664841173f3193e902ee4562815f622c27ecceb6d8e38fa44e33207bcd4693","packet_drift")
     upl.require(upl.hash_bytes((ROOT/"scripts/smoke-cloudflare-native-local.mjs").read_bytes())==SMOKE_SHA,"smoke_drift")
     upl.require(upl.hash_bytes((ROOT/"scripts/public-e62-acceptance.mjs").read_bytes())==OBSERVER_SHA,"observer_drift")
+    dependencies = {
+        "lib/public-faq.mjs": "5d0ee29ca677caa39ec624712eac6df55e778ca5e6fc2bb9e88544342b6e6ab0",
+        "lib/public-tools-copy.mjs": "325a8d6a5350e526a192a3986a8eb048baba3a5eba7afa0530cc10fac608b6a9",
+        "lib/home-copy.mjs": "cce7d886b68c4b639aea3f3511853083c2f93269bba6f5040069f5e64a757d55",
+        "lib/site-i18n.mjs": "660f9dde676190ad246e9e5c445ccea02d7fa2fb73366fc7d2c0c4317aea201d",
+        "lib/public-capability-copy.mjs": "778fc23d9040acd17df3699383d2736898293cde3c0d7fefef551267b69f5db5",
+        "lib/maturity-copy.mjs": "c17eb36ec1355a39a953210c71f36a477ea6f1f83ab6b3cd080671743b724a97",
+    }
+    for path, expected in dependencies.items():
+        upl.require(upl.hash_bytes((ROOT/path).read_bytes())==expected,"observer_dependency_drift")
     upl.require(contract["baseline"]["versionId"]==OLD and contract["baseline"]["deploymentId"]==INITIAL,"baseline_scope")
     return contract,inventory
 

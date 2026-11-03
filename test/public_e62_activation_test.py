@@ -146,6 +146,15 @@ class ActivationTests(unittest.TestCase):
         self.assertEqual(self.m.TAG, "e62cd321-r41669272094-a1")
         self.assertEqual(inventory["files"], 339)
 
+    def test_packet_rejects_observer_dependency_drift(self):
+        from unittest.mock import patch
+        original = Path.read_bytes
+        def changed(file):
+            content = original(file)
+            return content + b"drift" if file == ROOT/"lib/home-copy.mjs" else content
+        with patch.object(Path, "read_bytes", changed), self.assertRaisesRegex(ValueError, "observer_dependency_drift"):
+            self.m.packet()
+
     def test_prewrite_rejects_changed_deployment_after_metadata_read(self):
         expected=self.read()
         changed={**expected,"id":"30000000-0000-0000-0000-000000000003"}
