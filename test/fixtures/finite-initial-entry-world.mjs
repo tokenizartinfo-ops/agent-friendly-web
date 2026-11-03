@@ -84,7 +84,7 @@ export async function initialEntryHarness(mode='normal'){
    }
    else if(req.url.startsWith(CF+'/workflows/')){
     const name=new URL(req.url).pathname.split('/').at(req.url.includes('/instances?')?-2:-1),s=AFW_FIXED_WORKFLOWS.find(x=>x.name===name);assert.ok(s,req.url);
-    if(req.url.includes('/instances?')&&f.inventoryProbe){
+    if(req.url.includes('/instances?')&&(f.inventoryProbe||f.uploads.length>0&&f.nowOffset===0)){
      const own=s.name==='afw-own-qa-private-bootstrap',self={id:f.refs.initialInstanceId,status:'running',workflow_id:s.id};
      result=own&&f.inventoryMode!=='missing'?[self]:[];
      if(own&&f.inventoryMode==='terminal')result=[{...self,status:'complete'}];
