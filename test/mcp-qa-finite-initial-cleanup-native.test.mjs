@@ -61,8 +61,8 @@ for(const journal of ['send','ack'])test('B2b future SYN '+journal+' without set
  assert.equal((await f.alarmAt(plan.C0+1)).status,'admin_pending');assert.equal(f.restores.length,0);assert.equal(record(await f.stub.snapshot(),'receipt'),null);
 }));
 for(const fault of ['active-workflow','active-container','schedule','ineligible','custody-drift','candidate-module','candidate-resource','candidate-secret'])test('B2b actual native alarm rejects '+fault+' before restore SEND',()=>using(async f=>{
- const plan=await prepared(f);await f.future();f.alarmMode=fault;assert.equal((await f.alarmAt(plan.C0+1)).status,'admin_pending');assert.equal(f.restores.length,0);assert.equal(record(await f.stub.snapshot(),'restore-send'),null);
- const target=fault==='custody-drift'?'/tokens/verify':fault==='active-workflow'?'/instances?':fault==='active-container'?'/instances-v2?':fault==='schedule'?'/schedules':fault==='ineligible'?'/versions?deployable=true':'/versions/'+plan.candidateVersionId+'?include=modules';assert.ok(f.requests.some(url=>url.includes(target)),fault+' reached its intended boundary');
+ const plan=await prepared(f);await f.future();const before=f.requests.length;f.alarmMode=fault;assert.equal((await f.alarmAt(plan.C0+1)).status,'admin_pending');assert.equal(f.restores.length,0);assert.equal(record(await f.stub.snapshot(),'restore-send'),null);
+ const target=fault==='custody-drift'?'/tokens/verify':fault==='active-workflow'?'/instances?':fault==='active-container'?'/instances-v2?':fault==='schedule'?'/schedules':fault==='ineligible'?'/versions?deployable=true':'/versions/'+plan.candidateVersionId+'?include=modules';assert.ok(f.requests.slice(before).some(url=>url.includes(target)),fault+' reached its intended boundary');
 }));
 test('B2b foreign primary pointer stops without blind overwrite',()=>using(async f=>{
  const plan=await prepared(f);await f.future();f.pointerMode='foreign';assert.equal((await f.alarmAt(plan.C0+1)).status,'admin_pending');assert.equal(f.restores.length,0);
