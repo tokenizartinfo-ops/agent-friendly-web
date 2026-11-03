@@ -41,6 +41,36 @@ def check_provenance(artifact, run, now):
     BASE.require(all(run.get(k, {}).get("full_name") == REPO for k in ("repository", "head_repository")), "repository")
 
 
+
+def check_profile_contract(contract):
+    expected_artifact = {
+        "id": ARTIFACT, "name": "afw-build-" + SOURCE, "runId": RUN, "runAttempt": 1,
+        "workflow": ".github/workflows/ci.yml", "bytes": SIZE, "sha256": DIGEST, "expiresAt": EXPIRY,
+    }
+    expected_baseline = {
+        "versionId": "0fd30778-70ce-406f-8757-69bb29a21c09",
+        "deploymentId": "37fe1838-b871-4b98-818c-990d61667dbb",
+        "bindingsSha256": "7347149d5e22db8d04ef7fcdefa82da44eb9e877b0efde2faa1f1c22d099cf74",
+        "settingsSha256": "aa39596bf29a129c7cc803eb9fc8e2a7df6d4de995f4bd8de69c207456f09166",
+        "runtimeSha256": "d022a50e3aa634cb5b81066a014c552b59c82ca605ef7473d968cf8da07af739",
+    }
+    target = {"accountId": "85d0d5dadac3341a564f22ce885e9eec", "worker": "agent-friendly-web-web-production",
+              "origin": "https://agentfriendlyweb.dev", "entrypoint": "server/index.js", "assets": "client"}
+    baseline = contract.get("baseline", {})
+    BASE.require(contract.get("project") == "AFW" and contract.get("repository") == REPO
+                 and contract.get("sourceRevision") == SOURCE and contract.get("sourceTree") == TREE
+                 and contract.get("target") == target and contract.get("artifact") == expected_artifact
+                 and contract.get("inventoryPath") == "docs/evidence/2026-11-03-public-e62/qualified-inventory.json"
+                 and contract.get("allowedAction") == "read_validate_and_prepare_only"
+                 and contract.get("operationalReadiness") is False
+                 and all(baseline.get(k) == v for k, v in expected_baseline.items()), "package scope")
+
+
+def check_profile_provenance(contract, artifact, run, now):
+    check_profile_contract(contract)
+    check_provenance(artifact, run, now)
+
+
 def inventory_archive(data, expected_case):
     BASE.require(isinstance(data, bytes) and len(data) == SIZE and BASE.sha256(data) == DIGEST, "immutable ZIP")
     BASE.require(data.startswith(b"PK\x03\x04"), "ZIP signature")

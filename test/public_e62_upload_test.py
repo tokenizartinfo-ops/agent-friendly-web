@@ -10,9 +10,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class PublicE62UploadTests(unittest.TestCase):
     def setUp(self):
-        spec = importlib.util.spec_from_file_location("public_upload", ROOT / "scripts/public-inactive-upload.py")
-        self.upload = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(self.upload)
+        spec = importlib.util.spec_from_file_location("public_upload", ROOT / "scripts/public-e62-inactive-upload.py")
+        adapter = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(adapter)
+        self.upload = adapter.uploader
+        self.profile = adapter.profile
         self.contract = json.loads((ROOT / "config/public-e62-delivery.v1.json").read_text())
 
     def test_fixed_packet_and_dry_run_cannot_select_other_sources(self):
@@ -47,13 +49,13 @@ class PublicE62UploadTests(unittest.TestCase):
                "conclusion": "success", "repository": {"full_name": self.upload.REPO},
                "head_repository": {"full_name": self.upload.REPO}}
         now = datetime(2026, 11, 3, tzinfo=timezone.utc)
-        self.upload.qual.check_provenance(self.contract, artifact, run, now)
+        self.profile.check_profile_provenance(self.contract, artifact, run, now)
         for patch in [{"event": "pull_request"}, {"head_branch": "other"}, {"head_sha": "a" * 40},
                       {"run_attempt": 2}, {"conclusion": "failure"}, {"path": ".github/workflows/other.yml"}]:
             with self.subTest(patch=patch), self.assertRaises(ValueError):
-                self.upload.qual.check_provenance(self.contract, artifact, {**run, **patch}, now)
+                self.profile.check_profile_provenance(self.contract, artifact, {**run, **patch}, now)
         with self.assertRaises(ValueError):
-            self.upload.qual.check_provenance(self.contract, artifact, run, datetime(2026, 11, 11, tzinfo=timezone.utc))
+            self.profile.check_profile_provenance(self.contract, artifact, run, datetime(2026, 11, 11, tzinfo=timezone.utc))
 
     def test_digest_matches_recursive_sorted_js_json_for_ascii_primary_fields(self):
         sample = {"z": [{"b": 2, "a": 1}, "ascii"], "a": {"nested": True, "empty": None}, "n": 0}

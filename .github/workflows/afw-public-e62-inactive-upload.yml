@@ -3,10 +3,9 @@ name: AFW public e62 inactive upload
 on:
   pull_request:
     paths:
-      - 'scripts/public-inactive-upload.py'
       - 'scripts/public-e62-inactive-upload.py'
-      - 'scripts/prepare-public-cloud-delivery.py'
       - 'scripts/prepare-public-e62-delivery.py'
+      - 'scripts/qualify-public-e62-artifact.py'
       - 'test/public_inactive_upload_test.py'
       - 'test/public_e62_upload_test.py'
       - 'test/public_cloud_delivery_test.py'
