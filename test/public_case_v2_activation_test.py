@@ -144,7 +144,7 @@ class ActivationTests(unittest.TestCase):
         self.assertEqual(self.m.NEW, "29ff6775-2f8f-4318-81c8-c8931c6a4973")
         self.assertEqual(self.m.OLD, "ad126c2c-d049-4083-9f41-b9879ee3fdd9")
         self.assertEqual(self.m.TAG, "df9896f0-r41680994050-a1")
-        self.assertEqual(inventory["files"], 339)
+        self.assertEqual(inventory["files"], 341)
 
     def test_packet_rejects_observer_dependency_drift(self):
         from unittest.mock import patch
