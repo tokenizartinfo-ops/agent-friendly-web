@@ -58,7 +58,7 @@ export async function initialEntryHarness(mode='normal'){
     result=structuredClone(w.pointer);
     if(f.uploads.length>0){f.gateReached=true;if(f.gateMode==='qa')result.deployments[0].id='99999999-9999-4999-8999-999999999999';}
    }
-   else if(req.url===CF+'/workers/scripts/agent-friendly-web-release-operator/deployments?per_page=1')result={deployments:[{id:opPin.deploymentId,strategy:'percentage',versions:[{version_id:opPin.id,percentage:100}]}]};
+   else if(req.url===CF+'/workers/scripts/agent-friendly-web-release-operator/deployments?per_page=1'){if(f.gateMode==='primary-retention')await new Promise(resolve=>setTimeout(resolve,500));result={deployments:[{id:f.gateMode==='primary-retention'?'99999999-9999-4999-8999-999999999999':opPin.deploymentId,strategy:'percentage',versions:[{version_id:opPin.id,percentage:100}]}]};}
    else if(req.url===CF+'/workers/workers/agent-friendly-web-release-operator/versions/'+opPin.id+'?include=modules')result=structuredClone(opMetadata);
    else if(req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/versions?deployable=true&per_page=100&page=1'){
     const items=Array.from({length:100},(_,i)=>({id:i===5&&f.alarmMode!=='ineligible'?x.pin.id:'00000000-0000-4000-8000-'+String(i+1).padStart(12,'0'),number:171-i}));
@@ -101,6 +101,7 @@ export async function initialEntryHarness(mode='normal'){
     return Response.json({success:true,errors:[],messages:[],result,...Array.isArray(result)?{result_info:{per_page:100,count:result.length,total_count:result.length,page:1,total_pages:1}}:{}},{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString()}});
    }
    else if(req.url.includes('/instances-v2?state=active&per_page=100')){
+    if(f.gateMode==='primary-retention'){f.held='provider-read';await new Promise(resolve=>{f.release=resolve;});}
     return Response.json({success:true,errors:[],messages:[],result:f.alarmMode==='active-container'?[{id:'SYN'}]:[],result_info:{per_page:100}},{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString()}});
    }
    else if(['/schedules','/tails'].some(p=>req.url.endsWith(p)))result=f.alarmMode==='schedule'?[{id:'SYN'}]:[];
