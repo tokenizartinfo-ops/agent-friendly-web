@@ -44,3 +44,15 @@ test('failed sibling retains the actual unfinished D1 read until it settles',()=
  assert.equal(available,true,'settlement releases the prior retention');
  assert.deepEqual(await f.stub.snapshot(),rows);
 },'gate-retention'));
+
+for(const fault of ['active-container','schedule','ineligible','candidate-module','candidate-resource','candidate-secret'])test('pre-effect primary '+fault+' blocks without activation',()=>using(async f=>{
+ f.alarmMode=fault;
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(r.status,'admin_pending',fault);
+ assert.equal(f.uploads.length,1);
+ assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'));
+ const target=fault==='active-container'?'/instances-v2?':fault==='schedule'?'/schedules':fault==='ineligible'?'/versions?deployable=true':'/versions/55555555-5555-4555-8555-555555555555?include=modules';
+ assert.ok(f.requests.some(url=>url.includes(target)),fault+' reached its primary read');
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ assert.equal(f.restores.length,0);
+}));
