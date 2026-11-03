@@ -1,5 +1,5 @@
 # B2b — mounted initial cleanup owner
-Status: source implementation and qualification complete; fresh independent spec and quality review pending.
+Status: fix round 1/5 in progress; cloud checks and same-reviewer scoped re-review pending.
 BASE dc337e624bc77a6e54a8f7a105c4199ec4f619d5 / tree627039a13601b861b8109237d1e5757243ee683c; branch feat/finite-native-cleanup-20261101 verified by Git ref read.
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT isolated source branch / hosted Actions; ORIGIN GitHub APIs; RESOURCE_TYPE source/ref and temporary source qualifier; RESOURCE_ID this branch; ALLOWED_ACTION source/tests/docs and restricted qualifier; ROLLBACK immutable prior commit, nonforce expected-SHA update only. No provider authority.
 
@@ -56,3 +56,34 @@ BASE..b38d exact changed-path/blob readback:
 - `worker/independent-closure/finite.mjs` — `bf32c10f01cd2cc4acda3b9cb4dc81f5eb422149`
 
 Linear source/ref updates used expected-SHA and force:false; immutable parent commits preserve rollback. Pre-code docdc42d28, REDa0c354ae, product464f614, test53217, diagnostics5d6d219, fixture81644→1324af→51219d→d0cc334, envelope fix7b3244b, qualifier/assertions da75f8a→b38d145; diagnostic and parse failures retained above. Final report/ledger docs-only commit follows b38d and cannot self-embed its own resulting SHA; Root receives exact docHEAD/tree/ref and file readbacks. No production dispatch, source promotion/main/tag, live initial command, Cloudflare upload/deploy, native Workflow CREATE, activation, OAuth/grant/token/role/cron/Container/Max/mail/chat/automation. Do not renew or retime original 2026-11-03T02:59Z source ceiling; current custody is unproven. STOP/release writer for fresh independent spec + quality review. operationalReadiness=false; completePackage=false; PCoff=false.
+
+## Fix round 1/5 — checkpoint 2026-11-03, interrupted by owner STOP
+
+Review FIX_BASE fd6fb939405d02a168ff5f04f162dca1a8b6d20e, findings and Root ruling in ../reviews/2026-11-02-finite-initial-cleanup-owner.md. Three Important: completed outcomes bypassed required/forbidden journal cross-checks; activation SEND lacked causal relation to arm ACK; duplicated lease mechanism. No spec conflict. Minor deferred to whole-branch triage: existing punycode/esbuild-kit/ESLint9.39.4/Actions Node20→24 warnings; no dependency upgrades or warning suppression.
+
+Test-only a97a9a173e21bd01be9b1336bd94292480407498/treea0ebfd4a08293ded0889a27b42ce1a196d3bccfe run41555520953/job125653350610/attempt1: `node --test --test-name-pattern='B2b (completed|pre-arm)' test/mcp-qa-finite-initial-cleanup-native.test.mjs` produced 0 PASS/4 behavioral FAIL: completed never_activated+unsettled SEND returned never_activated; completed restored with deleted/contradictory ACK returned restored; pre-arm SEND led to restored. Scoped lint PASS. Fixture positive future SYN activation now uses actual arm ACK time within original forward deadline; negative uses time immediately before ACK.
+
+Product4119c5c60a263b82ec9ab35abc96362d2c099952/tree4dd39440da218f74eeb0fd4db1b613c38022d023 adds complete outcome journal validation, cross-hash checks and activation issuedAt>=actual arm ACK. Focused GREEN run41555714833/job125653981498/attempt1: same command 4 PASS/0 FAIL/skip/cancel, scoped lint PASS. This GREEN predates shared lease extraction and expanded cases.
+
+Source checkpoint2b734f69e3a296ba1043bc2dd372581dc54ae58f/tree08c33ed42d499ef997d5b963ea8a7ed8ca558755 extracts the byte-equivalent common initial lease mechanism into lib/mcp-qa-finite-initial-lease.mjs, called by entry and cleanup with their own explicit deadline, original source ceiling, holder check and fail behavior; no new RPC/clock-selector/effect API, no new authority or renewal. Expanded test-only contradictions cover missing activation SEND/ACK/completion, mismatched activation completion, missing restore SEND and mismatched receipt, in addition to earlier four cases. These changes are NOT yet claimed fully verified or reviewed.
+
+Hosted Actions [41555913917](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41555913917), attempt1, exact2b734f69; running at checkpoint:
+- focused job125654628551: `node --test test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-initial-cleanup-records.test.mjs`, followed by scoped lint — IN PROGRESS, no result claimed.
+- forward-consumers job125654628157: `node --test --test-concurrency=1 test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-upload-native.test.mjs` — IN PROGRESS, no result claimed.
+- compiler job125654628446: `node --test test/mcp-qa-finite-candidate-residency.test.mjs` — 23 PASS/0 FAIL/skip/cancel. Actual emitted canary1948550 bytes SHA256 cba3690e40d632d197c6685b791fbf725ebe1941fe2fc8d51bd266b444013444; QA1939633 bytes SHA256 c3eb113e0500f22e5f9f3db12f61535203eb798a961da76e297edd4eb1f9c3b5; compressed382788 bytes SHA256 8bc5c4e79f98d575fe327fcc11d6df7a32621ea8718c86e44168cf0ac3cd58a5. Graph QA295/canary318 inputs; issuer/compiler/fs/esbuild absent; original size caps met.
+
+On continuation: inspect actual completion/attempt, jobs/logs and artifact inventory of run41555913917 before any repetition; diagnose any failures, verify same-revision results and append exact output. Then package fd6fb939..fixDocHEAD for SAME reviewer scoped review of all three findings; do not report round complete or self-accept. If code changes, preserve original source ceiling 2026-11-03T02:59Z; do not retime or assert current custody. Temporary qualifier remains excluded integration. Native workerd/SQLite/D1 and actual fixed class exercised, but alarm delivery, future activation, external credentials/provider facts/clock remain SYN; no live scheduler/9aa capability/full package/PC-off claim.
+
+Git API readbacks at2b734f69 for all paths changed since FIX_BASE (includes Root review/historical docs, preserved):
+- `.github/workflows/finite-task1-temporary-qualifier.yml` — `0f5367ba0a5ca8b501596713b420f8074378e065`
+- `docs/superpowers/progress/2026-11-01-finite-native-confirmation-cleanup.md` — `629930a5c09f5f7291e7467addfb0a854d16ca55`
+- `docs/superpowers/reports/2026-11-02-finite-historical-writer-qualification.es.md` — `b4e553355507b9be3ab7dacec6c5d8ea8c6e0eb1`
+- `docs/superpowers/reviews/2026-11-02-finite-initial-cleanup-owner.md` — `6bb949e60e2e6c32e0835021fc86ee89b176108c`
+- `docs/superpowers/reviews/packages/2026-11-02-finite-initial-cleanup-owner.diff.json` — `3319c1e44b9095113f528d1e909ac6b1b93ef777`
+- `lib/mcp-qa-finite-initial-cleanup.mjs` — `35b37902a5f8138f81299e006158de5e7ddef444`
+- `lib/mcp-qa-finite-initial-entry.mjs` — `c18e294fd95875e0084cbdd9afce1e1cc3ba8782`
+- `lib/mcp-qa-finite-initial-lease.mjs` — `a9cc083baae71c89af2f6436c00571dc8e7a20c9`
+- `test/fixtures/finite-initial-entry-world.mjs` — `375466815ff760eca29146bf876502898a7bf1b1`
+- `test/mcp-qa-finite-initial-cleanup-native.test.mjs` — `c72569efd46538999a8d3ac4ab54cfa17a13a8a9`
+
+All source/ref writes used linear parent, expected-SHA and force:false. This docs checkpoint is based on2b734f69; resulting docs HEAD/tree/ref are provided separately. No uncommitted local files, local source/deps/build/temp, external runtime/provider writes, live intent, activation, Workflow CREATE, deployment, credentials/roles/grants/Container/Max actions. operationalReadiness=false; completePackage=false; PCoff=false.
