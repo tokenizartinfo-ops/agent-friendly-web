@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
 
-async function using(fn){
+async function using(fn,mode='normal'){
  const f=await initialEntryHarness('normal');
- try{await f.stub.configure('normal');await fn(f);}
+ try{await f.stub.configure(mode);await fn(f);}
  finally{await f.stub.restoreMethods();await f.mf.dispose();await f.cleanup();}
 }
 const has=(f,part)=>f.requests.some(x=>x.includes(part));
@@ -29,3 +29,18 @@ for(const fault of ['guard','inventory','schema','qa','history','custody'])test(
  assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'),fault+' reached durable arm');
  assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
 }));
+
+test('failed sibling retains the actual unfinished D1 read until it settles',()=>using(async f=>{
+ f.oldGuardMode='retention-401';
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(r.status,'admin_pending');
+ assert.equal((await f.stub.stats()).held,true,'the native query completion remains held');
+ assert.equal((await f.stub.probeStageAvailability()).available,false,'the prior actor work remains retained');
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ assert.equal(f.restores.length,0);
+ await f.stub.release();
+ let available=false;
+ for(let n=0;n<100&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,10));}
+ assert.equal(available,true,'settlement releases the prior retention');
+ assert.deepEqual(await f.stub.snapshot(),rows);
+},'gate-retention'));
