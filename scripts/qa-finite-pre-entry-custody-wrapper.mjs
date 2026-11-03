@@ -30,9 +30,19 @@ function guard(env,id,source,minimum){
  };
  check();return{check,ns,versionId};
 }
+function receipt(r){
+ fields(r,['purpose','status','reader','publisher','guardVerified','scopeVerified','authorizesEffects','operationalReadiness','mayRetry']);
+ if(r.purpose!==purpose||r.status!=='observed'||r.guardVerified!==true||r.scopeVerified!==false||r.authorizesEffects!==false||r.operationalReadiness!==false||r.mayRetry!==false)fail();
+ for(const v of [r.reader,r.publisher]){
+  fields(v,['status','expiresAt','notBefore']);
+  const expiry=typeof v.expiresAt==='string'?Date.parse(v.expiresAt):NaN,notBefore=v.notBefore===null?null:typeof v.notBefore==='string'?Date.parse(v.notBefore):NaN;
+  if(v.status!=='active'||!Number.isSafeInteger(expiry)||expiry<=Date.now()||new Date(expiry).toISOString()!==v.expiresAt||notBefore!==null&&(!Number.isSafeInteger(notBefore)||notBefore>Date.now()||new Date(notBefore).toISOString()!==v.notBefore))fail();
+ }
+ return r;
+}
 function observation(r){
- if(!r||r.status!=='observed'||r.guardVerified!==true||r.scopeVerified!==false||r.authorizesEffects!==false||r.operationalReadiness!==false||r.reader?.status!=='active'||r.publisher?.status!=='active')fail();
- return {purpose,status:'observed',reader:r.reader,publisher:r.publisher,guardVerified:true,scopeVerified:false,authorizesEffects:false,operationalReadiness:false,mayRetry:false};
+ if(!r||r.status!=='observed'||r.guardVerified!==true||r.scopeVerified!==false||r.authorizesEffects!==false||r.operationalReadiness!==false)fail();
+ return receipt({purpose,status:'observed',reader:r.reader,publisher:r.publisher,guardVerified:true,scopeVerified:false,authorizesEffects:false,operationalReadiness:false,mayRetry:false});
 }
 export class IndependentClosure extends BaselineClosure{
  async readPreEntryCustody(...args){
@@ -60,8 +70,7 @@ export class PrivateQaBootstrap extends BaselineBootstrap{
     const actor=g.ns.get(g.ns.idFromName(slot)),raw=await actor.readPreEntryCustody(custodyContext.id,custodyContext.sourceRevision);g.check();if(typeof raw!=='string'||new TextEncoder().encode(raw).length>2048)fail();return raw;
    });
    g.check();if(!executed||Date.now()-stamp>=15000||performance.now()-origin>=15000||typeof value!=='string'||new TextEncoder().encode(value).length>2048)fail();
-   const result=JSON.parse(value);if(result?.purpose!==purpose||result.status!=='observed'||result.guardVerified!==true||result.scopeVerified!==false||result.authorizesEffects!==false||result.operationalReadiness!==false||result.mayRetry!==false)fail();
-   return result;
+   return receipt(JSON.parse(value));
   }catch{return blocked();}
  }
 }
