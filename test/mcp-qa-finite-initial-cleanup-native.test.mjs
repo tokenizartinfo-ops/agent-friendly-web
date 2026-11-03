@@ -95,3 +95,8 @@ for(const mode of ['delete','contradict'])test('B2b completed restored rejects '
 test('B2b pre-arm activation SEND cannot authorize restore',()=>using(async f=>{
  const plan=await prepared(f);await f.future('pre-arm');const rows=await f.stub.snapshot(),arm=record(rows,'arm-ack'),send=record(rows,'activation-send');assert.ok(send.issuedAt<arm.acknowledgedAt);assert.equal((await f.alarmAt(plan.C0+1)).status,'admin_pending');assert.equal(f.restores.length,0);assert.equal(record(await f.stub.snapshot(),'restore-send'),null);
 }));
+
+for(const [key,mode] of [['activation-send','delete'],['activation-ack','delete'],['activation-completion','delete'],['activation-completion','contradict'],['restore-send','delete'],['receipt','contradict']])test('B2b completed restored rejects '+mode+' '+key+' chain without effects',()=>using(async f=>{
+ const plan=await prepared(f);await f.future();assert.equal((await f.alarmAt(plan.C0+1)).status,'restored');await f.stub.mutateCleanup(key,mode);const rows=await f.stub.snapshot(),before=f.requests.length;
+ assert.equal((await f.alarmAt(plan.C0+60001)).status,'admin_pending');assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.requests.length,before);assert.equal(f.restores.length,1);
+}));

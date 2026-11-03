@@ -21,7 +21,37 @@ jobs:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: B2b native qualification
-        run: node --test --test-name-pattern='B2b (completed|pre-arm)' test/mcp-qa-finite-initial-cleanup-native.test.mjs
+        run: node --test test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-initial-cleanup-records.test.mjs
       - name: Scoped lint
         if: always()
         run: npx eslint lib/mcp-qa-finite-initial-*.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-initial-cleanup-*.test.mjs test/fixtures/finite-initial-entry-world.mjs
+  forward-consumers:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Actual B1 entry and upload consumers
+        run: node --test --test-concurrency=1 test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-upload-native.test.mjs
+  compiler:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Stable changed graph compiler and residency
+        run: node --test test/mcp-qa-finite-candidate-residency.test.mjs
