@@ -35,6 +35,7 @@ test('scoped pending custody read remains retained after timeout',()=>using('cus
 
 test('pre-entry custody observes without entry or mutation',()=>using('normal',async f=>{
  const before=await f.stub.snapshot(),r=await f.stub.preEntryCustody();
+ assert.equal(before.some(([key])=>key==='afw.finite-initial-preparation.v1:entry'),false);
  assert.equal(r.status,'observed');assert.equal(r.authorizesEffects,false);assert.equal(r.operationalReadiness,false);
  assert.deepEqual(await f.stub.snapshot(),before);assert.equal(f.uploads.length,0);assert.equal(f.restores.length,0);
  assert.equal(JSON.stringify(r).includes('synthetic-native'),false);
@@ -44,4 +45,14 @@ test('pre-entry pending read retains exclusive scope after timeout',()=>using('c
  try{assert.equal((await f.stub.probeStageAvailability()).available,false);assert.equal((await f.stub.preEntryCustody()).status,'unavailable');}finally{f.release();}
  let available=false;for(let n=0;n<200&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,10));}
  assert.equal(available,true);assert.deepEqual(await f.stub.snapshot(),before);assert.equal(f.uploads.length,0);
+}));
+
+for(const mode of ['reader-wrong-id','publisher-wrong-id','reader-expired','publisher-inactive'])test('pre-entry rejects '+mode,()=>using(mode,async f=>{
+ const before=await f.stub.snapshot(),r=await f.stub.preEntryCustody();
+ assert.equal(r.status,'unavailable');assert.deepEqual(await f.stub.snapshot(),before);assert.equal(f.uploads.length,0);assert.equal(f.restores.length,0);
+}));
+
+test('wrong native actor cannot start a pre-entry custody read',()=>using('normal',async f=>{
+ const n=f.requests.length,before=await f.stub.snapshot(),r=await f.stub.preEntryCustody('wrong-actor');
+ assert.equal(r.status,'unavailable');assert.equal(f.requests.length,n);assert.deepEqual(await f.stub.snapshot(),before);
 }));
