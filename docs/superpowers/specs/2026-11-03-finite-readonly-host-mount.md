@@ -27,3 +27,7 @@ Actual existing GitHub-held QA token identity verification completed once: run41
 ## Validation/report
 
 Use TDD for native host behavior and focused controller gates, credential-free GitHub Actions. Temporary qualifier workflow excluded from later integration. Source ceiling remains expired. Report exact base/head, RED/GREEN Actions and test groups, inherited RPC inventory/boundary, artifact hashes/config preservation, residual concrete gates. Do not claim activation/readiness/PC-off. operationalReadiness=false, completePackage=false. Deliver report docs/superpowers/reports/2026-11-03-finite-readonly-host-mount.md. No local clone/dependencies/build, no subagents.
+
+## Unit A/B scope ruling
+
+Unit A is the source-only fixed wrapper and Workflow path, synthetic native qualification and an opt-in exact-byte qualification hook. The real historical module need not be obtained during this credential-free unit; its exact inherited-method qualification remains a mandatory pre-promotion gate. The hook must reject missing or mismatched bytes; a synthetic fixture is not equivalent. Unit B separately owns the controller, command, artifact integration and independently captured active-version and script-settings preservation. Each surface must match its own expected baseline; they need not equal each other. Unexpected drift, unsafe settings changes or inability to preserve/recover both blocks future mutation. This ruling authorizes no provider operation or promotion.
