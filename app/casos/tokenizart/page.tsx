@@ -20,6 +20,33 @@ import { localizedRouteMetadata } from '../../../lib/localized-route-metadata.mj
 
 export const metadata: Metadata = localizedRouteMetadata('tokenizartCase', 'es') as Metadata;
 
+const currentAudits = [
+  {
+    "origin": "https://tokenizart.com",
+    "checkedAt": "2026-11-03T14:41:02.617Z",
+    "score": 87,
+    "level": "AF-4 delegable",
+    "llmsStatus": 200,
+    "sitemapStatus": 200
+  },
+  {
+    "origin": "https://atelier.tokenizart.com",
+    "checkedAt": "2026-11-03T14:40:59.143Z",
+    "score": 87,
+    "level": "AF-4 delegable",
+    "llmsStatus": 200,
+    "sitemapStatus": 200
+  },
+  {
+    "origin": "https://agentfriendlyweb.dev",
+    "checkedAt": "2026-11-03T14:40:59.560Z",
+    "score": 95,
+    "level": "AF-5 transaccional",
+    "llmsStatus": 200,
+    "sitemapStatus": 200
+  }
+];
+
 const surfaces = [
   {
     name: 'Tokenizart',
@@ -51,11 +78,11 @@ const surfaces = [
 ];
 
 const phases = [
-  ['P0', 'Verdad publica', 'Guia e indice de recursos publicados. Traducciones, metadata y revision editorial completa siguen pendientes.', 'Avance parcial'],
-  ['P1', 'Lectura por agentes', 'WordPress: llms y sitemap verificados. Atelier: llms pendiente. Plugin de Link headers desactivado tras verificacion fallida.', 'Entrega parcial'],
-  ['P2', 'Herramientas reales', 'Publicar CLI, skills, OpenAPI y MCP solo con version y URL verificadas.', 'Release candidate'],
+  ['P0', 'Verdad publica', 'Contrastar identidad, fuentes y traducciones con el contenido publico vigente.', 'Revision continua'],
+  ['P1', 'Lectura por agentes', 'llms y sitemap respondieron 200 en ambos origenes el 2026-11-03. Revisar su contenido y mantenerlo coherente.', 'Observado con fecha'],
+  ['P2', 'Herramientas reales', 'Publicar CLI, skills, OpenAPI y MCP solo con version y URL verificadas.', 'Verificar por artefacto'],
   ['P3', 'Owner Live', 'Identidad, consentimiento, scopes, revocacion y auditoria read-only.', 'Gate separado'],
-  ['P4', 'Acciones y pagos', 'Contratos seguros para acciones y eventual x402/MPP.', 'No iniciado'],
+  ['P4', 'Acciones y pagos', 'Contratos seguros para acciones y eventual x402/MPP.', 'Alcance separado'],
 ];
 
 const downloads = [
@@ -85,8 +112,8 @@ export default function TokenizartCasePage() {
       <SiteHeader routeKey="tokenizartCase" />
       <section className="case-hero">
         <div>
-          <span>Primer caso integral · revision 2026-09-09</span>
-          <h1>Tokenizart: una infraestructura preparada para humanos y agentes.</h1>
+          <span>Primer caso integral · revision 2026-11-03</span>
+          <h1>Tokenizart: del sitio publico a una experiencia comprensible para agentes.</h1>
           <p>
             El caso conecta contenido publico, crawlers, CLI, MCP, skills y futuras herramientas owner-scoped.
             Cada capacidad se publica cuando es real, verificable y segura.
@@ -105,16 +132,27 @@ export default function TokenizartCasePage() {
       </section>
 
       <section className="architecture-band" aria-labelledby="published-title">
-        <div><span>Publicacion verificada: 2026-09-09</span><h2 id="published-title">Lo que ya puede consultarse en Tokenizart.com</h2></div>
-        <div className="case-source-links">
-          <a href="https://tokenizart.com/es/tokenizart-y-atelier-guia-publica-y-descubrimiento-agentico/">Guia publica de Tokenizart y Atelier</a>
-          <a href="https://tokenizart.com/llms.txt">llms.txt vigente</a>
-          <a href="https://tokenizart.com/llms-full.txt">llms-full.txt vigente</a>
-          <a href="https://tokenizart.com/wp-sitemap.xml">Sitemap WordPress</a>
-          <a href="https://tokenizart.com/#agent-resources">Indice y acceso desde menus</a>
+        <div><span>Auditoria publica: 2026-11-03 · UTC</span><h2 id="published-title">Que pudimos comprobar y que falta verificar</h2></div>
+        <p>Una consulta por origen al auditor publico de AFW, con el motor Gabriel Mucchiut Agent Friendly Web Method v1. Estos resultados describen señales publicas observadas en esa fecha, no un estado permanente.</p>
+        <div className="surface-grid">
+          {currentAudits.map((audit) => (
+            <article className="surface-card" key={audit.origin}>
+              <h3>{audit.origin.replace('https://', '')}</h3>
+              <p><strong>{audit.score}/100</strong> · etiqueta calculada: {audit.level}</p>
+              <small>Observado: {audit.checkedAt}</small>
+              <p>llms.txt y sitemap.xml respondieron HTTP 200.</p>
+              <a href={`/?site=${encodeURIComponent(audit.origin)}#auditar`}>Hacer una nueva auditoria <ArrowRight size={17} /></a>
+            </article>
+          ))}
         </div>
-        <p>Verificados mediante acceso publico. Esto no significa indexacion por una LLM ni habilita operaciones de cuenta. Atelier es un origen separado: su llms.txt devolvio 404 en esta revision.</p>
-        <p>36/100 en AFW, reportados por Gabriel el 2026-09-09; pendiente de una medicion independiente reproducible. No se asigna un nuevo nivel AF a partir de este reporte.</p>
+        <p>Los niveles AF son parte de nuestra metodologia, no una certificacion. Una etiqueta como «delegable» o «transaccional» no acredita permisos, acciones, pagos ni funcionamiento privado: esta medicion solo inspecciona señales publicas. Tampoco demuestra indexacion o recomendacion por una LLM, ni el ensayo con el ordenador apagado.</p>
+        <p>No verificamos la revision del runtime del auditor ni la equivalencia de sus reglas con agosto. No corresponde restar estos puntajes a los historicos como prueba de una mejora atribuible. Cloudflare usa otro motor y otra escala; no realizamos una nueva medicion de Cloudflare para esta revision.</p>
+        <div className="case-source-links">
+          <a href="https://tokenizart.com/llms.txt">Indice publico de Tokenizart</a>
+          <a href="https://atelier.tokenizart.com/llms.txt">Indice publico de Atelier</a>
+          <a href="/cases/tokenizart/public-audit-2026-11-03.json">Resumen fechado de la medicion</a>
+        </div>
+        <p>Antecedente del 2026-09-09: se verificaron recursos de Tokenizart y se registro un 404 en llms.txt de Atelier. Ese 404 es historico: la nueva consulta respondio 200. Los 36/100 reportados por Gabriel en septiembre fueron una declaracion, no una medicion independiente de esta revision.</p>
       </section>
 
       <section className="case-score-band" aria-labelledby="baseline-title">
@@ -141,7 +179,7 @@ export default function TokenizartCasePage() {
       <section className="atelier-explainer">
         <div className="journey-icon"><ServerCog size={22} /></div>
         <div><span>Relacion del producto</span><h2>Atelier es donde realmente sucede la operacion.</h2></div>
-        <p>El sitio de Tokenizart presenta la propuesta, el conocimiento y los accesos. Atelier es el entorno autenticado para preparar registros y realizar acciones habilitadas. Companion explica; Demo Atelier simula; Owner Live, cuando supere sus gates, solo leera contexto consentido.</p>
+        <p>El sitio de Tokenizart presenta la propuesta, el conocimiento y los accesos. Atelier es el entorno autenticado para preparar registros y realizar acciones habilitadas. La documentacion publica no acredita el estado de Companion, demos ni Owner Live. Cualquier lectura privada o accion requiere verificar su servicio, identidad, consentimiento y alcance por separado.</p>
       </section>
 
       <section className="case-progress" aria-labelledby="progress-title">
@@ -189,7 +227,7 @@ export default function TokenizartCasePage() {
 
       <section className="gate-band">
         <article><Check size={20} /><div><strong>Publicable tras revision</strong><p>Contenido, llms, robots, sitemap y JSON-LD coherentes con la experiencia humana.</p></div></article>
-        <article><CircleDashed size={20} /><div><strong>Release candidate</strong><p>CLI, skills, MCP y OKF existen, pero necesitan distribucion y endpoints estables.</p></div></article>
+        <article><CircleDashed size={20} /><div><strong>Verificar cada capacidad</strong><p>Un catalogo o contrato publicado no demuestra que su servicio este operativo. Comprobar version, distribucion, endpoint y permisos antes de usarlo.</p></div></article>
         <article><ShieldCheck size={20} /><div><strong>Gate separado</strong><p>Owner Live y toda accion real conservan identidad, consentimiento, auditoria y aprobacion.</p></div></article>
         <article><CircleAlert size={20} /><div><strong>No simular capacidades</strong><p>No se publican MCP, OpenAPI, pagos ni permisos que el origen todavia no ofrece.</p></div></article>
       </section>
@@ -200,7 +238,7 @@ export default function TokenizartCasePage() {
           <a href="https://developers.cloudflare.com/ai-crawl-control/" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> AI Crawl Control <ExternalLink size={14} /></a>
           <a href="https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> Markdown for Agents <ExternalLink size={14} /></a>
           <a href="https://github.com/tokenizartinfo-ops/tokenizart-agentic" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> Tokenizart Agentic <ExternalLink size={14} /></a>
-          <a href="https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/TOKENIZART-CASE-2026-08-26.md" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> Informe completo <ExternalLink size={14} /></a>
+          <a href="https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/TOKENIZART-CASE-2026-08-26.md" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> Informe historico de agosto <ExternalLink size={14} /></a>
           <a href="/registry/tokenizart/profile.json"><FileCheck2 size={16} /> Perfil Registry JSON <ExternalLink size={14} /></a>
           <a href="/registry/tokenizart/profile.md"><FileCheck2 size={16} /> Perfil Registry Markdown <ExternalLink size={14} /></a>
         </div>
