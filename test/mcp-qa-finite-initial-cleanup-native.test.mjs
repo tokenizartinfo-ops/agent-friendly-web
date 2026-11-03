@@ -141,3 +141,9 @@ test('timed out actual activation POST remains retained and cannot write a late 
  let available=false;for(let n=0;n<150&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,20));}
  assert.equal(available,true);assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.activations.length,1);
 }));
+
+for(const mode of ['activation-storage-return-lost','activation-storage-sync-lost'])test(mode+' keeps SEND uncertain without a POST',()=>using(async f=>{
+ await f.stub.restoreMethods();await f.stub.configure(mode);assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');
+ const rows=await f.stub.snapshot();assert.ok(record(rows,'activation-send'));assert.equal(record(rows,'activation-ack'),null);assert.equal(f.activations.length,0);
+ await f.stub.restoreMethods();await f.stub.configure('normal');assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.activations.length,0);
+}));
