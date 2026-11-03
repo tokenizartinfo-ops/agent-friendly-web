@@ -62,7 +62,7 @@ export async function initialEntryHarness(mode='normal'){
     result={items};
     return Response.json({success:true,errors:[],messages:[],result,result_info:{page:0,per_page:100,count:100,total_count:100}},{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString()}});
    }
-   else if(req.url===CF+'/workflows'){
+   else if(req.url===CF+'/workflows?per_page=100&page=1'){
     return Response.json({success:true,errors:[],messages:[],result:AFW_FIXED_WORKFLOWS.map(s=>({name:s.name,id:s.id,script_name:s.script,class_name:s.className})),result_info:{per_page:100,count:3,total_count:3,page:1,total_pages:1}},{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString()}});
    }
    else if(req.url.startsWith(CF+'/workflows/')){
