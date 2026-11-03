@@ -1,0 +1,119 @@
+name: AFW public e62 cloud activation
+on:
+  pull_request:
+    paths:
+      - 'scripts/public-e62-activate.py'
+      - 'scripts/public-e62-acceptance.mjs'
+      - 'scripts/public-e62-local-acceptance.mjs'
+      - 'scripts/prepare-public-e62-delivery.py'
+      - 'scripts/qualify-public-e62-artifact.py'
+      - 'scripts/public-inactive-upload.py'
+      - 'scripts/smoke-cloudflare-native-local.mjs'
+      - 'config/public-e62-delivery.v1.json'
+      - 'docs/evidence/2026-11-03-public-e62/**'
+      - 'test/public_e62_activation_test.py'
+      - 'test/public-e62-acceptance.test.mjs'
+      - '.github/workflows/afw-public-e62-activation.yml'
+  workflow_dispatch:
+    inputs:
+      operation:
+        type: choice
+        description: Verify source only, or stage and activate the fixed e62 candidate
+        default: verify_only
+        options:
+          - verify_only
+          - activate
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('afw-public-e62-activation-verify-{0}', github.event.pull_request.number) || 'afw-public-inactive-upload' }}
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && ((github.event_name == 'workflow_dispatch' && inputs.operation == 'verify_only') || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      AFW_QUALIFIER_REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test transition ownership, expiry, unknown ACK and recovery
+        run: python3 -m unittest discover -s test -p 'public_e62_activation_test.py' -v
+      - name: Test bounded observer without network requests
+        run: node --test test/public-e62-acceptance.test.mjs
+      - name: Install locked tools in ephemeral runner
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Qualify fixed e62 ZIP without rebuilding
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/prepare-public-e62-delivery.py
+      - name: Extract the qualified ZIP in the runner
+        run: |
+          python3 - <<'PY'
+          import importlib.util, json, os
+          from pathlib import Path
+          root = Path.cwd()
+          spec = importlib.util.spec_from_file_location("uploader", root / "scripts/public-inactive-upload.py")
+          uploader = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(uploader)
+          handoff = root / "output/public-cloud-delivery"
+          inventory = json.loads((handoff / "inventory.json").read_text())
+          receipt = json.loads((handoff / "receipt.json").read_text())
+          assert receipt["sourceRevision"] == "e62cd321f38e07926659c52a59a220a4e0ea865e"
+          assert receipt["artifactId"] == 13240978655
+          uploader.extract_qualified((handoff / "qualified-dist.zip").read_bytes(), inventory,
+              "5e664841173f3193e902ee4562815f622c27ecceb6d8e38fa44e33207bcd4693",
+              Path(os.environ["RUNNER_TEMP"]) / "afw-e62-qualified-preview")
+          PY
+      - name: Check real compiled case and FAQ in a local native runtime
+        run: node scripts/public-e62-local-acceptance.mjs
+      - name: Check literal packet and smoke source without remote access
+        run: python3 scripts/public-e62-activate.py verify_only
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afw-public-e62-activation-source-${{ github.run_id }}-${{ github.run_attempt }}
+          path: output/public-e62-activation-receipt.json
+          if-no-files-found: error
+          retention-days: 7
+  activate:
+    if: github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.operation == 'activate'
+    environment: afw-public-release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 11
+    env:
+      AFW_QUALIFIER_REVISION: ${{ github.sha }}
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify the controller and observer in this same executor before access
+        run: |
+          python3 -m unittest discover -s test -p public_e62_activation_test.py -v
+          node --test test/public-e62-acceptance.test.mjs
+          python3 scripts/public-e62-activate.py verify_only
+      - name: Check, stage, verify, activate and close in this executor
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.AFW_PUBLIC_UPLOAD_TOKEN }}
+        run: python3 scripts/public-e62-activate.py activate
+      - name: Retain sanitized result even after a closed failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-public-e62-activation-result-${{ github.run_id }}-${{ github.run_attempt }}
+          path: output/public-e62-activation-receipt.json
+          if-no-files-found: ignore
+          retention-days: 7
