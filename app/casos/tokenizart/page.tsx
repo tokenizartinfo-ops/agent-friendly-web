@@ -16,36 +16,12 @@ import {
 } from '../../components/client-icons';
 import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
+import publicAudit from '../../../public/cases/tokenizart/public-audit-2026-11-03.json';
 import { localizedRouteMetadata } from '../../../lib/localized-route-metadata.mjs';
 
 export const metadata: Metadata = localizedRouteMetadata('tokenizartCase', 'es') as Metadata;
 
-const currentAudits = [
-  {
-    "origin": "https://tokenizart.com",
-    "checkedAt": "2026-11-03T14:41:02.617Z",
-    "score": 87,
-    "level": "AF-4 delegable",
-    "llmsStatus": 200,
-    "sitemapStatus": 200
-  },
-  {
-    "origin": "https://atelier.tokenizart.com",
-    "checkedAt": "2026-11-03T14:40:59.143Z",
-    "score": 87,
-    "level": "AF-4 delegable",
-    "llmsStatus": 200,
-    "sitemapStatus": 200
-  },
-  {
-    "origin": "https://agentfriendlyweb.dev",
-    "checkedAt": "2026-11-03T14:40:59.560Z",
-    "score": 95,
-    "level": "AF-5 transaccional",
-    "llmsStatus": 200,
-    "sitemapStatus": 200
-  }
-];
+const currentAudits = publicAudit.observations;
 
 const surfaces = [
   {
@@ -132,7 +108,7 @@ export default function TokenizartCasePage() {
       </section>
 
       <section className="architecture-band" aria-labelledby="published-title">
-        <div><span>Auditoria publica: 2026-11-03 · UTC</span><h2 id="published-title">Que pudimos comprobar y que falta verificar</h2></div>
+        <div><span>Auditoría pública: 2026-11-03 · UTC</span><h2 id="published-title">Que pudimos comprobar y que falta verificar</h2></div>
         <p>Una consulta por origen al auditor publico de AFW, con el motor Gabriel Mucchiut Agent Friendly Web Method v1. Estos resultados describen señales publicas observadas en esa fecha, no un estado permanente.</p>
         <div className="surface-grid">
           {currentAudits.map((audit) => (
@@ -157,7 +133,7 @@ export default function TokenizartCasePage() {
 
       <section className="case-score-band" aria-labelledby="baseline-title">
         <div className="section-heading plain">
-          <div><span>Baseline historico del 2026-08-26</span><h2 id="baseline-title">Tres superficies, dos auditores</h2></div>
+          <div><span>Baseline histórico del 2026-08-26</span><h2 id="baseline-title">Tres superficies, dos auditores</h2></div>
           <p>Valores conservados como referencia historica, no puntajes actuales. Cloudflare y AF usan escalas diferentes.</p>
         </div>
         <div className="surface-grid">
@@ -178,15 +154,15 @@ export default function TokenizartCasePage() {
 
       <section className="case-progress" aria-labelledby="evolution-title">
         <div className="section-heading plain">
-          <div><span>Evolucion documentada</span><h2 id="evolution-title">Como aparecen las capas de descubrimiento</h2></div>
-          <p>Las fechas indican cuando se observo o reporto cada capa, no cuando se instalo. Los saltos entre mediciones no prueban causalidad ni equivalencia entre motores.</p>
+          <div><span>Evolución documentada</span><h2 id="evolution-title">Cómo aparecen las capas de descubrimiento</h2></div>
+          <p>Las fechas indican cuándo se observó o reporto cada capa, no cuándo se instaló. Los saltos entre mediciones no prueban causalidad ni equivalencia entre motores.</p>
         </div>
-        <ol className="phase-list">
-          <li><article><span>01</span><div><h3><time dateTime="2026-08-26">26 agosto 2026</time> · Baseline historico</h3><p>Tokenizart: robots y sitemap. Atelier: robots, sin sitemap ni llms detectados en aquel baseline. AFW: documentos, catalogos y herramientas publicas descritos en el informe original. Puntajes y escalas conservados arriba.</p></div><strong>Registro historico</strong></article></li>
-          <li><article><span>02</span><div><h3><time dateTime="2026-09-09">9 septiembre 2026</time> · Documentacion publica</h3><p>Tokenizart: guia, llms.txt, llms-full.txt e indice de recursos registrados en esa revision. Atelier: llms.txt devolvio 404 entonces. El 36/100 fue reportado por Gabriel, sin una medicion independiente reproducible.</p></div><strong>Observado / declarado</strong></article></li>
-          <li><article><span>03</span><div><h3><time dateTime="2026-11-03">3 noviembre 2026</time> · Nueva observacion por origen</h3><p>Tokenizart y Atelier: el auditor detecto llms, sitemap, cabeceras Link, JSON-LD, Markdown, OpenAPI, catalogos y un indice de skills. Atelier ya respondio 200 en llms.txt y sitemap.xml. AFW: estas señales y catalogos MCP detectados. No se probaron operaciones de esas herramientas.</p></div><strong>Auditoria publica AFW</strong></article></li>
+        <ol className="phase-list" style={{ listStyle: 'none', padding: 0 }}>
+          <li><article><span>01</span><div><h3><time dateTime="2026-08-26">26 agosto 2026</time> · Baseline histórico</h3><p>Tokenizart: robots y sitemap. Atelier: robots, sin sitemap ni llms detectados en aquel baseline. AFW: documentos, catálogos y herramientas públicas descritos en el informe original. Puntajes y escalas conservados arriba.</p></div><strong>Registro histórico</strong></article></li>
+          <li><article><span>02</span><div><h3><time dateTime="2026-09-09">9 septiembre 2026</time> · Documentación pública</h3><p>Tokenizart: guia, llms.txt, llms-full.txt e índice de recursos registrados en esa revisión. Atelier: llms.txt devolvió 404 entonces. El 36/100 fue reportado por Gabriel, sin una medición independiente reproducible.</p></div><strong>Observado / declarado</strong></article></li>
+          <li><article><span>03</span><div><h3><time dateTime="2026-11-03">3 noviembre 2026</time> · Nueva observación por origen</h3><p>Tokenizart y Atelier: el auditor detectó llms, sitemap, cabeceras Link, JSON-LD, Markdown, OpenAPI, catálogos y un índice de skills. Atelier ya respondió 200 en llms.txt y sitemap.xml. AFW: estas señales y catálogos MCP detectados. No se probaron operaciónes de esas herramientas.</p></div><strong>Auditoría pública AFW</strong></article></li>
         </ol>
-        <p>Una capa detectada es una pista para revisar: no valida el contenido completo del contrato ni concede acceso. La fecha exacta de incorporacion de cada recurso y la operacion privada siguen fuera de esta comprobacion.</p>
+        <p>Una capa detectada es una pista para revisar: no valida el contenido completo del contrato ni concede acceso. La fecha exacta de incorporación de cada recurso y la operación privada siguen fuera de esta comprobacion.</p>
       </section>
 
       <section className="atelier-explainer">
