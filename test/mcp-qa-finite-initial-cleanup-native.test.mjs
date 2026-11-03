@@ -126,3 +126,9 @@ test('malformed actual activation ACK remains an uncertain issued effect',()=>us
  f.alarmMode='activation-ack-bad';assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');const rows=await f.stub.snapshot();
  assert.ok(record(rows,'activation-send'));assert.equal(record(rows,'activation-ack'),null);assert.equal(f.activations.length,1);
 }));
+
+test('preexisting activation SEND blocks before any activation POST',()=>using(async f=>{
+ await f.stub.restoreMethods();await f.stub.configure('preexisting-send');
+ assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');const rows=await f.stub.snapshot();
+ assert.equal(rows.find(([k])=>k===P+'activation-send')?.[1],'SYN conflict');assert.equal(f.activations.length,0);
+}));

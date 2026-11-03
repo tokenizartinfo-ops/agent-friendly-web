@@ -25,7 +25,7 @@ for(const fault of ['guard','inventory','schema','qa','history','custody'])test(
  if(['qa','history','custody'].includes(fault))f.gateMode=fault;
  const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
  assert.equal(r.status,'admin_pending',fault);
- assert.equal(f.uploads.length,1);assert.equal(f.restores.length,0);
+ assert.equal(f.uploads.length,1);assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
  assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'),fault+' reached durable arm');
  assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
 }));
@@ -37,7 +37,7 @@ test('failed sibling retains the actual unfinished D1 read until it settles',()=
  assert.equal((await f.stub.stats()).held,true,'the native query completion remains held');
  assert.equal((await f.stub.probeStageAvailability()).available,false,'the prior actor work remains retained');
  assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
- assert.equal(f.restores.length,0);
+ assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
  await f.stub.release();
  let available=false;
  for(let n=0;n<100&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,10));}
@@ -54,7 +54,7 @@ for(const fault of ['active-container','schedule','ineligible','candidate-module
  const target=fault==='active-container'?'/instances-v2?':fault==='schedule'?'/schedules':fault==='ineligible'?'/versions?deployable=true':'/versions/55555555-5555-4555-8555-555555555555?include=modules';
  assert.ok(f.requests.some(url=>url.includes(target)),fault+' reached its primary read');
  assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
- assert.equal(f.restores.length,0);
+ assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
 }));
 
 test('failed primary sibling retains actual outstanding provider read',()=>using(async f=>{
@@ -81,7 +81,7 @@ for(const fault of ['operator-pointer','operator-version','canary-pointer','tail
  const target=fault==='operator-pointer'?'agent-friendly-web-release-operator/deployments?':fault==='operator-version'?'agent-friendly-web-release-operator/versions/':fault==='canary-pointer'?'agent-friendly-web-delegated-canary/deployments?':'/tails';
  assert.ok(f.requests.some(url=>url.includes(target)),fault+' reached its primary read');
  assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
- assert.equal(f.restores.length,0);
+ assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
 }));
 
 test('late primary headers cancel open response body after sibling failure',()=>using(async f=>{
@@ -108,7 +108,7 @@ test('final serial canary pointer drift blocks before activation',()=>using(asyn
  assert.ok(f.pointerReads>=5,'the post-inventory pointer was observed');
  assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'));
  assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
- assert.equal(f.restores.length,0);
+ assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
 }));
 test('late initial journal conflict blocks the final gate',()=>using(async f=>{
  const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
@@ -116,5 +116,5 @@ test('late initial journal conflict blocks the final gate',()=>using(async f=>{
  assert.ok(f.pointerReads>=5);
  assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'));
  assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
- assert.equal(f.restores.length,0);
+ assert.equal(f.restores.length,0);assert.equal(f.activations.length,0);
 },'late-initial-journal'));
