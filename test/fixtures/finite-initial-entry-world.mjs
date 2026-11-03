@@ -111,6 +111,7 @@ export async function initialEntryHarness(mode='normal'){
      f.activations.push({body,data});f.activationAnnotation=data.annotations['workers/message'];
      result={id:'66666666-6666-4666-8666-666666666666',...data};f.pointerMode=f.alarmMode==='activation-pointer-drift'?'foreign':'candidate';
      if(f.alarmMode==='activation-ack-bad')result.versions[0].percentage=99;
+     if(f.alarmMode==='activation-held'){f.held='activation';await new Promise(resolve=>{f.release=resolve;});}
      if(f.alarmMode==='activation-ack-lost')throw Error('SYN activation applied ACK lost');
     }else{
      f.restores.push({body,data});result={id:'77777777-7777-4777-8777-777777777777',...data};f.restored=result;f.pointerMode='restored';

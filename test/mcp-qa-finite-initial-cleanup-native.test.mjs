@@ -132,3 +132,12 @@ test('preexisting activation SEND blocks before any activation POST',()=>using(a
  assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');const rows=await f.stub.snapshot();
  assert.equal(rows.find(([k])=>k===P+'activation-send')?.[1],'SYN conflict');assert.equal(f.activations.length,0);
 }));
+
+test('timed out actual activation POST remains retained and cannot write a late ACK',()=>using(async f=>{
+ f.alarmMode='activation-held';const operation=f.stub.invoke(f.refs);let held=false;
+ for(let n=0;n<150&&!held;n++){held=f.held==='activation';if(!held)await new Promise(resolve=>setTimeout(resolve,20));}assert.equal(held,true);
+ assert.equal((await operation).status,'admin_pending');const rows=await f.stub.snapshot();assert.ok(record(rows,'activation-send'));assert.equal(record(rows,'activation-ack'),null);
+ assert.equal((await f.stub.probeStageAvailability()).available,false);f.release();
+ let available=false;for(let n=0;n<150&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,20));}
+ assert.equal(available,true);assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.activations.length,1);
+}));
