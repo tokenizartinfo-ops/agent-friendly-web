@@ -20,3 +20,15 @@ test('old guard 401 stays unavailable without exposing credential or changing ac
 for(const mode of ['aborted','expired'])test('unavailable parent prevents native custody reads '+mode,()=>using('normal',async f=>{
  const n=f.requests.length,r=await f.stub.probeNativeCustody(mode);assert.notEqual(r.status,'observed');assert.equal(f.requests.length,n);assert.equal(f.uploads.length,0);
 }));
+
+test('unscoped caller cannot start native custody reads',()=>using('normal',async f=>{
+ const before=f.requests.length,r=await f.stub.probeNativeCustody('unscoped');
+ assert.equal(r.status,'unavailable');assert.equal(f.requests.length,before);assert.equal(f.uploads.length,0);
+}));
+test('scoped pending custody read remains retained after timeout',()=>using('custody-hold',async f=>{
+ const before=await f.stub.snapshot(),result=await f.stub.probeNativeCustody();
+ assert.equal(result.status,'unavailable');assert.equal(f.held,'custody-read');
+ try{assert.equal((await f.stub.probeStageAvailability()).available,false);}finally{f.release();}
+ let available=false;for(let n=0;n<200&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,10));}
+ assert.equal(available,true);assert.deepEqual(await f.stub.snapshot(),before);assert.equal(f.uploads.length,0);assert.equal(f.restores.length,0);
+}));
