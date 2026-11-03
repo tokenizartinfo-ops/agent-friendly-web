@@ -83,3 +83,15 @@ test('B2b corrupt backup chunk blocks fixed restore',()=>using(async f=>{
 test('B2b exhausted original C1 never renews or dispatches',()=>using(async f=>{
  const plan=await prepared(f);await f.future();const before=await f.stub.snapshot();assert.equal((await f.alarmAt(plan.C1)).status,'admin_pending');assert.deepEqual(await f.stub.snapshot(),before);assert.equal(f.restores.length,0);
 }));
+
+test('B2b completed never_activated rejects later unsettled activation SEND without effects',()=>using(async f=>{
+ const plan=await prepared(f);assert.equal((await f.alarmAt(plan.C0+1)).status,'never_activated');await f.future('send');const rows=await f.stub.snapshot(),before=f.requests.length;
+ assert.equal((await f.alarmAt(plan.C0+60001)).status,'admin_pending');assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.requests.length,before);assert.equal(f.restores.length,0);
+}));
+for(const mode of ['delete','contradict'])test('B2b completed restored rejects '+mode+' restore ACK without effects',()=>using(async f=>{
+ const plan=await prepared(f);await f.future();assert.equal((await f.alarmAt(plan.C0+1)).status,'restored');await f.stub.mutateCleanup('restore-ack',mode);const rows=await f.stub.snapshot(),before=f.requests.length;
+ assert.equal((await f.alarmAt(plan.C0+60001)).status,'admin_pending');assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.requests.length,before);assert.equal(f.restores.length,1);
+}));
+test('B2b pre-arm activation SEND cannot authorize restore',()=>using(async f=>{
+ const plan=await prepared(f);await f.future('pre-arm');const rows=await f.stub.snapshot(),arm=record(rows,'arm-ack'),send=record(rows,'activation-send');assert.ok(send.issuedAt<arm.acknowledgedAt);assert.equal((await f.alarmAt(plan.C0+1)).status,'admin_pending');assert.equal(f.restores.length,0);assert.equal(record(await f.stub.snapshot(),'restore-send'),null);
+}));
