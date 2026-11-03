@@ -8,7 +8,7 @@ async function using(fn,mode='normal'){
  finally{await f.stub.restoreMethods();await f.mf.dispose();await f.cleanup();}
 }
 const has=(f,part)=>f.requests.some(x=>x.includes(part));
-test('same original initial actor observes all preliminary gates without activation',()=>using(async f=>{
+test('same original initial actor observes preliminary gates before activation',()=>using(async f=>{
  const r=await f.stub.invoke(f.refs);
  assert.equal(r.status,'material_recorded',JSON.stringify(r));
  assert.equal(r.authorizesEffects,false);assert.equal(r.completePackage,false);
@@ -16,7 +16,7 @@ test('same original initial actor observes all preliminary gates without activat
  assert.ok(has(f,'/workflows?per_page=100&page=1'));
  assert.equal(f.requests.filter(x=>x.includes('independent-closure-qa/deployments?per_page=1')).length>=4,true);
  assert.equal(f.uploads.length,1);assert.equal(f.restores.length,0);
- assert.equal(f.requests.some(x=>x.includes('/deployments')&&!x.endsWith('?per_page=1')),false);
+ assert.equal(f.activations.length,1);
 }));
 for(const fault of ['guard','inventory','schema','qa','history','custody'])test('preliminary '+fault+' failure cannot progress after arm',()=>using(async f=>{
  if(fault==='guard')f.oldGuardMode='http-401';

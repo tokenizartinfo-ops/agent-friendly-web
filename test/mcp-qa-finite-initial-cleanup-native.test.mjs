@@ -22,7 +22,7 @@ test('B2b finite alarm refuses orphan ownership fragment instead of nominal fall
 }));
 
 const record=(rows,key)=>JSON.parse(rows.find(([k])=>k===P+key)?.[1]??'null');
-async function prepared(f){assert.equal((await f.stub.invoke(f.refs)).status,'material_recorded');return record(await f.stub.snapshot(),'plan');}
+async function prepared(f){await f.stub.restoreMethods();await f.stub.configure('late-initial-journal');assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');await f.stub.restoreMethods();await f.stub.configure('normal');return record(await f.stub.snapshot(),'plan');}
 for(const fault of ['missing-get-alarm','missing-list'])test('B2b predictable '+fault+' fails before permanent Entry',()=>using(async f=>{
  await f.stub.restoreMethods();await f.stub.configure(fault);assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');
  await f.stub.restoreMethods();assert.equal((await f.stub.snapshot()).some(([k])=>k==='afw.finite-initial-preparation.v1:entry'),false);assert.equal(f.uploads.length,0);
@@ -107,5 +107,12 @@ test('initial winner durably records actual activation after one fixed POST',()=
  assert.ok(record(rows,'activation-send'),'live winner must persist SEND');
  assert.ok(record(rows,'activation-ack'),'actual provider response must yield ACK');
  assert.ok(record(rows,'activation-completion'),'primary readback must yield Completion');
+ assert.equal(f.activations.length,1);assert.equal(f.restores.length,0);
  assert.equal(r.status,'material_recorded');
+ assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.equal(f.activations.length,1);
+}));
+test('lost activation acknowledgement remains uncertain and never reposts',()=>using(async f=>{
+ f.alarmMode='activation-ack-lost';assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');
+ const rows=await f.stub.snapshot();assert.ok(record(rows,'activation-send'));assert.equal(record(rows,'activation-ack'),null);assert.equal(f.activations.length,1);
+ assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.activations.length,1);
 }));
