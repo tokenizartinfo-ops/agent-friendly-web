@@ -1,0 +1,7 @@
+# Pre-Entry native host Unit A — source acceptance
+
+Independent task review: compliant with narrowed Unit A scope, quality Approved; no Critical, Important or actionable Minor findings. Source9a33bd5e48c47241844ea1f46764666c4448af66, report6e1b1414344c81df83b63d878d50d9e931263c39. Full review package5151bfd87f3c3cdcb90ba46c7a7546d198b13cc6 records BASE68ae439241a2e9cfe5b7df3a841467a80820adb1 through report HEAD. Actions41693118183 independently observed complete/success;14host+105regression,0fail/skip and lint as recorded. No suite rerun by reviewer.
+
+Actualthis.ctx/env fixed helper invocation, actor/source/context/operation/instance/timing checks and bounded strict receipt were reviewed. Original binding capability boundary retained, H/context not credentials. Native helper retains own readonly scope, children and outstanding operations; no Entry/admission/effect authority. Temporary qualifier excluded from integration.
+
+Source integration approval is NOT promotion readiness. Exact395915B baseline/hash, its valid-entry inherited methods, reachable binding holders and retention interaction require actual qualification before any upload. UnitB controller/command and full artifact/preservation/readback are absent. Synthetic no-argument inventory is not that proof. No provider call/deployment/credential renewal, expired source ceiling unchanged. operationalReadiness=false;completePackage=false;PC-off pending.
