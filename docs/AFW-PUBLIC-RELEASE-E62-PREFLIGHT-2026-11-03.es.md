@@ -32,3 +32,13 @@ Preparar un perfil específico para el artefacto e62 con inventario y observador
 El secreto `AFW_PUBLIC_UPLOAD_TOKEN` del entorno `afw-public-release` no fue leído ni probado aquí. Su última autorización conocida de siete días terminaba el 30 de octubre en Argentina. Confirmar vigencia y alcance efectivo antes de una operación remota; no deducirlos de la existencia del secreto en GitHub. Comprobar que la versión activa actual sea recuperable y preservar cambios legítimos posteriores antes de promover.
 
 La futura observación debe cubrir por lo menos la portada y guía públicas, el caso Tokenizart, el JSON fechado, la FAQ de AI Index en ES/EN/PT y las fronteras privadas anónimas. Registrar origen, fecha, versión y contenido esperado. No inferir aceptación de AI Index ni funcionamiento privado desde la publicación pública.
+
+## Calificación de solo lectura en GitHub
+
+Run [41662447007](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41662447007), job 126008890141, intento 1, ejecutó el calificador de esta rama `50c4f27239a8b5af33daabdc52d8deb9d35d7385`. Comprobó 20 pruebas existentes del archivo, dos nuevas de procedencia y límites, y 27 pruebas de caso, FAQ y guía, todas aprobadas.
+
+El runner validó el evento push/main, revisión y árbol e62, run exitoso, plazo y digest del ZIP. Recorrió en memoria 339 archivos y 5.810.921 bytes descomprimidos, rechazando rutas inseguras, enlaces, colisiones, compresión y tamaños fuera de límites. El JSON del caso coincidió por bytes con la fuente fijada. Encontró en los archivos compilados marcadores de cronología y textos de la guía en ES/EN/PT. El inventario deriva del ZIP fijado por digest, no de un inventario independiente previo.
+
+Recibo e inventario saneados en artifact 13242836747, digest GitHub SHA-256 `1b049220e1d5404836b16377291281ae5e0b380b9c4c71abeecc8560aacd77d4`, vence 2026-11-10 15:18:18 UTC. El ZIP principal conserva su vencimiento original. No se extrajo ni ejecutó el paquete; los marcadores no prueban el renderizado de la candidata ni su publicación.
+
+La lectura primaria adicional aportada por operación a las 15:15:30.286 UTC mostró diez nombres/tipos de bindings conocidos, flags de compatibilidad y subdominio y previews deshabilitados. Es un dato fechado, no verificación del secreto ni de recuperación. Releer y comparar las huellas completas en el perfil específico antes de cualquier carga.
