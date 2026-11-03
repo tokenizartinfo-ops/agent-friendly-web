@@ -147,14 +147,16 @@ test('all missing assets share a strict34GET budget rather than renewing one all
  assert.equal(calls,34);assert.equal(out.assets.every(x=>x.ok),false);assert.ok(now<30000);
 });
 
-test('case v2 requires current cards, closed history, CSS reference, chronology and limits', async()=>{
+test('case v2 requires visible current cards, closed history, loaded stylesheet and dated evidence', async()=>{
  const {caseResult}=await import('../scripts/public-case-v2-acceptance.mjs');
- const markers=['current-title','2026-08-26','2026-09-09','2026-11-03','/cases/tokenizart/public-audit-2026-11-03.json','no acredita permisos, acciones, pagos','/_next/static/css/page.BTbpqG9k.css'];
+ const markers=['2026-08-26','2026-09-09','2026-11-03','/cases/tokenizart/public-audit-2026-11-03.json','no acredita permisos, acciones, pagos'];
  const cards=[87,87,95].map(x=>'<article data-current-metric="true"><strong>'+x+'</strong></article>').join('');
- const html=markers.join(' ')+' <details id="previous-measurements">'+cards;
+ const sheet='<link rel="stylesheet" href="/_next/static/css/page.BTbpqG9k.css"/>';
+ const html=markers.join(' ')+sheet+'<section aria-labelledby="current-title">'+cards+'</section><details id="previous-measurements"></details>';
  assert.equal(caseResult(200,Buffer.from(html)).ok,true);
  for(const marker of markers)assert.equal(caseResult(200,Buffer.from(html.replaceAll(marker,''))).ok,false);
- for(const invalid of [html.replace('87</strong>','23</strong>'),html.replace('<details id=','<details open id='),html+'Tres superficies, dos auditores'])assert.equal(caseResult(200,Buffer.from(invalid)).ok,false);
+ const invalid=[html.replace('87</strong>','23</strong>'),html.replace('<details id=','<details open id='),html+'Tres superficies, dos auditores',html+'<div class="case-score-band">',html.replace(sheet,'/_next/static/css/page.BTbpqG9k.css'),html.replace(cards,'<details>'+cards+'</details>')];
+ for(const value of invalid)assert.equal(caseResult(200,Buffer.from(value)).ok,false);
  assert.equal(caseResult(403,Buffer.from(html)).ok,false);
 });
 

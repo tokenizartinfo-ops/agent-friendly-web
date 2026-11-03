@@ -176,11 +176,14 @@ export function journeyResult(route,locale,status,bytes){
 export function caseResult(status,bytes){
  try{
   const html=new TextDecoder('utf-8',{fatal:true}).decode(bytes);
-  const markers=['current-title','2026-08-26','2026-09-09','2026-11-03','/cases/tokenizart/public-audit-2026-11-03.json','no acredita permisos, acciones, pagos','/_next/static/css/page.BTbpqG9k.css'];
-  const cards=[...html.matchAll(/<article\b[^>]*data-current-metric[^>]*>([\s\S]*?)<\/article>/g)];
+  const markers=['2026-08-26','2026-09-09','2026-11-03','/cases/tokenizart/public-audit-2026-11-03.json','no acredita permisos, acciones, pagos'];
+  const section=html.match(/<section\b(?=[^>]*\baria-labelledby="current-title")[^>]*>([\s\S]*?)<\/section>/);
+  const visible=(section?.[1]||'').replace(/<details\b[^>]*>[\s\S]*?<\/details>/g,'');
+  const cards=[...visible.matchAll(/<article\b[^>]*data-current-metric[^>]*>([\s\S]*?)<\/article>/g)];
   const history=html.match(/<details\b[^>]*id="previous-measurements"[^>]*>/);
   const scores=cards.map(x=>(x[1].match(/<strong>(87|95)<\/strong>/)||[])[1]);
-  return {status,ok:status===200&&markers.every(x=>html.includes(x))&&scores.join(',')==='87,87,95'&&!!history&&!/\sopen(?:\s|=|>)/.test(history[0])&&!html.includes('Tres superficies, dos auditores')};
+  const css=[...html.matchAll(/<link\b[^>]*>/g)].some(x=>/\brel="stylesheet"/.test(x[0])&&/\bhref="\/_next\/static\/css\/page\.BTbpqG9k\.css"/.test(x[0]));
+  return {status,ok:status===200&&markers.every(x=>html.includes(x))&&scores.join(',')==='87,87,95'&&!!history&&!/\sopen(?:\s|=|>)/.test(history[0])&&css&&!html.includes('Tres superficies, dos auditores')&&!/class="[^"]*(?:architecture-band|case-score-band)/.test(html)};
  }catch{return {status,ok:false};}
 }
 
