@@ -120,10 +120,10 @@ export async function initialEntryHarness(mode='normal'){
      f.held='body';return new Response(new ReadableStream({start(controller){f.release=()=>{controller.enqueue(new TextEncoder().encode(JSON.stringify({success:true,errors:[],messages:[],result})));controller.close();};}}),{headers:{date:new Date().toUTCString(),'content-type':'application/json'}});
     }
    }else if(req.url===CF+'/workers/workers/agent-friendly-web-delegated-canary/versions/55555555-5555-4555-8555-555555555555?include=modules'){assert.ok(f.uploaded);result=structuredClone(f.uploaded);
-    if(mode==='wrong-uploaded-module'||f.alarmMode==='candidate-module')result.modules[0].content_base64=Buffer.from(x.script).toString('base64');
+    if(mode==='wrong-uploaded-module'||f.alarmMode==='candidate-module'&&f.gateReached)result.modules[0].content_base64=Buffer.from(x.script).toString('base64');
     if(mode==='qa-uploaded-module')result.modules[0].content_base64=Buffer.from('export default{};').toString('base64');
-    if(mode==='literal-secret'||f.alarmMode==='candidate-secret')result.bindings.find(b=>b.type==='secret_text').text='SYNTHETIC_SHOULD_NEVER_PERSIST';
-    if(mode==='new-resource'||f.alarmMode==='candidate-resource')result.bindings.find(b=>b.name==='AFW_FINITE_TRIAL_CONTROL').namespace_id='f'.repeat(32);
+    if(mode==='literal-secret'||f.alarmMode==='candidate-secret'&&f.gateReached)result.bindings.find(b=>b.type==='secret_text').text='SYNTHETIC_SHOULD_NEVER_PERSIST';
+    if(mode==='new-resource'||f.alarmMode==='candidate-resource'&&f.gateReached)result.bindings.find(b=>b.name==='AFW_FINITE_TRIAL_CONTROL').namespace_id='f'.repeat(32);
     if(mode==='new-class')result.exports.NewClass={type:'durable-object',storage:'sqlite'};
     if(mode==='new-migration')result.migrations=[];
     if(mode==='enabled-cache')result.exports.default.cache={enabled:true};
