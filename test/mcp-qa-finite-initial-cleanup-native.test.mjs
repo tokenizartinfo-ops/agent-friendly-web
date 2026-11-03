@@ -25,7 +25,7 @@ const record=(rows,key)=>JSON.parse(rows.find(([k])=>k===P+key)?.[1]??'null');
 async function prepared(f){assert.equal((await f.stub.invoke(f.refs)).status,'material_recorded');return record(await f.stub.snapshot(),'plan');}
 for(const fault of ['missing-get-alarm','missing-list'])test('B2b predictable '+fault+' fails before permanent Entry',()=>using(async f=>{
  await f.stub.restoreMethods();await f.stub.configure(fault);assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');
- assert.equal((await f.stub.snapshot()).some(([k])=>k==='afw.finite-initial-preparation.v1:entry'),false);assert.equal(f.uploads.length,0);
+ await f.stub.restoreMethods();assert.equal((await f.stub.snapshot()).some(([k])=>k==='afw.finite-initial-preparation.v1:entry'),false);assert.equal(f.uploads.length,0);
 }));
 for(const fault of ['cleanup-missing-tx-alarm','cleanup-never-commit','cleanup-callback-retry','cleanup-final-return-lost','cleanup-reject-sync','cleanup-alarm-ack-lost','cleanup-publisher-drift','cleanup-nominal-conflict'])test('B2b native '+fault+' never produces positive arm or permits replay',()=>using(async f=>{
  await f.stub.restoreMethods();await f.stub.configure(fault);assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');
@@ -48,7 +48,7 @@ test('B2b persisted native restart owns initial alarm; manual SYN delivery obser
  assert.equal(r.status,'never_activated');assert.equal(record(await f.stub.snapshot(),'state').status,'complete');assert.equal(f.restores.length,0);assert.equal(await f.stub.alarmInfo(),null);
 },'restart'));
 test('B2b only actual finite alarm with no initial records delegates nominal unchanged',()=>using(async f=>{
- const result=await f.stub.initialAlarm();assert.deepEqual(result,{state:'unavailable'});assert.equal(f.requests.length,0);
+ const result=await f.stub.nominalAlarmData();assert.deepEqual(result,{state:'unavailable'});assert.equal(f.requests.length,0);
 }));
 test('B2b complete future SYN activation evidence permits exactly one fixed native restore wire',()=>using(async f=>{
  const plan=await prepared(f);await f.future();const r=await f.alarmAt(plan.C0+1);assert.equal(r.status,'restored');
