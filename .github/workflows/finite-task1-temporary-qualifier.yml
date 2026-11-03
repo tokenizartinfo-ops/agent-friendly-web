@@ -3,7 +3,7 @@ name: Finite initial cleanup temporary qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-initial-*.mjs', 'lib/mcp-qa-finite-historical-source.mjs', 'test/mcp-qa-finite-initial-*.test.mjs', 'test/mcp-qa-finite-historical-source-native.test.mjs', 'test/fixtures/finite-initial-*.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-initial-*.mjs', 'lib/mcp-qa-finite-historical-source.mjs', 'lib/mcp-fixed-terminal-workflows.mjs', 'test/mcp-qa-finite-initial-*.test.mjs', 'test/mcp-qa-finite-historical-source-native.test.mjs', 'test/fixtures/finite-initial-*.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -24,7 +24,7 @@ jobs:
         run: node --test test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-initial-cleanup-records.test.mjs test/mcp-qa-finite-initial-workflows-native.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-initial-*.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-initial-cleanup-*.test.mjs test/fixtures/finite-initial-entry-world.mjs
+        run: npx eslint lib/mcp-fixed-terminal-workflows.mjs lib/mcp-qa-finite-initial-*.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-initial-cleanup-*.test.mjs test/fixtures/finite-initial-entry-world.mjs
   forward-consumers:
     runs-on: ubuntu-24.04
     timeout-minutes: 12
