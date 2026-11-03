@@ -41,7 +41,7 @@ export default function TokenizartCasePage() {
   return (
     <>
       <SiteHeader routeKey="tokenizartCase" />
-      <main id="afw-main-content" className={styles.page}>
+      <main className={styles.page}>
         <header className={styles.hero}>
           <span className={styles.eyebrow}>Un caso real · Tokenizart + Atelier</span>
           <h1>Que se entienda.<br /><em>Que se pueda encontrar.</em></h1>

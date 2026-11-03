@@ -55,7 +55,7 @@ try{
  page.on('console',message=>{if(message.type()==='error')errors.push(message.text());});
  await page.route('**/*',route=>new URL(route.request().url()).hostname==='127.0.0.1'?route.continue():route.abort());
  const response=await page.goto(base+'/casos/tokenizart',{waitUntil:'networkidle'});
- assert.equal(response.status(),200);assert.equal(await page.locator('h1').count(),1);
+ assert.equal(response.status(),200);assert.equal(await page.locator('#afw-main-content').count(),1);assert.equal(await page.locator('h1').count(),1);
  assert.deepEqual(await page.locator('[data-current-metric] strong').allTextContents(),['87','87','95']);
  assert.equal(await page.locator('#previous-measurements').getAttribute('open'),null);
  assert.equal(await page.locator('#previous-measurements table').isVisible(),false);
@@ -66,6 +66,7 @@ try{
  await page.screenshot({path:path.join(output,'viewport-'+viewport.width+'.png')});
  const history=page.locator('#previous-measurements summary');await history.focus();await page.keyboard.press('Enter');
  assert.equal(await page.locator('#previous-measurements table').isVisible(),true);
+ await page.screenshot({path:path.join(output,'expanded-'+viewport.width+'.png'),fullPage:true});
  await history.focus();await page.keyboard.press('Enter');
  assert.equal(await page.locator('#previous-measurements table').isVisible(),false);
  checks.push({viewport,overflow,errors,currentScores:[87,87,95],historyKeyboardToggle:true});
