@@ -152,7 +152,7 @@ test('e62 case requires the dated chronology, evidence link and limits', async()
  const marks=['Cómo aparecen las capas de descubrimiento','2026-08-26','2026-09-09','2026-11-03','/cases/tokenizart/public-audit-2026-11-03.json','no acredita permisos, acciones, pagos'];
  const html=marks.join(' ');
  assert.equal(caseResult(200,Buffer.from(html)).ok,true);
- for(const marker of marks)assert.equal(caseResult(200,Buffer.from(html.replace(marker,''))).ok,false);
+ for(const marker of marks)assert.equal(caseResult(200,Buffer.from(html.replaceAll(marker,''))).ok,false);
  assert.equal(caseResult(403,Buffer.from(html)).ok,false);
 });
 
