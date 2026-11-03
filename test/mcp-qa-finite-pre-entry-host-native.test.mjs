@@ -100,3 +100,13 @@ hostTest('fixed wrapper bundles reproducibly with only fixed external boundaries
  const names=imports.map(x=>x.path);assert.equal(names.includes('./closed-rollback.mjs'),true);assert.equal(names.includes('./pre-entry-custody-context.mjs'),true);assert.equal(names.every(x=>['./closed-rollback.mjs','./pre-entry-custody-context.mjs','node:async_hooks','node:crypto'].includes(x)),true);
  console.log('CUSTODY_HOST_BUNDLE',JSON.stringify({bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')}));
 });
+
+hostTest('Workflow rejects wrong correlation and instance before actor access',async()=>{
+ for(const variant of ['correlation','instance']){
+  const f=await fixture();try{
+   const params={operation:'inspect_pre_entry_custody',observationId:variant==='correlation'?'f'.repeat(64):id};
+   const name=variant==='instance'?'afw-qa-custody-'+'f'.repeat(64):'afw-qa-custody-'+id;
+   assert.equal((await f.run(params,name)).status,'blocked');assert.equal(f.calls.length,0);
+  }finally{await f.mf.dispose();}
+ }
+});
