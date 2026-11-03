@@ -16,6 +16,10 @@ const exact=exactPath?await readFile(exactPath):null;
 if(exact){assert.equal(exact.length,395915);assert.equal(createHash('sha256').update(exact).digest('hex'),baselineHash);}
 console.log('CUSTODY_HOST_BASELINE',JSON.stringify({mode:exact?'exact':'synthetic',bytes:exact?.length??null,sha256:exact?baselineHash:null}));
 
+const hasWrapper=await readFile('scripts/qa-finite-pre-entry-custody-wrapper.mjs').then(()=>true,()=>false);
+test('fixed host wrapper source exists',()=>assert.equal(hasWrapper,true));
+const hostTest=hasWrapper?test:test.skip;
+
 async function fixture(mode='normal'){
  const now=Date.now();
  const context={purpose:'afw.qa-pre-entry-custody-context.v1',id,sourceRevision:source,baselineVersionId:'c570b60b-95dc-48e1-89f3-9c4651691dbc',baselineModuleHash:baselineHash,startAt:now-1000,expiresAt:now+120000};
@@ -53,19 +57,19 @@ async function fixture(mode='normal'){
  }
  return{mf,stub,ns:b.AFW_INDEPENDENT_CLOSURE,run,calls,get held(){return held;},release:()=>release?.()};
 }
-test('fixed native Workflow reaches actual custody actor without consuming Entry or changing history',async()=>{
+hostTest('fixed native Workflow reaches actual custody actor without consuming Entry or changing history',async()=>{
  const f=await fixture();try{
   const before=await f.stub.snapshot();assert.deepEqual(await f.stub.inherited(),{alarm:{state:'unavailable'},arm:{state:'unavailable'},status:{state:'unavailable'}});
   const r=await f.run();assert.equal(r.status,'observed');assert.equal(r.authorizesEffects,false);assert.equal(r.operationalReadiness,false);assert.equal(r.scopeVerified,false);
   assert.equal(f.calls.length,3);assert.equal(await f.stub.snapshot(),before);assert.equal((await f.mf.dispatchFetch('https://synthetic.invalid/')).status,404);
  }finally{await f.mf.dispose();}
 });
-for(const mode of ['open','expired','bad-source'])test('closed host rejects '+mode,async()=>{const f=await fixture(mode);try{assert.notEqual((await f.run()).status,'observed');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
-test('selector and wrong actor cannot start custody reads',async()=>{const f=await fixture();try{
+for(const mode of ['open','expired','bad-source'])hostTest('closed host rejects '+mode,async()=>{const f=await fixture(mode);try{assert.notEqual((await f.run()).status,'observed');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
+hostTest('selector and wrong actor cannot start custody reads',async()=>{const f=await fixture();try{
  for(const args of [[],['f'.repeat(64)],[id,source,{}]])assert.notEqual((await f.stub.readPreEntryCustody(...args)).status,'observed');
  const wrong=f.ns.get(f.ns.idFromName('foreign'));assert.notEqual((await wrong.readPreEntryCustody(id,source)).status,'observed');
  assert.equal(f.calls.length,0);
  }finally{await f.mf.dispose();}});
-test('pending read remains exclusive after timeout until underlying operation settles',async()=>{
+hostTest('pending read remains exclusive after timeout until underlying operation settles',async()=>{
  const f=await fixture('hold');try{const r=await f.run();assert.notEqual(r.status,'observed');assert.equal(f.held,true);assert.equal(await f.stub.availability(),false);assert.notEqual((await f.stub.readPreEntryCustody(id,source)).status,'observed');f.release();let ok=false;for(let n=0;n<200&&!ok;n++){ok=await f.stub.availability();if(!ok)await new Promise(r=>setTimeout(r,10));}assert.equal(ok,true);}finally{f.release();await f.mf.dispose();}
 });
