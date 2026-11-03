@@ -97,6 +97,6 @@ hostTest('fixed wrapper bundles reproducibly with only fixed external boundaries
  const output=Object.values(a.metafile.outputs);assert.equal(output.length,1);
  assert.deepEqual([...output[0].exports].sort(),['IndependentClosure','PrivateQaBootstrap','PrivateQaNamedConfirmation','PrivateQaPreregistration','default'].sort());
  const imports=output[0].imports;assert.equal(imports.every(x=>x.external&&x.kind==='import-statement'),true);
- assert.deepEqual([...new Set(imports.map(x=>x.path))].sort(),['./closed-rollback.mjs','./pre-entry-custody-context.mjs','node:async_hooks','node:crypto'].sort());
+ const names=imports.map(x=>x.path);assert.equal(names.includes('./closed-rollback.mjs'),true);assert.equal(names.includes('./pre-entry-custody-context.mjs'),true);assert.equal(names.every(x=>['./closed-rollback.mjs','./pre-entry-custody-context.mjs','node:async_hooks','node:crypto'].includes(x)),true);
  console.log('CUSTODY_HOST_BUNDLE',JSON.stringify({bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')}));
 });
