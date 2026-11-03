@@ -42,8 +42,8 @@ export class IndependentClosure extends BaselineClosure{
    if(actor.toString()!==g.ns.idFromName(slot).toString())fail();
    const value=await readFinitePreEntryCustody({ctx,env});
    g.check();if(this.ctx!==ctx||this.env!==env||ctx.storage!==storage||ctx.id!==actor||actor.toString()!==g.ns.idFromName(slot).toString())fail();
-   return observation(value);
-  }catch{return blocked();}
+   return JSON.stringify(observation(value));
+  }catch{return JSON.stringify(blocked());}
  }
 }
 export class PrivateQaBootstrap extends BaselineBootstrap{
@@ -57,10 +57,11 @@ export class PrivateQaBootstrap extends BaselineBootstrap{
    let executed=false;
    const value=await step.do('inspect-pre-entry-custody',{retries:{limit:0,delay:'1 second',backoff:'constant'},timeout:'15 seconds'},async()=>{
     if(executed)fail();executed=true;g.check();
-    const actor=g.ns.get(g.ns.idFromName(slot)),r=await actor.readPreEntryCustody(custodyContext.id,custodyContext.sourceRevision);g.check();return r;
+    const actor=g.ns.get(g.ns.idFromName(slot)),raw=await actor.readPreEntryCustody(custodyContext.id,custodyContext.sourceRevision);g.check();if(typeof raw!=='string'||new TextEncoder().encode(raw).length>2048)fail();return raw;
    });
-   g.check();if(!executed||Date.now()-stamp>=15000||performance.now()-origin>=15000||value?.purpose!==purpose||value.status!=='observed'||value.authorizesEffects!==false||value.operationalReadiness!==false||value.mayRetry!==false)fail();
-   return value;
+   g.check();if(!executed||Date.now()-stamp>=15000||performance.now()-origin>=15000||typeof value!=='string'||new TextEncoder().encode(value).length>2048)fail();
+   const result=JSON.parse(value);if(result?.purpose!==purpose||result.status!=='observed'||result.guardVerified!==true||result.scopeVerified!==false||result.authorizesEffects!==false||result.operationalReadiness!==false||result.mayRetry!==false)fail();
+   return result;
   }catch{return blocked();}
  }
 }
