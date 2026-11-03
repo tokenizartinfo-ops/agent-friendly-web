@@ -32,7 +32,7 @@ test('B2a private backup reconstructs exact baseline with bounded deterministic 
  assert.equal(uploadRows(rows).every(([,raw])=>Buffer.byteLength(raw)<=65536),true);
  const material=JSON.parse(rows.find(([k])=>k.startsWith('afw.finite-initial-preparation.v1:material:'))[1]);
  assert.equal(manifest.retainedIds.preconnectionId,material.preconnectionId);assert.equal(manifest.retainedIds.activationKey,material.originalContext.publication.activationKey);
- assert.equal(f.uploads[0].data.bindings.find(b=>b.name==='AFW_OAUTH_PILOT_EXPIRES_AT').text,new Date(material.intent.initialDeadline).toISOString());
+ assert.equal(f.uploads[0].data.bindings.find(b=>b.name==='AFW_OAUTH_PILOT_EXPIRES_AT').text,new Date(material.intent.I0+900000).toISOString());
  assert.equal(manifest.historicalSourceRevision,f.x.receipt.sourceRevision);assert.notEqual(manifest.historicalSourceRevision,material.intent.sourceRevision);
  for(const [key,value]of before)assert.equal(digestRows(rows.filter(([k])=>k===key)),digestRows([[key,value]]));
  const send=JSON.parse(uploadRows(rows).find(([k])=>k.endsWith(':send'))[1]);assert.equal(send.bodyHash,sha(f.uploads[0].body));assert.ok(send.deadline-send.issuedAt<=5000);
