@@ -58,8 +58,8 @@ export async function initialEntryHarness(mode='normal'){
     result=structuredClone(w.pointer);
     if(f.uploads.length>0){f.gateReached=true;if(f.gateMode==='qa')result.deployments[0].id='99999999-9999-4999-8999-999999999999';}
    }
-   else if(req.url===CF+'/workers/scripts/agent-friendly-web-release-operator/deployments?per_page=1'){if(f.gateMode==='primary-retention')await new Promise(resolve=>setTimeout(resolve,500));result={deployments:[{id:f.gateMode==='primary-retention'?'99999999-9999-4999-8999-999999999999':opPin.deploymentId,strategy:'percentage',versions:[{version_id:opPin.id,percentage:100}]}]};}
-   else if(req.url===CF+'/workers/workers/agent-friendly-web-release-operator/versions/'+opPin.id+'?include=modules')result=structuredClone(opMetadata);
+   else if(req.url===CF+'/workers/scripts/agent-friendly-web-release-operator/deployments?per_page=1'){if(f.gateMode==='primary-retention')await new Promise(resolve=>setTimeout(resolve,500));result={deployments:[{id:['primary-retention','operator-pointer'].includes(f.gateMode)?'99999999-9999-4999-8999-999999999999':opPin.deploymentId,strategy:'percentage',versions:[{version_id:opPin.id,percentage:100}]}]};}
+   else if(req.url===CF+'/workers/workers/agent-friendly-web-release-operator/versions/'+opPin.id+'?include=modules'){result=structuredClone(opMetadata);if(f.gateMode==='operator-version')result.modules[0].content_base64=Buffer.from('SYN operator drift').toString('base64');}
    else if(req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/versions?deployable=true&per_page=100&page=1'){
     const items=Array.from({length:100},(_,i)=>({id:i===5&&f.alarmMode!=='ineligible'?x.pin.id:'00000000-0000-4000-8000-'+String(i+1).padStart(12,'0'),number:171-i}));
     result={items};
@@ -104,13 +104,13 @@ export async function initialEntryHarness(mode='normal'){
     if(f.gateMode==='primary-retention'){f.held='provider-read';await new Promise(resolve=>{f.release=resolve;});}
     return Response.json({success:true,errors:[],messages:[],result:f.alarmMode==='active-container'?[{id:'SYN'}]:[],result_info:{per_page:100}},{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString()}});
    }
-   else if(['/schedules','/tails'].some(p=>req.url.endsWith(p)))result=f.alarmMode==='schedule'?[{id:'SYN'}]:[];
+   else if(['/schedules','/tails'].some(p=>req.url.endsWith(p)))result=f.alarmMode==='schedule'||f.gateMode==='tails'&&req.url.endsWith('/tails')?[{id:'SYN'}]:[];
    else if(req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/deployments'){
     assert.equal(req.method,'POST');const body=await req.text(),data=JSON.parse(body);f.restores.push({body,data});
     result={id:'77777777-7777-4777-8777-777777777777',...data};f.restored=result;f.pointerMode='restored';
     if(f.alarmMode==='restore-ack-lost')throw Error('SYN restore applied ACK lost');
    }
-   else if(req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/deployments?per_page=1'){f.pointerReads++;if(f.pointerMode==='restored')result={deployments:[f.restored]};else if(f.pointerMode==='candidate'||f.pointerMode==='foreign')result={deployments:[{id:f.pointerMode==='foreign'?'99999999-9999-4999-8999-999999999999':'66666666-6666-4666-8666-666666666666',strategy:'percentage',versions:[{version_id:f.uploaded.id,percentage:100}],annotations:{'workers/message':f.activationAnnotation}}]};else result={deployments:[{id:mode==='baseline-drift'||mode==='pointer-drift'&&f.uploads.length?'99999999-9999-4999-8999-999999999999':x.pin.deploymentId,strategy:'percentage',versions:[{version_id:x.pin.id,percentage:100}]}]};}
+   else if(req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/deployments?per_page=1'){f.pointerReads++;if(f.pointerMode==='restored')result={deployments:[f.restored]};else if(f.pointerMode==='candidate'||f.pointerMode==='foreign')result={deployments:[{id:f.pointerMode==='foreign'?'99999999-9999-4999-8999-999999999999':'66666666-6666-4666-8666-666666666666',strategy:'percentage',versions:[{version_id:f.uploaded.id,percentage:100}],annotations:{'workers/message':f.activationAnnotation}}]};else result={deployments:[{id:mode==='baseline-drift'||mode==='pointer-drift'&&f.uploads.length||f.gateMode==='canary-pointer'&&f.gateReached?'99999999-9999-4999-8999-999999999999':x.pin.deploymentId,strategy:'percentage',versions:[{version_id:x.pin.id,percentage:100}]}]};}
    else if(req.url===CF+'/workers/workers/agent-friendly-web-delegated-canary/versions?deploy=false'){
     assert.equal(req.method,'POST');assert.equal(req.headers.get('authorization'),'Bearer synthetic-native-publisher');assert.match(req.headers.get('content-type'),/^application\/json/);
     const body=await req.text(),data=JSON.parse(body);f.uploads.push({body,data});f.uploaded={...data,id:'55555555-5555-4555-8555-555555555555',urls:[],containers:data.containers.map(c=>({...c,name:'agent-friendly-web-delegated-canary-afwowneventnode'})),bindings:data.bindings.map(b=>b.type==='inherit'?{name:b.name,type:'secret_text'}:b)};

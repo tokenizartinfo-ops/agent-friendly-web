@@ -71,3 +71,15 @@ test('failed primary sibling retains actual outstanding provider read',()=>using
  assert.equal(available,true);
  assert.deepEqual(await f.stub.snapshot(),rows);
 }));
+
+for(const fault of ['operator-pointer','operator-version','canary-pointer','tails'])test('pre-effect primary '+fault+' fails closed',()=>using(async f=>{
+ f.gateMode=fault;
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(r.status,'admin_pending',fault);
+ assert.equal(f.uploads.length,1);
+ assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'));
+ const target=fault==='operator-pointer'?'/release-operator/deployments?':fault==='operator-version'?'/release-operator/versions/':fault==='canary-pointer'?'/delegated-canary/deployments?':'/tails';
+ assert.ok(f.requests.some(url=>url.includes(target)),fault+' reached its primary read');
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ assert.equal(f.restores.length,0);
+}));
