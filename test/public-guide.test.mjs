@@ -215,3 +215,20 @@ test('start questions keep specific intent and safety boundaries ahead of onboar
     assert.equal(turn.blocked, topic === 'security_block');
   }
 });
+
+test('guide explains Cloudflare AI Index without claiming account access or indexing', () => {
+  for (const [locale, question] of [
+    ['es', '¿Qué es Cloudflare AI Index?'],
+    ['en', 'What is Cloudflare AI Index?'],
+    ['pt', 'O que é Cloudflare AI Index?'],
+  ]) {
+    const turn = respondToPublicGuide({ locale, message: question });
+    assert.equal(turn.topic, 'faq:cloudflare-ai-index');
+    assert.match(turn.answer, /beta/i);
+    const detail = respondToPublicGuide({ locale, message: locale === 'en' ? 'More detail' : locale === 'pt' ? 'Mais detalhes' : 'Más detalle', context: turn.next_context });
+    assert.match(detail.answer, /AI Search/);
+    assert.match(detail.answer, /Cloudflare/);
+  }
+  const action = respondToPublicGuide({ message: 'Publica AI Index en mi sitio' });
+  assert.equal(action.topic, 'action_boundary');
+});
