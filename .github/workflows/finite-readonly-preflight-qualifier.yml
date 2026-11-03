@@ -18,5 +18,13 @@ jobs:
       - run: node --test test/mcp-qa-independent-config-preservation.test.mjs
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: node --test test/mcp-qa-finite-pre-entry-host-native.test.mjs
+      - name: Exact historical module is mandatory for primary qualification
+        shell: bash
+        run: |
+          if AFW_REQUIRE_EXACT_BASELINE=1 node --test test/mcp-qa-finite-pre-entry-host-native.test.mjs > "$RUNNER_TEMP/exact-missing.log" 2>&1; then exit 1; fi
+          grep -q 'Exact historical baseline required' "$RUNNER_TEMP/exact-missing.log"
+          printf 'synthetic-wrong-baseline' > "$RUNNER_TEMP/wrong-baseline.mjs"
+          if AFW_REQUIRE_EXACT_BASELINE=1 AFW_QA_INSPECTION_BASE_MODULE="$RUNNER_TEMP/wrong-baseline.mjs" node --test test/mcp-qa-finite-pre-entry-host-native.test.mjs > "$RUNNER_TEMP/exact-wrong.log" 2>&1; then exit 1; fi
+          grep -q 'AssertionError' "$RUNNER_TEMP/exact-wrong.log"
       - run: node --test test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-initial-cleanup-records.test.mjs test/mcp-qa-finite-initial-workflows-native.test.mjs test/mcp-qa-finite-initial-history-schema-native.test.mjs test/mcp-qa-finite-initial-old-guard-native.test.mjs test/mcp-qa-finite-initial-gates-native.test.mjs test/mcp-qa-finite-initial-activation-wire-native.test.mjs test/mcp-qa-finite-initial-custody-probe-native.test.mjs test/mcp-qa-finite-initial-scope.test.mjs
-      - run: npx eslint lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-initial-custody-probe.mjs test/mcp-qa-finite-initial-scope.test.mjs test/mcp-qa-finite-initial-custody-probe-native.test.mjs test/fixtures/finite-initial-entry-world.mjs
+      - run: npx eslint scripts/qa-finite-pre-entry-custody-wrapper.mjs test/mcp-qa-finite-pre-entry-host-native.test.mjs lib/mcp-qa-independent-config-preservation.mjs test/mcp-qa-independent-config-preservation.test.mjs lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-initial-custody-probe.mjs test/mcp-qa-finite-initial-scope.test.mjs test/mcp-qa-finite-initial-custody-probe-native.test.mjs test/fixtures/finite-initial-entry-world.mjs
