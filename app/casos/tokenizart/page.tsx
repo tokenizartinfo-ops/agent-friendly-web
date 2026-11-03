@@ -176,6 +176,19 @@ export default function TokenizartCasePage() {
         <p className="case-disclaimer">HTTP 200 para un crawler demuestra acceso en una prueba; no demuestra indexacion, recomendacion ni permiso de entrenamiento.</p>
       </section>
 
+      <section className="case-progress" aria-labelledby="evolution-title">
+        <div className="section-heading plain">
+          <div><span>Evolucion documentada</span><h2 id="evolution-title">Como aparecen las capas de descubrimiento</h2></div>
+          <p>Las fechas indican cuando se observo o reporto cada capa, no cuando se instalo. Los saltos entre mediciones no prueban causalidad ni equivalencia entre motores.</p>
+        </div>
+        <ol className="phase-list">
+          <li><article><span>01</span><div><h3><time dateTime="2026-08-26">26 agosto 2026</time> · Baseline historico</h3><p>Tokenizart: robots y sitemap. Atelier: robots, sin sitemap ni llms detectados en aquel baseline. AFW: documentos, catalogos y herramientas publicas descritos en el informe original. Puntajes y escalas conservados arriba.</p></div><strong>Registro historico</strong></article></li>
+          <li><article><span>02</span><div><h3><time dateTime="2026-09-09">9 septiembre 2026</time> · Documentacion publica</h3><p>Tokenizart: guia, llms.txt, llms-full.txt e indice de recursos registrados en esa revision. Atelier: llms.txt devolvio 404 entonces. El 36/100 fue reportado por Gabriel, sin una medicion independiente reproducible.</p></div><strong>Observado / declarado</strong></article></li>
+          <li><article><span>03</span><div><h3><time dateTime="2026-11-03">3 noviembre 2026</time> · Nueva observacion por origen</h3><p>Tokenizart y Atelier: el auditor detecto llms, sitemap, cabeceras Link, JSON-LD, Markdown, OpenAPI, catalogos y un indice de skills. Atelier ya respondio 200 en llms.txt y sitemap.xml. AFW: estas señales y catalogos MCP detectados. No se probaron operaciones de esas herramientas.</p></div><strong>Auditoria publica AFW</strong></article></li>
+        </ol>
+        <p>Una capa detectada es una pista para revisar: no valida el contenido completo del contrato ni concede acceso. La fecha exacta de incorporacion de cada recurso y la operacion privada siguen fuera de esta comprobacion.</p>
+      </section>
+
       <section className="atelier-explainer">
         <div className="journey-icon"><ServerCog size={22} /></div>
         <div><span>Relacion del producto</span><h2>Atelier es donde realmente sucede la operacion.</h2></div>

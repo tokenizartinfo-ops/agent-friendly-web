@@ -39,3 +39,16 @@ test('dated public audit separates origins, engine and operational limits', () =
   assert.ok(!page.includes('Atelier: llms pendiente'));
   assert.ok(!page.includes('Publicacion verificada: 2026-09-09'));
 });
+
+test('visual chronology distinguishes observation dates from installation and reports', () => {
+  const page = readFileSync(new URL('../app/casos/tokenizart/page.tsx', import.meta.url), 'utf8');
+  assert.ok(page.includes('aria-labelledby="evolution-title"'));
+  for (const date of ['2026-08-26', '2026-09-09', '2026-11-03']) assert.ok(page.includes('dateTime="' + date + '"'));
+  assert.ok(page.includes('no cuando se instalo'));
+  assert.ok(page.includes('sin una medicion independiente reproducible'));
+  assert.ok(page.includes('No se probaron operaciones de esas herramientas'));
+  const audit = JSON.parse(readFileSync(new URL('../public/cases/tokenizart/public-audit-2026-11-03.json', import.meta.url), 'utf8'));
+  assert.equal(audit.observations[0].detectedPublicSignals.includes('mcp'), false);
+  assert.equal(audit.observations[1].detectedPublicSignals.includes('mcp'), false);
+  assert.equal(audit.observations[2].detectedPublicSignals.includes('mcp'), true);
+});

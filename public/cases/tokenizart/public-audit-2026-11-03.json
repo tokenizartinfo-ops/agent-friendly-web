@@ -10,7 +10,18 @@
       "score": 87,
       "level": "AF-4 delegable",
       "llmsStatus": 200,
-      "sitemapStatus": 200
+      "sitemapStatus": 200,
+      "detectedPublicSignals": [
+        "llms",
+        "sitemap",
+        "linkHeaders",
+        "structuredData",
+        "markdown",
+        "openapi",
+        "apiCatalog",
+        "aiCatalog",
+        "skills"
+      ]
     },
     {
       "origin": "https://atelier.tokenizart.com",
@@ -18,7 +29,18 @@
       "score": 87,
       "level": "AF-4 delegable",
       "llmsStatus": 200,
-      "sitemapStatus": 200
+      "sitemapStatus": 200,
+      "detectedPublicSignals": [
+        "llms",
+        "sitemap",
+        "linkHeaders",
+        "structuredData",
+        "markdown",
+        "openapi",
+        "apiCatalog",
+        "aiCatalog",
+        "skills"
+      ]
     },
     {
       "origin": "https://agentfriendlyweb.dev",
@@ -26,7 +48,19 @@
       "score": 95,
       "level": "AF-5 transaccional",
       "llmsStatus": 200,
-      "sitemapStatus": 200
+      "sitemapStatus": 200,
+      "detectedPublicSignals": [
+        "llms",
+        "sitemap",
+        "linkHeaders",
+        "structuredData",
+        "markdown",
+        "openapi",
+        "apiCatalog",
+        "aiCatalog",
+        "skills",
+        "mcp"
+      ]
     }
   ],
   "limits": [
