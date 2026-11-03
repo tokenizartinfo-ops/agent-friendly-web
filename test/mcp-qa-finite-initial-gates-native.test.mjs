@@ -100,3 +100,21 @@ test('late primary headers cancel open response body after sibling failure',()=>
  assert.equal(available,true,'the body cancellation has settled');
  assert.deepEqual(await f.stub.snapshot(),rows);
 },'late-body-observe'));
+
+test('final serial canary pointer drift blocks before activation',()=>using(async f=>{
+ f.gateMode='final-pointer';
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(r.status,'admin_pending');
+ assert.ok(f.pointerReads>=5,'the post-inventory pointer was observed');
+ assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'));
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ assert.equal(f.restores.length,0);
+}));
+test('late initial journal conflict blocks the final gate',()=>using(async f=>{
+ const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ assert.equal(r.status,'admin_pending');
+ assert.ok(f.pointerReads>=5);
+ assert.ok(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:arm-ack'));
+ assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ assert.equal(f.restores.length,0);
+},'late-initial-journal'));
