@@ -147,3 +147,18 @@ for(const mode of ['activation-storage-return-lost','activation-storage-sync-los
  const rows=await f.stub.snapshot();assert.ok(record(rows,'activation-send'));assert.equal(record(rows,'activation-ack'),null);assert.equal(f.activations.length,0);
  await f.stub.restoreMethods();await f.stub.configure('normal');assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.activations.length,0);
 }));
+
+
+test('late activation headers retain body cancellation until it settles',()=>using(async f=>{
+ await f.stub.restoreMethods();await f.stub.configure('late-activation-cancel');f.alarmMode='activation-held';const operation=f.stub.invoke(f.refs);let held=false;
+ for(let n=0;n<150&&!held;n++){held=f.held==='activation';if(!held)await new Promise(resolve=>setTimeout(resolve,20));}assert.equal(held,true);
+ assert.equal((await operation).status,'admin_pending');const rows=await f.stub.snapshot();assert.ok(record(rows,'activation-send'));assert.equal(record(rows,'activation-ack'),null);
+ f.release();let cancelling=false;
+ try{
+  for(let n=0;n<150&&!cancelling;n++){cancelling=(await f.stub.stats()).cancelHeld;if(!cancelling)await new Promise(resolve=>setTimeout(resolve,20));}assert.equal(cancelling,true,'native response cancellation started');
+  assert.equal((await f.stub.probeStageAvailability()).available,false,'late body cancellation remains retained');
+ }finally{await f.stub.releaseBodyCancel();}
+ let available=false;for(let n=0;n<150&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,20));}
+ assert.equal(available,true);assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.activations.length,1);
+ assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.equal(f.activations.length,1);
+}));
