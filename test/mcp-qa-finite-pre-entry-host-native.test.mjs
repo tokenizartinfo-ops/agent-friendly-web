@@ -30,7 +30,7 @@ async function fixture(mode='normal'){
  export class Actor extends IndependentClosure{
   async snapshot(){return JSON.stringify([...await this.ctx.storage.list()]);}
   async availability(){const c=new AbortController(),lease={signal:c.signal,assertCurrent(){}};try{await observeFiniteOwnerStageWork({ctx:this.ctx,env:this.env,admission:{lease},originalLease:lease},async()=>true);return true;}catch{return false;}finally{c.abort();}}
-  async inherited(){return {alarm:await this.alarm(),arm:await this.arm(),status:await this.status()};}
+  async inherited(){return JSON.stringify({alarm:await this.alarm(),arm:await this.arm(),status:await this.status()});}
  }
  export {PrivateQaBootstrap};export default base;`;
  const built=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],plugins:[{name:'synthetic-base-and-context',setup(b){
@@ -59,17 +59,17 @@ async function fixture(mode='normal'){
 }
 hostTest('fixed native Workflow reaches actual custody actor without consuming Entry or changing history',async()=>{
  const f=await fixture();try{
-  const before=await f.stub.snapshot();assert.deepEqual(await f.stub.inherited(),{alarm:{state:'unavailable'},arm:{state:'unavailable'},status:{state:'unavailable'}});
+  const before=await f.stub.snapshot();assert.deepEqual(JSON.parse(await f.stub.inherited()),{alarm:{state:'unavailable'},arm:{state:'unavailable'},status:{state:'unavailable'}});
   const r=await f.run();assert.equal(r.status,'observed');assert.equal(r.authorizesEffects,false);assert.equal(r.operationalReadiness,false);assert.equal(r.scopeVerified,false);
   assert.equal(f.calls.length,3);assert.equal(await f.stub.snapshot(),before);assert.equal((await f.mf.dispatchFetch('https://synthetic.invalid/')).status,404);
  }finally{await f.mf.dispose();}
 });
 for(const mode of ['open','expired','bad-source'])hostTest('closed host rejects '+mode,async()=>{const f=await fixture(mode);try{assert.notEqual((await f.run()).status,'observed');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
 hostTest('selector and wrong actor cannot start custody reads',async()=>{const f=await fixture();try{
- for(const args of [[],['f'.repeat(64)],[id,source,{}]])assert.notEqual((await f.stub.readPreEntryCustody(...args)).status,'observed');
- const wrong=f.ns.get(f.ns.idFromName('foreign'));assert.notEqual((await wrong.readPreEntryCustody(id,source)).status,'observed');
+ for(const args of [[],['f'.repeat(64)],[id,source,{}]])assert.notEqual(JSON.parse(await f.stub.readPreEntryCustody(...args)).status,'observed');
+ const wrong=f.ns.get(f.ns.idFromName('foreign'));assert.notEqual(JSON.parse(await wrong.readPreEntryCustody(id,source)).status,'observed');
  assert.equal(f.calls.length,0);
  }finally{await f.mf.dispose();}});
 hostTest('pending read remains exclusive after timeout until underlying operation settles',async()=>{
- const f=await fixture('hold');try{const r=await f.run();assert.notEqual(r.status,'observed');assert.equal(f.held,true);assert.equal(await f.stub.availability(),false);assert.notEqual((await f.stub.readPreEntryCustody(id,source)).status,'observed');f.release();let ok=false;for(let n=0;n<200&&!ok;n++){ok=await f.stub.availability();if(!ok)await new Promise(r=>setTimeout(r,10));}assert.equal(ok,true);}finally{f.release();await f.mf.dispose();}
+ const f=await fixture('hold');try{const r=await f.run();assert.notEqual(r.status,'observed');assert.equal(f.held,true);assert.equal(await f.stub.availability(),false);assert.notEqual(JSON.parse(await f.stub.readPreEntryCustody(id,source)).status,'observed');f.release();let ok=false;for(let n=0;n<200&&!ok;n++){ok=await f.stub.availability();if(!ok)await new Promise(r=>setTimeout(r,10));}assert.equal(ok,true);}finally{f.release();await f.mf.dispose();}
 });
