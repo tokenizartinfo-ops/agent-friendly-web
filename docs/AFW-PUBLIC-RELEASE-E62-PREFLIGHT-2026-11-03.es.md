@@ -13,6 +13,8 @@ Este registro prepara una publicación de la guía AI Index y el caso Tokenizart
 
 CI main [41658579964](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41658579964), intento 1, concluyó correctamente test, lint y build. El artefacto `afw-build-e62cd321f38e07926659c52a59a220a4e0ea865e`, ID 13240978655, contiene 3.054.694 bytes ZIP; digest GitHub SHA-256 `5e664841173f3193e902ee4562815f622c27ecceb6d8e38fa44e33207bcd4693`, creado 2026-11-03 15:05:32 UTC, vence 2026-11-10 15:05:31 UTC.
 
+El calificador existente `scripts/prepare-public-cloud-delivery.py` exige que el run origen tenga evento `pull_request`. El artefacto e62 procede de un `push` en main, por lo que ese calificador lo rechazará. Crear una verificación específica que exija explícitamente el evento push, la rama main, revisión e62 y run exitoso, o demostrar que un artefacto de PR tiene exactamente el árbol final antes de reutilizarlo. No cambiar el evento esperado por suposición.
+
 Estos metadatos identifican el ZIP, no certifican su inventario ni el módulo desplegado. Calificar descarga, hash, tamaño, entradas, contenido, rutas y hashes pertinentes en un runner cloud antes de usarlo. Verificar revisión, árbol y vigencia sin reconstruir ni sustituir el paquete.
 
 ## Última evidencia primaria aportada por la operación AFW
