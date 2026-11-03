@@ -1,44 +1,21 @@
-# AFW: continuación cloud — 2 de noviembre de 2026
+# AFW — punto de continuación al cierre
 
-Checkpoint Root después de aceptar B2a y preparar B2b. Repositorio tokenizartinfo-ops/agent-friendly-web; rama feat/finite-native-cleanup-20261101. GitHub APIs/Actions, sin nuevos clones/dependencias/builds/temporales del PC. No repetir unidades aceptadas. Este checkpoint sustituye el de22:35, preservado40ab68d7d7d50198c4e622e31ffd673fe9383b1c.
+Owner STOP: 2nov2026,21:55Argentina /3nov00:55UTC. Todo el trabajo source está en GitHub, rama feat/finite-native-cleanup-20261101. Leer [cierre del día](2026-11-02-day-close.es.md) antes de continuar. Sin nuevos bloques ni ensayos hasta el regreso de Gabriel. Preferencia cloud; no clones/deps/builds/temporales locales.
 
-## Código aceptado
+## Estado exacto
 
-C2Tasks1–4, residenciaB1 y hechos históricosB2-AB conservan aceptaciones previas. C1puenteQA PRET0 aceptado6038db5; C2-A materialinicial aceptado44dde8d. C2-B1 ingreso nativo aceptadoae7afdb trasfix28d2bd6; C3admisión aceptado40ab68d tras06e424. Informes/revisiones2026-11-02-finite-{initial-native-entry,premature-admission}. No repetir sus suites sin nuevo cambio pertinente.
+C1/C2-A/B1/C3/B2a aceptados como SOURCE, no como operación completa. B2a aceptación8fe5b917/fix56c04288,45dirigidasPASS y revisión limpia. B2b base dc337e624bc77a6e54a8f7a105c4199ec4f619d5; revisiónfd6fb939 encontró3Important. Fix1 code2b734f69e3a296ba1043bc2dd372581dc54ae58f/tree08c33ed42d499ef997d5b963ea8a7ed8ca558755, docs0da7df964a2ad8389fdec06b3bd2f5b103f3008f/tree2af811c1616562ed7be305bb22db866d2dc56149. Corrección funcional4119c5c4PASS; sharedlease nuevo mcp-qa-finite-initial-lease.mjs.
 
-B2a publicación INACTIVA aceptada tras revisión+fix1: BASEc4696911; productocode5705d750 (último producto47083000), doc046a2c8; revisiónhallóduplicaciónpura. Fix56c04288a7b4a3574511e8013d37e0483e6b94ea, doc893d29409886b1af7b825f9a3175f5083385b831. Mismo reviewer SpecPASS/Approved,1ImportantADDRESSSED/0open/sinnewbreakage. Root verificó41548928626/job125631300881/attempt1/head56c04288:36historical/parity+9upload=45PASS0fail/cancel/skip/lintlimpio/0artefactos. Report/review2026-11-02-finite-initial-inactive-upload; paquetescompletoyfixenreviews/packages.
+Run41555913917/attempt1/head2b734f69: Rootverificó45focused+lintPASS/job125654628551 y23compilerPASS/job125654628446; forward-consumersjob125654628157 ENCURSO enúltimacomprobación. Leerfinal/logs/artifactsantesderepetir. Misma revisión scoped/root/review_initial_cleanup_owner pendiente, FIX_BASEfd6fb939405d02a168ff5f04f162dca1a8b6d20e; no aceptación de ronda aún. Implementadoractual/root/initial_cleanup_owner_recovery liberó escritortrasSTOP. Todosloscommits/ref/readbacksremotos guardados, ningúncambiolocalpendiente.
 
-Actual privado B1winnerACK/sync/readback→A/post-sync→backup saneado/chunks→SEND distinto durable→un JSONdeploy=falsePOST→ACKUUIDreal→GETexacto/config/M/puntero→reciboDATA privado. RPCsafe sin nuevasautoridades. Nunca activar desdeEntry/recibo/stepcache/reinicio. Unknown noresend; no borrado dehuérfanos. Fixedbaseline2607/7b5; latest/last100 efectosdecatálogo reconocidos.
+Reportes/brief/spec/plan2026-11-02-finite-initial-cleanup-owner; reporthistorical-writer-qualification explica primaryQA01ac/build2a477, destroyconcreto y restoreblockedpreSEND, candidato sinadmisión y límites, y envelope deployable object.items/page0 real. No repetir ensayos antiguos/credenciales ni universalizar ausencia/drenaje. Docs/ledger contienen IDs completos.
 
-Evidencia anterior5705 run41545121309/job125618722602:23compiler/residencyPASS/lint/artifacts0; canary1948550B SHAac1d9d8af2153815e74f608dbe208760e11938b143c702b4ce54d2b495d45965,QA1905417B SHA3cd5d82a90d87943692ba4d0fca2ef6b7bd105430dfc94bd3ac5dae2a6dfc875,residente382787B. NOsonmedidasdelposterior56c04288; refactor noimports/exportsnuevos, futuroCIcompuesto compilaráfuenteexacta. Expanded8bb83tests82PASS1FAILgettercodec ya corregido4708; no sumar grupos/revisiones como wholesuitefinal.
+## Bloques restantes
 
-## Incertidumbres históricas concretas resueltas
+B2c activación/cápsula/ownerSource/ingreso fixednative, ventanaowner≤15min delMISMOI0 separada deltechnical5min; cleanuphandoff antesgrants/avisos. Despuésnominalfactory/wiring/Save/callback/suscripción/entregaútil/revisión/bajanativa/cierrefísico/finalizer. LuegoCIcompuesto/revisiónderama/promoción yrecorridorealatendido; soloentoncesPCoff yposteriorMaxconpreview/aprobación. Noactualinitialintenthastafullcomposition: Entry/HEADfinitosnoreseteables; no replays.
 
-Ver reports/2026-11-02-finite-historical-writer-qualification.es.md. Root hashprimarioQA01ac462861B/a7d40b81 coincide conmanifiestoREALimpresoenbuild41083490837/job124158457457/source2a477/tree637af; no ZIP/localbuild. Source2a477 de reductionCOMPLETE esperó eldestroyconcreto. UnGET histórico2nov23:51:33.482UTC delguardd56 confirma complete,restorestepúnicosuccess,outputblocked+dispatchStatusuncertain. Root+revisiónindependiente relacionaron blockedconissued=false/preSEND, porloque ESAinvocaciónNOemitiórestorePOST. No seguir arrastrando ese supuestoPOSTpendiente.
+Sourceceiling/reader9aa/publisher0573nov02:59UTC/2nov23:59Argentina: probablemente vencidos alregreso. Verificarmetadata/custodia yresolverpermisoaplicable, nuncarenovar/retimarautomáticamente. GHA9db8nov separado. No9aacapabilityactualacreditada. Nativealarmmanual/eventos yfutureactivationjournalsSYN; CI noes runtime.
 
-DispatchdeliverOwnSavedanterior sigueuncertain; noes publicaciónnueva/autoridad. No drenajeuniversal, actualesotrosescritores y reutilizaciónContainer necesitan susgates. ConsultaMCPowner NOacreditaclavesecreta9aa/RESTnativo. Readerprobeexistentelee7recursos pero noidentificatoken/GETWorkflowindividual; no se ejecutó.
-
-## Bloque siguiente
-
-B2b mountedinitialcleanup: spec/plan/brief2026-11-02-finite-initial-cleanup-owner. DiseñoRoot pendientecheckbuilder antesimplementación. ExistingDOalarm/finite.mjs, no nuevoWorkflow. ArmprivadoenMISMOwinnerdespuésuploadACK, transacción+setAlarm+sync+readback/getAlarm; futuroalarmindependientesoloclosedUI/fixedbaseline, atmostonce/pending. C0originalI0+900s/C1+180s,soloautoridadcleanup, technicalI0+300/native30s intactos. Tresdeliveriesacotadas; custodiamustcoverC1, noextensiónsilenciosa.
-
-OwnerSource/connectionSource/activaciónseguirsinmontar. CurrentwireOAuthI0+5min NOalcanza OwnerPreparation commandBy+510s. Futurounit debe reconciliar explícitamente ventanaownermáximo15min delMISMOI0yhandoffguard antesgrants/notices/nominal. No usar guardnominalT0/C0/C1como inicialsincontrato,ni QArestoreconpublicadorcanary.
-
-## Pendientes hacia PC apagada
-
-1. B2b cleanup inicial y revisión; activacióninicial realconarmACK, writers/SENDrelevantes/globalinventory/9aacapacidad/rollback/cápsula/ownerSource/ventanas.
-2. Forwarding real/sesiones/etapas/material/montajes/finalizadorindependiente, custodia/presupuestoactual. AnónimoGitHub60/IP/h;53/10sesionesnoestácualificado.
-3. C3wiring, Save separado, callback/suscripción/entregaútil/revisión/bajanativa/retiradatemprana/cierrefísico.
-4. CIcompuesto/privacidad/revisiónderama/promocióncontrolada; recorridoatendidoreal; DESPUÉSunaocurrenciaPCoffgenuina. Maxrequierepreview/aprobación y permaneceintacto.
-
-No es solamente esperar Cloudflare. No plazo fijo prometido. No guardiaautomáticainventada.
-
-## Recursos y custodia
-
-ÚltimocierreCOMPLETO1nov14:30:52UTC QA c570/deployment4c78c652,canary2607/7b5,OP855/9790;14/8/3false,cron/tails0,21WFterminales/Container0. Lectura2nov12:35 solometadata. Son fechadas,noestadoactualgarantizado. GETmetadata9aa2nov20:34:58.485active/vencimiento3nov02:59UTC,ContentReadcanary+OP,Metadata/Containerscuenta; no prueba clavecargada/endpoint. Reader9aa/publisher057 techo3nov02:59UTC; GHA9db8nov02:59:59. No renovación automática.
-
-Duranteestetrabajo solo rama/source/Actions, más2GETversionQAold y1GEThistoricalguardstatussaneados; no sonensayos. No tagreal/mainmutation/produccióndispatch/WorkflowCREATE/upload/deploy/activación/OAuth/grant/ventana/secreto/rol/DDL/cron/Container/Max/correo/nuevochat/automatización. Calificadortemporal EXCLUIDOintegración. MonitorLOCALpausado, no guardiacloud niPCoff.
-
-Minorpararevisiónfinal: oráculoTask4independiente deA, ReservationclientRPC lifecycle/futuracleanupRPCadaptación ywarningsbaseline(deps/eslint/punycode/Actions). No descartar en silencio ni actualizarherramientasporinferencia.
+ÚltimocierreCOMPLETOprimario1nov14:30:52UTC; metadata2nov12:35 ylecturashistóricas/catálogofechadas NOgarantizanestadoactualgeneral. Trabajoactualnoabrióensayo ni mutóruntime; no main/publicación/activation/OAuth/token/role/cron/Container/Max. JobsyaemitidossoncalificaciónSOURCEy pueden terminarcloud, noensayoPCoff. CalificadortemporalEXCLUIDOintegración. No nuevaguardia/automatización.
 
 operationalReadiness=false;completePackage=false;PCoff=false.
