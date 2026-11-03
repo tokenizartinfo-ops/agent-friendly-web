@@ -1,3 +1,30 @@
+# Shutdown checkpoint — 3 November 2026, 18:32 UTC / 15:32 Argentina
+
+Gabriel requested shutdown in ten minutes and continuation tomorrow. Implementation agents stopped at durable GitHub checkpoints. Do not open new trials, permissions, OTP or commands during shutdown. No new autonomous guard/scheduler is claimed. GitHub Actions already submitted may finish independently; this does not prove AFW PC-off operation.
+
+## Current authoritative resume map
+
+- Primary finite branch feat/finite-native-cleanup-20261101 HEAD ca62152d3f3fda1f9e174ea6967fd399cd398e8e, independently read back. Initial activation coordinator SOURCE ACCEPTED after round1 retention fix; exact accepted codebd460633, Actions41691101695:108focused/83consumer/23compiler+lint PASS. Full and scoped review packages and acceptance retained.
+- Initial capsule is NOT implemented. Test-only cd5fa42c3a6e56f5bd4cf2750dd7de5cb46770e7 plus checkpoint report ca62152. Actions41694127911 still in_progress at18:32UTC; compiler passed previously, causal RED not yet confirmed. Resume by reading this run once, identify expected capsule-missing failure versus unrelated error, then implement the approved capsule brief and finish focused tests/fresh review. No live effect can be retried from a failing source test.
+- Independent readonly branch feat/finite-readonly-preflight-20261103 HEAD97a939037ed7a66b86a0a90c92c2b2ac2e957a68, independently read back. Helper accepted105tests, native host UnitA accepted14host/bundle+105regression, Actions41693118183; fresh review compliant/sourcequalityApproved, no actionable findings. Exact historical module, inherited valid-entry methods, binding holder qualification, full artifact and controller UnitB remain promotion blockers. Temporary qualifier excluded when integrating.
+- Public Tokenizart case redesign is LIVE and separately complete; current measurements87/87/95 and historical23/14/70 presentation redesigned/verified desktop+mobile. Actual public receipt in docs/public-e62-release-preflight-20261103 at75879d9; accepted activecandidate29ff6775/deploymentfb1fe1fb from17:24UTC. Never repeat consumed public upload/activation commands.
+
+## Remaining order
+
+1. Complete immutable actual-activation capsule in existing source spec docs/superpowers/specs/2026-11-03-finite-initial-capsule.md; new fixed key outside cleanup prefix, actual M UUID/deployment, sameA preconnectionId, same original surviving continuation only.
+2. Integrate accepted readonly source and hostA without temporary qualifiers, preserving both branches' shared fixtures and accepted full-lifecycle retention. Review meaningful integration diff.
+3. Qualified factual owner source/closed UI from capsule and fresh primary anchors; old2607 is rollback, never initialBaseline. Preserve A preconnectionId on first ownerGET, separate projectRef/ticket opaque handles. Keep approvalPOST denied before ticket consumption until cleanup handoff qualified.
+4. Complete native forwarding/authenticated owner connection/read/notice stages and cleanup handoff/finalizer. Source-only tests do not establish actual subscription/useful cloud review/withdrawal/physical stop.
+5. SourceUnitB controlled pre-Entry invocation/preservation and actual inherited baseline qualification. Preserve active-version and saved settings independently against OWN baselines; no false equality or normalization.
+6. Full branch review/required cloud checks and actually loaded credential/endpoint permission/source ceiling/latency/C1 qualification. Reader/publisher expired3Nov02:59UTC; do not renew while source composition incomplete or repeat accepted custody checks. Browser handoff only when concrete live gate is ready.
+7. One complete controlled own remote trial with independent useful outcome and verified withdrawal/physical cleanup. Only afterward coordinate actual PC-off trial. Max preview/approval/client gates remain later.
+
+This is no longer solely a wait for a Cloudflare email or incident. Autonomous source composition is still required and explicitly identified above. Runtime/provider state must be rechecked at its actual live gate; old observations are dated evidence only. No private trial was opened in this source block. operationalReadiness=false;completePackage=false;PC-off pending.
+
+Detailed earlier observations and rulings follow, retaining their dates and limitations.
+
+---
+
 # AFW PC-off preparation — continuation 3 November 2026
 
 This is a source-work checkpoint, not a live-trial receipt. operationalReadiness=false; completePackage=false; PC-off pending. No Max data, contact or client consent used.
