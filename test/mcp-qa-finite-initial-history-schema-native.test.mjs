@@ -11,7 +11,9 @@ const triggers=[
 test('native D1 installed immutable history triggers are checked before an initial gate can qualify',async()=>{
  const f=await initialEntryHarness('normal');
  try{
-  assert.equal((await f.stub.probeHistorySchema()).schemaVerified,true);
+  const observed=await f.stub.probeHistorySchema();assert.equal(observed.schemaVerified,true);assert.equal(observed.authorizesEffects,false);assert.equal(observed.operationalReadiness,false);
+  assert.equal((await f.stub.probeHistorySchema('aborted')).status,'unavailable');
+  assert.equal((await f.stub.probeHistorySchema('expired')).status,'unavailable');
   for(const name of triggers){
    const saved=await f.db.prepare("SELECT sql FROM sqlite_schema WHERE type='trigger' AND name=?").bind(name).first();
    assert.ok(saved?.sql,name);

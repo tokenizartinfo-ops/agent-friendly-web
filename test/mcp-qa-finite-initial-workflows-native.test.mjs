@@ -13,6 +13,7 @@ test('initial inventory accepts only its actual active bootstrap instance',()=>u
  assert.equal(r.otherWorkflowsTerminal,true);
  assert.equal(r.authorizesEffects,false);
  assert.equal(r.operationalReadiness,false);
+ f.inventoryMode='waiting';assert.equal((await f.stub.probeInitialInventory()).currentInitialObserved,true);
  for(const mode of ['missing','terminal','duplicate','wrong-id','foreign','other-active']){
   f.inventoryMode=mode;
   assert.equal((await f.stub.probeInitialInventory()).status,'unavailable',mode);
