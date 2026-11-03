@@ -58,8 +58,9 @@ export async function initialEntryHarness(mode='normal'){
    else if(req.url===CF+'/workers/scripts/agent-friendly-web-release-operator/deployments?per_page=1')result={deployments:[{id:opPin.deploymentId,strategy:'percentage',versions:[{version_id:opPin.id,percentage:100}]}]};
    else if(req.url===CF+'/workers/workers/agent-friendly-web-release-operator/versions/'+opPin.id+'?include=modules')result=structuredClone(opMetadata);
    else if(req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/versions?deployable=true&per_page=100&page=1'){
-    result=f.alarmMode==='ineligible'?[]:[{id:x.pin.id,number:1}];
-    return Response.json({success:true,errors:[],messages:[],result,result_info:{page:1,per_page:100,count:result.length,total_count:result.length,total_pages:1}},{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString()}});
+    const items=Array.from({length:100},(_,i)=>({id:i===5&&f.alarmMode!=='ineligible'?x.pin.id:'00000000-0000-4000-8000-'+String(i+1).padStart(12,'0'),number:171-i}));
+    result={items};
+    return Response.json({success:true,errors:[],messages:[],result,result_info:{page:0,per_page:100,count:100,total_count:100}},{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString()}});
    }
    else if(req.url===CF+'/workflows'){
     return Response.json({success:true,errors:[],messages:[],result:AFW_FIXED_WORKFLOWS.map(s=>({name:s.name,id:s.id,script_name:s.script,class_name:s.className})),result_info:{per_page:100,count:3,total_count:3,page:1,total_pages:1}},{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString()}});
