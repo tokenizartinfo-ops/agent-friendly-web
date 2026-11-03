@@ -225,6 +225,7 @@ test('guide explains Cloudflare AI Index without claiming account access or inde
     const turn = respondToPublicGuide({ locale, message: question });
     assert.equal(turn.topic, 'faq:cloudflare-ai-index');
     assert.match(turn.answer, /beta/i);
+    assert.ok(turn.sources.some((source) => source.url === 'https://www.cloudflare.com/aiindex-signup/'));
     const detail = respondToPublicGuide({ locale, message: locale === 'en' ? 'More detail' : locale === 'pt' ? 'Mais detalhes' : 'Más detalle', context: turn.next_context });
     assert.match(detail.answer, /AI Search/);
     assert.match(detail.answer, /Cloudflare/);
