@@ -1,66 +1,27 @@
-/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors avoid unstable vinext RSC prefetch requests. */
-
-import {
-  ArrowRight,
-  Check,
-  CircleAlert,
-  CircleDashed,
-  Download,
-  ExternalLink,
-  FileCheck2,
-  GitBranch,
-  Globe2,
-  Layers3,
-  ServerCog,
-  ShieldCheck,
-} from '../../components/client-icons';
+/* eslint-disable @next/next/no-html-link-for-pages -- Plain anchors preserve native navigation. */
+import type { Metadata } from 'next';
+import { ArrowRight, BookOpen, Check, FileCheck2, Layers3 } from '../../components/client-icons';
 import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
 import publicAudit from '../../../public/cases/tokenizart/public-audit-2026-11-03.json';
 import { localizedRouteMetadata } from '../../../lib/localized-route-metadata.mjs';
+import styles from './tokenizart-case.module.css';
 
 export const metadata: Metadata = localizedRouteMetadata('tokenizartCase', 'es') as Metadata;
-
 const currentAudits = publicAudit.observations;
-
-const surfaces = [
-  {
-    name: 'Tokenizart',
-    url: 'tokenizart.com',
-    score: 23,
-    level: 'AF-1',
-    external: 'Cloudflare Level 1',
-    state: 'Descubrible',
-    detail: 'Robots y sitemap presentes. Falta ordenar contenido, metadata y recursos para agentes.',
-  },
-  {
-    name: 'Atelier',
-    url: 'atelier.tokenizart.com',
-    score: 14,
-    level: 'AF-0',
-    external: 'Cloudflare Level 0',
-    state: 'Baseline minimo',
-    detail: 'Es la plataforma operativa. Tiene robots, pero aun no sitemap, llms ni metadata publica suficiente.',
-  },
-  {
-    name: 'Agent Friendly Web',
-    url: 'agentfriendlyweb.dev',
-    score: 70,
-    level: 'AF-3',
-    external: 'Cloudflare Level 2 · Bot-Aware',
-    state: 'Herramientas publicas',
-    detail: 'Subio desde 63/100 tras publicar politica crawler explicita, documentos agenticos, catalogos, OpenAPI, skills y evidencia de autoria.',
-  },
-];
-
-const phases = [
-  ['P0', 'Verdad publica', 'Contrastar identidad, fuentes y traducciones con el contenido publico vigente.', 'Revision continua'],
-  ['P1', 'Lectura por agentes', 'llms y sitemap respondieron 200 en ambos origenes el 2026-11-03. Revisar su contenido y mantenerlo coherente.', 'Observado con fecha'],
-  ['P2', 'Herramientas reales', 'Publicar CLI, skills, OpenAPI y MCP solo con version y URL verificadas.', 'Verificar por artefacto'],
-  ['P3', 'Owner Live', 'Identidad, consentimiento, scopes, revocacion y auditoria read-only.', 'Gate separado'],
-  ['P4', 'Acciones y pagos', 'Contratos seguros para acciones y eventual x402/MPP.', 'Alcance separado'],
-];
-
+const names: Record<string, string> = {
+  'https://tokenizart.com': 'Tokenizart',
+  'https://atelier.tokenizart.com': 'Atelier',
+  'https://agentfriendlyweb.dev': 'Agent Friendly Web',
+};
+const roles: Record<string, string> = {
+  'https://tokenizart.com': 'El sitio que presenta el proyecto.',
+  'https://atelier.tokenizart.com': 'La plataforma donde se utiliza.',
+  'https://agentfriendlyweb.dev': 'Nuestro propio sitio, como referencia.',
+};
+const observationDate = (value: string) => new Intl.DateTimeFormat('es-AR', {
+  dateStyle: 'long', timeZone: 'UTC',
+}).format(new Date(value));
 const downloads = [
   ['Paquete completo ZIP', '/cases/tokenizart/tokenizart-agent-friendly-package-2026-08-26.zip', 'Todos los candidatos, manifiesto, checksums y guia de instalacion.'],
   ['Guia de instalacion', '/cases/tokenizart/RUNBOOK.es.md', 'Orden, pruebas y rollback para WordPress y Atelier.'],
@@ -75,165 +36,101 @@ const downloads = [
   ['Manifiesto del paquete', '/cases/tokenizart/manifest.json', 'Targets, fecha, estado y exclusiones.'],
 ];
 
-const owners = [
-  ['Gabriel', 'Aprueba contenido publico, politica de entrenamiento y ventanas de produccion.'],
-  ['Leonardo', 'Facilita acceso y coordinacion del sitio y hosting de WordPress.'],
-  ['Leandro', 'Aporta contexto tecnico y accesos para comprender Atelier y preparar cambios acotados.'],
-  ['Codex', 'Realiza implementacion asistida autorizada, pruebas, rollback y documentacion; no sustituye aprobaciones ni evidencia de despliegue.'],
-];
 
 export default function TokenizartCasePage() {
   return (
-    <main>
+    <>
       <SiteHeader routeKey="tokenizartCase" />
-      <section className="case-hero">
-        <div>
-          <span>Primer caso integral · revision 2026-11-03</span>
-          <h1>Tokenizart: del sitio publico a una experiencia comprensible para agentes.</h1>
-          <p>
-            El caso conecta contenido publico, crawlers, CLI, MCP, skills y futuras herramientas owner-scoped.
-            Cada capacidad se publica cuando es real, verificable y segura.
-          </p>
-          <div className="case-actions">
-            <a href="/registry/tokenizart">Ver perfil en Registry <ArrowRight size={17} /></a>
-            <a href="/?site=tokenizart.com#auditar">Repetir auditoria <ArrowRight size={17} /></a>
-            <a href="https://tokenizart.com/#agent-resources">Ver recursos publicados <ExternalLink size={16} /></a>
+      <main id="afw-main-content" className={styles.page}>
+        <header className={styles.hero}>
+          <span className={styles.eyebrow}>Un caso real · Tokenizart + Atelier</span>
+          <h1>Que se entienda.<br /><em>Que se pueda encontrar.</em></h1>
+          <p>Así acompañamos a Tokenizart a ordenar su información pública para que las personas y los agentes puedan comprender mejor qué ofrece.</p>
+          <a className={styles.primaryLink} href="/?site=tokenizart.com#auditar">Volver a auditar Tokenizart <ArrowRight size={18} /></a>
+        </header>
+
+        <section className={styles.section} aria-labelledby="current-title">
+          <div className={styles.heading}>
+            <div><span className={styles.eyebrow}>La última comprobación</span><h2 id="current-title">Medición actual</h2></div>
+            <p>Observada el <time dateTime="2026-11-03">3 de noviembre de 2026</time>.<br />Tres sitios distintos, medidos con el auditor público de AFW.</p>
           </div>
-        </div>
-        <aside>
-          <Layers3 size={26} />
-          <strong>Como se compone</strong>
-          <p>Tokenizart explica y conecta el ecosistema. Atelier es la plataforma donde un usuario autenticado prepara y opera sus obras u objetos.</p>
-        </aside>
-      </section>
-
-      <section className="architecture-band" aria-labelledby="published-title">
-        <div><span>Auditoría pública: 2026-11-03 · UTC</span><h2 id="published-title">Que pudimos comprobar y que falta verificar</h2></div>
-        <p>Una consulta por origen al auditor publico de AFW, con el motor Gabriel Mucchiut Agent Friendly Web Method v1. Estos resultados describen señales publicas observadas en esa fecha, no un estado permanente.</p>
-        <div className="surface-grid">
-          {currentAudits.map((audit) => (
-            <article className="surface-card" key={audit.origin}>
-              <h3>{audit.origin.replace('https://', '')}</h3>
-              <p><strong>{audit.score}/100</strong> · etiqueta calculada: {audit.level}</p>
-              <small>Observado: {audit.checkedAt}</small>
-              <p>llms.txt y sitemap.xml respondieron HTTP 200.</p>
-              <a href={`/?site=${encodeURIComponent(audit.origin)}#auditar`}>Hacer una nueva auditoria <ArrowRight size={17} /></a>
-            </article>
-          ))}
-        </div>
-        <p>Los niveles AF son parte de nuestra metodologia, no una certificacion. Una etiqueta como «delegable» o «transaccional» no acredita permisos, acciones, pagos ni funcionamiento privado: esta medicion solo inspecciona señales publicas. Tampoco demuestra indexacion o recomendacion por una LLM, ni el ensayo con el ordenador apagado.</p>
-        <p>No verificamos la revision del runtime del auditor ni la equivalencia de sus reglas con agosto. No corresponde restar estos puntajes a los historicos como prueba de una mejora atribuible. Cloudflare usa otro motor y otra escala; no realizamos una nueva medicion de Cloudflare para esta revision.</p>
-        <div className="case-source-links">
-          <a href="https://tokenizart.com/llms.txt">Indice publico de Tokenizart</a>
-          <a href="https://atelier.tokenizart.com/llms.txt">Indice publico de Atelier</a>
-          <a href="/cases/tokenizart/public-audit-2026-11-03.json">Resumen fechado de la medicion</a>
-        </div>
-        <p>Antecedente del 2026-09-09: se verificaron recursos de Tokenizart y se registro un 404 en llms.txt de Atelier. Ese 404 es historico: la nueva consulta respondio 200. Los 36/100 reportados por Gabriel en septiembre fueron una declaracion, no una medicion independiente de esta revision.</p>
-      </section>
-
-      <section className="case-score-band" aria-labelledby="baseline-title">
-        <div className="section-heading plain">
-          <div><span>Baseline histórico del 2026-08-26</span><h2 id="baseline-title">Tres superficies, dos auditores</h2></div>
-          <p>Valores conservados como referencia historica, no puntajes actuales. Cloudflare y AF usan escalas diferentes.</p>
-        </div>
-        <div className="surface-grid">
-          {surfaces.map((surface) => (
-            <article className="surface-card" key={surface.url}>
-              <div className="surface-card-head"><Globe2 size={20} /><span>{surface.state}</span></div>
-              <h3>{surface.name}</h3>
-              <small>{surface.url}</small>
-              <div className="surface-score"><strong>{surface.score}</strong><span>/100 · {surface.level}</span></div>
-              <div className="mini-meter"><span style={{ width: `${surface.score}%` }} /></div>
-              <p>{surface.detail}</p>
-              <div className="external-result">{surface.external}</div>
-            </article>
-          ))}
-        </div>
-        <p className="case-disclaimer">HTTP 200 para un crawler demuestra acceso en una prueba; no demuestra indexacion, recomendacion ni permiso de entrenamiento.</p>
-      </section>
-
-      <section className="case-progress" aria-labelledby="evolution-title">
-        <div className="section-heading plain">
-          <div><span>Evolución documentada</span><h2 id="evolution-title">Cómo aparecen las capas de descubrimiento</h2></div>
-          <p>Las fechas indican cuándo se observó o reportó cada capa, no cuándo se instaló. Los saltos entre mediciones no prueban causalidad ni equivalencia entre motores.</p>
-        </div>
-        <ol className="phase-list" style={{ listStyle: 'none', padding: 0 }}>
-          <li><article><span>01</span><div><h3><time dateTime="2026-08-26">26 agosto 2026</time> · Baseline histórico</h3><p>Tokenizart: robots y sitemap. Atelier: robots, sin sitemap ni llms detectados en aquel baseline. AFW: documentos, catálogos y herramientas públicas descritos en el informe original. Puntajes y escalas conservados arriba.</p></div><strong>Registro histórico</strong></article></li>
-          <li><article><span>02</span><div><h3><time dateTime="2026-09-09">9 septiembre 2026</time> · Documentación pública</h3><p>Tokenizart: guía, llms.txt, llms-full.txt e índice de recursos registrados en esa revisión. Atelier: llms.txt devolvió 404 entonces. El 36/100 fue reportado por Gabriel, sin una medición independiente reproducible.</p></div><strong>Observado / declarado</strong></article></li>
-          <li><article><span>03</span><div><h3><time dateTime="2026-11-03">3 noviembre 2026</time> · Nueva observación por origen</h3><p>Tokenizart y Atelier: el auditor detectó llms, sitemap, cabeceras Link, JSON-LD, Markdown, OpenAPI, catálogos y un índice de skills. Atelier ya respondió 200 en llms.txt y sitemap.xml. AFW: estas señales y catálogos MCP detectados. No se probaron operaciones de esas herramientas.</p></div><strong>Auditoría pública AFW</strong></article></li>
-        </ol>
-        <p>Una capa detectada es una pista para revisar: no valida el contenido completo del contrato ni concede acceso. La fecha exacta de incorporación de cada recurso y la operación privada siguen fuera de esta comprobación.</p>
-      </section>
-
-      <section className="atelier-explainer">
-        <div className="journey-icon"><ServerCog size={22} /></div>
-        <div><span>Relacion del producto</span><h2>Atelier es donde realmente sucede la operacion.</h2></div>
-        <p>El sitio de Tokenizart presenta la propuesta, el conocimiento y los accesos. Atelier es el entorno autenticado para preparar registros y realizar acciones habilitadas. La documentacion publica no acredita el estado de Companion, demos ni Owner Live. Cualquier lectura privada o accion requiere verificar su servicio, identidad, consentimiento y alcance por separado.</p>
-      </section>
-
-      <section className="case-progress" aria-labelledby="progress-title">
-        <div className="section-heading plain">
-          <div><span>Roadmap verificable</span><h2 id="progress-title">Del contenido a la delegacion</h2></div>
-        </div>
-        <div className="phase-list">
-          {phases.map(([id, title, detail, status]) => (
-            <article key={id}>
-              <span>{id}</span>
-              <div><h3>{title}</h3><p>{detail}</p></div>
-              <strong>{status}</strong>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="case-grid">
-        <article className="evidence-table">
-          <div className="section-heading plain"><div><span>Candidatos del 2026-08-26</span><h2>Paquete historico de referencia</h2></div></div>
-          <p>No instalar este ZIP sobre los archivos actuales. Conserva propuestas anteriores y no representa lo publicado hoy. Los enlaces de produccion estan en la seccion superior.</p>
-          <div className="download-list">
-            {downloads.map(([name, href, detail]) => (
-              <a href={href} key={href}>
-                <span><Download size={16} /></span>
-                <div><strong>{name}</strong><small>{detail}</small></div>
-                <ArrowRight size={16} />
-              </a>
+          <div className={styles.metrics}>
+            {currentAudits.map(audit => (
+              <article className={styles.metric} key={audit.origin} data-current-metric>
+                <h3>{names[audit.origin]}</h3>
+                <p className={styles.role}>{roles[audit.origin]}</p>
+                <p className={styles.score}><strong>{audit.score}</strong><span>/100</span></p>
+                <p className={styles.observed}><Check size={16} aria-hidden="true" /> Documentos e índice del sitio accesibles</p>
+                <time className={styles.date} dateTime={audit.checkedAt}>{observationDate(audit.checkedAt)}</time>
+                <a className={styles.domain} href={audit.origin}>{audit.origin.replace('https://', '')} <ArrowRight size={14} aria-hidden="true" /></a>
+              </article>
             ))}
           </div>
-          <p className="table-note">Estos archivos son candidatos historicos. Cada cambio requiere comparar el origen actual, revisar alcance y probar rollback. WordPress y Atelier se verifican por separado.</p>
-        </article>
+          <p className={styles.note}>El puntaje resume señales públicas. No garantiza que una IA recomiende el sitio ni que pueda realizar operaciones en él.</p>
+          <details className={styles.disclosure} id="measurement-method">
+            <summary>Cómo leer esta medición</summary>
+            <div className={styles.detailBody}>
+              <p>Motor: {publicAudit.methodology}. Una auditoría por sitio, con fecha UTC. En los tres, <code>llms.txt</code> y <code>sitemap.xml</code> respondieron 200.</p>
+              <p>Las etiquetas calculadas AF-4 y AF-5 no son certificaciones: esta lectura no acredita permisos, acciones, pagos ni acceso privado. No se probaron operaciones de esas herramientas.</p>
+              <p>No verificamos la revisión del motor desplegado ni que sus reglas sean idénticas a las de agosto. No corresponde restar los puntajes para atribuir una mejora. Cloudflare usa otra escala; no realizamos una nueva medición de Cloudflare.</p>
+              <a href="/cases/tokenizart/public-audit-2026-11-03.json">Consultar evidencia fechada <FileCheck2 size={16} /></a>
+            </div>
+          </details>
+        </section>
 
-        <aside className="case-roadmap">
-          <div className="journey-icon"><GitBranch size={22} /></div>
-          <span>Responsables</span>
-          <h2>Quien hace cada parte</h2>
-          <ol>
-            {owners.map(([owner, task], index) => (
-              <li key={owner}><span>{index + 1}</span><div><strong>{owner}</strong><small>{task}</small></div></li>
-            ))}
+        <section className={styles.section} aria-labelledby="layers-title">
+          <div className={styles.heading}><div><span className={styles.eyebrow}>Lo que cambió</span><h2 id="layers-title">Más pistas. Menos dudas.</h2></div><p>Ahora encontramos varias capas de información pública en Tokenizart y Atelier.</p></div>
+          <ol className={styles.layers}>
+            <li><BookOpen size={24} aria-hidden="true" /><h3>Entender</h3><p>Documentos para agentes que explican el proyecto y sus límites.</p></li>
+            <li><Layers3 size={24} aria-hidden="true" /><h3>Encontrar</h3><p>Mapas del sitio, enlaces y datos estructurados que ayudan a recorrer el contenido.</p></li>
+            <li><FileCheck2 size={24} aria-hidden="true" /><h3>Consultar</h3><p>Catálogos y contratos que describen herramientas. Su presencia no autoriza a usarlas.</p></li>
           </ol>
-        </aside>
-      </section>
+          <p className={styles.note}>En Atelier, el documento para agentes que no se encontró en septiembre ya estaba accesible en noviembre. Las fechas indican cuándo se observó, no cuándo se instaló.</p>
+        </section>
 
-      <section className="gate-band">
-        <article><Check size={20} /><div><strong>Publicable tras revision</strong><p>Contenido, llms, robots, sitemap y JSON-LD coherentes con la experiencia humana.</p></div></article>
-        <article><CircleDashed size={20} /><div><strong>Verificar cada capacidad</strong><p>Un catalogo o contrato publicado no demuestra que su servicio este operativo. Comprobar version, distribucion, endpoint y permisos antes de usarlo.</p></div></article>
-        <article><ShieldCheck size={20} /><div><strong>Gate separado</strong><p>Owner Live y toda accion real conservan identidad, consentimiento, auditoria y aprobacion.</p></div></article>
-        <article><CircleAlert size={20} /><div><strong>No simular capacidades</strong><p>No se publican MCP, OpenAPI, pagos ni permisos que el origen todavia no ofrece.</p></div></article>
-      </section>
+        <section className={styles.section} aria-labelledby="evolution-title">
+          <div className={styles.heading}><div><span className={styles.eyebrow}>Paso a paso</span><h2 id="evolution-title">Un recorrido, con evidencia.</h2></div></div>
+          <ol className={styles.timeline}>
+            <li><time dateTime="2026-08-26">26 ago 2026</time><div><h3>El punto de partida</h3><p>Registramos cómo se descubrían los sitios y preparamos los primeros documentos.</p></div></li>
+            <li><time dateTime="2026-09-09">9 sep 2026</time><div><h3>Una explicación más clara</h3><p>Se comprobaron la guía y los documentos de Tokenizart. En Atelier todavía faltaba esa lectura.</p></div></li>
+            <li><time dateTime="2026-11-03">3 nov 2026</time><div><h3>Volver a mirar</h3><p>La nueva auditoría detectó documentos, mapas del sitio y catálogos públicos en ambos sitios.</p></div></li>
+          </ol>
+          <details className={styles.disclosure} id="previous-measurements">
+            <summary>Ver mediciones anteriores</summary>
+            <div className={styles.detailBody}>
+              <p>Referencia histórica del 26 de agosto de 2026. Estos números no describen el estado actual.</p>
+              <div className={styles.tableWrap}><table><caption>Dos motores, escalas diferentes</caption><thead><tr><th scope="col">Sitio</th><th scope="col">AFW</th><th scope="col">Cloudflare</th></tr></thead><tbody>
+                <tr><th scope="row">Tokenizart</th><td>23/100 · AF-1</td><td>Level 1</td></tr>
+                <tr><th scope="row">Atelier</th><td>14/100 · AF-0</td><td>Level 0</td></tr>
+                <tr><th scope="row">AFW</th><td>70/100 · AF-3</td><td>Level 2</td></tr>
+              </tbody></table></div>
+              <p>El 9 de septiembre se registró un 404 en <code>llms.txt</code> de Atelier. Los 36/100 reportados por Gabriel ese día fueron una declaración, sin una medición independiente reproducible.</p>
+              <p>Conservamos las observaciones originales. Los saltos entre fechas no prueban causalidad ni equivalencia entre métodos.</p>
+              <a href="https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/TOKENIZART-CASE-2026-08-26.md">Leer el informe de agosto <ArrowRight size={16} /></a>
+              <a href="/registry/tokenizart">Ver el perfil histórico en Registry <ArrowRight size={16} /></a>
+            </div>
+          </details>
+        </section>
 
-      <section className="architecture-band">
-        <div><span>Fuentes y metodo</span><h2>La mejora queda auditable.</h2></div>
-        <div className="case-source-links">
-          <a href="https://developers.cloudflare.com/ai-crawl-control/" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> AI Crawl Control <ExternalLink size={14} /></a>
-          <a href="https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> Markdown for Agents <ExternalLink size={14} /></a>
-          <a href="https://github.com/tokenizartinfo-ops/tokenizart-agentic" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> Tokenizart Agentic <ExternalLink size={14} /></a>
-          <a href="https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/main/docs/TOKENIZART-CASE-2026-08-26.md" target="_blank" rel="noreferrer"><FileCheck2 size={16} /> Informe historico de agosto <ExternalLink size={14} /></a>
-          <a href="/registry/tokenizart/profile.json"><FileCheck2 size={16} /> Perfil Registry JSON <ExternalLink size={14} /></a>
-          <a href="/registry/tokenizart/profile.md"><FileCheck2 size={16} /> Perfil Registry Markdown <ExternalLink size={14} /></a>
-        </div>
-      </section>
+        <section className={styles.resources} aria-labelledby="resources-title">
+          <div><span className={styles.eyebrow}>Seguir la pista</span><h2 id="resources-title">Mirá los documentos.</h2><p>Tokenizart presenta el proyecto. Atelier es su plataforma de uso. Cada sitio conserva su propia información y sus permisos.</p></div>
+          <div className={styles.resourceLinks}>
+            <a href="https://tokenizart.com/llms.txt">Documentos de Tokenizart <ArrowRight size={18} /></a>
+            <a href="https://atelier.tokenizart.com/llms.txt">Documentos de Atelier <ArrowRight size={18} /></a>
+            <a href="/cases/tokenizart/public-audit-2026-11-03.json">Evidencia de esta auditoría <ArrowRight size={18} /></a>
+          </div>
+        </section>
+
+        <details className={styles.disclosure} id="historical-downloads">
+          <summary>Archivo: documentos preparados en agosto</summary>
+          <div className={styles.detailBody}>
+            <p>Paquete histórico de referencia del 26 de agosto de 2026. No instalarlo sobre los archivos actuales: contiene propuestas de aquella etapa.</p>
+            <ul className={styles.archiveLinks}>{downloads.map(([name,href])=><li key={href}><a href={href}>{name} <ArrowRight size={14} aria-hidden="true" /></a></li>)}</ul>
+            <p>Las futuras acciones requieren revisar cada servicio, identidad y permiso. Un documento público no concede acceso a una cuenta.</p>
+          </div>
+        </details>
+      </main>
       <SiteFooter />
-    </main>
+    </>
   );
 }
-import type { Metadata } from 'next';
