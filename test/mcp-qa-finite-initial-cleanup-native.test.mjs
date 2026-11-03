@@ -107,6 +107,11 @@ test('initial winner durably records actual activation after one fixed POST',()=
  assert.ok(record(rows,'activation-send'),'live winner must persist SEND');
  assert.ok(record(rows,'activation-ack'),'actual provider response must yield ACK');
  assert.ok(record(rows,'activation-completion'),'primary readback must yield Completion');
+ const capsuleRow=rows.find(([k])=>k==='afw.finite-initial-preparation.v1:capsule');assert.ok(capsuleRow,'completed activation must persist immutable capsule');
+ const capsule=JSON.parse(capsuleRow[1]),plan=record(rows,'plan'),completion=record(rows,'activation-completion');
+ const material=JSON.parse(rows.find(([k])=>k.startsWith('afw.finite-initial-preparation.v1:material:'))[1]);
+ assert.equal(capsule.activationCompletionHash,completion.recordHash);assert.equal(capsule.activatedVersionId,plan.candidateVersionId);assert.equal(capsule.activatedDeploymentId,completion.deploymentId);assert.equal(capsule.preconnectionId,material.preconnectionId);assert.equal(capsule.qaDeploymentId,material.qaBootstrap.currentPointer.deploymentId);
+ assert.equal(rows.some(([k])=>k==='afw.qa-finite-trial.v1:head'),false);
  assert.equal(f.activations.length,1);assert.equal(f.restores.length,0);
  assert.equal(r.status,'material_recorded');
  assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.equal(f.activations.length,1);
