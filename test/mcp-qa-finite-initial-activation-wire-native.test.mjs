@@ -13,7 +13,7 @@ test('initial activation wire is an unmounted factual proposal from the native a
  assert.equal(r.ack.sendHash,r.wire.send.recordHash);assert.equal(r.completion.ackHash,r.ack.recordHash);
  assert.deepEqual(await f.stub.snapshot(),before);assert.equal(f.requests.length,reads);assert.equal(f.restores.length,0);
 }));
-for(const mode of ['arm','wrong-version','wrong-annotation','wrong-deployment','wrong-module','coherent-wrong-module','issued-before-arm','deadline-too-long','ack-after-deadline','observation-after-deadline'])test('activation wire rejects '+mode,()=>using(async f=>{
+for(const mode of ['arm','wrong-version','wrong-annotation','wrong-deployment','wrong-module','coherent-wrong-module','same-size-wrong-module','issued-before-arm','deadline-too-long','ack-after-deadline','observation-after-deadline'])test('activation wire rejects '+mode,()=>using(async f=>{
  const before=await f.stub.snapshot(),reads=f.requests.length;
  assert.equal((await f.stub.probeActivationWire(f.uploaded,mode)).status,'rejected');
  assert.deepEqual(await f.stub.snapshot(),before);assert.equal(f.requests.length,reads);assert.equal(f.restores.length,0);
