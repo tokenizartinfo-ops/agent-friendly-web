@@ -32,6 +32,12 @@ async function fixture(mode='normal'){
  export class Actor extends IndependentClosure{
   async readPreEntryCustody(...args){if(this.env.SYNTHETIC_MODE==='forged')return JSON.stringify({purpose:'afw.qa-pre-entry-custody.v1',status:'observed',guardVerified:true,scopeVerified:false,authorizesEffects:false,operationalReadiness:false,mayRetry:false,reader:{status:'active'},publisher:{status:'active'},extra:'untrusted'});return super.readPreEntryCustody(...args);}
   async snapshot(){return JSON.stringify([...await this.ctx.storage.list()]);}
+  async inheritedInventory(){
+   const base=Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf(this)));
+   const names=Object.getOwnPropertyNames(base).filter(k=>k!=='constructor'&&typeof base[k]==='function').sort(),result=[];
+   for(const name of names){try{const value=await this[name]();result.push({name,returned:true,positive:value?.authorizesEffects===true||value?.operationalReadiness===true});}catch{result.push({name,returned:false,positive:false});}}
+   return JSON.stringify(result);
+  }
   async availability(){const c=new AbortController(),lease={signal:c.signal,assertCurrent(){}};try{await observeFiniteOwnerStageWork({ctx:this.ctx,env:this.env,admission:{lease},originalLease:lease},async()=>true);return true;}catch{return false;}finally{c.abort();}}
   async inherited(){return JSON.stringify({alarm:await this.alarm(),arm:await this.arm(),status:await this.status()});}
  }
@@ -82,3 +88,5 @@ hostTest('loaded wrong credential identity fails closed without mutations',async
 hostTest('Workflow rejects extra selectors before actor access',async()=>{const f=await fixture();try{const r=await f.run({operation:'inspect_pre_entry_custody',observationId:id,target:'foreign'});assert.equal(r.status,'blocked');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
 
 hostTest('Workflow rejects a malformed actor receipt instead of forwarding it',async()=>{const f=await fixture('forged');try{const r=await f.run();assert.equal(r.status,'blocked');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
+
+hostTest('synthetic inherited RPC inventory remains closed on unscoped calls',async()=>{const f=await fixture();try{const before=await f.stub.snapshot(),inventory=JSON.parse(await f.stub.inheritedInventory());assert.ok(inventory.some(x=>x.name==='arm'));assert.ok(inventory.some(x=>x.name==='alarm'));assert.equal(inventory.some(x=>x.positive),false);assert.equal(await f.stub.snapshot(),before);assert.equal(f.calls.length,0);console.log('SYNTHETIC_INHERITED_RPC_INVENTORY',JSON.stringify(inventory));}finally{await f.mf.dispose();}});
