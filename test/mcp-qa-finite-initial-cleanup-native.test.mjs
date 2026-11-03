@@ -162,3 +162,17 @@ test('late activation headers retain body cancellation until it settles',()=>usi
  assert.equal(available,true);assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.activations.length,1);
  assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.equal(f.activations.length,1);
 }));
+
+
+test('late activation body read retains cancellation until it settles',()=>using(async f=>{
+ await f.stub.restoreMethods();await f.stub.configure('late-activation-read');const operation=f.stub.invoke(f.refs);let reading=false;
+ for(let n=0;n<150&&!reading;n++){reading=(await f.stub.stats()).readHeld;if(!reading)await new Promise(resolve=>setTimeout(resolve,20));}assert.equal(reading,true);
+ assert.equal((await operation).status,'admin_pending');const rows=await f.stub.snapshot();assert.ok(record(rows,'activation-send'));assert.equal(record(rows,'activation-ack'),null);
+ assert.equal((await f.stub.probeStageAvailability()).available,false);await f.stub.releaseBodyRead();let cancelling=false;
+ try{
+  for(let n=0;n<150&&!cancelling;n++){cancelling=(await f.stub.stats()).cancelHeld;if(!cancelling)await new Promise(resolve=>setTimeout(resolve,20));}assert.equal(cancelling,true,'native reader cancellation started');
+  assert.equal((await f.stub.probeStageAvailability()).available,false,'late reader cancellation remains retained');
+ }finally{await f.stub.releaseBodyCancel();}
+ let available=false;for(let n=0;n<150&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,20));}
+ assert.equal(available,true);assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.activations.length,1);
+}));
