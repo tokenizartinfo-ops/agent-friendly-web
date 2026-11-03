@@ -1,0 +1,42 @@
+{
+  "base": "b44fb3ccff94a87d0955bbf25dd1c549d329615e",
+  "head": "619b5088dea0ed6e97a25133859f81fe4bbdbaeb",
+  "files": [
+    {
+      "sha": "c015170d96b96219fabdb3dfa8a17d04fbdd32cc",
+      "filename": "docs/superpowers/reports/2026-11-03-finite-owner-window.md",
+      "status": "added",
+      "additions": 9,
+      "deletions": 0,
+      "changes": 9,
+      "blob_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/619b5088dea0ed6e97a25133859f81fe4bbdbaeb/docs%2Fsuperpowers%2Freports%2F2026-11-03-finite-owner-window.md",
+      "raw_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/raw/619b5088dea0ed6e97a25133859f81fe4bbdbaeb/docs%2Fsuperpowers%2Freports%2F2026-11-03-finite-owner-window.md",
+      "contents_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/contents/docs%2Fsuperpowers%2Freports%2F2026-11-03-finite-owner-window.md?ref=619b5088dea0ed6e97a25133859f81fe4bbdbaeb",
+      "patch": "@@ -0,0 +1,9 @@\n+# Ventana del titular de la preparación finita\n+\n+BASE b44fb3ccff94a87d0955bbf25dd1c549d329615e. Código y prueba e966527af2d0ecd053000ddcb6c2e538ea0a1b09.\n+\n+La configuración de la versión inicial cerrada fija AFW_OAUTH_PILOT_EXPIRES_AT al tiempo inicial I0 más 900 segundos. Antes se fijaba al plazo técnico de 300 segundos, insuficiente para el presupuesto posterior de commandBy más 510 segundos. El cambio conserva I0 como origen, C0 en I0+900 s y C1 en I0+1080 s. La duración del permiso delegado, su revocación y los límites de identidad y custodia conservan sus validaciones. La configuración permanece cerrada y la carga sigue siendo inactiva.\n+\n+Prueba nativa con la implementación anterior: commit c60377f9cb4db27e3839cba28209fec052a4d632, run 41634008245, job 125910462293, 82 PASS y una única falla esperada por la diferencia entre I0+300 e I0+900. El mismo flujo con la corrección, run 41634555467, registró 83 PASS consumidores, 45 PASS focalizadas y 23 PASS compilación/residencia, cero fallos, cancelaciones u omisiones. Lint acotado pasó y no hubo artefactos. La prueba usa workerd y datos sintéticos. Persisten advertencias previas del toolchain y mensajes de disposers en fixtures.\n+\n+Esta unidad no produce activación, cápsula ni acceso del titular. Antes de emitir una activación aún hay que componer las comprobaciones de writers, inventario, custodia y publicación primaria en la misma invocación finita, guardar SEND/ACK y comprobar la publicación. El lector histórico y el puente QA producen evidencia factual, no autorización de efectos. El techo de fuente y credenciales venció el 3 de noviembre a las 02:59 UTC; antes de cualquier ensayo real se debe reconciliar una vigencia nueva y verificar el lector nativo."
+    },
+    {
+      "sha": "be1c7d1f25ffd1c6184f6139acb03110b7b148bb",
+      "filename": "lib/mcp-qa-finite-initial-upload-wire.mjs",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/619b5088dea0ed6e97a25133859f81fe4bbdbaeb/lib%2Fmcp-qa-finite-initial-upload-wire.mjs",
+      "raw_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/raw/619b5088dea0ed6e97a25133859f81fe4bbdbaeb/lib%2Fmcp-qa-finite-initial-upload-wire.mjs",
+      "contents_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/contents/lib%2Fmcp-qa-finite-initial-upload-wire.mjs?ref=619b5088dea0ed6e97a25133859f81fe4bbdbaeb",
+      "patch": "@@ -16,7 +16,7 @@ export function buildFiniteInitialUpload(material,baseline,bytes){\n  if(!(bytes instanceof Uint8Array)||bytes.length<1||bytes.length>2097152||sha(bytes)!==m.originalContext.artifact.workerHash)fail();\n  const cfg=structuredClone(finitePublicProfileTemplate('canaryLive'));\n  cfg.bindings=cfg.bindings.map(b=>b.name.endsWith('_ENABLED')?{name:b.name,type:'plain_text',text:'false'}:b.privateSlot?{name:b.name,type:'plain_text',text:b.name==='AFW_OAUTH_PILOT_CLIENT_ID'?p.clientId:b.name==='AFW_OAUTH_PILOT_PROJECT_ID'?p.project.projectId:''}:b);\n- cfg.bindings.push({name:'ACCESS_TEAM_DOMAIN',type:'plain_text',text:p.access.teamDomain},{name:'ACCESS_AUD',type:'plain_text',text:p.access.audience},{name:'AFW_OAUTH_PILOT_EXPIRES_AT',type:'plain_text',text:new Date(m.intent.initialDeadline).toISOString()},structuredClone(p.limiter),{name:'AFW_DOSSIER_MONITORING_OWNER_POLICY',type:'plain_text',text:''});\n+ cfg.bindings.push({name:'ACCESS_TEAM_DOMAIN',type:'plain_text',text:p.access.teamDomain},{name:'ACCESS_AUD',type:'plain_text',text:p.access.audience},{name:'AFW_OAUTH_PILOT_EXPIRES_AT',type:'plain_text',text:new Date(m.intent.I0+900000).toISOString()},structuredClone(p.limiter),{name:'AFW_DOSSIER_MONITORING_OWNER_POLICY',type:'plain_text',text:''});\n  qualifyFiniteConnectionProfile({phase:'closed_ui',metadata:cfg});\n  // Every physical/secret binding must already exist under the same actual ID;\n  // the two explicitly reviewed profile references are the only exceptions."
+    },
+    {
+      "sha": "59c65f23ce15c7d0b5b1e1b93428c413060a5523",
+      "filename": "test/mcp-qa-finite-initial-upload-native.test.mjs",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/619b5088dea0ed6e97a25133859f81fe4bbdbaeb/test%2Fmcp-qa-finite-initial-upload-native.test.mjs",
+      "raw_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/raw/619b5088dea0ed6e97a25133859f81fe4bbdbaeb/test%2Fmcp-qa-finite-initial-upload-native.test.mjs",
+      "contents_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/contents/test%2Fmcp-qa-finite-initial-upload-native.test.mjs?ref=619b5088dea0ed6e97a25133859f81fe4bbdbaeb",
+      "patch": "@@ -32,7 +32,7 @@ test('B2a private backup reconstructs exact baseline with bounded deterministic\n  assert.equal(uploadRows(rows).every(([,raw])=>Buffer.byteLength(raw)<=65536),true);\n  const material=JSON.parse(rows.find(([k])=>k.startsWith('afw.finite-initial-preparation.v1:material:'))[1]);\n  assert.equal(manifest.retainedIds.preconnectionId,material.preconnectionId);assert.equal(manifest.retainedIds.activationKey,material.originalContext.publication.activationKey);\n- assert.equal(f.uploads[0].data.bindings.find(b=>b.name==='AFW_OAUTH_PILOT_EXPIRES_AT').text,new Date(material.intent.initialDeadline).toISOString());\n+ assert.equal(f.uploads[0].data.bindings.find(b=>b.name==='AFW_OAUTH_PILOT_EXPIRES_AT').text,new Date(material.intent.I0+900000).toISOString());\n  assert.equal(manifest.historicalSourceRevision,f.x.receipt.sourceRevision);assert.notEqual(manifest.historicalSourceRevision,material.intent.sourceRevision);\n  for(const [key,value]of before)assert.equal(digestRows(rows.filter(([k])=>k===key)),digestRows([[key,value]]));\n  const send=JSON.parse(uploadRows(rows).find(([k])=>k.endsWith(':send'))[1]);assert.equal(send.bodyHash,sha(f.uploads[0].body));assert.ok(send.deadline-send.issuedAt<=5000);"
+    }
+  ]
+}
