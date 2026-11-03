@@ -67,7 +67,8 @@ export async function initialEntryHarness(mode='normal'){
    }
    else if(req.url===CF+'/workflows/afw-own-qa-private-bootstrap/instances/afw-mcp-closure-d56b5e850d24cc23058a024d73bae4c830a91c1fb9659f2e96282854ccae2c04'){
     assert.equal(req.method,'GET');assert.equal(req.headers.get('authorization'),'Bearer synthetic-native-reader');
-    if(f.oldGuardMode==='retention-401')await new Promise(resolve=>setTimeout(resolve,500));\n    if(['http-401','retention-401'].includes(f.oldGuardMode))return Response.json({success:false,errors:[],messages:[],result:null},{status:401,headers:{date:new Date().toUTCString()}});
+    if(f.oldGuardMode==='retention-401')await new Promise(resolve=>setTimeout(resolve,500));
+    if(['http-401','retention-401'].includes(f.oldGuardMode))return Response.json({success:false,errors:[],messages:[],result:null},{status:401,headers:{date:new Date().toUTCString()}});
     const step={name:'restore-own-closed-canary-1',start:'2026-10-30T16:41:01.564Z',end:'2026-10-30T16:41:01.675Z',success:true};
     const output={status:'blocked',dispatchStatus:'uncertain',nativeWithdrawalVerified:false,operationalReadiness:false,mayRetry:false};
     result={status:'complete',step_count:6,output,steps:[{name:'SYN-1'},step,{name:'SYN-2'},{name:'SYN-3'},{name:'SYN-4'},{name:'SYN-5'}]};
