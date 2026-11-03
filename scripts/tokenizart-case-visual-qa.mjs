@@ -52,6 +52,7 @@ try{
  const context=await browser.newContext({viewport,reducedMotion:'reduce'});
  const page=await context.newPage();const errors=[];
  page.on('pageerror',e=>errors.push(e.message));
+ page.on('console',message=>{if(message.type()==='error')errors.push(message.text());});
  await page.route('**/*',route=>new URL(route.request().url()).hostname==='127.0.0.1'?route.continue():route.abort());
  const response=await page.goto(base+'/casos/tokenizart',{waitUntil:'networkidle'});
  assert.equal(response.status(),200);assert.equal(await page.locator('h1').count(),1);

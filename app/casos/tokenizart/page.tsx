@@ -24,13 +24,13 @@ const observationDate = (value: string) => new Intl.DateTimeFormat('es-AR', {
 }).format(new Date(value));
 const downloads = [
   ['Paquete completo ZIP', '/cases/tokenizart/tokenizart-agent-friendly-package-2026-08-26.zip', 'Todos los candidatos, manifiesto, checksums y guia de instalacion.'],
-  ['Guia de instalacion', '/cases/tokenizart/RUNBOOK.es.md', 'Orden, pruebas y rollback para WordPress y Atelier.'],
-  ['Tokenizart llms.txt', '/cases/tokenizart/tokenizart.com/llms.txt', 'Indice publico corto para agentes.'],
-  ['Tokenizart llms-full.txt', '/cases/tokenizart/tokenizart.com/llms-full.txt', 'Contexto publico extendido y limites.'],
+  ['Guía de instalación', '/cases/tokenizart/RUNBOOK.es.md', 'Orden, pruebas y rollback para WordPress y Atelier.'],
+  ['Tokenizart llms.txt', '/cases/tokenizart/tokenizart.com/llms.txt', 'Índice público corto para agentes.'],
+  ['Tokenizart llms-full.txt', '/cases/tokenizart/tokenizart.com/llms-full.txt', 'Contexto público extendido y límites.'],
   ['Robots Tokenizart', '/cases/tokenizart/tokenizart.com/robots.proposed.txt', 'Propuesta que conserva reglas WordPress/WooCommerce.'],
-  ['JSON-LD Tokenizart', '/cases/tokenizart/tokenizart.com/structured-data.json', 'Identidad del sitio y relacion con Atelier.'],
+  ['JSON-LD Tokenizart', '/cases/tokenizart/tokenizart.com/structured-data.json', 'Identidad del sitio y relación con Atelier.'],
   ['Atelier llms.txt', '/cases/tokenizart/atelier.tokenizart.com/llms.txt', 'Explica que Atelier es la plataforma operativa.'],
-  ['Atelier llms-full.txt', '/cases/tokenizart/atelier.tokenizart.com/llms-full.txt', 'Flujos, seguridad y limites publicos.'],
+  ['Atelier llms-full.txt', '/cases/tokenizart/atelier.tokenizart.com/llms-full.txt', 'Flujos, seguridad y límites públicos.'],
   ['Robots Atelier', '/cases/tokenizart/atelier.tokenizart.com/robots.proposed.txt', 'Mantiene las APIs fuera del rastreo.'],
   ['Sitemap Atelier', '/cases/tokenizart/atelier.tokenizart.com/sitemap.proposed.xml', 'Baseline inicial; luego debe generarse desde el source real.'],
   ['Manifiesto del paquete', '/cases/tokenizart/manifest.json', 'Targets, fecha, estado y exclusiones.'],
