@@ -90,3 +90,13 @@ hostTest('Workflow rejects extra selectors before actor access',async()=>{const 
 hostTest('Workflow rejects a malformed actor receipt instead of forwarding it',async()=>{const f=await fixture('forged');try{const r=await f.run();assert.equal(r.status,'blocked');assert.equal(f.calls.length,0);}finally{await f.mf.dispose();}});
 
 hostTest('synthetic inherited RPC inventory remains closed on unscoped calls',async()=>{const f=await fixture();try{const before=await f.stub.snapshot(),inventory=JSON.parse(await f.stub.inheritedInventory());assert.ok(inventory.some(x=>x.name==='arm'));assert.ok(inventory.some(x=>x.name==='alarm'));assert.equal(inventory.some(x=>x.positive),false);assert.equal(await f.stub.snapshot(),before);assert.equal(f.calls.length,0);console.log('SYNTHETIC_INHERITED_RPC_INVENTORY',JSON.stringify(inventory));}finally{await f.mf.dispose();}});
+
+hostTest('fixed wrapper bundles reproducibly with only fixed external boundaries',async()=>{
+ const options={entryPoints:['scripts/qa-finite-pre-entry-custody-wrapper.mjs'],bundle:true,format:'esm',platform:'neutral',target:'es2022',write:false,metafile:true,logLevel:'silent',external:['node:*','cloudflare:*','./closed-rollback.mjs','./pre-entry-custody-context.mjs']};
+ const a=await build(options),b=await build(options),bytes=a.outputFiles[0].contents;assert.deepEqual(bytes,b.outputFiles[0].contents);
+ const output=Object.values(a.metafile.outputs);assert.equal(output.length,1);
+ assert.deepEqual([...output[0].exports].sort(),['IndependentClosure','PrivateQaBootstrap','PrivateQaNamedConfirmation','PrivateQaPreregistration','default'].sort());
+ const imports=output[0].imports;assert.equal(imports.every(x=>x.external&&x.kind==='import-statement'),true);
+ assert.deepEqual([...new Set(imports.map(x=>x.path))].sort(),['./closed-rollback.mjs','./pre-entry-custody-context.mjs','node:async_hooks','node:crypto'].sort());
+ console.log('CUSTODY_HOST_BUNDLE',JSON.stringify({bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')}));
+});
