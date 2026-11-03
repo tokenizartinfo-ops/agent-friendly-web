@@ -62,9 +62,10 @@ test('failed primary sibling retains actual outstanding provider read',()=>using
  const result=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
  assert.equal(result.status,'admin_pending');
  assert.equal(f.held,'provider-read');
- assert.equal((await f.stub.probeStageAvailability()).available,false);
- assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
- f.release();
+ try{
+  assert.equal((await f.stub.probeStageAvailability()).available,false);
+  assert.equal(rows.some(([k])=>k==='afw.finite-initial-cleanup.v1:activation-send'),false);
+ }finally{f.release();}
  let available=false;
  for(let n=0;n<100&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,10));}
  assert.equal(available,true);
