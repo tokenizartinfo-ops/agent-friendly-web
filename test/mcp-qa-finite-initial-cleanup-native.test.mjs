@@ -116,3 +116,13 @@ test('lost activation acknowledgement remains uncertain and never reposts',()=>u
  const rows=await f.stub.snapshot();assert.ok(record(rows,'activation-send'));assert.equal(record(rows,'activation-ack'),null);assert.equal(f.activations.length,1);
  assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.activations.length,1);
 }));
+
+for(const fault of ['activation-pointer-drift','activation-completion-module'])test('post-ACK '+fault+' prevents durable Completion without replay',()=>using(async f=>{
+ f.alarmMode=fault;assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');const rows=await f.stub.snapshot();
+ assert.ok(record(rows,'activation-send'));assert.ok(record(rows,'activation-ack'));assert.equal(record(rows,'activation-completion'),null);assert.equal(f.activations.length,1);
+ await f.restart();await f.stub.configure('normal');assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.equal(f.activations.length,1);assert.deepEqual(await f.stub.snapshot(),rows);
+},'restart'));
+test('malformed actual activation ACK remains an uncertain issued effect',()=>using(async f=>{
+ f.alarmMode='activation-ack-bad';assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');const rows=await f.stub.snapshot();
+ assert.ok(record(rows,'activation-send'));assert.equal(record(rows,'activation-ack'),null);assert.equal(f.activations.length,1);
+}));

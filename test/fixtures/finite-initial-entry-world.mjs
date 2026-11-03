@@ -109,7 +109,8 @@ export async function initialEntryHarness(mode='normal'){
     assert.equal(req.method,'POST');const body=await req.text(),data=JSON.parse(body);
     if(data.annotations?.['workers/message']?.startsWith('afw-finite-initial-activate-')){
      f.activations.push({body,data});f.activationAnnotation=data.annotations['workers/message'];
-     result={id:'66666666-6666-4666-8666-666666666666',...data};f.pointerMode='candidate';
+     result={id:'66666666-6666-4666-8666-666666666666',...data};f.pointerMode=f.alarmMode==='activation-pointer-drift'?'foreign':'candidate';
+     if(f.alarmMode==='activation-ack-bad')result.versions[0].percentage=99;
      if(f.alarmMode==='activation-ack-lost')throw Error('SYN activation applied ACK lost');
     }else{
      f.restores.push({body,data});result={id:'77777777-7777-4777-8777-777777777777',...data};f.restored=result;f.pointerMode='restored';
@@ -127,7 +128,7 @@ export async function initialEntryHarness(mode='normal'){
      f.held='body';return new Response(new ReadableStream({start(controller){f.release=()=>{controller.enqueue(new TextEncoder().encode(JSON.stringify({success:true,errors:[],messages:[],result})));controller.close();};}}),{headers:{date:new Date().toUTCString(),'content-type':'application/json'}});
     }
    }else if(req.url===CF+'/workers/workers/agent-friendly-web-delegated-canary/versions/55555555-5555-4555-8555-555555555555?include=modules'){assert.ok(f.uploaded);result=structuredClone(f.uploaded);
-    if(mode==='wrong-uploaded-module'||f.alarmMode==='candidate-module'&&f.gateReached)result.modules[0].content_base64=Buffer.from(x.script).toString('base64');
+    if(mode==='wrong-uploaded-module'||f.alarmMode==='candidate-module'&&f.gateReached||f.alarmMode==='activation-completion-module'&&f.activations.length)result.modules[0].content_base64=Buffer.from(x.script).toString('base64');
     if(mode==='qa-uploaded-module')result.modules[0].content_base64=Buffer.from('export default{};').toString('base64');
     if(mode==='literal-secret'||f.alarmMode==='candidate-secret'&&f.gateReached)result.bindings.find(b=>b.type==='secret_text').text='SYNTHETIC_SHOULD_NEVER_PERSIST';
     if(mode==='new-resource'||f.alarmMode==='candidate-resource'&&f.gateReached)result.bindings.find(b=>b.name==='AFW_FINITE_TRIAL_CONTROL').namespace_id='f'.repeat(32);
