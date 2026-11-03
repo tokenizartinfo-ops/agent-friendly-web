@@ -230,6 +230,12 @@ test('guide explains Cloudflare AI Index without claiming account access or inde
     assert.match(detail.answer, /AI Search/);
     assert.match(detail.answer, /Cloudflare/);
   }
-  const action = respondToPublicGuide({ message: 'Publica AI Index en mi sitio' });
-  assert.equal(action.topic, 'action_boundary');
+  for (const [locale, message] of [
+    ['es', 'Publica AI Index en mi sitio'],
+    ['en', 'Enable AI Index for my website'],
+    ['pt', 'Ative AI Index no meu site'],
+  ]) {
+    const action = respondToPublicGuide({ locale, message });
+    assert.equal(action.topic, 'action_boundary', message);
+  }
 });
