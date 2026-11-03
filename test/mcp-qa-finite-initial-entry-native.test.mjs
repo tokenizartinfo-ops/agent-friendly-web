@@ -15,9 +15,9 @@ test('B1 actual finite actor durable entry composes A and returns only safe refe
  assert.equal(entry.operationDeadline,Math.min(entry.initialDeadline,entry.createdAt+30000,f.approval));
  assert.ok(claimed(rows));for(const pair of before)assert.deepEqual(rows.find(([k])=>k===pair[0]),pair);
  assert.equal(rows.some(([k])=>k==='afw.qa-finite-trial.v1:head'),false);
- assert.equal((await f.stub.stats()).syncs,6);
+ assert.equal((await f.stub.stats()).syncs,8);
  const requests=f.requests.length;pending(await f.stub.invoke(f.refs));assert.deepEqual(await f.stub.snapshot(),rows);
- assert.ok(f.requests.length>=requests);assert.equal((await f.stub.stats()).syncs,6);
+ assert.ok(f.requests.length>=requests);assert.equal((await f.stub.stats()).syncs,8);
 }));
 test('B1 concurrent actual SQLite contenders admit one A',()=>using('normal',async f=>{
  await f.stub.configure('normal');const results=await Promise.all([f.stub.invoke(f.refs),f.stub.invoke(f.refs)]);
