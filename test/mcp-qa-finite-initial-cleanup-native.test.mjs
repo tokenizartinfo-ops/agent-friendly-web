@@ -51,7 +51,7 @@ test('B2b only actual finite alarm with no initial records delegates nominal unc
  const result=await f.stub.nominalAlarmData();assert.equal(await result.state,'unavailable');assert.equal(f.requests.length,0);
 }));
 test('B2b complete future SYN activation evidence permits exactly one fixed native restore wire',()=>using(async f=>{
- const plan=await prepared(f);await f.future();const r=await f.alarmAt(plan.C0+1);console.log('SYN last request',f.requests.at(-1));assert.equal(r.status,'restored');
+ const plan=await prepared(f);await f.future();const r=await f.alarmAt(plan.C0+1);assert.equal(r.status,'restored');
  assert.equal(f.restores.length,1);assert.deepEqual(f.restores[0].data,{strategy:'percentage',versions:[{version_id:f.x.pin.id,percentage:100}],annotations:{'workers/message':'afw-finite-initial-restore-'+plan.recordHash}});
  const rows=await f.stub.snapshot();assert.ok(record(rows,'restore-send'));assert.ok(record(rows,'restore-ack'));assert.equal(record(rows,'receipt').outcome,'restored');
  assert.equal((await f.alarmAt(plan.C0+60001)).status,'restored');assert.equal(f.restores.length,1);
@@ -62,6 +62,7 @@ for(const journal of ['send','ack'])test('B2b future SYN '+journal+' without set
 }));
 for(const fault of ['active-workflow','active-container','schedule','ineligible','custody-drift','candidate-module','candidate-resource','candidate-secret'])test('B2b actual native alarm rejects '+fault+' before restore SEND',()=>using(async f=>{
  const plan=await prepared(f);await f.future();f.alarmMode=fault;assert.equal((await f.alarmAt(plan.C0+1)).status,'admin_pending');assert.equal(f.restores.length,0);assert.equal(record(await f.stub.snapshot(),'restore-send'),null);
+ const target=fault==='custody-drift'?'/tokens/verify':fault==='active-workflow'?'/instances?':fault==='active-container'?'/instances-v2?':fault==='schedule'?'/schedules':fault==='ineligible'?'/versions?deployable=true':'/versions/'+plan.candidateVersionId+'?include=modules';assert.ok(f.requests.some(url=>url.includes(target)),fault+' reached its intended boundary');
 }));
 test('B2b foreign primary pointer stops without blind overwrite',()=>using(async f=>{
  const plan=await prepared(f);await f.future();f.pointerMode='foreign';assert.equal((await f.alarmAt(plan.C0+1)).status,'admin_pending');assert.equal(f.restores.length,0);
