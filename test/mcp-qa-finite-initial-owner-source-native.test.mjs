@@ -21,13 +21,13 @@ test('fixed factual envelope after technical expiry preserves original A, actual
  assert.notEqual(m.originalContext.original.programHash,m.originalContext.artifact.programHash);assert.notEqual(m.originalContext.original.sourceRevision,m.originalContext.artifact.sourceRevision);
  assert.deepEqual(a.source.programContext,{programHash:m.originalContext.original.programHash,sourceRevision:m.originalContext.original.sourceRevision,originalContextHash:initialHash('afw.finite-original-context.v1',m.originalContext)});
  assert.deepEqual(await f.stub.snapshot(),before);assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);assert.equal(f.restores.length,0);
- assert.ok(f.requests.slice(start).length>0);assert.ok(f.requests.slice(start).every(r=>r.method==='GET'));
+ assert.ok(f.requests.slice(start).length>0);assert.ok(f.requestMethods.slice(start).every(method=>method==='GET'));
  assert.deepEqual(await result(f.stub.ownerSourceRead(899000,'normal',a.preconnectionId)),a);
  assert.equal((await result(f.stub.ownerSourceRead(900000))).status,'unavailable');
 }));
 test('strict same-lineage and holders deny without writes',()=>using(async f=>{
  const before=await f.stub.snapshot();
- for(const mode of ['missing','malformed','hash','anchor-entry','anchor-once','anchor-selector','anchor-ack','anchor-plan','anchor-state','anchor-arm-ack','anchor-activation-send','anchor-activation-ack','anchor-activation-completion','changed-anchor','alarm','transition','head','publication','wrong-version','wrong-actor','holder-drift','backward','parent-deadline','aborted','untrusted-parent']){
+ for(const mode of ['missing','material','malformed','hash','anchor-entry','anchor-once','anchor-selector','anchor-ack','anchor-plan','anchor-state','anchor-arm-ack','anchor-activation-send','anchor-activation-ack','anchor-activation-completion','changed-anchor','alarm','transition','head','publication','wrong-version','wrong-actor','holder-drift','backward','parent-deadline','aborted','untrusted-parent']){
   assert.equal((await result(f.stub.ownerSourceRead(400000,mode))).status,'unavailable',mode);
  }
  assert.equal((await result(f.stub.ownerSourceRead(400000,'normal','f'.repeat(64)))).status,'unavailable');
@@ -51,4 +51,16 @@ test('actual deferred read stays retained after child timeout and blocks owner a
  assert.equal((await result(f.stub.probeStageAvailability())).available,true);
  assert.deepEqual(await f.stub.snapshot(),rows);
  assert.ok((await result(f.stub.ownerSourceRead())).source);
+}));
+
+for(const mode of ['held-fetch','held-cancel','held-body'])test('whole '+mode+' and cancellation remain retained after timeout',()=>using(async f=>{
+ const before=await f.stub.snapshot(),p=result(f.stub.ownerSourceRead(400000,mode));
+ const wait=async key=>{for(let i=0;i<200;i++){if((await result(f.stub.stats()))[key])return;await new Promise(r=>setTimeout(r,20));}assert.fail('actual '+key+' not reached');};
+ await wait(mode==='held-fetch'?'held':mode==='held-cancel'?'cancelHeld':'readHeld');
+ assert.equal((await p).status,'unavailable');assert.equal((await result(f.stub.probeStageAvailability())).available,false);
+ if(mode==='held-fetch')await f.stub.release();
+ else if(mode==='held-body'){await f.stub.releaseBodyRead();await wait('cancelHeld');assert.equal((await result(f.stub.probeStageAvailability())).available,false);await f.stub.releaseBodyCancel();}
+ else await f.stub.releaseBodyCancel();
+ for(let i=0;i<200;i++){if((await result(f.stub.probeStageAvailability())).available)break;await new Promise(r=>setTimeout(r,20));}
+ assert.equal((await result(f.stub.probeStageAvailability())).available,true);assert.deepEqual(await f.stub.snapshot(),before);
 }));
