@@ -47,3 +47,14 @@ test('translated lease clips wall and monotonic disagreement and links actual in
   controller.abort();assert.equal(local.lease.signal.aborted,true);assert.throws(()=>local.lease.assertCurrent());
  }finally{local.finish();}
 });
+
+test('descendant boundary cannot renew its spent five second monotonic budget when wall time stalls',async t=>{
+ let mono=100;t.mock.method(Date,'now',()=>100000);t.mock.method(performance,'now',()=>mono);
+ const incoming=request(),parent=preparation.createFiniteOwnerRequestLease(incoming),ctx={storage:{transaction(){}},id:{toString:()=> 'a'.repeat(64)}},env={RELEASE_DB:{withSession(){}}};let boundary;
+ try{
+  await assert.rejects(preparation.continuePrivateQaFiniteOwnerChoice({ctx,env,request:incoming},parent.lease,child=>{
+   mono+=4000;boundary=preparation.readFiniteOwnerRequestBoundary(child);throw Error('SYN stop before source');
+  }));
+  assert.ok(boundary.remainingMs<=1000,'descendant monotonic budget must not be renewed');
+ }finally{parent.finish();}
+});

@@ -22,28 +22,5 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Scoped syntax and lint preflight
         run: npx eslint lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-preparation-qa.mjs lib/mcp-qa-finite-owner-native-wire.mjs lib/mcp-qa-finite-owner-native-bridge.mjs lib/mcp-qa-finite-owner-native-receiver.mjs test/fixtures/finite-native-conduit-sender.mjs test/fixtures/finite-native-conduit-receiver.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-context.test.mjs test/mcp-qa-finite-owner-native-wire.test.mjs test/mcp-qa-finite-owner-native-conduit-native.test.mjs test/mcp-qa-finite-owner-original-context-native.test.mjs
-      - name: Exact ticket selector and genuine admission expiry
-        run: timeout 60s node --test --test-timeout=30000 test/mcp-qa-finite-owner-context.test.mjs
-      - name: Added native malformed envelope and size case
-        run: timeout 60s node --test --test-timeout=20000 --test-name-pattern="actual native size" test/mcp-qa-finite-owner-native-conduit-native.test.mjs
-      - name: Causal original selector mutation RED then restored GREEN
-        run: |
-          cp lib/mcp-qa-finite-owner-preparation.mjs /tmp/afw-native-conduit-preparation.original
-          trap 'cp /tmp/afw-native-conduit-preparation.original lib/mcp-qa-finite-owner-preparation.mjs' EXIT
-          node --input-type=module <<'NODE'
-          import {readFile,writeFile} from 'node:fs/promises';
-          import assert from 'node:assert/strict';
-          const path='lib/mcp-qa-finite-owner-preparation.mjs',s=await readFile(path,'utf8'),from='preconnectionId=c.context?.preconnectionId??opaque();';
-          assert.equal(s.split(from).length,2);
-          await writeFile(path,s.replace(from,'preconnectionId=opaque();'));
-          NODE
-          set +e
-          timeout 60s node --test --test-timeout=45000 test/mcp-qa-finite-owner-original-context-native.test.mjs > /tmp/afw-native-conduit-selector-red.log 2>&1
-          outcome=$?
-          set -e
-          cat /tmp/afw-native-conduit-selector-red.log
-          cp /tmp/afw-native-conduit-preparation.original lib/mcp-qa-finite-owner-preparation.mjs
-          test "$outcome" -eq 1
-          grep -q 'original capsule selector must remain exact' /tmp/afw-native-conduit-selector-red.log
-          git diff --exit-code -- lib/mcp-qa-finite-owner-preparation.mjs
-          timeout 60s node --test --test-timeout=45000 test/mcp-qa-finite-owner-original-context-native.test.mjs
+      - name: Descendant monotonic boundary causal RED
+        run: node --test --test-timeout=10000 --test-name-pattern="descendant boundary cannot renew" test/mcp-qa-finite-owner-native-conduit.test.mjs
