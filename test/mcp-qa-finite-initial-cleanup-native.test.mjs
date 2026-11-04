@@ -184,3 +184,8 @@ test('late activation body read retains cancellation until it settles',()=>using
  let available=false;for(let n=0;n<150&&!available;n++){available=(await f.stub.probeStageAvailability()).available;if(!available)await new Promise(resolve=>setTimeout(resolve,20));}
  assert.equal(available,true);assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.activations.length,1);
 }));
+
+test('Unit2a unresolved issuer prefix refuses initial alarm without inventing authority',()=>using(async f=>{
+ await f.stub.seed([['afw.finite-preparation-issuer.v1:'+'a'.repeat(64)+':reservation','{}']]);
+ const before=await f.stub.snapshot();assert.equal((await f.stub.initialAlarm()).status,'admin_pending');assert.deepEqual(await f.stub.snapshot(),before);assert.equal(f.uploads.length,0);
+}));
