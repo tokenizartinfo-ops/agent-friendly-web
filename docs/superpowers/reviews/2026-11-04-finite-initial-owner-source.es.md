@@ -1,0 +1,7 @@
+# Initial factual owner source — source acceptance 4 November 2026
+
+TaskBASE3ee192749d45824707bcc621df33e4e61d67ed24; tested/ reviewedcodee38b1ef4c20a1672a2e9fe49130ae25d256e4a98; finalreport3bdcb61c1e981aa4e21ae453784bbe4347e3f041; full staticreviewpackage rootdocs5c56fae8be7106aba061cf6108dd10e48e1b2529. IndependentSpecPass/qualityacceptable; noCriticalImportant. FinalCIcondition cleared byrootactualjob126752437101 logs/41880790474 atsamee38:169PASS0fail/cancel/skip,lint+hashsuccess. Reader15927B SHA256d2de227be646329e259afb9257beb711fad4a7f1ba627e73fae1aea2ddb92b14. No code changed afterreview; reportonly.
+
+Factualenvelope/genuineoriginalclock/retainedactualIO and Q/M/hashrole mappings reviewed; no source/forward/mount oradmissionenabled. OneMinor deferred to nextowner-request/wholebranch work: native owner mismatch follows changedrevision, so resetrevisionbeforeownerchange for independentcoverage (testline39). Carrythisfindingexplicitly, notdiscarded. Existing97RPCharnesswarningsreported, no physicalsettlementclaim.
+
+Tasksourcecomplete with1deferredtestMinor. operationalReadiness=false;completePackage=false;actualmodule/holders/closedcontroller/custody/ownerrequest-cleanup/native/live/PCoff gates remain. SameoriginalEntry reserved for onecoordinatedPCoffoccurrence, neverpartialrehearsal. Nextdedicatedrequestretention/genuinehandoff sourceunit.
