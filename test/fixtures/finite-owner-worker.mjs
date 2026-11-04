@@ -2,6 +2,8 @@ import * as ownerPreparation from '../../lib/mcp-qa-finite-owner-preparation.mjs
 import {createDelegatedOAuthStore} from '../../lib/delegated-oauth-store.mjs';
 import {recordDossierMonitoringConsent} from '../../lib/dossier-monitoring-authority.mjs';
 import {DurableObject} from 'cloudflare:workers';
+import {createFiniteOwnerComponentHost} from './finite-owner-component-host.mjs';
+import * as stageWork from '../../lib/mcp-qa-finite-stage-work.mjs';
 import {createFiniteOwnerPreparationHost} from '../../lib/mcp-qa-finite-owner-http.mjs';
 import {createFiniteOwnerPreparationStore} from '../../lib/mcp-qa-finite-preparation-store.mjs';
 import {createFiniteOwnerRequestLease,readFiniteOwnerPreparation,recordFinitePreparationGrant,recordFinitePreparationNotice,recordFinitePreparationAuthorization} from '../../lib/mcp-qa-finite-owner-preparation.mjs';
@@ -10,6 +12,39 @@ const H='a'.repeat(64),M='b'.repeat(40),U='11111111-1111-4111-8111-111111111111'
 export class FiniteOwnerFixture extends DurableObject{
  async fetch(request){
   const path=new URL(request.url).pathname;
+
+  if(path==='/fixture/pending-host')return createFiniteOwnerPreparationHost({ctx:this.ctx,env:this.env}).fetch(new Request(origin+'/connections/finite-prepare',{method:request.method==='POST'?'POST':'GET',headers:request.headers,body:request.method==='POST'?'decision=approve':undefined}));
+  if(path==='/fixture/request-state')return Response.json({held:!!this.requestGate?.held,cancelHeld:!!this.requestGate?.cancelHeld,settled:!!this.requestGate?.settled,denied:this.requestGate?.denied??null});
+  if(path==='/fixture/request-release'){this.requestGate?.release?.();return Response.json({released:true});}
+  if(path==='/fixture/request-probe'){
+   const p=createFiniteOwnerRequestLease(request),ctx=this.requestCtx??this.ctx;
+   const probe=fn=>{try{return fn(),true;}catch{return false;}};
+   const observer=stageWork.observeFiniteOwnerRequestWork??((_o,fn)=>fn()); // RED baseline only; no production bypass.
+   const admission={lease:p.lease};
+   let requestAllowed=false,readAllowed=false,ownerAllowed=false;
+   try{requestAllowed=await observer({ctx,env:this.env,originalLease:p.lease},async()=>true);}catch{}
+   try{readAllowed=await stageWork.observeFiniteReadOnlyWork({ctx,env:this.env,originalLease:p.lease},async()=>true);}catch{}
+   try{ownerAllowed=await stageWork.observeFiniteOwnerStageWork({ctx,env:this.env,originalLease:p.lease,admission},async()=>true);}catch{}
+   p.finish();return Response.json({requestAllowed,readAllowed,ownerAllowed,continueAllowed:probe(()=>stageWork.continueFiniteOwnerStageWork({ctx,env:this.env,originalLease:p.lease},async()=>true))});
+  }
+  if(path==='/fixture/request-prepare'){
+   const input=await request.json(),actual=this.ctx.storage,gate={held:false,cancelHeld:false,settled:false};this.requestGate=gate;
+   const wait=()=>new Promise(resolve=>{gate.held=true;gate.release=()=>{gate.settled=true;resolve();};});
+   const storage={get:async(...a)=>{const v=await actual.get(...a);if(input.mode==='source'&&!gate.held&&a[0]==='fixture:source')await wait();return v;},put:(...a)=>actual.put(...a),transaction:async fn=>{
+    if(input.mode==='ticket'||input.mode==='approval'){
+     let target=false;const wrapped=tx=>fn({get:(...a)=>tx.get(...a),put:(key,...a)=>{if(input.mode==='ticket'?key.startsWith('owner-ticket:')&&!key.endsWith(':use'):key.startsWith('connection-approval:'))target=true;return tx.put(key,...a);}});
+     const v=await actual.transaction(wrapped);if(target&&!gate.held)await wait();return v;
+    }return actual.transaction(fn);
+   }};
+   const ctx={id:this.ctx.id,storage};this.requestCtx=ctx;
+   let body=input.body;
+   if(input.mode==='body')body=new ReadableStream({pull(){return new Promise(resolve=>{gate.held=true;gate.release=()=>{resolve();};});},cancel(){gate.cancelHeld=true;return new Promise(resolve=>{gate.release=()=>{gate.settled=true;resolve();};});}});
+   const original=new Request(origin+'/connections/finite-prepare',{method:input.method??'GET',headers:input.headers,body}),parent=createFiniteOwnerRequestLease(original);
+   const observer=stageWork.observeFiniteOwnerRequestWork??((_o,fn)=>fn());
+   try{return await observer({ctx,env:this.env,originalLease:parent.lease},async()=>{try{return Response.json({result:await ownerPreparation.prepareFiniteOwnerChoice({ctx,env:this.env,request:original},parent.lease)});}catch(e){gate.denied=true;return Response.json({rejected:true,status:e.status??503});}finally{parent.finish();}});}
+   finally{parent.finish();}
+  }
+
   if(path==='/fixture/admission'){
    const input=await request.json(),original=new Request(input.url,{method:'POST',headers:input.headers,body:input.body}),parent=ownerPreparation.createFiniteOwnerRequestLease(original);
    let result,first=false,second=false,wrong=false,expired=false,qualified=false,deadlineBound=false,cloneDenied=false,finishedDenied=false;
@@ -108,7 +143,7 @@ export class FiniteOwnerFixture extends DurableObject{
    const storage={get:(...a)=>actual.get(...a),transaction:async fn=>{const result=await actual.transaction(fn);if(!lost){lost=true;throw Error('synthetic lost native transaction acknowledgement');}return result;}};
    ctx={id:this.ctx.id,storage};
   }
-  return createFiniteOwnerPreparationHost({ctx,env:this.env}).fetch(request);
+  return createFiniteOwnerComponentHost({ctx,env:this.env}).fetch(request);
  }
 }
 const worker={fetch(request,env){

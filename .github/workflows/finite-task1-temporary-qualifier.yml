@@ -1,9 +1,8 @@
-# Branch-only fixed factual owner reader TDD qualifier. EXCLUDE before main.
-name: Finite initial owner source temporary qualifier
+# Branch-only owner request retention TDD qualifier. EXCLUDE before main.
+name: Finite owner request retention temporary qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-initial-owner-source.mjs','test/mcp-qa-finite-initial-owner-source-native.test.mjs','.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
@@ -20,10 +19,10 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node --test test/mcp-qa-finite-initial-owner-source-records.test.mjs test/mcp-qa-finite-initial-owner-source-native.test.mjs test/mcp-qa-finite-initial-capsule-records.test.mjs test/mcp-qa-finite-initial-capsule-native.test.mjs test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-scope.test.mjs test/mcp-qa-finite-initial-custody-probe-native.test.mjs test/mcp-qa-finite-pre-entry-host-native.test.mjs
+      - run: node --test test/mcp-qa-finite-owner-request-retention-native.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-initial-owner-source.mjs test/mcp-qa-finite-initial-owner-source-*.test.mjs test/fixtures/finite-initial-entry-world.mjs
+        run: npx eslint test/mcp-qa-finite-owner-request-retention-native.test.mjs test/fixtures/finite-owner-worker.mjs test/fixtures/finite-owner-component-host.mjs
       - name: Fixed source artifact hashes
         run: |
           wc -c lib/mcp-qa-finite-initial-owner-source.mjs test/mcp-qa-finite-initial-owner-source-*.test.mjs test/fixtures/finite-initial-entry-world.mjs
