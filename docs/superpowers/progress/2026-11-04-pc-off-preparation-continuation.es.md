@@ -1,3 +1,33 @@
+# CHECKPOINT VIGENTE — desconexión breve del owner, 2026-11-04 18:36:22 UTC
+
+Gabriel pidió guardar sin cerrar nada. Trabajo guardado EN GITHUB; no nuevos archivos/dependencias/builds/procesos locales. No nuevo ensayo, permisos ni login solicitado. Subagentes de esta unidad y arquitectura finalizaron; no tarea de código pendiente en un agente perdido. No iniciar ventana con vencimiento durante su desconexión.
+
+## Punto exacto para reanudar
+- Rama SOURCE única feat/finite-native-cleanup-20261101: 8241213398f3acee3c58d6667ab7cdb255588dc2 (commit de aceptación documental sobre19b364a4a572affdc2eed6baf3855f97f7d11c54).
+- Último código probado:0aa0a399ef2698d66a61c0998e2fdd7028bf2950.
+- Unidad retención owner COMPLETA, revisión independiente SpecPass/QualityApproved tras fix1/5,0findings abiertos. Aceptación: docs/superpowers/reviews/2026-11-04-owner-request-retention.es.md. Informe: docs/superpowers/reports/2026-11-04-owner-request-retention.md. No repetir esta unidad, sus RED/GREEN, la custodia anterior ni sus revisiones.
+- Fix causal preserva error400 durante cancelación retenida: GREEN41887933176/job126777308909/attempt1:44PASS0FAIL/CANCEL/SKIP,lintlimpio,0RPCwarnings. Controller leyó logs exactos. Reporte documenta9RPCwarnings en cada uno de los dos jobs anteriores; no se afirmó ausencia general de leaks. Anterior57PASS+compiler y47grupos inalterados tienen alcance/revisión fechados en informe; no se presentan como un único run104.
+- Capsule,readonlyintegration,factualownerreader ya aceptados antes; detalles de recibos debajo. Qualifier temporal de unidadretención retirado; revisado source/fixture/test no cambió tras0aa. No merge/main/deploy.
+
+## Siguiente bloque (NO implementado todavía)
+Convertir arquitectura de cleanup en spec/plan vinculantes y ejecutar la primera unidad. Diseño YA guardado en docs/finite-owner-cleanup-design-20261104, commit1db28efb87768cf724be56c7f941333fc2a4f71b, docs/superpowers/reports/2026-11-04-owner-cleanup-handoff-design.md. Arquitecto design_owner_cleanup_handoff terminó; no volver a pedir el mismo estudio.
+Builder check independiente check_cleanup_design: BUILDABLE con estas dos decisiones técnicas, root las acepta como ruling para próxima spec:
+1. Enrollment exige ownerpreconnectionId EXACTAMENTE igual a capsule.preconnectionId (selector originalM/A). Diferencia falla cerrado/ceroPOSTs; no mapping opcional ni nueva ocurrencia. Unit2 debe conectar firstGET con selector factual original antes de abrirlo. Generic prepareGET hoy crea opaque(), por eso source/host siguen cerrados. Harness reutilizable REALnativo/sintético: test/fixtures/finite-initial-entry-world.mjs y test/mcp-qa-finite-initial-owner-source-native.test.mjs; fixture policytransport con source sustituido solo no prueba vínculoM.
+2. Tras enrollment real, transporte sigue admin_pending ANTES upload.issue/proveedorSEND hasta implementación Unit2. Cambiar expectativas positivas actuales a enrollment+bloqueado/ceroPOST; ningún bypass caller/env ni duplicar motor de producción para fingir instalado. No aprobación humana pendiente para estas decisiones.
+
+Secuencia finita seleccionada (mismo actor/UNalarm existente, sin nuevos recursos):
+Unit1 obligación durable de cleanup preparatorio +fence en consumidor real tras admisión genuina, sin habilitar nada.
+Unit2 retirada exacta de authorization/readgrant/notices incluso prefijos parciales y commitD1 previo a ACKDO; reconciliar publicación exacta y restauración. Brecha concreta: reducción existente exige fila monitoringconsent, por lo que NO cubre readgrant anterior al consentimiento de avisos. Hace falta correlación durable propia del issuer antes de escrituras para cierre seguro; no escanear solo owner/client ni inventarconsent.
+Unit3 transferencia atómica del MISMOalarm a guard nominal, sin doblepropietario/reset y sin HEADconflict silencioso. Factory/plan/control genuinos, sync/readback/ACK; incertidumbre bloquea launch.
+Informe arquitectónico incluye firmas sugeridas, archivos, categorías crash/unknown y matriztests. Próxima spec debe fijar schemas/interfaces exactos y conservar consumidor real, mismas promesas/raíz y límites; lector/factual/source seam no se monta por enrollment solo. No implementación nueva aún, no briefing perdido.
+
+## Clocks y próximos gates no se alteraron
+Wire ACTUAL ya I0+900000; comentario spec2Nov de cinco minutos histórico. Technical I0+300000, C0initial=I0+900000,C1initial=C0+180000. commandBy conserva -510000; nominalC0n=T0+240000,C1n=T0+420000,R1=T0+480000,launchT0+150000. Un único Entry completo se reserva para ensayo coordinado PC-off; no PC-on completo separado,reset,borrado o rearm. Ver spec single-live-pcoff-sequence.
+Después de cleanup: UnitBcontroller cerrado/artefacto/preservaciónsettings+active por separado, exactbasec570/inheritedmethods/holders; wholebranchreview/checks/retirarqualifiers; credenciales realmente cargadas/permisoendpoint/confignamespace/latencia/sourceceilingC1; luego única ocurrencia coordinada. Sourceceiling3Nov02:59UTC sigue VENCIDO. Lectores/publicador nativos vencidos: no renovación anticipada mientras fuente no completa. Último runtime primario sigue fechado, no observación nueva por este checkpoint.
+operationalReadiness=false;completePackage=false;PC-off pendiente;Maxsinacciones. No pedir apagar ni prometer ejecución/guardia cloud desde sesión local.
+
+---
+
 # Owner request retention — review and fix round1/5
 Task BASEc12d109..reviewedbf5cac5 (code c47d241). Independent reviewer review_owner_request_retention: SpecNeedsFixes/QualityNeedsFixes, noCritical; oneImportant: first400 bodyvalidation error overwritten by503 if cancellation remains pending beyond5s. Spec acceptance3 requires firstfailurepreservation AND actualcancelretention; not plan-mandated. Ruling: fix within original task, preserve immediate logical error while retain actual complete cancellation untilsettlement. Native regression oversize1025/limit1024→heldcancel→caller400→conflicting scopesblocked→settlementrelease. No widened/restarted timer/guard or cleanup claim. OneMinor: report must name9RPCdisposalwarnings in final57testjob (also9 priorjob), without inferring newphysicalleak. Resume originalimplementer, scopedcausalRED+affectedtests, reportupdate, samefreshreviewer scopedfixdiff. No runtime/provider/permission actions. Task notaccepted; nextimplementation notdispatched.
 
