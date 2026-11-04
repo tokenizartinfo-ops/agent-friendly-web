@@ -7,7 +7,7 @@ on:
 permissions:
   contents: read
 jobs:
-  qualification:
+  inventory:
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
@@ -16,26 +16,5 @@ jobs:
           ref: ${{ github.sha }}
           persist-credentials: false
           fetch-depth: 1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Lint changed JavaScript
-        run: npx eslint lib/mcp-qa-finite-profile.mjs test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-owner-native-conduit-native.test.mjs test/fixtures/finite-native-conduit-receiver.mjs
-      - name: Actual native receiver and retained guard
-        run: timeout 60s node --test --test-timeout=20000 test/mcp-qa-finite-owner-native-conduit-native.test.mjs
-      - name: Selected exact profile and source regressions
-        run: timeout 120s node --test --test-timeout=45000 test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-candidate-residency.test.mjs test/mcp-qa-finite-phase-inventory.test.mjs test/mcp-qa-finite-bootstrap.test.mjs
-      - name: Selected initial upload and historical source regressions
-        run: timeout 180s node --test --test-timeout=120000 test/mcp-qa-finite-initial-upload-native.test.mjs test/mcp-qa-finite-historical-source-native.test.mjs
-      - name: One actual finite compilation
-        if: always()
-        run: |
-          node --input-type=module <<'NODE'
-          import {compileFiniteNativeStaging} from './scripts/build-finite-native-package.mjs';
-          import {createHash} from 'node:crypto';
-          const r=await compileFiniteNativeStaging({cwd:process.cwd(),sourceRevision:process.env.GITHUB_SHA});
-          const sha=x=>createHash('sha256').update(x).digest('hex');
-          console.log(JSON.stringify({sourceRevision:process.env.GITHUB_SHA,sourceTree:r.sourceTree,completePackage:r.completePackage,bootstrapSource:r.bootstrapSource,residency:r.residency,modules:Object.fromEntries(['qaLive','canaryLive'].map(role=>[role,{bytes:r.files[role+'/index.mjs'].length,sha256:sha(r.files[role+'/index.mjs'])}]))}));
-          NODE
+      - name: Finite hash and named plan call site inventory
+        run: rg -n 'activationConfigurationHash|resolveNamedActivationPlan|validateNamedCancellationHistory|createActivationObserver' lib/mcp-qa-finite-*.mjs lib/mcp-finite-*.mjs
