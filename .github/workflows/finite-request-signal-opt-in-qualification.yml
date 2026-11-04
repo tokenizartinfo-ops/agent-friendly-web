@@ -21,5 +21,5 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Selected causal native RED
+      - name: Selected actual native GREEN
         run: timeout 60s node --test --test-timeout=20000 --test-name-pattern='actual native signal capability' test/mcp-qa-finite-owner-native-conduit-native.test.mjs
