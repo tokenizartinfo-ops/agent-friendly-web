@@ -9,7 +9,7 @@ concurrency:
   group: finite-owner-phase-context-source
   cancel-in-progress: false
 jobs:
-  red-native:
+  green-source:
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
@@ -20,5 +20,6 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npx eslint lib/mcp-qa-finite-owner-stage-facts.mjs lib/mcp-qa-finite-preparation-enrollment-facts.mjs lib/mcp-qa-finite-owner-phase-context.mjs lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-preparation-cleanup.mjs lib/mcp-qa-finite-owner-preparation-qa.mjs test/mcp-qa-finite-owner-phase-context.test.mjs test/mcp-qa-finite-owner-phase-context-native.test.mjs test/fixtures/finite-owner-phase-context.mjs test/fixtures/finite-initial-entry-world.mjs
       - run: node --test test/mcp-qa-finite-owner-phase-context.test.mjs
       - run: node --test test/mcp-qa-finite-owner-phase-context-native.test.mjs
