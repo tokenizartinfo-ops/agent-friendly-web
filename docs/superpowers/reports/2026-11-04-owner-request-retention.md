@@ -72,7 +72,7 @@ Scoped lint command (exit0, no lint diagnostics):
 npx eslint lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-{preparation,http}.mjs lib/mcp-qa-finite-policy-transport.mjs lib/mcp-qa-finite-initial-owner-source.mjs test/mcp-qa-finite-owner-request-retention*.test.mjs test/mcp-qa-finite-initial-owner-source-native.test.mjs test/fixtures/finite-{owner*,connection-worker,initial-entry-world}.mjs
 ```
 
-Actions emits its pre-existing dependency/action deprecation notices; these are not lint diagnostics. Exact job logs/head/attempt were checked. No dispatch or rerun was duplicated to compensate for delayed list/status metadata.
+Actions emits dependency/action deprecation notices and RPC disposal warnings. Both job126769927786 (98/99) and job126771803825 (57/57) logged nine occurrences of `An RPC stub was not disposed properly`. They did not fail tests. Their prior presence alone does not establish a newly introduced physical leak; these observations are separate from the clean scoped lint result. Exact job logs/head/attempt were checked. No dispatch or rerun was duplicated to compensate for delayed list/status metadata.
 
 ## Hashes from final cloud job
 
@@ -102,3 +102,60 @@ The branch-only `.github/workflows/finite-task1-temporary-qualifier.yml` is remo
 Cleanup handoff qualification; native route/controller mounting and source/forward seam availability; actual custody/identity/permission/consent and any separate promotion approval; main/full CI and fresh task review; the single consuming Entry coordinated with PC-off. No PC-on consuming rehearsal/reset occurred. Expired source ceiling and I0/C0/C1/T0 are unchanged.
 
 **operationalReadiness=false; completePackage=false; actual host approvals=PENDING; PC-off=PENDING.**
+
+
+## Fix1 — independent review first-failure ordering (2026-11-04)
+
+The original self-review conclusion above is historical: independent review subsequently found an Important violation of acceptance3 and a Minor receipt omission. Both are addressed in this same source unit; the fix is ready for scoped re-review.
+
+- FIXBASE: `bf5cac5e2884eecb09ce3d2a36c0f5522c69855b`.
+- Causal RED head: `bb3468a975f9d34391757b6bdae4be2e0d1038be`.
+- Fix1 codeHEAD: `0aa0a399ef2698d66a61c0998e2fdd7028bf2950`, tree `c7e5bfef1e25d4c146f9efd042f035ff250d64c7`.
+- Scoped review range: FIXBASE..Fix1codeHEAD. The enclosing receipt commit changes this report and removes the temporary qualifier; tested source/fixture/test bytes are unchanged.
+- Every branch ref update retained an exact expectedSHA lease. No other writer, local clone/build/dependencies, real provider/runtime/secret/consent/Entry/main/merge action.
+
+### Important: first body failure while cancellation remains pending
+
+Root cause: after a1025-byte POST chunk exceeded the1024-byte preparation limit, the actual body operation awaited held cancellation before rejecting. The five-second child timer could therefore win and replace the earlier400 with503.
+
+The fix publishes the first known logical failure through a local promise before awaiting cancellation and races that failure against the existing child completion. The actual read/failure/cancellation operation remains inside the SAME retained child until physical settlement. A timeout occurring first still wins; a size failure occurring first now returns400 while cancellation remains physically pending. No timer is widened/restarted, no retention bag/parent is replaced, and no admission/authentication/schema/export/import edge is added.
+
+The new native regression uses an actual1025-byte ReadableStream and controlled actual cancel promise. It asserts caller400, all competing request/readonly/owner scopes excluded, continued exclusion beyond5100ms with cancellation still held, no persisted effects, then cancellation settlement and successful new request scope. Only this stream mode was added to the existing fixture; unrelated harness behavior was not refactored.
+
+### RED/GREEN commands and evidence
+
+[RED run41887717861](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41887717861), attempt1, exact job126776572068, checkout bb3468a975f9d34391757b6bdae4be2e0d1038be:
+
+```sh
+node --test --test-name-pattern='oversized body' test/mcp-qa-finite-owner-request-retention-native.test.mjs
+```
+
+Observed causal assertion: `503 !== 400`, expected400/actual503 after held cancellation;1test,0pass,1fail,0cancelled,0skipped, duration6350.090649ms. Scoped lint exit0.
+
+[GREEN run41887933176](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41887933176), attempt1, exact job126777308909, checkout0aa0a399ef2698d66a61c0998e2fdd7028bf2950:
+
+```sh
+node --test test/mcp-qa-finite-owner-request-retention-native.test.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs test/mcp-qa-finite-owner-request-retention.test.mjs
+```
+
+Actual output:44tests,44pass,0fail,0cancelled,0skipped, duration35163.809566ms, process exit0. The new first400/cancel regression passed in5553.118677ms. Existing timeout-first body cancellation, genuine handoff/replay, original401 identity fence and owner preparation/helper compatibility all passed.
+
+Scoped lint (exit0, no diagnostics):
+
+```sh
+npx eslint lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs test/fixtures/finite-owner-worker.mjs
+```
+
+Fix1 GREEN logs contain zero RPC disposal warnings. The receipt Minor is corrected above: the prior two covering jobs each had nine such warnings alongside deprecation notices, without test failures. This bounded observation neither proves a new leak nor proves general absence of leaks.
+
+Final cloud SHA256 output for changed code/test/fixture:
+
+```text
+daf99a35765f4e59b78f07653bf7360d5aae3e7af73ce8fa2473f54b0cba9f68  lib/mcp-qa-finite-owner-preparation.mjs
+bfe4a5181aa2fba1882a65b0630000238493fcfca88ca6f59133ddbc702d69ac  test/mcp-qa-finite-owner-request-retention-native.test.mjs
+67df94df5a61c07a42b48a698c497f29afe1650a3d521eb32c00c7d41a1864b5  test/fixtures/finite-owner-worker.mjs
+```
+
+Self-review of exact FIXBASE..Fix1codeHEAD confirms only local failure signaling, the causal fixture/test and temporary qualifier changes. First-failure signaling happens before awaited cancellation; cancellation is still inside the original retained operation. No import graph/export change, so the previous actual compiler/graph tests remain applicable to topology; they are not represented as Fix1 output-byte artifacts. Per the bounded fix instructions, no compiler/fullsuite/unrelated group was repeated. Fresh scoped re-review and any new final package build remain with the root task.
+
+The temporary qualifier is removed in this receipt delivery. All prior unavailable routes/source/forward seams, cleanup and actual custody/promotion gates remain unchanged. **operationalReadiness=false; completePackage=false; approvals=PENDING; PC-off=PENDING.**
