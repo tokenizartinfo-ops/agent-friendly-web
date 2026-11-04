@@ -1,0 +1,33 @@
+name: finite known C1 scoped qualifier
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - .github/workflows/finite-known-c1-qualification.yml
+      - lib/mcp-activation-observer.mjs
+      - lib/mcp-release-operator-policy.mjs
+      - test/mcp-finite-activation-compatibility.test.mjs
+      - test/mcp-finite-named-activation.test.mjs
+permissions:
+  contents: read
+jobs:
+  finite-known-c1:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Lint before acceptance
+        if: ${{ !contains(github.event.head_commit.message, 'RED') }}
+        run: npm run lint
+      - name: RED finite tests
+        if: ${{ contains(github.event.head_commit.message, 'RED') }}
+        run: node --test test/mcp-finite-activation-compatibility.test.mjs test/mcp-finite-named-activation.test.mjs
+      - name: GREEN finite and legacy tests
+        if: ${{ !contains(github.event.head_commit.message, 'RED') }}
+        run: node --test test/mcp-finite-activation-compatibility.test.mjs test/mcp-finite-named-activation.test.mjs test/mcp-activation-observer.test.mjs test/mcp-named-activation.test.mjs
