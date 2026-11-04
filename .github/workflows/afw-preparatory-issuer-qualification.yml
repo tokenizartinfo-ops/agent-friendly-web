@@ -28,5 +28,5 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Scoped final journal fixture lint
         run: npx eslint test/mcp-qa-finite-preparation-issuer-native.test.mjs test/fixtures/finite-preparation-issuer-worker.mjs
-      - name: Additional native journal chain only
-        run: node --test --test-timeout=30000 --test-name-pattern='REAL journal append-once send ACK freeze' test/mcp-qa-finite-preparation-issuer-native.test.mjs
+      - name: Additional native journal and queued-ordering cases only
+        run: node --test --test-timeout=30000 --test-name-pattern='REAL journal append-once send ACK freeze|REAL barrier beats SYN queued|REAL native execution fence rejects SYN late' test/mcp-qa-finite-preparation-issuer-native.test.mjs

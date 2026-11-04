@@ -67,3 +67,11 @@ test('REAL journal append-once send ACK freeze rejects replacement grant ID and 
  for(const name of ['frozenGrant','replacement'])assert.equal(r[name].status,'uncertain',name);
  assert.equal(r.chain.operations.open_fence.send.recordHash,r.chain.operations.open_fence.ack.sendHash);assert.equal(r.chain.operations.grant.send,null);assert.equal(r.unknownDenied,true);
 });
+
+for(const target of ['open','consume','grant'])test('REAL barrier beats SYN queued original '+target+' SQL without reopening',async t=>{
+ const {result:r}=await scenario(t,'queued_barrier',{target});assert.equal(r.error,undefined);assert.equal(r.barrier.status,'fenced');assert.equal(r.rows.fences.results.length,1);assert.equal(r.rows.fences.results[0].fence_request_id,r.barrier.row.fence_request_id);assert.deepEqual(r.rows.grants.results,[]);
+ if(target==='open')assert.equal(r.pending.rejected,true);else if(target==='consume')assert.equal(r.pending.value,null);else assert.equal(r.pending.value.status,'no_mutation');
+});
+for(const mode of ['authorization_queue','open_queue','deadline_grant_queue','C0_grant_queue'])test('REAL native execution fence rejects SYN late '+mode,async t=>{
+ const {result:r}=await scenario(t,mode);assert.equal(r.error,undefined);assert.equal((r.operation??r.grant).status,'no_mutation');assert.deepEqual(r.rows.grants.results,[]);if(mode==='authorization_queue')assert.deepEqual(r.rows.consents.results,[]);if(mode==='open_queue')assert.deepEqual(r.rows.fences.results,[]);
+});

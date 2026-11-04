@@ -17,7 +17,7 @@ export class FiniteIssuerFixture extends DurableObject{
   if(b.case!=='missing_schema')for(const sql of schema)await exec(sql);
   const at=(await db.prepare("SELECT CAST(unixepoch('subsec')*1000 AS INTEGER) AS ms").first()).ms;
   const identity=seal('Identity',{preconnectionId:H,enrollmentHash:H,capsuleHash:H,sourceRevision:'b'.repeat(40),qaVersionId:U,actorId:this.ctx.id.toString(),subject:'SYN-owner',accessRealmHash:H,projectId:'SYN-project',projectRevision:1,clientId:'SYN-client',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',authorizationHash:'c'.repeat(64),grantId:U,requestedScopes:['afw:project:read','afw:evidence:read'],consentExpiresAt:new Date(at+12000).toISOString(),I0:at-1000,C0:at+899000,C1:at+1079000,reservedAt:at-5});
-  const i=['C0_queue','expired_cleanup'].includes(b.case)?seal('Identity',{...identity,I0:at-899200,C0:at+800,C1:at+180800,consentExpiresAt:new Date(at+800).toISOString()}):b.case==='consent_queue'?seal('Identity',{...identity,consentExpiresAt:new Date(at+500).toISOString()}):identity;
+  const i=['C0_queue','expired_cleanup','C0_grant_queue'].includes(b.case)?seal('Identity',{...identity,I0:at-899200,C0:at+800,C1:at+180800,consentExpiresAt:new Date(at+800).toISOString()}):b.case==='consent_queue'?seal('Identity',{...identity,consentExpiresAt:new Date(at+500).toISOString()}):identity;
   const parent=new AbortController(),lease=Object.freeze({signal:parent.signal,assertCurrent(){if(parent.signal.aborted||Date.now()>=at+30000)throw Error('SYN original lease expired');}});
   let delay=null,lose=null,holdAck=null,sessionId=0,sqlCount=0,grantCommitted=false;
   const wrapper={withSession(mode){events.push({session:++sessionId,mode});const sid=sessionId,s=db.withSession(mode);return {prepare(sql){events.push({sid,sql});const actualSql=b.case==='unsupported_clock'&&sql.includes(' AS ms,typeof(')?sql.replaceAll("'subsec'","'SYN-unsupported'"):b.case==='unsupported_iso'&&sql.includes(' AS ms,typeof(')?sql.replaceAll("'2026-11-04T12:00:00.123Z'","'SYN-not-iso'"):sql;const stmt=s.prepare(actualSql);return {bind(...args){const bound=stmt.bind(...args);const call=method=>async()=>{sqlCount++;if(delay&&sql.includes(delay.needle)){const d=delay;delay=null;await sleep(d.ms);}const result=await bound[method]();if(sql.includes('INSERT INTO delegated_access_grants'))grantCommitted=true;if(holdAck&&sql.includes(holdAck.needle)){const d=holdAck;holdAck=null;await sleep(d.ms);}if(lose&&sql.includes(lose)){lose=null;throw Error('SYN lost actual native SQL ACK');}return result;};return {first:call('first'),all:call('all'),run:call('run')};}};}};}};
@@ -56,7 +56,7 @@ export class FiniteIssuerFixture extends DurableObject{
     result.collision=await rejected(()=>exec('INSERT INTO finite_preparation_issuer_fences SELECT ?,authorization_hash,grant_id,enrollment_hash,identity_hash,reserved_at,forward_until,cleanup_until,fence_request_id,fenced_at FROM finite_preparation_issuer_fences','d'.repeat(64)));
     result.rows=await snapshot();
    }else if(b.case==='open_then_close'){result.open=await opened();result.barrier=await close();result.authorization=await authorized();result.rows=await snapshot();}
-   else if(b.case==='journal'){
+   else if(['journal','journal_chain'].includes(b.case)){
     const journal=createFinitePreparationIssuerJournal({ctx,env});
     const reservation=seal('Reservation',{purpose:'afw.finite-preparation-issuer-reservation.v1',identity:i,requestHash:H,issuedAt:at,deadline:at+4000});
     if(b.fault)txFault=b.fault;
@@ -76,6 +76,21 @@ export class FiniteIssuerFixture extends DurableObject{
      await nativeStorage.put(P+i.preconnectionId+':unknown','{}');result.unknownDenied=await rejected(()=>journal.read({preconnectionId:i.preconnectionId},lease));
     }
     result.rows=[...await nativeStorage.list({prefix:P})];
+   }else if(b.case==='queued_barrier'){
+    let consumption;
+    if(b.target!=='open'){await opened();await authorized();}
+    if(b.target==='grant')consumption=await consume();
+    const needles={open:'INSERT INTO finite_preparation_issuer_fences',consume:'UPDATE delegated_consent_sessions',grant:'INSERT INTO delegated_access_grants'};
+    delay={needle:needles[b.target],ms:250};
+    const work=b.target==='open'?()=>opened():b.target==='consume'?()=>consume():()=>store.insertReadGrant({...opts(),consumption,grant},lease);
+    let pendingSettled=false;const pending=work().then(value=>{pendingSettled=true;return {value};},()=>{pendingSettled=true;return {rejected:true};});
+    while(delay!==null&&!pendingSettled)await sleep(1);if(delay!==null)throw Error('SYN queue did not reach actual SQL');
+    result.barrier=await close();result.pending=await pending;result.rows=await snapshot();
+   }else if(['authorization_queue','open_queue'].includes(b.case)){
+    if(b.case==='authorization_queue')await opened();
+    const o=opts();o.window.deadline=o.window.startedAt+300;
+    delay={needle:b.case==='open_queue'?'INSERT INTO finite_preparation_issuer_fences':'INSERT INTO delegated_consent_sessions',ms:650};
+    result.operation=await store[b.case==='open_queue'?'openFence':'insertAuthorization'](o,lease);result.rows=await snapshot();
    }else{
     await opened();await authorized();
     if(['consent_queue','C0_queue','deadline_queue'].includes(b.case)){
@@ -92,9 +107,11 @@ export class FiniteIssuerFixture extends DurableObject{
       result.leaseDenied=await rejected(()=>store.insertReadGrant({...opts(),consumption,grant},otherLease));
       result.grant=await store.insertReadGrant({...opts(),consumption,grant},lease);
       result.replayDenied=await rejected(()=>store.insertReadGrant({...opts(),consumption,grant},lease));
-     }else if(b.case==='grant_expiry_queue'){
-      const g={...grant,expiresAt:new Date(Date.now()+300).toISOString()};delay={needle:'INSERT INTO delegated_access_grants',ms:650};
-      result.grant=await store.insertReadGrant({...opts(),consumption,grant:g},lease);
+     }else if(['grant_expiry_queue','deadline_grant_queue','C0_grant_queue'].includes(b.case)){
+      const g=b.case==='grant_expiry_queue'?{...grant,expiresAt:new Date(Date.now()+300).toISOString()}:grant;
+      const o=opts();if(b.case==='deadline_grant_queue')o.window.deadline=o.window.startedAt+300;
+      delay={needle:'INSERT INTO delegated_access_grants',ms:b.case==='C0_grant_queue'?1000:650};
+      result.grant=await store.insertReadGrant({...o,consumption,grant:g},lease);
      }else if(b.case==='grant_after_barrier'){
       result.barrier=await close();result.grant=await store.insertReadGrant({...opts(),consumption,grant},lease);result.observation=await observe(result.barrier);
      }else if(b.case==='unknown_fence'){
