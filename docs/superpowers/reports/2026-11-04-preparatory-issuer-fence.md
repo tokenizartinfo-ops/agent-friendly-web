@@ -112,3 +112,18 @@ Ordinary `lib/delegated-oauth-store.mjs` and `db/schema.ts` are byte/blob-identi
 No remote DDL, schema installation, credentials, keys, permissions, provider calls, Entry, OTP/OAuth action, deployment, main/merge, cron, monitor, other project, Max or source forward was performed. No automatic review or Unit2b was dispatched.
 
 Fresh independent source review is the next gate. Unit2b native provenance/SDK/consent/selector/notice composition, Unit3 qualified alarm handoff, remote schema preservation/installation and full branch/artifact/promotion gates remain separate. operationalReadiness=false; completePackage=false; PCoff=false.
+
+
+## Root compiler addendum — 4 November 2026, 20:57 UTC
+
+The earlier 725.7KB legacy `worker/independent-closure/index.mjs` build did not qualify the changed `finite.mjs` entry. Root ran the actual `compileFiniteNativeStaging` source compiler in a credential-free temporary Actions job, without modifying compiler guards or product code.
+
+First verifier HEAD4213efd49cac8a1df74ba8cb02fa9a6bab4679b4 / run41910465625 failed an extra verifier assertion that issuer-records must be imported. The product compiler had returned successfully; this codec is intentionally unmounted, while initial cleanup checks its fixed prefix literal. Root removed only that erroneous assertion. This is verifier correction, not a product fix, renewed clock or relaxed compiler.
+
+Corrected HEAD `3be763e4e0813518f83f516dd60fb5fb51b85b05`, source tree `8c6b15022e1ebce2662b6fb173399ee371886fbf`: [Actions41911378344](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41911378344), job126859517581, attempt1, SUCCESS. Root read actual completed job/logs. Actual compiler entry `worker/independent-closure/finite.mjs` and changed initial-cleanup are present in QA graph. SQL store/journal remain absent from both worker graphs; no node:fs output import. Original 2MiB canary/3MiB QA guards and embedded residency/bootstrap/source-before-after checks all passed, unchanged.
+
+- canaryLive:1950914bytes, SHA256 `63dbebc5e406774d6e8b0cb5715f98d6d8a0e891d6c708ae32170ffbe78c1773`.
+- qaLive:2006323bytes, SHA256 `866ea9ca50d900c13af194a375cee2e9eb39d302d0a325b30a90adec79340fe7`.
+- Candidate compressed383484bytes; original cap2098176bytes.
+
+These module hashes qualify only compiler HEAD3be763e4/tree8c6b1502, not this later report/deletion commit or a deployable complete package. Temporary root qualifier removed in this commit. Existing accepted138 cases are preserved, not rerun; no native product change since9907976a. completePackage=false;operationalReadiness=false;PCoff=false. Fresh independent Unit2a review dispatched against the full task diff and report; this addendum supplies the previously missing graph evidence, not acceptance.
