@@ -21,5 +21,20 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Selected actual native GREEN
-        run: timeout 60s node --test --test-timeout=20000 --test-name-pattern='actual native signal capability' test/mcp-qa-finite-owner-native-conduit-native.test.mjs
+      - name: Lint changed JavaScript
+        run: npx eslint lib/mcp-qa-finite-profile.mjs test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-owner-native-conduit-native.test.mjs test/fixtures/finite-native-conduit-receiver.mjs
+      - name: Actual native receiver and retained guard
+        run: timeout 60s node --test --test-timeout=20000 test/mcp-qa-finite-owner-native-conduit-native.test.mjs
+      - name: Selected exact profile and source regressions
+        run: timeout 120s node --test --test-timeout=45000 test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-candidate-residency.test.mjs test/mcp-qa-finite-phase-inventory.test.mjs test/mcp-qa-finite-bootstrap.test.mjs
+      - name: Selected connection initial upload historical and retention regressions
+        run: timeout 180s node --test --test-timeout=45000 test/mcp-qa-finite-connection-preparation-native.test.mjs test/mcp-qa-finite-initial-upload-native.test.mjs test/mcp-qa-finite-historical-source-native.test.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs
+      - name: One actual finite compilation
+        run: |
+          node --input-type=module <<'NODE'
+          import {compileFiniteNativeStaging} from './scripts/build-finite-native-package.mjs';
+          import {createHash} from 'node:crypto';
+          const r=await compileFiniteNativeStaging({cwd:process.cwd(),sourceRevision:process.env.GITHUB_SHA});
+          const sha=x=>createHash('sha256').update(x).digest('hex');
+          console.log(JSON.stringify({sourceRevision:process.env.GITHUB_SHA,sourceTree:r.sourceTree,completePackage:r.completePackage,bootstrapSource:r.bootstrapSource,residency:r.residency,modules:Object.fromEntries(['qaLive','canaryLive'].map(role=>[role,{bytes:r.files[role+'/index.mjs'].length,sha256:sha(r.files[role+'/index.mjs'])}]))}));
+          NODE

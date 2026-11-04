@@ -2,10 +2,10 @@ import {DurableObject} from 'cloudflare:workers';
 import {createFiniteOwnerNativeReceiver} from '../../lib/mcp-qa-finite-owner-native-receiver.mjs';
 // SYN observations are bounded booleans/counts only, never credentials/body.
 export class NativeReceiverFixture extends DurableObject{
- constructor(ctx,env){super(ctx,env);this.observed={receiverEntered:0,receiverAborted:false,beforeGuardAborted:null,held:false,settled:false,privateHeaders:[],callerHeader:false,businessRows:0};}
+ constructor(ctx,env){super(ctx,env);this.observed={receiverEntered:0,receiverAborted:false,beforeGuardAborted:null,held:false,readReturned:false,readCancelled:false,settled:false,privateHeaders:[],callerHeader:false,businessRows:0};}
  async hold(){this.heldMode=true;}
  async release(){this.releaseRead?.();}
- async reset(){this.heldMode=false;this.releaseRead?.();this.observed={receiverEntered:0,receiverAborted:false,beforeGuardAborted:null,held:false,settled:false,privateHeaders:[],callerHeader:false,businessRows:0};}
+ async reset(){this.heldMode=false;this.releaseRead?.();this.observed={receiverEntered:0,receiverAborted:false,beforeGuardAborted:null,held:false,readReturned:false,readCancelled:false,settled:false,privateHeaders:[],callerHeader:false,businessRows:0};}
  async state(){return {...this.observed,businessRows:(await this.ctx.storage.list()).size};}
  async fetch(request){
   const seen=this.observed;seen.receiverEntered++;seen.privateHeaders=[...request.headers.keys()].filter(k=>k.startsWith('x-afw-finite-')).sort();seen.callerHeader=request.headers.has('X-Caller-Arbitrary');
@@ -16,11 +16,12 @@ export class NativeReceiverFixture extends DurableObject{
    // Hold the actual native read's settlement, not a replacement signal.
    const stream=request.body,getReader=stream.getReader;
    stream.getReader=()=>{
-    const reader=Reflect.apply(getReader,stream,[]),read=reader.read;let once=false;
+    const reader=Reflect.apply(getReader,stream,[]),read=reader.read,cancel=reader.cancel;let once=false;
+    reader.cancel=(...args)=>{seen.readCancelled=true;return Reflect.apply(cancel,reader,args);};
     reader.read=async()=>{
      const value=await Reflect.apply(read,reader,[]);
      if(!once){once=true;seen.held=true;await new Promise(resolve=>{this.releaseRead=resolve;});}
-     seen.beforeGuardAborted=request.signal.aborted;return value;
+     seen.readReturned=true;seen.beforeGuardAborted=request.signal.aborted;return value;
     };return reader;
    };
   }

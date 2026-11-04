@@ -86,3 +86,20 @@ test('finite canary source preserves existing SQLite Container relationship and 
  assert.notEqual(restorationConfigurationHash(actual),restorationConfigurationHash(detached));
  assert.equal(p.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_NODE').namespace_id,'d6fc71552de7494a863aca20365a572d');
 });
+
+test('new finite candidate flags are exact before every phase and reject old or expanded profiles',()=>{
+ const expected={qaLive:['nodejs_compat','enable_request_signal'],canaryLive:['nodejs_compat','global_fetch_strictly_public','enable_request_signal']};
+ for(const role of Object.keys(expected)){
+  const profile=role==='canaryLive'?fixture():structuredClone(api.finitePublicProfileTemplate(role));
+  const template=api.finitePublicProfileTemplate(role),config=api.finiteWranglerProfileTemplate(role);
+  assert.equal(template.compatibility_date,'2026-09-07');
+  assert.equal(config.compatibility_date,'2026-09-07');
+  assert.deepEqual(template.compatibility_flags,expected[role]);
+  assert.deepEqual(config.compatibility_flags,expected[role]);
+  assert.deepEqual(api.projectFinitePublicConfiguration({role,metadata:profile}).compatibility_flags,expected[role]);
+  for(const flags of [expected[role].slice(0,-1),[...expected[role].slice(0,-1),'request_signal_passthrough'],[...expected[role],'request_signal_passthrough'],[...expected[role]].reverse()]){
+   const changed=structuredClone(profile);changed.compatibility_flags=flags;
+   assert.throws(()=>api.projectFinitePublicConfiguration({role,metadata:changed}),role+' must reject nonexact candidate flags');
+  }
+ }
+});

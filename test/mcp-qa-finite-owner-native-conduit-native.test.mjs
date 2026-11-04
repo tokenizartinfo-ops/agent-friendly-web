@@ -41,7 +41,12 @@ test('actual native signal capability observes receiver separately during held r
  await f.wait('held');await f.call('/fixture/abort');
  const sender=await pending,held=await f.state();
  await f.call('/fixture/release');const settled=await f.wait('settled');
- assert.equal(held.receiverEntered,1);assert.equal(settled.businessRows,0);
+ assert.equal(held.receiverEntered,1);assert.equal(held.settled,false,'actual receiving read remains occupied after sender settles');
+ assert.equal(held.readReturned,false,'held native read has not physically returned');
+ assert.equal(settled.readReturned,true,'actual native read eventually returned');
+ assert.equal(settled.readCancelled,true,'product finiteNativeBytes caught the denied post-read lease guard and canceled the real reader');
+ assert.equal(settled.settled,true,'receiver settled only after held read release');
+ assert.equal(settled.businessRows,0,'no storage mutation follows denied guard');
  assert.equal(held.receiverAborted,true,'actual receiver Request.signal must abort while read remains held');
  assert.equal(settled.beforeGuardAborted,true,'actual receiver signal must still be aborted immediately before product guard');
  const qualification=held.receiverAborted&&settled.beforeGuardAborted?'receiver_abort_observed':'receiver_abort_NOT_qualified';
