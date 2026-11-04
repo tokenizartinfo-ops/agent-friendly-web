@@ -19,13 +19,13 @@ export class FiniteIssuerFixture extends DurableObject{
   const i=b.case==='C0_queue'?seal('Identity',{...identity,I0:at-899500,C0:at+500,C1:at+180500,consentExpiresAt:new Date(at+500).toISOString()}):b.case==='consent_queue'?seal('Identity',{...identity,consentExpiresAt:new Date(at+500).toISOString()}):identity;
   const parent=new AbortController(),lease=Object.freeze({signal:parent.signal,assertCurrent(){if(parent.signal.aborted||Date.now()>=at+30000)throw Error('SYN original lease expired');}});
   let delay=null,lose=null,holdAck=null,sessionId=0,sqlCount=0,grantCommitted=false;
-  const wrapper={withSession(mode){events.push({session:++sessionId,mode});const sid=sessionId,s=db.withSession(mode);return {prepare(sql){events.push({sid,sql});const stmt=s.prepare(sql);return {bind(...args){const bound=stmt.bind(...args);const call=method=>async()=>{sqlCount++;if(delay&&sql.includes(delay.needle)){const d=delay;delay=null;await sleep(d.ms);}const result=await bound[method]();if(sql.includes('INSERT INTO delegated_access_grants'))grantCommitted=true;if(holdAck&&sql.includes(holdAck.needle)){const d=holdAck;holdAck=null;await sleep(d.ms);}if(lose&&sql.includes(lose)){lose=null;throw Error('SYN lost actual native SQL ACK');}return result;};return {first:call('first'),all:call('all'),run:call('run')};}};}};}};
+  const wrapper={withSession(mode){events.push({session:++sessionId,mode});const sid=sessionId,s=db.withSession(mode);return {prepare(sql){events.push({sid,sql});const actualSql=b.case==='unsupported_clock'&&sql.includes(' AS ms,typeof(')?sql.replaceAll("'subsec'","'SYN-unsupported'"):b.case==='unsupported_iso'&&sql.includes(' AS ms,typeof(')?sql.replaceAll("'2026-11-04T12:00:00.123Z'","'SYN-not-iso'"):sql;const stmt=s.prepare(actualSql);return {bind(...args){const bound=stmt.bind(...args);const call=method=>async()=>{sqlCount++;if(delay&&sql.includes(delay.needle)){const d=delay;delay=null;await sleep(d.ms);}const result=await bound[method]();if(sql.includes('INSERT INTO delegated_access_grants'))grantCommitted=true;if(holdAck&&sql.includes(holdAck.needle)){const d=holdAck;holdAck=null;await sleep(d.ms);}if(lose&&sql.includes(lose)){lose=null;throw Error('SYN lost actual native SQL ACK');}return result;};return {first:call('first'),all:call('all'),run:call('run')};}};}};}};
   let txFault=null,txCommitted=false;
   const nativeStorage=this.ctx.storage;
-  const storage={get:(...args)=>nativeStorage.get(...args),list:(...args)=>nativeStorage.list(...args),sync:async()=>{if(txFault==='sync_loss')throw Error('SYN sync loss');return nativeStorage.sync();},transaction:async callback=>{
-   const result=await nativeStorage.transaction(callback);txCommitted=true;
+  const storage={get:async(...args)=>{const v=await nativeStorage.get(...args);return txFault==='readback_loss'&&txCommitted?'SYN-readback-loss':v;},list:(...args)=>nativeStorage.list(...args),sync:async()=>{if(txFault==='readback_loss')return nativeStorage.sync();if(txFault==='sync_loss')throw Error('SYN sync loss');return nativeStorage.sync();},transaction:async callback=>{
+   const result=await nativeStorage.transaction(async tx=>{const r=await callback(tx);if(txFault==='callback_throw')throw Error('SYN final native transaction callback throw');return r;});txCommitted=true;
    // Hold AFTER the actual transaction final return; no interior read/release deadlock.
-   if(txFault==='post_commit_hold'){await sleep(20);parent.abort();}
+   if(txFault==='post_commit_hold'){parent.abort();await sleep(20);}
    if(txFault==='final_throw')throw Error('SYN native final ACK loss');return result;
   }};
   const ctx={storage,id:this.ctx.id},env={RELEASE_DB:wrapper,AFW_QA_VERSION:{id:U},AFW_INDEPENDENT_CLOSURE:this.env.FIXTURE};
@@ -44,7 +44,7 @@ export class FiniteIssuerFixture extends DurableObject{
   const observe=barrier=>store.observeGrant({identity:i,barrier,expectedGrant:grant,window:clean()},lease);
   let result={};
   try{
-   if(b.case==='missing_schema')result={rejected:await rejected(opened),consents:(await db.prepare('SELECT * FROM delegated_consent_sessions').all()).results};
+   if(['missing_schema','unsupported_clock','unsupported_iso'].includes(b.case))result={rejected:await rejected(opened),consents:(await db.prepare('SELECT * FROM delegated_consent_sessions').all()).results};
    else if(b.case==='tamper_schema'){await exec('DROP TRIGGER finite_preparation_issuer_fences_terminal_fence');await exec('CREATE TRIGGER finite_preparation_issuer_fences_terminal_fence BEFORE UPDATE ON finite_preparation_issuer_fences BEGIN SELECT 1; END');result={rejected:await rejected(opened),rows:(await snapshot())};}
    else if(b.case==='schema'){
     const barrier=await close();result.barrier=barrier;result.delayedOpen=await rejected(opened);
@@ -91,11 +91,17 @@ export class FiniteIssuerFixture extends DurableObject{
       result.barrier=barrier;result.observation=await restart.observeGrant({identity:i,barrier,expectedGrant:grant,window:clean()},lease);
      }else{
       // Commit the real INSERT first but retain its response, then serialize a terminal barrier.
-      if(b.case==='held_grant_ack')holdAck={needle:'INSERT INTO delegated_access_grants',ms:200};
-      const pending=store.insertReadGrant({...opts(),consumption,grant},lease);
+      if(b.case==='held_grant_ack')holdAck={needle:'INSERT INTO delegated_access_grants',ms:2000};
+      let grantSettled=false;const pending=store.insertReadGrant({...opts(),consumption,grant},lease);pending.then(()=>{grantSettled=true;},()=>{grantSettled=true;});
       let earlyBarrier=null;
-      if(b.case==='held_grant_ack'){while(!grantCommitted)await sleep(1);earlyBarrier=await close();}
+      if(b.case==='held_grant_ack'){while(!grantCommitted&&!grantSettled)await sleep(1);if(!grantCommitted)await pending;earlyBarrier=await close();result.barrierBeforeGrantAck=!grantSettled;}
       const issued=await pending;result.grant=issued;
+      if(b.case==='foreign_grants'){
+       const bad={user_id:'foreign-owner',client_id:'foreign-client',project_id:'foreign-project',resource:'https://foreign.invalid/mcp',scopes_json:'[]',created_at:new Date(at+1).toISOString(),expires_at:new Date(at+11000).toISOString()};
+       const original=await db.prepare('SELECT * FROM delegated_access_grants WHERE id=?').bind(i.grantId).first(),barrier=await close();result.denials={};
+       for(const [field,value]of Object.entries(bad)){await exec('UPDATE delegated_access_grants SET '+field+'=? WHERE id=?',value,i.grantId);result.denials[field]=await rejected(()=>observe(barrier));await exec('UPDATE delegated_access_grants SET '+field+'=? WHERE id=?',original[field],i.grantId);}
+       result.rows=await snapshot();return Response.json({result,events,at,identity:i});
+      }
       if(b.case==='history')await exec('UPDATE delegated_access_grants SET exchanged_at=?,revoked_at=? WHERE id=?',new Date(at+1).toISOString(),new Date(at+2).toISOString(),i.grantId);
       await exec("INSERT INTO delegated_access_grants VALUES (?,?,?,?,?,?,?,?,?,?)",'unrelated',i.subject,i.clientId,i.projectId,i.resource,'[]',grant.createdAt,grant.expiresAt,'','');
       const before=(await db.prepare("SELECT * FROM delegated_access_grants WHERE id='unrelated'").first());

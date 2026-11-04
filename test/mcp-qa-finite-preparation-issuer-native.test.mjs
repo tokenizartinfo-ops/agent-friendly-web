@@ -7,7 +7,7 @@ async function scenario(t,name,extra={}){
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],d1Databases:{RELEASE_DB:'issuer-component'},durableObjects:{FIXTURE:{className:'FiniteIssuerFixture',useSQLite:true,uniqueKey:'SYN-issuer-component'}}}));
  t.after(()=>mf.dispose());const response=await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify({case:name,...extra})});assert.equal(response.status,200);return response.json();
 }
-for(const fault of ['missing_schema','tamper_schema'])test('REAL native preflight denies '+fault+' before effects',async t=>{
+for(const fault of ['missing_schema','tamper_schema','unsupported_clock','unsupported_iso'])test('REAL native preflight denies '+fault+' before effects',async t=>{
  const {result:r}=await scenario(t,fault);assert.equal(r.rejected,true);assert.deepEqual(r.consents??r.rows.consents.results,[]);
 });
 test('REAL closed-first monotonic tombstone permits early reduction and blocks delayed OPEN',async t=>{
@@ -38,7 +38,7 @@ test('REAL unknown fence ACK reconciles same original ID on fresh primary before
 });
 for(const mode of ['normal','held_grant_ack','history'])test('REAL original UUID grant-only cleanup '+mode+' preserves unrelated rows/history',async t=>{
  const {result:r}=await scenario(t,mode);assert.equal(r.error,undefined);assert.equal(r.clonedBarrierDenied,true);assert.equal(r.clonedObservationDenied,true);assert.equal(r.unrelatedUnchanged,true);
- assert.equal(r.revoke.status,mode==='history'?'already_revoked':'revoked');assert.ok(r.rows.grants.results.find(g=>g.id!=='unrelated').revoked_at);if(mode==='history')assert.ok(r.revoke.row.exchanged_at);
+ if(mode==='held_grant_ack')assert.equal(r.barrierBeforeGrantAck,true);assert.equal(r.revoke.status,mode==='history'?'already_revoked':'revoked');assert.ok(r.rows.grants.results.find(g=>g.id!=='unrelated').revoked_at);if(mode==='history')assert.ok(r.revoke.row.exchanged_at);
 });
 test('REAL foreign project revision fails closed after barrier',async t=>{
  const {result:r}=await scenario(t,'foreign_owner');assert.match(r.error,/unavailable/);assert.equal(r.rows,undefined);
@@ -46,6 +46,13 @@ test('REAL foreign project revision fails closed after barrier',async t=>{
 test('REAL journal native transaction final return sync exact readback produces append-once facts',async t=>{
  const {result:r}=await scenario(t,'journal');assert.equal(r.error,undefined);assert.equal(r.append.status,'recorded');assert.equal(r.existing.status,'existing');assert.equal(r.data.reservation.recordHash,r.append.recordHash);assert.equal(r.rows.length,1);
 });
-for(const fault of ['final_throw','sync_loss','post_commit_hold'])test('SYN '+fault+' after REAL native journal commit permits no next SQL issue',async t=>{
+for(const fault of ['final_throw','sync_loss','post_commit_hold','readback_loss'])test('SYN '+fault+' after REAL native journal commit permits no next SQL issue',async t=>{
  const {result:r}=await scenario(t,'journal',{fault});assert.equal(r.error,undefined);assert.equal(r.txCommitted,true);assert.equal(r.append.status,'uncertain');assert.equal(r.sqlBefore,r.sqlAfter);assert.equal(r.rows.length,1);
+});
+
+test('SYN native callback final throw rolls back journal and permits no SQL continuation',async t=>{
+ const {result:r}=await scenario(t,'journal',{fault:'callback_throw'});assert.equal(r.error,undefined);assert.equal(r.txCommitted,false);assert.equal(r.append.status,'uncertain');assert.equal(r.sqlBefore,r.sqlAfter);assert.equal(r.rows.length,0);
+});
+test('REAL exact grant immutable field mismatches all fail closed without rewriting history',async t=>{
+ const {result:r}=await scenario(t,'foreign_grants');assert.equal(r.error,undefined);for(const [field,denied]of Object.entries(r.denials))assert.equal(denied,true,field);assert.equal(Object.keys(r.denials).length,7);assert.equal(r.rows.grants.results[0].revoked_at,'');
 });
