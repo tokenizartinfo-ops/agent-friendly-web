@@ -25,7 +25,7 @@ jobs:
         run: npx eslint lib/mcp-qa-finite-profile.mjs test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-owner-native-conduit-native.test.mjs test/fixtures/finite-native-conduit-receiver.mjs
       - name: Actual native receiver and retained guard
         run: timeout 60s node --test --test-timeout=20000 test/mcp-qa-finite-owner-native-conduit-native.test.mjs
-      - name: Selected exact profile and source regressions
+      - name: Selected exact profile and source regressions (after retained-read correction)
         run: timeout 120s node --test --test-timeout=45000 test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-package.test.mjs test/mcp-qa-finite-candidate-residency.test.mjs test/mcp-qa-finite-phase-inventory.test.mjs test/mcp-qa-finite-bootstrap.test.mjs
       - name: Selected connection initial upload historical and retention regressions
         run: timeout 180s node --test --test-timeout=45000 test/mcp-qa-finite-connection-preparation-native.test.mjs test/mcp-qa-finite-initial-upload-native.test.mjs test/mcp-qa-finite-historical-source-native.test.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs
