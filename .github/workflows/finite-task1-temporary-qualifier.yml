@@ -1,13 +1,13 @@
-# Branch-only B2b source qualifier; EXCLUDE from eventual integration.
-name: Finite initial cleanup temporary qualifier
+# Branch-only fixed factual owner reader TDD qualifier. EXCLUDE before main.
+name: Finite initial owner source temporary qualifier
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
-    paths: ['lib/mcp-qa-finite-initial-*.mjs', 'lib/mcp-qa-finite-historical-source.mjs', 'lib/mcp-fixed-terminal-workflows.mjs', 'lib/mcp-qa-finite-stage-work.mjs', 'test/mcp-qa-finite-initial-*.test.mjs', 'test/mcp-qa-finite-historical-source-native.test.mjs', 'test/fixtures/finite-initial-*.mjs', '.github/workflows/finite-task1-temporary-qualifier.yml']
+    paths: ['lib/mcp-qa-finite-initial-owner-source.mjs','test/mcp-qa-finite-initial-owner-source-native.test.mjs','.github/workflows/finite-task1-temporary-qualifier.yml']
 permissions:
   contents: read
 jobs:
-  focused:
+  source:
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
@@ -20,23 +20,4 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: B2b native qualification
-        run: node --test test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-initial-cleanup-records.test.mjs test/mcp-qa-finite-initial-capsule-records.test.mjs test/mcp-qa-finite-initial-capsule-native.test.mjs test/mcp-qa-finite-initial-workflows-native.test.mjs test/mcp-qa-finite-initial-history-schema-native.test.mjs test/mcp-qa-finite-initial-old-guard-native.test.mjs test/mcp-qa-finite-initial-gates-native.test.mjs test/mcp-qa-finite-initial-activation-wire-native.test.mjs test/mcp-qa-finite-initial-custody-probe-native.test.mjs test/mcp-qa-finite-initial-scope.test.mjs test/mcp-qa-finite-pre-entry-host-native.test.mjs
-      - name: Scoped lint
-        if: always()
-        run: npx eslint scripts/qa-finite-pre-entry-custody-wrapper.mjs test/mcp-qa-finite-pre-entry-host-native.test.mjs test/mcp-qa-finite-initial-custody-probe-native.test.mjs lib/mcp-qa-finite-stage-work.mjs lib/mcp-fixed-terminal-workflows.mjs lib/mcp-qa-finite-initial-*.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-initial-cleanup-*.test.mjs test/mcp-qa-finite-initial-capsule-*.test.mjs test/mcp-qa-finite-initial-scope.test.mjs test/fixtures/finite-initial-entry-world.mjs
-  compiler:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 12
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-          fetch-depth: 1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Stable changed graph compiler and residency
-        run: node --test test/mcp-qa-finite-candidate-residency.test.mjs
+      - run: node --test test/mcp-qa-finite-initial-owner-source-native.test.mjs
