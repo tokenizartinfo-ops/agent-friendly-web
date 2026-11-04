@@ -36,6 +36,7 @@ test('strict same-lineage and holders deny without writes',()=>using(async f=>{
 test('fresh primary owner and metadata mismatches deny',()=>using(async f=>{
  for(const fault of ['qa-module','qa-namespace','module','configuration']){f.ownerFault=fault;assert.equal((await result(f.ownerRead())).status,'unavailable',fault);}f.ownerFault=null;
  await f.db.prepare('UPDATE site_projects SET revision=revision+1').run();assert.equal((await result(f.ownerRead())).status,'unavailable');
+ await f.db.prepare("UPDATE site_projects SET revision=1").run();
  await f.db.prepare("UPDATE site_projects SET user_id='SYN another-owner'").run();assert.equal((await result(f.ownerRead())).status,'unavailable');
 }));
 test('actual deferred read stays retained after child timeout and blocks owner and readonly until settlement',()=>using(async f=>{
@@ -74,4 +75,16 @@ test('factual entry narrows the remaining ORIGINAL request budget rather than re
  await f.stub.release();
  for(let i=0;i<150;i++){if((await result(f.stub.probeStageAvailability())).available)break;await new Promise(r=>setTimeout(r,20));}
  assert.equal((await result(f.stub.probeStageAvailability())).available,true);
+}));
+
+test('actual fixed reader borrows only its existing native request and retains actual held read',()=>using(async f=>{
+ const standalone=await result(f.ownerRead()),nested=await result(f.ownerRead(400000,'nested-request'));
+ assert.deepEqual(nested,standalone);
+ const p=result(f.ownerRead(400000,'nested-request-held-read'));
+ for(let i=0;i<200;i++){if((await result(f.stub.stats())).held)break;await new Promise(r=>setTimeout(r,20));}
+ assert.equal((await p).status,'unavailable');assert.equal((await result(f.ownerRead())).status,'unavailable');assert.equal((await result(f.stub.probeStageAvailability())).available,false);
+ await f.stub.release();
+ for(let i=0;i<200;i++){if((await result(f.stub.probeStageAvailability())).available)break;await new Promise(r=>setTimeout(r,20));}
+ assert.equal((await result(f.stub.probeStageAvailability())).available,true);
+ assert.deepEqual(await result(f.ownerRead()),standalone);
 }));
