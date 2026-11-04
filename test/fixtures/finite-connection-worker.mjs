@@ -49,7 +49,7 @@ export class FiniteConnectionFixture extends FiniteOwnerFixture{
 
   if(path==='/fixture/request-publish'){
    const input=await request.json(),original=new Request(input.url,{method:'POST',headers:input.headers,body:input.body}),parent=createFiniteOwnerRequestLease(original),ctx=this.effectCtx??this.ctx;
-   const observer=requestStage.observeFiniteOwnerRequestWork??((_o,fn)=>fn());
+   const observer=requestStage.observeFiniteOwnerRequestWork;
    const gate={held:true,settled:false};this.requestGate=gate;this.requestCtx=ctx;
    try{return await observer({ctx,env:this.env,originalLease:parent.lease},async()=>{
     requestStage.retainFiniteOwnerStagePromise(new Promise(resolve=>{gate.release=()=>{gate.settled=true;resolve();};}));
@@ -61,7 +61,7 @@ export class FiniteConnectionFixture extends FiniteOwnerFixture{
    });}catch{return Response.json({rejected:true});}finally{parent.finish();}
   }
   if(path==='/fixture/request-missing-admission'){
-   const input=await request.json(),parent=createFiniteOwnerRequestLease(request),observer=requestStage.observeFiniteOwnerRequestWork??((_o,fn)=>fn());
+   const input=await request.json(),parent=createFiniteOwnerRequestLease(request),observer=requestStage.observeFiniteOwnerRequestWork;
    try{return await observer({ctx:this.ctx,env:this.env,originalLease:parent.lease},async()=>{try{await createFinitePolicyTransport({ctx:this.ctx,env:this.env}).run({...input,admission:{lease:parent.lease}},parent.lease);return Response.json({accepted:true});}catch{return Response.json({accepted:false});}});}finally{parent.finish();}
   }
   if(path==='/fixture/publish'){

@@ -36,7 +36,7 @@ test('strict same-lineage and holders deny without writes',()=>using(async f=>{
 test('fresh primary owner and metadata mismatches deny',()=>using(async f=>{
  for(const fault of ['qa-module','qa-namespace','module','configuration']){f.ownerFault=fault;assert.equal((await result(f.ownerRead())).status,'unavailable',fault);}f.ownerFault=null;
  await f.db.prepare('UPDATE site_projects SET revision=revision+1').run();assert.equal((await result(f.ownerRead())).status,'unavailable');
- await f.db.prepare("UPDATE site_projects SET revision=1").run();
+ await f.db.prepare("UPDATE site_projects SET revision=1").run();assert.ok((await result(f.ownerRead())).source,'original revision must independently qualify before changing owner');
  await f.db.prepare("UPDATE site_projects SET user_id='SYN another-owner'").run();assert.equal((await result(f.ownerRead())).status,'unavailable');
 }));
 test('actual deferred read stays retained after child timeout and blocks owner and readonly until settlement',()=>using(async f=>{

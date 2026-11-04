@@ -3,7 +3,7 @@ import * as ownerLeases from '../../lib/mcp-qa-finite-owner-preparation.mjs';
 // No fixture is imported by any production module or qualified as runtime evidence.
 export async function readPrivateQaFiniteOwnerSource({ctx,env,parent,preconnectionId}){
  parent.assertCurrent();
- if(ctx.requestLineage){const context=ownerLeases.readFiniteOwnerRequestContext?.(parent);let cloneDenied=false;try{ownerLeases.readFiniteOwnerRequestContext?.({...parent});}catch{cloneDenied=true;}ctx.requestLineage.push({sameRoot:context?.root===ctx.requestRoot,remaining:context?.deadline-Date.now(),cloneDenied,frozen:Object.isFrozen(context)});}
+ if(ctx.requestLineage){const context=ownerLeases.readFiniteOwnerRequestContext(parent);let cloneDenied=false;try{ownerLeases.readFiniteOwnerRequestContext({...parent});}catch{cloneDenied=true;}ctx.requestLineage.push({sameRoot:context?.root===ctx.requestRoot,remaining:context?.deadline-Date.now(),cloneDenied,frozen:Object.isFrozen(context)});}
  if(env.RELEASE_DB===env.DB)throw Error('synthetic wrong release binding');
  const source=await ctx.storage.get('fixture:source');
  const delay=await ctx.storage.get('fixture:delay');

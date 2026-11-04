@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node --test test/mcp-qa-finite-owner-request-retention.test.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs test/mcp-qa-finite-connection-preparation-native.test.mjs test/mcp-qa-finite-initial-owner-source-records.test.mjs test/mcp-qa-finite-initial-owner-source-native.test.mjs test/mcp-qa-finite-initial-scope.test.mjs test/mcp-qa-finite-initial-custody-probe-native.test.mjs test/mcp-qa-finite-pre-entry-host-native.test.mjs test/mcp-qa-finite-policy-setup-facts-native.test.mjs
+      - run: node --test test/mcp-qa-finite-owner-request-retention.test.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs test/mcp-qa-finite-initial-owner-source-native.test.mjs test/build-finite-native-package.test.mjs
       - name: Scoped lint
         if: always()
         run: npx eslint lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-{preparation,http}.mjs lib/mcp-qa-finite-policy-transport.mjs lib/mcp-qa-finite-initial-owner-source.mjs test/mcp-qa-finite-owner-request-retention*.test.mjs test/mcp-qa-finite-initial-owner-source-native.test.mjs test/fixtures/finite-{owner*,connection-worker,initial-entry-world}.mjs

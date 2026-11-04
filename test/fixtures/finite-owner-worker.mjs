@@ -19,7 +19,7 @@ export class FiniteOwnerFixture extends DurableObject{
   if(path==='/fixture/request-probe'){
    const p=createFiniteOwnerRequestLease(request),ctx=this.requestCtx??this.ctx;
    const probe=fn=>{try{return fn(),true;}catch{return false;}};
-   const observer=stageWork.observeFiniteOwnerRequestWork??((_o,fn)=>fn()); // RED baseline only; no production bypass.
+   const observer=stageWork.observeFiniteOwnerRequestWork;
    const admission={lease:p.lease};
    let requestAllowed=false,readAllowed=false,ownerAllowed=false;
    try{requestAllowed=await observer({ctx,env:this.env,originalLease:p.lease},async()=>true);}catch{}
@@ -40,7 +40,7 @@ export class FiniteOwnerFixture extends DurableObject{
    let body=input.body;
    if(input.mode==='body')body=new ReadableStream({pull(controller){return new Promise(resolve=>{gate.held=true;gate.release=()=>{controller.enqueue(new Uint8Array([104]));resolve();};});},cancel(){gate.cancelHeld=true;return new Promise(resolve=>{gate.release=()=>{gate.settled=true;resolve();};});}});
    const original=new Request(origin+'/connections/finite-prepare',{method:input.method??'GET',headers:input.headers,body}),parent=createFiniteOwnerRequestLease(original);ctx.requestRoot=parent.lease;
-   const observer=stageWork.observeFiniteOwnerRequestWork??((_o,fn)=>fn());
+   const observer=stageWork.observeFiniteOwnerRequestWork;
    try{return await observer({ctx,env:this.env,originalLease:parent.lease},async()=>{try{return Response.json({result:await ownerPreparation.prepareFiniteOwnerChoice({ctx,env:this.env,request:original},parent.lease),lineage:ctx.requestLineage});}catch(e){gate.denied=true;return Response.json({rejected:true,status:e.status??503});}finally{parent.finish();}});}
    finally{parent.finish();}
   }
