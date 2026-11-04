@@ -56,6 +56,9 @@ test('Task4 actual native wrapper DO store and two-effect engine installs only a
  const rows=await f.rows(),context=decodeFinitePreparationRecord('SetupContext',rows.find(([k])=>k.endsWith(':context'))[1]);
  assert.equal(context.ownerPreparation.programContext.sourceRevision,'c'.repeat(40));assert.equal(context.sourceRevision,'b'.repeat(40));
  assert(context.T0<context.ownerPreparation.commandBy);assert(outcome.receipt.installedAt>context.ownerPreparation.commandBy);
+ assert.deepEqual(context.baseline.configuration.compatibility_flags,['nodejs_compat','global_fetch_strictly_public','enable_request_signal']);
+ assert.deepEqual(context.rollback.configuration.compatibility_flags,['nodejs_compat','global_fetch_strictly_public']);
+ assert(f.reads.some(url=>url.includes(context.baseline.versionId)));assert(f.reads.some(url=>url.includes(context.rollback.versionId)));
  assert.equal(context.C0,context.T0+240000);assert.equal(context.C1,context.T0+420000);
  const withdrawal=JSON.parse(context.policies.AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY);assert.equal(withdrawal.startAt,context.C0);assert.equal(withdrawal.expiresAt,context.C1);
  const canonical=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a<b?-1:a>b?1:0)):x);

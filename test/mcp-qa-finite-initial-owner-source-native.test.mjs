@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {initialCanonical as canonical,initialHash} from '../lib/mcp-qa-finite-initial-material-records.mjs';
 import {validateFiniteOwnerSource} from '../lib/mcp-qa-finite-preparation-records.mjs';
-import {activationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
+import {finiteActivationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
 const P='afw.finite-initial-preparation.v1:',C='afw.finite-initial-cleanup.v1:',get=(rows,k)=>rows.find(([key])=>key===k)?.[1];
 async function result(p){const r=await p;try{return JSON.parse(JSON.stringify(r));}finally{r[Symbol.dispose]?.();}}
@@ -16,7 +16,7 @@ test('fixed factual envelope after technical expiry preserves original A, actual
  assert.deepEqual(a.source.window,{startedAt:capsule.I0,expiresAt:capsule.C0});assert.equal(a.source.phase,'closed_ui');
  assert.deepEqual(a.source.currentPublication,{stage:null,versionId:capsule.activatedVersionId,deploymentId:capsule.activatedDeploymentId,receiptHash:null});
  assert.notEqual(a.source.initialBaseline.versionId,f.x.pin.id);assert.equal(a.source.initialBaseline.moduleHash,capsule.moduleHash);
- assert.equal(a.source.initialBaseline.configurationHash,activationConfigurationHash(plan.configuration));assert.notEqual(a.source.initialBaseline.configurationHash,capsule.configurationHash);
+ assert.equal(a.source.initialBaseline.configurationHash,finiteActivationConfigurationHash(plan.configuration));assert.notEqual(a.source.initialBaseline.configurationHash,capsule.configurationHash);
  assert.equal(a.source.initialBaseline.bindingsHash,createHash('sha256').update(canonical([...plan.configuration.bindings].sort((a,b)=>a.name<b.name?-1:a.name>b.name?1:0))).digest('hex'));
  assert.notEqual(m.originalContext.original.programHash,m.originalContext.artifact.programHash);assert.notEqual(m.originalContext.original.sourceRevision,m.originalContext.artifact.sourceRevision);
  assert.deepEqual(a.source.programContext,{programHash:m.originalContext.original.programHash,sourceRevision:m.originalContext.original.sourceRevision,originalContextHash:initialHash('afw.finite-original-context.v1',m.originalContext)});
