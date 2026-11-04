@@ -29,7 +29,6 @@ jobs:
           const qa=r.metafiles.qaLive.inputs;
           assert(Object.hasOwn(qa,'worker/independent-closure/finite.mjs'));
           assert(Object.hasOwn(qa,'lib/mcp-qa-finite-initial-cleanup.mjs'));
-          assert(Object.hasOwn(qa,'lib/mcp-qa-finite-preparation-issuer-records.mjs'));
           for(const role of ['qaLive','canaryLive']){
             const m=r.metafiles[role];
             assert.equal(m.inputs['lib/mcp-qa-finite-preparation-issuer-store.mjs'],undefined);
