@@ -20,7 +20,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Boundary GREEN and private context causal RED
-        run: |
-          npx eslint lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-owner-native-conduit.test.mjs test/mcp-qa-finite-owner-context.test.mjs test/fixtures/finite-owner-worker.mjs
-          node --test --test-timeout=30000 test/mcp-qa-finite-owner-native-conduit.test.mjs test/mcp-qa-finite-owner-context.test.mjs
+      - name: Scoped syntax and lint preflight
+        run: npx eslint lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-preparation-qa.mjs lib/mcp-qa-finite-owner-native-wire.mjs lib/mcp-qa-finite-owner-native-bridge.mjs lib/mcp-qa-finite-owner-native-receiver.mjs test/fixtures/finite-native-conduit-sender.mjs test/fixtures/finite-native-conduit-receiver.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-context.test.mjs test/mcp-qa-finite-owner-native-wire.test.mjs test/mcp-qa-finite-owner-native-conduit-native.test.mjs test/mcp-qa-finite-owner-original-context-native.test.mjs
+      - name: Boundary context and wire GREEN
+        run: timeout 70s node --test --test-timeout=30000 test/mcp-qa-finite-owner-native-conduit.test.mjs test/mcp-qa-finite-owner-context.test.mjs test/mcp-qa-finite-owner-native-wire.test.mjs
+      - name: Actual fixed native ends
+        run: timeout 60s node --test --test-timeout=20000 test/mcp-qa-finite-owner-native-conduit-native.test.mjs
+      - name: Original capsule first GET
+        run: timeout 60s node --test --test-timeout=45000 test/mcp-qa-finite-owner-original-context-native.test.mjs
