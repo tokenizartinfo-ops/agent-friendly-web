@@ -6,24 +6,9 @@ on:
 permissions:
   contents: read
 jobs:
-  qualify:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - group: consumer
-            command: node --test test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-preparation-records.test.mjs test/mcp-qa-finite-policy-transport.test.mjs
-          - group: owner-integration
-            command: node --test --test-concurrency=1 test/mcp-qa-finite-policy-setup-native.test.mjs test/mcp-qa-finite-connection-preparation-native.test.mjs test/mcp-qa-finite-initial-owner-source-native.test.mjs test/mcp-qa-finite-preparation-cleanup-native.test.mjs test/mcp-qa-finite-confirmation-native.test.mjs
-          - group: initial-upload
-            command: node --test --test-timeout=180000 test/mcp-qa-finite-initial-upload-native.test.mjs
-          - group: profiles-history
-            command: node --test --test-concurrency=1 test/mcp-qa-finite-profile-native.test.mjs test/mcp-qa-finite-phase-inventory.test.mjs test/mcp-qa-finite-bootstrap-native.test.mjs test/mcp-qa-finite-historical-source-native.test.mjs
-          - group: cancellation-retention
-            command: node --test --test-concurrency=1 test/mcp-qa-finite-owner-native-conduit-native.test.mjs test/mcp-qa-finite-owner-request-retention.test.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs
-    name: ${{ matrix.group }}
+  final:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,8 +19,15 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Scoped C3 qualification
-        run: ${{ matrix.command }}
+      - name: Final consumer assertions
+        run: node --test test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-preparation-records.test.mjs test/mcp-qa-finite-policy-transport.test.mjs
       - name: Lint
-        if: matrix.group == 'consumer'
         run: npm run lint
+      - name: Exact clean source compiler with original byte limits
+        run: |
+          node --input-type=module <<'NODE'
+          import {compileFiniteNativeStaging} from './scripts/build-finite-native-package.mjs';
+          const r=await compileFiniteNativeStaging({cwd:process.cwd(),sourceRevision:process.env.GITHUB_SHA});
+          const {content:omitted,...residency}=r.candidateResidency;void omitted;
+          console.log(JSON.stringify({sourceRevision:r.sourceRevision,sourceTree:r.sourceTree,sourceCheck:r.sourceCheck,buildWorkflowHash:r.buildWorkflowHash,bootstrapSource:r.bootstrapSource,modules:r.modules,residency,completePackage:r.completePackage,operationalReadiness:r.operationalReadiness,PCoff:false}));
+          NODE

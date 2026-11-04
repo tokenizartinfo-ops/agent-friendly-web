@@ -56,12 +56,12 @@ async function versionRoleHarness(t){
  let metadata,writes=0,gets=0;
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:compiled.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_MCP_CLOSURE_READ_TOKEN:'SYNTHETIC_READER_00000000000000',AFW_MCP_CLOSURE_PUBLISH_TOKEN:'SYNTHETIC_PUBLISHER_000000000000'},outboundService:request=>{if(request.method!=='GET'){writes++;throw Error('write forbidden');}gets++;return Response.json({success:true,errors:[],messages:[],result:metadata});}}));
  t.after(()=>mf.dispose());
- const script='export default {}',module={name:'index.mjs',sha256:createHash('sha256').update(script).digest('hex'),bytes:Buffer.byteLength(script)},versionId='22222222-2222-4222-8222-222222222222';
+ const script='export default {}',descriptor={name:'index.mjs',sha256:createHash('sha256').update(script).digest('hex'),bytes:Buffer.byteLength(script)},versionId='22222222-2222-4222-8222-222222222222';
  const candidate=syntheticPreparation('closed_ui',{clientId:'SYNTHETIC_CLIENT',project:{projectId:'SYNTHETIC_PROJECT'},access:{audience:'SYNTHETIC_AUD',teamDomain:'synthetic.cloudflareaccess.com'},window:{expiresAt:1000000}});
  const historical=structuredClone(candidate);historical.compatibility_flags=['nodejs_compat','global_fetch_strictly_public'];
  return {candidate,historical,counts:()=>({writes,gets}),async read(actual,expected,closed=false,wire=false){
   metadata={...actual,id:versionId,urls:[],modules:[{name:'index.mjs',content_type:'application/javascript+module',content_base64:Buffer.from(script).toString('base64')}]};
-  return (await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify({pin:{versionId,module,configuration:expected},closed,wire})})).json();
+  return (await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify({pin:{versionId,module:descriptor,configuration:expected},closed,wire})})).json();
  }};
 }
 test('read_version_current_candidate_and_historical_rollback',async t=>{

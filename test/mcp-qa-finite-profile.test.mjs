@@ -111,6 +111,11 @@ test('legacy bundle remains independently strict for the historical compatibilit
  const policy=inertNamedConfirmationPolicy(artifact);
  assert.deepEqual(policy.observation.configuration.compatibility_flags,['nodejs_compat','global_fetch_strictly_public']);
  assert.equal(validateReleaseOperatorBundle({artifact,policy}),true);
+ const historical=policy.observation.configuration,changed=structuredClone(historical),binding=changed.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_POLICY');
+ binding.text=JSON.stringify({...JSON.parse(binding.text),grantId:'ci-only-second-inert'});
+ assert.notEqual(activationConfigurationHash(historical),activationConfigurationHash(changed));
+ assert.notEqual(restorationConfigurationHash(historical),restorationConfigurationHash(changed));
+ assert.notEqual(activationConfigurationHash(historical),restorationConfigurationHash(historical));
  assert.throws(()=>validateFiniteReleaseOperatorBundle({artifact,policy}));
 });
 
