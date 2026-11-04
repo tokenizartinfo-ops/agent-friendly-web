@@ -9,7 +9,7 @@ concurrency:
   group: finite-owner-phase-context-source
   cancel-in-progress: false
 jobs:
-  red-data:
+  red-native:
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
@@ -21,3 +21,4 @@ jobs:
           node-version: '22'
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: node --test test/mcp-qa-finite-owner-phase-context.test.mjs
+      - run: node --test test/mcp-qa-finite-owner-phase-context-native.test.mjs
