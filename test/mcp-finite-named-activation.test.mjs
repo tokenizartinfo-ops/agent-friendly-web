@@ -31,7 +31,7 @@ test('finite_bundle_requires_confirm_named',()=>{
  const confirm={...f.bundle,policy:{...f.bundle.policy,operation:'confirm',plan:{...f.bundle.policy.plan,scopeHash:'f'.repeat(64)}}};
  assert.throws(()=>policy.validateFiniteReleaseOperatorBundle(confirm));
  const old=structuredClone(f.bundle);old.policy.observation.configuration.compatibility_flags=['nodejs_compat','global_fetch_strictly_public'];old.policy.plan.configurationHash=activationConfigurationHash(old.policy.observation.configuration);
- assert.equal(policy.validateReleaseOperatorBundle(old),true);assert.throws(()=>policy.validateFiniteReleaseOperatorBundle(old));assert.throws(()=>policy.validateReleaseOperatorBundle(f.bundle));
+ assert.equal(policy.validateReleaseOperatorBundle(old),true);assert.throws(()=>policy.validateFiniteReleaseOperatorBundle(old),{message:'Release operator plan unavailable'});assert.throws(()=>policy.validateReleaseOperatorBundle(f.bundle));
 });
 test('finite_private_binding_and_current_grant_correlated',()=>{
  const f=fixture(),original=f.bundle.policy.plan.configurationHash;
