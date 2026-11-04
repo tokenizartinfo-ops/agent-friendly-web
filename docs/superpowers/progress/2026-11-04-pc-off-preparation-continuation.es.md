@@ -1,3 +1,17 @@
+# Active checkpoint — shared finite Known lifecycle (Checkpoint2)
+
+4 November 2026. Checkpoint1 is COMPLETE and independently accepted. BASE48462cdc; codefb7b89885033749c10264095ccadeb252d0e78c8; report/cleanup a8dd66018fd731154d3289554c69f3766a147a52. Fresh review_finite_known_c1: SpecPass / QualityApproved, no Critical/Important/Minor. Root read final Actions41928462320/job126918982084:22/22 PASS, zero failures/skips/cancellations, lint0errors16 repo-wide warnings. Golden/independent digest and unchanged positive legacy observer/named/native tests verified. RED had a disclosed fixture setup failure and proves missing exports only. Own qualifier removed; parent qualifier untouched. Review package b30febed8bb721765f053aca96b8fd362299b215.
+
+Primary acceptance and Checkpoint2 brief committed at `c9809d79d7e4e918e595da829a2109fdc71f453a`. C1 review record: docs/superpowers/reviews/2026-11-04-finite-known-profile-c1.es.md. Do not redispatch C1.
+
+Checkpoint2 ACTIVE. Sole product writer: `implement_finite_known_c2` (Astra high). BASEc9809d79d7e4e918e595da829a2109fdc71f453a on feat/finite-native-cleanup-20261101. Exact task brief: docs/superpowers/briefs/2026-11-04-finite-known-profile-c2.md. Report target: docs/superpowers/reports/2026-11-04-finite-known-profile-c2.md. Only shared private runtime/reservation implementations, fixed runFiniteKnownCancellationReleaseWorkflow/reserveFiniteReleaseSuccessor, and actual separate finite native tests belong here. No finite consumer/profile/mount or unrelated HTTP-engine edits. All18 hooks, original70s/5s/20s ceilings, current primary grant/history/identity, private one-use lease, non-reentrance, effect order and retained actual settlement remain unchanged. Legacy positive native builder cases stay positive. One untouched actual finite-core positive is separate from observation-only hook instrumentation. C2 material source remains unavailable; no complete mounted lifecycle claim.
+
+Original flag writer remains idle at3fb1751c; its parent task is still unaccepted. Checkpoint3 role integration/final qualification is NOT assigned yet. The initial-upload timeout remains unresolved for that later gate. Root will verify C2 logs/report/full diff and obtain fresh independent review before chaining C3. No blind repeat of native opt-in or old accepted units; final full compiler belongs to C3 unless a concrete concern appears.
+
+No remote runtime/provider/Entry/DDL/credentials/permissions/OAuth/OTP/cron/Max/main/merge effect. Source ceiling expired; operationalReadiness=false;completePackage=false;PCoff=false. No user intervention is required for this source stage. The prepared factual context and prearm/setup dependency reports remain later work, not active code tasks.
+
+---
+
 # Active implementation checkpoint — fixed finite compatibility primitives
 
 4 November 2026. Root reviewed architecture commit `0bf8a38ad64433f2a390d99819535be57edfe24d` on `docs/finite-known-profile-design-20261104`. It defines three reviewable source checkpoints: fixed hash/policy/observer primitives; shared private Known lifecycle adapters; explicit finite candidate/historical role consumers. No generic profile callback, automatic old-or-new validation, new public Workflow/Operator core, or legacy coverage removal.
