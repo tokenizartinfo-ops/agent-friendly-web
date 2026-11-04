@@ -20,7 +20,11 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node --test test/mcp-qa-finite-initial-owner-source-records.test.mjs test/mcp-qa-finite-initial-owner-source-native.test.mjs
+      - run: node --test test/mcp-qa-finite-initial-owner-source-records.test.mjs test/mcp-qa-finite-initial-owner-source-native.test.mjs test/mcp-qa-finite-initial-capsule-records.test.mjs test/mcp-qa-finite-initial-capsule-native.test.mjs test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-scope.test.mjs test/mcp-qa-finite-initial-custody-probe-native.test.mjs test/mcp-qa-finite-pre-entry-host-native.test.mjs
       - name: Scoped lint
         if: always()
         run: npx eslint lib/mcp-qa-finite-initial-owner-source.mjs test/mcp-qa-finite-initial-owner-source-*.test.mjs test/fixtures/finite-initial-entry-world.mjs
+      - name: Fixed source artifact hashes
+        run: |
+          wc -c lib/mcp-qa-finite-initial-owner-source.mjs test/mcp-qa-finite-initial-owner-source-*.test.mjs test/fixtures/finite-initial-entry-world.mjs
+          sha256sum lib/mcp-qa-finite-initial-owner-source.mjs test/mcp-qa-finite-initial-owner-source-*.test.mjs test/fixtures/finite-initial-entry-world.mjs
