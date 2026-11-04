@@ -94,6 +94,15 @@ export default{fetch(r,e){return Response.json({original:e.NODE.idFromName('afw-
   const operator={name:'operator',modules:true,script:compiled.script,compatibilityDate:'2026-09-07',compatibilityFlags:finite?['nodejs_compat','enable_request_signal']:['nodejs_compat'],bindings:{AFW_RELEASE_OPERATOR_ENABLED:'true',AFW_RELEASE_WORKFLOW_ENABLED:'true',AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED:'true',AFW_RELEASE_READ_TOKEN:'synthetic_read_credential'},durableObjects:{AFW_RELEASE_EVENTS_NODE:{className:'Own',scriptName:'identity'}},d1Databases:{RELEASE_DB:'exact-named-rehearsal'},workflows:{FLOW:{name:'afw-exact-confirmation-qualification',className:'AfwReleaseWorkflow'}},outboundService};
   if(reserve!==null)operator.bindings.AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED=reserve;
   if(measure||nativeFault!==null)operator.script+='\n'+knownCancellationNativeHarness({fault:nativeFault,policyExpiresAt:window.expiresAt,grantId:JSON.parse(events.text).grantId});
+  // Test-only credential observation, outside the untouched Known core.
+  if(finite&&(measure||nativeFault!==null))operator.script+=`
+const __finiteMeasuredRun=AfwReleaseWorkflow.prototype.run;
+AfwReleaseWorkflow.prototype.run=async function(event,step){
+ let credentialReads=0;const env=new Proxy(this.env,{get(target,key){if(key==='AFW_RELEASE_READ_TOKEN')credentialReads++;return Reflect.get(target,key,target);}});
+ const result=await __finiteMeasuredRun.call({env},event,step);
+ return {...result,qualification:{...result.qualification,credentialReads}};
+};
+`;
   if(fault!==null)operator.script+='\n'+reservationFaultHarness(fault);
   const retired={purpose:'afw.node-retirement-observation.v1',containerId:ids.original,programHash:manifest.original.programHash,sourceRevision:manifest.original.sourceRevision,processGeneration:'8'.repeat(64),image:'cloudflare/debian-trixie',createdAt:window.startAt-10000,expiresAt:window.startAt-5000,closedAt:window.startAt-3000,observedAt:window.startAt-2000,physicalStopVerified:false,mayStartSuccessor:false};
   identity.bindings={RETIREMENT:retirement,...(retirement==='absent'?{}:{RETIRED:JSON.stringify(retired)})};

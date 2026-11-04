@@ -1,4 +1,5 @@
 name: Finite Known C2 source qualification
+# Final qualification adds explicit credential observation and untouched string payload.
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]

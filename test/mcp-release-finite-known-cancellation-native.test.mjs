@@ -24,7 +24,7 @@ test('unmounted fixed finite wrapper and actual Known core authorize complete hi
  assert.equal(r.output.reservation.state,'prepared');
  const q=r.output.qualification;
  assert.equal(q.projectionReads,6);assert.ok(q.eligibilityChecks>=19);assert.equal(q.rpcReads,2);
- assert.ok(q.elapsedMs<70000);assert.ok(q.remainingOriginalMs>0);
+ assert.ok(q.credentialReads>0);assert.ok(q.elapsedMs<70000);assert.ok(q.remainingOriginalMs>0);
  assert.deepEqual(q.stageInvocations,[],'primary qualification uses unmodified adapter source');
  console.log('untouched-finite-native-measurement',JSON.stringify(q));
 });
@@ -40,7 +40,7 @@ test('observation-only instrumented native witness executes all 18 actual hooks 
 for(const nativeFault of ['missing-current','expired-current','identity-mismatch','extra-cancellation','queue-expired','projection-deadline'])
  test('finite native route blocks '+nativeFault+' before credentials, provider or journal',async()=>{
   const r=await run({nativeFault});safe(r);assert.equal(r.output.status,'blocked',JSON.stringify(r.output));
-  assert.deepEqual(r.counts,empty);assert.equal(r.reservationCount,0);assert.equal(r.counters.apiReads,0);assert.equal(r.counters.providerReads,0);
+  assert.deepEqual(r.counts,empty);assert.equal(r.reservationCount,0);assert.equal(r.counters.apiReads,0);assert.equal(r.counters.providerReads,0);assert.equal(r.output.qualification.credentialReads,0);
   assert.equal(r.historyPreserved,true);
  });
 for(const nativeFault of ['revoke-prewrite','revoke-postwrite'])test('current grant '+nativeFault+' preserves activation journals and immutable history',async()=>{
@@ -68,4 +68,13 @@ test('same native instance restart cannot consume a second activation or reserva
  const r=await run({replay:true});safe(r);
  assert.equal(r.output.status,'confirmed');assert.equal(r.replayOutput.status,'uncertain');
  assert.deepEqual(r.counts,journals);assert.equal(r.reservationCount,1);assert.equal(r.counters.retirementReads,2);assert.equal(r.historyPreserved,true);
+});
+
+test('finite native positive with string payload leaves Workflow and Known source completely untouched',async()=>{
+ const r=await run({measure:false,payloadMode:'string'});
+ assert.equal(r.httpStatus,404);assert.equal(r.output.status,'confirmed',JSON.stringify(r.output));
+ assert.equal(r.output.mayRetry,false);assert.equal(r.output.operationalReadiness,false);
+ assert.equal(r.output.reservation.state,'prepared');assert.equal(r.output.reservation.mayBoot,false);
+ assert.deepEqual(r.counts,journals);assert.equal(r.reservationCount,1);assert.equal(r.historyPreserved,true);
+ assert.equal(r.immutableHistoryPreserved,true);assert.equal(Object.hasOwn(r.output,'qualification'),false);
 });
