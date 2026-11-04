@@ -9,9 +9,9 @@ concurrency:
   group: finite-owner-phase-context-source
   cancel-in-progress: false
 jobs:
-  green-native-matrix:
+  green-issuer-and-retention:
     runs-on: ubuntu-24.04
-    timeout-minutes: 7
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
