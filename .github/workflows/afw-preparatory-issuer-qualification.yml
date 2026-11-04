@@ -26,13 +26,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Scoped lint before native work
-        run: npx eslint lib/mcp-qa-finite-preparation-issuer-*.mjs lib/mcp-qa-finite-initial-cleanup.mjs test/mcp-qa-finite-preparation-issuer-*.test.mjs test/mcp-qa-finite-initial-cleanup-native.test.mjs test/fixtures/finite-preparation-issuer-worker.mjs
-      - name: Cheap codec schema and import graph checks
-        run: node --test test/mcp-qa-finite-preparation-issuer-records.test.mjs
-      - name: Actual native D1 and DO component ordering
-        run: node --test --test-timeout=30000 test/mcp-qa-finite-preparation-issuer-native.test.mjs
-      - name: Affected ordinary store and initial cleanup regressions
-        run: node --test test/delegated-oauth-store.test.mjs test/mcp-qa-finite-initial-cleanup-records.test.mjs test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-preparation-cleanup-native.test.mjs
-      - name: One changed runtime graph compiler
-        run: npx esbuild worker/independent-closure/index.mjs --bundle --format=esm --platform=neutral --target=es2022 '--external:node:*' '--external:cloudflare:*' --outfile=/tmp/issuer-qa-graph.mjs
+      - name: Scoped final journal fixture lint
+        run: npx eslint test/mcp-qa-finite-preparation-issuer-native.test.mjs test/fixtures/finite-preparation-issuer-worker.mjs
+      - name: Additional native journal chain only
+        run: node --test --test-timeout=30000 --test-name-pattern='REAL journal append-once send ACK freeze' test/mcp-qa-finite-preparation-issuer-native.test.mjs

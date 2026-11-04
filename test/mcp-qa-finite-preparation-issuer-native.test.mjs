@@ -60,3 +60,10 @@ test('REAL exact grant immutable field mismatches all fail closed without rewrit
 test('REAL expired original grant and consent are reduced after C0 within original cleanup C1',async t=>{
  const {result:r,identity:i}=await scenario(t,'expired_cleanup');assert.equal(r.error,undefined);assert.ok(r.barrier.row.fenced_at>=i.C0);assert.ok(r.barrier.row.fenced_at>=Date.parse(i.consentExpiresAt));assert.equal(r.revoke.status,'revoked');assert.equal(r.revoke.row.expires_at,i.consentExpiresAt);
 });
+
+test('REAL journal append-once send ACK freeze rejects replacement grant ID and unknown keys',async t=>{
+ const {result:r}=await scenario(t,'journal_chain');assert.equal(r.error,undefined);
+ for(const name of ['send','ack','freeze','cleanupSend'])assert.equal(r[name].status,'recorded',name);
+ for(const name of ['frozenGrant','replacement'])assert.equal(r[name].status,'uncertain',name);
+ assert.equal(r.chain.operations.open_fence.send.recordHash,r.chain.operations.open_fence.ack.sendHash);assert.equal(r.chain.operations.grant.send,null);assert.equal(r.unknownDenied,true);
+});

@@ -1,3 +1,4 @@
+import {initialHash as hash} from '../../lib/mcp-qa-finite-initial-material-records.mjs';
 import {DurableObject} from 'cloudflare:workers';
 import {createFinitePreparationIssuerStore,FINITE_PREPARATION_ISSUER_SCHEMA as schema} from '../../lib/mcp-qa-finite-preparation-issuer-store.mjs';
 import {createFinitePreparationIssuerJournal} from '../../lib/mcp-qa-finite-preparation-issuer-journal.mjs';
@@ -63,6 +64,17 @@ export class FiniteIssuerFixture extends DurableObject{
     if(result.append.status==='recorded')result.sql=await opened();
     result.sqlAfter=sqlCount;
     if(!parent.signal.aborted){result.existing=await journal.appendReservation(reservation,lease);result.data=await journal.read({preconnectionId:i.preconnectionId},lease);}
+    if(b.case==='journal_chain'){
+     const send=seal('Send',{purpose:'afw.finite-preparation-issuer-send.v1',identityHash:i.identityHash,reservationHash:reservation.recordHash,operation:'open_fence',requestId:null,requestHash:H,issuedAt:at+1,deadline:at+4000});
+     result.send=await journal.appendSend({preconnectionId:i.preconnectionId,record:send},lease);
+     result.ack=await journal.appendAck({preconnectionId:i.preconnectionId,operation:'open_fence',record:seal('Ack',{purpose:'afw.finite-preparation-issuer-ack.v1',sendHash:send.recordHash,rowHash:hash('afw.finite-preparation-issuer-row.v1',result.sql.row),outcome:'applied',observedAt:at+2})},lease);
+     result.freeze=await journal.freeze({preconnectionId:i.preconnectionId,record:seal('Freeze',{purpose:'afw.finite-preparation-issuer-freeze.v1',identityHash:i.identityHash,reservationHash:reservation.recordHash,frozenAt:at+3})},lease);
+     result.frozenGrant=await journal.appendSend({preconnectionId:i.preconnectionId,record:seal('Send',{...send,operation:'grant',issuedAt:at+4})},lease);
+     result.cleanupSend=await journal.appendSend({preconnectionId:i.preconnectionId,record:seal('Send',{...send,operation:'close_fence',requestId:F,issuedAt:at+4})},lease);
+     result.replacement=await journal.appendReservation(seal('Reservation',{...reservation,identity:seal('Identity',{...i,grantId:F})}),lease);
+     result.chain=await journal.read({preconnectionId:i.preconnectionId},lease);
+     await nativeStorage.put(P+i.preconnectionId+':unknown','{}');result.unknownDenied=await rejected(()=>journal.read({preconnectionId:i.preconnectionId},lease));
+    }
     result.rows=[...await nativeStorage.list({prefix:P})];
    }else{
     await opened();await authorized();
