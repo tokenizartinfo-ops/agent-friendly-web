@@ -45,6 +45,7 @@ function samples(){
  const p=structuredClone(pre);p.selectedAt=T0-10;p.expiresAt=T0+900000;p.commandBy=T0+390000;p.owner.accessVerifiedAt=T0-100;p.owner.accessExpiresAt=T0+900000;p.connection.permissionExpiresAt=T0+900000;p.approval.approvedAt=T0-100;p.approval.expiresAt=T0+900000;p.preparationHash=hash('OwnerPreparation',p);
  const config=structuredClone(finitePublicProfileTemplate('canaryLive'));
  for(const b of config.bindings)if(b.privateSlot){delete b.privateSlot;b.text='synthetic';}
+ const historical=structuredClone(config);historical.compatibility_flags=['nodejs_compat','global_fetch_strictly_public'];
  const policySend={purpose:'afw.finite-policy-send.v1',intentId:'intent',sourceRevision:M,setupInstanceId:'setup',contextHash:H,effect:'upload',requestHash:H,issuedAt:10,deadline:100};
  const connectionSend={purpose:'afw.finite-connection-send.v1',preconnectionId:H,sourceRevision:M,stage:'connection',contextHash:H,effect:'upload',baselineVersionId:U,baselineDeploymentId:U,requestHash:H,issuedAt:10,deadline:100};
  return {
@@ -63,7 +64,7 @@ function samples(){
  ConnectionReceipt:seal('ConnectionReceipt',{purpose:'afw.finite-connection-installed.v1',preconnectionId:H,sourceRevision:M,stage:'connection',baselineVersionId:U,baselineDeploymentId:U,versionId:U,deploymentId:U,moduleHash:H,configurationHash:H,completedAt:40},'receiptHash'),
  PolicyReceipt:seal('PolicyReceipt',{purpose:'afw.finite-policy-installed.v1',intentId:'intent',sourceRevision:M,setupInstanceId:'setup',qaVersionId:U,seedHash:H,contextHash:H,baselineVersionId:U,baselineDeploymentId:U,versionId:U,deploymentId:U,moduleHash:H,publicStaticHash:H,activationHash:H,restorationHash:H,bindingsHash:H,installedAt:40},'receiptHash'),
  Failure:{purpose:'afw.finite-policy-failure.v1',identityHash:H,reasonCode:'deadline',observedAt:40},
- SetupContext:{purpose:'afw.finite-policy-context.v1',intentId:'intent',sourceRevision:M,seedHash:H,preparationHash:p.preparationHash,selectionHash:H,bindingHash:H,T0,C0:T0+240000,C1:T0+420000,ownerPreparation:p,baselineProjectRevision:1,goal:'discovery',saveIdempotencyKey:U,legacy,policies:{AFW_DOSSIER_EVENTS_POLICY:'synthetic',AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY:'synthetic',AFW_DOSSIER_RETIREMENT_POLICY:'synthetic',AFW_DOSSIER_SUCCESSOR_POLICY:'synthetic',AFW_OAUTH_PILOT_CLIENT_ID:'client',AFW_OAUTH_PILOT_PROJECT_ID:'project'},baseline:{versionId:U,deploymentId:U,module:{name:'index.mjs',sha256:H,bytes:1024},configuration:config},rollback:{versionId:U,deploymentId:U,module:{name:'index.mjs',sha256:H,bytes:1024},configuration:config},expectedFull:{activationHash:H,restorationHash:H,bindingsHash:H}}
+ SetupContext:{purpose:'afw.finite-policy-context.v1',intentId:'intent',sourceRevision:M,seedHash:H,preparationHash:p.preparationHash,selectionHash:H,bindingHash:H,T0,C0:T0+240000,C1:T0+420000,ownerPreparation:p,baselineProjectRevision:1,goal:'discovery',saveIdempotencyKey:U,legacy,policies:{AFW_DOSSIER_EVENTS_POLICY:'synthetic',AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY:'synthetic',AFW_DOSSIER_RETIREMENT_POLICY:'synthetic',AFW_DOSSIER_SUCCESSOR_POLICY:'synthetic',AFW_OAUTH_PILOT_CLIENT_ID:'client',AFW_OAUTH_PILOT_PROJECT_ID:'project'},baseline:{versionId:U,deploymentId:U,module:{name:'index.mjs',sha256:H,bytes:1024},configuration:config},rollback:{versionId:U,deploymentId:U,module:{name:'index.mjs',sha256:H,bytes:1024},configuration:historical},expectedFull:{activationHash:H,restorationHash:H,bindingsHash:H}}
  };
 }
 test('all_fixed_record_kinds_roundtrip_and_exact_domains',()=>{
@@ -115,4 +116,16 @@ test('Task3 final audit commits every actual stage and original factual relation
  for(const key of ['preparationHash','selectionHash','jwt'])assert.throws(()=>records.hashFiniteOwnerPreparationAudit({...v,[key]:H}));
  const getter={...v};Object.defineProperty(getter,'sourceHash',{enumerable:true,get(){throw Error('must not invoke');}});
  assert.throws(()=>records.hashFiniteOwnerPreparationAudit(getter));
+});
+
+test('mixed_role_setup_context_roundtrip',()=>{
+ const context=samples().SetupContext,raw=encode('SetupContext',context);
+ assert.deepEqual(decode('SetupContext',raw),context);
+ for(const property of ['baseline','rollback']){
+  const wrong=structuredClone(context);
+  wrong[property].configuration=structuredClone(context[property==='baseline'?'rollback':'baseline'].configuration);
+  assert.throws(()=>encode('SetupContext',wrong),property+' must retain its trusted role');
+ }
+ const swapped=structuredClone(context);[swapped.baseline.configuration,swapped.rollback.configuration]=[swapped.rollback.configuration,swapped.baseline.configuration];
+ assert.throws(()=>encode('SetupContext',swapped));
 });

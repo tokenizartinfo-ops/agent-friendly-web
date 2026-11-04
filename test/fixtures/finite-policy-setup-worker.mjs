@@ -5,7 +5,7 @@ import {narrowFinitePolicySetupClock} from '../../lib/mcp-qa-finite-policy-setup
 import {createFiniteOwnerPreparationStore} from '../../lib/mcp-qa-finite-preparation-store.mjs';
 import {hashFinitePreparationRecord as hash,hashFiniteOwnerPreparationProject} from '../../lib/mcp-qa-finite-preparation-records.mjs';
 import {finitePublicProfileTemplate,finitePublicStaticExpectation} from '../../lib/mcp-qa-finite-profile.mjs';
-import {activationConfigurationHash} from '../../lib/mcp-activation-observer.mjs';
+import {finiteActivationConfigurationHash} from '../../lib/mcp-activation-observer.mjs';
 import {finiteFixture} from './qa-finite-trial.mjs';
 // SYNTHETIC source/GitHub/CF/custody/owner qualification. Actual native class,
 // original clock logic, store, context/journal, transport and byte checks.
@@ -18,7 +18,7 @@ const refs={intentId:H,sourceRevision:M},hydrations=new WeakMap();
 function native(T0){return {setupInstanceId:'afw-finite-policy-'+sha('afw.finite-private-policy-setup.v1\n'+canonical(refs)),sourceRevision:M,qaVersionId:U,eventTimestamp:T0+200,queuedAt:T0+100,startedAt:T0+300,T0};}
 function make(env,T0,mode){
  const config=structuredClone(finitePublicProfileTemplate('canaryLive'));for(const b of config.bindings)if(b.privateSlot){delete b.privateSlot;b.text='SYNTHETIC_PREARM';}
- const closed=structuredClone(config);for(const b of closed.bindings)if(b.type==='plain_text'&&b.name.endsWith('_ENABLED'))b.text='false';
+ const closed=structuredClone(config);closed.compatibility_flags=['nodejs_compat','global_fetch_strictly_public'];for(const b of closed.bindings)if(b.type==='plain_text'&&b.name.endsWith('_ENABLED'))b.text='false';
  const originalId=env.AFW_RELEASE_EVENTS_NODE.idFromName('afw-own-event-one-occurrence-v1').toString();
  const artifact={script:mode==='oversize'?script+' '.repeat(2097153):script,sourceRevision:M,sourceTree:'d'.repeat(40),programHash:'e'.repeat(64),workerHash:sha(script),sourceCheck:'git-inputs-before-after-v1'};
  if(mode==='oversize')artifact.workerHash=sha(artifact.script);
@@ -49,7 +49,7 @@ export async function syntheticFacts({ctx,env,intentId,sourceRevision},lease){
  const {script:bytes}=x.originalContext.artifact,source={native:n,ownerSource:{window:{startedAt:x.T0-1000,expiresAt:x.preparation.expiresAt}},originalContext:x.originalContext,baseline:x.baseline,rollback:x.rollback,bytes:{baseline:new TextEncoder().encode(bytes),rollback:new TextEncoder().encode(bytes),candidate:new TextEncoder().encode(bytes)},assertCurrent};
  const material={seedHash:H,seed:{sourceRevision:M,intentId:H,manifest:{sourceRevision:M,sourceTree:'d'.repeat(40),modules:{canaryLive:{module:{...x.module,exports:['AfwNodeControl','AfwOwnEventNode','default']},publicStatic:finitePublicStaticExpectation('canaryLive')}}},qaPublication:{qaLive:{versionId:U}}},primaryEvidence:{T0:x.T0,N1:x.T0+300000,R1:x.T0+480000,seedStepCompletedAt:x.T0+50}};
  const notice={sequence:1,revision:1,issuedAt:x.T0-200,expiresAt:x.preparation.connection.permissionExpiresAt};
- const receipt={versionId:V,deploymentId:D,moduleHash:x.module.sha256,configurationHash:activationConfigurationHash(x.baseline.configuration)};
+ const receipt={versionId:V,deploymentId:D,moduleHash:x.module.sha256,configurationHash:finiteActivationConfigurationHash(x.baseline.configuration)};
  await assertCurrent(lease);
  return {value:{},selected,witness:{selectionHash:x.selection.selectionHash,publishedAt:x.T0-50},receipt,ownerSource:source.ownerSource,source,material,notice};
 }

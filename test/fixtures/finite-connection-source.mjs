@@ -2,7 +2,7 @@
 import {hashFinitePolicyEffectIdentity} from '../../lib/mcp-qa-finite-preparation-records.mjs';
 import {createHash} from 'node:crypto';
 import {finitePublicProfileTemplate,finitePublicStaticExpectation} from '../../lib/mcp-qa-finite-profile.mjs';
-import {activationConfigurationHash} from '../../lib/mcp-activation-observer.mjs';
+import {finiteActivationConfigurationHash} from '../../lib/mcp-activation-observer.mjs';
 import {restorationConfigurationHash} from '../../lib/mcp-restoration-configuration.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const script='export class AfwOwnEventNode {} export class AfwNodeControl {} export default {fetch(){return new Response(null,{status:404})}}';
@@ -21,7 +21,7 @@ export function syntheticPreparation(phase,source){
 }
 export async function initializeSyntheticConnectionMaterial(ctx){
  const source=await ctx.storage.get('fixture:source'),configuration=syntheticPreparation('closed_ui',source);
- source.initialBaseline={...source.initialBaseline,moduleHash:descriptor.sha256,configurationHash:activationConfigurationHash(configuration),bindingsHash:sha(JSON.stringify(configuration.bindings))};
+ source.initialBaseline={...source.initialBaseline,moduleHash:descriptor.sha256,configurationHash:finiteActivationConfigurationHash(configuration),bindingsHash:sha(JSON.stringify(configuration.bindings))};
  await ctx.storage.put('fixture:source',source);await ctx.storage.put('fixture:configuration',configuration);
  return {source,configuration,script,module:descriptor,restorationHash:restorationConfigurationHash(configuration)};
 }

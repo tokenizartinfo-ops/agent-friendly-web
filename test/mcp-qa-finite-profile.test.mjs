@@ -1,36 +1,35 @@
 import {createHash} from 'node:crypto';
 import {inertNamedConfirmationPolicy} from './fixtures/inert-named-confirmation-policy.mjs';
-import {validateReleaseOperatorBundle} from '../lib/mcp-release-operator-policy.mjs';
+import {validateReleaseOperatorBundle,validateFiniteReleaseOperatorBundle} from '../lib/mcp-release-operator-policy.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {activationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
+import {activationConfigurationHash,finiteActivationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
 import {restorationConfigurationHash} from '../lib/mcp-restoration-configuration.mjs';
 let api;
 try{api=await import('../lib/mcp-qa-finite-profile.mjs');}catch{/* Missing implementation is an explicit RED assertion. */}
-function historicalActivation(configuration){const value=structuredClone(configuration);value.compatibility_flags=['nodejs_compat','global_fetch_strictly_public'];return value;}
 function fixture(){
  assert.equal(typeof api?.finitePublicProfileTemplate,'function','source-owned profile template required');
  const v=structuredClone(api.finitePublicProfileTemplate('canaryLive'));
  for(const b of v.bindings)if(b.privateSlot){delete b.privateSlot;b.text='SYNTHETIC-PRIVATE-'+b.name;}
  return v;
 }
-test('private_projection_preserves_full_fingerprint',()=>{
+test('candidate_private_projection_full_hash',()=>{
  const script='export default {fetch(){return new Response(null,{status:404})}}';
  const artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:createHash('sha256').update(script).digest('hex'),sourceCheck:'git-inputs-before-after-v1'};
  const policy=inertNamedConfirmationPolicy(artifact),a=fixture();
  for(const binding of a.bindings){const original=policy.observation.configuration.bindings.find(x=>x.name===binding.name);if(original&&binding.type==='plain_text'&&original.type==='plain_text')binding.text=original.text;}
  const b=structuredClone(a),event=b.bindings.find(x=>x.name==='AFW_DOSSIER_EVENTS_POLICY');
  const changed=JSON.parse(event.text);changed.grantId='ci-only-second-inert';event.text=JSON.stringify(changed);
- for(const configuration of [a,b]){const p=structuredClone(policy),historical=historicalActivation(configuration);p.observation.configuration=historical;p.plan.configurationHash=activationConfigurationHash(historical);assert.equal(validateReleaseOperatorBundle({artifact,policy:p}),true);}
+ for(const configuration of [a,b]){const p=structuredClone(policy);p.observation.configuration=configuration;p.plan.configurationHash=finiteActivationConfigurationHash(configuration);assert.equal(validateFiniteReleaseOperatorBundle({artifact,policy:p}),true);}
  const bad=structuredClone(b),raw=bad.bindings.find(x=>x.name==='AFW_DOSSIER_EVENTS_POLICY'),invalid=JSON.parse(raw.text);invalid.clientId='wrong-private-client';raw.text=JSON.stringify(invalid);
- const invalidPolicy=structuredClone(policy);invalidPolicy.observation.configuration=historicalActivation(bad);invalidPolicy.plan.configurationHash=activationConfigurationHash(invalidPolicy.observation.configuration);
+ const invalidPolicy=structuredClone(policy);invalidPolicy.observation.configuration=bad;invalidPolicy.plan.configurationHash=finiteActivationConfigurationHash(invalidPolicy.observation.configuration);
  assert.deepEqual(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:b}),api.projectFinitePublicConfiguration({role:'canaryLive',metadata:bad}));
- assert.throws(()=>validateReleaseOperatorBundle({artifact,policy:invalidPolicy}),/Release operator plan unavailable/);
+ assert.throws(()=>validateFiniteReleaseOperatorBundle({artifact,policy:invalidPolicy}),/Release operator plan unavailable/);
  assert.deepEqual(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:a}),api.projectFinitePublicConfiguration({role:'canaryLive',metadata:b}));
  assert.throws(()=>activationConfigurationHash(a),'old activation reader must reject new candidate flags');
- assert.notEqual(activationConfigurationHash(historicalActivation(a)),activationConfigurationHash(historicalActivation(b)));
+ assert.notEqual(finiteActivationConfigurationHash(a),finiteActivationConfigurationHash(b));
  assert.notEqual(restorationConfigurationHash(a),restorationConfigurationHash(b));
- assert.notEqual(activationConfigurationHash(historicalActivation(a)),restorationConfigurationHash(a));
+ assert.notEqual(finiteActivationConfigurationHash(a),restorationConfigurationHash(a));
  const projected=JSON.stringify(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:a}));
  assert(!projected.includes('SYNTHETIC-PRIVATE'));
 });
@@ -85,7 +84,7 @@ test('finite canary source preserves existing SQLite Container relationship and 
  delete detached.exports.AfwOwnEventNode.container;detached.containers=[];
  assert.throws(()=>api.projectFinitePublicConfiguration({role:'canaryLive',metadata:detached}));
  assert.throws(()=>activationConfigurationHash(actual),'old activation reader must not reinterpret new candidate');
- assert.notEqual(activationConfigurationHash(historicalActivation(actual)),activationConfigurationHash(historicalActivation(detached)));
+ assert.notEqual(finiteActivationConfigurationHash(actual),finiteActivationConfigurationHash(detached));
  assert.notEqual(restorationConfigurationHash(actual),restorationConfigurationHash(detached));
  assert.equal(p.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_NODE').namespace_id,'d6fc71552de7494a863aca20365a572d');
 });
@@ -105,4 +104,12 @@ test('new finite candidate flags are exact before every phase and reject old or 
    assert.throws(()=>api.projectFinitePublicConfiguration({role,metadata:changed}),role+' must reject nonexact candidate flags');
   }
  }
+});
+
+test('legacy bundle remains independently strict for the historical compatibility pair',()=>{
+ const script='export default {fetch(){return new Response(null,{status:404})}}',artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:createHash('sha256').update(script).digest('hex'),sourceCheck:'git-inputs-before-after-v1'};
+ const policy=inertNamedConfirmationPolicy(artifact);
+ assert.deepEqual(policy.observation.configuration.compatibility_flags,['nodejs_compat','global_fetch_strictly_public']);
+ assert.equal(validateReleaseOperatorBundle({artifact,policy}),true);
+ assert.throws(()=>validateFiniteReleaseOperatorBundle({artifact,policy}));
 });

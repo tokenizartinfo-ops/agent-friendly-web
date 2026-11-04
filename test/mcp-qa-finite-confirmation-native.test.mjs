@@ -8,7 +8,7 @@ const entry=`
 import {PrivateQaNamedConfirmation} from './worker/independent-closure/finite.mjs';
 import {finiteFixture,digest,hash} from './test/fixtures/qa-finite-trial.mjs';
 import {inertNamedConfirmationPolicy} from './test/fixtures/inert-named-confirmation-policy.mjs';
-import {activationConfigurationHash} from './lib/mcp-activation-observer.mjs';
+import {finiteActivationConfigurationHash} from './lib/mcp-activation-observer.mjs';
 import {finiteCleanupPolicyHash} from './lib/mcp-finite-cleanup-policy.mjs';
 export const state={};
 export function material({env,event,step,parent}){
@@ -27,9 +27,10 @@ export default {async fetch(request,env,ctx){
  const {mode}=await request.json();state.mode=mode;state.calls=0;state.reads=0;
  const real=Date.now(),f=finiteFixture({at:real+600000}),p=f.plan;state.at=p.T0+150000;Date.now=()=>state.at;
  const script='export default {fetch(){return new Response(null,{status:404})}}',artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:hash(script),sourceCheck:'git-inputs-before-after-v1'},policy=inertNamedConfirmationPolicy(artifact);
+ policy.observation.configuration.compatibility_flags=['nodejs_compat','global_fetch_strictly_public','enable_request_signal'];
  const window={startAt:p.T0,expiresAt:p.N1};Object.assign(policy,window);Object.assign(policy.plan,window);
  const bindings=policy.observation.configuration.bindings,mb=bindings.find(b=>b.name==='AFW_DOSSIER_SUCCESSOR_POLICY'),manifest=JSON.parse(mb.text);Object.assign(manifest.candidate,window);mb.text=JSON.stringify(manifest);
- const eb=bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_POLICY');eb.text=JSON.stringify({...JSON.parse(eb.text),...window});policy.plan.configurationHash=activationConfigurationHash(policy.observation.configuration);
+ const eb=bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_POLICY');eb.text=JSON.stringify({...JSON.parse(eb.text),...window});policy.plan.configurationHash=finiteActivationConfigurationHash(policy.observation.configuration);
  const bundle={artifact,policy},bundleHash=hash(JSON.stringify(bundle));p.bundleHash=bundleHash;p.workflows.confirmation='afw-release-'+bundleHash;p.closePolicyHash=finiteCleanupPolicyHash(p);
  const execution={intentId:p.intentId,finitePlanHash:digest(p.purpose,p),controlHash:'1'.repeat(64),sourceRevision:p.source.revision,qaVersionId:p.deployments.qaLive.versionId,actorId:p.resources.actorId,launcherId:p.workflows.launcher,nominalId:p.workflows.confirmation,bundleHash,preparedHash:'2'.repeat(64),sendHash:'3'.repeat(64),bindingHash:'4'.repeat(64),createdAt:state.at};
  const binding={accountId:'85d0d5dadac3341a564f22ce885e9eec',bindingName:'AFW_QA_NAMED_CONFIRMATION',className:'PrivateQaNamedConfirmation',definitionName:'afw-own-qa-private-confirmation',qaVersionId:p.deployments.qaLive.versionId,scriptName:'agent-friendly-web-independent-closure-qa',sourceModuleHash:p.source.moduleHash,sourceProfileHash:p.source.profileHash,sourceRevision:p.source.revision};execution.bindingHash=hash('afw.finite-native-child-binding.v1\\n'+JSON.stringify(Object.fromEntries(Object.keys(binding).sort().map(k=>[k,binding[k]]))));
@@ -55,12 +56,12 @@ async function run(mode,source=true){
  if(!bundles[source])bundles[source]=(await build({stdin:{contents:"export {default} from 'synthetic-entry';",resolveDir:process.cwd(),sourcefile:'synthetic-confirmation-entry.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:[{name:'synthetic-source-and-identity-spy',setup(b){
  if(source)b.onLoad({filter:/mcp-qa-finite-confirmation-source\.mjs$/},()=>({contents:"export {material as readPrivateQaFiniteConfirmationMaterial} from 'synthetic-entry';",loader:'js'}));
  b.onResolve({filter:/^synthetic-entry$/},()=>({path:'entry',namespace:'synthetic'}));b.onLoad({filter:/.*/,namespace:'synthetic'},()=>({contents:entry,resolveDir:process.cwd(),loader:'js'}));
- b.onLoad({filter:/mcp-release-runtime\.mjs$/},()=>({contents:"export {known as runKnownCancellationReleaseWorkflow} from 'synthetic-entry'; export async function runReleaseWorkflow(){return {status:'blocked'}};export async function runReleaseOperator(){return {status:'blocked'}};",loader:'js'}));
+ b.onLoad({filter:/mcp-release-runtime\.mjs$/},()=>({contents:"export {known as runFiniteKnownCancellationReleaseWorkflow} from 'synthetic-entry'; export async function runReleaseWorkflow(){return {status:'blocked'}};export async function runReleaseOperator(){return {status:'blocked'}};",loader:'js'}));
  }}]})).outputFiles[0].text;
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:bundles[source],compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}));
  try{const r=await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify({mode})});assert.equal(r.status,200,await r.clone().text());return r.json();}finally{await mf.dispose();}
 }
-for(const mode of ['success','at-last-create'])test('finite nominal original event handoff '+mode,async()=>{
+for(const mode of ['success','at-last-create'])test('finite_confirmation_handoff_fixed_entry '+mode,async()=>{
  const r=await run(mode);assert.equal(r.calls,1);assert.equal(r.same,true);assert.deepEqual(r.keys,['bundle','env','event','step']);assert.equal(r.result.purpose,'afw.finite-confirmation-result.v1');assert.equal(r.preserved,true);
 });
 for(const mode of ['early','late','future','queued-expired','wrong-payload','wrong-id','schedule','wrong-name','timestamp-not-date','missing-source','hydration-expired','mutated-event','wrong-source','wrong-plan'])test('finite nominal rejects '+mode+' before Known',async()=>{const r=await run(mode);assert.equal(r.calls,0);assert.equal(r.result.status,'blocked');assert.equal(r.result.purpose,undefined);});
