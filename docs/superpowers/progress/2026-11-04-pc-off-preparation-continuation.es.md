@@ -1,3 +1,25 @@
+# Estado de implementación y próximo protocolo — 4 noviembre2026
+
+Task preparación-cleanup-enrollment ACTIVA/NOaceptada. BASEe256ee1a43ca3125fdb12485ceab712b6a7e197e; writerimplement_preparation_cleanup_enrollment. CausalRED real746120f58/run41898588470/job126814619777/attempt1:0!==2Enrollmentrows después de sourceoriginalIDigual, POST202yadmisiónWeakMapgenuina youtcomepending. Controller leyóactual logs. Anteriores1e3fabf/0565/e0b381/efe496fueronfallosfixture(clockSYNDate yparamparent/chronology), NOcausalRED yNOproveedor. Primeraimplementación0ca→699(fixsyntax). f39e649e/run41899615715 nuevo32PASS/regresiones182PASS4FAIL: cuatropositivosowner-derivedsetupfacts esperabaninstalled/6POST, ahora legitimatelypendientesporfence. Tests seajustan a0POST/no selectedfacts; no copiaengine/bypass. Cuatrocasos queUnit2b deberárestaurarcomo cobertura compuesta positiva alhabilitarowner: Task4actualsetupfacts post-commandBy native primary normal/grant/revision/selection. Setuptransportseparado byteigualBASE ypositivos aprobados. Últimoauthorcheckpoint98c02877, finalfocused +posteriorúnicacompilacióncambiografopendientes. Qualifierretirarantesreport; revisiónfresca aúnNOdespachada. Noautorizaciónhumanafaltante parafuente.
+
+## Unit2a protocolo preparado, todavía SINspec/plandeimplementación
+Diseñoexiste docs/finite-owner-cleanup-design-20261104/ec811a93cb41b8e8ae98428f117a3804559ad692, docs/superpowers/reports/2026-11-04-preparatory-issuer-correlation-design.md. NO repetir estudio.
+UnnarrowD1issuer-fenceTABLE esnecesario (SQLsourceonly, no instalación remota) para tombstoneirrevocable ybarrierprimarioanteslookup/revokeUUIDreservado, incluso antesnotice. DOreservaSDKauthHash+grantUUIDantesD1; SQL INSERT SELECT/UPDATE RETURNING cruza exactfenceidentity, owner/projectrevision/client/resource/scopes yDBtime; ordinarysemantics/runtimeforwardsnoabren. No grantmint porjournaldata/ACK. SDKopaquecompletionunknownsno físicosettledporfence.
+Buildercheck_issuer_protocol BUILDABLE conrulingsroot:
+- OPENplanoINSERT,nuncaUPDATE/REPLACE; terminalclosed-firstupsertmonotónico, requestIDexacto; actualDBfencedAtdelRETURNING/readback,nopretendidoJScleanupNow. UnknownACKreconciliar soloexactmismaidentidad.
+- Mutatingconsent/grantSQLcomparaexpiryREALcontraDBtime; reservedConsumeAt essolocorrelación,noactualtime. Columnasexistentes son TEXTISO yscopes_json; fence/deadlinesINTEGERms. Conversioncanonicalexplícita,nocompararISOconINTEGER.
+- Unit2aSQL/journalQAcomponentunmounted, suSYNidentitynoacreditaM→QA/nativecaller/SDKconsent. Esacomposición+noticesUnit2b; consumedsingrantterminalválido.
+- SQLclocknative realnopasadoautomáticamenteporfixtureJSantes3Novceiling; separarpruebaSQLreal+pruebacapsule/leaseoriginalsin clockinject/ceilingrenewal.
+PerfilM síincluyeAFW_FINITE_TRIAL_CONTROL→QA070/scriptfixed yTRIAL_VERSION comoreviewedexceptionantescapsule; NOcanaryAFW_INDEPENDENT_CLOSURE. No nuevobinding/recurso inferido.
+
+### Preflight clock conflict pendiente de resolución documental
+Rootdetectó nominalC0n/C1n/R1 sonANTESinitialC0, perodiseñofencepedíafencedAt>=initialC0. Esoimpediríaretiranissuerheredadoennominalhandoff. Arquitectodesign_owner_cleanup_handoff reanudado SOLOpararesolvereso,sinproductcode. Propuestaroot: storageCHECKfenceTime>=reservedAt&&<originalcleanupUntil, actualCURRENTcleanupcontrollerenforceinitialC0; futurohandoffgenuino puedeusaroriginalC0nmás tempranoenSQLgateprivado. Nocallerclockpermit,noreinicio/extensión C0/C1,noRPCabierto. EspecificarnextUnit2solo cuandocierreestaruling (no bloqueaUnit1).
+D1docsprimariosconsultados https://developers.cloudflare.com/d1/worker-api/d1-database/ : first-primarygarantizaprimerqueryaprimary; consultasposteriorespuedenusarréplicaconconsistenciasecuencial. Paraindependentprimaryreadback usar sesiónnuevafirst-primaryprimerSELECT, noafirmartodasqueriesprimary. D1SQLdocs https://developers.cloudflare.com/d1/sql-api/sql-statements/ soportemayoríaconvencionesSQLite; SQLdate/time https://www.sqlite.org/lang_datefunc.html respaldasubsec/conversión. Esto esbasedediseño, NOpruebaD1remotonioperaciónAFW.
+
+operationalReadiness=false;completePackage=false;sourceceilingvencido;sinEntry/provider/runtime/credenciales/OTP/permiso/Maxnuevo.
+
+---
+
 # SDD ledger — plan: docs/superpowers/plans/2026-11-04-preparation-cleanup-enrollment.md
 
 ## Activo tras regresar Gabriel (4 noviembre 2026)
