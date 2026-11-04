@@ -22,5 +22,5 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Focused syntax and lint
         run: npx eslint lib/mcp-qa-finite-owner-native-wire.mjs test/mcp-qa-finite-owner-native-wire.test.mjs
-      - name: Empty late response causal RED
-        run: timeout 30s node --test --test-timeout=10000 --test-name-pattern="empty late successful response" test/mcp-qa-finite-owner-native-wire.test.mjs
+      - name: Scoped native wire regression GREEN
+        run: timeout 45s node --test --test-timeout=10000 test/mcp-qa-finite-owner-native-wire.test.mjs
