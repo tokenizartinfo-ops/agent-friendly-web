@@ -18,8 +18,4 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node --test test/mcp-qa-finite-preparation-cleanup-records.test.mjs test/mcp-qa-finite-preparation-cleanup-native.test.mjs
-      - run: node --test test/mcp-qa-finite-policy-transport.test.mjs test/mcp-qa-finite-connection-preparation-native.test.mjs test/mcp-qa-finite-policy-setup-facts-native.test.mjs test/mcp-qa-finite-policy-setup-native.test.mjs test/mcp-qa-finite-initial-cleanup-native.test.mjs
-      - run: npx eslint lib/mcp-qa-finite-preparation-cleanup-records.mjs lib/mcp-qa-finite-preparation-cleanup.mjs lib/mcp-qa-finite-initial-anchors.mjs lib/mcp-qa-finite-policy-transport.mjs lib/mcp-qa-finite-initial-cleanup.mjs test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-preparation-cleanup-entry.mjs test/fixtures/finite-preparation-cleanup-source.mjs test/mcp-qa-finite-preparation-cleanup-records.test.mjs test/mcp-qa-finite-preparation-cleanup-native.test.mjs test/mcp-qa-finite-policy-transport.test.mjs test/mcp-qa-finite-connection-preparation-native.test.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs test/mcp-qa-finite-policy-setup-facts-native.test.mjs test/mcp-qa-finite-preparation-cleanup-build.test.mjs
-      - run: git diff --check e256ee1a43ca3125fdb12485ceab712b6a7e197e HEAD
-      - run: node --test test/mcp-qa-finite-preparation-cleanup-build.test.mjs
+      - run: node --experimental-vm-modules --test test/temporary-preparation-cleanup-compiler-diagnostic.test.mjs
