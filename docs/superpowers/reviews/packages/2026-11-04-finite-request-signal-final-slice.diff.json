@@ -1,0 +1,269 @@
+{
+  "purpose": "Complete final six-patch original signal/profile slice; accepted compatibility checkpoints excluded explicitly",
+  "base": "aed54dab23b644481aed01cf6b5b94249ecf9f23",
+  "head": "949d84784e83f8859421242edeab3f68c5db93a3",
+  "commits": [
+    {
+      "sha": "1d601fcce56f0f98d10a0ad32f4a5737d6b55dc0",
+      "message": "test(afw): require actual finite receiver signal abort"
+    },
+    {
+      "sha": "d2e5d8ce513ada7c9ecb19829a2bff60c5597cd5",
+      "message": "feat(afw): test exact finite incoming signal opt-in"
+    },
+    {
+      "sha": "c338f90c9ce29f6dbbfff70274e1c7f070c6a38c",
+      "message": "test(afw): verify exact finite profiles and receiver guard settlement"
+    },
+    {
+      "sha": "ccc7624e52c54884691343c0495bbe17c06dcd56",
+      "message": "test(afw): distinguish logical receiver return from retained native read"
+    },
+    {
+      "sha": "e29fe8ec607e3ac702a3b09f6795a694c2723195",
+      "message": "test(afw): await physical reader cancellation after release"
+    },
+    {
+      "sha": "e7ed164d08dddd4f2fca0004d54c8ea52a3688d5",
+      "message": "test(afw): keep old activation fixture pinned apart from new candidates"
+    },
+    {
+      "sha": "ab85ac8f9e0e1383d573d49fee6742c04976e5b1",
+      "message": "ci(afw): isolate finite compilation and historical diagnostics"
+    },
+    {
+      "sha": "62307cbad80455689486ff52e2216867bfecddcc",
+      "message": "ci(afw): inventory finite candidate hash call sites"
+    },
+    {
+      "sha": "e6f6aff834fdf0b9af78665e98c6835e90911077",
+      "message": "ci(afw): use available scoped grep for finite hash inventory"
+    },
+    {
+      "sha": "bd923bab7225212e35e054b14c132de78195ec5e",
+      "message": "ci(afw): complete finite bundle hash call site inventory"
+    },
+    {
+      "sha": "3fb1751c901059c9acdb2a9f1de2f6470b9f3c41",
+      "message": "docs(afw): checkpoint signal opt-in evidence and Known path blocker"
+    },
+    {
+      "sha": "48462cdc36315f91b5417df9e8333cd6601f270d",
+      "message": "docs(afw): activate strict finite compatibility primitives dependency"
+    },
+    {
+      "sha": "b6f482b87916018822430dd77aaa4b5e73802f06",
+      "message": "test(afw): RED finite known C1 fixed exports"
+    },
+    {
+      "sha": "06d8f29c574454056b19c2b6b3e867a728605f54",
+      "message": "feat(afw): add strict fixed finite activation primitives"
+    },
+    {
+      "sha": "a81a6db504ced20b5601cdf37f698b8a039fae2f",
+      "message": "test(afw): pin legacy digest and operation boundary"
+    },
+    {
+      "sha": "fb7b89885033749c10264095ccadeb252d0e78c8",
+      "message": "fix(afw): sanitize finite bundle validation errors"
+    },
+    {
+      "sha": "a8dd66018fd731154d3289554c69f3766a147a52",
+      "message": "docs(afw): report finite known C1 and remove scoped qualifier"
+    },
+    {
+      "sha": "c9809d79d7e4e918e595da829a2109fdc71f453a",
+      "message": "docs(afw): accept strict finite primitives and activate shared lifecycle task"
+    },
+    {
+      "sha": "8168e64efa56eef8240b9efded5992caa4f1cb9c",
+      "message": "test: specify fixed finite Known lifecycle and native source qualification"
+    },
+    {
+      "sha": "0df957482755f4ef6e718e759bff2e69b50517ba",
+      "message": "feat: share private release lifecycle behind fixed legacy and finite Known entries"
+    },
+    {
+      "sha": "1bc37f26df3837780c295dafc366f1ad7694370f",
+      "message": "test: observe finite credential reads and untouched native string payload"
+    },
+    {
+      "sha": "a3b4f94758a610495d8ff72d0277c9c197b60da9",
+      "message": "docs: record finite Known C2 qualification and remove own qualifier"
+    },
+    {
+      "sha": "2f3d11f7aa0381fed24265ef4f74129ff96500c4",
+      "message": "docs: correct C2 BASE tree provenance"
+    },
+    {
+      "sha": "e280a297f4c2ea3f38ea3fc4ac157439415708be",
+      "message": "docs(afw): accept finite lifecycle and activate explicit role integration"
+    },
+    {
+      "sha": "0221c1b846dd258aa345e6705702ef162f79aff6",
+      "message": "test: expose finite C3 candidate and historical consumer boundaries"
+    },
+    {
+      "sha": "53256405e5525372efda40673b42282fe0da0935",
+      "message": "test: preserve legacy spy and isolate final upload timeout cases"
+    },
+    {
+      "sha": "2b2af6989a243d7a99beb882e24bd62d5a50a965",
+      "message": "fix: select fixed finite candidate APIs and historical rollback roles"
+    },
+    {
+      "sha": "6d17d438becca708da5baae70129c73fc118bf98",
+      "message": "test: retain legacy digest checks and qualify exact C3 compiler head"
+    },
+    {
+      "sha": "949d84784e83f8859421242edeab3f68c5db93a3",
+      "message": "docs: record finite C3 qualification and remove temporary qualifiers"
+    }
+  ],
+  "allChangedPaths": [
+    "docs/superpowers/briefs/2026-11-04-finite-known-profile-c1.md",
+    "docs/superpowers/briefs/2026-11-04-finite-known-profile-c2.md",
+    "docs/superpowers/briefs/2026-11-04-finite-known-profile-c3.md",
+    "docs/superpowers/plans/2026-11-04-finite-known-profile-compatibility.md",
+    "docs/superpowers/reports/2026-11-04-finite-known-profile-c1.md",
+    "docs/superpowers/reports/2026-11-04-finite-known-profile-c2.md",
+    "docs/superpowers/reports/2026-11-04-finite-known-profile-c3.md",
+    "docs/superpowers/reports/2026-11-04-finite-request-signal-opt-in-checkpoint.md",
+    "docs/superpowers/reviews/2026-11-04-finite-known-profile-c1.es.md",
+    "docs/superpowers/reviews/2026-11-04-finite-known-profile-c2.es.md",
+    "docs/superpowers/specs/2026-11-04-finite-known-profile-compatibility.md",
+    "lib/mcp-activation-observer.mjs",
+    "lib/mcp-qa-finite-confirmation.mjs",
+    "lib/mcp-qa-finite-initial-owner-source.mjs",
+    "lib/mcp-qa-finite-policy-setup.mjs",
+    "lib/mcp-qa-finite-policy-transport.mjs",
+    "lib/mcp-qa-finite-preparation-cleanup.mjs",
+    "lib/mcp-qa-finite-preparation-records.mjs",
+    "lib/mcp-qa-finite-profile.mjs",
+    "lib/mcp-release-operator-policy.mjs",
+    "lib/mcp-release-runtime.mjs",
+    "lib/mcp-release-successor-reservation.mjs",
+    "test/fixtures/finite-connection-source.mjs",
+    "test/fixtures/finite-native-conduit-receiver.mjs",
+    "test/fixtures/finite-policy-setup-worker.mjs",
+    "test/fixtures/named-confirmation-native-rehearsal.mjs",
+    "test/mcp-finite-activation-compatibility.test.mjs",
+    "test/mcp-finite-named-activation.test.mjs",
+    "test/mcp-qa-finite-confirmation-native.test.mjs",
+    "test/mcp-qa-finite-initial-owner-source-native.test.mjs",
+    "test/mcp-qa-finite-owner-native-conduit-native.test.mjs",
+    "test/mcp-qa-finite-policy-setup-native.test.mjs",
+    "test/mcp-qa-finite-policy-transport.test.mjs",
+    "test/mcp-qa-finite-preparation-records.test.mjs",
+    "test/mcp-qa-finite-profile.test.mjs",
+    "test/mcp-release-finite-known-cancellation-native.test.mjs",
+    "test/mcp-release-finite-known-cancellation.test.mjs",
+    "test/mcp-release-known-cancellation.test.mjs",
+    "wrangler.independent-closure-qa.finite.jsonc",
+    "wrangler.mcp-own.finite.jsonc"
+  ],
+  "scope": [
+    "lib/mcp-qa-finite-profile.mjs",
+    "test/fixtures/finite-native-conduit-receiver.mjs",
+    "test/mcp-qa-finite-owner-native-conduit-native.test.mjs",
+    "test/mcp-qa-finite-profile.test.mjs",
+    "wrangler.independent-closure-qa.finite.jsonc",
+    "wrangler.mcp-own.finite.jsonc"
+  ],
+  "files": [
+    {
+      "path": "lib/mcp-qa-finite-profile.mjs",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 3,
+      "patch": "@@ -18,8 +18,8 @@ function snapshot(v,depth=0,budget={nodes:0,bytes:0}){\n }\n // Reviewed live source templates. Typed markers are NOT provider metadata and\n // must never be passed to activationConfigurationHash/Known or deployed as vars.\n-const templates=freeze({\"qaLive\":{\"compatibility_date\":\"2026-09-07\",\"compatibility_flags\":[\"nodejs_compat\"],\"main_module\":\"index.mjs\",\"usage_model\":\"standard\",\"containers\":[],\"exports\":[\"IndependentClosure\",\"PrivateQaBootstrap\",\"PrivateQaCatalog\",\"PrivateQaNamedConfirmation\",\"PrivateQaPreregistration\",\"default\",\"observePrivateQa\"],\"bindings\":[{\"name\":\"AFW_INDEPENDENT_CLOSURE\",\"class_name\":\"IndependentClosure\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"070c4a7708eb4592a3ded7c117a88225\"},{\"name\":\"AFW_MCP_CLOSURE_DISPATCH_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_MCP_CLOSURE_DISPATCH_POLICY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_MCP_CLOSURE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_MCP_CLOSURE_NODE\",\"class_name\":\"AfwOwnEventNode\",\"script_name\":\"agent-friendly-web-delegated-canary\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"d6fc71552de7494a863aca20365a572d\"},{\"name\":\"AFW_MCP_CLOSURE_POLICY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_MCP_CLOSURE_PUBLISH_TOKEN\",\"type\":\"secret_text\"},{\"name\":\"AFW_MCP_CLOSURE_READ_TOKEN\",\"type\":\"secret_text\"},{\"name\":\"AFW_MCP_CLOSURE_REDUCTION_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_MCP_PUBLISHER_PROBE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_MCP_PUBLISHER_PROBE_POLICY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_MCP_READER_PROBE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_MCP_READER_PROBE_POLICY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_QA_BOOTSTRAP\",\"type\":\"workflow\",\"workflow_name\":\"afw-own-qa-private-bootstrap\",\"class_name\":\"PrivateQaBootstrap\"},{\"name\":\"AFW_QA_BOOTSTRAP_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_CHALLENGE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_CHALLENGE_IDENTITY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_QA_DB\",\"type\":\"d1\",\"id\":\"676ca49e-af71-4f2f-a12d-11f13de78a51\"},{\"name\":\"AFW_QA_DOSSIER_DB\",\"type\":\"d1\",\"id\":\"6a728254-1494-4039-802e-b39288a55fcc\"},{\"name\":\"AFW_QA_HTTP_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_HTTP_POLICY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_QA_INSTALLATION_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_NAMED_CONFIRMATION\",\"type\":\"workflow\",\"workflow_name\":\"afw-own-qa-private-confirmation\",\"class_name\":\"PrivateQaNamedConfirmation\"},{\"name\":\"AFW_QA_OCCURRENCE_RATE_LIMITER\",\"type\":\"ratelimit\",\"namespace_id\":\"2026101003\",\"simple\":{\"limit\":10,\"period\":60}},{\"name\":\"AFW_QA_ORIGINALS_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_PREREGISTRATION\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_QA_PREREGISTRY\",\"class_name\":\"PrivateQaPreregistration\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"6f30104244424152b800bc64d5f4cfac\"},{\"name\":\"AFW_QA_PRIMARY_ADMISSION_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_PRIMARY_CATALOG_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_PRIMARY_RESERVATION_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_PROVIDER_OBSERVATION_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_VERSION\",\"type\":\"version_metadata\"},{\"name\":\"AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_RELEASE_EVENTS_NODE\",\"class_name\":\"AfwOwnEventNode\",\"script_name\":\"agent-friendly-web-delegated-canary\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"d6fc71552de7494a863aca20365a572d\"},{\"name\":\"AFW_RELEASE_OPERATOR_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_RELEASE_WORKFLOW_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"RELEASE_DB\",\"type\":\"d1\",\"id\":\"6a728254-1494-4039-802e-b39288a55fcc\"}]},\"canaryLive\":{\"compatibility_date\":\"2026-09-07\",\"compatibility_flags\":[\"nodejs_compat\",\"global_fetch_strictly_public\"],\"main_module\":\"index.mjs\",\"usage_model\":\"standard\",\"containers\":[{\"class_name\":\"AfwOwnEventNode\",\"name\":\"agent-friendly-web-delegated-canary-afwowneventnode\"}],\"exports\":{\"default\":{\"type\":\"worker\"},\"AfwNodeControl\":{\"type\":\"worker\"},\"AfwOwnEventNode\":{\"type\":\"durable-object\",\"storage\":\"sqlite\",\"container\":\"agent-friendly-web-delegated-canary-afwowneventnode\"}},\"bindings\":[{\"name\":\"AFW_DELEGATED_OAUTH_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_DOSSIER_EVENTS_CUSTODY_KEY\",\"type\":\"secret_text\"},{\"name\":\"AFW_DOSSIER_EVENTS_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_DOSSIER_EVENTS_NODE\",\"class_name\":\"AfwOwnEventNode\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"d6fc71552de7494a863aca20365a572d\"},{\"name\":\"AFW_DOSSIER_EVENTS_NODE_NAME\",\"type\":\"plain_text\",\"text\":\"afw-own-event-first-successor-v1\"},{\"name\":\"AFW_DOSSIER_EVENTS_POLICY\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"events-policy\"}},{\"name\":\"AFW_DOSSIER_EVENTS_PROJECTION_SECRET\",\"type\":\"secret_text\"},{\"name\":\"AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_DOSSIER_MONITORING_OWNER_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_DOSSIER_OWN_SAVE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"withdrawal-policy\"}},{\"name\":\"AFW_DOSSIER_RETIREMENT_POLICY\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"retirement-policy\"}},{\"name\":\"AFW_DOSSIER_RETIREMENT_READ_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_DOSSIER_SUCCESSOR_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_DOSSIER_SUCCESSOR_POLICY\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"successor-policy\"}},{\"name\":\"AFW_FINITE_TRIAL_CONTROL\",\"class_name\":\"IndependentClosure\",\"script_name\":\"agent-friendly-web-independent-closure-qa\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"070c4a7708eb4592a3ded7c117a88225\"},{\"name\":\"AFW_FINITE_TRIAL_VERSION\",\"type\":\"version_metadata\"},{\"name\":\"AFW_OAUTH_ISSUER\",\"type\":\"plain_text\",\"text\":\"https://delegated-canary.agentfriendlyweb.dev\"},{\"name\":\"AFW_OAUTH_PILOT_CLIENT_ID\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"client-id\"}},{\"name\":\"AFW_OAUTH_PILOT_PROJECT_ID\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"project-id\"}},{\"name\":\"AFW_OAUTH_REFRESH_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_OAUTH_RESOURCE\",\"type\":\"plain_text\",\"text\":\"https://delegated-canary.agentfriendlyweb.dev/mcp\"},{\"name\":\"AFW_OAUTH_SERVICE_MODE\",\"type\":\"plain_text\",\"text\":\"window\"},{\"name\":\"DB\",\"type\":\"d1\",\"id\":\"6a728254-1494-4039-802e-b39288a55fcc\"},{\"name\":\"OAUTH_KV\",\"type\":\"kv_namespace\",\"namespace_id\":\"6b94ff702e504e14a7730cee73a0f6ff\"}]}});\n-const configs=freeze({\"qaLive\":{\"name\":\"agent-friendly-web-independent-closure-qa\",\"account_id\":\"85d0d5dadac3341a564f22ce885e9eec\",\"main\":\"worker/independent-closure/finite.mjs\",\"compatibility_date\":\"2026-09-07\",\"workers_dev\":false,\"preview_urls\":false,\"routes\":[],\"triggers\":{\"crons\":[]},\"durable_objects\":{\"bindings\":[{\"name\":\"AFW_INDEPENDENT_CLOSURE\",\"class_name\":\"IndependentClosure\"},{\"name\":\"AFW_QA_PREREGISTRY\",\"class_name\":\"PrivateQaPreregistration\"},{\"name\":\"AFW_MCP_CLOSURE_NODE\",\"class_name\":\"AfwOwnEventNode\",\"script_name\":\"agent-friendly-web-delegated-canary\"},{\"name\":\"AFW_RELEASE_EVENTS_NODE\",\"class_name\":\"AfwOwnEventNode\",\"script_name\":\"agent-friendly-web-delegated-canary\"}]},\"migrations\":[{\"tag\":\"afw-own-qa-closed-v1\",\"new_sqlite_classes\":[\"IndependentClosure\"]},{\"tag\":\"afw-private-preregistry-v1\",\"new_sqlite_classes\":[\"PrivateQaPreregistration\"]}],\"d1_databases\":[{\"database_id\":\"676ca49e-af71-4f2f-a12d-11f13de78a51\",\"database_name\":\"agent-friendly-web-independent-closure-qa\",\"binding\":\"AFW_QA_DB\"},{\"binding\":\"RELEASE_DB\",\"database_name\":\"agent-friendly-web-delegated-canary\",\"database_id\":\"6a728254-1494-4039-802e-b39288a55fcc\"},{\"binding\":\"AFW_QA_DOSSIER_DB\",\"database_name\":\"agent-friendly-web-delegated-canary\",\"database_id\":\"6a728254-1494-4039-802e-b39288a55fcc\"}],\"workflows\":[{\"name\":\"afw-own-qa-private-bootstrap\",\"binding\":\"AFW_QA_BOOTSTRAP\",\"class_name\":\"PrivateQaBootstrap\"},{\"name\":\"afw-own-qa-private-confirmation\",\"binding\":\"AFW_QA_NAMED_CONFIRMATION\",\"class_name\":\"PrivateQaNamedConfirmation\"}],\"ratelimits\":[{\"name\":\"AFW_QA_OCCURRENCE_RATE_LIMITER\",\"namespace_id\":\"2026101003\",\"simple\":{\"limit\":10,\"period\":60}}],\"vars\":{\"AFW_QA_HTTP_ENABLED\":\"false\",\"AFW_QA_HTTP_POLICY\":\"\",\"AFW_QA_BOOTSTRAP_ENABLED\":\"false\",\"AFW_QA_PREREGISTRATION\":\"\",\"AFW_QA_CHALLENGE_ENABLED\":\"false\",\"AFW_QA_CHALLENGE_IDENTITY\":\"\",\"AFW_MCP_CLOSURE_ENABLED\":\"false\",\"AFW_MCP_CLOSURE_POLICY\":\"\",\"AFW_MCP_READER_PROBE_ENABLED\":\"false\",\"AFW_MCP_READER_PROBE_POLICY\":\"\",\"AFW_MCP_PUBLISHER_PROBE_ENABLED\":\"false\",\"AFW_MCP_PUBLISHER_PROBE_POLICY\":\"\",\"AFW_MCP_CLOSURE_DISPATCH_ENABLED\":\"false\",\"AFW_MCP_CLOSURE_DISPATCH_POLICY\":\"\",\"AFW_QA_ORIGINALS_ENABLED\":\"false\",\"AFW_QA_PROVIDER_OBSERVATION_ENABLED\":\"false\",\"AFW_QA_PRIMARY_RESERVATION_ENABLED\":\"false\",\"AFW_QA_INSTALLATION_ENABLED\":\"false\",\"AFW_QA_PRIMARY_CATALOG_ENABLED\":\"false\",\"AFW_QA_PRIMARY_ADMISSION_ENABLED\":\"false\",\"AFW_MCP_CLOSURE_REDUCTION_ENABLED\":\"false\",\"AFW_RELEASE_OPERATOR_ENABLED\":\"true\",\"AFW_RELEASE_WORKFLOW_ENABLED\":\"true\",\"AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED\":\"true\",\"AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED\":\"true\"},\"compatibility_flags\":[\"nodejs_compat\"],\"version_metadata\":{\"binding\":\"AFW_QA_VERSION\"},\"tail_consumers\":[]},\"canaryLive\":{\"name\":\"agent-friendly-web-delegated-canary\",\"account_id\":\"85d0d5dadac3341a564f22ce885e9eec\",\"main\":\"worker/mcp-own/finite.mjs\",\"compatibility_date\":\"2026-09-07\",\"compatibility_flags\":[\"nodejs_compat\",\"global_fetch_strictly_public\"],\"workers_dev\":false,\"preview_urls\":false,\"routes\":[],\"triggers\":{\"crons\":[]},\"tail_consumers\":[],\"observability\":{\"enabled\":false},\"vars\":{\"AFW_DELEGATED_OAUTH_ENABLED\":\"false\",\"AFW_OAUTH_REFRESH_ENABLED\":\"false\",\"AFW_OAUTH_SERVICE_MODE\":\"window\",\"AFW_OAUTH_ISSUER\":\"https://delegated-canary.agentfriendlyweb.dev\",\"AFW_OAUTH_RESOURCE\":\"https://delegated-canary.agentfriendlyweb.dev/mcp\",\"AFW_DOSSIER_EVENTS_ENABLED\":\"true\",\"AFW_DOSSIER_SUCCESSOR_ENABLED\":\"true\",\"AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED\":\"true\",\"AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED\":\"false\",\"AFW_DOSSIER_RETIREMENT_READ_ENABLED\":\"false\",\"AFW_DOSSIER_OWN_SAVE_ENABLED\":\"false\",\"AFW_DOSSIER_MONITORING_OWNER_ENABLED\":\"false\",\"AFW_DOSSIER_EVENTS_NODE_NAME\":\"afw-own-event-first-successor-v1\"},\"d1_databases\":[{\"binding\":\"DB\",\"database_name\":\"agent-friendly-web-delegated-canary\",\"database_id\":\"6a728254-1494-4039-802e-b39288a55fcc\"}],\"kv_namespaces\":[{\"binding\":\"OAUTH_KV\",\"id\":\"6b94ff702e504e14a7730cee73a0f6ff\"}],\"durable_objects\":{\"bindings\":[{\"name\":\"AFW_DOSSIER_EVENTS_NODE\",\"class_name\":\"AfwOwnEventNode\"},{\"name\":\"AFW_FINITE_TRIAL_CONTROL\",\"class_name\":\"IndependentClosure\",\"script_name\":\"agent-friendly-web-independent-closure-qa\"}]},\"version_metadata\":{\"binding\":\"AFW_FINITE_TRIAL_VERSION\"},\"exports\":{\"default\":{\"type\":\"worker\"},\"AfwNodeControl\":{\"type\":\"worker\"},\"AfwOwnEventNode\":{\"type\":\"durable-object\",\"storage\":\"sqlite\",\"container\":\"agent-friendly-web-delegated-canary-afwowneventnode\"}},\"unsafe\":{\"metadata\":{\"exports\":{\"default\":{\"type\":\"worker\"},\"AfwNodeControl\":{\"type\":\"worker\"},\"AfwOwnEventNode\":{\"type\":\"durable-object\",\"storage\":\"sqlite\",\"container\":\"agent-friendly-web-delegated-canary-afwowneventnode\"}},\"containers\":[{\"class_name\":\"AfwOwnEventNode\"}]}}}});\n+const templates=freeze({\"qaLive\":{\"compatibility_date\":\"2026-09-07\",\"compatibility_flags\":[\"nodejs_compat\",\"enable_request_signal\"],\"main_module\":\"index.mjs\",\"usage_model\":\"standard\",\"containers\":[],\"exports\":[\"IndependentClosure\",\"PrivateQaBootstrap\",\"PrivateQaCatalog\",\"PrivateQaNamedConfirmation\",\"PrivateQaPreregistration\",\"default\",\"observePrivateQa\"],\"bindings\":[{\"name\":\"AFW_INDEPENDENT_CLOSURE\",\"class_name\":\"IndependentClosure\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"070c4a7708eb4592a3ded7c117a88225\"},{\"name\":\"AFW_MCP_CLOSURE_DISPATCH_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_MCP_CLOSURE_DISPATCH_POLICY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_MCP_CLOSURE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_MCP_CLOSURE_NODE\",\"class_name\":\"AfwOwnEventNode\",\"script_name\":\"agent-friendly-web-delegated-canary\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"d6fc71552de7494a863aca20365a572d\"},{\"name\":\"AFW_MCP_CLOSURE_POLICY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_MCP_CLOSURE_PUBLISH_TOKEN\",\"type\":\"secret_text\"},{\"name\":\"AFW_MCP_CLOSURE_READ_TOKEN\",\"type\":\"secret_text\"},{\"name\":\"AFW_MCP_CLOSURE_REDUCTION_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_MCP_PUBLISHER_PROBE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_MCP_PUBLISHER_PROBE_POLICY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_MCP_READER_PROBE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_MCP_READER_PROBE_POLICY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_QA_BOOTSTRAP\",\"type\":\"workflow\",\"workflow_name\":\"afw-own-qa-private-bootstrap\",\"class_name\":\"PrivateQaBootstrap\"},{\"name\":\"AFW_QA_BOOTSTRAP_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_CHALLENGE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_CHALLENGE_IDENTITY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_QA_DB\",\"type\":\"d1\",\"id\":\"676ca49e-af71-4f2f-a12d-11f13de78a51\"},{\"name\":\"AFW_QA_DOSSIER_DB\",\"type\":\"d1\",\"id\":\"6a728254-1494-4039-802e-b39288a55fcc\"},{\"name\":\"AFW_QA_HTTP_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_HTTP_POLICY\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_QA_INSTALLATION_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_NAMED_CONFIRMATION\",\"type\":\"workflow\",\"workflow_name\":\"afw-own-qa-private-confirmation\",\"class_name\":\"PrivateQaNamedConfirmation\"},{\"name\":\"AFW_QA_OCCURRENCE_RATE_LIMITER\",\"type\":\"ratelimit\",\"namespace_id\":\"2026101003\",\"simple\":{\"limit\":10,\"period\":60}},{\"name\":\"AFW_QA_ORIGINALS_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_PREREGISTRATION\",\"type\":\"plain_text\",\"text\":\"\"},{\"name\":\"AFW_QA_PREREGISTRY\",\"class_name\":\"PrivateQaPreregistration\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"6f30104244424152b800bc64d5f4cfac\"},{\"name\":\"AFW_QA_PRIMARY_ADMISSION_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_PRIMARY_CATALOG_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_PRIMARY_RESERVATION_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_PROVIDER_OBSERVATION_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_QA_VERSION\",\"type\":\"version_metadata\"},{\"name\":\"AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_RELEASE_EVENTS_NODE\",\"class_name\":\"AfwOwnEventNode\",\"script_name\":\"agent-friendly-web-delegated-canary\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"d6fc71552de7494a863aca20365a572d\"},{\"name\":\"AFW_RELEASE_OPERATOR_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_RELEASE_WORKFLOW_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"RELEASE_DB\",\"type\":\"d1\",\"id\":\"6a728254-1494-4039-802e-b39288a55fcc\"}]},\"canaryLive\":{\"compatibility_date\":\"2026-09-07\",\"compatibility_flags\":[\"nodejs_compat\",\"global_fetch_strictly_public\",\"enable_request_signal\"],\"main_module\":\"index.mjs\",\"usage_model\":\"standard\",\"containers\":[{\"class_name\":\"AfwOwnEventNode\",\"name\":\"agent-friendly-web-delegated-canary-afwowneventnode\"}],\"exports\":{\"default\":{\"type\":\"worker\"},\"AfwNodeControl\":{\"type\":\"worker\"},\"AfwOwnEventNode\":{\"type\":\"durable-object\",\"storage\":\"sqlite\",\"container\":\"agent-friendly-web-delegated-canary-afwowneventnode\"}},\"bindings\":[{\"name\":\"AFW_DELEGATED_OAUTH_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_DOSSIER_EVENTS_CUSTODY_KEY\",\"type\":\"secret_text\"},{\"name\":\"AFW_DOSSIER_EVENTS_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_DOSSIER_EVENTS_NODE\",\"class_name\":\"AfwOwnEventNode\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"d6fc71552de7494a863aca20365a572d\"},{\"name\":\"AFW_DOSSIER_EVENTS_NODE_NAME\",\"type\":\"plain_text\",\"text\":\"afw-own-event-first-successor-v1\"},{\"name\":\"AFW_DOSSIER_EVENTS_POLICY\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"events-policy\"}},{\"name\":\"AFW_DOSSIER_EVENTS_PROJECTION_SECRET\",\"type\":\"secret_text\"},{\"name\":\"AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_DOSSIER_MONITORING_OWNER_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_DOSSIER_OWN_SAVE_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"withdrawal-policy\"}},{\"name\":\"AFW_DOSSIER_RETIREMENT_POLICY\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"retirement-policy\"}},{\"name\":\"AFW_DOSSIER_RETIREMENT_READ_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_DOSSIER_SUCCESSOR_ENABLED\",\"type\":\"plain_text\",\"text\":\"true\"},{\"name\":\"AFW_DOSSIER_SUCCESSOR_POLICY\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"successor-policy\"}},{\"name\":\"AFW_FINITE_TRIAL_CONTROL\",\"class_name\":\"IndependentClosure\",\"script_name\":\"agent-friendly-web-independent-closure-qa\",\"type\":\"durable_object_namespace\",\"namespace_id\":\"070c4a7708eb4592a3ded7c117a88225\"},{\"name\":\"AFW_FINITE_TRIAL_VERSION\",\"type\":\"version_metadata\"},{\"name\":\"AFW_OAUTH_ISSUER\",\"type\":\"plain_text\",\"text\":\"https://delegated-canary.agentfriendlyweb.dev\"},{\"name\":\"AFW_OAUTH_PILOT_CLIENT_ID\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"client-id\"}},{\"name\":\"AFW_OAUTH_PILOT_PROJECT_ID\",\"type\":\"plain_text\",\"privateSlot\":{\"purpose\":\"afw.finite-private-slot.v1\",\"kind\":\"project-id\"}},{\"name\":\"AFW_OAUTH_REFRESH_ENABLED\",\"type\":\"plain_text\",\"text\":\"false\"},{\"name\":\"AFW_OAUTH_RESOURCE\",\"type\":\"plain_text\",\"text\":\"https://delegated-canary.agentfriendlyweb.dev/mcp\"},{\"name\":\"AFW_OAUTH_SERVICE_MODE\",\"type\":\"plain_text\",\"text\":\"window\"},{\"name\":\"DB\",\"type\":\"d1\",\"id\":\"6a728254-1494-4039-802e-b39288a55fcc\"},{\"name\":\"OAUTH_KV\",\"type\":\"kv_namespace\",\"namespace_id\":\"6b94ff702e504e14a7730cee73a0f6ff\"}]}});\n+const configs=freeze({\"qaLive\":{\"name\":\"agent-friendly-web-independent-closure-qa\",\"account_id\":\"85d0d5dadac3341a564f22ce885e9eec\",\"main\":\"worker/independent-closure/finite.mjs\",\"compatibility_date\":\"2026-09-07\",\"workers_dev\":false,\"preview_urls\":false,\"routes\":[],\"triggers\":{\"crons\":[]},\"durable_objects\":{\"bindings\":[{\"name\":\"AFW_INDEPENDENT_CLOSURE\",\"class_name\":\"IndependentClosure\"},{\"name\":\"AFW_QA_PREREGISTRY\",\"class_name\":\"PrivateQaPreregistration\"},{\"name\":\"AFW_MCP_CLOSURE_NODE\",\"class_name\":\"AfwOwnEventNode\",\"script_name\":\"agent-friendly-web-delegated-canary\"},{\"name\":\"AFW_RELEASE_EVENTS_NODE\",\"class_name\":\"AfwOwnEventNode\",\"script_name\":\"agent-friendly-web-delegated-canary\"}]},\"migrations\":[{\"tag\":\"afw-own-qa-closed-v1\",\"new_sqlite_classes\":[\"IndependentClosure\"]},{\"tag\":\"afw-private-preregistry-v1\",\"new_sqlite_classes\":[\"PrivateQaPreregistration\"]}],\"d1_databases\":[{\"database_id\":\"676ca49e-af71-4f2f-a12d-11f13de78a51\",\"database_name\":\"agent-friendly-web-independent-closure-qa\",\"binding\":\"AFW_QA_DB\"},{\"binding\":\"RELEASE_DB\",\"database_name\":\"agent-friendly-web-delegated-canary\",\"database_id\":\"6a728254-1494-4039-802e-b39288a55fcc\"},{\"binding\":\"AFW_QA_DOSSIER_DB\",\"database_name\":\"agent-friendly-web-delegated-canary\",\"database_id\":\"6a728254-1494-4039-802e-b39288a55fcc\"}],\"workflows\":[{\"name\":\"afw-own-qa-private-bootstrap\",\"binding\":\"AFW_QA_BOOTSTRAP\",\"class_name\":\"PrivateQaBootstrap\"},{\"name\":\"afw-own-qa-private-confirmation\",\"binding\":\"AFW_QA_NAMED_CONFIRMATION\",\"class_name\":\"PrivateQaNamedConfirmation\"}],\"ratelimits\":[{\"name\":\"AFW_QA_OCCURRENCE_RATE_LIMITER\",\"namespace_id\":\"2026101003\",\"simple\":{\"limit\":10,\"period\":60}}],\"vars\":{\"AFW_QA_HTTP_ENABLED\":\"false\",\"AFW_QA_HTTP_POLICY\":\"\",\"AFW_QA_BOOTSTRAP_ENABLED\":\"false\",\"AFW_QA_PREREGISTRATION\":\"\",\"AFW_QA_CHALLENGE_ENABLED\":\"false\",\"AFW_QA_CHALLENGE_IDENTITY\":\"\",\"AFW_MCP_CLOSURE_ENABLED\":\"false\",\"AFW_MCP_CLOSURE_POLICY\":\"\",\"AFW_MCP_READER_PROBE_ENABLED\":\"false\",\"AFW_MCP_READER_PROBE_POLICY\":\"\",\"AFW_MCP_PUBLISHER_PROBE_ENABLED\":\"false\",\"AFW_MCP_PUBLISHER_PROBE_POLICY\":\"\",\"AFW_MCP_CLOSURE_DISPATCH_ENABLED\":\"false\",\"AFW_MCP_CLOSURE_DISPATCH_POLICY\":\"\",\"AFW_QA_ORIGINALS_ENABLED\":\"false\",\"AFW_QA_PROVIDER_OBSERVATION_ENABLED\":\"false\",\"AFW_QA_PRIMARY_RESERVATION_ENABLED\":\"false\",\"AFW_QA_INSTALLATION_ENABLED\":\"false\",\"AFW_QA_PRIMARY_CATALOG_ENABLED\":\"false\",\"AFW_QA_PRIMARY_ADMISSION_ENABLED\":\"false\",\"AFW_MCP_CLOSURE_REDUCTION_ENABLED\":\"false\",\"AFW_RELEASE_OPERATOR_ENABLED\":\"true\",\"AFW_RELEASE_WORKFLOW_ENABLED\":\"true\",\"AFW_RELEASE_CONFIRMATION_WORKFLOW_ENABLED\":\"true\",\"AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED\":\"true\"},\"compatibility_flags\":[\"nodejs_compat\",\"enable_request_signal\"],\"version_metadata\":{\"binding\":\"AFW_QA_VERSION\"},\"tail_consumers\":[]},\"canaryLive\":{\"name\":\"agent-friendly-web-delegated-canary\",\"account_id\":\"85d0d5dadac3341a564f22ce885e9eec\",\"main\":\"worker/mcp-own/finite.mjs\",\"compatibility_date\":\"2026-09-07\",\"compatibility_flags\":[\"nodejs_compat\",\"global_fetch_strictly_public\",\"enable_request_signal\"],\"workers_dev\":false,\"preview_urls\":false,\"routes\":[],\"triggers\":{\"crons\":[]},\"tail_consumers\":[],\"observability\":{\"enabled\":false},\"vars\":{\"AFW_DELEGATED_OAUTH_ENABLED\":\"false\",\"AFW_OAUTH_REFRESH_ENABLED\":\"false\",\"AFW_OAUTH_SERVICE_MODE\":\"window\",\"AFW_OAUTH_ISSUER\":\"https://delegated-canary.agentfriendlyweb.dev\",\"AFW_OAUTH_RESOURCE\":\"https://delegated-canary.agentfriendlyweb.dev/mcp\",\"AFW_DOSSIER_EVENTS_ENABLED\":\"true\",\"AFW_DOSSIER_SUCCESSOR_ENABLED\":\"true\",\"AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED\":\"true\",\"AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED\":\"false\",\"AFW_DOSSIER_RETIREMENT_READ_ENABLED\":\"false\",\"AFW_DOSSIER_OWN_SAVE_ENABLED\":\"false\",\"AFW_DOSSIER_MONITORING_OWNER_ENABLED\":\"false\",\"AFW_DOSSIER_EVENTS_NODE_NAME\":\"afw-own-event-first-successor-v1\"},\"d1_databases\":[{\"binding\":\"DB\",\"database_name\":\"agent-friendly-web-delegated-canary\",\"database_id\":\"6a728254-1494-4039-802e-b39288a55fcc\"}],\"kv_namespaces\":[{\"binding\":\"OAUTH_KV\",\"id\":\"6b94ff702e504e14a7730cee73a0f6ff\"}],\"durable_objects\":{\"bindings\":[{\"name\":\"AFW_DOSSIER_EVENTS_NODE\",\"class_name\":\"AfwOwnEventNode\"},{\"name\":\"AFW_FINITE_TRIAL_CONTROL\",\"class_name\":\"IndependentClosure\",\"script_name\":\"agent-friendly-web-independent-closure-qa\"}]},\"version_metadata\":{\"binding\":\"AFW_FINITE_TRIAL_VERSION\"},\"exports\":{\"default\":{\"type\":\"worker\"},\"AfwNodeControl\":{\"type\":\"worker\"},\"AfwOwnEventNode\":{\"type\":\"durable-object\",\"storage\":\"sqlite\",\"container\":\"agent-friendly-web-delegated-canary-afwowneventnode\"}},\"unsafe\":{\"metadata\":{\"exports\":{\"default\":{\"type\":\"worker\"},\"AfwNodeControl\":{\"type\":\"worker\"},\"AfwOwnEventNode\":{\"type\":\"durable-object\",\"storage\":\"sqlite\",\"container\":\"agent-friendly-web-delegated-canary-afwowneventnode\"}},\"containers\":[{\"class_name\":\"AfwOwnEventNode\"}]}}}});\n export function finitePublicProfileTemplate(role){if(typeof role!=='string'||!Object.hasOwn(templates,role))fail();return templates[role];}\n export function finiteWranglerProfileTemplate(role){if(typeof role!=='string'||!Object.hasOwn(configs,role))fail();return configs[role];}\n export function projectFinitePublicConfiguration(input){\n@@ -53,7 +53,7 @@ export function qualifyFiniteSourceRoleMetadata({manifest,role,metadata}){\n  const m=validateFinitePackageManifest(manifest),projection=projectFinitePublicConfiguration({role,metadata});\n  const publicStatic=staticCommitment(role,projection);\n  if(canonical(m.modules[role].publicStatic)!==canonical(publicStatic))fail();\n- return freeze({publicStatic,privateFull:{configurationAlgorithm:role==='qaLive'?'qaClosedConfigurationHash':'restorationConfigurationHash',activationAlgorithm:role==='canaryLive'?'activationConfigurationHash':null,privateSlots:projection.bindings.filter(b=>b.privateSlot).map(b=>b.name),nativeValidationRequired:true}});\n+ return freeze({publicStatic,privateFull:{configurationAlgorithm:role==='qaLive'?'qaClosedConfigurationHash':'restorationConfigurationHash',activationAlgorithm:role==='canaryLive'?'finiteActivationConfigurationHash':null,privateSlots:projection.bindings.filter(b=>b.privateSlot).map(b=>b.name),nativeValidationRequired:true}});\n }\n export function qualifyFiniteSourcePackage({manifest}){\n  const m=validateFinitePackageManifest(manifest);"
+    },
+    {
+      "path": "test/fixtures/finite-native-conduit-receiver.mjs",
+      "status": "modified",
+      "additions": 5,
+      "deletions": 4,
+      "patch": "@@ -2,10 +2,10 @@ import {DurableObject} from 'cloudflare:workers';\n import {createFiniteOwnerNativeReceiver} from '../../lib/mcp-qa-finite-owner-native-receiver.mjs';\n // SYN observations are bounded booleans/counts only, never credentials/body.\n export class NativeReceiverFixture extends DurableObject{\n- constructor(ctx,env){super(ctx,env);this.observed={receiverEntered:0,receiverAborted:false,beforeGuardAborted:null,held:false,settled:false,privateHeaders:[],callerHeader:false,businessRows:0};}\n+ constructor(ctx,env){super(ctx,env);this.observed={receiverEntered:0,receiverAborted:false,beforeGuardAborted:null,held:false,readReturned:false,readCancelled:false,settled:false,privateHeaders:[],callerHeader:false,businessRows:0};}\n  async hold(){this.heldMode=true;}\n  async release(){this.releaseRead?.();}\n- async reset(){this.heldMode=false;this.releaseRead?.();this.observed={receiverEntered:0,receiverAborted:false,beforeGuardAborted:null,held:false,settled:false,privateHeaders:[],callerHeader:false,businessRows:0};}\n+ async reset(){this.heldMode=false;this.releaseRead?.();this.observed={receiverEntered:0,receiverAborted:false,beforeGuardAborted:null,held:false,readReturned:false,readCancelled:false,settled:false,privateHeaders:[],callerHeader:false,businessRows:0};}\n  async state(){return {...this.observed,businessRows:(await this.ctx.storage.list()).size};}\n  async fetch(request){\n   const seen=this.observed;seen.receiverEntered++;seen.privateHeaders=[...request.headers.keys()].filter(k=>k.startsWith('x-afw-finite-')).sort();seen.callerHeader=request.headers.has('X-Caller-Arbitrary');\n@@ -16,11 +16,12 @@ export class NativeReceiverFixture extends DurableObject{\n    // Hold the actual native read's settlement, not a replacement signal.\n    const stream=request.body,getReader=stream.getReader;\n    stream.getReader=()=>{\n-    const reader=Reflect.apply(getReader,stream,[]),read=reader.read;let once=false;\n+    const reader=Reflect.apply(getReader,stream,[]),read=reader.read,cancel=reader.cancel;let once=false;\n+    reader.cancel=(...args)=>{seen.readCancelled=true;return Reflect.apply(cancel,reader,args);};\n     reader.read=async()=>{\n      const value=await Reflect.apply(read,reader,[]);\n      if(!once){once=true;seen.held=true;await new Promise(resolve=>{this.releaseRead=resolve;});}\n-     seen.beforeGuardAborted=request.signal.aborted;return value;\n+     seen.readReturned=true;seen.beforeGuardAborted=request.signal.aborted;return value;\n     };return reader;\n    };\n   }"
+    },
+    {
+      "path": "test/mcp-qa-finite-owner-native-conduit-native.test.mjs",
+      "status": "modified",
+      "additions": 10,
+      "deletions": 3,
+      "patch": "@@ -40,9 +40,16 @@ test('actual native signal capability observes receiver separately during held r\n  const pending=f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded'},body:'SYN=bounded'}).then(async r=>({status:r.status,body:await r.json()}),()=>({senderRejected:true}));\n  await f.wait('held');await f.call('/fixture/abort');\n  const sender=await pending,held=await f.state();\n- await f.call('/fixture/release');const settled=await f.wait('settled');\n- assert.equal(held.receiverEntered,1);assert.equal(settled.businessRows,0);\n- assert.equal(typeof held.receiverAborted,'boolean');assert.equal(typeof settled.beforeGuardAborted,'boolean');\n+ await f.call('/fixture/release');const settled=await f.wait('readCancelled');\n+ assert.equal(held.receiverEntered,1);\n+ assert.equal(held.readReturned,false,'held native read has not physically returned after sender settles');\n+ assert.equal(held.readCancelled,false,'held read cancellation awaits physical release');\n+ assert.equal(settled.readReturned,true,'actual native read eventually returned');\n+ assert.equal(settled.readCancelled,true,'product finiteNativeBytes caught the denied post-read lease guard and canceled the real reader');\n+ assert.equal(settled.settled,true,'receiver handler has returned after cancellation');\n+ assert.equal(settled.businessRows,0,'no storage mutation follows denied guard');\n+ assert.equal(held.receiverAborted,true,'actual receiver Request.signal must abort while read remains held');\n+ assert.equal(settled.beforeGuardAborted,true,'actual receiver signal must still be aborted immediately before product guard');\n  const qualification=held.receiverAborted&&settled.beforeGuardAborted?'receiver_abort_observed':'receiver_abort_NOT_qualified';\n  console.log('native_signal_capability',JSON.stringify({qualification,sender,receiverDuringHeldRead:held.receiverAborted,receiverBeforeGuard:settled.beforeGuardAborted,profiles:f.profiles,businessProducer:false}));\n });"
+    },
+    {
+      "path": "test/mcp-qa-finite-profile.test.mjs",
+      "status": "modified",
+      "additions": 54,
+      "deletions": 9,
+      "patch": "@@ -1,9 +1,9 @@\n import {createHash} from 'node:crypto';\n import {inertNamedConfirmationPolicy} from './fixtures/inert-named-confirmation-policy.mjs';\n-import {validateReleaseOperatorBundle} from '../lib/mcp-release-operator-policy.mjs';\n+import {validateReleaseOperatorBundle,validateFiniteReleaseOperatorBundle} from '../lib/mcp-release-operator-policy.mjs';\n import test from 'node:test';\n import assert from 'node:assert/strict';\n-import {activationConfigurationHash} from '../lib/mcp-activation-observer.mjs';\n+import {activationConfigurationHash,finiteActivationConfigurationHash} from '../lib/mcp-activation-observer.mjs';\n import {restorationConfigurationHash} from '../lib/mcp-restoration-configuration.mjs';\n let api;\n try{api=await import('../lib/mcp-qa-finite-profile.mjs');}catch{/* Missing implementation is an explicit RED assertion. */}\n@@ -13,22 +13,23 @@ function fixture(){\n  for(const b of v.bindings)if(b.privateSlot){delete b.privateSlot;b.text='SYNTHETIC-PRIVATE-'+b.name;}\n  return v;\n }\n-test('private_projection_preserves_full_fingerprint',()=>{\n+test('candidate_private_projection_full_hash',()=>{\n  const script='export default {fetch(){return new Response(null,{status:404})}}';\n  const artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:createHash('sha256').update(script).digest('hex'),sourceCheck:'git-inputs-before-after-v1'};\n  const policy=inertNamedConfirmationPolicy(artifact),a=fixture();\n  for(const binding of a.bindings){const original=policy.observation.configuration.bindings.find(x=>x.name===binding.name);if(original&&binding.type==='plain_text'&&original.type==='plain_text')binding.text=original.text;}\n  const b=structuredClone(a),event=b.bindings.find(x=>x.name==='AFW_DOSSIER_EVENTS_POLICY');\n  const changed=JSON.parse(event.text);changed.grantId='ci-only-second-inert';event.text=JSON.stringify(changed);\n- for(const configuration of [a,b]){const p=structuredClone(policy);p.observation.configuration=configuration;p.plan.configurationHash=activationConfigurationHash(configuration);assert.equal(validateReleaseOperatorBundle({artifact,policy:p}),true);}\n+ for(const configuration of [a,b]){const p=structuredClone(policy);p.observation.configuration=configuration;p.plan.configurationHash=finiteActivationConfigurationHash(configuration);assert.equal(validateFiniteReleaseOperatorBundle({artifact,policy:p}),true);}\n  const bad=structuredClone(b),raw=bad.bindings.find(x=>x.name==='AFW_DOSSIER_EVENTS_POLICY'),invalid=JSON.parse(raw.text);invalid.clientId='wrong-private-client';raw.text=JSON.stringify(invalid);\n- const invalidPolicy=structuredClone(policy);invalidPolicy.observation.configuration=bad;invalidPolicy.plan.configurationHash=activationConfigurationHash(bad);\n+ const invalidPolicy=structuredClone(policy);invalidPolicy.observation.configuration=bad;invalidPolicy.plan.configurationHash=finiteActivationConfigurationHash(invalidPolicy.observation.configuration);\n  assert.deepEqual(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:b}),api.projectFinitePublicConfiguration({role:'canaryLive',metadata:bad}));\n- assert.throws(()=>validateReleaseOperatorBundle({artifact,policy:invalidPolicy}),/Release operator plan unavailable/);\n+ assert.throws(()=>validateFiniteReleaseOperatorBundle({artifact,policy:invalidPolicy}),/Release operator plan unavailable/);\n  assert.deepEqual(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:a}),api.projectFinitePublicConfiguration({role:'canaryLive',metadata:b}));\n- assert.notEqual(activationConfigurationHash(a),activationConfigurationHash(b));\n+ assert.throws(()=>activationConfigurationHash(a),'old activation reader must reject new candidate flags');\n+ assert.notEqual(finiteActivationConfigurationHash(a),finiteActivationConfigurationHash(b));\n  assert.notEqual(restorationConfigurationHash(a),restorationConfigurationHash(b));\n- assert.notEqual(activationConfigurationHash(a),restorationConfigurationHash(a));\n+ assert.notEqual(finiteActivationConfigurationHash(a),restorationConfigurationHash(a));\n  const projected=JSON.stringify(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:a}));\n  assert(!projected.includes('SYNTHETIC-PRIVATE'));\n });\n@@ -82,7 +83,51 @@ test('finite canary source preserves existing SQLite Container relationship and\n  const actual=fixture(),detached=structuredClone(actual);\n  delete detached.exports.AfwOwnEventNode.container;detached.containers=[];\n  assert.throws(()=>api.projectFinitePublicConfiguration({role:'canaryLive',metadata:detached}));\n- assert.notEqual(activationConfigurationHash(actual),activationConfigurationHash(detached));\n+ assert.throws(()=>activationConfigurationHash(actual),'old activation reader must not reinterpret new candidate');\n+ assert.notEqual(finiteActivationConfigurationHash(actual),finiteActivationConfigurationHash(detached));\n  assert.notEqual(restorationConfigurationHash(actual),restorationConfigurationHash(detached));\n  assert.equal(p.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_NODE').namespace_id,'d6fc71552de7494a863aca20365a572d');\n });\n+\n+test('new finite candidate flags are exact before every phase and reject old or expanded profiles',()=>{\n+ const expected={qaLive:['nodejs_compat','enable_request_signal'],canaryLive:['nodejs_compat','global_fetch_strictly_public','enable_request_signal']};\n+ for(const role of Object.keys(expected)){\n+  const profile=role==='canaryLive'?fixture():structuredClone(api.finitePublicProfileTemplate(role));\n+  const template=api.finitePublicProfileTemplate(role),config=api.finiteWranglerProfileTemplate(role);\n+  assert.equal(template.compatibility_date,'2026-09-07');\n+  assert.equal(config.compatibility_date,'2026-09-07');\n+  assert.deepEqual(template.compatibility_flags,expected[role]);\n+  assert.deepEqual(config.compatibility_flags,expected[role]);\n+  assert.deepEqual(api.projectFinitePublicConfiguration({role,metadata:profile}).compatibility_flags,expected[role]);\n+  for(const flags of [expected[role].slice(0,-1),[...expected[role].slice(0,-1),'request_signal_passthrough'],[...expected[role],'request_signal_passthrough'],[...expected[role]].reverse()]){\n+   const changed=structuredClone(profile);changed.compatibility_flags=flags;\n+   assert.throws(()=>api.projectFinitePublicConfiguration({role,metadata:changed}),role+' must reject nonexact candidate flags');\n+  }\n+ }\n+});\n+\n+test('legacy bundle remains independently strict for the historical compatibility pair',()=>{\n+ const script='export default {fetch(){return new Response(null,{status:404})}}',artifact={script,sourceRevision:'a'.repeat(40),sourceTree:'b'.repeat(40),programHash:'c'.repeat(64),workerHash:createHash('sha256').update(script).digest('hex'),sourceCheck:'git-inputs-before-after-v1'};\n+ const policy=inertNamedConfirmationPolicy(artifact);\n+ assert.deepEqual(policy.observation.configuration.compatibility_flags,['nodejs_compat','global_fetch_strictly_public']);\n+ assert.equal(validateReleaseOperatorBundle({artifact,policy}),true);\n+ const historical=policy.observation.configuration,changed=structuredClone(historical),binding=changed.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_POLICY');\n+ binding.text=JSON.stringify({...JSON.parse(binding.text),grantId:'ci-only-second-inert'});\n+ assert.notEqual(activationConfigurationHash(historical),activationConfigurationHash(changed));\n+ assert.notEqual(restorationConfigurationHash(historical),restorationConfigurationHash(changed));\n+ assert.notEqual(activationConfigurationHash(historical),restorationConfigurationHash(historical));\n+ assert.throws(()=>validateFiniteReleaseOperatorBundle({artifact,policy}));\n+});\n+\n+test('candidate descriptor declares fixed finite activation while QA remains null',()=>{\n+ const M='a'.repeat(40),tree='b'.repeat(40),roles=['qaLive','qaClosed','canaryLive','canaryClosed','operatorClosed'];\n+ const versions={qaClosed:'c570b60b-95dc-48e1-89f3-9c4651691dbc',canaryClosed:'2607abae-cec3-4e35-89eb-8b8572262b54',operatorClosed:'855dc5c1-e757-49aa-a6f5-cb02f8d03ea4'},keys={qaClosed:'qaClosed',canaryClosed:'canary',operatorClosed:'operator'};\n+ const manifest={purpose:'afw.finite-native-package.v2',sourceRevision:M,sourceTree:tree,sourceCheck:'git-inputs-and-configuration-before-after-v1',buildWorkflowHash:'c'.repeat(64),modules:Object.fromEntries(roles.map(role=>[role,{provenance:versions[role]?{kind:'historical-content-pin.v1',receiptPath:'lib/mcp-qa-cloud-closed-pins.mjs',receiptBlobSha:'26213123304eea25e652a52d808d25b7e0e3475e',receiptKey:keys[role],versionId:versions[role]}:{kind:'compiled-source.v1',sourceRevision:M,sourceTree:tree},module:{name:role==='qaClosed'?'closed-rollback.mjs':'index.mjs',bytes:1,sha256:'d'.repeat(64),exports:[]},publicStatic:{purpose:'afw.finite-public-static-profile.v1',configurationHash:'1'.repeat(64),profileHash:'2'.repeat(64),bindingsHash:'3'.repeat(64)}}])),compatibility:Object.fromEntries(['qaClassesPreserved','qaNamespacesPreserved','canaryClassesPreserved','canaryNamespacesPreserved','closedEntrypointsDenied','legacyContainmentQualified'].map(k=>[k,true]))};\n+\n+ for(const role of ['qaLive','canaryLive']){\n+  manifest.modules[role].publicStatic=api.finitePublicStaticExpectation(role);\n+  const metadata=role==='canaryLive'?fixture():structuredClone(api.finitePublicProfileTemplate(role));\n+  const descriptor=api.qualifyFiniteSourceRoleMetadata({manifest,role,metadata});\n+  assert.equal(descriptor.privateFull.activationAlgorithm,role==='canaryLive'?'finiteActivationConfigurationHash':null);\n+ }\n+});"
+    },
+    {
+      "path": "wrangler.independent-closure-qa.finite.jsonc",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 1,
+      "patch": "@@ -112,7 +112,8 @@\n     \"AFW_RELEASE_RESERVATION_WORKFLOW_ENABLED\": \"true\"\n   },\n   \"compatibility_flags\": [\n-    \"nodejs_compat\"\n+    \"nodejs_compat\",\n+    \"enable_request_signal\"\n   ],\n   \"version_metadata\": {\n     \"binding\": \"AFW_QA_VERSION\""
+    },
+    {
+      "path": "wrangler.mcp-own.finite.jsonc",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 1,
+      "patch": "@@ -5,7 +5,8 @@\n   \"compatibility_date\": \"2026-09-07\",\n   \"compatibility_flags\": [\n     \"nodejs_compat\",\n-    \"global_fetch_strictly_public\"\n+    \"global_fetch_strictly_public\",\n+    \"enable_request_signal\"\n   ],\n   \"workers_dev\": false,\n   \"preview_urls\": false,"
+    }
+  ],
+  "originalCheckpointCommits": [
+    {
+      "sha": "1d601fcce56f0f98d10a0ad32f4a5737d6b55dc0",
+      "message": "test(afw): require actual finite receiver signal abort"
+    },
+    {
+      "sha": "d2e5d8ce513ada7c9ecb19829a2bff60c5597cd5",
+      "message": "feat(afw): test exact finite incoming signal opt-in"
+    },
+    {
+      "sha": "c338f90c9ce29f6dbbfff70274e1c7f070c6a38c",
+      "message": "test(afw): verify exact finite profiles and receiver guard settlement"
+    },
+    {
+      "sha": "ccc7624e52c54884691343c0495bbe17c06dcd56",
+      "message": "test(afw): distinguish logical receiver return from retained native read"
+    },
+    {
+      "sha": "e29fe8ec607e3ac702a3b09f6795a694c2723195",
+      "message": "test(afw): await physical reader cancellation after release"
+    },
+    {
+      "sha": "e7ed164d08dddd4f2fca0004d54c8ea52a3688d5",
+      "message": "test(afw): keep old activation fixture pinned apart from new candidates"
+    },
+    {
+      "sha": "ab85ac8f9e0e1383d573d49fee6742c04976e5b1",
+      "message": "ci(afw): isolate finite compilation and historical diagnostics"
+    },
+    {
+      "sha": "62307cbad80455689486ff52e2216867bfecddcc",
+      "message": "ci(afw): inventory finite candidate hash call sites"
+    },
+    {
+      "sha": "e6f6aff834fdf0b9af78665e98c6835e90911077",
+      "message": "ci(afw): use available scoped grep for finite hash inventory"
+    },
+    {
+      "sha": "bd923bab7225212e35e054b14c132de78195ec5e",
+      "message": "ci(afw): complete finite bundle hash call site inventory"
+    },
+    {
+      "sha": "3fb1751c901059c9acdb2a9f1de2f6470b9f3c41",
+      "message": "docs(afw): checkpoint signal opt-in evidence and Known path blocker"
+    }
+  ],
+  "acceptedDependencies": [
+    "C1 SpecPass/QualityApproved",
+    "C2 SpecPass/QualityApproved",
+    "C3 SpecPass/QualityApproved"
+  ],
+  "note": "Not a purported full parent-branch diff. This is the explicitly separated original source unit; fresh task reviews cover the excluded compatibility checkpoint patches. Later full branch review remains required."
+}
