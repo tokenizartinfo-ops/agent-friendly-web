@@ -66,7 +66,7 @@ test('native reconstruction, noAck and advanced delivery1/2 preserve original ze
  f.alarmMode='normal';assert.equal((await plain(f.alarmAt(capsule.C0+60001))).status,'restored');
  rows=await plain(f.stub.snapshot());state=JSON.parse(rows.find(([k])=>k==='afw.finite-initial-cleanup.v1:state')[1]);assert.equal(state.deliveries,2);assert.equal(state.status,'complete');
  assert.equal(JSON.parse(rows.find(([k])=>k==='afw.finite-initial-cleanup.v1:plan')[1]).C1,capsule.C1);assert.equal(f.restores.length,1);
-}),'enrollment-restart'));
+},'enrollment-restart'));
 for(const corruption of ['orphan','hash','unknown','head','policy','permission','foreign'])test('factual '+corruption+' obligation refuses restoration and all forwards',()=>world(async f=>{
  const {capsule}=await enroll(f);
  await f.stub.enrollmentCorrupt(corruption);

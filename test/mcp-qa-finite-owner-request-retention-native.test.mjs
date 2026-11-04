@@ -31,9 +31,9 @@ test('actual unmounted host GET and POST stay pending without form or ticket con
 test('genuine consumed stage adopts the original request in place and replay cannot effect',async t=>{
  const f=await setup(t),screen=await f.screen(),input={url:O+'/connections/finite-prepare',headers:{'Cf-Access-Jwt-Assertion':f.token,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:screen.cookie},body:new URLSearchParams({handle:screen.handle,projectRef:screen.projectRef,decision:'approve'}).toString()};
  const result=await f.json('/fixture/request-publish',input);
- assert.equal(result.answer?.status,'installed');assert.equal(result.continued,true);assert.equal(result.replayed,false);assert.equal(f.posts(),2);
+ assert.equal(result.answer?.status,'admin_pending');assert.equal(result.continued,true);assert.equal(result.replayed,false);assert.equal(f.posts(),0);
  try{await blocked(f);}finally{await f.json('/fixture/request-release',{});}await wait(f,'settled');await new Promise(r=>setTimeout(r,30));
- assert.deepEqual(await f.json('/fixture/request-missing-admission',{preconnectionId:'a'.repeat(64),stage:'connection'}),{accepted:false});assert.equal(f.posts(),2);
+ assert.deepEqual(await f.json('/fixture/request-missing-admission',{preconnectionId:'a'.repeat(64),stage:'connection'}),{accepted:false});assert.equal(f.posts(),0);
 });
 test('resolver genuine children and proof descendants retain root and five second bound',async t=>{
  const f=await native(t),r=await f.json('/fixture/request-prepare',{mode:'normal',headers:{'Cf-Access-Jwt-Assertion':f.token}});
