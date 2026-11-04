@@ -46,6 +46,37 @@ export class FiniteOwnerFixture extends DurableObject{
    finally{parent.finish();}
   }
 
+
+  if(path==='/fixture/owner-borrow'){
+   const input=await request.json(),original=new Request(origin+'/connections/finite-prepare',{method:'POST',headers:input.headers,body:input.body}),parent=createFiniteOwnerRequestLease(original);
+   const ctx=this.ctx,env=this.env,gate={held:false,settled:false};this.requestCtx=ctx;this.requestGate=gate;
+   try{return await stageWork.observeFiniteOwnerRequestWork({ctx,env,originalLease:parent.lease},async()=>{
+    const prepared=await ownerPreparation.prepareFiniteOwnerChoice({ctx,env,request:original},parent.lease);
+    const refs={ctx,env,preconnectionId:prepared.preconnectionId,stage:prepared.stage};
+    const admission=ownerPreparation.consumeFiniteOwnerStageAdmission(refs,parent.lease);
+    let replayDenied=false;try{ownerPreparation.consumeFiniteOwnerStageAdmission(refs,parent.lease);}catch{replayDenied=true;}
+    return await stageWork.adoptFiniteOwnerRequestStageWork({ctx,env,admission,originalLease:parent.lease},async()=>{
+     const borrow=arg=>stageWork.observeFiniteFactualReadWork({ctx,env,originalLease:parent.lease,requestLease:parent.lease,...arg},async()=>true);
+     const denied={};const reject=(key,fn)=>{try{fn();denied[key]=false;}catch{denied[key]=true;}};
+     const foreign=createFiniteOwnerRequestLease(new Request(origin));
+     try{reject('foreign',()=>borrow({requestLease:foreign.lease}));reject('clone',()=>borrow({requestLease:{...parent.lease}}));}
+     finally{foreign.finish();}
+     reject('ctx',()=>borrow({ctx:{storage:ctx.storage}}));
+     const storage=ctx.storage,db=env.RELEASE_DB;
+     // Native ctx.storage is readonly. Substitution is tested through a distinct
+     // context; the actual DB binding can drift and must not be borrowed.
+     reject('storage',()=>borrow({ctx:{id:ctx.id,storage:{}}}));
+     env.RELEASE_DB={};reject('db',()=>borrow({}));env.RELEASE_DB=db;
+     let borrowed=false;
+     try{borrowed=await stageWork.observeFiniteFactualReadWork({ctx,env,originalLease:parent.lease,requestLease:parent.lease},async()=>{
+      const actual=Promise.resolve(storage.get('fixture:source')).then(()=>new Promise(resolve=>{gate.held=true;gate.release=()=>{gate.settled=true;resolve();};}));
+      stageWork.retainFiniteOwnerStagePromise(actual);await Promise.resolve();return true;
+     });}catch{}
+     return Response.json({borrowed,replayDenied,denied});
+    });
+   });}finally{parent.finish();}
+  }
+
   if(path==='/fixture/admission'){
    const input=await request.json(),original=new Request(input.url,{method:'POST',headers:input.headers,body:input.body}),parent=ownerPreparation.createFiniteOwnerRequestLease(original);
    let result,first=false,second=false,wrong=false,expired=false,qualified=false,deadlineBound=false,cloneDenied=false,finishedDenied=false;

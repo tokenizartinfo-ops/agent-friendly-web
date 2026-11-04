@@ -20,5 +20,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Causal boundary RED
-        run: node --test --test-timeout=10000 test/mcp-qa-finite-owner-native-conduit.test.mjs
+      - name: Boundary GREEN and private context causal RED
+        run: |
+          npx eslint lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-owner-native-conduit.test.mjs test/mcp-qa-finite-owner-context.test.mjs test/fixtures/finite-owner-worker.mjs
+          node --test --test-timeout=30000 test/mcp-qa-finite-owner-native-conduit.test.mjs test/mcp-qa-finite-owner-context.test.mjs
