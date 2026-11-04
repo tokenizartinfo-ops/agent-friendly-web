@@ -34,7 +34,7 @@
 **Interfaces:** Exact record kinds/identity/prefix and createFinitePreparationIssuerJournal({ctx,env}) / createFinitePreparationIssuerStore({ctx,env}) fixed methods are in spec. Store consumes original guarded lease and fixed typed DATA, not arbitrary db/now/query/callback. Same actual result objects retain the live SQL continuation; serialized receipts/history cannot issue another grant.
 
 - [ ] Write native/schema/codec RED cases for missing monotonic fence/actual late deadline/no-notice exact recovery; identify new-interface absence explicitly and exclude fixture parse failures.
-- [ ] Run targeted causal cases in credential-free Node22 Actions; record exact head/job/output.
+- [ ] Run targeted causal cases in credential-free Node22 Actions; record exact head/job/output. Put scoped lint before long native groups; avoid binding a local variable named module (Next lint). After causal RED, cheap source/graph/schema preflight should precede broad native regression to fail fast without repeating passed groups.
 - [ ] Implement strict codecs and fixed native append-once journal with actual commit/sync/readback, retained I/O and no reconstructed issuing continuation.
 - [ ] Implement source-only table and no-delete/identity/terminal triggers; exact schema/clock preflight. Do NOT install remotely or change ordinary schema/store semantics.
 - [ ] Implement fixed OPEN/consent/consume/grant SQL joins and private one-use actual consume witness; DBnow expires/deadlines and original UUID.
@@ -45,4 +45,4 @@
 - [ ] Self-review full taskBASE..codeHEAD; remove temporary qualifier; report docs/superpowers/reports/2026-11-04-preparatory-issuer-fence.md with schema/source hashes, exact tests/warnings/limits and next Unit2b actualcomposition. Fresh task review before next implementation.
 
 ## Root preflight / activation status
-DRAFT FOR NEXT TASK, not dispatched while Unit1 writer/review active. Bind to primary only after Unit1 acceptance and record actual new BASE. Corrected architecture8e06dae and independent builder rulings incorporated: serverDBfencedAt, canonicalISO/DBexpiry, monotonic storage allowing qualified earlier futurehandoff, fresh first-primary readback. User ordinary technical delegation applies; no missing human design decision. Source/live readiness remains false; no current runtime schema presumed installed.
+Unit1 source accepted after independent SpecPass/QualityApproved (acceptance committed alongside this spec/plan). Actual implementation BASE is this spec/plan commit and will be recorded in the root ledger before dispatch. Corrected architecture8e06dae and independent builder rulings incorporated: serverDBfencedAt, canonicalISO/DBexpiry, monotonic storage allowing qualified earlier futurehandoff, fresh first-primary readback. User ordinary technical delegation applies; no missing human design decision. Source/live readiness remains false; no current runtime schema presumed installed.

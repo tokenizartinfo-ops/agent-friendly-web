@@ -1,0 +1,20 @@
+# Preparatory cleanup enrollment — SOURCE acceptance, 4 November 2026
+
+PROJECT AFW; repo tokenizartinfo-ops/agent-friendly-web; isolated feature source/GitHubActions. Documentation acceptance only; rollback revert source unit before separate promotion. No actual provider, Entry, deployment, permission, credentials, OAuth, cron, monitor, Max or other project action.
+
+TaskBASE e256ee1a43ca3125fdb12485ceab712b6a7e197e. Tested code5f39fba550157c4f34926f7fd1e47b4395e1426a; reportHEAD1fa96ab84aff1ed1ad287f48a673e4b282a18dd2 (aftercode only qualifier removal/report). Report docs/superpowers/reports/2026-11-04-preparation-cleanup-enrollment.md. Full reviewpackage docs/superpowers/reviews/packages/2026-11-04-preparation-cleanup-enrollment.diff.json at separate docsbranch0b456223a808302b06da5f5961604d317d7782b6.
+
+Independent reviewer review_preparation_cleanup_enrollment: SpecPass/QualityApproved, noCritical/Important/Minor. Full15commitdiff readonce; named focused enclosingrun/child/recovery/capsule/own-data contracts checked, no reruns or mutations. Genuine one-use consumer/same-entry adoption precedesprivate enroller; original selector equality, actualTicket/use/ProjectRef/CSRF ancestry reread, real native txfinalreturn/sync/readback/alarm thenimmutableAck. Unknown/saveddata never resume. Explicitpending/no ownerSEND, separate setupengine byte-identical. OriginalzeroStatecommitment separatedfromcurrentrecoveryState; existingcleanup C0/C1/counter/custody/primarybytes/backup/foreign/unknownbarriers preserved.
+
+Root independentlyread actual logs:
+- CausalRED746120f58/41898588470/job126814619777:0!==2rows after selector/prepared202/genuineadmission/pending. Earlierfixtureparse/date/parent/chronology failures excluded from causalRED.
+- 98c02877/41900952944/job126822897810:32newPASS+99affectedPASS,0fail/cancel/skip inbehaviorgroups; scopedlint/diffclean. Latercompilerfailed and wasnotcalledgreen.
+- Diagnosticf79f9ebe/41902194114/job126827280255: cleantrackedsource, unchangedcompilerline72 rejectedQAbootstrap-sourceincanarygraph. Rootruling rawcompilerDATAdescriptorsallowedincommonhelper, notactualbytesqualification; noimport/provenance/sizeguardrelaxed. Undefined/malformed/foreign/accessordescriptorsfailclosed. FullQA owner/alarm actualbootstrap/residency/primary/bytegates intact.
+- 45c0b08f/41903117759/job126830520494:36native/codecPASS0fail/cancel/skip; laterlintreservedidentifierfailed. Purealpha renameto moduleDescriptor at5f39; nobehaviorchange.
+- Final5f39/41903787998/job126832855789/attempt1: scopedlintclean/diffclean/actualcompiler1PASS0fail/cancel/skip. QA2006147B SHA85bf6198c7b5d9f91609554738da535b9f99e1968c31341ae523d0fc54559588; canary1950914B SHA0fbb8002bf71d587583728ef072091e753686833626c576fcebdbfee2a742b6f. TheseartifactsbindONLY5f39/tree82683a0919e1ec51c2d13b7f1c4b8c9bb20ae67f, notlaterdocHEAD. Noalltests-at-oneHEADclaim.
+
+NativefixtureSYNsource/identity/provider/time/manualalarmevents declared; warnings/RPCdisposal/deprecations retained as limitations, no physicalsettlement/provider/realalarmdelivery inference. Originalharnessminimalextension/test-onlySYNproducer, no productioncallback/bypass. Qualifier/temporarydiagnostic removed.
+
+Fourcomposedowner-derivedsetupfactspositives intentionallynarrowedbecauseownerfirstpublicationremainsfenced: normal delayedfacts, revokedgrant, changedrevision, changedselection. Unit2b MUSTrestoreallfourwhenqualifiedownerflowenabled; pendingnegativedoesnotcoverthoseoldbranches. Separateactualsetuptransportpositivesremain.
+
+Task preparation-cleanup-enrollment: COMPLETE (e256ee1..1fa96ab, reviewclean,0open). No runtime readiness: hostpending/unmounted/sourceforwardsunavailable, sourceceiling3Nov02:59expired, no newEntry. Nextunmountedissuerfence/grant-onlycleanup, Unit2bactualcomposition/notices+restoration, Unit3samealarmhandoff, UnitBcontroller/exactbaseline, wholebranch/fullchecks/actualcustody/endpoint/ceiling/latency beforeONEcoordinatedPCoffoccurrence. operationalReadiness=false;completePackage=false;PCoff=false.
