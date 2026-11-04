@@ -11,7 +11,7 @@ test('causal: genuine owner POST consumes admission for actual original native c
  const screen=await plain(f.stub.enrollmentScreen(token));
  assert.equal(screen.fixtureError,undefined,JSON.stringify(screen));
  assert.equal(screen.preconnectionId,capsule.preconnectionId);
- const r=await plain(f.stub.enrollmentPost(token,screen));assert.equal(r.prepared.status,202);assert.match(r.result.admitted,/^[a-f0-9]{64}$/);
+ const r=await plain(f.stub.enrollmentPost(token,screen));assert.equal(r.status,undefined,JSON.stringify(r));assert.equal(r.prepared.status,202);assert.match(r.result.admitted,/^[a-f0-9]{64}$/);
  assert.equal(r.result.outcome.status,'admin_pending');
  const rows=await plain(f.stub.snapshot());assert.equal(rows.filter(([k])=>k.startsWith(P)).length,2);
  assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);
