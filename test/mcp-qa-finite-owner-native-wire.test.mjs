@@ -67,3 +67,16 @@ test('registered genuine preparation child boundary preserves original start and
   assert.equal(boundary.startedAt,root.startedAt);assert.ok(boundary.deadline<=root.deadline);assert.ok(boundary.remainingMs<=5000);
  }finally{parent.finish();}
 });
+
+test('late native fetch and its subsequent real body cancellation remain occupied through physical settlement',async()=>{
+ let fetched,releaseFetch,releaseCancel,cancelStarted;
+ const entered=new Promise(r=>{fetched=r;}),cancelling=new Promise(r=>{cancelStarted=r;});
+ const f=sender(()=>{fetched();return new Promise(r=>{releaseFetch=r;});}),controller=new AbortController();
+ const pending=invoke(f,new Request(U,{signal:controller.signal}));await entered;controller.abort();assert.equal((await pending).status,503);
+ const other=createFiniteOwnerRequestLease(new Request(U)),probe=()=>observeFiniteOwnerRequestWork({ctx:f.ctx,env:f.env,originalLease:other.lease},async()=>true);
+ try{
+  assert.throws(probe);
+  releaseFetch(new Response(new ReadableStream({start(c){c.enqueue(new Uint8Array([1]));},cancel(){cancelStarted();return new Promise(r=>{releaseCancel=r;});}})));
+  await cancelling;assert.throws(probe);releaseCancel();await Promise.all(f.retained);assert.equal(await probe(),true);
+ }finally{releaseCancel?.();other.finish();}
+});

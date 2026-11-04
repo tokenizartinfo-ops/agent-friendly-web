@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
 const copy=async p=>{const r=await p;try{return JSON.parse(JSON.stringify(r));}finally{r[Symbol.dispose]?.();}};
 test('actual fixed QA adapter first GET uses exact original capsule selector and unrelated UI handles',async()=>{
- const f=await initialEntryHarness();
+ const f=await initialEntryHarness('private-choice');
  try{
   await f.stub.configure('normal');assert.equal((await copy(f.stub.invoke(f.refs))).status,'material_recorded');await f.stub.restoreMethods();
   const envelope=await copy(f.ownerRead()),token=await f.enrollmentToken(envelope.source),before=await copy(f.stub.snapshot());
