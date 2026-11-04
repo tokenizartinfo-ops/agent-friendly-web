@@ -1,0 +1,7 @@
+# Initial immutable capsule — source acceptance 4 November 2026
+
+Full task BASE006bf8578ad27fd7f20abc00a9418f369b2a8b4c..codebae656253793eca490e9d7d38cd3a8cb142ba0c4; full review package and report4c924bef3ebb6bf21e0adaba84324691d1743afa. Independent reviewer verdict SpecPass, QualityApproved; no Critical/Important/actionableMinor. Source task complete, not runtime acceptance.
+
+Actual Completion transaction/sync/readback precedes capsule append inside same surviving child; absence and exact originaljournal/Awitnesschecks, retainedreads/writes/sync/readback and actual M/Aidentity were reviewed. Strict canonicalgrammar/link/time checks and completebindingshash convention approved. Native tests cover conflicting/coherent drift, ACKloss/restart/heldwork/expiry/no replay/cleanupcompatibility; newly touched RPCresults disposedfinally. ExistingrelatedCI evidence verifiedbyroot: Actions41873478253,140focused/102consumers/23compiler+lint,0fail/cancel/skip. No tests rerunbyreviewer.
+
+No external deployedmodule/provider/owner/PCoff proof implied; operationalReadiness=false,completePackage=false,expiredceiling andunavailableownerseams appropriate. Next boundedfeaturebranchintegration of alreadyacceptedreadonly helper+hostA. Do notcopyincomingtemporaryqualifier; primaryfeaturequalifier mayserve development checks only and alltemporaryqualifiers mustbe absent before finalmainintegration/promotion. This feature-to-feature integration doesnotauthorize runtimeeffects or resetEntry.
