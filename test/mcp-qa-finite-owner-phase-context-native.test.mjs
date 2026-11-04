@@ -51,7 +51,7 @@ test('absent original issuer never triggers a global grant lookup',()=>world(asy
  f.phaseCurrent=await seed(f);const r=await read(f);assert.equal(r.fixtureError,undefined,JSON.stringify(r));const queries=(await plain(f.stub.phasePrimaryReads())).flat();assert(queries.every(q=>!q.includes('delegated_access_grants')));
 }));
 
-for(const drift of ['revision','owner','configuration','pointer','grant'])test('fresh current owner and current publication are independently rechecked: '+drift,()=>world(async f=>{
+for(const drift of ['revision','owner','configuration','pointer','grant','schema'])test('fresh current owner and current publication are independently rechecked: '+drift,()=>world(async f=>{
  f.phaseCurrent=await seed(f,'settled',null);if(drift==='grant'){const r=await plain(f.stub.seedPhaseIssuer('linked'));assert.equal(r.fixtureError,undefined,JSON.stringify(r));}
  f.phaseObservation=0;f.phaseDrift=drift;assert.equal((await read(f)).status,'unavailable');assert.equal(f.phaseObservation,2);
 }));
@@ -76,3 +76,16 @@ test('original retained request with 29 seconds elapsed keeps at most its remain
  const started=performance.now();assert.equal((await read(f,'request-budget')).status,'unavailable');assert(performance.now()-started<1500);assert.equal((await plain(f.stub.stats())).held,true);assert.equal((await plain(f.stub.probeStageAvailability())).available,false);await f.stub.release();await settled(f);
 }));
 test('same ambient original request borrows factual scope without a new root',()=>world(async f=>{assert.deepEqual(await read(f,'nested-request'),await read(f));}));
+
+test('absent exact issuer table and empty original prefix remain factual context only',()=>world(async f=>{
+ await f.db.prepare('DROP TABLE finite_preparation_issuer_fences').run();const closed=await read(f);assert.equal(closed.fixtureError,undefined,JSON.stringify(closed));assert.equal(closed.source.phase,'closed_ui');f.phaseCurrent=await seed(f);const installed=await read(f);assert.equal(installed.fixtureError,undefined,JSON.stringify(installed));assert.equal(installed.source.phase,'read_consent');const queries=(await plain(f.stub.phasePrimaryReads())).flat();assert(queries.some(q=>q.includes('FROM sqlite_schema')));assert(queries.every(q=>!q.includes('delegated_access_grants')&&!q.includes('FROM finite_preparation_issuer_fences')));
+}));
+test('original issuer reservation requires actual exact table',()=>world(async f=>{
+ f.phaseCurrent=await seed(f,'settled',null);const r=await plain(f.stub.seedPhaseIssuer('reservation'));assert.equal(r.fixtureError,undefined,JSON.stringify(r));await f.db.prepare('DROP TABLE finite_preparation_issuer_fences').run();assert.equal((await read(f)).status,'unavailable');
+}));
+test('existing orphan original fence denies without global grant lookup',()=>world(async f=>{
+ f.phaseCurrent=await seed(f,'settled',null);const r=await plain(f.stub.seedPhaseIssuer('open'));assert.equal(r.fixtureError,undefined,JSON.stringify(r));const rows=await plain(f.stub.snapshot()),original=rows.filter(([k])=>!k.startsWith('afw.finite-preparation-issuer.v1:'));await f.stub.removePhaseIssuerFixture();assert.equal((await read(f)).status,'unavailable');assert.deepEqual(await plain(f.stub.snapshot()),original);
+}));
+test('failed schema SELECT denies and malformed existing table never falls back',()=>world(async f=>{
+ assert.equal((await read(f,'schema-failure')).status,'unavailable');await f.db.prepare('DROP TABLE finite_preparation_issuer_fences').run();await f.db.prepare('CREATE TABLE finite_preparation_issuer_fences (preconnection_id TEXT PRIMARY KEY)').run();assert.equal((await read(f)).status,'unavailable');
+}));

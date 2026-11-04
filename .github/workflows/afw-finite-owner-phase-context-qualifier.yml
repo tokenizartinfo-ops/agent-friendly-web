@@ -9,7 +9,7 @@ concurrency:
   group: finite-owner-phase-context-source
   cancel-in-progress: false
 jobs:
-  green-issuer-and-retention:
+  lint:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -20,6 +20,43 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npx eslint lib/mcp-qa-finite-owner-stage-facts.mjs lib/mcp-qa-finite-preparation-enrollment-facts.mjs lib/mcp-qa-finite-owner-phase-context.mjs lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-preparation-cleanup.mjs lib/mcp-qa-finite-owner-preparation-qa.mjs test/mcp-qa-finite-owner-phase-context.test.mjs test/mcp-qa-finite-owner-phase-context-native.test.mjs test/fixtures/finite-owner-phase-context.mjs test/fixtures/finite-initial-entry-world.mjs
-      - run: node --test test/mcp-qa-finite-owner-phase-context.test.mjs
-      - run: node --test test/mcp-qa-finite-owner-phase-context-native.test.mjs
+      - run: npm run lint
+  phase:
+    needs: lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --test test/mcp-qa-finite-owner-phase-context.test.mjs test/mcp-qa-finite-owner-phase-context-native.test.mjs
+  original-cleanup:
+    needs: lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --test test/mcp-qa-finite-initial-owner-source-native.test.mjs test/mcp-qa-finite-initial-owner-source-records.test.mjs test/mcp-qa-finite-preparation-cleanup-native.test.mjs test/mcp-qa-finite-preparation-cleanup-records.test.mjs
+  continuation:
+    needs: lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --test test/mcp-qa-finite-owner-context.test.mjs test/mcp-qa-finite-owner-original-context-native.test.mjs test/mcp-qa-finite-owner-native-conduit.test.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs test/mcp-qa-finite-policy-setup-facts-native.test.mjs
