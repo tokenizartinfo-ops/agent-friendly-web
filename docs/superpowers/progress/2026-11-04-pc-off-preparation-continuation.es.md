@@ -1,3 +1,16 @@
+# SDD ledger — plan: docs/superpowers/plans/2026-11-04-preparation-cleanup-enrollment.md
+
+## Activo tras regresar Gabriel (4 noviembre 2026)
+Task1 preparación cleanup enrollment SOURCE-ONLY iniciada, BASE e256ee1a43ca3125fdb12485ceab712b6a7e197e, writer implement_preparation_cleanup_enrollment, branch feat/finite-native-cleanup-20261101. Spec/planguidados en mismoBASE, paths docs/superpowers/{specs,plans}/2026-11-04-preparation-cleanup-enrollment.md. Exact schemas/selectorfence/pendingoutcome/recovery/retention fixed. Report docs/superpowers/reports/2026-11-04-preparation-cleanup-enrollment.md. No otro productwriter.
+Preflight: arquitectura1db28ef ybuilderindependiente BUILDABLE ya completos, no repetir. Root adopta rulings selectororiginalexacto (mismatchdenies) ytransporte siemprepending/ceroSENDPOST trasenrollment hastaUnit2. Spec incluye cambio honesto de expectativas positivas y preservación setup/B1 sinbypass. Reconciliación actualbranch8241213 verificada antes de commitdocs e256. Root selfreview plan/spec: unatarea/revisiónindependiente con interfacesexactas, clocks/counter/zeroStateoriginalvsrecoverystate separados; sin decisiónhumana pendiente. Rollback revertir unidad antespromoción. No clon/deps/buildlocal; ledgerGitHub sustituye scriptslocalskill.
+
+Task owner-request-retention: COMPLETE accepted8241213398f3acee3c58d6667ab7cdb255588dc2; código0aa0a39, final44GREEN+scopedreviewApproved. NO redispatch/rerun. Checkpoint histórico debajo.
+
+Siguientes unidades NO implementadas: Unit2 correlaciónissuer original prewrite/readgrantantesnotice +reducción/restauraciónexacta +source/selectorcomposition; Unit3 handoffatómico alguardnominal; UnitBcontrollerclosed/exactbase/historicalholders; revisiónwholebranch/fullchecks y actualcustody/endpoint/ceilinglatency. Composición futura también debe probar factualsource rechecks bajo scopeowner yaadoptado (actual observeFiniteFactualReadWork presta solo modorequest); no inferir montaje compatible del lector desmontado. Esto NO autoriza readonly→owner ni modifica Task1. Unidadactual no abre rutasy enrollment noesreadiness.
+operationalReadiness=false;completePackage=false;PCoff=false. Sourceceiling3Nov02:59UTCvencido; sinEntry/provider/runtime/permiso/OTP/token/Max/monitor nuevo.
+
+---
+
 # CHECKPOINT VIGENTE — desconexión breve del owner, 2026-11-04 18:36:22 UTC
 
 Gabriel pidió guardar sin cerrar nada. Trabajo guardado EN GITHUB; no nuevos archivos/dependencias/builds/procesos locales. No nuevo ensayo, permisos ni login solicitado. Subagentes de esta unidad y arquitectura finalizaron; no tarea de código pendiente en un agente perdido. No iniciar ventana con vencimiento durante su desconexión.
