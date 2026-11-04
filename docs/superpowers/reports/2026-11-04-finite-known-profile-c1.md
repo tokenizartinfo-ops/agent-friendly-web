@@ -1,0 +1,30 @@
+# Checkpoint 1 — strict fixed finite candidate primitives
+
+Date: 2026-11-04 UTC. PROJECT: AFW. REPOSITORY: tokenizartinfo-ops/agent-friendly-web (1347578006). ENVIRONMENT: GitHub source branch and credential-free GitHub Actions. ORIGIN: delegated-canary.agentfriendlyweb.dev, not contacted. RESOURCE_TYPE: source code, tests and temporary CI qualifier. RESOURCE_ID: feat/finite-native-cleanup-20261101. ALLOWED_ACTION: Checkpoint 1 source, selected tests, report and qualifier cleanup. Rollback: revert this source unit on the feature branch; no runtime mutation occurred. The exact report HEAD is the commit that adds this document, recorded in the parent handoff after the CAS write.
+
+## Exact source boundary
+
+- BASE: `48462cdc36315f91b5417df9e8333cd6601f270d`; base tree `1e2379b488cd7249c79a94c7b12095dd32dd65a5`. Branch comparison was identical before source work.
+- CODE HEAD: `fb7b89885033749c10264095ccadeb252d0e78c8`; code tree `aefc4ebc2f2446e19fde0e34ec7baec1e6dfa41a`.
+- Report/cleanup HEAD: see this document's containing commit and exact handoff SHA. All branch moves used GitHub App expected-head CAS.
+- Product changes: only `lib/mcp-activation-observer.mjs` and `lib/mcp-release-operator-policy.mjs`. New tests: `test/mcp-finite-activation-compatibility.test.mjs` and `test/mcp-finite-named-activation.test.mjs`. The temporary `.github/workflows/finite-known-c1-qualification.yml` is removed in the report/cleanup commit. Parent `finite-request-signal-opt-in-qualification.yml` is untouched.
+- No reservation/runtime, finite consumer, native mount/producer, source flag, historical pin, provider, Entry, DDL, credential, permission, OAuth, OTP, cron or Max edit. No main/PR/merge.
+
+## Implementation
+
+The observer module now has private fixed legacy and finite flag arrays. The existing seven-field snapshot, canonical SHA-256, execution metadata, binding and size checks are shared privately. `activationConfigurationHash` and `createActivationObserver` keep the exact legacy pair `[nodejs_compat,global_fetch_strictly_public]`. The new `finiteActivationConfigurationHash` and `createFiniteActivationObserver` require exactly `[nodejs_compat,global_fetch_strictly_public,enable_request_signal]` at date `2026-09-07`, in that order. Approved and observed metadata use the same selected hash. The original readers, 5-second deadline, body limit and cancellation behavior remain in the shared observer body.
+
+The policy module shares private validation, named resolution and history bodies. Legacy exports keep publish/confirm/confirm_named and legacy hashing. New finite exports accept confirm_named only, use the finite hash, preserve exact artifact/target/manifest/identity/window/current-grant checks, and do not call `namespace.get`. Finite bundle failures return the sanitized policy error. No public strategy/hash callback, fallback profile, extra authority or business effect was added.
+
+## Causal qualification
+
+1. RED source `b6f482b87916018822430dd77aaa4b5e73802f06`: `node --test test/mcp-finite-activation-compatibility.test.mjs test/mcp-finite-named-activation.test.mjs` in Actions run [41927627756](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41927627756), job `126916074027`, attempt 1: 2 passed, 4 failed, 0 skipped/cancelled. Missing finite hash export caused TypeError and the second test module import failed on that missing export. The initial legacy positive fixture also failed because its synthetic version metadata omitted the DO binding; that test setup was corrected before GREEN. This RED is causal for missing exports but is not a clean isolated RED for every new assertion.
+2. First GREEN source `06d8f29c574454056b19c2b6b3e867a728605f54`: Actions run [41927841591](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41927841591), job `126916833734`, attempt 1: lint 0 errors/16 warnings, selected 22/22 passed, 0 fail/skip/cancel. This run emitted the original literal fixture's legacy digest for pinning.
+3. Digest/operation assertion source `a81a6db504ced20b5601cdf37f698b8a039fae2f`: Actions run [41928123688](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41928123688), job `126917816314`, attempt 1: lint 0 errors/16 warnings; selected 22/22 passed, 0 fail/skip/cancel.
+4. Final CODE HEAD `fb7b89885033749c10264095ccadeb252d0e78c8`: `npm run lint` then `node --test test/mcp-finite-activation-compatibility.test.mjs test/mcp-finite-named-activation.test.mjs test/mcp-activation-observer.test.mjs test/mcp-named-activation.test.mjs`, Actions run [41928462320](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41928462320), job `126918982084`, attempt 1: SUCCESS, lint 0 errors/16 warnings; 22 passed, 0 failed, 0 cancelled, 0 skipped. Node punycode deprecation and Actions Node 20-to-24 action warnings were observed. All actual output was read before this report.
+
+The legacy golden digest from the old implementation's literal seven-field fixture is `b35fa92f070cde9b87142997c223c5a3067c702fc594c435a9164f50bbee4f33`; it is now asserted literally and against an independently canonicalized SHA-256 calculation. The candidate digest is independently computed from its actual triple and sorted bindings. The tests reject old/new cross-use, missing/extra/wrong/reordered flags and date, accessor without invocation and secret content; assert input non-mutation; verify positive legacy and finite observers; verify finite bundle/plan/history plus binding/current grant and identity drift. Existing legacy named/native private confirmation cases remain positive in the selected suite.
+
+## Boundary and handoff
+
+All provider responses, credentials, manifests, namespace identities and history fixtures in this checkpoint are synthetic; Actions is actual cloud source execution. No provider or runtime operation occurred. Source ceiling `2026-11-03T02:59:00Z` is expired. `operationalReadiness=false`, `completePackage=false`, `PCoff=false`. This is a prerequisite primitive checkpoint only. Root reviews the full BASE diff independently before assigning Checkpoint 2. No self-acceptance or review dispatch.
