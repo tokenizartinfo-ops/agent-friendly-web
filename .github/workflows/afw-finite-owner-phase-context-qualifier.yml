@@ -1,0 +1,23 @@
+name: Finite owner phase context source qualifier
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-owner-phase-context-qualifier.yml]
+permissions:
+  contents: read
+concurrency:
+  group: finite-owner-phase-context-source
+  cancel-in-progress: false
+jobs:
+  red-data:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --test test/mcp-qa-finite-owner-phase-context.test.mjs
