@@ -9,7 +9,7 @@ test('bounded immutable canonical domain-separated DATA exports only Enrollment/
  for(const [kind,value]of [['Enrollment',input()],['Ack',{enrollmentHash:h,stateHash:h,alarmAt:C0,acknowledgedAt:I0+401000}]]){
   const sealed=seal(kind,value),raw=encode(kind,sealed);assert.deepEqual(decode(kind,raw),sealed);assert(Object.isFrozen(sealed));assert(Buffer.byteLength(raw)<=8192);
   assert.throws(()=>decode(kind,raw+' '));assert.throws(()=>decode(kind,raw.replace(sealed.recordHash,'f'.repeat(64))));
-  assert.throws(()=>seal(kind,{...value,unknown:true}));assert.throws(()=>seal('Send',value));
+  assert.throws(()=>seal(kind,{...value,unknown:true}));assert.throws(()=>seal('Send',value));assert.throws(()=>seal(kind,{...value,purpose:sealed.purpose}));
  }
 });
 test('reject accessors/prototypes/symbols/toJSON before executing user code',()=>{
