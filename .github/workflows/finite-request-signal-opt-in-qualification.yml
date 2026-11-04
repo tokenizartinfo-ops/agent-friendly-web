@@ -17,4 +17,4 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
       - name: Finite hash and named plan call site inventory
-        run: rg -n 'activationConfigurationHash|resolveNamedActivationPlan|validateNamedCancellationHistory|createActivationObserver' lib/mcp-qa-finite-*.mjs lib/mcp-finite-*.mjs
+        run: grep -nE 'activationConfigurationHash|resolveNamedActivationPlan|validateNamedCancellationHistory|createActivationObserver' lib/mcp-qa-finite-*.mjs lib/mcp-finite-*.mjs
