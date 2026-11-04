@@ -22,5 +22,21 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Scoped syntax and lint preflight
         run: npx eslint lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-preparation-qa.mjs lib/mcp-qa-finite-owner-native-wire.mjs lib/mcp-qa-finite-owner-native-bridge.mjs lib/mcp-qa-finite-owner-native-receiver.mjs test/fixtures/finite-native-conduit-sender.mjs test/fixtures/finite-native-conduit-receiver.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-context.test.mjs test/mcp-qa-finite-owner-native-wire.test.mjs test/mcp-qa-finite-owner-native-conduit-native.test.mjs test/mcp-qa-finite-owner-original-context-native.test.mjs
-      - name: Descendant monotonic boundary causal RED
-        run: node --test --test-timeout=10000 --test-name-pattern="descendant boundary cannot renew" test/mcp-qa-finite-owner-native-conduit.test.mjs
+      - name: Boundary GREEN and affected child descendants
+        run: |
+          node --test --test-timeout=10000 test/mcp-qa-finite-owner-native-conduit.test.mjs
+          timeout 60s node --test --test-timeout=30000 --test-name-pattern="resolver genuine children" test/mcp-qa-finite-owner-request-retention-native.test.mjs
+      - name: Final common graph compiler after monotonic fix
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {build} from 'esbuild';
+          import {compileFiniteNativeStaging} from './scripts/build-finite-native-package.mjs';
+          const r=await compileFiniteNativeStaging({cwd:process.cwd(),sourceRevision:process.env.GITHUB_SHA});
+          const forbidden=['lib/mcp-qa-finite-owner-preparation-qa.mjs','lib/mcp-qa-finite-initial-owner-source.mjs','lib/mcp-qa-finite-bootstrap-source.mjs','lib/mcp-qa-finite-candidate-residency.mjs'];
+          for(const p of forbidden)assert.equal(Object.hasOwn(r.metafiles.canaryLive.inputs,p),false,p);
+          for(const role of ['qaLive','canaryLive'])for(const p of ['lib/mcp-qa-finite-owner-native-bridge.mjs','lib/mcp-qa-finite-owner-native-receiver.mjs'])assert.equal(Object.hasOwn(r.metafiles[role].inputs,p),false,'must remain unmounted '+p);
+          const common=await build({entryPoints:['lib/mcp-qa-finite-owner-preparation.mjs'],bundle:true,write:false,metafile:true,format:'esm',platform:'neutral',external:['node:*','cloudflare:*']});
+          for(const p of forbidden)assert.equal(Object.hasOwn(common.metafile.inputs,p),false,p);
+          console.log(JSON.stringify({sourceRevision:r.sourceRevision,sourceTree:r.sourceTree,sourceCheck:r.sourceCheck,modules:r.modules,commonNoQa:true,unmounted:true,completePackage:r.completePackage,operationalReadiness:r.operationalReadiness}));
+          NODE
