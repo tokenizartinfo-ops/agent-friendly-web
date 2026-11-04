@@ -16,7 +16,7 @@ export class FiniteIssuerFixture extends DurableObject{
   if(b.case!=='missing_schema')for(const sql of schema)await exec(sql);
   const at=(await db.prepare("SELECT CAST(unixepoch('subsec')*1000 AS INTEGER) AS ms").first()).ms;
   const identity=seal('Identity',{preconnectionId:H,enrollmentHash:H,capsuleHash:H,sourceRevision:'b'.repeat(40),qaVersionId:U,actorId:this.ctx.id.toString(),subject:'SYN-owner',accessRealmHash:H,projectId:'SYN-project',projectRevision:1,clientId:'SYN-client',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',authorizationHash:'c'.repeat(64),grantId:U,requestedScopes:['afw:project:read','afw:evidence:read'],consentExpiresAt:new Date(at+12000).toISOString(),I0:at-1000,C0:at+899000,C1:at+1079000,reservedAt:at-5});
-  const i=b.case==='C0_queue'?seal('Identity',{...identity,I0:at-899500,C0:at+500,C1:at+180500,consentExpiresAt:new Date(at+500).toISOString()}):b.case==='consent_queue'?seal('Identity',{...identity,consentExpiresAt:new Date(at+500).toISOString()}):identity;
+  const i=['C0_queue','expired_cleanup'].includes(b.case)?seal('Identity',{...identity,I0:at-899200,C0:at+800,C1:at+180800,consentExpiresAt:new Date(at+800).toISOString()}):b.case==='consent_queue'?seal('Identity',{...identity,consentExpiresAt:new Date(at+500).toISOString()}):identity;
   const parent=new AbortController(),lease=Object.freeze({signal:parent.signal,assertCurrent(){if(parent.signal.aborted||Date.now()>=at+30000)throw Error('SYN original lease expired');}});
   let delay=null,lose=null,holdAck=null,sessionId=0,sqlCount=0,grantCommitted=false;
   const wrapper={withSession(mode){events.push({session:++sessionId,mode});const sid=sessionId,s=db.withSession(mode);return {prepare(sql){events.push({sid,sql});const actualSql=b.case==='unsupported_clock'&&sql.includes(' AS ms,typeof(')?sql.replaceAll("'subsec'","'SYN-unsupported'"):b.case==='unsupported_iso'&&sql.includes(' AS ms,typeof(')?sql.replaceAll("'2026-11-04T12:00:00.123Z'","'SYN-not-iso'"):sql;const stmt=s.prepare(actualSql);return {bind(...args){const bound=stmt.bind(...args);const call=method=>async()=>{sqlCount++;if(delay&&sql.includes(delay.needle)){const d=delay;delay=null;await sleep(d.ms);}const result=await bound[method]();if(sql.includes('INSERT INTO delegated_access_grants'))grantCommitted=true;if(holdAck&&sql.includes(holdAck.needle)){const d=holdAck;holdAck=null;await sleep(d.ms);}if(lose&&sql.includes(lose)){lose=null;throw Error('SYN lost actual native SQL ACK');}return result;};return {first:call('first'),all:call('all'),run:call('run')};}};}};}};
@@ -68,11 +68,12 @@ export class FiniteIssuerFixture extends DurableObject{
     await opened();await authorized();
     if(['consent_queue','C0_queue','deadline_queue'].includes(b.case)){
      const w=window();if(b.case==='deadline_queue')w.deadline=w.startedAt+300;
-     delay={needle:'UPDATE delegated_consent_sessions',ms:650};
+     delay={needle:'UPDATE delegated_consent_sessions',ms:b.case==='C0_queue'?1000:650};
      result.consumption=await store.consumeAuthorization({identity:i,consumedAt:new Date(at).toISOString(),window:w},lease);result.rows=await snapshot();
     }else{
      const consumption=await consume();result.consumed=!!consumption;
      if(b.case==='witness'){
+      result.rebuiltDenied=await rejected(async()=>store.insertReadGrant({...opts(),consumption:await db.prepare('SELECT * FROM delegated_consent_sessions WHERE handle_hash=?').bind(i.authorizationHash).first(),grant},lease));
       result.cloneDenied=await rejected(()=>store.insertReadGrant({...opts(),consumption:{...consumption},grant},lease));
       result.foreignDenied=await rejected(()=>createFinitePreparationIssuerStore({ctx,env}).insertReadGrant({...opts(),consumption,grant},lease));
       const otherLease=Object.freeze({signal:lease.signal,assertCurrent:lease.assertCurrent});
@@ -96,6 +97,7 @@ export class FiniteIssuerFixture extends DurableObject{
       let earlyBarrier=null;
       if(b.case==='held_grant_ack'){while(!grantCommitted&&!grantSettled)await sleep(1);if(!grantCommitted)await pending;earlyBarrier=await close();result.barrierBeforeGrantAck=!grantSettled;}
       const issued=await pending;result.grant=issued;
+      if(b.case==='expired_cleanup')await sleep(1000);
       if(b.case==='foreign_grants'){
        const bad={user_id:'foreign-owner',client_id:'foreign-client',project_id:'foreign-project',resource:'https://foreign.invalid/mcp',scopes_json:'[]',created_at:new Date(at+1).toISOString(),expires_at:new Date(at+11000).toISOString()};
        const original=await db.prepare('SELECT * FROM delegated_access_grants WHERE id=?').bind(i.grantId).first(),barrier=await close();result.denials={};

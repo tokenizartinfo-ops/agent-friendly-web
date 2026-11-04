@@ -26,7 +26,7 @@ test('SYN queue REAL SQL grant expiry denies actual late grant without repairing
 });
 test('REAL consumption UPDATE RETURNING privately witnesses same-instance surviving one-use grant',async t=>{
  const {result:r}=await scenario(t,'witness');assert.equal(r.error,undefined);
- for(const k of ['cloneDenied','foreignDenied','leaseDenied','replayDenied'])assert.equal(r[k],true,k);assert.equal(r.grant.status,'applied');assert.equal(r.rows.grants.results.length,1);
+ for(const k of ['cloneDenied','rebuiltDenied','foreignDenied','leaseDenied','replayDenied'])assert.equal(r[k],true,k);assert.equal(r.grant.status,'applied');assert.equal(r.rows.grants.results.length,1);
 });
 test('REAL serialized barrier orders future grant to zero and makes exact absence meaningful',async t=>{
  const {result:r}=await scenario(t,'grant_after_barrier');assert.equal(r.error,undefined);assert.equal(r.grant.status,'no_mutation');assert.equal(r.observation.status,'absent');
@@ -55,4 +55,8 @@ test('SYN native callback final throw rolls back journal and permits no SQL cont
 });
 test('REAL exact grant immutable field mismatches all fail closed without rewriting history',async t=>{
  const {result:r}=await scenario(t,'foreign_grants');assert.equal(r.error,undefined);for(const [field,denied]of Object.entries(r.denials))assert.equal(denied,true,field);assert.equal(Object.keys(r.denials).length,7);assert.equal(r.rows.grants.results[0].revoked_at,'');
+});
+
+test('REAL expired original grant and consent are reduced after C0 within original cleanup C1',async t=>{
+ const {result:r,identity:i}=await scenario(t,'expired_cleanup');assert.equal(r.error,undefined);assert.ok(r.barrier.row.fenced_at>=i.C0);assert.ok(r.barrier.row.fenced_at>=Date.parse(i.consentExpiresAt));assert.equal(r.revoke.status,'revoked');assert.equal(r.revoke.row.expires_at,i.consentExpiresAt);
 });

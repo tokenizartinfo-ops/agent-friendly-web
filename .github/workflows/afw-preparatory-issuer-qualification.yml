@@ -30,8 +30,6 @@ jobs:
         run: npx eslint lib/mcp-qa-finite-preparation-issuer-*.mjs lib/mcp-qa-finite-initial-cleanup.mjs test/mcp-qa-finite-preparation-issuer-*.test.mjs test/mcp-qa-finite-initial-cleanup-native.test.mjs test/fixtures/finite-preparation-issuer-worker.mjs
       - name: Cheap codec schema and import graph checks
         run: node --test test/mcp-qa-finite-preparation-issuer-records.test.mjs
-      - name: Fast native OPEN barrier preflight
-        run: node --test --test-timeout=30000 --test-name-pattern='REAL OPEN then' test/mcp-qa-finite-preparation-issuer-native.test.mjs
       - name: Actual native D1 and DO component ordering
         run: node --test --test-timeout=30000 test/mcp-qa-finite-preparation-issuer-native.test.mjs
       - name: Affected ordinary store and initial cleanup regressions
