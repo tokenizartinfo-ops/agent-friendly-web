@@ -16,7 +16,7 @@ const safe=r=>{
  assert.equal(r.output.qualification.workflowName,'afw-exact-confirmation-qualification');
  assert.deepEqual(r.output.qualification.payloadKeys,['planHash']);assert.equal(r.output.qualification.identityMatches,true);
 };
-test('unfinite fixed finite wrapper and actual Known core authorize complete history and exact own reservation after INSERT',async()=>{
+test('unmounted fixed finite wrapper and actual Known core authorize complete history and exact own reservation after INSERT',async()=>{
  const r=await run();safe(r);
  assert.equal(r.output.status,'confirmed',JSON.stringify(r.output));assert.deepEqual(r.counts,journals);
  assert.equal(r.historyPreserved,true);assert.equal(r.reservationCount,1);assert.equal(r.counters.retirementReads,2);

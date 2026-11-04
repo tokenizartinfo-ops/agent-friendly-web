@@ -19,5 +19,7 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Lint
         run: npm run lint
-      - name: Causal RED finite tests
-        run: node --test test/mcp-release-finite-known-cancellation.test.mjs test/mcp-release-finite-known-cancellation-native.test.mjs
+      - name: Known unit compatibility
+        run: node --test test/mcp-release-finite-known-cancellation.test.mjs test/mcp-release-known-cancellation.test.mjs
+      - name: Native finite and legacy compatibility
+        run: node --test --test-concurrency=1 test/mcp-release-finite-known-cancellation-native.test.mjs test/mcp-release-known-cancellation-native.test.mjs test/mcp-release-reservation-native.test.mjs test/mcp-release-workflow-native.test.mjs test/mcp-release-runtime-native.test.mjs

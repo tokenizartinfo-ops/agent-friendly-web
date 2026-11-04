@@ -6,6 +6,7 @@ import {resolveSuccessorPreparation} from '../lib/mcp-successor-manifest.mjs';
 import {createSuccessorReservation} from '../lib/mcp-successor-reservation.mjs';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import * as runtime from '../lib/mcp-release-runtime.mjs';
+import {reserveReleaseSuccessor,reserveFiniteReleaseSuccessor} from '../lib/mcp-release-successor-reservation.mjs';
 import {activationConfigurationHash,finiteActivationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
 import {inertNamedConfirmationPolicy} from './fixtures/inert-named-confirmation-policy.mjs';
 import {namedHistoryFixture,seedNamedHistoryFixture} from './fixtures/named-known-cancellation.mjs';
@@ -110,15 +111,23 @@ test('outer step settlement past the original event ceiling cannot report confir
  assert.deepEqual(await call(f),{status:'uncertain',mayRetry:false,operationalReadiness:false});assert.equal(f.steps,1);
  }finally{Date.now=realNow;await f.mf.dispose();}
 });
-test('a shape-compatible or copied request lease is rejected before its methods are invoked',async()=>{
- const f=await fixture();try{let calls=0;for(const lease of [{current(){calls++;return true;},remaining(){calls++;return 70000;}},{},null]){
- assert.deepEqual(await runtime.runReleaseWorkflow({...f.input,requestLease:lease}),blocked);
- }assert.equal(calls,0);assert.equal(f.steps,0);}finally{await f.mf.dispose();}
+test('a forged lease is denied by the selected finite core before its methods run',async()=>{
+ const f=await fixture();let calls=0;try{
+ const h=await closureHarness(async args=>{
+  for(const lease of [{current(){calls++;return true;},remaining(){calls++;return 70000;}},{},null]){
+   assert.deepEqual(await args.runReleaseWorkflow({...f.input,requestLease:lease}),blocked);
+  }
+  assert.deepEqual(await args.runReleaseWorkflow({...f.input,requestLease:{...args.requestLease}}),blocked);
+  return blocked;
+ });
+ assert.deepEqual(await h.runFiniteKnownCancellationReleaseWorkflow(f.input),blocked);
+ assert.equal(calls,0);assert.equal(f.steps,0);assert.equal(f.credentials,0);
+ }finally{delete globalThis.__knownAdapterCapture;await f.mf.dispose();}
 });
 test('absent projected current grant blocks before eligibility or runtime',async()=>{
  const f=await fixture();try{f.afterRead=async(sql,r)=>{if(sql.includes('WHERE g.id=?'))r.results=[];};assert.deepEqual(await call(f),blocked);assert.equal(f.steps,0);}finally{await f.mf.dispose();}
 });
-// White-box closure tests only. The separate native composition above uses the
+// White-box closure tests only. The separate finite native test file uses the
 // unmodified module and never injects an authorization callback or lease mint.
 let harnessSerial=0;
 async function closureHarness(capture){
@@ -223,4 +232,15 @@ test('fixed entries reject the other profile before primary, step or credentials
 });
 for(const key of ['profile','strategy','hash','requestLease'])test('finite exact four-field admission rejects '+key,async()=>{
  const f=await fixture();try{f.input[key]={};assert.deepEqual(await call(f),blocked);assert.equal(f.steps,0);assert.equal(f.reads.length,0);assert.equal(f.credentials,0);}finally{await f.mf.dispose();}
+});
+
+test('fixed successor reservation entries reject cross-profile before IO',async()=>{
+ const f=await fixture();let credentials=0,fetches=0;try{
+ const options={bundle:f.bundle,env:f.input.env,namespace:f.input.env.AFW_RELEASE_EVENTS_NODE,readCredential:async()=>{credentials++;throw Error('no credential');},fetchImpl:async()=>{fetches++;throw Error('no provider');},signal:new AbortController().signal};
+ await assert.rejects(reserveReleaseSuccessor(options));
+ f.bundle.policy.observation.configuration.compatibility_flags=['nodejs_compat','global_fetch_strictly_public'];
+ f.bundle.policy.plan.configurationHash=activationConfigurationHash(f.bundle.policy.observation.configuration);
+ await assert.rejects(reserveFiniteReleaseSuccessor(options));
+ assert.equal(credentials,0);assert.equal(fetches,0);assert.equal(f.reads.length,0);
+ }finally{await f.mf.dispose();}
 });
