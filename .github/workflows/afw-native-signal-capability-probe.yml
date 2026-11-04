@@ -1,0 +1,75 @@
+name: AFW native signal capability probe
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: ['.github/workflows/afw-native-signal-capability-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Observe both native ends using unchanged finite compatibility profiles
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFile} from 'node:fs/promises';
+          import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+          const qa=JSON.parse(await readFile('wrangler.independent-closure-qa.finite.jsonc','utf8'));
+          const m=JSON.parse(await readFile('wrangler.mcp-own.finite.jsonc','utf8'));
+          const qaScript=\`
+          import {DurableObject} from 'cloudflare:workers';
+          export class SignalProbe extends DurableObject{
+           state={started:false,receiverAbort:false,firstMutationMarker:false,settled:false};
+           async fetch(request){
+            if(new URL(request.url).pathname==='/state')return Response.json(this.state);
+            this.state.started=true;
+            request.signal.addEventListener('abort',()=>{this.state.receiverAbort=true;},{once:true});
+            await new Promise(resolve=>setTimeout(resolve,400));
+            if(!request.signal.aborted)this.state.firstMutationMarker=true;
+            this.state.settled=true;
+            return Response.json(this.state);
+           }
+          }
+          export default {fetch(){return new Response(null,{status:404});}};
+          \`;
+          const senderScript=\`
+          export default {async fetch(request,env){
+           const stub=env.PROBE.get(env.PROBE.idFromName('SYN-native-abort-probe'));
+           const c=new AbortController();
+           let senderOutcome='pending';
+           const actual=stub.fetch(new Request('https://probe.invalid/read',{signal:c.signal})).then(async r=>{await r.arrayBuffer();senderOutcome='resolved';},()=>{senderOutcome='rejected';});
+           await new Promise(resolve=>setTimeout(resolve,75));
+           const before=await (await stub.fetch('https://probe.invalid/state')).json();
+           if(!before.started)throw Error('Receiver did not enter held read');
+           c.abort();
+           await actual;
+           await new Promise(resolve=>setTimeout(resolve,550));
+           const after=await (await stub.fetch('https://probe.invalid/state')).json();
+           return Response.json({before,after,senderOutcome,senderSignalAborted:c.signal.aborted});
+          }};
+          \`;
+          const mf=new Miniflare(convertV4MiniflareOptions({workers:[
+           {name:'qa',modules:true,script:qaScript,compatibilityDate:qa.compatibility_date,compatibilityFlags:qa.compatibility_flags,durableObjects:{PROBE:{className:'SignalProbe',useSQLite:true,uniqueKey:'SYN-native-abort-probe'}}},
+           {name:'sender',modules:true,script:senderScript,compatibilityDate:m.compatibility_date,compatibilityFlags:m.compatibility_flags,durableObjects:{PROBE:{className:'SignalProbe',scriptName:'qa'}}}
+          ]}));
+          try{
+           const sender=await mf.getWorker('sender'),response=await sender.fetch('https://sender.invalid');
+           assert.equal(response.status,200);
+           const r=await response.json();
+           assert.equal(r.before.started,true);assert.equal(r.before.settled,false);
+           assert.equal(r.senderSignalAborted,true);assert.equal(r.after.settled,true);
+           const supported=r.after.receiverAbort===true&&r.after.firstMutationMarker===false;
+           console.log('AFW_NATIVE_SIGNAL_PROBE '+JSON.stringify({at:new Date().toISOString(),head:process.env.GITHUB_SHA,profileDates:[m.compatibility_date,qa.compatibility_date],profileFlags:[m.compatibility_flags,qa.compatibility_flags],...r,supported,qualification:'SYN fixture capability observation only; no product or remote effect',operationalReadiness:false}));
+          }finally{await mf.dispose();}
+          
+          NODE
