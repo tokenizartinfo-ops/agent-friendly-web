@@ -1,0 +1,21 @@
+name: Unit1 preparation cleanup qualifier
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: ['.github/workflows/unit1-preparation-cleanup.yml', 'lib/**', 'test/**']
+permissions:
+  contents: read
+jobs:
+  focused:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --test test/mcp-qa-finite-preparation-cleanup-native.test.mjs
