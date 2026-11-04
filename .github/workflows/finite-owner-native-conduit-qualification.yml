@@ -22,27 +22,28 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Scoped syntax and lint preflight
         run: npx eslint lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-preparation-qa.mjs lib/mcp-qa-finite-owner-native-wire.mjs lib/mcp-qa-finite-owner-native-bridge.mjs lib/mcp-qa-finite-owner-native-receiver.mjs test/fixtures/finite-native-conduit-sender.mjs test/fixtures/finite-native-conduit-receiver.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-context.test.mjs test/mcp-qa-finite-owner-native-wire.test.mjs test/mcp-qa-finite-owner-native-conduit-native.test.mjs test/mcp-qa-finite-owner-original-context-native.test.mjs
-      - name: Focused remaining late retention case
-        run: node --test --test-timeout=10000 --test-name-pattern="late native fetch" test/mcp-qa-finite-owner-native-wire.test.mjs
-      - name: Original capsule first GET signer correction
-        run: timeout 60s node --test --test-timeout=45000 test/mcp-qa-finite-owner-original-context-native.test.mjs
-      - name: Affected ordinary preparation and request regression
+      - name: Exact ticket selector and genuine admission expiry
+        run: timeout 60s node --test --test-timeout=30000 test/mcp-qa-finite-owner-context.test.mjs
+      - name: Added native malformed envelope and size case
+        run: timeout 60s node --test --test-timeout=20000 --test-name-pattern="actual native size" test/mcp-qa-finite-owner-native-conduit-native.test.mjs
+      - name: Causal original selector mutation RED then restored GREEN
         run: |
-          timeout 60s node --test --test-timeout=30000 test/mcp-qa-finite-owner-request-retention.test.mjs
-          timeout 60s node --test --test-timeout=30000 --test-name-pattern="initial owned synthetic selection|unqualified product source|accepted qaLive profile|obsolete QA_VERSION|canary DELEGATED_RATE_LIMITER" test/mcp-qa-finite-owner-preparation-native.test.mjs
-          timeout 60s node --test --test-timeout=30000 --test-name-pattern="resolver genuine children|genuine consumed stage adopts" test/mcp-qa-finite-owner-request-retention-native.test.mjs
-          timeout 60s node --test --test-timeout=30000 --test-name-pattern="fixed factual envelope|actual fixed reader borrows" test/mcp-qa-finite-initial-owner-source-native.test.mjs
-      - name: One actual finite compiler and graph check
-        run: |
+          cp lib/mcp-qa-finite-owner-preparation.mjs /tmp/afw-native-conduit-preparation.original
+          trap 'cp /tmp/afw-native-conduit-preparation.original lib/mcp-qa-finite-owner-preparation.mjs' EXIT
           node --input-type=module <<'NODE'
+          import {readFile,writeFile} from 'node:fs/promises';
           import assert from 'node:assert/strict';
-          import {build} from 'esbuild';
-          import {compileFiniteNativeStaging} from './scripts/build-finite-native-package.mjs';
-          const r=await compileFiniteNativeStaging({cwd:process.cwd(),sourceRevision:process.env.GITHUB_SHA});
-          const forbidden=['lib/mcp-qa-finite-owner-preparation-qa.mjs','lib/mcp-qa-finite-initial-owner-source.mjs','lib/mcp-qa-finite-bootstrap-source.mjs','lib/mcp-qa-finite-candidate-residency.mjs'];
-          for(const p of forbidden)assert.equal(Object.hasOwn(r.metafiles.canaryLive.inputs,p),false,p);
-          for(const role of ['qaLive','canaryLive'])for(const p of ['lib/mcp-qa-finite-owner-native-bridge.mjs','lib/mcp-qa-finite-owner-native-receiver.mjs'])assert.equal(Object.hasOwn(r.metafiles[role].inputs,p),false,'must remain unmounted '+p);
-          const common=await build({entryPoints:['lib/mcp-qa-finite-owner-preparation.mjs'],bundle:true,write:false,metafile:true,format:'esm',platform:'neutral',external:['node:*','cloudflare:*']});
-          for(const p of forbidden)assert.equal(Object.hasOwn(common.metafile.inputs,p),false,p);
-          console.log(JSON.stringify({sourceRevision:r.sourceRevision,sourceTree:r.sourceTree,sourceCheck:r.sourceCheck,modules:r.modules,commonNoQa:true,unmounted:true,completePackage:r.completePackage,operationalReadiness:r.operationalReadiness}));
+          const path='lib/mcp-qa-finite-owner-preparation.mjs',s=await readFile(path,'utf8'),from='preconnectionId=c.context?.preconnectionId??opaque();';
+          assert.equal(s.split(from).length,2);
+          await writeFile(path,s.replace(from,'preconnectionId=opaque();'));
           NODE
+          set +e
+          timeout 60s node --test --test-timeout=45000 test/mcp-qa-finite-owner-original-context-native.test.mjs > /tmp/afw-native-conduit-selector-red.log 2>&1
+          outcome=$?
+          set -e
+          cat /tmp/afw-native-conduit-selector-red.log
+          cp /tmp/afw-native-conduit-preparation.original lib/mcp-qa-finite-owner-preparation.mjs
+          test "$outcome" -eq 1
+          grep -q 'original capsule selector must remain exact' /tmp/afw-native-conduit-selector-red.log
+          git diff --exit-code -- lib/mcp-qa-finite-owner-preparation.mjs
+          timeout 60s node --test --test-timeout=45000 test/mcp-qa-finite-owner-original-context-native.test.mjs

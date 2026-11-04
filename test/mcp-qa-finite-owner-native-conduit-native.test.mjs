@@ -46,3 +46,18 @@ test('actual native signal capability observes receiver separately during held r
  const qualification=held.receiverAborted&&settled.beforeGuardAborted?'receiver_abort_observed':'receiver_abort_NOT_qualified';
  console.log('native_signal_capability',JSON.stringify({qualification,sender,receiverDuringHeldRead:held.receiverAborted,receiverBeforeGuard:settled.beforeGuardAborted,profiles:f.profiles,businessProducer:false}));
 });
+
+test('actual native size and malformed receiving envelope stay closed without storage effects',{timeout:20000},async t=>{
+ const f=await fixture(t);
+ const oversized=await f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:O},body:'x'.repeat(16385)});
+ assert.equal(oversized.status,400);await oversized.body.cancel();assert.equal((await f.state()).receiverEntered,0);
+ const headers=()=>{const at=Date.now();return {'x-afw-finite-boundary':JSON.stringify({startedAt:at,deadline:at+30000,remainingMs:29999}),'x-afw-finite-original-url':O+'/connections/finite-prepare','x-afw-finite-original-method':'POST','x-afw-finite-version':V,'x-afw-finite-request-id':V,Origin:O};};
+ for(const [path,h,body,status]of [
+  ['/fixture/receiver-probe',{...headers(),'x-afw-finite-extra':'deny'},'SYN',400],
+  ['/fixture/receiver-probe',{...headers(),'x-afw-finite-boundary':'{}'},'SYN',400],
+  ['/fixture/receiver-probe',{...headers(),'x-afw-finite-version':'bad'},'SYN',400],
+  ['/fixture/receiver-probe',headers(),'x'.repeat(16385),400],
+  ['/fixture/wrong-actor',headers(),'SYN',503]
+ ]){const r=await f.call(path,{method:'POST',headers:h,body});assert.equal(r.status,status);await r.body.cancel();}
+ assert.equal((await f.state()).businessRows,0);
+});

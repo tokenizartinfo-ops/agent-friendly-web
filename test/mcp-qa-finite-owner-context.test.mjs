@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {createFiniteOwnerPreparationStore} from '../lib/mcp-qa-finite-preparation-store.mjs';
 import * as preparation from '../lib/mcp-qa-finite-owner-preparation.mjs';
 import {native} from './fixtures/finite-owner-native.mjs';
 test('private original context has a distinct internal continuation; ordinary arguments cannot select it',async()=>{
@@ -9,11 +11,11 @@ test('private original context has a distinct internal continuation; ordinary ar
  finally{parent.finish();}
 });
 test('genuine one-use consumed admission permits same ambient owner factual borrow and retains actual held read',async t=>{
- const f=await native(t),screen=await f.screen();
- const r=await f.json('/fixture/owner-borrow',{headers:{'Cf-Access-Jwt-Assertion':f.token,Origin:'https://delegated-canary.agentfriendlyweb.dev','Content-Type':'application/x-www-form-urlencoded',Cookie:screen.cookie},body:new URLSearchParams({handle:screen.handle,projectRef:screen.projectRef,decision:'approve'}).toString()});
+ const f=await native(t),screen=await f.screen(),shortToken=await f.jwt('owner','finite-owner','5s');
+ const r=await f.json('/fixture/owner-borrow',{probeExpiry:true,headers:{'Cf-Access-Jwt-Assertion':shortToken,Origin:'https://delegated-canary.agentfriendlyweb.dev','Content-Type':'application/x-www-form-urlencoded',Cookie:screen.cookie},body:new URLSearchParams({handle:screen.handle,projectRef:screen.projectRef,decision:'approve'}).toString()});
  try{
   assert.equal(r.replayDenied,true);assert.equal(r.borrowed,true,'same genuine adopted owner entry cannot borrow factual work');
-  assert.deepEqual(r.denied,{foreign:true,clone:true,ctx:true,storage:true,db:true});
+  assert.deepEqual(r.denied,{foreign:true,clone:true,ctx:true,storage:true,db:true,admissionExpiry:true});
   assert.equal((await f.json('/fixture/request-probe',{})).requestAllowed,false);
  }finally{await f.json('/fixture/request-release',{});}
  await new Promise(resolve=>setTimeout(resolve,30));
@@ -33,4 +35,22 @@ test('private envelope rejects accessor/extra/inner drift and capsule or selecto
    return value;
   }));assert.equal(getters,0);assert.equal(calls,mode.endsWith('drift')?2:1,mode);}finally{parent.finish();}
  }
+});
+
+test('requested ticket selector cannot substitute for exact original A envelope',async()=>{
+ const initial=source(),map=new Map(),storage={get:async key=>map.get(key),put:async(key,value)=>map.set(key,value),async transaction(fn){return fn(this);}};
+ const ctx={storage,id:{toString:()=>initial.actorId}},env={RELEASE_DB:{withSession(){throw Error('unexpected primary');}},AFW_QA_VERSION:{id:initial.qaVersionId}};
+ const handle='1'.repeat(64),ticketHash=createHash('sha256').update(handle).digest('hex'),request=new Request(initial.origin+'/connections/finite-prepare',{headers:{Cookie:'__Host-afw-finite-prepare='+handle}}),parent=preparation.createFiniteOwnerRequestLease(request);
+ const ticket={purpose:'afw.finite-owner-ticket.v1',ticketHash,subjectHash:'2'.repeat(64),sourceRevision:initial.sourceRevision,projectRef:'3'.repeat(64),connectionRef:null,preconnectionId:'4'.repeat(64),action:'connection',createdAt:Date.now()-1,expiresAt:Date.now()+30000};
+ try{
+  assert.equal((await createFiniteOwnerPreparationStore({storage,now:Date.now}).putTicket(ticket,parent.lease)).status,'recorded');
+  let requested;
+  await assert.rejects(preparation.continuePrivateQaFiniteOwnerChoice({ctx,env,request},parent.lease,(child,id)=>{child.assertCurrent();requested=id;return {source:initial,preconnectionId:'5'.repeat(64),capsuleHash:'6'.repeat(64)};}));
+  assert.equal(requested,ticket.preconnectionId);assert.equal(map.size,1);
+ }finally{parent.finish();}
+});
+test('private continuation rejects positive POST before any factual reader invocation',async()=>{
+ let calls=0;const request=new Request('https://delegated-canary.agentfriendlyweb.dev/connections/finite-prepare',{method:'POST'}),parent=preparation.createFiniteOwnerRequestLease(request);
+ try{await assert.rejects(preparation.continuePrivateQaFiniteOwnerChoice({ctx:{},env:{},request},parent.lease,()=>{calls++;}));assert.equal(calls,0);}
+ finally{parent.finish();}
 });

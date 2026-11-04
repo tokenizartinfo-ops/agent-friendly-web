@@ -11,7 +11,7 @@ export class NativeReceiverFixture extends DurableObject{
   const seen=this.observed;seen.receiverEntered++;seen.privateHeaders=[...request.headers.keys()].filter(k=>k.startsWith('x-afw-finite-')).sort();seen.callerHeader=request.headers.has('X-Caller-Arbitrary');
   seen.receiverAborted=request.signal.aborted;request.signal.addEventListener('abort',()=>{seen.receiverAborted=true;},{once:true});
   seen.originalMethod=request.headers.get('x-afw-finite-original-method');seen.originalUrl=request.headers.get('x-afw-finite-original-url');
-  seen.version=request.headers.get('x-afw-finite-version');seen.boundaryValid=Number.isSafeInteger(JSON.parse(request.headers.get('x-afw-finite-boundary')).remainingMs);
+  seen.version=request.headers.get('x-afw-finite-version');try{seen.boundaryValid=Number.isSafeInteger(JSON.parse(request.headers.get('x-afw-finite-boundary')).remainingMs);}catch{seen.boundaryValid=false;}
   if(this.heldMode&&request.body){
    // Hold the actual native read's settlement, not a replacement signal.
    const stream=request.body,getReader=stream.getReader;

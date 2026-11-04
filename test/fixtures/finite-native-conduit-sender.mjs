@@ -11,7 +11,7 @@ export default {async fetch(request,env,ctx){
  if(path==='/fixture/release'){await stub.release();return Response.json({released:true});}
  if(path==='/fixture/abort'){active?.finish();return Response.json({aborted:!!active});}
  if(path==='/fixture/reset'){await stub.reset();return Response.json({reset:true});}
- if(path==='/fixture/wrong-actor')return env.AFW_FINITE_TRIAL_CONTROL.get(env.AFW_FINITE_TRIAL_CONTROL.idFromName('SYN-foreign')).fetch(request);
+ if(['/fixture/receiver-probe','/fixture/wrong-actor'].includes(path)){const receiver=path==='/fixture/wrong-actor'?env.AFW_FINITE_TRIAL_CONTROL.get(env.AFW_FINITE_TRIAL_CONTROL.idFromName('SYN-foreign')):stub;return receiver.fetch(new Request('https://afw-private.invalid/_finite-owner/choice',{method:'POST',headers:request.headers,body:request.body,signal:request.signal}));}
  const parent=createFiniteOwnerRequestLease(request);active=parent;entered++;
  try{return await forwardFiniteOwnerChoice({request,env,ctx},parent.lease);}
  finally{parent.finish();if(active===parent)active=null;}

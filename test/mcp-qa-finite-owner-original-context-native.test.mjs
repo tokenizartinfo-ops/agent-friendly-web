@@ -12,7 +12,7 @@ test('actual fixed QA adapter first GET uses exact original capsule selector and
   assert.notEqual(result.handle,envelope.preconnectionId);assert.notEqual(result.projectRef,envelope.preconnectionId);
   const rows=await copy(f.stub.snapshot()),added=rows.filter(([key])=>!before.some(([old])=>key===old));
   const tickets=added.filter(([key])=>key.startsWith('owner-ticket:')).map(([,v])=>typeof v==='string'?JSON.parse(v):v);
-  assert.equal(tickets.length,1);assert.equal(tickets[0].preconnectionId,envelope.preconnectionId);
+  assert.equal(tickets.length,1);assert.equal(tickets[0].preconnectionId,envelope.preconnectionId,'original capsule selector must remain exact');
   const snapshots=added.filter(([key])=>key.startsWith('connection-preparation:')&&key.endsWith(':source')).map(([,v])=>typeof v==='string'?JSON.parse(v):v);
   assert.equal(snapshots.length,1);assert.equal(snapshots[0].preconnectionId,envelope.preconnectionId);
   assert.equal(added.some(([key])=>key.endsWith(':use')||key.endsWith(':connection:approval')),false);

@@ -72,6 +72,7 @@ export class FiniteOwnerFixture extends DurableObject{
       const actual=Promise.resolve(storage.get('fixture:source')).then(()=>new Promise(resolve=>{gate.held=true;gate.release=()=>{gate.settled=true;resolve();};}));
       stageWork.retainFiniteOwnerStagePromise(actual);await Promise.resolve();return true;
      });}catch{}
+     if(input.probeExpiry){const now=Date.now;Date.now=()=>now()+10000;try{reject('admissionExpiry',()=>borrow({}));}finally{Date.now=now;}}
      return Response.json({borrowed,replayDenied,denied});
     });
    });}finally{parent.finish();}
