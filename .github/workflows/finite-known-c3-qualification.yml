@@ -24,3 +24,6 @@ jobs:
       - name: Native setup and confirmation RED
         if: always()
         run: node --test --test-concurrency=1 test/mcp-qa-finite-policy-setup-native.test.mjs test/mcp-qa-finite-confirmation-native.test.mjs
+      - name: Isolate previously unsettled final initial-upload cases
+        if: always()
+        run: node --test --test-timeout=30000 --test-name-pattern='publisher-revoked-before-send|upload-config-tamper' test/mcp-qa-finite-initial-upload-native.test.mjs
