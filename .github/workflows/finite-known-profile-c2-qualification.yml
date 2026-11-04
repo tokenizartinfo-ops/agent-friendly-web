@@ -1,0 +1,23 @@
+name: Finite Known C2 source qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/finite-known-profile-c2-qualification.yml]
+permissions:
+  contents: read
+jobs:
+  c2-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Lint
+        run: npm run lint
+      - name: Causal RED finite tests
+        run: node --test test/mcp-release-finite-known-cancellation.test.mjs test/mcp-release-finite-known-cancellation-native.test.mjs
