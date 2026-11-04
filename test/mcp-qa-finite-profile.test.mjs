@@ -7,6 +7,7 @@ import {activationConfigurationHash} from '../lib/mcp-activation-observer.mjs';
 import {restorationConfigurationHash} from '../lib/mcp-restoration-configuration.mjs';
 let api;
 try{api=await import('../lib/mcp-qa-finite-profile.mjs');}catch{/* Missing implementation is an explicit RED assertion. */}
+function historicalActivation(configuration){const value=structuredClone(configuration);value.compatibility_flags=['nodejs_compat','global_fetch_strictly_public'];return value;}
 function fixture(){
  assert.equal(typeof api?.finitePublicProfileTemplate,'function','source-owned profile template required');
  const v=structuredClone(api.finitePublicProfileTemplate('canaryLive'));
@@ -20,15 +21,16 @@ test('private_projection_preserves_full_fingerprint',()=>{
  for(const binding of a.bindings){const original=policy.observation.configuration.bindings.find(x=>x.name===binding.name);if(original&&binding.type==='plain_text'&&original.type==='plain_text')binding.text=original.text;}
  const b=structuredClone(a),event=b.bindings.find(x=>x.name==='AFW_DOSSIER_EVENTS_POLICY');
  const changed=JSON.parse(event.text);changed.grantId='ci-only-second-inert';event.text=JSON.stringify(changed);
- for(const configuration of [a,b]){const p=structuredClone(policy);p.observation.configuration=configuration;p.plan.configurationHash=activationConfigurationHash(configuration);assert.equal(validateReleaseOperatorBundle({artifact,policy:p}),true);}
+ for(const configuration of [a,b]){const p=structuredClone(policy),historical=historicalActivation(configuration);p.observation.configuration=historical;p.plan.configurationHash=activationConfigurationHash(historical);assert.equal(validateReleaseOperatorBundle({artifact,policy:p}),true);}
  const bad=structuredClone(b),raw=bad.bindings.find(x=>x.name==='AFW_DOSSIER_EVENTS_POLICY'),invalid=JSON.parse(raw.text);invalid.clientId='wrong-private-client';raw.text=JSON.stringify(invalid);
- const invalidPolicy=structuredClone(policy);invalidPolicy.observation.configuration=bad;invalidPolicy.plan.configurationHash=activationConfigurationHash(bad);
+ const invalidPolicy=structuredClone(policy);invalidPolicy.observation.configuration=historicalActivation(bad);invalidPolicy.plan.configurationHash=activationConfigurationHash(invalidPolicy.observation.configuration);
  assert.deepEqual(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:b}),api.projectFinitePublicConfiguration({role:'canaryLive',metadata:bad}));
  assert.throws(()=>validateReleaseOperatorBundle({artifact,policy:invalidPolicy}),/Release operator plan unavailable/);
  assert.deepEqual(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:a}),api.projectFinitePublicConfiguration({role:'canaryLive',metadata:b}));
- assert.notEqual(activationConfigurationHash(a),activationConfigurationHash(b));
+ assert.throws(()=>activationConfigurationHash(a),'old activation reader must reject new candidate flags');
+ assert.notEqual(activationConfigurationHash(historicalActivation(a)),activationConfigurationHash(historicalActivation(b)));
  assert.notEqual(restorationConfigurationHash(a),restorationConfigurationHash(b));
- assert.notEqual(activationConfigurationHash(a),restorationConfigurationHash(a));
+ assert.notEqual(activationConfigurationHash(historicalActivation(a)),restorationConfigurationHash(a));
  const projected=JSON.stringify(api.projectFinitePublicConfiguration({role:'canaryLive',metadata:a}));
  assert(!projected.includes('SYNTHETIC-PRIVATE'));
 });
@@ -82,7 +84,8 @@ test('finite canary source preserves existing SQLite Container relationship and 
  const actual=fixture(),detached=structuredClone(actual);
  delete detached.exports.AfwOwnEventNode.container;detached.containers=[];
  assert.throws(()=>api.projectFinitePublicConfiguration({role:'canaryLive',metadata:detached}));
- assert.notEqual(activationConfigurationHash(actual),activationConfigurationHash(detached));
+ assert.throws(()=>activationConfigurationHash(actual),'old activation reader must not reinterpret new candidate');
+ assert.notEqual(activationConfigurationHash(historicalActivation(actual)),activationConfigurationHash(historicalActivation(detached)));
  assert.notEqual(restorationConfigurationHash(actual),restorationConfigurationHash(detached));
  assert.equal(p.bindings.find(b=>b.name==='AFW_DOSSIER_EVENTS_NODE').namespace_id,'d6fc71552de7494a863aca20365a572d');
 });
