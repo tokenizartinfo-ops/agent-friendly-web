@@ -1,0 +1,47 @@
+{
+  "purpose": "afw.sdd-scoped-fix-review.v1",
+  "fixBase": "70486bef8c17f13247066c636041dbf002e0aa28",
+  "head": "2589c1301774a2d4fce51dd7256ba984b18b6845",
+  "finding": "Late 2xx empty/unclosed body begins read before original lease/holder check; cancellation never starts. One Important, no Critical/Minor.",
+  "commits": [
+    {
+      "sha": "b0ffad10bc247d4fd71667cfd022f39fa32f246a",
+      "message": "test: reproduce empty late native response missing pre-read guard"
+    },
+    {
+      "sha": "7de7f441ce4bbc276ee43d45097777271fef31a7",
+      "message": "fix: guard late native response before first body read"
+    },
+    {
+      "sha": "b97806741902bbf7cc028d7c9c1f395c097cade1",
+      "message": "chore: remove scoped native wire qualifier after green"
+    },
+    {
+      "sha": "2589c1301774a2d4fce51dd7256ba984b18b6845",
+      "message": "docs: record scoped late-response fix and Actions evidence"
+    }
+  ],
+  "files": [
+    {
+      "filename": "docs/superpowers/reports/2026-11-04-finite-owner-native-conduit.md",
+      "status": "modified",
+      "patch": "@@ -112,3 +112,15 @@ Git blob SHA1 identities of the final changed source/tests (distinct from module\n - Original I0/C0/C1, nominal clocks/counters and source ceiling2026-11-03T02:59:00Z are unchanged. The source ceiling is expired. operationalReadiness=false; completePackage=false; PCoff=false.\n \n The temporary qualification workflow is removed by this report commit. No local temporary artifacts from this task require cleanup. No provider/runtime restoration is claimed or needed because no remote mutation was performed.\n+\n+## Independent review fixRound1/5 — empty late successful response (2026-11-04 UTC)\n+\n+The earlier “final codeHEAD” and tree above describe the original Unit2b.1 delivery. This addendum supersedes that codeHEAD for the one reviewed fix. FIX_BASE `70486bef8c17f13247066c636041dbf002e0aa28`; causal RED HEAD `b0ffad10bc247d4fd71667cfd022f39fa32f246a`; fixed codeHEAD `7de7f441ce4bbc276ee43d45097777271fef31a7`; qualifier-removal HEAD `b97806741902bbf7cc028d7c9c1f395c097cade1`. The containing reportHEAD is the next commit and is independently resolvable from GitHub metadata rather than embedded in its own content. All writes used GitHub App expected-head CAS on the sole branch `feat/finite-native-cleanup-20261101`.\n+\n+Review finding (one Important): a successful native fetch that settled after original logical abort or captured-holder drift entered `reader.read()` before checking validity. An empty unclosed stream could hold the retained operation forever even though its stream cancellation could settle. The fix adds `check()` inside `finiteNativeBytes`' retained `try`, before the first response read. The catch still reports the first error and awaits actual `reader.cancel()`; the bridge's preceding non-2xx HTTP-first error handling is unchanged. No target, metadata, receiver, permission, profile, mount, budget or business behavior changed.\n+\n+Causal RED was already observed before this fix: [run 41919608082](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41919608082), job `126888317715`, attempt1 at RED HEAD. Exact command: `timeout 30s node --test --test-timeout=10000 --test-name-pattern=\"empty late successful response\" test/mcp-qa-finite-owner-native-wire.test.mjs`. Both empty-late cases (abort and holder drift) failed their cancellation-start assertion: 0 pass, 2 fail, 0 skipped/cancelled. Lint passed. The test's closed-stream failure-path drain ran only after the causal assertion.\n+\n+GREEN: [run 41921052263](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41921052263), job `126893345188`, attempt1, checked out exact codeHEAD above. `npx eslint lib/mcp-qa-finite-owner-native-wire.mjs test/mcp-qa-finite-owner-native-wire.test.mjs` passed. `timeout 45s node --test --test-timeout=10000 test/mcp-qa-finite-owner-native-wire.test.mjs` passed 9/9, 0 fail, 0 skipped/cancelled. This includes the two new empty-stream cases, known HTTP403 first-error preservation, held cancellation occupancy, late fetch/body cancellation, response size and holder checks. Actual job output was read, not inferred from the success label. Warnings were deprecations for punycode/url.parse and Node20-based Actions forced to Node24; Node test runtime was22.23.4.\n+\n+The temporary source-only qualification workflow was removed after GREEN. No local clone, build, dependency install, remote provider/runtime action, new permission, positive producer or graph change occurred. Existing 33-case original evidence and Unit2a138 remain historical receipts, not rerun claims. Native incoming abort remains NOT qualified; the conduit remains UNMOUNTED and pending-only, business producer absent, `operationalReadiness=false`, `completePackage=false`, `PCoff=false`. Self-review covered only this fix diff; fresh scoped independent review of FIX_BASE through reportHEAD remains required. Rollback is source revert before promotion.",
+      "additions": 12,
+      "deletions": 0
+    },
+    {
+      "filename": "lib/mcp-qa-finite-owner-native-wire.mjs",
+      "status": "modified",
+      "patch": "@@ -43,6 +43,7 @@ export async function finiteNativeBytes(message,check,first,status=400){\n  const reader=message.body?.getReader();if(!reader){check();return new Uint8Array();}\n  const chunks=[];let length=0;\n  try{\n+  check();\n   for(;;){const {done,value}=await reader.read();check();if(done)break;if(!(value instanceof Uint8Array)||(length+=value.length)>16384)finiteNativeFailure(status);chunks.push(value);}\n   const bytes=new Uint8Array(length);let at=0;for(const chunk of chunks){bytes.set(chunk,at);at+=chunk.length;}return bytes;\n  }catch(error){first(error);try{await reader.cancel();}catch{}throw error;}",
+      "additions": 1,
+      "deletions": 0
+    },
+    {
+      "filename": "test/mcp-qa-finite-owner-native-wire.test.mjs",
+      "status": "modified",
+      "patch": "@@ -80,3 +80,32 @@ test('late native fetch and its subsequent real body cancellation remain occupie\n   await cancelling;assert.throws(probe);releaseCancel();await Promise.all(f.retained);assert.equal(await probe(),true);\n  }finally{releaseCancel?.();other.finish();}\n });\n+\n+for(const fault of ['abort','holder-drift'])test('empty late successful response cancels before its first read after '+fault,async()=>{\n+ let enteredFetch,releaseFetch,releaseCancel,enterCancel,bodyController,readCalls=0,cancelStarted=false;\n+ const fetched=new Promise(r=>{enteredFetch=r;}),cancelling=new Promise(r=>{enterCancel=r;});\n+ const f=sender(()=>{enteredFetch();return new Promise(r=>{releaseFetch=r;});}),controller=new AbortController();\n+ const pending=invoke(f,new Request(U,{signal:controller.signal}));\n+ await fetched;\n+ if(fault==='abort'){controller.abort();assert.equal((await pending).status,503);}\n+ else f.env.OAUTH_KV={};\n+ const stream=new ReadableStream({start(c){bodyController=c;},cancel(){cancelStarted=true;enterCancel();return new Promise(r=>{releaseCancel=r;});}});\n+ const getReader=stream.getReader;\n+ stream.getReader=function(){const reader=Reflect.apply(getReader,this,[]),read=reader.read;reader.read=function(){readCalls++;return Reflect.apply(read,this,[]);};return reader;};\n+ const other=createFiniteOwnerRequestLease(new Request(U)),probe=()=>observeFiniteOwnerRequestWork({ctx:f.ctx,env:f.env,originalLease:other.lease},async()=>true);\n+ let timer;\n+ try{\n+  releaseFetch(new Response(stream));\n+  const cancelled=await Promise.race([cancelling.then(()=>true),new Promise(r=>{timer=setTimeout(()=>r(false),250);})]);\n+  assert.equal(cancelled,true,'empty late response must begin cancellation before reading');\n+  assert.equal(readCalls,0,'invalid original lease or holder must not start a response read');\n+  assert.equal((await pending).status,503);assert.throws(probe,'actual cancel remains occupied after logical finish');\n+  releaseCancel();await Promise.all(f.retained);assert.equal(await probe(),true);\n+ }finally{\n+  clearTimeout(timer);\n+  // RED-only drain of the held read, after the causal assertion. This chunk\n+  // never masks the empty-stream behavior being tested above.\n+  if(!cancelStarted)bodyController.enqueue(new Uint8Array([1]));\n+  await cancelling;releaseCancel?.();await pending;await Promise.all(f.retained);other.finish();\n+ }\n+});",
+      "additions": 29,
+      "deletions": 0
+    }
+  ]
+}
