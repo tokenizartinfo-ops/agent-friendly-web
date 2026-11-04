@@ -26,7 +26,10 @@ test('finite_named_plan_and_history_positive',()=>{
 });
 test('finite_bundle_requires_confirm_named',()=>{
  const f=fixture();
- for(const operation of ['confirm','publish'])assert.throws(()=>policy.validateFiniteReleaseOperatorBundle({...f.bundle,policy:{...f.bundle.policy,operation}}));
+ const publish={artifact:f.bundle.artifact,policy:{operation:'publish',startAt:1000,expiresAt:601000,pins:{...policy.RELEASE_TARGET,baseVersionId:'33333333-3333-4333-8333-333333333333'}}};
+ assert.equal(policy.validateReleaseOperatorBundle(publish),true);assert.throws(()=>policy.validateFiniteReleaseOperatorBundle(publish));
+ const confirm={...f.bundle,policy:{...f.bundle.policy,operation:'confirm',plan:{...f.bundle.policy.plan,scopeHash:'f'.repeat(64)}}};
+ assert.throws(()=>policy.validateFiniteReleaseOperatorBundle(confirm));
  const old=structuredClone(f.bundle);old.policy.observation.configuration.compatibility_flags=['nodejs_compat','global_fetch_strictly_public'];old.policy.plan.configurationHash=activationConfigurationHash(old.policy.observation.configuration);
  assert.equal(policy.validateReleaseOperatorBundle(old),true);assert.throws(()=>policy.validateFiniteReleaseOperatorBundle(old));assert.throws(()=>policy.validateReleaseOperatorBundle(f.bundle));
 });

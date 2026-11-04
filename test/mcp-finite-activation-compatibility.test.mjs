@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import * as activation from '../lib/mcp-activation-observer.mjs';
 
+const LEGACY_GOLDEN='b35fa92f070cde9b87142997c223c5a3067c702fc594c435a9164f50bbee4f33';
 const legacy=()=>({compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat','global_fetch_strictly_public'],main_module:'index.mjs',exports:{AfwOwnEventNode:{type:'durable-object',storage:'sqlite'}},bindings:[{name:'TOKEN',type:'secret_text'},{name:'ENABLED',type:'plain_text',text:'true'},{name:'AFW_DOSSIER_EVENTS_NODE',type:'durable_object_namespace',namespace_id:'b'.repeat(32),class_name:'AfwOwnEventNode'}],usage_model:'standard',containers:[]});
 const finite=()=>({...legacy(),compatibility_flags:['nodejs_compat','global_fetch_strictly_public','enable_request_signal']});
 const canonical=value=>JSON.stringify(value,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b))):x);
@@ -23,7 +24,7 @@ async function observe(configuration,make,actual=configuration){
  return {run:()=>fn(input,new AbortController().signal),calls};
 }
 test('legacy_pair_digest_and_positive_observer_preserved',async()=>{
- const value=legacy();assert.equal(activation.activationConfigurationHash(value),independent(value));console.log('LEGACY_GOLDEN '+independent(value));
+ const value=legacy();assert.equal(independent(value),LEGACY_GOLDEN);assert.equal(activation.activationConfigurationHash(value),LEGACY_GOLDEN);
  const {run,calls}=await observe(value,activation.createActivationObserver);
  assert.equal((await run()).configurationHash,independent(value));assert.equal(calls.length,7);
 });
