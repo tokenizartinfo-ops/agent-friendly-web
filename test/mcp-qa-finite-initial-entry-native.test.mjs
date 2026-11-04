@@ -7,6 +7,7 @@ async function using(mode,fn){const f=await initialEntryHarness(mode);try{await 
 const claimed=rows=>rows.some(([k])=>k===ONCE);
 test('B1 actual finite actor durable entry composes A and returns only safe references',()=>using('normal',async f=>{
  const before=await f.stub.snapshot();await f.stub.configure('normal');const r=await f.stub.invoke(f.refs);
+ try{
  assert.equal(r.status,'material_recorded',JSON.stringify(r));
  assert.deepEqual(Object.keys(r).sort(),['status','entryHash','materialHash','sourceRevision','qaVersionId','authorizesEffects','completePackage','operationalReadiness'].sort());
  assert.equal(r.authorizesEffects,false);assert.equal(r.completePackage,false);assert.equal(r.operationalReadiness,false);
@@ -15,9 +16,11 @@ test('B1 actual finite actor durable entry composes A and returns only safe refe
  assert.equal(entry.operationDeadline,Math.min(entry.initialDeadline,entry.createdAt+30000,f.approval));
  assert.ok(claimed(rows));for(const pair of before)assert.deepEqual(rows.find(([k])=>k===pair[0]),pair);
  assert.equal(rows.some(([k])=>k==='afw.qa-finite-trial.v1:head'),false);
- assert.equal((await f.stub.stats()).syncs,11);
- const requests=f.requests.length;pending(await f.stub.invoke(f.refs));assert.deepEqual(await f.stub.snapshot(),rows);
- assert.ok(f.requests.length>=requests);assert.equal((await f.stub.stats()).syncs,11);
+ assert.ok(rows.some(([k])=>k==='afw.finite-initial-preparation.v1:capsule'));
+ const stats=await f.stub.stats();try{assert.equal(stats.syncs,12);}finally{stats[Symbol.dispose]?.();}
+ const requests=f.requests.length,replay=await f.stub.invoke(f.refs);try{pending(replay);}finally{replay[Symbol.dispose]?.();}assert.deepEqual(await f.stub.snapshot(),rows);
+ assert.ok(f.requests.length>=requests);const after=await f.stub.stats();try{assert.equal(after.syncs,12);}finally{after[Symbol.dispose]?.();}
+ }finally{r[Symbol.dispose]?.();}
 }));
 test('B1 concurrent actual SQLite contenders admit one A',()=>using('normal',async f=>{
  await f.stub.configure('normal');const results=await Promise.all([f.stub.invoke(f.refs),f.stub.invoke(f.refs)]);

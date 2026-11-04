@@ -33,19 +33,19 @@ for(const fault of ['missing-completion','coherent-ack','coherent-claim','finite
 }));
 test('preexisting conflicting capsule is immutable and never authority to retry',()=>using(async f=>{
  await f.stub.seed([[KEY,'SYN conflicting capsule']]);assert.equal(await invoke(f),'admin_pending');assert.equal(get(await f.stub.snapshot(),KEY),'SYN conflicting capsule');
- assert.equal(await invoke(f),'admin_pending');assert.equal(f.activations.length,1);assert.equal(f.uploads.length,1);
+ assert.equal(await invoke(f),'admin_pending');assert.equal(f.activations.length,0);assert.equal(f.uploads.length,0);assert.equal(get(await f.stub.snapshot(),P+'entry'),undefined);
 }));
 for(const fault of ['return-lost','sync-lost','readback-lost','holder-drift'])test('capsule '+fault+' preserves uncertain append across restart without replay',()=>using(async f=>{
  await f.stub.restoreMethods();await f.stub.configure('capsule-'+fault);assert.equal(await invoke(f),'admin_pending');
  const rows=await f.stub.snapshot();assert.ok(get(rows,KEY));assert.ok(get(rows,C+'activation-completion'));assert.equal(f.activations.length,1);
  await f.restart();await f.stub.configure('normal');assert.equal(await invoke(f),'admin_pending');assert.deepEqual(await f.stub.snapshot(),rows);assert.equal(f.activations.length,1);assert.equal(f.uploads.length,1);
 },'restart'));
-for(const fault of ['held-sync','held-readback','held-transaction-read','expired-completion'])test('actual '+fault+' remains retained through deadline and late settlement never resumes',()=>using(async f=>{
+for(const fault of ['held-sync','held-readback','held-transaction','expired-completion'])test('actual '+fault+' remains retained through deadline and late settlement never resumes',()=>using(async f=>{
  await f.stub.restoreMethods();await f.stub.configure('capsule-'+fault);const operation=invoke(f);
  await until(async()=>(await stats(f)).held);assert.equal(await operation,'admin_pending');
- const rows=fault==='held-transaction-read'?null:await f.stub.snapshot();
+ const rows=await f.stub.snapshot();
  assert.equal(await available(f),false);await f.stub.release();await until(()=>available(f));
- const settled=await f.stub.snapshot();if(rows)assert.deepEqual(settled,rows);if(fault==='expired-completion'||fault==='held-transaction-read')assert.equal(get(settled,KEY),undefined);
+ const settled=await f.stub.snapshot();if(rows)assert.deepEqual(settled,rows);if(fault==='expired-completion')assert.equal(get(settled,KEY),undefined);
  if(fault==='expired-completion')assert.equal((await stats(f)).capsuleTransactions,0,'no capsule continuation begins after expired Completion');
  assert.equal(await invoke(f),'admin_pending');assert.equal(f.activations.length,1);
 }));
