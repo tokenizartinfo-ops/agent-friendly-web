@@ -1,3 +1,9 @@
+# Unit2a expiry interpretation ruling —4nov2026
+Ruling: DBexecutiontime < consent/grant expiry applies to GRANTING mutations (authorizationINSERT/consume/grantINSERT andlatergrantingnoticeoperations), never to permission-reducing cleanup. Revocation mustremainpossibleaftergrant expiryatC0 andbeforeoriginalC1, withconfirmedexactprimarybarrier/currentowner+revision/immutablegrantidentity andoriginalcleanupSQLwindow. Cleanup comparesoriginalcanonicalexpiryforidentity; doesNOTrequireunexpiredgrant/consent. Otherwise C0cleanupwouldbeimpossiblebecauseoriginalgrant expires<=C0. No originaltime/expirywrite orauthorityexpansion; monotonic reductiononly. Rootclarifiesbroadphrase'everymutatingstatement' inUnit2aspecusingitsnamedgrant/revokecontracts andarchitecture. Carryruling toreport/reviewer; no userdecision.
+Unit2aBASE1c05ff... writerimplement_preparatory_issuer_fence, REDheadc41499c746ce82d05a9c384dfdb8ec8d8cdaf436 /Actions41906273217 pendingvalidation; no acceptanceyet. Sourceonly/noactualDDL/provider/runtime/Entry/permissions/Max.
+
+---
+
 # SDD ledger — plan: docs/superpowers/plans/2026-11-04-preparatory-issuer-fence.md
 
 ## ACTUAL — Unit2a implementación SOURCE
