@@ -1,0 +1,20 @@
+# Conditional SDK uncertainty ruling for later finite cleanup
+
+4 November 2026. Design ruling for FUTURE source composition, not current implementation, runtime qualification or permission to execute. Parent task Unit2b.1 remains unmounted/pending and unchanged by this document.
+
+The architecture report b60f8328df195307df62610968055b84ea766043 recommends separating opaque SDK/KV uncertainty from application permission/deployment uncertainty. Root adopts that distinction conditionally, not a generic success/settlement bypass.
+
+Pinned dependency is @cloudflare/workers-oauth-provider1.2.1 in package-lock ataccepted efcdadec029d88c3258566a05d688d70f125e7fa. Its [consent source](https://github.com/cloudflare/workers-oauth-provider/blob/v1.2.1/src/oauth-consent.ts) stores/consumes SDK transactions in KV. [Completion source](https://raw.githubusercontent.com/cloudflare/workers-oauth-provider/v1.2.1/src/oauth-provider.ts) generates SDK grant/code data and writes KV; revokeExistingGrants:false avoids its replacement scan. This classification is pinned source evidence, not proof of a deployed loaded library. Future finite callbacks must preserve that exact effect boundary.
+
+Root inspected current app delegated-oauth-worker at efcdadec: tokenExchangeCallback looks up exact props.applicationGrantId, checks active state, subject/client/resource/project/scopes/remaining time and consumes exchange; boundedTokenResponse checks the application grant again before returning a token. delegated-oauth-store.consumeExchange SQL requires original id/user/client/resource, revoked_at='', exchanged_at='' and original expires_at>bound time. A confirmed revocation therefore denies a later exchange even if an earlier app read was stale. MCP reads retain their own application permission checks; future qualification must verify their actual finite compiled path, not assume it from this note.
+
+## Binding conditional rule
+Only after ALL of the following actual facts: exact original issuer frozen; exact same-row terminal D1 fence committed and fresh-primary confirmed; original application grant absent/revoked under confirmed barrier; every granting/notice SQL path ordered behind that same fence; all relevant deployment writers physically settled; exact owned current pointer/baseline/backup/custody/inventory/unchanged original cleanupC1 gates satisfied—an unresolved beginConsent/approveConsent/completeAuthorization operation restricted to pinned opaque SDK/KV effects is not by itself a reason to miss the authorized exact closed restoration.
+
+Persist three separate results: permission reduction factual state; Worker restoration factual state; SDK/KV uncertainty still outstanding. Do not turn the last one into physical completion, full cleanup completion, readiness or PC-off acceptance. Retain actual SDK promises until settlement under their original scope and preserve uncertainty across expiry/restart as exact records permit; no key scan/delete or global drain assertion. No raw SDK handles/cookies/tokens persisted or logged.
+
+The exception DOES NOT apply to an unknown grant/notice SQL operation before serialized barrier, unknown deployment/activation writer, unclassified callback, arbitrary external HTTP, issuer collision or changed holder/module/source. Any future SDK callback that can mint application permission or deploy invalidates this ruling and must be separately fenced/settled. Restore cannot authorize new business work, rearm Entry, restart time, reuse consumed approval or reconstruct continuation from receipts.
+
+Required later native proof: actual pinned SDK completion held beyond original cutoff, exact barrier/revocation then closed restoration, eventual opaque completion, subsequent exchange/read denied, no new D1 grant/notice/deployment and legitimate historical rows preserved. Separate actual deployment-unknown test must still forbid restore. This is new coverage for later composition, not a reason to rerun completed Unit2a tests now.
+
+No product edits or tests run for this ruling; no remote effect. operationalReadiness=false;completePackage=false;PCoff=false.
