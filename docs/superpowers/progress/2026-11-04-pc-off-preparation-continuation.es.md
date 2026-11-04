@@ -1,3 +1,8 @@
+# Owner request retention — review and fix round1/5
+Task BASEc12d109..reviewedbf5cac5 (code c47d241). Independent reviewer review_owner_request_retention: SpecNeedsFixes/QualityNeedsFixes, noCritical; oneImportant: first400 bodyvalidation error overwritten by503 if cancellation remains pending beyond5s. Spec acceptance3 requires firstfailurepreservation AND actualcancelretention; not plan-mandated. Ruling: fix within original task, preserve immediate logical error while retain actual complete cancellation untilsettlement. Native regression oversize1025/limit1024→heldcancel→caller400→conflicting scopesblocked→settlementrelease. No widened/restarted timer/guard or cleanup claim. OneMinor: report must name9RPCdisposalwarnings in final57testjob (also9 priorjob), without inferring newphysicalleak. Resume originalimplementer, scopedcausalRED+affectedtests, reportupdate, samefreshreviewer scopedfixdiff. No runtime/provider/permission actions. Task notaccepted; nextimplementation notdispatched.
+
+---
+
 # Estado vigente — continuación autónoma del 4 de noviembre de 2026
 
 Esta sección actualiza las fases anteriores; las notas de abajo conservan su carácter histórico. Proyecto AFW / repo tokenizartinfo-ops/agent-friendly-web / entorno ramas aisladas y GitHub Actions / recurso código y evidencia sintética / acción edición y pruebas SOURCE-ONLY / rollback revertir la unidad antes de promoción. Sin cambios de runtime, permisos, secretos, OAuth, Entry, cron o datos de Max.
