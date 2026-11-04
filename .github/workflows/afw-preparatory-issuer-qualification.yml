@@ -35,4 +35,4 @@ jobs:
       - name: Affected ordinary store and initial cleanup regressions
         run: node --test test/delegated-oauth-store.test.mjs test/mcp-qa-finite-initial-cleanup-records.test.mjs test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-preparation-cleanup-native.test.mjs
       - name: One changed runtime graph compiler
-        run: npx esbuild worker/mcp-independent-closure/index.mjs --bundle --format=esm --platform=neutral --target=es2022 '--external:node:*' '--external:cloudflare:*' --outfile=/tmp/issuer-qa-graph.mjs
+        run: npx esbuild worker/independent-closure/index.mjs --bundle --format=esm --platform=neutral --target=es2022 '--external:node:*' '--external:cloudflare:*' --outfile=/tmp/issuer-qa-graph.mjs

@@ -35,8 +35,8 @@ test('issuer canonical domain own-data strict roundtrip is DATA not live capsule
 });
 test('issuer rejects unknown/prototype/accessor/symbol before getters',()=>{
  let reads=0;const r=reservation(),bad=Object.defineProperty({...r},'identity',{enumerable:true,get(){reads++;return r.identity;}});
- for(const v of [bad,Object.assign(Object.create(r),r),{...r,[Symbol('x')]:1},{...r,extra:true}])assert.throws(()=>encode('Reservation',v));
- assert.equal(reads,0);assert.throws(()=>decode('Reservation',JSON.stringify(r)));assert.throws(()=>decode('Reservation',' '.repeat(16385)));assert.throws(()=>encode('Reservation',{...r,recordHash:H}));
+ for(const v of [bad,Object.setPrototypeOf({...r},{}),{...r,[Symbol('x')]:1},{...r,extra:true}])assert.throws(()=>encode('Reservation',v));
+ assert.equal(reads,0);assert.throws(()=>decode('Reservation',' '+encode('Reservation',r)));assert.throws(()=>decode('Reservation',' '.repeat(16385)));assert.throws(()=>encode('Reservation',{...r,recordHash:H}));
 });
 for(const [key,value]of [['C0',0],['grantId','fresh-id'],['projectRevision',0],['resource','https://other.invalid/mcp'],['requestedScopes',['afw:write']],['consentExpiresAt','2026-11-02T00:15:00Z'],['reservedAt',0]]){
  test('issuer rejects invalid identity '+key,()=>assert.throws(()=>seal('Identity',{...identity(),[key]:value})));
