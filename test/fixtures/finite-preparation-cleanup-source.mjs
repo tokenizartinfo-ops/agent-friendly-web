@@ -1,7 +1,7 @@
 // SYN only. Source is derived first from the real initial native capsule reader.
 import {initialCanonical as canonical} from '../../lib/mcp-qa-finite-initial-material-records.mjs';
 import {readPrivateQaFiniteCandidate} from '../../lib/mcp-qa-finite-candidate-residency.mjs';
-export async function readPrivateQaFiniteOwnerSource({ctx},parent){
+export async function readPrivateQaFiniteOwnerSource({ctx,parent}){
  parent.assertCurrent();if(!ctx.fixtureEnrollmentSource)throw Error('SYN source absent');return ctx.fixtureEnrollmentSource;
 }
 export async function readPrivateQaFiniteConnectionSource({ctx},lease){
