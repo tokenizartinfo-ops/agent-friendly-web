@@ -39,6 +39,7 @@ export class FiniteOwnerFixture extends DurableObject{
    const ctx={id:this.ctx.id,storage,requestLineage:[]};this.requestCtx=ctx;
    let body=input.body;
    if(input.mode==='body')body=new ReadableStream({pull(controller){return new Promise(resolve=>{gate.held=true;gate.release=()=>{controller.enqueue(new Uint8Array([104]));resolve();};});},cancel(){gate.cancelHeld=true;return new Promise(resolve=>{gate.release=()=>{gate.settled=true;resolve();};});}});
+   if(input.mode==='oversize')body=new ReadableStream({start(controller){controller.enqueue(new Uint8Array(1025));},cancel(){gate.cancelHeld=true;return new Promise(resolve=>{gate.release=()=>{gate.settled=true;resolve();};});}});
    const original=new Request(origin+'/connections/finite-prepare',{method:input.method??'GET',headers:input.headers,body}),parent=createFiniteOwnerRequestLease(original);ctx.requestRoot=parent.lease;
    const observer=stageWork.observeFiniteOwnerRequestWork;
    try{return await observer({ctx,env:this.env,originalLease:parent.lease},async()=>{try{return Response.json({result:await ownerPreparation.prepareFiniteOwnerChoice({ctx,env:this.env,request:original},parent.lease),lineage:ctx.requestLineage});}catch(e){gate.denied=true;return Response.json({rejected:true,status:e.status??503});}finally{parent.finish();}});}

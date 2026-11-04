@@ -40,3 +40,15 @@ test('resolver genuine children and proof descendants retain root and five secon
  assert.equal(r.result?.status,200);assert.ok(r.lineage.length>=3);
  for(const observation of r.lineage){assert.equal(observation.sameRoot,true);assert.equal(observation.cloneDenied,true);assert.equal(observation.frozen,true);assert.ok(observation.remaining>0&&observation.remaining<=5000);}
 });
+
+test('oversized body preserves first400 while actual cancellation stays retained past child timeout',async t=>{
+ const f=await native(t),p=f.json('/fixture/request-prepare',{mode:'oversize',method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded'}});
+ await wait(f,'cancelHeld');
+ try{
+  assert.equal((await p).status,400,'the size failure precedes any cancellation or deadline failure');
+  await blocked(f);await new Promise(resolve=>setTimeout(resolve,5100));await blocked(f);
+  assert.deepEqual(await f.json('/fixture/rows',{}),[]);
+ }finally{await f.json('/fixture/request-release',{});}
+ await wait(f,'settled');await new Promise(resolve=>setTimeout(resolve,30));
+ assert.equal((await f.json('/fixture/request-probe',{})).requestAllowed,true);
+});
