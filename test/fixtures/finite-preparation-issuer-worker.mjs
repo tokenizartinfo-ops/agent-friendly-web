@@ -151,4 +151,5 @@ export class FiniteIssuerFixture extends DurableObject{
   return Response.json({result,events,at,identity:i});
  }
 }
-export default {fetch(request,env){return env.FIXTURE.get(env.FIXTURE.idFromName('afw-own-successor-closure-v1')).fetch(request);}};
+const handler={fetch(request,env){return env.FIXTURE.get(env.FIXTURE.idFromName('afw-own-successor-closure-v1')).fetch(request);}};
+export default handler;
