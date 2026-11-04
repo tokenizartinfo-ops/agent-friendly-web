@@ -1,3 +1,21 @@
+# Active implementation checkpoint — fixed finite compatibility primitives
+
+4 November 2026. Root reviewed architecture commit `0bf8a38ad64433f2a390d99819535be57edfe24d` on `docs/finite-known-profile-design-20261104`. It defines three reviewable source checkpoints: fixed hash/policy/observer primitives; shared private Known lifecycle adapters; explicit finite candidate/historical role consumers. No generic profile callback, automatic old-or-new validation, new public Workflow/Operator core, or legacy coverage removal.
+
+Root copied the reviewed spec/plan to source and activated ONLY Checkpoint1 at BASE `48462cdc36315f91b5417df9e8333cd6601f270d`. Sole product writer: `implement_finite_known_c1` (Sol high). Branch: `feat/finite-native-cleanup-20261101`. Task brief: `docs/superpowers/briefs/2026-11-04-finite-known-profile-c1.md`. Report target: `docs/superpowers/reports/2026-11-04-finite-known-profile-c1.md`. The long compatibility plan's delegation header was adjusted by root to the standing SDD method; one writer and independent checkpoint reviews remain mandatory.
+
+Checkpoint1 may modify only mcp-activation-observer and mcp-release-operator-policy plus two new tests/evidence. Fixed exports: finiteActivationConfigurationHash, createFiniteActivationObserver, validateFiniteReleaseOperatorBundle(confirm_named only), resolveFiniteNamedActivationPlan and validateFiniteNamedCancellationHistory. Legacy exports remain old-pair strict with unchanged golden digest and positive observer/named behavior. No runtime/reservation/finite consumer changes belong to this first checkpoint. Later checkpoints are NOT yet assigned.
+
+Original flag writer `implement_signal_opt_in` is idle/BLOCKED at checkpoint3fb1751c; do not resume its source writes concurrently. Its exact native opt-in proof and partial test/compiler receipts are preserved, but original opt-in Task1 remains unaccepted until all compatibility consumers and final qualification pass. Its existing temporary qualifier stays untouched during C1. C1 writer uses/removes its own scoped qualifier. Root does not buy credits or retry quota errors.
+
+Next: verify C1 actual logs/report/full BASE diff, fresh independent C1 review, then activate lifecycle checkpoint2 and role integration checkpoint3 sequentially. Do not rerun accepted Unit2a/Unit2b.1 or the native flag experiment merely for metadata. Initial-upload timeout is still unresolved and must be diagnosed for final compatibility acceptance. The C2 material/producer source is still unavailable; a positive isolated native Known fixture is not a mounted complete lifecycle.
+
+Prepared later factual context remains only closed_ui/read_consent; reviewed copies are in this docs branch. Notice/finite prearm and complete issuer/cleanup still require separate source work. The third-stage/T0 cycle report13688c4 recommends exact CLOSED third prearm followed by explicit full setup shape conversion, including removal of five prep-only bindings; no implementation or full-projection relaxation has been accepted for that proposal.
+
+No remote runtime/provider/Entry/DDL/credential/permission/OAuth/OTP/cron/Max/main/merge action. Source ceiling remains expired, operationalReadiness=false, completePackage=false, PCoff=false. No user intervention is required at this source stage. Preserve one consuming coordinated PC-off occurrence after nonconsuming preparation.
+
+---
+
 # Current checkpoint — 4 November 2026
 
 ## Signal qualification: positive native result, integration still pending
