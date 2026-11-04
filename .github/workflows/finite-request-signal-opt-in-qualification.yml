@@ -1,0 +1,25 @@
+name: AFW finite request signal opt-in qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - .github/workflows/finite-request-signal-opt-in-qualification.yml
+permissions:
+  contents: read
+jobs:
+  qualification:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Selected causal native RED
+        run: timeout 60s node --test --test-timeout=20000 --test-name-pattern='actual native signal capability' test/mcp-qa-finite-owner-native-conduit-native.test.mjs

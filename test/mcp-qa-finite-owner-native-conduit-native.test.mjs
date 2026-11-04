@@ -42,7 +42,8 @@ test('actual native signal capability observes receiver separately during held r
  const sender=await pending,held=await f.state();
  await f.call('/fixture/release');const settled=await f.wait('settled');
  assert.equal(held.receiverEntered,1);assert.equal(settled.businessRows,0);
- assert.equal(typeof held.receiverAborted,'boolean');assert.equal(typeof settled.beforeGuardAborted,'boolean');
+ assert.equal(held.receiverAborted,true,'actual receiver Request.signal must abort while read remains held');
+ assert.equal(settled.beforeGuardAborted,true,'actual receiver signal must still be aborted immediately before product guard');
  const qualification=held.receiverAborted&&settled.beforeGuardAborted?'receiver_abort_observed':'receiver_abort_NOT_qualified';
  console.log('native_signal_capability',JSON.stringify({qualification,sender,receiverDuringHeldRead:held.receiverAborted,receiverBeforeGuard:settled.beforeGuardAborted,profiles:f.profiles,businessProducer:false}));
 });
