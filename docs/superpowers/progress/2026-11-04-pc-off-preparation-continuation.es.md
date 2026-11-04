@@ -1,3 +1,26 @@
+# Estado vigente — continuación autónoma del 4 de noviembre de 2026
+
+Esta sección actualiza las fases anteriores; las notas de abajo conservan su carácter histórico. Proyecto AFW / repo tokenizartinfo-ops/agent-friendly-web / entorno ramas aisladas y GitHub Actions / recurso código y evidencia sintética / acción edición y pruebas SOURCE-ONLY / rollback revertir la unidad antes de promoción. Sin cambios de runtime, permisos, secretos, OAuth, Entry, cron o datos de Max.
+
+## Unidades SOURCE aceptadas hoy
+- Cápsula inmutable de activación real: código bae656253793eca490e9d7d38cd3a8cb142ba0c4; Actions41873478253:140 focused +102 consumers +23 compiler, lintPASS. Revisión independiente limpia; aceptación docs/superpowers/reviews/2026-11-04-finite-initial-capsule.es.md en73c6b79430db10ed9eaa663c9625569d8f88aba6.
+- Integración readonly/helper/hostA: código b43847adf24fad08b91eccd0f055b6dadd99d49c; Actions41875644983:162 focused +23 compiler y lintPASS. Seis blobs importados exactos de97a939; fixture conserva cambios primarios. Revisión independiente limpia; aceptación docs/superpowers/reviews/2026-11-04-finite-readonly-integration.es.md en3ee192749d45824707bcc621df33e4e61d67ed24.
+- Lector factual inicial desmontado: código e38b1ef4c20a1672a2e9fe49130ae25d256e4a98; Actions41880790474/job126752437101/attempt1:169PASS,0FAIL/CANCEL/SKIP y lintPASS. Revisión SpecPass/qualityacceptable, sin Critical/Important; Minor de aislamiento de rechazo por titular trasladada a siguiente unidad. Aceptación docs/superpowers/reviews/2026-11-04-finite-initial-owner-source.es.md en c12d109395f9c1d386cf665d7eea5e49c12e311a. Informe final3bdcb61c1e981aa4e21ae453784bbe4347e3f041; reviewpackage en este branch5c56fae. No claim de montaje ni actual custody.
+
+## Única unidad de implementación activa
+Retención de solicitud owner original y handoff genuino, BASE c12d109395f9c1d386cf665d7eea5e49c12e311a. Spec/plan docs/superpowers/{specs,plans}/2026-11-04-owner-request-retention.md. Writer implement_owner_request_retention; no otro writer concurrente. Request bookkeeping NO concede autoridad. Ancestría privada root/child/proof sin reiniciar30s/5s; factual reader solo presta retención a solicitud ambient real; consumer one-use obligatorio antes de request→owner; cuerpo+cancelación real retenidos. Host real desmontado/pending hasta handoff de cleanup separado.
+
+RED informado41885124589/job1267674193720/5PASS; ampliado41885445510/job1267685253240/7PASS. Primera implementación be12e9e/41885838856:98/99PASS,lintclean según writer; único fallo existente expiryAccess503vs401 por timerchild. Fix c47d241 preserva guard del padre sin ensanchar plazo; CI dirigido+compiler pendiente. Controller no acepta unidad hasta logs exactos y revisión independiente. Informe docs/superpowers/reports/2026-11-04-owner-request-retention.md pendiente. No repetir ejecuciones ya consumidas por metadata retrasada.
+
+## Continuación después de esta unidad
+Calificar handoff cleanup/owner y forwards/rutas desmontadas; UnitB controller cerrado de observación/preEntry, bundle y preservación/restauración; evidencia exacta del baseline c570/inherited entry/holders; wholebranchreview+checks y retirar qualifiers; reconciliar credenciales realmente cargadas/permiso endpoint/config/namespace/latencia/ceiling/C1 solo cuando fuente esté completa. Lector/publicador nativos vencidos3Nov02:59UTC: no renovación anticipada. Ver regla una sola ocurrencia más abajo: no ensayo completo PC-on separado.
+
+## Precisiones y límites
+Los metadatos GitHub consultados mostraron estados que no coincidían temporalmente con jobs/logs de ejecución; causa no establecida. Calificar por head/attempt/job y salida real. No atribuir a claves, Cloudflare o capacidad sin evidencia. Consulta acotada a chat Tokenizart/Atelier respondió sin ejecutor cloud Linux acreditado actualmente; no pruebas/clone/proveedor ni nuevo monitor. Hallazgos FCO no se mezclan con AFW. Publiccase Tokenizart ya LIVE: no repetir uploads/activación.
+operationalReadiness=false;completePackage=false;PC-off pendiente; no nueva Entry ni permiso delegado real.
+
+---
+
 # Current trial-sequence ruling — 4 November 2026
 
 This correction takes precedence over earlier continuation wording that implied a separate complete PC-on live rehearsal followed by another complete PC-off occurrence.
