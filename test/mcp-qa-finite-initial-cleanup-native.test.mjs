@@ -103,7 +103,9 @@ for(const [key,mode] of [['activation-send','delete'],['activation-ack','delete'
 
 
 test('initial winner durably records actual activation after one fixed POST',()=>using(async f=>{
- const r=await f.stub.invoke(f.refs),rows=await f.stub.snapshot();
+ const r=await f.stub.invoke(f.refs);
+ try{
+ const rows=await f.stub.snapshot();
  assert.ok(record(rows,'activation-send'),'live winner must persist SEND');
  assert.ok(record(rows,'activation-ack'),'actual provider response must yield ACK');
  assert.ok(record(rows,'activation-completion'),'primary readback must yield Completion');
@@ -114,7 +116,8 @@ test('initial winner durably records actual activation after one fixed POST',()=
  assert.equal(rows.some(([k])=>k==='afw.qa-finite-trial.v1:head'),false);
  assert.equal(f.activations.length,1);assert.equal(f.restores.length,0);
  assert.equal(r.status,'material_recorded');
- assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');assert.equal(f.activations.length,1);
+ const replay=await f.stub.invoke(f.refs);try{assert.equal(replay.status,'admin_pending');}finally{replay[Symbol.dispose]?.();}assert.equal(f.activations.length,1);
+ }finally{r[Symbol.dispose]?.();}
 }));
 test('lost activation acknowledgement remains uncertain and never reposts',()=>using(async f=>{
  f.alarmMode='activation-ack-lost';assert.equal((await f.stub.invoke(f.refs)).status,'admin_pending');

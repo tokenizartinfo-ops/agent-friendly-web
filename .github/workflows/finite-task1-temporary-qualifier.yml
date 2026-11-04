@@ -21,10 +21,10 @@ jobs:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: B2b native qualification
-        run: node --test test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-initial-cleanup-records.test.mjs test/mcp-qa-finite-initial-workflows-native.test.mjs test/mcp-qa-finite-initial-history-schema-native.test.mjs test/mcp-qa-finite-initial-old-guard-native.test.mjs test/mcp-qa-finite-initial-gates-native.test.mjs test/mcp-qa-finite-initial-activation-wire-native.test.mjs test/mcp-qa-finite-initial-custody-probe-native.test.mjs test/mcp-qa-finite-initial-scope.test.mjs
+        run: node --test test/mcp-qa-finite-initial-cleanup-native.test.mjs test/mcp-qa-finite-initial-cleanup-records.test.mjs test/mcp-qa-finite-initial-capsule-records.test.mjs test/mcp-qa-finite-initial-capsule-native.test.mjs test/mcp-qa-finite-initial-workflows-native.test.mjs test/mcp-qa-finite-initial-history-schema-native.test.mjs test/mcp-qa-finite-initial-old-guard-native.test.mjs test/mcp-qa-finite-initial-gates-native.test.mjs test/mcp-qa-finite-initial-activation-wire-native.test.mjs test/mcp-qa-finite-initial-custody-probe-native.test.mjs test/mcp-qa-finite-initial-scope.test.mjs
       - name: Scoped lint
         if: always()
-        run: npx eslint lib/mcp-qa-finite-stage-work.mjs lib/mcp-fixed-terminal-workflows.mjs lib/mcp-qa-finite-initial-*.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-initial-cleanup-*.test.mjs test/mcp-qa-finite-initial-scope.test.mjs test/fixtures/finite-initial-entry-world.mjs
+        run: npx eslint lib/mcp-qa-finite-stage-work.mjs lib/mcp-fixed-terminal-workflows.mjs lib/mcp-qa-finite-initial-*.mjs worker/independent-closure/finite.mjs test/mcp-qa-finite-initial-cleanup-*.test.mjs test/mcp-qa-finite-initial-capsule-*.test.mjs test/mcp-qa-finite-initial-scope.test.mjs test/fixtures/finite-initial-entry-world.mjs
   forward-consumers:
     runs-on: ubuntu-24.04
     timeout-minutes: 12
@@ -39,7 +39,7 @@ jobs:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Actual B1 entry and upload consumers
-        run: node --test --test-concurrency=1 test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-upload-native.test.mjs
+        run: node --test --test-concurrency=1 test/mcp-qa-finite-initial-entry-native.test.mjs test/mcp-qa-finite-initial-upload-native.test.mjs test/mcp-qa-finite-initial-material-native.test.mjs test/mcp-qa-finite-initial-material-records.test.mjs
   compiler:
     runs-on: ubuntu-24.04
     timeout-minutes: 12
