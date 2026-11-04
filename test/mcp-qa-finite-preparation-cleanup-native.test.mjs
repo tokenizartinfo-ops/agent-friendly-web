@@ -16,7 +16,7 @@ test('causal: genuine owner POST consumes admission for actual original native c
  const rows=await plain(f.stub.snapshot());assert.equal(rows.filter(([k])=>k.startsWith(P)).length,2);
  assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);
  assert.equal(rows.filter(([k])=>k.startsWith('afw.finite-policy-effect.v1:')).length,0);
- for(const [k,v]of before)assert.equal(rows.find(([key])=>key===k)?.[1],v);
+ for(const [k,v]of before)assert.deepEqual(rows.find(([key])=>key===k)?.[1],v);
  assert.equal(await f.stub.alarmInfo(),capsule.C0);
 }));
 
@@ -33,7 +33,7 @@ test('generic first GET remains a genuine admitted mismatched-selector negative'
  assert.equal(result.result.outcome.status,'admin_pending');assert.equal((await plain(f.stub.snapshot())).filter(([k])=>k.startsWith(P)).length,0);
  assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);
 }));
-for(const mode of ['throw-enrollment','throw-ack','sync-reject','readback-lost','alarm-lost'])test('native '+mode+' is pending, immutable and never an owner forward',()=>world(async f=>{
+for(const mode of ['throw-enrollment','throw-ack','sync-reject','readback-lost','alarm-lost','ack-readback-lost','ack-sync-reject','ack-alarm-lost'])test('native '+mode+' is pending, immutable and never an owner forward',()=>world(async f=>{
  const {result,capsule,screen,token}=await enroll(f,mode);assert.equal(result.result.outcome.status,'admin_pending');
  const rows=await plain(f.stub.snapshot()),enrolled=rows.filter(([k])=>k.startsWith(P));
  assert(enrolled.length>=1&&enrolled.length<=2);
@@ -45,12 +45,13 @@ for(const mode of ['throw-enrollment','throw-ack','sync-reject','readback-lost',
  assert.equal(outcome.status,'restored','SYN/manual existing native alarm event must still recover closed_ui');
  assert.equal(f.restores.length,1);
 }));
-for(const mode of ['hold-enrollment','hold-ack','sync-hold'])test('actual '+mode+' after native commit stays in original scope until external release',()=>world(async f=>{
+for(const mode of ['hold-enrollment','hold-ack','sync-hold','readback-hold'])test('actual '+mode+' after native commit stays in original scope until external release',()=>world(async f=>{
  const before=await plain(f.stub.snapshot()),capsule=JSON.parse(before.find(([k])=>k.endsWith(':capsule'))[1]),source=(await plain(f.ownerRead())).source,token=await f.enrollmentToken(source);
  f.nowOffset=capsule.I0+400000-Date.now();const screen=await plain(f.stub.enrollmentScreen(token)),work=plain(f.stub.enrollmentPost(token,screen,mode));
  for(let i=0;i<200;i++){if((await plain(f.stub.stats())).held)break;await new Promise(r=>setTimeout(r,20));}
  assert.equal((await plain(f.stub.stats())).held,true,'hold is after actual native transaction return');
  const result=await work;assert.equal(result.result.outcome.status,'admin_pending');assert.equal((await plain(f.stub.probeStageAvailability())).available,false);
+ assert.deepEqual(await plain(f.stub.enrollmentProbe()),{requestAllowed:false,readAllowed:false});
  const rows=await plain(f.stub.snapshot());assert(rows.some(([k])=>k===P+'enrollment'));assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);
  await f.stub.release();
  for(let i=0;i<200;i++){if((await plain(f.stub.probeStageAvailability())).available)break;await new Promise(r=>setTimeout(r,20));}
@@ -72,4 +73,12 @@ for(const corruption of ['orphan','hash','unknown','head','policy','permission',
  await f.stub.enrollmentCorrupt(corruption);
  assert.equal((await plain(f.stub.enrollmentRead())).status,'unavailable');
  assert.equal((await plain(f.alarmAt(capsule.C0+1))).status,'admin_pending');assert.equal(f.restores.length,0);assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);
+}));
+
+for(const mode of ['source-drift','holder-drift','qa-drift','clock-backward','clock-forward','clone-admission','wrong-stage'])test('genuine original owner decision refuses '+mode+' without any cleanup DATA or forward',()=>world(async f=>{
+ const {result}=await enroll(f,mode);
+ assert.equal((await plain(f.stub.snapshot())).filter(([k])=>k.startsWith(P)).length,0);
+ assert.equal((await plain(f.stub.snapshot())).filter(([k])=>k.endsWith(':connection:approval')).length,1,'actual signed POST/CSRF precedes boundary refusal');
+ if(result.result)assert.equal(result.result.outcome.status,'admin_pending');else assert.equal(result.status,'unavailable');
+ assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);
 }));
