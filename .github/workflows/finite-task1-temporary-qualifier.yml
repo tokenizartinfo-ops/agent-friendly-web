@@ -19,11 +19,11 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node --test --test-name-pattern='oversized body' test/mcp-qa-finite-owner-request-retention-native.test.mjs
+      - run: node --test test/mcp-qa-finite-owner-request-retention-native.test.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs test/mcp-qa-finite-owner-request-retention.test.mjs
       - name: Scoped lint
         if: always()
         run: npx eslint lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs test/fixtures/finite-owner-worker.mjs
       - name: Fixed source artifact hashes
         run: |
-          wc -c lib/mcp-qa-finite-{stage-work,owner-preparation,owner-http,policy-transport,initial-owner-source}.mjs
-          sha256sum lib/mcp-qa-finite-{stage-work,owner-preparation,owner-http,policy-transport,initial-owner-source}.mjs test/mcp-qa-finite-owner-request-retention*.test.mjs
+          wc -c lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs test/fixtures/finite-owner-worker.mjs
+          sha256sum lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs test/fixtures/finite-owner-worker.mjs
