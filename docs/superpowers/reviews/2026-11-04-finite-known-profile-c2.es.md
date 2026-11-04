@@ -1,0 +1,9 @@
+# Checkpoint 2 — independent source acceptance
+
+4 November2026UTC. BASEc9809d79d7e4e918e595da829a2109fdc71f453a; product0df957482755f4ef6e718e759bff2e69b50517ba; finalcode1bc37f26df3837780c295dafc366f1ad7694370f; finalreport2f3d11f7aa0381fed24265ef4f74129ff96500c4. Report-only BASE-tree typo corrected to33c65238fd4cd3072468c3482089dcfa62194dee without test repeat.
+
+Fresh independent reviewer review_finite_known_c2 (Astra high): SpecPass / QualityApproved; no Critical/Important/Minor. Full5commits/7patches reviewed; focused extra reads only cut Known lease/authorization body and native fixture completion/replay. Fixed private selection reaches every nested validation/observer/reservation, legacy entries remain fixed, private WeakSet lease/70s+5s/20s clocks/18hooks/primary identity/history/reentrance and effect order preserved. Native fixture calls actual new finite Known with separate fully uninstrumented string-payload positive; restart totals collected after replay. Review package docsbranchb472f206b40cb96ebc37adfb7e876a6ec26aa63e.
+
+Root independently read final Actions41930295369/job126925170305/attempt1:90/90 unit+90/90 native PASS,0fail/skip/cancel; lint0errors16repo-wide warnings. Legacy positive cases retained. Isolated timings and SYN provider/custody/identity/fault controls are not SLA, real provider execution or mounted lifecycle proof. Actual existing retention algorithms are unchanged, not independently physically requalified here. Own qualifier removed, parent/historical pins unchanged.
+
+Checkpoint2 COMPLETE. Checkpoint3 role integration and final compatibility compiler remain required and are activated by the adjacent brief. Original opt-in task remains incomplete. Current C2/material source unavailable and mounts unchanged; no new producer. operationalReadiness=false;completePackage=false;PCoff=false, sourceceilingexpired. No runtime/provider/Entry/DDL/credentials/permissions/OAuth/OTP/cron/Max/main/merge.
