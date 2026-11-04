@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import * as activation from '../lib/mcp-activation-observer.mjs';
 
-const legacy=()=>({compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat','global_fetch_strictly_public'],main_module:'index.mjs',exports:{AfwOwnEventNode:{type:'durable-object',storage:'sqlite'}},bindings:[{name:'TOKEN',type:'secret_text'},{name:'ENABLED',type:'plain_text',text:'true'}],usage_model:'standard',containers:[]});
+const legacy=()=>({compatibility_date:'2026-09-07',compatibility_flags:['nodejs_compat','global_fetch_strictly_public'],main_module:'index.mjs',exports:{AfwOwnEventNode:{type:'durable-object',storage:'sqlite'}},bindings:[{name:'TOKEN',type:'secret_text'},{name:'ENABLED',type:'plain_text',text:'true'},{name:'AFW_DOSSIER_EVENTS_NODE',type:'durable_object_namespace',namespace_id:'b'.repeat(32),class_name:'AfwOwnEventNode'}],usage_model:'standard',containers:[]});
 const finite=()=>({...legacy(),compatibility_flags:['nodejs_compat','global_fetch_strictly_public','enable_request_signal']});
 const canonical=value=>JSON.stringify(value,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b))):x);
 const independent=value=>createHash('sha256').update(canonical({...value,bindings:[...value.bindings].sort((a,b)=>a.name.localeCompare(b.name))})).digest('hex');
@@ -23,7 +23,7 @@ async function observe(configuration,make,actual=configuration){
  return {run:()=>fn(input,new AbortController().signal),calls};
 }
 test('legacy_pair_digest_and_positive_observer_preserved',async()=>{
- const value=legacy();assert.equal(activation.activationConfigurationHash(value),independent(value));
+ const value=legacy();assert.equal(activation.activationConfigurationHash(value),independent(value));console.log('LEGACY_GOLDEN '+independent(value));
  const {run,calls}=await observe(value,activation.createActivationObserver);
  assert.equal((await run()).configurationHash,independent(value));assert.equal(calls.length,7);
 });
