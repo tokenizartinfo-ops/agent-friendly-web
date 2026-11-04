@@ -18,4 +18,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node --experimental-vm-modules --test test/temporary-preparation-cleanup-compiler-diagnostic.test.mjs
+      - run: node --test test/mcp-qa-finite-preparation-cleanup-records.test.mjs test/mcp-qa-finite-preparation-cleanup-native.test.mjs test/mcp-qa-finite-initial-cleanup-native.test.mjs
+      - run: npx eslint lib/mcp-qa-finite-initial-anchors.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-preparation-cleanup-native.test.mjs test/mcp-qa-finite-preparation-cleanup-build.test.mjs
+      - run: git diff --check e256ee1a43ca3125fdb12485ceab712b6a7e197e HEAD
+      - run: node --test test/mcp-qa-finite-preparation-cleanup-build.test.mjs

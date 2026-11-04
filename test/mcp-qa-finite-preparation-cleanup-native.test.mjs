@@ -82,3 +82,10 @@ for(const mode of ['source-drift','holder-drift','qa-drift','clock-backward','cl
  if(result.result)assert.equal(result.result.outcome.status,'admin_pending');else assert.equal(result.status,'unavailable');
  assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);
 }));
+
+for(const pin of ['absent','foreign','malformed','accessor'])test('SYN malformed compiled DATA descriptor '+pin+' fails after real original admission without a row or forward',()=>world(async f=>{
+ const {result}=await enroll(f);
+ assert.equal(result.prepared.status,202);assert.match(result.result.admitted,/^[a-f0-9]{64}$/);assert.equal(result.result.outcome.status,'admin_pending');
+ assert.equal((await plain(f.stub.snapshot())).filter(([k])=>k.startsWith(P)).length,0);
+ assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);
+},'enrollment-pin-'+pin));
