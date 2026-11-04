@@ -40,9 +40,10 @@ test('actual native signal capability observes receiver separately during held r
  const pending=f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded'},body:'SYN=bounded'}).then(async r=>({status:r.status,body:await r.json()}),()=>({senderRejected:true}));
  await f.wait('held');await f.call('/fixture/abort');
  const sender=await pending,held=await f.state();
- await f.call('/fixture/release');const settled=await f.wait('settled');
- assert.equal(held.receiverEntered,1);assert.equal(held.settled,false,'actual receiving read remains occupied after sender settles');
- assert.equal(held.readReturned,false,'held native read has not physically returned');
+ await f.call('/fixture/release');const settled=await f.wait('readCancelled');
+ assert.equal(held.receiverEntered,1);
+ assert.equal(held.readReturned,false,'held native read has not physically returned after sender settles');
+ assert.equal(held.readCancelled,false,'held read cancellation awaits physical release');
  assert.equal(settled.readReturned,true,'actual native read eventually returned');
  assert.equal(settled.readCancelled,true,'product finiteNativeBytes caught the denied post-read lease guard and canceled the real reader');
  assert.equal(settled.settled,true,'receiver handler has returned after cancellation');
