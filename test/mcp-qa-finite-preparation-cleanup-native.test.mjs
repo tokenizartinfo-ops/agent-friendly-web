@@ -7,7 +7,9 @@ async function world(fn){const f=await initialEntryHarness('enrollment');try{awa
 test('causal: genuine owner POST consumes admission for actual original native capsule, enrolls once, remains pending without owner SEND',()=>world(async f=>{
  const before=await plain(f.stub.snapshot()),capsule=JSON.parse(before.find(([k])=>k.endsWith(':capsule'))[1]);
  const source=(await plain(f.ownerRead())).source,token=await f.enrollmentToken(source);
+ f.nowOffset=capsule.I0+400000-Date.now();
  const screen=await plain(f.stub.enrollmentScreen(token));
+ assert.equal(screen.fixtureError,undefined,JSON.stringify(screen));
  assert.equal(screen.preconnectionId,capsule.preconnectionId);
  const r=await plain(f.stub.enrollmentPost(token,screen));assert.equal(r.prepared.status,202);assert.match(r.result.admitted,/^[a-f0-9]{64}$/);
  assert.equal(r.result.outcome.status,'admin_pending');
