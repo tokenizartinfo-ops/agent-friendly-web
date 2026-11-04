@@ -9,7 +9,7 @@ concurrency:
   group: finite-owner-phase-context-source
   cancel-in-progress: false
 jobs:
-  green-source:
+  green-native-matrix:
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
