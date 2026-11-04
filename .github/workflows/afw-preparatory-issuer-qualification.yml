@@ -1,0 +1,30 @@
+name: AFW preparatory issuer component qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - 'lib/mcp-qa-finite-preparation-issuer*'
+      - 'lib/mcp-qa-finite-initial-cleanup.mjs'
+      - 'db/finite-preparation-issuer-fences.sql'
+      - 'test/*preparation-issuer*'
+      - 'test/fixtures/finite-preparation-issuer*'
+      - '.github/workflows/afw-preparatory-issuer-qualification.yml'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Causal new-interface qualification
+        run: node --test test/mcp-qa-finite-preparation-issuer-records.test.mjs
