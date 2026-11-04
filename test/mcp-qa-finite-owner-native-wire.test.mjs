@@ -80,3 +80,32 @@ test('late native fetch and its subsequent real body cancellation remain occupie
   await cancelling;assert.throws(probe);releaseCancel();await Promise.all(f.retained);assert.equal(await probe(),true);
  }finally{releaseCancel?.();other.finish();}
 });
+
+for(const fault of ['abort','holder-drift'])test('empty late successful response cancels before its first read after '+fault,async()=>{
+ let enteredFetch,releaseFetch,releaseCancel,enterCancel,bodyController,readCalls=0,cancelStarted=false;
+ const fetched=new Promise(r=>{enteredFetch=r;}),cancelling=new Promise(r=>{enterCancel=r;});
+ const f=sender(()=>{enteredFetch();return new Promise(r=>{releaseFetch=r;});}),controller=new AbortController();
+ const pending=invoke(f,new Request(U,{signal:controller.signal}));
+ await fetched;
+ if(fault==='abort'){controller.abort();assert.equal((await pending).status,503);}
+ else f.env.OAUTH_KV={};
+ const stream=new ReadableStream({start(c){bodyController=c;},cancel(){cancelStarted=true;enterCancel();return new Promise(r=>{releaseCancel=r;});}});
+ const getReader=stream.getReader;
+ stream.getReader=function(){const reader=Reflect.apply(getReader,this,[]),read=reader.read;reader.read=function(){readCalls++;return Reflect.apply(read,this,[]);};return reader;};
+ const other=createFiniteOwnerRequestLease(new Request(U)),probe=()=>observeFiniteOwnerRequestWork({ctx:f.ctx,env:f.env,originalLease:other.lease},async()=>true);
+ let timer;
+ try{
+  releaseFetch(new Response(stream));
+  const cancelled=await Promise.race([cancelling.then(()=>true),new Promise(r=>{timer=setTimeout(()=>r(false),250);})]);
+  assert.equal(cancelled,true,'empty late response must begin cancellation before reading');
+  assert.equal(readCalls,0,'invalid original lease or holder must not start a response read');
+  assert.equal((await pending).status,503);assert.throws(probe,'actual cancel remains occupied after logical finish');
+  releaseCancel();await Promise.all(f.retained);assert.equal(await probe(),true);
+ }finally{
+  clearTimeout(timer);
+  // RED-only drain of the held read, after the causal assertion. This chunk
+  // never masks the empty-stream behavior being tested above.
+  if(!cancelStarted)bodyController.enqueue(new Uint8Array([1]));
+  await cancelling;releaseCancel?.();await pending;await Promise.all(f.retained);other.finish();
+ }
+});
