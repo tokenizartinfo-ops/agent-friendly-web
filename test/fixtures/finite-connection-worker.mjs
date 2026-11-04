@@ -1,3 +1,5 @@
+import * as requestStage from '../../lib/mcp-qa-finite-stage-work.mjs';
+import {createFinitePolicyTransport} from '../../lib/mcp-qa-finite-policy-transport.mjs';
 import {FiniteOwnerFixture} from './finite-owner-worker.mjs';
 import {createFiniteOwnerRequestLease,prepareFiniteOwnerChoice} from '../../lib/mcp-qa-finite-owner-preparation.mjs';
 import {createFiniteConnectionPreparation} from '../../lib/mcp-qa-finite-connection-preparation.mjs';
@@ -44,6 +46,24 @@ export class FiniteConnectionFixture extends FiniteOwnerFixture{
    this.effectCtx={id:this.ctx.id,storage};return Response.json({configured:true});
   }
   if(path==='/fixture/material')return Response.json(await initializeSyntheticConnectionMaterial(this.ctx));
+
+  if(path==='/fixture/request-publish'){
+   const input=await request.json(),original=new Request(input.url,{method:'POST',headers:input.headers,body:input.body}),parent=createFiniteOwnerRequestLease(original),ctx=this.effectCtx??this.ctx;
+   const observer=requestStage.observeFiniteOwnerRequestWork??((_o,fn)=>fn());
+   const gate={held:true,settled:false};this.requestGate=gate;this.requestCtx=ctx;
+   try{return await observer({ctx,env:this.env,originalLease:parent.lease},async()=>{
+    requestStage.retainFiniteOwnerStagePromise(new Promise(resolve=>{gate.release=()=>{gate.settled=true;resolve();};}));
+    const prepared=await prepareFiniteOwnerChoice({ctx,env:this.env,request:original},parent.lease),refs={preconnectionId:prepared.preconnectionId,stage:prepared.stage};
+    const answer=await createFiniteConnectionPreparation({ctx,env:this.env}).run(refs,parent.lease);
+    let continued=false,replayed=false;try{continued=await requestStage.continueFiniteOwnerStageWork({ctx,env:this.env,originalLease:parent.lease},async()=>true);}catch{}
+    try{await createFinitePolicyTransport({ctx,env:this.env}).run(refs,parent.lease);replayed=true;}catch{}
+    return Response.json({answer,continued,replayed});
+   });}catch{return Response.json({rejected:true});}finally{parent.finish();}
+  }
+  if(path==='/fixture/request-missing-admission'){
+   const input=await request.json(),parent=createFiniteOwnerRequestLease(request),observer=requestStage.observeFiniteOwnerRequestWork??((_o,fn)=>fn());
+   try{return await observer({ctx:this.ctx,env:this.env,originalLease:parent.lease},async()=>{try{await createFinitePolicyTransport({ctx:this.ctx,env:this.env}).run({...input,admission:{lease:parent.lease}},parent.lease);return Response.json({accepted:true});}catch{return Response.json({accepted:false});}});}finally{parent.finish();}
+  }
   if(path==='/fixture/publish'){
    const input=await request.json(),original=new Request(input.url,{method:'POST',headers:input.headers,body:input.body}),parent=createFiniteOwnerRequestLease(original);
    try{
