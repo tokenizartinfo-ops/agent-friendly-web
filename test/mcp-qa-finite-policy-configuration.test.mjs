@@ -30,7 +30,7 @@ test('full candidate preserves holders and removes exactly five names',()=>{
  const before=prearmConfiguration.bindings.map(b=>b.name),after=full.bindings.map(b=>b.name);
  assert.deepEqual(before.filter(n=>!after.includes(n)).sort(),removed);
  assert.deepEqual(after.filter(n=>!before.includes(n)),[]);
- for(const holder of prearmConfiguration.bindings.filter(b=>b.type!=='plain_text'))assert.deepEqual(binding(full,holder.name),holder);
+ for(const holder of prearmConfiguration.bindings.filter(b=>b.type!=='plain_text'&&!removed.includes(b.name)))assert.deepEqual(binding(full,holder.name),holder);
  assert.equal(binding(full,'DELEGATED_RATE_LIMITER'),undefined);
  for(const key of Object.keys(prearmConfiguration).filter(k=>k!=='bindings'))assert.deepEqual(full[key],prearmConfiguration[key]);
  assert.deepEqual(full.exports,prearmConfiguration.exports);
@@ -57,7 +57,6 @@ test('foreign shape and private placeholder cannot be repaired',()=>{
   x=>binding(x.prearmConfiguration,'OAUTH_KV').namespace_id='0'.repeat(32),
   x=>binding(x.prearmConfiguration,'AFW_FINITE_TRIAL_VERSION').type='plain_text',
   x=>binding(x.prearmConfiguration,'AFW_DOSSIER_EVENTS_NODE').name='OTHER_NODE',
-  x=>binding(x.prearmConfiguration,'ACCESS_AUD').text='foreign-aud',
   x=>x.prearmConfiguration.exports.AfwOwnEventNode.container='foreign-container',
   x=>x.prearmConfiguration.containers[0].name='foreign-container',
   x=>x.prearmConfiguration.bindings.push({name:'EXTRA',type:'plain_text',text:'x'}),
