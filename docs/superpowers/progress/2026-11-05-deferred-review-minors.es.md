@@ -34,3 +34,8 @@ CarryConsentMinor161/244: reviewerLink confirmó visiblemente assertions settlem
 ## Cierre formal tras aceptación Link
 
 ConsentMinor161/244 CLOSED: revisiónfrescaLinkyScopedround1confirmaronsettlementassertsobservados;4focales42126215195/127590980113 PASS, sinpollingagotadosilencioso. LinkI1fixround1/5:1addressed/0open,2f530092..dba6cde8,compartirsetupauténticoConsent/Linksinperderasserts/lifecycle. LinkM1/M2siguenabiertos,deferredwholebranch; no reparacióninferida.
+
+
+## M3 — Task1: segundo intento durante cancel pendiente (DEFERRED)
+
+Origen: revisión fresca Task1 sobre SOURCE97ee8675e614032af2f3caa9fe3eaa24d991c7d1, Spec✅/QualityApproved, sin Critical/Important. test/mcp-qa-finite-policy-transport.test.mjs:92/97/104 invoca activate una vez; posts:1 prueba primer request, no otro intento durante cancel pendiente. El engine tiene failure absorbente en fixed-policy-engine24–32/52, sin defecto funcional identificado. No fixloop ni repetir Task1. Gate/owner: Root en retención Task3 o whole-branch, cuando ese delta se ejerza; intentar segunda operación antes release y exigir rechazo/posts inalterados junto a settlement real. M2warnings RPC/toolchain siguen abiertos sin ownership atribuido; M1baselineSdkReadCurrent sigue desconocido/no reproducido, SQLConsentMinor cerrado. No convertir este Minor en permiso para ensayos/runtime o ampliar Task2.
