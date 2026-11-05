@@ -35,3 +35,8 @@ Los encabezados DESIGN ONLY/INACTIVE en documentos de inspección44d0490a conser
 ## Despacho efectivamente realizado
 
 Root verificó la rama en BASE7a2a1c1ffa66b21ae0aa8ad7d0a5ef0c4a2441be/árbol616d1e6187e652f07c067683a12b40c564da78d8 y despachó implement_native_notice_store(Solhigh, contexto fresco) como único writer. Informe y revisión pendientes; ninguna prueba nueva se acredita aún. Esta copia de continuidad está en rama docs separada y no añade commits al producto mientras el writer trabaja.
+
+
+## Ruling posterior de contrato — antes de ejecución de regresión
+
+Root confirmó lectura primaria de authority@BASE: revokeGrant hace que el resolver real rechace Monitoring authorization unavailable, no que devuelva enabled:false. Ruling: preservar autoridad; positivo true trasCLOSE + rechazo real trasrevoke + historia intacta; metadata fixture inequívoca resolverRejected/authorizationdenied. Ver reviews/2026-11-05-finite-preparation-notice-store-authority-ruling.es.md. El writer recibió instrucción; no cambio de scope ni ejecución de matrices anteriores.
