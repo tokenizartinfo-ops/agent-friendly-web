@@ -1,31 +1,36 @@
 # AFW — continuidad vigente del circuito nativo
 
-5 de noviembre de 2026. Trabajo reanudado por Gabriel, exclusivamente para AFW.
+5 de noviembre de 2026. Objetivo vigente: avanzar por los bloques autorizados hacia un ensayo real cloud con PC apagada. Trabajo de esta sesión exclusivamente AFW; no Tokenizart/FCO. Repositorio tokenizartinfo-ops/agent-friendly-web; fuente feat/finite-native-cleanup-20261101; coordinación docs/finite-pcoff-continuation-20261103.
 
-Repositorio: `tokenizartinfo-ops/agent-friendly-web`. Fuente: `feat/finite-native-cleanup-20261101`. Coordinación: `docs/finite-pcoff-continuation-20261103`. Todo el código y las pruebas se trabajan en GitHub/Actions sintético, sin credenciales ni builds locales.
+## Completado y aceptado, no repetir
 
-## Componente GET aceptado
+- GET nativo aceptado SOURCE en f68797ca0ad083aa4e90be87c83b5f60f2aa691b, con Minor P3 trasladado expresamente a POST. Registro reviews/2026-11-05-finite-native-notice-get.es.md.
+- POST nativo aceptado SOURCE en **f62b6c8b17412b812ae411bbc9cedad43b9ce501**, árbol50fec019ac7a341fd9dacf004f7dd7f95581cd71. Producto e1537bf403944ae4f79c04818db1932a3189d78c, report5205d80216d9767c44762df4a181e1015e093a8e, qualifier retirado1199dc92. Revisor fresco review_notice_consent: Spec✅/QualityApproved,0Critical/Important, dosMinor. Registro completo reviews/2026-11-05-finite-native-notice-consent.es.md; P3 cookies **CLOSED**.
+- Root leyó informe38322chars, primarias y matriz50POST/37GET única con GREEN escalonados compatibles, pure18 y seleccionados16/6/4. Última calificación42109674529:6POST+5GET/lint10 PASS. No afirmar que un único run ejecutó50+37.
+- M stream diagnostic resuelto sólo en fixture por liberar el productor en su petición original; sin cambio producto/Set/plazos. Restart SYN realctx.abort cambió instancia, conservó historia y bloqueó replay. Todo documentado en progress/2026-11-05-finite-native-notice-consent.es.md.
+- Minor settlement en Consent161/244 se refuerza dentro del siguiente Link; warnings toolchain/harness permanecen para revisión final. Ledger progress/2026-11-05-deferred-review-minors.es.md conserva historia y cierres.
+- D0.4, store, journal y fanout aceptados previamente: no reejecutarlos por resumen ni redespacharlos.
 
-Aceptación SOURCE: `f68797ca0ad083aa4e90be87c83b5f60f2aa691b`; código `e71eb58f040d8de531206172c2cd0d2df897771a`; revisión independiente sobre `cfe8f0ddde1d782757dd7e0d3160967f325df553`.
+## ACTUAL — Link-only activo
 
-La revisión fue **Approved with Minor**, con una desviación P3 de gramática de cookies trasladada expresamente a POST. No constituye conformidad literal sin reservas. La cobertura y las primarias están en `docs/superpowers/reviews/2026-11-05-finite-native-notice-get.es.md`. No repetir GET, D0.4, store, journal o fanout aceptados por resumir.
+BASE exacto **953e7af1fc20b59c59d8e4a03dcf398d98165cf5**, árbol **ee77df20d2c22fc48c55663524b9720b95364d2d**. Añade sólo seis docs sobre f62 aceptado; Root verificó CAS/readback/compare.
 
-## Trabajo activo: POST de consentimiento
+Único writer fuente: **implement_notice_link**, fresco Sol high/fork none, ya confirmó lectura completa. READ FIRST briefs/2026-11-05-finite-native-notice-link.md (45516chars, blob61f7a5f4b3c996feeb580c7f37843fd14f0272d7); preflight reviews/2026-11-05-finite-native-notice-link-preflight.es.md (blob5cfbf0f7a1bd62437b0891ea3de97de0281bc564). Ledger progress/2026-11-05-finite-native-notice-link.es.md. Reporte futuro reports/2026-11-05-finite-native-notice-link.md.
 
-BASE de ejecución: `2f96acb45ec5477d559f85070aa438d2e2e00822`; árbol `ce6242321aa5177f5828ec592a7bb00d6d6cd91a`. Único writer fuente: `implement_notice_consent`. Brief, preflight y ledger: archivos `2026-11-05-finite-native-notice-consent` bajo `docs/superpowers/`.
+Cuatro paths: phase-context, fixtureGET existente, nuevo Linknative y Consentnative existente. Qualifier temporal afw-notice-link-qualification.yml, máximo tres jobs independientes de quince minutos, sin secretos. Root no toca fuente mientras writer activo. Futuro reviewer fresco después del informe completo, nunca helper/reviewer propio del writer.
 
-Root leyó las primeras primarias RED del run `42104033222`, jobs `127514019845` y `127514019716`. El primer GREEN parcial fue `42104729861`, HEAD `87c8430d82df08b4eea59e6296c9a05b80009250`: POST 2/2 y GET/P3 3/3, sin fallos ni skips; Root leyó ambos logs. Esto no acepta el corpus completo ni cierra P3 antes de revisión independiente.
+Rulings: misma child/SQLPromise/result/ownSend/ownAck reales hasta putLink→sync→readback→par completo; estados explícitos, sin pending permisivo ni backfill. NoticeLink5campos/hash camelCase, separado del journal5filasnormal/max6/cap7. acceptedAt dentro ventana histórica5s; observer posterior usa límites actuales sin convertir historia en nuevo permiso. Helpers Node SYN fijos compartidos sólo en fixtureGET para evitar duplicación/ciclo; sin factory de autoridad o nuevo archivo. Reforzar dos asserts Minor. Preflight contiene tabla, casos y límites completos.
 
-La calificación nativa ejerció 37 casos POST (34 PASS, tres fallos) y 36 GET (30 PASS, seis gates no alcanzados); phase16/SDK6/D0.4 token4 pasaron. En el siguiente focal `42107074652`/HEAD `24db0b56d3c4f08299490048bef50225d76234be`, los seis drift GET y los dos drift POST pasaron. Los dos fallos M se resolvieron en el contraste sólo de fixture `42109028969`/HEAD `db17f2f5` sin cambiar el producto: liberación del stream desde la petición original y settlement nativo comprobado. La prueba separada de reinicio real del actor SYN pasó, conservando historia y replay cerrado. La calificación final SOURCE `42109674529`/HEAD `e1537bf403944ae4f79c04818db1932a3189d78c` pasó 6/6 POST y 5/5 GET, lintall10 limpio. Root leyó las primarias y las métricas. Writer DONE: informe38322chars publicado en `5205d80216d9767c44762df4a181e1015e093a8e`, blob `91c08e8cfd6f0eb954631c3e75ea4af66e4b33b5`; qualifier retirado en1199. Root leyó informe completo y verificó los nueve blobs calificados. Revisión fresca `review_notice_consent` en curso con paquete U10 completo `2026-11-05-finite-native-notice-consent-5205d802-package.md` en coordinación@01afa513, blobc0797305. Revisión final: Spec✅/QualityApproved,0Critical/Important,2Minor diferidos. Root resolvió las dos ⚠ con primarias y alcance SOURCE; Task POST aceptado y P3 cookies CLOSED. Registro `docs/superpowers/reviews/2026-11-05-finite-native-notice-consent.es.md`. No redispatchar la unidad POST ni repetir pruebas aceptadas. Falta integrar docs de aceptación en la rama fuente y preflight/BASE/dispatch del Link. El formulario GET quedó activo sólo en SOURCE de ensayo; ninguna ruta desplegada se montó. Mapa: diez paths fuente/test, informe y qualifier temporal, máximo dos jobs aislados de quince minutos, sin secretos.
+Diseño30981d2a2f15bd49d1d0226358486e2ec0262b07 reconciliado y copiado aBASE, no seguir WIP como diseño nuevo. No duplicar este despacho ni rehacer POST.
 
-La siguiente unidad **Link-only** está diseñada, INACTIVE, en `9c4dfcde605be3e26d623c98dfcb45fb1293afa2`. Root leyó informe/spec/plan y cotejó store, records y stage-facts en el BASE; sus tres documentos se preservan también en esta rama de coordinación. El diseñador original está reconciliando esos tres documentos contra5205 ahora aceptado. Lleva el Minor de precisión de settlement en los dos casos Consent afectados; los docs siguen INACTIVE. Requiere aprobación POST y preflight/BASE nuevo antes de cualquier despacho. No incluye nueva fase, segunda publicación, third CLOSED ni montaje.
+## Gates operativos pendientes
 
-## Límites operativos
+operationalReadiness=false; completePackage=false; PCoff=false. Sólo código/pruebas GitHub/Actions SYN; sin builds/clones/deps locales. No runtime/provider/alias/Entry/DDLreal/OAuth/OTP/tokens/permisos/cron/Containers/Max/main/merge/mount/ARM. Última primaria real de runtime3nov no garantiza estado actual. Techo fuente3nov02:59Z vencido, no renovar anticipadamente. C0=I0+900000/C1=C0+180000 y30s/5s intactos.
 
-`operationalReadiness=false`; `completePackage=false`; `PCoff=false`. Sin lectura ni mutación de runtime Cloudflare en este trabajo, alias, Entry, DDL real, OAuth, OTP, tokens, permisos, cron, Containers, datos de Max, main, merge, mount o ARM. La última primaria real de runtime es del 3 de noviembre, no prueba estado actual. El techo fuente del 3 de noviembre a las 02:59 UTC venció; no renovarlo anticipadamente. C0/C1 y límites originales de 30 s/5 s permanecen intactos.
+Link no completa segunda publicación notices, third CLOSED/finite_prearm, setup/cleanup/guard, suscripción, recepción útil, retirada nativa ni ensayo PCoff. No pedir apagar el ordenador por un PASS SOURCE.
 
 ## Soporte y coordinación
 
-OpenAI 18196140 respondió el 5 de noviembre a las 18:59 UTC sin causa ni solución verificada. El proxy nativo actual no se ha ensayado; un éxito en Actions no acredita su recuperación. La consulta acotada de Cloudflare posterior al 3 de noviembre sólo devolvió cierre administrativo de Cron 02375364 y dos encuestas, sin indicación técnica nueva de Container/Access en ese intervalo.
+OpenAI18196140 respondió5nov18:59UTC sin causa/solución verificada; proxy nativo actual no ensayado, Actions de lectura pública no prueba recuperación del proxy. Consulta CF posterior3nov sólo devolvió cierre administrativo Cron02375364 y dos encuestas; no reparación nueva Container/Access en ese intervalo. Notas saneadas progress/2026-11-05-openai-proxy-support-followup.es.md y cloudflare-support-check.es.md.
 
-No se enviaron respuestas de soporte, nuevos casos ni pruebas. Las notas saneadas están en `docs/superpowers/progress/2026-11-05-openai-proxy-support-followup.es.md` y `2026-11-05-cloudflare-support-check.es.md`. La solicitud documental de Chavo ya recibió ACK y respuesta en el canal privado autorizado; no publicar referencias de ese canal ni alterar FCO.
+Solicitud documental de Chavo recibió ACK/REPLY en canal privado autorizado; no URLs/IDs privados en repo público ni enviar soporte por inferencia. No nuevos correos/casos, encuestas, pruebas o monitores en este trabajo.
