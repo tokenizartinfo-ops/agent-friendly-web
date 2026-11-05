@@ -1,5 +1,6 @@
 // Fixed test-only I/O observation. No SDK/KV wrapper or strict-source probe.
 export function instrumentFiniteOwnerIo(source){
+ const noticeStart=source.indexOf('/** UNMOUNTED fixed GET.'),noticeSuffix=noticeStart<0?'':source.slice(noticeStart);if(noticeStart>=0)source=source.slice(0,noticeStart);
  const once=(needle,replacement)=>{if(source.split(needle).length!==2)throw Error('SYN I/O marker changed: '+needle);source=source.replace(needle,replacement);};
  const runtime=String.raw`
 const ioState=()=>globalThis.__finiteIo;
@@ -48,7 +49,7 @@ const ioEnd=row=>{if(!row)return;row.endedAt=Date.now();row.endMono=performance.
  once("const joined=await retain(Promise.allSettled([qaWork,mWork]));","const joined=await retain(Promise.allSettled([qaWork,mWork]));await ioCheckpoint('joined-before-consumption');");
  once("const observed=await primary();","const observed=await primary();await ioCheckpoint('after-first');");
  once("const qualified=await qualify(first,observed),again=await primary(),second=await facts(),secondQualified=await qualify(second,again);","const qualified=await qualify(first,observed);await ioCheckpoint('between');const again=await primary(),second=await facts(),secondQualified=await qualify(second,again);");
- return source;
+ return source+noticeSuffix;
 }
 export function extendFiniteOwnerIo(entry){
  const needle=' export class Initial extends FiniteClosure{';if(entry.split(needle).length!==2)throw Error('SYN I/O class marker');

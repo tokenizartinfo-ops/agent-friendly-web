@@ -49,10 +49,14 @@ async function actualExchangeMcp(f){
 test('GET acknowledged original after actual QA code M token MCP and D04 reader',()=>withIssued(async f=>{
  await actualExchangeMcp(f);
  const before=await plain(f.stub.noticeInspect());assert.equal(before.schema.length,7);assert.deepEqual(before.notice,[]);assert.deepEqual(before.tickets,[]);assert.deepEqual(before.events,[]);
+ await f.stub.ioConfigure();await f.stub.noticeConfigure();const began=Date.now();
  const response=await f.mf.dispatchFetch(f.source.origin+'/monitoring',{headers:f.headers,redirect:'manual'});
  const status=response.status,html=await response.text();
  const after=await plain(f.stub.noticeInspect());
  assert.equal(status,200,'fixed GET missing after actual prerequisites; tickets='+after.tickets.length+' journal='+after.notice.length);
+ const state=(await plain(f.stub.noticeStateRead())).state,io=await plain(f.stub.ioObservation());console.info('NOTICE actual principal costs',JSON.stringify({elapsed:Date.now()-began,trace:state.trace,sql:state.sql,ops:state.ops,lists:state.lists,io}));
+ assert(Date.now()-began<30000);assert.equal(io.peak,2);assert.equal(io.active,0);
+ assert(state.sql.filter(s=>s.queries.some(q=>q.sql.endsWith('LIMIT 8'))).every(s=>s.constraint==='first-primary'&&s.queries.length===1&&s.queries[0].method==='all'));assert(state.sql.filter(s=>s.queries.some(q=>q.sql.endsWith('LIMIT 2')||q.sql.endsWith('LIMIT 3'))).every(s=>s.constraint==='first-primary'&&s.queries.length===1));
  assert.equal(after.tickets.length,1);assert.equal(after.notice.length,3);assert.deepEqual(after.events,[]);
  const records=Object.fromEntries(after.notice.map(([key,value])=>[key.split(':').slice(-2).join(':'),JSON.parse(value)])),ticket=after.tickets[0],handle=/name="handle" value="([^"]+)"/.exec(html)?.[1];assert(handle);
  assert.equal(createHash('sha256').update(handle).digest('hex'),ticket.handle_hash);assert.equal(Object.keys(ticket).length,14);assert.equal(ticket.grant_id,f.identity.grantId);assert.equal(ticket.user_id,f.identity.subject);assert.equal(ticket.expected_sequence,0);assert.equal(ticket.action,'grant');assert.equal(ticket.purpose,'afw.dossier-monitoring-owner.v1');
