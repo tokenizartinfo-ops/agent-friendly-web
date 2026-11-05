@@ -60,13 +60,13 @@ test('native consent POST records original decision after actual ticket GET',()=
  await saveNoticeObservation({unit:'consent',elapsed,...observation.state,io});
  console.info('CONSENT native principal costs',JSON.stringify({elapsed,pairs:io.snapshots/2,rechecks:observation.state.trace.filter(v=>v.stage==='after').length,accessVerifications:observation.state.accessVerifications??0,sqlSessions:observation.state.sql.length,first:observation.state.sql.flatMap(s=>s.queries).filter(q=>q.method==='first').length,all:observation.state.sql.flatMap(s=>s.queries).filter(q=>q.method==='all').length,ops:observation.state.ops,noticeLists:observation.state.lists.filter(v=>v.prefix.startsWith('afw.finite-preparation-notice')).length,http:{snapshots:io.snapshots,requests:io.rows.length,peak:io.peak,active:io.active}}));
  assert(elapsed<30000);assert.equal(io.peak,2);assert.equal(io.active,0);
- assert.equal(observation.state.trace.filter(v=>v.stage==='after').length,5);assert.equal(observation.state.accessVerifications,2);
+ assert.equal(observation.state.trace.filter(v=>v.stage==='after').length,6);assert.equal(observation.state.accessVerifications,2);
  const rowsAfter=await plain(f.stub.snapshot());for(const row of original)assert.deepEqual(rowsAfter.find(([k])=>k===row[0]),row);
  const historyAfter=(await f.db.prepare('SELECT * FROM dossier_monitoring_consent_events ORDER BY sequence').all()).results;
  for(const row of history)assert.deepEqual(historyAfter.find(v=>v.sequence===row.sequence),row);
 
  assert.equal(response.status,200,'fixed POST reached after native ticket; events='+after.events.length);
- assert.equal(after.events.length,1);assert.equal(after.notice.length,5);assert.match(html,/Registré tu decisión temporal/);
+ assert.equal(after.events.length,1);assert.equal(after.notice.length,5);assert((await plain(f.stub.snapshot())).some(([key])=>key==='connection-preparation:'+f.identity.preconnectionId+':notice'));assert.match(html,/Registré tu decisión temporal/);
  assert.deepEqual(after.tickets,before.tickets);assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),f.grant);
  const record=suffix=>JSON.parse(after.notice.find(([k])=>k.endsWith(suffix))[1]),r=record(':reservation'),send=record('consent:send'),ack=record('consent:ack'),row=after.events[0],i=f.identity;
  assert.deepEqual(row,{sequence:row.sequence,grant_id:i.grantId,project_id:i.projectId,user_id:i.subject,client_id:i.clientId,resource:i.resource,revision:i.projectRevision,action:'grant',purpose:'afw.dossier-monitoring.v1',request_id:r.ticket.requestId,issued_at:row.issued_at,expires_at:r.ticket.permissionExpiresAt});

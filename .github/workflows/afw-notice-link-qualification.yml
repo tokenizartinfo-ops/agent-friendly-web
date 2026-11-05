@@ -11,7 +11,7 @@ on:
 permissions:
   contents: read
 jobs:
-  causal-red:
+  principal-green:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -24,13 +24,13 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Causal Link RED and settlement carry
+      - name: Native Link principal and settlement carry
         shell: bash
         run: |
           set +e
-          node --test test/mcp-qa-finite-owner-notice-link-native.test.mjs > "$RUNNER_TEMP/link-red.tap" 2>&1
+          node --test test/mcp-qa-finite-owner-notice-link-native.test.mjs > "$RUNNER_TEMP/link-principal.tap" 2>&1
           link_status=$?
-          cat "$RUNNER_TEMP/link-red.tap"
+          cat "$RUNNER_TEMP/link-principal.tap"
           node --test --test-name-pattern='^native consent (original window fences queued SQL|abort retains SQL and forbids late ACK)$' test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/carry.tap" 2>&1
           carry_status=$?
           cat "$RUNNER_TEMP/carry.tap"
@@ -38,7 +38,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: afw-notice-link-red
+          name: afw-notice-link-principal
           path: |
             ${{ runner.temp }}/*.tap
             ${{ runner.temp }}/afw-notice-get-bundles/*.json
