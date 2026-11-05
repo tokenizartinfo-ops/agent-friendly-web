@@ -128,3 +128,85 @@ Caller identity/Access/preconnection/approval inputs are explicit SYN DATA, not 
 D0.4 remains accepted and untouched; no token→notice integration, source human decision, notice journal/fixed receiver/provenance/NoticeLink, downstream notice phase/third CLOSED preparation, own SEND/full setup/cleanup/guard/preflight package, mount, ARM, real subscription/delivery/withdrawal or coordinated PC-off occurrence is established here. Prior Minor D0.3 OAuth-error precision and fanout fixture cleanup remain deferred to whole-branch triage per their existing ledger.
 
 Expired source ceiling 2026-11-03T02:59Z was never renewed. No runtime/provider/alias/Entry/DDL/grant real, browser/OAuth/OTP/token/access, cron/Container/Max, main or merge operation. operationalReadiness=false; completePackage=false; PCoff=false.
+
+## Fix round 1/5 — concurrent failure absorption (2026-11-05 UTC)
+
+Current implementation status: DONE, pending the same independent reviewer's scoped re-review. This append preserves the original receipt verbatim as dated evidence; the 147-test GREEN above is the earlier codeHEAD, not a claim that those suites ran again after this fix.
+
+FIX_BASE=`78c3bdc6fec287494ec1e2d37223c8d006ea6487`, tree `5ccf430216d2d9b218d755382c7a16186b7afd09`, same isolated branch and original three-product-file scope. [Binding fix brief](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e063b13ac696910e20b2bc7e72257000ff78fdeb/docs/superpowers/fixes/2026-11-05-finite-preparation-notice-store-fix1.md).
+
+Reviewer Important finding: monitoringFailed was only checked before async preflight. A held ticket ACK could fail while consent preflight or ticket observation was suspended; their lease-only guards could then emit new consent SQL or deliver a late witness/applied result after a known mutation failure. Root confirmed the real gap; the contract was not weakened.
+
+### Minimal change
+
+A private `monitoringGuard(identityHash,lease)` composes the existing original lease/holder guard with absorbing monitoringFailed checks. Only the three monitoring methods use it. Existing query/c.wait boundaries therefore check failure before issuing SQL and after real Promise settlement; monitoring methods also check immediately after preflight/query awaits and before delivering a result/witness. Monitoring preflight checks after awaiting the original issuer preflight. No mutex, callback, framework, product hook, new clock or authority factory.
+
+Original factory/input/preflight/helpers and all original openFence through revokeGrant bodies remain byteexact and contiguous. Existing SQL, DATA signatures, schema metadata, absolute expiries, attempts, lease semantics and authority are unchanged. Production import/mount/dependency graph is unchanged.
+
+New SYN fixture scheduling holds the actual ticket INSERT's committed ACK; it can then hold consent's real preflight, actual ticket SELECT settlement, or actual consent INSERT settlement. It counts native INSERT invocation by the INSERT target (not a joined table), retains actual Promises, observes ticket rejection as failure-known before release, and reports only SYN metadata. No returned SQL row/predicate is replaced.
+
+Qualified fix codeHEAD=`bca2a33b935a75504331bd8cd5115fea79c18357`; tree `048d092947ad61ec62017e5202c0deebc6b7a986`.
+
+Product blobs at that head:
+- store `efc25b2af9c80b8eb27cffe219544e974002293e`;
+- fixture `ab77081da5b3112adb841dd362af116eb8c55b90`;
+- notice tests `f210a1807a923310dd71934131989d89440c68e8`.
+
+Fix reportHEAD/tree are the final append/qualifier-removal commit resolved by final CAS readback and final handoff. Those product blobs remain identical to qualified fix codeHEAD; no repeat suite is claimed for the report head.
+
+### Causal RED and the bounded fixture correction
+
+1. [Run 42067694742](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/42067694742), [job 127386336898](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/42067694742/job/127386336898), attempt 1, head `f4b661866ec031d063e922ac55a7dbfd8d15abb6`, tree `afacdaa41d7b12a991bfac7f7ca1b6326fb4aa35`. Command selected the three new concurrent tests. TAP 3 tests/0 pass/3 fail/0 cancelled/0 skip/0 todo, 1860.876376ms; fixture compiled once, 196043 bytes. Cases 1 and 2 passed all actual grant/commit/gate/failure-known prerequisites, then failed `known mutation failure must absorb concurrent result` as expected. Case 3 reached the real consent commit/ACK hold but failed a SYN emission bookkeeping assertion 0!=1: classification inspected any owner_tickets occurrence, including the consent SQL JOIN. That third assertion is explicitly NOT qualifying RED and is not attributed to production.
+2. Corrected only the fixture's INSERT-target classification and scoped the next RED to case 3 alone; no accepted first-two case or issuer suite repeated. [Run 42068064621](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/42068064621), [job 127387728347](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/42068064621/job/127387728347), attempt 1, head `f8d6196b4c0620c8dc5a9aef9cec45b0cbd75c5b`, tree `0c518381dbebbbbcf98c24b9bf611019182c4004`. TAP 1 test/0 pass/1 fail/0 cancelled/0 skip/0 todo, 1520.36513ms; fixture once, 196074 bytes. Actual consent row present, emitted count 1, original pending Promise retained, ticket ACK failure known, then the same absorption assertion failed. This is case 3's causal RED.
+
+No product guard fix was committed before these REDs.
+
+```text
+npm ci --ignore-scripts --no-audit --no-fund
+node --test --test-name-pattern="REAL concurrent monitoring failure" test/mcp-qa-finite-preparation-notice-native.test.mjs
+# Corrected third-case RED only:
+node --test --test-name-pattern="REAL concurrent monitoring failure cannot return applied after emitted consent" test/mcp-qa-finite-preparation-notice-native.test.mjs
+```
+
+### Targeted GREEN and lint
+
+[Run 42068293108](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/42068293108), [job 127388595184](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/42068293108/job/127388595184), attempt 1, exact fix codeHEAD/tree above; terminal success.
+
+```text
+npm ci --ignore-scripts --no-audit --no-fund
+node --test --test-name-pattern="REAL concurrent monitoring failure|REAL post-commit notice ACK loss|REAL held native SQL settlement|REAL first notice uses native original issuer grant" test/mcp-qa-finite-preparation-notice-native.test.mjs
+node node_modules/eslint/bin/eslint.js lib/mcp-qa-finite-preparation-issuer-store.mjs test/fixtures/finite-preparation-issuer-worker.mjs test/mcp-qa-finite-preparation-notice-native.test.mjs
+```
+
+Exactly 8 meaningful tests: 3 new concurrent + 2 original ticket/consent ACK-loss + 2 original ticket/consent held settlement + 1 original causal positive. TAP 8 pass/0 fail/0 cancelled/0 skip/0 todo; 3137.840399ms. Scoped ESLint exit 0, no rule diagnostics. One native fixture compilation in GREEN: 196400 bytes. No standard compilation or production graph change; no 147-case/full matrix, 33 issuer, SDK/fanout, full CI, provider or runtime repeat.
+
+All three new tests assert actual original grant chain, ticket commit/ACK gate and second native gate reached before child deadline, ticket rejection observed before release, original pending Promise still pending after failure, and no late success/witness. Actual GREEN metadata:
+
+```text
+SYN concurrent notice-concurrent-before ticketGate=true boundaryGate=true failureKnown=true emitted=0 afterFailure=0 persisted=0
+SYN concurrent notice-concurrent-observation ticketGate=true boundaryGate=true failureKnown=true emitted=0 afterFailure=0 persisted=0
+SYN concurrent notice-concurrent-after ticketGate=true boundaryGate=true failureKnown=true emitted=1 afterFailure=0 persisted=1
+```
+
+Case 1's preflight read was already invoked before failure and may settle afterward; no consent INSERT was emitted afterward. Case 2's real SELECT row was held before delivery; it did not become a witness after failure. Case 3's real consent INSERT committed before failure, and its retained Promise settled only after release: the row remains while caller receives rejection. This proves neither cancellation of already-issued SQL nor physical drain, rollback, deletion or cross-RPC replay exclusion.
+
+Three native fixture compilations across this fix round (first RED, corrected third-only RED, GREEN), zero standard builds. Previous receipt's 35 native compilations are historical; no rerun to recover hashes. Each of these three jobs installed 649 packages only on the existing cloud runner with --ignore-scripts. No local clone/dependencies/tests/build/process.
+
+Actual warnings across this round, deduplicated with process IDs omitted:
+
+```text
+[DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+[DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.hirok.io
+npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.hirok.io
+npm warn deprecated eslint@9.39.4: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+```
+
+The normal Git initial-default-branch advisory also occurred. No native compiler/test or ESLint-rule warning.
+
+### Final FIX_BASE diff and limits
+
+Only store, fixture, notice test and this report change from FIX_BASE after temporary qualifier removal. Native schema constants and both original db files remain unchanged; phase blob `ebebaa9542c2408c0d505d1e23daa946762c1cab` and M blob `d979f395029c9b1e66a99222d06acf99eba4f358` are inherited unchanged. Original issuer methods and input/preflight helpers were compared as exact source substrings against FIX_BASE/original BASE. All ref moves were expected-head CAS direct-child commits followed by actual ref readback, without force or foreign overwrite.
+
+Temporary contents:read/metadata:read qualifier, checkout persist-credentials:false/fetch-depth:1, is removed from final diff. No secrets or provider credentials, no new tools/dependencies/import graph, no real DDL/grant/alias/Entry/runtime/OTP/OAuth/token/access/cron/Container/Max/main/merge or downstream unit. Previous authority ruling and whole-branch deferred Minors stay as recorded above. operationalReadiness=false; completePackage=false; PCoff=false. Root owns actual FIX_BASE..reportHEAD full diff and same-reviewer scoped acceptance.
