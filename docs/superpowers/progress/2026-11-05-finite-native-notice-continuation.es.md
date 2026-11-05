@@ -80,3 +80,23 @@ Root leyó informe COMPLETO23632chars/blob9f71c6acd260a36774fee7b7f05902a3cdc524
 Reviewer fresco review_first_connection_shared (Astrahigh/forknone) activo, sólo lectura/combinedspec+quality/sinhelpers/retests. Ya confirmó leer brief/plan/global/specinterface/reporte completo; recorre delta. Esperar findingsfinales antes aceptar. M1baselineSdkReadCurrentcausadesconocida/M2warningsdeferred, warningsRPC/toolchainfinalesconservados; no autocompletarTask1 porCI.
 
 Root preparó borrador Task2 sin activar ni escribir SOURCE:9paths scopeplan/mountfiniteantesordinary/QA4targets/choicegrammarbounded/initialCLOSEDbytesdesdeorigen/negativaszeroordinarySQL y pending sinpublicación. Baselines5mountfiles+6OAuth/notice context leídos a pins; no API nueva ni producer. TrasreviewTask1 aceptado, fijar nuevoBASEdocs y writerfrescoTask2; siImportant usarfixloop mismawriter, scopedreviewmismafreshreviewer. Task3 siguependiente. Gates operativos falsos; ningún recurso real ni permiso cambiado.
+
+
+## ACTUAL — Task 1 aceptada; Task 2 activa
+
+Reviewer fresco terminó: Spec Compliance✅ / Task Quality Approved,0Critical/0Important. Leyó paquete145611chars completo; sólo lectura adicional stage-work16–23 confirmó misma Promise retenida. Root acepta Task1SOURCE97ee. MinorM3 nuevo: testpolicytransport92/97/104 no intenta segunda operación durantecancelpendiente; engine absorbente sin defecto funcional. DEFERRED gate de retenciónTask3/wholebranch, sinfixloop aquí. M2warnings RPC/toolchain siguen abiertos sin ownership atribuido; M1SDK sigue desconocido/no reproducido. SQLConsentMinor cerrado.
+
+Root documentó aceptación+M3+preflightTask2 mediante5commits SOURCEdocs-only, cada parent/delta1path/ref/blob/contenido exactos:
+-8c7d4517f6dea8b72daa10ccf0a2fe2e0cfe9949 reviewTask1/blob5f1f77b24c1a8ac828f2345fe24a4a5d099f0dd5.
+-b03b5d9682d8a91e38004160f4c2a9f0ae7ca595 deferredMinors/blobedeaa4240c77d56f48f2ada5bdb2f82a2373a2b5.
+-15c05b2bd1c06ce479f3cc76d5ef5f097b780aef plan reconciliado/blobd3c08299febbe2d11b38db1a31e765d7a236d6a5/33208chars.
+-4ae35568afd39227ec6ccfd815c7512a4c68023f briefTask2/blob757f60d7e720cc7b05f99072f39d4b51bfbefb20/11655chars.
+-c56e52ae26292f618ff5527cabd46594f90b41c5 ledger/blob1f9a92703eb225c3d9edcc7ad9bf4a0add544fd1.
+
+BASE ejecución Task2=c56e52ae26292f618ff5527cabd46594f90b41c5/tree463911dc0bfca3ccb59e9dc6e2521a197ac29305. Writer nuevo implement_first_connection_mount (Solhigh/forknone) activo, sinhelpers/reviewerpropios. Confirmó lectura preflight,ref/tree y comienza fixturepropietario+REDcausal antesmounts. Root no escribe SOURCE hasta STOPWRITES. No Task3.
+
+READFIRST briefTask2 en docs/superpowers/briefs/2026-11-05-finite-native-first-connection-publication-task2.md. Scope11code/testpaths:5mount/wire/bridge/receiver deplan, puretestfirstconnection+NEWnativefirstconnection, F1+F2, dosoldtests wire y conduit-native. Root preflight encontró Cookie'SYN-cookie'sin'=' yPOST'SYN=bounded' que strictgrammar rechaza antesdelpunto medido; sólo normalizar INPUTS SYN válidos y expectedliteral, preservando TODAS assertions/drift/hold/abort/counts/settlement/ceroefectos. Fixtureslegacy sin cambios, leídos Root y confirmados. Plan añadeT5/T6; no cambio arquitectura/permiso ni relajarparser.
+
+Task2 resultado: initialCLOSED contiene dispatcherfinite desdeorigen,4targetsQA fijos, choicegramática1024UTF8/cookies, QAresponseHTML16384allowlist y pending seguro; cero ordinarySQL fallback. OAuth/notice requierenOAuthtrue+QActual, noflagordinarymonitoring. /oauth/token y/mcp SDK intactos. Nuevafixture initialreal sinseedPhaseFacts/ConnectionReceipt; hash/cápsula nunca normalizados trasbuild. P1/P2/P3/phasecontext/preparation/index/config/build/DDL/journals protegidos. QualifierTEMP≤3jobs15min, contentsread/nosecrets/persistfalse; REDprefijoT2+GREENpureTask1/T2/oldwire,nativeTask2/oldconduit,compilerstaging+missingfactory/lint11; retirarfinal. RESTseqfileCASreglasvigentes, noGQLretry.
+
+Root tiene baseline11paths exactos en memoria reconciliados contra treeSource97ee (c56 sólo docs), 1newfileabsente. Próximo: writerentrega informe completo/primarias/HEAD+STOPWRITES→reviewerfresco→aceptación→Task3. No repetir gatesviejosni arreglarM1/M2/M3porrutina. Gates operativos false, fuente3Novvencida, sinresourcesreales/consent/permissions. No pedir apagar.
