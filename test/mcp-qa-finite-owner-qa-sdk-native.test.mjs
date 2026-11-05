@@ -42,7 +42,7 @@ test('actual native source and SDK parser require lexical continuation after ori
  const f=await initialEntryHarness('phase-context-sdk');
  console.info('D02 native stage: original entry');
  try{
-  await f.stub.configure('normal');assert.equal((await plain(f.stub.invoke(f.refs))).status,'material_recorded');await f.stub.restoreMethods();
+  await f.stub.configure('normal');const entry=await plain(f.stub.invoke(f.refs));if(entry.status!=='material_recorded')console.info('D02 initial diagnostics',JSON.stringify({requests:f.requests.map(x=>new URL(x).pathname),stats:await plain(f.stub.stats()),keys:(await plain(f.stub.snapshot())).map(([key])=>key)}));assert.equal(entry.status,'material_recorded');await f.stub.restoreMethods();
   console.info('D02 native stage: seed approved external facts');
   f.phaseCurrent=await plain(f.stub.seedPhaseFacts('settled',null));assert.equal(f.phaseCurrent.fixtureError,undefined,JSON.stringify(f.phaseCurrent));
   console.info('D02 native stage: genuine source');
