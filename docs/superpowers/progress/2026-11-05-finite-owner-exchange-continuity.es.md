@@ -1,3 +1,17 @@
+# CHECKPOINT VIGENTE — D0.4 aceptado; notice store ACTIVO, 5nov2026
+
+D0.4 complete: BASE4d8f6a0..report9fed36c15411470f22e284b1ba84aefb91f5d153/codef9ee816c, revisión fresca AstrahighPass/Approved0C0I/sin nuevoMinor. Root verificó RED42059288764, GREEN42059641718(24+3+7) y principal reforzado42061681764(1);65fixturebuilds/0standard. Recibo reviews/2026-11-05-finite-owner-exchange-continuity.es.md; fullreviewpackage d95206f6. Stagedheads, warnings,6CASerrors reconciliados y límites físicos/runtime conservados. NO redispatchD0.1/2/3/4/fanout ni matrices.
+
+ÚNICO productwriter activo implement_native_notice_store(Solhigh), BASE7a2a1c1ffa66b21ae0aa8ad7d0a5ef0c4a2441be/árbol616d1e6187e652f07c067683a12b40c564da78d8, rama feat/finite-native-cleanup-20261101. Brief completo docs/superpowers/briefs/2026-11-05-finite-preparation-notice-store.md; preflight/spec/plan/progress mismafecha y basename. Report esperado reports/2026-11-05-finite-preparation-notice-store.md. Rootdocsrama separada, no otro writerproducto. Unicamente3archivos: issuerstore/fixtureissuer/newnoticetest; sin métodosantiguos alterados. Ticket/observe/consent con SQLreal cercado/owneractual/cercaoriginal/expiry/sequence, testigomisma instancia/lease, ACKinciertoabsorbe/reteniendoPromisereales. No journal/receptor/NoticeLink/fase notices ni DDLproductivo.
+
+Diseño44d0490a/preflight leídos completos y rulings resueltos: SDDvigente, preservar cuerposprevios(nohashdelarchivoampliado), qualifier temporal acotado contents:read sinsecretos/removerfinal, techosanidadosconmínimos/empates, tamperSYNexplicitodespuéspreflight, noestándarsinnewimports. D0.4 cierra ACKhistórico en fuente, sinreabrirphase/SDK. MinorD03precisiónerror y Minorfanoutcleanup siguen diferidos paratriagefinal.
+
+Luego quedan journal/receptor/provenancia avisos, tercero CLOSED y ownSEND, fullsetup/cleanup/alarma/control/paquete/preflight y UNAocurrenciaPCoffcoordinada. No esperar sóloCloudflare ni decirlista. Sin intervención humana paraelcomponentefuente; GitHub+Actions credentialfree, sinclones/deps/build/tests locales. Techo fuente3nov02:59UTCvencido,no renovaranticipadamente. Últimaprimaria3novfechada; noasumirvigencia. No runtime/alias/Entry/DDL/OTP/OAuthbrowser/tokens/permisos/cron/Containers/Max/main/merge. operationalReadiness=false;completePackage=false;PCoff=false. ARMgenuino vigente antesdepedirapagar. Chatlocal/Actions noesguardiacloud.
+
+**Lo siguiente conserva historia y estados antiguos supersedidos.**
+
+---
+
 # Actualización de evidencia — D0.4 pendiente de revisión, 5nov2026
 
 RED real42059288764/job127356149761 en d4b58bb8: prerequisitos QA→tokenM200→MCP original y ACK histórico iguales comprobados; falla final lector unavailable. GREEN42059641718/job127357402313 en762ab842:24tokencompat+3SDK+7fase PASS sin skips. Principal reforzado42061681764/job127364780539 enb5e61d16:1PASS0FAIL0SKIP/count1; root leyó primaria y confirmó fullDOsnapshotdigest/prereqs.65compilacionesfixtureconocidas,0estándar; phase/imports siguen unmounted. No repetir matrices.
