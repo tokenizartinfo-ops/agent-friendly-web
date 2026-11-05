@@ -30,3 +30,23 @@ Pendientes después: journal/receptor fijo/provenancia/NoticeLink, fase avisos y
 ## Historia / overrides
 
 Los encabezados DESIGN ONLY/INACTIVE en documentos de inspección44d0490a conservan historia: este ledger y el despacho de root con BASE exacto activan exclusivamente Task1source. La referencia del plan a post-tokenACKpendiente es histórica; D0.4 fuente está aceptado arriba y no se reimplementa. No se activa downstream por aceptar o ejecutar este componente.
+
+
+## Despacho efectivamente realizado
+
+Root verificó la rama en BASE7a2a1c1ffa66b21ae0aa8ad7d0a5ef0c4a2441be/árbol616d1e6187e652f07c067683a12b40c564da78d8 y despachó implement_native_notice_store(Solhigh, contexto fresco) como único writer. Informe y revisión pendientes; ninguna prueba nueva se acredita aún. Esta copia de continuidad está en rama docs separada y no añade commits al producto mientras el writer trabaja.
+
+
+## Ruling posterior de contrato — antes de ejecución de regresión
+
+Root confirmó lectura primaria de authority@BASE: revokeGrant hace que el resolver real rechace Monitoring authorization unavailable, no que devuelva enabled:false. Ruling: preservar autoridad; positivo true trasCLOSE + rechazo real trasrevoke + historia intacta; metadata fixture inequívoca resolverRejected/authorizationdenied. Ver reviews/2026-11-05-finite-preparation-notice-store-authority-ruling.es.md. El writer recibió instrucción; no cambio de scope ni ejecución de matrices anteriores.
+
+
+## Review inicial / fix round1 ACTIVO
+
+Implementación inicial entregada78c3bdc6/e7846aa4 con147PASS/lintdirigido y35fixturebuilds. Root leyó primariasRED/GREEN y confirmófinalblobs/qualifierausente/originalesbyteexact. ReviewAstrahighSpecIssues/QualityNeedsfixes:Important1 monitoringFailed no se revalida trasawait, puede emitirse nuevoINSERTo testigo despuésdeACKfallido conocido. No aceptado todavía. FIX_BASE78c3bdc6, originalwriter se reanuda bajo brief fixes/2026-11-05-finite-preparation-notice-store-fix1.md, sólo3casosconcurrentes+5regresionesdirigidas/lint, no147repeat. Mismo reviewer después. Minorwarnings diferido al triagefinal. Ruling: gap real de absorción antes de emisión, no exigir cancelación deSQLyaemitido; no contradice alcance de componenteniamplía autoridad.
+
+
+## Cierre aceptado por root
+
+Task1: fix round1/5 (1addressed0open, commits78c3bdc6..4016c13d); Task1:complete(BASE7a2a..4016c13d, reviewclean). Rootprimarias3roundlogs/scopedreviewImportantADDRESSED/Approved y byteexactoriginales;147initial+8dirigidosposteriores/38fixturebuilds/0standard. Recibo reviews/2026-11-05-finite-preparation-notice-store.es.md. No replay/fix abierto ni fuenteoperativa activa. Minorherramientasyanterioresdiferidos.
