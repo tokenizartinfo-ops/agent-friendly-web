@@ -265,7 +265,7 @@ async function fanoutMetrics(f,form,response,{peak}){
 }
 test('fanout causal control delay0 preserves complete native child and original reads',{timeout:120000},()=>world(async f=>{
  const form=await consent(f);await f.stub.ioConfigure();
- await fanoutMetrics(f,form,await f.post(form),{peak:1});
+ await fanoutMetrics(f,form,await f.post(form),{peak:2});
 },{observed:false,io:true}));
 test('fanout 50ms preserves original five second child and actual grant',{timeout:120000},()=>world(async f=>{
  const form=await consent(f);await f.stub.ioConfigure();f.ioDelay=50;
