@@ -17,6 +17,6 @@ test('real compiler binds exact tracked workflow/CLI hashes in QA only and exclu
  for(const role of ['qaLive','canaryLive'])for(const output of Object.values(r.metafiles[role].outputs))assert(output.imports.every(x=>!/^node:fs(?:\/|$)/.test(x.path)),'no filesystem import in runtime graph');assert(!r.metafiles.canaryLive.inputs['lib/mcp-qa-finite-bootstrap-source.mjs']);
  for(const role of ['qaLive','canaryLive'])assert(Object.keys(r.metafiles[role].inputs).every(x=>!x.includes('bootstrap-issuer')&&!x.includes('build-finite-native-package')&&!x.includes('node_modules/esbuild')));
  assert.equal(r.completePackage,false);assert.equal(r.manifest,undefined);
- console.log('ACTUAL compiler bytes QA='+r.files['qaLive/index.mjs'].length+' canary='+r.files['canaryLive/index.mjs'].length);
+ console.log('D0.1 ACTUAL compiler '+JSON.stringify({sourceRevision:r.sourceRevision,sourceTree:r.sourceTree,qa:{bytes:r.files['qaLive/index.mjs'].length,sha256:sha(r.files['qaLive/index.mjs']),publicStatic:r.modules.qaLive.publicStatic,inputs:Object.keys(r.metafiles.qaLive.inputs).length},m:{bytes:r.files['canaryLive/index.mjs'].length,sha256:sha(r.files['canaryLive/index.mjs']),publicStatic:r.modules.canaryLive.publicStatic,inputs:Object.keys(r.metafiles.canaryLive.inputs).length},completePackage:r.completePackage,operationalReadiness:r.operationalReadiness}));
  await assert.rejects(buildFiniteNativePackage({cwd:process.cwd(),sourceRevision:M}));
 });

@@ -66,3 +66,18 @@ test('actual finite QA class constructs fixed actor and retains closed diagnosti
   assert.equal(r.material,false);
  }finally{await mf.dispose();}
 });
+
+test('D0.1 checked-in QA Wrangler exactly matches revised source; historical and M pins stay fixed',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const {finiteWranglerProfileTemplate,finitePublicProfileTemplate}=await import('../lib/mcp-qa-finite-profile.mjs');
+ const {QA_CLOUD_CLOSED_PINS}=await import('../lib/mcp-qa-cloud-closed-pins.mjs');
+ const qa=JSON.parse(await readFile('wrangler.independent-closure-qa.finite.jsonc','utf8'));
+ assert.deepEqual(qa,finiteWranglerProfileTemplate('qaLive'));
+ assert.deepEqual(qa.kv_namespaces,[{binding:'AFW_FINITE_OWNER_OAUTH_KV',id:'6b94ff702e504e14a7730cee73a0f6ff'}]);
+ assert.equal(finitePublicProfileTemplate('qaLive').bindings.filter(b=>b.type==='kv_namespace').length,1);
+ assert.deepEqual(finiteWranglerProfileTemplate('canaryLive').kv_namespaces,[{binding:'OAUTH_KV',id:'6b94ff702e504e14a7730cee73a0f6ff'}]);
+ assert.equal(finitePublicProfileTemplate('canaryLive').bindings.some(b=>b.name==='AFW_FINITE_OWNER_OAUTH_KV'),false);
+ assert.equal(QA_CLOUD_CLOSED_PINS.qaClosed.id,'c570b60b-95dc-48e1-89f3-9c4651691dbc');
+ assert.equal(QA_CLOUD_CLOSED_PINS.qaClosed.bindingCount,31);
+ assert.equal(QA_CLOUD_CLOSED_PINS.canary.id,'2607abae-cec3-4e35-89eb-8b8572262b54');
+});

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {initialCanonical as canonical,initialHash,hashFiniteInitialMaterialRecord} from '../lib/mcp-qa-finite-initial-material-records.mjs';
+import {finitePublicProfileTemplate,finitePublicStaticExpectation} from '../lib/mcp-qa-finite-profile.mjs';
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
 const P='afw.finite-initial-preparation.v1:',C='afw.finite-initial-cleanup.v1:',KEY=P+'capsule',get=(rows,key)=>rows.find(([k])=>k===key)?.[1];
 async function using(fn,mode='normal'){const f=await initialEntryHarness(mode);try{await f.stub.configure('normal');await fn(f);}finally{await f.stub.restoreMethods();await f.mf.dispose();await f.cleanup();}}
@@ -13,6 +14,14 @@ test('capsule binds actual M and exact A journals once, survives restart and lea
  assert.equal(await invoke(f),'material_recorded');
  const rows=await f.stub.snapshot(),raw=get(rows,KEY),v=JSON.parse(raw),m=JSON.parse(get(rows,P+'material:'+v.materialHash)),ack=JSON.parse(get(rows,P+'ack')),selector=JSON.parse(get(rows,P+'selector')),plan=JSON.parse(get(rows,C+'plan')),completion=JSON.parse(get(rows,C+'activation-completion'));
  assert.equal(v.purpose,'afw.finite-initial-capsule.v1');assert.equal(v.activatedVersionId,'55555555-5555-4555-8555-555555555555');assert.equal(v.activatedDeploymentId,completion.deploymentId);assert.notEqual(v.activatedVersionId,f.x.pin.id);assert.notEqual(v.activatedDeploymentId,f.x.pin.deploymentId);
+ assert.deepEqual(m.qaBootstrap.record.qaLive.publicStatic,finitePublicStaticExpectation('qaLive'));
+ const prior=finitePublicProfileTemplate('qaLive').bindings.filter(b=>b.name!=='AFW_FINITE_OWNER_OAUTH_KV');
+ const oldHash=initialHash('afw.finite-public-bindings.v1',prior);
+ assert.notEqual(oldHash,m.qaBootstrap.record.qaLive.publicStatic.bindingsHash);
+ const oldMaterial=structuredClone(m);
+ oldMaterial.qaBootstrap.record.qaLive.publicStatic.bindingsHash=oldHash;
+ assert.throws(()=>hashFiniteInitialMaterialRecord('InitialMaterial',oldMaterial));
+ console.log('D0.1 actual codec lineage '+JSON.stringify({qaBindingsHash:m.qaBootstrap.record.qaLive.publicStatic.bindingsHash,materialHash:v.materialHash,capsuleHash:v.capsuleHash,mBindingsHash:v.bindingsHash}));
  assert.equal(v.selectorHash,hashFiniteInitialMaterialRecord('InitialSelector',selector));assert.equal(v.materialAckHash,hashFiniteInitialMaterialRecord('InitialAck',ack));assert.equal(v.preconnectionId,m.preconnectionId);assert.equal(v.qaVersionId,m.qaBootstrap.currentPointer.versionId);assert.equal(v.qaDeploymentId,m.qaBootstrap.currentPointer.deploymentId);
  assert.equal(v.bindingsHash,createHash('sha256').update(canonical([...plan.configuration.bindings].sort((a,b)=>a.name<b.name?-1:a.name>b.name?1:0))).digest('hex'));
  assert.equal(v.moduleHash,f.resident.module.sha256);assert.notEqual(v.moduleHash,f.x.pin.module.sha256);assert.equal(v.C0,v.I0+900000);assert.equal(v.C1,v.C0+180000);assert.ok(v.recordedAt>=completion.observedAt&&v.recordedAt<v.initialDeadline);

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {finitePublicStaticExpectation,finitePublicProfileTemplate} from '../lib/mcp-qa-finite-profile.mjs';
+import {initialHash} from '../lib/mcp-qa-finite-initial-material-records.mjs';
 let recordApi,admissionApi;
 try{recordApi=await import('../lib/mcp-qa-finite-bootstrap-record.mjs');}catch{/* behavioral RED: product absent */}
 try{admissionApi=await import('../lib/mcp-qa-finite-bootstrap-admission.mjs');}catch{/* behavioral RED: product absent */}
@@ -63,4 +64,13 @@ for(const mutation of ['owner','repo','branch','attempt','event','issue','pull-r
  if(mutation==='future')c.event.comment.created_at=new Date(Date.now()+60000).toISOString();
  if(mutation==='expired')c.event.comment.created_at=new Date(Date.now()-300000).toISOString();
  assert.throws(()=>admissionApi.validateQaBootstrapCommand(c));
+});
+
+test('D0.1 old sealed QA public binding commitment is rejected by actual bootstrap codec',()=>{
+ const old=record(),qa=finitePublicProfileTemplate('qaLive');
+ const prior=qa.bindings.filter(x=>x.name!=='AFW_FINITE_OWNER_OAUTH_KV');
+ const oldHash=initialHash('afw.finite-public-bindings.v1',prior);
+ assert.notEqual(oldHash,old.qaLive.publicStatic.bindingsHash);
+ old.qaLive.publicStatic={...old.qaLive.publicStatic,bindingsHash:oldHash};
+ assert.throws(()=>recordApi.encodeFiniteQaBootstrap(old));
 });
