@@ -61,6 +61,7 @@ test('actual native source and SDK parser require lexical continuation after ori
   const appBefore=await f.db.prepare('SELECT id FROM delegated_access_grants WHERE id=?').bind(reservation.identity.grantId).first();assert.equal(appBefore,null);
   const cookie=response.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');
   const post=await f.mf.dispatchFetch(context.source.origin+'/authorize',{method:'POST',redirect:'manual',headers:{Origin:context.source.origin,'Content-Type':'application/x-www-form-urlencoded','Cf-Access-Jwt-Assertion':token,Cookie:'__Host-afw-finite-prepare='+'a'.repeat(64)+'; '+cookie},body:new URLSearchParams({handle,decision:'approve',scope:'afw:project:read'})});
+  if(post.status!==302)console.info('D02 POST stages',JSON.stringify((await plain(f.stub.sdkObservation())).rows.map(([key])=>key.split(':').slice(-2).join(':'))));
   assert.equal(post.status,302,'actual SDK approve and same-child original grant must precede complete');
   assert(new URL(post.headers.get('Location')).searchParams.get('code'),'actual SDK code returned');
   const app=await f.db.prepare('SELECT * FROM delegated_access_grants WHERE id=?').bind(reservation.identity.grantId).first();assert.equal(app.id,reservation.identity.grantId);assert.equal(app.revoked_at,'');
