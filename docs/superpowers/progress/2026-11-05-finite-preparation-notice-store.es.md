@@ -40,3 +40,8 @@ Root verificó la rama en BASE7a2a1c1ffa66b21ae0aa8ad7d0a5ef0c4a2441be/árbol616
 ## Ruling posterior de contrato — antes de ejecución de regresión
 
 Root confirmó lectura primaria de authority@BASE: revokeGrant hace que el resolver real rechace Monitoring authorization unavailable, no que devuelva enabled:false. Ruling: preservar autoridad; positivo true trasCLOSE + rechazo real trasrevoke + historia intacta; metadata fixture inequívoca resolverRejected/authorizationdenied. Ver reviews/2026-11-05-finite-preparation-notice-store-authority-ruling.es.md. El writer recibió instrucción; no cambio de scope ni ejecución de matrices anteriores.
+
+
+## Review inicial / fix round1 ACTIVO
+
+Implementación inicial entregada78c3bdc6/e7846aa4 con147PASS/lintdirigido y35fixturebuilds. Root leyó primariasRED/GREEN y confirmófinalblobs/qualifierausente/originalesbyteexact. ReviewAstrahighSpecIssues/QualityNeedsfixes:Important1 monitoringFailed no se revalida trasawait, puede emitirse nuevoINSERTo testigo despuésdeACKfallido conocido. No aceptado todavía. FIX_BASE78c3bdc6, originalwriter se reanuda bajo brief fixes/2026-11-05-finite-preparation-notice-store-fix1.md, sólo3casosconcurrentes+5regresionesdirigidas/lint, no147repeat. Mismo reviewer después. Minorwarnings diferido al triagefinal. Ruling: gap real de absorción antes de emisión, no exigir cancelación deSQLyaemitido; no contradice alcance de componenteniamplía autoridad.

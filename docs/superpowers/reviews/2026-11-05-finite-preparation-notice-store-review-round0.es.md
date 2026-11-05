@@ -1,0 +1,9 @@
+# Native notice store — task review round0
+
+5nov2026, review_native_notice_store(Astrahigh), BASE7a2a1c1ffa66b21ae0aa8ad7d0a5ef0c4a2441be..HEAD78c3bdc6fec287494ec1e2d37223c8d006ea6487. Spec Issues / Task quality Needs fixes. Critical0, Important1 abierto. Fuente todavía NO aceptada.
+
+Important — el estado fallido no protege operaciones concurrentes después de un await. En store199–205 monitoringFailed se comprueba una sola vez; después g verifica únicamente el lease. Interleaving permitido:1ticketINSERTcommit/ACKretenido;2observefilanativa→testigo;3consentvalidatestigo y suspendepreflight;4ticketACKfalla→monitoringFailed en179;5consentreanuda, emite NUEVO INSERT después del fallo conocido y puede devolver applied. Contradice “Cualquier fallo/ACK desconocido de una mutación bloquea ambas escrituras de avisos para esa identidad”. Observe184–190 también puede entregar testigo después del estado fallido. Fix recomendado: guard exclusivo monitoring que compruebe failed antes/después de esperas/query, originales intactos; no prometer cancelar SQL emitido o borrar filas.
+
+CannotVerify reproducción: reviewer no ejecutó test; actuales ACK/held77–82 sólo reintentos secuenciales. Root confirma gapcódigo desde g=c.leaseGuard y checks iniciales, requiereRED/GREENconcurrente nativo específico antes de aceptar. Resuelve mediantefixround1 con originalwriter, FIX_BASE78c3bdc6. No atribuir este caso a proveedor ni a pruebas nativas anteriores inválidas:147P siguen evidencia de esos casos, no de concurrencia nueva.
+
+Strengths: firmas/snapshots/testigos privados; rejoin14columnas; expiryabsoluto; predicadosSQL; freshprimary; autoridadtrue trasCLOSE/rechazo trasrevoke por ruling; no mount/autoridad nueva. Minor/mantenimiento: npm/API/Actionswarnings para triagefinal, no fixloop ni reruns porruido. No critical hallado. operationalReadiness=false;completePackage=false;PCoff=false.
