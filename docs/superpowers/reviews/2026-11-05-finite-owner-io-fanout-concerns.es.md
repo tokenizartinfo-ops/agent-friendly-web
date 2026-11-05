@@ -1,0 +1,23 @@
+# Root handling / independent execution checks — I/O fanout
+
+5nov2026. Received DONE_WITH_CONCERNS; root reread handling-reports and entire report before review. Task is not accepted yet. BASE51c5db8 →code9ff0226 →reportae39d1b2. Scope amendments underreviews/2026-11-05-finite-owner-io-fanout-scope-amendments.es.md are bindingrequirements; rootapprovedonlytwotestfixtureconstructions outsideinitialfilemap.
+
+Root independently read actualprimarylogs:
+-42047502457/127314365473 calibration1P2causalRED:0delay302/1332ms/full112,narrow84,SQL98;50ms503/5001ms/70prefix/native5s/grantACKabsent;peak1vs2.
+-42047841728/127315577517 samecalibration3GREEN,50ms4867ms/tail660/margin132,allcountsunchanged.
+-42048550578/127318088611 SDK57PASS including23newfanout; fullfile50ms4705/tail587/margin295. Adjacent54completed53P1fixture-seedF then180s124cutoff.
+-42051365596/12732801811327remainingphase24PASS3heldhelperFAIL; ownerseedcaseactuallyreaches meaningfulsourceownerdenial.
+-42052792433/127333052666/attempt1 final3heldPASS+1realuninstrumentedSDKpositivePASS+65adjacentPASS, scopedlintclean. Final50msnotrerun forreportonly.
+All executingrunsattempt1. Originalqualifiedsourceproductchangesareonlyprivatecredentials/primaryschedule; rootfetchedBASE/headfullmoduleandcomparedprefix15941charsbeforeoldcredentials andsuffix40294fromconstobserved: BOTHbyteidentical. Node/helpers/request/store/SDKclocksourcechecks outsideextractionunchanged. Net7filecompare/reportdeliveryalsoverified.
+
+Concerns classified for review, not suppressed:
+-132ms/295msmargin provesoneSYNworkloadonly, notliveSLA, stability oroperationalacceptance. No fakeclock/thresholdtuning/retryuntilgreen. Realprovidergatelater.
+-Enrollmenttwosamplecause source-inferred; originaltimesnotcaptured. Rootauthorizedone-timesamplefixturefix, nocodecclockrelaxation. Do notpresentinferred5001asmeasuredoriginalvalue.
+-247knownfixturecompiles + atmost1unloggedinflightbuildat180scutoff; evidencecan'trecoverexactcountwithoutlying. No extrabuildtocleanreport; standardcompiler0becausechangedmoduleunmountedandnoimportedge/mountchanged, acceptedD0.3graphstillapplies.
+-Stagedheads57+80+65 notsinglefinal202run. Finalsharedfixturechangescoveredby3failedheldcases+oneSDKpositive; originalsourceproductbyteunchangedsinceeb99.
+-RPC/CIMDwarningsdisclosed, notglobalSDK/KVdrainproof. Primarynewhostilecounts+samectxoccupancytestseparatelyqualifyactualheldprovider/read/cancelsettlement. No runtimepublication/permission/Entryaction.
+Report/helperqualityandcoveragearedeliberatelylefttofreshreviewerjudgment; rootdoesnotdowngradefindingsinadvance.
+
+Follow-upfactualpost-tokenexchanged_at/ACKgap confirmed source-only, deliberatelynotpartofthisscheduleunit; separateD0.4designinpreparation. Native noticeSTORE-onlydesignalsoINACTIVE. D0.3minorremainsfinalwholebranchinput.
+
+operationalReadiness=false;completePackage=false;PCoff=false;sourceceiling3nov02:59UTCexpired. No realprovider/AFW/alias/credential/DDL/OAuth/OTP/cron/Max/main/merge.
