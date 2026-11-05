@@ -44,3 +44,19 @@ BASE c55d4eda1eeaf80341c8abd6c85b76dc662614f5/tree9b463ea4b4603be08233a7703af1e0
 Scope7code/testpaths:P1fixed-policy-engineNEW,P2preparation-enrollment-writerNEW,P3policy-transport; newtestfirst-connection-publication yfixturefinite-first-connection-publication; oldtestpolicy-transport yfixturefinite-initial-entry-world. Sólohelperscompartidos/factuales/oldcallersconservados; NO Task2mount/Task3producer. QualifierTEMP .github/workflows/afw-first-connection-qualification.yml≤3jobs15min,nosecrets/contentsread/persistfalseNode22/removefinal. Informe reports/2026-11-05-finite-native-first-connection-publication-task1.md, progreso first-connection-publication.es.md. RootnoeditaSOURCEhastaSTOPWRITES/reporte.
 
 P1operacionesproviderfijas,describe.pathURLABSOLUTAuna vez/nohttpgenérico. P2oneShotfactualnoadmisión/callbacknuevo, mismochilddeadline/ACKpuntonativo/sourcechecks/actualPromises; actualfailureantescancelpendienteconretención. DATAapprovalSYNaisladapermitidasólohelper sinPOST/receipt/autoridad. Validaroldtransport/setup,grafosCLOSED/preservedroles,lints; no repetirLink/81/50porrutina. C0/C1/30s/5s/fuentevencida/readinessfalseinvariables. STOPfinalpara reviewerfrescoRoot, noautoiniciarTask2.
+
+
+## Vía de escritura GitHub — excepción técnica actual
+
+5nov23:21–23:24UTC: update_refGQL devolvióerrorinterno2vecesRootdocs/1vezSOURCE. Readbacks confirmaron ramas sin mover; NOrechazo de permisos ni prueba de credencialvencida. StatuspúblicoGitHubconsultado1vez23:23:API/Git/Actionsoperational/incidents[],noexplicaelerror. create_treeinlinecontent sífunciona; errorbindingdelwriter era base_tree incorrecto (debe base_tree_sha). Evitarcreate_blobqueerroresinternos.
+
+Objetos preservados/noenlazados: Rootcheckpoint6356beb01b7c802f9b1181e42ef3dffdf5b179fe/tree647830e1cd15680411fedd81bf06483a3357fe20,parentb44; REDTask1 63ac62652af1530a1542de646f10ae0d46501499/tree771ab2898ebab814ba181184b2524771178f9b0d,parentc55. NOfueronheads, noActionsderivados.
+
+Rootprobó RESTcontents update_file consha/branchexplícitoenSUramadocs: ec63ce2453952aacef6f97330b5328df7348244f,parentb44correcto,únicopathcontinuación/readbackbyteexacto. No volveramoverrefa6356sobreesoscommitsREST. SourcewritersehabíadetenidoNEEDSCONTEXT; RootloREANUDÓconrulingRESTporarchivo:
+- Sólo branchSOURCEoriginal/whitelist, nunca null/default/main/newbranch/force/localCLI/token/settings.
+- FileSHA-CASexistente/absenceCASnuevo; escriturasSECUENCIALES, writerexclusivo.
+- AntesprimerwriteHEADc55; trasCADAwriteverificarparentprevio/deltaúnicopath/ref/blob/byteexacto. Interferencia/UNKNOWN→preservaryparar, sinretryciego.
+- QualifierÚLTIMOtrasinputscompletos; quitarantesdebatchesmulticode/recrearúltimo, evitarActionsintermedios. RetirarfinalfileCAS. ≤3jobs15min,contentsread/nosecrets/persistfalse igual.
+- Documentarparents/shas/trees y NOafirmaratomicidadmultifile. SiRESTfunciona, continuarRED→GREENnormal,noesperarGQL, nocambiarpermisos.
+
+Sourcewriteractual implement_first_connection_shared sigueúnicoasignado; debe entregarHEADnuevo/primarias. RootnoescribeSOURCE. CanonicalRootcontinuityseguardaporREST; Sourceacceptedbaselinec55y8docsyaestabanenlazadosantesdelfallo. NoTask1GREEN/producto/siguientetarea todavía.
