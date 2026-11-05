@@ -72,13 +72,13 @@ export async function finiteOwnerSdkWorkers(qa,{observed=false,token=false}={}){
  if(token)source=`import {createDelegatedOAuthWorker} from './lib/delegated-oauth-worker.mjs';
  import {forwardPrivateFiniteOwnerOAuth} from './lib/mcp-qa-finite-owner-oauth-forward.mjs';
  import {createFiniteOwnerRequestLease} from './lib/mcp-qa-finite-owner-preparation.mjs';
- const issuer='https://delegated-canary.agentfriendlyweb.dev',worker=createDelegatedOAuthWorker({issuer,resource:issuer+'/mcp'});
+ const issuer='https://delegated-canary.agentfriendlyweb.dev',worker=createDelegatedOAuthWorker({issuer,resource:issuer+'/mcp'});let tokenPins=null;
  export default{async fetch(request,env,ctx){
   const path=new URL(request.url).pathname;
   if(path==='/fixture/token-config'&&request.method==='POST'){
-   const pins=await request.json();env.AFW_OAUTH_PILOT_CLIENT_ID=pins.clientId;env.AFW_OAUTH_PILOT_PROJECT_ID=pins.projectId;env.AFW_OAUTH_PILOT_EXPIRES_AT=pins.expiresAt;return new Response(null,{status:204});
+   const pins=await request.json();tokenPins={AFW_OAUTH_PILOT_CLIENT_ID:pins.clientId,AFW_OAUTH_PILOT_PROJECT_ID:pins.projectId,AFW_OAUTH_PILOT_EXPIRES_AT:pins.expiresAt};return new Response(null,{status:204});
   }
-  if(path==='/oauth/token'||path==='/mcp')return worker.fetch(request,env,ctx);
+  if(path==='/oauth/token'||path==='/mcp')return worker.fetch(request,{...env,...tokenPins},ctx);
   if(path!=='/authorize')return new Response(null,{status:404});
   const root=createFiniteOwnerRequestLease(request);try{return await forwardPrivateFiniteOwnerOAuth({request,env,ctx},root.lease);}finally{root.finish();}
  }};`;
