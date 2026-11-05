@@ -27,3 +27,22 @@ Root leyó run `42114322347`, intento1, job `127549785870`: principal Link 0 PAS
 Writer sigue implementación mínima y corpus, sin repetir RED. Root conserva tres blobs BASE existentes para full diff futuro; no se modifica fuente desde Root.
 
 En paralelo, diseñador original prepara únicamente informe preliminar de la siguiente dependencia (segunda publicación notices) en su rama docs: `reports/2026-11-05-finite-native-notices-publication-design.es.md`, pin953 inmutable, sin seguir WIP Link y sin spec/plan/ejecución. Ruling: el contrato histórico notices no exige Link (finite sí); orden de trabajo no crea gate de negocio nuevo. Aprobación/admisión no se reconstruye de registros durables si exige misma lease viva. Reporte debe contrastar corte GET-only vs unidad mayor aprobación→publicación sobre interfaces existentes, sin elegir por adelantado ni crear recursos.
+
+
+## Implementación mínima: fallo de proyección y primer GREEN
+
+Checkpoint producto `7b3609bc43ab2f42903ab8d0f6ab6a69b90d48e0`, árbol47163864, run `42115157508`, intento1, job `127552730650`: Link0/1 y carry0/2 fallaron ANTES de OAuth/POST, en sdkReadCurrent inicial que devolvió sólo status en lugar de tres claves. Root leyó la primaria y stack prepareNoticeIssued. Artefacto `13455388683`, SHA256 `73d96cd9a601f4062424da81f0b0bed5276d2be138e42af3f14a3fd888273b71`. No fue un RED de Link ni un problema del proveedor/deadline.
+
+Writer encontró data.noticeLink añadido antes de spread al contrato protegido exacto de10campos qualifyFinitePreparationEnrollmentFacts. Corrección `7d3044f9b2127c74083f955905e70ed33d6cf488`: leer Link después de ese validador y antes de issuer/noticecorrelation, sin ampliar contrato protegido ni saltar su validación.
+
+Root leyó GREEN `42115360441`, intento1, job `127553446346`: principal Link1/1 y carry2/2 PASS,0skip. Siete pares/catorce snapshots/seis rechecks/dos Access reales; child901ms dentro5000ms, parent1471ms. HTTP98, peak2, active0. Captura D1 121sesiones/74first65all y DO1067/129/3/31/117/2/3 **incluye inspección posterior del test**, no costo exacto del POST; writer corregirá captura en el próximo principal ya necesario, sin run extra de métricas.
+
+Seis compiles QA/M reales, cero estándar. QA1811421bytes/325inputs, bundleSHA019dd50d8b0c330ca36119eb145da55c1243640d527bb9274a9b6b1f03e81c84/graphac1d4c43e43a8d461e0589f16d329da2102f87088e2120933190955bca8eb559. M1686818/303, SHA f3e3a5b9104aecce8184a97edc16cf6709e5941c1faad423b06c0663924e9340/graph0f1e927b66951ce5a82293e717f69f0417e2336932c1653f6d80dacb4cebb551. Artefacto `13455861437`, SHA256 `c128c26dc76867057ba0222979dbbbbd51088c6c24678b0fa8f8f5d886060a5a`,7d.
+
+Candidato ampliado `fe18ba913a66f63f23468b455f5ec64bf9de6ec4`, árbol `06098fadd7dbbc8c23bf5c6409b012dc6a1e1c74`: writer anuncia corpus Link31/POST50/GET37+pure18+phase16/SDK6/D04token4+lint4 en tres jobs independientes. Captura desplazada inmediatamente tras POST antes de inspección. Todavía sin primarias terminales ni aceptación; no inferir GREEN de esta preparación.
+
+## Diseño siguiente, sólo preliminar
+
+Root leyó informe11972chars `reports/2026-11-05-finite-native-notices-publication-design.es.md`, designerHEAD `fc3512d14cbfaf8b4cc62ed062cac06dc5769397`, blob `a03a1ab8815521402f70e23e344365e15047062c`. INACTIVE. Existing stage notices NO exige Link; finite sí. Aprobación actual, configuración y avisos son permisos diferentes. No usar aprobación durable para reconstruir admisión que exige la misma lease viva.
+
+Root pidió sólo segundo informe focal `reports/2026-11-05-finite-native-notices-publication-source-audit.es.md` para precisar fixedsource/candidate/rollback/engine y viabilidad de aprobación→publicación completa antes de elegir puente GET-only o unidad mayor. Misma rama docs del diseñador y pin953 inmutable, sin WIP Link, spec/plan, implementación, pruebas o provider. Ninguna unidad siguiente activada.
