@@ -13,7 +13,22 @@ const ioBegin=(path,token,reader,snapshot)=>{
 const ioResponse=async(response,row)=>{
  const s=ioState();if(!s||!row)return response;
  if(s.fail===row.category){await response.body.cancel();return new Response(null,{status:503,headers:response.headers});}
- return response;
+ if(s.hold!==row.category||s.holdUsed)return response;
+ s.holdUsed=true;const bytes=new Uint8Array(await response.arrayBuffer());let pulled=false;
+ return new Response(new ReadableStream({
+  pull(controller){
+   if(pulled){controller.close();return;}pulled=true;s.held={category:row.category,phase:'body'};
+   return new Promise(resolve=>{s.releaseRead=()=>{s.releaseRead=null;s.held=null;controller.enqueue(bytes);resolve();};if(s.autoRelease)s.releaseRead();});
+  },
+  cancel(){
+   s.held={category:row.category,phase:'cancel'};row.cancelHeldAt=performance.now();
+   return new Promise(resolve=>{s.releaseCancel=()=>{s.releaseCancel=null;s.held=null;row.cancelReleasedAt=performance.now();resolve();};if(s.autoRelease)s.releaseCancel();});
+  }
+ },{highWaterMark:0}),{status:response.status,headers:response.headers});
+};
+const ioCheckpoint=async name=>{
+ const s=ioState();if(!s||s.checkpoint!==name||s.snapshots!==1)return;
+ s.checkpointHeld=name;await new Promise(resolve=>{s.releaseCheckpoint=()=>{s.releaseCheckpoint=null;s.checkpointHeld=null;resolve();};if(s.autoRelease)s.releaseCheckpoint();});
 };
 const ioEnd=row=>{if(!row)return;row.endedAt=Date.now();row.endMono=performance.now();ioState().active--;};
 `;
@@ -26,6 +41,11 @@ const ioEnd=row=>{if(!row)return;row.endedAt=Date.now();row.endMono=performance.
  once("const primary=async()=>{\n    await credentials();","const primary=async()=>{\n    ioSnapshot=ioState()?++ioState().snapshots:0;await credentials();");
  once("const withChild=async action=>clock.child(async(l,until)=>{activeChild=l;try{check();return await action(l,{startedAt:Date.now(),deadline:until});}finally{activeChild=null;}});","const withChild=async action=>clock.child(async(l,until)=>{activeChild=l;const io=ioState(),startedAt=Date.now(),startMono=performance.now(),first=io?.rows.length,sqlFirst=globalThis.__finiteIoOwner?.sdkPrimary?.length??0;try{check();return await action(l,{startedAt:Date.now(),deadline:until});}finally{if(io?.consuming){io.child={startedAt,startMono,deadline:until,endedAt:Date.now(),endMono:performance.now(),first,last:io.rows.length,sqlFirst,sqlLast:globalThis.__finiteIoOwner?.sdkPrimary?.length??0};io.consuming=false;}activeChild=null;}});");
  once("consumptionChild=l;consumptionStore=store;","consumptionChild=l;consumptionStore=store;if(ioState())ioState().consuming=true;");
+ once("if(consumptionChild!==l||consumptionStore!==store||!consumption)fail();","if(consumptionChild!==l||consumptionStore!==store||!consumption)fail();if(ioState())ioState().same={child:consumptionChild===l,store:consumptionStore===store};");
+ once("onAbort=()=>clock.close();originalLease.signal.addEventListener('abort',onAbort,{once:true});","onAbort=()=>{if(ioState())ioState().parentAborted=true;clock.close();};originalLease.signal.addEventListener('abort',onAbort,{once:true});");
+ once("const joined=await retain(Promise.allSettled([qaWork,mWork]));","const joined=await retain(Promise.allSettled([qaWork,mWork]));await ioCheckpoint('before-join');");
+ once("const observed=await primary();","const observed=await primary();await ioCheckpoint('after-first');");
+ once("const qualified=await qualify(first,observed),again=await primary(),second=await facts(),secondQualified=await qualify(second,again);","const qualified=await qualify(first,observed);await ioCheckpoint('between');const again=await primary(),second=await facts(),secondQualified=await qualify(second,again);");
  return source;
 }
 export function extendFiniteOwnerIo(entry){
@@ -33,14 +53,27 @@ export function extendFiniteOwnerIo(entry){
  return entry.replace(needle,needle+String.raw`
  async ioConfigure(options={}){
   await this.sdkPrimaryObserve();globalThis.__finiteIoOwner=this;
-  globalThis.__finiteIo={rows:[],active:0,peak:0,snapshots:0,child:null,fail:options.fail??null};
+  globalThis.__finiteIo={rows:[],active:0,peak:0,snapshots:0,child:null,fail:options.fail??null,hold:options.hold??null,checkpoint:options.checkpoint??null};
+ }
+
+ async ioRelease(kind='all'){
+  const s=globalThis.__finiteIo;if(!s)return;
+  if(kind==='all')s.autoRelease=true;
+  if(kind==='all'||kind==='body')s.releaseRead?.();
+  if(kind==='all'||kind==='cancel')s.releaseCancel?.();
+  if(kind==='all'||kind==='checkpoint')s.releaseCheckpoint?.();
+ }
+ async ioProbe(){
+  const root=createFiniteOwnerRequestLease(new Request('https://delegated-canary.agentfriendlyweb.dev/fixture/retention'));
+  try{return await observeFiniteOwnerRequestWork({ctx:this.ctx,env:this.env,originalLease:root.lease},async()=>({allowed:true}));}
+  catch{return {allowed:false};}finally{root.finish();}
  }
  async ioObservation(){
   const s=globalThis.__finiteIo;if(!s)return null;
   const c=s.child,sessions=c?(this.sdkPrimary??[]).slice(c.sqlFirst,c.sqlLast):[];
   let factual=0,preflight=0,writes=0;
   for(const session of sessions){if(session.queries.length===8)preflight+=8;else for(const sql of session.queries){if(sql.startsWith('SELECT '))factual++;else writes++;}}
-  return {...s,sql:{factual,preflight,writes}};
+  return {rows:s.rows,active:s.active,peak:s.peak,snapshots:s.snapshots,child:s.child,same:s.same??null,held:s.held??null,checkpointHeld:s.checkpointHeld??null,parentAborted:s.parentAborted??false,sql:{factual,preflight,writes}};
  }
 `);
 }

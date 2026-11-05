@@ -14,7 +14,7 @@ permissions:
 jobs:
   qualify:
     runs-on: ubuntu-24.04
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
@@ -25,4 +25,5 @@ jobs:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npx eslint lib/mcp-qa-finite-owner-phase-context.mjs test/mcp-qa-finite-owner-qa-sdk-native.test.mjs test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-qa-sdk.mjs test/fixtures/finite-owner-io-fanout.mjs
-      - run: timeout 300s node --test --test-concurrency=1 --test-name-pattern="fanout causal control|fanout 50ms|fanout fixed two" test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+      - run: timeout 660s node --test --test-concurrency=1 test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+      - run: timeout 180s node --test --test-concurrency=1 test/mcp-qa-finite-owner-phase-context-native.test.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs test/mcp-qa-finite-owner-request-retention.test.mjs test/mcp-qa-finite-preparation-issuer-native.test.mjs test/mcp-qa-finite-profile-native.test.mjs test/mcp-qa-finite-profile.test.mjs test/mcp-qa-finite-owner-sdk-binding-facts.test.mjs

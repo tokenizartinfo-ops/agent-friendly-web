@@ -83,7 +83,7 @@ async function world(fn,{observed=true,restart=false,io=false}={}){
   await fn(f);
   const after=await plain(f.stub.sdkGrants());
   for(const row of f.history)assert.deepEqual(after.find(r=>r.id===row.id),row,'original historical D1 grant unchanged');
- }finally{await f.stub.sdkReleaseHeld().catch(()=>{});await f.mf.dispose();await f.cleanup();}
+ }finally{if(io){await f.stub.ioRelease('all');await ioWait(f,s=>s.active===0);}await f.stub.sdkReleaseHeld().catch(()=>{});await f.mf.dispose();await f.cleanup();}
 }
 async function consent(f){
  const response=await f.get();assert.equal(response.status,200);
@@ -255,7 +255,7 @@ async function fanoutMetrics(f,form,response,{peak}){
  assert.equal(full.length,112);assert.equal(narrow.length,84);
  assert.deepEqual(counts,Object.fromEntries(['verify-reader','verify-publisher','qa-deployment','qa-version','m-deployment','m-initial-version','m-current-version'].map(k=>[k,16])));
  assert.deepEqual(state.sql,{factual:80,preflight:16,writes:2});
- assert.equal(state.peak,peak);assert.equal(state.active,0);
+ assert.equal(state.peak,peak);assert.equal(state.active,0);assert.deepEqual(state.same,{child:true,store:true});assertIoOrder(state.rows);
  assert(full.every(r=>r.outcome==='fulfilled'&&r.endMono>=r.cancelSettledAt&&r.cancelSettledAt>=r.cancelStartedAt&&r.bytes>0));
  if(f.ioDelay)assert(f.ioWaits.every(ms=>ms>=50));
  await issued(f,form,response);
@@ -274,4 +274,91 @@ test('fanout 50ms preserves original five second child and actual grant',{timeou
 test('fanout fixed two overlaps real request lifecycles',{timeout:120000},()=>world(async f=>{
  const form=await consent(f);await f.stub.ioConfigure();
  await fanoutMetrics(f,form,await f.post(form),{peak:2});
+},{observed:false,io:true}));
+
+
+async function ioWait(f,predicate){
+ for(let n=0;n<400;n++){const s=await plain(f.stub.ioObservation());if(!s||predicate(s))return s;await new Promise(resolve=>setTimeout(resolve,20));}
+ assert.fail('native I/O barrier did not settle within 8s');
+}
+function assertIoOrder(rows){
+ let priorEnd=0;
+ for(const snapshot of [...new Set(rows.map(r=>r.snapshot))]){
+  const group=rows.filter(r=>r.snapshot===snapshot),by=k=>group.find(r=>r.category===k);
+  assert.equal(group.length,7,'all original reads in each complete primary');
+  const reader=by('verify-reader'),publisher=by('verify-publisher'),qa=by('qa-deployment'),m=by('m-deployment');
+  assert(Math.min(reader.startMono,publisher.startMono)>=priorEnd,'no primary snapshot overlap');
+  assert(Math.min(qa.startMono,m.startMono)>=Math.max(reader.endMono,publisher.endMono),'both credentials fully settled before descriptors');
+  assert(by('qa-version').startMono>=qa.endMono);
+  assert(by('m-initial-version').startMono>=m.endMono);
+  assert(by('m-current-version').startMono>=by('m-initial-version').endMono);
+  priorEnd=Math.max(...group.map(r=>r.endMono));
+ }
+ const events=rows.flatMap(r=>[[r.startMono,1],[r.endMono,-1]]).sort((a,b)=>a[0]-b[0]||a[1]-b[1]);let active=0;
+ // Native workerd timestamps can tie; strict positive intervals carry the peak
+ // assertion separately from the in-lifecycle increment/decrement counter.
+ for(const [,delta]of events){active+=delta;assert(active<=2,'physical body/cancel concurrency bound');}
+}
+async function ioDeny(f,response){
+ assert.equal(response.status,503);assert.doesNotMatch(await response.text(),/<form|name="handle"/);assert.equal(response.headers.get('Location'),null);
+ const s=await observe(f);assert.equal(s.rows.length,0,'no actual SDK operation/receipt');assert.equal(s.calls.length,0);assert.equal(s.probes.length,0);
+ assert.equal((await plain(f.stub.sdkGrants())).length,f.history.length,'no new grant');
+ const rows=await plain(f.stub.snapshot());assert(!rows.some(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')),'no issuer SEND or ACK');
+}
+async function ioPhysicalRelease(f,{replace=false}={}){
+ const held=await ioWait(f,s=>s.held?.phase==='body');assert.equal(held.active,1);
+ assert.deepEqual(await plain(f.stub.ioProbe()),{allowed:false},'original native request remains occupied');
+ if(replace)await f.stub.sdkReplaceHolder();
+ await f.stub.ioRelease('body');
+ const cancelling=await ioWait(f,s=>s.held?.phase==='cancel');assert.equal(cancelling.active,1);
+ assert.deepEqual(await plain(f.stub.ioProbe()),{allowed:false},'cancellation Promise retains occupancy');
+ await f.stub.ioRelease('cancel');
+ const done=await ioWait(f,s=>s.active===0);assert(done.rows.some(r=>r.cancelReleasedAt>=r.cancelHeldAt));assert(done.peak<=2);
+ for(let n=0;n<100;n++){if((await plain(f.stub.ioProbe())).allowed)return done;await new Promise(resolve=>setTimeout(resolve,20));}
+ assert.fail('native request did not release after actual physical settlement');
+}
+for(const [fail,hold]of [['verify-reader','verify-publisher'],['verify-publisher','verify-reader'],['qa-deployment','m-deployment'],['m-deployment','qa-version']]){
+ test('fanout failed '+fail+' retains sibling actual body and cancellation',{timeout:60000},()=>world(async f=>{
+  await f.stub.ioConfigure({fail,hold});const pending=f.get();await ioWait(f,s=>s.held?.phase==='body');
+  await ioDeny(f,await pending);const failed=await plain(f.stub.ioObservation());assert.equal(failed.snapshots,1);assert.equal(failed.peak,2);
+  if(fail.startsWith('verify-'))assert(failed.rows.every(r=>r.branch==='credentials'),'no descriptors after credential failure');
+  await ioPhysicalRelease(f);
+  const done=await plain(f.stub.ioObservation());assert.equal(done.snapshots,1,'failed join never starts next snapshot');
+  console.info('fanout retained failure',JSON.stringify({fail,hold,activeAtDenial:failed.active,settled:done.active,peak:done.peak,categories:done.rows.map(r=>r.category)}));
+ },{observed:false,io:true}));
+}
+for(const boundary of ['controller','root-finish']){
+ test('fanout native '+boundary+' abort retains actual body and cancel',{timeout:60000},()=>world(async f=>{
+  await f.stub.ioConfigure({hold:'qa-version'});const pending=f.get();await ioWait(f,s=>s.held?.phase==='body');
+  await status(f.mf.dispatchFetch(f.source.origin+(boundary==='controller'?'/fixture/abort':'/fixture/abort-root')));
+  await ioDeny(f,await pending);assert.equal((await plain(f.stub.ioObservation())).parentAborted,true,'accepted actual native QA boundary received abort');
+  await ioPhysicalRelease(f);
+  assert.equal((await observe(f)).rows.length,0,'no late SDK receipt');
+ },{observed:false,io:true}));
+}
+test('fanout sibling beyond original child cannot renew its deadline',{timeout:60000},()=>world(async f=>{
+ await f.stub.ioConfigure({hold:'verify-publisher'});const start=performance.now(),pending=f.get();await ioWait(f,s=>s.held?.phase==='body');
+ await ioDeny(f,await pending);const elapsed=performance.now()-start;assert(elapsed>=4900&&elapsed<15000);
+ await ioPhysicalRelease(f);assert.equal((await plain(f.stub.ioObservation())).snapshots,1);
+ console.info('fanout native sibling expiry',JSON.stringify({elapsed,renewed:false}));
+},{observed:false,io:true}));
+for(const checkpoint of ['before-join','after-first','between'])for(const drift of ['owner','pointer','module','configuration']){
+ test('fanout '+drift+' drift at causal '+checkpoint+' denies at original following checkpoint',{timeout:60000},()=>world(async f=>{
+  await f.stub.ioConfigure({checkpoint});const pending=f.get();await ioWait(f,s=>s.checkpointHeld===checkpoint);
+  if(drift==='owner')await f.db.prepare("UPDATE site_projects SET user_id='SYN drift'").run();
+  if(drift==='pointer')f.phaseCurrent.receipt.deploymentId='99999999-9999-4999-8999-999999999999';
+  if(drift==='module')f.phaseFault='module';
+  if(drift==='configuration')f.phaseFault='configuration';
+  await f.stub.ioRelease('checkpoint');await ioDeny(f,await pending);
+  const s=await ioWait(f,s=>s.active===0);assert(s.snapshots<=2);assert(s.peak<=2);
+ },{observed:false,io:true}));
+}
+
+test('fanout completed sibling cannot hide live holder replacement',{timeout:60000},()=>world(async f=>{
+ await f.stub.ioConfigure({hold:'verify-publisher'});const start=performance.now(),pending=f.get();
+ await ioWait(f,s=>s.held?.phase==='body'&&s.rows.some(r=>r.category==='verify-reader'&&r.outcome==='fulfilled'));
+ await f.stub.sdkReplaceHolder();await f.stub.ioRelease('body');
+ await ioWait(f,s=>s.held?.phase==='cancel');assert(performance.now()-start<4500,'replacement precedes original child expiry');
+ await f.stub.ioRelease('cancel');await ioDeny(f,await pending);
+ const s=await ioWait(f,s=>s.active===0);assert.equal(s.snapshots,1);assert.equal(s.peak,2);
 },{observed:false,io:true}));
