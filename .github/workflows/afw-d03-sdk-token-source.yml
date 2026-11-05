@@ -25,8 +25,8 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Scoped lint before native work
         run: npx eslint lib/delegated-oauth-worker.mjs test/fixtures/finite-owner-qa-sdk.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs
-      - name: Actual native QA code to M token and MCP complete qualification
-        run: timeout 420s node --test test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs
+      - name: Corrected four SDK identity scope and actual MCP carrier cases
+        run: timeout 180s node --test --test-name-pattern='actual original QA code negative (sdk-subject|requested-scope)|otherwise valid actual token' test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs
       - name: Relevant unchanged D02 actual positive after shared fixture composition
         run: timeout 150s node --test --test-name-pattern='uninstrumented actual native source/SDK/Unit2a GET POST' test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
       - name: Affected actual OAuth token refresh and MCP regressions

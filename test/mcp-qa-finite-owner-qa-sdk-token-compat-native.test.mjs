@@ -74,10 +74,27 @@ async function corruptProps(f,x,change){
  const encrypted=await crypto.subtle.encrypt({name:'AES-GCM',iv:new Uint8Array(12)},key,new TextEncoder().encode(JSON.stringify(props)));
  await f.kv.put(x.key,JSON.stringify({...x.grant,encryptedProps:Buffer.from(encrypted).toString('base64')}));
 }
+
+/** SYN negative identity in the ACTUAL SDK code grammar. Preserve this family's
+ * SDK id and original app UUID; rewrap its actual key for the changed code.
+ * This is a corrupted negative fixture, never QA's positive issuance. */
+async function corruptSdkSubject(f,x){
+ const constant=new Uint8Array([0x22,0x7e,0x26,0x86,0x8d,0xf1,0xe1,0x6d,0x80,0x70,0xea,0x17,0x97,0x5b,0x47,0xa6,0x82,0x18,0xfa,0x87,0x28,0xae,0xde,0x85,0xb5,0x1d,0x4a,0xd9,0x96,0xca,0xca,0x43]);
+ const hmac=await crypto.subtle.importKey('raw',constant,{name:'HMAC',hash:'SHA-256'},false,['sign']);
+ const derive=async code=>crypto.subtle.importKey('raw',await crypto.subtle.sign('HMAC',hmac,new TextEncoder().encode(code)),{name:'AES-KW'},false,['wrapKey','unwrapKey']);
+ const originalWrapping=await derive(x.code),key=await crypto.subtle.unwrapKey('raw',Buffer.from(x.grant.authCodeWrappedKey,'base64'),originalWrapping,{name:'AES-KW'},{name:'AES-GCM'},true,['encrypt','decrypt']);
+ const [,id,secret]=x.code.split(':'),subject='SYN-foreign',code=subject+':'+id+':'+secret,newWrapping=await derive(code);
+ const props={...x.props,userId:subject},encrypted=await crypto.subtle.encrypt({name:'AES-GCM',iv:new Uint8Array(12)},key,new TextEncoder().encode(JSON.stringify(props)));
+ const grant={...x.grant,userId:subject,authCodeId:createHash('sha256').update(code).digest('hex'),authCodeWrappedKey:Buffer.from(await crypto.subtle.wrapKey('raw',key,newWrapping,{name:'AES-KW'})).toString('base64'),encryptedProps:Buffer.from(encrypted).toString('base64')};
+ assert.deepEqual(await readSyntheticIssuedGrantProps(code,grant),props,'actual SDK key/props format remains valid');
+ await f.kv.delete(x.key);const newKey='grant:'+subject+':'+id;await f.kv.put(newKey,JSON.stringify(grant));
+ x.code=code;x.key=newKey;x.grant=grant;
+}
+
 async function rawMcp(f,token){
  const r=await f.mf.dispatchFetch(f.source.resource,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json',Accept:'application/json, text/event-stream',Host:new URL(f.source.origin).host},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'tools/call',params:{name:'read_project_summary',arguments:{}}})});
  const body=await r.text();let result;try{result=JSON.parse(body);}catch{/* Actual M human failure page has no JSON result. */}
- return {status:r.status,result};
+ return {status:r.status,result,mediaType:r.headers.get('Content-Type'),format:/^data:/m.test(body)?'sse':result?'json':'other'};
 }
 for(const field of ['userId','projectId'])for(const kind of ['missing','wrong'])test('SYN SDK-format '+kind+' redundant '+field+' denies actual token exchange',()=>world(async f=>{
  const x=await issued(f);await corruptProps(f,x,props=>{if(kind==='missing')delete props[field];else props[field]='SYN-foreign';});
@@ -107,11 +124,11 @@ for(const fault of ['pkce','client','resource','namespace','missing-app','wrong-
   const r=await f.mf.dispatchFetch(f.source.origin+'/fixture/token-namespace',{method:'POST'});assert.equal(r.status,204);
  }
  if(fault==='missing-app'||fault==='wrong-app')await corruptProps(f,x,p=>{if(fault==='missing-app')delete p.applicationGrantId;else p.applicationGrantId='eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee';});
- if(fault==='sdk-subject')await f.kv.put(x.key,JSON.stringify({...x.grant,userId:'SYN-foreign'}));
+ if(fault==='sdk-subject')await corruptSdkSubject(f,x);
  if(fault==='owner')await f.db.prepare('UPDATE site_projects SET user_id=? WHERE id=?').bind('SYN-foreign',x.app.project_id).run();
  if(fault==='native-project')await f.db.prepare('UPDATE delegated_access_grants SET project_id=? WHERE id=?').bind('SYN-foreign',x.app.id).run();
  if(fault==='granted-scope')await f.kv.put(x.key,JSON.stringify({...x.grant,scope:['afw:project:read','afw:evidence:read']}));
- if(fault==='requested-scope')patch={scope:'afw:project:read afw:evidence:read'};
+ if(fault==='requested-scope')patch={scope:'afw:evidence:read'}; // SDK downscopes a mixed request to read; evidence-only is genuinely outside this grant.
  if(fault==='consumed-exchange')await f.db.prepare('UPDATE delegated_access_grants SET exchanged_at=? WHERE id=?').bind(new Date().toISOString(),x.app.id).run();
  await deniedExchange(f,x,patch);
  const row=await plain(f.stub.sdkGrant(x.app.id));assert.equal(row.revoked_at,'');if(fault!=='consumed-exchange')assert.equal(row.exchanged_at,'','denial did not consume original application exchange');
@@ -135,9 +152,10 @@ for(const reduction of ['revoke','expire'])test('otherwise valid actual token lo
  assert.equal((await readSummary(f,payload.access_token)).isError,undefined);
  if(reduction==='revoke'){const reduced=await plain(f.stub.sdkReduceOriginal());assert.equal(reduced.fence,'fenced');assert.equal(reduced.activeAfterFence,true);assert.equal(reduced.reduction,'revoked');}
  else await f.db.prepare('UPDATE delegated_access_grants SET expires_at=? WHERE id=?').bind(new Date(Date.now()-1000).toISOString(),x.app.id).run();
- const denied=await rawMcp(f,payload.access_token);assert.equal(denied.status,200,'SDK cryptography still accepted; permission is checked separately');
- assert.equal(denied.result.result.isError,true);assert.equal(denied.result.result.structuredContent.code,'delegated_access_denied');assert.equal(denied.result.result.structuredContent.data,undefined);
- console.info('D03 actual permission reduction',JSON.stringify({reduction,http:denied.status,code:denied.result.result.structuredContent.code}));
+ const carrier=await rawMcp(f,payload.access_token);assert.equal(carrier.status,200,'SDK cryptography still accepted; permission is checked separately');
+ console.info('D03 actual permission carrier',JSON.stringify({reduction,http:carrier.status,mediaType:carrier.mediaType,format:carrier.format}));
+ const denied=await readSummary(f,payload.access_token);assert.equal(denied.isError,true);assert.equal(denied.structuredContent.code,'delegated_access_denied');assert.equal(denied.structuredContent.data,undefined);
+ console.info('D03 actual permission reduction',JSON.stringify({reduction,code:denied.structuredContent.code}));
 }));
 test('held actual SDK completion settles late after original terminal fence and real grant reduction',{timeout:45000},()=>world(async f=>{
  const form=await consent(f);await f.stub.sdkConfigure('hold-put');const pending=f.post(form);
