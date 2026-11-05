@@ -79,6 +79,8 @@ export function extendFiniteOwnerNoticeGet(entry){
   }catch(error){return {unavailable:true,message:error.message};}
  }
 
+ async noticeInstanceRead(){this.noticeInstance??=crypto.randomUUID();return this.noticeInstance;}
+ async noticeRestart(){this.ctx.abort('SYN notice restart',{retryAlarm:false});}
  async noticeConfigure(mode='normal'){
   this.noticeRestore?.();globalThis.__noticeOwner=this;this.noticeMode=mode;this.noticeHeld=null;this.noticeRelease=null;
   const state=globalThis.__noticeState={trace:[],sql:[],ops:{get:0,list:0,sync:0,transaction:0,txGet:0,txList:0,txPut:0},lists:[],resolution:null};this.noticeState=state;

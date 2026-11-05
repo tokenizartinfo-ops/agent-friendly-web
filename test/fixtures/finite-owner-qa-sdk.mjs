@@ -111,6 +111,27 @@ export async function finiteOwnerSdkWorkers(qa,{observed=false,token=false,io=fa
   contents=contents.replace(needle,"const outgoing=new Request(finiteOwnerOAuthTarget,{method:'POST',redirect:'manual',headers,body:bytes.length?bytes:undefined,signal:originalLease.signal});globalThis.__d02M.outgoingEntryAborted=outgoing.signal.aborted;globalThis.__d02M.outgoingAbortObserved=false;outgoing.signal.addEventListener('abort',()=>{globalThis.__d02M.outgoingAbortObserved=true;},{once:true});const response=await Reflect.apply(fetcher,stub,[outgoing]);check();");
   return {contents,loader:'js'};
  });}}]:[];
+
+ if(noticeGet)plugins.push({name:'SYN-notice-M-body-diagnostic',setup(b){
+  b.onLoad({filter:/mcp-qa-finite-owner-notice-consent-body\.mjs$/},async args=>{
+   let contents=await readFile(args.path,'utf8');
+   const once=(needle,next)=>{if(contents.split(needle).length!==2)throw Error('SYN body diagnostic marker');contents=contents.replace(needle,next);};
+   once(" const reader=message.body?.getReader();"," const seen=globalThis.__noticeMBody?.state;const reader=message.body?.getReader();");
+   once("const {done,value}=await retain(reader.read());","const actualRead=reader.read();if(seen)seen.readNativeEntered=true;actualRead.then(()=>{if(seen)seen.readNativeSettled=true;},()=>{if(seen)seen.readNativeRejected=true;});const {done,value}=await retain(actualRead);");
+   once("try{await retain(reader.cancel());}catch{}throw error;}","try{const actualCancel=reader.cancel();if(seen)seen.cancelNativeEntered=true;actualCancel.then(()=>{if(seen)seen.cancelNativeSettled=true;},()=>{if(seen)seen.cancelNativeRejected=true;});await retain(actualCancel);}catch{}throw error;}finally{if(seen)seen.bodyFinally=true;}");
+   return {contents,loader:'js'};
+  });
+  b.onLoad({filter:/mcp-qa-finite-owner-notice-get-forward\.mjs$/},async args=>{
+   let contents=await readFile(args.path,'utf8');
+   const once=(needle,next)=>{if(contents.split(needle).length!==2)throw Error('SYN forward diagnostic marker');contents=contents.replace(needle,next);};
+   once("async signalFailure=>{","async signalFailure=>{try{");
+   once("  }));","  }finally{const seen=globalThis.__noticeMBody?.state;if(seen)seen.actualCallbackFinally=true;}}));");
+   once("const bytes=await (consent?readFiniteOwnerNoticeConsentBody:finiteNativeBytes)(request,check,first);","const actualBody=(consent?readFiniteOwnerNoticeConsentBody:finiteNativeBytes)(request,check,first),seen=globalThis.__noticeMBody?.state;if(seen)seen.bodyPromiseEntered=true;actualBody.then(()=>{if(seen)seen.bodyPromiseSettled=true;},()=>{if(seen)seen.bodyPromiseRejected=true;});const bytes=await actualBody;");
+   once(" }catch{return pending();}"," }catch{return pending();}finally{const seen=globalThis.__noticeMBody?.state;if(seen)seen.outerFinally=true;}");
+   return {contents,loader:'js'};
+  });
+ }});
+
  const built=await build({plugins,stdin:{contents:source,resolveDir:process.cwd()},bundle:true,write:false,metafile:true,platform:'neutral',mainFields:['module','main'],format:'esm',target:'es2022',external:['node:*','cloudflare:*']});
  if((observed||io)&&outgoingInstrumentations!==1)throw Error('SYN outgoing observer not installed exactly once');
  if(noticeGet)await captureNoticeBundle(built,'M',{'<stdin>':source});

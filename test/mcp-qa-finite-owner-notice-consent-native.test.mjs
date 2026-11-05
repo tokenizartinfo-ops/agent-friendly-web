@@ -236,7 +236,7 @@ for(const where of ['M','QA'])test('native consent failed body retains actual ca
  const probe=async()=>where==='QA'?plain(f.stub.noticeProbe()):(await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-probe')).json();
  assert.equal((await probe()).allowed,false,'new live root denied by actual pending cancellation');
  if(where==='QA')await f.stub.noticeBodyReleaseHeld();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-release')).body?.cancel();
- for(let n=0;n<100;n++){if((await probe()).allowed)return;await new Promise(r=>setTimeout(r,10));}assert.fail('actual body cancellation not settled '+JSON.stringify(await probe()));
+ for(let n=0;n<100;n++){if((await probe()).allowed)return;await new Promise(r=>setTimeout(r,10));}const finalState=where==='QA'?await plain(f.stub.noticeBodyRead()):await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-state')).json();assert.fail('actual body cancellation not settled '+JSON.stringify({probe:await probe(),state:finalState}));
 }));
 test('native consent abort retains SQL and forbids late ACK',()=>withIssued(async f=>{
  await ticket(f);await f.stub.noticeConfigure('hold-after');const pending=consent(f);await gate(f,'after-sql');
@@ -282,7 +282,7 @@ for(const where of ['M','QA'])test('native consent failed body retains actual ca
  const read=async()=>where==='QA'?plain(f.stub.noticeBodyRead()):(await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-state')).json();
  const probe=async()=>where==='QA'?plain(f.stub.noticeProbe()):(await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-probe')).json();
  const pending=where==='QA'?plain(f.stub.noticeBodyStart(f.notice.headers,'read')):f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-read-start',{method:'POST',headers:f.notice.headers}).then(r=>r.json());
- const until=async predicate=>{for(let n=0;n<200;n++){const state=await read();if(predicate(state))return state;await new Promise(r=>setTimeout(r,10));}assert.fail('native held body state not reached');};
+ const until=async predicate=>{for(let n=0;n<200;n++){const state=await read();if(predicate(state))return state;await new Promise(r=>setTimeout(r,10));}assert.fail('native held body state not reached '+JSON.stringify({state:await read(),probe:await probe()}));};
  await until(s=>s.readEntered);
  if(where==='QA')await f.stub.noticeBodyAbortHeld();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-abort')).body?.cancel();
  const failed=await pending;assert.notEqual(failed.response,200);assert.equal(failed.readSettled,false);assert.equal((await probe()).allowed,false);
@@ -299,4 +299,16 @@ for(const drift of ['owner','revision','pointer'])test('native consent source cu
  await f.stub.noticeReleaseHeld();await denied(f,await pending);
  const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,0);assert.equal(after.notice.length,4);
  const state=(await plain(f.stub.noticeStateRead())).state;assert.equal(state.sql.flatMap(s=>s.queries).filter(q=>q.sql.includes('INSERT INTO dossier_monitoring_consent_events')).length,0);
+}));
+
+test('native consent lost native result never reconstructs ACK after actual actor restart',()=>withIssued(async f=>{
+ await ticket(f);await f.stub.noticeConfigure('lost-sql');await denied(f,await consent(f));
+ const before=await plain(f.stub.noticeInspect());assert.equal(before.events.length,1);assert.equal(before.notice.length,4);
+ const originalInstance=await f.stub.noticeInstanceRead();await assert.rejects(async()=>{await f.stub.noticeRestart();});
+ const bindings=await f.mf.getBindings('qa-sdk');f.stub=bindings.AFW_INDEPENDENT_CLOSURE.get(bindings.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));
+ assert.notEqual(await f.stub.noticeInstanceRead(),originalInstance,'actual actor instance changed after native abort');
+ assert.deepEqual(await plain(f.stub.noticeInspect()),before);await f.stub.noticeConfigure();
+ await denied(f,await consent(f),before);const state=(await plain(f.stub.noticeStateRead())).state;
+ assert.equal(state.sql.flatMap(s=>s.queries).filter(q=>q.sql.includes('INSERT INTO dossier_monitoring_consent_events')).length,0);
+ assert(!before.notice.some(([k])=>k.endsWith('consent:ack')));
 }));
