@@ -1,6 +1,6 @@
 # NoticeLink nativo desde la continuación privada de consentimiento
 
-2026-11-05 · **INACTIVE / SOURCE ONLY / SYN / UNMOUNTED**. Scope de diseño aprobado por root: link-only, misma child/continuación POST después de ACK y recheck reales. No ejecución hasta reconciliar POST aceptado, preflight root y futuro BASE. Pin de inspección2f96acb45ec5477d559f85070aa438d2e2e00822/treece6242321aa5177f5828ec592a7bb00d6d6cd91a. POST es contrato documental61b8bb4cecae0a7459ea1ca55a7116a41afb520d bajo implementación, NO aceptado; no se siguió WIP.
+2026-11-05 · **INACTIVE / SOURCE ONLY / SYN / UNMOUNTED**. Scope de diseño aprobado por root: link-only, misma child/continuación POST después de ACK y recheck reales. No ejecución hasta reconciliar POST aceptado, preflight root y futuro BASE. Contratos protegidos inspeccionados en 2f96acb45ec5477d559f85070aa438d2e2e00822. Reconciliación focalizada con POST candidato 5205d80216d9767c44762df4a181e1015e093a8e / tree 23309d147f8818e0232be215f42a77cf7ffe0e6a, Root informa revisión POST Spec ✅ / Quality Approved, 0 Critical y 0 Important; aceptación documental en preparación, aún no fijada aquí. INACTIVE hasta registro de aceptación, preflight y futuro BASE. No se siguió WIP. Formulario GET SOURCE activo y corrección cookie P3 implementados en ese candidato; aceptación aún pendiente.
 
 ## Resultado y límites
 
@@ -10,10 +10,10 @@ C0=I0+900000; C1=C0+180000; padre<=30000ms; hija<=5000ms; techo fuente2026-11-03
 
 ## Filemap cerrado (cuatro archivos)
 
-1. lib/mcp-qa-finite-owner-phase-context.mjs: productor léxico al final del handler Consent propuesto; único suffix inventory notice adicional; read/correlación/snapshot privados.
+1. lib/mcp-qa-finite-owner-phase-context.mjs: productor léxico al final del handler handlePrivateQaFiniteOwnerNoticeConsent real del candidato; único suffix inventory notice adicional; read/correlación/snapshot privados.
 2. test/fixtures/finite-owner-notice-get.mjs: extender fixture SYN existente para observar putLink/sync/readback y gates reales; corrupción negativa/no autoridad.
 3. NUEVO test/mcp-qa-finite-owner-notice-link-native.test.mjs: recorrido y negativos específicos.
-4. test/mcp-qa-finite-owner-notice-consent-native.test.mjs: adaptar únicamente positivo a exigir link final y cobertura de respuesta tras link; nombres reales se reconcilian al aceptar POST.
+4. test/mcp-qa-finite-owner-notice-consent-native.test.mjs: adaptar principal 'native consent POST records original decision after actual ticket GET' a Link final y reforzar sólo los dos asserts de settlement indicados abajo; conservar corpus restante.
 
 No cambiar preparación-store/records, notice-store/journal, owner-preparation antiguo, stage/profile/source stubs, forward/wire/QA, OAuth/SDK, world/DDL, workflows/config/flags. No nuevos helpers/exported callbacks o fichero de framework. Nuevo BASE que cambie APIs/fixture requiere ajuste explícito root antes de ejecución; el writer no amplía mapa.
 
@@ -28,7 +28,7 @@ createFiniteOwnerPreparationStore({storage:ctx.storage,now:Date.now}):
 - readLink({kind:'notice',preconnectionId},lease) -> {status:'observed'|'absent',record}.
 Key exacta connection-preparation:<original preconnectionId>:notice. Append-once; old byte-exact->existing, distinto->rechazo. putLink comprueba Preconnection y GrantLink actuales en transacción y acceptedAt dentro de sus límites; no valida por sí mismo SQL/Access/decisión. Su transaction NO incorpora storage.sync: la continuación debe esperar sync y readback explícitos además del ACK de putLink.
 
-Capturar storage/sync/transaction/get/holders con captureFinitePreparationIssuerContext ya usado por POST. Crear store de preparación fijo dentro del handler, sin opciones externas. Reutilizar prepEncode/prepHash/evidence imports existentes. No llamar recordFinitePreparationNotice({requestId,sequence},lease): requiere notice_consent, relee request y no conserva resultado SQL; forwardPrivateQaFiniteOwnerNotice sigue unavailable.
+Reutilizar issuerCapture=captureFinitePreparationIssuerContext({ctx,env}) de línea 756 y su verificación holders de 764. Crear preparación fija como preparationStore=createFiniteOwnerPreparationStore({storage:issuerCapture.storage,now:Date.now}) junto a journal/store de 800, sin opciones externas. Sync real: Reflect.apply(issuerCapture.sync,issuerCapture.storage,[]) retenido y esperado por wait; holders/check antes y después. Reutilizar prepEncode/prepHash/evidence imports existentes. No llamar recordFinitePreparationNotice({requestId,sequence},lease): requiere notice_consent, relee request y no conserva resultado SQL; forwardPrivateQaFiniteOwnerNotice sigue unavailable.
 
 ## Proyección de evento: hash correcto
 
@@ -40,7 +40,7 @@ grantHash=issuerRows.grantLink.grantHash===SHA256(original issuer identity.grant
 
 ## Observer privado y snapshots completos
 
-Puntos reales en pin: facts143–150 inventory prefix/list 17/size<=16 y whitelist de cinco suffixes; noticePrimary272–305; snapshot368–375; requireEmptyNotice387–399. POST propuesto ya amplía noticePrimary a ConsentRow. Esta unidad sólo:
+Puntos reales en candidato: phase-context blob f8948c0a2cc41a48773406a64fc9c863226f9b2d, facts inventory prefix/list 17/size<=16, noticePrimary273–315, qualify373–374, snapshots376–388, qualifyNoticeConsentEvent395–400, qualifyNoticeConsentBaseline401–414, requireEmptyNotice416–419. POST ya correlaciona ConsentRow. Esta unidad sólo:
 1. Añadir 'notice' a whitelist existente del prefix original. Mantener list 17, size<=16 y demás inventarios/caps. No aceptar otra aprobación/efecto/stage por presencia de link.
 2. En qualify, usando getRecord existente, leer data.noticeLink=await getRecord('readLink',{kind:'notice',preconnectionId:capsule.preconnectionId},false), también cuando se espera ausente. Una lectura DO real adicional por snapshot. Require equivalencia presencia y encode byte-exact con f.inventory.get(prefix+'notice'); no inferir ausencia de error.
 3. Añadir noticeLink a lista privada snapshot.preparation (null ausente). records.inventory y anchor.inventory ya contienen la fila raw. No alterar anchor.notice (journal seis filas) ni noticeRows (schema/tickets/events). No nuevo campo público.
@@ -58,23 +58,27 @@ Ambos snapshots completos se comparan entre sí y contra expected; no omitir fil
 
 ## Continuación productora exacta
 
-Punto de extensión: dentro de MISMA clock.child de Consent, después de appendAck recorded, update expected consent ACK y recheckConsentOwned completos, ANTES de activeChild=null/child.close y HTML. No otra petición, lease, ventana o endpoint.
+Punto exacto en candidato: línea 849, inmediatamente después de await recheckConsentOwned() y antes de activeChild=null. clock.child abre en 826; l, window y common son los originales de 826–829. actualSqlPromise/actualSqlResult/sqlSettled se asignan en 842–843; const ack y appendAckPromise/appendAckResult son reales en 846–848. HTML sigue fuera de la child en 852–853. No otra petición, lease, ventana o endpoint.
 
 Precondiciones privadas simultáneas:
 - identity/CSRF/prepare/approval originales del POST fueron verificados por servidor; headers/holders siguen idénticos y tiempo actual permitido;
 - actualSqlPromise REAL resuelta, sqlSettled=true, actualSqlResult.status==='applied'; EventRow exacta igual expected.noticeRows.events[0];
 - ownSend creado aquí y recorded, ownAck creado de ese resultado con appendAck recorded, recheck completo ya hecho;
 - expected.preparation.noticeLink===null y key ausente en inventory; failed=false.
-No param/callback/WeakMap nuevo admite estas condiciones. Una variable ownAck privada, si POST aún no la conserva, mantiene el record concreto producido y resultado de append, no lo reconstruye de una lectura.
+No param/callback/WeakMap nuevo admite estas condiciones. El candidato no conserva ownAck en el scope de recheckConsentOwned. Añadir ownAck=null a la declaración 801 y asignar ownAck=ack únicamente después del guard recorded/hash de appendAckResult en 848. Es el const ack realmente producido, nunca clon tomado del journal/expected. appendAckPromise y appendAckResult permanecen léxicos en la misma child; no transportarlos mediante DTO.
 
 1. Guard del parent+child+failure/holders/Access actual y recheck ya realizado tras ACK. Sample acceptedAt una vez y construir ownedNoticeLink cinco campos de referencias locales originales. Validar codec y relaciones anteriores antes de llamada.
-2. position='notice-link-pending'; linkSettled=false. Retener linkPromise REAL=preparationStore.putLink({kind:'notice',record:ownedNoticeLink},activeChild) antes de race, sin sobrescribir actualSqlPromise/result/settled ni appendAckPromise. Await bajo wait/activeChild; require recorded y recordHash===prepHash('NoticeLink',ownedNoticeLink). existing/uncertain/error termina sin200, sin retry/read-to-recover.
+2. position='notice-link-pending'; linkSettled=false. Retener linkPromise REAL=preparationStore.putLink({kind:'notice',record:ownedNoticeLink},l) antes de race, sin sobrescribir actualSqlPromise/result/settled ni appendAckPromise. Await bajo wait/activeChild; require recorded y recordHash===prepHash('NoticeLink',ownedNoticeLink). existing/uncertain/error termina sin200, sin retry/read-to-recover.
 3. Guard; await Promise REAL de storage.sync usando método capturado y retain; luego readLink real en MISMA child, require observed + prepEncode byte-exact del record y hash esperado. Mantener linkPromise/result/referencia propias. No usar transacción ACK como sustituto de sync.
 4. Sólo tras sync/readback normales: linkSettled=true; actualizar expected.preparation.noticeLink=clone(record), insertar [prefix+'notice',prepEncode('NoticeLink',record)] en expected.records.inventory conservando orden, expected.anchor.inventory=clone(expected.records.inventory); ninguna otra celda. position='notice-link-recorded'.
-5. recheckConsentOwned() completo extendido: deniega si SQL/linkPromise pendiente, exige referencias/results locales reales según estado; link-recorded exige put recorded+sync/readback satisfactorios y exacta ownedNoticeLink. Await ambos snapshots completos, comparar canonical(first)===canonical(second)===canonical(expected). Sin rawpair exportado ni tolerancia desde parámetros.
+5. recheckConsentOwned() completo extendido: el candidato sólo valida SQL resuelto en los estados consent-sql-resolved y consent-ack-recorded (816–818). Enumerar exhaustivamente estados admitidos al recheck: baseline, ticket-observed, consent-send-recorded, consent-sql-resolved, consent-ack-recorded y notice-link-recorded. consent-sql-pending, notice-link-pending y cualquier desconocido deniegan antes del par. Los tres estados resueltos deben exigir actualSqlPromise, sqlSettled, actualSqlResult applied, EventRow byte-exact y qualifyNoticeConsentEvent; los dos posteriores al ACK también ownAck, sendHash/rowHash/sequence exactos y canonical(ownAck)===canonical(expected.records.notice.operations.consent.ack). notice-link-recorded exige además put recorded+sync/readback satisfactorios, linkSettled y exacta ownedNoticeLink. No dejar estados Link caer en el else genérico de 813. Await ambos snapshots completos, comparar canonical(first)===canonical(second)===canonical(expected). Sin rawpair exportado ni tolerancia desde parámetros.
 6. Guard final dentro child, cerrar child normalmente, guard original/failure/Access antes de200. Mantener respuesta POST humana sobre decisión temporal: no link hash/IDs internos ni “suscripción lista”. No autoavanzar fase o publicar.
 
 No journal SEND extra para Link: es append local one-shot existente; consent SEND/ACK nativos y baseline cerrado ya impiden otra continuación. Unknown Link commit puede dejar Link durable sin200: se conserva como hecho, no se completa/reintenta desde lectura ni se borra. ACK consent permanece histórico aunque link falle. No freeze automático ni nueva operación en journal6rows.
+
+## Refuerzo acotado del test Consent existente
+
+Carry obligatorio de precisión de tests, informado por root tras revisión POST (sin fix-loop ni cambio de producto): en 'native consent original window fences queued SQL' (158–162), después de noticeReleaseHeld exigir settlement observado antes de noticeInspect/asserts finales; en 'native consent abort retains SQL and forbids late ACK' (240–245), polling acotado debe terminar con assert explícito de noticeProbe().allowed===true, no agotarse silenciosamente. En ambos casos falla si no se observa settlement dentro del límite SYN existente; no ampliar ventana productiva, retención o timeout para conseguirlo. La admisión del probe acredita sólo ese scope local, no physical drain. Warnings de toolchain/harness quedan para review final, sin upgrades.
 
 ## Fallo, retención y carreras
 
@@ -90,8 +94,8 @@ stage='finite' requiere además NoticeLink y dos predecessors en stage-facts; fi
 
 ## Costos, aceptación y handoff
 
-Sin D1 SELECT nuevo: ticket/event/issuer/current/SDK provienen de pares completos POST existentes. Sí +1 DO readLink por snapshot (+2 por par) siempre, incluido estado vacío. Con link añade bytes de raw inventory + registro privado en snapshots, manteniendo caps. Productor suma transacción putLink, sync, readback y UN par completo adicional tras link; recheck postACK ya existente no se sustituye ni duplica innecesariamente. Es decir POST pasa de sus pares reales aceptados a +1 par, sujeto a reconciliación, no asumir número fijo anterior.
+Sin D1 SELECT nuevo: ticket/event/issuer/current/SDK provienen de pares completos POST existentes. Sí +1 DO readLink por snapshot (+2 por par) siempre, incluido estado vacío. Con link añade bytes de raw inventory + registro privado en snapshots, manteniendo caps. Productor suma transacción putLink, sync, readback y UN par completo adicional tras link; recheck postACK ya existente no se sustituye ni duplica innecesariamente. El reporte del candidato mide 6 pares/12 snapshots: objetivo estructural Link 7 pares/14 snapshots, sujeto a comprobación nativa; no afirmar medición antes del GREEN.
 
-Medir en mismo GREEN queries/DOops/get/list/transaction/sync/HTTPfanout/bytes/metafiles/childelapsed/parentelapsed. No heredar98/112 ni cifras POST WIP; no repetir50 ms/all SDK/build estándar para métricas. No aumentar fanout 2/caps/plazos. Si deadline original impide completar, reportar con estado durable real y root decide unidad futura; no renovar.
+Medir en mismo GREEN queries/DOops/get/list/transaction/sync/HTTPfanout/bytes/metafiles/childelapsed/parentelapsed. Referencia atribuida al reporte candidato blob 91c08e8cfd6f0eb954631c3e75ea4af66e4b33b5: child 775 ms/window 4999 ms, parent 1275 ms; 102 first-primary sessions, 120 SQL (64 first/56 all), DO get902/list108/sync2/transaction26, HTTP84/peak2/active0. No son presupuesto adicional ni cifras del futuro Link. No heredar 98/112 ni repetir 50 ms/all SDK/build estándar para métricas. No aumentar fanout 2/caps/plazos. Si deadline original impide completar, reportar con estado durable real y root decide unidad futura; no renovar.
 
-Plan especifica RED causal y GREEN nativo. JWT SYN realmente firmado, Access/CSRF originales, GET+POST y D1/DO reales, sin prefill positivo ni verifier fake. P3 cookie-list y pruebas de correlación resealed pertenecen a POST aceptado y se conservan sin arrastrar fix nuevo. Root debe leer spec/plan, reconciliar actual POST/APIs/estado y definir execution BASE/permiso cloud. Rollback sólo commits propios por CAS; nunca borrar Links/eventos/historia real. No ejecución por estos docs.
+Plan especifica RED causal y GREEN nativo. JWT SYN realmente firmado, Access/CSRF originales, GET+POST y D1/DO reales, sin prefill positivo ni verifier fake. P3 cookie-list y corpus resealed están implementados en el candidato POST con revisión aprobada según root: conservarlos, esperar registro de aceptación y no editar wire/body. La evidencia POST50/GET37 es cobertura escalonada, no una única ejecución full. Root debe aceptar POST, resolver cualquier cambio de revisión y definir BASE/permiso cloud. Propuesta de qualifier futuro: tres jobs independientes sin credenciales, cada uno ≤15 min: Link full, POST full, GET full+regresiones+lint. Root fija cap/partición en preflight; estos docs no autorizan workflow/dispatch ni reducir checks. Rollback sólo commits propios por CAS; nunca borrar Links/eventos/historia real. No ejecución por estos docs.
