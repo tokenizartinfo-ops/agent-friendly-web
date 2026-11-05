@@ -7,7 +7,7 @@
 **Tech Stack:** ESM, harness Miniflare/workerd/D1/DO existente, JWT RS256 SYN real; cloud sólo cuando root lo active.
 **Spec:** docs/superpowers/specs/2026-11-05-finite-native-notice-link.md
 **Contratos protegidos:** 2f96acb45ec5477d559f85070aa438d2e2e00822.
-**POST reconciliado:** candidato 5205d80216d9767c44762df4a181e1015e093a8e / tree 23309d147f8818e0232be215f42a77cf7ffe0e6a; Root informa revisión POST Spec ✅ / Quality Approved, 0 Critical y 0 Important; aceptación documental en preparación, aún no fijada aquí. INACTIVE hasta registro de aceptación, preflight y futuro BASE. No seguir WIP. GET form SOURCE activo y cookie P3 implementados; esperar registro de aceptación.
+**POST reconciliado:** candidato 5205d80216d9767c44762df4a181e1015e093a8e / tree 23309d147f8818e0232be215f42a77cf7ffe0e6a; POST aceptado SOURCE por root en f62b6c8b17412b812ae411bbc9cedad43b9ce501 (tree 50fec019ac7a341fd9dacf004f7dd7f95581cd71): Spec ✅ / Quality Approved, 0 Critical y 0 Important. Producto idéntico a 5205/e153. Link INACTIVE hasta preflight y futuro BASE. No seguir WIP. GET form SOURCE activo y cookie P3 aceptados SOURCE por root; sin mount.
 
 ## Restricciones
 
