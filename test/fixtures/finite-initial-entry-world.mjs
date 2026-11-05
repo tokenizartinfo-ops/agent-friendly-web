@@ -73,7 +73,7 @@ export async function initialEntryHarness(mode='normal'){
  if(mode.startsWith('phase-context-sdk'))console.info('D02 fixture QA compiler',JSON.stringify({bytes:built.outputFiles[0].contents.length,sha256:sha(built.outputFiles[0].contents),inputs:Object.keys(built.metafile.inputs).length}));
  let finalOptions={...base,script:built.outputFiles[0].text,outboundService:async req=>{
   if(req.url.endsWith('/cdn-cgi/access/certs'))return Response.json({keys:[jwk]});
-  f.requests.push(req.url);(f.observationTimes??=[]).push({at:Date.now(),method:req.method});(f.requestMethods??=[]).push(req.method);
+  f.requests.push(req.url);(f.observationTimes??=[]).push({at:Date.now(),method:req.method,kind:new URL(req.url).origin==='https://api.cloudflare.com'?'provider':'ledger'});(f.requestMethods??=[]).push(req.method);
   let value;
   if(req.url.startsWith(GH)){
    assert.equal(req.headers.get('authorization'),null);value=structuredClone(await w.get(req.url.slice(GH.length)));
