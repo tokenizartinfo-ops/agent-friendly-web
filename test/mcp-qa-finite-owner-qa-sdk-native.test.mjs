@@ -34,6 +34,26 @@ test('D0.2 fixed original authorization grammar denies old result paths and payl
  assert.throws(()=>qualify(post,new Uint8Array(16385)));
 });
 
+test('strict local provenance records preserve exact bounded DATA-only fields',async()=>{
+ const {sealFiniteOwnerIssuerProvenanceRecord:seal,encodeFiniteOwnerIssuerProvenanceRecord:encode,decodeFiniteOwnerIssuerProvenanceRecord:decode}=await import('../lib/mcp-qa-finite-owner-issuer-provenance-records.mjs');
+ const h='a'.repeat(64),uuid='11111111-1111-4111-8111-111111111111',I0=1000;
+ const values={
+  Root:{purpose:'afw.finite-owner-issuer-root.v1',preconnectionId:h,capsuleHash:h,enrollmentHash:h,sourceRevision:'a'.repeat(40),actorId:h,qaVersionId:uuid,mVersionId:uuid,originalConnectionReceiptHash:h,I0,C0:I0+900000,C1:I0+1080000,createdAt:I0},
+  SdkSend:{purpose:'afw.finite-owner-sdk-send.v1',rootHash:h,operation:'sdk_begin',originalRequestId:uuid,originalRequestHash:h,issuedAt:I0,deadline:I0+30000,bindingHash:h},
+  ExpectedGrant:{purpose:'afw.finite-owner-expected-grant.v1',rootHash:h,identityHash:h,reservationHash:h,authorizationHash:h,grantId:uuid,approvedRequestHash:h,scopes:['afw:project:read'],createdAt:'2026-11-05T00:00:00.000Z',expiresAt:'2026-11-05T00:01:00.000Z'}
+ };
+ for(const [kind,value]of Object.entries(values)){
+  const sealed=seal(kind,value),raw=encode(kind,sealed);assert.deepEqual(decode(kind,raw),sealed);
+  for(const bad of [{...value,extra:true},{...value,[Symbol('unknown')]:true},Object.assign(Object.create({}),value),Object.defineProperty({...value},'purpose',{enumerable:true,get(){throw Error('executed accessor');}})])assert.throws(()=>seal(kind,bad),e=>!e.message.includes('executed accessor'));
+  assert.throws(()=>decode(kind,raw+' '));assert.throws(()=>decode(kind,' '.repeat(16385)));
+ }
+ assert.throws(()=>seal('Root',{...values.Root,C0:values.Root.C0+1}));
+ assert.throws(()=>seal('SdkSend',{...values.SdkSend,operation:'sdk-completed'}));
+ assert.throws(()=>seal('SdkSend',{...values.SdkSend,deadline:I0+30001}));
+ assert.throws(()=>seal('ExpectedGrant',{...values.ExpectedGrant,grantId:'substitute'}));
+ assert.throws(()=>seal('ExpectedGrant',{...values.ExpectedGrant,scopes:['afw:write']}));
+});
+
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
 import {seedFiniteOwnerSdkClient} from './fixtures/finite-owner-qa-sdk.mjs';
 async function plain(p){const r=await p;try{return JSON.parse(JSON.stringify(r));}finally{r?.[Symbol.dispose]?.();}}
@@ -75,7 +95,7 @@ async function oldPaths(f,form={handle:'a'.repeat(43),cookie:'SYN'}){
   assert.equal(await f.stub.sdkOldPath(path,{...f.headers,Cookie:PREP+'; '+form.cookie},JSON.stringify({handle:form.handle,resultHash:'a'.repeat(64),sdkCompleted:true})),404);
   assert.equal(await status(f.mf.dispatchFetch(f.source.origin+path,{method:'POST',headers:f.headers,body:'resultHash='+ 'b'.repeat(64)})),503);
  }
- assert.deepEqual(await plain(f.stub.snapshot()),rows);assert.deepEqual(await plain(f.stub.sdkGrants()),grants);assert.deepEqual(await observe(f),before);
+ assert.deepEqual(await plain(f.stub.snapshot()),rows);assert.deepEqual(await plain(f.stub.sdkGrants()),grants);const after=await observe(f);assert.deepEqual(after.rows,before.rows);assert.deepEqual(after.calls,before.calls);assert.deepEqual(after.probes,before.probes);
 }
 async function issued(f,form,response){
  assert.equal(response.status,302);const code=new URL(response.headers.get('Location')).searchParams.get('code');assert(code);
@@ -159,5 +179,20 @@ for(const boundary of ['controller','root-finish','dispatch-signal'])test('abort
  await new Promise(r=>setTimeout(r,100));
  const before=await observe(f),m=await (await f.mf.dispatchFetch(f.source.origin+'/fixture/signal-state')).json();
  await f.stub.sdkReleaseHeld();const response=await pending;await new Promise(r=>setTimeout(r,100));const after=await observe(f);
- console.info('D02 abort boundary diagnostic',JSON.stringify({boundary,sender:m,qaBefore:before.signals,qaLeaseBefore:before.leaseSignals,qaAfter:after.signals,qaLeaseAfter:after.leaseSignals,response,lateObserved:has(after,'sdk_begin:observed'),profiles:{compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat']}}));
+ for(const key of ['incomingEntryAborted','incomingAbortObserved','rootAbortObserved','rootEntryAborted','outgoingEntryAborted','outgoingAbortObserved'])assert.equal(typeof m[key],'boolean','missing actual signal observation '+key);
+ if(boundary!=='dispatch-signal'||m.incomingAbortObserved){assert.equal(m.rootAbortObserved,true);assert.equal(m.outgoingAbortObserved,true);assert.equal(before.signals.abortObserved,true);assert.equal(before.leaseSignals.abortObserved,true);assert.equal(after.leaseSignals.sdkSettledAborted,true);assert.equal(has(after,'sdk_begin:observed'),false,'actual native QA abort must deny late observed ACK');}
+ console.info('D02 abort boundary diagnostic',JSON.stringify({boundary,sender:m,qaBefore:before.signals,qaLeaseBefore:before.leaseSignals,qaAfter:after.signals,qaLeaseAfter:after.leaseSignals,response,lateObserved:has(after,'sdk_begin:observed'),profiles:f.sdkProfiles}));
+}));
+
+for(const snapshot of ['first','second'])test('actual current publication drift denies owned SDK result at '+snapshot+' observation',()=>world(async f=>{
+ await f.stub.sdkConfigure('hold-put');const pending=f.get();await held(f);
+ if(snapshot==='first')f.phaseFault='configuration';else{f.phaseObservation=0;f.phaseDrift='configuration';}
+ await f.stub.sdkReleaseHeld();assert.equal(await status(pending),503);assert(!has(await observe(f),'sdk_begin:observed'));
+ assert(!(await plain(f.stub.snapshot())).some(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')));
+}));
+test('actual verified owner expiry during held SDK begin cannot extend original access',()=>world(async f=>{
+ f.headers['Cf-Access-Jwt-Assertion']=await f.enrollmentToken(f.source,Math.floor(Date.now()/1000)+8);
+ await f.stub.sdkConfigure('hold-put');const pending=f.get();await held(f);assert.equal(await status(pending),503);assert.equal((await observe(f)).held,true);
+ await f.stub.sdkReleaseHeld();await new Promise(r=>setTimeout(r,100));assert(!has(await observe(f),'sdk_begin:observed'));
+ assert(!(await plain(f.stub.snapshot())).some(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')));
 }));
