@@ -1,3 +1,17 @@
+import {createHash} from 'node:crypto';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
+import {join} from 'node:path';
+// Actual harness compiler evidence, never a separate compiler or source authority.
+let bundleIndex=0;
+export async function captureNoticeBundle(built,role){
+ if(!process.env.AFW_NOTICE_BUNDLE_CAPTURE)return;
+ const bytes=built.outputFiles[0].contents,sha256=createHash('sha256').update(bytes).digest('hex'),metafile=built.metafile;
+ const inputs=await Promise.all(Object.entries(metafile.inputs).map(async([path,data])=>({path,bytes:data.bytes,imports:data.imports,sha256:path==='<stdin>'?null:createHash('sha256').update(await readFile(path)).digest('hex')})));
+ const data={role,bytes:bytes.length,sha256,inputs,metafile};
+ const directory=join(process.env.RUNNER_TEMP,'afw-notice-get-bundles');await mkdir(directory,{recursive:true});
+ await writeFile(join(directory,role+'-'+process.pid+'-'+(++bundleIndex)+'.json'),JSON.stringify(data));
+ console.info('NOTICE actual compiler graph',JSON.stringify({role,bytes:bytes.length,sha256,inputs:inputs.length,noticeInputs:inputs.filter(x=>x.path.includes('notice-get')||x.path.includes('notice-journal')).map(x=>x.path)}));
+}
 // SYN negative corruption and factual observation only. No positive SQL producer.
 export function extendFiniteOwnerNoticeGet(entry){
  const methods=`

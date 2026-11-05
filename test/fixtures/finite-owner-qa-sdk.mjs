@@ -1,3 +1,4 @@
+import {captureNoticeBundle} from './finite-owner-notice-get.mjs';
 import {build} from 'esbuild';
 import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
@@ -112,6 +113,7 @@ export async function finiteOwnerSdkWorkers(qa,{observed=false,token=false,io=fa
  });}}]:[];
  const built=await build({plugins,stdin:{contents:source,resolveDir:process.cwd()},bundle:true,write:false,metafile:true,platform:'neutral',mainFields:['module','main'],format:'esm',target:'es2022',external:['node:*','cloudflare:*']});
  if((observed||io)&&outgoingInstrumentations!==1)throw Error('SYN outgoing observer not installed exactly once');
+ if(noticeGet)await captureNoticeBundle(built,'M');
  console.info('D02 fixture M compiler',JSON.stringify({bytes:built.outputFiles[0].contents.length,sha256:createHash('sha256').update(built.outputFiles[0].contents).digest('hex'),inputs:Object.keys(built.metafile.inputs).length}));
  return {...(qa.resourcePersistencePath?{resourcePersistencePath:qa.resourcePersistencePath}:{}),workers:[{...qa,name:'qa-sdk'},{
   name:'m-sdk',modules:true,script:built.outputFiles[0].text,compatibilityDate:mProfile.compatibility_date,compatibilityFlags:mProfile.compatibility_flags,
