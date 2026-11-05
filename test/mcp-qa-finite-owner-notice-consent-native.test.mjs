@@ -236,7 +236,7 @@ for(const where of ['M','QA'])test('native consent failed body retains actual ca
  const probe=async()=>where==='QA'?plain(f.stub.noticeProbe()):(await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-probe')).json();
  assert.equal((await probe()).allowed,false,'new live root denied by actual pending cancellation');
  if(where==='QA')await f.stub.noticeBodyReleaseHeld();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-release')).body?.cancel();
- for(let n=0;n<100;n++){if((await probe()).allowed)return;await new Promise(r=>setTimeout(r,10));}assert.fail('actual body cancellation not settled');
+ for(let n=0;n<100;n++){if((await probe()).allowed)return;await new Promise(r=>setTimeout(r,10));}assert.fail('actual body cancellation not settled '+JSON.stringify(await probe()));
 }));
 test('native consent abort retains SQL and forbids late ACK',()=>withIssued(async f=>{
  await ticket(f);await f.stub.noticeConfigure('hold-after');const pending=consent(f);await gate(f,'after-sql');
@@ -251,3 +251,52 @@ test('pure fixed POST metadata and original grammar remain exact',()=>{
  const h=new Headers({'x-afw-finite-boundary':'{"startedAt":1,"deadline":30001,"remainingMs":30000}','x-afw-finite-original-method':'POST','x-afw-finite-original-url':origin+'/monitoring/grant','x-afw-finite-version':'77777777-7777-4777-8777-777777777777','x-afw-finite-request-id':'77777777-7777-4777-8777-777777777777'});
  assert.equal(readFiniteOwnerNoticeConsentMetadata(h).method,'POST');h.set('x-afw-finite-original-method','GET');assert.throws(()=>readFiniteOwnerNoticeConsentMetadata(h));
 });
+
+for(const kind of ['absent','partial','failed-schema-metadata','malformed-schema-results'])test('native consent history closes replay schema '+kind,()=>withIssued(async f=>{
+ const before=await ticket(f);await f.stub.noticeConfigure(kind);
+ if(kind==='absent'){await f.db.prepare('DROP TABLE dossier_monitoring_owner_tickets').run();await f.db.prepare('DROP TABLE dossier_monitoring_consent_events').run();}
+ if(kind==='partial')await f.db.prepare('DROP INDEX dossier_monitoring_consent_grant_sequence').run();
+ await denied(f,await consent(f));
+ const state=(await plain(f.stub.noticeStateRead())).state;assert.equal(state.sql.flatMap(s=>s.queries).filter(q=>q.sql.includes('INSERT INTO dossier_monitoring_consent_events')).length,0);
+ const rows=(await plain(f.stub.snapshot())).filter(([k])=>k.startsWith('afw.finite-preparation-notice.v1:'));assert.deepEqual(rows,before.notice);
+}));
+test('native consent history closes replay event without SEND',()=>withIssued(async f=>{
+ const before=await ticket(f),i=f.identity,at=Date.now(),r=JSON.parse(before.notice.find(([k])=>k.endsWith(':reservation'))[1]);
+ await f.db.prepare('INSERT INTO dossier_monitoring_consent_events (grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)').bind(i.grantId,i.projectId,i.subject,i.clientId,i.resource,i.projectRevision,'grant','afw.dossier-monitoring.v1',r.ticket.requestId,at,r.ticket.permissionExpiresAt).run();
+ const corrupted=await plain(f.stub.noticeInspect());await denied(f,await consent(f),corrupted);assert.equal(corrupted.notice.length,3);assert.equal(corrupted.events.length,1);
+}));
+test('native consent withdrawal preserves history ordinary append-only withdrawal',()=>withIssued(async f=>{
+ await ticket(f);const response=await consent(f);assert.equal(response.status,200);await response.body?.cancel();
+ const before=await plain(f.stub.noticeInspect());assert.deepEqual(await plain(f.stub.noticeOrdinaryRead()),{enabled:true});const withdrawn=await plain(f.stub.noticeOrdinaryWithdraw());assert.equal(withdrawn.status,200);assert.equal(withdrawn.action,'revoke');
+ const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,2);assert.deepEqual(after.events[0],before.events[0]);assert.deepEqual(after.tickets,before.tickets);assert.deepEqual(after.notice,before.notice);assert.deepEqual(await plain(f.stub.noticeOrdinaryRead()),{enabled:false});
+ await denied(f,await consent(f),after);assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),f.grant);
+}));
+test('native consent withdrawal preserves history revokeGrant before queued SQL',()=>withIssued(async f=>{
+ await ticket(f);await f.stub.noticeConfigure('hold-before');const pending=consent(f);await gate(f,'before-sql');
+ const reduced=await plain(f.stub.sdkReduceOriginal());assert.equal(reduced.reduction,'revoked');await f.stub.noticeReleaseHeld();await denied(f,await pending);
+ const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,0);assert.equal(after.notice.length,4);assert.deepEqual(await plain(f.stub.noticeOrdinaryRead()),{unavailable:true,message:'Monitoring authorization unavailable'});
+}));
+
+for(const where of ['M','QA'])test('native consent failed body retains actual cancellation held read '+where,()=>withIssued(async f=>{
+ const before=await ticket(f);
+ const read=async()=>where==='QA'?plain(f.stub.noticeBodyRead()):(await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-state')).json();
+ const probe=async()=>where==='QA'?plain(f.stub.noticeProbe()):(await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-probe')).json();
+ const pending=where==='QA'?plain(f.stub.noticeBodyStart(f.notice.headers,'read')):f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-read-start',{method:'POST',headers:f.notice.headers}).then(r=>r.json());
+ const until=async predicate=>{for(let n=0;n<200;n++){const state=await read();if(predicate(state))return state;await new Promise(r=>setTimeout(r,10));}assert.fail('native held body state not reached');};
+ await until(s=>s.readEntered);
+ if(where==='QA')await f.stub.noticeBodyAbortHeld();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-abort')).body?.cancel();
+ const failed=await pending;assert.notEqual(failed.response,200);assert.equal(failed.readSettled,false);assert.equal((await probe()).allowed,false);
+ if(where==='QA')await f.stub.noticeBodyReleaseRead();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-release-read')).body?.cancel();
+ const cancelling=await until(s=>s.cancelEntered);assert.equal(cancelling.readSettled,true);assert.equal(cancelling.cancelSettled,false);assert.equal((await probe()).allowed,false);
+ if(where==='QA')await f.stub.noticeBodyReleaseHeld();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-release')).body?.cancel();
+ for(let n=0;n<100;n++){if((await probe()).allowed){assert.deepEqual(await plain(f.stub.noticeInspect()),before);return;}await new Promise(r=>setTimeout(r,10));}assert.fail('actual held read/cancel scope not released');
+}));
+for(const drift of ['owner','revision','pointer'])test('native consent source current drift denies after-SEND before recheck '+drift,()=>withIssued(async f=>{
+ await ticket(f);await f.stub.noticeConfigure('after-send');const pending=consent(f);await gate(f,'after-send');
+ if(drift==='owner')await f.db.prepare("UPDATE site_projects SET user_id='SYN NEGATIVE owner' WHERE id=?").bind(f.identity.projectId).run();
+ if(drift==='revision')await f.db.prepare('UPDATE site_projects SET revision=revision+1 WHERE id=?').bind(f.identity.projectId).run();
+ if(drift==='pointer')f.phaseCurrent.receipt.deploymentId='99999999-9999-4999-8999-999999999999';
+ await f.stub.noticeReleaseHeld();await denied(f,await pending);
+ const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,0);assert.equal(after.notice.length,4);
+ const state=(await plain(f.stub.noticeStateRead())).state;assert.equal(state.sql.flatMap(s=>s.queries).filter(q=>q.sql.includes('INSERT INTO dossier_monitoring_consent_events')).length,0);
+}));

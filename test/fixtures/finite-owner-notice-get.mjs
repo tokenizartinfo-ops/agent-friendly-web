@@ -15,7 +15,7 @@ export async function captureNoticeBundle(built,role,virtualSources={}){
  const data={role,bytes:bytes.length,sha256,inputs,metafile,graphSha256:createHash('sha256').update(JSON.stringify(metafile)).digest('hex')};
  const directory=join(process.env.RUNNER_TEMP,'afw-notice-get-bundles');await mkdir(directory,{recursive:true});
  await writeFile(join(directory,role+'-'+process.pid+'-'+(++bundleIndex)+'.json'),JSON.stringify(data));
- console.info('NOTICE actual compiler graph',JSON.stringify({role,bytes:bytes.length,sha256,inputs:inputs.length,noticeInputs:inputs.filter(x=>x.path.includes('notice-get')||x.path.includes('notice-journal')).map(x=>x.path)}));
+ console.info('NOTICE actual compiler graph',JSON.stringify({role,bytes:bytes.length,sha256,inputs:inputs.length,noticeInputs:inputs.filter(x=>x.path.includes('notice-get')||x.path.includes('notice-consent')||x.path.includes('notice-journal')).map(x=>x.path)}));
 }
 // SYN negative corruption and factual observation only. No positive SQL producer.
 export function extendFiniteOwnerNoticeGet(entry){
@@ -50,14 +50,34 @@ export function extendFiniteOwnerNoticeGet(entry){
   if(this.noticeState)this.noticeState.trace=[];
   return {codecRoundtrip,journalValid};
  }
- async noticeBodyStart(headers){
-  this.noticeBodyState={cancelEntered:false,cancelSettled:false,response:null};
-  const state=this.noticeBodyState,body=new ReadableStream({start(c){c.enqueue(new Uint8Array(1025));},cancel:()=>{state.cancelEntered=true;return new Promise(resolve=>{this.noticeBodyRelease=()=>{this.noticeBodyRelease=null;state.cancelSettled=true;resolve();};});}});
+ async noticeBodyStart(headers,kind='overflow'){
+  this.noticeBodyState={readEntered:false,readSettled:false,cancelEntered:false,cancelSettled:false,response:null};
+  const state=this.noticeBodyState,control=new AbortController();this.noticeBodyAbort=()=>control.abort();
+  const body=new ReadableStream({
+   start(c){if(kind==='overflow')c.enqueue(new Uint8Array(1025));},
+   pull:c=>{if(kind==='read'&&!state.readEntered){state.readEntered=true;return new Promise(resolve=>{this.noticeBodyReadRelease=()=>{this.noticeBodyReadRelease=null;state.readSettled=true;c.enqueue(new TextEncoder().encode('handle='+'a'.repeat(43)));resolve();};});}},
+   cancel:()=>{state.cancelEntered=true;return new Promise(resolve=>{this.noticeBodyRelease=()=>{this.noticeBodyRelease=null;state.cancelSettled=true;resolve();};});}
+  },{highWaterMark:0});
   const at=Date.now(),h=new Headers(headers);h.set('x-afw-finite-boundary',JSON.stringify({startedAt:at,deadline:at+30000,remainingMs:30000}));h.set('x-afw-finite-original-method','POST');h.set('x-afw-finite-original-url','https://delegated-canary.agentfriendlyweb.dev/monitoring/grant');h.set('x-afw-finite-version','77777777-7777-4777-8777-777777777777');h.set('x-afw-finite-request-id','77777777-7777-4777-8777-777777777777');
-  const response=await createPrivateQaFiniteOwnerNoticeConsentReceiver({ctx:this.ctx,env:this.env}).fetch(new Request('https://afw-private.invalid/_finite-owner/monitoring/grant',{method:'POST',headers:h,body}));state.response=response.status;await response.body?.cancel();return {...state};
+  const response=await createPrivateQaFiniteOwnerNoticeConsentReceiver({ctx:this.ctx,env:this.env}).fetch(new Request('https://afw-private.invalid/_finite-owner/monitoring/grant',{method:'POST',headers:h,body,signal:control.signal}));state.response=response.status;await response.body?.cancel();return {...state};
  }
+ async noticeBodyAbortHeld(){this.noticeBodyAbort?.();}
+ async noticeBodyReleaseRead(){this.noticeBodyReadRelease?.();}
  async noticeBodyRead(){return {...this.noticeBodyState};}
  async noticeBodyReleaseHeld(){this.noticeBodyRelease?.();}
+
+
+ async noticeOrdinaryWithdraw(){
+  const all=[...await this.ctx.storage.list()],r=JSON.parse(all.find(([k])=>k.startsWith('afw.finite-preparation-notice.v1:')&&k.endsWith(':reservation'))[1]),i=r.identity;
+  const event=await this.env.RELEASE_DB.prepare('SELECT sequence FROM dossier_monitoring_consent_events WHERE grant_id=? ORDER BY sequence DESC LIMIT 1').bind(i.grantId).first();
+  return noticeOrdinaryRecord({db:this.env.RELEASE_DB,subject:i.subject,grantId:i.grantId,projectId:i.projectId,expectedClientId:i.clientId,expectedResource:i.resource,expectedRevision:i.projectRevision,expectedSequence:event.sequence,action:'revoke',requestId:'22222222-2222-4222-8222-222222222222',now:Date.now()});
+ }
+ async noticeOrdinaryRead(){
+  const all=[...await this.ctx.storage.list()],r=JSON.parse(all.find(([k])=>k.startsWith('afw.finite-preparation-notice.v1:')&&k.endsWith(':reservation'))[1]),i=r.identity;
+  try{const auth=await noticeOrdinaryAuthorization({db:this.env.RELEASE_DB,context:{grantId:i.grantId,subject:i.subject,clientId:i.clientId,resource:i.resource,scopes:i.requestedScopes},projectId:i.projectId,projectionSecret:'SYN-only-public-fixture-projection-secret-00000000'})();
+   return {enabled:auth.enabled};
+  }catch(error){return {unavailable:true,message:error.message};}
+ }
 
  async noticeConfigure(mode='normal'){
   this.noticeRestore?.();globalThis.__noticeOwner=this;this.noticeMode=mode;this.noticeHeld=null;this.noticeRelease=null;
@@ -141,7 +161,7 @@ export function extendFiniteOwnerNoticeGet(entry){
  }
  `;
  if(entry.split(' export class Initial extends FiniteClosure{').length!==2)throw Error('SYN notice class marker');
- return "import {initialHash as noticeHash} from './lib/mcp-qa-finite-initial-material-records.mjs';\nimport {sealFinitePreparationIssuerRecord as noticeIssuerSeal} from './lib/mcp-qa-finite-preparation-issuer-records.mjs';\nimport {createFinitePreparationNoticeJournal as noticeRealJournal} from './lib/mcp-qa-finite-preparation-notice-journal.mjs';\nimport {sealFinitePreparationNoticeRecord as noticeSeal,encodeFinitePreparationNoticeRecord as noticeEncode,decodeFinitePreparationNoticeRecord as noticeDecode} from './lib/mcp-qa-finite-preparation-notice-records.mjs';\n"+entry.replace(' export class Initial extends FiniteClosure{',' export class Initial extends FiniteClosure{'+methods);
+ return "import {recordDossierMonitoringConsent as noticeOrdinaryRecord,createDossierMonitoringAuthorization as noticeOrdinaryAuthorization} from './lib/dossier-monitoring-authority.mjs';\nimport {initialHash as noticeHash} from './lib/mcp-qa-finite-initial-material-records.mjs';\nimport {sealFinitePreparationIssuerRecord as noticeIssuerSeal} from './lib/mcp-qa-finite-preparation-issuer-records.mjs';\nimport {createFinitePreparationNoticeJournal as noticeRealJournal} from './lib/mcp-qa-finite-preparation-notice-journal.mjs';\nimport {sealFinitePreparationNoticeRecord as noticeSeal,encodeFinitePreparationNoticeRecord as noticeEncode,decodeFinitePreparationNoticeRecord as noticeDecode} from './lib/mcp-qa-finite-preparation-notice-records.mjs';\n"+entry.replace(' export class Initial extends FiniteClosure{',' export class Initial extends FiniteClosure{'+methods);
 }
 
 // Read-only instrumentation of exact lexical source sites. SYN gates never supply authority.
@@ -171,6 +191,7 @@ export function instrumentFiniteNoticeGet(source){
   postReplace("if(canonical(pair.first)!==canonical(expected)||canonical(pair.second)!==canonical(expected))fail();","if(canonical(pair.first)!==canonical(expected)||canonical(pair.second)!==canonical(expected))fail();globalThis.__noticeState?.trace.push({position,at:Date.now(),stage:'after'});");
   postReplace("context=qualifyNoticeConsentBaseline(baseline);","context=qualifyNoticeConsentBaseline(baseline);globalThis.__noticeState?.trace.push({position:'baseline-observed',at:Date.now()});");
   postReplace("position='ticket-observed';await recheckConsentOwned();","position='ticket-observed';if(globalThis.__noticeOwner?.noticeMode==='before-send')await wait(globalThis.__noticeOwner.noticeGate('before-send'));await recheckConsentOwned();");
+  postReplace("anchor();position='consent-send-recorded';","anchor();position='consent-send-recorded';if(globalThis.__noticeOwner?.noticeMode==='after-send')await wait(globalThis.__noticeOwner.noticeGate('after-send'));");
   postReplace("ownSend=send;expected.records.notice.operations.consent.send=","if(globalThis.__noticeOwner?.noticeMode==='lost-send')throw Error('SYN NEGATIVE consent SEND recorded, result lost');ownSend=send;expected.records.notice.operations.consent.send=");
   postReplace("expected.records.notice.operations.consent.ack=structuredClone(ack);","if(globalThis.__noticeOwner?.noticeMode==='lost-ack')throw Error('SYN NEGATIVE consent ACK recorded, result lost');expected.records.notice.operations.consent.ack=structuredClone(ack);");
   postReplace("    position='consent-sql-pending';sqlSettled=false;","    if(globalThis.__noticeOwner?.noticeMode==='before-insert')await wait(globalThis.__noticeOwner.noticeGate('before-insert'));check();position='consent-sql-pending';sqlSettled=false;");
@@ -178,6 +199,7 @@ export function instrumentFiniteNoticeGet(source){
  }
  head=head.replace("if(globalThis.__noticeOwner?.noticeMode==='drift'&&globalThis.__noticeState?.trace.at(-1)?.position==='ticket-sql-resolved')await globalThis.__noticeOwner.noticeGate('between-own');","if((globalThis.__noticeOwner?.noticeMode==='drift'&&globalThis.__noticeState?.trace.at(-1)?.position==='ticket-sql-resolved')||(globalThis.__noticeOwner?.noticeMode==='consent-drift'&&globalThis.__noticeState?.trace.at(-1)?.position==='consent-sql-resolved'))await globalThis.__noticeOwner.noticeGate('between-own');");
 
+ head=head.replaceAll("globalThis.__noticeState?.trace.at(-1)?.position","globalThis.__noticeState?.trace.filter(v=>v.position).at(-1)?.position");
  const passiveMarker=(needle,entry,exit)=>{
   if(head.split(needle).length!==2)throw Error('SYN passive correlator marker changed: '+entry);
   head=head.replace(needle,"globalThis.__noticeState?.trace.push({correlator:'"+entry+"',phase:'enter'});"+needle+(exit?"globalThis.__noticeState?.trace.push({correlator:'"+entry+"',phase:'exit'});":""));
