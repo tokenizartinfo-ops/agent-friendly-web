@@ -32,6 +32,7 @@ Pinned package.json uses @cloudflare/workers-oauth-provider1.2.1. Official [Prov
 QA constructs lexically:
 
 ```js
+import { OAuthAuthorizationServer } from '@cloudflare/workers-oauth-provider';
 new OAuthAuthorizationServer({
  issuer: 'https://delegated-canary.agentfriendlyweb.dev',
  resources: ['https://delegated-canary.agentfriendlyweb.dev/mcp'],
@@ -157,3 +158,6 @@ Root selects option2 as a technical architecture choice under the owner's delega
 - Reuse the eventually accepted factual-reader fixture and its guarded initialization. Do not copy old220b5bc missing ordinary schema, rename/drop historical grant tables or patch production SQL time. The actual fixture-only expired-ceiling substitution remains explicitly SYN and cannot prove runtime/source eligibility.
 
 Root preflight: the original M→QA SDK report dependency is removed by lexical QA execution, not 'authenticated' by serializable metadata. Separate alias access/profile lineage, real local issuer behavior and token compatibility remain independently rejectable tasks. No unresolved dependency is silently renamed complete. Full mount/provider-publication/cleanup/PCoff stays separate.
+
+
+Public SDK import feasibility was verified against v1.2.1 package entrypoint (package.json3–6), tsdown ESM entry3–8, exported class1727–1752 and instancegetOAuthApi1784–1786; AFW already imports the named class in delegated-oauth-worker:1 and lockfile822–826 pins1.2.1. Use instance method, not differently shaped standalone getOAuthApi export. This is source/API evidence, not a new build/native qualification.
