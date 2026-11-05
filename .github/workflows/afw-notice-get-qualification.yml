@@ -28,5 +28,5 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Causal RED1 inventory after real grant
-        run: node --test --test-name-pattern='^inventory own negative' test/mcp-qa-finite-owner-notice-get-native.test.mjs
+      - name: Inventory GREEN and causal RED2 GET after real prerequisites
+        run: node --test test/mcp-qa-finite-owner-notice-get-native.test.mjs

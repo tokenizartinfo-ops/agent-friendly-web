@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {finiteWranglerProfileTemplate} from '../../lib/mcp-qa-finite-profile.mjs';
 // SYN fixture composition only. Actual source/SDK/journals/Unit2a modules remain.
-export function extendFiniteOwnerQaSdk(entry,{observed=false}={}){
+export function extendFiniteOwnerQaSdk(entry,{observed=false,noticeGet=false}={}){
  const imports=`import {sealFiniteOwnerIssuerProvenanceRecord as sdkSeal,encodeFiniteOwnerIssuerProvenanceRecord as sdkEncode} from './lib/mcp-qa-finite-owner-issuer-provenance-records.mjs';\nimport {createPrivateQaFiniteOwnerOAuthReceiver} from './lib/mcp-qa-finite-owner-oauth-qa.mjs';\n`;
  let methods=`
  async fetch(request){return createPrivateQaFiniteOwnerOAuthReceiver({ctx:this.ctx,env:this.env}).fetch(request);}
@@ -75,9 +75,12 @@ export function extendFiniteOwnerQaSdk(entry,{observed=false}={}){
  // It must match a real bounded preparation cookie, never a positive source alias.
  const old="ticketHash='7'.repeat(64)",replacement="ticketHash=phaseRawSha('a'.repeat(64))";
  if(!entry.includes(old))throw Error('SYN exact phase seed changed');
- return imports+entry.replace(old,replacement).replace(' export class Initial extends FiniteClosure{',' export class Initial extends FiniteClosure{'+methods);
+ if(noticeGet){
+  methods=methods.replace("async fetch(request){return createPrivateQaFiniteOwnerOAuthReceiver({ctx:this.ctx,env:this.env}).fetch(request);}", "async fetch(request){if(request.url==='https://afw-private.invalid/_finite-owner/monitoring')return createPrivateQaFiniteOwnerNoticeGetReceiver({ctx:this.ctx,env:this.env}).fetch(request);return createPrivateQaFiniteOwnerOAuthReceiver({ctx:this.ctx,env:this.env}).fetch(request);}");
+ }
+ return (noticeGet?"import {createPrivateQaFiniteOwnerNoticeGetReceiver} from './lib/mcp-qa-finite-owner-notice-get-qa.mjs';\n":"")+imports+entry.replace(old,replacement).replace(' export class Initial extends FiniteClosure{',' export class Initial extends FiniteClosure{'+methods);
 }
-export async function finiteOwnerSdkWorkers(qa,{observed=false,token=false,io=false}={}){
+export async function finiteOwnerSdkWorkers(qa,{observed=false,token=false,io=false,noticeGet=false}={}){
  const mProfile=finiteWranglerProfileTemplate('canaryLive');let outgoingInstrumentations=0;
  let source=`import {forwardPrivateFiniteOwnerOAuth} from './lib/mcp-qa-finite-owner-oauth-forward.mjs';
  import {createFiniteOwnerRequestLease} from './lib/mcp-qa-finite-owner-preparation.mjs';
@@ -96,6 +99,10 @@ export async function finiteOwnerSdkWorkers(qa,{observed=false,token=false,io=fa
   if(path!=='/authorize')return new Response(null,{status:404});
   const root=createFiniteOwnerRequestLease(request);try{return await forwardPrivateFiniteOwnerOAuth({request,env,ctx},root.lease);}finally{root.finish();}
  }};`;
+ if(noticeGet){
+  source="import {forwardPrivateFiniteOwnerNoticeGet} from './lib/mcp-qa-finite-owner-notice-get-forward.mjs';\n"+source;
+  source=source.replace("if(path!=='/authorize')return new Response(null,{status:404});", "if(['/monitoring','/monitoring/grant','/monitoring/revoke'].includes(path)){if(request.method!=='GET'||path!=='/monitoring')return new Response(null,{status:405});const root=createFiniteOwnerRequestLease(request);try{return await forwardPrivateFiniteOwnerNoticeGet({request,env,ctx},root.lease);}finally{root.finish();}}if(path!=='/authorize')return new Response(null,{status:404});");
+ }
  if(observed||io)source=source.replace("export default{async fetch(request,env,ctx){const root=",`let active,activeRoot,delay=0;export default{async fetch(request,env,ctx){const path=new URL(request.url).pathname;if(path==='/fixture/signal-state')return Response.json(globalThis.__d02M??{});if(path==='/fixture/abort'){active?.abort();return new Response(null,{status:204});}if(path==='/fixture/abort-root'){activeRoot?.finish();return new Response(null,{status:204});}if(path==='/fixture/elapsed'){delay=29000;return new Response(null,{status:204});}const seen=globalThis.__d02M={incomingEntryAborted:request.signal.aborted,incomingAbortObserved:false,rootAbortObserved:false};request.signal.addEventListener('abort',()=>{seen.incomingAbortObserved=true;},{once:true});const control=new AbortController();request.signal.addEventListener('abort',()=>control.abort(),{once:true});request=new Request(request,{signal:control.signal});active=control;const root=`).replace("try{return await forward", "activeRoot=root;globalThis.__d02M.rootEntryAborted=root.lease.signal.aborted;root.lease.signal.addEventListener('abort',()=>{globalThis.__d02M.rootAbortObserved=true;},{once:true});try{const elapsed=delay;delay=0;if(elapsed)await new Promise(resolve=>setTimeout(resolve,elapsed));return await forward").replace("finally{root.finish();}", "finally{root.finish();if(active===control)active=null;if(activeRoot===root)activeRoot=null;}");
  const plugins=observed||io?[{name:'SYN-signal-observation',setup(b){b.onLoad({filter:/mcp-qa-finite-owner-oauth-forward\.mjs$/},async args=>{
   outgoingInstrumentations++;let contents=await readFile(args.path,'utf8');const needle="const response=await Reflect.apply(fetcher,stub,[new Request(finiteOwnerOAuthTarget,{method:'POST',redirect:'manual',headers,body:bytes.length?bytes:undefined,signal:originalLease.signal})]);check();";
