@@ -1,3 +1,19 @@
+# CHECKPOINT VIGENTE — GET avisos ACTIVO, 5nov2026
+
+ÚNICO productwriter implement_notice_get(Solhigh), BASEdc4edafc0b5e4ba440cd32a21dd3dd58024e811a/tree91d023ce48bb2f5105140c788d3646c64c20bd4e, rama feat/finite-native-cleanup-20261101. READFIRST brief docs/superpowers/briefs/2026-11-05-finite-native-notice-next-slice.md; preflight/progress mismo basename. Alcance10paths source/test +informe, qualifier temporal .github/workflows/afw-notice-get-qualification.yml autorizado sólo rama/path/contentsread/nosecrets/persistfalse/npmciignore/job≤15m/removerfinal. No nuevo permiso/runtime. Rootrulings enbrief: success===true para all, schemafullantesreservation/SEND,16phase/6SDK/4D04selectednofilters0, ownframe/SQLPromise léxicos/noDTO, nuevoscostosmedidos/no50msallrepeats; figuras30s/5sinalteradas.
+
+Journal SOURCE COMPLETE04c..2969a840/treed89ca7b6 con28codec+37nativePASS/lint0/0/freshreviewAstrahighPassApproved0C0I0nuevoMinor;4fixturebuilds0standard. Store4016c13d trasfix1 concurrentfailureaceptado y D04/fanout previoscompletos. No redispatchni repetirantiguasmatrices alresumir. MinorD03/fanout/toolchain enledgertriagefinal.
+
+GETplan2b6cd7a6 leídoíntegro9970/21701/14344 porroot; taskactivadaenproducto con8docs yacceptedjournalreceipt. GET sólo prepara ticket/ACK yformdisabled, public3keyreader/OAuthcierrancontenidopropio, noPOST/NoticeLink/newphase/mount. Sourcegrant.exchanged_atactualenframes; historiaajenaporUUID/prefijoinspecciónscopepreservada. Sourceceiling3nov02:59Zvencido/últimaprimariaremota3novfechada/no asumirvigencia. operationalReadiness=false;completePackage=false;PCoff=false.
+
+Diseñador design_native_notice_receiver ahora SOLOdocsPOSTconsentnextuniten docs/finite-native-notice-receiver-design-20261105 desde2b6, pinfuente dc4; NOproductwriter niimplementación. Rootdebeleer/preflightyaceptarGETantesdeactivarPOSTfuturo. Rootdocsseparada, ningúnhelper/reviewerdelwriter. Informeesperado reports/2026-11-05-finite-native-notice-next-slice.md; rootfullBASEdiff/reviewfresco alterminar.
+
+QuedanPOST/CSRF/NoticeLink/stages/terceroCLOSED/ownSEND/fullsetup/cleanup/guard/paquete/preflight/mount/ARM/UNAocurrenciaPCoffcoordinada. No provider/runtime/alias/Entry/DDLreal/OTP/OAuth/tokens/permisos/cron/Containers/Max/main/merge. Sin intervenciónowneractual; seguirencadenadohasta gate real, no pedirconfirmacionesrutinarias. No apagar paraensayo sinARMgenuinovigente.
+
+**Historia supersedida debajo.**
+
+---
+
 # CHECKPOINT — provenance aceptado; siguienteGET en diseño, 5nov2026
 
 Taskjournal/provenance COMPLETE:04c49dcc..2969a840/tree d89ca7b6, reviewAstrahighPass/Approved0C0I0nuevoMinor. Rootprimarias28codec+37nativeP0F0skip/lint0/0,4fixturebuilds0standard. Sólo5filesnuevos+informe,0existingchanged; qualifierretirado. Recibo reviews/2026-11-05-finite-native-notice-provenance.es.md. D04/fanout/store tambiénaceptados; no repetirlos porcompactación. MinorD03/fanout/toolchain diferidosparaúltimoreview.
