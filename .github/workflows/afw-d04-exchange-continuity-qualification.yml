@@ -1,0 +1,24 @@
+name: D04 scoped source qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-d04-exchange-continuity-qualification.yml]
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Scoped lint first
+        run: npx eslint lib/mcp-qa-finite-owner-phase-context.mjs test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs test/fixtures/finite-initial-entry-world.mjs
+      - name: D04 principal causal RED
+        run: node --test --test-reporter=tap --test-name-pattern='D04 actual exchange retains factual read_consent and immutable grant ACK' test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs

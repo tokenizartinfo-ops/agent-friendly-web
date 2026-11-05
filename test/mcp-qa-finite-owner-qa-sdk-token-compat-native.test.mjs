@@ -4,6 +4,8 @@ import {createHash} from 'node:crypto';
 import {Client,StreamableHTTPClientTransport} from '@modelcontextprotocol/client';
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
 import {seedFiniteOwnerSdkClient,readSyntheticIssuedGrantProps} from './fixtures/finite-owner-qa-sdk.mjs';
+import {initialHash} from '../lib/mcp-qa-finite-initial-material-records.mjs';
+import {decodeFinitePreparationIssuerRecord} from '../lib/mcp-qa-finite-preparation-issuer-records.mjs';
 const PREP='__Host-afw-finite-prepare='+'a'.repeat(64);
 const plain=async p=>{const v=await p;try{return JSON.parse(JSON.stringify(v));}finally{v?.[Symbol.dispose]?.();}};
 async function world(fn,{late=false}={}){
@@ -180,4 +182,48 @@ test('SYN reduction of original issued expiry clamps actual token response below
  assert(payload.expires_in<=Math.floor((Date.parse(expiresAt)-Date.now())/1000)+1);
  assert.equal((await readSummary(f,payload.access_token)).isError,undefined);
  console.info('D03 reduced original expiry bound',JSON.stringify({expiresIn:payload.expires_in,refresh:false,actualClock:true}));
+}));
+
+
+async function d04Read(f,x){
+ const current=await plain(f.stub.sdkReadCurrent());
+ assert.deepEqual(Object.keys(current).sort(),['capsuleHash','preconnectionId','source']);
+ assert.equal(current.source.phase,'read_consent');
+ assert.equal(current.preconnectionId,x.form.identity.preconnectionId);
+ assert.equal(current.source.project.projectId,x.app.project_id);
+ return current;
+}
+async function d04Journals(f){
+ return (await plain(f.stub.snapshot())).filter(([key])=>['afw.finite-preparation-issuer.v1:','afw.finite-owner-issuer-provenance.v1:','connection-preparation:','afw.finite-preparation-cleanup.v1:','afw.finite-policy-effect.v1:'].some(prefix=>key.startsWith(prefix)));
+}
+async function d04Ack(f,x){
+ const rows=await d04Journals(f),key='afw.finite-preparation-issuer.v1:'+x.form.identity.preconnectionId+':grant:ack';
+ const raw=rows.find(([k])=>k===key)?.[1];assert.equal(typeof raw,'string');
+ const ack=decodeFinitePreparationIssuerRecord('Ack',raw);
+ return {rows,key,raw,ack};
+}
+async function d04Exchanged(f){
+ const x=await issued(f),before=await d04Read(f,x),original=await d04Ack(f,x);
+ assert.equal(x.app.exchanged_at,'');
+ assert.equal(original.ack.rowHash,initialHash('afw.finite-preparation-issuer-row.v1',x.app));
+ const r=await exchange(f,x);assert.equal(r.status,200);const payload=await r.json();
+ assert.equal(typeof payload.access_token,'string');assert.equal(payload.token_type.toLowerCase(),'bearer');
+ assert.equal(Object.hasOwn(payload,'refresh_token'),false);assert.equal(r.headers.get('Cache-Control'),'no-store');
+ assert(payload.expires_in>0&&payload.expires_in<=300);
+ assert(payload.expires_in<=Math.floor((Date.parse(x.app.expires_at)-Date.now())/1000)+1);
+ const summary=await readSummary(f,payload.access_token);assert.equal(summary.isError,undefined);
+ assert.equal(summary.structuredContent.data.id,x.app.project_id);
+ const current=await plain(f.stub.sdkGrant(x.app.id));assert.notEqual(current.exchanged_at,'');
+ assert.deepEqual({...current,exchanged_at:''},x.app,'real token only changed original exchanged_at');
+ assert.notEqual(initialHash('afw.finite-preparation-issuer-row.v1',current),original.ack.rowHash);
+ assert.equal(initialHash('afw.finite-preparation-issuer-row.v1',{...current,exchanged_at:''}),original.ack.rowHash);
+ assert.deepEqual(await d04Journals(f),original.rows,'token/MCP leave DO journals and raw ACK bytes unchanged');
+ assert.equal((await plain(f.stub.sdkGrants())).filter(row=>!f.history.some(old=>old.id===row.id)).map(row=>row.id).join(),x.app.id);
+ console.info('D04 actual exchange prerequisites',JSON.stringify({preTokenReader:true,actualToken:200,actualMcpOriginalProject:true,originalAppOnly:true,currentHashDifferent:true,historicalHashMatches:true,ackUnchanged:true}));
+ return {x,before,original,current};
+}
+test('D04 actual exchange retains factual read_consent and immutable grant ACK',()=>world(async f=>{
+ const {x,before,original}=await d04Exchanged(f);
+ const after=await d04Read(f,x);assert.deepEqual(after,before);
+ assert.deepEqual(await d04Journals(f),original.rows,'reader also leaves original raw ACK/recordHash and every DO journal unchanged');
 }));
