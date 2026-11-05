@@ -24,6 +24,37 @@ export function extendFiniteOwnerNoticeGet(entry){
  const methods=String.raw`
 
 
+ async noticeLinkCorrupt(kind){
+  // SYN negative DATA only, starting from an actual producer Link.
+  const all=[...await this.ctx.storage.list()],entry=all.find(([key])=>key.startsWith('connection-preparation:')&&key.endsWith(':notice'));
+  if(!entry)throw Error('SYN real Link required');
+  const link=noticePrepDecode('NoticeLink',entry[1]),prefix='afw.finite-preparation-notice.v1:'+link.preconnectionId+':';
+  const ack=JSON.parse(await this.ctx.storage.get(prefix+'consent:ack')),send=JSON.parse(await this.ctx.storage.get(prefix+'consent:send'));
+  const changed={...link};
+  if(['eventHash','grantHash','preconnectionId'].includes(kind))changed[kind]=link[kind]==='f'.repeat(64)?'e'.repeat(64):'f'.repeat(64);
+  else if(kind==='sequence')changed.sequence++;
+  else if(kind==='future')changed.acceptedAt=Date.now()+60000;
+  else if(kind==='before-ack')changed.acceptedAt=ack.observedAt-1;
+  else if(kind==='after-deadline')changed.acceptedAt=send.window.deadline;
+  else throw Error('SYN unknown Link corruption');
+  if(kind==='after-deadline')await new Promise(resolve=>setTimeout(resolve,Math.max(0,send.window.deadline-Date.now()+25)));
+  const raw=noticePrepEncode('NoticeLink',changed);await this.ctx.storage.put(entry[0],raw);await this.ctx.storage.sync();
+  const root=createFiniteOwnerRequestLease(new Request('https://delegated-canary.agentfriendlyweb.dev/fixture/notice-link-negative'));
+  let journalValid=false;try{await noticeRealJournal({ctx:this.ctx,env:this.env}).read({preconnectionId:link.preconnectionId},root.lease);journalValid=true;}finally{root.finish();}
+  this.noticeState.trace=[];
+  return {original:entry,codecRoundtrip:noticePrepEncode('NoticeLink',noticePrepDecode('NoticeLink',raw))===raw,journalValid};
+ }
+ async noticeLinkRestore(entry){await this.ctx.storage.put(entry[0],entry[1]);await this.ctx.storage.sync();this.noticeState.trace=[];}
+ async noticeLinkMissing(kind){
+  const all=[...await this.ctx.storage.list()],entry=all.find(([key])=>key.startsWith('connection-preparation:')&&key.endsWith(':notice')),link=noticePrepDecode('NoticeLink',entry[1]),prefix='afw.finite-preparation-notice.v1:'+link.preconnectionId+':';
+  if(kind==='ack')await this.ctx.storage.delete(prefix+'consent:ack');
+  else if(kind==='unknown-send')await this.ctx.storage.put(prefix+'consent:send','SYN NEGATIVE unknown SEND');
+  else if(kind==='no-mutation'){
+   const ack=JSON.parse(await this.ctx.storage.get(prefix+'consent:ack'));
+   await this.ctx.storage.put(prefix+'consent:ack',noticeEncode('Ack',noticeSeal('Ack',{...ack,outcome:'no_mutation',rowHash:null,sequence:null})));
+  }else throw Error('SYN unknown missing source kind');
+  await this.ctx.storage.sync();this.noticeState.trace=[];
+ }
  async noticeCorrelated(kind){
   // SYN negative DATA reseal only; original issuer/source/SQL facts never change.
   const all=[...await this.ctx.storage.list()],original=all.find(([k])=>k.startsWith('afw.finite-preparation-notice.v1:')&&k.endsWith(':reservation'));
@@ -228,6 +259,7 @@ export function instrumentFiniteNoticeGet(source){
   postReplace("if(!verified.ok)fail();identity=verified.identity;clock.narrow(identity.expiresAt);","if(!verified.ok)fail();identity=verified.identity;globalThis.__noticeState&&(globalThis.__noticeState.accessVerifications=(globalThis.__noticeState.accessVerifications??0)+1);clock.narrow(identity.expiresAt);");
   postReplace("if(!again.ok||again.identity.subject!==identity.subject||again.identity.expiresAt!==identity.expiresAt)fail();","if(!again.ok||again.identity.subject!==identity.subject||again.identity.expiresAt!==identity.expiresAt)fail();globalThis.__noticeState&&(globalThis.__noticeState.accessVerifications=(globalThis.__noticeState.accessVerifications??0)+1);");
   postReplace("    const acceptedAt=Date.now();","    if(globalThis.__noticeOwner){globalThis.__noticeState?.trace.push({position:'before-link',at:Date.now()});if(['link-before','link-cut-after-ack','link-existing','link-conflict'].includes(globalThis.__noticeOwner.noticeMode))await wait(globalThis.__noticeOwner.noticeLinkGate('before-link'));}check();const acceptedAt=Date.now();");
+  postReplace("    position='notice-link-pending';linkSettled=false;","    if(['link-existing','link-conflict'].includes(globalThis.__noticeOwner?.noticeMode)){const data=globalThis.__noticeOwner.noticeMode==='link-conflict'?{...ownedNoticeLink,eventHash:ownedNoticeLink.eventHash==='f'.repeat(64)?'e'.repeat(64):'f'.repeat(64)}:ownedNoticeLink;await wait(ctx.storage.put('connection-preparation:'+id+':notice',prepEncode('NoticeLink',data)));await wait(ctx.storage.sync());globalThis.__noticeState?.trace.push({link:'negative-race-insert',at:Date.now()});}position='notice-link-pending';linkSettled=false;");
   postReplace("    linkPromise=retain(preparationStore.putLink","    globalThis.__noticeOwner&&(globalThis.__noticeOwner.noticeLinkPhase='write');globalThis.__noticeState?.trace.push({link:'put-enter',at:Date.now()});linkPromise=retain(preparationStore.putLink");
   postReplace("    if(linkResult?.status!=='recorded'||linkResult.recordHash!==linkHash)fail();","    globalThis.__noticeState?.trace.push({link:'put-exit',status:linkResult?.status,at:Date.now()});if(linkResult?.status!=='recorded'||linkResult.recordHash!==linkHash)fail();");
   postReplace("    check();linkSyncPromise=retain","    globalThis.__noticeOwner&&(globalThis.__noticeOwner.noticeLinkPhase='sync');globalThis.__noticeState?.trace.push({link:'sync-enter',at:Date.now()});check();linkSyncPromise=retain");
@@ -239,6 +271,10 @@ export function instrumentFiniteNoticeGet(source){
  head=head.replace("if(globalThis.__noticeOwner?.noticeMode==='drift'&&globalThis.__noticeState?.trace.at(-1)?.position==='ticket-sql-resolved')await globalThis.__noticeOwner.noticeGate('between-own');","if((globalThis.__noticeOwner?.noticeMode==='drift'&&globalThis.__noticeState?.trace.at(-1)?.position==='ticket-sql-resolved')||(globalThis.__noticeOwner?.noticeMode==='consent-drift'&&globalThis.__noticeState?.trace.at(-1)?.position==='consent-sql-resolved'))await globalThis.__noticeOwner.noticeGate('between-own');");
 
  head=head.replaceAll("globalThis.__noticeState?.trace.at(-1)?.position","globalThis.__noticeState?.trace.filter(v=>v.position).at(-1)?.position");
+ const betweenLink="await ioCheckpoint('between');";
+ if(head.split(betweenLink).length!==2)throw Error('SYN Link second snapshot marker');
+ head=head.replace(betweenLink,betweenLink+"if(globalThis.__noticeOwner?.noticeMode==='link-drift'&&globalThis.__noticeState?.trace.filter(v=>v.position&&v.stage==='before').at(-1)?.position==='notice-link-recorded')await globalThis.__noticeOwner.noticeLinkGate('link-between');");
+
  const passiveMarker=(needle,entry,exit)=>{
   if(head.split(needle).length!==2)throw Error('SYN passive correlator marker changed: '+entry);
   head=head.replace(needle,"globalThis.__noticeState?.trace.push({correlator:'"+entry+"',phase:'enter'});"+needle+(exit?"globalThis.__noticeState?.trace.push({correlator:'"+entry+"',phase:'exit'});":""));
@@ -247,6 +283,9 @@ export function instrumentFiniteNoticeGet(source){
  passiveMarker("if(tickets.some(v=>canonical(v)!==canonical(row)))fail();",'noticePrimary301',true);
  passiveMarker("if(consent.ack?.outcome==='applied'&&(events.length!==1||consent.ack.rowHash!==digest('afw.finite-preparation-notice-row.v1',events[0])||consent.ack.sequence!==events[0].sequence||events[0].issued_at>consent.ack.observedAt))fail();",'noticeConsentEventAck',true);
 
+ const snapshotMarker="const pair={first:snapshot(first,observed,qualified),second:snapshot(second,again,secondQualified)};";
+ if(head.split(snapshotMarker).length!==2)throw Error('SYN Link full snapshot marker');
+ head=head.replace(snapshotMarker,snapshotMarker+"for(const s of [pair.first,pair.second])globalThis.__noticeState?.trace.push({snapshotNotice:{present:s.preparation.noticeLink!==null,inventory:s.records.inventory.some(([key])=>key==='connection-preparation:'+s.preconnectionId+':notice'),anchor:s.anchor.inventory.some(([key])=>key==='connection-preparation:'+s.preconnectionId+':notice')}});");
  const linkPredicate="if(link.preconnectionId!==i.preconnectionId";
  if(head.split(linkPredicate).length!==2)throw Error('SYN Link correlator marker');
  head=head.replace(linkPredicate,"globalThis.__noticeState?.trace.push({correlator:'noticeLink',phase:'enter',acceptedAt:link.acceptedAt,deadline:send.window.deadline,at:Date.now()});"+linkPredicate);

@@ -13,7 +13,7 @@ async function withIssued(fn){
 }
 test('native notice link follows actual consent ACK in the same POST child',()=>withIssued(async f=>{
  await actualExchangeMcp(f);await ticket(f);await f.stub.noticeConfigure();await f.stub.ioConfigure();
- const original=await plain(f.stub.snapshot()),history=(await f.db.prepare('SELECT * FROM dossier_monitoring_consent_events ORDER BY sequence').all()).results,began=Date.now();const response=await consent(f);await response.body?.cancel();const after=await plain(f.stub.noticeInspect());
+ const original=await plain(f.stub.snapshot()),history=(await f.db.prepare('SELECT * FROM dossier_monitoring_consent_events ORDER BY sequence').all()).results,began=Date.now();const response=await consent(f);await response.body?.cancel();const observation=await plain(f.stub.noticeStateRead()),io=await plain(f.stub.ioObservation()),elapsed=Date.now()-began;const after=await plain(f.stub.noticeInspect());
  assert.equal(response.status,200);assert.equal(after.fixtureError,undefined);assert.equal(after.events.length,1);
  assert.equal(after.notice.length,5);assert(after.notice.some(([key])=>key.endsWith('consent:ack')));
  const all=await plain(f.stub.snapshot()),link=all.find(([key])=>key==='connection-preparation:'+f.identity.preconnectionId+':notice');
@@ -24,11 +24,105 @@ test('native notice link follows actual consent ACK in the same POST child',()=>
  assert.notEqual(record.eventHash,ack.rowHash);assert.equal(ack.rowHash,initialHash('afw.finite-preparation-notice-row.v1',event));assert.equal(record.sequence,event.sequence);assert(record.sequence>1);assert(record.acceptedAt>=ack.observedAt);assert(record.acceptedAt<send.window.deadline);
  for(const row of original)assert.deepEqual(all.find(([key])=>key===row[0]),row);
  const historyAfter=(await f.db.prepare('SELECT * FROM dossier_monitoring_consent_events ORDER BY sequence').all()).results;for(const row of history)assert.deepEqual(historyAfter.find(v=>v.sequence===row.sequence),row);
- const observation=await plain(f.stub.noticeStateRead()),io=await plain(f.stub.ioObservation()),elapsed=Date.now()-began,trace=observation.state.trace;
+ const trace=observation.state.trace;
  assert.deepEqual(trace.filter(v=>v.link&&v.link!=='transaction-settled').map(v=>v.link),['put-enter','put-exit','sync-enter','sync-exit','read-enter','read-exit']);
+ const snapshots=trace.filter(v=>v.snapshotNotice).map(v=>v.snapshotNotice);assert.equal(snapshots.length,14);assert.deepEqual(snapshots.slice(0,12),Array.from({length:12},()=>({present:false,inventory:false,anchor:false})));assert.deepEqual(snapshots.slice(12),Array.from({length:2},()=>({present:true,inventory:true,anchor:true})));
  assert.equal(trace.filter(v=>v.stage==='after').length,6);assert.equal(io.snapshots,14);assert.equal(io.peak,2);assert.equal(io.active,0);
  const complete=trace.find(v=>v.position==='complete');assert(complete.at<send.window.deadline);assert(elapsed<30000);
  await saveNoticeObservation({unit:'link',elapsed,...observation.state,io});
  console.info('LINK native principal costs',JSON.stringify({elapsed,pairs:io.snapshots/2,rechecks:trace.filter(v=>v.stage==='after').length,accessVerifications:observation.state.accessVerifications,sqlSessions:observation.state.sql.length,first:observation.state.sql.flatMap(s=>s.queries).filter(q=>q.method==='first').length,all:observation.state.sql.flatMap(s=>s.queries).filter(q=>q.method==='all').length,ops:observation.state.ops,noticeLists:observation.state.lists.filter(v=>v.prefix.startsWith('afw.finite-preparation-notice')).length,http:{snapshots:io.snapshots,requests:io.rows.length,peak:io.peak,active:io.active},childElapsed:complete.at-send.window.startedAt,windowMs:send.window.deadline-send.window.startedAt}));
 
+}));
+
+async function state(f){return (await plain(f.stub.noticeStateRead())).state;}
+async function gate(f,name){
+ for(let n=0;n<500;n++){const s=await plain(f.stub.noticeStateRead());if(s.held===name)return s;await new Promise(r=>setTimeout(r,10));}
+ assert.fail('SYN actual Link gate not reached: '+name);
+}
+async function settled(f){for(let n=0;n<100;n++){if((await plain(f.stub.noticeProbe())).allowed)return;await new Promise(r=>setTimeout(r,10));}assert.fail('actual originating Link work did not settle');}
+async function denied(response){assert.notEqual(response.status,200);assert.doesNotMatch(await response.text(),/Registré tu decisión|<form/);}
+async function success(f){await ticket(f);await f.stub.noticeConfigure();const response=await consent(f);assert.equal(response.status,200);await response.body?.cancel();return plain(f.stub.noticeInspect());}
+async function linkEntry(f){return (await plain(f.stub.snapshot())).find(([key])=>key==='connection-preparation:'+f.identity.preconnectionId+':notice');}
+function countWrites(s){return s.trace.filter(v=>v.link==='put-enter').length;}
+function consentInserts(s){return s.sql.flatMap(v=>v.queries).filter(v=>v.sql.includes('INSERT INTO dossier_monitoring_consent_events')).length;}
+async function replayClosed(f,before){
+ await f.stub.noticeConfigure();await denied(await consent(f));assert.deepEqual(await plain(f.stub.noticeInspect()),before);const s=await state(f);assert.equal(countWrites(s),0);assert.equal(consentInserts(s),0);
+}
+test('native notice link retains global event sequence and foreign history',()=>withIssued(async f=>{
+ const at=Date.now(),foreign='ffffffff-ffff-4fff-8fff-ffffffffffff';
+ await f.db.prepare('INSERT INTO dossier_monitoring_consent_events (grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)').bind(foreign,'SYN-other','SYN-other','SYN-other','https://foreign.invalid/mcp',1,'grant','afw.dossier-monitoring.v1',foreign,at,at+60000).run();
+ const original=(await f.db.prepare('SELECT * FROM dossier_monitoring_consent_events ORDER BY sequence').all()).results;
+ const after=await success(f),record=decodeFinitePreparationRecord('NoticeLink',(await linkEntry(f))[1]);assert.equal(record.sequence,after.events[0].sequence);assert(record.sequence>original.at(-1).sequence);
+ const history=(await f.db.prepare('SELECT * FROM dossier_monitoring_consent_events ORDER BY sequence').all()).results;for(const row of original)assert.deepEqual(history.find(v=>v.sequence===row.sequence),row);
+}));
+test('native notice link never advances source or public readers and remains factual after deadline',()=>withIssued(async f=>{
+ const after=await success(f),entry=await linkEntry(f),send=JSON.parse(after.notice.find(([key])=>key.endsWith('consent:send'))[1]);
+ await new Promise(r=>setTimeout(r,Math.max(0,send.window.deadline-Date.now()+25)));assert(Date.now()>send.window.deadline);
+ await f.stub.noticeConfigure();assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
+ const trace=(await state(f)).trace;assert(trace.some(v=>v.correlator==='noticeLink'&&v.phase==='enter'&&v.at>send.window.deadline));assert(trace.some(v=>v.correlator==='noticeLink'&&v.phase==='exit'));
+ for(const path of ['/monitoring','/authorize','/monitoring/notice-link']){const response=await f.mf.dispatchFetch(f.source.origin+path,{headers:f.headers});assert.notEqual(response.status,200);await response.body?.cancel();}
+ await replayClosed(f,after);assert.deepEqual(await linkEntry(f),entry);assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),f.grant);
+}));
+for(const history of ['complete','cut-after-ack'])test('native notice link requires live originating SQL continuation '+history,()=>withIssued(async f=>{
+ await ticket(f);await f.stub.noticeConfigure(history==='complete'?'normal':'link-cut-after-ack');
+ if(history==='complete'){const response=await consent(f);assert.equal(response.status,200);await response.body?.cancel();}
+ else{const pending=consent(f);await gate(f,'before-link');await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-abort')).body?.cancel();await denied(await pending);await f.stub.noticeReleaseHeld();await settled(f);}
+ const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,1);assert.equal(after.notice.length,5);assert.equal(Boolean(await linkEntry(f)),history==='complete');
+ const originalInstance=await f.stub.noticeInstanceRead();await assert.rejects(async()=>{await f.stub.noticeRestart();});
+ const bindings=await f.mf.getBindings('qa-sdk');f.stub=bindings.AFW_INDEPENDENT_CLOSURE.get(bindings.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));
+ assert.notEqual(await f.stub.noticeInstanceRead(),originalInstance);await replayClosed(f,after);assert.equal(Boolean(await linkEntry(f)),history==='complete');
+}));
+for(const mode of ['link-lost-transaction','link-lost-sync','link-lost-readback','link-wrong-readback'])test('native notice link unknown or lost actual result remains closed '+mode,()=>withIssued(async f=>{
+ await ticket(f);await f.stub.noticeConfigure(mode);await denied(await consent(f));
+ const after=await plain(f.stub.noticeInspect()),entry=await linkEntry(f),s=await state(f);assert.equal(after.events.length,1);assert.equal(after.notice.length,5);assert(entry);assert.equal(countWrites(s),1);
+ if(mode==='link-lost-transaction'){assert(s.trace.some(v=>v.link==='put-exit'&&v.status==='uncertain'));assert(!s.trace.some(v=>v.link==='sync-enter'||v.link==='read-enter'));}
+ if(mode==='link-lost-sync')assert(!s.trace.some(v=>v.link==='read-enter'));
+ assert(!s.trace.some(v=>v.position==='complete'));await replayClosed(f,after);assert.deepEqual(await linkEntry(f),entry);
+}));
+for(const mode of ['link-existing','link-conflict'])test('native notice link existing or conflicting record cannot win '+mode,()=>withIssued(async f=>{
+ await ticket(f);await f.stub.noticeConfigure(mode);const pending=consent(f);await gate(f,'before-link');await f.stub.noticeReleaseHeld();await denied(await pending);
+ const after=await plain(f.stub.noticeInspect()),s=await state(f);assert.equal(after.events.length,1);assert.equal(after.notice.length,5);assert(await linkEntry(f));assert.equal(countWrites(s),1);assert(s.trace.some(v=>v.link==='negative-race-insert'));assert(!s.trace.some(v=>v.link==='sync-enter'));await replayClosed(f,after);
+}));
+for(const [mode,name]of [['link-hold-write','link-write'],['link-hold-commit','link-commit'],['link-hold-sync','link-sync'],['link-hold-readback','link-readback']])test('native notice link held native work and cancellation retain scope '+mode,()=>withIssued(async f=>{
+ await ticket(f);await f.stub.noticeConfigure(mode);const pending=consent(f);await gate(f,name);
+ assert.equal((await plain(f.stub.noticeProbe())).allowed,false,'fresh native request denied while actual work outstanding');
+ await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-abort')).body?.cancel();await denied(await pending);assert.equal((await plain(f.stub.noticeProbe())).allowed,false,'aborting original request is not settlement');
+ await f.stub.noticeReleaseHeld();await settled(f);
+ const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,1);assert.equal(after.notice.length,5);const s=await state(f);assert.equal(countWrites(s),1);assert(!s.trace.some(v=>v.position==='complete'));await replayClosed(f,after);
+}));
+for(const [mode,name]of [['link-before','before-link'],['link-hold-commit','link-commit']])test('native notice link original child expires without renewal '+mode,()=>withIssued(async f=>{
+ await ticket(f);await f.stub.noticeConfigure(mode);const pending=consent(f),seen=await gate(f,name);
+ const at=await plain(f.stub.noticeInspect()),send=JSON.parse(at.notice.find(([key])=>key.endsWith('consent:send'))[1]);assert(seen.state.trace.some(v=>v.gate===name&&v.at<send.window.deadline));
+ await new Promise(r=>setTimeout(r,Math.max(0,send.window.deadline-Date.now()+25)));await denied(await pending);assert.equal((await plain(f.stub.noticeProbe())).allowed,false);
+ await f.stub.noticeReleaseHeld();await settled(f);const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,1);assert.equal(after.notice.length,5);
+ const s=await state(f);assert.equal(countWrites(s),mode==='link-before'?0:1);assert.equal(Boolean(await linkEntry(f)),mode==='link-hold-commit');assert(!s.trace.some(v=>v.position==='complete'));await replayClosed(f,after);
+}));
+for(const drift of ['owner','revision','QA','M','holder','exchange'])test('native notice link current facts drift at final recheck '+drift,()=>withIssued(async f=>{
+ await ticket(f);await f.stub.noticeConfigure('link-drift');const pending=consent(f);await gate(f,'link-between');assert(await linkEntry(f));
+ if(drift==='owner')await f.db.prepare("UPDATE site_projects SET user_id='SYN NEGATIVE owner' WHERE id=?").bind(f.identity.projectId).run();
+ if(drift==='revision')await f.db.prepare('UPDATE site_projects SET revision=revision+1 WHERE id=?').bind(f.identity.projectId).run();
+ if(drift==='M')f.phaseCurrent.receipt.deploymentId='99999999-9999-4999-8999-999999999999';
+ if(drift==='QA')(f.phaseQaObservation=1,f.phaseDrift='qa-pointer');
+ if(drift==='holder')await f.stub.sdkReplaceHolder();
+ if(drift==='exchange'){const value=new Date(Math.max(Date.parse(f.grant.created_at),Date.now()-1)).toISOString();await f.db.prepare('UPDATE delegated_access_grants SET exchanged_at=? WHERE id=?').bind(value,f.identity.grantId).run();}
+ await f.stub.noticeReleaseHeld();await denied(await pending);const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,1);assert.equal(after.notice.length,5);assert(await linkEntry(f));assert.equal(countWrites(await state(f)),1);
+}));
+test('native notice link factual mismatch denies valid codec and journal data',()=>withIssued(async f=>{
+ const after=await success(f),event=after.events[0],grant=await plain(f.stub.sdkGrant(f.identity.grantId));
+ for(const kind of ['eventHash','grantHash','sequence','preconnectionId','future','before-ack','after-deadline']){
+  const proof=await plain(f.stub.noticeLinkCorrupt(kind));assert.equal(proof.codecRoundtrip,true,kind);assert.equal(proof.journalValid,true,kind);
+  assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable',kind);const s=await state(f);assert(s.trace.some(v=>v.correlator==='noticeLink'&&v.phase==='enter'),kind+' reaches actual correlator');assert(!s.trace.some(v=>v.correlator==='noticeLink'&&v.phase==='exit'),kind+' fails actual predicate');assert.equal(countWrites(s),0);assert.equal(consentInserts(s),0);
+  assert.deepEqual((await plain(f.stub.noticeInspect())).events,[event]);assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),grant);await f.stub.noticeLinkRestore(proof.original);
+ }
+}));
+for(const missing of ['ack','unknown-send','no-mutation','freeze','withdrawal'])test('native notice link missing source evidence never becomes authority '+missing,()=>withIssued(async f=>{
+ await success(f);const entry=await linkEntry(f);
+ if(missing==='freeze')await f.stub.noticeCorrupt('freeze');else if(missing==='withdrawal')assert.equal((await plain(f.stub.noticeOrdinaryWithdraw())).status,200);else await f.stub.noticeLinkMissing(missing);
+ const before=await plain(f.stub.noticeInspect());await replayClosed(f,before);assert.deepEqual(await linkEntry(f),entry);assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
+}));
+for(const reduction of ['CLOSE','revokeGrant'])test('native notice link real reduction preserves event and link '+reduction,()=>withIssued(async f=>{
+ const before=await success(f),entry=await linkEntry(f);
+ if(reduction==='CLOSE'){assert.equal((await plain(f.stub.noticeFence())).status,'fenced');assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),f.grant);}
+ else{assert.equal((await plain(f.stub.sdkReduceOriginal())).reduction,'revoked');assert.notEqual((await plain(f.stub.sdkGrant(f.identity.grantId))).revoked_at,'');assert.deepEqual(await plain(f.stub.noticeOrdinaryRead()),{unavailable:true,message:'Monitoring authorization unavailable'});}
+ await replayClosed(f,before);assert.deepEqual(await linkEntry(f),entry);
 }));
