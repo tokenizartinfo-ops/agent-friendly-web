@@ -1,0 +1,29 @@
+name: AFW D03 native SDK token source qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - '.github/workflows/afw-d03-sdk-token-source.yml'
+      - 'lib/delegated-oauth-worker.mjs'
+      - 'test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs'
+      - 'test/fixtures/finite-owner-qa-sdk.mjs'
+      - 'test/fixtures/finite-initial-entry-world.mjs'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Scoped lint before native work
+        run: npx eslint lib/delegated-oauth-worker.mjs test/fixtures/finite-owner-qa-sdk.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs
+      - name: Actual native QA code to M token and MCP baseline
+        run: timeout 240s node --test test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs
