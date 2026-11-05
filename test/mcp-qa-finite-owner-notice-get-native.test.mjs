@@ -1,3 +1,4 @@
+import {initialHash} from '../lib/mcp-qa-finite-initial-material-records.mjs';
 import {saveNoticeObservation} from './fixtures/finite-owner-notice-get.mjs';
 import {FINITE_PREPARATION_MONITORING_SCHEMA as SCHEMA} from '../lib/mcp-qa-finite-preparation-issuer-store.mjs';
 import {createHash} from 'node:crypto';
@@ -51,7 +52,7 @@ async function actualExchangeMcp(f){
 test('GET acknowledged original after actual QA code M token MCP and D04 reader',()=>withIssued(async f=>{
  await actualExchangeMcp(f);
  const before=await plain(f.stub.noticeInspect());assert.equal(before.schema.length,7);assert.deepEqual(before.notice,[]);assert.deepEqual(before.tickets,[]);assert.deepEqual(before.events,[]);
- await f.stub.ioConfigure();await f.stub.noticeConfigure();const began=Date.now();
+ const originalRows=await plain(f.stub.snapshot());await f.stub.ioConfigure();await f.stub.noticeConfigure();const began=Date.now();
  const response=await f.mf.dispatchFetch(f.source.origin+'/monitoring',{headers:f.headers,redirect:'manual'});
  const status=response.status,html=await response.text();
  const after=await plain(f.stub.noticeInspect());
@@ -62,6 +63,12 @@ test('GET acknowledged original after actual QA code M token MCP and D04 reader'
  assert.equal(after.tickets.length,1);assert.equal(after.notice.length,3);assert.deepEqual(after.events,[]);
  const records=Object.fromEntries(after.notice.map(([key,value])=>[key.split(':').slice(-2).join(':'),JSON.parse(value)])),ticket=after.tickets[0],handle=/name="handle" value="([^"]+)"/.exec(html)?.[1];assert(handle);
  assert.equal(createHash('sha256').update(handle).digest('hex'),ticket.handle_hash);assert.equal(Object.keys(ticket).length,14);assert.equal(ticket.grant_id,f.identity.grantId);assert.equal(ticket.user_id,f.identity.subject);assert.equal(ticket.expected_sequence,0);assert.equal(ticket.action,'grant');assert.equal(ticket.purpose,'afw.dossier-monitoring-owner.v1');
+ const reservation=JSON.parse(after.notice.find(([key])=>key.endsWith(':reservation'))[1]),rt=reservation.ticket,i=f.identity;
+ assert.deepEqual(reservation.identity,i);assert.deepEqual(reservation.expectedGrant,{scopes:JSON.parse(f.grant.scopes_json),createdAt:f.grant.created_at,expiresAt:f.grant.expires_at});
+ assert.deepEqual(ticket,{handle_hash:createHash('sha256').update(handle).digest('hex'),request_id:rt.requestId,user_id:i.subject,grant_id:i.grantId,project_id:i.projectId,client_id:i.clientId,resource:i.resource,purpose:'afw.dossier-monitoring-owner.v1',action:'grant',revision:i.projectRevision,expected_sequence:0,issued_at:rt.issuedAt,expires_at:rt.expiresAt,permission_expires_at:rt.permissionExpiresAt});
+ assert.equal(records['ticket:ack'].rowHash,initialHash('afw.finite-preparation-notice-row.v1',ticket));
+ assert.equal(ticket.expires_at,Math.min(ticket.issued_at+600000,reservation.accessExpiresAt,reservation.preconnectionExpiresAt,i.C0,Date.parse(i.consentExpiresAt),Date.parse(f.grant.expires_at)));
+ const sourceRowsAfter=await plain(f.stub.snapshot());for(const row of originalRows)assert.deepEqual(sourceRowsAfter.find(([key])=>key===row[0]),row,'original preparation/issuer/SDK history retained');
  assert.equal(records['ticket:ack'].outcome,'applied');assert.equal(records['ticket:ack'].sequence,null);assert(records['ticket:ack'].observedAt<records['ticket:send'].window.deadline);assert(state.trace.find(v=>v.position==='complete').at<records['ticket:send'].window.deadline);assert(records['ticket:send'].window.deadline-records['ticket:send'].window.startedAt<=5000);
  assert.match(html,/<button type="button" disabled>/);assert.doesNotMatch(html,/<script|<form[^>]+action=/);assert.match(html,/Todavía no diste permiso para avisos/);
  assert.match(response.headers.get('Content-Security-Policy'),/form-action 'none'/);assert.equal(response.headers.get('X-Content-Type-Options'),'nosniff');assert.equal(response.headers.get('Cache-Control'),'no-store');assert.equal(response.headers.get('Referrer-Policy'),'same-origin');assert.match(response.headers.get('Set-Cookie'),/; Path=\/; Secure; HttpOnly; SameSite=Strict; Max-Age=\d+/);
@@ -191,9 +198,10 @@ test('SYN negative original UUID ticket without journal and consent history fail
  await f.db.prepare('INSERT INTO dossier_monitoring_owner_tickets VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)').bind('e'.repeat(64),request,f.identity.subject,f.identity.grantId,f.identity.projectId,f.identity.clientId,f.identity.resource,'afw.dossier-monitoring-owner.v1','grant',f.identity.projectRevision,0,at,at+60000,at+60000).run();
  await deny(await notice(f));assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');assert.deepEqual(await ownRows(f),[]);
 }));
-test('SYN negative consent event without journal never authorizes GET',()=>withIssued(async f=>{
+test('SYN negative consent event with real correct ticket never authorizes GET',()=>withIssued(async f=>{
+ const prepared=await notice(f);assert.equal(prepared.status,200);await prepared.body?.cancel();const ticketBefore=(await plain(f.stub.noticeInspect())).tickets;assert.equal(ticketBefore.length,1);
  const at=Date.now();await f.db.prepare('INSERT INTO dossier_monitoring_consent_events (grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)').bind(f.identity.grantId,f.identity.projectId,f.identity.subject,f.identity.clientId,f.identity.resource,f.identity.projectRevision,'grant','afw.dossier-monitoring.v1','eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee',at,at+60000).run();
- await deny(await notice(f));assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');assert.deepEqual(await ownRows(f),[]);
+ await deny(await notice(f));assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');assert.deepEqual((await plain(f.stub.noticeInspect())).tickets,ticketBefore);assert.equal((await ownRows(f)).length,3);
 }));
 for(const drift of ['owner','revision','pointer','exchange','journal','ticket'])test('two complete snapshots reject SYN own-state drift '+drift,()=>withIssued(async f=>{
  await f.stub.noticeConfigure('drift');const pending=notice(f);await gate(f,'between-own');
