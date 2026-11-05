@@ -1,0 +1,9 @@
+# Fix1 primary verification — root
+
+5nov2026. Root reread handling-reports and scoped-reviewtemplate; reportappend contains coveringcommands/output/heads. OriginalImportantfromreviewer remainsopenuntilSAMEreviewerscopedverdict. DeferredglobalcleanupMinor remainsoutsidefixloop.
+
+Actualprimaryjob127345582052/run42056328272/attempt1:4causalRED failures atoriginalMpendingassert, actualsettled;QA/Mbothsettled,fetchStartedtrue,active0,snapshot1. Actualprimaryjob127347597989/run42056890908/attempt1:8PASS0FAIL0SKIP,4preservedjoined-before-consumption+4newactualpending. BeforemutationQAsettled/Mpending,fetchStartedfalse,outcomepending,active1,snapshot1. AfterreleaseHTTP503/active0/bothsettled/snapshot1/peak2; originalaffectedreadexecutedanddenied. Body/callbackpendingdistinctionhonestlyreported; no claimoutboundfetchalreadyinflightatpre-fetchgate.
+
+Rootreadappendedreport, fullFIX_BASEcompare3files and59d→90bbdelivery2files; no productschedule/clock/guardedit. Knownround24fixturebuilds(8RED16GREEN), no newstandardcompile/fullsuite/50msrepeat; total271known+≤1historicalinflightuncertainty. PriorSYNmargin132ms preservedaslimitnotliveSLA. Productblob85c7105f906b5d7936b4bd205c1f4598f5521546 untouched.
+
+Ready for scoped re-review ONLY, not sourceacceptance. D0.4designaccepted/inactiveawaitsfanout. Operationalflagsfalse; no provider/runtime/Entry/alias/permissions/OTP/Max/main/merge.
