@@ -13,11 +13,11 @@ async function scenario(t,name='positive',extra={}){
  assert.equal(response.status,200);const {result:r,identity:i}=await response.json();
  assert.equal(r.grant?.row.id,i.grantId);assert.equal(r.reachedNativeGrant,true);assert.equal(r.error,undefined,'native grant reached; journal failure: '+r.error);return r;
 }
-function recorded(r){assert.equal(r.reservation.status,'recorded');assert.equal(r.reservationReplay.status,'existing');assert.equal(r.reservationConflict.status,'uncertain');}
+function recorded(r){assert.equal(r.reservation.status,'recorded');assert.equal(r.reservationReplay.status,'existing');assert.equal(r.reservationConflict.status,'uncertain');assert.equal(r.ticketReservationConflict.status,'uncertain');}
 test('REAL native original grant precedes durable notice reservation and original provenance bindings',async t=>{
  const r=await scenario(t);recorded(r);assert.equal(r.issuerReservation.status,'recorded');assert.equal(r.originalGrantAck.status,'recorded');
  assert.equal(r.reservationData.issuerReservationHash,r.originalBindings.issuer);assert.equal(r.reservationData.originalGrantAckHash,r.originalBindings.ack);assert.equal(r.reservationData.grantLinkHash,r.originalBindings.grantLink);assert.equal(r.reservationData.connectionHash,r.originalBindings.connection);
- assert.deepEqual(r.concurrent.map(x=>x.status).sort(),['existing','recorded']);assert.equal(r.ticket.status,'applied');assert.equal(r.ticketAck.status,'recorded');assert.equal(r.betweenGetPost.operations.ticket.ack.recordHash,r.ticketAckData.recordHash);
+ assert.deepEqual(r.concurrent.map(x=>x.status).sort(),['existing','recorded']);assert.equal(r.sendConflict.status,'uncertain');assert.equal(r.ticket.status,'applied');assert.equal(r.ticketAck.status,'recorded');assert.equal(r.betweenGetPost.operations.ticket.ack.recordHash,r.ticketAckData.recordHash);
  assert.equal(r.observed,true);assert.equal(r.witnessFrozen,true);assert.equal(r.consent.status,'applied');assert.equal(r.consentAck.status,'recorded');assert.equal(r.writes,2);assert.equal(r.grantUnchanged,true);
  assert.equal(r.priorGrantMax,0);assert.equal(r.reservationData.ticket.expectedSequence,0);assert.equal(r.consent.row.sequence,17);assert.equal(r.consentAckData.sequence,17);assert.deepEqual(r.foreignAfter,r.foreignBefore);assert.equal(r.foreignAfter.length,16);
  assert.equal(Object.keys(r.ticket.row).length,14);assert.equal(Object.keys(r.consent.row).length,12);

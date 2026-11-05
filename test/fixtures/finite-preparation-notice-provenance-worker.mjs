@@ -110,6 +110,7 @@ export class FiniteNoticeProvenanceFixture extends DurableObject{
     }else{
      result.reservationReplay=await journal.appendReservation(r,lease);
      result.reservationConflict=await journal.appendReservation(make('Reservation',{...r,connectionHash:'e'.repeat(64)}),lease);
+     result.ticketReservationConflict=await journal.appendReservation(make('Reservation',{...r,ticket:{...ticket,requestId:U}}),lease);
      if(b.case==='corrupt'){
       const prefix=P+H+':';
       if(b.fault==='unknown')await native.put(prefix+'unknown','{}');
@@ -138,7 +139,7 @@ export class FiniteNoticeProvenanceFixture extends DurableObject{
       if(b.case==='freeze-empty'){
        const f=freeze();result.freeze=await journal.freeze({preconnectionId:H,record:f},lease);result.freezeReplay=await journal.freeze({preconnectionId:H,record:f},lease);result.blockedSend=await append(ticketSend);result.history=await read();result.writes=writes();
       }else{
-       const sends=await Promise.all([append(ticketSend),append(ticketSend)]);result.concurrent=sends;
+       const sends=await Promise.all([append(ticketSend),append(ticketSend)]);result.concurrent=sends;result.sendConflict=await append(send('ticket',{window:ticketSend.window,issuedAt:ticketSend.issuedAt+1}));
        // Only a newly recorded SEND emits SQL; existing is DATA history, never permission.
        if(sends.filter(v=>v.status==='recorded').length!==1)throw Error('SYN SEND must have exactly one recorded result');
        if(b.case==='retained-sql'){
@@ -198,4 +199,5 @@ export class FiniteNoticeProvenanceFixture extends DurableObject{
   return Response.json({result,identity:i});
  }
 }
-export default {fetch(request,env){return env.FIXTURE.get(env.FIXTURE.idFromName('afw-own-successor-closure-v1')).fetch(request);}};
+const handler={fetch(request,env){return env.FIXTURE.get(env.FIXTURE.idFromName('afw-own-successor-closure-v1')).fetch(request);}};
+export default handler;
