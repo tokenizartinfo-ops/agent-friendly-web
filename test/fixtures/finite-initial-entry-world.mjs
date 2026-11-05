@@ -63,7 +63,7 @@ export async function initialEntryHarness(mode='normal'){
  }};
  const built=await build({metafile:true,stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',mainFields:['module','main'],format:'esm',target:'es2022',external:['node:*','cloudflare:*'],plugins:[plugin],define:{'globalThis.__AFW_FINITE_CANDIDATE_RESIDENCY__':J(resident),'globalThis.__AFW_QA_SOURCE_REVISION__':J(M),'globalThis.__AFW_FINITE_SOURCE_TREE__':J(TREE),'globalThis.__AFW_NODE_PROGRAM__':J(program),'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':J(w.expected)}});
  if(mode.startsWith('phase-context-sdk'))console.info('D02 fixture QA compiler',JSON.stringify({bytes:built.outputFiles[0].contents.length,sha256:sha(built.outputFiles[0].contents),inputs:Object.keys(built.metafile.inputs).length}));
- let finalOptions=convertV4MiniflareOptions({...base,script:built.outputFiles[0].text,outboundService:async req=>{
+ let finalOptions={...base,script:built.outputFiles[0].text,outboundService:async req=>{
   if(req.url.endsWith('/cdn-cgi/access/certs'))return Response.json({keys:[jwk]});
   f.requests.push(req.url);(f.requestMethods??=[]).push(req.method);
   let value;
@@ -186,8 +186,8 @@ export async function initialEntryHarness(mode='normal'){
    value={success:true,errors:[],messages:[],result};
   }
   return Response.json(value,{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString(),'x-ratelimit-remaining':'60'}});
- }});
- if(mode.startsWith('phase-context-sdk'))finalOptions=await finiteOwnerSdkWorkers(finalOptions);
+ }};
+ finalOptions=convertV4MiniflareOptions(mode.startsWith('phase-context-sdk')?await finiteOwnerSdkWorkers(finalOptions):finalOptions);
  await mf.setOptions(finalOptions);
  const bindings=await mf.getBindings(mode.startsWith('phase-context-sdk')?'qa-sdk':undefined);f.stub=bindings.AFW_INDEPENDENT_CLOSURE.get(bindings.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB',mode.startsWith('phase-context-sdk')?'qa-sdk':undefined);
  if(mode.startsWith('phase-context')){try{if(mode==='phase-context-init-failure')throw Error('SYN phase fixture initialization failed');await seedFiniteOwnerPhaseHistory(f.db,x,seedInitialHistory);for(const sql of FINITE_PREPARATION_ISSUER_SCHEMA)await f.db.prepare(sql).run();}catch(error){await mf.dispose();error.fixtureDisposed=true;throw error;}}else await seedInitialHistory(f.db,x);await f.stub.seed(x.rows);f.resident=resident;

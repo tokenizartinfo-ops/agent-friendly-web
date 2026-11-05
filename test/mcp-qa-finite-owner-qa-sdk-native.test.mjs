@@ -48,10 +48,10 @@ test('actual native source and SDK parser require lexical continuation after ori
   console.info('D02 native stage: genuine source');
   const context=await plain(f.stub.sdkReadCurrent());assert.equal(context.source?.phase,'read_consent',JSON.stringify(context));
   await seedFiniteOwnerSdkClient(f.mf,context.source);await f.stub.sdkConfigure();
-  const token=await f.enrollmentToken(context.source),m=await f.mf.getWorker('m-sdk');
+  const token=await f.enrollmentToken(context.source);
   const query=new URLSearchParams({client_id:context.source.clientId,redirect_uri:'https://client.example/cb',response_type:'code',resource:context.source.resource,scope:'afw:project:read',state:'SYN-state',code_challenge:'a'.repeat(43),code_challenge_method:'S256'});
   console.info('D02 native stage: original authorization');
-  const response=await m.fetch(context.source.origin+'/authorize?'+query,{headers:{'Cf-Access-Jwt-Assertion':token,Cookie:'__Host-afw-finite-prepare='+'a'.repeat(64)}});
+  const response=await f.mf.dispatchFetch(context.source.origin+'/authorize?'+query,{redirect:'manual',headers:{'Cf-Access-Jwt-Assertion':token,Cookie:'__Host-afw-finite-prepare='+'a'.repeat(64)}});
   const observed=await plain(f.stub.sdkObservation());
   assert(observed.calls.some(c=>c.method==='get'&&c.prefix==='client'),'actual SDK client lookup entered');
   assert(observed.rows.some(([key])=>key.endsWith('sdk_begin:send')),'actual durable original begin SEND reached');

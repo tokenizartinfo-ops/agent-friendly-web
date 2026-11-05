@@ -42,7 +42,7 @@ export async function finiteOwnerSdkWorkers(qa){
   kvNamespaces:{OAUTH_KV:'finite-sdk-shared'},
   bindings:{AFW_FINITE_TRIAL_VERSION:{id:'77777777-7777-4777-8777-777777777777'}},
   durableObjects:{AFW_FINITE_TRIAL_CONTROL:{className:'Initial',scriptName:'qa-sdk',useSQLite:true,uniqueKey:'initial-c2a'}}
- }]};
+ }].reverse()};
 }
 export async function seedFiniteOwnerSdkClient(mf,source){
  const kv=await mf.getKVNamespace('OAUTH_KV','m-sdk');
