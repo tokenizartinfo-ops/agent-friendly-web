@@ -62,6 +62,8 @@ Los IDs siguientes identifican rutas exactas; cada tarea enumera todos sus archi
 | F1 | test/fixtures/finite-first-connection-publication.mjs | Crear T1: probe enrollment; T2/T3: provider registry SYN y probes fijos |
 | F2 | test/fixtures/finite-initial-entry-world.mjs | T1: modo enrollment aislado; T2/T3: modo publicación; modos anteriores intactos |
 | T4 | test/mcp-qa-finite-owner-phase-context-native.test.mjs | T3: cierre público de parciales y compatibilidad |
+| T5 | test/mcp-qa-finite-owner-native-wire.test.mjs | T2 Root preflight: normalizar sólo cookie SYN válida, preservar asserts de drift/retención |
+| T6 | test/mcp-qa-finite-owner-native-conduit-native.test.mjs | T2 Root preflight: POST SYN válido para alcanzar el hold nativo, preservar asserts de abort/settlement/cero efectos |
 
 T1→T2→T3 son secuenciales. Un writer por tarea y revisión SDD antes de la siguiente; root controla aceptación y cierre. Los tests de tareas anteriores siguen siendo contratos. No refactor ajeno de phase-context ni cambios silenciosos en SDK, esquemas o stubs para acomodar los tests.
 
@@ -97,7 +99,9 @@ P2: prepareFinitePreparationEnrollmentWrite({ctx,env,preconnectionId,stageApprov
 
 ## Task 2: Incluir despacho finite cerrado en initial CLOSED
 
-**Files:** modificar P4/P5/P6/P7/P8/T2/F1/F2; crear T3. P8 conserva negocio pending hasta T3; los otros handlers ya existentes no se reimplementan.
+**Files:** modificar P4/P5/P6/P7/P8/T2/F1/F2/T5/T6; crear T3. T5/T6 son el ajuste acotado de preflight Root descrito abajo; no fixtures legacy ni producto extra. P8 conserva negocio pending hasta T3; los otros handlers ya existentes no se reimplementan.
+
+**Ruling Root de preflight Task2, posterior a aceptación Task1:** T5 hoy usa Cookie 'SYN-cookie' sin '=' y T6 usa POST 'SYN=bounded'. La gramática estricta ya elegida los rechaza antes del punto cuyo drift/hold pretenden medir. Autorizar únicamente reemplazar esos INPUTS SYN por cookie-list válida y form exacto handle/projectRef/decision=approve con cookie prepare matching. Preservar cada assert, señal/hold nativo, contadores y settlement; no debilitar el parser ni cambiar fixtures para conservar el viejo input inválido. Añadir T5 y T6 completos al gate proporcional porque ejercitan directamente wire/bridge/receiver modificados. Sus pruebas de malformados siguen negativas. Esta normalización no concede aprobación ni crea precedente Task3. No se modifica contrato producto ni se amplían endpoints. Scope Task2:11code/testpaths más qualifier/informe/ledger explícitos.
 
 **Interfaces consumidas/producidas:** reutilizar forwardFiniteOwnerChoice({request,env,ctx},originalLease) y los forwards/receivers OAuth/notice existentes. Ningún endpoint nuevo. P5.fetch(request) selecciona sólo targets privados literales de la spec. P7 sólo devuelve HTML y headers QA permitidos, body <=16384; errores nunca se convierten en éxito. P8 conserva native holders/boundary/retención; su reemplazo de pending por handler ocurre únicamente en T3.
 
@@ -177,7 +181,7 @@ Root mantiene deuda explícita baselineSdkReadCurrent: dos fallos iniciales no r
 
 ## Self-review y handoff
 
-- Cobertura: spec 1–3 → T2/T3; 4–5 → T3; 6 → T1; 7–8 → T3; 9 coincide con los 16 paths; 10 → matriz T1/T2/T3/regresiones; 11 → qualifier y límites.
+- Cobertura: spec 1–3 → T2/T3; 4–5 → T3; 6 → T1; 7–8 → T3; 9 coincide con el filemap original de16paths más T5/T6 de preflight Root; 10 → matriz T1/T2/T3/regresiones; 11 → qualifier y límites.
 - Consistencia: T3 consume exactamente firmas de T1; choice sólo añade POST al seam interno; P8 cambia de pending a handler en T3. Mount existe antes de fijar bytes/cápsula positiva; no tests verdes sobre M ordinary.
 - Grafo: P1/P2 no importan phase-context/residencia; P3 no los recibe indirectamente. QA puede importar P10 y M residente; M no contiene decoder QA. F1 no importa F2.
 - Review Focus: cinco riesgos tienen tests propietarios nombrados; negativos resealed no confunden checksum con correlación, y settlement se afirma explícitamente.
