@@ -26,4 +26,4 @@ jobs:
       - name: Scoped lint before native work
         run: npx eslint lib/mcp-qa-finite-owner-phase-context.mjs lib/mcp-qa-finite-owner-oauth-*.mjs lib/mcp-qa-finite-owner-issuer-provenance-*.mjs test/fixtures/finite-owner-qa-sdk.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
       - name: D02 causal helper and native qualification
-        run: node --test test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+        run: timeout 180s node --test test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
