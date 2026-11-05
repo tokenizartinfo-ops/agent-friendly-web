@@ -45,14 +45,14 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {createHash} from 'node:crypto';
 async function versionRoleHarness(t){
  // Test-only exposure of the private engine; no public role/configuration API.
- const entry=`import {fixedPolicyEngine} from './lib/mcp-qa-finite-policy-transport.mjs';
+ const entry=`import {createFiniteFixedPolicyEngine} from './lib/mcp-qa-finite-fixed-policy-engine.mjs';
  export default {async fetch(request,env){
   const {pin,closed,wire}=await request.json(),lease={signal:new AbortController().signal,assertCurrent(){}};
-  const engine=fixedPolicyEngine({ctx:{},env},()=>{});
-  try{if(wire)engine.wire(pin.configuration,pin.versionId,new Uint8Array([1]));else await engine.readVersion(pin,lease,closed);return Response.json({accepted:true});}
+  const engine=createFiniteFixedPolicyEngine({ctx:{},env},()=>{});
+  try{if(wire)engine.describeUpload({configuration:pin.configuration,baselineVersionId:pin.versionId,bytes:new Uint8Array([1])});else await engine.readVersion(pin,lease,closed);return Response.json({accepted:true});}
   catch{return Response.json({accepted:false});}
  }};`;
- const compiled=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:[{name:'private-engine-test-only',setup(b){b.onLoad({filter:/mcp-qa-finite-policy-transport\.mjs$/},async args=>({contents:(await readFile(args.path,'utf8'))+'\nexport {fixedPolicyEngine};',resolveDir:process.cwd()+'/lib',loader:'js'}));}}]});
+ const compiled=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*']});
  let metadata,writes=0,gets=0;
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:compiled.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_MCP_CLOSURE_READ_TOKEN:'SYNTHETIC_READER_00000000000000',AFW_MCP_CLOSURE_PUBLISH_TOKEN:'SYNTHETIC_PUBLISHER_000000000000'},outboundService:request=>{if(request.method!=='GET'){writes++;throw Error('write forbidden');}gets++;return Response.json({success:true,errors:[],messages:[],result:metadata});}}));
  t.after(()=>mf.dispose());
