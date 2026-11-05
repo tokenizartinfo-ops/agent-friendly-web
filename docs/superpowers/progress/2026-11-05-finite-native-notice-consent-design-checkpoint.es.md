@@ -1,0 +1,9 @@
+# Checkpoint mínimo — diseño POST de avisos
+
+5nov2026. INACTIVE / NO IMPLEMENTADO. Pedido de apagado detuvo esta preparación; no hay plan POST aprobado ni pruebas.
+
+Último diseño guardado por el diseñador: docs/finite-native-notice-receiver-design-20261105@2b6cd7a6b7c1f31af6accf408a55066dd90cb4e6, sólo GET+inventario. La elaboración POST posterior no entregó nuevos archivos/commit antes del cierre; no atribuirle decisiones aceptadas. Su contexto de tarea permanece en la coordinación, pero no es una guardia cloud ni debe seguir trabajando al apagar.
+
+Intención para retomar después de GETaceptado: unidad POSTreal de consentimiento con Access firmado/realm/subject/preparecookie/approval/owner/grant/ConnectionRef/ticketACK actuales; Origin exacto/bodyform≤1024/unhandleúnico/cookiemonitoringhashmatching; Common/lease/store iguales en observeTicket→insertConsent; techoAccessminoriginalactual sinrenovación. ConsentSENDantesSQL, actualPromise/resultléxico→ACKsecuenciareal/rowhash→recheck completo. Ampliación factualprivada mínima, reader3keys/OAuth/GET cerrados ante historia propia; no autoridad por ACKDATA/DTO/allowPending. Reusar GET para evitar duplicación injustificada, sin frameworknuevo por inferencia. Prefijo/UUIDoriginales e historiaajenapreservada, schema/IOcosto/5s30s medidos.
+
+Debe producir informe/spec/plan explícitosINACTIVE y rootpreflightfuturo antes de ejecución. No NoticeLink/nuevafase/terceroCLOSED/mount, permisos reales, publicación ni pruebaPCoff por este texto. Source3nov02:59Zexpirado; todoslosindicadoresoperativos false. Prioridad al retomar: completar/verificarGETpendiente primero.

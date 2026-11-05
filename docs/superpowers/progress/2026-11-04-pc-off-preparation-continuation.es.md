@@ -1,3 +1,9 @@
+# DETENIDO POR APAGADO — 5nov2026
+
+Ownerpidióguardar yseguir mástarde. NOseguirbloquesautomáticamente. Leer docs/superpowers/progress/2026-11-05-shutdown-checkpoint.es.md. Producto guardado a0bd9d68653cc18313490c842d7d884c6184fa18/treec526aaa7, informeparcialy draftnoverificado; qualifierretirado,3jobsGETterminales, writerterminado/diseñadorinterrumpido. SourceGETTask1INCOMPLETO: inventorybásicoPASS+RED2causalválido; faltaGETreal/restoverificación. BASEoriginaldc4edafc sepreserva. D04/store/journal/fanoutanterioresaceptados,noredispatch. operationalReadiness=false;completePackage=false;PCoff=false. ApagarparaPAUSA noesensayoPCoff. Autorizacionesfuentevigentespararetomarcuandoownerloindique; nada runtime/OTP/tokens/Max/main/merge ahora.
+
+---
+
 # CHECKPOINT VIGENTE — GET avisos ACTIVO, 5nov2026
 
 ÚNICO productwriter implement_notice_get(Solhigh), BASEdc4edafc0b5e4ba440cd32a21dd3dd58024e811a/tree91d023ce48bb2f5105140c788d3646c64c20bd4e, rama feat/finite-native-cleanup-20261101. READFIRST brief docs/superpowers/briefs/2026-11-05-finite-native-notice-next-slice.md; preflight/progress mismo basename. Alcance10paths source/test +informe, qualifier temporal .github/workflows/afw-notice-get-qualification.yml autorizado sólo rama/path/contentsread/nosecrets/persistfalse/npmciignore/job≤15m/removerfinal. No nuevo permiso/runtime. Rootrulings enbrief: success===true para all, schemafullantesreservation/SEND,16phase/6SDK/4D04selectednofilters0, ownframe/SQLPromise léxicos/noDTO, nuevoscostosmedidos/no50msallrepeats; figuras30s/5sinalteradas.
