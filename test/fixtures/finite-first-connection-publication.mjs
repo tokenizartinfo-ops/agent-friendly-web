@@ -54,17 +54,18 @@ export function extendEnrollmentComponent(entry,writerAvailable){
    if(!${writerAvailable})throw Error('fixed factual enrollment writer contract absent');
    const baseline={versionId:c.activatedVersionId,deploymentId:c.activatedDeploymentId,module:readPrivateQaFiniteCandidate().module,configuration:plan.configuration};
    writer=await prepareFinitePreparationEnrollmentWrite({ctx,env,preconnectionId,stageApprovalHash:hashPrep('StageApproval',approval),ownerSource:source,baseline,baselineBytes:readPrivateQaFiniteCandidate().bytes},lease,end);
+   if(!Object.isFrozen(writer)||Object.keys(writer).sort().join(',')!=='recordAck,recordEnrollment')throw Error('SYN writer interface mismatch');
    if(scenario==='holder-drift')env.AFW_QA_VERSION={id:metadata.id};
    if(scenario==='deadline')controller.abort();
    if(scenario==='ack-first')await writer.recordAck();
    else {
     const first=writer.recordEnrollment();
     if(scenario==='double-enrollment')await writer.recordEnrollment().then(()=>{throw Error('SYN duplicate accepted');},()=>{trace.push('duplicate-enrollment-denied');});
-    const recorded=await first;enrollment=recorded.enrollment;
+    const recorded=await first;enrollment=recorded.enrollment;const enrollmentReturnedAt=Date.now();
     if(recorded.ack!==null)throw Error('SYN premature ACK');
     const second=writer.recordAck();
     if(scenario==='double-ack')await writer.recordAck().then(()=>{throw Error('SYN duplicate accepted');},()=>{trace.push('duplicate-ack-denied');});
-    ack=(await second).ack;
+    ack=(await second).ack;if(ack.acknowledgedAt>enrollmentReturnedAt)throw Error('SYN ACK was prepared after enrollment returned');
    }
   }catch(error){failure=String(error);}
   finally{settled=true;for(const [key,value]of Object.entries(native))s[key]=value;env.AFW_QA_VERSION=metadata;controller.abort();}
