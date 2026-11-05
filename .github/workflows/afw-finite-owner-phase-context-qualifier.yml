@@ -9,7 +9,7 @@ concurrency:
   group: finite-owner-phase-context-source
   cancel-in-progress: false
 jobs:
-  red:
+  green:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -20,5 +20,20 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npx eslint test/fixtures/finite-owner-phase-context.mjs test/mcp-qa-finite-owner-phase-context-native.test.mjs
-      - run: node --test --test-name-pattern='settled original M journals never imply read_consent' test/mcp-qa-finite-owner-phase-context-native.test.mjs
+      - run: npx eslint lib/mcp-qa-finite-owner-phase-context.mjs test/fixtures/finite-owner-phase-context.mjs test/mcp-qa-finite-owner-phase-context-native.test.mjs
+      - run: "node --test --test-name-pattern='closed source keeps original A|original approval and enrollment stay closed|settled first connection derives|settled original M journals|actual current module and profile independently deny configuration|fresh current owner and current publication are independently rechecked: (configuration|pointer)' test/mcp-qa-finite-owner-phase-context-native.test.mjs"
+  compiler:
+    needs: green
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: test -z "$(git status --porcelain)"
+      - run: node --test test/mcp-qa-finite-candidate-residency.test.mjs
+      - run: test -z "$(git status --porcelain)"
