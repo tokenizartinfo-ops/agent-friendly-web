@@ -83,27 +83,24 @@ test('wrong_role_denied_before_mutation',async t=>{
 test('T1 known failure retains real cancellation',async t=>{
  const fresh=await readFile('lib/mcp-qa-finite-fixed-policy-engine.mjs','utf8').then(()=>true,()=>false);
  const entry=`import {${fresh?'createFiniteFixedPolicyEngine':'fixedPolicyEngine'}} from './lib/${fresh?'mcp-qa-finite-fixed-policy-engine':'mcp-qa-finite-policy-transport'}.mjs';
- let release,failed=false,settled=false,cancelStarted=false,cancelSettled=false,posts=0;
  export default {async fetch(request,env){
-  const path=new URL(request.url).pathname;
-  if(path==='/start'){
-   globalThis.fetch=async()=>{posts++;return new Response(new ReadableStream({cancel(){cancelStarted=true;return new Promise(r=>{release=()=>{cancelSettled=true;r();};});}}),{status:200,headers:{'Content-Type':'text/plain'}});};
-   const lease={signal:new AbortController().signal,assertCurrent(){}};
-   const engine=${fresh?'createFiniteFixedPolicyEngine':'fixedPolicyEngine'}({ctx:{},env},()=>{});
-   const actual=${fresh?"engine.activate({versionId:'22222222-2222-4222-8222-222222222222'},lease)":"engine.http('POST','scripts/agent-friendly-web-delegated-canary/deployments',{strategy:'percentage',versions:[{version_id:'22222222-2222-4222-8222-222222222222',percentage:100}]},lease)"};
-   actual.then(()=>{settled=true;},()=>{failed=true;settled=true;});
-   return new Response(null,{status:202});
-  }
-  if(path==='/release')release?.();
-  await Promise.resolve();
-  return Response.json({failed,settled,cancelStarted,cancelSettled,posts});
+  let release,started,failed=false,settled=false,cancelStarted=false,cancelSettled=false,posts=0;
+  const cancellationStarted=new Promise(r=>{started=r;});
+  globalThis.fetch=async()=>{posts++;return new Response(new ReadableStream({cancel(){cancelStarted=true;started();return new Promise(r=>{release=()=>{cancelSettled=true;r();};});}}),{status:200,headers:{'Content-Type':'text/plain'}});};
+  const lease={signal:new AbortController().signal,assertCurrent(){}};
+  const engine=${fresh?'createFiniteFixedPolicyEngine':'fixedPolicyEngine'}({ctx:{},env},()=>{});
+  const actual=${fresh?"engine.activate({versionId:'22222222-2222-4222-8222-222222222222'},lease)":"engine.http('POST','scripts/agent-friendly-web-delegated-canary/deployments',{strategy:'percentage',versions:[{version_id:'22222222-2222-4222-8222-222222222222',percentage:100}]},lease)"};
+  const logical=actual.then(()=>{settled=true;},()=>{failed=true;settled=true;});
+  await cancellationStarted;
+  // Drain only already-queued native continuations inside this original request.
+  for(let i=0;i<12;i++)await Promise.resolve();
+  const before={failed,settled,cancelStarted,cancelSettled,posts};
+  release();await logical;for(let i=0;i<4;i++)await Promise.resolve();
+  return Response.json({before,after:{failed,settled,cancelStarted,cancelSettled,posts}});
  }};`;
  const compiled=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['node:*','cloudflare:*'],plugins:fresh?[]:[{name:'old-private-contract-only',setup(b){b.onLoad({filter:/mcp-qa-finite-policy-transport\.mjs$/},async args=>({contents:(await readFile(args.path,'utf8'))+'\nexport {fixedPolicyEngine};',resolveDir:process.cwd()+'/lib',loader:'js'}));}}]});
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:compiled.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_MCP_CLOSURE_PUBLISH_TOKEN:'SYNTHETIC_PUBLISHER_000000000000'}}));t.after(()=>mf.dispose());
- assert.equal((await mf.dispatchFetch('https://fixture.invalid/start')).status,202);
- const before=await (await mf.dispatchFetch('https://fixture.invalid/probe')).json();
- try{assert.deepEqual(before,{failed:true,settled:true,cancelStarted:true,cancelSettled:false,posts:1},'known failure must reject logically while actual cancellation remains retained');}
- finally{await mf.dispatchFetch('https://fixture.invalid/release');}
- const after=await (await mf.dispatchFetch('https://fixture.invalid/probe')).json();
- assert.equal(after.cancelSettled,true);assert.equal(after.posts,1);
+ const {before,after}=await (await mf.dispatchFetch('https://fixture.invalid')).json();
+ assert.deepEqual(before,{failed:true,settled:true,cancelStarted:true,cancelSettled:false,posts:1},'known failure must reject logically while actual cancellation remains retained');
+ assert.deepEqual(after,{failed:true,settled:true,cancelStarted:true,cancelSettled:true,posts:1});
 });
