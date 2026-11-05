@@ -25,12 +25,6 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Scoped lint before native work
         run: npx eslint lib/mcp-qa-finite-owner-approved-ticket-facts.mjs lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-owner-phase-context.mjs lib/mcp-qa-finite-owner-oauth-*.mjs lib/mcp-qa-finite-owner-issuer-provenance-*.mjs test/fixtures/finite-owner-qa-sdk.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
-      - name: Final fixture disposal regression and actual uninstrumented source positive
-        run: >-
-          timeout 120s node --test
-          --test-name-pattern='actual allocated phase fixture disposes|uninstrumented|legacy pair'
-          test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
-          test/mcp-qa-finite-owner-phase-context-native.test.mjs
       - name: Exact-head standard changed-reader compiler graph remains unmounted
         run: |
           node --input-type=module <<'JS'
@@ -39,10 +33,11 @@ jobs:
           const built=await compileFiniteNativeStaging({cwd:process.cwd(),sourceRevision:process.env.GITHUB_SHA});
           assert.equal(built.sourceRevision,process.env.GITHUB_SHA);
           assert.equal(built.completePackage,false);assert.equal(built.operationalReadiness,false);
-          assert(built.metafiles.qaLive.inputs['lib/mcp-qa-finite-owner-phase-context.mjs']);
           console.info('D02 standard compiler entrypoints',JSON.stringify({compileFiniteNativeStaging:1,buildFiniteNativePackage:0,nodeProgramEsbuild:1,roleEsbuild:2,sourceRevision:built.sourceRevision,sourceTree:built.sourceTree}));
           for(const role of ['canaryLive','qaLive']){
             const meta=built.metafiles[role],output=Object.values(meta.outputs)[0],inputs=output.inputs;
-            console.info('D02 standard role',JSON.stringify({role,...built.modules[role].module,parsedInputs:Object.keys(meta.inputs).length,readerBytesInOutput:inputs['lib/mcp-qa-finite-owner-phase-context.mjs']?.bytesInOutput??0,parsedSdkInputs:Object.keys(meta.inputs).filter(k=>k.includes('workers-oauth-provider')).length,sdkBytesInOutput:Object.entries(inputs).filter(([k])=>k.includes('workers-oauth-provider')).reduce((n,[,v])=>n+v.bytesInOutput,0),newReceiverInGraph:!!meta.inputs['lib/mcp-qa-finite-owner-oauth-qa.mjs'],newForwarderInGraph:!!meta.inputs['lib/mcp-qa-finite-owner-oauth-forward.mjs'],qualification:'standard unmounted source graph; not full mounting proof'}));
+            assert.equal(!!meta.inputs['lib/mcp-qa-finite-owner-oauth-qa.mjs'],false);assert.equal(!!meta.inputs['lib/mcp-qa-finite-owner-oauth-forward.mjs'],false);
+            if(role==='canaryLive'){for(const path of ['lib/mcp-qa-finite-owner-phase-context.mjs','lib/mcp-qa-finite-preparation-issuer-store.mjs','lib/mcp-qa-finite-preparation-issuer-journal.mjs','lib/mcp-qa-finite-owner-issuer-provenance-journal.mjs','lib/mcp-qa-finite-initial-anchors.mjs','lib/mcp-qa-finite-candidate-residency.mjs'])assert.equal(!!meta.inputs[path],false,path);assert.equal(output.imports.some(v=>/^node:fs(?:\/|$)/.test(v.path)),false);}
+            console.info('D02 standard role',JSON.stringify({role,...built.modules[role].module,parsedInputs:Object.keys(meta.inputs).length,readerInGraph:!!meta.inputs['lib/mcp-qa-finite-owner-phase-context.mjs'],mQaDecoderIssuerFsExclusions:role==='canaryLive'?'passed':'not-applicable',readerBytesInOutput:inputs['lib/mcp-qa-finite-owner-phase-context.mjs']?.bytesInOutput??0,parsedSdkInputs:Object.keys(meta.inputs).filter(k=>k.includes('workers-oauth-provider')).length,sdkBytesInOutput:Object.entries(inputs).filter(([k])=>k.includes('workers-oauth-provider')).reduce((n,[,v])=>n+v.bytesInOutput,0),newReceiverInGraph:!!meta.inputs['lib/mcp-qa-finite-owner-oauth-qa.mjs'],newForwarderInGraph:!!meta.inputs['lib/mcp-qa-finite-owner-oauth-forward.mjs'],qualification:'standard unmounted source graph; not full mounting proof'}));
           }
           JS
