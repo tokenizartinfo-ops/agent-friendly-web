@@ -55,7 +55,7 @@ test('strict local provenance records preserve exact bounded DATA-only fields',a
 });
 
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
-import {seedFiniteOwnerSdkClient} from './fixtures/finite-owner-qa-sdk.mjs';
+import {seedFiniteOwnerSdkClient,readSyntheticIssuedGrantProps} from './fixtures/finite-owner-qa-sdk.mjs';
 async function plain(p){const r=await p;try{return JSON.parse(JSON.stringify(r));}finally{r?.[Symbol.dispose]?.();}}
 
 const PREP='__Host-afw-finite-prepare='+'a'.repeat(64);
@@ -103,6 +103,7 @@ async function issued(f,form,response){
  assert.equal(app.id,form.identity.grantId);assert.equal(app.revoked_at,'');
  const [subject,sdkId]=code.split(':'),kv=await f.mf.getKVNamespace('OAUTH_KV','m-sdk'),grant=await kv.get('grant:'+subject+':'+sdkId,{type:'json'});
  assert(grant,'M fixture alias observes actual SDK grant');assert.equal(grant.userId,form.identity.subject);assert.equal(grant.clientId,form.identity.clientId);assert.equal(grant.resource,form.identity.resource);assert.deepEqual(grant.scope,['afw:project:read']);assert(grant.encryptedProps);assert(grant.authCodeId);
+ assert.deepEqual(await readSyntheticIssuedGrantProps(code,grant),{applicationGrantId:form.identity.grantId,userId:form.identity.subject,projectId:form.identity.projectId});
  const final=await observe(f);assert(has(final,'sdk_complete:observed'));assert.equal(final.rows.length,8);
  const journal=await plain(f.stub.snapshot()),read=suffix=>JSON.parse(journal.find(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')&&k.endsWith(suffix))[1]),consume=read(':consume:send'),ack=read(':grant:ack');assert(ack.observedAt<consume.deadline);console.info('D02 native timing',JSON.stringify({...f.timings,consumeSendToGrantAckMs:ack.observedAt-consume.issuedAt,childRemainingAtGrantAckMs:consume.deadline-ack.observedAt,mockedProviderGetObservations:(f.observationTimes??[]).filter(v=>v.method==='GET'&&v.at>=consume.issuedAt&&v.at<=ack.observedAt).length}));
  return {app,code,sdkId,grant};
@@ -125,8 +126,9 @@ test('held actual approve denies fabricated results and concurrent complete bear
  await f.stub.sdkReleaseHeld();await issued(f,form,await pending);
  s=await observe(f);assert(s.calls.some(c=>c.method==='get'&&c.prefix==='transaction'));assert(s.calls.filter(c=>c.method==='put'&&c.prefix==='grant').every(c=>c.actualGrantAck));assert.equal(s.calls.filter(c=>c.method==='put'&&c.prefix==='grant').length,1);assert.equal(s.calls.filter(c=>c.method==='list').length,0);
  for(const p of s.probes.filter(p=>p.strictUnavailable!==undefined))assert.equal(p.strictUnavailable,true,'strict public reader denied same ambient unresolved SEND');
+ for(const op of ['consume','grant'])assert(s.probes.some(p=>p.kind==='issuer'&&p.op===op&&p.strictUnavailable));for(const op of ['sdk_approve','sdk_complete'])assert(s.probes.some(p=>p.kind==='sdk'&&p.op===op&&p.strictUnavailable));
  const consumed=s.probes.find(p=>p.kind==='consumption');assert(consumed.sameStore&&consumed.sameChild);assert(consumed.windowMs<=5000&&consumed.remainingMs>0);
- const reads=s.primary.filter(session=>/^SELECT\b/i.test(session.queries[0]));assert(reads.length>20);for(const session of s.primary)assert.equal(session.constraint,'first-primary');for(const session of reads)assert(session.queries.every(q=>/^SELECT\b/i.test(q)));assert.equal(s.primary.filter(session=>/^WITH\b/i.test(session.queries[0])).length,4,'separate unchanged Unit2a write sessions');
+ const writes=[];let readCount=0;for(const session of s.primary){assert.equal(session.constraint,'first-primary');assert.equal(session.queries.length,1,'fresh session for every original observation or atomic write');const sql=session.queries[0];if(/^SELECT\b/i.test(sql)){readCount++;continue;}assert.match(sql,/^WITH q\(preconnection_id,authorization_hash,grant_id,enrollment_hash,identity_hash,/);assert(sql.includes("n(ms) AS (SELECT CAST(unixepoch('subsec')*1000 AS INTEGER))"));const kind=['INSERT INTO finite_preparation_issuer_fences','INSERT INTO delegated_consent_sessions','UPDATE delegated_consent_sessions AS c SET consumed_at=','INSERT INTO delegated_access_grants'].find(k=>sql.includes(k));assert(kind,'only exact original Unit2a atomic writer');writes.push(kind);}assert(readCount>20);assert.equal(new Set(writes).size,4);assert.equal(writes.length,4);
 }));
 test('missing actual SDK binding cookie denies copied public form before original consume',()=>world(async f=>{
  const form=await consent(f);assert.equal(await status(f.post(form,{Cookie:PREP})),503);
@@ -195,4 +197,38 @@ test('actual verified owner expiry during held SDK begin cannot extend original 
  await f.stub.sdkConfigure('hold-put');const pending=f.get();await held(f);assert.equal(await status(pending),503);assert.equal((await observe(f)).held,true);
  await f.stub.sdkReleaseHeld();await new Promise(r=>setTimeout(r,100));assert(!has(await observe(f),'sdk_begin:observed'));
  assert(!(await plain(f.stub.snapshot())).some(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')));
+}));
+
+for(const fault of ['sdk-extra','sdk-observed','issuer-extra','policy-send','backup','module','pointer','owner-revision'])test('owned begin recheck rejects actual foreign delta '+fault,()=>world(async f=>{
+ await f.stub.sdkConfigure('hold-put');const pending=f.get();await held(f);
+ if(['sdk-extra','sdk-observed','issuer-extra','policy-send'].includes(fault))await f.stub.sdkCorrupt(fault);
+ else if(fault==='backup')await f.stub.phaseCorrupt('tamper-backup');
+ else if(fault==='module')f.phaseFault='module';
+ else {f.phaseObservation=0;f.phaseDrift=fault==='pointer'?'pointer':'revision';}
+ const before=await plain(f.stub.snapshot());await f.stub.sdkReleaseHeld();assert.equal(await status(pending),503);assert.deepEqual(await plain(f.stub.snapshot()),before,'actual SDK result cannot adopt foreign ledger facts');
+ assert(!(await plain(f.stub.snapshot())).some(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')&&k.endsWith(':reservation')));
+}));
+for(const fault of ['issuer-freeze','issuer-ack'])test('owned approve recheck rejects original issuer '+fault,()=>world(async f=>{
+ const form=await consent(f);await f.stub.sdkConfigure('hold-get');const pending=f.post(form);await held(f);
+ if(fault==='issuer-freeze')await f.stub.sdkCorrupt(fault);else await f.stub.phaseCorrupt(fault);
+ const before=await plain(f.stub.snapshot());await f.stub.sdkReleaseHeld();assert.equal(await status(pending),503);assert.deepEqual(await plain(f.stub.snapshot()),before);assert.equal(await plain(f.stub.sdkGrant(form.identity.grantId)),null);assert(!has(await observe(f),'sdk_approve:observed'));
+}));
+for(const snapshot of ['first','second'])test('owned recheck still requires original CLOSED configuration in '+snapshot+' snapshot',()=>world(async f=>{
+ await f.stub.sdkConfigure('hold-put');const pending=f.get();await held(f);
+ if(snapshot==='first')f.ownerFault='original-open';else{f.phaseObservation=0;f.phaseDrift='original-open';}
+ await f.stub.sdkReleaseHeld();assert.equal(await status(pending),503);assert(!has(await observe(f),'sdk_begin:observed'));
+}));
+test('absent original issuer schema denies handler before any actual SDK lookup or claim',()=>world(async f=>{
+ await f.stub.sdkCorrupt('absent-schema');assert.equal(await status(f.get()),503);const s=await observe(f);assert.equal(s.calls.length,0);assert.equal(s.rows.length,0);
+}));
+for(const operation of ['open','grant'])test('actual handler original child cannot authorize SQL queued beyond five seconds: '+operation,{timeout:35000},()=>world(async f=>{
+ const form=operation==='grant'?await consent(f):null;
+ await f.stub.sdkConfigure('queue-'+operation);
+ assert.equal(await status(form?f.post(form):f.get()),503);
+ let s;for(let n=0;n<100;n++){s=await observe(f);if(s.queue?.returned)break;await new Promise(r=>setTimeout(r,20));}
+ assert.equal(s.queue?.entered,true);assert.equal(s.queue?.returned,true);assert.equal(s.queue?.rowAbsent,true,'original SQL clock rejected actual delayed execution');
+ assert(!has(s,'sdk_complete:send'));
+ if(form){assert.equal(await plain(f.stub.sdkGrant(form.identity.grantId)),null);const rows=await plain(f.stub.snapshot());assert(rows.some(([k])=>k.endsWith(':consume:ack')));assert(!rows.some(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')&&k.endsWith(':grant:ack')));}
+ else {assert(has(s,'sdk_begin:observed'));assert(!(await plain(f.stub.snapshot())).some(([k])=>k.endsWith(':authorization:ack')));}
+ const beforeCalls=s.calls.length;assert.equal(await status(form?f.post(form):f.get()),503);assert.equal((await observe(f)).calls.length,beforeCalls,'incomplete first GET/POST never restarts SDK');
 }));

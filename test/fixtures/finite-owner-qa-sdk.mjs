@@ -4,10 +4,10 @@ import {readFile} from 'node:fs/promises';
 import {finiteWranglerProfileTemplate} from '../../lib/mcp-qa-finite-profile.mjs';
 // SYN fixture composition only. Actual source/SDK/journals/Unit2a modules remain.
 export function extendFiniteOwnerQaSdk(entry,{observed=false}={}){
- const imports=`import {createPrivateQaFiniteOwnerOAuthReceiver} from './lib/mcp-qa-finite-owner-oauth-qa.mjs';\n`;
+ const imports=`import {sealFiniteOwnerIssuerProvenanceRecord as sdkSeal,encodeFiniteOwnerIssuerProvenanceRecord as sdkEncode} from './lib/mcp-qa-finite-owner-issuer-provenance-records.mjs';\nimport {createPrivateQaFiniteOwnerOAuthReceiver} from './lib/mcp-qa-finite-owner-oauth-qa.mjs';\n`;
  let methods=`
  async fetch(request){return createPrivateQaFiniteOwnerOAuthReceiver({ctx:this.ctx,env:this.env}).fetch(request);}
- async sdkObservation(){return {signals:this.sdkSignals??null,leaseSignals:globalThis.__d02QaSignals??null,held:!!this.sdkRelease,probes:globalThis.__d02Probes??[],primary:this.sdkPrimary??[],rows:[...await this.ctx.storage.list({prefix:'afw.finite-owner-issuer-provenance.v1:'})],calls:this.sdkCalls??[]};}
+ async sdkObservation(){return {queue:this.sdkQueue??null,signals:this.sdkSignals??null,leaseSignals:globalThis.__d02QaSignals??null,held:!!this.sdkRelease,probes:globalThis.__d02Probes??[],primary:this.sdkPrimary??[],rows:[...await this.ctx.storage.list({prefix:'afw.finite-owner-issuer-provenance.v1:'})],calls:this.sdkCalls??[]};}
  async sdkConfigure(mode='normal'){
   globalThis.__d02Probes=[];
 
@@ -25,13 +25,26 @@ export function extendFiniteOwnerQaSdk(entry,{observed=false}={}){
    return actual;
   };
  }
+ async sdkCorrupt(kind){
+  const rows=[...await this.ctx.storage.list()],capsule=JSON.parse(rows.find(([k])=>k.endsWith(':capsule'))[1]),id=capsule.preconnectionId,sp='afw.finite-owner-issuer-provenance.v1:'+id+':',ip='afw.finite-preparation-issuer.v1:'+id+':';
+  if(kind==='sdk-extra')await this.ctx.storage.put(sp+'unknown','SYN forbidden extra');
+  else if(kind==='sdk-observed'){const send=JSON.parse(await this.ctx.storage.get(sp+'sdk_begin:send'));await this.ctx.storage.put(sp+'sdk_begin:observed',sdkEncode('SdkObserved',sdkSeal('SdkObserved',{purpose:'afw.finite-owner-sdk-observed.v1',sendHash:send.recordHash,resultHash:'f'.repeat(64),observedAt:Date.now(),outcome:'resolved'})));}
+  else if(kind==='issuer-extra')await this.ctx.storage.put(ip+'unknown','SYN forbidden extra');
+  else if(kind==='issuer-freeze'){const r=JSON.parse(await this.ctx.storage.get(ip+'reservation'));await this.ctx.storage.put(ip+'freeze',phaseEncodeIssuer('Freeze',phaseSealIssuer('Freeze',{purpose:'afw.finite-preparation-issuer-freeze.v1',identityHash:r.identity.identityHash,reservationHash:r.recordHash,frozenAt:Date.now()})));}
+  else if(kind==='policy-send'){const ack=rows.find(([k])=>k.startsWith('afw.finite-policy-effect.v1:')&&k.endsWith(':ack'));if(!ack)throw Error('SYN policy ACK missing');await this.ctx.storage.delete(ack[0]);}
+  else if(kind==='absent-schema')await this.env.RELEASE_DB.prepare('DROP TABLE finite_preparation_issuer_fences').run();
+  else throw Error('SYN unknown fault');await this.ctx.storage.sync();
+ }
  async sdkGrants(){return (await this.env.RELEASE_DB.prepare('SELECT * FROM delegated_access_grants ORDER BY id').all()).results;}
  async sdkGrant(id){if(!/^[a-f0-9-]{36}$/.test(id))throw Error('SYN UUID');return this.env.RELEASE_DB.prepare('SELECT * FROM delegated_access_grants WHERE id=?').bind(id).first();}
  async sdkReplaceHolder(){const kv=this.env.AFW_FINITE_OWNER_OAUTH_KV,original=kv.get;kv.get=(...args)=>Reflect.apply(original,kv,args);}
  async sdkAliasAbsent(absent){if(absent){this.sdkAlias=this.env.AFW_FINITE_OWNER_OAUTH_KV;this.env.AFW_FINITE_OWNER_OAUTH_KV=undefined;}else this.env.AFW_FINITE_OWNER_OAUTH_KV=this.sdkAlias;}
  async sdkPrimaryObserve(){
   this.sdkPrimary=[];const db=this.env.RELEASE_DB,original=db.withSession;
-  db.withSession=constraint=>{const session=Reflect.apply(original,db,[constraint]),prepare=session.prepare,queries=[];this.sdkPrimary.push({constraint,queries});session.prepare=sql=>{queries.push(sql);return Reflect.apply(prepare,session,[sql]);};return session;};
+  db.withSession=constraint=>{const session=Reflect.apply(original,db,[constraint]),prepare=session.prepare,queries=[];this.sdkPrimary.push({constraint,queries});session.prepare=sql=>{queries.push(sql);const statement=Reflect.apply(prepare,session,[sql]);
+   if(this.sdkMode==='queue-grant'&&sql.includes('INSERT INTO delegated_access_grants')||this.sdkMode==='queue-open'&&sql.includes('INSERT INTO finite_preparation_issuer_fences')){
+    this.sdkMode='queued';const seen=this.sdkQueue={entered:false,returned:false,rowAbsent:null};return {bind(...args){const bound=statement.bind(...args);return {async first(){seen.entered=true;await new Promise(resolve=>setTimeout(resolve,5100));const row=await bound.first();seen.returned=true;seen.rowAbsent=row===null;return row;}};}};
+   }return statement;};return session;};
  }
  async sdkOldPath(path,headers={},body=''){
   if(!['/read-grant','/sdk-completed','/sdk-complete','/sdk-begin','/sdk-approve'].includes(path))throw Error('SYN path');
@@ -89,4 +102,18 @@ export function instrumentFiniteOwnerQaSdk(source){
  once("await issuerAppend('Send',send,op);await recheckOwned();check();","await issuerAppend('Send',send,op);"+probe('issuer')+"await recheckOwned();check();");
  once("if(consumptionChild!==l||consumptionStore!==store||!consumption)fail();","if(consumptionChild!==l||consumptionStore!==store||!consumption)fail();(globalThis.__d02Probes??=[]).push({kind:'consumption',sameChild:consumptionChild===l,sameStore:consumptionStore===store,remainingMs:w.deadline-Date.now(),windowMs:w.deadline-w.startedAt});");
  return source;
+}
+
+/** Read-only audit of this test's actual SDK1.2.1 encrypted grant. This public
+ * wrapping constant and HMAC/AES-KW/AES-GCM format are from pinned
+ * cloudflare/workers-oauth-provider v1.2.1 src/oauth-provider.ts:6334-6408.
+ * No token exchange, SDK substitute, code logging or production key access. */
+export async function readSyntheticIssuedGrantProps(code,grant){
+ const publicWrappingConstant=new Uint8Array([0x22,0x7e,0x26,0x86,0x8d,0xf1,0xe1,0x6d,0x80,0x70,0xea,0x17,0x97,0x5b,0x47,0xa6,0x82,0x18,0xfa,0x87,0x28,0xae,0xde,0x85,0xb5,0x1d,0x4a,0xd9,0x96,0xca,0xca,0x43]);
+ const hmac=await crypto.subtle.importKey('raw',publicWrappingConstant,{name:'HMAC',hash:'SHA-256'},false,['sign']);
+ const material=await crypto.subtle.sign('HMAC',hmac,new TextEncoder().encode(code));
+ const wrapping=await crypto.subtle.importKey('raw',material,{name:'AES-KW'},false,['unwrapKey']);
+ const key=await crypto.subtle.unwrapKey('raw',Buffer.from(grant.authCodeWrappedKey,'base64'),wrapping,{name:'AES-KW'},{name:'AES-GCM'},false,['decrypt']);
+ const bytes=await crypto.subtle.decrypt({name:'AES-GCM',iv:new Uint8Array(12)},key,Buffer.from(grant.encryptedProps,'base64'));
+ return JSON.parse(new TextDecoder().decode(bytes));
 }
