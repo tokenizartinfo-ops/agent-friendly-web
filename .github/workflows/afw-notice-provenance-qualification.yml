@@ -1,0 +1,24 @@
+name: Finite notice provenance temporary qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - 'lib/mcp-qa-finite-preparation-notice-*.mjs'
+      - 'test/mcp-qa-finite-preparation-notice-provenance*.test.mjs'
+      - 'test/fixtures/finite-preparation-notice-provenance-worker.mjs'
+      - '.github/workflows/afw-notice-provenance-qualification.yml'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --test test/mcp-qa-finite-preparation-notice-provenance-native.test.mjs
