@@ -36,3 +36,12 @@ NO Task1complete. Owner apaga PC yretomamástarde. Writer terminó/checkpoint a0
 ## REANUDADO por el owner — 5nov2026 19:21 UTC
 
 Gabriel pidió «continua con los bloques» después del cierre. La pausa queda revocada sólo para el trabajo autorizado. Root verificó rama fuente todavía a0bd9d68653cc18313490c842d7d884c6184fa18/treec526aaa70236dd1dd0fc9b012fa7e23e4f65f68f y docs699180ed. Se reanuda el MISMO implement_notice_get mediante followup, BASE de revisión originaldc4edaf, sin repetirRED1/RED2/aceptados. Qualifier temporal GET reautorizado con mismo scope, seguridad y retiro final; ningún cambio de budgets, custodia o runtime. Diseño POST continúa sólo documental en rama separada desde82f9d340, INACTIVE hastaGETaceptado/reconciliación/preflight. No otro writerfuente. operationalReadiness=false;completePackage=false;PCoff=false.
+
+
+## Primarias leídas al reanudar y ruling de transporte
+
+Rootleyó job127476629576/run42093279704/HEAD35ad25a4:1T0P1F, error de captura esbuild inputvirtual antes de prerrequisitos, QA1compile/sin artefacto; no REDproducto. Rootleyó job127478302248/run42093762800/HEAD808a9bab:1T0P1F por Cache-Control duplicado, ya200/ticket14/3journal/ACK/HTML/nosniff;2compiles/artefacto13446176700. MétricaJSON partida64KiB reconstruida sin repetir:1656ms/SQL102sesiones111sentencias/peak2active0; distinguir3queries inspect posteriores. Rootleyó job127480153262/run42094285083/HEAD0db9f2d1:32T30P2F0skip/62fixturecompiles; principalGREEN, dos expectativasCloseapplied erróneas frentefenced. Storeoriginal líneas115–122 confirmafenced; no cambióstoreporassertion. Próxima cualificaciónbe044d48/run42095343936/job127483768304 sigue pendiente: no atribuirGREENanticipado.
+
+Ruling: copiar sólo allowlistOAuthintacta y fijar nosniff exclusivamente en HTML200 final de M; QA genera su propio nosniff. No header callerconfigurable/expansión de allowlist ni cambioOAuthordinario. Corregir duplicación Cache-Control sóloGET. Writer conservainterfaces/SQLPromise/rootbudgets. Totalesestáticosdc4sin ejecutar:phase80(16selected+64notselected),SDK61(6+55),D04token46(4+42), separadosdeTAPskip0Node22.
+
+DiseñoPOSTe27bbc16c3abc11c64a4740157e1c998c1b0f829,treec7dc1cdd81b02f319ab7e18ed87357e4a37e4ca6:rootleyó informe9772/spec21473/plan14362. Completo documental peroINACTIVE,pendienteGETaceptado/reconciliación/preflight. No activar desde su pin viejo. MensajeOpenAI5nov18:59UTC/caso18196140sóloseguimiento,sincausa/repairverificada; lecturaacotada ynota separada, sinensayoproxy/entorno/correosoporte. No esContainer/Access/Cron/FCO.

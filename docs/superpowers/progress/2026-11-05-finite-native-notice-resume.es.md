@@ -9,3 +9,9 @@ Task1 GETticket sigue INCOMPLETE. Root reanudó implement_notice_get (mismo writ
 En paralelo se solicita al diseñador original completar únicamente informe/spec/plan POST de su rama docs/finite-native-notice-receiver-design-20261105 desde82f9d340. Mantener INACTIVE; leer sólo pin aceptado dc4 para diseño y reconciliar después con GETaceptado antes de preflight/activación. No writer adicional de fuente ni pruebas en su nombre.
 
 No clones/deps/tests/build/procesos persistentes locales. No mutación/sondeo CF, runtime, alias, Entry, DDLreal, OAuth, OTP, tokens, permisos, cron, Containers, Max, main/merge/publicación. Sourceceiling3nov02:59Zpermanecevencido. BudgetsC0/C1/30s/5soriginales. operationalReadiness=false;completePackage=false;PCoff=false. La continuación no acredita guardia permanente o PCoff.
+
+## Avance posterior sin aceptación anticipada
+
+Tres primarias GET se leyeron: fallo de captura de inputvirtual35ad25a4;200/ticket14/3journal con assertCache-Controlduplicado808a9bab; batería0db9f2d1 de32T30P2F0skip (dos expectativasfenced del cierre nativo). Run42095343936/be044d48 activo al guardar, no GREENfinal declarado. El writer conserva autoríaúnica/BASEoriginal y protección de store/journal/SDK/budgets. Rulingfijo nosniff/allowlisty detalles enledger.
+
+DiseñoPOST completo documental e27bbc16/treec7dc1cdd, tres archivos existentes en rama del diseñador leídos íntegros porroot; INACTIVE hastaGETaceptado/reconciliación/preflight. SoporteOpenAI sigue sincausa/soluciónverificada segúnrespuesta5nov18:59UTC; nota propia saneada progress/2026-11-05-openai-proxy-support-followup.es.md, sin nuevos tests de proxy ni envío a soporte. MantenerdistintoslosresultadosSYN/Actions ylarutaCodexnativa. operationalReadiness=false;completePackage=false;PCoff=false.
