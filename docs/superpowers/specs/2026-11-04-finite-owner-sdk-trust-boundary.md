@@ -168,6 +168,11 @@ Public SDK import feasibility was verified against v1.2.1 package entrypoint (pa
 Currentcontainingcommitactivates ONLYD0.1after independentlyacceptedpureprearmTask1(report9fd0ff65) andfirstphasecontext(reportfe0af360). ActualBASEsuppliedindispatch. D0.2/D0.3/nativeissuer/notices/fullmount/cleanup andALLactualKVaccess/publication remainINACTIVE. ScopedGitHubsourceandcredential-freeActionsbuild/testareauthorizedforthisunit, notprovideroperations. DeclareexactQAaliasandstrictmappingDATA; preserveM/historicals/currentfactualreadercontracts. No newSDKcall/sourcebroker isimplementedhere. Root's laterowned-recheckdesignsupplementamendsD0.2only; donotimplementtheoldMresult-reportsketch.
 
 
+## Root D0.2 SOURCE activation — 5 November2026
+
+Latestcontainingcommitactivates ONLYD0.2plusowned-recheckamendment afterD0.1acceptance04e8bb0f. ActualexecutionBASEsuppliedindispatch. HistoricalD0.1-onlyactivation/unassignedwordingaboveisdatedhistory. D0.3/notices/fullmount/actualbinding/provider/credential/Entry remainINACTIVE. SourceSDKtestsareonlysyntheticnativequalification. Briefdocs/superpowers/briefs/2026-11-05-finite-owner-sdk-trust-boundary-d02.md governsrootrulings andCASsinglewriter. No operationalreadiness.
+
+
 ## Root D0.3 SOURCE activation — 5 November 2026
 
 This containing commit accepts D0.2 source at report d630a99d8bd30bbeaa5606a89dbd33ee58ce8b72 after independent Pass/Approved review and activates only D0.3. Exact execution BASE supplied by root. Earlier ACTIVE/INACTIVE headers are dated history. Brief docs/superpowers/briefs/2026-11-05-finite-owner-sdk-trust-boundary-d03.md and preflight define the precise conditional scope amendment: valid existing exchange first, and ONLY if genuine negative proves missing redundant props checks, two privilege-reducing equality guards in existing M token callback before consumeExchange. No other production behavior, permission, SDK callback injection, schema, clock or mount changes. Live I/O feasibility remains unaccredited; audit proposals not activated.
