@@ -146,3 +146,55 @@ Changed product blob85c7105f906b5d7936b4bd205c1f4598f5521546; new I/O fixture8db
 The product ceiling2026-11-03T02:59:00Z stays expired. Initial fixture-only approval/custody/JWKS/provider/ledger/module/history substitutions are SYN; actual SDK crypto, journals, native KV/DO/D1 and original SDK positive execute. The new I/O positives keep actual JS/SQL clocks; existing adjacent historical fixtures explicitly retain their previously accepted SYN time projections, not real-provider operation.
 
 operationalReadiness=false; completePackage=false; PCoff=false. No alias installation, mounted graph, real credentials, runtime/provider timing, Entry/cleanup/notice/subscription/consumer availability or PC-off acceptance follows from these tests. The narrow five-second margin, captured-count uncertainty at the killed process, RPC warnings and staged-head coverage remain explicit limitations. ROOT owns the full actual BASE diff and fresh independent spec/quality review before any next decision.
+
+
+## Fix round 1/5 — actual pending-branch drift (5 November 2026)
+
+FIX_BASE / previous reviewed HEAD: ae39d1b220614498856160a3b2de994c58544110. Same source writer, no subagents/reviewer. Independent reviewer review_owner_io_fanout found product structure Pass but SpecIssues/Needsfixes: the old before-join barrier was injected AFTER awaited Promise.allSettled([qaWork,mWork]). ROOT authorized only fixture/native-case/report changes and an own temporary scoped qualifier. Product scheduling, source guards, clocks, permissions and deferred minor cleanup were outside this round.
+
+This append CORRECTS the earlier report's before-join claim: those four existing drift cases changed state after both branches had settled, before joined results were consumed. They were useful post-join coverage, not evidence of drift with a branch pending. The historical report above remains unchanged for provenance; this append supersedes that characterization.
+
+Fix code/test head: 59d6852539b59bc3430f41c7455ca36be223955d; tree 480a8b61276489645f565fd54d19d07eeeab8883. Final report containing commit/tree are in the CAS delivery receipt; final delivery only appends this text and removes the own qualifier. Before CAS, branch ref readback matched the expected head. Final product blob remains 85c7105f906b5d7936b4bd205c1f4598f5521546, exactly unchanged from FIX_BASE. Fixed I/O fixture blob 900172e1dd24662c354c0d3d48d4ed28a86c3a52; native test blob fb645efe76fd007e64aed1c485ac98834ba7b729.
+
+Only these code/test files changed against FIX_BASE:
+- test/fixtures/finite-owner-io-fanout.mjs
+- test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+
+The fixture observes the original fixed QA/M branch promises entering pending state and reaching their actual helper-promise finalizers. Exact-one instrumentation markers fail closed. It records whether each original request callback has actually invoked fetch. It does not substitute source/result/DTO, query an additional authority, wrap SDK/KV, change a grant or export a capability.
+
+The new selected before-join gate is inside the retained original request callback, before the original fetch is invoked. It applies only to the explicitly selected category in snapshot 1:
+- Owner/pointer: M deployment request, before that branch obtains the pointer or reaches its later original owned-project SELECT.
+- Module/configuration: current M version request, before the original metadata fetch observes the mutated module/configuration.
+
+A real retained source M branch/helper and its original child callback remain unfinished while the gate is held. The trace's active1 at this gate means that callback is awaiting the test barrier; it does NOT claim an outbound fetch/body is already in flight. Tests explicitly require M=pending, the affected callback entered, fetchStarted=false, outcome=pending, no end marker, snapshot1, and peak≤2 BEFORE performing the native D1 owner mutation or mocked provider pointer/module/configuration mutation. Then they release the barrier and verify denial through the original following checks. No guessed sleep, timer/clock offset, shortened delay, deadline extension or new source read is used.
+
+The old four cases are retained under joined-before-consumption. They now explicitly assert QA=settled, M=settled and active0 at that checkpoint. The eight existing after-first/between-snapshot cases are unchanged and were not rerun. The new four tests own their pending request/barrier cleanup; the existing world() prefix through its finally block is byte-for-byte unchanged. ROOT's deferred minor at the global world cleanup remains deferred and was not mixed into fix1.
+
+### Causal RED and scoped GREEN
+
+| Actual head | Run / job / attempt | Command result | Fixture builds |
+| --- | --- | --- | ---: |
+|7ac10c3f69eb69d56f097219c199670b9cf4958d|42056328272 /127345582052 /1|0P4F0skip, intended pending-state RED at old location; scoped lint clean|8|
+|59d6852539b59bc3430f41c7455ca36be223955d|42056890908 /127347597989 /1|8P0F0skip: four new pending cases +four preserved post-join cases; scoped lint clean|16|
+
+RED retained the old barrier location and added actual branch observation plus the new pending assertion. All four owner/pointer/module/configuration cases failed exactly at “original M branch must still be unfinished at mutation barrier”: expected pending, actual settled. Each recorded QA=settled, M=settled, affected fetchStarted=true, outcome=fulfilled, active0, snapshot1. The failed assertion preceded mutation. Per-test finally released the old gate and awaited/cancelled the original pending response. These were causal coverage REDs, not initialization/observer/source mismatch failures or fabricated product positives.
+
+GREEN kept the same four assertions and mutations, moving only the selected test barrier before the affected fetch; the old post-join barrier was renamed and preserved. All four new mutations recorded QA=settled, M=pending, fetchStarted=false, outcome=pending, active1, snapshot1. After release, each actual request returned503 without form/Location/SDK operation/receipt/issuer SEND/ACK/new grant, the affected fetch had actually started and its cancellation/end markers had settled, both branches were settled, active0, snapshot1, peak2. Thus all four denied at original checks in the first snapshot. No detection after all original checkpoints or atomic-provider-state claim is made.
+
+Exact cloud commands:
+
+~~~sh
+npx eslint test/fixtures/finite-owner-io-fanout.mjs test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+timeout 180s node --test --test-concurrency=1 --test-name-pattern="fanout pending branch" test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+timeout 180s node --test --test-concurrency=1 --test-name-pattern="fanout pending branch|drift at causal joined-before-consumption" test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+~~~
+
+Both Actions jobs use Ubuntu24.04/Node22.23.4, timeout5min, contents:read, checkout persist-credentials:false/fetch-depth1 and npm ci --ignore-scripts --no-audit --no-fund. No secrets, artifact uploads, local clone/dependencies/build/tests or real provider requests. The branch/path-scoped .github/workflows/afw-owner-io-source.yml is removed in final delivery.
+
+Compilation accounting for this round is exact: 4 native worlds ×2 roles=8 actual esbuild calls for RED, 8 worlds ×2=16 for GREEN, total24, all completed; 0 observed compiler failures or esbuild warnings. GREEN's executing component fixture QA is1696356 bytes/320 parsed inputs (first SHA2bc2954c260101eb7c4591703d3f2f4e2366872ef4fe85c198a2c052a46316b1), M110968 bytes/187 inputs/SHAa90fcc6ef797de0218b93de2c166c8f6957c7bdf5468e0280f998b3ef0e0d45a. QA hashes vary with the existing disclosed SYN ceiling. No extra hash-only build or standard compiler was invoked; no production graph/import/mount changed. Cumulative known authored fixture calls become271, with the same possible1 unlogged invocation at the earlier180s cutoff still unresolved.
+
+Warnings retained: RED0 RPC-stub warnings/4 CIMD notices; GREEN8 RPC-stub warnings/8 CIMD notices; npm/action/Node deprecations remain in both bounded logs. Scoped lint has0 errors/warnings, esbuild diagnostics0. The RPC notices are not suppressed and are not physical-drain evidence. There were no additional failure/correction runs in this round.
+
+Prior57 SDK, staged80 phase and65 adjacent coverage remains at its documented heads; this is ONLY the scoped eight-case fix1 qualification. No full57/80/65 suite, 50ms repeat/stress or new standard compile gate was run. The prior132ms empirical margin and earlier one-call accounting uncertainty remain limitations. The deferred minor and full integration checks remain ROOT's final whole-branch list.
+
+DONE_WITH_CONCERNS; ready for the same independent reviewer's scoped re-review, not self-approval. operationalReadiness=false; completePackage=false; PCoff=false. No next unit, runtime, Entry, alias, credential, OAuth/OTP, clock, Max, main or merge action is activated by this append.
