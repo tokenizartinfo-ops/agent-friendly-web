@@ -362,3 +362,29 @@ test('fanout completed sibling cannot hide live holder replacement',{timeout:600
  await f.stub.ioRelease('cancel');await ioDeny(f,await pending);
  const s=await ioWait(f,s=>s.active===0);assert.equal(s.snapshots,1);assert.equal(s.peak,2);
 },{observed:false,io:true}));
+
+
+for(const drift of ['owner','pointer','module','configuration']){
+ test('fanout pending branch '+drift+' drift before original fact read denies',{timeout:60000},()=>world(async f=>{
+  const category=['owner','pointer'].includes(drift)?'m-deployment':'m-current-version';
+  await f.stub.ioConfigure({checkpoint:'before-join',pendingCategory:category});const pending=f.get();
+  try{
+   const at=await ioWait(f,s=>s.checkpointHeld==='before-join'),row=at.rows.find(r=>r.snapshot===1&&r.category===category);
+   console.info('fanout pending branch barrier',JSON.stringify({drift,category,branches:at.branches,fetchStarted:row?.fetchStarted,outcome:row?.outcome,active:at.active,snapshot:at.snapshots}));
+   assert.equal(at.branches.m,'pending','original M branch must still be unfinished at mutation barrier');
+   assert(row,'actual affected request callback entered');assert.equal(row.fetchStarted,false,'mutated fact has not yet been fetched');
+   assert.equal(row.outcome,'pending');assert.equal(row.endMono,undefined);assert.equal(at.snapshots,1);assert(at.active>=1&&at.peak<=2);
+   if(drift==='owner')await f.db.prepare("UPDATE site_projects SET user_id='SYN drift'").run();
+   if(drift==='pointer')f.phaseCurrent.receipt.deploymentId='99999999-9999-4999-8999-999999999999';
+   if(drift==='module')f.phaseFault='module';
+   if(drift==='configuration')f.phaseFault='configuration';
+   await f.stub.ioRelease('checkpoint');await ioDeny(f,await pending);
+   const done=await ioWait(f,s=>s.active===0),read=done.rows.find(r=>r.snapshot===1&&r.category===category);
+   assert.equal(read.fetchStarted,true);assert(read.cancelSettledAt<=read.endMono);assert.equal(done.branches.m,'settled');assert(done.snapshots<=2&&done.peak<=2);
+   console.info('fanout pending branch denial',JSON.stringify({drift,status:503,active:done.active,branches:done.branches,snapshots:done.snapshots,peak:done.peak}));
+  }finally{
+   await f.stub.ioRelease('all');
+   await pending.then(async response=>{if(response.body&&!response.body.locked)await response.body.cancel();},()=>{});
+  }
+ },{observed:false,io:true}));
+}
