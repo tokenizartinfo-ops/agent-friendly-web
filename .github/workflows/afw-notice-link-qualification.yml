@@ -11,7 +11,7 @@ on:
 permissions:
   contents: read
 jobs:
-  link-native-final:
+  exact-existing-baseline-diagnostic:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -45,12 +45,12 @@ jobs:
           const text=readFileSync(process.argv[2],'utf8'),count=Number(/^# tests (\d+)$/m.exec(text)?.[1]);console.log('QUALIFICATION selected count',count,'expected',process.argv[3]);if(count!==Number(process.argv[3]))process.exitCode=1;
           NODE
           }
-          timeout --signal=TERM 13m node --test test/mcp-qa-finite-owner-notice-link-native.test.mjs > "$RUNNER_TEMP/link-final.tap" 2>&1
+          timeout --signal=TERM 13m node --test --test-name-pattern='^native notice link existing or conflicting record cannot win link-existing$' test/mcp-qa-finite-owner-notice-link-native.test.mjs > "$RUNNER_TEMP/existing-baseline-diagnostic.tap" 2>&1
           group_status=$?
-          show_tap "$RUNNER_TEMP/link-final.tap"
-          check_count "$RUNNER_TEMP/link-final.tap" 31
+          show_tap "$RUNNER_TEMP/existing-baseline-diagnostic.tap"
+          check_count "$RUNNER_TEMP/existing-baseline-diagnostic.tap" 1
           count_status=$?
-          npx --no-install eslint test/mcp-qa-finite-owner-notice-link-native.test.mjs > "$RUNNER_TEMP/lint.txt" 2>&1
+          npx --no-install eslint test/fixtures/finite-owner-notice-get.mjs > "$RUNNER_TEMP/lint.txt" 2>&1
           lint_status=$?
           cat "$RUNNER_TEMP/lint.txt"
           if [ "$group_status" -ne 0 ] || [ "$count_status" -ne 0 ] || [ "$lint_status" -ne 0 ]; then qualification_status=1; fi
@@ -58,7 +58,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: afw-notice-link-final
+          name: afw-notice-link-existing-baseline-diagnostic
           path: |
             ${{ runner.temp }}/*.tap
             ${{ runner.temp }}/lint.txt

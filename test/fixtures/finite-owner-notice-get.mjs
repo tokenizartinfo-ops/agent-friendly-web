@@ -235,6 +235,13 @@ export function extendFiniteOwnerNoticeGet(entry){
   await this.ctx.storage.sync();
  }
  `;
+ // Passive diagnostic of the original caught Error: guard, throw and return stay intact.
+ const leaseImport="import{createFiniteOwnerRequestLease}from'./lib/mcp-qa-finite-owner-preparation.mjs';";
+ if(entry.split(leaseImport).length!==2)throw Error('SYN initial diagnostic lease import marker');
+ entry=entry.replace(leaseImport,"import{createFiniteOwnerRequestLease,readFiniteOwnerRequestDeadline as noticeDiagnosticDeadline}from'./lib/mcp-qa-finite-owner-preparation.mjs';");
+ const originalRead="try{return await readPrivateQaFiniteOwnerContext({ctx:this.ctx,env:this.env,parent:parent.lease});}catch{return {status:'unavailable'};}finally{parent.finish();}";
+ if(entry.split(originalRead).length!==2)throw Error('SYN initial diagnostic original catch marker');
+ entry=entry.replace(originalRead,"try{return await readPrivateQaFiniteOwnerContext({ctx:this.ctx,env:this.env,parent:parent.lease});}catch(error){let deadline=null;try{deadline=noticeDiagnosticDeadline(parent.lease);}catch{}console.info('NOTICE SYN original phase failure',JSON.stringify({stage:'sdkReadCurrent-catch',at:Date.now(),deadline,signalAborted:parent.lease.signal.aborted,frames:String(error?.stack??'').split('\\n').slice(1,5).map(line=>line.slice(0,240))}));return {status:'unavailable'};}finally{parent.finish();}");
  const fetchMarker='export default{async fetch(request,env){const refs=await request.json();';
  if(entry.split(fetchMarker).length!==2)throw Error('SYN fixed QA DATA fetch marker');
  entry=entry.replace(fetchMarker,`export default{async fetch(request,env){
