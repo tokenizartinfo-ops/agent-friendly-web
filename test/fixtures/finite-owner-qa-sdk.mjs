@@ -8,6 +8,19 @@ export function extendFiniteOwnerQaSdk(entry,{observed=false}={}){
  let methods=`
  async fetch(request){return createPrivateQaFiniteOwnerOAuthReceiver({ctx:this.ctx,env:this.env}).fetch(request);}
  async sdkObservation(){return {queue:this.sdkQueue??null,signals:this.sdkSignals??null,leaseSignals:globalThis.__d02QaSignals??null,held:!!this.sdkRelease,probes:globalThis.__d02Probes??[],primary:this.sdkPrimary??[],rows:[...await this.ctx.storage.list({prefix:'afw.finite-owner-issuer-provenance.v1:'})],calls:this.sdkCalls??[]};}
+
+ async sdkReduceOriginal(){
+  const rows=[...await this.ctx.storage.list()],reservation=JSON.parse(rows.find(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')&&k.endsWith(':reservation'))[1]),expected=JSON.parse(rows.find(([k])=>k.startsWith('afw.finite-owner-issuer-provenance.v1:')&&k.endsWith(':grant'))[1]);
+  const identity=reservation.identity,parent=createFiniteOwnerRequestLease(new Request('https://delegated-canary.agentfriendlyweb.dev/fixture/reduction'));
+  try{
+   const store=phaseIssuerStore({ctx:this.ctx,env:this.env}),window=()=>({startedAt:Date.now(),deadline:Math.min(Date.now()+4500,identity.C1)});
+   const barrier=await store.closeFence({identity,window:window(),fenceRequestId:'22222222-2222-4222-8222-222222222222'},parent.lease);
+   const before=await this.sdkGrant(identity.grantId),observation=await store.observeGrant({identity,barrier,expectedGrant:{scopes:expected.scopes,createdAt:expected.createdAt,expiresAt:expected.expiresAt},window:window()},parent.lease);
+   const reduced=await store.revokeGrant({identity,barrier,observation,window:window()},parent.lease);
+   return {fence:barrier.status,activeAfterFence:before.revoked_at==='',observation:observation.status,reduction:reduced.status,row:reduced.row};
+  }finally{parent.finish();}
+ }
+ async sdkTakeLateCode(){const code=globalThis.__d03LateCode??null;delete globalThis.__d03LateCode;return code;}
  async sdkConfigure(mode='normal'){
   globalThis.__d02Probes=[];
 
@@ -72,13 +85,14 @@ export async function finiteOwnerSdkWorkers(qa,{observed=false,token=false}={}){
  if(token)source=`import {createDelegatedOAuthWorker} from './lib/delegated-oauth-worker.mjs';
  import {forwardPrivateFiniteOwnerOAuth} from './lib/mcp-qa-finite-owner-oauth-forward.mjs';
  import {createFiniteOwnerRequestLease} from './lib/mcp-qa-finite-owner-preparation.mjs';
- const issuer='https://delegated-canary.agentfriendlyweb.dev',worker=createDelegatedOAuthWorker({issuer,resource:issuer+'/mcp'});let tokenPins=null;
+ const issuer='https://delegated-canary.agentfriendlyweb.dev',worker=createDelegatedOAuthWorker({issuer,resource:issuer+'/mcp'});let tokenPins=null,wrongNamespace=false;
  export default{async fetch(request,env,ctx){
   const path=new URL(request.url).pathname;
   if(path==='/fixture/token-config'&&request.method==='POST'){
    const pins=await request.json();tokenPins={AFW_OAUTH_PILOT_CLIENT_ID:pins.clientId,AFW_OAUTH_PILOT_PROJECT_ID:pins.projectId,AFW_OAUTH_PILOT_EXPIRES_AT:pins.expiresAt,ACCESS_AUD:pins.audience,ACCESS_TEAM_DOMAIN:pins.teamDomain};return new Response(null,{status:204});
   }
-  if(path==='/oauth/token'||path==='/mcp'){const headers=new Headers(request.headers);headers.set('Host',new URL(issuer).host);return worker.fetch(new Request(request,{headers}),{...env,...tokenPins},ctx);}
+  if(path==='/fixture/token-namespace'&&request.method==='POST'){wrongNamespace=true;return new Response(null,{status:204});}
+  if(path==='/oauth/token'||path==='/mcp'){const headers=new Headers(request.headers);headers.set('Host',new URL(issuer).host);return worker.fetch(new Request(request,{headers}),{...env,...tokenPins,...(wrongNamespace?{OAUTH_KV:env.SYN_WRONG_KV}:{})},ctx);}
   if(path!=='/authorize')return new Response(null,{status:404});
   const root=createFiniteOwnerRequestLease(request);try{return await forwardPrivateFiniteOwnerOAuth({request,env,ctx},root.lease);}finally{root.finish();}
  }};`;
@@ -94,7 +108,7 @@ export async function finiteOwnerSdkWorkers(qa,{observed=false,token=false}={}){
  console.info('D02 fixture M compiler',JSON.stringify({bytes:built.outputFiles[0].contents.length,sha256:createHash('sha256').update(built.outputFiles[0].contents).digest('hex'),inputs:Object.keys(built.metafile.inputs).length}));
  return {...(qa.resourcePersistencePath?{resourcePersistencePath:qa.resourcePersistencePath}:{}),workers:[{...qa,name:'qa-sdk'},{
   name:'m-sdk',modules:true,script:built.outputFiles[0].text,compatibilityDate:mProfile.compatibility_date,compatibilityFlags:mProfile.compatibility_flags,
-  kvNamespaces:{OAUTH_KV:'finite-sdk-shared'},
+  kvNamespaces:{OAUTH_KV:'finite-sdk-shared',...(token?{SYN_WRONG_KV:'finite-sdk-wrong'}:{})},
   ...(token?{d1Databases:{DB:qa.d1Databases.RELEASE_DB},ratelimits:{DELEGATED_RATE_LIMITER:{namespace_id:'99123',simple:{limit:1000,period:60}}}}:{}),
   bindings:{...(token?{AFW_DELEGATED_OAUTH_ENABLED:'true',AFW_OAUTH_REFRESH_ENABLED:'false',AFW_OAUTH_SERVICE_MODE:'window',AFW_DOSSIER_EVENTS_ENABLED:'false'}:{}),AFW_FINITE_TRIAL_VERSION:{id:'77777777-7777-4777-8777-777777777777'}},
   durableObjects:{AFW_FINITE_TRIAL_CONTROL:{className:'Initial',scriptName:'qa-sdk',useSQLite:true,uniqueKey:'initial-c2a'}}
@@ -130,4 +144,12 @@ export async function readSyntheticIssuedGrantProps(code,grant){
  const key=await crypto.subtle.unwrapKey('raw',Buffer.from(grant.authCodeWrappedKey,'base64'),wrapping,{name:'AES-KW'},{name:'AES-GCM'},false,['decrypt']);
  const bytes=await crypto.subtle.decrypt({name:'AES-GCM',iv:new Uint8Array(12)},key,Buffer.from(grant.encryptedProps,'base64'));
  return JSON.parse(new TextDecoder().decode(bytes));
+}
+
+/** Test-only observation of the actual SDK Promise result, before the original
+ * await/recheck rejects a terminally reduced operation. No result substitution. */
+export function instrumentFiniteOwnerQaSdkLate(source){
+ const needle="actualPromise=retain(Promise.resolve().then(()=>{check();return call();}));position='sdk-pending';";
+ if(source.split(needle).length!==2)throw Error('SYN late observation point changed');
+ return source.replace(needle,"actualPromise=retain(Promise.resolve().then(()=>{check();return call();}).then(value=>{if(op==='sdk_complete')globalThis.__d03LateCode=new URL(value.redirectTo).searchParams.get('code');return value;}));position='sdk-pending';");
 }

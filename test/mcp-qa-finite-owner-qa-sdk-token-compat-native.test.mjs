@@ -6,8 +6,8 @@ import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
 import {seedFiniteOwnerSdkClient,readSyntheticIssuedGrantProps} from './fixtures/finite-owner-qa-sdk.mjs';
 const PREP='__Host-afw-finite-prepare='+'a'.repeat(64);
 const plain=async p=>{const v=await p;try{return JSON.parse(JSON.stringify(v));}finally{v?.[Symbol.dispose]?.();}};
-async function world(fn){
- const f=await initialEntryHarness('phase-context-sdk-token');
+async function world(fn,{late=false}={}){
+ const f=await initialEntryHarness('phase-context-sdk-token'+(late?'-late':''));
  try{
   await f.stub.configure('normal');assert.equal((await plain(f.stub.invoke(f.refs))).status,'material_recorded');await f.stub.restoreMethods();
   f.phaseCurrent=await plain(f.stub.seedPhaseFacts('settled',null));assert.equal(f.phaseCurrent.fixtureError,undefined);
@@ -16,7 +16,7 @@ async function world(fn){
   await seedFiniteOwnerSdkClient(f.mf,f.source);
   f.history=await plain(f.stub.sdkGrants());f.kv=await f.mf.getKVNamespace('OAUTH_KV','m-sdk');
   f.verifier='v'.repeat(64);f.challenge=createHash('sha256').update(f.verifier).digest('base64url');
-  const configured=await f.mf.dispatchFetch(f.source.origin+'/fixture/token-config',{method:'POST',body:JSON.stringify({clientId:f.source.clientId,projectId:f.source.project.projectId,audience:f.source.access.audience,teamDomain:f.source.access.teamDomain,expiresAt:new Date(Date.now()+600000).toISOString()})});assert.equal(configured.status,204);
+  const configured=await f.mf.dispatchFetch(f.source.origin+'/fixture/token-config',{method:'POST',body:JSON.stringify({clientId:f.source.clientId,projectId:f.source.project.projectId,audience:f.source.access.audience,teamDomain:f.source.access.teamDomain,expiresAt:new Date(f.source.window.expiresAt).toISOString()})});assert.equal(configured.status,204);
   f.get=()=>f.mf.dispatchFetch(f.source.origin+'/authorize?'+new URLSearchParams({client_id:f.source.clientId,redirect_uri:'https://client.example/cb',response_type:'code',resource:f.source.resource,scope:'afw:project:read',state:'SYN-state',code_challenge:f.challenge,code_challenge_method:'S256'}),{redirect:'manual',headers:f.headers});
   f.post=form=>f.mf.dispatchFetch(f.source.origin+'/authorize',{method:'POST',redirect:'manual',headers:{...f.headers,Origin:f.source.origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:PREP+'; '+form.cookie},body:new URLSearchParams({handle:form.handle,decision:'approve',scope:'afw:project:read'})});
   await fn(f);
@@ -52,7 +52,7 @@ async function readSummary(f,token){
 }
 test('valid actual QA code exchanges through actual M bounded response and actual MCP original permission',()=>world(async f=>{
  const x=await issued(f),r=await exchange(f,x);assert.equal(r.status,200);const payload=await r.json();
- assert.equal(typeof payload.access_token,'string');assert.equal(payload.token_type.toLowerCase(),'bearer');assert.equal(payload.refresh_token,undefined);
+ assert.equal(typeof payload.access_token,'string');assert.equal(payload.token_type.toLowerCase(),'bearer');assert.equal(Object.hasOwn(payload,'refresh_token'),false);
  assert(payload.expires_in>0&&payload.expires_in<=300);assert(payload.expires_in<=Math.floor((Date.parse(x.app.expires_at)-Date.now())/1000)+1);
  assert.equal(r.headers.get('Cache-Control'),'no-store');
  const summary=await readSummary(f,payload.access_token);assert.equal(summary.isError,undefined);assert.equal(summary.structuredContent.data.id,x.app.project_id);
@@ -88,4 +88,78 @@ for(const field of ['userId','projectId'])for(const kind of ['missing','wrong'])
  }else{const error=await r.json();assert.equal(error.error,'invalid_grant');}
  assert.equal(tokenStatus,400,'exact redundant tuple must deny before consumeExchange');
  const app=await plain(f.stub.sdkGrant(x.app.id));assert.equal(app.exchanged_at,'');
+}));
+
+async function deniedExchange(f,x,patch={},expected){
+ const r=await exchange(f,x,patch),status=r.status;let error;
+ const body=await r.text();try{error=JSON.parse(body).error;}catch{/* Keep the actual non-JSON denial status. */}
+ assert([400,401,503].includes(status),'actual OAuth route must deny');if(expected)assert.equal(error,expected);
+ console.info('D03 denial stage',JSON.stringify({case:f.negative,tokenStatus:status,oauthError:error}));
+ return error;
+}
+for(const fault of ['pkce','client','resource','namespace','missing-app','wrong-app','sdk-subject','owner','native-project','granted-scope','requested-scope','consumed-exchange'])test('actual original QA code negative '+fault,()=>world(async f=>{
+ const x=await issued(f);f.negative=fault;
+ let patch={};
+ if(fault==='pkce')patch={code_verifier:'wrong'.repeat(16)};
+ if(fault==='client')patch={client_id:'SYN-other-client'};
+ if(fault==='resource')patch={resource:'https://foreign.example/mcp'};
+ if(fault==='namespace'){
+  const r=await f.mf.dispatchFetch(f.source.origin+'/fixture/token-namespace',{method:'POST'});assert.equal(r.status,204);
+ }
+ if(fault==='missing-app'||fault==='wrong-app')await corruptProps(f,x,p=>{if(fault==='missing-app')delete p.applicationGrantId;else p.applicationGrantId='eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee';});
+ if(fault==='sdk-subject')await f.kv.put(x.key,JSON.stringify({...x.grant,userId:'SYN-foreign'}));
+ if(fault==='owner')await f.db.prepare('UPDATE site_projects SET user_id=? WHERE id=?').bind('SYN-foreign',x.app.project_id).run();
+ if(fault==='native-project')await f.db.prepare('UPDATE delegated_access_grants SET project_id=? WHERE id=?').bind('SYN-foreign',x.app.id).run();
+ if(fault==='granted-scope')await f.kv.put(x.key,JSON.stringify({...x.grant,scope:['afw:project:read','afw:evidence:read']}));
+ if(fault==='requested-scope')patch={scope:'afw:project:read afw:evidence:read'};
+ if(fault==='consumed-exchange')await f.db.prepare('UPDATE delegated_access_grants SET exchanged_at=? WHERE id=?').bind(new Date().toISOString(),x.app.id).run();
+ await deniedExchange(f,x,patch);
+ const row=await plain(f.stub.sdkGrant(x.app.id));assert.equal(row.revoked_at,'');if(fault!=='consumed-exchange')assert.equal(row.exchanged_at,'','denial did not consume original application exchange');
+}));
+test('real code reuse denies without a second application grant; SDK family behavior is separate',()=>world(async f=>{
+ const x=await issued(f),first=await exchange(f,x);assert.equal(first.status,200);const payload=await first.json();
+ assert.equal((await readSummary(f,payload.access_token)).isError,undefined);
+ const before=await plain(f.stub.sdkGrant(x.app.id));f.negative='code-reuse';await deniedExchange(f,x);
+ assert.deepEqual(await plain(f.stub.sdkGrant(x.app.id)),before);
+ const after=await rawMcp(f,payload.access_token);console.info('D03 actual vendor reuse family',JSON.stringify({mcpStatus:after.status,code:after.result?.result?.structuredContent?.code??null,originalApplicationUnchanged:true}));
+}));
+for(const reduction of ['revoke','expire'])test('actual original '+reduction+' before token denies actual callback',()=>world(async f=>{
+ const x=await issued(f);f.negative=reduction;
+ if(reduction==='revoke'){const r=await plain(f.stub.sdkReduceOriginal());assert.equal(r.fence,'fenced');assert.equal(r.activeAfterFence,true,'fence alone did not revoke the active row');assert.equal(r.reduction,'revoked');}
+ else await f.db.prepare('UPDATE delegated_access_grants SET expires_at=? WHERE id=?').bind(new Date(Date.now()-1000).toISOString(),x.app.id).run();
+ await deniedExchange(f,x,{},'invalid_grant');
+ assert.equal((await plain(f.stub.sdkGrant(x.app.id))).exchanged_at,'');
+}));
+for(const reduction of ['revoke','expire'])test('otherwise valid actual token loses actual MCP permission after original '+reduction,()=>world(async f=>{
+ const x=await issued(f),r=await exchange(f,x);assert.equal(r.status,200);const payload=await r.json();
+ assert.equal((await readSummary(f,payload.access_token)).isError,undefined);
+ if(reduction==='revoke'){const reduced=await plain(f.stub.sdkReduceOriginal());assert.equal(reduced.fence,'fenced');assert.equal(reduced.activeAfterFence,true);assert.equal(reduced.reduction,'revoked');}
+ else await f.db.prepare('UPDATE delegated_access_grants SET expires_at=? WHERE id=?').bind(new Date(Date.now()-1000).toISOString(),x.app.id).run();
+ const denied=await rawMcp(f,payload.access_token);assert.equal(denied.status,200,'SDK cryptography still accepted; permission is checked separately');
+ assert.equal(denied.result.result.isError,true);assert.equal(denied.result.result.structuredContent.code,'delegated_access_denied');assert.equal(denied.result.result.structuredContent.data,undefined);
+ console.info('D03 actual permission reduction',JSON.stringify({reduction,http:denied.status,code:denied.result.result.structuredContent.code}));
+}));
+test('held actual SDK completion settles late after original terminal fence and real grant reduction',{timeout:45000},()=>world(async f=>{
+ const form=await consent(f);await f.stub.sdkConfigure('hold-put');const pending=f.post(form);
+ let held=false;for(let n=0;n<1000;n++){const s=await plain(f.stub.sdkObservation());if(s.held){held=true;assert(s.rows.some(([k])=>k.endsWith('sdk_complete:send')));assert(!s.rows.some(([k])=>k.endsWith('sdk_complete:observed')));break;}await new Promise(r=>setTimeout(r,20));}
+ assert.equal(held,true);const app=await plain(f.stub.sdkGrant(form.identity.grantId));assert(app);assert.equal(app.revoked_at,'');
+ const reduced=await plain(f.stub.sdkReduceOriginal());assert.equal(reduced.activeAfterFence,true);assert.equal(reduced.fence,'fenced');assert.equal(reduced.reduction,'revoked');
+ await f.stub.sdkReleaseHeld();const response=await pending;assert.equal(response.status,503);await response.body?.cancel();
+ let code;for(let n=0;n<100;n++){code=await f.stub.sdkTakeLateCode();if(code)break;await new Promise(r=>setTimeout(r,20));}
+ assert.equal(typeof code,'string','observe only actual SDK complete result, transiently');
+ f.negative='late-completion-after-terminal-reduction';await deniedExchange(f,{code},{},'invalid_grant');
+ const after=await plain(f.stub.sdkObservation());assert(!after.rows.some(([k])=>k.endsWith('sdk_complete:observed')));
+ assert.notEqual((await plain(f.stub.sdkGrant(app.id))).revoked_at,'');
+ console.info('D03 late completion',JSON.stringify({actualSdkSettled:true,applicationRevoked:true,tokenDenied:true,physicalKvDrain:'not-proven'}));
+},{late:true}));
+
+test('SYN reduction of original issued expiry clamps actual token response below SDK default',()=>world(async f=>{
+ const x=await issued(f),expiresAt=new Date(Date.now()+90000).toISOString();
+ // Labelled timestamp reduction on this original already-issued native row.
+ await f.db.prepare('UPDATE delegated_access_grants SET expires_at=? WHERE id=?').bind(expiresAt,x.app.id).run();
+ const r=await exchange(f,x);assert.equal(r.status,200);const payload=await r.json();
+ assert(payload.expires_in>0&&payload.expires_in<=90);assert.equal(Object.hasOwn(payload,'refresh_token'),false);
+ assert(payload.expires_in<=Math.floor((Date.parse(expiresAt)-Date.now())/1000)+1);
+ assert.equal((await readSummary(f,payload.access_token)).isError,undefined);
+ console.info('D03 reduced original expiry bound',JSON.stringify({expiresIn:payload.expires_in,refresh:false,actualClock:true}));
 }));
