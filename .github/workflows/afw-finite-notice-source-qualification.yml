@@ -23,5 +23,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: RED concurrent monitoring failure
-        run: node --test --test-name-pattern="REAL concurrent monitoring failure cannot return applied after emitted consent" test/mcp-qa-finite-preparation-notice-native.test.mjs
+      - name: GREEN concurrent monitoring failure and five regressions
+        run: node --test --test-name-pattern="REAL concurrent monitoring failure|REAL post-commit notice ACK loss|REAL held native SQL settlement|REAL first notice uses native original issuer grant" test/mcp-qa-finite-preparation-notice-native.test.mjs
+      - name: Lint three scoped product files
+        if: always()
+        run: node node_modules/eslint/bin/eslint.js lib/mcp-qa-finite-preparation-issuer-store.mjs test/fixtures/finite-preparation-issuer-worker.mjs test/mcp-qa-finite-preparation-notice-native.test.mjs
