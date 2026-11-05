@@ -52,6 +52,6 @@ test('pure helpers reject accessors, symbols and callback/options without execut
 });
 test('shared predicates never acquire source, store or QA decoder authority',async()=>{
  for(const path of ['lib/mcp-qa-finite-owner-stage-facts.mjs','lib/mcp-qa-finite-preparation-enrollment-facts.mjs']){
-  const text=await readFile(path,'utf8');assert.doesNotMatch(text,/from ['"].*(?:bootstrap|residency|owner-preparation|preparation-store)['"]/);assert.doesNotMatch(text,/\b(?:fetch|resolve|stageHistory)\s*\(/);
+  const text=await readFile(path,'utf8');assert.doesNotMatch(text,/from ['"].*(?:bootstrap|residency|owner-preparation|preparation-store)(?:\.mjs)?['"]/);assert.doesNotMatch(text,/\b(?:fetch|resolve|stageHistory)\s*\(/);
  }
 });

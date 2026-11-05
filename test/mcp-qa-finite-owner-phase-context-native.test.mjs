@@ -89,3 +89,6 @@ test('existing orphan original fence denies without global grant lookup',()=>wor
 test('failed schema SELECT denies and malformed existing table never falls back',()=>world(async f=>{
  assert.equal((await read(f,'schema-failure')).status,'unavailable');await f.db.prepare('DROP TABLE finite_preparation_issuer_fences').run();await f.db.prepare('CREATE TABLE finite_preparation_issuer_fences (preconnection_id TEXT PRIMARY KEY)').run();assert.equal((await read(f)).status,'unavailable');
 }));
+
+for(const prefix of ['snapshot-only','snapshot-map'])test('exact original metadata prefix remains closed without ticket: '+prefix,()=>world(async f=>{await seed(f,prefix);const before=await plain(f.stub.snapshot()),r=await read(f);assert.equal(r.fixtureError,undefined,JSON.stringify(r));assert.equal(r.source.phase,'closed_ui');assert.deepEqual(await plain(f.stub.snapshot()),before);}));
+for(const fault of ['orphan-ticket-use','foreign-snapshot','stale-snapshot','later-approval','extra'])test('missing original ticket never relaxes '+fault,()=>world(async f=>{await seed(f,'snapshot-only');await f.stub.phaseCorrupt(fault);assert.equal((await read(f)).status,'unavailable');}));

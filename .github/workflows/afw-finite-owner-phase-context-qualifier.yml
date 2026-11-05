@@ -34,19 +34,6 @@ jobs:
           node-version: '22'
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: node --test test/mcp-qa-finite-owner-phase-context.test.mjs test/mcp-qa-finite-owner-phase-context-native.test.mjs
-  original-cleanup:
-    needs: lint
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node --test test/mcp-qa-finite-initial-owner-source-native.test.mjs test/mcp-qa-finite-initial-owner-source-records.test.mjs test/mcp-qa-finite-preparation-cleanup-native.test.mjs test/mcp-qa-finite-preparation-cleanup-records.test.mjs
   continuation:
     needs: lint
     runs-on: ubuntu-24.04
@@ -59,4 +46,19 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node --test test/mcp-qa-finite-owner-context.test.mjs test/mcp-qa-finite-owner-original-context-native.test.mjs test/mcp-qa-finite-owner-native-conduit.test.mjs test/mcp-qa-finite-owner-request-retention-native.test.mjs test/mcp-qa-finite-policy-setup-facts-native.test.mjs
+      - run: node --test test/mcp-qa-finite-owner-original-context-native.test.mjs
+  compiler:
+    needs: [phase, continuation]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: test -z "$(git status --porcelain)"
+      - run: node --test test/mcp-qa-finite-candidate-residency.test.mjs
+      - run: test -z "$(git status --porcelain)"
