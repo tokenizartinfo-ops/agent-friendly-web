@@ -31,20 +31,23 @@ jobs:
       - name: DIAGNOSTIC native M actual promise chain
         run: |
           set +e
-          node --test --test-name-pattern='^native consent failed body retains actual cancellation (M|held read M) test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/notice-post.tap" 2>&1
+          node --test --test-name-pattern='^native consent failed body retains actual cancellation (M|held read M)$' test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/notice-post-native.tap" 2>&1
           code=$?
-          tail -n 12 "$RUNNER_TEMP/notice-post.tap"
-          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-post.tap"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-post.tap"; fi
+          grep -E '^# Subtest:|^(not )?ok [0-9]|^# (tests|pass|fail|skipped|cancelled|duration_ms)' "$RUNNER_TEMP/notice-post-native.tap"
+          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-post-native.tap"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-post-native.tap"; fi
           exit "$code"
         env:
           AFW_NOTICE_BUNDLE_CAPTURE: '1'
+      - name: Lint changed fixture and test
+        if: ${{ !cancelled() }}
+        run: npx --no-install eslint test/mcp-qa-finite-owner-notice-consent-native.test.mjs test/fixtures/finite-owner-notice-get.mjs test/fixtures/finite-owner-qa-sdk.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: notice-consent-post-${{ github.sha }}
+          name: notice-consent-post-native-${{ github.sha }}
           path: |
             ${{ runner.temp }}/afw-notice-get-bundles
-            ${{ runner.temp }}/notice-post.tap
+            ${{ runner.temp }}/notice-post-native.tap
           retention-days: 7
   get-regressions:
     runs-on: ubuntu-latest
@@ -58,170 +61,23 @@ jobs:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Native actual actor restart
-        if: ${{ !cancelled() }}
         run: |
           set +e
-          node --test --test-name-pattern='^native consent lost native result never reconstructs ACK after actual actor restart > "$RUNNER_TEMP/notice-regression-0.log" 2>&1
+          node --test --test-name-pattern='^native consent lost native result never reconstructs ACK after actual actor restart$' test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/notice-get-regressions.tap" 2>&1
           code=$?
-          tail -n 12 "$RUNNER_TEMP/notice-regression-0.log"
-          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-regression-0.log"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-0.log" || cat "$RUNNER_TEMP/notice-regression-0.log"; fi
+          grep -E '^# Subtest:|^(not )?ok [0-9]|^# (tests|pass|fail|skipped|cancelled|duration_ms)' "$RUNNER_TEMP/notice-get-regressions.tap"
+          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-get-regressions.tap"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-get-regressions.tap"; fi
           exit "$code"
         env:
           AFW_NOTICE_BUNDLE_CAPTURE: '1'
-      - name: Lint changed
+      - name: Lint changed fixture and test
         if: ${{ !cancelled() }}
-        run: |
-          set +e
-          npx --no-install eslint test/mcp-qa-finite-owner-notice-consent-native.test.mjs test/fixtures/finite-owner-notice-get.mjs test/fixtures/finite-owner-qa-sdk.mjs > "$RUNNER_TEMP/notice-regression-5.log" 2>&1
-          code=$?
-          tail -n 12 "$RUNNER_TEMP/notice-regression-5.log"
-          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-regression-5.log"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-5.log" || cat "$RUNNER_TEMP/notice-regression-5.log"; fi
-          exit "$code"
-        env:
-          AFW_NOTICE_BUNDLE_CAPTURE: '1'
+        run: npx --no-install eslint test/mcp-qa-finite-owner-notice-consent-native.test.mjs test/fixtures/finite-owner-notice-get.mjs test/fixtures/finite-owner-qa-sdk.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: notice-consent-get-${{ github.sha }}
+          name: notice-consent-get-regressions-${{ github.sha }}
           path: |
             ${{ runner.temp }}/afw-notice-get-bundles
-            ${{ runner.temp }}/notice-regression-*.log
-          retention-days: 7
- test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/notice-post.tap" 2>&1
-          code=$?
-          tail -n 12 "$RUNNER_TEMP/notice-post.tap"
-          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-post.tap"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-post.tap"; fi
-          exit "$code"
-        env:
-          AFW_NOTICE_BUNDLE_CAPTURE: '1'
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: notice-consent-post-${{ github.sha }}
-          path: |
-            ${{ runner.temp }}/afw-notice-get-bundles
-            ${{ runner.temp }}/notice-post.tap
-          retention-days: 7
-  get-regressions:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: GET focal passive marker regressions
-        if: ${{ !cancelled() }}
-        run: |
-          set +e
-          node --test --test-name-pattern='^two complete snapshots reject SYN own-state drift' test/mcp-qa-finite-owner-notice-get-native.test.mjs > "$RUNNER_TEMP/notice-regression-0.log" 2>&1
-          code=$?
-          tail -n 12 "$RUNNER_TEMP/notice-regression-0.log"
-          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-regression-0.log"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-0.log" || cat "$RUNNER_TEMP/notice-regression-0.log"; fi
-          exit "$code"
-        env:
-          AFW_NOTICE_BUNDLE_CAPTURE: '1'
-      - name: Lint changed
-        if: ${{ !cancelled() }}
-        run: |
-          set +e
-          npx --no-install eslint test/mcp-qa-finite-owner-notice-consent-native.test.mjs test/fixtures/finite-owner-notice-get.mjs test/fixtures/finite-owner-qa-sdk.mjs > "$RUNNER_TEMP/notice-regression-5.log" 2>&1
-          code=$?
-          tail -n 12 "$RUNNER_TEMP/notice-regression-5.log"
-          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-regression-5.log"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-5.log" || cat "$RUNNER_TEMP/notice-regression-5.log"; fi
-          exit "$code"
-        env:
-          AFW_NOTICE_BUNDLE_CAPTURE: '1'
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: notice-consent-get-${{ github.sha }}
-          path: |
-            ${{ runner.temp }}/afw-notice-get-bundles
-            ${{ runner.temp }}/notice-regression-*.log
-          retention-days: 7
- test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/notice-regression-0.log" 2>&1
-          code=$?
-          tail -n 12 "$RUNNER_TEMP/notice-regression-0.log"
-          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-regression-0.log"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-0.log" || cat "$RUNNER_TEMP/notice-regression-0.log"; fi
-          exit "$code"
-        env:
-          AFW_NOTICE_BUNDLE_CAPTURE: '1'
-      - name: Lint changed
-        if: ${{ !cancelled() }}
-        run: |
-          set +e
-          npx --no-install eslint test/mcp-qa-finite-owner-notice-consent-native.test.mjs test/fixtures/finite-owner-notice-get.mjs test/fixtures/finite-owner-qa-sdk.mjs > "$RUNNER_TEMP/notice-regression-5.log" 2>&1
-          code=$?
-          tail -n 12 "$RUNNER_TEMP/notice-regression-5.log"
-          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-regression-5.log"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-5.log" || cat "$RUNNER_TEMP/notice-regression-5.log"; fi
-          exit "$code"
-        env:
-          AFW_NOTICE_BUNDLE_CAPTURE: '1'
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: notice-consent-get-${{ github.sha }}
-          path: |
-            ${{ runner.temp }}/afw-notice-get-bundles
-            ${{ runner.temp }}/notice-regression-*.log
-          retention-days: 7
- test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/notice-post.tap" 2>&1
-          code=$?
-          tail -n 12 "$RUNNER_TEMP/notice-post.tap"
-          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-post.tap"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-post.tap"; fi
-          exit "$code"
-        env:
-          AFW_NOTICE_BUNDLE_CAPTURE: '1'
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: notice-consent-post-${{ github.sha }}
-          path: |
-            ${{ runner.temp }}/afw-notice-get-bundles
-            ${{ runner.temp }}/notice-post.tap
-          retention-days: 7
-  get-regressions:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: GET focal passive marker regressions
-        if: ${{ !cancelled() }}
-        run: |
-          set +e
-          node --test --test-name-pattern='^two complete snapshots reject SYN own-state drift' test/mcp-qa-finite-owner-notice-get-native.test.mjs > "$RUNNER_TEMP/notice-regression-0.log" 2>&1
-          code=$?
-          tail -n 12 "$RUNNER_TEMP/notice-regression-0.log"
-          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-regression-0.log"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-0.log" || cat "$RUNNER_TEMP/notice-regression-0.log"; fi
-          exit "$code"
-        env:
-          AFW_NOTICE_BUNDLE_CAPTURE: '1'
-      - name: Lint changed
-        if: ${{ !cancelled() }}
-        run: |
-          set +e
-          npx --no-install eslint test/mcp-qa-finite-owner-notice-consent-native.test.mjs test/fixtures/finite-owner-notice-get.mjs test/fixtures/finite-owner-qa-sdk.mjs > "$RUNNER_TEMP/notice-regression-5.log" 2>&1
-          code=$?
-          tail -n 12 "$RUNNER_TEMP/notice-regression-5.log"
-          if [ "$code" -ne 0 ]; then head -n 16 "$RUNNER_TEMP/notice-regression-5.log"; grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-5.log" || cat "$RUNNER_TEMP/notice-regression-5.log"; fi
-          exit "$code"
-        env:
-          AFW_NOTICE_BUNDLE_CAPTURE: '1'
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: notice-consent-get-${{ github.sha }}
-          path: |
-            ${{ runner.temp }}/afw-notice-get-bundles
-            ${{ runner.temp }}/notice-regression-*.log
+            ${{ runner.temp }}/notice-get-regressions.tap
           retention-days: 7
