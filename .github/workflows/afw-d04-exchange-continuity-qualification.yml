@@ -22,4 +22,5 @@ jobs:
         run: npx eslint lib/mcp-qa-finite-owner-phase-context.mjs test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs test/fixtures/finite-initial-entry-world.mjs
       - name: D04 full DO snapshot immutable principal GREEN
         run: |
-          node --test --test-reporter=tap --test-name-pattern='^D04 actual exchange retains factual read_consent and immutable grant ACK
+          node --test --test-reporter=tap --test-name-pattern='D04 actual exchange retains factual read_consent and immutable grant ACK' test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs | tee principal.tap
+          node --input-type=module -e "import{readFileSync}from'node:fs';import assert from'node:assert/strict';const s=readFileSync('principal.tap','utf8');assert.equal(Number(s.match(/^# tests (\d+)$/m)?.[1]),1);assert.equal(Number(s.match(/^# pass (\d+)$/m)?.[1]),1);assert.equal(Number(s.match(/^# fail (\d+)$/m)?.[1]),0);console.info('Meaningful selected count: 1');"
