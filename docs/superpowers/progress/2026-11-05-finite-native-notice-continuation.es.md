@@ -17,11 +17,11 @@ BASE exacto **953e7af1fc20b59c59d8e4a03dcf398d98165cf5**, árbol **ee77df20d2c22
 
 Único writer fuente: **implement_notice_link**, fresco Sol high/fork none, ya confirmó lectura completa. READ FIRST briefs/2026-11-05-finite-native-notice-link.md (45516chars, blob61f7a5f4b3c996feeb580c7f37843fd14f0272d7); preflight reviews/2026-11-05-finite-native-notice-link-preflight.es.md (blob5cfbf0f7a1bd62437b0891ea3de97de0281bc564). Ledger progress/2026-11-05-finite-native-notice-link.es.md. Reporte futuro reports/2026-11-05-finite-native-notice-link.md.
 
-Cuatro paths: phase-context, fixtureGET existente, nuevo Linknative y Consentnative existente. Qualifier temporal afw-notice-link-qualification.yml, máximo tres jobs independientes de quince minutos, sin secretos. Root no toca fuente mientras writer activo. Futuro reviewer fresco después del informe completo, nunca helper/reviewer propio del writer.
+Cuatro paths: phase-context, fixtureGET existente, nuevo Linknative y Consentnative existente. Qualifier temporal afw-notice-link-qualification.yml, máximo tres jobs independientes de quince minutos, sin secretos. Root no toca fuente mientras writer activo. Primer checkpoint71c1e67ed1c15269f177a6413b2a6c4901cc57f0: RED causal42114322347/job127549785870, Linkausente despuésPOST200/event1/ACKnativos; carry2settlementPASS. Root leyó primaria/artefacto13453534727/digest. Producto aún sin Link en ese checkpoint; writer implementa mínimo/corpus, no repetirRED. Futuro reviewer fresco después del informe completo, nunca helper/reviewer propio del writer.
 
 Rulings: misma child/SQLPromise/result/ownSend/ownAck reales hasta putLink→sync→readback→par completo; estados explícitos, sin pending permisivo ni backfill. NoticeLink5campos/hash camelCase, separado del journal5filasnormal/max6/cap7. acceptedAt dentro ventana histórica5s; observer posterior usa límites actuales sin convertir historia en nuevo permiso. Helpers Node SYN fijos compartidos sólo en fixtureGET para evitar duplicación/ciclo; sin factory de autoridad o nuevo archivo. Reforzar dos asserts Minor. Preflight contiene tabla, casos y límites completos.
 
-Diseño30981d2a2f15bd49d1d0226358486e2ec0262b07 reconciliado y copiado aBASE, no seguir WIP como diseño nuevo. No duplicar este despacho ni rehacer POST.
+Diseño30981d2a2f15bd49d1d0226358486e2ec0262b07 reconciliado y copiado aBASE, no seguir WIP como diseño nuevo. No duplicar este despacho ni rehacer POST. Diseñador original en paralelo produce sólo informe preliminar notices-publication (sin spec/plan ni ejecución), pin953; notices no exige Link por contrato histórico, finite sí. Lease viva de aprobación/admisión no se reconstruye desde DATA. Esperar informe antes de elegir el siguiente corte.
 
 ## Gates operativos pendientes
 
