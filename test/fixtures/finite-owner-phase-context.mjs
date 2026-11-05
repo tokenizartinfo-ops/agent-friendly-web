@@ -138,6 +138,13 @@ import {sealFiniteInitialUploadRecord as phaseSealUpload,encodeFiniteInitialUplo
  const start=entry.indexOf(' async ownerSourceRead('),end=entry.indexOf(' async ownerEffectCount()',start);
  if(start<0||end<start)throw Error('Original native request harness missing');
  let method=entry.slice(start,end).replace('async ownerSourceRead(','async phaseContextRead(').replaceAll('readPrivateQaFiniteInitialOwnerSource(','readPrivateQaFiniteOwnerContext(');
+ // These legacy regressions intentionally hold ONE actual operation. Concurrent
+ // source credentials must not overwrite the single release RPC's callback.
+ const heldNeedle="if(['held-fetch','held-body','held-cancel'].includes(mode)){const owner=this;globalThis.fetch=(...args)=>Reflect.apply(fetcher,globalThis,args).then(async response=>{";
+ const heldReplacement="if(['held-fetch','held-body','held-cancel'].includes(mode)){let phaseHeld=false;const owner=this;globalThis.fetch=(...args)=>Reflect.apply(fetcher,globalThis,args).then(async response=>{if(phaseHeld)return response;phaseHeld=true;";
+ if(method.split(heldNeedle).length!==2)throw Error('SYN exact phase held-operation hook changed');
+ method=method.replace(heldNeedle,heldReplacement);
+
  // Read-only journal transactions are real transactions; mutation methods throw.
  method=method.replace("s.put=noWrite;s.transaction=noWrite;s.sync=noWrite;","s.put=noWrite;s.delete=noWrite;s.sync=noWrite;s.transaction=fn=>Reflect.apply(transaction,s,[tx=>fn({get:(...a)=>tx.get(...a),list:(...a)=>tx.list(...a),put:noWrite,delete:noWrite,setAlarm:noWrite,deleteAlarm:noWrite})]);");
  method=method.replace('put=s.put,transaction=', 'put=s.put,del=s.delete,transaction=').replace('s.put=put;s.transaction=', 's.put=put;s.delete=del;s.transaction=');
