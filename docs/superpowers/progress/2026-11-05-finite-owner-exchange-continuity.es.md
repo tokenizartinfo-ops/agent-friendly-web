@@ -1,3 +1,17 @@
+# CHECKPOINT VIGENTE — store avisos aceptado; provenance ACTIVO, 5nov2026
+
+Store fuente COMPLETE trasfix1: BASE7a2a1c1f..report4016c13d27ecc80467b73e978158ca05caad1f13, codebca2a33b, reviewAstrahighImportantADDRESSED/SpecPass/QualityApproved,0C/Iabiertos. Rootprimarias147Pantesfix/8dirigidospostfix;38fixturebuilds/0standard. Casoabsorciónconcurrentereproducido/corregido; filaya-commitconservada,no physicalcancel. Recibo reviews/2026-11-05-finite-preparation-notice-store.es.md; fullreview3c360958/scoped785d7b49. Originalmétodos/SQL/input/preflightbyteexact; qualifierretirado. D0.1/2/3/4/fanout/store no se redispatchan por compactación. MinorD03/fanout/toolingwarnings diferidos para triagefinalwholebranch.
+
+ÚNICO productwriter ACTIVO implement_notice_provenance(Solhigh), BASE04c49dcc48b37f7fe825daa6c1c0747c5822d74e/tree7b13cf0a4262f7d5d5b8695c3bda3875d63e0bef, rama feat/finite-native-cleanup-20261101. READFIRST brief docs/superpowers/briefs/2026-11-05-finite-native-notice-provenance.md, preflight/progress mismo basename. Exactamente5nuevosfiles(codec/journal/2tests/fixture), report reports/2026-11-05-finite-native-notice-provenance.md. Rootdocsrama separada; designer terminó39ba/6d13 y nadie más muta producto. Nuevojournal6claves(list7), ACKDATA≠pruebaSQL/humano/autoridad; recordednuevo sólocontinuaciónfutura, existing/uncertain noSQL. Fuenteprivada/receptor aún no implementados. No agentehelpers/reviewerpropio.
+
+Rootleyó diseños/preflight/rulings: contexto.waitya retiene y noexcluyeporSetpending; pruebaexclusiónoriginalsóloobserverexternoreal/segunda leaseSYNvigente(noabortada)mismodeadline; codeccontextchecks a journal; REDscaffoldnuevofailclosed sin fakepositivo; testscompletos nuevos/lint5, no147/33repeat sincausa, qualifiercredentialfree temporal/remover. Protectedstoreefc25b2/phaseebebaa95/Md979f395.
+
+Pendientesdespués: receptorQApre-write/Mforwardfijo+provenancialéxica/recheckfactual, notices/terceroCLOSED/ownSEND/fullsetup/cleanup/alarma/control/paquete/preflight y UNAocurrenciaPCoffcoordinada. NoesperarsóloCloudflarenideclararlista. Techo fuente3nov02:59Z vencido/no renovaranticipadamente; últimaprimariaremota3novfechada/noasumirvigencia. No provider/runtime/alias/Entry/DDL/grantreal/OTP/OAuth/tokens/permisos/cron/Containers/Max/main/merge. operationalReadiness=false;completePackage=false;PCoff=false. Intervenciónowner no necesariaahora. ARMgenuinovigente antesdepedirapagar; chatlocal/Actions noesguardiaPCoff.
+
+**Lo siguiente conserva historia/antiguos ACTIVE supersedidos.**
+
+---
+
 # CHECKPOINT VIGENTE — D0.4 aceptado; notice store ACTIVO, 5nov2026
 
 D0.4 complete: BASE4d8f6a0..report9fed36c15411470f22e284b1ba84aefb91f5d153/codef9ee816c, revisión fresca AstrahighPass/Approved0C0I/sin nuevoMinor. Root verificó RED42059288764, GREEN42059641718(24+3+7) y principal reforzado42061681764(1);65fixturebuilds/0standard. Recibo reviews/2026-11-05-finite-owner-exchange-continuity.es.md; fullreviewpackage d95206f6. Stagedheads, warnings,6CASerrors reconciliados y límites físicos/runtime conservados. NO redispatchD0.1/2/3/4/fanout ni matrices.
