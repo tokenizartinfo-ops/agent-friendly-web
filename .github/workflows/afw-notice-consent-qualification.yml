@@ -1,0 +1,61 @@
+name: AFW notice consent qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - lib/mcp-qa-finite-owner-phase-context.mjs
+      - lib/mcp-qa-finite-owner-notice-get-wire.mjs
+      - lib/mcp-qa-finite-owner-notice-get-forward.mjs
+      - lib/mcp-qa-finite-owner-notice-get-qa.mjs
+      - lib/mcp-qa-finite-owner-notice-consent-body.mjs
+      - test/mcp-qa-finite-owner-notice-consent-native.test.mjs
+      - test/fixtures/finite-owner-notice-get.mjs
+      - test/fixtures/finite-owner-qa-sdk.mjs
+      - test/mcp-qa-finite-owner-notice-get-native.test.mjs
+      - test/fixtures/finite-owner-io-fanout.mjs
+      - .github/workflows/afw-notice-consent-qualification.yml
+permissions:
+  contents: read
+jobs:
+  post-native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: POST causal RED
+        run: node --test test/mcp-qa-finite-owner-notice-consent-native.test.mjs
+        env:
+          AFW_NOTICE_BUNDLE_CAPTURE: '1'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: notice-consent-post-${{ github.sha }}
+          path: ${{ runner.temp }}/afw-notice-get-bundles
+          retention-days: 7
+  get-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Cookie P3 causal RED
+        run: node --test --test-name-pattern='^(notice cookie-list|notice GET malformed unrelated cookie)' test/mcp-qa-finite-owner-notice-get-native.test.mjs
+        env:
+          AFW_NOTICE_BUNDLE_CAPTURE: '1'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: notice-consent-get-${{ github.sha }}
+          path: ${{ runner.temp }}/afw-notice-get-bundles
+          retention-days: 7

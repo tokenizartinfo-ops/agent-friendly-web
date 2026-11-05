@@ -235,3 +235,25 @@ test('GET child expiry retains actual HTTP body and cancel until physical settle
  for(let n=0;n<100;n++){const state=await plain(f.stub.ioObservation());if(state.active===0&&(await plain(f.stub.noticeProbe())).allowed)return;await new Promise(r=>setTimeout(r,10));}
  assert.fail('actual HTTP body/cancel did not settle in original parent window');
 }));
+
+test('notice GET malformed unrelated cookie denies before reservation',()=>withIssued(async f=>{
+ const before=await plain(f.stub.noticeInspect());
+ for(const suffix of ['; bad:name=x','; ; extra=x']){
+  const response=await notice(f,{...f.headers,Cookie:PREP+suffix});await response.body?.cancel();
+  assert.notEqual(response.status,200);assert.deepEqual(await plain(f.stub.noticeInspect()),before);
+ }
+}));
+test('notice cookie-list accepts token names and legitimate values',async()=>{
+ const {qualifyFiniteOwnerNoticeGetRequest:q}=await import('../lib/mcp-qa-finite-owner-notice-get-wire.mjs');
+ const origin='https://delegated-canary.agentfriendlyweb.dev';
+ for(const cookie of [null,"!#$%&'*+-.^_`|~=x",'a=','a=base64===','a="quoted=="','a=""; b=x']){
+  const headers=cookie===null?{}:{Cookie:cookie};assert.equal(q(new Request(origin+'/monitoring',{headers}),new Uint8Array()).method,'GET');
+ }
+});
+test('notice cookie-list rejects malformed list',async()=>{
+ const {qualifyFiniteOwnerNoticeGetRequest:q}=await import('../lib/mcp-qa-finite-owner-notice-get-wire.mjs');
+ const origin='https://delegated-canary.agentfriendlyweb.dev';
+ for(const cookie of ['', '   ','; a=x','a=x;','a=x; ; b=y','bad:name=x','bad/name=x','bad@name=x','bad(name)=x','bad[name]=x','bad,name=x','bad name=x','námé=x','a=x; a=y','a=x,y','a=x\\y','a=has space','a=é','a="x"y','a="x','a=x"','a=x;b=y','a=x;  b=y','a=x ; b=y','a='+'x'.repeat(8191)]){
+  assert.throws(()=>q(new Request(origin+'/monitoring',{headers:{Cookie:cookie}}),new Uint8Array()),'must reject '+JSON.stringify(cookie));
+ }
+});
