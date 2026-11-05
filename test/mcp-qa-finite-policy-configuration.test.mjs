@@ -8,7 +8,7 @@ import {restorationConfigurationHash} from '../lib/mcp-restoration-configuration
 let api;
 try{api=await import('../lib/mcp-qa-finite-policy-configuration.mjs');}catch{/* Missing new module is the causal RED. */}
 const fixture=()=>finitePolicyConfigurationFixture();
-const build=x=>api.buildFinitePolicySetupConfiguration(x);
+const build=x=>{assert.equal(typeof api?.buildFinitePolicySetupConfiguration,'function','full-policy builder required');return api.buildFinitePolicySetupConfiguration(x);};
 const copy=x=>structuredClone(x);
 const binding=(v,name)=>v.bindings.find(b=>b.name===name);
 const removed=['ACCESS_AUD','ACCESS_TEAM_DOMAIN','AFW_DOSSIER_MONITORING_OWNER_POLICY','AFW_OAUTH_PILOT_EXPIRES_AT','DELEGATED_RATE_LIMITER'];
