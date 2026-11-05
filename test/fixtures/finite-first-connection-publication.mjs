@@ -22,6 +22,10 @@ export function extendEnrollmentComponent(entry,writerAvailable){
   finally{for(const [key,value]of Object.entries(native))s[key]=value;}
  }
   async exerciseEnrollmentComponent(scenario='normal'){
+   try{return await this.exerciseEnrollmentComponentBody(scenario);}
+   catch(error){console.info('T1 component setup failure',String(error?.stack??error));return {trace:[],enrollment:null,ack:null,failure:'SYN component setup: '+String(error),settled:true};}
+  }
+  async exerciseEnrollmentComponentBody(scenario='normal'){
   const allowed=['normal','double-enrollment','ack-first','double-ack','unknown-enrollment','unknown-ack','holder-drift','deadline'];
   if(!allowed.includes(scenario))throw Error('SYN scenario absent');
   const ctx=this.ctx,env=this.env,s=ctx.storage,controller=new AbortController(),start=Date.now(),end=start+5000;
@@ -55,6 +59,7 @@ export function extendEnrollmentComponent(entry,writerAvailable){
    const baseline={versionId:c.activatedVersionId,deploymentId:c.activatedDeploymentId,module:readPrivateQaFiniteCandidate().module,configuration:plan.configuration};
    writer=await prepareFinitePreparationEnrollmentWrite({ctx,env,preconnectionId,stageApprovalHash:hashPrep('StageApproval',approval),ownerSource:source,baseline,baselineBytes:readPrivateQaFiniteCandidate().bytes},lease,end);
    if(!Object.isFrozen(writer)||Object.keys(writer).sort().join(',')!=='recordAck,recordEnrollment')throw Error('SYN writer interface mismatch');
+   trace.push('writer-prepared');
    if(scenario==='holder-drift')env.AFW_QA_VERSION={id:metadata.id};
    if(scenario==='deadline')controller.abort();
    if(scenario==='ack-first')await writer.recordAck();
