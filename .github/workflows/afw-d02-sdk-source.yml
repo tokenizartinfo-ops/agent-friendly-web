@@ -1,0 +1,29 @@
+name: AFW D02 lexical SDK source qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - '.github/workflows/afw-d02-sdk-source.yml'
+      - 'lib/mcp-qa-finite-owner-*.mjs'
+      - 'test/mcp-qa-finite-owner-qa-sdk-native.test.mjs'
+      - 'test/fixtures/finite-owner-qa-sdk.mjs'
+      - 'test/fixtures/finite-initial-entry-world.mjs'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Scoped lint before native work
+        run: npx eslint test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+      - name: D02 causal helper and native qualification
+        run: node --test test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
