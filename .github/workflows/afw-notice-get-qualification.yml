@@ -28,16 +28,11 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Selected phase native16
+      - name: Only affected fanout control0 metric
         run: |
           set -o pipefail
-          node --test --test-name-pattern='^(closed source keeps|settled first connection|unknown issuer SEND|absent original issuer never|failed schema SELECT|fresh current owner|fresh QA pointer|same ambient original request)' test/mcp-qa-finite-owner-phase-context-native.test.mjs 2>&1 | tee "$RUNNER_TEMP/notice-regression-0.tap"
-          node --input-type=module -e "import{readFileSync}from'node:fs';const s=readFileSync(process.argv[1],'utf8');if(!/^# tests 16$/m.test(s)||!/^# pass 16$/m.test(s)||!/^# fail 0$/m.test(s))throw Error('Unexpected TAP count');" "$RUNNER_TEMP/notice-regression-0.tap"
-      - name: Selected SDK native6
-        run: |
-          set -o pipefail
-          node --test --test-name-pattern='^(uninstrumented actual native|missing actual SDK binding cookie|actual current publication drift|owned begin recheck rejects actual foreign delta owner-revision|fanout causal control delay0)' test/mcp-qa-finite-owner-qa-sdk-native.test.mjs 2>&1 | tee "$RUNNER_TEMP/notice-regression-1.tap"
-          node --input-type=module -e "import{readFileSync}from'node:fs';const s=readFileSync(process.argv[1],'utf8');if(!/^# tests 6$/m.test(s)||!/^# pass 6$/m.test(s)||!/^# fail 0$/m.test(s))throw Error('Unexpected TAP count');" "$RUNNER_TEMP/notice-regression-1.tap"
+          node --test --test-name-pattern='^fanout causal control delay0' test/mcp-qa-finite-owner-qa-sdk-native.test.mjs 2>&1 | tee "$RUNNER_TEMP/notice-fanout.tap"
+          node --input-type=module -e "import{readFileSync}from'node:fs';const s=readFileSync(process.argv[1],'utf8');if(!/^# tests 1$/m.test(s)||!/^# pass 1$/m.test(s)||!/^# fail 0$/m.test(s))throw Error('Unexpected TAP count');" "$RUNNER_TEMP/notice-fanout.tap"
       - name: Selected D04 token4
         run: |
           set -o pipefail

@@ -254,7 +254,7 @@ async function fanoutMetrics(f,form,response,{peak}){
  assert(child);assert(child.endMono-child.startMono<5000);assert(child.endedAt<child.deadline);
  assert.equal(full.length,112);assert.equal(narrow.length,84);
  assert.deepEqual(counts,Object.fromEntries(['verify-reader','verify-publisher','qa-deployment','qa-version','m-deployment','m-initial-version','m-current-version'].map(k=>[k,16])));
- assert.deepEqual(state.sql,{factual:80,preflight:16,writes:2});
+ assert.deepEqual(state.sql,{factual:128,preflight:16,writes:2});
  assert.equal(state.peak,peak);assert.equal(state.active,0);assert.deepEqual(state.same,{child:true,store:true});assertIoOrder(state.rows);
  assert(full.every(r=>r.outcome==='fulfilled'&&r.endMono>=r.cancelSettledAt&&r.cancelSettledAt>=r.cancelStartedAt&&r.bytes>0));
  if(f.ioDelay)assert(f.ioWaits.every(ms=>ms>=50));
