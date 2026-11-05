@@ -33,3 +33,23 @@ test('D0.2 fixed original authorization grammar denies old result paths and payl
  for(const suffix of ['&sdkCompleted=true','&resultHash=x','&decision=approve'])assert.throws(()=>qualify(post,new TextEncoder().encode(form+suffix)));
  assert.throws(()=>qualify(post,new Uint8Array(16385)));
 });
+
+import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
+import {seedFiniteOwnerSdkClient} from './fixtures/finite-owner-qa-sdk.mjs';
+async function plain(p){const r=await p;try{return JSON.parse(JSON.stringify(r));}finally{r[Symbol.dispose]?.();}}
+test('actual native source and SDK parser require lexical continuation after original SDK begin SEND',async()=>{
+ const f=await initialEntryHarness('phase-context-sdk');
+ try{
+  await f.stub.configure('normal');assert.equal((await plain(f.stub.invoke(f.refs))).status,'material_recorded');await f.stub.restoreMethods();
+  f.phaseCurrent=await plain(f.stub.seedPhaseFacts('settled',null));assert.equal(f.phaseCurrent.fixtureError,undefined,JSON.stringify(f.phaseCurrent));
+  const context=await plain(f.stub.sdkReadCurrent());assert.equal(context.source?.phase,'read_consent',JSON.stringify(context));
+  await seedFiniteOwnerSdkClient(f.mf,context.source);await f.stub.sdkConfigure();
+  const token=await f.enrollmentToken(context.source),m=await f.mf.getWorker('m-sdk');
+  const query=new URLSearchParams({client_id:context.source.clientId,redirect_uri:'https://client.example/cb',response_type:'code',resource:context.source.resource,scope:'afw:project:read',state:'SYN-state',code_challenge:'a'.repeat(43),code_challenge_method:'S256'});
+  const response=await m.fetch(context.source.origin+'/authorize?'+query,{headers:{'Cf-Access-Jwt-Assertion':token,Cookie:'__Host-afw-finite-prepare='+'a'.repeat(64)}});
+  const observed=await plain(f.stub.sdkObservation());
+  assert(observed.calls.some(c=>c.method==='get'&&c.prefix==='client'),'actual SDK client lookup entered');
+  assert(observed.rows.some(([key])=>key.endsWith('sdk_begin:send')),'actual durable original begin SEND reached');
+  assert.equal(response.status,200,'actual source/SDK path reached original pending SEND; same invocation must continue lexically');
+ }finally{await f.mf.dispose();await f.cleanup();}
+});
