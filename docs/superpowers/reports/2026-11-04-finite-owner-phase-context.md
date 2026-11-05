@@ -106,3 +106,65 @@ Known output remains non-pristine: global lint16 inherited warnings; npm esbuild
 Root independent source review is still required. No notice/finite-prearm/fullsetup/current source selection producer, SDK issuance, native mount, permission/admission, cleanup relaxation or remote runtime operation was delivered. No provider deployment/mutation, Entry consumption, remote DDL, permission/token/OAuth/OTP/cron/Max/main/merge or other-project effect occurred. Historical2607/c570 and QA_CLOUD_CLOSED_PINS remain immutable; source ceiling2026-11-03T02:59:00Z remains expired; single consuming Entry remains reserved.
 
 `operationalReadiness=false; completePackage=false; PCoff=false`.
+
+## Review fix round 1/5 — exact phase configuration for every settled receipt
+
+Root review of the preceding report HEAD returned SpecNeedsFixes/QualityNeedsFixes with one Important/P1 finding, no Critical or Minor. A coherent upload/activation/receipt chain could reference the original M version/deployment and original closed configuration hash. Because primary() previously applied the enabled read_consent configuration predicate only when the pointer changed, that chain could incorrectly produce read_consent while delegated OAuth remained false.
+
+This section records the correction and supersedes the earlier initial-qualification final-code designation. Earlier outcomes, failures and compile hashes above remain historical evidence.
+
+- FIX_BASE / original reviewed report HEAD: `4ffc2f9c0b80ae9f863a8d63ed34abc13b18b690`, tree `8eefb9080f95a99eaa12055a23026e4964eb1fa1`.
+- Causal RED HEAD: `3265fd64bf8cf6a5275f7f70114601668e661ba2`, tree `d1ab4a6dc399fdd9969652e4396ff05ba209ee08`.
+- Corrected code / new actual compile HEAD: `52ef404365b00054dbc1edc281a858223e3eab18`, tree `107d92211a182eaf32bc351c4638a6fbca53dbe1`.
+- Fix report HEAD/tree is the immutable containing commit/tree of this appended report, supplied exactly in final root handoff. Its parent is corrected code HEAD; its only delta is this report append and deletion of the own temporary qualifier. It does not inherit the compiled module hashes as its own output.
+
+The product fix is three added lines in [receipt qualification](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/52ef404365b00054dbc1edc281a858223e3eab18/lib/mcp-qa-finite-owner-phase-context.mjs#L265): after the actual stage helper qualifies the settled receipt, always compare actual current configuration against the exact original plan configuration with only AFW_DELEGATED_OAUTH_ENABLED=true, and always run qualifyFiniteConnectionProfile for read_consent. This is independent of whether the current IDs equal the original IDs. The same qualify() runs on both consistency snapshots at lines274–275; matching receipt hashes or unchanged pointers cannot bypass the phase predicate. No-receipt closed_ui retains its original behavior. No timer, holder, profile-role, admission or effect policy changed.
+
+The native fixture adds only a settled-original variant: it seeds both actual journal SEND/ACK operations and the actual receipt through the existing native journal APIs, using capsule original version/deployment and the original closed configuration hash. The new test first asserts exact original IDs and OAuth=false, then requires unavailable and unchanged storage/provider mutation counts/zero owner effects. It does not replace source, reader, codecs, qualifier, resident decoder or journal results. Existing SYN external-data boundaries remain exactly as disclosed above.
+
+Both runs used the own workflow path and feature branch only, contents:read, checkout persist-credentials:false, Ubuntu24.04/Node22 and npm ci --ignore-scripts --no-audit --no-fund, with five-minute bounded jobs. Lint precedes test execution; the new compiler depends on focused GREEN. Both are attempt1.
+
+| HEAD | Run / job | Observed evidence |
+| --- | --- | --- |
+| 3265fd64bf8cf6a5275f7f70114601668e661ba2 | [41941387830/126962788368](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41941387830/job/126962788368) | Scoped lint passed; causal native RED1 selected test FAIL,0 pass/cancel/skip,2971.078753ms. After coherent native seed and original-ID/OAuthfalse assertions, expected status unavailable but status was undefined because the reader returned its source envelope. Product reader remained unchanged from FIX_BASE. |
+| 52ef404365b00054dbc1edc281a858223e3eab18 | [41941527071/126963273710](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41941527071/job/126963273710) | Scoped changed-files lint passed with no lint errors/warnings; focused native GREEN7 selected PASS,0 fail/cancel/skip,19817.789072ms. |
+| 52ef404365b00054dbc1edc281a858223e3eab18 | [41941527071/126963606851](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41941527071/job/126963606851) | New actual compile/residency23 PASS,0 fail/cancel/skip,2508.084681ms; clean git status before and after. |
+
+Exact RED command:
+
+```sh
+node --test --test-name-pattern='settled original M journals never imply read_consent' test/mcp-qa-finite-owner-phase-context-native.test.mjs
+```
+
+Exact focused GREEN commands:
+
+```sh
+npx eslint lib/mcp-qa-finite-owner-phase-context.mjs test/fixtures/finite-owner-phase-context.mjs test/mcp-qa-finite-owner-phase-context-native.test.mjs
+node --test --test-name-pattern='closed source keeps original A|original approval and enrollment stay closed|settled first connection derives|settled original M journals|actual current module and profile independently deny configuration|fresh current owner and current publication are independently rechecked: (configuration|pointer)' test/mcp-qa-finite-owner-phase-context-native.test.mjs
+```
+
+RED lint used the same fixture/test paths, without the unchanged product reader. Node22 executed only the named selections; terminal summaries reported no skipped tests. The seven GREEN cases cover original no-receipt closed_ui, approval/enrollment without publication, valid first settled read_consent, coherently settled original M denial, current configuration mismatch, and configuration/pointer drift at the second primary observation. Existing tests enforce provider GET-only/zero owner effects; positive and adversarial cases compare durable snapshots and mutation counts. The two drift cases assert both observations occurred. No broad old suite, signal opt-in experiment or unrelated fixture cleanup was rerun or changed.
+
+The new compiler command was exactly the existing candidate-residency test with clean-status guards, not a second standalone compile:
+
+```sh
+test -z "$(git status --porcelain)"
+node --test test/mcp-qa-finite-candidate-residency.test.mjs
+test -z "$(git status --porcelain)"
+```
+
+There are now **two successful actual compiles across two separately attributed code HEADs**: the original qualification at8381d5aa7554792f21c04b1c39b95849e7710f05, and this required review-fix qualification at52ef404365b00054dbc1edc281a858223e3eab18. Each candidate-residency invocation called compileFiniteNativeStaging once. Old838 module hashes do not apply to the fix.
+
+| Corrected artifact | Bytes | SHA256 |
+| --- | ---: | --- |
+| canaryLive M index.mjs | 1951651 | 1c57b72ac004ee0c1b692aba1d024a07d1c0067e5a0b2d1c1cbe51c10c26d73a |
+| qaLive index.mjs | 2019962 | 8872b77fc13cb877be54d5754a14afaffff3d5c97f2b73004d3575660eff3dd4 |
+| gzip resident M | 383744 | 356546ee23208334e6078d2f0e8558b0f23c23a1428cbcc7aa824f71aef9b906 |
+
+New residency sourceRevision/tree are exactly corrected code HEAD/tree above; sourceCheck git-inputs-before-after-v1; programHash remains f6f517c3ac135cfa7b9853137e0487f768b8f24a11e24959a337cac4e28d42e6. Original2MiB M/3MiB QA caps pass. Metafiles remain QA304/M330 inputs. Actual unchanged [compiler guards](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/52ef404365b00054dbc1edc281a858223e3eab18/scripts/build-finite-native-package.mjs#L69) reject M bootstrap-source and residency; [test line44](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/52ef404365b00054dbc1edc281a858223e3eab18/test/mcp-qa-finite-candidate-residency.test.mjs#L44) verifies QA decoder present/M decoder absent. No import or worker entry changed in this fix; shared initial-anchors boundary remains as described above. Actual emitted bytes and native decoder execute in the23 cases; this is not evidence of a mounted phase reader or complete package.
+
+Self-review of FIX_BASE->corrected code is limited to three added product lines, two fixture-line replacements, the new native regression and the own qualifier. Final report commit removes that qualifier and appends only this section. Root receives this scoped fix diff for the same review, not a new source unit.
+
+Warnings remain disclosed: esbuild-kit/eslint and punycode deprecations, Actions v4 Node20/forced24 notice, and RPC stub disposal warnings observed in RED and the selected native GREEN run. Scoped lint is clean; the earlier global16 warnings are historical and were not rerun or claimed resolved. No unrelated warning/resource fix is included.
+
+No runtime/Entry consumption/remote DDL/permissions/credentials/OTP/Max/main/merge or other-project action. Product pins, expired source ceiling and all original request/effect controls remain unchanged. Root re-review is pending. `operationalReadiness=false; completePackage=false; PCoff=false`.
