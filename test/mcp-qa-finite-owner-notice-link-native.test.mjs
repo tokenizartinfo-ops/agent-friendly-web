@@ -94,17 +94,19 @@ async function controlGate(f){
  assert.fail('actual QA fetch did not observe original TX DATA gate within original child');
 }
 for(const [mode,name]of [['link-hold-write','link-write'],['link-hold-commit','link-commit'],['link-hold-sync','link-sync'],['link-hold-readback','link-readback']])test('native notice link held native work and cancellation retain scope '+mode,()=>withIssued(async f=>{
- let rpcProbe=null,probeSettled=false,probeError=null;
+ let rpcProbe=null,probeSettled=false,probeError=null,probeValue=null,probeAt=null,pendingConsent=null;
  if(mode==='link-hold-write'){
   const data=await qaControl(f,'reset'),actor=await plain(f.stub.noticeLinkControlRead());assert.equal(data.visible,true);assert.equal(actor.visible,true,'QA fetch DATA is actually visible in actor realm');assert.equal(actor.marker,data.marker,'actual native fetch and actor share the same DATA');
  }
  try{
-  await ticket(f);await f.stub.noticeConfigure(mode);const pending=consent(f);
+  await ticket(f);await f.stub.noticeConfigure(mode);const pending=pendingConsent=consent(f);
   if(mode==='link-hold-write'){
    const data=await controlGate(f);assert.equal(data.entered,1);assert.equal(data.expired,false);
    console.info('LINK native DATA visibility',JSON.stringify({actualQaFetch:true,actorShared:true,originalTxEntered:data.entered}));
-   rpcProbe=plain(f.stub.noticeProbe()).then(value=>{probeSettled=true;return value;},error=>{probeSettled=true;probeError=String(error?.message);return null;});
-   await new Promise(r=>setTimeout(r,25));assert.equal(probeSettled,false,'native input gate queues same-DO RPC; no application denial is claimed');
+   const probeBegan=Date.now();rpcProbe=plain(f.stub.noticeProbe()).then(value=>{probeSettled=true;probeValue=value;probeAt=Date.now();return value;},error=>{probeSettled=true;probeError=String(error?.message);return null;});
+   await new Promise(r=>setTimeout(r,25));const dataAfter=await qaControl(f,'read'),actualState=await state(f);
+   console.info('LINK native TX probe diagnostic',JSON.stringify({settled:probeSettled,error:probeError,allowed:probeValue?.allowed??null,probeElapsed:probeAt===null?null:probeAt-probeBegan,controlHeld:dataAfter.held,controlEntered:dataAfter.entered,controlSettled:dataAfter.settled,controlExpired:dataAfter.expired,actualTransactionSettled:actualState.trace.some(v=>v.link==='transaction-settled'),putCalls:countWrites(actualState)}));
+   assert.equal(probeSettled,false,'native input gate queues same-DO RPC; no application denial is claimed');
   }else{await gate(f,name);assert.equal((await plain(f.stub.noticeProbe())).allowed,false,'fresh native request denied while actual work outstanding');}
   await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-abort')).body?.cancel();await denied(await pending);
   if(mode==='link-hold-write'){
@@ -114,7 +116,7 @@ for(const [mode,name]of [['link-hold-write','link-write'],['link-hold-commit','l
   }else{assert.equal((await plain(f.stub.noticeProbe())).allowed,false,'aborting original request is not settlement');await f.stub.noticeReleaseHeld();}
   await settled(f);const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,1);assert.equal(after.notice.length,5);
   const s=await state(f);assert.equal(countWrites(s),1);assert(!s.trace.some(v=>v.position==='complete'));await replayClosed(f,after);
- }finally{if(mode==='link-hold-write')await qaControl(f,'release');}
+ }finally{if(mode==='link-hold-write'){await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-abort')).body?.cancel();await qaControl(f,'release');if(pendingConsent){const response=await pendingConsent;await response.body?.cancel().catch(()=>{});}}}
 }));
 for(const [mode,name]of [['link-before','before-link'],['link-hold-commit','link-commit']])test('native notice link original child expires without renewal '+mode,()=>withIssued(async f=>{
  await ticket(f);await f.stub.noticeConfigure(mode);const pending=consent(f),seen=await gate(f,name);
@@ -128,7 +130,7 @@ for(const drift of ['owner','revision','QA','M','holder','exchange'])test('nativ
  if(drift==='owner')await f.db.prepare("UPDATE site_projects SET user_id='SYN NEGATIVE owner' WHERE id=?").bind(f.identity.projectId).run();
  if(drift==='revision')await f.db.prepare('UPDATE site_projects SET revision=revision+1 WHERE id=?').bind(f.identity.projectId).run();
  if(drift==='M')f.phaseCurrent.receipt.deploymentId='99999999-9999-4999-8999-999999999999';
- if(drift==='QA')(f.phaseQaObservation=1,f.phaseDrift='qa-pointer');
+ if(drift==='QA'){f.phaseQaObservation=1;f.phaseDrift='qa-pointer';}
  if(drift==='holder')await f.stub.sdkReplaceHolder();
  if(drift==='exchange'){const value=new Date(Math.max(Date.parse(f.grant.created_at),Date.now()-1)).toISOString();await f.db.prepare('UPDATE delegated_access_grants SET exchanged_at=? WHERE id=?').bind(value,f.identity.grantId).run();}
  await f.stub.noticeReleaseHeld();await denied(await pending);const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,1);assert.equal(after.notice.length,5);assert(await linkEntry(f));assert.equal(countWrites(await state(f)),1);

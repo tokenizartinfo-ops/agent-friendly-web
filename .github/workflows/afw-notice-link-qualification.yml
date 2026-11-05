@@ -11,7 +11,7 @@ on:
 permissions:
   contents: read
 jobs:
-  control-and-fixes:
+  tx-probe-diagnostic:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -45,78 +45,20 @@ jobs:
           const text=readFileSync(process.argv[2],'utf8'),count=Number(/^# tests (\d+)$/m.exec(text)?.[1]);console.log('QUALIFICATION selected count',count,'expected',process.argv[3]);if(count!==Number(process.argv[3]))process.exitCode=1;
           NODE
           }
-          node --test --test-name-pattern='^native notice link held native work and cancellation retain scope link-hold-write$' test/mcp-qa-finite-owner-notice-link-native.test.mjs > "$RUNNER_TEMP/native-control.tap" 2>&1
+          node --test --test-name-pattern='^native notice link held native work and cancellation retain scope link-hold-write$' test/mcp-qa-finite-owner-notice-link-native.test.mjs > "$RUNNER_TEMP/native-control-diagnostic.tap" 2>&1
           group_status=$?
-          show_tap "$RUNNER_TEMP/native-control.tap"
-          check_count "$RUNNER_TEMP/native-control.tap" 1
+          show_tap "$RUNNER_TEMP/native-control-diagnostic.tap"
+          check_count "$RUNNER_TEMP/native-control-diagnostic.tap" 1
           count_status=$?
-          if [ "$group_status" -ne 0 ] || [ "$count_status" -ne 0 ]; then qualification_status=1; fi
-          if [ "$qualification_status" -ne 0 ]; then exit "$qualification_status"; fi
-          node --test --test-name-pattern='^(native notice link follows actual consent ACK in the same POST child|native notice link factual mismatch denies valid codec and journal data|native notice link missing source evidence never becomes authority withdrawal)$' test/mcp-qa-finite-owner-notice-link-native.test.mjs > "$RUNNER_TEMP/link-affected.tap" 2>&1
-          group_status=$?
-          show_tap "$RUNNER_TEMP/link-affected.tap"
-          check_count "$RUNNER_TEMP/link-affected.tap" 3
-          count_status=$?
-          if [ "$group_status" -ne 0 ] || [ "$count_status" -ne 0 ]; then qualification_status=1; fi
-          exit "$qualification_status"
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: afw-notice-link-control-and-fixes
-          path: |
-            ${{ runner.temp }}/*.tap
-            ${{ runner.temp }}/lint.txt
-            ${{ runner.temp }}/afw-notice-get-bundles/*.json
-          retention-days: 7
-  cookie-diagnostic-and-lint:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      AFW_NOTICE_BUNDLE_CAPTURE: '1'
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Fixed native qualification
-        shell: bash
-        run: |
-          set +e
-          qualification_status=0
-          show_tap() {
-            node --input-type=module - "$1" <<'NODE'
-          import {readFileSync} from 'node:fs';
-          for(const line of readFileSync(process.argv[2],'utf8').split('\n')){
-            const marker='# NOTICE actual principal costs ';
-            if(line.startsWith(marker)){const d=JSON.parse(line.slice(marker.length));console.log(marker+JSON.stringify({...d,traceCount:d.trace?.length,trace:undefined,queryCount:d.queries?.length,queries:undefined,noticeListCount:d.noticeLists?.length,noticeLists:undefined}));}
-            else console.log(line);
-          }
-          NODE
-          }
-          check_count() {
-            node --input-type=module - "$1" "$2" <<'NODE'
-          import {readFileSync} from 'node:fs';
-          const text=readFileSync(process.argv[2],'utf8'),count=Number(/^# tests (\d+)$/m.exec(text)?.[1]);console.log('QUALIFICATION selected count',count,'expected',process.argv[3]);if(count!==Number(process.argv[3]))process.exitCode=1;
-          NODE
-          }
-          node --test --test-name-pattern='^native consent malformed unrelated cookie denies before SEND$' test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/cookie-diagnostic.tap" 2>&1
-          group_status=$?
-          show_tap "$RUNNER_TEMP/cookie-diagnostic.tap"
-          check_count "$RUNNER_TEMP/cookie-diagnostic.tap" 1
-          count_status=$?
-          if [ "$group_status" -ne 0 ] || [ "$count_status" -ne 0 ]; then qualification_status=1; fi
           npx --no-install eslint lib/mcp-qa-finite-owner-phase-context.mjs test/fixtures/finite-owner-notice-get.mjs test/mcp-qa-finite-owner-notice-link-native.test.mjs test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/lint.txt" 2>&1
           lint_status=$?
           cat "$RUNNER_TEMP/lint.txt"
-          if [ "$lint_status" -ne 0 ]; then qualification_status=1; fi
+          if [ "$group_status" -ne 0 ] || [ "$count_status" -ne 0 ] || [ "$lint_status" -ne 0 ]; then qualification_status=1; fi
           exit "$qualification_status"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: afw-notice-link-cookie-diagnostic
+          name: afw-notice-link-tx-probe-diagnostic
           path: |
             ${{ runner.temp }}/*.tap
             ${{ runner.temp }}/lint.txt
