@@ -45,3 +45,10 @@ Rootleyó job127476629576/run42093279704/HEAD35ad25a4:1T0P1F, error de captura e
 Ruling: copiar sólo allowlistOAuthintacta y fijar nosniff exclusivamente en HTML200 final de M; QA genera su propio nosniff. No header callerconfigurable/expansión de allowlist ni cambioOAuthordinario. Corregir duplicación Cache-Control sóloGET. Writer conservainterfaces/SQLPromise/rootbudgets. Totalesestáticosdc4sin ejecutar:phase80(16selected+64notselected),SDK61(6+55),D04token46(4+42), separadosdeTAPskip0Node22.
 
 DiseñoPOSTe27bbc16c3abc11c64a4740157e1c998c1b0f829,treec7dc1cdd81b02f319ab7e18ed87357e4a37e4ca6:rootleyó informe9772/spec21473/plan14362. Completo documental peroINACTIVE,pendienteGETaceptado/reconciliación/preflight. No activar desde su pin viejo. MensajeOpenAI5nov18:59UTC/caso18196140sóloseguimiento,sincausa/repairverificada; lecturaacotada ynota separada, sinensayoproxy/entorno/correosoporte. No esContainer/Access/Cron/FCO.
+
+
+## GREEN GET y diagnóstico de compatibilidad — aún no Task1complete
+
+Rootleyó primaria be044/run42095343936/job127483768304:GET33/33PASS, pure18/18PASS, phase16seleccionados6P10F, siguientesSDK/token/lintnoejecutados.64fixturecompilesenrun. CasoHTTPbody/cancel PASS, no hang: archivo458762ms; principal1294ms, ticketchild595ms; doce snapshots/84HTTP/peak2active0. No aceptaciónglobal antes de regresiones/review.
+
+Rootleyó diagnósticoúnicod87158c4/run42097405566/job127490953992 (1fixturebuild1469048B/322inputs):Maptrue0/ALLsuccesstruearray4/failphase276. Esquema histórico4consentobjects +3eventosajenos, nofallo deMap/ALL/actor. Rulingformal en brief/preflight: completar7DDLoriginalesvacíos en worldYApermitido para phase-context*, preservar4DDL/3eventos/historia y guardas estrictas; mapa10/no11ºpath. NoDDLreal. Corregir única condición deinstalaciónfixture; retirar onLoadantesGREEN. Conservar33GET+18pure si productblobsintactos y correr sólo16phase/6SDK/4token/lint. Task1 siguependienteregresiones/informe/fullBASEreview.

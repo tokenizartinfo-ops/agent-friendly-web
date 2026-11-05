@@ -4,6 +4,16 @@ READ FIRST; requisitos completos para UNwriterfresco SDD. Preparado5nov2026, INA
 
 PROJECT=AFW; ENVIRONMENT GitHubsource/ActionsSYN; ORIGIN GitHubAPI; RESOURCE_TYPE isolatedbranch; ALLOWED_ACTION10paths exactos+informe+qualifier temporal aprobado; ROLLBACK sólo owncommits expectedheadCAS/sinforeignoverwrite. No localclone/deps/build/test/bigfiles ni tocarotrosproyectos. Ningún runtime/provider/account, alias/Entry/DDLreal/OAuth/OTP/tokens/permisos/cron/Containers/Max/main/merge. Scope SOURCEUNMOUNTED; sourceceiling3nov02:59UTCvencido/Noearlyrenewal. Flagsoperationalfalse.
 
+## Ruling de reanudación — fixture histórica, 5nov2026
+
+Esta sección prevalece únicamente sobre la condición anterior «7DDL sólo noticeGet». Root leyó la primaria DIAGNÓSTICO d87158c4/run42097405566/job127490953992: LIST nativa Maptrue/size0, ALL nativa successtrue/arraytrue/size4, rechazo phase:276 por schema parcial. Test1F antes del segundo snapshot; no defecto de Map/ALL/actor ni autorización para interpretar4comoausencia. Root leyó test/fixtures/finite-initial-history-world.mjs@dc4 líneas31–37: instala4objetos consent y conserva3eventos ajenos ('original','cancelled-old').
+
+Autorizado sólo en test/fixtures/finite-initial-entry-world.mjs YA dentro del mapa10: después de seedFiniteOwnerPhaseHistory instalar los7DDL IF NOT EXISTS originales para todos mode.startsWith('phase-context'), añadiendo únicamente tabla tickets+2triggers faltantes. Conservar4DDLexistentes/3eventos/grants/filas/historia; sin DROP/DELETE/UPDATE/semillas positivas/cambio de fixture11/DDLreal. Acreditar preservación nativa y diff exclusivo adaptador. El producto sigue rechazando schema parcial/malformado/unknown; success===true/array/cap/Map intactos. Retirar onLoad diagnóstico, nunca usar sus hashes como GREENproducto.
+
+Se conservan33GETnativas+18purePASS de be044d4894e84497fb490720875195f5c8b15167/run42095343936/job127483768304 si el código producto no cambia. Tras adaptar exclusivamente fixture ejecutar phase16/SDK6/D04token4+lint10; nuevas repeticiones sólo por fallo/cambio/defecto concreto, no repetir33 para aceptar el adaptador. Ruling nosniff: copiar sólo allowlistOAuthintacta y fijar nosniff en HTML200 final M; QA genera su header, sin ampliar copia ni cambiarOAuthordinario.
+
+Esto corrige preflight de fixture con evidencia; no cambia alcance fuente/autoridad/frames/presupuestos30s5s ni permiso humano/runtime. ROOTBASE de revisión sigue dc4edafc0b5e4ba440cd32a21dd3dd58024e811a; no cambiarlo al fixhead.
+
 ## Rulings de root que prevalecen sobre incertidumbres del diseño
 
 1 SelectAll requiere result.success===true +resultsArray/cap antesdeinterpretar0rows; error/unknown jamásschemaausente. Todaslas consultas nuevasfactuales sonprimerasentencia ennewfirst-primary. Ninguna positivaSQL/snapshot/identityverifier fake; nuevosfaultsSYNnegativos pueden cambiar sólopropiedadmetadata despuésdeactualquery, explícito/noesproveedorreal.
