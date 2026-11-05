@@ -6,13 +6,13 @@
 
 GETnativo f68797ca0ad083aa4e90be87c83b5f60f2aa691b. POSTnativo f62b6c8b17412b812ae411bbc9cedad43b9ce501; producto e1537bf403944ae4f79c04818db1932a3189d78c/report5205d80216d9767c44762df4a181e1015e093a8e. Revisión review_notice_consent Spec✅/QualityApproved,0Critical/Important. P3cookiesCLOSED. Registros reviews/2026-11-05-finite-native-notice-get.es.md y finite-native-notice-consent.es.md. D0.4/store/journal/fanout aceptados, no volver a ejecutarlos por resumen. MinorSQLsettlement se refuerza enLink; warningsdeferred a revisiónwholebranch.
 
-## ACTUAL: Link implementado, revisión independiente pendiente
+## ACTUAL: Link fix round1/5 activo
 
-BASE953e7af1fc20b59c59d8e4a03dcf398d98165cf5/treeee77df20d2c22fc48c55663524b9720b95364d2d. Writer implement_notice_link DONE/detenido; no despachar otro writer ni empezar unidadsiguiente hasta dictamen.
+BASE953e7af1fc20b59c59d8e4a03dcf398d98165cf5/treeee77df20d2c22fc48c55663524b9720b95364d2d. Reviewer review_notice_link: Spec❌/Needsfixes,0Critical/1ImportantI1duplicación dehelpersSYNenConsent. Mismo writer implement_notice_link reanudado para import/delegación conservandoasserts/lifecycle;4focalesConsent+lint yscopedrereviewmismorevisor. FixBASE2f530092bdc6f89e856ca3803f04dcc83fb90b1f. No otro writer ni unidadsiguiente hastaaceptación. Minorbaseline/warningsdeferrednofixloop. Rootleyófix-loop/rereview.
 
 codeHEADfb739b07c26487242d72bbc56ba0b115095bb8fa/tree9efd8240dfbacc65ba8d1821a2cba39bf5b577d9. ReportHEAD2f530092bdc6f89e856ca3803f04dcc83fb90b1f; reports/2026-11-05-finite-native-notice-link.md/blobce3655e1b35f948574653e901fd06a98e1656c4c/105131chars. Sólo4codepaths y2docs; qualifier eliminado. Rootcontrastó4blobs/compare11commits. Brief61f7a5f4b3c996feeb580c7f37843fd14f0272d7/preflight5cfbf0f7a1bd62437b0891ea3de97de0281bc564 en953 leídos; ledger progress/2026-11-05-finite-native-notice-link.es.md guarda rulings y primarias.
 
-Paquete reviews/2026-11-05-finite-native-notice-link-2f530092-package.md,135504chars:11commits/statcompleto, narrativaentera34628,4diffU10exactos93162, rulings. El apéndice del reporte original repite esos4patches; no duplicarlectura. Reviewer fresco debe revisar SOURCEconcurrencia/factualidad, no ampliar a futurosmounts. Sin tests por mera confirmación.
+Paquete reviews/2026-11-05-finite-native-notice-link-2f530092-package.md,135504chars:11commits/statcompleto, narrativaentera34628,4diffU10exactos93162, rulings. El apéndice del reporte original repite esos4patches; no duplicarlectura. Revisorfresco ya revisóSOURCE; verificarúnicamenteI1yfixdiffenrereview, no reabrirrestodelta. Sin tests por mera confirmación.
 
 Root leyó todasprimarias relevantes y ZIPsgrafo en memoria. MatrizSTAGED: Link31=30full+1focal; POST50=49full+1focal; GET/regresiones81full. FullLink31 y fullPOST50 FAILED por sdkReadCurrentsetupinicial antesacciones, casosdistintos. Focales pasaron, causa DESCONOCIDA/no reproducida, NOreparaciónprobada. Revisor debe clasificar esta deuda. Linkterminalrun42121776005/job127575702935 duró386019ms,proceso terminó y13mcontenciónnoactivada. Focal696/run42123491595/job127581599230 1PASS17051ms, sinfailtrace. No repetir30/49/81para buscarverde.
 
