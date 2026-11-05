@@ -81,3 +81,21 @@ Root leyó los módulos body `2a1e89ffcfe56a607c704129a3af6a83e8bc9b81`, forward
 **Ruling de contraste acotado:** una ejecución focal, sólo dos casos M. Los controles HTTP sólo cambian flags DATA; resolver/controlador y timer SYN se crean y ejecutan desde la petición original, dentro del deadline absoluto original capturado (máximo 30 s). El productor SYN libera sus propias promesas al observar el flag; no sustituye ni completa artificialmente las Promise nativas reader.read/cancel. No nueva ventana, reloj, lease, budget, permiso, runtime, helper o cambio de Set/guards/retención. Comprobar settlement nativo y de la cadena antes de considerar scope disponible. Si falla, volver al trace; no cambios aleatorios de producto.
 
 Task POST sigue abierto. Producto aún corresponde a `87c8430`, formulario desactivado, sólo fixtures/diagnóstico variaron después. No aceptación ni cierre P3, informe/revisión fresca pendientes.
+
+
+## Contraste M resuelto y calificación final SOURCE
+
+Contraste `42109028969`, intento 1, HEAD `db17f2f56af6bcf8eaee6eb29aca09d6caad0032`, árbol `f9f198f954cd48c7ef159e963239eb84bffeec24`, job `127531380618`: dos casos M, 2 PASS/0 FAIL/0 skip, 25185 ms, lint2 PASS. Root leyó la primaria. Artefacto `13453580020`, SHA256 `a744c888793c30292fe72735c48297b36a6c51d633bea0c9e09fc4e550d40de1`.
+
+Cambió sólo el control de fixture: flags DATA entre peticiones y productor/stream liberado dentro de la petición original. Los asserts observaron settlement nativo read/cancel, cierre del body y callback real, y scope disponible sólo tras settlement más aborto de la raíz. Producto, Set de retención y plazos permanecieron intactos. El resultado respalda la hipótesis del origen de petición del fixture; no demuestra un incidente del proveedor ni reparación de producción. Marcadores pasivos mínimos usados en asserts causales se conservan en SYN; el resto de instrumentación diagnóstica se retiró.
+
+Root autorizó evitar una repetición amplia por el cambio final limitado a HTML/CSP. Requiere matriz por nombre único→GREEN compatible y explicación de cada reuso frente a los cambios de fixture, sin sumar overlaps. Ejecutar faltantes si aparecen. El cambio de código desde `87c8430` sólo activa el formulario HTML y CSP self, sin lógica nueva.
+
+Último código calificado `e1537bf403944ae4f79c04818db1932a3189d78c`, árbol `15f7bfa4877c3068b7088defde4b413b52c6b955`; run `42109674529`, intento 1. Root leyó ambos jobs terminales:
+
+- POST `127533595946`: 6/6 PASS, 0 FAIL/skip, 60115 ms: principal, cookie nativa malformada, dos gramáticas puras y dos cancelaciones M después de la limpieza. Artefacto `13453505757`, SHA256 `e4fbdb7a54b511ee3fb0bc918ab1ae37078dc2132e4acbb3d6973410a7d7ccea`.
+- GET `127533596479`: 5/5 PASS, 0 FAIL/skip, 28446 ms: principal con formulario activo, cookie nativa malformada, gramáticas puras y límites/envelope Headers (distinguir constructor nativo de parser). Lint de los diez paths limpio. Artefacto `13452319591`, SHA256 `b5161a9ea8927b96d7ee272e94a150125de116efec8f42c08450b805a7c1dee6`.
+- Principal final: 1275 ms totales, child 775 ms dentro de ventana 4999 ms; seis pares/doce snapshots/cinco rechecks y dos verificaciones Access reales. 102 sesiones, 64 first/56 all; DO get902/list108/sync2/txn26/txGet98/txList2/txPut2. 84 HTTP, peak2, active0. Son mediciones de este recorrido SYN, no SLA, factura ni drenaje físico.
+- QA principal: 1801609 bytes/325 inputs, SHA256 `3885841126ffba0a9fcffc748dfe04aa6cd0621953cf692963a512fbc76b0f13`, graph SHA256 `4d9be238e8da7428599b70a29fc6f84fde780ef156e671268a99097e9a9e9dc7`. M: 1686818 bytes/303 inputs, SHA256 `f3e3a5b9104aecce8184a97edc16cf6709e5941c1faad423b06c0663924e9340`, graph SHA256 `0f1e927b66951ce5a82293e717f69f0417e2336932c1653f6d80dacb4cebb551`.
+
+El writer informó inventarios finales de 50 POST y 37 GET únicos y está terminando matriz/informe, protección de blobs y retiro del qualifier. **Pendiente leer informe completo, comprobar diff BASE→HEAD y revisión independiente**. Los PASS no cierran Task/P3 por sí solos. Root ya obtuvo los diez archivos en e153 para preparar el paquete U10; fanout permanece sin cambios y era opcional. No cambios en main ni recursos remotos.
