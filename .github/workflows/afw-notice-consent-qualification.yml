@@ -28,15 +28,23 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: POST causal RED
-        run: node --test test/mcp-qa-finite-owner-notice-consent-native.test.mjs
+      - name: POST full native qualification
+        run: |
+          set +e
+          node --test test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/notice-post.tap" 2>&1
+          code=$?
+          tail -n 12 "$RUNNER_TEMP/notice-post.tap"
+          if [ "$code" -ne 0 ]; then grep -A 28 '^not ok' "$RUNNER_TEMP/notice-post.tap"; fi
+          exit "$code"
         env:
           AFW_NOTICE_BUNDLE_CAPTURE: '1'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: notice-consent-post-${{ github.sha }}
-          path: ${{ runner.temp }}/afw-notice-get-bundles
+          path: |
+            ${{ runner.temp }}/afw-notice-get-bundles
+            ${{ runner.temp }}/notice-post.tap
           retention-days: 7
   get-regressions:
     runs-on: ubuntu-latest
@@ -49,13 +57,77 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Cookie P3 causal RED
-        run: node --test --test-name-pattern='^(notice cookie-list|notice GET malformed unrelated cookie)' test/mcp-qa-finite-owner-notice-get-native.test.mjs
+      - name: GET full
+        if: ${{ !cancelled() }}
+        run: |
+          set +e
+          node --test test/mcp-qa-finite-owner-notice-get-native.test.mjs > "$RUNNER_TEMP/notice-regression-0.log" 2>&1
+          code=$?
+          tail -n 12 "$RUNNER_TEMP/notice-regression-0.log"
+          if [ "$code" -ne 0 ]; then grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-0.log" || cat "$RUNNER_TEMP/notice-regression-0.log"; fi
+          exit "$code"
+        env:
+          AFW_NOTICE_BUNDLE_CAPTURE: '1'
+      - name: Phase pure full
+        if: ${{ !cancelled() }}
+        run: |
+          set +e
+          node --test test/mcp-qa-finite-owner-phase-context.test.mjs > "$RUNNER_TEMP/notice-regression-1.log" 2>&1
+          code=$?
+          tail -n 12 "$RUNNER_TEMP/notice-regression-1.log"
+          if [ "$code" -ne 0 ]; then grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-1.log" || cat "$RUNNER_TEMP/notice-regression-1.log"; fi
+          exit "$code"
+        env:
+          AFW_NOTICE_BUNDLE_CAPTURE: '1'
+      - name: Phase native selected16
+        if: ${{ !cancelled() }}
+        run: |
+          set +e
+          node --test --test-name-pattern='^(closed source keeps|settled first connection|unknown issuer SEND|absent original issuer never|failed schema SELECT|fresh current owner|fresh QA pointer|same ambient original request)' test/mcp-qa-finite-owner-phase-context-native.test.mjs > "$RUNNER_TEMP/notice-regression-2.log" 2>&1
+          code=$?
+          tail -n 12 "$RUNNER_TEMP/notice-regression-2.log"
+          if [ "$code" -ne 0 ]; then grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-2.log" || cat "$RUNNER_TEMP/notice-regression-2.log"; fi
+          exit "$code"
+        env:
+          AFW_NOTICE_BUNDLE_CAPTURE: '1'
+      - name: SDK native selected6
+        if: ${{ !cancelled() }}
+        run: |
+          set +e
+          node --test --test-name-pattern='^(uninstrumented actual native|missing actual SDK binding cookie|actual current publication drift|owned begin recheck rejects actual foreign delta owner-revision|fanout causal control delay0)' test/mcp-qa-finite-owner-qa-sdk-native.test.mjs > "$RUNNER_TEMP/notice-regression-3.log" 2>&1
+          code=$?
+          tail -n 12 "$RUNNER_TEMP/notice-regression-3.log"
+          if [ "$code" -ne 0 ]; then grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-3.log" || cat "$RUNNER_TEMP/notice-regression-3.log"; fi
+          exit "$code"
+        env:
+          AFW_NOTICE_BUNDLE_CAPTURE: '1'
+      - name: D04 native selected4
+        if: ${{ !cancelled() }}
+        run: |
+          set +e
+          node --test --test-name-pattern='^D04 actual exchange (retains|then SYN valid native timestamp drift|then SYN immutable original current-(owner|revision))' test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs > "$RUNNER_TEMP/notice-regression-4.log" 2>&1
+          code=$?
+          tail -n 12 "$RUNNER_TEMP/notice-regression-4.log"
+          if [ "$code" -ne 0 ]; then grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-4.log" || cat "$RUNNER_TEMP/notice-regression-4.log"; fi
+          exit "$code"
+        env:
+          AFW_NOTICE_BUNDLE_CAPTURE: '1'
+      - name: Lint changed
+        if: ${{ !cancelled() }}
+        run: |
+          set +e
+          npx --no-install eslint lib/mcp-qa-finite-owner-phase-context.mjs lib/mcp-qa-finite-owner-notice-get-wire.mjs lib/mcp-qa-finite-owner-notice-get-forward.mjs lib/mcp-qa-finite-owner-notice-get-qa.mjs lib/mcp-qa-finite-owner-notice-consent-body.mjs test/mcp-qa-finite-owner-notice-consent-native.test.mjs test/fixtures/finite-owner-notice-get.mjs test/fixtures/finite-owner-qa-sdk.mjs test/mcp-qa-finite-owner-notice-get-native.test.mjs > "$RUNNER_TEMP/notice-regression-5.log" 2>&1
+          code=$?
+          tail -n 12 "$RUNNER_TEMP/notice-regression-5.log"
+          if [ "$code" -ne 0 ]; then grep -A 28 '^not ok' "$RUNNER_TEMP/notice-regression-5.log" || cat "$RUNNER_TEMP/notice-regression-5.log"; fi
+          exit "$code"
         env:
           AFW_NOTICE_BUNDLE_CAPTURE: '1'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: notice-consent-get-${{ github.sha }}
-          path: ${{ runner.temp }}/afw-notice-get-bundles
+          path: |
+            ${{ runner.temp }}/afw-notice-get-bundles
+            ${{ runner.temp }}/notice-regression-*.log
           retention-days: 7
