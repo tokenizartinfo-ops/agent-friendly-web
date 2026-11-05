@@ -1,3 +1,17 @@
+# CHECKPOINT VIGENTE — cierre ordinario 4nov2026 Argentina
+
+D0.1 COMPLETE/independientemente aprobado sin hallazgos; root verificó fuente04e8bb0f77cb78b27c219b9fd703641018e8df12 antes del cierre5nov01:16UTC. Código probado9fe7e2f53f4e594879b3992e5751fe631c03ec60/treeee2817c5d711b073a12ccd7fa2aef2f840e577f4. Actions41946053720/job126978408579/attempt1:143PASS+compiler1PASS,lint0errors16existingwarnings. Reporte docs/superpowers/reports/2026-11-04-finite-owner-sdk-trust-boundary-d01.md; revisión docs/superpowers/reviews/2026-11-04-finite-owner-sdk-trust-boundary-d01.es.md. Paquete a1a8e0139f993d05d9fb83c2610c4ed0cef4a898. Primer gate fallido preservado y discrepancia del codec DATA cerrada con corrección de test solamente; cinco compilaciones reales declaradas.
+
+También COMPLETE: signal/compatibilidad C1/C2/C3 y slice original220b5bc3, fase factualfe0af360 trasfixR1, conversión pura9fd0ff65. No redispatch/retest por pérdida de memoria. Contrato QAalias soloFUENTE; ningún acceso real añadido. Diseños D0actualSDK/owned-recheck revisados como diseños, no implementados. Supersedido A/B con reporte deM no es ruta aceptada.
+
+**DETENER AL CERRAR:** Gabriel espera aviso para apagar; no activar D0.2 ni otra fuente o ventana esta noche. No escritores o ensayos activos creados por este bloque. Retomar mañana desde cierre docs/superpowers/progress/2026-11-04-end-of-day.es.md, critical-path y spec/plan D0 SDK+owned-recheck. Próximo bloque D0.2 integrado QA SDK/recheck lexical, luegoD0.3compat, avisos/prearm/fullsetup, alarma/control/cleanup total, revisión de rama/CI/paquete y preflightremoto noconsumidor. Una única ocurrencia coordinada PC-off después; ARMgenuino vigente antesdepedirapagadoensayo.
+
+No runtime/Entry/OAuth/OTP/DDL/credencial/permisos/cron/Max/main/merge acción esta jornada. Ceilingsource3nov02:59UTC expirado; no renovación anticipada. Últimaremota3nov es evidencia fechada,nolecturadehoy. operationalReadiness=false;completePackage=false;PCoff=false. La dirección de estechat sigue local; no guardia cloudpermanente. El apagado de hoy es descanso, no ensayo ni acreditación.
+
+**Los checkpoints debajo son HISTORIA preservada. Sus antiguos textos ACTIVE no son asignaciones actuales.**
+
+---
+
 # Active checkpoint — detached closed-prearm DATA conversion
 
 4novArgentina/5novUTC. First-phase factual ownercontext COMPLETE afterfixround1. Fullreview220b5bc3..4ffc2f9c oneImportantP1(coherentoriginalMreceipt incorrectlyread_consent); samewriter3265RED1FAIL→52ef4043GREEN7PASS/newcompiler23PASS; scopedrereview4ffc..fe0af360ADDRESSED/no newCriticalImportant,combinedSpecPass/QualityApproved. Rootacceptedandactivatednextunitat33fece006e8ccb74c6f91546002469d89939c059. DoNOTredispatchphase/C1/C2/C3/signal/earlierissuer/conduitacceptedunits.
