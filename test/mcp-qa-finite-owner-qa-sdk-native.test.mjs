@@ -67,8 +67,8 @@ import {seedFiniteOwnerSdkClient,readSyntheticIssuedGrantProps} from './fixtures
 async function plain(p){const r=await p;try{return JSON.parse(JSON.stringify(r));}finally{r?.[Symbol.dispose]?.();}}
 
 const PREP='__Host-afw-finite-prepare='+'a'.repeat(64);
-async function world(fn,{observed=true,restart=false}={}){
- const f=await initialEntryHarness('phase-context-sdk'+(observed?'-observed':'')+(restart?'-restart':''));
+async function world(fn,{observed=true,restart=false,io=false}={}){
+ const f=await initialEntryHarness(io?'phase-context-sdk-io':'phase-context-sdk'+(observed?'-observed':'')+(restart?'-restart':''));
  try{
   await f.stub.configure('normal');assert.equal((await plain(f.stub.invoke(f.refs))).status,'material_recorded');await f.stub.restoreMethods();
   f.phaseCurrent=await plain(f.stub.seedPhaseFacts('settled',null));assert.equal(f.phaseCurrent.fixtureError,undefined,JSON.stringify(f.phaseCurrent));
@@ -240,3 +240,38 @@ for(const operation of ['open','grant'])test('actual handler original child cann
  else {assert(has(s,'sdk_begin:observed'));assert(!(await plain(f.stub.snapshot())).some(([k])=>k.endsWith(':authorization:ack')));}
  const beforeCalls=s.calls.length;assert.equal(await status(form?f.post(form):f.get()),503);assert.equal((await observe(f)).calls.length,beforeCalls,'incomplete first GET/POST never restarts SDK');
 }));
+
+
+async function fanoutMetrics(f,form,response,{peak}){
+ const state=await plain(f.stub.ioObservation()),rows=await plain(f.stub.snapshot());
+ const read=suffix=>{const raw=rows.find(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')&&k.endsWith(suffix))?.[1];return raw?JSON.parse(raw):null;};
+ const send=read(':consume:send'),ack=read(':grant:ack'),child=state.child;
+ const full=child?state.rows.slice(child.first,child.last):[];
+ const narrow=send&&ack?full.filter(r=>r.startedAt>=send.issuedAt&&r.startedAt<=ack.observedAt):[];
+ const counts={};for(const row of full)counts[row.category]=(counts[row.category]??0)+1;
+ console.info('fanout actual lifecycle',JSON.stringify({status:response.status,peak:state.peak,active:state.active,child,elapsed:child?child.endMono-child.startMono:null,tail:child&&ack?child.endedAt-ack.observedAt:null,full:full.length,narrow:narrow.length,counts,sql:state.sql,delayMinimum:f.ioWaits?.length?Math.min(...f.ioWaits):0,sendPresent:!!send,ackPresent:!!ack}));
+ assert.equal(response.status,302,'genuine original POST must issue code before original child expiry');
+ assert(child);assert(child.endMono-child.startMono<5000);assert(child.endedAt<child.deadline);
+ assert.equal(full.length,112);assert.equal(narrow.length,84);
+ assert.deepEqual(counts,Object.fromEntries(['verify-reader','verify-publisher','qa-deployment','qa-version','m-deployment','m-initial-version','m-current-version'].map(k=>[k,16])));
+ assert.deepEqual(state.sql,{factual:80,preflight:16,writes:2});
+ assert.equal(state.peak,peak);assert.equal(state.active,0);
+ assert(full.every(r=>r.outcome==='fulfilled'&&r.endMono>=r.cancelSettledAt&&r.cancelSettledAt>=r.cancelStartedAt&&r.bytes>0));
+ if(f.ioDelay)assert(f.ioWaits.every(ms=>ms>=50));
+ await issued(f,form,response);
+ assert.equal((await observe(f)).calls.length,0,'I/O-only mode leaves actual SDK KV unwrapped');
+ assert.equal((await observe(f)).probes.length,0,'I/O-only mode never probes source');
+ return state;
+}
+test('fanout causal control delay0 preserves complete native child and original reads',{timeout:120000},()=>world(async f=>{
+ const form=await consent(f);await f.stub.ioConfigure();
+ await fanoutMetrics(f,form,await f.post(form),{peak:1});
+},{observed:false,io:true}));
+test('fanout 50ms preserves original five second child and actual grant',{timeout:120000},()=>world(async f=>{
+ const form=await consent(f);await f.stub.ioConfigure();f.ioDelay=50;
+ await fanoutMetrics(f,form,await f.post(form),{peak:2});
+},{observed:false,io:true}));
+test('fanout fixed two overlaps real request lifecycles',{timeout:120000},()=>world(async f=>{
+ const form=await consent(f);await f.stub.ioConfigure();
+ await fanoutMetrics(f,form,await f.post(form),{peak:2});
+},{observed:false,io:true}));
