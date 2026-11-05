@@ -28,10 +28,10 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Native principal integration checkpoint
+      - name: Native GET complete file
         env:
           AFW_NOTICE_BUNDLE_CAPTURE: '1'
-        run: node --test --test-name-pattern='^GET acknowledged original' test/mcp-qa-finite-owner-notice-get-native.test.mjs
+        run: node --test test/mcp-qa-finite-owner-notice-get-native.test.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

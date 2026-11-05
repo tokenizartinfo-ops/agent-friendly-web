@@ -3,6 +3,11 @@ import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {join} from 'node:path';
 // Actual harness compiler evidence, never a separate compiler or source authority.
 let bundleIndex=0;
+export async function saveNoticeObservation(data){
+ if(!process.env.AFW_NOTICE_BUNDLE_CAPTURE)return;
+ const directory=join(process.env.RUNNER_TEMP,'afw-notice-get-bundles');await mkdir(directory,{recursive:true});
+ await writeFile(join(directory,'principal-io-'+process.pid+'.json'),JSON.stringify(data));
+}
 export async function captureNoticeBundle(built,role,virtualSources={}){
  if(!process.env.AFW_NOTICE_BUNDLE_CAPTURE)return;
  const bytes=built.outputFiles[0].contents,sha256=createHash('sha256').update(bytes).digest('hex'),metafile=built.metafile;
@@ -105,6 +110,10 @@ export function instrumentFiniteNoticeGet(source){
  const marker='/** UNMOUNTED fixed GET.',at=source.indexOf(marker);
  if(at<0)throw Error('SYN notice handler marker');
  let head=source.slice(0,at),body=source.slice(at);
+ const between="await ioCheckpoint('between');";
+ if(head.split(between).length!==2)throw Error('SYN notice second snapshot marker');
+ head=head.replace(between,between+"if(globalThis.__noticeOwner?.noticeMode==='drift'&&globalThis.__noticeState?.trace.at(-1)?.position==='ticket-sql-resolved')await globalThis.__noticeOwner.noticeGate('between-own');");
+
  const replace=(needle,next)=>{if(body.split(needle).length!==2)throw Error('SYN notice marker changed: '+needle);body=body.replace(needle,next);};
  replace("async function recheckNoticeGetOwned(){\n    check();","async function recheckNoticeGetOwned(){\n    globalThis.__noticeState?.trace.push({position,at:Date.now(),stage:'before'});check();");
  replace("if(canonical(pair.first)!==canonical(expected)||canonical(pair.second)!==canonical(expected))fail();","if(canonical(pair.first)!==canonical(expected)||canonical(pair.second)!==canonical(expected))fail();globalThis.__noticeState?.trace.push({position,at:Date.now(),stage:'after'});");
