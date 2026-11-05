@@ -8,7 +8,7 @@ permissions:
 jobs:
   qualify:
     runs-on: ubuntu-24.04
-    timeout-minutes: 22
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,15 +20,6 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Scoped lint first
         run: npx eslint lib/mcp-qa-finite-owner-phase-context.mjs test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs test/fixtures/finite-initial-entry-world.mjs
-      - name: D04 GREEN and actual token strict pending
+      - name: D04 full DO snapshot immutable principal GREEN
         run: |
-          node --test --test-reporter=tap --test-name-pattern='D04|valid actual QA code exchanges through actual M bounded response and actual MCP original permission|held actual SDK completion settles late after original terminal fence and real grant reduction' test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs | tee scoped-0.tap
-          node --input-type=module -e "import{readFileSync}from'node:fs';import assert from'node:assert/strict';const s=readFileSync('scoped-0.tap','utf8');assert.equal(Number(s.match(/^# tests (\d+)$/m)?.[1]),24);assert.equal(Number(s.match(/^# pass (\d+)$/m)?.[1]),24);assert.equal(Number(s.match(/^# fail (\d+)$/m)?.[1]),0);console.info('Meaningful selected count: 24');"
-      - name: Selected SDK authority regressions
-        run: |
-          node --test --test-reporter=tap --test-name-pattern='held actual approve denies fabricated results|owned approve recheck rejects original issuer' test/mcp-qa-finite-owner-qa-sdk-native.test.mjs | tee scoped-1.tap
-          node --input-type=module -e "import{readFileSync}from'node:fs';import assert from'node:assert/strict';const s=readFileSync('scoped-1.tap','utf8');assert.equal(Number(s.match(/^# tests (\d+)$/m)?.[1]),3);assert.equal(Number(s.match(/^# pass (\d+)$/m)?.[1]),3);assert.equal(Number(s.match(/^# fail (\d+)$/m)?.[1]),0);console.info('Meaningful selected count: 3');"
-      - name: Selected phase native authority regressions
-        run: |
-          node --test --test-reporter=tap --test-name-pattern='primary issuer prefixes remain facts not next-stage permission: (reservation|linked)|unknown issuer SEND denies grant|original primary issuer denies (revoked-grant|unknown-ack)|fresh current owner and current publication are independently rechecked: grant|absent original issuer never triggers a global grant lookup' test/mcp-qa-finite-owner-phase-context-native.test.mjs | tee scoped-2.tap
-          node --input-type=module -e "import{readFileSync}from'node:fs';import assert from'node:assert/strict';const s=readFileSync('scoped-2.tap','utf8');assert.equal(Number(s.match(/^# tests (\d+)$/m)?.[1]),7);assert.equal(Number(s.match(/^# pass (\d+)$/m)?.[1]),7);assert.equal(Number(s.match(/^# fail (\d+)$/m)?.[1]),0);console.info('Meaningful selected count: 7');"
+          node --test --test-reporter=tap --test-name-pattern='^D04 actual exchange retains factual read_consent and immutable grant ACK

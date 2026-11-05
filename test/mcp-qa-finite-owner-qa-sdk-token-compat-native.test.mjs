@@ -195,13 +195,13 @@ async function d04Read(f,x){
  return current;
 }
 async function d04Journals(f){
- return (await plain(f.stub.snapshot())).filter(([key])=>['afw.finite-preparation-issuer.v1:','afw.finite-owner-issuer-provenance.v1:','connection-preparation:','afw.finite-preparation-cleanup.v1:','afw.finite-policy-effect.v1:'].some(prefix=>key.startsWith(prefix)));
+ return initialHash('afw.finite-d04-test-do-snapshot.v1',await plain(f.stub.snapshot()));
 }
 async function d04Ack(f,x){
- const rows=await d04Journals(f),key='afw.finite-preparation-issuer.v1:'+x.form.identity.preconnectionId+':grant:ack';
+ const rows=await plain(f.stub.snapshot()),key='afw.finite-preparation-issuer.v1:'+x.form.identity.preconnectionId+':grant:ack';
  const raw=rows.find(([k])=>k===key)?.[1];assert.equal(typeof raw,'string');
  const ack=decodeFinitePreparationIssuerRecord('Ack',raw);
- return {rows,key,raw,ack};
+ return {rows:initialHash('afw.finite-d04-test-do-snapshot.v1',rows),key,raw,ack};
 }
 async function d04Exchanged(f){
  const x=await issued(f),before=await d04Read(f,x),original=await d04Ack(f,x);
@@ -215,18 +215,18 @@ async function d04Exchanged(f){
  const summary=await readSummary(f,payload.access_token);assert.equal(summary.isError,undefined);
  assert.equal(summary.structuredContent.data.id,x.app.project_id);
  const current=await plain(f.stub.sdkGrant(x.app.id));assert.notEqual(current.exchanged_at,'');
- assert.deepEqual({...current,exchanged_at:''},x.app,'real token only changed original exchanged_at');
+ assert.equal(initialHash('afw.finite-preparation-issuer-row.v1',{...current,exchanged_at:''}),initialHash('afw.finite-preparation-issuer-row.v1',x.app),'real token only changed original exchanged_at');
  assert.notEqual(initialHash('afw.finite-preparation-issuer-row.v1',current),original.ack.rowHash);
  assert.equal(initialHash('afw.finite-preparation-issuer-row.v1',{...current,exchanged_at:''}),original.ack.rowHash);
- assert.deepEqual(await d04Journals(f),original.rows,'token/MCP leave DO journals and raw ACK bytes unchanged');
+ assert.equal(await d04Journals(f),original.rows,'token/MCP leave DO journals and raw ACK bytes unchanged');
  assert.equal((await plain(f.stub.sdkGrants())).filter(row=>!f.history.some(old=>old.id===row.id)).map(row=>row.id).join(),x.app.id);
  console.info('D04 actual exchange prerequisites',JSON.stringify({preTokenReader:true,actualToken:200,actualMcpOriginalProject:true,originalAppOnly:true,currentHashDifferent:true,historicalHashMatches:true,ackUnchanged:true}));
  return {x,before,original,current};
 }
 test('D04 actual exchange retains factual read_consent and immutable grant ACK',()=>world(async f=>{
  const {x,before,original}=await d04Exchanged(f);
- const after=await d04Read(f,x);assert.deepEqual(after,before);
- assert.deepEqual(await d04Journals(f),original.rows,'reader also leaves original raw ACK/recordHash and every DO journal unchanged');
+ const after=await d04Read(f,x);assert.equal(initialHash('afw.finite-d04-test-reader.v1',after),initialHash('afw.finite-d04-test-reader.v1',before));
+ assert.equal(await d04Journals(f),original.rows,'reader also leaves original raw ACK/recordHash and every DO journal unchanged');
 }));
 
 /** SYN negative-only native changes follow the genuine QA -> M -> MCP flow.
@@ -248,15 +248,15 @@ for(const fault of ['blob-type','numeric-text','invalid-text','noncanonical','fu
  await f.db.prepare('UPDATE delegated_access_grants SET exchanged_at=? WHERE id=?').bind(value,x.app.id).run();
  if(fault==='blob-type')assert.equal(typeof (await plain(f.stub.sdkGrant(x.app.id))).exchanged_at,'object');
  assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
- assert.deepEqual(await d04Journals(f),original.rows);
+ assert.equal(await d04Journals(f),original.rows);
 }));
 
 test('D04 actual exchange then SYN inclusive created_at remains factual only',()=>world(async f=>{
  const {x,before,original,current}=await d04Exchanged(f);await d04Read(f,x);
  assert(Date.parse(current.created_at)<=Date.now()&&Date.parse(current.created_at)<Date.parse(current.expires_at));
  await f.db.prepare('UPDATE delegated_access_grants SET exchanged_at=? WHERE id=?').bind(current.created_at,x.app.id).run();
- assert.deepEqual(await d04Read(f,x),before);
- assert.deepEqual(await d04Journals(f),original.rows);
+ assert.equal(initialHash('afw.finite-d04-test-reader.v1',await d04Read(f,x)),initialHash('afw.finite-d04-test-reader.v1',before));
+ assert.equal(await d04Journals(f),original.rows);
 }));
 
 for(const field of ['id','user_id','client_id','project_id','resource','scopes_json','created_at','expires_at','revoked_at','current-owner','current-revision'])test('D04 actual exchange then SYN immutable original '+field+' denies',()=>world(async f=>{
@@ -280,7 +280,7 @@ for(const field of ['id','user_id','client_id','project_id','resource','scopes_j
   if(field==='id')assert.equal(await plain(f.stub.sdkGrant(x.app.id)),null,'original UUID absent; another row cannot substitute');
  }
  assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
- assert.deepEqual(await d04Journals(f),original.rows);
+ assert.equal(await d04Journals(f),original.rows);
 }));
 
 test('D04 actual exchange then SYN valid native timestamp drift at observation two denies',()=>world(async f=>{
@@ -297,5 +297,5 @@ test('D04 actual exchange then SYN valid native timestamp drift at observation t
  assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
  assert.equal(f.phaseObservation,2,'existing second pointer observation performed fixed native UPDATE');
  assert.equal((await plain(f.stub.sdkGrant(x.app.id))).exchanged_at,different);
- assert.deepEqual(await d04Journals(f),original.rows);
+ assert.equal(await d04Journals(f),original.rows);
 }));
