@@ -1,46 +1,90 @@
-# Partial checkpoint — fixed GET ticket and private factual notice inventory
+# Fixed notice GET and private factual inventory — implementation report
 
-5 November 2026. **INCOMPLETE; owner requested stop and preservation for PC shutdown.** This closes only the current small checkpoint, not Task1 acceptance. No new unit, promotion, merge or runtime action is authorized by this report.
+5 November 2026, SOURCE ONLY / UNMOUNTED. **Writer status: DONE_WITH_CONCERNS, ready for root's independent spec/quality review.** The required source checks are covered by the primaries below; this does not accept a deployment, notice consent, hosting or operational package.
 
-PROJECT=AFW; REPOSITORY=tokenizartinfo-ops/agent-friendly-web (1347578006, PUBLIC); ENVIRONMENT=GitHub source/credential-free Actions SYN; ORIGIN=GitHub App API; RESOURCE_TYPE=isolated source branch; RESOURCE_ID=feat/finite-native-cleanup-20261101; ALLOWED_ACTION=bounded ten-path source task plus this report and temporary qualifier removal; ROLLBACK=own commits only, expected-head CAS, no foreign overwrite. No local clone, dependency install, build or test occurred.
+PROJECT=AFW; REPOSITORY=tokenizartinfo-ops/agent-friendly-web (1347578006, PUBLIC); ENVIRONMENT=GitHub source/credential-free Actions SYN; ORIGIN=GitHub App API; RESOURCE_TYPE=isolated source branch; RESOURCE_ID=feat/finite-native-cleanup-20261101; ALLOWED_ACTION=exact ten source/test paths, this report and temporary qualifier; ROLLBACK=own commits only with expected-head CAS, preserving foreign changes and every historical row. No local clone/dependencies/build/test or persistent process was used. No Cloudflare runtime was read or mutated.
 
-## Revisions and preservation
+## Immutable revisions, scope and rulings
 
-- Execution BASE: `dc4edafc0b5e4ba440cd32a21dd3dd58024e811a`; BASE tree `91d023ce48bb2f5105140c788d3646c64c20bd4e`.
-- Current codeHEAD: `2f2cbe4d2f9852d6717fcda59e23a5fc51fb9330`; code tree `4ed04ac1a74dc05b7e822f770c38d4ec6f9683d3`.
-- Own checkpoints: RED1 `bab878c611006abf7a00a9b223bc478e203b7a38`; inventory + absent-GET scaffolds `b2069aba00535c60715b0f1fab4f4a4ca6520035`; schema grammar correction `2f2cbe4d2f9852d6717fcda59e23a5fc51fb9330`.
-- reportHEAD and report tree mean the commit/tree containing this report and deleting the qualifier; their exact resulting IDs are returned in the root closing receipt. A report cannot embed its own commit hash.
-- All three Actions jobs below are terminal. No rerun, cancellation, new dispatch, broad test, or runtime action was performed for this closure.
-- The temporary `.github/workflows/afw-notice-get-qualification.yml` is removed in the report commit. Historical workflow content and evidence remain recoverable at the codeHEAD and run URLs.
+- Review BASE remains `dc4edafc0b5e4ba440cd32a21dd3dd58024e811a`, tree `91d023ce48bb2f5105140c788d3646c64c20bd4e`; never reset to a later checkpoint.
+- Final codeHEAD `e71eb58f040d8de531206172c2cd0d2df897771a`, code tree `055d0226b5b433742e74d21a1288a4c4ae87425f`.
+- Product blobs have been identical since `be044d4894e84497fb490720875195f5c8b15167`. Later changes were fixture schema preservation, the measured SDK assertion, test reinforcement and temporary workflow selection. Source proof is the four product blobs below and the immutable comparison [be044..final code](https://github.com/tokenizartinfo-ops/agent-friendly-web/compare/be044d4894e84497fb490720875195f5c8b15167...e71eb58f040d8de531206172c2cd0d2df897771a).
+- reportHEAD/tree are the commit/tree containing this report plus qualifier deletion, returned and independently read back in root's closing receipt. A report cannot embed its own containing commit hash.
+- The temporary `.github/workflows/afw-notice-get-qualification.yml` is removed with this report after every own run reached terminal status. It remains recoverable at the recorded run heads. No permanent CI/service/permission was added.
+- Original brief/preflight at BASE bind the unit. Root's narrow schema-fixture ruling is formalized at [root docs c5d211e6 brief](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/c5d211e671c79d5ed99330eb7c5950e36f3f5da8/docs/superpowers/briefs/2026-11-05-finite-native-notice-next-slice.md), blob `c64f9c9f9c97f2a8832e3dcb090aa17d9b57579c`. It supersedes only “seven DDL exclusively in noticeGet”: all phase-context SYN fixtures may add the missing three objects while retaining their four original consent objects, three foreign events and two grants. Product schema guards remain unchanged.
+- Root resolved the header conflict: keep OAuth's header-copy allowlist intact; QA generates fixed nosniff, M validates/does not copy that special header and independently sets fixed `X-Content-Type-Options: nosniff` only on accepted HTML200. The ordinary OAuth modules are untouched.
+- The shutdown report/draft is preserved at [a0bd9d6](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/a0bd9d68653cc18313490c842d7d884c6184fa18/docs/superpowers/reports/2026-11-05-finite-native-notice-next-slice.md). Its draft was explicitly unverified then; current source was implemented and qualified separately, without repeating valid RED1/RED2.
 
-## What is actually committed
+## Resulting source behavior
 
-Private observer now reads the accepted notice journal and exact seven-object monitoring schema, and queries tickets/events only for the original issuer UUID using fresh first-primary ALL reads. ALL requires success===true, an array and the cap; errors never become absent schema. Both snapshots include actual notice/schema/rows. The existing three-key reader and OAuth recheck reject own notice content.
+The private observer reads the accepted six-row notice journal, validates all seven exact SQL definitions and reads the original UUID's exact ticket/event columns from fresh first-primary sessions. Each ALL must actually return success===true, an array and the fixed cap. An error, malformed metadata or partial schema is never interpreted as absence. Both whole snapshots include actual schema SQL, notice records, ticket rows and event rows; current grant.exchanged_at remains actual. Foreign prefixes/UUID history are neither used for admission nor rewritten.
 
-This is **partial implementation, not fully qualified**. Only the two cases below were exercised. The three new GET modules are explicitly unavailable scaffolds, only for a causal RED. The new fixture opts in via `phase-context-sdk-token-notice-get`, installs the existing seven DDL definitions only in that SYN mode, and uses actual OAuth/SDK issuance and native D1/DO. No real schema was changed. The new test currently has two cases. No SDK/store/codec/journal production substitution was introduced.
+The public three-key reader and existing OAuth continuation reject any own notice content. Complete empty schema and totally absent schema remain compatible with the old reader; GET additionally requires complete seven-object schema before reservation/SEND.
 
-| Path at codeHEAD | Blob |
+The fixed M bridge and QA receiver accept only the bounded original GET. Metadata is overwritten at M; caller options never create source/identity/permission. The handler verifies actual Access crypto, preparation cookie, preconnection, approval, original issuer/grant/SDK chain and current publication. A lexical expected whole frame tracks only this invocation's actual recorded reservation, its own SEND, its real retained INSERT Promise/result, and recorded ACK. Separate append Promises never overwrite SQL references. Every own transition checks two complete snapshots. Pending, existing, no_mutation, unknown or contradictory state returns503 without reconstructing an ACK or retrying SQL.
+
+Success inserts exactly one original fourteen-column ticket and three journal rows, with no consent event. HTML has the fixed preparation message, hidden escaped handle, disabled button, no action/JS, CSP form-action none, no-store and Strict/HttpOnly/Secure cookie. All three human POST paths remain closed before any journal/SQL. No route/mount, phase, NoticeLink or source-notice permission was added.
+
+| Final path | Blob |
 | --- | --- |
-| `lib/mcp-qa-finite-owner-notice-get-forward.mjs` | `fc1763e6aeb0f87674876a8a8fb2b8b6ce372f2e` |
-| `lib/mcp-qa-finite-owner-notice-get-qa.mjs` | `e340887574b4cb34dbb4e5d44f08976ea923d6e7` |
-| `lib/mcp-qa-finite-owner-notice-get-wire.mjs` | `a0a6c84f9ca61bc70db6e4f601eff5e54c934377` |
-| `lib/mcp-qa-finite-owner-phase-context.mjs` | `ae95ceb6b262535d45b198bf70bb9cd021fc9f95` |
-| `test/fixtures/finite-initial-entry-world.mjs` | `af29170068fe713a7a67a3ea20145636363f8bc8` |
-| `test/fixtures/finite-owner-io-fanout.mjs` | `900172e1dd24662c354c0d3d48d4ed28a86c3a52` |
-| `test/fixtures/finite-owner-notice-get.mjs` | `0ed6f9ac8b901596dc716fdbe2604d806369da83` |
-| `test/fixtures/finite-owner-qa-sdk.mjs` | `53324ed7f04d126edf7240d4aa4cbc1ded19daf9` |
-| `test/mcp-qa-finite-owner-notice-get-native.test.mjs` | `18201a9cbe0e20ec0f95a22cc366e53d50969873` |
-| `test/mcp-qa-finite-owner-qa-sdk-native.test.mjs` | `fb645efe76fd007e64aed1c485ac98834ba7b729` |
+| `lib/mcp-qa-finite-owner-notice-get-forward.mjs` | `b131cdef0fccf7ccdd4b810d99ea4be4252b2650` |
+| `lib/mcp-qa-finite-owner-notice-get-qa.mjs` | `6f7b6cb02e9551caab16afdc1b1cd650336837f4` |
+| `lib/mcp-qa-finite-owner-notice-get-wire.mjs` | `74da03e38a5ff7561f23ddbab5dfc3397cb31896` |
+| `lib/mcp-qa-finite-owner-phase-context.mjs` | `4fc7a7005330e6fbf76ae7ab0ea4767dcfd2facf` |
+| `test/fixtures/finite-initial-entry-world.mjs` | `bfb918ebe15edc654de0e57d5aecf83757129b07` |
+| `test/fixtures/finite-owner-io-fanout.mjs` | `e181bfd7634b6f71e4129b03fbb529a2f1b04f10` |
+| `test/fixtures/finite-owner-notice-get.mjs` | `f83a1db865ea85668d7261f728a1ec12541409cc` |
+| `test/fixtures/finite-owner-qa-sdk.mjs` | `6ac23eb8251ee89ee73a40b822c8856ebeca578a` |
+| `test/mcp-qa-finite-owner-notice-get-native.test.mjs` | `50f082434f339094718a681456dcb2e13912811c` |
+| `test/mcp-qa-finite-owner-qa-sdk-native.test.mjs` | `35c3d9a3bd7be8ea09e3963ac6e56cd3ee40a1f8` |
 
-Protected blobs at codeHEAD, unchanged from BASE:
+Protected blobs, unchanged from BASE:
 
+- `lib/mcp-qa-finite-owner-oauth-forward.mjs`: `f7979579fcb6d00b3d5d68c7790089c803f4170f`.
+- `lib/mcp-qa-finite-owner-oauth-qa.mjs`: `ec5c16161bffc6e6d19de153b4465bf6ae748493`.
+- `lib/mcp-qa-finite-owner-oauth-wire.mjs`: `fc113a05e7f6d1ef72cd045a55c5934b357aa724`.
 - `lib/mcp-qa-finite-preparation-issuer-store.mjs`: `efc25b2af9c80b8eb27cffe219544e974002293e`.
 - `lib/mcp-qa-finite-preparation-notice-journal.mjs`: `b9c15aba18e2442a0ed864b8afd5e86313c5e470`.
 - `lib/mcp-qa-finite-preparation-notice-records.mjs`: `8c9386b27109cd056d3f70d91ab3cb6c6f40b4e9`.
 
-The ordinary M source, SDK source, schema/config/hosts and source stubs remain outside the changed map. Existing accepted store4016c13d and journal2969a840 acceptance was reused; no 147-store/33-issuer/journal repetition was run.
+SDK source, ordinary M entry/hosts, schema/config, source stubs and all other product files were not modified. Accepted store4016c13d and journal2969a840 were reused; no repeated147-store/33-issuer/journal or50ms/allSDK suite was run.
 
-## Primary evidence: all runs, including failed prerequisites
+## Required acceptance coverage, with exact selected counts
+
+All runs below are attempt1. TAP skip counts describe only emitted TAP; Node22 filters exclude unselected declarations rather than reporting them as skips.
+
+| Required group | Qualified primary | Result |
+| --- | --- | --- |
+| New native file, full33 cases | be044 / run42095343936 / job127483768304 | 33PASS/0FAIL/0skip,458761.807882ms |
+| Final changed principal and consent cases | e71eb58f / run42098853181 / job127496007748 | 2PASS/0FAIL/0skip,32356.0771ms; replaces the two changed assertions/cases,31 other cases preserved |
+| Pure phase file, entire18 | be044 / run42095343936 / job127483768304 | 18PASS/0FAIL/0skip,132.301603ms |
+| Selected phase-native16 | c0e1db92 / run42097918038 / job127492728047 | 16PASS/0FAIL/0skip,59418.956819ms |
+| Selected SDK-native6 | c0e1db92 / job127492728047 plus1c2a4a5b / job127494691138 | Five unchanged cases PASS in the first; affected fanout case PASS in the second. Do not misreport this as one six-pass TAP run |
+| Selected D04 token-native4 | 1c2a4a5b / run42098481702 / job127494691138 | 4PASS/0FAIL/0skip,54236.087611ms |
+| Targeted ten-file ESLint | 1c2a4a5b and final e71eb58f jobs | Both success, no lint diagnostic |
+
+Static declaration inventories supplied by root at BASE and unchanged by this unit: phase-native80=16selected+64not selected; SDK-native61=6+55; D04token-native46=4+42. These are **static inventories, not TAP skips**. Final reinforcement filters select2 of current33 declarations, leaving31 not selected in that run. The fanout-only correction selects1 of61, leaving60 not selected; it preserves the other five earlier selected passes.
+
+Exact required commands (shell runs also checked actual TAP counts/nonzero):
+
+```text
+node --test test/mcp-qa-finite-owner-notice-get-native.test.mjs
+node --test test/mcp-qa-finite-owner-phase-context.test.mjs
+node --test --test-name-pattern='^(closed source keeps|settled first connection|unknown issuer SEND|absent original issuer never|failed schema SELECT|fresh current owner|fresh QA pointer|same ambient original request)' test/mcp-qa-finite-owner-phase-context-native.test.mjs
+node --test --test-name-pattern='^(uninstrumented actual native|missing actual SDK binding cookie|actual current publication drift|owned begin recheck rejects actual foreign delta owner-revision|fanout causal control delay0)' test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+node --test --test-name-pattern='^D04 actual exchange (retains|then SYN valid native timestamp drift|then SYN immutable original current-(owner|revision))' test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs
+node --test --test-name-pattern='^fanout causal control delay0' test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+node --test --test-name-pattern='^(GET acknowledged original|SYN negative consent event with real)' test/mcp-qa-finite-owner-notice-get-native.test.mjs
+./node_modules/.bin/eslint lib/mcp-qa-finite-owner-phase-context.mjs lib/mcp-qa-finite-owner-notice-get-wire.mjs lib/mcp-qa-finite-owner-notice-get-forward.mjs lib/mcp-qa-finite-owner-notice-get-qa.mjs test/mcp-qa-finite-owner-notice-get-native.test.mjs test/fixtures/finite-owner-notice-get.mjs test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-qa-sdk.mjs test/fixtures/finite-owner-io-fanout.mjs test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+```
+
+The principal actually issues QA code, exchanges it through actual M, reads actual MCP and the D0.4 three-key reader before GET. It verifies all fourteen actual columns, an independent full-row ACK hash, original identity/grant and verbatim original preparation/issuer/SDK rows; actual exchanged_at and original issuer ACK are retained. A valid own ticket followed by a SYN negative consent event denies subsequent access without changing that ticket/journal.
+
+Other native cases cover schema0/7/partial/extra/changed SQL and failed actual ALL metadata; foreign history; grammar, cookies, crypto signature/subject/audience/issuer; longer original versus shorter current Access and actual expiry during GET; unknown/overflow/orphan/SEND/correlation/row-hash states; own pending and committed-before-return gates with a foreign reader/GET denied; lost reservation/SEND/SQL observation without retry; interleaved freeze; original5s SQL queue; CLOSE-before-ticket and ticket-before-CLOSE with history retained; two-snapshot owner/revision/pointer/exchanged_at/journal/ticket drift; and actual HTTP body/cancel retention after child expiry. Ticket mutation was explicitly destructive SYN corruption after first snapshot with trigger reinstated, not a legitimate transition. Positive grants were always actually issued by SDK/native paths; no positive SQL prefills/verifier/source/snapshot mocks were used.
+
+## All primary runs, failures and their disposition
+
+### Preserved causal REDs before shutdown
 
 All attempts are attempt 1; checkout persisted credentials=false, contents permission=read, Ubuntu24.04, Node22.23.4, npm10.9.9. Each job used `npm ci --ignore-scripts --no-audit --no-fund`, max job15min. No product30s/5s clock was extended.
 
@@ -56,251 +100,104 @@ All attempts are attempt 1; checkout persisted credentials=false, contents permi
    `node --test test/mcp-qa-finite-owner-notice-get-native.test.mjs`.
    TAP tests2/pass1/fail1/cancel0/skip0, duration19553.299179ms. Inventory own negative test PASS. Principal case reached actual QA code→actual M token exchange→actual MCP read_project_summary→actual D0.4 three-key/read_consent reader; preserved actual exchanged_at. Complete schema7 and empty own notice/ticket/event prerequisites passed. Missing GET scaffold then returned503 versus200, exact assertion: `fixed GET missing after actual prerequisites; tickets=0 journal=0`. This is the valid causal RED2. No GREEN GET exists.
 
-## Compiler/cost facts and their limits
 
-The actual QA/M harness compilers ran as part of these tests (ten compiler invocations total, no extra build just for hashes). Existing compatibility profiles were qa-sdk 2026-09-07/nodejs_compat/enable_request_signal and m-sdk with additional global_fetch_strictly_public. Captured existing compiler lines:
 
-- RED1: D02 fixture QA compiler {"bytes":1706500,"sha256":"8c2ca7e1183d2fe3f8212566c2791256479d29110c0d3681d1d6200663da0d29","inputs":320}
-- RED1: D02 fixture M compiler {"bytes":1671443,"sha256":"f0b31e17cb31207a010e7fee6bb8b52b69856d3d409916687539677bff3d939d","inputs":300}
-- escaping defect: D02 fixture QA compiler {"bytes":1726758,"sha256":"1ced02bee9fdeb0823fb5cbc3cdc40370110d4127bfc8713c59daf55308db058","inputs":323}
-- escaping defect: D02 fixture M compiler {"bytes":1672050,"sha256":"2a68ecbe12403a25a1eff003c05d76d1c7793b360d405407eb6cc422c2a6b0b2","inputs":301}
-- escaping defect: D02 fixture QA compiler {"bytes":1726758,"sha256":"122f69611d53dbbc8e4c9211c1dd69617f0bf264ede44d01c255225932c4973d","inputs":323}
-- escaping defect: D02 fixture M compiler {"bytes":1672050,"sha256":"2a68ecbe12403a25a1eff003c05d76d1c7793b360d405407eb6cc422c2a6b0b2","inputs":301}
-- corrected checkpoint: D02 fixture QA compiler {"bytes":1726755,"sha256":"20fb455e1e6c53b89ac9d607719e6b6964fb217d6a6aadc34883f4c79edf8e8c","inputs":323}
-- corrected checkpoint: D02 fixture M compiler {"bytes":1672050,"sha256":"2a68ecbe12403a25a1eff003c05d76d1c7793b360d405407eb6cc422c2a6b0b2","inputs":301}
-- corrected checkpoint: D02 fixture QA compiler {"bytes":1726755,"sha256":"4e856b69be04d6774ed6ee361397fe06ecdff22135c337d8ccf8938deec8f7ad","inputs":323}
-- corrected checkpoint: D02 fixture M compiler {"bytes":1672050,"sha256":"2a68ecbe12403a25a1eff003c05d76d1c7793b360d405407eb6cc422c2a6b0b2","inputs":301}
+Resumed runs (each head is immutable; no automatic rerun/attempt2):
 
-QA hashes can differ between harnesses because their explicit SYN material contains generated original timestamps/keys. Metafile input counts above are factual compiler observations, **not full graph/reachability acceptance**. Full actual metafile preservation, graph comparison, compiler input hashes, and new GET I/O metrics remain undone. No standard compiler was added; standard entrypoints are unchanged and phase remains unmounted.
+| Head | Run / job | Observed result and disposition |
+| --- | --- | --- |
+|35ad25a479eb7bc5a4dad040be047e4f4d349e8b|42093279704 /127476629576|1T0P1F0skip. Fixture graph helper treated esbuild virtual define as a file, ENOENT before prerequisites. One actual QA compile. Not a product RED. Fixed capture distinguishes actual file bytes from actual virtual compile-option text; no extra build just for hashes. Upload warned no files.|
+|808a9bab84193557970a804ca5fbf619f39dff15|42093762800 /127478302248|1T0P1F0skip. GET200/ticket/ACK/HTML/nosniff assertions passed, then exact Cache-Control assertion found duplicated no-store. Fixed only new GET forward to set once. Two compiles. Full metrics JSON was split at64KiB in logs; root reconstructed it, not lost.|
+|0db9f2d1c7018dc6f572f7fe930d8dfe5acd30e7|42094285083 /127480153262|32T30P2F0skip,268249.906914ms. Two fixture expectations incorrectly wanted applied from original closeFence, whose accepted status is fenced. Corrected assertions only. Principal and all other native cases passed.62compiles.|
+|be044d4894e84497fb490720875195f5c8b15167|42095343936 /127483768304|33nativePASS plus18purePASS. Phase16 emitted6P10F because legacy fixture contained partial four-object monitoring schema. SDK/token/lint were skipped in this job.64QA/M compiles plus16phase QA invocations. No budget/hang failure.|
+|d87158c4847604446051ab27e3ef9d844b3d2f8d|42097405566 /127490953992|One authorized diagnostic case,1T0P1F0skip. Actual LIST Maptrue,size0; actual ALL success:true/array:true,size4; source fail-site phase:276. Diagnostic QA1469048B/322inputs/hash e486e62e3d00a75fa6f18d90353483f86add066f3f8f75e25134f49b0687d65e. This instrumented diagnostic bundle is not a GREEN product bundle.|
+|c0e1db92432651391d3dfc10e18c409e1b4aa4ec|42097918038 /127492728047|Phase16PASS. SDK6 emitted5P1F because old metric expected80 versus measured128 factual reads. Control returned302 with original child1532ms, HTTP112/84, peak2/active0, preflight16/writes2 intact. Token/lint skipped.12QA/M compiles plus16phase QA invocations.|
+|1c2a4a5bae85a8ed0789057c5691fd7bd9fe3cdc|42098481702 /127494691138|Only affected fanout1PASS,15030.431257ms; D04token4PASS; lint10clean. Only factual expectation changed80→128.10QA/M compiles.|
+|e71eb58f040d8de531206172c2cd0d2df897771a|42098853181 /127496007748|Only reinforced principal+consent2PASS,32356.0771ms, lint10clean.4QA/M compiles. Last test source and all product blobs qualified as above.|
 
-No claim of total D1/DO/HTTP/body/cancel cost, new GET peak2, parent30s fit, child5s fit or retained work/drain acceptance is made. Old 98D1/112GET totals are not applied here. The inventory implementation introduces the planned journal list and schema/targeted ALL reads, but their aggregate metrics and sessions/order assertions have not yet been qualified. No50ms/allSDK/store/journal repeated checks were run.
+Canonical run links use [Actions runs](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions); each exact run/job ID above is independently retrievable. No run was canceled, replayed or extended to fit. Diagnostic onLoad code was removed before c0e1. No timeout or credential incident was inferred from temporary404 BlobNotFound while a job was still running.
 
-## Checks not run and work to resume
+## Legacy SYN schema adapter: preservation and isolation
 
-The owner stopped work after the small checkpoint; Task1 is not DONE. Before resuming verify current branch/ref/tree against this report and current authorization; do not blindly replay a run.
+The phase failures were correct product denials, not grounds to weaken success/Map/schema predicates. Native history fixture installed four consent objects and three events for foreign original/cancelled-old grants. Root authorized the already-scoped world adapter to apply the original seven IF NOT EXISTS definitions after native history seeding. It adds only owner-tickets table and its two triggers.
 
-- Implement and review fixed wire/forward/QA receiver and GET lexical state machine; preserve schema7 before reservation/SEND, actual SQL Promise/result until final whole-snapshot recheck, owned SEND references and separate journal append references.
-- Convert the principal RED2 into a real GET GREEN, exact14-column ticket plus three journal rows, HTML disabled/noJS/form-action none, Strict cookie, all three human POST routes closed before journal/SQL, no mounting or ordinary fallback.
-- Add remaining contract negatives/adversaries: absent/full-empty/partial/tampered schema; foreign history; grammar/Access/cookies/expiry; row/journal/correlation corruption; concurrent own continuation; real SQL pending/settled gates; unknown/lost ACK; snapshot drift; native5s queue/CLOSE; retained body/cancel/SQL work. Current foreign-prefix fixture method is present but not tested.
-- Adapt I/O observers only through unique/restricted lexical markers; current planned GET draft adds a second OAuth-like handler and will make naive global marker matching ambiguous. No existing observer guards/scheduler/gates were changed.
-- Run whole new native file, whole pure phase file, selected phase-native16/SDK-native6/D04token4 with actual TAP nonzero/count checks, and targeted ten-file lint. None of those regression groups or lint have run at this checkpoint. No assurance about those results is implied by the single inventory PASS.
-- Preserve actual QA/M metafiles/hash/bytes/input reachability and measure all new I/O/cost/child-parent gates without enlarging30s/5s. Unexpected standard graph edge requires root scope ruling before broader checks.
-- Root must inspect full BASE diff and obtain fresh independent spec/quality review before accepting this unit. No review has accepted the inventory implementation here.
+Assertions on each affected harness verify exact SQL of four consent objects, all three existing consent rows and both existing grant rows before/after, then verify seven objects. There is no DROP/DELETE/UPDATE or new positive seed in this adapter. Other non-phase modes remain unchanged. Native stdout records consentObjectsPreserved4/consentRowsPreserved3/grantsPreserved2/objectsAfter7/addedObjects3.
 
-Warnings preserved, not fixed: npm deprecated @esbuild-kit/esm-loader2.6.5 and core-utils3.3.2, eslint9.39.4 deprecation, setup punycode DEP0040, CIMD/compatibility warning in SYN QA, RPC stub disposal warning (RED1 and corrected checkpoint), checkout/setup-node Node20-to24 runner warning and git initial branch hint. No credential diagnosis follows from them. MinorD03 OAuth error precision, fanout cleanup and toolchain triage remain separate existing concerns.
+Comparison be044..c0e1 changed only world initialization, removal of diagnostic fixture text, and the temporary qualifier; all four product blobs were identical. Comparison c0e1..1c2a changed only the measured SDK test assertion and qualifier. Final e71 changes only two test assertions/cases and qualifier. The root documents containing the narrow ruling are referenced above and were not copied over this source branch by the writer.
 
-## Authority and historical limits
+## Actual GET I/O, timing and budgets
 
-SOURCE ONLY/UNMOUNTED. Existing provider/profile/history fixtures are explicitly SYN; actual cryptographic verification and native workerd/D1/DO/SDK/token/MCP calls above do not prove live Cloudflare operation or hosting fit. Source ceiling2026-11-03T02:59Z remains expired, no renewal/rearm. GET is preparation, not notice consent. No new consent, source notices, phase, NoticeLink, human POST, mount, alias, Entry, real DDL, OAuth/OTP/token/role, cron, Container, Max, main or merge.
+Final reinforced principal elapsed **1328ms** including transport and subsequent factual inspection. It observed12complete source snapshots,84actual provider HTTP GET lifecycles, peak2, active0 and84settled body/cancel lifecycles. The ticket SEND-recorded→complete interval in trace is604ms; actual SEND window<=5000ms and completion before that exact deadline are asserted. Parent remains original<=30000ms; queued negative crosses real5s without clock patch or extension.
 
-Current native fact in the valid RED2 case: original issued/exchanged active grant; seven monitoring schema objects; own tickets0/events0/notice0 after missing GET. No ticket SEND/ACK exists. Unknown SQL/journal outcomes and retained work have not been newly exercised; do not reconstruct ACKs, cleanup rows, infer drain or retry from SELECT. Historical application grants were not deleted.
+| Whole expected-frame recheck | Trace stage | Actual Date.now ms |
+| --- | --- | --- |
+| baseline | before | 1793908708614 |
+| baseline | after | 1793908708828 |
+| reservation-recorded | before | 1793908708833 |
+| reservation-recorded | after | 1793908709017 |
+| ticket-send-recorded | before | 1793908709020 |
+| ticket-send-recorded | after | 1793908709204 |
+| ticket-sql-resolved | before | 1793908709230 |
+| ticket-sql-resolved | after | 1793908709440 |
+| ticket-ack-recorded | before | 1793908709443 |
+| ticket-ack-recorded | after | 1793908709623 |
 
-operationalReadiness=false; completePackage=false; PCoff=false. PC shutdown is the owner's convenience request, not an accepted PC-off operational trial.
+Baseline observed at1793908708611; final complete1793908709624. These are real runner/workerd fixture timestamps, not live-provider latency or wall-clock evidence of deployment.
 
-## APPENDIX — BORRADOR NO VERIFICADO / NO EJECUTAR / NO FUENTE
+- Actual captured SQL:102first-primary sessions,111statements; first62/all49. The following noticeInspect diagnostic contributes3sessions/3ALLs after complete. The source GET itself is99sessions/108statements:96factual reads across12snapshots plus original store preflight11reads and one INSERT. Original issuer preflight is8statements; monitoring preflight adds schema+two PRAGMA reads. No factual ALL borrows a preflight session.
+- Of the factual reads,36 are the new three-per-snapshot ALLs:12schema,12ticket and12event queries. Each is first on a newly created first-primary session; bound grant UUID is always the original issuer UUID. Schema cap8 accepts only0 or7; tickets cap2 rejects>=2; events cap3 rejects any row. Actual journal lists use limit7; twelve extra factual journal lists are recorded separately from three append transaction lists.
+- Observed native API invocation counters, including the final diagnostic inspection: storage.get903, storage.list109, sync3, transactions27; transaction.get99/list3/put3. The inspection adds one outer list and the three ALLs identified above. These are instrumentation categories, not a sum of billable network RPCs; do not infer cross-RPC physical drain.
+- Each own recheck preserves the full pair, original fanout scheduler/credential join, peak2 and serial snapshots. Principal source GET factual accounting is6pairs×16D1factual statements plus its12store statements, and6pairs×14HTTP GETs; timestamps/query sessions in artifact permit checking per-phase costs.
+- The separate original OAuth fanout control0 has112HTTP/84narrow observations and sixteen primary snapshots. Its actual factual SQL changed80→128 (+48=16×3), while preflight16/writes2 remain unchanged. Corrected control child1577ms, peak2/active0; no50ms repeat or scheduler change. These112/128 values are **not** GET totals.
 
-The following serializable in-memory draft was preserved because the owner requested saving all work. **It was never applied to source, compiled, linted, tested or reviewed. It carries no authority and is not a runnable patch.** Resume from the committed causal RED2; review every line against the brief before considering these snippets. No source result or positive SQL producer was substituted in the committed tests.
+Exact new factual SQL, without values:
 
-Proposed extra imports and handler append for phase-context (the accepted committed inventory body is not duplicated):
-
-```javascript
-import {readFiniteOwnerNoticeGetMetadata,qualifyFiniteOwnerNoticeGetRequest} from './mcp-qa-finite-owner-notice-get-wire.mjs';
-import {sealFinitePreparationNoticeRecord as noticeSeal} from './mcp-qa-finite-preparation-notice-records.mjs';
-
-/** UNMOUNTED fixed GET. Only this invocation can retain its own SQL result. */
-export async function handlePrivateQaFiniteOwnerNoticeGet({request,env,ctx},originalLease){
- let clock,onAbort;
- try{
-  if(readFiniteOwnerRequestContext(originalLease).root!==originalLease)fail();
-  return await observeFiniteOwnerRequestWork({ctx,env,originalLease},()=>finiteNativeOperation(originalLease,ctx,async firstFailure=>{
-   const received=readFiniteOwnerNoticeGetMetadata(request.headers);
-   const issuerCapture=captureFinitePreparationIssuerContext({ctx,env});
-   const alias=env.AFW_FINITE_OWNER_OAUTH_KV,methods={get:alias?.get,put:alias?.put,delete:alias?.delete,list:alias?.list};
-   const db=env.RELEASE_DB,dbPrepare=db?.prepare,node=env.AFW_RELEASE_EVENTS_NODE,nodeMethods={idFromName:node?.idFromName,idFromString:node?.idFromString,get:node?.get};
-   const self=env.AFW_INDEPENDENT_CLOSURE,selfGet=self?.get,metadata=env.AFW_QA_VERSION,reader=env.AFW_MCP_CLOSURE_READ_TOKEN,publisher=env.AFW_MCP_CLOSURE_PUBLISH_TOKEN,fetcher=globalThis.fetch;
-   const headers=request.headers,signal=request.signal,url=request.url,method=request.method,headerBytes=canonical([...headers]);
-   if([...Object.values(methods),...Object.values(nodeMethods),dbPrepare,selfGet].some(v=>typeof v!=='function'))fail();
-   let identity=null,activeChild=null;
-   const holders=()=>{
-    current(originalLease);issuerCapture.holders();
-    if(env.AFW_FINITE_OWNER_OAUTH_KV!==alias||Object.keys(methods).some(k=>alias[k]!==methods[k])||env.RELEASE_DB!==db||db.prepare!==dbPrepare||env.AFW_RELEASE_EVENTS_NODE!==node||Object.keys(nodeMethods).some(k=>node[k]!==nodeMethods[k])||env.AFW_INDEPENDENT_CLOSURE!==self||self.get!==selfGet||env.AFW_QA_VERSION!==metadata||env.AFW_MCP_CLOSURE_READ_TOKEN!==reader||env.AFW_MCP_CLOSURE_PUBLISH_TOKEN!==publisher||globalThis.fetch!==fetcher||request.headers!==headers||request.signal!==signal||request.url!==url||request.method!==method||canonical([...headers])!==headerBytes)fail();
-    if(identity&&Date.now()>=identity.expiresAt)fail();
-   };
-   clock=createFiniteInitialLease(readFiniteOwnerRequestDeadline(originalLease),readFiniteOwnerRequestDeadline(originalLease),holders,fail);
-   onAbort=()=>clock.close();originalLease.signal.addEventListener('abort',onAbort,{once:true});
-   const check=()=>{current(clock.lease);if(activeChild)current(activeChild);};
-   const wait=async promise=>{check();const result=await clock.wait(retain(promise),activeChild??clock.lease);check();return result;};
-   const bytes=await wait(finiteNativeBytes(request,check,firstFailure));check();
-   const original=new Request(received.url,{method:received.method,headers,body:bytes.length?bytes:undefined,signal:originalLease.signal});
-   qualifyFiniteOwnerNoticeGetRequest(original,bytes);
-   const baseline=await wait(observeOwnerPhasePair({ctx,env,parent:originalLease})),context=qualifySettledOwnerPair(baseline);
-   if(context.source.phase!=='read_consent'||received.mVersionId!==context.source.currentPublication.versionId||!baseline.second.noticeRows.schema)fail();
-   const expected=structuredClone(baseline.second),source=context.source,id=context.preconnectionId;
-   const capsule=expected.anchor.anchors.capsule,prep=expected.preparation;
-   clock.narrow(Math.min(capsule.C0,prep.preconnection.expiresAt,prep.preconnection.owner.accessExpiresAt,prep.approval.expiresAt));
-   const verified=await wait(verifyCloudflareAccessJwtWithExpiry({token:original.headers.get('Cf-Access-Jwt-Assertion'),teamDomain:source.access.teamDomain,audience:source.access.audience}));
-   if(!verified.ok)fail();identity=verified.identity;clock.narrow(identity.expiresAt);
-   const rawCookies=(original.headers.get('Cookie')??'').split(';').map(s=>s.trim()),cookie=rawCookies.filter(s=>s.startsWith('__Host-afw-finite-prepare='));
-   if(cookie.length!==1||!/^__Host-afw-finite-prepare=[a-f0-9]{64}$/.test(cookie[0])||sha(cookie[0].slice('__Host-afw-finite-prepare='.length))!==prep.ticket.ticketHash)fail();
-   const realm=evidence('realm',{...source.access,origin:source.origin}),subjectHash=evidence('subject',{accessRealmHash:realm,subject:identity.subject});
-   qualifyFiniteOwnerApprovedTicket({source,identity,currentTicket:prep.ticket,ticket:prep.ticket,use:prep.ticketUse,pre:prep.preconnection,approval:prep.approval,snapshot:prep.sourceSnapshot,realm,subjectHash,observedAt:Date.now()});
-   if(identity.subject!==expected.anchor.anchors.material.ownerSelection.subject||identity.subject!==expected.records.issuer.reservation?.identity.subject)fail();
-   const issuer=expected.records.issuer,rows=expected.issuerRows,i=issuer.reservation?.identity;
-   if(!i||!rows.grant||!rows.authorization||!rows.grantLink||!rows.relation||!rows.connection||issuer.operations.grant.ack?.outcome!=='applied')fail();
-   const sdkPrefix='afw.finite-owner-issuer-provenance.v1:'+id+':';
-   const sdkNames=new Set(expected.records.sdk.map(([key])=>key));
-   if(!['root','grant','sdk_begin:observed','sdk_approve:observed','sdk_complete:observed'].every(k=>sdkNames.has(sdkPrefix+k)))fail();
-   if(rawCookies.some(v=>v.startsWith('__Host-afw-monitoring-owner=')))fail();
-   const accessExpiresAt=Math.min(identity.expiresAt,prep.preconnection.owner.accessExpiresAt,i.C0),preconnectionExpiresAt=prep.preconnection.expiresAt;
-   const permissionCeiling=Math.min(accessExpiresAt,preconnectionExpiresAt,prep.approval.expiresAt,rows.connection.expiresAt,i.C0,Date.parse(i.consentExpiresAt),Date.parse(rows.grant.expires_at));
-   clock.narrow(permissionCeiling);
-   const at=Date.now(),handle=randomBytes(32).toString('base64url'),expiresAt=Math.min(at+600000,permissionCeiling);
-   if(expiresAt<=at)fail();
-   const ticket={handleHash:sha(handle),requestId:crypto.randomUUID(),expectedSequence:0,issuedAt:at,expiresAt,permissionExpiresAt:expiresAt};
-   const expectedGrant={scopes:JSON.parse(rows.grant.scopes_json),createdAt:rows.grant.created_at,expiresAt:rows.grant.expires_at},consumedAt=rows.consent.consumed_at;
-   const journal=noticeJournal({ctx,env}),store=createFinitePreparationIssuerStore({ctx,env});
-   let position='baseline',operation=null,actualPromise=null,actualResult=null,settled=false,ownedReservation=null,ownedSend=null;
-   const anchor=()=>{expected.anchor.notice=structuredClone(expected.records.notice);};
-   async function recheckNoticeGetOwned(){
-    check();
-    if(actualPromise&&!settled)fail();
-    for(const v of Object.values(expected.records.issuer.operations))if(v.send&&!v.ack||v.ack&&!v.send)fail();
-    const names=new Set(expected.records.sdk.map(([key])=>key));
-    for(const [key]of expected.records.sdk)if(key.endsWith(':send')&&!names.has(key.slice(0,-4)+'observed'))fail();
-    const n=expected.records.notice;
-    if(n.freeze||n.operations.consent.send||n.operations.consent.ack)fail();
-    if(position==='baseline'){requireEmptyNotice(expected);if(ownedReservation||ownedSend||operation)fail();}
-    else{
-     if(!ownedReservation||canonical(n.reservation)!==canonical(ownedReservation))fail();
-     if(position!=='reservation-recorded'){
-      if(operation!=='ticket'||!ownedSend||canonical(n.operations.ticket.send)!==canonical(ownedSend)||ownedSend.reservationHash!==ownedReservation.recordHash)fail();
-      if(['ticket-sql-resolved','ticket-ack-recorded'].includes(position)&&(!actualPromise||!settled||actualResult?.status!=='applied'||canonical(actualResult.row)!==canonical(expectedNoticeTicket(i,ticket))))fail();
-     }
-    }
-    const pair=await wait(observeOwnerPhasePair({ctx,env,parent:originalLease,preconnectionId:id}));
-    if(canonical(pair.first)!==canonical(expected)||canonical(pair.second)!==canonical(expected))fail();
-    check();
-   }
-   await recheckNoticeGetOwned();
-   await clock.child((l)=>retain((async()=>{
-    activeChild=l;check();
-    const record=noticeSeal('Reservation',{purpose:'afw.finite-preparation-notice-reservation.v1',identity:i,issuerReservationHash:issuer.reservation.recordHash,originalGrantAckHash:issuer.operations.grant.ack.recordHash,grantLinkHash:prepHash('GrantLink',rows.grantLink),connectionHash:prepHash('ConnectionRef',rows.connection),expectedGrant,consumedAt,accessExpiresAt,preconnectionExpiresAt,ticket,issuedAt:Date.now()});
-    const appendPromise=retain(journal.appendReservation(record,l)),appendResult=await wait(appendPromise);
-    if(appendResult?.status!=='recorded'||appendResult.recordHash!==record.recordHash)fail();
-    ownedReservation=record;expected.records.notice.reservation=structuredClone(record);anchor();position='reservation-recorded';
-    await recheckNoticeGetOwned();activeChild=null;
-   })()));
-   await clock.child((l,deadline)=>retain((async()=>{
-    activeChild=l;check();
-    const window={startedAt:Date.now(),deadline:Math.min(deadline,permissionCeiling)};
-    const common={identity:i,expectedGrant,consumedAt,accessExpiresAt,preconnectionExpiresAt,window};
-    const send=noticeSeal('Send',{purpose:'afw.finite-preparation-notice-send.v1',identityHash:i.identityHash,reservationHash:ownedReservation.recordHash,operation:'ticket',requestHash:digest('afw.finite-preparation-notice-request.v1',{operation:'ticket',common,ticket,decisionHash:null}),accessExpiresAt,window,issuedAt:Date.now(),decisionHash:null});
-    const appendSendPromise=retain(journal.appendSend({preconnectionId:id,record:send},l)),appendSendResult=await wait(appendSendPromise);
-    if(appendSendResult?.status!=='recorded'||appendSendResult.recordHash!==send.recordHash)fail();
-    ownedSend=send;operation='ticket';expected.records.notice.operations.ticket.send=structuredClone(send);anchor();position='ticket-send-recorded';await recheckNoticeGetOwned();check();
-    position='ticket-sql-pending';settled=false;
-    actualPromise=retain(store.insertMonitoringTicket({...common,ticket},l));
-    actualResult=await wait(actualPromise);settled=true;
-    if(actualResult?.status!=='applied'||canonical(actualResult.row)!==canonical(expectedNoticeTicket(i,ticket)))fail();
-    expected.noticeRows.tickets=[structuredClone(actualResult.row)];position='ticket-sql-resolved';await recheckNoticeGetOwned();check();
-    const ack=noticeSeal('Ack',{purpose:'afw.finite-preparation-notice-ack.v1',sendHash:ownedSend.recordHash,outcome:'applied',rowHash:digest('afw.finite-preparation-notice-row.v1',actualResult.row),sequence:null,observedAt:Date.now()});
-    const appendAckPromise=retain(journal.appendAck({preconnectionId:id,operation:'ticket',record:ack},l)),appendAckResult=await wait(appendAckPromise);
-    if(appendAckResult?.status!=='recorded'||appendAckResult.recordHash!==ack.recordHash)fail();
-    expected.records.notice.operations.ticket.ack=structuredClone(ack);anchor();position='ticket-ack-recorded';await recheckNoticeGetOwned();activeChild=null;
-   })()));
-   check();
-   const maxAge=Math.floor((ticket.expiresAt-Date.now())/1000);if(maxAge<1)fail();
-   const escaped=handle.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),nonce=randomBytes(18).toString('base64url');
-   const html='<!doctype html><html lang="es"><meta charset="utf-8"><title>Preparación de avisos</title><body><h1>Preparación de avisos</h1><p>Preparé un formulario temporal. Todavía no diste permiso para avisos. El envío de este formulario aún no está habilitado.</p><form><input type="hidden" name="handle" value="'+escaped+'"><button type="button" disabled>Permitir avisos temporales</button></form><a href="https://agentfriendlyweb.dev/expediente">Volver al expediente</a></body></html>';
-   check();return new Response(html,{status:200,headers:{'Content-Type':'text/html; charset=UTF-8','Cache-Control':'no-store','Referrer-Policy':'same-origin','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; script-src 'nonce-"+nonce+"'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",'Set-Cookie':'__Host-afw-monitoring-owner='+handle+'; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age='+maxAge}});
-  }));
- }catch{return pending();}finally{if(onAbort)originalLease.signal.removeEventListener('abort',onAbort);clock?.close();}
-}
-
+```sql
+SELECT type,name,tbl_name,sql FROM sqlite_schema WHERE tbl_name IN ('dossier_monitoring_consent_events','dossier_monitoring_owner_tickets') AND sql IS NOT NULL ORDER BY name LIMIT 8;
+SELECT handle_hash,request_id,user_id,grant_id,project_id,client_id,resource,purpose,action,revision,expected_sequence,issued_at,expires_at,permission_expires_at FROM dossier_monitoring_owner_tickets WHERE grant_id=? ORDER BY handle_hash LIMIT 2;
+SELECT sequence,grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at FROM dossier_monitoring_consent_events WHERE grant_id=? ORDER BY sequence LIMIT 3
 ```
 
-Draft replacement for `lib/mcp-qa-finite-owner-notice-get-wire.mjs` — NOT APPLIED:
+SQL/header/body/cancel failures remain retained. Native tests prove a fresh SYN lease in the same ctx is blocked while actual queued SQL or HTTP body/cancellation remains unresolved, then releases after actual settlement. This is request-scope bookkeeping, not a durable all-path writer inventory or proof of global drain. No unknown ACK was reconstructed from SELECT; no row/history was deleted to recover an outcome.
 
-```javascript
-import {finiteNativeOrigin as origin,finiteNativeHeaders,finiteNativeUuid,finiteNativeFailure as fail} from './mcp-qa-finite-owner-native-wire.mjs';
-export const finiteOwnerNoticeGetTarget='https://afw-private.invalid/_finite-owner/monitoring';
-const max=16384;
-export function qualifyFiniteOwnerNoticeGetRequest(request,bytes){
- if(!(request instanceof Request)||!(bytes instanceof Uint8Array)||bytes.length||request.url.length>max)fail(400);
- if(request.url!==origin+'/monitoring')fail(404);
- if(request.method!=='GET')fail(405);
- const from=request.headers.get('Origin');if(from!==null&&from!==origin)fail(403);
- const cookie=request.headers.get('Cookie')??'',assertion=request.headers.get('Cf-Access-Jwt-Assertion')??'';
- if(cookie.length>8192||assertion.length>8192||/[\r\n]/.test(cookie+assertion))fail(400);
- const names=new Set();for(const part of cookie.split(';').filter(x=>x.trim())){const match=/^\s*([^=\s]+)=([^;\s]*)\s*$/.exec(part);if(!match||names.has(match[1]))fail(400);names.add(match[1]);}
- return Object.freeze({method:'GET',url:request.url});
-}
-export function readFiniteOwnerNoticeGetMetadata(headers){
- const entries=[...headers].filter(([key])=>key.startsWith('x-afw-finite-'));
- if(entries.length!==finiteNativeHeaders.length||entries.some(([key])=>!finiteNativeHeaders.includes(key))||Buffer.byteLength(JSON.stringify(entries))>max)fail(400);
- const raw=headers.get('x-afw-finite-boundary');let boundary;try{boundary=JSON.parse(raw);}catch{fail(400);}
- if(!boundary||!['startedAt','deadline','remainingMs'].every(k=>Number.isSafeInteger(boundary[k]))||JSON.stringify({startedAt:boundary.startedAt,deadline:boundary.deadline,remainingMs:boundary.remainingMs})!==raw)fail(400);
- const method=headers.get('x-afw-finite-original-method'),url=headers.get('x-afw-finite-original-url'),mVersionId=headers.get('x-afw-finite-version'),requestId=headers.get('x-afw-finite-request-id');
- if(method!=='GET'||url!==origin+'/monitoring'||!finiteNativeUuid(mVersionId)||!finiteNativeUuid(requestId))fail(400);
- return Object.freeze({boundary,method:'GET',url,mVersionId,requestId});
-}
-```
+## Actual compilers, graph and retained artifacts
 
-Draft replacement for `lib/mcp-qa-finite-owner-notice-get-forward.mjs` — NOT APPLIED:
+No standard compiler/build was added; standard entrypoints/configs are unchanged, and phase/new receiver remain unmounted. Actual QA/M harness builds were measured during tests, never a separate build for hashes. Current real fixture profile remains QA2026-09-07/nodejs_compat/enable_request_signal and M adds global_fetch_strictly_public.
 
-```javascript
-import {readFiniteOwnerRequestContext,readFiniteOwnerRequestBoundary} from './mcp-qa-finite-owner-preparation.mjs';
-import {observeFiniteOwnerRequestWork} from './mcp-qa-finite-stage-work.mjs';
-import {finiteNativeFailure as fail,finiteNativeUuid} from './mcp-qa-finite-owner-native-wire.mjs';
-import {finiteNativeActor,finiteNativePreservedHeaders,finiteNativeOperation,finiteNativeBytes,finiteNativePending as pending} from './mcp-qa-finite-owner-native-wire.mjs';
-import {finiteOwnerNoticeGetTarget,qualifyFiniteOwnerNoticeGetRequest,readFiniteOwnerNoticeGetMetadata} from './mcp-qa-finite-owner-notice-get-wire.mjs';
-/** Unmounted forwarding only. Transport metadata never asserts SDK results. */
-export async function forwardPrivateFiniteOwnerNoticeGet({request,env,ctx},originalLease){
- try{
-  if(readFiniteOwnerRequestContext(originalLease).root!==originalLease)fail();
-  const namespace=env?.AFW_FINITE_TRIAL_CONTROL,idFromName=namespace?.idFromName,get=namespace?.get,metadata=env?.AFW_FINITE_TRIAL_VERSION,version=metadata?.id;
-  if([idFromName,get].some(v=>typeof v!=='function')||!finiteNativeUuid(version))fail();
-  const id=Reflect.apply(idFromName,namespace,[finiteNativeActor]),actor=id.toString(),stub=Reflect.apply(get,namespace,[id]),fetcher=stub?.fetch;
-  if(!/^[a-f0-9]{64}$/.test(actor)||typeof fetcher!=='function')fail();
-  const check=()=>{originalLease.assertCurrent();if(env.AFW_FINITE_TRIAL_CONTROL!==namespace||namespace.idFromName!==idFromName||namespace.get!==get||Reflect.apply(idFromName,namespace,[finiteNativeActor]).toString()!==actor||stub.fetch!==fetcher||env.AFW_FINITE_TRIAL_VERSION!==metadata||metadata.id!==version)fail();};
-  check();
-  return await observeFiniteOwnerRequestWork({ctx,env,originalLease},()=>finiteNativeOperation(originalLease,ctx,async first=>{
-   const bytes=await finiteNativeBytes(request,check,first);check();qualifyFiniteOwnerNoticeGetRequest(request,bytes);
-   const headers=new Headers();for(const name of finiteNativePreservedHeaders){const value=request.headers.get(name);if(value!==null)headers.set(name,value);}
-   headers.set('x-afw-finite-boundary',JSON.stringify(readFiniteOwnerRequestBoundary(originalLease)));
-   headers.set('x-afw-finite-original-method',request.method);headers.set('x-afw-finite-original-url',request.url);
-   headers.set('x-afw-finite-version',version);headers.set('x-afw-finite-request-id',crypto.randomUUID());
-   readFiniteOwnerNoticeGetMetadata(headers);check();
-   const response=await Reflect.apply(fetcher,stub,[new Request(finiteOwnerNoticeGetTarget,{method:'POST',redirect:'manual',headers,body:bytes.length?bytes:undefined,signal:originalLease.signal})]);check();
-   const body=await finiteNativeBytes(response,check,first,503);check();
-   if(response.status!==200)return pending([400,401,403,404,405,413,429].includes(response.status)?response.status:503);
-   if(!/^text\/html(?:;|$)/i.test(response.headers.get('content-type')??''))fail();
-   const output=new Headers({'Cache-Control':'no-store'});
-   for(const [key,value]of response.headers){if(!['content-type','content-security-policy','referrer-policy','location','set-cookie','cache-control','x-frame-options','x-content-type-options'].includes(key)||value.length>8192)fail();output.append(key,value);}
-   check();return new Response(body,{status:response.status,headers:output});
-  }));
- }catch{return pending();}
-}
-```
+Final focused native compiler outputs:
 
-Draft replacement for `lib/mcp-qa-finite-owner-notice-get-qa.mjs` — NOT APPLIED:
+| Invocation | Bytes | Metafile inputs | Bundle SHA256 |
+| --- | ---: | ---: | --- |
+| principal QA | 1759194 | 324 | `f4232ea48bf810e47bbeecacdc16b1a6c8a1f697cee65575be33772eee024823` |
+| principal M | 1678423 | 302 | `d68eef4a16568b6bb53c4921f0d0cc111113e674ebab3127d2430d7ed1f9f032` |
+| consent negative QA | 1759194 | 324 | `d0bf2b020b6498e299b34e9484ed1dff5915b1cebde837706e12810d22e080e8` |
+| consent negative M | 1678423 | 302 | `d68eef4a16568b6bb53c4921f0d0cc111113e674ebab3127d2430d7ed1f9f032` |
 
-```javascript
-import {finiteNativePending as pending} from './mcp-qa-finite-owner-native-wire.mjs';
-import {createFiniteOwnerForwardedRequestLease} from './mcp-qa-finite-owner-preparation.mjs';
-import {finiteOwnerNoticeGetTarget,readFiniteOwnerNoticeGetMetadata} from './mcp-qa-finite-owner-notice-get-wire.mjs';
-import {handlePrivateQaFiniteOwnerNoticeGet} from './mcp-qa-finite-owner-phase-context.mjs';
-export function createPrivateQaFiniteOwnerNoticeGetReceiver({ctx,env}){
- return Object.freeze({async fetch(request){
-  let parent;
-  try{
-   if(!(request instanceof Request)||request.url!==finiteOwnerNoticeGetTarget)return pending(404);
-   if(request.method!=='POST')return pending(405);
-   const metadata=readFiniteOwnerNoticeGetMetadata(request.headers);
-   parent=createFiniteOwnerForwardedRequestLease(request,metadata.boundary);
-   return await handlePrivateQaFiniteOwnerNoticeGet({request,env,ctx},parent.lease);
-  }catch{return pending();}finally{parent?.finish();}
- }});
-}
-```
+Compare to RED1 actual QA1706500B/320inputs and token M1671443B/300inputs: current QA adds notice wire/journal/records/receiver reachability; current M fixture adds only notice wire/forward (302inputs). M's ordinary source/token SDK graph remains separate; no unexpected standard edge was discovered. QA source phase already existed in the private harness and now imports the notice journal. No graph/byte count is a remote fit/hosting claim.
 
+Metafiles are from the actual build results and include imports/output reachability. Captured bundle SHA/bytes are actual output bytes. Input file hashes explicitly refer to repository file bytes before SYN onLoad transformations; virtual hashes refer to the exact supplied compile-option text (stdin/defines), rather than pretending virtual inputs are files. Actual transformed graph byte/import information is in the metafile. Provider/history and source-ceiling adjustments remain the existing explicit SYN harness boundary.
+
+Artifacts, each retained seven days as authorized:
+
+| Run | Artifact ID / ZIP SHA256 | Contents |
+| --- | --- | --- |
+|42093762800|13446176700 / c9c6f71fc85d85ce556474eb2d3998309acbe38f1f49f734bb3370222d9f2003|2actual QA/M graph manifests; early header-failure primary|
+|42094285083|13447421598 /59e725ce41390467f3a3aac421f34947379d1d6265f2104ef803bf5254e0df96|62actual graph manifests and principal I/O detail; CLOSE assertion-failure job|
+|42095343936|13446718826 /74a2572333a5a76ee91598b419535aaafd42b2211fca114aec5d1187caec9f19|64actual graph manifests and full principal query/session/HTTP detail;33nativeGREEN|
+|42098853181|13447389411 /5ac2ab6cf5aa1fc4ed44051e1abe6e1be3417a0eccc8bca11687b12aac8d01e9|4final actual graph manifests and final principal I/O detail;153292Bcompressed|
+
+Count ledger:10pre-shutdown fixture compiler invocations already preserved; resumed jobs1+2+62+80+1diagnostic+28+10+4=188, total198fixture invocations and0standard. Of the80/28 groups, each includes16phase-only QA builds (one per actually run harness, unlike the explicit two-worker SDK logs). All other QA/M counts are explicit compiler log lines; c0e1 additionally recorded22native schema-adapter completions (16phase+6SDK). The numerous SYN compiles are reported as cost, not hidden or presented as production builds.
+
+Artifacts expire under the authorized seven-day retention. Permanent source/report and run/hash pointers remain; no new publication/storage service or unapproved evidence destination was created.
+
+## Warnings, self-review and remaining authority limits
+
+Warnings preserved: RPC stub disposal; CIMD/profile message in SYN QA; npm deprecated esbuild-kit esm-loader/core-utils and eslint9.39.4; setup punycode DEP0040; Actions checkout/setup-node Node20-to24 warning; git default-branch hint. First graph-helper failure also emitted “no files” upload warning. Root located the same RPC warning in existing D04GREEN run42059641718/job127357402313 (762ab84265b2fb75256f1c7e17f2618e6893123a,24+3+7PASS), before this GET unit. That is dated prior evidence, not proof of identical cause or absence of current risk. No warning, MinorD03 OAuth-error precision or old fanout cleanup was fixed by scope drift.
+
+Self-review: public export set is old three-key reader/OAuth handler plus the fixed GET handler; observer/pairs and expected frames stay private. Original select helper is unchanged. No allowPending or caller identity/time/keySet/source options exist. Full expected snapshots retain actual current rows and raw SQL. SQL Promise/result/settled remain lexical until final ACK recheck, while append references are separate. Product store/journal/SDK/ordinary-M/source-stub/config/schema blobs are preserved. Final BASE diff is exactly ten approved source/test files plus this report after qualifier deletion. Root still must inspect that full diff and obtain a fresh independent spec/quality review; writer did not create a helper/reviewer.
+
+This unit produces preparation only. POST/CSRF consent, NoticeLink/stages/third CLOSED/ownSEND/full setup/cleanup/guard/ARM/mount/hosting and the complete operational package remain downstream, separately scoped. The POST design on another branch is INACTIVE and was not incorporated here.
+
+Source ceiling2026-11-03T02:59Z remains expired; no early renewal/rearm. C0=I0+900000, C1=C0+180000, parent30s/child5s unchanged. Native crypto/D1/DO/SDK/token/MCP in an explicitly SYN provider/history harness do not establish live customer Access, current runtime state or fit with a PC off. Unknown outcomes remain no-retry; code rollback never authorizes deleting historical D1/DO data or claiming global physical drain.
+
+**operationalReadiness=false; completePackage=false; PCoff=false.**
