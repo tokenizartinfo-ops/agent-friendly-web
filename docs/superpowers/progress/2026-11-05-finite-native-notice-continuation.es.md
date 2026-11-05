@@ -60,3 +60,10 @@ Rootprobó RESTcontents update_file consha/branchexplícitoenSUramadocs: ec63ce2
 - Documentarparents/shas/trees y NOafirmaratomicidadmultifile. SiRESTfunciona, continuarRED→GREENnormal,noesperarGQL, nocambiarpermisos.
 
 Sourcewriteractual implement_first_connection_shared sigueúnicoasignado; debe entregarHEADnuevo/primarias. RootnoescribeSOURCE. CanonicalRootcontinuityseguardaporREST; Sourceacceptedbaselinec55y8docsyaestabanenlazadosantesdelfallo. NoTask1GREEN/producto/siguientetarea todavía.
+
+
+## Task 1 — comprobaciones en curso, 5 noviembre 23:38 UTC
+
+El writer continúa exclusivamente en SOURCE. REST secuencial confirmó c55→1f16b764→d540cf85→aee616f3 y árbol RED771ab2898ebab814ba181184b2524771178f9b0d; no despliegue. RED2 Actions42129895780:4tests/1PASSbaseline/3falloscausales según informe writer, primaria pendiente de revisión Root. GREEN inicialHEAD7f911e29677d2980e48b392a65999f8e0574b9f3/run42130466031/attempt1 terminal: graph job127605478869 1PASS+lint7paths0/0; setup job127605478876 3PASS; contracts job127605478583 27tests18PASS9FAIL. Root leyó la primaria contracts:8fallos en serialización/RPC F1plain línea4/exerciseEnrollmentWriter línea80, sin observaciones recuperadas del helper; no demuestra si helper corrió ni causa de infraestructura. Otrofallo testwire consulta enginecapturado después de cambiarfetch, guard legítimo, corregir prueba sin relajarproducto. No afirmar Task1GREEN.
+
+Writer diagnosticará mínimamente F1/F2 con preservación de trazas; contrato DATAcodecantesdeltry es hipótesis hasta stack. Graph/setup aprobados no repetir. Run42130778246 inválidoYAML,0jobs/0tests por reemplazoJS de patrón con dollar-apostrophe; writer corrigió mediante funciónreplacement/readback, no es fallo producto. No sleeps/retry para ocultar fallos. Root no escribe SOURCE. Próximo reporte completo+STOPWRITES→reviewerfresco; Task2/3 siguen inactivos.
