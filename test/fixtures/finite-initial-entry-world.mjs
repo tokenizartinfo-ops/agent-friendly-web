@@ -1,4 +1,4 @@
-import {extendFiniteOwnerQaSdk,finiteOwnerSdkWorkers} from './finite-owner-qa-sdk.mjs';
+import {extendFiniteOwnerQaSdk,finiteOwnerSdkWorkers,instrumentFiniteOwnerQaSdk} from './finite-owner-qa-sdk.mjs';
 import {FINITE_PREPARATION_ISSUER_SCHEMA} from '../../lib/mcp-qa-finite-preparation-issuer-store.mjs';
 import {extendFiniteOwnerPhaseContext,seedFiniteOwnerPhaseHistory} from './finite-owner-phase-context.mjs';
 import {extendPreparationCleanupFixture} from './finite-preparation-cleanup-entry.mjs';
@@ -45,13 +45,14 @@ export async function initialEntryHarness(mode='normal'){
  for(const p of ['mcp-qa-finite-historical-source.mjs','mcp-qa-finite-bootstrap-native.mjs']){
   const s=await readFile('lib/'+p,'utf8');assert.equal(s.split(approvalDecl).length,2);sources.set(p,s.replace(approvalDecl,'CEILING='+approval));
  }
- if(mode.startsWith('phase-context-sdk')){
+ if(mode.startsWith('phase-context-sdk-observed')){
   // Test-only error-location observation; no return/guard/authority replacement.
   const instrument=source=>source.replaceAll('catch{return pending();}',"catch(error){console.info('D02 initial failure frames',String(error?.stack??'').split('\\n').slice(1,5).join(' | '));if(/^Finite historical source unavailable:(input|custody|http|metadata|historical_slots|legacy|history|coherence|deadline)$/.test(error?.message??''))console.info('D02 historical gate',error.message);return pending();}");
   product=instrument(product);
   sources.set('mcp-qa-finite-initial-entry.mjs',instrument(sources.get('mcp-qa-finite-initial-entry.mjs')));
  }
  const plugin={name:'explicit-SYN-external-data-not-whole-facts',setup(b){
+  if(mode.startsWith('phase-context-sdk-observed'))b.onLoad({filter:/mcp-qa-finite-owner-phase-context\.mjs$/},async args=>({contents:instrumentFiniteOwnerQaSdk(await readFile(args.path,'utf8')),loader:'js'}));
   if(mode.startsWith('enrollment-pin-'))b.onLoad({filter:/mcp-qa-finite-initial-anchors\.mjs$/},async args=>{
    let contents=await readFile(args.path,'utf8');
    const needle='const compiledResidency=globalThis.__AFW_FINITE_CANDIDATE_RESIDENCY__??null;';
@@ -85,7 +86,7 @@ export async function initialEntryHarness(mode='normal'){
     if(f.phaseDrift==='qa-pointer'&&++f.phaseQaObservation===2)result.deployments[0].id='99999999-9999-4999-8999-999999999999';
     if(f.uploads.length>0){f.gateReached=true;if(f.gateMode==='qa')result.deployments[0].id='99999999-9999-4999-8999-999999999999';}
    }
-   else if(req.url===CF+'/workers/workers/agent-friendly-web-independent-closure-qa/versions/'+UUID+'?include=modules'){result={...structuredClone(finitePublicProfileTemplate('qaLive')),id:UUID,urls:[],modules:[{name:'index.mjs',content_type:'application/javascript+module',content_base64:Buffer.from('export default{};').toString('base64')}]};if(f.ownerFault==='qa-module')result.modules[0].content_base64='AAAA';if(f.ownerFault==='qa-namespace')result.bindings.find(b=>b.name==='AFW_INDEPENDENT_CLOSURE').namespace_id='f'.repeat(32);}
+   else if(req.url===CF+'/workers/workers/agent-friendly-web-independent-closure-qa/versions/'+UUID+'?include=modules'){result={...structuredClone(finitePublicProfileTemplate('qaLive')),id:UUID,urls:[],modules:[{name:'index.mjs',content_type:'application/javascript+module',content_base64:Buffer.from('export default{};').toString('base64')}]};if(f.ownerFault==='qa-module')result.modules[0].content_base64='AAAA';if(f.ownerFault==='qa-namespace')result.bindings.find(b=>b.name==='AFW_INDEPENDENT_CLOSURE').namespace_id='f'.repeat(32);if(f.ownerFault==='sdk-alias')result.bindings.find(b=>b.name==='AFW_FINITE_OWNER_OAUTH_KV').namespace_id='f'.repeat(32);if(f.ownerFault==='sdk-extra')result.bindings.push({name:'EXTRA_SAME_ACCOUNT',type:'kv_namespace',namespace_id:'6b94ff702e504e14a7730cee73a0f6ff'});}
    else if(req.url===CF+'/workers/scripts/agent-friendly-web-release-operator/deployments?per_page=1'){if(['primary-retention','primary-late-headers'].includes(f.gateMode))await new Promise(resolve=>setTimeout(resolve,500));result={deployments:[{id:['primary-retention','primary-late-headers','operator-pointer'].includes(f.gateMode)?'99999999-9999-4999-8999-999999999999':opPin.deploymentId,strategy:'percentage',versions:[{version_id:opPin.id,percentage:100}]}]};}
    else if(req.url===CF+'/workers/workers/agent-friendly-web-release-operator/versions/'+opPin.id+'?include=modules'){result=structuredClone(opMetadata);if(f.gateMode==='operator-version')result.modules[0].content_base64=Buffer.from('SYN operator drift').toString('base64');}
    else if(req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/versions?deployable=true&per_page=100&page=1'){
@@ -193,7 +194,7 @@ export async function initialEntryHarness(mode='normal'){
   }
   return Response.json(value,{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString(),'x-ratelimit-remaining':'60'}});
  }};
- finalOptions=convertV4MiniflareOptions(mode.startsWith('phase-context-sdk')?await finiteOwnerSdkWorkers(finalOptions):finalOptions);
+ finalOptions=convertV4MiniflareOptions(mode.startsWith('phase-context-sdk')?await finiteOwnerSdkWorkers(finalOptions,{observed:mode.startsWith('phase-context-sdk-observed')}):finalOptions);
  await mf.setOptions(finalOptions);
  const bindings=await mf.getBindings(mode.startsWith('phase-context-sdk')?'qa-sdk':undefined);f.stub=bindings.AFW_INDEPENDENT_CLOSURE.get(bindings.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB',mode.startsWith('phase-context-sdk')?'qa-sdk':undefined);
  if(mode.startsWith('phase-context-sdk'))console.info('D02 native identity comparison',JSON.stringify({provisionalWorker:base.name,finalWorker:'qa-sdk',original:bindings.AFW_RELEASE_EVENTS_NODE.idFromName('afw-own-event-one-occurrence-v1').toString()===x.ids.original,candidate:bindings.AFW_RELEASE_EVENTS_NODE.idFromName('afw-own-event-first-successor-v1').toString()===x.ids.candidate}));
@@ -202,7 +203,7 @@ export async function initialEntryHarness(mode='normal'){
  if(mode==='wrong-owned-subject')await f.db.prepare("UPDATE site_projects SET user_id='another-owner'").run();
  f.namespace=bindings.AFW_INDEPENDENT_CLOSURE;
  f.workflow=async refs=>(await f.mf.dispatchFetch('https://synthetic.invalid/workflow',{method:'POST',body:J(refs)})).json();
- f.restart=async()=>{assert.ok(persist);await f.mf.dispose();f.mf=new Miniflare(finalOptions);const b=await f.mf.getBindings();f.stub=b.AFW_INDEPENDENT_CLOSURE.get(b.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));};
+ f.restart=async()=>{assert.ok(persist);await f.mf.dispose();f.mf=new Miniflare(finalOptions);const b=await f.mf.getBindings(mode.startsWith('phase-context-sdk')?'qa-sdk':undefined);if(mode.startsWith('phase-context-sdk'))f.db=await f.mf.getD1Database('RELEASE_DB','qa-sdk');f.stub=b.AFW_INDEPENDENT_CLOSURE.get(b.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));};
  f.alarmAt=async at=>{f.nowOffset=at-Date.now();try{return await f.stub.initialAlarmAt(at);}finally{f.nowOffset=0;}};
  f.ownerRead=async(delta=400000,...args)=>{const rows=await f.stub.snapshot();let raw;try{raw=JSON.parse(rows.find(([k])=>k==='afw.finite-initial-preparation.v1:capsule')[1]);}finally{rows[Symbol.dispose]?.();}f.nowOffset=raw.I0+delta-Date.now();try{return await f.stub.ownerSourceRead(delta,...args);}finally{f.nowOffset=0;}};
  f.future=async(kind='complete')=>{await f.stub.seedFutureActivation(kind);const rows=await f.stub.snapshot(),plan=JSON.parse(rows.find(([k])=>k==='afw.finite-initial-cleanup.v1:plan')[1]);f.activationAnnotation='afw-finite-initial-activate-'+plan.recordHash;f.pointerMode='candidate';return plan;};
