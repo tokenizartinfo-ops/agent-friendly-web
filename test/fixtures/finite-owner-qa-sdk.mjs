@@ -112,10 +112,10 @@ export async function finiteOwnerSdkWorkers(qa,{observed=false,token=false,io=fa
   return {contents,loader:'js'};
  });}}]:[];
 
- if(noticeGet)plugins.push({name:'SYN-notice-M-body-diagnostic',setup(b){
+ if(noticeGet)plugins.push({name:'SYN-notice-M-body-observation',setup(b){
   b.onLoad({filter:/mcp-qa-finite-owner-notice-consent-body\.mjs$/},async args=>{
    let contents=await readFile(args.path,'utf8');
-   const once=(needle,next)=>{if(contents.split(needle).length!==2)throw Error('SYN body diagnostic marker');contents=contents.replace(needle,next);};
+   const once=(needle,next)=>{if(contents.split(needle).length!==2)throw Error('SYN body observation marker');contents=contents.replace(needle,next);};
    once(" const reader=message.body?.getReader();"," const seen=globalThis.__noticeMBody?.state;const reader=message.body?.getReader();");
    once("const {done,value}=await retain(reader.read());","const actualRead=reader.read();if(seen)seen.readNativeEntered=true;actualRead.then(()=>{if(seen)seen.readNativeSettled=true;},()=>{if(seen)seen.readNativeRejected=true;});const {done,value}=await retain(actualRead);");
    once("try{await retain(reader.cancel());}catch{}throw error;}","try{const actualCancel=reader.cancel();if(seen)seen.cancelNativeEntered=true;actualCancel.then(()=>{if(seen)seen.cancelNativeSettled=true;},()=>{if(seen)seen.cancelNativeRejected=true;});await retain(actualCancel);}catch{}throw error;}finally{if(seen)seen.bodyFinally=true;}");
@@ -123,7 +123,7 @@ export async function finiteOwnerSdkWorkers(qa,{observed=false,token=false,io=fa
   });
   b.onLoad({filter:/mcp-qa-finite-owner-notice-get-forward\.mjs$/},async args=>{
    let contents=await readFile(args.path,'utf8');
-   const once=(needle,next)=>{if(contents.split(needle).length!==2)throw Error('SYN forward diagnostic marker');contents=contents.replace(needle,next);};
+   const once=(needle,next)=>{if(contents.split(needle).length!==2)throw Error('SYN forward observation marker');contents=contents.replace(needle,next);};
    once("async signalFailure=>{","async signalFailure=>{try{");
    once("  }));","  }finally{const seen=globalThis.__noticeMBody?.state;if(seen)seen.actualCallbackFinally=true;}}));");
    once("const bytes=await (consent?readFiniteOwnerNoticeConsentBody:finiteNativeBytes)(request,check,first);","const actualBody=(consent?readFiniteOwnerNoticeConsentBody:finiteNativeBytes)(request,check,first),seen=globalThis.__noticeMBody?.state;if(seen)seen.bodyPromiseEntered=true;actualBody.then(()=>{if(seen)seen.bodyPromiseSettled=true;},()=>{if(seen)seen.bodyPromiseRejected=true;});const bytes=await actualBody;");

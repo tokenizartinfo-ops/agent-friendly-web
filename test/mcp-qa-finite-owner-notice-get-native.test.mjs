@@ -70,8 +70,8 @@ test('GET acknowledged original after actual QA code M token MCP and D04 reader'
  assert.equal(ticket.expires_at,Math.min(ticket.issued_at+600000,reservation.accessExpiresAt,reservation.preconnectionExpiresAt,i.C0,Date.parse(i.consentExpiresAt),Date.parse(f.grant.expires_at)));
  const sourceRowsAfter=await plain(f.stub.snapshot());for(const row of originalRows)assert.deepEqual(sourceRowsAfter.find(([key])=>key===row[0]),row,'original preparation/issuer/SDK history retained');
  assert.equal(records['ticket:ack'].outcome,'applied');assert.equal(records['ticket:ack'].sequence,null);assert(records['ticket:ack'].observedAt<records['ticket:send'].window.deadline);assert(state.trace.find(v=>v.position==='complete').at<records['ticket:send'].window.deadline);assert(records['ticket:send'].window.deadline-records['ticket:send'].window.startedAt<=5000);
- assert.match(html,/<button type="button" disabled>/);assert.doesNotMatch(html,/<script|<form[^>]+action=/);assert.match(html,/Todavía no diste permiso para avisos/);
- assert.match(response.headers.get('Content-Security-Policy'),/form-action 'none'/);assert.equal(response.headers.get('X-Content-Type-Options'),'nosniff');assert.equal(response.headers.get('Cache-Control'),'no-store');assert.equal(response.headers.get('Referrer-Policy'),'same-origin');assert.match(response.headers.get('Set-Cookie'),/; Path=\/; Secure; HttpOnly; SameSite=Strict; Max-Age=\d+/);
+ assert.match(html,/<form method="post" action="\/monitoring\/grant">/);assert.match(html,/<button type="submit">Permitir avisos temporales<\/button>/);assert.doesNotMatch(html,/<script|disabled|autosubmit/);assert.match(html,/Podés registrar un permiso temporal para avisos/);assert(html.includes(new Date(ticket.permission_expires_at).toISOString()));
+ assert.match(response.headers.get('Content-Security-Policy'),/form-action 'self'/);assert.equal(response.headers.get('X-Content-Type-Options'),'nosniff');assert.equal(response.headers.get('Cache-Control'),'no-store');assert.equal(response.headers.get('Referrer-Policy'),'same-origin');assert.match(response.headers.get('Set-Cookie'),/; Path=\/; Secure; HttpOnly; SameSite=Strict; Max-Age=\d+/);
  assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),f.grant);
  const repeat=await f.mf.dispatchFetch(f.source.origin+'/monitoring',{headers:f.headers});assert.equal(repeat.status,503);await repeat.body?.cancel();assert.deepEqual(await plain(f.stub.noticeInspect()),after);
 }));
@@ -246,14 +246,20 @@ test('notice GET malformed unrelated cookie denies before reservation',()=>withI
 test('notice cookie-list accepts token names and legitimate values',async()=>{
  const {qualifyFiniteOwnerNoticeGetRequest:q}=await import('../lib/mcp-qa-finite-owner-notice-get-wire.mjs');
  const origin='https://delegated-canary.agentfriendlyweb.dev';
- for(const cookie of [null,"!#$%&'*+-.^_`|~=x",'a=','a=base64===','a="quoted=="','a=""; b=x']){
+ for(const cookie of [null,"!#$%&'*+-.^_`|~=x",'a=','a=base64===','a="quoted=="','a=""; b=x','a=x; A=y']){
   const headers=cookie===null?{}:{Cookie:cookie};assert.equal(q(new Request(origin+'/monitoring',{headers}),new Uint8Array()).method,'GET');
  }
 });
 test('notice cookie-list rejects malformed list',async()=>{
  const {qualifyFiniteOwnerNoticeGetRequest:q}=await import('../lib/mcp-qa-finite-owner-notice-get-wire.mjs');
  const origin='https://delegated-canary.agentfriendlyweb.dev';
- for(const cookie of ['', '   ','; a=x','a=x;','a=x; ; b=y','bad:name=x','bad/name=x','bad@name=x','bad(name)=x','bad[name]=x','bad,name=x','bad name=x','námé=x','a=x; a=y','a=x,y','a=x\\y','a=has space','a=é','a="x"y','a="x','a=x"','a=x;b=y','a=x;  b=y','a=x ; b=y','a='+'x'.repeat(8191)]){
+ for(const cookie of ['', '   ','; a=x','a=x;','a=x; ; b=y','bad:name=x','bad/name=x','bad@name=x','bad(name)=x','bad[name]=x','bad,name=x','bad name=x','námé=x','a=x; a=y','a=x,y','a=x\\y','a=has space','bad\x01name=x','a=x\x7fy','a=x\ty; b=1','a=x\r\ny=1','a=é','a="x"y','a="x','a=x"','a=x;b=y','a=x;  b=y','a=x ; b=y','a='+'x'.repeat(8191)]){
   assert.throws(()=>q(new Request(origin+'/monitoring',{headers:{Cookie:cookie}}),new Uint8Array()),'must reject '+JSON.stringify(cookie));
  }
+});
+
+test('notice cookie-list bounds assertion and native header envelope',async()=>{
+ const {qualifyFiniteOwnerNoticeGetRequest:q}=await import('../lib/mcp-qa-finite-owner-notice-get-wire.mjs'),origin='https://delegated-canary.agentfriendlyweb.dev';
+ assert.throws(()=>q(new Request(origin+'/monitoring',{headers:{'Cf-Access-Jwt-Assertion':'x'.repeat(8193)}}),new Uint8Array()));
+ assert.throws(()=>q(new Request(origin+'/monitoring',{headers:{'Cf-Access-Jwt-Assertion':'x\r\ny'}}),new Uint8Array()));
 });

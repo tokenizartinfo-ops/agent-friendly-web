@@ -58,9 +58,9 @@ test('native consent POST records original decision after actual ticket GET',()=
  await f.stub.ioConfigure();await f.stub.noticeConfigure();const began=Date.now(),response=await consent(f),html=await response.text();
  const observation=await plain(f.stub.noticeStateRead()),io=await plain(f.stub.ioObservation()),elapsed=Date.now()-began,after=await plain(f.stub.noticeInspect());
  await saveNoticeObservation({unit:'consent',elapsed,...observation.state,io});
- console.info('CONSENT native principal costs',JSON.stringify({elapsed,trace:observation.state.trace,sqlSessions:observation.state.sql.length,first:observation.state.sql.flatMap(s=>s.queries).filter(q=>q.method==='first').length,all:observation.state.sql.flatMap(s=>s.queries).filter(q=>q.method==='all').length,ops:observation.state.ops,noticeListLimits:observation.state.lists.filter(v=>v.prefix.startsWith('afw.finite-preparation-notice')).map(v=>v.limit),http:{snapshots:io.snapshots,requests:io.rows.length,peak:io.peak,active:io.active}}));
+ console.info('CONSENT native principal costs',JSON.stringify({elapsed,pairs:io.snapshots/2,rechecks:observation.state.trace.filter(v=>v.stage==='after').length,accessVerifications:observation.state.accessVerifications??0,sqlSessions:observation.state.sql.length,first:observation.state.sql.flatMap(s=>s.queries).filter(q=>q.method==='first').length,all:observation.state.sql.flatMap(s=>s.queries).filter(q=>q.method==='all').length,ops:observation.state.ops,noticeLists:observation.state.lists.filter(v=>v.prefix.startsWith('afw.finite-preparation-notice')).length,http:{snapshots:io.snapshots,requests:io.rows.length,peak:io.peak,active:io.active}}));
  assert(elapsed<30000);assert.equal(io.peak,2);assert.equal(io.active,0);
- assert.equal(observation.state.trace.filter(v=>v.stage==='after').length,5);
+ assert.equal(observation.state.trace.filter(v=>v.stage==='after').length,5);assert.equal(observation.state.accessVerifications,2);
  const rowsAfter=await plain(f.stub.snapshot());for(const row of original)assert.deepEqual(rowsAfter.find(([k])=>k===row[0]),row);
  const historyAfter=(await f.db.prepare('SELECT * FROM dossier_monitoring_consent_events ORDER BY sequence').all()).results;
  for(const row of history)assert.deepEqual(historyAfter.find(v=>v.sequence===row.sequence),row);
@@ -71,7 +71,7 @@ test('native consent POST records original decision after actual ticket GET',()=
  const record=suffix=>JSON.parse(after.notice.find(([k])=>k.endsWith(suffix))[1]),r=record(':reservation'),send=record('consent:send'),ack=record('consent:ack'),row=after.events[0],i=f.identity;
  assert.deepEqual(row,{sequence:row.sequence,grant_id:i.grantId,project_id:i.projectId,user_id:i.subject,client_id:i.clientId,resource:i.resource,revision:i.projectRevision,action:'grant',purpose:'afw.dossier-monitoring.v1',request_id:r.ticket.requestId,issued_at:row.issued_at,expires_at:r.ticket.permissionExpiresAt});
  assert(Number.isSafeInteger(row.sequence)&&row.sequence>0);assert(row.issued_at>=send.issuedAt);assert(row.issued_at<send.window.deadline);assert.equal(ack.sequence,row.sequence);assert.equal(ack.rowHash,initialHash('afw.finite-preparation-notice-row.v1',row));assert.equal(ack.sendHash,send.recordHash);
- assert(send.window.deadline-send.window.startedAt<=5000);assert(observation.state.trace.find(v=>v.position==='complete').at<send.window.deadline);
+ console.info('CONSENT native original window',JSON.stringify({childElapsed:observation.state.trace.find(v=>v.position==='complete').at-send.window.startedAt,windowMs:send.window.deadline-send.window.startedAt,parentElapsed:elapsed}));assert(send.window.deadline-send.window.startedAt<=5000);assert(observation.state.trace.find(v=>v.position==='complete').at<send.window.deadline);
  assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
  for(const path of ['/monitoring','/authorize']){
   const response=await f.mf.dispatchFetch(f.source.origin+path,{headers:f.headers});assert.notEqual(response.status,200);await response.body?.cancel();
@@ -202,16 +202,15 @@ test('native consent captured failure cannot resume commit',()=>withIssued(async
 test('notice cookie-list accepts token names and legitimate values POST',()=>{
  const origin='https://delegated-canary.agentfriendlyweb.dev',bytes=new TextEncoder().encode('handle='+'a'.repeat(43));
  assert.equal(finiteOwnerNoticeConsentTarget,'https://afw-private.invalid/_finite-owner/monitoring/grant');
- for(const cookie of ["!#$%&'*+-.^_\x60|~=x",'a=','a=base64===','a="quoted=="','a=""; b=x']){
+ for(const cookie of ["!#$%&'*+-.^_\x60|~=x",'a=','a=base64===','a="quoted=="','a=""; b=x','a=x; A=y']){
   const request=new Request(origin+'/monitoring/grant',{method:'POST',headers:{Origin:origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:cookie}});
   assert.equal(qualifyFiniteOwnerNoticeConsentRequest(request,bytes).handle,'a'.repeat(43));
  }
 });
 test('notice cookie-list rejects malformed list POST',()=>{
  const origin='https://delegated-canary.agentfriendlyweb.dev',bytes=new TextEncoder().encode('handle='+'a'.repeat(43));
- for(const cookie of ['', '   ','; a=x','a=x;','a=x; ; b=y','bad:name=x','bad/name=x','bad@name=x','bad(name)=x','bad[name]=x','bad,name=x','bad name=x','námé=x','a=x; a=y','a=x,y','a=x\\y','a=has space','a=é','a="x"y','a="x','a=x"','a=x;b=y','a=x;  b=y','a=x ; b=y','a='+'x'.repeat(8191)]){
-  const request=new Request(origin+'/monitoring/grant',{method:'POST',headers:{Origin:origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:cookie}});
-  assert.throws(()=>qualifyFiniteOwnerNoticeConsentRequest(request,bytes),JSON.stringify(cookie));
+ for(const cookie of ['', '   ','; a=x','a=x;','a=x; ; b=y','bad:name=x','bad/name=x','bad@name=x','bad(name)=x','bad[name]=x','bad,name=x','bad name=x','námé=x','a=x; a=y','a=x,y','a=x\\y','a=has space','bad\x01name=x','a=x\x7fy','a=x\ty; b=1','a=x\r\ny=1','a=é','a="x"y','a="x','a=x"','a=x;b=y','a=x;  b=y','a=x ; b=y','a='+'x'.repeat(8191)]){
+  assert.throws(()=>qualifyFiniteOwnerNoticeConsentRequest(new Request(origin+'/monitoring/grant',{method:'POST',headers:{Origin:origin,'Content-Type':'application/x-www-form-urlencoded',Cookie:cookie}}),bytes),JSON.stringify(cookie));
  }
 });
 
@@ -236,7 +235,7 @@ for(const where of ['M','QA'])test('native consent failed body retains actual ca
  const probe=async()=>where==='QA'?plain(f.stub.noticeProbe()):(await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-probe')).json();
  assert.equal((await probe()).allowed,false,'new live root denied by actual pending cancellation');
  if(where==='QA')await f.stub.noticeBodyReleaseHeld();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-release')).body?.cancel();
- for(let n=0;n<100;n++){if((await probe()).allowed){if(where==='M'){const actual=await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-state')).json();for(const key of ['readNativeSettled','cancelNativeSettled','bodyFinally','bodyPromiseRejected','actualCallbackFinally','outerFinally'])assert.equal(actual[key],true,key);assert.notEqual(actual.cancelNativeRejected,true);}return;}await new Promise(r=>setTimeout(r,10));}const finalState=where==='QA'?await plain(f.stub.noticeBodyRead()):await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-state')).json();assert.fail('actual body cancellation not settled '+JSON.stringify({probe:await probe(),state:finalState}));
+ for(let n=0;n<100;n++){if((await probe()).allowed){if(where==='M'){const actual=await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-state')).json();for(const key of ['readNativeEntered','readNativeSettled','cancelNativeEntered','cancelNativeSettled','bodyFinally','bodyPromiseEntered','bodyPromiseRejected','actualCallbackFinally','outerFinally'])assert.equal(actual[key],true,key);for(const key of ['cancelNativeRejected','readNativeRejected','bodyPromiseSettled'])assert.notEqual(actual[key],true,key);}return;}await new Promise(r=>setTimeout(r,10));}const finalState=where==='QA'?await plain(f.stub.noticeBodyRead()):await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-state')).json();assert.fail('actual body cancellation not settled '+JSON.stringify({probe:await probe(),state:finalState}));
 }));
 test('native consent abort retains SQL and forbids late ACK',()=>withIssued(async f=>{
  await ticket(f);await f.stub.noticeConfigure('hold-after');const pending=consent(f);await gate(f,'after-sql');
@@ -289,7 +288,7 @@ for(const where of ['M','QA'])test('native consent failed body retains actual ca
  if(where==='QA')await f.stub.noticeBodyReleaseRead();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-release-read')).body?.cancel();
  const cancelling=await until(s=>s.cancelEntered);assert.equal(cancelling.readSettled,true);assert.equal(cancelling.cancelSettled,false);assert.equal((await probe()).allowed,false);
  if(where==='QA')await f.stub.noticeBodyReleaseHeld();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-release')).body?.cancel();
- for(let n=0;n<100;n++){if((await probe()).allowed){if(where==='M'){const actual=await read();for(const key of ['readNativeSettled','cancelNativeSettled','bodyFinally','bodyPromiseRejected','actualCallbackFinally','outerFinally'])assert.equal(actual[key],true,key);assert.notEqual(actual.cancelNativeRejected,true);}assert.deepEqual(await plain(f.stub.noticeInspect()),before);return;}await new Promise(r=>setTimeout(r,10));}assert.fail('actual held read/cancel scope not released');
+ for(let n=0;n<100;n++){if((await probe()).allowed){if(where==='M'){const actual=await read();for(const key of ['readNativeEntered','readNativeSettled','cancelNativeEntered','cancelNativeSettled','bodyFinally','bodyPromiseEntered','bodyPromiseRejected','actualCallbackFinally','outerFinally'])assert.equal(actual[key],true,key);for(const key of ['cancelNativeRejected','readNativeRejected','bodyPromiseSettled'])assert.notEqual(actual[key],true,key);}assert.deepEqual(await plain(f.stub.noticeInspect()),before);return;}await new Promise(r=>setTimeout(r,10));}assert.fail('actual held read/cancel scope not released');
 }));
 for(const drift of ['owner','revision','pointer'])test('native consent source current drift denies after-SEND before recheck '+drift,()=>withIssued(async f=>{
  await ticket(f);await f.stub.noticeConfigure('after-send');const pending=consent(f);await gate(f,'after-send');
