@@ -342,9 +342,10 @@ test('fanout sibling beyond original child cannot renew its deadline',{timeout:6
  await ioPhysicalRelease(f);assert.equal((await plain(f.stub.ioObservation())).snapshots,1);
  console.info('fanout native sibling expiry',JSON.stringify({elapsed,renewed:false}));
 },{observed:false,io:true}));
-for(const checkpoint of ['before-join','after-first','between'])for(const drift of ['owner','pointer','module','configuration']){
+for(const checkpoint of ['joined-before-consumption','after-first','between'])for(const drift of ['owner','pointer','module','configuration']){
  test('fanout '+drift+' drift at causal '+checkpoint+' denies at original following checkpoint',{timeout:60000},()=>world(async f=>{
-  await f.stub.ioConfigure({checkpoint});const pending=f.get();await ioWait(f,s=>s.checkpointHeld===checkpoint);
+  await f.stub.ioConfigure({checkpoint});const pending=f.get();const at=await ioWait(f,s=>s.checkpointHeld===checkpoint);
+  if(checkpoint==='joined-before-consumption'){assert.deepEqual(at.branches,{qa:'settled',m:'settled'});assert.equal(at.active,0);}
   if(drift==='owner')await f.db.prepare("UPDATE site_projects SET user_id='SYN drift'").run();
   if(drift==='pointer')f.phaseCurrent.receipt.deploymentId='99999999-9999-4999-8999-999999999999';
   if(drift==='module')f.phaseFault='module';
