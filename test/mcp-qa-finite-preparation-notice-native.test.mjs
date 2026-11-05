@@ -80,3 +80,24 @@ for(const target of ['ticket','consent'])test('REAL post-commit notice ACK loss 
 for(const target of ['ticket','consent'])test('REAL held native SQL settlement cannot become successful cancellation '+target,async t=>{
  const {result:r,identity:i}=await scenario(t,'notice-held',{target});causal(r,i);assert.equal(r.gateReached,true);assert.equal(r.committed,true);assert.equal(r.pendingAfterAbort,true);assert.equal(r.pending.rejected,true);assert.equal(r.retryWrites,0);assert.equal(r.counts.tickets,1);assert.equal(r.counts.notices,target==='ticket'?0:1);
 });
+
+for(const [name,kind] of [
+ ['REAL concurrent monitoring failure blocks pending consent before INSERT','notice-concurrent-before'],
+ ['REAL concurrent monitoring failure blocks pending ticket observation','notice-concurrent-observation'],
+ ['REAL concurrent monitoring failure cannot return applied after emitted consent','notice-concurrent-after']
+])test(name,async t=>{
+ const {result:r,identity:i}=await scenario(t,kind);causal(r,i);
+ assert.equal(r.ticketCommitGate,true);assert.equal(r.ticketGateBeforeDeadline,true);
+ assert.equal(r.boundaryGate,true);assert.equal(r.boundaryBeforeDeadline,true);
+ assert.equal(r.ticketFailure.rejected,true);assert.equal(r.failureKnown,true);
+ assert.ok(r.failureAt>=r.boundaryAt);assert.equal(r.pendingAfterFailure,true,'original pending operation retained until native gate settles');
+ if(kind==='notice-concurrent-after'){assert.equal(r.nativeBoundaryRow,true);assert.equal(r.emittedBeforeRelease,1);assert.equal(r.counts.notices,1);}
+ else if(kind==='notice-concurrent-observation'){assert.equal(r.nativeObservationRow,true);assert.equal(r.emittedBeforeRelease,0);}
+ else{assert.equal(r.observed,true);assert.equal(r.emittedBeforeRelease,0);}
+ assert.equal(r.pending.rejected,true,'known mutation failure must absorb concurrent result');
+ assert.equal(r.pending.value,undefined,'no late witness/applied result');
+ assert.equal(r.newEmissionsAfterFailure,0,'no new native monitoring SQL emitted after known failure');
+ assert.equal(r.consentEmitted,kind==='notice-concurrent-after'?1:0);
+ assert.equal(r.counts.tickets,1);assert.equal(r.counts.notices,kind==='notice-concurrent-after'?1:0);
+ console.log('SYN concurrent '+kind+' ticketGate='+r.ticketGateBeforeDeadline+' boundaryGate='+r.boundaryBeforeDeadline+' failureKnown='+r.failureKnown+' emitted='+r.consentEmitted+' afterFailure='+r.newEmissionsAfterFailure+' persisted='+r.counts.notices);
+});

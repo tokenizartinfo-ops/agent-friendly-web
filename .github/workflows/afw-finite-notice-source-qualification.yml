@@ -1,0 +1,27 @@
+name: AFW finite notice source qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - lib/mcp-qa-finite-preparation-issuer-store.mjs
+      - test/fixtures/finite-preparation-issuer-worker.mjs
+      - test/mcp-qa-finite-preparation-notice-native.test.mjs
+      - .github/workflows/afw-finite-notice-source-qualification.yml
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: RED concurrent monitoring failure
+        run: node --test --test-name-pattern="REAL concurrent monitoring failure" test/mcp-qa-finite-preparation-notice-native.test.mjs

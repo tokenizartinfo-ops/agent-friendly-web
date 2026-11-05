@@ -21,10 +21,15 @@ export class FiniteIssuerFixture extends DurableObject{
   const identity=seal('Identity',{preconnectionId:H,enrollmentHash:H,capsuleHash:H,sourceRevision:'b'.repeat(40),qaVersionId:U,actorId:this.ctx.id.toString(),subject:'SYN-owner',accessRealmHash:H,projectId:'SYN-project',projectRevision:1,clientId:'SYN-client',resource:'https://delegated-canary.agentfriendlyweb.dev/mcp',authorizationHash:'c'.repeat(64),grantId:U,requestedScopes:['afw:project:read','afw:evidence:read'],consentExpiresAt:new Date(at+(b.case.startsWith('notice-')?24000:12000)).toISOString(),I0:at-1000,C0:at+899000,C1:at+1079000,reservedAt:at-5});
   const i=b.case.startsWith('notice-')&&b.ceiling==='C0'?seal('Identity',{...identity,I0:at-897000,C0:at+3000,C1:at+183000,consentExpiresAt:new Date(at+3000).toISOString()}):b.case.startsWith('notice-')&&b.ceiling==='consent'?seal('Identity',{...identity,consentExpiresAt:new Date(at+3000).toISOString()}):['C0_queue','expired_cleanup','C0_grant_queue'].includes(b.case)?seal('Identity',{...identity,I0:at-899200,C0:at+800,C1:at+180800,consentExpiresAt:new Date(at+800).toISOString()}):b.case==='consent_queue'?seal('Identity',{...identity,consentExpiresAt:new Date(at+500).toISOString()}):identity;
   const parent=new AbortController(),lease=Object.freeze({signal:parent.signal,assertCurrent(){if(parent.signal.aborted||Date.now()>=at+30000)throw Error('SYN original lease expired');}});
-  let delay=null,lose=null,holdAck=null,sessionId=0,sqlCount=0,grantCommitted=false,noticeGate=null,noticeClock=null;
+  let delay=null,lose=null,holdAck=null,sessionId=0,sqlCount=0,grantCommitted=false,noticeGate=null,noticeClock=null,noticeConcurrent=null;
   const wrapper={withSession(mode){events.push({session:++sessionId,mode});const sid=sessionId,s=db.withSession(mode);return {prepare(sql){events.push({sid,sql});const actualSql=(b.case==='unsupported_clock'||noticeClock==='clock')&&sql.includes(' AS ms,typeof(')?sql.replaceAll("'subsec'","'SYN-unsupported'"):(b.case==='unsupported_iso'||noticeClock==='iso')&&sql.includes(' AS ms,typeof(')?sql.replaceAll("'2026-11-04T12:00:00.123Z'","'SYN-not-iso'"):sql;const stmt=s.prepare(actualSql);return {bind(...args){const bound=stmt.bind(...args);const call=method=>async()=>{sqlCount++;if(delay&&sql.includes(delay.needle)){const d=delay;delay=null;await sleep(d.ms);}const gate=noticeGate&&sql.includes(noticeGate.needle)?noticeGate:null;
       if(gate&&!['notice-ack','notice-held'].includes(b.case)){gate.reached=true;gate.at=Date.now();await gate.wait;}
+      const nc=noticeConcurrent,nb=nc?.boundary;
+      if(nc?.phase==='preflight'&&sql.includes('SELECT type,name,tbl_name,sql FROM sqlite_schema')&&!nb.reached){nb.reached=true;nb.at=Date.now();await nb.wait;}
+      if(nc&&sql.includes('INSERT INTO dossier_monitoring_'))nc.emitted.push({kind:sql.includes('owner_tickets')?'ticket':'consent',at:Date.now(),afterFailure:nc.failureKnown});
       const result=await bound[method]();
+      if(nc&&sql.includes('INSERT INTO dossier_monitoring_owner_tickets')){const tg=nc.ticketAck;tg.nativeRow=!!result;tg.at=Date.now();tg.reached=true;await tg.wait;throw Error('SYN actual concurrent ticket ACK lost');}
+      if(nc&&((nc.phase==='observation'&&sql.includes('SELECT t.*'))||(nc.phase==='consent-ack'&&sql.includes('INSERT INTO dossier_monitoring_consent_events')))){nb.nativeRow=!!result;nb.at=Date.now();nb.reached=true;await nb.wait;}
       if(gate&&['notice-ack','notice-held'].includes(b.case)){gate.committed=true;gate.reached=true;gate.at=Date.now();await gate.wait;if(b.case==='notice-ack')throw Error('SYN post-commit notice ACK loss');}if(sql.includes('INSERT INTO delegated_access_grants'))grantCommitted=true;if(holdAck&&sql.includes(holdAck.needle)){const d=holdAck;holdAck=null;await sleep(d.ms);}if(lose&&sql.includes(lose)){lose=null;throw Error('SYN lost actual native SQL ACK');}return result;};return {first:call('first'),all:call('all'),run:call('run')};}};}};}};
   let txFault=null,txCommitted=false;
   const nativeStorage=this.ctx.storage;
@@ -74,7 +79,41 @@ export class FiniteIssuerFixture extends DurableObject{
      await exec("INSERT INTO dossier_monitoring_consent_events(grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES (?,?,?,?,?,1,'grant','afw.dossier-monitoring.v1',?,?,?)",foreign?'SYN-foreign':i.grantId,i.projectId,i.subject,i.clientId,i.resource,foreign?U:'33333333-3333-4333-8333-333333333333',at,at+15000);
     };
     if(b.case==='notice-global'){await competing(true);await exec("INSERT INTO dossier_monitoring_consent_events(grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES ('SYN-second',?,?,?,?,1,'grant','afw.dossier-monitoring.v1',?,?,?)",i.projectId,i.subject,i.clientId,i.resource,U,at,at+15000);result.priorMax=(await db.prepare('SELECT COALESCE(MAX(sequence),0) AS n FROM dossier_monitoring_consent_events WHERE grant_id=?').bind(i.grantId).first()).n;}
-    if(b.case==='notice-schema'){
+
+    if(b.case.startsWith('notice-concurrent-')){
+     // SYN scheduling gates only; every result below comes from real D1.
+     const latch=()=>{let release;const wait=new Promise(resolve=>{release=resolve;});return {wait,release,reached:false,at:null,nativeRow:false};};
+     const ticketAck=latch(),boundary=latch();
+     noticeConcurrent={ticketAck,boundary,phase:null,failureKnown:false,emitted:[],kind:b.case};
+     let ticketSettled=false;const ticketPending=issue().then(value=>{ticketSettled=true;return {value};},()=>{ticketSettled=true;return {rejected:true};});
+     while(!ticketAck.reached&&!ticketSettled)await sleep(1);
+     if(!ticketAck.reached||!ticketAck.nativeRow)throw Error('SYN concurrent ticket commit gate not reached');
+     result.ticketCommitGate=true;result.ticketGateBeforeDeadline=ticketAck.at<common.window.deadline;
+     let pendingSettled=false,pending;
+     if(b.case==='notice-concurrent-observation'){
+      noticeConcurrent.phase='observation';
+      pending=observeTicket().then(value=>{pendingSettled=true;return {value};},()=>{pendingSettled=true;return {rejected:true};});
+     }else{
+      const witness=await observeTicket();result.observed=!!witness;
+      if(!witness)throw Error('SYN concurrent native witness not reached');
+      noticeConcurrent.phase=b.case==='notice-concurrent-before'?'preflight':'consent-ack';
+      pending=insertNotice(witness).then(value=>{pendingSettled=true;return {value};},()=>{pendingSettled=true;return {rejected:true};});
+     }
+     while(!boundary.reached&&!pendingSettled)await sleep(1);
+     if(!boundary.reached)throw Error('SYN concurrent boundary not reached');
+     result.boundaryGate=true;result.boundaryBeforeDeadline=boundary.at<common.window.deadline;
+     result.nativeBoundaryRow=boundary.nativeRow;result.boundaryAt=boundary.at;
+     ticketAck.release();result.ticketFailure=await ticketPending;
+     if(!result.ticketFailure.rejected)throw Error('SYN actual ticket ACK failure not observed');
+     noticeConcurrent.failureKnown=true;result.failureKnown=true;result.failureAt=Date.now();
+     await sleep(20);result.pendingAfterFailure=!pendingSettled;
+     result.emittedBeforeRelease=noticeConcurrent.emitted.filter(e=>e.kind==='consent').length;
+     boundary.release();result.pending=await pending;
+     result.consentEmitted=noticeConcurrent.emitted.filter(e=>e.kind==='consent').length;
+     result.newEmissionsAfterFailure=noticeConcurrent.emitted.filter(e=>e.afterFailure).length;
+     result.emitted=noticeConcurrent.emitted.map(e=>({kind:e.kind,at:e.at,afterFailure:e.afterFailure}));
+     result.counts=await counts();result.nativeObservationRow=b.case==='notice-concurrent-observation'&&boundary.nativeRow;
+    }else if(b.case==='notice-schema'){
      if(b.fault==='clock')noticeClock='clock';else if(b.fault==='iso')noticeClock='iso';
      else if(b.fault==='type'){await exec('DROP TABLE dossier_monitoring_owner_tickets');await exec('CREATE TABLE dossier_monitoring_owner_tickets (handle_hash TEXT PRIMARY KEY,request_id TEXT,user_id TEXT,grant_id TEXT,project_id TEXT,client_id TEXT,resource TEXT,purpose TEXT,action TEXT,revision TEXT,expected_sequence INTEGER,issued_at INTEGER,expires_at INTEGER,permission_expires_at INTEGER)');}
      else if(b.fault==='extra')await exec('CREATE INDEX SYN_extra_notice ON dossier_monitoring_owner_tickets(grant_id)');
