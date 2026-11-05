@@ -1,3 +1,4 @@
+import {createHash} from 'node:crypto';
 import {DurableObject} from 'cloudflare:workers';
 import {initialHash as hash} from '../../lib/mcp-qa-finite-initial-material-records.mjs';
 import {createFinitePreparationIssuerStore,FINITE_PREPARATION_ISSUER_SCHEMA as schema,FINITE_PREPARATION_MONITORING_SCHEMA as monitoringSchema} from '../../lib/mcp-qa-finite-preparation-issuer-store.mjs';
@@ -65,7 +66,7 @@ export class FiniteNoticeProvenanceFixture extends DurableObject{
    const ga=issuer('Ack',{purpose:'afw.finite-preparation-issuer-ack.v1',sendHash:gs.recordHash,rowHash:hash('afw.finite-preparation-issuer-row.v1',result.grant.row),outcome:'applied',observedAt:Date.now()});
    result.originalGrantAck=await ij.appendAck({preconnectionId:H,operation:'grant',record:ga},lease);
    // Persist and read the ORIGINAL SYN reference rows before notice reservation.
-   const link={preconnectionId:H,authorizationHash:i.authorizationHash,grantId:i.grantId,grantHash:hash('SYN-original-grant-row',result.grant.row),acceptedAt:Date.now()};
+   const link={preconnectionId:H,authorizationHash:i.authorizationHash,grantId:i.grantId,grantHash:createHash('sha256').update(i.grantId).digest('hex'),acceptedAt:Date.now()};
    const connection={connectionRef:H,subject:i.subject,grantId:i.grantId,clientId:i.clientId,projectId:i.projectId,resource:i.resource,issuedAt:at,expiresAt:at+22000};
    await native.put('SYN:original:GrantLink',prepEncode('GrantLink',link));await native.put('SYN:original:ConnectionRef',prepEncode('ConnectionRef',connection));
    const originalLink=prepDecode('GrantLink',await native.get('SYN:original:GrantLink')),originalConnection=prepDecode('ConnectionRef',await native.get('SYN:original:ConnectionRef'));
@@ -84,7 +85,7 @@ export class FiniteNoticeProvenanceFixture extends DurableObject{
    const ack=(s,actual)=>make('Ack',{sendHash:s.recordHash,outcome:actual.status,rowHash:actual.status==='applied'?hash('afw.finite-preparation-notice-row.v1',actual.row):null,sequence:actual.status==='applied'&&s.operation==='consent'?actual.row.sequence:null,observedAt:Date.now()});
    const appendAck=(s,a)=>journal.appendAck({preconnectionId:H,operation:s.operation,record:a},lease);
    const freeze=()=>make('Freeze',{identityHash:i.identityHash,reservationHash:r.recordHash,frozenAt:Date.now()});
-   const read=()=>createJournal({ctx,env}).read({preconnectionId:H},lease);
+   const read=()=>journal.read({preconnectionId:H},lease);
    const issue=s=>store.insertMonitoringTicket({...data(s),ticket},lease);
    const retain=async(kind,work)=>{
     const gate=latch();if(kind==='transaction')txGate=gate;else{gate.needle='INSERT INTO dossier_monitoring_owner_tickets';sqlGate=gate;}
@@ -167,7 +168,7 @@ export class FiniteNoticeProvenanceFixture extends DurableObject{
           for(let n=0;n<16;n++)await exec("INSERT INTO dossier_monitoring_consent_events(grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at) VALUES (?,?,?,?,?,1,'grant','afw.dossier-monitoring.v1',?,?,?)",'SYN-foreign-'+n,i.projectId,i.subject,i.clientId,i.resource,'33333333-3333-4333-8333-'+String(n).padStart(12,'0'),at,at+19000);
           result.foreignBefore=(await db.prepare("SELECT * FROM dossier_monitoring_consent_events WHERE grant_id<>? ORDER BY sequence").bind(i.grantId).all()).results;
           result.priorGrantMax=(await db.prepare('SELECT COALESCE(MAX(sequence),0) AS n FROM dossier_monitoring_consent_events WHERE grant_id=?').bind(i.grantId).first()).n;
-          const cs=send('consent');result.consentSend=await append(cs);
+          const cs=send('consent',b.case==='consent-reduced'?{accessExpiresAt:ticket.expiresAt}:{});result.consentSend=await append(cs);
           if(result.consentSend.status==='recorded'){
            const common=data(cs),witness=await store.observeMonitoringTicket({...common,ticket},lease);result.observed=!!witness;result.witnessFrozen=Object.isFrozen(witness)&&Object.isFrozen(witness.row);
            if(b.case==='sql-loss'&&b.target==='consent')sqlLoss='INSERT INTO dossier_monitoring_consent_events';
@@ -181,7 +182,7 @@ export class FiniteNoticeProvenanceFixture extends DurableObject{
           if(b.case==='freeze-complete'){result.freeze=await journal.freeze({preconnectionId:H,record:freeze()},lease);result.replayAck=await appendAck(ticketSend,ta);result.replaySend=await append(ticketSend);}
          }
         }
-        result.history=await read();
+        if(b.case==='sql-loss')journal=createJournal({ctx,env});result.history=await read();
         if(b.case==='sql-loss'&&b.target==='ticket')result.blockedConsent=await append(send('consent'));
         if(b.case==='sql-loss'){result.freeze=await journal.freeze({preconnectionId:H,record:freeze()},lease);result.afterFreeze=await read();}
         result.ticketRows=(await db.prepare('SELECT * FROM dossier_monitoring_owner_tickets').all()).results;

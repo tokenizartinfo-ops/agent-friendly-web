@@ -47,3 +47,7 @@ test('DATA decode rejects malformed JSON, unknown fields, noncanonical bytes and
  const wrong=canonical({...reservation,issuerReservationHash:'f'.repeat(64)});assert.throws(()=>decode('Reservation',wrong));
  assert.equal(reservation.recordHash,hash(reservation.purpose,Object.fromEntries(Object.entries(reservation).filter(([k])=>k!=='recordHash'))));
 });
+
+test('DATA Access and preconnection are independent ceilings, never renewal authority',()=>{
+ const r=make('Reservation',{...body,accessExpiresAt:at+30000});assert.ok(r.accessExpiresAt>r.preconnectionExpiresAt);assert.equal(r.ticket.expiresAt,body.ticket.expiresAt);
+});

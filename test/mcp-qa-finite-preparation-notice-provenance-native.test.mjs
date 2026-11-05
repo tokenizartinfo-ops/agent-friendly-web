@@ -56,3 +56,7 @@ for(const fault of ['sendHash','sequence','early','late'])test('REAL ticket ACK 
 });
 test('REAL consent ACK requires actual positive assigned sequence',async t=>{const r=await scenario(t,'invalid-consent-ack');recorded(r);assert.equal(r.consent.row.sequence,17);assert.equal(r.invalidAck.status,'uncertain');assert.equal(r.history.operations.consent.ack,null);assert.equal(r.writes,2);});
 test('REAL no_mutation ACK is terminal and cannot advance consent',async t=>{const r=await scenario(t,'no-mutation');recorded(r);assert.equal(r.ticket.status,'no_mutation');assert.equal(r.ticketAck.status,'recorded');assert.equal(r.history.operations.ticket.ack.rowHash,null);assert.equal(r.history.operations.ticket.ack.sequence,null);assert.equal(r.blockedConsent.status,'uncertain');assert.equal(r.history.operations.consent.send,null);assert.equal(r.ticketRows.length,0);assert.equal(r.writes,1);});
+
+test('REAL POST Access may narrow while covering original ticket without enlarging permission',async t=>{
+ const r=await scenario(t,'consent-reduced');recorded(r);assert.equal(r.consent.status,'applied');assert.equal(r.history.operations.consent.send.accessExpiresAt,r.reservationData.ticket.expiresAt);assert.ok(r.history.operations.consent.send.accessExpiresAt<r.reservationData.accessExpiresAt);assert.equal(r.consent.row.expires_at,r.reservationData.ticket.permissionExpiresAt);
+});
