@@ -236,7 +236,7 @@ for(const where of ['M','QA'])test('native consent failed body retains actual ca
  const probe=async()=>where==='QA'?plain(f.stub.noticeProbe()):(await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-probe')).json();
  assert.equal((await probe()).allowed,false,'new live root denied by actual pending cancellation');
  if(where==='QA')await f.stub.noticeBodyReleaseHeld();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-release')).body?.cancel();
- for(let n=0;n<100;n++){if((await probe()).allowed)return;await new Promise(r=>setTimeout(r,10));}const finalState=where==='QA'?await plain(f.stub.noticeBodyRead()):await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-state')).json();assert.fail('actual body cancellation not settled '+JSON.stringify({probe:await probe(),state:finalState}));
+ for(let n=0;n<100;n++){if((await probe()).allowed){if(where==='M'){const actual=await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-state')).json();for(const key of ['readNativeSettled','cancelNativeSettled','bodyFinally','bodyPromiseRejected','actualCallbackFinally','outerFinally'])assert.equal(actual[key],true,key);assert.notEqual(actual.cancelNativeRejected,true);}return;}await new Promise(r=>setTimeout(r,10));}const finalState=where==='QA'?await plain(f.stub.noticeBodyRead()):await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-state')).json();assert.fail('actual body cancellation not settled '+JSON.stringify({probe:await probe(),state:finalState}));
 }));
 test('native consent abort retains SQL and forbids late ACK',()=>withIssued(async f=>{
  await ticket(f);await f.stub.noticeConfigure('hold-after');const pending=consent(f);await gate(f,'after-sql');
@@ -289,7 +289,7 @@ for(const where of ['M','QA'])test('native consent failed body retains actual ca
  if(where==='QA')await f.stub.noticeBodyReleaseRead();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-release-read')).body?.cancel();
  const cancelling=await until(s=>s.cancelEntered);assert.equal(cancelling.readSettled,true);assert.equal(cancelling.cancelSettled,false);assert.equal((await probe()).allowed,false);
  if(where==='QA')await f.stub.noticeBodyReleaseHeld();else await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-body-release')).body?.cancel();
- for(let n=0;n<100;n++){if((await probe()).allowed){assert.deepEqual(await plain(f.stub.noticeInspect()),before);return;}await new Promise(r=>setTimeout(r,10));}assert.fail('actual held read/cancel scope not released');
+ for(let n=0;n<100;n++){if((await probe()).allowed){if(where==='M'){const actual=await read();for(const key of ['readNativeSettled','cancelNativeSettled','bodyFinally','bodyPromiseRejected','actualCallbackFinally','outerFinally'])assert.equal(actual[key],true,key);assert.notEqual(actual.cancelNativeRejected,true);}assert.deepEqual(await plain(f.stub.noticeInspect()),before);return;}await new Promise(r=>setTimeout(r,10));}assert.fail('actual held read/cancel scope not released');
 }));
 for(const drift of ['owner','revision','pointer'])test('native consent source current drift denies after-SEND before recheck '+drift,()=>withIssued(async f=>{
  await ticket(f);await f.stub.noticeConfigure('after-send');const pending=consent(f);await gate(f,'after-send');
