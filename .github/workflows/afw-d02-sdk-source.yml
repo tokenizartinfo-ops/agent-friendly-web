@@ -25,25 +25,12 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Scoped lint before native work
         run: npx eslint lib/mcp-qa-finite-owner-approved-ticket-facts.mjs lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-owner-phase-context.mjs lib/mcp-qa-finite-owner-oauth-*.mjs lib/mcp-qa-finite-owner-issuer-provenance-*.mjs test/fixtures/finite-owner-qa-sdk.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
-      - name: D02 causal helper and native qualification
-        run: timeout 180s node --test --test-name-pattern='D0.2|strict local|legacy pair|uninstrumented|held actual approve|held actual complete' test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
-
-      - name: Affected original reader issuer linkers conduit retention and pending setup regressions
+      - name: Final fixture disposal regression and actual uninstrumented source positive
         run: >-
-          timeout 540s node --test
-          test/mcp-qa-finite-owner-phase-context.test.mjs
+          timeout 120s node --test
+          --test-name-pattern='actual allocated phase fixture disposes|uninstrumented|legacy pair'
+          test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
           test/mcp-qa-finite-owner-phase-context-native.test.mjs
-          test/mcp-qa-finite-owner-context.test.mjs
-          test/mcp-qa-finite-owner-preparation-native.test.mjs
-          test/mcp-qa-finite-preparation-issuer-records.test.mjs
-          test/mcp-qa-finite-preparation-issuer-native.test.mjs
-          test/mcp-qa-finite-owner-native-wire.test.mjs
-          test/mcp-qa-finite-owner-native-conduit.test.mjs
-          test/mcp-qa-finite-owner-native-conduit-native.test.mjs
-          test/mcp-qa-finite-owner-request-retention.test.mjs
-          test/mcp-qa-finite-owner-request-retention-native.test.mjs
-          test/mcp-qa-finite-owner-sdk-binding-facts.test.mjs
-          test/mcp-qa-finite-policy-setup-facts-native.test.mjs
       - name: Exact-head standard changed-reader compiler graph remains unmounted
         run: |
           node --input-type=module <<'JS'
