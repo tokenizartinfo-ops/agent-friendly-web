@@ -95,3 +95,11 @@ for(const fault of ['orphan-ticket-use','foreign-snapshot','stale-snapshot','lat
 
 test('fresh QA pointer drift after the first snapshot denies',()=>world(async f=>{f.phaseCurrent=await seed(f);f.phaseQaObservation=0;f.phaseDrift='qa-pointer';assert.equal((await read(f)).status,'unavailable');assert.equal(f.phaseQaObservation,2);}));
 test('actual allocated phase fixture disposes after initialization failure',async()=>{await assert.rejects(initialEntryHarness('phase-context-init-failure'),e=>e.message==='SYN phase fixture initialization failed'&&e.fixtureDisposed===true);});
+
+test('settled original M journals never imply read_consent',()=>world(async f=>{
+ const original=await plain(f.ownerRead());f.phaseCurrent=await seed(f,'settled-original');
+ assert.equal(f.phaseCurrent.receipt.versionId,original.source.initialBaseline.versionId);assert.equal(f.phaseCurrent.receipt.deploymentId,original.source.initialBaseline.deploymentId);
+ assert.equal(f.phaseCurrent.configuration.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text,'false');
+ const before=await plain(f.stub.snapshot()),writes=f.uploads.length+f.activations.length,r=await read(f);
+ assert.equal(r.status,'unavailable');assert.deepEqual(await plain(f.stub.snapshot()),before);assert.equal(f.uploads.length+f.activations.length,writes);assert.equal(await f.stub.ownerEffectCount(),0);
+}));

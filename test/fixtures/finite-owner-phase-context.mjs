@@ -44,9 +44,9 @@ import {sealFiniteInitialUploadRecord as phaseSealUpload,encodeFiniteInitialUplo
    phaseEnrollmentFacts(facts);this.phaseSeededFacts=facts;
    if(['enrollment','enrollment-no-ack'].includes(kind))return {provenance:'SYN enrollment DATA',preconnectionId:id};
    const contextHash=phaseDigest('afw.finite-connection-context.v1',{preconnection:pre,stageApproval,predecessors:[],grant:null,notice:null}),identity={kind:'connection',preconnectionId:id,sourceRevision:source.sourceRevision,stage:'connection'};
-   const cfg=structuredClone(p.configuration);cfg.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';
+   const cfg=structuredClone(p.configuration);if(kind!=='settled-original')cfg.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';
    const journal=effect=>phaseJournal({storage,identity:{...identity,effect},now:Date.now});
-   const versionId='77777777-7777-4777-8777-777777777777',deploymentId='88888888-8888-4888-8888-888888888888';
+   const versionId=kind==='settled-original'?c.activatedVersionId:'77777777-7777-4777-8777-777777777777',deploymentId=kind==='settled-original'?c.activatedDeploymentId:'88888888-8888-4888-8888-888888888888';
    let activation;
    for(const effect of ['upload','activation']){
     const send={purpose:'afw.finite-connection-send.v1',preconnectionId:id,sourceRevision:source.sourceRevision,stage:'connection',contextHash,effect,baselineVersionId:c.activatedVersionId,baselineDeploymentId:c.activatedDeploymentId,requestHash:'6'.repeat(64),issuedAt:Date.now(),deadline:Date.now()+5000},j=journal(effect);
