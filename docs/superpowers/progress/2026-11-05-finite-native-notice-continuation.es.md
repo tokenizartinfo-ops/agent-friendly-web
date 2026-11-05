@@ -16,9 +16,9 @@ BASE de ejecución: `2f96acb45ec5477d559f85070aa438d2e2e00822`; árbol `ce624232
 
 Root leyó las primeras primarias RED del run `42104033222`, jobs `127514019845` y `127514019716`. El primer GREEN parcial fue `42104729861`, HEAD `87c8430d82df08b4eea59e6296c9a05b80009250`: POST 2/2 y GET/P3 3/3, sin fallos ni skips; Root leyó ambos logs. Esto no acepta el corpus completo ni cierra P3 antes de revisión independiente.
 
-Faltan corpus completo, negativas válidamente reselladas que alcancen el correlador real, concurrencia, regresiones proporcionales, medición IO/graphs, informe y revisión fresca. El formulario GET sigue desactivado hasta completar esta unidad SOURCE. Mapa: diez paths fuente/test, informe y qualifier temporal, máximo dos jobs aislados de quince minutos, sin secretos.
+La primera calificación completa en `42105489485` no ejerció las suites nativas: una colisión de dos declaraciones `const marker` en el fixture impidió importar. Root verificó las líneas 150/181 del blob `1303c580e9059f97856b6e3e20165c8b59bf98a6`. La suite pura pasó 18/18 y no se repite sin cambios. El rename mínimo está en `7ce4d221beac0c276e3d7c74577a5527fa223c36`; run `42105777333`, jobs POST `127520078660` y GET/regresiones `127520079207`, aún pendientes de primaria terminal. Faltan corpus completo, negativas válidamente reselladas que alcancen el correlador real, concurrencia, regresiones proporcionales, medición IO/graphs, informe y revisión fresca. El formulario GET sigue desactivado hasta completar esta unidad SOURCE. Mapa: diez paths fuente/test, informe y qualifier temporal, máximo dos jobs aislados de quince minutos, sin secretos.
 
-El diseñador prepara la siguiente unidad **Link-only**, INACTIVE, en su propia rama. Requiere reconciliarse con el POST realmente aceptado antes de cualquier despacho. No incluye nueva fase, segunda publicación, third CLOSED ni montaje.
+La siguiente unidad **Link-only** está diseñada, INACTIVE, en `9c4dfcde605be3e26d623c98dfcb45fb1293afa2`. Root leyó informe/spec/plan y cotejó store, records y stage-facts en el BASE; sus tres documentos se preservan también en esta rama de coordinación. Requiere reconciliarse con el POST realmente aceptado antes de cualquier despacho. No incluye nueva fase, segunda publicación, third CLOSED ni montaje.
 
 ## Límites operativos
 
