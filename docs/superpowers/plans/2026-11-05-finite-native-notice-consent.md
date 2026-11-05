@@ -1,24 +1,81 @@
-# Consentimiento POST — checkpoint de planificación
+# POST nativo de consentimiento — Implementation Plan
 
-> **For agentic workers:** Futuro workflow superpowers:subagent-driven-development, writer único y revisión root. **INACTIVE: este checkpoint está incompleto y no autoriza implementación, agente, pruebas ni permisos.**
+> **For agentic workers:** Workflow futuro superpowers:subagent-driven-development, un único writer y revisión root de spec/quality. **INACTIVE**: no ejecutar, implementar, crear agentes o lanzar tests desde este documento. Activación sólo tras GET aceptado, reconciliación y preflight root con BASE futuro. El writer no crea helpers/reviewers; root coordina la revisión.
 
-**Goal:** Pendiente de especificación final: POST humano de consentimiento nativo con correlación factual privada.
-**Architecture:** Propuesta de reutilizar piezas GET, verificación humana nueva por POST y mismo store/witness/lease/Common/window.
-**Tech Stack:** ESM, Node/Miniflare/workerd/D1/DO existentes, únicamente cloud autorizado cuando root active.
+**Goal:** Registrar un consentimiento humano POST real, con ticket original nativo y correlación factual privada completa antes de responder.
+**Architecture:** Ampliar los módulos GET propuestos con entradas Consent fijas y transporte privado compartido; misma instancia store/lease/Common/window desde observe hasta INSERT. El resultado SQL real permanece léxico hasta ACK/rechecks.
+**Tech Stack:** ESM, Node y harness existente Miniflare/workerd/D1/DO/JWT RS256 SYN, sólo entorno cloud específicamente autorizado.
 **Spec:** docs/superpowers/specs/2026-11-05-finite-native-notice-consent.md
 
-Guardado por solicitud de Gabriel de apagar y continuar después. No tareas ejecutables a continuación: son pendientes de diseño.
+## Restricciones globales
 
-- [ ] Root entrega estado/HEAD aceptado del GET; no seguir rama WIP ni inferir aceptación desde código.
-- [ ] Contrastar diferencias reales respecto al pin dc4edafc0b5e4ba440cd32a21dd3dd58024e811a.
-- [ ] Cerrar filemap/APIs de transporte POST y refactor privado; no tres copias genéricas ni autoridad por mode/DTO.
-- [ ] Cerrar lectura body1024, parser/cookie/Origin, Access actual y vínculo de ticket original.
-- [ ] Especificar baseline privado POST y correlaciones de eventos en ambos snapshots; público3keys/OAuth/GET no se relajan.
-- [ ] Especificar secuencia observe→SEND→insert→ACK y rechecks con Promise SQL real, failure latch, unknownACK y retención.
-- [ ] Determinar campos EventRow/sequence real/expiry original y reducción conservando historia.
-- [ ] Fijar RED causal y GREEN mediante GET real previo, JWT SYN firmado/CSRF real/D1DO nativos; ninguna fila positiva prefijada ni verifier/source/snapshot fake.
-- [ ] Seleccionar regresiones con nombres literales realmente presentes, verificar no0match y medir nuevas lecturas sin repetir50ms/allSDK/builds sólo para métricas.
-- [ ] Completar informe/spec/plan y obtener preflight root con BASE futuro, permiso cloud/qualifier y rollback específicos.
-- [ ] Sólo una activación posterior explícita podría iniciar implementación.
+- Pin de diseño dc4edafc0b5e4ba440cd32a21dd3dd58024e811a; GET INCOMPLETE al reanudar. No seguir WIP ni inferir aceptación.
+- C0=I0+900000; C1=C0+180000; padre<=30000ms; hija<=5000ms; source ceiling2026-11-03T02:59Z vencido. Sin nuevos relojes/rearm/renew.
+- Scope original preconnection/prefijo y grant UUID; historia ajena intacta. Schema cap8/DO list7/ticket2/event3, todas columnas y ambos snapshots.
+- Protected store/journal/records/DDL/authority/ordinary writer/SDK/source stubs/flags/mounts; filemap10 cerrado en spec.
+- No authority DTO, allowPending, callback aprobador, raw pair, source factory, retry/reconstrucción ACK/physical drain.
+- Todo SOURCE/SYN/unmounted; operationalReadiness=false; completePackage=false; PCoff=false.
 
-No implementar desde este archivo. Estado final del checkpoint: diseño parcial preservado y trabajo detenido. operationalReadiness=false; completePackage=false; PCoff=false.
+## Review focus
+
+1. Body malformado/overflow y cancel retenido no deben seguir a baseline/store aunque falle pronto HTTP.
+2. Menor AccessPOST no puede renovar ni retrorecortar ticket, Common o ventana.
+3. Witness copiado o de otra instancia nunca sirve; witness válido no sustituye firma/CSRF.
+4. Own SEND sólo se tolera en continuación léxica con actual SQL Promise/result; ACK DATA o replay no la recrean.
+5. Corrupción del segundo snapshot, retiro real o fallo absorbente conserva historia y evita ACK/éxito.
+
+Cada punto se cubre con pruebas concretas en pasos4–5. Riesgos no cubiertos no se resuelven por tests globales arbitrarios.
+
+## Task 1: unidad coherente POST + correlación + formulario SOURCE
+
+Única unidad de aceptación: no publicar formulario activo ni aceptar endpoint por separado. Se permiten checkpoints propios no activados; no siguiente producto.
+
+**Files:** los diez de spec, sin archivos adicionales. Nuevos: lib/mcp-qa-finite-owner-notice-consent-body.mjs y test/mcp-qa-finite-owner-notice-consent-native.test.mjs. Modificar los cuatro módulos GET/phase, dos fixtures GET/SDK, fixture IO sólo si necesita labels y test GET existente. No nuevos frameworks ni mode de initial-entry.
+
+**Interfaces consumidas:** observeOwnerPhasePair PRIVATE, createFinitePreparationIssuerStore({ctx,env}).observeMonitoringTicket({...Common,ticket},lease), .insertMonitoringConsent({...Common,ticketWitness},MISMA lease), createFinitePreparationNoticeJournal({ctx,env}).appendSend/appendAck/read, verifyCloudflareAccessJwtWithExpiry, qualifyFiniteOwnerApprovedTicket, original stage-work/lease/retention.
+**Interfaces producidas:** los siete exports exactos de spec; ningún par ni capacidad. Receiver/forward/handler reciben sólo Request/env/ctx/originalLease. Private qualifyNoticeConsentBaseline(pair) y recheckConsentOwned() no exportados.
+
+- [ ] **1. Reconciliar prerrequisito y congelar ejecución.** Root entrega GET aceptado exactHEAD/tree/blobs y futuro BASE; comparar con los contratos GET de dc4, confirmar10paths, APIs y shared fixture. No copiar rama docs encima de producto. Root define cloud qualifier temporal, comandos permitidos y rollback CAS de propios commits; autorización GET anterior no se hereda para POST. Conservar expired SOURCE y restauración del qualifier SYN. Si falta método o fixture, volver con diferencia concreta antes de ampliar mapa.
+
+- [ ] **2. Escribir RED causal del recorrido principal.** Reusar OAuth QA GET/POST real que genera grant; en principal hacer además code→M token→MCP real para conservar exchanged_at actual; GET de monitoring nativo real genera formulario/ticket ACK. Construir POST de handle obtenido de HTML y cookies reales, Origin correcto y JWT SYN firmado con JWKS real de fixture, nunca token decodificado/verifier fake. Baseline GET aún niega POST: el RED esperado es respuesta404/405/503 frente200 y events0 frente1; demostrar endpoint alcanzado, no import missing ni fixtureError. En baseline puede construirse POST desde hidden handle del formulario disabled sin simular decisión persistida. Añadir assertion de literal exports después de causalRED; no anunciar missing export como prueba de seguridad.
+
+- [ ] **3. Implementar mínimo íntegro de fuente.** Compartir transporte dentro de módulos GET conservando signatures antiguas. Añadir body1024 real retenido con failure latch, grammar/metadata fixed POST y guards de actor/versions. Handler: baseline privado ticketACK3rows/event0, Access/prepare/approval/CSRF actuales, mismo Common/window/store/witness. Secuencia exacta observe→recheck→verify→Send recorded→recheck→SQL Promise/result real→recheck→Ack recorded→recheck. Ampliar correlación factual sólo eventos exactos ya leídos; público3keys/OAuth/GET no admiten history. Actualizar sólo celdas notice/event esperadas; grant.exchanged_at y todas las demás quedan reales. HTML activo sólo cuando toda unidad pasa. No tocar store/journal para facilitar tiempo/resultados.
+
+- [ ] **4. GREEN nativo principal y corpus de entrada.** Crear los siguientes tests en archivo nuevo; nombres literales forman contrato de revisión (parámetros producen sufijos claros):
+  - 'native consent POST records original decision after actual ticket GET': one original UUID, ticket14 exacto, ConsentRow12 completa, journal5filas sin freeze, SEND antes SQL, ACK rowHash/sequence nativos, issuer historical ACK intacto, exchanged_at actual conservado; source reader3keys/OAuth/GET niegan history; HTML/cookie/header/source flags correctos; historial ajeno byteexact.
+  - 'native consent preserves global sequence across another grant history': insertar historia AJENA SYN identificada antes del recorrido original; native original sequence>1, no max global ni expectedSequence+1.
+  - 'native consent grammar denies ': method GET/path revoke/query, wrong Origin, missing Origin, extra/duplicate handle, malformed percent/UTF8, MIME parameter, 1025bytes, duplicate cookie, bad cookie hash, missing prepare, prepare mismatch. Assert no consent SEND/SQL; repetir solicitudes sin decisión no consume intento.
+  - 'native consent verified identity denies ': invalid signature, wrong realm/audience, other subject, expired Access, AccessPOST shorter than original ticket. JWT malos firmados SYN cuando corresponda; ningún verifier replacement. Assert no consent SEND/SQL, ticket original íntegro.
+  Negativos ordinarios usan grant realmente emitido por SDK y ticket GET real, sin repetir token/MCP completo en cada caso. No prefill positivo de notice/consent.
+
+- [ ] **5. GREEN causal de concurrencia, fallos y factual.** Gates SYN sobre operaciones nativas reales, no Promises inventadas como éxito:
+  - 'native consent own SQL continuation alone accepts pending SEND': hold INSERT antes resolución; comprobar SEND presente/events0/ACK0, lector público y otro POST niegan; liberar operación real, sólo propia continuación puede completar; no pasar expected/allowPending al handler.
+  - 'native consent lost native result never reconstructs ACK': ejecutar INSERT real y perder/rechazar respuesta; evento queda, SEND sinACK,503; restart/replay no escribe ni completa ACK.
+  - 'native consent journal uncertainty never authorizes next effect': perder retorno de appendSend tras commit/sync/readback -> INSERT0; perder ACK tras commit -> sin200 ni replay, eventos/filas conservados.
+  - 'native consent original window fences queued SQL': hold antes ejecución hasta pasar deadline real5s; liberar, native no mutation/ACK0; gate alcanzado antes de expirar. No clock patch ni nueva child.
+  - 'native consent source current drift denies ': before-SEND y after-SEND/before-SQL cambiar owner/revision, current QA pointer/M version o holder; comprobar consumo correcto (noSEND antes; SEND conservado después) y SQL0 cuando se detecta antes llamada.
+  - 'native consent second snapshot drift denies ': alterar exchanged_at válido o aviso/evento original entre snapshots; conservar snapshots completos; no enmascarar drift. Si se altera fila inmutable, fixture lo rotula SYN corrupción destructiva, nunca operación legítima.
+  - 'native consent history closes replay ': actual successful POST, own unmatched SEND, foreign request ticket same UUID, event without SEND, mismatched rowHash/sequence, unknown journal key, overflow, missing schema, partial schema, success:false schema, malformed results. Positivos proceden de producer; manipulaciones posteriores negativas SYN. Esquema ausente/no listo niega antes SEND; prueba read-only vacío sigue válida en regresión.
+  - 'native consent withdrawal preserves history ': CLOSE real antes release no revoca por sí solo; revokeGrant real sí impide SQL. Tras evento grant real, retirada real append-only por mecanismo ordinario permitido exclusivamente en fixture deja grant/revoke históricos y bloquea toda continuación. No nuevo endpoint revoke producto. Resolver ordinario tras revokeGrant rechaza generic Monitoring authorization unavailable; no assertion enabled:false.
+  - 'native consent failed body retains actual cancellation': body reader/overflow/cancel held en M y QA; failure latch responde sin éxito y mantiene scope real retenido. Otro ingreso del mismo ctx usando lease SYN válida dentro deadlineoriginal deniega mientras pendiente; tras settle+root abort disponibilidad vuelve según stage-work. Lease yaabortada no prueba exclusión.
+  - 'native consent abort retains SQL and forbids late ACK': abort request/root mientras SQL pendiente, late real resolution no ACK/200; historial conserva efecto que haya ganado. Medir pending real, no declarar drain.
+  - 'native consent captured failure cannot resume commit': primer error capturado/holder mutation durante await luego resolución buena no permite SEND/INSERT/ACK siguiente.
+  Para fallos store concurrentes no modificar sus métodos: conservar protección aceptada y probar handler sin bypass. No test imposible de autenticar humano/SQL sólo validando ACK DATA.
+
+- [ ] **6. Medir el mismo GREEN y comprobar resultado.** Trace saneado por fase baseline/observe/SEND/SQL/ACK: body/fetch/read/cancel real y settlement, journal ops/list7, D1 sesiones fresh-primary/select/all/preflight/INSERT; ambos snapshots completos por cada recheck, request lifetimes/peak<=2 original, elapsed child<=5000/parent<=30000. Contar seis pares previstos si implementación coincide; documentar toda diferencia necesaria antes de aceptar. Consent añade validación sobre consulta event GET ya existente, no otra consulta por declaración. Dos Access verifications reales; JWKS caching no es permiso nuevo. Sin repetir50ms/allSDK para contar. Si deadline falla, investigar causa causal manteniendo plazos y lectura completa; no ampliar clock ni borrar checks.
+
+- [ ] **7. Regresiones proporcionales cloud, después de primarias.**
+  1. node --test test/mcp-qa-finite-owner-notice-consent-native.test.mjs
+  2. node --test test/mcp-qa-finite-owner-notice-get-native.test.mjs
+  3. node --test test/mcp-qa-finite-owner-phase-context.test.mjs
+  4. node --test --test-name-pattern='^(closed source keeps|settled first connection|unknown issuer SEND|absent original issuer never|failed schema SELECT|fresh current owner|fresh QA pointer|same ambient original request)' test/mcp-qa-finite-owner-phase-context-native.test.mjs
+  5. node --test --test-name-pattern='^(uninstrumented actual native|missing actual SDK binding cookie|actual current publication drift|owned begin recheck rejects actual foreign delta owner-revision|fanout causal control delay0)' test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+  6. node --test --test-name-pattern='^D04 actual exchange (retains|then SYN valid native timestamp drift|then SYN immutable original current-(owner|revision))' test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs
+  Estos prefijos se leyeron literalmente en dc4: phase16 seleccionados (1+1+4+1+1+6+1+1), SDK6 (1+1+2+1+1), D04 cuatro. Verificar nombres y no0match en GET aceptado antes de correr; registrar seleccionados/passed/failed/skipped reales y no atribuir skip0 a toda suite filtrada. Source vacío/three-keys, unknown issuer, snapshot2, shared fixture y exchanged_at justifican selección. No repetir todas SDK/50ms ni suites store/journal intactas por reflejo; extender sólo ante cambios reales/fallo o ruling root.
+  ESLint sólo archivos cambiados y tooling existente. QA/M se compilan en harness; guardar metafile/inputs/hash/bytes reales y diff con GET aceptado. Standard build sólo si root confirma nuevo reachability a entrypoint estándar; no usar build para métricas.
+
+- [ ] **8. Checkpoint y revisión root.** Reportar BASE/codeHEAD/reportHEAD/tree, diff10paths/blobs y protected blobs exactos; RED/GREEN run/job/attempt/comandos/counts y estados terminales sin recomputar para hashes. Costo real/graph/5s30s/fanout, weak witness/nohuman, native vs SYN, rowhash/sequence/expiry, public closures y ausencia mount. Retirar qualifier temporal según permiso root y readback CAS. Root revisión completa spec+quality SDD antes de aceptar; no agentes del writer ni siguiente unidad.
+
+## Entrega y rollback
+
+Status DONE/DONE_WITH_CONCERNS/NEEDS_CONTEXT/BLOCKED; root recibe SHAs y pendientes concretos. No aceptación parcial de formulario activo ni exposición real. Rollback producto limitado a propios commits con expected HEAD, sin borrar notice/ticket/consent/eventos/grants ajenos; nunca “compensar” permiso eliminando historia. Runtime sigue cerrado incluso si todas pruebas pasan. Next gaps: retirada humana completa, NoticeLink/etapas restantes, tercer CLOSED, own setup/cleanup/guard/hosting/PCoff requieren unidades/autoridad separadas.
