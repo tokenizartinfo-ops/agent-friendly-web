@@ -1,0 +1,92 @@
+{
+  "purpose": "Scoped first-phase reader review fix round1, prior full-reviewed head as FIX_BASE",
+  "base": "4ffc2f9c0b80ae9f863a8d63ed34abc13b18b690",
+  "head": "fe0af3605368d563c911f8e8a308584d3d292038",
+  "finding": "P1 coherent settled original-M receipt must never imply read_consent while actual OAuth/config remains closed",
+  "commits": [
+    {
+      "sha": "3265fd64bf8cf6a5275f7f70114601668e661ba2",
+      "message": "test(afw): reproduce settled original M phase confusion"
+    },
+    {
+      "sha": "52ef404365b00054dbc1edc281a858223e3eab18",
+      "message": "fix(afw): require exact read consent configuration for every settled receipt"
+    },
+    {
+      "sha": "fe0af3605368d563c911f8e8a308584d3d292038",
+      "message": "docs(afw): record original receipt phase fix qualification"
+    }
+  ],
+  "stat": [
+    {
+      "path": "docs/superpowers/reports/2026-11-04-finite-owner-phase-context.md",
+      "status": "modified",
+      "additions": 62,
+      "deletions": 0
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 0
+    },
+    {
+      "path": "test/fixtures/finite-owner-phase-context.mjs",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2
+    },
+    {
+      "path": "test/mcp-qa-finite-owner-phase-context-native.test.mjs",
+      "status": "modified",
+      "additions": 8,
+      "deletions": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/superpowers/reports/2026-11-04-finite-owner-phase-context.md",
+      "status": "modified",
+      "patch": "@@ -106,3 +106,65 @@ Known output remains non-pristine: global lint16 inherited warnings; npm esbuild\n Root independent source review is still required. No notice/finite-prearm/fullsetup/current source selection producer, SDK issuance, native mount, permission/admission, cleanup relaxation or remote runtime operation was delivered. No provider deployment/mutation, Entry consumption, remote DDL, permission/token/OAuth/OTP/cron/Max/main/merge or other-project effect occurred. Historical2607/c570 and QA_CLOUD_CLOSED_PINS remain immutable; source ceiling2026-11-03T02:59:00Z remains expired; single consuming Entry remains reserved.\n \n `operationalReadiness=false; completePackage=false; PCoff=false`.\n+\n+## Review fix round 1/5 — exact phase configuration for every settled receipt\n+\n+Root review of the preceding report HEAD returned SpecNeedsFixes/QualityNeedsFixes with one Important/P1 finding, no Critical or Minor. A coherent upload/activation/receipt chain could reference the original M version/deployment and original closed configuration hash. Because primary() previously applied the enabled read_consent configuration predicate only when the pointer changed, that chain could incorrectly produce read_consent while delegated OAuth remained false.\n+\n+This section records the correction and supersedes the earlier initial-qualification final-code designation. Earlier outcomes, failures and compile hashes above remain historical evidence.\n+\n+- FIX_BASE / original reviewed report HEAD: `4ffc2f9c0b80ae9f863a8d63ed34abc13b18b690`, tree `8eefb9080f95a99eaa12055a23026e4964eb1fa1`.\n+- Causal RED HEAD: `3265fd64bf8cf6a5275f7f70114601668e661ba2`, tree `d1ab4a6dc399fdd9969652e4396ff05ba209ee08`.\n+- Corrected code / new actual compile HEAD: `52ef404365b00054dbc1edc281a858223e3eab18`, tree `107d92211a182eaf32bc351c4638a6fbca53dbe1`.\n+- Fix report HEAD/tree is the immutable containing commit/tree of this appended report, supplied exactly in final root handoff. Its parent is corrected code HEAD; its only delta is this report append and deletion of the own temporary qualifier. It does not inherit the compiled module hashes as its own output.\n+\n+The product fix is three added lines in [receipt qualification](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/52ef404365b00054dbc1edc281a858223e3eab18/lib/mcp-qa-finite-owner-phase-context.mjs#L265): after the actual stage helper qualifies the settled receipt, always compare actual current configuration against the exact original plan configuration with only AFW_DELEGATED_OAUTH_ENABLED=true, and always run qualifyFiniteConnectionProfile for read_consent. This is independent of whether the current IDs equal the original IDs. The same qualify() runs on both consistency snapshots at lines274–275; matching receipt hashes or unchanged pointers cannot bypass the phase predicate. No-receipt closed_ui retains its original behavior. No timer, holder, profile-role, admission or effect policy changed.\n+\n+The native fixture adds only a settled-original variant: it seeds both actual journal SEND/ACK operations and the actual receipt through the existing native journal APIs, using capsule original version/deployment and the original closed configuration hash. The new test first asserts exact original IDs and OAuth=false, then requires unavailable and unchanged storage/provider mutation counts/zero owner effects. It does not replace source, reader, codecs, qualifier, resident decoder or journal results. Existing SYN external-data boundaries remain exactly as disclosed above.\n+\n+Both runs used the own workflow path and feature branch only, contents:read, checkout persist-credentials:false, Ubuntu24.04/Node22 and npm ci --ignore-scripts --no-audit --no-fund, with five-minute bounded jobs. Lint precedes test execution; the new compiler depends on focused GREEN. Both are attempt1.\n+\n+| HEAD | Run / job | Observed evidence |\n+| --- | --- | --- |\n+| 3265fd64bf8cf6a5275f7f70114601668e661ba2 | [41941387830/126962788368](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41941387830/job/126962788368) | Scoped lint passed; causal native RED1 selected test FAIL,0 pass/cancel/skip,2971.078753ms. After coherent native seed and original-ID/OAuthfalse assertions, expected status unavailable but status was undefined because the reader returned its source envelope. Product reader remained unchanged from FIX_BASE. |\n+| 52ef404365b00054dbc1edc281a858223e3eab18 | [41941527071/126963273710](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41941527071/job/126963273710) | Scoped changed-files lint passed with no lint errors/warnings; focused native GREEN7 selected PASS,0 fail/cancel/skip,19817.789072ms. |\n+| 52ef404365b00054dbc1edc281a858223e3eab18 | [41941527071/126963606851](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41941527071/job/126963606851) | New actual compile/residency23 PASS,0 fail/cancel/skip,2508.084681ms; clean git status before and after. |\n+\n+Exact RED command:\n+\n+```sh\n+node --test --test-name-pattern='settled original M journals never imply read_consent' test/mcp-qa-finite-owner-phase-context-native.test.mjs\n+```\n+\n+Exact focused GREEN commands:\n+\n+```sh\n+npx eslint lib/mcp-qa-finite-owner-phase-context.mjs test/fixtures/finite-owner-phase-context.mjs test/mcp-qa-finite-owner-phase-context-native.test.mjs\n+node --test --test-name-pattern='closed source keeps original A|original approval and enrollment stay closed|settled first connection derives|settled original M journals|actual current module and profile independently deny configuration|fresh current owner and current publication are independently rechecked: (configuration|pointer)' test/mcp-qa-finite-owner-phase-context-native.test.mjs\n+```\n+\n+RED lint used the same fixture/test paths, without the unchanged product reader. Node22 executed only the named selections; terminal summaries reported no skipped tests. The seven GREEN cases cover original no-receipt closed_ui, approval/enrollment without publication, valid first settled read_consent, coherently settled original M denial, current configuration mismatch, and configuration/pointer drift at the second primary observation. Existing tests enforce provider GET-only/zero owner effects; positive and adversarial cases compare durable snapshots and mutation counts. The two drift cases assert both observations occurred. No broad old suite, signal opt-in experiment or unrelated fixture cleanup was rerun or changed.\n+\n+The new compiler command was exactly the existing candidate-residency test with clean-status guards, not a second standalone compile:\n+\n+```sh\n+test -z \"$(git status --porcelain)\"\n+node --test test/mcp-qa-finite-candidate-residency.test.mjs\n+test -z \"$(git status --porcelain)\"\n+```\n+\n+There are now **two successful actual compiles across two separately attributed code HEADs**: the original qualification at8381d5aa7554792f21c04b1c39b95849e7710f05, and this required review-fix qualification at52ef404365b00054dbc1edc281a858223e3eab18. Each candidate-residency invocation called compileFiniteNativeStaging once. Old838 module hashes do not apply to the fix.\n+\n+| Corrected artifact | Bytes | SHA256 |\n+| --- | ---: | --- |\n+| canaryLive M index.mjs | 1951651 | 1c57b72ac004ee0c1b692aba1d024a07d1c0067e5a0b2d1c1cbe51c10c26d73a |\n+| qaLive index.mjs | 2019962 | 8872b77fc13cb877be54d5754a14afaffff3d5c97f2b73004d3575660eff3dd4 |\n+| gzip resident M | 383744 | 356546ee23208334e6078d2f0e8558b0f23c23a1428cbcc7aa824f71aef9b906 |\n+\n+New residency sourceRevision/tree are exactly corrected code HEAD/tree above; sourceCheck git-inputs-before-after-v1; programHash remains f6f517c3ac135cfa7b9853137e0487f768b8f24a11e24959a337cac4e28d42e6. Original2MiB M/3MiB QA caps pass. Metafiles remain QA304/M330 inputs. Actual unchanged [compiler guards](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/52ef404365b00054dbc1edc281a858223e3eab18/scripts/build-finite-native-package.mjs#L69) reject M bootstrap-source and residency; [test line44](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/52ef404365b00054dbc1edc281a858223e3eab18/test/mcp-qa-finite-candidate-residency.test.mjs#L44) verifies QA decoder present/M decoder absent. No import or worker entry changed in this fix; shared initial-anchors boundary remains as described above. Actual emitted bytes and native decoder execute in the23 cases; this is not evidence of a mounted phase reader or complete package.\n+\n+Self-review of FIX_BASE->corrected code is limited to three added product lines, two fixture-line replacements, the new native regression and the own qualifier. Final report commit removes that qualifier and appends only this section. Root receives this scoped fix diff for the same review, not a new source unit.\n+\n+Warnings remain disclosed: esbuild-kit/eslint and punycode deprecations, Actions v4 Node20/forced24 notice, and RPC stub disposal warnings observed in RED and the selected native GREEN run. Scoped lint is clean; the earlier global16 warnings are historical and were not rerun or claimed resolved. No unrelated warning/resource fix is included.\n+\n+No runtime/Entry consumption/remote DDL/permissions/credentials/OTP/Max/main/merge or other-project action. Product pins, expired source ceiling and all original request/effect controls remain unchanged. Root re-review is pending. `operationalReadiness=false; completePackage=false; PCoff=false`."
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "status": "modified",
+      "patch": "@@ -262,6 +262,9 @@ export async function readPrivateQaFiniteOwnerContext(options){\n      if(f.effects.size!==allowed.length||[...f.effects.keys()].some(k=>!allowed.includes(k)))fail();\n      const upload=await child(l=>createFinitePolicyEffectJournal({storage,identity:{...identity,effect:'upload'},now:Date.now}).read(l)),activation=await child(l=>createFinitePolicyEffectJournal({storage,identity:{...identity,effect:'activation'},now:Date.now}).read(l));\n      receipt=qualifyFiniteOwnerInstalledStage({source,preconnection:data.preconnection,sourceSnapshot:data.sourceSnapshot,initialTicket:data.ticket,connection:null,stage:'connection',stageApproval:data.stageApproval,approval:data.approval,ticket:data.ticket,ticketUse:data.ticketUse,upload,activation,predecessors:[],grantLink:null,noticeLink:null,observedAt:Date.now()});\n+     const expected=structuredClone(plan.configuration);expected.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';\n+     if(canonical(actual.currentConfiguration)!==canonical(expected))fail();\n+     qualifyFiniteConnectionProfile({phase:'read_consent',metadata:actual.currentConfiguration});\n      if(f.effects.get('afw.finite-policy-effect.v1:writer-head')!==JSON.stringify({identityHash:activationId,sendHash:prepHash('ConnectionSend',activation.send)})||receipt.moduleHash!==capsule.moduleHash||receipt.configurationHash!==finiteActivationConfigurationHash(actual.currentConfiguration))fail();\n     }\n     if(receipt?(actual.pointer.versionId!==receipt.versionId||actual.pointer.deploymentId!==receipt.deploymentId):(actual.pointer.versionId!==capsule.activatedVersionId||actual.pointer.deploymentId!==capsule.activatedDeploymentId))fail();"
+    },
+    {
+      "path": "test/fixtures/finite-owner-phase-context.mjs",
+      "status": "modified",
+      "patch": "@@ -44,9 +44,9 @@ import {sealFiniteInitialUploadRecord as phaseSealUpload,encodeFiniteInitialUplo\n    phaseEnrollmentFacts(facts);this.phaseSeededFacts=facts;\n    if(['enrollment','enrollment-no-ack'].includes(kind))return {provenance:'SYN enrollment DATA',preconnectionId:id};\n    const contextHash=phaseDigest('afw.finite-connection-context.v1',{preconnection:pre,stageApproval,predecessors:[],grant:null,notice:null}),identity={kind:'connection',preconnectionId:id,sourceRevision:source.sourceRevision,stage:'connection'};\n-   const cfg=structuredClone(p.configuration);cfg.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';\n+   const cfg=structuredClone(p.configuration);if(kind!=='settled-original')cfg.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';\n    const journal=effect=>phaseJournal({storage,identity:{...identity,effect},now:Date.now});\n-   const versionId='77777777-7777-4777-8777-777777777777',deploymentId='88888888-8888-4888-8888-888888888888';\n+   const versionId=kind==='settled-original'?c.activatedVersionId:'77777777-7777-4777-8777-777777777777',deploymentId=kind==='settled-original'?c.activatedDeploymentId:'88888888-8888-4888-8888-888888888888';\n    let activation;\n    for(const effect of ['upload','activation']){\n     const send={purpose:'afw.finite-connection-send.v1',preconnectionId:id,sourceRevision:source.sourceRevision,stage:'connection',contextHash,effect,baselineVersionId:c.activatedVersionId,baselineDeploymentId:c.activatedDeploymentId,requestHash:'6'.repeat(64),issuedAt:Date.now(),deadline:Date.now()+5000},j=journal(effect);"
+    },
+    {
+      "path": "test/mcp-qa-finite-owner-phase-context-native.test.mjs",
+      "status": "modified",
+      "patch": "@@ -95,3 +95,11 @@ for(const fault of ['orphan-ticket-use','foreign-snapshot','stale-snapshot','lat\n \n test('fresh QA pointer drift after the first snapshot denies',()=>world(async f=>{f.phaseCurrent=await seed(f);f.phaseQaObservation=0;f.phaseDrift='qa-pointer';assert.equal((await read(f)).status,'unavailable');assert.equal(f.phaseQaObservation,2);}));\n test('actual allocated phase fixture disposes after initialization failure',async()=>{await assert.rejects(initialEntryHarness('phase-context-init-failure'),e=>e.message==='SYN phase fixture initialization failed'&&e.fixtureDisposed===true);});\n+\n+test('settled original M journals never imply read_consent',()=>world(async f=>{\n+ const original=await plain(f.ownerRead());f.phaseCurrent=await seed(f,'settled-original');\n+ assert.equal(f.phaseCurrent.receipt.versionId,original.source.initialBaseline.versionId);assert.equal(f.phaseCurrent.receipt.deploymentId,original.source.initialBaseline.deploymentId);\n+ assert.equal(f.phaseCurrent.configuration.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text,'false');\n+ const before=await plain(f.stub.snapshot()),writes=f.uploads.length+f.activations.length,r=await read(f);\n+ assert.equal(r.status,'unavailable');assert.deepEqual(await plain(f.stub.snapshot()),before);assert.equal(f.uploads.length+f.activations.length,writes);assert.equal(await f.stub.ownerEffectCount(),0);\n+}));"
+    }
+  ],
+  "rootActualEvidence": {
+    "RED": {
+      "head": "3265fd64bf8cf6a5275f7f70114601668e661ba2",
+      "run": 41941387830,
+      "job": 126962788368,
+      "attempt": 1,
+      "result": "1nativeFAIL0pass0cancel0skip; expectedunavailable butenvelope"
+    },
+    "GREEN": {
+      "head": "52ef404365b00054dbc1edc281a858223e3eab18",
+      "tree": "107d92211a182eaf32bc351c4638a6fbca53dbe1",
+      "run": 41941527071,
+      "job": 126963273710,
+      "attempt": 1,
+      "result": "7selectednativePASS0fail0cancel0skip;scopedlintclean"
+    },
+    "compiler": {
+      "run": 41941527071,
+      "job": 126963606851,
+      "attempt": 1,
+      "result": "23PASS,actualcompileoneatthefixHEAD,cleanbeforeafter,M1951651/Q2019962,originalcaps/guards;old838hashesnotreused"
+    }
+  },
+  "scope": "Only finding and fixdiff. Full task was already reviewed. No broad tests or unchanged-code re-review."
+}
