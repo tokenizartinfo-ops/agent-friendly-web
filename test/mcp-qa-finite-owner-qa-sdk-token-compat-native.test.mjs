@@ -1,8 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {Client} from '@modelcontextprotocol/client';
-import {StreamableHTTPClientTransport} from '@modelcontextprotocol/client/streamableHttp';
+import {Client,StreamableHTTPClientTransport} from '@modelcontextprotocol/client';
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
 import {seedFiniteOwnerSdkClient,readSyntheticIssuedGrantProps} from './fixtures/finite-owner-qa-sdk.mjs';
 const PREP='__Host-afw-finite-prepare='+'a'.repeat(64);
