@@ -1,3 +1,15 @@
+# Actualización de evidencia — D0.4 pendiente de revisión, 5nov2026
+
+RED real42059288764/job127356149761 en d4b58bb8: prerequisitos QA→tokenM200→MCP original y ACK histórico iguales comprobados; falla final lector unavailable. GREEN42059641718/job127357402313 en762ab842:24tokencompat+3SDK+7fase PASS sin skips. Principal reforzado42061681764/job127364780539 enb5e61d16:1PASS0FAIL0SKIP/count1; root leyó primaria y confirmó fullDOsnapshotdigest/prereqs.65compilacionesfixtureconocidas,0estándar; phase/imports siguen unmounted. No repetir matrices.
+
+Primer qualifier principal42060808569 falló en shell antes de Node/compiler: String.replace interpretó $' de regex; corrección de quoting,0tests/0builds para ese fallo. Cuatro respuestas internas GraphQL de update_ref durante edición/retirada de qualifier: cada estado se reconcilió por lectura. Camino force-with-lease+expectedHEAD, commit hijo directo verificado, permitió avance sin reescritura ni cambio de permisos. No diagnóstico de claves. Código final provisional f9ee816c6525893094568fda34e8bd0b0d128311/árbol69dc2270: sólo3archivos previstos; qualifier retirado. Informe/revisión independiente todavía PENDIENTES: no aceptación D0.4 por este checkpoint.
+
+Ruido observado en pruebas: advisoryCIMD de QA, RPCstubdisposal, JSONnotifications, deprecacionesdeps/punycode/ActionsNode20→24. Conservarlo para evaluación del reviewer; no llamar salida pristine ni atribuir causa sin evidencia. Fuente corregida no es prueba operativa.
+
+Root preparó preflight/brief store-only en esta misma rama docs; sigue INACTIVE hasta aceptación D0.4 y BASE futuro explícito. No otro productwriter. Sin intervención del owner necesaria; operacionalReadiness=false/completePackage=false/PCoff=false.
+
+---
+
 # CHECKPOINT VIGENTE — fanout aceptado; D0.4 activo, 5nov2026
 
 D0.2 y D0.3 completos en fuente; fanout COMPLETE tras revisión independiente Astrahigh +fixround1ADDRESSED. Sourcebase51c5db8→report90bb28b5; productphaseblob85c7105f inalteradodurantefix1. Critical0/Important0abiertos; Minor de cleanupfixture y MinorD0.3siguenenprogress/2026-11-05-deferred-review-minors.es.md para triage final, nofixclaim. No redispatch57/80/65 niD0.1/2/3/fanout por pérdida de memoria.
