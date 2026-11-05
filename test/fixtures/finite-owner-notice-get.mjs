@@ -55,6 +55,14 @@ export function extendFiniteOwnerNoticeGet(entry){
   }else throw Error('SYN unknown missing source kind');
   await this.ctx.storage.sync();this.noticeState.trace=[];
  }
+ async noticeLinkControlRead(){const c=globalThis.__noticeLinkData;return {visible:!!c,marker:c?.marker??null};}
+ async noticeLinkWriteGate(deadline){
+  const c=globalThis.__noticeLinkData;
+  if(!c||!Number.isSafeInteger(deadline)||Date.now()>=deadline||c.held!==null)throw Error('SYN Link DATA control unavailable');
+  c.held='link-write';c.entered++;c.deadline=deadline;
+  try{while(!c.released){if(Date.now()>=deadline){c.expired=true;throw Error('SYN Link original child deadline reached');}await new Promise(resolve=>setTimeout(resolve,Math.min(10,Math.max(1,deadline-Date.now()))));}}
+  finally{c.held=null;c.settled++;}
+ }
  async noticeCorrelated(kind){
   // SYN negative DATA reseal only; original issuer/source/SQL facts never change.
   const all=[...await this.ctx.storage.list()],original=all.find(([k])=>k.startsWith('afw.finite-preparation-notice.v1:')&&k.endsWith(':reservation'));
@@ -101,6 +109,8 @@ export function extendFiniteOwnerNoticeGet(entry){
 
 
  async noticeOrdinaryWithdraw(){
+  // Restore observational wrappers so the ordinary native store retains its run method.
+  this.noticeRestore?.();
   const all=[...await this.ctx.storage.list()],r=JSON.parse(all.find(([k])=>k.startsWith('afw.finite-preparation-notice.v1:')&&k.endsWith(':reservation'))[1]),i=r.identity;
   const event=await this.env.RELEASE_DB.prepare('SELECT sequence FROM dossier_monitoring_consent_events WHERE grant_id=? ORDER BY sequence DESC LIMIT 1').bind(i.grantId).first();
   return noticeOrdinaryRecord({db:this.env.RELEASE_DB,subject:i.subject,grantId:i.grantId,projectId:i.projectId,expectedClientId:i.clientId,expectedResource:i.resource,expectedRevision:i.projectRevision,expectedSequence:event.sequence,action:'revoke',requestId:'22222222-2222-4222-8222-222222222222',now:Date.now()});
@@ -138,7 +148,7 @@ export function extendFiniteOwnerNoticeGet(entry){
    const actual=Reflect.apply(originals.transaction,storage,[async tx=>{
     const methods={get:tx.get,list:tx.list,put:tx.put},wrapped={};
     for(const [name,method]of Object.entries(methods))wrapped[name]=(...args)=>{state.ops[{get:'txGet',list:'txList',put:'txPut'}[name]]++;return Reflect.apply(method,tx,args);};
-    const result=await callback(wrapped);if(stage==='write'&&this.noticeMode==='link-hold-write')await this.noticeLinkGate('link-write');return result;
+    const result=await callback(wrapped);if(stage==='write'&&this.noticeMode==='link-hold-write')await this.noticeLinkWriteGate(this.noticeLinkDeadline);return result;
    }]);
    const result=await actual;
    if(stage==='write'){
@@ -221,6 +231,19 @@ export function extendFiniteOwnerNoticeGet(entry){
   await this.ctx.storage.sync();
  }
  `;
+ const fetchMarker='export default{async fetch(request,env){const refs=await request.json();';
+ if(entry.split(fetchMarker).length!==2)throw Error('SYN fixed QA DATA fetch marker');
+ entry=entry.replace(fetchMarker,`export default{async fetch(request,env){
+  if(new URL(request.url).pathname==='/fixture/notice-link-control'){
+   if(request.method!=='POST'||new URL(request.url).search)return new Response(null,{status:400});
+   let input;try{const raw=await request.text();if(raw.length>64)throw Error();input=JSON.parse(raw);}catch{return new Response(null,{status:400});}
+   if(!input||Object.getPrototypeOf(input)!==Object.prototype||Object.keys(input).length!==1||!['read','reset','release'].includes(input.action))return new Response(null,{status:400});
+   if(input.action==='reset'){if(globalThis.__noticeLinkData?.held)return new Response(null,{status:409});globalThis.__noticeLinkData={marker:crypto.randomUUID(),held:null,released:false,entered:0,settled:0,expired:false,deadline:null};}
+   const c=globalThis.__noticeLinkData;
+   if(input.action==='release'&&c)c.released=true;
+   return Response.json({visible:!!c,marker:c?.marker??null,held:c?.held??null,entered:c?.entered??0,settled:c?.settled??0,expired:c?.expired??false});
+  }
+  const refs=await request.json();`);
  if(entry.split(' export class Initial extends FiniteClosure{').length!==2)throw Error('SYN notice class marker');
  return "import {encodeFinitePreparationRecord as noticePrepEncode,decodeFinitePreparationRecord as noticePrepDecode} from './lib/mcp-qa-finite-preparation-records.mjs';\nimport {recordDossierMonitoringConsent as noticeOrdinaryRecord,createDossierMonitoringAuthorization as noticeOrdinaryAuthorization} from './lib/dossier-monitoring-authority.mjs';\nimport {initialHash as noticeHash} from './lib/mcp-qa-finite-initial-material-records.mjs';\nimport {sealFinitePreparationIssuerRecord as noticeIssuerSeal} from './lib/mcp-qa-finite-preparation-issuer-records.mjs';\nimport {createFinitePreparationNoticeJournal as noticeRealJournal} from './lib/mcp-qa-finite-preparation-notice-journal.mjs';\nimport {sealFinitePreparationNoticeRecord as noticeSeal,encodeFinitePreparationNoticeRecord as noticeEncode,decodeFinitePreparationNoticeRecord as noticeDecode} from './lib/mcp-qa-finite-preparation-notice-records.mjs';\n"+entry.replace(' export class Initial extends FiniteClosure{',' export class Initial extends FiniteClosure{'+methods);
 }
@@ -260,7 +283,7 @@ export function instrumentFiniteNoticeGet(source){
   postReplace("if(!again.ok||again.identity.subject!==identity.subject||again.identity.expiresAt!==identity.expiresAt)fail();","if(!again.ok||again.identity.subject!==identity.subject||again.identity.expiresAt!==identity.expiresAt)fail();globalThis.__noticeState&&(globalThis.__noticeState.accessVerifications=(globalThis.__noticeState.accessVerifications??0)+1);");
   postReplace("    const acceptedAt=Date.now();","    if(globalThis.__noticeOwner){globalThis.__noticeState?.trace.push({position:'before-link',at:Date.now()});if(['link-before','link-cut-after-ack','link-existing','link-conflict'].includes(globalThis.__noticeOwner.noticeMode))await wait(globalThis.__noticeOwner.noticeLinkGate('before-link'));}check();const acceptedAt=Date.now();");
   postReplace("    position='notice-link-pending';linkSettled=false;","    if(['link-existing','link-conflict'].includes(globalThis.__noticeOwner?.noticeMode)){const data=globalThis.__noticeOwner.noticeMode==='link-conflict'?{...ownedNoticeLink,eventHash:ownedNoticeLink.eventHash==='f'.repeat(64)?'e'.repeat(64):'f'.repeat(64)}:ownedNoticeLink;await wait(ctx.storage.put('connection-preparation:'+id+':notice',prepEncode('NoticeLink',data)));await wait(ctx.storage.sync());globalThis.__noticeState?.trace.push({link:'negative-race-insert',at:Date.now()});}position='notice-link-pending';linkSettled=false;");
-  postReplace("    linkPromise=retain(preparationStore.putLink","    globalThis.__noticeOwner&&(globalThis.__noticeOwner.noticeLinkPhase='write');globalThis.__noticeState?.trace.push({link:'put-enter',at:Date.now()});linkPromise=retain(preparationStore.putLink");
+  postReplace("    linkPromise=retain(preparationStore.putLink","    globalThis.__noticeOwner&&(globalThis.__noticeOwner.noticeLinkDeadline=window.deadline);globalThis.__noticeOwner&&(globalThis.__noticeOwner.noticeLinkPhase='write');globalThis.__noticeState?.trace.push({link:'put-enter',at:Date.now()});linkPromise=retain(preparationStore.putLink");
   postReplace("    if(linkResult?.status!=='recorded'||linkResult.recordHash!==linkHash)fail();","    globalThis.__noticeState?.trace.push({link:'put-exit',status:linkResult?.status,at:Date.now()});if(linkResult?.status!=='recorded'||linkResult.recordHash!==linkHash)fail();");
   postReplace("    check();linkSyncPromise=retain","    globalThis.__noticeOwner&&(globalThis.__noticeOwner.noticeLinkPhase='sync');globalThis.__noticeState?.trace.push({link:'sync-enter',at:Date.now()});check();linkSyncPromise=retain");
   postReplace("linkSynced=true;","linkSynced=true;globalThis.__noticeState?.trace.push({link:'sync-exit',at:Date.now()});");

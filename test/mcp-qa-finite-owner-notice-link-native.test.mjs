@@ -12,8 +12,8 @@ async function withIssued(fn){
  finally{await f.stub.noticeReleaseHeld().catch(()=>{});await f.stub.ioRelease('all').catch(()=>{});await f.mf.dispose();await f.cleanup();}
 }
 test('native notice link follows actual consent ACK in the same POST child',()=>withIssued(async f=>{
- await actualExchangeMcp(f);await ticket(f);await f.stub.noticeConfigure();await f.stub.ioConfigure();
- const original=await plain(f.stub.snapshot()),history=(await f.db.prepare('SELECT * FROM dossier_monitoring_consent_events ORDER BY sequence').all()).results,began=Date.now();const response=await consent(f);await response.body?.cancel();const observation=await plain(f.stub.noticeStateRead()),io=await plain(f.stub.ioObservation()),elapsed=Date.now()-began;const after=await plain(f.stub.noticeInspect());
+ await actualExchangeMcp(f);await ticket(f);
+ const original=await plain(f.stub.snapshot()),history=(await f.db.prepare('SELECT * FROM dossier_monitoring_consent_events ORDER BY sequence').all()).results,grants=(await f.db.prepare('SELECT * FROM delegated_access_grants ORDER BY id').all()).results,schema=(await f.db.prepare("SELECT type,name,tbl_name,sql FROM sqlite_schema WHERE tbl_name IN ('dossier_monitoring_consent_events','dossier_monitoring_owner_tickets') AND sql IS NOT NULL ORDER BY name").all()).results;await f.stub.noticeConfigure();await f.stub.ioConfigure();const began=Date.now();const response=await consent(f);await response.body?.cancel();const observation=await plain(f.stub.noticeStateRead()),io=await plain(f.stub.ioObservation()),elapsed=Date.now()-began;const after=await plain(f.stub.noticeInspect());
  assert.equal(response.status,200);assert.equal(after.fixtureError,undefined);assert.equal(after.events.length,1);
  assert.equal(after.notice.length,5);assert(after.notice.some(([key])=>key.endsWith('consent:ack')));
  const all=await plain(f.stub.snapshot()),link=all.find(([key])=>key==='connection-preparation:'+f.identity.preconnectionId+':notice');
@@ -24,6 +24,7 @@ test('native notice link follows actual consent ACK in the same POST child',()=>
  assert.notEqual(record.eventHash,ack.rowHash);assert.equal(ack.rowHash,initialHash('afw.finite-preparation-notice-row.v1',event));assert.equal(record.sequence,event.sequence);assert(record.sequence>1);assert(record.acceptedAt>=ack.observedAt);assert(record.acceptedAt<send.window.deadline);
  for(const row of original)assert.deepEqual(all.find(([key])=>key===row[0]),row);
  const historyAfter=(await f.db.prepare('SELECT * FROM dossier_monitoring_consent_events ORDER BY sequence').all()).results;for(const row of history)assert.deepEqual(historyAfter.find(v=>v.sequence===row.sequence),row);
+ assert(grants.length>=3);assert.equal(schema.length,7);assert.deepEqual((await f.db.prepare('SELECT * FROM delegated_access_grants ORDER BY id').all()).results,grants);assert.deepEqual((await f.db.prepare("SELECT type,name,tbl_name,sql FROM sqlite_schema WHERE tbl_name IN ('dossier_monitoring_consent_events','dossier_monitoring_owner_tickets') AND sql IS NOT NULL ORDER BY name").all()).results,schema);
  const trace=observation.state.trace;
  assert.deepEqual(trace.filter(v=>v.link&&v.link!=='transaction-settled').map(v=>v.link),['put-enter','put-exit','sync-enter','sync-exit','read-enter','read-exit']);
  const snapshots=trace.filter(v=>v.snapshotNotice).map(v=>v.snapshotNotice);assert.equal(snapshots.length,14);assert.deepEqual(snapshots.slice(0,12),Array.from({length:12},()=>({present:false,inventory:false,anchor:false})));assert.deepEqual(snapshots.slice(12),Array.from({length:2},()=>({present:true,inventory:true,anchor:true})));
@@ -83,12 +84,37 @@ for(const mode of ['link-existing','link-conflict'])test('native notice link exi
  await ticket(f);await f.stub.noticeConfigure(mode);const pending=consent(f);await gate(f,'before-link');await f.stub.noticeReleaseHeld();await denied(await pending);
  const after=await plain(f.stub.noticeInspect()),s=await state(f);assert.equal(after.events.length,1);assert.equal(after.notice.length,5);assert(await linkEntry(f));assert.equal(countWrites(s),1);assert(s.trace.some(v=>v.link==='negative-race-insert'));assert(!s.trace.some(v=>v.link==='sync-enter'));await replayClosed(f,after);
 }));
+async function qaControl(f,action){
+ assert.equal(typeof f.mf.getWorker,'function','actual Miniflare getWorker API is present');
+ f.qaControlWorker??=await f.mf.getWorker('qa-sdk');assert.equal(typeof f.qaControlWorker.fetch,'function');
+ const response=await f.qaControlWorker.fetch('https://qa-fixture.invalid/fixture/notice-link-control',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action})});assert.equal(response.status,200);return response.json();
+}
+async function controlGate(f){
+ for(let n=0;n<500;n++){const data=await qaControl(f,'read');if(data.held==='link-write')return data;await new Promise(r=>setTimeout(r,10));}
+ assert.fail('actual QA fetch did not observe original TX DATA gate within original child');
+}
 for(const [mode,name]of [['link-hold-write','link-write'],['link-hold-commit','link-commit'],['link-hold-sync','link-sync'],['link-hold-readback','link-readback']])test('native notice link held native work and cancellation retain scope '+mode,()=>withIssued(async f=>{
- await ticket(f);await f.stub.noticeConfigure(mode);const pending=consent(f);await gate(f,name);
- assert.equal((await plain(f.stub.noticeProbe())).allowed,false,'fresh native request denied while actual work outstanding');
- await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-abort')).body?.cancel();await denied(await pending);assert.equal((await plain(f.stub.noticeProbe())).allowed,false,'aborting original request is not settlement');
- await f.stub.noticeReleaseHeld();await settled(f);
- const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,1);assert.equal(after.notice.length,5);const s=await state(f);assert.equal(countWrites(s),1);assert(!s.trace.some(v=>v.position==='complete'));await replayClosed(f,after);
+ let rpcProbe=null,probeSettled=false,probeError=null;
+ if(mode==='link-hold-write'){
+  const data=await qaControl(f,'reset'),actor=await plain(f.stub.noticeLinkControlRead());assert.equal(data.visible,true);assert.equal(actor.visible,true,'QA fetch DATA is actually visible in actor realm');assert.equal(actor.marker,data.marker,'actual native fetch and actor share the same DATA');
+ }
+ try{
+  await ticket(f);await f.stub.noticeConfigure(mode);const pending=consent(f);
+  if(mode==='link-hold-write'){
+   const data=await controlGate(f);assert.equal(data.entered,1);assert.equal(data.expired,false);
+   console.info('LINK native DATA visibility',JSON.stringify({actualQaFetch:true,actorShared:true,originalTxEntered:data.entered}));
+   rpcProbe=plain(f.stub.noticeProbe()).then(value=>{probeSettled=true;return value;},error=>{probeSettled=true;probeError=String(error?.message);return null;});
+   await new Promise(r=>setTimeout(r,25));assert.equal(probeSettled,false,'native input gate queues same-DO RPC; no application denial is claimed');
+  }else{await gate(f,name);assert.equal((await plain(f.stub.noticeProbe())).allowed,false,'fresh native request denied while actual work outstanding');}
+  await (await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-abort')).body?.cancel();await denied(await pending);
+  if(mode==='link-hold-write'){
+   assert.equal(probeSettled,false,'native RPC remains blocked while original transaction callback is held');
+   await qaControl(f,'release');await rpcProbe;assert.equal(probeError,null);const data=await qaControl(f,'read');assert.equal(data.entered,1);assert.equal(data.settled,1);assert.equal(data.expired,false);
+   console.info('LINK native queued RPC settled',JSON.stringify({blockedDuringTransaction:true,settledAfterRelease:probeSettled}));
+  }else{assert.equal((await plain(f.stub.noticeProbe())).allowed,false,'aborting original request is not settlement');await f.stub.noticeReleaseHeld();}
+  await settled(f);const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,1);assert.equal(after.notice.length,5);
+  const s=await state(f);assert.equal(countWrites(s),1);assert(!s.trace.some(v=>v.position==='complete'));await replayClosed(f,after);
+ }finally{if(mode==='link-hold-write')await qaControl(f,'release');}
 }));
 for(const [mode,name]of [['link-before','before-link'],['link-hold-commit','link-commit']])test('native notice link original child expires without renewal '+mode,()=>withIssued(async f=>{
  await ticket(f);await f.stub.noticeConfigure(mode);const pending=consent(f),seen=await gate(f,name);
@@ -108,10 +134,10 @@ for(const drift of ['owner','revision','QA','M','holder','exchange'])test('nativ
  await f.stub.noticeReleaseHeld();await denied(await pending);const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,1);assert.equal(after.notice.length,5);assert(await linkEntry(f));assert.equal(countWrites(await state(f)),1);
 }));
 test('native notice link factual mismatch denies valid codec and journal data',()=>withIssued(async f=>{
- const after=await success(f),event=after.events[0],grant=await plain(f.stub.sdkGrant(f.identity.grantId));
+ const after=await success(f),event=after.events[0],grant=await plain(f.stub.sdkGrant(f.identity.grantId)),baselineInserts=consentInserts(await state(f));assert.equal(baselineInserts,1);
  for(const kind of ['eventHash','grantHash','sequence','preconnectionId','future','before-ack','after-deadline']){
   const proof=await plain(f.stub.noticeLinkCorrupt(kind));assert.equal(proof.codecRoundtrip,true,kind);assert.equal(proof.journalValid,true,kind);
-  assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable',kind);const s=await state(f);assert(s.trace.some(v=>v.correlator==='noticeLink'&&v.phase==='enter'),kind+' reaches actual correlator');assert(!s.trace.some(v=>v.correlator==='noticeLink'&&v.phase==='exit'),kind+' fails actual predicate');assert.equal(countWrites(s),0);assert.equal(consentInserts(s),0);
+  assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable',kind);const s=await state(f);assert(s.trace.some(v=>v.correlator==='noticeLink'&&v.phase==='enter'),kind+' reaches actual correlator');assert(!s.trace.some(v=>v.correlator==='noticeLink'&&v.phase==='exit'),kind+' fails actual predicate');assert.equal(countWrites(s),0);assert.equal(consentInserts(s),baselineInserts);
   assert.deepEqual((await plain(f.stub.noticeInspect())).events,[event]);assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),grant);await f.stub.noticeLinkRestore(proof.original);
  }
 }));
