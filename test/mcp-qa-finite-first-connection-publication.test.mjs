@@ -51,11 +51,12 @@ async function component(scenario,inspect){
  }finally{await f.stub.restoreMethods();await f.mf.dispose();await f.cleanup();}
 }
 for(const scenario of ['double-enrollment','ack-first','double-ack','unknown-enrollment','unknown-ack','holder-drift','deadline'])test('T1 factual enrollment refuses '+scenario+' without repeated IO',()=>component(scenario,async result=>{
- assert.equal(result.settled,true);assert(result.failure,JSON.stringify(result));
+ assert.equal(result.settled,true);assert(result.failure,JSON.stringify(result));assert(result.trace.includes('writer-prepared'),JSON.stringify(result));
  assert(result.trace.filter(value=>value==='put:enrollment').length<=1);
  assert(result.trace.filter(value=>value==='put:ack').length<=1);
  if(['ack-first','holder-drift','deadline'].includes(scenario))assert.equal(result.trace.filter(value=>value.startsWith('put:')).length,0);
- if(scenario==='unknown-enrollment')assert.equal(result.trace.filter(value=>value==='put:ack').length,0);
+ if(scenario==='unknown-enrollment'){assert.equal(result.trace.filter(value=>value==='put:enrollment').length,1);assert.equal(result.trace.filter(value=>value==='put:ack').length,0);}
+ if(scenario==='unknown-ack')assert.equal(result.trace.filter(value=>value==='put:ack').length,1);
 }));
 import {syntheticPreparation} from './fixtures/finite-connection-source.mjs';
 test('T1 fixed descriptions preserve literal wire and secret baseline inheritance',async()=>{
@@ -65,12 +66,12 @@ test('T1 fixed descriptions preserve literal wire and secret baseline inheritanc
  assert.equal(upload.method,'POST');assert.equal(upload.path,'https://api.cloudflare.com/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/workers/agent-friendly-web-delegated-canary/versions?deploy=false');
  assert.deepEqual(upload.body,{...configuration,containers:configuration.containers.map(({class_name})=>({class_name})),bindings:configuration.bindings.map(value=>value.type==='secret_text'?{name:value.name,type:'inherit',version_id:baselineVersionId}:value),modules:[{name:'index.mjs',content_type:'application/javascript+module',content_base64:'AQID'}]});
  assert.deepEqual(engine.describeActivation({versionId:baselineVersionId}),{method:'POST',path:'https://api.cloudflare.com/client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/agent-friendly-web-delegated-canary/deployments',body:{strategy:'percentage',versions:[{version_id:baselineVersionId,percentage:100}]}});
- const original=globalThis.fetch;
+ const activation=engine.describeActivation({versionId:baselineVersionId}),original=globalThis.fetch;
  try{
   const requests=[];globalThis.fetch=async(path,options)=>{requests.push({method:options.method,path,body:JSON.parse(options.body)});return Response.json({success:true,errors:[],messages:[],result:{id:'33333333-3333-4333-8333-333333333333'}});};
   const native=createFiniteFixedPolicyEngine({ctx:{},env:{AFW_MCP_CLOSURE_PUBLISH_TOKEN:'SYNTHETIC_PUBLISHER_000000000000'}},()=>{}),lease={signal:new AbortController().signal,assertCurrent(){}};
   await native.upload({configuration,baselineVersionId,bytes},lease);await native.activate({versionId:baselineVersionId},lease);
-  assert.deepEqual(requests,[upload,engine.describeActivation({versionId:baselineVersionId})],'description and effective native request are identical');
+  assert.deepEqual(requests,[upload,activation],'description and effective native request are identical');
  }finally{globalThis.fetch=original;}
 
 });
