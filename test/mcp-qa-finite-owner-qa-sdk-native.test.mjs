@@ -56,5 +56,15 @@ test('actual native source and SDK parser require lexical continuation after ori
   assert(observed.calls.some(c=>c.method==='get'&&c.prefix==='client'),'actual SDK client lookup entered');
   assert(observed.rows.some(([key])=>key.endsWith('sdk_begin:send')),'actual durable original begin SEND reached');
   assert.equal(response.status,200,'actual source/SDK path reached original pending SEND; same invocation must continue lexically');
+  const html=await response.text(),handle=/name="handle" value="([^"]+)"/.exec(html)?.[1];assert(handle,'actual SDK form follows issuer authorization');
+  const rows=await plain(f.stub.snapshot()),reservation=JSON.parse(rows.find(([key])=>key.startsWith('afw.finite-preparation-issuer.v1:')&&key.endsWith(':reservation'))[1]);
+  const appBefore=await f.db.prepare('SELECT id FROM delegated_access_grants WHERE id=?').bind(reservation.identity.grantId).first();assert.equal(appBefore,null);
+  const cookie=response.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');
+  const post=await f.mf.dispatchFetch(context.source.origin+'/authorize',{method:'POST',redirect:'manual',headers:{Origin:context.source.origin,'Content-Type':'application/x-www-form-urlencoded','Cf-Access-Jwt-Assertion':token,Cookie:'__Host-afw-finite-prepare='+'a'.repeat(64)+'; '+cookie},body:new URLSearchParams({handle,decision:'approve',scope:'afw:project:read'})});
+  assert.equal(post.status,302,'actual SDK approve and same-child original grant must precede complete');
+  assert(new URL(post.headers.get('Location')).searchParams.get('code'),'actual SDK code returned');
+  const app=await f.db.prepare('SELECT * FROM delegated_access_grants WHERE id=?').bind(reservation.identity.grantId).first();assert.equal(app.id,reservation.identity.grantId);assert.equal(app.revoked_at,'');
+  const final=await plain(f.stub.sdkObservation());assert(final.rows.some(([key])=>key.endsWith('sdk_complete:observed')));assert.equal(final.calls.filter(c=>c.method==='list').length,0);
+  console.info('D02 actual GET POST completed; original UUID, SDK code, no list; fixture only');
  }finally{console.info('D02 native stage: dispose');await f.mf.dispose();await f.cleanup();}
 });

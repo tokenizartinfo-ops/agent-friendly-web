@@ -24,6 +24,6 @@ jobs:
           node-version: 22
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Scoped lint before native work
-        run: npx eslint lib/mcp-qa-finite-owner-phase-context.mjs lib/mcp-qa-finite-owner-oauth-*.mjs lib/mcp-qa-finite-owner-issuer-provenance-*.mjs test/fixtures/finite-owner-qa-sdk.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
+        run: npx eslint lib/mcp-qa-finite-owner-approved-ticket-facts.mjs lib/mcp-qa-finite-owner-preparation.mjs lib/mcp-qa-finite-owner-phase-context.mjs lib/mcp-qa-finite-owner-oauth-*.mjs lib/mcp-qa-finite-owner-issuer-provenance-*.mjs test/fixtures/finite-owner-qa-sdk.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
       - name: D02 causal helper and native qualification
         run: timeout 180s node --test test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
