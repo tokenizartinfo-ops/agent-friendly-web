@@ -128,7 +128,7 @@ export function extendFiniteOwnerNoticeGet(entry){
   this.noticeRestore?.();globalThis.__noticeOwner=this;this.noticeMode=mode;this.noticeHeld=null;this.noticeRelease=null;
   const state=globalThis.__noticeState={trace:[],sql:[],ops:{get:0,list:0,sync:0,transaction:0,txGet:0,txList:0,txPut:0},lists:[],resolution:null};this.noticeState=state;
   const db=this.env.RELEASE_DB,sessionMethod=db.withSession,storage=this.ctx.storage,originals={get:storage.get,list:storage.list,sync:storage.sync,transaction:storage.transaction};
-  this.noticeLinkPhase=null;this.noticeLinkReleased=false;
+  this.noticeLinkPhase=null;this.noticeLinkReleased=false;this.noticeLinkTransactionObserved=false;
   for(const kind of ['get','list','sync'])storage[kind]=async(...args)=>{
    state.ops[kind]++;if(kind==='list')state.lists.push({prefix:String(args[0]?.prefix??''),limit:args[0]?.limit??null});
    const stage=this.noticeLinkPhase,actual=Reflect.apply(originals[kind],storage,args),value=await actual;
@@ -150,6 +150,10 @@ export function extendFiniteOwnerNoticeGet(entry){
     for(const [name,method]of Object.entries(methods))wrapped[name]=(...args)=>{state.ops[{get:'txGet',list:'txList',put:'txPut'}[name]]++;return Reflect.apply(method,tx,args);};
     const result=await callback(wrapped);if(stage==='write'&&this.noticeMode==='link-hold-write')await this.noticeLinkWriteGate(this.noticeLinkDeadline);return result;
    }]);
+   if(stage==='write'&&!this.noticeLinkTransactionObserved){
+    this.noticeLinkTransactionObserved=true;const data=globalThis.__noticeLinkData;
+    if(data){data.txStarted=true;actual.then(()=>{data.txSettled=true;data.txOutcome='fulfilled';},()=>{data.txSettled=true;data.txOutcome='rejected';});}
+   }
    const result=await actual;
    if(stage==='write'){
     state.trace.push({link:'transaction-settled',at:Date.now()});
@@ -238,10 +242,10 @@ export function extendFiniteOwnerNoticeGet(entry){
    if(request.method!=='POST'||new URL(request.url).search)return new Response(null,{status:400});
    let input;try{const raw=await request.text();if(raw.length>64)throw Error();input=JSON.parse(raw);}catch{return new Response(null,{status:400});}
    if(!input||Object.getPrototypeOf(input)!==Object.prototype||Object.keys(input).length!==1||!['read','reset','release'].includes(input.action))return new Response(null,{status:400});
-   if(input.action==='reset'){if(globalThis.__noticeLinkData?.held)return new Response(null,{status:409});globalThis.__noticeLinkData={marker:crypto.randomUUID(),held:null,released:false,entered:0,settled:0,expired:false,deadline:null};}
+   if(input.action==='reset'){if(globalThis.__noticeLinkData?.held)return new Response(null,{status:409});globalThis.__noticeLinkData={marker:crypto.randomUUID(),held:null,released:false,entered:0,settled:0,expired:false,deadline:null,txStarted:false,txSettled:false,txOutcome:null};}
    const c=globalThis.__noticeLinkData;
    if(input.action==='release'&&c)c.released=true;
-   return Response.json({visible:!!c,marker:c?.marker??null,held:c?.held??null,entered:c?.entered??0,settled:c?.settled??0,expired:c?.expired??false});
+   return Response.json({visible:!!c,marker:c?.marker??null,held:c?.held??null,entered:c?.entered??0,settled:c?.settled??0,expired:c?.expired??false,txStarted:c?.txStarted??false,txSettled:c?.txSettled??false,txOutcome:c?.txOutcome??null});
   }
   const refs=await request.json();`);
  if(entry.split(' export class Initial extends FiniteClosure{').length!==2)throw Error('SYN notice class marker');
