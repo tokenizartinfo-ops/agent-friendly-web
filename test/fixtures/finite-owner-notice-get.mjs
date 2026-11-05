@@ -127,22 +127,3 @@ export function instrumentFiniteNoticeGet(source){
  return head+body;
 }
 
-// Temporary, explicitly scoped diagnostic: actual operations/guards/throws unchanged.
-export function diagnoseNoticeInventory(source,label){
- const original=source;
- source=source.replace(/\bfail\(\)/g,(match,offset)=>{
-  const line=original.slice(0,offset).split('\n').length;
-  return "(console.info('NOTICE DIAGNOSTIC fail-site',"+JSON.stringify(label+':'+line)+"),fail())";
- });
- if(label==='phase'){
-  const needle="const actual=retain(Reflect.apply(all,bound,[])),result=await actual;current(l);";
-  if(source.split(needle).length!==2)throw Error('SYN diagnostic ALL marker');
-  source=source.replace(needle,needle+"console.info('NOTICE DIAGNOSTIC real ALL types',JSON.stringify({success:result?.success,isArray:Array.isArray(result?.results),size:result?.results?.length,prepare:typeof session.prepare,bind:typeof statement.bind,all:typeof bound.all}));");
- }
- if(label==='journal'){
-  const needle="check(rows instanceof Map&&rows.size<=6);";
-  if(source.split(needle).length!==2)throw Error('SYN diagnostic journal marker');
-  source=source.replace(needle,"console.info('NOTICE DIAGNOSTIC real LIST types',JSON.stringify({isMap:rows instanceof Map,size:rows?.size,get:typeof rows?.get,list:typeof tx.list}));"+needle);
- }
- return source;
-}
