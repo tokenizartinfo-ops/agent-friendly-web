@@ -1,0 +1,27 @@
+name: AFW D0.1 source qualifier
+on:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
+    paths:
+      - 'lib/mcp-qa-finite-profile.mjs'
+      - 'lib/mcp-qa-finite-owner-sdk-binding-facts.mjs'
+      - 'test/mcp-qa-finite-profile.test.mjs'
+      - 'test/mcp-qa-finite-owner-sdk-binding-facts.test.mjs'
+      - '.github/workflows/afw-d01-source-qualifier.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  d01:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --test test/mcp-qa-finite-owner-sdk-binding-facts.test.mjs test/mcp-qa-finite-profile.test.mjs

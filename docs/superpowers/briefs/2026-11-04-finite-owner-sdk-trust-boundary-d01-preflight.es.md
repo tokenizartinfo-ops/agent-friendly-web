@@ -1,0 +1,7 @@
+# D0.1 preflight — 2026-11-04
+- PROJECT: Agent Friendly Web; REPOSITORY: tokenizartinfo-ops/agent-friendly-web (ID 1347578006); ENVIRONMENT: candidate SOURCE branch feat/finite-native-cleanup-20261101; ORIGIN: GitHub connector; RESOURCE_TYPE: branch commit/tree; RESOURCE_ID: 7067c850914353d720eac67e039216bd19ec1268; ALLOWED_ACTION: D0.1 source/test/docs commit and credential-free Actions only.
+- Branch head read through Git ref equals exact accepted BASE 7067c850914353d720eac67e039216bd19ec1268; tree 6b1fbd2329d89e16415e65b4c6082114e58ae96d. No main/PR/deploy/provider contact.
+- Accepted phase-context first-primary reader and pure conversion are already in BASE; D0.1 consumes neither as authority. D0 design brief and linked exact access delta reviewed. D0.2/D0.3 inactive.
+- Proposal: exactly one qaLive alias AFW_FINITE_OWNER_OAUTH_KV to existing namespace 6b94ff702e504e14a7730cee73a0f6ff. This would grant namespace-wide QA Worker read/write on actual installation, not per-key or actor permissions. This commit creates SOURCE declarations only and carries no real binding, credential, operational authorization, or Entry.
+- M physical bindings and historical qaClosed/c570/M2607/pins remain fixed. Revised Q bootstrap/material/capsule must precede the single Entry. Old sealed Q cannot qualify after this change.
+- Rollback: revert only this task's branch commits by CAS to the preserved BASE after verifying no later legitimate work; do not reset other refs or delete historical resources. Source evidence is the commits, Actions runs and this record.

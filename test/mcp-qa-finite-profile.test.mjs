@@ -131,3 +131,16 @@ test('candidate descriptor declares fixed finite activation while QA remains nul
   assert.equal(descriptor.privateFull.activationAlgorithm,role==='canaryLive'?'finiteActivationConfigurationHash':null);
  }
 });
+
+test('D0.1 exact QA SDK alias changes only qaLive source contract',()=>{
+ const q=api.finitePublicProfileTemplate('qaLive');
+ const m=api.finitePublicProfileTemplate('canaryLive');
+ const alias={name:'AFW_FINITE_OWNER_OAUTH_KV',type:'kv_namespace',namespace_id:'6b94ff702e504e14a7730cee73a0f6ff'};
+ assert.deepEqual(q.bindings.filter(b=>b.name===alias.name),[alias]);
+ assert.deepEqual(m.bindings.filter(b=>b.type==='kv_namespace'),[{name:'OAUTH_KV',type:'kv_namespace',namespace_id:alias.namespace_id}]);
+ const config=api.finiteWranglerProfileTemplate('qaLive');
+ assert.deepEqual(config.kv_namespaces,[{binding:alias.name,id:alias.namespace_id}]);
+ assert.deepEqual(api.projectFinitePublicConfiguration({role:'qaLive',metadata:q}),q);
+ const changed=structuredClone(q);changed.bindings.find(b=>b.name===alias.name).namespace_id='0'.repeat(32);
+ assert.throws(()=>api.projectFinitePublicConfiguration({role:'qaLive',metadata:changed}));
+});
