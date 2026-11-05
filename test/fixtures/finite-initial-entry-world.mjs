@@ -1,5 +1,5 @@
 import {FINITE_PREPARATION_ISSUER_SCHEMA} from '../../lib/mcp-qa-finite-preparation-issuer-store.mjs';
-import {extendFiniteOwnerPhaseContext,installFiniteOwnerPhaseFixture} from './finite-owner-phase-context.mjs';
+import {extendFiniteOwnerPhaseContext,seedFiniteOwnerPhaseHistory} from './finite-owner-phase-context.mjs';
 import {extendPreparationCleanupFixture} from './finite-preparation-cleanup-entry.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -72,6 +72,7 @@ export async function initialEntryHarness(mode='normal'){
    if(req.url===CF+'/tokens/verify'){if(mode==='custody-hold'){f.held='custody-read';await new Promise(resolve=>{f.release=resolve;});}result={id:req.headers.get('authorization')==='Bearer synthetic-native-reader'?'9aa97ad1fc9afe3021cf69ea497d5190':'05718105dcdfc92e55cc3624172c2740',status:'active',expires_on:new Date(approval+60000).toISOString(),not_before:null};}
    else if(req.url===CF+'/workers/scripts/agent-friendly-web-independent-closure-qa/deployments?per_page=1'){
     result=structuredClone(w.pointer);
+    if(f.phaseDrift==='qa-pointer'&&++f.phaseQaObservation===2)result.deployments[0].id='99999999-9999-4999-8999-999999999999';
     if(f.uploads.length>0){f.gateReached=true;if(f.gateMode==='qa')result.deployments[0].id='99999999-9999-4999-8999-999999999999';}
    }
    else if(req.url===CF+'/workers/workers/agent-friendly-web-independent-closure-qa/versions/'+UUID+'?include=modules'){result={...structuredClone(finitePublicProfileTemplate('qaLive')),id:UUID,urls:[],modules:[{name:'index.mjs',content_type:'application/javascript+module',content_base64:Buffer.from('export default{};').toString('base64')}]};if(f.ownerFault==='qa-module')result.modules[0].content_base64='AAAA';if(f.ownerFault==='qa-namespace')result.bindings.find(b=>b.name==='AFW_INDEPENDENT_CLOSURE').namespace_id='f'.repeat(32);}
@@ -184,7 +185,7 @@ export async function initialEntryHarness(mode='normal'){
  }});
  await mf.setOptions(finalOptions);
  const bindings=await mf.getBindings();f.stub=bindings.AFW_INDEPENDENT_CLOSURE.get(bindings.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB');
- await seedInitialHistory(f.db,x);if(mode.startsWith('phase-context')){await installFiniteOwnerPhaseFixture(f.db);for(const sql of FINITE_PREPARATION_ISSUER_SCHEMA)await f.db.prepare(sql).run();}await f.stub.seed(x.rows);f.resident=resident;
+ if(mode.startsWith('phase-context')){try{if(mode==='phase-context-init-failure')throw Error('SYN phase fixture initialization failed');await seedFiniteOwnerPhaseHistory(f.db,x,seedInitialHistory);for(const sql of FINITE_PREPARATION_ISSUER_SCHEMA)await f.db.prepare(sql).run();}catch(error){await mf.dispose();error.fixtureDisposed=true;throw error;}}else await seedInitialHistory(f.db,x);await f.stub.seed(x.rows);f.resident=resident;
  if(mode==='invalid-owned-revision')await f.db.prepare('UPDATE site_projects SET revision=0').run();
  if(mode==='wrong-owned-subject')await f.db.prepare("UPDATE site_projects SET user_id='another-owner'").run();
  f.namespace=bindings.AFW_INDEPENDENT_CLOSURE;

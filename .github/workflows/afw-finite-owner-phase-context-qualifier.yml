@@ -7,7 +7,7 @@ permissions:
   contents: read
 concurrency:
   group: finite-owner-phase-context-source
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   lint:
     runs-on: ubuntu-24.04
@@ -22,6 +22,7 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm run lint
   phase:
+    name: final-phase-matrix
     needs: lint
     runs-on: ubuntu-24.04
     timeout-minutes: 10

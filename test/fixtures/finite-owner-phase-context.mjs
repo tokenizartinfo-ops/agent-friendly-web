@@ -148,17 +148,15 @@ import {sealFiniteInitialUploadRecord as phaseSealUpload,encodeFiniteInitialUplo
  return imports+entry.replace(' export class Initial extends FiniteClosure{',' export class Initial extends FiniteClosure{'+methods+method+" async phasePrimaryReads(){return this.phasePrimary;}\n");
 }
 
-/** Extend only this isolated phase world with the accepted ordinary issuer schema.
- * Preserve every historical grant value; no production schema or clock is changed. */
-export async function installFiniteOwnerPhaseFixture(db){
- const before=(await db.prepare('SELECT * FROM delegated_access_grants ORDER BY id').all()).results;
- await db.batch([
-  db.prepare('ALTER TABLE delegated_access_grants RENAME TO phase_fixture_retained_grants'),
-  db.prepare("CREATE TABLE delegated_access_grants (id TEXT PRIMARY KEY,user_id TEXT,client_id TEXT,project_id TEXT,resource TEXT,scopes_json TEXT,created_at TEXT,expires_at TEXT,revoked_at TEXT NOT NULL DEFAULT '',exchanged_at TEXT NOT NULL DEFAULT '')"),
-  db.prepare('INSERT INTO delegated_access_grants SELECT * FROM phase_fixture_retained_grants'),
-  db.prepare('DROP TABLE phase_fixture_retained_grants'),
-  db.prepare("CREATE TABLE delegated_consent_sessions (handle_hash TEXT PRIMARY KEY,user_id TEXT,kind TEXT,project_id TEXT,client_id TEXT,resource TEXT,scopes_json TEXT,expires_at TEXT,consumed_at TEXT NOT NULL DEFAULT '')")
- ]);
- const after=(await db.prepare('SELECT * FROM delegated_access_grants ORDER BY id').all()).results;
- if(JSON.stringify(before)!==JSON.stringify(after))throw Error('SYN historical grant preservation failed');
+/** Seed the existing history through native D1 with the accepted ordinary
+ * issuer column defaults from the start. No rename/drop of referenced history. */
+export async function seedFiniteOwnerPhaseHistory(db,history,seedHistory){
+ const needle='revoked_at TEXT,exchanged_at TEXT)',replacement="revoked_at TEXT NOT NULL DEFAULT '',exchanged_at TEXT NOT NULL DEFAULT '')";
+ let adjusted=false;
+ const setupDb={prepare:sql=>db.prepare(sql),exec:sql=>{
+  if(sql.includes('CREATE TABLE delegated_access_grants')){if(adjusted||sql.split(needle).length!==2)throw Error('SYN grant schema drift');adjusted=true;sql=sql.replace(needle,replacement);}
+  return db.exec(sql);
+ }};
+ await seedHistory(setupDb,history);if(!adjusted)throw Error('SYN grant schema not initialized');
+ await db.prepare("CREATE TABLE delegated_consent_sessions (handle_hash TEXT PRIMARY KEY,user_id TEXT,kind TEXT,project_id TEXT,client_id TEXT,resource TEXT,scopes_json TEXT,expires_at TEXT,consumed_at TEXT NOT NULL DEFAULT '')").run();
 }

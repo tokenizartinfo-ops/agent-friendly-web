@@ -92,3 +92,6 @@ test('failed schema SELECT denies and malformed existing table never falls back'
 
 for(const prefix of ['snapshot-only','snapshot-map'])test('exact original metadata prefix remains closed without ticket: '+prefix,()=>world(async f=>{await seed(f,prefix);const before=await plain(f.stub.snapshot()),r=await read(f);assert.equal(r.fixtureError,undefined,JSON.stringify(r));assert.equal(r.source.phase,'closed_ui');assert.deepEqual(await plain(f.stub.snapshot()),before);}));
 for(const fault of ['orphan-ticket-use','foreign-snapshot','stale-snapshot','later-approval','extra'])test('missing original ticket never relaxes '+fault,()=>world(async f=>{await seed(f,'snapshot-only');await f.stub.phaseCorrupt(fault);assert.equal((await read(f)).status,'unavailable');}));
+
+test('fresh QA pointer drift after the first snapshot denies',()=>world(async f=>{f.phaseCurrent=await seed(f);f.phaseQaObservation=0;f.phaseDrift='qa-pointer';assert.equal((await read(f)).status,'unavailable');assert.equal(f.phaseQaObservation,2);}));
+test('actual allocated phase fixture disposes after initialization failure',async()=>{await assert.rejects(initialEntryHarness('phase-context-init-failure'),e=>e.message==='SYN phase fixture initialization failed'&&e.fixtureDisposed===true);});
