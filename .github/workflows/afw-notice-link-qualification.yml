@@ -1,0 +1,45 @@
+name: AFW NoticeLink qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - lib/mcp-qa-finite-owner-phase-context.mjs
+      - test/fixtures/finite-owner-notice-get.mjs
+      - test/mcp-qa-finite-owner-notice-link-native.test.mjs
+      - test/mcp-qa-finite-owner-notice-consent-native.test.mjs
+      - .github/workflows/afw-notice-link-qualification.yml
+permissions:
+  contents: read
+jobs:
+  causal-red:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      AFW_NOTICE_BUNDLE_CAPTURE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Causal Link RED and settlement carry
+        shell: bash
+        run: |
+          set +e
+          node --test test/mcp-qa-finite-owner-notice-link-native.test.mjs > "$RUNNER_TEMP/link-red.tap" 2>&1
+          link_status=$?
+          cat "$RUNNER_TEMP/link-red.tap"
+          node --test --test-name-pattern='^native consent (original window fences queued SQL|abort retains SQL and forbids late ACK)$' test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/carry.tap" 2>&1
+          carry_status=$?
+          cat "$RUNNER_TEMP/carry.tap"
+          test "$link_status" -eq 0 && test "$carry_status" -eq 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-notice-link-red
+          path: |
+            ${{ runner.temp }}/*.tap
+            ${{ runner.temp }}/afw-notice-get-bundles/*.json
+          retention-days: 7

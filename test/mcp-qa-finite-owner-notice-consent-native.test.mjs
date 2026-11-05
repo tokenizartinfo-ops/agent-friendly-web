@@ -158,7 +158,7 @@ for(const mode of ['lost-send','lost-ack'])test('native consent journal uncertai
 test('native consent original window fences queued SQL',()=>withIssued(async f=>{
  await ticket(f);await f.stub.noticeConfigure('queue');const pending=consent(f),seen=await gate(f,'before-sql');assert(seen.state.sqlEnteredAt);
  await new Promise(resolve=>setTimeout(resolve,5100));await denied(f,await pending);assert.equal((await plain(f.stub.noticeProbe())).allowed,false,'actual operation remains retained');
- await f.stub.noticeReleaseHeld();const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,0);assert.equal(after.notice.length,4);
+ await f.stub.noticeReleaseHeld();for(let n=0;n<100;n++){if((await plain(f.stub.noticeProbe())).allowed)break;await new Promise(r=>setTimeout(r,10));}assert.equal((await plain(f.stub.noticeProbe())).allowed,true,'actual queued SQL settlement observed');const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,0);assert.equal(after.notice.length,4);
 }));
 for(const [mode,drift]of [['before-send','revision'],['before-send','owner'],['before-send','pointer'],['before-insert','revision'],['before-insert','holder']])test('native consent source current drift denies '+mode+' '+drift,()=>withIssued(async f=>{
  await ticket(f);await f.stub.noticeConfigure(mode);const pending=consent(f);await gate(f,mode==='before-send'?'before-send':'before-insert');
@@ -242,7 +242,7 @@ test('native consent abort retains SQL and forbids late ACK',()=>withIssued(asyn
  const abort=await f.mf.dispatchFetch(f.source.origin+'/fixture/consent-abort');assert.equal(abort.status,204);await abort.body?.cancel();
  await denied(f,await pending);assert.equal((await plain(f.stub.noticeProbe())).allowed,false);await f.stub.noticeReleaseHeld();
  for(let n=0;n<100;n++){if((await plain(f.stub.noticeProbe())).allowed)break;await new Promise(r=>setTimeout(r,10));}
- const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,1);assert.equal(after.notice.length,4);assert(!after.notice.some(([k])=>k.endsWith('consent:ack')));
+ assert.equal((await plain(f.stub.noticeProbe())).allowed,true,'actual aborted SQL settlement observed');const after=await plain(f.stub.noticeInspect());assert.equal(after.events.length,1);assert.equal(after.notice.length,4);assert(!after.notice.some(([k])=>k.endsWith('consent:ack')));
 }));
 test('pure fixed POST metadata and original grammar remain exact',()=>{
  const origin='https://delegated-canary.agentfriendlyweb.dev';
