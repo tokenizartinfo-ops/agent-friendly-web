@@ -31,3 +31,14 @@ Cobertura GREEN escalonada162casos únicos:Link31(30full+1focal),POST50(49full+1
 Costosprincipalbf686 medidos antesinspecciones/despuésbaseline3events/3grants/7DDL:7pares14snapshots6rechecks/Access2;118sessions74first62all;DOget1067/list126/sync3/transaction31/txGet117/txList2/txPut3;HTTP98/peak2/active0;child1007ms/window4999,parent1544. Graphs reales QA325/M303 sin paths nuevos/retirados, sólophase+stdin changed;edgecodecstdin multiplicidad1→2/sin nuevaadyacencia;Mbytes/hash/metafileidénticos.0standardbuild/store/journal/allSDK/50ms. GitHub/Actions únicamente para implementación/tests;ZIPs leídos en memoria sin archivos/deps/clones locales. Artifact7d/heads/digests/patchfull eninforme.
 
 Warnings toolchain/harness/RPC/CIMD se mantienen. Los dos asserts de settlementcarry reforzados yGREEN no cierran Minor hasta revisión independiente. operationalReadiness=false;completePackage=false;PCoff=false;sourceceiling3nov02:59Z vencido. Sin runtime/merge/main/mount/ARM/segunda publicación/thirdCLOSED/notificaciónMax.
+
+
+## Fix loop round1/5 — Important I1, pendiente de scoped re-review
+
+FixBASE revisor2f530092bdc6f89e856ca3803f04dcc83fb90b1f. Review_notice_link:0Critical/1Important, extracción incompleta del flujo auténtico. Sólo Consenttest ahora importa/delega a helpers fijos existentes prepareNoticeIssued/issueNotice/actualExchangeMcp/ticket/consent; seed/harness/lifecycle/cleanup siguen enwithIssued. Fixture/producto/Link byteexactos, sin archivos/ciclos/APIs nuevos.
+
+Prueba literal:4cuerpos compartidos idénticos(611/1535/1737/806chars;4/8/8/3assertsites); expansión de helpers reales reproducearchivoFixBASE entero byteexacto,172assertsitesmismoorden,23delegados+149directos;sufijo50tests íntegro. PREP/plain-dispose/importbindings y defaults/inputs/signatures iguales. No eliminación de asserts ni sleep/retry/clockpatch.
+
+TestHEADbc4000addba4b67f8a76344e5745e3d0eab6ff07, Actions42126215195/attempt1/job127590980113 SUCCESS:4exactos(principal+cookie+queuedSQL+abortSQL)=4PASS0FAIL0SKIP/66225.083215ms,46no seleccionados;lintConsentexit0/0warnings.8metafiles4QA4M deharness requeridos,0buildestándar;ningúnLink31/POST50/GET81repeat. Artefacto13462160172 ZIP305662B SHAaa23e104d147055c357c96f3909c518fa3484430923d6c68018a0ff46fc37eba expires12nov23:02:16Z. RechazorequireEmptyNotice logueadodespuésLinkes esperado,no baselineM1 reproducido.
+
+Qualifierretirado. FixcodeHEAD33d3739e6b585a2efd821c2c1006e4e59fbd7ed4/tree53d7d2591dbc9541a45305dc9da8bbe4de585cd2;compareFixBASEsóloConsenttest+3/-38/blob2169e0877eb72ab1db890f0c4e7b8c5c9075515b. Apéndicecompletoenreporteactual reports/2026-11-05-finite-native-notice-link.md incluye diff/primarias/assertproof/hashes. I1propuestoimplementado,NOautoaceptado;STOPWRITESpara scopedre-reviewMISMOreviewer. M1baseline2faildesconocidos yM2warningsnoentranloop;carryMinorConsentpendienteaceptaciónRoot. operationalReadiness=false;completePackage=false;PCoff=false;sinruntime/merge/main/nuevaunidad.
