@@ -1,0 +1,48 @@
+name: AFW NoticeLink fix round1 qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - test/mcp-qa-finite-owner-notice-consent-native.test.mjs
+      - .github/workflows/afw-notice-link-qualification.yml
+permissions:
+  contents: read
+jobs:
+  consent-shared-flow-round1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      AFW_NOTICE_BUNDLE_CAPTURE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Four exact shared-flow cases and amended-file lint
+        shell: bash
+        run: |
+          set +e
+          timeout --signal=TERM 13m node --test --test-name-pattern='^native consent (POST records original decision after actual ticket GET|original window fences queued SQL|abort retains SQL and forbids late ACK|malformed unrelated cookie denies before SEND)$' test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/fix-round1.tap" 2>&1
+          test_status=$?
+          cat "$RUNNER_TEMP/fix-round1.tap"
+          node --input-type=module - "$RUNNER_TEMP/fix-round1.tap" <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const text=readFileSync(process.argv[2],'utf8'),count=Number(/^# tests (\d+)$/m.exec(text)?.[1]),skipped=Number(/^# skipped (\d+)$/m.exec(text)?.[1]);console.log('FIX ROUND1 selected count',count,'expected4; skipped',skipped);if(count!==4||skipped!==0)process.exitCode=1;
+          NODE
+          count_status=$?
+          npx --no-install eslint test/mcp-qa-finite-owner-notice-consent-native.test.mjs > "$RUNNER_TEMP/lint.txt" 2>&1
+          lint_status=$?
+          cat "$RUNNER_TEMP/lint.txt"
+          test "$test_status" -eq 0 && test "$count_status" -eq 0 && test "$lint_status" -eq 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: afw-notice-link-fix-round1
+          path: |
+            ${{ runner.temp }}/*.tap
+            ${{ runner.temp }}/lint.txt
+            ${{ runner.temp }}/afw-notice-get-bundles/*.json
+          retention-days: 7
