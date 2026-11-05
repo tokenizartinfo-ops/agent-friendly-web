@@ -6,9 +6,9 @@
 
 GETnativo f68797ca0ad083aa4e90be87c83b5f60f2aa691b. POSTnativo f62b6c8b17412b812ae411bbc9cedad43b9ce501; producto e1537bf403944ae4f79c04818db1932a3189d78c/report5205d80216d9767c44762df4a181e1015e093a8e. Revisión review_notice_consent Spec✅/QualityApproved,0Critical/Important. P3cookiesCLOSED. Registros reviews/2026-11-05-finite-native-notice-get.es.md y finite-native-notice-consent.es.md. D0.4/store/journal/fanout aceptados, no volver a ejecutarlos por resumen. MinorSQLsettlement se refuerza enLink; warningsdeferred a revisiónwholebranch.
 
-## ACTUAL: Link fix round1/5 activo
+## Link aceptado SOURCE; no repetir
 
-BASE953e7af1fc20b59c59d8e4a03dcf398d98165cf5/treeee77df20d2c22fc48c55663524b9720b95364d2d. Reviewer review_notice_link: Spec❌/Needsfixes,0Critical/1ImportantI1duplicación dehelpersSYNenConsent. Mismo writer implement_notice_link reanudado para import/delegación conservandoasserts/lifecycle;4focalesConsent+lint yscopedrereviewmismorevisor. FixBASE2f530092bdc6f89e856ca3803f04dcc83fb90b1f. No otro writer ni unidadsiguiente hastaaceptación. Minorbaseline/warningsdeferrednofixloop. Rootleyófix-loop/rereview.
+BASE953e7af1fc20b59c59d8e4a03dcf398d98165cf5/treeee77df20d2c22fc48c55663524b9720b95364d2d. Reviewer review_notice_link cerró I1 ADDRESSED en scopedround1:Spec✅/TaskQualityApproved,0Critical/Important abierto. Linkcodigo33d3739/reportdba6cde8, aceptaciónSourcec55d4eda. MinorM1/M2deferred, SQLsettlementConsentCLOSED. No reabrirLink/POST/GET porresumen.
 
 codeHEADfb739b07c26487242d72bbc56ba0b115095bb8fa/tree9efd8240dfbacc65ba8d1821a2cba39bf5b577d9. ReportHEAD2f530092bdc6f89e856ca3803f04dcc83fb90b1f; reports/2026-11-05-finite-native-notice-link.md/blobce3655e1b35f948574653e901fd06a98e1656c4c/105131chars. Sólo4codepaths y2docs; qualifier eliminado. Rootcontrastó4blobs/compare11commits. Brief61f7a5f4b3c996feeb580c7f37843fd14f0272d7/preflight5cfbf0f7a1bd62437b0891ea3de97de0281bc564 en953 leídos; ledger progress/2026-11-05-finite-native-notice-link.es.md guarda rulings y primarias.
 
@@ -35,3 +35,12 @@ operationalReadiness=false;completePackage=false;PCoff=false. Sinruntime/provide
 ## Soporte y coordinación
 
 OpenAI18196140 respondió5nov18:59UTC sincausa/reparacióncomprobada; proxynativoactual noensayado, ActionsGETnoacreditasureparación. ConsultaCFposterior3nov sólo cierreCron02375364+2encuestas, sinreparaciónContainer/Accessnuevaenesaintervalo. Notas progress/2026-11-05-openai-proxy-support-followup.es.md y cloudflare-support-check.es.md. ChavoACK/REPLYdocumental privadoyaatendido,sinURLs/IDsprivadosenrepo público ni enviarsoporteporinferencia. No nuevoscorreos/casos/monitores.
+
+
+## ACTUAL — Task1 de primera publicaciónconnection
+
+BASE c55d4eda1eeaf80341c8abd6c85b76dc662614f5/tree9b463ea4b4603be08233a7703af1e09142daced4 verificados,8docs-onlysobreLinkaceptado. Único writerfresco implement_first_connection_shared (Solhigh/forknone), activo porRootdispatch, nohelpers/reviewerspropios. READFIRST briefs/2026-11-05-finite-native-first-connection-publication-task1.md/16043chars/blob57a5a7692b63ddc98560aac62d7b30851f8527bd; diseño0ac493/plan c9262d/preflight96bbc3. Sourcebranchfeat/finite-native-cleanup-20261101; Rootdocsbranchcoordinaciónseparada.
+
+Scope7code/testpaths:P1fixed-policy-engineNEW,P2preparation-enrollment-writerNEW,P3policy-transport; newtestfirst-connection-publication yfixturefinite-first-connection-publication; oldtestpolicy-transport yfixturefinite-initial-entry-world. Sólohelperscompartidos/factuales/oldcallersconservados; NO Task2mount/Task3producer. QualifierTEMP .github/workflows/afw-first-connection-qualification.yml≤3jobs15min,nosecrets/contentsread/persistfalseNode22/removefinal. Informe reports/2026-11-05-finite-native-first-connection-publication-task1.md, progreso first-connection-publication.es.md. RootnoeditaSOURCEhastaSTOPWRITES/reporte.
+
+P1operacionesproviderfijas,describe.pathURLABSOLUTAuna vez/nohttpgenérico. P2oneShotfactualnoadmisión/callbacknuevo, mismochilddeadline/ACKpuntonativo/sourcechecks/actualPromises; actualfailureantescancelpendienteconretención. DATAapprovalSYNaisladapermitidasólohelper sinPOST/receipt/autoridad. Validaroldtransport/setup,grafosCLOSED/preservedroles,lints; no repetirLink/81/50porrutina. C0/C1/30s/5s/fuentevencida/readinessfalseinvariables. STOPfinalpara reviewerfrescoRoot, noautoiniciarTask2.
