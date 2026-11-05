@@ -1,0 +1,32 @@
+name: AFW finite closed prearm Task1 temporary qualifier
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - .github/workflows/afw-finite-closed-prearm-task1-qualifier.yml
+      - lib/mcp-qa-finite-prearm-profile.mjs
+      - lib/mcp-qa-finite-policy-configuration.mjs
+      - test/mcp-qa-finite-prearm-profile.test.mjs
+      - test/mcp-qa-finite-policy-configuration.test.mjs
+      - test/fixtures/finite-policy-configuration-data.mjs
+permissions:
+  contents: read
+jobs:
+  pure-data:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Pure closed prearm causal tests
+        run: node --test test/mcp-qa-finite-prearm-profile.test.mjs test/mcp-qa-finite-policy-configuration.test.mjs
+      - name: Existing strict finite profile tests
+        run: node --test test/mcp-qa-finite-profile.test.mjs
+      - name: Scoped ESLint
+        run: ./node_modules/.bin/eslint lib/mcp-qa-finite-prearm-profile.mjs lib/mcp-qa-finite-policy-configuration.mjs test/mcp-qa-finite-prearm-profile.test.mjs test/mcp-qa-finite-policy-configuration.test.mjs test/fixtures/finite-policy-configuration-data.mjs
