@@ -34,3 +34,10 @@ Link no completa segunda publicación notices, third CLOSED/finite_prearm, setup
 OpenAI18196140 respondió5nov18:59UTC sin causa/solución verificada; proxy nativo actual no ensayado, Actions de lectura pública no prueba recuperación del proxy. Consulta CF posterior3nov sólo devolvió cierre administrativo Cron02375364 y dos encuestas; no reparación nueva Container/Access en ese intervalo. Notas saneadas progress/2026-11-05-openai-proxy-support-followup.es.md y cloudflare-support-check.es.md.
 
 Solicitud documental de Chavo recibió ACK/REPLY en canal privado autorizado; no URLs/IDs privados en repo público ni enviar soporte por inferencia. No nuevos correos/casos, encuestas, pruebas o monitores en este trabajo.
+
+
+## Actualización 2026-11-05 22:16:14 UTC
+
+Root leyó run42115921441: GET/regresiones81PASS+lint4; POST49PASS/1FAIL inicial antesflujo/casocookie,causa noestablecida; Linkparcial31=28PASS/3FAIL sin resumen,jobcancelado15min/procesoabierto. Fallos Link: hook TX bloquea controlRPC mismoDO, INSERTbaselineincorrecto y wrapperretirada sinrun. Ledger Link conserva primarias/digests/ruling. Writer implement_notice_link reanudado mismoagente: controlSYN DATA-only fijo enfixtureGET, probar visibilidadreal, deadline original5s/cleanup/Promisesnativas; focalesafectados+principal+lint y luegoLink31terminal, sin repetirGET81/POST50. No nuevo writer ni runtime.
+
+Root leyó completo segundo audit notices-publication-source-audit.es.md (blob68c648d3524ecd8604fc658fda468806d65140ce). INACTIVE: config-only actual hereda monitoring ordinario; montaje finite y fixedsource/rollback/efectos propios pendientes de decisión antes spec. No retirar byte/hashguards para hacer pasar un montaje; no próximaunidadactivada.

@@ -46,3 +46,22 @@ Candidato ampliado `fe18ba913a66f63f23468b455f5ec64bf9de6ec4`, árbol `06098fadd
 Root leyó informe11972chars `reports/2026-11-05-finite-native-notices-publication-design.es.md`, designerHEAD `fc3512d14cbfaf8b4cc62ed062cac06dc5769397`, blob `a03a1ab8815521402f70e23e344365e15047062c`. INACTIVE. Existing stage notices NO exige Link; finite sí. Aprobación actual, configuración y avisos son permisos diferentes. No usar aprobación durable para reconstruir admisión que exige la misma lease viva.
 
 Root pidió sólo segundo informe focal `reports/2026-11-05-finite-native-notices-publication-source-audit.es.md` para precisar fixedsource/candidate/rollback/engine y viabilidad de aprobación→publicación completa antes de elegir puente GET-only o unidad mayor. Misma rama docs del diseñador y pin953 inmutable, sin WIP Link, spec/plan, implementación, pruebas o provider. Ninguna unidad siguiente activada.
+
+
+## Corpus completo, fallo de harness y ruling Root (2026-11-05 22:16:14 UTC)
+
+HEAD fuente fe18ba913a66f63f23468b455f5ec64bf9de6ec4, run42115921441/intento1. Root leyó primarias y ZIPs seleccionados en memoria sin archivos locales; no recompiló aparte.
+
+- GET/regresiones job127555404157 SUCCESS:37GET+18pure+16phase+6SDK+4D04=81PASS,0FAIL/skip y lint4. Artefacto13457061618, digest c1bfbdc4c0237017e4de6cf284dc51fc09500a440ae36a1aa5c271c33916a8bb. No repetir ese grupo sin cambio relevante.
+- POST job127555403763 FAILURE:49PASS/1FAIL/0skip de50. Único fallo cookie ajena malformada en sdkReadCurrent inicial, antes del flujo authorize/monitoring; causa aún desconocida, sin prueba de defecto cookie/Link. Artefacto13455977825, digest d81f083f6a89cc6a90bcd68a1c7bb7292e78ef6748d3edf9f166a0d129406e16.
+- Link job127555403391 CANCELLED por15min (21:48:25→22:03:25UTC):TAP31 emitidos=28PASS/3FAIL, sin resumen terminal y proceso abierto. Artefacto13456723052, digest ef29c5d63f09bc66107e7527531904a8f9f3e0a56c281f1e25fb2c0c3d785c82. No describirlo como suite terminada.
+
+Link#12 retuvo callback de storage.transaction mientras read/release/probe eran RPC al mismo DO: input gate nativo bloqueó controles y provocó reset blockConcurrencyWhile a30s. #24 comparó INSERT0 pese a baselineINSERT1 existente; #29 wrapper D1 first/all omitió run requerido por retirada ordinaria. #13/14/15 heldcommit/sync/readback y demás negativas documentadas permanecen primarias válidas; no borrar fallos con un retry.
+
+Ruling Root: mismo writer reanudado mediante followup_task, hook SYN DATA-only fijo en fetch existente /fixture/notice-link-control para read/reset/release, sin stub/storage/RPC/autoridad/DTO desde control y sin nuevos Worker/binding/world/paths. Primero comprobar visibilidad DATA real; nunca presumir sharedrealm. El productor original resuelve sólo su espera SYN, conserva Promise/result nativos y deadline child original<=5s; cleanup garantizado. Mientras TX inputgate está cerrado, probe mismoDO puede quedar en cola: es bloqueo nativo, no denegación aplicativa; ámbito se prueba también en heldcommit/sync/readback. Si no comparteDATA, volver con evidencia/propuesta sin simular.
+
+Corregir #24 respecto baseline real; #29 restaurar métodos nativos antes retirada real. Fortalecer principal3grants/7DDL; una sola ejecución focal del POST inicial fallido, conservando causa desconocida si no reproduce. Primero casos afectados+principal+lint; sólo después Link31 terminal nueva por hook/fallos/timeout, sin repetir grupos verdes POST/GET. Retirar qualifier antes reporte completo/revisión fresca. Sin runtime ni nueva fase; operationalReadiness/completePackage/PCoff=false.
+
+Grafo Root leído del principal parcial vs POSTe153: QA325inputs,0paths añadidos/retirados; sólo phase-context y stdin cambian, aristas1802→1803 sin nueva adyacencia única. QA1801609→1815768bytes. M303inputs/886aristas/1686818bytes y todos hashes idénticos. No compilación adicional de métricas.
+
+Segundo informe preliminar notices-publication-source-audit leído completo por Root: HEAD949418367234d44e7d633be87b12a20702a57d8b/blob68c648d3524ecd8604fc658fda468806d65140ce,11991chars. INACTIVE. Config-only no monta finite porque finite.mjs hereda monitoring ordinario; approval→publication requiere misma lease viva, fixedsource y transición léxica de efectos propios. Preservar bytes/hash, no aflojar guard para acomodar scripts. Falta decidir composición/mount inicial cerrado/rollback antes spec; nada siguiente activado.
