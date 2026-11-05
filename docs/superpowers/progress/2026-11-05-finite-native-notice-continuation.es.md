@@ -1,0 +1,11 @@
+# AFW — continuidad vigente del circuito nativo
+
+5nov2026. Trabajo reanudado por Gabriel, sólo proyectoAFW. Repositorio tokenizartinfo-ops/agent-friendly-web, rama fuente feat/finite-native-cleanup-20261101; docs docs/finite-pcoff-continuation-20261103. Todo código/pruebas enGitHub/ActionsSYN,sinclones/deps/buildlocal ni runtimeCF.
+
+GET completo aceptado SOURCEconfindingMinorP3diferido: codee71,reviewedcfe8,aceptaciónf68797ca0ad083aa4e90be87c83b5f60f2aa691b/tree8f07c7e2. Registroreviews/2026-11-05-finite-native-notice-get.es.md. 33native/18pure/16phase/SDK5+1/D04token4+2reforzados/lint;P3cookiesnocorregidoaún,obligatorioenPOSTantesmount. NorepetirGET/D04/store/journal/fanoutaceptadosporresumir.
+
+ACTUAL: TaskPOSTconsent,plan/spec/briefpreflight2026-11-05-finite-native-notice-consent,exécutionBASE2f96acb45ec5477d559f85070aa438d2e2e00822/treece6242321aa5177f5828ec592a7bb00d6d6cd91a. Writerúnicoimplement_notice_consentactivo;actualprimercheckpointaa6b1cd. RootleyóREDsrun42104033222/jobs127514019845+127514019716. Falta implementación/GREEN/refuerzoP3+correlaciónresealed/proporcionales/IO/graph/report+freshreview. NuevoScope10paths+report+qualifierconsent<=2jobs15min,secretsnone; no otrafuentewriter. Ledgerprogress/2026-11-05-finite-native-notice-consent.es.md.
+
+DiseñoPOSTreconciliado61b8bb4enramadesigner; ya copiadoaBASE2f96,headersINACTIVEcedenúnicamenteadespachoRootexacto. Diseñador estudiaLink-onlyfuturo:ninguna phase/permiso/efecto operativo habilitado. No asumir estadoactual de despliegues desde última primariareal3nov. Sourceceiling3nov02:59Zvencido;C0C1/30s5soriginales. NoCFmutation/alias/Entry/DDLreal/OAuth/OTP/tokens/permisos/cron/Containers/Max/main/merge/mount/ARM. operationalReadiness=false;completePackage=false;PCoff=false.
+
+Soportes: OpenAI18196140respondió5nov18:59UTCsincausa/soluciónverificada;proxyactualnoensayado,noinferirrecuperacióndesdeActions. ConsultaCFafter3novsólodevolviócierreadministrativoCron02375364(3nov)+2encuestas; no indicacióntécnicanuevaContainer/Accesseneseintervalo. Sinresponder/crearcasos/seguirlinks. Chavo canalprivadoyaacusado/respondidoensolicituddecriteriodocumental;noURLsprivadasenrepo público,nocambioFCO. Guardadossaneadosprogress/2026-11-05-openai-proxy-support-followup.es.md ycloudflare-support-check.es.md.
