@@ -38,7 +38,7 @@ export function extendFiniteOwnerNoticeGet(entry){
     return {bind:(...args)=>{
      const bound=statement.bind(...args),run=async kind=>{
       entry.method=kind;entry.at=Date.now();
-      const ticketInsert=sql.includes('INSERT INTO dossier_monitoring_owner_tickets');
+      const ticketInsert=sql.includes('INSERT INTO dossier_monitoring_owner_tickets')||sql.includes('INSERT INTO dossier_monitoring_consent_events');
       if(ticketInsert){state.sqlEnteredAt=Date.now();if(this.noticeMode==='queue'||this.noticeMode==='hold-before')await this.noticeGate('before-sql');}
       const actual=Reflect.apply(bound[kind],bound,[]),result=await actual;entry.doneAt=Date.now();
       if(ticketInsert){state.resolution={at:Date.now(),row:result!==null};if(this.noticeMode==='hold-after')await this.noticeGate('after-sql');if(this.noticeMode==='lost-sql')throw Error('SYN NEGATIVE actual SQL committed, result lost');}
@@ -107,6 +107,7 @@ export function extendFiniteOwnerNoticeGet(entry){
 
 // Read-only instrumentation of exact lexical source sites. SYN gates never supply authority.
 export function instrumentFiniteNoticeGet(source){
+ const postAt=source.indexOf('/** UNMOUNTED fixed human POST.'),post=postAt<0?'':source.slice(postAt);if(postAt>=0)source=source.slice(0,postAt);
  const marker='/** UNMOUNTED fixed GET.',at=source.indexOf(marker);
  if(at<0)throw Error('SYN notice handler marker');
  let head=source.slice(0,at),body=source.slice(at);
@@ -124,6 +125,18 @@ export function instrumentFiniteNoticeGet(source){
  replace("   check();\n   const maxAge=","   globalThis.__noticeState?.trace.push({position:'complete',at:Date.now()});check();\n   const maxAge=");
 
  replace("if(!verified.ok)fail();identity=verified.identity;clock.narrow(identity.expiresAt);","if(!verified.ok)fail();identity=verified.identity;if(globalThis.__noticeOwner?.noticeMode==='expire-access')await wait(globalThis.__noticeOwner.noticeGate('access'));clock.narrow(identity.expiresAt);");
- return head+body;
+ let consent=post;
+ const postReplace=(needle,next)=>{if(consent.split(needle).length!==2)throw Error('SYN consent marker changed: '+needle);consent=consent.replace(needle,next);};
+ if(consent){
+  postReplace("async function recheckConsentOwned(){\n    check();","async function recheckConsentOwned(){\n    globalThis.__noticeState?.trace.push({position,at:Date.now(),stage:'before'});check();");
+  postReplace("if(canonical(pair.first)!==canonical(expected)||canonical(pair.second)!==canonical(expected))fail();","if(canonical(pair.first)!==canonical(expected)||canonical(pair.second)!==canonical(expected))fail();globalThis.__noticeState?.trace.push({position,at:Date.now(),stage:'after'});");
+  postReplace("context=qualifyNoticeConsentBaseline(baseline);","context=qualifyNoticeConsentBaseline(baseline);globalThis.__noticeState?.trace.push({position:'baseline-observed',at:Date.now()});");
+  postReplace("position='ticket-observed';await recheckConsentOwned();","position='ticket-observed';if(globalThis.__noticeOwner?.noticeMode==='before-send')await wait(globalThis.__noticeOwner.noticeGate('before-send'));await recheckConsentOwned();");
+  postReplace("ownSend=send;expected.records.notice.operations.consent.send=","if(globalThis.__noticeOwner?.noticeMode==='lost-send')throw Error('SYN NEGATIVE consent SEND recorded, result lost');ownSend=send;expected.records.notice.operations.consent.send=");
+  postReplace("expected.records.notice.operations.consent.ack=structuredClone(ack);","if(globalThis.__noticeOwner?.noticeMode==='lost-ack')throw Error('SYN NEGATIVE consent ACK recorded, result lost');expected.records.notice.operations.consent.ack=structuredClone(ack);");
+  postReplace("   const html=","   globalThis.__noticeState?.trace.push({position:'complete',at:Date.now()});const html=");
+ }
+ head=head.replace("if(globalThis.__noticeOwner?.noticeMode==='drift'&&globalThis.__noticeState?.trace.at(-1)?.position==='ticket-sql-resolved')await globalThis.__noticeOwner.noticeGate('between-own');","if((globalThis.__noticeOwner?.noticeMode==='drift'&&globalThis.__noticeState?.trace.at(-1)?.position==='ticket-sql-resolved')||(globalThis.__noticeOwner?.noticeMode==='consent-drift'&&globalThis.__noticeState?.trace.at(-1)?.position==='consent-sql-resolved'))await globalThis.__noticeOwner.noticeGate('between-own');");
+ return head+body+consent;
 }
 
