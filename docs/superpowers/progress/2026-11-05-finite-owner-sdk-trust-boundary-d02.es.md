@@ -1,20 +1,21 @@
-# SDD ledger — plan: docs/superpowers/plans/2026-11-04-finite-owner-sdk-trust-boundary.md
+# D0.2 — native pending-prefix RED reached; integration ACTIVE
 
-# CHECKPOINT VIGENTE — D0.2 integrado ACTIVO, 5nov2026
+5nov2026. Plan docs/superpowers/plans/2026-11-04-finite-owner-sdk-trust-boundary.md plus owned-recheckamendment. Ownerrequestedcontinuouswork; no currentshutdownrequest. SOLEproductwriterimplement_qa_sdk_d02(Astrahigh), exactexecutionBASEf2c11705cf4f44c66d158444679640e727ae7de9 onfeat/finite-native-cleanup-20261101. Reporttarget docs/superpowers/reports/2026-11-05-finite-owner-sdk-trust-boundary-d02.md. Rootonlydocsbranch. SourceHEADadvancesonlywriter; readrefbeforeresume, don'tassume2e6latest.
 
-Owner reanudó con «continua» el5nov2026; cierre nocturno4nov queda como historia. Continuidad verificada enGitHub antesdeactivar: product04e8bb0f77cb78b27c219b9fd703641018e8df12; docs45807a924fa59b9bef1d29c8aa40ad3ee02d028b. No tareas anteriores repetidas.
+## Latest verified milestone
 
-ÚNICOwriterproducto implement_qa_sdk_d02(Astrahigh), BASEf2c11705cf4f44c66d158444679640e727ae7de9, branchfeat/finite-native-cleanup-20261101. Briefdocs/superpowers/briefs/2026-11-05-finite-owner-sdk-trust-boundary-d02.md; reporte esperado docs/superpowers/reports/2026-11-05-finite-owner-sdk-trust-boundary-d02.md. D0.2actualSDKQA+same-moduleowned-rechecktogether, no secondwriter/scaffolding-onlyacceptance. RootpreflightenBASE inclcontradicciónREDyseparacióngraphfixture/standard. RootaceptaD0.1reviewcopiedaBASE. D0.3tokencompat/nuevosavisos/fullmount/actualalias/provider/credential/Entry permaneceninactivos.
+NativeRED2e6cd00b683ff790e12e6b0104637b8006607372; Actions42022171581/job127227358395/attempt1:lintPASS,2helperPASS1nativeFAIL. Rootreadactualoutput: provisional/finalQAworkersbothqa-sdk, nativeidFromNameoriginal/candidatetrue; originalEntry reachesmaterial_recorded, actualfirstphasecontextread_consent, realSDKparser/clientlookup, durable sdk_begin:send. Finalexpected200failsactual503atcurrentstrictown-SENDrecheck. ThisisgenuinebehavioralRED. **No actualbeginConsentdispatch, Unit2areservation/grant orheldSDKpositiveprovedyet.**
 
-Preservarsamestore/samechildconsumptionwitness, actualSDKpromise/rawbearerlimit/lateuncertainty, first-primarySELECToriginalUUID, strictreaderthree-keyDTO, dosobservacionesconreceiptguards, clocksoriginales, Mbindings/historicalpins. Nocrossmoduleframes/allowPending/sourcecallbacks/transportedSDKclaims/newretentionadmission. Un SOLOengineobservaciónenphase-context; newfixedhandler/receiverunmounted. PropuestaQAaliasSOURCEalreadyexists, acceso real no instalado.
+WritercontinuesONEintegratedsame-moduleprivateobservationengine+handler, GET/POSTactualSDK/fence/samestorechildwitness, trueowneddelta+strictgeneralreader andallbriefhostilecases. Do NOTacceptpartialGET/helpers orredascomplete; D0.2reportfullBASEdiff/actualGREEN/regressions/graph+freshreviewstillrequired. No parallelwriter/revieweruntilreport. D0.3borradorINACTIVEunderbriefs, needsacceptedD0.2BASE+realfixtureAPIbeforeactivation. No duplicatesofacceptedD0.1/pureprearm/phase/signalunits.
 
-GitHubApp+Actionscredentialfreecloudonly; sinclone/build/npm/deps/localtests. WriterCASyqualifierpropio; rootcheckpoint/review/nextbriefseparados. CausalREDyGREEN+afectadas+actualcompilerconcounttodasinvocaciones, fixturesSYNexplicit. No runtime/OTP/tokens/DDL/Max/main/merge. operationalReadiness=false;completePackage=false;PCoff=false. Sourceceiling3nov02:59UTCexpirado, norenovaciónanticipada. No se espera exclusivamenteCloudflare; falta integración fuente/CI/aceptaciónremota antesdeUNAocurrenciacoordinadaPCoff conARMgenuinoantesdeapagar.
+## Prior diagnosed fixture issues, not SDK/product RED
 
-**Estado de tareas anteriores:** D0.1completo04e8bb0f/143PASS+compiler1PASS; pureprearm9fd0ff65approved; factualphasefe0af360fixapproved; signalcompatibility220b5bc3approved. No redispatch. Últimaprimariaremota3novnoasumirvigencia. Estechatlocalnoesguardiacloud.
+- HelperRED1c70547f/42018617906 job1272153650390P2Fmissingfunctions; helperGREENa5000b3c/42018945636 job1272165044112PASS. Rootreadboth.
+- Firstnative8bae8e2b/42020190003 job127220700276:esbuildSDKresolutionfail+leakedMF; boundedjobcancelled. Infraonly, notcausalnativeRED.
+- d3f70ce7/42020505691 job127221776565:outertimeout180s+guardedawaiteddispose revealed neutralplatformignoresmain. MinimalfixturemainFields:['module','main']fix84a0f679; standardcompileralreadycorrect,unchangedSDKversion/import.
+- 84a0/42020897378 job127223094244:SDKcompilesQA/MbutMFconfigundefinedbeforestartup. CorrectwholemultiworkerconvertV4MiniflareOptions+senderfirstdispatchFetchpatternfromacceptedconduit.
+- ac45d433/42021095932 job127223766869:boots/disposesbutEntryadmin_pending. Diagnostics473a2583/42021444854job127224935968pointedreadPrivateQaFiniteHistoricalSource/historical_slots. e87a977e/42021889457job127226415314provedprovisionalunnamed/finalqa-sdkcausedbothnativeIDsfalse. Rootreadactualdiag; no pins/history/sourceweakened. AllowedminimalconsistentQAworkernameonlyphase-context-sdkfixturemode, olddefaultunchanged. Result2e6IDsbothtrue+intendednativeREDabove.
 
-**Los checkpoints debajo son HISTORIA preservada; antiguos ACTIVE/STOP nocturnos no cambian esta asignación.**
+Rulingpurelinkfactsextractionfc823057: strictDATAconstructors/qualifiersreusedoldlinkers+fixedhandler; noDate.now/randomUUID/I/O/nativeobjects inhelpers. ActualnewGrantLinkACKonlyallowsfirstpairallocation; no row/hashreplacementforwitness. No injectedsourcecallback, privateframeexport, allowPending, SDKreportpath or ordinaryunfencedfallback. NewSDKjournalmax8/read9,16KiBrecords. RootexplicitlywarnedheldSDKprobesmustretainactualnativeKV/SDK, positiveuninstrumentedseparate, no fakepositive/methoddriftmasqueradingpendingproof. Transientcode/cookie/redirectunlogged, redirectsmanual/destinationssynthetic.
 
----
-
-
-Próximo: esperar reporte del writer, revisar evidencia primaria y fullBASE..HEADdiff, freshindependentreview; resolverhallazgosporelfixloop. TrasaceptaciónD0.2, D0.3pruebatokencompatseactivaconBASEexactoysuownbrief, sinfaltodeREDmanufacturado. No activarD0.3antes. Ultimaactualización5nov11:21UTC.
+All testscloudcredentialfreeGitHubActions; noPCclone/build/npm/deps. FixtureAccess/provider/custody/material/expiredsourceceiling substitutionexplicitSYN,nativeSQLclockreal. No remoteprovider/runtime/aliasinstallation/publicmount/Entry/OTP/token/DDL/cron/Max/main/mergeeffects. operationalReadiness=false;completePackage=false;PCoff=false. No actualPCofforautonomousguardclaim. ContinueuntilD0.2acceptanceandchainD0.3; no needuserinterventionnow.
