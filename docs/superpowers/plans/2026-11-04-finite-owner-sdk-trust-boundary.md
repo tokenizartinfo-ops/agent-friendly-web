@@ -1,4 +1,4 @@
-# Finite Owner SDK Trust Boundary Implementation Plan — D0.1 source ACTIVE only
+# Finite Owner SDK Trust Boundary Implementation Plan — D0.2 source ACTIVE only
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans task-by-task. Root preserves the standing one-product-writer method. This plan is DESIGN ONLY; source work begins only after root accepts D0 and dispatches a task. Original issuer/notice A/B remain inactive until integrated.
 
@@ -158,3 +158,8 @@ Root selects option2 as a technical architecture choice under the owner's delega
 - Reuse the eventually accepted factual-reader fixture and its guarded initialization. Do not copy old220b5bc missing ordinary schema, rename/drop historical grant tables or patch production SQL time. The actual fixture-only expired-ceiling substitution remains explicitly SYN and cannot prove runtime/source eligibility.
 
 Root preflight: the original M→QA SDK report dependency is removed by lexical QA execution, not 'authenticated' by serializable metadata. Separate alias access/profile lineage, real local issuer behavior and token compatibility remain independently rejectable tasks. No unresolved dependency is silently renamed complete. Full mount/provider-publication/cleanup/PCoff stays separate.
+
+
+## Root D0.2 SOURCE activation — 5 November2026
+
+Latestcontainingcommitactivates ONLYD0.2plusowned-recheckamendment afterD0.1acceptance04e8bb0f. ActualexecutionBASEsuppliedindispatch. HistoricalD0.1-onlyactivation/unassignedwordingaboveisdatedhistory. D0.3/notices/fullmount/actualbinding/provider/credential/Entry remainINACTIVE. SourceSDKtestsareonlysyntheticnativequalification. Briefdocs/superpowers/briefs/2026-11-05-finite-owner-sdk-trust-boundary-d02.md governsrootrulings andCASsinglewriter. No operationalreadiness.

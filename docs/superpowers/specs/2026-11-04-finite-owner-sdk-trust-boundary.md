@@ -166,3 +166,8 @@ Public SDK import feasibility was verified against v1.2.1 package entrypoint (pa
 ## Root D0.1 SOURCE activation
 
 Currentcontainingcommitactivates ONLYD0.1after independentlyacceptedpureprearmTask1(report9fd0ff65) andfirstphasecontext(reportfe0af360). ActualBASEsuppliedindispatch. D0.2/D0.3/nativeissuer/notices/fullmount/cleanup andALLactualKVaccess/publication remainINACTIVE. ScopedGitHubsourceandcredential-freeActionsbuild/testareauthorizedforthisunit, notprovideroperations. DeclareexactQAaliasandstrictmappingDATA; preserveM/historicals/currentfactualreadercontracts. No newSDKcall/sourcebroker isimplementedhere. Root's laterowned-recheckdesignsupplementamendsD0.2only; donotimplementtheoldMresult-reportsketch.
+
+
+## Root D0.2 SOURCE activation — 5 November2026
+
+Latestcontainingcommitactivates ONLYD0.2plusowned-recheckamendment afterD0.1acceptance04e8bb0f. ActualexecutionBASEsuppliedindispatch. HistoricalD0.1-onlyactivation/unassignedwordingaboveisdatedhistory. D0.3/notices/fullmount/actualbinding/provider/credential/Entry remainINACTIVE. SourceSDKtestsareonlysyntheticnativequalification. Briefdocs/superpowers/briefs/2026-11-05-finite-owner-sdk-trust-boundary-d02.md governsrootrulings andCASsinglewriter. No operationalreadiness.
