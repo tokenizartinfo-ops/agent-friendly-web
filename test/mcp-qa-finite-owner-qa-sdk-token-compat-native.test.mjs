@@ -163,6 +163,7 @@ test('held actual SDK completion settles late after original terminal fence and 
  const form=await consent(f);await f.stub.sdkConfigure('hold-put');const pending=f.post(form);
  let held=false;for(let n=0;n<1000;n++){const s=await plain(f.stub.sdkObservation());if(s.held){held=true;assert(s.rows.some(([k])=>k.endsWith('sdk_complete:send')));assert(!s.rows.some(([k])=>k.endsWith('sdk_complete:observed')));break;}await new Promise(r=>setTimeout(r,20));}
  assert.equal(held,true);const app=await plain(f.stub.sdkGrant(form.identity.grantId));assert(app);assert.equal(app.revoked_at,'');
+ assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable','active original grant with actual sdk_complete SEND and no OBSERVED remains pending before reduction/release');
  const reduced=await plain(f.stub.sdkReduceOriginal());assert.equal(reduced.activeAfterFence,true);assert.equal(reduced.fence,'fenced');assert.equal(reduced.reduction,'revoked');
  await f.stub.sdkReleaseHeld();const response=await pending;assert.equal(response.status,503);await response.body?.cancel();
  let code;for(let n=0;n<100;n++){code=await f.stub.sdkTakeLateCode();if(code)break;await new Promise(r=>setTimeout(r,20));}
@@ -226,4 +227,75 @@ test('D04 actual exchange retains factual read_consent and immutable grant ACK',
  const {x,before,original}=await d04Exchanged(f);
  const after=await d04Read(f,x);assert.deepEqual(after,before);
  assert.deepEqual(await d04Journals(f),original.rows,'reader also leaves original raw ACK/recordHash and every DO journal unchanged');
+}));
+
+/** SYN negative-only native changes follow the genuine QA -> M -> MCP flow.
+ * A stable valid timestamp is current field data, never new exchange authority. */
+for(const fault of ['blob-type','numeric-text','invalid-text','noncanonical','future','before-created','expiry','after-expiry'])test('D04 actual exchange then SYN invalid exchanged_at '+fault,()=>world(async f=>{
+ const {x,original,current}=await d04Exchanged(f);await d04Read(f,x);
+ const created=Date.parse(current.created_at),expiry=Date.parse(current.expires_at),now=Date.now();
+ let value;
+ if(fault==='blob-type')value=new Uint8Array([1,2,3]);
+ if(fault==='numeric-text')value=42; // SQLite TEXT affinity; invalid canonical time after native storage.
+ if(fault==='invalid-text')value='SYN-invalid-time';
+ if(fault==='noncanonical')value=current.exchanged_at.replace('.'+current.exchanged_at.split('.')[1],'Z');
+ if(fault==='future'){assert(now+60000<expiry);value=new Date(now+60000).toISOString();}
+ if(fault==='before-created'){assert(created-1<now&&created-1<expiry);value=new Date(created-1).toISOString();}
+ if(fault==='expiry')value=current.expires_at;
+ if(fault==='after-expiry')value=new Date(expiry+1).toISOString();
+ // Under this active grant, expiry/expiry+1 also fail no-future; no predicate isolation claimed.
+ assert(now<expiry);
+ await f.db.prepare('UPDATE delegated_access_grants SET exchanged_at=? WHERE id=?').bind(value,x.app.id).run();
+ if(fault==='blob-type')assert.equal(typeof (await plain(f.stub.sdkGrant(x.app.id))).exchanged_at,'object');
+ assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
+ assert.deepEqual(await d04Journals(f),original.rows);
+}));
+
+test('D04 actual exchange then SYN inclusive created_at remains factual only',()=>world(async f=>{
+ const {x,before,original,current}=await d04Exchanged(f);await d04Read(f,x);
+ assert(Date.parse(current.created_at)<=Date.now()&&Date.parse(current.created_at)<Date.parse(current.expires_at));
+ await f.db.prepare('UPDATE delegated_access_grants SET exchanged_at=? WHERE id=?').bind(current.created_at,x.app.id).run();
+ assert.deepEqual(await d04Read(f,x),before);
+ assert.deepEqual(await d04Journals(f),original.rows);
+}));
+
+for(const field of ['id','user_id','client_id','project_id','resource','scopes_json','created_at','expires_at','revoked_at','current-owner','current-revision'])test('D04 actual exchange then SYN immutable original '+field+' denies',()=>world(async f=>{
+ const {x,original,current}=await d04Exchanged(f);await d04Read(f,x);
+ const values={id:'eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee',user_id:'SYN-foreign',client_id:'SYN-foreign',project_id:'SYN-foreign',resource:'https://foreign.example/mcp',scopes_json:'["afw:project:read","afw:evidence:read"]',revoked_at:new Date().toISOString()};
+ if(field==='created_at'){
+  const shifted=Date.parse(current.created_at)+1;
+  assert(shifted<=Date.parse(current.exchanged_at)&&shifted<=Date.now()&&shifted<Date.parse(current.expires_at));
+  values.created_at=new Date(shifted).toISOString();
+ }
+ if(field==='expires_at'){
+  const shifted=Date.parse(current.expires_at)-1;
+  assert(shifted>Date.now()&&shifted>Date.parse(current.exchanged_at)&&shifted>Date.parse(current.created_at));
+  values.expires_at=new Date(shifted).toISOString();
+ }
+ if(field==='current-owner')await f.db.prepare('UPDATE site_projects SET user_id=? WHERE id=?').bind('SYN-foreign',x.app.project_id).run();
+ else if(field==='current-revision')await f.db.prepare('UPDATE site_projects SET revision=revision+1 WHERE id=?').bind(x.app.project_id).run();
+ else{
+  // The closed list above is test-controlled; all writes target the actual original UUID.
+  await f.db.prepare('UPDATE delegated_access_grants SET '+field+'=? WHERE id=?').bind(values[field],x.app.id).run();
+  if(field==='id')assert.equal(await plain(f.stub.sdkGrant(x.app.id)),null,'original UUID absent; another row cannot substitute');
+ }
+ assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
+ assert.deepEqual(await d04Journals(f),original.rows);
+}));
+
+test('D04 actual exchange then SYN valid native timestamp drift at observation two denies',()=>world(async f=>{
+ const {x,original,current}=await d04Exchanged(f);await d04Read(f,x);
+ let different=current.created_at;
+ if(different===current.exchanged_at){
+  const next=Date.parse(current.exchanged_at)+1;
+  while(Date.now()<next)await new Promise(resolve=>setTimeout(resolve,1));
+  different=new Date(next).toISOString();
+ }
+ assert.notEqual(different,current.exchanged_at);
+ assert(Date.parse(different)>=Date.parse(current.created_at)&&Date.parse(different)<=Date.now()&&Date.parse(different)<Date.parse(current.expires_at));
+ f.phaseObservation=0;f.phaseDrift='exchange';f.exchangeDrift={grantId:x.app.id,exchangedAt:different};
+ assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');
+ assert.equal(f.phaseObservation,2,'existing second pointer observation performed fixed native UPDATE');
+ assert.equal((await plain(f.stub.sdkGrant(x.app.id))).exchanged_at,different);
+ assert.deepEqual(await d04Journals(f),original.rows);
 }));
