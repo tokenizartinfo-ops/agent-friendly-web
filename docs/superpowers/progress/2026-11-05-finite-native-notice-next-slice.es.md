@@ -31,3 +31,8 @@ RootverificóCAS/readbackBASEdc4edafc0b5e4ba440cd32a21dd3dd58024e811a/tree91d023
 ## DETENIDO por pedido del owner — 5nov2026
 
 NO Task1complete. Owner apaga PC yretomamástarde. Writer terminó/checkpoint a0bd9d68653cc18313490c842d7d884c6184fa18/treec526aaa70236dd1dd0fc9b012fa7e23e4f65f68f, informeparcial33230char+draftnoverificado. Código2f2cbe4d;3runs terminales/10fixturebuilds0std. InventorybásicoPASS,RED1yRED2válidos; GETreal/adversariales/métricas/regresiones/lint/reviewpendientes. Qualifierausente, rootref/report+workflowrunsreadbackverificados. Sin trabajoautomáticohastaownerresume. Leerprogress/2026-11-05-shutdown-checkpoint.es.md y conservarBASEoriginaldc4para futurarevisión; noblindreruns.
+
+
+## REANUDADO por el owner — 5nov2026 19:21 UTC
+
+Gabriel pidió «continua con los bloques» después del cierre. La pausa queda revocada sólo para el trabajo autorizado. Root verificó rama fuente todavía a0bd9d68653cc18313490c842d7d884c6184fa18/treec526aaa70236dd1dd0fc9b012fa7e23e4f65f68f y docs699180ed. Se reanuda el MISMO implement_notice_get mediante followup, BASE de revisión originaldc4edaf, sin repetirRED1/RED2/aceptados. Qualifier temporal GET reautorizado con mismo scope, seguridad y retiro final; ningún cambio de budgets, custodia o runtime. Diseño POST continúa sólo documental en rama separada desde82f9d340, INACTIVE hastaGETaceptado/reconciliación/preflight. No otro writerfuente. operationalReadiness=false;completePackage=false;PCoff=false.
