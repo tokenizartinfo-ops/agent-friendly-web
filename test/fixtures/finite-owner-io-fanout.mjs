@@ -49,6 +49,9 @@ const ioEnd=row=>{if(!row)return;row.endedAt=Date.now();row.endMono=performance.
  once("const joined=await retain(Promise.allSettled([qaWork,mWork]));","const joined=await retain(Promise.allSettled([qaWork,mWork]));await ioCheckpoint('joined-before-consumption');");
  once("const observed=await primary();","const observed=await primary();await ioCheckpoint('after-first');");
  once("const qualified=await qualify(first,observed),again=await primary(),second=await facts(),secondQualified=await qualify(second,again);","const qualified=await qualify(first,observed);await ioCheckpoint('between');const again=await primary(),second=await facts(),secondQualified=await qualify(second,again);");
+
+ once("const result=await retain(Reflect.apply(first,bound,[]));current(l);if(session.prepare!==method)fail();return result;","if(ioState())ioState().factualFirst=(ioState().factualFirst??0)+1;const result=await retain(Reflect.apply(first,bound,[]));current(l);if(session.prepare!==method)fail();return result;");
+ once("const actual=retain(Reflect.apply(all,bound,[])),result=await actual;current(l);","if(ioState())ioState().factualAll=(ioState().factualAll??0)+1;const actual=retain(Reflect.apply(all,bound,[])),result=await actual;current(l);");
  return source+noticeSuffix;
 }
 export function extendFiniteOwnerIo(entry){
@@ -76,7 +79,7 @@ export function extendFiniteOwnerIo(entry){
   const c=s.child,sessions=c?(this.sdkPrimary??[]).slice(c.sqlFirst,c.sqlLast):[];
   let factual=0,preflight=0,writes=0;
   for(const session of sessions){if(session.queries.length===8)preflight+=8;else for(const sql of session.queries){if(sql.startsWith('SELECT '))factual++;else writes++;}}
-  return {rows:s.rows,branches:s.branches,active:s.active,peak:s.peak,snapshots:s.snapshots,child:s.child,same:s.same??null,held:s.held??null,checkpointHeld:s.checkpointHeld??null,parentAborted:s.parentAborted??false,sql:{factual,preflight,writes}};
+  return {factualFirst:s.factualFirst??0,factualAll:s.factualAll??0,rows:s.rows,branches:s.branches,active:s.active,peak:s.peak,snapshots:s.snapshots,child:s.child,same:s.same??null,held:s.held??null,checkpointHeld:s.checkpointHeld??null,parentAborted:s.parentAborted??false,sql:{factual,preflight,writes}};
  }
 `);
 }

@@ -62,7 +62,7 @@ test('GET acknowledged original after actual QA code M token MCP and D04 reader'
  assert.equal(after.tickets.length,1);assert.equal(after.notice.length,3);assert.deepEqual(after.events,[]);
  const records=Object.fromEntries(after.notice.map(([key,value])=>[key.split(':').slice(-2).join(':'),JSON.parse(value)])),ticket=after.tickets[0],handle=/name="handle" value="([^"]+)"/.exec(html)?.[1];assert(handle);
  assert.equal(createHash('sha256').update(handle).digest('hex'),ticket.handle_hash);assert.equal(Object.keys(ticket).length,14);assert.equal(ticket.grant_id,f.identity.grantId);assert.equal(ticket.user_id,f.identity.subject);assert.equal(ticket.expected_sequence,0);assert.equal(ticket.action,'grant');assert.equal(ticket.purpose,'afw.dossier-monitoring-owner.v1');
- assert.equal(records['ticket:ack'].outcome,'applied');assert.equal(records['ticket:ack'].sequence,null);assert(records['ticket:ack'].observedAt<records['ticket:send'].window.deadline);
+ assert.equal(records['ticket:ack'].outcome,'applied');assert.equal(records['ticket:ack'].sequence,null);assert(records['ticket:ack'].observedAt<records['ticket:send'].window.deadline);assert(state.trace.find(v=>v.position==='complete').at<records['ticket:send'].window.deadline);assert(records['ticket:send'].window.deadline-records['ticket:send'].window.startedAt<=5000);
  assert.match(html,/<button type="button" disabled>/);assert.doesNotMatch(html,/<script|<form[^>]+action=/);assert.match(html,/Todavía no diste permiso para avisos/);
  assert.match(response.headers.get('Content-Security-Policy'),/form-action 'none'/);assert.equal(response.headers.get('X-Content-Type-Options'),'nosniff');assert.equal(response.headers.get('Cache-Control'),'no-store');assert.equal(response.headers.get('Referrer-Policy'),'same-origin');assert.match(response.headers.get('Set-Cookie'),/; Path=\/; Secure; HttpOnly; SameSite=Strict; Max-Age=\d+/);
  assert.equal((await plain(f.stub.sdkReadCurrent())).status,'unavailable');assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),f.grant);
@@ -170,11 +170,11 @@ test('queue past original five-second SQL window cannot mutate or ACK',()=>withI
  const after=await plain(f.stub.noticeInspect());assert.equal(after.tickets.length,0);assert.equal(after.notice.some(([key])=>key.endsWith('ticket:ack')),false);
 }));
 test('original CLOSE wins queued INSERT without deleting history or revoking grant',()=>withIssued(async f=>{
- await f.stub.noticeConfigure('hold-before');const pending=notice(f);await gate(f,'before-sql');assert.equal((await plain(f.stub.noticeFence())).status,'applied');await f.stub.noticeReleaseHeld();await deny(await pending);
+ await f.stub.noticeConfigure('hold-before');const pending=notice(f);await gate(f,'before-sql');assert.equal((await plain(f.stub.noticeFence())).status,'fenced');await f.stub.noticeReleaseHeld();await deny(await pending);
  const after=await plain(f.stub.noticeInspect());assert.equal(after.tickets.length,0);assert.equal(after.notice.some(([key])=>key.endsWith('ticket:ack')),false);assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),f.grant);
 }));
 test('ticket wins before original CLOSE; retained ticket and grant survive',()=>withIssued(async f=>{
- const response=await notice(f);assert.equal(response.status,200);await response.body?.cancel();const before=await plain(f.stub.noticeInspect());assert.equal((await plain(f.stub.noticeFence())).status,'applied');
+ const response=await notice(f);assert.equal(response.status,200);await response.body?.cancel();const before=await plain(f.stub.noticeInspect());assert.equal((await plain(f.stub.noticeFence())).status,'fenced');
  assert.deepEqual(await plain(f.stub.noticeInspect()),before);assert.deepEqual(await plain(f.stub.sdkGrant(f.identity.grantId)),f.grant);
 }));
 test('actual Access expires inside GET before any reservation',()=>withIssued(async f=>{
@@ -213,4 +213,17 @@ for(const drift of ['owner','revision','pointer','exchange','journal','ticket'])
  }
  await f.stub.noticeReleaseHeld();await deny(await pending);
  const after=await plain(f.stub.noticeInspect());assert.equal(after.tickets.length,1);assert.equal(after.notice.some(([key])=>key.endsWith('ticket:ack')),false);
+}));
+
+async function ioGate(f,phase){
+ for(let n=0;n<200;n++){const state=await plain(f.stub.ioObservation());if(state.held?.phase===phase)return state;await new Promise(r=>setTimeout(r,10));}
+ assert.fail('actual provider body/cancel gate not reached: '+phase);
+}
+test('GET child expiry retains actual HTTP body and cancel until physical settlement',()=>withIssued(async f=>{
+ await f.stub.ioConfigure({hold:'qa-version'});const began=Date.now(),pending=notice(f);await ioGate(f,'body');
+ await deny(await pending);assert(Date.now()-began>=4900);assert.deepEqual(await plain(f.stub.noticeProbe()),{allowed:false});
+ assert.deepEqual(await ownRows(f),[]);await f.stub.ioRelease('body');const cancelling=await ioGate(f,'cancel');assert.equal(cancelling.active,1);assert.deepEqual(await plain(f.stub.noticeProbe()),{allowed:false});
+ await f.stub.ioRelease('cancel');
+ for(let n=0;n<100;n++){const state=await plain(f.stub.ioObservation());if(state.active===0&&(await plain(f.stub.noticeProbe())).allowed)return;await new Promise(r=>setTimeout(r,10));}
+ assert.fail('actual HTTP body/cancel did not settle in original parent window');
 }));

@@ -31,7 +31,32 @@ jobs:
       - name: Native GET complete file
         env:
           AFW_NOTICE_BUNDLE_CAPTURE: '1'
-        run: node --test test/mcp-qa-finite-owner-notice-get-native.test.mjs
+        run: |
+          set -o pipefail
+          node --test test/mcp-qa-finite-owner-notice-get-native.test.mjs 2>&1 | tee "$RUNNER_TEMP/notice-native.tap"
+          node --input-type=module -e "import{readFileSync}from'node:fs';const s=readFileSync(process.argv[1],'utf8');if(!/^# tests 33$/m.test(s)||!/^# pass 33$/m.test(s)||!/^# fail 0$/m.test(s))throw Error('Unexpected native TAP count');" "$RUNNER_TEMP/notice-native.tap"
+      - name: Pure phase context
+        run: |
+          set -o pipefail
+          node --test test/mcp-qa-finite-owner-phase-context.test.mjs 2>&1 | tee "$RUNNER_TEMP/notice-group-0.tap"
+          node --input-type=module -e "import{readFileSync}from'node:fs';const s=readFileSync(process.argv[1],'utf8');if(!/^# tests 18$/m.test(s)||!/^# pass 18$/m.test(s)||!/^# fail 0$/m.test(s))throw Error('Unexpected TAP count');" "$RUNNER_TEMP/notice-group-0.tap"
+      - name: Selected phase native16
+        run: |
+          set -o pipefail
+          node --test --test-name-pattern='^(closed source keeps|settled first connection|unknown issuer SEND|absent original issuer never|failed schema SELECT|fresh current owner|fresh QA pointer|same ambient original request)' test/mcp-qa-finite-owner-phase-context-native.test.mjs 2>&1 | tee "$RUNNER_TEMP/notice-group-1.tap"
+          node --input-type=module -e "import{readFileSync}from'node:fs';const s=readFileSync(process.argv[1],'utf8');if(!/^# tests 16$/m.test(s)||!/^# pass 16$/m.test(s)||!/^# fail 0$/m.test(s))throw Error('Unexpected TAP count');" "$RUNNER_TEMP/notice-group-1.tap"
+      - name: Selected SDK native6
+        run: |
+          set -o pipefail
+          node --test --test-name-pattern='^(uninstrumented actual native|missing actual SDK binding cookie|actual current publication drift|owned begin recheck rejects actual foreign delta owner-revision|fanout causal control delay0)' test/mcp-qa-finite-owner-qa-sdk-native.test.mjs 2>&1 | tee "$RUNNER_TEMP/notice-group-2.tap"
+          node --input-type=module -e "import{readFileSync}from'node:fs';const s=readFileSync(process.argv[1],'utf8');if(!/^# tests 6$/m.test(s)||!/^# pass 6$/m.test(s)||!/^# fail 0$/m.test(s))throw Error('Unexpected TAP count');" "$RUNNER_TEMP/notice-group-2.tap"
+      - name: Selected D04 token4
+        run: |
+          set -o pipefail
+          node --test --test-name-pattern='^D04 actual exchange (retains|then SYN valid native timestamp drift|then SYN immutable original current-(owner|revision))' test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs 2>&1 | tee "$RUNNER_TEMP/notice-group-3.tap"
+          node --input-type=module -e "import{readFileSync}from'node:fs';const s=readFileSync(process.argv[1],'utf8');if(!/^# tests 4$/m.test(s)||!/^# pass 4$/m.test(s)||!/^# fail 0$/m.test(s))throw Error('Unexpected TAP count');" "$RUNNER_TEMP/notice-group-3.tap"
+      - name: Targeted ten-file ESLint
+        run: ./node_modules/.bin/eslint lib/mcp-qa-finite-owner-phase-context.mjs lib/mcp-qa-finite-owner-notice-get-wire.mjs lib/mcp-qa-finite-owner-notice-get-forward.mjs lib/mcp-qa-finite-owner-notice-get-qa.mjs test/mcp-qa-finite-owner-notice-get-native.test.mjs test/fixtures/finite-owner-notice-get.mjs test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-qa-sdk.mjs test/fixtures/finite-owner-io-fanout.mjs test/mcp-qa-finite-owner-qa-sdk-native.test.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
