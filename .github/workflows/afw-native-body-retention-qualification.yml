@@ -1,0 +1,84 @@
+name: AFW native body retention qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-native-body-retention-qualification.yml]
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      QUALIFICATION_MODE: red
+      SOURCE_REVISION: 85eee832e779df310f14423ceec637ef459b0dd2
+      AFW_RETENTION_EVIDENCE: evidence/bundles
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 85eee832e779df310f14423ceec637ef459b0dd2
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Preserve exact source and qualification contract
+        run: |
+          mkdir -p evidence/source
+          git rev-parse HEAD HEAD^{tree} > evidence/source-revision.txt
+          test "$(git rev-parse HEAD)" = "$SOURCE_REVISION"
+          git ls-tree -r HEAD > evidence/complete-tree.txt
+          cp lib/mcp-qa-finite-{bootstrap-native,historical-source,initial-material,stage-work,fixed-policy-engine}.mjs evidence/source/
+          cp test/mcp-qa-finite-{bootstrap-native,historical-source-native,initial-material-native}.test.mjs evidence/source/
+          cp test/fixtures/finite-native-body-retention.mjs evidence/source/
+          cp package.json package-lock.json evidence/source/
+          date -u +%FT%TZ > evidence/started-at.txt
+          node --version > evidence/node-version.txt
+      - name: Install fixed dependencies without scripts
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Qualify frozen native matrix
+        run: |
+          cat > evidence/qualify.mjs <<'JS'
+          import {spawnSync} from 'node:child_process';
+          import {writeFileSync,readFileSync} from 'node:fs';
+          const mode=process.env.QUALIFICATION_MODE;
+          const positives=["actual workerd DO reader returns bounded bridge facts with direct/source authority false","B2 body retention positive baseline","T2 material native ownership keeps frozen script and mutable bytes fenced"];
+          const negatives=["I1 acquired bootstrap body retention invalid-status","I1 acquired bootstrap body retention late-response","I1 acquired historical-source body retention invalid-status","I1 acquired historical-source body retention late-response","I1 acquired initial-material body retention invalid-status","I1 acquired initial-material body retention late-response"];
+          const files=["test/mcp-qa-finite-bootstrap-native.test.mjs","test/mcp-qa-finite-historical-source-native.test.mjs","test/mcp-qa-finite-initial-material-native.test.mjs"];
+          const spec={mode,source:process.env.SOURCE_REVISION,trigger:process.env.GITHUB_SHA,base:'8b2380c9bcc9c383ec46590df1403eed19fd2659',brief:'b2ee090b1d1a62059cb80b7601b140ca023cb08e',positiveNames:positives,negativeNames:negatives,positiveTop:3,negativeTop:6,subtests:0,rootMaxMs:30000,childMaxMs:5000,pollMaxMs:2000,commandTimeoutMs:300000,jobMaxMinutes:15,provider:'SYN native Response/ReadableStream; no live API',operationalReadiness:false,completePackage:false,PCoff:false};
+          writeFileSync('evidence/spec.json',JSON.stringify(spec,null,2));
+          const results=[];
+          function run(label,names,expectPass,expectFail){
+            const args=['--test','--test-concurrency=1','--test-reporter=tap','--test-name-pattern=^('+names.join('|')+')$',...files];
+            const started=new Date().toISOString(),r=spawnSync(process.execPath,args,{encoding:'utf8',timeout:300000,maxBuffer:16*1024*1024});
+            const text=(r.stdout||'')+(r.stderr||'');
+            writeFileSync('evidence/'+label+'.tap',text);console.log(text);
+            const count=k=>Number(text.match(new RegExp('^# '+k+' ([0-9]+)$','m'))?.[1]??-1);
+            const result={label,command:[process.execPath,...args],started,finished:new Date().toISOString(),exit:r.status,signal:r.signal,tests:count('tests'),pass:count('pass'),fail:count('fail'),cancelled:count('cancelled'),skipped:count('skipped')};
+            results.push(result);writeFileSync('evidence/results.json',JSON.stringify(results,null,2));
+            if(result.tests!==names.length||result.pass!==expectPass||result.fail!==expectFail||result.cancelled!==0||result.skipped!==0||r.status!==(expectFail?1:0))throw Error('Unexpected native matrix outcome '+JSON.stringify(result));
+            for(const name of names)if(!text.includes(name))throw Error('Missing named test '+name);
+            if(label==='regression'&&mode==='red'&&(text.match(/required acquired-body cancellation entry:/g)||[]).length!==6)throw Error('RED was not six causal cancellation-entry failures');
+          }
+          run('positive',positives,3,0);
+          run('regression',negatives,mode==='red'?0:6,mode==='red'?6:0);
+          if(mode==='green'){
+            const args=['eslint','lib/mcp-qa-finite-bootstrap-native.mjs','lib/mcp-qa-finite-historical-source.mjs','lib/mcp-qa-finite-initial-material.mjs',...files,'test/fixtures/finite-native-body-retention.mjs'];
+            const r=spawnSync('npx',args,{encoding:'utf8',timeout:120000});const text=(r.stdout||'')+(r.stderr||'');console.log(text);writeFileSync('evidence/lint.txt',text);
+            results.push({label:'lint',command:['npx',...args],exit:r.status});writeFileSync('evidence/results.json',JSON.stringify(results,null,2));if(r.status!==0)throw Error('Changed-file lint failed');
+          }
+          console.log('I1_RESULTS '+readFileSync('evidence/results.json','utf8'));
+          JS
+          node evidence/qualify.mjs
+      - name: Preserve sanitized qualification artifacts
+        if: always()
+        run: |
+          date -u +%FT%TZ > evidence/finished-at.txt
+          find evidence -type f -print0 | sort -z | xargs -0 sha256sum > evidence-sha256.txt
+          mv evidence-sha256.txt evidence/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-body-retention-red-85eee832e779df310f14423ceec637ef459b0dd2
+          path: evidence
+          retention-days: 7
+          if-no-files-found: error
