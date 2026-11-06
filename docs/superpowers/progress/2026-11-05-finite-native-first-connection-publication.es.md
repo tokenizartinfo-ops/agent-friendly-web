@@ -86,3 +86,6 @@ Task3 checkpoint2026-11-06 13:57UTC: IN PROGRESS, codea4ae401; holder causal RED
 
 
 Task3 freeze2026-11-06 14:09UTC: code31ede7d2/tree49ef7824, qualifier absent; direct native readback8PASS(run42229788438); source-holder0+six ticket codec/correlator negatives2PASS(run42231129828/job127936986325). Exact final native60=A24+B25+C11, scoped positive107,total167,2expected-fail mutants,lint7. Bounded3jobs15min estimated847/850/852s; no fit/completion claim until terminal primary logs. Full frozen per-variant/native-vs-compositional mapping and parent/blob log in Task3 report. All readiness/completePackage/PCoff=false.
+
+
+Task3 2026-11-06 14:44UTC: primer gate42232085255 NO aceptado global: A24PASS/C118PASS+controles+lint,B23/25fallan observacion de dos boundaries tardios. Causa probada: reloj de observacionNode30s abarcaba GET+POST separados; producto no se relaja. Focal42235796244/job1279529300612PASS, entradasPOST19.67/20.44s<30s reales; cancelacion tardia separada de admision I/O viva. Codigo sourceb6a81590 sinqualifier; P8/P9/P10 intactos, F1/T3 medicion corregida. Final60=A23+B23+C14;167positive+2controles,3jobs15min,est776/783/665s; falta primaria terminal. Excepcioncallbackretry semantica explicita aprobadaRoot, noPASSdinamico inventado. Todos readiness=false.
