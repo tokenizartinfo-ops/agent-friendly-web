@@ -115,7 +115,7 @@ test('T2 initial artifact already contains fixed finite dispatch',async()=>{
 });
 test('T2 choice grammar bounds actual body and cookies',async t=>{
  const cases=[
-  ['overflow',post('x'.repeat(1025)),413],['utf8',post(new Uint8Array([0xc3,0x28])),400],
+  ['overflow',post('x'.repeat(1025)),413],['utf8',post(new Uint8Array([0xc3,0x28])),503],
   ['escape',post(validForm+'&bad=%GG'),400],['encoded utf8',post(validForm.replace(H,'%FF')),400],
   ['extra',post(validForm+'&extra=1'),400],['duplicate',post(validForm+'&handle='+H),400],
   ['decision',post(validForm.replace('approve','deny')),400],['short handle',post(validForm.replace(H,'a')),400],
@@ -144,4 +144,17 @@ test('T2 choice response only carries bounded QA HTML and allowed headers',async
   ['oversize',()=>new Response('x'.repeat(16385),{headers:{'Content-Type':'text/html'}}),503],['status202',()=>new Response('partial',{status:202,headers:{'Content-Type':'text/html'}}),503],
   ['html',html,200]
  ])await t.test(name,async()=>{const f=conduit(make),r=await choice(f);assert.equal(r.status,status);assert.equal(r.headers.get('X-Provider-Secret'),null);assert.equal(r.headers.get('Cache-Control'),'no-store');if(status===200){assert(r.headers.has('Content-Security-Policy'));assert.equal(r.headers.get('Referrer-Policy'),'no-referrer');}});
+});
+
+test('T2 original headers and signal remain fixed until actual continuation',async()=>{
+ let entered,release;const ready=new Promise(r=>{entered=r;}),f=conduit(()=>{entered();return new Promise(r=>{release=r;});});
+ const request=new Request(U,{headers:{Cookie:'synthetic=one'}}),parent=createFiniteOwnerRequestLease(request);
+ try{
+  const pending=forwardFiniteOwnerChoice({request,...f},parent.lease);await ready;request.headers.set('Cookie','synthetic=two');release(html());assert.equal((await pending).status,503);assert.equal(f.sent.length,1);
+ }finally{parent.finish();await Promise.all(f.retained);}
+ const g=conduit(html),get=new Request(U),body=new ReadableStream({start(c){c.enqueue(new Uint8Array([1]));c.close();}});
+ Object.defineProperty(get,'body',{value:body});
+ const original=createFiniteOwnerRequestLease(get);
+ try{assert.equal((await forwardFiniteOwnerChoice({request:get,...g},original.lease)).status,400);assert.equal(g.sent.length,0);}
+ finally{original.finish();await Promise.all(g.retained);}
 });
