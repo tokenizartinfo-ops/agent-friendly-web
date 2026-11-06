@@ -1,3 +1,4 @@
+import {retentionImports,retentionMethods,checkBodyRetention,captureRetentionBuild} from './fixtures/finite-native-body-retention.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -64,7 +65,10 @@ async function harness(actualPins=false,productionExpiry=null,commitmentFault=nu
  }
  const entry=String.raw`import{DurableObject}from'cloudflare:workers';import{readPrivateQaFiniteHistoricalSource as read,qualifyFiniteInitialHistoricalBaseline as baseline}from'./lib/mcp-qa-finite-historical-source.mjs';import{createHash}from'node:crypto';import{createFiniteOwnerRequestLease}from'./lib/mcp-qa-finite-owner-preparation.mjs';import{observeFiniteOwnerStageWork}from'./lib/mcp-qa-finite-stage-work.mjs';
  export class Node extends DurableObject{}
+${retentionImports}
  export class History extends DurableObject{
+${retentionMethods("read({ctx:this.ctx,env:this.env},parent.lease)")}
+
  async seed(rows){for(const[k,v]of rows)await this.ctx.storage.put(k,v);return true;}
  async snapshot(){return[...await this.ctx.storage.list()];}
  async qualifyBaseline(metadata){
@@ -89,7 +93,8 @@ async function harness(actualPins=false,productionExpiry=null,commitmentFault=nu
  }
  }export default{fetch(){return new Response(null,{status:404})}};`;
  const plugin={name:'explicit-synthetic-external-source-commitments',setup(b){b.onResolve({filter:/mcp-qa-finite-historical-source\.mjs$/},()=>({path:'historical-reader',namespace:'b2-source'}));b.onLoad({filter:/.*/,namespace:'b2-source'},()=>({contents:source,loader:'js',resolveDir:process.cwd()+'/lib'}));if(actualPins)return;b.onLoad({filter:/mcp-confirmation-frozen-artifact\.json$/},()=>({contents:J(x.receipt),loader:'json'}));b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));b.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({contents:'export const QA_CLOUD_CLOSED_PINS='+J({...REAL_PINS,canary:x.pin})+';',loader:'js'}));}};
- const built=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],plugins:[plugin]});
+ const built=await build({metafile:true,stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],plugins:[plugin]});
+ await captureRetentionBuild('historical-source',built);
  const f={x,mf,requests:[],mode:'normal',delay:0,versionReads:0,fixtureApproval};
  await mf.setOptions(convertV4MiniflareOptions({...base,script:built.outputFiles[0].text,outboundService:async req=>{
  const u=new URL(req.url);f.requests.push(u.pathname);assert.equal(req.method,'GET');assert.equal(req.headers.get('Authorization'),'Bearer synthetic-native-reader');
@@ -218,4 +223,12 @@ for(const fault of ['receipt-version','source-link'])test('both historical consu
    assert.equal(response.ok,false);assert.equal(response.message,'Finite historical source unavailable:metadata');
   }
  }finally{await f.mf.dispose();}
+});
+
+for(const mode of ['invalid-status','late-response'])test('I1 acquired historical-source body retention '+mode,async()=>{
+ const f=await harness();await checkBodyRetention(f,mode);
+});
+
+test('B2 body retention positive baseline',async()=>{
+ const f=await harness();try{const r=await f.stub.read();assert.equal(r.ok,true,J(r));assert.equal(r.artifactBytes,Buffer.byteLength(f.x.script));assert.deepEqual(r.claims,[false,false,false,false]);}finally{await f.mf.dispose();}
 });
