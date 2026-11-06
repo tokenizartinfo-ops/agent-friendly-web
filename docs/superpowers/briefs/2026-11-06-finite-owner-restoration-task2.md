@@ -1,6 +1,6 @@
 # AFW Task2 brief — native owner cleanup and original-alarm restoration
 
-Read this first — these are your requirements with exact values to use verbatim. Task2 only. Do not restart Task1 or implement later third-CLOSED/prearm/fullsetup/nominal handoff.
+Read this first — these are your requirements with exact values to use verbatim. Task2 only. Final rulings below supersede earlier49/38 grouping; frozen total51 with cleanup-scope contracts included. Do not restart Task1 or implement later third-CLOSED/prearm/fullsetup/nominal handoff.
 
 PROJECT=AFW; REPOSITORY=tokenizartinfo-ops/agent-friendly-web (public1347578006); ENVIRONMENT=SOURCE/SYN GitHub+Actions; ORIGIN=GitHub connector; RESOURCE_TYPE=existing isolated Source branch; RESOURCE_ID=feat/finite-native-cleanup-20261101; ALLOWED_ACTION=Task2 exact source/tests/credential-free bounded qualification; ROLLBACK=own commits only with CAS/exact sole-parent/path/blob/content/ref readback, preserving history.
 Task2 execution BASE2c6b5a0eb503b8d877158f85832c510b9a45f7ca/tree57ac1355a85560dee14b2f933b4b68f877911ae2 (3173 leaf entries). The whole-plan BASE7aab233 named in copied Globals remains historical combined-review start, NOT your starting HEAD.
@@ -43,7 +43,7 @@ Plan task/preflight below comes from docs/superpowers/plans/2026-11-06-finite-na
 - Modify lib/mcp-qa-finite-initial-cleanup.mjs: sólo composición de cierreposterior, misma entrada/contador/restore.
 - Create test/mcp-qa-finite-owner-cleanup.test.mjs y test/mcp-qa-finite-owner-cleanup-native.test.mjs; extender fixturefinite-owner-cleanup deTask1 con checkpoint persistido yoriginalalarmreal. Existingfixtures sólo seam mínimo sihacenfalta ypreflightloenumera.
 - Existingtest initial-cleanup-native seleccionados2 ypreparation-issuer-native seleccionados pornuevoSQL, no corpusentero.
-- El mismo qualifier temporal, ahora2jobs por RED/GREEN; artifactsSYN7d, sinsecrets; retirar terminal.
+- El mismo qualifier temporal: dos jobs por calificación nativa; RED solo g0, GREEN seis pares según los rulings finales. artifactsSYN7d, sinsecrets; retirar terminal.
 - Report docs/superpowers/reports/2026-11-06-finite-owner-restoration-task2.md.
 
 **Interfaces yregistros:**
@@ -85,9 +85,9 @@ Checkpoint must preserve native D1/DO/KV files, original alarm, plan/counters/ID
 
 ### Frozen GREEN groups and new-SQL coverage
 
-Exact GREEN top-level count49: contract12 + inherited Task1contract10 + existing issuer9 + existing initial2 + new native monitoring SQL5 + original-alarm principal1 + later-state matrix10. No nested tests, fail/cancel/skip/todo all0. Keep groups separate in TAP/manifest. RED executes only the original-alarm principal in jobB; jobA produces the real checkpoint, without importing nonexistent future Source modules or running missing-code tests. Its expected failure must follow a genuine valid produced lineage/native C0/alarm, not missing modules/setup/expired entry.
+Exact GREEN top-level count51: contract14 (twelve listed below plus two cleanup-scope cases in the final rulings) + inherited Task1contract10 + existing issuer9 + existing initial2 + new native monitoring SQL5 + original-alarm principal1 + later-state matrix10. No nested tests, fail/cancel/skip/todo all0. Keep groups separate in TAP/manifest. RED executes only the original-alarm principal in jobB; jobA produces the real checkpoint, without importing nonexistent future Source modules or running missing-code tests. Its expected failure must follow a genuine valid produced lineage/native C0/alarm, not missing modules/setup/expired entry.
 
-New12 contract names (SOURCE/SYN component tests; no claim of native admission from their DTO/lease fixtures):
+Initial twelve of the fourteen contract names (SOURCE/SYN component tests; no claim of native admission from their DTO/lease fixtures):
 1. R2 cleanup records roundtrip
 2. R2 cleanup hash rejects drift
 3. R2 cleanup records reject accessors and extra fields
@@ -127,23 +127,60 @@ These use actual native D1/store methods with explicitly labeled component fixtu
 
 Principal and ten matrix names remain exactly those in Task2 above. The SDK paging matrix covers the new reduction facet; it must not silently be counted as Task1 readonly-reader boundary coverage. Archived historical normal observations can be validated as dated facts during restart; missing Observed must never be reconstructed from a later read. Same-stack opaque reduction/receipt objects are newly held internally only after fresh native qualification, not deserialized capabilities.
 
-### Two-job timing and causal grouping
+## FINAL ROOT RULINGS — binding implementation decisions
 
-JobA runs the38 contract/store/regression component cases BEFORE creating I0, while no original cycle clock is open. Validate remaining15min job budget, maximum export/upload time and minimum JobB recovery margin before I0. If too little remains, do not start the cycle. Then run the real current producer through Reference/token/MCP/NoticeLink, finish requests, dispose/flush, preserve state/scripts/manifest and wait only until original C0-120000. Upload SYN-only checkpoint with7day retention. The wait does not hold a business Root.
-
-JobB restores the same untouched principal before C0, validates manifest/IDs/scripts/current storage/alarm and margin, and observes native alarm at C0. Run the principal FIRST. Ten subsequent matrix cases may use isolated native replicas of the exact PRE-cleanup checkpoint with explicitly labeled fault mutations; preserve all original times/IDs and use real current DB time, not retiming/resealing/new I0. Their original C1 still applies. Bound parallelism and startup/work so the matrix fits; no positive premise from an expired lease. They are labeled replicas/components, not eleven live or user rehearsals. If this cannot fit original C1 or exact persistence cannot be recovered, report concrete timing/data and obtain a Root grouping ruling before dispatch; never widen production clocks. Every job remains <=15min and source stays frozen across both.
-
-Ruling: explicit persistence seam and49 frozen cases close the concrete omissions above while reusing all existing native behavior. Why: an ordinary cold restart cannot be demonstrated by a renamed mode or reconstructed rows, and the new SQL revocation needs its own native boundary tests. Cost if wrong: the laboratory may fail budget/recovery calibration; adjust laboratory grouping with evidence, not business clocks/authority. No runtime/provider effects or owner intervention are required for Source/Actions SYN.
+Plan update32833cd81e7e84f8d835f83a97da0ebdc62a6408/blob6c294e2189ffb3af3698576e54ed193b8be4f175 supersedes the earlier grouping and expands exactly one production path. This section settles the implementer's read-only NEEDS_CONTEXT; Source remains BASE2c6b5a0 until edits start. Full producer through NoticeLink is required for g0; g1 deliberately produces the specified genuine partial prefixes with labeled faults.
 
 
+## Task2 implementation rulings after concrete preflight (6 Nov 2026)
+
+These rulings supersede the earlier49/38 grouping and the assumption that all ten variants fit one original C1. They do not change production authority or clocks.
+
+### Fixed SYN provider and persistence reconstruction — approved
+
+Extract the SAME existing initial-entry outbound SYN closure into a fixed factory over serialized original facts, as the minimal initial-entry/persistence fixture seam. Preserve its existing branches/default modes and request semantics; no generic production callback or server-generated success authority. Reconstruct current mounted scripts/options/worker names/IDs exactly. Pure helper construction may reattach behavior to preserved fact maps, but must not run bootstrap/native seed/producer or regenerate a new lineage. Before opening Miniflare, compare serialized facts and script hashes with the original manifest.
+
+The opt-in cleanup+persistence scenario may add original baseline x.metadata to its preserved provider registry and support ONLY the exact original restore wire: annotation afw-finite-initial-restore-<original planHash>, original baseline target100%, distinct known restore deployment ID (existing777... if distinct from all prior IDs), real registry pointer/restores update and explicit after-effect ACK-loss fault. Other modes/activation behavior remain unchanged.
+
+The current fake provider reports bootstrap running by nowOffset rather than a terminal scenario. For this opt-in scenario preserve a dated SYN terminal-inventory input only after native prepare/producer requests finish. Label it MODELED PROVIDER INPUT. Local invocation return does not prove a Cloudflare Workflow terminal state; do not make that inference in code/evidence. No clock patch or actual Workflow change.
+
+### Non-authorizing cleanup lifetime — approved additional production path
+
+Add lib/mcp-qa-finite-stage-work.mjs to Task2 whitelist only for minimal observeFiniteOwnerCleanupWork({ctx,env,originalLease},operation), mode cleanup. It provides ambient same-ctx exclusion and actual-promise retention, never admission/permission. No fabricated admission={lease}, no pretending a mutation is readonly, no change to existing owner/request/factual semantics. A private shared scope constructor may avoid duplication while preserving old behavior. Newly added function is not a new public transport/runtime capability.
+
+Wrap the original alarm continuation under that lifetime. In initial-cleanup adapt actual retention BEFORE parent/child races using the existing parent retainer plus retainFiniteOwnerStagePromise; do not alter/freeze-bypass initial-lease, reset lease/source clocks or treat dispose as settlement. One logical denial leaves actual work retained and another live scope excluded until real settlement.
+
+Add two contract/component tests (no native-admission claim from their synthetic ctx/lease fixtures):
+13. R2 cleanup scope retains actual work after logical abort
+14. R2 cleanup scope rejects foreign or nested root
+
+Frozen final top-level total is now51: contract14 + inherited Task1contract10 + issuer9 + initial2 + nativeSQL5 + principal1 + matrix10. Forty component/regression cases run once before I0 in GREEN group0 prepare. Native held-SDK-delete matrix also checks a genuine live non-authorizing scope in the same native ctx; it must not use a business reader that would fail merely because C0 already expired. Keep old stage/request behavior checks meaningful if their implementation is factored.
+
+### Bounded grouping — six paired GREEN qualifications, three independent lanes
+
+Measured full producer/downstream is about60.51s. Ten Roots at a30s maximum plus principal/startup do not fit a shared180s C1. Do not gamble on typical duration, retime replicas or drop cases. Instead split the11 native assertions into SIX explicitly SYN laboratory qualifications. Each has its own genuine producer checkpoint(s), unchanged original I0/C0/C1, two jobs prepare->consume each<=15min, and exact same Source checkout. All groups must pass on the same frozen revision. This is additional laboratory coverage, not extra user/live rehearsals or renewed authority.
+
+Fixed groups:
+- g0: R2 original alarm restores the produced current cycle at real C0; R2 originalSDKexpiry still permits exact historical reduction. One untouched principal. The expiry case can assert the SAME actual original expired SDK selector/reduction result as a postcondition, clearly sharing the occurrence rather than inventing a second effect.
+- g1: R2 fence covers grant before link; R2 notice SQL without link is withdrawn. Produce genuine partial prefixes with explicit faults at the respective effect boundaries, not delete later rows and claim that history. Two separately produced native lineages/checkpoints in prepare; their original clocks may be staggered naturally. Both preserve original times/scripts/IDs at cold load.
+- g2: R2 foreign pointer is preserved; R2 SDK paging and scope fail before extra IO. Two labeled isolated fault replicas from a genuine checkpoint, configured before C0. Never transfer a negative's mutation to the principal.
+- g3: R2 unknown restore acknowledgement cannot complete; R2 same fence identity is reconciled without replay. Separate isolated replicas, original three slots; preserve unknown SENDs and distinguish factual reconciliation from missing ACK. Two native instances maximum.
+- g4: R2 held SDK delete retains original cleanup; R2 restart preserves slots and own uncertainty. May share the SAME lineage: reach intended hold, prove exclusion, release and observe actual settlement, then dispose/flush/cold-load its real partial-cleanup state before the remaining original slots. No forced drain, no retransmitting unknown SDK SEND.
+- g5: R2 late foreign-isolate KV cannot reopen business access. Own genuine checkpoint, narrowly start its real other-isolate SDK operation before C0 under the original request budget, observe/release the late operation around the original fence/closure, and verify denied response/data. Preserve actual SDK expiry/write outcomes; do not fake a successful late commit if native SDK/KV rejects it. Any deliberate adversarial residual-state component must be labeled separately from that actual operation. Global drain/namespace absence remain false.
+
+Use at most two Miniflare/native instances concurrently per consumer group; principal g0 has no competing matrix worker. A group needing two genuine producers must validate its prepare timing before first I0 and preserve BOTH original clocks; no new business duration is granted. JobA still waits only to its earliest original C0-120000 and exports SYN-only7day artifacts. JobB must recover before the relevant C0 and reject insufficient startup/C1 margin.
+
+The one temporary qualifier may use twelve explicit jobs with pair-local dependencies in three independent lanes: prepare_g0->consume_g0->prepare_g3->consume_g3; prepare_g1->consume_g1->prepare_g4->consume_g4; prepare_g2->consume_g2->prepare_g5->consume_g5. Do not use a matrix-wide needs barrier that waits for all producers before any consumer, because it would expire earlier clocks. RED uses only g0 prepare/consume and executes only the principal case. GREEN51 is counted across all groups, never mixed across revisions or failed attempts. Required graph/checkpoint/artifact counts are declared per group/lineage, not a stale six-graph expectation from Task1.
+
+Ruling: more bounded SYN jobs are preferable to an unprovable C1 fit. Cost if wrong: extra runner minutes or a failed recovery margin, preserved and reported; no production clock/permission change and no user data/resources. If this grouping still cannot fit, report measurements before qualification; do not invent a new I0 for a recovered lineage.
 
 
 ## Dispatch preflight and file whitelist
 
 Before the first Source write: read applicable current Source AGENTS, confirm BASE/ref/tree/main and exact whitelist, explain the minimal persistence/cold-load/alarm observation seam and timing/grouping strategy to Root, then wait for any required seam ruling. Do not request owner login or approval for SOURCE/SYN.
-Mandatory production paths: lib/mcp-qa-finite-owner-cleanup.mjs; new lib/mcp-qa-finite-owner-cleanup-records.mjs; new lib/mcp-qa-finite-owner-cleanup-journal.mjs; lib/mcp-qa-finite-preparation-issuer-store.mjs; lib/mcp-qa-finite-initial-cleanup.mjs.
+Mandatory production paths: lib/mcp-qa-finite-stage-work.mjs (minimal non-authorizing cleanup scope only); lib/mcp-qa-finite-owner-cleanup.mjs; new lib/mcp-qa-finite-owner-cleanup-records.mjs; new lib/mcp-qa-finite-owner-cleanup-journal.mjs; lib/mcp-qa-finite-preparation-issuer-store.mjs; lib/mcp-qa-finite-initial-cleanup.mjs.
 Tests: new test/mcp-qa-finite-owner-cleanup.test.mjs and test/mcp-qa-finite-owner-cleanup-native.test.mjs; test/fixtures/finite-owner-cleanup.mjs; optional new test/fixtures/finite-owner-cleanup-persistence.mjs; minimal test/fixtures/finite-initial-entry-world.mjs and optional test/fixtures/finite-first-connection-publication.mjs seam described above. Existing issuer test/fixture and other Task1 libraries/worker entries remain unchanged. If another path is necessary, name the reason to Root BEFORE editing it.
-Temporary qualifier .github/workflows/afw-owner-restoration-qualification.yml, exact Source checkout and two jobs each<=15min, contents:read, Node22/current lock, npm ci --ignore-scripts --no-audit --no-fund; no secrets. Remove after terminal evidence upload/download/readback. Report path below.
+Temporary qualifier .github/workflows/afw-owner-restoration-qualification.yml, exact Source checkout, two jobs per native qualification (six GREEN pairs / twelve explicit jobs in three pair-local lanes; RED g0 only), each<=15min, contents:read, Node22/current lock, npm ci --ignore-scripts --no-audit --no-fund; no secrets. Remove after terminal evidence upload/download/readback. Report path below.
 Qualifiers must freeze names/counts/groups and expected artifact graph/persistence manifests before dispatch, preserve all failures/warnings, and verify required scripts/metafiles/native files actually survive artifact readback. Artifacts are public-repo SYN-only,7days; never real data/credentials. No same Source mutation while either job runs.
 
 ## Report and STOP contract
