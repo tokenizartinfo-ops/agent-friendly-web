@@ -21,12 +21,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: DIAGNOSTIC exactly two hold marker cases
+      - name: GREEN final sixteen cases after test signal projection correction
         shell: bash
         run: |
           mkdir -p output/owner-reference
           set -o pipefail
-          node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern="^R1 (held SDK lookup retains original scope|aborted reference sync cannot return late redirect)$" test/mcp-qa-finite-owner-sdk-reference-native.test.mjs | tee output/owner-reference/diagnostic.tap
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-sdk-reference.test.mjs test/mcp-qa-finite-owner-sdk-reference-native.test.mjs | tee output/owner-reference/green.tap
       - name: Lint exact changed JavaScript files
         if: always()
         run: |
@@ -74,7 +74,7 @@ jobs:
           import {readFile} from 'node:fs/promises';
           import {createHash} from 'node:crypto';
           import assert from 'node:assert/strict';
-          const before=JSON.parse(await readFile('output/owner-reference/artifact-manifest.json','utf8')),after=JSON.parse(await readFile('output/artifact-readback/owner-reference/artifact-manifest.json','utf8'));assert.deepEqual(after,before);assert.equal(after.source,process.env.GITHUB_SHA);assert.equal(after.graphs,2);
+          const before=JSON.parse(await readFile('output/owner-reference/artifact-manifest.json','utf8')),after=JSON.parse(await readFile('output/artifact-readback/owner-reference/artifact-manifest.json','utf8'));assert.deepEqual(after,before);assert.equal(after.source,process.env.GITHUB_SHA);assert.equal(after.graphs,6);
           for(const file of after.files){const b=await readFile('output/artifact-readback/'+file.path);assert.equal(b.length,file.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),file.sha256);}
           console.info('R1 uploaded artifact exact readback',JSON.stringify({source:after.source,verifiedFiles:after.files.length,graphs:after.graphs,manifestVerified:true}));
           NODE
