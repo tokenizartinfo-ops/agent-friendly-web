@@ -23,9 +23,10 @@ jobs:
         run: |
           mkdir -p output/owner-cleanup
           set -o pipefail
-          for file in lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs test/mcp-qa-finite-owner-cleanup.test.mjs; do node --check "$file"; done
-          npx eslint lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs test/mcp-qa-finite-owner-cleanup.test.mjs | tee output/owner-cleanup/lint.log
+          { for file in lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs test/mcp-qa-finite-owner-cleanup.test.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs; do node --check "$file"; done; } 2>&1 | tee output/owner-cleanup/syntax.log
+          npx eslint lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs test/mcp-qa-finite-owner-cleanup.test.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/lint.log
           node --test --test-reporter=tap test/mcp-qa-finite-owner-cleanup.test.mjs | tee output/owner-cleanup/contracts.tap
+          node --test --test-reporter=tap --test-name-pattern='^R2 native monitoring revoke ' test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/sql5.tap
       - uses: actions/upload-artifact@v4
         if: always()
         with:
