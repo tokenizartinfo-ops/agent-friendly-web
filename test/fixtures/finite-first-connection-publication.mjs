@@ -173,6 +173,25 @@ export function extendFirstConnectionPublication(entry){
   try{const identity=kind=>({kind:'connection',preconnectionId:receipt.preconnectionId,sourceRevision:receipt.sourceRevision,stage:'connection',effect:kind}),upload=await firstJournal({storage:s,identity:identity('upload'),now:Date.now}).read(root.lease),activation=await firstJournal({storage:s,identity:identity('activation'),now:Date.now}).read(root.lease);return {codecRoundtrip:true,journalValid:upload.state==='acknowledged'&&activation.state==='installed'};}finally{root.finish();}
  }
 
+
+ async firstConnectionExpiredEntry(){
+  const now=Date.now(),headers={'x-afw-finite-boundary':JSON.stringify({startedAt:now-30000,deadline:now-1,remainingMs:0}),'x-afw-finite-original-method':'GET','x-afw-finite-original-url':'https://delegated-canary.agentfriendlyweb.dev/connections/finite-prepare','x-afw-finite-version':'55555555-5555-4555-8555-555555555555','x-afw-finite-request-id':crypto.randomUUID()};
+  const response=await this.fetch(new Request('https://afw-private.invalid/_finite-owner/choice',{method:'POST',headers})),status=response.status;await response.body?.cancel();return {status};
+ }
+ async firstConnectionBodyControl(key){if(this.firstBodyControl)this.firstBodyControl[key]=true;}
+ async firstConnectionBodyState(){return this.firstBodyState??{};}
+ async firstConnectionBodyStart(kind='read'){
+  const began=Date.now(),deadline=began+30000,owner=this,controller=new AbortController(),state=this.firstBodyState={readHeld:false,readSettled:false,cancelHeld:false,cancelSettled:false,kind},control=this.firstBodyControl={abort:false,read:false,cancel:false};
+  const held=key=>{state[key+'Held']=true;return new Promise((resolve,reject)=>{const tick=()=>{const remaining=deadline-Date.now();if(remaining<=0){state[key+'Settled']=true;reject(Error('SYN original body deadline'));return;}if(control[key]){state[key+'Settled']=true;resolve();return;}setTimeout(tick,Math.min(10,remaining));};tick();});};
+  let pulled=false;
+  const body=new ReadableStream({start(c){if(kind==='overflow')c.enqueue(new Uint8Array(1025));},pull(c){if(kind!=='read'||pulled)return;pulled=true;return held('read').then(()=>{c.enqueue(new TextEncoder().encode('handle='+'a'.repeat(64)));});},cancel(){return held('cancel');}},{highWaterMark:0});
+  const headers={'x-afw-finite-boundary':JSON.stringify({startedAt:began,deadline,remainingMs:30000}),'x-afw-finite-original-method':'POST','x-afw-finite-original-url':'https://delegated-canary.agentfriendlyweb.dev/connections/finite-prepare','x-afw-finite-version':'55555555-5555-4555-8555-555555555555','x-afw-finite-request-id':crypto.randomUUID(),Origin:'https://delegated-canary.agentfriendlyweb.dev','Content-Type':'application/x-www-form-urlencoded'};
+  let timer,logicalFinished=false;
+  const tick=()=>{if(logicalFinished)return;if(control.abort||Date.now()>=deadline){controller.abort();return;}timer=setTimeout(tick,Math.min(10,Math.max(1,deadline-Date.now())));};tick();
+  try{const response=await owner.fetch(new Request('https://afw-private.invalid/_finite-owner/choice',{method:'POST',headers,body,signal:controller.signal}));state.status=response.status;await response.body?.cancel();return state;}
+  finally{logicalFinished=true;clearTimeout(timer);state.logicalFinished=true;}
+ }
+
  async firstConnectionRestart(){this.ctx.abort('SYN original actor restart');}
  async firstConnectionInstance(){return this.firstInstance??=crypto.randomUUID();}
  async firstConnectionBackupFault(mode){
@@ -190,19 +209,21 @@ export function extendFirstConnectionPublication(entry){
   catch{return {available:false,live:!root.lease.signal.aborted,entered};}finally{root.finish();}
  }
  async firstConnectionRestore(){this.firstRestore?.();this.firstRestore=null;}
- async firstConnectionState(){return this.firstState??{trace:[]};}
+ async firstConnectionState(){return {...(this.firstState??{trace:[]}),http:globalThis.__t3Http??[]};}
  async firstConnectionRelease(which='work'){if(this.firstRelease)this.firstRelease[which]=true;}
  async firstConnectionConfigure(mode='normal'){
   this.firstRestore?.();this.firstState={mode,trace:[],fetchHeld:false,fetchSettled:false,readHeld:false,readSettled:false,cancelHeld:false,cancelSettled:false};this.firstRelease={};
   const owner=this,state=this.firstState,s=this.ctx.storage,env=this.env,native={get:s.get,list:s.list,transaction:s.transaction,sync:s.sync,getAlarm:s.getAlarm},fetcher=globalThis.fetch,wall=Date.now;
-  let writes=[],receiptRead=false,shift=0;state.counts={get:0,list:0,transaction:0,sync:0,firstPrimary:0,sql:0};const db=env.RELEASE_DB,withSession=db.withSession;
-  db.withSession=(...args)=>{if(args[0]==='first-primary')state.counts.firstPrimary++;const session=Reflect.apply(withSession,db,args),prepare=session.prepare;session.prepare=(...a)=>{state.counts.sql++;return Reflect.apply(prepare,session,a);};return session;};
+  let writes=[],receiptRead=false,shift=0;const originalMetadata=env.AFW_QA_VERSION;state.counts={get:0,list:0,transaction:0,sync:0,firstPrimary:0,sql:0};const db=env.RELEASE_DB,withSession=db.withSession;
+  db.withSession=(...args)=>{if(args[0]==='first-primary')state.counts.firstPrimary++;const session=Reflect.apply(withSession,db,args),prepare=session.prepare;session.prepare=(...a)=>{state.counts.sql++;const statement=Reflect.apply(prepare,session,a);if(mode==='source-sql-held'&&String(a[0]).includes('site_projects')){const bind=statement.bind;statement.bind=(...values)=>{const bound=Reflect.apply(bind,statement,values),first=bound.first;bound.first=async(...params)=>{const actual=Reflect.apply(first,bound,params),value=await actual;if(state.sqlHeld)return value;state.sqlHeld=true;return held('work',value);};return bound;};}return statement;};return session;};
   s.list=(...args)=>{state.counts.list++;return Reflect.apply(native.list,s,args);};
   const target=key=>typeof key==='string'&&(key.startsWith('afw.finite-preparation-cleanup.v1:')||key.startsWith('afw.finite-policy-effect.v1:'));
   const note=(kind,key)=>{if(target(key))state.trace.push({kind,key,at:Date.now()});};
   const held=(name,value)=>{const deadline=owner.firstBoundary.deadline;state[name+'Held']=true;return new Promise((resolve,reject)=>{const tick=()=>{const remaining=deadline-Date.now();if(!Number.isSafeInteger(remaining)||remaining<=0){state[name+'Settled']=true;reject(Error('SYN original request deadline'));return;}if(owner.firstRelease[name]===true){state[name+'Settled']=true;resolve(value);return;}setTimeout(tick,Math.min(10,remaining));};tick();});};
   const get=async(method,holder,args)=>{
    state.counts.get++;const value=await Reflect.apply(method,holder,args),key=args[0];note('get-settled',key);
+   if(mode==='clock-backward'&&!state.backward){shift-=100;state.backward=true;}
+   if(mode==='source-holder-drift'&&!state.holderChanged){env.AFW_QA_VERSION={id:originalMetadata.id};state.holderChanged=true;}
    if(mode==='access-expiry-held'&&state.jwkFetched&&!state.workHeld)return held('work',value);
    if(mode==='receipt-readback-lost'&&key.endsWith(':receipt')&&key.startsWith('afw.finite-policy-effect.v1:')&&value!==undefined)throw Error('SYN receipt readback unknown');
    if(mode==='final-pair-owner-drift'&&receiptRead&&key.endsWith(':capsule'))await env.RELEASE_DB.prepare("UPDATE site_projects SET user_id='SYN-negative-owner'").run();
@@ -218,7 +239,7 @@ export function extendFirstConnectionPublication(entry){
    }]).then(value=>{writes=currentWrites;for(const key of writes)note('transaction-settled',key);return value;});
    return actual.then(async value=>{
     if(mode==='enrollment-transaction-lost'&&writes.includes('afw.finite-preparation-cleanup.v1:enrollment')||mode==='upload-send-transaction-lost'&&writes.some(k=>k.startsWith('afw.finite-policy-effect.v1:')&&k.endsWith(':send'))||mode==='receipt-transaction-lost'&&writes.some(k=>k.startsWith('afw.finite-policy-effect.v1:')&&k.endsWith(':receipt')))throw Error('SYN native transaction result lost');
-    if(mode==='enrollment-transaction-held'&&writes.includes('afw.finite-preparation-cleanup.v1:enrollment'))return held('work',value);
+    if(mode==='enrollment-transaction-held'&&writes.includes('afw.finite-preparation-cleanup.v1:enrollment')||mode==='upload-ack-held'&&writes.some(key=>key.startsWith('afw.finite-policy-effect.v1:')&&key.endsWith(':ack'))||mode==='receipt-transaction-held'&&writes.some(key=>key.startsWith('afw.finite-policy-effect.v1:')&&key.endsWith(':receipt')))return held('work',value);
     return value;
    });
   };
@@ -232,6 +253,7 @@ export function extendFirstConnectionPublication(entry){
    const url=String(args[0]),method=args[1]?.method??'GET',effect=method==='POST'?(url.endsWith('/versions?deploy=false')?'upload':url.endsWith('/deployments')?'activation':null):null;
    const response=await Reflect.apply(fetcher,globalThis,args);if(url.endsWith('/cdn-cgi/access/certs'))state.jwkFetched=true;if(!effect)return response;
    state.trace.push({kind:'native-result-enter',effect,at:Date.now()});
+   if(mode===effect+'-holder-drift'){env.AFW_QA_VERSION={id:originalMetadata.id};state.holderChanged=true;}
    if(mode===effect+'-lost')throw Error('SYN applied provider result lost');
    if(mode===effect+'-held')return held('fetch',response);
    if(mode===effect+'-malformed'){await response.body.cancel();return Response.json({success:true,errors:[],messages:[],result:{id:'invalid'}},{headers:response.headers});}
@@ -244,8 +266,7 @@ export function extendFirstConnectionPublication(entry){
    return response;
   };
   Date.now=()=>wall()+shift;
-  if(mode==='clock-backward')shift=-1;
-  this.firstRestore=()=>{for(const [key,value]of Object.entries(native))s[key]=value;globalThis.fetch=fetcher;Date.now=wall;db.withSession=withSession;};
+  this.firstRestore=()=>{for(const [key,value]of Object.entries(native))s[key]=value;globalThis.fetch=fetcher;Date.now=wall;db.withSession=withSession;env.AFW_QA_VERSION=originalMetadata;};
  }
  async firstConnectionReseal(effect='upload',variant='ack'){
   const s=this.ctx.storage,rows=[...await s.list({prefix:'afw.finite-policy-effect.v1:'})],pair=rows.find(([k,v])=>k.endsWith(':send')&&JSON.parse(v).effect===effect);if(!pair)throw Error('SYN actual SEND absent');
@@ -327,5 +348,25 @@ export function instrumentFirstConnection(source,{mutation=null}={}){
 
  source=source.replace("async function observeOwnerPhasePair(options){\n let clock,onAbort,parentSignal;",()=>"async function observeOwnerPhasePair(options){\ const observedAt=performance.now();\n let clock,onAbort,parentSignal;");
  source=source.replace("}finally{if(parentSignal&&onAbort)parentSignal.removeEventListener('abort',onAbort);clock?.close();}",()=>"}finally{(globalThis.__t3Observation??=[]).push({kind:'pair',elapsedMs:performance.now()-observedAt});if(parentSignal&&onAbort)parentSignal.removeEventListener('abort',onAbort);clock?.close();}");
+ return instrumentFirstConnectionObserverIo(source);
+}
+
+
+function instrumentFirstConnectionObserverIo(source){
+ const once=(needle,next)=>{assert.equal(source.split(needle).length,2,'passive native HTTP source marker');source=source.replace(needle,()=>next);};
+ const declaration="const request=(path,cap=65536,token=reader)=>child(async l=>{\n    let response,stream;";
+ once(declaration,"const request=(path,cap=65536,token=reader)=>child(async l=>{\n    const io={kind:'observer',method:'GET',bytes:0,reads:0,cancelCalls:0,cancelSettled:0,settled:false};(globalThis.__t3Http??=[]).push(io);let response,stream;");
+ const loop="for(;;){const part=await retain(stream.read());current(l);";
+ once(loop,"for(;;){const part=await retain(stream.read());io.reads++;io.bytes+=part.value?.byteLength??0;current(l);");
+ const ending="}finally{if(stream)await retain(stream.cancel()).catch(()=>{});else if(response?.body&&!response.body.locked)await retain(response.body.cancel()).catch(()=>{});}";
+ once(ending,"}finally{if(stream){io.cancelCalls++;await retain(stream.cancel()).then(()=>{io.cancelSettled++;},()=>{});}else if(response?.body&&!response.body.locked){io.cancelCalls++;await retain(response.body.cancel()).then(()=>{io.cancelSettled++;},()=>{});}io.settled=true;}");
+ return source;
+}
+export function instrumentFirstConnectionEngine(source){
+ const once=(needle,next)=>{assert.equal(source.split(needle).length,2,'passive fixed engine HTTP marker');source=source.replace(needle,()=>next);};
+ once("async function http(method,path,body,c){\n  check(c);","async function http(method,path,body,c){\n  const io={kind:'engine',method,bytes:0,reads:0,cancelCalls:0,cancelSettled:0,settled:false};(globalThis.__t3Http??=[]).push(io);check(c);");
+ once("for(;;){const part=await retain(reader.read());check(c);","for(;;){const part=await retain(reader.read());io.reads++;io.bytes+=part.value?.byteLength??0;check(c);");
+ const ending="finally{if(reader)await retain(reader.cancel()).catch(()=>{});else if(response?.body&&!response.body.locked)await retain(response.body.cancel()).catch(()=>{});}";
+ once(ending,"finally{if(reader){io.cancelCalls++;await retain(reader.cancel()).then(()=>{io.cancelSettled++;},()=>{});}else if(response?.body&&!response.body.locked){io.cancelCalls++;await retain(response.body.cancel()).then(()=>{io.cancelSettled++;},()=>{});}io.settled=true;}");
  return source;
 }
