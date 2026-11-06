@@ -123,7 +123,7 @@ async function firstSettled(f){
 async function failureCase(t,mode){
  const f=await fixture(t);await f.stub.firstConnectionConfigure(mode);
  const response=await approveFirstConnection(f);assert.notEqual(response.status,200,mode);await response.body?.cancel();
- const state=await plain(f.stub.firstConnectionState()),probe=await readFirstConnectionProbe(f);assert.equal(receipts(probe).length,0,mode);return {f,probe,state};
+ const state=f.failedChoiceState??await plain(f.stub.firstConnectionState()),probe=await readFirstConnectionProbe(f);assert.equal(receipts(probe).length,0,mode);return {f,probe,state};
 }
 for(const mode of ['enrollment-transaction-lost','enrollment-sync-lost'])test('T3 enrollment unknown cannot upload: '+mode,{timeout:120000},async t=>{
  const {f,probe,state}=await failureCase(t,mode);assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);assert(state.trace.some(v=>v.key==='afw.finite-preparation-cleanup.v1:enrollment'&&v.kind==='put-settled'));assert(probe.rows.some(([k])=>k==='afw.finite-preparation-cleanup.v1:enrollment'));assert.equal(effectRows(probe).length,0);const factual=await plain(f.stub.firstConnectionContext());assert.equal(factual.source?.phase,'closed_ui');assert.equal(factual.source.currentPublication.stage,null);const source=(await plain(f.stub.capsuleFacts())).material.ownerSelection,fresh=await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':await f.enrollmentToken(source)}});assert.notEqual(fresh.status,200,'genuinely fresh signed choice cannot resume enrollment');await fresh.body?.cancel();assert.equal(f.uploads.length,1);assert.equal(effectRows(await readFirstConnectionProbe(f)).length,0);
