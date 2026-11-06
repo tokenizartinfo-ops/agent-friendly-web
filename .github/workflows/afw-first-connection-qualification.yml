@@ -1,0 +1,33 @@
+name: AFW first connection qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-first-connection-qualification.yml]
+permissions:
+  contents: read
+jobs:
+  connection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Focused connection
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p output/task3
+          node --test --test-reporter=spec --test-concurrency=1 --test-name-pattern='^(T3 identity and choice|T3 original deadline and holder references remain original: source-holder-drift)' test/mcp-qa-finite-first-connection-publication-native.test.mjs 2>&1 | tee output/task3/connection.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: task3-connection-${{ github.sha }}
+          path: |
+            output/task3
+            output/t2-native-graphs
+          retention-days: 7
