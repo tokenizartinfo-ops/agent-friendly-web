@@ -53,7 +53,11 @@ test('T2 closed mounted conduits cannot authorize business',{timeout:120000},asy
 
 test('T3 same initial bytes produce connection and downstream',{timeout:120000},async t=>{
  const f=await fixture(t),before=await readFirstConnectionProbe(f);await f.stub.firstConnectionConfigure('normal');
- const response=await approveFirstConnection(f);
+ const owner=(await plain(f.stub.capsuleFacts())).material.ownerSelection,originalToken=await f.enrollmentToken(owner),choiceHeaders={'Cf-Access-Jwt-Assertion':originalToken};
+ const foreignUrl='https://foreign.invalid/connections/finite-prepare',foreign=await f.mf.dispatchFetch(foreignUrl,{headers:choiceHeaders});assert.notEqual(foreign.status,200);await foreign.body?.cancel();
+ const foreignSpy=await f.negative.fetch(foreignUrl,{headers:choiceHeaders});assert.notEqual(foreignSpy.status,200);await foreignSpy.body?.cancel();
+ const originProbe=await readFirstConnectionProbe(f);assert.equal(originProbe.native.calls.length,0,'valid signed foreign URL never reaches QA');assert.equal(originProbe.negative.forwarded,0);assert.equal(originProbe.negative.ordinary,0);assert.equal(originProbe.negative.sql,0);assert.equal(effectRows(originProbe).length,0);
+ const response=await approveFirstConnection(f,{token:originalToken});
  if(response.status!==200)console.info('T3 failed continuation observation',JSON.stringify(await plain(f.stub.firstConnectionProbe())));
  assert.equal(response.status,200,'original signed choice must complete native ConnectionReceipt before success');
  await response.body?.cancel();
@@ -71,7 +75,10 @@ test('T3 same initial bytes produce connection and downstream',{timeout:120000},
  const configOnly=structuredClone(closedVersion);configOnly.id=receipt.versionId;configOnly.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';assert.deepEqual(connectionVersion,configOnly);
  // Adoption follows actual POST completion/body settlement and uses only the
  // provider registry's real upload/pointer. QA script and physical references stay.
- await f.adoptConnectionConfiguration();
+ await f.adoptConnectionConfiguration();assert.equal(f.transportNormalized,false);
+ const postAdoptionBefore=await readFirstConnectionProbe(f),postAdoptionForeign=await f.mf.dispatchFetch(foreignUrl,{headers:choiceHeaders});assert.notEqual(postAdoptionForeign.status,200);await postAdoptionForeign.body?.cancel();assert.equal((await readFirstConnectionProbe(f)).native.calls.length,postAdoptionBefore.native.calls.length);
+ await f.adoptConnectionConfiguration({upstream:true});assert.equal(f.transportNormalized,true);
+ const normalBefore=await readFirstConnectionProbe(f),foreignOrigin=await f.negative.fetch(O+'/connections/finite-prepare',{headers:{...choiceHeaders,Origin:'https://foreign.invalid'}});assert.notEqual(foreignOrigin.status,200);await foreignOrigin.body?.cancel();const normalAfter=await readFirstConnectionProbe(f);assert.equal(normalAfter.native.calls.length,normalBefore.native.calls.length,'foreign Origin remains denied before QA under native upstream');assert.equal(normalAfter.negative.forwarded,normalBefore.negative.forwarded);assert.equal(normalAfter.negative.ordinary,0);assert.equal(normalAfter.negative.sql,0);
  const current=await plain(f.stub.firstConnectionContext());assert.equal(current.source?.phase,'read_consent',JSON.stringify(current));f.source=current.source;
  const kv=await f.mf.getKVNamespace('OAUTH_KV','canary-first-connection');
  await kv.put('client:'+f.source.clientId,JSON.stringify({clientId:f.source.clientId,redirectUris:['https://client.example/cb'],clientName:'SYN native client',grantTypes:['authorization_code'],responseTypes:['code'],tokenEndpointAuthMethod:'none',authMethodExplicit:true,registrationDate:Math.floor(Date.now()/1000)}));
