@@ -88,7 +88,13 @@ export async function initialEntryHarness(mode='normal',{negativeProfile=false,o
   }
  }
  const plugin={name:'explicit-SYN-external-data-not-whole-facts',setup(b){
-  if(cleanupCheckpoint)b.onLoad({filter:/mcp-qa-finite-(?:owner-cleanup|initial-cleanup)\.mjs$/},async args=>({contents:instrumentCleanupConsumer(await readFile(args.path,'utf8')),loader:'js'}));
+  if(cleanupCheckpoint)b.onLoad({filter:/mcp-qa-finite-(?:owner-cleanup|initial-cleanup)\.mjs$/},async args=>{
+   // Compose diagnostics after the existing SYN fixture substitution, never
+   // reload the untransformed production ceiling over that prepared source.
+   const name=args.path.split('/').at(-1),source=sources.get(name)??await readFile(args.path,'utf8');
+   if(name==='mcp-qa-finite-initial-cleanup.mjs'){assert(source.includes('CEILING='+approval));assert(!source.includes(approvalDecl));}
+   return {contents:instrumentCleanupConsumer(source),loader:'js'};
+  });
   if(firstConnection)b.onLoad({filter:/mcp-qa-finite-owner-phase-context\.mjs$/},async args=>({contents:(ownerCleanup?instrumentFiniteOwnerCleanup:x=>x)(instrumentFirstConnection(await readFile(args.path,'utf8'),{mutation:firstConnectionMutation})),loader:'js'}));
   if(firstConnection)b.onLoad({filter:/mcp-qa-finite-fixed-policy-engine\.mjs$/},async args=>({contents:instrumentFirstConnectionEngine(await readFile(args.path,'utf8')),loader:'js'}));
   if(firstConnection)b.onLoad({filter:/mcp-qa-finite-initial-lease\.mjs$/},()=>({contents:sources.get('mcp-qa-finite-initial-lease.mjs'),loader:'js'}));
