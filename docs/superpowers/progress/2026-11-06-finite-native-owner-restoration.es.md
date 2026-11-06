@@ -4,6 +4,17 @@ PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT SOURC
 
 ## Identity and current next step
 
+CURRENT: Task1 COMPLETE SOURCE/SYN at2c6b5a0eb503b8d877158f85832c510b9a45f7ca/tree57ac1355a85560dee14b2f933b4b68f877911ae2. Independent spec+quality APPROVED, Critical0/Important0/Minor4 tracked; acceptance40ebf3aa6d9982139f6507336bf352e27c5e9a4f/blob9896fc376075f5fd1bd544864dac8469a25c8692. Do not repeat Task1 or the earlier body-retention fix.
+
+CURRENT: Task2 ACTIVE, sole writer finite_owner_cleanup_impl (Astra high, same agent resumed after NEEDS_CONTEXT). No Source write/Actions occurred before its preflight escalation. It acknowledged the updated binding brief50986e7a6d8e14a9091a72416a2428bdea35dfc2/blob992cb0a2a4b785ade35f97abb017074e944d729c (34991chars) and proceeds with the test/persistence seam and causal native-C0 g0 RED. Source BASE remains2c6b5a0/tree57ac1355; whole-plan BASE7aab233 only for final combined review. Root docs only while writer works.
+
+Plan latest32833cd81e7e84f8d835f83a97da0ebdc62a6408/blob6c294e2189ffb3af3698576e54ed193b8be4f175 (38675chars), implementation-rulings section supersedes older49/38/shared-C1 assumptions. Task2 FINAL GREEN planned51 cases (14+10+9+2+5+1+10), not yet executed. These are distinct from Task1's51 total executions across its failed/intermediate/final runs.
+
+Main last independently read0c9c475b3ebaa970fc11d628b40e50a90cceb727; no runtime read or mutation this block. Source ceiling remains expired, original clocks/three slots unchanged. operationalReadiness=false;completePackage=false;PCoff=false. No human code/credential/consent window open or needed for Source/Actions SYN.
+
+## Initial plan checkpoint (historical; superseded by CURRENT above)
+
+
 Plan at a051f1fc7d1501efee93927bf55110260f138501/blob8f68017afeb18f0869fb3c32bfa0b80537d795c9 (22631chars). Design at ead56350882d81e3edf4952cb2658587b5fdd118/blobcf42e203d07a5e528e64eecd239491686cb73021 (34924chars). Task1brief at c1f69a88a055dd24430b51d0362e50736f17797e/blob40132fe17ea56ecef675324a5edd3f8de2c73892 (14962chars). Allcompletecontent/parent/onepath/refverified.
 
 Task1 BASE7aab233741b09f8873bf04831ca2fa9a9c2b1c4d/tree6eb4241fb4451e7f74ba1b0fd9ad2a02a52cb0f3,Sourcejustreadidentical. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 lastreadunchanged. Priorfinalbodyfix9casesaccepted/one-scopedrereviewclosed; doNOTrepeat oropenitsfixloop. CurrentplanisNEXTfunctionalwork, notanotherfixwaveofthatreview.
@@ -138,3 +149,12 @@ Task2 is READY FOR DISPATCH, not implemented. Fresh implementation model Astra h
 ## Task2 dispatch receipt
 
 Fresh sole Source writer: finite_owner_cleanup_impl (Astra high, fork none), dispatched with the verified Task2 brief as single requirements source. Task2 ACTIVE — pre-write preflight/fixture seam ACK pending. Agent may not write Source before that review. Root retains docs only; no other Source writer. Task1 remains accepted at2c6b5a0. No active real consent window or credential request.
+
+## Task2 NEEDS_CONTEXT resolved — implementation resumed
+
+Root read handling-reports again and settled three concrete preflight gaps, without forcing a retry of an unchanged plan:
+1. Approved SAME fixed SYN outbound-factory/current-options/checkpoint extraction; exact original-baseline restore support with distinct restore ID and after-effect ACK-loss; modeled terminal-bootstrap input explicitly SYN. A local prepare return never proves provider Workflow termination.
+2. Added only lib/mcp-qa-finite-stage-work.mjs for minimal observeFiniteOwnerCleanupWork, non-authorizing cleanup mode, ambient actual retention/exclusion. No synthetic admission or readonly mislabel. Existing modes preserved; initial-cleanup retains actuals before parent races. Two component contracts increase final total to51; native held-delete additionally proves same-ctx lifetime.
+3. Ten maximal Roots do not fit one180s C1. Use six paired SYN GREEN qualifications, each original clock and same frozen Source, in three independent pair-local lanes (twelve explicit jobs), not a matrix-wide producer barrier. g0principal+SDKexpiry; g1genuine partial grant/link and notice/link; g2foreign-pointer+paging; g3unknown-restore+same-fence; g4held-delete+cold-restart; g5late-KV. Max2 native instances/group,40 components before g0 I0 once, RED only g0. No retiming, Source renewal or live rehearsal.
+
+Writer ACK confirmed latest brief, whitelist,51 grouping, Source ref stillBASE2c6b5a0, and proceeds. No production writes before a valid g0 native-C0 RED failure. Additional runner cost/time is laboratory coverage only; abort before I0/recovery on insufficient budget rather than widening clocks. Root did not take over Source or start another writer.
