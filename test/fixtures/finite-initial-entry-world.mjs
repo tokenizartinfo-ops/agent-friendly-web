@@ -9,7 +9,7 @@ import {extendPreparationCleanupFixture} from './finite-preparation-cleanup-entr
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
-import {readFile,mkdtemp,rm} from 'node:fs/promises';
+import {readFile,mkdtemp,rm,mkdir,writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join,resolve} from 'node:path';
 import {build} from 'esbuild';
@@ -112,6 +112,13 @@ export async function initialEntryHarness(mode='normal'){
   w.record.qaLive.module={name:'index.mjs',sha256:sha(built.outputFiles[0].contents),bytes:built.outputFiles[0].contents.length,exports:[...finitePublicProfileTemplate('qaLive').exports]};w.refresh();
   f.firstConnectionBuild={M:{sha256:sha(bytes),bytes:bytes.length,inputs:Object.keys(firstCandidate.metafile.inputs)},QA:{sha256:sha(built.outputFiles[0].contents),bytes:built.outputFiles[0].contents.length,inputs:Object.keys(built.metafile.inputs)},spyHash:firstCandidate.spyHash,residency:resident};
   f.providerRegistry={requests:[],versions:{},pointer:null};
+  const artifacts='output/t2-native-graphs/'+sha(built.outputFiles[0].contents);await mkdir(artifacts,{recursive:true});
+  await Promise.all([
+   writeFile(artifacts+'/native-syn.json',J({purpose:'afw.first-connection-native-syn-build.v1',testRevision:process.env.GITHUB_SHA??null,M:{...f.firstConnectionBuild.M,inputs:undefined},QA:{...f.firstConnectionBuild.QA,inputs:undefined},resident:{...resident,content:undefined},negativeSpyHash:firstCandidate.spyHash,completePackage:false,operationalReadiness:false})),
+   writeFile(artifacts+'/metafiles.json',J({M:firstCandidate.metafile,QA:built.metafile})),
+   writeFile(artifacts+'/canary-index.mjs',firstCandidate.bytes),
+   writeFile(artifacts+'/qa-index.mjs',built.outputFiles[0].contents)
+  ]);
  }
  let finalOptions={...base,script:built.outputFiles[0].text,outboundService:async req=>{
   await delayFiniteOwnerIo(f,req);
