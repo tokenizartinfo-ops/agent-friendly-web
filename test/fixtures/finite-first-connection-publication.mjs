@@ -216,14 +216,14 @@ export function extendFirstConnectionPublication(entry){
  async firstConnectionConfigure(mode='normal'){
   this.firstRestore?.();this.firstState={mode,trace:[],fetchHeld:false,fetchSettled:false,readHeld:false,readSettled:false,cancelHeld:false,cancelSettled:false};this.firstRelease={};
   const owner=this,state=this.firstState,s=this.ctx.storage,env=this.env,native={get:s.get,list:s.list,transaction:s.transaction,sync:s.sync,getAlarm:s.getAlarm},fetcher=globalThis.fetch,wall=Date.now;
-  let writes=[],receiptRead=false,shift=0;const originalMetadata=env.AFW_QA_VERSION,originalQaId=originalMetadata.id,originalPrepare=env.RELEASE_DB.prepare,originalNode=env.AFW_RELEASE_EVENTS_NODE,nodeName=originalNode.idFromName,originalSelf=env.AFW_INDEPENDENT_CLOSURE,selfGet=originalSelf.get,originalKv=env.AFW_FINITE_OWNER_OAUTH_KV,kvGet=originalKv.get,originalReader=env.AFW_MCP_CLOSURE_READ_TOKEN;state.counts={get:0,list:0,transaction:0,sync:0,firstPrimary:0,sql:0};const db=env.RELEASE_DB,withSession=db.withSession;
-  db.withSession=(...args)=>{if(args[0]==='first-primary')state.counts.firstPrimary++;const session=Reflect.apply(withSession,db,args),prepare=session.prepare;session.prepare=(...a)=>{state.counts.sql++;const statement=Reflect.apply(prepare,session,a);if(mode==='source-sql-held'&&String(a[0]).includes('site_projects')){const bind=statement.bind;statement.bind=(...values)=>{const bound=Reflect.apply(bind,statement,values),first=bound.first;bound.first=async(...params)=>{const actual=Reflect.apply(first,bound,params),value=await actual;if(state.sqlHeld)return value;state.sqlHeld=true;return held('work',value);};return bound;};}return statement;};return session;};
-  s.list=(...args)=>{state.counts.list++;return Reflect.apply(native.list,s,args);};
+  let writes=[],receiptRead=false,shift=0;const originalMetadata=env.AFW_QA_VERSION,originalQaId=originalMetadata.id,originalPrepare=env.RELEASE_DB.prepare,originalNode=env.AFW_RELEASE_EVENTS_NODE,nodeName=originalNode.idFromName,originalSelf=env.AFW_INDEPENDENT_CLOSURE,selfGet=originalSelf.get,originalKv=env.AFW_FINITE_OWNER_OAUTH_KV,kvGet=originalKv.get,originalReader=env.AFW_MCP_CLOSURE_READ_TOKEN;state.afterDriftIo={get:0,list:0,db:0,node:0,self:0,kv:0,fetch:0};const afterDrift=kind=>{if(state.holderChanged)state.afterDriftIo[kind]++;};state.counts={get:0,list:0,transaction:0,sync:0,firstPrimary:0,sql:0};const db=env.RELEASE_DB,withSession=db.withSession;
+  db.withSession=(...args)=>{afterDrift('db');if(args[0]==='first-primary')state.counts.firstPrimary++;const session=Reflect.apply(withSession,db,args),prepare=session.prepare;session.prepare=(...a)=>{state.counts.sql++;const statement=Reflect.apply(prepare,session,a);if(mode==='source-sql-held'&&String(a[0]).includes('site_projects')){const bind=statement.bind;statement.bind=(...values)=>{const bound=Reflect.apply(bind,statement,values),first=bound.first;bound.first=async(...params)=>{const actual=Reflect.apply(first,bound,params),value=await actual;if(state.sqlHeld)return value;state.sqlHeld=true;return held('work',value);};return bound;};}return statement;};return session;};
+  s.list=(...args)=>{afterDrift('list');state.counts.list++;return Reflect.apply(native.list,s,args);};
   const target=key=>typeof key==='string'&&(key.startsWith('afw.finite-preparation-cleanup.v1:')||key.startsWith('afw.finite-policy-effect.v1:'));
   const note=(kind,key)=>{if(target(key))state.trace.push({kind,key,at:Date.now()});};
   const held=(name,value)=>{const deadline=owner.firstBoundary.deadline;state[name+'Held']=true;return new Promise((resolve,reject)=>{const tick=()=>{const remaining=deadline-Date.now();if(!Number.isSafeInteger(remaining)||remaining<=0){state[name+'Settled']=true;reject(Error('SYN original request deadline'));return;}if(owner.firstRelease[name]===true){state[name+'Settled']=true;resolve(value);return;}setTimeout(tick,Math.min(10,remaining));};tick();});};
   const get=async(method,holder,args)=>{
-   state.counts.get++;const value=await Reflect.apply(method,holder,args),key=args[0];note('get-settled',key);
+   afterDrift('get');state.counts.get++;const value=await Reflect.apply(method,holder,args),key=args[0];note('get-settled',key);
    if(mode==='clock-backward'&&owner.firstBoundary&&!state.backward){shift-=100;state.backward=true;}
    if(mode==='source-holder-drift'&&owner.firstBoundary&&!state.holderChanged){env.AFW_QA_VERSION={id:originalMetadata.id};state.holderChanged=true;}
    if(mode==='access-expiry-held'&&state.jwkFetched&&!state.workHeld)return held('work',value);
@@ -253,16 +253,16 @@ export function extendFirstConnectionPublication(entry){
   };
   globalThis.fetch=async(...args)=>{
    const url=String(args[0]),method=args[1]?.method??'GET',effect=method==='POST'?(url.endsWith('/versions?deploy=false')?'upload':url.endsWith('/deployments')?'activation':null):null;
-   const response=await Reflect.apply(fetcher,globalThis,args);if(url.endsWith('/cdn-cgi/access/certs'))state.jwkFetched=true;if(!effect)return response;
+   afterDrift('fetch');const response=await Reflect.apply(fetcher,globalThis,args);if(url.endsWith('/cdn-cgi/access/certs'))state.jwkFetched=true;if(!effect)return response;
    state.trace.push({kind:'native-result-enter',effect,at:Date.now()});
    if(effect==='upload'){
     if(mode==='upload-metadata-id-drift'){originalMetadata.id='dddddddd-dddd-4ddd-8ddd-dddddddddddd';state.holderChanged=true;}
-    if(mode==='upload-db-method-drift'){db.withSession=(...args)=>Reflect.apply(withSession,db,args);state.holderChanged=true;}
-    if(mode==='upload-db-prepare-drift'){db.prepare=(...args)=>Reflect.apply(originalPrepare,db,args);state.holderChanged=true;}
-    if(mode==='upload-node-method-drift'){originalNode.idFromName=(...args)=>Reflect.apply(nodeName,originalNode,args);state.holderChanged=true;}
-    if(mode==='upload-self-method-drift'){originalSelf.get=(...args)=>Reflect.apply(selfGet,originalSelf,args);state.holderChanged=true;}
-    if(mode==='upload-kv-method-drift'){originalKv.get=(...args)=>Reflect.apply(kvGet,originalKv,args);state.holderChanged=true;}
-    if(mode==='upload-fetch-drift'){globalThis.fetch=(...args)=>Reflect.apply(fetcher,globalThis,args);state.holderChanged=true;}
+    if(mode==='upload-db-method-drift'){db.withSession=(...args)=>{afterDrift('db');return Reflect.apply(withSession,db,args);};state.holderChanged=true;}
+    if(mode==='upload-db-prepare-drift'){db.prepare=(...args)=>{afterDrift('db');return Reflect.apply(originalPrepare,db,args);};state.holderChanged=true;}
+    if(mode==='upload-node-method-drift'){originalNode.idFromName=(...args)=>{afterDrift('node');return Reflect.apply(nodeName,originalNode,args);};state.holderChanged=true;}
+    if(mode==='upload-self-method-drift'){originalSelf.get=(...args)=>{afterDrift('self');return Reflect.apply(selfGet,originalSelf,args);};state.holderChanged=true;}
+    if(mode==='upload-kv-method-drift'){originalKv.get=(...args)=>{afterDrift('kv');return Reflect.apply(kvGet,originalKv,args);};state.holderChanged=true;}
+    if(mode==='upload-fetch-drift'){globalThis.fetch=(...args)=>{afterDrift('fetch');return Reflect.apply(fetcher,globalThis,args);};state.holderChanged=true;}
     if(mode==='upload-credential-drift'){env.AFW_MCP_CLOSURE_READ_TOKEN='SYN-negative-changed-reader';state.holderChanged=true;}
    }
    if(mode===effect+'-holder-drift'){env.AFW_QA_VERSION={id:originalMetadata.id};state.holderChanged=true;}
@@ -329,7 +329,7 @@ export function instrumentFirstConnection(source,{mutation=null}={}){
  handler=handler.replace("}catch(error){failed=true;position='failed';",()=>"}catch(error){(globalThis.__t3Observation??=[]).push({kind:'connection-failure',position,frames:String(error.stack).split('\\n').filter(line=>/^\\s+at\\s/.test(line)).slice(0,6)});failed=true;position='failed';");
 
 
- const resultTarget="const result=await wait(j[method](value,l));";
+ const resultTarget="const result=await wait(()=>j[method](value,l));";
  assert.equal(handler.split(resultTarget).length,2,'passive original journal result target exactly once');
  handler=handler.replace(resultTarget,()=>resultTarget+"(globalThis.__t3Observation??=[]).push({kind:'journal-mutation',recordKind:kind,method,status:result.status});");
  if(mutation==='existing-ack'){
