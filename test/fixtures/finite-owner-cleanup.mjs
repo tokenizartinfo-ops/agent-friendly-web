@@ -14,10 +14,10 @@ export function extendFiniteOwnerCleanup(entry){
 
  const cleanupMethods=String.raw`
  async ownerCleanupFault(mode){
-  if(!['grant-before-link','notice-before-link','fence-ack-lost','held-sdk-delete','paging-scope'].includes(mode))throw Error('SYN fixed cleanup fault');
+  if(!['normal','grant-before-link','notice-before-link','fence-ack-lost','held-sdk-delete','paging-scope'].includes(mode))throw Error('SYN fixed cleanup fault');
   this.ownerCleanupFaultRestore?.();
   const db=this.env.RELEASE_DB,session=db.withSession,kv=this.env.AFW_FINITE_OWNER_OAUTH_KV,del=kv.delete,list=kv.list;
-  const state=this.cleanupFaultState={mode,sqlWrites:0,reconciles:0,lists:0,deletes:0,held:false,released:false,settled:false,scopeProbe:null,trace:[]};
+  const state=this.cleanupFaultState={mode,sqlWrites:0,sqlCalls:0,sqlElapsedMs:0,reconciles:0,lists:0,deletes:0,held:false,released:false,settled:false,scopeProbe:null,trace:[]};
   this.ownerCleanupFaultRestore=()=>{db.withSession=session;kv.delete=del;kv.list=list;};
   db.withSession=(...a)=>{
    const s=Reflect.apply(session,db,a),prepare=s.prepare;
@@ -28,7 +28,7 @@ export function extendFiniteOwnerCleanup(entry){
      const bound=Reflect.apply(bind,stmt,values),first=bound.first;
      bound.first=async(...args)=>{
       const target=mode==='grant-before-link'&&sql.includes('INSERT INTO delegated_access_grants')||mode==='notice-before-link'&&sql.includes('INSERT INTO dossier_monitoring_consent_events')||mode==='fence-ack-lost'&&sql.includes('INSERT INTO finite_preparation_issuer_fences');
-      const actual=Reflect.apply(first,bound,args),value=await actual;
+      state.sqlCalls++;const started=performance.now(),actual=Reflect.apply(first,bound,args),value=await actual;state.sqlElapsedMs+=performance.now()-started;
       if(target){state.sqlWrites++;state.trace.push({kind:mode,at:Date.now(),actualRow:!!value});if(value)throw Error('SYN actual SQL result lost before link');}
       return value;
      };return bound;
@@ -76,7 +76,7 @@ export function extendFiniteOwnerCleanup(entry){
  async ownerCleanupSignal(){return this.cleanupAlarmSignal??{entered:0,settled:0,status:null,at:null,finishedAt:null};}
  async ownerCleanupFacts(){
   const dbNow=await this.env.RELEASE_DB.prepare("SELECT CAST(unixepoch('subsec')*1000 AS INTEGER) AS now").first();
-  return {dbNow:dbNow.now,wall:Date.now(),alarm:await this.ctx.storage.getAlarm(),rows:[...await this.ctx.storage.list()],signal:await this.ownerCleanupSignal()};
+  return {dbNow:dbNow.now,wall:Date.now(),alarm:await this.ctx.storage.getAlarm(),rows:[...await this.ctx.storage.list()],signal:await this.ownerCleanupSignal(),failures:globalThis.__r2CleanupFailures??[],children:globalThis.__r2CleanupChildren??[]};
  }
  `;
  const marker=' export class Initial extends FiniteClosure{';assert.equal(entry.split(marker).length,2);
@@ -155,4 +155,17 @@ export async function monitoringCleanupScenario(t,mode){
  const built=await buildCleanupComponent({stdin:{contents:monitoringCleanupComponent,resolveDir:process.cwd(),sourcefile:'SYN-monitoring-cleanup-component.mjs'},bundle:true,write:false,format:'esm',platform:'neutral',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none'});
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,script:built.outputFiles[0].text,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],d1Databases:{RELEASE_DB:'SYN-monitoring-cleanup'},durableObjects:{FIXTURE:{className:'MonitoringCleanup',useSQLite:true,uniqueKey:'SYN-monitoring-cleanup'}}}));
  t.after(()=>mf.dispose());const response=await mf.dispatchFetch('https://fixture.invalid',{method:'POST',body:JSON.stringify({mode})});assert.equal(response.status,200);return response.json();
+}
+
+export function instrumentCleanupConsumer(source){
+ const fail=/const fail=\(\)=>\{throw Error\('([^']+)'\);\};/;
+ assert(fail.test(source),'fixed cleanup fail marker');
+ source=source.replace(fail,(_,message)=>"const fail=()=>{const error=Error("+JSON.stringify(message)+");(globalThis.__r2CleanupFailures??=[]).push({at:Date.now(),frames:String(error.stack).split('\\n').slice(0,7)});throw error;};");
+ const child="async function child(work){";
+ if(source.includes(child)){
+  assert.equal(source.split(child).length,2);source=source.replace(child,child+"const childAt=Date.now(),childMono=performance.now();");
+  const end="try{return await clock.wait(actual);}finally{originalLease.signal.removeEventListener('abort',stop);clock.close();}";
+  assert.equal(source.split(end).length,2);source=source.replace(end,"try{return await clock.wait(actual);}finally{(globalThis.__r2CleanupChildren??=[]).push({startedAt:childAt,elapsedMs:performance.now()-childMono,aborted:clock.lease.signal.aborted});originalLease.signal.removeEventListener('abort',stop);clock.close();}");
+ }
+ return source;
 }
