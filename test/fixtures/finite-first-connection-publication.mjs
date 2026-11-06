@@ -134,13 +134,44 @@ export async function compileFirstConnectionCandidate(revision,tree){
  return {script:m.outputFiles[0].text,bytes,program:node.program,resident,metafile:m.metafile,spyScript:spy.outputFiles[0].text,spyHash:digest(spy.outputFiles[0].contents)};
 }
 export function extendFirstConnectionPublication(entry){
- return "import {hashFinitePreparationRecord as firstPrepHash,encodeFinitePreparationRecord as firstPrepEncode,decodeFinitePreparationRecord as firstPrepDecode} from './lib/mcp-qa-finite-preparation-records.mjs';\nimport {readPrivateQaFiniteOwnerContext as firstConnectionContext} from './lib/mcp-qa-finite-owner-phase-context.mjs';\n"+entry.replace(' export class Initial extends FiniteClosure{',String.raw` export class Initial extends FiniteClosure{
+ return "import {createFinitePolicyEffectJournal as firstJournal} from './lib/mcp-qa-finite-policy-journal.mjs';\nimport {hashFinitePreparationRecord as firstPrepHash,encodeFinitePreparationRecord as firstPrepEncode,decodeFinitePreparationRecord as firstPrepDecode,hashFinitePolicyEffectIdentity as firstIdentityHash} from './lib/mcp-qa-finite-preparation-records.mjs';\nimport {readPrivateQaFiniteOwnerContext as firstConnectionContext} from './lib/mcp-qa-finite-owner-phase-context.mjs';\n"+entry.replace(' export class Initial extends FiniteClosure{',String.raw` export class Initial extends FiniteClosure{
  async fetch(request){
-  this.firstBoundary=JSON.parse(request.headers.get('x-afw-finite-boundary'));this.firstConnectionCalls??=[];this.firstConnectionCalls.push({url:request.url,method:request.method,version:request.headers.get('x-afw-finite-version')});
+  this.firstBoundary=JSON.parse(request.headers.get('x-afw-finite-boundary'));this.firstConnectionCalls??=[];this.firstConnectionCalls.push({boundary:this.firstBoundary,url:request.url,method:request.method,version:request.headers.get('x-afw-finite-version')});
   return super.fetch(request);
  }
 
 
+
+
+ async firstConnectionCorruptCompleted(variant){
+  const s=this.ctx.storage;
+  if(variant==='restore'){for(const [key,raw]of this.firstCorruptedOriginal??[])await s.put(key,raw);this.firstCorruptedOriginal=null;await s.sync();return;}
+  if(this.firstCorruptedOriginal)throw Error('SYN corruption not restored');
+  const rows=[...await s.list()],effect=rows.filter(([key])=>key.startsWith('afw.finite-policy-effect.v1:')),send=kind=>effect.find(([key,raw])=>key.endsWith(':send')&&JSON.parse(raw).effect===kind),u=send('upload'),a=send('activation'),r=effect.find(([key])=>key.endsWith(':receipt'));
+  if(!u||!a||!r)throw Error('SYN actual completed publication absent');
+  const up=JSON.parse(u[1]),act=JSON.parse(a[1]),uploadAck=JSON.parse(await s.get(u[0].slice(0,-4)+'ack')),activationAck=JSON.parse(await s.get(a[0].slice(0,-4)+'ack')),receipt=JSON.parse(r[1]),modified=[];
+  const change=async(key,kind,value)=>{const original=await s.get(key);modified.push([key,original]);if(kind==='Preconnection')value.recordHash=firstPrepHash(kind,value);if(kind==='ConnectionReceipt')value.receiptHash=firstPrepHash(kind,value);const raw=firstPrepEncode(kind,value);if(firstPrepEncode(kind,firstPrepDecode(kind,raw))!==raw)throw Error('SYN codec did not roundtrip');await s.put(key,raw);};
+  const foreign='dddddddd-dddd-4ddd-8ddd-dddddddddddd';
+  if(variant==='owner'||variant==='source'){
+   const key='connection-preparation:'+receipt.preconnectionId+':record',pre=JSON.parse(await s.get(key));if(variant==='owner')pre.owner.subject='SYN-foreign-owner';else pre.sourceRevision='e'.repeat(40);await change(key,'Preconnection',pre);
+  }else{
+   if(variant==='context')up.contextHash=act.contextHash='f'.repeat(64);
+   if(variant==='baseline'){up.baselineVersionId=act.baselineVersionId=receipt.baselineVersionId=foreign;up.baselineDeploymentId=act.baselineDeploymentId=receipt.baselineDeploymentId=foreign;}
+   if(variant==='module')receipt.moduleHash='f'.repeat(64);
+   if(variant==='configuration')receipt.configurationHash='f'.repeat(64);
+   if(variant==='version')uploadAck.resourceId=receipt.versionId=foreign;
+   if(variant==='deployment')activationAck.resourceId=receipt.deploymentId=foreign;
+   if(variant==='receipt-links')receipt.baselineDeploymentId=foreign;
+   if(variant==='receipt-time')receipt.completedAt=act.deadline;
+   if(!['context','baseline','module','configuration','version','deployment','receipt-links','receipt-time','writer-head'].includes(variant))throw Error('SYN unknown completed variant');
+   uploadAck.sendHash=firstPrepHash('ConnectionSend',up);activationAck.sendHash=firstPrepHash('ConnectionSend',act);
+   for(const [key,kind,value]of [[u[0],'ConnectionSend',up],[a[0],'ConnectionSend',act],[u[0].slice(0,-4)+'ack','ConnectionAck',uploadAck],[a[0].slice(0,-4)+'ack','ConnectionAck',activationAck],[r[0],'ConnectionReceipt',receipt]])await change(key,kind,value);
+   const key='afw.finite-policy-effect.v1:writer-head';modified.push([key,await s.get(key)]);const h=variant==='writer-head'?up:act,identity={kind:'connection',preconnectionId:h.preconnectionId,sourceRevision:h.sourceRevision,stage:h.stage,effect:h.effect};await s.put(key,JSON.stringify({identityHash:firstIdentityHash(identity),sendHash:firstPrepHash('ConnectionSend',h)}));
+  }
+  this.firstCorruptedOriginal=modified;await s.sync();
+  const root=createFiniteOwnerRequestLease(new Request('https://delegated-canary.agentfriendlyweb.dev/fixture/journal-codec'));
+  try{const identity=kind=>({kind:'connection',preconnectionId:receipt.preconnectionId,sourceRevision:receipt.sourceRevision,stage:'connection',effect:kind}),upload=await firstJournal({storage:s,identity:identity('upload'),now:Date.now}).read(root.lease),activation=await firstJournal({storage:s,identity:identity('activation'),now:Date.now}).read(root.lease);return {codecRoundtrip:true,journalValid:upload.state==='acknowledged'&&activation.state==='installed'};}finally{root.finish();}
+ }
 
  async firstConnectionRestart(){this.ctx.abort('SYN original actor restart');}
  async firstConnectionInstance(){return this.firstInstance??=crypto.randomUUID();}
@@ -219,13 +250,15 @@ export function extendFirstConnectionPublication(entry){
  async firstConnectionReseal(effect='upload',variant='ack'){
   const s=this.ctx.storage,rows=[...await s.list({prefix:'afw.finite-policy-effect.v1:'})],pair=rows.find(([k,v])=>k.endsWith(':send')&&JSON.parse(v).effect===effect);if(!pair)throw Error('SYN actual SEND absent');
   const send=JSON.parse(pair[1]),resourceId=effect==='upload'?'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa':'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb';
+  if(variant==='ack-matched'){const frozen=Date.now();Date.now=()=>frozen;}
   if(variant==='context'){send.contextHash='f'.repeat(64);await s.put(pair[0],firstPrepEncode('ConnectionSend',send));}
   const ack={purpose:'afw.finite-connection-ack.v1',sendHash:firstPrepHash('ConnectionSend',send),resourceId,acknowledgedAt:Date.now()},raw=firstPrepEncode('ConnectionAck',ack);
   await s.put(pair[0].slice(0,-4)+'ack',raw);await s.sync();
-  return {codecRoundtrip:firstPrepEncode('ConnectionAck',firstPrepDecode('ConnectionAck',raw))===raw};
+  const root=createFiniteOwnerRequestLease(new Request('https://delegated-canary.agentfriendlyweb.dev/fixture/foreign-journal'));
+  try{const read=await firstJournal({storage:s,identity:{kind:'connection',preconnectionId:send.preconnectionId,sourceRevision:send.sourceRevision,stage:send.stage,effect},now:Date.now}).read(root.lease);return {codecRoundtrip:firstPrepEncode('ConnectionAck',firstPrepDecode('ConnectionAck',raw))===raw,journalValid:read.state==='acknowledged'};}finally{root.finish();}
  }
 
- async firstConnectionContext(){const request=new Request('https://delegated-canary.agentfriendlyweb.dev/fixture/current'),root=createFiniteOwnerRequestLease(request);try{return await firstConnectionContext({ctx:this.ctx,env:this.env,parent:root.lease});}catch{return {status:'unavailable'};}finally{root.finish();}}
+ async firstConnectionContext(){const request=new Request('https://delegated-canary.agentfriendlyweb.dev/fixture/current'),root=createFiniteOwnerRequestLease(request);try{return await firstConnectionContext({ctx:this.ctx,env:this.env,parent:root.lease});}catch(error){(globalThis.__t3Observation??=[]).push({kind:'public-reader-rejected',frames:String(error.stack).split('\n').filter(line=>/^\s+at\s/.test(line)).slice(0,8)});return {status:'unavailable'};}finally{root.finish();}}
  async firstConnectionProbe(){const rows=[...await this.ctx.storage.list()];return {observation:globalThis.__t3Observation??[],calls:this.firstConnectionCalls??[],business:rows.filter(([k])=>k.startsWith('afw.finite-policy-effect.v1:')||k.startsWith('connection-preparation:')||k.startsWith('afw.finite-preparation-cleanup.v1:')||k.startsWith('owner-ticket:')).map(([key])=>key),alarm:await this.ctx.storage.getAlarm()};}
  `);
 }
@@ -254,14 +287,44 @@ export async function readFirstConnectionProbe(f){
 }
 
 /** Passive SYN scalar/frame observation; no guard, return, body or source changed. */
-export function instrumentFirstConnection(source){
+export function instrumentFirstConnection(source,{mutation=null}={}){
  const fail="const fail=()=>{throw Error('Finite owner phase context unavailable');};";
  assert.equal(source.split(fail).length,2);
  source=source.replace(fail,()=> "const fail=()=>{const error=Error('Finite owner phase context unavailable');(globalThis.__t3Observation??=[]).push({kind:'failure',frames:String(error.stack).split('\\n').filter(line=>/^\\s+at\\s/.test(line)).slice(0,6)});throw error;};");
  const start=source.indexOf('export async function handlePrivateQaFiniteOwnerConnection('),end=source.indexOf('/** Fixed unmounted QA implementation.',start);
  assert(start>=0&&end>start);let handler=source.slice(start,end);
  handler=handler.replace("}catch(error){failed=true;position='failed';",()=>"}catch(error){(globalThis.__t3Observation??=[]).push({kind:'connection-failure',position,frames:String(error.stack).split('\\n').filter(line=>/^\\s+at\\s/.test(line)).slice(0,6)});failed=true;position='failed';");
+
+
+ const resultTarget="const result=await wait(j[method](value,l));";
+ assert.equal(handler.split(resultTarget).length,2,'passive original journal result target exactly once');
+ handler=handler.replace(resultTarget,()=>resultTarget+"(globalThis.__t3Observation??=[]).push({kind:'journal-mutation',recordKind:kind,method,status:result.status});");
+ if(mutation==='existing-ack'){
+  const target="if(result.status!=='recorded'||result.recordHash!==prepHash(kind,value))fail();";
+  assert.equal(handler.split(target).length,2,'negative-only own recorded ACK target exactly once');
+  handler=handler.replace(target,()=>"if(result.status!=='recorded'&&!(kind==='ConnectionAck'&&result.status==='existing')||result.recordHash!==prepHash(kind,value))fail();");
+ }
  source=source.slice(0,start)+handler+source.slice(end);
+ const publicTarget="if(s.records.effects.length&&!s.installed.receipt||s.preparation.ticketUse&&!s.preparation.stageApproval)fail();";
+ assert.equal(source.split(publicTarget).length,2,'passive public partial boundary exactly once');
+ source=source.replace(publicTarget,()=>"if(s.records.effects.length&&!s.installed.receipt)(globalThis.__t3Observation??=[]).push({kind:'public-partial-target'});"+publicTarget);
+ if(mutation==='public-partial'){
+  const target="if(s.records.effects.length&&!s.installed.receipt||s.preparation.ticketUse&&!s.preparation.stageApproval)fail();";
+  assert.equal(source.split(target).length,2,'negative-only public partial target exactly once');
+  source=source.replace(target,()=>"if(s.preparation.ticketUse&&!s.preparation.stageApproval)fail();");
+ }
+ const correlators=[
+  ["pre.owner.subject!==p.subject","sa.ticketHash!==t.ticketHash",'preparation'],
+  ["s.preconnectionId!==id","s.contextHash!==contextHash",'connection-history'],
+  ["upload.ack.resourceId===capsule.activatedVersionId","actual.pointer.versionId!==upload.ack.resourceId",'publication-pointer'],
+  ["receipt.moduleHash!==capsule.moduleHash","receipt.configurationHash!==finiteActivationConfigurationHash",'receipt-physical-hash'],
+  ["f.effects.size!==expectedRows","writer-head",'writer-head']
+ ];
+ for(const [first,second,name]of correlators){
+  const lines=source.split('\n'),matches=lines.map((line,i)=>line.includes(first)&&line.includes(second)?i:-1).filter(i=>i>=0);assert.equal(matches.length,1,'passive correlator label '+name);
+  const i=matches[0];assert(lines[i].endsWith('fail();'));lines[i]=lines[i].slice(0,-7)+"{(globalThis.__t3Observation??=[]).push({kind:'correlator',name:'"+name+"'});fail();}";source=lines.join('\n');
+ }
+
  source=source.replace("async function observeOwnerPhasePair(options){\n let clock,onAbort,parentSignal;",()=>"async function observeOwnerPhasePair(options){\ const observedAt=performance.now();\n let clock,onAbort,parentSignal;");
  source=source.replace("}finally{if(parentSignal&&onAbort)parentSignal.removeEventListener('abort',onAbort);clock?.close();}",()=>"}finally{(globalThis.__t3Observation??=[]).push({kind:'pair',elapsedMs:performance.now()-observedAt});if(parentSignal&&onAbort)parentSignal.removeEventListener('abort',onAbort);clock?.close();}");
  return source;
