@@ -1,0 +1,1800 @@
+# Whole-branch review packet 15/26 — docs
+
+PROJECT=AFW; repository=tokenizartinfo-ops/agent-friendly-web; SOURCE head=8b2380c9bcc9c383ec46590df1403eed19fd2659; tree=07079c8cc3670a6a1db51ca1daadbf3172c2d445; mergebase=f4ff51596be918e9d556f6765aeb0441133ff52f. Review index in this directory is authoritative for complete579file/954commit coverage. This packet contains full U10 diffs and exact blob provenance for 9 files; no runtime or merge authorization. Generated in cloud tool memory from pinned GitHub text, no local checkout/build.
+
+## Packet manifest
+
+- docs/superpowers/progress/2026-11-01-finite-native-confirmation-cleanup.md: ABSENT -> f8e200c0f8b38e2c6877894e93ecd24a8029361f; full diff chars=260229
+- docs/superpowers/progress/2026-11-05-deferred-review-minors.es.md: ABSENT -> 8ba955705a129fb27a61211b2ef486d41c21a194; full diff chars=7471
+- docs/superpowers/progress/2026-11-05-finite-native-first-connection-publication.es.md: ABSENT -> dd1cd80434ae8c63ca4adb70a8d00b35674d26fe; full diff chars=19089
+- docs/superpowers/progress/2026-11-05-finite-native-notice-consent.es.md: ABSENT -> 2e07b7497ed309758d5939f610d51a993ca45be2; full diff chars=20558
+- docs/superpowers/progress/2026-11-05-finite-native-notice-link.es.md: ABSENT -> 5ab4c81e76d44398a7dd4c08268aedaa5381ca67; full diff chars=8447
+- docs/superpowers/progress/2026-11-05-finite-native-notice-next-slice.es.md: ABSENT -> efbc1ce8366f3319fe8b7e74f83728688c992897; full diff chars=9381
+- docs/superpowers/progress/2026-11-05-finite-native-notice-provenance.es.md: ABSENT -> 082d55fd873fdc8858407d22d6f2bd929ccc2984; full diff chars=4379
+- docs/superpowers/progress/2026-11-05-finite-preparation-notice-store.es.md: ABSENT -> e83566751c45a714e26350324e81150985d5c539; full diff chars=6859
+- docs/superpowers/reports/2026-11-01-finite-material-task1.md: ABSENT -> 3ef7d13ac1704feaa77e9b63c16c09669bf4fb5f; full diff chars=9677
+
+## docs/superpowers/progress/2026-11-01-finite-native-confirmation-cleanup.md
+
+~~~~~~~~~~diff
+diff --git a/docs/superpowers/progress/2026-11-01-finite-native-confirmation-cleanup.md b/docs/superpowers/progress/2026-11-01-finite-native-confirmation-cleanup.md
+--- /dev/null
++++ b/docs/superpowers/progress/2026-11-01-finite-native-confirmation-cleanup.md
+@@ -0,0 +1,1156 @@
++Implementation baseline cd13d3de95e32adaef0411e94b5665dae3cdbcc2/tree c3faa9d40dd38f5cb0f4ee03972ef07f12e375cb, accepted PR709 (complete known-cancellation adapter + actual wrapper). Fresh design and focused containment reviews accepted with recorded root rulings. Historical design baseline7163 remains below; runtime readiness=false.
++
++# Finite native confirmation cleanup — progress
++2026-11-01 · AFW · DESIGN ONLY
++
++Verified GitHub main7163bde8a956f82fe1a55bae1116123c3ee72371 before writing this isolated three-document branch. Source audit found no existing per-generation finite finalizer; reuse interfaces and concrete missing mounts are specified in ../specs/2026-11-01-finite-native-confirmation-cleanup.md. Four reviewable tasks are in ../plans/2026-11-01-finite-native-confirmation-cleanup.md.
++
++Status: spec/plan drafted; ROOT fresh design review pending, implementation NOT STARTED. Known-cancellation adapter remains a separate active dependency. No tests run for these prose-only additions; native/source acceptance belongs to the proposed tasks.
++
++No runtime/source implementation edits, grants, credentials, DDL, deployments, commands/trials, local files/dependencies or subagents. Existing closed runtimes and legacy history were not mutated. operationalReadiness=false; physical stop, native unsubscribe, useful review and PC-off remain unproved by this design.
++
++One consolidated design fix wave after root fresh review: concrete native seal/writer-terminal/no-admission proof and discriminated finite consumers; strict legacy stopped-instance contract preserved; Task4 bound to accepted known-cancellation wrapper/original event; mandatory phase-aware complete inventory; separate finalizer workflow/run/concurrency without readiness-lock cycle. Scoped root rereview pending. No implementation/runtime changes.
++
++Root narrow ruling after scoped review089e362: original P1/rulings resolved; residual P2 closed in design by pre-canary-POST retained proof/evidence readback, retained producer provenance, separate durable canary/QA effect claims, one challenge capture/two fact consumers, and bounded fixed-transport restart recovery. Added focused Task2/3 canary-closed/live-observer-unavailable case. Root states no additional design review required for this narrow ruling. No implementation/runtime/new custody; unavailable evidence/transport remains admin-pending.
++
++New root-selected prospective containment choice added: real finite canary denies legacy deliverOwnSaved before any host/state access; typed finite method resolves only intent/control through concrete server-owned QA capability/producer. Exact legacy issued uncertainty remains; no completion/refund claim. Added Task2/4 inherited-history, delayed RPC/await/transaction and signed-packet tests. Focused architecture review of THIS new choice pending; implementation/runtime untouched.
++
++Focused containment reviewd6dab approved subject root P2 ruling now recorded: prepare INFO has only planned selectors; captureObservedFacts fixed internal enum obtains actual first-primary facts once, append-only under unchanged controlHash. Exact saved revision/fingerprint and receipt comparisons, private technical hashes, unknown-ACK read-only reconciliation and Task1/4 native cases added. Root states no additional design review needed for this narrow ruling. No code/runtime changes.
++
++Root execution gate: PR709 merged cd13d3de after exact-tree CI41311775582 14/1403/5039PASS0FAIL1oldSKIP/all9checks and fresh reviews0pending; source dependency satisfied. Design P1 no-admission, phase inventories/cancellation independence, retained-proof P2 and prospective containment/planned-facts P2 resolved in final8d5c12ab. Task1 may implement only new finite control/tests. No runtime/credentials/source profile promotion follows from this plan. Use source-qualified deny-first finite gate before accepting retained legacy-issued uncertainty; never clear or mark old journals complete.
++
++## Root pairwise preflight and execution rulings (2026-11-01)
++T1 control/hash/clocks and T2 guard share pending/armed and immutable effect claims: pending can clean up but never authorizes nominal work. T1/T3 finalizer evidence requires the actual in-progress exact job and completed fixed ready step, with original R1. T1/T4 use a trusted actual ctx/env constructor and planned-only INFO; real primary producers remain Task2/4. T2/T3 retain one captured proof for two fact consumers with distinct restore claims and no former live observer after canary rollback. T2/T4 require every admission/launch path to participate in seal and the prospective deny-first legacy gate. T3/T4 separate readiness from writer lock and cancel groups, with actual profile/pin evidence. Each task's source acceptance stays separate from runtime promotion.
++
++Root retained-proof transport ruling: Task2/3 use an exact precreated PrivateQaBootstrap observer Workflow, bound to intent/control, with existing qualified QA custody only. Server exact-head selection resolves the once-captured proofHash and invokes readRetainedFiniteCleanupProof; no generic DO REST, public HTTP or new custody. At most 32 distinct bounded reads under original C1/R1. Exact observer may remain active during canary restoration under the complete phase inventory while nominal confirmation is already terminal; observer must be terminal before QA restoration. Fixed readFiniteTrialCleanupCompletion({intentId,controlHash,proofHash}) returns a bounded retained receipt only after canary readback and settled effect journals. Completion excludes observer-terminal/QA-restore/GHA-done. Observer returns proof+completion, provider completes, GHA obtains fresh independent primary checks, then QA restore may claim its separate effect. Unknown issued restoration cannot produce completion without qualified read-only reconciliation. This remains pending Task2/3 source work; no Task1 transport added.
++
++Root ACK ruling: lost arm ACK never authorizes nominal work. Task1 deliberately requires the same trusted instance's acknowledged prepare for the nominal claim. Hibernation/reconstruction between prepare and nominal means stop/admin-pending, never automatic reprepare. Task4 must compose that instance or seek a separately reviewed server receipt handoff.
++
++## Task1 implementation and qualification
++Status: Task1 implemented source-only; ready for root's independent task review. Tasks2–4 remain pending. Assigned BASE8b3ebb647edca8249aa1c8f237c047c996ba858d; final code a5cefc7df7c6644bcb9bb94f2b8ba1e851216dc8. Report: ../reports/2026-11-01-finite-native-cleanup-task1.md.
++
++Cloud TDD: RED375c28573f4ff28112165816c4fc4096bfac5b73 / Actions41314102576 / job124870400077:40 tests,13PASS27FAIL0SKIP (missing factory). Final Actions41315067210 / job124873249214:53 focused+2 native+89 nearby PASS,0FAIL0SKIP; scoped lint clean. Commands and intermediate native fixture diagnosis are in the report. Full integrated suite/build is root's later gate.
++
++New unmounted lib/mcp-qa-finite-trial-control.mjs, focused/native tests and fixture only. Canonical immutable plan/INFO, distinct QA/canary artifact tuples, original clocks, native branded coherence pin, exact finalizer-ready/containment/quiescence predicate, pending+alarm before armed CAS, planned-only selectors and append-only observed facts, sticky clock-reversal rejection, narrower consent retained through awaits, immutable issued effects and read-only reconciliation. Original legacy issued/complete/absent/absent history and uncertainty remain unchanged.
++
++Fixed effects: nominal, withdraw, close, seal, canary_restore, qa_restore. Fixed capture kinds: subscription, process, saved_event. No arbitrary caller facts/selectors/receipts, effect retries/refunds or nominal resurrection after ACK loss. Cleanup may use pending control/facts under separate original deadlines. Concrete primary producers, proof validation/transport, guard and actual wrapper/profile remain absent/unmounted.
++
++Explicit first-intent-only restriction: the fixed head is never advanced/reset, including after withdrawal/expiry; a consumed finite history blocks any new intent. Tests prove preservation. This is not a repeatable lifecycle and must not consume the unique successor occurrence on an extra rehearsal.
++
++Temporary .github/workflows/finite-task1-temporary-qualifier.yml is branch-only Actions scaffolding and must be EXCLUDED from eventual source integration. It is not the independent finalizer. No local files/dependencies/builds, child agents, runtime/custody/grant/schema changes, live requests or PC-off work occurred. Source rollback is revert only; operationalReadiness=false.
++
++Root14:16UTC: Task1 review dispatched against immutable BASE8b3ebb64..HEAD7876f631/codea5cefc7d to review_finite_control_task1, no code changes during review. Added detailed concrete observer ruling to spec/plan after focused architecture review (including amended guard-completion receipt/order) returned no P1/P2. Tasks2–4 remain pending. Temporary qualifier remains branch-only; source runtime closed/operationalReadiness=false.
++
++## Task1 independent-review fix round 1/5
++One P2: cleanup claim write/ACK could settle after original C1/R1 and return issued. Preserving root headc888e156216013ae3a41bc704eb4ff7b2b9e54e6, REDfa2bc42a/run41315656840/job124875021543 reproduced close/qa_restore exact-boundary failures:53PASS2FAIL. Fix3b11c580c721f545e6497490792c9d1d092b01a9 retains an invocation-wide original cleanup deadline for each new claim through every await and final return; late writes are uncertain and remain consumed, with no refund/retry. Existing-claim reads and receipt reconciliation remain read-only after expiry. GREEN41315740901/job124875264618:55focused+2native+89nearby=146PASS0FAIL0SKIP/scopedlintclean. Only control/focused tests changed; no full suite or runtime work. Same report updated; root scoped rereview pending. First-intent/same-instance restrictions and temporary qualifier exclusion remain. operationalReadiness=false.
++
++
++## Task1 root acceptance and Task2 gate ruling
++Root accepted Task1 code3b11c580 after scoped independent review: original P2 cleanup-claim late ACK ADDRESSED, 0 remaining; Actions41315740901/job124875264618 146PASS0FAIL0SKIP and scoped lint clean. Task1 complete source-only; no intermediate merge required.
++
++Task2 begins from5feb4e9110b3f2afdfe1cada745460182626a526. Actual source inspection found QA reservation D1 INSERT, candidate custody admission INSERT and successor launch claim/runtime send are distinct non-atomic writers. Root accepted a fixed candidate-DO gate: reservation begin/settle RPC carries exact intent/control only; process admission/launch share that gate. Immutable issued-before-send markers, original request/cleanup deadlines and exact first-primary correlated settlement are required. Seal blocks new writers but never converts held/late/unknown issued work to terminal. Bare absence, HTTP success or Workflow terminal do not settle writes. Optional INTERNAL module capability preserves legacy when absent; Task4 supplies actual binding/profile constructor without adding caller authority to runKnownCancellationReleaseWorkflow({bundle,env,event,step}). Unsettled work may remain admin-pending; no atomic remote-cancel claim. operationalReadiness=false.
++
++## Task2 implementation complete — root independent review pending
++2026-11-01 15:56UTC. Assigned BASE5feb4e9110b3f2afdfe1cada745460182626a526; final code fa087bde941638b2a3584172ab07911b75b93124. Actions41323580857/job124898739889:415PASS0FAIL0SKIP; expanded scoped ESLint clean. Full report: ../reports/2026-11-01-finite-native-cleanup-task2.md. Whole-branch integrated CI/review remains root-owned; no intermediate merge.
++
++Implemented native finite writer gate and actual reservation/custody/launch hooks; immutable original-claim nominal child view with exact owned-writer accounting; pending-before-first-ready ordering; optional fixed-actor finite alarm, max three original recovery slots; permissions-only reduction + historical close with separate issued journals and original C1; one challenged native proof after GET-only readiness; retained proof/readback and bounded completion; fixed documentary RPCs; exact finite canary restorer and phase-aware full inventory using the existing allowlisted transport. Actual workerd DO/D1 fixtures cover held/late writer settlement, reservation-only/no-admission, delayed stop, reconstruction, post-N1 cleanup, lost close/restore ACK and closed-profile read compatibility. Providers/custody/stop callbacks/source metadata in fixtures are explicitly synthetic.
++
++Dependency corrections/rulings are appended to spec and plan: five exact module pins; canonical finite cleanup policy; actual applicationId strict32hex (D1 UUID unchanged); actual narrowed Task1 nominal deadline remains valid only until its original bound; new AFW_FINITE_TRIAL_VERSION is a future real binding/compatibility gate; no generic counter/whole-actor exclusion; strict RPC own shape. Root's interim narrowed-claim finding was reproduced RED630b7ea3/41323511136/job124898528439 then fixed in final code. Full TDD checkpoints and self-review corrections are in the report.
++
++Task3 still owns actual bootstrap material preview/observer/GHA transport/custody; Task4 owns the actual fixed constructors, complete primary inventory/resolver/delivery containment and approved artifact/profile packaging. Source factories are not installed by default. Original known-cancellation wrapper shape/event/stage/deadline contract is preserved. Pre-arm setup stays operator-attended; missing proof/native/credential authority remains admin-pending. Workflow POST401 remains a promotion gate, not an inferred permission fix.
++
++No runtime/profile/binding, credential/token/grant/custody, remote schema or trial action occurred. No local source/dependencies/build, no child agents. Branch-only .github/workflows/finite-task1-temporary-qualifier.yml must be excluded from eventual integration. Source rollback is revert only; legacy journals/history and uncertainty remain intact. operationalReadiness=false.
++
++
++## Task2 review fix round 1 — ready for scoped rereview
++2026-11-01 UTC. FIX_BASE `340aca28d86bd4609fb0f077842f515b06ebf69a`; final fix code `75c71b2394c44e880b3238c4866136b707158315`. The single assigned P2, “Preserve the finite nominal deadline beyond beginLaunch()”, is addressed in implementation; root independent scoped rereview remains pending.
++
++Durable fixed writer claims retain the effective nominal/consent deadline. A shared branded internal continuation check carries it through reservation, custody and successor launch awaits and business sends; all three primary write predicates are bounded too. Custody's invocation-local nominal context does not constrain separate cleanup; immutable settlement retains original C1. Unknown emitted effects remain consumed/unresolved, never retried.
++
++Meaningful tests-only RED `ba992668481de930afbd7222602ff707eb073100`, Actions41325554517/job124904625120: 67 PASS / 4 FAIL including actual late launch/INSERT and lost narrow claim deadline. Final [Actions41325873588/job124905564368](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41325873588/job/124905564368): 72 focused + 6 affected native = **78 PASS / 0 FAIL / 0 SKIP**, scoped lint clean. The report appendix records the initial assertion/fixture clock corrections and exact commands; no broader full-suite rerun was substituted for focused coverage.
++
++Doc-only clarification: the older Root execution ruling now agrees with the accepted exact observer payload `{operation,intentId,sourceRevision}` and first-step native material-preview plan/control references for admit-and-ready before prepare. No Task3 behavior or new ruling implemented. Root owns subsequent Task3 document changes after branch handback.
++
++Report: [Task2 report, fix round 1 appendix](../reports/2026-11-01-finite-native-cleanup-task2.md). Existing Task1 acceptance/report and Task2 history preserved. No runtime/credential/grant/schema/trial action, local source/dependency/build or child agent. Exclude branch-only temporary qualifier from eventual integration; source rollback by revert only. operationalReadiness=false.
++
++
++## Root Task3 preflight — concrete native claim transport
++Task2 fix code75c71b23/HEADc79cc383 has covering78PASS0FAIL0SKIP/scopedlint0 (41325873588/job124905564368); scoped independent rereview is pending, so Task3 code has NOT started.
++
++A focused architecture/source review found no native qa_restore claim channel from GHA after its proof observer becomes terminal. Root accepts the smallest cycle-free handoff now documented in spec and Task3 brief: same exact observer performs one acknowledged native qa_restore claim journal step after guard completion, returns immutable technical claim facts, reaches provider complete; actual external finalizer under its late writer lock makes a separate unique append-only GitHub send claim and one QA POST. Existing/unknown native/send claims reconcile only; originalR1 and source/job/resource/proof binding remain mandatory. No bearer/token/newroute or process-local-only fence. Dedicated technical plan projection avoids copying private selectors/consent to GHA artifacts. Admit/poll and later fixed restore jobs are exact phase-correlated within same finalizer run.
++
++Ruling: use this fixed channel rather than a new public/native transport or credential — addresses a real source plan dependency without a terminal-observer claim cycle — cost if wrong is source rework/admin-pending, never authority to repeat effects. Live WorkflowPOST401 scope remains unresolved; no grants, runtime, policies, credentials, instances or remote schema changed. operationalReadiness=false.
++
++
++## Task2 scoped review round 1 verdict; fix round 2 underway
++2026-11-01 UTC. Reviewer verdict on round 1: **NOT_ADDRESSED (partial fix), 0 addressed / 1 open**. The same original P2 remains open: the retained deadline was checked only after actual runtime.launch returned; its nested makeControl await could still resume into container.start after D. This is a residual of the existing finding, not a new Task3/Task4 feature.
++
++Round 2 FIX_BASE is c79cc3834231f532591652cddc594c40d1de6985; root's documentation-only child c1e643db608074d5afc4784055c0c916e695dc30 is preserved as the editing parent. The fix will propagate the internal narrowing assertion through the actual runtime continuation and prove zero native starts after a held makeControl crosses D. Legacy absence and independent C1 cleanup remain required. No Task3 implementation, runtime/credential action or new authorization.
++
++
++## Task2 review fix round 2 — implementation ready for scoped rereview
++2026-11-01 UTC. Same original P2; previous scoped verdict remains 0 addressed / 1 open pending rereview. FIX_BASE c79cc3834231f532591652cddc594c40d1de6985; root documentation child c1e643db608074d5afc4784055c0c916e695dc30 preserved. Final round-2 code `f8780ba3552412b82ead3b79d78b81de4927b87b`.
++
++The retained narrowing assertion now crosses the actual custody → fixed host successor adapter → launch gate → original Container runtime boundary. The runtime checks it after makeControl and each subsequent launch-side await, before the next native send. No new RPC/public authority or known-workflow argument; absent finite assertion preserves legacy behavior, and independent cleanup retains C1.
++
++Tests-only RED1bef2107/Actions41326569433/job124907651117: 46 PASS / 2 FAIL, both actual-runtime compositions emitting one native start after held makeControl crossed D. Final [Actions41326751931/job124908186503](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41326751931/job/124908186503): **50 focused + 6 native = 56 PASS / 0 FAIL / 0 SKIP**, scoped lint clean. The report's round-2 appendix contains exact commands, the retained consumed journals and limits. No full-suite rerun, live/runtime/credential action, local build or subagent. Root owns scoped rereview and Task3; branch handback follows this documentation receipt. operationalReadiness=false.
++
++
++## Task2 root acceptance after scoped fix round2
++Independent scoped review closed original narrower-deadline P2: ADDRESSED, no new actionable breakage. Round1 remained0addressed/1open because actual Container runtime awaited makeControl under a broader clock; round2 f8780ba3 threads the internal assertion through custody/fixed host/gate/runtime and checks after each awaited launch stage before the next native send. RED41326569433/job12490765111746PASS2FAIL; GREEN41326751931/job12490818650350focused+6native=56PASS0FAIL0SKIP/scopedlint0. Final task HEADb902617a. Earlier415-test checkpoint and round1 78-test run are historical proportional evidence, not full final suite. Task2 complete SOURCE only; Task3 may start at the next doc child. Full branch CI/review and actual factories/profile/promotion still pending; temporary qualifier excluded later.
++
++Independent PR710 source probe merged mainabed6474/tree51916f25 after exact-tree CI41326034268 (14/1403/5115PASS0FAIL1oldSKIP) and fresh review. A SINGLE readonly live command6560728289/run41326878464/job124908564953 called the fixed verify endpoint and returned HTTP200 but blocked/invalid_response. Actual token identity is STILL unknown; no permission/workflowcreate/readiness conclusion. Artifact13091582273,ZIP441B/SHA99ff98cc1ea557ee03dbb8fc9323a5d555b12c48621d886ba673bcae93c6ee7f, read in memory only. No provider writes/new runtime, key/role/permission or AFW trial; do not rerun unchanged probe. Further response-grammar diagnosis is separate from Task3. operationalReadiness=false.
++
++## Root ruling — retained first-primary receipt replaces unavailable external D1 query (Task3, 2026-11-01)
++Focused architecture review accepted this explicit replacement. No external bounded administrative D1 endpoint is accredited. The SAME observer, after settled guard completion and acknowledged native qa_restore claim, obtains one fresh first-primary snapshot through the concrete fixed QA producer's ACTUAL bound DB path under its short original lease and R1. It compares exact row hashes/process generation/settled writer journals to the retained proof (only observation timestamps may differ), and correlates control/proof/completion/native claim/seal/source/native identity before and after the read. Its bounded immutable receipt hashes those references and the observation; it never refreshes its timestamp on external replay.
++
++Irreversible seal, settled writers, and qualified closed source must exclude ALL remaining scoped writes, including already-issued remote writes and old continuations. A known active/pending/unresolved administrative or independent writer blocks; broad credential capability alone does not establish an active writer. Empty Workflows and a closed current deployment ALONE are insufficient: an outstanding D1 write could still commit after the receipt.
++
++After observer completion and acquiring the QA writer lock, GHA performs fresh GET-only checks of exact closed chain/modules/configuration/namespaces/exposure/full Workflow and provider inventories, then validates the retained first-primary receipt and its qualified writer-exclusion lineage. Changed pointers/source/lineage or incomplete inventory stays admin-pending. This is NOT a new external D1 query or an unseen-foreign-writer guarantee. Task4 owns actual source/producer qualification; absence remains unavailable. Original R1, native claim and separate durable send fence remain unchanged. Add a negative fixture holding an actual outstanding D1 writer after the observation: no send claim or POST.
++
++The GitHub send fence uses an immutable annotated tag object and atomic unique ref under the fixed intent/control/qa_restore domain, never run/job/source as an additional namespace. Content binds native claim/proof/exact run/attempt/job/source/candidate/target. Only the execution ACKing a NEW ref201 before R1 may POST. Existing/unknown ACK/restart is GET-only; no deletion, force, reassignment, refund or resend. Tag-object creation alone grants nothing.
++
++Cost if exclusion cannot be qualified: admin-pending and source rework, never blind restore, a new transport or credentials. operationalReadiness=false.
++
++## Task3 handback — source only (2026-11-01)
++Task3 DONE_WITH_CONCERNS at qualified source aaa3a5cb663993d1843f6a432b98f98810a94f3c (BASE529fac1a99a167aaeccac4ada96a41904adb771a); this report/ledger is the documentation-only child. Full report: [2026-11-01-finite-native-cleanup-task3](../reports/2026-11-01-finite-native-cleanup-task3.md). Hosted run [41330951514](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41330951514)/job124920741851: 63 focused +143 preserved +3 actual native =209PASS,0FAIL,0SKIP; scoped lint clean. Initial RED3 missing APIs and later RED late-C1 poll regression were observed before fixes. Actual native Workflow/DO claim handoff and held D1 writer are covered; unresolved real pending write prevents finalizer/send claim/POST even though that write can subsequently commit. Workerd owned returned RPC AND Workflow-step handles require clone/release before exact DTO validation; diagnostic test instrumentation removed.
++
++Implemented exact material-first observer, one native qa_restore journal claim, immutable retained first-primary receipt, bounded technical projection, exact new command, separate external finalizer workflow with phase-specific primary GHA metadata, fixed CF adapters, durable annotated-tag/atomic-unique-ref send claim and single QA POST/readback. NEW ref201 ACK only; existing/unknown/restart GET-only. Own actual Workflow env version_metadata + compiled source + original event.instanceId establishes execution provenance separately from DO preview; Workflow versionId never equals Worker version by inference. actions:read explicit on admit/restore, contents:write for their existing append-only fences, existing protected CF environment only.
++
++Root clarified TOTAL<=32 readonly step.do calls INCLUDING preview and final-primary; 30 cleanup samples cover original C0..R1-5000, sleeps excluded, one separate native claim. Cost is slightly coarser sampling/possible admin-pending, no extra authority. External poll separately uses 48 deterministic original T0..R1-5000 slots; regression caught and fixed old 48x5s exhaustion near C0. All awaited custody/readiness/tag/ref/creation work preserves original command margin and original R1 including queues.
++
++The retained-first-primary replacement and GitHub append-only fence root rulings were committed before relevant code (5e859f55). Complete scoped writer exclusion must include outstanding remote writes/old continuations/known administrative writers; empty provider/Workflows alone is insufficient. Inability to qualify the chain means admin-pending/source rework, never a blind restore, extra transport or credentials.
++
++Task4 must install actual compiled observer/native material/primary/external source factories/profile/private producer/delivery and nominal integration. Defaults remain unavailable; current real token identity/effective permissions remain unqualified by this task. Separate main probe work was not imported. No actual runtime/provider operation, command, trial, credential/role/permission/DDL/OAuth/Max action or unique successor was spent. operationalReadiness=false. Root owns fresh task review, whole-branch review/full CI/integration. EXCLUDE temporary .github/workflows/finite-task1-temporary-qualifier.yml from final integration; cloud-only work, no local source/temp/dependencies/build.
++
++## Root ruling — original execution and GET-only send-fence recovery (Task3 round1, 2026-11-01)
++Only the fixed trusted GHA restore launcher, invoked ONCE in authenticated attempt1, may initialize one module-private original-execution capability. It binds exact authenticated admission, intent/control/proof/source, primary run/attempt/job/step and the actual original Node process. The launcher sets a task-specific PID marker once and execs Node once; PID equality is coherence ONLY, not durable process identity or source provenance. Qualified checked-out source and exact primary workflow/job are the trust boundary. No retry, supervisor or recovery launcher regenerates the marker in this supported source.
++
++GitHub [run_attempt](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#github-context) increments on a true workflow rerun, which remains denied. Same-attempt reexecution of the WHOLE launcher is explicitly outside this supported scope: neither metadata nor PID can distinguish it. If the host cannot establish the once-launch assumption, no capability is admitted and the result is admin-pending.
++
++One capability is shared across ALL clients in that original process. Consume it privately at FIRST claimSend entry BEFORE ANY send-fence mutation, including annotated-tag POST. An earlier GET failure may conservatively poison it. GET first: an existing fence permits only reconciliation and never refunds the capability. Unknown/lost tag/ref ACK consumes it permanently. Reconstruction with the same capability cannot refund it; default/no-cap/recovery, INCLUDING GET404, performs only GETs and remains admin-pending when the fence is absent. No caller boolean, recovery permission flag, DTO or 404 mints authority. Only the original execution acknowledging NEW ref201, still within its original bounds, may issue the single QA POST.
++
++Revalidate original R1/cancellation/source/identity at awaited boundaries and before mutation. A child/new process inheriting the old PID marker fails coherence. The fixed workflow must actually contain one exec invocation and no wrapper retry. Atomic ref uniqueness remains the final durable send fence; process flags/concurrency are not durable proof.
++
++Availability cost: losing the original process before issuance can leave admin-pending even if no ref exists. Generic mutating process resumption is NOT supported. Retained proof/provider-closed recovery remains GET-only. Durable resumption under a broader launcher model would require a separate protocol, never inferred renewed authority. Source-private fixture authority is explicitly synthetic. No runtime, credential, scope or nominal factory change is authorized by this ruling.
++
++## Task3 fix round1 handback — GET-only send-fence recovery (2026-11-01)
++One P2 addressed, no P1: reconstructed GitHub clients previously created extra tag/ref POSTs before discovering the consumed fence. FIX_BASEdc7d1869. Root's once-launched original-execution ruling was committed BEFORE code atd93ca236. Exact finding, ruling, availability cost, source scope and commands are appended to [Task3 report](../reports/2026-11-01-finite-native-cleanup-task3.md).
++
++Qualified code/test HEADe175d5f7101c2a80c32baa69d2d4b063dc67b77d; production correction3c7bc1c. RED31560555/run41331811152/job124923315740:55tests/53PASS/2expectedFAIL. Final hosted [run41333148084](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41333148084)/job124927292982:71PASS,0FAIL,0SKIP,scopedlintclean. Covering HTTP/send-fence/finalizer/affectedCLI only; nofullsuite or native runtime call.
++
++One private original-process capability is initialized only by the fixed trusted once-exec attempt1 restore entry, after authenticated admission/primary run-job-step/proof-source checks. Shared across ALL clients and consumed at first claimSend entry BEFORE any tag/ref mutation. Existing/lostACK/default/reconstructed/unknown404 is GET-only; no added persistent namespace or resumed authority. Unknown deferred ref POST and lost tag ACK cannot create additional tag/ref writes after reconstruction. NEWref201 still required for sole QA POST. Actual child inherited-PID mismatch blocks; actual hosted export/exec retains PID and admits one synthetic send. PID remains coherence ONLY, never durable identity. Same-attempt reexecution of the WHOLE launcher is excluded, and generic mutating process resumption unsupported. If once-launch is unqualified or original process is lost, admin-pending is allowed even without a visible ref; no renewed cap from absence.
++
++No nominal interface/runtime, credential, role, scope or provider change; operationalReadiness=false. Source fixture authority is explicitly synthetic. Temporary qualifier remains excluded from integration. This documentation-only child records handback; branch writes stop for scoped root re-review.
++
++
++## Root Task3 acceptance and Task4 handoff (2026-11-01)
++Scoped independent review f11aa9b6 closedP2 GET-onlysend-fencerecovery:ADDRESSED,0newP1/P2. Finalcodee175d5f7,Actions41333148084/job12492729298271PASS0FAIL0SKIP/scopedlint0. Original209-testcheckpoint41330951514 remains earlier broaderTask3evidence; finalfullsuite/wholebranchreview pending. Conservativeoriginalonce-launchedGHArestoreprocesscap applies toANYtag/refmutation; default/reconstruction/unknown404 onlyGET;wholelauncher sameattemptreexecutionexcluded, PIDcoherenceNOTdurableidentity. Availabilitylossbeforeissuance mayadminpending. Task3completeSOURCE, actualfactories/profile/privateproducerstillTask4.
++
++Read-only custody nowactuallycorrelated: mainf4ff5159/PR712 exactCI4133007202514/1403/5148PASS0FAIL1oldSKIP/lint0errors14oldwarnings/buildPASS; command6561311217/run41331162110/job12492137402517:22:52.954UTC verified expectedID9db7901af95faf07e6f7ef378045328e activeexp8nov02:59:59UTC. Metadata17:25 confirmslimitedQAEditor/readers, no conditions. WorkflowREST401 stillseparate/unresolved. No credential/policychange.
++
++Rootreconcilesacceptedmainf4ff5159 with thisisolatedbranch: commonbaselinecd13; mainchangesare16ADDEDfileswithNOtargetcollisions, exactacceptedGitblobSHAs copied; mergehasbothparents andpreservesallTask1–3source. No localgit/deps/build, no runtimeeffects. Task4brief ../briefs/2026-11-01-finite-native-cleanup-task4.md ownsactualfinitefactories/profiles/receiver/fullsyntheticroute.
++
++A separate read-onlyfeasibilitystudyconfirmed nativeWorkflowbindingscancreateaNEWnominalinstanceafterasleep, preservingactualprovidercreationtimestampandKnown70s. Rootselects furtherTask5DESIGN ofonefixednativeBootstraplauncher+GET-onlyprecreatedobserveradoption insteadofassumingRESTpermissionupgrade; NO Task5implementation/mount yet. Keepobservermutationcontract/guardC0unchanged; anylauncher/newjournal/planphase/inventory/schedulingfield mustbereviewedexplicitly. ActualQAmetadata17:58 showedonlyBootstrapbinding+QA_VERSION;NamedConfirmationbindingisNOTinstalledinclosedc570 (repo configisarchitecturalonly). No newnamespace/route/token/broadaccountwrite/recurringschedule authorized bythisnote. Task4sourceworkmaycontinueindependently; no actualfiniteoccurrencespent/operationalReadiness=false/PCofffalse/Maxuntouched.
++
++
++## Task4 partial source checkpoint — material-selection question (2026-11-01)
++BASE8e3b6b2d1ba508b758ddacc2741149fb9b47dd91. Status NEEDS_CONTEXT, Task4 NOT complete. Actual compiled canary finite entrypoint denies legacy deliverOwnSaved/deliverSaved before host/env access; legacy scheduler stops before policy. Default closed and historical close/retirement preserved. Discriminator is coherence only, NOT source/binding provenance. RED044b1718/run41334724548/job124932010328 2tests0PASS2expectedFAIL. Production9b59ef15/initialGREEN41334855215. Expanded actual workerd/native GREEN9fe8664d57958d8ec5a9dfbe9a9ffa98bb7d92e5/run41334946894/job124932675671 7PASS0FAIL/scopedlint0. Report ../reports/2026-11-01-finite-native-cleanup-task4.md records exact commands/limits.
++Concrete architecture question to root: native preview receives intent/source only before persistAdmission, but immutable plan already needs exact original command/T0/finalizer run/job and dynamic live module/deployment pins. Full compiled plan would self-reference module hash. Existing private named draft/history does not identify a reviewed finite intent-to-command/run seed/artifact channel; persistAdmission happens after preview/planHash. Need exact authoritative existing locator/protocol and qualified native GitHub read capability, not latest-record/caller-JSON/fabricated metadata/new schema. Dependent actual factories/profile/rawproducer/receiver/nominal/fullroute remain unimplemented and are not hidden as future runtime gates. Task5 launcher/adoption remains separate.
++No runtime, CF/private probe, credential/role/DDL/OAuth/provider/Max action or occurrence; no localcode/deps/build/temp/subagents. Temporary qualifier remains branch-only/no-secrets/excludedintegration. operationalReadiness=false. Writes stop at this bounded checkpoint for root's material decision and fresh review; no Task4 completion claim.
++
++
++## Root material bootstrap correction and Task4A review (2026-11-01)
++Root selected the explicit bounded technical SEED in the existing observer-creation ref domain; see [material bootstrap correction](../specs/2026-11-01-finite-material-bootstrap-correction.md). Documentation baseline7d9214d82ca0b129bd318a60fcf01466f21166ea. Separate fixed seed-material step/CLI phase in the SAME actual admit job must validate exact finite package/source/custody, acknowledge NEW seed/ref and read back, then complete successfully BEFORE root/operator exact observer creation. GHA adopts via GET only, preview precedes later admit-and-ready, then native prepare. No missing-seed observer polling invented. No plan/control hashes, private selectors, raw policy or secrets in public seed; full material derives from actual primaries after build. Existing/unknown seed issuance is GET-only, no refill/replacement. No self-referencing compiled plan.
++Remove fictitious nominalRunId GHA dependency; actual nominal is named native Workflow, absent at arm and terminal before restores under unchanged contract. Exact finalizer run/job stays independently qualified; Task5 launcher remains separate. Finite source package/resolver are new requirements, existing closed packages are insufficient and no finite artifact is claimed available. Account-owned GHA token verification uses actual exact account/ID/expiry and bounded independently qualified policy/current-rights evidence; do not demand /user/token, broad policy-read or two permission groups. Native QA reader identity remains distinct/uninferred. No new key/scope. Full source details and impacted tests are in the correction; Task4B/4C may be separate bounded slices.
++Root reports Task4A fresh Sol-high scoped review PASS, spec/quality0P1/P2/Minor, BASE8e3b6b2d to HEAD7d9214d8; 7PASS/run41334946894 confirmed. This accepts the bounded containment slice, not WHOLE Task4. Actual factories/profile/raw producer/receiver/finite packaging/nominal integration remain pending. This docs-only checkpoint changes no code, runtime, custody, policies, DDL, old claims or original clocks; no occurrence spent, operationalReadiness=false.
++
++
++## Root builder rulings and bounded Task4B plan (2026-11-01)
++Fresh builder check on correction6dd2d769 returned exactly TWO blocking rulings; root accepted both, with no further blocking contract questions reported. This records reported review evidence, not a new runtime verification.
++1. Custody qualification is a SOURCE-APPROVED DATED STATIC policy receipt correlated to exact tokenID/account/expiry, plus fresh ACCOUNT self-verification and fixed-resource GETs. UNCHANGED POLICY is an explicit trusted-operator assumption; neither fresh scope equivalence nor scopeVerified=true is claimed. This supersedes the prior correction/ledger wording suggesting current full-policy proof. Provider checks actual permission on each fixed mutation; denial/unknown outcome consumes its issued effect and leaves admin-pending/GET-only, no new key/scope/policy-read, /user/tokens or two-group requirement. Distinct native QA reader needs its own receipt/self-verification and remains unavailable until qualified.
++2. Seed issuance matches Task3: process-private shared consumed capability INSIDE the fixed trusted ONCE launcher; PID coherence ONLY. SAME-attempt WHOLE launcher reexecution is EXCLUDED, not claimed prevented; no retry/supervisor/regeneration or invented persistent identity. Losing the original process may leave admin-pending without a visible ref.
++The [updated correction](../specs/2026-11-01-finite-material-bootstrap-correction.md) also pins arm absence to full inventory AND qualified fixed SOURCE-producer never-issued child-create SEND evidence. Caller boolean/provider absence/Task1 nominal permission claim is insufficient; missing Task5 producer remains unavailable, no future journal values invented.
++[Task4B implementation plan](../plans/2026-11-01-finite-material-bootstrap-correction.md) follows writing-plans: (1) strict codec/actual nominal identity/phase inventory; (2) concrete fixed package resolver and real bounded ZIP inspection; (3) actual seed-material phase/once issuance/GET adoption/public native seed qualification. Each owns hosted RED/GREEN and focused source/native checks. Finite package creation, mounted producer/profile/full route remain4C; launcher remainsTask5. No completion by throwing placeholder or fake artifact. Task4A prior accepted7PASS/review remains unchanged; not repeated.
++Docs-only followup from6dd2d769; no code/tests executed, runtime calls, policy/custody mutations, source deployment or finite occurrence. operationalReadiness=false.
++
++
++## Root pre-code sequencing and exact structural manifest ruling (2026-11-01)
++Root settled sequencing at e571372e: Task4B Task1 implements strict seed/manifest structural codec and REMOVES fictitious nominalRunId plus finalizer inequality ONLY. Actual arm-absence phase inventory moves to4C/Task5 together with concrete child-create SEND journal/source producer. Existing inventory stays fail-closed for absent nominal;4B negative tests keep it blocked. No invented brand/proof-mint/future-journal fields or positive fixture qualification. Desired future full-inventory+never-issued evidence remains in the spec; ownership changes, no runtime gate relaxation.
++Manifest syntax now fixes module.name=index.mjs, each role positive bytes<=3145728, exports max128 sorted unique ASCII JS identifiers ^[A-Za-z_$][A-Za-z0-9_$]{0,127}$, and exactly six archive files: manifest.json plus the five fixed role/index.mjs modules. Pure codec acceptance is NOT semantic profile qualification; actual exports/classes and independently committed configuration/profile/binding hash qualification remain4C. Updated [spec](../specs/2026-11-01-finite-material-bootstrap-correction.md) and [plan](../plans/2026-11-01-finite-material-bootstrap-correction.md). Root requires no new builder check for this settled sequencing. Docs only/no code or runtime; operationalReadiness=false.
++
++
++## Task4B Task1 handback — strict finite material codec (2026-11-01)
++Bounded SOURCE Task1 DONE; root fresh review pending. BASE9304b0b066f32340e21be0331fc1f6628029631a; RED9939d1e34d0b07749b8e22b555c40e63df73d8f3; qualified code HEADefe382046a4478da36f6405d71fd3301e7d0bb36/treea780d6dd110db8c5466db1bd0753a6d81a41655c. Full report: [2026-11-01-finite-material-task1](../reports/2026-11-01-finite-material-task1.md). Documentation checkpoint/HEAD receipt follows below. Hosted RED41337195445/job124939411150:86tests31PASS55expectedFAIL0SKIP (missing codec/old nominal schema). First implementation41337288416:160+47PASS, one lint binding error; binding-only correctionefe382046a4478da36f6405d71fd3301e7d0bb36 final [41337388559](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41337388559)/job124939980962:160focused+47external-consumer=207PASS0FAIL0SKIP/scopedlint0errors0warnings. Exact commands/counts/limits are in report.
++Pure strict envelope/manifest codec plus root-requested specific encodeFinitePackageManifest/hashFinitePackageManifest helpers share SAME private validation/canonicalizer/domain. Helpers documented in brief forTask2/4C; no dummyseed/genericschema. Removed fictitious workflows.nominalRunId and finalizer inequality only; actual NamedConfirmation and exact finalizer identity preserved. Candidate fixtures regenerated, no historical records reinterpreted. Existing inventory unchanged/blob e612bce9; absent nominal NEGATIVE arm/nominal/bothrestores regressions stayblocked. No newbrand/minter/journal/transport/packagebuilder/sourcefactory. Structural compatibilitytrue is NOT semantic qualification. lib/mcp-qa-finite-source.mjs remains unavailable/blob36ff3e3c;4C/5/fullruntime pending. Originalclocks/margins/nativeinterfaces/effecthistory unchanged; no occurrence/CF/privateprobe/token/policy/OAuth/DDL/Max/runtime/publicmainmerge. CloudGitHub/Actionsonly/no localcode/deps/build. Temporary qualifier branchonly/no-secret/excludedintegration. operationalReadiness=false.
++
++## Documentation HEAD receipt
++Exact documentation checkpoint HEAD: b9fa66530721618f8a63af9158223e9e857db11c (parent qualified code efe382046a4478da36f6405d71fd3301e7d0bb36). The final documentation-only receipt commit adds this exact checkpoint to report/ledger; its SHA is returned to root by CAS readback as the final branch HEAD. Neither documentation commit changes source, tests, workflow or the207-test qualification. Root's review compares BASE9304b0b066f32340e21be0331fc1f6628029631a to that final receipt HEAD.
++
++
++## Root acceptance — Task4B Task1 / next package resolver
++Task4B Task1 complete (BASE9304b0b0..HEAD5c5813cd, qualified codeefe38204). Fresh scoped review: spec PASS, quality Approved,0P1/0P2/0Minor. Existing Actions41337388559/job124939980962 at exact code verified:207PASS0FAIL0SKIP, scoped lintclean. Fixed-terminal inventory and default source remain unchanged/unavailable, no old history interpreted. Codec is syntax/hash evidence only, not semantic profile/custody/PC-off.
++Next bounded Task4B Task2 uses docs/superpowers/briefs/2026-11-01-finite-material-task2.md. It implements a REAL fixed GitHub package resolver/real bounded archive parser; live finite package production/actual source producer/profile remain4C, launcher remainsTask5. No actual occurrence, runtime/credential/role/OAuth/DDL/Max action. operationalReadiness=false.
++
++
++## Task4B Task2 — fixed finite package resolver and real archive complete (source only)
++BASE1d49771a3bfb06433cb006db8d2d6c97c2673822; REDa167611cc63f787a7de87c2aaff58242e32c2886; qualified codeHEAD44221801cfcc9a23a09ccde1291e0553c9bcf655/tree11aa29fdd5b420fc319b50cdaf4dccf8744aa0ff. Exact branch CAS leases/readback, no force. Report: docs/superpowers/reports/2026-11-01-finite-material-task2.md. Documentation checkpoint HEAD follows in receipt.
++
++Hosted RED run41338258762/job124942585176: Node103FAIL0PASS0SKIP (concrete resolver missing), Python23FAIL (actual parser missing); lint rejected missing file. Hosted GREEN run41338469061/job124943205564 exact code: Node103PASS0FAIL0CANCEL0SKIP, Python23PASS0FAIL, scoped lint clean/Python compile success, attempt1/push exact isolated branch, completed2026-11-01T18:48:52Z. Commands: npm ci --ignore-scripts --no-audit --no-fund; node --test test/mcp-qa-finite-package.test.mjs; python -m unittest discover -s test -p 'finite_archive_test.py'; npx eslint lib/mcp-qa-finite-package.mjs lib/mcp-qa-finite-source.mjs test/mcp-qa-finite-package.test.mjs; python -m py_compile scripts/verify-qa-finite-archive.py test/finite_archive_test.py. Temporary existing qualifier remains branch-push-only/no project secrets/EXCLUDED FROM INTEGRATION. Setup/cleanup action deprecation notices are not lint findings.
++
++Concrete fixed primary GET resolver, shared Task1 manifest helpers, actual Python standard ZIP/deflate/CRC subprocess and seed-material source entry installed. Exact package/run/artifact selection, complete bounded pagination, actual committed workflow/tree/role commit evidence, provider/archive/module hashes, immutable technical-only result, bounded anonymous signed download and sanitized5s-step/30s-total cancellation. No extraction/module execution or fixture fallback.
++
++Task2 Ruling (root): historical operatorClosed cannot be relabeled M; actual commit/tree/archive consistency is NOT role authorization. Actual approved frozen operator/canary/QA provenance receipt, builder semantics/full profile remain4C before live eligibility; no guessed hash/path/receipt. Cost if misread: factual provenance could be mistaken for runtime authority, expressly barred. Narrow redirect/ZIP formats fail closed if provider changes; no current availability claim. Source-only tests use synthetic network but real ZIP/subprocess. No full suite/build/4A repeat by exact brief; no local source/deps/build. No Task3 transport,4C producer/package,Task5 launcher, CF/private/provider probe, live action, main merge or Max. operationalReadiness=false. Root fresh review pending; no agent self-review.
++
++
++## Task4B Task2 — ROOT QA closed basename correction and final qualification
++ROOT changed the accepted all-index grammar after initial Task2GREEN: existing source QA_CLOUD_CLOSED_PINS.qaClosed.module is closed-rollback.mjs/395915B/SHA2564b557f04777be25f3df6dc271990d57095ace231bb7b24e2a7a10da23ada2c2f (datedc570b60b-95dc-48e1-89f3-9c4651691dbc). Task1 was compliant with its then-current contract. New exact six-file layout preserves qaClosed/closed-rollback.mjs and four other index.mjs paths; codec one predicate, pure tests/fixtures, real parser/resolver and brief/spec/plan grammar amended. No actual module renamed or profile/source identity authority inferred; approved frozen identity/semantics remain4C.
++
++Correction REDf3ae28cee4eefdc64c945f7c48fcb009686e3375/run41338886494/job124944451818: resolver105(100PASS5FAIL), codec77(73PASS4FAIL), Python24(21PASS3FAIL),0SKIP; expected new-basename rejection/old-name acceptance and escaped-signature-query rejection. Scoped lint/Python compile already passed. Focused fix scopes URL escape checking to the original raw PATH (no normalization/traversal allowance) and permits percent-escaped signature query bytes; no cross-origin credential forwarding.
++
++FINAL codeHEADa391a530bf8b4490b767764c1d33946fccc9807c/tree08b18ef1dd6676774d2a0d1f0b2e708da5d7a497. FINALGREEN run41339000993/job124944799259: resolver105PASS0FAIL0SKIP; pure amended codec77PASS0FAIL0SKIP; Python24PASS0FAIL; TOTAL206PASS0FAIL0SKIP, scoped lint clean, Python compile passed. Exact isolated branch/head/push/attempt1/repo1347578006 verified; run success2026-11-01T18:55:19Z. Commands: npm ci --ignore-scripts --no-audit --no-fund; node --test test/mcp-qa-finite-package.test.mjs; node --test test/mcp-qa-finite-seed.test.mjs; python -m unittest discover -s test -p 'finite_archive_test.py'; npx eslint lib/mcp-qa-finite-seed.mjs test/mcp-qa-finite-seed.test.mjs lib/mcp-qa-finite-package.mjs lib/mcp-qa-finite-source.mjs test/mcp-qa-finite-package.test.mjs; python -m py_compile scripts/verify-qa-finite-archive.py test/finite_archive_test.py.
++
++Initial report checkpoint5157eea792f09a358c242eb0dd4b7fc6e41309c3 and earlier126-testGREEN are retained as pre-correction history, not final qualification. Full final report updated at docs/superpowers/reports/2026-11-01-finite-material-task2.md; final documentation checkpoint SHA follows. Root fresh review must cover BASE1d49771a..finalHEAD including the explicit codec/spec amendment. No new action scope, real package, CF/private probe, Task3/4C/Task5 implementation or operational authority. operationalReadiness=false.
++
++
++## Exact documentation HEAD receipt
++Documentation checkpoint HEAD: `36d7d9e7d3fd3ab242ffa5ba44c25b985bdd1101`, parent qualified code `a391a530bf8b4490b767764c1d33946fccc9807c`. This final documentation-only receipt records that checkpoint; its own final SHA is delivered to root after independent CAS ref readback. Neither documentation commit changes source/tests/workflow or the206-test final qualification. Root review range is BASE`1d49771a3bfb06433cb006db8d2d6c97c2673822` through final receipt HEAD, including the explicit ROOT codec/spec amendment. Branch writes stop after that readback; Task3/4C/Task5 and operationalReadiness=false remain unchanged.
++
++
++## Root acceptance — Task4B Task2 / Task3 briefing
++Task4B Task2 complete (BASE1d49771a..HEADb0f3340b, codea391a530): fresh task review spec PASS/qualityApproved/0P1-P2-Minor. Actions41339000993/job124944799259206PASS0FAIL0SKIP (105resolver/77codec/24Python),lint+compilepass. Exact QAclosed actualname closed-rollback.mjs preserved; parser/resolver real, authority/networkfixturesSYNTHETIC. No live finite artifact exists; role authorization/profile/export semantics still4C gates.
++Exact design-only blobs from isolated branches imported unchanged: native-launch41cf3139 (fresh buildercheck nothingimportantleft); QA bridge8d547123 (one timestampcycle ruling incorporated). No productcode from those branches. Task3 brief and sanitized dated GHA receipt prepared; immutablepolicyhash340050c2...52b computed from Root's actual17:25metadata, not a fresh policyclaim. Nativecandidate9aa is administrativeidentityonly, actualsecretmatchunverified. No token/role/expiry change.
++Task3 newseed grammar addsqaPublication tobridgeactualGHAQAbytes/source pins+nativeownversion/pointers; actualsource/profile/closedcompatibility/historicalSHA and first-primary factoryremain4C. Native delayedlauncher/journal/inventory remainsTask5. No live runtime, testoccurrence, OAuth/DDL/Container/Max action. operationalReadiness=false. Temporaryqualifierexcludedintegration.
++
++
++## Task4B Task3 — source transport qualification checkpoint
++
++BASE `f9c70a3f13540ea693350179e9fdf3d2356cbc1f`; final codeHEAD `eaefd5aabf5ebf3c08da29c2ad6d1eb699af39f8`. Exact branch CAS/readback preserved. Full report: [Task3](../reports/2026-11-01-finite-material-task3.md).
++
++Required qaPublication codec, concrete fixed seed issuer/anonymous primary reader, real QA-byte publication checks, account9db dated-static custody verification, native separately named publication bridge and actual CLI/YAML ordering implemented. Finite GHA ingress GET-adopts only; no Workflow REST create. Shared original issuer consumed before POST; lost/late/existing/reconstructed authority never refills. Seed issuer validates primary START; later reader validates completed success. Original restore once fence/claims/clocks preserved. Same-attempt whole-launcher replay remains EXCLUDED trusted-host assumption, PID coherence only.
++
++Meaningful RED `3067adb85aa7401f6938acaf5e3e2dc80f76c629` run41340141811/job124948204717:85tests81PASS4FAIL0SKIP. FINALGREEN run41341399674/job124951985828:350PASS0FAIL0SKIP0CANCELLED, all changed MJS scoped ESLint clean. Exact head/push/attempt1/repo1347578006 verified; completed2026-11-01T19:23:09Z. Commands and all intermediate receipts in full report. Actual parsers, ZIP subprocess, hashes, CLI and native paths execute against explicitly SYNTHETIC platform/source authority; no local source/deps/build and no provider/private probes.
++
++Native bridge is11GHGET (max12/262144aggregateB) plus3CFGET (account selfverify and SAME fixed QA deployments twice; no QAcontent read), max3/1048576aggregateB. Combined14actual/max15 and1310720B, one shared5s parent signal across awaits. Mandatory4C: reserve this inside original full hydration budgets alongside direct canary/OP checks; no new clocks/expanded limits. Direct qaCodeProvenanceVerified remainsfalse. Native9aa actualsecretmatch remainsunverified.
++
++Fixed source-authority4C mounts intentionally unavailable: production missing semantic package/profile/class/namespace/history constructor yields ZERO seedPOST. C570 source tuple and compatibility still pending; no invented source relabel/production profile grammar. Full native factory, actual package, Task5, live trial/guard/PC-off acceptance remain unavailable. operationalReadiness=false. Temporary qualifier remains EXCLUDED integration; docs receipts skip CI.
++
++Unaccepted initial harness run41340592762/job124949542852 still reportedin_progress, jobstarted19:12:57Z/completed_at:null at19:25:45UTC, declared8min timeout/no project secrets. It is not final evidence or runtime authority; full totals unavailable and tool exposes no cancel action. Root owns one bounded follow-up; no invented cancel endpoint or indefinite wait.
++
++Root fresh review pending; final documentation checkpoint/readback receipt follows.
++
++
++## Task4B Task3 — exact documentation HEAD receipt
++Documentation checkpoint HEAD `94dca586b44178ef45ac84f5827fd1c997bb9f27`, parent qualified code `eaefd5aabf5ebf3c08da29c2ad6d1eb699af39f8`. This receipt changes docs only; FINAL350PASS/lint evidence remains run41341399674/job124951985828. Its own final SHA is returned to root after exact CAS/readback; writes then STOP for root fresh review. No 4C/runtime readiness inferred.
++
++
++## Task4B Task3 — review fix round1/5 recorded BEFORE implementation
++
++Baseline `28e96f962fb6abfa09ed60af8bb07f37826102d2`. Fresh-review P2: **Reject malformed admit-job start timestamps.** In `lib/mcp-qa-finite-seed-primary.mjs:25`, `Date.parse(j.started_at)` is checked only with `<T0` and `>startedAt`; missing/invalid values become NaN and both comparisons are false, accepting unknown primary evidence in issuer/reader qualification. Required correction: require a string, parse once, require a safe integer, then preserve the existing interval checks. Include missing, malformed and nonstring/coercible-array negatives.
++
++Round scope: focused hosted RED for new public-reader/issuer/native-bridge negatives, minimal implementation GREEN, scoped ESLint; no whole350/full-suite repetition, architecture/runtime/custody/source probe/main change or subagents. Preserve original clocks, fences, source4C unavailability and operationalReadiness=false. Report/readback then stop writes for scoped re-review.
++
++Dated housekeeping closure supplied by ROOT's primary follow-up: old harness run41340592762 is now completed/cancelled, updated2026-11-01T19:25:58Z. Preserve earlier as-of in_progress evidence above; no cause is attributed, and cancellation is not test success.
++
++
++## Task4B Task3 — review fix round1/5 result
++Finding-before-code `c344ba426ee8274f6db1fc7ece29f2cf6550b08d`; RED `d8626b13704e24c30872b374617de14ca1c0237c` run41342133220/job124954198695:72tests63PASS9FAIL0SKIP (all9 “Missing expected rejection”),lintpass. Minimal codeHEAD `f2b35826f12f646b3a25064213c5203f88d6f531`: require string, parse admit-job started_at once, require safeinteger before existing interval. GREEN run41342221090/job124954468465:72PASS0FAIL0SKIP0CANCELLED,scopedlintpass, exacthead/push/attempt1/repo1347578006 verified, updated2026-11-01T19:32:46Z. Three affected files only, no whole350/fullsuite. Full round report appended to reports/2026-11-01-finite-material-task3.md. No authority/runtime scope change; operationalReadiness=false. Docs receipt skips CI; stopwrites after CAS/readback for scoped root re-review.
++
++
++## Root acceptance — Task4B Task3 and 4C1 start
++Task4B Task3 complete (BASEf9c70a3f..HEADa776e115, originalqualifiedeaefd5aa350PASS/lintclean; strictjobstartfixf2b3582672coveringPASS/lintclean). Fresh taskreview found oneP2 NaN/nonstringprimaryjobtimestamp; round1/5 ADDRESSED,0newP1/P2/out-of-scope, qualityApproved. No full350rerunclaimedaftertinyfix. Originalseed/restorefences, typedcustodyandactualQAbridge preserved;4Csource/nativeguards remainunavailable, defaultZEROseedPOST. Oldharness41340592762 independentlycompleted/cancelled19:25:58UTC; notsuccess/causeclaim.
++4Cprofile/package design3461c1e passedfresh buildercheck nothingimportantleft; plan/brief731bfd49 copiedasdocs only, actualsourceB3interfacesrea... retained. Order4C1 ->Native5sourceprimitives ->4C2actualprivateprimary/factories ->4C3fullroute/packagecompletion ->wholebranchreview/fullCI. Rootprepared4C1briefcloud/noactualCFpreservationauthorizedbythissourcecommit.
++Critical before any actualfirst-head prepare: qualify ALLreadonlyadmission/cleanup/source/custody/receiver prerequisites and ORIGINALcombinednativelease budget using dated primary evidence, without consuming finitehead or issuing nominal authority merelyto measure readiness. Pending/armed setup remainsoperator-attended untilvalidguard+independentready; neverrequestPCofffromsourcepasses/staging. Nativecleanup/no-createdadminpendingcost stays explicit. No reset/alternateactor/counterrefund.
++Root immutableC570read19:08:46UTC reconfirmedexactclosed-rollback.mjs395915B/hash4b55, no rawcode returned/saved and no originalsourceSHAproved. Historicalcontentpin union statesunknownGitprovenance truthfully; no relabelM. Currentruntimeclosure remainspriorDATED evidence. No newtoken/policy/OAuth/DB/Container/grant/Max or finiteoccurrence; operationalReadiness=false.
++
++
++## Task4C1 — source profiles/provenance/compiler staging result
++
++BASE80f53e771e8f265c6ce2a975461298bc4ff06e0b -> codeHEAD863267acb4b4492bee7d159f5f1c41236349431c, tree7688ef25c598674bc49344db79e0d4969075c87d. Exact-CAS/readback on feat/finite-native-cleanup-20261101; no local code/deps/build. SOURCE ONLY, operationalReadiness=false.
++Live publicStatic/privateFull split, strict v2 provenance/seed/manifest domains, fixed receipt blob/literal historical module verification, full QA publication fingerprints plus publicStatic, pointer-before-closed-canary-metadata, real esbuild/metafile/class staging compiler and actual-byte Wrangler dry-runs. C570 original Git SHA remains unknown, closed-rollback.mjs preserved. No raw private policy/plan/config or historical module bytes uploaded; final run artifacts0.
++REDb45e1a0 run41343249979/job124957563158:0/7PASS. Intermediatebfb0ade9 source-fixture/archive-boundary failures explicitly recorded; fixeded488c7 run41343849216:272+24Python+37nativePASS/lint/dry-runsPASS. Root-authorized narrow withdrawal addition: actual finite reduction requires WITHDRAWALtrue at exact raw policy/own/C0C1 gates; finite-only actual SQLite subclass denies both legacy withdrawal RPCs before host. RED25d3be44 run41344215526/job124960456071 proved both env touches (8tests4PASS4FAIL incl parent/retained fixture touch); proper arity/separate actor fixture now verifies inherited finite method remains unavailable without source factory. Retirement legacy read staysfalse; finite handoff retains separate namespace.
++FinalGREEN863267ac run41344334155/job124960812141, completed/success push/attempt1/exacthead/repo1347578006:279PASS+24PythonPASS+40native/hash/reductionPASS=343 scoped,0FAIL/0SKIP/0CANCELLED,scopedlintPASS, actual compiler and both no-bundle dry-runsPASS, generatedbytes unchanged. No fullsuite/350rerun claim.
++Staging qaLive685470B sha33fa610fbb3c8e2d74e60e161e5191a3a9b2634cca279712a45fd05e6ad54788; canaryLive1843504B sha1290c6e82b21fdad716eeee5579afcea401a1cee0a59b34d85cb4d5d0f8c1079. Real compiler success is NOT complete finite package. Full source/native/custody qualification and buildFiniteNativePackage remain unavailable/ZEROeligibleoutput until Native5/4C2/4C3 actual mounts, approved normalized historical privacy/bytes/locator, Container attachment and rollback compatibility qualify. No provider/private probe, preservation dispatch, secret/role/OAuth/DDL/deploy/livecomment/occurrence/Max/mainmerge. Original clocks/fences/history preserved.
++Detailed report: ../reports/2026-11-01-finite-profile-package-task4c1.md; root scope addition in its brief. PRIVATE4C2 privateCanaryConfiguration/INFO exact tuple and distinct activation/restoration/public/private-binding hash meanings documented, not fabricated. Temporary qualifier remains excluded integration. Documentation-only receipt skips CI; final exact docHEAD delivered by CAS/readback handoff. STOP WRITES for root fresh review.
++
++
++## Task4C1 — fix round1/5 finding recorded before implementation
++
++Review BASE525d992ccdfa24bdd4f6b71c4873a990d900142f: spec Changes requested; quality1P2/noP1. Exact finding: [P2] Bind embedded Node compilation to the verified checkout — scripts/build-finite-native-package.mjs:37. compileFiniteNativeStaging({cwd,sourceRevision}) verifies checkout B/Worker entries, while imported buildMcpNodeProgram() resolves import.meta.url in checkout A, allowing A Node bytes to claim B/M provenance.
++Root ruling: require canonical filesystem identity of cwd and the executing compiler repository root BEFORE any build; safely accept a symlink alias of the same root. No generic builder injection/callback, dynamic trusted import or relabel. Hosted regression creates a real temporary Git worktree B, commits different Node source, independently verifies B, and requires A's compiler to reject B. Temporary worktree/dependency symlink exist only on the hosted runner and are removed after the bounded test.
++Round1/5 open1/implemented0 pending meaningful RED, minimal fix, scoped compiler/profile/native covering tests/lint and same-root actual staging/dry-runs; no343/fullsuite rerun. operationalReadiness=false; all prior complete-package/custody/runtime gates unchanged.
++
++
++## Task4C1 — fix round1/5 result
++
++Finding-before-implementation/REDbb1a92711b350fed51bc5f60c331d41b16e6a677. Exact P2: imported Node builder could compile checkout A while cwd/source verification claimed B. Hosted RED41347409966/job124970096074:5tests4PASS1FAIL0SKIP0CANCELLED; sole failure Missing expected rejection against actual clean independently verified divergent worktree B. Same-root symlink case passed.
++Fix codeHEADb2481cdb4dcaef72eb353a0db97938538d7f4aef (tree68f1c0253b2e678194714c9a9068503a08e53280) resolves cwd and executing compiler root with realpath, rejects different canonical root before build, and uses canonical cwd thereafter. No generic DI/callback/import/relabel.
++GREEN41347509630/job124970396983 completed/success push/attempt1/exacthead/repo1347578006:18 covering compiler/profile/nativePASS,0FAIL/0SKIP/0CANCELLED,scopedlintPASS,actualsame-rootstaging/bothWranglerdry-runsPASS,bytehashesunchanged,eligiblemanifestabsent/artifacts0. Commands and output appended to reports/2026-11-01-finite-profile-package-task4c1.md. No343/fullsuite rerun.
++Task4C1: fix round1/5 (1 addressed by implementation,0 unimplemented; P2 executing checkout identity; commits525d992c..b2481cdb). Root scoped re-review pending; do not infer review acceptance. Cloud-only bounded worktree/symlink fixtures removed after tests. Sourcefullpackage/custody/native/history gates and operationalReadiness=false unchanged. Documentation-only commit skipsCI; STOP WRITES after final CAS/readback.
++
++## Root acceptance Task4C1 / Native5 preflight
++
++Task4C1 COMPLETE: BASE80f53e77..HEAD7815c834, initial code863267ac343scopedPASS and actual staging/dry-runs; oneP2 cross-checkout embeddedNode provenance corrected in b2481cdb. Meaningful RED41347409966/job124970096074 4PASS/1FAIL; GREEN41347509630/job12497039698318coveringPASS/lint/staging/bothdry-runs/byte-preservation. Fresh scoped re-review ADDRESSED/no newP1/P2, spec satisfies/quality approved. No343/fullsuite rerun claimed after correction. Fullpackage/source/native/custody/historical/Container/rollback eligibility remain unqualified. Temporary qualifier excluded integration. Earlier root shorthand 'allfourguardsunavailable' corrected: package/role profile implementations permitted by brief; actual fullpackage blocks, nativecontext/custody remain unavailable.
++
++Native5 source task preflight (post4C1 lease, docs copied only after correction review):
++| Pair/task | Producer -> consumer / checked constraint | Ruling |
++|---|---|---|
++| Task1 within itself | strict launchPolicy/records -> real state snapshots/native inventory; nested prepare awaits inventory | Snapshot reads decoded actual storage, never control.read; no HEAD synthesized. Outer prepare does not hold SEND coordinator. |
++| Task1 -> Task2 | source-private context/coordinator + append-only prepared/SEND/ACK -> real same-object prepare/guard/nominal claim and native create | One coordinator per actual DOctx; every SEND transition uses it; transaction NEW/readback + process-local once capability; unknown GET-only. |
++| Task1 -> Task3 | invocation-bound never-issued observation -> preview/arm/prelaunch only | No caller phase/DTO/boolean; full provider inventory then identical snapshot and synchronous consumption under coordinator. Never-used observation not restoration authority. |
++| Task2 within itself | parent before hydration -> storage/queue/claim/create/readback | Original5s/narrower absolute end on every await; no new helper lifetime; original90s ARM and150s/160s send bounds. |
++| Task2 -> Task3 | prepared receipt/SEND -> Bootstrap sleep + Named original event | Sole nominal payload planHash=bundleHash; actual event unmodified; four args/18stages/70s/5s/20s remain. |
++| Task3 within itself | successful seed -> GET-only bounded adoption -> ready -> launcher | 36 absolute2s slots to original70s, skip elapsed, typed exact not-yet only; no CF POST/writer lock/new run/clock. |
++| Native5 -> B3/4C1 | v2 package/seed + actual publicStatic lineage | Preserve accepted codecs/provenance/default full-package unavailable. |
++| Native5 -> C2 | fixed resolvePrivateQaFiniteLaunchContext plus completed-private-setup context | Source unavailable until actual qualified native/private mount. Explicit synthetic source boundary in hosted tests; no runtime registration or success callbacks. |
++| Native5 -> private setup | terminal post-T0 setup before observer/prepare | Design pending builder refinement; private setup receipt installed is not own terminal proof. Early initial connection provisioning is separate preT0 stage, not fabricated by Native5. |
++| Native5 -> cleanup/rollback | exact nominal+launcher terminal; observer exception exact | No whole-definition exclusion, sealed-never-created union, firstHEAD reset or early restore. Never-created remains admin_pending. |
++
++Ruling: Native5 primitives may proceed after clean4C1 task review, while private setup design is refined independently; its integration seam stays unavailable. This unblocks reviewed source behavior without pretending custody, baseline, raw private policies or Container attachment exist. Cost if wrong is source rework, not provider mutation.
++Ruling: final source design references to older private-policy draft are dependency pointers only; current refined final spec governs C2. Native5 must not implement guessed private publisher/owner selector or treat any DTO as terminal setup authority.
++No new provider calls/credentials/OAuth/finite occurrence; operationalReadiness=false.
++
++## Native5 Task1 — root interface ruling before implementation
++
++BASE c989ff4473117cea7e31ff026306dac90237bb98, tree a7668dc2c463c2aafa7a7f60a723879630d3f868, branch feat/finite-native-cleanup-20261101. AFW source-only GitHub CRUD/CAS and hosted Node22 Actions; rollback is forward revert preserving other work; no runtime mutations.
++Root approves extracting the existing strict state decoder for both control and snapshot, preserving original hashes/order/legacy checks and avoiding control.read reentry. Root approves fixed-source opaque context with exact private material {ctx,env,plan,request,execution}; execution is existing fixed provenance plus launcherId. Fixed resolver and material reader remain unavailable until C2; they must qualify immutable setup completion/source/bindings before returning a token. No public registration, caller DTO or success booleans. Preview does not require future finalizer READY.
++Actual parser is lib/mcp-fixed-terminal-workflows.mjs. Extract bounded raw enumeration and synchronous phase validation; public parser retains strict missing-nominal behavior. Native source observation snapshots actual storage, enumerates complete fixed workflows through fixed GET transport, verifies equal second snapshot, then synchronously consumes phase validation under one per-DO coordinator. Returned DTO is facts only. Future every SEND must acquire the same coordinator. No outer prepare lock.
++RED 48761994873d3b6364d47ebfb763b5a121382064 run41347968011/job124971767357: exact brief command,12 tests,2PASS10 expected assertion FAIL (new functions absent),0SKIP/CANCELLED. Original native control tests pass. No production edits before RED.
++
++## Native5 Task1 — structural observation ruling before implementation
++
++Root requires private invocation token WeakMap, minted only under the coordinator after identical second snapshot. Fixed synchronous phase parser resolves that token via a source-owned lookup; token never leaves the source operation and is deleted in finally before lock release. Caller facts/DTOs, forged tokens and replay cannot mint absence. A narrow function-only ESM cycle is acceptable if hosted native compilation/load tests cover it. Existing public raw parser remains strict.
++Hosted8284a26 run41348539372/job124973497655:24/24 focused PASS and scoped lint PASS; affected125 tests66PASS49FAIL10CANCELLED. Shared decoder extraction missed the internally used fresh() accessor, blocking restoration eligibility/reconciliation and preventing held-claim tests entering their transaction. Existing failing tests are the regression evidence; minimal fix4ffbf5f preserves original check and domains. This intermediate failed run is not acceptance.
++
++## Native5 Task1 — final implementation and hosted qualification
++
++SOURCE Task1 complete pending root review. BASEc989ff4473117cea7e31ff026306dac90237bb98 -> finalcode/testHEADb425c77ff551fb54c70e24f69b2f57862ed22b63 (tree23ed4e40b70d8059433518b875b332eae4036fec). Canonical launch records/policy/workflows, shared strict decoder and true-beforeHEAD snapshot, actual alarm/journal/cleanup commitments, fixed complete inventory, per-DO coordinator and private one-consumption invocation token implemented. Exact C2 resolver/material-reader default remains unavailable; no public registration/DTO authority. Interface details and source coverage limits in reports/2026-11-01-finite-native-launch-task1.md.
++Meaningful REDs:41347968011(2PASS10FAIL),41348380100(12PASS12FAIL),41348718958(25PASS1FAIL copiedDTO),41348777081(25PASS2FAIL domains/coercion),41348937299(33PASS1FAIL actualalarm),41349123287(34PASS2FAIL orphan/cleanup). Intermediate8284a26 affected66PASS49FAIL10CANCELLED came from omitted shared fresh accessor, fixed4ffbf5f and disclosed in report.
++FinalGREEN41349308125/job124975828609 completed/success, push/attempt1/exacthead/repo1347578006:39focused+125affected=164PASS,0FAIL/0SKIP/0CANCELLED; scopedlintPASS; artifacts0. Actual workerd DO/D1/native pins/control/guard/storage/parser and SEND-vs-inventory race, SYNTHETIC external provenance only. Exact brief command plus affected control/phase/finalizer/http/guard command preserved in report. No fullsuite/C1 repetition; temporary qualifier excluded integration.
++All15 changed paths read back exactly at codeHEAD; no worker business mounts/nativecreate/sleep/adoption, provider calls/credentials/publication/mainmerge/occurrence. Task2 must create same original parent BEFORE hydration, use exact fixed source token/material and route EVERY SEND through withPrivateQaFiniteLaunchCoordinator; outer prepare never owns it. No never-created restoration proof; operationalReadiness=false. Final reportdocHEAD supplied after CAS/readback; STOP WRITES for root fresh review.
++
++
++## Pausa del owner — 2026-11-01 21:00UTC
++Gabriel solicita guardar y detener por apagado durante horas. Native5Task1 código b425c77/doc087f642:164PASS/lint, fresh review PENDING; no Task2 despachada. Revisor avisado de parar; ningún escritor activo. Checkpoint detallado 2026-11-01-afw-pause.es.md. C2 diseño/plan aislado c95118ca aprobado como diseño, sin código ni runtime. No nuevas ventanas, OTP, credenciales, ensayos, publicación o Max; operationalReadiness=false. Reanudar por revisión, nunca por repetir ocurrencia o permisos vencidos.
++
++## Native5 Task1 — fix round 1/5 opened before code
++
++Owner resumed; fresh root review at087f6427004ecabd89e9989dd87d0d4fde449424 reports spec and quality ChangesRequired, one P2: Keep coordinator occupied until underlying work settles (lib/mcp-qa-finite-launch-inventory.mjs:69). bounded() rejects when timeout wins Promise.race while operation(check) may still await storage/provider; unconditional release allows a fresh parent into the same actor section. Expired checks do not cancel already-issued awaits.
++Verified write BASE ef30cf6c3c69df97d5c5944ea3cf153bc5fac038, tree960e195ae016a824bcfd87d0853d296434d33da7, parent087f642; intervening change is pause documentation only. Same AFW branch/source-only authorization, remote CRUD/CAS and hosted Node22; forward revert preserves others. No runtime/provider/private probes, credentials, deployment, Task2 or C2 context implementation.
++Ruling from root: preserve bounded caller failure while retaining the slot until actual callback settlement; no force unlock, deadline reset or renewed authority. Unknown outstanding work can leave the actor blocked/admin_pending. Add native active-callback-after-expiry regression with fresh parent, actual held storage/provider await, bounded first result, no overlap, eventual slot release, no after-expiry effects or unhandled rejection. Existing queued expiry checks remain. Hosted RED/GREEN limited to focused launch/native control/records and scoped lint. Root performs scoped re-review after report/readback; no subagents.
++
++Root extension ruling for the same P2 round1: readPrivateQaFiniteControlSnapshot has its own Promise.race around the storage transaction. Keeping only that wrapper would release the coordinator while its underlying transaction still runs. Include a shared snapshot implementation with a narrow source-internal actual-settlement variant used under the coordinator; public snapshot stays bounded. The outer original parent still bounds caller failure and every late check denies further authority. No callback/settlement DTO supplied by external callers, no fresh lifetime. Cover actual held snapshot transaction as well as direct storage callback and fixed provider transport. This is necessary to address the original finding, not Task2 expansion.
++
++Initial RED9bd1764 run41367768265/job125031491775:39PASS3FAIL (42 total), lintPASS. Provider test demonstrates fresh-parent overlap. Two storage harness cases held inside actual SQLite transaction callback and workerd blocked timer events until its30s blockConcurrencyWhile reset; these are harness errors, not accepted defect evidence. Adjust test-only hold to delay ACK after executing actual transaction, preserving real storage/native code and unresolved storage API promise without suppressing native timer events. Production remains unchanged until all covering assertions fail for intended overlap.
++
++Meaningful covering RED65f54dc12a81aa9931527493117cabc4049f1981, hosted41367995719/job125032185984:42tests39PASS3FAIL0SKIP/CANCELLED; lintPASS. All three failures are intended fresh-parent overlap assertions (provider, actual storage ACK, nested snapshot ACK), true !== false, after first caller already returned unavailable while work remained held. Native event-gate harness issue removed; production unchanged for this RED. Inspection of fixed complete enumerator shows sequential direct awaits, no additional timeout race in this path.
++
++Task1: fix round1/5 (1 addressed by implementer,0 open; root scoped re-review pending — retain coordinator through actual callback and nested snapshot transaction settlement; commits ef30cf6..5cf7a37). Public snapshot remains bounded; source-internal under-coordinator variant shares the same decoder/checks and awaits actual storage settlement. Caller stays bounded by original parent, while unknown outstanding work may keep actor held/admin_pending indefinitely; no cancellation or authority renewal assumed.
++Final codeHEAD5cf7a373457b313397aa0fa249385d02ef610146. Hosted41368143785/job125032621637 completed/success, push/attempt1/exact branch+HEAD/repository1347578006, Nodev22.23.4, artifacts0:42PASS0FAIL0SKIP0CANCELLED; scopedlintPASS. Same focused launch records/native inventory/native control command and exact scopedlint recorded with outputs in same Task1 report. Meaningful RED65f54dc:39PASS3intendedFAIL. Initial native transaction event-gate harness error9bd1764 disclosed and corrected before production edits. Five code/test/ledger/workflow paths exact readback. C2 seams unavailable; no Task2/runtime/provider/credentials/deploy/occurrence. Final docHEAD supplied after CAS/readback; STOP WRITES for root re-review.
++
++## Root resume and acceptance — Native5 Task1 / Task2 preparation
++Owner resumed with “continua”. Native5 Task1 COMPLETE: BASEc989ff44..HEADda0dc1a1. Originalcodeb425c77 hosted41349308125/job124975828609164PASS/lint; freshreview oneP2 coordinatorreleasedoncaller-timeoutbeforeactualcallbacksettlement. Fixround1 code5cf7a373 meaningfulRED41367995719/job12503218598439PASS3intendedFAIL -> GREEN41368143785/job12503262163742PASS0FAIL0SKIP/lint. Fresh scoped re-review: P2ADDRESSED, specPASS/qualityPASS,0newP1/P2. No164/fullsuite rerun after correction claimed. Initialfixtureerrorsdisclosed, notacceptedRED.
++Sharedcoordinator nowretainsactualcallbacksettlement; internal readPrivateQaFiniteControlSnapshotUnderCoordinator avoidsnestedtimeout-release. Publicsnapshotcallerboundunchanged. Unknownunsettledworkmayholdactorindefinitely/adminpending, neverassumedcancelled/forceunlocked. EVERYfutureSEND mustawaitactualworkunderthiscoordinator.
++RootTask2brief addsonefixedSOURCEC2readPrivateQaFiniteLaunchOperations seam EXACT{controlPrimary,guardActions}, defaultunavailableuntilactualC2; no registration/callerDTO/envJSON andrealTask2constructorsrequired. Guardidentityfromactualdecodedcontrol. ActualNamedbinding afw-own-qa-private-confirmation/PrivateQaNamedConfirmation, fixedownQAscript/account; exactdomain-separatedbindingHash tuple inbrief. No callerresourcechoice.
++Ruling: ONE5soriginalparentcreatedBEFOREhydration. Onceactualplanisknown, narrowercheck/timersuseSAMEparentplusoriginalphaseends; neverreplacecontextparent/resetstart. Latehydrationdeniesbeforewrites. Callerexpirydoesnotreleaseunderlyingpendingcriticalwork.
++C2privatepolicy design ec08eda passedfreshbuilderchecknothingimportantleft, isolatedplan/briefc95118ca self-reviewedandcopiedas3docsONLY. ItremainsfiveunimplementedtasksafterNative5; C3finiteHTTPexistinggrant path/wholepackage/actualContainer/history/privacy/rollback/fullCI/runtimeacceptancestillpending.
++RootpreflightTask2: same-controlprepareACK->guardarm/alarmreadback->NEWnominalclaim->immutableprepared; original90sARM/150slaunch/160slastcreate; nativeNamedcreateonceAFTERdurableNEWsend/readback, originalsolepayload; unknownGET-only/neverrefund; noRESTcreate. SourceC2context/operationsremainunavailable, explicitSYNTHETICexternalprovenanceonlyinnativetests. Task2briefreadyforfreshimplementer, no Task3businesswrapper/sleepchangehere.
++Cloudsourceonly; main/runtime/permissions/tokens/OAuth/DDL/cron/Containers/subscriptions/Maxunchangedbythiswork. No newoccurrence or firstHEAD spent. operationalReadiness=false.
++
++
++## Native5 Task2 — start and root interface ruling
++
++BASE9c64ed4a66af2a845db964d11751e6182f62a8e3/treec2a93c3002b3630ef7051dfd45bd799dc4e2879f verified. Sole Task2 product writer; accepted Task1 coordinator settlement retained. PROJECT=AFW; REPOSITORY=tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT=source-only GitHub/hosted Node22; ORIGIN=GitHub; RESOURCE_TYPE=branch/source/temporary qualification; RESOURCE_ID=feat/finite-native-cleanup-20261101; ALLOWED_ACTION=bounded source CRUD/CAS/test; ROLLBACK=forward revert preserving subsequent work. No runtime/provider probe/deploy/occurrence; operationalReadiness=false.
++
++Root approved source-internal control.readLaunchControl(): share existing read_nominal state/current consent/existing claim and additionally invoke existing strict finalizer READY decoder/freshness under the same parent. Existing readNominalControl semantics unchanged; no new RPC, claim or boolean authority. Task2 create uses this read before SEND/native call; source/prepared/binding/time checks remain independent. This ruling precedes product edits. Hosted RED covers missing mounts, actual native prepare/create/records, current READY loss and unknown acknowledgements. Temporary qualifier remains excluded from integration.
++
++
++## Native5 Task2 — implementation checkpoint / root review pending
++SOURCE ONLY. BASE9c64ed4a66af2a845db964d11751e6182f62a8e3 -> code/testHEAD e5f57230082c0abb55483564db5b7999ea5fa480/tree1abbc863789475a7b04320c73bc06f75823384cf. Actual DO fixed prepare/create/read; SAME original parent before hydration, real same-object control.prepare -> guard.arm/C0 readback -> NEW nominal claim -> prepared receipt. Source operations EXACT{controlPrimary,guardActions} default unavailable; Task1 material unchanged; actual C2 setup/owner/primary/custody plan remains unimplemented.
++Root-approved readLaunchControl shares original strict nominal path plus existing current finalizer READY decoder; awaits actual settlement under coordinator, old readNominalControl unchanged. Full source prelaunch inventory BEFORE SEND lock (no reentry), current commitment comparison inside lock and atomic transaction, NEW acknowledged SEND/readback alone creates local once-send capability; exact original native binding/id/payload. Every journal/native await retains underlying work; late/unknown never refunds/retries. ACK only matching timely API acknowledgement, not newness/execution/termination. Read facts only; no Task3 changes, C0 sole alarm, never-created cleanup admin_pending.
++MeaningfulRED f218922/run41369062429/job125035371298:48PASS30FAIL absent native mounts. Concrete duplicate-instance gap found7e8e25f77PASS1FAIL; targetedRED10e7dfd90PASS2FAIL includes1disclosedfixturepredicate error. c9cc0d2prelaunchfix92PASS1FAIL held-SENDfixturebranch error; corrected e5f5723 finalrun41369829372/job125037690164 attempt1:94focused+66affected=160PASS,0FAIL/SKIP/CANCELLED, scopedlint0errors/warnings,Node22.23.4,artifacts0. No whole-suite/C1 repetition. MINIFLARE duplicate-return observation is not production behavior: official create docs say duplicate retained ID throws; no provider probe/fallback/restart.
++Eight source/test/ledger paths independently read back exact at codeHEAD; branch/head/tree verified; documentation CAS/readback follows. Report docs/superpowers/reports/2026-11-01-finite-native-launch-task2.md contains commands, allrun/job counts, fixture-error disclosure, boundaries and handoff. Temporary qualifier excluded integration. No localfiles/deps/build, real private/provider operations, credentials/scopes/OAuth, deploy/DDL/cron/Containers, occurrence/finiteHEAD/Max/mainmerge. operationalReadiness=false. STOP WRITES for fresh root scoped review after documentation commit.
++
++
++## Native5 Task2 — fix round 1/5 opened before code
++Fresh root Spec/Quality review at98d2e5dc7df12fe5fea2ee2e5fc564fbf652d17b requested changes: oneP1, no additional actionable finding. Verbatim: **[P1] Preserve current consent expiry through final storage await** — lib/mcp-qa-finite-launch.mjs115–118. fresh() discards readLaunchControl().value.consent.expiresAt; the subsequent snapshot can cross expiry while critical() accepts original parent/lastCreateAt, permitting native create with expired current consent. Persisted claim deadline is not current consent expiry. Static finding; no prior reproduction claimed.
++Scope: retain validated current consent expiry in the invocation's EXISTING monotonically narrowed check/timer. Never widen on later primary evidence, replace parent/context, reset start or release coordinator on caller timeout. Add hosted regression crossing current consent expiry during SECOND fresh snapshot AFTER SEND; expect zero native calls, unresolved immutable SEND/no retry. Root owns scoped re-review; sole original implementer, round1/5, no subagents. Focused Task2-native/control/native-inventory commands and scoped lint only; no160/full-suite repetition. Source-only/default C2 unavailable/operationalReadiness=false; same authorization/rollback boundaries as Task2.
++
++
++## Native5 Task2 — fix round 1/5 implementation complete / scoped review pending
++FindingP1 current consent expiry lost before final storage await reproduced atffe21c16/run41370718670/job125040404933:91tests89PASS2intendedFAIL(expected0nativecalls,actual1),0SKIP/CANCELLED. Minimal07edebb0192929357de4122acf40fb442740418a/tree14acc77c7703a982b73dc848a3817ec7ff419d78 retains validated readLaunchControl consent expiry in EXISTING monotonic narrow() BEFOREsnapshot; sameoriginalparent/context/start, laterprimarycannotwiden. criticalafterawait/beforenativecreate nowdeniesexpiredconsent. Actual outstandingwork/coordinatorslotretained; no cancellation/refund/retry.
++GREEN41370885088/job125040906128 attempt1 exactcodeHEAD:91PASS0FAIL0SKIP0CANCELLED; scopedlintPASS,Node22.23.4,artifacts0. Cases crossCURRENTexpiry duringSECONDfreshsnapshotAFTERSEND, prevent widening onlaterprimary, holdactualnative snapshotACK past500msnarrowercallerbound anddenyfreshparententryuntilsettlement; zero nativecalls and immutableunresolvedSEND. Command: node --test test/mcp-qa-finite-launch-native.test.mjs test/mcp-qa-finite-launch-inventory-native.test.mjs test/mcp-finite-nominal-control.test.mjs. Lint: npx eslint lib/mcp-qa-finite-launch.mjs test/mcp-qa-finite-launch-native.test.mjs. No160/full-suite rerun.
++Task2: fix round1/5 (implementer assessment1addressed,0open; root scopedre-reviewpending; commits98d2e5d..07edebb0). Same report appended withcommands/output/exactruns/jobs/boundaries; four changedpaths exactreadback andindependentbranch/runverified. TemporaryqualifierEXCLUDEintegration. Only tinyinstalledfix-loopinstructionreadlocally(rootpermitted); no localprojectfiles/build/deps/probes/runtime/credentials/OAuth/occurrence/deploy/Max/mainmerge. C2unavailable; operationalReadiness=false. STOP WRITES afterdocumentationCAS/readback.
++
++## Root acceptance — Native5 Task2 / Task3 start
++Task2 COMPLETE BASE9c64ed4a..HEAD83daad0c. Initial e5f57230 hosted41369829372/job12503769016494focused+66affected=160PASS/lint. Freshreview identifiedoneP1: currentvalidatedconsentexpiry discardedbeforesecondpost-SENDsnapshot. Fixround1code07edebb0 actualnarrow(existingmin,currentExpiry) beforeawait; sameparent/context/start, localtimerclippedandunderlyingmutexsettlementretained. RED41370718670/job12504040493389PASS2intendednativecallFAIL -> GREEN41370885088/job12504090612891PASS/lint. Scopedre-review P1ADDRESSED, specPASS/qualityPASS,0newP1/P2. No160/fullsuite rerun afterfix claimed.
++ActualDOprepare/create/read methods andsource-privateoperationsseam implemented; defaultC2stillunavailable. readLaunchControl SOURCE-INTERNAL sharesstrictnominalreadplusactualREADY, awaitsunderlyingworkundercoordinator. Fullprelaunchinventoryandatomiccommitmentcheck precedeNEWinvocationSEND; actualnativecreateonce/noPOSTREST/retry/refund. MiniflareexistingIDreturnwasobservedLOCAL; officialCFcreatecontractduplicates-throw, no productioninference. Actualproviderqualificationpending.
++RootTask3brief fixeslauncherpreparedsteptechnicalgrammar, originalevent/runtimedeadlines, privateconfirmationSOURCEreaderdefaultunavailableuntilC2, strictouterprovenancewithoutKnownmutation. RelevantacceptedKnownislib/mcp-release-runtime.mjs; original70sendalreadyderivesfromevent.timestamp, nofresh70afterhydration. Fourargs/18stages/5s/20s remain. No newpublicrawcontext/bundleRPC; C2ownsactualprivateproducer/transport/immutablefirstHEADlocator(no latestscan).
++Task3adoptiononlyafterprimaryseedcompleted-success;36absolute2sslotsuntil70, originalARM90/launch150/last160, typedsource-qualifiednot-yetonly/noCFPOST/writerlock/newrun. Bothrestoresnominal+launcherterminal; exactobserverexceptiononly; no-createdadminpending. Privatepolicysetup5tasks/C3MCPHTTP/fullpackage/privacy/closed-input/Container/rollback/fullCI/actualPCoffgatesstillpending.
++FutureC2UI/runbookpreflight: CFconfigurationpreparation/read+noticesconsentmustnotimplyD1editing. Originalown-syntheticcommand/runbookmustexplicitlycoveroneknown-goalSavewithoriginalrevision/idempotency, separatelyfromREADgrant; UIplainlystateswhatwillbesaved. Existingbroadownerauthorizationsupportspreparingthisconcreterunbook, notfabricatingserverproof.
++SourceonlyGitHub/Actions, no runtimemutations/OAuth/keys/permissions/realoccurrence/firstHEAD/Max/mainmerge. operationalReadiness=false. FreshTask3implementerassignedafterdocCAS/readback; no parallelproductwriter.
++
++
++### Native5 Task3 started — ROOT2 rulings before implementation
++BASE d5a76d6309e1067add15d9b103c0719f8ca4bfd9 / tree d217fb67113a54a1a11a2b935a08c2b1e77b8a07. Sole product writer, SOURCE ONLY; operationalReadiness=false. PROJECT=AFW; REPOSITORY=tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT=GitHub source/hosted Node22; ORIGIN=GitHub; RESOURCE_TYPE=branch/source/temporary qualifier; RESOURCE_ID=feat/finite-native-cleanup-20261101; ALLOWED_ACTION=source CRUD/CAS and bounded hosted tests; ROLLBACK=forward revert preserving subsequent work. No local project files/dependencies/build or live provider queries.
++
++Task3 Ruling ROOT2: finite.mjs source-selected Bootstrap/Named subclasses preserve index.mjs ordinary closed dispatch. Fixed class/export/binding and C2 actual provenance qualify definition; if original event.workflowName exists it must match, absence is not filled or fabricated. Original event is never copied.
++Task3 Ruling ROOT2: fixed readPrivateQaFiniteSetupCompletion({intentId,sourceRevision,parent}) in lib/mcp-qa-finite-adoption-source.mjs remains default unavailable. Same internal parent, refs only; exact immutable {receipt,instance,observedAt}, installed receipt grammar from C2 spec and exact terminal instance grammar from root. No caller boolean/receipt/registration or publisher implementation.
++Task3 Ruling ROOT2: verify primary successful seed before waiting. First GET exact observer; qualified absence may wait during attended setup. After actual observer exists, typed completed setup must qualify BEFORE preview; missing/running/unknown setup denies immediately. Pending preview alone can wait afterward. Original70s/child5s/36 absolute slots preserved. Fresh root review after report; no self-appointed reviewer.
++
++Task3 Ruling ROOT2 output clarification: successful setup output is EXACT {status:'installed',receipt}. outputHash is SHA256(canonical ASCII-key-sorted JSON of that object), without a domain. This correlates output only; terminal status/source/writers remain actual C2 primary obligations. Brief addendum carries these rulings.
++
++Task3 Ruling ROOT3 before wire implementation: dated root-only fixed AFW definition and never-created sentinel GET on2026-11-02T01:34:31.058Z established404 envelope successfalse/messages[]/errors[{code:10400,message:workflows.api.error.instance.not_found}]/resultnull. Whitelist exact envelope at exact expected source-qualified instance URL, body<=2048bytes within original budget. Unknown/auth/generic/extra/oversized responses fail, no catch-all. Implementer made no provider probe; evidence is grammar only, not live module/permission/absence attestation. Brief addendum retained.
++
++Task3 Ruling ROOT4 before result-reader implementation: add strict read-only validatePrivateQaFiniteConfirmationResult(value,expectedExecution) beside entry; no older nominal-output parser is required. Actual entry constructs and validates exact envelope, preserving unchanged Known result. Future C2 imports only under actual correlated finite source/instance. Bounded own-data/cycle/accessor/prototype checks and whole-output64KiB cap; grammar facts never prove terminal/writer/physical stop or confer permission. Ordinary/default status readers unchanged. Covering RED added before implementation.
++
++Task3 Ruling ROOT5: exact nominal+launcher terminal is necessary but NOT sufficient for native-create writer settlement. Actual C2 fixed native constructor must own ctx/env/opaque context/original parent and bind primaryRead/readFinalPrimary closures. It must hold/observe Task1 actual coordinator, durable SEND/ACK and actual unique nominal source/terminal outcome; held/unknown callbacks/storage/provider work never yield positive restore, ACK/404 never settle it. Keep source factories unavailable until actual qualification. No new proof union, process-writer kind, boolean authority or storage-keyed coordinator; existing process-writer max3 unchanged. Task3 status consumer/launcher/entry is source-only; C2 Task5 owns actual full writer-settlement integration/tests.
++
++
++### Native5 Task3 completed SOURCE ONLY — fresh root review pending
++Status DONE_WITH_CONCERNS. BASE d5a76d6309e1067add15d9b103c0719f8ca4bfd9; final code/test dc37acb35060c7fd8955403dfe4d30fdfeccd9fa, tree 6f9149c78c5a8813f86b223b0ad23a26102b05bd. Final hosted run41374675156/job125052234371, attempt1, Node22.23.4: exact Task3 command127PASS + affected consumers64PASS =191PASS,0FAIL0SKIP0CANCELLED; scoped ESLint PASS, artifacts0. All24 changed pre-report paths independently fetched/matched; branch lease/tree/head/run/job verified. See reports/2026-11-01-finite-native-launch-task3.md for exact commands, every RED/GREEN/failure distinction, hashes and limits. Documentation HEAD is enclosing commit, supplied after CAS/readback.
++
++Actual finite source launcher/nominal class mounts, original-event hydration/four-key Known call, bounded technical-result grammar, source-qualified10400 passive GET-only adoption and exact nominal+launcher terminal restoration consumers implemented. Original70s/5s/20s/18stages and observer32/oneclaim preserved. No real C2 producer/private bundle/owner context/consent/custody/native-create settlement barrier installed; ROOT5 C2 Task5 gate remains mandatory. Cached native-step-output DELIVERY and clocks/provenance are synthetic; no provider restart/real occurrence/PC-off claim. Native Bootstrap workflowName observed in final hosted log.
++
++Task3 finding fixed: early sleep could observe before its absolute slot. Covering RED639afc4/run41373959042 returned ready; GREENb7f95b4 and final reject without an observer GET. Other early failures were separately identified fixture issues (ExecutionContext, seed completedAt/hash, native sleep epoch, engine ordinal misidentified as replay), not hidden product regressions. Root2/3/4/5 rulings above remain binding. Temporary qualifier excluded from integration; its path filter avoids documentation-only reruns. operationalReadiness=false. STOP WRITES after this report/ledger CAS/readback; root owns fresh review.
++
++## Native5 Task3 accepted — next C2 Task1 source-only
++
++Task Native5/3: complete (commits d5a76d6309e1067add15d9b103c0719f8ca4bfd9..86d566e5c1712d3e9a7f043f2305edc32cab2eee, review clean). Fresh independent reviewer /root/review_native_launch_task3: spec PASS, quality PASS, no actionable P1/P2. Reviewed launcher timing/replay, original nominal event/same-reference four-key Known handoff, fixed setup/observer ordering/10400 grammar and both restoration consumers. It did not claim C2 producers, actual native-create writer settlement, production provider replay/PC-off or qualifier integration. Actual C2 Task5 remains mandatory; default source factories unavailable.
++
++Root independently read Actions41374675156: head dc37acb35060c7fd8955403dfe4d30fdfeccd9fa, completed/success/attempt1. Report retains exact127 focused+64 affected=191PASS and scoped lint, native/synthetic limits. No duplicate tests/provider read/trial performed for acceptance. Temporary qualifier remains excluded from integration. C2 Task1 BASE is this documentation commit after expected-head CAS/readback; one new implementer then independent review, no parallel product writers. Source only: no main merge, deploy, keys, roles, OAuth, live command/first HEAD, Max or PC-off; operationalReadiness=false.
++
++## C2 preflight — private-policy setup source plan (prepared after Native5 Task3)
++
++Plan docs/superpowers/plans/2026-11-01-finite-private-policy-setup.md; accepted spec ec08eda2f986fad608f7b1c113aa0dd877d378d8. Its original DESIGN ONLY/pending heading is historical; the prior design acceptance and subsequent root dispatch govern source execution, never runtime permission.
++
++| Pair/task | Producer -> consumer / consistency checked | Finding / resolution |
++|---|---|---|
++| T1 self | Seven new codec/store/journal/fixture files; named behavior tests consume the exact constructors and lease; no product mount. | Consistent; pure records are factual only. Native fixture mounts remain test-only. |
++| T2 self | Actual Access/JWKS + owned D1 + original request/ticket; genuine grant/notice links; fixed host. | Consistent; unavailable publication before T3 is explicit, never positive placeholder. |
++| T3 self | Fixed Beta upload/version inheritance + activation; three preconnection stages; original leases and journals. | Consistent; six pre-T0 effects remain distinct from post-T0 two; current token/module availability is a later runtime gate. |
++| T4 self | Original seed/context selection + T1/T3 transport; two post-T0 effects; receipt cannot certify self-terminal. | Consistent; setup50s and request30s/child5s constrain the same original lifetime. |
++| T5 self | Fixed native mounts/source factories/primary + barrier; default closure until full composition. | Plan needs explicit carry-forward of accepted Native5 source interfaces and ROOT5 actual writer-settlement ownership; record below. |
++| T1/T2 | Strict selection/tickets/link records -> actual authenticated owner producer. | Exact plan signatures; authentication happens only T2. No data record or hash grants a send. |
++| T1/T3 | Connection journal SEND/ACK/receipt -> one-shot actual private publisher. | Exact union/stage/effect identity; actual invocation capability remains source-private and must not be reconstructed from factual status. |
++| T1/T4 | Policy journal/immutable selected binding/context -> actual post-T0 setup. | Exact intent/source/original T0 binding; no finite HEAD, latest row or replay refund. |
++| T1/T5 | Private storage codecs/context -> fixed native material/primary constructors. | Same actual DO storage and source namespace; no caller storage path/boolean authority. |
++| T2/T3 | Owner stage host + genuine exact grant/notice links -> source-fixed phase publisher. | T2 cannot claim publication before T3; Task3 owns only the bounded producer. Original request lease retained. |
++| T2/T4 | OwnerPreparation/selection/binding + current primary owner -> setup authorization. | Bounded commandBy and exact synthetic project/revision/goal; READ remains separate from configuration and Save authority. |
++| T2/T5 | Access-protected original request forwarding and source-qualified holder -> actual QA mount. | No arbitrary QA ingress/identity DTO. Every forwarded request independently verified at QA. |
++| T3/T4 | Shared fixed private transport/module/profile/custody -> two-effect post-T0 policy setup. | No general URL, latest inheritance or configuration/code substitution. Original qualified baseline/version descriptors required. |
++| T3/T5 | Private phase producer + module/profile boundary -> source-approved actual mounts. | Actual module bytes may not reside in <=64KiB context; qualification/residency remains source-only implementation and later acceptance gate. |
++| T4/T5 | Installed receipt/context -> actual completed-success provider/source primary -> material factory. | Receipt alone cannot prove terminal or settlement. Must match Native5 exact completed setup envelope/output hash and default-unavailable seams. |
++
++Ruling: carry accepted Native5 Task1/2/3 interfaces into C2 Task5 without widening the plan — actual fixed constructors must provide the currently unavailable launch context/material/operations, nominal confirmation material and setup-completion seams; nominal result remains facts-only and both terminal inventory plus actual native-create coordinator/SEND/ACK/writer settlement are mandatory — the older plan predates these mounted names — a missed correlation would keep source unavailable or permit unsafe restoration, so default closure and held-work negatives must remain explicit.
++
++Ruling: C2 Task1 is only strict factual records/native transactions. Existence, observed/recorded status, digests, ticket use or installed receipts never mint source invocation/native send authority; runtime publishers must separately own the acknowledged uninterrupted operation — prevents journal replay from becoming permission — if wrong, later producers need contract rework rather than a runtime bypass.
++
++Ruling: preserve separate explicit own-synthetic configuration preparation and the original known-goal Save authorization in later owner UI/runbook; a read/notices grant never authorizes the Save by implication — owner approved overall rehearsal, but the concrete authenticated server proof must describe its action — if omitted the rehearsal must remain unavailable, not silently save under READ.
++
++C2 Task1 next only after Task3 review acceptance. No runtime/readiness/consent/provider/Container/PC-off claim; no source promotion or occurrence from this preflight.
++
++
++## Root C2 Task1 exact-contract rulings (2026-11-02, before implementation)
++
++Source-only BASE 6c3b0f951d2c7a63cbf9abfd4aea81222bf1cd9a. Root approved narrow read-only validatePrivateQaFiniteLegacy({legacy,T0}) in mcp-qa-finite-trial-control.mjs, factoring the exact existing previous-field/hash/source validator and reusing legacy(plan,T0); exact own-data pair, immutable legacy only. No fabricated full plan/weaker duplicate; old finite-control native command joins GREEN. Baseline/rollback module is actual validateFiniteModule EXACT {name,sha256,bytes}; exports belong to configuration.exports/profile qualification, never a fourth descriptor field. Configuration is checked with actual activationConfigurationHash (seven keys, secret_text name/type only) AND separately fingerprinted with restorationConfigurationHash. Full source/binding correctness remains T3/T5.
++
++GrantLink and NoticeLink keep exact spec field lists WITHOUT purpose/selfhash. Their digest domains are afw.finite-grant-link.v1 and afw.finite-notice-link.v1 plus newline plus ASCII-key-sorted canonical full record. ConnectionRef map likewise has no purpose/selfhash; domain afw.finite-connection-ref.v1. Other record domains use actual purpose and exclude only their named selfdigest. Root accepted explicit fail-closed RED shells with actual SQLite mounts and behavioral assertions; missing dependencies/syntax/mounts are not qualifying RED. No positive authority placeholder.
++
++
++Root C2 Task1 additional exactness ruling: policies has exactly AFW_DOSSIER_EVENTS_POLICY, AFW_DOSSIER_PERMISSION_WITHDRAWAL_POLICY, AFW_DOSSIER_RETIREMENT_POLICY, AFW_DOSSIER_SUCCESSOR_POLICY, AFW_OAUTH_PILOT_CLIENT_ID and AFW_OAUTH_PILOT_PROJECT_ID. Project digest is SHA256('afw.finite-owner-project.v1\n'+ASCII-canonical exact {projectId,revision,synthetic}). Standalone ConfigurationApproval checks digest shape; embedded OwnerPreparation checks exact project digest/source/goal. Optional narrow hashFiniteOwnerPreparationProject factual helper confers no authorization. Preconnection approvalHash remains a T2 source correlation to actual stored ConfigurationApproval.
++
++
++Root C2 Task1 identity ruling: Failure.identityHash and journal key derive SHA256('afw.finite-policy-effect-identity.v1\n'+ASCII-canonical EXACT validated identity union INCLUDING kind/effect). Connection union is {kind:'connection',preconnectionId,sourceRevision,stage,effect}; policy union is {kind:'policy',intentId,sourceRevision,setupInstanceId,effect}. Sibling upload replaces only effect with literal upload and hashes same union/domain. No caller key or omitted dimension; afw.finite-connection-stage.v1 remains separate. Shared factual identity helper may be exported; digest never creates send authority. Unknown/late SEND remains outstanding.
++
++
++Root C2 Task1 program provenance ruling: OwnerPreparation.sourceRevision and approval.sourceRevision are runtime/sourceM and MUST match. programContext.sourceRevision is the actual program revision, potentially distinct from M; T1 checks 40hex plus programHash/originalContextHash shape. T2/T4 must correlate all three values with current primary program and exact selected project/goal. No equality to runtimeM, substituted current program or synthesized source authority.
++
++
++Root C2 Task1 actual publication chronology ruling: append private source-owned {selectionHash,publishedAt} witness under sourceM/selection-derived key, without public schema/API changes. Sample publishedAt AFTER the atomic preparation+selection+head-CAS transaction promise successfully settles, with original lease assertions before/after. A second append-only transaction is allowed; recorded requires witness ACK and exact readback. Missing/uncertain head/witness => uncertain factual state; preserve history/head and never reconstruct/manufacture/backdate a witness. Binding requires exact current selection plus durable witness selectedAt<=publishedAt<=originalT0. Delayed witness storage never pretends a head ACK happened earlier. No reset/refund/rollback/authority. Cover actual backdated publication, original transaction held acrossT0, lost head/witness ACKs with focused hosted RED/GREEN.
++
++
++## C2 Task1 completed SOURCE ONLY — fresh root review pending
++
++DONE_WITH_CONCERNS. BASE6c3b0f951d2c7a63cbf9abfd4aea81222bf1cd9a; code/testHEAD7a7ebb4d8db5e37b615dc5c38d2f1a80e8513b28/tree39c2e04f8387741601017f8786fdeb1ac5b3c36a. Final hosted41377436434/job125060645997 attempt1 Node22.23.4:21focused+2olddecoder=23PASS,0FAIL/SKIP/CANCELLED; scopedlint0errors/0warnings/artifacts0. Exact commands, all eight run/job counts/classifications, paths, root rulings and limits in reports/2026-11-01-finite-private-policy-setup-task1.md. Documentation HEAD is enclosing report/ledger commit and supplied after CAS/readback.
++
++Strict factual codecs, original selection/CAS/binding/context/tickets/links and separate native connection/policy append-only SEND/ACK/receipt/failure journals implemented; no production mount. Root-approved narrow legacy helper reuses existing exact algorithms; actual module{ name,sha256,bytes }, actual activation configuration grammar/separate restoration hash, six environment slots, project/identity/link domains and program-vs-runtime revision pinned above.
++
++Meaningful shellRED648997a/run41376387383/job1250574282141PASS9FAIL (actual native mounts/CAS/status behavior; shellthrows/lostACKTypeError separately disclosed); fullerRED7b89b78/run41376855027/job1250588689581PASS15FAIL. Initial a7259f8/run41376246732 fixture export startup error explicitly NONQUALIFYING. InitialGREEN44dc92216focused+2oldPASS. Self-review actual chronology gap -> RED79bbd24/run41377275523/job12506014781816PASS4FAIL and accessorREDa7fc159/run41377327773/job12506030759816PASS5FAIL. Final7a7ebb4 uses immutable publication witness sampled AFTER actual atomic head transaction ACK; second append-only witness ACK/readback required before recorded, existing/lost-head ACK cannot synthesize witness, binding requires durable publishedAt<=originalT0. Lost witness ACK retains actual witness/history; exact readback recovers facts only. Positive fixtures now genuinely publish beforeT0. Accessors reject without invocation.
++
++All13 pre-report paths independently fetched/matched at final codeHEAD; every commit expected-headCAS plus branch/contentreadback; final run/head/tree/attempt verified, compare ahead10/behind0. Branch-only qualifier excludes documentation-only pushes and MUST be excluded integration. No fullsuite rerun. NativeSQLite/transactions/reconstruction real; leases/clocks/authority/provider boundaries SYNTHETIC. Only tiny installed skill reads local; no localprojectfiles/deps/build/downloads, provider/privateGET, runtime/keys/roles/OAuth/OTP/consent/window/deploy/DDL/cron/Containers/occurrence/ownercommand/firstHEAD/Max/mainmerge.
++
++No Task2/3/4/5 business producers/capability placeholders. Fresh root review, actual source/custody/owner/consent/privacy/profile/full mounts/writer settlement/C3/fullpackage/attended gates remain. operationalReadiness=false. STOP WRITES after report/ledger documentationCAS/readback.
++
++
++## C2 Task1 fix round 1/5 — opened before product mutation
++
++FIX_BASE/reviewedHEAD224693b91b7a66d331f5996f1ddc178823e4d485. Fresh independent reviewer /root/review_private_policy_task1: Spec FAIL / Quality FAIL; ONE P2, two same-pattern sites, no other actionable finding.
++
++Verbatim: **[P2] Snapshot ticket-consumption input before asynchronous storage work. lib/mcp-qa-finite-preparation-store.mjs:67–72. fields() validates and returns the caller’s original mutable object. consumeTicket derives the use key before its first await, then rereads value.ticketHash and spreads value after awaits. Deterministic reproduction: persist valid tickets A and B; call consumeTicket({ticketHash:A,recordHash:R}, lease); suspend get(A:use); change the original argument’s ticketHash to B; resume. The transaction validates B but stores TicketUse(ticketHash=B) under A:use. A subsequent ordinary consumption of B succeeds under B:use, consuming B twice. This breaks the Task1 one-use/exact-record invariant without an expired lease or forged stored record. Capture a validated immutable argument snapshot before any await and cover this interleaving. The same retained-wrapper pattern appears in putLink at lines76–82: changing value.kind during the preconnection read can skip the notice→grant check and select a different storage suffix; snapshot the discriminator too.**
++
++Reviewer reproduction is source-derived, not previously executed. Root assigned original sole implementer fix round1/5; no subagents. Scope is both mutable-wrapper boundaries, meaningful actual native RED before minimal fix, unchanged lease/schema/chronology and exact source-only limits. Covering command: node --test test/mcp-qa-finite-preparation-store-native.test.mjs. Scoped lint only changed product/store-native/fixture JS; temporary qualifier narrowed to avoid repeating unchanged suites. No whole-suite, runtime/provider/custody/identity/consent/OAuth/OTP/window operation; owner asleep. Root owns scoped re-review224693b..fixHEAD and next-task gate.
++
++
++## C2 Task1 fix round 1/5 — complete / scoped root re-review pending
++
++P2 implementer assessment ADDRESSED at both mutable-wrapper sites; no open scoped implementation finding; fresh root re-review pending. FIX_BASE224693b91b7a66d331f5996f1ddc178823e4d485. Genuine nativeREDeb8a594/run41378343786/job125063437194:11PASS3FAIL,0SKIP/CANCELLED; actual tx.get interleavings mutate original invocation argument once, expose TicketUse(B) underA:use plus ordinaryB consumption, skipped notice-grant prerequisite, and wrong native append suffix. No fixture/syntax/dependency/lease failure counted; lintclean.
++
++Minimal7307b75959f177f1ff4684bd95be263dcb4c52c3/tree163c1019a5856728d5392d43ef227252908a3b5a copies/freezes validated wrappers BEFORE firstawait in consumeTicket/putLink, two changed product lines; caller original remains mutable, decoded link record already immutable. GREEN41378417492/job125063662829 attempt1 Node22.23.4:14PASS0FAIL/SKIP/CANCELLED; scopedlint0errors/0warnings/artifacts0. Command: node --test test/mcp-qa-finite-preparation-store-native.test.mjs. Lint: npx eslint lib/mcp-qa-finite-preparation-store.mjs test/mcp-qa-finite-preparation-store-native.test.mjs test/fixtures/finite-preparation-store-worker.mjs. Same report appended with exact command/output/run/job/counts, reproductions, source limits/selfreview; original history preserved.
++
++Six changed paths independently fetched/matched at codeHEAD; every commit expected-headCAS plus branch/contentreadback; compare224693b..7307b ahead2/behind0, productdiff2additions/2deletions; finalrun/head/tree/job/attempt verified. Temporaryqualifier narrowed store-nativeonly/threeJSlint, branch-only/contentsread/nosecrets/artifacts/deploy/docs-onlyfiltered and EXCLUDEintegration. No unchangedsuite/fullsuite/lintbroaden. NativeSQLite actual, source/clock/lease/interleavingauthority synthetic. No localprojectfiles/deps/build/downloads, provider/privateGET/runtime/keys/roles/OAuth/OTP/consent/window/deploy/DDL/cron/Containers/occurrence/firstHEAD/owneraction/Max/mainmerge or nexttask; owner asleep. operationalReadiness=false. DocumentationHEAD enclosing append commit supplied afterCAS/readback; STOP WRITES for root scoped re-review224693b..fixHEAD.
++
++## C2 Task1 accepted — actual owner producer next
++
++Task C2/1: fix round1/5 (1 addressed,0 open — mutable consumeTicket/putLink argument snapshots; commits224693b91b7a66d331f5996f1ddc178823e4d485..7b2e448b4ddf0d4765de4eff93045c77642e366b). Original fresh review /root/review_private_policy_task1 found one P2, not waived. Original implementer reproduced11PASS/3intendedFAIL at eb8a594/run41378343786, fixed only2product lines at7307b759,14store-nativePASS/lint0warnings/artifacts0 in41378417492/job125063662829/attempt1. Root read run/head/status/success independently. Scoped fresh /root/rereview_private_policy_task1_fix1: ADDRESSED both sites, spec PASS/quality PASS, no new P1/P2/no blocking observations. Original23PASS evidence remains covering unchanged records/journal/legacy; no whole-suite rerun.
++
++Task C2/1: complete (commits6c3b0f951d2c7a63cbf9abfd4aea81222bf1cd9a..7b2e448b4ddf0d4765de4eff93045c77642e366b, review clean after round1). Exact factual codecs/store/journals accepted with actual publication chronology and own-data snapshots, no owner/send authority or live mount. Native storage is real; time/lease/authority/external boundaries synthetic. Temporary qualifier excluded eventual integration. Original helper/hash/legacy algorithms and private-slot/program-vs-runtime distinctions preserved.
++
++Next C2/2 root-dispatched fresh implementer: actual Access/owned-primary/one-use ticket/genuine grant+notice links, brief docs/superpowers/briefs/2026-11-01-finite-private-policy-setup-task2.md. BASE is this documentation commit after CAS/readback. Owner asleep with PC on: continue source-only reversible work, no requests for clicks/codes/credentials/live windows; human-only gate prepared for tomorrow. No other source writer, no main merge/deploy/provider probe/runtime/first finite HEAD/Max; operationalReadiness=false. Cloud/private publication/actual consent/settlement/PC-off acceptance remain separate. Source guard and receipt limits unchanged.
++
++
++## C2 Task2 exact-contract amendment — documentation gate (2026-11-02)
++
++Root resumed original Task2 implementer at unchanged BASE270ef346ac5e87cec87aa4ea7de0527e3f75a826 after explicit missing-contract inspection; NO product edits/tests/runtime actions. Root resolves routine source design without waking owner. Proposed exact table appended to docs/superpowers/briefs/2026-11-01-finite-private-policy-setup-task2.md; shared plan cross-links that single review table. It covers fixed unavailable owner-source resolver and exact private tuple; initial immutable baseline/program versus legitimate stage pointers; one source-qualified synthetic project with fresh owner-primary lookup; approved ProjectRef/AuthorizationLink/ConfigurationApproval/ConnectionRef factual storage; original transaction mapping; exact realm/subject/grant/consent/event/baseline digests; noncircular explicit decision digest consumed with durable ACK/readback before approval; bounded transient request/cookie grammar and ordinary OAuth success preservation.
++
++Tuple/subsets are PROPOSED pending Root immediate validation, not a live capability or product authorization. Positive fixture may replace only fixed source module statically; actual signature/JWKS/native D1/HTTP retained. Future source/publication/custody/profile/module/program qualification remains T3/T5 and unavailable today. Source-only GitHub expected-head CAS and independent readback; documentation HEAD supplied in handoff, no self-referential SHA invented. No local project/source/deps/build/temp download, provider/private read, credentials/keys/scopes/real OAuth/OTP/consent/window, DDL/deploy/first finite HEAD/owner action/main merge/Max. No tests for docs-only gate; operationalReadiness=false. STOP product writes pending Root table validation.
++
++
++## Root validation of Task2 amendment — corrections accepted before product work
++
++Root validated the preceding exact table at6b450267 with these binding corrections. These supersede only the conflicting proposed entries; all other exact fields/domains/chronology are approved. Source BASE remains270ef346; this is documentation-first correction, not runtime authorization.
++
++- Add `qaVersionId` UUID to EXACT source tuple and compare actual native `env.QA_VERSION.id`. Namespace identity does not establish current QA version. T3/T5 must prove actual source/module/bindings/current pointer.
++- QA DO primary project/grant/consent/program reads use actual `env.RELEASE_DB`, the existing canary release D1 binding; NEVER QA `env.DB`. Ordinary canary OAuth/monitoring continue their existing env.DB. No environment alias/clone. Private preparation state uses actual ctx.storage. Missing/wrong RELEASE_DB must deny; T3/T5 verify actual binding IDs/holders.
++- Add private factual `OwnerSourceSnapshot` EXACT `{preconnectionId,initialTicketHash,source,sourceHash}`; source is the complete validated INITIAL tuple INCLUDING qaVersionId, closed_ui phase and initial currentPublication; sourceHash=D(`afw.finite-owner-choice.v1`, EXACT `{preconnectionId,initialTicketHash,source}`). No purpose/other selfhash/credentials/source bytes. Strict codecs and append-only store `putOwnerSourceSnapshot(record,lease)` / `readOwnerSourceSnapshot({preconnectionId},lease)`, key `connection-preparation:<preconnectionId>:source`, T1 observations/lease/snapshot discipline. This data never qualifies source.
++- Initial GET must obtain durable snapshot+ProjectRef+Ticket ACK/readback BEFORE emitting handle. Partial or lost ACK preserves factual writes and never implies approval. POST independently resolves current source and compares initial snapshot EXACT before approval: changed goal/programContext/initialBaseline/window/revision/QA version denies. Meaningful goal/program between-requests regressions required. Original source window cannot restart from GET/POST or stage progression.
++- Later phases may differ ONLY through separately source-qualified phase/currentPublication chain; original snapshot, project, goal, program and window stay immutable. initialTicketHash resolves original consumed configuration decision without scans/latest lookup. Later stage tickets/cookies retain exact same preconnection+ProjectRef and original window. Broad rehearsal authorization never replaces explicit displayed goal and verified configuration approval.
++- All proposed hashes/map schemas/store reads, including readTicketUse and noncircular decision digest, are approved. Actual consume ACK/readback precedes ConfigurationApproval. Existing OAuth handle/grant hash and monitoring algorithms stay unchanged.
++- Forwarding uses existing fixed QA namespace/actor through actual source-qualified binding and preserves bounded original request. Never treat canary ExecutionContext as QA DO ctx/storage; no public QA ingress, credential or generic URL/RPC. Mount/caller-holder qualification belongs T5; fixed source adapters may remain unavailable meanwhile. Positive fixture provenance is explicitly synthetic; production resolver unavailable is a mandatory later gate, not a waiver.
++
++Proceed scoped T2 TDD after this documentation commit; no further pause except concrete unresolved contract gaps. No provider/private read, credential/real OAuth/OTP/consent/window, local project/deps/build, DDL/deploy/main merge/first finite HEAD/owner request. operationalReadiness=false.
++
++
++## Root Task2 identity and forwarding ruling (2026-11-02)
++
++Final OwnerPreparation.prepId MUST equal its original preconnectionId: the SAME original server-generated random32-byte ID is reused, never newly allocated or aliased. ONE final preparation per original preconnection; source/owner/window remain unchanged. No T1 schema change/secondary index/latest scan. readFiniteOwnerPreparation resolves exact prepId keys for original OwnerSourceSnapshot, Preconnection, GrantLink and NoticeLink and requalifies current source/primary. ID equality is factual correlation only, never permission. Task3 final producer MUST retain this invariant; immutable selection/binding/history and no renewal remain.
++
++Approved fixed default-unavailable source forwarding exports: forwardPrivateQaFiniteOwnerAuthorization({ctx,env,request,authorizationHash},lease), forwardPrivateQaFiniteOwnerGrant({ctx,env,request,grantId},lease), forwardPrivateQaFiniteOwnerNotice({ctx,env,request,requestId,sequence},lease). Only actual server-success refs and bounded preserved original request; no generic RPC/URL/status/identity DTO or registration. The original lease starts at actual canary request receipt BEFORE first SDK/auth/DB IO; hooks/QA may never restart30s/5s. T5 must qualify native sender/binding/holder and original-deadline/abort forwarding, overwriting any internal transport metadata from trusted source; actual transport remains unavailable here. Canary ExecutionContext is not QA DO ctx/storage. Unrelated ordinary consent is unchanged; a failed prep hook cannot revoke completed authorization or repeat grant creation.
++
++
++## Root SameSite browser-flow correction before source hooks
++
++Keep the preparation cookie SameSite=Strict. A cross-site initial /authorize navigation may omit it; never relax it or infer preparation from subject/time. In addition to genuine beginConsent+consent-row GET mapping when the cookie is actually present, Root approves one exact same-origin POST mapping point: AFTER actual api.approveConsent(request,h) succeeds, BEFORE store.consumeConsent/createGrant/completeAuthorization. The fixed sender passes authorizationHash=existing SHA256(h); QA independently verifies original prep cookie/ticket/current source and exact still-unconsumed original consent row. Existing map is read-only/idempotent; no replacement or refreshed issuedAt. Actual SDK-approved handle plus original configuration decision establishes transaction correlation before any grant. No cookie remains ordinary OAuth without preparation success; wrong handle/source/cookie never creates a link. Mapping after grant by matching rows/time stays forbidden. Missing/failed link cannot repeat or revoke genuine OAuth completion. Real SDK/native tests must cover GET without prep cookie then same-origin POST with it; this is HTTP fixture evidence, not an actual browser session. Actual forwarding qualification remains T5 unavailable.
++
++
++## Root Task2 exact preconnection-to-connection topology (2026-11-02)
++
++APPROVED completion requirement: PreconnectionConnection EXACT `{preconnectionId,connectionRef,grantHash,linkedAt}`, no purpose/selfhash; D(`afw.finite-preconnection-connection.v1`, whole exact record). Key `connection-preparation:<preconnectionId>:connection`. Fixed store `putPreconnectionConnection({relation,connection},lease)` atomically appends BOTH relation and exact existing ConnectionRef; `readPreconnectionConnection({preconnectionId},lease)` returns ReadObservation. Same original lease, strict immutable snapshots, no generic index/scan. Actual stored Preconnection+GrantLink must correlate owner/client/project/resource/grant and original source/window; recompute existing SHA256(grantId) identity. Require relation.linkedAt>=GrantLink.acceptedAt, connection.issuedAt=linkedAt, exact connRef/grantHash, times<=actual clock and expiry within original preconnection. Source additionally clips to fresh actual grant/Access expiration.
++
++Only genuine grant producer after actual GrantLink ACK+readback may allocate the initial random32-byte ConnectionRef. First exact pair wins; competing ref cannot replace it. Unknown/lost ACK, missing one side or conflict stays pending/uncertain, never re-mints/renews from absent read after an unknown attempt. Reconstruction recovers exact paired factual records only. A GrantLink already present with absent relation is NOT a new-allocation opportunity. Reader uses exact preconnection→relation→ConnectionRef. Task3 stages MUST consume this existing immutable pair, never synthesize a newer reference, scan maps or treat the relation as permission. Native atomic-pair/lost-ACK/conflict and actual grant-producer→subsequent-stage/read tests are required; no unexplained test-seeded map stands in for the producer.
++
++
++## C2 Task2 source handoff — fresh Root review pending (2026-11-02)
++
++Status DONE_WITH_CONCERNS/SOURCE ONLY, operationalReadiness=false. BASE270ef346ac5e87cec87aa4ea7de0527e3f75a826; code/testHEAD0bf4dc1247550ab7b71a5242d465c5905a2bc531; treef136b16e5137a2f103b9838e5bcc6aeea6f7e4fc. Documentation HEAD is this enclosing report/ledger commit, returned exactly after CAS/readback in handoff. Detailed durable report: docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task2.md.
++
++Delivered fixed owner HTTP/native source producers, independent verified Access expiry, exact one synthetic owner/revision through RELEASE_DB, initial snapshot+ProjectRef+Ticket ACK/readback, noncircular explicit config decision, immutable actual authorization/grant/notice correlation, pregrant POST fallback for strict-cookie cross-site GET, ordinary successful OAuth grant preservation, awaited original monitoring lease, atomic exact preconnection→ConnectionRef and internal positive-eligibility reader. Existing grant/SDK handle hashes and original consent/revocation semantics retained. No T3 publication or T5 actual-source/transport readiness invented.
++
++Final hosted Node22.23.4 run41383552325/job125079335946/attempt1/head0bf4dc1247550ab7b71a5242d465c5905a2bc531:24native+60affected=84PASS,0FAIL/0SKIP/0CANCELLED; scoped ESLint0errors/0warnings; artifacts0. Meaningful RED history and exact commands are in report. Self-review reproduced and fixed monitoring return-before-await closure, exact source-ref lookup, SAME verified JWT expiry across source latency (native actual1 expired-proof snapshot vs expected0), and Root-approved atomic relation topology/lost ACK/conflicting proposal/no-remint. No syntax/dependency/fixture failure counted as qualifying RED.
++
++All22 pre-report commits used exact expected-head CAS and independent readback; final17 changed paths match independently at codeHEAD, ahead22/behind0. New source resolver/forwarders remain unavailable; positive tests statically replace only that source module with synthetic provenance while real signed-JWKS/HTTP/D1/DO/SDK behavior runs hosted. Temporary branch-only qualifier EXCLUDE integration; no secrets/artifacts/deploy; docs-only filtered. No local project/source/deps/build/temp downloads or provider/private/real-auth/runtime/DDL/deploy/first finite HEAD/main merge/Max action.
++
++Mandatory T3 handoff: prepId=original preconnectionId; retain initial snapshot/program/baseline/window; use exact atomic relation, never latest/ref re-mint or expired-permission renewal. Mandatory T5: actual native source/version/binding/RELEASE_DB/profile/module/custody/program/current-stage and original transport deadline/abort qualification before mount/readiness. Active-positive preparation reader is NOT cleanup authority: withdrawn/expired permission must not prevent original authorized cleanup/retirement using retained context and actual current withdrawal/settlement. C3 finite business route remains separate. Fresh Root task-scoped spec+quality review owns acceptance.
++
++STOP WRITES after report+ledger CAS/readback. No subagents, self-appointed reviewer, Task3 implementation or human auth request.
++
++
++## C2 Task2 fix round1/5 — opened before product mutation
++
++FIX_BASE/reviewed documentation HEAD `3aead938fece1c4f1f6fdc5b42b08a6fb3371528`. Fresh independent reviewer /root/review_private_policy_task2: Spec FAIL / Quality FAIL, ONE actionable P2, no other P1/P2.
++
++Verbatim finding: **[P2] Invalidate timed-out child operations before they can write. lib/mcp-qa-finite-owner-preparation.mjs:30–34 rejects Promise.race after five seconds but neither aborts nor invalidates the outstanding operation. step passes the still-live original proof lease to storage, whose guards therefore permit work beyond that child deadline. Source-derived reproduction: hold putAuthorizationLink transaction before its write for six seconds; at five seconds the authorization hook rejects, ordinary OAuth continues through consume/grant creation, and held transaction can resume while original thirty-second parent remains valid. It can append authorization link after its child expired—and after consumption. Introduce a nonrenewable child guard propagated into actual work/storage, invalidated on timeout, preserving any already-committed uncertain facts. Add a native held-transaction regression keeping parent alive, checking no late append.**
++
++Reviewer reproduction is inspection-derived, not previously executed. Root assigns original sole implementer round1/5: meaningful native held-transaction RED first, then minimal captured-child guard propagated to actual storage/work. No mutable shared current-child alias. Original30s parent, SAME verified JWT expiry, child5s, source guards, ordinary SDK302/grant/revoke isolation and uncertain committed history remain. No Task3, subagent, local source/dependency/build, provider/private/auth/runtime or owner interaction.
++
++Covering command: `node --test test/mcp-qa-finite-owner-preparation-native.test.mjs test/delegated-oauth-flow.test.mjs test/dossier-monitoring-oauth-native.test.mjs`; scoped lint exact changed JS. Temporary qualifier narrowed to this coverage with contents:read/no secrets/artifacts/deploy/docs-only filtering. Root owns scoped re-review FIX_BASE..fixHEAD; previous completion evidence above is historical and does not close this finding. operationalReadiness=false.
++
++### C2 Task2 fix round 1 — Root profile-binding correction (2026-11-02)
++
++Root corrects its earlier `env.QA_VERSION.id` shorthand: the accepted source `finitePublicProfileTemplate('qaLive')` and existing native publication bridge expose the version_metadata binding `AFW_QA_VERSION`. The source tuple field remains `qaVersionId`; resolution MUST compare exclusively actual `env.AFW_QA_VERSION.id`, with no QA_VERSION alias, new binding, profile change or cloned environment. This is a plan correction based on pinned repository source, not provider observation or deployment qualification. Record as round1 finding 2 alongside the reviewer's child timeout P2. Add real native positive with only the profile-derived binding name and negative with only the obsolete shorthand; preserve original source/parent/child/signature semantics and operationalReadiness=false.
++
++### C2 Task2 fix round 1 — Root QA rate-limit binding correction (2026-11-02)
++
++Root extends the same actual-role dependency correction: `finitePublicProfileTemplate('qaLive')` declares `AFW_QA_OCCURRENCE_RATE_LIMITER`, not the canary role's `DELEGATED_RATE_LIMITER`. The private QA owner host MUST call the existing actual QA limiter directly with its existing finite-owner key. No alias, new binding/namespace, cloned environment, quota/settings or unrelated key change; ordinary canary OAuth/monitoring retain their existing DELEGATED_RATE_LIMITER. The native owner fixture takes the binding name from the accepted profile and includes a legacy-only rejection. This corrects earlier QA-role assumptions; source inspection is not actual provider/resource/holder qualification, which remains T5-unavailable.
++
++### C2 Task2 fix round 1 — verification and source-only handoff (2026-11-02)
++
++FIX_BASE is the previously reviewed docHEAD `3aead938fece1c4f1f6fdc5b42b08a6fb3371528`; original task BASE remains `270ef346ac5e87cec87aa4ea7de0527e3f75a826`. Root's review finding was recorded before product changes at `e3eba962c9481ab9e5cf9e353d7fbdaa515d8a44`. Root's profile corrections were recorded before their product changes at `d0f3132e8bbf4867b425f03ef48bdb1a305adfb4` and `d7378255f1f8caa0be5d23eeeb8b96ffe415cd55`. These append-only corrections supersede earlier QA_VERSION/DELEGATED_RATE_LIMITER shorthand for the QA role; they do not alter the accepted profile.
++
++The child helper now allocates one frozen, nonrenewable guard per actual operation, retaining the same original parent and the same verified Access expiry. It checks both wall and monotonic child elapsed time, invalidates/aborts on timeout, parent abort and settlement, and passes that captured guard into every actual owner-store callback and the fixed source resolver. A subsequent operation cannot revive an earlier callback. No shared current-child alias, new request clock, refreshed identity, retry/refund or send authority is introduced.
++
++The native regression holds the first real DO transaction before its write for six seconds while the original thirty-second parent remains alive. After the hook rejects, the fixture consumes the exact original primary consent and creates an active real synthetic D1 grant, then starts a second pending child of the same parent before releasing the old callback. RED showed an impermissible late AuthorizationLink; GREEN requires no late append and an independently successful second child. A companion case commits the original transaction before holding its ACK: timeout preserves that exact durable fact. Abort is not evidence that committed work vanished. Existing actual SDK302/grant/revocation-isolation and monitoring tests remain in the covering run.
++
++The binding regression derives names from `finitePublicProfileTemplate('qaLive')`. The owner fixture's successful HTTP/JWKS/D1 path has only the real profile names, while obsolete-version-only and canary-limiter-only cases fail unavailable without owner records. Product reads actual `env.AFW_QA_VERSION.id` and `env.AFW_QA_OCCURRENCE_RATE_LIMITER` directly. Ordinary canary OAuth/monitoring bindings, native quota/settings, unrelated keys, and accepted profiles are unchanged.
++
++All runs use the same exact covering command:
++```sh
++npm ci --ignore-scripts --no-audit --no-fund
++node --test test/mcp-qa-finite-owner-preparation-native.test.mjs test/delegated-oauth-flow.test.mjs test/dossier-monitoring-oauth-native.test.mjs
++npx eslint lib/mcp-qa-finite-owner-preparation.mjs test/mcp-qa-finite-owner-preparation-native.test.mjs test/fixtures/finite-owner-worker.mjs
++```
++Hosted Ubuntu24 / Node22 / existing lockfile only. Temporary qualifier is branch-only, contents:read, no secrets/artifacts/deploy, docs-filtered; exclude it from eventual integration. No local project/source/dependency/build execution. Unchanged suites outside the mandated coverage were not rerun for this round.
++
++Exact evidence, all attempt 1, artifacts 0, scoped lint 0 errors / 0 warnings:
++
++| Stage | Exact head | Run / job | Output and conclusion |
++| --- | --- | --- | --- |
++| Child native RED | `8ed7b3e0bca3751ef4dcb93c1e0eaa3b5188897e` | [41442454925](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41442454925) / 125267398566 | 56 tests; 55 pass, 1 fail, 0 cancelled/skipped. Test55 expected no late append, actual true. Test56 committed-before-ACK preservation passed. |
++| Captured child GREEN | `39805f98bb12a8c535ff224b451b55da9b32199c` | [41442815442](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41442815442) / 125268595630 | 56 tests; 56 pass, 0 fail/cancelled/skipped. |
++| Preliminary version diagnostic | `093bb6c4beb209388c40a2993df8c3ebce61c06d` | [41443357496](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41443357496) / 125270385569 | 58 tests; 56 pass, 2 fail. Positive actual503/expected200; negative expected403 was corrected to existing unavailable503 before product patch. Superseded by following qualifying RED. |
++| Version binding RED | `5f1c5b1b32fe62f691742f206b9231d9898c8076` | [41443428834](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41443428834) / 125270619996 | 58 tests; 56 pass, 2 fail, 0 cancelled/skipped. Actual profile-only positive503 versus expected200; obsolete alias-only actual200 versus expected503. |
++| Version binding GREEN | `96fa4ebd670cfc569e52dcf21a6297a4de501c1d` | [41443638736](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41443638736) / 125271318526 | 58 tests; 58 pass, 0 fail/cancelled/skipped. |
++| QA limiter binding RED | `b3a434bd115f13d975735ca496c511194bc39fc6` | [41444057114](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41444057114) / 125272680230 | 59 tests; 57 pass, 2 fail, 0 cancelled/skipped. Actual QA profile-only positive503 versus expected200; canary-limiter-only actual200 versus expected503. |
++| Final combined GREEN | `33ade9569fe0f5d770a4ee2a9ed59cb6f68c6b22` | [41444334695](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41444334695) / 125273592435 | 59 tests; 59 pass (29 owner-native + 30 OAuth/monitoring), 0 fail/cancelled/skipped. Test step and lint success. |
++
++Qualifying RED failures were behavior assertions in mounted native HTTP/JWKS-signature/D1/storage paths, not fixture syntax, dependency or build failures. Final codeHEAD `33ade9569fe0f5d770a4ee2a9ed59cb6f68c6b22`, tree `27e7e514e458d8fcefc7807c780d1013ac495b89`, parent `b3a434bd115f13d975735ca496c511194bc39fc6`. FIX_BASE..codeHEAD is ahead10, exactly8 changed paths, with only one product source file modified (`lib/mcp-qa-finite-owner-preparation.mjs`). Every commit used expected-head CAS and independent ref/content readback; all8 changed paths were independently fetched at final codeHEAD and matched expected contents. Final run head, job, attempt, test output, lint and empty artifacts were independently verified. The final append-only documentation commit containing this section is docHEAD; its exact SHA is returned after CAS/readback in the handoff.
++
++Selfreview: all owner-store calls capture the operation's own childLease; no callback receives the still-live broad proof lease instead. Subsequent source checks also retain that same verified expiration through the captured child. Existing T1 transaction guards fence actual writes and readbacks; already committed uncertain facts remain intact. No schema/store/ordinary OAuth/monitoring product changes in this round. Profile-name consistency now uses actual accepted QA version and limiter names, without aliases or changing profile/quota settings.
++
++SOURCE ONLY / DONE_WITH_CONCERNS. Fixed private source and forwarding adapters remain default UNAVAILABLE; positive provenance is explicitly synthetic static source replacement. T3/T5 still own actual source/binding IDs/holders, version/module/profile/program/baseline/stage-chain qualification, fixed QA forwarding with original cross-worker deadline/abort propagation, custody and mount/publication readiness. No provider/private read, real Access/OAuth/OTP/consent/window, deploy, DDL, cron, container, main merge, live occurrence or Task3. Active-grant/notice reader remains preparation eligibility only; T5 cleanup/retirement must use retained original context plus current withdrawal/settlement facts after Save/revoke. operationalReadiness=false. STOP WRITES after final documentation CAS/readback; Root owns fresh scoped spec+quality re-review FIX_BASE..docHEAD.
++
++## C2Task2 accepted — fixed publisher/stages next
++
++Task C2/2: fix round1/5 (2 findings addressed,0 open — captured nonrenewable child guard plus Root actual-QA version/limiter role correction; commits3aead938fece1c4f1f6fdc5b42b08a6fb3371528..935b7beb9919e120066f193b8e009c0c1dfe5e2b). Original fresh /root/review_private_policy_task2 found the local late-child-append P2; original implementer reproduced actual native failure and fixed all captured lease callsites. Root corrected its wrong QA_VERSION/canary-limiter shorthand to actual AFW_QA_VERSION/AFW_QA_OCCURRENCE_RATE_LIMITER, without aliases/profile/quota changes. Scoped re-review by same independent reviewer: both ADDRESSED, fix spec PASS/quality PASS, no new P1/P2. Real held-native parent-alive/second-child/committed-ACK cases and profile-derived names covered. Final code33ade956; Actions41444334695/job125273592435/attempt1=59PASS, lint0/0,artifacts0 per report; Root independently read exact run/head/status/success. Original84PASS remains evidence for unchanged data/other scopes; no whole-suite repeat.
++
++Task C2/2: complete (commits270ef346ac5e87cec87aa4ea7de0527e3f75a826..935b7beb9919e120066f193b8e009c0c1dfe5e2b, review clean after round1). Actual native HTTP/JWKS/D1/SQLite code and strict correlation accepted SOURCE ONLY. Actual owner-source and fixed forwarding remain unavailable for mandatory T3/T5 source/binding/module/custody/program/original deadline qualification; no runtime readiness waived. OwnerPreparation.prepId=preconnectionId and atomic paired ConnectionRef topology must carry to T3. Positive active eligibility is not cleanup authority after Save/revoke.
++
++Next C2/3 brief docs/superpowers/briefs/2026-11-01-finite-private-policy-setup-task3.md, BASE this documentation commit after CAS/readback. One fresh implementer, no parallel product writer, then fresh source review. Owner last availability: asleep; continue authorized source-only work, leave human-only gate prepared. No main merge/deploy/new OAuth/keys/tokens/first finite HEAD/Max/PC-off. Temporary qualifier excluded integration; operationalReadiness=false.
++
++Pending integration check for C3/full review: early owner withdrawal during finite profile must be an actual supported route or truthfully described own-rehearsal limitation; native C0 cleanup alone does not prove earlier user withdrawal while global OAuth/monitoring-owner stay false. No new runtime action/permission is implied.
++
++Pending actual material-residency gate for T3/T5: qaLive has CF reader/publisher only, no native GH artifact credential. Public seed/tag/metadata does not prove private ZIP access. Source-owned M-qualified canaryLive bytes/privacy/residency must be concretely implemented before readiness, no invented env.GITHUB_TOKEN/public artifact/general raw module RPC. A compile-time QA-only source-held compressed bundle is an option to investigate with graph/size/self-reference limits, not an implemented/selected route. Official GitHub artifact download docs checked2Nov; unauth-public clause applies metadata list/get, not the documented download permission. Source task may defer exact actual source constructor to T5, never actual readiness.
++
++## C2T3 preflight — schema and existing resource preservation
++
++Ruling: use the documented Beta JSON modules payload on the fixed explicit-version-inheritance endpoint, not classic multipart — public API schema now inspected directly — a wrong wire format would fail upload, so pin tests before effects. Source API payload, normalized actual configuration and request fingerprints stay distinct.
++
++Ruling: preserve the existing declared AfwOwnEventNode SQLite/Container linkage in preparation AND finite profiles; amend the source canaryLive container projection/expectations instead of publishing its staging containers[] marker as if it preserved attachment — Root four GETs at2Nov12:35UTC observed exact current UUID metadata with existing attachment — wrong preservation could detach the existing app or trigger export reconciliation, so no new namespaces/migrations/transfer/delete and reject any unknown reconciliation. Source metadata does not prove ctx.container physical ability. Fixture/profile/dry-run coverage must show preservation without provisioning/building an app/image.
++
++Primary/schema report docs/superpowers/reports/2026-11-02-preparation-provider-schema.es.md. Public docs: https://developers.cloudflare.com/api/resources/workers/subresources/beta/subresources/workers/subresources/versions/methods/create/. No further provider probe from this source task. All actual custody/baseline bytes/privacy/source qualification and runtime acceptance remain gates.
++
++## Root C2 Task3 exact contracts (2026-11-02, before affected code)
++
++SOURCE ONLY. Original BASE `2e80783c1d821c3e507f5217ead421237cb87887`. Unique Task3 writer; operationalReadiness=false. These rulings resolve source contracts, not owner/provider authority.
++
++1. StageApproval EXACT {purpose:'afw.finite-connection-stage-approval.v1',preconnectionId,sourceRevision,stage,ticketHash,approvalHash}, no selfdigest; existing D(actual purpose,canonical whole record). Key connection-preparation:<id>:<stage>:approval. putStageApproval(record,lease), readStageApproval({preconnectionId,stage},lease) use factual T1 observations and immutable append-only storage. Verify actual Preconnection/sourceM/owner/project/client/window; original Ticket.action=stage, preconnection/source/projectRef; actual TicketUse.recordHash=ConfigurationApproval.csrfReceiptHash and recomputed original decision digest/current proof limits. connection matches original pre.approvalHash and initialTicketHash; notices/finite match exact original atomic ConnectionRef. No latest scan or consent-to-configuration inference.
++
++2. Final audit EXACT hash-only value {preconnectionId,sourceRevision,sourceHash,preconnectionHash,stageApprovalHashes,stageReceiptHashes,grantLinkHash,noticeLinkHash,connectionRelationHash,connectionRefHash}. Each stage hash map EXACT {connection,notices,finite}. D('afw.finite-owner-preparation-audit.v1',canonical whole exact value); sourceHash=original OwnerSourceSnapshot.sourceHash, preconnectionHash=original recordHash. Other hashes use actual acknowledged/read-back StageApproval/ConnectionReceipt/link/relation/ref records. A narrow factual hashFiniteOwnerPreparationAudit may be shared. No future/self OwnerPreparation/selection hashes or authority.
++
++3. Reader retains original pre.approvalHash/initial-ticket checks independently. OwnerPreparation.approval maps FINAL finite-stage actual ConfigurationApproval into existing own-synthetic-policy-preparation purpose/decision approve/source/project/goal/times/csrf. Qualify all three actual stage approvals/receipts and recompute audit. Preserve original owner/window/baseline/program; prepId=preconnectionId. Final preparation/selection follows finite activation ACK/readback, before commandBy, with actual publication witness.
++
++4. Original-invocation admission: unexported WeakMap in owner-preparation keyed exact ORIGINAL incoming request lease. ONLY actual same-origin POST with verified current Access/source/primary, NEW consumeTicket status recorded, and exact durable decision/approval/StageApproval ACK/readback may set it. Entry captures ctx/env refs, preconnection/stage/stageApprovalHash and SAME already narrowed proof lease, never a settled five-second child/new clock. Export ONLY consumeFiniteOwnerStageAdmission({ctx,env,preconnectionId,stage},originalLease); delete synchronously before validation/await, match exact refs/native source and assert lease, returning frozen private {lease,ownerSource,stageApprovalHash}. No setter/registry/DTO/RPC mint; reconstruction/uncertain/existing facts confer none. Public run consumes once before source IO. owner-http imports owner-preparation and connection-preparation; latter imports consume-only, avoiding cycles. parent.finish invalidates unused admission. Internal result carries refs only to fixed caller; HTML/JSON never projects them. Forms derive stage from server Ticket.action, never a body stage field.
++
++5. Fixed readPrivateQaFiniteConnectionSource({ctx,env,preconnectionId,stage},lease) remains default unavailable, with no runtime override. createFinitePolicyTransport({ctx,env}) privately captures actual existing native CF reader/publisher identities, not caller fetch/URL/credential/pins/success DTOs. T5 owns actual source/custody/byte qualification. Exact private material/transport/settlement table remains subject to Root ruling BEFORE transport/producer code; reuse actual baseline/rollback {versionId,deploymentId,module,configuration}, separate private bytes <=3MiB each, M-qualified candidate, existing exposure/execution validators and recoverable closed rollback. No invented GitHub token/public artifact/general module RPC. Actual byte residency remains a T5 gate.
++
++6. Independent Container correction is approved now: preserve dated existing AfwOwnEventNode SQLite/name/namespace in public+Wrangler source templates and wrangler.mcp-own.finite.jsonc, regenerate dynamic hashes/build metadata. Beta wire containers=[{class_name}], normalized helper validates/reintroduces actual name, exports preserves existing container name. No Docker image directive/app/image build/new namespace/migration/transfer/delete; use schema-correct unsafe metadata for source dry-run if needed. Unexpected reconciliation remains administrative pending. No runtime capability inferred from metadata.
++
++Hosted meaningful RED/GREEN plus scoped lint/native compiler/generated-byte dry-run only. No local source/clone/dependencies/build/temp downloads, provider/private probes, credentials, real auth/consent/window, DDL/deploy/cron/Container action, occurrence/main merge/Max or subagents. Stop writes for Root review after Task3 report.
++
++## Root C2 Task3 private material and effect ownership (2026-11-02)
++
++Record before transport/producer implementation. SOURCE ONLY; operationalReadiness=false.
++
++| Private field / boundary | Exact contract and ownership |
++| --- | --- |
++| readPrivateQaFiniteConnectionSource({ctx,env,preconnectionId,stage},lease) | Fixed default-unavailable source module; no runtime replacement/registry. Returns EXACT frozen {ownerSource,baseline,rollback,candidate,bytes,assertCurrent}. No owner permission inferred from data. |
++| ownerSource | Existing validateFiniteOwnerSource grammar, original sourceM/QA/owner/project/client/goal/program/window/baseline retained. |
++| baseline / rollback | Existing EXACT {versionId,deploymentId,module,configuration}; validateFiniteModule plus <=3MiB, actual qualifyFiniteWorkerVersion(canary; rollback closed:true), activationConfigurationHash/restorationConfigurationHash, snapshotOwnWorkerExecution. |
++| candidate | EXACT {sourceRevision,role,module,configuration,publicStatic}; role preparation or canaryLive. preparation publicStatic=null and exact qualified phase; first two stages preserve actual baseline bytes. canaryLive uses actual M-qualified package descriptor/role/publicStatic and private bytes. |
++| bytes | EXACT {baseline,rollback,candidate}, defensive native Uint8Array copies matching descriptor/hash, <=3MiB each; never persisted/serialized/logged/artifact/public RPC. Source-private real residency and package privacy remain mandatory T5 gates. |
++| assertCurrent(lease) | Fixed source-owned closure qualifies actual ctx/env/binding holders/credential roles/custody/window/program/closed rollback and current exposure. No caller callback authority. Existing version urls and snapshotOwnWorkerExecution checks remain; routes/workers.dev/previews/crons/tails and ALL old pre/post-T0 writers qualify inside actual T5 closure against approved source, unavailable until implemented. No standalone exposure DTO/validator or invented post-T0 control. |
++| createFinitePolicyTransport({ctx,env}).run({preconnectionId,stage},originalLease) | ONLY exported effect method; synchronously consumes actual original owner admission before async IO, privately loads source/journal, captures actual native reader/publisher/global fetch identities, requires NEW SEND+readback before fixed CF requests. No upload(body), generic request, URL/pins/credential argument or exported mint. |
++| Transport result | PRIVATE EXACT {outcome,admission}; outcome is existing exact StageOutcome, admission is consumed actual {lease,ownerSource,stageApprovalHash}. JS-internal only; never HTTP/RPC/JSON/log. Captured narrowed lease is not a new clock. |
++| createFiniteConnectionPreparation.run | Calls the one transport.run; only installed permits post-stage/final preparation using actual captured admission; returns only StageOutcome. Reconstructed/missing admission fails before effects. |
++| Settlement | Transport per-actual-ctx WeakMap retains underlying CF promises until actual fulfillment/rejection after timeout. Producer similarly retains actual journal/storage operations with captured child guards. Abort/race completion is not settlement; durable unknown SEND stays blocking across reconstruction. ALL old writers must block positive qualification/restoration; T5 inventory mandatory, no actor-local-only claim. Any actor-wide durable index needs separate exact Root ruling before implementation. |
++| Expected own transition | Before effect, immutable source and baseline pointer. After timely activation ACK plus exact primary code/config/pointer readback, permit ONLY this stage's expected phase/currentPublication change; captured immutable core plus actual journal/ACK/raw pointer qualifies pre-receipt state, full new ownerSource only AFTER receipt ACK/readback. No future receipt cycle, unrelated drift, initial snapshot replacement or renewed expiry. |
++
++Beta publication remains full schema-qualified JSON/base64/deploy=false and explicit inherit UUID, preserving actual existing namespace/SQLite/Container. No lifecycle weakening, additional credentials, private/public provider probes, general module upload, Docker/image/app/migrations or automatic recovery.
++
++Root approves a DERIVED DRY-RUN-ONLY hosted config: remove top-level exports only in that transient config, retain exact unsafe.metadata.exports/container class declaration. Wrangler otherwise requires a local containers image configuration for the named export. Never deploy/publish that derived config or equate its warning/success with full runtime/profile acceptance. Full source/Beta export/container metadata remains intact. Validate generated module byte/hash identity before/after no-bundle dry-run; no fake image/Docker build.
++
++## Root C2 Task3 actor-wide factual writer head (2026-11-02)
++
++Before journal mutation: key afw.finite-policy-effect.v1:writer-head holds EXACT {identityHash,sendHash}. NEW SEND and head advance are atomic in the same native journal transaction. Advance only after strict matching predecessor SEND+ACK/readback; no clear/reset/delete. Unknown/lost ACK blocks all later SEND including other preconnections after restart. Existing same-send replay never advances or grants capability. Applies connection and policy factories; unrelated finite-trial HEAD stays untouched.
++
++Journal remains factual {storage,identity,now}: no assertSettled callback, success boolean or native-source claim from stored records. Actual fixed transport/source independently qualifies legacy writer inventory before absent-head first issue and underlying settlement before every advance. Its per-ctx registry retains ENTIRE admitted stage work/queued callbacks and actual CF/storage promises until real settlement, never just Promise.race. Only SAME original admission lineage continues itself; another preconnection cannot use an early ACK to bypass pending stage work. T5 source current/primary/writer inventory owns older cross-path reconciliation and remains unavailable until qualified. Unknown head/data/settlement fails closed. Cover atomic head concurrency, different-preconnection unknown, restart reconstruction denial and held actual promises. No registry/mint or storage-derived authority.
++
++## Root C2 Task3 actual original and effect deadline (2026-11-02)
++
++Before code: readFiniteOwnerRequestDeadline(originalLease) is a read-only getter from an unexported WeakMap populated ONLY by actual createFiniteOwnerRequestLease at request receipt, removed on finish. Assert exact original issued/current lease; clone/unissued/finished reject. Returns original wall receipt+30000; no setter/renewal/new parent or admission schema change.
++
++Each publication effect child begins BEFORE SEND transaction/readback. Its captured wall+monotonic duration is <=5000ms clipped by original deadline, source window, actual Preconnection/approval/Access bounds. ConnectionSend.deadline is min of those actual bounds and this SAME effect child's wall end. Claim/readback/network/ACK share the child's nonrenewable budget; never start another five seconds after claim or before fetch. Native captured guard invalidates on expiry/abort/settlement; timeout is not physical settlement. Test clone/finished getter and delayed actual native SEND ACK consuming the original child's budget. T4 has its own fixed original native clock; this getter never supplies setup authority.
++
++## C2 Task3 source handoff (2026-11-02)
++
++DONE_WITH_CONCERNS / SOURCE ONLY. Report: [2026-11-01-finite-private-policy-setup-task3.md](../reports/2026-11-01-finite-private-policy-setup-task3.md).
++BASE `2e80783c1d821c3e507f5217ead421237cb87887`; final code/test HEAD `72ab2aea12a86471ae20ba342bd4b8115fe315d8`; last product-code commit `8216659e8900be92031d03fa37ad4d91838aab80`.
++
++Three server-ticket configuration approvals now produce fixed private Beta upload/activation stages, actual journal receipts, exact final approval/audit/selection and publication witness. Original lease admission is private consume-once; original30s and captured5s claim-to-send budget cannot renew. The actor writer head and retained actual work block unknown writers; rejected acknowledged readback preserves a factual failure barrier. Plain UI text distinguishes confirmed configuration from uncertainty.
++
++Full targeted hosted GREEN at `ec83c42f594ff0751dcf7a17a9a9d147a338b29d`: run41457985200/job125319474707/attempt1,120pass0fail, scoped lint, derived byte-only qa/canary dry-runs and exact emitted-byte comparisons pass, artifacts0. Final changes after that checkpoint affect tests/workflow only: actual complete-wire commitment assertion passes in the41-test transport group at19f01dda; final actual Miniflare/SQLite restart proof at72ab2aea run41460645920/job125328488776/attempt1 passes7/7 and scoped lint, artifacts0. The final run is focused, not another full120 run. The report preserves every RED/diagnostic and its limits.
++
++Actual private owner/material/forwarding sources remain unavailable until T5 qualifies real M bytes/residency/custody, source/primary/exposure/credentials and ALL old writer lineages. Initial preparation publication, T4 setup, C3 business/early-withdrawal surface and attended live acceptance remain separate. No provider/private read, credentials, real auth/consent/window, deploy/DDL/Container/image/migration, first finite HEAD, occurrence, main merge or local source/build occurred. operationalReadiness=false; no PC-off acceptance. Derived dry-run config must never be deployed; full source/Beta existing Container declarations remain preserved.
++
++Temporary branch qualifier is contents:read/no secrets/artifacts/deploy and docs-filtered; exclude from integration. Every source/docs commit uses expected-head CAS plus independent ref/file readback. STOP WRITES after report/ledger readback for fresh Root spec and quality review. No Task4 implementation.
++
++
++## Root C2 Task3 fix round1 — whole-stage actual settlement (2026-11-02)
++
++Fresh reviewer /root/review_private_policy_task3 assessed BASE2e80783..423c1bf: spec FAIL, quality needs fixes, one Important settlement defect, no Critical or separate Minor. Original task is NOT accepted; Task4 remains undispatched. Review evidence: full targeted120PASS ec83c42f/run41457985200/job125319474707 and actual-restart7PASS72ab2aea/run41460645920/job125328488776. Root independently read both logs, actual run/head/attempt1/success and final423c1bf branch pointer. Later ec83..72ab changes only temporary workflow+three test/fixture files; no product drift.
++
++Ruling: fix the existing whole-stage retention requirement in round1/5 using the original implementer. One actual native ctx/source-bound admission lineage must block another SEND across transport, final producer and every nested underlying source/storage/CF promise. Gate before effects, not after transport returns. Original parent finish, wrapper timeout, ACK/receipt and journal head are not settlement. Only actual fulfillment/rejection can remove underlying work; no force/reset/refund/timeout release or success DTO. Invalidated child guards and all original deadlines remain unchanged. A narrow shared INTERNAL factual retention component is permitted if needed to connect these existing owners: it can only retain/deny/observe outstanding actual promises and remove them on actual settlement, never create admission, allow an unrelated lineage, expose a caller send/mint/clear API, or replace T5 all-path native inventory. This clarifies memory ownership, not new authority.
++
++Covering behavioral RED/GREEN: hold actual final publishSelection/storage work after producer timeout+HTTP parent.finish, then attempt a separately admitted writer before releasing it; likewise hold a nested factual-source/storage promise whose race wrapper has already settled. Assert no subsequent SEND/provider effect while outstanding, retain late work until actual settlement, and preserve committed factual history. Exercise actual native SQLite/Miniflare with synthetic source/provider qualification explicitly labelled. Use test/mcp-qa-finite-connection-preparation-native.test.mjs, test/mcp-qa-finite-policy-transport.test.mjs and affected owner-preparation native tests plus scoped lint; retain journal restart tests if shared barrier/journal is touched. No unchanged full suite/native compiler rerun unless a concrete changed dependency justifies it. Append fix report/tests/commands/output and STOP WRITES for same-reviewer scoped423c1bf..fix-docHEAD re-review.
++
++Unimplemented T4/T5/C3 and actual acceptance remain separate gates; operationalReadiness=false. No source/CI result authorizes provider/private probes, credentials, auth/window, runtime deploy, main merge, finite HEAD or Max.
++
++### Fix round1 implementation boundary, before product code
++
++Root accepted one INTERNAL denial/retention scope keyed by actual ctx and exact already-consumed admission reference, retaining original env/storage/primary/request references. It cannot mint an admission, SEND or replacement lineage. Transport and final producer enter the same scope; nested owner factual child operations register their actual native Promise before racing timeout. Each promise is removed only on fulfillment/rejection, and the ctx entry can disappear only after original parent completion AND an empty actual-work set. A competing actual admission is denied before transport IO/SEND.
++
++Use only supported AsyncLocalStorage.run/getStore with actual native Promise chains; no enterWith/disable or RPC/isolate propagation assumption. Reference supplied/checked by Root: https://developers.cloudflare.com/workers/runtime-apis/nodejs/asynclocalstorage/. Native Miniflare/workerd tests must prove propagation through nested source/storage IO; T5 cross-path/durable writer inventory remains separate and unavailable. Public transport/preparation/consume-only signatures, original clocks and child guards remain unchanged. This module has no clear/reset/refund/send/mint API.
++
++## C2 Task3 fix round1/5 handoff — review pending (2026-11-02)
++
++Original review423c1bf was spec FAIL / quality needs fixes: one Important whole-stage settlement defect. Root's ruling is preserved at a6dab660; implementation boundary was recorded before product code at f51d65fa. Fix codeHEAD `62fb4122ab2991eb3d4781187369269ceb849623`; re-review range remains423c1bf..fix-docHEAD, not the writer BASE.
++
++One internal denial-only scope now retains the exact consumed admission lineage across transport, final producer and nested underlying owner source/storage promises. Timeout, wrapper settlement and parent.finish cannot clear actual outstanding work. Competing admission is denied before source IO/SEND; no admission/public signature/deadline/journal/source qualification changes or mint/reset API.
++
++RED `05bfb64dc6b71190fe4f9313f82ebc4c7c226ac8`: run41465306769/job125344480872/attempt1,55 tests53pass2fail; both new native held-final-selection/nested-source cases incorrectly permitted installed second stages. GREEN62fb4122: run41466161397/job125347499185/attempt1,55pass0fail/cancelled0/skipped0, scoped lint clean, artifacts0. Coverage includes actual owner/admission/transport/three-stage tests and native journal restart. No unchanged profile/compiler/full120 rerun.
++
++The final storage hold and nested factual hold survive parent.finish while a separately verified owner POST consumes a new ticket/approval. No additional SEND/provider effect occurs until settlement; committed history remains and expired children make no late writes. Provider/source authority remains explicitly synthetic. AsyncLocalStorage uses supported run/getStore only; no RPC/isolate assumption or replacement for unavailable T5 durable/all-path inventory.
++
++Full finding, ruling, exact commands/output, RED/GREEN evidence and selfreview are appended to [Task3 report](../reports/2026-11-01-finite-private-policy-setup-task3.md). Every commit used expected-head CAS plus independent ref/file readback. Fix implementation is NOT independent acceptance. STOP WRITES after final docs readback for Root's same-reviewer scoped review. No Task4, actual provider/private/auth/credential/runtime/local source/build action. All T4/T5/C3 and attended/runtime gates remain; operationalReadiness=false.
++
++
++## Root C2 Task3 accepted after fix round1 (2026-11-02)
++
++Task C2.3: fix round1/5 (1 addressed,0 open — whole-stage publication barrier now includes final producer and nested actual promises; commits423c1bf..43ebcacd).
++Task C2.3: complete (commits2e80783..43ebcacd, fresh spec+quality review clean after scoped correction).
++
++Original fresh reviewer /root/review_private_policy_task3 reported one Important at423c1bf; Root recorded it/ruling at a6dab660 and resumed original implementer. Same reviewer re-reviewed only423c1bfafc863d97114848e66edbea8e97ea0429..43ebcacd9a3455a0c44f3f55ee6a1d7ed10366d2: ADDRESSED both final-selection and nested-IO paths; scoped spec PASS, quality approved; no new Critical/Important/Minor or separate out-of-scope finding. Evidence lines: shared stage-work7–20 and27–38; transport36–40; producer15–24; owner-preparation64–66; native covering tests53–74. The common component is retention/denial only and does not mint admission.
++
++Root independently read GREEN run41466161397 actual head62fb4122ab2991eb3d4781187369269ceb849623/attempt1/completed-success, job125347499185 log55PASS0FAIL0cancel0skip and scoped lint exit success; artifacts list0; final ref43ebcacd exact. Both new behavioral tests are visible in logs. Prior full scoped120PASS ec83c42f/run41457985200 and actual restart7PASS72ab2aea/run41460645920 remain separately dated evidence; no false claim of new full120 at fix head.
++
++Cannot-verify resolution against owning plan/brief: actual M-qualified resident bytes/source/custody/current primary/exposure/all previous writer lineages are explicitly owned by T5 and remain default unavailable; initial preparation publication/recoverable rollback and real runtime identity/consent/PCoff are attended gates. T4 setup and C3 business/early withdrawal are separately unimplemented tasks. These are not silently accepted as runtime evidence or parked Task3 defects. Task3 required composition/settlement seam is implemented and now reviewed; no overall C2/package/runtime readiness claimed.
++
++Report docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task3.md; review docs/superpowers/reviews/2026-11-01-finite-private-policy-setup-task3.md. Temporary qualifier excluded integration. No main merge/runtime/source promotion, provider/private probe, credentials, consent/window, occurrence/finite HEAD, Max or email. operationalReadiness=false.
++
++Task C2.4 is next, prepared in its scoped brief and dispatched only after this documentation commit's CAS/ref/file qualification. Original Task3 implementer remains stopped; fresh implementer/BASE supplied by Root dispatch.
++
++## Root C2 Task4 integration preflight (2026-11-02, before source work)
++
++Ruling: preserve strict pre-T0 selection/approval behavior while implementing a fixed native-source-qualified post-T0 factual path. Immutable selection requires selectedAt<=actual original T0<commandBy. A command just before commandBy may validly be processed after it while current permission/R1/setup/original-parent bounds still hold; never use observedNow<commandBy as a substitute for original command chronology. No caller T0/bypass boolean or refreshed parent/consent. T4 must propose the smallest exact actual native-entry/source/admission/material table before affected code; owning T5 source qualifiers may remain unavailable, not fake positive DTOs.
++
++The original native setup clock must include forwarding/queue and clip all child/SEND/ACK work. Official WorkflowEvent timestamp is the native triggered Date; fixed instance GET schema exposes queued/start, not created_on. No equality between those clocks was verified by the documentation lookup. Resolve source-owned provenance/narrowing before code, not a fresh30s in a later DO or a caller deadline argument. Actual four Known args/18stages/70s/5s/20s and setupBy50/ARM90 remain unchanged.
++
++Original pre-T0 ownerSource.currentPublication/ConnectionReceipt sequence is historical preparation provenance after the approved post-T0 policy activation, not permission to report the old prearm pointer as the current provider pointer. Native setup/prepare must separately qualify the actual current pointer/config/code against SetupContext/PolicyReceipt and fresh owned-primary facts, preserving original selection/snapshot/receipts. Use the narrowly expected own transition after actual ACK/readback, no rewritten baseline, new preparation-stage enum or generic pointer bypass. Propose exact contract before code.
++
++Source material-residency gate remains T5: compiler currently has single qaLive/canaryLive outputs; native QA has no GitHub download credential. Root considered a possible canary-first compiler DAG with QA-only compressed M-qualified canary bytes, but this is NOT selected/implemented/authority and requires exact design/size/privacy/hash-cycle qualification. No new key/public artifact/general module RPC by inference.
++
++C3 current-source preflight at423c1bf/bcf54a5c: delegated-oauth-worker143 returns paused on OAuth=false before ordinary owner connections/revoke295–319; monitoring has its own gate144. Separately qualify narrow existing-grant business/early withdrawal before live; C0 cleanup does not establish early owner withdrawal. This is future C3 work, not a reopened Task3 review.
++
++References checked without resource probes: https://developers.cloudflare.com/workflows/build/events-and-parameters/ ; https://developers.cloudflare.com/workflows/build/workers-api/ ; https://developers.cloudflare.com/api/resources/workflows/subresources/instances/methods/get/ .
++
++## Root Task4 factual binding correction — 2026-11-02
++
++Execution BASE `757223ebc920c46e3df77995d7ba017ea3b9884e`. SOURCE ONLY; operationalReadiness=false.
++
++`bindSelection(binding,lease)` is already the intended post-T0 factual API. Preserve strict pre-T0 approval/selection/read APIs. Correct only its observed `at>=commandBy` predicate to require `observedAt<min(preparation.expiresAt,owner.accessExpiresAt,connection.permissionExpiresAt,approval.expiresAt)`. Retain actual-record `selectedAt<=T0<commandBy`, exact current selection/head, durable publication witness `selectedAt<=publishedAt<=T0`, `T0<=boundAt<=observedAt`, immutable once binding and original lease guards. Stored expiries are facts, not current consent or native authority. No new record, hash, key, API or bypass variant. The fixed native setup must independently qualify original primary T0, current owner/consent, R1/setup and original parent before this call.
++
++Required native RED/GREEN: command just before commandBy with binding observed after commandBy and original unexpired bounds; command at/after commandBy, expired stored bounds, late witness and current-head drift denied. Original native source/clock/material table is still under Root ruling; no affected product implementation before that ruling. Known four args/18 stages/70s/5s/20s and Task5/C3 boundaries unchanged.
++
++## Root Task4 native/source/material contract — 2026-11-02
++
++Execution BASE `757223ebc920c46e3df77995d7ba017ea3b9884e`; factual binding correction code `a75403f7c551ea2c6bd66c683d84a3ddddea1e82`. SOURCE ONLY, operationalReadiness=false. This table records Root's pre-code ruling; default source constructors remain unavailable until Task5 actual qualification.
++
++| Boundary | Exact fixed contract and ownership |
++| --- | --- |
++| Public operation | Payload EXACT {operation:'finite_private_policy_setup',intentId,sourceRevision}; refs EXACT {intentId,sourceRevision}; setupInstanceId='afw-finite-policy-'+SHA256('afw.finite-private-policy-setup.v1\n'+ASCII-canonical refs). Only finite PrivateQaBootstrap dispatch and finite IndependentClosure subclass setupFinitePrivatePolicy(refs). Ordinary index/public ingress, existing namespace/class/backend/exports and all other methods unchanged. This is the narrow Task4 exercise mount, not Task5 completion. |
++| Workflow source entry | readPrivateQaFinitePolicyEntry({env,event,step},originalLease) -> EXACT {setupInstanceId,sourceRevision,qaVersionId,eventTimestamp,queuedAt,startedAt,T0}. Fixed source owns actual native entry, existing binding/primary Workflow identity, M/QA, original command/seed and read-only qualification. Native Date/instanceId mandatory; actual supplied workflowName must match afw-own-qa-private-bootstrap, absent name requires source proof. Matching IDs/status DTO are not authority. Default unavailable; no registry or caller clock. |
++| DO source material | readPrivateQaFinitePolicySource({ctx,env,intentId,sourceRevision},originalLease) -> EXACT {native,ownerSource,originalContext,baseline,rollback,bytes,assertCurrent}. native uses the seven fields above. ownerSource uses accepted validateFiniteOwnerSource grammar; finite_prearm/currentPublication remain immutable historical preparation provenance. baseline/rollback EXACT {versionId,deploymentId,module,configuration}, existing module {name,sha256,bytes}; private bytes EXACT {baseline,rollback,candidate}, each Uint8Array <=3MiB. Candidate descriptor comes ONLY from actual seed.manifest.modules.canaryLive.module (name/sha256/bytes, separately actual exports); M/tree/publicStatic checked against source/seed. Fixed assertCurrent(originalLease) independently qualifies actual source/entry, owner/current primary, publisher custody/expiry/operations, current pointer/exposure/bytes and all writer inventory, including only actual own journal ACK transitions. No caller expected-transition DTO or generic send callback. Default unavailable until Task5. |
++| Clock | Workflow wall/monotonic guard starts before IO; eventTimestamp+30000 cap narrows to min(eventTimestamp,queuedAt)+30000 and T0+50000. Require primary queuedAt<=startedAt<=observedNow, eventTimestamp<=observedNow; NO invented equality/order between eventTimestamp/queuedAt. DO source hydration begins under read-only provisional <=5000 guard before IO; no effects until independently source-qualified original deadline, never fresh30 after forwarding. Same parent narrows through original owner/window/permission/R1; each effect child begins before SEND and shares <=5000 across storage/readback/network/ACK. Source clocks/T0 are never public arguments. |
++| Setup factual read | INTERNAL readFiniteOwnerSetupFacts({ctx,env,intentId,sourceRevision},originalLease) itself calls fixed DO source and actual readFiniteMaterialSeed under the same parent, checks primary original T0, selected owner/selection/witness, current D1 owner/grant/notice/revision/program and immutable three-stage history. Pre-T0 reader APIs unchanged. Return private EXACT {value,selected,witness,receipt,ownerSource,source,material,notice}; value is existing pre-selection preparation facts, notice actual current event, source/material remain private and confer no send authority by themselves. No caller seed/T0/bypass. |
++| Original context | EXACT {artifact,scope,original,publication,cancellations,retirementPolicy,withdrawalRequestId,saveIdempotencyKey,legacy,trialId}. artifact actual six fields {script,sourceRevision,sourceTree,programHash,workerHash,sourceCheck}: script is actual candidate Worker bytes, revision/tree are real CODE build M/tree and workerHash actual SHA. Candidate programHash independently proved from embedded candidate program. scope/original/publication existing exact validator grammars. original.programHash/sourceRevision match ownerPreparation.programContext retained ORIGINAL program Q, which may differ from candidate runtime M. cancellations ARRAY preserves existing exact Known historical entry grammar/order/values; no currentGrant in original hash. retirementPolicy raw unchanged qualified historical meaning; withdrawal/save UUIDs and trialId64hex are source-owned preexisting approved identities committed before initial choice, never generated from future T0. publication.workerHash/artifactKey bind candidate bytes, activationKey fixed pre-T0 identity, never provider UUID. legacy existing exact validator. |
++| Original digest | originalContextHash=SHA256 UTF8('afw.finite-original-context.v1\n'+ASCII-canonical exact context projection replacing artifact ONLY with {sourceRevision,sourceTree,programHash,workerHash,sourceCheck}); all other fields unchanged. Bound script bytes/hash separately; no script/current grant/current notice/T0/future ACK in digest projection. Actual original program/context and candidate provenance must reconcile independently; digest alone grants nothing. |
++| Derived policy material | C0=T0+240000,C1=T0+420000,N1=T0+300000. Exact six private slots only. EVENTS actual selected owner/grant/project/client/resource T0..N1; SUCCESSOR retained scope/original/publication and candidate {trialId,programHash,sourceRevision,startAt:T0,expiresAt:N1,budget:1}; withdrawal C0..C1 with actual current D1 notice originalConsent {sequence,revision,issuedAt,expiresAt} and actual resolved candidate identity. Historical cancellations preserved; construct full Known history currentGrant from current D1, never initial hash. Pure resolveSuccessorPreparation/prepareKnownCancellationHistory/withdrawal parser before effects; resolveNamedActivationPlan only after actual new version/deployment/config readback. No env clone, fake flag/Container, predicted UUID or Known execution. |
++| Native effect admission | Only original actual setup producer, after fixed native source + primary seed + factual current checks, can enter private transport under its same original lease. No owner-POST admission reuse, public mint/clear/force/reset or factual-record authority. Same actual ctx/env/storage/db captured and shared stage-work retention across connection/policy identities; track actual nested IO Promise before races. Binding newly recorded plus exact durable readback required; existing/uncertain binding/SEND never grants a new send. |
++| Transport/context/output | Reuse fixed Beta HTTP/projection engine privately; no generic URLs/credentials/caller policies. Snapshot immutable SetupContext <=64KiB before upload. Exact baseline-version secret inheritance vector hashed in request/SEND. One upload then one activation; actual timely upload ACK plus fresh bytes/full metadata needed. Source assertCurrent independently reconciles baseline to its own actual journal ACK/pointer transition. Context and receipt readback precede installed output; output contains no raw policies. Later completed-success Workflow/output/pointer/writer qualification remains mandatory for observer/control.prepare. |
++
++No relabelling M script with original Q revision, weakening Known four args/18 stages/70s/5s/20s, compiler changes, actual provider/private reads, credential/role/OAuth/window action, runtime/DDL/deploy/cron/Container, finite HEAD or Task5/C3 implementation. Compiler source currently does not establish separate retained program mapping; default source remains unavailable until qualified. SYNTHETIC fixtures establish source-contract behavior only, never actual custody/byte residency/platform cross-RPC provenance.
++
++
++Root Task4 final pre-effect checks: actual native eventTimestamp AND queuedAt must be >= actual material.primaryEvidence.seedStepCompletedAt >= original T0; completed-success seed is required BEFORE setup creation. No invented event/queue equality/tolerance. Candidate upload cap3MiB never relaxes Known artifact.script<=2MiB; validate exact artifact bytes/hash/M/tree/sourceCheck/candidate correspondence BEFORE publication, then full resolveNamedActivationPlan only after actual new UUID/config readback. Default actual source remains unavailable until Task5.
++
++
++## Root Task4 whole-operation retention ruling — 2026-11-02
++
++SOURCE ONLY at execution BASE `757223ebc920c46e3df77995d7ba017ea3b9884e`; preceding implementation `c96a1cee336c0edf7e7fc7ae21ccaabedd667f85`. Before affected code: start the existing denial-only `observeFiniteOwnerStageWork` atomically at original DO run entry after exact refs validation and before first source/facts IO. Its private original-invocation lineage object identifies actual ctx/env/storage/RELEASE_DB plus the SAME original issued parent lease, narrowed only after original source time is known. Retain this lineage through hydration, nested factual reads, binding/context, transport and receipt; retain actual nested native promises before racing. A second lineage is denied before source/effects while outstanding; release only original termination AND actual promises settled. No public lineage constructor/token/mint/clear, helper relaxation or new clock.
++
++Lineage retention grants NO send authority. The distinct private effect admission is minted and consumed only after fixed source/seed/current owner checks and NEW binding/context ACK/readback. Original source constructors receive the actual original parent lease while bounded read-only child races retain their actual operations. Native Workflow RPC returns RpcPromise: retain a fixed source-owned native async continuation awaiting the captured actual binding/method BEFORE racing the original Workflow deadline. This proves client RPC-continuation settlement only, not remote physical settlement, remote DO terminal, or T5 all-path closure. Root approved this narrow correction after native RED `545156864549efa963a30bcab58848dcefd9c2c5` run41475481741/job125379799936 (1 failed), and repair `a8e56e9ed6666b320a1ab026e982e818218d98d9` run41475798053/job125380907183 (1 passed). Add a native held nested hydration case: response/finish does not release held work, second invocation performs no new source read/SEND/CF POST, and late guard cannot write. All source/CF/GitHub/custody fixture qualification remains SYNTHETIC; operationalReadiness=false.
++
++
++## C2 Task4 source implementation handoff — 2026-11-02
++
++DONE_WITH_CONCERNS; STOP WRITES for Root fresh spec+quality review. Execution BASE `757223ebc920c46e3df77995d7ba017ea3b9884e`; final code/test HEAD `28ef1be9ee133373003123b5d0a3c0dc910e867e`. docHEAD is the documentation-only commit containing this entry/report, verified by independent ref and exact-file readback and supplied in handoff; a commit cannot embed its own hash. Full report: [2026-11-01-finite-private-policy-setup-task4.md](../reports/2026-11-01-finite-private-policy-setup-task4.md).
++
++Actual separate native setup parent/admission, fixed facts reader, once-only original binding/context, shared two-effect transport/journal, fixed finite wrapper→DO mount and whole-operation native-promise retention implemented. Source constructors remain default unavailable. Original Q program/source revision stays distinct from candidate/runtime M. Pre-code scoped rulings are recorded above; no new factual authority/bypass API, caller T0/clock, future terminal, fake Container or predicted provider ACK.
++
++Hosted final run [41478848890](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41478848890), job125391503776, attempt1:105/105 setup/facts/seed/bridge/control/store plus45/45 concrete shared transport/owner regressions;0fail/cancel/skip, scoped ESLint0errors/0warnings, artifacts0. Native meaningful REDs: binding run41469781571(19pass/1fail), dispatch41471445006(0/8), native RpcPromise41475481741(0/1), held nested hydration41476837668(0/1 reads2 vs1). Fixes and full exact commands/run/job/output in report.
++
++Coverage distinction: two-effect positive matrix uses SYNTHETIC whole facts/source/CF/GitHub/custody qualification while executing actual native wrapper/DO/clock/store/context/journal/transport. Separate new setup-facts integration executes REAL new reader against actual native D1/SQLite and immutable three-stage owner history; only fixed external source/GitHub boundaries are synthetic. It deliberately stops before publication after actual reader return. Actual stored515s expiry plus elapsed time proves valid T0 just before commandBy processed after it; current D1 revoked grant/project revision and actual later publishSelection deny. No fake Date or backdated/head/witness rewrite. Both evidence layers are source tests, not T5 provenance.
++
++Static ESM setup↔owner narrow-helper/consume-only transport coupling is disclosed for fresh review; no authority/data cycle or exported clock factory was introduced. Native client RPC continuation settlement does not prove remote physical settlement. T5 source/custody/residency/compiler mapping/all-path writer/mount gates and C3 business/withdrawal remain unimplemented/unqualified. Temporary qualifier is branch-only contents:read/no secrets/artifacts/deploy and EXCLUDED integration. No runtime/private/auth/DDL/deploy/cron/Container/finite HEAD/main merge/local source work. operationalReadiness=false.
++
++
++## Root C2 Task4 accepted (2026-11-02)
++
++Task C2.4: complete (commits757223e..3b1f876, fresh spec+quality review clean).
++Fresh independent /root/review_private_policy_task4 reviewed all22 complete patches across17commits from757223ebc920c46e3df77995d7ba017ea3b9884e to3b1f8766ec64b51fad60cb12de4781e4f5c0ba2b (code28ef1be9ee133373003123b5d0a3c0dc910e867e): source-only spec PASS, quality approved, no Critical/Important/Minor. Native scope/clock/setup47/101–120, fixed post-T0 factual reader399/408–419, exact factual binding194, Known2MiB/Q-M65/73, fixed transport165/194–227 and finite mount6 satisfy scoped requirements. Static ESM cycle uses deferred calls, no current initialization/authority defect; no narrowing factory or admission mint export. Reviewer made no writes/subagents/retests.
++
++Root independently read final run41478848890 actual head28ef1be9/attempt1/completed-success, job125391503776 logs105PASS0FAIL and45PASS0FAIL,0cancel/skip and scoped lint success; artifactsAPI0. Real new facts reader/native D1+SQLite/current-history tests normal/grant/revision/selection are visibly ok in logs; their after-return stop before setup publication and separate synthetic whole-facts two-effect matrix remain explicit. No full actual source-to-provider provenance claimed.
++
++Cannot-verify resolution: actual entry/source constructors intentionally remain unavailable and are OWNED BY Task5: native route/clock/source and seed/program mapping, private resident bytes/custody/scope/expiry/baseline privacy/current pointers/all-writer closure. Native client RPC continuation is not remote physical settlement. Full original source→provider composition, future Workflow completed-success/output, observer/control eligibility, C3 business/early withdrawal and actual cloud/PCoff acceptance remain separate requirements. This source-only Task4 acceptance does not certify those gates, actual promotion or readiness.
++
++Report docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task4.md; full independent review recorded in docs/superpowers/reviews/2026-11-01-finite-private-policy-setup-task4.md. Temporary qualifier excluded integration. No main/runtime publication, provider/private probe, new credentials/consent/window, actual finite HEAD, Max or email. operationalReadiness=false.
++
++Task C2.5 next: read scoped Task5 brief; propose actual fixed source/forwarding/residency/context/writer ownership before code. Fresh implementer/BASE supplied by Root after this docs commit CAS/ref/file qualification; Task4 implementer and reviewer stopped.
++
++
++## Root Task5 subdivision and T5-B1 ruling — 2026-11-02
++
++Pre-code BASE `1057ce94a77df9edd8119f74c516d5512add3cf0`. The [complete preflight tables](../reports/2026-11-01-finite-private-policy-setup-task5-preflight.md) identify actual signatures, source/program/byte provenance, native versus GHA callers, missing bootstrap, forwarding/abort limitations, original cleanup and ALL writer families. Root rules sequential subdivision because these are missing producers, not one constructor.
++
++Start ONLY B1: actual nodeM→canaryM→bounded deterministic compressed candidate→QA-only embedding and fixed private decoder, candidate<=2MiB, QA<=3MiB measured. Exact module3keys plus compiler-derived programM/sourceRevision/sourceTree/sourceCheck; no selfhash cycle, original-Q relabelling, private/historical bytes, path/URL/callback/boolean initializer. Preserve physical-checkout before/after, exports/profile/Container/backend. Strict canonical decoder and actual byte SHA; private in-process only. Complete package stays false/throw. No other seam/bootstrap/mount/forwarding/C3/settlement implementation. Hosted meaningful RED/GREEN, scoped lint, compiler measurements and separate B1 report; STOP for fresh Root review. All runtime gates remain, operationalReadiness=false.
++
++
++## Task5-B1 source handoff — review pending (2026-11-02)
++
++BASE1057ce94; pre-code ruling dc1da49; qualified codeHEAD `e93037e9879b8feeb69d11b39ddea784936443af`. Scope is ONLY Root's B1 spec/plan appendix, not Task5 completion. [Full preflight](../reports/2026-11-01-finite-private-policy-setup-task5-preflight.md) and [separate B1 report](../reports/2026-11-01-finite-private-policy-setup-task5-b1.md) preserve contracts, missing producers, ruling, exact runs/commands/limits/source-vs-synthetic evidence and pending gates.
++
++Actual nodeM→canaryM→gzip→QA-only residency and private strict decoder. Candidate1,941,257B (margin155,895 below2MiB), QA1,760,625B, gzip380,962B; exact M/tree/hashes in report. No private/historical bytes/selfhash cycle/original-Q relabel, no other source seam/bootstrap/forwarding/C3/settlement/runtime change. Full package still throws.
++
++RED7283d13/run41486970581/job125419777631:9tests5pass4fail (two behavioral missing-residency tests; two setup failures, not native behavioral RED). First implementation34a8a24/run41487492232:25pass3 fixture teardown failures; workerd decoder itself rejected malformed input. Test-only repair6e63a8f/run41487695469:28+14PASS. Final evidence e93037e/run41488089019/job125423600551/attempt1:28+14PASS0FAIL0CANCEL0SKIP, scoped lint clean, artifacts0; actual workerd maxOutputLength control and exact emitted hashes verified. Branch-only contents:read/no-secrets/no-artifacts qualifier excludes docs-only triggers and MUST be excluded integration. No full-suite/image/Docker/provider action.
++
++Expected-head CAS and independent ref/every-changed-file readback for each commit. STOP WRITES after report/ledger readback for fresh Root review. Remaining Task5/B2-C-D/C3/historical/privacy/custody/attended gates unimplemented; completePackage=false, operationalReadiness=false. Future mounts may use the155,895B margin and require new measured compile, never cap expansion by inference.
++
++## Root C2 Task5-B1 accepted — 2026-11-02
++
++Task C2.5-B1: COMPLETE SOURCE ONLY at code e93037e9879b8feeb69d11b39ddea784936443af / docs21b679ce45835ab1df34a18ff9f8e95ad10308d4. Task5 remains INCOMPLETE.
++Fresh independent /root/review_private_policy_task5_b1 reviewed all10 complete compare patches across6commits from1057ce94a77df9edd8119f74c516d5512add3cf0: specPASS B1 only, qualityAPPROVED, no actionable Critical/Important/Minor defects. Review recorded in reviews/2026-11-01-finite-private-policy-setup-task5-b1.md. Compiler actual source DAG/caps/provenance and private bounded decoder/workerd tests satisfy the narrower pre-code ruling, not the original whole Task5.
++
++Root independently fetched actual final41488089019/head e93037e/attempt1/completed-success, job125423600551 logs28+14PASS0fail/cancel/skip/scoped ESLintsuccess, artifactsAPI0. Actual canary1,941,257B/hash e900a53ea779168ce1391a7bd09b66ac7ae023e40493b837555c750d4df57f6e; QA1,760,625B/hash8440daba8d96075d7a4ced10c5df7618c8bdc68112d7fc6dbb8b58499f3e62d3 at sourceTree1d151a2555510d3bbc905f997182de791dec5184. Candidate margin155,895B is dated, not guaranteed after later source changes. Native bounded-inflate control and canonical rejection tested in unchanged workerd profile. Expected startup-negative messages and preexisting tool warnings disclosed, not incidents; no unrelated upgrade/rerun.
++
++Cannot-verify ownership resolution: actual custody, deployed QA code/native identity, bootstrap/initial context, forwarding, all-writer settlement, retained material/Workflow/GHA composition, historical privacy, C3 and attended cloud/PCoff are deliberately OUTSIDE B1 and remain explicit Task5/subsequent gates. No B1 mechanism claims these properties; full package stays false/throws. B1 alone complete, never Task5/readiness. Temporary qualifier remains EXCLUDED integration.
++
++Next bounded B2: locate and design the actual pre-T0 source/bootstrap producer before replacing any unavailable seam. Initial QA code provenance cannot depend on the post-T0 seed or a downstream owner snapshot. Evaluate exact existing immutable native metadata/history/draft selectors and existing GHA QA-publication bridge; no native credential scope widening by inference. Root requires exact dataflow/clock/issuer/locator/normalization table and records next ruling before product. See briefs/2026-11-01-finite-private-policy-setup-task5-b2.md.
++
++Owner update: Gabriel leaves PC ON but unavailable until16:00 Argentina on2Nov. Continue source/cloud work autonomously; NO OTP/consent/window/private credential action or human step before return. No runtime/main/permissions/DDL/grants/finite HEAD/Max/email action by this acceptance. operationalReadiness=false; PCoff=false.
++
++
++## Root Task5-B2 A+B ruling — 2026-11-02, before product
++
++BASE70408e380551ac7dc70d3e88ec9f5b75172fbe75. Complete exact preflight table1/2, original recommendation, source/API limitations and Root ruling: [B2 preflight](../reports/2026-11-01-finite-private-policy-setup-task5-b2-preflight.md). B1 accepted; Task5/B2 incomplete, completePackage=false, operationalReadiness=false.
++
++Root selects ONE coherent read-only factual producer: fixed fullUUID closed-canary historical bytes/private metadata plus exact native control/four-journal snapshot plus bounded first-primary RELEASE_DB originalQ/cancellation rows derived ONLY from qualified manifest.original/scope. Historical frozen315/source2a477 != originalQ != candidateM. No caller pins/URL/callback/credential, latest, reconstructed oldpolicy, invented history or empty cancellation defaults. Actual fixed1830202byte/SHA/receipt/config validation; missing private strings are sanitized unavailable gate. Existing helper10min contracts unchanged; no15min relabel. <=8 cancellation rows; reject overflow/missing/ambiguity/foreign identities/times. Readonly exact known storage keys, no scans/write/newstore/DDL. Private in-process only, no HTTP/RPC/log/artifact/embedding. No unavailable seam replacement or native code/permission/admission claim.
++
++Fixed env credential privately consumed with approved dated custody descriptor + actual verify, never globalenv/noarg success. All read children<=5s clipped same original30s wall/mono/abort; actual promise retention under existing stage scope, never timeout/dispose=settlement. Explicit writable metadata normalization before code; rejecttransfer/destructive/cache-on/unknownextras, existing fingerprints unchanged. Consolidated exact args/returns/queries/bounds must be validated by Root AFTER this ruling documentation and BEFORE product.
++
++Keep pre-T0 QA bridge/bootstrap-once/capsule/newintents, custody/sourceauthority, forwarding/mounts/publication/C3/all-writer composition separate. No drafttable misuse19fc… or owner question. Hosted Node22 behavioral RED/GREEN, actual workerd/DO/D1/SQLite newlogic with explicitly SYNTHETIC provider/custody boundary; scoped regressions/lint only. Temporary branch contents:read/no-secrets/no-artifacts qualifier EXCLUDED integration; separate B2-AB report with exact CAS/readbacks and STOP for fresh review. No runtime/provider/private reads/main/DDL/keys/window/Max/local work.
++
++
++## Root validated consolidated B2-AB contract — 2026-11-02, before product
++
++After preflight/ruling dd4773a38a54a4f7611b1829b7cd79f7d8b6a0b1 (CAS/ref/all4 exact readbacks), Root validates implementation of this factual unit. This appendix supersedes only the preflight proposal's whole5s, escaped-result cap, env-envelope and rawhash ambiguity.
++
++New private API: readPrivateQaFiniteHistoricalSource({ctx,env},originalLease), exactly2args, exact options and existing {signal,assertCurrent} parent lease. No selector/pin/URL/credential/source/clock/callback input except original parent guard. No mount/old source-seam replacement. Capture actual env AFW_MCP_CLOSURE_READ_TOKEN/RELEASE_DB/AFW_RELEASE_EVENTS_NODE/AFW_INDEPENDENT_CLOSURE/AFW_QA_VERSION and native ctx.id/storage/methods; pin stable same holders after awaits. Local coherence is NOT source identity/permission/admission. Separate owning source wrapper remains unavailable. No global custody change/ALS crossRPC assumption.
++
++Clock: same original parent<=30s wall/mono/abort, logical children<=5s clipped parent, never renewed on forwarding/await. Retain actual native promises/continuations through retainFiniteOwnerStagePromise BEFORE child race; this read-only retention is not remote physical settlement proof. Prefer per-child5s under originalparent; a stricter whole5s, if used, must be reported as futurelatency gate, not usabilitypromise.
++
++Fixed GETs: account85d0d5dadac3341a564f22ce885e9eec/tokens/verify and full closed-canary UUID2607abae-cec3-4e35-89eb-8b8572262b54?include=modules, no latest/prefix. Native9aa97ad1fc9afe3021cf69ea497d5190 active, actual expiry valid. Dated source only states minute02:59: Root authorizes conservative ceiling2026-11-03T02:59:00Z and effectiveExpiry=min(actualVerifiedExpiry,ceiling), never assumes exactseconds/policyequality. Validate actualaccount/tokenID/active/notbefore/freshness; no9db/057alias/newkey. Fixed trust descriptor is dated approval of this operation ONLY; scopeVerified=false. Stream bounds token8KiB/version3MiB, redirectmanual/no-store/HTTP200/freshDate<=5s/no-cache/canonicalbase64/fatalUTF8; sanitized error, no provider/SQL/private text.
++
++Historical artifact EXACT committed receipt8 {baseVersionId,artifactKey,sourceRevision,sourceTree,programHash,workerHash,workerBytes,sourceCheck} from scripts/mcp-confirmation-frozen-artifact.json; actual1830202B/SHA315cc3b310767bafe6c7928822b5acb8ec5ad168e21d94a55e6fea26592e46d3/source2a4773737764c5038aaa0b3528b43df2a0572441/tree637af253296ac1c771cb73ea353cb960a2e59204/programf6f517c3ac135cfa7b9853137e0487f768b8f24a11e24959a337cac4e28d42e6. Artifact6 {script,sourceRevision,sourceTree,programHash,workerHash,sourceCheck}. Historical artifact != originalQ != B1 candidateM. Exact version metadata/pin29bindings/8false/config4fc9703cc8de929f766aa6aac3429d06c806ba2663ce63ec33a5754a030853c0. Fixed historical version is NOT currentdeployment proof.
++
++Metadata: writable projection compatibility_date,compatibility_flags,main_module,usage_model,containers,exports,bindings; optional limits/placement/cache_options/assets/package_dependencies preserved exactly ONLY if normalized fixedhash admits them. Explicit bounded readonly whitelist id/number/startup_time_ms/annotations/urls/source/created_on/author_id/author_email; no genericextras. env is undocumented in currentBetaGET and MUST REJECT. Exact original exports default/AfwNodeControl workers and AfwOwnEventNode sqlite/container; reject expecting-transfer/transfer_from/delete/destructive/cachetrue/unknown. Narrow normalization allowed ONLY explicit state:'created' on the3exports, worker cache:{enabled:false} on2workers, global cache_options strictly known allfalse shape. Hash normalized fixed-template projection==4fc970…; rawhash may differ solely for documenteddefaults. If rawalready4fc, preserve fields without unnecessary erasure. Capture rawhash independently and compare both snapshots, never label it4fc when different. Private metadataProof EXACT {versionId,rawConfigurationHash,normalizedConfigurationHash,normalizations}; normalizations sortedunique closed path enum exports.default.state, exports.default.cache, exports.AfwNodeControl.state, exports.AfwNodeControl.cache, exports.AfwOwnEventNode.state, cache_options. Existing strict restorationConfigurationHash unchanged. No upload here.
++
++Private required strings successorPolicy<=8192,eventsPolicy<=4096,retirementPolicy<=4096 from exact qualified bindings; crosscheck actual client/project/resource. Parse original/scope/candidate/publication with existing exact grammar; native namespace derives actual original and historical successor actorIDs. Missing strings => sanitized historical_slots gate, no hash inversion/named/dispatch reconstruction. Retirement MUST reuse/factor existing pure grammar; enabled/effectguards unchanged, no envclone or permissive duplicate. Target follows actual existinggrammar, not forcedQ/M. Committed scripts/mcp-qa-legacy-historical-context.json realhash-only source, not compilednullglobals.
++
++Legacy: one native storage transaction reads EXACT5keys afw.canary-restoration-control.v1, afw.private-prepared-dispatch.v1, afw.private-reduction-dispatch.v1, afw.successor-canary-restoration.v1, afw.successor-retirement-handoff.v1. No scans/list/HEAD/write. Own canonical data<=64KiB. Control/closure/preparedissued+nullcompletion/reductioncomplete match committed historical control/closure/journal/withdrawal/dispatch hashes + actual historical manifest/events; absent restoration/retirement required, storednull rejected. Repeat snapshot after D1 and compare. Do not manufacture full finiteLegacy.sourceRevision/sourceHash or old named bundle validation.
++
++D1: fixed bounded single SQL per snapshot, real RELEASE_DB.withSession('first-primary'). Source-bound original container/program/revision plus oldevent subject/project/client/resource; no caller selectors. OriginalCTE exactselection; global admissionCount,closureCount,nonNullClosureCount retain discrepancy. Enumerate ALLclosures LIMIT10, LEFTjoin originaladmission/grants/latestmonitor and one actualearliergrant row (minimumearliergrantsequence), pergrantadmissioncount and projectownership existence; no filtering away foreign/invalid rows. Require totaladmissions1, exactly1nonnull processclosure, totalclosures=1+cancellations.length,1..8cancel and completebounded result. Exact originalprocess row matches Q/admission/grant/scope/image; admission/consent expired, created<=closed<=DBnow/localnow. Cancellation process_generation NULL, noadmission, distinctoriginalgrant, actualowncontainer/program/source/image (may differQ/M), sameowner/project/client/resource, canonicalgrantISOcreated<=exchanged<=revoked<=closed, expired<=DBnow, singletonreadscope. Latestrevoke positive seq/revision/purpose/scope, issued==expires<=closed; actualearliergrant same scope/purpose, lowerseq, validpositive chronology. Preserved oldevents.grantId hash must match committed historicalcontext.grantIdHash and its cancellation container/program/source match historicalcandidate; originalQ remains separate. No currentGrant/active-newgrant/Save/currentprojectrevision requirement; no 10min helper change/15min relabel. Second identical query compares ALLnormalized historicaldata except DBnow; no distributedatomicity/physicalstop claim. Rejectmissing/ambiguity/foreign/overflow/invalidtimes, neverdefault[].
++
++Return EXACT deepowned {purpose:'afw.finite-historical-source.v1',artifact,receipt,configuration,metadataProof,bindings,legacy,history,observedAt,sourceIdentityVerified:false,scopeVerified:false,authorizesEffects:false,operationalReadiness:false}. bindings={successorPolicy,eventsPolicy,retirementPolicy} canonical strings. legacy={control,preparedDispatch,reductionDispatch,restoration:null,retirement:null,controlHash,preparedDispatchHash,reductionDispatchHash}, no fabricated provenance. history={originalAdmission,originalClosure,cancellations}; originalAdmission={grantId,subject,projectId,clientId,resource,containerId,processGeneration,programHash,sourceRevision,image,createdAt,expiresAt,consentExpiresAt}; originalClosure={grantId,containerId,processGeneration,programHash,sourceRevision,image,closedAt}; cancellation existing10keys {grantId,containerId,programHash,sourceRevision,image,closedAt,revokedAt,monitorSequence,monitorRevision,monitorRevokedAt}. No capability/secret/currentgrant/successauthority. Script exactreceiptUTF8byte/SHA; canonicalmetadata EXCLUDINGscript<=131072; rawscriptUTF8+metadata<=2097152. NEVER cap escaped JSON.stringify wholeartifact as wire2MiB. NoHTTP/RPC/log/artifact/embedding.
++
++Fixed sanitized exception gate enum input/custody/http/metadata/historical_slots/legacy/history/coherence/deadline; no private text. Tests actual newreader/query/parser in workerd DO/storage/D1SQLite; explicitly SYNTHETIC CF/custody/test-time fixedreceiptfixture boundary (no productionpinsparameter), no whole-source successDTO. Actual newbehavior RED beforeproduct, GREEN scopednewtests+affectedmetadata/history/retirementregressions+eslint, Node22/existinglockfile/contents:read/no-secrets/no-artifacts/deploy qualifier EXCLUDEDintegration. B1 unchanged, no reflexrerun. Separate task5-b2-ab report exact base/code/docHEAD/run/job/counts/CAS/all-file readbacks and STOP for freshreview. Sourceauthority/bridge/bootstrap-once/newIDs/store/forwarding/mounts/publication/C3 remain SEPARATE; Task5 incomplete, operationalReadiness=false.
++
++Root secret-descriptor clarification: reject any returned secret_text value/text/key/extra content BEFORE raw fingerprint/projection. Only exact {name,type} descriptors; never hash secret values. Plain private policies remain allowed in-process data.
++
++
++## C2 Task5-B2 A+B implementation STOP — 2026-11-02
++
++Execution BASE70408e380551ac7dc70d3e88ec9f5b75172fbe75; precode tables/rulingdd4773a and validatedexactcontract5d38d05. Product22963e217760c4aa70daf38d76802d72fad38438; final qualifiedcode/testHEAD5b087d0a3090935327b7aee37bcad175bbac4be4. [Separate B2-AB report](../reports/2026-11-01-finite-private-policy-setup-task5-b2-ab.md), [preflight/contract](../reports/2026-11-01-finite-private-policy-setup-task5-b2-preflight.md). B2-AB factualproducer only; Task5/B2bootstrap incomplete, pendingfreshspec/qualityreview.
++
++Fixedprivate fullUUIDcanary historicalbytes/config + exactnative5keylegacytransactions + boundedfirstprimary RELEASE_DB Q/cancellationrows. Raw/normalizedmetadatahashwitness, created/cachefalseonly, secretvalueextrasdenybeforehash; candidateM/originalQ/frozen315distinct. Source-ownedenvcredentialverify withconservativeexpiryceiling, allauthorityclaimsfalse; no publicraw output/store/DDL/oldseamreplacement. Retirementpuregrammarsharedwitholdguards/explicitpolicytargetpreserved. Sameparent30s/perchild5s, realpromise/continuationretention notphysicalsettlement. NewQAbridge/bootstrap/intents/forwarding/custodyauthority/mounts/C3stayseparate.
++
++RED18cdadd/run41494766596/job125446692715:16tests11pass5fail;3positivebehavioralabsentproducer +parent,1fixtureFKsetup failure separatelydisclosed. Product22963e/run41495551219/job125449433224:16+256PASS/lintclean. Test54e081/run41496044051/job125451144530:20+256+28PASS. Additionalretentionfixture31d411/run41496480232 failedRPCtypeHeaderafter30s;1d7042/run41496938879 movedholdoutsideSQLitegate, thenRPCproxycomparisonfailed; both19pass2fail,no productchange, reportexplicit. Final5b087d0a/run41497210626/job125455183793/attempt1:21+256+28PASS0fail/cancel/skip, lintsuccess, artifactsAPI0. Nativefixtureactualreader/WorkerDO/D1/SQLite; CF/custody/fixedhistoricalcommitments explicitlySYN; productionpinnegative rejectsSYNbytes. Retentiontestholdsactualnativeoperation's LOCALcontinuation, notremotewriterproof.
++
++AffectedB1graph recompiled becausepuregrammar dependencychanged: tree04c7c6526051fc0fac1cd602dd47d78b539d2c89, canary1942384B/hashb2a8b83f7c92547df2d8669dd20c6d846169514c5e5576c0a0a7fad17a0bcc5e; QA1761077B/hashdb7fd9b960b7a322d9328af585d70a28dc03f1e00785b9b6a52d1927aec373c6; gzip381302B. Candidate margin154768B, no futurefitguarantee/capchange. Expectednegative decoderstartupmessages andpreexistingtoolwarnings disclosed; no dependency/actionupgrade.
++
++Allcommits expected-headCAS/ref/everychangedfile exactreadbacks; finalcodeHEAD all10contentmatches. Report/ledgerdocscommit SHA/readback suppliedseparately (noselfhash). Temporarybranchonly contents:read/no-secrets/no-artifacts/deploy qualifier docs-onlyexcluded, EXCLUDEintegration. STOPWRITES forfreshRootreview. No runtime/provider/privateprobe/main/auth/keys/window/Max/localsource; operationalReadiness=false.
++
++## Root B2-AB review finding and fix round1 ruling — 2026-11-02
++
++Initial fresh review bd9cb210: specPASS but qualityNEEDS_FIXES oneP2 test future date failure; full record reviews/2026-11-01-finite-private-policy-setup-task5-b2-ab.md. Root independentlyverified final41497210626/5b087d0a/attempt1 job12545518379321+256+28PASS0fail/cancel/skip/scopedlint/artifacts0. Green beforeexpiry doesn't remove the finding. B2-AB NOT accepted yet.
++
++Ruling: fix reproducibility ONLY at explicit SYNTHETIC custody/time test boundary. Production9aa approvedceiling remains exactly2026-11-03T02:59:00Z, not renewed/extended or made configurable by caller. Regular nativepositive fixture should use controlled fixture approval/custody datum and real elapsedclock/D1 semantics; if source-held fixed datum requires factoring, keep exactproductionvalue/behavior and private API unchanged. Test-only compile/clock substitution may be used for one focused expiry denial with unmodified production ceiling; label as synthetic clock evidence, not actual postdate runtime. Test production historical pins independently from synthetic custody datum so expected metadata denial cannot degrade into earlier deadline/custody failure. No caller clock/pin/key API, globalsuccessoverride, weaker guard or extendedruntimeauthorization. No new actualcred/probe/window.
++
++Originalimplementer owns fixround1/5, report covering exacttests/commands/output and meaningfulRED→GREEN, thenSTOP. Only affectedhistoricalnewtest plusnecessarylint; broad256/B1 reruns only if actualproduct dependency changes require them. Scoped rereview by same reviewer FIX_BASEbd9cb210..fixDocHEAD; nowholeoldcodecrawl. Root does not fix product/tests itself. First3rounds originalimplementer; no parking structural/testdefect now.
++
++Independent C3 read-only preflight recorded in reports/2026-11-02-finite-c3-consumer-preflight.md: existing OAuth/continuity/owner gates, missing actualfiniteGate and prematureadmission-before-reservation bug; actualclient timing/nativeunsubscribe vs readrevocation unproved. OfficialMCPEventsWorkCloud/dotssupport verified, account/AFWbinding not. No C3code/runtime action.
++
++Owner remains absent until16:00Argentina2Nov, PC ON. No humanstep/OTP/window beforereturn.
++
++## B2-AB fix round 1 STOP — 2026-11-02
++
++One P2 dated native fixture corrected within Root's recorded test-only ruling. Execution BASE2de006396e4a44a3460da29c295519d0dfde38a0; qualified testHEADf68d360aac8d789024e2a4da1f1bd951bb71c7bb. Only native test and temporary targeted workflow changed; production reader/2026-11-03T02:59:00Z ceiling byte-for-byte unchanged. Full [fix round 1 evidence](../reports/2026-11-01-finite-private-policy-setup-task5-b2-ab.md#b2-ab-fix-round-1--reproducible-synthetic-custody-boundary-2026-11-02).
++
++Regular positives use explicit SYN dynamic approval/token datum, real Date/performance/parent/D1/SQLite. Production historical-pin negative retains real pins, requires metadata and observed fixed-version request. Focused unchanged-production-ceiling test freezes reader-only clock at CEILING−1 (first provider invocation admitted) and exact CEILING (deadline, zero requests). Before-control is a constant clock, NOT 1ms available IO. Exact/unique substitutions asserted; no product clock/pin/key override or approval extension.
++
++RED9793f0d9/run41500063202/job125464938529/attempt1:22tests13pass9fail/lintsuccess. Instrumented future reader clock reproduces seven behavioral deadline failures plus parent aggregate; ninth RPC-proxy deepEqual assertion separately disclosed/repaired. GREENf68d360a/run41500276455/job125465668561/attempt1 completed-success:22PASS0fail/cancel/skip/todo/lintsuccess, artifactsAPI0. Node22/existinglockfile; only affected native file and lint, no256/B1 rerun. Preexisting dependency/punycode/actions deprecation warnings disclosed. Actual native reader/storage/D1 with SYN external custody/CF commitments, not real future date or provider access.
++
++Two-file self-review, expected-headCAS/ref/every changed-file exact readbacks; report/ledger docs-only follow-up fixDocHEAD supplied separately and read back. Temporary qualifier contents:read/no-secrets/artifacts/deploy, docs-only excluded, EXCLUDE integration. STOP for fresh scoped rereview FIX_BASEbd9cb210..fixDocHEAD. Task5/B2bootstrap incomplete; no C3/runtime/main/owner step. operationalReadiness=false.
++
++## Root B2-AB accepted after fix round1 — 2026-11-02
++
++Task C2.5-B2 A+B: COMPLETE SOURCE ONLY; Task5 and bootstrap remain INCOMPLETE. Original fresh review BASE70408e38→bd9cb210: specPASS, qualityNEEDS_FIXES oneP2 date-dependentfixture. Originalimplementer fixed only test/temporaryworkflow; unchangedproduction sourcecode5b087d0a3090935327b7aee37bcad175bbac4be4 retains exact approvedceiling. Fix testHEADf68d360aac8d789024e2a4da1f1bd951bb71c7bb / docs fbe117a63ae1e55f64c104e274aa90f9df28118d.
++
++SAME reviewer /root/review_private_policy_task5_b2_ab scoped rereview bd9cb210..fbe117a6: P2 ADDRESSED, overallAPPROVED, no new actionablebreakage. Ordinaryfixture uses exactuniquelyasserted SYN approvaldatum withfutureexpiry and realelapsed/D1/parent clocks. Productionhistoricalpin negative reachesactualmetadataendpoint and requiresmetadata denial. SeparateunchangedproductionCEILING guardcontrol admits firstSYN invocation atconstantCEILING−1 and deadline0calls atexactCEILING; no1msIObudget and no actualfuture-runtime claim. No productionpermission/clock/pin API changed. Reviewrecord appended below its originalfinding.
++
++Root independently fetched actualfinal41500276455/job125465668561/attempt1, headf68d360a/completed-success:22PASS0fail/cancel/skip, scopedESLintsuccess, artifactsAPI0. Priorfullaffectedqualification actual41497210626/job125455183793 code5b087:21+256+28PASS/lint/artifacts0 remainsdateddependency evidence; no repeat256/B1 for test-onlyfix. Actualcanary1942384B margin154768/QA1761077B measuredat5b087 only. Temporaryqualifier EXCLUDED integration.
++
++Cannot-verify resolution: this unit is factualsource/historyreader ONLY; explicitfalseauthority flags and no oldsource-seam/mount replacement. Nativecodeidentity/custody/scope/currentavailability, initialsource/window/privatecapsule, pre-T0QAbridge, originalsourceforwarding, retainedmaterial/Workflow/GHA/allwriter/physicalsettlement, C3read/earlywithdraw/finiteGate/Save/consumer, historicalprivacy/fullpackage/wholeCI/wholebranchpromotion and attendedPCoff remain separate owninggates. This source acceptance certifies none ofthem. No provider/privateprobe/keys/permissions/DDL/grant/window/finiteHEAD/main/runtime/Max/email.
++
++## Short-disconnection checkpoint — 2026-11-02 18:36UTC
++
++Gabriel requested saving everything before a short move/disconnection; he explicitly said not to close anything. All code/docs are remote GitHub source commits and completed hosted Actions. Implementer/reviewer/C3 investigator STOPPED, no deployment or pendinglivewindow, no localbuild/process/source work tofinish. No tabs closed. No new auth/click/OTP/permissions/request duringdisconnect.
++
++Read reports/2026-11-02-finite-cloud-continuation.es.md first onreturn. Nextautonomousblock remains pre-T0QA source-provenance bridge / initialbootstrap design under actual existing custody, NOT another live trial. Do not repeat B1/B2/fix1 or acceptedcustody/history/previous consumedintents. C3source/timing findings persisted in reports/2026-11-02-finite-c3-consumer-preflight.md and notimplemented. operationalReadiness=false; PCoff=false; Maxuntouched.
++
++## Resume: Task5-B2-C1 source proof before owner preparation
++
++Owner renewed autonomous continuation after the short disconnect. Resume from acceptedB1/B2-AB at44a54157; do not redispatch completed blocks or testfix1. Next bounded source unit is PRE-T0 QA publication provenance, distinct from post-T0seed. Brief: briefs/2026-11-02-finite-pre-t0-qa-provenance.md. Exact source-supported contract/ruling precedes product; no workflow/tag/provider/runtime/credential/consent action now. Initial capsule/source authority/material/C3 remain separate. One implementer and fresh review, GitHub/Actions only. operationalReadiness=false.
++
++
++## Root Task5-B2-C1 ruling — PRE-T0 QA provenance, 2026-11-02
++
++BASE a609c1f3296177f73468ca8c708b9333330f1d32. Root approved the complete [C1 contract](../specs/2026-11-02-finite-pre-t0-qa-provenance.md) BEFORE tests/product. Dedicated owner command and actual compiler/GHA producer, fullQAUUID create-only source tag, native supported token+pointer reads and public completed-success provenance; P0+300s original issuer deadline, no business window. Independently tracked workflow/CLI hashes embedded QA-only. Git ref mutability explicitly remains trusted repository-writer governance assumption, not historical nonmutation/publisher identity/business authority. No custody extension, source seam replacement, full package bypass, initial publication, runtime or C3. Source-only hosted meaningful RED/GREEN then STOP for fresh independent review; no owner intervention.
++
++
++## C1 implemented; awaiting independent review — 2026-11-02
++
++CodeHEAD d22d5366069ff569e428bc051a3e524f93abeed0. [C1 report](../reports/2026-11-02-finite-pre-t0-qa-provenance.md) records pre-code contract1ae574eb, behavioral RED370a6913/2c5da36a and actual GREEN41511052481/job125502671941/attempt1:81new+34affectedPASS0fail/cancel/skip, lintsuccess/artifacts0, QA1762180B/canary1942384B. Actual native workerd/DO and Node issuer/real compiler execute under explicit SYN provider/GH/custody boundaries. Source-only immutable-object/current-ref facts retain TRUSTED repo-writer governance assumption; historical ref nonmutation and full publisher/source identity remain false. No source seam/fullpackage opening, credential extension, actual tag/dispatch/publication, window or runtime. Stop writes for fresh Root review; Task5/C3/PCoff incomplete.
++
++
++## C1 independent review; C2 initial-source preflight — 2026-11-02
++
++Root independently verified actual C1 run41511052481/job125502671941/attempt1 atd22d5366:81+34PASS0fail/cancel/skip, lintsuccess/artifacts0; exact compiler sizes documented. C1 review is READONLY against BASEa609c1f3..DocHEADb7ca96be; no acceptance yet. Next independent READONLY preflight uses briefs/2026-11-02-finite-initial-preparation-source.md, no product/writes before C1 acceptance and Root's actual source/clock/selector/issuer ruling. This parallelism shares no mutable state; only Root writes these docs. Existing source/custody/runtime gates and false readiness preserved.
++
++
++## C1 independent review — fix round1/5, before code
++
++Fresh review againsta609..b7:specFAIL/qualityNEEDSFIXES, Important1P2 cumulativeobservedAt5s incorrectlyconsumes otherwisevalid publication aftertag/ref; Critical0/Minor0. Root accepts genuinegap; exactreview+scope/cannotverifyresolution in reviews/2026-11-02-finite-pre-t0-qa-provenance.md. Ruling: preserve originalobservedAt/P0/Pend/transport5s, remove unintendedcumulativeage requirement aftermutation; focusedreal-latencyRED/GREEN byoriginalimplementer, same scopedreviewer b7..fixDocHEAD. C2initialsource preflight READONLY maycontinue, no product/writes whilefixwriteractive. No auth/runtime/ownerwindow/PCoff.
++
++
++## C1 fix round1 ready for same-reviewer re-review — 2026-11-02
++
++Root pre-code ruling at6335b5d accepted P2 cumulative observedAt-age defect. REDd052b35d/run41512903562/job125508988847/attempt1:44PASS4FAIL; actual6518ms original elapsed, everyrequest<=654ms,2POST,unchangedtimestamp/livePend. Fix21087916f3967b92ec0ef7f6905aeaa5642c8511 changes only issuer historical primary predicate to finite/originalstep/Pend/notfuture, retaining all transport5s/Date freshness/originalclock/cap/unknownACK semantics. GREEN41513188777/job125509965448/attempt1:48PASS0fail/cancel/skip/lintsuccess/artifacts0; actual6518ms elapsed,maxrequest653ms,2POST,unchangedobservedAt,repeatzeroHTTP. Productioncustody/native/compiler unchanged; prior81+34 evidence retained. See [updated report](../reports/2026-11-02-finite-pre-t0-qa-provenance.md). CAS/ref/exactreadbacks verified. STOP for SAMEreviewer b7ca96be..fixDocHEAD; no acceptance/runtime/windows/publication/PCoff claim.
++
++
++## C1 Root acceptance after scoped round1 — 2026-11-02
++
++Task T5-B2-C1: complete SOURCE ONLY (BASEa609c1f3..DocHEADf933dc19/code21087916; freshreviewP2ADDRESSED/APPROVED). Root actual48PASS fix41513188777/job125509965448/attempt1/lintsuccess/artifacts0 andprevious81+34PASS retained; no reruns. No newbreakage. Exactscopedreview andcannotverifyowninggates in reviews/2026-11-02-finite-pre-t0-qa-provenance.md. C2initialREADONLYpreflight/refinement stillunderRootruling beforeanyproduct; fullTask5/C3/runtime/PCoffincomplete. Updated readablecontinuation reports/2026-11-02-finite-cloud-continuation.es.md. No localcode/build/provider/resource/custody/window/Maxaction.
++
++
++## C2 preflight accepted; bounded C2-A selected before exact contract/product — 2026-11-02
++
++BASE6038db5ffbdcaa3e3512f31e355e96dd20f52beb, C1 SOURCE accepted. Full initial-source preflight and targeted refinements preserved in [report](../reports/2026-11-02-finite-initial-preparation-source-preflight.md). Root selects A: unmounted actual B1+B2+C1 material facts, exact ten-field original-context projection (script only in memory), append-only global once/material/selector/ACK records in existing actor, new IDs retained before assembly, constructor-owned same-holder/original-lease factual result. DATA never effect authority. Accepted reader-origin legacy domains under M, exact pinned old synthetic scope plus fresh owned row, historical retirement policy unchanged/flag false. Missing Access/limiter fails. Unknown ACK consumes; no new IDs/resend/new M reset, old history/first finite HEAD preserved. No named-packet/draft reuse or DDL.
++
++[Exact A contract proposal](../specs/2026-11-02-finite-initial-material.md) awaits Root approval BEFORE product. Current writer is authorized only these docs; no tests/product yet. A has no Workflow/public RPC/HTTP mount, owner-source replacement, sessions/forwarding, initial publication, full material or all-writer success. Hypothetical 53-GH/10-owner-session flow is UNQUALIFIED and no hard session budget is implemented; A only C1 once plus original command before/after, GH60/IP/hour/shared quota remains a gate. Future B independently owns actual native entry/original issuer/initial publisher/capsule/closed_ui source; admin MCP one-create/fixed-ID reconciliation is a future separately verified action, never caller identity proof or new key scope.
++
++No provider/resource query, actual command/tag/Workflow/deploy, custody change, owner/read window, local source/dependencies/build, main/Max/PCoff action. operationalReadiness=false; completePackage=false; PCoff=false. Docs CAS/ref/exact readbacks and exact resulting head delivered separately, avoiding a selfhash.
++
++
++## Root exact-contract acceptance and corrected bounds clarification — 2026-11-02, BEFORE product
++
++Root accepts ba452cffcf10def0263164a18551372ba15ffd82 contract with this clarification. Initial review mistakenly described Task4 original-context digest as unsorted schema-order JSON and requested a shared helper; Root independently rechecked policy-setup.mjs:18–19,72–73 and WITHDREW that assertion/helper request. Actual v1 digest recursively sorts keys, AFTER existing finiteData validation. Preserve it exactly; do not invent a sorted-vs-Task4 hash difference or change v1 meaning.
++
++Required correction ONLY: stored script-free originalContext must pass the existing finiteData bounds (whole projection<=32768 UTF8 bytes, depth<=12, nodes<=2048) even though the enclosing material may be<=65536. Then use existing sorted domain hash afw.finite-original-context.v1. Verify actual codec-decoded material.originalContext after canonical roundtrip; rehydrate script only from B1. Regression must demonstrate actual Task4 digest equivalence and projection32KiB overflow rejection despite totalmaterial<64KiB. Default leave Task4 product unchanged, no shared helper or reflex Task4 rerun.
++
++Exact C2-A contract is now APPROVED subject this recorded clarification. Proceed sole writer with meaningful hosted RED→GREEN, actual native full B1/B2/C1 fixture composition under explicit external SYN boundaries, and mandatory partially consumed original-parent held-child test with actual timer/abort/retained promise/no after-deadline writes. All unmounted/factual/no-effects/no-source-authority/no-owner-window scope remains unchanged. No additional permission required for this bounded source/test implementation. Fresh review after report remains mandatory.
++
++## Root clarification of uncertain first-claim outcomes — 2026-11-02 20:30 UTC
++
++Chronology: the implementer added the private per-actual-storage WeakSet denial in source commit 8a8633d7527a448998cefd46910f7d197d47aded before Root's message confirming this defense. This is NOT represented as pre-code Root approval. Root subsequently confirmed the bounded defense and asked to preserve this chronology; no history rewrite/revert is needed.
++
++The original pre-code contract remains unmounted factual C2-A. A committed/retained durable once record denies replay across constructors/M/QA/lost ACK. If the first claim never committed, absent durable evidence after actor restart proves neither consumption nor physical settlement. The private WeakSet is set after verified original command, before first claim transaction, keyed only by captured actual storage identity; it is never cleared on false/unknown outcomes. It denies new-constructor retries in the same isolate, including an uncommitted claim, and concurrent claims admit one attempt. It is NOT a durable registry, source authority, effect admission, or restart proof.
++
++Future C2-B must independently fence the original native entry and unknown outcomes. No A data/result can supply that permission. No new key/table/role/entry/proxy/incarnation claim. Required final focused test explicitly uses a fresh store constructor over the same actual storage after unknown/no-commit ACK, asserts no second transaction/IDs; concurrent path one actual attempt. Operational readiness remains false. This clarification is persisted before that final test refinement.
++
++## C2-A final source checkpoint — 2026-11-02
++
++Implemented unmounted factual initial material/once/selector/ACK at code 2ab571bd1659060387b5c19d58dd5d329b8b7d5e. Hosted run41520147197/job125533756257 attempt1: 19 pass/0 fail/0 cancelled/0 skipped; scoped lint clean; artifacts0. Exact Task4 sorted digest/bounds unchanged and regression verified through real canonical material roundtrip. Actual native B1/B2/C1 composition under explicit SYN external-data boundaries, not whole facts DTOs. Native parent/held ACK test and fresh-constructor/unknown-no-commit same-storage denial passed. Durable once continuity requires committed/retained evidence; WeakSet is same-isolate denial only, not restart consumption/settlement/authority.
++
++Full report: docs/superpowers/reports/2026-11-02-finite-initial-material.md. All source/test/qualifier exact readbacks and branch ref verified; final docs CAS/readbacks returned to Root. Independent review PENDING; task STOP. No mount/publisher/source authority/session forwarding/actual provider or owner command/window; owner15min/read10min unstarted; completePackage/readiness/PC-off false. Future B owns original native entry/issuer/all-writers and restart/unknown-outcome admission.
++
++
++## C2-A Root source acceptance — 2026-11-02
++
++Task C2-A complete SOURCE ONLY (BASE6038..DocHEAD119f21f/code2ab571bd; freshspecPASS/qualityAPPROVED). Root independently verifiedactual41520147197/job125533756257/attempt1:19PASS0fail/cancel/skip/lintclean/artifacts0. Minorcanonicaltestsharedoracle deferredtointegration/finalwholebranchreview, exactnoteinreviews/2026-11-02-finite-initial-material.md. Scope/custody/runtime/restartcallerpermission gates remainB; Adata/brand notauthority. Root separatelyread ONLYexistingtokenmetadata20:34:58tooltime, roles/expiryunchanged, noTailReadobserved/noendpointorloadedsecretproof; reports/2026-11-02-reader-metadata-preparation.es.md. C3 sourcepreflight/races persisted reports/2026-11-02-finite-admission-preflight.md, NOTimplemented. NextREADONLYactualBtable perbriefs/2026-11-02-finite-initial-publication.md beforeRootruling/code. Main/runtime/window/Max/PCoffunchangedfalse.
++
++
++## 2026-11-02 — Root approves C2-B1 acknowledged durable native entry BEFORE product
++
++Read-only44dde8d preflight complete; Root rejects additional factual publication reader and selects owning native-entry gap. Basef61ec7b2251672cc34016715c45dd3ecf085c14c. Exact preflight/spec/plan: reports/2026-11-02-finite-initial-publication-preflight.md; specs/plans/2026-11-02-finite-initial-native-entry.md. Deterministic entry CAS finalsuccessfulRETURN→actualstorage.sync→exactreadback→one actualA continuation→assertCurrent/postAactualsync→safehashesonly. Existing/unknown/expired neverreconstructpermission; nevercommittedCAScontender onlysameoriginalintent/deadline, distinctfromforbiddeneffectSENDretry. SQLiteprimarydocs recorded; firstacknowledgeddurablewinner NOTfirstcallbackever. Sourcegovernancecorrelation notcryptographiccalleridentity; noqueuedAt. Solewriter/noagents, GitHubAPIhostedRED→GREEN, no localbuild/provider/actualcommand/instance/window/publish/main. Laterpublisher allwriters/custody/rollback/ownerSource/HTTP/C3 gatesremain; firstfiniteHEADpreserved. completePackage/operationalReadiness/PCoff false. Freshspec+qualityreviewrequiredafterboundedunit.
++
++
++## 2026-11-02 — C2-B1 native entry qualified; STOP for fresh review
++
++Sole-writer bounded task from Root base f61ec7b2251672cc34016715c45dd3ecf085c14c. Full preflight/spec/plan/ruling preceded product at 69e338a3378d3fafaf8593def21802aac78308f0. Final source e95b4cf1b1f4d098c3c4e412678b79a3a389a8f7 (tree670a7a9b117f5bb693804501147c60df8d1515cc): actual native first acknowledged durable winner, captured sync/readback before A, post-A sync, exact safe DATA only. Existing A/C1 and ordinary routes preserved; no extra factual reader/publisher/window.
++
++Hosted run41530593619/job125569445138/attempt1 PASS: 68 tests, 0 fail/cancelled/skipped, lint clean, artifacts0. Actual bytes: canary1942384/QA1875803/resident compressed381302; unchanged 2MiB/3MiB caps. All 12 changed source/doc/qualifier files at code head and branch ref were exactly read back. CAS writes used expected SHA, force:false. [Full report](../reports/2026-11-02-finite-initial-native-entry.md) records exact prior REDs, actual-vs-SYN boundaries, commands/hashes, primary RPC/persistence sources and remaining gates.
++
++Observed production fixes: native RPC own Symbol.dispose boundary; missing DB/node prerequisites before Entry. Persisted restart uses locked Miniflare's actual resourcePersistencePath. Root AFTER implementation approved common native baseDeadline versus actor-only I0/custody narrowing: safe factual output can arrive after tighter actor bound, never an effect permit/resumable continuation. Held transaction ACK and SYN retry scheduling are not forced delayed disk commit or settlement evidence.
++
++Temporary qualifier remains EXCLUDED from integration, contents:read only, no secrets/artifacts/deploy or docs-only trigger. No live command/CF API/Workflow instance/publication/owner window/main/Max action. All operational/full-package/PC-off flags false. STOP for fresh independent spec and quality review; no agent/reviewer was spawned by this task.
++
++
++## 2026-11-02 — Root independent qualification, B1 review package, C3 refinement
++
++Root independently fetched run41530593619/head e95b/attempt1, job125569445138/logs/steps and artifacts:68PASS0fail/cancel/skip, lintclean,0artifacts; QA1875803/canary1942384/resident381302 exact. Final implementer docHEAD722a45c has13changedfiles, fullcomparepatches present, refmatches. Fresh independent review remains REQUIRED, source notacceptedyet. Package reviews/packages/2026-11-02-finite-initial-native-entry.diff.json contains fullBASEf61..722 patches and claims/evidence for that gate.
++
++C3 readonly followup confirmed lazy admission-source resolution; previous eager constructor proposal is superseded. ExactRoot refinement reports/2026-11-02-finite-admission-refinement.md + boundedplan plans/2026-11-02-finite-premature-admission.md. Ruling: preserve cleanup construction afterSave/revoke/N1 by resolving live successor/source/auth only on admission-helper use; constructors captureprovenance, notreadypermission. Known-zero classification mustretainallcallbackattemptstate; fixedreservation EXISTS atomicD1 guard; no firstHEAD/markerreset/refund. Librarysourceunit selected AFTER B1reviewcloses, no productauthorization whileB1reviewopen. ActualfiniteWorkerwiring is separatequalificationgate. Cost ifwrong: librarycleanup regression or ambiguousadmission erroneouslytreatedsafe, coveredby focusedrealDO/D1 tests andindependentreview. No runtime/provider/grant/token/ownerwindow/main/Max effect.
++
++
++## 2026-11-02 — B1 independent review opens fix round1/5
++
++Fresh /root/review_initial_native_entry SpecFAIL/NeedsFixes,1Important: entry70–74 lacks RELEASE_DB.withSession/node.idFromString requiredbyactualA17–18; detectbeforeirreversibleEntry, notafter. Exactreview reviews/2026-11-02-finite-initial-native-entry.md. Rootacceptsfinding; originalimplementerround1capture/require/recheckbothmethods+missing/noncallable/holderdrift-beforeCAS nativespecimens, focusedhostedtests/lint, same-reviewerscopedre-review. NoEntryrefund/clockwiden/fullfeatureextension. Baseline lognoise minor deferred; actualruntimegates remainoutside, notsourceapproval. B1notaccepted/C3productnotstarted. Source-only/main/runtime/Maxunchanged.
++
++
++## 2026-11-02 — C2-B1 fix round 1/5 qualified; same-reviewer STOP
++
++Reviewer FIX_BASE722a45ccd2eaf058bceb048158fe4db9d98a7b55; fix began at Root HEAD6af20d18bebe98738374dbb030e5cb0026a27a85 with all intervening review/C3 documentation preserved. Exact Important finding: missing RELEASE_DB.withSession and AFW_RELEASE_EVENTS_NODE.idFromString checks could consume permanent Entry before actual A constructor failed.
++
++RED6e0ac6f85b274e62ff40d459a59c05cc7725c078/run41532294450/job125575296424/attempt1:35tests,29PASS,6FAIL,0cancel/skip; lintPASS/artifacts0. Four absent/noncallable methods left Entry present; two callable replacements before CAS reached material_recorded. Three-line production correction captures/requires/rechecks both actual native methods before entry.
++
++GREEN code28d2bd6f977980944bb7288baba35a2fb547107d/tree1a8beb4f319a89f67d6a378463287612afb3c169; run41532541570/job125576141961/attempt1:35PASS,0fail/cancel/skip, scoped lint clean, artifacts0. Exact command: node --test test/mcp-qa-finite-initial-entry-native.test.mjs; lint covers changed production/test/fixture. Four source/test/qualifier files and ref exactly read back; expected-SHA non-force CAS. [Same report append](../reports/2026-11-02-finite-initial-native-entry.md) records commands/evidence/heads and final documentation handoff.
++
++No imports/runtime graph changed; no unrelated compiler/profile/residency rerun. Earlier e95 compiler sizes/hashes are prior-source evidence only, not28d2 measurements; eventual full-package CI must compile exact new source. No Entry reset/refund, deadline widening or feature expansion. Baseline unsupported eslint@9.39.4 npm warning, punycode and Actions host warnings preserved without configuration/dependency/lockfile change; dependency maintenance is deferred.
++
++STOP for same reviewer's scoped re-review; C3 product waits. Temporary qualifier EXCLUDED from integration. No provider/runtime/publication/main/Max action; operational/full-package/PC-off flags false.
++
++
++## 2026-11-02 — Root accepts B1 after scoped fixround1
++
++Task C2-B1: fix round1/5 (1addressed,0open; nativepre-Entry requiredmethodscapture/recheck; commits722a45c..23115f7). SamefreshreviewerADDRESSED/SpecPASS/TaskQualityApproved/noCriticalImportant. Rootactual41532541570/job125576141961/attempt1/head28d2:35PASS0fail/cancel/skip/lintclean/artifacts0; prior68PASS/compilerONLYe95b. TaskC2-B1complete(BASEf61..23115f7,reviewclean). Runtimecannotverifyownedfuturegates explicitlyoutsideunit; nooperationalapproval. DeferredAoracle+baselinenoise carriedfinalreview. Currentcheckpoint reports/2026-11-02-finite-cloud-continuation.es.md now21:59UTC. NextC3boundedsourceperrefinement/plan, noactualfinitewiringinferred. Main/runtime/grant/firstHEAD/Maxunchanged; allreadinessfalse.
++
++## 2026-11-02 — C3 premature finite admission qualified; STOP for fresh review
++
++BASE ae7afdb8820b509f761ac026d311f9c39ed8b0db; pre-code table/ruling6af54224896e9d6574bd10f39d374a997badb024 preceded product. Final code06e424666e7cc1fcf277024aaed463f7d764dc24/tree72031c6b1aeeed48b907ece99182d110798487dd. Fixed lazy source-owned preparation checks at host/custody before beginAdmission, exact atomic prepared-reservation EXISTS in ordinary D1 INSERT, and custody/current-start private no-admission classification. Cumulative unknown/inserted/pending/ambiguous prior custody remains unsafe across callback retries; issued markers are never reset/refunded. Reservation-only pending writer is not possible-process evidence, per explicit pre-code Root ruling.
++
++Final hosted run41537047289/job125591439327/attempt1:65 affected native/custody +23 actual compiler/residency PASS,0fail/cancel/skip,lint clean,artifacts0. Actual compiler at EXACT06e424: canary1948550B/QA1878261B, caps unchanged; hashes and all RED/fixture-failure/cumulative-state correction chronology in [report](../reports/2026-11-02-finite-premature-admission.md). Prior broader run340cbf passed96/98 with two fixture failures subsequently repaired; these earlier results are not mislabeled final-HEAD full-suite evidence. All11 changed files at code head and ref verified; final docs expected-SHA CAS/readback receipt is returned to Root.
++
++Actual workerd SQLite DO/D1 and owning source composition; explicit SYN provider/auth approval/source tuples, process boundary, retry scheduler and held ACK microtask. No real callback/receiver/physical settlement claim. Source-package B1/C1/A, first finite HEAD, standalone launch API and Worker entrypoints preserved. Native Worker finiteGate wiring/factory remains a separate owning gate; no-source denial is scoped to changed host/custody composition. Temporary branch-only qualifier EXCLUDED from integration.
++
++Independent spec/quality review PENDING; STOP and release writer. No main/publication/provider/Container/Workflow CREATE/token/role/grant/OAuth/owner window/Max/mail/chat/automation or real attempt. No local source/dependencies/builds/tempfiles/processes. operationalReadiness=false; completePackage=false; PCoff=false.
++
++
++## 2026-11-02 — Root C3 qualification and fresh review pending
++
++Rootactual41537047289/head06e424/attempt1/job125591439327SUCCESS:65affectednative/custody+23compiler/residencyPASS0fail/cancel/skip,lintclean,artifacts0. Actualcanary1948550/QA1878261/compressed382785, tree72031c6b1aeeed48b907ece99182d110798487dd. Full14filepatchpackageBASEae7..c452 readypendingFRESHindependentspec+qualityreview; noacceptanceyet. MeaningfulRED227358/run415348 primarylogs independentlyread; actualearlyadmission/closure/atomicrace, leftoverordinarycallbackcountfixtureexplicit. B2writerrelevancepreflight andselectednativeRPCboundariesreports persisted, notnewpositiveauthority. Exactoldreductiondestroyterminalchainpendingreadonly; currentlegacycodecannotretroprovelateoldrequests. Reservationrawenvelope lifecyclemaintenance andfuturecleanupRPCadapter integrationcoverage carriedfinalreview, no demonstratedparserdefectinconcreteinspectedconsumers. No runtime/main/provider/grant/Maxeffects; allreadinessfalse.
++
++
++## 2026-11-02 — Root accepts C3 source correction
++
++Task C3 complete (BASEae7afdb..c452b7c, reviewclean). Fresh /root/review_premature_admission SpecPASS/Approved,0Critical/Important. Root independentlyverified actual41537047289/job125591439327/attempt1/code06e424:65+23PASS0fail/cancel/skip/lintclean/artifacts0; actualcanary1948550/QA1878261/compressed382785. Full review reviews/2026-11-02-finite-premature-admission.md. Owningruntime/mount/standalonelaunch/callback/owner/fullpackagegates remainfuture notsourceapprovalclaims. Minorbaselinewarnings deferredalongsideAoracle/RPClifecycle-adaptercoverage. NextB2initialpublicationcontract/relevantwriters/rollback/capsule/source, no thirdfactualreader. Currentcheckpoint updated22:35. Main/runtime/grants/firstHEAD/Maxunchanged; allreadinessfalse.
++
++
++## 2026-11-02 — Root approves bounded B2a inactive upload BEFORE product
++
++Binding spec/plan/brief/reports preflight2026-11-02-finite-initial-inactive-upload. ActualprivatewinnercontinuationafterA/postsync→sanitizedchunkedbackup→initialdistinctSEND/sync/readback→singleJSONdeployfalsePOST→realACKUUID/GETexactbytescfg/receiptDATAonly. Noactivation/rollback/capsule/ownerSource; no liveinitialintentuntilfullcomposition, toavoidspendingEntryonpartialunit. Parentoriginal30s/5s/custody/I0bounds/no45shelper. Fixedbaseline2607/7b5verified,noadoptforeign; source315/2a477notM. Onlyexistingexports/namespaces/containerlink,no migrations/cache/assets/newidentities; exactbaselineinheritsecretsonly. Latest/last100effectsacknowledged, explicitUUIDs.
++
++Ruling: activationwriter-drain/9aaWorkflowendpointproofnotprerequisiteforimmutableinactivecreation; oldrestoreselectsolddeploymentnotnewUUID. Preserveoldunknown, datedpointersnotfuturechangeproof; futureactivation/source/rollbackrequiretheiractualgatesinsamewinnerbeforeturnreturn. Costifwrong: inactivepayloadcouldprovisionglobalresourcesorfalseauthority; strictwireallowlist+actualresource/readbacktests+freshreviewrequired. No thirdfactualreader/DTOsuccessseam. ExactlegacyCOMPLETEsourceawaitchainproven,butactualoldexecutionprovenanceunverified; noactualpendingdestroyshown. Existingnativeobservationlistsloadedbindingbutdoesnotverify9aaid/individualGET, no liveprobeperformed. Newfreshimplementerwillownonlythissourceunit; no runtime/main/Maxeffects.
++
++
++## 2026-11-02 — C2-B2a inactive upload source qualified; STOP for fresh review
++
++BASE c4696911f8895ae605da0512c77dc8d1a0e5acd0/tree30646c600c01160b731a5ed834991e9be413fe78. Pre-code actual constructor/wire/journal table93719fdca2c62788097f3f5685c3047eabd6c629 preceded RED/product. Final code/test5705d750fdac7f3e1c859f50f1df33b124ddfa6c/tree51d2c534ff71dbdea593676751d1e481737d4f80; last product47083000. Private nonexported sole winner continuation after actual A/post-sync now preserves sanitized bounded baseline chunks, commits distinct initial SEND/sync/readback, performs one fixed JSON deploy=false POST, persists actual ACK UUID and exact GET/module/config/resource/pointer receipt. Existing safe RPC unchanged; no activation/rollback/ownerSource/capsule/resumption.
++
++Meaningful RED0486e42/run41543223627/job125612299535/attempt1:3expectedFAIL. FirstGREENf1223caf/run41543829083:3PASS. Expanded8bb966f3/run41544264267/job125615855644:83tests,82PASS/1codec-getterFAIL; all native B1/upload/custody/timeout/restart boundaries passed. Getter-before-copy bug causally fixed47083000; run41544832452/job125617754533/attempt1:3codec+8fresh native baseline/config/winner+53historical/A/profile+23compilerPASS0fail/cancel/skip/lintclean. Final5705 run41545121309/job125618722602/attempt1:23actualcompiler/residencyPASS, explicit noissuer/compiler/fs/esbuild runtime graph, lintclean,artifacts0. Final bytes canary1948550/QA1905417/compressed382787, caps unchanged. Tests are recorded by actual revision/group, not falsely aggregated as final-head full suite. All5artifact inventories0.
++
++[Full report](../reports/2026-11-02-finite-initial-inactive-upload.md) contains exact commands/hashes/chronology/actual-vs-SYN/limits.11source/test/qualifier files read back exactly at5705; expected-SHA nonforce linear refs, final docs13-file/ref readback returned to Root. Temporary qualifier EXCLUDED from integration. No provider/live command/Workflow CREATE/source publication/main/Max/grant/secret/token/role/Container/owner-window action; actual source tests only in hostedNode22, no local source/dependencies/builds/temp/process.
++
++Root timing clarification preserved: inactive closed_ui uses original I0+5min, not future up-to15min owner authority. No actual initial intent until full composition. Currentbaseline2607/7b5 is fixed and before/after are dated observations; oldunknown and firstfiniteHEAD preserved, latest/last100 catalog effects acknowledged. Future activation/source/rollback/capsule independently qualify within same winner before return. SOURCE ONLY; fresh independent spec+quality review PENDING. STOP and release writer. operationalReadiness=false;completePackage=false;PCoff=false.
++
++
++## 2026-11-02 — B2a fresh review; fix round 1/5 opened
++
++Fresh reviewer SpecPASS/QualityNeedsFixes, noCritical. Important: verbatim historical qualification duplicated in lib/mcp-qa-finite-historical-source.mjs; extract one private pure qualifier, preserve callers' outputs/policy. No observed behavioral divergence, no spec conflict; Root accepts finding and resumes original implementer. Cover amended historical-source and upload-wire/native consumers proportionally, record commands/output in same report before scoped same-reviewer re-review. Minor baseline warnings deferred to wholebranch; inconsistent report status included in doc correction. BASE previous-reviewhead39f0b726. No main/runtime/provider/Max action; allreadinessfalse.
++
++
++## 2026-11-02 — B2a fix round 1 implemented; scoped review pending
++
++Code56c04288a7b4a3574511e8013d37e0483e6b94ea/docs893d29409886b1af7b825f9a3175f5083385b831. Root actual41548928626/job125631300881/attempt1/head56c04288SUCCESS:36historical/parity+9actualuploadconsumersPASS0fail/cancel/skip/lintclean/artifacts0. One pure private historical qualifier shared bybothcallers; unchangedimports/exports, distinctoutputs/policy preserved. Statusdoc corrected. Existingwarningsdeferred. No newcompile;5705bytes stayearliersource evidence. Fullscoped6filepatch39f0b726..893d294 packaged; same reviewer pending. Historical primary/source/build andexactguardresult qualified separately in reports/2026-11-02-finite-historical-writer-qualification.es.md: thisrestoreinvocationBLOCKEDbeforeSEND, olddispatchuncertainretained. No universaldrain or9aacapability claim. No runtime/main/Maxeffects.
++
++
++## 2026-11-02 — Root accepts B2a; next cleanup design
++
++TaskB2a complete (c4696911..893d2940, reviewclean). Fixround1/5:1Important addressed,0open; commits39f0b726..893d2940; same reviewer SpecPASS/Approved/no newbreakage. Rootactual45PASS/head56c04288/run41548928626 asabove. Initialinactiveupload sourceaccepted, NOTactivated/live/fullpackage. Compilation5705remainsolderhead; futurechangedgraphgetsownbuild.
++
++Ruling nextB2b: existingDOalarm overnewWorkflowCREATE; actualfinite.mjs subclassmount, private survivingwinnerarm beforeactivation, immutablecleanup-only C0=I0+900s/C1=C0+180s/threeboundeddeliveries, custody mustcoverC1. TechnicalI0+300/native30/child5unchanged; noowner/grantlifetimeextended. Costifwrong: prematurealarmcollisionorlateforwardwritecouldleaveopenresource; source/nativefailurematrix+freshreviewrequired, noactualinitialintentuntilfullchain. No ownerSource/forwardactivation/handoff inthisunit, futurebusinessstagesmustfirstqualifycleanuptransfer. Spec/plan/brief2026-11-02-finite-initial-cleanup-owner persisted forbuildercheckBEFOREimplementation. No approvalsrequestedfromowner forroutineauthorizedsourcechoices. No live/runtime/main/Maxeffects.
++
++
++## 2026-11-03 — B2b builder PASS and execution approval
++
++Freshbuilder/root/builder_initial_activation PASS8fe5b917; no loadbearingcontradiction. Pair/taskpreflighttable in reports/2026-11-02-finite-initial-cleanup-owner-preflight.md coversB2a/privatearm/initial-vsnominalalarm/clock/futureactivation/recoverablebaseline/QAownerboundary. Routine corrupt/incompleteplan-state-journal mustnotdelegate; actualgetAlarm/sync/txsetAlarmcapture andsubclassmounttestsrequired. RootapprovesSOURCE execution, freshsingleimplementer; noactualinitialintent/runtime/main. Issue497checkpoint6591712936 recordsB2aacceptance+historicalgapnarrowing. Allreadinessfalse.
++
++
++## 2026-11-03 — B2b source qualified; fresh review pending
++
++BASE dc337e624bc77a6e54a8f7a105c4199ec4f619d5; code/test b38d145b6958b34af4ee5735bad49183e46a7c26/tree4d4d9f8f81c7cf3026e99af57f8ecc525a3f80cd. Same actual initial winner privately arms fixed actor native alarm after A/inactive receipt; future activation producer ABSENT and journal inputs SYN only. Original I0+300/native30/child5 and independent cleanup C0=I0+900/C1=C0+180 remain distinct. No nominal handoff, QA finalizer, owner/grant or Container cleanup.
++
++Actual B2b missing-arm RED a0c354ae/run41550992919 0/3 PASS; later deployable-envelope RED d0cc334/run41553064433 32/35; fixed7b3244b. Exact b38d run41553851713/attempt1: focused35/35+lint job125647778652; relevant initial/historical/profile/nominal regressions163/163 job125647778314; compiler/residency23/23 job125647778707, canary1948550/QA1940933 bytes, graphs318/294 and forbidden inputs absent, artifacts0. The b38d push auto-repeated jobs already green on da75; exact run revisions distinguished. See [report](../reports/2026-11-02-finite-initial-cleanup-owner.md) for failure/fixture chronology, actual-vs-SYN, exact hashes and file readbacks.
++
++Alarm delivery manual SYN; dated primary deployable-list read does not prove native9aa capability. Historical prior invocation blocked before POST, old dispatch still uncertain. No runtime/main/initialcommand/Workflow CREATE/deploy/activation/grant/token/role/Container/Max effects. Temporary qualifier excluded from integration. STOP/release writer for fresh spec + quality review; operationalReadiness=false; completePackage=false; PCoff=false.
++
++
++## 2026-11-03 — Root B2b qualification; fresh review pending
++
++BASEdc337e624..docfd6fb939 (11fullpatches,14commits). Recovery implementer/root/initial_cleanup_owner_recovery completed after originalSolmodelcapacityerror; remotecommits preserved, no concurrentwriters. Rootverifiedactual41553851713/attempt1/headb38d145b6958b34af4ee5735bad49183e46a7c26: focused35job125647778652/lintPASS; regressions163job125647778314; compiler23job125647778707;0fail/cancel/skip/artifacts0. Canary1948550/QA1940933/resident382789,actualgraphs318/294noissuer/compiler/fs/esbuild. Exacthashes/report, notdocsHEADrebuild. Nativealarmmanualdelivery/futureactivationinputsSYN explicitly; no live9aa/custody/activationclaims. Fullpackage reviewpackage2026-11-02-finite-initial-cleanup-owner.diff.json generated for fresh independent spec+qualitygate, acceptance PENDING.
++
++Additionalreadonlyprimary: candidate-specific olddispatch requires never-presentcandidateadmission beforeSDK; originaldifferentadmissioncannotmatch; schema sourceimmutabletriggers, actualinstalledschema+primaryhistorylatergate. Actualdeployablecatalog object.items/info page0 differsunfilteredarray/full171; RootdatedGETs00:22/00:24 caughtfixture/productenveloperejection. Reportqualifiedhistoricalwriter appended, no universaldrain/9aaproof/newruntimeaction. No furtherproviderqueriesneededforthisfact.
++
++
++## 2026-11-03 — B2b fresh review NeedsFixes; fix round1/5
++
++Fresh/root/review_initial_cleanup_owner SpecIssues/QualityNeedsFixes,0Critical/3Important: completedstate bypasses fulljournalconsistency; activationSEND lacks>=armACKcausalorder (positiveSYNfixturepredatesACK); verbatimforward/cleanuplease duplication. Rootacceptsallthree, noplanspecconflict, noearlyadjudication. Same/root/initial_cleanup_owner_recovery resumes sourcefix; sharedINTERNALlease extraction permitted, phaseoriginalbounds explicitnoeffectauthority. Minorbaselinewarningsdeferred; reportdisclosure required. Nativealarmprecheckrace notdemonstrated, evidencegap retainednotfabricatedbug. Reviewatdocs/superpowers/reviews/2026-11-02-finite-initial-cleanup-owner.md; scopedfixBASEfd6fb939, freshreviewhead. No nextimplementationuntilscopefix/re-review; no runtime/main/Maxactions.
++
++
++## 2026-11-03 — B2b fix round1/5 checkpoint, owner STOP
++
++Review fd6fb939: three Important (completed journal consistency, arm-ACK before activation SEND, duplicated lease) accepted; minor punycode/esbuild-kit/ESLint9.39.4/Actions Node20→24 deferred to final whole-branch triage. RED a97a9a1/run41555520953/job125653350610: 0/4; functional fix4119c5c run41555714833/job125653981498:4/4+lint. Shared lease extraction and expanded chain tests committed2b734f69/tree08c33ed4. Exact cloud run41555913917: compiler job125654628446 23/23 PASS; focused125654628551 and forward-consumers125654628157 IN PROGRESS at checkpoint. No final source GREEN/review claimed. [Report](../reports/2026-11-02-finite-initial-cleanup-owner.md) records commands, hashes, pending and continuation. Writer released per owner STOP; no new jobs or external runtime action. Same reviewer scoped re-review pending; FIX_BASE fd6fb939. operationalReadiness=false; completePackage=false; PCoff=false.
++
++
++## 2026-11-03 00:55UTC — Root owner STOP y cierre del día
++
++GabrielapagaráPC; no nuevosbloques/jobs/ensayos trasSTOP. Source2b734f69/docs0da7df96 guardadosyrefleídos, writerliberado. Rootprimary45focused+lintPASS/job125654628551,23compilerPASS/job125654628446/run41555913917/attempt1; forwardconsumers125654628157aúnencurso, leerfinalmañanaantesderepetir. Fixround1NOaceptado/SAMEscopedreviewpendiente. Cierre/continuación2026-11-02-day-close.es.md conpendientes/credencialesexpiry02:59Z/norenovaciónautomática. JobscloudyaenviadospuedenterminarsinPC, no pruebanAFWPCoff. No archivoslocalespendientes/runtimeefectos. Sourceinputgateprecheck supportedporCloudflareglossary/storage-onlychain y reglasalarms, no pruebasexhaustivasderuntime; no inventar carrera ni settlingpromises. Todosreadinessfalse.
+
+~~~~~~~~~~
+
+## docs/superpowers/progress/2026-11-05-deferred-review-minors.es.md
+
+~~~~~~~~~~diff
+diff --git a/docs/superpowers/progress/2026-11-05-deferred-review-minors.es.md b/docs/superpowers/progress/2026-11-05-deferred-review-minors.es.md
+--- /dev/null
++++ b/docs/superpowers/progress/2026-11-05-deferred-review-minors.es.md
+@@ -0,0 +1,46 @@
++# Deferred task-review minors — AFW finite preparation
++
++## Required final whole-branch review input
++
++This list is read by the final whole-branch review before merge. Minor findings are deferred under standing SDD, never silently discarded or treated as completed fixes.
++
++- Task D0.3; review_sdk_token_d03_sol; reviewedHEADc35716e68245bd7f7747a6d6020ebd4953df8270. test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs:110–134:12negative matrix helper accepts any400/401/503 ratherthan exactreported status/OAutherror. Add expected tuple percase, preserving missing-app503. Current primary evidence confirms intendeddenialstages; nonblockingtestprecision. Finalreview must triage beforemerge; no fixclaimed. Rootreadfix-loop Minor-defer rule and didnotenterafixloop.
++
++No Critical/Important parked issues in D0.2/D0.3 acceptance. Operational gates remain outside source acceptance.
++
++- Task finite-owner-io-fanout; reviewer review_owner_io_fanout(Astrahigh), reviewedHEADae39d1b220614498856160a3b2de994c58544110. test/mcp-qa-finite-owner-qa-sdk-native.test.mjs:86: worldfinally awaits ioRelease/ioWait before dispose/cleanup without nestedfinally; failedrelease/settlementassert skipsisolatedruntime/tempcleanup. Nestcleanupfinally; keepdrainassertionanddon'tcallforceddisposalphysicaldrain. Nonblockingtestfailurepathquality; DEFERRED underSDD, finalwholebranchreviewmusttriage. Notpartoffix1Importantandnotclaimedfixed.
++
++
++- Task native notice store; review_native_notice_store; reviewedHEAD78c3bdc6fec287494ec1e2d37223c8d006ea6487. Mantenimiento no bloqueante: warnings npm/NodeAPI/ActionsNode20→24 en informe2026-11-05-finite-preparation-notice-store.md. No evidencia de defecto del componente; triage de herramientas al finalwholebranch, no ocultar ni repetir runs para suprimir ruido. Important de absorción concurrente se trata aparte en fixround1 y NO está diferido.
++
++
++- Task finite-native-notice-GET; reviewer review_notice_get(Astrahigh), reviewedHEADcfe8f0ddde1d782757dd7e0d3160967f325df553. MinorP3 lib/mcp-qa-finite-owner-notice-get-wire.mjs:11: cookie names allow separators and empty segments discarded; literal grammar deviation without identified authority bypass. Deferred by SDD (no fixloop), explicitly carried into next POST task touching samewire with mandatory pure/nativevalidprepare+malformedpair denial before notice/SQL and POSTbeforeconsentSEND/SQL. ApprovedwithMinor clarification,0C/I; no full SpecPass/fixclaim. Finalwholebranchreview MUST verify disposition/closure beforemount/merge. Seereviews/2026-11-05-finite-native-notice-get.es.md. Current corruption tests are rejectioncoverage, not independent proof of each cross-source correlator; futurePOSTbaseline requires resealedvalid-DATA negativevariants beforeSQL.
++
++
++## Disposición POST — 5 de noviembre de 2026
++
++- **CLOSED — P3 GET cookie-list:** corregido y aceptado en Task POST sobre `5205d80216d9767c44762df4a181e1015e093a8e` (código e153). Revisor fresco review_notice_consent: Spec✅/QualityApproved, sin Critical/Important. Evidencia pura/nativa causal de parser compartido y cookies propias sin normalización. Ver `docs/superpowers/reviews/2026-11-05-finite-native-notice-consent.es.md`. La entrada histórica de deferral anterior queda como trazabilidad; ya no es deuda abierta.
++- **OPEN — POST test settlement, Minor:** `test/mcp-qa-finite-owner-notice-consent-native.test.mjs:244` puede agotar polling sin exigir probe.allowed antes de assertions finales; línea161 inspecciona inmediatamente tras liberar SQL. No defecto de producto identificado. Reforzar settlement observado en esos dos casos, con validación focal, en la siguiente unidad Link que ya toca ese archivo. Ruling root: no fix loop Minor; obligatorio resolver/triage antes de mount/whole-branch final. Hasta entonces no atribuir prueba completa de settlement tardío a esos dos casos.
++- **OPEN — toolchain/harness warnings, Minor:** misma revisión sobre informe línea336: npm/ESLint unsupported/Node/Actions/CIMD/RPC stub warnings declarados; unir a deuda existente de herramientas. Lint limpio no significa salida sin warnings. No upgrades/flags ni reruns en esta unidad para ocultarlos.
++
++
++## NoticeLink — revisión fresca 5nov2026
++
++TaskLink: minor (deferred) M1 — fiabilidad de sdkReadCurrent baselineSYN: dos FAIL iniciales de fullPOST50 y fullLink31 antes de acciones; focales posteriores pasan sin causa/reparación probada. Primarias42115921441/job127555403763 y42121776005/job127575702935; focales42120340776/job127570739345 y42123491595/job127581599230. Revisión fresca lo clasifica no-bloqueante funcionalLink. Conservar diagnóstico pasivo; si reaparece investigar stackoriginal sinretry/sleep/fullrunbuscandoverde. Ownerpreparationreal y wholebranchreview deben revisar esta deuda, no descartarla.
++TaskLink: minor (deferred) M2 — warnings npm/Actions/CIMD/RPC del harness preexistentes. Nuevo ESLint131 corregido/calificado0/0; agregado no pristine. Se mantiene el grupo toolchain para wholebranchreview antesmerge, no upgrade incidental.
++CarryConsentMinor161/244: reviewerLink confirmó visiblemente assertions settlementobservado; cierreformal aún pendiente de aceptación deLink (ImportantI1DRY en fixround1/5). Minor no entra alfixloop.
++
++
++## Cierre formal tras aceptación Link
++
++ConsentMinor161/244 CLOSED: revisiónfrescaLinkyScopedround1confirmaronsettlementassertsobservados;4focales42126215195/127590980113 PASS, sinpollingagotadosilencioso. LinkI1fixround1/5:1addressed/0open,2f530092..dba6cde8,compartirsetupauténticoConsent/Linksinperderasserts/lifecycle. LinkM1/M2siguenabiertos,deferredwholebranch; no reparacióninferida.
++
++
++## M3 — Task1: segundo intento durante cancel pendiente (DEFERRED)
++
++Origen: revisión fresca Task1 sobre SOURCE97ee8675e614032af2f3caa9fe3eaa24d991c7d1, Spec✅/QualityApproved, sin Critical/Important. test/mcp-qa-finite-policy-transport.test.mjs:92/97/104 invoca activate una vez; posts:1 prueba primer request, no otro intento durante cancel pendiente. El engine tiene failure absorbente en fixed-policy-engine24–32/52, sin defecto funcional identificado. No fixloop ni repetir Task1. Gate/owner: Root en retención Task3 o whole-branch, cuando ese delta se ejerza; intentar segunda operación antes release y exigir rechazo/posts inalterados junto a settlement real. M2warnings RPC/toolchain siguen abiertos sin ownership atribuido; M1baselineSdkReadCurrent sigue desconocido/no reproducido, SQLConsentMinor cerrado. No convertir este Minor en permiso para ensayos/runtime o ampliar Task2.
++
++
++## M4 — Task2: faultprofile de fixture ambiguo/inactivo (DEFERRED)
++
++Revisión fresca Task2 sobre3eebf3b1d50d7537c6ae72138a08b44b2b59ee93, Spec✅/QualityApproved/0Critical0Important. test/fixtures/finite-first-connection-publication.mjs123/129: profile sólo cambiaOAuth, wrong-profile no cambia perfilcompilado y setter no lo acepta. No evidencia negativa de otroperfil. Gate/owner: RootTask3/wholebranch, retirar/renombrar cuando corresponda o usar composición realmente diferente para probarperfil. No fixloop/repeticiónTask2 porMinor. M2 actualizado:11warningsRPCfinales9pure+2native ytoolchainconservados, ownershipdesconocido,nopristine. M1/M3siguenabiertos,SQLConsentMinorcerrado.
+
+~~~~~~~~~~
+
+## docs/superpowers/progress/2026-11-05-finite-native-first-connection-publication.es.md
+
+~~~~~~~~~~diff
+diff --git a/docs/superpowers/progress/2026-11-05-finite-native-first-connection-publication.es.md b/docs/superpowers/progress/2026-11-05-finite-native-first-connection-publication.es.md
+--- /dev/null
++++ b/docs/superpowers/progress/2026-11-05-finite-native-first-connection-publication.es.md
+@@ -0,0 +1,97 @@
++# SDD — primera publicaciónconnection
++
++Plan: docs/superpowers/plans/2026-11-05-finite-native-first-connection-publication.md; specmismo basename-design; preflight reviews/2026-11-05-finite-native-first-connection-publication-preflight.es.md. SourcebaselineLinkaceptado dba6cde8a18b7810fb59329c6e429be639e6fdc8/code33d3739. Rootcreará docs-onlyBASE y lo comunicará antesRED; no hash autorreferente.
++
++Task1: INACTIVE hasta despachoRootexacto. Sólo7paths P1/P2/P3/T1/T2/F1/F2 másqualifierreportledger explícitos. Resultadohelpersengine/enrollment compartidosconoldcallersconservados, no publicaciónconnection todavía. Rulings Source/helpersfactuales/URLhash/C0/caps/clock enbrief. Task2mountcerrado yTask3producerendtoend pendientes; unreviewgatemediacadacontratorevisable. Ownerautorizóencadenar, no preguntarporimplementaciónrutinaria.
++
++Preflightcompletocon3paresdeinterfaces+3selfrows+downstream/global,y5ReviewFocus. Builderchecknothingimportantleft. NoSourcecode/tests/Actionsdeesteplan aúnejecutados. M1baselineSDK yM2toolchainwarningsdeferred; SourceONLY, fuente3Novvencida/readinessfalse/completePackagefalse/PCofffalse.
++
++
++## Task1 ejecutada — 2026-11-05 UTC; revisión Root pendiente
++
++El dispatch Root sobre BASE c55d4eda1eeaf80341c8abd6c85b76dc662614f5 activó únicamente Task1 y supersede el estado INACTIVE histórico anterior. Link aceptado dba6cde8/code33d3739 permanece intacto. Task2/Task3 no iniciadas.
++
++Ruling Root: GQL update_ref devolvió error interno y readback SOURCE quedó en BASE; REST contents API probado por Root permite fallback exclusivo por archivo. Branch siempre explícita feat/finite-native-cleanup-20261101; fileSHA-CAS/ausencia, parent/ref/delta único/contenido verificados tras cada write secuencial. Sin atomicidad multiarchivo, force, nueva rama, permisos o credenciales. Qualifier retirado antes de lotes y recreado último; eliminado finalmente por SHA-CAS.
++
++Task1 IMPLEMENTED / DONE_WITH_CONCERNS / awaiting fresh task review, no autoaceptación. Engine6operaciones fijas y writer Enrollment/Ack one-shot extraídos; callers owner pending y setup con admisión independiente preservados. P1/P2/P3 no incorporan dependencias QA nuevas. Diff código exactamente7paths;13blobs protegidos BASE/checkpoint idénticos. Code checkpoint 1d5b25544077bfcd88019e6804ab83ed7d3d79c3/tree429ab1c65e6f065f451db3bf9308aa2ace09c4f3, sin qualifier.
++
++RED 42129592527 3F; RED2 42129895780/job127603546232 4=1P3F capturó traza/records antiguos antes de refactor. Primer GREEN42130466031 contratos27=18P9F; diagnóstico42130861278 confirmó F1 DATAcodec sin purpose en ConfigurationApproval/TicketUse, corregido sólo fixture; wiretest preserva guard. Run42130778246 tuvo YAML inválido0jobs por replacement del implementer, corregido/preservado en informe. No retry/rerun/clockpatch/deadline ampliado.
++
++GREEN final42131020681/HEAD22ce84052756936d612b046a84b6500f5773937d/job127607346515:27PASS0FAIL0CANCEL0SKIP (14existentes+13nuevos),43145.616811ms; lint7paths exit0. Artifact13462972310/digestsha256:d9719bec4c21b1e969a5f7f5268746d53a46db5de77b008fe5b7b3ee920a0d21 expira2026-11-12T23:40:23Z. Reutilizados sin repetir con producto/compilador idénticos: setup3PASS/job127605478876 y único compiler staging1PASS/job127605478869 de42130466031/HEAD7f911e29. Sus hashes/metafiles/SQL/DO/bytes no emitidos no se inventan.
++
++Reporte completo: docs/superpowers/reports/2026-11-05-finite-native-first-connection-publication-task1.md, commitf75e07c643d7e0005a52c3360931085e8378a8f3/blob9f71c6acd260a36774fee7b7f05902a3cdc524dd. Incluye comandos, casos, primarias de fallos, artifacts7d,26parents/trees/path/blob REST, checkpoint,13protegidos y límites.
++
++Concerns para Root:9RPCstubwarnings y8líneas toolchain/deprecación en final; no pristine claim/ownership inventado. M1sdkReadCurrent2fails previos desconocidos/no reproducidos y M2deferredwholebranch conservados; MinorSQLConsentCLOSED intacto. NoSourceCloudProof ni publicaciónconnection, provider real/mount/guard/suscripción/entrega/PCoff. Fuente3Novvencida; readinessfalse/completePackagefalse/PCofffalse.
++
++STOPWRITES tras este ledger y readback final. Root asigna reviewer fresco; Task1 no se marca accepted/complete por estos tests.
++
++
++## Aceptación Root y siguiente unidad
++
++Task1 ACCEPTED en SOURCE97ee8675e614032af2f3caa9fe3eaa24d991c7d1: reviewer fresco Spec✅/QualityApproved/0Critical/0Important. Root leyó reporte completo y primarias27+3+1PASS, verificó scope y parents. reviews/2026-11-05-finite-native-first-connection-publication-task1.es.md conserva aceptación. M3 segundo intento durante cancel diferido a Task3/whole-branch; M1/M2 abiertos, SQLConsentMinor cerrado. No fixloop porMinor.
++
++Task2 sigue INACTIVE hasta dispatch Root con BASEdocs exacto; brief Task2 y plan reconciliados añaden sólo2tests heredados para actualizar DATA SYN que la gramática estricta ahora rechaza. Mantener todas sus assertions de retención/guard/cero efectos. Ninguna nueva capacidad de negocio ni cambio en fixtureslegacy. Task3 INACTIVE. operationalReadiness/completePackage/PCofffalse.
++
++## Task2 implementada — 2026-11-06 UTC; revisión Root pendiente / STOPWRITES
++
++Dispatch Root sobre BASEc56e52ae26292f618ff5527cabd46594f90b41c5/tree463911dc0bfca3ccb59e9dc6e2521a197ac29305 activó sóloTask2, supersediendo INACTIVE histórico. Task1accepted97ee permaneceintacta; Task3 NOiniciada. Scope cerrado11→13paths sólo por rulingRoot para lib/mcp-qa-finite-initial-material.mjs y test/mcp-qa-finite-initial-material-native.test.mjs. Fuenteoperativavencida3Nov02:59UTC; operationalReadiness=false/completePackage=false/PCoff=false.
++
++Resultado SOURCE: initialCLOSED compila Mdispatcher fixed choice/OAuth/notice→QA desdeorigen; QA cuatro targetsPOST literales. Choice negocioPENDING, ninguna primeraConnectionReceipt/permisonuevo. OAuth/notice requierenOAuthtrue+calificaciónQA existente, noflagordinarymonitoring; /oauth/token,/mcp ylegacycleanup preservados. Gramática choice1024B/UTF8/escapes/form3campos/cookiesestrictos; HTMLQA16384/headerallowlist/failclosed. T5/T6 sóloDATA SYN válidayrulingRoot413EXACTO en4sizeassertions, restoabort/hold/cancel/settlement/ceroefectos intacto. No fixtureslegacy ni phase-context/preparation/P1/P2/P3/SDK/config/build/schema/journals alterados.
++
++Prerequisito acotado acreditado: c94a015d/42135912817/job127623868291 baseline2445218B/599reads/read80ms/guard4714ms; childoriginal5000ms rechazópor4ms alive=true/abort=false, ningúnSEND/POST/capsule. Root aprobócapturar scriptLOCAL reciénvalidado+refs exactas frozencontext/artifact enWeakMapprivado, comparaciónrefs/string envezrehashstringinmutable. candidateBytesmutabletype/length/SHA, materialHash/recordHash,r.check/source/holders/leases/todosrechecks siguen. initial-entry/lease BLOBSprotegidos intactos; sincoarserchunks/tinyartifact ni clocksampliados. Confix upstreamreal material_recorded bajoIOoriginal; material5PASS en42136813257/job127626950108 conproductoc0ee5315563764979ed2c681c71b2dbc5515203d/test7f98bfe8cfe169ef1261f6c15ce9d08df9214d22 eimportsprotegidos, evidenciareutilizadasinrepetir.
++
++Fallosprimarioscompletos enreporte: RED135=6P29Fconfixturebindingsundefined; RED2mismosconteosconprivateSlotMFmalproyectado; RED342134025472canceladoal15mintrasdosFAILsinTAPcompleto; 0jobs42134741117porerrorpropioJSreplace dollar-apostrophe/YAML (replacerfunción desdeentonces); inspecciones42134821443/42135243230/42135912817 conservaronfronteraexacta; prerequisite run42136813257WHOLEFAILED poradopciónMFconverted/raw yexit124, aunmaterial5PASS/upstreamreal. Options42137357533 ERR_VALIDATION Unrecognizedbindings resueltosdentroF2 preservandoRAW→convertuna vez yconfiguploadactual; noeditcápsula. NuncaGreen/REDcausalporerroresfixture otimeout.
++
++REDcausal42137654835/job127629780614/HEAD0778b680:36=7P29F0SKIP26215ms; upstreams/mounts/teardown reales, ordinary16vs0/choice404vs503 yfaltadispatch/gramática/HTML. PrimerGREEN42138439136=55+5+2PASS; lint13warningowneddefaultanónimo corregidonombrandoobjetoP4, obligónuevosbytes/finalrun.
++
++FINALGREEN42138702058/attempt1/testHEAD e6518da5c696dc8f2050b4a19bbcefba400b6a25/treec0256f6ca5c963ef22cf3f1dd3f90d5fe1977705:
++- job127633258197 pureTask1+Task2+oldwire:55PASS0FAIL0CANCEL0SKIP31071.885953ms; lint13exit0SINwarnings.
++- job127633258206 nativeTask2+oldconduit:5PASS0FAIL0CANCEL0SKIP26999.269476ms.
++- job127633257935 compilerexactos:2PASS0FAIL0CANCEL0SKIP1177.282405ms.
++- Material5PASS separadoarriba, nofalseclaim67casosenunrun. No npmtestglobal/Link31/POST50/GET81/setup3 ni builds métricos extra.
++
++Artifactsfinales7d: native13467085448/digest79c44c2bbaed8bc1619636be44e40afc61a47fa3243091aba0ca391174af160d expira13Nov00:42:41UTC; pure13465979714/digest8231010e86e461833817b5b36477f8a8ae6a41d0c9455518edf720902e335a31 expira13Nov00:42:51; compiler13466269416/digest1d851f763fa191d4ce4f840d4383b252d1c781bc55752fc962c693c42e0d0dd1 expira13Nov00:42:16. Incluyenbundles/hashmanifests/metafiles realesdelascompilacionesnecesarias, separadosdeSYNmetadata. CompilerfinalM1988061B/SHA7f2151a2.../340inputs,QA2469863B/SHAe95eaac1.../324inputs. NativeSYN M1988061B/SHA c49303be.../340inputs,QA2295035B/SHA6216fd47.../328; MsinresidenciaQA,QAconMexacto. Cierrepositive79requestobservations,ordinary0/SQL0/firstconnectioneffects0 y1upload+1activationSÓLOupstreaminitial. No heredar118/98 ni inventarSQL/DO/fanout/agregadosnofirmados.
++
++Qualifierretirado enCODECHECKPOINT780af1412a695b78c1cdc857ed06f5381dc5ddb7/tree236d11c3c16e2fa44db90691a32fe156e0cdf749:13paths exactos,3148blobsfueraalcance idénticosBASE; códigoigualatestHEADfinal. RESTcontentscadaarchivobranchSOURCEexplícita/SHA-CAS,54parentslineales/trees/path/blob hastaesecheckpoint enreporte, sinatomicidadmultifile/GQLretry/force/nueva rama/defaultbranch. Reportes posteriores sonDOCSsolamente.
++
++ReporteCOMPLETO (48821chars) docs/superpowers/reports/2026-11-05-finite-native-first-connection-publication-task2.md; commitb3c432ecc5bb3a52aa499a4e297c0869d0f0a8f4/blob3205f7d1a9fd52bc64ca3abe7ed8d9fbe95668b8, incluyeBASE→codecheckpoint/fullcompare,13blobsfinales/20protegidosseleccionados/audit3148/54parents/primariasfallos/causas/fixes/casos/GREEN/artifactsexpiry/límites. La correccióndelreporte reconoce explícitamente11mensajesRPCdisposal observados9pure+2native; nocausa/ownershipasignadosnitodosbaseline. Toolchainwarningscontinúan; NOpristineclaim. M1sdkReadCurrentviejo desconocido/noreproducido, M2warningsdeferred, M3segundointentodurantecancelTask3/wholebranch, SQLConsentMinorCLOSED preservados.
++
++STOPWRITES trasesteledger yreadback final. Implementer DONE_WITH_CONCERNS/awaitingfreshRootspec+qualityreview, NOautoaceptado. Task3 yotraunidadNOautorizadasparaestebloque: ownerapagaráPCenunrato; Rootrevisa/cierra yavisaráapagadonormal, sinensayoPCoff. TodopreservadoenGitHub/Actions; noasumir disponibilidadconPCapagado.
++
++
++## Cierre Root por pedido del owner — 6nov2026UTC / noche5novArgentina
++
++Task2 ACCEPTED enSOURCE3eebf3b1d50d7537c6ae72138a08b44b2b59ee93: revisiónfrescaSpec✅/QualityApproved/0Critical0Important. Aceptación reviews/2026-11-06-finite-native-first-connection-publication-task2.es.md. Rootverificó57parents/scope13code+2docs/blobsfinales/primarias55+5+2PASS ymaterial5reutilizados; lint13sinwarnings. Inspectó ZIPnative/grafos/residentMporhash, sinfilesystem. Plan/brief reconciliados13 y4SIZE413.
++
++M4fixtureprofileambiguo/inactivo deferredTask3/wholebranch; M1M2M3abiertos,SQLConsentMinorcerrado. Sinfixloop porMinor. Qualifierausente, Actionsfinalesterminales. Fuente3Novvencida/readinesscompletePackagePCofffalse. SinactualCloudSourceProof/nuevoConnectionReceipt/discovery-subscribe-delivery/bajanativa/PCoff acreditados.
++
++OWNER STOP: terminar bloqueactual,guardar ydetenerhasta mañana; no iniciarTask3 niotrotrabajo. Próximo alretomar: leeraceptación/preflight/planTask3, verificarSourceHEADactual, fijarBASE y writerfresco para primera publicaciónconnection+downstream sinseeds. Nuevalineage sobrecódigofinal, nunca reusarcapTask2. Mantener codeapproval separado de permisos/runtime. Seguimiento actualLOCAL dependePC/app; este cierre no instala guardiacloud ni autorizaensayoPCoff. Ninguna intervenciónpendiente hoy.
++
++
++## Reanudación Root y activación Task3 — 6nov2026
++
++Gabriel pidió “continua”; queda superado OWNER STOP del cierre anterior para esta unidad SOURCE. Refs reconciliadas sin drift: Source4f5f5f124b55c8b90c424753f00b9e9cf4634c05 y Rootdocsdc3a92e5495a160f5489c40510344b2f9a410589. Task1/Task2/Link aceptados, sin repetirlos. Cuatro Actions recientes terminales; último GREEN42138702058 sobree6518da5. No lectura/runtime remoto nuevo.
++
++Brief Task3 completo: docs/superpowers/briefs/2026-11-06-finite-native-first-connection-publication-task3.md, commit09f0ba4a4454a05f0926bbb94e01f3ea945ff5e8, blob847824af6cf748cbebfc2db7ba3bd0a841725385. Root autoriza SOLO siete paths P8/P9/P10/T3/F1/F2/T4, qualifier temporal máximo3jobs15min sin secrets, reporteTask3 y este ledger. BASE exacto posterior a esta documentación se entrega en dispatch al writer fresco. Secuencia SDD nueva: RED causal→implementación→GREEN proporcional→reporte completo→reviewer fresco; no ejecutar unidades posteriores por inferencia.
++
++Preflight: opción Miniflare sólo adopta configuración M desde registry real después de finalizar el POST; no remount QA dentro de callback provider, no phaseCurrent/ACK/receipt sembrados. T2 pendiente signed-success queda reemplazado por principalTask3 y controles closed/invalid; legacy setup siguepending. Nombres de regresiones y expansiones reconciliados, Link focal exacto elegido en brief. Fuente3Nov sigue vencida; operationalReadiness/completePackage/PCoff=false. Sin tokens/OTP/roles/permisos/runtime/main/merge/Max. No intervención humana requerida para este bloque cloud SYN.
++
++
++## Task3 checkpoint SOURCE/SYN — 2026-11-06 12:53 UTC
++
++Implementación sigue IN PROGRESS, writer exclusivo. Principal sin seed y composición nativa completa PASS en42216919108/c49e4eff; correlaciones y controles causales adicionales PASS en42218799447/48c4efa. No aceptación completa todavía: matriz fina, última verificación con el mismo head, artefactos, contraste protected y revisión fresca pendientes. Qualifier retirado durante checkpoint; corrida de lifetime42220276392 sigue fijada en935d202f, sin autorizar otra operación. Detalle recuperable en el reporteTask3, con cronología TDD explícita (negativos posteriores a skeleton), hashes/expiración, clocks originales y límite condicional de API. Root documenta factibilidad aparte en6fc3bac5e79ccb399935836370e3cb60edb2e0f2;1736CF/flujo SYN no acredita cuota/429/latencia real. No ampliar clocks, bajar checks ni optimizar producto aquí. operationalReadiness=false; completePackage=false; PCoff=false. Sin runtime/main/merge/Cloudflare real/Max.
++
++
++Task3 checkpoint2026-11-06 13:57UTC: IN PROGRESS, codea4ae401; holder causal RED5+metadataACK1→fix→14GREEN atcd4d6c1; deferred invocation/zero-next-read guard run42229397747 active. Native matrix now60 with8actual upload/activation readback variants pending. Final exact3jobs≤15min, full mapping/report/protected readback/qualifier removal remain. See Task3 report; all readiness/completePackage/PCoff=false.
++
++
++Task3 freeze2026-11-06 14:09UTC: code31ede7d2/tree49ef7824, qualifier absent; direct native readback8PASS(run42229788438); source-holder0+six ticket codec/correlator negatives2PASS(run42231129828/job127936986325). Exact final native60=A24+B25+C11, scoped positive107,total167,2expected-fail mutants,lint7. Bounded3jobs15min estimated847/850/852s; no fit/completion claim until terminal primary logs. Full frozen per-variant/native-vs-compositional mapping and parent/blob log in Task3 report. All readiness/completePackage/PCoff=false.
++
++
++Task3 2026-11-06 14:44UTC: primer gate42232085255 NO aceptado global: A24PASS/C118PASS+controles+lint,B23/25fallan observacion de dos boundaries tardios. Causa probada: reloj de observacionNode30s abarcaba GET+POST separados; producto no se relaja. Focal42235796244/job1279529300612PASS, entradasPOST19.67/20.44s<30s reales; cancelacion tardia separada de admision I/O viva. Codigo sourceb6a81590 sinqualifier; P8/P9/P10 intactos, F1/T3 medicion corregida. Final60=A23+B23+C14;167positive+2controles,3jobs15min,est776/783/665s; falta primaria terminal. Excepcioncallbackretry semantica explicita aprobadaRoot, noPASSdinamico inventado. Todos readiness=false.
++
++
++Task3 cierre implementer2026-11-06 15:18UTC — DONE_WITH_CONCERNS/SOURCE-SYN, pendiente revision frescaRoot. Checkout calificadoD11dff63/tree4e30,7blobs congelados; primera ConnectionReceipt nativa real+downstream QAauthorize/Mtoken/MCP-D04/timestamp/noticeGETPOST/Link sinseed.167/167positivos(60native,137top+30subtests) en42236775067: A23/B23/C121, todos comandos exit0; run permaneceCANCELLED por15min durante control restante. Excepcioncompositiva aprobadaRoot:42240487416/job127969155895SUCCESS,checkoutEXACTOD11 desde triggerf29804ab,2controles1expectedFAILcada uno/targettrue/exit1 +lint7exit0,7hashesHEAD/workingbeforeafter exactos. Full42232085255 sigueFAILED, no single-rungreen inventado. Qualifier retirado5e28e70b/tree6f3b7308; reporte final completo incluye REDcausal, matrizporvariante/nivelesdeprueba, excepcioncallbackestatica, padres/blobs/artefactos7d,~1.877GB JSONSYN yfeasibilidadlivecondicional; M1/M2deferred,ningunoptimizador/runtimemutation. AlloperationalReadiness=false/completePackage=false/PCoff=false; techo3Novvencido. Codigo7paths identicoD11; commitsreporte/progreso solo docs, artefactos no se atribuyen a HEAD posterior. Implementer entregaSHAfinal separado trasreadback y cesaSourcewrites.
++
++
++FIX ROUND1/5 — 2026-11-06 16:09UTC: I1 de reviewer (faltaba asercion de cronologia nativa, sin defecto de orden observado) corregido solo en T3/F1. Codigo calificado7ebe843a/treeafc2; run42248678046/job1279975689101principalPASS/0FAIL-CANCEL-SKIP-TODO/exit0 +lint2exit0,94sjob. Aserta por efecto commitSEND→sync→readbackROtransaction normalfulfill→invocacion→resultado completo→commitACK→sync→readback; receipt349<QA200return415.5checksDATAcopias distinguen omisiones/reorden/pending, nofallosnativosinyectados. MpositivoexactoD11c49303be/1988061B;QAinstrumentadoe4861bf5/2368172B. Primer focal42247056350 permaneceFAILEDporclasificacionincorrecta(storageget vs ROtxn), sintraceguardado; corregidoobservadorcontraAPIreal, sin relajarreadback/producto/clocks. Artefacto13519737504/digestf40e631bdeae57bf9cce4479cb74360d716c4a5b3dda2b2ac3a107b04f7de05e exp13Nov16:04:21. Qualifier retiradoab96b2a1.167anteriores siguenD11,noatribuirlos alfixtureHEADnuevo. Re-reviewRootpendiente;I1noautoaceptado. Productotodo/F2/P1/P2/P8/P9/P10exactos,Minorsdeferred,no runtime. VerapendiceFIXROUND1en reporte, SHAfinalentregadoapartetrasreadback.Sourcewritescesantrasentrega.
+
+~~~~~~~~~~
+
+## docs/superpowers/progress/2026-11-05-finite-native-notice-consent.es.md
+
+~~~~~~~~~~diff
+diff --git a/docs/superpowers/progress/2026-11-05-finite-native-notice-consent.es.md b/docs/superpowers/progress/2026-11-05-finite-native-notice-consent.es.md
+--- /dev/null
++++ b/docs/superpowers/progress/2026-11-05-finite-native-notice-consent.es.md
+@@ -0,0 +1,119 @@
++# SDD ledger — plan: docs/superpowers/plans/2026-11-05-finite-native-notice-consent.md
++
++## Identidad y activación futura
++
++PROJECTAFW; REPOSITORYtokenizartinfo-ops/agent-friendly-web(1347578006 PUBLIC); SOURCEbranch feat/finite-native-cleanup-20261101,GitHub/ActionsSYNsincredenciales. GETaceptadof68797ca/tree8f07c7e2(codee71);AstrareviewApprovedwithMinorP3cookie,nofixloop,obligatorioaquí. Diseño61b8bb4reconciliadoconAPIsreales,preservahistoriaworld7DDL. Preflightreviews/2026-11-05-finite-native-notice-consent-preflight.es.md ybriefcompleto briefs/2026-11-05-finite-native-notice-consent.md sonautoridadantesdelpinINACTIVEhistórico.
++
++Rootleyóinforme9950/spec26462/plan18212 y cambiosrespectoe27,cuatro módulosGET firmasyhandlerprivate,preflightconflictos fuente/consent/publicreader/P3/correlación/retención/clocks/IO/graph/cloud. Task1pendiente,sinwriterhastaBASEexactodespachadoyverificado. Únicoresultadofuentepermitido: POSThumano realnativo+correlaciónprecisa+GETformactivoSÓLOSOURCE, sinretiradapública/NoticeLink/phase/mount. No compilación/ensayo hechoporcreardocs.
++
++## Rulings y límites
++
++Mapa10+informe+qualifiertemporalaprobado;2jobsisoladoscredentialfree<=15mincomo máximo,sinsecretos/checkoutpersistfalse/npmciignorecloud/artefactos7d/removerfinal. No clones/deps/test/buildlocal ni otrosproyectos. Public3keys/OAuth/GET siguelimitado, baselinePOSTprivadauntransportable;actualAccess/CSRF/nativeticketwitnessmismaCommonleasechild5s/PROMISESQLrealhastaACK/full2snapshots. P3cookieestrictocompartidoynativos0efectosobligatorios; nuevasnegativasresealedválidasconjournal.readreal/markerpasivoacreditanpredicadocruzado,nosólochecksuminválido. Nodatosowner/secretos enlogs. World/store/journal/SDK/nativewire/stagework/ordinaryM/sourceflagsprotegidos. C0C1/30s5s/source3novvencidointactos,norenovarantesdeadmisiónreal.
++
++Task1: pending. Reportefuturoreports/2026-11-05-finite-native-notice-consent.md;BASE/tree/qualifiedHEAD,primariasREDGREEN/run/job/counts/lint/graph/IO/WARN/retención/nophase,fullBASEdiff yfreshreviewroot. No redispatchGET/store/journal/D04/fanoutaceptados. P3noresueltohastaestaaceptación;deferredledgerdebeactualizarseconpruebareview. Faltanretirada/NoticeLink/stages/thirdCLOSED/setup/cleanup/guard/mount/ARM/hosting/PCoffposteriores. operationalReadiness=false;completePackage=false;PCoff=false.
++
++
++## Despacho y primeras primarias
++
++RootverificóCAS/readbackBASE2f96acb45ec5477d559f85070aa438d2e2e00822/treece6242321aa5177f5828ec592a7bb00d6d6cd91a ydespachóimplement_notice_consent(Solhigh/forknone),únicowriterfuente. Brief48473char/blob79286bc31fd525b9efac3cd9ccf837bd6a38bfdb. Ruta ledgercorrecta docs/superpowers/progress/2026-11-05-finite-native-notice-consent.es.md; menciónabreviadaprogress noesarchivo distinto.
++
++PrimerREDaa6b1cd25c8e15b4cf5d2ae91c85651e071ddff1/tree3c34d159994b59857842781fae912ee4f1e40bf7 sólo2testsfiles+qualifier,productointacto. Run42104033222attempt1/job127514019845:2T1P1F0skip,principal405vs200/events0 DESPUÉS code→Mtoken→MCP+GETticketreales. Job127514019716:3T1P2F0skip, nativebadCookie200/capturatic ket ypurepresentemptyaceptado; válidonegativocausalP3. POSTbadCookiepasósolopor405baseline,noGREENparser. Rootleyóambasprimarias;6fixturecompiles0STD/artifacts13451925208+13452115077/7d,sinreruns. Implementaciónmínimaenprogreso,Task1NOcomplete.
++
++En paralelo designeroriginal estudiaNoticeLink-only yprepara3docsINACTIVEenramapropia. ContratoexistenteNoticeLinkDATA5campos,eventHash camelCase12columnas delhashEvidence('event'),nodejournalrowHash. Propuesta: putLinkdentro MISMAchild/stackPOST trasACK+recheck actuales,fuente read_consent/públicocerrados,nophasenueva/nobackfilldeconsentshistóricos. Segunda publicaciónnotices ythirdCLOSEDfinite_prearmseparados; decisiónrootdealcance únicamente,diseñonoimplementación. FaltareconciliarPOSTaceptadoantesdeactivarLink.
++
++
++## Primer GREEN parcial verificado por Root
++
++HEAD `87c8430d82df08b4eea59e6296c9a05b80009250`, árbol `fcfeddb03de9d4e44083142dc62bfa08f63f5987`; run `42104729861`, intento 1. Root leyó ambos logs terminales:
++
++- Job POST `127516429185`: 2 pruebas, 2 PASS, 0 FAIL, 0 skip. El principal realiza el POST nativo después del ticket real; la negativa de cookie ajena malformada parte de ticket válido y niega antes de SEND/SQL. Artefacto `13450937291`, SHA256 `b7539dfa37bb8ac6939e4fd252fd011f6fe7dcaf0e57739ee9f889fe09f45f42`.
++- Job GET/P3 `127516428832`: 3 pruebas, 3 PASS, 0 FAIL, 0 skip. Incluye gramática pura positiva/negativa y GET nativo con cookie ajena malformada antes de reserva. Artefacto `13450279676`, SHA256 `77f8796b921adf0ea5d3e8e4c1fa5906fc4e5b0af23200c5594f71e69c389c46`.
++
++Se ejecutaron seis compiles reales de fixtures QA/M y ningún estándar. El producto integrado y el parser ya tienen un primer GREEN; **no hay aceptación final**, P3 sigue pendiente de corpus/revisión y el formulario GET continúa desactivado. El writer sigue con concurrencia, errores/resultado tardío, correlación resellada válida, IO y calificación completa. No repetir estos GREEN sólo para resumir.
++
++
++## Calificación completa: importación fallida, sin atribución a casos nativos
++
++Run `42105489485`, intento 1, HEAD `06d29af097f2cf912472c5af2c2eadd22b5b5f29`. Root leyó jobs `127519081042` (POST) y `127519081544` (GET/regresiones). POST y cuatro archivos nativos de regresión fallaron al importar; no se ejercieron sus casos seleccionados. La suite pura pasó 18/18; lint terminó sin errores. Root verificó en el blob `1303c580e9059f97856b6e3e20165c8b59bf98a6` del fixture que las líneas 150 y 181 declaran `const marker` en el mismo ámbito.
++
++Artefactos de siete días: POST `13452166342`, SHA256 `8977f801ad34b280dc7a489894b4588e7644b0b90b3fcd2b2c3dc0105f734a7d`; regresiones `13451331905`, SHA256 `1999c38cd8905552ac079d71cad006775a570ac1139b2e6433772190a76c1175`. No fue una negativa causal de seguridad ni evidencia de fallo del producto.
++
++El writer hizo un rename privado mínimo en `7ce4d221beac0c276e3d7c74577a5527fa223c36`, árbol `58653825bdae741df6c4ddbe4e5f64fcc5ca7f0c`. Nueva ejecución `42105777333`, intento 1, jobs `127520078660` y `127520079207`, todavía sin aceptación. Reutilizar 18/18 pure por blobs intactos; repetir los archivos no ejercidos, sin relanzar el run fallido.
++
++Diseño Link-only final `9c4dfcde605be3e26d623c98dfcb45fb1293afa2`, árbol `38f5ba09d78caf48448480eadb12ffae170df38d`: Root leyó sus tres documentos y cotejó contratos protegidos. Sigue INACTIVE; requiere reconciliación focalizada contra POST aceptado, preflight final y BASE nuevo. Ninguna ruta, fase o recurso activado.
++
++
++## Corpus nativo y regresiones: evidencia leída, cierre todavía pendiente
++
++Run `42105777333`, intento 1, HEAD `7ce4d221beac0c276e3d7c74577a5527fa223c36`:
++
++- POST job `127520078660`: 37 casos, 34 PASS, 3 FAIL, 0 skip. Dos fallos fueron gates de drift no alcanzados por interferencia del nuevo trace pasivo; el tercero fue la sonda de cancelación en M que siguió encontrando trabajo pendiente. QA equivalente pasó.
++- GET/regresiones job `127520079207`: GET 36 casos, 30 PASS y seis gates de drift no alcanzados; phase 16/16, SDK 6/6, D0.4 token 4/4 y lint PASS. Artefacto `13452282426`, SHA256 `225fcedb9228f3ced5a95261549ef49a166e6e34e0bed2aff8d713909cf0e3ae`.
++- Root leyó ambos logs. Además leyó el TAP completo y los metadatos originales del artefacto POST `13453165308` en memoria, verificando ZIP SHA256 `eea2e5ea084de9bcb02586d094efb0c8e4a50e7452db8ac9faf21f406b252375`. Fueron 68 compiles de fixtures (34 QA + 34 M), no ocho: el resumen de consola sólo mostraba fragmentos. Ningún build estándar.
++- Siete negativas de correlación resellada pasaron, con journal.read nativo válido y marcadores de llegada al correlador. El principal terminó en 785 ms, con seis pares/doce snapshots, 84 HTTP, peak 2 y active 0. Se observaron 102 sesiones first-primary y 120 sentencias (64 first + 56 all); el contador factual cubre 48 first y 36 all. Separar inspección y clases de operación en el informe final; no sumarlas como RPC facturados ni como prueba de drenaje físico.
++- Principal M: 1683900 bytes, 303 inputs, bundle SHA256 `d005983e91845d1d39329768c5599205f67f02ab8cef60047d07fbb8cc32b3ad`, graph SHA256 `25297943f01de8f41f7370e266d61cdf36d68237c0f8b5a7f7d847f38cc4e2eb`.
++- Principal QA: 1787113 bytes, 325 inputs, bundle SHA256 `5f5acdd4133db7fa6061b3985993fe5c9c9666803177ffbeb9cd9f09a199ce9c`, graph SHA256 `09fe0a83a412cda1cc099d190e4a9a09385005344fc1b2b09b7eadc08a01353d`.
++
++Focal siguiente `42107074652`, intento 1, HEAD `24db0b56d3c4f08299490048bef50225d76234be`, árbol `72fb29e2f2d49ce78a782e9fd4b9990c287a6ca2`: producto intacto y formulario desactivado. Root leyó job GET `127524592031`, seis drift/6 PASS + lint3 limpio, artefacto `13452507433`, SHA256 `ea8878d55bd0381048287613b7434c660199739cda6ad90116d9ed0bd90932b6`. Se corrigió sólo la selección de la última posición causal del trace.
++
++Root leyó POST `127524591351`: 16 casos, 14 PASS, 2 FAIL, 0 skip. Ambos drift previos pasaron, junto a los nuevos casos de esquema/retirada ordinaria/revocación antes SQL/drift después SEND y QA body. M overflow informó cancelSettled=true/rootAborted=true, pero la sonda siguió dando `Finite stage work remains outstanding`; M held-read no alcanzó cancelEntered. No atribuir todavía a producto, SDK o harness. Artefacto `13452188432`, SHA256 `72bedc12592ecde5367e852f9ecc7681c7fc021335f903cedb6ed062f7862f28`.
++
++**Ruling diagnóstico:** permitir una ejecución focal de los dos casos M con instrumentación pasiva esbuild opt-in en fixture SDK/test ya autorizados. Observar settlement de las mismas Promise read/cancel y cierre real de body/callback/outer; preservar referencias, resultados, throws, retain, guards y timers. No tocar stage-work protegido, borrar el Set, forzar settlement ni ampliar plazos. Diagnóstico no es GREEN. Mantener sólo marcadores SYN necesarios para pruebas causales y retirar el resto antes del GREEN final.
++
++**Ruling restart:** world y modo fijo permanecen intactos. Fresh invocation no prueba reinicio del actor. Candidato dentro del fixture autorizado: RPC SYN con `ctx.abort`, marcador efímero de instancia, reacquire del mismo namespace/id y comprobación de cambio de instancia + filas persistidas + nueva petición denegada sin nuevo SQL/ACK. Root contrastó el método con [Durable Object State](https://developers.cloudflare.com/durable-objects/api/state/#abort). La documentación describe reset inmediato; su disponibilidad en este harness debe probarse. Si no está disponible, volver a Root con causa concreta; no declarar restart desde una invocación nueva.
++
++No repetir los 18 pure ni las 26 regresiones seleccionadas aprobadas por recuperar evidencia. Inventarios estáticos: phase 80 total/16 seleccionados/64 no seleccionados; SDK 61/6/55; D0.4 token 46/4/42. Skip cero de Node no cuenta los no seleccionados. Falta diagnóstico, casos pendientes, formulario activo SOURCE, calificación final proporcional, informe y revisión independiente. P3 no cerrado todavía; operacionalidad y PC-off siguen false.
++
++
++## Diagnóstico M y reinicio real del actor de laboratorio
++
++Intento INVALID `42108179683`, HEAD `f23a8e4a3365f8a330434175d53501449c71f349`, intento 1: Root consultó run y jobs, completed/failure con total_count=0. Ninguna prueba ni compilación. El writer informó corrupción del YAML por la expansión de `$'` en un replacement JS; reconstruyó el workflow como literal. No interpretar ese run como RED de seguridad.
++
++Run `42108321734`, HEAD `2e1b55175552cc3c990f600b64a444a4b1bc2ce4`, árbol `8097b7e71b8a88d4f1acf229a8a835183ba9d56b`, intento 1. Root leyó ambos jobs:
++
++- Diagnóstico M `127528955248`: dos casos, 0 PASS/2 FAIL/0 skip, 25050 ms. Overflow: read nativo settled; cancel nativo entró, pero no settled/rejected, aunque el flag del productor SYN decía cancelSettled. Body/actual callback no finalizaron, outer sí y root abortado; scope siguió outstanding. Held-read: productor SYN decía readSettled, pero read nativo no settled/rejected; no llegó a cancel. Esto localiza la suspensión y no demuestra fuga del Set protegido. Artefacto `13452033747`, SHA256 `38d4fde609093e40d3d20723ad2c591a063aa0f540976777850166237efb2b90`.
++- Reinicio `127528954797`: un caso, PASS/0 FAIL/0 skip, 11802 ms, lint PASS. `ctx.abort` real en Miniflare/workerd cambió el marcador efímero de instancia, conservó filas SQL/journal y el replay quedó cerrado. No equivale a reinicio del runtime de producción ni a PC-off. Artefacto `13451524143`, SHA256 `c053539138ec5b4b413e2dd9c86f786e87fd50acfada0c5d119069786666bd60`.
++
++Root leyó los módulos body `2a1e89ffcfe56a607c704129a3af6a83e8bc9b81`, forward `ea910f0fcdeade5a794ddaa60898706924e72f80`, stage-work protegido `a89baeb2578856dadedf700f9d66e180eb09120e` y native-wire protegido `42aa81f82b60bcc66a140f1358784108696f41e5`. La cadena real está retenida antes del race; liberar el scope exige aborto de la raíz y cero promesas. No se modificaron esos controles.
++
++**Hipótesis pendiente de contraste:** los controles HTTP del fixture llaman resolvers/controladores del stream de la petición original desde otra invocación. Root cotejó [aislamiento de I/O por petición](https://developers.cloudflare.com/workers/observability/errors/#cannot-perform-io-on-behalf-of-a-different-request) y [waitUntil](https://developers.cloudflare.com/workers/runtime-apis/context/#waituntil). Son referencias de modelo del runtime; la documentación no demuestra por sí sola la causa de estos dos fallos.
++
++**Ruling de contraste acotado:** una ejecución focal, sólo dos casos M. Los controles HTTP sólo cambian flags DATA; resolver/controlador y timer SYN se crean y ejecutan desde la petición original, dentro del deadline absoluto original capturado (máximo 30 s). El productor SYN libera sus propias promesas al observar el flag; no sustituye ni completa artificialmente las Promise nativas reader.read/cancel. No nueva ventana, reloj, lease, budget, permiso, runtime, helper o cambio de Set/guards/retención. Comprobar settlement nativo y de la cadena antes de considerar scope disponible. Si falla, volver al trace; no cambios aleatorios de producto.
++
++Task POST sigue abierto. Producto aún corresponde a `87c8430`, formulario desactivado, sólo fixtures/diagnóstico variaron después. No aceptación ni cierre P3, informe/revisión fresca pendientes.
++
++
++## Contraste M resuelto y calificación final SOURCE
++
++Contraste `42109028969`, intento 1, HEAD `db17f2f56af6bcf8eaee6eb29aca09d6caad0032`, árbol `f9f198f954cd48c7ef159e963239eb84bffeec24`, job `127531380618`: dos casos M, 2 PASS/0 FAIL/0 skip, 25185 ms, lint2 PASS. Root leyó la primaria. Artefacto `13453580020`, SHA256 `a744c888793c30292fe72735c48297b36a6c51d633bea0c9e09fc4e550d40de1`.
++
++Cambió sólo el control de fixture: flags DATA entre peticiones y productor/stream liberado dentro de la petición original. Los asserts observaron settlement nativo read/cancel, cierre del body y callback real, y scope disponible sólo tras settlement más aborto de la raíz. Producto, Set de retención y plazos permanecieron intactos. El resultado respalda la hipótesis del origen de petición del fixture; no demuestra un incidente del proveedor ni reparación de producción. Marcadores pasivos mínimos usados en asserts causales se conservan en SYN; el resto de instrumentación diagnóstica se retiró.
++
++Root autorizó evitar una repetición amplia por el cambio final limitado a HTML/CSP. Requiere matriz por nombre único→GREEN compatible y explicación de cada reuso frente a los cambios de fixture, sin sumar overlaps. Ejecutar faltantes si aparecen. El cambio de código desde `87c8430` sólo activa el formulario HTML y CSP self, sin lógica nueva.
++
++Último código calificado `e1537bf403944ae4f79c04818db1932a3189d78c`, árbol `15f7bfa4877c3068b7088defde4b413b52c6b955`; run `42109674529`, intento 1. Root leyó ambos jobs terminales:
++
++- POST `127533595946`: 6/6 PASS, 0 FAIL/skip, 60115 ms: principal, cookie nativa malformada, dos gramáticas puras y dos cancelaciones M después de la limpieza. Artefacto `13453505757`, SHA256 `e4fbdb7a54b511ee3fb0bc918ab1ae37078dc2132e4acbb3d6973410a7d7ccea`.
++- GET `127533596479`: 5/5 PASS, 0 FAIL/skip, 28446 ms: principal con formulario activo, cookie nativa malformada, gramáticas puras y límites/envelope Headers (distinguir constructor nativo de parser). Lint de los diez paths limpio. Artefacto `13452319591`, SHA256 `b5161a9ea8927b96d7ee272e94a150125de116efec8f42c08450b805a7c1dee6`.
++- Principal final: 1275 ms totales, child 775 ms dentro de ventana 4999 ms; seis pares/doce snapshots/cinco rechecks y dos verificaciones Access reales. 102 sesiones, 64 first/56 all; DO get902/list108/sync2/txn26/txGet98/txList2/txPut2. 84 HTTP, peak2, active0. Son mediciones de este recorrido SYN, no SLA, factura ni drenaje físico.
++- QA principal: 1801609 bytes/325 inputs, SHA256 `3885841126ffba0a9fcffc748dfe04aa6cd0621953cf692963a512fbc76b0f13`, graph SHA256 `4d9be238e8da7428599b70a29fc6f84fde780ef156e671268a99097e9a9e9dc7`. M: 1686818 bytes/303 inputs, SHA256 `f3e3a5b9104aecce8184a97edc16cf6709e5941c1faad423b06c0663924e9340`, graph SHA256 `0f1e927b66951ce5a82293e717f69f0417e2336932c1653f6d80dacb4cebb551`.
++
++El writer informó inventarios finales de 50 POST y 37 GET únicos y está terminando matriz/informe, protección de blobs y retiro del qualifier. **Pendiente leer informe completo, comprobar diff BASE→HEAD y revisión independiente**. Los PASS no cierran Task/P3 por sí solos. Root ya obtuvo los diez archivos en e153 para preparar el paquete U10; fanout permanece sin cambios y era opcional. No cambios en main ni recursos remotos.
++
++
++## Writer cerrado; revisión independiente en curso
++
++Writer `implement_notice_consent` terminó DONE y se detuvo. Informe `docs/superpowers/reports/2026-11-05-finite-native-notice-consent.md`: HEAD `5205d80216d9767c44762df4a181e1015e093a8e`, árbol `23309d147f8818e0232be215f42a77cf7ffe0e6a`, blob `91c08e8cfd6f0eb954631c3e75ea4af66e4b33b5`, 38322 caracteres. Root lo leyó completo en tres partes y verificó comparación BASE→HEAD: once commits, nueve paths de código/test y ese informe. Los nueve blobs coinciden con e153 calificado; qualifier ausente al final. IO fixture opcional sigue byte-exacto.
++
++Paquete de revisión completo U10 BASE `2f96acb45ec5477d559f85070aa438d2e2e00822`→HEAD `5205d80216d9767c44762df4a181e1015e093a8e`: `docs/superpowers/reviews/2026-11-05-finite-native-notice-consent-5205d802-package.md`, guardado en rama de coordinación commit `01afa513a97edad287c5eeddb3ea8151a72a9b4c`, blob `c0797305c95ba869f73b08a10f1c669537a252db`, 166531 caracteres, readback exacto. Incluye once commits/stat/full diff de la unidad, no sólo el último commit.
++
++Revisor fresco `review_notice_consent` (Astra high, fork none) despachado con brief original, informe y paquete. Lectura únicamente; sin helpers, subagentes propios, pruebas repetidas, runtime o escrituras. Pendiente dictamen Spec y Quality; **Task/P3 todavía no aceptados**. Reusar este revisor para un eventual fix loop, no crear otra revisión duplicada.
++
++En paralelo, el diseñador original `design_native_notice_receiver` reconcilia sólo sus tres documentos Link contra este candidato inmutable 5205, no sigue WIP/HEAD móvil. Esa excepción documental es explícita: siguen INACTIVE y condicionados a aceptación POST. Si revisión cambia APIs habrá reconciliación focal posterior. No hay segundo writer fuente. Root preflight final, nuevo BASE y despacho siguen pendientes.
++
++
++## Aceptación de la unidad
++
++Revisor fresco `review_notice_consent`: Spec✅/Task quality Approved, cero Critical/Important, dos Minor. Registro completo y resolución Root de dos ⚠ en `docs/superpowers/reviews/2026-11-05-finite-native-notice-consent.es.md`. Root comprobó primarias/50 y37 nombres únicos/compatibilidad y mantuvo runtime/PCoff fuera de alcance. No fix loop; Minor settlement se lleva explícitamente al mismo archivo en Link y warnings a revisión final. P3 cookies **CLOSED** con historia conservada en deferred ledger.
++
++**Task POST: complete (commits2f96acb..5205d80, review Spec✅/QualityApproved; dos Minor diferidos).** Writer detenido. Enlazar esta aceptación en futuro BASE de Link; no volver a ejecutar POST/store/journal/GET aceptados por resumir. operationalReadiness=false;completePackage=false;PCoff=false.
+
+~~~~~~~~~~
+
+## docs/superpowers/progress/2026-11-05-finite-native-notice-link.es.md
+
+~~~~~~~~~~diff
+diff --git a/docs/superpowers/progress/2026-11-05-finite-native-notice-link.es.md b/docs/superpowers/progress/2026-11-05-finite-native-notice-link.es.md
+--- /dev/null
++++ b/docs/superpowers/progress/2026-11-05-finite-native-notice-link.es.md
+@@ -0,0 +1,51 @@
++# SDD ledger — plan: docs/superpowers/plans/2026-11-05-finite-native-notice-link.md
++
++PROJECT=AFW; REPOSITORY=tokenizartinfo-ops/agent-friendly-web; SOURCEbranch=feat/finite-native-cleanup-20261101; GitHub/Actions SYN sin secretos ni builds locales. POST aceptado f62b6c8b17412b812ae411bbc9cedad43b9ce501, producto5205/e153, P3cookies CLOSED; Minor precisión de settlement161/244 obligatorio aquí, warnings diferidos a whole-branch review.
++
++Diseño30981d2a2f15bd49d1d0226358486e2ec0262b07 reconciliado con código real. Root leyó originales y toda reconciliación, cotejó store/records/stage-facts protegidos y handler/recheck/clock/ACK reales. Tabla de conflictos y rulings completos en reviews/2026-11-05-finite-native-notice-link-preflight.es.md y briefREADFIRST briefs/2026-11-05-finite-native-notice-link.md.
++
++Rulings: cuatro paths+informe+qualifier3jobs≤15min; ownAck real, estados explícitos SQL/ACK/Link; misma child5s/parent30s sin rearm; Link5campos/hashcamelCase/put→sync→readback→pair; DATAhistoria legible bajo techos actuales después de ventana de efecto sin autorizar replay; journal5filasnormales/max6/cap7; helpers NodeSYN mínimos compartidos en fixtureGET sinciclo ni autoridad/archivo nuevo; reforzar dos asserts Minor. ROOT no autoriza runtime/phase/publicaciones/thirdCLOSED.
++
++**Task1: pending/INACTIVE hasta BASE y despacho Root exactos.** No writer todavía. operationalReadiness=false;completePackage=false;PCoff=false;fuente3nov02:59Z vencida. No volver a ejecutar unidades aceptadas por resumir.
++
++
++## Ejecución SOURCE y cierre del writer — 2026-11-05
++
++Despacho Root exacto BASE953e7af1fc20b59c59d8e4a03dcf398d98165cf5/treeee77df20d2c22fc48c55663524b9720b95364d2d activó Task1. CodeHEAD fb739b07c26487242d72bbc56ba0b115095bb8fa/tree9efd8240dfbacc65ba8d1821a2cba39bf5b577d9; cuatro paths del mapa y qualifier temporal ya retirado. Informe completo: reports/2026-11-05-finite-native-notice-link.md. Implementación terminada SOURCE; fresh task-review Root pendiente, sin autoaceptación ni siguiente unidad.
++
++Ruling Root después de fe18: control SYN DATA-only fijo /fixture/notice-link-control dentro de defaultfetch GETfixture existente, read/reset/release acotados, sin Worker/binding/world mode/quinta ruta de código ni I/O/RPC/autoridad desde el control. Visibilidad compartida real comprobada con getWorker('qa-sdk')/actor y ENTER productora. Gate en continuación original de TX, deadline original<=5s y cleanup/reject; conserva Promises/resultados nativos. RPC Node durante TX podía consumir hasta el deadline; no imponer demora25ms ni interpretar allowed=true posterior como admisión durante TX. Se capturaron Fetchers antes del hold, usó HTTPM→QA existente y observó fulfillment/rejection de Promise transaction original sin reemplazarla. Focal ac401 comprobó pendingreal, después TXfulfilled/ambosHTTP503/no late200. Heldcommit/sync/readback acreditan scope local, no physical drain.
++
++Primarias attempt1 preservadas:
++-42114322347/127549785870 REDcausal Link0P1F trasPOST200/event/ACK,carry2P.
++-42115157508/127552730650 FAILsetupLink1+carry2 por campo nuevo antes de contrato exacto enrollment; corrección7d304 no cambió contrato protegido.
++-42115360441/127553446346 focal Link1+carry2PASS.
++-42115921441 fe18: Link127555403391 CANCELLED15min,31emitidos28P3F/sin resumen; POST12755540376350=49P1Fsetup; GET/reg12755540415781P+lint4.
++-42120340776 be350:127570738707calibración0P1F(mala expectativaRPC),visibilidadreal;127570739345cookie1P,no reproducido,lint4exit0/1warning corregido.
++-42120773920 f619/127572226999diagnóstico0P1F,probe4379ms/controlelapsed;lint40/0.
++-42121383907 ac401/127574329989control1+principal/correlación/withdrawal3PASS,lint40/0; realesSQLbaseline1sin nuevoINSERT, retirada ordinariareal/métodosD1restaurados.
++-42121776005 bf686/127575702935fullLinkterminal31=30P1F/0skip,386019ms,noprocesofugado; únicoFAIL#10setup sdkReadCurrent inicial antes deltest;lintLink0/0.
++-42123491595 696611/127581599230 exacta#10focal1PASS/0skip,lintfixture0/0. Loggingpasivo originalError/fourframes/stage/times/getterreadonly sinI/O, conserva return/throw/guard; nofailqueloguear. Root autorizó matriz staged30+1 y no repetir30PASS.
++
++Cobertura GREEN escalonada162casos únicos:Link31(30full+1focal),POST50(49full+1focal),GET37+pure18+phase16+SDK6+D044=81. Full31 yfull50 fueronFAILED, no pristine/whole-branchCI. Deuda explícita:2baselineSYNsdkReadCurrent unavailable en distintossetup;focales no reproducidos/causadesconocida,NOreparaciónprobada. Seedprotectedoffset0Date.nowreal;sin sleep/backdate/clockpatch/retry.
++
++Costosprincipalbf686 medidos antesinspecciones/despuésbaseline3events/3grants/7DDL:7pares14snapshots6rechecks/Access2;118sessions74first62all;DOget1067/list126/sync3/transaction31/txGet117/txList2/txPut3;HTTP98/peak2/active0;child1007ms/window4999,parent1544. Graphs reales QA325/M303 sin paths nuevos/retirados, sólophase+stdin changed;edgecodecstdin multiplicidad1→2/sin nuevaadyacencia;Mbytes/hash/metafileidénticos.0standardbuild/store/journal/allSDK/50ms. GitHub/Actions únicamente para implementación/tests;ZIPs leídos en memoria sin archivos/deps/clones locales. Artifact7d/heads/digests/patchfull eninforme.
++
++Warnings toolchain/harness/RPC/CIMD se mantienen. Los dos asserts de settlementcarry reforzados yGREEN no cierran Minor hasta revisión independiente. operationalReadiness=false;completePackage=false;PCoff=false;sourceceiling3nov02:59Z vencido. Sin runtime/merge/main/mount/ARM/segunda publicación/thirdCLOSED/notificaciónMax.
++
++
++## Fix loop round1/5 — Important I1, pendiente de scoped re-review
++
++FixBASE revisor2f530092bdc6f89e856ca3803f04dcc83fb90b1f. Review_notice_link:0Critical/1Important, extracción incompleta del flujo auténtico. Sólo Consenttest ahora importa/delega a helpers fijos existentes prepareNoticeIssued/issueNotice/actualExchangeMcp/ticket/consent; seed/harness/lifecycle/cleanup siguen enwithIssued. Fixture/producto/Link byteexactos, sin archivos/ciclos/APIs nuevos.
++
++Prueba literal:4cuerpos compartidos idénticos(611/1535/1737/806chars;4/8/8/3assertsites); expansión de helpers reales reproducearchivoFixBASE entero byteexacto,172assertsitesmismoorden,23delegados+149directos;sufijo50tests íntegro. PREP/plain-dispose/importbindings y defaults/inputs/signatures iguales. No eliminación de asserts ni sleep/retry/clockpatch.
++
++TestHEADbc4000addba4b67f8a76344e5745e3d0eab6ff07, Actions42126215195/attempt1/job127590980113 SUCCESS:4exactos(principal+cookie+queuedSQL+abortSQL)=4PASS0FAIL0SKIP/66225.083215ms,46no seleccionados;lintConsentexit0/0warnings.8metafiles4QA4M deharness requeridos,0buildestándar;ningúnLink31/POST50/GET81repeat. Artefacto13462160172 ZIP305662B SHAaa23e104d147055c357c96f3909c518fa3484430923d6c68018a0ff46fc37eba expires12nov23:02:16Z. RechazorequireEmptyNotice logueadodespuésLinkes esperado,no baselineM1 reproducido.
++
++Qualifierretirado. FixcodeHEAD33d3739e6b585a2efd821c2c1006e4e59fbd7ed4/tree53d7d2591dbc9541a45305dc9da8bbe4de585cd2;compareFixBASEsóloConsenttest+3/-38/blob2169e0877eb72ab1db890f0c4e7b8c5c9075515b. Apéndicecompletoenreporteactual reports/2026-11-05-finite-native-notice-link.md incluye diff/primarias/assertproof/hashes. I1propuestoimplementado,NOautoaceptado;STOPWRITESpara scopedre-reviewMISMOreviewer. M1baseline2faildesconocidos yM2warningsnoentranloop;carryMinorConsentpendienteaceptaciónRoot. operationalReadiness=false;completePackage=false;PCoff=false;sinruntime/merge/main/nuevaunidad.
++
++
++## Root aceptación posterior
++
++I1 ADDRESSED. review_notice_link: helpers5 imported atConsent2, copies removed; originalf/prepare→seed→OAuth→case/finally preserved. No assertions removed/APInew/framework; no newCritical/Important. Fourcoveringcases4PASS/lint0/0confirmedRoot. MinorM1/M2remainopen/outofscope. Fixroundallfindingsaddressed;Spec✅/TaskQualityApproved.
++
++Root aceptó código33d3739/reportdba6cde8 tras primarias/grafos/blobs. Registro reviews/2026-11-05-finite-native-notice-link.es.md. M1/M2deferredwholebranch, no reparados. CarryConsentMinor161/244CLOSED. FuenteOnly/operationalReadinessfalse; no main/runtime/PCoff. Siguiente unidadfirstconnectionsecoordinaenotroledger, no continuarLinkporresumen.
+
+~~~~~~~~~~
+
+## docs/superpowers/progress/2026-11-05-finite-native-notice-next-slice.es.md
+
+~~~~~~~~~~diff
+diff --git a/docs/superpowers/progress/2026-11-05-finite-native-notice-next-slice.es.md b/docs/superpowers/progress/2026-11-05-finite-native-notice-next-slice.es.md
+--- /dev/null
++++ b/docs/superpowers/progress/2026-11-05-finite-native-notice-next-slice.es.md
+@@ -0,0 +1,63 @@
++# SDD ledger — plan: docs/superpowers/plans/2026-11-05-finite-native-notice-next-slice.md
++
++> Estado vigente: Task1 SOURCE completa con ApprovedwithMinor/P3diferido al POST; sinruntime/PCoff. Leer el cierre final y reviews/2026-11-05-finite-native-notice-get.es.md antes de retomar; no repetir la tarea.
++
++## Identidad y activación SOURCE — 5nov2026
++
++PROJECTAFW; REPOSITORYtokenizartinfo-ops/agent-friendly-web(1347578006 PUBLIC); rama feat/finite-native-cleanup-20261101; GitHub/ActionsSYNsincredenciales. Rootacepta store4016c13d y journal2969a840 conprimarias/reviewfrescos. Estaunidadúnica GETticket+inventariofactualprivado seactiva cuando rootentrega BASEexactocontainingcommit y únicowriterfresco, nopin04c/2b6diseño. Nadaejecutadoporcrearledger.
++
++Rootleyó diseño2b6cd7a6b7c1f31af6accf408a55066dd90cb4e6(informe9970/spec21701/plan14344), fuentesnativewire/phasefixturetests y nombres de seleccionados. Tabla/rulingsreviews/2026-11-05-finite-native-notice-next-slice-preflight.es.md; briefcompleto briefs/2026-11-05-finite-native-notice-next-slice.md. Unicoresultadopermitidofuente es GETcon ticket+3journalrows, formulario disabled; POSTclosed, no mount/permisoavisos/sourceNotice/fase. El reader3keyvacío/OAuthsinnotices sigueválido; owncontentcierrareaderexterno, nuncaexcepcióntransportada.
++
++## Rulings
++
++Diezpaths exactos, qualifier temporalcontentsread/nosecrets/persistfalse/npmciignorecloud/timeout15min/removerfinal; noclone/deps/tests/buildlocal. No codeexistingfuera mapa. SelectAll nativefreshprimary exige success===true/resultsarray/cap; errornoesschemaausente. UUID/prefijooriginales, nocountglobal/historyajena. Schemafull7antesreservation/SEND, carrieraposterioruncertain/noretry. Expected/SQLPromise/result/settled sólolexicales, appendrefsseparadas/dossnapshotscompletos/sinningunDTO/allowPending/sourcefactory.
++
++DosREDválidas inventory+GET conprerrequisitos nativos, stubsúnicamentenewGETunavailable. GREENnuevoGETcompleto/purephase/16phase-native/6SDK-native/4D04token/lint10; contadoresrealesnofilters0. PrincipalGETtoken/MCPactual; negativosSDKemisorrealnofillpositivo. QueriesDO/D1/HTTP/Bodies/cancel/peak2cómputoreal nuevaslecturas, no98/112asumidos, no50ms/allSDKrerunsnischedulerchange. QA/Mharnessgraph/hashes/metafiles; noestándar extra mientrasstdentryinvariables yphaseunmounted; cualquiernuevaedgestd requierevolverroot. Budgets30s/5sinalterados; fallodefitnoautorizawindowextension/cache.
++
++## Task1 pendiente
++
++ÚnicoimplementerfrescoS D D, noh elpers/reviewerpropio. Informe reports/2026-11-05-finite-native-notice-next-slice.md conBASE/code/report/tree, primarias2RED/GREEN/lint/compiler/métricas y nativevsSYN/unknownACK/rollback/bodyretention. RootactualBASEdiff+reviewindependiente antesdeaceptar. No redispatchD04/fanout/store/journalporresumir. MinorD03/fanout/toolchain ledgertriagefinalsinfixporarrastre.
++
++## Límite
++
++Source3nov02:59UTCexpirado/C0=I0+900000/C1=C0+180000,parent30s,child5s. Última primariareal3novesfechada. No provider/runtime/alias/Entry/DDLreal/OAuth/OTP/tokens/permisos/cron/Containers/Max/main/merge. Faltan POST+CSRF/NoticeLink/stages/terceroCLOSED/ownSEND/fullsetup/cleanup/guard/paquete/preflight/mount/ARM/hosted/UNAocurrenciaPCoffcoordinada. operationalReadiness=false;completePackage=false;PCoff=false.
++
++EncabezadoshistóricosINACTIVEdel diseño noactivanporsísolos; ledger+despachorootposterior sóloactivanTask1SOURCE, no downstream.
++
++
++## Despacho real
++
++RootverificóCAS/readbackBASEdc4edafc0b5e4ba440cd32a21dd3dd58024e811a/tree91d023ce48bb2f5105140c788d3646c64c20bd4e ydespachóúnico implement_notice_get(Solhigh/contextofresco). Writerleyóbrief/preflight/ledger ycomenzó. Qualifiernombre/pushscoped autorizadoexpresamente; modeloprevio88a67d5 en .github/workflows/afw-notice-provenance-qualification.yml sólo lectura/template. No ejecuciónGETacreditada todavía.
++
++
++## DETENIDO por pedido del owner — 5nov2026
++
++NO Task1complete. Owner apaga PC yretomamástarde. Writer terminó/checkpoint a0bd9d68653cc18313490c842d7d884c6184fa18/treec526aaa70236dd1dd0fc9b012fa7e23e4f65f68f, informeparcial33230char+draftnoverificado. Código2f2cbe4d;3runs terminales/10fixturebuilds0std. InventorybásicoPASS,RED1yRED2válidos; GETreal/adversariales/métricas/regresiones/lint/reviewpendientes. Qualifierausente, rootref/report+workflowrunsreadbackverificados. Sin trabajoautomáticohastaownerresume. Leerprogress/2026-11-05-shutdown-checkpoint.es.md y conservarBASEoriginaldc4para futurarevisión; noblindreruns.
++
++
++## REANUDADO por el owner — 5nov2026 19:21 UTC
++
++Gabriel pidió «continua con los bloques» después del cierre. La pausa queda revocada sólo para el trabajo autorizado. Root verificó rama fuente todavía a0bd9d68653cc18313490c842d7d884c6184fa18/treec526aaa70236dd1dd0fc9b012fa7e23e4f65f68f y docs699180ed. Se reanuda el MISMO implement_notice_get mediante followup, BASE de revisión originaldc4edaf, sin repetirRED1/RED2/aceptados. Qualifier temporal GET reautorizado con mismo scope, seguridad y retiro final; ningún cambio de budgets, custodia o runtime. Diseño POST continúa sólo documental en rama separada desde82f9d340, INACTIVE hastaGETaceptado/reconciliación/preflight. No otro writerfuente. operationalReadiness=false;completePackage=false;PCoff=false.
++
++
++## Primarias leídas al reanudar y ruling de transporte
++
++Rootleyó job127476629576/run42093279704/HEAD35ad25a4:1T0P1F, error de captura esbuild inputvirtual antes de prerrequisitos, QA1compile/sin artefacto; no REDproducto. Rootleyó job127478302248/run42093762800/HEAD808a9bab:1T0P1F por Cache-Control duplicado, ya200/ticket14/3journal/ACK/HTML/nosniff;2compiles/artefacto13446176700. MétricaJSON partida64KiB reconstruida sin repetir:1656ms/SQL102sesiones111sentencias/peak2active0; distinguir3queries inspect posteriores. Rootleyó job127480153262/run42094285083/HEAD0db9f2d1:32T30P2F0skip/62fixturecompiles; principalGREEN, dos expectativasCloseapplied erróneas frentefenced. Storeoriginal líneas115–122 confirmafenced; no cambióstoreporassertion. Próxima cualificaciónbe044d48/run42095343936/job127483768304 sigue pendiente: no atribuirGREENanticipado.
++
++Ruling: copiar sólo allowlistOAuthintacta y fijar nosniff exclusivamente en HTML200 final de M; QA genera su propio nosniff. No header callerconfigurable/expansión de allowlist ni cambioOAuthordinario. Corregir duplicación Cache-Control sóloGET. Writer conservainterfaces/SQLPromise/rootbudgets. Totalesestáticosdc4sin ejecutar:phase80(16selected+64notselected),SDK61(6+55),D04token46(4+42), separadosdeTAPskip0Node22.
++
++DiseñoPOSTe27bbc16c3abc11c64a4740157e1c998c1b0f829,treec7dc1cdd81b02f319ab7e18ed87357e4a37e4ca6:rootleyó informe9772/spec21473/plan14362. Completo documental peroINACTIVE,pendienteGETaceptado/reconciliación/preflight. No activar desde su pin viejo. MensajeOpenAI5nov18:59UTC/caso18196140sóloseguimiento,sincausa/repairverificada; lecturaacotada ynota separada, sinensayoproxy/entorno/correosoporte. No esContainer/Access/Cron/FCO.
++
++
++## GREEN GET y diagnóstico de compatibilidad — aún no Task1complete
++
++Rootleyó primaria be044/run42095343936/job127483768304:GET33/33PASS, pure18/18PASS, phase16seleccionados6P10F, siguientesSDK/token/lintnoejecutados.64fixturecompilesenrun. CasoHTTPbody/cancel PASS, no hang: archivo458762ms; principal1294ms, ticketchild595ms; doce snapshots/84HTTP/peak2active0. No aceptaciónglobal antes de regresiones/review.
++
++Rootleyó diagnósticoúnicod87158c4/run42097405566/job127490953992 (1fixturebuild1469048B/322inputs):Maptrue0/ALLsuccesstruearray4/failphase276. Esquema histórico4consentobjects +3eventosajenos, nofallo deMap/ALL/actor. Rulingformal en brief/preflight: completar7DDLoriginalesvacíos en worldYApermitido para phase-context*, preservar4DDL/3eventos/historia y guardas estrictas; mapa10/no11ºpath. NoDDLreal. Corregir única condición deinstalaciónfixture; retirar onLoadantesGREEN. Conservar33GET+18pure si productblobsintactos y correr sólo16phase/6SDK/4token/lint. Task1 siguependienteregresiones/informe/fullBASEreview.
++
++
++## Task1 complete SOURCE — review Approved with Minor, 5nov2026
++
++Task1: complete (commitsdc4edaf..cfe8f0d,0C/I,1MinorP3deferred). NO plenoSpecPass: desviacióngramáticacookieexpresa yobligatoriaenpróximoPOSTantesdemount. ReviewerAstra review_notice_get aclaróApprovedwithMinor, sin otroimpedimentoSOURCE; nofixloopporMinor. Registroreviews/2026-11-05-finite-native-notice-get.es.md ydeferred-review-minors. RootverificópackageBASE11archivos195718char yprácticadeevidencias: GET33+pure18/phase16/SDK5+1/token4/2reforzados/lint10; todos11runsGETterminalesattempt1,qualifierretirado yfuenteprotegidaexacta. Reporte28941char/readbackbloba7dbd31. Inmutablesfinalcfe8/tree22df ycodee71/tree055d. No desplegado.
++
++CannotVerifyprimarias resueltoporrootlecturas; limitacióntestcorrelators conservada como rechazo,noaislamiento. FuturaPOSTdebeprobarDATAresealedválido conrelacionesfuente/issuer/GrantLink/Connection/ticket/eventerradasantesconsentSEND/SQL. DiseñoPOSTe27endiseñador sereconcilia/documentaP3antesdepreflight/BASE. operacionalReadiness=false;completePackage=false;PCoff=false.
+
+~~~~~~~~~~
+
+## docs/superpowers/progress/2026-11-05-finite-native-notice-provenance.es.md
+
+~~~~~~~~~~diff
+diff --git a/docs/superpowers/progress/2026-11-05-finite-native-notice-provenance.es.md b/docs/superpowers/progress/2026-11-05-finite-native-notice-provenance.es.md
+--- /dev/null
++++ b/docs/superpowers/progress/2026-11-05-finite-native-notice-provenance.es.md
+@@ -0,0 +1,37 @@
++# SDD ledger — plan: docs/superpowers/plans/2026-11-05-finite-native-notice-provenance.md
++
++## Identidad / activación fuente — 5nov2026
++
++PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web(1347578006 PUBLIC); rama feat/finite-native-cleanup-20261101; GitHub/Actionscredentialfree SYN. Fuenteunidadjournal-only. Root acepta storecomponente trasfixround1/report4016c13d y reviewAstrahighImportantADDRESSED/Approved; recibo reviews/2026-11-05-finite-preparation-notice-store.es.md. Rootactiva sólo Task1nuevojournal cuando entrega BASE exacto futuro(containingcommit) y único implementerfresco. Esteledger noacredita ejecución.
++
++Diseño39ba3250ecac6c05956252aac8d4c27fa3e0b6da, enmiendaplan6d13ace8a9fee901d2e1508d8946193440eb4357; pineshistóricosdeinspección7a2 no son BASEejecución. Rootleyó informe/spec/plan completos másdeltaunaviñeta y fuentesissuercontext/codec/stagework. Preflighttabla y rulings en reviews/2026-11-05-finite-native-notice-provenance-preflight.es.md; briefcompleto briefs/2026-11-05-finite-native-notice-provenance.md.
++
++## Rulings vinculantes resueltos
++
++- Sólo5filesnuevos; issuer/store/phase/M/SDK/authority/schema/entry/cleanup invariables. Capturedcontext.wait ya retienePromises, no c.retain. Nadaimportanuevojournal enproductoexistente.
++- Codec compruebaforma/hash/relacionesinternas; consent-sinACKcontextovalida journalconreserva, sin expandirfirma.
++- Retención/exclusiónSYNoriginal sóloobserverexterno.outstanding.has(ctx), segunda leaseSYNdistinta vigente enmismodeadline; no probarpendingusandoleaseabortada ni declararqueSetpendingdeljournalserializamétodos.
++- REDandamiajemínimo sólo nuevojournalgenéricamenteunavailable despuésdegrantnativo; no sustitucionespositivas/factualsource/SDK/store ni errorbundle/import/DDLcomoRED.
++- Nuevoscodectest+nativocompletos+lint5files; no147/33/SDK/fanout/estándar repetidos sinsharedchange/causa. Qualifiertemporalrama/pathcontentsread sinsecretos/persistfalse/npmciignore-scripts;retirarfinal.
++- ACK_DATA sóloenlaces/checksum, no autenticaSQL/caller/humano. FuturofixedQAcontinuaciónléxica con resultadoreal esgatedownstream, no autoridadporseisfilas.
++- Senddeadlineincluyetechosoriginalesynuncaexcedechild5s; ACKobservedAt<deadline;readhistoriavencidanoextiendepermiso ni habilitaSQLdeexisting.
++
++## Task1 pendiente de ejecución
++
++Unico futuroproductwriterfresco, ningúns ubagente/helper/reviewerpropio. Cincoarchivosdelmapa, informe reports/2026-11-05-finite-native-notice-provenance.md, REDcausal/GREENcodec+nativo/lint, hashes/gráficoprotegido, fullBASEdiff/reviewindependiente. No redispatchD0.1/2/3/4/fanout/store ni susmatrices.
++
++## Límite permanente
++
++C0=I0+900000,C1=C0+180000,padre30000/hija5000, fuente3nov02:59Zexpirada; synscope no renuevaautoridad. MinorD03/fanout/toolchain se triageanwholebranch. No receiver/factualphase/NoticeLink/terceroCLOSED/ownSEND/fullsetup/cleanup/guard/mount/ARM/PCoff yno provider/runtime/alias/Entry/DDLreal/OTP/OAuth/tokens/permisos/cron/Containers/Max/main/merge. operationalReadiness=false;completePackage=false;PCoff=false.
++
++EncabezadosINACTIVEdel diseño son históricos: ledger y despacho futurorootactivansolamenteestaunidad SOURCE, nunca etapasposteriores.
++
++
++## Despacho verificado
++
++BASE04c49dcc48b37f7fe825daa6c1c0747c5822d74e/tree7b13cf0a4262f7d5d5b8695c3bda3875d63e0bef verificado porroottrasCAS. implement_notice_provenance(Solhigh/contextofresco) único productwriter despachado; informe/reviewpendientes. No trabajo nativo nuevo acreditado por este checkpoint.
++
++
++## Cierre de Task1
++
++Task1:complete (BASE04c49dcc..report2969a840, reviewclean). RootleyóRED/2intermedios/final:28codec+37nativePASS0FAIL/CANCEL/SKIP/lint0/0;4fixturecompiles0standard; fullBASEdiff5new+report0existingchanged/qualifierausente/finalSHAs=qualification. FreshreviewAstrahighPass/Approved0C0I0nuevoMinor; primariasresuelvenejecución, nodudacódigo pendiente. Recibo reviews/2026-11-05-finite-native-notice-provenance.es.md. Ningúnotrowriterprovenance; diseñadorsiguienteGET+privateinventory todavíaACTIVO/docs-only, noactivado. No redispatchTask1 porresumir.
+
+~~~~~~~~~~
+
+## docs/superpowers/progress/2026-11-05-finite-preparation-notice-store.es.md
+
+~~~~~~~~~~diff
+diff --git a/docs/superpowers/progress/2026-11-05-finite-preparation-notice-store.es.md b/docs/superpowers/progress/2026-11-05-finite-preparation-notice-store.es.md
+--- /dev/null
++++ b/docs/superpowers/progress/2026-11-05-finite-preparation-notice-store.es.md
+@@ -0,0 +1,52 @@
++# SDD ledger — plan: docs/superpowers/plans/2026-11-05-finite-preparation-notice-store.md
++
++## Identidad y estado vigente — 5nov2026
++
++PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web (1347578006 PUBLIC). Rama producto feat/finite-native-cleanup-20261101; unidad fuente aislada, cloudGitHub/Actions sin credenciales. Workspace documental autorizado por preferencia cloud del owner; no checkout/deps/build/tests locales. Task1 preparada/ACTIVADA por root después de aceptar D0.4; BASE será el commit contenedor de este ledger y los documentos entregado explícitamente al implementer. No usar51c5 ni4d8 como BASE de esta nueva tarea.
++
++D0.4 complete/reportHEAD9fed36c15411470f22e284b1ba84aefb91f5d153/codef9ee816c, reviewAstrahighPass/Approved0C0I0nuevoMinor. Recibo compañero reviews/2026-11-05-finite-owner-exchange-continuity.es.md. No redispatchD0.1/2/3/4/fanout ni repetir sus matrices.
++
++## Preflight y rulings vinculantes
++
++Root leyó spec17.6k/plan15.4k íntegros y issuer store original. Tabla completa en reviews/2026-11-05-finite-preparation-notice-store-preflight.es.md. Ningún conflicto sin ruling:
++- Ruling: SDD con un writer fresco y review posterior de root; encabezado histórico executing-plans sustituido — continuidad vigente — costo si erróneo: coordinación redundante, no relajación de producto.
++- Ruling: preservar bytes/métodos/SQL/schema antiguos, no el hash invariable del issuer que se amplía — edición es aditiva acotada — costo si erróneo: regresión requiere corrección antes de aceptar.
++- Ruling: proyección ACK D0.4 ya aceptada, no retocar phase/M/SDK aquí — dependencia cerrada distinta — costo si erróneo: no se presume flujo token→avisos.
++- Ruling: sólo fixtureSYN puede alterar un trigger después del preflight para probar comparación de fila en carrera; UPDATE normal debe fallar — schema real inmutable — costo si erróneo: prueba no acreditaría predicado.
++- Ruling: reportar mínimos/empates de ceilings, no aislamiento imposible — techos anidados — costo si erróneo: cobertura sobreatribuida.
++- Ruling: qualifier temporal limitado a esta rama/tres archivos, contents:read, sin secretos y retirado al final — runnercloud ya autorizado — costo si erróneo: root no acepta scope ampliado.
++- Ruling: no compiler estándar extra con imports/mount/deps invariables; sí compilar fixture nativa y reportar número real — pruebas proporcionales — costo si erróneo: nueva edge/defecto obliga validación dirigida.
++
++## Task1 — native fenced notice store
++
++Brief READ FIRST docs/superpowers/briefs/2026-11-05-finite-preparation-notice-store.md (requisitos completos). Report esperado docs/superpowers/reports/2026-11-05-finite-preparation-notice-store.md. Producto exactamente store original, fixtureissuer existente y nuevo testnotice. No segundo writer ni subagentes del implementer. RED causal método ausente después de grant nativo real; GREEN nuevotest+issuer; lint dirigido; fullBASEdiff/reporte/review. Ninguna ejecución acreditada por este ledger de activación. Commit BASE y agente se registran después de readback.
++
++## Límites sin cambio
++
++Caller DATA no es Access/consentimiento humano. Testigo WeakMap no prueba exclusión durable entre stores. SQL en cola debe negar por reloj/cerca/owner/tuple/sequence en sentencia real; ACK perdido puede dejar fila sin éxito y no habilita retry. CLOSE solo no retira grant ni borra evento; reducción real separada mantiene historia. DDL sólo fixture, componente nunca instala schema.
++
++Pendientes después: journal/receptor fijo/provenancia/NoticeLink, fase avisos y tercera preparación CLOSED, own SEND/fullsetup/cleanup/alarma/control/paquete/preflight y UNAocurrenciaPCoffcoordinada. operationalReadiness=false;completePackage=false;PCoff=false. Techo fuente3nov02:59Z vencido. No alias/Entry/DDL/runtime/grant real/OTP/OAuthbrowser/tokens/permisos/cron/Containers/Max/main/merge. No pedir apagar. MinorpreviosD03/fanout diferidos al triagewholebranch.
++
++## Historia / overrides
++
++Los encabezados DESIGN ONLY/INACTIVE en documentos de inspección44d0490a conservan historia: este ledger y el despacho de root con BASE exacto activan exclusivamente Task1source. La referencia del plan a post-tokenACKpendiente es histórica; D0.4 fuente está aceptado arriba y no se reimplementa. No se activa downstream por aceptar o ejecutar este componente.
++
++
++## Despacho efectivamente realizado
++
++Root verificó la rama en BASE7a2a1c1ffa66b21ae0aa8ad7d0a5ef0c4a2441be/árbol616d1e6187e652f07c067683a12b40c564da78d8 y despachó implement_native_notice_store(Solhigh, contexto fresco) como único writer. Informe y revisión pendientes; ninguna prueba nueva se acredita aún. Esta copia de continuidad está en rama docs separada y no añade commits al producto mientras el writer trabaja.
++
++
++## Ruling posterior de contrato — antes de ejecución de regresión
++
++Root confirmó lectura primaria de authority@BASE: revokeGrant hace que el resolver real rechace Monitoring authorization unavailable, no que devuelva enabled:false. Ruling: preservar autoridad; positivo true trasCLOSE + rechazo real trasrevoke + historia intacta; metadata fixture inequívoca resolverRejected/authorizationdenied. Ver reviews/2026-11-05-finite-preparation-notice-store-authority-ruling.es.md. El writer recibió instrucción; no cambio de scope ni ejecución de matrices anteriores.
++
++
++## Review inicial / fix round1 ACTIVO
++
++Implementación inicial entregada78c3bdc6/e7846aa4 con147PASS/lintdirigido y35fixturebuilds. Root leyó primariasRED/GREEN y confirmófinalblobs/qualifierausente/originalesbyteexact. ReviewAstrahighSpecIssues/QualityNeedsfixes:Important1 monitoringFailed no se revalida trasawait, puede emitirse nuevoINSERTo testigo despuésdeACKfallido conocido. No aceptado todavía. FIX_BASE78c3bdc6, originalwriter se reanuda bajo brief fixes/2026-11-05-finite-preparation-notice-store-fix1.md, sólo3casosconcurrentes+5regresionesdirigidas/lint, no147repeat. Mismo reviewer después. Minorwarnings diferido al triagefinal. Ruling: gap real de absorción antes de emisión, no exigir cancelación deSQLyaemitido; no contradice alcance de componenteniamplía autoridad.
++
++
++## Cierre aceptado por root
++
++Task1: fix round1/5 (1addressed0open, commits78c3bdc6..4016c13d); Task1:complete(BASE7a2a..4016c13d, reviewclean). Rootprimarias3roundlogs/scopedreviewImportantADDRESSED/Approved y byteexactoriginales;147initial+8dirigidosposteriores/38fixturebuilds/0standard. Recibo reviews/2026-11-05-finite-preparation-notice-store.es.md. No replay/fix abierto ni fuenteoperativa activa. Minorherramientasyanterioresdiferidos.
+
+~~~~~~~~~~
+
+## docs/superpowers/reports/2026-11-01-finite-material-task1.md
+
+~~~~~~~~~~diff
+diff --git a/docs/superpowers/reports/2026-11-01-finite-material-task1.md b/docs/superpowers/reports/2026-11-01-finite-material-task1.md
+--- /dev/null
++++ b/docs/superpowers/reports/2026-11-01-finite-material-task1.md
+@@ -0,0 +1,74 @@
++# Task4B Task1 — strict finite material codec and actual nominal identity
++2026-11-01 · AFW · SOURCE ONLY · operationalReadiness=false
++
++Status: DONE for this bounded Task1; fresh root review pending. Task4A acceptance is unchanged; full4C/Task5 is not complete.
++
++## Scope and provenance
++PROJECT=Agent Friendly Web; REPOSITORY=tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT=isolated source branch; ORIGIN=https://github.com/tokenizartinfo-ops/agent-friendly-web; RESOURCE_TYPE=Git objects/branch and hosted Actions qualifier; RESOURCE_ID=feat/finite-native-cleanup-20261101; ALLOWED_ACTION=bounded source/tests/docs commits plus branch-push qualification. ROLLBACK=preserved BASE and parent history; no runtime mutation or history rewrite.
++
++- BASE: 9304b0b066f32340e21be0331fc1f6628029631a.
++- Hosted RED: 9939d1e34d0b07749b8e22b555c40e63df73d8f3.
++- Initial implementation: adc60db9bfe8c66e7a5d0d9d78450ec90f11f373.
++- Qualified code HEAD: efe382046a4478da36f6405d71fd3301e7d0bb36; source tree a780d6dd110db8c5466db1bd0753a6d81a41655c.
++- Documentation checkpoint: recorded in the final documentation receipt below; this source qualification does not imply a runtime release.
++
++The branch lease began at the exact BASE and every ref update uses expected_sha CAS. Existing branch changes remain ancestors. Implementation used connected GitHub tools and hosted Actions only: no local source files/clones, dependencies, builds or runtime processes. No additional agent was spawned.
++
++## Implemented interfaces
++New pure lib/mcp-qa-finite-seed.mjs exports:
++- encodeFiniteMaterialSeed(seed): canonical envelope string.
++- decodeFiniteMaterialSeed(text): immutable {seed,seedHash}.
++- validateFinitePackageManifest(value): immutable structural manifest copy.
++- encodeFinitePackageManifest(value): canonical manifest UTF-8 string.
++- hashFinitePackageManifest(value): lowercase64hex of afw.finite-native-manifest.v1 plus newline and canonical manifest.
++
++The two manifest encode/hash helpers are the root's specific adjacent-Task2 interface clarification, now added to the brief. All five exports share private structural validation and canonicalization, with no generic caller schema or I/O/authority. Task2 resolver and4C builder can consume these exact names without duplicating canonicalization or fabricating a dummy seed.
++
++Own-data snapshots reject accessors without invoking them, nonplain prototypes, prototype keys, symbols, sparse/extended arrays and unsafe/nonfinite numbers; immutable output never freezes/mutates caller objects. Canonicalization ASCII-sorts object keys, preserves array order and uses compact UTF-8 JSON without normalization/newline. Exact decoder roundtrip rejects noncanonical bytes and duplicate keys, including escaped duplicates, because duplicate-key bytes cannot equal the unique-key canonical projection. Seed and manifest use the new independent domains; existing intent/plan/control hash algorithms are unchanged.
++
++Exact schemas/fixed values, five role descriptors, historical per-descriptor source provenance, module index.mjs/cap3145728/ASCII sorted unique exports<=128, true structural compatibility assertions, envelope32768/manifest24576 UTF-8 bytes, depth12/nodes2048 are enforced. Manifest source revision equals seed source revision; historical descriptor pins are not relabeled. Both digests are independently recomputed. ZIP code and actual package resolution are absent from this task.
++
++workflows now has exactly confirmation and bootstrap in trial-control and external-plan validation/projection. Fictitious nominalRunId and its inequality with finalizer.runId are removed; legacy added nominalRunId is rejected as an unknown field. Actual nominal remains the existing native NamedConfirmation identity. Exact finalizer repository/run/attempt/job/workflow/source/ready-step validation remains; mismatching primary run/attempt/job/repository/workflow regressions block prepare/nominal.
++
++The shared finite fixture regenerates only candidate canonical material under the corrected schema. One obsolete invalidity test now rejects zero finalizer run rather than equality to a fictitious nominal GHA run. No historical record/claim/effect/hash is migrated or reinterpreted.
++
++## Hosted RED/GREEN and scoped lint
++Temporary qualifier .github/workflows/finite-task1-temporary-qualifier.yml triggers push only on the isolated branch, contents:read, checkout exact github.sha/persist-credentials:false, Node22, eight-minute bound. It references no secrets or protected environment and MUST BE EXCLUDED from integration.
++
++Hosted install command: `npm ci --ignore-scripts --no-audit --no-fund`.
++
++Exact required RED and GREEN command:
++```sh
++node --test test/mcp-qa-finite-seed.test.mjs test/mcp-qa-finite-phase-inventory.test.mjs test/mcp-qa-finite-trial-control.test.mjs test/mcp-qa-finite-trial-control-native.test.mjs test/mcp-finite-nominal-control.test.mjs
++```
++Directly affected external-plan consumers:
++```sh
++node --test test/mcp-qa-finite-finalizer.test.mjs test/mcp-qa-finite-http.test.mjs
++```
++Scoped lint:
++```sh
++npx eslint lib/mcp-qa-finite-seed.mjs lib/mcp-qa-finite-trial-control.mjs lib/mcp-qa-finite-external-contract.mjs test/mcp-qa-finite-seed.test.mjs test/mcp-qa-finite-phase-inventory.test.mjs test/mcp-qa-finite-trial-control.test.mjs test/fixtures/qa-finite-trial.mjs
++```
++
++| Stage | Commit | Run / job | Observed result |
++| --- | --- | --- | --- |
++| Intended RED | 9939d1e34d0b07749b8e22b555c40e63df73d8f3 | [41337195445](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41337195445) /124939411150 |86tests:31PASS,55expectedFAIL,0SKIP. Codec module absent; corrected fixture rejected by old nominalRunId validators. Lint expectedly reports absent codec file. |
++| First implementation | adc60db9bfe8c66e7a5d0d9d78450ec90f11f373 | [41337288416](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41337288416) /124939688639 |160focused+47external-consumer PASS,0FAIL,0SKIP. Lint found one @next/next/no-assign-module-variable diagnostic. |
++| Final GREEN | efe382046a4478da36f6405d71fd3301e7d0bb36 | [41337388559](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/41337388559) /124939980962 |160focused+47external-consumer=207PASS,0FAIL,0SKIP; scoped lint0errors/0warnings; job success. |
++
++Lint correction renamed only the local descriptor binding module to mod; no semantic changes. Final workflow logs and job steps were fetched and checked before completion. Focused tests include actual hosted Miniflare/workerd DO reconstruction/alarm checks with synthetic primaries, as well as independent canonical digest roundtrip, strict schema/private-field/malformed-key/type/numeric/export/hash/size/accessor regressions and no input mutation. Full suite/build/Task4A were not rerun; these are source checks, not live custody/installed binding evidence.
++
++## Preserved boundaries and negative absence regression
++lib/mcp-fixed-terminal-workflows.mjs is byte-identical to BASE: blob e612bce91071264520f5471911405662641d4c24. lib/mcp-qa-finite-source.mjs is unchanged/unavailable: blob36ff3e3c7e1b07bf1ce746ca375fcc6e46103802. Exact blob readback at qualified code HEAD confirmed both.
++
++New phase-inventory regression keeps missing nominal blocked at arm, nominal, canary_restore AND qa_restore. Existing full inventory and terminal checks remain; active nominal blocks both restores and observer must complete at QA restore. The test's existing-instance control proves test transport validity; there is no positive absent-nominal authority. No arm-absence implementation, evidence brand/minter, new journal or SEND producer was introduced. Task1's nominal permission claim remains distinct from the future child-create SEND journal.
++
++Original T0/N1/C0/C1/R1,180000ms preparation margin, native event/wrapper interfaces, provider event/70s and nested5s/20s leases and effect history are unchanged. No reset/replay/refund/new occurrence is authorized or spent.
++
++## Remaining work / limitations
++Codec acceptance proves syntax and hashes only; compatibility=true fixtures do not qualify actual exports/classes/configuration/profile/binding semantics. Actual artifact package creation/profile/native source factories/producer/receiver/full route remain4C; child-create SEND inventory/launcher belongs4C/Task5. Package resolver/ZIP and seed transport/once issuance/adoption belong later4B tasks. Source-compiled finite default stays unavailable.
++
++No CF/private/provider probe, deployed runtime, real command/trial, token/custody/policy/role/credentials/OAuth/DDL, public/main merge, Max or PC-off operation was performed. No semantic profile or operational readiness claim follows from these207 synthetic/source checks. Root owns fresh scoped review, final broader qualification and any integration; this agent stops branch writes after documentation receipt.
++
++## Documentation HEAD receipt
++Exact documentation checkpoint HEAD: b9fa66530721618f8a63af9158223e9e857db11c (parent qualified code efe382046a4478da36f6405d71fd3301e7d0bb36). The final documentation-only receipt commit adds this exact checkpoint to report/ledger; its SHA is returned to root by CAS readback as the final branch HEAD. Neither documentation commit changes source, tests, workflow or the207-test qualification. Root's review compares BASE9304b0b066f32340e21be0331fc1f6628029631a to that final receipt HEAD.
+
+~~~~~~~~~~
