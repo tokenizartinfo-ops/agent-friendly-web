@@ -1,3 +1,4 @@
+import {monitoringCleanupScenario} from './fixtures/finite-owner-cleanup.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {recoverCheckpoint,observeOriginalAlarm,writeCleanupEvidence,principalName} from './fixtures/finite-owner-cleanup-persistence.mjs';
@@ -20,4 +21,21 @@ test(principalName,async t=>{
  assert.equal(f.providerRegistry.pointer.versions[0].version_id,f.plan.baselineVersionId);
  const row=facts.rows.find(([k])=>k.startsWith('afw.finite-owner-cleanup.v1:')&&k.endsWith(':receipt'));assert(row,'original cleanup receipt');
  const receipt=JSON.parse(row[1]);assert.equal(receipt.businessAccessClosed,true);assert.equal(receipt.sdkReductionReturned,true);assert.equal(receipt.globalNativeDrainVerified,false);assert.equal(receipt.sdkNamespaceEmptyVerified,false);
+});
+
+test('R2 native monitoring revoke binds original consent and preserves unrelated rows',async t=>{
+ const r=await monitoringCleanupScenario(t,'normal');assert.equal(r.rejected,false);assert.equal(r.result.status,'applied');assert.equal(r.after.length,3);assert.deepEqual(r.after.slice(0,2),r.before);assert.equal(r.result.row.grant_id,r.before[1].grant_id);assert.equal(r.result.row.action,'revoke');assert.equal(r.result.row.issued_at,r.result.row.expires_at);assert(r.result.row.issued_at>=r.at);assert.equal(r.noUpdate,true);assert.equal(r.noDelete,true);
+ const reads=r.events.filter(e=>e.sql?.includes('SELECT v.*'));assert(reads.length>=2);for(const e of reads)assert.equal(r.events.find(x=>x.sid===e.sid),e,'fresh first-primary SELECT');
+});
+test('R2 native monitoring revoke preserves prior withdrawal',async t=>{
+ const r=await monitoringCleanupScenario(t,'prior');assert.equal(r.rejected,false);assert.equal(r.result.status,'already_withdrawn');assert.deepEqual(r.after,r.before);assert.deepEqual(r.result.row,r.before.at(-1));assert.equal(r.writes,0);
+});
+test('R2 native monitoring revoke rejects foreign revision and sequence',async t=>{
+ for(const mode of ['revision','sequence']){const r=await monitoringCleanupScenario(t,mode);assert(r.rejected||r.result?.status==='no_mutation');assert.deepEqual(r.after,r.before);assert.equal(r.observed,null);}
+});
+test('R2 native monitoring revoke enforces native C1 and child window',async t=>{
+ for(const mode of ['C1','window']){const r=await monitoringCleanupScenario(t,mode);assert(r.rejected||r.result?.status==='no_mutation');assert.deepEqual(r.after,r.before);assert.equal(r.observed,null);}
+});
+test('R2 native monitoring revoke unknown acknowledgement cannot become observed',async t=>{
+ const r=await monitoringCleanupScenario(t,'unknown');assert.equal(r.rejected,true);assert.equal(r.result,null);assert.equal(r.after.length,r.before.length+1,'actual native append survived lost response');assert(r.send);assert.equal(r.observed,null);assert.equal(r.retryDenied,true);assert.equal(r.writes,1);
 });
