@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      QUALIFICATION_MODE: red
-      SOURCE_REVISION: 85eee832e779df310f14423ceec637ef459b0dd2
+      QUALIFICATION_MODE: green
+      SOURCE_REVISION: 17c6f08f9e0b76a6ac239be05f5d887e37c49d8c
       AFW_RETENTION_EVIDENCE: evidence/bundles
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 85eee832e779df310f14423ceec637ef459b0dd2
+          ref: 17c6f08f9e0b76a6ac239be05f5d887e37c49d8c
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -78,7 +78,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: native-body-retention-red-85eee832e779df310f14423ceec637ef459b0dd2
+          name: native-body-retention-green-17c6f08f9e0b76a6ac239be05f5d887e37c49d8c
           path: evidence
           retention-days: 7
           if-no-files-found: error
