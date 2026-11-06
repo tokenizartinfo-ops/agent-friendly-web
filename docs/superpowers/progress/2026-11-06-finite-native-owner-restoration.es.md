@@ -114,3 +114,23 @@ Root verificó el rango COMPLETO: 25 commits, cada uno con único padre anterior
 Paquete íntegro de review: docs/superpowers/reviews/2026-11-06-finite-owner-restoration-task1-package.md, Rootdocs73dcb07e19f2a6be38cc33eb7e108f090fe9ae0d / blob91844e3f87b0b6d2a18b77a32948a607d9fd28fe /162836chars. Incluye25 commits, nueve diffs U10 BASE..HEAD y snapshots inmutables de qualifiers; ningún HEAD~1. Creación, padre único, contenido, blob y ref comprobados.
 
 Reviewer fresco finite_owner_sdk_reference_review (Astrahigh/forknone), READONLY, recibió brief/reporte/paquete y constraints exactos. Sin helpers ni reruns de pruebas. Task1: REVIEW ACTIVE, todavía no aceptada. Task2: NOTSTARTED, solo borrador en memoria para su preflight. No Source writer activo durante review.
+
+## Task1 complete; Task2 preflight and dispatch ready
+
+Task1: complete (commits7aab233..2c6b5a0, independent spec+quality approved, Critical0/Important0/Minor4 tracked). Acceptance Rootdocs40ebf3aa6d9982139f6507336bf352e27c5e9a4f/blob9896fc376075f5fd1bd544864dac8469a25c8692. Root resolved Cannot verify under the installed reference: expired-C0 consumption, cross-isolate late writes and restoration belong to Task2 explicitly; no missing Task1 deliverable confirmed. No Source fix loop or old-wave rereview was opened.
+
+Task2 execution BASE2c6b5a0eb503b8d877158f85832c510b9a45f7ca/tree57ac1355a85560dee14b2f933b4b68f877911ae2,3173 leaf entries. Whole-plan review BASE stays7aab233. Plan updated/verified at57827023b4ed9ba38470079381a040cac1fc0000/blobbcc66a841f4459b9696d267c89b75185af524e67,30871chars. Task2 brief verified atf7fcd6d50ad28a15abb7a8f92bf1856f9b5f069b/blob1744eb5b9dda84a7c279520af8260aa73bf204a8,28219chars. Single requirements source: docs/superpowers/briefs/2026-11-06-finite-owner-restoration-task2.md.
+
+| Preflight pair/risk | Finding and ruling | Cost if wrong |
+| --- | --- | --- |
+| Producer mode vs persistence | firstConnection uses exact equality; persistence only suffix restart. A renamed mode loses producer. Permit explicit opt-in persistence/current mounted-options checkpoint in existing harness; optional small persistence fixture. | Cold reload may fail; never recreate/seed lineage to hide it. |
+| Existing restart vs native identities | Existing restart selects wrong default worker for first-connection and earlier options. JobB must load preserved exact scripts/bindings/IDs/native files, reattach only fixed SYN provider implementation. | Hash/identity mismatch aborts, not fresh I0. |
+| Native principal vs clock helpers | f.alarmAt/initialAlarmAt/ownerRead patch clock. Prohibit them for principal; original runtime alarm at real C0/native DB time. | Failed lab is reported, no native claim from simulation. |
+| New SQL vs inherited regression | Nine old issuer tests cannot cover new monitoring-revoke SQL. Add five fixed native SQL component cases in new native test, preserving old issuer fixture. | Extra scoped runtime before I0; budget gate must reject if too late. |
+| Group count vs C0/C1 | GREEN49=contract12+Task1contract10+issuer9+initial2+newSQL5+principal1+matrix10;38 before I0 in A, untouched principal first in B, labeled native replicas under original C1. | Adjust lab grouping with Root only after concrete measurements; never widen clocks. |
+| Late KV vs matrix order | Case needing pre-C0 callback may preload/arm its isolated replica narrowly before C0, assess after untouched principal. No15min business Root or retiming. | Fail premise if callback/window not valid; no pass for pre-target denial. |
+| Shared readonly module vs cleanup extension | Preserve Task1 public signatures/semantics; if readonly queue/lease/native-boundary behavior must change, name need to Root before edit/qualification so dependency checks and grouping remain proportional. | Affected behavior needs fresh scoped checks; old16 is not evidence for changed code. |
+| Opaque authority vs persisted restart facts | New invocation freshly qualifies native facts; historical observed rows are dated evidence, missing ACK stays unknown; no WeakMap deserialization. | Recovery unable to qualify remains admin_pending. |
+| Source isolation vs heavy local tooling | Existing cloud branch/GitHub/Actions only; fresh sole writer, no local clone/build/deps. | CAS/ref mismatch stops own work preserving interference. |
+
+Task2 is READY FOR DISPATCH, not implemented. Fresh implementation model Astra high chosen for multi-file native lifecycle/persistence/concurrency judgment; no helpers. Root will record identity and require minimal-seam/timing ACK before Source writes. No new human step, credentials or live test window needed. Parent/child/C0/C1/three slots and Source ceiling remain unchanged; operationalReadiness/completePackage/PCoff false.
