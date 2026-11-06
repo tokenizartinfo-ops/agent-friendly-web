@@ -149,7 +149,7 @@ for(const mode of ['receipt-transaction-lost','receipt-sync-lost','receipt-readb
 for(const mode of ['upload-held','activation-held','upload-read-held','upload-cancel-held','source-sql-held','enrollment-transaction-held','enrollment-sync-held','upload-ack-held','receipt-transaction-held'])test('T3 retained work blocks a different live root: '+mode,{timeout:120000},async t=>{
  const f=await fixture(t);await f.stub.firstConnectionConfigure(mode);const pending=approveFirstConnection(f);
  const which=['upload-held','activation-held'].includes(mode)?'fetch':mode==='upload-read-held'?'read':mode==='upload-cancel-held'?'cancel':'work';
- await waitFirstState(f,s=>s[which+'Held'],'held '+which,true);
+ const heldState=await waitFirstState(f,s=>s[which+'Held'],'held '+which,true),boundary=heldState[which+'Boundary'];assert.equal(boundary.originalMethod,mode==='source-sql-held'?'GET':'POST');assert(boundary.enteredAt>=boundary.startedAt&&boundary.enteredAt<boundary.deadline,'actual held boundary entered while its original request lease was live');console.info('T3 actual held entry',JSON.stringify({mode,...boundary}));
  const response=await pending;assert.notEqual(response.status,200);await response.body?.cancel();
  const other=await plain(f.stub.firstConnectionAvailability());assert.equal(other.live,true,'different root is genuinely still live');assert.equal(other.available,false,'actual retained native work owns scope');
  assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');
