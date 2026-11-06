@@ -123,7 +123,7 @@ async function firstSettled(f){
 async function failureCase(t,mode){
  const f=await fixture(t);await f.stub.firstConnectionConfigure(mode);
  const response=await approveFirstConnection(f);assert.notEqual(response.status,200,mode);await response.body?.cancel();
- const probe=await readFirstConnectionProbe(f);assert.equal(receipts(probe).length,0,mode);return {f,probe,state:await plain(f.stub.firstConnectionState())};
+ const state=await plain(f.stub.firstConnectionState()),probe=await readFirstConnectionProbe(f);assert.equal(receipts(probe).length,0,mode);return {f,probe,state};
 }
 for(const mode of ['enrollment-transaction-lost','enrollment-sync-lost'])test('T3 enrollment unknown cannot upload: '+mode,{timeout:120000},async t=>{
  const {f,probe,state}=await failureCase(t,mode);assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);assert(state.trace.some(v=>v.key==='afw.finite-preparation-cleanup.v1:enrollment'&&v.kind==='put-settled'));assert(probe.rows.some(([k])=>k==='afw.finite-preparation-cleanup.v1:enrollment'));assert.equal(effectRows(probe).length,0);const factual=await plain(f.stub.firstConnectionContext());assert.equal(factual.source?.phase,'closed_ui');assert.equal(factual.source.currentPublication.stage,null);const source=(await plain(f.stub.capsuleFacts())).material.ownerSelection,fresh=await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':await f.enrollmentToken(source)}});assert.notEqual(fresh.status,200,'genuinely fresh signed choice cannot resume enrollment');await fresh.body?.cancel();assert.equal(f.uploads.length,1);assert.equal(effectRows(await readFirstConnectionProbe(f)).length,0);
@@ -230,7 +230,7 @@ test('T3 own completion requires genuinely recorded original ACK even when forei
 });
 
 for(const mode of ['clock-backward','source-holder-drift','upload-holder-drift','activation-holder-drift','upload-metadata-id-drift','upload-db-method-drift','upload-db-prepare-drift','upload-node-method-drift','upload-self-method-drift','upload-kv-method-drift','upload-fetch-drift','upload-credential-drift'])test('T3 original deadline and holder references remain original: '+mode,{timeout:120000},async t=>{
- const {f,probe,state}=await failureCase(t,mode);assert.equal(mode==='clock-backward'?state.backward:state.holderChanged,true,'actual native guard boundary reached');
+ const {f,probe,state}=await failureCase(t,mode);assert.equal(mode==='clock-backward'?state.backward:state.holderChanged,true,'actual native guard boundary reached');if(mode!=='clock-backward')assert.deepEqual(state.afterDriftIo,{get:0,list:0,db:0,node:0,self:0,kv:0,fetch:0},'changed original holder cannot invoke the next native factual read');
  assert.equal(f.uploads.length,['clock-backward','source-holder-drift'].includes(mode)?1:2);assert.equal(f.activations.length,mode==='activation-holder-drift'?2:1);
  assert.equal(effectRows(probe).filter(([key])=>key.endsWith(':ack')).length,mode==='activation-holder-drift'?1:0,'changed original holder cannot produce ACK');if(mode!=='activation-holder-drift')assert(!effectRows(probe).some(([key,raw])=>key.endsWith(':send')&&JSON.parse(raw).effect==='activation'),'changed original holder denies activation SEND');if(['clock-backward','source-holder-drift'].includes(mode))assert.equal(ticketUses(probe).length,0);
 });
