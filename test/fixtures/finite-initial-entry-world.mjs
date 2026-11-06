@@ -256,6 +256,20 @@ export async function initialEntryHarness(mode='normal',{negativeProfile=false}=
     if(mode===role+'-expired')result.expires_on=new Date(Date.now()-1).toISOString();
     if(mode===role+'-not-before')result.not_before=new Date(Date.now()+60000).toISOString();
    }
+   // Negative-only corruption of the actual fixed provider READ response.
+   // Registry artifacts and native POST results remain their genuine originals.
+   if(firstConnection&&f.connectionReadbackFault&&f.uploads.length>1){
+    const fault=f.connectionReadbackFault,stage=f.activations.length===1?'upload':'activation',pointer=req.url===CF+'/workers/scripts/agent-friendly-web-delegated-canary/deployments?per_page=1',candidate=req.url===CF+'/workers/workers/agent-friendly-web-delegated-canary/versions/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa?include=modules';
+    if(fault.startsWith(stage+'-')&&(pointer&&['upload-pointer','activation-pointer','activation-percentage','activation-version'].includes(fault)||candidate&&['upload-module','upload-config','activation-config','activation-secret'].includes(fault))){
+     f.connectionReadbackHits=(f.connectionReadbackHits??0)+1;
+     if(fault.endsWith('-module'))result.modules[0].content_base64='AAAA';
+     if(fault.endsWith('-config'))result.bindings.find(binding=>binding.name==='ACCESS_AUD').text='SYN readback mismatch';
+     if(fault==='activation-secret')result.bindings.find(binding=>binding.type==='secret_text').text='SYN negative secret metadata';
+     if(fault.endsWith('-pointer'))result.deployments[0].id='dddddddd-dddd-4ddd-8ddd-dddddddddddd';
+     if(fault==='activation-percentage')result.deployments[0].versions[0].percentage=99;
+     if(fault==='activation-version')result.deployments[0].versions[0].version_id='55555555-5555-4555-8555-555555555555';
+    }
+   }
    value={success:true,errors:[],messages:[],result};
   }
   return respond(value,{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString(),'x-ratelimit-remaining':'60'}});
