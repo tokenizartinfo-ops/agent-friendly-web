@@ -418,3 +418,16 @@ Plan2tareas:1 SDKreferenceproducer/readonlyboundedfacet/codecjournalobserver;2co
 Task1brief: docs/superpowers/briefs/2026-11-06-finite-owner-restoration-task1.md enRootdocsc1f69a88a055dd24430b51d0362e50736f17797e/blob40132fe17ea56ecef675324a5edd3f8de2c73892 (14962chars). BASE7aab/tree6eb4241f confirmadoantesdespacho. ÚnicoSourcewriterACTIVE finite_owner_sdk_reference_impl Solhigh/forknone; nohelpers/reviewerpropio. Root sóloRootdocsmientrastrabaja. ReportfutureSource reports/2026-11-06-finite-owner-restoration-task1.md. RequerimientoscausalREDprincipalSDKrealnoReference→GREEN10contract+6native/lint/graph,qualifier1job≤15min/phase,NOesperaC0enTask1. ReviewindependienteRootdespuésSTOPwrites,fullBASE→HEADpackage, noTask2automáticodesdeimplementer.
 
 Whitelistreferidaenbrief;pendingrequestsdearquitecturavienenalRoot, noOwner. No clon/git/deps/build/tests/temporaleslocales. Source7aabnodecurrentreader7aabchunksprotected. Fuente3Nov02:59vencida/Root30s/child5s/C0C1/3slotsinalterados. NoactualGHA/CFcredentialpermisos/OAuth/OTP/runtime/Container/consumer/cron/Max/supportmail/merge. operationalReadiness=false;completePackage=false;PCoff=false.
+
+
+## ACTUAL — 6 nov 2026: Task1 aceptada; Task2 native-C0 RED en curso
+
+Fuente única de continuación actual: docs/superpowers/progress/2026-11-06-finite-native-owner-restoration.es.md (leer sección CURRENT). Task1 SOURCE/SYN completa en2c6b5a0eb503b8d877158f85832c510b9a45f7ca, revisión independiente aprobada; no repetirla ni la corrección previa de body retention. Final16/16, lint8, artefacto13535307870/readback32archivos/seisgrafos; cuatro Minor conservados, sin Important/Critical.
+
+Task2 ACTIVE con único escritor finite_owner_cleanup_impl (Astra high), después de resolver preflight sin Source writes. Brief vinculante actualizado50986e7a6d8e14a9091a72416a2428bdea35dfc2/blob992cb0a2a4b785ade35f97abb017074e944d729c; plan/rulings32833cd81e7e84f8d835f83a97da0ebdc62a6408. Final GREEN planeado51 casos en seis pares de calificación SYN, tres lanes independientes; no todos bajo un mismo C1.
+
+Primer RED g0 en Source474e58189802bd62aa2ddb2febee196b67c435e0/tree61a90927edd2cd41a813d517f67a19344c7f2080; run42289097871, prepare_g0 job128137518701 observado en curso. Solo fixtures/test/persistencia/qualifier modificados; producción BASE2c6b5a0 intacta. Se produce estado real SDK/SQL/DO/KV SYN, dispone/flush y espera al C0 original; consumidor independiente cargará mismos archivos/scripts/IDs y observará alarma nativa. Source congelada hasta terminal; todavía no hay RED causal aceptado ni implementación Task2 terminada.
+
+Hechos para posterior calificación de rendimiento: docs/superpowers/reviews/2026-11-06-finite-performance-facts.es.md en80a0ff1d7a6c902b6d57962b44b14f433a304564. No optimización aplicada ni margen real asumido.
+
+No navegador, OTP, secreto o ventana humana abierta. Sin lectura/mutación del runtime real en este bloque. Source ceiling vencida; operationalReadiness=false, completePackage=false, PCoff=false. Aún faltan Task2, revisión final del delta, estados/handoff posteriores, evidencia vigente de fuente/custodia/proxy/proveedor y el único ensayo real coordinado PC-off. Max sigue pendiente.
