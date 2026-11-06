@@ -172,3 +172,10 @@ operationalReadiness=false; completePackage=false; PCoff=false. Fuente3Novvencid
 Actions42212217715/head1945fdccae8fa4f1a0a27f3d780d8be3c71c7b08, job127873373491: initial material_recorded→mount-ready reales, principal “T3 same initial bytes produce connection and downstream” falla503!=200 en primera choice pendiente, 8667.947ms. Root leyó logprimario22935chars; nofallo decompilación/fixture ynoGREENfabricado. Nodeinformó2tests/1pass/1fail, peroelpass fuearchivoT4sinmatchT3: seexcluye comoevidenciafuncional. Writerreporta artifact13500215579/digestca41b9550902e9e40f88ae2bd6cae35bac34bcf841b1eb0e74ccb50798bf99fe/7d; RootnoinspeccionóZIPtodavía. Qualifier inspeccionadoRoot:1job15min/contentsread/persistfalse/nosecrets/pipefail/7d.
 
 Writer continúa implementación ymedición original, NOreportefinal/aceptación; RootnoescribeSource. No repetirRED paraobtenerverde ni considerarparcialconnectioncomotareaTask3completa: faltandownstream/matriz/GREEN/review. RestoAutorizaciónBaseyreadinesssin cambios.
+
+
+### Ruling Task3 — Access menor (6nov2026, durante implementación)
+
+Ruling: “Access menor” exige respetar el vencimiento firmado más corto y denegar al cruzarlo, no inventar vida mínima ni negar toda identidad válida con vencimiento menor que C0 — P9 ya usa expiresAt=min(ticket,identidad actual,techos originales) y ese contrato se preserva — si esta interpretación es incorrecta, falta precisar/revalidar un requisito de vida mínima de producto; no se amplían techos ni autoridad por esta decisión.
+
+Matriz: identidad firmada válida al entrar cuyo vencimiento corto se cruza antesdeTicketUse/admission debe dejarTicketUse0/SEND0, observando frontera causal; JWT yaexpirado alentrar esotrocaso ynoúnicacobertura. Si vence despuésdeTicketUse, conservar hechos ydenegar siguienteefecto en grupoTiempo, sinborrarhistoria. Historialconsumido noescausaAccess. Verificar éxitoacotado de vida menorytimestimestamps estrechados cuando corresponda, sin sleeps/renovación/productclocksnuevos. Writer recibió ruling; reporteloexplicita; reviewfresco pendiente.
