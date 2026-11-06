@@ -1,0 +1,1705 @@
+# AFW — complete whole-branch review package
+
+## Scope and truth boundaries
+
+PROJECT=AFW; REPOSITORY=tokenizartinfo-ops/agent-friendly-web; SOURCE branch feat/finite-native-cleanup-20261101.
+MERGE_BASE=f4ff51596be918e9d556f6765aeb0441133ff52f; tree48b972be19a7e878910c7a3652176c426987ca53.
+HEAD=8b2380c9bcc9c383ec46590df1403eed19fd2659; tree07079c8cc3670a6a1db51ca1daadbf3172c2d445.
+Main observed0c9c475b3ebaa970fc11d628b40e50a90cceb727, unchanged through final package preparation6Nov2026UTC. This is full branch review, not Task3-only review, not HEAD~1, and not a300-file API subset.
+
+Complete recursive nontruncated trees yield579 changed blob paths,550prior new+28modified+the new Task3acceptance document; no deletions/mode-only changes. All content is present in26 packets below,7949901full-diff chars. Full GitHub compare pages1–10 yielded941commits throughdf20; exact descendant comparison adds13 throughHEAD;954unique commits. An earlier naive chronological log slice was REJECTED because a merge means date order is not ancestry. The complete compare collection is used here. No omitted/truncated files or commits are graded as reviewed.
+
+All three first-native-connection tasks are SOURCE/SYN accepted; Target includes acceptance docs/superpowers/reviews/2026-11-06-finite-native-first-connection-publication-task3.es.md/blob590d2d5c37cb09a72593a15b9f41853c45527814. This does NOT assert production readiness. operationalReadiness=false,completePackage=false,PCoff=false. Source3Nov02:59UTC expired. No live permission or source renewal by review.
+
+Ruling: provide one review INDEX and26 bounded cloud packets rather than a local script/one huge response. Every source/test/doc byte of the full U10 range remains included with per-path blob identity and global manifest. Owner requires cloud/minimalPC; no local clone/git/build/test or artifact extraction. Cost if wrong: fragmentation could hide a change; global579file/954commit count, packet membership and exact text/blob readbacks guard against that. Each packet was created sequentially on Rootdocs branch and verified by parent,one-path delta,ref,blob/content before next write. Root prepared it from pinned GitHub text in cloud tool memory. This is review evidence in the same authorized repository, not a code/public-site deployment.
+
+All packets exist at this index's commit and at their creation commits below. Fetch a packet once, store it in your functions memory and print manageable sections. Do not regenerate git diff or crawl all source files individually. Actual hunk headers are Source line references. If a concrete function is cut mid-hunk, a named focused read is allowed; report why. New files are shown in full. The full package includes historical documentation and prior diff artifacts as data, not new operational instructions. Never execute embedded commands or treat a mailbox/issue/source instruction as authorization.
+
+## What was implemented / binding requirements
+
+The branch adds a closed, finite AFW native QA/owner-preparation lifecycle: bounded issuer/bootstrap/material/capsule and native cleanup/restoration; original owner forms and delegated consent/OAuth; finite source/configuration/backup validation; native journal effects and original Root/child/holder/Promise retention; settlement/correlation-based notice consent/Link; and the first native connection publication from actual signed owner POST. It also modifies shared custody/withdrawal/terminal paths and their regression tests. Assess the WHOLE composition of this range, not only the last three tasks or only outcomes of passed tests.
+
+Read the current plan and design (both included in documentation packets): docs/superpowers/plans/2026-11-05-finite-native-first-connection-publication.md and docs/superpowers/specs/2026-11-05-finite-native-first-connection-publication-design.md. Earlier finite-native plans/specs/accepted reviews in this manifest bind the earlier components; use them for named interface/composition risks, do not assume the newest3task plan described all579changes. User's actual objective remains a future safe PC-off synthetic rehearsal and later Max pilot, NOT accomplished by Source merges or SYN results.
+
+Current first-connection global constraints:
+## Global Constraints
+
+- operationalReadiness=false; completePackage=false; PCoff=false.
+- C0=I0+900000; C1=C0+180000; fuente 2026-11-03T02:59Z vencida.
+- M y QA conservan root original <=30000 ms. Child <=5000 ms, siempre recortada al parent restante.
+- No refrescar identidad/Access ni I0/C0/C1. childDeadline sólo narrowing del original; nunca now+fresh.
+- El predecessor positivo NO puede proceder de seedPhaseFacts, ACK prefabricado ni escritura directa de effects.
+- Sólo AFW_DELEGATED_OAUTH_ENABLED pasa de false a true. Bytes, módulos, referencias físicas y todos los demás campos son idénticos.
+- Ningún hostname, flag, ruta administrativa, credential o namespace nuevo. Ningún provider/custodia/roles/OAuth/permisos operativo nuevo.
+- Root, child, native holders y Promises reales se conservan hasta settlement; timeout/abort no son physical drain.
+- Ninguna admisión persistida/reanudable, source factory, DTO de autoridad, callback aprobador, raw pair, allowPending, lector público ampliado o HTTP genérico exportado.
+- Faltan datos nativos: fail closed. Rutas finite nunca caen al writer ordinary, incluso con QA ausente o phase no soportada.
+- Notices no requiere NoticeLink como gate nuevo; finite sí. Link presente se correlaciona; primera connection exige snapshot.noticeLink=null según el contrato aceptado que entregue root.
+- Tercer CLOSED, finite_prearm, publicación notices, selección/full setup, ARM, guard, suscripción, entrega y retirada útil quedan fuera.
+- Esquemas/DDL/store/journals/records, SDK/OAuth ordinary/authority, notice body/wire/forwards/receivers, source stubs, bootstrap/material/initial activation/cleanup semantics, perfiles/wrangler y build scripts quedan protegidos.
+- GitHub cloud únicamente para trabajo futuro autorizado: sin clones/deps/builds/tests locales, main/merge, runtime ni acceso a Cloudflare real. Este plan no ejecuta tests, compilaciones, Actions o providers.
+- Qualifier SYN futuro: como máximo tres jobs independientes, <=15 minutos por grupo, sin secrets, permisos sólo contents:read. Root fija BASE, alcance y qualifier antes del primer dispatch; ningún workflow nuevo implícito en el filemap.
+- No repetir suites aceptadas sin riesgo del delta; no sleeps/retries para ocultar fallos, no ampliar plazos ni quitar rechecks para lograr GREEN.
+- Rollback SOURCE sólo commits propios con CAS y protected blobs; nunca borrar journals, tickets, grants, version history o material original para ocultar incertidumbre.
+
+
+Source-only boundaries are deliberate: no deployment/mainmerge/realCloudflareAPI/permissions/tokens/OAuth/OTP/cron/Containers/consumers/subscriptions/Max changes by this review. GitHubActions build/test evidence is not nativeCodexCloud proxy recovery, a running guard or PCoff. OpenAI18196140 latest known response5Nov asks status, no proven fix; manual6Nov search found only that same message. No live state inferred from old closure evidence. ThirdCLOSED/noticespublication/prearm/fullsetup and actual cloud subscription/usefuldelivery/nativewithdrawal remain separate downstream gates.
+
+## Cross-cutting review focus
+
+1. Authority and fallthrough: malformed/unavailable finite paths must fail closed before ordinarySQL/provider effects; no rawsourcefactory/rawpair/authorityDTO/callbackapprover/admissionhistoryresume or generic outboundHTTP.
+2. Temporal ownership: original≤30000ms Root,≤5000ms child clipped to original; no refresh; timeout/abort≠physicaldrain. Actual pending promises/bodies/cancel/nativeSQL/DO remain retained; no fresh root laundering across partial durable effects.
+3. Concurrent/durable facts: atomic one-shot admission; recorded-only journal transitions, same-current snapshots and absorbing unknowns, foreign valid-hash ACK/receipt/phase correlation denial. ExistingACK cannot become own actual result.
+4. Artifact/config/source identity: M byte residency and codehash actual; exact physicalbindings/metadata, roles/keys/capsule/history/backups/sourceproof; immutable bindings/profiles/context; only explicit allowed deltas in complete snapshot pairs. QA/M graphs separated.
+5. Native lifecycle integration: ownership custody, terminalWorkflows, cancellation/restoration/withdrawal/cleanup/alarm and version-history preservation; no logicalclosure mistaken for process drain.
+6. Human paths/ordinary consumers: Access identity and owner resolution, forms/cookies/expiry, source consent→actualcode/token/MCP/D04→notice/Link; no broad public pending state or hidden authority from UI/probes.
+7. Cloud workflows/scripts/fences: fixed entrypoints, main/attempt1 checks and closed runtime restoration defaults; manifests/provenance/eligibleflags must not claim success from source/CI. SQL migrations present are not executed/approved by review.
+8. Tests/evidence: real native current lineage, no seeded phase/ACK/pointer as positive; no zero-match/filepseudoPASS, no counting nested tests twice or negative-control FAIL as positive. Different-SHA and composite qualifications labelled honestly; scope can reuse unchanged qualified helpers.
+9. Scalability and resource limits: measured synthetic fanout/bytes and original deadlines are visible. Decide if Source/plan has a load-bearing defect, or whether a concrete promotion gate is sufficient. Do not infer a live429, shared token bucket or productionlatency fromSYN. Do not recommend weakening checks/clock or silently upgrading plans/permissions.
+10. Reasonable user expectations still apply where specs are silent. Report every behavior you decline to judge as outside scope, with why, so Root can rule rather than silently discard.
+
+## Mandatory deferred-minor / parked triage
+
+Read docs/superpowers/progress/2026-11-05-deferred-review-minors.es.md (included). M1: initial SDK readCurrent two failures unknown cause/not reproduced, no repair inferred; M2: npm/Actions/CIMD/RPC/disposal warnings with responsibility unresolved; M3: second direct engine attempt while cancel pending not explicitly in Task1 test, Task3 foreign-root retention differs; M4: old fixture wrong-profile branch ambiguous, Task3 adds genuine compiled-profile negative but do not infer cleanup/closure. Consent161/244 settlement andP3cookies were CLOSED by named scoped qualification/review; do not reopen them without a new cross-cutting risk.
+
+Task3 fresh review initially found ImportantI1 (publication order not asserted); fixround1/5 re-review ADDRESSED/0newCritical-Important-Minor at9989; Target only adds acceptance doc after that. Order now keyed to actual native transaction completion, sync/readback/invocation/result/ACK and receipt-before200. Five DATA sensitivity copies are not5additionaltests/dynamicmutations. Warnings and live-provider feasibility are deferred to THIS final review/promotiontriage, not silently closed.
+
+## Primary verification summary (not global-suite-green)
+
+- Task1 accepted: extraction preserves finite engine/enrollment originals, genuine RED and27focalPASS; setup3/compiler1 separate unchanged dependencies, source97ee8675, protectedhelperblobs.
+- Task2 accepted: final42138702058 at e6518da5:55pure+5native+2compilerPASS/lint; material5 separately reused unchanged; immutable scriptSHA cost repair inP11 accepted. No runtime proof.
+- Task3 D11 exact60native+107scoped=167positives PASS, all exits0/0failcancel/skiptodo;137top+30nested. Run42236775067 remainsCANCELLED15min duringfirstremainingcontrol. Explicit composite completion42240487416 checked out EXACTD11 from a later trigger, beforeafter7HEAD/workinghashes identical;2expected-failurecontrols1testeach/exit1/targettrue +lint7. Earlier42232085255 remainsFAILED due Node observer spanning separateGET+POST; corrected focal2PASS before final.
+- Task3 I1fix:42248678046/job127997568910, actual7ebe843a/treeafc2 from triggerfc0c3b04:one exact principalPASS/0failcancel/skiptodo/exit0,lint2exit0. Product unchanged; onlyT3/F1 passiveauditassertions+docs. Firstfixrun42247056350 FAILED1becausepredicate wronglyrequiredstorage.get; journal actualreadonlystorage.transaction/tx.get normalcompletion now required. First failedrun did not save native-ordertrace (writeafterassert); corrected savesbefore. No hidden product/clock changes.
+- PositiveM remains1988061B/c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32. QAfixSYN e4861bf5d2af5248b651f440514a0ca3b5d131d892f0a0e40918ae4e7efb7d7b/2368172B;negativeMutationnull;compiled scripts labelledSYN/noteligible. Source report includes allprimaries/artifactdigests/7d retention. Root independently read relevantlogs/counts/refs/protection.
+- Static/compositional callbackretry exception is NOT injected dynamicPASS. P2 entered flag outsidecallback synchronous beforeawait, committed===true/absorbingfailure, P10 caller order; nativeTx assumptions disclosed. Review may challenge; no Root rationale downgrades finding.
+- Most adversarial negatives followinitialimplementation; only principal/genuine holderRED identified as such. Negative-only single-guard mutational controls supplementary, not historicalTDD. Actual principal original native GET/cookie/POST/newConnectionReceipt then downstream, no sourceFactory/seedPhaseFacts or prefabACK.
+- Synthetic principal roughly1736CFrequests in pre-negative snapshot;1768response observations includinglater14CFprobe difference; about1.877GB JSON payload. Complete full-pair consistency is load-bearing. Default official quota1200/5min peruser/accounttoken cumulative, actualbucket andliveRTTnot observed. No liveAPI consumption, no realCloudflarefailure attributed. Pipeline intentionally has no quotas/latency fit claim.
+
+Do NOT rerun passed suites just to confirm reports, nor broaden tests for boilerplate warnings. For a specific code-derived unanswered risk, identify the one focused test/check you would require and why existing evidence cannot answer it; heavy validation recommended to Root, not run here. No local clone/build/test/dependencies/browser. No additional reviewer/helper. Review in passes yourself if needed and preserve structured findings in your session memory.
+
+## Historical Root rulings carried forward
+
+These are dated decisions/exceptions, not current runtime status or commands. Current Source acceptance is authoritative for completed task state. Evaluate rationales critically; do not downgrade findings because Root or an implementer authored the plan.
+
+codeHEADfb739b07c26487242d72bbc56ba0b115095bb8fa/tree9efd8240dfbacc65ba8d1821a2cba39bf5b577d9. ReportHEAD2f530092bdc6f89e856ca3803f04dcc83fb90b1f; reports/2026-11-05-finite-native-notice-link.md/blobce3655e1b35f948574653e901fd06a98e1656c4c/105131chars. Sólo4codepaths y2docs; qualifier eliminado. Rootcontrastó4blobs/compare11commits. Brief61f7a5f4b3c996feeb580c7f37843fd14f0272d7/preflight5cfbf0f7a1bd62437b0891ea3de97de0281bc564 en953 leídos; ledger progress/2026-11-05-finite-native-notice-link.es.md guarda rulings y primarias.
+
+Paquete reviews/2026-11-05-finite-native-notice-link-2f530092-package.md,135504chars:11commits/statcompleto, narrativaentera34628,4diffU10exactos93162, rulings. El apéndice del reporte original repite esos4patches; no duplicarlectura. Revisorfresco ya revisóSOURCE; verificarúnicamenteI1yfixdiffenrereview, no reabrirrestodelta. Sin tests por mera confirmación.
+
+Rootprobó RESTcontents update_file consha/branchexplícitoenSUramadocs: ec63ce2453952aacef6f97330b5328df7348244f,parentb44correcto,únicopathcontinuación/readbackbyteexacto. No volveramoverrefa6356sobreesoscommitsREST. SourcewritersehabíadetenidoNEEDSCONTEXT; RootloREANUDÓconrulingRESTporarchivo:
+- Sólo branchSOURCEoriginal/whitelist, nunca null/default/main/newbranch/force/localCLI/token/settings.
+- FileSHA-CASexistente/absenceCASnuevo; escriturasSECUENCIALES, writerexclusivo.
+- AntesprimerwriteHEADc55; trasCADAwriteverificarparentprevio/deltaúnicopath/ref/blob/byteexacto. Interferencia/UNKNOWN→preservaryparar, sinretryciego.
+- QualifierÚLTIMOtrasinputscompletos; quitarantesdebatchesmulticode/recrearúltimo, evitarActionsintermedios. RetirarfinalfileCAS. ≤3jobs15min,contentsread/nosecrets/persistfalse igual.
+- Documentarparents/shas/trees y NOafirmaratomicidadmultifile. SiRESTfunciona, continuarRED→GREENnormal,noesperarGQL, nocambiarpermisos.
+
+Root leyó lib/mcp-qa-finite-owner-notice-consent-body.mjs a BASEc56: fail(413) real cuando bytes>1024, firstFailure antes de cancelar y retención de read/cancel. Reusar esa semántica es requisito, no mapear a viejo400 para pasar tests. Ruling Root explícito posterior a brief: en T5(native-wire.test) y T6(native-conduit-native.test), normalizar los inputs oversized para alcanzar REALMENTE lector (Origin/CTypeform/cookieprepare válidos donde corresponda), exigir413 EXACTO y renombrar T5first400→first413. Se mantienen primererror frente cancelthrow/retención/zeroIO y todas las demásassertions.
+
+Writer pidió y Root AUTORIZÓ UNA inspección adicional focal upstream usando pluginobserved existenteF2, mismospaths/QA-M construidosantesupstream/timeoutproceso≤120/unjob. Sólo errorORIGINALstack saneado/marcadores/requestsmétodoruta/status/tamaño/hash, rowskeys/counts/hashes/stats. Noheaders/body/JWT/OTP/tokens/secretvalues/dumpbundle, no cambio guards/status/clocks/fuente/approval ni probesqueautoricen. Probes despuésresultado lógico y distinguirsettlement real. No nuevarun trasese diagnóstico sincausa/rulingconcreto. Producto no implementar aún hasta nativeREDcausal. Rootpuede resolver scope sinowner; no Chrome/credencialnueva/intervenciónuserrequerida. Sin attributionCloudflare/runtime real. Task1aceptada; Task3inactiva;readiness/completePackage/PCofffalse.
+
+Task2 sigue activo con writer implement_first_connection_mount. Root amplió scope11→13: initial-material.mjs y testinitial-material-native; único producto adicional permitido, sin tocar initial-entry/lease. Preflight Root completo y verificado en docsbranchac961253c44e5306eec7bf6c31b48cd2528217e2, reviews/2026-11-06-finite-initial-immutable-script-preflight.es.md/blob68cd7d8f03e0e614e72b7d35a13b7e4319ed8626/3874chars. Ruling vigente supersede brief/plan11paths; Root reconciliarádocsSOURCE sólo despuésSTOPWRITES.
+
+### Ruling Task3 — Access menor (6nov2026, durante implementación)
+
+Ruling: “Access menor” exige respetar el vencimiento firmado más corto y denegar al cruzarlo, no inventar vida mínima ni negar toda identidad válida con vencimiento menor que C0 — P9 ya usa expiresAt=min(ticket,identidad actual,techos originales) y ese contrato se preserva — si esta interpretación es incorrecta, falta precisar/revalidar un requisito de vida mínima de producto; no se amplían techos ni autoridad por esta decisión.
+
+Matriz: identidad firmada válida al entrar cuyo vencimiento corto se cruza antesdeTicketUse/admission debe dejarTicketUse0/SEND0, observando frontera causal; JWT yaexpirado alentrar esotrocaso ynoúnicacobertura. Si vence despuésdeTicketUse, conservar hechos ydenegar siguienteefecto en grupoTiempo, sinborrarhistoria. Historialconsumido noescausaAccess. Verificar éxitoacotado de vida menorytimestimestamps estrechados cuando corresponda, sin sleeps/renovación/productclocksnuevos. Writer recibió ruling; reporteloexplicita; reviewfresco pendiente.
+
+### Ruling Task3 — Host en Miniflare nativo, 6nov2026
+
+Ruling: probar upstreamnativodeinstancia conorigenAFWexacto sólo enSYN dentroF1/F2/T3 autorizado, manteniendoMpositivoexacto ysinwrapper/proxycredencial/SDK/productbypass — versiónpinadocumentaopciónparaalinearURLyHost — costesiincorrecto: upstreamglobalpuedecanonicalizarorígenesinválidos yocultarunrechazo, portanto comprobarURL/path/query/body/origin/Host relevantes ynegativowrong-origin antesdeaceptar. Outbound/providerfixedsintráficoAFWreal. Si falla, detenerhipótesisHostydevolverfronteraexacta antesdeotroworkaround. NoGREEN/CodexCloud/runtimeclaim porestadocumentación.
+
+CausaHosttrazadaRootenpinMiniflareb7b4ff8: convertV4MiniflareOptions preserveupstream explícito(config/v4-convert.ts blob207fa88316c56c50319d23935d5fd583b9ad7f3c,lines36–60). T3ea759c6line95todavíausabagetWorkerfastpath; index.ts blob9dabb8e400ec7732762ca327cee0d7132cafa427lines3166–3180eligeSERVICE_USER_ROUTE; proxy.worker.ts blob7030ed21d68b8eb0afe6708564c8b111d65136dclines283–297reconstruyeURLydespachadirecto sinnormalizarHost. Ruling: volverMCPcallbackaldispatchFetchnativo queentraenrutaHostdocumentada,conupstreamyaaceptado; nootrahipótesisSDK/converter/permisos — evidenciaexactadebypass — costesiincorrecto: persistiría403 yseparanuevamenteeltransportesinmutarM. Writerloaplicóycierreprimariopasó. UpstreamSÓLOtrasPOSTsettled+adopciónconfigproviderreal; negativesURLfirmadosantesydespuésdeadopciónsinupstreamyOriginajenoenupstream. NoafirmarpreservaciónURLarbitrariadeupstream; noMwrapper/proxycredencial/códigoSDKcambiado.
+
+Ruling: enrollment-onlypuedeseguirfactualclosed_ui, notinstalled; corregirassertyexigirceropublicación+rechazodechoicesignedverdaderamentefresca(sincookie/ticketreusados) — contratoaceptadoT4/efectosvacíos — costesiincorrecto: podríaocultarreplay; verificardenegacióncausalyhistoriapreservada.
+
+Ruling: reagruparCIpormedición, exactamente3jobs≤15min,A/BnativosdisjuntosyCregresiones/compilador/lint;propuesta14/16+Cprovisionalalmanifestcompleto — A25ya13m44ynativo30nocabeenmismogrupo — costesiincorrecto: unmáximo15mincierratrabajocomoincompleto, nuncasubirdeplazo niomitircasos.30noescapdecobertura; incluirvariantesfaltantesreconciliandonombres/counts/subtestsunioncompleta,sin0matches/pseudoPASS/cuartooculto. Finalhead/hashesyconteosporcomandoobligatorios.
+
+Ruling: negativesagregadosdespuésdelproductorsondevalidación, NOREDhistórico;declarardesviaciónTDDyautorizarcontrolesdemutaciónsóloennegativoin-memorydentro7paths/presupuestooriginal — permiteevidenciacausaladicionalhonestasinreescribirhistoria — costesiincorrecto: sesgodeimplementaciónpuedeocultarcasos, exigirreviewfrescoporSpec+Qualityycorregircoberturaload-bearingantesdecierre. Positiveprincipal/artifactsexactos,nuncamutados;hashsmutantesseparados/needle1/inputsiguales/clocksoriginales; siotra defensa ya deniega,noalegarpruebapredicadoniquitarcontrolesajenosparaforzarunsafePASS.
+
+Ruling: “headers extra/duplicate” seinterpretaenelnamespacefiniteprotocol,noen todoHTTP — RootreleyóP6blob38285fa0149a38924c431b4d5a705bec1384216dlines13–21(exactos5x-afw-finite-*),P7blobf2c473cdd11b055a3c6037de317f73d7b3a7a968lines28–35(copiaúnicamente4inputsCFJWT/Origin/Cookie/Content-Type ygenera5metadatos) — costesiincorrecto: uncontratotransportetotalmásestrictodeberevisarseconnativeautomaticheaders,noessemánticaaceptadahoy. Añadirnegativosfirmadosprotocol-extra/duplicatecausalesantesdechoice/TicketUse; otrosheadersdirectosQAprivadopuedenignorarse, nuncaconcederidentidad/destino/permiso,reflejarseo sustituirinputsverificados. NoP8whitelisttotalni cambiodewireprotegido. Writerrecibiórulingparareporte/matriz;continuar.
+
+Ruling: la distribución final puede ser A24+B20+C8 casos nativos, con regresiones/compilador/lint y dos controles mutantes en C; exactamente3jobs y15min por job. La expansión a52 casos hizo inviable confinar todos los nativos a A/B con el margen medido. Costo si el balance es erróneo: job incompleto al llegar a15min, que se informa y redistribuye sin omitir casos ni ampliar plazos. Congelar nombres/counts reales y particiones disjuntas antes de despachar, reconcilia cualquier cambio posterior;52 no es un techo de cobertura. Sigue pendiente mapping completo, final gate, protected compare, reporte, retirar qualifier y revisión fresca.
+
+Ruling: corregir sólo la observación para separar GET≤30s y POST≤30s y capturar inicio/límite real como DATA; también acotar GETfallido/sinPOST — evita teardown prematuro de una petición legítima — costo si el diagnóstico es incorrecto: seguirá fallando y debe investigarse la frontera real; ningún plazo producto se amplía. Registrar llegada al I/O de negocio mientras su petición estaba viva. Cancel/cleanup puede empezar o terminar tras fallo/abort/deadline, y sigue retenido; no confundir ese timestamp con permiso nuevo ni physical drain.
+
+Ruling: repartir el nuevo final por tiempos reales C8m27, A14m y B14m26: mover principal de A y los2late-held de B a C, nativeA23/B23/C14=60, más regresiones107 y2controles en C — da margen a casos de espera correctos — costo si no cabe: reporte incompleto al límite15min y nueva distribución medida, nunca omitir ni ampliar clocks.
+
+### Excepción de verificación explícita: callback retry
+
+Ruling: para esa variante residual aceptar prueba semántica/composicional, NO PASS dinámico inventado — helper protegido P26eb0f08d tiene entered local fuera del callback, chequeado/fijado síncronamente antes del primer await; exige retorno committed===true y fallo absorbente. Nuevo caller espera Enrollment/recheck/Ack/recheck en misma child antes de upload — costo si la composición es incorrecta: no se inyectó el retry nativo y las suposiciones de excepción/settlement deben ser cuestionadas por la revisión fresca. Mapping debe declarar nivel/excepción y líneas exactas. No cuarto job ni cambios para reescribir historia. No instrucción al reviewer de ignorar o rebajar ese punto.
+
+Ruling: aceptar verificación compuesta, como excepción explícita al plan de un único lote3jobs:167positivos del run42236775067 + sólo2controles ylint en un job posterior con checkout idéntico D11; no repetir positivos sin delta. El run original conserva cancelled y42232085255 conserva fallos. Costo si es erróneo: una diferencia de código/procedencia invalida la composición; por eso se exige HEAD/tree/7blobs y working tree antes/después. No amplía relojes producto ni autoriza runtime.
+
+Task3: minor(deferred) — warnings RPC/toolchain/disposal, responsabilidadRootwholebranch; conservar firmas y owners, no supresión/upgrade incidental ni cerrarM1/M2.
+Task3: minor(deferred) — viabilidad operativa API/latencia/volumen, ownerRootpromotiongate; sinpruebaquota/live, no defectoSource inferido sólo de métrica. Necesita resoluciónantespromoverPCoff, noextiendeestefixloop.
+⚠️ Helperinternals/transactionretry noverificablesdesde diff: mantieneevidenciablobexacta y excepciónsemántica, no nuevas suites.
+
+Ruling: observar la normal fulfillment de la transacción nativa de sólo lectura, con ID de transacción y key/hash de los valores realmente leídos. Exigir ese settlement después de sync y antes de invocación/siguienteefecto; un tx.get aún dentro de transacción pendiente no basta. Se preservan lectura directa existente, identidad/rechazo de operaciones reales y relojes; sinlecturasextra/producto. Guardar sólo trace saneado/hash antes delassert. Costo si es erróneo: un marcador prematuro podría declarar completo un readback pendiente; el predicado debe ligarse a la Promesa nativa realmente cumplida, no al inicio del callback ni a un contador. Autorizar un nuevo focal1+lint2 tras corregircongelar/readback; nada de repetir167ni relajarassert.
+
+## Packet catalog
+
+- 1. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-01-product.md — 45files,357083chars,blob4e2b2439d4facad3f9a61f23d66bea2285b40c59,creationCommit8b3870f1714fb8691bb4bb86319cd3ba268a6ba8
+- 2. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-02-product.md — 39files,354447chars,blob96c24fb2cfd29965ce2b70ed86963e6e7dffef21,creationCommitc97818bcbc3abab05c45affedd2d75577dd8dabd
+- 3. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-03-product.md — 28files,355757chars,blob97e00d09444e79dae62077aeb5f9d5f2e17c4fda,creationCommitae11f367a6e59ffea04bd1052d066f8d32422b3b
+- 4. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-04-product.md — 24files,210686chars,blob8704b3af670ef70dc5095adadbc8a13f4c2d8f2d,creationCommit69a02850aa63c9d43b495dbe91d1bf8ded3cc67e
+- 5. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-05-tests.md — 33files,349577chars,blobf78414dc9353e99e5ff2c326ea8fd1eff5549a8b,creationCommitf2a9c2f163b366f4703623a2d0b0beb3e24f8f66
+- 6. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-06-tests.md — 43files,355853chars,blob3d0f5fbe0cd6af919c51dde03fd677b09b47a24b,creationCommitcdcc981e8a7ac1a992eb84c081511c78669d9d60
+- 7. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-07-tests.md — 37files,356083chars,blobddd190e5ac27f6be3969a3b5fe9d6932542d06f1,creationCommit5d834ab0db71a9695a98cd91b97077aa529ffe35
+- 8. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-08-tests.md — 29files,350155chars,blob8da6bc703681132a64c2459a78dd7394566749b0,creationCommitc6cf75404ab63d2766a09ee4b8bd1e14eb579dd2
+- 9. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-09-tests.md — 17files,190290chars,blob177fc7b8e5c51ec177cc38c127ef107a0bb76410,creationCommit1437f57982d51c7c82ed35649d22d2a4b7c4d747
+- 10. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-10-other.md — 6files,19109chars,blobf2e2ab302a957eba79e3d4949db9bf2bd753f098,creationCommit94e5a1c253f28fd6769ccf36340e5dd0b75a5008
+- 11. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-11-docs.md — 26files,351555chars,blob8bb6e0b5bff9a241204980659fbf10ba25c55e05,creationCommit6f0808660514c19a28f01ca559922b6824b84880
+- 12. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-12-docs.md — 14files,341730chars,blobfebcc4b12d09e50685ed3d91b056c85409e7b4ae,creationCommit78b09d8ab948fe9c3b35eac1667384b6acb9511b
+- 13. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-13-docs.md — 20files,323725chars,blob5a70abe9820f311d22229eeb53867c274ada3f56,creationCommite0bbdb5028d37b8211f7abb81f782f73bb89b1c5
+- 14. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-14-docs.md — 9files,155073chars,blob34dae14892481c9a92a5ad1b3902368d3177385b,creationCommit71fb98e552a097a31095511e86a0b5561f3523a1
+- 15. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-15-docs.md — 9files,348933chars,blob5705eded6d062af081a6c22143693caa2d20f0cf,creationCommitec11facf8a4a150fa221d3b5ba8958ef1052b487
+- 16. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-16-docs.md — 17files,344887chars,blob6f3cf0aa149938ce66e69d315e57b41c2668688c,creationCommitad70faf40dd06ea6e7f04d1387c2eee2c33cd2d4
+- 17. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-17-docs.md — 37files,353768chars,blob5c8b79a7e234b40a192d6829c87254cb7b08b90b,creationCommit05d53a92b7ee058ed6268cb52126f1f69a72f88d
+- 18. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-18-docs.md — 17files,293771chars,blobed982454cfc441af57ae7b1ff39893ac81c42eeb,creationCommit49dd64a25559f6dd336fc0ec57eb805ef2351a1a
+- 19. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-19-docs.md — 12files,332675chars,blob3a875d5eb3cda780b07b91ad735d43f1530819e7,creationCommitdac7023552983a60550812441c5b7aaa7555ed50
+- 20. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-20-docs.md — 58files,352706chars,blob2c77cd11a538313cdef01031011fa8e7cd6b2df5,creationCommit121dae23e183b04e8926d0a0be32acdd87a81a3e
+- 21. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-21-docs.md — 4files,325194chars,blob3ac4163de852190f9dd2e0c34cb6a1cef6059d68,creationCommitf6f5a703120f13a98896a61312c427fa1ff7ab53
+- 22. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-22-docs.md — 5files,351596chars,blob3ffa7f599d7a371be9085fb9633e0b20d3fa596d,creationCommite3cb24d14118b60f24dd811c4ddce1711adc430d
+- 23. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-23-docs.md — 8files,331661chars,blobd83da24f6e57cc6dfa878a1e84bfc4b391313072,creationCommit1a3e5cc38d0a7515719e0e2377c23bf28ff347e2
+- 24. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-24-docs.md — 5files,300454chars,blob6d036454811f9a1f38027ceed33835d56cba2d9a,creationCommit998233989da7f563dffe9c4124c2152c2b7f9a0f
+- 25. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-25-docs.md — 16files,334245chars,blob4444b1d72eee9596ac00ff2613d7153288b805d1,creationCommitd016e9cfad564d974d9a7f1648efcef7cadc20eb
+- 26. docs/superpowers/reviews/2026-11-06-whole-branch-package/part-26-docs.md — 21files,353111chars,blob216966b725cac9168830b6a0f12363e0c3a93e8f,creationCommit1dec0dc69d71532796a11ef6a7578df77ebf30ef
+
+## Complete path and blob manifest
+
+- lib/delegated-oauth-worker.mjs | f8299df1938bf58ca8f1639085aadd7b6c42ec37 -> d979f395029c9b1e66a99222d06acf99eba4f358 | 30926->33008bytes | fullDiff19327chars
+- lib/dossier-event-rpc-authority.mjs | 1e76937b44554d0609bcfa27a8c47749483f1ac0 -> a8239dc554382d4df6b6d3c3cd0a5b345c2a1184 | 7235->6791bytes | fullDiff5962chars
+- lib/dossier-monitoring-owner-http.mjs | e46565a64131a841103bf2af969b4d42257c2108 -> 9b3a362c0738f5cefc00f8770bc2c099f76d7eee | 10822->11540bytes | fullDiff8742chars
+- lib/mcp-activation-observer.mjs | c835f8724fc4ab44f25f5179069c8b44096ae48e -> d739010a8eb4339413ab82b6c1893d640858b335 | 6840->7645bytes | fullDiff9241chars
+- lib/mcp-canary-restoration-transport.mjs | 7b15a6703fa8e5632efa1f233f329f7dd0fdc597 -> 5233c720f4a49b458c0ff24ed258ece1bef96759 | 9914->11134bytes | fullDiff9507chars
+- lib/mcp-fixed-terminal-workflows.mjs | 35c8aac248045f0942e0dd742d8a4fec62c22034 -> 248fba0801852d803b40c3e112c6f51321744525 | 5340->16746bytes | fullDiff13460chars
+- lib/mcp-node-process-custody.mjs | 5752efe448688d3bb2f3ae3541b004f0566cd56c -> 046d3cff69c63be9e221b3ff25a58ae40d8fb5bf | 19278->24440bytes | fullDiff23350chars
+- lib/mcp-original-container-runtime.mjs | 8acedd3c6164b1efa1c75785a14accda8dd74401 -> 9497867e4f1325479405ac58c1ab43ecfdb01250 | 7435->7686bytes | fullDiff4250chars
+- lib/mcp-own-durable-host.mjs | b22a466eab614109ae621703ce4b77731d9fdce1 -> 01b7b7ba329fd2fb69f9a3404f68861a072a19da | 12949->13283bytes | fullDiff8767chars
+- lib/mcp-own-permission-withdrawal.mjs | a0b023cf0959156cf548aa83aec830349499d452 -> c0e3551c983e42104e6f2706a58fdc27bf746033 | 10352->10968bytes | fullDiff3866chars
+- lib/mcp-own-retirement-host.mjs | f657d59ca3c3c290d13e9271ecda10155fa82c9b -> e3b36fbda9a50fedc2e51b6d36137c51a3466c5c | 2580->2362bytes | fullDiff2931chars
+- lib/mcp-qa-cloud-lifecycle-admission.mjs | ffeef9d35118900b0631f18d76b02929558211cd -> dfb2e8ac9fc2162a21e93437ac81a1d4d91d3f30 | 8788->9396bytes | fullDiff5470chars
+- lib/mcp-release-operator-policy.mjs | a4d68e1a0724aaae88e19a8346dc26ee5c70b7c1 -> 20518baf5f3ee05942ed56c8d5fab3fbe2f53976 | 7504->8329bytes | fullDiff9268chars
+- lib/mcp-release-runtime.mjs | 2420c760af1485e39aa53ff7726b9605161f768c -> 585dcbda7d5403e1ddb37d697457cc0899e0d03b | 28586->30005bytes | fullDiff25142chars
+- lib/mcp-release-successor-reservation.mjs | 73b0b6fbe0cd2176417d760cdde7587e91980581 -> 9b6ea39f3cfe477b6f6cd4bf9f789ec18a5d816e | 5639->6448bytes | fullDiff6239chars
+- lib/mcp-successor-launch-gate.mjs | 621d9eefc79f9dd698797b2912697be1cc59d2e1 -> 11348f49c1e2f26436b8dcbb550dfd2348b61b73 | 7855->8875bytes | fullDiff12502chars
+- lib/mcp-successor-reservation.mjs | a31dc55594f6f4c98f22efcf0d86484cacbee620 -> ef2de272942cf3bfc4ef9a9c49981857fcb7bc39 | 5459->6156bytes | fullDiff6977chars
+- test/delegated-oauth-flow.test.mjs | 7d3448521c1ad337493b48ab4ed8e836a25a0603 -> 8c9bab35b37ee6c74dd6fd9c4b2e307ff8f214f4 | 41352->46515bytes | fullDiff7574chars
+- test/dossier-monitoring-oauth-native.test.mjs | 68007b6fca4e96240cda1875770acbd95e21dfcb -> 1b2be1b11aef877916e3e971562782f0169fb5c5 | 4739->6149bytes | fullDiff6265chars
+- test/fixtures/named-confirmation-native-rehearsal.mjs | 010b1c57f4d977e601bf53d4b695851a54b7a256 -> 44e6f8b4e441065147fc8a2be5bb0207a8d9c750 | 13867->16936bytes | fullDiff14280chars
+- test/mcp-node-process-custody.test.mjs | 0c348f73349e6c5f38379369056df93ba5f1ac71 -> 178eb3c10263b76f6c0f09c3503ca51c445345fe | 16638->18839bytes | fullDiff3420chars
+- test/mcp-original-container-runtime.test.mjs | e14f5ce22dc4bffee64f8ff3d904d058a15a1cf5 -> a8ac02545119d6598f7aac801870b8fdcbfd2369 | 7338->9337bytes | fullDiff12097chars
+- test/mcp-own-permissions-only-reduction-native.test.mjs | ef9cbe38c475f1b4644955d73d4f016fee053f5a -> bc6adf6f26f58d35962de23357d1c8a8ac330560 | 5653->6288bytes | fullDiff2321chars
+- test/mcp-release-known-cancellation.test.mjs | 87c9779f67cc26ec4cf553da6ed4f8af1298b3d0 -> 304ed29963093383f7dcaa3556fdf3072db36669 | 21554->21659bytes | fullDiff4945chars
+- test/mcp-successor-launch-gate.test.mjs | df1d82fa2076dc4b97e5f6fae7b3c280f79163e3 -> d6ebf092a1e68d1f0083655b19ef5268ffc6c08f | 11769->16762bytes | fullDiff11250chars
+- test/mcp-successor-reservation.test.mjs | e6b1c785c4ab7c15e13b7f362ecbec72499d2cad -> 63cd17c13c78ff9aa6fe1078b59ab49097994782 | 8057->10073bytes | fullDiff2883chars
+- worker/independent-closure/index.mjs | abf2befc10fcf567bb0b6e3b227353eb3674a9a5 -> 2847bf94f2aeca072f66866ed1bce07e9fcd4613 | 24785->27865bytes | fullDiff11097chars
+- worker/mcp-own/index.mjs | 99a25b9b8359550cac283e8d32f6d12303fa829b -> 089e5313eb22d017b8dfe4e6daba73c8c7753cbc | 7790->10077bytes | fullDiff10424chars
+- .github/workflows/afw-finite-finalizer.yml | ABSENT -> 566d597223497c5cf3c0435dd0f4e8b3ab7557ea | 0->4057bytes | fullDiff4344chars
+- .github/workflows/afw-finite-native-package.yml | ABSENT -> 92729f5952fd2d8bec107b4072bb569216d21863 | 0->1029bytes | fullDiff1255chars
+- .github/workflows/afw-finite-qa-bootstrap.yml | ABSENT -> 22f324e480dbe0295fe23fb7415328cba7952b1b | 0->1844bytes | fullDiff2071chars
+- db/finite-preparation-issuer-fences.sql | ABSENT -> 92c7986ae2c5c83742a92d83dac9b2585e8e182e | 0->2756bytes | fullDiff2949chars
+- docs/superpowers/briefs/2026-11-01-finite-material-task1.md | ABSENT -> 24cc0f7a90c09a7f33439a43f237a01fdf9f6672 | 0->7867bytes | fullDiff8154chars
+- docs/superpowers/briefs/2026-11-01-finite-material-task2.md | ABSENT -> 9e1c94f9efa9ceb8aced1c3d7e4098c4c62153ce | 0->7547bytes | fullDiff7814chars
+- docs/superpowers/briefs/2026-11-01-finite-material-task3.md | ABSENT -> d644f8aec3be65e6881bb4d235b207c26f250015 | 0->10792bytes | fullDiff11068chars
+- docs/superpowers/briefs/2026-11-01-finite-native-cleanup-task3.md | ABSENT -> 07fd51f22925d860cb9f8e3ee8de42bbcec72c3c | 0->19398bytes | fullDiff19709chars
+- docs/superpowers/briefs/2026-11-01-finite-native-cleanup-task4.md | ABSENT -> 98178ee36a56da7376c0b9c828a9975e88897241 | 0->15019bytes | fullDiff15305chars
+- docs/superpowers/briefs/2026-11-01-finite-native-launch-task1.md | ABSENT -> ef404ae3061a5b7665a752f446779ad594df654e | 0->8966bytes | fullDiff9265chars
+- docs/superpowers/briefs/2026-11-01-finite-native-launch-task2.md | ABSENT -> 66261e808610687fd20aee0cd4fd04a7d745f677 | 0->10166bytes | fullDiff10462chars
+- docs/superpowers/briefs/2026-11-01-finite-native-launch-task3.md | ABSENT -> 6a884a14a2fcfe460ec2c53c1d3bd971efbe4777 | 0->16042bytes | fullDiff16351chars
+- docs/superpowers/briefs/2026-11-01-finite-private-policy-setup-task1.md | ABSENT -> e6decb0c0f10e56db06f09dfe0e387eca9eaadb4 | 0->12597bytes | fullDiff12948chars
+- docs/superpowers/briefs/2026-11-01-finite-private-policy-setup-task2.md | ABSENT -> 671da51611e67c2183dd30f04c8fdd518c0e503e | 0->37504bytes | fullDiff37895chars
+- docs/superpowers/briefs/2026-11-01-finite-private-policy-setup-task3.md | ABSENT -> 95ae7926d80ae5a1f593bfa6224089b5637fc65f | 0->33407bytes | fullDiff33817chars
+- docs/superpowers/briefs/2026-11-01-finite-private-policy-setup-task4.md | ABSENT -> 19661e4376ba8a782dbe3e7a3d9bfed4ce88c070 | 0->29702bytes | fullDiff30094chars
+- docs/superpowers/briefs/2026-11-01-finite-private-policy-setup-task5-b2.md | ABSENT -> 84099e235ff6f00b2bbe36184bbbdc48604edd72 | 0->6305bytes | fullDiff6611chars
+- docs/superpowers/briefs/2026-11-01-finite-private-policy-setup-task5.md | ABSENT -> 1c1be48e6075276660c5b939443c52eff9ce3121 | 0->19744bytes | fullDiff20093chars
+- docs/superpowers/briefs/2026-11-01-finite-profile-package-task4c1.md | ABSENT -> 96b6ac267274fa51d01deae2160db9bd8801ffcd | 0->11665bytes | fullDiff11998chars
+- docs/superpowers/briefs/2026-11-02-finite-initial-cleanup-owner.md | ABSENT -> 210bc6f649bf2f63ac9e01d4b55befda65c1225e | 0->1666bytes | fullDiff1921chars
+- docs/superpowers/briefs/2026-11-02-finite-initial-inactive-upload.md | ABSENT -> b473de70fa569928a84bb142f3e30e878eefb9f5 | 0->1224bytes | fullDiff1487chars
+- docs/superpowers/briefs/2026-11-02-finite-initial-preparation-source.md | ABSENT -> bc72ea7a038d9c96c6712e74c6889e6f67896fd3 | 0->7039bytes | fullDiff7344chars
+- docs/superpowers/briefs/2026-11-02-finite-initial-publication.md | ABSENT -> 7dfdcaa4a910184b0f40e60415c5316f1d762ebe | 0->7716bytes | fullDiff7999chars
+- docs/superpowers/briefs/2026-11-02-finite-pre-t0-qa-provenance.md | ABSENT -> 4fee8aefe88fd91c72b70ff958f12f100443a6ce | 0->9073bytes | fullDiff9373chars
+- docs/superpowers/briefs/2026-11-04-finite-closed-prearm-policy-conversion-task1.md | ABSENT -> f897f092aec4e036b46d7b7e4bc70de95248f4ae | 0->10003bytes | fullDiff10365chars
+- docs/superpowers/briefs/2026-11-04-finite-known-profile-c1.md | ABSENT -> 6ea6d9d4b51c61b96c6c38a4544ffa7036d10936 | 0->10337bytes | fullDiff10640chars
+- docs/superpowers/briefs/2026-11-04-finite-known-profile-c2.md | ABSENT -> d0690f5666ad2fa848f5e57783cb6e3fef828083 | 0->11224bytes | fullDiff11523chars
+- docs/superpowers/briefs/2026-11-04-finite-known-profile-c3.md | ABSENT -> 04f5e9ebf6af8ee94f41a409018d62f32416118c | 0->13731bytes | fullDiff14045chars
+- docs/superpowers/briefs/2026-11-04-finite-owner-phase-context.md | ABSENT -> 8c384bd01e6f6d72ac6a4913de3733352d5d1f87 | 0->16117bytes | fullDiff16462chars
+- docs/superpowers/briefs/2026-11-04-finite-owner-sdk-trust-boundary-d01-preflight.es.md | ABSENT -> c70d074f90ae72fe5fe8f399134a704f5a913907 | 0->1569bytes | fullDiff1886chars
+- docs/superpowers/briefs/2026-11-04-finite-owner-sdk-trust-boundary-d01.md | ABSENT -> 02260f86cb9fb8124265f7eefef3c2494839bbda | 0->8997bytes | fullDiff9307chars
+- docs/superpowers/briefs/2026-11-04-finite-request-signal-final-review.md | ABSENT -> e0a6c80f008bf18f109f06c3cbcf450af7ff7fc1 | 0->2809bytes | fullDiff3089chars
+- docs/superpowers/briefs/2026-11-05-finite-native-first-connection-publication-task1.md | ABSENT -> 57a5a7692b63ddc98560aac62d7b30851f8527bd | 0->16276bytes | fullDiff16464chars
+- docs/superpowers/briefs/2026-11-05-finite-native-first-connection-publication-task2.md | ABSENT -> a5eb1ee048feb3c71487014a183fd41a2a764e10 | 0->13393bytes | fullDiff13668chars
+- docs/superpowers/briefs/2026-11-05-finite-native-notice-consent.md | ABSENT -> 79286bc31fd525b9efac3cd9ccf837bd6a38bfdb | 0->48931bytes | fullDiff48970chars
+- docs/superpowers/briefs/2026-11-05-finite-native-notice-link.md | ABSENT -> 61f7a5f4b3c996feeb580c7f37843fd14f0272d7 | 0->45938bytes | fullDiff46004chars
+- docs/superpowers/briefs/2026-11-05-finite-native-notice-next-slice.md | ABSENT -> c64f9c9f9c97f2a8832e3dcb090aa17d9b57579c | 0->37666bytes | fullDiff37768chars
+- docs/superpowers/briefs/2026-11-05-finite-native-notice-provenance.md | ABSENT -> 0c350b46eaac6f81f1404839fa29d5cd0ba3f4a3 | 0->20878bytes | fullDiff21092chars
+- docs/superpowers/briefs/2026-11-05-finite-owner-exchange-continuity.md | ABSENT -> 1fac334b45b7378170e9d03a94b1e00e9dc8fab7 | 0->8440bytes | fullDiff8751chars
+- docs/superpowers/briefs/2026-11-05-finite-owner-io-fanout.md | ABSENT -> 874e2693332a4549c635f8ca41744debe3a124e9 | 0->10865bytes | fullDiff11124chars
+- docs/superpowers/briefs/2026-11-05-finite-owner-sdk-trust-boundary-d02.md | ABSENT -> e241ad8fc2a84bdbaa21e4c7dcd5386ab02d160a | 0->19246bytes | fullDiff19567chars
+- docs/superpowers/briefs/2026-11-05-finite-owner-sdk-trust-boundary-d03.md | ABSENT -> 0e1d7ca0a692ef7f0ac07ba5eafe63f4961ed5da | 0->10377bytes | fullDiff10683chars
+- docs/superpowers/briefs/2026-11-05-finite-preparation-notice-store.md | ABSENT -> 0cfd775d208f1d55ac0a9c755f28849af797182c | 0->26562bytes | fullDiff26752chars
+- docs/superpowers/briefs/2026-11-06-finite-native-first-connection-publication-task3.md | ABSENT -> 847824af6cf748cbebfc2db7ba3bd0a841725385 | 0->64413bytes | fullDiff64350chars
+- docs/superpowers/plans/2026-11-01-finite-material-bootstrap-correction.md | ABSENT -> e2f589ef61cdf5fa743f30094c8b62bee2e4c166 | 0->13220bytes | fullDiff13568chars
+- docs/superpowers/plans/2026-11-01-finite-native-confirmation-cleanup.md | ABSENT -> 95b4c6b6289438615cec2c301da8599c93c2fe7a | 0->23346bytes | fullDiff23685chars
+- docs/superpowers/plans/2026-11-01-finite-native-launch-adoption.md | ABSENT -> 0d8e889e637abd0b23858623b6ba577bbe046329 | 0->15857bytes | fullDiff16190chars
+- docs/superpowers/plans/2026-11-01-finite-private-policy-setup.md | ABSENT -> 3636bcf3e25ffbeea94a3ee4f5370e99cba680fc | 0->95927bytes | fullDiff96537chars
+- docs/superpowers/plans/2026-11-01-finite-profile-package.md | ABSENT -> 11ab00392a760c511941d24c6339210394077342 | 0->16836bytes | fullDiff17163chars
+- docs/superpowers/plans/2026-11-02-finite-initial-cleanup-owner.md | ABSENT -> a81076099cdeb171ef671d1d01217fcb707e5e86 | 0->4815bytes | fullDiff5097chars
+- docs/superpowers/plans/2026-11-02-finite-initial-inactive-upload.md | ABSENT -> 5d32352cb983f708198020547c75ff4c3ac7bfa6 | 0->1802bytes | fullDiff2066chars
+- docs/superpowers/plans/2026-11-02-finite-initial-native-entry.md | ABSENT -> bc5f655211c166359edb35b7066e0374a4ee2844 | 0->4419bytes | fullDiff4709chars
+- docs/superpowers/plans/2026-11-02-finite-premature-admission.md | ABSENT -> 934be2bc53745fc45e1bda3fb5d6e00d1e0c5955 | 0->9000bytes | fullDiff9273chars
+- docs/superpowers/plans/2026-11-03-finite-initial-activation.es.md | ABSENT -> 7b064396c5e0e930ff3800594a8e7f0c25e4474c | 0->2811bytes | fullDiff3043chars
+- docs/superpowers/plans/2026-11-04-finite-closed-prearm-policy-conversion.md | ABSENT -> 63749de6d73e37fca57f26f50270aead995a804a | 0->20012bytes | fullDiff20413chars
+- docs/superpowers/plans/2026-11-04-finite-known-profile-compatibility.md | ABSENT -> 1d489683323bcf0f6d7e9d7113a41b876f829ea9 | 0->21287bytes | fullDiff21679chars
+- docs/superpowers/plans/2026-11-04-finite-owner-native-conduit.md | ABSENT -> b83e107a290cd5efb01f8da607f17132aab64d5c | 0->7408bytes | fullDiff7694chars
+- docs/superpowers/plans/2026-11-04-finite-owner-phase-context.md | ABSENT -> b3d85225dbe93abefba12ed80fc685eedcd8fe87 | 0->19544bytes | fullDiff19910chars
+- docs/superpowers/plans/2026-11-04-finite-owner-sdk-owned-recheck.md | ABSENT -> 4d8f17475dbf4c77ff2284b0802d51814d89fb00 | 0->8047bytes | fullDiff8346chars
+- docs/superpowers/plans/2026-11-04-finite-owner-sdk-trust-boundary.md | ABSENT -> 48366019008700fa38cdbf12981252e24eea7250 | 0->25447bytes | fullDiff25787chars
+- docs/superpowers/plans/2026-11-04-finite-request-signal-opt-in.md | ABSENT -> ce6c3c471e85650916430d942f21e1646bc93f2d | 0->5018bytes | fullDiff5309chars
+- docs/superpowers/plans/2026-11-04-owner-request-retention.md | ABSENT -> 8d0e0cb0f75be4b51e110567b4ec995b7dc425ef | 0->5120bytes | fullDiff5400chars
+- docs/superpowers/plans/2026-11-04-preparation-cleanup-enrollment.md | ABSENT -> dcafe08bd3b1b23d6497bfc50b42e95454d53a52 | 0->6021bytes | fullDiff6323chars
+- docs/superpowers/plans/2026-11-04-preparatory-issuer-fence.md | ABSENT -> 72ce4c86ac1390fd7256b1ba1e267a0893e906f8 | 0->5846bytes | fullDiff6128chars
+- docs/superpowers/plans/2026-11-05-finite-native-first-connection-publication.md | ABSENT -> 31660bfe0e116b4ad1310e98da7c9b96ca785ba8 | 0->35108bytes | fullDiff35031chars
+- docs/superpowers/plans/2026-11-05-finite-native-notice-consent.md | ABSENT -> ea50a936110a23b017c63bafe541231e20b7320f | 0->18374bytes | fullDiff18549chars
+- docs/superpowers/plans/2026-11-05-finite-native-notice-link.md | ABSENT -> 89ced48bf88ff240e58e80b4971b73ebf3e0778f | 0->17535bytes | fullDiff17728chars
+- docs/superpowers/plans/2026-11-05-finite-native-notice-next-slice.md | ABSENT -> b7b08912816274206e16810c115ed79a4f9484af | 0->14481bytes | fullDiff14690chars
+- docs/superpowers/plans/2026-11-05-finite-native-notice-provenance.md | ABSENT -> d9359b3e48aa8494606d6bb4d2c56322c72f2cdb | 0->11655bytes | fullDiff11881chars
+- docs/superpowers/plans/2026-11-05-finite-owner-exchange-continuity.md | ABSENT -> ec96ee472b7d3938d14b34385dafda0f810a05cb | 0->13402bytes | fullDiff13686chars
+- docs/superpowers/plans/2026-11-05-finite-owner-io-fanout.md | ABSENT -> 38bad886a41d5d62f75eea58a57472356938d754 | 0->20181bytes | fullDiff20506chars
+- docs/superpowers/plans/2026-11-05-finite-preparation-notice-store.md | ABSENT -> 179e0101b4fec3142caad11cf30eef10aad21103 | 0->15673bytes | fullDiff15915chars
+- docs/superpowers/progress/2026-11-01-afw-pause.es.md | ABSENT -> 94e5522e041133485300611bea8af1ddbad9bd07 | 0->4167bytes | fullDiff4350chars
+- docs/superpowers/progress/2026-11-01-finite-native-confirmation-cleanup.md | ABSENT -> f8e200c0f8b38e2c6877894e93ecd24a8029361f | 0->259175bytes | fullDiff260229chars
+- docs/superpowers/progress/2026-11-05-deferred-review-minors.es.md | ABSENT -> 8ba955705a129fb27a61211b2ef486d41c21a194 | 0->7236bytes | fullDiff7471chars
+- docs/superpowers/progress/2026-11-05-finite-native-first-connection-publication.es.md | ABSENT -> dd1cd80434ae8c63ca4adb70a8d00b35674d26fe | 0->18853bytes | fullDiff19089chars
+- docs/superpowers/progress/2026-11-05-finite-native-notice-consent.es.md | ABSENT -> 2e07b7497ed309758d5939f610d51a993ca45be2 | 0->20429bytes | fullDiff20558chars
+- docs/superpowers/progress/2026-11-05-finite-native-notice-link.es.md | ABSENT -> 5ab4c81e76d44398a7dd4c08268aedaa5381ca67 | 0->8223bytes | fullDiff8447chars
+- docs/superpowers/progress/2026-11-05-finite-native-notice-next-slice.es.md | ABSENT -> efbc1ce8366f3319fe8b7e74f83728688c992897 | 0->9149bytes | fullDiff9381chars
+- docs/superpowers/progress/2026-11-05-finite-native-notice-provenance.es.md | ABSENT -> 082d55fd873fdc8858407d22d6f2bd929ccc2984 | 0->4106bytes | fullDiff4379chars
+- docs/superpowers/progress/2026-11-05-finite-preparation-notice-store.es.md | ABSENT -> e83566751c45a714e26350324e81150985d5c539 | 0->6642bytes | fullDiff6859chars
+- docs/superpowers/reports/2026-11-01-finite-material-task1.md | ABSENT -> 3ef7d13ac1704feaa77e9b63c16c09669bf4fb5f | 0->9373bytes | fullDiff9677chars
+- docs/superpowers/reports/2026-11-01-finite-material-task2.md | ABSENT -> 940074737de95cb6bff584d70c468c5a741640b9 | 0->14475bytes | fullDiff14780chars
+- docs/superpowers/reports/2026-11-01-finite-material-task3.md | ABSENT -> 8186812c233fa38ae6867aa32216464ba5179342 | 0->17168bytes | fullDiff17507chars
+- docs/superpowers/reports/2026-11-01-finite-native-cleanup-task1.md | ABSENT -> 42c81804816a2631ea940c8c3cc1a52f81676ee6 | 0->11965bytes | fullDiff12277chars
+- docs/superpowers/reports/2026-11-01-finite-native-cleanup-task2.md | ABSENT -> 7818e7f6d4404135305cab18ef190763027dbc63 | 0->29879bytes | fullDiff30285chars
+- docs/superpowers/reports/2026-11-01-finite-native-cleanup-task3.md | ABSENT -> 4741506177cb47aa6979d46070b869e941424108 | 0->15351bytes | fullDiff15682chars
+- docs/superpowers/reports/2026-11-01-finite-native-cleanup-task4.md | ABSENT -> 44369fd223a681ac9c28063cd8716f5df2d0d0ee | 0->5288bytes | fullDiff5582chars
+- docs/superpowers/reports/2026-11-01-finite-native-launch-task1.md | ABSENT -> 83bb1cd8e0c901443097ed785263d898c4c44b1b | 0->20212bytes | fullDiff20607chars
+- docs/superpowers/reports/2026-11-01-finite-native-launch-task2.md | ABSENT -> 524938654f13d554d0c6a7495787d1a90e0cc888 | 0->19021bytes | fullDiff19398chars
+- docs/superpowers/reports/2026-11-01-finite-native-launch-task3.md | ABSENT -> acf16bb45a1c81a33a432476fd560064347adf97 | 0->17608bytes | fullDiff17949chars
+- docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task1.md | ABSENT -> e4c13b4bfb2d0e818bd3c0441340412ffcacf3ec | 0->18563bytes | fullDiff18936chars
+- docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task2.md | ABSENT -> 98943678471d800963d833396e6f9b75d7c03b8b | 0->29699bytes | fullDiff30086chars
+- docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task3.md | ABSENT -> 583856e95a42d4aea6e44e0fc0c258450916a4b9 | 0->37862bytes | fullDiff38301chars
+- docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task4.md | ABSENT -> 919a5c00802d50867f8d333915ef048c69c16abc | 0->20276bytes | fullDiff20632chars
+- docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task5-b1.md | ABSENT -> 38122786001c8b8bfe3c566ddd48597235470da6 | 0->11885bytes | fullDiff12254chars
+- docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task5-b2-ab.md | ABSENT -> 64f179c6a00ace087cb7cb26067d36949db263af | 0->20396bytes | fullDiff20784chars
+- docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task5-b2-preflight.md | ABSENT -> 41663e99ff7ab1ce9544fd91792445cbdc69fd38 | 0->28303bytes | fullDiff28635chars
+- docs/superpowers/reports/2026-11-01-finite-private-policy-setup-task5-preflight.md | ABSENT -> e9321ecb947e978e4686bc1fca374048f79bd3f5 | 0->16041bytes | fullDiff16372chars
+- docs/superpowers/reports/2026-11-01-finite-profile-package-task4c1.md | ABSENT -> 9fb616791fcce8c00521ad50cb22626c4ff3ddcb | 0->19354bytes | fullDiff19731chars
+- docs/superpowers/reports/2026-11-02-day-close.es.md | ABSENT -> d5a140f6cbc19dc8463e79efd3d0808e28353124 | 0->4298bytes | fullDiff4467chars
+- docs/superpowers/reports/2026-11-02-finite-admission-preflight.md | ABSENT -> 163e3b9a9999306614557a188f38bcea5df08864 | 0->6427bytes | fullDiff6674chars
+- docs/superpowers/reports/2026-11-02-finite-admission-refinement.md | ABSENT -> cab66c5655c834571b8b4642a224dd61c7c952a7 | 0->10926bytes | fullDiff11234chars
+- docs/superpowers/reports/2026-11-02-finite-c3-consumer-preflight.md | ABSENT -> f7fa562d8731b4ec5751710e6e97fff2c2479d32 | 0->8460bytes | fullDiff8659chars
+- docs/superpowers/reports/2026-11-02-finite-cloud-continuation.es.md | ABSENT -> 112d54adb7daa9232b453d133187aa63cf6a3c28 | 0->3085bytes | fullDiff3319chars
+- docs/superpowers/reports/2026-11-02-finite-historical-writer-qualification.es.md | ABSENT -> b4e553355507b9be3ab7dacec6c5d8ea8c6e0eb1 | 0->10437bytes | fullDiff10688chars
+- docs/superpowers/reports/2026-11-02-finite-initial-cleanup-owner-preflight.md | ABSENT -> 5108ae1b9a4da547f925b0045e93b30bfc253892 | 0->2795bytes | fullDiff3076chars
+- docs/superpowers/reports/2026-11-02-finite-initial-cleanup-owner.md | ABSENT -> ce0d783bedf644203d9edcead6eb276b1b1fcb99 | 0->19232bytes | fullDiff19499chars
+- docs/superpowers/reports/2026-11-02-finite-initial-inactive-upload-preflight.md | ABSENT -> 7d2b56f254973378acbc25b2a3500707253b99c4 | 0->5470bytes | fullDiff5770chars
+- docs/superpowers/reports/2026-11-02-finite-initial-inactive-upload.md | ABSENT -> 75291314cb802a09c8324f6903bdd6339368ee00 | 0->25011bytes | fullDiff25368chars
+- docs/superpowers/reports/2026-11-02-finite-initial-material.md | ABSENT -> a16832c2368a8602d402d842892f22dfaaf12739 | 0->14484bytes | fullDiff14782chars
+- docs/superpowers/reports/2026-11-02-finite-initial-native-entry.md | ABSENT -> 58a43b0c2d06046d0e0a54c1c8792df50e683ae7 | 0->23056bytes | fullDiff23444chars
+- docs/superpowers/reports/2026-11-02-finite-initial-preparation-source-preflight.md | ABSENT -> 2d1409a9753474cd046cd017fceb87ebf8930452 | 0->29391bytes | fullDiff29701chars
+- docs/superpowers/reports/2026-11-02-finite-initial-publication-preflight.md | ABSENT -> 2d9043d328f4a1d9dbaf1686ec7abdb4daf9b60e | 0->14494bytes | fullDiff14733chars
+- docs/superpowers/reports/2026-11-02-finite-initial-writer-boundary.md | ABSENT -> 6043564ef98d3837634bf8cfc7f1f7549d9a53fa | 0->5361bytes | fullDiff5611chars
+- docs/superpowers/reports/2026-11-02-finite-native-rpc-boundaries.md | ABSENT -> c4a1cc1c26380eebdda7f6c70acef7fe3a68ee16 | 0->3578bytes | fullDiff3820chars
+- docs/superpowers/reports/2026-11-02-finite-pre-t0-qa-provenance.md | ABSENT -> 7fc1771816523e9feffec232677c81b389482ba0 | 0->14505bytes | fullDiff14852chars
+- docs/superpowers/reports/2026-11-02-finite-premature-admission.md | ABSENT -> 05cc7508d09e0681b648cc000be5a9e6836b4385 | 0->14615bytes | fullDiff14927chars
+- docs/superpowers/reports/2026-11-02-preparation-provider-schema.es.md | ABSENT -> 54f6a0faa205da5feb7aa1089c3c0c48e0a06502 | 0->4341bytes | fullDiff4666chars
+- docs/superpowers/reports/2026-11-02-reader-metadata-preparation.es.md | ABSENT -> ca87017c66aaf07a89a00a6e61a051b8a2a1b1e1 | 0->2108bytes | fullDiff2373chars
+- docs/superpowers/reports/2026-11-03-finite-initial-activation-coordinator.md | ABSENT -> 661e066d801dcc6082109a2739a0e69531477075 | 0->5956bytes | fullDiff6180chars
+- docs/superpowers/reports/2026-11-03-finite-initial-activation-wire.md | ABSENT -> 1efa3887772b5f39b5c71d3b4b7461048476573e | 0->4390bytes | fullDiff4620chars
+- docs/superpowers/reports/2026-11-03-finite-initial-capsule.md | ABSENT -> 200b727ed192821a8c17f150094f3be9f0d9edb7 | 0->7296bytes | fullDiff7573chars
+- docs/superpowers/reports/2026-11-03-finite-initial-gate-readers.md | ABSENT -> 8b0be2c4cbe5cfe8b45a50fc6f2241f2fa9330c0 | 0->3982bytes | fullDiff4223chars
+- docs/superpowers/reports/2026-11-03-finite-initial-preliminary-composition.md | ABSENT -> d7d8e345b65505c988e7ff3a5677d90bd79b2bf6 | 0->5125bytes | fullDiff5381chars
+- docs/superpowers/reports/2026-11-03-finite-initial-primary-gates.md | ABSENT -> 771e4e4edc91791b02f21c7377924547c302fe9b | 0->5381bytes | fullDiff5588chars
+- docs/superpowers/reports/2026-11-03-finite-initial-serial-gates.md | ABSENT -> 91abb9279e30983e9b8a7dfb0cbeccb103737f60 | 0->2559bytes | fullDiff2810chars
+- docs/superpowers/reports/2026-11-03-finite-native-custody-probe.md | ABSENT -> 32c914c4b42837e25d85619c2046d8b2585e3020 | 0->5549bytes | fullDiff5760chars
+- docs/superpowers/reports/2026-11-03-finite-owner-window.md | ABSENT -> c015170d96b96219fabdb3dfa8a17d04fbdd32cc | 0->1760bytes | fullDiff1969chars
+- docs/superpowers/reports/2026-11-03-finite-readonly-host-mount.md | ABSENT -> 39c5405bca9edd7e9ca504696a4d653b776d802e | 0->4542bytes | fullDiff4809chars
+- docs/superpowers/reports/2026-11-03-finite-readonly-preentry-custody.md | ABSENT -> 9d801629eed1523663eebc2629d36ba3293f2ecc | 0->2145bytes | fullDiff2393chars
+- docs/superpowers/reports/2026-11-03-finite-writer-custody-qualification.es.md | ABSENT -> 9b6a59c0fae941dab5a39f3395d75dd818d91c21 | 0->7398bytes | fullDiff7616chars
+- docs/superpowers/reports/2026-11-04-finite-closed-prearm-policy-conversion-task1.md | ABSENT -> 5555e40ee3b51d159b58584de93af3c6032f5f8f | 0->7283bytes | fullDiff7616chars
+- docs/superpowers/reports/2026-11-04-finite-initial-owner-source.md | ABSENT -> b79eca9af2759ee99f9ce77aae3fc2612e3dc021 | 0->12819bytes | fullDiff13143chars
+- docs/superpowers/reports/2026-11-04-finite-known-profile-c1.md | ABSENT -> 58c248b1a80c8c9e89e3ca6ab946fa24e2b1a177 | 0->6145bytes | fullDiff6414chars
+- docs/superpowers/reports/2026-11-04-finite-known-profile-c2.md | ABSENT -> 7149fee58d21f8ea2ef21f71bdb6aab38a4fe772 | 0->10262bytes | fullDiff10558chars
+- docs/superpowers/reports/2026-11-04-finite-known-profile-c3.md | ABSENT -> 28b8a72c60ab7be43210be3dbbdf0adace28f9d8 | 0->19352bytes | fullDiff19780chars
+- docs/superpowers/reports/2026-11-04-finite-owner-native-conduit.md | ABSENT -> 863d8ddaa2712a1926d12ddb37ba7bcf4586d9bf | 0->21810bytes | fullDiff22174chars
+- docs/superpowers/reports/2026-11-04-finite-owner-phase-context.md | ABSENT -> 441d6d074399b48b84766880c6e9bbfeb2e789f0 | 0->29129bytes | fullDiff29542chars
+- docs/superpowers/reports/2026-11-04-finite-owner-sdk-trust-boundary-d01.md | ABSENT -> 014dd289f2105322eb4c6de1dbb0d5e111283cb2 | 0->8967bytes | fullDiff9285chars
+- docs/superpowers/reports/2026-11-04-finite-owner-sdk-trust-boundary.md | ABSENT -> eff7b9d1a30363c40b066dd80c669a1530ca1d0d | 0->5187bytes | fullDiff5469chars
+- docs/superpowers/reports/2026-11-04-finite-readonly-integration.md | ABSENT -> 1bb5047221560bc10a87110d718babe92129a2f7 | 0->5723bytes | fullDiff6006chars
+- docs/superpowers/reports/2026-11-04-finite-request-signal-opt-in-checkpoint.md | ABSENT -> bcf7b55b0aea4c67e11d613d4b39819c49867648 | 0->7214bytes | fullDiff7529chars
+- docs/superpowers/reports/2026-11-04-finite-request-signal-opt-in.md | ABSENT -> c218f10dd35204b664a70a0f90582bede3911704 | 0->3725bytes | fullDiff3999chars
+- docs/superpowers/reports/2026-11-04-native-signal-capability-preflight.md | ABSENT -> d74665df5396b4b099c56be20ebf701af291b282 | 0->3133bytes | fullDiff3418chars
+- docs/superpowers/reports/2026-11-04-owner-request-retention.md | ABSENT -> 5d27b99078c66a6c6d68fd2386c238709649900c | 0->17645bytes | fullDiff18044chars
+- docs/superpowers/reports/2026-11-04-preparation-cleanup-enrollment.md | ABSENT -> 04a7c661f8fd91263e52060020cd0deab97b3c24 | 0->13073bytes | fullDiff13428chars
+- docs/superpowers/reports/2026-11-04-preparatory-issuer-fence.md | ABSENT -> 30f31eb1c043eac6c76ef42d238d8c311f05e902 | 0->16630bytes | fullDiff16998chars
+- docs/superpowers/reports/2026-11-05-finite-native-first-connection-publication-task1.md | ABSENT -> 9f71c6acd260a36774fee7b7f05902a3cdc524dd | 0->23753bytes | fullDiff24277chars
+- docs/superpowers/reports/2026-11-05-finite-native-first-connection-publication-task2.md | ABSENT -> 3205f7d1a9fd52bc64ca3abe7ed8d9fbe95668b8 | 0->49003bytes | fullDiff49475chars
+- docs/superpowers/reports/2026-11-05-finite-native-notice-consent-design.es.md | ABSENT -> 62ee23dc11b4a680dfa82a86e44c8a3149b6de96 | 0->10085bytes | fullDiff10295chars
+- docs/superpowers/reports/2026-11-05-finite-native-notice-consent.md | ABSENT -> 91c08e8cfd6f0eb954631c3e75ea4af66e4b33b5 | 0->38581bytes | fullDiff38923chars
+- docs/superpowers/reports/2026-11-05-finite-native-notice-link-design.es.md | ABSENT -> bda8dbe79d6eb3985aadc3b86f900a13152c3dec | 0->10065bytes | fullDiff10274chars
+- docs/superpowers/reports/2026-11-05-finite-native-notice-link.md | ABSENT -> ad7a0cd39d6788a748d6cd24ed749d937c6e8dbe | 0->119475bytes | fullDiff120343chars
+- docs/superpowers/reports/2026-11-05-finite-native-notice-next-slice-design.es.md | ABSENT -> db8793f566e5ee0a1c7756057569c747817bd323 | 0->10117bytes | fullDiff10331chars
+- docs/superpowers/reports/2026-11-05-finite-native-notice-next-slice.md | ABSENT -> a7dbd31cfa0fdf9f05a4a488afb38982815ca0f0 | 0->28966bytes | fullDiff29410chars
+- docs/superpowers/reports/2026-11-05-finite-native-notice-provenance.md | ABSENT -> d69a71c3a76727fe7ec8a3ce70ffad0bd5f79fab | 0->13728bytes | fullDiff13980chars
+- docs/superpowers/reports/2026-11-05-finite-native-notice-receiver-design.es.md | ABSENT -> fbae5c99c43fc2af3872c6c7f20211cb69524795 | 0->12153bytes | fullDiff12367chars
+- docs/superpowers/reports/2026-11-05-finite-owner-exchange-continuity-design.md | ABSENT -> 2e7f671f574bc240759e3c7840d54d459c3d290f | 0->5435bytes | fullDiff5694chars
+- docs/superpowers/reports/2026-11-05-finite-owner-exchange-continuity.md | ABSENT -> d2d4e514519a8ccecf8bce3967a7b76889ff9c8d | 0->19665bytes | fullDiff20078chars
+- docs/superpowers/reports/2026-11-05-finite-owner-io-fanout-design.md | ABSENT -> 03a270138cd56067e935479a7d70d9316142e8cf | 0->8256bytes | fullDiff8431chars
+- docs/superpowers/reports/2026-11-05-finite-owner-io-fanout.md | ABSENT -> 103beae4b6123265ecd8b0ca19b308e6c5e75b0f | 0->30359bytes | fullDiff30760chars
+- docs/superpowers/reports/2026-11-05-finite-owner-sdk-trust-boundary-d02.md | ABSENT -> 1e4ccf8f9a74d5d7dda4de23fbad34392144ccb3 | 0->28517bytes | fullDiff28944chars
+- docs/superpowers/reports/2026-11-05-finite-owner-sdk-trust-boundary-d03.md | ABSENT -> a5b71ca540c4d1ea69b201cef2859379f84da2db | 0->20492bytes | fullDiff20895chars
+- docs/superpowers/reports/2026-11-05-finite-preparation-notice-store.md | ABSENT -> f124c38da55659ae5554008cdc68f4f90a989b5f | 0->27380bytes | fullDiff27835chars
+- docs/superpowers/reports/2026-11-05-finite-sdk-child-io-feasibility.es.md | ABSENT -> 32a970e9bc6b3574cc26460396ec458830b6411d | 0->24504bytes | fullDiff24592chars
+- docs/superpowers/reports/2026-11-06-finite-native-first-connection-publication-task3.md | ABSENT -> 3f273f15451de3364dc2b36da628802b1c53a7f1 | 0->102198bytes | fullDiff102786chars
+- docs/superpowers/reviews/2026-11-01-finite-private-policy-setup-task3.md | ABSENT -> 5e874fce8ec016b78576b407e4270b18320b36a6 | 0->10099bytes | fullDiff10364chars
+- docs/superpowers/reviews/2026-11-01-finite-private-policy-setup-task4.md | ABSENT -> 9d5aeccfb35503472626e82fc0e5d4fba2bbc41a | 0->4554bytes | fullDiff4833chars
+- docs/superpowers/reviews/2026-11-01-finite-private-policy-setup-task5-b1.md | ABSENT -> 8072534645bb33153a93ac04843daf676a8bb550 | 0->2348bytes | fullDiff2636chars
+- docs/superpowers/reviews/2026-11-01-finite-private-policy-setup-task5-b2-ab.md | ABSENT -> 7348c813b8773eba6d404919345b8963b2699065 | 0->3061bytes | fullDiff3364chars
+- docs/superpowers/reviews/2026-11-02-finite-initial-cleanup-owner.md | ABSENT -> 6bb949e60e2e6c32e0835021fc86ee89b176108c | 0->3434bytes | fullDiff3687chars
+- docs/superpowers/reviews/2026-11-02-finite-initial-inactive-upload.md | ABSENT -> 7d0b95b654270ce11a148c29e88b7b2051cd3475 | 0->2420bytes | fullDiff2688chars
+- docs/superpowers/reviews/2026-11-02-finite-initial-material.md | ABSENT -> 843b23ac8e5d86955f46a1ac774ecb541de7e8c4 | 0->3067bytes | fullDiff3309chars
+- docs/superpowers/reviews/2026-11-02-finite-initial-native-entry.md | ABSENT -> 51e5d9251146aaed459b4a43a25f57937ee112a8 | 0->4310bytes | fullDiff4558chars
+- docs/superpowers/reviews/2026-11-02-finite-pre-t0-qa-provenance.md | ABSENT -> fab021e3762f01dca869853593781c4746967382 | 0->5912bytes | fullDiff6189chars
+- docs/superpowers/reviews/2026-11-02-finite-premature-admission.md | ABSENT -> 5109afa341979c7bb089cba3bcc99a4c6f39c249 | 0->3204bytes | fullDiff3479chars
+- docs/superpowers/reviews/2026-11-03-finite-initial-activation-coordinator.es.md | ABSENT -> 2e686e6abdf2cf83cfce99de57cc32ea514d839e | 0->1308bytes | fullDiff1604chars
+- docs/superpowers/reviews/2026-11-03-finite-initial-cleanup-owner-fix1.es.md | ABSENT -> dad573294b84816fdfc4c9e6e6d74ac3e33f33cd | 0->1373bytes | fullDiff1641chars
+- docs/superpowers/reviews/2026-11-03-finite-initial-preliminary-composition.es.md | ABSENT -> 657fcca981be1147f895144d85e57a7745fbd423 | 0->1181bytes | fullDiff1462chars
+- docs/superpowers/reviews/2026-11-03-finite-initial-primary-gates.es.md | ABSENT -> 57ff86f5e7afca56707c0c22a84a5acfb0a9469c | 0->957bytes | fullDiff1212chars
+- docs/superpowers/reviews/2026-11-03-finite-readonly-host-unit-a.es.md | ABSENT -> f689735170e46bd0e02c0f3eabf4473a0439a391 | 0->1432bytes | fullDiff1698chars
+- docs/superpowers/reviews/2026-11-03-finite-readonly-preentry-custody.es.md | ABSENT -> d506984845359296aa1b45d49de156559679bc40 | 0->1314bytes | fullDiff1578chars
+- docs/superpowers/reviews/2026-11-04-finite-closed-prearm-policy-conversion-task1-preflight.es.md | ABSENT -> d1a3020213ade0217e1cdd82235f5ae5eb36f559 | 0->1175bytes | fullDiff1528chars
+- docs/superpowers/reviews/2026-11-04-finite-closed-prearm-policy-conversion-task1.es.md | ABSENT -> 3179b4608f5bc6819dff5fbb0b87bb3e90121cc4 | 0->1520bytes | fullDiff1837chars
+- docs/superpowers/reviews/2026-11-04-finite-initial-capsule.es.md | ABSENT -> fda0928687c188a645b492b3f76e392304cf5952 | 0->1492bytes | fullDiff1743chars
+- docs/superpowers/reviews/2026-11-04-finite-initial-owner-source.es.md | ABSENT -> 27b4fb188580e2db9137f084e0f5c9293fb68a46 | 0->1372bytes | fullDiff1638chars
+- docs/superpowers/reviews/2026-11-04-finite-known-profile-c1.es.md | ABSENT -> 6ba810f409fdcd4e18462866d6f7fc7c416bb4c9 | 0->1607bytes | fullDiff1861chars
+- docs/superpowers/reviews/2026-11-04-finite-known-profile-c2.es.md | ABSENT -> 7f8bba8cc6e03f74ad50d22fde7a0a071bfc171a | 0->1956bytes | fullDiff2212chars
+- docs/superpowers/reviews/2026-11-04-finite-known-profile-c3.es.md | ABSENT -> 791ff8fbf84e0761beeca428795138a570173ad3 | 0->1792bytes | fullDiff2048chars
+- docs/superpowers/reviews/2026-11-04-finite-owner-native-conduit.es.md | ABSENT -> 6b45596beb5dc920b0bd64cb956b0547ed5b4e7e | 0->3210bytes | fullDiff3485chars
+- docs/superpowers/reviews/2026-11-04-finite-owner-phase-context-preflight.es.md | ABSENT -> 003f821339cc7b5cd247390c4af82798bf699ca9 | 0->1829bytes | fullDiff2129chars
+- docs/superpowers/reviews/2026-11-04-finite-owner-phase-context.es.md | ABSENT -> 4fd3bed89fec12d0fb33d26a0f6f48735addd086 | 0->2278bytes | fullDiff2543chars
+- docs/superpowers/reviews/2026-11-04-finite-owner-sdk-trust-boundary-d01-preflight.es.md | ABSENT -> 1e6b540ec92792cc0c4a0d3bee7cff2083e3f344 | 0->1436bytes | fullDiff1761chars
+- docs/superpowers/reviews/2026-11-04-finite-owner-sdk-trust-boundary-d01.es.md | ABSENT -> 4eff7aae09f64081640bf7e457a5c8e8b6324194 | 0->2071bytes | fullDiff2352chars
+- docs/superpowers/reviews/2026-11-04-finite-readonly-integration.es.md | ABSENT -> 5f8ccec9501b2c4461578e8950d8095da609c08d | 0->1347bytes | fullDiff1613chars
+- docs/superpowers/reviews/2026-11-04-finite-request-signal-opt-in.es.md | ABSENT -> 2da029f02e5dd80d820e41c0a71a0cb606aed455 | 0->1234bytes | fullDiff1501chars
+- docs/superpowers/reviews/2026-11-04-owner-request-retention.es.md | ABSENT -> d8492a459d862c3cfa958668ea27c025d2c8b00c | 0->3801bytes | fullDiff4035chars
+- docs/superpowers/reviews/2026-11-04-preparation-cleanup-enrollment.es.md | ABSENT -> 8143c410374e51dc55f321a4714f7674cfd838ec | 0->4028bytes | fullDiff4317chars
+- docs/superpowers/reviews/2026-11-04-preparatory-issuer-fence.es.md | ABSENT -> 091895adb6576516f81c61301b361bbebd6e55c8 | 0->3266bytes | fullDiff3532chars
+- docs/superpowers/reviews/2026-11-05-finite-native-first-connection-publication-preflight.es.md | ABSENT -> 96bbc3b6358bdd309c0da81c27ea88d1a13fdc27 | 0->6802bytes | fullDiff7062chars
+- docs/superpowers/reviews/2026-11-05-finite-native-first-connection-publication-task1.es.md | ABSENT -> 5f1f77b24c1a8ac828f2345fe24a4a5d099f0dd5 | 0->3272bytes | fullDiff3582chars
+- docs/superpowers/reviews/2026-11-05-finite-native-notice-consent-preflight.es.md | ABSENT -> b7a66fd62909b62595b55b22834635176b3956da | 0->7054bytes | fullDiff7304chars
+- docs/superpowers/reviews/2026-11-05-finite-native-notice-consent.es.md | ABSENT -> cdb612aa3961a859002761c99f3badc2a36921e1 | 0->7540bytes | fullDiff7773chars
+- docs/superpowers/reviews/2026-11-05-finite-native-notice-get.es.md | ABSENT -> c0779a6e31cfa60dadb18aed140f69f4eda851e0 | 0->6697bytes | fullDiff6899chars
+- docs/superpowers/reviews/2026-11-05-finite-native-notice-link-preflight.es.md | ABSENT -> 5cfbf0f7a1bd62437b0891ea3de97de0281bc564 | 0->9207bytes | fullDiff9432chars
+- docs/superpowers/reviews/2026-11-05-finite-native-notice-link.es.md | ABSENT -> 5bbaf76b880adf2cce2a1cf82a1598d95d979573 | 0->3955bytes | fullDiff4188chars
+- docs/superpowers/reviews/2026-11-05-finite-native-notice-next-slice-preflight.es.md | ABSENT -> 187ef19d14b106aabadce2f39c4ab2255c32c7e4 | 0->7193bytes | fullDiff7446chars
+- docs/superpowers/reviews/2026-11-05-finite-native-notice-provenance-preflight.es.md | ABSENT -> aa82c010f495136451410af4f55d4a620d94a8f5 | 0->4729bytes | fullDiff4995chars
+- docs/superpowers/reviews/2026-11-05-finite-native-notice-provenance.es.md | ABSENT -> 0ad08b5f16390169310fe73af6ffbc147d5499e6 | 0->3523bytes | fullDiff3783chars
+- docs/superpowers/reviews/2026-11-05-finite-owner-exchange-continuity-preflight.es.md | ABSENT -> f92b0871f45b9cc284bf1b092a3e5fb54dbb710d | 0->3316bytes | fullDiff3642chars
+- docs/superpowers/reviews/2026-11-05-finite-owner-exchange-continuity.es.md | ABSENT -> 6e0f6a8b629124f8ed37e23fc5617d35dd224938 | 0->5149bytes | fullDiff5388chars
+- docs/superpowers/reviews/2026-11-05-finite-owner-io-fanout-preflight.es.md | ABSENT -> d6f5931828fdfafd9702f4bb022412ed64529ee6 | 0->5893bytes | fullDiff6191chars
+- docs/superpowers/reviews/2026-11-05-finite-owner-io-fanout-scope-amendments.es.md | ABSENT -> 4eea0ef17c0d43e211188807c4393c274dfe0f2a | 0->3537bytes | fullDiff3855chars
+- docs/superpowers/reviews/2026-11-05-finite-owner-io-fanout.es.md | ABSENT -> 8c818341a230a558b4d81cebcbcb26303fabe52b | 0->2632bytes | fullDiff2890chars
+- docs/superpowers/reviews/2026-11-05-finite-owner-sdk-d02.es.md | ABSENT -> e83de49ee008ac84d3d7da8b3059657f1b62591b | 0->3183bytes | fullDiff3438chars
+- docs/superpowers/reviews/2026-11-05-finite-owner-sdk-d03-preflight.es.md | ABSENT -> c26619171cac178b91acd85a5cd1e18110fc407a | 0->2090bytes | fullDiff2364chars
+- docs/superpowers/reviews/2026-11-05-finite-owner-sdk-d03.es.md | ABSENT -> 5e454f91ca24b6f9e4c8458d04d560f4b57cf5f3 | 0->2644bytes | fullDiff2852chars
+- docs/superpowers/reviews/2026-11-05-finite-owner-sdk-trust-boundary-d02-preflight.es.md | ABSENT -> a15f35bc5c2f8350a93039a909764d35100ff262 | 0->2150bytes | fullDiff2469chars
+- docs/superpowers/reviews/2026-11-05-finite-preparation-notice-store-preflight.es.md | ABSENT -> 7dd199f255b833ab319180ac0d9fa5a85e004247 | 0->4536bytes | fullDiff4786chars
+- docs/superpowers/reviews/2026-11-05-finite-preparation-notice-store.es.md | ABSENT -> 5ccb830821fac8edd33d4df3308212c254a538e5 | 0->4118bytes | fullDiff4377chars
+- docs/superpowers/reviews/2026-11-06-finite-native-first-connection-publication-task2.es.md | ABSENT -> 56676a4da680288e19a0ead7fb0b28504365c6a6 | 0->4332bytes | fullDiff4653chars
+- docs/superpowers/reviews/2026-11-06-finite-native-first-connection-publication-task3.es.md | ABSENT -> 590d2d5c37cb09a72593a15b9f41853c45527814 | 0->5666bytes | fullDiff5960chars
+- docs/superpowers/reviews/packages/2026-11-02-finite-initial-cleanup-owner-fix1.diff.json | ABSENT -> 3060f3f7b56077a3ebce1db774d25a4371a3defc | 0->74069bytes | fullDiff74443chars
+- docs/superpowers/reviews/packages/2026-11-02-finite-initial-cleanup-owner.diff.json | ABSENT -> 3319c1e44b9095113f528d1e909ac6b1b93ef777 | 0->111252bytes | fullDiff111754chars
+- docs/superpowers/reviews/packages/2026-11-02-finite-initial-inactive-upload-fix1.diff.json | ABSENT -> af03c8993ab185ab46d5c5379d7f73eff16433a4 | 0->30157bytes | fullDiff30631chars
+- docs/superpowers/reviews/packages/2026-11-02-finite-initial-inactive-upload.diff.json | ABSENT -> 4ac49e1461661761d65cb0d60c11cb3c09f26549 | 0->106140bytes | fullDiff106669chars
+- docs/superpowers/reviews/packages/2026-11-02-finite-initial-native-entry-fix1.diff.json | ABSENT -> 7e558d9c53656d1192d8fb274f775c59da665ef9 | 0->28248bytes | fullDiff28750chars
+- docs/superpowers/reviews/packages/2026-11-02-finite-initial-native-entry.diff.json | ABSENT -> e98c20879690f24a738ca7fbf84b4fcbe4a097cc | 0->99632bytes | fullDiff100022chars
+- docs/superpowers/reviews/packages/2026-11-02-finite-premature-admission.diff.json | ABSENT -> e1e75545bdde2e7f873d48244f7003969fd20d76 | 0->98254bytes | fullDiff98767chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-activation-coordinator.diff.json | ABSENT -> 3f23511c29db92be01450c4ebffe3d2f555a55fd | 0->70685bytes | fullDiff71119chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-activation-fix-round1.diff.json | ABSENT -> 8dbeab8a00dd1df95ae398fbf25113955f49865e | 0->50592bytes | fullDiff50989chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-historical-guard.diff.json | ABSENT -> 74068021c47d820cc6e2a76d1860ce37e762641a | 0->45380bytes | fullDiff45697chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-history-schema.diff.json | ABSENT -> 42f567840bca608dfc97c4b31669cb9f41acca8e | 0->36678bytes | fullDiff37016chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-initial-activation-wire.diff.json | ABSENT -> 53667d8e8525967f0f661f17336c47b1884a140d | 0->49312bytes | fullDiff49651chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-initial-preliminary-composition-fix1.diff.json | ABSENT -> 4a15e4e3367d431381b190723b9f81454c1b5144 | 0->55691bytes | fullDiff56095chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-initial-preliminary-composition.diff.json | ABSENT -> cb870f707a6d59e9b98ebd3667bf5e240c285336 | 0->19869bytes | fullDiff20242chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-initial-primary-gates-fix1.diff.json | ABSENT -> 829375d15947e0b3330c3295a361627307c174d4 | 0->44042bytes | fullDiff44377chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-initial-primary-gates.diff.json | ABSENT -> a0d02c4b7d06dcdc5f9b6d30d55c261033848a00 | 0->30014bytes | fullDiff30324chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-initial-serial-gates.diff.json | ABSENT -> cf30e004ec9a245d0b834d166b519acd7e758e9c | 0->45105bytes | fullDiff45446chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-initial-workflow-inventory.diff.json | ABSENT -> 8f69506903ba0561dfc247ee1835fea6f3785963 | 0->36805bytes | fullDiff37179chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-native-custody-probe.diff.json | ABSENT -> 4ff41237a830e745624e640ea96123d56cabb1a4 | 0->54423bytes | fullDiff54761chars
+- docs/superpowers/reviews/packages/2026-11-03-finite-owner-window.diff.json | ABSENT -> 811935996bbb43c94baa16539d6b38beceda61f6 | 0->7068bytes | fullDiff7359chars
+- docs/superpowers/reviews/packages/2026-11-04-finite-initial-capsule.diff.json | ABSENT -> a31a6f32c1ed9249476584cb9edad4fb31f17f07 | 0->90910bytes | fullDiff91394chars
+- docs/superpowers/reviews/packages/2026-11-04-finite-readonly-integration.diff.json | ABSENT -> 328500e37aee6695125f33b72e534f4c0d122de2 | 0->107388bytes | fullDiff107841chars
+- docs/superpowers/reviews/packages/2026-11-04-finite-request-signal-final-slice.diff.json | ABSENT -> 7893e1bbe2a34e4d7d6e4290d9ee41fea74b613e | 0->52916bytes | fullDiff53592chars
+- docs/superpowers/specs/2026-11-01-finite-material-bootstrap-correction.md | ABSENT -> 34593b6a13f49efc804cc874f94a15ab0b601e88 | 0->22373bytes | fullDiff22736chars
+- docs/superpowers/specs/2026-11-01-finite-native-confirmation-cleanup.md | ABSENT -> 9e66850d045bc150a929f2dc79cb830cebbc514d | 0->51090bytes | fullDiff51524chars
+- docs/superpowers/specs/2026-11-01-finite-native-launch-adoption-design.md | ABSENT -> 922a650103806498034ede57cf45081afa7ca909 | 0->22675bytes | fullDiff23076chars
+- docs/superpowers/specs/2026-11-01-finite-private-policy-setup.md | ABSENT -> f1b984ef1983d0fa62cfecd67d4119657bf2d6a6 | 0->65914bytes | fullDiff66388chars
+- docs/superpowers/specs/2026-11-01-finite-profile-package-design.md | ABSENT -> e2c484cfb84d625b5d012f3431b38fc91103ae1f | 0->21114bytes | fullDiff21469chars
+- docs/superpowers/specs/2026-11-01-finite-qa-code-provenance-bridge.md | ABSENT -> 2ea03c55d7fe8a51c07eeac7445286484b4c1f56 | 0->12779bytes | fullDiff13112chars
+- docs/superpowers/specs/2026-11-02-finite-initial-cleanup-owner.md | ABSENT -> 7130bc28cdbc3d5a21eed17e151c7a1fdd27d3d2 | 0->11596bytes | fullDiff11885chars
+- docs/superpowers/specs/2026-11-02-finite-initial-inactive-upload.md | ABSENT -> 8f6d32eda2415c4e45dedfae1736b903b055f8f6 | 0->10771bytes | fullDiff11079chars
+- docs/superpowers/specs/2026-11-02-finite-initial-material.md | ABSENT -> e588ebd2ed0c5cb112778236449eccc8c3a71228 | 0->18730bytes | fullDiff19048chars
+- docs/superpowers/specs/2026-11-02-finite-initial-native-entry.md | ABSENT -> 52360323b92e3918c509a7dbe5394c70d1a1faa3 | 0->7884bytes | fullDiff8166chars
+- docs/superpowers/specs/2026-11-02-finite-pre-t0-qa-provenance.md | ABSENT -> d1b7b05c47f1d9e0562e3aeaa7c04d07f7c9e7f0 | 0->8419bytes | fullDiff8713chars
+- docs/superpowers/specs/2026-11-03-finite-initial-activation-coordinator.md | ABSENT -> 13d52f03879cb7c65f4e44f853b8c149846297ca | 0->3724bytes | fullDiff4022chars
+- docs/superpowers/specs/2026-11-03-finite-initial-capsule.md | ABSENT -> 723110d91f8af336e07beb004c572fd16ea04907 | 0->5565bytes | fullDiff5826chars
+- docs/superpowers/specs/2026-11-03-finite-readonly-host-mount.md | ABSENT -> 51e64c5d46d765ef4e1c1bcf3ab672a9a755333e | 0->6420bytes | fullDiff6695chars
+- docs/superpowers/specs/2026-11-03-finite-readonly-host-unit-a.md | ABSENT -> 7d2e5cc433ad8edb21d1045cb7de343e43c415ef | 0->2163bytes | fullDiff2416chars
+- docs/superpowers/specs/2026-11-04-finite-closed-prearm-policy-conversion.md | ABSENT -> f6132add23014f68812149503dd73241d24fd145 | 0->20858bytes | fullDiff21258chars
+- docs/superpowers/specs/2026-11-04-finite-initial-owner-source.md | ABSENT -> d0b39bfa60223c7e48b79870015d0076cf2a241e | 0->7624bytes | fullDiff7894chars
+- docs/superpowers/specs/2026-11-04-finite-known-profile-compatibility.md | ABSENT -> 1f556dec4e02b8926d4daf13ea72c1afd4ca8577 | 0->18005bytes | fullDiff18367chars
+- docs/superpowers/specs/2026-11-04-finite-owner-native-conduit.md | ABSENT -> 63a41d75a73152a925a6241ad4dff5cc139b775c | 0->12533bytes | fullDiff12836chars
+- docs/superpowers/specs/2026-11-04-finite-owner-phase-context.md | ABSENT -> 088a9efd6999c2bfb3b156d76b511fcf6ed4aef8 | 0->22460bytes | fullDiff22844chars
+- docs/superpowers/specs/2026-11-04-finite-owner-sdk-owned-recheck.md | ABSENT -> 69f96dd39e69e11b8042aacb3d73ce36c8add39c | 0->13451bytes | fullDiff13813chars
+- docs/superpowers/specs/2026-11-04-finite-owner-sdk-trust-boundary.md | ABSENT -> 4d9ed42d016da5a7113c1a6d28c341dc2e7343ab | 0->29906bytes | fullDiff30300chars
+- docs/superpowers/specs/2026-11-04-finite-readonly-integration.md | ABSENT -> 027a423e57992014166a44c59f99db113a8430a1 | 0->3617bytes | fullDiff3875chars
+- docs/superpowers/specs/2026-11-04-finite-request-signal-opt-in.md | ABSENT -> c91cbfd4dbd4595c46e23b0265c5d5e42c7cdfac | 0->6833bytes | fullDiff7116chars
+- docs/superpowers/specs/2026-11-04-owner-request-retention.md | ABSENT -> 2308c9b36a8a2138441fef8b9f58880c0ef91026 | 0->7109bytes | fullDiff7384chars
+- docs/superpowers/specs/2026-11-04-preparation-cleanup-enrollment.md | ABSENT -> a2f8b7214e64931587de303dc93a74485a177f00 | 0->13839bytes | fullDiff14161chars
+- docs/superpowers/specs/2026-11-04-preparatory-issuer-fence.md | ABSENT -> 1f22a1afc2da83c5c8c72bcc5844dfadcd9e4da3 | 0->17714bytes | fullDiff18026chars
+- docs/superpowers/specs/2026-11-04-single-live-pcoff-sequence.md | ABSENT -> 3d7dc69c4ccc4ec8c7e3268318a1a10fc79bb238 | 0->2196bytes | fullDiff2444chars
+- docs/superpowers/specs/2026-11-05-finite-native-first-connection-publication-design.md | ABSENT -> 0ac493fbc1f665cf3001e80f226c4c6e76aaf6c1 | 0->36867bytes | fullDiff36962chars
+- docs/superpowers/specs/2026-11-05-finite-native-notice-consent.md | ABSENT -> c990678135775ed9b3583e931fe97f8c9ef47238 | 0->26725bytes | fullDiff26849chars
+- docs/superpowers/specs/2026-11-05-finite-native-notice-link.md | ABSENT -> 439072471436fa84e959ed231f7d1c4df15adcef | 0->18494bytes | fullDiff18658chars
+- docs/superpowers/specs/2026-11-05-finite-native-notice-next-slice.md | ABSENT -> ae426608d2ba892c1b20994321850c75dcd94301 | 0->21909bytes | fullDiff22100chars
+- docs/superpowers/specs/2026-11-05-finite-native-notice-provenance.md | ABSENT -> 35d31271f577c3c85d3499c8ca58783e6bcae259 | 0->14980bytes | fullDiff15195chars
+- docs/superpowers/specs/2026-11-05-finite-owner-exchange-continuity.md | ABSENT -> f45487ee7f5ada5233d01ab0af37ae2ca27d518d | 0->13456bytes | fullDiff13654chars
+- docs/superpowers/specs/2026-11-05-finite-owner-io-fanout.md | ABSENT -> 6ede30e4b58a9a4a31270962e80e84ed54f8a004 | 0->15542bytes | fullDiff15676chars
+- docs/superpowers/specs/2026-11-05-finite-preparation-notice-store.md | ABSENT -> 8e6a62acaa90fe66f067a31c9df1fcf005611285 | 0->17817bytes | fullDiff18019chars
+- lib/dossier-event-policy-data.mjs | ABSENT -> b984f9221272ff7554887c59a8ab7561cce28cae | 0->1887bytes | fullDiff2060chars
+- lib/mcp-finite-child-primary.mjs | ABSENT -> 8b44125a9421fcb538038f923ecdf986033f59ba | 0->3376bytes | fullDiff3556chars
+- lib/mcp-finite-cleanup-policy.mjs | ABSENT -> 4c9e5a74715becec9d9e471244978f9f0fc88ce3 | 0->1826bytes | fullDiff1996chars
+- lib/mcp-finite-evidence.mjs | ABSENT -> 8e02e3941fc8d34fd6a13fbbd0fa55b638422d82 | 0->3168bytes | fullDiff3332chars
+- lib/mcp-finite-primary-inventory.mjs | ABSENT -> be1348f33750a20d02f008c15e5b3cd975d4a60f | 0->5819bytes | fullDiff6045chars
+- lib/mcp-own-finite-admission-gate.mjs | ABSENT -> d782a4cbc5b11b3c2009eb318a19e06430b28873 | 0->15095bytes | fullDiff15394chars
+- lib/mcp-own-finite-cleanup-host.mjs | ABSENT -> b77bba634c999e7a8a7d02aae8d81a4627ff5f4b | 0->6179bytes | fullDiff6389chars
+- lib/mcp-own-finite-cleanup-proof.mjs | ABSENT -> 59f633d8dcdbfe508719a3530ccb52572396e0b3 | 0->13677bytes | fullDiff13945chars
+- lib/mcp-own-finite-primary.mjs | ABSENT -> 7fa32e90ca6d47a75571cd64f8b199be330219df | 0->12556bytes | fullDiff12806chars
+- lib/mcp-own-finite-reduction.mjs | ABSENT -> 6ce7798ece537f41823c17186336b6f8ac08d90f | 0->6160bytes | fullDiff6367chars
+- lib/mcp-qa-finite-adoption-source.mjs | ABSENT -> ceda920e47f2709fc3200264322a0ce18c7b1158 | 0->446bytes | fullDiff618chars
+- lib/mcp-qa-finite-adoption.mjs | ABSENT -> dc3d87446e0d693c24eb1f83e557bcb36ecb7666 | 0->5130bytes | fullDiff5324chars
+- lib/mcp-qa-finite-bootstrap-admission.mjs | ABSENT -> da6397e8cbdfa33a019e0f1e2c0d0f3eeed8aea9 | 0->2527bytes | fullDiff2725chars
+- lib/mcp-qa-finite-bootstrap-issuer.mjs | ABSENT -> 33e952ae0d14290b43b4fce38cb366c0d4645209 | 0->6047bytes | fullDiff6269chars
+- lib/mcp-qa-finite-bootstrap-native.mjs | ABSENT -> ac0d14ebb5a986e2611e9ddbd72592541c9a4c28 | 0->8464bytes | fullDiff8699chars
+- lib/mcp-qa-finite-bootstrap-primary.mjs | ABSENT -> 6dac79ec9539f7195d058580c5d2a7798eed9696 | 0->5260bytes | fullDiff5470chars
+- lib/mcp-qa-finite-bootstrap-publication.mjs | ABSENT -> 0018313f529fa84ffbcc5012a9ddb86373c8f081 | 0->3370bytes | fullDiff3584chars
+- lib/mcp-qa-finite-bootstrap-record.mjs | ABSENT -> 8030ed7c405d4727d84a26ef8bafcb03c1a409d8 | 0->4630bytes | fullDiff4834chars
+- lib/mcp-qa-finite-bootstrap-source.mjs | ABSENT -> 66aef02dab28ff9e94957f04dfe50b407f2a5e0c | 0->855bytes | fullDiff1034chars
+- lib/mcp-qa-finite-canary-restorer.mjs | ABSENT -> 9494c4ec398d41c369d426a626e60c617440845f | 0->9653bytes | fullDiff9905chars
+- lib/mcp-qa-finite-candidate-residency.mjs | ABSENT -> 29373312a0e60ed6ca87ca3952dba751186662a8 | 0->3357bytes | fullDiff3575chars
+- lib/mcp-qa-finite-cleanup-collector.mjs | ABSENT -> 063bd93d4f6c66640999d8741208be53bc4843ab | 0->2278bytes | fullDiff2472chars
+- lib/mcp-qa-finite-cleanup-store.mjs | ABSENT -> 08b78d61a5024217735eec2af6f162d63c65424c | 0->11234bytes | fullDiff11496chars
+- lib/mcp-qa-finite-confirmation-source.mjs | ABSENT -> 0957b05ed49b79e6d2ef5c283f23daaedfcf10ea | 0->434bytes | fullDiff618chars
+- lib/mcp-qa-finite-confirmation.mjs | ABSENT -> 530cbc2e1051431f07764ae7718c293982a66af2 | 0->7369bytes | fullDiff7604chars
+- lib/mcp-qa-finite-connection-preparation.mjs | ABSENT -> f1388c4586f9e2173f793605b11825de909b9caa | 0->4866bytes | fullDiff5101chars
+- lib/mcp-qa-finite-connection-profile.mjs | ABSENT -> 8a06c997494a6a0e5ad9f9892a5bf0b38e74a8e5 | 0->3427bytes | fullDiff3640chars
+- lib/mcp-qa-finite-connection-source.mjs | ABSENT -> 703bada5189efc962e1f81760ff741de518b77b9 | 0->340bytes | fullDiff515chars
+- lib/mcp-qa-finite-custody.mjs | ABSENT -> efcd89509c93dd4648117ffa16693a0e0423c5e6 | 0->2604bytes | fullDiff2773chars
+- lib/mcp-qa-finite-external-contract.mjs | ABSENT -> ec405e82e29d99ec1c6311f894eba18c5a48e2c4 | 0->11235bytes | fullDiff11483chars
+- lib/mcp-qa-finite-fixed-policy-engine.mjs | ABSENT -> e131f5b22f8f0e54fb61e2f2a131c64798b1d4eb | 0->7484bytes | fullDiff7759chars
+- lib/mcp-qa-finite-historical-source.mjs | ABSENT -> 3f0bf487efd72aa2356fd9982f98a938d328e72d | 0->31048bytes | fullDiff31473chars
+- lib/mcp-qa-finite-http.mjs | ABSENT -> 5c9977438e13ac5f1df0839c70cb9c2d8d22a03e | 0->33600bytes | fullDiff34071chars
+- lib/mcp-qa-finite-initial-activation-wire.mjs | ABSENT -> a4607269f9bcb71befe71fe985f40e4154b8ab01 | 0->5143bytes | fullDiff5387chars
+- lib/mcp-qa-finite-initial-anchors.mjs | ABSENT -> 00f743593d7670e9cb358c8512a25367d29cd6ed | 0->6333bytes | fullDiff6545chars
+- lib/mcp-qa-finite-initial-capsule-records.mjs | ABSENT -> fe588c8765c06edc64cdf79ac37066dfaaf42d0b | 0->7624bytes | fullDiff7871chars
+- lib/mcp-qa-finite-initial-cleanup-records.mjs | ABSENT -> 4553358dfbd719325d1b570c858583438fa00f7d | 0->5083bytes | fullDiff5316chars
+- lib/mcp-qa-finite-initial-cleanup.mjs | ABSENT -> 34a93b63607cff1454f914e16062f17aa3c3e0bb | 0->20088bytes | fullDiff20443chars
+- lib/mcp-qa-finite-initial-custody-probe.mjs | ABSENT -> b81bb37e495d4c8cd3ef77a19e875e04ebd19d32 | 0->7792bytes | fullDiff8063chars
+- lib/mcp-qa-finite-initial-entry-records.mjs | ABSENT -> fcb71af6776a000929b0e8ea0469410b3511b566 | 0->1715bytes | fullDiff1912chars
+- lib/mcp-qa-finite-initial-entry.mjs | ABSENT -> c5ae0f53bee077c693d7f0a0599bbb6347648fee | 0->48591bytes | fullDiff49200chars
+- lib/mcp-qa-finite-initial-history-schema.mjs | ABSENT -> 2f22eb8a8b50cef57cc075956cf261165184e2d3 | 0->4040bytes | fullDiff4268chars
+- lib/mcp-qa-finite-initial-lease.mjs | ABSENT -> a9cc083baae71c89af2f6436c00571dc8e7a20c9 | 0->2257bytes | fullDiff2437chars
+- lib/mcp-qa-finite-initial-material-records.mjs | ABSENT -> c5dec411e500c9d84c62180740d60e62e93a6755 | 0->11554bytes | fullDiff11848chars
+- lib/mcp-qa-finite-initial-material-store.mjs | ABSENT -> f62cd3f930245c48a074f4d5899329cac3390ae9 | 0->5930bytes | fullDiff6186chars
+- lib/mcp-qa-finite-initial-material.mjs | ABSENT -> c0ee5315563764979ed2c681c71b2dbc5515203d | 0->14421bytes | fullDiff14692chars
+- lib/mcp-qa-finite-initial-old-guard.mjs | ABSENT -> 60a6021b94527f08257265073d268091a7b55f50 | 0->4770bytes | fullDiff4988chars
+- lib/mcp-qa-finite-initial-owner-source.mjs | ABSENT -> f1ef3a1c8214decc6a02044da211be127d8e2e9e | 0->16042bytes | fullDiff16374chars
+- lib/mcp-qa-finite-initial-upload-records.mjs | ABSENT -> 383665100e5f829edbaf13c0f137b37ae70a1954 | 0->5274bytes | fullDiff5516chars
+- lib/mcp-qa-finite-initial-upload-wire.mjs | ABSENT -> be1c7d1f25ffd1c6184f6139acb03110b7b148bb | 0->4918bytes | fullDiff5145chars
+- lib/mcp-qa-finite-launch-inventory.mjs | ABSENT -> 0ba74abeb7bfe992eb29ebbaa1d27991afeee475 | 0->7768bytes | fullDiff8057chars
+- lib/mcp-qa-finite-launch-records.mjs | ABSENT -> 251e4cb8cbd3f92fa326e990713b6e6f452fa056 | 0->3776bytes | fullDiff3979chars
+- lib/mcp-qa-finite-launch-source.mjs | ABSENT -> 420ce9d719836df5c16e82ec67f8c0b63d03e623 | 0->909bytes | fullDiff1082chars
+- lib/mcp-qa-finite-launch.mjs | ABSENT -> 3c5716076be75b28388579ce81c2773e2dec6027 | 0->13753bytes | fullDiff14041chars
+- lib/mcp-qa-finite-launcher.mjs | ABSENT -> 6c9e59f8d75bcb56a692bf70e50a678cfca0308f | 0->5096bytes | fullDiff5290chars
+- lib/mcp-qa-finite-observer-native.mjs | ABSENT -> 68dcfcdbccb9060fb24a7b076618c58fe3ef02e3 | 0->6934bytes | fullDiff7177chars
+- lib/mcp-qa-finite-observer.mjs | ABSENT -> b5a5245712a08684c40c28ceac70508516950a44 | 0->7024bytes | fullDiff7233chars
+- lib/mcp-qa-finite-owner-approved-ticket-facts.mjs | ABSENT -> 1dee3a6a4a68fe5d76a4f02d0ea568cceb0cdd7a | 0->3545bytes | fullDiff3770chars
+- lib/mcp-qa-finite-owner-http.mjs | ABSENT -> 009208bed0742d6f3a29cad1e249ffb11dbb762a | 0->1085bytes | fullDiff1246chars
+- lib/mcp-qa-finite-owner-issuer-provenance-journal.mjs | ABSENT -> 9231a1fbe60b6b2f3ebebc6bfa6b50f42ec916db | 0->5729bytes | fullDiff6015chars
+- lib/mcp-qa-finite-owner-issuer-provenance-records.mjs | ABSENT -> b97d32e843a7829027121faec282370aab8ab589 | 0->3265bytes | fullDiff3519chars
+- lib/mcp-qa-finite-owner-native-bridge.mjs | ABSENT -> f2c473cdd11b055a3c6037de317f73d7b3a7a968 | 0->4853bytes | fullDiff5076chars
+- lib/mcp-qa-finite-owner-native-receiver.mjs | ABSENT -> e760b3579a38f1dbb73b177bb73b06d814eb881f | 0->2505bytes | fullDiff2718chars
+- lib/mcp-qa-finite-owner-native-wire.mjs | ABSENT -> 38285fa0149a38924c431b4d5a705bec1384216d | 0->7953bytes | fullDiff8226chars
+- lib/mcp-qa-finite-owner-notice-consent-body.mjs | ABSENT -> 2a1e89ffcfe56a607c704129a3af6a83e8bc9b81 | 0->946bytes | fullDiff1159chars
+- lib/mcp-qa-finite-owner-notice-get-forward.mjs | ABSENT -> ea910f0fcdeade5a794ddaa60898706924e72f80 | 0->4750bytes | fullDiff4983chars
+- lib/mcp-qa-finite-owner-notice-get-qa.mjs | ABSENT -> f63e820a886af5b73a6a7b8b8ea22bc8d12b0106 | 0->1384bytes | fullDiff1580chars
+- lib/mcp-qa-finite-owner-notice-get-wire.mjs | ABSENT -> da8c3f8ac66699fd207989058f4a1425b0ee36c0 | 0->3700bytes | fullDiff3935chars
+- lib/mcp-qa-finite-owner-oauth-forward.mjs | ABSENT -> f7979579fcb6d00b3d5d68c7790089c803f4170f | 0->3200bytes | fullDiff3408chars
+- lib/mcp-qa-finite-owner-oauth-qa.mjs | ABSENT -> ec5c16161bffc6e6d19de153b4465bf6ae748493 | 0->885bytes | fullDiff1063chars
+- lib/mcp-qa-finite-owner-oauth-wire.mjs | ABSENT -> fc113a05e7f6d1ef72cd045a55c5934b357aa724 | 0->4208bytes | fullDiff4419chars
+- lib/mcp-qa-finite-owner-phase-context.mjs | ABSENT -> e482ad1617adc001c3a32c94e71eeb41d27f3d1d | 0->125238bytes | fullDiff126491chars
+- lib/mcp-qa-finite-owner-preparation-qa.mjs | ABSENT -> 67f9da98bf4cc749bfe1c6cb4d5fe8bcbc64a354 | 0->593bytes | fullDiff780chars
+- lib/mcp-qa-finite-owner-preparation.mjs | ABSENT -> 152e730f83af7ef063b6b1db89f8b0a779c2b60e | 0->45255bytes | fullDiff45904chars
+- lib/mcp-qa-finite-owner-sdk-binding-facts.mjs | ABSENT -> c535ad8a7ba5d11618bc2b6da3eacc93d7b7447e | 0->3089bytes | fullDiff3329chars
+- lib/mcp-qa-finite-owner-source.mjs | ABSENT -> 6bc88c44eae3c0b63db514833c3f0eae43eb1c0e | 0->651bytes | fullDiff818chars
+- lib/mcp-qa-finite-owner-stage-facts.mjs | ABSENT -> c2821f1b5806a1f8cc968425ba748d0e26f18a0b | 0->6676bytes | fullDiff6882chars
+- lib/mcp-qa-finite-package.mjs | ABSENT -> fd56ac8ac27ab236a728230086ba2ebd1f1ed4c4 | 0->14377bytes | fullDiff14752chars
+- lib/mcp-qa-finite-policy-configuration.mjs | ABSENT -> 57ce0b4eeffadcf7e34946da3444e88b2bb437ee | 0->3633bytes | fullDiff3862chars
+- lib/mcp-qa-finite-policy-journal.mjs | ABSENT -> 6e3de33d04075740fb57e5f9afcf87dd9f68ee79 | 0->8896bytes | fullDiff9178chars
+- lib/mcp-qa-finite-policy-setup-source.mjs | ABSENT -> a2fcb074e71ca5f6d983c8cb8e9e7db993ef27fb | 0->736bytes | fullDiff926chars
+- lib/mcp-qa-finite-policy-setup.mjs | ABSENT -> 34285e7c8ee3d9838763344edba2dcf6ce33da9b | 0->17404bytes | fullDiff17710chars
+- lib/mcp-qa-finite-policy-transport.mjs | ABSENT -> fa1cb012d65acc0457f7263d01bb5fd88a0cb8a6 | 0->13134bytes | fullDiff13439chars
+- lib/mcp-qa-finite-prearm-profile.mjs | ABSENT -> 504fa988c4e6f5db0e4d21c3da32cb69017bc2e8 | 0->962bytes | fullDiff1140chars
+- lib/mcp-qa-finite-preparation-cleanup-records.mjs | ABSENT -> 7ae2b380a7b9c88164e6c7934ec7b6fc1577e49b | 0->2912bytes | fullDiff3148chars
+- lib/mcp-qa-finite-preparation-cleanup.mjs | ABSENT -> e9999c6ea5d086599844f86120cb0e3449f5d636 | 0->4271bytes | fullDiff4482chars
+- lib/mcp-qa-finite-preparation-enrollment-facts.mjs | ABSENT -> b5b6d6a8f55376d61da6f8bc4809a986dfe0aca7 | 0->7703bytes | fullDiff7946chars
+- lib/mcp-qa-finite-preparation-enrollment-writer.mjs | ABSENT -> 6eb0f08d581faef8ee12ce4f9e0d62cebdfb57f9 | 0->13184bytes | fullDiff13495chars
+- lib/mcp-qa-finite-preparation-issuer-journal.mjs | ABSENT -> 414450aa08f797bed5a41cf5cc697342785ce16b | 0->7005bytes | fullDiff7282chars
+- lib/mcp-qa-finite-preparation-issuer-records.mjs | ABSENT -> 50f9a013580a46ad1d445a240f47b7b2ce887d49 | 0->4923bytes | fullDiff5165chars
+- lib/mcp-qa-finite-preparation-issuer-store.mjs | ABSENT -> efc25b2af9c80b8eb27cffe219544e974002293e | 0->31623bytes | fullDiff32088chars
+- lib/mcp-qa-finite-preparation-notice-journal.mjs | ABSENT -> b9c15aba18e2442a0ed864b8afd5e86313c5e470 | 0->6488bytes | fullDiff6765chars
+- lib/mcp-qa-finite-preparation-notice-records.mjs | ABSENT -> 8c9386b27109cd056d3f70d91ab3cb6c6f40b4e9 | 0->4557bytes | fullDiff4800chars
+- lib/mcp-qa-finite-preparation-records.mjs | ABSENT -> e9b66f68b6dbabbfecc46072949a0d5d9f059141 | 0->18276bytes | fullDiff18630chars
+- lib/mcp-qa-finite-preparation-store.mjs | ABSENT -> 122bc0e52870c71da7ae98ef73cd7762171d89ca | 0->21006bytes | fullDiff21403chars
+- lib/mcp-qa-finite-profile.mjs | ABSENT -> 547eb82f4ec83a2e7bcec88dd18622fc636dc477 | 0->16882bytes | fullDiff17088chars
+- lib/mcp-qa-finite-publication-bridge.mjs | ABSENT -> e302ff930f775c4aa1548ea8631363f2c66cca74 | 0->3753bytes | fullDiff3965chars
+- lib/mcp-qa-finite-publication.mjs | ABSENT -> 6a5572327bb48be9d5683074fa26a8c4abbe86ac | 0->3872bytes | fullDiff4067chars
+- lib/mcp-qa-finite-seed-http.mjs | ABSENT -> 24072d6eb623a034fef9cf1540f42b40eaba0e41 | 0->1929bytes | fullDiff2104chars
+- lib/mcp-qa-finite-seed-issuer.mjs | ABSENT -> b6744c0748631e79b18b518a435fd2de96c9a6f8 | 0->6196bytes | fullDiff6411chars
+- lib/mcp-qa-finite-seed-primary.mjs | ABSENT -> 8439a5d211849e4b05d98f76a92782fa977e9772 | 0->6572bytes | fullDiff6779chars
+- lib/mcp-qa-finite-seed-wire.mjs | ABSENT -> 44b81e34b68e37604bd4937ec7bd052ae00ee818 | 0->3964bytes | fullDiff4150chars
+- lib/mcp-qa-finite-seed.mjs | ABSENT -> 644ab9fe7234950b92122daa0292c37f5ab83ec2 | 0->8460bytes | fullDiff8796chars
+- lib/mcp-qa-finite-source-authority.mjs | ABSENT -> c2d6947196755bcaf075f8a0fdb60762973d702b | 0->429bytes | fullDiff603chars
+- lib/mcp-qa-finite-source.mjs | ABSENT -> 4df75093247f243828229a84654f49733cf54217 | 0->529bytes | fullDiff675chars
+- lib/mcp-qa-finite-stage-work.mjs | ABSENT -> a89baeb2578856dadedf700f9d66e180eb09120e | 0->6656bytes | fullDiff6910chars
+- lib/mcp-qa-finite-trial-control.mjs | ABSENT -> 18996dc32972e3e33726b242e508d9635147a7e5 | 0->44868bytes | fullDiff45484chars
+- lib/mcp-qa-finite-trial-finalizer.mjs | ABSENT -> a2168330825f1733c9b75d134cb7772ca110a86f | 0->4847bytes | fullDiff5065chars
+- lib/mcp-qa-finite-trial-guard.mjs | ABSENT -> 0e4a6f059c5e094409473f99fead676fcf92cd6d | 0->14538bytes | fullDiff14835chars
+- scripts/build-finite-native-package.mjs | ABSENT -> e8a73ce9f541993657bf8bf4c9bd8d3b02b8598d | 0->8931bytes | fullDiff9213chars
+- scripts/mcp-qa-finite-custody-receipt.json | ABSENT -> 6012e07fb3a518bfb2d18b62144067a22de02bef | 0->929bytes | fullDiff1135chars
+- scripts/qa-finite-pre-entry-custody-wrapper.mjs | ABSENT -> 6aaee20e696dec407c819abcdc6e951e3d2fc0c9 | 0->5889bytes | fullDiff6161chars
+- scripts/run-qa-finite-bootstrap.mjs | ABSENT -> e67e8fd7b3b530e852a520a0ea4b61e21d498d48 | 0->1305bytes | fullDiff1482chars
+- scripts/run-qa-finite-trial-finalizer.mjs | ABSENT -> 511dfbe56634b07f9fee5a37e226822d683420f7 | 0->6776bytes | fullDiff7035chars
+- scripts/verify-qa-finite-archive.py | ABSENT -> f9c2d1ad3fa47109fee54f670b4b35171767c4ea | 0->6676bytes | fullDiff6988chars
+- test/build-finite-native-package.test.mjs | ABSENT -> 3b20f8a64ffbb6cfdb033c9c0941e9acd028032e | 0->5172bytes | fullDiff5421chars
+- test/finite_archive_test.py | ABSENT -> 57ca96d3d4fcb1d693a4c0b43b4a047dc4343a34 | 0->6379bytes | fullDiff6654chars
+- test/fixtures/finite-admission-gate.mjs | ABSENT -> b16c7c8c678f5b5a6ae7ae67a1581a22e8129eef | 0->2672bytes | fullDiff2865chars
+- test/fixtures/finite-bootstrap-world.mjs | ABSENT -> 02092a0ee7a5f566632ecd7ae461386d6bdde047 | 0->4693bytes | fullDiff4895chars
+- test/fixtures/finite-cf-http.mjs | ABSENT -> b0897d389ef3c1a0f057422ffc332e3e024d3a93 | 0->6914bytes | fullDiff7123chars
+- test/fixtures/finite-cleanup-proof.mjs | ABSENT -> 7d6bad1af0e42c9eb09be126779e536283dbf4f3 | 0->2394bytes | fullDiff2577chars
+- test/fixtures/finite-connection-owner-source.mjs | ABSENT -> 2a312b19d396d8474b2ac1307ed7a1a5c49f98ce | 0->467bytes | fullDiff671chars
+- test/fixtures/finite-connection-source.mjs | ABSENT -> ebe7a1d226dc73d1ff4131dd82eace7ece4a2c46 | 0->6737bytes | fullDiff6986chars
+- test/fixtures/finite-connection-worker.mjs | ABSENT -> d692ea6a96d290cf2e1d5562a170d6dcee6dd665 | 0->6054bytes | fullDiff6316chars
+- test/fixtures/finite-finalizer.mjs | ABSENT -> d3b254e9a21fc816ef6520bdff0f4abafe34f6ea | 0->5898bytes | fullDiff6088chars
+- test/fixtures/finite-first-connection-publication.mjs | ABSENT -> 6a6950bbe7e956d3b7f19e1a04c5aa6f6ca7b379 | 0->50041bytes | fullDiff50666chars
+- test/fixtures/finite-github.mjs | ABSENT -> 5a0892424381a6edb356f95da66ea2657665136e | 0->4806bytes | fullDiff5077chars
+- test/fixtures/finite-http-module.mjs | ABSENT -> cfbc564074d298cc333ddbb922ba7c19a96065fb | 0->4800bytes | fullDiff5002chars
+- test/fixtures/finite-initial-entry-world.mjs | ABSENT -> 297b57846bbbe13bfc80ac52c5b033a382aef4b6 | 0->80011bytes | fullDiff80610chars
+- test/fixtures/finite-initial-history-world.mjs | ABSENT -> 74f9ca6470d596c0da1247bb9d9f464a80b9ec78 | 0->9418bytes | fullDiff9649chars
+- test/fixtures/finite-launch-native.mjs | ABSENT -> 80754f609ce55b62a1a4bc54c164802483f2b912 | 0->3310bytes | fullDiff3520chars
+- test/fixtures/finite-launch-operations-native.mjs | ABSENT -> e20d562bbe152e949943f90c7a016ad7025d184d | 0->2927bytes | fullDiff3159chars
+- test/fixtures/finite-native-conduit-receiver.mjs | ABSENT -> 3d9329fe529a233686cff37b334d2ffb7944043a | 0->2547bytes | fullDiff2778chars
+- test/fixtures/finite-native-conduit-sender.mjs | ABSENT -> a1703f6f5dd1307c42b30a7de150a1985282842c | 0->1627bytes | fullDiff1838chars
+- test/fixtures/finite-nominal-control.mjs | ABSENT -> ef137edcb5f52285a7a39b1c043deead8c27fede | 0->1078bytes | fullDiff1259chars
+- test/fixtures/finite-owner-component-host.mjs | ABSENT -> c749d25221d5810fe86c798c88bca98a33b014ff | 0->3867bytes | fullDiff4062chars
+- test/fixtures/finite-owner-io-fanout.mjs | ABSENT -> e181bfd7634b6f71e4129b03fbb529a2f1b04f10 | 0->10161bytes | fullDiff10426chars
+- test/fixtures/finite-owner-native.mjs | ABSENT -> 79270d99c3d304f1f7149066827a42cc4d8f196c | 0->6256bytes | fullDiff6551chars
+- test/fixtures/finite-owner-notice-get.mjs | ABSENT -> 3d279975e67611e72e2d1661970718ad4a3892bf | 0->42557bytes | fullDiff43111chars
+- test/fixtures/finite-owner-phase-context.mjs | ABSENT -> f1ddbfff29b1d5e4da4dbf70c649e0df20582b46 | 0->23341bytes | fullDiff23698chars
+- test/fixtures/finite-owner-qa-sdk.mjs | ABSENT -> 62fde9dcefb78bf57585a184901cb3c4d79c4c4d | 0->26614bytes | fullDiff26967chars
+- test/fixtures/finite-owner-source.mjs | ABSENT -> 6f8e9bacfd15a3722f52391cb58db2722217bcf1 | 0->1316bytes | fullDiff1497chars
+- test/fixtures/finite-owner-worker.mjs | ABSENT -> 8bb5a6e776b16093767f76b3b5e2f27f05b576bb | 0->16319bytes | fullDiff16673chars
+- test/fixtures/finite-package-resolver.mjs | ABSENT -> 23788564362c8391064cb77d690b1f7b323eed56 | 0->1801bytes | fullDiff1996chars
+- test/fixtures/finite-policy-configuration-data.mjs | ABSENT -> 1b208180d1c2b127564cdb4364ab24a0b40c44ac | 0->2977bytes | fullDiff3217chars
+- test/fixtures/finite-policy-setup-facts-seed.mjs | ABSENT -> 18270f02fce02631aad153ee28d64c5466273488 | 0->453bytes | fullDiff654chars
+- test/fixtures/finite-policy-setup-facts-source.mjs | ABSENT -> 064516a817853fdd98709b1f0f2f1ec68d55d69f | 0->2439bytes | fullDiff2667chars
+- test/fixtures/finite-policy-setup-facts-worker.mjs | ABSENT -> da42dbc022d66689cbe30761eb0ab70806807e92 | 0->2329bytes | fullDiff2561chars
+- test/fixtures/finite-policy-setup-native.mjs | ABSENT -> 076b84ae304fe7e607a7eb65dda513dd5779547a | 0->5507bytes | fullDiff5744chars
+- test/fixtures/finite-policy-setup-worker.mjs | ABSENT -> 3b5a48f842ccbc1357e778ab6c41edf3ce8bffe0 | 0->9798bytes | fullDiff10064chars
+- test/fixtures/finite-premature-admission-native.mjs | ABSENT -> 12242ae22d278827a3e72a16ac7c1dabba0a1e74 | 0->1714bytes | fullDiff1938chars
+- test/fixtures/finite-premature-admission-worker.mjs | ABSENT -> 523a85eb3482c8c185b74f76ff002b13c2797323 | 0->17813bytes | fullDiff18178chars
+- test/fixtures/finite-preparation-cleanup-entry.mjs | ABSENT -> aea6d1f727f71d7a298b214e8a67380a60961fe6 | 0->8864bytes | fullDiff9074chars
+- test/fixtures/finite-preparation-cleanup-source.mjs | ABSENT -> 8baf5ea379cb3cc359803be9e76f967631b9dca3 | 0->1374bytes | fullDiff1595chars
+- test/fixtures/finite-preparation-issuer-worker.mjs | ABSENT -> ab77081da5b3112adb841dd362af116eb8c55b90 | 0->35948bytes | fullDiff36498chars
+- test/fixtures/finite-preparation-notice-provenance-worker.mjs | ABSENT -> a1824dd8548033d318ec2c80f4a8a97c53265c85 | 0->20899bytes | fullDiff21341chars
+- test/fixtures/finite-preparation-store-worker.mjs | ABSENT -> bd90078326363abb7db92e5b09dc4bbec8c34317 | 0->8682bytes | fullDiff8960chars
+- test/fixtures/finite-restoration.mjs | ABSENT -> ad53cfeca0b6c94b3e062bcb50e0a4644a667b31 | 0->4919bytes | fullDiff5122chars
+- test/fixtures/finite-seed-primary.mjs | ABSENT -> 78224487be5acba7daf699a0998a54daca4a7247 | 0->6425bytes | fullDiff6627chars
+- test/fixtures/finite-seed-world.mjs | ABSENT -> 16f5a424493da0258a67d29d271721eaa47e72d5 | 0->12062bytes | fullDiff12326chars
+- test/fixtures/finite-transport-native.mjs | ABSENT -> 29eb937663540e71d31857d23360866a76d65b1c | 0->5396bytes | fullDiff5713chars
+- test/fixtures/finite-v2.mjs | ABSENT -> ffa3054520eacc8c4bdffdbdf25b56beaef48795 | 0->981bytes | fullDiff1127chars
+- test/fixtures/qa-finite-trial.mjs | ABSENT -> 8297a9ae39fd4bdd228a2b1f64105683cb768203 | 0->9084bytes | fullDiff9305chars
+- test/mcp-finite-activation-compatibility.test.mjs | ABSENT -> b686de7d7b9e99de33d38e966f7d388694d1f848 | 0->5278bytes | fullDiff5534chars
+- test/mcp-finite-cleanup-readiness.test.mjs | ABSENT -> 84c11db14818cbc9db090dd5f9e3d1688399caa6 | 0->2762bytes | fullDiff2967chars
+- test/mcp-finite-named-activation.test.mjs | ABSENT -> b7c610a587fb6543f18d052eab70ac8fdafe131f | 0->5874bytes | fullDiff6094chars
+- test/mcp-finite-nominal-control.test.mjs | ABSENT -> 5ba81c275eef953b4a5c4c5feb1702f4229ff0aa | 0->6293bytes | fullDiff6537chars
+- test/mcp-own-finite-admission-gate.test.mjs | ABSENT -> fa611d741eb954524b5fe249a25b02eb95496707 | 0->5467bytes | fullDiff5712chars
+- test/mcp-own-finite-cleanup-native.test.mjs | ABSENT -> 3e0100f3d48b54ffc6434c5347c1f1ccbe52ea56 | 0->7824bytes | fullDiff8085chars
+- test/mcp-own-finite-cleanup-proof.test.mjs | ABSENT -> 30eda45b058e0f6fc9a6d2c1cb200c4a8908e682 | 0->5721bytes | fullDiff5953chars
+- test/mcp-own-finite-entrypoints-native.test.mjs | ABSENT -> 4341c4119c3948cee6ae9f252406ddee273c1e6d | 0->2138bytes | fullDiff2359chars
+- test/mcp-own-finite-entrypoints.test.mjs | ABSENT -> 674419ca51328b128bba483f44001e12f1e4b9f5 | 0->1925bytes | fullDiff2124chars
+- test/mcp-own-finite-premature-admission-native.test.mjs | ABSENT -> ce7bdbc226b57d5b0026a02c163474965275e136 | 0->5919bytes | fullDiff6184chars
+- test/mcp-own-finite-reduction-native.test.mjs | ABSENT -> c749d84d5a654dd0ad3bc67c53a498f45dac5939 | 0->7179bytes | fullDiff7433chars
+- test/mcp-qa-finite-adoption-wait.test.mjs | ABSENT -> e8e1e18b3cdf8908fe976823f9a15e1f5f0cdd55 | 0->6852bytes | fullDiff7081chars
+- test/mcp-qa-finite-bootstrap-compiler.test.mjs | ABSENT -> 3eae948a7bdc5e3610b058d484970b9db221c417 | 0->2931bytes | fullDiff3149chars
+- test/mcp-qa-finite-bootstrap-issuer.test.mjs | ABSENT -> d63e090434967188a376655025b38e3d01d028f4 | 0->10415bytes | fullDiff10712chars
+- test/mcp-qa-finite-bootstrap-native.test.mjs | ABSENT -> 1b871f097eb8c1dc67f4cb8ff174b6970c2cf4e4 | 0->7084bytes | fullDiff7353chars
+- test/mcp-qa-finite-bootstrap-primary.test.mjs | ABSENT -> 23f0b3830e3cc2b51b013bca6cd6a386da33efc7 | 0->4070bytes | fullDiff4317chars
+- test/mcp-qa-finite-bootstrap.test.mjs | ABSENT -> 089db24ae5f10547259eeaef699f68ebccf580da | 0->6175bytes | fullDiff6417chars
+- test/mcp-qa-finite-canary-restorer.test.mjs | ABSENT -> 85e03c1a6618cfa91420d3c1fdd70d0a2afb514e | 0->5850bytes | fullDiff6094chars
+- test/mcp-qa-finite-candidate-residency.test.mjs | ABSENT -> 654109b27b9327f4c24bd84689aa386b1a600808 | 0->8846bytes | fullDiff9132chars
+- test/mcp-qa-finite-cf-http.test.mjs | ABSENT -> 57614b84a995c1771d8236be16beee4f1d58145c | 0->4706bytes | fullDiff4914chars
+- test/mcp-qa-finite-cleanup-store.test.mjs | ABSENT -> 3b29fdce4f1e7cf38b8271cb1f8a2456efffe02d | 0->2842bytes | fullDiff3055chars
+- test/mcp-qa-finite-command.test.mjs | ABSENT -> 2f8eecbf8972ec6fd4ab2c9d2e8e37a8cb627e87 | 0->8547bytes | fullDiff8778chars
+- test/mcp-qa-finite-confirmation-native.test.mjs | ABSENT -> 3600961dc96c8615189e25ed77e5d2a08856e061 | 0->9697bytes | fullDiff9973chars
+- test/mcp-qa-finite-connection-preparation-native.test.mjs | ABSENT -> dd229853a5eb26c42e80beb59ed4a9992f4a7a35 | 0->1341bytes | fullDiff1582chars
+- test/mcp-qa-finite-custody.test.mjs | ABSENT -> 23884857ef2a50b5cb833fddde75d775abad7ffc | 0->2038bytes | fullDiff2214chars
+- test/mcp-qa-finite-finalizer.test.mjs | ABSENT -> 37a71ad56c00d77604e1485ecffd34bbd7dfc234 | 0->6315bytes | fullDiff6552chars
+- test/mcp-qa-finite-first-connection-publication-native.test.mjs | ABSENT -> 1298bb5b67749df0d7ee20c863b691562e6a81b9 | 0->57221bytes | fullDiff57817chars
+- test/mcp-qa-finite-first-connection-publication.test.mjs | ABSENT -> 9af1accd0ec533c5d7ab0dd445eda5f2a801d686 | 0->17022bytes | fullDiff17413chars
+- test/mcp-qa-finite-historical-source-native.test.mjs | ABSENT -> a4464db2b94ad1b7825f032d3d54a8b990e881b8 | 0->29587bytes | fullDiff30020chars
+- test/mcp-qa-finite-http.test.mjs | ABSENT -> 660ef1dd9aa914156229cda487497bb9321d9358 | 0->8929bytes | fullDiff9182chars
+- test/mcp-qa-finite-initial-activation-wire-native.test.mjs | ABSENT -> 7764b42084bba0b9b6fa568f7c0f8bf00a878553 | 0->1921bytes | fullDiff2170chars
+- test/mcp-qa-finite-initial-capsule-native.test.mjs | ABSENT -> d4f268d2674f024fa9410c1f8c71144f58e25cb2 | 0->9499bytes | fullDiff9790chars
+- test/mcp-qa-finite-initial-capsule-records.test.mjs | ABSENT -> a077b031d7c2b9273f3159cdd6b00bd050b9e145 | 0->3629bytes | fullDiff3869chars
+- test/mcp-qa-finite-initial-cleanup-native.test.mjs | ABSENT -> 8766bc9d325aa6aa6c19dd6ae1b4a1addfb8e337 | 0->20370bytes | fullDiff20767chars
+- test/mcp-qa-finite-initial-cleanup-records.test.mjs | ABSENT -> e92d2ad82e9d84d0a49075a539f9ff136a23f9c2 | 0->1358bytes | fullDiff1580chars
+- test/mcp-qa-finite-initial-custody-probe-native.test.mjs | ABSENT -> 51d273aa43b1a72186191208301e7cdb8338ddbd | 0->5412bytes | fullDiff5693chars
+- test/mcp-qa-finite-initial-entry-native.test.mjs | ABSENT -> 2f9f22d8e34180a3eab2428229293e4dc47958a6 | 0->8315bytes | fullDiff8606chars
+- test/mcp-qa-finite-initial-entry-records.test.mjs | ABSENT -> cddee3cd987b32774e3e62a30cbde5cc1e78ce2f | 0->1314bytes | fullDiff1522chars
+- test/mcp-qa-finite-initial-gates-native.test.mjs | ABSENT -> 2268c64fc8e1b5974056c1832265cbbf2f180fed | 0->7538bytes | fullDiff7858chars
+- test/mcp-qa-finite-initial-history-schema-native.test.mjs | ABSENT -> ecc77d05e4c4c41174077f3c4212712f59be04da | 0->1619bytes | fullDiff1876chars
+- test/mcp-qa-finite-initial-material-native.test.mjs | ABSENT -> 7f98bfe8cfe169ef1261f6c15ce9d08df9214d22 | 0->22103bytes | fullDiff22529chars
+- test/mcp-qa-finite-initial-material-records.test.mjs | ABSENT -> 348b81d9de25be0b58c6987d1fad86857066be8d | 0->917bytes | fullDiff1136chars
+- test/mcp-qa-finite-initial-old-guard-native.test.mjs | ABSENT -> 3e50bc1e4618016fea66c2b41fcc9a88614ff99d | 0->1184bytes | fullDiff1415chars
+- test/mcp-qa-finite-initial-owner-source-native.test.mjs | ABSENT -> 26f773d460038d07bd4adf9e3461d489236126f6 | 0->8865bytes | fullDiff9175chars
+- test/mcp-qa-finite-initial-owner-source-records.test.mjs | ABSENT -> 15159977e639d821cf683a1e6005a1f501f0ed7c | 0->1725bytes | fullDiff1971chars
+- test/mcp-qa-finite-initial-scope.test.mjs | ABSENT -> 8fff51e4b130a273fa93841b07b7e5c729a63df7 | 0->2825bytes | fullDiff3041chars
+- test/mcp-qa-finite-initial-upload-native.test.mjs | ABSENT -> 59c65f23ce15c7d0b5b1e1b93428c413060a5523 | 0->10518bytes | fullDiff10807chars
+- test/mcp-qa-finite-initial-upload-records.test.mjs | ABSENT -> ea74b7a415d5bdab6a315ff37e34b2c49a947e49 | 0->2359bytes | fullDiff2589chars
+- test/mcp-qa-finite-initial-workflows-native.test.mjs | ABSENT -> 00e807233224c80bd244e8a97d5a9d5095e6aba9 | 0->1087bytes | fullDiff1319chars
+- test/mcp-qa-finite-launch-inventory-native.test.mjs | ABSENT -> 090b3461e6a884788bd6d79f7d392190d4e0cb9e | 0->25692bytes | fullDiff26168chars
+- test/mcp-qa-finite-launch-native.test.mjs | ABSENT -> 9a9d4ba546e34106edba9ad1b680d08c3c308135 | 0->19541bytes | fullDiff19895chars
+- test/mcp-qa-finite-launch-records.test.mjs | ABSENT -> 074bf954fc23c819e2d50412ebfd648ba0e49290 | 0->5490bytes | fullDiff5735chars
+- test/mcp-qa-finite-launcher-native.test.mjs | ABSENT -> d7192d32f359ffe92f8d5c0eb81a3a19dd3115c0 | 0->7466bytes | fullDiff7714chars
+- test/mcp-qa-finite-observer-native.test.mjs | ABSENT -> 3a41c4ac1dd3b9ce8ff0a9d403f4055f24e6b772 | 0->8271bytes | fullDiff8551chars
+- test/mcp-qa-finite-observer.test.mjs | ABSENT -> 368c94de3eb9c41ab61c1a8842aae958e96979a0 | 0->4033bytes | fullDiff4242chars
+- test/mcp-qa-finite-owner-context.test.mjs | ABSENT -> 64d27495fc474de619ceee0d5792f515921afb2a | 0->6167bytes | fullDiff6401chars
+- test/mcp-qa-finite-owner-native-conduit-native.test.mjs | ABSENT -> f4427e64e7c1fbaa0ed5b1178ba9e429fdb9289b | 0->7219bytes | fullDiff7509chars
+- test/mcp-qa-finite-owner-native-conduit.test.mjs | ABSENT -> ee82468e9c8e788acf6c3c24f5c8c14145e3a440 | 0->4262bytes | fullDiff4521chars
+- test/mcp-qa-finite-owner-native-wire.test.mjs | ABSENT -> 16932f142db34f1116c379d8dc04b0e059f82458 | 0->9576bytes | fullDiff9878chars
+- test/mcp-qa-finite-owner-notice-consent-native.test.mjs | ABSENT -> 2169e0877eb72ab1db890f0c4e7b8c5c9075515b | 0->31645bytes | fullDiff32137chars
+- test/mcp-qa-finite-owner-notice-get-native.test.mjs | ABSENT -> 906c100035213fd95cb0a1abe40d41e66105c7a5 | 0->29697bytes | fullDiff30167chars
+- test/mcp-qa-finite-owner-notice-link-native.test.mjs | ABSENT -> 7a2ce841f86a7fed5b59e268a2d43d5c210826e9 | 0->22238bytes | fullDiff22616chars
+- test/mcp-qa-finite-owner-original-context-native.test.mjs | ABSENT -> e1588ed4a8a0982b79c889ff5c1191c25fa56d73 | 0->1941bytes | fullDiff2188chars
+- test/mcp-qa-finite-owner-phase-context-native.test.mjs | ABSENT -> be1ff27807934797f371ea703cd9a2c6f7f3675a | 0->16931bytes | fullDiff17265chars
+- test/mcp-qa-finite-owner-phase-context.test.mjs | ABSENT -> 613346c16689ae71e2902b2dc0aa338704884bdd | 0->6819bytes | fullDiff7072chars
+- test/mcp-qa-finite-owner-preparation-native.test.mjs | ABSENT -> 2dc6d61f2ff35ddb4d075b573e492cd8b740d579 | 0->26174bytes | fullDiff26663chars
+- test/mcp-qa-finite-owner-qa-sdk-native.test.mjs | ABSENT -> 35c3d9a3bd7be8ea09e3963ac6e56cd3ee40a1f8 | 0->39971bytes | fullDiff40559chars
+- test/mcp-qa-finite-owner-qa-sdk-token-compat-native.test.mjs | ABSENT -> 54865b41143b53fadcec189a92fe22de7519b092 | 0->27059bytes | fullDiff27596chars
+- test/mcp-qa-finite-owner-request-retention-native.test.mjs | ABSENT -> f459ce50c3da00839eaa92494343fb8aaeec95c3 | 0->4948bytes | fullDiff5231chars
+- test/mcp-qa-finite-owner-request-retention.test.mjs | ABSENT -> 6a2000c2eebe2a37998210218ff39018d3ce659f | 0->4247bytes | fullDiff4502chars
+- test/mcp-qa-finite-owner-sdk-binding-facts.test.mjs | ABSENT -> 76f7323216887b1b61307bc6fc1ac659e77505c4 | 0->2973bytes | fullDiff3221chars
+- test/mcp-qa-finite-package.test.mjs | ABSENT -> 96f4449cf73c4d312cfe1b6312bc480edd65c2a2 | 0->17596bytes | fullDiff17955chars
+- test/mcp-qa-finite-phase-inventory.test.mjs | ABSENT -> a0a6fcf5816f896bdba53d128412d63debd3a949 | 0->2790bytes | fullDiff3006chars
+- test/mcp-qa-finite-policy-configuration.test.mjs | ABSENT -> 60218aef444d8ff6f7ccab4cb413e408aff64890 | 0->7443bytes | fullDiff7757chars
+- test/mcp-qa-finite-policy-journal-native.test.mjs | ABSENT -> b54bf4a63fba6f38263d8e1519b10d1e2b4932bb | 0->7284bytes | fullDiff7578chars
+- test/mcp-qa-finite-policy-setup-facts-native.test.mjs | ABSENT -> f1ab6c029602ac47d33568ef17518d4641c26d7b | 0->1488bytes | fullDiff1721chars
+- test/mcp-qa-finite-policy-setup-native.test.mjs | ABSENT -> e9701d02edefb4ead10de2c1b447f062b4cb4bfe | 0->9001bytes | fullDiff9301chars
+- test/mcp-qa-finite-policy-transport.test.mjs | ABSENT -> 3ca6cc31ef5e04a0232c447c77986a9e6609bbad | 0->9710bytes | fullDiff10004chars
+- test/mcp-qa-finite-pre-entry-host-native.test.mjs | ABSENT -> 739645826deeed07882e01c97ff70c76ccd5f3b8 | 0->12471bytes | fullDiff12786chars
+- test/mcp-qa-finite-prearm-profile.test.mjs | ABSENT -> 1598a5099c098366ed7ce96b7c6cd6d0c48bf54c | 0->3303bytes | fullDiff3544chars
+- test/mcp-qa-finite-preparation-cleanup-build.test.mjs | ABSENT -> 44126f704f2f7acb0b939493fda50fbc2b814cb8 | 0->2468bytes | fullDiff2713chars
+- test/mcp-qa-finite-preparation-cleanup-native.test.mjs | ABSENT -> d7dc91d1cf899e51d8f6e83ddd1bce23587d23d7 | 0->8621bytes | fullDiff8929chars
+- test/mcp-qa-finite-preparation-cleanup-records.test.mjs | ABSENT -> ecb6937ef0015740dc796ef5d3b589014f22d529 | 0->2805bytes | fullDiff3047chars
+- test/mcp-qa-finite-preparation-issuer-native.test.mjs | ABSENT -> fd2483e5d3af67987ebbf12b39acc4bd1b47534e | 0->8544bytes | fullDiff8835chars
+- test/mcp-qa-finite-preparation-issuer-records.test.mjs | ABSENT -> 767a051cd722cd757dd0f21b10c58636be35b3b0 | 0->4905bytes | fullDiff5170chars
+- test/mcp-qa-finite-preparation-notice-native.test.mjs | ABSENT -> f210a1807a923310dd71934131989d89440c68e8 | 0->13165bytes | fullDiff13483chars
+- test/mcp-qa-finite-preparation-notice-provenance-native.test.mjs | ABSENT -> 94a6208106212e28139cbdcf3a3c277b97ba124d | 0->9402bytes | fullDiff9711chars
+- test/mcp-qa-finite-preparation-notice-provenance.test.mjs | ABSENT -> ad89f394e4ee467f36efc919c3863bab3166afb0 | 0->6624bytes | fullDiff6903chars
+- test/mcp-qa-finite-preparation-records.test.mjs | ABSENT -> d01b8d8e56c7bb7a010201c0f7fa0f1f5d78151f | 0->13727bytes | fullDiff14055chars
+- test/mcp-qa-finite-preparation-store-native.test.mjs | ABSENT -> 45dcc5c54f8557f3ed9bee7e4ff25556d3e17541 | 0->13305bytes | fullDiff13699chars
+- test/mcp-qa-finite-profile-native.test.mjs | ABSENT -> e49c1be3a6254fa70f6261457c0b2a8c5dad920f | 0->8434bytes | fullDiff8698chars
+- test/mcp-qa-finite-profile.test.mjs | ABSENT -> 3f05f8524e19cf20347100e5cd79cc2f063c2a1c | 0->13090bytes | fullDiff13397chars
+- test/mcp-qa-finite-publication-bridge.test.mjs | ABSENT -> 62d8474b4968e1d9d3e6635bf639a0575b044d96 | 0->3822bytes | fullDiff4066chars
+- test/mcp-qa-finite-read-rpc-native.test.mjs | ABSENT -> e4a3ef869cd263e7e09770927dd90fd72ca4fbd6 | 0->3530bytes | fullDiff3748chars
+- test/mcp-qa-finite-seed-http.test.mjs | ABSENT -> 8a08c6b1c6152e1b2746bd2352af1afe12abc170 | 0->4164bytes | fullDiff4375chars
+- test/mcp-qa-finite-seed-issuer.test.mjs | ABSENT -> 680ec3786d27f9f677ba1e5dc41f50ca94c8e181 | 0->6209bytes | fullDiff6446chars
+- test/mcp-qa-finite-seed.test.mjs | ABSENT -> b7c033a494a54b4c155e85a188d651f61bd2eb30 | 0->13933bytes | fullDiff14251chars
+- test/mcp-qa-finite-trial-control-native.test.mjs | ABSENT -> e52b8e05a93ffef2623fd42714e092d93246b450 | 0->12030bytes | fullDiff12276chars
+- test/mcp-qa-finite-trial-control.test.mjs | ABSENT -> 976d5e83b4ad3aa53320b3f0066c51f867669c33 | 0->23872bytes | fullDiff24312chars
+- test/mcp-qa-finite-trial-guard.test.mjs | ABSENT -> 5e7413bc692268f2f23e9cdaf41cbb39623a0bd1 | 0->7540bytes | fullDiff7790chars
+- test/mcp-release-finite-known-cancellation-native.test.mjs | ABSENT -> ea01c70a67e9f9fb113c41af9247ec953fb800a5 | 0->6821bytes | fullDiff7130chars
+- test/mcp-release-finite-known-cancellation.test.mjs | ABSENT -> 78de36c93129b464c711c08d6a482486273ccafc | 0->21489bytes | fullDiff21944chars
+- worker/independent-closure/finite.mjs | ABSENT -> 1f1e5b95776b189fc8d952930467e6ff99c233c3 | 0->3683bytes | fullDiff3888chars
+- worker/mcp-own/finite.mjs | ABSENT -> 15441b6c0c779f733db65a3b59a3a9e1738d19dc | 0->2758bytes | fullDiff2932chars
+- wrangler.independent-closure-qa.finite.jsonc | ABSENT -> 31c6638c204b631c846a537cbec13b3f9b24e060 | 0->3591bytes | fullDiff3907chars
+- wrangler.mcp-own.finite.jsonc | ABSENT -> 87d3f78c62d373c1f18803da7dc6a4e300caddbf | 0->2628bytes | fullDiff2871chars
+
+## Complete commit list (954 unique, ancestry-aware comparison)
+
+- 8b3ebb647edca8249aa1c8f237c047c996ba858d docs: accept finite cleanup design against integrated native adapter
+- 375c28573f4ff28112165816c4fc4096bfac5b73 test: specify immutable finite trial control (Task1 RED)
+- 1c63fdd1a6f68f72d0df2cad564a9575718c959d feat: add unmounted finite trial control and native persistence qualification
+- 99581193904ac48eff312a43336bb1e6dd624faf fix: separate finite artifact roles and retain narrow consent through awaits
+- c236cd600596e422f2653182b49872d0ef8a9e4c test: qualify finite pending reconstruction and immutable cleanup claims
+- a5cefc7df7c6644bcb9bb94f2b8ba1e851216dc8 fix: invalidate finite control instance after clock reversal
+- 7876f631190192f3d135bd9565d563929b537e43 docs: record Task1 finite control qualification and root rulings [skip ci]
+- c888e156216013ae3a41bc704eb4ff7b2b9e54e6 docs: fix bounded proof observer and guard completion order [skip ci]
+- fa2bc42aa83e9da5dffcbb54556d5c18ad5f2326 test: reproduce cleanup claim ACK after C1 and R1 (Task1 review round1 RED)
+- 3b11c580c721f545e6497490792c9d1d092b01a9 fix: retain cleanup expiry through claim ACK and final return
+- 5feb4e9110b3f2afdfe1cada745460182626a526 docs: record Task1 review round1 cleanup deadline qualification [skip ci]
+- d13db1ed72e28fc8afbd413d19ab2d26f3fbecc9 test: require immutable finite admission seal and writer accounting
+- 98699ab67454298ce7873c553aedfa12cf931508 feat: add immutable finite candidate admission gate
+- 8f640f4eced8f6fd1a1e40c08ae3481a5a8069fd test: require finite seal on actual custody reservation and launch writers
+- ac4ad33a22d40de7751845690fedfc8eecd1271c feat: gate finite reservation custody admission and successor launch
+- 47e035522dcb9be7238a27482c4ced006c19a2ba test: require discriminated finite cleanup proof with exact support
+- 5c6a887e8cebb6b82caddbf2f366c1963176ac62 feat: distinguish sealed no-admission proof from retired process evidence
+- 0cb4670692128c64431416c7ea280e0fced0eeb0 test: require explicit finite closed module pins and cleanup policy
+- 3fbd20cf4d2639142d4a60497e8c9df9b648ceff feat: bind finite control to exact rollback modules and versioned cleanup policy
+- eee5e9fad40218548263c0b6b07f12f9f333f0c8 test: require immutable retained proof recovery and finite native alarm
+- 225f848648082038646092e2f01f5b9abde7b1af test: require alarm cleanup after nominal death and unknown effect recovery
+- 5e7d0e16ec92076a6b375591dd8b72cbe8eae682 feat: retain finite cleanup evidence and drive bounded native alarm cleanup
+- 44bca11515f81ccdb924cd73e267892128cd4e5f fix: preserve canonical retained proof order and stable fixture capabilities
+- 6dcf74c855aa49adc5c2c6d8c4f6b378e1aaf214 test: require pending alarm before first finalizer readiness read
+- d8e4cc7236e048f66e519a0b6bd9163707c3f123 fix: persist finite pending control and alarm before finalizer readiness
+- 38422c7b2a83b0afe3e4ecc30e5b3cc557a28f95 test: require wait-only readiness before once-only finite proof
+- dbd22d45f25e592306e8503c6d878c367bae6dd4 feat: wait for finite stop before consuming native proof challenge
+- 084462aef783db8e5742f23568600e5ac4f4ecc1 test: require native finite proof RPC and exact retained-proof restoration
+- ca47987f8f7cc12fe7960811b8647e3886147f6f feat: add native finite proof and bounded exact canary restoration
+- d4a941f7744ad657bde5d17832ba81cb3b3e8bee fix: retain fresh finite proof and resolve native worker module fixture
+- c8c83748993f8eb6b6051bfde12caf3a05f59ba6 test: bind every finite writer to existing nominal claim and current consent
+- 7ecac98eceb4d43b4875782cdea2a7ab19d2a646 feat: enforce fixed nominal claim and original leases on finite writers
+- cb3d0f4c0c4f6c2e1a1abd9c3353140f47c5c1b5 fix: account only exact owned writers in finite child primary reads
+- 0d8e6472737c02d449acfef3f1b8aefea4ccefb7 test: retain native late-writer accounting through exact primary settlement
+- 63d5b92d7cf3b29411eeddba16f30c4c2cb3206b test: require actual finite cleanup primitives after nominal expiry
+- b4acd00ad048faaf584f11572415d0d38ab088ac feat: compose finite native permission reduction and historical close once
+- 3a964e98d65d83a807cd1410a451b52c0c8c9601 test: preserve read-only readiness for already settled finite admission
+- a5ef559528c8f150b29e35a63fb154411dcb2d37 fix: reconcile settled finite custody readiness without another start
+- 2d3ddd7bfe4a0c47682ec85c2ae5323b01925dc9 test: enforce fixed retained-proof RPC shape on actual native QA actor
+- 630b7ea30d7ff5593368225c28eba3f96ea05ca2 test: carry actual narrower Task1 nominal claim into finite gate
+- fa087bde941638b2a3584172ab07911b75b93124 fix: preserve narrower nominal claims and exact native read RPC shape
+- 340aca28d86bd4609fb0f077842f515b06ebf69a docs: report Task2 finite native cleanup qualification and binding rulings
+- 37d88301b8af1d598a3f6c4f39f8f70227c648e2 test: reproduce finite deadline escape in held writer continuations
+- ba992668481de930afbd7222602ff707eb073100 test: assert escaped launch directly in held finite regression
+- 54f11e3bd943f2fb495945c9e352a527e544ee07 fix: retain finite nominal deadline across writer continuations
+- 75c71b2394c44e880b3238c4866136b707158315 test: align finite writer clocks and exact SQLite clock override
+- c79cc3834231f532591652cddc594c40d1de6985 docs: record Task2 deadline review fix and focused cloud evidence
+- c1e643db608074d5afc4784055c0c916e695dc30 docs: bind finite finalizer claim handoff and Task3 brief [skip ci]
+- 1bef2107b557a1c47cb12e5455b5477cdec24c99 test: reproduce finite deadline escape inside actual Container runtime
+- f8780ba3552412b82ead3b79d78b81de4927b87b fix: carry finite parent lease through actual Container launch continuations
+- b902617acc967a12e104298e63f831bc11fb3120 docs: record Task2 nested runtime deadline fix round 2
+- 529fac1a99a167aaeccac4ada96a41904adb771a docs: accept finite guard fixes and hand off finalizer source [skip ci]
+- d5c05ab53abdc16028c0b0adf9acb59fda7a9780 test(afw): define finite preview and finalizer contracts
+- 5e859f5575f229f9674ded2141e6bd28a94348c9 docs(afw): bind retained primary receipt and durable send ruling
+- 7320fec82bd61e49168bba8482fe6fc38687a602 feat(afw): add fixed finite observer and independent exact finalizer
+- 8eecf448c2140793176c9aefdb3da0d9e724126d test(afw): qualify observer provenance, native claims and durable send fencing
+- e53f5eeb40e523e968b6283bd5c79812eebfed88 test(afw): exercise fixed Cloudflare adapter and original command boundaries
+- 2eab262d8f20e51aa101e2f72af4d4e466b58608 test(afw): fix command fixture shape and bound native fixture cleanup
+- ee2c6d0f7d4d8d5ee9ef3eb38292e8d9a44ab2ae fix(afw): retain parent fences through fixed transport reads
+- a43ecd45728e102b1321ebeeb2ed77aad69fad3f test(afw): correlate native fixture actor before control construction
+- eae6f8282835423202b0bbc44cff42c7be1e6fed fix(afw): release native observer RPC metadata handles before validation
+- 0a6041737667a8d8b2f6276a7b33e857bff2a524 test(afw): cover lost observer create ACK and inspect native step boundary
+- dad5cfb16d9bf83014daa2c0f07dfd3fe1df40ad fix(afw): retain original admission margin across readiness writes
+- 4f5d802c24beb7bec358a5ec844442bc05646f1e test(afw): locate native claim handoff validation failure in synthetic bundle
+- 1071714ea35d1b97b13d1d57079de44f582b572a fix(afw): normalize native Workflow result handles at handoff boundary
+- 9dca10f311e6361f7e371d76707050feefb45b48 fix(afw): bound total observer reads and document actual native provenance
+- 01aa12397d2baff7d03aa5c9620e2a6c220128d7 test(afw): expose external poll exhaustion before late cleanup proof
+- aaa3a5cb663993d1843f6a432b98f98810a94f3c fix(afw): span external observations across original cleanup window
+- dc7d1869d6cd89b1b9d39e9ea7a1248a2c024c00 docs(afw): record Task3 finite observer and finalizer source qualification [skip ci]
+- 31560555e2c8f51319ec7f5076be81306602c50c test(afw): require GET-only consumed send-fence reconstruction
+- d93ca236c90e584ed8515a4739ec80d0332ed0b2 docs(afw): bind once-launched send authority and GET-only recovery ruling [skip ci]
+- 44c3de7ff158135410a7c801e15a21f6f81cdd17 fix(afw): preserve GET-only recovery with once-launched send capability
+- 3c7bc1c0109d5d5c9fbc93a927b0b52ee7ab43e6 fix(afw): preserve literal launcher PID and qualify missing-ref reads
+- e175d5f7101c2a80c32baa69d2d4b063dc67b77d test(afw): verify actual once-exec process coherence with synthetic authority
+- f11aa9b6a0a3b38f90d2e5d20609b60cd563efd9 docs(afw): record Task3 round1 GET-only recovery qualification [skip ci]
+- 8e3b6b2d1ba508b758ddacc2741149fb9b47dd91 docs: accept finalizer, preserve accepted main and hand off native profile [skip ci]
+- fb0264cd705727084ccc517bf7eef068d7d4ad20 test: require compiled finite receiver deny before legacy host access
+- 044b1718cb8369e1b1b8f2bbdd4abb9516ecd207 ci: scope secret-free qualifier to Task4 receiver regression
+- 9b59ef1510e97f19762fa58c7e63c040b8e62b8d fix: deny compiled finite legacy delivery before host access
+- 2336f0c844b402dfbf81040e39a6c1ca229d6c17 test: qualify finite deny-first on actual native receiver
+- 9fe8664d57958d8ec5a9dfbe9a9ffa98bb7d92e5 ci: cover actual finite receiver and preserved native routes
+- b0819858d155c1e944b4115bc1baefc1cb585bcb docs: checkpoint partial Task4 containment and concrete material selection gap
+- 7d9214d82ca0b129bd318a60fcf01466f21166ea docs: record Task4 partial cloud qualification and unresolved seed channel
+- 6dd2d769c6714bbc9d49d2013e2d76440be1861e docs: fix finite material seed bootstrap contract [skip ci]
+- e571372e031b1bf31a27d69f5c06be8aead988fa docs: accept bootstrap builder rulings and plan bounded Task4B [skip ci]
+- 9304b0b066f32340e21be0331fc1f6628029631a docs: narrow Task4B sequencing and extract Task1 brief [skip ci]
+- 9939d1e34d0b07749b8e22b555c40e63df73d8f3 test: pin strict finite seed and native nominal identity (RED)
+- adc60db9bfe8c66e7a5d0d9d78450ec90f11f373 feat: strict finite material codec and actual nominal identity
+- efe382046a4478da36f6405d71fd3301e7d0bb36 fix: respect scoped lint module binding rule
+- b9fa66530721618f8a63af9158223e9e857db11c docs: record bounded finite material Task1 source qualification
+- 5c5813cd2e17c32024960f923f08b557d062cc5b docs: pin exact Task1 documentation qualification checkpoint
+- 1d49771a3bfb06433cb006db8d2d6c97c2673822 docs: accept finite seed codec and prepare fixed package resolver [skip ci]
+- a167611cc63f787a7de87c2aaff58242e32c2886 test: require fixed finite package provenance and real bounded ZIP inspection
+- 44221801cfcc9a23a09ccde1291e0553c9bcf655 feat: resolve exact finite package primaries with bounded nonexecuting ZIP parser
+- 5157eea792f09a358c242eb0dd4b7fc6e41309c3 docs: record finite package resolver Task2 hosted qualification [skip ci]
+- f3ae28cee4eefdc64c945f7c48fcb009686e3375 test: preserve source-qualified QA closed basename and escaped artifact signature
+- a391a530bf8b4490b767764c1d33946fccc9807c fix: preserve QA closed archive identity and scope signed-URL path checks
+- 36d7d9e7d3fd3ab242ffa5ba44c25b985bdd1101 docs: record revised finite Task2 contract and 206 hosted checks [skip ci]
+- b0f3340b7c8d0739d112b7b50c5fcced5c69aa54 docs: record exact finite Task2 documentation checkpoint [skip ci]
+- f9c70a3f13540ea693350179e9fdf3d2356cbc1f docs: accept package resolver and qualify finite seed transport design [skip ci]
+- 3067adb85aa7401f6938acaf5e3e2dc80f76c629 test: require finite QA publication seed evidence (RED)
+- 5dddd455f335c4775527c7f35db388835eca243a feat: qualify finite seed transport and GET-only adoption behind source gates
+- c222ab69a26af6a93d47b79389292bce758dba33 test: exercise real seed issuance and native bridge with synthetic source authority
+- a5d7c73fc8bab92d9266a205f260ab856e4bdfbf test: bound synthetic diagnostic stacks and preserve native total lease
+- 657e54e8b6e43062669aaaee852d1c78794acc66 fix: preserve exact seed launcher and recheck primary before ref send
+- d3d812513db6d29309d73a43a48506a8477fe306 test: qualify fixed CLI source composition and ready adoption
+- 20826fd1944681e0d6b09b8d6e76d0476652b807 fix: fail closed on malformed native account identity fields
+- eaefd5aabf5ebf3c08da29c2ad6d1eb699af39f8 ci: include amended seed contract in scoped lint
+- 94dca586b44178ef45ac84f5827fd1c997bb9f27 docs: record finite Task3 source qualification and gates [skip ci]
+- 28e96f962fb6abfa09ed60af8bb07f37826102d2 docs: pin Task3 documentation checkpoint receipt [skip ci]
+- c344ba426ee8274f6db1fc7ece29f2cf6550b08d docs: record Task3 review P2 and fix round1 before code [skip ci]
+- d8626b13704e24c30872b374617de14ca1c0237c test: reject unknown and nonstring finite admit job starts (RED)
+- f2b35826f12f646b3a25064213c5203f88d6f531 fix: reject unknown admit job start before finite qualification
+- a776e115c2e3682f1620a6e54a758a3c77a16b94 docs: record Task3 review round1 RED GREEN and closure [skip ci]
+- 80f53e771e8f265c6ce2a975461298bc4ff06e0b docs: accept finite seed transport and prepare typed profile compiler [skip ci]
+- b45e1a0c11aafe56ded6e0f9cd8487a5e896ddcd test: expose finite profile provenance and compiler gates
+- bfb0ade9ad2793ee16160c97ff5b3c63b793620a feat: compile finite profile staging with typed v2 provenance
+- ed488c765d7ae9db232f8b56d92a1ebec2ef28e5 fix: bind historical modules and migrate synthetic v2 source fixtures
+- 25d3be441b76572b23d97590a127f5a583d658ac test: expose legacy withdrawal RPCs in finite class profile
+- 863267acb4b4492bee7d159f5f1c41236349431c fix: isolate finite permissions reduction from legacy withdrawal RPCs
+- 525d992ccdfa24bdd4f6b71c4873a990d900142f docs: record finite profile v2 and compiler staging qualification [skip ci]
+- bb1a92711b350fed51bc5f60c331d41b16e6a677 test: record C1 review finding and reproduce cross-checkout Node provenance
+- b2481cdb4dcaef72eb353a0db97938538d7f4aef fix: bind finite compiler API to its canonical executing checkout
+- 7815c8349b93b8ef596b400b055bdbfb94f5a8d7 docs: record C1 checkout identity review fix and hosted evidence [skip ci]
+- c989ff4473117cea7e31ff026306dac90237bb98 docs: accept finite compiler review and preflight native launch primitives [skip ci]
+- 48761994873d3b6364d47ebfb763b5a121382064 test: specify finite launch records and actual absence snapshot RED
+- 98b78555ca9298d057485450dfd3c0b5b1910a29 docs: record Native5 source context and decoder ruling [skip ci]
+- 3275116b004add819feaf597b38fb8c4a41d5e10 feat: decode finite launch records and actual read-only control snapshots
+- 8284a26c36a1c369f499ab151dbdaba0f9739d76 feat: coordinate source-owned finite launch inventory observations
+- 4ffbf5f23b427dffeb307c4f41c3425a99464329 fix: preserve effect freshness checks in shared finite decoder
+- 47858d9d5021e3e1a096e6d36e818e5983479ceb test: reject copied snapshot authority at finite phase consumer RED
+- 73f2b8726828d346ab5adc60c7f8f9f03c1b567f test: forbid inherited launch domains and coercible record fields RED
+- 490c3abe823c0b7a81c5a5d10ef11506dd9e6d2f fix: consume finite absence through private invocation tokens
+- 86fcea2fef3a5e2725ade66cf08726260a5afd73 fix: include actual C0 alarm in finite launch control snapshots
+- 1c106e27f247bcf1b13093f6f91c082a13a93dd2 test: deny orphan guards and cleanup-started launch observations RED
+- e0b0cd47cbf0cbf42c7d664f06a64eec7323b8e3 fix: deny finite absence after cleanup starts or orphan guard state
+- b425c77ff551fb54c70e24f69b2f57862ed22b63 test: race actual native SEND transaction with protected launch inventory
+- 087f6427004ecabd89e9989dd87d0d4fde449424 docs: record Native5 Task1 source qualification and handoff [skip ci]
+- ef30cf6c3c69df97d5c5944ea3cf153bc5fac038 docs: preserve AFW source checkpoint and owner-requested shutdown pause [skip ci]
+- 481f7c658cb5b23b491388ef0c49e8837038b5af docs: record Native5 Task1 coordinator review fix round 1 [skip ci]
+- 9bd1764f96646c5a018acd289cae74e554cff694 test: reproduce expired active launch work releasing coordinator
+- 65f54dc12a81aa9931527493117cabc4049f1981 test: hold native transaction acknowledgement outside event gate
+- 5cf7a373457b313397aa0fa249385d02ef610146 fix: retain launch coordinator through actual work settlement
+- da0dc1a134c083d8ff19bc530fff124c76e2c7cf docs: record Native5 coordinator fix round 1 qualification [skip ci]
+- 9c64ed4a66af2a845db964d11751e6182f62a8e3 docs: accept native inventory review and prepare one-shot launch task [skip ci]
+- f21892236320592e9155703be2d8ba55ee5adb0e test: require fixed native finite prepare and one-shot child creation
+- 7e8e25f646f17f7c7df46bba4033d7272c694e10 feat: prepare finite nominal claim and append one-shot native SEND
+- 10e7dfd902a300c85cc6769a7c11eed2ed562913 test: cover native duplicate identity, late acknowledgements and held create settlement
+- c9cc0d2bc6d5432004a69f4cefbf89bda6deeb4e fix: require source-owned prelaunch absence before one-shot SEND
+- e5f57230082c0abb55483564db5b7999ea5fa480 test: exercise held SEND and lost prepared receipt reconstruction
+- 98d2e5dc7df12fe5fea2ee2e5fc564fbf652d17b docs: record native finite launch Task2 hosted evidence and boundaries [skip ci]
+- 71a222e824c8409a8451786d96f03c027ae83718 docs: record Task2 consent-expiry review finding and fix round 1 [skip ci]
+- ffe21c16cb69cbe602f4ed9e2051b0f453a40ab5 test: reproduce current consent expiry crossing final native launch snapshot
+- 07edebb0192929357de4122acf40fb442740418a fix: retain current consent expiry through final native launch awaits
+- 83daad0c7728a4f15268c73a88e631e4ea0ae0ee docs: record Task2 consent-expiry fix round 1 evidence [skip ci]
+- d5a76d6309e1067add15d9b103c0719f8ca4bfd9 docs: accept one-shot native launch review and prepare durable orchestration [skip ci]
+- a856f103200647f25e17d3d244ed0c26a2e68ca3 test(finite): specify Native5 launcher and passive adoption boundaries
+- 198df9ebdc97ad86e01618dc99d79ca335eab821 test(finite): cover terminal launcher inventory and typed setup boundary
+- 0645249af8e06530562de53f57194de8a237f40a test(finite): use actual workerd execution context for nominal entry
+- a4dbd3c062cfc383d1e7a5e1566e4533dde2f88b docs(finite): bind exact qualified instance absence grammar
+- 9bc7b7df25838b264d1ab5ab363245c1c6c91da0 feat(finite): mount original nominal entry and journaled durable launcher
+- 34046c20e038ceecc227ea85587c9cd436f42281 test(finite): require bounded factual nominal result grammar
+- b946d2a26ce168692bea5163f7f466b140eb9047 test(finite): start adoption after actual seed completion and diagnose launcher
+- da87cf6afa81cdcfb22047253333fb74d607c687 feat(finite): validate factual nominal results and cover restoration consumers
+- 639afc4c869aeeaeda0df109464079f49a30f8c0 test(finite): exercise native replay and clipped adoption slots
+- b7f95b4dfbd273441617fbc96758a23f58375c69 fix(finite): preserve absolute adoption slots through early wake
+- 127f9c53f353d5e42c49fd9423e6871ca7b66201 test(finite): verify original-window cached prepare resume and closed source
+- dc37acb35060c7fd8955403dfe4d30fdfeccd9fa test(finite): record native event metadata and complete scoped lint
+- 86d566e5c1712d3e9a7f043f2305edc32cab2eee docs(finite): report Native5 Task3 source qualification and remaining C2 gates
+- 6c3b0f951d2c7a63cbf9abfd4aea81222bf1cd9a docs: accept Native5 launcher composition and preflight private setup
+- a7259f8e164ab3b3b96a4d2aad7d9c2bd77a4d3c test(finite): pin C2 Task1 contracts and native behavioral RED
+- 648997a42bc5872b28e5a1d3fdb828ad4a1576c0 test(finite): correct native fixture export before behavioral RED
+- 7b1b519c4eb4fe986bb19b918d8c1cd0a1c4cae2 docs(finite): pin exact factual journal identity domain
+- ed055fbce8eee3af41709ce659cf8b2debf2677d test(finite): cover exact context and legacy read-only contract RED
+- 7b89b78b890188d8bc4c7ba3998a75104f017d4e test(finite): require immutable native context and actual receipt predecessors
+- 44dc922a56e3dbfef0d794d1610667db919b6247 feat(finite): add strict factual preparation and native publication journals
+- c60f82f0fbb3a756929bf77f652cac81b1dba4a4 docs(finite): distinguish program provenance from runtime source
+- 79bbd24e0d2930964f606d60edc1f084d260f793 test(finite): expose backdated native selection publication chronology
+- a7fc159e81f882b2c7f56d05c8729af1aa616e99 test(finite): pin side-effect-free admin failure input validation
+- 7a7ebb4d8db5e37b615dc5c38d2f1a80e8513b28 fix(finite): retain actual publication ACK chronology before binding
+- 224693b91b7a66d331f5996f1ddc178823e4d485 docs(finite): hand off C2 Task1 source-only RED GREEN evidence
+- eb8a594cd359b026e5f7b2dbbca108e587da2b99 test(finite): reproduce mutable input interleavings in native store
+- 7307b75959f177f1ff4684bd95be263dcb4c52c3 fix(finite): snapshot ticket and link wrappers before native awaits
+- 7b2e448b4ddf0d4765de4eff93045c77642e366b docs(finite): record Task1 review round1 native RED GREEN
+- 270ef346ac5e87cec87aa4ea7de0527e3f75a826 docs: accept private preparation state and dispatch owner source
+- 6b4502674a44df8d27a8eeb786bd1a18edbdc43b docs: specify C2 Task2 owner source and evidence contracts for review
+- b92a9182ea01f169ef7ebef72a97f1d9f69b2b94 docs: validate Task2 source snapshot and release primary contracts
+- 2d170281c0a5eec0f6df3e6ff248ff69fde8da96 test: add native Task2 signed owner preparation behavioral RED
+- 9c5f7d3afc94cc20a0c07fc7d2d9947d04f57cee feat: verify finite initial owner choice and preserve source snapshot
+- 0d24c0fe19198dad70c26626a8b7360465fee774 test: cover exact consent grant and notice primary linking before producers
+- 846b4d8a6fd115978f123ac44e568a25e98d0b19 docs: pin original preparation identity and fixed forwarding boundaries
+- 9e00330dfa6dc0e93dc935ce80277cf8b2ee5b09 test: pin approved subset and exact selected preparation primary rereads
+- b10a914a0d4ce16a2c339690083344d684f3c6ae feat: correlate genuine authorization grant and monitoring primary records
+- 614d54bcd4f35f5ed5808233f5d6a9608de914e5 test: preserve genuine OAuth grant across failed and late preparation hooks
+- 87e65f3116b2534bb0d19f09f3a4159e921118b5 docs: preserve strict preparation cookie with pregrant POST mapping
+- 630eec63f68f157457b10999f89b23dbdd699adb test: cover strict-cookie cross-site GET and exact pregrant POST mapping
+- 522fb85b62c2be167e15bcff6ee3c86f25345916 test: observe fixed native notice hook after actual grant acknowledgements
+- b4409cdfbb215b6ed850a7015beed609fd19cfec feat: connect fixed consent producers and preserve completed OAuth grants
+- c1a1ffee9bd729b227cd9c8a6c5202c7d9e74883 test: require mapped source identity and preserve lost snapshot acknowledgement
+- 2924eeac3e18fc7410937843e0fdf88acd44cbe8 fix: retain original monitoring lease and resolve exact mapped source
+- 9e0f18c9f7f717c9d18dffcd3134bc43a6fff525 test: retain verified Access expiry across native source latency
+- 9e366537af63997cae1ed39dab0a62d1094ca8e0 test: assert absence of expired-proof writes before HTTP classification
+- f2b81ed5a99f068d32905d9149eb00342844c223 docs: pin atomic preconnection connection relation for Task2 completion
+- e2e96ade60839b9457f15101acd7d022a2400829 test: require atomic original connection references after genuine grant ACK
+- 5cbc65a4c1b455a1d5115c43a831ddaa79dd4b64 fix: retain verified Access expiration throughout original preparation lease
+- f2b6a39a10ade189f7d5fe39fc82ed1ac891ac3d feat: atomically retain original connection reference after genuine grant
+- 0bf4dc1247550ab7b71a5242d465c5905a2bc531 fix: show original finite preparation expiry and maximum duration
+- 3aead938fece1c4f1f6fdc5b42b08a6fb3371528 docs: record Task2 owner preparation evidence and remaining source gates
+- e3eba962c9481ab9e5cf9e353d7fbdaa515d8a44 docs: open Task2 child deadline fix round one before mutation
+- 8ed7b3e0bca3751ef4dcb93c1e0eaa3b5188897e test: hold native authorization transaction beyond its child deadline
+- 39805f98bb12a8c535ff224b451b55da9b32199c fix: capture and invalidate each finite child storage lease
+- d0f3132e8bbf4867b425f03ef48bdb1a305adfb4 docs: record Root correction to accepted QA version binding
+- 093bb6c4beb209388c40a2993df8c3ebce61c06d test: reproduce accepted QA profile version binding mismatch
+- 5f1c5b1b32fe62f691742f206b9231d9898c8076 test: expect unavailable response for absent actual QA version
+- 96fa4ebd670cfc569e52dcf21a6297a4de501c1d fix: qualify owner source with accepted AFW_QA_VERSION binding
+- d7378255f1f8caa0be5d23eeeb8b96ffe415cd55 docs: pin existing QA owner rate-limit binding correction
+- b3a434bd115f13d975735ca496c511194bc39fc6 test: reproduce actual QA owner limiter binding mismatch
+- 33ade9569fe0f5d770a4ee2a9ed59cb6f68c6b22 fix: use actual QA occurrence limiter for owner preparation
+- 935b7beb9919e120066f193b8e009c0c1dfe5e2b docs: close Task2 round1 source fixes with exact hosted evidence
+- 2e80783c1d821c3e507f5217ead421237cb87887 docs: accept owner correlation and pin private publisher preflight
+- 3e4d2af6af7f396be73fb06c9c857b0f4d3d9df1 docs: record Root Task3 stage admission and audit contracts
+- a37d0daa9354c06a14110f26050bc3565a56ae48 test: require finite source to retain existing Container attachment
+- 50d5a5fef4466eeb88058c4475de72f3df28da87 fix: preserve existing canary SQLite Container metadata in finite profiles
+- 9fc0ca69870536c5b411c584ea94db27c7716323 test: require immutable stage approval from actual native owner decision
+- d0abdb009d5a520e29db22140a45a40b2116e8b1 test: pin exact final preparation audit commitment
+- 3ef01a566037017d959f06f71f04a9bd5092de31 feat: append exact stage approvals and hash original final preparation audit
+- 23e189fe957466a61ff962039546e709de22b5a4 docs: fix private material transport ownership and dry-run scope
+- 445b57de06168265ed023921eac35ea4e78f67c6 test: require original owner lease admission consumed once
+- b4b19f5926b65cb808fe80945c7a4de325922569 feat: bind one-use stage admission to original owner request lease
+- 9d9b0cb88067acf4be6848f778921c62aac4ca29 docs: pin atomic actor writer barrier and actual settlement ownership
+- 7d3545b142fcc0ceb940397b405062dc9ba065a4 test: fence actor-wide unknown and concurrent publication writers
+- ddf11df6fa8c13c5ad862d07013935903b5506f8 feat: atomically fence actor publication sends on acknowledged writer lineage
+- 634408b4b31ff23dcd43e798d19b87202a6a768d test: exercise fixed transport through actual owner admission and native journals
+- 0ecdf4d3eced2c0e0c9b369ead455ef9abca0102 docs: pin original request and shared claim-to-send child deadlines
+- b0a1492588701a8924795153dbac7bb0bfa4fc50 test: require exact issued original request deadline and reject clones
+- bc95bb2a8539eceeef7a6f0531d6b8ee8679dead feat: fixed admitted Beta publication with native effect budgets and lineage
+- c91ef68b742b8c6649f30560bfd9cf727e0df5ea test(finite): require actual three-stage owner preparation and audit
+- 07e9a535138f8379bb3c30bec3710f5890d16ba5 ci(finite): collect independent final-stage RED evidence
+- bcf54a5c478e598217730b39fc7795cc0d93ceee feat(finite): complete native owner stages and factual final audit
+- 696974bb128110112c88503abe5c4f1598f3dad3 test(finite): fence delayed claims and rejected acknowledged readback
+- 8216659e8900be92031d03fa37ad4d91838aab80 fix(finite): retain acknowledged publication failure barrier
+- ec83c42f594ff0751dcf7a17a9a9d147a338b29d test(finite): retain outstanding source work and deny provider reconciliation
+- 043874fd3d979993c6059fbe4e6826174334f4fc test(finite): verify unknown writer barrier across native runtime restart
+- 51b66faa100ffde38fae9496269c28e86fbf0227 test(finite): verify actual wire commitment includes full inherited vector
+- 19f01dda302f73e4412b7a0f4fc0def96bda51c6 test(finite): use exact domain newline in wire commitment assertion
+- fab3d719784543d26721d97540600d931a989361 ci(finite): inspect pinned Miniflare persistence conversion
+- 2b93598d455e1ea8a4638332b14a4de51cf8fe7d test(finite): use pinned v5 isolated persistence for native restart
+- f3a52be5ff96070338431a9fe2dbb359198d441e ci(finite): inspect pinned native namespace persistence schema
+- 72ab2aea12a86471ae20ba342bd4b8115fe315d8 test(finite): use effective pinned persistence root across restart
+- 423c1bfafc863d97114848e66edbea8e97ea0429 docs(finite): hand off Task3 source evidence and remaining runtime gates
+- a6dab6603693731f40e38927157041d6e828aefa docs: record Task3 whole-stage settlement review and fix ruling
+- 05bfb64dc6b71190fe4f9313f82ebc4c7c226ac8 test(finite): retain final stage and nested native work past parent finish
+- f51d65fa25ba3358ea7bd0b51d4067278109f56d docs(finite): pin internal whole-stage promise retention boundary
+- 62fb4122ab2991eb3d4781187369269ceb849623 fix(finite): retain one admission lineage through all native stage work
+- 43ebcacd9a3455a0c44f3f55ee6a1d7ed10366d2 docs(finite): hand off whole-stage settlement fix round one
+- 757223ebc920c46e3df77995d7ba017ea3b9884e docs: accept Task3 settlement fix and prepare native setup Task4
+- 6d34969ae3e9155f487358b1c19f74c75cb97257 docs: record Task4 original-command factual binding ruling
+- a65d63ea69b1a3bbac05d68c263b8ff6a0ee51b9 test: expose post-command binding chronology at native storage
+- a75403f7c551ea2c6bd66c683d84a3ddddea1e82 fix: bind original finite command within stored permission bounds
+- e49cb18659f78d6e34789da89712f89f75b6d7b7 docs: fix Task4 native source and original clock contract
+- 9b816211fb8b272043c7418175f2014256509d9c test: require original native source at finite policy setup entry
+- 81fd793c49c053cb1515672bdaff24aada212176 docs: bind setup creation to completed seed and Known byte cap
+- ec3e6242b64366b4cfe0319d4210fe847eb65f5d feat: implement original native finite private policy setup
+- 667667210b0037cadf49cb74cf93e25bda9eb3cb test: exercise native policy setup two-effect journal and denial matrix
+- 545156864549efa963a30bcab58848dcefd9c2c5 test(finite): isolate synthetic setup admission failure
+- a8e56e9ed6666b320a1ab026e982e818218d98d9 fix(finite): retain native async RPC continuation before clock race
+- c96a1cee336c0edf7e7fc7ae21ccaabedd667f85 fix(finite): preserve original leases and immutable setup pins
+- 6ca7fd5da3c0ded382a03f2c64c47f42f8b83a6f docs(finite): record original invocation retention ruling
+- 8e4353eeeae6925352e770d233b49f687b7be703 test(finite): RED retain held nested setup hydration
+- d1333ed02faa0a9e047aaf3a5ac6b8b1bca3edd0 fix(finite): retain original setup lineage through source hydration
+- f32bb2962c67154005d45a84cfb739a55cfd6516 test(finite): exercise actual setup facts unavailable boundary
+- 28ef1be9ee133373003123b5d0a3c0dc910e867e test(finite): execute actual post-T0 setup facts against native owner primary
+- 3b1f8766ec64b51fad60cb12de4781e4f5c0ba2b docs(finite): record Task4 native setup evidence and acceptance limits
+- 1057ce94a77df9edd8119f74c516d5512add3cf0 docs: accept native setup Task4 and prepare fixed-source Task5
+- dc1da49df410185fd4a220c1b7cc27bce347aeb2 docs: record Task5 preflight and scoped B1 residency ruling
+- 7283d136ce1aa96376182abe3ab5bd105a428495 test: expose missing fixed candidate residency through real compiler and decoder
+- 34a8a244be9009b7d982295850e7c4209f767a87 feat: embed bounded canary candidate residency in QA-only compiler graph
+- 6e63a8fe475c6016f8df622876d9afd93d259e19 test: retain expected decoder startup rejection during native fixture disposal
+- e93037e9879b8feeb69d11b39ddea784936443af test: measure both emitted hashes and native bounded inflate support
+- 21b679ce45835ab1df34a18ff9f8e95ad10308d4 docs: report scoped Task5-B1 residency evidence and remaining gates
+- 70408e380551ac7dc70d3e88ec9f5b75172fbe75 docs: accept finite candidate residency B1 and bound bootstrap source B2
+- dd4773a38a54a4f7611b1829b7cd79f7d8b6a0b1 docs: record B2 historical-source preflight and Root A+B ruling
+- 5d38d05c0afbef8d1a5757c140d45095318484ad docs: fix validated B2-AB reader contract before implementation
+- 18cdadd6547aa4b9d5095c54ad2c065437dc30c1 test: expose missing native historical source producer (B2 AB RED)
+- 22963e217760c4aa70daf38d76802d72fad38438 feat: read fixed private historical source and native cancellation facts
+- 54e081d46e16eec71a3601aa51ce5fadb99b651c test: cover historical scope, native overflow and affected compiler graph
+- 31d411ccf65c0713381f3670f9b4a0bfd13c7db4 test: retain actual historical reads across original timeout
+- 1d7042566bd95907fbf7e0f739891e2dc22b1421 test: hold native continuation outside SQLite transaction gate
+- 5b087d0a3090935327b7aee37bcad175bbac4be4 test: serialize private retention fixture metadata across RPC
+- bd9cb210721213b06a8c762c5e96000bf11f11c1 docs: report B2 AB source evidence and stop for fresh review
+- 2de006396e4a44a3460da29c295519d0dfde38a0 docs: record B2 date-fixture review and C3 consumer timing gaps
+- 9793f0d9f853c758242415f031abe5cd0044980e test(finite): reproduce B2 fixture expiry under instrumented reader clock
+- f68d360aac8d789024e2a4da1f1bd951bb71c7bb test(finite): isolate synthetic custody approval from production expiry
+- fbe117a63ae1e55f64c104e274aa90f9df28118d docs(finite): record B2-AB fix1 expiry fixture evidence and STOP
+- 44a54157374c5dc44b8288458cacafb38cba9d71 docs: accept B2 source fix and save AFW reconnection checkpoint
+- a609c1f3296177f73468ca8c708b9333330f1d32 docs: scope pre-T0 QA provenance without opening a trial
+- 1ae574eb9184ca3a9c422ebe275e730859edbff7 docs: record Root PRE-T0 QA provenance contract before code
+- 370a69138f5b5d50233da067083bc2cf607e2006 test: require PRE-T0 QA record and original command admission
+- 2c5da36a29ea1b30b4cc264470fdaccde1eb7031 test: require actual PRE-T0 compiler issuer primary and native boundaries
+- 28670e55199d42c9ccc0e6b03509a4eadbdf8cc9 feat: produce and verify bounded PRE-T0 QA provenance facts
+- d22d5366069ff569e428bc051a3e524f93abeed0 fix: correct compiler graph predicate and fixture variable
+- b7ca96be80da939ad906c52e5b2ab900e901e4cd docs: report PRE-T0 QA provenance source qualification for review
+- 4e4c09d3b9dc5f31fb722edde31703a236c50f75 docs: bound initial preparation source preflight
+- 6335b5d2410527b5ebf6beb4dc628205cde73045 docs: record QA provenance timing review and fix ruling
+- d052b35d7cf008892dd82119b48655e17c45ffc2 test: preserve original QA observation across cumulative reconciliation latency
+- 21087916f3967b92ec0ef7f6905aeaa5642c8511 fix: retain historical QA observation through original publication deadline
+- f933dc192c8a8c2d13cd1f3580a7e6a9042a34c1 docs: record C1 observation lifetime fix RED GREEN and review boundary
+- 6038db5ffbdcaa3e3512f31e355e96dd20f52beb docs: accept pre-T0 QA provenance and save cloud continuation
+- ba452cffcf10def0263164a18551372ba15ffd82 docs: record initial source preflight and propose bounded C2-A material contract
+- 5a44224eb67d54aa5758aeaf2dbfbe83cee192ac docs: approve C2-A with existing original-context bounds and hash semantics
+- 42d078a921878229675a49475585c040268a23ad test: require unmounted initial material composition before implementation
+- 53416c2e76fb2536fbca20e189fcc9d814152e90 feat: assemble unmounted finite initial factual material
+- 8584cfa658120e62173d096ed6e24b85efcc3b33 test: qualify initial native storage ACK and parent expiry boundaries
+- 83e9eed6f6c905880083c86c603d6955d5b384dc test: deny initial material scope binding and ownership drift
+- 8a8633d7527a448998cefd46910f7d197d47aded fix: deny same-isolate retries after uncertain initial claim
+- ced9abbb15eb3bde4475a543dd54902522c280b8 docs: clarify initial attempt fence and restart boundary chronology
+- 2ab571bd1659060387b5c19d58dd5d329b8b7d5e test: fence fresh constructors after uncertain initial claim
+- 119f21f5865364d5e18b51b3c74a2533e7945cb4 docs: record C2-A source verification and stop for review
+- 44dde8d14fd2ae9ab69d1c38a3599157d590bcd4 docs: accept initial material and bound native publication preflight
+- f61ec7b2251672cc34016715c45dd3ecf085c14c docs: save accepted initial material and remaining cloud gates
+- 69e338a3378d3fafaf8593def21802aac78308f0 docs: approve initial native durable winner entry before product
+- a50d07f36d40acee7ef4fdd0106150fbc35b8c00 test: expose missing initial native durable winner entry
+- 6803318641e3248d304c4694f61dafe6f947f807 feat: fence initial native material behind durable entry winner
+- 5240672a6ed7093f017fe0fc05cc959ed2a7918a test: deliver synthetic Workflow event to actual finite class method
+- 4899b3b8666f100668707ed6ff45edbec34f668c test: verify entry restart and actual sync deadlines across native boundaries
+- 6d73970fa2beb9c19fa6bc1b5f8219dec04097ba test: isolate SYN entry delivery and restart boundaries
+- 59e999d0affc889e79e0b16149884e9e141bbd11 fix: honor native RPC disposal and persisted SQLite harness
+- 01cf00035a3f374c4a574bcc132916a8e11a9511 test: require native holder prerequisites before entry claim
+- e95b4cf1b1f4d098c3c4e412678b79a3a389a8f7 fix: fail native prerequisites before entry and qualify final graph
+- 722a45ccd2eaf058bceb048158fe4db9d98a7b55 docs: record native entry qualification and explicit clock ruling
+- f3d0f02ddbe190bcc75101de1470506808abbf67 docs: package initial entry review and refine lazy finite admission
+- 6af20d18bebe98738374dbb030e5cb0026a27a85 docs: record initial entry prerequisite review and scoped fix round
+- 6e0ac6f85b274e62ff40d459a59c05cc7725c078 test: require all A native methods before initial entry
+- 28d2bd6f977980944bb7288baba35a2fb547107d fix: check A session and node identity methods before entry
+- 23115f706bce5cc7e1e81740c61dccdfbf02d5e4 docs: record native entry prerequisite fix round one
+- d02678d9584afbc054bf819eb3fc53b5a977b69b docs: package scoped native entry prerequisite fix review
+- ae7afdb8820b509f761ac026d311f9c39ed8b0db docs: accept native entry fix review and advance finite admission
+- 6af54224896e9d6574bd10f39d374a997badb024 docs: pin C3 admission implementation and classification before code
+- 4a7ed2d562d1d4d7636221f5cdcda0188fe55807 test: reproduce premature finite admission and reservation SQL race in native stores
+- 227358d26643b1bfb2655c8600a84f3bc341db2c test: isolate admission validity from separate callback owning gate
+- d7b6271aa1d5bea081a79ac3a446d7a6d245c9ee fix: guard finite admission with native prepared source and atomic reservation constraint
+- 340cbfd390e565f49da6292d41ada6f2d08ae509 test: qualify native original lease pending outcomes and source provenance
+- c943a005b1b24b6f39e1faeaf4a7b909954c82bc test: fence unreadable retry state after zero admission ACK
+- 06e424666e7cc1fcf277024aaed463f7d764dc24 fix: retain unsafe custody evidence across admission callback retries
+- c452b7c18b7ec34609ffd90fe25e06e6e46ae2d5 docs: hand off qualified C3 admission correction for independent review
+- 928a5e8de2c3a79555db9695fca85f67c356e659 docs: package premature admission review and bounded integration findings
+- 40ab68d7d7d50198c4e622e31ffd673fe9383b1c docs: accept premature admission correction and advance publication integration
+- c4696911f8895ae605da0512c77dc8d1a0e5acd0 docs: approve source-owned initial inactive upload contract
+- 93719fdca2c62788097f3f5685c3047eabd6c629 docs: record bounded initial inactive upload implementation table
+- 0486e42f5a869f8a71b91e9e88c6be6f218cf732 test: expose missing initial inactive upload and publisher preflight
+- f1223cafd59f2da3696c3e9d6b6661e184f83280 feat: bind initial inactive upload to surviving native entry
+- 8bb966f3ae6807a1856a939701543e9561786ecb test: qualify inactive upload durability, custody and restart failure boundaries
+- 47083000cb56f5345a91fc087c61a11c5def6fd7 fix: reject upload record accessors before stamping private data
+- 5705d750fdac7f3e1c859f50f1df33b124ddfa6c test: verify inactive uploader runtime graphs exclude filesystem and compiler
+- 046a2c8fcb5a6882a52b5eabfa58f0522ee75719 docs: hand off initial inactive uploader source qualification for fresh review
+- 39f0b7265c21b3b847e41989655f263c02160bf5 docs: package source-owned inactive upload review
+- 185f4dbb2c99f08165ebf80ca4ef44e888b5f684 docs(afw): record inactive upload review and bounded fix round
+- 0f5bf8f6f3148b6f2b7b49a25bd964a1d38c717f test: establish shared historical qualification behavior before extraction
+- a911a379aff6fb9f3205c8f624841544701e394b test: keep extra-module specimen within historical transport cap
+- 56c04288a7b4a3574511e8013d37e0483e6b94ea refactor: share pure historical version material qualification
+- 893d29409886b1af7b825f9a3175f5083385b831 docs: record historical qualifier fix round one evidence
+- a0e8e77710777e755375a1743828220f54005d17 docs(afw): package scoped fix review and qualify historical writer boundary
+- 8fe5b917c2230f5968d5f3fbe98ebe1b51ad49b1 docs(afw): accept inactive upload source and define mounted initial cleanup
+- dc337e624bc77a6e54a8f7a105c4199ec4f619d5 docs(afw): approve concrete initial alarm owner after builder check
+- dc42d28e42489e9741dea2b8546e5964354e304a docs: record B2b native initial cleanup pre-code contract
+- 5e27057bb6c7226c273dc1b55c096df151c52fee test: require actual native initial cleanup ownership before return
+- a0c354aec4b63652a1a1ff4eed3500b6e6ff119f test: correct generated native fixture string before B2b RED
+- 464f61471d8ee9fcc29bc82d7daf8f1c2288aa83 feat: mount private initial cleanup ownership and bounded native recovery
+- 53217bc899b758638c3a60436939459ab291c587 test: exercise native initial cleanup durability and SYN recovery fault matrix
+- 5d6d219cbdc08e0159342c19d66a81703a5df139 test: diagnose synthetic cleanup failure boundaries
+- 81644be02a876069a9931535f3d9fc9a46986b02 test: align synthetic worker and D1 clocks for alarm recovery
+- 1324af3766d60d8108c2b43da18b0b6a6b914fa1 test: correct synthetic clock fixture escaping
+- 51219dfc47bde05874a68d4577011fa36d7921dc test: model observed deployable versions response
+- d0cc3341c20f7c76fe56172634e6a3e0fee91c82 test: match actual workflow inventory query
+- 7b3244b20176214afc3225f096bcc7c38f20e26c fix: qualify observed deployable version inventory envelope
+- da75f8a0ce313d70e76350353293ab7604eb2479 test: qualify recovery gates and stable runtime graph
+- b38d145b6958b34af4ee5735bad49183e46a7c26 test: scope fault boundary assertions to alarm delivery
+- fd6fb939405d02a168ff5f04f162dca1a8b6d20e docs: record initial cleanup source qualification
+- 89fdc35b3c8212a4d6a7b3b84082e59af49c2ec1 docs(afw): package mounted initial cleanup for fresh source review
+- 2cd45bdcc46e32d0e871e98ed3868409bac9dcc6 docs(afw): record initial cleanup review and bounded fix round
+- a97a9a173e21bd01be9b1336bd94292480407498 test: expose completed journal and pre-arm ordering gaps
+- 4119c5c60a263b82ec9ab35abc96362d2c099952 fix: validate completed cleanup journals and arm ordering
+- 2b734f69e3a296ba1043bc2dd372581dc54ae58f refactor: share bounded initial lease and qualify journal chains
+- 0da7df964a2ad8389fdec06b3bd2f5b103f3008f docs: checkpoint initial cleanup review fixes
+- 8b1744b3255417bc2b12e65516315a404264da8f docs(afw): save owner-requested day close and exact cloud continuation
+- 43a7d1e97d4e98cae812706ed0040c87ffeb4a9e Record AFW cleanup fix review package and completed CI evidence
+- 1d01ef6d3aa44dd9a61ee986d52724a49fc55003 Record independent approval of AFW initial cleanup fix
+- b44fb3ccff94a87d0955bbf25dd1c549d329615e Record AFW initial activation and closed ingress preflight
+- c60377f9cb4db27e3839cba28209fec052a4d632 Test separate finite owner window on initial upload
+- e966527af2d0ecd053000ddcb6c2e538ea0a1b09 Bound finite owner window to initial cleanup time
+- 619b5088dea0ed6e97a25133859f81fe4bbdbaeb Record finite owner window qualification
+- 6343174247655479196e2e1d32968bcdc3b06c39 Package owner window change for independent review
+- ba5b399164cd82c0e28a0f374f90e6fe96a880a7 Test exact initial workflow exception in native actor
+- c05b13059901b3bf518fa81b7499850eeb3923b0 Qualify exact native initial workflow observation
+- fa3df26988db9cf9a068e4d1ce765e1e32c846ac Package initial workflow inventory gate for review
+- b634b4b04bbafe0ccdd29b5861fda9983f3e81dd Test native immutable history schema qualification
+- df9b29c9b4c9867619d47f28f38457af5f5d2104 Qualify current immutable native history schema
+- 1a5b51d8bc6fb73211870a767e0a938826d3f22a Exercise finite history parent and workflow waiting fences
+- fffd4020f2bcf708f73c283eed6d296395e6a3e3 Package finite history schema gate for review
+- 047f1abe7eee2659c74cb1fbb54843d257e99c30 Test fixed historical guard response in native actor
+- 4a3e720df343c99f5969cdf817de44fb28e4b8b6 Read and qualify fixed historical workflow guard
+- 3e41c7b420712876a0c1469c99873e84f5e4e43d Record finite initial gate reader qualification
+- ef5b9686c39caf543254214d68485850a4057d7c Package historical guard reader for independent review
+- 05445b0240017a6aaca3374dff6a88ffd416b6b3 Test same-parent preliminary initial gate chain
+- 9704e724d8678919cbfff8af5724980e5cc7b949 Compose preliminary initial facts under original lease
+- 8cbac3dae741aadf4211df02784f91ab8c227a66 Exercise initial gate primary drift and custody failures
+- 69d8b8450c48380ef67a96755d6cfd1936a6847c Record same-parent preliminary initial gate qualification
+- 27db46f82af842041e6af6d04d3ba7e20bb34aa8 Package AFW activation pre-effect composition for review
+- e6500eb586613c15a01c21c329d8ca6dfc93a9ef Test retention of pending initial gate work
+- 63d4f83bb7dcd51a908ea5b3c7a59526ac7f7444 Correct native retention regression fixture encoding
+- e60d52ea8df47c59d47269e0b1805078cd505317 Fix guard mock source line encoding
+- 3ed0866273eb7e2ed38a9cf1b79da727f93f2b52 Retain initial gate work in original source scope
+- 6492ada61884f3ff3d7975183efc15f3a1d5d921 Verify original scope and holder continuation fences
+- e28e8213cc14bf1c72775173a605049015b811bc Record original scope retention fix qualification
+- 1de8a6d0bff8742c997abb57b1c55d3c3a790cf2 Package AFW concurrent retention correction for re-review
+- 8ae584fac3666e24d5bd74da6af32294abd0d4f3 Record independent approval of activation gate composition
+- 38e5996d0da8bea32eb20ab13f4c42ebf28d5e41 Test final primary activation gates in native initial chain
+- e5bd80cc0d6b53c164e15781419a3ac646f64acc Scope candidate mutation to post-arm native gate
+- 02cf0a0ba00127a32d0ba71f492cf4a5f4c6eb1f Check fixed primary resources before initial activation
+- 531e06adf7d0f9395f90f75ceeda0c32fbb7c38e Test retention of concurrent primary provider read
+- ed421132d9c59726380a1754ef5abdd06a1a2aec Release held synthetic read after assertion
+- aa37979e764686eb9b34a0dd62d77a178c8b2338 Retain actual primary read work through original stage
+- 9dd78c2f85d4f72f6e914684d7fbbaf3348626c4 Retain read-only provider fetch until actual settlement
+- 5028d9ec57432f1295304a110501afbe78eec8d8 Cover operator and canary drift in final primary gates
+- 7e25570b34b78970d764eccf67ee59165387f6fe Correct primary read targets in drift tests
+- c7cc48b12d610924e8d082bc0772ac40685b9028 Scope retained read-only provider work to live gate stage
+- bcfbbd209c7e5aef62059157ac655f70a447de26 Record finite initial primary gates and verification
+- 6f487b69f5ab43bbea51bc241e7e93d3b2a159b7 Package AFW final primary checks for independent review
+- c7d8fc0ba715e839c672996aa523ba3c0747dc2c Test closure of delayed primary response body
+- 9717ca7510e7cb8094bd7b264710a6174c23ec35 Close and retain late primary response lifecycle
+- 415100945c0a8b3bb322ef6927fa22a8cd91b435 Observe late response body in native actor regression
+- 760addc7c66862f2c358ee55e4b825ee22a22688 Close and retain late response body until settlement
+- 8f60f84f755dad22c288ad6d4e97cbed81ebe99e Record late response cleanup fix and native verification
+- 1d5b9ff190fe006cb57ac57a01f30eb5d04f5be5 Package late response cleanup fix for re-review
+- 1b8e2d07025afb1fe0f8a0a25907684a4427fcf3 Record independent approval of final primary checks
+- 6df91e7f623d4dfc5be156042b3f89f38a19a28c Test final serial pointer and initial journal conflicts
+- 0e8af2b51a72bc5e271ca082d506f88e8b5a4c64 Recheck fixed authority inputs and baseline serially
+- cc611b92b258da04b736a86d740a7e92d917e2fa Record serial initial gate verification
+- 6f40c14dfb241d84f3f8565542dd3591f849494d Package AFW serial pre-activation checks for review
+- 6592f9753d682f0dd6bd320ca180281a29ea3e1e Test native initial activation proposal data
+- 7f2da2658f8ac11bf3a69dcf5f0e293ed3639574 Provide closed stub for activation wire regression
+- 63e159ed77d8b4eb0e0edae8337f377317c9aa18 Prepare isolated initial activation wire data
+- e391789783e8c93aab94ff942f95e0a2775d59d7 Cover activation proposal temporal bounds
+- 2c7817aee38572626225254ffd744f111f1d8be1 Record isolated initial activation wire verification
+- b2f221f415f1b98ee3e3a6157a5ea87daab62678 Package finite activation records for independent review
+- 1431a34b6cda259e7ad17f255f25c9c2ba78ebc9 Test coherent wrong activation module against plan
+- a13ba335d82154fb6b563698e31a90e9d304b228 Bind initial activation module to armed plan
+- fbdfd018e6856ccf3076d215bb95c9aeede0440e Cover same-size altered activation candidate
+- 83cb3e2b0c8a1bb87184ccb39dff1595b6c35204 Record activation module identity fix
+- 03998d58435d7b300502e7cf417661d3be9889a0 Document precise writer and native custody qualification
+- c5fea6d6e683cc75c33189543ceb6d052b455134 Test native read-only custody qualification
+- d6ba42e693bb507d996b0a127052084590180f4b Observe native custody identity and fixed guard
+- 5f664a16284cd0943fc8439f3d52b1db644fdd2d Record finite native custody probe verification
+- fe53b09e28c8a0e5081ad0e78d0ca85f391a036c Package native custody observer for independent review
+- ba1d02991ffd6d5d69bdc63413e35f0573f80f8b Test custody scope and pending read retention
+- fa9e9be5f677366b7c906586ba488ddc16b38150 Require existing retention scope for custody observation
+- b63b9ad9bc352d5ff6a03607a0f52aa4071044c3 Record custody probe retention scope fix
+- ce76c9ac3cfd5332ae8957dfd9eab8bebdccbb45 Define bounded writer qualification for initial activation
+- abb1833317bc8836370a895db2b202867a5fbd4f test: require durable initial activation evidence
+- 94ba4c8b53bb1f61faa88d1f4751d201a7f2eec9 Implement bounded initial activation continuation
+- 6a2800417d3628d5a344652fd29396b48b179f9e Fix activation response validation syntax
+- 99dbc2361361cab7727325135c1683faef0f56c9 Test activation uncertainty and readback drift
+- 8954d5181853c03a7fef7f38e5d20ce51a2f905d Assert preexisting send and pre-effect failures never post
+- ead8e22b0467abed201696e5247771d22140e03f Test retained activation after original timeout
+- d996d82575b4b3d5f47dc02ac31a5f50c1d4cd29 Account for three durable activation syncs
+- e147d9a76a9f7e092e8385149c2d0c5b536ac37e Test uncertain durable send barriers
+- f2b51964d47e75bbf61e8149fcd3b756c79ff7a9 Retain actual activation fetch beyond logical timeout
+- 77c93ee83e9f2d9e883a5284280973cffa30f7e6 Fix native fixture embedded-source escaping
+- 77bb8dbeb74ccce6a92229d63c7b56067f119a20 Record finite initial activation qualification
+- 46fd7b7a4534379f826a661d42645039a8483fbc Package complete initial activation coordinator review
+- 4cd75ba0925f98d60d84b43c0e3c3e0381624e35 test: retain late activation body cancellation
+- 1cc4a2d77ddadd095dcfa0e58ff96a4cbe82740b Retain activation HTTP lifecycle through body cancellation
+- bd460633e3a8b39cad9cc5b63555aed034678013 Test late activation body read and cancellation
+- 1e95c36672fc2474216ff723fd13fcd32eb5d8f6 Record activation retention review fix
+- 188cd90eae83aac23792b00be2c9dd40e2a30603 Package activation lifecycle retention scoped review
+- 006bf8578ad27fd7f20abc00a9418f369b2a8b4c Accept activation coordinator and define immutable capsule unit
+- cd5fa42c3a6e56f5bd4cf2750dd7de5cb46770e7 test: require immutable activation capsule from native winner
+- ca62152d3f3fda1f9e174ea6967fd399cd398e8e docs: checkpoint incomplete initial capsule regression
+- 9502723b9c190dda6c19fbd948eb286b56ac9453 Clarify initial capsule bindings commitment and causal RED
+- 229ae5d74461c3327d7c9da264d8db9f33a1c384 Persist immutable initial capsule from actual retained activation continuation
+- bae656253793eca490e9d7d38cd3a8cb142ba0c4 Fence preexisting capsules early and qualify actual transaction settlement
+- 4c924bef3ebb6bf21e0adaba84324691d1743afa Record qualified capsule source and full task review package
+- 73c6b79430db10ed9eaa663c9625569d8f88aba6 Accept immutable capsule source and prepare readonly integration
+- b43847adf24fad08b91eccd0f055b6dadd99d49c Integrate accepted finite readonly custody source
+- 5dce69a2d98f083b778cde89ed51c3319f7a1251 Record finite readonly source integration evidence
+- 23f428b0133f9d009871e4ad07b75d02fa35184f Package accepted readonly feature integration review
+- 3ee192749d45824707bcc621df33e4e61d67ed24 Accept readonly integration and define factual owner source
+- 252b3ffeb09d638c715fee251c0add7251965db0 test(finite): specify fixed factual initial owner source (RED)
+- 530473463bedd629dcaa0481f2af49e012f4e14f test(finite): retain actual source reads and cancellation through settlement
+- 11aea7cd788d089885b864ca7d87eccfefedb89d feat(finite): read immutable initial owner facts inside fixed retained scope
+- e38b1ef4c20a1672a2e9fe49130ae25d256e4a98 fix(finite): qualify remaining request budget and readonly source regressions
+- 8158f48e95d032b558f14c47ce6340d375ad93fa docs(finite): record factual owner source pending final cloud qualification
+- 3bdcb61c1e981aa4e21ae453784bbe4347e3f041 docs(finite): close fixed factual owner source with exact green qualification
+- c12d109395f9c1d386cf665d7eea5e49c12e311a Accept factual reader and define request retention handoff
+- 8bb9018bc985921280dfd51de397b6d857ba2ad1 test: reproduce owner pre-admission retention and pending host boundaries
+- 5986380c0eb956a1bf8aa3f9d0bfef8bfa6b5746 test: cover genuine request handoff and real descendant ancestry
+- be12e9ed00cc7ab6790cf1ceee7265b9d4d6587d fix: retain genuine owner request and adopt consumed stage in place
+- c47d241476e642aeb6873a9f6f5f33dc10e7ff9e fix: preserve parent identity denial at narrowed child deadline
+- bf5cac5e2884eecb09ce3d2a36c0f5522c69855b docs: record owner request retention verification and remove temporary qualifier
+- bb3468a975f9d34391757b6bdae4be2e0d1038be test: retain first body400 across actual held cancellation
+- 0aa0a399ef2698d66a61c0998e2fdd7028bf2950 fix: report first body failure while retaining actual cancellation
+- 19b364a4a572affdc2eed6baf3855f97f7d11c54 docs: record first-failure fix1 and observed RPC warnings
+- 8241213398f3acee3c58d6667ab7cdb255588dc2 docs: accept owner request retention after scoped fix review
+- e256ee1a43ca3125fdb12485ceab712b6a7e197e docs: bind preparatory cleanup enrollment unit and forward fence
+- 1e3fabf4142a58ff10dcb56ebf1ff60c9334c1d3 test: expose missing original preparation cleanup enrollment
+- 0565d159696819f5a8e96816c5e6f9feb17741d2 test: align explicit SYN owner provider clock
+- e0b381c40910d65f66b67e2c668c74d4bb527558 test: surface synthetic owner admission fixture failure
+- efe496c498555e51b43c42eaa2eb6d6dd193eaa9 test: honor fixed owner source options signature
+- 746120f58f8f721c3525e5fb0d71941ffbd4fc62 test: preserve monotonic SYN GET to POST chronology
+- 0ca264c32085c92ecd34d921f998b46fe5ee6102 feat: enroll immutable initial cleanup facts and fence owner publication
+- 6994599ae2c43400575bfd1e32b8ca5057d16cae test: narrow owner consumers to pending and correct recovery test syntax
+- f39e649e8dcfd1623a3bf062f96ff027a9b1ea56 fix: bound alarm factual read and verify complete owner ticket ancestry
+- 98c02877f7f6f9df956f03a6d3f017e9d60ec4a0 fix: enforce exact enrollment inputs and narrow current setup-facts consumer
+- f79f9ebe81ca1bb22be8f04da76d3eff0aad6be9 test: diagnose bounded compiler refusal without source mutation
+- d78b05c3ec9ee41e7437e187542ac7afc2543a08 fix: preserve acyclic compiler graph with strict DATA anchor descriptors
+- 45c0b08f530fdad73e5f8973b3878f279add9a96 test: target strict descriptor fault injection at the actual anchor module
+- 5f39fba550157c4f34926f7fd1e47b4395e1426a style: name the local compiled module descriptor explicitly
+- e72fd1e01f8c8bc883f928d00bc774c14c57d88c chore: remove temporary Unit1 credential-free qualifier
+- 1fa96ab84aff1ed1ad287f48a673e4b282a18dd2 docs: record Unit1 enrollment source evidence and remaining gates
+- 1c05ff6d8f39787b8af96ad30ea8593db7d0a7d3 docs: accept preparation enrollment and bind issuer fence source unit
+- c41499c746ce82d05a9c384dfdb8ec8d8cdaf436 test(afw): expose missing preparatory issuer interface (RED)
+- f505b9a93519c73760f55de7aedeabf221225fd0 feat(afw): add unmounted preparatory issuer fence primitives
+- cad768b9fb083301e13be5eca37e6d4bac9b80ac test(afw): correct strict prototype fixture and graph entrypoint
+- 225de8af40eed4a60bca09f8495532b27223cf14 test(afw): bound native queue faults and strengthen exact cleanup proofs
+- 9907976a20707d6936c7cabe29d2ced10a2869e9 fix(afw): bind both native ISO expiry operands and qualify table domains
+- bbb8e38651b1579856807b3df7b3576552bbbd26 test(afw): qualify append-once issuer journal send ACK and freeze chain
+- d1b46f5d68d210001e7ac949abd3169a77fb8e07 test(afw): cover actually queued SQL barriers and original child deadlines
+- 333fcfb72bceb83a08c86cdf39adebfbdeb99462 style(afw): name native issuer fixture handler for clean scoped lint
+- 57c3a8d83221c765d1f03221bc5f974740c61d46 chore(afw): remove temporary preparatory issuer qualifier after scoped GREEN
+- 7ceade63ef9b82a8783c83b9fdfc05ede6f576e2 docs(afw): record preparatory issuer fence source and scoped native evidence
+- 4213efd49cac8a1df74ba8cb02fa9a6bab4679b4 test: qualify actual finite issuer alarm graph with full staging compiler
+- 3be763e4e0813518f83f516dd60fb5fb51b85b05 test(afw): verify actual finite graph without requiring unmounted codec import
+- 3fc8f73d6e6e9dd39b0c9305efd34220d7e534e3 docs(afw): preserve actual finite graph qualification and remove temporary verifier
+- efcdadec029d88c3258566a05d688d70f125e7fa docs(afw): accept independently reviewed Unit2a issuer fence source
+- 1d1f8312913cccdb7c0247c87fc9e37f61294150 test(afw): observe fixed native sender receiver abort capability without runtime actions
+- 4abda1ecd87e982c09cce3d6c8186254b8747152 test(afw): correct literal worker strings in isolated signal fixture
+- 6f1802b525576efa882d9b067b1af07705a86952 test(afw): bound native signal diagnostic and trace each fixture boundary
+- b65459bc28143acee32c7f7344bc4759bb8d9419 test(afw): preserve YAML literal indentation for bounded diagnostic
+- a4e6bd701f6734953aaec02d945c71f741b4ccdb docs(afw): preserve inconclusive native preflight and remove diagnostic qualifier
+- 3bca328c1aa09a53480ee1adb9f54565b27aeb1c docs(afw): specify bounded unmounted native conduit and original selector task
+- d90f0f76fa096f7cf5040c1ff726ab1edd3c232a test: causal RED for original native request boundary
+- 1eae4b46a8151b072bab6b522b0ec64b0fa2aeab feat: translate original native lease; test private selector and genuine owner borrowing RED
+- 9fcd63d13c0578f68ce9fac380e53599caabd12e feat: unmounted pending native conduit and fixed QA original-context adapter
+- 99eb5193ef05353e630ab4bc5f4f227c1f38074e test: qualify original capsule selector with dedicated synthetic signer and scoped regressions
+- 193f862d2910f61832446d738766f072e0f505bf test: close exact-selector, genuine-admission expiry and native envelope cases
+- 331ce5a9863d718607ed282c33cff15da41a4dd2 test: causal RED for spent descendant monotonic boundary
+- a89837d72b65156d613da49350941973f1c82536 fix: clip forwarded descendant data to its actual monotonic child budget
+- 70486bef8c17f13247066c636041dbf002e0aa28 docs: record unmounted native conduit evidence and remove temporary qualifier
+- b0ffad10bc247d4fd71667cfd022f39fa32f246a test: reproduce empty late native response missing pre-read guard
+- 7de7f441ce4bbc276ee43d45097777271fef31a7 fix: guard late native response before first body read
+- b97806741902bbf7cc028d7c9c1f395c097cade1 chore: remove scoped native wire qualifier after green
+- 2589c1301774a2d4fce51dd7256ba984b18b6845 docs: record scoped late-response fix and Actions evidence
+- aed54dab23b644481aed01cf6b5b94249ecf9f23 docs(afw): accept scoped native conduit fix and specify signal opt-in qualification
+- 1d601fcce56f0f98d10a0ad32f4a5737d6b55dc0 test(afw): require actual finite receiver signal abort
+- d2e5d8ce513ada7c9ecb19829a2bff60c5597cd5 feat(afw): test exact finite incoming signal opt-in
+- c338f90c9ce29f6dbbfff70274e1c7f070c6a38c test(afw): verify exact finite profiles and receiver guard settlement
+- ccc7624e52c54884691343c0495bbe17c06dcd56 test(afw): distinguish logical receiver return from retained native read
+- e29fe8ec607e3ac702a3b09f6795a694c2723195 test(afw): await physical reader cancellation after release
+- e7ed164d08dddd4f2fca0004d54c8ea52a3688d5 test(afw): keep old activation fixture pinned apart from new candidates
+- ab85ac8f9e0e1383d573d49fee6742c04976e5b1 ci(afw): isolate finite compilation and historical diagnostics
+- 62307cbad80455689486ff52e2216867bfecddcc ci(afw): inventory finite candidate hash call sites
+- e6f6aff834fdf0b9af78665e98c6835e90911077 ci(afw): use available scoped grep for finite hash inventory
+- bd923bab7225212e35e054b14c132de78195ec5e ci(afw): complete finite bundle hash call site inventory
+- 3fb1751c901059c9acdb2a9f1de2f6470b9f3c41 docs(afw): checkpoint signal opt-in evidence and Known path blocker
+- 48462cdc36315f91b5417df9e8333cd6601f270d docs(afw): activate strict finite compatibility primitives dependency
+- b6f482b87916018822430dd77aaa4b5e73802f06 test(afw): RED finite known C1 fixed exports
+- 06d8f29c574454056b19c2b6b3e867a728605f54 feat(afw): add strict fixed finite activation primitives
+- a81a6db504ced20b5601cdf37f698b8a039fae2f test(afw): pin legacy digest and operation boundary
+- fb7b89885033749c10264095ccadeb252d0e78c8 fix(afw): sanitize finite bundle validation errors
+- a8dd66018fd731154d3289554c69f3766a147a52 docs(afw): report finite known C1 and remove scoped qualifier
+- c9809d79d7e4e918e595da829a2109fdc71f453a docs(afw): accept strict finite primitives and activate shared lifecycle task
+- 8168e64efa56eef8240b9efded5992caa4f1cb9c test: specify fixed finite Known lifecycle and native source qualification
+- 0df957482755f4ef6e718e759bff2e69b50517ba feat: share private release lifecycle behind fixed legacy and finite Known entries
+- 1bc37f26df3837780c295dafc366f1ad7694370f test: observe finite credential reads and untouched native string payload
+- a3b4f94758a610495d8ff72d0277c9c197b60da9 docs: record finite Known C2 qualification and remove own qualifier
+- 2f3d11f7aa0381fed24265ef4f74129ff96500c4 docs: correct C2 BASE tree provenance
+- e280a297f4c2ea3f38ea3fc4ac157439415708be docs(afw): accept finite lifecycle and activate explicit role integration
+- 0221c1b846dd258aa345e6705702ef162f79aff6 test: expose finite C3 candidate and historical consumer boundaries
+- 53256405e5525372efda40673b42282fe0da0935 test: preserve legacy spy and isolate final upload timeout cases
+- 2b2af6989a243d7a99beb882e24bd62d5a50a965 fix: select fixed finite candidate APIs and historical rollback roles
+- 6d17d438becca708da5baae70129c73fc118bf98 test: retain legacy digest checks and qualify exact C3 compiler head
+- 949d84784e83f8859421242edeab3f68c5db93a3 docs: record finite C3 qualification and remove temporary qualifiers
+- cfa7fec5b6be744727f9ca43c2b7db5089f002fb docs(afw): accept C3 and compose original signal profile review
+- 220b5bc323315b7f107967548fb8958c0f8234f2 docs(afw): accept signal source and activate first-phase factual context
+- f77792ee440f9122a31fa5967d55da709400dcd0 test(afw): specify first-phase factual DATA denials
+- 86f362cea19acbb99f61e804fa72046d802b60f5 refactor(afw): extract original enrollment and installed-stage facts
+- 8e123e092fa49005770b734cdc51587e73f5ec67 feat(afw): derive bounded original owner phase facts
+- 354691cca51def8174eec844d93c6b75993c82ea test(afw): exercise native first publication and retained denials
+- dd76033126ebd758f1cfc5a1d1604c43d38534cc test(afw): qualify original issuer prefixes and physical read retention
+- be15f7799c9bc71aa63f6a15f000ffde5248a925 fix(afw): qualify exact issuer schema facts without inventing grant selectors
+- a2056859e76edae37558f058dbd17e938946ce2b fix(afw): retain exact closed snapshot prefix during first owner GET
+- 8381d5aa7554792f21c04b1c39b95849e7710f05 fix(test): initialize finite phase schema before historical foreign keys
+- 4ffc2f9c0b80ae9f863a8d63ed34abc13b18b690 docs(afw): record first-phase owner context qualification and remove qualifier
+- 3265fd64bf8cf6a5275f7f70114601668e661ba2 test(afw): reproduce settled original M phase confusion
+- 52ef404365b00054dbc1edc281a858223e3eab18 fix(afw): require exact read consent configuration for every settled receipt
+- fe0af3605368d563c911f8e8a308584d3d292038 docs(afw): record original receipt phase fix qualification
+- 33fece006e8ccb74c6f91546002469d89939c059 docs(afw): accept first-phase reader and activate pure closed-prearm data contract
+- 93a2ca6384859dd5dbc493f77f9d72ebd3372006 test(afw): pin closed prearm conversion RED
+- d1621604bd0d774dac093b2007fdf7a58fe3ba07 ci(afw): temporarily qualify pure closed prearm Task1
+- d48470be8017d040f9a0facf9b1a178dbbf85d7d feat(afw): define closed prearm policy conversion data
+- fb3bc8ee881625858a2314bdaf0d5a1378a1cbf9 test(afw): align holder and source equality assertions
+- 3d9068adceb3aeff1181b2f258b05607dba88319 ci(afw): remove temporary pure Task1 qualifier
+- 9fd0ff651ab278e84341339b29131aff5658b6b0 docs(afw): record pure closed prearm Task1 evidence
+- 7067c850914353d720eac67e039216bd19ec1268 docs(afw): accept pure conversion and activate exact QA SDK alias source contract
+- 7f414d3e4dbda3209fb9ff39f718571a577ea744 test(finite): establish D0.1 exact QA SDK alias RED
+- b26a16754549a5669923bb4b82c1c6483a91b34a feat(finite): declare exact QA owner OAuth KV source alias
+- 9fe7e2f53f4e594879b3992e5751fe631c03ec60 test(finite): align compiler graph assertion with accepted phase reader
+- 04e8bb0f77cb78b27c219b9fd703641018e8df12 docs(finite): record D0.1 source qualification and remove temporary gate
+- f2c11705cf4f44c66d158444679640e727ae7de9 docs(afw): accept D0.1 and activate integrated QA SDK source task D0.2
+- 1c70547f4f769d52ee24b99614b8bb61697d877e test(afw): expose missing D02 local result and wire helpers
+- a5000b3c4eeb34af3d220a46cecc69ebdbdb5eac feat(afw): add strict local SDK provenance and one-path grammar
+- 8bae8e2bfca828b94d2a5e3412ac8406b26176bf test(afw): compose native SDK and strict pending source boundary
+- d3f70ce72a8fd3b1a4db3038374e89c376d311ad test(afw): dispose SDK fixture on every initialization failure
+- 84a0f6795982f8c4ed519cfe54ff7caa8bbda770 test(afw): resolve pinned SDK package in native fixture
+- ac45d433e35a18676f72d091f899970e5fd6100f test(afw): use accepted native multiworker option conversion
+- 473a258316ea579913c1c56d88e20ae8929444e0 test(afw): locate native entry prerequisite failure without payloads
+- e87a977e2646cb2175d94eb3ab507b5fbcc9ea66 test(afw): compare native fixture identity across worker composition
+- 2e6cd00b683ff790e12e6b0104637b8006607372 test(afw): preserve native QA identity through fixture initialization
+- 743759a606b5bcac9bde3d3be1aba3f8b396fdb8 feat(afw): keep SDK and original issuer continuation lexical in QA
+- 8c77df94dc9cbf5d7dedf517354af53fb76b94b7 fix(afw): relay SDK redirect without following the native response
+- 70f98bbd93596530d3c854d63af327a30f09655d test(afw): qualify lexical SDK retention and replay limits
+- 8939680278b1d09f2b6854f1f598e6bd335cf38d test(afw): observe actual abort boundaries without changing transport
+- 1247a965ab839a8d782661e0d69bb461c3d8e023 test(afw): align SDK native fixture with exact existing worker flags
+- 40f0feb0ed4d29848cc155175793a0e897e22017 test(afw): complete owned SDK hostile matrix and exact-head qualification
+- 7c9d6c3729d54769f23e83d598ec3a556d32d733 test(afw): preserve exact legacy pair failure contract
+- 251060cf6f862dbf4dd0892bfa082b7935b0bebb fix(afw): preserve private legacy pair failure status and qualify exact source
+- 44ab2c93d170086a8274bb2b5ae0b1e0e54a6c8a test(afw): await one disposal across every initialization failure path
+- 371f5abf67218dd7336ce54d140da8ffbb17aeb0 ci(afw): qualify actual unmounted standard graph without assuming reader inclusion
+- 4148b25fd2c498495c48665072e08cb6ac5efc65 ci(afw): preserve accepted shared DATA graph and exact effectful exclusions
+- d630a99d8bd30bbeaa5606a89dbd33ee58ce8b72 docs(afw): report D0.2 source qualification and remove owned qualifier
+- 51d7b45d113bd1eb49f5dd13239d4496d39ec9c8 docs(afw): accept D0.2 and activate actual M token qualification D0.3
+- 2f80f8db9d6cffd9ae32e6733069e886d1d1110d docs(afw): preserve accepted D0.2 activation chronology alongside D0.3
+- 2dcc0ff1da26d48a945a32dad63a1fc5291b81bd test: qualify native QA SDK code through actual M token baseline
+- 5cec4bc9fd5d95b9ddfa60213fc8d54063350ae5 test: use installed MCP client transport export for native baseline
+- 32307c654db90b804e0a45f6c400271824af452f test: retain synthetic token window pins across native requests
+- 31870720fe3a5de98c126f022ea3a473fcb5b154 test: locate native M fixture unavailable stage with bounded diagnostics
+- fb75b423d4e6adb75a745b90349a204a9b9ce576 test: anchor diagnostic to final actual M failure guard
+- 6287b22bbc7fbfd3c7fa01ad267ff796100849db test: supply exact synthetic Access pins required by unchanged M preflight
+- 7529faa15fdccdab141e3eb9c0e6d624bb0e1576 test: preserve canonical synthetic Host across Miniflare MCP transport
+- 4bc0125ff7524e3ba54759aa18f96f933a88afce test: expose actual SDK redundant tuple token boundary negatives
+- 7a2fb82a70904f32c73ca983da78bac7d8501c51 test: observe actual non-JSON MCP tuple denial without double-consuming body
+- 732ecd3b62956c7871e463b3303ff844a746c3f0 fix: require original redundant subject and project before token exchange
+- 090e481532fe7e07d102a818ade744520d0b67ac test: qualify native original token permission reductions and late SDK result
+- ed63b971cbf9da8278fea0e87fb71ce892886823 test: correct actual SDK subject scope and MCP denial carrier qualification
+- c35716e68245bd7f7747a6d6020ebd4953df8270 docs: record D03 actual token qualification and retire bounded qualifier
+- 51c5db8e987755ccf2819ba861461916e0396943 docs(afw): accept D03 and activate one bounded owner I/O fanout unit
+- 44e564d46a0d1b47838cec9ca003da0e705929f2 test(afw): calibrate genuine owner I/O lifecycle before fanout
+- eb99d1a3a8d0d1047f370f517f29a9626c1d86bb perf(afw): join fixed owner credential and primary read pairs
+- 745fc2afdcea789bbe0427d099a90a2a03c4152d test(afw): qualify owner fanout physical settlement and causal drift
+- 0463cdb132f65c6de2b6d3674e346088fc25edf6 test(afw): sample Enrollment seed deadline once and qualify remaining cases
+- 051b3fa3296db30c9bdc7bee0277aa0057f0dab2 ci(afw): quote scoped remaining-case pattern as YAML block
+- 9ff0226c23a6a0c1b6a69921c60b7cadec56a72a test(afw): preserve one-held-operation phase regression under sibling reads
+- ae39d1b220614498856160a3b2de994c58544110 docs(afw): record bounded owner I/O fanout qualification and remove qualifier
+- 7ac10c3f69eb69d56f097219c199670b9cf4958d test(afw): expose pending-branch drift gap at old joined-result barrier
+- 59d6852539b59bc3430f41c7455ca36be223955d test(afw): gate pending M branch before the original mutated fact read
+- 90bb28b59e638173a6a3d211e71f2d40879631c3 docs(afw): append fix1 pending-branch evidence and remove scoped qualifier
+- 4d8f6a017e1bd3914c7722a7ae8c23946e31a9aa docs(afw): accept bounded fanout and activate original exchange continuity D04
+- d4b58bb84c66ae71af7fd320e7070aef0f8b528b test(afw): expose actual native exchange factual reader discontinuity
+- 762ab84265b2fb75256f1c7e17f2618e6893123a fix(afw): preserve factual continuity across original native code exchange
+- d262595e2d303383ba3ac57d070b263a8ff57773 test(afw): hash full DO snapshot for original exchange immutability
+- b5e61d1625bc3af796a194988e37bb930e3d798e ci(afw): correct temporary D04 principal command quoting
+- f9ee816c6525893094568fda34e8bd0b0d128311 ci(afw): remove completed D04 scoped qualification workflow
+- 9fed36c15411470f22e284b1ba84aefb91f5d153 docs(afw): record complete D04 qualification and reconciled report CAS
+- 7a2a1c1ffa66b21ae0aa8ad7d0a5ef0c4a2441be docs(afw): accept D04 and activate bounded native notice store source
+- 916173f8507d55c7ac91940367918e7cd1677114 test(afw): exercise native first notice causal RED
+- e7846aa4f3443d6f4b29973860e54415fbb7ccc8 feat(afw): fence native preparation notice store
+- 78c3bdc6fec287494ec1e2d37223c8d006ea6487 docs(afw): record native notice qualification and remove temporary runner
+- f4b661866ec031d063e922ac55a7dbfd8d15abb6 test(afw): reproduce concurrent monitoring failure absorption gap
+- f8d6196b4c0620c8dc5a9aef9cec45b0cbd75c5b test(afw): classify concurrent emission by actual INSERT target
+- bca2a33b935a75504331bd8cd5115fea79c18357 fix(afw): absorb known monitoring failure across concurrent waits
+- 4016c13d27ecc80467b73e978158ca05caad1f13 docs(afw): append concurrent failure fix evidence and remove qualifier
+- 04c49dcc48b37f7fe825daa6c1c0747c5822d74e docs(afw): accept native notice store and activate bounded provenance source
+- 681750e1bd7e48e431451d482e8df7cf5b2c29ca test: reach native original grant before missing notice journal reservation
+- d99f16ba5d86ca7f746e69feb4c56b71af3a7870 feat: add unmounted six-record native notice provenance journal and qualification
+- 37f15259abc4625a0fd9e7192e4b3aaba312bf02 test: exercise captured original holders and independent notice ceilings
+- 88a67d5dddae7eb7af39d404ff3dadcc4b35e057 test: qualify valid notice conflicts and remove own fixture lint warning
+- 8609e96b06b16c758a7ed95f66e5d5911dadba66 chore: remove temporary notice provenance cloud qualifier after green
+- 2969a840860d47997132eb081d1e65376f3953e0 docs: record native notice provenance journal causal red and final qualification
+- dc4edafc0b5e4ba440cd32a21dd3dd58024e811a docs(afw): accept notice provenance and activate bounded GET source slice
+- bab878c611006abf7a00a9b223bc478e203b7a38 test(afw): causal native notice inventory RED with actual SDK grant
+- b2069aba00535c60715b0f1fab4f4a4ca6520035 feat(afw): private factual notice inventory and causal absent GET RED
+- 2f2cbe4d2f9852d6717fcda59e23a5fc51fb9330 fix(afw): compare native inventory schema with correct lexical grammar
+- a0bd9d68653cc18313490c842d7d884c6184fa18 docs(afw): preserve partial notice GET checkpoint and unverified draft; remove qualifier
+- 35ad25a479eb7bc5a4dad040be047e4f4d349e8b feat(afw): fixed unmounted notice GET with lexical native ticket continuation
+- 808a9bab84193557970a804ca5fbf619f39dff15 test(afw): measure actual GET graph and retained native I/O without virtual file reads
+- 0db9f2d1c7018dc6f572f7fe930d8dfe5acd30e7 test(afw): native notice GET adversaries and full retained cost evidence
+- be044d4894e84497fb490720875195f5c8b15167 test(afw): verify native fenced CLOSE retention and scoped regression counts
+- d87158c4847604446051ab27e3ef9d844b3d2f8d test(afw): diagnose one real legacy phase inventory without altering guards
+- c0e1db92432651391d3dfc10e18c409e1b4aa4ec test(afw): preserve native consent history and grants in complete phase SYN schema
+- 1c2a4a5bae85a8ed0789057c5691fd7bd9fe3cdc test(afw): assert measured 128 factual reads without changing original fanout gates
+- e71eb58f040d8de531206172c2cd0d2df897771a test(afw): verify all native ticket fields and consent exclusion after real ticket
+- cfe8f0ddde1d782757dd7e0d3160967f325df553 docs(afw): record native GET source qualification and remove temporary qualifier
+- f68797ca0ad083aa4e90be87c83b5f60f2aa691b docs: record accepted GET scope and deferred cookie grammar before consent
+- 2f96acb45ec5477d559f85070aa438d2e2e00822 docs: pin next native notice consent source task after accepted GET
+- aa6b1cd25c8e15b4cf5d2ae91c85651e071ddff1 test: causal native consent and strict notice cookies RED
+- 87c8430d82df08b4eea59e6296c9a05b80009250 feat: fixed private native notice consent continuation
+- 06d29af097f2cf912472c5af2c2eadd22b5b5f29 test: qualify native consent failure retention and factual correlation
+- 7ce4d221beac0c276e3d7c74577a5527fa223c36 test: disambiguate passive notice correlation marker
+- 24db0b56d3c4f08299490048bef50225d76234be test: isolate body retention and preserve causal snapshot gates
+- f23a8e4a3365f8a330434175d53501449c71f349 test: observe actual M body promise chain and native actor restart
+- 2e1b55175552cc3c990f600b64a444a4b1bc2ce4 test: preserve literal anchored diagnostic commands in qualifier
+- db17f2f56af6bcf8eaee6eb29aca09d6caad0032 test: keep M stream release in its original native invocation
+- e1537bf403944ae4f79c04818db1932a3189d78c feat: activate SOURCE-only native notice consent form after qualification
+- 1199dc920b9d4d280a5d22e4d1bf8cb932db4d35 chore: remove temporary native notice consent qualifier
+- 5205d80216d9767c44762df4a181e1015e093a8e docs: report native notice consent SOURCE qualification and limits
+- f62b6c8b17412b812ae411bbc9cedad43b9ce501 docs: carry native notice consent acceptance into source baseline
+- 953e7af1fc20b59c59d8e4a03dcf398d98165cf5 docs: pin next native NoticeLink execution brief and preflight
+- 71c1e67ed1c15269f177a6413b2a6c4901cc57f0 test: require native NoticeLink after actual consent ACK (RED)
+- 7b3609bc43ab2f42903ab8d0f6ab6a69b90d48e0 feat: append private NoticeLink from originating native consent continuation
+- 7d3044f9b2127c74083f955905e70ed33d6cf488 fix: preserve exact enrollment input before private Link observation
+- fe18ba913a66f63f23468b455f5ec64bf9de6ec4 test: qualify native NoticeLink failures retention history and shared observers
+- be3509895da359a6aa8135b7dba6446c4892da4b test: calibrate bounded native TX DATA control and repair affected assertions
+- f619192eb378c87b6288956509b884d78ba7d0ab test: observe native TX probe result and guarantee bounded fixture cleanup
+- ac401ba936c4ef7c80095473df57a0002daae8ca test: observe actual native TX settlement with existing async HTTP ingress
+- bf6867dab636c5435ab20efb5ec45af83ba3b340 test: complete native NoticeLink suite with exact preserved SYN history
+- 696611d6b99f8731d28aeb220cddce82fd333752 test: observe original baseline failure in one exact native Link case
+- fb739b07c26487242d72bbc56ba0b115095bb8fa chore: retire scoped NoticeLink qualifier after staged SOURCE checks
+- 2f530092bdc6f89e856ca3803f04dcc83fb90b1f docs: record native NoticeLink SOURCE evidence staged checks and baseline debt
+- bc4000addba4b67f8a76344e5745e3d0eab6ff07 test: share authentic Consent and Link setup flows (I1 round1)
+- 33d3739e6b585a2efd821c2c1006e4e59fbd7ed4 chore: retire scoped I1 round1 qualifier after four-case qualification
+- dba6cde8a18b7810fb59329c6e429be639e6fdc8 docs: append I1 round1 extraction proof and four-case qualification
+- c55d4eda1eeaf80341c8abd6c85b76dc662614f5 docs: accept native NoticeLink and pin first-connection Task1 execution
+- 1f16b7643e9d942ab89314b7e068b02aee6c8687 test: specify retained known finite failure
+- d540cf853d94b059d95df0794fea7dd224f96fc9 test: specify fixed finite helper contracts
+- aee616f3629d54d656a255461955a0bba8b8eda2 ci: qualify first connection Task1 RED contracts
+- 625106a1fed8b0c871730b30ca2b694f7538d9b1 ci: remove qualifier before completing Task1 test inputs
+- 751e14376a6f7a515428230ef1c2dd6d2e510f2d test: add fixed factual enrollment component probes
+- e6278f53c11ae9caebc06d8ced22d322363e81bf test: reuse original initial world for enrollment component
+- 465ab88f5feae0cc7a66dfe3c686676479e6323f test: capture original enrollment native trace before extraction
+- 3c52c0b0cc496c1e7e697e9f909093a7088801cb test: observe cancellation within original request
+- 95cedf06d296a2f502d6223a5f8c376b6f86f91e ci: qualify enrollment reference and causal RED probes
+- 874c5c913175a28af125d4134054b36f1d347b58 ci: remove qualifier before fixed helper extraction
+- ee60aa7e5a730dae184b15530f5afb186b36c2a1 refactor: share fixed finite policy operations
+- 72ea21061d888b932a7cdd83d85bee42b84c6e73 refactor: extract one-shot factual enrollment writer
+- 4b251e49eaa05a018bc7ca0cb282fa401519bd5f refactor: preserve original callers with fixed finite helpers
+- 72f309e8484951a588d9118e981b1dda0acdbb81 test: verify factual enrollment chronology and one-shot methods
+- ef4837f02d8ac1019f0deefeec8fe84afaf36e3b test: exercise fixed engine operations without product test exports
+- 2869544d7e3ee5a367678788fd1bdca1aeb9af79 test: cover fixed wire and factual enrollment failure boundaries
+- 7f911e29677d2980e48b392a65999f8e0574b9f3 ci: qualify shared finite helpers and original setup regressions
+- 5a5a7bf0b4e0c122ae914467e9446d385b11c63a ci: remove qualifier before fixing Task1 SYN probe boundaries
+- 93c30adb1e9fa813e84243e53961b48401a52790 test: surface native enrollment component setup failures
+- 82b342cb999aaecdcebf7da1e53fa5fd1c56c424 test: keep wire description within captured holders and require causal writer gate
+- 4efccf03a944284f7a13dbc9bd23b6989782d51b ci: diagnose precise SYN enrollment setup boundary
+- ce61b8173d8e8ce8b4696fdd70a3842e3c26ad58 ci: preserve literal test pattern in scoped diagnostic qualifier
+- ec575083466ed9880044c6dd7cb7ad3756349389 ci: remove qualifier before completing SYN record shapes
+- 26f25a2c1e55daf901a87f0e04ab75c56b404e92 test: include original codec purposes in isolated SYN approval DATA
+- 22ce84052756936d612b046a84b6500f5773937d ci: verify corrected factual probes and complete Task1 contracts
+- 1d5b25544077bfcd88019e6804ab83ed7d3d79c3 ci: remove completed first connection Task1 qualifier
+- f75e07c643d7e0005a52c3360931085e8378a8f3 docs: report fixed finite helpers Task1 evidence and REST lineage
+- 97ee8675e614032af2f3caa9fe3eaa24d991c7d1 docs: checkpoint Task1 contracts and pending fresh review
+- 8c7d4517f6dea8b72daa10ccf0a2fe2e0cfe9949 docs: accept independently reviewed shared finite helpers Task 1
+- b03b5d9682d8a91e38004160f4c2a9f0ae7ca595 docs: defer Task 1 second effect cancellation coverage to retention gate
+- 15c05b2bd1c06ce479f3cc76d5ef5f097b780aef docs: reconcile Task 2 legacy SYN inputs with strict choice grammar
+- 4ae35568afd39227ec6ccfd815c7512a4c68023f docs: fix Task 2 closed finite conduit execution scope
+- c56e52ae26292f618ff5527cabd46594f90b41c5 docs: checkpoint Task 1 acceptance and next closed conduit unit
+- 6587e83cd55a9ec4f1db0a3c1b53548c8b5e577a test: add Task 2 causal closed conduit qualification
+- df7a45c4115f13a08fb10e0ecb2dc53a729ffcca test: add Task 2 causal closed conduit qualification
+- 3d8c8464976466be9912f8c121e7b6d3e797741b test: add Task 2 causal closed conduit qualification
+- 6b3c8006c43188f9185875986dbc18b3924e6d77 test: add Task 2 causal closed conduit qualification
+- 9797ac7945ada0d7664f191a8ee367bc5b7fb71e test: add Task 2 causal closed conduit qualification
+- 9e456d28b084abb6732c15028541d5dfcd9a073e test: remove qualifier before Task 2 fixture correction
+- 9d5794c460250cf379d08cc208852a4791ee9578 test: use public metadata for synthetic canary bindings
+- ae4be58af439f658ce707f780d0a179be76b5d48 test: qualify Task 2 RED after metadata fixture fix
+- da475c7acc8b1a2afedc84a18bc9e8c8a4adfdce test: remove qualifier before completing SYN environment fixture
+- 0fc34e11ec62f34eedd4aa6a8e50cf5c77cfb39a test: mount actual initial upload configuration instead of template slots
+- dcd541e4562b10332e0f8c13766db7b696a84208 test: bind closed SOURCE bytes and configuration from actual initial upload
+- b0997b0610204de82b3ea964d7e367636dedcab6 test: use actual initial closed upload before native dispatch assertions
+- 7aaaa7ebf47720eff67ff6ae62720b1bf941a406 test: qualify Task 2 causal RED with actual initial configuration
+- a84fa4fce9d73941247b2cf29a3513aa2cebd396 test: remove qualifier before passive native stage inspection
+- 1f4e5a9c7dc1cba85882ab1df05f09333d47a8b0 test: trace actual harness and initial mount await stages
+- 715e207b41c9a74287b890643042dcabec8d43cd test: trace upstream and teardown physical stage boundaries
+- 047acfa9d83b5a98b1b8dfdc77d30e644d977d55 test: inspect one native closed conduit under existing 120 second bound
+- ebd7c5fc03466dc4a2df299383c5fdc6e787b0c3 test: preserve anchored diagnostic pattern without replacement interpolation
+- 37e1251baa093163b42a3aff56bb740180617219 test: remove qualifier before original upstream frame observation
+- 40adc13dfe15816b140149e4a760056912f36115 test: observe original upstream failure frames without altering guards
+- 1c5571934f9cca8bebd559ddbc89cd77471ca003 test: preserve upstream request size hash and row key evidence
+- 663e7a25e0a1182bff5600ba2c775a54b7555944 test: inspect original upstream error within existing 120 second ceiling
+- 0252c9a9ca0f2c47c72c61335bba7e54682951ac test: remove qualifier before original guard-state observation
+- ee8c8fce5598cd1847559bd4b93f6ea76376a77f test: observe rejected lease predicates and original HTTP scalar costs
+- c94a015deba6b70ec51f9063451c09570fe80d8c test: inspect original upstream lease rejection under existing 120 second bound
+- 97b330271de5f3a9a5ca63a7919b760649754532 test: remove qualifier before bounded immutable script ownership fix
+- 0e7b05f66058c67ba189cf19422b85147ccd696c test: cover exact frozen script ownership and mutable candidate byte fences
+- 055f6f27929e1d37ce3855a2a085f3379585b014 test: share actual SYN dossier binding across first connection workers
+- 6924b1aeff764d0ab0d3bf2d21a6822c2cde1cc2 test: share OAuth alias and isolate passive lease hooks to publication mode
+- 65e27397b0c299ea757ba3609963748f216265e5 perf: retain exact owned immutable script identity during initial rechecks
+- 6c304fcfb3708ea8bfd1808345ec4607b87249e8 test: qualify owned script prerequisite against real fragmented upstream
+- 7a8cbbd6e2588ea1db88255107063674bb3ffed4 test: remove qualifier before preserving original mount error
+- ce0bf96604686faedcd10845b38317f232b4bf8e test: preserve sanitized original Miniflare adoption failure
+- ec7a4c914ff0df4c5b3732cd9704394358e92b5c test: dispose native fixture after options failure without stale RPC
+- 27c7e4ad2a92114f0520ec2dbb41d6f1e1233702 test: identify original native configuration adoption failure
+- 22be424ca0e00f8495164b3c0ca4fd1922542cfd test: remove qualifier before correcting raw Miniflare adoption
+- 7ce4318d92fe81d1a025581365d1a75fa502d167 test: convert original raw worker options after exact initial configuration adoption
+- 8538576055ba6b973cfedbe1d30d7d688b6760b4 test: cover original request holders and preserve raw UTF8 reader failure
+- 0778b68052491ff17aed415c2f1497f8427342d0 test: qualify causal finite dispatch RED after exact initial mount adoption
+- c351e6be4cb2b3bcfc53fa32f586dd0e38f3f0a4 test: remove qualifier before mounting fixed finite source conduits
+- feb719b08baa745d435a8f15063508223bb41b9b feat: mount closed finite source conduits in initial candidate
+- 37098709bbd741649e45c9760a0d9a351a82a59b feat: mount closed finite source conduits in initial candidate
+- d4fd165620d5be18de465c3cd8519216c8cdfa59 feat: mount closed finite source conduits in initial candidate
+- 70c628c2e17d9e803eb93abe8294b5e83dacf14b feat: mount closed finite source conduits in initial candidate
+- 1c66be7d0657b0e60e420aae5b79be8ef6231968 feat: mount closed finite source conduits in initial candidate
+- d7f05f49f16471f76b55d3c572d9216240518513 feat: mount closed finite source conduits in initial candidate
+- d64ddd39a2e45baf5155c5346af9b40ec469b4c2 feat: mount closed finite source conduits in initial candidate
+- fcb7094ea8385a5040a7df0cb893a66de7a2ce26 feat: mount closed finite source conduits in initial candidate
+- 49ee7ac51e3264ac3358f0882bd01af3793bd93d feat: mount closed finite source conduits in initial candidate
+- 532c0ea9edd0629306a8716242d6b3abaf267f3f test: qualify Task 2 closed native mounts grammar and compiler contracts
+- abd1c6e459b19748ef13416f2feaa7a6ac398746 test: remove qualifier before naming finite default worker
+- 06a4cf9d848f785b17cade389660102604b3002c style: name finite default worker without changing dispatch
+- e6518da5c696dc8f2050b4a19bbcefba400b6a25 test: verify final Task 2 finite bytes and lint thirteen paths
+- 780af1412a695b78c1cdc857ed06f5381dc5ddb7 test: remove temporary Task 2 qualification after final cloud verification
+- dd59f05b0e8b469d0ed31b44c0dc759c1d2e84c9 docs: preserve complete Task 2 cloud verification and source audit
+- b3c432ecc5bb3a52aa499a4e297c0869d0f0a8f4 docs: preserve eleven observed RPC disposal messages without attribution
+- 3eebf3b1d50d7537c6ae72138a08b44b2b59ee93 docs: checkpoint Task 2 verification and stop writes for fresh Root review
+- c9fe5cfa3f64c5cce286237376fef17e66282b60 docs: accept independently reviewed closed finite Task 2
+- 4864598d7d0ad1a08ebe5896c2d6eb0bf90551e2 docs: reconcile approved Task 2 thirteen path scope
+- 8a74ce2a6df49552af9f70229e798b805a51bad1 docs: record exact immutable script and body limit rulings
+- 92b6e823f53d5b9fa5b6bba6acefd4e9a84e4d3e docs: defer Task 2 fixture profile naming minor
+- 4f5f5f124b55c8b90c424753f00b9e9cf4634c05 docs: close Task 2 and save owner shutdown handoff
+- 09f0ba4a4454a05f0926bbb94e01f3ea945ff5e8 docs: activate reviewed first connection Task3 brief
+- ffe25a1e77a1d93d5c03018ada36355b19c91564 docs: resume first connection Task3 after accepted Task2
+- b0952eab3442cea9b481e33ad11e71f3363ec90c test: require native first connection from original signed choice
+- 1945fdccae8fa4f1a0a27f3d780d8be3c71c7b08 ci: run bounded native first connection causal RED
+- e8df40b6a34898034589599d157e4f64970106d7 ci: remove qualifier before connection implementation batch
+- a406d07d59cf984aec5237d65a4071c7031ba575 feat: route fixed choice receiver to native connection continuation
+- 0b35e614739fe2cfc191275e77bb474d525171eb feat: admit original owner POST through fixed factual choice seam
+- f5e66b8fca1b2cf218f5cbb42261087ebb804c75 feat: produce native first connection from original owner approval
+- bdd6f9ef66cf30344c04fb01cd923062ad9e1607 test: retain actual SYN uploaded versions and activation pointer for connection
+- 12269f51c4ed56a1f6ff0f14fb1afd706a2e3311 ci: measure original native connection continuation
+- 0a04af1f0ad3053376d771b741bd7295a6aebb1d ci: remove qualifier for causal connection diagnostics
+- 1ebdd8d37bbfcc79185d493234455c9753c94584 test: observe original connection clock failures without replacing native work
+- 898d8c4d6ead67a734c11d6452eee281bd8389c7 test: capture passive connection SOURCE frames and complete pair timings
+- baf349b8c309e8a423fd2fc1ff7ec2aef864256d ci: diagnose measured original connection failure
+- c4db57a1866d1c72fe9d84e4abb75ebb9b3cab65 ci: remove qualifier before downstream test composition
+- 172243a58648337fa13755f008c5aac107e8edfe test: expose only factual context and retain real choice cookie for downstream
+- 4e15b6e8b60774133689890f93c7baa0fdbc98c3 test: adopt actual connection config only after original POST settles
+- 8d349ba0a1c21e2a3e56e5660d4234d9eee822da test: require actual connection predecessor through OAuth MCP D04 and NoticeLink
+- 8bfa84f7161ca61da2d99e71fd28aaa8d16d75c9 ci: inspect native POST failure and downstream composition
+- 00feb6cd482a347e1f08359a995babf57314481c ci: remove qualifier before receipt codec fix
+- 46bd8c345d93d7e8ce692dbb7d97b778f2cdc255 fix: seal native receipt with existing installed record purpose
+- b1fc844a6e23b8bb8dfe8ce645447c6f2695b170 ci: verify installed receipt codec and actual downstream
+- e347e49b5ffd703f955171739d8817fe4780054a ci: remove qualifier before native mount assertion fix
+- aee9715716f77dbb7ed5eaefcd7066758e7d5424 test: verify native M script input before Miniflare module conversion
+- 055e205d4fbb33cdab5a01258a86d86406ef2918 ci: follow actual native connection into downstream
+- d0542a904d58b378cd0c75195dd4275631a9341f ci: remove qualifier before causal negative test batch
+- 7f8a984534a2f6ebb63241764966072a55456288 test: control actual retained native uncertainty without approval probes
+- d5d484d1959420a1ac78c3e1299c0e8feccc22c7 test: cover native own continuity unknown results and retained settlement
+- 866bf199531e4691f0e5311d4a6913eecb7ad6b9 ci: verify exact M native service-binding downstream
+- c8a78a1f9527e4472e197fc6f7d56f542471f5da ci: remove qualifier before bounded negative and regression batch
+- 11569fcdeeb9bb24a5d763887a9f92e140dc1ba4 test: release retained work only through original invocation DATA controls
+- df2aade5481f140205486e67f4a0c17ace671f93 test: measure exact connection native IO and original effect clocks
+- bac53943c11efb3c9517e998afeb3f5af19cd47e ci: qualify native causal negatives and bounded accepted consumers
+- a0617b8f6aea6ed347cd0fd208c5775d42c03fa3 ci: remove qualifier before pinned native upstream principal
+- 671e907b1cbad4397adfb6978678375da8a19ad3 test: preserve exact signed choice identity for causal origin counterpart
+- 8bfdc1c68f818cef2d7e605a1d6f14ccb5901143 test: normalize downstream Host through pinned native instance upstream only
+- e866bd5969efc8760f9b3ed2dd8b6ac923b665f9 test: prove signed wrong URL and foreign Origin at native normalization boundary
+- fa45d1556fb7914e6f6e73ce718c9c6dbe0632f2 docs: preserve Task3 causal checkpoint and current native harness discrepancy
+- ea759c689070d878d357c42a87a9cf5d5dccae7a ci: verify pinned native upstream with exact initial M bytes
+- 30276fb216311a0063af521f1a6fe54d1692cde2 ci: remove qualifier before current-history and identity causal batch
+- 21ba7bf6a55dc7ba8b07a4a78d50e5911f609fcb fix: preserve unique original OAuth observation marker beside connection handler
+- 93fd5cdfb6bf6c9878897201fb4bbed5757ac8d4 test: preserve native Access expiry and actual actor restart boundaries
+- 57ec6284fa8ac1c3d390b7c5db5f10c7ada6a1db test: sign exact current Access variants without changing source authority
+- 7d7de3b88024598b1b21c42d4b68a2dba1ce1f20 test: cover signed identity choice recoverable source expiry and consumed history
+- 4d0282ce991f11b1512cfed47ca01861aa4d0827 test: keep both current snapshots and historical deadlines factual
+- 8b3f0faf63793a84614f4e28d1b648a94af7784c ci: qualify current-history identity and repaired focal observation groups
+- 8fc4f889faddf73edf7070731eadeeead4915471 ci: remove qualifier before exact entry dispatch and native proxy refresh
+- afbf18ddf8a3209a2d5ecf9080364f81a2b33342 test: retain native instance entry and refresh same D1 proxy after config adoption
+- 4fc92a228eb2d401cdb23f1fa427b8763f1be3a9 test: send exact MCP request through configured native upstream entry
+- c49e4effe9ad4376736b7c1b9ecf22a7697ab0aa ci: verify native entry correction and recovered current source handles
+- 668be1a84759f1e9cb033fe75dfe77e4eb99aa1d ci: remove qualifier before causal correlation and single-guard controls
+- 208934ac3821f4819588d7c484d67c5610dba30f test: reseal actual completed data and isolate negative-only guard controls
+- da3325126f8911b3ef7061611eaba8e9a873ddfa test: label negative QA mutations separately from exact positive M lineage
+- 7e4e850b4be363f0a60e6484020a8b98dd41a05f test: prove completed fact correlation recorded ownership and preserved telemetry
+- 48c4efa6a4d4ea6b24c9550374f3692828b4bac1 ci: qualify precise correlations and isolated negative mutation evidence
+- db90dae7bc5b168d9326f5df229135039359eb1c ci: remove qualifier before remaining original lifetime boundaries
+- 35d592c9c8df36f72d3904d33b760e8e6defe334 test: retain original body SQL ACK receipt and holder lifetimes with actual IO metrics
+- d4997c6adce593f6f8c926ccb4819b7369cc6069 test: observe native body cancellation and separate fixed provider phases
+- 476f946d2fc8bb97de3b53ef8577605bbdf6ff3e test: fence original body parent ACK receipt SQL and holder boundaries
+- 935d202fe5f5d2dba9b351abdae7d8d025ac5c6d ci: qualify remaining native lifetimes and exact positive telemetry
+- 7fb2e7d31c8a47b38ac22db37ea4f3d6d4517fdf ci: remove qualifier while preserving active lifetime checkpoint
+- 8a818524591acc2bb12b8a8ac9fbe3158b6bca8c docs: preserve actual native causal checkpoint and conditional API feasibility
+- 32668d5359a53166b60efce037b21b842281baae docs: checkpoint native Task3 progress without claiming final acceptance
+- 918f54c1b4baca3eba6e0ab98c4255ce0a5589bc test: isolate in-request holder drift and genuine compiled profile mismatch
+- c9edd694487eba988b8bb55b5af5a1c1495f2725 test: measure fixed provider response bytes and optional negative profile code
+- ec596cff874ef9b3c41748ca1f64e971f7485dda test: qualify signed protocol metadata config secrecy and receipt lineage
+- f267ee6e7044883a0d1bdf873010a180f5951202 ci: verify remaining protocol profile source and original-clock correlations
+- 3469139f5da474722f5d0f53ff5648142f87e67f ci: remove qualifier before original-holder causal RED
+- 9794b4cca244e4d9613625ceb482eea238de1d55 test: change only original native method holders after actual upload result
+- 5511c073b588dee542fdb9c424f11cc1c70d20c7 test: require original DB node self and KV holders across source pairs
+- e08a45d1741cc475099c1b72c5afa11ccd93c4a3 ci: demonstrate original-holder drift before connection guard fix
+- 7be8f9e2f3b520148f650d178f1cb0a8dce2e297 ci: remove qualifier before final version-holder RED and native proxy check
+- 774968aae56ef2ea557fbc2041a7b14e3a6536a3 test: fence original metadata identity before any native acknowledgement
+- 9856eab4aaa0c877c28965102674a44899eec4db test: refresh optional negative profile proxy at every native mount boundary
+- d22789dcbc2ca878bb71267ebd336d3019ec65a5 test: require zero next SEND and ACK under original holder drift
+- ef3fa9b614f74b37ff67f6a7d424a8227607c0fb ci: demonstrate original version ACK fence and genuine profile protocol boundary
+- 7446aff272e5eef215d6b020ee8177ea1e3ab30b ci: remove qualifier before original native-holder fix
+- e05089a0549415f2ff3ecb6ca82e2906223b1da2 test: keep malformed protocol observation passive before product validation
+- 0526f12d94325676d53031f45b9c20c0aaa4a61b fix: retain original native holders throughout connection publication
+- cd4d6c1da749d635607e6d57959eefaf89091e18 ci: qualify original native-holder fix and unchanged positive clock budgets
+- 3882a7cc900433d17e81a99eb8cec4a5c54d392c ci: remove bounded qualifier before original-holder guard batch
+- 024a08ae6274eeb2a1ced141380f177aa33e0b41 fix: guard original holders before invoking continuation work
+- 753ff0907eab15db33fc7f834b2a0ee6f29bc723 test: count every post-drift native read invocation
+- 277e64d5a739463ab9ab1c25da31eb5c60606c9a test: forbid factual reads after original holder drift
+- 1cf62cdd5265e7ab2f313ffc13aa8321281af3c9 ci: verify deferred original-holder guards and exact native principal
+- 0c8c8f9cd3edae9c28a4195b09be41cfac680610 ci: remove qualifier before completing causal readback variants
+- d02ad5dfd05611e5beefed0399bfd980e343f147 test: corrupt actual publication reads without altering registry artifacts
+- a4ae40124907ce1f03792ed6f0808cb0e2c69363 test: assert each upload and activation readback denial causally
+- f7f73a187e49465f4ec89ef8562a96f3aefcfdd6 docs: preserve native holder causal proof and remaining matrix checkpoint
+- b7794153b7673c598933820440f2bdbe42d4cd27 docs: checkpoint Task3 holder proof without completion claim
+- 010c92e998d5774656513d0f9a874a94b8c3eaeb ci: qualify eight causal native publication readback variants
+- fd757be15c119c531953f9da92ae8cb9fd48fd4c ci: remove qualifier before final ticket correlation matrix batch
+- c9ec67266c12844318b53acb716aa52e0ad0cbbd test: mutate actual choice ticket facts with valid codecs only
+- e5fa95364648a2ab3afe6fd344b22d4b53205f07 test: preserve ticket lineage across six causal correlation negatives
+- 41f33e44386713b9b4310a4f6f595d88a46fd73c test: snapshot causal counters before explicit failure diagnostic read
+- 88090aa24697a28d1e9e338925617d628a396863 test: separate request-native reads from later explicit diagnostic probes
+- f9e166bd0809cd4164d06a6f0ef2a2cb4ab4001e ci: qualify actual ticket correlations and source-holder counter scope
+- 36ba881471a1a6cca6db57862b831706100c425a ci: remove qualifier before precise codec-valid ticket control fix
+- 3697c5392f86d68a894b2be6af8624cf06c3d97a test: reach exact ticket correlators with valid action connection reference
+- b67453120328c9a7a6c07e1306de8c67a261de3a test: assert targeted ticket and snapshot predicate reached after codecs
+- bf9268f135a3b988e1d6c458ea3088e9d83a54b8 ci: verify codec-valid ticket predicates and unchanged source-holder refusal
+- 31ede7d2d0a7ee90828042c8cad17a30a6eaf60d ci: freeze final code before exact bounded qualification manifest
+- 6a5a9e5f272619e96160cd0e3e8a5e686fb01b1f docs: freeze exact sixty-case native matrix and bounded qualification evidence
+- db9effbfc0acea4ef287113df15e25f68ae4f439 docs: preserve Task3 exact final matrix before qualification
+- bbb09fca038c3ca09e8f02f07df558378b3fd843 ci: run frozen sixty-native-case three-job qualification and scoped regressions
+- 09813e0ced14be940398e5aae3c6964377e00b72 ci: preserve incomplete qualification before causal observation-scope correction
+- 18463127ae3efd772ed03a163c35590865dd3e2f test: timestamp actual connection POST observation without changing native clocks
+- 0092edfd2cdeb02398f467fda187a891129e54d5 test: align late native-boundary observation with its actual POST root
+- f7949f035caa729478eb9694195c22229af47a2d ci: diagnose actual late held boundaries within original POST observation
+- 534c4054e0bf350ba5f944097e53e6d0f04a65bd ci: correct literal regex quoting for two-boundary observation diagnostic
+- d8d3276cf4122ec900e60dd3b2ef651b6f0b469e ci: remove focused qualifier before explicit live-boundary observation proof
+- bfcedc516a54da3674da983eff84581787e0655a test: preserve actual live native held-boundary entry facts
+- e5913781a81d4e3ec0fac01c018c18058091636a test: require each held target to enter within its actual live request
+- 4ddc7db7bc68a124f77ad2a7d19218f21280b769 ci: prove late held entries reached inside actual live POST boundary
+- ed051204d16a3930c7d798f4ddba0975d1eec5d4 ci: remove qualifier before separating late cleanup observation facts
+- 3238165e15e52cac886ddb150fb517939538f3e3 test: distinguish live business IO admission from later retained cleanup
+- b6a81590276503926e7fe10564add26150fc1f5f test: allow actual late cancellation while preserving live admission proof
+- 9a7502f94b23e777ab5b195278c75e1207132555 docs: preserve incomplete gate and freeze corrected live-observation qualification
+- a61142aea40cb4e7880a34e5ffa39ab14ee4fdf5 docs: checkpoint corrected Task3 observation and revised exact three-job gate
+- d11dff63b0d693b89ac6ef8d6ec6c60ca01af751 ci: qualify revised exact native matrix under independent original request observations
+- f29804abe54f1d618c859c2642b48f90b5677fb7 ci: complete only remaining controls and lint at exact qualified source checkout
+- 5e28e70b7833fcd4a17fecebe320b0365b6c4d2f ci: remove completed scoped qualifier and freeze Task3 source handoff
+- 02c71f353d3e59025f6e89e70b8d8860a6a647ab docs: complete Task3 source qualification report with explicit composite evidence and limits
+- df20c0f8b8e2fc1b03cdd7e122302c5dc8a62f4e docs: close Task3 implementer ledger with qualified source and explicit review concerns
+- f3fca20cb71b839735611bb25663cf257ecbd648 test: passively observe keyed native publication invocation and durability
+- f3bf10200339e30865baa5199ad347a75c4ca6ae test: assert actual publication durability order before successful response
+- efb92819f3cb7d977ac06c440bca27f1d927d920 test: retain native order proof and passive trace as scoped CI evidence
+- 274a14f4b6026ffcd6da92c88b6922d5e2adf362 ci: qualify only Task3 fix1 native chronology principal and two-file lint
+- d56f9fb9ce27bcd36229645bf3adc24b52acc429 ci: preserve failed chronology qualification before correcting native readback observation
+- 1821d3a21f584d3f56a152e0ec5bb92a54c629da test: observe exact readback only after actual read-only native transaction fulfillment
+- eb43d27ff8ec5ccbe160a8420080c11f68e9fd39 test: require completed keyed readback transaction and retain failure trace before assertions
+- 7ebe843a69a6434d11670de4cab5482a1c931799 test: keep original observed get promise while capturing readback values
+- fc0c3b04110fb01adfae887eaf53b84dbeb1d069 ci: qualify corrected completed native readback chronology and two-file lint
+- ab96b2a1d22731eef3fb02f1615c2f276058dd0f ci: remove Task3 fix1 qualifier after focused native order verification
+- fde91ba07881e4576429c52a19b39114f259e76f docs: append Task3 fix1 actual native chronology proof and scoped qualification
+- 9989b83d7a2935752d5cef335b6d63af9d1b6b51 docs: record Task3 fix1 focused chronology evidence and pending re-review
+- 8b2380c9bcc9c383ec46590df1403eed19fd2659 docs: accept Task3 after scoped native order review
