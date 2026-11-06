@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {access} from 'node:fs/promises';
+import {access,mkdir,writeFile} from 'node:fs/promises';
 test('T1 fixed engine exposes only finite operations',async()=>{
  await assert.doesNotReject(access('lib/mcp-qa-finite-fixed-policy-engine.mjs'),'fixed finite operation contract must exist before publication');
  const {createFiniteFixedPolicyEngine}=await import('../lib/mcp-qa-finite-fixed-policy-engine.mjs');
@@ -106,6 +106,13 @@ async function choice(f,options={},url=U){
 function post(body=validForm,headers={}){return {method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:'__Host-afw-finite-prepare='+H,...headers},body};}
 test('T2 initial artifact already contains fixed finite dispatch',async()=>{
  const revision=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),r=await compileFiniteNativeStaging({cwd:process.cwd(),sourceRevision:revision}),m=r.metafiles.canaryLive.inputs,q=r.metafiles.qaLive.inputs;
+ const artifacts='output/t2-graphs';await mkdir(artifacts,{recursive:true});
+ await Promise.all([
+  writeFile(artifacts+'/compiler-metafiles.json',JSON.stringify(r.metafiles,null,2)),
+  writeFile(artifacts+'/compiler.json',JSON.stringify({purpose:r.purpose,sourceRevision:r.sourceRevision,sourceTree:r.sourceTree,modules:r.modules,candidateResidency:{...r.candidateResidency,content:undefined},completePackage:r.completePackage,operationalReadiness:r.operationalReadiness},null,2)),
+  writeFile(artifacts+'/canary-index.mjs',r.files['canaryLive/index.mjs']),
+  writeFile(artifacts+'/qa-index.mjs',r.files['qaLive/index.mjs'])
+ ]);
  for(const path of ['lib/mcp-qa-finite-owner-native-bridge.mjs','lib/mcp-qa-finite-owner-oauth-forward.mjs','lib/mcp-qa-finite-owner-notice-get-forward.mjs'])assert(m[path],'initial M must contain '+path);
  for(const path of ['lib/mcp-qa-finite-owner-native-receiver.mjs','lib/mcp-qa-finite-owner-oauth-qa.mjs','lib/mcp-qa-finite-owner-notice-get-qa.mjs'])assert(q[path],'initial QA must contain '+path);
  assert.equal(m['lib/mcp-qa-finite-candidate-residency.mjs'],undefined);assert(q['lib/mcp-qa-finite-candidate-residency.mjs']);
