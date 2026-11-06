@@ -1,0 +1,53 @@
+name: AFW first connection qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - .github/workflows/afw-first-connection-qualification.yml
+permissions:
+  contents: read
+jobs:
+  native-red:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Actual fragmented upstream then native dispatch RED
+        run: |
+          set -o pipefail
+          mkdir -p output/t2-native-red
+          timeout 120s node --test --test-reporter=spec --test-concurrency=1 --test-name-pattern='^T2 finite dispatch never falls through ordinary$' test/mcp-qa-finite-first-connection-publication-native.test.mjs 2>&1 | tee output/t2-native-red/result.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: first-connection-task2-fragmented-upstream
+          path: output/t2-native-red/
+          retention-days: 7
+  material:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Material native ownership and lifetime contracts
+        run: |
+          set -o pipefail
+          mkdir -p output/t2-material
+          node --test --test-reporter=spec --test-concurrency=1 --test-name-pattern='^(T2 material native ownership keeps frozen script and mutable bytes fenced|C2-A actual native B1\+B2\+C1 composition retains private factual material, never authority|C2-A denies (aborted|holder-drift) without material/selector/ACK|C2-A partially consumed original parent aborts held child, retains real promise and writes nothing late)$' test/mcp-qa-finite-initial-material-native.test.mjs 2>&1 | tee output/t2-material/result.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: first-connection-task2-material
+          path: output/t2-material/
+          retention-days: 7
