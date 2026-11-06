@@ -96,7 +96,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {readFile} from 'node:fs/promises';
 import {buildMcpNodeProgram} from '../../scripts/build-mcp-node-program.mjs';
-import {finitePublicProfileTemplate,finiteWranglerProfileTemplate} from '../../lib/mcp-qa-finite-profile.mjs';
+import {finiteWranglerProfileTemplate} from '../../lib/mcp-qa-finite-profile.mjs';
 const digest=x=>createHash('sha256').update(x).digest('hex');
 const origin='https://delegated-canary.agentfriendlyweb.dev';
 export async function compileFirstConnectionCandidate(revision,tree){
@@ -145,17 +145,18 @@ export function extendFirstConnectionPublication(entry){
  `);
 }
 export function firstConnectionWorkers(qa,candidate){
- const p=finiteWranglerProfileTemplate('canaryLive'),bindingValues=Object.fromEntries(finitePublicProfileTemplate('canaryLive').bindings.filter(b=>b.type==='plain_text').map(b=>[b.name,b.text]));
+ const p=finiteWranglerProfileTemplate('canaryLive'),bindingValues={...p.vars};
  const options={modules:true,outboundService:async()=>new Response(null,{status:503}),compatibilityDate:p.compatibility_date,compatibilityFlags:p.compatibility_flags,durableObjects:{AFW_FINITE_TRIAL_CONTROL:{className:'Initial',scriptName:'qa-first-connection',useSQLite:true,uniqueKey:'initial-c2a'},AFW_DOSSIER_EVENTS_NODE:{className:'AfwOwnEventNode',useSQLite:true,uniqueKey:'first-connection-node'}},d1Databases:{DB:'SYN-first-connection-M'},kvNamespaces:{OAUTH_KV:'first-connection-oauth'},ratelimits:{DELEGATED_RATE_LIMITER:{namespace_id:'99126',simple:{limit:1000,period:60}}},bindings:{...bindingValues,AFW_FINITE_TRIAL_VERSION:{id:'55555555-5555-4555-8555-555555555555'}}};
  return {workers:[{...options,name:'canary-first-connection',script:candidate.script},qa,{...options,name:'negative-first-connection',script:candidate.spyScript}]};
 }
 export async function approveFirstConnection(f){
  assert.equal(f.mode,'first-connection-publication');
- const screen=await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':await f.enrollmentToken(f.firstConnectionSource)}});
+ const facts=await plain(f.stub.capsuleFacts()),source=facts.material.ownerSelection;
+ const screen=await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':await f.enrollmentToken(source)}});
  if(screen.status!==200)return screen;
  const text=await screen.text(),handle=/name="handle" value="([a-f0-9]{64})"/.exec(text)?.[1],projectRef=/name="projectRef" value="([a-f0-9]{64})"/.exec(text)?.[1],cookie=screen.headers.get('set-cookie')?.split(';')[0];
  assert(handle&&projectRef&&cookie,'actual choice must supply bounded form/cookie');
- return f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:origin,'Content-Type':'application/x-www-form-urlencoded','Cf-Access-Jwt-Assertion':await f.enrollmentToken(f.firstConnectionSource),Cookie:cookie},body:new URLSearchParams({handle,projectRef,decision:'approve'}).toString()});
+ return f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:origin,'Content-Type':'application/x-www-form-urlencoded','Cf-Access-Jwt-Assertion':await f.enrollmentToken(source),Cookie:cookie},body:new URLSearchParams({handle,projectRef,decision:'approve'}).toString()});
 }
 export async function setFirstConnectionFault(f,fault){
  assert.equal(f.mode,'first-connection-publication');assert(['none','qa-absent','version','profile','actor','version-drift','oauth-open'].includes(fault));
