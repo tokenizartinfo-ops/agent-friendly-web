@@ -37,7 +37,7 @@ test('actual fixed Worker to DO conduit stays pending and overwrites every calle
 });
 test('actual native signal capability observes receiver separately during held read and before guarded continuation',{timeout:20000},async t=>{
  const f=await fixture(t);await f.call('/fixture/hold');
- const pending=f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded'},body:'SYN=bounded'}).then(async r=>({status:r.status,body:await r.json()}),()=>({senderRejected:true}));
+ const pending=f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:'__Host-afw-finite-prepare='+'a'.repeat(64)},body:'handle='+'a'.repeat(64)+'&projectRef='+'b'.repeat(64)+'&decision=approve'}).then(async r=>({status:r.status,body:await r.json()}),()=>({senderRejected:true}));
  await f.wait('held');await f.call('/fixture/abort');
  const sender=await pending,held=await f.state();
  await f.call('/fixture/release');const settled=await f.wait('readCancelled');
@@ -56,14 +56,14 @@ test('actual native signal capability observes receiver separately during held r
 
 test('actual native size and malformed receiving envelope stay closed without storage effects',{timeout:20000},async t=>{
  const f=await fixture(t);
- const oversized=await f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:O},body:'x'.repeat(16385)});
- assert.equal(oversized.status,400);await oversized.body.cancel();assert.equal((await f.state()).receiverEntered,0);
+ const oversized=await f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:'__Host-afw-finite-prepare='+'a'.repeat(64)},body:'x'.repeat(16385)});
+ assert.equal(oversized.status,413);await oversized.body.cancel();assert.equal((await f.state()).receiverEntered,0);
  const headers=()=>{const at=Date.now();return {'x-afw-finite-boundary':JSON.stringify({startedAt:at,deadline:at+30000,remainingMs:29999}),'x-afw-finite-original-url':O+'/connections/finite-prepare','x-afw-finite-original-method':'POST','x-afw-finite-version':V,'x-afw-finite-request-id':V,Origin:O};};
  for(const [path,h,body,status]of [
   ['/fixture/receiver-probe',{...headers(),'x-afw-finite-extra':'deny'},'SYN',400],
   ['/fixture/receiver-probe',{...headers(),'x-afw-finite-boundary':'{}'},'SYN',400],
   ['/fixture/receiver-probe',{...headers(),'x-afw-finite-version':'bad'},'SYN',400],
-  ['/fixture/receiver-probe',headers(),'x'.repeat(16385),400],
+  ['/fixture/receiver-probe',{...headers(),'Content-Type':'application/x-www-form-urlencoded',Cookie:'__Host-afw-finite-prepare='+'a'.repeat(64)},'x'.repeat(16385),413],
   ['/fixture/wrong-actor',headers(),'SYN',503]
  ]){const r=await f.call(path,{method:'POST',headers:h,body});assert.equal(r.status,status);await r.body.cancel();}
  assert.equal((await f.state()).businessRows,0);
