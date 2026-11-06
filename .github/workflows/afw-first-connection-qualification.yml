@@ -1,0 +1,85 @@
+name: AFW first connection qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - .github/workflows/afw-first-connection-qualification.yml
+permissions:
+  contents: read
+jobs:
+  pure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Pure Task1 Task2 and complete old wire
+        run: |
+          set -o pipefail
+          mkdir -p output/t2-pure
+          node --test --test-reporter=spec --test-concurrency=1 test/mcp-qa-finite-first-connection-publication.test.mjs test/mcp-qa-finite-owner-native-wire.test.mjs 2>&1 | tee output/t2-pure/result.log
+      - name: Lint thirteen changed paths
+        if: always()
+        run: |
+          set -o pipefail
+          mkdir -p output/t2-pure
+          npx --no-install eslint worker/mcp-own/finite.mjs worker/independent-closure/finite.mjs lib/mcp-qa-finite-owner-native-wire.mjs lib/mcp-qa-finite-owner-native-bridge.mjs lib/mcp-qa-finite-owner-native-receiver.mjs test/mcp-qa-finite-first-connection-publication.test.mjs test/mcp-qa-finite-first-connection-publication-native.test.mjs test/fixtures/finite-first-connection-publication.mjs test/fixtures/finite-initial-entry-world.mjs test/mcp-qa-finite-owner-native-wire.test.mjs test/mcp-qa-finite-owner-native-conduit-native.test.mjs lib/mcp-qa-finite-initial-material.mjs test/mcp-qa-finite-initial-material-native.test.mjs 2>&1 | tee output/t2-pure/lint.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: first-connection-task2-pure
+          path: |
+            output/t2-pure/
+            output/t2-graphs/
+          retention-days: 7
+  native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Complete Task2 and complete old native conduit
+        run: |
+          set -o pipefail
+          mkdir -p output/t2-native
+          timeout 120s node --test --test-reporter=spec --test-concurrency=1 test/mcp-qa-finite-first-connection-publication-native.test.mjs test/mcp-qa-finite-owner-native-conduit-native.test.mjs 2>&1 | tee output/t2-native/result.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: first-connection-task2-native
+          path: |
+            output/t2-native/
+            output/t2-native-graphs/
+          retention-days: 7
+  compiler:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Exactly two compiler staging and missing package cases
+        run: |
+          set -o pipefail
+          mkdir -p output/t2-compiler
+          node --test --test-reporter=spec --test-concurrency=1 --test-name-pattern='^(actual compiler staging hashes final bytes and retains source classes without eligible manifest|missing_factory_blocks_package)$' test/build-finite-native-package.test.mjs 2>&1 | tee output/t2-compiler/result.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: first-connection-task2-compiler
+          path: output/t2-compiler/
+          retention-days: 7
