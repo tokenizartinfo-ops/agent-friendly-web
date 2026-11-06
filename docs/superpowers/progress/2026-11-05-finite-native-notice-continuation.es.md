@@ -263,3 +263,20 @@ C sí completó121positivos:14native,34context,4GET,10POST,2SDK,1Link,46pure[16t
 Próximo: acordar terminación mínima de los controles pendientes, conservando los7blobs de código/prueba exactos y sin repetir167positivos aprobados ni ampliar plazos producto. Source aún bajo first_connection_task3_impl; no hay reporte DONE ni aceptación Task3. Las variantes de observación focales fueron probadas aparte en42235796244/job1279529300612PASS, con entrada POST19.672/20.436s dentro de su Root30s; no sustituye el cierre pendiente.
 
 operationalReadiness=false, completePackage=false, PCoff=false. Ningún recurso real, permiso, token, OAuth, cron, Container o suscripción mutado por esta calificación.
+
+
+## Task3: terminación acotada observada, pendiente de revisión fresca
+
+Ruling: aceptar verificación compuesta, como excepción explícita al plan de un único lote3jobs:167positivos del run42236775067 + sólo2controles ylint en un job posterior con checkout idéntico D11; no repetir positivos sin delta. El run original conserva cancelled y42232085255 conserva fallos. Costo si es erróneo: una diferencia de código/procedencia invalida la composición; por eso se exige HEAD/tree/7blobs y working tree antes/después. No amplía relojes producto ni autoriza runtime.
+
+Completion run42240487416/job127969155895 SUCCESS15:10:04–15:11:17UTC, triggerf29804abe54f1d618c859c2642b48f90b5677fb7 separado de checkoutd11dff63b0d693b89ac6ef8d6ec6c60ca01af751/tree4e30df2ae4abe2bf087b123823185fa6ab082fa8. Root leyó qualifierb9fe3400416e990bb451a17ff21f6999bebe65e4:1job15min, contents:read,persistfalse,checkout fijo,sin secretos. Antes/después HEAD/tree y cada blob HEAD+workingfile de7paths exactos, sin cambios tracked. GITHUB_SHA sólo en child se fija al checkout real para que testRevision no declare el trigger posterior.
+
+Root leyó log49796chars: mutantepublic-partial1executed/0PASS/1expectedFAIL/exit1/targettrue (22085ms); mutanteexisting-ack igual (28004ms); ambos0cancel/skip/todo. Lint7exit0/2086ms. Dos QAsha literales de TASK3_BUILD:028d66e39df56d557cb2f96b5122b36eb1dc4c1624dfbc6cc2dd47b9b1141ca8 y05db012360e6c7a28d64f8188542d2ba62103ca2c5c596ebe1eb5fda376e7c72, etiquetados negativeMutation y testRevisionD11; M inalterado1988061B/c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32. No llamar a esos2 expectedFAIL positivos ni TDD histórico.
+
+Artifact completion13515241913 ZIP2425465B/SHA2564af8719690f283e0c78b46cc0c44a56a341cca62a4128162aa5a7442c03e45dd/vence13nov15:11:14UTC. Artifact A13514930019/digest91fd1b47cf3eb55593f3d20482ce26e4279f500c4f187cafe3ef44243051e59d, B13511838508/digest03f46d3e978c50da7b0a02dcfbb25b34f4eb49bc1101266cdabe277980bb007b, C13513670609/digest62261874fd5dfc92155fb6ea75e295704dba6c351a2c5cf06cd33e0753d9d2b6. APImetadata comprobada, no ZIP local.
+
+Root reconcilió cada positivo contra manifiesto y nombresTAP:60native únicos y107scoped (pure46incluye30subtests),167PASS/0FAIL/CANCEL/SKIP/TODO/exit0. Code/test d11fulltree delta frente a BASE: exactamente7paths permitidos +report/progress+qualifier; protegido idéntico. Final aún necesita reporte completo, retirada qualifier, readback final y revisión fresca spec+quality; no aceptación anticipada.
+
+Métrica SYN recibida del principal:1768respuestas/1877366582bytes, con snapshot requests1754=16GitHub+1736Cloudflare+2JWKS;14CF respuestas posteriores son probes factuales de otra ventana de medición. No cuota/tráfico real probado. Gate de viabilidad separado antes de promoción: latencia/volumen/rate con garantías intactas; no optimización dentro de Task3.
+
+operationalReadiness=false;completePackage=false;PCoff=false.
