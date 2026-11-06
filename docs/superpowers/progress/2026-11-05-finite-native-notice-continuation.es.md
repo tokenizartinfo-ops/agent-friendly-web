@@ -280,3 +280,20 @@ Root reconcilió cada positivo contra manifiesto y nombresTAP:60native únicos y
 Métrica SYN recibida del principal:1768respuestas/1877366582bytes, con snapshot requests1754=16GitHub+1736Cloudflare+2JWKS;14CF respuestas posteriores son probes factuales de otra ventana de medición. No cuota/tráfico real probado. Gate de viabilidad separado antes de promoción: latencia/volumen/rate con garantías intactas; no optimización dentro de Task3.
 
 operationalReadiness=false;completePackage=false;PCoff=false.
+
+
+## Task3: revisión fresca y fix round1/5 abierto
+
+Source implementer entregó DONE_WITH_CONCERNS y cesó escrituras en df20c0f8b8e2fc1b03cdd7e122302c5dc8a62f4e/treef7229e5c4c323b147120d001baa1183a874728da, report99e3a4c1251bf3c88694afd71c61859b9dcf7f42 y progressa1ae93956e0757a5dc9999ab2b738354dcc540ae. Root fulltree3326sintruncación:7code/test+2docs, código idénticoD11, qualifierausente/todoslosdemásblobsBASEidénticos. Comparación122/122commits. Paquete completoBASE→HEAD330278chars/U10/commitlist/stat en docs/superpowers/reviews/2026-11-06-finite-native-first-connection-task3-review-package.md, Root commitaeb60b38e2d7e8c740faf617bcc88b6989b2fc14/blob206ead2513546e26c5a7e9525c4cc454f657608e.
+
+Revisor fresco first_connection_task3_review, Astrahigh, read-only/sin helpers ni reruns: Spec❌/QualityNeedsfixes,0Critical/1Important/2Minor. Fortalezas: holdercapturadoantesI/O, thunks, state privado, snapshots yretención. Acepta límites explícitos como evidencia compuesta/estática, no comoPASSdinámico o runtime.
+
+ImportantI1 (verbatim): Required native publication chronology is not asserted. Native test:71 reads telemetry but only checks counters and HTTP settlement; line105 logs further measurements. The fixture records keyed transaction/sync/readback events and native results (fixture:238,256,272), but no T3 assertion checks their sequence. The implementation presently orders these operations correctly; nevertheless, the mandated test would not detect removal/reordering of an upload/activation SEND durability boundary merely from successful final rows. Add passive native-invocation markers and assert, per effect, SEND commit→sync→readback→invocation→result→ACK commit→sync→readback, plus receipt durability before success. Qualify the focused principal; the existing T1 enrollment chronology does not answer this new coordinator requirement.
+
+Root contrastó brief99/419,351–357 y T3native54–71: requisito explícito y falta real, no excepción del plan ni defecto de orden observado en producto. Entrar fixloopRound1/5 con writeroriginal; todavía0addressed/1open. Corrección sólo test/observabilidad pasiva de T3/F1/F2 según necesidad; sin tocar producto/P1/P2 ni autoridad/clock. Calificación focal del principal ylint, no repetir167sinriesgo nuevo. Reevaluación posterior exclusivamentefixdiff con findingI1.
+
+Task3: minor(deferred) — warnings RPC/toolchain/disposal, responsabilidadRootwholebranch; conservar firmas y owners, no supresión/upgrade incidental ni cerrarM1/M2.
+Task3: minor(deferred) — viabilidad operativa API/latencia/volumen, ownerRootpromotiongate; sinpruebaquota/live, no defectoSource inferido sólo de métrica. Necesita resoluciónantespromoverPCoff, noextiendeestefixloop.
+⚠️ Helperinternals/transactionretry noverificablesdesde diff: mantieneevidenciablobexacta y excepciónsemántica, no nuevas suites.
+
+Mainactual sigue0c9c475b3ebaa970fc11d628b40e50a90cceb727. Fullbranch contra mergebasef4ff51596be918e9d556f6765aeb0441133ff52f tiene578paths (277docs); reviewTask3 noesreviewfinaldemerge. SourcefixBase=df20c0f8..., readiness/completePackage/PCoff=false.
