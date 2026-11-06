@@ -8,7 +8,7 @@ async function fixture(t){
  const f=await initialEntryHarness('first-connection-publication');
  t.after(async()=>{await f.stub.restoreMethods();await f.mf.dispose();await f.cleanup();});
  await f.stub.configure('normal');
- const initial=await plain(f.stub.invoke(f.refs));assert.equal(initial.status,'material_recorded',JSON.stringify(initial));await f.stub.restoreMethods();
+ const initial=await plain(f.stub.invoke(f.refs));assert.equal(initial.status,'material_recorded',JSON.stringify(initial));await f.stub.restoreMethods();await f.mountFirstConnection();
  const rows=await plain(f.stub.snapshot()),capsule=JSON.parse(rows.find(([key])=>key.endsWith(':capsule'))[1]);
  assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);assert.equal(f.phaseCurrent,undefined);
  assert.equal(capsule.moduleHash,f.firstConnectionBuild.residency.module.sha256);
