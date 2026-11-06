@@ -610,3 +610,82 @@ a61142aea40cb4e7880a34e5ffa39ab14ee4fdf5 → d11dff63b0d693b89ac6ef8d6ec6c60ca01
 d11dff63b0d693b89ac6ef8d6ec6c60ca01af751 → f29804abe54f1d618c859c2642b48f90b5677fb7; tree 4f7b1b5ff6296fa6220d09d8d8636f28b26a907a; .github/workflows/afw-first-connection-qualification.yml; blob b9fe3400416e990bb451a17ff21f6999bebe65e4; ci: complete only remaining controls and lint at exact qualified source checkout
 
 f29804abe54f1d618c859c2642b48f90b5677fb7 → 5e28e70b7833fcd4a17fecebe320b0365b6c4d2f; tree 6f3b7308bf8d73418baa8ab1f91ee5900d89b89a; .github/workflows/afw-first-connection-qualification.yml; blob ABSENT; ci: remove completed scoped qualifier and freeze Task3 source handoff
+
+## FIX ROUND1/5 — I1 native chronology assertion, 2026-11-06 16:09 UTC
+
+**IMPLEMENTED AND FOCALLY QUALIFIED; scoped Root re-review pending.** Fresh reviewer returned Spec❌/QualityNeedsfixes,0Critical/1Important. I1 identified a real test-contract gap: the implementation already orders native publication correctly, but T3 only asserted final state/counters/HTTP settlement and did not prove its coordinator's SEND/ACK/receipt durability sequence. The existing T1 enrollment chronology was not evidence for this new coordinator. This appendix supersedes any implication that the earlier D11 test dynamically asserted that order. No product-order defect was observed; no product change was made.
+
+FIX_BASE df20c0f8b8e2fc1b03cdd7e122302c5dc8a62f4e/treef7229e5c4c323b147120d001baa1183a874728da. Tested code7ebe843a69a6434d11670de4cab5482a1c931799/treeafc2a93653f91ee262f9df9f9e32aef07e044dcb; qualifier triggerfc0c3b04110fb01adfae887eaf53b84dbeb1d069. Qualifier-free checkpointab96b2a1d22731eef3fb02f1615c2f276058dd0f/treeafc2a93653f91ee262f9df9f9e32aef07e044dcb. Only T3 and passive F1 instrumentation changed; F2 was unnecessary. P8/P9/P10/P1/P2, schemas/store/journals, SDK, build/profile/bootstrap/source and every other product path remain FIX_BASE-identical.
+
+### What now proves actual native order
+
+F1 captures original request ID, exact keyed raw-value SHA256 from existing native put/get results, native transaction commit/settled sync events, actual captured-fetch invocation+wire-body hash, header response, fixed engine operation's normal fulfillment after body/cancel, and actual QA fetch response return. Audit hashing is synchronous on captured immutable DATA, not asynchronous work that could reorder observations. There are no additional backend reads/calls, authority predicates, grants, callback approvals, seeded rows or new clocks. Engine/response side observers attach to original operation Promises and return those original Promises/values; rejection semantics stay with originals, not the observation branch. Synchronous QA responses also preserve their original return path.
+
+The principal correlates actual own journal keys to effect identities, raw values and ACK→SEND codec hashes; SEND requestHash binds the actual provider method/URL/JSON body plus original baselines. Actual normal result IDs bind the ACKs and receipt. It requires native put→commit→sync→completed exact readback before invocation, header response→body/cancel/result settlement before ACK put, ACK commit→sync→completed exact readback before next effect, and receipt durability before the actual QA200 return. It additionally checks upload ACK durability before activation SEND and activation ACK durability before receipt. The trace never supplies product authority.
+
+Protected journal blob6e3de33d04075740fb57e5f9afcf87dd9f68ee79 read() uses transact(...,false), state() performs tx.get inside a read-only native storage.transaction. Therefore a completed readback is not assumed to be direct storage.get. Passive RO transaction events carry transactionID and hashes of the exact values actually read and are emitted ONLY after that original native transaction Promise fulfills normally. Predicate pairs those fulfilled events with the same transaction's actual get values after sync/before the next boundary; an incomplete tx.get does not qualify. Genuine direct storage.get is still supported. No pending readback was relabelled settled.
+
+Actual primary event indices (strict trace sequence, not coarse wall-clock sorting), requestc6f64333-d308-4427-82c7-fc24909741a4:
+
+| Effect | put / commit | sync settled | completed exact readback | native invocation | headers / normal result | ACK put / commit | ACK sync | ACK completed readback |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| upload | 22 / 25 | 27 | 33 (RO tx11) | 69 | 70 / 71 | 78 / 79 | 80 | 86 (RO tx17) |
+| activation | 199 / 202 | 204 | 210 (RO tx31) | 246 | 247 / 248 | 255 / 256 | 257 | 263 (RO tx37) |
+
+Receipt put340→commit341→sync342→completed RO readback349(tx47)→actual successful QA response415,status200. All events correlate exact own keys/hashes and the original POST. Full sanitized hashed passive trace and selected proof are preserved in output/task3/native-publication-order.json. Trace is captured BEFORE order assertions for failure diagnosis, then augmented with the passing proof.
+
+### Covering qualification and assertion discrimination
+
+Exact command:
+```text
+node --test --test-concurrency=1 --test-reporter=spec --test-reporter=tap --test-reporter-destination=stdout --test-reporter-destination=output/task3/fix1-principal.tap --test-name-pattern=^(?:T3 same initial bytes produce connection and downstream)$ test/mcp-qa-finite-first-connection-publication-native.test.mjs
+npx eslint --max-warnings=0 test/mcp-qa-finite-first-connection-publication-native.test.mjs test/fixtures/finite-first-connection-publication.mjs
+```
+The runner passes arguments as a structured argv array; the displayed regex above is not a shell-quoting recipe.
+
+[Run42248678046](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/42248678046)/job127997568910 SUCCESS16:02:52–16:04:26UTC(94s), exactly1job timeout15min,Node22,contents:read,persist-credentials:false,no secrets,npmci --ignore-scripts --no-audit --no-fund. Actual checkout7ebe/treeafc2 is distinct from triggerfc0c3b04; child fixture testRevision explicitly names actual verified checkout. Before/after actual HEAD/tree, tracked cleanliness and all7HEAD+working-file hashes match. Expected/executed1/1,top1/sub0,PASS1,FAIL0,CANCEL0,SKIP0,TODO0,commandExit0,signalnull; runner64546ms/native test63789.314432ms. lint2exit0/2637ms. Exact name equality prevents zero-match/file pseudo-PASS. No other native case/suite was rerun.
+
+Five copied-DATA checks rejected missing/reordered/incomplete observations while leaving the actual native flow untouched: missing upload SEND sync; activation invocation before SEND readback; missing activation ACK sync; incomplete upload SEND transaction get; receipt readback only after success. They are assertion-discrimination checks over copies, nativeFailureInjected=false, not dynamic product/native mutation evidence or historical TDD RED. No product mutation was needed for this reviewer finding.
+
+Positive initial M remains EXACT D11: SHA256c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32/1988061bytes, explicitly asserted before approval. Principal negativeMutation=null. QA-only passive instrumentation SHA256e4861bf5d2af5248b651f440514a0ca3b5d131d892f0a0e40918ae4e7efb7d7b/2368172bytes; it does not replace/wrap the positive M or change product files. Root/child deadlines, body/cancel retention, source C0/C1 and native positive lineage/downstream remain unchanged. Audit additions have measured native flow63789ms aggregate across separate requests, not an asserted speed improvement; CI hardware/timing differ. Existing167positive product evidence remains at D11, NOT all167tested at this new fixture checkout.
+
+Artifact ID13519737504,task3-fix1-source-7ebe843a-trigger-fc0c3b04110fb01adfae887eaf53b84dbeb1d069; ZIP1225837bytes; sha256:f40e631bdeae57bf9cce4479cb74360d716c4a5b3dda2b2ac3a107b04f7de05e; expiry2026-11-13T16:04:21Z. Source/metafiles, M/QA scripts, spec+TAP/counts/manifests/provenance and sanitized native-order trace are retained7days. Digest is verified GitHub metadata/primary upload value, not a local ZIP rehash/download.
+
+### Failed first qualification and correction
+
+Run42247056350/job127991910162 at actualefb92819/tree8dd17328 (trigger274a14f4) remains FAILED:1executed/0PASS/1FAIL/0CANCEL/0SKIP/0TODO/exit1 at “upload SEND exact storage readback after sync before next boundary”; actual connection response had already returned200, exact M unchanged, lint2exit0. This was a passive-observer/predicate API classification defect, not a pre-fix product RED or observed product chronology violation. The predicate had incorrectly accepted only direct storage.get while the protected journal uses actual read-only native transaction/tx.get. Root independently verified the native API and explicitly approved the corrected completed-transaction observation before redispatch. First failed qualification did NOT save native-publication-order.json because its write was after the failed assertion; no captured trace is claimed for that run.
+
+Failed artifact13518022372/sha256:3e3a9f24adc96fc4e7c5af35c353594a6718381a45cd1fbd7c5494896de4034e/expiry2026-11-13T15:53:25Z is preserved. The correction records actual RO transaction normal fulfillment, not mere get invocation/result, and saves trace before assertions. No readback requirement, guard or clock was weakened. No blind rerun, backend replacement, extra read, product edit or new fix round occurred.
+
+### Before/after blobs, scope and handoff
+
+| Path | FIX_BASE blob | Qualified blob |
+| --- | --- | --- |
+| test/mcp-qa-finite-first-connection-publication-native.test.mjs | bc9f717d79e6e1ad60a40f358351093371331bee | 1298bb5b67749df0d7ee20c863b691562e6a81b9 |
+| test/fixtures/finite-first-connection-publication.mjs | 2cda37157bc0d1c9622784c33aa3b0fd94dc0e48 | 6a6950bbe7e956d3b7f19e1a04c5aa6f6ca7b379 |
+
+All other five Task3 paths match FIX_BASE/D11 exactly; all product paths including protected P1/P2 match FIX_BASE. Final scope will contain only these2test files plus appended report/progress; temporary qualifier removed before this appendix. Artifact provenance binds tested code7ebe, not later documentation commits. Source ownership ends after final readback/handoff; Root will create the FIX_BASEdf20→HEAD review package. I1 implementation is ready for scoped re-review; it is not self-accepted as closed. M2/toolchain/RPC warnings, semantic callback-retry exception, post-implementation negative chronology and live-provider/~1.877GB SYN feasibility limits remain as disclosed, outside this fix. No Minor fix wave or runtime/auth/token/provider/deploy action occurred. All operationalReadiness/completePackage/PCoff remain false; Nov3 source ceiling stays expired.
+
+Verified sequential FIX ROUND1 writes through qualifier removal (each single-parent/path/file-CAS/ref/blob read back):
+
+- df20c0f8b8e2fc1b03cdd7e122302c5dc8a62f4e → f3fca20cb71b839735611bb25663cf257ecbd648; tree5f3f3878130d1e06de32356e930c213ba2f09b79; test/fixtures/finite-first-connection-publication.mjs; blob86dffd281c04d4404c9c257c588e7be1afa24a2c; test: passively observe keyed native publication invocation and durability
+
+- f3fca20cb71b839735611bb25663cf257ecbd648 → f3bf10200339e30865baa5199ad347a75c4ca6ae; tree6a12bc22fbccfccbb13ac29697bce44a660bd24f; test/mcp-qa-finite-first-connection-publication-native.test.mjs; blob379b1b64686d6882f04269b146c5a294d5bd7734; test: assert actual publication durability order before successful response
+
+- f3bf10200339e30865baa5199ad347a75c4ca6ae → efb92819f3cb7d977ac06c440bca27f1d927d920; tree8dd17328e892f34528c7bb5c4ea10715df78dbda; test/mcp-qa-finite-first-connection-publication-native.test.mjs; blob0f6c87ddce517098bf4a16191e64cc381157802e; test: retain native order proof and passive trace as scoped CI evidence
+
+- efb92819f3cb7d977ac06c440bca27f1d927d920 → 274a14f4b6026ffcd6da92c88b6922d5e2adf362; treed23aa0cbb8769502431dc9c022ecca0679dea121; .github/workflows/afw-first-connection-qualification.yml; blobae4a2cffc12a79ac268ffb62fe8d0e47117ef013; ci: qualify only Task3 fix1 native chronology principal and two-file lint
+
+- 274a14f4b6026ffcd6da92c88b6922d5e2adf362 → d56f9fb9ce27bcd36229645bf3adc24b52acc429; tree8dd17328e892f34528c7bb5c4ea10715df78dbda; .github/workflows/afw-first-connection-qualification.yml; blobABSENT; ci: preserve failed chronology qualification before correcting native readback observation
+
+- d56f9fb9ce27bcd36229645bf3adc24b52acc429 → 1821d3a21f584d3f56a152e0ec5bb92a54c629da; tree73d733f122177a132b8fe96e1ee148bab41fa1ac; test/fixtures/finite-first-connection-publication.mjs; blob2fd1f95a917f4987dbc8b6425a2847e40a8f8878; test: observe exact readback only after actual read-only native transaction fulfillment
+
+- 1821d3a21f584d3f56a152e0ec5bb92a54c629da → eb43d27ff8ec5ccbe160a8420080c11f68e9fd39; treea2696d58eb0118b7214601985f8c0cf6436cf201; test/mcp-qa-finite-first-connection-publication-native.test.mjs; blob1298bb5b67749df0d7ee20c863b691562e6a81b9; test: require completed keyed readback transaction and retain failure trace before assertions
+
+- eb43d27ff8ec5ccbe160a8420080c11f68e9fd39 → 7ebe843a69a6434d11670de4cab5482a1c931799; treeafc2a93653f91ee262f9df9f9e32aef07e044dcb; test/fixtures/finite-first-connection-publication.mjs; blob6a6950bbe7e956d3b7f19e1a04c5aa6f6ca7b379; test: keep original observed get promise while capturing readback values
+
+- 7ebe843a69a6434d11670de4cab5482a1c931799 → fc0c3b04110fb01adfae887eaf53b84dbeb1d069; tree48b3fcf8b99373888a1871f4ba608fa005ded211; .github/workflows/afw-first-connection-qualification.yml; blob7f1baea5578278b317d8264be9da6b597e0a93d5; ci: qualify corrected completed native readback chronology and two-file lint
+
+- fc0c3b04110fb01adfae887eaf53b84dbeb1d069 → ab96b2a1d22731eef3fb02f1615c2f276058dd0f; treeafc2a93653f91ee262f9df9f9e32aef07e044dcb; .github/workflows/afw-first-connection-qualification.yml; blobABSENT; ci: remove Task3 fix1 qualifier after focused native order verification
+
+The next report/progress commits only append this fix receipt and are delivered by their final handoff SHA rather than a self-referential content hash.
