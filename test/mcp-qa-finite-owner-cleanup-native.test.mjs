@@ -1,0 +1,23 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {recoverCheckpoint,observeOriginalAlarm,writeCleanupEvidence,principalName} from './fixtures/finite-owner-cleanup-persistence.mjs';
+const P='afw.finite-initial-cleanup.v1:';
+test(principalName,async t=>{
+ const f=await recoverCheckpoint(process.env.AFW_R2_CHECKPOINT??'output/owner-cleanup/checkpoint-g0');
+ t.after(()=>f.mf.dispose());
+ const before=f.checkpoint,issuer=before.facts.rows.find(([key])=>key.startsWith('afw.finite-preparation-issuer.v1:')&&key.endsWith(':reservation'));
+ assert(issuer,'genuine producer issuer reservation prerequisite');
+ assert(before.facts.rows.some(([key])=>key.endsWith(':reference')),'historical SDK Reference prerequisite');
+ assert(before.facts.rows.some(([key])=>key.startsWith('connection-preparation:')&&key.endsWith(':notice')),'actual NoticeLink prerequisite');
+ const connected=before.state.providerRegistry.pointer;assert.equal(connected.versions.length,1);assert.equal(connected.versions[0].percentage,100);
+ assert(before.state.providerRegistry.versions[connected.versions[0].version_id],'actual SYN registry original current version');
+ const facts=await observeOriginalAlarm(f),state=JSON.parse(facts.rows.find(([k])=>k===P+'state')[1]);
+ const result={purpose:'afw.owner-cleanup-original-alarm.syn.v1',source:process.env.GITHUB_SHA,I0:f.plan.I0,C0:f.plan.C0,C1:f.plan.C1,recovery:f.recovery,signal:facts.signal,nativeDbNow:facts.dbNow,wall:facts.wall,state,alarm:facts.alarm,originalPlanHash:f.plan.recordHash,originalIssuerReservationHash:JSON.parse(issuer[1]).recordHash,sdkReferencePresent:true,noticeLinkPresent:true,restores:f.restores.length,pointer:f.providerRegistry.pointer,ownCleanupSuffixes:facts.rows.filter(([k])=>k.startsWith('afw.finite-owner-cleanup.v1:')).map(([k])=>k.split(':').slice(2).join(':')),operationalReadiness:false,completePackage:false,PCoff:false,custodyReal:false,modeledProviderInput:before.modeledProviderInput};
+ await writeCleanupEvidence('principal',result);console.info('R2 original native C0 evidence',JSON.stringify(result));
+ assert(facts.dbNow>=f.plan.C0,'actual D1 native clock reached original C0');
+ assert.equal(state.status,'complete','R2 original C0 issuer/later-state owner cleanup must complete');
+ assert.equal(facts.alarm,null);assert.equal(f.restores.length,1);
+ assert.equal(f.providerRegistry.pointer.versions[0].version_id,f.plan.baselineVersionId);
+ const row=facts.rows.find(([k])=>k.startsWith('afw.finite-owner-cleanup.v1:')&&k.endsWith(':receipt'));assert(row,'original cleanup receipt');
+ const receipt=JSON.parse(row[1]);assert.equal(receipt.businessAccessClosed,true);assert.equal(receipt.sdkReductionReturned,true);assert.equal(receipt.globalNativeDrainVerified,false);assert.equal(receipt.sdkNamespaceEmptyVerified,false);
+});
