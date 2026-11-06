@@ -3,6 +3,8 @@ import {Client,StreamableHTTPClientTransport} from '@modelcontextprotocol/client
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {gunzipSync} from 'node:zlib';
+import {initialHash} from '../lib/mcp-qa-finite-initial-material-records.mjs';
+import {hashFinitePreparationRecord,hashFinitePolicyEffectIdentity} from '../lib/mcp-qa-finite-preparation-records.mjs';
 import {initialEntryHarness} from './fixtures/finite-initial-entry-world.mjs';
 import {plain,approveFirstConnection,readFirstConnectionProbe,setFirstConnectionFault} from './fixtures/finite-first-connection-publication.mjs';
 const O='https://delegated-canary.agentfriendlyweb.dev';
@@ -51,8 +53,65 @@ test('T2 closed mounted conduits cannot authorize business',{timeout:120000},asy
  console.info('T2 initial native build',JSON.stringify({...f.firstConnectionBuild,residency:{...f.resident,content:undefined},M:{...f.firstConnectionBuild.M,inputs:f.firstConnectionBuild.M.inputs.length},QA:{...f.firstConnectionBuild.QA,inputs:f.firstConnectionBuild.QA.inputs.length},requests:p.providerRequests.length}));
 });
 
+
+/** Node assertion over passive actual native observations; never product authority. */
+function assertNativePublicationOrder(trace,rows,requests){
+ const sha=value=>createHash('sha256').update(value).digest('hex'),prefix='native publication order: ';
+ const indexed=trace.map((event,index)=>({...event,index}));
+ const one=(values,label)=>{assert.equal(values.length,1,prefix+label+' must be unique');return values[0];};
+ const response=one(indexed.filter(e=>e.kind==='native-response-return'&&e.originalMethod==='POST'&&e.status===200),'actual successful QA response');
+ assert.equal(typeof response.requestId,'string');assert(response.requestId.length>0,prefix+'original request ID');
+ const events=indexed.filter(e=>e.requestId===response.requestId);
+ const records=rows.filter(([key])=>key.startsWith('afw.finite-policy-effect.v1:'));
+ const readRow=key=>{const row=one(records.filter(([k])=>k===key),key);return {key,raw:row[1],value:JSON.parse(row[1]),valueHash:sha(row[1])};};
+ const sendFor=effect=>{const row=one(records.filter(([key,raw])=>key.endsWith(':send')&&JSON.parse(raw).effect===effect),effect+' own SEND');return readRow(row[0]);};
+ const uploadSend=sendFor('upload'),activationSend=sendFor('activation');
+ const receipt=readRow(activationSend.key.slice(0,-4)+'receipt');
+ const durability=(record,label,before)=>{
+  const matches=kind=>events.filter(e=>e.kind===kind&&e.key===record.key&&e.valueHash===record.valueHash);
+  const put=one(matches('put-settled'),label+' actual native put'),commit=one(matches('transaction-settled'),label+' actual native commit');
+  assert(put.index<commit.index&&commit.index<before,prefix+label+' put/commit before next boundary');
+  const sync=matches('sync-settled').find(e=>e.index>commit.index&&e.index<before);assert(sync,prefix+label+' settled sync before next boundary');
+  const read=matches('get-settled').find(e=>e.scope==='storage'&&e.index>sync.index&&e.index<before);assert(read,prefix+label+' exact storage readback after sync before next boundary');
+  return {key:record.key,valueHash:record.valueHash,put:put.index,commit:commit.index,sync:sync.index,read:read.index};
+ };
+ const flows=[];
+ for(const [effect,send]of [['upload',uploadSend],['activation',activationSend]]){
+  const ack=readRow(send.key.slice(0,-4)+'ack'),identity={kind:'connection',preconnectionId:send.value.preconnectionId,sourceRevision:send.value.sourceRevision,stage:'connection',effect};
+  assert.equal(send.key,'afw.finite-policy-effect.v1:'+hashFinitePolicyEffectIdentity(identity)+':send',prefix+effect+' original journal identity');
+  assert.equal(ack.value.sendHash,hashFinitePreparationRecord('ConnectionSend',send.value),prefix+effect+' ACK links actual own SEND');
+  const invocation=one(events.filter(e=>e.kind==='native-invocation'&&e.effect===effect),effect+' actual fetch invocation');
+  const wire=one(requests.filter(r=>r.method==='POST'&&r.url===invocation.url),effect+' actual provider request');
+  assert.equal(invocation.method,wire.method,prefix+effect+' actual method');assert.equal(invocation.bodyHash,sha(wire.body),prefix+effect+' actual body hash');
+  assert.equal(send.value.requestHash,initialHash('afw.finite-policy-request.v1',{method:wire.method,path:wire.url,body:JSON.parse(wire.body),baselineVersionId:send.value.baselineVersionId,baselineDeploymentId:send.value.baselineDeploymentId}),prefix+effect+' SEND binds actual wire');
+  const headers=one(events.filter(e=>e.kind==='native-result-enter'&&e.effect===effect),effect+' captured native response');
+  const result=one(events.filter(e=>e.kind==='native-operation-settled'&&e.effect===effect),effect+' fulfilled original operation');
+  assert(invocation.index<headers.index&&headers.index<result.index,prefix+effect+' invocation then response then body/cancel/result settlement');
+  assert.equal(result.resourceId,ack.value.resourceId,prefix+effect+' ACK resource from actual normal result');
+  const next=effect==='upload'?one(events.filter(e=>e.kind==='transaction-settled'&&e.key===activationSend.key&&e.valueHash===activationSend.valueHash),'activation SEND commit').index:one(events.filter(e=>e.kind==='transaction-settled'&&e.key===receipt.key&&e.valueHash===receipt.valueHash),'receipt commit').index;
+  const sendOrder=durability(send,effect+' SEND',invocation.index),ackOrder=durability(ack,effect+' ACK',next);
+  assert(result.index<ackOrder.put,prefix+effect+' actual result before ACK put');
+  flows.push({effect,sendHash:hashFinitePreparationRecord('ConnectionSend',send.value),send:sendOrder,invocation:invocation.index,headers:headers.index,result:result.index,resourceId:result.resourceId,ack:ackOrder});
+ }
+ assert(flows[0].ack.read<flows[1].send.put,prefix+'upload ACK durability before activation SEND');
+ assert.equal(receipt.value.versionId,flows[0].resourceId,prefix+'receipt upload ID');assert.equal(receipt.value.deploymentId,flows[1].resourceId,prefix+'receipt deployment ID');
+ assert.equal(receipt.value.baselineVersionId,uploadSend.value.baselineVersionId,prefix+'receipt original baseline');assert.equal(receipt.value.baselineDeploymentId,activationSend.value.baselineDeploymentId,prefix+'receipt original deployment');
+ const receiptOrder=durability(receipt,'receipt',response.index);
+ assert(flows[1].ack.read<receiptOrder.put,prefix+'activation ACK durability before receipt put');
+ return {requestId:response.requestId,flows,receipt:receiptOrder,success:response.index,status:response.status};
+}
+function assertPublicationOrderDataSensitivity(trace,rows,requests,actual){
+ const checked=[],reject=(name,copy)=>{assert.throws(()=>assertNativePublicationOrder(copy,rows,requests),/native publication order:/,name+' must fail the Node order predicate');checked.push(name);};
+ const upload=actual.flows[0],activation=actual.flows[1];
+ reject('missing upload SEND sync',trace.filter(e=>!(e.kind==='sync-settled'&&e.key===upload.send.key)));
+ const moved=trace.slice(),[invoke]=moved.splice(activation.invocation,1);moved.splice(activation.send.read,0,invoke);reject('activation invocation before SEND readback',moved);
+ reject('missing activation ACK sync',trace.filter(e=>!(e.kind==='sync-settled'&&e.key===activation.ack.key)));
+ const late=trace.filter(e=>!(e.kind==='get-settled'&&e.key===actual.receipt.key));late.push(trace[actual.receipt.read]);reject('receipt readback only after success',late);
+ return {kind:'assertion discrimination on DATA copies only',nativeFailureInjected:false,checked};
+}
+
 test('T3 same initial bytes produce connection and downstream',{timeout:120000},async t=>{
- const f=await fixture(t),before=await readFirstConnectionProbe(f);assert.equal(f.firstConnectionBuild.negativeMutation,null,'positive principal is unmutated');await f.stub.firstConnectionConfigure('normal');
+ const f=await fixture(t),before=await readFirstConnectionProbe(f);assert.equal(f.firstConnectionBuild.negativeMutation,null,'positive principal is unmutated');assert.equal(f.firstConnectionBuild.M.sha256,'c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32','positive initial M stays exact D11');assert.equal(f.firstConnectionBuild.M.bytes,1988061);await f.stub.firstConnectionConfigure('normal');
  const owner=(await plain(f.stub.capsuleFacts())).material.ownerSelection,originalToken=await f.firstConnectionToken(owner,{expiresAt:Math.floor((Date.now()+120000)/1000)}),choiceHeaders={'Cf-Access-Jwt-Assertion':originalToken};
  const foreignUrl='https://foreign.invalid/connections/finite-prepare',foreign=await f.mf.dispatchFetch(foreignUrl,{headers:choiceHeaders});assert.notEqual(foreign.status,200);await foreign.body?.cancel();
  const foreignSpy=await f.negative.fetch(foreignUrl,{headers:choiceHeaders});assert.notEqual(foreignSpy.status,200);await foreignSpy.body?.cancel();
@@ -68,7 +127,7 @@ test('T3 same initial bytes produce connection and downstream',{timeout:120000},
  assert.equal(receiptRows.length,1,'durable own connection receipt');
  assert.equal(JSON.parse(receiptRows[0][1]).moduleHash,f.firstConnectionBuild.M.sha256);
  assert.equal(f.phaseCurrent,undefined,'no seeded publication authority');
- const connectionTelemetry=await plain(f.stub.firstConnectionState());assert(connectionTelemetry.counts?.get>0);assert(connectionTelemetry.http.length>0);assert(connectionTelemetry.http.every(io=>io.settled&&io.cancelCalls===io.cancelSettled),'success retains every actual native body/cancel settlement');const receipt=JSON.parse(receiptRows[0][1]),originalRows=before.rows.filter(([k])=>!k.startsWith('owner-ticket:')&&!k.startsWith('owner-project-ref:')&&!k.startsWith('connection-preparation:'));
+ const connectionTelemetry=await plain(f.stub.firstConnectionState());assert(connectionTelemetry.counts?.get>0);assert(connectionTelemetry.http.length>0);assert(connectionTelemetry.http.every(io=>io.settled&&io.cancelCalls===io.cancelSettled),'success retains every actual native body/cancel settlement');const orderRequests=p.providerRequests.slice(before.providerRequests.length),nativeOrder=assertNativePublicationOrder(connectionTelemetry.trace,p.rows,orderRequests);console.info('T3 native publication chronology',JSON.stringify(nativeOrder));console.info('T3 chronology DATA sensitivity',JSON.stringify(assertPublicationOrderDataSensitivity(connectionTelemetry.trace,p.rows,orderRequests,nativeOrder)));console.info('T3 principal build provenance',JSON.stringify({testRevision:process.env.GITHUB_SHA,negativeMutation:f.firstConnectionBuild.negativeMutation,M:{sha256:f.firstConnectionBuild.M.sha256,bytes:f.firstConnectionBuild.M.bytes},QA:{sha256:f.firstConnectionBuild.QA.sha256,bytes:f.firstConnectionBuild.QA.bytes}}));const receipt=JSON.parse(receiptRows[0][1]),originalRows=before.rows.filter(([k])=>!k.startsWith('owner-ticket:')&&!k.startsWith('owner-project-ref:')&&!k.startsWith('connection-preparation:'));
  for(const row of originalRows)assert.deepEqual(p.rows.find(([k])=>k===row[0]),row);
  const closedVersion=f.providerRegistry.versions[receipt.baselineVersionId],connectionVersion=f.providerRegistry.versions[receipt.versionId];
  assert.equal(connectionVersion.modules[0].content_base64,closedVersion.modules[0].content_base64);
