@@ -14,7 +14,7 @@ export class AfwOwnEventNode extends OwnEventNode{
 }
 export {AfwNodeControl};
 const finiteEntrypoint=globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__==='finite_trial_event';
-export default {...worker,async fetch(request,env,ctx){
+const finiteWorker={...worker,async fetch(request,env,ctx){
  const url=new URL(request.url),path=url.pathname;
  let decoded;try{decoded=decodeURIComponent(path);}catch{decoded=path;}
  const reserved=value=>['/connections','/authorize','/monitoring'].some(prefix=>value===prefix||value.startsWith(prefix+'/'));
@@ -41,3 +41,4 @@ export default {...worker,async fetch(request,env,ctx){
  }catch{return finiteNativePending();}finally{parent.finish();}
 }};
 
+export default finiteWorker;
