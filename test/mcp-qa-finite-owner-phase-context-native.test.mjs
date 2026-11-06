@@ -103,3 +103,14 @@ test('settled original M journals never imply read_consent',()=>world(async f=>{
  const before=await plain(f.stub.snapshot()),writes=f.uploads.length+f.activations.length,r=await read(f);
  assert.equal(r.status,'unavailable');assert.deepEqual(await plain(f.stub.snapshot()),before);assert.equal(f.uploads.length+f.activations.length,writes);assert.equal(await f.stub.ownerEffectCount(),0);
 }));
+
+for(const drift of ['revision','owner','configuration','pointer','grant','schema'])test('T3 current snapshots remain complete: '+drift,()=>world(async f=>{
+ f.phaseCurrent=await seed(f,'settled',null);
+ if(drift==='grant'){const r=await plain(f.stub.seedPhaseIssuer('linked'));assert.equal(r.fixtureError,undefined);}
+ f.phaseObservation=0;f.phaseDrift=drift;const before=await plain(f.stub.snapshot());assert.equal((await read(f)).status,'unavailable');assert.equal(f.phaseObservation,2,'both real current observations were reached');assert.deepEqual(await plain(f.stub.snapshot()),before,'source observer preserves durable history');
+}));
+test('T3 history is factual not replay authority: historical deadline',{timeout:120000},()=>world(async f=>{
+ f.phaseCurrent=await seed(f);const before=await plain(f.stub.snapshot()),send=before.filter(([key])=>key.startsWith('afw.finite-policy-effect.v1:')&&key.endsWith(':send')).map(([,raw])=>JSON.parse(raw)).find(v=>v.effect==='activation');
+ const c=JSON.parse(before.find(([key])=>key.endsWith(':capsule'))[1]);assert(c.I0+420000>send.deadline,'actual source observation is beyond historical effect deadline');
+ const r=await read(f);assert.equal(r.source?.phase,'read_consent');assert.equal(r.source.currentPublication.receiptHash,f.phaseCurrent.receipt.receiptHash);assert.deepEqual(await plain(f.stub.snapshot()),before);assert.equal(await f.stub.ownerEffectCount(),0);
+}));
