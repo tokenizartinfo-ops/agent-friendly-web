@@ -144,6 +144,21 @@ export function extendFirstConnectionPublication(entry){
 
 
 
+ async firstConnectionTicketFault(variant){
+  const s=this.ctx.storage;
+  if(variant==='restore'){for(const [key,raw]of this.firstTicketOriginal??[])await s.put(key,raw);this.firstTicketOriginal=null;await s.sync();return {restored:true};}
+  if(this.firstTicketOriginal)throw Error('SYN ticket corruption not restored');
+  const rows=[...await s.list()],ticketRow=rows.find(([key])=>key.startsWith('owner-ticket:')&&!key.endsWith(':use'));if(!ticketRow)throw Error('SYN actual choice ticket absent');
+  let key=ticketRow[0],kind='Ticket',record=JSON.parse(ticketRow[1]);
+  if(variant==='action')record.action='notices';
+  if(variant==='preconnection')record.preconnectionId='f'.repeat(64);
+  if(variant==='source')record.sourceRevision='e'.repeat(40);
+  if(variant==='subject-realm')record.subjectHash='d'.repeat(64);
+  if(variant==='project-map'){kind='ProjectRef';key='owner-project-ref:'+record.projectRef;record=JSON.parse(await s.get(key));record.projectId='SYN-foreign-project';}
+  if(variant==='snapshot'){kind='OwnerSourceSnapshot';key='connection-preparation:'+record.preconnectionId+':source';record=JSON.parse(await s.get(key));record.source.project.revision++;record.sourceHash=firstPrepHash(kind,record);}
+  const original=await s.get(key),raw=firstPrepEncode(kind,record);if(firstPrepEncode(kind,firstPrepDecode(kind,raw))!==raw)throw Error('SYN negative ticket codec');
+  this.firstTicketOriginal=[[key,original]];await s.put(key,raw);await s.sync();return {codecRoundtrip:true,kind};
+ }
  async firstConnectionCorruptCompleted(variant){
   const s=this.ctx.storage;
   if(variant==='restore'){for(const [key,raw]of this.firstCorruptedOriginal??[])await s.put(key,raw);this.firstCorruptedOriginal=null;await s.sync();return;}
