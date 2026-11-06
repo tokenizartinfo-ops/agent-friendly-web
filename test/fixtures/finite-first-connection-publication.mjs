@@ -316,14 +316,14 @@ export function firstConnectionWorkers(qa,candidate){
  return {workers:[{...options,name:'canary-first-connection',script:candidate.script},qa,{...options,name:'negative-first-connection',script:candidate.spyScript},...(candidate.wrongProfileScript?[{...options,name:'wrong-profile-first-connection',script:candidate.wrongProfileScript}]:[])]};
 }
 export async function approveFirstConnection(f,{token=null}={}){
- assert.equal(f.mode,'first-connection-publication');
+ assert.equal(f.mode,'first-connection-publication');f.choicePostStarted=null;f.failedChoiceState=null;
  const facts=await plain(f.stub.capsuleFacts()),source=facts.material.ownerSelection;
  const screenStart=performance.now(),screen=await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':token??await f.enrollmentToken(source)}});
  console.info('T3 actual choice GET',JSON.stringify({status:screen.status,elapsedMs:performance.now()-screenStart}));if(screen.status!==200){f.failedChoiceState=await plain(f.stub.firstConnectionState());console.info('T3 actual choice failure',JSON.stringify(await plain(f.stub.firstConnectionProbe())));return screen;}
  const text=await screen.text(),handle=/name="handle" value="([a-f0-9]{64})"/.exec(text)?.[1],projectRef=/name="projectRef" value="([a-f0-9]{64})"/.exec(text)?.[1],cookie=screen.headers.get('set-cookie')?.split(';')[0];
  assert(handle&&projectRef&&cookie,'actual choice must supply bounded form/cookie');
- f.choice={handle,projectRef,cookie};
- return f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:origin,'Content-Type':'application/x-www-form-urlencoded','Cf-Access-Jwt-Assertion':token??await f.enrollmentToken(source),Cookie:cookie},body:new URLSearchParams({handle,projectRef,decision:'approve'}).toString()});
+ f.choice={handle,projectRef,cookie};const postToken=token??await f.enrollmentToken(source);f.choicePostStarted=performance.now();
+ return f.call('/connections/finite-prepare',{method:'POST',headers:{Origin:origin,'Content-Type':'application/x-www-form-urlencoded','Cf-Access-Jwt-Assertion':postToken,Cookie:cookie},body:new URLSearchParams({handle,projectRef,decision:'approve'}).toString()});
 }
 export async function setFirstConnectionFault(f,fault){
  assert.equal(f.mode,'first-connection-publication');assert(['none','qa-absent','version','actor','version-drift','oauth-open'].includes(fault));
