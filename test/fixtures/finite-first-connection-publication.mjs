@@ -141,6 +141,18 @@ export function extendFirstConnectionPublication(entry){
  }
 
 
+
+ async firstConnectionRestart(){this.ctx.abort('SYN original actor restart');}
+ async firstConnectionInstance(){return this.firstInstance??=crypto.randomUUID();}
+ async firstConnectionBackupFault(mode){
+  const s=this.ctx.storage;
+  if(mode==='restore'){for(const [key,raw]of this.firstBackupOriginal??[])await s.put(key,raw);await s.sync();return;}
+  const rows=[...await s.list()],entries=rows.filter(([key])=>key.startsWith('afw.finite-initial-upload.v1:'));this.firstBackupOriginal??=entries;
+  const backup=entries.find(([key])=>key.endsWith(':backup')),chunk=entries.find(([key])=>key.includes(':chunk:')),receipt=entries.find(([key])=>key.endsWith(':receipt'));
+  const target=mode==='missing-backup'?backup:mode==='missing-receipt'?receipt:chunk;if(!target)throw Error('SYN retained original target absent');
+  if(mode.startsWith('missing-'))await s.delete(target[0]);else await s.put(target[0],target[1]+' ');
+  await s.sync();
+ }
  async firstConnectionAvailability(){
   const root=createFiniteOwnerRequestLease(new Request('https://delegated-canary.agentfriendlyweb.dev/fixture/live-root')),entered=Date.now();
   try{return await observeFiniteOwnerRequestWork({ctx:this.ctx,env:this.env,originalLease:root.lease},async()=>({available:true,live:true,entered}));}
@@ -160,6 +172,7 @@ export function extendFirstConnectionPublication(entry){
   const held=(name,value)=>{const deadline=owner.firstBoundary.deadline;state[name+'Held']=true;return new Promise((resolve,reject)=>{const tick=()=>{const remaining=deadline-Date.now();if(!Number.isSafeInteger(remaining)||remaining<=0){state[name+'Settled']=true;reject(Error('SYN original request deadline'));return;}if(owner.firstRelease[name]===true){state[name+'Settled']=true;resolve(value);return;}setTimeout(tick,Math.min(10,remaining));};tick();});};
   const get=async(method,holder,args)=>{
    state.counts.get++;const value=await Reflect.apply(method,holder,args),key=args[0];note('get-settled',key);
+   if(mode==='access-expiry-held'&&state.jwkFetched&&!state.workHeld)return held('work',value);
    if(mode==='receipt-readback-lost'&&key.endsWith(':receipt')&&key.startsWith('afw.finite-policy-effect.v1:')&&value!==undefined)throw Error('SYN receipt readback unknown');
    if(mode==='final-pair-owner-drift'&&receiptRead&&key.endsWith(':capsule'))await env.RELEASE_DB.prepare("UPDATE site_projects SET user_id='SYN-negative-owner'").run();
    if(target(key)&&key.endsWith(':receipt')&&value!==undefined)receiptRead=true;
@@ -186,7 +199,7 @@ export function extendFirstConnectionPublication(entry){
   };
   globalThis.fetch=async(...args)=>{
    const url=String(args[0]),method=args[1]?.method??'GET',effect=method==='POST'?(url.endsWith('/versions?deploy=false')?'upload':url.endsWith('/deployments')?'activation':null):null;
-   const response=await Reflect.apply(fetcher,globalThis,args);if(!effect)return response;
+   const response=await Reflect.apply(fetcher,globalThis,args);if(url.endsWith('/cdn-cgi/access/certs'))state.jwkFetched=true;if(!effect)return response;
    state.trace.push({kind:'native-result-enter',effect,at:Date.now()});
    if(mode===effect+'-lost')throw Error('SYN applied provider result lost');
    if(mode===effect+'-held')return held('fetch',response);
