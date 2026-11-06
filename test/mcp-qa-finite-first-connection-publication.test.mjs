@@ -85,3 +85,63 @@ test('T1 engine holder drift is absorbing before another provider effect',async(
   assert.equal(calls,0);
  }finally{globalThis.fetch=original;}
 });
+
+import {compileFiniteNativeStaging} from '../scripts/build-finite-native-package.mjs';
+import {execFileSync} from 'node:child_process';
+import {createHash as firstHash} from 'node:crypto';
+import {gunzipSync as firstInflate} from 'node:zlib';
+import {createFiniteOwnerRequestLease} from '../lib/mcp-qa-finite-owner-preparation.mjs';
+import {forwardFiniteOwnerChoice} from '../lib/mcp-qa-finite-owner-native-bridge.mjs';
+const O='https://delegated-canary.agentfriendlyweb.dev',U=O+'/connections/finite-prepare',V='11111111-1111-4111-8111-111111111111',H='a'.repeat(64),P='b'.repeat(64);
+const validForm='handle='+H+'&projectRef='+P+'&decision=approve';
+function conduit(fetcher){
+ const sent=[],retained=[],stub={fetch(request){sent.push(request);return fetcher(request);}},ns={idFromName(){return {toString:()=> 'c'.repeat(64)};},get(){return stub;}};
+ return {sent,retained,env:{AFW_FINITE_TRIAL_CONTROL:ns,AFW_FINITE_TRIAL_VERSION:{id:V},DB:{prepare(){},withSession(){}},OAUTH_KV:{get(){},put(){}},DELEGATED_RATE_LIMITER:{limit(){}}},ctx:{waitUntil(p){retained.push(p);}}};
+}
+const html=()=>new Response('<!doctype html><p>Prepared</p>',{headers:{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'none'; form-action 'self'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer','Cache-Control':'no-store'}});
+async function choice(f,options={},url=U){
+ const request=new Request(url,options),parent=createFiniteOwnerRequestLease(request);
+ try{return await forwardFiniteOwnerChoice({request,...f},parent.lease);}finally{parent.finish();await Promise.all(f.retained);}
+}
+function post(body=validForm,headers={}){return {method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:'__Host-afw-finite-prepare='+H,...headers},body};}
+test('T2 initial artifact already contains fixed finite dispatch',async()=>{
+ const revision=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),r=await compileFiniteNativeStaging({cwd:process.cwd(),sourceRevision:revision}),m=r.metafiles.canaryLive.inputs,q=r.metafiles.qaLive.inputs;
+ for(const path of ['lib/mcp-qa-finite-owner-native-bridge.mjs','lib/mcp-qa-finite-owner-oauth-forward.mjs','lib/mcp-qa-finite-owner-notice-get-forward.mjs'])assert(m[path],'initial M must contain '+path);
+ for(const path of ['lib/mcp-qa-finite-owner-native-receiver.mjs','lib/mcp-qa-finite-owner-oauth-qa.mjs','lib/mcp-qa-finite-owner-notice-get-qa.mjs'])assert(q[path],'initial QA must contain '+path);
+ assert.equal(m['lib/mcp-qa-finite-candidate-residency.mjs'],undefined);assert(q['lib/mcp-qa-finite-candidate-residency.mjs']);
+ assert.deepEqual(firstInflate(Buffer.from(r.candidateResidency.content,'base64')),r.files['canaryLive/index.mjs']);
+ for(const role of ['canaryLive','qaLive'])console.info('T2 compiler',JSON.stringify({role,sourceRevision:r.sourceRevision,sourceTree:r.sourceTree,bytes:r.files[role+'/index.mjs'].length,sha256:firstHash('sha256').update(r.files[role+'/index.mjs']).digest('hex'),inputs:Object.keys(r.metafiles[role].inputs).length}));
+ assert.equal(r.completePackage,false);assert.equal(r.operationalReadiness,false);
+});
+test('T2 choice grammar bounds actual body and cookies',async t=>{
+ const cases=[
+  ['overflow',post('x'.repeat(1025)),413],['utf8',post(new Uint8Array([0xc3,0x28])),400],
+  ['escape',post(validForm+'&bad=%GG'),400],['encoded utf8',post(validForm.replace(H,'%FF')),400],
+  ['extra',post(validForm+'&extra=1'),400],['duplicate',post(validForm+'&handle='+H),400],
+  ['decision',post(validForm.replace('approve','deny')),400],['short handle',post(validForm.replace(H,'a')),400],
+  ['project',post(validForm.replace(P,'b')),400],['missing cookie',post(validForm,{Cookie:''}),400],
+  ['absent cookie',{method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded'},body:validForm},403],
+  ['cookie separator',post(validForm,{Cookie:'other=x;__Host-afw-finite-prepare='+H}),400],
+  ['cookie name',post(validForm,{Cookie:'bad name=x; __Host-afw-finite-prepare='+H}),400],
+  ['cookie duplicate',post(validForm,{Cookie:'__Host-afw-finite-prepare='+H+'; __Host-afw-finite-prepare='+H}),400],
+  ['foreign duplicate',post(validForm,{Cookie:'x=1; x=2; __Host-afw-finite-prepare='+H}),400],
+  ['mismatch',post(validForm,{Cookie:'__Host-afw-finite-prepare='+P}),403],
+  ['legacy cookie',post(validForm,{Cookie:'SYN-cookie'}),400],['legacy form',post('SYN=bounded'),400],
+  ['content-type',post(validForm,{'Content-Type':'text/plain'}),400],['origin',post(validForm,{Origin:'https://other.invalid'}),403]
+ ];
+ for(const [name,options,status]of cases)await t.test(name,async()=>{const f=conduit(html),r=await choice(f,options);assert.equal(r.status,status,name);assert.equal(f.sent.length,0,'invalid choice must not enter QA');});
+ for(const [name,options]of [['get',{}],['get valid foreign cookie',{headers:{Cookie:'synthetic="valid value"'}}],['post',post()],['post foreign cookie',post(validForm,{Cookie:'other=""; __Host-afw-finite-prepare='+H})]]){
+  // Cookie values follow RFC6265 octets: a quoted space is still invalid.
+  if(name==='get valid foreign cookie')options.headers.Cookie='synthetic="valid-value"';
+  await t.test(name,async()=>{const f=conduit(html),r=await choice(f,options);assert.equal(r.status,200);assert.equal(f.sent.length,1);assert.match(await r.text(),/Prepared/);});
+ }
+ for(const suffix of ['?q=1','#fragment']){const f=conduit(html);assert.equal((await choice(f,{},U+suffix)).status,404);assert.equal(f.sent.length,0);}
+});
+test('T2 choice response only carries bounded QA HTML and allowed headers',async t=>{
+ for(const [name,make,status]of [
+  ['pending',()=>Response.json({status:'admin_pending'},{status:503}),503],
+  ['json',()=>Response.json({success:true}),503],['header',()=>new Response('html',{headers:{'Content-Type':'text/html','X-Provider-Secret':'SYN'}}),503],
+  ['oversize',()=>new Response('x'.repeat(16385),{headers:{'Content-Type':'text/html'}}),503],['status202',()=>new Response('partial',{status:202,headers:{'Content-Type':'text/html'}}),503],
+  ['html',html,200]
+ ])await t.test(name,async()=>{const f=conduit(make),r=await choice(f);assert.equal(r.status,status);assert.equal(r.headers.get('X-Provider-Secret'),null);assert.equal(r.headers.get('Cache-Control'),'no-store');if(status===200){assert(r.headers.has('Content-Security-Policy'));assert.equal(r.headers.get('Referrer-Policy'),'no-referrer');}});
+});
