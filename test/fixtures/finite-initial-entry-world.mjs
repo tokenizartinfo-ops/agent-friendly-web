@@ -1,4 +1,4 @@
-import {extendFiniteOwnerCleanup,instrumentFiniteOwnerCleanup} from './finite-owner-cleanup.mjs';
+import {extendFiniteOwnerCleanup,instrumentFiniteOwnerCleanup,instrumentCleanupConsumer} from './finite-owner-cleanup.mjs';
 import {compileFirstConnectionCandidate,extendFirstConnectionPublication,firstConnectionWorkers,extendEnrollmentComponent,instrumentFirstConnection,instrumentFirstConnectionEngine} from './finite-first-connection-publication.mjs';
 import {extendFiniteOwnerNoticeGet,captureNoticeBundle,instrumentFiniteNoticeGet} from './finite-owner-notice-get.mjs';
 import {FINITE_PREPARATION_MONITORING_SCHEMA} from '../../lib/mcp-qa-finite-preparation-issuer-store.mjs';
@@ -88,6 +88,7 @@ export async function initialEntryHarness(mode='normal',{negativeProfile=false,o
   }
  }
  const plugin={name:'explicit-SYN-external-data-not-whole-facts',setup(b){
+  if(cleanupCheckpoint)b.onLoad({filter:/mcp-qa-finite-(?:owner-cleanup|initial-cleanup)\.mjs$/},async args=>({contents:instrumentCleanupConsumer(await readFile(args.path,'utf8')),loader:'js'}));
   if(firstConnection)b.onLoad({filter:/mcp-qa-finite-owner-phase-context\.mjs$/},async args=>({contents:(ownerCleanup?instrumentFiniteOwnerCleanup:x=>x)(instrumentFirstConnection(await readFile(args.path,'utf8'),{mutation:firstConnectionMutation})),loader:'js'}));
   if(firstConnection)b.onLoad({filter:/mcp-qa-finite-fixed-policy-engine\.mjs$/},async args=>({contents:instrumentFirstConnectionEngine(await readFile(args.path,'utf8')),loader:'js'}));
   if(firstConnection)b.onLoad({filter:/mcp-qa-finite-initial-lease\.mjs$/},()=>({contents:sources.get('mcp-qa-finite-initial-lease.mjs'),loader:'js'}));
