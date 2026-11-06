@@ -16,10 +16,10 @@ async function invoke(f,request){
 }
 test('fixed M holder capture rejects drift across actual fetch settlement and never needs QA holders',async()=>{
  const f=sender(async()=>{f.env.OAUTH_KV={};return new Response('bounded');});
- const r=await invoke(f,new Request(U,{headers:{'x-afw-finite-extra':'forged','X-Other':'discard','Cookie':'SYN-cookie','Cf-Access-Jwt-Assertion':'SYN-JWT'}}));
+ const r=await invoke(f,new Request(U,{headers:{'x-afw-finite-extra':'forged','X-Other':'discard','Cookie':'synthetic=SYN-cookie','Cf-Access-Jwt-Assertion':'SYN-JWT'}}));
  assert.equal(r.status,503);assert.equal(f.sent.length,1);assert.equal(f.sent[0].url,T);
  assert.equal(f.sent[0].headers.has('x-afw-finite-extra'),false);assert.equal(f.sent[0].headers.has('X-Other'),false);
- assert.equal(f.sent[0].headers.get('Cookie'),'SYN-cookie');assert.equal(f.sent[0].headers.get('Cf-Access-Jwt-Assertion'),'SYN-JWT');
+ assert.equal(f.sent[0].headers.get('Cookie'),'synthetic=SYN-cookie');assert.equal(f.sent[0].headers.get('Cf-Access-Jwt-Assertion'),'SYN-JWT');
  assert.equal(Object.hasOwn(f.env,'RELEASE_DB'),false);assert.equal(Object.hasOwn(f.ctx,'storage'),false);
  assert.doesNotMatch(await r.text(),/SYN-cookie|SYN-JWT/);await Promise.all(f.retained);
 });
@@ -33,10 +33,10 @@ test('known HTTP error is prompt and retains real cancellation past logical fini
   assert.equal(await observeFiniteOwnerRequestWork({ctx:f.ctx,env:f.env,originalLease:other.lease},async()=>true),true);
  }finally{release();other.finish();}
 });
-test('bounded original body preserves first400 despite synchronous cancel error and sends no fetch',async()=>{
+test('bounded original body preserves first413 despite synchronous cancel error and sends no fetch',async()=>{
  const f=sender(async()=>new Response('unused'));
- const request=new Request(U,{method:'POST',headers:{Origin:O},duplex:'half',body:new ReadableStream({start(c){c.enqueue(new Uint8Array(16385));},cancel(){throw Error('SYN cancel');}})});
- const r=await invoke(f,request);assert.equal(r.status,400);assert.equal(f.sent.length,0);await Promise.all(f.retained);
+ const request=new Request(U,{method:'POST',headers:{Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:'__Host-afw-finite-prepare='+'a'.repeat(64)},duplex:'half',body:new ReadableStream({start(c){c.enqueue(new Uint8Array(16385));},cancel(){throw Error('SYN cancel');}})});
+ const r=await invoke(f,request);assert.equal(r.status,413);assert.equal(f.sent.length,0);await Promise.all(f.retained);
 });
 test('oversized successful response fails closed and retains cancellation',async()=>{
  let release;const f=sender(async()=>new Response(new ReadableStream({start(c){c.enqueue(new Uint8Array(16385));},cancel(){return new Promise(r=>{release=r;});}})));
@@ -56,8 +56,8 @@ test('receiver strict envelope route, metadata and actual QA holder denials stay
  }
  assert.equal(reads,0);
  const good=receiver();const r=await good.handler.fetch(new Request(T,{method:'POST',headers:headers()}));assert.equal(r.status,503);
- const post=new Request(T,{method:'POST',headers:{...headers(),'x-afw-finite-original-method':'POST',Origin:O},body:'x'.repeat(16385)});
- assert.equal((await good.handler.fetch(post)).status,400);
+ const post=new Request(T,{method:'POST',headers:{...headers(),'x-afw-finite-original-method':'POST',Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:'__Host-afw-finite-prepare='+'a'.repeat(64)},body:'x'.repeat(16385)});
+ assert.equal((await good.handler.fetch(post)).status,413);
 });
 test('registered genuine preparation child boundary preserves original start and earlier five second end',async()=>{
  const request=new Request(U),parent=createFiniteOwnerRequestLease(request),root=readFiniteOwnerRequestBoundary(parent.lease);
