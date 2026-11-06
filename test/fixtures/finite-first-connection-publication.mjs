@@ -136,7 +136,7 @@ export async function compileFirstConnectionCandidate(revision,tree){
 export function extendFirstConnectionPublication(entry){
  return "import {hashFinitePreparationRecord as firstPrepHash,encodeFinitePreparationRecord as firstPrepEncode,decodeFinitePreparationRecord as firstPrepDecode} from './lib/mcp-qa-finite-preparation-records.mjs';\nimport {readPrivateQaFiniteOwnerContext as firstConnectionContext} from './lib/mcp-qa-finite-owner-phase-context.mjs';\n"+entry.replace(' export class Initial extends FiniteClosure{',String.raw` export class Initial extends FiniteClosure{
  async fetch(request){
-  this.firstConnectionCalls??=[];this.firstConnectionCalls.push({url:request.url,method:request.method,version:request.headers.get('x-afw-finite-version')});
+  this.firstBoundary=JSON.parse(request.headers.get('x-afw-finite-boundary'));this.firstConnectionCalls??=[];this.firstConnectionCalls.push({url:request.url,method:request.method,version:request.headers.get('x-afw-finite-version')});
   return super.fetch(request);
  }
 
@@ -148,16 +148,18 @@ export function extendFirstConnectionPublication(entry){
  }
  async firstConnectionRestore(){this.firstRestore?.();this.firstRestore=null;}
  async firstConnectionState(){return this.firstState??{trace:[]};}
- async firstConnectionRelease(which='work'){this.firstRelease?.[which]?.();}
+ async firstConnectionRelease(which='work'){if(this.firstRelease)this.firstRelease[which]=true;}
  async firstConnectionConfigure(mode='normal'){
   this.firstRestore?.();this.firstState={mode,trace:[],fetchHeld:false,fetchSettled:false,readHeld:false,readSettled:false,cancelHeld:false,cancelSettled:false};this.firstRelease={};
   const owner=this,state=this.firstState,s=this.ctx.storage,env=this.env,native={get:s.get,list:s.list,transaction:s.transaction,sync:s.sync,getAlarm:s.getAlarm},fetcher=globalThis.fetch,wall=Date.now;
-  let writes=[],receiptRead=false,shift=0;
+  let writes=[],receiptRead=false,shift=0;state.counts={get:0,list:0,transaction:0,sync:0,firstPrimary:0,sql:0};const db=env.RELEASE_DB,withSession=db.withSession;
+  db.withSession=(...args)=>{if(args[0]==='first-primary')state.counts.firstPrimary++;const session=Reflect.apply(withSession,db,args),prepare=session.prepare;session.prepare=(...a)=>{state.counts.sql++;return Reflect.apply(prepare,session,a);};return session;};
+  s.list=(...args)=>{state.counts.list++;return Reflect.apply(native.list,s,args);};
   const target=key=>typeof key==='string'&&(key.startsWith('afw.finite-preparation-cleanup.v1:')||key.startsWith('afw.finite-policy-effect.v1:'));
   const note=(kind,key)=>{if(target(key))state.trace.push({kind,key,at:Date.now()});};
-  const held=(name,value)=>new Promise(resolve=>{state[name+'Held']=true;owner.firstRelease[name]=()=>{state[name+'Settled']=true;resolve(value);};});
+  const held=(name,value)=>{const deadline=owner.firstBoundary.deadline;state[name+'Held']=true;return new Promise((resolve,reject)=>{const tick=()=>{const remaining=deadline-Date.now();if(!Number.isSafeInteger(remaining)||remaining<=0){state[name+'Settled']=true;reject(Error('SYN original request deadline'));return;}if(owner.firstRelease[name]===true){state[name+'Settled']=true;resolve(value);return;}setTimeout(tick,Math.min(10,remaining));};tick();});};
   const get=async(method,holder,args)=>{
-   const value=await Reflect.apply(method,holder,args),key=args[0];note('get-settled',key);
+   state.counts.get++;const value=await Reflect.apply(method,holder,args),key=args[0];note('get-settled',key);
    if(mode==='receipt-readback-lost'&&key.endsWith(':receipt')&&key.startsWith('afw.finite-policy-effect.v1:')&&value!==undefined)throw Error('SYN receipt readback unknown');
    if(mode==='final-pair-owner-drift'&&receiptRead&&key.endsWith(':capsule'))await env.RELEASE_DB.prepare("UPDATE site_projects SET user_id='SYN-negative-owner'").run();
    if(target(key)&&key.endsWith(':receipt')&&value!==undefined)receiptRead=true;
@@ -165,7 +167,7 @@ export function extendFirstConnectionPublication(entry){
   };
   s.get=(...a)=>get(native.get,s,a);
   s.transaction=fn=>{
-   const currentWrites=[];
+   state.counts.transaction++;const currentWrites=[];
    const actual=Reflect.apply(native.transaction,s,[async tx=>{
     const result=await fn({get:(...a)=>get(tx.get,tx,a),list:tx.list.bind(tx),put:async(k,v)=>{note('put-enter',k);const out=await tx.put(k,v);note('put-settled',k);currentWrites.push(k);return out;}});
     return result;
@@ -177,7 +179,7 @@ export function extendFirstConnectionPublication(entry){
    });
   };
   s.sync=async(...args)=>{
-   const value=await Reflect.apply(native.sync,s,args);for(const key of writes)note('sync-settled',key);
+   state.counts.sync++;const value=await Reflect.apply(native.sync,s,args);for(const key of writes)note('sync-settled',key);
    if(mode==='enrollment-sync-lost'&&writes.includes('afw.finite-preparation-cleanup.v1:enrollment')||mode==='receipt-sync-lost'&&writes.some(k=>k.startsWith('afw.finite-policy-effect.v1:')&&k.endsWith(':receipt')))throw Error('SYN native sync result lost');
    if(mode==='enrollment-sync-held'&&writes.includes('afw.finite-preparation-cleanup.v1:enrollment'))return held('work',value);
    return value;
@@ -199,7 +201,7 @@ export function extendFirstConnectionPublication(entry){
   };
   Date.now=()=>wall()+shift;
   if(mode==='clock-backward')shift=-1;
-  this.firstRestore=()=>{for(const [key,value]of Object.entries(native))s[key]=value;globalThis.fetch=fetcher;Date.now=wall;};
+  this.firstRestore=()=>{for(const [key,value]of Object.entries(native))s[key]=value;globalThis.fetch=fetcher;Date.now=wall;db.withSession=withSession;};
  }
  async firstConnectionReseal(effect='upload',variant='ack'){
   const s=this.ctx.storage,rows=[...await s.list({prefix:'afw.finite-policy-effect.v1:'})],pair=rows.find(([k,v])=>k.endsWith(':send')&&JSON.parse(v).effect===effect);if(!pair)throw Error('SYN actual SEND absent');
