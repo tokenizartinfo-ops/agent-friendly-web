@@ -51,6 +51,7 @@ export function extendFiniteOwnerCleanup(entry){
    }return value;
   };
  }
+ async ownerCleanupReset(){this.ownerCleanupFaultRestore?.();}
  async ownerCleanupControl(){this.cleanupFaultState.released=true;this.releaseCleanupHeld?.();this.releaseCleanupHeld=null;}
  async ownerCleanupFaultSignal(){const s=this.cleanupFaultState;return s?{mode:s.mode,held:s.held,settled:s.settled,deletes:s.deletes,lists:s.lists,sqlWrites:s.sqlWrites,reconciles:s.reconciles}:null;}
  async ownerCleanupFaultFacts(){return this.cleanupFaultState??null;}
