@@ -13,6 +13,59 @@ export function extendFiniteOwnerCleanup(entry){
  const methods="\n async ownerReferenceConfigure(mode='normal'){\n  this.ownerReferenceRestore?.();const kv=this.env.AFW_FINITE_OWNER_OAUTH_KV,s=this.ctx.storage,native={get:kv.get,list:kv.list,put:kv.put,storageGet:s.get,sync:s.sync,transaction:s.transaction};\n  const state=this.ownerReferenceState={mode,completeWrites:0,completeNormal:0,lists:0,gets:0,active:0,peak:0,held:false,released:false,actualSettled:false,abort:false,referenceCommits:0,referenceSyncs:0,referenceReadbacks:0,requests:[],children:[],trace:[]};globalThis.__r1ReferenceState=state;let referencePending=false;\n  const held=value=>{state.held=true;return new Promise(resolve=>{const tick=()=>{if(state.released){state.actualSettled=true;resolve(value);return;}setTimeout(tick,10);};tick();});};\n  this.ownerReferenceRestore=()=>{kv.get=native.get;kv.list=native.list;kv.put=native.put;s.get=native.storageGet;s.sync=native.sync;s.transaction=native.transaction;globalThis.__r1ReferenceState=null;};\n  kv.put=async(key,raw,...more)=>{\n   if(!key.startsWith('grant:'))return Reflect.apply(native.put,kv,[key,raw,...more]);\n   state.completeWrites++;state.trace.push('actual-grant-put');\n   if(mode==='foreign-metadata'){const value=JSON.parse(raw);value.metadata={afwFiniteCleanup:{purpose:'afw.finite-sdk-cleanup-correlation.v1',correlationHash:'f'.repeat(64)}};raw=JSON.stringify(value);}\n   const actual=Reflect.apply(native.put,kv,[key,raw,...more]),result=await actual;\n   if(mode==='duplicate'){const value=JSON.parse(raw),id=value.id==='AAAAAAAAAAAAAAAA'?'BBBBBBBBBBBBBBBB':'AAAAAAAAAAAAAAAA';value.id=id;await Reflect.apply(native.put,kv,[key.slice(0,key.lastIndexOf(':')+1)+id,JSON.stringify(value),...more]);}\n   return result;\n  };\n  for(const method of ['get','list'])kv[method]=async(...args)=>{\n   const grant=method==='get'?String(args[0]).startsWith('grant:'):String(args[0]?.prefix).startsWith('grant:');\n   if(!grant)return Reflect.apply(native[method],kv,args);\n   state[method==='get'?'gets':'lists']++;if(method==='list'){if(args[0].limit!==100)throw Error('SYN native list limit');state.nativeListLimit=args[0].limit;}state.active++;state.peak=Math.max(state.peak,state.active);\n   const actual=Reflect.apply(native[method],kv,args);let value;try{value=await actual;state.trace.push('actual-'+method+'-settled');}finally{state.active--;}\n   // Held outward ACK chain AFTER native settlement; not physical KV latency.\n   if(method==='list'&&mode==='hold-lookup-ack'&&!state.held)return held(value);\n   return value;\n  };\n  s.transaction=(callback,...args)=>{\n   let wrote=false;const actual=Reflect.apply(native.transaction,s,[async tx=>{\n    const put=tx.put;tx.put=async(key,raw,...rest)=>{const value=await Reflect.apply(put,tx,[key,raw,...rest]);if(String(key).endsWith(':reference')){referencePending=true;wrote=true;state.trace.push('reference-put-native-settled');}return value;};return callback(tx);\n   },...args]);\n   return actual.then(value=>{if(wrote){state.referenceCommits++;state.trace.push('reference-transaction-native-settled');}return value;});\n  };\n  s.get=async(...args)=>{const value=await Reflect.apply(native.storageGet,s,args);if(String(args[0]).endsWith(':reference')&&value!==undefined&&state.referenceSyncs){state.referenceReadbacks++;state.trace.push('reference-readback-native-settled');}return value;};\n  s.sync=async(...args)=>{const actual=Reflect.apply(native.sync,s,args),value=await actual;if(referencePending){referencePending=false;state.referenceSyncs++;state.trace.push('reference-sync-native-settled');if(mode==='unknown-reference')throw Error('SYN reference sync ACK unknown');if(mode==='abort-reference-sync-ack')return held(value);}return value;};\n }\n async ownerReferenceObserve(signalsOnly=false){if(typeof signalsOnly!=='boolean')throw Error('SYN fixed signal projection');const state=this.ownerReferenceState??{};if(signalsOnly)return {held:state.held===true,actualSettled:state.actualSettled===true};return {...state,rows:[...await this.ctx.storage.list({prefix:'afw.finite-owner-issuer-provenance.v1:'})]};}\n async ownerReferenceControl(key){if(!['released','abort'].includes(key))throw Error('SYN control');this.ownerReferenceState[key]=true;}\n async ownerReferenceFetch(request,forward){\n  const state=this.ownerReferenceState;if(!state||request.url!=='https://afw-private.invalid/_finite-owner/authorize')return forward(request);\n  const began=performance.now(),startedAt=Date.now(),method=request.headers.get('x-afw-finite-original-method'),boundary=JSON.parse(request.headers.get('x-afw-finite-boundary'));const controller=new AbortController(),abort=()=>controller.abort();request.signal.addEventListener('abort',abort,{once:true});let done=false,timer;\n  const tick=()=>{if(done)return;if(state.abort){controller.abort();return;}timer=setTimeout(tick,10);};tick();\n  try{const response=await forward(new Request(request,{signal:controller.signal}));state.trace.push('native-authorize-response:'+response.status);return response;}finally{state.requests.push({method,startedAt,elapsedMs:performance.now()-began,wallElapsedMs:Date.now()-startedAt,budgetMs:boundary.deadline-boundary.startedAt,aborted:controller.signal.aborted});done=true;clearTimeout(timer);request.signal.removeEventListener('abort',abort);}\n }\n";
 
  const cleanupMethods=String.raw`
+ async ownerCleanupFault(mode){
+  if(!['grant-before-link','notice-before-link','fence-ack-lost','held-sdk-delete','paging-scope'].includes(mode))throw Error('SYN fixed cleanup fault');
+  this.ownerCleanupFaultRestore?.();
+  const db=this.env.RELEASE_DB,session=db.withSession,kv=this.env.AFW_FINITE_OWNER_OAUTH_KV,del=kv.delete,list=kv.list;
+  const state=this.cleanupFaultState={mode,sqlWrites:0,reconciles:0,lists:0,deletes:0,held:false,released:false,settled:false,scopeProbe:null,trace:[]};
+  this.ownerCleanupFaultRestore=()=>{db.withSession=session;kv.delete=del;kv.list=list;};
+  db.withSession=(...a)=>{
+   const s=Reflect.apply(session,db,a),prepare=s.prepare;
+   s.prepare=(sql,...rest)=>{
+    if(sql.includes('SELECT f.*'))state.reconciles++;
+    const stmt=Reflect.apply(prepare,s,[sql,...rest]),bind=stmt.bind;
+    stmt.bind=(...values)=>{
+     const bound=Reflect.apply(bind,stmt,values),first=bound.first;
+     bound.first=async(...args)=>{
+      const target=mode==='grant-before-link'&&sql.includes('INSERT INTO delegated_access_grants')||mode==='notice-before-link'&&sql.includes('INSERT INTO dossier_monitoring_consent_events')||mode==='fence-ack-lost'&&sql.includes('INSERT INTO finite_preparation_issuer_fences');
+      const actual=Reflect.apply(first,bound,args),value=await actual;
+      if(target){state.sqlWrites++;state.trace.push({kind:mode,at:Date.now(),actualRow:!!value});if(value)throw Error('SYN actual SQL result lost before link');}
+      return value;
+     };return bound;
+    };return stmt;
+   };return s;
+  };
+  kv.list=async options=>{
+   state.lists++;state.trace.push({kind:'list',at:Date.now(),limit:options.limit,prefixHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(options.prefix)).then(b=>Buffer.from(b).toString('hex'))});
+   const value=await Reflect.apply(list,kv,[options]);
+   if(mode!=='paging-scope')return value;
+   if(state.lists===1)return {keys:Array.from({length:100},(_,n)=>({name:options.prefix+'SYN-token-'+n})),list_complete:false,cursor:'SYN-second-page'};
+   return {keys:[{name:'client:SYN-forbidden-extra-IO'}],list_complete:true};
+  };
+  kv.delete=async key=>{
+   state.deletes++;state.trace.push({kind:'delete',at:Date.now(),scope:key.startsWith('token:')?'token':key.startsWith('grant:')?'grant':'foreign'});
+   const actual=Reflect.apply(del,kv,[key]),value=await actual;
+   if(mode==='held-sdk-delete'&&!state.held){
+    state.held=true;state.trace.push({kind:'actual-native-delete-settled-ACK-held',at:Date.now()});
+    await new Promise(resolve=>{this.releaseCleanupHeld=resolve;});state.settled=true;state.trace.push({kind:'held-ACK-released',at:Date.now()});
+   }return value;
+  };
+ }
+ async ownerCleanupControl(){this.cleanupFaultState.released=true;this.releaseCleanupHeld?.();this.releaseCleanupHeld=null;}
+ async ownerCleanupFaultSignal(){const s=this.cleanupFaultState;return s?{mode:s.mode,held:s.held,settled:s.settled,deletes:s.deletes,lists:s.lists,sqlWrites:s.sqlWrites,reconciles:s.reconciles}:null;}
+ async ownerCleanupFaultFacts(){return this.cleanupFaultState??null;}
+ async ownerCleanupScopeProbe(){
+  const controller=new AbortController(),at=Date.now(),lease=Object.freeze({signal:controller.signal,assertCurrent(){if(controller.signal.aborted||Date.now()-at>=5000)throw Error('SYN probe lifetime');}});
+  try{await observeFiniteReadOnlyWork({ctx:this.ctx,env:this.env,originalLease:lease},async()=>true);return {available:true,at};}
+  catch{return {available:false,at};}finally{controller.abort();}
+ }
+ async ownerCleanupNativeRows(){
+  const rows=await this.ctx.storage.list({prefix:'afw.finite-preparation-issuer.v1:',limit:16}),reservation=[...rows].find(([k])=>k.endsWith(':reservation'));
+  if(!reservation)return {fence:null,grant:null,notices:[]};
+  const i=JSON.parse(reservation[1]).identity,db=this.env.RELEASE_DB;
+  return {fence:await db.prepare('SELECT * FROM finite_preparation_issuer_fences WHERE preconnection_id=?').bind(i.preconnectionId).first(),grant:await db.prepare('SELECT * FROM delegated_access_grants WHERE id=?').bind(i.grantId).first(),notices:(await db.prepare('SELECT * FROM dossier_monitoring_consent_events WHERE grant_id=? ORDER BY sequence').bind(i.grantId).all()).results};
+ }
+
  async alarm(){
   const signal=this.cleanupAlarmSignal??={entered:0,settled:0,status:null,at:null,finishedAt:null};
   signal.entered++;signal.at=Date.now();
@@ -27,7 +80,7 @@ export function extendFiniteOwnerCleanup(entry){
  `;
  const marker=' export class Initial extends FiniteClosure{';assert.equal(entry.split(marker).length,2);
  const original='actual=super.fetch(request);';assert.equal(entry.split(original).length,2);
- return entry.replace(marker,()=>marker+methods+cleanupMethods).replace(original,()=>'actual=this.ownerReferenceFetch(request,r=>super.fetch(r));');
+ return ("import {observeFiniteReadOnlyWork} from './lib/mcp-qa-finite-stage-work.mjs';\n"+entry).replace(marker,()=>marker+methods+cleanupMethods).replace(original,()=>'actual=this.ownerReferenceFetch(request,r=>super.fetch(r));');
 }
 export function instrumentFiniteOwnerCleanup(source){
  const marker="actualResult=await wait(actualPromise);settled=true;position='sdk-resolved';await recheckOwned();";assert.equal(source.split(marker).length,2);
@@ -71,14 +124,15 @@ export async function recordOwnerReference(f,label,extra={}){
  const result={label,testRevision:process.env.GITHUB_SHA??null,M:{sha256:f.firstConnectionBuild.M.sha256,bytes:f.firstConnectionBuild.M.bytes},QA:{sha256:f.firstConnectionBuild.QA.sha256,bytes:f.firstConnectionBuild.QA.bytes},completeWrites:o.completeWrites,completeNormal:o.completeNormal,referenceRows:o.rows.filter(([k])=>k.endsWith(':reference')).length,lists:o.lists,gets:o.gets,peak:o.peak,listLimit:o.nativeListLimit??null,trace:o.trace,requests:o.requests,children:o.children,lookupChild:o.lookupChild??null,referenceReadbacks:o.referenceReadbacks,sdkSuffixes:o.rows.map(([key])=>key.split(':').slice(2).join(':')),roots:(await plain(f.stub.firstConnectionProbe())).calls.map(c=>({method:c.originalMethod,windowMs:c.boundary.deadline-c.boundary.startedAt})),httpSpans:state.http.filter(v=>Number.isSafeInteger(v.childStartedAt)).map(v=>({kind:v.kind,bytes:v.bytes,elapsedMs:v.elapsedMs,bodyGuardMs:v.bodyGuardMs??0,childStartedAt:v.childStartedAt})),http:state.http.reduce((a,v)=>({requests:a.requests+1,bytes:a.bytes+v.bytes}),{requests:0,bytes:0}),completePackage:false,operationalReadiness:false,PCoff:false,custodyReal:false,...extra};
  await mkdir('output/owner-reference',{recursive:true});await writeFile('output/owner-reference/'+label+'.json',JSON.stringify(result,null,2));console.info('R1 sanitized native marker',JSON.stringify(result));return result;
 }
-export async function downstreamOwnerReference(f,response,prepared){
+export async function downstreamOwnerReference(f,response,prepared,{cleanupPartial=false}={}){
  const code=new URL(response.headers.get('Location')).searchParams.get('code');assert(code);await response.body?.cancel();
- const tokenResponse=await f.call('/oauth/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',client_id:f.source.clientId,redirect_uri:'https://client.example/cb',resource:f.source.resource,code,code_verifier:prepared.verifier})});assert.equal(tokenResponse.status,200);const token=await tokenResponse.json();assert.equal(typeof token.access_token,'string');
+ const tokenResponse=await f.call('/oauth/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',client_id:f.source.clientId,redirect_uri:'https://client.example/cb',resource:f.source.resource,code,code_verifier:prepared.verifier})});assert.equal(tokenResponse.status,200);const token=await tokenResponse.json();assert.equal(typeof token.access_token,'string');f.cleanupToken=token;
  const client=new Client({name:'SYN-owner-reference',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
  try{await client.connect(new StreamableHTTPClientTransport(new URL(f.source.resource),{requestInit:{headers:{Authorization:'Bearer '+token.access_token,Host:new URL(O).host}},fetch:(url,options)=>f.mf.dispatchFetch(String(url),options)}));const result=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(result.isError,undefined);assert.equal(result.structuredContent.data.id,f.source.project.projectId);}finally{await client.close();}
  const screen=await f.call('/monitoring',{headers:prepared.headers});assert.equal(screen.status,200);const html=await screen.text(),handle=/name="handle" value="([^"]+)"/.exec(html)?.[1],cookie=screen.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(handle&&cookie);
- const posted=await f.call('/monitoring/grant',{method:'POST',headers:{...prepared.headers,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:f.choice.cookie+'; '+cookie},body:new URLSearchParams({handle})});assert.equal(posted.status,200);await posted.body?.cancel();
- const rows=await plain(f.stub.snapshot()),root=JSON.parse(rows.find(([key])=>key.endsWith(':root')&&key.startsWith('afw.finite-owner-issuer-provenance.v1:'))[1]);assert(rows.some(([k])=>k==='connection-preparation:'+root.preconnectionId+':notice'));
+ if(cleanupPartial)await f.stub.ownerCleanupFault('notice-before-link');
+ const posted=await f.call('/monitoring/grant',{method:'POST',headers:{...prepared.headers,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:f.choice.cookie+'; '+cookie},body:new URLSearchParams({handle})});if(cleanupPartial)assert.notEqual(posted.status,200);else assert.equal(posted.status,200);await posted.body?.cancel();
+ const rows=await plain(f.stub.snapshot()),root=JSON.parse(rows.find(([key])=>key.endsWith(':root')&&key.startsWith('afw.finite-owner-issuer-provenance.v1:'))[1]);assert.equal(rows.some(([k])=>k==='connection-preparation:'+root.preconnectionId+':notice'),!cleanupPartial);
 }
 export async function waitReferenceState(f,predicate){
  const until=performance.now()+30000;for(;;){let v=await plain(f.stub.ownerReferenceObserve(true));if(predicate(v))return v;if(performance.now()>=until){v=await plain(f.stub.ownerReferenceObserve());const data={purpose:'afw.owner-reference-timeout-diagnostic.syn.v1',mode:v.mode,completeWrites:v.completeWrites,completeNormal:v.completeNormal,held:v.held,actualSettled:v.actualSettled,referenceCommits:v.referenceCommits,referenceSyncs:v.referenceSyncs,referenceReadbacks:v.referenceReadbacks,requests:v.requests,lookupChild:v.lookupChild??null,children:v.children,sdkSuffixes:v.rows.map(([key])=>key.split(':').slice(2).join(':')),lists:v.lists,gets:v.gets,peak:v.peak,trace:v.trace,operationalReadiness:false,completePackage:false,PCoff:false};await mkdir('output/owner-reference',{recursive:true});await writeFile('output/owner-reference/diagnostic-timeout-'+v.mode+'.json',JSON.stringify(data,null,2));console.info('R1 DIAGNOSTIC last collected state',JSON.stringify({...data,children:data.children?.map(c=>({ms:c.actualElapsedMs??null,aborted:c.aborted??null,operations:c.steps.filter(s=>s.operation!=='source-pair').map(s=>s.operation),sourcePairs:c.steps.filter(s=>s.operation==='source-pair').map(s=>s.elapsedMs)}))}));assert.fail('bounded native marker wait');}await new Promise(resolve=>setTimeout(resolve,20));}
