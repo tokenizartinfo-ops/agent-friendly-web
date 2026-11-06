@@ -22,17 +22,10 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p output/t2-red
-          timeout 120s node --test --test-reporter=spec --test-concurrency=1 --test-name-pattern='^T2 finite dispatch never falls through ordinary 2>&1 | tee output/t2-red/result.log
+          timeout 120s node --test --test-reporter=spec --test-concurrency=1 --test-name-pattern='^T2 finite dispatch never falls through ordinary$' test/mcp-qa-finite-first-connection-publication-native.test.mjs 2>&1 | tee output/t2-red/result.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: first-connection-task2-native-inspection
-          path: output/t2-red/
-          retention-days: 7
- test/mcp-qa-finite-first-connection-publication-native.test.mjs 2>&1 | tee output/t2-red/result.log
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: first-connection-task2-red
           path: output/t2-red/
           retention-days: 7
