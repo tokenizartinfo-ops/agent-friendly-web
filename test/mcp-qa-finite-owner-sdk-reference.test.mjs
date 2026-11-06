@@ -5,7 +5,7 @@ import {createFiniteOwnerIssuerProvenanceJournal} from '../lib/mcp-qa-finite-own
 import {syntheticSdkReferenceComponent} from './fixtures/finite-owner-cleanup.mjs';
 const {sealFiniteOwnerIssuerProvenanceRecord:seal,encodeFiniteOwnerIssuerProvenanceRecord:encode,decodeFiniteOwnerIssuerProvenanceRecord:decode}=codec;
 function component(){
- const f=syntheticSdkReferenceComponent(),correlationHash=codec.finiteOwnerSdkCleanupCorrelation(f),reference=seal('SdkGrantReference',{purpose:'afw.finite-owner-sdk-reference.v1',rootHash:f.root.recordHash,expectedGrantHash:f.expectedGrant.recordHash,completeSendHash:f.completeSend.recordHash,completeObservedHash:f.completeObserved.recordHash,correlationHash,sdkGrantId:'abcdefghijklmnop',createdAt:Math.floor(f.completeSend.issuedAt/1000),expiresAt:null,observedAt:f.completeObserved.observedAt+1});
+ const f=syntheticSdkReferenceComponent(),correlationHash=codec.finiteOwnerSdkCleanupCorrelation({root:f.root,expectedGrant:f.expectedGrant,completeSend:f.completeSend,identity:f.identity}),reference=seal('SdkGrantReference',{purpose:'afw.finite-owner-sdk-reference.v1',rootHash:f.root.recordHash,expectedGrantHash:f.expectedGrant.recordHash,completeSendHash:f.completeSend.recordHash,completeObservedHash:f.completeObserved.recordHash,correlationHash,sdkGrantId:'abcdefghijklmnop',createdAt:Math.floor(f.completeSend.issuedAt/1000),expiresAt:null,observedAt:f.completeObserved.observedAt+1});
  return {...f,reference};
 }
 function journal(f){
@@ -16,7 +16,7 @@ function journal(f){
  const api=createFiniteOwnerIssuerProvenanceJournal({ctx,env});return {api,lease,rows,prefix,limits,log,append:r=>api.appendSdkReference({preconnectionId:f.root.preconnectionId,record:r},lease)};
 }
 test('R1 records roundtrip',()=>{
- const f=component(),raw=encode('SdkGrantReference',f.reference);assert.deepEqual(decode('SdkGrantReference',raw),f.reference);assert.equal(JSON.parse(raw).expiresAt,null);assert.throws(()=>codec.finiteOwnerSdkCleanupCorrelation({...f,identity:{...f.identity,subject:'foreign'}}));
+ const f=component(),raw=encode('SdkGrantReference',f.reference);assert.deepEqual(decode('SdkGrantReference',raw),f.reference);assert.equal(JSON.parse(raw).expiresAt,null);assert.throws(()=>codec.finiteOwnerSdkCleanupCorrelation({root:f.root,expectedGrant:f.expectedGrant,completeSend:f.completeSend,identity:{...f.identity,subject:'foreign'}}));
 });
 test('R1 reference hash rejects drift',()=>{const f=component();assert.throws(()=>encode('SdkGrantReference',{...f.reference,correlationHash:'f'.repeat(64)}));assert.throws(()=>decode('SdkGrantReference',encode('SdkGrantReference',f.reference)+' '));});
 test('R1 reference rejects foreign root',async()=>{const f=component(),j=journal(f),r=seal('SdkGrantReference',{...f.reference,rootHash:'f'.repeat(64)});assert.equal((await j.append(r)).status,'uncertain');assert.equal(j.rows.size,8);});
