@@ -52,7 +52,7 @@ test('T2 closed mounted conduits cannot authorize business',{timeout:120000},asy
 });
 
 test('T3 same initial bytes produce connection and downstream',{timeout:120000},async t=>{
- const f=await fixture(t),before=await readFirstConnectionProbe(f);await f.stub.firstConnectionConfigure('normal');
+ const f=await fixture(t),before=await readFirstConnectionProbe(f);assert.equal(f.firstConnectionBuild.negativeMutation,null,'positive principal is unmutated');await f.stub.firstConnectionConfigure('normal');
  const owner=(await plain(f.stub.capsuleFacts())).material.ownerSelection,originalToken=await f.firstConnectionToken(owner,{expiresAt:Math.floor((Date.now()+120000)/1000)}),choiceHeaders={'Cf-Access-Jwt-Assertion':originalToken};
  const foreignUrl='https://foreign.invalid/connections/finite-prepare',foreign=await f.mf.dispatchFetch(foreignUrl,{headers:choiceHeaders});assert.notEqual(foreign.status,200);await foreign.body?.cancel();
  const foreignSpy=await f.negative.fetch(foreignUrl,{headers:choiceHeaders});assert.notEqual(foreignSpy.status,200);await foreignSpy.body?.cancel();
@@ -68,7 +68,7 @@ test('T3 same initial bytes produce connection and downstream',{timeout:120000},
  assert.equal(receiptRows.length,1,'durable own connection receipt');
  assert.equal(JSON.parse(receiptRows[0][1]).moduleHash,f.firstConnectionBuild.M.sha256);
  assert.equal(f.phaseCurrent,undefined,'no seeded publication authority');
- const receipt=JSON.parse(receiptRows[0][1]),originalRows=before.rows.filter(([k])=>!k.startsWith('owner-ticket:')&&!k.startsWith('owner-project-ref:')&&!k.startsWith('connection-preparation:'));
+ const connectionTelemetry=await plain(f.stub.firstConnectionState());assert(connectionTelemetry.counts?.get>0);const receipt=JSON.parse(receiptRows[0][1]),originalRows=before.rows.filter(([k])=>!k.startsWith('owner-ticket:')&&!k.startsWith('owner-project-ref:')&&!k.startsWith('connection-preparation:'));
  for(const row of originalRows)assert.deepEqual(p.rows.find(([k])=>k===row[0]),row);
  const closedVersion=f.providerRegistry.versions[receipt.baselineVersionId],connectionVersion=f.providerRegistry.versions[receipt.versionId];
  assert.equal(connectionVersion.modules[0].content_base64,closedVersion.modules[0].content_base64);
@@ -102,7 +102,7 @@ test('T3 same initial bytes produce connection and downstream',{timeout:120000},
  const final=await readFirstConnectionProbe(f),link=final.rows.find(([k])=>k==='connection-preparation:'+current.preconnectionId+':notice');assert(link,'actual native NoticeLink follows actual GET/POST');
  const unsupported=await f.call('/connections/finite-prepare',{headers});assert.notEqual(unsupported.status,200);await unsupported.body?.cancel();assert.equal(f.uploads.length,2);assert.equal(f.activations.length,2);
  assert.equal(final.negative.ordinary,0);assert.equal(final.negative.sql,0);
- const telemetry=await plain(f.stub.firstConnectionState()),sends=effectRows(final).filter(([k])=>k.endsWith(':send')).map(([,v])=>JSON.parse(v));console.info('T3 original clock and IO',JSON.stringify({counts:telemetry.counts,providerRequests:final.providerRequests.length,sends:sends.map(s=>({effect:s.effect,windowMs:s.deadline-s.issuedAt})),receiptInsideActivation:receipt.completedAt<sends.find(s=>s.effect==='activation').deadline}));
+ const telemetry=connectionTelemetry,sends=effectRows(final).filter(([k])=>k.endsWith(':send')).map(([,v])=>JSON.parse(v));console.info('T3 original clock and IO',JSON.stringify({counts:telemetry.counts,originalRoots:p.native.calls.map(c=>({method:c.method,windowMs:c.boundary.deadline-c.boundary.startedAt})),pairs:p.native.observation.filter(v=>v.kind==='pair').map(v=>v.elapsedMs),providerRequests:final.providerRequests.length,providerByHost:final.providerRequests.reduce((out,r)=>{const host=new URL(r.url).host;out[host]=(out[host]??0)+1;return out;},{}),providerByEndpoint:final.providerRequests.reduce((out,r)=>{const u=new URL(r.url),path=u.pathname.includes('/versions/')?u.pathname.replace(/\/versions\/[^/]+$/,'/versions/:id'):u.pathname,key=u.host+' '+r.method+' '+path;out[key]=(out[key]??0)+1;return out;},{}),sends:sends.map(s=>({effect:s.effect,windowMs:s.deadline-s.issuedAt})),receiptInsideActivation:receipt.completedAt<sends.find(s=>s.effect==='activation').deadline}));
  console.info('T3 native closure SYN',JSON.stringify({sourceRevision:f.source.sourceRevision,testRevision:process.env.GITHUB_SHA,receiptHash:receipt.receiptHash,grantTimestampNative:true,noticeLink:true,seededConnection:false,completePackage:false,operationalReadiness:false}));
 
 });
@@ -126,10 +126,10 @@ async function failureCase(t,mode){
  const probe=await readFirstConnectionProbe(f);assert.equal(receipts(probe).length,0,mode);return {f,probe,state:await plain(f.stub.firstConnectionState())};
 }
 for(const mode of ['enrollment-transaction-lost','enrollment-sync-lost'])test('T3 enrollment unknown cannot upload: '+mode,{timeout:120000},async t=>{
- const {f,probe,state}=await failureCase(t,mode);assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);assert(state.trace.some(v=>v.key==='afw.finite-preparation-cleanup.v1:enrollment'&&v.kind==='put-settled'));assert(probe.rows.some(([k])=>k==='afw.finite-preparation-cleanup.v1:enrollment'));assert.equal(effectRows(probe).length,0);assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');
+ const {f,probe,state}=await failureCase(t,mode);assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);assert(state.trace.some(v=>v.key==='afw.finite-preparation-cleanup.v1:enrollment'&&v.kind==='put-settled'));assert(probe.rows.some(([k])=>k==='afw.finite-preparation-cleanup.v1:enrollment'));assert.equal(effectRows(probe).length,0);const factual=await plain(f.stub.firstConnectionContext());assert.equal(factual.source?.phase,'closed_ui');assert.equal(factual.source.currentPublication.stage,null);const source=(await plain(f.stub.capsuleFacts())).material.ownerSelection,fresh=await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':await f.enrollmentToken(source)}});assert.notEqual(fresh.status,200,'genuinely fresh signed choice cannot resume enrollment');await fresh.body?.cancel();assert.equal(f.uploads.length,1);assert.equal(effectRows(await readFirstConnectionProbe(f)).length,0);
 });
 for(const mode of ['upload-send-transaction-lost','upload-lost','upload-malformed','upload-cached','upload-oversize'])test('T3 upload uncertainty cannot activate: '+mode,{timeout:120000},async t=>{
- const {f,probe,state}=await failureCase(t,mode);assert.equal(f.activations.length,1);assert(state.trace.some(v=>v.key?.endsWith(':send')&&v.kind==='put-settled'));assert(!effectRows(probe).some(([k,v])=>k.endsWith(':send')&&JSON.parse(v).effect==='activation'));assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');assert.equal(f.uploads.length,mode==='upload-send-transaction-lost'?1:2);
+ const {f,probe,state}=await failureCase(t,mode);assert.equal(f.activations.length,1);assert(state.trace.some(v=>v.key?.endsWith(':send')&&v.kind==='put-settled'));assert(!effectRows(probe).some(([k,v])=>k.endsWith(':send')&&JSON.parse(v).effect==='activation'));const context=await plain(f.stub.firstConnectionContext()),publicProbe=await plain(f.stub.firstConnectionProbe());assert(publicProbe.observation.some(v=>v.kind==='public-partial-target'),'valid private partial pair reaches public denial predicate');assert.equal(context.status,'unavailable','public partial connection cannot appear closed_ui');assert.equal(f.uploads.length,mode==='upload-send-transaction-lost'?1:2);
 });
 for(const mode of ['activation-lost','activation-malformed','activation-cached'])test('T3 activation uncertainty cannot finish: '+mode,{timeout:120000},async t=>{
  const {f,probe,state}=await failureCase(t,mode);assert.equal(f.uploads.length,2);assert.equal(f.activations.length,2);assert(state.trace.some(v=>v.effect==='activation'&&v.kind==='native-result-enter'));assert(!effectRows(probe).some(([k,v])=>k.endsWith(':ack')&&JSON.parse(v).resourceId==='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'));assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');
@@ -151,7 +151,7 @@ for(const mode of ['upload-held','upload-read-held','upload-cancel-held','enroll
 });
 for(const effect of ['upload','activation'])for(const variant of ['ack','context'])test('T3 resealed foreign publication is not own completion: '+effect+' '+variant,{timeout:120000},async t=>{
  const f=await fixture(t);await f.stub.firstConnectionConfigure(effect+'-held');const pending=approveFirstConnection(f);await waitFirstState(f,s=>s.fetchHeld,'actual '+effect+' result held');
- assert.deepEqual(await plain(f.stub.firstConnectionReseal(effect,variant)),{codecRoundtrip:true});
+ assert.deepEqual(await plain(f.stub.firstConnectionReseal(effect,variant)),{codecRoundtrip:true,journalValid:true});
  await f.stub.firstConnectionRelease('fetch');const response=await pending;assert.notEqual(response.status,200);await response.body?.cancel();await firstSettled(f);
  const probe=await readFirstConnectionProbe(f);assert.equal(receipts(probe).length,0);assert.equal(f.activations.length,effect==='upload'?1:2);assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');
 });
@@ -190,4 +190,29 @@ test('T3 admission cannot cross lineage or resume',{timeout:120000},async t=>{
   if(step==='actual actor restart'){const instance=await f.stub.firstConnectionInstance();await assert.rejects(async()=>{await f.stub.firstConnectionRestart();});const bindings=await f.mf.getBindings('qa-first-connection');f.stub=bindings.AFW_INDEPENDENT_CLOSURE.get(bindings.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));assert.notEqual(await f.stub.firstConnectionInstance(),instance);}
   const r=await replay();assert.notEqual(r.status,200,step);await r.body?.cancel();assert.equal(f.uploads.length,2);assert.equal(f.activations.length,1);assert.deepEqual((await readFirstConnectionProbe(f)).rows,before,'consumed history and unrelated rows preserved');
  }
+});
+
+test('T3 resealed completed owner baseline physical and receipt facts remain correlated',{timeout:120000},async t=>{
+ const f=await fixture(t),response=await approveFirstConnection(f);assert.equal(response.status,200);await response.body?.cancel();
+ const baseline=await readFirstConnectionProbe(f),posts=baseline.providerRequests.filter(r=>r.method==='POST').length;
+ const variants=['owner','source','context','baseline','module','configuration','version','deployment','writer-head','receipt-links','receipt-time'];
+ for(const variant of variants){
+  assert.equal((await plain(f.stub.firstConnectionContext())).source?.phase,'read_consent','valid produced baseline before '+variant);
+  assert.deepEqual(await plain(f.stub.firstConnectionCorruptCompleted(variant)),{codecRoundtrip:true,journalValid:true},variant);
+
+  const observedBefore=(await plain(f.stub.firstConnectionProbe())).observation.length;
+  const r=await plain(f.stub.firstConnectionContext());assert.equal(r.status,'unavailable',variant+' must fail current correlation after valid codecs/journals');
+  const newObservations=(await plain(f.stub.firstConnectionProbe())).observation.slice(observedBefore),target={owner:'preparation',source:'preparation',context:'connection-history',baseline:'connection-history',module:'receipt-physical-hash',configuration:'receipt-physical-hash',version:'publication-pointer',deployment:'publication-pointer','writer-head':'writer-head'}[variant];
+  if(target)assert(newObservations.some(v=>v.kind==='correlator'&&v.name===target),variant+' reaches intended '+target+' correlator');
+  else assert(newObservations.some(v=>v.frames?.some(frame=>frame.includes('qualifyFiniteOwnerInstalledStage'))),variant+' reaches installed-stage receipt link/time correlator');
+
+  const probe=await readFirstConnectionProbe(f),observations=probe.native.observation.filter(v=>v.kind==='public-reader-rejected');assert(observations.length,variant);console.info('T3 completed correlator',JSON.stringify({variant,codecRoundtrip:true,journalValid:true,frames:observations.at(-1).frames}));
+  assert.equal(probe.providerRequests.filter(r=>r.method==='POST').length,posts,'no next provider effect for '+variant);
+  await f.stub.firstConnectionCorruptCompleted('restore');assert.deepEqual((await readFirstConnectionProbe(f)).rows,baseline.rows,'foreign/original rows preserved for '+variant);
+ }
+});
+test('T3 own completion requires genuinely recorded original ACK even when foreign bytes match',{timeout:120000},async t=>{
+ const f=await fixture(t);await f.stub.firstConnectionConfigure('upload-held');const pending=approveFirstConnection(f);await waitFirstState(f,s=>s.fetchHeld,'actual upload result held');
+ assert.deepEqual(await plain(f.stub.firstConnectionReseal('upload','ack-matched')),{codecRoundtrip:true,journalValid:true});
+ await f.stub.firstConnectionRelease('fetch');const response=await pending,status=response.status;await response.body?.cancel();await firstSettled(f);const before=await readFirstConnectionProbe(f);assert(before.native.observation.some(v=>v.kind==='journal-mutation'&&v.recordKind==='ConnectionAck'&&v.status==='existing'),'exact valid foreign bytes reach the own-recorded guard');console.info('T3 recorded ACK target',JSON.stringify({status,activations:before.activations,mutant:f.firstConnectionBuild.negativeMutation??null}));assert.notEqual(status,200,'existing foreign ACK cannot be accepted by own continuation');assert.equal(f.activations.length,1);assert.equal(receipts(before).length,0);
 });
