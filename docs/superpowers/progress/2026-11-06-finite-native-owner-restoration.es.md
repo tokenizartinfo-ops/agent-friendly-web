@@ -50,3 +50,21 @@ Implementer documentó el seam mínimo: optional ownerCleanup=false en initialEn
 Ruling: holds son sobre ACKpostnative y mantienen la referencia a la Promesa original másla cadenaoutwardretenida; no llamarlos physicalKVpending si ya terminó el I/O nativo. Se afirma exclusión por trabajo retenido, no drenaje remoto por monkeypatch. Costo si es incorrecto: fixturepodríaproducirunnegativoantesdeblancoreal; markersdeSDKcomplete/nativecall/Reference yRootLIVE debenmostrarcausalidad.
 
 Requestabortdelnegativo debeprovenirdeRequest/AbortController nativos dentrodeworkerd, no inferirse de la propagación Node→RPC. Whitelist/wire/sourceprofile originalsiguenvalidos. AgentconfirmóSDKfijadolistUserGrantspagina legacy yPromise.all internamente, porloquepresupuesto/cola porllamada nativa ystickyfailure sonload-bearing;Rootexigiónoemisiónnueva trasprimerfallo aunque queden Promesasactualespendientes.
+
+## Task1: RED causal comprobado por Root
+
+Checkout y Source RED: 74086e7b0a9df597274ec0a11386f58daab1c904, árbol de7294f82ca761867618aaedb424f9cf65f6a4d1. [Run 42275435649](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/42275435649), job 128090446140, attempt 1, terminó el 6 nov 2026 a las 18:59:23 UTC. Root leyó independientemente el run, los logs completos del job, el test focal y el qualifier de ese checkout.
+
+El único caso ejecutado falló exactamente por `R1 missing durable SDK Reference AFTER actual completeAuthorization`: el marcador registró una escritura real de grant, una resolución normal de completeAuthorization, observación sdk_complete durable, Reference 0 y HTTP 302. Resultado: 1 ejecutado / 0 PASS / 1 FAIL / 0 cancelados / 0 skip / 0 todo; exit 1. Esto es el RED esperado, no producto verde.
+
+Los hashes medidos de ese run fueron M c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32 (1988061 bytes) y QA a0d12a7be2b4f4a0638f30c65bc33d37a1ba64c707c6ccf0c0aed21689cffcdd (2373893 bytes). La duración focal de 53376.907 ms incluye preparación y varios requests, no una ampliación de la Root de cada request. Los contadores HTTP del marcador pertenecen a fixtures SYN, no a llamadas facturadas contra Cloudflare.
+
+Artefacto RED 13532153177, SHA256 2c9bbb4108363c9077995c0d27df563ab8c188227ae4f398a6b8e10c02112d74, vence el 13 nov 2026 a las 18:59:20 UTC. LIMITACIÓN: conservó solo red.tap y el marcador saneado; los scripts/metafiles se generaron bajo output/t2-native-graphs, pero el qualifier seleccionó otra ruta. No afirmar que esos grafos RED quedaron preservados. Root decidió no repetir un RED causal únicamente por esa omisión. GREEN debe corregir la ruta y verificar el contenido del artefacto antes de retirar el qualifier. Implementer continúa Task1; no Task2 ni Source writes de Root.
+
+Advertencias registradas: CIMD deshabilitado en el entorno SYN, un RPC stub no dispuesto y deprecaciones de dependencias/actions. No se cambiaron flags, dependencias o políticas para silenciarlas. La revisión evaluará su incidencia en el alcance de esta tarea.
+
+## Decisión transversal: plan Workers compartido, recursos separados
+
+Gabriel confirmó usar el mismo plan de pago de Workers para AFW y Tokenizart, con rutas distintas por proyecto. Se conserva esa decisión sin duplicar suscripciones y con Workers, rutas, entornos, almacenamiento, secretos y permisos separados. Compartir el plan no habilita reutilizar datos, callbacks o credenciales ni concede autoridad de despliegue al otro proyecto.
+
+Root contrastó la distinción de plan por cuenta y límites REST con la documentación oficial de [Workers pricing](https://developers.cloudflare.com/workers/platform/pricing/) y [API limits](https://developers.cloudflare.com/fundamentals/api/reference/limits/). El presupuesto mensual de Workers y la cuota de la API de control son límites diferentes. No se reserva capacidad ni se acredita margen operativo actual a partir del plan. No se cambió facturación, cuenta, ruta, permisos, monitor o runtime. Este bloque sigue limitado a Source/Actions SYN.
