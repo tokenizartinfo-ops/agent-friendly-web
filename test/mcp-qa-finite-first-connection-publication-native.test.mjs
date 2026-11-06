@@ -260,3 +260,15 @@ test('T3 fixed protocol and genuinely compiled foreign profile cannot mint choic
  const headers=transport();headers.set('X-SYN-Unrelated-Trace','ignored input, never permission');const counterpart=await f.stub.fetch('https://afw-private.invalid/_finite-owner/choice',{method:'POST',headers});assert.equal(counterpart.status,200,'same signed fixed protocol otherwise reaches real choice');await counterpart.body?.cancel();const p=await readFirstConnectionProbe(f);assert(p.native.business.some(key=>key.startsWith('owner-ticket:')));assert.equal(ticketUses(p).length,0);assert.equal(effectRows(p).length,0);
  console.info('T3 compiled profile negative',JSON.stringify({positiveM:f.firstConnectionBuild.M.sha256,negativeProfileM:f.firstConnectionBuild.wrongProfileHash,protocolVariants:cases.length,ignoredUnrelatedHeader:true}));
 });
+
+for(const fault of ['upload-module','upload-config','upload-pointer','activation-pointer','activation-percentage','activation-version','activation-config','activation-secret'])test('T3 actual publication readback denies next effect: '+fault,{timeout:120000},async t=>{
+ const f=await fixture(t);f.connectionReadbackFault=fault;
+ const response=await approveFirstConnection(f);assert.notEqual(response.status,200,fault);await response.body?.cancel();
+ assert(f.connectionReadbackHits>0,'actual fixed provider readback reached '+fault);
+ const probe=await readFirstConnectionProbe(f);assert.equal(f.uploads.length,2,'actual original upload was applied');
+ assert.equal(f.activations.length,fault.startsWith('upload-')?1:2,'invalid upload readback cannot activate');
+ assert.equal(receipts(probe).length,0,'invalid activation readback cannot issue receipt');
+ assert(!effectRows(probe).some(([key,raw])=>key.endsWith(':send')&&JSON.parse(raw).effect==='activation')||fault.startsWith('activation-'),'invalid upload readback denies activation SEND');
+ assert.equal(effectRows(probe).filter(([key])=>key.endsWith(':ack')).length,fault.startsWith('upload-')?1:2,'original native ACKs preserved without compensation');
+ console.info('T3 actual readback target',JSON.stringify({fault,hits:f.connectionReadbackHits,uploads:f.uploads.length,activations:f.activations.length,receipt:0}));
+});
