@@ -1,0 +1,39 @@
+name: AFW owner restoration qualification
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths:
+      - .github/workflows/afw-owner-restoration-qualification.yml
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: RED one actual SDK reference case
+        shell: bash
+        run: |
+          mkdir -p output/owner-reference
+          set -o pipefail
+          node --test --test-reporter=tap --test-name-pattern="^R1 SDK reference is durable before redirect$" test/mcp-qa-finite-owner-sdk-reference-native.test.mjs | tee output/owner-reference/red.tap
+      - name: Preserve bounded SOURCE SYN evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-owner-reference-${{ github.sha }}
+          path: |
+            output/owner-reference/
+            output/task3/
+          if-no-files-found: warn
+          retention-days: 7
