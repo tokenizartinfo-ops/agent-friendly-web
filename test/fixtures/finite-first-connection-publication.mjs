@@ -216,7 +216,7 @@ export function extendFirstConnectionPublication(entry){
  async firstConnectionConfigure(mode='normal'){
   this.firstRestore?.();this.firstState={mode,trace:[],fetchHeld:false,fetchSettled:false,readHeld:false,readSettled:false,cancelHeld:false,cancelSettled:false};this.firstRelease={};
   const owner=this,state=this.firstState,s=this.ctx.storage,env=this.env,native={get:s.get,list:s.list,transaction:s.transaction,sync:s.sync,getAlarm:s.getAlarm},fetcher=globalThis.fetch,wall=Date.now;
-  let writes=[],receiptRead=false,shift=0;const originalMetadata=env.AFW_QA_VERSION,originalPrepare=env.RELEASE_DB.prepare,originalNode=env.AFW_RELEASE_EVENTS_NODE,nodeName=originalNode.idFromName,originalSelf=env.AFW_INDEPENDENT_CLOSURE,selfGet=originalSelf.get,originalKv=env.AFW_FINITE_OWNER_OAUTH_KV,kvGet=originalKv.get,originalReader=env.AFW_MCP_CLOSURE_READ_TOKEN;state.counts={get:0,list:0,transaction:0,sync:0,firstPrimary:0,sql:0};const db=env.RELEASE_DB,withSession=db.withSession;
+  let writes=[],receiptRead=false,shift=0;const originalMetadata=env.AFW_QA_VERSION,originalQaId=originalMetadata.id,originalPrepare=env.RELEASE_DB.prepare,originalNode=env.AFW_RELEASE_EVENTS_NODE,nodeName=originalNode.idFromName,originalSelf=env.AFW_INDEPENDENT_CLOSURE,selfGet=originalSelf.get,originalKv=env.AFW_FINITE_OWNER_OAUTH_KV,kvGet=originalKv.get,originalReader=env.AFW_MCP_CLOSURE_READ_TOKEN;state.counts={get:0,list:0,transaction:0,sync:0,firstPrimary:0,sql:0};const db=env.RELEASE_DB,withSession=db.withSession;
   db.withSession=(...args)=>{if(args[0]==='first-primary')state.counts.firstPrimary++;const session=Reflect.apply(withSession,db,args),prepare=session.prepare;session.prepare=(...a)=>{state.counts.sql++;const statement=Reflect.apply(prepare,session,a);if(mode==='source-sql-held'&&String(a[0]).includes('site_projects')){const bind=statement.bind;statement.bind=(...values)=>{const bound=Reflect.apply(bind,statement,values),first=bound.first;bound.first=async(...params)=>{const actual=Reflect.apply(first,bound,params),value=await actual;if(state.sqlHeld)return value;state.sqlHeld=true;return held('work',value);};return bound;};}return statement;};return session;};
   s.list=(...args)=>{state.counts.list++;return Reflect.apply(native.list,s,args);};
   const target=key=>typeof key==='string'&&(key.startsWith('afw.finite-preparation-cleanup.v1:')||key.startsWith('afw.finite-policy-effect.v1:'));
@@ -256,6 +256,7 @@ export function extendFirstConnectionPublication(entry){
    const response=await Reflect.apply(fetcher,globalThis,args);if(url.endsWith('/cdn-cgi/access/certs'))state.jwkFetched=true;if(!effect)return response;
    state.trace.push({kind:'native-result-enter',effect,at:Date.now()});
    if(effect==='upload'){
+    if(mode==='upload-metadata-id-drift'){originalMetadata.id='dddddddd-dddd-4ddd-8ddd-dddddddddddd';state.holderChanged=true;}
     if(mode==='upload-db-method-drift'){db.withSession=(...args)=>Reflect.apply(withSession,db,args);state.holderChanged=true;}
     if(mode==='upload-db-prepare-drift'){db.prepare=(...args)=>Reflect.apply(originalPrepare,db,args);state.holderChanged=true;}
     if(mode==='upload-node-method-drift'){originalNode.idFromName=(...args)=>Reflect.apply(nodeName,originalNode,args);state.holderChanged=true;}
@@ -277,7 +278,7 @@ export function extendFirstConnectionPublication(entry){
    return response;
   };
   Date.now=()=>wall()+shift;
-  this.firstRestore=()=>{for(const [key,value]of Object.entries(native))s[key]=value;globalThis.fetch=fetcher;Date.now=wall;db.withSession=withSession;env.AFW_QA_VERSION=originalMetadata;db.prepare=originalPrepare;originalNode.idFromName=nodeName;originalSelf.get=selfGet;originalKv.get=kvGet;env.AFW_MCP_CLOSURE_READ_TOKEN=originalReader;};
+  this.firstRestore=()=>{for(const [key,value]of Object.entries(native))s[key]=value;globalThis.fetch=fetcher;Date.now=wall;db.withSession=withSession;originalMetadata.id=originalQaId;env.AFW_QA_VERSION=originalMetadata;db.prepare=originalPrepare;originalNode.idFromName=nodeName;originalSelf.get=selfGet;originalKv.get=kvGet;env.AFW_MCP_CLOSURE_READ_TOKEN=originalReader;};
  }
  async firstConnectionReseal(effect='upload',variant='ack'){
   const s=this.ctx.storage,rows=[...await s.list({prefix:'afw.finite-policy-effect.v1:'})],pair=rows.find(([k,v])=>k.endsWith(':send')&&JSON.parse(v).effect===effect);if(!pair)throw Error('SYN actual SEND absent');
