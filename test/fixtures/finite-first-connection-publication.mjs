@@ -319,7 +319,7 @@ export async function approveFirstConnection(f,{token=null}={}){
  assert.equal(f.mode,'first-connection-publication');
  const facts=await plain(f.stub.capsuleFacts()),source=facts.material.ownerSelection;
  const screenStart=performance.now(),screen=await f.call('/connections/finite-prepare',{headers:{'Cf-Access-Jwt-Assertion':token??await f.enrollmentToken(source)}});
- console.info('T3 actual choice GET',JSON.stringify({status:screen.status,elapsedMs:performance.now()-screenStart}));if(screen.status!==200){console.info('T3 actual choice failure',JSON.stringify(await plain(f.stub.firstConnectionProbe())));return screen;}
+ console.info('T3 actual choice GET',JSON.stringify({status:screen.status,elapsedMs:performance.now()-screenStart}));if(screen.status!==200){f.failedChoiceState=await plain(f.stub.firstConnectionState());console.info('T3 actual choice failure',JSON.stringify(await plain(f.stub.firstConnectionProbe())));return screen;}
  const text=await screen.text(),handle=/name="handle" value="([a-f0-9]{64})"/.exec(text)?.[1],projectRef=/name="projectRef" value="([a-f0-9]{64})"/.exec(text)?.[1],cookie=screen.headers.get('set-cookie')?.split(';')[0];
  assert(handle&&projectRef&&cookie,'actual choice must supply bounded form/cookie');
  f.choice={handle,projectRef,cookie};
