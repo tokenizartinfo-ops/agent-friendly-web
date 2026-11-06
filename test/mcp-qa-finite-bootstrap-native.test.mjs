@@ -1,3 +1,4 @@
+import {retentionImports,retentionMethods,checkBodyRetention,captureRetentionBuild} from './fixtures/finite-native-body-retention.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -16,7 +17,10 @@ async function fixture({productionExpiry=false}={}){
  const entry=`
  import{DurableObject}from'cloudflare:workers';
  import{readPrivateQaFiniteBootstrap}from'./lib/mcp-qa-finite-bootstrap-native.mjs';
+${retentionImports}
  export class Check extends DurableObject{
+${retentionMethods("readPrivateQaFiniteBootstrap({ctx:this.ctx,env:this.env},parent.lease)")}
+
   async read(mode){
    const controller=new AbortController(),start=Date.now(),env=this.env,version=env.AFW_QA_VERSION;
    const lease={signal:controller.signal,assertCurrent(){if(controller.signal.aborted||Date.now()-start>=30000||mode==='expired-parent')throw Error('parent');}};
@@ -27,7 +31,8 @@ async function fixture({productionExpiry=false}={}){
   }
  }export default{fetch(){return new Response(null,{status:404});}};
  `;
- const built=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],define:{'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':JSON.stringify(w.expected)},plugins:[{name:'explicit-SYN-custody-boundary',setup(b){b.onLoad({filter:/mcp-qa-finite-bootstrap-native\.mjs$/},()=>({contents:source,loader:'js'}));}}]});
+ const built=await build({metafile:true,stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],define:{'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':JSON.stringify(w.expected)},plugins:[{name:'explicit-SYN-custody-boundary',setup(b){b.onLoad({filter:/mcp-qa-finite-bootstrap-native\.mjs$/},()=>({contents:source,loader:'js'}));}}]});
+ await captureRetentionBuild('bootstrap',built);
  const f={w,mode:'normal',requests:[],pointerReads:0,held:null,approval};
  const mf=new Miniflare(convertV4MiniflareOptions({modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],bindings:{AFW_QA_VERSION:{id:UUID},AFW_MCP_CLOSURE_READ_TOKEN:'SYN-native-token'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'Check',useSQLite:true,uniqueKey:'bootstrap-c1'}},script:built.outputFiles[0].text,outboundService:async req=>{
   f.requests.push({url:req.url,authorization:req.headers.get('authorization')});assert.equal(req.method,'GET');
@@ -79,4 +84,8 @@ test('held actual provider promise cannot renew original aborted parent or conti
 });
 test('unmodified production approval ceiling denies at expiry before all HTTP (SYN reader clock only)',async t=>{
  const f=await fixture({productionExpiry:true});t.after(()=>f.mf.dispose());assert.equal((await f.stub.read('normal')).denied,true);assert.equal(f.requests.length,0);
+});
+
+for(const mode of ['invalid-status','late-response'])test('I1 acquired bootstrap body retention '+mode,async()=>{
+ const f=await fixture();await checkBodyRetention(f,mode);
 });
