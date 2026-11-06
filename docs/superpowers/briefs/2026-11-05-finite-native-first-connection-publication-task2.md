@@ -10,7 +10,7 @@ READ FIRST: esta brief; plan 2026-11-05-finite-native-first-connection-publicati
 
 ## Filemap cerrado y writer único
 
-Exactamente11code/testpaths:
+Exactamente13code/testpaths (reconciliación Root posterior a diagnóstico):
 1. worker/mcp-own/finite.mjs
 2. worker/independent-closure/finite.mjs
 3. lib/mcp-qa-finite-owner-native-wire.mjs
@@ -22,6 +22,8 @@ Exactamente11code/testpaths:
 9. test/fixtures/finite-initial-entry-world.mjs
 10. test/mcp-qa-finite-owner-native-wire.test.mjs (sólo normalización DATA SYN indicada abajo)
 11. test/mcp-qa-finite-owner-native-conduit-native.test.mjs (mismo límite).
+12. lib/mcp-qa-finite-initial-material.mjs (único prerequisite producto extra Root).
+13. test/mcp-qa-finite-initial-material-native.test.mjs (ownership/forgery/bytes mutables/vida).
 
 Extras explícitos: TEMP .github/workflows/afw-first-connection-qualification.yml, reporte reports/2026-11-05-finite-native-first-connection-publication-task2.md y progress/2026-11-05-finite-native-first-connection-publication.es.md. No otro fixture/framework/API ni archivo producto; no phase-context, preparation, SDK, ordinary index, scripts, configuración, SQL/schema/DDL, journals/store/records, perfiles o P1/P2/P3. Si falta un path, parar y pedir ruling Root antes de tocarlo. No helpers/reviewer propios ni iniciar Task3.
 
@@ -76,7 +78,7 @@ CLOSED debe compilarse con el dispatcher ANTES de fijar cápsula/residencia/hash
 RED focal nuevo prefijo '^T2 ' en los2archivos first-connection-publication (pure+native), con fallos concretos dispatch/gramática/artefacto; no imports, fixture incompleto ni baseline falso. Preservar primaria. Mantener casos Task1 como contratos.
 
 Qualifier autorizado <=3jobs, timeout-minutes<=15 por job, Node22, npm ci --ignore-scripts --no-audit --no-fund, contents:read, persist-credentials:false, sin secrets, push sólo SOURCE/paths explícitos. Retirarlo antes de lotes y recrearlo ÚLTIMO; remover final. Sugerencia proporcional a ajustar sólo con datos:
-- contratos Task1+Task2 del archivo pure + T5 completo y lint11paths;
+- contratos Task1+Task2 del archivo pure + T5 completo y lint13paths;
 - T3 nuevo completo (nombres Task2) + T6 completo;
 - compiler staging seleccionado: 'actual compiler staging hashes final bytes and retains source classes without eligible manifest' y 'missing_factory_blocks_package', confirmar nombres exactos BASE.
 Nada de full Link31/POST50/GET81/setup3 por rutina. No npm test global, sleeps/retries, fanout nuevo, clocks/deadlines amplificados o assertions suprimidas para GREEN. Cero matches/skips de seleccionado/wrapper sin assertions no cuenta. Si no cabe, Root decide grouping con medida; nunca ampliar timeout.
@@ -87,8 +89,17 @@ Capturar hashes/metafiles/bytes/grafo si la ejecución los produce, sin otro bui
 
 GQL update_ref falló con error interno ya preservado; no volver a probarlo ni tocar credenciales/settings. Ruling REST contents API: branch SOURCE explícita siempre, fileSHA-CAS para existente o create sólo ausente, escrituras SECUENCIALES de writer exclusivo. Antes primer write verificar BASE. Tras CADA write verificar parent previo, único path permitido, ref, blob/contenido exactos. No atomicidad multiarchivo; qualifier último. Unknown/interferencia→preservar y avisar, sin retry ciego/force/defaultbranch. No local clone/deps/build/test: GitHub/Actions.
 
-Informe completo de una vez: BASE→HEAD/diff entero/parents/primarias run-attempt-jobs/casos ejecutados-PASS/lint11/graphs-costes medidos/errores y fixes causales/artifacts-expiry/protegidos y limitaciones. Retirar qualifier y STOPWRITES para reviewer fresco Root antes Task3.
+Informe completo de una vez: BASE→HEAD/diff entero/parents/primarias run-attempt-jobs/casos ejecutados-PASS/lint13/graphs-costes medidos/errores y fixes causales/artifacts-expiry/protegidos y limitaciones. Retirar qualifier y STOPWRITES para reviewer fresco Root antes Task3.
 
 M1 sdkReadCurrent viejo sigue desconocido/no reproducido; M2warnings RPC/toolchain no pristine; M3 segundo intento durante cancel deferido al gate de retención Task3/whole-branch (no arreglarlo aquí). SQLConsentMinor cerrado. No volver a contar/ejecutar gates anteriores por su debt.
 
 C0=I0+900000,C1=C0+180000,parent30s/child5s, ceiling operativo3Nov02:59UTC vencido y no renovable anticipadamente. Sin recursos/runtime/provider real/alias/Entry/DDLreal/OAuth/OTP/tokens/permisos/cron/Containers/Max/main/merge/ARM. operationalReadiness=false; completePackage=false; PCoff=false. Task2 no instala guard/suscripción/entrega ni permite pedir apagar.
+
+
+## Reconciliación Root para cierre de Task2
+
+Los13paths anteriores incorporan el ruling posterior: weakMap privado captura script LOCAL previamenteSHA-validado y refs exactos decontext/artifact congelados; comparar identidad/valor en vez de SÓLOrehashscriptinmutable. SHAbytesMUTABLES/type/length/materialhash/recordhash/r.check/holders/source/leases/todosawaitrechecks preservados; initial-entry/lease nuncaeditados. No cambiodeclock/chunking/artefacto/cachéDTO. Primariaantes5004>=5000/599reads/4714guardms; despuésmismabaselineguard1711ms y upstreamfactual. Rootpreflight6Nov y reportTask2 fijan fuente/Scope13.
+
+T5/T6 tienen4SIZEassertions sender+receiver: headersválidos para alcanzar reader1024,413exacto (no[400,413]) y renamefirst400→first413. Todaslas demásassertions de cancel/retención/zeroeffect/malformed vigentes. Esta precisión supersede la prohibición genérica de cambiar literalstatus cuando corresponde al nuevo límite.
+
+El implementer terminó SOURCE3eebf3b1d50d7537c6ae72138a08b44b2b59ee93 yquitóqualifier. Final42138702058=55+5+2PASS/0F0SKIP,lint13limpio; material5PASSreutilizados conblobsidenticos. No se acredita aceptaciónporCI; Rootfreshreview tiene gates finales. Owner pidió terminar ESTEbloque,guardarydetenerseparaapagado normal: no empezarTask3esta noche ni pedirapagarcomoensayo. Task3mañana debecrearnuevalineageconsusbytesfinales.
