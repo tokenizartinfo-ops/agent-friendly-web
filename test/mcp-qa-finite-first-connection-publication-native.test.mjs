@@ -52,7 +52,7 @@ test('T2 closed mounted conduits cannot authorize business',{timeout:120000},asy
 });
 
 test('T3 same initial bytes produce connection and downstream',{timeout:120000},async t=>{
- const f=await fixture(t),before=await readFirstConnectionProbe(f);
+ const f=await fixture(t),before=await readFirstConnectionProbe(f);await f.stub.firstConnectionConfigure('normal');
  const response=await approveFirstConnection(f);
  if(response.status!==200)console.info('T3 failed continuation observation',JSON.stringify(await plain(f.stub.firstConnectionProbe())));
  assert.equal(response.status,200,'original signed choice must complete native ConnectionReceipt before success');
@@ -93,6 +93,7 @@ test('T3 same initial bytes produce connection and downstream',{timeout:120000},
  const final=await readFirstConnectionProbe(f),link=final.rows.find(([k])=>k==='connection-preparation:'+current.preconnectionId+':notice');assert(link,'actual native NoticeLink follows actual GET/POST');
  const unsupported=await f.call('/connections/finite-prepare',{headers});assert.notEqual(unsupported.status,200);await unsupported.body?.cancel();assert.equal(f.uploads.length,2);assert.equal(f.activations.length,2);
  assert.equal(final.negative.ordinary,0);assert.equal(final.negative.sql,0);
+ const telemetry=await plain(f.stub.firstConnectionState()),sends=effectRows(final).filter(([k])=>k.endsWith(':send')).map(([,v])=>JSON.parse(v));console.info('T3 original clock and IO',JSON.stringify({counts:telemetry.counts,providerRequests:final.providerRequests.length,sends:sends.map(s=>({effect:s.effect,windowMs:s.deadline-s.issuedAt})),receiptInsideActivation:receipt.completedAt<sends.find(s=>s.effect==='activation').deadline}));
  console.info('T3 native closure SYN',JSON.stringify({sourceRevision:f.source.sourceRevision,testRevision:process.env.GITHUB_SHA,receiptHash:receipt.receiptHash,grantTimestampNative:true,noticeLink:true,seededConnection:false,completePackage:false,operationalReadiness:false}));
 
 });
