@@ -111,13 +111,24 @@ export async function compileFirstConnectionCandidate(revision,tree,{negativePro
  import finite from './worker/mcp-own/finite.mjs';
  export {AfwOwnEventNode,AfwNodeControl} from './worker/mcp-own/finite.mjs';
  import {finiteNativeActor} from './lib/mcp-qa-finite-owner-native-wire.mjs';
- let fault='none';globalThis.__firstConnectionOrdinary=0;let sql=0,forwarded=0;
+ let fault='none';globalThis.__firstConnectionOrdinary=0;let sql=0,forwarded=0,lateRelease;
+ const late={armed:false,reached:false,released:false,nativeReturned:false,nativeRejected:false,startedAt:null,finishedAt:null};
  export default{async fetch(request,env,ctx){
   const path=new URL(request.url).pathname;
   if(path==='/_fixture/fault'){fault=await request.text();return new Response(null,{status:204});}
   if(path==='/_fixture/probe')return Response.json({ordinary:globalThis.__firstConnectionOrdinary,sql,forwarded});
+  if(path==='/_fixture/r2-late-arm'){late.armed=true;return new Response(null,{status:204});}
+  if(path==='/_fixture/r2-late-signal')return Response.json(late);
+  if(path==='/_fixture/r2-late-release'){late.released=true;lateRelease?.();return new Response(null,{status:204});}
   const ns=env.AFW_FINITE_TRIAL_CONTROL,db=env.DB;
   const prepared={...env,DB:{prepare(...a){sql++;return db.prepare(...a);},withSession(...a){sql++;return db.withSession(...a);}}};
+  if(late.armed){
+   const kv=env.OAUTH_KV;
+   prepared.OAUTH_KV={get:kv.get.bind(kv),list:kv.list.bind(kv),delete:kv.delete.bind(kv),async put(key,value,options){
+    if(!late.reached&&(key.startsWith('token:')||key.startsWith('grant:'))){late.reached=true;late.startedAt=Date.now();await new Promise(resolve=>{lateRelease=resolve;});}
+    try{const result=await kv.put(key,value,options);late.nativeReturned=true;return result;}catch(error){late.nativeRejected=true;throw error;}finally{late.finishedAt=Date.now();}
+   }};
+  }
   if(fault==='qa-absent')prepared.AFW_FINITE_TRIAL_CONTROL=undefined;
   if(fault==='version')prepared.AFW_FINITE_TRIAL_VERSION={id:'invalid'};
   if(fault==='actor')prepared.AFW_FINITE_TRIAL_CONTROL={idFromName(){return {toString:()=> 'bad'};},get(){throw Error('SYN wrong actor');}};
