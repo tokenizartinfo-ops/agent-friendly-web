@@ -1,6 +1,61 @@
 # Task3 native first connection — qualification report
 
-IN PROGRESS at 2026-11-06 14:44 UTC. Final exact same-code bounded qualification is frozen below; no completion/review claim. PROJECT=AFW; repository tokenizartinfo-ops/agent-friendly-web; SOURCE branch feat/finite-native-cleanup-20261101. Cloud connector/Actions only, no local clone/build/tests/dependencies. BASE ffe25a1e77a1d93d5c03018ada36355b19c91564 / tree43f53af19e427eade3ab6d4f90ac91ef1380f627. Final code checkpoint b6a81590276503926e7fe10564add26150fc1f5f / treec81007b46849a3a9d2a5673a7912b32d62493f4d; qualifier absent at this checkpoint. Seven code blobs below are the frozen lineage inputs. Documentation and temporary qualifier commits do not change them.
+DONE_WITH_CONCERNS — SOURCE/SYN implementation and declared composite qualification complete at2026-11-06 15:18UTC; fresh independent Root review/acceptance pending. Explicit verification exceptions and live-feasibility limits are below. PROJECT=AFW; repository tokenizartinfo-ops/agent-friendly-web; SOURCE branch feat/finite-native-cleanup-20261101. Cloud connector/Actions only, no local clone/build/tests/dependencies. BASE ffe25a1e77a1d93d5c03018ada36355b19c91564 / tree43f53af19e427eade3ab6d4f90ac91ef1380f627. Qualified source checkout d11dff63b0d693b89ac6ef8d6ec6c60ca01af751 / tree4e30df2ae4abe2bf087b123823185fa6ab082fa8. Qualifier-free code checkpoint 5e28e70b7833fcd4a17fecebe320b0365b6c4d2f / tree6f3b7308bf8d73418baa8ab1f91ee5900d89b89a; qualifier absent at this checkpoint. Seven code blobs below are the frozen lineage inputs. Documentation and temporary qualifier commits do not change them.
+
+## Completed declared gates — explicit composite verification exception
+
+**167/167 positive tests PASS at exact SOURCE checkout d11dff63b0d693b89ac6ef8d6ec6c60ca01af751/tree4e30df2ae4abe2bf087b123823185fa6ab082fa8**:137top-level tests+30actual nested subtests. Native union60 exact/disjoint; all positive FAIL/CANCEL/SKIP/TODO0 and individual command exit0. Principal67,583.677ms aggregate across distinct original requests: actual signed GET/cookie/form→POST→new upload/activation→native ConnectionReceipt hash99bf64e38bf7f6230b585c6e6c72f7fb2ccc7643be3ffcb12e7da8f3bdcb9a33→real QA authorize/code/Mtoken/MCP-D04/native grant timestamp→native notice GET/POST/NoticeLink. No seeded connection, exact initial M bytes/config-only OAuth, ordinary SQL0.
+
+This is NOT a successful single full qualifier run. [Run42236775067](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/42236775067) remains **CANCELLED**: A23PASS, B23PASS, C121positive PASS, then jobC reached15min during first remaining mutant. Positive command sum inC883225ms (14m43s); no completed control/lint credit from that cancelled job. Job wall timestamps include setup/cancellation/artifact overhead: A14:45:34–14:58:43(789s), B14:45:34–14:57:56(742s), C14:45:34–15:00:54(920s,cancelled). The C665s forecast missed actual allocation; never called a bounded fit.
+
+Root explicitly approved minimal **composite acceptance**: retain all167already-passed positives at D11; run ONLY the two controls+lint against that SAME pinned checkout, without changing any source/test file or rerunning positives. [Scoped run42240487416](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/42240487416)/job127969155895 SUCCESS15:10:04–15:11:17UTC(73s), exactly1job, configured15min/read-only/no secrets. Trigger commitf29804abe54f1d618c859c2642b48f90b5677fb7 is distinct from actual checkoutD11/tree4e30. Existing fixture child-only GITHUB_SHA was explicitly set to verified checkoutD11 so testRevision names actual compiled source, not later workflow trigger. Before/after seven HEAD+working-file hashes and tracked cleanliness are exact. Initial actual HEAD/tree are pinned and verified. No claim tests later qualifier/report commits. Cost if wrong: any hidden code/provenance difference invalidates composition; do not accept. This is an explicit verification-plan exception to the former single3job gate, not a hidden fourth job.
+
+| Command | Job | Expected/executed | Top/sub | PASS/FAIL/CANCEL/SKIP | Exit | Elapsed ms |
+| --- | --- | --- | --- | --- | --- | --- |
+| native-A | A | 23/23 | 23/0 | 23/0/0/0 | 0 | 759036 |
+| native-B | B | 23/23 | 23/0 | 23/0/0/0 | 0 | 714696 |
+| native-C | C | 14/14 | 14/0 | 14/0/0/0 | 0 | 440549 |
+| context | C | 34/34 | 34/0 | 34/0/0/0 | 0 | 151231 |
+| get | C | 4/4 | 4/0 | 4/0/0/0 | 0 | 57730 |
+| post | C | 10/10 | 10/0 | 10/0/0/0 | 0 | 145934 |
+| sdk | C | 2/2 | 2/0 | 2/0/0/0 | 0 | 27224 |
+| link | C | 1/1 | 1/0 | 1/0/0/0 | 0 | 19883 |
+| pure | C | 46/46 | 16/30 | 46/0/0/0 | 0 | 29135 |
+| transport | C | 5/5 | 5/0 | 5/0/0/0 | 0 | 1914 |
+| setup | C | 3/3 | 3/0 | 3/0/0/0 | 0 | 8488 |
+| compiler | C | 2/2 | 2/0 | 2/0/0/0 | 0 | 1137 |
+
+| Negative control | Expected/executed | PASS/expectedFAIL/CANCEL/SKIP | Exit | Exact target | Elapsed ms |
+| --- | --- | --- | --- | --- | --- |
+| public-partial | 1/1 | 0/1/0/0 | 1 | true | 22085 |
+| existing-ack | 1/1 | 0/1/0/0 | 1 | true | 28004 |
+
+Both controls have TODO0, exact one matching name, actual exit1, targetMessage=true and accepted=true; unrelated guards remain. lint exactly7paths --max-warnings=0 exit0,2086ms. Positive matched-ACK denial at D11 and mutation counterexample are separately recorded. Matched foreign ACK fixture freezes SYN wall time only to make bytes/timestamp identical; original monotonic root/child limits still run, and the positive principal has no such mutation. These controls are supplementary causal regression evidence, not historical TDD RED.
+
+Remaining concerns are disclosed: static/compositional callback-retry proof exception, post-implementation chronology for most negatives, inherited M1/M2 warnings and live-provider feasibility. Fresh independent Root review/acceptance remains pending. All operationalReadiness/completePackage/PCoff=false.
+
+## Final artifacts, hashes and provenance
+
+Artifact SHA256 values below are GitHub metadata/primary upload digests; no local ZIP download/extraction or rehash was performed. ZIPs retain exact spec+TAP, counts/name manifests, Source provenance, M/QA files/metafiles and content-addressed native-syn descriptors,7day retention.
+
+| Run/job | Artifact ID / name | ZIP bytes | SHA256 | Expiry UTC |
+| --- | --- | --- | --- | --- |
+| 42236775067/127956321656 | 13514930019 / task3-A-d11dff63b0d693b89ac6ef8d6ec6c60ca01af751 | 27779625 | 91fd1b47cf3eb55593f3d20482ce26e4279f500c4f187cafe3ef44243051e59d | 2026-11-13T14:58:36Z |
+| 42236775067/127956322164 | 13513670609 / task3-C-d11dff63b0d693b89ac6ef8d6ec6c60ca01af751 | 18162476 | 62261874fd5dfc92155fb6ea75e295704dba6c351a2c5cf06cd33e0753d9d2b6 | 2026-11-13T15:00:48Z |
+| 42236775067/127956322176 | 13511838508 / task3-B-d11dff63b0d693b89ac6ef8d6ec6c60ca01af751 | 27779351 | 03f46d3e978c50da7b0a02dcfbb25b34f4eb49bc1101266cdabe277980bb007b | 2026-11-13T14:57:50Z |
+| 42240487416/127969155895 | 13515241913 / task3-completion-source-d11dff63-trigger-f29804abe54f1d618c859c2642b48f90b5677fb7 | 2425465 | 4af8719690f283e0c78b46cc0c44a56a341cca62a4128162aa5a7442c03e45dd | 2026-11-13T15:11:14Z |
+
+SYN positive M1988061bytes/340inputs, SHA256c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32; resident gzip389502bytes/SHA2566fc1a66575d3e906707a03782ea40b6c9b8011d95ebc99974fbd04d15214ad12; programHashf6f517c3ac135cfa7b9853137e0487f768b8f24a11e24959a337cac4e28d42e6. Unmutated SYN initial-closed QA example from A/T2:2365243bytes/328inputs, SHA256a3787f276184f199166c754bc9fe629ed084a58b17674a51defe306797671c47; principal's actual compiled QA/metadata are retained in C's content-addressed artifact and its runtime checks, not attributed to this other fixture's bootstrap hash. Positive M remains exact in all labels.
+
+| Separate negative QA label | QA bytes | QA SHA256 | M SHA256 |
+| --- | --- | --- | --- |
+| public-partial | 2365191 | 028d66e39df56d557cb2f96b5122b36eb1dc4c1624dfbc6cc2dd47b9b1141ca8 | c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32 |
+| existing-ack | 2365307 | 05db012360e6c7a28d64f8188542d2ba62103ca2c5c596ebe1eb5fda376e7c72 | c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32 |
+
+These exact negative-build literals were printed in the scoped completion primary log with testRevisionD11 and stored under output/t2-native-graphs/<QAsha>/native-syn.json; both carry completePackage=false/operationalReadiness=false. Negative ordinary-profile/spy artifacts remain separately labelled from unwrapped positive M.
+
+Actual production staging compiler evidence at D11/tree4e30 (C positive pure/compiler tests, not SYN metadata literals): canaryLive1988061bytes/340inputs SHA256bbb4355253ecde12b2700815f596e2df974907b2d2160fa7d617951d15e0753f; qaLive2524211bytes/324inputs SHA256d91dae532d45f60b245f381cd686653a73b0a7634629f1da80b4f6be4fe5241a. Eligibility/completePackage remain false. SYN M/QA and actual Git-provenance staging bundles are distinct artefacts; do not transfer their hashes to later documentation HEAD or publication.
+
 
 ## Outcome and exact implementation
 
@@ -115,11 +170,11 @@ Max EXACTLY3 independent jobs, timeout15min each, Node22, npmci --ignore-scripts
 - T3 original body retains real read and cancellation: read
 - T3 actual publication readback denies next effect: upload-module
 
-JobC additionally executes exact scoped manifests context34/GET4/POST10/SDK2/Link1/pure46/transport5/setup3/compiler2, two negative controls and lint7. Exact actual first-gate per-command counts/durations are retained in its artifacts; revised final same-code results remain PENDING. Node runner also prints only archived native-syn build metadata (purpose/mutation/testRevision/M/QA/compressed hashes/bytes) from content-addressed artifact directories inside these SAME3jobs, no extra job or body/token output.
+JobC additionally executes exact scoped manifests context34/GET4/POST10/SDK2/Link1/pure46/transport5/setup3/compiler2, two negative controls and lint7. Exact actual first-gate per-command counts/durations are retained in its artifacts; actual declared composite results are in the completed-gates table above; the full3job run remains cancelled. Node runner also prints only archived native-syn build metadata (purpose/mutation/testRevision/M/QA/compressed hashes/bytes) from content-addressed artifact directories inside these SAME3jobs, no extra job or body/token output.
 
 ## Per-variant evidence map
 
-“Native” means fresh current Task3 producer lineage; “current unit/helper/T4” means final selected same-code composition with own SYN fixture (may seed historical facts); “reused” means immutable accepted protected evidence, not a new Task3 execution. Exact native names/assignments above; final runner artifact manifest holds all regression names. Seven blobs below fix tests/call sites. Final result fields remain PENDING until read primary terminal logs.
+“Native” means fresh current Task3 producer lineage; “current unit/helper/T4” means final selected same-code composition with own SYN fixture (may seed historical facts); “reused” means immutable accepted protected evidence, not a new Task3 execution. Exact native names/assignments above; final runner artifact manifest holds all regression names. Seven blobs below fix tests/call sites. All declared result fields were read from primary terminal command logs; dynamic, reused and semantic-only evidence levels remain distinct.
 
 ### Dispatch M
 
@@ -191,9 +246,9 @@ Current full pure46 includes exact compiler graph assertions initial M contains 
 
 ### Explicit callback-retry verification exception (Root ruling)
 
-No literal native transaction callback-retry injection was found in this Task3 gate or the historical accepted suites. This row has SEMANTIC/COMPOSITIONAL proof, not dynamic PASS. At tested HEAD bbb09fca038c3ca09e8f02f07df558378b3fd843, unchanged helper blob6eb0f08d581faef8ee12ce4f9e0d62cebdfb57f9 [append lines53–56](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/bbb09fca038c3ca09e8f02f07df558378b3fd843/lib/mcp-qa-finite-preparation-enrollment-writer.mjs#L53) initializes private entered once OUTSIDE the native transaction callback; checks and sets it synchronously before its first await. A second callback calls fail(), setting failed before throwing (lines22–23), and every subsequent check is absorbing (line32). Transaction result must be exactly true, then original sync/readback/alarm (lines70–72); recordEnrollment/recordAck catch set failed (90/99). Native APIs are assumed to settle the transaction Promise only after their callbacks and to propagate/represent rollback/failure according to their documented native contract; this proof does not independently inject native retry/rollback behavior.
+No literal native transaction callback-retry injection was found in this Task3 gate or the historical accepted suites. This row has SEMANTIC/COMPOSITIONAL proof, not dynamic PASS. At tested HEAD d11dff63b0d693b89ac6ef8d6ec6c60ca01af751, unchanged helper blob6eb0f08d581faef8ee12ce4f9e0d62cebdfb57f9 [append lines53–56](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/d11dff63b0d693b89ac6ef8d6ec6c60ca01af751/lib/mcp-qa-finite-preparation-enrollment-writer.mjs#L53) initializes private entered once OUTSIDE the native transaction callback; checks and sets it synchronously before its first await. A second callback calls fail(), setting failed before throwing (lines22–23), and every subsequent check is absorbing (line32). Transaction result must be exactly true, then original sync/readback/alarm (lines70–72); recordEnrollment/recordAck catch set failed (90/99). Native APIs are assumed to settle the transaction Promise only after their callbacks and to propagate/represent rollback/failure according to their documented native contract; this proof does not independently inject native retry/rollback behavior.
 
-P10 blob e482ad1617adc001c3a32c94e71eeb41d27f3d1d [598–602](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/bbb09fca038c3ca09e8f02f07df558378b3fd843/lib/mcp-qa-finite-owner-phase-context.mjs#L598) unconditionally awaits exact helper preparation→own enrollment→full recheck→own ACK→full recheck in one original child; only afterwards may upload SEND issue/sync/readback/recheck607–609 and actual native Promise610 begin. No caught helper failure can reach those effects. This is the producer-side composition.
+P10 blob e482ad1617adc001c3a32c94e71eeb41d27f3d1d [598–602](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/d11dff63b0d693b89ac6ef8d6ec6c60ca01af751/lib/mcp-qa-finite-owner-phase-context.mjs#L598) unconditionally awaits exact helper preparation→own enrollment→full recheck→own ACK→full recheck in one original child; only afterwards may upload SEND issue/sync/readback/recheck607–609 and actual native Promise610 begin. No caught helper failure can reach those effects. This is the producer-side composition.
 
 Reused dynamic integration evidence: [accepted enrollment receipt](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/ffe25a1e77a1d93d5c03018ada36355b19c91564/docs/superpowers/reports/2026-11-04-preparation-cleanup-enrollment.md), reportblob04a7c661f8fd91263e52060020cd0deab97b3c24/review8143c410374e51dc55f321a4714f7674cfd838ec. Behavior45c0b08f530fdad73e5f8973b3878f279add9a96/run41903117759/job12683052049436PASS;98c02877f7f6f9df956f03a6d3f017e9d60ec4a0/run41900952944/job12682289781032new+99affectedPASS. Unchanged testblobd7dc91d1cf899e51d8f6e83ddd1bce23587d23d7 names: native [throw-enrollment,throw-ack,sync-reject,readback-lost,alarm-lost,ack-readback-lost,ack-sync-reject,ack-alarm-lost] is pending,immutable and never an owner forward; actual [hold-enrollment,hold-ack,sync-hold,readback-hold] after native commit stays in original scope until external release; factual [orphan,hash,unknown,head,policy,permission,foreign] obligation refuses restoration and all forwards; genuine original owner decision refuses [source-drift,holder-drift,qa-drift,clock-backward,clock-forward,clone-admission,wrong-stage] without any cleanup DATA or forward. These test the preserved native-failure/exclusion integration, not callback retry itself.
 
@@ -206,11 +261,83 @@ Cost if this exception is wrong: automatic native callback/rollback behavior has
 
 Finite extra/duplicate protocol headers preserve accepted P6 exact x-afw-finite-* five and P7 forwarding whitelist; no reject-every-HTTP-header policy. Cost if this interpretation were wrong: stronger transport policy requires explicit native automatic-header design, not a silent new P8 wire contract. Access menor uses valid-on-entry signed identity crossing expiry before TicketUse; valid shorter JWT is allowed and narrows ceilings. Expired-on-entry alone is separate. If expiry occurs after TicketUse preserve durable facts and deny next effect; no minimum lifetime denial or reused consumed history as causal Access test. Cost of opposite interpretation would be denying valid shorter identities/refreshing permission, contrary to original min-ceiling contract.
 
-Checkpoint metrics (FINAL SAME-HEAD values pending) cd4d6c1: principal65.75s aggregate over separate original requests, source earlier17.57s;69pairs295–430ms;pre-reload10327get(incltransactional)/1255list/55transaction/7sync/558first-primary/555SQL. Actual business HTTP836observerGET822776950bytes/202388reads/836cancel settled,9engineGET10409327bytes/2559reads/9cancel settled,2enginePOST302bytes/4reads/2cancel settled. Both incoming QA root windows30000ms. Upload/activation SEND windows remain<=5000ms and receiptInsideActivation asserted. All actual IO completion/read/cancel retained; logical abort not drain.
+### Final D11 synthetic native-lab measurements
 
-Whole registry now1754 =16GitHub+1736CF+2AccessJWKS. CFphase split initial63;choiceGET288/POST559 (847forms incl9GET+2POSTengine);authorizeGET280/POST336;noticeGET84/POST98;explicit context probes14+14 separately. This is SYN total, not real-provider latency. Final artifact aggregates response bytes by host/fixed endpoint/phase, no bodies/tokens. Repeated full modules/version READ dominates bytes; immutable and mutable dependencies are unchanged and quantified, no optimization/check removal here.
+Principal67,583.677ms aggregate across separate incoming requests; two receiving QA root boundary windows30000/30000ms; upload/activation SEND remaining windows4644/4642ms; receiptInsideActivation=true.69complete pairs292–1242ms. Pre-reload first-connection instrumentation (including explicit fixture factual/probe reads, not whole-flow SQL/DO totals):10327get(including transaction reads),1255list,55transaction,7sync,558first-primary,555SQL. No resource/check/clock optimizer was introduced.
 
-[Root conditional live-feasibility review](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/6fc3bac5e79ccb399935836370e3cb60edb2e0f2/docs/superpowers/reviews/2026-11-06-native-provider-feasibility.es.md) and [Cloudflare default API limits](https://developers.cloudflare.com/fundamentals/api/reference/limits/): default1200requests/5min per user/account token,cumulative user quota; actual Ratelimit/Ratelimit-Policy headers matter. Measured1736CF in~65s SYN COULD exceed default IF same quota bucket; conditional inference, not observed429/account quota or actual rate-limit fit. Live feasibility gate before operational promotion. No quota/plan/credential/check/clock change, retry/sleep or subscription authorized.
+| Captured actual HTTP | Requests | Received bytes | Reads | Cancel calls/settled |
+| --- | --- | --- | --- | --- |
+| observer GET | 836 | 823,391,326 | 202586 | 836/836 |
+| engine GET | 9 | 10,409,327 | 2559 | 9/9 |
+| engine POST | 2 | 302 | 4 | 2/2 |
+
+Actual reads/cancellations on success settled before reload; logical failure/abort is never physical drain. Held original business admission timestamps are separate from late retained cancellation. Late POST activation/receipt targets are admitted within their own live original30s request; observation timer does not merge GET+POST roots. No clipping of cleanup to expired clocks.
+
+Request snapshot BEFORE the final signed unsupported fresh-choice negative:1754 =16GitHub+1736Cloudflare+2AccessJWKS. Business CF phases initial63;choiceGET288/POST559(847connection-form/publication);authorizeGET280/POST336;noticeGET84/POST98; explicit factual verification probes14+14. Actual MCP library path itself adds no CF provider reads in this measured flow; the explicit post-exchange verification14 is labelled separately.
+
+Response aggregation is taken AFTER that late denied signed choice, so1768response observations include its additional14CF factual reads (no next effect). It is a DIFFERENT measurement scope, not duplicated responses. Full response JSON payload total1,877,366,582bytes; headers/compression/network charges/peakCPU/RAM are not measured. These are synthetic native-lab received bytes, not real Cloudflare transfer cost, quota or latency proof.
+
+| Host | Response observations | JSON payload bytes |
+| --- | --- | --- |
+| api.github.com | 16 | 10,028 |
+| api.cloudflare.com | 1750 | 1,877,355,712 |
+| synthetic-team.cloudflareaccess.com | 2 | 842 |
+
+| Phase · host | Response observations | JSON payload bytes |
+| --- | --- | --- |
+| initial-upstream · api.github.com | 16 | 10,028 |
+| initial-upstream · api.cloudflare.com | 63 | 27,541,517 |
+| GET /connections/finite-prepare · api.cloudflare.com | 302 | 295,945,410 |
+| GET /connections/finite-prepare · synthetic-team.cloudflareaccess.com | 1 | 421 |
+| POST /connections/finite-prepare · api.cloudflare.com | 559 | 554,789,099 |
+| verification context after connection · api.cloudflare.com | 14 | 16,933,554 |
+| GET /authorize · api.cloudflare.com | 280 | 338,671,080 |
+| GET /authorize · synthetic-team.cloudflareaccess.com | 1 | 421 |
+| POST /authorize · api.cloudflare.com | 336 | 406,405,296 |
+| verification context after exchange · api.cloudflare.com | 14 | 16,933,554 |
+| GET /monitoring · api.cloudflare.com | 84 | 101,601,324 |
+| POST /monitoring/grant · api.cloudflare.com | 98 | 118,534,878 |
+
+| Fixed host/method/path bucket (version IDs grouped) | Responses | JSON payload bytes |
+| --- | --- | --- |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/workers/agent-friendly-web-delegated-canary/versions/:id | 401 | 1,062,437,552 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/workers/agent-friendly-web-independent-closure-qa/versions/:id | 258 | 814,679,892 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/tokens/verify | 532 | 89,908 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/agent-friendly-web-delegated-canary/deployments | 269 | 77,402 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/agent-friendly-web-independent-closure-qa/deployments | 263 | 58,649 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/agent-friendly-web-delegated-canary/versions | 1 | 6,005 |
+| api.github.com GET /repos/tokenizartinfo-ops/agent-friendly-web/contents/.github/workflows/afw-finite-qa-bootstrap.yml | 1 | 2,624 |
+| api.github.com GET /repos/tokenizartinfo-ops/agent-friendly-web/contents/scripts/run-qa-finite-bootstrap.mjs | 1 | 1,894 |
+| api.github.com GET /repos/tokenizartinfo-ops/agent-friendly-web/git/tags/ffffffffffffffffffffffffffffffffffffffff | 1 | 1,874 |
+| api.github.com GET /repos/tokenizartinfo-ops/agent-friendly-web/issues/comments/9001 | 4 | 1,536 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workflows | 2 | 1,332 |
+| synthetic-team.cloudflareaccess.com GET /cdn-cgi/access/certs | 2 | 842 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/workers/agent-friendly-web-release-operator/versions/:id | 1 | 760 |
+| api.github.com GET /repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/456 | 1 | 644 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workflows/afw-own-qa-private-bootstrap/instances | 2 | 600 |
+| api.cloudflare.com POST /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/agent-friendly-web-delegated-canary/deployments | 2 | 539 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workflows/afw-own-qa-private-confirmation | 2 | 476 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workflows/afw-own-qa-private-bootstrap | 2 | 454 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workflows/afw-own-qa-private-bootstrap/instances/afw-mcp-closure-d56b5e850d24cc23058a024d73bae4c830a91c1fb9659f2e96282854ccae2c04 | 1 | 443 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workflows/afw-release-administrative | 2 | 438 |
+| api.github.com GET /repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/456/attempts/1/jobs | 1 | 429 |
+| api.github.com GET /repos/tokenizartinfo-ops/agent-friendly-web/issues/comments/123 | 1 | 316 |
+| api.github.com GET /repos/tokenizartinfo-ops/agent-friendly-web/git/ref/heads/main | 3 | 303 |
+| api.github.com GET /repos/tokenizartinfo-ops/agent-friendly-web/git/ref/tags/afw-finite-bootstrap/11111111-1111-4111-8111-111111111111 | 2 | 300 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workflows/afw-release-administrative/instances | 2 | 272 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workflows/afw-own-qa-private-confirmation/instances | 2 | 272 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/agent-friendly-web-release-operator/deployments | 1 | 223 |
+| api.cloudflare.com POST /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/workers/agent-friendly-web-delegated-canary/versions | 2 | 194 |
+| api.github.com GET /repos/tokenizartinfo-ops/agent-friendly-web/git/commits/cccccccccccccccccccccccccccccccccccccccc | 1 | 108 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/containers/applications/d6fc71552de7494a863aca20365a572d/instances-v2 | 1 | 85 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/agent-friendly-web-delegated-canary/schedules | 1 | 54 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/agent-friendly-web-delegated-canary/tails | 1 | 54 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/agent-friendly-web-release-operator/schedules | 1 | 54 |
+| api.cloudflare.com GET /client/v4/accounts/85d0d5dadac3341a564f22ce885e9eec/workers/scripts/agent-friendly-web-release-operator/tails | 1 | 54 |
+
+Two immutable-version/module response buckets (M401responses/1,062,437,552bytes and QA258/814,679,892) account for1,877,117,444bytes; mutable pointer/token/workflow facts remain distinct. Full exact endpoint×phase map is in the principal primary JSON and artifacts. This quantifies repeated large reads for later design; it does not authorize changing the accepted checks or clocks.
+
+[Root conditional live-feasibility review](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/6fc3bac5e79ccb399935836370e3cb60edb2e0f2/docs/superpowers/reviews/2026-11-06-native-provider-feasibility.es.md) and [Cloudflare default API limits](https://developers.cloudflare.com/fundamentals/api/reference/limits/): default1200requests/5min per user/account token,cumulative user quota; actual Ratelimit/Ratelimit-Policy headers matter. Request snapshot1736CF/full response observations1750CF within~67.6s SYN COULD exceed default IF same quota bucket; conditional inference, not observed429/account quota or actual rate-limit fit. Live feasibility gate before operational promotion. No quota/plan/credential/check/clock change, retry/sleep or subscription authorized.
 
 All operationalReadiness=false,completePackage=false,PCoff=false. C0=I0+900000,C1=C0+180000; original Nov3 ceiling remains EXPIRED. No main/merge/deploy/provider/auth/OTP/Max/browser/real account/owner data. No actualCloudSourceProof, rollback operational compatibility, hosting/delivery/subscription/guard or PC-off claim. M1 sdkReadCurrent old fixture cause remains UNKNOWN; M2 RPC/toolchain/disposal warnings unowned and not incidentally upgraded. FirstConnectionTicketFault's initial invalid action/nullref hit existing Miniflare RPC error handling; repaired valid codec, no general M2 fix claimed.
 
@@ -228,7 +355,19 @@ BASE→final-code compare exactly7allowed code/test paths plus report/progress, 
 | test/fixtures/finite-initial-entry-world.mjs | 297b57846bbbe13bfc80ac52c5b033a382aef4b6 |
 | test/mcp-qa-finite-owner-phase-context-native.test.mjs | be1ff27807934797f371ea703cd9a2c6f7f3675a |
 
-Rollback only own Source commits via explicit branch/fileSHA CAS; accepted BASE preserved. No runtime rollback/compensation or historical-row deletion. Every write verified commit single parent, exactly intended path, ref and blob readback. Sequential parent log below through frozen code; final documentation/test/qualifier removal readbacks will be appended at completion, self-referential final doc SHA is delivered separately in handoff.
+Rollback only own Source commits via explicit branch/fileSHA CAS; accepted BASE preserved. No runtime rollback/compensation or historical-row deletion. Every write verified commit single parent, exactly intended path, ref and blob readback. Sequential parent log below includes the completed scoped qualifier removal. The final two report/progress commits are documentation-only and verified/read back separately; final HEAD is delivered in handoff rather than made self-referential in this file.
+
+## Final scope/readback and verification exceptions
+
+Complete BASE and D11/qualifier-free trees were read without truncation. BASE→qualifier-free code checkpoint has exactly7allowed product/test paths plus this report and existing progress; temporary qualifier absent. All7blobs match D11 exactly; every other source/test/helper/schema/store/journal/SDK/profile/build/bootstrap/initial-material path remains BASE-identical. Final report/progress may change Git tree/provenance but not those source bytes; do not reuse D11 compiled hashes as a later checkout's publication bundle.
+
+Protected exact pairs include P1e131f5b22f8f0e54fb61e2f2a131c64798b1d4eb,P26eb0f08d581faef8ee12ce4f9e0d62cebdfb57f9, anchors00f743593d7670e9cb358c8512a25367d29cd6ed, stage-worka89baeb2578856dadedf700f9d66e180eb09120e, cleanup e9999c6ea5d086599844f86120cb0e3449f5d636, transportfa1cb012d65acc0457f7263d01bb5fd88a0cb8a6, journal6e3de33d04075740fb57e5f9afcf87dd9f68ee79, store122bc0e52870c71da7ae98ef73cd7762171d89ca, recordse9b66f68b6dbabbfecc46072949a0d5d9f059141, compilere8a73ce9f541993657bf8bf4c9bd8d3b02b8598d, Mentry15441b6c0c779f733db65a3b59a3a9e1738d19dc, QAentry1f1e5b95776b189fc8d952930467e6ff99c233c3. The global complete-tree diff covers all other protected files too.
+
+Verification exceptions are explicit: (1) callback retry is semantic/compositional proof with stated native transaction assumptions, not a dynamically injected PASS; (2) most negatives followed initial implementation; (3) full run42232085255 FAILED and full run42236775067 CANCELLED remain so, with scoped completion42240487416 at exact D11 closing only remaining controls/lint under Root's approved composite plan; (4) inherited RPC/toolchain warnings and M1unknown remain; (5) synthetic response/fanout measurements expose a live-feasibility/promotion gate. No requested Source implementation/matrix item is silently omitted or counted as selected0/pseudoPASS.
+
+Process note: an initial qualifier-removal call omitted the deletion selector and was rejected by connector schema for null content. Explicit ref readback remainedf29804ab; the correct explicit delete then produced5e28e70b and qualifier absence. No unknown mutation, retry of an uncertain write or content overwrite occurred. Generated replacements use functions after the separately logged0job quoting mistake.
+
+No further source validation is needed absent a new change or review finding. No local clone/dependency/build/test/artifact download or persistent process was used. Final report/progress readback and handoff conclude implementer Source ownership; no Source writes after that handoff.
 
 ## Sequential verified writes
 
@@ -461,3 +600,13 @@ e5913781a81d4e3ec0fac01c018c18058091636a → 4ddc7db7bc68a124f77ad2a7d19218f2128
 ed051204d16a3930c7d798f4ddba0975d1eec5d4 → 3238165e15e52cac886ddb150fb517939538f3e3; tree 4b30daa0c22cf7ae6114b927cb676c4ec9826284; test/fixtures/finite-first-connection-publication.mjs; blob 2cda37157bc0d1c9622784c33aa3b0fd94dc0e48; test: distinguish live business IO admission from later retained cleanup
 
 3238165e15e52cac886ddb150fb517939538f3e3 → b6a81590276503926e7fe10564add26150fc1f5f; tree c81007b46849a3a9d2a5673a7912b32d62493f4d; test/mcp-qa-finite-first-connection-publication-native.test.mjs; blob bc9f717d79e6e1ad60a40f358351093371331bee; test: allow actual late cancellation while preserving live admission proof
+
+b6a81590276503926e7fe10564add26150fc1f5f → 9a7502f94b23e777ab5b195278c75e1207132555; tree 764110b8beb6f35c4901a6f4ff462b0b73e0931d; docs/superpowers/reports/2026-11-06-finite-native-first-connection-publication-task3.md; blob c41b55139cb8695b1a9169b5e368d78fdec4c377; docs: preserve incomplete gate and freeze corrected live-observation qualification
+
+9a7502f94b23e777ab5b195278c75e1207132555 → a61142aea40cb4e7880a34e5ffa39ab14ee4fdf5; tree 6f3b7308bf8d73418baa8ab1f91ee5900d89b89a; docs/superpowers/progress/2026-11-05-finite-native-first-connection-publication.es.md; blob b6a5810d8e70b7b737b6588f59ea7bdd82835a15; docs: checkpoint corrected Task3 observation and revised exact three-job gate
+
+a61142aea40cb4e7880a34e5ffa39ab14ee4fdf5 → d11dff63b0d693b89ac6ef8d6ec6c60ca01af751; tree 4e30df2ae4abe2bf087b123823185fa6ab082fa8; .github/workflows/afw-first-connection-qualification.yml; blob c3bf62cd04769c1d43abe3ff13784f59e3b351c7; ci: qualify revised exact native matrix under independent original request observations
+
+d11dff63b0d693b89ac6ef8d6ec6c60ca01af751 → f29804abe54f1d618c859c2642b48f90b5677fb7; tree 4f7b1b5ff6296fa6220d09d8d8636f28b26a907a; .github/workflows/afw-first-connection-qualification.yml; blob b9fe3400416e990bb451a17ff21f6999bebe65e4; ci: complete only remaining controls and lint at exact qualified source checkout
+
+f29804abe54f1d618c859c2642b48f90b5677fb7 → 5e28e70b7833fcd4a17fecebe320b0365b6c4d2f; tree 6f3b7308bf8d73418baa8ab1f91ee5900d89b89a; .github/workflows/afw-first-connection-qualification.yml; blob ABSENT; ci: remove completed scoped qualifier and freeze Task3 source handoff
