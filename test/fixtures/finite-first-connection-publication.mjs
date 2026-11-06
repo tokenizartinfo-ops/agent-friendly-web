@@ -241,8 +241,8 @@ export function extendFirstConnectionPublication(entry){
   const rawHash=value=>typeof value==='string'?firstTraceHash('sha256').update(value).digest('hex'):null;
   const note=(kind,key,value,scope,transactionId=null)=>{if(target(key))state.trace.push({kind,key,valueHash:rawHash(value),scope,transactionId,requestId:owner.firstRequestId,at:Date.now()});};
   const held=(name,value)=>{const deadline=owner.firstBoundary.deadline;state[name+'Boundary']={...owner.firstBoundary,originalMethod:owner.firstOriginalMethod,enteredAt:Date.now()};state[name+'Held']=true;return new Promise((resolve,reject)=>{const tick=()=>{const remaining=deadline-Date.now();if(!Number.isSafeInteger(remaining)||remaining<=0){state[name+'Settled']=true;reject(Error('SYN original request deadline'));return;}if(owner.firstRelease[name]===true){state[name+'Settled']=true;resolve(value);return;}setTimeout(tick,Math.min(10,remaining));};tick();});};
-  const get=async(method,holder,args,scope='storage',transactionId=null)=>{
-   afterDrift('get');state.counts.get++;const value=await Reflect.apply(method,holder,args),key=args[0];note('get-settled',key,value,scope,transactionId);
+  const get=async(method,holder,args,scope='storage',transactionId=null,transactionReads=null)=>{
+   afterDrift('get');state.counts.get++;const value=await Reflect.apply(method,holder,args),key=args[0];note('get-settled',key,value,scope,transactionId);if(transactionReads&&target(key))transactionReads.push([key,value]);
    if(mode==='clock-backward'&&owner.firstBoundary&&!state.backward){shift-=100;state.backward=true;}
    if(mode==='source-holder-drift'&&owner.firstBoundary&&!state.holderChanged){env.AFW_QA_VERSION={id:originalMetadata.id};state.holderChanged=true;}
    if(mode==='access-expiry-held'&&state.jwkFetched&&!state.workHeld)return held('work',value);
@@ -255,7 +255,7 @@ export function extendFirstConnectionPublication(entry){
   s.transaction=fn=>{
    const transactionId=++state.counts.transaction,currentWrites=[],currentValues=new Map(),currentReads=[];
    const actual=Reflect.apply(native.transaction,s,[async tx=>{
-    const result=await fn({get:async(...a)=>{const value=await get(tx.get,tx,a,'transaction',transactionId);if(target(a[0]))currentReads.push([a[0],value]);return value;},list:tx.list.bind(tx),put:async(k,v)=>{note('put-enter',k,v,'transaction',transactionId);const out=await tx.put(k,v);note('put-settled',k,v,'transaction',transactionId);currentValues.set(k,v);currentWrites.push(k);return out;}});
+    const result=await fn({get:(...a)=>get(tx.get,tx,a,'transaction',transactionId,currentReads),list:tx.list.bind(tx),put:async(k,v)=>{note('put-enter',k,v,'transaction',transactionId);const out=await tx.put(k,v);note('put-settled',k,v,'transaction',transactionId);currentValues.set(k,v);currentWrites.push(k);return out;}});
     return result;
    }]).then(value=>{writes=currentWrites;for(const key of writes){const raw=currentValues.get(key);if(target(key))committedValues.set(key,raw);note('transaction-settled',key,raw,'transaction',transactionId);}if(currentWrites.length===0)for(const [key,raw]of currentReads)note('readback-transaction-settled',key,raw,'transaction',transactionId);return value;});
    return actual.then(async value=>{
