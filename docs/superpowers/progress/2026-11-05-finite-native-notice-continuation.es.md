@@ -165,3 +165,10 @@ Writer fresco first_connection_task3_impl, gpt-6.1-sol high según SDD, SOLO sie
 Preflight cerrado: NUEVA lineage del código final desdeinitialCLOSED; adopciónSYN de M config sólo desde actualregistry despuésdePOSTcompleto, ningún remountQA en callbackprovider/phaseCurrent/ACKseed. Task3 debe producir receipt real yactualQAcode→Mtoken→MCP/D04→noticeGET/POST/Link; reader/fallos parciales/retención se califican causalmente. M1sdkReadCurrentcausadesconocida, M2warnings, M3segundointentodurantecancel yM4perfilambiguo siguen como ledger; no declararlosresueltos por GREEN ajeno.
 
 operationalReadiness=false; completePackage=false; PCoff=false. Fuente3Novvencida. Sin currentremotechecks nuevos, código aceptado noacredita runtime/CodexCloud/PCoff/Max. No intervención humana requerida para Task3SYN cloud. No OAuth/permisos/tokens/OTP/realCloudflare/main/merge ni nuevoenvío soporte. Continuar unidad hasta reporte/revisión o intervención indispensable, conservando checkpoints siGabriel pidecierre.
+
+
+### Task3 — RED causal comprobado por Root, 6nov11:47UTC
+
+Actions42212217715/head1945fdccae8fa4f1a0a27f3d780d8be3c71c7b08, job127873373491: initial material_recorded→mount-ready reales, principal “T3 same initial bytes produce connection and downstream” falla503!=200 en primera choice pendiente, 8667.947ms. Root leyó logprimario22935chars; nofallo decompilación/fixture ynoGREENfabricado. Nodeinformó2tests/1pass/1fail, peroelpass fuearchivoT4sinmatchT3: seexcluye comoevidenciafuncional. Writerreporta artifact13500215579/digestca41b9550902e9e40f88ae2bd6cae35bac34bcf841b1eb0e74ccb50798bf99fe/7d; RootnoinspeccionóZIPtodavía. Qualifier inspeccionadoRoot:1job15min/contentsread/persistfalse/nosecrets/pipefail/7d.
+
+Writer continúa implementación ymedición original, NOreportefinal/aceptación; RootnoescribeSource. No repetirRED paraobtenerverde ni considerarparcialconnectioncomotareaTask3completa: faltandownstream/matriz/GREEN/review. RestoAutorizaciónBaseyreadinesssin cambios.
