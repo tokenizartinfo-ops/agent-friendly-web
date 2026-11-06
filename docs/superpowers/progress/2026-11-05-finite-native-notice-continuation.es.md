@@ -297,3 +297,18 @@ Task3: minor(deferred) — viabilidad operativa API/latencia/volumen, ownerRootp
 ⚠️ Helperinternals/transactionretry noverificablesdesde diff: mantieneevidenciablobexacta y excepciónsemántica, no nuevas suites.
 
 Mainactual sigue0c9c475b3ebaa970fc11d628b40e50a90cceb727. Fullbranch contra mergebasef4ff51596be918e9d556f6765aeb0441133ff52f tiene578paths (277docs); reviewTask3 noesreviewfinaldemerge. SourcefixBase=df20c0f8..., readiness/completePackage/PCoff=false.
+
+
+### Task3 fix1: primer focal fallido y corrección de observación
+
+Fix code efb92819f3cb7d977ac06c440bca27f1d927d920/tree8dd17328e892f34528c7bb5c4ea10715df78dbda: Root leyó tree completo, sólo F1 yT3 difieren de df20; producto yF2 idénticos. F1=86dffd281c04d4404c9c257c588e7be1afa24a2c,T3=0f6c87ddce517098bf4a16191e64cc381157802e.
+
+Focal42247056350/job127991910162(trigger274a14f4,checkoutefb),1executed/0PASS/1FAIL/0cancel-skip/exit1/36819ms. Falló assertNativePublicationOrder: upload SEND exact storage readback after sync before next boundary. Lint2exit0/3000ms; M1988061B/c49303... exacto, QAa040c0dae252181c99a9145e1b2281907634bc356e735c65e44cc1d3eb46a08a. La conexión ya respondió200 antes del assert. No PASS ni TDDREDhistórico de producto, no fallo de proveedor inferido.
+
+Causa verificada Root+writer: P10record589–592 hace sync y j.read; journal protegido6e3de33d read116 llama transact(...,false), líneas26–35 y40–47 leen tx.get, NO storage.get. El predicado nuevo filtraba scope=storage. Además el artefacto del trace estaba después del assert: esa ejecución fallida no conservó dicho trace; no reclamarlo como evidencia archivada.
+
+Ruling: observar la normal fulfillment de la transacción nativa de sólo lectura, con ID de transacción y key/hash de los valores realmente leídos. Exigir ese settlement después de sync y antes de invocación/siguienteefecto; un tx.get aún dentro de transacción pendiente no basta. Se preservan lectura directa existente, identidad/rechazo de operaciones reales y relojes; sinlecturasextra/producto. Guardar sólo trace saneado/hash antes delassert. Costo si es erróneo: un marcador prematuro podría declarar completo un readback pendiente; el predicado debe ligarse a la Promesa nativa realmente cumplida, no al inicio del callback ni a un contador. Autorizar un nuevo focal1+lint2 tras corregircongelar/readback; nada de repetir167ni relajarassert.
+
+Fixround1/5 sigue abierto,0addressed/1open hasta prueba y re-review. Source continúa bajo writeroriginal.
+
+Chequeo manual soporte6nov: una búsqueda Gmail acotada al casoOpenAI18196140 devolvió sólo mensaje1a1ad14237370ea0 ya registrado5nov; sinrespuesta posterior, sinreleerhilo ni enviarcorreos. Estadoactualproxynativo sigue noensayado, no inferirreparación/fallovigente.
