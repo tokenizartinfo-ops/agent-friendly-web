@@ -60,11 +60,13 @@ export async function initialEntryHarness(mode='normal'){
  for(const p of ['mcp-qa-finite-historical-source.mjs','mcp-qa-finite-bootstrap-native.mjs']){
   const s=await readFile('lib/'+p,'utf8');assert.equal(s.split(approvalDecl).length,2);sources.set(p,s.replace(approvalDecl,'CEILING='+approval));
  }
- if(mode.startsWith('phase-context-sdk-observed')){
-  // Test-only error-location observation; no return/guard/authority replacement.
-  const instrument=source=>source.replaceAll('catch{return pending();}',"catch(error){console.info('D02 initial failure frames',String(error?.stack??'').split('\\n').slice(1,5).join(' | '));if(/^Finite historical source unavailable:(input|custody|http|metadata|historical_slots|legacy|history|coherence|deadline)$/.test(error?.message??''))console.info('D02 historical gate',error.message);return pending();}");
+ if(firstConnection||mode.startsWith('phase-context-sdk-observed')){
+  // Test-only original error frames; no return/guard/authority replacement.
+  const frames=String.raw`console.info('T2 original upstream error',JSON.stringify({name:error?.name,status:error?.status??null,frames:String(error?.stack??'').split('\n').filter(line=>/^\s+at\s/.test(line)).slice(0,5)}));`;
+  const instrument=source=>source.replaceAll('catch{return pending();}',()=>firstConnection?'catch(error){'+frames+'return pending();}':"catch(error){console.info('D02 initial failure frames',String(error?.stack??'').split('\\n').slice(1,5).join(' | '));if(/^Finite historical source unavailable:(input|custody|http|metadata|historical_slots|legacy|history|coherence|deadline)$/.test(error?.message??''))console.info('D02 historical gate',error.message);return pending();}").replaceAll('catch{fail();}',()=>firstConnection?'catch(error){'+frames+'fail();}':'catch{fail();}');
   product=instrument(product);
   sources.set('mcp-qa-finite-initial-entry.mjs',instrument(sources.get('mcp-qa-finite-initial-entry.mjs')));
+  if(firstConnection)sources.set('mcp-qa-finite-bootstrap-native.mjs',instrument(sources.get('mcp-qa-finite-bootstrap-native.mjs')));
  }
  const plugin={name:'explicit-SYN-external-data-not-whole-facts',setup(b){
   if(mode==='phase-context-sdk-token-notice-get')b.onLoad({filter:/mcp-qa-finite-owner-phase-context\.mjs$/},async args=>({contents:instrumentFiniteNoticeGet(instrumentFiniteOwnerIo(await readFile(args.path,'utf8'))),loader:'js'}));
@@ -219,6 +221,7 @@ export async function initialEntryHarness(mode='normal'){
    }
    value={success:true,errors:[],messages:[],result};
   }
+  if(firstConnection){const encoded=J(value);f.providerRegistry.responses??=[];f.providerRegistry.responses.push({method:req.method,path:new URL(req.url).pathname,status:200,bytes:Buffer.byteLength(encoded),sha256:sha(encoded)});}
   return Response.json(value,{headers:{date:new Date(Date.now()+f.nowOffset).toUTCString(),'x-ratelimit-remaining':'60'}});
  }};
  if(mode.startsWith('phase-context-sdk')){finalOptions=await finiteOwnerSdkWorkers(finalOptions,{observed:mode.startsWith('phase-context-sdk-observed'),token:mode.includes('-token'),io:mode==='phase-context-sdk-io',noticeGet:mode==='phase-context-sdk-token-notice-get'});f.sdkProfiles=Object.fromEntries(finalOptions.workers.map(worker=>[worker.name,{compatibilityDate:worker.compatibilityDate,compatibilityFlags:worker.compatibilityFlags}]));console.info('D02 actual Miniflare SDK profiles',JSON.stringify(f.sdkProfiles));}
