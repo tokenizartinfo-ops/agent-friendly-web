@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {mkdir,readFile,writeFile,readdir,cp,rm} from 'node:fs/promises';
+import {mkdir,readFile,writeFile,readdir,cp} from 'node:fs/promises';
 import {resolve,join,relative} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
