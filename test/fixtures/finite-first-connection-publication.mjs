@@ -99,7 +99,7 @@ import {buildMcpNodeProgram} from '../../scripts/build-mcp-node-program.mjs';
 import {finiteWranglerProfileTemplate} from '../../lib/mcp-qa-finite-profile.mjs';
 const digest=x=>createHash('sha256').update(x).digest('hex');
 const origin='https://delegated-canary.agentfriendlyweb.dev';
-export async function compileFirstConnectionCandidate(revision,tree){
+export async function compileFirstConnectionCandidate(revision,tree,{negativeProfile=false}={}){
  const node=await buildMcpNodeProgram(),define={'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify(revision),'globalThis.__AFW_NODE_SOURCE_REVISION__':JSON.stringify(revision),'globalThis.__AFW_NODE_PROGRAM__':JSON.stringify(node.program),'globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__':JSON.stringify('finite_trial_event')};
  const options={bundle:true,write:false,metafile:true,platform:'neutral',mainFields:['module','main'],format:'esm',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',define};
  const m=await build({...options,entryPoints:['worker/mcp-own/finite.mjs']});
@@ -130,8 +130,9 @@ export async function compileFirstConnectionCandidate(revision,tree){
   return finite.fetch(request,prepared,ctx);
  }};
  `;
- const spy=await build({...options,stdin:{contents:source,resolveDir:process.cwd()},plugins:[{name:'negative-only-ordinary-spy',setup(b){b.onLoad({filter:/worker\/mcp-own\/index\.mjs$/},async args=>{const text=await readFile(args.path,'utf8'),needle='const worker={fetch(request,env,ctx){';assert.equal(text.split(needle).length,2);return {contents:text.replace(needle,needle+'globalThis.__firstConnectionOrdinary++;'),loader:'js'};});}}]});
- return {script:m.outputFiles[0].text,bytes,program:node.program,resident,metafile:m.metafile,spyScript:spy.outputFiles[0].text,spyHash:digest(spy.outputFiles[0].contents)};
+ const spyOptions={...options,stdin:{contents:source,resolveDir:process.cwd()},plugins:[{name:'negative-only-ordinary-spy',setup(b){b.onLoad({filter:/worker\/mcp-own\/index\.mjs$/},async args=>{const text=await readFile(args.path,'utf8'),needle='const worker={fetch(request,env,ctx){';assert.equal(text.split(needle).length,2);return {contents:text.replace(needle,needle+'globalThis.__firstConnectionOrdinary++;'),loader:'js'};});}}]};
+ const spy=await build(spyOptions),wrong=negativeProfile?await build({...spyOptions,define:{...define,'globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__':JSON.stringify('ordinary')}}):null;
+ return {script:m.outputFiles[0].text,bytes,program:node.program,resident,metafile:m.metafile,spyScript:spy.outputFiles[0].text,spyHash:digest(spy.outputFiles[0].contents),wrongProfileScript:wrong?.outputFiles[0].text??null,wrongProfileHash:wrong?digest(wrong.outputFiles[0].contents):null};
 }
 export function extendFirstConnectionPublication(entry){
  return "import {createFinitePolicyEffectJournal as firstJournal} from './lib/mcp-qa-finite-policy-journal.mjs';\nimport {hashFinitePreparationRecord as firstPrepHash,encodeFinitePreparationRecord as firstPrepEncode,decodeFinitePreparationRecord as firstPrepDecode,hashFinitePolicyEffectIdentity as firstIdentityHash} from './lib/mcp-qa-finite-preparation-records.mjs';\nimport {readPrivateQaFiniteOwnerContext as firstConnectionContext} from './lib/mcp-qa-finite-owner-phase-context.mjs';\n"+entry.replace(' export class Initial extends FiniteClosure{',String.raw` export class Initial extends FiniteClosure{
@@ -157,20 +158,21 @@ export function extendFirstConnectionPublication(entry){
   }else{
    if(variant==='context')up.contextHash=act.contextHash='f'.repeat(64);
    if(variant==='baseline'){up.baselineVersionId=act.baselineVersionId=receipt.baselineVersionId=foreign;up.baselineDeploymentId=act.baselineDeploymentId=receipt.baselineDeploymentId=foreign;}
+   if(variant==='preconnection')receipt.preconnectionId='f'.repeat(64);
    if(variant==='module')receipt.moduleHash='f'.repeat(64);
    if(variant==='configuration')receipt.configurationHash='f'.repeat(64);
    if(variant==='version')uploadAck.resourceId=receipt.versionId=foreign;
    if(variant==='deployment')activationAck.resourceId=receipt.deploymentId=foreign;
    if(variant==='receipt-links')receipt.baselineDeploymentId=foreign;
    if(variant==='receipt-time')receipt.completedAt=act.deadline;
-   if(!['context','baseline','module','configuration','version','deployment','receipt-links','receipt-time','writer-head'].includes(variant))throw Error('SYN unknown completed variant');
+   if(!['context','baseline','preconnection','module','configuration','version','deployment','receipt-links','receipt-time','writer-head'].includes(variant))throw Error('SYN unknown completed variant');
    uploadAck.sendHash=firstPrepHash('ConnectionSend',up);activationAck.sendHash=firstPrepHash('ConnectionSend',act);
    for(const [key,kind,value]of [[u[0],'ConnectionSend',up],[a[0],'ConnectionSend',act],[u[0].slice(0,-4)+'ack','ConnectionAck',uploadAck],[a[0].slice(0,-4)+'ack','ConnectionAck',activationAck],[r[0],'ConnectionReceipt',receipt]])await change(key,kind,value);
    const key='afw.finite-policy-effect.v1:writer-head';modified.push([key,await s.get(key)]);const h=variant==='writer-head'?up:act,identity={kind:'connection',preconnectionId:h.preconnectionId,sourceRevision:h.sourceRevision,stage:h.stage,effect:h.effect};await s.put(key,JSON.stringify({identityHash:firstIdentityHash(identity),sendHash:firstPrepHash('ConnectionSend',h)}));
   }
   this.firstCorruptedOriginal=modified;await s.sync();
   const root=createFiniteOwnerRequestLease(new Request('https://delegated-canary.agentfriendlyweb.dev/fixture/journal-codec'));
-  try{const identity=kind=>({kind:'connection',preconnectionId:receipt.preconnectionId,sourceRevision:receipt.sourceRevision,stage:'connection',effect:kind}),upload=await firstJournal({storage:s,identity:identity('upload'),now:Date.now}).read(root.lease),activation=await firstJournal({storage:s,identity:identity('activation'),now:Date.now}).read(root.lease);return {codecRoundtrip:true,journalValid:upload.state==='acknowledged'&&activation.state==='installed'};}finally{root.finish();}
+  try{const identity=kind=>({kind:'connection',preconnectionId:up.preconnectionId,sourceRevision:up.sourceRevision,stage:'connection',effect:kind}),upload=await firstJournal({storage:s,identity:identity('upload'),now:Date.now}).read(root.lease),activation=await firstJournal({storage:s,identity:identity('activation'),now:Date.now}).read(root.lease);return {codecRoundtrip:true,journalValid:upload.state==='acknowledged'&&activation.state==='installed'};}finally{root.finish();}
  }
 
 
@@ -222,8 +224,8 @@ export function extendFirstConnectionPublication(entry){
   const held=(name,value)=>{const deadline=owner.firstBoundary.deadline;state[name+'Held']=true;return new Promise((resolve,reject)=>{const tick=()=>{const remaining=deadline-Date.now();if(!Number.isSafeInteger(remaining)||remaining<=0){state[name+'Settled']=true;reject(Error('SYN original request deadline'));return;}if(owner.firstRelease[name]===true){state[name+'Settled']=true;resolve(value);return;}setTimeout(tick,Math.min(10,remaining));};tick();});};
   const get=async(method,holder,args)=>{
    state.counts.get++;const value=await Reflect.apply(method,holder,args),key=args[0];note('get-settled',key);
-   if(mode==='clock-backward'&&!state.backward){shift-=100;state.backward=true;}
-   if(mode==='source-holder-drift'&&!state.holderChanged){env.AFW_QA_VERSION={id:originalMetadata.id};state.holderChanged=true;}
+   if(mode==='clock-backward'&&owner.firstBoundary&&!state.backward){shift-=100;state.backward=true;}
+   if(mode==='source-holder-drift'&&owner.firstBoundary&&!state.holderChanged){env.AFW_QA_VERSION={id:originalMetadata.id};state.holderChanged=true;}
    if(mode==='access-expiry-held'&&state.jwkFetched&&!state.workHeld)return held('work',value);
    if(mode==='receipt-readback-lost'&&key.endsWith(':receipt')&&key.startsWith('afw.finite-policy-effect.v1:')&&value!==undefined)throw Error('SYN receipt readback unknown');
    if(mode==='final-pair-owner-drift'&&receiptRead&&key.endsWith(':capsule'))await env.RELEASE_DB.prepare("UPDATE site_projects SET user_id='SYN-negative-owner'").run();
@@ -286,7 +288,7 @@ export function extendFirstConnectionPublication(entry){
 export function firstConnectionWorkers(qa,candidate){
  const p=finiteWranglerProfileTemplate('canaryLive'),bindingValues={...p.vars};
  const options={modules:true,outboundService:async()=>new Response(null,{status:503}),compatibilityDate:p.compatibility_date,compatibilityFlags:p.compatibility_flags,durableObjects:{AFW_FINITE_TRIAL_CONTROL:{className:'Initial',scriptName:'qa-first-connection',useSQLite:true,uniqueKey:'initial-c2a'},AFW_DOSSIER_EVENTS_NODE:{className:'AfwOwnEventNode',useSQLite:true,uniqueKey:'first-connection-node'}},d1Databases:{DB:'initial-db'},kvNamespaces:{OAUTH_KV:'first-connection-oauth'},ratelimits:{DELEGATED_RATE_LIMITER:{namespace_id:'99126',simple:{limit:1000,period:60}}},bindings:{...bindingValues,AFW_FINITE_TRIAL_VERSION:{id:'55555555-5555-4555-8555-555555555555'}}};
- return {workers:[{...options,name:'canary-first-connection',script:candidate.script},qa,{...options,name:'negative-first-connection',script:candidate.spyScript}]};
+ return {workers:[{...options,name:'canary-first-connection',script:candidate.script},qa,{...options,name:'negative-first-connection',script:candidate.spyScript},...(candidate.wrongProfileScript?[{...options,name:'wrong-profile-first-connection',script:candidate.wrongProfileScript}]:[])]};
 }
 export async function approveFirstConnection(f,{token=null}={}){
  assert.equal(f.mode,'first-connection-publication');
