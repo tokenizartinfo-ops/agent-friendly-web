@@ -1,6 +1,6 @@
 # Task3 native first connection — qualification report
 
-IN PROGRESS at 2026-11-06 14:09 UTC. Final exact same-code bounded qualification is frozen below; no completion/review claim. PROJECT=AFW; repository tokenizartinfo-ops/agent-friendly-web; SOURCE branch feat/finite-native-cleanup-20261101. Cloud connector/Actions only, no local clone/build/tests/dependencies. BASE ffe25a1e77a1d93d5c03018ada36355b19c91564 / tree43f53af19e427eade3ab6d4f90ac91ef1380f627. Final code checkpoint 31ede7d2d0a7ee90828042c8cad17a30a6eaf60d / tree49ef7824b8586000f16db0360c8a8adaadd186ae; qualifier absent at this checkpoint. Seven code blobs below are the frozen lineage inputs. Documentation and temporary qualifier commits do not change them.
+IN PROGRESS at 2026-11-06 14:44 UTC. Final exact same-code bounded qualification is frozen below; no completion/review claim. PROJECT=AFW; repository tokenizartinfo-ops/agent-friendly-web; SOURCE branch feat/finite-native-cleanup-20261101. Cloud connector/Actions only, no local clone/build/tests/dependencies. BASE ffe25a1e77a1d93d5c03018ada36355b19c91564 / tree43f53af19e427eade3ab6d4f90ac91ef1380f627. Final code checkpoint b6a81590276503926e7fe10564add26150fc1f5f / treec81007b46849a3a9d2a5673a7912b32d62493f4d; qualifier absent at this checkpoint. Seven code blobs below are the frozen lineage inputs. Documentation and temporary qualifier commits do not change them.
 
 ## Outcome and exact implementation
 
@@ -24,15 +24,31 @@ After connection POST actual work AND response settle, harness adopts actual reg
 
 Process deviation: most adverse cases were added after initial implementation; do not describe that chronology as historical TDD. Genuine principal/holder REDs above and final same-code adverse results are the evidence. Earlier protocol logger duplicate-boundary JSONparse and ticket action-with-null-connectionRef were fixture defects, repaired to reach real validators with valid inputs, not product acceptance.
 
+## Qualification revision — observation scope, not product clock
+
+First complete gate run42232085255/headbbb09fca038c3ca09e8f02f07df558378b3fd843 FAILED globally: Ajob12794023733124/24PASS in840s; Cjob127940236986118/118PASS plus both expected-fail controls/lint in507s; Bjob12794023753125executed/23PASS/2FAIL,0cancel/skip in866s. All under15min, but NOT global acceptance. Bactivation-held/receipt-transaction-held failed because Node waitFirstState's30s observation started BEFORE signed GET, then incorrectly covered the distinct POST too. Example GET14:18:33.54→14:18:44.48(10.94s), observation teardown14:19:03.53 only19.05s into POST whose own original root still ran until~14:19:14.48. No child-clock rejection logged. The held target had not yet been observed; those failures did not test retention.
+
+Only Node/test observations changed: timestamp actual POST dispatch as DATA, retain independent bounded GET/no-POST/failed-GET observation, then observe actual POST within its own existing30s window. No product grace/root/child/clock/check/retention change. Added sanitized state/position/frames on absent target. Raw replacement string accidentally interpreted dollar-apostrophe in qualifier: run42235027798/headf7949f035caa729478eb9694195c22229af47a2d had0jobs/0tests; no RED/GREEN credit. Corrected with replacement FUNCTION at534c4054e0bf350ba5f944097e53e6d0f04a65bd.
+
+Focused actual observation fix: run42235354353/head534c4054/job1279513952072/2PASS. Explicit native live-entry facts then run42235796244/head4ddc7db7/job1279529300612/2PASS: activation-held POST entered19672ms after original start, before30000ms deadline; receipt-held20436ms before30000ms deadline. Both genuinely reached actual late target and passed distinct LIVE competing-root refusal + actual retained settlement,46.78/46.27s total fixture durations across separate original requests.
+
+Cancellation is separate: original upload fetch admission is recorded before actual native invocation; held cancel start/settlement may occur after logical failure/abort/deadline and is never clipped. upload-read-held records original live read and later real read→cancel→settled; no later cleanup timestamp is required to be before an expired deadline. Physical drain is not inferred. Passive facts do not become product permission.
+
+Root approved measured repartition: move principal64.16s A→C and both late-held cases B→C. Revised A23/B23/C14 native60; C retains scoped107 positive,2controls,lint. Measured first jobs A840/B866/C507 plus latest focused boundary costs yields conservative new estimates776/783/665s including setup, margins124/117/235s; no fit claim until terminal primary logs. Existing product blobsP8/P9/P10 unchanged; only F1/T3 observation fixtures changed. New final principal must start its own lineage under revised exact code. No writes during revised qualification gate.
+
+First FAILED gate artifact metadata retained, not promoted:
+- task3-C-bbb09fca038c3ca09e8f02f07df558378b3fd843: ID13510917143, ZIP15749703B, sha256:3afcf15ea83b6bfec65754bb9c8344dfcfac2ea9cb751ce1a18c921021095940, expires2026-11-13T14:22:27Z
+- task3-B-bbb09fca038c3ca09e8f02f07df558378b3fd843: ID13510413505, ZIP30193009B, sha256:0f44d91c4a7d068bad810f6aa356b88a340caf0d2ec2bfaa0f6d8f636f263c78, expires2026-11-13T14:28:24Z
+- task3-A-bbb09fca038c3ca09e8f02f07df558378b3fd843: ID13509388893, ZIP28989241B, sha256:3f1f77d549da6b8b2324bfe0b938781df66b2fb168a7e214db56e801fe4b32f9, expires2026-11-13T14:27:58Z
+
 ## Exact frozen qualification and expected costs
 
 Max EXACTLY3 independent jobs, timeout15min each, Node22, npmci --ignore-scripts --no-audit --no-fund, contents:read, checkout persist-credentials:false, no secrets. Each Node test invocation emits spec AND TAP in one execution. Runner checks expected/executed/PASS/FAIL/CANCEL/SKIP/TODO, top-level names/subtest counts, actual process exit/signal; no tee masking. Native exact disjoint union60, no selected0/file pseudo-PASS. Full positive count167 =60native +34context +4GET +10POST +2SDK +1Link +46pure +5transport +3setup +2compiler. Two isolated mutants each1expectedFAIL; lint seven paths max-warnings0. Fine-grained t.test assertions are separately counted by TAP; variant loops are logged as variants, not falsely counted as Node subtests.
 
 
-### Job A: 24 native cases, estimated 847s including30s setup, margin53s
+### Job A: 23 native cases, estimated 776s including setup, margin124s
 
 - T2 closed mounted conduits cannot authorize business
-- T3 same initial bytes produce connection and downstream
 - T3 enrollment unknown cannot upload: enrollment-transaction-lost
 - T3 upload uncertainty cannot activate: upload-lost
 - T3 upload uncertainty cannot activate: upload-oversize
@@ -56,7 +72,7 @@ Max EXACTLY3 independent jobs, timeout15min each, Node22, npmci --ignore-scripts
 - T3 actual publication readback denies next effect: activation-pointer
 - T3 actual publication readback denies next effect: activation-config
 
-### Job B: 25 native cases, estimated 850s including30s setup, margin50s
+### Job B: 23 native cases, estimated 783s including setup, margin117s
 
 - T2 finite dispatch never falls through ordinary
 - T3 upload uncertainty cannot activate: upload-send-transaction-lost
@@ -65,9 +81,7 @@ Max EXACTLY3 independent jobs, timeout15min each, Node22, npmci --ignore-scripts
 - T3 final readback cannot turn uncertainty into success: receipt-sync-lost
 - T3 final readback cannot turn uncertainty into success: final-pair-owner-drift
 - T3 retained work blocks a different live root: upload-held
-- T3 retained work blocks a different live root: activation-held
 - T3 retained work blocks a different live root: enrollment-sync-held
-- T3 retained work blocks a different live root: receipt-transaction-held
 - T3 resealed foreign publication is not own completion: upload ack
 - T3 resealed foreign publication is not own completion: activation ack
 - T3 identity and choice cannot mint admission
@@ -84,10 +98,13 @@ Max EXACTLY3 independent jobs, timeout15min each, Node22, npmci --ignore-scripts
 - T3 actual publication readback denies next effect: activation-version
 - T3 actual publication readback denies next effect: activation-secret
 
-### Job C: 11 native cases, estimated 852s including30s setup, margin48s
+### Job C: 14 native cases, estimated 665s including setup, margin235s
 
+- T3 same initial bytes produce connection and downstream
 - T3 enrollment unknown cannot upload: enrollment-sync-lost
 - T3 upload uncertainty cannot activate: upload-malformed
+- T3 retained work blocks a different live root: activation-held
+- T3 retained work blocks a different live root: receipt-transaction-held
 - T3 source and rollback must be recoverable
 - T3 original deadline fences each native boundary: shorter signed Access before TicketUse
 - T3 original deadline and holder references remain original: source-holder-drift
@@ -98,7 +115,7 @@ Max EXACTLY3 independent jobs, timeout15min each, Node22, npmci --ignore-scripts
 - T3 original body retains real read and cancellation: read
 - T3 actual publication readback denies next effect: upload-module
 
-JobC additionally runs exact scoped manifests (context34,GET4,POST10,SDK2,Link1,pure46,transport5,setup3,compiler2), two negative controls and lint. Measured old context27=131.4s,newT4seven26.5s,GET58.9s,POST142.8s,SDK26.1s,Link19.8s; accepted/compiler/lint estimate50s, mutants76s. Measured fresh native names total~1933s, with matching-case latest duration and conservative unpublished forecasts. Bounded estimates are NOT fit claims; any job beyond15min is incomplete and requires factual regrouping, never omitted coverage/check/clock relaxation.
+JobC additionally executes exact scoped manifests context34/GET4/POST10/SDK2/Link1/pure46/transport5/setup3/compiler2, two negative controls and lint7. Exact actual first-gate per-command counts/durations are retained in its artifacts; revised final same-code results remain PENDING. Node runner also prints only archived native-syn build metadata (purpose/mutation/testRevision/M/QA/compressed hashes/bytes) from content-addressed artifact directories inside these SAME3jobs, no extra job or body/token output.
 
 ## Per-variant evidence map
 
@@ -130,7 +147,7 @@ Native source case removes original backup/receipt/chunk and tampers chunk: zero
 
 ### Enrollment
 
-Native lost enrollment transaction/sync preserve committed enrollment and no upload; factual public closed_ui but genuinely fresh signed choice denies. Native retained transaction/sync cases preserve scope. Current pure exact T1 chronology/native legacy pending, double-enrollment/ack-first/double-ack/unknown-enrollment/unknown-ack/holder-drift/deadline. New P10 unconditionally awaits fixed prepare helper in ONE child with exact ctx/env/id/admissionHash/ownerSource/baseline/defensive resident bytes; rechecks before/after prepare, recordEnrollment, recordAck; updates only own observed records. Protected helper transaction/anchor/alarm/foreign-effect details reused separately with exact accepted evidence pending Root reference.
+Native lost enrollment transaction/sync preserve committed enrollment and no upload; factual public closed_ui but genuinely fresh signed choice denies. Native retained transaction/sync cases preserve scope. Current pure exact T1 chronology/native legacy pending, double-enrollment/ack-first/double-ack/unknown-enrollment/unknown-ack/holder-drift/deadline. New P10 unconditionally awaits fixed prepare helper in ONE child with exact ctx/env/id/admissionHash/ownerSource/baseline/defensive resident bytes; rechecks before/after prepare, recordEnrollment, recordAck; updates only own observed records. Protected helper transaction/anchor/alarm/foreign-effect details are reused via exact accepted evidence in the callback verification exception below; callback retry itself is semantic/compositional, not dynamically injected.
 
 ### Admission
 
@@ -172,6 +189,19 @@ Principal no seeds: actual upstream initial→signed GET/form/cookie→POST→na
 
 Current full pure46 includes exact compiler graph assertions initial M contains fixed dispatch, M excludes QA candidate decoder/bootstrap, QAdescriptor residency; fixed engine wire and one-shot helper chronology. Transport5 +setup3 preserve old pending and actual two-effect ACK behavior; compiler2 source class/hash/missing factory; lint7paths with max-warnings0. No standard/full SDK corpus, no fourth hidden job.
 
+### Explicit callback-retry verification exception (Root ruling)
+
+No literal native transaction callback-retry injection was found in this Task3 gate or the historical accepted suites. This row has SEMANTIC/COMPOSITIONAL proof, not dynamic PASS. At tested HEAD bbb09fca038c3ca09e8f02f07df558378b3fd843, unchanged helper blob6eb0f08d581faef8ee12ce4f9e0d62cebdfb57f9 [append lines53–56](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/bbb09fca038c3ca09e8f02f07df558378b3fd843/lib/mcp-qa-finite-preparation-enrollment-writer.mjs#L53) initializes private entered once OUTSIDE the native transaction callback; checks and sets it synchronously before its first await. A second callback calls fail(), setting failed before throwing (lines22–23), and every subsequent check is absorbing (line32). Transaction result must be exactly true, then original sync/readback/alarm (lines70–72); recordEnrollment/recordAck catch set failed (90/99). Native APIs are assumed to settle the transaction Promise only after their callbacks and to propagate/represent rollback/failure according to their documented native contract; this proof does not independently inject native retry/rollback behavior.
+
+P10 blob e482ad1617adc001c3a32c94e71eeb41d27f3d1d [598–602](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/bbb09fca038c3ca09e8f02f07df558378b3fd843/lib/mcp-qa-finite-owner-phase-context.mjs#L598) unconditionally awaits exact helper preparation→own enrollment→full recheck→own ACK→full recheck in one original child; only afterwards may upload SEND issue/sync/readback/recheck607–609 and actual native Promise610 begin. No caught helper failure can reach those effects. This is the producer-side composition.
+
+Reused dynamic integration evidence: [accepted enrollment receipt](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/ffe25a1e77a1d93d5c03018ada36355b19c91564/docs/superpowers/reports/2026-11-04-preparation-cleanup-enrollment.md), reportblob04a7c661f8fd91263e52060020cd0deab97b3c24/review8143c410374e51dc55f321a4714f7674cfd838ec. Behavior45c0b08f530fdad73e5f8973b3878f279add9a96/run41903117759/job12683052049436PASS;98c02877f7f6f9df956f03a6d3f017e9d60ec4a0/run41900952944/job12682289781032new+99affectedPASS. Unchanged testblobd7dc91d1cf899e51d8f6e83ddd1bce23587d23d7 names: native [throw-enrollment,throw-ack,sync-reject,readback-lost,alarm-lost,ack-readback-lost,ack-sync-reject,ack-alarm-lost] is pending,immutable and never an owner forward; actual [hold-enrollment,hold-ack,sync-hold,readback-hold] after native commit stays in original scope until external release; factual [orphan,hash,unknown,head,policy,permission,foreign] obligation refuses restoration and all forwards; genuine original owner decision refuses [source-drift,holder-drift,qa-drift,clock-backward,clock-forward,clone-admission,wrong-stage] without any cleanup DATA or forward. These test the preserved native-failure/exclusion integration, not callback retry itself.
+
+[Task1 extraction acceptance](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/ffe25a1e77a1d93d5c03018ada36355b19c91564/docs/superpowers/reviews/2026-11-05-finite-native-first-connection-publication-task1.es.md) reviewblob5f1f77b24c1a8ac828f2345fe24a4a5d099f0dd5/report9f71c6acd260a36774fee7b7f05902a3cdc524dd: unchanged P2 exact; run42131020681/head22ce84052756936d612b046a84b6500f5773937d/job12760734651527PASS. Exact T1 native old/component append→transaction settled→sync→get→alarm→cleanup→Ack chronology and one-shot method tests run again in final current pure suite. Current native enrollment lost transaction/sync + held work independently cover new producer no-upload order.
+
+Cost if this exception is wrong: automatic native callback/rollback behavior has not been directly injected; fresh reviewer must see and may challenge this verification exception. It is NOT silently counted as a61st native case or dynamic coverage. Root explicitly accepted this level while keeping frozen60 and3jobs; no Source edit/job/check/clock change was made to manufacture a PASS.
+
+
 ## Clarifications, metrics and operational limits
 
 Finite extra/duplicate protocol headers preserve accepted P6 exact x-afw-finite-* five and P7 forwarding whitelist; no reject-every-HTTP-header policy. Cost if this interpretation were wrong: stronger transport policy requires explicit native automatic-header design, not a silent new P8 wire contract. Access menor uses valid-on-entry signed identity crossing expiry before TicketUse; valid shorter JWT is allowed and narrows ceilings. Expired-on-entry alone is separate. If expiry occurs after TicketUse preserve durable facts and deny next effect; no minimum lifetime denial or reused consumed history as causal Access test. Cost of opposite interpretation would be denying valid shorter identities/refreshing permission, contrary to original min-ceiling contract.
@@ -193,8 +223,8 @@ BASE→final-code compare exactly7allowed code/test paths plus report/progress, 
 | lib/mcp-qa-finite-owner-native-receiver.mjs | e760b3579a38f1dbb73b177bb73b06d814eb881f |
 | lib/mcp-qa-finite-owner-preparation.mjs | 152e730f83af7ef063b6b1db89f8b0a779c2b60e |
 | lib/mcp-qa-finite-owner-phase-context.mjs | e482ad1617adc001c3a32c94e71eeb41d27f3d1d |
-| test/mcp-qa-finite-first-connection-publication-native.test.mjs | 925cec402b15e7fceef2331210020a114d29388d |
-| test/fixtures/finite-first-connection-publication.mjs | 4160151fa7c426f4b9fd7d83f38deb7d7e1a4b9f |
+| test/mcp-qa-finite-first-connection-publication-native.test.mjs | bc9f717d79e6e1ad60a40f358351093371331bee |
+| test/fixtures/finite-first-connection-publication.mjs | 2cda37157bc0d1c9622784c33aa3b0fd94dc0e48 |
 | test/fixtures/finite-initial-entry-world.mjs | 297b57846bbbe13bfc80ac52c5b033a382aef4b6 |
 | test/mcp-qa-finite-owner-phase-context-native.test.mjs | be1ff27807934797f371ea703cd9a2c6f7f3675a |
 
@@ -401,3 +431,33 @@ f9e166bd0809cd4164d06a6f0ef2a2cb4ab4001e → 36ba881471a1a6cca6db57862b831706100
 b67453120328c9a7a6c07e1306de8c67a261de3a → bf9268f135a3b988e1d6c458ea3088e9d83a54b8; tree 19035a2dbc0926b5f668d0ce385fe0e27937d117; .github/workflows/afw-first-connection-qualification.yml; blob 525378b2a53fb92211d8930efa52ef98d1eea3d6; ci: verify codec-valid ticket predicates and unchanged source-holder refusal
 
 bf9268f135a3b988e1d6c458ea3088e9d83a54b8 → 31ede7d2d0a7ee90828042c8cad17a30a6eaf60d; tree 49ef7824b8586000f16db0360c8a8adaadd186ae; .github/workflows/afw-first-connection-qualification.yml; blob ABSENT; ci: freeze final code before exact bounded qualification manifest
+
+31ede7d2d0a7ee90828042c8cad17a30a6eaf60d → 6a5a9e5f272619e96160cd0e3e8a5e686fb01b1f; tree e5eea4ef7f0bf4e4353ad4175c6a0c262331d331; docs/superpowers/reports/2026-11-06-finite-native-first-connection-publication-task3.md; blob 3123a98230018cfb85f2ba54297aa8ee6200388b; docs: freeze exact sixty-case native matrix and bounded qualification evidence
+
+6a5a9e5f272619e96160cd0e3e8a5e686fb01b1f → db9effbfc0acea4ef287113df15e25f68ae4f439; tree 1348b19395830000a5112ff658f654a3d6c090fd; docs/superpowers/progress/2026-11-05-finite-native-first-connection-publication.es.md; blob 80448d490bf23a11dbb4ff5925221e8632232160; docs: preserve Task3 exact final matrix before qualification
+
+db9effbfc0acea4ef287113df15e25f68ae4f439 → bbb09fca038c3ca09e8f02f07df558378b3fd843; tree df6af49fb23e4291540b312ea57ac6c96e23679f; .github/workflows/afw-first-connection-qualification.yml; blob aaec94c6f7b9e932e840d3bf662e2e105553eff4; ci: run frozen sixty-native-case three-job qualification and scoped regressions
+
+bbb09fca038c3ca09e8f02f07df558378b3fd843 → 09813e0ced14be940398e5aae3c6964377e00b72; tree 1348b19395830000a5112ff658f654a3d6c090fd; .github/workflows/afw-first-connection-qualification.yml; blob ABSENT; ci: preserve incomplete qualification before causal observation-scope correction
+
+09813e0ced14be940398e5aae3c6964377e00b72 → 18463127ae3efd772ed03a163c35590865dd3e2f; tree b610f6b80a19ff543a11dbab6f9ad8692108c273; test/fixtures/finite-first-connection-publication.mjs; blob 369d164b38ee658002726a1155929a2ac18b5cd2; test: timestamp actual connection POST observation without changing native clocks
+
+18463127ae3efd772ed03a163c35590865dd3e2f → 0092edfd2cdeb02398f467fda187a891129e54d5; tree ba43b2143bf8543961074237412724d4a8067ff0; test/mcp-qa-finite-first-connection-publication-native.test.mjs; blob 27334256258176816345265e26cd735099be9df7; test: align late native-boundary observation with its actual POST root
+
+0092edfd2cdeb02398f467fda187a891129e54d5 → f7949f035caa729478eb9694195c22229af47a2d; tree ffd876ed7656678e143c58614044472d9d450fd1; .github/workflows/afw-first-connection-qualification.yml; blob e0d70f2afc0056360d14f2fb916f2dce1dd09c3e; ci: diagnose actual late held boundaries within original POST observation
+
+f7949f035caa729478eb9694195c22229af47a2d → 534c4054e0bf350ba5f944097e53e6d0f04a65bd; tree 184792f2a92b83c0a32dd356a4c5fbb69f7d5567; .github/workflows/afw-first-connection-qualification.yml; blob 5ae4f604eeb637a587079a1c6fb0492f5acf256d; ci: correct literal regex quoting for two-boundary observation diagnostic
+
+534c4054e0bf350ba5f944097e53e6d0f04a65bd → d8d3276cf4122ec900e60dd3b2ef651b6f0b469e; tree ba43b2143bf8543961074237412724d4a8067ff0; .github/workflows/afw-first-connection-qualification.yml; blob ABSENT; ci: remove focused qualifier before explicit live-boundary observation proof
+
+d8d3276cf4122ec900e60dd3b2ef651b6f0b469e → bfcedc516a54da3674da983eff84581787e0655a; tree ec33d785810c368a5bda529332dc3dc3e1a66aaa; test/fixtures/finite-first-connection-publication.mjs; blob b3325a419b15fd92f99471d91702674c5f85de0b; test: preserve actual live native held-boundary entry facts
+
+bfcedc516a54da3674da983eff84581787e0655a → e5913781a81d4e3ec0fac01c018c18058091636a; tree d83ba47df207e8f57dff75fce5a8fec4ee9a167c; test/mcp-qa-finite-first-connection-publication-native.test.mjs; blob f86fa330d2eb9848804bec900191e60cf71b2956; test: require each held target to enter within its actual live request
+
+e5913781a81d4e3ec0fac01c018c18058091636a → 4ddc7db7bc68a124f77ad2a7d19218f21280b769; tree 0a3a9d26e74fd1182917e1e459611c1878401314; .github/workflows/afw-first-connection-qualification.yml; blob 5ae4f604eeb637a587079a1c6fb0492f5acf256d; ci: prove late held entries reached inside actual live POST boundary
+
+4ddc7db7bc68a124f77ad2a7d19218f21280b769 → ed051204d16a3930c7d798f4ddba0975d1eec5d4; tree d83ba47df207e8f57dff75fce5a8fec4ee9a167c; .github/workflows/afw-first-connection-qualification.yml; blob ABSENT; ci: remove qualifier before separating late cleanup observation facts
+
+ed051204d16a3930c7d798f4ddba0975d1eec5d4 → 3238165e15e52cac886ddb150fb517939538f3e3; tree 4b30daa0c22cf7ae6114b927cb676c4ec9826284; test/fixtures/finite-first-connection-publication.mjs; blob 2cda37157bc0d1c9622784c33aa3b0fd94dc0e48; test: distinguish live business IO admission from later retained cleanup
+
+3238165e15e52cac886ddb150fb517939538f3e3 → b6a81590276503926e7fe10564add26150fc1f5f; tree c81007b46849a3a9d2a5673a7912b32d62493f4d; test/mcp-qa-finite-first-connection-publication-native.test.mjs; blob bc9f717d79e6e1ad60a40f358351093371331bee; test: allow actual late cancellation while preserving live admission proof
