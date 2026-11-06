@@ -66,7 +66,23 @@ export async function initialEntryHarness(mode='normal'){
   const instrument=source=>source.replaceAll('catch{return pending();}',()=>firstConnection?'catch(error){'+frames+'return pending();}':"catch(error){console.info('D02 initial failure frames',String(error?.stack??'').split('\\n').slice(1,5).join(' | '));if(/^Finite historical source unavailable:(input|custody|http|metadata|historical_slots|legacy|history|coherence|deadline)$/.test(error?.message??''))console.info('D02 historical gate',error.message);return pending();}").replaceAll('catch{fail();}',()=>firstConnection?'catch(error){'+frames+'fail();}':'catch{fail();}');
   product=instrument(product);
   sources.set('mcp-qa-finite-initial-entry.mjs',instrument(sources.get('mcp-qa-finite-initial-entry.mjs')));
-  if(firstConnection)sources.set('mcp-qa-finite-bootstrap-native.mjs',instrument(sources.get('mcp-qa-finite-bootstrap-native.mjs')));
+  if(firstConnection){
+   sources.set('mcp-qa-finite-bootstrap-native.mjs',instrument(sources.get('mcp-qa-finite-bootstrap-native.mjs')));
+   let lease=await readFile('lib/mcp-qa-finite-initial-lease.mjs','utf8');
+   const holder='holders();const at=Date.now()',parentClock='if(closed||controller.signal.aborted||!Number.isSafeInteger(at)||at<last||at>=end||!Number.isFinite(m)||m<lastMono||m-mono>=end-entered)fail();',childClock='if(!alive||c.signal.aborted||Date.now()>=until||performance.now()-m0>=until-began)fail();';
+   for(const needle of [holder,parentClock,childClock])assert.equal(lease.split(needle).length,2,'SYN original lease seam');
+   lease=lease.replace(holder,()=>"try{holders();}catch(error){console.info('T2 original parent holders rejected',JSON.stringify({closed,aborted:controller.signal.aborted,entered,end,last,mono,lastMono}));throw error;}const at=Date.now()");
+   lease=lease.replace(parentClock,()=>parentClock.slice(0,-7)+"{console.info('T2 original parent clock rejected',JSON.stringify({closed,aborted:controller.signal.aborted,entered,end,last,at,mono,m,lastMono}));fail();}");
+   lease=lease.replace(childClock,()=>childClock.slice(0,-7)+"{console.info('T2 original child clock rejected',JSON.stringify({alive,aborted:c.signal.aborted,began,until,m0,wall:Date.now(),monotonic:performance.now()}));fail();}");
+   sources.set('mcp-qa-finite-initial-lease.mjs',lease);
+   let initial=sources.get('mcp-qa-finite-initial-entry.mjs');
+   const declaration='async function http(method,suffix,token,body,l,cap=3145728){',readLoop='for(;;){const read=await track(stream.read());guard(l);if(read.done)break;',ending='}finally{if(stream)track(stream.cancel()).catch(()=>{});else if(response?.body&&!response.body.locked)track(response.body.cancel()).catch(()=>{});}';
+   for(const needle of [declaration,readLoop,ending])assert.equal(initial.split(needle).length,2,'SYN original upload HTTP seam');
+   initial=initial.replace(declaration,()=>declaration+"const observed={reads:0,bytes:0,readMs:0,postReadGuardMs:0};");
+   initial=initial.replace(readLoop,()=>"for(;;){const readAt=performance.now(),read=await track(stream.read());observed.readMs+=performance.now()-readAt;observed.reads++;observed.bytes+=read.value?.byteLength??0;const guardAt=performance.now();try{guard(l);}finally{observed.postReadGuardMs+=performance.now()-guardAt;}if(read.done)break;");
+   initial=initial.replace(ending,()=>"}finally{console.info('T2 original upload HTTP scalars',JSON.stringify({method,path:suffix.split('?')[0],...observed}));"+ending.slice('}finally{'.length));
+   sources.set('mcp-qa-finite-initial-entry.mjs',initial);
+  }
  }
  const plugin={name:'explicit-SYN-external-data-not-whole-facts',setup(b){
   if(mode==='phase-context-sdk-token-notice-get')b.onLoad({filter:/mcp-qa-finite-owner-phase-context\.mjs$/},async args=>({contents:instrumentFiniteNoticeGet(instrumentFiniteOwnerIo(await readFile(args.path,'utf8'))),loader:'js'}));
@@ -83,7 +99,7 @@ export async function initialEntryHarness(mode='normal'){
   if(mode.startsWith('enrollment')||enrollmentComponent)b.onResolve({filter:/mcp-qa-finite-(owner-source|connection-source)\.mjs$/},()=>({path:process.cwd()+'/test/fixtures/finite-preparation-cleanup-source.mjs'}));
   b.onLoad({filter:/mcp-qa-finite-initial-material\.mjs$/},()=>({contents:product,loader:'js'}));
   b.onResolve({filter:/mcp-qa-finite-initial-material\.mjs$/},()=>({path:process.cwd()+'/lib/mcp-qa-finite-initial-material.mjs'}));
-  b.onLoad({filter:/mcp-qa-finite-(initial-entry|initial-entry-records|initial-capsule-records|initial-cleanup|historical-source|bootstrap-native)\.mjs$/},args=>({contents:sources.get(args.path.split('/').at(-1)),loader:'js'}));
+  b.onLoad({filter:/mcp-qa-finite-(initial-entry|initial-entry-records|initial-capsule-records|initial-cleanup|initial-lease|historical-source|bootstrap-native)\.mjs$/},args=>({contents:sources.get(args.path.split('/').at(-1)),loader:'js'}));
   b.onLoad({filter:/mcp-confirmation-frozen-artifact\.json$/},()=>({contents:J(x.receipt),loader:'json'}));
   b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));
   b.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({contents:'export const QA_CLOUD_CLOSED_PINS='+J({...realPins,canary:x.pin,operator:opPin})+';',loader:'js'}));
