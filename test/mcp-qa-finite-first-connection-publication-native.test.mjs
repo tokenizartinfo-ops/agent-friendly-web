@@ -168,6 +168,13 @@ test('T3 identity and choice cannot mint admission',{timeout:120000},async t=>{
  const form=await actualChoice(f,valid),normal=new URLSearchParams({handle:form.handle,projectRef:form.projectRef,decision:'approve'}).toString();
  const cases=[['Origin',{headers:{Origin:'https://foreign.invalid'}}],['cookie repeat',{headers:{Cookie:form.cookie+'; '+form.cookie}}],['cookie list',{headers:{Cookie:form.cookie+'; bad name=x'}}],['handle',{body:normal.replace(form.handle,'f'.repeat(64))}],['projectRef',{body:normal.replace(form.projectRef,'e'.repeat(64))}],['decision',{body:normal.replace('approve','deny')}],['extra',{body:normal+'&extra=x'}],['duplicate',{body:normal+'&decision=approve'}],['escape',{body:normal+'&x=%ZZ'}],['oversize',{body:normal+'x'.repeat(1025)}],['UTF8',{body:new Uint8Array([0xff])}]];
  for(const [label,patch]of cases){const r=await choicePost(f,form,valid,patch);assert.notEqual(r.status,200,label);await r.body?.cancel();const p=await readFirstConnectionProbe(f);assert.equal(ticketUses(p).length,0,label);assert.equal(effectRows(p).length,0,label);}
+ const ticketBaseline=(await readFirstConnectionProbe(f)).rows;
+ for(const variant of ['action','preconnection','source','subject-realm','project-map','snapshot']){
+  const altered=await plain(f.stub.firstConnectionTicketFault(variant));assert.equal(altered.codecRoundtrip,true,variant+' passes actual record codec');
+  const r=await choicePost(f,form,valid);assert.notEqual(r.status,200,'persisted ticket correlation '+variant);await r.body?.cancel();const p=await readFirstConnectionProbe(f);assert.equal(ticketUses(p).length,0,variant);assert.equal(effectRows(p).length,0,variant);assert(!p.rows.some(([key])=>key.startsWith('connection-approval:')),variant+' cannot approve');
+  await f.stub.firstConnectionTicketFault('restore');assert.deepEqual((await readFirstConnectionProbe(f)).rows,ticketBaseline,'original history restored after negative '+variant);
+  console.info('T3 actual ticket correlation',JSON.stringify({variant,codecRoundtrip:true,ticketUse:0,approval:0,effects:0}));
+ }
  const accepted=await choicePost(f,form,valid);assert.equal(accepted.status,200,'same actual ticket and current owner remain usable after invalid inputs');await accepted.body?.cancel();assert.equal(receipts(await readFirstConnectionProbe(f)).length,1);
 });
 test('T3 source and rollback must be recoverable',{timeout:120000},async t=>{
