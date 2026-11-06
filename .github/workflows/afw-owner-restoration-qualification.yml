@@ -6,12 +6,10 @@ on:
 permissions:
   contents: read
 jobs:
-  prepare_g0:
+  component_preflight:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - name: Record bounded job start
-        run: echo "AFW_JOB_STARTED_MS=$(date +%s%3N)" >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
@@ -20,76 +18,18 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 22, cache: npm}
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Syntax and exact seam lint before I0
-        run: |
-          node --check test/fixtures/finite-initial-entry-world.mjs
-          node --check test/fixtures/finite-owner-cleanup.mjs
-          node --check test/fixtures/finite-owner-cleanup-persistence.mjs
-          node --check test/mcp-qa-finite-owner-cleanup-native.test.mjs
-          npx eslint test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs
-      - name: RED g0 genuine producer then native dispose flush and wait
+      - name: Fixed component preflight before any I0
         shell: bash
         run: |
           mkdir -p output/owner-cleanup
           set -o pipefail
-          node test/fixtures/finite-owner-cleanup-persistence.mjs prepare output/owner-cleanup/checkpoint-g0 | tee output/owner-cleanup/prepare-g0.log
-      - name: Upload immutable same-state checkpoint
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: r2-red-g0-checkpoint-${{ github.sha }}
-          path: output/owner-cleanup/checkpoint-g0/
-          if-no-files-found: error
-          retention-days: 7
-      - name: Read back actual uploaded checkpoint
-        if: success()
-        uses: actions/download-artifact@v4
-        with:
-          name: r2-red-g0-checkpoint-${{ github.sha }}
-          path: ${{ runner.temp }}/r2-checkpoint-readback
-      - name: Verify native files scripts graphs and manifest readback
-        if: success()
-        run: node test/fixtures/finite-owner-cleanup-persistence.mjs verify "${{ runner.temp }}/r2-checkpoint-readback"
-      - name: Preserve all producer diagnostics and current graphs
+          for file in lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs test/mcp-qa-finite-owner-cleanup.test.mjs; do node --check "$file"; done
+          npx eslint lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs test/mcp-qa-finite-owner-cleanup.test.mjs | tee output/owner-cleanup/lint.log
+          node --test --test-reporter=tap test/mcp-qa-finite-owner-cleanup.test.mjs | tee output/owner-cleanup/contracts.tap
+      - uses: actions/upload-artifact@v4
         if: always()
-        uses: actions/upload-artifact@v4
         with:
-          name: r2-red-g0-prepare-evidence-${{ github.sha }}
-          path: |
-            output/owner-cleanup/prepare-g0.log
-            output/owner-reference/
-            output/t2-native-graphs/
-          if-no-files-found: warn
-          retention-days: 7
-  consume_g0:
-    needs: prepare_g0
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-          fetch-depth: 1
-      - uses: actions/setup-node@v4
-        with: {node-version: 22, cache: npm}
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - uses: actions/download-artifact@v4
-        with:
-          name: r2-red-g0-checkpoint-${{ github.sha }}
-          path: output/owner-cleanup/checkpoint-g0
-      - name: RED only principal original native C0
-        shell: bash
-        run: |
-          set -o pipefail
-          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/red-g0.tap
-      - name: Preserve causal principal outcome
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: r2-red-g0-consume-evidence-${{ github.sha }}
-          path: |
-            output/owner-cleanup/red-g0.tap
-            output/owner-cleanup/principal.json
+          name: r2-component-preflight-${{ github.sha }}
+          path: output/owner-cleanup/
           if-no-files-found: error
           retention-days: 7
