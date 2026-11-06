@@ -171,7 +171,7 @@ test('T3 identity and choice cannot mint admission',{timeout:120000},async t=>{
  const ticketBaseline=(await readFirstConnectionProbe(f)).rows;
  for(const variant of ['action','preconnection','source','subject-realm','project-map','snapshot']){
   const altered=await plain(f.stub.firstConnectionTicketFault(variant));assert.equal(altered.codecRoundtrip,true,variant+' passes actual record codec');
-  const r=await choicePost(f,form,valid);assert.notEqual(r.status,200,'persisted ticket correlation '+variant);await r.body?.cancel();const p=await readFirstConnectionProbe(f);assert.equal(ticketUses(p).length,0,variant);assert.equal(effectRows(p).length,0,variant);assert(!p.rows.some(([key])=>key.startsWith('connection-approval:')),variant+' cannot approve');
+  const observedBefore=(await plain(f.stub.firstConnectionProbe())).observation.length;const r=await choicePost(f,form,valid);assert.notEqual(r.status,200,'persisted ticket correlation '+variant);await r.body?.cancel();const p=await readFirstConnectionProbe(f);assert.equal(ticketUses(p).length,0,variant);assert.equal(effectRows(p).length,0,variant);assert(!p.rows.some(([key])=>key.startsWith('connection-approval:')),variant+' cannot approve');assert(p.native.observation.slice(observedBefore).some(v=>v.kind==='correlator'&&v.name===(variant==='snapshot'?'source-snapshot':'ticket-map')),variant+' reaches actual complete-snapshot correlator');
   await f.stub.firstConnectionTicketFault('restore');assert.deepEqual((await readFirstConnectionProbe(f)).rows,ticketBaseline,'original history restored after negative '+variant);
   console.info('T3 actual ticket correlation',JSON.stringify({variant,codecRoundtrip:true,ticketUse:0,approval:0,effects:0}));
  }
