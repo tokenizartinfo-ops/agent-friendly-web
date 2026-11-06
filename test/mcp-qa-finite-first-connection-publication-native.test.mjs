@@ -48,3 +48,17 @@ test('T2 closed mounted conduits cannot authorize business',{timeout:120000},asy
  assert(f.firstConnectionBuild.QA.inputs.includes('lib/mcp-qa-finite-candidate-residency.mjs'));
  console.info('T2 initial native build',JSON.stringify({...f.firstConnectionBuild,residency:{...f.resident,content:undefined},M:{...f.firstConnectionBuild.M,inputs:f.firstConnectionBuild.M.inputs.length},QA:{...f.firstConnectionBuild.QA,inputs:f.firstConnectionBuild.QA.inputs.length},requests:p.providerRequests.length}));
 });
+
+test('T3 same initial bytes produce connection and downstream',{timeout:120000},async t=>{
+ const f=await fixture(t),before=await readFirstConnectionProbe(f);
+ const response=await approveFirstConnection(f);
+ assert.equal(response.status,200,'original signed choice must complete native ConnectionReceipt before success');
+ await response.body?.cancel();
+ const p=await readFirstConnectionProbe(f);
+ assert.equal(p.uploads,before.uploads+1,'new native upload');
+ assert.equal(p.activations,before.activations+1,'new native activation');
+ const receiptRows=p.rows.filter(([k])=>k.startsWith('afw.finite-policy-effect.v1:')&&k.endsWith(':receipt'));
+ assert.equal(receiptRows.length,1,'durable own connection receipt');
+ assert.equal(JSON.parse(receiptRows[0][1]).moduleHash,f.firstConnectionBuild.M.sha256);
+ assert.equal(f.phaseCurrent,undefined,'no seeded publication authority');
+});
