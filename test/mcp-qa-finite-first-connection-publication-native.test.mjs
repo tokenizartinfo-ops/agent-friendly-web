@@ -110,9 +110,18 @@ test('T3 same initial bytes produce connection and downstream',{timeout:120000},
 const effectRows=p=>p.rows.filter(([k])=>k.startsWith('afw.finite-policy-effect.v1:'));
 const ticketUses=p=>p.rows.filter(([k])=>k.startsWith('owner-ticket:')&&k.endsWith(':use'));
 const receipts=p=>effectRows(p).filter(([k])=>k.endsWith(':receipt'));
-async function waitFirstState(f,predicate,label){
- const end=performance.now()+30000;
- while(performance.now()<end){const state=await plain(f.stub.firstConnectionState());if(predicate(state))return state;await new Promise(r=>setTimeout(r,10));}
+async function waitFirstState(f,predicate,label,observePost=false){
+ let end=performance.now()+30000,waitingPost=observePost,last;
+ for(;;){
+  // GET and POST have separate actual incoming roots. Observe the root whose
+  // native boundary is requested; this DATA timestamp never reaches the product.
+  if(waitingPost&&Number.isFinite(f.choicePostStarted)){end=f.choicePostStarted+30000;waitingPost=false;}
+  if(performance.now()>=end)break;
+  last=await plain(f.stub.firstConnectionState());if(predicate(last))return last;
+  if(waitingPost&&f.failedChoiceState)break;
+  await new Promise(r=>setTimeout(r,10));
+ }
+ const probe=await plain(f.stub.firstConnectionProbe());console.info('T3 missing boundary SYN',JSON.stringify({label,observePost,postObserved:observePost&&!waitingPost,choicePostStarted:f.choicePostStarted,state:{...last,http:undefined,trace:last?.trace?.slice(-12)},failures:probe.observation.filter(v=>['failure','connection-failure'].includes(v.kind)).slice(-8)}));
  assert.fail('actual native boundary absent: '+label);
 }
 async function firstSettled(f){
@@ -140,7 +149,7 @@ for(const mode of ['receipt-transaction-lost','receipt-sync-lost','receipt-readb
 for(const mode of ['upload-held','activation-held','upload-read-held','upload-cancel-held','source-sql-held','enrollment-transaction-held','enrollment-sync-held','upload-ack-held','receipt-transaction-held'])test('T3 retained work blocks a different live root: '+mode,{timeout:120000},async t=>{
  const f=await fixture(t);await f.stub.firstConnectionConfigure(mode);const pending=approveFirstConnection(f);
  const which=['upload-held','activation-held'].includes(mode)?'fetch':mode==='upload-read-held'?'read':mode==='upload-cancel-held'?'cancel':'work';
- await waitFirstState(f,s=>s[which+'Held'],'held '+which);
+ await waitFirstState(f,s=>s[which+'Held'],'held '+which,true);
  const response=await pending;assert.notEqual(response.status,200);await response.body?.cancel();
  const other=await plain(f.stub.firstConnectionAvailability());assert.equal(other.live,true,'different root is genuinely still live');assert.equal(other.available,false,'actual retained native work owns scope');
  assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');
@@ -150,7 +159,7 @@ for(const mode of ['upload-held','activation-held','upload-read-held','upload-ca
  const probe=await readFirstConnectionProbe(f);assert.equal(f.activations.length,['activation-held','receipt-transaction-held'].includes(mode)?2:1);assert.equal(receipts(probe).length,mode==='receipt-transaction-held'?1:0);assert.equal(effectRows(probe).filter(([k])=>k.endsWith(':ack')).length,mode==='receipt-transaction-held'?2:['activation-held','upload-ack-held'].includes(mode)?1:0);
 });
 for(const effect of ['upload','activation'])for(const variant of ['ack','context'])test('T3 resealed foreign publication is not own completion: '+effect+' '+variant,{timeout:120000},async t=>{
- const f=await fixture(t);await f.stub.firstConnectionConfigure(effect+'-held');const pending=approveFirstConnection(f);await waitFirstState(f,s=>s.fetchHeld,'actual '+effect+' result held');
+ const f=await fixture(t);await f.stub.firstConnectionConfigure(effect+'-held');const pending=approveFirstConnection(f);await waitFirstState(f,s=>s.fetchHeld,'actual '+effect+' result held',true);
  assert.deepEqual(await plain(f.stub.firstConnectionReseal(effect,variant)),{codecRoundtrip:true,journalValid:true});
  await f.stub.firstConnectionRelease('fetch');const response=await pending;assert.notEqual(response.status,200);await response.body?.cancel();await firstSettled(f);
  const probe=await readFirstConnectionProbe(f);assert.equal(receipts(probe).length,0);assert.equal(f.activations.length,effect==='upload'?1:2);assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');
@@ -231,7 +240,7 @@ test('T3 resealed completed owner baseline physical and receipt facts remain cor
  }
 });
 test('T3 own completion requires genuinely recorded original ACK even when foreign bytes match',{timeout:120000},async t=>{
- const f=await fixture(t);await f.stub.firstConnectionConfigure('upload-held');const pending=approveFirstConnection(f);await waitFirstState(f,s=>s.fetchHeld,'actual upload result held');
+ const f=await fixture(t);await f.stub.firstConnectionConfigure('upload-held');const pending=approveFirstConnection(f);await waitFirstState(f,s=>s.fetchHeld,'actual upload result held',true);
  assert.deepEqual(await plain(f.stub.firstConnectionReseal('upload','ack-matched')),{codecRoundtrip:true,journalValid:true});
  await f.stub.firstConnectionRelease('fetch');const response=await pending,status=response.status;await response.body?.cancel();await firstSettled(f);const before=await readFirstConnectionProbe(f);assert(before.native.observation.some(v=>v.kind==='journal-mutation'&&v.recordKind==='ConnectionAck'&&v.status==='existing'),'exact valid foreign bytes reach the own-recorded guard');console.info('T3 recorded ACK target',JSON.stringify({status,activations:before.activations,mutant:f.firstConnectionBuild.negativeMutation??null}));assert.notEqual(status,200,'existing foreign ACK cannot be accepted by own continuation');assert.equal(f.activations.length,1);assert.equal(receipts(before).length,0);
 });
