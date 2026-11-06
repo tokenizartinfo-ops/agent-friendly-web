@@ -93,7 +93,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern='^(?!R2 native monitoring revoke )' test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g0.tap
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g0.tap
           node --input-type=module <<'NODE'
           import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
           const tap=await readFile('output/owner-cleanup/green-g0.tap','utf8');for(const [key,value]of [['tests',2],['pass',2],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g0 '+key);
@@ -201,7 +201,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern='^(?!R2 native monitoring revoke )' test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g1.tap
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g1.tap
           node --input-type=module <<'NODE'
           import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
           const tap=await readFile('output/owner-cleanup/green-g1.tap','utf8');for(const [key,value]of [['tests',2],['pass',2],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g1 '+key);
@@ -309,7 +309,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern='^(?!R2 native monitoring revoke )' test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g2.tap
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g2.tap
           node --input-type=module <<'NODE'
           import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
           const tap=await readFile('output/owner-cleanup/green-g2.tap','utf8');for(const [key,value]of [['tests',2],['pass',2],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g2 '+key);
@@ -418,7 +418,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern='^(?!R2 native monitoring revoke )' test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g3.tap
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g3.tap
           node --input-type=module <<'NODE'
           import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
           const tap=await readFile('output/owner-cleanup/green-g3.tap','utf8');for(const [key,value]of [['tests',2],['pass',2],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g3 '+key);
@@ -527,7 +527,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern='^(?!R2 native monitoring revoke )' test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g4.tap
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g4.tap
           node --input-type=module <<'NODE'
           import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
           const tap=await readFile('output/owner-cleanup/green-g4.tap','utf8');for(const [key,value]of [['tests',2],['pass',2],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g4 '+key);
@@ -637,7 +637,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern='^(?!R2 native monitoring revoke )' test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g5.tap
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g5.tap
           node --input-type=module <<'NODE'
           import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
           const tap=await readFile('output/owner-cleanup/green-g5.tap','utf8');for(const [key,value]of [['tests',1],['pass',1],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g5 '+key);
