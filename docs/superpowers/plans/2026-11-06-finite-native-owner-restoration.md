@@ -98,6 +98,72 @@ Correlation exacta = initialHash('afw.finite-sdk-cleanup-correlation.v1',{rootHa
 - [ ] GREENexacto ylintdepaths;compiler/grafosM/QAactuales necesariosporimports/newmetadata, hashes/capsules/pinsactivosSourceartefacto noeligible. Métricasrealesporfase deCF/GitHub/SQL/DO/KV/bytes/reads/cancels/peak/Root/child; no atribuirD11aestecheckout. APIbucketactual/proxynativo/CurrentCustody/backupsremotosseguiránpendientesoperativos.
 - [ ] Selfreviewyprotectedtreecompleto;removerqualifiertrasterminal;reporteconRED/GREEN nativas/artefactos/persistencia/SDKstate/D1nativeclock/rootbudget/counts y todoslímites/residuos/unknowns. STOPSourcewrites. RootfreshspeccodequalityreviewytododeltafinalantesdecierreSource. NoUnit3niensayorealporunGREEN.
 
+
+## Task2 closed preflight after Task1 acceptance (6 Nov 2026)
+
+Task1 is accepted SOURCE/SYN after independent review: stopped Source2c6b5a0eb503b8d877158f85832c510b9a45f7ca/tree57ac1355a85560dee14b2f933b4b68f877911ae2. THIS is Task2 execution BASE; original whole-plan BASE7aab233 remains the start of the combined review range. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 stays protected. Task1 interfaces and eight tested JS blobs are inherited, not restarted. Four Task1 Minor findings remain recorded in docs/superpowers/reviews/2026-11-06-finite-owner-restoration-task1-review.es.md; they do not authorize incidental source work.
+
+### Persistence seam and file boundary
+
+The existing initialEntryHarness sets firstConnection only for exact mode first-connection-publication, while its persistence only follows mode.endsWith('restart'); changing the mode name alone therefore cannot preserve the producer. Its restart helper also does not select qa-first-connection and retains the earlier options, not necessarily the last mounted bindings. These are concrete laboratory integration gaps, not Cloudflare failures.
+
+Allowed optional seam in test/fixtures/finite-initial-entry-world.mjs: explicit opt-in persistence/checkpoint controls for the unchanged first-connection mode; expose/freeze exact CURRENT mounted scripts/options/worker names/namespace IDs needed to export after native dispose/flush; safe reload without invoking bootstrap/seed/producer again. Default old modes/behavior remain byte-semantically preserved. Existing test/fixtures/finite-first-connection-publication.mjs may receive only the minimal fixed SYN service/worker reconstruction seam if needed, documented before qualification. New optional test/fixtures/finite-owner-cleanup-persistence.mjs can isolate checkpoint/laboratory responsibility from the existing owner-cleanup fixture. No other files are added to the whitelist.
+
+Checkpoint must preserve native D1/DO/KV files, original alarm, plan/counters/IDs, exact compiled scripts and current mounted bindings, plus a serializable SYN provider registry. Reattach only the fixed SYN service implementation from the same checkout to those preserved facts. Do not JSON-serialize functions/WeakMaps or call initialEntryHarness to manufacture a new lineage at recovery. Never use f.alarmAt, initialAlarmAt or ownerRead/nowOffset for the positive principal; those helpers patch clocks. JobB must observe the actual runtime alarm at original C0 and native DB now. No reset of I0/alarm, no seeded positive receipts, no recompilation to different scripts under the same proof.
+
+### Frozen GREEN groups and new-SQL coverage
+
+Exact GREEN top-level count49: contract12 + inherited Task1contract10 + existing issuer9 + existing initial2 + new native monitoring SQL5 + original-alarm principal1 + later-state matrix10. No nested tests, fail/cancel/skip/todo all0. Keep groups separate in TAP/manifest. RED executes only the original-alarm principal in jobB; jobA produces the real checkpoint, without importing nonexistent future Source modules or running missing-code tests. Its expected failure must follow a genuine valid produced lineage/native C0/alarm, not missing modules/setup/expired entry.
+
+New12 contract names (SOURCE/SYN component tests; no claim of native admission from their DTO/lease fixtures):
+1. R2 cleanup records roundtrip
+2. R2 cleanup hash rejects drift
+3. R2 cleanup records reject accessors and extra fields
+4. R2 cleanup identity binds original plan and clock
+5. R2 cleanup send permits only fixed reductions
+6. R2 cleanup observed requires original send
+7. R2 cleanup receipt requires business closure
+8. R2 cleanup receipt forbids global drain and namespace claims
+9. R2 cleanup receipt preserves never-issued null obligations
+10. R2 cleanup journal append is once
+11. R2 cleanup journal rejects foreign identity and unknown suffix
+12. R2 cleanup journal requires transaction sync and readback
+
+Existing issuer9, exact test names:
+1. REAL closed-first monotonic tombstone permits early reduction and blocks delayed OPEN
+2. REAL OPEN then terminal close prevents late authorization
+3. REAL serialized barrier orders future grant to zero and makes exact absence meaningful
+4. REAL unknown fence ACK reconciles same original ID on fresh primary before absence
+5. REAL original UUID grant-only cleanup normal preserves unrelated rows/history
+6. REAL original UUID grant-only cleanup held_grant_ack preserves unrelated rows/history
+7. REAL original UUID grant-only cleanup history preserves unrelated rows/history
+8. REAL foreign project revision fails closed after barrier
+9. REAL expired original grant and consent are reduced after C0 within original cleanup C1
+
+Existing initial2, exact test names:
+1. B2b only actual finite alarm with no initial records delegates nominal unchanged
+2. B2b foreign primary pointer stops without blind overwrite
+
+New native SQL component5, placed in test/mcp-qa-finite-owner-cleanup-native.test.mjs with fixed SYN setup in the new owner-cleanup fixture; do not modify the existing issuer fixture or expose generic SQL callers:
+1. R2 native monitoring revoke binds original consent and preserves unrelated rows
+2. R2 native monitoring revoke preserves prior withdrawal
+3. R2 native monitoring revoke rejects foreign revision and sequence
+4. R2 native monitoring revoke enforces native C1 and child window
+5. R2 native monitoring revoke unknown acknowledgement cannot become observed
+
+These use actual native D1/store methods with explicitly labeled component fixtures. They test exact original event/sequence/identity, append-only behavior, SQL's real clock, first-primary readback and unknown ACK behavior. They do NOT substitute for the genuine produced-cycle principal. Preserve existing forward SQL behavior.
+
+Principal and ten matrix names remain exactly those in Task2 above. The SDK paging matrix covers the new reduction facet; it must not silently be counted as Task1 readonly-reader boundary coverage. Archived historical normal observations can be validated as dated facts during restart; missing Observed must never be reconstructed from a later read. Same-stack opaque reduction/receipt objects are newly held internally only after fresh native qualification, not deserialized capabilities.
+
+### Two-job timing and causal grouping
+
+JobA runs the38 contract/store/regression component cases BEFORE creating I0, while no original cycle clock is open. Validate remaining15min job budget, maximum export/upload time and minimum JobB recovery margin before I0. If too little remains, do not start the cycle. Then run the real current producer through Reference/token/MCP/NoticeLink, finish requests, dispose/flush, preserve state/scripts/manifest and wait only until original C0-120000. Upload SYN-only checkpoint with7day retention. The wait does not hold a business Root.
+
+JobB restores the same untouched principal before C0, validates manifest/IDs/scripts/current storage/alarm and margin, and observes native alarm at C0. Run the principal FIRST. Ten subsequent matrix cases may use isolated native replicas of the exact PRE-cleanup checkpoint with explicitly labeled fault mutations; preserve all original times/IDs and use real current DB time, not retiming/resealing/new I0. Their original C1 still applies. Bound parallelism and startup/work so the matrix fits; no positive premise from an expired lease. They are labeled replicas/components, not eleven live or user rehearsals. If this cannot fit original C1 or exact persistence cannot be recovered, report concrete timing/data and obtain a Root grouping ruling before dispatch; never widen production clocks. Every job remains <=15min and source stays frozen across both.
+
+Ruling: explicit persistence seam and49 frozen cases close the concrete omissions above while reusing all existing native behavior. Why: an ordinary cold restart cannot be demonstrated by a renamed mode or reconstructed rows, and the new SQL revocation needs its own native boundary tests. Cost if wrong: the laboratory may fail budget/recovery calibration; adjust laboratory grouping with evidence, not business clocks/authority. No runtime/provider effects or owner intervention are required for Source/Actions SYN.
+
+
 ## Self-review del plan y ejecución
 
 CoberturaSpec1–4:Task2consumer/alarm;5:Task1reference+Task2exactreduce;6–8:Task2SQLSDKrestore/receipt;7KVlimits:Task1readonly/Task2delete;9filemap:ambas;10nativeC0:Task2;11anti-goals:GlobalConstraints;12builderanswers:ReferenceTask1 ypredicateTask2.
