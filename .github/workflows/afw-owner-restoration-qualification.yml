@@ -18,15 +18,23 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 22, cache: npm}
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Fixed component preflight before any I0
+      - name: Current seams components and M size before any I0
         shell: bash
         run: |
           mkdir -p output/owner-cleanup
           set -o pipefail
-          { for file in lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs test/mcp-qa-finite-owner-cleanup.test.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs; do node --check "$file"; done; } 2>&1 | tee output/owner-cleanup/syntax.log
-          npx eslint lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs test/mcp-qa-finite-owner-cleanup.test.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/lint.log
-          node --test --test-reporter=tap test/mcp-qa-finite-owner-cleanup.test.mjs | tee output/owner-cleanup/contracts.tap
-          node --test --test-reporter=tap --test-name-pattern='^R2 native monitoring revoke ' test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/sql5.tap
+          { for file in test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs test/mcp-qa-finite-owner-cleanup.test.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs test/fixtures/finite-first-connection-publication.mjs; do node --check "$file"; done; } 2>&1 | tee output/owner-cleanup/syntax.log
+          npx eslint test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs test/mcp-qa-finite-owner-cleanup.test.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs test/fixtures/finite-first-connection-publication.mjs | tee output/owner-cleanup/lint.log
+          node --test --test-reporter=tap test/mcp-qa-finite-owner-cleanup.test.mjs | tee output/owner-cleanup/contracts14.tap
+          node --test --test-reporter=tap test/mcp-qa-finite-owner-sdk-reference.test.mjs | tee output/owner-cleanup/inherited10.tap
+          node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern='^(REAL closed-first monotonic tombstone permits early reduction and blocks delayed OPEN|REAL OPEN then terminal close prevents late authorization|REAL serialized barrier orders future grant to zero and makes exact absence meaningful|REAL unknown fence ACK reconciles same original ID on fresh primary before absence|REAL original UUID grant-only cleanup normal preserves unrelated rows/history|REAL original UUID grant-only cleanup held_grant_ack preserves unrelated rows/history|REAL original UUID grant-only cleanup history preserves unrelated rows/history|REAL foreign project revision fails closed after barrier|REAL expired original grant and consent are reduced after C0 within original cleanup C1)$' test/mcp-qa-finite-preparation-issuer-native.test.mjs | tee output/owner-cleanup/issuer9.tap
+          node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern='^(B2b only actual finite alarm with no initial records delegates nominal unchanged|B2b foreign primary pointer stops without blind overwrite)$' test/mcp-qa-finite-initial-cleanup-native.test.mjs | tee output/owner-cleanup/initial2.tap
+          AFW_R2_GROUP=components node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/sql5.tap
+          node --input-type=module <<'NODE' | tee output/owner-cleanup/current-M.log
+          import {compileFirstConnectionCandidate} from './test/fixtures/finite-first-connection-publication.mjs';
+          import assert from 'node:assert/strict';
+          const m=await compileFirstConnectionCandidate('c'.repeat(40),'d'.repeat(40));console.info(JSON.stringify({source:process.env.GITHUB_SHA,bytes:m.bytes.length,sha256:m.resident.module.sha256,inputs:Object.keys(m.metafile.inputs).length}));assert(m.bytes.length<=2097152);
+          NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
