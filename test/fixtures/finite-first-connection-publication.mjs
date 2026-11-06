@@ -150,7 +150,7 @@ export function extendFirstConnectionPublication(entry){
   if(this.firstTicketOriginal)throw Error('SYN ticket corruption not restored');
   const rows=[...await s.list()],ticketRow=rows.find(([key])=>key.startsWith('owner-ticket:')&&!key.endsWith(':use'));if(!ticketRow)throw Error('SYN actual choice ticket absent');
   let key=ticketRow[0],kind='Ticket',record=JSON.parse(ticketRow[1]);
-  if(variant==='action')record.action='notices';
+  if(variant==='action'){record.action='notices';record.connectionRef='c'.repeat(64);}
   if(variant==='preconnection')record.preconnectionId='f'.repeat(64);
   if(variant==='source')record.sourceRevision='e'.repeat(40);
   if(variant==='subject-realm')record.subjectHash='d'.repeat(64);
@@ -363,6 +363,8 @@ export function instrumentFirstConnection(source,{mutation=null}={}){
  }
  const correlators=[
   ["pre.owner.subject!==p.subject","sa.ticketHash!==t.ticketHash",'preparation'],
+  ["t.ticketHash!==data.sourceSnapshot.initialTicketHash","t.action!=='connection'",'ticket-map'],
+  ["data.sourceSnapshot.preconnectionId!==id","canonical(data.sourceSnapshot.source)!==canonical(source)",'source-snapshot'],
   ["s.preconnectionId!==id","s.contextHash!==contextHash",'connection-history'],
   ["upload.ack.resourceId===capsule.activatedVersionId","actual.pointer.versionId!==upload.ack.resourceId",'publication-pointer'],
   ["receipt.moduleHash!==capsule.moduleHash","receipt.configurationHash!==finiteActivationConfigurationHash",'receipt-physical-hash'],
