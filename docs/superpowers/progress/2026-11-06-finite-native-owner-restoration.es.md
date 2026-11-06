@@ -8,7 +8,7 @@ Plan at a051f1fc7d1501efee93927bf55110260f138501/blob8f68017afeb18f0869fb3c32bfa
 
 Task1 BASE7aab233741b09f8873bf04831ca2fa9a9c2b1c4d/tree6eb4241fb4451e7f74ba1b0fd9ad2a02a52cb0f3,Sourcejustreadidentical. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 lastreadunchanged. Priorfinalbodyfix9casesaccepted/one-scopedrereviewclosed; doNOTrepeat oropenitsfixloop. CurrentplanisNEXTfunctionalwork, notanotherfixwaveofthatreview.
 
-Task1 SDK durableReferencebefore302: PREPARED; dispatchsolewriter finite_owner_sdk_reference_impl afterthisledgercommit. Task2completealarmconsumer:NOTSTARTEDuntilTask1accepted. ThisplanoverallINCOMPLETE; operationalReadiness=false/completePackage=false/PCoff=false. No realpermission/window/SDKoperationcreated.
+Task1 SDK durableReferencebefore302: ACTIVE; solewriter finite_owner_sdk_reference_impl (Solhigh/forknone), dispatch después deledger yrefsverificadas. Agentack leyóbrief/AGENTS/skills yconfirmóBASE/whitelist/16GREENcases/RED1native ycalificador≤1job15min. No Sourcewrite Root mientras trabaja. Task2completealarmconsumer:NOTSTARTEDuntilTask1accepted. ThisplanoverallINCOMPLETE; operationalReadiness=false/completePackage=false/PCoff=false. No realpermission/window/SDKoperationcreated.
 
 ## Design decisions and builder check
 
@@ -41,3 +41,12 @@ SDDfixloop/verificationappliespernewtask; doNOTapplypreviousfinalfixwavecaptoane
 ## Operational boundary
 
 Source3Nov02:59UTCexpired;Parent30s/child5s/C0/C1/3slotsunchanged. NorealCF/GitHubsecret/credential/permission/OAuth/OTP/runtime/cron/Container/consumer/Max/supportmail/mainmutation. OnlyGitHubSource/Docs/ActionsSYN. NotCodexcloudproof/PCoff. NointerventionneededforTask1coding. NativeCloudreceiver/actualsourceproof/custody/recoverabledeploy/providerfeasibility/thirdCLOSED/prearm/fullsetup/samealarmnominalhandoff/preEntrycontroller/ONErealPCoffremainfuturegates.
+
+
+## Task1 fixture ruling before first Source write
+
+Implementer documentó el seam mínimo: optional ownerCleanup=false en initialEntryHarness, importando/aplicando extendFiniteOwnerCleanup(entry) e instrumentFiniteOwnerCleanup(phase source) de la nueva fixture dewhitelist únicamente si true. FirstConnectionengine ymodos previossin cambio. Root autorizó ese seam exacto; no nuevo pathproductivo. Wrappers KV/storage estables ANTESdeOAuth permiten capturarholdersoriginales. PassiveSDKcomplete normalresolution marcador sólohash/facts, nunca redirect/code/token enlogs.
+
+Ruling: holds son sobre ACKpostnative y mantienen la referencia a la Promesa original másla cadenaoutwardretenida; no llamarlos physicalKVpending si ya terminó el I/O nativo. Se afirma exclusión por trabajo retenido, no drenaje remoto por monkeypatch. Costo si es incorrecto: fixturepodríaproducirunnegativoantesdeblancoreal; markersdeSDKcomplete/nativecall/Reference yRootLIVE debenmostrarcausalidad.
+
+Requestabortdelnegativo debeprovenirdeRequest/AbortController nativos dentrodeworkerd, no inferirse de la propagación Node→RPC. Whitelist/wire/sourceprofile originalsiguenvalidos. AgentconfirmóSDKfijadolistUserGrantspagina legacy yPromise.all internamente, porloquepresupuesto/cola porllamada nativa ystickyfailure sonload-bearing;Rootexigiónoemisiónnueva trasprimerfallo aunque queden Promesasactualespendientes.
