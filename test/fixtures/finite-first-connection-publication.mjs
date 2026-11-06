@@ -135,10 +135,13 @@ export async function compileFirstConnectionCandidate(revision,tree,{negativePro
  return {script:m.outputFiles[0].text,bytes,program:node.program,resident,metafile:m.metafile,spyScript:spy.outputFiles[0].text,spyHash:digest(spy.outputFiles[0].contents),wrongProfileScript:wrong?.outputFiles[0].text??null,wrongProfileHash:wrong?digest(wrong.outputFiles[0].contents):null};
 }
 export function extendFirstConnectionPublication(entry){
- return "import {createFinitePolicyEffectJournal as firstJournal} from './lib/mcp-qa-finite-policy-journal.mjs';\nimport {hashFinitePreparationRecord as firstPrepHash,encodeFinitePreparationRecord as firstPrepEncode,decodeFinitePreparationRecord as firstPrepDecode,hashFinitePolicyEffectIdentity as firstIdentityHash} from './lib/mcp-qa-finite-preparation-records.mjs';\nimport {readPrivateQaFiniteOwnerContext as firstConnectionContext} from './lib/mcp-qa-finite-owner-phase-context.mjs';\n"+entry.replace(' export class Initial extends FiniteClosure{',String.raw` export class Initial extends FiniteClosure{
+ return "import {createHash as firstTraceHash} from 'node:crypto';\nimport {createFinitePolicyEffectJournal as firstJournal} from './lib/mcp-qa-finite-policy-journal.mjs';\nimport {hashFinitePreparationRecord as firstPrepHash,encodeFinitePreparationRecord as firstPrepEncode,decodeFinitePreparationRecord as firstPrepDecode,hashFinitePolicyEffectIdentity as firstIdentityHash} from './lib/mcp-qa-finite-preparation-records.mjs';\nimport {readPrivateQaFiniteOwnerContext as firstConnectionContext} from './lib/mcp-qa-finite-owner-phase-context.mjs';\n"+entry.replace(' export class Initial extends FiniteClosure{',String.raw` export class Initial extends FiniteClosure{
  async fetch(request){
-  try{this.firstBoundary=JSON.parse(request.headers.get('x-afw-finite-boundary'));}catch{this.firstBoundary=null;}this.firstOriginalMethod=request.headers.get('x-afw-finite-original-method');this.firstConnectionCalls??=[];this.firstConnectionCalls.push({boundary:this.firstBoundary,url:request.url,method:request.method,version:request.headers.get('x-afw-finite-version')});
-  return super.fetch(request);
+  try{this.firstBoundary=JSON.parse(request.headers.get('x-afw-finite-boundary'));}catch{this.firstBoundary=null;}this.firstOriginalMethod=request.headers.get('x-afw-finite-original-method');this.firstRequestId=request.headers.get('x-afw-finite-request-id');globalThis.__t3NativeTraceRequestId=this.firstRequestId;this.firstConnectionCalls??=[];this.firstConnectionCalls.push({boundary:this.firstBoundary,url:request.url,method:request.method,originalMethod:this.firstOriginalMethod,requestId:this.firstRequestId,version:request.headers.get('x-afw-finite-version')});
+  const originalMethod=this.firstOriginalMethod,requestId=this.firstRequestId,target=request.url,trace=this.firstState?.trace,actual=super.fetch(request);
+  const observed=response=>{if(originalMethod==='POST'&&target==='https://afw-private.invalid/_finite-owner/choice')trace?.push({kind:'native-response-return',requestId,originalMethod,target,status:response.status,at:Date.now()});};
+  if(actual&&typeof actual.then==='function')actual.then(observed,()=>{}).catch(()=>{});else observed(actual);
+  return actual;
  }
 
 
@@ -229,16 +232,17 @@ export function extendFirstConnectionPublication(entry){
  async firstConnectionState(){return {...(this.firstState??{trace:[]}),http:globalThis.__t3Http??[]};}
  async firstConnectionRelease(which='work'){if(this.firstRelease)this.firstRelease[which]=true;}
  async firstConnectionConfigure(mode='normal'){
-  this.firstRestore?.();this.firstState={mode,trace:[],fetchHeld:false,fetchSettled:false,readHeld:false,readSettled:false,cancelHeld:false,cancelSettled:false};this.firstRelease={};
+  this.firstRestore?.();this.firstState={mode,trace:[],fetchHeld:false,fetchSettled:false,readHeld:false,readSettled:false,cancelHeld:false,cancelSettled:false};globalThis.__t3NativeTrace=this.firstState.trace;this.firstRelease={};
   const owner=this,state=this.firstState,s=this.ctx.storage,env=this.env,native={get:s.get,list:s.list,transaction:s.transaction,sync:s.sync,getAlarm:s.getAlarm},fetcher=globalThis.fetch,wall=Date.now;
-  let writes=[],receiptRead=false,shift=0;const originalMetadata=env.AFW_QA_VERSION,originalQaId=originalMetadata.id,originalPrepare=env.RELEASE_DB.prepare,originalNode=env.AFW_RELEASE_EVENTS_NODE,nodeName=originalNode.idFromName,originalSelf=env.AFW_INDEPENDENT_CLOSURE,selfGet=originalSelf.get,originalKv=env.AFW_FINITE_OWNER_OAUTH_KV,kvGet=originalKv.get,originalReader=env.AFW_MCP_CLOSURE_READ_TOKEN;state.afterDriftIo={get:0,list:0,db:0,node:0,self:0,kv:0,fetch:0};const afterDrift=kind=>{if(state.holderChanged)state.afterDriftIo[kind]++;};state.counts={get:0,list:0,transaction:0,sync:0,firstPrimary:0,sql:0};const db=env.RELEASE_DB,withSession=db.withSession;
+  let writes=[],receiptRead=false,shift=0;const committedValues=new Map();const originalMetadata=env.AFW_QA_VERSION,originalQaId=originalMetadata.id,originalPrepare=env.RELEASE_DB.prepare,originalNode=env.AFW_RELEASE_EVENTS_NODE,nodeName=originalNode.idFromName,originalSelf=env.AFW_INDEPENDENT_CLOSURE,selfGet=originalSelf.get,originalKv=env.AFW_FINITE_OWNER_OAUTH_KV,kvGet=originalKv.get,originalReader=env.AFW_MCP_CLOSURE_READ_TOKEN;state.afterDriftIo={get:0,list:0,db:0,node:0,self:0,kv:0,fetch:0};const afterDrift=kind=>{if(state.holderChanged)state.afterDriftIo[kind]++;};state.counts={get:0,list:0,transaction:0,sync:0,firstPrimary:0,sql:0};const db=env.RELEASE_DB,withSession=db.withSession;
   db.withSession=(...args)=>{afterDrift('db');if(args[0]==='first-primary')state.counts.firstPrimary++;const session=Reflect.apply(withSession,db,args),prepare=session.prepare;session.prepare=(...a)=>{state.counts.sql++;const statement=Reflect.apply(prepare,session,a);if(mode==='source-sql-held'&&String(a[0]).includes('site_projects')){const bind=statement.bind;statement.bind=(...values)=>{const bound=Reflect.apply(bind,statement,values),first=bound.first;bound.first=async(...params)=>{const actual=Reflect.apply(first,bound,params),value=await actual;if(state.sqlHeld)return value;state.sqlHeld=true;return held('work',value);};return bound;};}return statement;};return session;};
   s.list=(...args)=>{afterDrift('list');state.counts.list++;return Reflect.apply(native.list,s,args);};
   const target=key=>typeof key==='string'&&(key.startsWith('afw.finite-preparation-cleanup.v1:')||key.startsWith('afw.finite-policy-effect.v1:'));
-  const note=(kind,key)=>{if(target(key))state.trace.push({kind,key,at:Date.now()});};
+  const rawHash=value=>typeof value==='string'?firstTraceHash('sha256').update(value).digest('hex'):null;
+  const note=(kind,key,value,scope)=>{if(target(key))state.trace.push({kind,key,valueHash:rawHash(value),scope,requestId:owner.firstRequestId,at:Date.now()});};
   const held=(name,value)=>{const deadline=owner.firstBoundary.deadline;state[name+'Boundary']={...owner.firstBoundary,originalMethod:owner.firstOriginalMethod,enteredAt:Date.now()};state[name+'Held']=true;return new Promise((resolve,reject)=>{const tick=()=>{const remaining=deadline-Date.now();if(!Number.isSafeInteger(remaining)||remaining<=0){state[name+'Settled']=true;reject(Error('SYN original request deadline'));return;}if(owner.firstRelease[name]===true){state[name+'Settled']=true;resolve(value);return;}setTimeout(tick,Math.min(10,remaining));};tick();});};
-  const get=async(method,holder,args)=>{
-   afterDrift('get');state.counts.get++;const value=await Reflect.apply(method,holder,args),key=args[0];note('get-settled',key);
+  const get=async(method,holder,args,scope='storage')=>{
+   afterDrift('get');state.counts.get++;const value=await Reflect.apply(method,holder,args),key=args[0];note('get-settled',key,value,scope);
    if(mode==='clock-backward'&&owner.firstBoundary&&!state.backward){shift-=100;state.backward=true;}
    if(mode==='source-holder-drift'&&owner.firstBoundary&&!state.holderChanged){env.AFW_QA_VERSION={id:originalMetadata.id};state.holderChanged=true;}
    if(mode==='access-expiry-held'&&state.jwkFetched&&!state.workHeld)return held('work',value);
@@ -249,11 +253,11 @@ export function extendFirstConnectionPublication(entry){
   };
   s.get=(...a)=>get(native.get,s,a);
   s.transaction=fn=>{
-   state.counts.transaction++;const currentWrites=[];
+   state.counts.transaction++;const currentWrites=[],currentValues=new Map();
    const actual=Reflect.apply(native.transaction,s,[async tx=>{
-    const result=await fn({get:(...a)=>get(tx.get,tx,a),list:tx.list.bind(tx),put:async(k,v)=>{note('put-enter',k);const out=await tx.put(k,v);note('put-settled',k);currentWrites.push(k);return out;}});
+    const result=await fn({get:(...a)=>get(tx.get,tx,a,'transaction'),list:tx.list.bind(tx),put:async(k,v)=>{note('put-enter',k,v,'transaction');const out=await tx.put(k,v);note('put-settled',k,v,'transaction');currentValues.set(k,v);currentWrites.push(k);return out;}});
     return result;
-   }]).then(value=>{writes=currentWrites;for(const key of writes)note('transaction-settled',key);return value;});
+   }]).then(value=>{writes=currentWrites;for(const key of writes){const raw=currentValues.get(key);if(target(key))committedValues.set(key,raw);note('transaction-settled',key,raw,'transaction');}return value;});
    return actual.then(async value=>{
     if(mode==='enrollment-transaction-lost'&&writes.includes('afw.finite-preparation-cleanup.v1:enrollment')||mode==='upload-send-transaction-lost'&&writes.some(k=>k.startsWith('afw.finite-policy-effect.v1:')&&k.endsWith(':send'))||mode==='receipt-transaction-lost'&&writes.some(k=>k.startsWith('afw.finite-policy-effect.v1:')&&k.endsWith(':receipt')))throw Error('SYN native transaction result lost');
     if(mode==='enrollment-transaction-held'&&writes.includes('afw.finite-preparation-cleanup.v1:enrollment')||mode==='upload-ack-held'&&writes.some(key=>key.startsWith('afw.finite-policy-effect.v1:')&&key.endsWith(':ack'))||mode==='receipt-transaction-held'&&writes.some(key=>key.startsWith('afw.finite-policy-effect.v1:')&&key.endsWith(':receipt')))return held('work',value);
@@ -261,15 +265,15 @@ export function extendFirstConnectionPublication(entry){
    });
   };
   s.sync=async(...args)=>{
-   state.counts.sync++;const value=await Reflect.apply(native.sync,s,args);for(const key of writes)note('sync-settled',key);
+   state.counts.sync++;const syncing=writes.map(key=>[key,committedValues.get(key)]),value=await Reflect.apply(native.sync,s,args);for(const [key,raw]of syncing)note('sync-settled',key,raw,'storage');
    if(mode==='enrollment-sync-lost'&&writes.includes('afw.finite-preparation-cleanup.v1:enrollment')||mode==='receipt-sync-lost'&&writes.some(k=>k.startsWith('afw.finite-policy-effect.v1:')&&k.endsWith(':receipt')))throw Error('SYN native sync result lost');
    if(mode==='enrollment-sync-held'&&writes.includes('afw.finite-preparation-cleanup.v1:enrollment'))return held('work',value);
    return value;
   };
   globalThis.fetch=async(...args)=>{
    const url=String(args[0]),method=args[1]?.method??'GET',effect=method==='POST'?(url.endsWith('/versions?deploy=false')?'upload':url.endsWith('/deployments')?'activation':null):null;
-   afterDrift('fetch');if(effect)state[effect+'Admission']={...owner.firstBoundary,originalMethod:owner.firstOriginalMethod,enteredAt:Date.now()};const response=await Reflect.apply(fetcher,globalThis,args);if(url.endsWith('/cdn-cgi/access/certs'))state.jwkFetched=true;if(!effect)return response;
-   state.trace.push({kind:'native-result-enter',effect,at:Date.now()});
+   afterDrift('fetch');if(effect){state[effect+'Admission']={...owner.firstBoundary,originalMethod:owner.firstOriginalMethod,enteredAt:Date.now()};state.trace.push({kind:'native-invocation',effect,requestId:owner.firstRequestId,method,url,bodyHash:rawHash(args[1]?.body),at:Date.now()});}const response=await Reflect.apply(fetcher,globalThis,args);if(url.endsWith('/cdn-cgi/access/certs'))state.jwkFetched=true;if(!effect)return response;
+   state.trace.push({kind:'native-result-enter',effect,requestId:owner.firstRequestId,status:response.status,at:Date.now()});
    if(effect==='upload'){
     if(mode==='upload-metadata-id-drift'){originalMetadata.id='dddddddd-dddd-4ddd-8ddd-dddddddddddd';state.holderChanged=true;}
     if(mode==='upload-db-method-drift'){db.withSession=(...args)=>{afterDrift('db');return Reflect.apply(withSession,db,args);};state.holderChanged=true;}
@@ -395,6 +399,11 @@ export function instrumentFirstConnectionEngine(source){
  const once=(needle,next)=>{assert.equal(source.split(needle).length,2,'passive fixed engine HTTP marker');source=source.replace(needle,()=>next);};
  once("async function http(method,path,body,c){\n  check(c);","async function http(method,path,body,c){\n  const io={kind:'engine',method,bytes:0,reads:0,cancelCalls:0,cancelSettled:0,settled:false};(globalThis.__t3Http??=[]).push(io);check(c);");
  once("for(;;){const part=await retain(reader.read());check(c);","for(;;){const part=await retain(reader.read());io.reads++;io.bytes+=part.value?.byteLength??0;check(c);");
+
+ for(const [method,effect]of [['upload','upload'],['activate','activation']]){
+  const describe=method==='upload'?'describeUpload':'describeActivation',needle=method+"(input,c){return invoke(c,async()=>{const request="+describe+"(input);return result(await http(request.method,request.path,request.body,c));});}";
+  once(needle,method+"(input,c){const trace=globalThis.__t3NativeTrace,requestId=globalThis.__t3NativeTraceRequestId,actual=invoke(c,async()=>{const request="+describe+"(input);return result(await http(request.method,request.path,request.body,c));});actual.then(value=>{trace?.push({kind:'native-operation-settled',effect:'"+effect+"',resourceId:value.id,requestId,at:Date.now()});},()=>{}).catch(()=>{});return actual;}");
+ }
  const ending="finally{if(reader)await retain(reader.cancel()).catch(()=>{});else if(response?.body&&!response.body.locked)await retain(response.body.cancel()).catch(()=>{});}";
  once(ending,"finally{if(reader){io.cancelCalls++;await retain(reader.cancel()).then(()=>{io.cancelSettled++;},()=>{});}else if(response?.body&&!response.body.locked){io.cancelCalls++;await retain(response.body.cancel()).then(()=>{io.cancelSettled++;},()=>{});}io.settled=true;}");
  return source;
