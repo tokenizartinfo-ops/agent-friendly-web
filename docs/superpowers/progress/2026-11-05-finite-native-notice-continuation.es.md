@@ -229,3 +229,26 @@ El writer debe fijar originales objeto/métodos y el id primitivo en P10 antes d
 Ruling: la distribución final puede ser A24+B20+C8 casos nativos, con regresiones/compilador/lint y dos controles mutantes en C; exactamente3jobs y15min por job. La expansión a52 casos hizo inviable confinar todos los nativos a A/B con el margen medido. Costo si el balance es erróneo: job incompleto al llegar a15min, que se informa y redistribuye sin omitir casos ni ampliar plazos. Congelar nombres/counts reales y particiones disjuntas antes de despachar, reconcilia cualquier cambio posterior;52 no es un techo de cobertura. Sigue pendiente mapping completo, final gate, protected compare, reporte, retirar qualifier y revisión fresca.
 
 Source pertenece aún al writer first_connection_task3_impl. Root no escribe Source. Los cierres funcional y causales guardados siguen siendo de laboratorio; readiness/completePackage/PCoff=false. La nota de viabilidad del proveedor continúa como gate posterior visible; ninguna cuota real fue ensayada.
+
+
+## Task3: primer lote final NO aprobado; corrección de observación
+
+Run final42232085255, headbbb09fca038c3ca09e8f02f07df558378b3fd843. Qualifier blobaaec94c6f7b9e932e840d3bf662e2e105553eff4 inspeccionado Root:3jobs15min, contents:read, persist-credentials:false, Node22/npmciignoreScripts, sin secretos. Root extrajo los3manifest JSON: mismo nativeNames60, unión disjunta A24/B25/C11,167positivos+2mutantes; TAP/nombres/exits reales, sin cero-match.
+
+Root leyó C job127940236986/log238029chars:118positivos PASS (11native/34context/4GET/10POST/2SDK/1Link/46pure[16top+30sub]/5transport/3setup/2compiler),0FAIL/CANCEL/SKIP/TODO,exits0;2mutantes separados1expectedFAIL/exit1/targetMessage true cada uno; lint exit0. Artifact13510917143,15749703B, SHA2563afcf15ea83b6bfec65754bb9c8344dfcfac2ea9cb751ce1a18c921021095940,expira13nov14:22:27UTC; API metadata Root verificada. Contenido QAsha/ZIP aún archivado, no leído por Root. No descarga local ni cuarto job para métricas.
+
+Writer reportó A job12794023733124/24PASS (~14m); B12794023753125executed/23PASS2FAIL (~14m26,0cancel/skip). Conjunto165/167PASS, NOGREEN global. Los2 fallos activation-held/receipt-transaction-held fueron waitFirstState sin alcanzar frontera; no son pruebas de retención aprobadas. Diagnóstico temporal: observador Node empieza30s antes del GET que hace approveFirstConnection; GET~10.94s consume parte de esa ventana, por lo que el observador termina mientras el POST separado aún tiene su Root30s vigente. No se probó aún el arreglo de observación final.
+
+Ruling: corregir sólo la observación para separar GET≤30s y POST≤30s y capturar inicio/límite real como DATA; también acotar GETfallido/sinPOST — evita teardown prematuro de una petición legítima — costo si el diagnóstico es incorrecto: seguirá fallando y debe investigarse la frontera real; ningún plazo producto se amplía. Registrar llegada al I/O de negocio mientras su petición estaba viva. Cancel/cleanup puede empezar o terminar tras fallo/abort/deadline, y sigue retenido; no confundir ese timestamp con permiso nuevo ni physical drain.
+
+Código observación reportado0092edfd. Primer qualifierf7949f0/run42235027798 tuvo0jobs por String.replace con literal dollar-apostrophe; corregido con replacement FUNCTION en534c4054. Ese fallo no es evidencia de producto. Repetición focal2 antes de nuevo final3jobs; no escrituras durante gate.
+
+Ruling: repartir el nuevo final por tiempos reales C8m27, A14m y B14m26: mover principal de A y los2late-held de B a C, nativeA23/B23/C14=60, más regresiones107 y2controles en C — da margen a casos de espera correctos — costo si no cabe: reporte incompleto al límite15min y nueva distribución medida, nunca omitir ni ampliar clocks.
+
+### Excepción de verificación explícita: callback retry
+
+Root encontró review8143c410/report04a7c661:45c0b08f/run41903117759/job12683052049436PASS;98c02877/run41900952944/job12682289781032new+99affectedPASS. ExtracciónTask1 review5f1f77b2/report9f71c6ac:42131020681/job12760734651527PASS, setup3/compiler1 por separado e inputs sin cambios. Test protegido d7dc91d1cf899e51d8f6e83ddd1bce23587d23d7 tiene loss/alarm8,hold4,foreign/corruption7 y otros; NO contiene inyección literal de callback retry.
+
+Ruling: para esa variante residual aceptar prueba semántica/composicional, NO PASS dinámico inventado — helper protegido P26eb0f08d tiene entered local fuera del callback, chequeado/fijado síncronamente antes del primer await; exige retorno committed===true y fallo absorbente. Nuevo caller espera Enrollment/recheck/Ack/recheck en misma child antes de upload — costo si la composición es incorrecta: no se inyectó el retry nativo y las suposiciones de excepción/settlement deben ser cuestionadas por la revisión fresca. Mapping debe declarar nivel/excepción y líneas exactas. No cuarto job ni cambios para reescribir historia. No instrucción al reviewer de ignorar o rebajar ese punto.
+
+Root fuentes aún950364c.. sólo documentación en esta rama; Source sigue bajo first_connection_task3_impl. Task3 no tiene reporte DONE ni revisión fresca. operationalReadiness/completePackage/PCoff=false. Siguiente: focal2, nuevo final3jobs y reporte completo protegido antes de reviewer.
