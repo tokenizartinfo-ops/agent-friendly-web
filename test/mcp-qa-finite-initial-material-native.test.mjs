@@ -1,3 +1,4 @@
+import {retentionImports,retentionMethods,checkBodyRetention,captureRetentionBuild} from './fixtures/finite-native-body-retention.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -29,7 +30,10 @@ async function harness(mode='normal'){
  import{hashFiniteInitialMaterialRecord,initialInstanceId}from'./lib/mcp-qa-finite-initial-material-records.mjs';
  import{observeFiniteOwnerStageWork}from'./lib/mcp-qa-finite-stage-work.mjs';
  export class Node extends DurableObject{}
+${retentionImports}
  export class Initial extends DurableObject{
+${retentionMethods("createPrivateQaFiniteInitialMaterial({ctx:this.ctx,env:this.env}).collect({commandId:9001},parent.lease)",true)}
+
  async seed(rows){for(const[k,v]of rows)await this.ctx.storage.put(k,v);}
  async snapshot(){return[...await this.ctx.storage.list()];}
  async run(mode='normal'){
@@ -125,7 +129,8 @@ async function harness(mode='normal'){
   b.onLoad({filter:/mcp-qa-legacy-historical-context\.json$/},()=>({contents:J(x.historical),loader:'json'}));
   b.onLoad({filter:/mcp-qa-cloud-closed-pins\.mjs$/},()=>({contents:'export const QA_CLOUD_CLOSED_PINS='+J({...realPins,canary:x.pin})+';',loader:'js'}));
  }};
- const built=await build({stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],plugins:[plugin],define:{'globalThis.__AFW_FINITE_CANDIDATE_RESIDENCY__':J(resident),'globalThis.__AFW_QA_SOURCE_REVISION__':J(M),'globalThis.__AFW_FINITE_SOURCE_TREE__':J(TREE),'globalThis.__AFW_NODE_PROGRAM__':J(program),'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':J(w.expected)}});
+ const built=await build({metafile:true,stdin:{contents:entry,resolveDir:process.cwd()},bundle:true,write:false,platform:'neutral',format:'esm',target:'es2022',external:['node:*','cloudflare:*'],plugins:[plugin],define:{'globalThis.__AFW_FINITE_CANDIDATE_RESIDENCY__':J(resident),'globalThis.__AFW_QA_SOURCE_REVISION__':J(M),'globalThis.__AFW_FINITE_SOURCE_TREE__':J(TREE),'globalThis.__AFW_NODE_PROGRAM__':J(program),'globalThis.__AFW_FINITE_BOOTSTRAP_SOURCE__':J(w.expected)}});
+ await captureRetentionBuild('initial-material',built);
  await mf.setOptions(convertV4MiniflareOptions({...base,script:built.outputFiles[0].text,outboundService:async req=>{
   f.requests.push(req.url);assert.equal(req.method,'GET');
   let value;
@@ -214,4 +219,8 @@ test('T2 material native ownership keeps frozen script and mutable bytes fenced'
   assert.equal(result.scriptHash,f.resident.module.sha256);assert.equal(result.candidateBytes,f.resident.module.bytes);
   assert.deepEqual(result.claims,[false,false,false,false,false]);
  }finally{await f.mf.dispose();}
+});
+
+for(const mode of ['invalid-status','late-response'])test('I1 acquired initial-material body retention '+mode,async()=>{
+ const f=await harness();await checkBodyRetention(f,mode);
 });
