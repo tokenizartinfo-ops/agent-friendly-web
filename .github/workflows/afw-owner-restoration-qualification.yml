@@ -21,12 +21,15 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: RED one actual SDK reference case
+      - name: GREEN ten contracts and six actual native cases
         shell: bash
         run: |
           mkdir -p output/owner-reference
           set -o pipefail
-          node --test --test-reporter=tap --test-name-pattern="^R1 SDK reference is durable before redirect$" test/mcp-qa-finite-owner-sdk-reference-native.test.mjs | tee output/owner-reference/red.tap
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-sdk-reference.test.mjs test/mcp-qa-finite-owner-sdk-reference-native.test.mjs | tee output/owner-reference/green.tap
+      - name: Lint exact changed JavaScript files
+        run: |
+          npx eslint lib/mcp-qa-finite-owner-issuer-provenance-records.mjs lib/mcp-qa-finite-owner-issuer-provenance-journal.mjs lib/mcp-qa-finite-owner-phase-context.mjs lib/mcp-qa-finite-owner-cleanup.mjs test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-cleanup.mjs test/mcp-qa-finite-owner-sdk-reference.test.mjs test/mcp-qa-finite-owner-sdk-reference-native.test.mjs
       - name: Preserve bounded SOURCE SYN evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -34,6 +37,6 @@ jobs:
           name: afw-owner-reference-${{ github.sha }}
           path: |
             output/owner-reference/
-            output/task3/
+            output/t2-native-graphs/
           if-no-files-found: warn
           retention-days: 7
