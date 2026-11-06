@@ -252,3 +252,14 @@ Root encontró review8143c410/report04a7c661:45c0b08f/run41903117759/job12683052
 Ruling: para esa variante residual aceptar prueba semántica/composicional, NO PASS dinámico inventado — helper protegido P26eb0f08d tiene entered local fuera del callback, chequeado/fijado síncronamente antes del primer await; exige retorno committed===true y fallo absorbente. Nuevo caller espera Enrollment/recheck/Ack/recheck en misma child antes de upload — costo si la composición es incorrecta: no se inyectó el retry nativo y las suposiciones de excepción/settlement deben ser cuestionadas por la revisión fresca. Mapping debe declarar nivel/excepción y líneas exactas. No cuarto job ni cambios para reescribir historia. No instrucción al reviewer de ignorar o rebajar ese punto.
 
 Root fuentes aún950364c.. sólo documentación en esta rama; Source sigue bajo first_connection_task3_impl. Task3 no tiene reporte DONE ni revisión fresca. operationalReadiness/completePackage/PCoff=false. Siguiente: focal2, nuevo final3jobs y reporte completo protegido antes de reviewer.
+
+
+## Task3: segundo lote final, positivos completos y controles pendientes
+
+Run42236775067, headd11dff63b0d693b89ac6ef8d6ec6c60ca01af751, tree4e30df2ae4abe2bf087b123823185fa6ab082fa8. Root leyó los logs primarios completos en memoria, sin descarga local: A12795632165623/23PASS (759036ms), B12795632217623/23PASS (714696ms), C127956322164 cancelado al límite15min. Qualifier blobc3bf62cd04769c1d43abe3ff13784f59e3b351c7: native A23/B23/C14=60, nombres disjuntos y107positivos scoped,2mutantes y lint en C; la estimación C665s resultó insuficiente.
+
+C sí completó121positivos:14native,34context,4GET,10POST,2SDK,1Link,46pure[16top+30sub],5transport,3setup,2compiler, todos PASS/exit0/0fail-cancel-skip-todo. Root reconcilia167positivos totales con A/B. Tiempo comandos C883225ms (14m43s) más preparación; compiler terminó15:00:40UTC y el primer mutante comenzó15:00:40.854. Cancelado15:00:48 durante el primer control, sin resultado ni lint. No atribuirlo a fallo funcional ni declarar gate verde: quedan2controles ylint de esa revisión, archivo de evidencia final y revisión fresca.
+
+Próximo: acordar terminación mínima de los controles pendientes, conservando los7blobs de código/prueba exactos y sin repetir167positivos aprobados ni ampliar plazos producto. Source aún bajo first_connection_task3_impl; no hay reporte DONE ni aceptación Task3. Las variantes de observación focales fueron probadas aparte en42235796244/job1279529300612PASS, con entrada POST19.672/20.436s dentro de su Root30s; no sustituye el cierre pendiente.
+
+operationalReadiness=false, completePackage=false, PCoff=false. Ningún recurso real, permiso, token, OAuth, cron, Container o suscripción mutado por esta calificación.
