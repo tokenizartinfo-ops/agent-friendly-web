@@ -8,7 +8,7 @@ import {plain,approveFirstConnection,readFirstConnectionProbe,setFirstConnection
 const O='https://delegated-canary.agentfriendlyweb.dev';
 async function fixture(t){
  const f=await initialEntryHarness('first-connection-publication');
- t.after(async()=>{console.info('T2 native stage','teardown-start');try{if(!f.mountFailed)await f.stub.restoreMethods();console.info('T2 native stage','teardown-restored');}finally{await f.mf.dispose();console.info('T2 native stage','teardown-disposed');await f.cleanup();console.info('T2 native stage','teardown-done');}});
+ t.after(async()=>{console.info('T2 native stage','teardown-start');try{if(!f.mountFailed){await f.stub.firstConnectionRestore();await f.stub.restoreMethods();}console.info('T2 native stage','teardown-restored');}finally{await f.mf.dispose();console.info('T2 native stage','teardown-disposed');await f.cleanup();console.info('T2 native stage','teardown-done');}});
  await f.stub.configure('normal');
  console.info('T2 native stage','upstream-start');const initial=await plain(f.stub.invoke(f.refs));console.info('T2 native stage','upstream-done:'+initial.status);if(initial.status!=='material_recorded'){const seen=await plain(f.stub.snapshot());console.info('T2 upstream DATA inspection',JSON.stringify({requests:f.providerRegistry.requests.map(({url,method})=>({method,path:new URL(url).pathname})),responses:f.providerRegistry.responses,rows:seen.map(([key])=>key),stats:await plain(f.stub.stats()),M:{sha256:f.firstConnectionBuild.M.sha256,bytes:f.firstConnectionBuild.M.bytes},QA:{sha256:f.firstConnectionBuild.QA.sha256,bytes:f.firstConnectionBuild.QA.bytes}}));}assert.equal(initial.status,'material_recorded',JSON.stringify(initial));await f.stub.restoreMethods();await f.mountFirstConnection();
  const rows=await plain(f.stub.snapshot()),capsule=JSON.parse(rows.find(([key])=>key.endsWith(':capsule'))[1]);
@@ -39,7 +39,7 @@ test('T2 finite dispatch never falls through ordinary',{timeout:120000},async t=
 });
 test('T2 closed mounted conduits cannot authorize business',{timeout:120000},async t=>{
  const f=await fixture(t);
- const response=await approveFirstConnection(f);assert.equal(response.status,503,'choice reaches pending QA, never a connection success');await response.body.cancel();
+ const response=await f.call('/connections/finite-prepare');assert.notEqual(response.status,200,'unsigned choice cannot approve');await response.body?.cancel();
  const before=await readFirstConnectionProbe(f);assert.equal(before.native.calls.filter(c=>c.url.endsWith('/choice')).length,1,'actual closed M dispatches to actual QA receiver');
  for(const path of ['/authorize','/monitoring','/monitoring/grant']){const r=await f.call(path,path.endsWith('/grant')?{method:'POST'}:{});assert.notEqual(r.status,200);await r.body?.cancel();}
  const p=await readFirstConnectionProbe(f);assert.equal(p.native.calls.length,before.native.calls.length,'closed OAuth/notice denied before QA');assert.equal(p.effects,0);assert.deepEqual(p.native.business,[]);assert.equal(p.uploads,1);assert.equal(p.activations,1);
@@ -85,7 +85,7 @@ test('T3 same initial bytes produce connection and downstream',{timeout:120000},
  const tokenResponse=await f.call('/oauth/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',client_id:f.source.clientId,redirect_uri:'https://client.example/cb',resource:f.source.resource,code,code_verifier:verifier})});
  assert.equal(tokenResponse.status,200);const token=await tokenResponse.json();assert.equal(typeof token.access_token,'string');
  const client=new Client({name:'SYN-native-T3',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
- try{await client.connect(new StreamableHTTPClientTransport(new URL(f.source.resource),{requestInit:{headers:{Authorization:'Bearer '+token.access_token,Host:new URL(O).host}},fetch:(url,options)=>f.mf.dispatchFetch(String(url),options)}));const tools=await client.listTools();assert.deepEqual(tools.tools.map(t=>t.name).sort(),['read_project_summary','read_saved_evidence']);const summary=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(summary.isError,undefined);assert.equal(summary.structuredContent.data.id,f.source.project.projectId);}finally{await client.close();}
+ try{await client.connect(new StreamableHTTPClientTransport(new URL(f.source.resource),{requestInit:{headers:{Authorization:'Bearer '+token.access_token,Host:new URL(O).host}},fetch:async(url,options)=>(await f.mf.getWorker('canary-first-connection')).fetch(String(url),options)}));const tools=await client.listTools();assert.deepEqual(tools.tools.map(t=>t.name).sort(),['read_project_summary','read_saved_evidence']);const summary=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(summary.isError,undefined);assert.equal(summary.structuredContent.data.id,f.source.project.projectId);}finally{await client.close();}
  const actualCurrent=await plain(f.stub.firstConnectionContext());assert.equal(actualCurrent.source?.phase,'read_consent');const afterExchange=await plain(f.stub.snapshot());assert.deepEqual(afterExchange.find(([k])=>k===grantAck[0]),grantAck,'immutable original grant ACK');
  const grant=(await f.db.prepare("SELECT exchanged_at FROM delegated_access_grants WHERE id=?").bind(JSON.parse(beforeExchange.find(([k])=>k.startsWith('afw.finite-preparation-issuer.v1:')&&k.endsWith(':reservation'))[1]).identity.grantId).first());assert.notEqual(grant.exchanged_at,'','real native exchange timestamp');
  const noticeGet=await f.call('/monitoring',{headers});assert.equal(noticeGet.status,200);const noticeHtml=await noticeGet.text(),noticeHandle=/name="handle" value="([^"]+)"/.exec(noticeHtml)?.[1],noticeCookie=noticeGet.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(noticeHandle&&noticeCookie);
@@ -95,4 +95,53 @@ test('T3 same initial bytes produce connection and downstream',{timeout:120000},
  assert.equal(final.negative.ordinary,0);assert.equal(final.negative.sql,0);
  console.info('T3 native closure SYN',JSON.stringify({sourceRevision:f.source.sourceRevision,testRevision:process.env.GITHUB_SHA,receiptHash:receipt.receiptHash,grantTimestampNative:true,noticeLink:true,seededConnection:false,completePackage:false,operationalReadiness:false}));
 
+});
+
+const effectRows=p=>p.rows.filter(([k])=>k.startsWith('afw.finite-policy-effect.v1:'));
+const ticketUses=p=>p.rows.filter(([k])=>k.startsWith('owner-ticket:')&&k.endsWith(':use'));
+const receipts=p=>effectRows(p).filter(([k])=>k.endsWith(':receipt'));
+async function waitFirstState(f,predicate,label){
+ const end=performance.now()+30000;
+ while(performance.now()<end){const state=await plain(f.stub.firstConnectionState());if(predicate(state))return state;await new Promise(r=>setTimeout(r,10));}
+ assert.fail('actual native boundary absent: '+label);
+}
+async function firstSettled(f){
+ const end=performance.now()+5000;
+ while(performance.now()<end){const probe=await plain(f.stub.firstConnectionAvailability());if(probe.available){assert.equal(probe.live,true);return;}await new Promise(r=>setTimeout(r,10));}
+ assert.fail('actual retained work did not settle');
+}
+async function failureCase(t,mode){
+ const f=await fixture(t);await f.stub.firstConnectionConfigure(mode);
+ const response=await approveFirstConnection(f);assert.notEqual(response.status,200,mode);await response.body?.cancel();
+ const probe=await readFirstConnectionProbe(f);assert.equal(receipts(probe).length,0,mode);return {f,probe,state:await plain(f.stub.firstConnectionState())};
+}
+for(const mode of ['enrollment-transaction-lost','enrollment-sync-lost'])test('T3 enrollment unknown cannot upload: '+mode,{timeout:120000},async t=>{
+ const {f,probe,state}=await failureCase(t,mode);assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);assert(state.trace.some(v=>v.key==='afw.finite-preparation-cleanup.v1:enrollment'&&v.kind==='put-settled'));assert(probe.rows.some(([k])=>k==='afw.finite-preparation-cleanup.v1:enrollment'));assert.equal(effectRows(probe).length,0);assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');
+});
+for(const mode of ['upload-send-transaction-lost','upload-lost','upload-malformed','upload-cached','upload-oversize'])test('T3 upload uncertainty cannot activate: '+mode,{timeout:120000},async t=>{
+ const {f,probe,state}=await failureCase(t,mode);assert.equal(f.activations.length,1);assert(state.trace.some(v=>v.key?.endsWith(':send')&&v.kind==='put-settled'));assert(!effectRows(probe).some(([k,v])=>k.endsWith(':send')&&JSON.parse(v).effect==='activation'));assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');assert.equal(f.uploads.length,mode==='upload-send-transaction-lost'?1:2);
+});
+for(const mode of ['activation-lost','activation-malformed','activation-cached'])test('T3 activation uncertainty cannot finish: '+mode,{timeout:120000},async t=>{
+ const {f,probe,state}=await failureCase(t,mode);assert.equal(f.uploads.length,2);assert.equal(f.activations.length,2);assert(state.trace.some(v=>v.effect==='activation'&&v.kind==='native-result-enter'));assert(!effectRows(probe).some(([k,v])=>k.endsWith(':ack')&&JSON.parse(v).resourceId==='bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'));assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');
+});
+for(const mode of ['receipt-transaction-lost','receipt-sync-lost','receipt-readback-lost','final-pair-owner-drift'])test('T3 final readback cannot turn uncertainty into success: '+mode,{timeout:120000},async t=>{
+ const f=await fixture(t);await f.stub.firstConnectionConfigure(mode);const response=await approveFirstConnection(f);assert.notEqual(response.status,200);await response.body?.cancel();const probe=await readFirstConnectionProbe(f);assert.equal(f.uploads.length,2);assert.equal(f.activations.length,2);assert.equal(receipts(probe).length,1,'durable own receipt preserved despite failed response');const state=await plain(f.stub.firstConnectionState());assert(state.trace.some(v=>v.key?.endsWith(':receipt')&&v.kind==='put-settled'));
+});
+for(const mode of ['upload-held','upload-read-held','upload-cancel-held','enrollment-transaction-held','enrollment-sync-held'])test('T3 retained work blocks a different live root: '+mode,{timeout:120000},async t=>{
+ const f=await fixture(t);await f.stub.firstConnectionConfigure(mode);const pending=approveFirstConnection(f);
+ const which=mode==='upload-held'?'fetch':mode==='upload-read-held'?'read':mode==='upload-cancel-held'?'cancel':'work';
+ await waitFirstState(f,s=>s[which+'Held'],'held '+which);
+ const response=await pending;assert.notEqual(response.status,200);await response.body?.cancel();
+ const other=await plain(f.stub.firstConnectionAvailability());assert.equal(other.live,true,'different root is genuinely still live');assert.equal(other.available,false,'actual retained native work owns scope');
+ assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');
+ await f.stub.firstConnectionRelease(which);
+ if(which==='read'){await waitFirstState(f,s=>s.cancelHeld,'late read reached real cancel');assert.equal((await plain(f.stub.firstConnectionAvailability())).available,false);await f.stub.firstConnectionRelease('cancel');}
+ await firstSettled(f);const state=await plain(f.stub.firstConnectionState());assert.equal(state[which+'Settled'],true,'actual native settlement observed');if(which==='read')assert.equal(state.cancelSettled,true);
+ const probe=await readFirstConnectionProbe(f);assert.equal(f.activations.length,1);assert.equal(receipts(probe).length,0);assert.equal(effectRows(probe).filter(([k])=>k.endsWith(':ack')).length,0);
+});
+for(const effect of ['upload','activation'])for(const variant of ['ack','context'])test('T3 resealed foreign publication is not own completion: '+effect+' '+variant,{timeout:120000},async t=>{
+ const f=await fixture(t);await f.stub.firstConnectionConfigure(effect+'-held');const pending=approveFirstConnection(f);await waitFirstState(f,s=>s.fetchHeld,'actual '+effect+' result held');
+ assert.deepEqual(await plain(f.stub.firstConnectionReseal(effect,variant)),{codecRoundtrip:true});
+ await f.stub.firstConnectionRelease('fetch');const response=await pending;assert.notEqual(response.status,200);await response.body?.cancel();await firstSettled(f);
+ const probe=await readFirstConnectionProbe(f);assert.equal(receipts(probe).length,0);assert.equal(f.activations.length,effect==='upload'?1:2);assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');
 });
