@@ -39,3 +39,8 @@ ConsentMinor161/244 CLOSED: revisiónfrescaLinkyScopedround1confirmaronsettlemen
 ## M3 — Task1: segundo intento durante cancel pendiente (DEFERRED)
 
 Origen: revisión fresca Task1 sobre SOURCE97ee8675e614032af2f3caa9fe3eaa24d991c7d1, Spec✅/QualityApproved, sin Critical/Important. test/mcp-qa-finite-policy-transport.test.mjs:92/97/104 invoca activate una vez; posts:1 prueba primer request, no otro intento durante cancel pendiente. El engine tiene failure absorbente en fixed-policy-engine24–32/52, sin defecto funcional identificado. No fixloop ni repetir Task1. Gate/owner: Root en retención Task3 o whole-branch, cuando ese delta se ejerza; intentar segunda operación antes release y exigir rechazo/posts inalterados junto a settlement real. M2warnings RPC/toolchain siguen abiertos sin ownership atribuido; M1baselineSdkReadCurrent sigue desconocido/no reproducido, SQLConsentMinor cerrado. No convertir este Minor en permiso para ensayos/runtime o ampliar Task2.
+
+
+## M4 — Task2: faultprofile de fixture ambiguo/inactivo (DEFERRED)
+
+Revisión fresca Task2 sobre3eebf3b1d50d7537c6ae72138a08b44b2b59ee93, Spec✅/QualityApproved/0Critical0Important. test/fixtures/finite-first-connection-publication.mjs123/129: profile sólo cambiaOAuth, wrong-profile no cambia perfilcompilado y setter no lo acepta. No evidencia negativa de otroperfil. Gate/owner: RootTask3/wholebranch, retirar/renombrar cuando corresponda o usar composición realmente diferente para probarperfil. No fixloop/repeticiónTask2 porMinor. M2 actualizado:11warningsRPCfinales9pure+2native ytoolchainconservados, ownershipdesconocido,nopristine. M1/M3siguenabiertos,SQLConsentMinorcerrado.
