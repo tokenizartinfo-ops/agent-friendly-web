@@ -14,11 +14,11 @@ export function extendFiniteOwnerCleanup(entry){
 
  const cleanupMethods=String.raw`
  async ownerCleanupFault(mode){
-  if(!['normal','grant-before-link','notice-before-link','fence-ack-lost','held-sdk-delete','paging-scope'].includes(mode))throw Error('SYN fixed cleanup fault');
+  if(!['normal','grant-before-link','notice-before-link','fence-ack-lost','held-sdk-delete','paging-scope','inventory-drift'].includes(mode))throw Error('SYN fixed cleanup fault');
   this.ownerCleanupFaultRestore?.();
-  const db=this.env.RELEASE_DB,session=db.withSession,kv=this.env.AFW_FINITE_OWNER_OAUTH_KV,del=kv.delete,list=kv.list;
-  const state=this.cleanupFaultState={mode,sqlWrites:0,sqlCalls:0,sqlElapsedMs:0,reconciles:0,lists:0,deletes:0,held:false,released:false,settled:false,scopeProbe:null,trace:[]};
-  this.ownerCleanupFaultRestore=()=>{db.withSession=session;kv.delete=del;kv.list=list;};
+  const db=this.env.RELEASE_DB,session=db.withSession,kv=this.env.AFW_FINITE_OWNER_OAUTH_KV,del=kv.delete,list=kv.list,get=kv.get;
+  const state=this.cleanupFaultState={mode,sqlWrites:0,sqlCalls:0,sqlElapsedMs:0,reconciles:0,lists:0,deletes:0,grantReads:[],held:false,released:false,settled:false,scopeProbe:null,trace:[]};
+  this.ownerCleanupFaultRestore=()=>{db.withSession=session;kv.delete=del;kv.list=list;kv.get=get;};
   db.withSession=(...a)=>{
    const s=Reflect.apply(session,db,a),prepare=s.prepare;
    s.prepare=(sql,...rest)=>{
@@ -35,6 +35,11 @@ export function extendFiniteOwnerCleanup(entry){
     };return stmt;
    };return s;
   };
+  kv.get=async(...args)=>{
+   const actual=Reflect.apply(get,kv,args),value=await actual;
+   if(String(args[0]).startsWith('grant:'))state.grantReads.push({at:Date.now(),present:value!==null,keyHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(args[0])).then(b=>Buffer.from(b).toString('hex')),valueHash:value===null?null:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(typeof value==='string'?value:JSON.stringify(value))).then(b=>Buffer.from(b).toString('hex'))});
+   return value;
+  };
   kv.list=async options=>{
    state.lists++;state.trace.push({kind:'list',at:Date.now(),limit:options.limit,prefixHash:await crypto.subtle.digest('SHA-256',new TextEncoder().encode(options.prefix)).then(b=>Buffer.from(b).toString('hex'))});
    const value=await Reflect.apply(list,kv,[options]);
@@ -45,12 +50,19 @@ export function extendFiniteOwnerCleanup(entry){
   kv.delete=async key=>{
    state.deletes++;state.trace.push({kind:'delete',at:Date.now(),scope:key.startsWith('token:')?'token':key.startsWith('grant:')?'grant':'foreign'});
    const actual=Reflect.apply(del,kv,[key]),value=await actual;
+   if(mode==='inventory-drift'&&!state.held){
+    state.held=true;state.heldAt=Date.now();state.trace.push({kind:'actual-native-delete-settled-brief-ACK-held',at:state.heldAt});
+    await new Promise((resolve,reject)=>{const tick=()=>{if(state.released)return resolve();if(Date.now()-state.heldAt>=3500)return reject(Error('SYN brief hold release premise missed'));setTimeout(tick,25);};tick();});
+    state.settled=true;state.settledAt=Date.now();state.trace.push({kind:'brief-ACK-released',at:state.settledAt});
+   }
    if(mode==='held-sdk-delete'&&!state.held){
     state.held=true;state.trace.push({kind:'actual-native-delete-settled-ACK-held',at:Date.now()});
     await new Promise(resolve=>{this.releaseCleanupHeld=resolve;});state.settled=true;state.trace.push({kind:'held-ACK-released',at:Date.now()});
    }return value;
   };
  }
+ // Explicit fixture entry reentry; not an additional scheduler delivery or authority.
+ async ownerCleanupReenter(){return super.alarm();}
  async ownerCleanupReset(){this.ownerCleanupFaultRestore?.();}
  async ownerCleanupControl(){this.cleanupFaultState.released=true;this.releaseCleanupHeld?.();this.releaseCleanupHeld=null;}
  async ownerCleanupFaultSignal(){const s=this.cleanupFaultState;return s?{mode:s.mode,held:s.held,settled:s.settled,deletes:s.deletes,lists:s.lists,sqlWrites:s.sqlWrites,reconciles:s.reconciles}:null;}
