@@ -352,6 +352,44 @@ function budgetScopeSeams(source,path){
  return source;
 }
 
+// A reference target must remain a reference; its receiver/key reads are still visited.
+export function isBudgetReferenceTarget(original){
+ let node=original;
+ for(;;){
+  const parent=node.parent;if(!parent)return false;
+  if(ts.isParenthesizedExpression(parent)&&parent.expression===node){node=parent;continue;}
+  if(ts.isBinaryExpression(parent)&&parent.left===node)return parent.operatorToken.kind>=ts.SyntaxKind.FirstAssignment&&parent.operatorToken.kind<=ts.SyntaxKind.LastAssignment;
+  if((ts.isPrefixUnaryExpression(parent)||ts.isPostfixUnaryExpression(parent))&&parent.operand===node)return parent.operator===ts.SyntaxKind.PlusPlusToken||parent.operator===ts.SyntaxKind.MinusMinusToken;
+  if(ts.isDeleteExpression(parent)&&parent.expression===node)return true;
+  if((ts.isForInStatement(parent)||ts.isForOfStatement(parent))&&parent.initializer===node)return true;
+  if((ts.isSpreadElement(parent)||ts.isSpreadAssignment(parent))&&parent.expression===node){node=parent;continue;}
+  if(ts.isPropertyAssignment(parent)&&parent.initializer===node){node=parent;continue;}
+  if(ts.isArrayLiteralExpression(parent)&&parent.elements.includes(node)){node=parent;continue;}
+  if(ts.isObjectLiteralExpression(parent)&&parent.properties.includes(node)){node=parent;continue;}
+  // In particular, do not ascend through a larger member receiver or computed key.
+  return false;
+ }
+}
+export function rewriteBudgetIdentityAccess(original,node,{ast,path,hook,count}){
+ if(!(ts.isPropertyAccessExpression(original)||ts.isElementAccessExpression(original))||isBudgetReferenceTarget(original))return node;
+ const f=ts.factory,literal=createBudgetLiteral;
+ if(ts.isElementAccessExpression(original)&&ts.isVariableDeclaration(original.parent)&&original.parent.name.getText(ast)==='method'){
+  count('identity');return hook('readMethod',[node.expression,node.argumentExpression]);
+ }
+ if(ts.isPropertyAccessExpression(original)){
+  const method=original.name.text,receiver=original.expression.getText(ast),optional=!!original.questionDotToken;
+  if(path==='worker/mcp-own/finite.mjs'&&receiver==='request'&&method==='method'){count('scope');return hook('methodValue',[f.createIdentifier('request'),node]);}
+  const resource=RESOURCE_BINDINGS[method];
+  if(resource&&/(?:^|\.)env$/.test(receiver)){count('identity');return hook('nativeHolder',[node,literal(resource),literal(resource==='DO'?'namespace':'holder')]);}
+  if(method==='storage'&&/^(?:this\.ctx|ctx|context)$/.test(receiver)){count('identity');return hook('nativeHolder',[node,literal('DO'),literal('storage')]);}
+  if(method==='body'){count('body');return hook('body',[node.expression,optional?f.createTrue():f.createFalse()]);}
+  if((CAPTURE_METHODS.has(method)||ts.isVariableDeclaration(original.parent)&&original.parent.name.getText(ast)==='method')&&!(ts.isCallExpression(original.parent)&&original.parent.expression===original)){
+   count('identity');return hook('readMethod',[node.expression,literal(method),optional?f.createTrue():f.createFalse()]);
+  }
+ }
+ return node;
+}
+
 export function transformBudgetPreparedSource(source,path,role){
  source=budgetScopeSeams(source,path);
  const selected=nativeDescriptorByPath.has(path)?selectBudgetCallsites(source,path,role):budgetNativeDescriptorProposal.packages.some(p=>p.path===path)?packageSelection(source,path,role):path==='<stdin>'?entrySelection(source):null;
@@ -464,22 +502,8 @@ export function transformBudgetPreparedSource(source,path,role){
     const method=f.createMethodDeclaration(undefined,undefined,'budgetSnapshot',undefined,undefined,[],undefined,f.createBlock([f.createReturnStatement(hook('snapshot',[]))],true));
     return f.updateClassDeclaration(node,node.modifiers,node.name,node.typeParameters,node.heritageClauses,[...node.members,method]);
    }
-   if(ts.isElementAccessExpression(original)&&ts.isVariableDeclaration(original.parent)&&original.parent.name.getText(ast)==='method'){
-    identityEdges++;return hook('readMethod',[node.expression,node.argumentExpression]);
-   }
-   if(ts.isPropertyAccessExpression(original)){
-    const method=original.name.text,receiver=original.expression.getText(ast),optional=!!original.questionDotToken;
-    if(path==='worker/mcp-own/finite.mjs'&&receiver==='request'&&method==='method'){scopeEdges++;return hook('methodValue',[f.createIdentifier('request'),node]);}
-    // Passive identity capture at existing binding/storage reads only.
-    const resource=RESOURCE_BINDINGS[method];
-    if(resource&&/(?:^|\.)env$/.test(receiver)){identityEdges++;return hook('nativeHolder',[node,literal(resource),literal(resource==='DO'?'namespace':'holder')]);}
-    if(method==='storage'&&/^(?:this\.ctx|ctx|context)$/.test(receiver)){identityEdges++;return hook('nativeHolder',[node,literal('DO'),literal('storage')]);}
-    if(method==='body'&&!ts.isBinaryExpression(original.parent)){bodyEdges++;return hook('body',[node.expression,optional?f.createTrue():f.createFalse()]);}
-    if((CAPTURE_METHODS.has(method)||ts.isVariableDeclaration(original.parent)&&original.parent.name.getText(ast)==='method')&&!(ts.isCallExpression(original.parent)&&original.parent.expression===original)&&
-       !(ts.isBinaryExpression(original.parent)&&original.parent.left===original)){
-     identityEdges++;return hook('readMethod',[node.expression,literal(method),optional?f.createTrue():f.createFalse()]);
-    }
-   }
+   const identity=rewriteBudgetIdentityAccess(original,node,{ast,path,hook,count:kind=>{if(kind==='identity')identityEdges++;else if(kind==='body')bodyEdges++;else if(kind==='scope')scopeEdges++;else assert.fail('fixed identity hook kind');}});
+   if(identity!==node)return identity;
    if(ts.isNewExpression(original)&&ts.isIdentifier(original.expression)&&['Request','Response','ReadableStream'].includes(original.expression.text)){
     bodyEdges++;return f.createCallExpression(hook('construct',[node.expression,literal(original.expression.text)]),node.typeArguments,node.arguments??[]);
    }

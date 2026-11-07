@@ -48,7 +48,7 @@ test('Q4 logical denial and cancellation do not fabricate native settlement',()=
 test('Q5 observing preserves actual promise identity, resolution, rejection and no authority',async()=>{
  // Regression: foreign fragment coordinates must not alter inserted compiler metadata.
  const ts=(await import('typescript')).default;
- const {createBudgetLiteral,createBudgetScopeExpression,transformBudgetPreparedSource}=await import('./fixtures/finite-budget-world.mjs');
+ const {createBudgetLiteral,createBudgetScopeExpression,transformBudgetPreparedSource,rewriteBudgetIdentityAccess}=await import('./fixtures/finite-budget-world.mjs');
  const parse=(source,path)=>{const ast=ts.createSourceFile(path,source,ts.ScriptTarget.ESNext,true,ts.ScriptKind.JS);assert.equal(ast.parseDiagnostics.length,0,'inserted compiler output parses');return ast;};
  const decode=node=>{
   if(ts.isStringLiteral(node))return node.text;
@@ -114,6 +114,66 @@ test('Q5 observing preserves actual promise identity, resolution, rejection and 
  };
  visit(ast);assert.deepEqual(readers.filter(([method])=>method==='read'),[['read',{operation:'read',exposedBytes:true}]]);
  assert.deepEqual(readers.filter(([method])=>method==='cancel'),[['cancel',{operation:'cancel',exposedBytes:false}]]);
+
+ // Regression: identity observation keeps actual references assignable while visiting their reads.
+ const {transform}=await import('esbuild');
+ const identityOutput=source=>{
+  const ast=parse(source,'identity-fixture.mjs'),f=ts.factory,seen=[];
+  const hook=(name,args)=>f.createCallExpression(f.createPropertyAccessExpression(f.createIdentifier('__afwBudget'),name),undefined,args);
+  const result=ts.transform(ast,[context=>{
+   const visit=original=>{
+    const node=ts.visitEachChild(original,visit,context);
+    return rewriteBudgetIdentityAccess(original,node,{ast,path:'worker/mcp-own/finite.mjs',hook,count:kind=>seen.push(kind)});
+   };
+   return root=>ts.visitNode(root,visit);
+  }]);
+  const sourceText=ts.createPrinter().printFile(result.transformed[0]);result.dispose();return {source:sourceText,seen};
+ };
+ const referenceSource=`function refs(env,state,ctx,request,input){
+  state.counts.list++; ++state.counts.transaction; state.counts.get += 1; state.counts.sync ||= 0;
+  env.RELEASE_DB=input.value; (ctx.storage)=input.storage; delete request.body;
+  ({x:env.RELEASE_DB=request.body}=input.object);
+  [env.RELEASE_DB,...ctx.storage]=input.array; ({...env.RELEASE_DB}=input.object);
+  for(env.RELEASE_DB of input.array){} for(request.body in input.object){}
+  env.RELEASE_DB.get=input.fn; env.RELEASE_DB[request.body]=input.fn;
+  const method=env.RELEASE_DB[input.key]; return request.body===input.rhs&&request.method==='POST'&&method;
+ }`;
+ const references=identityOutput(referenceSource);await transform(references.source,{loader:'js',target:'es2022'});
+ const referenceAST=parse(references.source,'identity-output.mjs'),identityCalls=[];
+ const collect=node=>{if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.expression.getText(referenceAST)==='__afwBudget')identityCalls.push([node.expression.name.text,node.arguments[0]?.getText(referenceAST)]);ts.forEachChild(node,collect);};collect(referenceAST);
+ assert.equal(identityCalls.filter(([name,receiver])=>name==='nativeHolder'&&receiver==='env.RELEASE_DB').length,3,'larger member targets and captured method still read the binding');
+ assert.equal(identityCalls.filter(([name])=>name==='body').length,3,'default RHS, computed key and comparison each retain their body read');
+ assert.equal(identityCalls.filter(([name])=>name==='readMethod').length,1,'actual computed method acquisition remains observed');
+ assert.equal(identityCalls.filter(([name])=>name==='methodValue').length,1);
+ const semanticSource=`function exercise(input){
+  const env=input.env,state=input.state,ctx=input.ctx,request=input.request;
+  state.counts.list++; ++state.counts.transaction; state.counts.get+=2; state.counts.sync--;
+  env.RELEASE_DB=input.replacement;
+  env.RELEASE_DB.get=input.fn;
+  const body=request.body,method=ctx.storage.get;
+  input.target[request.body]=body;
+  const same=request.body===body&&request.method==='POST';
+  delete env.RELEASE_DB;
+  return {counts:state.counts,body,same,sameMethod:method===input.fn,target:input.target};
+ }`;
+ const semantic=identityOutput(semanticSource);await transform(semantic.source,{loader:'js',target:'es2022'});
+ const execute=source=>{
+  const trace=[],observations=[];const fn=()=>42,holder={get:fn},replacement={};
+  let binding=holder;
+  const env={};Object.defineProperty(env,'RELEASE_DB',{configurable:true,get(){trace.push('binding-get');return binding;},set(value){trace.push('binding-set');binding=value;}});
+  Object.defineProperty(replacement,'get',{configurable:true,set(value){trace.push('method-set');assert.equal(value,fn);}});
+  const request={get body(){trace.push('body-get');return 'key';},get method(){trace.push('method-get');return 'POST';}};
+  const ctx={get storage(){trace.push('storage-get');return holder;}};
+  const input={env,request,ctx,fn,holder,replacement,state:{counts:{list:0,transaction:0,get:0,sync:2}},target:{}};
+  const observer={nativeHolder(value){observations.push('holder');return value;},readMethod(receiver,key){observations.push('method');return receiver[key];},body(receiver){observations.push('body');return receiver.body;},methodValue(request,value){observations.push('request-method');return value;}};
+  const result=Function('__afwBudget','input',source+';return exercise(input);')(observer,input);
+  return {result,trace,observations,deleted:!Object.hasOwn(env,'RELEASE_DB')};
+ };
+ const untouched=execute(semanticSource),observed=execute(semantic.source);
+ assert.deepEqual(observed.result,untouched.result);assert.deepEqual(observed.trace,untouched.trace);assert.equal(observed.deleted,true);
+ assert.deepEqual(observed.trace,['binding-set','binding-get','method-set','body-get','storage-get','body-get','body-get','method-get']);
+ assert.deepEqual(observed.result.counts,{list:1,transaction:1,get:2,sync:1});assert.equal(observed.result.sameMethod,true);
+ assert.deepEqual(observed.observations,['holder','body','holder','method','body','body','request-method']);
  const {c,r,child}=fixture();let effect=0;const actual=Promise.resolve().then(()=>{effect++;return 42;}),op=begin(c,r,child,'authorize_get',performance.now());
  assert.equal(observeBudgetPromise(c,op,actual),actual);assert.equal(await actual,42);assert.equal(effect,1);
  const error=Error('native rejection'),rejected=Promise.reject(error),second=begin(c,r,child,'authorize_get',performance.now());assert.equal(observeBudgetPromise(c,second,rejected),rejected);await assert.rejects(rejected,value=>value===error);await Promise.resolve();
