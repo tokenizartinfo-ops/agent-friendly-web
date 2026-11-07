@@ -1420,3 +1420,32 @@ The syntax loop stopped at test/finite-budget-diagnostics.test.mjs:194: SyntaxEr
 Primary job log retains the exact error/caret and exit1 at22:16:42Z. The always-run artifact seal/upload/readback succeeded, but because syntax runs before tee commands, the artifact contains ONLY budget-artifact.json (files=[]). Artifact13593072163,338B ZIP/SHAf249121765d1889d56e04e4b9572348663f1fe6017d9fb8bd9e074c64d946295; manifest262B/SHA41b4100aff4693a5834a5115fe6b0d76cc61cfc72ab2004b912e5d3eb96aa706. SAME-ID downloaded readback verified the actual one-file inventory/source/run/attempt. Created22:16:43Z, expires2026-11-14T22:16:43Z, expired=false. Artifact does not contain test/preflight/lint logs; diagnostic evidence is the independently read decoded primary job log128545613974 and this append. No claim of complete test evidence or nine-check success.
 
 Reported immediately to Root. Minimal prospective correction is renaming only the newly introduced fixture-local observed binding and its uses (e.g. identityObserved), with no predicate, scope, expectation or business change; no correction or retry has been made. TEMP retired by this cleanup, then CAS/report/tree/main readbacks and STOP_WRITES. Any further action requires Root ruling within the unchanged22:28 activation/22:55 closure cutoff. All failures/history preserved; Task1 remains incomplete and all readiness flags false.
+
+
+## G5 final attempt today: mechanical Q5 binding rename — 2026-11-07
+
+Authorized only by Rootdocsed56bb9c8d51092c651f14cd00f0ea2813a13755/ledgerbcf0f2a17494987d7c3dfc8be71007d4f3b6c2b5/canonicalfeb7536619827b57165e7b42c9e89392cb90f036. Source68a65ff881a2ce9f90307dde303ba60de1a3b8f2/tree12a024cab26240b28b8b5884a66cf9ae1a179930 is the preserved G4 baseline. Main freshly unchanged0c9c475b3ebaa970fc11d628b40e50a90cceb727.
+
+Exactly8 identifier tokens in the NEW five-line controlled fixture fragment change from observed to identityObserved (declaration+seven uses). Exact prefix and suffix string comparisons PASS; every byte outside that fragment is unchanged, including the original later const observed=runtime.control(...), all test expectations, all8Q groups, world/predicate/runtime/Source. No other implementation correction.
+
+Before:
+
+```js
+ const untouched=execute(semanticSource),observed=execute(semantic.source);
+ assert.deepEqual(observed.result,untouched.result);assert.deepEqual(observed.trace,untouched.trace);assert.equal(observed.deleted,true);
+ assert.deepEqual(observed.trace,['binding-set','binding-get','method-set','body-get','storage-get','body-get','body-get','method-get']);
+ assert.deepEqual(observed.result.counts,{list:1,transaction:1,get:2,sync:1});assert.equal(observed.result.sameMethod,true);
+ assert.deepEqual(observed.observations,['holder','body','holder','method','body','body','request-method']);
+```
+
+After:
+
+```js
+ const untouched=execute(semanticSource),identityObserved=execute(semantic.source);
+ assert.deepEqual(identityObserved.result,untouched.result);assert.deepEqual(identityObserved.trace,untouched.trace);assert.equal(identityObserved.deleted,true);
+ assert.deepEqual(identityObserved.trace,['binding-set','binding-get','method-set','body-get','storage-get','body-get','body-get','method-get']);
+ assert.deepEqual(identityObserved.result.counts,{list:1,transaction:1,get:2,sync:1});assert.equal(identityObserved.result.sameMethod,true);
+ assert.deepEqual(identityObserved.observations,['holder','body','holder','method','body','body','request-method']);
+```
+
+Only Q5/report/TEMP paths change. Restore EXACT original three-job TEMP blob8e940dcf91efcdbc167088386c086ef90cc87578. G5 is the LAST qualification attempt today; activate only before22:28UTC (rename/comparison prepared22:20:27UTC), run every new-SHA8Q+strictM/QApreflight beforeI0 then originalP1/900s/Root30s/child5s/C0/C1, without priorPASS summing/newcase/clock extension. Source freezes until terminal; artifacts7days/SAME-ID readback and terminal retirement/fullfailurehistory/CAS/protected/main/STOP. A failure permits evidence/analysis only, NO G6 today. Root closes22:55UTC/ownerPCoff23:00UTC; no late/inflight extension. All readiness claims remain false and no test pass is claimed at activation.

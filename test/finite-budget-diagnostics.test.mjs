@@ -169,11 +169,11 @@ test('Q5 observing preserves actual promise identity, resolution, rejection and 
   const result=Function('__afwBudget','input',source+';return exercise(input);')(observer,input);
   return {result,trace,observations,deleted:!Object.hasOwn(env,'RELEASE_DB')};
  };
- const untouched=execute(semanticSource),observed=execute(semantic.source);
- assert.deepEqual(observed.result,untouched.result);assert.deepEqual(observed.trace,untouched.trace);assert.equal(observed.deleted,true);
- assert.deepEqual(observed.trace,['binding-set','binding-get','method-set','body-get','storage-get','body-get','body-get','method-get']);
- assert.deepEqual(observed.result.counts,{list:1,transaction:1,get:2,sync:1});assert.equal(observed.result.sameMethod,true);
- assert.deepEqual(observed.observations,['holder','body','holder','method','body','body','request-method']);
+ const untouched=execute(semanticSource),identityObserved=execute(semantic.source);
+ assert.deepEqual(identityObserved.result,untouched.result);assert.deepEqual(identityObserved.trace,untouched.trace);assert.equal(identityObserved.deleted,true);
+ assert.deepEqual(identityObserved.trace,['binding-set','binding-get','method-set','body-get','storage-get','body-get','body-get','method-get']);
+ assert.deepEqual(identityObserved.result.counts,{list:1,transaction:1,get:2,sync:1});assert.equal(identityObserved.result.sameMethod,true);
+ assert.deepEqual(identityObserved.observations,['holder','body','holder','method','body','body','request-method']);
  const {c,r,child}=fixture();let effect=0;const actual=Promise.resolve().then(()=>{effect++;return 42;}),op=begin(c,r,child,'authorize_get',performance.now());
  assert.equal(observeBudgetPromise(c,op,actual),actual);assert.equal(await actual,42);assert.equal(effect,1);
  const error=Error('native rejection'),rejected=Promise.reject(error),second=begin(c,r,child,'authorize_get',performance.now());assert.equal(observeBudgetPromise(c,second,rejected),rejected);await assert.rejects(rejected,value=>value===error);await Promise.resolve();
