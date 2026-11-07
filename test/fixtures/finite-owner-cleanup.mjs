@@ -99,7 +99,7 @@ export function instrumentFiniteOwnerCleanup(source){
  return source;
 }
 export async function ownerReferenceFixture(t,{cleanupCheckpoint=false}={}){
- const f=await initialEntryHarness('first-connection-publication',{ownerCleanup:true,cleanupCheckpoint});
+ const f=await initialEntryHarness('first-connection-publication',{ownerCleanup:true,cleanupCheckpoint});f.cleanupQualification=cleanupCheckpoint;
  t.after(async()=>{try{await f.stub.ownerReferenceControl('released').catch(()=>{});await f.stub.firstConnectionRestore();await f.stub.restoreMethods();}finally{await f.mf.dispose();await f.cleanup();}});
  await f.stub.configure('normal');assert.equal((await plain(f.stub.invoke(f.refs))).status,'material_recorded');await f.stub.restoreMethods();await f.mountFirstConnection();await f.stub.firstConnectionConfigure('normal');
  const initial=f.firstConnectionBuild.M;assert.equal(initial.sha256,f.resident.module.sha256);assert(initial.inputs.includes('worker/mcp-own/finite.mjs'));
@@ -127,7 +127,13 @@ export async function recordOwnerReference(f,label,extra={}){
 }
 export async function downstreamOwnerReference(f,response,prepared,{cleanupPartial=false}={}){
  const code=new URL(response.headers.get('Location')).searchParams.get('code');assert(code);await response.body?.cancel();
+ if(f.cleanupQualification){
+  const rows=await plain(f.stub.ownerReferenceObserve()),ref=JSON.parse(rows.rows.find(([k])=>k.endsWith(':reference'))[1]),native=await plain(f.stub.ownerCleanupNativeRows()),key='grant:'+native.grant.user_id+':'+ref.sdkGrantId;
+  const raw=JSON.parse(await f.kv.get(key)),listed=await f.kv.list({prefix:key,limit:1});assert.equal(listed.keys[0]?.name,key);assert(Number.isSafeInteger(listed.keys[0].expiration));assert.equal(raw.expiresAt,undefined);
+  f.sdkBeforeExchange={referenceHash:ref.recordHash,grantExpiresAt:null,nativeKVExpiration:listed.keys[0].expiration,createdAt:raw.createdAt,observedAt:Date.now()};
+ }
  const tokenResponse=await f.call('/oauth/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',client_id:f.source.clientId,redirect_uri:'https://client.example/cb',resource:f.source.resource,code,code_verifier:prepared.verifier})});assert.equal(tokenResponse.status,200);const token=await tokenResponse.json();assert.equal(typeof token.access_token,'string');f.cleanupToken=token;
+ if(f.cleanupQualification)f.sdkAfterExchange=await observeCleanupSdkExchange(f,token);
  const client=new Client({name:'SYN-owner-reference',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
  try{await client.connect(new StreamableHTTPClientTransport(new URL(f.source.resource),{requestInit:{headers:{Authorization:'Bearer '+token.access_token,Host:new URL(O).host}},fetch:(url,options)=>f.mf.dispatchFetch(String(url),options)}));const result=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(result.isError,undefined);assert.equal(result.structuredContent.data.id,f.source.project.projectId);}finally{await client.close();}
  const screen=await f.call('/monitoring',{headers:prepared.headers});assert.equal(screen.status,200);const html=await screen.text(),handle=/name="handle" value="([^"]+)"/.exec(html)?.[1],cookie=screen.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(handle&&cookie);
@@ -168,4 +174,29 @@ export function instrumentCleanupConsumer(source){
   assert.equal(source.split(end).length,2);source=source.replace(end,"try{return await clock.wait(actual);}finally{(globalThis.__r2CleanupChildren??=[]).push({startedAt:childAt,elapsedMs:performance.now()-childMono,aborted:clock.lease.signal.aborted});originalLease.signal.removeEventListener('abort',stop);clock.close();}");
  }
  return source;
+}
+
+/** Dated native facts after the real code exchange; never replaces the pre-302 Reference. */
+export async function observeCleanupSdkExchange(f,token){
+ const o=await plain(f.stub.ownerReferenceObserve()),referenceRaw=o.rows.find(([k])=>k.endsWith(':reference'))?.[1];assert(referenceRaw);
+ const ref=JSON.parse(referenceRaw),native=await plain(f.stub.ownerCleanupNativeRows());assert(native.grant);
+ const key='grant:'+native.grant.user_id+':'+ref.sdkGrantId,raw=await f.kv.get(key);assert.equal(typeof raw,'string');const grant=JSON.parse(raw);
+ assert.equal(grant.id,ref.sdkGrantId);assert.equal(grant.userId,native.grant.user_id);assert.equal(grant.clientId,f.source.clientId);
+ assert.equal(grant.metadata.afwFiniteCleanup.correlationHash,ref.correlationHash);assert(Number.isSafeInteger(grant.expiresAt));
+ const rows=await plain(f.stub.snapshot()),plan=JSON.parse(rows.find(([k])=>k==='afw.finite-initial-cleanup.v1:plan')[1]);
+ if(!f.cleanupSdkOnly)assert(grant.expiresAt*1000<=plan.C0,'actual post-exchange SDK expiry must not exceed original C0');
+ assert.equal(token.refresh_token,undefined,'M refresh remains disabled');assert(Number.isSafeInteger(token.expires_in)&&token.expires_in>=60&&token.expires_in<=300);
+ const hash=v=>createHash('sha256').update(v).digest('hex');
+ const tokenId=hash(token.access_token),tokenRaw=await f.kv.get('token:'+grant.userId+':'+grant.id+':'+tokenId);assert.equal(typeof tokenRaw,'string');const nativeToken=JSON.parse(tokenRaw);
+ assert.equal(nativeToken.grantId,grant.id);assert.equal(nativeToken.userId,grant.userId);
+ assert.equal(JSON.parse((await plain(f.stub.ownerReferenceObserve())).rows.find(([k])=>k.endsWith(':reference'))[1]).recordHash,ref.recordHash);
+ return {purpose:'afw.post-exchange-sdk-fact.syn.v1',referenceHash:ref.recordHash,referenceRawHash:hash(referenceRaw),referenceExpiresAt:ref.expiresAt,selectorHash:hash(ref.sdkGrantId),subjectHash:hash(grant.userId),clientHash:hash(grant.clientId),correlationHash:ref.correlationHash,metadataHash:hash(JSON.stringify(grant.metadata)),createdAt:grant.createdAt,expiresAt:grant.expiresAt,tokenExpiresAt:nativeToken.expiresAt,tokenHash:hash(token.access_token),advertisedExpiresIn:token.expires_in,D1ExpiresAt:Date.parse(native.grant.expires_at),observedAt:Date.now(),I0:plan.I0,C0:plan.C0,C1:plan.C1,operationalReadiness:false};
+}
+export async function readCleanupM(worker,token,projectId){
+ const requests=[],client=new Client({name:'SYN-named-M-control',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
+ try{
+  await client.connect(new StreamableHTTPClientTransport(new URL(O+'/mcp'),{requestInit:{headers:{Authorization:'Bearer '+token,Host:new URL(O).host}},fetch:async(url,options)=>{const response=await worker.fetch(String(url),options);requests.push({method:options?.method??'GET',status:response.status});return response;}}));
+  const result=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(result.isError,undefined);assert.equal(result.structuredContent.data.id,projectId);
+  return {worker:'canary-first-connection',path:'/mcp',at:Date.now(),requests,projectHash:createHash('sha256').update(projectId).digest('hex'),dataRead:true};
+ }finally{await client.close();}
 }
