@@ -6,7 +6,7 @@ PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT SOURC
 
 CURRENT: Task1 COMPLETE SOURCE/SYN at2c6b5a0eb503b8d877158f85832c510b9a45f7ca/tree57ac1355a85560dee14b2f933b4b68f877911ae2. Independent spec+quality APPROVED, Critical0/Important0/Minor4 tracked; acceptance40ebf3aa6d9982139f6507336bf352e27c5e9a4f/blob9896fc376075f5fd1bd544864dac8469a25c8692. Do not repeat Task1 or the earlier body-retention fix.
 
-CURRENT: Task2 FIX ROUND1/5 — independent reviewerfinite_owner_cleanup_review returned SpecFAIL/TaskQualityCHANGES_REQUIRED onAA; ImportantI1currentSDKgrantnotqualified beforedelete andI2missingfresh final inventory afterSDK, noCritical. Review preservedc1651974/blobc23b8241. SourceAA/tree258e FIX_BASE; originalwriterfinite_owner_cleanup_impl will resume with bindingbrief3bc2856e/blob49757cb0. Historicalgreen51 remains valid exercised evidence but Task2 NOTaccepted. MinorsM1/M2/M3 deferred to combinedgate. No Sourcewrites yet forfix; no newwholeplanreview untilTask2gate closes. Main0c9c unchanged; operationalReadiness/completePackage/PCofffalse.
+CURRENT: Task2 FIX ROUND1/5 ACTIVE — causal focal RED42387214095/attempt1,SourceFROZEN94e00923a25833cd134669e03fb646f3b1255c0b/tree505d56cbb08a649540d9027832fc1d09d2db4732. Only4fixture/test/temporaryqualifier paths changed from FIX_BASEAA; sixCoreunchanged,3176otherleaves protected. Fourcases/fourjobs/twogenuine lineagesg6/g7, oldproductionAA; no Sourcewrites untilterminal. New56coveringlayout approved inbrief5507eb69/blob37a995f2. ReviewerI1/I2 remainopen until meaningfulRED→GREEN and scopedre-review; original51green notacceptance. Main0c9c unchanged; readiness/package/PCofffalse.
 
 OWNER SHUTDOWN historical6nov, lifted by owner7novcontinua: Gabriel planned PCoff6nov19:00Argentina/22:00UTC. Root checkpoint/stop before21:55UTC. Hosted Actions may finish independently; that is CI SOURCE/SYN, not the AFW PC-off rehearsal or persistent guard. No human step is currently needed.
 
@@ -374,3 +374,13 @@ Finalcoveringrun56=original51+5necessarynewcases (40component+16native),8groups/
 Privatecoordination note: a newlydelivered compatibilitylearning wasreadfromitsoriginalrelayrecord anddeduplicated; oneACK sent andreadbackverified. Sourceinitial-cleanupHTTPadapteralreadyusesmanual redirects withstatus/rejected-body controls; no AFWcode/test/runtime/supportaction was taken from that advisory, no incident/proxyrecovery inferred. No private message body copied here. Crossprojectisolation maintained; this didnotreplace I1/I2 work.
 
 Owner unavailable until16:20UTC; no humanstep. Source/SYN only; readiness/package/PCofffalse.
+
+## 7 nov, 15:36 UTC — fix round1 causal RED frozen
+
+Run42387214095/attempt1 created15:36:36UTC onSource94e00923a25833cd134669e03fb646f3b1255c0b/tree505d56cbb08a649540d9027832fc1d09d2db4732. Root independently verified fulltree/linear4commits/compareAA..94e: ONLYtestfixturesowner-cleanup(ac3971...),persistence(72db12...),native.test(4a5df2...) and temporaryqualifier32b79e950862670412c2990970228a8aeb97bafb. All6Corebyte/mode/type remainAA;3176otherleaves unchanged. No fixproductionwrittenyet. Fourcases/fourjobs/twooriginalgenuineSYNlineagesg6/g7,contentsread/max2MF/job15min. Freezeuntilterminal; failed tests mustidentifyI1/I2 causes rather than unsupportedpremisses before implementation.
+
+Prior51green42381567231 remains historicalvalid evidence for the exercisedscenarios, not Task2approval. FixBaseAA remains source of scopedrereview. No implementation ofMinorM1/M2/M3 inthisround; combinedfinalgate musttriagethem andTask1debt.
+
+Root recovered exact warningexcerpts from already-fetched run42381567231 logs, withno rerun, into docs/superpowers/reviews/2026-11-07-finite-owner-restoration-warning-excerpts.es.md @7f51f91a16c53fa1a1d6ecf33e4baded704a34f7/blobbc26361788e2752b8ab7082b30ad6c68ded074cb. ContainsNodeDEP0040/0169/0005,CIMDdisabled,RPCstubdisposal andActionsNode20forced24. Theseareobservations,notresolvedorautomaticallyharmless; do not changecompatflags because a warninginstructs it. This resolves availability of the previouslyunseen warningtext; severity/lifetimeimpact stillbelongscombinedreview. No repeatedsuite or upgrade.
+
+Combinedplan BASE7aab/tree6eb and19netpathbaselines cached for futurepackaging only; combinedreview is NOTdispatched or accepted whileTask2I1/I2 open. Ownerunavailableactionsuntil16:20UTC; currentSourceworkneedsnohuman. No runtime/credentials/OAuth/Max/mail/monitors. operationalReadiness=false,completePackage=false,PCoff=false.
