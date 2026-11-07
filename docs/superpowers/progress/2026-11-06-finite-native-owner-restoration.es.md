@@ -6,11 +6,11 @@ PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT SOURC
 
 CURRENT: Task1 COMPLETE SOURCE/SYN at2c6b5a0eb503b8d877158f85832c510b9a45f7ca/tree57ac1355a85560dee14b2f933b4b68f877911ae2. Independent spec+quality APPROVED, Critical0/Important0/Minor4 tracked; acceptance40ebf3aa6d9982139f6507336bf352e27c5e9a4f/blob9896fc376075f5fd1bd544864dac8469a25c8692. Do not repeat Task1 or the earlier body-retention fix.
 
-CURRENT: Task2 FIX ROUND1/5 ACTIVE — FINAL covering56 run42390108314/attempt1 created16:12:21UTC,SourceFROZEN92d0255a2d5c2ac2249941e8348a0d5701742604/tree7c06844f33aeb6d0ce0d75381847b8f40d5a28a9. FocalGREEN42388746349/c06 SUCCESS4/4 cases+4jobs/readbacks aftercausalRED. Code/tests identicalfocal; onlyqualifier changed70d566b9/contentsread/16jobs/3lanes/9lineages19graphs/56cases40+16. No Sourcewrites untilterminal. I1/I2 notcloseduntilappendedfixreport+scopedrereviewAA..fixHEAD; main0c9c unchanged. Owneravailable/nohumanstep; readiness/package/PCofffalse.
+CURRENT: Task2 FIX ROUND1/5 — full covering qualification SUCCESS: run42390108314/attempt1 completed7Nov17:01:58UTC, Source92d0255a2d5c2ac2249941e8348a0d5701742604/tree7c06844f33aeb6d0ce0d75381847b8f40d5a28a9. Root independently verified56PASS/0fail/cancel/skip/todo,16jobsSUCCESS/24artifacts,9lineages19graphs. Await appended fix report + qualifier retirement/Source STOP, then AA..fixHEAD scoped rereview I1/I2/new breakage. Do NOT mark Task2 accepted before that review. Task1 accepted; main untouched. Owner available; no human step. readiness/package/PCoff=false.
 
 OWNER SHUTDOWN historical6nov, lifted by owner7novcontinua: Gabriel planned PCoff6nov19:00Argentina/22:00UTC. Root checkpoint/stop before21:55UTC. Hosted Actions may finish independently; that is CI SOURCE/SYN, not the AFW PC-off rehearsal or persistent guard. No human step is currently needed.
 
-Plan latest32833cd81e7e84f8d835f83a97da0ebdc62a6408/blob6c294e2189ffb3af3698576e54ed193b8be4f175 (38675chars), implementation-rulings section supersedes older49/38/shared-C1 assumptions. Task2 FINAL GREEN requires51 cases (14+10+9+2+5+1+10); no combined result accepted; prior second attempt terminal, new fixture correction preflight pending. These are distinct from Task1's51 total executions across its failed/intermediate/final runs.
+Plan latest32833cd81e7e84f8d835f83a97da0ebdc62a6408/blob6c294e2189ffb3af3698576e54ed193b8be4f175 (38675chars). Initial Task2 matrix51 is historical and preserved below; binding FIX ROUND1 brief5507eb69/blob37a995f2 adds five necessary cases for56=40components+16native. Older fixture corrections/preflights are closed evidence, not the current next step. Do not combine runs or repeat accepted Task1.
 
 Main last independently read0c9c475b3ebaa970fc11d628b40e50a90cceb727; no runtime read or mutation this block. Source ceiling remains expired, original clocks/three slots unchanged. operationalReadiness=false;completePackage=false;PCoff=false. No human code/credential/consent window open or needed for Source/Actions SYN.
 
@@ -436,3 +436,43 @@ Root parseó JSON g5 íntegro: originalC0=1794069790000; SDK-only callbackOmitte
 Ruling: autorizar al escritor una extracción en memoria de evidencia YA existente únicamente artifact13581839130/run42390108314attempt1/Source92d0255a, ZIP16487B/SHA25669b6733b03ede840d998ab82c97df7830f5db079680d6dae9bdf82309b59ca78. Motivo: segunda línea JSONg3 truncada65567chars, deudaM3 conocida; recuperar métricas/estado sin nuevoefecto. LímitesZIP2MiB/expandido4MiB, file_ref oficial, comprobarID/run/source/digest/path/bytes/SHA antesdeuso; sólo directorio central/evidence-manifest/same-fence-identity.json. No DB/scripts/OAuthvalues/disco/deps, liberar buffers tras resumen saneado. Costo si es incorrecto: lectura innecesaria de unosKB SYN; no permite rerun/Sourcewrite ni ejecución del contenido. No duplicar extracción desdeRoot. El reporte debe conservar sus resultados ylimitaciones.
 
 Source92d permanece congelado. operationalReadiness=false;completePackage=false;PCoff=false; sin runtime/credenciales/permisos/login/main/Max/mail.
+
+
+## FIX ROUND1/5 — final covering56 terminal verified, 7Nov17:03UTC
+
+Run42390108314/attempt1 completed17:01:58UTC SUCCESS on fixed Source92d0255a2d5c2ac2249941e8348a0d5701742604/tree7c06844f33aeb6d0ce0d75381847b8f40d5a28a9. All16 jobs SUCCESS. Root independently counted primary TAP40components +native groups3/2/2/2/2/1/3/1=56PASS,0fail/cancel/skip/todo. Exact outcome readbacks g0=4,g1=3,g2=3,g3=3,g4=43partialfiles+boundparent,g5=3,g6=5,g7=3. All8 producer readbacks preserve original Source/IDs/scripts/storage/clocks:9lineages/19graphs/max2native pergroup. Source/test changes remain the four inspected paths; other3175 AA leaves unchanged; final code identical focalC06 except qualifier.
+
+New g6 tests: current native grant matching qualifies before SDK reduction; conflicting current object has zero SDK deletes/no successful receipt; already-complete reentry tests fresh inventory and preserves historical rows/state/alarm. g7: postrestore Workflow drift during retained SDK prevents both completions. These test outputs support rereview; Root has not waived I1/I2 or declared independent acceptance.
+
+Authorized g3 recovery completed by writer: exact ZIP13581839130/16487B/digest69b673...; central4entries/294017B declared; only manifest641B and same-fence-identity.json123860B inflated. PayloadSHA256b757a01239159e6555d6cfc47a57d8dae79eba4b6a429a63757141d80493f1b2. Source92d/groupg3 matched. Three deliveries/admin_pending/alarmnull, restores0/receiptnull, sqlWrites1/reconciles2, suffixes identity+reconciled:2/:3,0KVlists/deletes,childmax212ms. Buffers released. Root independently verified artifact ID/bytes/full digest/Source/expiry via run-artifacts metadata; did not duplicate ZIP read. Console truncation M3 remains recorded, not repaired by recovering evidence.
+
+Primary artifact inventory (metadata read directly; SYN only, no local downloads):
+
+|ID|Name|ZIP bytes|SHA256|Expires UTC|
+|---|---|---:|---|---|
+|13583065899|r2-fix1-final-g7-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604|10864320|sha256:4baec2c2750e49656bc8d7e4a64725637a10d2d91582beb4fd6fa4dccdd37c21|2026-11-14T16:59:51Z|
+|13582946396|r2-fix1-final-g6-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|20592|sha256:89e6e0e6e9a9e82071dd5f93c7de4c8c05b15f20fa1b9ffd74e9ada41155923c|2026-11-14T17:01:11Z|
+|13582911309|r2-fix1-final-g7-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|1243854|sha256:5fbb52aa7508e01805060fbb27523408adba164adf0bfcb3c6094dd21ca45ef6|2026-11-14T16:59:57Z|
+|13582841821|r2-fix1-final-g7-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|8430|sha256:c855e22fd2f219c31c8260c8a52dd31a672f3f616a76bb82ce861ed076ea6c6d|2026-11-14T17:01:53Z|
+|13582225238|r2-green-g2-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604|10863428|sha256:b1baca0b44a9c7212ee2986ac4585666e6195a87d3209ad21dade38673dc33f4|2026-11-14T16:25:43Z|
+|13582220733|r2-green-g1-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|23888|sha256:e1a236fc82d8f69553292dd55762ca4ad49362b306b4c1bc8e8d2ad84bf73e9b|2026-11-14T16:28:44Z|
+|13582127956|r2-green-g3-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|1243694|sha256:a252b2aad2674ab3d2a114a9a1464bfa93eb26b4c2f00c045437386969642ca1|2026-11-14T16:41:42Z|
+|13582127944|r2-green-g3-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604|10864509|sha256:cfb357eb56b6ded5432d4137a8d028ed27efd141c805b18bc6ae289d3050023c|2026-11-14T16:41:37Z|
+|13582106877|r2-green-g5-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|1325652|sha256:4885f9d3e6618357ff9682a228d63bc4f5df18b908206a21c198f53f6f02df35|2026-11-14T16:41:13Z|
+|13581991995|r2-green-g5-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604|11018737|sha256:319e2d1f3ef89607cd209c21024fd79d1dd77c9c485b089a9b90ffab746899e7|2026-11-14T16:41:10Z|
+|13581984073|r2-green-g4-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|10882444|sha256:8fa4bf7a7991f2ac14b9a6336306a00d337d695d2b45449045e32dc387b9a941|2026-11-14T16:46:11Z|
+|13581888542|r2-green-g4-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|1243569|sha256:7a3c5b8adbcdf0ff35cee528ad697127b846875dc779849e4f3fd4e1d2f947e4|2026-11-14T16:42:12Z|
+|13581888527|r2-green-g4-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604|10864401|sha256:7326665adf5c453cdece36df94ded3f46965b6167ed4685867e2069477ba2da2|2026-11-14T16:42:08Z|
+|13581881074|r2-green-g1-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604|21703221|sha256:f348da2b0aa3ce49a254669f3c851fda54fae96fc7bdc2cd378a4effa9338f8c|2026-11-14T16:25:47Z|
+|13581839130|r2-green-g3-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|16487|sha256:69b6733b03ede840d998ab82c97df7830f5db079680d6dae9bdf82309b59ca78|2026-11-14T16:45:38Z|
+|13581816152|r2-green-g1-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|2484746|sha256:05fda0616dacf497a888cc7b339e9129e50bd86b7794cb0700db1f5803be3c51|2026-11-14T16:25:54Z|
+|13581776471|r2-green-g2-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|10553|sha256:1dae82bb00b3fa9734552b39a7554a4886b90d044f36aaef73f14bc5aabbdc4a|2026-11-14T16:27:45Z|
+|13581768742|r2-green-g5-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|20716|sha256:85ac3a4413b35d74ea830a56d6888337ea3c610017b9f799f708bc3623477cc1|2026-11-14T16:43:12Z|
+|13581614690|r2-fix1-final-g6-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604|10844277|sha256:33c14043b07285bdfa62262df1a0980b8d325c89ed2c5d449e1dbcd7189bc940|2026-11-14T16:59:05Z|
+|13581559578|r2-fix1-final-g6-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|1243557|sha256:ad95ad41b031726280eeb3c92f15898c7240d2fc1df88753490900208785cdb6|2026-11-14T16:59:08Z|
+|13581517110|r2-green-g2-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|1243529|sha256:97a25dc29c18ad398f37777b2ed30b9d11e7657a7b90f6f004fcc5d59d4712d4|2026-11-14T16:25:47Z|
+|13581352326|r2-green-g0-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|1247133|sha256:cebd30728287b3a5eca770600a03aeb6847d5a7caec9f21594cd8230c567e0e0|2026-11-14T16:26:10Z|
+|13581327491|r2-green-g0-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604|10863483|sha256:b06bc1a074869cf2951466f706a85014cc8d478e4104f4fe5cc87882effe89e1|2026-11-14T16:26:06Z|
+|13581249389|r2-green-g0-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604|14427|sha256:55c6f9ecda7a9df3c032dd2a410788f5da047cb7acb3eeb2e8439527252a2c41|2026-11-14T16:28:09Z|
+
+Next: writer appends full fix report to SAME task2 report, retires temporary qualifier only, confirms protected leaves and CAS/readbacks, then STOP. Root builds scopedAA..fixFINAL package, checks covering commands/output, resumes the original reviewer for I1/I2 and new fix breakage. Combined whole-plan review waits Task2 gate. No runtime/custody/login/permissions/newtrial/main/Max/mail; operationalReadiness=false;completePackage=false;PCoff=false.
