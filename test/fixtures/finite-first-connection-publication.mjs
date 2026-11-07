@@ -419,3 +419,67 @@ export function instrumentFirstConnectionEngine(source){
  once(ending,"finally{if(reader){io.cancelCalls++;await retain(reader.cancel()).then(()=>{io.cancelSettled++;},()=>{});}else if(response?.body&&!response.body.locked){io.cancelCalls++;await retain(response.body.cancel()).then(()=>{io.cancelSettled++;},()=>{});}io.settled=true;}");
  return source;
 }
+
+
+/** Negative SDK-only writer. It deliberately omits AFW's callback; never an M admission. */
+export async function compileCleanupSdkOnlyWorker(){
+ const source=String.raw`
+ import {OAuthAuthorizationServer} from '@cloudflare/workers-oauth-provider';
+ import {createFiniteOwnerRequestLease,readFiniteOwnerRequestBoundary} from './lib/mcp-qa-finite-owner-preparation.mjs';
+ const O='https://delegated-canary.agentfriendlyweb.dev',scopes=['afw:project:read'];
+ const server=new OAuthAuthorizationServer({issuer:O,resources:[O+'/mcp'],scopesSupported:scopes,accessTokenTTL:300,refreshTokenTTL:0,clientIdMetadataDocumentEnabled:false});
+ const hash=async v=>Buffer.from(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v))).toString('hex');
+ const check=(v,message)=>{if(!v)throw Error('SYN SDK-only '+message);};
+ let retained=null,release=null,signal={reached:false,settled:false};
+ export default{async fetch(request,env){
+  const path=new URL(request.url).pathname;
+  if(path==='/_fixture/sdk-only-signal')return Response.json(signal);
+  if(path==='/_fixture/sdk-only-release'){release?.();return new Response(null,{status:204});}
+  if(path!=='/_fixture/sdk-only-exchange'||request.method!=='POST')return new Response(null,{status:404});
+  if(retained)return new Response(null,{status:409});
+  const root=createFiniteOwnerRequestLease(request),boundary=readFiniteOwnerRequestBoundary(root.lease);
+  const startedMono=performance.now(),childDeadline=Math.min(boundary.deadline,boundary.startedAt+5000);
+  const current=()=>{root.lease.assertCurrent();check(Date.now()<childDeadline&&performance.now()-startedMono<5000,'original child expired');};
+  let timer,bodyFinish;
+  signal={label:'SYN adversarial SDK-only; AFW callback deliberately omitted',worker:'sdk-only-first-connection',callbackOmitted:true,MAdmission:false,rootStartedAt:boundary.startedAt,rootDeadline:boundary.deadline,childDeadline,reached:false,settled:false,retained:false,released:false,logicalDeniedAt:null,nativeReturned:false,nativeRejected:false};
+  try{
+   const input=await request.json();current();
+   check(Number.isSafeInteger(input.C0)&&Date.now()<input.C0,'original C0');
+   const original=server.getOAuthApi(env),summary=await original.unwrapToken(input.subjectToken);current();
+   check(summary&&summary.grantId===input.sdkGrantId&&summary.grant.clientId===input.clientId&&summary.audience===O+'/mcp'&&JSON.stringify(summary.scope)===JSON.stringify(scopes),'same genuine token identity/scope/audience');
+   check(summary.expiresAt*1000-Date.now()>=65000,'genuine token needs >=65s remaining');
+   const grantKey='grant:'+summary.userId+':'+summary.grantId,grant=await env.OAUTH_KV.get(grantKey,{type:'json'});current();
+   check(grant?.id===summary.grantId&&grant.metadata?.afwFiniteCleanup?.correlationHash===input.correlationHash,'same native grant/correlation');
+   signal.tokenHash=await hash(input.subjectToken);signal.selectorHash=await hash(summary.grantId);signal.subjectHash=await hash(summary.userId);signal.correlationHash=input.correlationHash;signal.referenceHash=input.referenceHash;signal.tokenExpiresAt=summary.expiresAt;signal.grantExpiresAt=grant.expiresAt??null;signal.C0=input.C0;
+   const kv=env.OAUTH_KV,prefix='token:'+summary.userId+':'+summary.grantId+':';
+   const wrapped={get(...args){current();return kv.get(...args);},list(){throw Error('SYN no SDK list');},delete(){throw Error('SYN no SDK delete');},async put(key,value,options){
+    current();check(!signal.reached&&key.startsWith(prefix),'single original token write only');
+    const native=JSON.parse(value);check(native.grantId===summary.grantId&&native.userId===summary.userId&&native.audience===summary.audience&&JSON.stringify(native.scope)===JSON.stringify(scopes),'same SDK write tuple');
+    signal.reached=true;signal.reachedAt=Date.now();signal.write={keyHash:await hash(key),valueHash:await hash(value),expiresAt:native.expiresAt,expirationTtl:options.expirationTtl};current();
+    await new Promise(resolve=>{release=()=>{signal.released=true;signal.releasedAt=Date.now();resolve();};});
+    // The already-started SDK operation survives logical denial. No new business work is admitted.
+    signal.nativeAttemptAt=Date.now();
+    try{const result=await kv.put(key,value,options);signal.nativeReturned=true;return result;}
+    catch(error){signal.nativeRejected=true;throw error;}
+    finally{signal.nativeSettledAt=Date.now();}
+   }};
+   current();
+   const actual=server.getOAuthApi({...env,OAUTH_KV:wrapped}).exchangeToken({subjectToken:input.subjectToken,scope:scopes,aud:O+'/mcp'});
+   retained=actual;signal.retained=true;
+   // Register settlement before the race; only this exact promise can clear retention.
+   actual.then(async value=>{signal.sdkReturned=true;signal.resultTokenHash=await hash(value.access_token);},()=>{signal.sdkRejected=true;}).finally(()=>{signal.settled=true;signal.settledAt=Date.now();signal.retained=false;retained=null;release=null;bodyFinish?.();}).catch(()=>{});
+   const denied=new Promise(resolve=>{timer=setTimeout(()=>resolve('deadline'),Math.max(0,childDeadline-Date.now()));});
+   const outcome=await Promise.race([actual.then(()=> 'early-return',()=> 'early-rejection'),denied]);
+   signal.logicalDeniedAt=Date.now();signal.logicalReason=outcome;root.finish();clearTimeout(timer);
+   // Fixed denied headers/body are available at the original child deadline. Keeping the
+   // transport body open retains execution context, not the expired logical Root.
+   const body=new ReadableStream({start(controller){controller.enqueue(new TextEncoder().encode('SYN SDK-only denied'));bodyFinish=()=>{try{controller.close();}catch{}};if(signal.settled)bodyFinish();},cancel(){return actual.catch(()=>{});}});
+   return new Response(body,{status:403,headers:{'Content-Type':'text/plain','Cache-Control':'no-store'}});
+  }catch{
+   root.finish();clearTimeout(timer);signal.logicalDeniedAt=Date.now();signal.logicalReason='premise-rejected';return new Response('SYN SDK-only premise rejected',{status:412});
+  }
+ }};
+`;
+ const result=await build({bundle:true,write:false,metafile:true,platform:'neutral',mainFields:['module','main'],format:'esm',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',stdin:{contents:source,resolveDir:process.cwd()}});
+ return {script:result.outputFiles[0].text,bytes:result.outputFiles[0].contents.length,sha256:digest(result.outputFiles[0].contents),metafile:result.metafile,sourceKind:'SYN adversarial SDK-only; AFW callback omitted'};
+}
