@@ -4,7 +4,7 @@ import {mkdir,readFile,writeFile,readdir,cp} from 'node:fs/promises';
 import {resolve,join,relative} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
-import {ownerReferenceFixture,prepareOwnerReference,assertActualComplete,downstreamOwnerReference,recordOwnerReference,cleanupMTransport,readCleanupM} from './finite-owner-cleanup.mjs';
+import {ownerReferenceFixture,prepareOwnerReference,assertActualComplete,downstreamOwnerReference,recordOwnerReference,cleanupMTransport,readCleanupM,cleanupMProfile,classifyCleanupMDenial} from './finite-owner-cleanup.mjs';
 import {createInitialEntrySynOutbound} from './finite-initial-entry-world.mjs';
 import {plain,compileCleanupSdkOnlyWorker,compileFirstConnectionCandidate} from './finite-first-connection-publication.mjs';
 import {build} from 'esbuild';
@@ -286,10 +286,57 @@ export async function verifyCleanupQualificationPremises(){
  }
 }
 
+
+/** PURE modeled response oracle against the exact archived M profile; no MF/SDK/I0. */
+export async function verifyCleanupDenialOracle(root,{expectedEvidenceSource}){
+ assert.equal(expectedEvidenceSource,'e5f96c1802e7ee2d5d242f9d4887df6bfeda33fb');
+ const {manifest,data}=await verifyCheckpoint(root,{source:expectedEvidenceSource}),bytes=await readFile(join(root,'manifest.json'));
+ assert.equal(sha(bytes),'5e81a7aa27d82aacc0bcac5b1392c14a36d3bdef6fbcea0bf78e5c2836e9299b');assert.equal(manifest.files.length,47);
+ const m=data.options.workers.find(w=>w.name==='canary-first-connection'),profile=cleanupMProfile(m,data.options.upstream);
+ assert.equal(profile.optionsHash,'bd1608ef915f46e9125301d7ff4b329ee608db777ea7ae3e9a819e61890cc93e');
+ assert.equal(profile.bindingsHash,'b3fb9ed039924267081ed78b2597208816b50a0491edc612a314650a03ab45dc');
+ assert.equal(profile.serviceExpiresAt,'2026-11-07T13:59:50.000Z');assert.equal(Date.parse(profile.serviceExpiresAt),data.plan.C0);
+ const anchors=[['lib/delegated-oauth-worker.mjs','d979f395029c9b1e66a99222d06acf99eba4f358'],['lib/delegated-project-mcp.mjs','39b91fe6332964b6229913bb88ff9e665b513f76'],['lib/delegated-project-read.mjs','e059e54c32b12455c2c1eeb251a668bb3ed55e82']];
+ for(const [path,expected]of anchors){const b=await readFile(path),actual=createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');assert.equal(actual,expected);}
+ const C0=data.plan.C0,result={isError:true,status:403,code:'delegated_access_denied',hasData:false};
+ const response={method:'POST',rpcMethod:'initialize',tool:null,startedAt:C0+1,finishedAt:C0+2,status:404,bodyKind:'html',bodyHash:sha('PURE MODELED RESPONSE; no observed HTTP'),closedWindowBody:true,containsExpectedData:false,containsCredential:false,readFailed:false,jsonRpc:null};
+ const base={operation:'read_project_summary',originalC0:C0,profile,profileCurrent:true,responses:[response],toolResult:null},cases=[];
+ const check=(name,change,layer='unproved')=>{const candidate=structuredClone(base);change(candidate);const actual=classifyCleanupMDenial(candidate);cases.push({name,expected:layer,actual:actual.layer,dataDenied:actual.dataDenied});assert.equal(actual.layer,layer,name);assert.equal(actual.dataDenied,layer!=='unproved',name);};
+ check('exact expired original window gives closed service only',()=>{},'service_window_closed');
+ check('404 before original expiry is unknown',o=>{o.responses[0].startedAt=C0-2;o.responses[0].finishedAt=C0-1;});
+ check('404 unknown body is not denial',o=>{o.responses[0].closedWindowBody=false;});
+ check('HTTP500 cannot prove denial',o=>{o.responses[0].status=500;});
+ check('timeout without response cannot prove denial',o=>{o.responses=[];o.error={type:'TimeoutError'};});
+ check('initialize200 alone cannot prove denial',o=>{Object.assign(o.responses[0],{status:200,bodyKind:'json',jsonRpc:{version:'2.0',kind:'result'}});});
+ check('protocol error cannot prove denial',o=>{Object.assign(o.responses[0],{status:200,bodyKind:'json',jsonRpc:{version:'2.0',kind:'error',errorCode:-32600}});});
+ check('successful data must reject',o=>{Object.assign(o.responses[0],{rpcMethod:'tools/call',tool:'read_project_summary',status:200,bodyKind:'json',containsExpectedData:true,jsonRpc:{version:'2.0',kind:'result'}});o.toolResult={isError:false,status:200,hasData:true};});
+ check('unknown script must reject',o=>{o.profile.scriptHash='0'.repeat(64);});
+ check('unknown flag inventory must reject',o=>{o.profile.flags.EXTRA_ENABLED='false';});
+ check('disabled default must reject',o=>{o.profile.flags.AFW_DELEGATED_OAUTH_ENABLED='false';});
+ check('profile drift must reject',o=>{o.profileCurrent=false;});
+ check('wrong origin must reject',o=>{o.profile.upstream='https://wrong.invalid';});
+ check('wrong route must reject',o=>{o.profile.path='/qa';});
+ check('wrong method must reject',o=>{o.responses[0].method='GET';});
+ check('body read failure must reject',o=>{o.responses[0].readFailed=true;});
+ const semantic=o=>{Object.assign(o.responses[0],{startedAt:C0-2,finishedAt:C0-1,rpcMethod:'tools/call',tool:'read_project_summary',status:200,bodyKind:'json',jsonRpc:{version:'2.0',kind:'result',result}});o.toolResult=result;};
+ check('live-window MCP semantic403 without data',semantic,'business_grant_denied');
+ check('semantic error still cannot contain data',o=>{semantic(o);o.toolResult={...result,hasData:true};o.responses[0].jsonRpc.result=o.toolResult;});
+ check('generic application503 is not denial',o=>{semantic(o);o.toolResult={...result,status:503,code:'delegated_read_unavailable'};o.responses[0].jsonRpc.result=o.toolResult;});
+ check('expired-window HTTP200 contradicts fixed branch',o=>{semantic(o);o.responses[0].startedAt=C0+1;o.responses[0].finishedAt=C0+2;});
+ const oauth=(o,status,error)=>{Object.assign(o.responses[0],{startedAt:C0-2,finishedAt:C0-1,status,bodyKind:status===401?'empty':'json',oauthError:status===403?error:null,oauthChallenge:{bearer:true,error,metadata:'https://delegated-canary.agentfriendlyweb.dev/.well-known/oauth-protected-resource/mcp'}});};
+ check('live-window native401 invalid_token challenge',o=>oauth(o,401,'invalid_token'),'sdk_token_rejection');
+ check('live-window native403 insufficient_scope challenge',o=>oauth(o,403,'insufficient_scope'),'sdk_scope_rejection');
+ check('generic401 without genuine challenge rejects',o=>{oauth(o,401,'invalid_token');o.responses[0].oauthChallenge.bearer=false;});
+ check('expired-window401 contradicts fixed branch',o=>{oauth(o,401,'invalid_token');o.responses[0].startedAt=C0+1;o.responses[0].finishedAt=C0+2;});
+ const audit={label:'PURE modeled denial oracle; no new M observation',sourceArtifact:expectedEvidenceSource,sourceVerifier:process.env.GITHUB_SHA,artifactId:13576692464,runId:42377143830,manifestSha256:sha(bytes),files:manifest.files.length,profile,anchors,cases,assertions:cases.length*2,originalFailedHttp:'UNKNOWN',workerMounted:false,newI0:false,SDKExecuted:false,newBusinessClosureProved:false,operationalReadiness:false,completePackage:false,PCoff:false};
+ await writeFile('g5-oracle-result.json',json(audit));console.info('R2 pure denial oracle',JSON.stringify(audit));return audit;
+}
+
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  const [command,root='output/owner-cleanup/checkpoint-g0',group='g0']=process.argv.slice(2);
  if(command==='preflight')await verifyCleanupQualificationPremises();
  else if(command==='launcher-probe')await verifyCleanupLauncherPremise();
+ else if(command==='oracle-preflight')await verifyCleanupDenialOracle(root,{expectedEvidenceSource:group});
  else if(command==='routing-preflight')console.info('R2 M routing preflight',json(await verifyCleanupMTransportPremises()));
  else if(command==='prepare')await produceCheckpoint(root);
  else if(command==='prepare-group')await produceGroup(group,root);
