@@ -18,7 +18,7 @@ async function recover(label,variant='principal',options={}){
 async function capture(f,label,facts){
  const native=await plain(f.stub.ownerCleanupNativeRows()),fault=await plain(f.stub.ownerCleanupFaultFacts());
  const receipt=cleanupReceipt(facts),state=row(facts,'state'),metrics={children:facts.children,sqlCalls:fault?.sqlCalls??0,sqlElapsedMs:fault?.sqlElapsedMs??0,kvLists:fault?.lists??0,kvDeletes:fault?.deletes??0,providerRequests:f.providerRegistry.requests.length-f.checkpoint.state.providerRegistry.requests.length};
- const result={purpose:'afw.owner-cleanup-native-result.syn.v1',label,source:process.env.GITHUB_SHA,I0:f.plan.I0,C0:f.plan.C0,C1:f.plan.C1,recovery:f.recovery,kvSemanticProof:f.kvSemanticProof,signal:facts.signal,nativeDbNow:facts.dbNow,wall:facts.wall,state,alarm:facts.alarm,originalPlanHash:f.plan.recordHash,restores:f.restores.length,pointer:f.providerRegistry.pointer,ownerCleanupSuffixes:cleanupRows(facts).map(([k])=>k.split(':').slice(2).join(':')),receipt,metrics,failures:facts.failures,fault,native:{fenced:!!native.fence?.fenced_at,grantPresent:!!native.grant,grantRevoked:!!native.grant?.revoked_at,noticeActions:native.notices.map(x=>x.action)},operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false,modeledProviderInput:f.checkpoint.modeledProviderInput};
+ const result={purpose:'afw.owner-cleanup-native-result.syn.v1',label,source:process.env.GITHUB_SHA,I0:f.plan.I0,C0:f.plan.C0,C1:f.plan.C1,recovery:f.recovery,kvSemanticProof:f.kvSemanticProof,signal:facts.signal,nativeDbNow:facts.dbNow,wall:facts.wall,state,alarm:facts.alarm,originalPlanHash:f.plan.recordHash,restores:f.restores.length,pointer:f.providerRegistry.pointer,ownerCleanupSuffixes:cleanupRows(facts).map(([k])=>k.split(':').slice(2).join(':')),receipt,metrics,...facts.finalInventoryProof?{finalInventoryProof:facts.finalInventoryProof}:{},failures:facts.failures,fault,native:{fenced:!!native.fence?.fenced_at,grantPresent:!!native.grant,grantRevoked:!!native.grant?.revoked_at,noticeActions:native.notices.map(x=>x.action)},operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false,modeledProviderInput:f.checkpoint.modeledProviderInput};
  await writeCleanupEvidence(label,result);console.info('R2 native result',JSON.stringify(result));return {result,native,receipt,state};
 }
 function assertClosed(f,facts,capture){
@@ -160,6 +160,14 @@ if(group==='g6'){
   const [f]=await fixCurrentPair(),facts=await observeOriginalAlarm(f),r=await capture(f,'fix1-matching-current-grant',facts);fixMatched={f,facts,r};
   assertClosed(f,facts,r);assert.equal(r.receipt.sdkReductionReturned,true);assert.equal(await f.kv.get(f.fixCurrent.key),null);
   assert.equal(f.checkpoint.sdkUnexchanged.codeExchanged,false);assert.equal(f.checkpoint.sdkUnexchanged.referenceExpiresAt,null);
+  const proof=facts.finalInventoryProof,observed=JSON.parse(cleanupRows(facts).find(([k])=>k.endsWith(':sdk_revoke:observed'))[1]);
+  assert(proof,'actual finalFactsHash input must include newly read inventory');assert.equal(proof.committedHash,r.receipt.finalFactsHash);
+  assert(proof.enteredAt>=observed.observedAt&&proof.observedAt>=proof.enteredAt&&r.receipt.observedAt>=proof.observedAt);
+  assert.equal(proof.workflow.workflowCount,3);assert(proof.workflow.instances.every(x=>['complete','errored','terminated'].includes(x.status)));assert.equal(proof.container.activeCount,0);
+  assert.equal(proof.schedulesAndTails.length,4);assert(proof.schedulesAndTails.every(x=>x.count===0));assert.equal(proof.operator.closed,true);assert.equal(proof.baseline.recoverable,true);
+  assert.equal(proof.baseline.versionId,r.receipt.baselineVersionId);assert.equal(proof.baseline.deploymentId,r.receipt.baselineDeploymentId);assert(proof.requestTimes.every(x=>x.observedAt>=proof.enteredAt&&x.observedAt<=proof.observedAt));
+  assert.equal(r.result.fault.grantReads.length,1);assert.equal(r.result.fault.grantReads[0].present,true);
+
  });
  test('R2 fix1 foreign current SDK object is preserved with zero deletes',async()=>{
   const [,f]=await fixCurrentPair(),facts=await observeOriginalAlarm(f),r=await capture(f,'fix1-foreign-current-grant',facts),remaining=await f.kv.get(f.fixCurrent.key);
