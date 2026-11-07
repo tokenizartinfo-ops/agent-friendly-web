@@ -1,7 +1,9 @@
 name: AFW finite budget qualification
 run-name: AFW budget R0 source ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
 permissions:
   contents: read
 concurrency:
@@ -9,13 +11,14 @@ concurrency:
   cancel-in-progress: false
 jobs:
   red:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
           persist-credentials: false
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -53,6 +56,7 @@ jobs:
           console.info('R0 manifest sealed',JSON.stringify({source:process.env.GITHUB_SHA,files:files.length}));
           NODE
       - name: Upload full SYN RED evidence
+        id: upload
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -60,3 +64,74 @@ jobs:
           path: output/finite-budget/red/
           if-no-files-found: error
           retention-days: 7
+      - name: Download the same uploaded artifact
+        if: always() && steps.upload.outputs.artifact-id != ''
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/afw-budget-red-readback
+          merge-multiple: true
+      - name: Verify downloaded causal RED evidence
+        if: always()
+        env:
+          AFW_RED_READBACK: ${{ runner.temp }}/afw-budget-red-readback
+          AFW_RED_ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFile,readdir} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          import {join,relative} from 'node:path';
+          const root=process.env.AFW_RED_READBACK,hash=b=>createHash('sha256').update(b).digest('hex'),files=[];
+          assert.match(process.env.AFW_RED_ARTIFACT_ID??'',/^[1-9][0-9]*$/);
+          async function walk(dir){for(const e of await readdir(dir,{withFileTypes:true})){const p=join(dir,e.name);assert(!e.isSymbolicLink());if(e.isDirectory())await walk(p);else{assert(e.isFile());const b=await readFile(p);files.push({path:relative(root,p).replaceAll('\\','/'),bytes:b.length,sha256:hash(b)});}}}
+          await walk(root);files.sort((a,b)=>a.path.localeCompare(b.path));
+          const expected=['console.tap','full-result.json','graphs/canary-index.mjs','graphs/metafiles.json','graphs/native-syn.json','graphs/qa-index.mjs','manifest.json','native-facts.json','node-exit-code.txt','outcome.json','source-inputs.json'].sort();
+          assert.deepEqual(files.map(f=>f.path).sort(),expected,'exact uploaded path set');
+          const json=async p=>JSON.parse(await readFile(join(root,p),'utf8'));
+          const manifest=await json('manifest.json'),outcome=await json('outcome.json'),facts=await json('native-facts.json'),result=await json('full-result.json'),graphs=await json('graphs/metafiles.json'),native=await json('graphs/native-syn.json'),inputs=await json('source-inputs.json');
+          assert.equal(manifest.purpose,'afw.finite-budget-red-manifest.syn.v1');
+          assert.equal(manifest.source,process.env.GITHUB_SHA);
+          assert.equal(manifest.run,process.env.GITHUB_RUN_ID);
+          assert.equal(manifest.attempt,process.env.GITHUB_RUN_ATTEMPT);
+          assert.deepEqual(files.filter(f=>f.path!=='manifest.json'),manifest.files,'downloaded bytes/SHA equal exact manifest');
+          for(const value of [manifest,outcome,facts])for(const flag of ['operationalReadiness','completePackage','PCoff'])assert.equal(value[flag],false);
+          for(const value of [outcome,facts,inputs])assert.equal(value.source,process.env.GITHUB_SHA);
+          assert.equal(native.testRevision,process.env.GITHUB_SHA);
+          assert.equal(result.testRevision,process.env.GITHUB_SHA);
+          assert.equal(outcome.stage,'missing-diagnostics-assertion');
+          assert.equal(outcome.expectedDeficitObserved,true);
+          assert.equal(outcome.assertionName,'AssertionError');
+          assert.equal(outcome.actualCompleteNormal,1);
+          assert.equal(outcome.responseStatus,302);
+          assert.equal(outcome.diagnosticsPurpose,null);
+          assert.match(outcome.referenceHash,/^[a-f0-9]{64}$/);
+          assert.equal(facts.referenceHash,outcome.referenceHash);
+          assert.equal(facts.responseStatus,302);
+          for(const field of ['completeWrites','completeNormal','referenceCommits','referenceSyncs','referenceReadbacks'])assert.equal(facts[field],1,field);
+          assert.equal(facts.diagnosticsPresent,false);
+          assert.equal(result.diagnostics,undefined);
+          assert.equal(result.completeNormal,1);
+          assert.equal(result.referenceRows,1);
+          assert(facts.trace.includes('actual-sdk-complete-normal'));
+          assert(facts.trace.indexOf('reference-readback-native-settled')<facts.trace.indexOf('native-authorize-response:302'));
+          const full=await readFile(join(root,'full-result.json'));
+          assert.deepEqual(facts.fullResult,{path:'full-result.json',bytes:full.length,sha256:hash(full)});
+          for(const [role,path]of [['M','graphs/canary-index.mjs'],['QA','graphs/qa-index.mjs']]){const b=await readFile(join(root,path));assert.equal(hash(b),facts[role].sha256);assert.equal(b.length,facts[role].bytes);assert.equal(native[role].sha256,facts[role].sha256);}
+          assert(Object.hasOwn(graphs.M.inputs,'worker/mcp-own/finite.mjs'));
+          assert(Object.keys(graphs.QA.inputs).some(p=>p.endsWith('mcp-qa-finite-owner-cleanup.mjs')));
+          const paths=[...new Set([...Object.keys(graphs.M.inputs),...Object.keys(graphs.QA.inputs)])].filter(p=>!p.startsWith('<')).sort();
+          assert.deepEqual(inputs.inputs.map(f=>f.path),paths);
+          for(const f of inputs.inputs){assert(!f.path.startsWith('/')&&!f.path.split('/').includes('..'));const b=await readFile(f.path);assert.equal(b.length,f.bytes);assert.equal(hash(b),f.sha256);}
+          assert.equal((await readFile(join(root,'node-exit-code.txt'),'utf8')).trim(),'1');
+          const tap=await readFile(join(root,'console.tap'),'utf8');
+          for(const [label,value]of [['tests',1],['pass',0],['fail',1],['cancelled',0],['skipped',0],['todo',0]])assert(new RegExp('^# '+label+' '+value+'$','m').test(tap),'TAP '+label);
+          assert.equal((tap.match(/^not ok /gm)??[]).length,1);
+          assert.match(tap,/not ok 1 - R0 attributable diagnostics after genuine SDK complete and durable Reference/);
+          assert.match(tap,/R0 missing attributable diagnostics after actual SDKcomplete1 \+ durable Reference \+302/);
+          assert.match(tap,/afw\.finite-budget-diagnostics\.syn\.v1/);
+          const consoleBytes=tap.split('\n').filter(l=>l.includes('R1 sanitized native marker')).map(l=>Buffer.byteLength(l,'utf8'));
+          assert.equal(consoleBytes.length,1);
+          console.info('R0 DOWNLOADED READBACK VERIFIED',JSON.stringify({source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,artifactId:process.env.AFW_RED_ARTIFACT_ID,files:files.length,manifestBytes:files.find(f=>f.path==='manifest.json').bytes,manifestSha256:files.find(f=>f.path==='manifest.json').sha256,nativeCompleteNormal:facts.completeNormal,referenceHash:facts.referenceHash,responseStatus:facts.responseStatus,expectedDeficitObserved:outcome.expectedDeficitObserved,tests:1,fail:1,pass:0,legacyConsoleLineBytes:consoleBytes[0],graphInputs:paths.length,operationalReadiness:false,completePackage:false,PCoff:false}));
+          NODE
