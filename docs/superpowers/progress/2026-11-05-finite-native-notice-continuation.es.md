@@ -1,5 +1,17 @@
 # AFW — continuidad vigente del circuito nativo
 
+## CURRENT — 7 noviembre2026,17:31UTC: no retomar los estados históricos inferiores
+
+SOURCE final29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64, rama feat/finite-native-cleanup-20261101, writerSTOP yqualifiertemporalretirado. El plan de SDKReference yretiro/restauración delcicloactual está COMPLETO únicamente SOURCE/SYN: Task1aceptada, Task2aceptada trasfixround1I1/I2, revisiónconjunta frescaPASS/0Critical/Important/7Minorretenidos. Calificación coherente42390108314/attempt1 SUCCESS17:01:58UTC,56PASS/0fail/cancel/skip/todo,16jobs/24artifacts. No combinar fallidos ni repetirlos desde un tailantiguo.
+
+Autoridad de continuación: docs/superpowers/progress/2026-11-06-finite-native-owner-restoration.es.md, últimoRootcheckpoint12a7345e3efb512beab039b7fdcda2d202609fb3/blobff46892a9d7d3d2a2c5469f934e0736cb164ca32. Revisiónconjunta docs/superpowers/reviews/2026-11-07-finite-owner-restoration-combined-review.es.md @b867a64626435a7223c62b3d24781b1ca053c895/blob00816a95124ae55a3461519021aaf21e97806b8d. Paquete19paths534935chars en .../2026-11-07-finite-owner-restoration-combined-29681ca-package.md @d3a1b3ce/blobff33898c927143078ba8461a94d07c3b19974314. Los archivos completos/historia/rollback se preservancloud; no mergeamain.
+
+NEXT: diseño de diagnóstico atribuible porfase/recurso ycalificación separada de límitesreadonly/reduction, preservandoRoot30s/child5s/C0/C1. Hechosactuales en reviews/2026-11-07-finite-current-performance-facts.es.md @965afb35/blobcb020f64b50a1a1fcc496c5a8b184f6cb2580585. No nueva implementación todavía; cierre delplananterior no completaAFW. Después siguen tercerosCLOSED/prearm/fullsetup/traspaso nominal bajo mismoalarm, candidato/procedencia/custodia/cloudactuales, receptor/suscripción/avisoútil/ACK/bajanativa yUNAocurrencia coordinadaPCoff. operationalReadiness=false;completePackage=false;PCoff=false;Maxpendiente. No nuevosensayos realespor unPASSdeSource.
+
+Owner7nov: PCencendida, Gabriel ausentehasta16:30Argentina/19:30UTC. No pedirOTP/pegados/ingreso niabrir ventanas humanasantes. Avanzar SOURCE/cloudsinlocalbuilds. Mantenerproyectosseparados. DebajohayHISTORIA: no ejecutar susinstruccionesobsoletasd46/42298166866/guardiaspasadas porserúltimoapéndice.
+
+## Historia preservada — supersedida por CURRENT y ledger vigente
+
 2026-11-05 22:52:23 UTC. Objetivo vigente: ensayo real cloud con PC apagada, después piloto Max. Únicamente AFW; repo tokenizartinfo-ops/agent-friendly-web (público1347578006). Fuente feat/finite-native-cleanup-20261101; coordinación docs/finite-pcoff-continuation-20261103. Sin clone/deps/build local; GitHub/Actions SYN. Lecturas pequeñas de skills y artefactosZIP en memoria, cero archivos locales.
 
 ## Completado y aceptado: no repetir
@@ -443,3 +455,8 @@ ESTADO A RETOMAR: Source feat/finite-native-cleanup-20261101 FROZEN en d46daf51f
 Writer actual finite_owner_cleanup_impl (Astra high) entregará su checkpoint21:53–21:54UTC y parará. Root conserva BaseTask2=2c6b5a0 y BasePlan=7aab233; rama documental docs/finite-pcoff-continuation-20261103. Brief vinculante50986e7a6d8e14a9091a72416a2428bdea35dfc2/blob992cb0a2a4b785ade35f97abb017074e944d729c. Código/source/digests en el ledger;32commits del primer congelado verificados individualmente más3correcciones pequeñas posteriores,35 hasta d46.3166hojas ajenas conservadas; revisar preservación final otra vez después del reporte. No Source writes hasta terminar calificación existente.
 
 No navegador, token, OAuth o recursos reales Cloudflare se modificaron en este bloque. No hay proceso local de build/test persistente que cerrar. Sigue faltando Task2 verde+revisión y revisión combinada; después estados/traspaso posteriores, evidencia vigente de fuente/custodia/proxy/proveedor, consumidor/suscripción/entrega útil/baja reales y un único ensayo coordinado PC-off. operationalReadiness=false,completePackage=false,PCoff=false; Max pendiente. No prometer notificación autónoma con PC apagado: mañana leer resultado existente.
+
+
+## Retomar únicamente CURRENT7nov (cierre de los apéndices históricos)
+
+Elrun42298166866/d46 ylosotrosrunsdeltextoanterior ya no sonlaesperaactual. Task1+Task2+combinedgateaceptados enSource29681cae con56/56final42390108314. Último mapa vivo: progress/2026-11-06-finite-native-owner-restoration.es.md yCURRENTsuperior. Fuente/clocksreales/custodiavencidosno serevalidanconCI. PróximotrabajoSOURCEesdiseño dediagnóstico/límites, sin recursohumanoantes19:30UTC. No relanzar, rotar, reconectar, publicar o apagar comoacción deesta nota; PC-offfinalnoacreditado.
