@@ -1,0 +1,101 @@
+# AFW — diseño de calificación de diagnóstico y límites nativos
+
+7nov2026. PROJECT AFW; repository tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT SOURCE/SYN GitHub/Actions, sin runtime. BASE29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64, Source feat/finite-native-cleanup-20261101; Rootdocs docs/finite-pcoff-continuation-20261103. Estado: diseño Root para buildercheck; NO implementación iniciada. Se preserva el plan anterior aceptado, sus siete Minor y todas sus excepciones.
+
+## Intención y decisión bajo delegación
+
+El owner busca AFW íntegro en cloud, mínimo uso local y avanzar sin decisiones técnicas rutinarias. Delegó expresamente elegir por él y encadenar bloques; está ausente hasta19:30UTC/16:30Argentina. Root usa la excepción de brainstorming para ese opt-out: no abrir preguntas, permisos, OTP o pruebas reales mientras se diseña. La elección técnica siguiente es de Root, no una aprobación específica atribuida a Gabriel.
+
+La revisión conjunta del plan anterior pasó sin Critical/Important. Antes de promoción quedan RM2/RM3/RM4 yM1/M2/M3: máximos de dos facetas distintas, presupuesto no atribuible y consola truncada. Esta unidad califica diagnóstico y límites; NO optimiza ni modifica código productivo. Queremos saber qué llamadas/bytes/esperas/cancelaciones pertenecen a cada fase y demostrar los topes reales del SDK fijado, con evidencia corta en consola y completa en artefactos.
+
+### Alternativas consideradas
+
+1. Medición atribuible y calificación dirigida sobre los flujos aceptados: conserva toda la lógica y permite decidir una optimización posterior con datos. Root elige esta opción; cuesta una unidad de pruebas/instrumentación y deja la viabilidad real como gate distinto.
+2. Reutilizar ahora bytes inmutables dentro del mismo Root: puede reducir payload, pero requiere un diseño de prueba privada y distinguir las proyecciones mutables. Sin atribución y presupuesto sería una hipótesis no medida; queda fuera de esta unidad.
+3. Ampliar planes/cuotas o probar APIs reales para compensar volumen: no resuelve por sí solo el fanout, requiere evidencia efectiva/custodia y no corresponde durante SOURCE/SYN. No se contratan ni amplían servicios.
+
+No son tres productos ni un cambio de rumbo. Se reutilizan helpers/SDK/D1/DO/KV/alarm/persistencia actuales.
+
+## Alcance y límites que no cambian
+
+- Ningún archivo lib/**,worker/**,package/lock,configuración productiva,SDK1.2.1,compatflag o API pública cambia. No se exporta la faceta privada, se crea una fábrica de autoridad o se sustituye por una copia del algoritmo.
+- Cualquier instrumentación de fuente ocurre sólo en el compilador SYN de fixtures, con marcadores exactos y conteo de ocurrencias antes de I0. Mantiene cuerpo/orden/guardas/promesas/retención nativa y bytes originales en disco; grafos y script transformado se archivan como SYN explícito, no deploy.
+- Fuente real3nov02:59UTC sigue vencida. OriginalI0/C0=I0+900000/C1=C0+180000, Root30s/child5s y tres slots originales se conservan. Nada de fake clock, refresco de Access/Source/identidad, cambio de TTL o segundo alarm.
+- No repetir los RED/16/51/56 anteriores por rutina; su evidencia queda aceptada y fechada. No broad suite por inercia. Nuevas pruebas sólo cubren los defectos de observabilidad y límites enumerados aquí.
+- No Cloudflare API real, runtime, DDL remoto, OAuth/OTP/tokens/permisos, cron/Container/consumidor/avisos reales, nuevo chat, main/PR/publish, Max ni correo.
+- Los diagnósticos son datos, nunca autoridad: no habilitan acciones, no son un ACK, no se leen para permitir business/cleanup ni permiten construir Root/lease/SDKselector.
+- operationalReadiness=false;completePackage=false;PCoff=false; globalNativeDrainVerified=false/sdkNamespaceEmptyVerified=false.
+
+## Reutilización e interfaces existentes
+
+BASE posee readonlyGrantKv privado en lib/mcp-qa-finite-owner-cleanup.mjs:46–81 (2listas limit100/200gets/concurrencia2), reducción privada:605–640 (1getexacto/2listas/200deletes TOTALES/concurrencia2). Los dos usan SDKreal1.2.1 y retain/guard; su código permanece exacto.
+
+test/fixtures/finite-owner-cleanup.mjs exporta ownerReferenceFixture,prepareOwnerReference,recordOwnerReference,downstreamOwnerReference, instrumentFiniteOwnerCleanup/instrumentCleanupConsumer y modos SYN fijos. test/fixtures/finite-owner-cleanup-persistence.mjs exporta produceCheckpoint,recoverCheckpoint,verifyCheckpoint,observeOriginalAlarm,writeCleanupEvidence. produceCheckpoint soporta unexchanged:true (genuino authorize tardíoC0−300, SDKcodeTTL600 sin exchange) ydeferWait. No hay que rehacer engine/persistencia ni alterar el grupo histórico g0..g7.
+
+La instrumentación test/fixtures/finite-owner-io-fanout.mjs ya observa categorías, bytes/settlement/cancel en un modo anterior, pero su implementación no se reutiliza a ciegas: tiene cap1024 que arroja y categorías limitadas a ese flujo. Sirve de referencia para ganchos y separación de fases; no debe introducir ese comportamiento en el recorrido normal. initial-entry-world registra composiciones esbuild y posee un único sitio de montaje de las extensiones SYN.
+
+Antes de editar, el implementer fija el mapa exacto de hooks/archivos y consumidores de logging, compara BASE/protectedtree y pide ruling a Root si falta un seam. No edita producción ni añade un camino de negocio para hacer medible una faceta.
+
+## Contrato del diagnóstico
+
+Colección sólo SYN, con procedencia por invocación real: identificadores ordinales privados de Root/child/operación, workerRole y fase fijos del callsite observado. Usar identidades locales de leases/contextos/capturas reales; no confiar en un phase/URL/rootId del caller ni en un global mutable compartido entre requests para atribuir settlement tardío. Capturar la fase al entrar, conservarla al terminar. Un transporte M sin Root de control se registra como transporte separado, nunca se le inventa un Root30s.
+
+Fases esperadas del recorrido: setup,authorize_get,authorize_post,sdk_lookup,token_exchange,mcp_read,monitoring_get,monitoring_post,cleanup_before_restore,restore,sdk_reduction,final_inventory. Las operaciones de control dentro de esas fases deben atribuirse o declarar unknown explícito; el pase diagnóstico exige cero unknown para el alcance fijo. No añadir supuestos de deadline a fases cuyo contrato actual no los tiene.
+
+Registro seguro: SourceSHA/role/phase/rootOrdinal/childOrdinal/opOrdinal, clase de recurso fija (CFcredential,CFdeployment,CFversion,CFworkflow,CFcontainer,CFschedule,CFtail,GHsource,JWKS,DO,SQL,KV,transport), método/operación fija, tiempos de entrada/salida, deadline observado si existe, bytes LEÍDOS/chunks, conteos native-start/native-settle/reject, logical-denial, cancel-start/cancel-settle y estado. No URL/query/headers/cuerpo/cookies/códigos/token/props/identidad raw. Versiones/selector se representan sólo como hash si son necesarios. Parsear encabezados de cuota únicamente a campos numéricos saneados; una ausencia es null, no margen infinito.
+
+No duplicar contadores por cada wrapper: opOrdinal corresponde a una entrada nativa concreta, body-read/cancel son facetas de ESA operación. Agregar por fase/recurso y también conservar Root/child. Distinguir requests de fixture, operaciones DO/SQL/KV, bytes de cuerpo, tiempo de headers/lectura/parse/validación cuando observado, lógica de timeout y settlement real. No sumar duraciones solapadas como wall-time ni comparar denominadores diferentes. Peak se mide desde entrada/settlement del scope nombrado; separar native-call de hold outward-ACK.
+
+Colección sin alterar el resultado: no throws, sleeps, aborts o awaits adicionales de negocio por observar; no guardar Response/Buffer/capabilities en resultados. Cap16384eventos por collector, strings sólo enums/hex/ordinales, contadores seguros; al saturar dejar de retener filas, marcar overflow y seguir counters sin cambiar el resultado original. La calificación NO puede declarar diagnóstico completo con overflow/unknown/actual-promise sin resolver. No se usa la saturación como autorización ni se oculta.
+
+### Consola y artefactos
+
+Conservar el resultado completo saneado en JSON a través de los helpers existentes, junto a fuente/grafo/native manifests. Cambiar los puntos de consola de recordOwnerReference y resultadoR2 para imprimir únicamente resumen≤2048bytes UTF8 por línea con propósito/version, Source, nombre de caso, estado/counts, ruta de artefacto, bytes ySHA256 de los bytes realmente escritos. Escribir primero el JSON, calcular hash sobre ese mismo buffer y emitir resumen después. No truncar un JSON arbitrario ni perder datos fuera de pantalla. Mantener retornos completos para tests/consumidores, no cambiar sus decisiones; actualizar sólo consumidores de logging que el preflight identifique. Los logs históricos no se reescriben.
+
+Full JSON y eventos son SYN saneados; no importar credenciales reales a la fixture. Readbacks del upload descargado exigen source, rutas exactas, bytes/hash, formato/contador/denominadores y ausencia de archivos desconocidos. Consola corta no reemplaza artefacto completo.
+
+## Casos y premisas nativas
+
+Exactamente16casos de la calificación final propuesta:8 contratos puros +3readonly nativos +4reduction nativos +1ciclo positivo instrumentado. No añadir los éxitos de RED/intermedios a ese total. Cada familia demuestra un contrato distinto; no llamar cobertura readonly a la reducción.
+
+### Ocho contratos del colector/proyección
+
+Q1 campos allowlist/redacción sin valores sensibles; Q2 identidad ordinal y denominadores sin doble conteo; Q3 fase capturada sobrevive settlement tardío y request concurrente; Q4 native vs logical vs cancel se conservan distintos; Q5 métricas/DTO no conceden autoridad ni alteran resultado/promesa; Q6 overflow marca incompleto sin cambiar efecto; Q7 resumen≤2048B con hash/ruta de JSON completo; Q8 lifecycle de bytes/lecturas/cancel y peak por scope no se infieren de promedios. Estos son componentes puros SYN, no simulaciones de un ACK real.
+
+### Tres casos readonly (genuino SDKcomplete en cada linaje)
+
+R1: inventario nativo de200grants/2páginas de100, exactamente uno con la correlación original; API SDKreal realiza200gets y el redirect exige Reference genuina durable. Extra199filas son entradas nativas modeladas SYN con formato SDK fijado y metadata extranjera, nunca200autorizaciones emitidas ni recibos sembrados. Medir limit100/cursor real/peak2/scope y preservar sentinel ajeno.
+
+R2:201entradas hacen necesaria tercera lista; rechazar antes de la tercera entrada nativa y antes de redirect/Reference exitosa, aunque el candidato propio esté entre los primeros200. No ampliar listas/get budget, no repetir SDKcomplete.
+
+R3: después de una página poblada, retener los ACKs outward de los primeros DOS gets ya invocados y dejar cola poblada; vence child original5s. Otro Root LIVE mismoctx sigue excluido hasta settlement; al liberar no entra ningún get de la cola ni vuelve302/Reference/SDKcomplete. Rotular holdpostnativeACK si el KV ya se resolvió; no llamarlo latencia física. Mostrar pico2 del scope correcto y eventos/cancel reales.
+
+Todas las filas adicionales y controles son inputs nativos SYN no confiables, derivados del subject/prefix original sólo dentro de fixture. No caller-selector/metadata como permiso productivo. Los clocks/expiraciones del grant original permanecen.
+
+### Cuatro casos reducción (mismo linaje original por réplicas explícitas)
+
+Producir una sola ocurrencia genuina unexchanged:true como el control aceptado g6: Reference previa302, grant todavía presente naturalmente alC0 (codeTTL600) sin modificar expiresAt/reference. Recuperar los mismos archivos/IDs/scripts antesC0. Cada caso usa réplica SYN aislada del checkpoint, con a lo sumo dos Miniflare vivos; no reconstruye receipt/alarm/Source/I0.
+
+D1:199claves token propias +grant final=200deletes TOTALES; SDKnormalreturn y cierre correcto con inventario fresco. D2:200tokens consumen200deletes; el intento grant201 se deniega antes de KV I/O, originalgrant conservado, sin SDKObserved/OwnerReceipt/completion exitosa. D3:201tokens requieren tercera lista; negar tercera lista antes de I/O, conservar incertidumbre/sin replay/ACKfabricado. D4: cola de deletes poblada con primeros dos ACKs outward retenidos, vence el child original, no nueva emisión tras fallo y otro Root excluido hasta settlement real del scope. Al liberar no inventar retorno SDK exitoso ni repetirlo.
+
+Los token rows adicionales son marcadores inertes SYN, no access tokens ni nuevos grants de datos. Medir el número total realmente existente antes de empezar y usar el prefix original; no asumir que el exchange dejó cero/uno. Mantener expiración absoluta del grant genuino al modelar filas: no extender TTL/C1 ni refrescar un recurso para que quede presente. Sentinels fuera del prefix/subject intactos. Los resultados pendientes son pases de protección, no retiros completados. Para D4 no hace falta repetir los tres slots/restart ya calificados: comprobar primera invocación, exclusión y no nueva emisión hasta settlement; reporte limita su alcance.
+
+### Un positivo completo para diagnóstico atribuible
+
+Productor actual hasta SDKReference/token/MCP/NoticeLink genuinos, con métricas por fase sin respuestas exitosas sembradas. Cold checkpoint de la misma ocurrencia, consumidor antesC0, mismo alarm aC0, una restauración y reducción nativa/inventario/receipt. Afirmar que las sumas porfase/recurso concuerdan con sus contadores nativos nombrados; preservar separados los agregados de fixture y las operaciones dentro de scopes. Todos los child/Root existentes dentro de sus techos, sin ampliar un milisegundo. Este positivo sólo valida medición y regresión del flujo usado, no reejecuta la matriz completa previa ni prueba proveedor real.
+
+## RED y ejecución cloud
+
+Un RED focal diagnóstico antes de implementación: usar los helpers BASE existentes para producir SDKcomplete real/Reference y salida actual; preservar hechos/resultado y afirmar atribución completa/resumen acotado. Debe fallar por el déficit real de diagnóstico/longitud tras el efecto observado, NO por importar un archivo/helper nuevo, premisa inválida o clock/hash viejo. No hay que esperarC0 en ese RED ni reabrir RED históricos. Cualquier límite ya implementado que pase en BASE sigue siendo control, no se presenta falsamente como una nueva reproducción de bug.
+
+FinalGREEN seleccionado en la misma revisión, después de implementación/instrumentación:6jobs (contratos,readonly,positivo_prepare→positivo_consume,reduction_prepare→reduction_consume);3lanes,native≤2Miniflare/job, jobs≤15min (readonly≤7,contratos≤2). Tres linajes readonly separados que terminan antes de sus C0 +dos linajes pareados con productor/consumidor original900s: cinco linajes/10grafosM-QA, sin nuevo SDK-only graph. Los cuatro D son réplicas expresas del MISMO checkpoint, no cuatro nuevos I0. Consumir las réplicas secuencialmente/porpares≤2 dentro deC1; si el presupuesto de reload no cabe, Root debe rediseñar antes de calificar, nunca ampliarC1. Productores respetan margen de apertura antes de90s/margen originalC0−120000 y consumidor30s antesC0; no abrir I0 si no cabe el job. Capturar volumen/tiempos de la propia instrumentación, sin declararlos RTT real.
+
+contents:read only, sinsecrets; checkouts SHA; node22/currentlock/npmci ignorescripts/audit/fund como antes; sintaxis+lint de changedfiles y comandos exactos en reporte. Sourcefrozen durante cada run. Por cada upload7d, descargar MISMO artifactid/run y verificar inventario exacto/scripts/metafiles/native-state/bytes/SHA. No extraer DB/scripts en el ordenador. Artefactos completosSYN y resumenfechado durable; no prometer retención indefinida del binario.
+
+## Mapa y revisión
+
+Whitelisted inicial propuesto: nuevos test/fixtures/finite-budget-diagnostics.mjs y finite-budget-world.mjs, nuevos test/finite-budget-diagnostics.test.mjs y test/mcp-qa-finite-budget-native.test.mjs; modificar sólo los seams necesarios en finite-owner-cleanup.mjs,finite-owner-cleanup-persistence.mjs,finite-initial-entry-world.mjs y opcional finite-owner-io-fanout.mjs. Todos bajo test/fixtures; Root debe fijar la lista definitiva tras preflight, antes de escribir. Qualifier temporal nuevo .github/workflows/afw-finite-budget-qualification.yml, retirado terminal. Reportes/briefs/ledger de ESTA unidad separados del plan anterior. No usar un facadetest exportado en lib/ para evitar el flujo genuino.
+
+Buildercheck fresco antes del plan: preguntas importantes sobre medición/premisas/agrupación; Root responde las ya resueltas y decisiones técnicas delegadas, no consulta al owner ausente por rutina. Luego writing-plans y SDD secuencial con un escritor Source y gates de tarea +revisión conjunta. Preservar BASE y cadaCAS/readback; rollback sólo cambios propios, sin reset/force/eliminar historia. RamaSource existente está aislada de main y se preserva cloud; no clone local.
+
+Cierre de unidad: diagnóstico atribuible con límites/casos/readback reales y consola segura, ambas facetas calificadas por separado, código productivo exactoBASE, reporte honesto de lo que no midió. Puede cerrar M3 y parte de M1/RM2/M2 según evidencia; NO cerrar RM3 de viabilidad operacional ni RM4 de warnings por un verdeSYN. RM1 histórico permanece excepción. No reclamar ahorro, cuota disponible, reparación de5065ms, ejecución CodexCloud/PCoff o las fases futuras no implementadas.
