@@ -1321,3 +1321,50 @@ TEMP runs one contents:read/self-path-push Ubuntu/Node22 job≤3m with unchanged
 Witness comparison inserts the same fixed JSON fragment into two tiny different SourceFiles using the current parser/printer pipeline. Foreign parsed nodes and factory-created nodes are compared only inside the diagnostic, not applied as a fix. Four rows record escaped source/emitted text (each≤2KB), hashes and parser diagnostics. One actual pinned delegated-oauth-worker33008B/SHA3161d183fac7bb31b5bd863deba7f0641400b4f0ef5709c940f11e5441125318/blobd979f395029c9b1e66a99222d06acf99eba4f358 undergoes the unchanged exported M transform exactly once; its current count1 strict assertion is captured as evidence. Total witness≤20KB; each artifact input≤64KB.
 
 Artifact exact paths witness.json,console.log,manifest.json; source/run/attempt/path/bytes/SHA, seven days, upload and SAME-ID download with independent inline built-in Node exact readback. Diagnostic SUCCESS means captured evidence only: compilerFixed=false,qualificationPassed=false,I0Opened=false,nativeExecutionProduced=false and all readiness flags false. Source freezes until terminal; then preserve outcome, retire TEMP, verify CAS/tree/main and STOP. All G1/G2 failures above are retained; no final9 retry authorized.
+
+
+## Bounded compiler diagnostic outcome and retirement — 2026-11-07
+
+Diagnostic run42418045543 attempt1 succeeded at Source6880630593a68f1d892bdc4ea21d241e8102ad48/treeed2b9f58dea4943127c60585ffac7683148e3bff, world4bc8668b38fbe6d7acfe69ceb07cc0628899ff86. One job128540284113; started21:54:09Z, terminal21:54:33Z. This is a captured diagnostic, NOT a fixed compiler, passing preflight, nine-check qualification or native execution. No tests/fullgraph/esbuild/Miniflare/I0 ran.
+
+Root performed the sole additionally authorized RAM inspection of the SAME artifact13592805304 because exact synthetic emissions were absent from logs. No duplicate inspection by Source implementer. Bounds held: ZIP2689B, expanded6402B, builtincrypto/zlib, no filesystem/process/dependencies/content execution; buffers released. ZIP SHA25683980ec0585028c61228be3ec5728b72afa14e16df52607702f76535dfb0888a; exact paths manifest.json673B/SHA b2472abb89e6ebe5f84c882f9c4e0c204df911e52119ff9ff53f31e9caf63d66, witness.json5334B/SHA89055318962b23a5dd2e2005951aa77057407364fe4b420bec16f9622a9d2011, console.log395B/SHA9dfe0ee60ca4eccc3c34080090fb3043b8b2321c2955c6cbd81c06ece596b0cd. Source/run/attempt/path/byte/hash verified by Actions SAME-ID download and independently by Root RAM inspection. Artifact expires2026-11-14T21:54:29Z. Locked TS5.9.3, exact lock/world/function pins confirmed.
+
+Exact bounded emissions below use JSON string notation so newlines/quotes remain explicit. Own arithmetic SHA recomputation over the strings supplied by Root matches every provided digest; no code was executed.
+
+### A foreign
+
+41B; SHA256 aaffd1c2fdc9a2250edb0e0b3717042d2937b70a5efc704bbfc4ab3e9abc99fa; parser diagnostics 5.
+
+```json
+"const target = observe({ = 0;\n    :  });\n"
+```
+
+### A factory
+
+49B; SHA256 689b246743ab85100f5ca0e16da6cfa36854d9bd9e2bf33a73680b2a384eab70; parser diagnostics 0.
+
+```json
+"const target = observe({ \"operation\": \"read\" });\n"
+```
+
+### B foreign
+
+83B; SHA256 e7b77f2dd8ff025650e0ec74d21ad0cba16b02a266f3f3ca767f325242dcba32; parser diagnostics 2.
+
+```json
+"const padding = \"different file\";\nconst target = observe({ g = \"differ: nt fil });\n"
+```
+
+### B factory
+
+83B; SHA256 b9c582b19374e7bd186a7edb4b6388ba97aeb5896299dcc85eb8b5986832d023; parser diagnostics 0.
+
+```json
+"const padding = \"different file\";\nconst target = observe({ \"operation\": \"read\" });\n"
+```
+
+This is not merely different formatting. A foreign metadata fragment containing operation/read emitted pieces of the first destination declaration (=0), and changing only destination source made it emit pieces of that destination's padding string. Both foreign variants fail to parse (5 and2 diagnostics); factory-node variants preserve operation/read and parse with0. Root accepts the demonstrated cause: parsed foreign fragment nodes retain coordinates subsequently interpreted in the destination SourceFile. The conclusion is bounded to compiler-generated inserted nodes, not original business AST nodes or universal graph behavior.
+
+The unchanged actual M transform of pinned delegated-oauth-worker33008B/SHA3161d183fac7bb31b5bd863deba7f0641400b4f0ef5709c940f11e5441125318 retained strict failure:1 diagnostic, code1136, start5950,length1,line52,column80. Emitted43990B/SHA3bc9aaa9a6104595c13c483363045503dd9223145b47e6c9059dff15697acce6. Bounded context includes corrupted generated call: __afwBudget.member(reader, uthAutho, { thAuthoriza: ionServe, , OAuthResourc: false }, false, false). This agrees with the synthetic causal witness. Original raw Source was not edited or evaluated.
+
+TEMP retired in this terminal cleanup. All G1/G2 failure history retained; diagnostic parser-message enrichment remains only for honest bounded errors. No compiler correction or final9 retry is authorized by this outcome. compilerFixed=false,qualificationPassed=false,I0Opened=false,nativeExecutionProduced=false,operationalReadiness=false,completePackage=false,PCoff=false. After final CAS/report/tree/main readbacks: STOP_WRITES; send minimal remediation/regression proposal to Root before any further Source mutation or CI.
