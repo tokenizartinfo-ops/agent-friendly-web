@@ -26,6 +26,9 @@ jobs:
           node --check test/fixtures/finite-owner-cleanup.mjs
           node --check test/fixtures/finite-owner-cleanup-persistence.mjs
           ./node_modules/.bin/eslint test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs
+      - name: Contrast inherited eval Worker launcher before any I0
+        timeout-minutes: 1
+        run: node test/fixtures/finite-owner-cleanup-persistence.mjs launcher-probe
       - name: Pin the existing g4 artifact without reproducing effects
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -95,13 +98,11 @@ jobs:
           const r=await verifyCleanupG4Outcome(process.env.RUNNER_TEMP+'/historical-g4',{expectedEvidenceSource:'818bc4d4e6fb1935e594951ba09d3f9536ba49d6',historicalArchive:true});await writeCleanupEvidence('g4-existing-audit',r);console.info('R2 historical g4 audit',JSON.stringify(r));
           NODE
       - name: Genuine short I0 diagnostic for exact ordinary M transport
+        timeout-minutes: 3
         shell: bash
         run: |
           set -o pipefail
-          node --input-type=module <<'NODE' | tee output/owner-cleanup/routing-preflight.log
-          import {verifyCleanupMTransportPremises} from './test/fixtures/finite-owner-cleanup-persistence.mjs';
-          console.info('R2 M routing preflight',JSON.stringify(await verifyCleanupMTransportPremises()));
-          NODE
+          node test/fixtures/finite-owner-cleanup-persistence.mjs routing-preflight | tee output/owner-cleanup/routing-preflight.log
       - name: Inventory current preflight evidence
         if: always()
         run: |
@@ -172,7 +173,7 @@ jobs:
           import {readdir,readFile} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
           const root=process.env.RUNNER_TEMP+'/routing-preflight-readback',m=JSON.parse(await readFile(root+'/evidence-manifest.json','utf8'));assert.equal(m.source,process.env.GITHUB_SHA);const actual=[];
           async function walk(path=''){for(const e of await readdir(root+'/'+path,{withFileTypes:true})){assert(!e.isSymbolicLink());const p=path?path+'/'+e.name:e.name;if(e.isDirectory())await walk(p);else{assert(e.isFile());if(p!=='evidence-manifest.json')actual.push(p);}}}await walk();assert.deepEqual(actual.sort(),m.files.map(f=>f.path).sort());
-          const required=['g4-artifact-metadata.json','g4-existing-audit.json','m-transport-preflight.json','routing-preflight.log','sdk-only-current.mjs','sdk-only-current-metafile.json'].map(n=>'owner-cleanup/'+n);for(const p of required)assert(actual.includes(p));const graphs=actual.filter(p=>p.startsWith('t2-native-graphs/'));assert.equal(graphs.length,3);assert(graphs.some(p=>p.endsWith('/canary-index.mjs')));assert(graphs.some(p=>p.endsWith('/qa-index.mjs')));assert(graphs.some(p=>p.endsWith('/metafiles.json')));assert.equal(actual.length,9);
+          const required=['launcher-probe.mjs','launcher-probe.json','g4-artifact-metadata.json','g4-existing-audit.json','m-transport-preflight.json','routing-preflight.log','sdk-only-current.mjs','sdk-only-current-metafile.json'].map(n=>'owner-cleanup/'+n);for(const p of required)assert(actual.includes(p));const graphs=actual.filter(p=>p.startsWith('t2-native-graphs/'));assert.equal(graphs.length,3);assert(graphs.some(p=>p.endsWith('/canary-index.mjs')));assert(graphs.some(p=>p.endsWith('/qa-index.mjs')));assert(graphs.some(p=>p.endsWith('/metafiles.json')));assert.equal(actual.length,11);
           for(const f of m.files){assert(!f.path.includes('..'));const b=await readFile(root+'/'+f.path);assert.equal(b.length,f.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),f.sha256);}
           const r=JSON.parse(await readFile(root+'/owner-cleanup/m-transport-preflight.json','utf8'));assert.equal(r.source,process.env.GITHUB_SHA);assert.equal(r.closureProved,false);assert.equal(r.disposedBeforeC0,true);assert.equal(r.positive.worker,'canary-first-connection');assert.equal(r.positive.dataRead,true);assert.equal(r.negative.dataDenied,true);assert.equal(r.sdkOnly.holdRepeated,false);console.info('R2 routing preflight exact readback',m.files.length);
           NODE
