@@ -47,7 +47,7 @@
 - MODIFY test/fixtures/finite-first-connection-publication.mjs: plugin M opt-in; default y negative spy exactos.
 - MODIFY test/mcp-qa-finite-owner-cleanup-native.test.mjs: sólo dos logs directos posteriores a writer, sin registro/assert/decisiones cambiados.
 - NO modificar finite-owner-io-fanout.mjs; su instrumentación no es el seam escogido.
-- TEMP .github/workflows/afw-finite-budget-qualification.yml; sólo workflow_dispatch/contents:read, retirar antes de cadaentrega.
+- TEMP .github/workflows/afw-finite-budget-qualification.yml; sólo push filtrado a rama Source + este único path temporal/contents:read, retirar antes de cadaentrega.
 - REPORT docs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task1.md y task2.md. El Source escritor no escribe ledger/briefs Root.
 
 El preflight enumera quéconsumer lee logs y los hooks exactos por módulo; Root cierra whitelist antes de Sourcewrite. Un archivo fuera de mapa requiere ruling previo. lib/worker/package/config/Core exactos a BASE.
@@ -171,3 +171,15 @@ Workspaceadaptacióncloud: ledger docs/superpowers/progress/2026-11-07-finite-na
 Root acepta los12paths cerrados (5nuevos test/helpers,5modificados test/fixtures+caller,1TEMP,1reporte), Mcompiler opt-in yconsolecaller R2; no producción. Carrier SYN ALS con storesinmutables+weakactualidentities dentrodearchivospermitidos, run devuelveexactaretornopromise, observaciónpasiva/snapshotcapturado para thenables, sin flags/compat/deps nuevos ysin getStoreausente convertido enRootficticio. Hookallowlist/markers/grafos completosverificadosantesI0, composiciónsobrefuenteYApreparada; leaf noatribuido detiene, no zeroUnknowninventado. Especificación última ec3b7d68 esautoridadsi unmapa anterior difiere.
 
 Autorizar inicialmente sólo nuevo native.test+TEMP para R0 conimportsBASE. Preservarnativecomplete1/Reference/status302/grafos/metafiles/facts/outcome+manifestantesassertdiagnosticause. No D1DBarchiveobligatorioenREDforward; sí coldstatecompletoenGREEN. RootdebeaceptarREDantescolector/instrumentación. No codewriteconrunactivo. Refs/rulingsenbriefactual+ledgerdeestaunidad; owner nointerviene.
+
+## Corrección de disparador CI — Root7Nov18:18UTC
+
+Root verificó primaria previa: run42390108314.event=push; su qualifier usa sólo on.push.branches:[feat/finite-native-cleanup-20261101],paths:[su propio archivo temporal]. workflow_dispatch-only del plan nuevo fue una elección de planificación, no regla de AGENTS ni permiso operacional. El conector carece de dispatch y no hace falta una sesión UI.
+
+Se autoriza el MISMO mecanismo para ESTA unidad: on.push.branches exacto feat/finite-native-cleanup-20261101, paths exacto .github/workflows/afw-finite-budget-qualification.yml; contents:read. Cada cambio consciente de ese TEMP inicia una sola calificación del SHA nuevo; no otras rutas/ramas/default-main/cron, no UI/auth ni trigger de producción. Test checkout github.sha/persist-credentials:false/fetch-depth:1; congelar Source desde el commit activador hasta terminal. Código/helper/report changes no disparan por el filtro. Quitar TEMP al entregar elimina futuras invocaciones. No actualizarlo con un run activo.
+
+Root comprobó0runs para staging manual b90221f7d935374a6b6519b3873f61cc232b04b5 a18:17:19UTC y no pulsó UI. Autoriza liberar esa espera pre-dispatch exclusivamente para UNA modificación del MISMO TEMP: header push + readback completo que faltaba. Writer debe comprobar de nuevo0runs antes de mutar; si apareció uno, STOP sin duplicarlo. Testblob4cec9ca554f58cf7238272ac287814c22878a592 y los3179BASEleaves permanecen exactos, nueva revisión quedará fijada como Source del RED. No helpers hasta Rootacepte causalRED.
+
+R0upload debe tener id y siempre descargar ESE artifact-id del MISMO run a runner.temp, verificar manifestSource/run/attempt y lista exacta de payloads/grafos/inputs/bytes/SHA, SDKcomplete1/Reference/302/expectedDeficit y NODEexit1/TAP1fail por el assert previsto. Un setupfail no es causalRED. No inferir integridad desde la copia anterior alupload. Readback se ejecuta aun con el test fallido; jobglobal quedaFAIL esperado. Archivos/schemas/desglose precisos se fijan en elTEMPantes de disparar; graphfile set real se contrasta contra los metafiles, no se omite. Sin secrets o downloads locales.
+
+Ruling: corregir el inicio a push estrictamente filtrado y añadir readback al mismoTEMP — reproduce infraestructura ya probada sin sesión humana ni nuevo permiso — costo si esincorrecto: un evento inesperado puede abrir calificación; filtros, CAS, revisión previa0runs, freeze y posterior retiro impiden repetirla a ciegas.

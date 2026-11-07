@@ -6,7 +6,7 @@ PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; 
 
 Plan38d8d2d61392bcb284085fe210dbad41baf7463b/blob1aad6aba555302736dc78cff1ef36c91a100c969 (20658chars), spec32e75999e36b0c8f6c60ffb16d13fe980900ece0/blobbef5563af032c433aaff498e730a9429e8220e0d (20408chars). Design buildercheck finished nothing important left after Root corrected grouping to7jobs. Root approved for planning under owner's explicit autonomy/opt-out. Method chosen Root: SDD/sequentialtwoTasks +freshcombinedgate.
 
-Task1 NEXT: fresh implementer READONLYpreflight first. No Sourcewrite until Root resolves exacthooks/whitelist/REDpremise. Task1requirescausalRED1 then9GREEN(8pure+P1),3jobs. Task2notstarted; afterTask1accepted implementsreadonly/reductionboundary7 and finalcoherent16/7jobs. No producer/clocks/livewindowopened.
+Task1 ACTIVE: finite_budget_diagnostics_impl(Solhigh) preflight CLOSED; R0 staged manually b90221f7,0runs verified/no UI action. Root authorizes one TEMP-only trigger+readback update to narrow push, then freeze RED. No collector implementation before Root accepts causalRED. Task1requirescausalRED1 then9GREEN(8pure+P1),3jobs. Task2notstarted; afterTask1accepted implementsreadonly/reductionboundary7 and finalcoherent16/7jobs. No producer/clocks/livewindowopened.
 
 GLOBALBASE Source29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64,3179leaves, ref freshlyverified7Nov17:58:43UTC. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 alsoverified. No activeSourcewriter from oldplan; keepRemoteSourceisolated frommain. Every lib/worker/package/lock/config/SDK/coreblob mustremainexact; test-onlychanges/temporaryqualifier/report allowedafterpreflight.
 
@@ -53,3 +53,22 @@ Root read preflight.md, resuming.md and using-git-worktrees/SKILL.md. Newledgerp
 ## Task contract / truth limits
 
 Nativecountermeasurements are SYN, notCFquotas/bill/RTT/CPU/RAM/guardia. Hechosactuales in reviews/2026-11-07-finite-current-performance-facts.es.md @965afb35/blobcb020f64b50a1a1fcc496c5a8b184f6cb2580585. Fuente realvencida/mismosI0/C0/C1/Root30s/child5s/3slots unchanged. No futurethirdCLOSED/prearm/fullsetup/nominalhandoff inferredfromthisunit. One realcoordinatedPCoffoccurrence remainsreservedafterlaterclosedpreflight; Maxseparateconsent.
+
+
+## Task1 preflight and staged R0 —7Nov18:18UTC
+
+Fresh implementer verifiedBASE296/tree3179/main0c9c/SourceAGENTSb679 +requirements, no mutation before Root ruling. ReturnedNEEDS_CONTEXT for missing Mcompiler andR2consolecaller seams. Root read handling-reports fresh, accepted two test-onlypaths, SYN ALS immutablecarrier with existingcompat/promiseidentity and exactnativeleaf markers/grafos, nofanout change. Currentdesign ec3b7d68/blob733462fe,plan7e3ee088/blob787daaf8,briefcc4a2f2b/blob63afb28c. Final12paths closed. Nativeopaque bytesnull/reason; safeNodewriter allows threeexistingoutputprefixes. Root validates causalRED beforeimplementation.
+
+Stage1writer addedONLY native.test4cec9ca5 andTEMPdf92e062, Sourceb90221f7/treeb20155a2, all3179BASEleaves protected. Root read bothfiles directly: Baseimports only, actualSDKcomplete/Reference/302 and fullgraphs/facts before missingdiagnosticsassert; temporarymanualtrigger hadno run. Root found missingpostuploadreadback and planningerror aboutmanualtrigger, corrected BEFORE first execution. No runtime/credentials/UI actions. Plan/brief trigger wording now superseded below. ExactSource staging preserved inGit, no reset.
+
+## Corrección de disparador CI — Root7Nov18:18UTC
+
+Root verificó primaria previa: run42390108314.event=push; su qualifier usa sólo on.push.branches:[feat/finite-native-cleanup-20261101],paths:[su propio archivo temporal]. workflow_dispatch-only del plan nuevo fue una elección de planificación, no regla de AGENTS ni permiso operacional. El conector carece de dispatch y no hace falta una sesión UI.
+
+Se autoriza el MISMO mecanismo para ESTA unidad: on.push.branches exacto feat/finite-native-cleanup-20261101, paths exacto .github/workflows/afw-finite-budget-qualification.yml; contents:read. Cada cambio consciente de ese TEMP inicia una sola calificación del SHA nuevo; no otras rutas/ramas/default-main/cron, no UI/auth ni trigger de producción. Test checkout github.sha/persist-credentials:false/fetch-depth:1; congelar Source desde el commit activador hasta terminal. Código/helper/report changes no disparan por el filtro. Quitar TEMP al entregar elimina futuras invocaciones. No actualizarlo con un run activo.
+
+Root comprobó0runs para staging manual b90221f7d935374a6b6519b3873f61cc232b04b5 a18:17:19UTC y no pulsó UI. Autoriza liberar esa espera pre-dispatch exclusivamente para UNA modificación del MISMO TEMP: header push + readback completo que faltaba. Writer debe comprobar de nuevo0runs antes de mutar; si apareció uno, STOP sin duplicarlo. Testblob4cec9ca554f58cf7238272ac287814c22878a592 y los3179BASEleaves permanecen exactos, nueva revisión quedará fijada como Source del RED. No helpers hasta Rootacepte causalRED.
+
+R0upload debe tener id y siempre descargar ESE artifact-id del MISMO run a runner.temp, verificar manifestSource/run/attempt y lista exacta de payloads/grafos/inputs/bytes/SHA, SDKcomplete1/Reference/302/expectedDeficit y NODEexit1/TAP1fail por el assert previsto. Un setupfail no es causalRED. No inferir integridad desde la copia anterior alupload. Readback se ejecuta aun con el test fallido; jobglobal quedaFAIL esperado. Archivos/schemas/desglose precisos se fijan en elTEMPantes de disparar; graphfile set real se contrasta contra los metafiles, no se omite. Sin secrets o downloads locales.
+
+Ruling: corregir el inicio a push estrictamente filtrado y añadir readback al mismoTEMP — reproduce infraestructura ya probada sin sesión humana ni nuevo permiso — costo si esincorrecto: un evento inesperado puede abrir calificación; filtros, CAS, revisión previa0runs, freeze y posterior retiro impiden repetirla a ciegas.
