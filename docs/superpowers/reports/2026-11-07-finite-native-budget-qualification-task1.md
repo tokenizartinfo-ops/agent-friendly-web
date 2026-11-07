@@ -1271,3 +1271,40 @@ Root resumed this same Task1 at Source21d795f3b2a359266fa2d22ae6a74a28216cfc30. 
 Only the world CLI dispatch changes: the same filename/argv/command branches now execute in an async main scheduled by setImmediate after the module completes evaluation. Its rejection handler prints the error and explicitly sets process.exitCode=1; no unobserved rejection or success-on-error path is intended. Non-CLI imports remain inert. All world text before the CLI block is byte-for-byte unchanged; selectors, runtime observation, Source guards/clocks/TTL and business code are unchanged for this correction.
 
 The exact three-job TEMP from failed Source23e7800 is restored unchanged (workflow blob8e940dcf91efcdbc167088386c086ef90cc87578). New revision must run all8Q plus exact AST preflight again before any I0, then the same original900s principal producer/P1 consumer; old8PASS cannot be added to a new P1. Same contents:read/self-path push trigger, timeouts, seven-day artifacts and exact-ID readbacks. Source freezes on activation until terminal. Another failure will be preserved and reported without automatic retry/widening. Prior failed history above is retained. All readiness flags remain false; no actual provider/runtime/auth/main/publication action.
+
+
+## Corrected CLI run failed at emitted AST parse gate — 2026-11-07 21:42:43 UTC
+
+Status remains IN_PROGRESS / NEEDS_CONTEXT; Task1 is not complete. The one correction/run authorized by Rootdocs976be2c15de7f811a2406eaa130883db10ec40c3 is exhausted. No automatic retry or further instrumentation edit follows this failure.
+
+Frozen Source7eeb66bca9e4bbc52487f31d6999e2d73ab37b7e/tree01a3fb039df215d5d6d72841b748a0523dcde936, world9898bd775d9ee544082d60b1476dbf85f1d432cd, reportad14b8f5fc28c9825cefe9f9c6242de7d076fae0. Run42417096301 attempt1 started21:42:03Z, terminalfailure21:42:43Z. Purejob128537445920 failed; positive_prepare128537598861 and positive_consume128537599462 skipped.
+
+All ten syntax checks and ESLint passed on this NEW SHA; Q1–Q8 again tests8/pass8/fail0. No old result was carried forward as a new pass. The CLI correction is causally supported: command progressed to harness-start, MODELED compile-only namespace DATA, and M-compile-start, instead of unresolved-TLA exit13. The explicitly caught compiler failure returned exit1. No native I0, SDK flow, checkpoint, alarm or P1 occurred.
+
+The actual M build failed with19 emitted-source parse assertions. This is a distinct previously unexecuted preflight failure family; the raw/prepared source hashes/selectors are not silently relaxed. Complete reported family (diagnostic count is a parser-error count, not native I/O):
+
+- lib/mcp-qa-finite-owner-native-wire.mjs: 17
+- lib/mcp-qa-finite-owner-notice-get-forward.mjs: 4
+- lib/mcp-qa-finite-owner-notice-consent-body.mjs: 4
+- lib/mcp-own-successor-host.mjs: 17
+- lib/mcp-own-successor-retirement-host.mjs: 38
+- lib/mcp-qa-finite-policy-setup.mjs: 79
+- lib/mcp-own-durable-host.mjs: 93
+- lib/mcp-own-synthetic-save-host.mjs: 20
+- lib/delegated-oauth-worker.mjs: 1
+- lib/delegated-oauth-store.mjs: 125
+- lib/mcp-qa-finite-preparation-store.mjs: 128
+- lib/mcp-retired-custody-reader.mjs: 5
+- lib/mcp-activation-observer.mjs: 40
+- lib/mcp-qa-finite-seed-wire.mjs: 16
+- lib/dossier-monitoring-authority.mjs: 165
+- lib/mcp-own-finite-reduction.mjs: 48
+- lib/mcp-own-finite-cleanup-proof.mjs: 5
+- lib/mcp-own-finite-primary.mjs: 69
+- lib/dossier-supervision.mjs: 19
+
+Bounded source-inspection hypothesis, not a verified cause/fix: world.parseExpression constructs a separate SourceFile fragment and returns its parsed child with fragment positions; those nodes are later inserted into another SourceFile and emitted by that file's printer. A foreign source-range/synthesis interaction could corrupt emitted literals. The present failure artifact contains only module/count assertions and build stacks, not a focused emitted location/excerpt. The next useful diagnostic is a minimal pinned transform witness and first generated parse location to distinguish this from another visitor/printer defect; no source/selector weakening, new map or guessed golden count is justified. Reported this uncertainty and minimal next evidence to Root.
+
+Failure artifact13591583752, finite-budget-pure-7eeb66bca9e4bbc52487f31d6999e2d73ab37b7e,3286B, ZIP SHA256529bd5c2f92e448e55391f3d265f420ffba20a23f95d992786e50257e2377c35; created21:42:37Z, expires2026-11-14T21:42:37Z, expired=false. Four files: budget-artifact.json,lint.log,preflight.log,tests.log. Download by SAME ID13591583752 reproduced ZIP digest and verified exact source/run/attempt and complete path/bytes/SHA inventory. Manifest697B/SHA2562b3bfc7fb16f7b253b0d82a4876057374c770459eca7c1b92d5a41e6f2bb73a7. API metadata/job logs independently read after terminal; no local ZIP extraction, dependency install, process, DB or project execution.
+
+TEMP retired again by this cleanup commit. All prior history is preserved. Source remains unqualified; main/protected paths and readiness flags unchanged. STOP_WRITES after CAS/report/tree/main readbacks pending Root continuation ruling. Fresh Task1 Spec/Quality and Task2 remain pending.
