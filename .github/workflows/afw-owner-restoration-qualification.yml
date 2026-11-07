@@ -1,4 +1,4 @@
-name: AFW owner fix1 causal RED
+name: AFW owner fix1 focused GREEN
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -27,8 +27,8 @@ jobs:
         run: |
           mkdir -p output/owner-cleanup
           set -o pipefail
-          for file in test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs; do node --check "$file"; done
-          npx eslint test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/lint.log
+          for file in lib/mcp-qa-finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs; do node --check "$file"; done
+          npx eslint lib/mcp-qa-finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/lint.log
       - name: Genuine g6 producer and native checkpoint
         shell: bash
         run: |
@@ -39,7 +39,7 @@ jobs:
         id: checkpoint
         uses: actions/upload-artifact@v4
         with:
-          name: r2-fix1-red-g6-checkpoint-${{ github.sha }}
+          name: r2-fix1-green-g6-checkpoint-${{ github.sha }}
           path: output/owner-cleanup/checkpoint-g6/
           if-no-files-found: error
           retention-days: 7
@@ -91,7 +91,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: r2-fix1-red-g6-prepare-evidence-${{ github.sha }}
+          name: r2-fix1-green-g6-prepare-evidence-${{ github.sha }}
           path: |
             output/owner-cleanup/*.log
             output/owner-cleanup/*.tap
@@ -157,7 +157,7 @@ jobs:
           ARTIFACT_ID: ${{ needs.prepare_g6.outputs.checkpoint_id }}
           DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
         run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
-      - name: RED fix1 g6 original native clocks
+      - name: GREEN fix1 g6 original native clocks
         shell: bash
         run: |
           set -o pipefail
@@ -181,7 +181,7 @@ jobs:
         id: outcome
         uses: actions/upload-artifact@v4
         with:
-          name: r2-fix1-red-g6-consume-evidence-${{ github.sha }}
+          name: r2-fix1-green-g6-consume-evidence-${{ github.sha }}
           path: |
             output/owner-cleanup/*.tap
             output/owner-cleanup/*.json
@@ -258,8 +258,8 @@ jobs:
         run: |
           mkdir -p output/owner-cleanup
           set -o pipefail
-          for file in test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs; do node --check "$file"; done
-          npx eslint test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/lint.log
+          for file in lib/mcp-qa-finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs; do node --check "$file"; done
+          npx eslint lib/mcp-qa-finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/lint.log
       - name: Genuine g7 producer and native checkpoint
         shell: bash
         run: |
@@ -270,7 +270,7 @@ jobs:
         id: checkpoint
         uses: actions/upload-artifact@v4
         with:
-          name: r2-fix1-red-g7-checkpoint-${{ github.sha }}
+          name: r2-fix1-green-g7-checkpoint-${{ github.sha }}
           path: output/owner-cleanup/checkpoint-g7/
           if-no-files-found: error
           retention-days: 7
@@ -322,7 +322,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: r2-fix1-red-g7-prepare-evidence-${{ github.sha }}
+          name: r2-fix1-green-g7-prepare-evidence-${{ github.sha }}
           path: |
             output/owner-cleanup/*.log
             output/owner-cleanup/*.tap
@@ -388,7 +388,7 @@ jobs:
           ARTIFACT_ID: ${{ needs.prepare_g7.outputs.checkpoint_id }}
           DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
         run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
-      - name: RED fix1 g7 original native clocks
+      - name: GREEN fix1 g7 original native clocks
         shell: bash
         run: |
           set -o pipefail
@@ -412,7 +412,7 @@ jobs:
         id: outcome
         uses: actions/upload-artifact@v4
         with:
-          name: r2-fix1-red-g7-consume-evidence-${{ github.sha }}
+          name: r2-fix1-green-g7-consume-evidence-${{ github.sha }}
           path: |
             output/owner-cleanup/*.tap
             output/owner-cleanup/*.json
