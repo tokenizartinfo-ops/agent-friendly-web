@@ -90,7 +90,7 @@ Next deliverable: collector/evidence+immutableALScarrier/exactSYNhooks/positiveP
 
 Owner absentuntil19:30UTC/16:30Argentina. NoChrome/GUI/login/OTP neededforCI. No nextSourceTask2/privateboundarymodes untilTask1accepted. operationalReadiness=false;completePackage=false;PCoff=false.
 
-## 7Nov18:47UTC — Task1 NEEDS_CONTEXT resuelto: inventario previo a I0
+## 7Nov18:44UTC — Task1 NEEDS_CONTEXT resuelto: inventario previo a I0
 
 Root leyó de nuevo handling-reports.md. El implementador se detuvo correctamente; no Task1 DONE ni evidencia GREEN. Checkpoint Source verificado por Root:050ad1a1eb9091ae02dbf3f2d2131656de0a5da3,tree8f3f9610332368fa6bd2edd06a5c9fdd41634a28,parentecd572222f7ec4e2759a9e6301e6a8481a6ea6b2. Sólo añade collector a66b46b6194d7694f6fd84dd9636658d20590601,evidence7b0dd5a30dffac183b2213ea6cb7b1be48a91547,Qtests504095a94a6ef47c480c5e797c063aa3454d08d8; todavía sin ejecutarQ1–Q8. Writer informa3179BASEleavesexactos/3184finales/0runs para el checkpoint; Root verificó ref/commit/cambios. El único run de esta unidad sigue siendo R0causal aceptado.
 
@@ -103,3 +103,11 @@ Ruling: Nodeevidencewriter admite testRevision:null sólo como desconocido expl�
 Ruling: ordinals de collector son locales a cada montaje/ejecución y no sobreviven un coldstart; separar los snapshots productor/consumidor y M/QA en envelopes de evidencia rotulados con segmentos fijos de prueba — evita fusionar dos rootOrdinal1 o fingir concurrencia entre épocas — costo: el total intersegmento se presenta como suma de contadores; peaks/identidades permanecen por segmento/Root y no se afirma un peak global no observado. Los labels sólo datos test, no inputs de autoridad, claves ni nuevosRoot; cada segmento conserva su Source40SHA/workerRole y capture real, sin fallbackRoot siALSfalta. Inventariar setup parent.lease y alarm parent.lease reales, incluyendo I/O previo a stagework. Nada de renovarI0/C0/C1/policies.
 
 Siguiente acción: reanudar MISMO implementador sólo para mapa/inventario+calificación compile-only bounded anterior. No finalGREEN ni Task2 ni nuevas dependencias hasta evaluación Root. Usuario no disponible antes19:30UTC/16:30Argentina; este paso no requiereChrome/códigos/credenciales. Readiness/completePackage/PCoff siguenfalse.
+
+### 7Nov18:46UTC — seam compile-only
+
+Root contrastó el harness Source296, blob8477a05e955d854e001d2315a8b2c4c6c6dbbbe2:28–43/115–142. La compilación M/QA existente está dentro del harness y obtiene los IDs de namespace mediante un Miniflare provisional antes de compilar.
+
+Ruling: permitir opt-in budgetCompileOnly dentro del fixture ya autorizado para omitir POR COMPLETO constructorMiniflare/getBindings/setOptions/seed/invoke y retornar inmediatamente después de los dos builds — reutiliza el compilador preparado real sin duplicar engine ni gastar I0 — costo: namespaces/IDs del input compile-only serán datos modelados, explícitamente rotulados, y sus digests nunca prueban los grafos nativos de P1. No simular una API Miniflare/namespace con objetos que parezcan nativos; pasar valores compile-only marcados como datos. La ruta default/nooptin y el P1 siguen derivando identidades nativas reales sin cambios. No producir un token real/sesión, persistencia/checkpoint nativo ni claim de cobertura ejecutada; cualquier metadata SYN auxiliar de compilación queda etiquetada como input modelado. El mapa estático validará las formas/callsites, no el éxito de runtime.
+
+El run final deberá reconstruir/archivar/comprobar sus propios grafos con namespace reales y gate de marcadores antesI0; no reutilizar scripts, IDs o resultados del inventoryrun para acreditar P1. La opción compile-only queda restringida al modo de prueba y no deberá ser alcanzable por los productores/consumidores de la calificación nativa.
