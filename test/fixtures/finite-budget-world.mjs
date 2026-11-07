@@ -125,7 +125,12 @@ const objectPath=p=>relative(process.cwd(),p).replaceAll('\\','/');
 const nativeDescriptorByPath=new Map(budgetNativeDescriptorProposal.sourceDescriptors.map(row=>[row.path,row]));
 function sourceAST(source,path){
  const ast=ts.createSourceFile(path,source,ts.ScriptTarget.ESNext,true,path.endsWith('.ts')?ts.ScriptKind.TS:ts.ScriptKind.JS);
- assert.equal(ast.parseDiagnostics.length,0,'budget prepared source parses: '+path);return ast;
+ let detail='';
+ if(ast.parseDiagnostics.length){
+  const first=ast.parseDiagnostics[0],start=first.start??0,location=ast.getLineAndCharacterOfPosition(start),from=Math.max(0,start-120);
+  detail='\nAFW_PARSE_WITNESS '+JSON.stringify({path,diagnostics:ast.parseDiagnostics.length,code:first.code,start,length:first.length??0,line:location.line+1,column:location.character+1,bytes:Buffer.byteLength(source),sha256:hash(source),contextStart:from,context:source.slice(from,from+240)});
+ }
+ assert.equal(ast.parseDiagnostics.length,0,'budget prepared source parses: '+path+detail);return ast;
 }
 function callShape(node,ast){
  const callee=node.expression;

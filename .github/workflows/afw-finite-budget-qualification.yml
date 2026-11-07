@@ -1,0 +1,144 @@
+name: AFW finite budget qualification
+run-name: AFW bounded compiler diagnostic source ${{ github.sha }}
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
+permissions:
+  contents: read
+concurrency:
+  group: afw-finite-budget-qualification
+  cancel-in-progress: false
+jobs:
+  compiler_diagnostic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node --check test/fixtures/finite-budget-world.mjs
+      - name: Bounded foreign-fragment and pinned-module witness
+        shell: bash
+        run: |
+          mkdir -p output/finite-budget/compiler-diagnostic
+          set -o pipefail
+          node --input-type=module <<'NODE' 2>&1 | tee output/finite-budget/compiler-diagnostic/console.log
+          import assert from 'node:assert/strict';
+          import {readFile,writeFile,mkdir} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          import ts from 'typescript';
+          import {transformBudgetPreparedSource} from './test/fixtures/finite-budget-world.mjs';
+          const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+          const root='output/finite-budget/compiler-diagnostic';
+          await mkdir(root,{recursive:true});
+          const witness={purpose:'afw.finite-budget-compiler-diagnostic.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,status:'started',comparison:[],actual:null,I0Opened:false,nativeExecutionProduced:false,compilerFixed:false,qualificationPassed:false,operationalReadiness:false,completePackage:false,PCoff:false};
+          function sourceAST(source,path){
+           const ast=ts.createSourceFile(path,source,ts.ScriptTarget.ESNext,true,path.endsWith('.ts')?ts.ScriptKind.TS:ts.ScriptKind.JS);
+           assert.equal(ast.parseDiagnostics.length,0,'budget prepared source parses: '+path);return ast;
+          }
+          function parseExpression(text){
+           const ast=sourceAST('const __v=('+text+');','expression.mjs');
+           return ast.statements[0].declarationList.declarations[0].initializer.expression;
+          }
+          const inspect=(source,path)=>{
+           const ast=ts.createSourceFile(path,source,ts.ScriptTarget.ESNext,true,ts.ScriptKind.JS);
+           return ast.parseDiagnostics.map(d=>{const start=d.start??0,p=ast.getLineAndCharacterOfPosition(start);return {code:d.code,start,length:d.length??0,line:p.line+1,column:p.character+1};});
+          };
+          try{
+           assert.match(witness.source??'',/^[a-f0-9]{40}$/);
+           const world=await readFile('test/fixtures/finite-budget-world.mjs','utf8'),lockBytes=await readFile('package-lock.json'),lock=JSON.parse(lockBytes),installedBytes=await readFile('node_modules/typescript/package.json'),installed=JSON.parse(installedBytes);
+           assert.equal(lockBytes.length,445991);assert.equal(hash(lockBytes),'846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34');
+           const pin=lock.packages['node_modules/typescript'];assert.equal(pin.version,'5.9.3');assert.equal(installed.version,pin.version);assert.equal(ts.version,pin.version);
+           const from=world.indexOf('function parseExpression('),to=world.indexOf('\nfunction packageSelection',from),actualFunction=world.slice(from,to);
+           assert.equal(actualFunction,parseExpression.toString());assert.equal(Buffer.byteLength(actualFunction),179);assert.equal(hash(actualFunction),'6d87bb59a40fbf99c3d738499e734ce130e9a7ecf18d7c41ba1bc85d75a22933');
+           assert(world.includes('const transformed=ts.createPrinter({newLine:ts.NewLineKind.LineFeed}).printFile(result.transformed[0]);'));
+           witness.inputs={world:{bytes:Buffer.byteLength(world),sha256:hash(world)},function:{bytes:179,sha256:hash(actualFunction)},lock:{bytes:lockBytes.length,sha256:hash(lockBytes),blob:'36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b'},typescript:{version:ts.version,integrity:pin.integrity,installedPackageBytes:installedBytes.length,installedPackageSha256:hash(installedBytes)}};
+           const fragment='{"operation":"read"}';
+           const sources=[{name:'witness-a.mjs',source:'const target = 0;\n'},{name:'witness-b.mjs',source:'const padding = "different file";\nconst target = 0;\n'}];
+           for(const input of sources)for(const variant of ['foreign-fragment','factory-nodes']){
+            assert(Buffer.byteLength(input.source)<=2048);
+            const ast=sourceAST(input.source,input.name),f=ts.factory;
+            const result=ts.transform(ast,[context=>{
+             const visit=node=>{
+              if(ts.isVariableDeclaration(node)&&node.name.getText(ast)==='target'){
+               const arg=variant==='foreign-fragment'?parseExpression(fragment):f.createObjectLiteralExpression([f.createPropertyAssignment(f.createStringLiteral('operation'),f.createStringLiteral('read'))]);
+               return f.updateVariableDeclaration(node,node.name,node.exclamationToken,node.type,f.createCallExpression(f.createIdentifier('observe'),undefined,[arg]));
+              }
+              return ts.visitEachChild(node,visit,context);
+             };
+             return value=>ts.visitNode(value,visit);
+            }]);
+            const emitted=ts.createPrinter({newLine:ts.NewLineKind.LineFeed}).printFile(result.transformed[0]);result.dispose();
+            assert(Buffer.byteLength(emitted)<=2048);const diagnostics=inspect(emitted,input.name);
+            witness.comparison.push({name:input.name,variant,fragment,source:input.source,sourceSha256:hash(input.source),emitted,emittedBytes:Buffer.byteLength(emitted),emittedSha256:hash(emitted),diagnostics});
+            if(variant==='factory-nodes')assert.equal(diagnostics.length,0);
+           }
+           const path='lib/delegated-oauth-worker.mjs',raw=await readFile(path,'utf8');
+           assert.equal(Buffer.byteLength(raw),33008);assert.equal(hash(raw),'3161d183fac7bb31b5bd863deba7f0641400b4f0ef5709c940f11e5441125318');
+           let actualError;
+           try{transformBudgetPreparedSource(raw,path,'M');}catch(error){actualError=error;}
+           assert(actualError,'current strict actual-module failure must remain observable');assert.equal(actualError.code,'ERR_ASSERTION');assert.equal(actualError.actual,1);assert.equal(actualError.expected,0);
+           const line=actualError.message.split('\n').find(line=>line.startsWith('AFW_PARSE_WITNESS '));assert(line);
+           const detail=JSON.parse(line.slice('AFW_PARSE_WITNESS '.length));assert.equal(detail.path,path);assert.equal(detail.diagnostics,1);assert(detail.context.length<=240);
+           witness.actual={path,role:'M',rawBytes:33008,rawSha256:hash(raw),rawBlob:'d979f395029c9b1e66a99222d06acf99eba4f358',strictFailureObserved:true,detail};
+           witness.comparisonSummary=sources.map(input=>{const a=witness.comparison.find(x=>x.name===input.name&&x.variant==='foreign-fragment'),b=witness.comparison.find(x=>x.name===input.name&&x.variant==='factory-nodes');return {name:input.name,emittedEqual:a.emitted===b.emitted,foreignDiagnosticCount:a.diagnostics.length,factoryDiagnosticCount:b.diagnostics.length};});
+           witness.status='diagnostic-captured';console.info('BOUNDED COMPILER DIAGNOSTIC CAPTURED',JSON.stringify({source:witness.source,comparison:witness.comparisonSummary,actualDiagnostics:witness.actual.detail.diagnostics,compilerFixed:false,qualificationPassed:false,I0Opened:false}));
+          }catch(error){witness.status='diagnostic-failed';witness.failure={name:String(error?.name??'Error').slice(0,80),message:String(error?.message??'diagnostic failure').slice(0,2048)};throw error;}
+          finally{const bytes=JSON.stringify(witness,null,2);assert(Buffer.byteLength(bytes)<=20480,'bounded witness');await writeFile(root+'/witness.json',bytes);}
+          NODE
+      - name: Seal exact three-file diagnostic artifact
+        if: always()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFile,writeFile,readdir} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          const root='output/finite-budget/compiler-diagnostic',names=(await readdir(root)).sort();
+          assert.deepEqual(names,['console.log','witness.json']);
+          const files=[];for(const path of names){const bytes=await readFile(root+'/'+path);assert(bytes.length<=65536);files.push({path,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});}
+          await writeFile(root+'/manifest.json',JSON.stringify({purpose:'afw.finite-budget-compiler-diagnostic-artifact.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,files,I0Opened:false,nativeExecutionProduced:false,compilerFixed:false,qualificationPassed:false,operationalReadiness:false,completePackage:false,PCoff:false},null,2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        id: upload
+        if: always()
+        with:
+          name: finite-budget-compiler-diagnostic-${{ github.sha }}
+          path: output/finite-budget/compiler-diagnostic/
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/download-artifact@v4
+        if: always() && steps.upload.outputs.artifact-id != ''
+        with:
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/budget-compiler-diagnostic-readback
+          merge-multiple: true
+      - name: Verify same-ID exact diagnostic artifact
+        if: always() && steps.upload.outputs.artifact-id != ''
+        env:
+          READBACK: ${{ runner.temp }}/budget-compiler-diagnostic-readback
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFile,readdir} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          const root=process.env.READBACK,hash=b=>createHash('sha256').update(b).digest('hex');
+          assert.match(process.env.ARTIFACT_ID??'',/^[1-9][0-9]*$/);
+          assert.deepEqual((await readdir(root)).sort(),['console.log','manifest.json','witness.json']);
+          const bytes=await readFile(root+'/manifest.json'),m=JSON.parse(bytes);
+          assert.equal(m.purpose,'afw.finite-budget-compiler-diagnostic-artifact.syn.v1');
+          assert.equal(m.source,process.env.GITHUB_SHA);assert.equal(m.run,process.env.GITHUB_RUN_ID);assert.equal(m.attempt,process.env.GITHUB_RUN_ATTEMPT);
+          const actual=[];for(const path of ['console.log','witness.json']){const b=await readFile(root+'/'+path);actual.push({path,bytes:b.length,sha256:hash(b)});}assert.deepEqual(actual,m.files);
+          const witness=JSON.parse(await readFile(root+'/witness.json'));
+          for(const v of [m,witness]){assert.equal(v.source,process.env.GITHUB_SHA);assert.equal(v.run,process.env.GITHUB_RUN_ID);assert.equal(v.attempt,process.env.GITHUB_RUN_ATTEMPT);for(const k of ['I0Opened','nativeExecutionProduced','compilerFixed','qualificationPassed','operationalReadiness','completePackage','PCoff'])assert.equal(v[k],false);}
+          console.info('COMPILER DIAGNOSTIC SAME ID READBACK VERIFIED',JSON.stringify({source:m.source,run:m.run,attempt:m.attempt,artifactId:process.env.ARTIFACT_ID,files:3,manifestBytes:bytes.length,manifestSha256:hash(bytes),status:witness.status,comparison:witness.comparisonSummary??null,actual:witness.actual??null,compilerFixed:false,qualificationPassed:false,I0Opened:false}));
+          NODE
