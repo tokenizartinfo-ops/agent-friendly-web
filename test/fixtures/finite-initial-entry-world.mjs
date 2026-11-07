@@ -169,6 +169,15 @@ export async function initialEntryHarness(mode='normal',{negativeProfile=false,o
   f.negative=await mf.getWorker('negative-first-connection');if(firstCandidate.wrongProfileScript)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');f.call=(path,options)=>{f.providerPhase=(options?.method??'GET')+' '+new URL('https://delegated-canary.agentfriendlyweb.dev'+path).pathname;return mf.dispatchFetch('https://delegated-canary.agentfriendlyweb.dev'+path,options);};}
  if(firstConnection&&negativeProfile)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');
  if(cleanupCheckpoint){
+  f.mountCleanupSdkOnly=async candidate=>{
+   assert(!currentMountedOptions.workers.some(w=>w.name==='sdk-only-first-connection'));
+   const m=currentMountedOptions.workers.find(w=>w.name==='canary-first-connection');
+   const extra={name:'sdk-only-first-connection',modules:true,script:candidate.script,compatibilityDate:m.compatibilityDate,compatibilityFlags:m.compatibilityFlags,kvNamespaces:{OAUTH_KV:m.kvNamespaces.OAUTH_KV},outboundService:async()=>new Response(null,{status:503})};
+   const next={...currentMountedOptions,workers:[...currentMountedOptions.workers,extra]};
+   await mf.setOptions(convertV4MiniflareOptions(next));currentMountedOptions=next;
+   const b=await mf.getBindings('qa-first-connection');f.stub=b.AFW_INDEPENDENT_CLOSURE.get(b.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));
+   f.db=await mf.getD1Database('RELEASE_DB','qa-first-connection');f.kv=await mf.getKVNamespace('OAUTH_KV','canary-first-connection');
+  };
   f.cleanupCheckpointInputs=()=>({persist,currentMountedOptions,factory:{firstConnection,jwk,mode,created,approval,opPin,opMetadata,qaScript:built.outputFiles[0].text,x,w:{map:[...w.map],pointer:w.pointer}},state:Object.fromEntries(['command','nowOffset','activations','restores','pointerMode','alarmMode','requests','uploads','mode','pointerReads','tokenReads','publisherReads','baselineReads','commandReads','approval','providerRegistry','uploaded','refs','activationAnnotation','inventoryMode','firstConnectionBuild','source','resident'].filter(k=>Object.hasOwn(f,k)).map(k=>[k,f[k]]))});
  }
  f.namespace=bindings.AFW_INDEPENDENT_CLOSURE;
