@@ -414,3 +414,14 @@ FINALcoveringrun42390108314/attempt1 created16:12:21UTC,Source92d0255a2d5c2ac224
 Afterterminal: appendedfixreport SAMEpath, qualifierretirement/CAS/readback, STOP; RootAA..fixHEAD scopedpackage andrereviewI1/I2/newbreakageonly. Do not markfindingsaddressedfromfocal alone orcombinefailedruns. CombinedplanreviewwaitsTask2gate; MinorsM1/M2/M3 + historicalTask1findingsstilldeferred.
 
 Ownerreturned andisavailable; noSourcehumanstep. No actualCloudflare/OAuth/keys/Max/mail/monitors/main mutation. operationalReadiness=false,completePackage=false,PCoff=false.
+
+
+## FIX ROUND1/5 — full56 primera tanda, lectura primaria Root 7Nov16:29UTC
+
+Run42390108314/attempt1, Source92d0255a2d5c2ac2249941e8348a0d5701742604/tree7c06844f33aeb6d0ce0d75381847b8f40d5a28a9 permanece activo y congelado. Root leyó por separado los seis jobs terminales y sus logs; no infirió resultados de un color global. prepare_g0 128455701913: componentes14+10+9+2+5=40PASS/0fail/cancel/skip/todo; prepare_g1 128455701590 y prepare_g2 128455701781 también SUCCESS. Readbacks nativos exactos: g0 principal45files/2graphs, g1 doslinajes40+45files/4graphs, g2 principal45files/2graphs; source/IDs/relojes conservados.
+
+consume_g0 128459192501:3PASS (principal+expiry misma ocurrencia+ausencia actualSDK); consume_g1 128459130424:2PASS (grantanteslink/noticeSQLsinlink); consume_g2 128459093629:2PASS (pointerajeno/paginaciónscope). Los tres outcomes verificaron listado exacto/bytes/SHA:4/3/3archivos. Agregado comprobado47PASS/0fail/cancel/skip/todo; faltan9casos, no se declara56verde. g3/g4/g5 productores activos. Un test extra de ausencia reutiliza el linaje principal; no se añadió otra reducción SDK.
+
+Principal g0: una restauración, State.complete, alarmnull; exactget grant presente=false antes delSDK normalreturn yReceipt.sdkReductionReturned=true, sin usar ausencia comoACK; globalNativeDrainVerified=false/sdkNamespaceEmptyVerified=false. Inventario final medido entered1794068888205/observed1794068888437, Workflow propio complete/Containeractive0/schedulesy tails0/operadorcerrado/baselinerecuperable. Son hechosSYN, no lecturas reales deCloudflare.
+
+Root comparó trees completos no truncados: AA3179leaves→full3180;3175idénticos con mode/type/SHA,4paths de código/test modificados y1qualifier temporal añadido. C06focal→92full sólo cambia qualifierblob70d566b9d7fbf4c4b0aac9af05f1b29f776a2e86; los3179otrosleaves permanecen idénticos. Sintaxis/lint ymandatos exactos delqualifier retenidos para el paquete. No Sourcewrite/runtime/newgrant/login/custody/main/Max/mail. operationalReadiness=false;completePackage=false;PCoff=false.
