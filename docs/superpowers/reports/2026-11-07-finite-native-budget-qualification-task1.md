@@ -991,3 +991,24 @@ Cloud logs retain npm package deprecations and Actions runtime warnings (punycod
 One compile-only job and one artifact were added; this preparation observation is not included in final9test accounting. Root must accept a corrected per-role, source/callback/reachability map and resolve native scope before further instrumentation/final qualification. No finalGREEN or Task2 is authorized by this checkpoint.
 
 Report records tested code e8b2ebed; it cannot contain its own future commit/blob hash. Final report commit/blob/ref are returned after independent readback.
+
+
+## Architectural continuation — bounded dependency provenance recovery
+
+2026-11-07 19:20 UTC preparation checkpoint, not closed-map approval or GREEN. Source before this appendix: c30b8360d38ea5911a6e867b58f35a7138df581e/tree582996de7ebf2f2a88c9dbd0eba3612adc24d4fc. Source head and main0c9c475b3ebaa970fc11d628b40e50a90cceb727 were independently read; zero Actions runs at c30. Root authorized exactly one further RAM-only inspection after the earlier transient tool cache lost two needed dependency rows. This was recovery of missing scalars, not another inventory run, graph replay or native qualification.
+
+The SAME artifact13586248119 was fetched through the GitHub connector; ZIP1888357B/SHA256b342ff82ad1ab43918d0ae5b2631cccb63f1f0faefce210a1a7fa71a7a337002 matched. Its central directory matched the exact9paths listed above and expanded-size sum remained under25MiB. Only manifest.json and source-inputs.json were inflated with built-in crypto/zlib. Manifest1576B/SHA2566db6eae2fa1a906fe9eae047423c5732b5370c5dc0be22ac4329b13e6165daba bound sourcee8b2ebed173ea4ce38040db3b19368918e72c79a/run42403413324/attempt1; source-inputs.json183901B/SHA25629b9e2bccbbc7492d4e123a5a56f11f7aeaeda39d68cfe801bd2f84c7cca759b matched that manifest. No filesystem/process/dependency/native DB access or execution of archive contents occurred. ZIP and inflated source-input buffers were released after the two-row projection.
+
+|Dependency input|Roles|Raw bytes|Raw SHA256|Prepared variant|
+|---|---|---:|---|---|
+|`node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js`|M,QA|251149|`bb2b85243221906d1705653a82678dab2f0020a14ef8faa7d86d764890610e80`|raw-identical in both existing graphs|
+|`node_modules/agents/dist/handler-stateless-VvrWSAVA.js`|M|13056|`e8a4d4802990ac3f434c8c84b8820dfd9510421ad6ac1e8a44ce628f42250bde`|raw-identical|
+
+Source-backed gaps found while closing the map:
+- `lib/mcp-qa-finite-initial-anchors.mjs` invokes captured get/list/getAlarm through `Reflect.apply(method,storage,args)`; this actual native boundary was absent from the heuristic method-name set and its172candidate-bearing modules. The preceding289 no-candidate modules cannot be called pure without typed call/callback review.
+- `lib/mcp-qa-finite-initial-entry.mjs` has namespace.get→actor.prepareFiniteInitialMaterial→Reflect.apply(method,actor,[r]). The selector is synchronous holder selection; the named RPC is a separate invocation boundary if reached. This does not assert that the exported Workflow path is traversed by P1.
+- SDK OAUTH_KV calls can target QA readonly/reduction facades while M uses actual KV. Moreover existing positive QA fixture wrappers can sit between those facade leaves and the captured native method. Counting each layer as native would double count and conflate native settlement with outer ACK.
+- Receiver-only modules establish forwarded genuine local Root leases before body/native I/O and must participate in phase attribution despite containing no discovered I/O.
+- Root permits the fixed diagnostics operation enum `rpc` with resourceClassDO, with no raw method/argument/payload in DTO. Operation counts represent native API invocations, not network requests, physical retry attempts, exclusive wall time, or real provider quota.
+
+No additional Source runtime hook, test registration, workflow activation or CI run is claimed by this appendix. Closed per-role map and semantic approval are still pending. All readiness/completePackage/PCoff flags remainfalse.
