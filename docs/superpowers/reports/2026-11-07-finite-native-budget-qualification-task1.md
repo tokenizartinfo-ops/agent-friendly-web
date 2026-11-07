@@ -1094,3 +1094,91 @@ The newly explicit omissions from the old API-name heuristic include initial-anc
 - The installed jose remote-JWKS helper calls captured/default `fetchImpl` followed by native Response `json()`; both escaped the old discovery names. Installed locked source must be matched in preflight; upstream TypeScript is not a substitute for installed JavaScript hashes.
 
 This checkpoint also tightens the collector's byte setter to reject non-read rows, preventing a fetch/cancel additive duplicate, and extends the existing Q8 group with those rejects and an inbound Request read without a fetch parent. Eight Q registrations remain. These edits are **unexecuted**; no PASS is asserted. Final map acceptance and final nine-test activation are still pending. Operational readiness, complete package, and PC-off evidence remain false.
+
+
+## Consolidated fixed-P1 descriptor and carrier proposal — review checkpoint
+
+Parent Source `fbcd6b7cdff7baa081b28287f4415338b912b8d2`; the original Task1 history above remains intact. The reviewable data is exported as `budgetNativeDescriptorProposal` from `test/fixtures/finite-budget-world.mjs`. It contains 130 pinned repository paths, 635 fixed selector groups, per-role membership and raw/prepared source hashes, and package/fixture supplements. It is **data only**: no native transform, fixture opt-in, TEMP activation, build, test, I0, or native qualification was added by this checkpoint. Root map acceptance is still pending.
+
+### Boundary and role closure
+
+The proposal is for the fixed P1 route: direct existing QA setup entry; M choice/authorize and QA receivers; ordinary M token exchange and read_project_summary; Notice GET/consent; original cold alarm; restoration, SDK reduction and final inventory. It does not qualify all exported Worker/Workflow/Container/Node callbacks. Legacy event/installation/launch paths, real Workflow execution, DNS/HTTP callback transport, Container start/stop, negative fixture branches and other MCP tools remain outside that route. Unexpected entry into a declared dormant path must mark coverage incomplete while allowing the original business call to proceed unchanged; it cannot fabricate an enum, Root, or successful observation.
+
+The selector data resolves capture forms missed by the 1696-name heuristic: generic Reflect.apply, Function.call on captured storage/session methods, statement aliases such as insert.run, direct fetchImpl/fetcher calls, dynamic issuer-store method(bound), namespace-holder edges, native limiter limit, Request/Response consumers and clone/reader identities. The old 1696 denominator remains syntactic discovery only.
+
+| Fixed family | Distinct repository sites | M variant sites | QA variant sites |
+|---|---:|---:|---:|
+| Captured invocation closures | 221 | 26 | 215 |
+| Direct storage/transaction native-capable calls | 293 | 81 | 264 |
+| Direct namespace holder selections | 22 | 7 | 19 |
+| Captured Function.call storage/namespace aliases | 10 | 7 | 10 |
+| Fixed global/fetchImpl/fetcher callsites (native or declared facade) | 32 | 7 | 31 |
+| Reader factory identity edges | 36 | 14 | 31 |
+| Native reader reads | 39 | 14 | 34 |
+| Native reader/stream cancellation | 58 | 20 | 50 |
+| SQL execution members | 97 | 64 | 67 |
+| Direct SQL prepare/bind/withSession identities | 239 | 151 | 162 |
+| Captured D1 withSession.call identity | 1 | 1 | 0 |
+| Actual native limiter limit members | 2 | 2 | 1 |
+
+These are fixed **source selector counts**, not actual API execution counts or a sum of native operations. Identity factories and explicit facades are listed separately from native entry. The repository selector families are nonexclusive at the module level; paths and exact receiver/method/target selectors and line locations are present in the helper data. AST reconciliation during the already required final preflight must select actual expressions, enforce each exact count, reject overlapping edits or unmatched native-capable sites, and emit role/pre-hook/post-hook hashes before I0. A mismatch fails preflight; it is not permission to broaden a selector or silently drop a row.
+
+The 317 captured Reflect sites have the source-backed dispositions preserved in the preceding table: 81 pure identity/clock selectors, 7 pure helper callbacks, 54 namespace/D1 holder edges, 146 storage/transaction native-capable entries, 13 SQL execution aliases, 3 captured stub fetches, 3 named RPC entries, 2 SDK facet entries, 5 dormant step.do calls, 1 dormant Workflow binding.create and 2 RPC-result disposals with no I/O row inferred. The 10 captured Function.call storage/namespace sites additionally distinguish 9 storage entries from one namespace selection; delegated-continuity-host adds one captured D1 withSession identity edge. Native class/operation comes from the captured real pair and closed descriptor, not the spelling alone.
+
+All 130 repository path role memberships were reconciled with the immutable source-input metadata: no role disagreement with the direct import closure was found. M uses each raw source variant; it never inherits QA's prepared override. The eight changed QA variants are recorded below. These hashes are evidence of the prior compile input, **not golden hashes for a future dynamic fixture ceiling**. Existing approval/namespace/compiled data preparation must run unchanged; final preflight records the actual new pre-hook variant and checks the pinned raw input, original composition seams and unchanged native-call counts.
+
+| Prepared QA source | Raw SHA256 (also M where present) | Prior QA prepared SHA256 |
+|---|---|---|
+| `lib/mcp-qa-finite-bootstrap-native.mjs` | `88c881bdcefc48d934010ee8b342ad921284c60f52ddeaebd924b63bf9a18997` | `bfae4026af2d13715dbce55b3bd8c7e98b1b710fbdfae6a49b0db28fb8b08a03` |
+| `lib/mcp-qa-finite-fixed-policy-engine.mjs` | `9e4debe5e87be5191f09aaf36438d78bf12724b292d8a3b39fb322087d563a7d` | `cef8ad565a97d2f3018abf989555e8f1d26af7f4bbf47c69dcf65a36fd06cf9a` |
+| `lib/mcp-qa-finite-historical-source.mjs` | `1ff09d3f9db050b19181d304a6533cc88f076f48898fd5fe20c8d5958d19ed12` | `099db8b6900a8b56558f5830f13a297c0003a95d74e837f6810469b66c63ca11` |
+| `lib/mcp-qa-finite-initial-cleanup.mjs` | `f0e8a2720987d13d0011c437abd3c5ef7d1452493b3c0e67b5da5d319e474de5` | `abc7de3bbf6d6ef326f1636ffa7b53f4f4dd933b1cc0263691020a243ec80342` |
+| `lib/mcp-qa-finite-initial-entry.mjs` | `364491541624f6722cd0366422bf7977851d4e9b33a9db745d7e862eea86c2fa` | `48cef41b16f418864d1c73b8bce32ae9a7154f71af15829199fe7be2bcb32a77` |
+| `lib/mcp-qa-finite-initial-material.mjs` | `7a8a17463688295a2ce45b72bf0744c6d83b40f9196a64170a7f42271ee76c67` | `d62aaf82f231de83e429221cf65e2703b62598f0aef40d0fc3ed22db5ee3cef5` |
+| `lib/mcp-qa-finite-owner-cleanup.mjs` | `866cdda4ea43f56c3c2f69c0a2846167e95f36ae26be35a76cc7eaa7b34a4483` | `c4d70030042d71dbb5deb525d77a7e41a929d1fcf6f1819690ae8f5ef094b3ba` |
+| `lib/mcp-qa-finite-owner-phase-context.mjs` | `d97d07f69916c45f58af511a6dfb57322ed3fe7d8fa1f6fbb2220d44be15b921` | `383333fee44645574486f22eab97060fb2087794fe413424adc643c7f69eac69` |
+
+The complete literal QA entry was reconstructed editorially without executing a repository helper, compiler or runtime. Retaining the two literal trailing spaces reconciles it exactly with the artifact: 64,800 UTF8 bytes, SHA256 `89ae285b8f00fdf95eecfeee37673138f4c136c7704f245152051a3be2985257`. Its 35 captured receiver/target groups contain 61 Reflect.apply sites, separately listed in the helper. Seed/configuration/probe RPCs and fixture setup SQL/KV are explicit fixture scopes, not Source Roots. The normal pre-existing wrapper chains remain intact; unselected fault branches are dormant.
+
+### Actual identity acquisition and phase carriers
+
+No Root is inferred from a fixture command, lexical function name, missing store, serialized parent, or current clock. Registration observes these actual Source identities:
+
+| Seam | Expected marker count | Carrier |
+|---|---:|---|
+| initial-entry parent=clock(r.createdAt+30000,holders) | 1 QA | actual parent.lease, setup, original observed deadline |
+| initial-cleanup parent=clock(Date.now()+30000,holders) | 1 QA | actual alarm parent.lease, cleanup_before_restore |
+| owner-preparation requestLease root registration | 1 per role | actual lease and already computed deadline; covers local and forwarded factory calls |
+| M finite fetch reserved branch | 1 | actual request lease, setup / authorize_get / authorize_post / monitoring_get / monitoring_post from the fixed route and method |
+| M finite fetch unreserved delegate | 1 | actual Request transport Root, null deadline, token_exchange or mcp_read for the fixed P1 endpoints |
+| QA native-choice / OAuth / Notice receiving handlers | 1 each | their actual locally created forwarded request leases and the fixed receiving phase |
+| initial-lease actual=work(l,until) | 1 per included role | actual child l and original until, inherited immutable Root/phase |
+| owner-preparation return work(childLease) | 1 per included role | actual childLease/end after the original current() guard |
+| initial-material return work(l) | 1 QA | actual material child and its existing end |
+| owner-cleanup return work(clock.lease,end) | 1 QA | actual cleanup child, including this non-clock.child path |
+
+Internal proof/clock guards do not become new Roots. Child deadline is the Source-computed value, not a renewed or reconstructed budget. Phase overrides are fixed call scopes: one lookup callback after the existing QA observation composition; the actual restore child and its immediate verification; the actual SDK-reduction child containing revokeGrant; and the one final-inventory invocation. Late settlement uses the captured operation handle and never the later active phase. Root30s, child5s, I0/C0/C1 and SDK limits remain unchanged.
+
+The carrier uses immutable AsyncLocalStorage stores through run/getStore only. The Source's native guard/retention calls remain in their original order. Outside an explicit fixture exclusion, an unproved missing business context increments incomplete coverage; there is no fallback Root. Body handles additionally retain their actual captured request/fetch scope for the already existing late stream callbacks. This is a captured identity relationship, not authority or a global mutable current phase. No new stream callback, consumer, parser, clone or cancellation is introduced.
+
+Native holders/functions are retained weakly from actual existing acquisition/capture sites. A method call observes its evaluated receiver and method once before evaluating the original argument list; Reflect.apply and Function.call forms retain their original argument evaluation and receiver semantics. The observer invokes the actual captured function once, registers passive settlement on its actual Promise, and returns that same Promise or synchronous value; synchronous throws rethrow the same error object. No env proxy, holder replacement, or newly replaced method is used. Existing fixture-assigned wrapper functions and Source facades are identified as outer ACKs; their original bottom native call is the measured operation. Native transaction and its leaf calls are separate native API invocations, never exclusive wall time or physical request counts.
+
+### Resolved Agents/MCP native-body closure
+
+Root authorized bounded RAM-only inspection of the same immutable artifact for this specific body-origin question. ZIP bytes/hash, exact nine paths, expanded size 7,351,721 bytes, manifest hash, source e8b2ebed173ea4ce38040db3b19368918e72c79a, run42403413324/attempt1 and M script bytes/hash all matched the existing receipt. No contents were executed, no files/processes/dependencies were created, and ZIP/bundle buffers were released.
+
+The labelled Agents excerpt is 12,793 bytes, compiled offsets1772115–1784908, SHA256 `e8fa1845a5831733775327ebd5817db7d3ceb60d8f02d9c3badc45e06987ea57`. The labelled MCP index segment is 50,658 UTF8 bytes, compiled offsets1721458–1772114, SHA256 `9b1bb51f64d8fb4fa53797a86e01b63c18729506819a234c1e3309d6eb6526b6`. Including overlapping focused excerpts, extraction was 71,856 bytes, below120KB. Installed MCP input is M-only, 80,210 bytes, raw/prepared SHA256 `4494af7ea28b45d1655df5a67dcbd6079a50cbe382f811d82441ad2004bf4d60`. This distinguishes installed module bytes from the tree-shaken compiled segment.
+
+Agents createLegacyCompatibilityRequestHandler obtains a Response from WebStandardStreamableHTTPServerTransport.handleRequest, reads its local SSE stream through one reader, and forwards chunks into the pre-existing adapter stream. wrapResponseBodyWithAuthContext adds the pre-existing second reader adapter; runWithAuthContext owns separate SDK ALS. Those two reads and two cancels are real native stream API invocations, not outbound fetches. Their reader identities acquire the original mcp_read transport context at actual getReader calls. The native calls and Promise settlements are observed without replacing the existing pull/cancel callbacks.
+
+MCP handlePostRequest consumes req.json() when parsedBody was not supplied. isLegacyRequest creates its existing Request clone and classifyEntryRequest consumes text(); the existing classify forward clone is a separate identity edge. Both opaque native consumers receive read rows with null bytes. The inspected MCP legacy fallback has one read/cancel adapter pair but is dormant under the selected Agents legacy-stateless lane; this does not prove it executed. Native local SSE Responses are created inside the known transport, and Agents' existing Response reconstructions preserve that local transport provenance. A known native-fetch association must survive forwarding/copying/cloning; lack of a link alone never establishes local origin.
+
+Package hook selector counts are explicit in the helper: OAuth SDK44 KV sites,2 native fetch sites,9 reader/cancel sites,1 native request.formData consumer,3 reader factories and1 existing request clone;9 handler dispatch fetch sites are excluded as helpers. Agents has2 reads,2 cancels,2 reader factories. MCP index has1 read,1 cancel,1 reader factory,1 request json,1 request text and2 existing request clones in the specified functions. jose remote-JWKS has1 fetchImpl and1 response.json; its installed input is5,258 bytes, SHA256 `2b64e5710a3b59a2ecae7084bbe6ac725a1356c84449f32ee32b3a32c040b63a`, M and QA. Upstream tagged source was consulted as semantic support; it was not substituted for these installed hashes.
+
+For all body paths, fulfilled fetch tags only the Response identity. Stream identity is acquired from the business code's actual body getter, and reader identity from its actual getReader call, preserving one evaluation and errors. Existing request/response.clone is a synchronous identity edge returning the same actual clone. A proven local SDK Response may use transport/read with a null fetch link. Each real read/cancel has its own native row and exact Promise settlement. Exposed chunks/ArrayBuffer bytes appear only on read rows; json/text/formData remain opaque. Existing clones or adapter rereads can count the same logical payload more than once as actual API reads: these metrics are **not unique network transfer bytes**. No fetch/read additive double count is permitted.
+
+### Review gate and remaining implementation
+
+The semantic decisions raised to Root have been resolved: typed rateLimiter/limit and DO/rpc; separate read/cancel rows and validated fetch links; inbound/local body exceptions with proof; existing clone preservation; dormant Workflow paths; and explicit pure helper exclusions. This checkpoint asks Root to review the fixed-P1 proposal and its native/facade/identity distinctions. It does not assert acceptance or complete coverage from unexecuted code.
+
+Remaining work is implementation within the same12paths: install the fixed descriptors and immutable carrier into the two positive-only compiler paths; assert prepared AST counts/hashes before I0; integrate per-isolate/worker/producer-consumer snapshots; preserve full evidence with bounded console summaries; complete the existing8Q contracts and single P1 pipeline; then run only after Root acceptance. No new test group, native graph, timeline, source deadline, permission, account binding or operating-readiness claim is proposed. Source must freeze during active CI. All readiness/completePackage/PCoff flags remain false.

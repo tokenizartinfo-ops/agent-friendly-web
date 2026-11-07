@@ -119,3 +119,11346 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
  await inspectBudgetCompilation(root);
 }
 export {inventoryFiles as inventoryBudgetFiles};
+
+// Reviewable static proposal only. No transform or native run is activated by this data.
+export const budgetNativeDescriptorProposal=Object.freeze({
+ "purpose": "afw.finite-budget-native-descriptor-proposal.syn.v1",
+ "sourceParent": "fbcd6b7cdff7baa081b28287f4415338b912b8d2",
+ "acceptedForNativeInstrumentation": false,
+ "transformInstalled": false,
+ "scope": "fixed P1 producer/consumer sequence only; no universal graph or Workflow execution claim",
+ "selectorBasis": "pinned raw source plus existing count-preserving QA composition; prepared AST must reconcile these selectors before I0",
+ "sourceFamilies": [
+  {
+   "family": "Captured invocation closures",
+   "distinctSites": 221,
+   "M": 26,
+   "QA": 215,
+   "paths": [
+    "lib/mcp-closure-reader-probe.mjs",
+    "lib/mcp-hosted-canary-restoration.mjs",
+    "lib/mcp-qa-finite-historical-source.mjs",
+    "lib/mcp-qa-finite-initial-anchors.mjs",
+    "lib/mcp-qa-finite-initial-cleanup.mjs",
+    "lib/mcp-qa-finite-initial-entry.mjs",
+    "lib/mcp-qa-finite-initial-history-schema.mjs",
+    "lib/mcp-qa-finite-initial-material-store.mjs",
+    "lib/mcp-qa-finite-initial-material.mjs",
+    "lib/mcp-qa-finite-initial-owner-source.mjs",
+    "lib/mcp-qa-finite-owner-cleanup-journal.mjs",
+    "lib/mcp-qa-finite-owner-cleanup.mjs",
+    "lib/mcp-qa-finite-owner-issuer-provenance-journal.mjs",
+    "lib/mcp-qa-finite-owner-native-bridge.mjs",
+    "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+    "lib/mcp-qa-finite-owner-oauth-forward.mjs",
+    "lib/mcp-qa-finite-owner-phase-context.mjs",
+    "lib/mcp-qa-finite-policy-setup.mjs",
+    "lib/mcp-qa-finite-preparation-cleanup.mjs",
+    "lib/mcp-qa-finite-preparation-enrollment-writer.mjs",
+    "lib/mcp-qa-finite-preparation-issuer-journal.mjs",
+    "lib/mcp-qa-finite-preparation-issuer-store.mjs",
+    "lib/mcp-qa-finite-preparation-notice-journal.mjs",
+    "lib/mcp-qa-finite-trial-control.mjs",
+    "lib/mcp-qa-generation-draft-reader.mjs",
+    "lib/mcp-qa-generation-ledger.mjs",
+    "lib/mcp-qa-generation-preparation.mjs",
+    "lib/mcp-qa-generation-resolver.mjs",
+    "lib/mcp-qa-historical-identity.mjs",
+    "lib/mcp-qa-named-eligibility.mjs",
+    "lib/mcp-qa-named-packet-reader.mjs",
+    "lib/mcp-qa-named-preflight.mjs",
+    "lib/mcp-qa-original-pins.mjs",
+    "lib/mcp-release-runtime.mjs",
+    "lib/mcp-successor-canary-restorer.mjs",
+    "lib/mcp-successor-retirement-handoff.mjs"
+   ]
+  },
+  {
+   "family": "Direct storage/transaction native-capable calls",
+   "distinctSites": 293,
+   "M": 81,
+   "QA": 264,
+   "paths": [
+    "lib/assistance-closure-alarm-lifecycle.mjs",
+    "lib/assistance-independent-closure.mjs",
+    "lib/assistance-private-challenge-budget.mjs",
+    "lib/assistance-private-custody-challenge.mjs",
+    "lib/assistance-private-evidence-journal.mjs",
+    "lib/assistance-private-installation-consumption.mjs",
+    "lib/assistance-private-installation-finalization.mjs",
+    "lib/assistance-private-installation-intent.mjs",
+    "lib/assistance-private-qa-catalog-host.mjs",
+    "lib/assistance-private-qa-installer.mjs",
+    "lib/assistance-private-qa-preregistration.mjs",
+    "lib/assistance-private-qa-provisioning.mjs",
+    "lib/assistance-private-resource-holds.mjs",
+    "lib/assistance-private-revocation-budget.mjs",
+    "lib/assistance-qa-closure-catalog.mjs",
+    "lib/mcp-closure-reader-probe.mjs",
+    "lib/mcp-hosted-canary-restoration.mjs",
+    "lib/mcp-invocation-storage.mjs",
+    "lib/mcp-node-process-custody.mjs",
+    "lib/mcp-own-finite-admission-gate.mjs",
+    "lib/mcp-own-finite-cleanup-host.mjs",
+    "lib/mcp-own-finite-cleanup-proof.mjs",
+    "lib/mcp-own-finite-reduction.mjs",
+    "lib/mcp-qa-finite-cleanup-store.mjs",
+    "lib/mcp-qa-finite-historical-source.mjs",
+    "lib/mcp-qa-finite-initial-cleanup.mjs",
+    "lib/mcp-qa-finite-launch.mjs",
+    "lib/mcp-qa-finite-observer-native.mjs",
+    "lib/mcp-qa-finite-policy-journal.mjs",
+    "lib/mcp-qa-finite-policy-setup.mjs",
+    "lib/mcp-qa-finite-preparation-store.mjs",
+    "lib/mcp-qa-finite-trial-guard.mjs",
+    "lib/mcp-retired-custody-reader.mjs",
+    "lib/mcp-subscription-lifecycle.mjs",
+    "lib/mcp-successor-canary-restorer.mjs",
+    "lib/mcp-successor-retirement-handoff.mjs",
+    "worker/independent-closure/index.mjs"
+   ]
+  },
+  {
+   "family": "Direct namespace holder selections",
+   "distinctSites": 22,
+   "M": 7,
+   "QA": 19,
+   "paths": [
+    "lib/dossier-event-rpc-authority.mjs",
+    "lib/mcp-closure-reader-probe.mjs",
+    "lib/mcp-own-successor-host.mjs",
+    "lib/mcp-own-synthetic-save-host.mjs",
+    "lib/mcp-qa-closed-context.mjs",
+    "lib/mcp-qa-finite-launcher.mjs",
+    "lib/mcp-qa-finite-observer.mjs",
+    "lib/mcp-qa-finite-policy-setup.mjs",
+    "lib/mcp-release-successor-reservation.mjs",
+    "worker/independent-closure/index.mjs",
+    "worker/independent-closure/occurrence-host.mjs",
+    "worker/mcp-own/index.mjs"
+   ]
+  },
+  {
+   "family": "Captured Function.call storage/namespace aliases",
+   "distinctSites": 10,
+   "M": 7,
+   "QA": 10,
+   "paths": [
+    "lib/mcp-own-finite-admission-gate.mjs",
+    "lib/mcp-qa-finite-launch.mjs",
+    "lib/mcp-qa-finite-trial-guard.mjs"
+   ]
+  },
+  {
+   "family": "Fixed global/fetchImpl/fetcher callsites (native or declared facade)",
+   "distinctSites": 32,
+   "M": 7,
+   "QA": 31,
+   "paths": [
+    "lib/assistance-administrative-get-transport.mjs",
+    "lib/assistance-private-provider-get-transport.mjs",
+    "lib/assistance-provider-token-name.mjs",
+    "lib/assistance-qa-administrative-composition.mjs",
+    "lib/assistance-service-identity-transport.mjs",
+    "lib/mcp-activation-observer.mjs",
+    "lib/mcp-canary-restoration-transport.mjs",
+    "lib/mcp-closed-version-upload.mjs",
+    "lib/mcp-closure-reader-probe.mjs",
+    "lib/mcp-hosted-canary-restoration.mjs",
+    "lib/mcp-node-private-bridge.mjs",
+    "lib/mcp-publication-artifact-reader.mjs",
+    "lib/mcp-qa-finite-bootstrap-native.mjs",
+    "lib/mcp-qa-finite-fixed-policy-engine.mjs",
+    "lib/mcp-qa-finite-historical-source.mjs",
+    "lib/mcp-qa-finite-initial-cleanup.mjs",
+    "lib/mcp-qa-finite-initial-custody-probe.mjs",
+    "lib/mcp-qa-finite-initial-entry.mjs",
+    "lib/mcp-qa-finite-initial-material.mjs",
+    "lib/mcp-qa-finite-initial-old-guard.mjs",
+    "lib/mcp-qa-finite-initial-owner-source.mjs",
+    "lib/mcp-qa-finite-owner-cleanup.mjs",
+    "lib/mcp-qa-finite-owner-phase-context.mjs",
+    "lib/mcp-qa-finite-seed-wire.mjs",
+    "lib/mcp-release-runtime.mjs",
+    "lib/mcp-retirement-provider-reader.mjs",
+    "lib/mcp-successor-deployment-reader.mjs",
+    "scripts/check-own-cron-provider.mjs"
+   ]
+  },
+  {
+   "family": "Reader factory identity edges",
+   "distinctSites": 36,
+   "M": 14,
+   "QA": 31,
+   "paths": [
+    "lib/assistance-administrative-get-transport.mjs",
+    "lib/assistance-private-provider-get-transport.mjs",
+    "lib/assistance-provider-token-name.mjs",
+    "lib/assistance-service-identity-transport.mjs",
+    "lib/delegated-oauth-worker.mjs",
+    "lib/dossier-monitoring-owner-http.mjs",
+    "lib/mcp-activation-observer.mjs",
+    "lib/mcp-canary-restoration-transport.mjs",
+    "lib/mcp-closed-version-upload.mjs",
+    "lib/mcp-closure-reader-probe.mjs",
+    "lib/mcp-node-private-bridge.mjs",
+    "lib/mcp-original-container-runtime.mjs",
+    "lib/mcp-own-synthetic-save-http.mjs",
+    "lib/mcp-publication-artifact-reader.mjs",
+    "lib/mcp-qa-finite-bootstrap-native.mjs",
+    "lib/mcp-qa-finite-fixed-policy-engine.mjs",
+    "lib/mcp-qa-finite-historical-source.mjs",
+    "lib/mcp-qa-finite-initial-cleanup.mjs",
+    "lib/mcp-qa-finite-initial-custody-probe.mjs",
+    "lib/mcp-qa-finite-initial-entry.mjs",
+    "lib/mcp-qa-finite-initial-material.mjs",
+    "lib/mcp-qa-finite-initial-old-guard.mjs",
+    "lib/mcp-qa-finite-initial-owner-source.mjs",
+    "lib/mcp-qa-finite-owner-cleanup.mjs",
+    "lib/mcp-qa-finite-owner-native-wire.mjs",
+    "lib/mcp-qa-finite-owner-notice-consent-body.mjs",
+    "lib/mcp-qa-finite-owner-phase-context.mjs",
+    "lib/mcp-qa-finite-owner-preparation.mjs",
+    "lib/mcp-qa-finite-seed-wire.mjs",
+    "lib/mcp-retirement-provider-reader.mjs",
+    "lib/mcp-successor-deployment-reader.mjs",
+    "lib/operations-service-request-controls.mjs",
+    "scripts/check-own-cron-provider.mjs"
+   ]
+  },
+  {
+   "family": "Native reader reads",
+   "distinctSites": 39,
+   "M": 14,
+   "QA": 34,
+   "paths": [
+    "lib/assistance-administrative-get-transport.mjs",
+    "lib/assistance-private-provider-get-transport.mjs",
+    "lib/assistance-private-qa-installer.mjs",
+    "lib/assistance-provider-token-name.mjs",
+    "lib/assistance-service-identity-transport.mjs",
+    "lib/delegated-oauth-worker.mjs",
+    "lib/dossier-monitoring-owner-http.mjs",
+    "lib/mcp-activation-observer.mjs",
+    "lib/mcp-canary-restoration-transport.mjs",
+    "lib/mcp-closed-version-upload.mjs",
+    "lib/mcp-closure-reader-probe.mjs",
+    "lib/mcp-node-private-bridge.mjs",
+    "lib/mcp-original-container-runtime.mjs",
+    "lib/mcp-own-synthetic-save-http.mjs",
+    "lib/mcp-publication-artifact-reader.mjs",
+    "lib/mcp-qa-finite-bootstrap-native.mjs",
+    "lib/mcp-qa-finite-fixed-policy-engine.mjs",
+    "lib/mcp-qa-finite-historical-source.mjs",
+    "lib/mcp-qa-finite-initial-cleanup.mjs",
+    "lib/mcp-qa-finite-initial-custody-probe.mjs",
+    "lib/mcp-qa-finite-initial-entry.mjs",
+    "lib/mcp-qa-finite-initial-material.mjs",
+    "lib/mcp-qa-finite-initial-old-guard.mjs",
+    "lib/mcp-qa-finite-initial-owner-source.mjs",
+    "lib/mcp-qa-finite-owner-cleanup.mjs",
+    "lib/mcp-qa-finite-owner-native-wire.mjs",
+    "lib/mcp-qa-finite-owner-notice-consent-body.mjs",
+    "lib/mcp-qa-finite-owner-phase-context.mjs",
+    "lib/mcp-qa-finite-owner-preparation.mjs",
+    "lib/mcp-qa-finite-seed-wire.mjs",
+    "lib/mcp-retirement-provider-reader.mjs",
+    "lib/mcp-successor-deployment-reader.mjs",
+    "lib/operations-service-request-controls.mjs",
+    "scripts/check-own-cron-provider.mjs",
+    "worker/independent-closure/index.mjs"
+   ]
+  },
+  {
+   "family": "Native reader/stream cancellation",
+   "distinctSites": 58,
+   "M": 20,
+   "QA": 50,
+   "paths": [
+    "lib/assistance-administrative-get-transport.mjs",
+    "lib/assistance-private-provider-get-transport.mjs",
+    "lib/assistance-provider-token-name.mjs",
+    "lib/assistance-service-identity-transport.mjs",
+    "lib/delegated-oauth-worker.mjs",
+    "lib/dossier-monitoring-owner-http.mjs",
+    "lib/mcp-activation-observer.mjs",
+    "lib/mcp-canary-restoration-transport.mjs",
+    "lib/mcp-closed-version-upload.mjs",
+    "lib/mcp-closure-reader-probe.mjs",
+    "lib/mcp-hosted-canary-restoration.mjs",
+    "lib/mcp-node-private-bridge.mjs",
+    "lib/mcp-original-container-runtime.mjs",
+    "lib/mcp-own-synthetic-save-http.mjs",
+    "lib/mcp-publication-artifact-reader.mjs",
+    "lib/mcp-qa-finite-bootstrap-native.mjs",
+    "lib/mcp-qa-finite-fixed-policy-engine.mjs",
+    "lib/mcp-qa-finite-historical-source.mjs",
+    "lib/mcp-qa-finite-initial-cleanup.mjs",
+    "lib/mcp-qa-finite-initial-custody-probe.mjs",
+    "lib/mcp-qa-finite-initial-entry.mjs",
+    "lib/mcp-qa-finite-initial-material.mjs",
+    "lib/mcp-qa-finite-initial-old-guard.mjs",
+    "lib/mcp-qa-finite-initial-owner-source.mjs",
+    "lib/mcp-qa-finite-owner-cleanup.mjs",
+    "lib/mcp-qa-finite-owner-native-wire.mjs",
+    "lib/mcp-qa-finite-owner-notice-consent-body.mjs",
+    "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+    "lib/mcp-qa-finite-owner-phase-context.mjs",
+    "lib/mcp-qa-finite-owner-preparation.mjs",
+    "lib/mcp-qa-finite-seed-wire.mjs",
+    "lib/mcp-retirement-provider-reader.mjs",
+    "lib/mcp-successor-deployment-reader.mjs",
+    "lib/operations-service-request-controls.mjs",
+    "scripts/check-own-cron-provider.mjs"
+   ]
+  },
+  {
+   "family": "SQL execution members",
+   "distinctSites": 97,
+   "M": 64,
+   "QA": 67,
+   "paths": [
+    "lib/assistance-closure-d1-actions.mjs",
+    "lib/assistance-occurrence-approvals.mjs",
+    "lib/assistance-occurrence-d1.mjs",
+    "lib/assistance-occurrence-http.mjs",
+    "lib/assistance-private-installation-d1.mjs",
+    "lib/delegated-oauth-store.mjs",
+    "lib/delegated-project-repository.mjs",
+    "lib/dossier-event-rpc-authority.mjs",
+    "lib/dossier-monitoring-authority.mjs",
+    "lib/dossier-monitoring-owner-http.mjs",
+    "lib/dossier-supervision.mjs",
+    "lib/mcp-activation-journal.mjs",
+    "lib/mcp-node-process-custody.mjs",
+    "lib/mcp-own-durable-host.mjs",
+    "lib/mcp-own-finite-primary.mjs",
+    "lib/mcp-own-permission-withdrawal.mjs",
+    "lib/mcp-own-subscription-receipt.mjs",
+    "lib/mcp-own-successor-retirement-host.mjs",
+    "lib/mcp-own-synthetic-save-http.mjs",
+    "lib/mcp-own-synthetic-save.mjs",
+    "lib/mcp-publication-deployment-reader.mjs",
+    "lib/mcp-publication-journal.mjs",
+    "lib/mcp-qa-finite-owner-preparation.mjs",
+    "lib/mcp-release-runtime.mjs",
+    "lib/mcp-saved-dossier-event.mjs",
+    "lib/mcp-successor-launch-gate.mjs",
+    "lib/mcp-successor-reservation.mjs"
+   ]
+  },
+  {
+   "family": "Direct SQL prepare/bind/withSession identities",
+   "distinctSites": 239,
+   "M": 151,
+   "QA": 162,
+   "paths": [
+    "lib/assistance-approved-qa-closure-actor.mjs",
+    "lib/assistance-closure-d1-actions.mjs",
+    "lib/assistance-occurrence-approvals.mjs",
+    "lib/assistance-occurrence-d1.mjs",
+    "lib/assistance-occurrence-http.mjs",
+    "lib/assistance-occurrence-operations.mjs",
+    "lib/assistance-private-installation-d1.mjs",
+    "lib/assistance-private-qa-catalog-host.mjs",
+    "lib/assistance-private-qa-installer.mjs",
+    "lib/delegated-oauth-store.mjs",
+    "lib/delegated-oauth-worker.mjs",
+    "lib/delegated-project-repository.mjs",
+    "lib/dossier-event-rpc-authority.mjs",
+    "lib/dossier-monitoring-authority.mjs",
+    "lib/dossier-monitoring-owner-http.mjs",
+    "lib/dossier-supervision.mjs",
+    "lib/mcp-activation-journal.mjs",
+    "lib/mcp-node-process-custody.mjs",
+    "lib/mcp-own-durable-host.mjs",
+    "lib/mcp-own-finite-primary.mjs",
+    "lib/mcp-own-permission-withdrawal.mjs",
+    "lib/mcp-own-subscription-receipt.mjs",
+    "lib/mcp-own-successor-retirement-host.mjs",
+    "lib/mcp-own-synthetic-save-http.mjs",
+    "lib/mcp-own-synthetic-save.mjs",
+    "lib/mcp-publication-deployment-reader.mjs",
+    "lib/mcp-publication-journal.mjs",
+    "lib/mcp-qa-finite-launch.mjs",
+    "lib/mcp-qa-finite-owner-preparation.mjs",
+    "lib/mcp-qa-generation-preparation.mjs",
+    "lib/mcp-release-runtime.mjs",
+    "lib/mcp-saved-dossier-event.mjs",
+    "lib/mcp-successor-launch-gate.mjs",
+    "lib/mcp-successor-reservation.mjs"
+   ]
+  },
+  {
+   "family": "Captured D1 withSession.call identity",
+   "distinctSites": 1,
+   "M": 1,
+   "QA": 0,
+   "paths": [
+    "lib/delegated-continuity-host.mjs"
+   ]
+  },
+  {
+   "family": "Actual native limiter limit members",
+   "distinctSites": 2,
+   "M": 2,
+   "QA": 1,
+   "paths": [
+    "lib/delegated-oauth-worker.mjs",
+    "lib/mcp-qa-finite-owner-preparation.mjs"
+   ]
+  }
+ ],
+ "sourceDescriptors": [
+  {
+   "path": "lib/assistance-administrative-get-transport.mjs",
+   "rawBlob": "02608c126cf04e022a34544349f288d2f43b8437",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      22
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      25
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      26
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      37
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "7ad2e899a66e5ef437d5afe5b813b11a8a22df085121e0bbe76558685d42556d",
+   "rawBytes": 3616,
+   "QApreparedSha256": "7ad2e899a66e5ef437d5afe5b813b11a8a22df085121e0bbe76558685d42556d",
+   "QApreparedBytes": 3616,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-approved-qa-closure-actor.mjs",
+   "rawBlob": "6db9db738c885b87e79f83fa9a9559569d43b5e1",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      17
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "acb9dbc4b16fdbb318d982da80df88844396dfb83af3e707225f0e83673b123a",
+   "rawBytes": 3989,
+   "QApreparedSha256": "acb9dbc4b16fdbb318d982da80df88844396dfb83af3e707225f0e83673b123a",
+   "QApreparedBytes": 3989,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-closure-alarm-lifecycle.mjs",
+   "rawBlob": "5558411784794212522a7701db934a6ca2d681e5",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "context.storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      21
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      22,
+      27,
+      49
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 6,
+     "rawLines": [
+      30,
+      32,
+      57,
+      63,
+      68,
+      82
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "deleteAlarm",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      32,
+      64,
+      70,
+      82
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "setAlarm",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      35,
+      57,
+      66,
+      70
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      48
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "3cb9ea1409899140375b3fc4c1b420a7d572d229dd1fba5a5406c92eaa7a421a",
+   "rawBytes": 5918,
+   "QApreparedSha256": "3cb9ea1409899140375b3fc4c1b420a7d572d229dd1fba5a5406c92eaa7a421a",
+   "QApreparedBytes": 5918,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-closure-d1-actions.mjs",
+   "rawBlob": "b04d4b1e57b3e98a71b3ab2471e4f7be932927a2",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      30,
+      43
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      30,
+      43
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "4826a80b833c20454b01188d59e615bd1b7118baafe13cbc69baef4007b7aebe",
+   "rawBytes": 4668,
+   "QApreparedSha256": "4826a80b833c20454b01188d59e615bd1b7118baafe13cbc69baef4007b7aebe",
+   "QApreparedBytes": 4668,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-independent-closure.mjs",
+   "rawBlob": "888cdf6232b406e418c12c986f3b833c825c9288",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      20
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      22
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      24,
+      43,
+      54,
+      65
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "5ef6b86bab69b234196c53155fe0dac5a6c7e3a54c2ed112d64afa2f4d3c18c8",
+   "rawBytes": 4591,
+   "QApreparedSha256": "5ef6b86bab69b234196c53155fe0dac5a6c7e3a54c2ed112d64afa2f4d3c18c8",
+   "QApreparedBytes": 4591,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-occurrence-approvals.mjs",
+   "rawBlob": "84408c48eea92ac428a04d3be93afc8e86cb31c7",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 5,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 2,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 7,
+     "rawLines": [
+      25,
+      25,
+      27,
+      28,
+      28,
+      29,
+      29
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 5,
+     "rawLines": [
+      27,
+      28,
+      28,
+      29,
+      29
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "18edc32d1f67a5248c018c53208366733216d4ff1f94f489bca4b1959f56621d",
+   "rawBytes": 6122,
+   "QApreparedSha256": "18edc32d1f67a5248c018c53208366733216d4ff1f94f489bca4b1959f56621d",
+   "QApreparedBytes": 6122,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-occurrence-d1.mjs",
+   "rawBlob": "2838986019414a64ad622b4d4725cae10e18ddb9",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 3,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "batch",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 8,
+     "rawLines": [
+      32,
+      32,
+      39,
+      42,
+      43,
+      52,
+      65,
+      65
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 6,
+     "rawLines": [
+      39,
+      42,
+      43,
+      57,
+      65,
+      65
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "576d9fb180d553093b2dc3f05a7501ea7ed8ed930b7e01f30803d553af38d38e",
+   "rawBytes": 12656,
+   "QApreparedSha256": "576d9fb180d553093b2dc3f05a7501ea7ed8ed930b7e01f30803d553af38d38e",
+   "QApreparedBytes": 12656,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-occurrence-http.mjs",
+   "rawBlob": "3e620020d57b711337d6efe2a9ca78f645dd8b4f",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 4,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      54
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      64,
+      64,
+      83,
+      105
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      105
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "74335744ba5e836caa997e89bd7dad8ae46d6f8258525d0c25a60d6ef304d2b7",
+   "rawBytes": 12989,
+   "QApreparedSha256": "74335744ba5e836caa997e89bd7dad8ae46d6f8258525d0c25a60d6ef304d2b7",
+   "QApreparedBytes": 12989,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-occurrence-operations.mjs",
+   "rawBlob": "d12c356f4e671d236ea0333d0a2340b12ac8e349",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 6,
+     "rawLines": [
+      16,
+      27,
+      35,
+      39,
+      46,
+      49
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 6,
+     "rawLines": [
+      16,
+      27,
+      37,
+      39,
+      47,
+      49
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "63e33aa029b61d0bcf43c134922b233e6ead0ad3fa500e42266f599dd23c263c",
+   "rawBytes": 5974,
+   "QApreparedSha256": "63e33aa029b61d0bcf43c134922b233e6ead0ad3fa500e42266f599dd23c263c",
+   "QApreparedBytes": 5974,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-challenge-budget.mjs",
+   "rawBlob": "09b77eb008fed622254f2b670ba879fcf169f1e1",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      11
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      12
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      15
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "5ff9ab41d8d060fbf203fe5ec9027cb9e5ec295be17ee08a77e0f2a521856d69",
+   "rawBytes": 1414,
+   "QApreparedSha256": "5ff9ab41d8d060fbf203fe5ec9027cb9e5ec295be17ee08a77e0f2a521856d69",
+   "QApreparedBytes": 1414,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-custody-challenge.mjs",
+   "rawBlob": "9ff74b6d3013589c7a0f7e06ebdefb2c416599dc",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      43,
+      49,
+      56,
+      57
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 7,
+     "rawLines": [
+      43,
+      43,
+      50,
+      50,
+      56,
+      56,
+      57
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      43,
+      52,
+      57
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "47cf60b78f5594bbd1eabd160de32725370894ef0bb6684255592fd53ac53a99",
+   "rawBytes": 5358,
+   "QApreparedSha256": "47cf60b78f5594bbd1eabd160de32725370894ef0bb6684255592fd53ac53a99",
+   "QApreparedBytes": 5358,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-evidence-journal.mjs",
+   "rawBlob": "e82b3cfe2e1d63426538b0e16f025812e5b485b7",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      18,
+      22
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      35,
+      46,
+      47
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      41,
+      42,
+      47
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "a02dc40f539d2bac640a2224b5d801cd3cf444fde2b95da37c393e796c5bfda7",
+   "rawBytes": 6098,
+   "QApreparedSha256": "a02dc40f539d2bac640a2224b5d801cd3cf444fde2b95da37c393e796c5bfda7",
+   "QApreparedBytes": 6098,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-installation-consumption.mjs",
+   "rawBlob": "95c487ef0e4d171149ec1992622f860607205917",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      11
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      21
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "380a2a5d447bcf0d50534e637a4054891a27e649d006d28faa3dc962401fef54",
+   "rawBytes": 3197,
+   "QApreparedSha256": "380a2a5d447bcf0d50534e637a4054891a27e649d006d28faa3dc962401fef54",
+   "QApreparedBytes": 3197,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-installation-d1.mjs",
+   "rawBlob": "a06adc73c259c5c2a53033169be46886db30bcc0",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 6,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "batch",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      38
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 9,
+     "rawLines": [
+      40,
+      40,
+      40,
+      40,
+      41,
+      47,
+      48,
+      48,
+      50
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 5,
+     "rawLines": [
+      41,
+      47,
+      48,
+      48,
+      50
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "1a67e3eeebf642e5973f30f3b19e25b40d96baff4abd4463ef0676c5f08bb615",
+   "rawBytes": 9145,
+   "QApreparedSha256": "1a67e3eeebf642e5973f30f3b19e25b40d96baff4abd4463ef0676c5f08bb615",
+   "QApreparedBytes": 9145,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-installation-finalization.mjs",
+   "rawBlob": "bd3a3bc5213425efc7c814b3f0d04e77bcec9032",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      14
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      42
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "7f50e10a60d65591cb2ec7f6aab74348fa8a7aa921eab1a4486cd217143dbebd",
+   "rawBytes": 5306,
+   "QApreparedSha256": "7f50e10a60d65591cb2ec7f6aab74348fa8a7aa921eab1a4486cd217143dbebd",
+   "QApreparedBytes": 5306,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-installation-intent.mjs",
+   "rawBlob": "545b5f9583cbcaa8a63863a0dac58e34a9297060",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      8
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      12
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "95bbc7136a4d163832d4f44777e2dca582c4e8c2a4e410b4ee85cf9d175aabad",
+   "rawBytes": 4425,
+   "QApreparedSha256": "95bbc7136a4d163832d4f44777e2dca582c4e8c2a4e410b4ee85cf9d175aabad",
+   "QApreparedBytes": 4425,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-provider-get-transport.mjs",
+   "rawBlob": "d550614164a0c6bd1b25331c0ce5b3bdc9bcae90",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      24
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      27
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      28
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      34
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "412df60e94f1dadebf8b244729119174ff1d1ae07d957a122ab8fca5edb8416c",
+   "rawBytes": 4213,
+   "QApreparedSha256": "412df60e94f1dadebf8b244729119174ff1d1ae07d957a122ab8fca5edb8416c",
+   "QApreparedBytes": 4213,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-qa-catalog-host.mjs",
+   "rawBlob": "c22225c5f4d5cb07e723040631264448a8e23bf5",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      23
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      33
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      34
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      28
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "af5c826b412d5363a8d50781df94f938e53168e11ddb7ae23c1816d20a3331a1",
+   "rawBytes": 4131,
+   "QApreparedSha256": "af5c826b412d5363a8d50781df94f938e53168e11ddb7ae23c1816d20a3331a1",
+   "QApreparedBytes": 4131,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-qa-installer.mjs",
+   "rawBlob": "8e70613c28b5f0baf324b1a3f1e0ab7f534aafc4",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      28
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      47,
+      56,
+      75
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      48,
+      57,
+      59,
+      75
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 6,
+     "rawLines": [
+      49,
+      61,
+      62,
+      63,
+      64,
+      75
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      32,
+      38
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      24
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "ff4f651b2ff6a48117098eac285de49b97abe6c521e05d9fb9b20ed2a9cfa730",
+   "rawBytes": 12141,
+   "QApreparedSha256": "ff4f651b2ff6a48117098eac285de49b97abe6c521e05d9fb9b20ed2a9cfa730",
+   "QApreparedBytes": 12141,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-qa-preregistration.mjs",
+   "rawBlob": "65463c4b6fb6cbc508224d668d25ca76db77884f",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 13,
+     "rawLines": [
+      40,
+      43,
+      43,
+      48,
+      50,
+      53,
+      55,
+      71,
+      79,
+      79,
+      84,
+      84,
+      89
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 8,
+     "rawLines": [
+      43,
+      57,
+      71,
+      75,
+      78,
+      84,
+      87,
+      89
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      62
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      71,
+      80,
+      89
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "Promise.prototype.catch",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      33
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "31cc509c7735c15edee53e604f8cc8feee8cca9e207058642db01d11b58f5ba6",
+   "rawBytes": 11505,
+   "QApreparedSha256": "31cc509c7735c15edee53e604f8cc8feee8cca9e207058642db01d11b58f5ba6",
+   "QApreparedBytes": 11505,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-qa-provisioning.mjs",
+   "rawBlob": "68a3a8f3d261726e66a5b666cbb026579bcb61bf",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      25,
+      26,
+      26
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      25,
+      95,
+      95,
+      98
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 12,
+     "rawLines": [
+      35,
+      36,
+      43,
+      67,
+      75,
+      87,
+      90,
+      94,
+      95,
+      96,
+      97,
+      98
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "92dd07261deb030e5c78f7c09a3fb4daac42cd9c8d9e534f716cc7a002f874ad",
+   "rawBytes": 22290,
+   "QApreparedSha256": "92dd07261deb030e5c78f7c09a3fb4daac42cd9c8d9e534f716cc7a002f874ad",
+   "QApreparedBytes": 22290,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-resource-holds.mjs",
+   "rawBlob": "5c25bf7786704352923c02ff5b5ecb1b938a887c",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      21,
+      22,
+      30
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      28,
+      36,
+      37,
+      38
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      32,
+      33,
+      38
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "723b8e7636c9221e14d4d7614509e4ea624ef69b2ef1a2fd8ebd744eee2c1a5b",
+   "rawBytes": 4798,
+   "QApreparedSha256": "723b8e7636c9221e14d4d7614509e4ea624ef69b2ef1a2fd8ebd744eee2c1a5b",
+   "QApreparedBytes": 4798,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-private-revocation-budget.mjs",
+   "rawBlob": "dd98f7b0148057cb35be493acd4efdfc3920649c",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      12
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      22,
+      29
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "dc944d2b09c729f8fc663e5fbb0c01c5ecf2646c9a74af5767778fd7eb82b529",
+   "rawBytes": 3228,
+   "QApreparedSha256": "dc944d2b09c729f8fc663e5fbb0c01c5ecf2646c9a74af5767778fd7eb82b529",
+   "QApreparedBytes": 3228,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-provider-token-name.mjs",
+   "rawBlob": "d97c9459091a7a1fe809b3a8be451d5168bf1b30",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      15
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      18
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      19
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      21
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "9266182b8aed11c1f1c24fb72d8872ee571af4c1bb5b7dfcf06733937e976980",
+   "rawBytes": 4116,
+   "QApreparedSha256": "9266182b8aed11c1f1c24fb72d8872ee571af4c1bb5b7dfcf06733937e976980",
+   "QApreparedBytes": 4116,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-qa-administrative-composition.mjs",
+   "rawBlob": "b1bade4cb9ed451f61e824ca19fde64a53e93ffc",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      50
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "f4caa5778cd6a0e6e221ef63223393b6509520f1ab1843c287ba0c02ba16bb4f",
+   "rawBytes": 4917,
+   "QApreparedSha256": "f4caa5778cd6a0e6e221ef63223393b6509520f1ab1843c287ba0c02ba16bb4f",
+   "QApreparedBytes": 4917,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-qa-closure-catalog.mjs",
+   "rawBlob": "a52fc130b13db8ebacde38f0123564ca55be7498",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 8,
+     "rawLines": [
+      70,
+      71,
+      71,
+      78,
+      78,
+      78,
+      97,
+      98
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      77,
+      92,
+      94,
+      96
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      83,
+      85,
+      99
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "eec7b73ea0820a5a5b1b3587f5ef380173247f926b8f7138c084bede9f6ebd62",
+   "rawBytes": 7425,
+   "QApreparedSha256": "eec7b73ea0820a5a5b1b3587f5ef380173247f926b8f7138c084bede9f6ebd62",
+   "QApreparedBytes": 7425,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/assistance-service-identity-transport.mjs",
+   "rawBlob": "48076dd199ce6104dee01f86446ab23017fd91b5",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      46
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      50
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      62
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "971936067536eb54a8cba244a8aac3edf7f3481b76a3bf00412410a9cfc4f4b3",
+   "rawBytes": 5358,
+   "QApreparedSha256": "971936067536eb54a8cba244a8aac3edf7f3481b76a3bf00412410a9cfc4f4b3",
+   "QApreparedBytes": 5358,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/delegated-continuity-host.mjs",
+   "rawBlob": "fd76e4612cf011906432fc93de34e1b73b264780",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "withSession",
+      "disposition": "captured-storage-or-holder-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      35
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "f51a584c579d2fcda2d726d664abbcaa72b9d4b589be57647c68f6c081949129",
+   "rawBytes": 2403,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "f51a584c579d2fcda2d726d664abbcaa72b9d4b589be57647c68f6c081949129",
+   "MpreparedBytes": 2403
+  },
+  {
+   "path": "lib/delegated-oauth-store.mjs",
+   "rawBlob": "80caca043bf2f9c1f9c8a4fcf4b1082ca0f0cb8f",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 4,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 5,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "all",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 2,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 11,
+     "rawLines": [
+      27,
+      32,
+      35,
+      40,
+      43,
+      52,
+      59,
+      63,
+      66,
+      71,
+      74
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 11,
+     "rawLines": [
+      29,
+      32,
+      36,
+      40,
+      49,
+      52,
+      59,
+      63,
+      68,
+      71,
+      74
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "5fda0cd4909df0832876cfd89c9101d8bc96d4f93d50779172c0db1558106399",
+   "rawBytes": 4933,
+   "QApreparedSha256": "5fda0cd4909df0832876cfd89c9101d8bc96d4f93d50779172c0db1558106399",
+   "QApreparedBytes": 4933,
+   "MpreparedSha256": "5fda0cd4909df0832876cfd89c9101d8bc96d4f93d50779172c0db1558106399",
+   "MpreparedBytes": 4933
+  },
+  {
+   "path": "lib/delegated-oauth-worker.mjs",
+   "rawBlob": "d979f395029c9b1e66a99222d06acf99eba4f358",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      36
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      37
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      37
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      18
+     ]
+    },
+    {
+     "family": "rateLimiter",
+     "selector": {
+      "receiver": "env.DELEGATED_RATE_LIMITER",
+      "method": "limit"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      178
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "3161d183fac7bb31b5bd863deba7f0641400b4f0ef5709c940f11e5441125318",
+   "rawBytes": 33008,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "3161d183fac7bb31b5bd863deba7f0641400b4f0ef5709c940f11e5441125318",
+   "MpreparedBytes": 33008
+  },
+  {
+   "path": "lib/delegated-project-repository.mjs",
+   "rawBlob": "7e98f6c54fd799f80fbcc357638458b3b66a2d8f",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "all",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 2,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 2,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      36,
+      40,
+      58,
+      69
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      36,
+      40,
+      58,
+      69
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "e4ac9ad670e75acb659a8b1f63850f3adfe5d8500a779a14875fb26db66cb93d",
+   "rawBytes": 5080,
+   "QApreparedSha256": "e4ac9ad670e75acb659a8b1f63850f3adfe5d8500a779a14875fb26db66cb93d",
+   "QApreparedBytes": 5080,
+   "MpreparedSha256": "e4ac9ad670e75acb659a8b1f63850f3adfe5d8500a779a14875fb26db66cb93d",
+   "MpreparedBytes": 5080
+  },
+  {
+   "path": "lib/dossier-event-rpc-authority.mjs",
+   "rawBlob": "a8239dc554382d4df6b6d3c3cd0a5b345c2a1184",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "namespace",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      41
+     ]
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      50
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      50
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "afd25d7f4e8521e285b65c1a2087a414e4ef26c4cf07111fda63729d442f1952",
+   "rawBytes": 6791,
+   "QApreparedSha256": "afd25d7f4e8521e285b65c1a2087a414e4ef26c4cf07111fda63729d442f1952",
+   "QApreparedBytes": 6791,
+   "MpreparedSha256": "afd25d7f4e8521e285b65c1a2087a414e4ef26c4cf07111fda63729d442f1952",
+   "MpreparedBytes": 6791
+  },
+  {
+   "path": "lib/dossier-monitoring-authority.mjs",
+   "rawBlob": "703b9d3cbb04bc5effff3f4ef8276cdb4cb95803",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 2,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      7
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      40,
+      45,
+      75
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      40,
+      53,
+      75
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "bb095879e8568a96a55b2e8ebd729586a14795a0a558e4076b7bc1af12be1400",
+   "rawBytes": 9995,
+   "QApreparedSha256": "bb095879e8568a96a55b2e8ebd729586a14795a0a558e4076b7bc1af12be1400",
+   "QApreparedBytes": 9995,
+   "MpreparedSha256": "bb095879e8568a96a55b2e8ebd729586a14795a0a558e4076b7bc1af12be1400",
+   "MpreparedBytes": 9995
+  },
+  {
+   "path": "lib/dossier-monitoring-owner-http.mjs",
+   "rawBlob": "9b3a362c0738f5cefc00f8770bc2c099f76d7eee",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      21
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      22
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      22
+     ]
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 2,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      44
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      45,
+      61,
+      69
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      45,
+      61,
+      69
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "fc3ad822cd457c7b0d57ad29a8d213d316eb21c89bd57e27a349393a6e0261e2",
+   "rawBytes": 11540,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "fc3ad822cd457c7b0d57ad29a8d213d316eb21c89bd57e27a349393a6e0261e2",
+   "MpreparedBytes": 11540
+  },
+  {
+   "path": "lib/dossier-supervision.mjs",
+   "rawBlob": "9ec0fe3f71773aa359cbdf967010060e85bac68d",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 3,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 4,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "all",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 8,
+     "rawLines": [
+      22,
+      23,
+      29,
+      35,
+      38,
+      44,
+      49,
+      50
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 8,
+     "rawLines": [
+      22,
+      23,
+      29,
+      35,
+      43,
+      44,
+      49,
+      50
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "1c822e9fa284209200e3ba08808fa2a4e10663e834a893d810cc6c909c1ae500",
+   "rawBytes": 6578,
+   "QApreparedSha256": "1c822e9fa284209200e3ba08808fa2a4e10663e834a893d810cc6c909c1ae500",
+   "QApreparedBytes": 6578,
+   "MpreparedSha256": "1c822e9fa284209200e3ba08808fa2a4e10663e834a893d810cc6c909c1ae500",
+   "MpreparedBytes": 6578
+  },
+  {
+   "path": "lib/mcp-activation-journal.mjs",
+   "rawBlob": "bb8f9195d7ed235e3fdd782474b8a2ed3dc9127d",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 3,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      24
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      26,
+      30,
+      35,
+      39
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      26,
+      30,
+      35,
+      39
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "294b82a91c996744d33da9753741bf26cf431c72ea91f0d693e796d38fd4b765",
+   "rawBytes": 6009,
+   "QApreparedSha256": "294b82a91c996744d33da9753741bf26cf431c72ea91f0d693e796d38fd4b765",
+   "QApreparedBytes": 6009,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-activation-observer.mjs",
+   "rawBlob": "d739010a8eb4339413ab82b6c1893d640858b335",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      47
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      55
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "7ffc13c11e813693238a02082f4893c3d28a99cc5a885cd89430c8b5d1a6ae5b",
+   "rawBytes": 7645,
+   "QApreparedSha256": "7ffc13c11e813693238a02082f4893c3d28a99cc5a885cd89430c8b5d1a6ae5b",
+   "QApreparedBytes": 7645,
+   "MpreparedSha256": "7ffc13c11e813693238a02082f4893c3d28a99cc5a885cd89430c8b5d1a6ae5b",
+   "MpreparedBytes": 7645
+  },
+  {
+   "path": "lib/mcp-callback-transport.mjs",
+   "rawBlob": "f3b74933666e68ade18ff8f410f566677e2be406",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "removeListener",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      38
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "signalAborted",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      47
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "addListener",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      48
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "f36d8f731712c01e374c92f50c24728da35de8126f436a9241e13300b3f8205f",
+   "rawBytes": 5416,
+   "QApreparedSha256": "f36d8f731712c01e374c92f50c24728da35de8126f436a9241e13300b3f8205f",
+   "QApreparedBytes": 5416,
+   "MpreparedSha256": "f36d8f731712c01e374c92f50c24728da35de8126f436a9241e13300b3f8205f",
+   "MpreparedBytes": 5416
+  },
+  {
+   "path": "lib/mcp-canary-restoration-transport.mjs",
+   "rawBlob": "5233c720f4a49b458c0ff24ed258ece1bef96759",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      93
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      97
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      98
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      104
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      108
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "d21c269dd3672a666d665f518ddc29071e0632c6e2fcc718b929beb3d59fc687",
+   "rawBytes": 11134,
+   "QApreparedSha256": "d21c269dd3672a666d665f518ddc29071e0632c6e2fcc718b929beb3d59fc687",
+   "QApreparedBytes": 11134,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-closed-version-upload.mjs",
+   "rawBlob": "481f781f2e9652212f53853d1f7b6c63c7e4c853",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      35
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      38
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      38
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "e38d97e76cdb8a021b285493cb0ad76b8c450346282994ed82c9f166c3e6be18",
+   "rawBytes": 7934,
+   "QApreparedSha256": "e38d97e76cdb8a021b285493cb0ad76b8c450346282994ed82c9f166c3e6be18",
+   "QApreparedBytes": 7934,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-closure-reader-probe.mjs",
+   "rawBlob": "85ae775ae1b267f7fdaebf8abbd7b4f96fb53962",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "self",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      92
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      101
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "t",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      101
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "t",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      131,
+      177
+     ]
+    },
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "ns",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      212
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      108
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      102
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      115
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      116
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      125
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "bbd21a73c2d2054da99c8f90267d8562d23a9e61a6c671b952583a95627648e8",
+   "rawBytes": 22195,
+   "QApreparedSha256": "bbd21a73c2d2054da99c8f90267d8562d23a9e61a6c671b952583a95627648e8",
+   "QApreparedBytes": 22195,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-hosted-canary-restoration.mjs",
+   "rawBlob": "b8edf426c23d8c07f78e0b1571a83c9f2af57f83",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "dispose",
+      "receiver": "value",
+      "disposition": "RPC-result disposal; no operation disposition inferred"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      37
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "selfMethod",
+      "receiver": "self",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      57,
+      60
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "nodeName",
+      "receiver": "node",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      66
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "nodeString",
+      "receiver": "node",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      66,
+      197,
+      223
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      100
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "list",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      102
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      108,
+      146,
+      160
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "nodeGet",
+      "receiver": "node",
+      "disposition": "DO namespace stub identity edge; no native settlement"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      197,
+      223
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method",
+      "receiver": "original",
+      "disposition": "DO named RPC native boundary; exported-Workflow reachability separate"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      200
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "ns",
+      "disposition": "DO namespace stub identity edge; no native settlement"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      265
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method",
+      "receiver": "ns",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      265
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "t",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      110,
+      161
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "t",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      118,
+      128,
+      190,
+      214
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      143
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      143
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "30db33c17d0db6729d19dbb502333cf11a12b7041169e9b9689b17ea0d947f4a",
+   "rawBytes": 26958,
+   "QApreparedSha256": "30db33c17d0db6729d19dbb502333cf11a12b7041169e9b9689b17ea0d947f4a",
+   "QApreparedBytes": 26958,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-invocation-storage.mjs",
+   "rawBlob": "d9fe8d04ebc1cedd443e3fa1f3882b64e7150cf5",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "state.tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      10
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "state.tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      11
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "original",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      17
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "9f04e0e346dede0e7561278cee100902646526faad260c3181ae31159e4f6761",
+   "rawBytes": 1392,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "9f04e0e346dede0e7561278cee100902646526faad260c3181ae31159e4f6761",
+   "MpreparedBytes": 1392
+  },
+  {
+   "path": "lib/mcp-node-private-bridge.mjs",
+   "rawBlob": "7038a7fed43aa75e0208568064929b49abe16bea",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      89
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      69
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      70,
+      72
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      71
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "a3fe9efd76f33206b997f106db59b0e4899973d44c876c1e54a8fc322cd471c4",
+   "rawBytes": 12032,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "a3fe9efd76f33206b997f106db59b0e4899973d44c876c1e54a8fc322cd471c4",
+   "MpreparedBytes": 12032
+  },
+  {
+   "path": "lib/mcp-node-process-custody.mjs",
+   "rawBlob": "046d3cff69c63be9e221b3ff25a58ae40d8fb5bf",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      33
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      35
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "o.storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 11,
+     "rawLines": [
+      79,
+      80,
+      89,
+      98,
+      130,
+      143,
+      148,
+      152,
+      163,
+      168,
+      198
+     ]
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 5,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": "nominalLease.run"
+     },
+     "expectedCount": 2,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      28
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 7,
+     "rawLines": [
+      31,
+      42,
+      55,
+      67,
+      164,
+      195,
+      196
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 7,
+     "rawLines": [
+      31,
+      42,
+      55,
+      67,
+      164,
+      195,
+      196
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "19f44e8af180254645f75264f9f57ca1d73ee722394240c712fac0b841e5fdda",
+   "rawBytes": 24440,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "19f44e8af180254645f75264f9f57ca1d73ee722394240c712fac0b841e5fdda",
+   "MpreparedBytes": 24440
+  },
+  {
+   "path": "lib/mcp-original-container-runtime.mjs",
+   "rawBlob": "9497867e4f1325479405ac58c1ab43ecfdb01250",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      16
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      16,
+      18
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      17
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "10f621e8578668d6d702bbda95123c0af8586271f5971340977dbfe46651fbf8",
+   "rawBytes": 7686,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "10f621e8578668d6d702bbda95123c0af8586271f5971340977dbfe46651fbf8",
+   "MpreparedBytes": 7686
+  },
+  {
+   "path": "lib/mcp-own-durable-host.mjs",
+   "rawBlob": "01b7b7ba329fd2fb69f9a3404f68861a072a19da",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 4,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      41
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      43,
+      89,
+      103,
+      110
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      43,
+      89,
+      103,
+      110
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "e07f741ffbe90eea85b319738bf9a951ecb60e182642fe7b15dd2f28d472f9d8",
+   "rawBytes": 13283,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "e07f741ffbe90eea85b319738bf9a951ecb60e182642fe7b15dd2f28d472f9d8",
+   "MpreparedBytes": 13283
+  },
+  {
+   "path": "lib/mcp-own-finite-admission-gate.mjs",
+   "rawBlob": "d782a4cbc5b11b3c2009eb318a19e06430b28873",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "t",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      58
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "t",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      69,
+      78,
+      82
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "get",
+      "disposition": "captured-storage-or-holder-identity"
+     },
+     "expectedCount": 6,
+     "rawLines": [
+      53,
+      60,
+      62,
+      70,
+      72,
+      109
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "transaction",
+      "disposition": "captured-storage-or-holder-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      58
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "named",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      105,
+      108
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "e8b3bd0cb08b36199d0453c9e2651ec0568afc82b9eb640166d8b757399dda27",
+   "rawBytes": 15095,
+   "QApreparedSha256": "e8b3bd0cb08b36199d0453c9e2651ec0568afc82b9eb640166d8b757399dda27",
+   "QApreparedBytes": 15095,
+   "MpreparedSha256": "e8b3bd0cb08b36199d0453c9e2651ec0568afc82b9eb640166d8b757399dda27",
+   "MpreparedBytes": 15095
+  },
+  {
+   "path": "lib/mcp-own-finite-cleanup-host.mjs",
+   "rawBlob": "b77bba634c999e7a8a7d02aae8d81a4627ff5f4b",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      23
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      23
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      23
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "ns",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      17
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "16920f520802d9899d460591d4871d4a45c508d4b289a5059e80726ab84843a9",
+   "rawBytes": 6179,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "16920f520802d9899d460591d4871d4a45c508d4b289a5059e80726ab84843a9",
+   "MpreparedBytes": 6179
+  },
+  {
+   "path": "lib/mcp-own-finite-cleanup-proof.mjs",
+   "rawBlob": "59f633d8dcdbfe508719a3530ccb52572396e0b3",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      90
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      90
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      90
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "fb53e168da7f7767af28cc006eccb2be28e566390066cbc230d9da74c891708c",
+   "rawBytes": 13677,
+   "QApreparedSha256": "fb53e168da7f7767af28cc006eccb2be28e566390066cbc230d9da74c891708c",
+   "QApreparedBytes": 13677,
+   "MpreparedSha256": "fb53e168da7f7767af28cc006eccb2be28e566390066cbc230d9da74c891708c",
+   "MpreparedBytes": 13677
+  },
+  {
+   "path": "lib/mcp-own-finite-primary.mjs",
+   "rawBlob": "7fa32e90ca6d47a75571cd64f8b199be330219df",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "all",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 2,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      20,
+      83
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      21,
+      83
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      21,
+      83
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "named",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "from",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "3cc046c2376106e557f084bae68d24651dbb76886a27de528da920e839cdd1d4",
+   "rawBytes": 12556,
+   "QApreparedSha256": "3cc046c2376106e557f084bae68d24651dbb76886a27de528da920e839cdd1d4",
+   "QApreparedBytes": 12556,
+   "MpreparedSha256": "3cc046c2376106e557f084bae68d24651dbb76886a27de528da920e839cdd1d4",
+   "MpreparedBytes": 12556
+  },
+  {
+   "path": "lib/mcp-own-finite-reduction.mjs",
+   "rawBlob": "6ce7798ece537f41823c17186336b6f8ac08d90f",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      27,
+      46
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      40,
+      45
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      40,
+      45
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      40,
+      45
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "e349c0b0c1073c0f49d522befebec5ceb9536d3e984d6dfa6ffb833b95248548",
+   "rawBytes": 6160,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "e349c0b0c1073c0f49d522befebec5ceb9536d3e984d6dfa6ffb833b95248548",
+   "MpreparedBytes": 6160
+  },
+  {
+   "path": "lib/mcp-own-permission-withdrawal.mjs",
+   "rawBlob": "c0e3551c983e42104e6f2706a58fdc27bf746033",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      72,
+      102,
+      163
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      74,
+      102,
+      168
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      82,
+      85
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "e638a8f60b07c6c634b5d6e4b7e0babc324048271eddc85555af7a5d70dd2308",
+   "rawBytes": 10968,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "e638a8f60b07c6c634b5d6e4b7e0babc324048271eddc85555af7a5d70dd2308",
+   "MpreparedBytes": 10968
+  },
+  {
+   "path": "lib/mcp-own-subscription-receipt.mjs",
+   "rawBlob": "d3225a0c0673ffd20e93743c9ec09f02669ebf0c",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 3,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      44
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      50,
+      51,
+      53,
+      72
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      50,
+      51,
+      53,
+      72
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "a09ddaeb05c2a1d7972bc0f37298db174ea49a0a952c38a3a5c461b6cf60e49d",
+   "rawBytes": 9882,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "a09ddaeb05c2a1d7972bc0f37298db174ea49a0a952c38a3a5c461b6cf60e49d",
+   "MpreparedBytes": 9882
+  },
+  {
+   "path": "lib/mcp-own-successor-host.mjs",
+   "rawBlob": "54e621e4c87139d780f3fb2ac132c06b2f4446a6",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "namespace",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      32
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "e3b5d124c7bc0e7d10c6bb2642d4dff21a8d29026bfb39c95096639ab5e3353f",
+   "rawBytes": 5141,
+   "QApreparedSha256": "e3b5d124c7bc0e7d10c6bb2642d4dff21a8d29026bfb39c95096639ab5e3353f",
+   "QApreparedBytes": 5141,
+   "MpreparedSha256": "e3b5d124c7bc0e7d10c6bb2642d4dff21a8d29026bfb39c95096639ab5e3353f",
+   "MpreparedBytes": 5141
+  },
+  {
+   "path": "lib/mcp-own-successor-retirement-host.mjs",
+   "rawBlob": "624d077f1683ce14c7a957ce6e1ece60ae1cefdb",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      31
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      31
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      31
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "ef395eaee8e7b8ceccee5aec9e8f88ae2e8fd97f5d5dfec0f6fe6bccbfb2a6c1",
+   "rawBytes": 5909,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "ef395eaee8e7b8ceccee5aec9e8f88ae2e8fd97f5d5dfec0f6fe6bccbfb2a6c1",
+   "MpreparedBytes": 5909
+  },
+  {
+   "path": "lib/mcp-own-synthetic-save-host.mjs",
+   "rawBlob": "170b510f82023c93a820e4f24195f1ce9a9b0f95",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "c.pins.AFW_DOSSIER_EVENTS_NODE",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      25,
+      29
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "1890caee1a4feb62a7be2673cd843a4dd0a6ccceec67be65fb4bb0af2ba82dac",
+   "rawBytes": 4414,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "1890caee1a4feb62a7be2673cd843a4dd0a6ccceec67be65fb4bb0af2ba82dac",
+   "MpreparedBytes": 4414
+  },
+  {
+   "path": "lib/mcp-own-synthetic-save-http.mjs",
+   "rawBlob": "0d651edfa36de8299f7f5e2794620fcf35515130",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      10
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      10
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      10
+     ]
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      26
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      26
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      26
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "a37b6f0c07a54a690f6cf43a390525fd86ee89f2a846ef64edc5dc2e1a442b01",
+   "rawBytes": 9016,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "a37b6f0c07a54a690f6cf43a390525fd86ee89f2a846ef64edc5dc2e1a442b01",
+   "MpreparedBytes": 9016
+  },
+  {
+   "path": "lib/mcp-own-synthetic-save.mjs",
+   "rawBlob": "777d35afdf795dc74df4680be383d09c93eeee7e",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 4,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "batch",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      26
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 6,
+     "rawLines": [
+      29,
+      34,
+      38,
+      41,
+      42,
+      45
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 6,
+     "rawLines": [
+      29,
+      34,
+      38,
+      41,
+      42,
+      45
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "06fb9c82f74142c396afcac551f84e402d35f42b5a0cb208a4ed9306e8106735",
+   "rawBytes": 6075,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "06fb9c82f74142c396afcac551f84e402d35f42b5a0cb208a4ed9306e8106735",
+   "MpreparedBytes": 6075
+  },
+  {
+   "path": "lib/mcp-publication-artifact-reader.mjs",
+   "rawBlob": "ddcb56c204ee961ea4d02c4cd93819204e1b15fd",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      19
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      22
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      22
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      33
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "00711ea1e77f421856e61ea8ee9683a7eca30163b33ee02506b5d7c5a353baa8",
+   "rawBytes": 4537,
+   "QApreparedSha256": "00711ea1e77f421856e61ea8ee9683a7eca30163b33ee02506b5d7c5a353baa8",
+   "QApreparedBytes": 4537,
+   "MpreparedSha256": "00711ea1e77f421856e61ea8ee9683a7eca30163b33ee02506b5d7c5a353baa8",
+   "MpreparedBytes": 4537
+  },
+  {
+   "path": "lib/mcp-publication-deployment-reader.mjs",
+   "rawBlob": "33bb481cdb0d75d3195f69b92d22376d1f2b0ecc",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      20
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      20
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      20
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "465500520bad6972af8b5768021d0337c7c8512a4962f43875678c4f4101574c",
+   "rawBytes": 3928,
+   "QApreparedSha256": "465500520bad6972af8b5768021d0337c7c8512a4962f43875678c4f4101574c",
+   "QApreparedBytes": 3928,
+   "MpreparedSha256": "465500520bad6972af8b5768021d0337c7c8512a4962f43875678c4f4101574c",
+   "MpreparedBytes": 3928
+  },
+  {
+   "path": "lib/mcp-publication-journal.mjs",
+   "rawBlob": "a7e02c48abd916efcb0c4abcec4fea32d67da3b3",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 2,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      26
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      27,
+      34
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      27,
+      34
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "39bc5a797e74f036c15b9fb3190b988b836b12f5290ec4619f8fe41665b213de",
+   "rawBytes": 3972,
+   "QApreparedSha256": "39bc5a797e74f036c15b9fb3190b988b836b12f5290ec4619f8fe41665b213de",
+   "QApreparedBytes": 3972,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-closed-context.mjs",
+   "rawBlob": "88c706e4633f9f53938bb2675c173223046b166e",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "ns",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      57
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "73dc8518f482e21832a42c6398bc4309e24796e78fd6f99885998176591959d9",
+   "rawBytes": 5599,
+   "QApreparedSha256": "73dc8518f482e21832a42c6398bc4309e24796e78fd6f99885998176591959d9",
+   "QApreparedBytes": 5599,
+   "MpreparedSha256": "73dc8518f482e21832a42c6398bc4309e24796e78fd6f99885998176591959d9",
+   "MpreparedBytes": 5599
+  },
+  {
+   "path": "lib/mcp-qa-finite-bootstrap-native.mjs",
+   "rawBlob": "003b8cda2b723d3422f8f696302acc8f550b3477",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "stringify",
+      "receiver": "actor",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      22,
+      28
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "self",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      22,
+      28
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      37
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      40
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      41
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      44
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      44
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "88c881bdcefc48d934010ee8b342ad921284c60f52ddeaebd924b63bf9a18997",
+   "rawBytes": 8553,
+   "QApreparedSha256": "bfae4026af2d13715dbce55b3bd8c7e98b1b710fbdfae6a49b0db28fb8b08a03",
+   "QApreparedBytes": 8735,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-cleanup-store.mjs",
+   "rawBlob": "08b78d61a5024217735eec2af6f162d63c65424c",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 11,
+     "rawLines": [
+      11,
+      13,
+      18,
+      20,
+      36,
+      37,
+      60,
+      65,
+      65,
+      74,
+      93
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      48,
+      52,
+      82
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 5,
+     "rawLines": [
+      48,
+      52,
+      52,
+      82,
+      82
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      48,
+      52,
+      82
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "29b8af4938b585235d8cc65a5b6e77a7684214f2e39ed4fdbf3effdd7d658f25",
+   "rawBytes": 11234,
+   "QApreparedSha256": "29b8af4938b585235d8cc65a5b6e77a7684214f2e39ed4fdbf3effdd7d658f25",
+   "QApreparedBytes": 11234,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-confirmation.mjs",
+   "rawBlob": "530cbc2e1051431f07764ae7718c293982a66af2",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "nativeDateTime",
+      "receiver": "timestamp",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      44,
+      50
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "63465958a454f4f22229a34d9dce821d58e91e57505f43189181b4510ad67a6c",
+   "rawBytes": 7369,
+   "QApreparedSha256": "63465958a454f4f22229a34d9dce821d58e91e57505f43189181b4510ad67a6c",
+   "QApreparedBytes": 7369,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-fixed-policy-engine.mjs",
+   "rawBlob": "e131f5b22f8f0e54fb61e2f2a131c64798b1d4eb",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      43
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      48
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      53
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      53
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "9e4debe5e87be5191f09aaf36438d78bf12724b292d8a3b39fb322087d563a7d",
+   "rawBytes": 7484,
+   "QApreparedSha256": "cef8ad565a97d2f3018abf989555e8f1d26af7f4bbf47c69dcf65a36fd06cf9a",
+   "QApreparedBytes": 8267,
+   "MpreparedSha256": "9e4debe5e87be5191f09aaf36438d78bf12724b292d8a3b39fb322087d563a7d",
+   "MpreparedBytes": 7484
+  },
+  {
+   "path": "lib/mcp-qa-finite-historical-source.mjs",
+   "rawBlob": "855af60b2880d566f665a405cb3ab4fe8b9d369e",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "toString",
+      "receiver": "actor",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      190,
+      199
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      226
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      234
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method",
+      "receiver": "session",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      235
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "bind",
+      "receiver": "statement",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      236
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "all",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      237
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      228
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      210
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      213
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      213
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      219
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      219
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "1ff09d3f9db050b19181d304a6533cc88f076f48898fd5fe20c8d5958d19ed12",
+   "rawBytes": 31165,
+   "QApreparedSha256": "099db8b6900a8b56558f5830f13a297c0003a95d74e837f6810469b66c63ca11",
+   "QApreparedBytes": 31144,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-initial-anchors.mjs",
+   "rawBlob": "00f743593d7670e9cb358c8512a25367d29cd6ed",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "toString",
+      "receiver": "actor",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      26,
+      27
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "ns",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      27
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      28
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "7b08df4f245c6ebf7ec7dee140684a60590ab1f6ec149321c9349e8d71151ead",
+   "rawBytes": 6333,
+   "QApreparedSha256": "7b08df4f245c6ebf7ec7dee140684a60590ab1f6ec149321c9349e8d71151ead",
+   "QApreparedBytes": 6333,
+   "MpreparedSha256": "7b08df4f245c6ebf7ec7dee140684a60590ab1f6ec149321c9349e8d71151ead",
+   "MpreparedBytes": 6333
+  },
+  {
+   "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+   "rawBlob": "0a04ae3a4d74c2c7939b1654683054b1d5d751d4",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      42,
+      112
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "list",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      47,
+      48
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "getAlarm",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      63,
+      116
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      102
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tg",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      106
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tp",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      107
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "td",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      109
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "ta",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      109
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "sync",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      112
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      114,
+      119,
+      182
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      123
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      128
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      129
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      131
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      131
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "f0e8a2720987d13d0011c437abd3c5ef7d1452493b3c0e67b5da5d319e474de5",
+   "rawBytes": 22438,
+   "QApreparedSha256": "abc7de3bbf6d6ef326f1636ffa7b53f4f4dd933b1cc0263691020a243ec80342",
+   "QApreparedBytes": 22545,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-initial-custody-probe.mjs",
+   "rawBlob": "b81bb37e495d4c8cd3ef77a19e875e04ebd19d32",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "toString",
+      "receiver": "actor",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      22,
+      28
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "self",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      23,
+      28
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      38
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      41
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      42
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "c68a13a94a093f6700fb2dda9fddb1533986ca443fbc8ce767ec5a88cca334d5",
+   "rawBytes": 7792,
+   "QApreparedSha256": "c68a13a94a093f6700fb2dda9fddb1533986ca443fbc8ce767ec5a88cca334d5",
+   "QApreparedBytes": 7792,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-initial-entry.mjs",
+   "rawBlob": "c5ae0f53bee077c693d7f0a0599bbb6347648fee",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "disposer",
+      "receiver": "value",
+      "disposition": "RPC-result disposal; no operation disposition inferred"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      57
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "toString",
+      "receiver": "actorId",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      70,
+      72
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 6,
+     "rawLines": [
+      104,
+      222,
+      264,
+      335,
+      405,
+      416
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tg",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      106,
+      108
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tp",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      109
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "sync",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 7,
+     "rawLines": [
+      112,
+      118,
+      232,
+      282,
+      345,
+      412,
+      423
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 13,
+     "rawLines": [
+      113,
+      128,
+      129,
+      130,
+      132,
+      233,
+      283,
+      285,
+      346,
+      413,
+      414,
+      424,
+      424
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "getAlarm",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 6,
+     "rawLines": [
+      131,
+      233,
+      285,
+      403,
+      414,
+      424
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "list",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      133,
+      404
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "getTx",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      225
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "putTx",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      230,
+      280
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "readTx",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      267
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "read",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 5,
+     "rawLines": [
+      338,
+      408,
+      419,
+      420,
+      420
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "write",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      339,
+      409,
+      421
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "alarm",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      410
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "nativeTime",
+      "receiver": "timestamp",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      434,
+      437
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "namespaceGet",
+      "receiver": "self",
+      "disposition": "DO namespace stub identity edge; no native settlement"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      439
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "self",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      439
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "stepDo",
+      "receiver": "step",
+      "disposition": "Workflow scheduling callback (P1 reachability unproved; not counted as helper or native yet)"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      440
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method",
+      "receiver": "actor",
+      "disposition": "DO named RPC native boundary; exported-Workflow reachability separate"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      442
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      79,
+      238,
+      309
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      82,
+      242,
+      315
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      83,
+      243
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      85,
+      245
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      85,
+      245,
+      318
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      316
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      318
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "364491541624f6722cd0366422bf7977851d4e9b33a9db745d7e862eea86c2fa",
+   "rawBytes": 48591,
+   "QApreparedSha256": "48cef41b16f418864d1c73b8bce32ae9a7154f71af15829199fe7be2bcb32a77",
+   "QApreparedBytes": 49371,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-initial-history-schema.mjs",
+   "rawBlob": "2f22eb8a8b50cef57cc075956cf261165184e2d3",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      27
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "prepare",
+      "receiver": "session",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      28
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "all",
+      "receiver": "statement",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      29
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "20e7efbb803b03f75c5450e0f0acb631f73e4ef14cc149a875e13baf7183114c",
+   "rawBytes": 4040,
+   "QApreparedSha256": "20e7efbb803b03f75c5450e0f0acb631f73e4ef14cc149a875e13baf7183114c",
+   "QApreparedBytes": 4040,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-initial-material-store.mjs",
+   "rawBlob": "f62cd3f930245c48a074f4d5899329cac3390ae9",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      16
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      17
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tg",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      20
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tp",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      20
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "63922fe3dcee5e22f7db368ff050c7cc14565c912425313dcdf321f97206b94e",
+   "rawBytes": 5930,
+   "QApreparedSha256": "63922fe3dcee5e22f7db368ff050c7cc14565c912425313dcdf321f97206b94e",
+   "QApreparedBytes": 5930,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-initial-material.mjs",
+   "rawBlob": "8e2d3e4a75baabf1be5d12b6e2868ffc16599f78",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "toString",
+      "receiver": "actor",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      19,
+      21
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      70
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      45
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      48
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      48
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      52
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      52
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "7a8a17463688295a2ce45b72bf0744c6d83b40f9196a64170a7f42271ee76c67",
+   "rawBytes": 14514,
+   "QApreparedSha256": "d62aaf82f231de83e429221cf65e2703b62598f0aef40d0fc3ed22db5ee3cef5",
+   "QApreparedBytes": 14696,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-initial-old-guard.mjs",
+   "rawBlob": "60a6021b94527f08257265073d268091a7b55f50",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      23
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      26
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      27
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      42
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      42
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "eb7d0e161db798350d4038492b3a60f040f54c908996aeea0e22d9100b83850a",
+   "rawBytes": 4770,
+   "QApreparedSha256": "eb7d0e161db798350d4038492b3a60f040f54c908996aeea0e22d9100b83850a",
+   "QApreparedBytes": 4770,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-initial-owner-source.mjs",
+   "rawBlob": "f1ef3a1c8214decc6a02044da211be127d8e2e9e",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "toString",
+      "receiver": "actor",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      46,
+      52
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "self",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      48,
+      53
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      63
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "list",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      64
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "getAlarm",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      93
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "nodeName",
+      "receiver": "node",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      103
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      105
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      70
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      75
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      76
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      79
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      79
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "5b12eb2de252453679e124fea6753f6f4b9e58bd51540585b2c63d93c46b2128",
+   "rawBytes": 16042,
+   "QApreparedSha256": "5b12eb2de252453679e124fea6753f6f4b9e58bd51540585b2c63d93c46b2128",
+   "QApreparedBytes": 16042,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-launch.mjs",
+   "rawBlob": "3c5716076be75b28388579ce81c2773e2dec6027",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "create",
+      "receiver": "binding",
+      "disposition": "Workflow create (P1 reachability unproved; enum disposition pending)"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      134
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "list",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      77
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "getAlarm",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      79
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      82
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      88
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "transaction",
+      "disposition": "captured-storage-or-holder-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      75
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "bade5ed2ecac75beb861585976643b65e352e032dafd36adece38529e2b73734",
+   "rawBytes": 13753,
+   "QApreparedSha256": "bade5ed2ecac75beb861585976643b65e352e032dafd36adece38529e2b73734",
+   "QApreparedBytes": 13753,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-launcher.mjs",
+   "rawBlob": "6c9e59f8d75bcb56a692bf70e50a678cfca0308f",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "ns",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      17
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "31a0d630ba33fb75cbec04baf4d87dcdde6be407f0ef086a0b5e1ef5608a8131",
+   "rawBytes": 5096,
+   "QApreparedSha256": "31a0d630ba33fb75cbec04baf4d87dcdde6be407f0ef086a0b5e1ef5608a8131",
+   "QApreparedBytes": 5096,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-observer-native.mjs",
+   "rawBlob": "68dcfcdbccb9060fb24a7b076618c58fe3ef02e3",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "ctx.storage",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      61
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "b0f4e7be449e48fe02620a8bbb2b330fe91b5e3aed0f5fa495d090a37239494e",
+   "rawBytes": 6934,
+   "QApreparedSha256": "b0f4e7be449e48fe02620a8bbb2b330fe91b5e3aed0f5fa495d090a37239494e",
+   "QApreparedBytes": 6934,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-observer.mjs",
+   "rawBlob": "b5a5245712a08684c40c28ceac70508516950a44",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "ns",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      36
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "d36d53b9b31adb8375a5034c14d6045ab6c352f1552ef50ce637ef4eb2f46630",
+   "rawBytes": 7024,
+   "QApreparedSha256": "d36d53b9b31adb8375a5034c14d6045ab6c352f1552ef50ce637ef4eb2f46630",
+   "QApreparedBytes": 7024,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-owner-cleanup-journal.mjs",
+   "rawBlob": "127e5906891b20d2f08c74a412383b8b7e3ff1e2",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "list",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      9
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.transaction",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      38
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      50
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "put",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      52
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.sync",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      54
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.get",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      55
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "e40290e120266cd57bceb6faa5ea3c871ddd8aa00c9d02e98094aaf11dd4c888",
+   "rawBytes": 5911,
+   "QApreparedSha256": "e40290e120266cd57bceb6faa5ea3c871ddd8aa00c9d02e98094aaf11dd4c888",
+   "QApreparedBytes": 5911,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+   "rawBlob": "1a5a2583d266179cdd89f799c64199f29044fec5",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "methods[q.method]",
+      "receiver": "alias",
+      "disposition": "KV private facet entry; follow existing wrapper to native leaf"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      55,
+      614
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "list",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      166,
+      168,
+      172
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      171,
+      660
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      190,
+      198
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method",
+      "receiver": "session",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      192,
+      200
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "bind",
+      "receiver": "statement",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      193,
+      201
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "first",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      194
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "all",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      202
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "nodeName",
+      "receiver": "node",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      229
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      178,
+      664
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      183,
+      667
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      184,
+      668
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      187,
+      671
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      187,
+      671
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "866cdda4ea43f56c3c2f69c0a2846167e95f36ae26be35a76cc7eaa7b34a4483",
+   "rawBytes": 89322,
+   "QApreparedSha256": "c4d70030042d71dbb5deb525d77a7e41a929d1fcf6f1819690ae8f5ef094b3ba",
+   "QApreparedBytes": 90231,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-owner-issuer-provenance-journal.mjs",
+   "rawBlob": "2fad787bd05736a17cf013f41aa143264298afd2",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "list",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      11
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.transaction",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      43
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      47
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "put",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      64
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.sync",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      66
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.get",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      67
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "28c93503b891bc1f04371528b224b7d091afb9a9e473c60722569cff6f0ef141",
+   "rawBytes": 6806,
+   "QApreparedSha256": "28c93503b891bc1f04371528b224b7d091afb9a9e473c60722569cff6f0ef141",
+   "QApreparedBytes": 6806,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-owner-native-bridge.mjs",
+   "rawBlob": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "namespace",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      16,
+      20
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "namespace",
+      "disposition": "DO namespace stub identity edge; no native settlement"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      16
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "fetcher",
+      "receiver": "stub",
+      "disposition": "DO fetch native boundary"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      36
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "ee56e016fdd17f97cb079cccd78d8c3aa4d0eb811cbdfda1b7b702a40d7bdaeb",
+   "rawBytes": 4853,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "ee56e016fdd17f97cb079cccd78d8c3aa4d0eb811cbdfda1b7b702a40d7bdaeb",
+   "MpreparedBytes": 4853
+  },
+  {
+   "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+   "rawBlob": "e760b3579a38f1dbb73b177bb73b06d814eb881f",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "toString",
+      "receiver": "actor",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      22
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "self",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      22
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "792cc680c103bef1d86ecb3a957e04112411bec8acd71c0a098e483bdec58750",
+   "rawBytes": 2505,
+   "QApreparedSha256": "792cc680c103bef1d86ecb3a957e04112411bec8acd71c0a098e483bdec58750",
+   "QApreparedBytes": 2505,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-owner-native-wire.mjs",
+   "rawBlob": "38285fa0149a38924c431b4d5a705bec1384216d",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      43
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      47
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      52
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "32bcc2e8ca3867fa212e82267372fb58cd695c20952ba3e3e009b43d7df47829",
+   "rawBytes": 7953,
+   "QApreparedSha256": "32bcc2e8ca3867fa212e82267372fb58cd695c20952ba3e3e009b43d7df47829",
+   "QApreparedBytes": 7953,
+   "MpreparedSha256": "32bcc2e8ca3867fa212e82267372fb58cd695c20952ba3e3e009b43d7df47829",
+   "MpreparedBytes": 7953
+  },
+  {
+   "path": "lib/mcp-qa-finite-owner-notice-consent-body.mjs",
+   "rawBlob": "2a1e89ffcfe56a607c704129a3af6a83e8bc9b81",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      5
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      10
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      16
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "95cf2327a326faca47ce812e2236a5a63ad0c33db9f6124c6106bd5ce88ff10e",
+   "rawBytes": 946,
+   "QApreparedSha256": "95cf2327a326faca47ce812e2236a5a63ad0c33db9f6124c6106bd5ce88ff10e",
+   "QApreparedBytes": 946,
+   "MpreparedSha256": "95cf2327a326faca47ce812e2236a5a63ad0c33db9f6124c6106bd5ce88ff10e",
+   "MpreparedBytes": 946
+  },
+  {
+   "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+   "rawBlob": "ea910f0fcdeade5a794ddaa60898706924e72f80",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "namespace",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      17,
+      19
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "namespace",
+      "disposition": "DO namespace stub identity edge; no native settlement"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      17
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "fetcher",
+      "receiver": "stub",
+      "disposition": "DO fetch native boundary"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      30
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      37
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "f7f72160e688d1c3aa57d2da0021d3c617cceb54c81e5947f5c11d7c17ce07ad",
+   "rawBytes": 4750,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "f7f72160e688d1c3aa57d2da0021d3c617cceb54c81e5947f5c11d7c17ce07ad",
+   "MpreparedBytes": 4750
+  },
+  {
+   "path": "lib/mcp-qa-finite-owner-oauth-forward.mjs",
+   "rawBlob": "f7979579fcb6d00b3d5d68c7790089c803f4170f",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "namespace",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      11,
+      13
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "namespace",
+      "disposition": "DO namespace stub identity edge; no native settlement"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      11
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "fetcher",
+      "receiver": "stub",
+      "disposition": "DO fetch native boundary"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      22
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "ec4732004d23c1e7ffa0a4ab8e29237c5c6c053905147ec0cd1132ea6f5137c7",
+   "rawBytes": 3200,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "ec4732004d23c1e7ffa0a4ab8e29237c5c6c053905147ec0cd1132ea6f5137c7",
+   "MpreparedBytes": 3200
+  },
+  {
+   "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+   "rawBlob": "7eb8f28760de60f143e487eeb6988705059a0a44",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "toString",
+      "receiver": "actor",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      87,
+      93,
+      497,
+      501
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "self",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      89,
+      94
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      104
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "list",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      105
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      123,
+      131,
+      164
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method",
+      "receiver": "session",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      125,
+      133
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "bind",
+      "receiver": "statement",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      126,
+      134
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "first",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      127
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "all",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      135
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "nodeName",
+      "receiver": "node",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      162
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "native.sync",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      577
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "issuerCapture.sync",
+      "receiver": "issuerCapture.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      1080
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetcher",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      111
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      116
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      117
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "stream",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      120
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      120
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "d97d07f69916c45f58af511a6dfb57322ed3fe7d8fa1f6fbb2220d44be15b921",
+   "rawBytes": 126504,
+   "QApreparedSha256": "383333fee44645574486f22eab97060fb2087794fe413424adc643c7f69eac69",
+   "QApreparedBytes": 129396,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+   "rawBlob": "152e730f83af7ef063b6b1db89f8b0a779c2b60e",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      115
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      117
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      120
+     ]
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 4,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      160
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      282,
+      348,
+      366,
+      403
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      282,
+      348,
+      366,
+      403
+     ]
+    },
+    {
+     "family": "rateLimiter",
+     "selector": {
+      "receiver": "env.AFW_QA_OCCURRENCE_RATE_LIMITER",
+      "method": "limit"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      221
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "444e0e748a8cadb84ba1fd125d51d5e7e123cd02a48e8276b4c4e7f558694866",
+   "rawBytes": 45255,
+   "QApreparedSha256": "444e0e748a8cadb84ba1fd125d51d5e7e123cd02a48e8276b4c4e7f558694866",
+   "QApreparedBytes": 45255,
+   "MpreparedSha256": "444e0e748a8cadb84ba1fd125d51d5e7e123cd02a48e8276b4c4e7f558694866",
+   "MpreparedBytes": 45255
+  },
+  {
+   "path": "lib/mcp-qa-finite-policy-journal.mjs",
+   "rawBlob": "6e3de33d04075740fb57e5f9afcf87dd9f68ee79",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      26
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      29,
+      31
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      30,
+      32
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "92602e854dd82333a40bedbc237de197173baf0d82c02c4a74a8c5e3eda4bfa8",
+   "rawBytes": 8896,
+   "QApreparedSha256": "92602e854dd82333a40bedbc237de197173baf0d82c02c4a74a8c5e3eda4bfa8",
+   "QApreparedBytes": 8896,
+   "MpreparedSha256": "92602e854dd82333a40bedbc237de197173baf0d82c02c4a74a8c5e3eda4bfa8",
+   "MpreparedBytes": 8896
+  },
+  {
+   "path": "lib/mcp-qa-finite-policy-setup.mjs",
+   "rawBlob": "34285e7c8ee3d9838763344edba2dcf6ce33da9b",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "nativeTime",
+      "receiver": "timestamp",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      129,
+      131
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "stepDo",
+      "receiver": "step",
+      "disposition": "Workflow scheduling callback (P1 reachability unproved; not counted as helper or native yet)"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      137
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "setup",
+      "receiver": "actor",
+      "disposition": "DO named RPC native boundary; exported-Workflow reachability separate"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      139
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      109
+     ]
+    },
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "ns",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      135
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "2f257b79ac6965b03439dda2cdbc2909aa7ea5eddd599e5210eec0cf90c694a8",
+   "rawBytes": 17404,
+   "QApreparedSha256": "2f257b79ac6965b03439dda2cdbc2909aa7ea5eddd599e5210eec0cf90c694a8",
+   "QApreparedBytes": 17404,
+   "MpreparedSha256": "2f257b79ac6965b03439dda2cdbc2909aa7ea5eddd599e5210eec0cf90c694a8",
+   "MpreparedBytes": 17404
+  },
+  {
+   "path": "lib/mcp-qa-finite-preparation-cleanup.mjs",
+   "rawBlob": "e9999c6ea5d086599844f86120cb0e3449f5d636",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "toString",
+      "receiver": "actor",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      12
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "ns",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      12
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      14
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "0e62d2af2bf250f6452aad73f1198e0ee9d00dad9ea09dd55ccf23b66b466da6",
+   "rawBytes": 4271,
+   "QApreparedSha256": "0e62d2af2bf250f6452aad73f1198e0ee9d00dad9ea09dd55ccf23b66b466da6",
+   "QApreparedBytes": 4271,
+   "MpreparedSha256": "0e62d2af2bf250f6452aad73f1198e0ee9d00dad9ea09dd55ccf23b66b466da6",
+   "MpreparedBytes": 4271
+  },
+  {
+   "path": "lib/mcp-qa-finite-preparation-enrollment-writer.mjs",
+   "rawBlob": "6eb0f08d581faef8ee12ce4f9e0d62cebdfb57f9",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      33
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      55
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tg",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      59
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tl",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      60
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tp",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      69
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "0579879851afb26b925845faaf3f2d099f6f8d11e4ab9976b79fc33781e802ee",
+   "rawBytes": 13184,
+   "QApreparedSha256": "0579879851afb26b925845faaf3f2d099f6f8d11e4ab9976b79fc33781e802ee",
+   "QApreparedBytes": 13184,
+   "MpreparedSha256": "0579879851afb26b925845faaf3f2d099f6f8d11e4ab9976b79fc33781e802ee",
+   "MpreparedBytes": 13184
+  },
+  {
+   "path": "lib/mcp-qa-finite-preparation-issuer-journal.mjs",
+   "rawBlob": "414450aa08f797bed5a41cf5cc697342785ce16b",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "toString",
+      "receiver": "actor",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      10
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "ns",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      12
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "listing",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      31
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.transaction",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      51
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tg",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      62
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tp",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      64
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.sync",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      66
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.get",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      67
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "bf99999978bac56fbc2a17270c5c588e2318fc16c8745416a86c665f9e940ceb",
+   "rawBytes": 7005,
+   "QApreparedSha256": "bf99999978bac56fbc2a17270c5c588e2318fc16c8745416a86c665f9e940ceb",
+   "QApreparedBytes": 7005,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-preparation-issuer-store.mjs",
+   "rawBlob": "b3e5f890ca525f8b3eb4e40ce4473cc9690cdcfb",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.session",
+      "receiver": "c.db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 5,
+     "rawLines": [
+      73,
+      79,
+      114,
+      158,
+      190
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "prepare",
+      "receiver": "s",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      74
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "bind",
+      "receiver": "stmt",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      75
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      76
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "c88ced455c142a3f72a54822d959fa744da426e3470ba3c19f992ab16368956a",
+   "rawBytes": 35850,
+   "QApreparedSha256": "c88ced455c142a3f72a54822d959fa744da426e3470ba3c19f992ab16368956a",
+   "QApreparedBytes": 35850,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-preparation-notice-journal.mjs",
+   "rawBlob": "b9c15aba18e2442a0ed864b8afd5e86313c5e470",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "listing",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      36
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.transaction",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      49
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tg",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      53
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "tp",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      63
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.sync",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      65
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "c.get",
+      "receiver": "c.storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      66
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "d3c13244036d3dbdbb9cddc5e384688670956a1f2ae5ccff105ddb2a4341b39b",
+   "rawBytes": 6488,
+   "QApreparedSha256": "d3c13244036d3dbdbb9cddc5e384688670956a1f2ae5ccff105ddb2a4341b39b",
+   "QApreparedBytes": 6488,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-finite-preparation-store.mjs",
+   "rawBlob": "122bc0e52870c71da7ae98ef73cd7762171d89ca",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      27,
+      212
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 5,
+     "rawLines": [
+      30,
+      32,
+      34,
+      214,
+      214
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      31,
+      33,
+      35
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      55,
+      64,
+      220
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "0e9f61a69fbb022676fef823948877b69585a261d63f4f639ae708a9c567c153",
+   "rawBytes": 21006,
+   "QApreparedSha256": "0e9f61a69fbb022676fef823948877b69585a261d63f4f639ae708a9c567c153",
+   "QApreparedBytes": 21006,
+   "MpreparedSha256": "0e9f61a69fbb022676fef823948877b69585a261d63f4f639ae708a9c567c153",
+   "MpreparedBytes": 21006
+  },
+  {
+   "path": "lib/mcp-qa-finite-seed-wire.mjs",
+   "rawBlob": "44b81e34b68e37604bd4937ec7bd052ae00ee818",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      22
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      27
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      28
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      35
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "ba153ac53d70fd66508822e057d29ed8540b6dd3f8cac4ff30122cb7d457d4c1",
+   "rawBytes": 3964,
+   "QApreparedSha256": "ba153ac53d70fd66508822e057d29ed8540b6dd3f8cac4ff30122cb7d457d4c1",
+   "QApreparedBytes": 3964,
+   "MpreparedSha256": "ba153ac53d70fd66508822e057d29ed8540b6dd3f8cac4ff30122cb7d457d4c1",
+   "MpreparedBytes": 3964
+  },
+  {
+   "path": "lib/mcp-qa-finite-trial-control.mjs",
+   "rawBlob": "18996dc32972e3e33726b242e508d9635147a7e5",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "actorString",
+      "receiver": "actor",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      192,
+      197
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "ns",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      192,
+      198
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method(expected,'toString')",
+      "receiver": "expected",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      193
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "method(expectedNow,'toString')",
+      "receiver": "expectedNow",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      198
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "primary[name]",
+      "receiver": "readPrimary",
+      "disposition": "Source helper callback; no native row at this invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      252
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "methods.transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      256,
+      419
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "m.get",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      259
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "m.put",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      260
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "m.list",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      261
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "m.setAlarm",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      263
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "methods.get",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      279
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "methods.getAlarm",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      280
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "primary.effect",
+      "receiver": "readPrimary",
+      "disposition": "Source helper callback; no native row at this invocation"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      351,
+      371
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "getMethod",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      422
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "listMethod",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      423
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "alarmMethod",
+      "receiver": "tx",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      425
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "20e127cda278a0b7707de6c5b48ae5625846508542db92e659b42e098404116a",
+   "rawBytes": 44868,
+   "QApreparedSha256": "20e127cda278a0b7707de6c5b48ae5625846508542db92e659b42e098404116a",
+   "QApreparedBytes": 44868,
+   "MpreparedSha256": "20e127cda278a0b7707de6c5b48ae5625846508542db92e659b42e098404116a",
+   "MpreparedBytes": 44868
+  },
+  {
+   "path": "lib/mcp-qa-finite-trial-guard.mjs",
+   "rawBlob": "0e4a6f059c5e094409473f99fead676fcf92cd6d",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      53,
+      67,
+      76
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      58
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      67,
+      76
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 5,
+     "rawLines": [
+      67,
+      76,
+      82,
+      97,
+      110
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "setAlarm",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      82,
+      94,
+      97
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "getAlarm",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      83
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "deleteAlarm",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      97,
+      110
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "ctx.storage",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      122,
+      134
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "transaction",
+      "disposition": "captured-storage-or-holder-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      53
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "get",
+      "disposition": "captured-storage-or-holder-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      54
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "3e084709b5197499a30fb4fc83eeaa8693f15c493afc7992d509a2d4575bfba4",
+   "rawBytes": 14538,
+   "QApreparedSha256": "3e084709b5197499a30fb4fc83eeaa8693f15c493afc7992d509a2d4575bfba4",
+   "QApreparedBytes": 14538,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-generation-draft-reader.mjs",
+   "rawBlob": "f4180dd3cfd22df84630b59b51c5b74b0cac6f97",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      37
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "prepare",
+      "receiver": "session",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      38
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "bind",
+      "receiver": "statement",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      39
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "first",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      41
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "4d2af7d78d41b84791362c12a2514a91f79535eb09f3b6cc4a883e218bfbd395",
+   "rawBytes": 4128,
+   "QApreparedSha256": "4d2af7d78d41b84791362c12a2514a91f79535eb09f3b6cc4a883e218bfbd395",
+   "QApreparedBytes": 4128,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-generation-ledger.mjs",
+   "rawBlob": "f7a72347eb44cf3305ab1a0a09ff1cd9e50d5816",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      64,
+      119,
+      166
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "list",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      65
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      116,
+      163,
+      234
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "assertPin",
+      "receiver": "pin",
+      "disposition": "Source helper callback; no native row at this invocation"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      143,
+      147
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "snapshotPin",
+      "receiver": "pin",
+      "disposition": "Source helper callback; no native row at this invocation"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      143,
+      147
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "put",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      167
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "921e2188dbc3b5396ae7a96b475f0b589717df969fed13a79d346e6edbbda10e",
+   "rawBytes": 19893,
+   "QApreparedSha256": "921e2188dbc3b5396ae7a96b475f0b589717df969fed13a79d346e6edbbda10e",
+   "QApreparedBytes": 19893,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-generation-preparation.mjs",
+   "rawBlob": "2f931c2d3bbcf087be9dbe2e80f8506ab57234f0",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idString",
+      "receiver": "id",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      70,
+      71
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "select",
+      "receiver": "self",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      71,
+      108
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      73
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      75
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "list",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      77
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "toString",
+      "receiver": "id",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      107,
+      108
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "stepDo",
+      "receiver": "step",
+      "disposition": "Workflow scheduling callback (P1 reachability unproved; not counted as helper or native yet)"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      140
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "ns",
+      "disposition": "DO namespace stub identity edge; no native settlement"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      140
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "select",
+      "receiver": "ns",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      140
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      117
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "Date.prototype.getTime",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      134
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "2d0cd5b29948a38703d88320994b7bb2c23a6e95f6b9fdfc6b049e987db4c99f",
+   "rawBytes": 18917,
+   "QApreparedSha256": "2d0cd5b29948a38703d88320994b7bb2c23a6e95f6b9fdfc6b049e987db4c99f",
+   "QApreparedBytes": 18917,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-generation-resolver.mjs",
+   "rawBlob": "ddaf4b847e35be04ce302176140ef65b5ea818e4",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idString",
+      "receiver": "id",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      33,
+      37
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "select",
+      "receiver": "self",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      37
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      42
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      45,
+      48
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "16f7bd44bf602fc1fa22cb9f2adce08aff91eb62145c4eb2df29d2d360b63f8a",
+   "rawBytes": 7599,
+   "QApreparedSha256": "16f7bd44bf602fc1fa22cb9f2adce08aff91eb62145c4eb2df29d2d360b63f8a",
+   "QApreparedBytes": 7599,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-historical-identity.mjs",
+   "rawBlob": "cbf7699be2ff6e330e8bfc945d6d228e4bb93714",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      52
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "prepare",
+      "receiver": "session",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      53
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "bind",
+      "receiver": "statement",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      54
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "first",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      55
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "799d6f69d868ca352c7367c3602bc193406109038ec6d6379b9a96c80096f3bd",
+   "rawBytes": 9331,
+   "QApreparedSha256": "799d6f69d868ca352c7367c3602bc193406109038ec6d6379b9a96c80096f3bd",
+   "QApreparedBytes": 9331,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-named-eligibility.mjs",
+   "rawBlob": "1c8ac8795d57fb1ff889163056146053d5647509",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      41
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "prepare",
+      "receiver": "session",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      42
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "bind",
+      "receiver": "statement",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      43
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "first",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      44
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "d6968dbe4fc2cfccf3903bdf158c3f11e0a95d83159b8b9a2bd43cb52e35c55e",
+   "rawBytes": 7143,
+   "QApreparedSha256": "d6968dbe4fc2cfccf3903bdf158c3f11e0a95d83159b8b9a2bd43cb52e35c55e",
+   "QApreparedBytes": 7143,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-named-packet-reader.mjs",
+   "rawBlob": "800f7dc409a81e7238937fa308ee5193fb138c83",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      37
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "prepare",
+      "receiver": "session",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      38
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "bind",
+      "receiver": "statement",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      39
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "first",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      41
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "cc81f096e29b52f0689182b4b75e92d49050068d6aaab25cc95088703dbd9bd7",
+   "rawBytes": 4039,
+   "QApreparedSha256": "cc81f096e29b52f0689182b4b75e92d49050068d6aaab25cc95088703dbd9bd7",
+   "QApreparedBytes": 4039,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-named-preflight.mjs",
+   "rawBlob": "62f59b70cc0a0d60ea1b5f55909960f95d822538",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idString",
+      "receiver": "id",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      57,
+      59
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "select",
+      "receiver": "self",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      59
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      60
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "t",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      60,
+      60
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "stepDo",
+      "receiver": "step",
+      "disposition": "Workflow scheduling callback (P1 reachability unproved; not counted as helper or native yet)"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      90
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "get",
+      "receiver": "ns",
+      "disposition": "DO namespace stub identity edge; no native settlement"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      90
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "select",
+      "receiver": "ns",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      90
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "7eebe489c53d4c60da61825d4eb5631e8d9841bbc690a398b22c18c0077a3534",
+   "rawBytes": 12930,
+   "QApreparedSha256": "7eebe489c53d4c60da61825d4eb5631e8d9841bbc690a398b22c18c0077a3534",
+   "QApreparedBytes": 12930,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-qa-original-pins.mjs",
+   "rawBlob": "3f7b3c5caf977f56c4ff677dc01db70db3f3beef",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      37
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "prepare",
+      "receiver": "session",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      38
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "bind",
+      "receiver": "statement",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      39
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "first",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      41
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "cf4c19d1210d0ea421db8fcf46106692c6bf1e32ebbb35e62b6b5de9c3e095e3",
+   "rawBytes": 5584,
+   "QApreparedSha256": "cf4c19d1210d0ea421db8fcf46106692c6bf1e32ebbb35e62b6b5de9c3e095e3",
+   "QApreparedBytes": 5584,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-release-runtime.mjs",
+   "rawBlob": "585dcbda7d5403e1ddb37d697457cc0899e0d03b",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "nativeDateTime",
+      "receiver": "timestamp",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      195,
+      203
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "withSession",
+      "receiver": "db",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      221
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "prepare",
+      "receiver": "session",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      222
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "bind",
+      "receiver": "statement",
+      "disposition": "D1 synchronous holder identity edge"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      223
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "all",
+      "receiver": "bound",
+      "disposition": "SQL native execution or existing fixture outer ACK; bottom capture required"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      226
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "stepDo",
+      "receiver": "step",
+      "disposition": "Workflow scheduling callback (P1 reachability unproved; not counted as helper or native yet)"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      273
+     ]
+    },
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetch",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      70,
+      133
+     ]
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      78
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      78
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      78
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "37b8285aa692ba89ff3560bec69c7593c9202db7b414e5adc1aabbb27a8513ee",
+   "rawBytes": 30005,
+   "QApreparedSha256": "37b8285aa692ba89ff3560bec69c7593c9202db7b414e5adc1aabbb27a8513ee",
+   "QApreparedBytes": 30005,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-release-successor-reservation.mjs",
+   "rawBlob": "9b6ea39f3cfe477b6f6cd4bf9f789ec18a5d816e",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "namespace",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      39
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "42c43eb8205f0c9775962b521a9ca610314390081497ecdd674c9d502206ff64",
+   "rawBytes": 6448,
+   "QApreparedSha256": "42c43eb8205f0c9775962b521a9ca610314390081497ecdd674c9d502206ff64",
+   "QApreparedBytes": 6448,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-retired-custody-reader.mjs",
+   "rawBlob": "5a33b1c408ae60f4c787ed671ee5fa03d8490db8",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "o.storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      10
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      10
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "13c30cd419a92b196239dea849dc0f11216700eb67c40f0f4364d458df4d520d",
+   "rawBytes": 1121,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "13c30cd419a92b196239dea849dc0f11216700eb67c40f0f4364d458df4d520d",
+   "MpreparedBytes": 1121
+  },
+  {
+   "path": "lib/mcp-retired-rpc-observation.mjs",
+   "rawBlob": "ccc430ca8f8dad9e5dce0387f1875469c8947938",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "dispose",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      29
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "571d3985ac4d727cdc1af41182113c9d961a50778d9e6fe4def27461b642a90b",
+   "rawBytes": 1700,
+   "QApreparedSha256": "571d3985ac4d727cdc1af41182113c9d961a50778d9e6fe4def27461b642a90b",
+   "QApreparedBytes": 1700,
+   "MpreparedSha256": "571d3985ac4d727cdc1af41182113c9d961a50778d9e6fe4def27461b642a90b",
+   "MpreparedBytes": 1700
+  },
+  {
+   "path": "lib/mcp-retired-rpc-receipt.mjs",
+   "rawBlob": "9e9c09b32236e7d37850c32e20c2e1664c1f9595",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "dispose",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      27
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "Promise.prototype.then",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      44
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "aace26bc46469f100f1ffc512ab5bc2f5cf72edb5fbd2590843f870e3308483b",
+   "rawBytes": 5868,
+   "QApreparedSha256": "aace26bc46469f100f1ffc512ab5bc2f5cf72edb5fbd2590843f870e3308483b",
+   "QApreparedBytes": 5868,
+   "MpreparedSha256": "aace26bc46469f100f1ffc512ab5bc2f5cf72edb5fbd2590843f870e3308483b",
+   "MpreparedBytes": 5868
+  },
+  {
+   "path": "lib/mcp-retirement-provider-reader.mjs",
+   "rawBlob": "27bcc5ff40e12e4ed409de083658eacccb294014",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      21
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      25
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      26
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      31
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      33
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "cbaf587f353cc718ae9b383979e0dd41d77cc66fac91244580dd662bebc16f4f",
+   "rawBytes": 4208,
+   "QApreparedSha256": "cbaf587f353cc718ae9b383979e0dd41d77cc66fac91244580dd662bebc16f4f",
+   "QApreparedBytes": 4208,
+   "MpreparedSha256": "cbaf587f353cc718ae9b383979e0dd41d77cc66fac91244580dd662bebc16f4f",
+   "MpreparedBytes": 4208
+  },
+  {
+   "path": "lib/mcp-saved-dossier-event.mjs",
+   "rawBlob": "6b2dda0badcecfd65f290d67cd063825717a8d59",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      14
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      19
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      19
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "eda401912331bb40eb151128614b023ddbf46a0eee4cc1f3d0d5d34043dcb63d",
+   "rawBytes": 3726,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "eda401912331bb40eb151128614b023ddbf46a0eee4cc1f3d0d5d34043dcb63d",
+   "MpreparedBytes": 3726
+  },
+  {
+   "path": "lib/mcp-subscription-lifecycle.mjs",
+   "rawBlob": "1b1cf4a29fe80042d35bbecdb7f2f6a952b460f2",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      53,
+      60,
+      92
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 4,
+     "rawLines": [
+      55,
+      62,
+      94,
+      114
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "transaction",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 17,
+     "rawLines": [
+      113,
+      121,
+      122,
+      125,
+      132,
+      136,
+      145,
+      157,
+      169,
+      172,
+      177,
+      183,
+      185,
+      188,
+      198,
+      200,
+      204
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "676163fc5e13647049514a90958076c3dd0a6bd3ebe1aa0ebd08b9c2dcbbe286",
+   "rawBytes": 24536,
+   "QApreparedSha256": "676163fc5e13647049514a90958076c3dd0a6bd3ebe1aa0ebd08b9c2dcbbe286",
+   "QApreparedBytes": 24536,
+   "MpreparedSha256": "676163fc5e13647049514a90958076c3dd0a6bd3ebe1aa0ebd08b9c2dcbbe286",
+   "MpreparedBytes": 24536
+  },
+  {
+   "path": "lib/mcp-successor-canary-restorer.mjs",
+   "rawBlob": "1638679062b5798874cbe63847da7035ab4931e8",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromName",
+      "receiver": "namespace",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      100
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "idFromString",
+      "receiver": "namespace",
+      "disposition": "Pure captured identity/clock selector; no I/O row"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      100
+     ]
+    },
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      109
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      109
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      153,
+      160
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "cb2927f215b15cd22970c4d5d7ce4dbede9dd5b504f1807739b4db24c2fd58cc",
+   "rawBytes": 21142,
+   "QApreparedSha256": "cb2927f215b15cd22970c4d5d7ce4dbede9dd5b504f1807739b4db24c2fd58cc",
+   "QApreparedBytes": 21142,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-successor-deployment-reader.mjs",
+   "rawBlob": "c09e266bd1833a07fac6f97483c3397d121904e7",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      20
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      23
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      23
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      35
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "0d496130d971febc102d45f63417ac191f717df594c00d07c7739506ee14377c",
+   "rawBytes": 5340,
+   "QApreparedSha256": "0d496130d971febc102d45f63417ac191f717df594c00d07c7739506ee14377c",
+   "QApreparedBytes": 5340,
+   "MpreparedSha256": "0d496130d971febc102d45f63417ac191f717df594c00d07c7739506ee14377c",
+   "MpreparedBytes": 5340
+  },
+  {
+   "path": "lib/mcp-successor-launch-gate.mjs",
+   "rawBlob": "11348f49c1e2f26436b8dcbb550dfd2348b61b73",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "first",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      33,
+      37
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      35,
+      37
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 2,
+     "rawLines": [
+      35,
+      37
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "idFromName",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      25
+     ]
+    },
+    {
+     "family": "Function.call",
+     "selector": {
+      "target": "idFromString",
+      "disposition": "fixed-selector/helper-or-dormant"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      25
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "fa1754f290de07f86b69d71a29f805f7ba55f8cd726797f1998e213fdea652ea",
+   "rawBytes": 8875,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "fa1754f290de07f86b69d71a29f805f7ba55f8cd726797f1998e213fdea652ea",
+   "MpreparedBytes": 8875
+  },
+  {
+   "path": "lib/mcp-successor-reservation.mjs",
+   "rawBlob": "ef2de272942cf3bfc4ef9a9c49981857fcb7bc39",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "SQL-member",
+     "selector": {
+      "method": "run",
+      "disposition": "native-statement/session-or-declared-facade",
+      "exclude": null
+     },
+     "expectedCount": 1,
+     "rawLines": []
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "withSession",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      28
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "prepare",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      32
+     ]
+    },
+    {
+     "family": "SQL-identity",
+     "selector": {
+      "method": "bind",
+      "disposition": "native-holder-or-declared-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      32
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "8fd6a5720f5af65ddafdf8430e29b50b94dd82dc5141f3ec457db6703d947bef",
+   "rawBytes": 6156,
+   "QApreparedSha256": "8fd6a5720f5af65ddafdf8430e29b50b94dd82dc5141f3ec457db6703d947bef",
+   "QApreparedBytes": 6156,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "lib/mcp-successor-retirement-handoff.mjs",
+   "rawBlob": "9ba62d6227090dbf989d4d887a54483fa277ad1f",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "Reflect.apply",
+     "selector": {
+      "target": "transaction",
+      "receiver": "storage",
+      "disposition": "DO storage/transaction native boundary or existing fixture outer ACK"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      53
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      55
+     ]
+    },
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "tx",
+      "method": "put",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      81
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M",
+    "QA"
+   ],
+   "rawSha256": "04955dcdab2230764cd9fb81cadb88414ce99c47200b54aa1321b3fbd39c4083",
+   "rawBytes": 8337,
+   "QApreparedSha256": "04955dcdab2230764cd9fb81cadb88414ce99c47200b54aa1321b3fbd39c4083",
+   "QApreparedBytes": 8337,
+   "MpreparedSha256": "04955dcdab2230764cd9fb81cadb88414ce99c47200b54aa1321b3fbd39c4083",
+   "MpreparedBytes": 8337
+  },
+  {
+   "path": "lib/operations-service-request-controls.mjs",
+   "rawBlob": "bd57f39938461f3022ab8d5c24d07733457d4f38",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      24
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      30
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      42
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "96ac89936dc048d294acc01112343d1207122d9c70d2d5ea02fbedb1fe7e9191",
+   "rawBytes": 2735,
+   "QApreparedSha256": "96ac89936dc048d294acc01112343d1207122d9c70d2d5ea02fbedb1fe7e9191",
+   "QApreparedBytes": 2735,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "scripts/check-own-cron-provider.mjs",
+   "rawBlob": "fcae8fe3eff333021e548874032e459b1caef265",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "direct-fetch",
+     "selector": {
+      "callee": "fetchImpl",
+      "disposition": "actual-native-fetch-or-declared-caller-facade"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      108
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "body",
+      "method": "getReader",
+      "disposition": "actual-reader-identity"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      115
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      117
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "cancel",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      136
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "3e37e556ccec5644f81c4449a2c6731b86d1fa886d5c05c7dbcd24894285121c",
+   "rawBytes": 11088,
+   "QApreparedSha256": "3e37e556ccec5644f81c4449a2c6731b86d1fa886d5c05c7dbcd24894285121c",
+   "QApreparedBytes": 11088,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "worker/independent-closure/index.mjs",
+   "rawBlob": "2847bf94f2aeca072f66866ed1bce07e9fcd4613",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "member",
+     "selector": {
+      "receiver": "storage",
+      "method": "get",
+      "disposition": "typed-storage-or-existing-facade"
+     },
+     "expectedCount": 6,
+     "rawLines": [
+      103,
+      106,
+      115,
+      115,
+      120,
+      130
+     ]
+    },
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "this.env.AFW_QA_PREREGISTRY",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 5,
+     "rawLines": [
+      160,
+      160,
+      160,
+      160,
+      160
+     ]
+    },
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "env.AFW_QA_PREREGISTRY",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 3,
+     "rawLines": [
+      165,
+      228,
+      240
+     ]
+    },
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "env.AFW_QA_PROVISIONING",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      177
+     ]
+    },
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "env.AFW_QA_CATALOG",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      227
+     ]
+    },
+    {
+     "family": "body",
+     "selector": {
+      "receiver": "reader",
+      "method": "read",
+      "disposition": "captured-body-native-invocation"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      179
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "5aa5c057aa248b9bba50071cca3385209984668eb4f9178e3af39d2798569d6b",
+   "rawBytes": 27865,
+   "QApreparedSha256": "5aa5c057aa248b9bba50071cca3385209984668eb4f9178e3af39d2798569d6b",
+   "QApreparedBytes": 27865,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "worker/independent-closure/occurrence-host.mjs",
+   "rawBlob": "be903edb4ade26c16f06c7fd310b2ffe708fe0ad",
+   "roles": [
+    "QA"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "namespace",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      18
+     ]
+    }
+   ],
+   "actualRoles": [
+    "QA"
+   ],
+   "rawSha256": "e3cf284aa02a51011ad56847e6c98a4f3e478afd7f37d5f350dbf66c2e5efbba",
+   "rawBytes": 2320,
+   "QApreparedSha256": "e3cf284aa02a51011ad56847e6c98a4f3e478afd7f37d5f350dbf66c2e5efbba",
+   "QApreparedBytes": 2320,
+   "MpreparedSha256": null,
+   "MpreparedBytes": null
+  },
+  {
+   "path": "worker/mcp-own/index.mjs",
+   "rawBlob": "089e5313eb22d017b8dfe4e6daba73c8c7753cbc",
+   "roles": [
+    "M"
+   ],
+   "preparedStage": {
+    "M": "original",
+    "QA": "after-existing-fixture-composition"
+   },
+   "selectors": [
+    {
+     "family": "identity",
+     "selector": {
+      "receiver": "c.pins.AFW_DOSSIER_EVENTS_NODE",
+      "method": "get",
+      "disposition": "typed-namespace-holder-only"
+     },
+     "expectedCount": 1,
+     "rawLines": [
+      94
+     ]
+    }
+   ],
+   "actualRoles": [
+    "M"
+   ],
+   "rawSha256": "2bc6d79e04769455f599bbc858565afb814eba0e9eb9357eabbee6e9b87ed496",
+   "rawBytes": 10077,
+   "QApreparedSha256": null,
+   "QApreparedBytes": null,
+   "MpreparedSha256": "2bc6d79e04769455f599bbc858565afb814eba0e9eb9357eabbee6e9b87ed496",
+   "MpreparedBytes": 10077
+  }
+ ],
+ "packages": [
+  {
+   "path": "node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "bytes": 251149,
+   "sha256": "bb2b85243221906d1705653a82678dab2f0020a14ef8faa7d86d764890610e80",
+   "selectors": {
+    "kv": 44,
+    "fetch": 2,
+    "readCancel": 9,
+    "requestFormData": 1,
+    "readerFactory": 3,
+    "requestClone": 1
+   },
+   "excludedDispatchFetch": 9,
+   "semantics": "QA private OAUTH_KV facets are outer calls; M actual OAUTH_KV and QA existing fixture bottom calls are native by captured pair; same native Promise"
+  },
+  {
+   "path": "node_modules/agents/dist/handler-stateless-VvrWSAVA.js",
+   "roles": [
+    "M"
+   ],
+   "bytes": 13056,
+   "sha256": "e8a4d4802990ac3f434c8c84b8820dfd9510421ad6ac1e8a44ce628f42250bde",
+   "selectors": {
+    "read": 2,
+    "cancel": 2,
+    "readerFactory": 2
+   },
+   "semantics": "existing local SSE body adapters over transport.handleRequest response; captured original request transport scope; two actual API read/cancel layers, not outbound fetch calls"
+  },
+  {
+   "path": "node_modules/@modelcontextprotocol/server/dist/index.mjs",
+   "roles": [
+    "M"
+   ],
+   "bytes": 80210,
+   "sha256": "4494af7ea28b45d1655df5a67dcbd6079a50cbe382f811d82441ad2004bf4d60",
+   "selectors": {
+    "read": 1,
+    "cancel": 1,
+    "readerFactory": 1,
+    "requestJson": 1,
+    "requestText": 1,
+    "requestClone": 2
+   },
+   "semantics": "classifyEntryRequest and WebStandardStreamableHTTPServerTransport request consumers; local SSE producer; legacy fallback adapter is dormant under Agents legacy stateless lane"
+  },
+  {
+   "path": "node_modules/jose/dist/webapi/jwks/remote.js",
+   "roles": [
+    "M",
+    "QA"
+   ],
+   "selectors": {
+    "fetchImpl": 1,
+    "responseJson": 1
+   },
+   "semantics": "fixed remote-JWKS helper; expected installed source metadata/hash required at preflight; opaque JSON bytes",
+   "bytes": 5258,
+   "sha256": "2b64e5710a3b59a2ecae7084bbe6ac725a1356c84449f32ee32b3a32c040b63a"
+  }
+ ],
+ "bodyEvidence": {
+  "artifactId": 13586248119,
+  "source": "e8b2ebed173ea4ce38040db3b19368918e72c79a",
+  "run": "42403413324",
+  "attempt": "1",
+  "zipSha256": "b342ff82ad1ab43918d0ae5b2631cccb63f1f0faefce210a1a7fa71a7a337002",
+  "Msha256": "c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32",
+  "excerpts": [
+   {
+    "label": "// node_modules/agents/dist/handler-stateless-VvrWSAVA.js",
+    "compiledStart": 1772115,
+    "compiledEnd": 1784908,
+    "bytes": 12793,
+    "sha256": "e8fa1845a5831733775327ebd5817db7d3ceb60d8f02d9c3badc45e06987ea57"
+   },
+   {
+    "label": "// node_modules/@modelcontextprotocol/server/dist/index.mjs",
+    "compiledStart": 1756568,
+    "compiledEnd": 1759973,
+    "bytes": 3405,
+    "sha256": "1003cd1f74f2a8c8a15118ff3881481452b9ab3d10ffbafeceec43dc6d1f853f"
+   }
+  ],
+  "mcpModule": {
+   "label": "// node_modules/@modelcontextprotocol/server/dist/index.mjs",
+   "compiledStart": 1721458,
+   "compiledEnd": 1772114,
+   "bytes": 50658,
+   "sha256": "9b1bb51f64d8fb4fa53797a86e01b63c18729506819a234c1e3309d6eb6526b6"
+  },
+  "extractedBytes": 71856,
+  "buffersReleased": true
+ },
+ "runtimeShape": {
+  "call": "observe the original receiver/function pair; invoke once via the original call form; return the identical native Promise/value/error",
+  "identity": "weak maps only; namespaces/session/statements/transactions/Response/stream/reader/clone; no new env proxy or method replacement",
+  "body": "tag fulfilled fetch Response only; observe actual body/getReader/clone accesses; no eager getter/read; each actual read/cancel has its own row; bytes only on read",
+  "callback": "capture actual immutable Root/child/phase at body reader acquisition; use that capture for later original reader calls/settlement, without replacing stream callbacks or using mutable current phase",
+  "scope": "ALS run/getStore only, exact Source lease/deadline acquisition; explicit fixture exclusions; missing unproven business context is incomplete",
+  "limits": "16384 cap unchanged; all unknown/overflow/foreign association/selector mismatch fails qualification before acceptance; never changes Source guards or calls"
+ },
+ "operationalReadiness": false,
+ "completePackage": false,
+ "PCoff": false,
+ "entry": {
+  "role": "QA",
+  "stage": "after existing literal fixture composition, before new observation edits",
+  "bytes": 64800,
+  "sha256": "89ae285b8f00fdf95eecfeee37673138f4c136c7704f245152051a3be2985257",
+  "reflectSelectors": {
+   "native.put → kv": 3,
+   "native[method] → kv": 2,
+   "native.transaction → s": 2,
+   "put → tx": 1,
+   "native.storageGet → s": 1,
+   "native.sync → s": 2,
+   "session → db": 1,
+   "prepare → s": 1,
+   "bind → stmt": 1,
+   "first → bound": 2,
+   "get → kv": 1,
+   "list → kv": 1,
+   "del → kv": 1,
+   "withSession → db": 3,
+   "prepare → session": 3,
+   "bind → statement": 1,
+   "native.list → s": 1,
+   "method → holder": 1,
+   "fetcher → globalThis": 3,
+   "originalPrepare → db": 1,
+   "nodeName → originalNode": 1,
+   "selfGet → originalSelf": 1,
+   "kvGet → originalKv": 1,
+   "get → s": 1,
+   "alarm → s": 1,
+   "list → s": 1,
+   "actualFetch → globalThis": 3,
+   "dbSession → db": 2,
+   "nodeString → node": 1,
+   "nt → s": 5,
+   "ns → s": 7,
+   "ng → s": 2,
+   "all → statement": 1,
+   "nlist → s": 1,
+   "nga → s": 1
+  },
+  "disposition": "normal existing wrapper native leaves; named seed/config/probe RPCs excluded; negative branches dormant"
+ },
+ "preparedHashRule": "Recorded QA hashes refer to e8 compile-only evidence. Existing approval/identity literals vary through the unmodified fixture; final preflight records actual pre-hook hashes and validates composition markers/counts. M uses raw source hashes, never QA overrides."
+});
