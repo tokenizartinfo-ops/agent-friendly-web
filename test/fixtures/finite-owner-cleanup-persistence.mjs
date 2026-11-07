@@ -187,6 +187,10 @@ export async function verifyCleanupQualificationPremises(){
 `;
  const issuer=await build({bundle:true,write:false,metafile:true,platform:'neutral',mainFields:['module','main'],format:'esm',target:'es2022',external:['node:*','cloudflare:*'],stdin:{contents:source,resolveDir:process.cwd()}});
  const base={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],kvNamespaces:{OAUTH_KV:'SYN-sdk-component-only'},outboundService:async()=>new Response(null,{status:503})};
+ await mkdir('output/owner-cleanup-preflight',{recursive:true});
+ await writeFile('output/owner-cleanup-preflight/sdk-only-index.mjs',candidate.script);await writeFile('output/owner-cleanup-preflight/sdk-only-metafile.json',json(candidate.metafile));
+ await writeFile('output/owner-cleanup-preflight/M-index.mjs',M.script);await writeFile('output/owner-cleanup-preflight/M-metafile.json',json(M.metafile));
+ await writeFile('output/owner-cleanup-preflight/component-index.mjs',issuer.outputFiles[0].text);await writeFile('output/owner-cleanup-preflight/component-metafile.json',json(issuer.metafile));
  const mf=new Miniflare(convertV4MiniflareOptions({workers:[{...base,name:'sdk-component-issuer',script:issuer.outputFiles[0].text},{...base,name:'sdk-only-first-connection',script:candidate.script}]}));let negative,response;
  try{
   const O='https://delegated-canary.agentfriendlyweb.dev',owner=await mf.getWorker('sdk-component-issuer');negative=await mf.getWorker('sdk-only-first-connection');const kv=await mf.getKVNamespace('OAUTH_KV','sdk-component-issuer');
@@ -199,15 +203,17 @@ export async function verifyCleanupQualificationPremises(){
   response=await negative.fetch(O+'/_fixture/sdk-only-exchange',{method:'POST',headers:{'Content-Type':'application/json'},body:json({subjectToken:token.access_token,sdkGrantId:before.id,clientId:data.clientId,correlationHash:'a'.repeat(64),referenceHash:'b'.repeat(64),C0:Date.now()+75000})});assert.equal(response.status,403);
   const held=await (await negative.fetch(O+'/_fixture/sdk-only-signal')).json();assert(held.reached&&held.retained&&!held.settled);assert.equal(held.logicalReason,'deadline');
   const busy=await negative.fetch(O+'/_fixture/sdk-only-exchange',{method:'POST'});assert.equal(busy.status,409);await busy.body?.cancel();
-  const body=response.text();await negative.fetch(O+'/_fixture/sdk-only-release');assert.equal(await body,'SYN SDK-only denied');
+  const body=response.text();await waitUntil(held.rootStartedAt+80000);await negative.fetch(O+'/_fixture/sdk-only-release');assert.equal(await body,'SYN SDK-only denied');
   const settled=await (await negative.fetch(O+'/_fixture/sdk-only-signal')).json();assert(settled.settled&&!settled.retained);assert(settled.nativeReturned&&settled.sdkReturned);
   const result={purpose:'afw.cleanup-sdk-premises.component.syn.v1',source:process.env.GITHUB_SHA,noAFWI0:true,noBusinessAdmission:true,componentOnly:true,originalGrant:sha(before.id),preExchangeExpiresAt:null,codeKVExpiration:listed.keys[0].expiration,postExchangeExpiresAt:after.expiresAt,actualAccessTTL:token.expires_in,refreshAbsent:true,held,settled,M:{sha256:sha(M.bytes),bytes:M.bytes.length,inputs:Object.keys(M.metafile.inputs).length},SDKOnly:{sha256:candidate.sha256,bytes:candidate.bytes,inputs:Object.keys(candidate.metafile.inputs).length},operationalReadiness:false,completePackage:false,PCoff:false};
-  await mkdir('output/owner-cleanup-preflight',{recursive:true});await writeFile('output/owner-cleanup-preflight/result.json',json(result));
-  await writeFile('output/owner-cleanup-preflight/sdk-only-index.mjs',candidate.script);await writeFile('output/owner-cleanup-preflight/sdk-only-metafile.json',json(candidate.metafile));
-  await writeFile('output/owner-cleanup-preflight/M-index.mjs',M.script);await writeFile('output/owner-cleanup-preflight/M-metafile.json',json(M.metafile));
-  await writeFile('output/owner-cleanup-preflight/component-index.mjs',issuer.outputFiles[0].text);await writeFile('output/owner-cleanup-preflight/component-metafile.json',json(issuer.metafile));
-  const files=await inventory('output/owner-cleanup-preflight');await writeFile('output/owner-cleanup-preflight/manifest.json',json({source:process.env.GITHUB_SHA,files}));console.info('R2 directed SDK premises',json(result));
- }finally{if(negative)await negative.fetch('https://delegated-canary.agentfriendlyweb.dev/_fixture/sdk-only-release').catch(()=>{});await mf.dispose();}
+  await writeFile('output/owner-cleanup-preflight/result.json',json(result));console.info('R2 directed SDK premises',json(result));
+ }catch(error){
+  const signal=negative?await (await negative.fetch('https://delegated-canary.agentfriendlyweb.dev/_fixture/sdk-only-signal')).json().catch(()=>null):null;
+  await writeFile('output/owner-cleanup-preflight/failure.json',json({source:process.env.GITHUB_SHA,noAFWI0:true,name:error.name,message:error.message,signal}));throw error;
+ }finally{
+  if(negative)await negative.fetch('https://delegated-canary.agentfriendlyweb.dev/_fixture/sdk-only-release').catch(()=>{});
+  await mf.dispose();const files=await inventory('output/owner-cleanup-preflight');await writeFile('output/owner-cleanup-preflight/manifest.json',json({source:process.env.GITHUB_SHA,files}));
+ }
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
