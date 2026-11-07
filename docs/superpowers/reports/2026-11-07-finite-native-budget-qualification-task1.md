@@ -1262,3 +1262,12 @@ Status: IN_PROGRESS / NEEDS_CONTEXT for further activation; Task1 is not complet
 - External tooling warnings retained in job log: npm package deprecations and GitHub action Node20→24 runtime warning; none was the failing gate. The sole observed gate failure is the CLI import cycle.
 
 TEMP is retired in this terminal cleanup commit. Source implementation remains preserved and unqualified; no automatic retry, main update, PR/publication, provider/runtime/auth action or owner request. operationalReadiness=false,completePackage=false,PCoff=false; real Workflow execution, global native drain and SDK namespace emptiness remain unproved. Root's fresh Spec/Quality review and Task2 remain pending. Further Source fixes/activation require Root's concrete continuation ruling under the failed-run condition; STOP_WRITES after terminal readbacks unless that ruling arrives.
+
+
+## Focused CLI cycle correction and corrected qualification authorization — 2026-11-07
+
+Root resumed this same Task1 at Source21d795f3b2a359266fa2d22ae6a74a28216cfc30. Binding Rootdocs976be2c15de7f811a2406eaa130883db10ec40c3 records independent verification of failed run42416460642 and the world CLI→dynamic initial-entry→static world module-evaluation cycle. Root authorizes one focused correction and one corrected final-nine qualification, not a general retry or new scope.
+
+Only the world CLI dispatch changes: the same filename/argv/command branches now execute in an async main scheduled by setImmediate after the module completes evaluation. Its rejection handler prints the error and explicitly sets process.exitCode=1; no unobserved rejection or success-on-error path is intended. Non-CLI imports remain inert. All world text before the CLI block is byte-for-byte unchanged; selectors, runtime observation, Source guards/clocks/TTL and business code are unchanged for this correction.
+
+The exact three-job TEMP from failed Source23e7800 is restored unchanged (workflow blob8e940dcf91efcdbc167088386c086ef90cc87578). New revision must run all8Q plus exact AST preflight again before any I0, then the same original900s principal producer/P1 consumer; old8PASS cannot be added to a new P1. Same contents:read/self-path push trigger, timeouts, seven-day artifacts and exact-ID readbacks. Source freezes on activation until terminal. Another failure will be preserved and reported without automatic retry/widening. Prior failed history above is retained. All readiness flags remain false; no actual provider/runtime/auth/main/publication action.

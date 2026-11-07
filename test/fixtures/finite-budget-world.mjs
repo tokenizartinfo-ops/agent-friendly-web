@@ -623,10 +623,14 @@ export async function verifyBudgetArtifact(root,kind,artifactId){
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
- const [command,root]=process.argv.slice(2);
- if(command==='preflight-budget')await preflightBudgetCompilation();
- else if(command==='prepare-positive')await prepareBudgetProducer('positive',root);
- else if(command==='verify-positive')await verifyBudgetCheckpoint('positive',root);
- else if(command==='inspect-budget-graphs')await inspectBudgetCompilation(root);
- else throw Error('SYN budget command unsupported before I0');
+ const main=async()=>{
+  const [command,root]=process.argv.slice(2);
+  if(command==='preflight-budget')await preflightBudgetCompilation();
+  else if(command==='prepare-positive')await prepareBudgetProducer('positive',root);
+  else if(command==='verify-positive')await verifyBudgetCheckpoint('positive',root);
+  else if(command==='inspect-budget-graphs')await inspectBudgetCompilation(root);
+  else throw Error('SYN budget command unsupported before I0');
+ };
+ // Finish this module before command work imports fixtures that import it.
+ setImmediate(()=>{main().catch(error=>{console.error(error);process.exitCode=1;});});
 }
