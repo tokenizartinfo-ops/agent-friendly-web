@@ -2,9 +2,9 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — 2026-11-07: G4 con contexto de referencias, sujeto al cierre de hoy
+## CURRENT — 2026-11-07: corregir colisión local; último G5 de hoy
 
-Task1 sigue en implementación, sin aceptación. Sourceb305ca3deac19546f28169bfc71d6703f145e47f, TEMP retirado, writer Astra STOP hasta reanudación. G3 pasó8Q y compiló M; QA detectó10targets de asignación/update transformados indebidamente. Root aprueba predicado compartido de contexto de referencia, regresión del visitante real dentroQ5 y UN G4 sólo si puede activar antes22:28UTC. CierreRoot22:55UTC/PCoffdelowner23:00UTC, no es el ensayoPCoff. Main0c9c475b intacto. Readiness/package/PCofffalse; sin paso humano pendiente.
+Task1 sigue en implementación, sin aceptación. Source68a65ff881a2ce9f90307dde303ba60de1a3b8f2, TEMP retirado, writerAstra STOP hasta reanudar. G4 se detuvo en sintaxis por un nombre duplicado dentroQ5; no ejecutó tests/lint/preflight/nativo. Root autoriza renombrar sólo el binding nuevo y UN G5, último de hoy, si se activa antes22:28UTC. El predicado de referencias sigue sin calificar. Guardar/cerrar22:55UTC antes del apagado23:00UTC. Todos los readiness false; sin paso humano pendiente.
 
 ## Estado inicial del plan preservado — 7Nov17:59UTC
 
@@ -307,3 +307,17 @@ Regresión dentroQ5, aún8Q: emitir snippets fijos con el helper real y esbuild.
 Autorizar MISMO Astra en world/Q5/reporte/TEMP dentro13paths y UN final9 G4, con mismo TEMPblob8e940dcf91efcdbc167088386c086ef90cc87578 y original900s/C0/C1/Root30s/child5s. Repetir8Q+preflight sobre el nuevoSHA antesI0, sin sumar resultados anteriores ni rebajar aserciones. Congelar Source activación→terminal; artefactos7d/sameIDreadback/retirada/report/STOP y revisión fresca posterior obligatoria. Nueva falla vuelve a evidencia/NEEDS_CONTEXT, no retry.
 
 Restricción horaria nueva del owner: PC se apaga23:00UTC/20:00Argentina7Nov. Root guarda/cierra22:55UTC. G4 sólo se activa si está listo ANTES22:28UTC para dejar margen al linaje original, readback y retiro. Si no llega, guardar el fix sinTEMP/activación ySTOP; se retomará mañana. No iniciar otra suite/linaje que quede pendiente al apagado ni alargar plazos para acomodarlo. No paso humano necesario. Sin CFAPI/runtime/auth/tokens/permisos/main/PR/publicación/Max/mail; operationalReadiness=false;completePackage=false;PCoff=false.
+
+### 2026-11-07 — G4 detenido en sintaxis; rename local y último G5 de hoy
+
+Root verificó logs primarios128545613974 y SourceG4ce65a00531ff00410d305ad8fb4ff6a26fcd3384. Run42419815858/attempt1/eventpush terminóFAIL22:16:49UTC. El Q5 nuevo declaró observed enlínea172, mientras el Q5 previo conserva observed enlínea194 en el mismo scope. Node--check rechaza la segunda declaración; no fue un fallo de predicate ni del Source original. Tests/lint/preflight/I0 NO corrieron; no trasladar8PASS deG3. Prepare128545734229 yconsume128545733743SKIPPED.
+
+Artifact13593072163,338B/SHAf249121765d1889d56e04e4b9572348663f1fe6017d9fb8bd9e074c64d946295, expira14Nov22:16:43UTC. Sólo budget-artifact.json, manifest262B/SHA41b4100aff4693a5834a5115fe6b0d76cc61cfc72ab2004b912e5d3eb96aa706 y files=[]. Same-IDreadbackPASS acredita ese inventario de un archivo, no logs de tests ausentes. El error/caret/exit1 está en el job primario, preservado en reporte. No extracción local.
+
+Root verificó68a65ff881a2ce9f90307dde303ba60de1a3b8f2/tree12a024cab26240b28b8b5884a66cf9ae1a179930,parentce65: sóloTEMPretirado+11líneas de reporte a31112a6dfa36507c6183fdba8c99780941bfd4e. Writer confirmó3186leaves/12diferenciaspermitidas/protegidos/main0c9c475b intactos/0cleanup-runs. NEEDS_CONTEXT yhandling-reports fresco antes de esta continuación.
+
+Ruling: permitir MISMO Astra corregir únicamente el binding observado NUEVO de la fixture sintética Q5líneas172–176, renombrándolo identityObserved y sus referencias de ese bloque. Conservar observed original de runtime y todos los demás bytes de tests fuera de ese fragmento, todos los valores/asserts/expectativas/predicado/world/runtime/mapa/Source/clock. Demostrar comparación exacta antes/después por fragmento; no nueva implementación ni diagnóstico. El error era una colisión léxica concreta, no una razón para cambiar arquitectura.
+
+Restaurar MISMO TEMPblob8e940dcf91efcdbc167088386c086ef90cc87578 y autorizar UN G5 sobre nuevoSHA, ÚLTIMA calificación de hoy y sólo si activa ANTES22:28UTC. Rehacer sintaxis/lint/8Q/preflightM+QA antesI0, luego mismoP1/900s/C0/C1/Root30s/child5s, nunca sumar pases viejos. Sourcefrozen hasta terminal, artefactos7d/sameIDreadback/retirarTEMP/report/protegidos/main/STOP. Si G5 falla, preservar y limitarse a análisis/guardado; no G6 hoy por este ruling. Si no llega al corte de activación, guardar rename sinTEMP/CI ySTOP.
+
+Se mantiene Rootclose22:55UTC y ownerPCoff23:00UTC/20:00Argentina, sin ampliar plazos ni dejar una ejecución propia pendiente al apagado. El apagado del owner es cierre de trabajo, no ensayoPCoff. Todos los readiness permanecen false, Task1/reviews/Task2 pendientes. Sin paso humano ni CFAPI/runtime/auth/permisos/tokens/cron/consumidores/main/PR/publicación/Max/mail.

@@ -1,16 +1,16 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 2026-11-07: corregir contexto de referencias; cierre de hoy22:55UTC
+## CURRENT — 2026-11-07: rename Q5 y último G5 de hoy; cierre22:55UTC
 
 Autoridad: docs/superpowers/progress/2026-11-07-finite-native-budget-qualification.es.md y los addenda vigentes de su spec/brief de escalación. El mapa preparado fue aceptado por Root en3f29a04d:130paths,635grupos, roles M/QA separados, aliases y cuerpos asociados, observación de guard por scope y límites de evidencia. Eso autoriza implementar/probar; no acredita cobertura nativa observada.
 
-Source actualb305ca3deac19546f28169bfc71d6703f145e47f/treea87c3a80b1e5fb32f154e00a4042bad2d89a8687, reporteTask1blob42add5877c6eb4af359a1576d5f26ed9ef26957d, TEMP retirado. Único implementador /root/finite_budget_architecture_impl,Astra high; Root sólo docs/finite-pcoff-continuation-20261103. Main0c9c475b y Core/package/lock/config intactos.
+Source actual68a65ff881a2ce9f90307dde303ba60de1a3b8f2/tree12a024cab26240b28b8b5884a66cf9ae1a179930; reporteTask1bloba31112a6dfa36507c6183fdba8c99780941bfd4e,TEMP retirado. Único implementador /root/finite_budget_architecture_impl,Astra high; Root sólo docs/finite-pcoff-continuation-20261103. Main0c9c475b/Core/package/lock/config intactos.
 
-G1CLI y G2literales extranjeros tienen correcciones demostradas. G3run42418864856/attempt1,Source42debdc2, pasó8Q/syntax/lint y M-compile-done. QA detectó10targets inválidos:4updates de contadores y6asignaciones de bindings habían sido sustituidos por llamadas. No I0; jobs nativos omitidos. Artifact13592134907,same-ID4filesPASS. Todos los fallos/evidencia siguen preservados, no9PASS ni Task1aceptada.
+G3 pasó8Q/Mcompile y detectó targets de escritura mal transformados enQA. La corrección de contexto se implementó enG4, pero éste se detuvo en sintaxis por el binding NUEVO observed deQ5 que duplica uno previo. Run42419815858/attempt1: tests/lint/preflight/nativo NO ejecutados. Artifact13593072163 contiene sólo manifest; error preservado en log primario/reporte. No afirmar que el predicado ya está calificado ni trasladar pases anteriores.
 
-NEXT aprobado: mismo escritor debe introducir clasificación compartida de referencias para omitir sólo targets reales de escritura/delete/update/destructuring/for, mientras conserva lecturas de receptores/keys/RHS. Factorizar bloque existente de identidad como helper Node-only usado por el visitante real y regresiónQ5, todavía8Q. Snippets sintéticos/esbuild.transform sin bundle ni módulos de negocio; preflight completo M/QA sigue gate antesI0. Después UN G4 con mismoTEMP3jobs, original900s/C0/C1/Root30s/child5s, artefactos7d/readback/retirada/STOP. No otro diagnóstico ni cambios Source/mapa/runtime/selectores.
+NEXT: MISMO writer, renombrar exclusivamente binding nuevo observed→identityObserved y sus usos en su bloqueQ5, conservar binding runtime original y todos los otros bytes/expectativas/predicado/Source. Restaurar mismoTEMP3jobs y UN G5 sobreSHA nuevo con sintaxis/lint/8Q/preflightM+QA antesI0 y mismoP1 original900s/C0/C1/Root30s/child5s. Es la ÚLTIMA calificación de hoy. Activar sólo ANTES22:28UTC; si no llega, guardar sinTEMP/CI ySTOP. Cualquier fracasoG5 se preserva/analiza, no G6 hoy.
 
-HORARIO: owner apagará PC23:00UTC/20:00Argentina; Root guarda/cierra22:55UTC. Activar G4 sólo antes22:28UTC; si no está listo, conservar fix sinTEMP/CI ySTOP. No ampliar clocks ni dejar linaje pendiente al apagado. Esto es cierre de trabajo, no ensayoPCoff. No paso humano necesario.
+Root guarda/cierra22:55UTC; owner apagará23:00UTC/20:00Argentina. Sin reloj extendido ni ejecución propia pendiente al apagado. Artefactos7d/readback/retiradaTEMP/reporte/STOP y revisión fresca siguen obligatorios. Esto es cierre de trabajo, no ensayoPCoff; no paso humano pendiente.
 
 Task1 BASE29681ca/tree0200cf32. R0 causal SDKcomplete1+Reference/302 y el inventario compile-only ya están preservados; no repetirlos ni las suites antiguas56 por inercia. Task1 sigue sin aceptar, luego revisión fresca Spec+Quality, Task2 y revisión conjunta. Después siguen etapas funcionales posteriores, candidato/custodia/ejecutor cloud actuales y UNA ocurrencia real coordinada con PC apagada; Max tiene alcance separado.
 
