@@ -4,7 +4,7 @@ PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; 
 
 ## CURRENT — 2026-11-07: corregir colisión local; último G5 de hoy
 
-Task1 sigue en implementación, sin aceptación. Source68a65ff881a2ce9f90307dde303ba60de1a3b8f2, TEMP retirado, writerAstra STOP hasta reanudar. G4 se detuvo en sintaxis por un nombre duplicado dentroQ5; no ejecutó tests/lint/preflight/nativo. Root autoriza renombrar sólo el binding nuevo y UN G5, último de hoy, si se activa antes22:28UTC. El predicado de referencias sigue sin calificar. Guardar/cerrar22:55UTC antes del apagado23:00UTC. Todos los readiness false; sin paso humano pendiente.
+Task1 sin aceptación. Sourcebbe7e518eac6b548e05384806da2f78c66c2e1e7 FROZEN en G5run42420218406/attempt1/eventpush. Purejob128546815140 PASS: sintaxis/lint/8Q y preflight completoM/QA; productor128546981834 activo a22:23:44UTC en el ciclo original. ResultadoP1/nativo todavía pendiente. Es la última calificación de hoy, noG6. Root guarda/cierra22:55UTC, owner apaga23:00UTC. Todos los readiness false; sin paso humano.
 
 ## Estado inicial del plan preservado — 7Nov17:59UTC
 
@@ -321,3 +321,13 @@ Ruling: permitir MISMO Astra corregir únicamente el binding observado NUEVO de 
 Restaurar MISMO TEMPblob8e940dcf91efcdbc167088386c086ef90cc87578 y autorizar UN G5 sobre nuevoSHA, ÚLTIMA calificación de hoy y sólo si activa ANTES22:28UTC. Rehacer sintaxis/lint/8Q/preflightM+QA antesI0, luego mismoP1/900s/C0/C1/Root30s/child5s, nunca sumar pases viejos. Sourcefrozen hasta terminal, artefactos7d/sameIDreadback/retirarTEMP/report/protegidos/main/STOP. Si G5 falla, preservar y limitarse a análisis/guardado; no G6 hoy por este ruling. Si no llega al corte de activación, guardar rename sinTEMP/CI ySTOP.
 
 Se mantiene Rootclose22:55UTC y ownerPCoff23:00UTC/20:00Argentina, sin ampliar plazos ni dejar una ejecución propia pendiente al apagado. El apagado del owner es cierre de trabajo, no ensayoPCoff. Todos los readiness permanecen false, Task1/reviews/Task2 pendientes. Sin paso humano ni CFAPI/runtime/auth/permisos/tokens/cron/consumidores/main/PR/publicación/Max/mail.
+
+### 2026-11-07 22:28:13 UTC — G5 activo, gate puro completo; todavía no hay P1
+
+ActivaciónG5bbe7e518eac6b548e05384806da2f78c66c2e1e7/tree215644d0342d7794890e555699ddbd5f5ab7ba80 a22:21:12UTC, antes del corte. Run42420218406/attempt1/eventpush. Root verificó único parent68a65ff, sóloQ5/report/TEMP; workflowblob8e940dcf exacto. Comparó el texto entero Q5 con el anterior: sólo8tokens observed en el fragmento sintético de5líneas cambian aidentityObserved; todos los otros bytes y el binding runtime original quedan exactos. Q5blob75d39b53c06c1891ae8ed6786a4c7e3dae6f516e.
+
+Root comparó árboles recursivos completos: BASE3179hojas ySourceG53187, exactamente13pathspermitidos (incluidoTEMPactivo), todos los demás SHA/modos/tipos exactos. Los11archivos de implementación cacheados para preparar revisión coinciden con el árbol nuevo. No cambios de producto/config/package/SDK/Core.
+
+Purejob128546815140 SUCCESS:8tests/8pass/0fail/cancel/skip/todo,753.56564ms; sintaxis/lint y preflight completo de roles preparados tambiénPASS. Pureartifact13593241365 tiene5archivos y SAME-IDreadbackPASS,manifest846B/SHA8d42424578d27964e6728cbc14dc6deab58dd63e57f465ae0ed5bb960640ec69. A22:23:44UTC productor128546981834 seguía en Actual SDK Notice and original native 900s checkpoint. El pipeline principal produce y preserva su checkpoint, luego espera por contrato hastaC0−120s; esa espera no amplía I0/C0/C1. No inferir éxito de SDK/P1/retirada ni de9checks mientras faltan los jobs terminales.
+
+Source sigue congelado; monitorizar esta misma ejecución, preservar/retirarTEMP/report/STOP al terminal. NoG6hoy. Preparación de revisión está en memoria/orquestaciónGitHub; sólo se despacha Task1review fresca después de un reporteDONE válido. CierreRoot22:55UTC antes dePCoffowner23:00UTC; no paso humano. operationalReadiness=false;completePackage=false;PCoff=false.
