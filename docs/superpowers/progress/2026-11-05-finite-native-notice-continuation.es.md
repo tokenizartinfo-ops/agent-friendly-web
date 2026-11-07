@@ -1,16 +1,16 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 2026-11-07: rename Q5 y último G5 de hoy; cierre22:55UTC
+## CURRENT — 2026-11-07: G5 falló por límite diagnóstico; inspección de artefacto y cierre
 
 Autoridad: docs/superpowers/progress/2026-11-07-finite-native-budget-qualification.es.md y los addenda vigentes de su spec/brief de escalación. El mapa preparado fue aceptado por Root en3f29a04d:130paths,635grupos, roles M/QA separados, aliases y cuerpos asociados, observación de guard por scope y límites de evidencia. Eso autoriza implementar/probar; no acredita cobertura nativa observada.
 
-Source actualbbe7e518eac6b548e05384806da2f78c66c2e1e7/tree215644d0342d7794890e555699ddbd5f5ab7ba80 FROZEN enG5run42420218406/attempt1/eventpush. Purejob128546815140 PASS8Q/syntax/lint/preflightM+QA; productor128546981834 activo, sin resultadoP1 todavía. TEMPactivo exacto8e940dcf. Última calificación de hoy; noG6. Root sólo docs; writerAstra sóloSource. Core/package/lock/config/protegidos comprobados exactos aBASE296.
+Source actual868f158e47f567505559d037b891d9669ff43874/tree2de888d5face07daad53bf31f6c2bb95a8fdcbf2,reporteTask1e76f339d02ff12bfad08361abfb07558285d4a45,TEMPretirado. MismoAstra Sourcewriter; Root sólo docs. Main0c9c475b/protegidos intactos.
 
-G3 pasó8Q/Mcompile y detectó targets de escritura mal transformados enQA. La corrección de contexto se implementó enG4, pero éste se detuvo en sintaxis por el binding NUEVO observed deQ5 que duplica uno previo. Run42419815858/attempt1: tests/lint/preflight/nativo NO ejecutados. Artifact13593072163 contiene sólo manifest; error preservado en log primario/reporte. No afirmar que el predicado ya está calificado ni trasladar pases anteriores.
+G5run42420218406/attempt1 terminóFAIL:8Q/preflightM+QA/producerPASS; el consumidor pasó las aserciones de cierre nativo anteriores a87 pero falla producer|0|QA coverage.overflow=true. Coherente8PASS+1FAIL, noTask1aceptada. Las aserciones diagnósticas posteriores no se alcanzaron. El ciclo deSOURCE/SYN no acredita operación real conPCoff. Fullresult40267275B/SHA9746051... y tres artefactos con same-IDreadbacks preservados.
 
-NEXT: seguir esta misma ejecución G5 hasta terminal. El rename fue verificado byte a byte y el gate completo previoI0 ya pasó sobre nuevoSHA; se espera el ciclo original, checkpoint/cold consumer/alarm/retirada y P1. No trasladar pases previos ni declarar9PASS antes de terminal. Source permanece congelado; después artefactos7d/readback, retiradaTEMP/reporte/protegidos/main/STOP. Revisión fresca Spec+Quality obligatoria trasDONE. NoG6hoy.
+NEXT acotado hasta22:55UTC: UN job cloud READONLY sobre positiveartifact13593821080/Sourcebbe7/run42420218406/attempt1 para obtener agregados saneados de los snapshots existentes. No pruebas nuevas/capfix/G6/I0. PythonstdlibRAM en Actions, sin checkout/deps/MF/DB; validar ZIP751744B/SHA8a315c7b...,manifest717B/SHA6a5193d2...,inventario4files/todohash y fullresult exacto. Output≤64KB sólo enums/números, eventCallsnull pues contador no exportado; no filas/KV/payloads ni URLs/auth. Ruling completo en ledger. Activación congelaSource; conservar evidencia, retirarTEMP/report ySTOP antes22:55. Si falla, registraruna vez yguardar, no retry niusuario.
 
-Root guarda/cierra22:55UTC; owner apaga23:00UTC/20:00Argentina. Nada de clocks extendidos o ejecuciones propias pendientes al apagado. Si un resultado requiere nuevo trabajo, preservar el pendiente para mañana. Esto es cierre de trabajo, no ensayoPCoff; no paso humano.
+Owner apaga23:00UTC/20:00Argentina; cierre de trabajo, no ensayoPCoff. Task1review yTask2 quedan pendientes. No paso humano ni runtime/CFAPI/auth/permisos/Max/mail/main/PR/publicación.
 
 Task1 BASE29681ca/tree0200cf32. R0 causal SDKcomplete1+Reference/302 y el inventario compile-only ya están preservados; no repetirlos ni las suites antiguas56 por inercia. Task1 sigue sin aceptar, luego revisión fresca Spec+Quality, Task2 y revisión conjunta. Después siguen etapas funcionales posteriores, candidato/custodia/ejecutor cloud actuales y UNA ocurrencia real coordinada con PC apagada; Max tiene alcance separado.
 
