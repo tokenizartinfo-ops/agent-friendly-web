@@ -4,7 +4,7 @@ PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; 
 
 ## CURRENT — 2026-11-07 21:51 UTC
 
-Task1 sigue en implementación, sin aceptación. Source294e88ee95bc187acf22c7699b91daef696ce0e3, TEMP retirado, writer Astra STOP; main0c9c475b intacto. G2run42417096301 confirma CLI corregido y8Q PASS, pero falla el análisis del JS emitido en19módulos antesI0. No hay P1 ni recorrido nativo nuevo. Último ruling al final: presentar propuesta concreta de UN diagnóstico puro del compilador; Root aprobará comandos/evidencia antes de activar. No corrección conjetural ni nuevo final9. operationalReadiness=false;completePackage=false;PCoff=false. Sin paso humano pendiente.
+Task1 sigue en implementación, sin aceptación. Source294e88ee95bc187acf22c7699b91daef696ce0e3, TEMP retirado, writer Astra STOP; main0c9c475b intacto. G2run42417096301 confirma CLI corregido y8Q PASS, pero falla el análisis del JS emitido en19módulos antesI0. No hay P1 ni recorrido nativo nuevo. Propuesta de UN diagnóstico puro del compilador aprobada por Root a las21:51:44UTC; mismo writer puede implementarla y activar una vez, sin corrección ni final9. No corrección conjetural ni nuevo final9. operationalReadiness=false;completePackage=false;PCoff=false. Sin paso humano pendiente.
 
 ## Estado inicial del plan preservado — 7Nov17:59UTC
 
@@ -261,3 +261,13 @@ Ruling: mismo implementador Astra, UN diagnóstico de compilador puro en GitHub/
 Paths permitidos para ese diagnóstico: TEMP/reporte y, sólo si hace falta, finite-budget-world para mejorar el mensaje del gate estricto, sin relajar parseDiagnostics===0 ni cambiar transform/observación/mapa. Sin otros paths, flags, dependencias ni Core. El implementador presenta primero comandos y contrato de evidencia a Root, sin escribir/activar. Root aprobará esa propuesta concreta; la activación congela Source hasta terminal. Artefacto7d con manifiesto, download por mismo ID, path/bytes/hash/source/run/attempt y reporte completo; después retirar TEMP y STOP. No CI final9, viejas suites ni nativo autorizados por esta fase. Nueva corrección exige causa demostrada y otro ruling.
 
 Usuario disponible después21:30UTC según último mensaje; no se necesita intervención ahora. operationalReadiness=false;completePackage=false;PCoff=false. Task1 sigue sin aceptar; Task2/revisión fresca pendientes.
+
+### 2026-11-07 21:51:44 UTC — propuesta concreta del diagnóstico aprobada
+
+Root revisó la propuesta recibida del mismo implementador y aprueba su ejecución única dentro del ruling anterior. Sólo world/sourceAST para enriquecer el mensaje de la aserción estricta, TEMP y reporte. world importa únicamente builtins+TypeScript y carga los descriptores: el script de diagnóstico lo importa como biblioteca con CLI=false, sin llamar preflight, initialEntryHarness, esbuild ni Miniflare.
+
+Job Ubuntu/Node22 hasta3min: npm ci --ignore-scripts --no-audit --no-fund; node --check world; un heredoc Node puro. TypeScript5.9.3 real instalado y ligado al lock445991B/SHA846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34. La función parseExpression copiada debe coincidir exactamente con el Source actual179B/SHA6d87bb59a40fbf99c3d738499e734ce130e9a7ecf18d7c41ba1bc85d75a22933 antes de usarla como witness.
+
+Dos textos SourceFile sintéticos pequeños: mismo fragmento literal observado con el pipeline actual frente a nodos factory sólo en el diagnóstico. No presuponer la hipótesis: registrar texto escapado/hash/parse diagnostics de ambas variantes. Fixtures y emitidos≤2KB cada uno. Una única llamada al transform exportado del módulo original lib/delegated-oauth-worker.mjs/M,33008B/SHA3161d183fac7bb31b5bd863deba7f0641400b4f0ef5709c940f11e5441125318; no ejecutar/importar el código de ese módulo. Capturar el rechazo estricto esperado de1error con path/código/start/length/línea/columna/hash/bytes/contexto≤240caracteres. Conservar parseDiagnostics.length===0: el catch sólo permite guardar el fallo como dato, no aceptar el módulo ni permitir un bundle nativo.
+
+Exactamente witness.json/console.log/manifest.json, artefacto7d y descarga por mismoID/readback completo. La eventual conclusión SUCCESS del diagnóstico significa evidencia recolectada, no compilador corregido ni Task1aceptada. Congelar Source al activar, retirar TEMP al terminal, append del reporte y STOP. Sin nueva corrección ni final9 autorizados. El implementador recibió este permiso explícito mediante followup_task y el Rootdocs521eb696 ya verificado; no requiere paso humano.
