@@ -3,7 +3,7 @@ import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
-import {monitoringCleanupScenario,readCleanupM,O} from './fixtures/finite-owner-cleanup.mjs';
+import {monitoringCleanupScenario,readCleanupM,observeCleanupMDenial,O} from './fixtures/finite-owner-cleanup.mjs';
 import {plain} from './fixtures/finite-first-connection-publication.mjs';
 import {recoverCheckpoint,observeOriginalAlarm,writeCleanupEvidence,principalName,waitUntil,persistPartialCleanup} from './fixtures/finite-owner-cleanup-persistence.mjs';
 const P='afw.finite-initial-cleanup.v1:',group=process.env.AFW_R2_GROUP??'g0',root=process.env.AFW_R2_CHECKPOINT??'output/owner-cleanup/checkpoint-'+group,fixtures=[];
@@ -120,9 +120,13 @@ if(group==='g5'){
   const facts=await observeOriginalAlarm(f),r=await capture(f,'late-isolate-business-closure',facts);assertClosed(f,facts,r);
   await f.sdkOnly.fetch(O+'/_fixture/sdk-only-release');const deniedBody=await pendingBody;
   const after=await (await f.sdkOnly.fetch(O+'/_fixture/sdk-only-signal')).json();assert(after.reached&&after.released&&after.settled&&!after.retained);assert(after.nativeReturned||after.nativeRejected);assert(after.nativeAttemptAt>=f.plan.C0);assert(!deniedBody.includes('access_token'));
-  const mcp=await f.m.fetch(O+'/mcp',{method:'POST',headers:{Authorization:'Bearer '+token.access_token,Host:new URL(O).host,'Content-Type':'application/json',Accept:'application/json, text/event-stream'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-03-26',capabilities:{},clientInfo:{name:'SYN-late-denial',version:'1'}}})});
-  const mcpBody=await mcp.text();assert([401,403].includes(mcp.status));assert(!mcpBody.includes(f.checkpoint.state.source.project.projectId));assert.equal(hash(m.script),f.checkpoint.build.M.sha256);
-  await writeCleanupEvidence('late-kv-actual-outcome',{label:'SYN adversarial SDK-only; not an M token-exchange admission',startedAt,deniedHeadersAt,C0:f.plan.C0,positive,build:f.checkpoint.sdkOnlyBuild,before,after,denialBodyHash:hash(deniedBody),mcpWorker:'canary-first-connection',mcpStatus:mcp.status,mcpBodyHash:hash(mcpBody),denialLayer:'not attributed from HTTP alone; native token expiry and D1 cleanup facts recorded separately',expiry,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false,operationalReadiness:false});
+  const negative=await observeCleanupMDenial(f.m,token.access_token,f.checkpoint.state.source.project.projectId,{C0:f.plan.C0});
+  const outcome={label:'SYN adversarial SDK-only; not an M token-exchange admission',startedAt,deniedHeadersAt,C0:f.plan.C0,positive,negative,build:f.checkpoint.sdkOnlyBuild,before,after,denialBodyHash:hash(deniedBody),mcpWorker:'canary-first-connection',denialLayer:negative.classification.layer,expiry,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false,operationalReadiness:false};
+  await writeCleanupEvidence('late-kv-actual-outcome',outcome);console.info('R2 late M denial diagnostic',JSON.stringify(outcome));
+  assert.deepEqual(negative.profile,positive.profile,'same original M script/config/namespace and wrapper');
+  assert(negative.responses.some(r=>r.method==='POST'&&r.startedAt>=f.plan.C0),'real post-C0 M request recorded');
+  assert.equal(negative.classification.dataDenied,true,'actual M data-denial contract, not initialize HTTP alone');
+  assert.equal(hash(m.script),f.checkpoint.build.M.sha256);
  });
 }
 
