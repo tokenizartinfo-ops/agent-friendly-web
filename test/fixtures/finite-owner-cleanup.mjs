@@ -197,8 +197,10 @@ export function cleanupMTransport(mf,{currentMountedOptions,expectedModuleHash})
  const m=currentMountedOptions.workers.find(w=>w.name==='canary-first-connection');
  assert(m);assert.equal(currentMountedOptions.upstream,O);assert.equal(createHash('sha256').update(m.script).digest('hex'),expectedModuleHash);
  assert.equal(m.kvNamespaces.OAUTH_KV,'first-connection-oauth');assert.equal(m.bindings.AFW_DELEGATED_OAUTH_ENABLED,'true');assert.equal(m.bindings.AFW_OAUTH_REFRESH_ENABLED,'false');
- const identity={worker:'canary-first-connection',path:'/mcp',scriptHash:expectedModuleHash,namespaceId:'first-connection-oauth'};
- return Object.freeze({...identity,fetch(input,init={}){
+ const identity={worker:'canary-first-connection',path:'/mcp',scriptHash:expectedModuleHash,namespaceId:'first-connection-oauth'},profile=cleanupMProfile(m,currentMountedOptions.upstream),profileHash=cleanupHash(JSON.stringify(profile));
+ const assertProfileCurrent=()=>assert.equal(cleanupHash(JSON.stringify(cleanupMProfile(m,currentMountedOptions.upstream))),profileHash,'original M script/config/namespace unchanged');
+ return Object.freeze({...identity,profile:Object.freeze(profile),assertProfileCurrent,fetch(input,init={}){
+  assertProfileCurrent();
   assert(typeof input==='string'||input instanceof URL,'fixed SYN URL input');const url=new URL(String(input));assert.equal(url.href,O+'/mcp','fixed ordinary M origin/path only');
   const headers=new Headers(init.headers);headers.set('Host',new URL(O).host);headers.set('MF-Route-Override',identity.worker);
   return mf.dispatchFetch(url.href,{...init,headers});
@@ -210,6 +212,67 @@ export async function readCleanupM(worker,token,projectId){
  try{
   await client.connect(new StreamableHTTPClientTransport(new URL(O+'/mcp'),{requestInit:{headers:{Authorization:'Bearer '+token,Host:new URL(O).host}},fetch:async(url,options)=>{const response=await worker.fetch(String(url),options);requests.push({method:options?.method??'GET',status:response.status});return response;}}));
   const result=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(result.isError,undefined);assert.equal(result.structuredContent.data.id,projectId);
-  return {worker:worker.worker,path:worker.path,scriptHash:worker.scriptHash,namespaceId:worker.namespaceId,at:Date.now(),requests,projectHash:createHash('sha256').update(projectId).digest('hex'),dataRead:true};
+  return {worker:worker.worker,path:worker.path,scriptHash:worker.scriptHash,namespaceId:worker.namespaceId,profile:worker.profile,at:Date.now(),requests,projectHash:createHash('sha256').update(projectId).digest('hex'),dataRead:true};
  }finally{await client.close();}
+}
+
+const cleanupMHash='c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32';
+const cleanupMFlags=['AFW_DELEGATED_OAUTH_ENABLED','AFW_DOSSIER_EVENTS_ENABLED','AFW_DOSSIER_EVENTS_SCHEDULE_ENABLED','AFW_DOSSIER_MONITORING_OWNER_ENABLED','AFW_DOSSIER_OWN_SAVE_ENABLED','AFW_DOSSIER_PERMISSION_WITHDRAWAL_ENABLED','AFW_DOSSIER_RETIREMENT_READ_ENABLED','AFW_DOSSIER_SUCCESSOR_ENABLED','AFW_OAUTH_REFRESH_ENABLED'];
+const cleanupHash=value=>createHash('sha256').update(value).digest('hex');
+export function cleanupMProfile(m,upstream){
+ return {worker:m.name,path:'/mcp',scriptHash:cleanupHash(m.script),optionsHash:cleanupHash(JSON.stringify(m)),bindingsHash:cleanupHash(JSON.stringify(m.bindings)),namespaceId:m.kvNamespaces.OAUTH_KV,upstream,issuer:m.bindings.AFW_OAUTH_ISSUER,resource:m.bindings.AFW_OAUTH_RESOURCE,serviceMode:m.bindings.AFW_OAUTH_SERVICE_MODE,serviceExpiresAt:m.bindings.AFW_OAUTH_PILOT_EXPIRES_AT,flags:Object.fromEntries(Object.entries(m.bindings).filter(([k])=>k.endsWith('_ENABLED'))),guardBlob:'d979f395029c9b1e66a99222d06acf99eba4f358'};
+}
+function qualifiedCleanupMProfile(p,C0){
+ return p?.worker==='canary-first-connection'&&p.path==='/mcp'&&p.scriptHash===cleanupMHash&&p.namespaceId==='first-connection-oauth'&&p.upstream===O&&p.issuer===O&&p.resource===O+'/mcp'&&p.serviceMode==='window'&&p.serviceExpiresAt===new Date(C0).toISOString()&&p.guardBlob==='d979f395029c9b1e66a99222d06acf99eba4f358'&&/^[a-f0-9]{64}$/.test(p.optionsHash)&&/^[a-f0-9]{64}$/.test(p.bindingsHash)&&JSON.stringify(Object.keys(p.flags??{}).sort())===JSON.stringify([...cleanupMFlags].sort())&&cleanupMFlags.every(k=>p.flags[k]===(k==='AFW_DELEGATED_OAUTH_ENABLED'?'true':'false'));
+}
+/** Interpretation only; fixture data cannot authorize or alter a worker. */
+export function classifyCleanupMDenial(observation){
+ const no={dataDenied:false,layer:'unproved',reason:'denial contract not established'},o=observation;
+ if(!Number.isSafeInteger(o?.originalC0)||o.originalC0<1||o.originalC0>8640000000000000||!qualifiedCleanupMProfile(o.profile,o.originalC0)||o.profileCurrent!==true||o.operation!=='read_project_summary'||!Array.isArray(o.responses)||o.responses.some(r=>r.containsExpectedData||r.containsCredential||r.readFailed))return no;
+ const rpc=o.responses.filter(r=>r.rpcMethod==='initialize'||r.rpcMethod==='tools/call'&&r.tool==='read_project_summary'),r=rpc.at(-1);
+ if(!r||r.method!=='POST'||!Number.isSafeInteger(r.startedAt)||!Number.isSafeInteger(r.finishedAt)||r.finishedAt<r.startedAt||!Number.isSafeInteger(r.status)||!/^[a-f0-9]{64}$/.test(r.bodyHash))return no;
+ if(r.status===404&&r.startedAt>=o.originalC0&&r.bodyKind==='html'&&r.closedWindowBody===true)
+  return {dataDenied:true,layer:'service_window_closed',reason:'unchanged original M window expired before request',branch:'delegated-oauth-worker.mjs:143-158 -> connectionWindowNotice:29-30',D1DenialProved:false};
+ if(r.startedAt>=o.originalC0)return no; // This fixed original window must close before SDK/MCP at C0.
+ const challenge=r.oauthChallenge;
+ if(r.status===401&&challenge?.bearer===true&&challenge.error==='invalid_token'&&challenge.metadata===O+'/.well-known/oauth-protected-resource/mcp'&&(r.bodyKind==='empty'||r.oauthError==='invalid_token'))
+  return {dataDenied:true,layer:'sdk_token_rejection',reason:'native OAuth invalid_token challenge',D1DenialProved:false};
+ if(r.status===403&&challenge?.bearer===true&&challenge.error==='insufficient_scope'&&challenge.metadata===O+'/.well-known/oauth-protected-resource/mcp'&&r.oauthError==='insufficient_scope')
+  return {dataDenied:true,layer:'sdk_scope_rejection',reason:'native OAuth insufficient_scope challenge',D1DenialProved:false};
+ const result=o.toolResult;
+ if(r.rpcMethod==='tools/call'&&r.tool==='read_project_summary'&&r.status===200&&r.bodyKind==='json'&&r.jsonRpc?.version==='2.0'&&r.jsonRpc.kind==='result'&&result?.isError===true&&result.status===403&&result.code==='delegated_access_denied'&&result.hasData===false&&JSON.stringify(r.jsonRpc.result)===JSON.stringify(result))
+  return {dataDenied:true,layer:'business_grant_denied',reason:'read_project_summary returned delegated_access_denied',branch:'delegated-project-read.mjs:63-68 via delegated-project-mcp.mjs:46-57',D1DenialProved:true};
+ return no;
+}
+function cleanupSafeToolResult(value){
+ const s=value?.structuredContent;
+ return {isError:value?.isError===true,status:Number.isInteger(s?.status)?s.status:null,code:typeof s?.code==='string'&&/^[a-z_]{1,80}$/.test(s.code)?s.code:null,hasData:!!value&&Object.hasOwn(value,'data')||!!s&&Object.hasOwn(s,'data')};
+}
+async function cleanupResponseFact(response,{request,startedAt,projectId,token}){
+ const reader=response.clone().body?.getReader(),chunks=[];let bytes=0;
+ if(reader)for(;;){const r=await reader.read();if(r.done)break;bytes+=r.value.length;if(bytes>131072){await reader.cancel();throw Error('SYN bounded M response exceeded');}chunks.push(Buffer.from(r.value));}
+ const body=Buffer.concat(chunks).toString('utf8'),type=response.headers.get('Content-Type')??'';let parsed=null;try{parsed=JSON.parse(body);}catch{}
+ const www=response.headers.get('WWW-Authenticate')??'',bearer=www.startsWith('Bearer '),error=/error="([^"]+)"/.exec(www)?.[1],metadata=/resource_metadata="([^"]+)"/.exec(www)?.[1],challenge={bearer,error:['invalid_token','insufficient_scope'].includes(error)?error:null,metadata:metadata===O+'/.well-known/oauth-protected-resource/mcp'?metadata:null};
+ const jsonRpc=parsed?.jsonrpc==='2.0'?{version:'2.0',kind:Object.hasOwn(parsed,'result')?'result':Object.hasOwn(parsed,'error')?'error':'unknown',idType:typeof parsed.id,errorCode:Number.isInteger(parsed.error?.code)?parsed.error.code:null,result:parsed.result?cleanupSafeToolResult(parsed.result):null}:null;
+ return {method:request.method,rpcMethod:request.rpcMethod,tool:request.tool,startedAt,finishedAt:Date.now(),status:response.status,contentType:type.split(';')[0],bodyKind:body===''?'empty':parsed?'json':type.startsWith('text/html')?'html':'text',bodyBytes:bytes,bodyHash:cleanupHash(body),oauthChallenge:challenge,oauthError:['invalid_token','insufficient_scope'].includes(parsed?.error)?parsed.error:null,jsonRpc,closedWindowBody:type.startsWith('text/html')&&body.includes('<h1>Te acompaño a revisar la conexión</h1>')&&body.includes('No pude completar esta conexión.')&&body.includes('No puedo confirmar la causa desde esta pantalla.'),containsExpectedData:body.includes(projectId),containsCredential:body.includes(token),readFailed:false};
+}
+/** Same real protocol as positive control. Preserve facts before the test asserts. */
+export async function observeCleanupMDenial(worker,token,projectId,{C0}){
+ const responses=[],observation={label:'SYN real ordinary M data denial observation',operation:'read_project_summary',originalC0:C0,profile:worker.profile,profileCurrent:false,responses,toolCallAttempted:false,toolResult:null,error:null};
+ const client=new Client({name:'SYN-named-M-denial',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
+ try{
+  worker.assertProfileCurrent();
+  await client.connect(new StreamableHTTPClientTransport(new URL(O+'/mcp'),{requestInit:{headers:{Authorization:'Bearer '+token,Host:new URL(O).host}},fetch:async(url,options={})=>{
+   let rpc;try{rpc=JSON.parse(options.body);}catch{}
+   const request={method:options.method??'GET',rpcMethod:rpc?.method??null,tool:rpc?.method==='tools/call'?rpc.params?.name??null:null},startedAt=Date.now();
+   const response=await worker.fetch(String(url),{...options,signal:options.signal?AbortSignal.any([options.signal,AbortSignal.timeout(5000)]):AbortSignal.timeout(5000)});
+   try{responses.push(await cleanupResponseFact(response,{request,startedAt,projectId,token}));}catch(error){responses.push({...request,startedAt,finishedAt:Date.now(),status:response.status,readFailed:true,errorType:error.name});throw error;}
+   return response;
+  }}));
+  observation.toolCallAttempted=true;
+  observation.toolResult=cleanupSafeToolResult(await client.callTool({name:'read_project_summary',arguments:{}}));
+ }catch(error){observation.error={type:error.name,messageHash:cleanupHash(String(error.message))};}
+ finally{try{await client.close();}catch(error){observation.closeError={type:error.name,messageHash:cleanupHash(String(error.message))};}
+  try{worker.assertProfileCurrent();observation.profileCurrent=true;}catch{observation.profileCurrent=false;}}
+ observation.classification=classifyCleanupMDenial(observation);return observation;
 }
