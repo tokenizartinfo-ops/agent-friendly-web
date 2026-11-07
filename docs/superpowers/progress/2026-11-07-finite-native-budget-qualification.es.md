@@ -2,7 +2,11 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — 7Nov17:59UTC
+## CURRENT — 2026-11-07 21:51 UTC
+
+Task1 sigue en implementación, sin aceptación. Source294e88ee95bc187acf22c7699b91daef696ce0e3, TEMP retirado, writer Astra STOP; main0c9c475b intacto. G2run42417096301 confirma CLI corregido y8Q PASS, pero falla el análisis del JS emitido en19módulos antesI0. No hay P1 ni recorrido nativo nuevo. Último ruling al final: presentar propuesta concreta de UN diagnóstico puro del compilador; Root aprobará comandos/evidencia antes de activar. No corrección conjetural ni nuevo final9. operationalReadiness=false;completePackage=false;PCoff=false. Sin paso humano pendiente.
+
+## Estado inicial del plan preservado — 7Nov17:59UTC
 
 Plan38d8d2d61392bcb284085fe210dbad41baf7463b/blob1aad6aba555302736dc78cff1ef36c91a100c969 (20658chars), spec32e75999e36b0c8f6c60ffb16d13fe980900ece0/blobbef5563af032c433aaff498e730a9429e8220e0d (20408chars). Design buildercheck finished nothing important left after Root corrected grouping to7jobs. Root approved for planning under owner's explicit autonomy/opt-out. Method chosen Root: SDD/sequentialtwoTasks +freshcombinedgate.
 
@@ -240,3 +244,20 @@ Ruling: permitir MISMO implementadorAstra corregir SÓLO eldispatchCLI para que 
 
 Autorizar restaurar MISMOTEMP3jobs/contentsread/selfpathpush y UN final9corregido; añadir commitfix/report antesdelactivador, freezeSourcehasta terminal. Reejecutar8QdelmismoSHAcorregido ypreflightreal antesI0; no sumar8viejoscomoéxito nuevo. Si elCLI falla, jobdebeserFAIL, nada dePromisedescartada/exit0 ocomprobación omitida. Runoriginales+fallbackdebenguardarseconref/digests.Sourcecambios: worldCLI/TEMP/report dentro13; sin cambios en Core ni en los plazos Source.  Si apareceotrafalla, preservar/diagnosticar antesdenuevosintentos,sin reintentos a ciegas. 
 EstadoSourceactual21dSTOP hasta reanudar,sinCIfrozenactiva. No paso humano requerido. Readiness/package/PCofffalse;RootTask1reviewyTask2pendientes.
+
+
+### 2026-11-07 21:51 UTC — G2 falló al imprimir AST; diagnóstico causal acotado
+
+Root leyó nuevamente handling-reports.md y systematic-debugging/SKILL.md y verificó los logs de G2, el Source actual y el reporte terminal. Run42417096301/attempt1/eventpush de Source7eeb66bca9e4bbc52487f31d6999e2d73ab37b7e/tree01a3fb039df215d5d6d72841b748a0523dcde936 terminó FAILURE21:42:43UTC. Las ocho Q, sintaxis y lint pasaron sobre ese SHA. El CLI corregido llegó al compilador M, que rechazó el código emitido por19 módulos por errores de análisis sintáctico. Prepare128537598861 y consume128537599462 quedaron SKIPPED. No hubo I0, SDK, checkpoint ni P1. El fallo es del nuevo instrumental de prueba; no demuestra un incidente del proveedor ni un problema de credenciales.
+
+Artifact13591583752, ZIP3286B/SHA256529bd5c2f92e448e55391f3d265f420ffba20a23f95d992786e50257e2377c35; expiración14Nov21:42:37UTC. Same-ID readback4files PASS, manifest697B/SHA2562b3bfc7fb16f7b253b0d82a4876057374c770459eca7c1b92d5a41e6f2bb73a7. Es evidencia del preflight fallido, no de los dos grafos nativos.
+
+Root verificó el cierre294e88ee95bc187acf22c7699b91daef696ce0e3/treeff62e80167f3e128ef8eae277cd30cd13b601c12, único parent7eeb: sólo retirada del TEMP y37líneas añadidas al reporte24ec029751794dc77d86179d5e589b0322de9c85, sin borrar historia. Source ref coincide y main sigue0c9c475b. El implementador conserva evidencia, STOP_WRITES y NEEDS_CONTEXT correctamente; no hubo repetición automática.
+
+Hipótesis todavía no probada: parseExpression devuelve nodos analizados en un fragmento separado con posiciones positivas de ese fragmento; luego el printer los inserta en otro SourceFile. Podría imprimir literales desde posiciones equivocadas. El log actual sólo contiene cantidades por módulo, sin primera posición/contexto emitido. No corresponde cambiar selectores, aceptar parse errors ni corregir por conjetura.
+
+Ruling: mismo implementador Astra, UN diagnóstico de compilador puro en GitHub/Actions, antes de cualquier corrección o nuevo final9. Un job pequeño de hasta3min, instalación bloqueada existente, contents:read, trigger push sólo del TEMP ya permitido, sin Miniflare ni ejecución nativa/I0. Usar TypeScript realmente instalado y el transform actual. Obtener (a) reproducción mínima del parseExpression/printer exacto, con su texto de función ligado al Source, mismo fragmento sobre dos SourceFiles distintos; y (b) primera ubicación y contexto emitido acotado de UN módulo M original fijado, preferiblemente delegated-oauth-worker, cuyo G2 contó1error. Comparación con nodos factory/synthesized sólo dentro del diagnóstico para discriminar la hipótesis, nunca aplicada al compilador por este permiso. Conservar origen/SHA/bytes, versión bloqueada, código de diagnóstico y fragmentos públicos mínimos; nada de respuestas/auth/runtime.
+
+Paths permitidos para ese diagnóstico: TEMP/reporte y, sólo si hace falta, finite-budget-world para mejorar el mensaje del gate estricto, sin relajar parseDiagnostics===0 ni cambiar transform/observación/mapa. Sin otros paths, flags, dependencias ni Core. El implementador presenta primero comandos y contrato de evidencia a Root, sin escribir/activar. Root aprobará esa propuesta concreta; la activación congela Source hasta terminal. Artefacto7d con manifiesto, download por mismo ID, path/bytes/hash/source/run/attempt y reporte completo; después retirar TEMP y STOP. No CI final9, viejas suites ni nativo autorizados por esta fase. Nueva corrección exige causa demostrada y otro ruling.
+
+Usuario disponible después21:30UTC según último mensaje; no se necesita intervención ahora. operationalReadiness=false;completePackage=false;PCoff=false. Task1 sigue sin aceptar; Task2/revisión fresca pendientes.
