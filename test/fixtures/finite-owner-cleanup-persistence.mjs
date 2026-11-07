@@ -204,21 +204,37 @@ export async function verifyCleanupG4Outcome(root,{expectedEvidenceSource=proces
  const project=v=>({label:v.label,I0:v.I0,C0:v.C0,C1:v.C1,signal:v.signal,state:v.state.status,deliveries:v.state.deliveries,alarm:v.alarm,restores:v.restores,receiptHash:v.receipt?.recordHash??null,children:v.metrics.children.length,childMaxMs:Math.max(...v.metrics.children.map(c=>c.elapsedMs)),sqlCalls:v.metrics.sqlCalls,sqlElapsedMs:v.metrics.sqlElapsedMs,kvLists:v.metrics.kvLists,kvDeletes:v.metrics.kvDeletes,held:v.fault.held,released:v.fault.released,settled:v.fault.settled});
  return {label:historicalArchive?'historical g4 byte audit; original job remains failed':'g4 strict outcome readback',sourceArtifact:expectedEvidenceSource,sourceVerifier:process.env.GITHUB_SHA,partialCheckpoint:descriptor,partialFiles:manifest.files.length,parentManifestSha256:manifest.parentManifestSha256,historicalEnvelopeBoundPartial:!historicalArchive,manifestAndBytesVerified:true,nativeEffectsReproduced:false,openedI0:false,results:[project(held),project(restarted)],operationalReadiness:false,completePackage:false,PCoff:false};
 }
+/** Contrast inherited Worker eval modes without reproducing Atomics.wait. */
+export async function verifyCleanupLauncherPremise(){
+ const {execFile}=await import('node:child_process'),{promisify}=await import('node:util'),run=promisify(execFile);
+ assert.equal(process.versions.node,'22.23.4');assert(!process.execArgv.includes('--input-type=module'));
+ const workerProgram="const {createRequire}=require('module');const {parentPort}=require('worker_threads');parentPort.postMessage({requireAvailable:typeof createRequire==='function'});";
+ const program="import {Worker} from 'node:worker_threads';\nconst worker=new Worker("+JSON.stringify(workerProgram)+",{eval:true});let done=false;const timer=setTimeout(()=>finish({outcome:'timeout'}),5000);async function finish(result){if(done)return;done=true;clearTimeout(timer);await worker.terminate();console.log(JSON.stringify({...result,execArgv:process.execArgv.filter(v=>v==='--input-type=module'),node:process.versions.node}));}worker.once('message',value=>finish({outcome:'success',requireAvailable:value.requireAvailable}));worker.once('error',error=>finish({outcome:'error',name:error.name,message:error.message.slice(0,200)}));\n";
+ await mkdir('output/owner-cleanup',{recursive:true});const file=resolve('output/owner-cleanup/launcher-probe.mjs');await writeFile(file,program);
+ const bad=JSON.parse((await run(process.execPath,['--input-type=module','-e',program],{timeout:15000,maxBuffer:32768})).stdout);
+ const good=JSON.parse((await run(process.execPath,[file],{timeout:15000,maxBuffer:32768})).stdout);
+ assert.equal(bad.outcome,'error');assert.equal(bad.name,'ReferenceError');assert.match(bad.message,/require is not defined/);assert.deepEqual(bad.execArgv,['--input-type=module']);
+ assert.equal(good.outcome,'success');assert.equal(good.requireAvailable,true);assert.deepEqual(good.execArgv,[]);
+ const result={label:'launcher contrast only; no Miniflare or I0',source:process.env.GITHUB_SHA,bad,good,workerProgramHash:sha(workerProgram),programHash:sha(program),sources:{nodeTag:'v22.23.4',nodeWorkerMainBlob:'f159022ee5bddd619389d22f5f19bfe7bfdb04cd',nodeWorkerDocsBlob:'4347585cb6ec054fb20d4e953d6f823436138510',miniflareTag:'miniflare@5.20260831.0-alpha',miniflareFetchSyncBlob:'ca4c161fd5a58d92cc75e60f7c6736cd1391aa39'},reproducedAtomicsBlock:false,openedI0:false,operationalReadiness:false,completePackage:false,PCoff:false};
+ await writeCleanupEvidence('launcher-probe',result);console.info('R2 launcher contrast',json(result));return result;
+}
+
 /** Genuine short SYN producer/control: early disposal, never a C0 closure claim. */
 export async function verifyCleanupMTransportPremises(){
+ assert(!process.execArgv.includes('--input-type=module'),'use fixed file CLI, not inherited module eval');let stage='sdk-compile-start';const mark=value=>{stage=value;console.info('R2 routing stage',json({stage,at:Date.now()}));};mark(stage);
  const sdkOnly=await compileCleanupSdkOnlyWorker();assert.equal(sdkOnly.sha256,'92f6554db082c30e83c6f7ae4700544ee7438f0da349b0dc2d70594d97efe66f','unchanged accepted SDK-only component');
  await mkdir('output/owner-cleanup',{recursive:true});await writeFile('output/owner-cleanup/sdk-only-current.mjs',sdkOnly.script);await writeFile('output/owner-cleanup/sdk-only-current-metafile.json',json(sdkOnly.metafile));
- let f,result;
+ mark('sdk-compile-done');let f,result;
  try{
-  f=await ownerReferenceFixture({after(){}},{cleanupCheckpoint:true});
-  const prepared=await prepareOwnerReference(f),response=await prepared.issue();assert.equal(response.status,302);await assertActualComplete(f,{reference:true});await downstreamOwnerReference(f,response,prepared);
+  mark('producer-start');f=await ownerReferenceFixture({after(){}},{cleanupCheckpoint:true});
+  mark('producer-ready');mark('authorize-prepare-start');const prepared=await prepareOwnerReference(f);mark('authorize-prepare-ready');mark('authorize-issue-start');const response=await prepared.issue();assert.equal(response.status,302);mark('authorize-issue-returned');await assertActualComplete(f,{reference:true});mark('canje-downstream-start');await downstreamOwnerReference(f,response,prepared);mark('canje-downstream-done');
   const {currentMountedOptions}=f.cleanupCheckpointInputs(),m=cleanupMTransport(f.mf,{currentMountedOptions,expectedModuleHash:f.firstConnectionBuild.M.sha256});
-  const positive=await readCleanupM(m,f.cleanupToken.access_token,f.source.project.projectId);
-  const denied=await m.fetch('https://delegated-canary.agentfriendlyweb.dev/mcp',{method:'POST',headers:{Authorization:'Bearer SYN-invalid-control',Host:'127.0.0.1','MF-Route-Override':'qa-first-connection','Content-Type':'application/json',Accept:'application/json, text/event-stream'},body:json({jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-03-26',capabilities:{},clientInfo:{name:'SYN-wrapper-negative',version:'1'}}})});
+  mark('M-wrapper-positive-start');const positive=await readCleanupM(m,f.cleanupToken.access_token,f.source.project.projectId);mark('M-wrapper-positive-done');
+  mark('M-wrapper-negative-start');const denied=await m.fetch('https://delegated-canary.agentfriendlyweb.dev/mcp',{method:'POST',headers:{Authorization:'Bearer SYN-invalid-control',Host:'127.0.0.1','MF-Route-Override':'qa-first-connection','Content-Type':'application/json',Accept:'application/json, text/event-stream'},body:json({jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-03-26',capabilities:{},clientInfo:{name:'SYN-wrapper-negative',version:'1'}}})});
   const body=await denied.text();assert([401,403].includes(denied.status));assert(!body.includes(f.source.project.projectId));
-  const facts=await plain(f.stub.ownerCleanupFacts()),plan=JSON.parse(facts.rows.find(([k])=>k===P+'plan')[1]);assert.equal(facts.signal.entered,0);assert(Date.now()<plan.C0);
+  mark('M-wrapper-negative-done');const facts=await plain(f.stub.ownerCleanupFacts()),plan=JSON.parse(facts.rows.find(([k])=>k===P+'plan')[1]);assert.equal(facts.signal.entered,0);assert(Date.now()<plan.C0);mark('original-I0-observed');
   result={label:'SYN genuine I0 diagnostic; early dispose; not GREEN51',source:process.env.GITHUB_SHA,I0:plan.I0,C0:plan.C0,C1:plan.C1,nativeDbNow:facts.dbNow,openedI0:true,closureProved:false,fabricatedAdmission:false,positive,negative:{status:denied.status,bodyHash:sha(body),dataDenied:true},sdkOnly:{sha256:sdkOnly.sha256,bytes:sdkOnly.bytes,inputs:Object.keys(sdkOnly.metafile.inputs).length,priorHoldRun:42371140511,holdRepeated:false},expiry:f.sdkAfterExchange,operationalReadiness:false,completePackage:false,PCoff:false};
- }finally{if(f){await f.mf.dispose();await f.cleanup();}}
+ }catch(error){await writeCleanupEvidence('m-transport-preflight-failure',{source:process.env.GITHUB_SHA,stage,name:error.name,code:error.code??null,frames:String(error.stack??'').split('\n').filter(l=>/^\s+at\s/.test(l)).slice(0,6),closureProved:false,operationalReadiness:false});throw error;}finally{if(f){mark('dispose-start');await f.mf.dispose();mark('dispose-done');await f.cleanup();mark('temporary-cleanup-done');}}
  result.disposedAt=Date.now();assert(result.disposedAt<result.C0);result.disposedBeforeC0=true;await writeCleanupEvidence('m-transport-preflight',result);return result;
 }
 
@@ -273,6 +289,8 @@ export async function verifyCleanupQualificationPremises(){
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  const [command,root='output/owner-cleanup/checkpoint-g0',group='g0']=process.argv.slice(2);
  if(command==='preflight')await verifyCleanupQualificationPremises();
+ else if(command==='launcher-probe')await verifyCleanupLauncherPremise();
+ else if(command==='routing-preflight')console.info('R2 M routing preflight',json(await verifyCleanupMTransportPremises()));
  else if(command==='prepare')await produceCheckpoint(root);
  else if(command==='prepare-group')await produceGroup(group,root);
  else if(command==='verify-group')console.info('R2 group uploaded readback',json(await verifyGroup(root)));
