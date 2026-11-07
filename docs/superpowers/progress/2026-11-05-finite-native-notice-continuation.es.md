@@ -1,6 +1,16 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 7 noviembre2026,17:31UTC: no retomar los estados históricos inferiores
+## CURRENT — 2026-11-07 18:49:11 UTC: Task1 de diagnóstico en curso
+
+La continuación vigente es progress/2026-11-07-finite-native-budget-qualification.es.md (ledger del plan homónimo), último checkpoint Root26626d1be8b2da240b81534d65559e6f8a96b980/blob9fdb31f74d9989d1e32f04d7ed429d0fac32b59d. Designec3b7d68 yplan/briefTask1f44506f2, todos en docs/finite-pcoff-continuation-20261103. El plan anterior de owner-restoration terminó SOURCE/SYN y no se reabre; su cierre17:31UTC inferior queda como historia.
+
+Task1budgetBASE29681ca/tree0200cf32. Último Source leído050ad1a1eb9091ae02dbf3f2d2131656de0a5da3/tree8f3f9610332368fa6bd2edd06a5c9fdd41634a28; mismo Sourcebranch feat/finite-native-cleanup-20261101, único writer finite_budget_diagnostics_impl. R0causal aceptado: run42401162548/attempt1/ecd57222, SDKcomplete1+Reference/302 antes de faltar diagnóstico; no repetirlo. Collector/evidence/Q1–Q8 preservados pero aún sin calificación. No Task1DONE/GREEN ni Task2.
+
+NEXTbounded autorizado: un inventario COMPILE-ONLY en GitHub Actions, mismo qualifier temporal/selfpath pushfilter, máximo3min, CEROI0/Miniflarebusiness/linajes. Writer hace mapa fijo de callsites nativos/callbacks/Root/child/fase sobre los builds M/QA, guarda scripts/metafiles/mapa+manifest y readback del MISMOartifact-id; luego STOP yRootacepta mapa. IDs de namespace de esa compilación son inputs MODELED rotulados, nunca identidad nativa ni bundles válidos para P1. Source se congela durante ese run; no editar TEMP/repetir mientras activo. Final9PASS(8Q+P1) se hará sólo después de liberar este gate y construir su propio linaje/grafos nativos. Task2final16 y sus límitesreadonly/reduction esperan Task1aceptada con revisión Spec+Quality fresca.
+
+No CPU/build/deps locales, credenciales, OAuth, permisos, API/runtimeCF, cron, clientes, main o publicación. Gabriel ausente hasta16:30Argentina/19:30UTC; no pedir códigos ni abrir ventanas humanas antes. operationalReadiness=false;completePackage=false;PCoff=false. Faltan aún etapas funcionales posteriores/traspaso y evidencia actual de ejecutor/custodia/consumidor/suscripción/aviso útil/ACK/baja/restauración, antes de UNAocurrencia realPCoff y luegoMax con alcance propio. Este progreso de CI no acredita ese ensayo.
+
+## Checkpoint anterior preservado — 7 noviembre2026,17:31UTC
 
 SOURCE final29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64, rama feat/finite-native-cleanup-20261101, writerSTOP yqualifiertemporalretirado. El plan de SDKReference yretiro/restauración delcicloactual está COMPLETO únicamente SOURCE/SYN: Task1aceptada, Task2aceptada trasfixround1I1/I2, revisiónconjunta frescaPASS/0Critical/Important/7Minorretenidos. Calificación coherente42390108314/attempt1 SUCCESS17:01:58UTC,56PASS/0fail/cancel/skip/todo,16jobs/24artifacts. No combinar fallidos ni repetirlos desde un tailantiguo.
 
