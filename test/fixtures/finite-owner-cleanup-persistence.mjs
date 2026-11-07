@@ -4,7 +4,7 @@ import {mkdir,readFile,writeFile,readdir,cp} from 'node:fs/promises';
 import {resolve,join,relative} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
-import {ownerReferenceFixture,prepareOwnerReference,assertActualComplete,downstreamOwnerReference,recordOwnerReference} from './finite-owner-cleanup.mjs';
+import {ownerReferenceFixture,prepareOwnerReference,assertActualComplete,downstreamOwnerReference,recordOwnerReference,cleanupMTransport,readCleanupM} from './finite-owner-cleanup.mjs';
 import {createInitialEntrySynOutbound} from './finite-initial-entry-world.mjs';
 import {plain,compileCleanupSdkOnlyWorker,compileFirstConnectionCandidate} from './finite-first-connection-publication.mjs';
 import {build} from 'esbuild';
@@ -140,7 +140,7 @@ export async function recoverCheckpoint(root,{label='principal',restart=false}={
   assert.deepEqual(current.rows,data.facts.rows,'cold load preserves original native rows exactly before alarm');
   const mKv=await mf.getKVNamespace('OAUTH_KV','canary-first-connection'),qaKv=await mf.getKVNamespace('AFW_FINITE_OWNER_OAUTH_KV','qa-first-connection');
   for(const kv of [mKv,qaKv]){const value=await kv.get(data.kvProof.key);assert.equal(typeof value,'string');assert.equal(sha(value),data.kvProof.valueHash,'same non-expirable client after cold load');}
-  f.negative=await mf.getWorker('negative-first-connection');f.m=await mf.getWorker('canary-first-connection');if(data.sdkOnlyBuild)f.sdkOnly=await mf.getWorker('sdk-only-first-connection');f.kv=mKv;f.kvSemanticProof={keyHash:data.kvProof.keyHash,valueHash:data.kvProof.valueHash,bothAliases:true,expires:false};
+  f.negative=await mf.getWorker('negative-first-connection');f.m=cleanupMTransport(mf,{currentMountedOptions:options,expectedModuleHash:data.build.M.sha256});if(data.sdkOnlyBuild)f.sdkOnly=await mf.getWorker('sdk-only-first-connection');f.kv=mKv;f.kvSemanticProof={keyHash:data.kvProof.keyHash,valueHash:data.kvProof.valueHash,bothAliases:true,expires:false};
   await f.stub.ownerCleanupFault('normal');
   f.plan=data.plan;f.checkpoint=data;f.directory=dest;f.recovery={entered,ready:Date.now(),nativeDbNow:current.dbNow,manifestSha256:sha(await readFile(join(root,'manifest.json')))};
   return f;
@@ -177,6 +177,49 @@ export async function persistPartialCleanup(f,root){
  await writeFile(join(root,'checkpoint.json'),json(data));
  const files=await inventory(root),manifest={purpose:'afw.owner-cleanup-checkpoint.syn.v1',source:process.env.GITHUB_SHA,I0:f.plan.I0,C0:f.plan.C0,C1:f.plan.C1,files,nativeClock:facts.dbNow,operationalReadiness:false,completePackage:false,PCoff:false,custodyReal:false,parentManifestSha256:f.recovery.manifestSha256};
  await writeFile(join(root,'manifest.json'),json(manifest));await verifyCheckpoint(root);return manifest;
+}
+
+/** Bind the already-required partial checkpoint into the g4 outcome envelope. */
+export async function sealCleanupG4Outcome(root){
+ const m=JSON.parse(await readFile(join(root,'evidence-manifest.json'),'utf8'));assert.equal(m.source,process.env.GITHUB_SHA);assert.equal(m.group,'g4');
+ assert.deepEqual(m.files.map(f=>f.path).sort(),['green-g4.tap','held-sdk-delete.json','restart-own-uncertainty.json']);
+ const bytes=await readFile(join(root,'g4-partial/manifest.json')),partial=JSON.parse(bytes);assert.equal(partial.source,m.source);
+ m.partialCheckpoint={path:'g4-partial',manifestSha256:sha(bytes)};await writeFile(join(root,'evidence-manifest.json'),json(m));return m.partialCheckpoint;
+}
+/** Byte/manifest audit only: never opens Miniflare, SDK, a clock or a producer. */
+export async function verifyCleanupG4Outcome(root,{expectedEvidenceSource=process.env.GITHUB_SHA,historicalArchive=false}={}){
+ assert.match(expectedEvidenceSource,/^[a-f0-9]{40}$/);
+ const m=JSON.parse(await readFile(join(root,'evidence-manifest.json'),'utf8')),names=['green-g4.tap','held-sdk-delete.json','restart-own-uncertainty.json'];
+ assert.equal(m.source,expectedEvidenceSource);assert.equal(m.group,'g4');assert.equal(m.operationalReadiness,false);assert.equal(m.completePackage,false);assert.equal(m.PCoff,false);
+ assert.deepEqual(m.files.map(f=>f.path).sort(),names);assert.deepEqual((await readdir(root)).sort(),['evidence-manifest.json','g4-partial',...names].sort());
+ for(const f of m.files){assert(!f.path.includes('/')&&!f.path.includes('..'));const bytes=await readFile(join(root,f.path));assert.equal(bytes.length,f.bytes);assert.equal(sha(bytes),f.sha256);}
+ const tap=await readFile(join(root,'green-g4.tap'),'utf8');for(const [key,value]of [['tests',2],['pass',2],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'));
+ const partialBytes=await readFile(join(root,'g4-partial/manifest.json')),descriptor={path:'g4-partial',manifestSha256:sha(partialBytes)};
+ if(historicalArchive){assert.equal(expectedEvidenceSource,'818bc4d4e6fb1935e594951ba09d3f9536ba49d6');assert.equal(Object.hasOwn(m,'partialCheckpoint'),false,'historical envelope did not bind partial manifest');}
+ else assert.deepEqual(m.partialCheckpoint,descriptor);
+ const {manifest,data}=await verifyCheckpoint(join(root,'g4-partial'),{source:expectedEvidenceSource});assert.equal(data.checkpointKind,'partial-cleanup');
+ const held=JSON.parse(await readFile(join(root,'held-sdk-delete.json'),'utf8')),restarted=JSON.parse(await readFile(join(root,'restart-own-uncertainty.json'),'utf8'));
+ for(const v of [held,restarted]){assert.equal(v.source,expectedEvidenceSource);assert.equal(v.I0,data.plan.I0);assert.equal(v.C0,data.plan.C0);assert.equal(v.C1,data.plan.C1);assert.equal(v.receipt,null);assert.equal(v.operationalReadiness,false);}
+ assert.equal(manifest.parentManifestSha256,held.recovery.manifestSha256);assert.equal(held.state.deliveries,1);assert.equal(restarted.state.deliveries,3);assert.equal(restarted.alarm,null);assert.equal(restarted.fault.deletes,0);
+ const project=v=>({label:v.label,I0:v.I0,C0:v.C0,C1:v.C1,signal:v.signal,state:v.state.status,deliveries:v.state.deliveries,alarm:v.alarm,restores:v.restores,receiptHash:v.receipt?.recordHash??null,children:v.metrics.children.length,childMaxMs:Math.max(...v.metrics.children.map(c=>c.elapsedMs)),sqlCalls:v.metrics.sqlCalls,sqlElapsedMs:v.metrics.sqlElapsedMs,kvLists:v.metrics.kvLists,kvDeletes:v.metrics.kvDeletes,held:v.fault.held,released:v.fault.released,settled:v.fault.settled});
+ return {label:historicalArchive?'historical g4 byte audit; original job remains failed':'g4 strict outcome readback',sourceArtifact:expectedEvidenceSource,sourceVerifier:process.env.GITHUB_SHA,partialCheckpoint:descriptor,partialFiles:manifest.files.length,parentManifestSha256:manifest.parentManifestSha256,historicalEnvelopeBoundPartial:!historicalArchive,manifestAndBytesVerified:true,nativeEffectsReproduced:false,openedI0:false,results:[project(held),project(restarted)],operationalReadiness:false,completePackage:false,PCoff:false};
+}
+/** Genuine short SYN producer/control: early disposal, never a C0 closure claim. */
+export async function verifyCleanupMTransportPremises(){
+ const sdkOnly=await compileCleanupSdkOnlyWorker();assert.equal(sdkOnly.sha256,'92f6554db082c30e83c6f7ae4700544ee7438f0da349b0dc2d70594d97efe66f','unchanged accepted SDK-only component');
+ await mkdir('output/owner-cleanup',{recursive:true});await writeFile('output/owner-cleanup/sdk-only-current.mjs',sdkOnly.script);await writeFile('output/owner-cleanup/sdk-only-current-metafile.json',json(sdkOnly.metafile));
+ let f,result;
+ try{
+  f=await ownerReferenceFixture({after(){}},{cleanupCheckpoint:true});
+  const prepared=await prepareOwnerReference(f),response=await prepared.issue();assert.equal(response.status,302);await assertActualComplete(f,{reference:true});await downstreamOwnerReference(f,response,prepared);
+  const {currentMountedOptions}=f.cleanupCheckpointInputs(),m=cleanupMTransport(f.mf,{currentMountedOptions,expectedModuleHash:f.firstConnectionBuild.M.sha256});
+  const positive=await readCleanupM(m,f.cleanupToken.access_token,f.source.project.projectId);
+  const denied=await m.fetch('https://delegated-canary.agentfriendlyweb.dev/mcp',{method:'POST',headers:{Authorization:'Bearer SYN-invalid-control',Host:'127.0.0.1','MF-Route-Override':'qa-first-connection','Content-Type':'application/json',Accept:'application/json, text/event-stream'},body:json({jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-03-26',capabilities:{},clientInfo:{name:'SYN-wrapper-negative',version:'1'}}})});
+  const body=await denied.text();assert([401,403].includes(denied.status));assert(!body.includes(f.source.project.projectId));
+  const facts=await plain(f.stub.ownerCleanupFacts()),plan=JSON.parse(facts.rows.find(([k])=>k===P+'plan')[1]);assert.equal(facts.signal.entered,0);assert(Date.now()<plan.C0);
+  result={label:'SYN genuine I0 diagnostic; early dispose; not GREEN51',source:process.env.GITHUB_SHA,I0:plan.I0,C0:plan.C0,C1:plan.C1,nativeDbNow:facts.dbNow,openedI0:true,closureProved:false,fabricatedAdmission:false,positive,negative:{status:denied.status,bodyHash:sha(body),dataDenied:true},sdkOnly:{sha256:sdkOnly.sha256,bytes:sdkOnly.bytes,inputs:Object.keys(sdkOnly.metafile.inputs).length,priorHoldRun:42371140511,holdRepeated:false},expiry:f.sdkAfterExchange,operationalReadiness:false,completePackage:false,PCoff:false};
+ }finally{if(f){await f.mf.dispose();await f.cleanup();}}
+ result.disposedAt=Date.now();assert(result.disposedAt<result.C0);result.disposedBeforeC0=true;await writeCleanupEvidence('m-transport-preflight',result);return result;
 }
 
 /** Directed SDK component qualification, no AFW I0/alarm or business admission. */
