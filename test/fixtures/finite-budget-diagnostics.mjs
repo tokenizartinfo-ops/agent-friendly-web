@@ -51,7 +51,7 @@ export function createBudgetDiagnostics(options={}){
  });
  const bytes=safe((ref,meta)=>{
   event();const row=nativeObject(ref)&&operations.get(ref),length=data(meta,'length'),chunks=data(meta,'chunks'),durationMs=data(meta,'durationMs');
-  if(!row||!integer(length)||!integer(chunks)||!number(durationMs))return invalid();
+  if(!row||row.operation!=='read'||!integer(length)||!integer(chunks)||!number(durationMs))return invalid();
   if(row.nativeBytesRead===null){row.nativeBytesRead=0;row.chunksRead=0;row.nativeBytesReason=null;coverage.nativeBytesUnavailable--;}
   row.nativeBytesRead+=length;row.chunksRead+=chunks;row.readDurationMs+=durationMs;
   for(const m of [totals,groups.get(row.phase+'|'+row.resourceClass),scopes.get(row.rootOrdinal+'|'+(row.childOrdinal??0))]){m.nativeBytesRead=(m.nativeBytesRead??0)+length;m.chunksRead=(m.chunksRead??0)+chunks;}

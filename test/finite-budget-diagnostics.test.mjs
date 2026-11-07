@@ -71,4 +71,6 @@ test('Q8 opaque wire bytes and linked body invocations preserve interval and byt
  assert.equal(c.begin(r,null,{phase,resourceClass,operation:'cancel',at:11,fetchOpRef:fetch}),null);
  assert.equal(c.begin(r,child,{phase,resourceClass:'KV',operation:'read',at:11,fetchOpRef:fetch}),null);
  assert.equal(c.snapshot().coverage.unattributed,4);assert.equal(c.snapshot().totals.nativeStarted,4);
+ const beforeBytes=c.snapshot().coverage.invalid;c.bytes(fetch,{length:12,chunks:1,durationMs:1});c.bytes(cancel,{length:12,chunks:1,durationMs:1});assert.equal(c.snapshot().coverage.invalid,beforeBytes+2);assert.equal(c.snapshot().totals.nativeBytesRead,12);
+ const inbound=c.begin(r,child,{phase,resourceClass:'transport',operation:'read',at:12});assert(inbound,'inbound Request body has no outbound fetch');c.settle(inbound,{at:13,status:'fulfilled'});assert.equal(c.snapshot().rows.at(-1).fetchOpOrdinal,null);
 });
