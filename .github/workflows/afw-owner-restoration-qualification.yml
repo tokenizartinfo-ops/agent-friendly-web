@@ -6,151 +6,1369 @@ on:
 permissions:
   contents: read
 jobs:
-  historical_preflight_readback:
-    permissions: {contents: read, actions: read}
+  prepare_g0:
+    outputs:
+      checkpoint_id: ${{ steps.checkpoint.outputs.artifact-id }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
+      - name: Record bounded job start
+        run: echo "AFW_JOB_STARTED_MS=$(date +%s%3N)" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
       - uses: actions/setup-node@v4
-        with: {node-version: 22}
-      - name: Pin the existing successful-control artifact
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: GREEN forty fixed components before first I0
+        shell: bash
         run: |
+          mkdir -p output/owner-cleanup
+          set -o pipefail
+          { for file in test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs test/mcp-qa-finite-owner-cleanup.test.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs test/fixtures/finite-first-connection-publication.mjs; do node --check "$file"; done; } 2>&1 | tee output/owner-cleanup/syntax.log
+          npx eslint test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs test/mcp-qa-finite-owner-cleanup.test.mjs lib/mcp-qa-finite-owner-cleanup-records.mjs lib/mcp-qa-finite-owner-cleanup-journal.mjs lib/mcp-qa-finite-stage-work.mjs lib/mcp-qa-finite-preparation-issuer-store.mjs lib/mcp-qa-finite-owner-cleanup.mjs lib/mcp-qa-finite-initial-cleanup.mjs test/fixtures/finite-first-connection-publication.mjs | tee output/owner-cleanup/lint.log
+          node --test --test-reporter=tap test/mcp-qa-finite-owner-cleanup.test.mjs | tee output/owner-cleanup/contracts14.tap
+          node --test --test-reporter=tap test/mcp-qa-finite-owner-sdk-reference.test.mjs | tee output/owner-cleanup/inherited10.tap
+          node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern='^(REAL closed-first monotonic tombstone permits early reduction and blocks delayed OPEN|REAL OPEN then terminal close prevents late authorization|REAL serialized barrier orders future grant to zero and makes exact absence meaningful|REAL unknown fence ACK reconciles same original ID on fresh primary before absence|REAL original UUID grant-only cleanup normal preserves unrelated rows/history|REAL original UUID grant-only cleanup held_grant_ack preserves unrelated rows/history|REAL original UUID grant-only cleanup history preserves unrelated rows/history|REAL foreign project revision fails closed after barrier|REAL expired original grant and consent are reduced after C0 within original cleanup C1)$' test/mcp-qa-finite-preparation-issuer-native.test.mjs | tee output/owner-cleanup/issuer9.tap
+          node --test --test-concurrency=1 --test-reporter=tap --test-name-pattern='^(B2b only actual finite alarm with no initial records delegates nominal unchanged|B2b foreign primary pointer stops without blind overwrite)$' test/mcp-qa-finite-initial-cleanup-native.test.mjs | tee output/owner-cleanup/initial2.tap
+          AFW_R2_GROUP=components node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/sql5.tap
           node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';
-          const r=await fetch('https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/13575584835',{headers:{Authorization:'Bearer '+process.env.GITHUB_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}});assert.equal(r.status,200);const a=await r.json();assert.equal(a.id,13575584835);assert.equal(a.workflow_run.id,42376693686);assert.equal(a.workflow_run.head_sha,'f591b7e8590b694cd3b7693f6537c6a92e5ee8e5');assert.equal(a.size_in_bytes,1322925);assert.equal(a.expired,false);assert.equal(a.digest,'sha256:3477ad8f889a9c9229c10d62bb30a21bccd0d1cf6f1e23b3cb9aa31f54d675f6');console.info('Historical artifact pinned',a.id,a.digest);
+          import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
+          for(const [name,count]of [['contracts14',14],['inherited10',10],['issuer9',9],['initial2',2],['sql5',5]]){
+           const tap=await readFile('output/owner-cleanup/'+name+'.tap','utf8');for(const [key,value]of [['tests',count],['pass',count],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),name+' '+key);
+          }
           NODE
-      - name: Download exact artifact historical_preflight attempt 1
-        id: historical_preflight_1
+      - name: Genuine g0 producer and native checkpoint
+        shell: bash
+        run: |
+          mkdir -p output/owner-cleanup
+          set -o pipefail
+          node test/fixtures/finite-owner-cleanup-persistence.mjs prepare-group output/owner-cleanup/checkpoint-g0 g0 | tee output/owner-cleanup/prepare-g0.log
+      - name: Upload native g0 checkpoint
+        id: checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g0-checkpoint-${{ github.sha }}
+          path: output/owner-cleanup/checkpoint-g0/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
         if: ${{ success() }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ '13575584835' }}
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
           merge-multiple: true
-          github-token: ${{ github.token }}
-          repository: tokenizartinfo-ops/agent-friendly-web
-          run-id: 42376693686
-          path: ${{ runner.temp }}/historical-preflight
+          path: ${{ runner.temp }}/r2-g0-readback
       - name: Wait two seconds before exact artifact retry
-        if: ${{ always() && steps.historical_preflight_1.outcome == 'failure' }}
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
         run: sleep 2
-      - name: Download exact artifact historical_preflight attempt 2
-        id: historical_preflight_2
-        if: ${{ always() && steps.historical_preflight_1.outcome == 'failure' }}
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ '13575584835' }}
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
           merge-multiple: true
-          github-token: ${{ github.token }}
-          repository: tokenizartinfo-ops/agent-friendly-web
-          run-id: 42376693686
-          path: ${{ runner.temp }}/historical-preflight
+          path: ${{ runner.temp }}/r2-g0-readback
       - name: Wait five seconds before final exact artifact retry
-        if: ${{ always() && steps.historical_preflight_2.outcome == 'failure' }}
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
         run: sleep 5
-      - name: Download exact artifact historical_preflight attempt 3
-        id: historical_preflight_3
-        if: ${{ always() && steps.historical_preflight_2.outcome == 'failure' }}
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ '13575584835' }}
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
           merge-multiple: true
-          github-token: ${{ github.token }}
-          repository: tokenizartinfo-ops/agent-friendly-web
-          run-id: 42376693686
-          path: ${{ runner.temp }}/historical-preflight
+          path: ${{ runner.temp }}/r2-g0-readback
       - name: Require successful exact artifact download
         if: ${{ always() }}
         env:
-          ARTIFACT_ID: ${{ '13575584835' }}
-          DOWNLOAD_OK: ${{ steps.historical_preflight_1.outcome == 'success' || steps.historical_preflight_2.outcome == 'success' || steps.historical_preflight_3.outcome == 'success' }}
+          ARTIFACT_ID: ${{ steps.checkpoint.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
         run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
-      - name: Verify twelve exact historical files without executing them
+      - name: Verify actual native files current scripts and graphs readback
+        run: node test/fixtures/finite-owner-cleanup-persistence.mjs verify-group "${{ runner.temp }}/r2-g0-readback"
+      - name: Preserve g0 producer diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g0-prepare-evidence-${{ github.sha }}
+          path: |
+            output/owner-cleanup/*.log
+            output/owner-cleanup/*.tap
+            output/owner-reference/
+            output/t2-native-graphs/
+          if-no-files-found: warn
+          retention-days: 7
+  consume_g0:
+    needs: prepare_g0
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      AFW_R2_GROUP: g0
+      AFW_R2_CHECKPOINT: output/owner-cleanup/checkpoint-g0
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
+        if: ${{ success() }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g0.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g0
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g0.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g0
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g0.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g0
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ needs.prepare_g0.outputs.checkpoint_id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: GREEN g0 original native clocks
         shell: bash
         run: |
           set -o pipefail
-          node --input-type=module <<'NODE' | tee historical-preflight-audit.log
-          import {readFile,readdir,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
-          const expectedEvidenceSource='f591b7e8590b694cd3b7693f6537c6a92e5ee8e5',root=process.env.RUNNER_TEMP+'/historical-preflight',hash=b=>createHash('sha256').update(b).digest('hex'),read=p=>readFile(root+'/'+p),parse=async p=>JSON.parse(await read(p));
-          const m=await parse('evidence-manifest.json');assert.equal(m.source,expectedEvidenceSource);assert.equal(m.operationalReadiness,false);assert.equal(m.completePackage,false);assert.equal(m.PCoff,false);
-          const owner=['launcher-probe.mjs','launcher-probe.json','g4-artifact-metadata.json','g4-existing-audit.json','m-transport-preflight.json','routing-preflight.log','sdk-only-current.mjs','sdk-only-current-metafile.json'].sort(),graphNames=['canary-index.mjs','qa-index.mjs','metafiles.json','native-syn.json'].sort();
-          assert.deepEqual((await readdir(root)).sort(),['evidence-manifest.json','owner-cleanup','t2-native-graphs']);assert.deepEqual((await readdir(root+'/owner-cleanup')).sort(),owner);const dirs=await readdir(root+'/t2-native-graphs');assert.equal(dirs.length,1);assert.match(dirs[0],/^[a-f0-9]{64}$/);const gp='t2-native-graphs/'+dirs[0];assert.deepEqual((await readdir(root+'/'+gp)).sort(),graphNames);
-          const actual=[];async function walk(p=''){for(const e of await readdir(root+'/'+p,{withFileTypes:true})){assert(!e.isSymbolicLink());const path=p?p+'/'+e.name:e.name;if(e.isDirectory())await walk(path);else{assert(e.isFile());if(path!=='evidence-manifest.json')actual.push(path);}}}await walk();const expected=[...owner.map(n=>'owner-cleanup/'+n),...graphNames.map(n=>gp+'/'+n)].sort();assert.deepEqual(actual.sort(),expected);assert.deepEqual(m.files.map(f=>f.path).sort(),expected);assert.equal(m.files.length,12);
-          for(const f of m.files){assert(!f.path.includes('..'));const b=await read(f.path);assert.equal(b.length,f.bytes);assert.equal(hash(b),f.sha256);}
-          const native=await parse(gp+'/native-syn.json'),metafiles=await parse(gp+'/metafiles.json'),M=await read(gp+'/canary-index.mjs'),QA=await read(gp+'/qa-index.mjs');
-          assert.equal(native.purpose,'afw.first-connection-native-syn-build.v1');assert.equal(native.testRevision,expectedEvidenceSource);assert.equal(hash(M),native.M.sha256);assert.equal(M.length,native.M.bytes);assert.equal(hash(QA),native.QA.sha256);assert.equal(QA.length,native.QA.bytes);assert.equal(hash(QA),dirs[0]);assert.equal(hash(M),'c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32');assert(Object.hasOwn(metafiles.M.inputs,'worker/mcp-own/finite.mjs'));assert(Object.keys(metafiles.QA.inputs).some(p=>p.endsWith('mcp-qa-finite-owner-cleanup.mjs')));
-          const control=await parse('owner-cleanup/m-transport-preflight.json'),probe=await parse('owner-cleanup/launcher-probe.json'),oldG4=await parse('owner-cleanup/g4-existing-audit.json'),oldMeta=await parse('owner-cleanup/g4-artifact-metadata.json'),sdk=await read('owner-cleanup/sdk-only-current.mjs'),sdkMeta=await parse('owner-cleanup/sdk-only-current-metafile.json');
-          assert.equal(control.source,expectedEvidenceSource);assert.equal(control.C0,control.I0+900000);assert.equal(control.C1,control.C0+180000);assert.equal(control.openedI0,true);assert.equal(control.closureProved,false);assert.equal(control.fabricatedAdmission,false);assert.equal(control.disposedBeforeC0,true);assert(control.disposedAt<control.C0);assert.equal(control.positive.worker,'canary-first-connection');assert.equal(control.positive.path,'/mcp');assert.equal(control.positive.scriptHash,hash(M));assert.equal(control.positive.namespaceId,'first-connection-oauth');assert.equal(control.positive.dataRead,true);assert(control.positive.requests.some(r=>r.status===200));assert.equal(control.negative.status,401);assert.equal(control.negative.dataDenied,true);
-          assert.equal(hash(sdk),'92f6554db082c30e83c6f7ae4700544ee7438f0da349b0dc2d70594d97efe66f');assert.equal(hash(sdk),control.sdkOnly.sha256);assert.equal(sdk.length,control.sdkOnly.bytes);assert.equal(Object.keys(sdkMeta.inputs).length,control.sdkOnly.inputs);assert.equal(control.sdkOnly.holdRepeated,false);
-          assert.equal(probe.source,expectedEvidenceSource);assert.equal(probe.bad.outcome,'error');assert.equal(probe.bad.name,'ReferenceError');assert.deepEqual(probe.bad.execArgv,['--input-type=module']);assert.equal(probe.good.outcome,'success');assert.equal(probe.good.requireAvailable,true);assert.deepEqual(probe.good.execArgv,[]);assert.equal(hash(await read('owner-cleanup/launcher-probe.mjs')),probe.programHash);
-          assert.equal(oldG4.sourceArtifact,'818bc4d4e6fb1935e594951ba09d3f9536ba49d6');assert.equal(oldG4.sourceVerifier,expectedEvidenceSource);assert.equal(oldG4.partialFiles,43);assert.equal(oldG4.manifestAndBytesVerified,true);assert.equal(oldG4.historicalEnvelopeBoundPartial,false);assert.equal(oldG4.openedI0,false);assert.equal(oldMeta.artifactId,13575185515);assert.equal(oldMeta.runId,42371498327);assert.equal(oldMeta.archiveDigest,'sha256:90edd8e83d2789fce9cca75b53d02102080e6ba0d60c891eac81fc90aff777e8');
-          const result={label:'historical preflight readback recovery; original run stays failure',sourceArtifact:expectedEvidenceSource,sourceVerifier:process.env.GITHUB_SHA,artifactId:13575584835,runId:42376693686,archiveBytes:1322925,archiveDigest:'sha256:3477ad8f889a9c9229c10d62bb30a21bccd0d1cf6f1e23b3cb9aa31f54d675f6',files:m.files,graphFiles:4,graphs:3,M:{sha256:hash(M),bytes:M.length,inputs:Object.keys(metafiles.M.inputs).length},QA:{sha256:hash(QA),bytes:QA.length,inputs:Object.keys(metafiles.QA.inputs).length},sdkOnly:control.sdkOnly,control,launcher:probe,oldG4,readbackVerified:true,newI0:false,nativeEffectsReproduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
-          await writeFile('historical-preflight-audit.json',JSON.stringify(result,null,2));console.info('R2 historical preflight exact readback',JSON.stringify({sourceArtifact:expectedEvidenceSource,sourceVerifier:process.env.GITHUB_SHA,files:m.files.length,graphFiles:4,newI0:false,M:result.M,QA:result.QA,sdkOnly:result.sdkOnly}));
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g0.tap
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
+          const tap=await readFile('output/owner-cleanup/green-g0.tap','utf8');for(const [key,value]of [['tests',2],['pass',2],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g0 '+key);
           NODE
-      - name: Preserve historical readback receipt
+      - name: Inventory g0 result evidence
         if: always()
-        id: audit
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {readdir,readFile,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';
+          const root='output/owner-cleanup',files=[];
+          for(const name of await readdir(root))if(/\.(json|tap)$/.test(name)){const b=await readFile(root+'/'+name);files.push({path:name,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});}
+          await writeFile(root+'/evidence-manifest.json',JSON.stringify({source:process.env.GITHUB_SHA,group:'g0',files,operationalReadiness:false,completePackage:false,PCoff:false},null,2));
+          NODE
+      - name: Preserve g0 native outcomes
+        if: always()
+        id: outcome
         uses: actions/upload-artifact@v4
         with:
-          name: r2-historical-preflight-audit-${{ github.sha }}
+          name: r2-green-g0-consume-evidence-${{ github.sha }}
           path: |
-            historical-preflight-audit.json
-            historical-preflight-audit.log
+            output/owner-cleanup/*.tap
+            output/owner-cleanup/*.json
           if-no-files-found: error
           retention-days: 7
-      - name: Download exact artifact audit_receipt attempt 1
-        id: audit_receipt_1
-        if: ${{ always() && steps.audit.outputs.artifact-id != '' }}
+      - name: Download exact artifact outcome_read attempt 1
+        id: outcome_read_1
+        if: ${{ always() && steps.outcome.outputs.artifact-id != '' }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ steps.audit.outputs.artifact-id }}
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
           merge-multiple: true
-          path: ${{ runner.temp }}/audit-receipt
+          path: ${{ runner.temp }}/r2-g0-outcome-readback
       - name: Wait two seconds before exact artifact retry
-        if: ${{ always() && steps.audit_receipt_1.outcome == 'failure' }}
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
         run: sleep 2
-      - name: Download exact artifact audit_receipt attempt 2
-        id: audit_receipt_2
-        if: ${{ always() && steps.audit_receipt_1.outcome == 'failure' }}
+      - name: Download exact artifact outcome_read attempt 2
+        id: outcome_read_2
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ steps.audit.outputs.artifact-id }}
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
           merge-multiple: true
-          path: ${{ runner.temp }}/audit-receipt
+          path: ${{ runner.temp }}/r2-g0-outcome-readback
       - name: Wait five seconds before final exact artifact retry
-        if: ${{ always() && steps.audit_receipt_2.outcome == 'failure' }}
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
         run: sleep 5
-      - name: Download exact artifact audit_receipt attempt 3
-        id: audit_receipt_3
-        if: ${{ always() && steps.audit_receipt_2.outcome == 'failure' }}
+      - name: Download exact artifact outcome_read attempt 3
+        id: outcome_read_3
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ steps.audit.outputs.artifact-id }}
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
           merge-multiple: true
-          path: ${{ runner.temp }}/audit-receipt
+          path: ${{ runner.temp }}/r2-g0-outcome-readback
       - name: Require successful exact artifact download
         if: ${{ always() }}
         env:
-          ARTIFACT_ID: ${{ steps.audit.outputs.artifact-id }}
-          DOWNLOAD_OK: ${{ steps.audit_receipt_1.outcome == 'success' || steps.audit_receipt_2.outcome == 'success' || steps.audit_receipt_3.outcome == 'success' }}
+          ARTIFACT_ID: ${{ steps.outcome.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.outcome_read_1.outcome == 'success' || steps.outcome_read_2.outcome == 'success' || steps.outcome_read_3.outcome == 'success' }}
         run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
-      - name: Verify recovered audit receipt
+      - name: Verify g0 outcome digest inventory
         if: always()
         run: |
           node --input-type=module <<'NODE'
-          import {readFile,readdir} from 'node:fs/promises';import assert from 'node:assert/strict';
-          const root=process.env.RUNNER_TEMP+'/audit-receipt';assert.deepEqual((await readdir(root)).sort(),['historical-preflight-audit.json','historical-preflight-audit.log']);const a=JSON.parse(await readFile(root+'/historical-preflight-audit.json','utf8'));assert.equal(a.sourceVerifier,process.env.GITHUB_SHA);assert.equal(a.sourceArtifact,'f591b7e8590b694cd3b7693f6537c6a92e5ee8e5');assert.equal(a.artifactId,13575584835);assert.equal(a.readbackVerified,true);assert.equal(a.files.length,12);assert.equal(a.newI0,false);console.info('R2 recovered audit receipt verified',a.files.length);
+          import {readFile,readdir} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+          const root=process.env.RUNNER_TEMP+'/r2-g0-outcome-readback',m=JSON.parse(await readFile(root+'/evidence-manifest.json','utf8'));assert.equal(m.source,process.env.GITHUB_SHA);assert.equal(m.group,'g0');assert.deepEqual(m.files.map(f=>f.path).sort(),["green-g0.tap","principal.json","sdk-expiry-same-occurrence.json"]);assert.deepEqual((await readdir(root)).sort(),[...m.files.map(f=>f.path),'evidence-manifest.json'].sort());
+          for(const f of m.files){assert(!f.path.includes('/')&&!f.path.includes('..'));const b=await readFile(root+'/'+f.path);assert.equal(b.length,f.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),f.sha256);}console.info('R2 outcome exact readback',m.group,m.files.length);
+          NODE
+  prepare_g1:
+    outputs:
+      checkpoint_id: ${{ steps.checkpoint.outputs.artifact-id }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Record bounded job start
+        run: echo "AFW_JOB_STARTED_MS=$(date +%s%3N)" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Genuine g1 producer and native checkpoint
+        shell: bash
+        run: |
+          mkdir -p output/owner-cleanup
+          set -o pipefail
+          node test/fixtures/finite-owner-cleanup-persistence.mjs prepare-group output/owner-cleanup/checkpoint-g1 g1 | tee output/owner-cleanup/prepare-g1.log
+      - name: Upload native g1 checkpoint
+        id: checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g1-checkpoint-${{ github.sha }}
+          path: output/owner-cleanup/checkpoint-g1/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
+        if: ${{ success() }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g1-readback
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g1-readback
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g1-readback
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ steps.checkpoint.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: Verify actual native files current scripts and graphs readback
+        run: node test/fixtures/finite-owner-cleanup-persistence.mjs verify-group "${{ runner.temp }}/r2-g1-readback"
+      - name: Preserve g1 producer diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g1-prepare-evidence-${{ github.sha }}
+          path: |
+            output/owner-cleanup/*.log
+            output/owner-cleanup/*.tap
+            output/owner-reference/
+            output/t2-native-graphs/
+          if-no-files-found: warn
+          retention-days: 7
+  consume_g1:
+    needs: prepare_g1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      AFW_R2_GROUP: g1
+      AFW_R2_CHECKPOINT: output/owner-cleanup/checkpoint-g1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
+        if: ${{ success() }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g1.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g1
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g1.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g1
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g1.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g1
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ needs.prepare_g1.outputs.checkpoint_id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: GREEN g1 original native clocks
+        shell: bash
+        run: |
+          set -o pipefail
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g1.tap
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
+          const tap=await readFile('output/owner-cleanup/green-g1.tap','utf8');for(const [key,value]of [['tests',2],['pass',2],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g1 '+key);
+          NODE
+      - name: Inventory g1 result evidence
+        if: always()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {readdir,readFile,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';
+          const root='output/owner-cleanup',files=[];
+          for(const name of await readdir(root))if(/\.(json|tap)$/.test(name)){const b=await readFile(root+'/'+name);files.push({path:name,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});}
+          await writeFile(root+'/evidence-manifest.json',JSON.stringify({source:process.env.GITHUB_SHA,group:'g1',files,operationalReadiness:false,completePackage:false,PCoff:false},null,2));
+          NODE
+      - name: Preserve g1 native outcomes
+        if: always()
+        id: outcome
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g1-consume-evidence-${{ github.sha }}
+          path: |
+            output/owner-cleanup/*.tap
+            output/owner-cleanup/*.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download exact artifact outcome_read attempt 1
+        id: outcome_read_1
+        if: ${{ always() && steps.outcome.outputs.artifact-id != '' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g1-outcome-readback
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact outcome_read attempt 2
+        id: outcome_read_2
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g1-outcome-readback
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact outcome_read attempt 3
+        id: outcome_read_3
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g1-outcome-readback
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ steps.outcome.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.outcome_read_1.outcome == 'success' || steps.outcome_read_2.outcome == 'success' || steps.outcome_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: Verify g1 outcome digest inventory
+        if: always()
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile,readdir} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+          const root=process.env.RUNNER_TEMP+'/r2-g1-outcome-readback',m=JSON.parse(await readFile(root+'/evidence-manifest.json','utf8'));assert.equal(m.source,process.env.GITHUB_SHA);assert.equal(m.group,'g1');assert.deepEqual(m.files.map(f=>f.path).sort(),["grant-before-link.json","green-g1.tap","notice-without-link.json"]);assert.deepEqual((await readdir(root)).sort(),[...m.files.map(f=>f.path),'evidence-manifest.json'].sort());
+          for(const f of m.files){assert(!f.path.includes('/')&&!f.path.includes('..'));const b=await readFile(root+'/'+f.path);assert.equal(b.length,f.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),f.sha256);}console.info('R2 outcome exact readback',m.group,m.files.length);
+          NODE
+  prepare_g2:
+    outputs:
+      checkpoint_id: ${{ steps.checkpoint.outputs.artifact-id }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Record bounded job start
+        run: echo "AFW_JOB_STARTED_MS=$(date +%s%3N)" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Genuine g2 producer and native checkpoint
+        shell: bash
+        run: |
+          mkdir -p output/owner-cleanup
+          set -o pipefail
+          node test/fixtures/finite-owner-cleanup-persistence.mjs prepare-group output/owner-cleanup/checkpoint-g2 g2 | tee output/owner-cleanup/prepare-g2.log
+      - name: Upload native g2 checkpoint
+        id: checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g2-checkpoint-${{ github.sha }}
+          path: output/owner-cleanup/checkpoint-g2/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
+        if: ${{ success() }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g2-readback
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g2-readback
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g2-readback
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ steps.checkpoint.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: Verify actual native files current scripts and graphs readback
+        run: node test/fixtures/finite-owner-cleanup-persistence.mjs verify-group "${{ runner.temp }}/r2-g2-readback"
+      - name: Preserve g2 producer diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g2-prepare-evidence-${{ github.sha }}
+          path: |
+            output/owner-cleanup/*.log
+            output/owner-cleanup/*.tap
+            output/owner-reference/
+            output/t2-native-graphs/
+          if-no-files-found: warn
+          retention-days: 7
+  consume_g2:
+    needs: prepare_g2
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      AFW_R2_GROUP: g2
+      AFW_R2_CHECKPOINT: output/owner-cleanup/checkpoint-g2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
+        if: ${{ success() }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g2.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g2
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g2.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g2
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g2.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g2
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ needs.prepare_g2.outputs.checkpoint_id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: GREEN g2 original native clocks
+        shell: bash
+        run: |
+          set -o pipefail
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g2.tap
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
+          const tap=await readFile('output/owner-cleanup/green-g2.tap','utf8');for(const [key,value]of [['tests',2],['pass',2],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g2 '+key);
+          NODE
+      - name: Inventory g2 result evidence
+        if: always()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {readdir,readFile,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';
+          const root='output/owner-cleanup',files=[];
+          for(const name of await readdir(root))if(/\.(json|tap)$/.test(name)){const b=await readFile(root+'/'+name);files.push({path:name,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});}
+          await writeFile(root+'/evidence-manifest.json',JSON.stringify({source:process.env.GITHUB_SHA,group:'g2',files,operationalReadiness:false,completePackage:false,PCoff:false},null,2));
+          NODE
+      - name: Preserve g2 native outcomes
+        if: always()
+        id: outcome
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g2-consume-evidence-${{ github.sha }}
+          path: |
+            output/owner-cleanup/*.tap
+            output/owner-cleanup/*.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download exact artifact outcome_read attempt 1
+        id: outcome_read_1
+        if: ${{ always() && steps.outcome.outputs.artifact-id != '' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g2-outcome-readback
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact outcome_read attempt 2
+        id: outcome_read_2
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g2-outcome-readback
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact outcome_read attempt 3
+        id: outcome_read_3
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g2-outcome-readback
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ steps.outcome.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.outcome_read_1.outcome == 'success' || steps.outcome_read_2.outcome == 'success' || steps.outcome_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: Verify g2 outcome digest inventory
+        if: always()
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile,readdir} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+          const root=process.env.RUNNER_TEMP+'/r2-g2-outcome-readback',m=JSON.parse(await readFile(root+'/evidence-manifest.json','utf8'));assert.equal(m.source,process.env.GITHUB_SHA);assert.equal(m.group,'g2');assert.deepEqual(m.files.map(f=>f.path).sort(),["foreign-pointer.json","green-g2.tap","sdk-paging-scope.json"]);assert.deepEqual((await readdir(root)).sort(),[...m.files.map(f=>f.path),'evidence-manifest.json'].sort());
+          for(const f of m.files){assert(!f.path.includes('/')&&!f.path.includes('..'));const b=await readFile(root+'/'+f.path);assert.equal(b.length,f.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),f.sha256);}console.info('R2 outcome exact readback',m.group,m.files.length);
+          NODE
+  prepare_g3:
+    outputs:
+      checkpoint_id: ${{ steps.checkpoint.outputs.artifact-id }}
+    needs: consume_g0
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Record bounded job start
+        run: echo "AFW_JOB_STARTED_MS=$(date +%s%3N)" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Genuine g3 producer and native checkpoint
+        shell: bash
+        run: |
+          mkdir -p output/owner-cleanup
+          set -o pipefail
+          node test/fixtures/finite-owner-cleanup-persistence.mjs prepare-group output/owner-cleanup/checkpoint-g3 g3 | tee output/owner-cleanup/prepare-g3.log
+      - name: Upload native g3 checkpoint
+        id: checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g3-checkpoint-${{ github.sha }}
+          path: output/owner-cleanup/checkpoint-g3/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
+        if: ${{ success() }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g3-readback
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g3-readback
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g3-readback
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ steps.checkpoint.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: Verify actual native files current scripts and graphs readback
+        run: node test/fixtures/finite-owner-cleanup-persistence.mjs verify-group "${{ runner.temp }}/r2-g3-readback"
+      - name: Preserve g3 producer diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g3-prepare-evidence-${{ github.sha }}
+          path: |
+            output/owner-cleanup/*.log
+            output/owner-cleanup/*.tap
+            output/owner-reference/
+            output/t2-native-graphs/
+          if-no-files-found: warn
+          retention-days: 7
+  consume_g3:
+    needs: prepare_g3
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      AFW_R2_GROUP: g3
+      AFW_R2_CHECKPOINT: output/owner-cleanup/checkpoint-g3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
+        if: ${{ success() }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g3.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g3
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g3.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g3
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g3.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g3
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ needs.prepare_g3.outputs.checkpoint_id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: GREEN g3 original native clocks
+        shell: bash
+        run: |
+          set -o pipefail
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g3.tap
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
+          const tap=await readFile('output/owner-cleanup/green-g3.tap','utf8');for(const [key,value]of [['tests',2],['pass',2],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g3 '+key);
+          NODE
+      - name: Inventory g3 result evidence
+        if: always()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {readdir,readFile,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';
+          const root='output/owner-cleanup',files=[];
+          for(const name of await readdir(root))if(/\.(json|tap)$/.test(name)){const b=await readFile(root+'/'+name);files.push({path:name,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});}
+          await writeFile(root+'/evidence-manifest.json',JSON.stringify({source:process.env.GITHUB_SHA,group:'g3',files,operationalReadiness:false,completePackage:false,PCoff:false},null,2));
+          NODE
+      - name: Preserve g3 native outcomes
+        if: always()
+        id: outcome
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g3-consume-evidence-${{ github.sha }}
+          path: |
+            output/owner-cleanup/*.tap
+            output/owner-cleanup/*.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download exact artifact outcome_read attempt 1
+        id: outcome_read_1
+        if: ${{ always() && steps.outcome.outputs.artifact-id != '' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g3-outcome-readback
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact outcome_read attempt 2
+        id: outcome_read_2
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g3-outcome-readback
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact outcome_read attempt 3
+        id: outcome_read_3
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g3-outcome-readback
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ steps.outcome.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.outcome_read_1.outcome == 'success' || steps.outcome_read_2.outcome == 'success' || steps.outcome_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: Verify g3 outcome digest inventory
+        if: always()
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile,readdir} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+          const root=process.env.RUNNER_TEMP+'/r2-g3-outcome-readback',m=JSON.parse(await readFile(root+'/evidence-manifest.json','utf8'));assert.equal(m.source,process.env.GITHUB_SHA);assert.equal(m.group,'g3');assert.deepEqual(m.files.map(f=>f.path).sort(),["green-g3.tap","same-fence-identity.json","unknown-restore-ack.json"]);assert.deepEqual((await readdir(root)).sort(),[...m.files.map(f=>f.path),'evidence-manifest.json'].sort());
+          for(const f of m.files){assert(!f.path.includes('/')&&!f.path.includes('..'));const b=await readFile(root+'/'+f.path);assert.equal(b.length,f.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),f.sha256);}console.info('R2 outcome exact readback',m.group,m.files.length);
+          NODE
+  prepare_g4:
+    outputs:
+      checkpoint_id: ${{ steps.checkpoint.outputs.artifact-id }}
+    needs: consume_g1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Record bounded job start
+        run: echo "AFW_JOB_STARTED_MS=$(date +%s%3N)" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Genuine g4 producer and native checkpoint
+        shell: bash
+        run: |
+          mkdir -p output/owner-cleanup
+          set -o pipefail
+          node test/fixtures/finite-owner-cleanup-persistence.mjs prepare-group output/owner-cleanup/checkpoint-g4 g4 | tee output/owner-cleanup/prepare-g4.log
+      - name: Upload native g4 checkpoint
+        id: checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g4-checkpoint-${{ github.sha }}
+          path: output/owner-cleanup/checkpoint-g4/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
+        if: ${{ success() }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g4-readback
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g4-readback
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g4-readback
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ steps.checkpoint.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: Verify actual native files current scripts and graphs readback
+        run: node test/fixtures/finite-owner-cleanup-persistence.mjs verify-group "${{ runner.temp }}/r2-g4-readback"
+      - name: Preserve g4 producer diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g4-prepare-evidence-${{ github.sha }}
+          path: |
+            output/owner-cleanup/*.log
+            output/owner-cleanup/*.tap
+            output/owner-reference/
+            output/t2-native-graphs/
+          if-no-files-found: warn
+          retention-days: 7
+  consume_g4:
+    needs: prepare_g4
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      AFW_R2_GROUP: g4
+      AFW_R2_CHECKPOINT: output/owner-cleanup/checkpoint-g4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
+        if: ${{ success() }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g4.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g4
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g4.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g4
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g4.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g4
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ needs.prepare_g4.outputs.checkpoint_id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: GREEN g4 original native clocks
+        shell: bash
+        run: |
+          set -o pipefail
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g4.tap
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
+          const tap=await readFile('output/owner-cleanup/green-g4.tap','utf8');for(const [key,value]of [['tests',2],['pass',2],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g4 '+key);
+          NODE
+      - name: Inventory g4 result evidence
+        if: always()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {readdir,readFile,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';
+          const root='output/owner-cleanup',files=[];
+          for(const name of await readdir(root))if(/\.(json|tap)$/.test(name)){const b=await readFile(root+'/'+name);files.push({path:name,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});}
+          await writeFile(root+'/evidence-manifest.json',JSON.stringify({source:process.env.GITHUB_SHA,group:'g4',files,operationalReadiness:false,completePackage:false,PCoff:false},null,2));
+          const {sealCleanupG4Outcome}=await import('./test/fixtures/finite-owner-cleanup-persistence.mjs');await sealCleanupG4Outcome(root);
+          NODE
+      - name: Preserve g4 native outcomes
+        if: always()
+        id: outcome
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g4-consume-evidence-${{ github.sha }}
+          path: |
+            output/owner-cleanup/*.tap
+            output/owner-cleanup/*.json
+            output/owner-cleanup/g4-partial/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download exact artifact outcome_read attempt 1
+        id: outcome_read_1
+        if: ${{ always() && steps.outcome.outputs.artifact-id != '' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g4-outcome-readback
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact outcome_read attempt 2
+        id: outcome_read_2
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g4-outcome-readback
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact outcome_read attempt 3
+        id: outcome_read_3
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g4-outcome-readback
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ steps.outcome.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.outcome_read_1.outcome == 'success' || steps.outcome_read_2.outcome == 'success' || steps.outcome_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: Verify g4 outcome and partial checkpoint recursively
+        if: always()
+        run: |
+          node --input-type=module <<'NODE'
+          import {verifyCleanupG4Outcome} from './test/fixtures/finite-owner-cleanup-persistence.mjs';
+          const result=await verifyCleanupG4Outcome(process.env.RUNNER_TEMP+'/r2-g4-outcome-readback');console.info('R2 g4 exact readback',JSON.stringify(result));
+          NODE
+  prepare_g5:
+    outputs:
+      checkpoint_id: ${{ steps.checkpoint.outputs.artifact-id }}
+    needs: consume_g2
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Record bounded job start
+        run: echo "AFW_JOB_STARTED_MS=$(date +%s%3N)" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Genuine g5 producer and native checkpoint
+        shell: bash
+        run: |
+          mkdir -p output/owner-cleanup
+          set -o pipefail
+          node test/fixtures/finite-owner-cleanup-persistence.mjs prepare-group output/owner-cleanup/checkpoint-g5 g5 | tee output/owner-cleanup/prepare-g5.log
+      - name: Upload native g5 checkpoint
+        id: checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g5-checkpoint-${{ github.sha }}
+          path: output/owner-cleanup/checkpoint-g5/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
+        if: ${{ success() }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g5-readback
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g5-readback
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.checkpoint.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g5-readback
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ steps.checkpoint.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: Verify actual native files current scripts and graphs readback
+        run: node test/fixtures/finite-owner-cleanup-persistence.mjs verify-group "${{ runner.temp }}/r2-g5-readback"
+      - name: Preserve g5 producer diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g5-prepare-evidence-${{ github.sha }}
+          path: |
+            output/owner-cleanup/*.log
+            output/owner-cleanup/*.tap
+            output/owner-reference/
+            output/t2-native-graphs/
+          if-no-files-found: warn
+          retention-days: 7
+  consume_g5:
+    needs: prepare_g5
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      AFW_R2_GROUP: g5
+      AFW_R2_CHECKPOINT: output/owner-cleanup/checkpoint-g5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Download exact artifact checkpoint_read attempt 1
+        id: checkpoint_read_1
+        if: ${{ success() }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g5.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g5
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact checkpoint_read attempt 2
+        id: checkpoint_read_2
+        if: ${{ always() && steps.checkpoint_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g5.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g5
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact checkpoint_read attempt 3
+        id: checkpoint_read_3
+        if: ${{ always() && steps.checkpoint_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.prepare_g5.outputs.checkpoint_id }}
+          merge-multiple: true
+          path: output/owner-cleanup/checkpoint-g5
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ needs.prepare_g5.outputs.checkpoint_id }}
+          DOWNLOAD_OK: ${{ steps.checkpoint_read_1.outcome == 'success' || steps.checkpoint_read_2.outcome == 'success' || steps.checkpoint_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: GREEN g5 original native clocks
+        shell: bash
+        run: |
+          set -o pipefail
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs | tee output/owner-cleanup/green-g5.tap
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
+          const tap=await readFile('output/owner-cleanup/green-g5.tap','utf8');for(const [key,value]of [['tests',1],['pass',1],['fail',0],['cancelled',0],['skipped',0],['todo',0]])assert(tap.includes('# '+key+' '+value+'\n'),'g5 '+key);
+          NODE
+      - name: Inventory g5 result evidence
+        if: always()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {readdir,readFile,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';
+          const root='output/owner-cleanup',files=[];
+          for(const name of await readdir(root))if(/\.(json|tap)$/.test(name)){const b=await readFile(root+'/'+name);files.push({path:name,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});}
+          await writeFile(root+'/evidence-manifest.json',JSON.stringify({source:process.env.GITHUB_SHA,group:'g5',files,operationalReadiness:false,completePackage:false,PCoff:false},null,2));
+          NODE
+      - name: Preserve g5 native outcomes
+        if: always()
+        id: outcome
+        uses: actions/upload-artifact@v4
+        with:
+          name: r2-green-g5-consume-evidence-${{ github.sha }}
+          path: |
+            output/owner-cleanup/*.tap
+            output/owner-cleanup/*.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download exact artifact outcome_read attempt 1
+        id: outcome_read_1
+        if: ${{ always() && steps.outcome.outputs.artifact-id != '' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g5-outcome-readback
+      - name: Wait two seconds before exact artifact retry
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
+        run: sleep 2
+      - name: Download exact artifact outcome_read attempt 2
+        id: outcome_read_2
+        if: ${{ always() && steps.outcome_read_1.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g5-outcome-readback
+      - name: Wait five seconds before final exact artifact retry
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
+        run: sleep 5
+      - name: Download exact artifact outcome_read attempt 3
+        id: outcome_read_3
+        if: ${{ always() && steps.outcome_read_2.outcome == 'failure' }}
+        continue-on-error: true
+        timeout-minutes: 1
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ steps.outcome.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/r2-g5-outcome-readback
+      - name: Require successful exact artifact download
+        if: ${{ always() }}
+        env:
+          ARTIFACT_ID: ${{ steps.outcome.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.outcome_read_1.outcome == 'success' || steps.outcome_read_2.outcome == 'success' || steps.outcome_read_3.outcome == 'success' }}
+        run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
+      - name: Verify g5 outcome digest inventory
+        if: always()
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile,readdir} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+          const root=process.env.RUNNER_TEMP+'/r2-g5-outcome-readback',m=JSON.parse(await readFile(root+'/evidence-manifest.json','utf8'));assert.equal(m.source,process.env.GITHUB_SHA);assert.equal(m.group,'g5');assert.deepEqual(m.files.map(f=>f.path).sort(),["green-g5.tap","late-isolate-business-closure.json","late-kv-actual-outcome.json"]);assert.deepEqual((await readdir(root)).sort(),[...m.files.map(f=>f.path),'evidence-manifest.json'].sort());
+          for(const f of m.files){assert(!f.path.includes('/')&&!f.path.includes('..'));const b=await readFile(root+'/'+f.path);assert.equal(b.length,f.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),f.sha256);}console.info('R2 outcome exact readback',m.group,m.files.length);
           NODE
