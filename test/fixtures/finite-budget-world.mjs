@@ -207,9 +207,47 @@ function descriptorMeta(selector){
  if(family==='Function.call'&&s.target==='withSession')return {edge:'holder'};
  return s.method?{operation:s.method}:{};
 }
-function parseExpression(text){
- const ast=sourceAST('const __v=('+text+');','expression.mjs');
- return ast.statements[0].declarationList.declarations[0].initializer.expression;
+// Only inserted compiler data uses these factories; original business nodes are untouched.
+export function createBudgetLiteral(value){
+ const f=ts.factory,active=new Set();
+ const build=value=>{
+  if(value===null)return f.createNull();
+  if(typeof value==='string')return f.createStringLiteral(value);
+  if(typeof value==='boolean')return value?f.createTrue():f.createFalse();
+  if(typeof value==='number'){
+   assert(Number.isFinite(value),'finite compiler JSON number');
+   const normalized=value===0?0:value;
+   return normalized<0?f.createPrefixUnaryExpression(ts.SyntaxKind.MinusToken,f.createNumericLiteral(-normalized)):f.createNumericLiteral(normalized);
+  }
+  assert(value&&typeof value==='object','supported compiler JSON value');
+  const array=Array.isArray(value),prototype=Object.getPrototypeOf(value);
+  assert(array?prototype===Array.prototype:prototype===Object.prototype||prototype===null,'plain compiler JSON data');
+  assert.equal(Object.getOwnPropertySymbols(value).length,0,'no compiler symbol fields');
+  assert(!active.has(value),'acyclic compiler JSON data');active.add(value);
+  try{
+   const descriptors=Object.getOwnPropertyDescriptors(value);
+   for(const descriptor of Object.values(descriptors))assert(Object.hasOwn(descriptor,'value'),'no compiler data accessors');
+   if(array){
+    const elements=[];for(let i=0;i<descriptors.length.value;i++)elements.push(Object.hasOwn(descriptors,String(i))?build(descriptors[i].value):f.createNull());
+    return f.createArrayLiteralExpression(elements);
+   }
+   return f.createObjectLiteralExpression(Object.keys(descriptors).filter(key=>descriptors[key].enumerable).map(key=>f.createPropertyAssignment(f.createStringLiteral(key),build(descriptors[key].value))));
+  }finally{active.delete(value);}
+ };
+ return build(value);
+}
+export function createBudgetScopeExpression(text){
+ const f=ts.factory,id=name=>f.createIdentifier(name),property=(name,key)=>f.createPropertyAccessExpression(id(name),key);
+ const conditional=(condition,yes,no)=>f.createConditionalExpression(condition,f.createToken(ts.SyntaxKind.QuestionToken),f.createStringLiteral(yes),f.createToken(ts.SyntaxKind.ColonToken),f.createStringLiteral(no));
+ switch(text){
+  case 'began+5000':return f.createBinaryExpression(id('began'),f.createToken(ts.SyntaxKind.PlusToken),f.createNumericLiteral(5000));
+  case 'entered+5000':return f.createBinaryExpression(id('entered'),f.createToken(ts.SyntaxKind.PlusToken),f.createNumericLiteral(5000));
+  case 'started+5000':return f.createBinaryExpression(id('started'),f.createToken(ts.SyntaxKind.PlusToken),f.createNumericLiteral(5000));
+  case 'parent.lease':return property('parent','lease');
+  case "metadata.method==='POST'?'authorize_post':'authorize_get'":return conditional(f.createBinaryExpression(property('metadata','method'),f.createToken(ts.SyntaxKind.EqualsEqualsEqualsToken),f.createStringLiteral('POST')),'authorize_post','authorize_get');
+  case "consent?'monitoring_post':'monitoring_get'":return conditional(id('consent'),'monitoring_post','monitoring_get');
+  default:assert.fail('fixed compiler scope expression required');
+ }
 }
 function packageSelection(source,path,role){
  const pin=budgetNativeDescriptorProposal.packages.find(p=>p.path===path);
@@ -339,7 +377,7 @@ export function transformBudgetPreparedSource(source,path,role){
   if(arg&&(ts.isArrowFunction(arg)||ts.isFunctionExpression(arg)))transactionCallbacks.add(arg);
  }
  const f=ts.factory,id=()=>f.createIdentifier(BUDGET_ID),access=name=>f.createPropertyAccessExpression(id(),name);
- const literal=value=>parseExpression(JSON.stringify(value));
+ const literal=createBudgetLiteral;
  const hook=(name,args)=>f.createCallExpression(access(name),undefined,args);
  let nativeCalls=0,identityEdges=0,bodyEdges=0,facadeEdges=0,scopeEdges=0,guardEdges=0;
  const closure=expression=>f.createArrowFunction(undefined,undefined,[],undefined,f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),expression);
@@ -383,13 +421,13 @@ export function transformBudgetPreparedSource(source,path,role){
     const callee=original.expression.getText(ast),text=original.getText(ast);
 
     if(callee==='Promise.resolve().then'&&path==='lib/mcp-qa-finite-bootstrap-native.mjs'&&text.includes('r=await fetcher(')){
-     scopeEdges++;return hook('childCall',[f.createIdentifier('originalLease'),f.createIdentifier('child'),parseExpression('began+5000'),closure(node)]);
+     scopeEdges++;return hook('childCall',[f.createIdentifier('originalLease'),f.createIdentifier('child'),createBudgetScopeExpression('began+5000'),closure(node)]);
     }
     if(callee==='Promise.resolve().then'&&path==='lib/mcp-qa-finite-initial-old-guard.mjs'&&text.includes('response=await fetcher(')){
-     scopeEdges++;return hook('childCall',[f.createIdentifier('originalLease'),f.createIdentifier('controller'),parseExpression('entered+5000'),closure(node)]);
+     scopeEdges++;return hook('childCall',[f.createIdentifier('originalLease'),f.createIdentifier('controller'),createBudgetScopeExpression('entered+5000'),closure(node)]);
     }
     if(path==='lib/mcp-qa-finite-initial-custody-probe.mjs'&&ts.isParenthesizedExpression(original.expression)&&ts.isArrowFunction(original.expression.expression)&&text.includes("fetcher(ROOT+'/tokens/verify'")){
-     scopeEdges++;return hook('childCall',[f.createIdentifier('originalLease'),f.createIdentifier('childCheck'),parseExpression('started+5000'),closure(node)]);
+     scopeEdges++;return hook('childCall',[f.createIdentifier('originalLease'),f.createIdentifier('childCheck'),createBudgetScopeExpression('started+5000'),closure(node)]);
     }
 
     if(path==='lib/mcp-qa-finite-stage-work.mjs'&&callee==='scopes.run'){scopeEdges++;return hook('run',[f.createIdentifier('originalLease'),closure(node)]);}
@@ -402,16 +440,16 @@ export function transformBudgetPreparedSource(source,path,role){
     if(path==='worker/mcp-own/finite.mjs'){
      if(callee==='worker.fetch'){scopeEdges++;return hook('transport',[f.createIdentifier('request'),f.createIdentifier('path'),closure(node)]);}
      const control=callee==='forwardFiniteOwnerChoice'?'setup':callee==='forwardPrivateFiniteOwnerOAuth'?'authorize':text.startsWith('(path===')?'monitoring':null;
-     if(control){scopeEdges++;return hook('control',[parseExpression('parent.lease'),control==='setup'?literal(control):hook('methodPhase',[f.createIdentifier('request'),literal(control)]),f.createIdentifier('request'),closure(node)]);}
+     if(control){scopeEdges++;return hook('control',[createBudgetScopeExpression('parent.lease'),control==='setup'?literal(control):hook('methodPhase',[f.createIdentifier('request'),literal(control)]),f.createIdentifier('request'),closure(node)]);}
     }
     if(path==='lib/mcp-qa-finite-owner-native-receiver.mjs'&&callee==='handlePrivateQaFiniteOwnerConnection'){
-     scopeEdges++;return hook('control',[parseExpression('parent.lease'),literal('setup'),f.createIdentifier('request'),closure(node)]);
+     scopeEdges++;return hook('control',[createBudgetScopeExpression('parent.lease'),literal('setup'),f.createIdentifier('request'),closure(node)]);
     }
     if(path==='lib/mcp-qa-finite-owner-oauth-qa.mjs'&&callee==='handlePrivateQaFiniteOwnerOAuth'){
-     scopeEdges++;return hook('control',[parseExpression('parent.lease'),parseExpression("metadata.method==='POST'?'authorize_post':'authorize_get'"),f.createIdentifier('request'),closure(node)]);
+     scopeEdges++;return hook('control',[createBudgetScopeExpression('parent.lease'),createBudgetScopeExpression("metadata.method==='POST'?'authorize_post':'authorize_get'"),f.createIdentifier('request'),closure(node)]);
     }
     if(path==='lib/mcp-qa-finite-owner-notice-get-qa.mjs'&&callee.startsWith('(consent?handlePrivateQaFiniteOwnerNoticeConsent')){
-     scopeEdges++;return hook('control',[parseExpression('parent.lease'),parseExpression("consent?'monitoring_post':'monitoring_get'"),f.createIdentifier('request'),closure(node)]);
+     scopeEdges++;return hook('control',[createBudgetScopeExpression('parent.lease'),createBudgetScopeExpression("consent?'monitoring_post':'monitoring_get'"),f.createIdentifier('request'),closure(node)]);
     }
    }
 

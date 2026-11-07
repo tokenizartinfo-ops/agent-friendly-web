@@ -46,6 +46,74 @@ test('Q4 logical denial and cancellation do not fabricate native settlement',()=
 
 });
 test('Q5 observing preserves actual promise identity, resolution, rejection and no authority',async()=>{
+ // Regression: foreign fragment coordinates must not alter inserted compiler metadata.
+ const ts=(await import('typescript')).default;
+ const {createBudgetLiteral,createBudgetScopeExpression,transformBudgetPreparedSource}=await import('./fixtures/finite-budget-world.mjs');
+ const parse=(source,path)=>{const ast=ts.createSourceFile(path,source,ts.ScriptTarget.ESNext,true,ts.ScriptKind.JS);assert.equal(ast.parseDiagnostics.length,0,'inserted compiler output parses');return ast;};
+ const decode=node=>{
+  if(ts.isStringLiteral(node))return node.text;
+  if(ts.isNumericLiteral(node))return Number(node.text);
+  if(node.kind===ts.SyntaxKind.TrueKeyword)return true;
+  if(node.kind===ts.SyntaxKind.FalseKeyword)return false;
+  if(node.kind===ts.SyntaxKind.NullKeyword)return null;
+  if(ts.isPrefixUnaryExpression(node)&&node.operator===ts.SyntaxKind.MinusToken)return -decode(node.operand);
+  if(ts.isArrayLiteralExpression(node))return node.elements.map(decode);
+  if(ts.isObjectLiteralExpression(node))return Object.fromEntries(node.properties.map(p=>{assert(ts.isPropertyAssignment(p)&&ts.isStringLiteral(p.name));return [p.name.text,decode(p.initializer)];}));
+  assert.fail('unexpected emitted JSON node');
+ };
+ const metadata={operation:'read',nested:[true,false,null,-0,-2.5,'quote" newline\n',[1]],resource:'transport'};
+ const expectedMetadata={operation:'read',nested:[true,false,null,0,-2.5,'quote" newline\n',[1]],resource:'transport'};
+ for(const [name,source]of [['witness-a.mjs','const target = 0;\n'],['witness-b.mjs','const padding = "different file";\nconst target = 0;\n']]){
+  const ast=parse(source,name),f=ts.factory,result=ts.transform(ast,[context=>{
+   const visit=node=>ts.isVariableDeclaration(node)&&node.name.getText(ast)==='target'
+    ?f.updateVariableDeclaration(node,node.name,node.exclamationToken,node.type,f.createCallExpression(f.createIdentifier('observe'),undefined,[createBudgetLiteral(metadata)]))
+    :ts.visitEachChild(node,visit,context);
+   return root=>ts.visitNode(root,visit);
+  }]);
+  const emitted=ts.createPrinter({newLine:ts.NewLineKind.LineFeed}).printFile(result.transformed[0]);result.dispose();
+  const output=parse(emitted,name),statement=output.statements.at(-1),call=statement.declarationList.declarations[0].initializer;
+  assert(ts.isCallExpression(call));assert.deepEqual(decode(call.arguments[0]),expectedMetadata);
+  assert.deepEqual(call.arguments[0].properties.map(p=>p.name.text),['operation','nested','resource']);
+ }
+ let accessorCalls=0;const accessor={};Object.defineProperty(accessor,'secret',{enumerable:true,get(){accessorCalls++;return 'wrong';}});
+ assert.throws(()=>createBudgetLiteral(accessor));assert.equal(accessorCalls,0);
+ for(const unsupported of [undefined,NaN,Infinity,()=>{},Symbol('unsupported'),new Date(0)])assert.throws(()=>createBudgetLiteral(unsupported));
+ const cyclic={};cyclic.self=cyclic;assert.throws(()=>createBudgetLiteral(cyclic));
+ const shape=node=>{
+  if(ts.isParenthesizedExpression(node))return shape(node.expression);
+  if(ts.isIdentifier(node))return ['id',node.text];
+  if(ts.isStringLiteral(node))return ['string',node.text];
+  if(ts.isNumericLiteral(node))return ['number',Number(node.text)];
+  if(ts.isPropertyAccessExpression(node))return ['property',shape(node.expression),node.name.text];
+  if(ts.isBinaryExpression(node))return [ts.tokenToString(node.operatorToken.kind),shape(node.left),shape(node.right)];
+  if(ts.isConditionalExpression(node))return ['conditional',shape(node.condition),shape(node.whenTrue),shape(node.whenFalse)];
+  assert.fail('unexpected fixed scope expression');
+ };
+ const scopeCases=[
+  ['began+5000',['+',['id','began'],['number',5000]]],
+  ['entered+5000',['+',['id','entered'],['number',5000]]],
+  ['started+5000',['+',['id','started'],['number',5000]]],
+  ['parent.lease',['property',['id','parent'],'lease']],
+  ["metadata.method==='POST'?'authorize_post':'authorize_get'",['conditional',['===',['property',['id','metadata'],'method'],['string','POST']],['string','authorize_post'],['string','authorize_get']]],
+  ["consent?'monitoring_post':'monitoring_get'",['conditional',['id','consent'],['string','monitoring_post'],['string','monitoring_get']]]
+ ];
+ for(const [text,expected]of scopeCases){
+  const expression=createBudgetScopeExpression(text),emitted=ts.createPrinter().printNode(ts.EmitHint.Expression,expression,parse('const unrelated = "destination";','scope.mjs'));
+  const ast=parse('const value = ('+emitted+');','scope-output.mjs');
+  assert.deepEqual(shape(ast.statements[0].declarationList.declarations[0].initializer),expected);
+ }
+ assert.throws(()=>createBudgetScopeExpression('unlisted.expression'));
+ const path='lib/delegated-oauth-worker.mjs',raw=await readFile(path,'utf8');
+ assert.equal(Buffer.byteLength(raw),33008);assert.equal(createHash('sha256').update(raw).digest('hex'),'3161d183fac7bb31b5bd863deba7f0641400b4f0ef5709c940f11e5441125318');
+ const emitted=transformBudgetPreparedSource(raw,path,'M').source,ast=parse(emitted,path),readers=[];
+ const visit=node=>{
+  if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.expression.getText(ast)==='__afwBudget'&&node.expression.name.text==='member'&&node.arguments[0]?.getText(ast)==='reader'){
+   assert(ts.isStringLiteral(node.arguments[1]));readers.push([node.arguments[1].text,decode(node.arguments[2])]);
+  }
+  ts.forEachChild(node,visit);
+ };
+ visit(ast);assert.deepEqual(readers.filter(([method])=>method==='read'),[['read',{operation:'read',exposedBytes:true}]]);
+ assert.deepEqual(readers.filter(([method])=>method==='cancel'),[['cancel',{operation:'cancel',exposedBytes:false}]]);
  const {c,r,child}=fixture();let effect=0;const actual=Promise.resolve().then(()=>{effect++;return 42;}),op=begin(c,r,child,'authorize_get',performance.now());
  assert.equal(observeBudgetPromise(c,op,actual),actual);assert.equal(await actual,42);assert.equal(effect,1);
  const error=Error('native rejection'),rejected=Promise.reject(error),second=begin(c,r,child,'authorize_get',performance.now());assert.equal(observeBudgetPromise(c,second,rejected),rejected);await assert.rejects(rejected,value=>value===error);await Promise.resolve();
