@@ -94,7 +94,7 @@ contents:read only, sinsecrets; checkouts SHA; node22/currentlock/npmci ignoresc
 
 ## Mapa y revisión
 
-Whitelisted inicial propuesto: nuevos test/fixtures/finite-budget-diagnostics.mjs y finite-budget-world.mjs, nuevos test/finite-budget-diagnostics.test.mjs y test/mcp-qa-finite-budget-native.test.mjs; modificar sólo los seams necesarios en finite-owner-cleanup.mjs,finite-owner-cleanup-persistence.mjs,finite-initial-entry-world.mjs y opcional finite-owner-io-fanout.mjs. Todos bajo test/fixtures; Root debe fijar la lista definitiva tras preflight, antes de escribir. Qualifier temporal nuevo .github/workflows/afw-finite-budget-qualification.yml, retirado terminal. Reportes/briefs/ledger de ESTA unidad separados del plan anterior. No usar un facadetest exportado en lib/ para evitar el flujo genuino.
+Whitelisted inicial propuesto: nuevos test/fixtures/finite-budget-diagnostics.mjs (colector puro), finite-budget-evidence.mjs (escritura Node) y finite-budget-world.mjs (instrumentación/CLI), nuevos test/finite-budget-diagnostics.test.mjs y test/mcp-qa-finite-budget-native.test.mjs; modificar sólo los seams necesarios en finite-owner-cleanup.mjs,finite-owner-cleanup-persistence.mjs,finite-initial-entry-world.mjs y opcional finite-owner-io-fanout.mjs. Todos bajo test/fixtures; Root debe fijar la lista definitiva tras preflight, antes de escribir. Qualifier temporal nuevo .github/workflows/afw-finite-budget-qualification.yml, retirado terminal. Reportes/briefs/ledger de ESTA unidad separados del plan anterior. No usar un facadetest exportado en lib/ para evitar el flujo genuino.
 
 Buildercheck fresco antes del plan: preguntas importantes sobre medición/premisas/agrupación; Root responde las ya resueltas y decisiones técnicas delegadas, no consulta al owner ausente por rutina. Luego writing-plans y SDD secuencial con un escritor Source y gates de tarea +revisión conjunta. Preservar BASE y cadaCAS/readback; rollback sólo cambios propios, sin reset/force/eliminar historia. RamaSource existente está aislada de main y se preserva cloud; no clone local.
 
@@ -111,3 +111,8 @@ Ruling Root: siete jobs, dos consumidores de reducción que comparten el MISMO p
 ## Aprobación de diseño para planificación — 7nov17:49UTC
 
 El mismo builder revisó únicamente la corrección de su pregunta y respondió literalmente «nothing important left». No se abrió otro reviewer ni un test. Root aprueba este diseño bajo la delegación vigente y la excepción de brainstorming del owner que pidió decidir/encadenar sin preguntas; no se atribuye una revisión humana deeste documento ni permiso operacional nuevo. Los16casos/7jobs y restricciones anteriores son el contrato actual. Próximo paso: writing-plans; ningún cambio Source hasta plan/preflight/brief fijados y un escritor designado. La aprobación es para SOURCE/SYN, nunca runtime/credenciales/promoción/ensayoPCoff.
+
+
+### Decisión menor al planificar
+
+Root separa el colector puro (importable en worker SYN) del escritor de evidencia Node-only finite-budget-evidence.mjs. No se permite arrastrar fs al grafo del worker ni introducir almacenamiento productivo por un helper de pruebas. Es separación de responsabilidades dentro del mapa propuesto, no otro subsistema ni cambio de contrato. Costo: un archivo test adicional; protegido por graph/readback.
