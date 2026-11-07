@@ -42,6 +42,12 @@ if(group==='g0'){
   assert.equal(observed.receipt.sdkReductionReturned,true);assert(observed.receipt.sdkSendHash);assert(observed.receipt.sdkObservedHash);
   await writeCleanupEvidence('sdk-expiry-same-occurrence',{label:'same principal occurrence; no second revoke',referenceHash:ref.recordHash,selectorHash:hash(ref.sdkGrantId),referenceExpiresAt:ref.expiresAt,actualPostExchange:actual,C0:f.plan.C0,sdkObservedHash:observed.receipt.sdkObservedHash,operationalReadiness:false});
  });
+ test('R2 fix1 absent current SDK grant uses original reference without absence ACK',async()=>{
+  assert(principal);const {f,observed}=principal,reads=observed.result.fault.grantReads;
+  assert.equal(reads.length,1,'bounded native current exact-key read required');assert.equal(reads[0].present,false);
+  assert.equal(observed.receipt.sdkReductionReturned,true);assert(observed.receipt.sdkSendHash&&observed.receipt.sdkObservedHash);
+  await writeCleanupEvidence('fix1-absent-current-grant',{label:'same principal occurrence; native absence is not an ACK',source:process.env.GITHUB_SHA,C0:f.plan.C0,read:reads[0],receiptHash:observed.receipt.recordHash,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false});
+ });
 }
 let pair;
 async function paired(g,configure){
@@ -127,6 +133,60 @@ if(group==='g5'){
   assert(negative.responses.some(r=>r.method==='POST'&&r.startedAt>=f.plan.C0),'real post-C0 M request recorded');
   assert.equal(negative.classification.dataDenied,true,'actual M data-denial contract, not initialize HTTP alone');
   assert.equal(hash(m.script),f.checkpoint.build.M.sha256);
+ });
+}
+
+let fixPair,fixMatched;
+async function fixCurrentPair(){
+ if(!fixPair){
+  fixPair=await Promise.all([recover('g6-matching'),recover('g6-conflicting')]);
+  for(const f of fixPair){
+   assert.equal(f.checkpoint.unexchanged,true);const ref=JSON.parse(f.checkpoint.facts.rows.find(([k])=>k.endsWith(':reference'))[1]),native=await plain(f.stub.ownerCleanupNativeRows()),key='grant:'+native.grant.user_id+':'+ref.sdkGrantId;
+   const raw=await f.kv.get(key),value=JSON.parse(raw),listed=await f.kv.list({prefix:key,limit:1});
+   assert.equal(hash(raw),f.checkpoint.sdkUnexchanged.grantObjectHash);assert.equal(value.id,ref.sdkGrantId);assert.equal(value.expiresAt,undefined);
+   assert.equal(listed.keys[0]?.name,key);assert.equal(listed.keys[0].expiration,f.checkpoint.sdkUnexchanged.nativeKVExpiration);assert(listed.keys[0].expiration*1000>f.plan.C0+120000);
+   f.fixCurrent={key,keyHash:hash(key),originalHash:hash(raw),expiration:listed.keys[0].expiration};
+  }
+  const f=fixPair[1],value=JSON.parse(await f.kv.get(f.fixCurrent.key));
+  value.metadata={afwFiniteCleanup:{purpose:'afw.finite-sdk-cleanup-correlation.v1',correlationHash:'f'.repeat(64)}};
+  const untrusted=JSON.stringify(value);await f.kv.put(f.fixCurrent.key,untrusted,{expiration:f.fixCurrent.expiration});
+  const listed=await f.kv.list({prefix:f.fixCurrent.key,limit:1});assert.equal(listed.keys[0].expiration,f.fixCurrent.expiration);assert.equal(await f.kv.get(f.fixCurrent.key),untrusted);
+  f.fixCurrent={...f.fixCurrent,untrustedHash:hash(untrusted),modeledUntrustedState:true,admission:false};
+ }
+ return fixPair;
+}
+if(group==='g6'){
+ test('R2 fix1 matching current native SDK grant is qualified before reduction',async()=>{
+  const [f]=await fixCurrentPair(),facts=await observeOriginalAlarm(f),r=await capture(f,'fix1-matching-current-grant',facts);fixMatched={f,facts,r};
+  assertClosed(f,facts,r);assert.equal(r.receipt.sdkReductionReturned,true);assert.equal(await f.kv.get(f.fixCurrent.key),null);
+  assert.equal(f.checkpoint.sdkUnexchanged.codeExchanged,false);assert.equal(f.checkpoint.sdkUnexchanged.referenceExpiresAt,null);
+ });
+ test('R2 fix1 foreign current SDK object is preserved with zero deletes',async()=>{
+  const [,f]=await fixCurrentPair(),facts=await observeOriginalAlarm(f),r=await capture(f,'fix1-foreign-current-grant',facts),remaining=await f.kv.get(f.fixCurrent.key);
+  await writeCleanupEvidence('fix1-foreign-current-preservation',{label:'untrusted modeled current KV content; no new grant authority',source:process.env.GITHUB_SHA,...f.fixCurrent,key:undefined,currentHash:remaining===null?null:hash(remaining),deletes:r.result.fault.deletes,receiptHash:r.receipt?.recordHash??null});
+  assert.equal(r.result.fault.deletes,0,'conflicting current native object must cause zero SDK deletes');
+  assert.equal(hash(remaining),f.fixCurrent.untrustedHash);assert.notEqual(r.state.status,'complete');assert.equal(r.receipt,null);
+  assert(!cleanupRows(facts).some(([k])=>k.endsWith(':sdk_revoke:observed')));
+ });
+ test('R2 fix1 completed reentry rejects fresh inventory drift without rewriting history',async()=>{
+  assert(fixMatched);const {f}=fixMatched;assert(Date.now()<f.plan.C1);const before=await plain(f.stub.ownerCleanupFacts()),effects=f.restores.length,requests=f.providerRegistry.requests.length;
+  const control=await plain(f.stub.ownerCleanupReenter());assert.equal(control.status,'restored');const stable=await plain(f.stub.ownerCleanupFacts());assert.deepEqual(stable.rows,before.rows);assert.equal(stable.alarm,before.alarm);
+  f.inventoryMode='waiting';const changedAt=Date.now(),denied=await plain(f.stub.ownerCleanupReenter()),after=await plain(f.stub.ownerCleanupFacts());
+  await writeCleanupEvidence('fix1-completed-reentry',{label:'explicit same alarm entry inspection; not another scheduled delivery or admission',source:process.env.GITHUB_SHA,I0:f.plan.I0,C0:f.plan.C0,C1:f.plan.C1,changedAt,control:control.status,result:denied.status,rowsUnchanged:JSON.stringify(after.rows)===JSON.stringify(before.rows),state:row(after,'state'),alarm:after.alarm,historicalReceiptHash:cleanupReceipt(after)?.recordHash,restoresBefore:effects,restoresAfter:f.restores.length,providerWrites:f.providerRegistry.requests.slice(requests).filter(x=>x.method!=='GET').length,inventoryMode:f.inventoryMode});
+  assert.equal(denied.status,'admin_pending','already-complete entry must reject new active Workflow inventory');
+  assert.deepEqual(after.rows,before.rows);assert.equal(after.alarm,before.alarm);assert.equal(f.restores.length,effects);assert.equal(f.providerRegistry.requests.slice(requests).filter(x=>x.method!=='GET').length,0);assert.equal(f.inventoryMode,'waiting');
+ });
+}
+if(group==='g7'){
+ test('R2 fix1 post-restore inventory drift during retained SDK blocks both completions',async()=>{
+  const f=await recover('g7-inventory-drift');await f.stub.ownerCleanupFault('inventory-drift');
+  for(;;){const signal=await plain(f.stub.ownerCleanupFaultSignal());if(signal.held)break;assert(Date.now()<f.plan.C0+30000,'real native SDK hold must be reached');await pause(50);}
+  assert.equal(f.restores.length,1,'drift occurs after real restore');const changedAt=Date.now();f.inventoryMode='waiting';await f.stub.ownerCleanupControl();
+  const facts=await observeOriginalAlarm(f),r=await capture(f,'fix1-post-sdk-inventory-drift',facts),fault=r.result.fault;
+  await writeCleanupEvidence('fix1-post-sdk-inventory-premise',{label:'modeled Workflow becomes active after restore while real SDK ACK pending',source:process.env.GITHUB_SHA,C0:f.plan.C0,changedAt,heldAt:fault.heldAt,settledAt:fault.settledAt,settled:fault.settled,holdMs:fault.settledAt-fault.heldAt,inventoryMode:f.inventoryMode,sdkObserved:cleanupRows(facts).some(([k])=>k.endsWith(':sdk_revoke:observed')),state:r.state.status,ownerReceiptHash:r.receipt?.recordHash??null,initialReceiptHash:row(facts,'receipt')?.recordHash??null});
+  assert(fault.settled&&fault.heldAt<=changedAt&&changedAt<=fault.settledAt&&fault.settledAt-fault.heldAt<3500,'bounded actual hold/release premise');
+  assert(cleanupRows(facts).some(([k])=>k.endsWith(':sdk_revoke:observed')),'real SDK returned before final inventory');
+  assert.equal(r.receipt,null,'fresh post-SDK inventory must prevent owner receipt');assert.equal(row(facts,'receipt'),null);assert.notEqual(r.state.status,'complete');assert.equal(f.inventoryMode,'waiting');assert.equal(f.restores.length,1);
  });
 }
 
