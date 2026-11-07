@@ -1012,3 +1012,20 @@ Source-backed gaps found while closing the map:
 - Root permits the fixed diagnostics operation enum `rpc` with resourceClassDO, with no raw method/argument/payload in DTO. Operation counts represent native API invocations, not network requests, physical retry attempts, exclusive wall time, or real provider quota.
 
 No additional Source runtime hook, test registration, workflow activation or CI run is claimed by this appendix. Closed per-role map and semantic approval are still pending. All readiness/completePackage/PCoff flags remainfalse.
+
+
+## Source schema and role-variant correction checkpoint (unexecuted)
+
+This continuation adds the Root-approved fixed native classes/operations `rateLimiter/limit` and `DO/rpc` and the optional collector-owned `fetchOpRef` link projected as `fetchOpOrdinal`. A foreign, non-fetch, mismatched Root/child/phase/resource or non-body reference is explicitly invalid/unattributed. Incoming Request body reads may legitimately have no fetch reference. Linked read/cancel calls are individual native API invocations; bytes belong only to each read row, while cancellation lifecycle facets belong to the owning fetch row. Fetch settlement at headers is not stretched across later body activity.
+
+Existing Q2/Q5/Q8 contract groups were extended for typed invocation counts, unchanged promise/rejection identity, false limiter result versus logical denial, separate fetch/read/cancel intervals, no additive duplicate bytes and invalid cross-context links. There are still exactly eight Q registrations. They have not yet been executed; no passing result is claimed.
+
+The exploratory compiler map's cross-role path deduplication defect is corrected in code: source inputs, candidates and seams are emitted separately per M/QA role. QA's already-prepared source no longer substitutes for M's original source. Every input records role and hookStage as well as raw/prepared hashes. Counts distinguish unique input paths from role variants. This corrects the descriptor representation only: the original API-shaped discovery remains explicitly exploratory and incomplete, and no second compile-only run has been activated.
+
+Further direct source closure review follows236 repository modules from the actual QA entry and M entry import roots. This is a bounded static read traversal, not a claim that all branches run in P1 or a new compiler/native result. It identified:
+- forwarded request Root creation in the receiver-only OAuth/Notice/choice modules;
+- additional actual child callback seams in initial-material, policy-transport and cleanupLifetime, beyond the prior ten marker list;
+- rateLimiter.limit native calls in delegated-oauth-worker and owner-preparation;
+- JWKS `fetchImpl` plus opaque native `response.json()` in jose6.2.10. The locked version and package integrity are unchanged. The first-party tagged source describes this alias at [jose v6.2.10 remote.ts](https://github.com/panva/jose/blob/v6.2.10/src/jwks/remote.ts); final compiler markers must bind the installed JS bytes, not assume TS equals the package output. The actual preparation/phase readers call Access verification without supplying a local key set, and the existing SYN outbound handler serves the fixed certs route.
+
+No native-identity carrier or blanket rewriter is activated by this checkpoint. The intended callsite observer will capture original native receiver/method pairs before existing fixture wrappers, preserve those wrappers as outer ACK layers, and record only actual bottom invocations. Exact callsite/alias/callback descriptors and complete per-role hook counts are still being closed; Root acceptance and the final single9-test qualification remain pending. Source controls, defaults, production/lib/worker/package/lock/config files, TEMP and all clocks are unchanged by this checkpoint.

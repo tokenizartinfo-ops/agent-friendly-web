@@ -1,7 +1,7 @@
 const PURPOSE='afw.finite-budget-diagnostics.syn.v1';
 const PHASES=new Set(['setup','authorize_get','authorize_post','sdk_lookup','token_exchange','mcp_read','monitoring_get','monitoring_post','cleanup_before_restore','restore','sdk_reduction','final_inventory']);
-const RESOURCES=new Set(['CFcredential','CFdeployment','CFversion','CFworkflow','CFcontainer','CFschedule','CFtail','GHsource','JWKS','DO','SQL','KV','transport']);
-const OPERATIONS=new Set(['get','list','put','delete','first','all','run','sync','transaction','getAlarm','setAlarm','deleteAlarm','fetch','read','cancel','batch','exec']);
+const RESOURCES=new Set(['CFcredential','CFdeployment','CFversion','CFworkflow','CFcontainer','CFschedule','CFtail','GHsource','JWKS','DO','SQL','KV','transport','rateLimiter']);
+const OPERATIONS=new Set(['get','list','put','delete','first','all','run','sync','transaction','getAlarm','setAlarm','deleteAlarm','fetch','read','cancel','batch','exec','rpc','limit']);
 const REASONS=new Set(['timeout','denied','aborted','guard']);
 const data=(value,key)=>{if(!value||typeof value!=='object')return undefined;const d=Object.getOwnPropertyDescriptor(value,key);return d&&Object.hasOwn(d,'value')?d.value:undefined;};
 const nativeObject=value=>value!==null&&(typeof value==='object'||typeof value==='function');
@@ -38,9 +38,12 @@ export function createBudgetDiagnostics(options={}){
  });
  const begin=safe((rootRef,childRef,meta)=>{
   const keep=event(),r=nativeObject(rootRef)&&rootHandles.get(rootRef),c=childRef===null?null:nativeObject(childRef)&&childHandles.get(childRef);
-  const phase=data(meta,'phase'),resourceClass=data(meta,'resourceClass'),operation=data(meta,'operation'),at=data(meta,'at');
+  const phase=data(meta,'phase'),resourceClass=data(meta,'resourceClass'),operation=data(meta,'operation'),at=data(meta,'at'),fetchOpRef=data(meta,'fetchOpRef')??null;
+  const fetchRow=fetchOpRef===null?null:nativeObject(fetchOpRef)&&operations.get(fetchOpRef);
   if(!r||childRef!==null&&!c||c&&c.rootOrdinal!==r.rootOrdinal||!PHASES.has(phase)||!RESOURCES.has(resourceClass)||!OPERATIONS.has(operation)||!number(at))return invalid(true);
-  const row={testRevision,workerRole,phase,resourceClass,operation,rootOrdinal:r.rootOrdinal,childOrdinal:c?.childOrdinal??null,opOrdinal:++opOrdinal,kind:r.kind,rootDeadline:r.deadline,childDeadline:c?.deadline??null,enteredAt:at,settledAt:null,status:'pending',nativeBytesRead:null,nativeBytesReason:'not_exposed_by_native_api',chunksRead:null,readDurationMs:0,logicalAt:null,logicalReason:null,cancelStartedAt:null,cancelSettledAt:null};
+  if(operation==='rpc'&&resourceClass!=='DO'||operation==='limit'&&resourceClass!=='rateLimiter'||resourceClass==='rateLimiter'&&operation!=='limit')return invalid(true);
+  if(fetchOpRef!==null&&(!fetchRow||!['read','cancel'].includes(operation)||fetchRow.operation!=='fetch'||fetchRow.rootOrdinal!==r.rootOrdinal||fetchRow.childOrdinal!==(c?.childOrdinal??null)||fetchRow.phase!==phase||fetchRow.resourceClass!==resourceClass))return invalid(true);
+  const row={testRevision,workerRole,phase,resourceClass,operation,rootOrdinal:r.rootOrdinal,childOrdinal:c?.childOrdinal??null,opOrdinal:++opOrdinal,fetchOpOrdinal:fetchRow?.opOrdinal??null,kind:r.kind,rootDeadline:r.deadline,childDeadline:c?.deadline??null,enteredAt:at,settledAt:null,status:'pending',nativeBytesRead:null,nativeBytesReason:'not_exposed_by_native_api',chunksRead:null,readDurationMs:0,logicalAt:null,logicalReason:null,cancelStartedAt:null,cancelSettledAt:null};
   const g=phase+'|'+resourceClass,scope=row.rootOrdinal+'|'+(row.childOrdinal??0);if(!groups.has(g))groups.set(g,{phase,resourceClass,...metric()});if(!scopes.has(scope))scopes.set(scope,{rootOrdinal:row.rootOrdinal,childOrdinal:row.childOrdinal,...metric()});
   coverage.nativeBytesUnavailable++;touch(row,'nativeStarted');active(row,1);
   firstAt=firstAt===null?at:Math.min(firstAt,at);lastAt=lastAt===null?at:Math.max(lastAt,at);
