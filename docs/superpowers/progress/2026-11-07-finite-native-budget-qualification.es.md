@@ -199,3 +199,16 @@ Ruling de separación deldato13ºpath — 270KBde literal mezclado con lógica d
 ### 2026-11-07 20:29:57 UTC — disponibilidad del owner actualizada
 
 Gabriel deja el ordenador encendido y se retira; nueva disponibilidad sólo DESPUÉS de18:30Argentina/21:30UTC del7Nov2026. Esta instrucción sustituye la ventana anterior19:30UTC: no solicitar ingreso/OTP/pegado de credenciales/consentimiento ni abrirventanas humanas antes21:30. ElSource/SYN aprobado ylaCI sincredenciales pueden continuar; ningunaautoridadnueva ni cambioSource/runtime. Si unpasohumanoestrictoaparece, preservarcheckpoint yseguirtrabajoindependiente. Task1mapaaceptado3f29a04d; únicoimplementadorAstra,13paths.SourceCI9todavíapendientesegúnúltimocheckpoint. Readiness/package/PCofffalse.
+
+### 2026-11-07 21:17:28 UTC — implementación preservada, aún sinCI
+
+Root verificó sucesivamente los commitsSource6494ef44c6658fa503bd46a03eabaeef50eb73f7/tree3d7e0f75f573cf5f334b09b015a75d5d49fbeffa(parentdc404),cb6e3ab25a5ef5f39cec680a1ae6e9ea983a3bb0/tree5d561750d891b4dde2d2df106cb735704a771673(parent6494) y ae7fc9de385bd45d130044c3df02c27916d48466/treeab41930ded467e4a3b04d9765840563540203d2b(parentcb6). Sólo13pathspermitidos; sinCore/package/lock/config/TEMPactivador nuevos. Mainúltimoreportado0c9c475b; evidencia actualSource/SYN,nolecturaruntime.
+
+6494: descriptores movidos a JSONc3830f883f17bc6b249ca5fe4f5e3705951f0fcc yloaderNodeworldb01fd61e3ffcfb978a8b2b2d66a7148f3282cd8f; Root comparó JSONsemántico completo conpropuestadc404 ysonidénticos.130paths/635grupos. Repor­te8d3ca080appendonly.
+cb6: runtime/compilerWIP quedóguardadoen diagnostics53f544c0e3718a7bd57f4fee772d620854d28b10(+205líneas),worldc175a8db29dab3cc047e526c92f4eb7850d66ce9(+240),reporte640a4035e8c2e963b45d957287ea93e25ab6f15d; aún sinwiring ni ejecución.
+
+ae7: wiringpositive-onlyM/QA,roles/raw/packageASTgates,bodyreceivers ybottomnativewrapperleaves,carrier,extensiónQ3/Q5/Q8 manteniendo8grupos,evidenciaR1acotada ypre-remountsnapshots. Rootverificó9paths:reporte f924e8f807cdbc718791cffabcc4a82b4d3ce7a8(+14/0);8Qtestfd263e7857ac5f7355904939016aa50b65fc2104;descriptorbe695028e4c12c3cb7d3b7bf2c5f2e7508f3db15;collector41c0653f2aefd4132dbdafb60ed0005900382420;worldeaf01df9a270068b38ce8898ffd10f3a1e295c50;firstConnectionCompilercede301c3e9cd95716ae2134f938dbb1d940e7a9;initialfixture1d04b22952267361938dd7dd2386f16cba4b7b73;ownerfixture388388c9d258a157a6dc963f142f08850c404c06;nativeTestc09ebc5dfd83c89b4eb1911590ff5c019ff3c38b.
+
+RootinspeccionóJSONae7: mantiene exactamente TODAS laskeys/valorespropuestaprevia y130/635; sóloañade implementationSupplement(purposefixed raw-selector expansion/originalfixtureleaves; bodyReceiverPins/scopeInputPins/entryNativeMembers/entryAdditionalCounts), no coberturaobservada. Son concrecionesdelmecanismoaceptado,cuyaspins/cuentas reales debenvalidarse antesI0. No se acepta porsercódigoescrito.
+
+Pendientedeimplementador: final/cold/checkpointepochplumbing,CLIpositive yP1linaje/evidencia,losdosconsolecallersR2, revisiónestática/conteossuplementarios y UNAactivación9. No testsQniP1corridos, noPASSnuevo niRootrulingblocker.LosúnicosrunsdeestaunidadsiguenR0causalycompile-onlyyaaceptados.Faltaestaverificaciónfresca,taskreviewyTask2. Usuarioausentehasta21:30UTC; nocódigos/ventanas. Readiness/package/PCofffalse.
