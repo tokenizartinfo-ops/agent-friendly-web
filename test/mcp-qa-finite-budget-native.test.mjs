@@ -13,7 +13,7 @@ test('R0 attributable diagnostics after genuine SDK complete and durable Referen
  const source=process.env.GITHUB_SHA;assert.match(source??'',/^[a-f0-9]{40}$/);
  const outcome={purpose:'afw.finite-budget-red-outcome.syn.v1',source,caseName:'R0',startedAt:Date.now(),stage:'fixture',actualCompleteNormal:null,referenceHash:null,responseStatus:null,diagnosticsPurpose:null,expectedDeficitObserved:false,operationalReadiness:false,completePackage:false,PCoff:false};
  try{
-  const f=await ownerReferenceFixture(t,{budgetQualification:true});
+  const f=await ownerReferenceFixture(t);
   outcome.stage='prepare';
   const prepared=await prepareOwnerReference(f);
   outcome.stage='issue';

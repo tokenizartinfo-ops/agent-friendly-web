@@ -114,11 +114,7 @@ export async function inspectBudgetCompilation(root){
  console.info('COMPILE ONLY INVENTORY',JSON.stringify({source,counts,graphs:provenance.graphs,I0Opened:false,nativeExecutionProduced:false,nativeCheckpointProduced:false}));
  return provenance;
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
- const [command,root]=process.argv.slice(2);
- if(command!=='inspect-budget-graphs')throw Error('SYN budget inspection command unsupported before I0');
- await inspectBudgetCompilation(root);
-}
+
 export {inventoryFiles as inventoryBudgetFiles};
 
 
@@ -148,7 +144,8 @@ function matchesSelector(row,shape){
  if(row.family==='Function.call')return shape.form===row.family&&shape.target===s.target;
  if(row.family==='direct-fetch')return shape.form===row.family&&shape.callee===s.callee;
  if(shape.form!=='member'||shape.method!==s.method)return false;
- if(s.receiver!==undefined&&shape.receiver!==s.receiver)return false;
+ if(row.family==='body'&&s.receivers){if(!Object.hasOwn(s.receivers,shape.receiver))return false;}
+ else if(s.receiver!==undefined&&shape.receiver!==s.receiver)return false;
  if(s.exclude==='nominalLease.run'&&shape.receiver==='nominalLease')return false;
  // These two bind expressions bind pure helper functions, not D1 statements.
  if(row.family==='SQL-identity'&&shape.method==='bind'&&['provisioning[k]','installation[k]'].includes(shape.receiver))return false;
@@ -160,7 +157,7 @@ export function selectBudgetCallsites(source,path,role){
  function visit(node){
   if(ts.isCallExpression(node)){
    const shape=callShape(node,ast),matches=[];
-   row.selectors.forEach((s,i)=>{if(matchesSelector(s,shape))matches.push(i);});
+   row.selectors.forEach((s,i)=>{const pin=s.family==='body'?budgetNativeDescriptorProposal.implementationSupplement.bodyReceiverPins.find(p=>p.path===path&&p.selector===i):null;const effective=pin?{...s,selector:{...s.selector,receivers:pin.receivers}}:s;if(matchesSelector(effective,shape))matches.push(i);});
    assert(matches.length<=1,'overlapping descriptor at '+role+' '+path+':'+(ast.getLineAndCharacterOfPosition(node.getStart(ast)).line+1));
    if(matches.length){const index=matches[0],at=node.getStart(ast),site={selector:index,position:at,end:node.end,line:ast.getLineAndCharacterOfPosition(at).line+1,shape,node};hits[index].push(site);calls.push(site);}
   }
@@ -168,6 +165,7 @@ export function selectBudgetCallsites(source,path,role){
  }
  visit(ast);
  row.selectors.forEach((s,i)=>assert.equal(hits[i].length,s.expectedCount,'exact prepared AST count '+role+' '+path+' selector '+i+' '+JSON.stringify(s.selector)));
+ for(const p of budgetNativeDescriptorProposal.implementationSupplement.bodyReceiverPins.filter(p=>p.path===path)){const actual={};for(const hit of hits[p.selector])actual[hit.shape.receiver]=(actual[hit.shape.receiver]??0)+1;assert.deepEqual(actual,p.receivers,'exact resolved body receiver '+role+' '+path+' '+p.selector);}
  return {ast,row,calls,counts:hits.map((v,i)=>({selector:i,count:v.length}))};
 }
 export async function validateBudgetPreparedSource({path,role,prepared,raw}){
@@ -237,7 +235,9 @@ function packageSelection(source,path,role){
 
 function entrySelection(source){
  const pin=budgetNativeDescriptorProposal.entry;assert.equal(Buffer.byteLength(source),pin.bytes,'composed QA entry bytes');assert.equal(hash(source),pin.sha256,'composed QA entry pin');
- const ast=sourceAST(source,'<stdin>'),counts=Object.fromEntries(Object.keys(pin.reflectSelectors).map(k=>[k,0])),calls=[];
+ const nativeMembers=budgetNativeDescriptorProposal.implementationSupplement.entryNativeMembers;
+ const extraExpected=budgetNativeDescriptorProposal.implementationSupplement.entryAdditionalCounts;
+ const ast=sourceAST(source,'<stdin>'),counts=Object.fromEntries(Object.keys(pin.reflectSelectors).map(k=>[k,0])),members=Object.fromEntries(Object.keys(nativeMembers).map(k=>[k,0])),extras=Object.fromEntries(Object.keys(extraExpected).map(k=>[k,0])),calls=[];
  function visit(node){
   if(ts.isCallExpression(node)){
    const shape=callShape(node,ast);
@@ -249,17 +249,27 @@ function entrySelection(source){
     else if(['session','withSession','dbSession','prepare','originalPrepare','bind'].includes(shape.target))meta={edge:'holder'};
     else if(['fetcher','actualFetch'].includes(shape.target))meta={operation:'fetch',classifyFetch:true};
     calls.push({node,meta,group:key});
+   }else if(shape.form==='member'&&Object.hasOwn(members,shape.receiver+' → '+shape.method)){
+    const key=shape.receiver+' → '+shape.method;members[key]++;calls.push({node,meta:{operation:shape.method},group:key});
+   }else if(shape.form==='direct-fetch'&&shape.callee==='fetch'){
+    extras.fetch++;calls.push({node,meta:{operation:'fetch',classifyFetch:true},group:'fetch'});
+   }else if(shape.form==='member'&&shape.method==='json'&&['r','request'].includes(shape.receiver)){
+    extras.json++;calls.push({node,meta:{operation:'read'},group:'json'});
+   }else if(shape.form==='member'&&['prepare','bind','first','all','run'].includes(shape.method)&&/^(?:db|this\.env\.RELEASE_DB|env\.RELEASE_DB)(?:\.prepare\(|$)/.test(shape.receiver)){
+    extras[shape.method]++;calls.push({node,meta:['prepare','bind'].includes(shape.method)?{edge:'holder'}:{operation:shape.method},group:shape.method});
    }
   }
   ts.forEachChild(node,visit);
  }
- visit(ast);for(const [key,count]of Object.entries(pin.reflectSelectors))assert.equal(counts[key],count,'exact composed QA entry selector '+key);
- return {ast,calls,counts};
+ visit(ast);assert.deepEqual(members,nativeMembers,'exact composed entry native member selectors');assert.deepEqual(extras,extraExpected,'exact composed entry SQL/body selectors');
+ for(const [key,count]of Object.entries(pin.reflectSelectors))assert.equal(counts[key],count,'exact composed QA entry selector '+key);
+ return {ast,calls,counts:{reflect:counts,members,extras}};
 }
 
 
 function budgetScopeSeams(source,path){
  const replace=(needle,replacement)=>{assert.equal(source.split(needle).length-1,1,'fixed scope seam '+path+' '+needle);source=source.replace(needle,replacement);};
+ if(path==='worker/mcp-own/finite.mjs')replace('const url=new URL(request.url),path=url.pathname;',"const url=new URL(request.url),path=url.pathname;if(path==='/_fixture/finite-budget')return new Response(JSON.stringify(__afwBudget.snapshot()),{headers:{'Content-Type':'application/json'}});");
  if(path==='lib/mcp-qa-finite-initial-lease.mjs'){
   const n='const lease=Object.freeze({signal:controller.signal,assertCurrent:check});';
   replace(n,n+'__afwBudget.clock(lease,end);');
@@ -285,6 +295,15 @@ function budgetScopeSeams(source,path){
   replace(n,n+'__afwBudget.alias(originalLease,lease);');
   replace('current();return work(l);','current();return __afwBudget.childCall(lease,l,childEnd,()=>work(l));');
  }
+ 
+ if(['lib/mcp-qa-finite-owner-phase-context.mjs','lib/mcp-qa-finite-initial-owner-source.mjs'].includes(path)){
+  const n='clock=createFiniteInitialLease(deadline,deadline,holders,fail);';replace(n,n+'__afwBudget.alias(parent,clock.lease);');
+ }
+ if(path==='lib/mcp-qa-finite-owner-phase-context.mjs'){
+  const n='clock=createFiniteInitialLease(readFiniteOwnerRequestDeadline(originalLease),readFiniteOwnerRequestDeadline(originalLease),holders,fail);';
+  assert.equal(source.split(n).length-1,4,'four actual request clock aliases');source=source.replaceAll(n,n+'__afwBudget.alias(originalLease,clock.lease);');
+ }
+ if(path==='lib/mcp-qa-finite-historical-source.mjs')replace('current();return work(abort.signal,current);','current();return __afwBudget.childInvoke(originalLease,start+5000,work,undefined,[abort.signal,current]);');
  if(path==='lib/mcp-qa-finite-owner-cleanup.mjs')replace('current(clock.lease);return work(clock.lease,end);','current(clock.lease);return __afwBudget.childCall(originalLease,clock.lease,end,()=>work(clock.lease,end));');
  if(path==='lib/mcp-qa-finite-policy-transport.mjs')replace('current(c);return fn(c,end);','current(c);return __afwBudget.childCall(originalLease,c,end,()=>fn(c,end));');
  return source;
@@ -351,6 +370,17 @@ export function transformBudgetPreparedSource(source,path,role){
 
    if(ts.isCallExpression(original)){
     const callee=original.expression.getText(ast),text=original.getText(ast);
+
+    if(callee==='Promise.resolve().then'&&path==='lib/mcp-qa-finite-bootstrap-native.mjs'&&text.includes('r=await fetcher(')){
+     scopeEdges++;return hook('childCall',[f.createIdentifier('originalLease'),f.createIdentifier('child'),parseExpression('began+5000'),closure(node)]);
+    }
+    if(callee==='Promise.resolve().then'&&path==='lib/mcp-qa-finite-initial-old-guard.mjs'&&text.includes('response=await fetcher(')){
+     scopeEdges++;return hook('childCall',[f.createIdentifier('originalLease'),f.createIdentifier('controller'),parseExpression('entered+5000'),closure(node)]);
+    }
+    if(path==='lib/mcp-qa-finite-initial-custody-probe.mjs'&&ts.isParenthesizedExpression(original.expression)&&ts.isArrowFunction(original.expression.expression)&&text.includes("fetcher(ROOT+'/tokens/verify'")){
+     scopeEdges++;return hook('childCall',[f.createIdentifier('originalLease'),f.createIdentifier('childCheck'),parseExpression('started+5000'),closure(node)]);
+    }
+
     if(path==='lib/mcp-qa-finite-stage-work.mjs'&&callee==='scopes.run'){scopeEdges++;return hook('run',[f.createIdentifier('originalLease'),closure(node)]);}
     let phase=null;
     if(path==='lib/mcp-qa-finite-owner-phase-context.mjs'&&callee==='readPrivateQaFiniteOwnerSdkGrant')phase='sdk_lookup';
@@ -379,6 +409,14 @@ export function transformBudgetPreparedSource(source,path,role){
    }
    if(ts.isCallExpression(original)&&original.expression.getText(ast)==='Response.json'){
     bodyEdges++;return hook('localResponse',[node]);
+   }
+   
+   if(path==='<stdin>'&&ts.isClassDeclaration(original)&&original.name?.text==='Initial'){
+    const method=f.createMethodDeclaration(undefined,undefined,'budgetSnapshot',undefined,undefined,[],undefined,f.createBlock([f.createReturnStatement(hook('snapshot',[]))],true));
+    return f.updateClassDeclaration(node,node.modifiers,node.name,node.typeParameters,node.heritageClauses,[...node.members,method]);
+   }
+   if(ts.isElementAccessExpression(original)&&ts.isVariableDeclaration(original.parent)&&original.parent.name.getText(ast)==='method'){
+    identityEdges++;return hook('readMethod',[node.expression,node.argumentExpression]);
    }
    if(ts.isPropertyAccessExpression(original)){
     const method=original.name.text,receiver=original.expression.getText(ast),optional=!!original.questionDotToken;
@@ -409,8 +447,8 @@ export function transformBudgetPreparedSource(source,path,role){
     const names=original.properties.filter(p=>(ts.isMethodDeclaration(p)||ts.isPropertyAssignment(p)&&(ts.isArrowFunction(p.initializer)||ts.isFunctionExpression(p.initializer)))&&p.name&&!ts.isComputedPropertyName(p.name)).map(p=>p.name.getText(ast).replace(/^['"]|['"]$/g,'')).filter(name=>CAPTURE_METHODS.has(name)||name==='fetch'||name==='rpc');
     if(names.length){facadeEdges++;return hook('facadeHolder',[node,literal(names)]);}
    }
-   if(ts.isBinaryExpression(original)&&original.operatorToken.kind===ts.SyntaxKind.EqualsToken&&ts.isPropertyAccessExpression(original.left)&&
-      (ts.isArrowFunction(original.right)||ts.isFunctionExpression(original.right))&&CAPTURE_METHODS.has(original.left.name.text)){
+   if(ts.isBinaryExpression(original)&&original.operatorToken.kind===ts.SyntaxKind.EqualsToken&&(ts.isPropertyAccessExpression(original.left)||ts.isElementAccessExpression(original.left))&&
+      (ts.isArrowFunction(original.right)||ts.isFunctionExpression(original.right))&&(ts.isElementAccessExpression(original.left)||CAPTURE_METHODS.has(original.left.name.text))){
     facadeEdges++;return f.updateBinaryExpression(node,node.left,node.operatorToken,hook('facade',[node.right]));
    }
    return node;
@@ -420,3 +458,79 @@ export function transformBudgetPreparedSource(source,path,role){
  const transformed=ts.createPrinter({newLine:ts.NewLineKind.LineFeed}).printFile(result.transformed[0]);result.dispose();
  return {source:"import {budget as "+BUDGET_ID+"} from 'afw:budget-runtime';\n"+transformed,counts:{nativeCalls,identityEdges,bodyEdges,facadeEdges,scopeEdges},selectorCounts:selected?.counts??[]};
 }
+
+const scopeInputPins=budgetNativeDescriptorProposal.implementationSupplement.scopeInputPins;
+export function createBudgetCompiler(role){
+ assert(['M','QA'].includes(role));const testRevision=process.env.GITHUB_SHA;assert.match(testRevision??'',/^[a-f0-9]{40}$/,'budget actual Actions revision before I0');
+ const records=new Map(),prepared=new Map(),expected=new Set(budgetNativeDescriptorProposal.sourceDescriptors.filter(p=>p.roles.includes(role)).map(p=>p.path));
+ for(const p of scopeInputPins.filter(p=>p.roles.includes(role)))expected.add(p.path);
+ for(const p of budgetNativeDescriptorProposal.packages.filter(p=>p.roles.includes(role)))expected.add(p.path);
+ if(role==='QA')expected.add('<stdin>');
+ const wanted=path=>expected.has(path);
+ async function transform(path,source){
+  assert(wanted(path),'unexpected instrumentation path '+role+' '+path);assert(!records.has(path),'duplicate prepared module '+role+' '+path);
+  const raw=path==='<stdin>'?source:await readFile(path,'utf8');
+  if(nativeDescriptorByPath.has(path))await validateBudgetPreparedSource({path,role,prepared:source,raw});
+  else if(path!=='<stdin>'&&!path.startsWith('node_modules/')){
+   const pin=scopeInputPins.find(p=>p.path===path);assert(pin?.roles.includes(role));assert.equal(hash(raw),pin.rawSha256,'scope input raw pin '+path);assert.equal(Buffer.byteLength(raw),pin.rawBytes);if(role==='M')assert.equal(source,raw);
+  }
+  const result=transformBudgetPreparedSource(source,path,role);
+  records.set(path,{role,path,rawBytes:Buffer.byteLength(raw),rawSha256:hash(raw),preparedBytes:Buffer.byteLength(source),preparedSha256:hash(source),emittedBytes:Buffer.byteLength(result.source),emittedSha256:hash(result.source),counts:result.counts,selectors:result.selectorCounts});
+  prepared.set(path,result.source);return result.source;
+ }
+ function plugin(existing=null){
+  return {name:'fixed-finite-budget-'+role,setup(builder){
+   builder.onResolve({filter:/^afw:budget-runtime$/},()=>({path:'runtime',namespace:'afw-budget'}));
+   builder.onLoad({filter:/.*/,namespace:'afw-budget'},()=>({contents:"import {createBudgetRuntime} from "+JSON.stringify(resolve('test/fixtures/finite-budget-diagnostics.mjs'))+";export const budget=createBudgetRuntime("+JSON.stringify({testRevision,workerRole:role})+");",loader:'js',resolveDir:process.cwd()}));
+   if(existing){
+    existing.setup({...builder,onLoad(options,loader){
+     builder.onLoad(options,async args=>{
+      const result=await loader(args),path=objectPath(args.path);
+      if(result?.contents!==undefined&&wanted(path))return {...result,contents:await transform(path,String(result.contents))};
+      return result;
+     });
+    }});
+   }
+   builder.onLoad({filter:/\.(?:mjs|js|ts)$/},async args=>{
+    const path=objectPath(args.path);if(!wanted(path))return undefined;
+    return {contents:await transform(path,await readFile(args.path,'utf8')),loader:path.endsWith('.ts')?'ts':'js'};
+   });
+   builder.onEnd(result=>{
+    if(result.errors.length)return;
+    assert.deepEqual([...records.keys()].sort(),[...expected].sort(),'closed prepared role input map '+role);
+    assert(!Object.keys(result.metafile?.inputs??{}).some(path=>path.endsWith('finite-budget-descriptors.json')||path.endsWith('finite-budget-world.mjs')),'Node-only map/compiler excluded from Worker bundle');
+   });
+  }};
+ }
+ return Object.freeze({role,plugin,entry:source=>transform('<stdin>',source),records:()=>[...records.values()],prepared:()=>[...prepared]});
+}
+export function attachBudgetEpochCapture(f,{segment='producer',epochs=[],epoch=0}={}){
+ assert(['producer','consumer'].includes(segment));let current=epoch;
+ f.budgetEpochs=epochs;
+ f.captureBudgetEpoch=async reason=>{
+  const qaValue=await f.stub.budgetSnapshot();let QA;try{QA=JSON.parse(JSON.stringify(qaValue));}finally{qaValue[Symbol.dispose]?.();}
+  const worker=await f.mf.getWorker('canary-first-connection'),response=await worker.fetch('https://delegated-canary.agentfriendlyweb.dev/_fixture/finite-budget');
+  assert.equal(response.status,200);const M=await response.json();
+  for(const [role,snapshot]of Object.entries({M,QA})){
+   assert.equal(snapshot.purpose,'afw.finite-budget-diagnostics.syn.v1');assert.equal(snapshot.workerRole,role);assert.equal(snapshot.testRevision,process.env.GITHUB_SHA);
+   const value={segment,epoch:current,role,reason,capturedAt:Date.now(),snapshot},index=epochs.findIndex(v=>v.segment===segment&&v.epoch===current&&v.role===role);
+   if(index<0)epochs.push(value);else epochs[index]=value;
+  }
+  return epochs;
+ };
+ f.nextBudgetEpoch=()=>{current++;};
+ return f;
+}
+export async function preflightBudgetCompilation(){
+ assert.equal(process.env.AFW_BUDGET_GROUP,'positive');
+ const {initialEntryHarness}=await import('./finite-initial-entry-world.mjs');
+ const graphs=await initialEntryHarness('first-connection-publication',{ownerCleanup:true,cleanupCheckpoint:true,budgetCompileOnly:true,budgetQualification:true});
+ assert.equal(graphs.I0Opened,false);assert.equal(graphs.nativeExecutionProduced,false);
+ assert(graphs.budget?.M?.length&&graphs.budget?.QA?.length);
+ assert(graphs.compatibility.M.compatibility_flags.includes('nodejs_compat'));assert(graphs.compatibility.QA.flags.includes('nodejs_compat'));
+ const result={purpose:'afw.finite-budget-preflight.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,inputs:graphs.budget,I0Opened:false,nativeExecutionProduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
+ await mkdir('output/finite-budget/preflight',{recursive:true});await writeFile('output/finite-budget/preflight/preflight.json',JSON.stringify(result,null,2));
+ return result;
+}
+
+if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){const [command,root]=process.argv.slice(2);if(command==='preflight-budget')await preflightBudgetCompilation();else if(command==='inspect-budget-graphs')await inspectBudgetCompilation(root);else throw Error('SYN budget command unsupported before I0');}

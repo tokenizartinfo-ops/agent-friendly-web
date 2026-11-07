@@ -11337,5 +11337,938 @@
     },
     "disposition": "normal existing wrapper native leaves; named seed/config/probe RPCs excluded; negative branches dormant"
   },
-  "preparedHashRule": "Recorded QA hashes refer to e8 compile-only evidence. Existing approval/identity literals vary through the unmodified fixture; final preflight records actual pre-hook hashes and validates composition markers/counts. M uses raw source hashes, never QA overrides."
+  "preparedHashRule": "Recorded QA hashes refer to e8 compile-only evidence. Existing approval/identity literals vary through the unmodified fixture; final preflight records actual pre-hook hashes and validates composition markers/counts. M uses raw source hashes, never QA overrides.",
+  "implementationSupplement": {
+    "purpose": "fixed raw-selector expansion and original fixture leaves; no observed native execution",
+    "bodyReceiverPins": [
+      {
+        "path": "lib/assistance-administrative-get-transport.mjs",
+        "selector": 1,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/assistance-administrative-get-transport.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/assistance-administrative-get-transport.mjs",
+        "selector": 3,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/assistance-private-provider-get-transport.mjs",
+        "selector": 1,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/assistance-private-provider-get-transport.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/assistance-private-provider-get-transport.mjs",
+        "selector": 3,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/assistance-private-qa-installer.mjs",
+        "selector": 4,
+        "receivers": {
+          "reader": 2
+        }
+      },
+      {
+        "path": "lib/assistance-provider-token-name.mjs",
+        "selector": 1,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/assistance-provider-token-name.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/assistance-provider-token-name.mjs",
+        "selector": 3,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/assistance-service-identity-transport.mjs",
+        "selector": 1,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/assistance-service-identity-transport.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/assistance-service-identity-transport.mjs",
+        "selector": 3,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/delegated-oauth-worker.mjs",
+        "selector": 0,
+        "receivers": {
+          "request.body": 1
+        }
+      },
+      {
+        "path": "lib/delegated-oauth-worker.mjs",
+        "selector": 1,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/delegated-oauth-worker.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/dossier-monitoring-owner-http.mjs",
+        "selector": 0,
+        "receivers": {
+          "request.body": 1
+        }
+      },
+      {
+        "path": "lib/dossier-monitoring-owner-http.mjs",
+        "selector": 1,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/dossier-monitoring-owner-http.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-activation-observer.mjs",
+        "selector": 1,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-activation-observer.mjs",
+        "selector": 2,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-activation-observer.mjs",
+        "selector": 3,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-canary-restoration-transport.mjs",
+        "selector": 1,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-canary-restoration-transport.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-canary-restoration-transport.mjs",
+        "selector": 3,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-canary-restoration-transport.mjs",
+        "selector": 4,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-closed-version-upload.mjs",
+        "selector": 1,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-closed-version-upload.mjs",
+        "selector": 2,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-closed-version-upload.mjs",
+        "selector": 3,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-closure-reader-probe.mjs",
+        "selector": 6,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-closure-reader-probe.mjs",
+        "selector": 7,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-closure-reader-probe.mjs",
+        "selector": 8,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-closure-reader-probe.mjs",
+        "selector": 9,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-hosted-canary-restoration.mjs",
+        "selector": 14,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-node-private-bridge.mjs",
+        "selector": 1,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-node-private-bridge.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 2
+        }
+      },
+      {
+        "path": "lib/mcp-node-private-bridge.mjs",
+        "selector": 3,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-original-container-runtime.mjs",
+        "selector": 0,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-original-container-runtime.mjs",
+        "selector": 1,
+        "receivers": {
+          "reader": 2
+        }
+      },
+      {
+        "path": "lib/mcp-original-container-runtime.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-own-synthetic-save-http.mjs",
+        "selector": 0,
+        "receivers": {
+          "request.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-own-synthetic-save-http.mjs",
+        "selector": 1,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-own-synthetic-save-http.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-publication-artifact-reader.mjs",
+        "selector": 1,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-publication-artifact-reader.mjs",
+        "selector": 2,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-publication-artifact-reader.mjs",
+        "selector": 3,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-bootstrap-native.mjs",
+        "selector": 3,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-bootstrap-native.mjs",
+        "selector": 4,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-bootstrap-native.mjs",
+        "selector": 5,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-bootstrap-native.mjs",
+        "selector": 6,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-fixed-policy-engine.mjs",
+        "selector": 1,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-fixed-policy-engine.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-fixed-policy-engine.mjs",
+        "selector": 3,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-fixed-policy-engine.mjs",
+        "selector": 4,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-historical-source.mjs",
+        "selector": 8,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-historical-source.mjs",
+        "selector": 9,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-historical-source.mjs",
+        "selector": 10,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-historical-source.mjs",
+        "selector": 11,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+        "selector": 11,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+        "selector": 12,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+        "selector": 13,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+        "selector": 14,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-custody-probe.mjs",
+        "selector": 3,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-custody-probe.mjs",
+        "selector": 4,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-custody-probe.mjs",
+        "selector": 5,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-custody-probe.mjs",
+        "selector": 6,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-entry.mjs",
+        "selector": 21,
+        "receivers": {
+          "response.body": 3
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-entry.mjs",
+        "selector": 22,
+        "receivers": {
+          "reader": 2
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-entry.mjs",
+        "selector": 23,
+        "receivers": {
+          "reader": 2
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-entry.mjs",
+        "selector": 24,
+        "receivers": {
+          "response.body": 3
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-entry.mjs",
+        "selector": 25,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-entry.mjs",
+        "selector": 26,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-material.mjs",
+        "selector": 3,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-material.mjs",
+        "selector": 4,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-material.mjs",
+        "selector": 5,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-material.mjs",
+        "selector": 6,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-old-guard.mjs",
+        "selector": 1,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-old-guard.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-old-guard.mjs",
+        "selector": 3,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-old-guard.mjs",
+        "selector": 4,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-owner-source.mjs",
+        "selector": 8,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-owner-source.mjs",
+        "selector": 9,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-owner-source.mjs",
+        "selector": 10,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-owner-source.mjs",
+        "selector": 11,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+        "selector": 10,
+        "receivers": {
+          "response.body": 2
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+        "selector": 11,
+        "receivers": {
+          "stream": 2
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+        "selector": 12,
+        "receivers": {
+          "stream": 2
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+        "selector": 13,
+        "receivers": {
+          "response.body": 2
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-native-wire.mjs",
+        "selector": 0,
+        "receivers": {
+          "message.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-native-wire.mjs",
+        "selector": 1,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-native-wire.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-native-wire.mjs",
+        "selector": 3,
+        "receivers": {
+          "message.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-notice-consent-body.mjs",
+        "selector": 0,
+        "receivers": {
+          "message.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-notice-consent-body.mjs",
+        "selector": 1,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-notice-consent-body.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+        "selector": 3,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "selector": 13,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "selector": 14,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "selector": 15,
+        "receivers": {
+          "stream": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "selector": 16,
+        "receivers": {
+          "response.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+        "selector": 0,
+        "receivers": {
+          "request.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+        "selector": 1,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-seed-wire.mjs",
+        "selector": 1,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-seed-wire.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-qa-finite-seed-wire.mjs",
+        "selector": 3,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-retirement-provider-reader.mjs",
+        "selector": 1,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-retirement-provider-reader.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-retirement-provider-reader.mjs",
+        "selector": 3,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-retirement-provider-reader.mjs",
+        "selector": 4,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-successor-deployment-reader.mjs",
+        "selector": 1,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "lib/mcp-successor-deployment-reader.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/mcp-successor-deployment-reader.mjs",
+        "selector": 3,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/operations-service-request-controls.mjs",
+        "selector": 0,
+        "receivers": {
+          "request.body": 1
+        }
+      },
+      {
+        "path": "lib/operations-service-request-controls.mjs",
+        "selector": 1,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "lib/operations-service-request-controls.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "scripts/check-own-cron-provider.mjs",
+        "selector": 1,
+        "receivers": {
+          "r.body": 1
+        }
+      },
+      {
+        "path": "scripts/check-own-cron-provider.mjs",
+        "selector": 2,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "scripts/check-own-cron-provider.mjs",
+        "selector": 3,
+        "receivers": {
+          "reader": 1
+        }
+      },
+      {
+        "path": "worker/independent-closure/index.mjs",
+        "selector": 5,
+        "receivers": {
+          "this.reader": 1
+        }
+      }
+    ],
+    "scopeInputPins": [
+      {
+        "path": "lib/mcp-qa-finite-initial-lease.mjs",
+        "rawSha256": "a5310b6f1ea8a34e173292b9e72ecf329840211985bdb043d5154b4d434bc03e",
+        "rawBytes": 2257,
+        "roles": [
+          "QA"
+        ]
+      },
+      {
+        "path": "lib/mcp-qa-finite-stage-work.mjs",
+        "rawSha256": "9ffa53cb3dc37e7c115f1a01430adf8e578cf9ce6933b63da2680f670f711a6c",
+        "rawBytes": 7405,
+        "roles": [
+          "M",
+          "QA"
+        ]
+      },
+      {
+        "path": "worker/mcp-own/finite.mjs",
+        "rawSha256": "b13e7fad6e1ea5e5bb1ab25d43e5051fdcf77c5ef0794d2389dd5041057b3470",
+        "rawBytes": 2758,
+        "roles": [
+          "M"
+        ]
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-oauth-qa.mjs",
+        "rawSha256": "af1fabbd6b5f0e475c4c23d254ea5f01ea9bb054db50840a1991f17e593ce016",
+        "rawBytes": 885,
+        "roles": [
+          "QA"
+        ]
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-notice-get-qa.mjs",
+        "rawSha256": "345cf78583d42c5227e75521a644d8d7e0f100d5814301e50b5450f900bdc42d",
+        "rawBytes": 1384,
+        "roles": [
+          "QA"
+        ]
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-preparation-qa.mjs",
+        "rawSha256": "2cf0221b057521dd1e954b766717454439a75f842038894d8242d19c3d563617",
+        "rawBytes": 593,
+        "roles": [
+          "QA"
+        ]
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+        "rawSha256": "792cc680c103bef1d86ecb3a957e04112411bec8acd71c0a098e483bdec58750",
+        "rawBytes": 2505,
+        "roles": [
+          "QA"
+        ]
+      }
+    ],
+    "entryNativeMembers": {
+      "this.ctx.storage → list": 5,
+      "this.ctx.storage → getAlarm": 3,
+      "s → put": 15,
+      "s → sync": 7,
+      "s → list": 5,
+      "s → get": 10,
+      "response.body → cancel": 11,
+      "s → delete": 1,
+      "tx → put": 2,
+      "this.ctx.storage → put": 5,
+      "this.ctx.storage → sync": 3,
+      "this.ctx.storage → delete": 1,
+      "this.ctx.storage → get": 7,
+      "this.ctx.storage → setAlarm": 1,
+      "tx → get": 2,
+      "tx → setAlarm": 1,
+      "tx → deleteAlarm": 1,
+      "s → setAlarm": 1
+    },
+    "entryAdditionalCounts": {
+      "prepare": 5,
+      "bind": 3,
+      "first": 3,
+      "all": 1,
+      "run": 1,
+      "fetch": 1,
+      "json": 2
+    }
+  }
 }

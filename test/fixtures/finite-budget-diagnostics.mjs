@@ -163,14 +163,15 @@ export function createBudgetRuntime(options={}){
   }catch{incomplete();}
  };
  function invoke(fn,receiver,args,meta,original=()=>Reflect.apply(fn,receiver,args)){
-  const bodyOwner=bodies.get(receiver);
-  const store=bodyOwner?.store??als.getStore();
+  const bodyOwner=bodies.get(receiver),currentStore=als.getStore();
+  const localStore=bodyOwner&&!bodyOwner.fetch&&bodyOwner.origin!=='outbound'&&currentStore?.root===bodyOwner.store?.root&&!currentStore?.excluded?currentStore:null;
+  const store=localStore??bodyOwner?.store??currentStore;
   if(meta.dormant){incomplete();return original();}
   if(meta.edge==='clone'){
    const result=original();if(bodyOwner)tagBody(result,bodyOwner);else incomplete();return result;
   }
   if(meta.edge==='reader'){
-   const result=original();if(bodyOwner)tagBody(result,bodyOwner);else incomplete();return result;
+   const result=original();if(bodyOwner)tagBody(result,localStore?immutable({...bodyOwner,store:localStore}):bodyOwner);else incomplete();return result;
   }
   const pair=(nativeObject(receiver)?nativePairs.get(receiver)?.get(fn):null)??nativePairs.get(globalThis)?.get(fn)??nativeFunctions.get(fn);
   const resource=pair?.resource;
@@ -228,6 +229,7 @@ export function createBudgetRuntime(options={}){
   request(req,lease);return run(lease,invoke);
  };
  const childCall=(parent,child,deadline,invoke)=>{if(!leases.has(parent)&&als.getStore()?.excluded)return invoke();descendant(parent,child,deadline);return run(child,invoke);};
+ const childInvoke=(parent,deadline,fn,receiver,args)=>childCall(parent,args[0],deadline,()=>Reflect.apply(fn,receiver,args));
  const alias=(parent,child)=>{const store=leases.get(parent);if(store&&nativeObject(child))leases.set(child,store);else if(!als.getStore()?.excluded)incomplete();return child;};
  const transport=(req,path,invoke)=>{
   const value=path==='/oauth/token'?'token_exchange':path==='/mcp'?'mcp_read':null;
@@ -292,6 +294,6 @@ export function createBudgetRuntime(options={}){
  };
  // Captured once before the fixed fixture can install any of its existing facades.
  capture(globalThis,'fetch',globalThis.fetch,'transport');
- return immutable({collector,root,descendant,run,phase,fixture,nativeHolder,capture,facade,facadeHolder,readMethod,transactionArgument,methodValue,methodPhase,deadline,clock,control,childCall,alias,transport,request,localResponse,body,construct,bind,member,direct,reflect,call,snapshot:collector.snapshot});
+ return immutable({collector,root,descendant,run,phase,fixture,nativeHolder,capture,facade,facadeHolder,readMethod,transactionArgument,methodValue,methodPhase,deadline,clock,control,childCall,childInvoke,alias,transport,request,localResponse,body,construct,bind,member,direct,reflect,call,snapshot:collector.snapshot});
 
 }

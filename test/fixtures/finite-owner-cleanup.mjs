@@ -1,3 +1,4 @@
+import {persistBudgetEvidence} from './finite-budget-evidence.mjs';
 import {build as buildCleanupComponent} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import assert from 'node:assert/strict';
@@ -110,9 +111,9 @@ export function instrumentFiniteOwnerCleanup(source){
  const settled="io.settled=true;}";assert.equal(source.split(settled).length,2);source=source.replace(settled,()=>"io.elapsedMs=performance.now()-io.enteredAt;io.settled=true;}");
  return source;
 }
-export async function ownerReferenceFixture(t,{cleanupCheckpoint=false}={}){
- const f=await initialEntryHarness('first-connection-publication',{ownerCleanup:true,cleanupCheckpoint});f.cleanupQualification=cleanupCheckpoint;
- t.after(async()=>{try{await f.stub.ownerReferenceControl('released').catch(()=>{});await f.stub.firstConnectionRestore();await f.stub.restoreMethods();}finally{await f.mf.dispose();await f.cleanup();}});
+export async function ownerReferenceFixture(t,{cleanupCheckpoint=false,budgetQualification=false}={}){
+ const f=await initialEntryHarness('first-connection-publication',{ownerCleanup:true,cleanupCheckpoint,budgetQualification});f.cleanupQualification=cleanupCheckpoint;
+ t.after(async()=>{try{await f.stub.ownerReferenceControl('released').catch(()=>{});await f.stub.firstConnectionRestore();await f.stub.restoreMethods();}finally{if(f.captureBudgetEpoch)await f.captureBudgetEpoch('before-fixture-dispose');await f.mf.dispose();await f.cleanup();}});
  await f.stub.configure('normal');assert.equal((await plain(f.stub.invoke(f.refs))).status,'material_recorded');await f.stub.restoreMethods();await f.mountFirstConnection();await f.stub.firstConnectionConfigure('normal');
  const initial=f.firstConnectionBuild.M;assert.equal(initial.sha256,f.resident.module.sha256);assert(initial.inputs.includes('worker/mcp-own/finite.mjs'));
  const connected=await approveFirstConnection(f);assert.equal(connected.status,200);await connected.body?.cancel();const probe=await readFirstConnectionProbe(f),receipt=JSON.parse(probe.rows.find(([k])=>k.startsWith('afw.finite-policy-effect.v1:')&&k.endsWith(':receipt'))[1]);assert.equal(receipt.moduleHash,initial.sha256);
@@ -135,7 +136,8 @@ export async function recordOwnerReference(f,label,extra={}){
  const o=await plain(f.stub.ownerReferenceObserve()),state=await plain(f.stub.firstConnectionState());
  assert(o.lists<=2&&o.gets<=200&&o.peak<=2,'native KV calls stay within fixed budget');
  const result={label,testRevision:process.env.GITHUB_SHA??null,M:{sha256:f.firstConnectionBuild.M.sha256,bytes:f.firstConnectionBuild.M.bytes},QA:{sha256:f.firstConnectionBuild.QA.sha256,bytes:f.firstConnectionBuild.QA.bytes},completeWrites:o.completeWrites,completeNormal:o.completeNormal,referenceRows:o.rows.filter(([k])=>k.endsWith(':reference')).length,lists:o.lists,gets:o.gets,peak:o.peak,listLimit:o.nativeListLimit??null,trace:o.trace,requests:o.requests,children:o.children,lookupChild:o.lookupChild??null,referenceReadbacks:o.referenceReadbacks,sdkSuffixes:o.rows.map(([key])=>key.split(':').slice(2).join(':')),roots:(await plain(f.stub.firstConnectionProbe())).calls.map(c=>({method:c.originalMethod,windowMs:c.boundary.deadline-c.boundary.startedAt})),httpSpans:state.http.filter(v=>Number.isSafeInteger(v.childStartedAt)).map(v=>({kind:v.kind,bytes:v.bytes,elapsedMs:v.elapsedMs,bodyGuardMs:v.bodyGuardMs??0,childStartedAt:v.childStartedAt})),http:state.http.reduce((a,v)=>({requests:a.requests+1,bytes:a.bytes+v.bytes}),{requests:0,bytes:0}),completePackage:false,operationalReadiness:false,PCoff:false,custodyReal:false,...extra};
- await mkdir('output/owner-reference',{recursive:true});await writeFile('output/owner-reference/'+label+'.json',JSON.stringify(result,null,2));console.info('R1 sanitized native marker',JSON.stringify(result));return result;
+ if(f.captureBudgetEpoch)result.diagnostics=await f.captureBudgetEpoch('owner-reference-record');
+ const evidence=await persistBudgetEvidence({path:'output/owner-reference/'+label+'.json',full:result,testRevision:process.env.GITHUB_SHA??null,caseName:label,counts:{}});console.info('R1 sanitized native marker',evidence.summary);return result;
 }
 export async function downstreamOwnerReference(f,response,prepared,{cleanupPartial=false}={}){
  const code=new URL(response.headers.get('Location')).searchParams.get('code');assert(code);await response.body?.cancel();
