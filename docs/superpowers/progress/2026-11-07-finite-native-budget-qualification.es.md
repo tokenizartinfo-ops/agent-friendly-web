@@ -195,3 +195,7 @@ Después código+9evidenciaverificada, Root despacha revisión frescaSpec+Qualit
 
 
 Ruling de separación deldato13ºpath — 270KBde literal mezclado con lógica dificultaría mantenimiento/revisión y no debe viajaralworker — costo:unJSONSYNadicional ysulecturavalidadaNode,envezdemodulecompiler11343líneasextra.No nuevaabstracción/runtimecapability. Referencias/propuesta anterior quedanpreservadasenGit yreporte. ÚnicowriterAstraretoma; anteriorSolSTOP. Próximopuntodecontrolserá implementación/run9, no otra ronda de inventariopor inercia.
+
+### 2026-11-07 20:29:57 UTC — disponibilidad del owner actualizada
+
+Gabriel deja el ordenador encendido y se retira; nueva disponibilidad sólo DESPUÉS de18:30Argentina/21:30UTC del7Nov2026. Esta instrucción sustituye la ventana anterior19:30UTC: no solicitar ingreso/OTP/pegado de credenciales/consentimiento ni abrirventanas humanas antes21:30. ElSource/SYN aprobado ylaCI sincredenciales pueden continuar; ningunaautoridadnueva ni cambioSource/runtime. Si unpasohumanoestrictoaparece, preservarcheckpoint yseguirtrabajoindependiente. Task1mapaaceptado3f29a04d; únicoimplementadorAstra,13paths.SourceCI9todavíapendientesegúnúltimocheckpoint. Readiness/package/PCofffalse.
