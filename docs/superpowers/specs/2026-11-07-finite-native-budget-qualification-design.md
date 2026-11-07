@@ -1,6 +1,6 @@
 # AFW — diseño de calificación de diagnóstico y límites nativos
 
-7nov2026. PROJECT AFW; repository tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT SOURCE/SYN GitHub/Actions, sin runtime. BASE29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64, Source feat/finite-native-cleanup-20261101; Rootdocs docs/finite-pcoff-continuation-20261103. Estado: diseño Root para buildercheck; NO implementación iniciada. Se preserva el plan anterior aceptado, sus siete Minor y todas sus excepciones.
+7nov2026. PROJECT AFW; repository tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT SOURCE/SYN GitHub/Actions, sin runtime. BASE29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64, Source feat/finite-native-cleanup-20261101; Rootdocs docs/finite-pcoff-continuation-20261103. Estado: diseño aprobado para planificación por Root bajo delegación expresa del owner (opt-out de preguntas rutinarias); buildercheck cerrado. NO implementación iniciada. Se preserva el plan anterior aceptado, sus siete Minor y todas sus excepciones.
 
 ## Intención y decisión bajo delegación
 
@@ -106,3 +106,8 @@ Cierre de unidad: diagnóstico atribuible con límites/casos/readback reales y c
 El builder fresco finite_budget_builder_check leyó diseño/hechos yfacetas/helpersBASE. Única pregunta importante: D3/D4 no pueden montarse después de D1/D2 yconservar recuperación preC0 usando sólo dosMiniflare; restart:true permitiría carrera conalarmvencido yconfiguración tardía. Root acepta elhallazgo de diseño ydescarta inventar una recuperación overdue comoatajo.
 
 Ruling Root: siete jobs, dos consumidores de reducción que comparten el MISMO productor/checkpoint yrecuperan sus dosréplicas cadauno antesC0; consume_b reutiliza la lane readonly ya terminada ydepende deambos trabajos, manteniendo treslanes/seisMiniflareglobales comomáximo. Los16casos/cincolinajes/diezgrafos ySource/Root/child/C0/C1 no cambian. Motivo: resolver lacomposición conprimitivasaceptadas, sin nuevo seam/clock ni lógica productiva. Costo si es incorrecto: más overhead de un job y posible fallo de margen de descarga/montaje; debe abortar yregistrarse, nunca ampliar el reloj ni afirmar verde desde un setupinválido. No añadir otro intento automáticamente sinrazón nueva.
+
+
+## Aprobación de diseño para planificación — 7nov17:49UTC
+
+El mismo builder revisó únicamente la corrección de su pregunta y respondió literalmente «nothing important left». No se abrió otro reviewer ni un test. Root aprueba este diseño bajo la delegación vigente y la excepción de brainstorming del owner que pidió decidir/encadenar sin preguntas; no se atribuye una revisión humana deeste documento ni permiso operacional nuevo. Los16casos/7jobs y restricciones anteriores son el contrato actual. Próximo paso: writing-plans; ningún cambio Source hasta plan/preflight/brief fijados y un escritor designado. La aprobación es para SOURCE/SYN, nunca runtime/credenciales/promoción/ensayoPCoff.
