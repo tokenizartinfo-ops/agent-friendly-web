@@ -109,7 +109,7 @@ export async function ownerReferenceFixture(t,{cleanupCheckpoint=false}={}){
  f.kv=await f.mf.getKVNamespace('OAUTH_KV','canary-first-connection');await f.kv.put('client:'+f.source.clientId,JSON.stringify({clientId:f.source.clientId,redirectUris:['https://client.example/cb'],clientName:'SYN reference client',grantTypes:['authorization_code'],responseTypes:['code'],tokenEndpointAuthMethod:'none',authMethodExplicit:true,registrationDate:Math.floor(Date.now()/1000)}));return f;
 }
 export async function prepareOwnerReference(f,fault='normal'){
- await f.stub.ownerReferenceConfigure(fault);const verifier='v'.repeat(64),challenge=createHash('sha256').update(verifier).digest('base64url'),headers={'Cf-Access-Jwt-Assertion':await f.enrollmentToken(f.source),Cookie:f.choice.cookie};
+ await f.stub.ownerReferenceConfigure(fault);const verifier='v'.repeat(64),challenge=createHash('sha256').update(verifier).digest('base64url'),headers={'Cf-Access-Jwt-Assertion':f.cleanupOriginalIdentityToken??await f.enrollmentToken(f.source),Cookie:f.choice.cookie};
  const screen=await f.call('/authorize?'+new URLSearchParams({client_id:f.source.clientId,redirect_uri:'https://client.example/cb',response_type:'code',resource:f.source.resource,scope:'afw:project:read',state:'SYN-reference-state',code_challenge:challenge,code_challenge_method:'S256'}),{redirect:'manual',headers});
  assert.equal(screen.status,200);const text=await screen.text(),handle=/name="handle" value="([^"]+)"/.exec(text)?.[1],cookie=screen.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(handle&&cookie);
  const issue=()=>f.call('/authorize',{method:'POST',redirect:'manual',headers:{...headers,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:f.choice.cookie+'; '+cookie},body:new URLSearchParams({handle,decision:'approve',scope:'afw:project:read'})});return {issue,headers,verifier};
@@ -189,7 +189,7 @@ export async function observeCleanupSdkExchange(f,token){
  const hash=v=>createHash('sha256').update(v).digest('hex');
  const tokenId=hash(token.access_token),tokenRaw=await f.kv.get('token:'+grant.userId+':'+grant.id+':'+tokenId);assert.equal(typeof tokenRaw,'string');const nativeToken=JSON.parse(tokenRaw);
  assert.equal(nativeToken.grantId,grant.id);assert.equal(nativeToken.userId,grant.userId);
- assert.equal(JSON.parse((await plain(f.stub.ownerReferenceObserve())).rows.find(([k])=>k.endsWith(':reference'))[1]).recordHash,ref.recordHash);
+ assert.equal((await plain(f.stub.ownerReferenceObserve())).rows.find(([k])=>k.endsWith(':reference'))[1],referenceRaw,'historical Reference bytes unchanged');
  return {purpose:'afw.post-exchange-sdk-fact.syn.v1',referenceHash:ref.recordHash,referenceRawHash:hash(referenceRaw),referenceExpiresAt:ref.expiresAt,selectorHash:hash(ref.sdkGrantId),subjectHash:hash(grant.userId),clientHash:hash(grant.clientId),correlationHash:ref.correlationHash,metadataHash:hash(JSON.stringify(grant.metadata)),createdAt:grant.createdAt,expiresAt:grant.expiresAt,tokenExpiresAt:nativeToken.expiresAt,tokenHash:hash(token.access_token),advertisedExpiresIn:token.expires_in,D1ExpiresAt:Date.parse(native.grant.expires_at),observedAt:Date.now(),I0:plan.I0,C0:plan.C0,C1:plan.C1,operationalReadiness:false};
 }
 export async function readCleanupM(worker,token,projectId){
