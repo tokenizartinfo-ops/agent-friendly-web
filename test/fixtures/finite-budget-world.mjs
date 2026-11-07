@@ -273,7 +273,7 @@ function budgetScopeSeams(source,path){
  if(path==='lib/mcp-qa-finite-initial-lease.mjs'){
   const n='const lease=Object.freeze({signal:controller.signal,assertCurrent:check});';
   replace(n,n+'__afwBudget.clock(lease,end);');
-  replace('actual=work(l,until);','actual=__afwBudget.childCall(lease,l,until,()=>work(l,until));');
+  replace('current(l,fail);actual=work(l,until);','actual=__afwBudget.childCall(lease,l,until,()=>{current(l,fail);return work(l,until);});');
  }
  if(path==='lib/mcp-qa-finite-initial-entry.mjs'){
   const n='parent=clock(r.createdAt+30000,holders);const lease=parent.lease;';
@@ -336,7 +336,7 @@ export function transformBudgetPreparedSource(source,path,role){
  const f=ts.factory,id=()=>f.createIdentifier(BUDGET_ID),access=name=>f.createPropertyAccessExpression(id(),name);
  const literal=value=>parseExpression(JSON.stringify(value));
  const hook=(name,args)=>f.createCallExpression(access(name),undefined,args);
- let nativeCalls=0,identityEdges=0,bodyEdges=0,facadeEdges=0,scopeEdges=0;
+ let nativeCalls=0,identityEdges=0,bodyEdges=0,facadeEdges=0,scopeEdges=0,guardEdges=0;
  const closure=expression=>f.createArrowFunction(undefined,undefined,[],undefined,f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),expression);
  const result=ts.transform(ast,[context=>{
   const visit=node=>{
@@ -362,6 +362,12 @@ export function transformBudgetPreparedSource(source,path,role){
     return f.updateCallExpression(node,hook('direct',[expr,data]),node.typeArguments,args);
    }
    node=ts.visitEachChild(node,visit,context);
+   if(ts.isThrowStatement(original)){
+    let owner=original.parent;
+    while(owner&&!ts.isFunctionLike(owner))owner=owner.parent;
+    const name=owner?.name?.getText(ast)??(owner&&ts.isVariableDeclaration(owner.parent)?owner.parent.name.getText(ast):null);
+    if(['fail','finiteNativeFailure'].includes(name)){guardEdges++;return f.updateThrowStatement(node,hook('guardValue',[node.expression]));}
+   }
    if(path==='<stdin>'&&ts.isMethodDeclaration(original)&&ts.isClassDeclaration(original.parent)&&FIXTURE_EXCLUDED_METHODS.has(original.name.getText(ast))){
     const modifiers=original.modifiers?.some(m=>m.kind===ts.SyntaxKind.AsyncKeyword)?[f.createModifier(ts.SyntaxKind.AsyncKeyword)]:undefined;
     const invoke=f.createArrowFunction(modifiers,undefined,[],undefined,f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),node.body);
@@ -456,7 +462,7 @@ export function transformBudgetPreparedSource(source,path,role){
   return root=>ts.visitNode(root,visit);
  }]);
  const transformed=ts.createPrinter({newLine:ts.NewLineKind.LineFeed}).printFile(result.transformed[0]);result.dispose();
- return {source:"import {budget as "+BUDGET_ID+"} from 'afw:budget-runtime';\n"+transformed,counts:{nativeCalls,identityEdges,bodyEdges,facadeEdges,scopeEdges},selectorCounts:selected?.counts??[]};
+ return {source:"import {budget as "+BUDGET_ID+"} from 'afw:budget-runtime';\n"+transformed,counts:{nativeCalls,identityEdges,bodyEdges,facadeEdges,scopeEdges,guardEdges},selectorCounts:selected?.counts??[]};
 }
 
 const scopeInputPins=budgetNativeDescriptorProposal.implementationSupplement.scopeInputPins;

@@ -16,7 +16,7 @@ export function createBudgetDiagnostics(options={}){
  const limit=integer(requested)&&requested>0&&requested<=16384?requested:16384;
  const coverage={overflow:false,invalid:testRevision&&workerRole===role&&limit===requested?0:1,unattributed:0,nativeBytesUnavailable:0};
  const roots=new WeakMap(),rootHandles=new WeakMap(),children=new WeakMap(),childHandles=new WeakMap(),operations=new WeakMap();
- const rows=[],groups=new Map(),scopes=new Map(),totals=metric();let rootOrdinal=0,childOrdinal=0,opOrdinal=0,events=0,firstAt=null,lastAt=null;
+ const rows=[],logicalScopeEvents=[],deniedScopes=new Set(),groups=new Map(),scopes=new Map(),totals=metric();let rootOrdinal=0,childOrdinal=0,opOrdinal=0,scopeEventOrdinal=0,scopeGuardEvents=0,events=0,firstAt=null,lastAt=null;
  const event=()=>{events++;if(events>limit){coverage.overflow=true;return false;}return true;};
  const invalid=(unattributed=false)=>{coverage.invalid++;if(unattributed)coverage.unattributed++;return null;};
  const handle=()=>Object.freeze(Object.create(null));
@@ -63,6 +63,15 @@ export function createBudgetDiagnostics(options={}){
   if(row.logicalAt!==null)return;
   row.logicalAt=at;row.logicalReason=reason;touch(row,'logicalDenied');
  });
+
+ const scopeLogical=safe((rootRef,childRef,meta)=>{
+  const keep=event(),r=nativeObject(rootRef)&&rootHandles.get(rootRef),c=childRef===null?null:nativeObject(childRef)&&childHandles.get(childRef);
+  const phase=data(meta,'phase'),at=data(meta,'at'),reason=data(meta,'reason');
+  if(!r||childRef!==null&&!c||c&&c.rootOrdinal!==r.rootOrdinal||!PHASES.has(phase)||!number(at)||!REASONS.has(reason))return invalid(true);
+  scopeGuardEvents++;const eventOrdinal=++scopeEventOrdinal;
+  if(keep){deniedScopes.add(r.rootOrdinal+'|'+(c?.childOrdinal??0)+'|'+phase);logicalScopeEvents.push({testRevision,workerRole,eventOrdinal,rootOrdinal:r.rootOrdinal,childOrdinal:c?.childOrdinal??null,phase,at,reason});}
+ });
+
  const cancel=safe((ref,meta)=>{
   event();const row=nativeObject(ref)&&operations.get(ref),at=data(meta,'at'),stage=data(meta,'stage');
   if(!row||!number(at)||!['started','settled'].includes(stage))return invalid();
@@ -76,9 +85,9 @@ export function createBudgetDiagnostics(options={}){
   if(at<row.enteredAt)return invalid();
   row.status=status;row.settledAt=at;lastAt=Math.max(lastAt??at,at);touch(row,'nativeSettled');if(status==='rejected')touch(row,'nativeRejected');touch(row,'nativeDurationSumMs',at-row.enteredAt);active(row,-1);
  });
- const snapshot=safe(()=>({purpose:PURPOSE,testRevision,workerRole,rows:rows.map(row=>({...row})),totals:{...totals,observedWallMs:firstAt===null?0:(lastAt??firstAt)-firstAt,scopes:[...scopes.values()].map(m=>({...m}))},byPhaseResource:[...groups.values()].map(m=>({...m})),coverage:{...coverage},operationalReadiness:false,completePackage:false,PCoff:false}));
+ const snapshot=safe(()=>({purpose:PURPOSE,testRevision,workerRole,rows:rows.map(row=>({...row})),logicalScopeEvents:logicalScopeEvents.map(event=>({...event})),totals:{...totals,scopeGuardEvents,deniedScopes:deniedScopes.size,observedWallMs:firstAt===null?0:(lastAt??firstAt)-firstAt,scopes:[...scopes.values()].map(m=>({...m}))},byPhaseResource:[...groups.values()].map(m=>({...m})),coverage:{...coverage},operationalReadiness:false,completePackage:false,PCoff:false}));
  const incomplete=safe(()=>{event();return invalid(true);});
- return Object.freeze({root,child,begin,bytes,logical,cancel,settle,snapshot,incomplete});
+ return Object.freeze({root,child,begin,bytes,logical,scopeLogical,cancel,settle,snapshot,incomplete});
 }
 function passiveThen(value){
  if(!nativeObject(value))return null;
@@ -122,6 +131,7 @@ export function createBudgetRuntime(options={}){
   if(!store||!PHASES.has(value)){incomplete();return invoke();}
   return als.run(immutable({...store,phase:value}),()=>invoke());
  };
+ const guardValue=value=>{const store=als.getStore();if(store?.excluded)return value;if(store?.root)collector.scopeLogical(store.root,store.child,{phase:store.phase,at:now(),reason:'guard'});else incomplete();return value;};
  const fixture=invoke=>als.run(immutable({excluded:true}),()=>invoke());
  const nativeHolder=(holder,resource,kind='holder')=>{
   if(holder==null)return holder;
@@ -284,6 +294,7 @@ export function createBudgetRuntime(options={}){
    if(description&&typeof value==='function')nativeFunctions.set(value,description);
    return value;
   };
+ };
  const construct=(constructor,kind)=>(...args)=>{
   const value=Reflect.construct(constructor,args);
   if(kind==='Request'){const resource=fetchResource(args[0],false);if(resource)requestResources.set(value,resource);}
@@ -294,6 +305,6 @@ export function createBudgetRuntime(options={}){
  };
  // Captured once before the fixed fixture can install any of its existing facades.
  capture(globalThis,'fetch',globalThis.fetch,'transport');
- return immutable({collector,root,descendant,run,phase,fixture,nativeHolder,capture,facade,facadeHolder,readMethod,transactionArgument,methodValue,methodPhase,deadline,clock,control,childCall,childInvoke,alias,transport,request,localResponse,body,construct,bind,member,direct,reflect,call,snapshot:collector.snapshot});
+ return immutable({collector,root,descendant,run,phase,fixture,guardValue,nativeHolder,capture,facade,facadeHolder,readMethod,transactionArgument,methodValue,methodPhase,deadline,clock,control,childCall,childInvoke,alias,transport,request,localResponse,body,construct,bind,member,direct,reflect,call,snapshot:collector.snapshot});
 
 }

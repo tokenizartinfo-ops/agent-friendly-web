@@ -1216,3 +1216,12 @@ Preserves compiler/plugin plumbing and runtime/Q drafts before the remaining pro
 - Positive fixture wiring captures old M/QA epochs before first-connection remount, connection configuration, optional SDK-only remount and restart. Remaining work includes final/checkpoint/cold-consumer capture, the complete P1/CLI/evidence integration, fixed supplemental hook-count assertions and final static review. R1 complete JSON is preserved before bounded console output. The historical unobserved R0 branch continues to use the default fixture, and is not being rerun.
 
 All changes remain opt-in or unactivated WIP; normal/negative emitted semantics are intended unchanged but not yet tested. No universal native coverage or operating-readiness claim. operationalReadiness=false; completePackage=false; PCoff=false.
+
+
+## Unactivated scope-event implementation checkpoint — 2026-11-07
+
+Follows Rootdocs a69f10dc085791051570a5868c9d7f62175a4691. The draft now separates bounded logicalScopeEvents, totals.scopeGuardEvents and totals.deniedScopes from explicitly associated per-native-row logicalDenied. The actual fixed fail/finiteNativeFailure throw expression is passed through guardValue once, retaining the identical thrown value; no raw Error, fanout or guard reprobe. Q4 checks fulfilled native work remains fulfilled/unmarked, repeated scope events versus distinct scopes, and explicit operation denial separately. Existing 16384 event cap applies.
+
+Additional immutable carrier plumbing captures four existing request-clock aliases and the fixed bootstrap/old-guard/custody child invocation registrations. The original initial-lease current check remains immediately before its original work invocation inside the captured child context. No callback argument or native Promise is replaced. Corrected an unfinished bind helper delimiter in the unactivated runtime and guaranteed fixture disposal even if evidence capture fails. Owner-reference diagnostics now use a purpose/revision/epochs envelope, preserving local role/epoch ordinals and peaks.
+
+This is preservation only: no preflight/test/native execution, TEMP change or qualification claim. Remaining: exact compiler hook gates, positive producer/consumer/checkpoint integration, P1 and bounded historical log callers, then the authorized final 8Q+P1 run. All readiness flags remain false.
