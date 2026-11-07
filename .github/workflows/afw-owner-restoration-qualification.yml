@@ -6,174 +6,151 @@ on:
 permissions:
   contents: read
 jobs:
-  routing_and_preservation_preflight:
-    permissions:
-      contents: read
-      actions: read
+  historical_preflight_readback:
+    permissions: {contents: read, actions: read}
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-          persist-credentials: false
-          fetch-depth: 1
       - uses: actions/setup-node@v4
-        with: {node-version: 22, cache: npm}
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Check only affected fixture syntax and lint
-        run: |
-          node --check test/fixtures/finite-owner-cleanup.mjs
-          node --check test/fixtures/finite-owner-cleanup-persistence.mjs
-          ./node_modules/.bin/eslint test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs
-      - name: Contrast inherited eval Worker launcher before any I0
-        timeout-minutes: 1
-        run: node test/fixtures/finite-owner-cleanup-persistence.mjs launcher-probe
-      - name: Pin the existing g4 artifact without reproducing effects
+        with: {node-version: 22}
+      - name: Pin the existing successful-control artifact
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          mkdir -p output/owner-cleanup
           node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';import {writeFile} from 'node:fs/promises';
-          const response=await fetch('https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/13575185515',{headers:{Authorization:'Bearer '+process.env.GITHUB_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}});
-          assert.equal(response.status,200);const a=await response.json();assert.equal(a.id,13575185515);assert.equal(a.workflow_run.id,42371498327);assert.equal(a.workflow_run.head_sha,'818bc4d4e6fb1935e594951ba09d3f9536ba49d6');assert.equal(a.size_in_bytes,10872023);assert.equal(a.expired,false);assert.equal(a.digest,'sha256:90edd8e83d2789fce9cca75b53d02102080e6ba0d60c891eac81fc90aff777e8');
-          await writeFile('output/owner-cleanup/g4-artifact-metadata.json',JSON.stringify({artifactId:a.id,runId:a.workflow_run.id,sourceArtifact:a.workflow_run.head_sha,sourceVerifier:process.env.GITHUB_SHA,archiveBytes:a.size_in_bytes,archiveDigest:a.digest,expiresAt:a.expires_at},null,2));console.info('Pinned existing g4 artifact',a.id,a.digest);
+          import assert from 'node:assert/strict';
+          const r=await fetch('https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/13575584835',{headers:{Authorization:'Bearer '+process.env.GITHUB_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}});assert.equal(r.status,200);const a=await r.json();assert.equal(a.id,13575584835);assert.equal(a.workflow_run.id,42376693686);assert.equal(a.workflow_run.head_sha,'f591b7e8590b694cd3b7693f6537c6a92e5ee8e5');assert.equal(a.size_in_bytes,1322925);assert.equal(a.expired,false);assert.equal(a.digest,'sha256:3477ad8f889a9c9229c10d62bb30a21bccd0d1cf6f1e23b3cb9aa31f54d675f6');console.info('Historical artifact pinned',a.id,a.digest);
           NODE
-      - name: Download exact artifact historical_g4 attempt 1
-        id: historical_g4_1
+      - name: Download exact artifact historical_preflight attempt 1
+        id: historical_preflight_1
         if: ${{ success() }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ '13575185515' }}
+          artifact-ids: ${{ '13575584835' }}
           merge-multiple: true
           github-token: ${{ github.token }}
           repository: tokenizartinfo-ops/agent-friendly-web
-          run-id: 42371498327
-          path: ${{ runner.temp }}/historical-g4
+          run-id: 42376693686
+          path: ${{ runner.temp }}/historical-preflight
       - name: Wait two seconds before exact artifact retry
-        if: ${{ always() && steps.historical_g4_1.outcome == 'failure' }}
+        if: ${{ always() && steps.historical_preflight_1.outcome == 'failure' }}
         run: sleep 2
-      - name: Download exact artifact historical_g4 attempt 2
-        id: historical_g4_2
-        if: ${{ always() && steps.historical_g4_1.outcome == 'failure' }}
+      - name: Download exact artifact historical_preflight attempt 2
+        id: historical_preflight_2
+        if: ${{ always() && steps.historical_preflight_1.outcome == 'failure' }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ '13575185515' }}
+          artifact-ids: ${{ '13575584835' }}
           merge-multiple: true
           github-token: ${{ github.token }}
           repository: tokenizartinfo-ops/agent-friendly-web
-          run-id: 42371498327
-          path: ${{ runner.temp }}/historical-g4
+          run-id: 42376693686
+          path: ${{ runner.temp }}/historical-preflight
       - name: Wait five seconds before final exact artifact retry
-        if: ${{ always() && steps.historical_g4_2.outcome == 'failure' }}
+        if: ${{ always() && steps.historical_preflight_2.outcome == 'failure' }}
         run: sleep 5
-      - name: Download exact artifact historical_g4 attempt 3
-        id: historical_g4_3
-        if: ${{ always() && steps.historical_g4_2.outcome == 'failure' }}
+      - name: Download exact artifact historical_preflight attempt 3
+        id: historical_preflight_3
+        if: ${{ always() && steps.historical_preflight_2.outcome == 'failure' }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ '13575185515' }}
+          artifact-ids: ${{ '13575584835' }}
           merge-multiple: true
           github-token: ${{ github.token }}
           repository: tokenizartinfo-ops/agent-friendly-web
-          run-id: 42371498327
-          path: ${{ runner.temp }}/historical-g4
+          run-id: 42376693686
+          path: ${{ runner.temp }}/historical-preflight
       - name: Require successful exact artifact download
         if: ${{ always() }}
         env:
-          ARTIFACT_ID: ${{ '13575185515' }}
-          DOWNLOAD_OK: ${{ steps.historical_g4_1.outcome == 'success' || steps.historical_g4_2.outcome == 'success' || steps.historical_g4_3.outcome == 'success' }}
+          ARTIFACT_ID: ${{ '13575584835' }}
+          DOWNLOAD_OK: ${{ steps.historical_preflight_1.outcome == 'success' || steps.historical_preflight_2.outcome == 'success' || steps.historical_preflight_3.outcome == 'success' }}
         run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
-      - name: Audit historical g4 bytes and original partial checkpoint
-        run: |
-          node --input-type=module <<'NODE'
-          import {verifyCleanupG4Outcome,writeCleanupEvidence} from './test/fixtures/finite-owner-cleanup-persistence.mjs';
-          const r=await verifyCleanupG4Outcome(process.env.RUNNER_TEMP+'/historical-g4',{expectedEvidenceSource:'818bc4d4e6fb1935e594951ba09d3f9536ba49d6',historicalArchive:true});await writeCleanupEvidence('g4-existing-audit',r);console.info('R2 historical g4 audit',JSON.stringify(r));
-          NODE
-      - name: Genuine short I0 diagnostic for exact ordinary M transport
-        timeout-minutes: 3
+      - name: Verify twelve exact historical files without executing them
         shell: bash
         run: |
           set -o pipefail
-          node test/fixtures/finite-owner-cleanup-persistence.mjs routing-preflight | tee output/owner-cleanup/routing-preflight.log
-      - name: Inventory current preflight evidence
-        if: always()
-        run: |
-          node --input-type=module <<'NODE'
-          import {readdir,readFile,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
-          const files=[];async function walk(path){for(const e of await readdir('output/'+path,{withFileTypes:true})){assert(!e.isSymbolicLink());const p=path+'/'+e.name;if(e.isDirectory())await walk(p);else{assert(e.isFile());const b=await readFile('output/'+p);files.push({path:p,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});}}}
-          for(const dir of ['owner-cleanup','t2-native-graphs'])try{await walk(dir);}catch(e){if(e.code!=='ENOENT')throw e;}
-          files.sort((a,b)=>a.path.localeCompare(b.path));await writeFile('output/evidence-manifest.json',JSON.stringify({source:process.env.GITHUB_SHA,label:'SYN diagnostic I0; no C0 closure; outside GREEN51',files,operationalReadiness:false,completePackage:false,PCoff:false},null,2));
+          node --input-type=module <<'NODE' | tee historical-preflight-audit.log
+          import {readFile,readdir,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+          const expectedEvidenceSource='f591b7e8590b694cd3b7693f6537c6a92e5ee8e5',root=process.env.RUNNER_TEMP+'/historical-preflight',hash=b=>createHash('sha256').update(b).digest('hex'),read=p=>readFile(root+'/'+p),parse=async p=>JSON.parse(await read(p));
+          const m=await parse('evidence-manifest.json');assert.equal(m.source,expectedEvidenceSource);assert.equal(m.operationalReadiness,false);assert.equal(m.completePackage,false);assert.equal(m.PCoff,false);
+          const owner=['launcher-probe.mjs','launcher-probe.json','g4-artifact-metadata.json','g4-existing-audit.json','m-transport-preflight.json','routing-preflight.log','sdk-only-current.mjs','sdk-only-current-metafile.json'].sort(),graphNames=['canary-index.mjs','qa-index.mjs','metafiles.json','native-syn.json'].sort();
+          assert.deepEqual((await readdir(root)).sort(),['evidence-manifest.json','owner-cleanup','t2-native-graphs']);assert.deepEqual((await readdir(root+'/owner-cleanup')).sort(),owner);const dirs=await readdir(root+'/t2-native-graphs');assert.equal(dirs.length,1);assert.match(dirs[0],/^[a-f0-9]{64}$/);const gp='t2-native-graphs/'+dirs[0];assert.deepEqual((await readdir(root+'/'+gp)).sort(),graphNames);
+          const actual=[];async function walk(p=''){for(const e of await readdir(root+'/'+p,{withFileTypes:true})){assert(!e.isSymbolicLink());const path=p?p+'/'+e.name:e.name;if(e.isDirectory())await walk(path);else{assert(e.isFile());if(path!=='evidence-manifest.json')actual.push(path);}}}await walk();const expected=[...owner.map(n=>'owner-cleanup/'+n),...graphNames.map(n=>gp+'/'+n)].sort();assert.deepEqual(actual.sort(),expected);assert.deepEqual(m.files.map(f=>f.path).sort(),expected);assert.equal(m.files.length,12);
+          for(const f of m.files){assert(!f.path.includes('..'));const b=await read(f.path);assert.equal(b.length,f.bytes);assert.equal(hash(b),f.sha256);}
+          const native=await parse(gp+'/native-syn.json'),metafiles=await parse(gp+'/metafiles.json'),M=await read(gp+'/canary-index.mjs'),QA=await read(gp+'/qa-index.mjs');
+          assert.equal(native.purpose,'afw.first-connection-native-syn-build.v1');assert.equal(native.testRevision,expectedEvidenceSource);assert.equal(hash(M),native.M.sha256);assert.equal(M.length,native.M.bytes);assert.equal(hash(QA),native.QA.sha256);assert.equal(QA.length,native.QA.bytes);assert.equal(hash(QA),dirs[0]);assert.equal(hash(M),'c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32');assert(Object.hasOwn(metafiles.M.inputs,'worker/mcp-own/finite.mjs'));assert(Object.keys(metafiles.QA.inputs).some(p=>p.endsWith('mcp-qa-finite-owner-cleanup.mjs')));
+          const control=await parse('owner-cleanup/m-transport-preflight.json'),probe=await parse('owner-cleanup/launcher-probe.json'),oldG4=await parse('owner-cleanup/g4-existing-audit.json'),oldMeta=await parse('owner-cleanup/g4-artifact-metadata.json'),sdk=await read('owner-cleanup/sdk-only-current.mjs'),sdkMeta=await parse('owner-cleanup/sdk-only-current-metafile.json');
+          assert.equal(control.source,expectedEvidenceSource);assert.equal(control.C0,control.I0+900000);assert.equal(control.C1,control.C0+180000);assert.equal(control.openedI0,true);assert.equal(control.closureProved,false);assert.equal(control.fabricatedAdmission,false);assert.equal(control.disposedBeforeC0,true);assert(control.disposedAt<control.C0);assert.equal(control.positive.worker,'canary-first-connection');assert.equal(control.positive.path,'/mcp');assert.equal(control.positive.scriptHash,hash(M));assert.equal(control.positive.namespaceId,'first-connection-oauth');assert.equal(control.positive.dataRead,true);assert(control.positive.requests.some(r=>r.status===200));assert.equal(control.negative.status,401);assert.equal(control.negative.dataDenied,true);
+          assert.equal(hash(sdk),'92f6554db082c30e83c6f7ae4700544ee7438f0da349b0dc2d70594d97efe66f');assert.equal(hash(sdk),control.sdkOnly.sha256);assert.equal(sdk.length,control.sdkOnly.bytes);assert.equal(Object.keys(sdkMeta.inputs).length,control.sdkOnly.inputs);assert.equal(control.sdkOnly.holdRepeated,false);
+          assert.equal(probe.source,expectedEvidenceSource);assert.equal(probe.bad.outcome,'error');assert.equal(probe.bad.name,'ReferenceError');assert.deepEqual(probe.bad.execArgv,['--input-type=module']);assert.equal(probe.good.outcome,'success');assert.equal(probe.good.requireAvailable,true);assert.deepEqual(probe.good.execArgv,[]);assert.equal(hash(await read('owner-cleanup/launcher-probe.mjs')),probe.programHash);
+          assert.equal(oldG4.sourceArtifact,'818bc4d4e6fb1935e594951ba09d3f9536ba49d6');assert.equal(oldG4.sourceVerifier,expectedEvidenceSource);assert.equal(oldG4.partialFiles,43);assert.equal(oldG4.manifestAndBytesVerified,true);assert.equal(oldG4.historicalEnvelopeBoundPartial,false);assert.equal(oldG4.openedI0,false);assert.equal(oldMeta.artifactId,13575185515);assert.equal(oldMeta.runId,42371498327);assert.equal(oldMeta.archiveDigest,'sha256:90edd8e83d2789fce9cca75b53d02102080e6ba0d60c891eac81fc90aff777e8');
+          const result={label:'historical preflight readback recovery; original run stays failure',sourceArtifact:expectedEvidenceSource,sourceVerifier:process.env.GITHUB_SHA,artifactId:13575584835,runId:42376693686,archiveBytes:1322925,archiveDigest:'sha256:3477ad8f889a9c9229c10d62bb30a21bccd0d1cf6f1e23b3cb9aa31f54d675f6',files:m.files,graphFiles:4,graphs:3,M:{sha256:hash(M),bytes:M.length,inputs:Object.keys(metafiles.M.inputs).length},QA:{sha256:hash(QA),bytes:QA.length,inputs:Object.keys(metafiles.QA.inputs).length},sdkOnly:control.sdkOnly,control,launcher:probe,oldG4,readbackVerified:true,newI0:false,nativeEffectsReproduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
+          await writeFile('historical-preflight-audit.json',JSON.stringify(result,null,2));console.info('R2 historical preflight exact readback',JSON.stringify({sourceArtifact:expectedEvidenceSource,sourceVerifier:process.env.GITHUB_SHA,files:m.files.length,graphFiles:4,newI0:false,M:result.M,QA:result.QA,sdkOnly:result.sdkOnly}));
           NODE
-      - name: Preserve preflight evidence
+      - name: Preserve historical readback receipt
         if: always()
-        id: evidence
+        id: audit
         uses: actions/upload-artifact@v4
         with:
-          name: r2-routing-preservation-preflight-${{ github.sha }}
+          name: r2-historical-preflight-audit-${{ github.sha }}
           path: |
-            output/evidence-manifest.json
-            output/owner-cleanup/
-            output/t2-native-graphs/
+            historical-preflight-audit.json
+            historical-preflight-audit.log
           if-no-files-found: error
           retention-days: 7
-      - name: Download exact artifact preflight_read attempt 1
-        id: preflight_read_1
-        if: ${{ always() && steps.evidence.outputs.artifact-id != '' }}
+      - name: Download exact artifact audit_receipt attempt 1
+        id: audit_receipt_1
+        if: ${{ always() && steps.audit.outputs.artifact-id != '' }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ steps.evidence.outputs.artifact-id }}
+          artifact-ids: ${{ steps.audit.outputs.artifact-id }}
           merge-multiple: true
-          path: ${{ runner.temp }}/routing-preflight-readback
+          path: ${{ runner.temp }}/audit-receipt
       - name: Wait two seconds before exact artifact retry
-        if: ${{ always() && steps.preflight_read_1.outcome == 'failure' }}
+        if: ${{ always() && steps.audit_receipt_1.outcome == 'failure' }}
         run: sleep 2
-      - name: Download exact artifact preflight_read attempt 2
-        id: preflight_read_2
-        if: ${{ always() && steps.preflight_read_1.outcome == 'failure' }}
+      - name: Download exact artifact audit_receipt attempt 2
+        id: audit_receipt_2
+        if: ${{ always() && steps.audit_receipt_1.outcome == 'failure' }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ steps.evidence.outputs.artifact-id }}
+          artifact-ids: ${{ steps.audit.outputs.artifact-id }}
           merge-multiple: true
-          path: ${{ runner.temp }}/routing-preflight-readback
+          path: ${{ runner.temp }}/audit-receipt
       - name: Wait five seconds before final exact artifact retry
-        if: ${{ always() && steps.preflight_read_2.outcome == 'failure' }}
+        if: ${{ always() && steps.audit_receipt_2.outcome == 'failure' }}
         run: sleep 5
-      - name: Download exact artifact preflight_read attempt 3
-        id: preflight_read_3
-        if: ${{ always() && steps.preflight_read_2.outcome == 'failure' }}
+      - name: Download exact artifact audit_receipt attempt 3
+        id: audit_receipt_3
+        if: ${{ always() && steps.audit_receipt_2.outcome == 'failure' }}
         continue-on-error: true
         timeout-minutes: 1
         uses: actions/download-artifact@v4
         with:
-          artifact-ids: ${{ steps.evidence.outputs.artifact-id }}
+          artifact-ids: ${{ steps.audit.outputs.artifact-id }}
           merge-multiple: true
-          path: ${{ runner.temp }}/routing-preflight-readback
+          path: ${{ runner.temp }}/audit-receipt
       - name: Require successful exact artifact download
         if: ${{ always() }}
         env:
-          ARTIFACT_ID: ${{ steps.evidence.outputs.artifact-id }}
-          DOWNLOAD_OK: ${{ steps.preflight_read_1.outcome == 'success' || steps.preflight_read_2.outcome == 'success' || steps.preflight_read_3.outcome == 'success' }}
+          ARTIFACT_ID: ${{ steps.audit.outputs.artifact-id }}
+          DOWNLOAD_OK: ${{ steps.audit_receipt_1.outcome == 'success' || steps.audit_receipt_2.outcome == 'success' || steps.audit_receipt_3.outcome == 'success' }}
         run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
-      - name: Verify exact preflight evidence after download
+      - name: Verify recovered audit receipt
         if: always()
         run: |
           node --input-type=module <<'NODE'
-          import {readdir,readFile} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
-          const root=process.env.RUNNER_TEMP+'/routing-preflight-readback',m=JSON.parse(await readFile(root+'/evidence-manifest.json','utf8'));assert.equal(m.source,process.env.GITHUB_SHA);const actual=[];
-          async function walk(path=''){for(const e of await readdir(root+'/'+path,{withFileTypes:true})){assert(!e.isSymbolicLink());const p=path?path+'/'+e.name:e.name;if(e.isDirectory())await walk(p);else{assert(e.isFile());if(p!=='evidence-manifest.json')actual.push(p);}}}await walk();assert.deepEqual(actual.sort(),m.files.map(f=>f.path).sort());
-          const required=['launcher-probe.mjs','launcher-probe.json','g4-artifact-metadata.json','g4-existing-audit.json','m-transport-preflight.json','routing-preflight.log','sdk-only-current.mjs','sdk-only-current-metafile.json'].map(n=>'owner-cleanup/'+n);for(const p of required)assert(actual.includes(p));const graphs=actual.filter(p=>p.startsWith('t2-native-graphs/'));assert.equal(graphs.length,3);assert(graphs.some(p=>p.endsWith('/canary-index.mjs')));assert(graphs.some(p=>p.endsWith('/qa-index.mjs')));assert(graphs.some(p=>p.endsWith('/metafiles.json')));assert.equal(actual.length,11);
-          for(const f of m.files){assert(!f.path.includes('..'));const b=await readFile(root+'/'+f.path);assert.equal(b.length,f.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),f.sha256);}
-          const r=JSON.parse(await readFile(root+'/owner-cleanup/m-transport-preflight.json','utf8'));assert.equal(r.source,process.env.GITHUB_SHA);assert.equal(r.closureProved,false);assert.equal(r.disposedBeforeC0,true);assert.equal(r.positive.worker,'canary-first-connection');assert.equal(r.positive.dataRead,true);assert.equal(r.negative.dataDenied,true);assert.equal(r.sdkOnly.holdRepeated,false);console.info('R2 routing preflight exact readback',m.files.length);
+          import {readFile,readdir} from 'node:fs/promises';import assert from 'node:assert/strict';
+          const root=process.env.RUNNER_TEMP+'/audit-receipt';assert.deepEqual((await readdir(root)).sort(),['historical-preflight-audit.json','historical-preflight-audit.log']);const a=JSON.parse(await readFile(root+'/historical-preflight-audit.json','utf8'));assert.equal(a.sourceVerifier,process.env.GITHUB_SHA);assert.equal(a.sourceArtifact,'f591b7e8590b694cd3b7693f6537c6a92e5ee8e5');assert.equal(a.artifactId,13575584835);assert.equal(a.readbackVerified,true);assert.equal(a.files.length,12);assert.equal(a.newI0,false);console.info('R2 recovered audit receipt verified',a.files.length);
           NODE
