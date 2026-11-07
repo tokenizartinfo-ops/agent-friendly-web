@@ -1225,3 +1225,14 @@ Follows Rootdocs a69f10dc085791051570a5868c9d7f62175a4691. The draft now separat
 Additional immutable carrier plumbing captures four existing request-clock aliases and the fixed bootstrap/old-guard/custody child invocation registrations. The original initial-lease current check remains immediately before its original work invocation inside the captured child context. No callback argument or native Promise is replaced. Corrected an unfinished bind helper delimiter in the unactivated runtime and guaranteed fixture disposal even if evidence capture fails. Owner-reference diagnostics now use a purpose/revision/epochs envelope, preserving local role/epoch ordinals and peaks.
 
 This is preservation only: no preflight/test/native execution, TEMP change or qualification claim. Remaining: exact compiler hook gates, positive producer/consumer/checkpoint integration, P1 and bounded historical log callers, then the authorized final 8Q+P1 run. All readiness flags remain false.
+
+
+## Unactivated positive-lineage integration checkpoint — 2026-11-07
+
+The draft positive producer opts into the existing principal checkpoint pipeline, retains the actual SDK completion/token/MCP/Notice flow and original I0/C0/C1, captures every producer epoch before native disposal, and includes full owner-reference evidence plus prepared role metadata. The cold consumer uses the original persisted native state and original alarm (restart=false), carries all producer epochs forward, captures cold/final consumer epochs and guarantees disposal. Default non-opt-in paths retain their existing composition.
+
+Added the required positive prepare/verify/consumer interfaces and CLI. instrumentBudgetDiagnostics takes moduleRole={workerRole,path}, a fixed Node-only role/path selector; extendBudgetQualification takes the prepared QA entry. Unsupported kinds still reject before I0. Fixed scope hook counts are checked with exact prepared AST selectors; native compilation also compares role/path/raw pins/selector counts/hook counts to the same-run pure preflight before I0, without treating old dynamic QA hashes as goldens.
+
+P1 is one case that preserves its full result before assertions, then checks actual native cleanup receipt/state/alarm/restore/SDK reduction/final inventory, original 900s lineage and cold margin, role/epoch-local row/counter/byte/link consistency and complete attribution across the twelve phases. Existing R0 remains a historical red branch and will not run. The only two older R2 console callers now persist the full object once and print its bounded hash summary; their assertions and business work are unchanged.
+
+No CI, tests, syntax execution or TEMP activation at this checkpoint. Artifact seal/same-ID verification helpers are prepared; final three-job workflow remains to be activated after editorial static review. Readiness remains false. This is not nine-check qualification or runtime evidence.

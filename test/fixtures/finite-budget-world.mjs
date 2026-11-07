@@ -461,6 +461,22 @@ export function transformBudgetPreparedSource(source,path,role){
   };
   return root=>ts.visitNode(root,visit);
  }]);
+
+ const expectedScopes={
+  '<stdin>':51,
+  'lib/mcp-qa-finite-stage-work.mjs':7,
+  'worker/mcp-own/finite.mjs':7,
+  'lib/mcp-qa-finite-owner-native-receiver.mjs':1,
+  'lib/mcp-qa-finite-owner-oauth-qa.mjs':1,
+  'lib/mcp-qa-finite-owner-notice-get-qa.mjs':1,
+  'lib/mcp-qa-finite-owner-phase-context.mjs':1,
+  'lib/mcp-qa-finite-owner-cleanup.mjs':2,
+  'lib/mcp-qa-finite-initial-cleanup.mjs':1,
+  'lib/mcp-qa-finite-bootstrap-native.mjs':1,
+  'lib/mcp-qa-finite-initial-old-guard.mjs':1,
+  'lib/mcp-qa-finite-initial-custody-probe.mjs':1
+ };
+ assert.equal(scopeEdges,expectedScopes[path]??0,'fixed prepared scope hook count '+role+' '+path);
  const transformed=ts.createPrinter({newLine:ts.NewLineKind.LineFeed}).printFile(result.transformed[0]);result.dispose();
  return {source:"import {budget as "+BUDGET_ID+"} from 'afw:budget-runtime';\n"+transformed,counts:{nativeCalls,identityEdges,bodyEdges,facadeEdges,scopeEdges,guardEdges},selectorCounts:selected?.counts??[]};
 }
@@ -501,10 +517,16 @@ export function createBudgetCompiler(role){
     const path=objectPath(args.path);if(!wanted(path))return undefined;
     return {contents:await transform(path,await readFile(args.path,'utf8')),loader:path.endsWith('.ts')?'ts':'js'};
    });
-   builder.onEnd(result=>{
+   builder.onEnd(async result=>{
     if(result.errors.length)return;
     assert.deepEqual([...records.keys()].sort(),[...expected].sort(),'closed prepared role input map '+role);
     assert(!Object.keys(result.metafile?.inputs??{}).some(path=>path.endsWith('finite-budget-descriptors.json')||path.endsWith('finite-budget-world.mjs')),'Node-only map/compiler excluded from Worker bundle');
+    if(process.env.AFW_BUDGET_PREFLIGHT){
+     const prior=JSON.parse(await readFile(process.env.AFW_BUDGET_PREFLIGHT,'utf8'));
+     assert.equal(prior.source,testRevision);assert.equal(prior.run,process.env.GITHUB_RUN_ID);assert.equal(prior.attempt,process.env.GITHUB_RUN_ATTEMPT);
+     const shape=list=>list.map(r=>({role:r.role,path:r.path,rawBytes:r.path==='<stdin>'?null:r.rawBytes,rawSha256:r.path==='<stdin>'?null:r.rawSha256,counts:r.counts,selectors:r.selectors})).sort((a,b)=>a.path.localeCompare(b.path));
+     assert.deepEqual(shape([...records.values()]),shape(prior.inputs[role]),'native prepared role hooks match exact prior pure preflight before I0');
+    }
    });
   }};
  }
@@ -535,8 +557,76 @@ export async function preflightBudgetCompilation(){
  assert(graphs.budget?.M?.length&&graphs.budget?.QA?.length);
  assert(graphs.compatibility.M.compatibility_flags.includes('nodejs_compat'));assert(graphs.compatibility.QA.flags.includes('nodejs_compat'));
  const result={purpose:'afw.finite-budget-preflight.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,inputs:graphs.budget,I0Opened:false,nativeExecutionProduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
- await mkdir('output/finite-budget/preflight',{recursive:true});await writeFile('output/finite-budget/preflight/preflight.json',JSON.stringify(result,null,2));
+ await mkdir('output/finite-budget/pure',{recursive:true});await writeFile('output/finite-budget/pure/preflight.json',JSON.stringify(result,null,2));
  return result;
 }
 
-if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){const [command,root]=process.argv.slice(2);if(command==='preflight-budget')await preflightBudgetCompilation();else if(command==='inspect-budget-graphs')await inspectBudgetCompilation(root);else throw Error('SYN budget command unsupported before I0');}
+export function instrumentBudgetDiagnostics(source,{moduleRole}={}){
+ assert(moduleRole&&['M','QA'].includes(moduleRole.workerRole)&&typeof moduleRole.path==='string','fixed role/path selector required');
+ return transformBudgetPreparedSource(source,moduleRole.path,moduleRole.workerRole).source;
+}
+export function extendBudgetQualification(entry){
+ return transformBudgetPreparedSource(entry,'<stdin>','QA').source;
+}
+function positiveKind(kind){assert.equal(kind,'positive','SYN budget kind unsupported before I0');assert.equal(process.env.AFW_BUDGET_GROUP,'positive');}
+export async function prepareBudgetProducer(kind,root){
+ positiveKind(kind);
+ const {produceCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
+ return produceCheckpoint(root,{variant:'principal',budgetQualification:true});
+}
+export async function verifyBudgetCheckpoint(kind,root){
+ positiveKind(kind);
+ const {verifyCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
+ const value=await verifyCheckpoint(root),b=value.data.budget;
+ assert.equal(b?.purpose,'afw.finite-budget-checkpoint.syn.v1');assert.equal(b.source,process.env.GITHUB_SHA);
+ assert.equal(b.run,process.env.GITHUB_RUN_ID);assert.equal(b.attempt,process.env.GITHUB_RUN_ATTEMPT);
+ assert.equal(value.data.variant,'principal');assert.equal(value.data.unexchanged,false);assert.equal(value.data.sdkOnlyBuild,null);
+ assert(b.preparedInputs.M.length&&b.preparedInputs.QA.length);assert(b.epochs.length>=2);
+ for(const e of b.epochs){assert.equal(e.segment,'producer');assert.equal(e.snapshot.testRevision,process.env.GITHUB_SHA);assert.equal(e.role,e.snapshot.workerRole);}
+ return value;
+}
+export async function runBudgetConsumer(kind,root){
+ positiveKind(kind);await verifyBudgetCheckpoint(kind,root);
+ const {recoverCheckpoint,observeOriginalAlarm}=await import('./finite-owner-cleanup-persistence.mjs');
+ const {plain}=await import('./finite-first-connection-publication.mjs');
+ const f=await recoverCheckpoint(root,{label:'finite-budget-positive',restart:false,budgetQualification:true});
+ try{
+  await f.captureBudgetEpoch('after-consumer-cold-load');
+  const facts=await observeOriginalAlarm(f),native=await plain(f.stub.ownerCleanupNativeRows()),fault=await plain(f.stub.ownerCleanupFaultFacts());
+  await f.captureBudgetEpoch('consumer-final-before-dispose');
+  const result={purpose:'afw.finite-budget-positive-result.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,
+   plan:f.plan,recovery:f.recovery,kvSemanticProof:f.kvSemanticProof,facts,fault,native,restores:f.restores.length,pointer:f.providerRegistry.pointer,
+   producer:f.checkpoint.budget.ownerReference,sdkAfterExchange:f.checkpoint.sdkAfterExchange,preparedInputs:f.checkpoint.budget.preparedInputs,
+   diagnostics:{purpose:'afw.finite-budget-diagnostics.syn.v1',testRevision:process.env.GITHUB_SHA,epochs:structuredClone(f.budgetEpochs)},
+   modeledProviderInput:f.checkpoint.modeledProviderInput,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
+  return result;
+ }finally{
+  try{await f.captureBudgetEpoch('consumer-before-dispose');await mkdir('output/finite-budget/positive',{recursive:true});await writeFile('output/finite-budget/positive/epochs.json',JSON.stringify({source:process.env.GITHUB_SHA,epochs:f.budgetEpochs},null,2));}
+  finally{await f.mf.dispose();}
+ }
+}
+export async function sealBudgetArtifact(root,kind){
+ assert(['pure','checkpoint','positive'].includes(kind));
+ await mkdir(root,{recursive:true});
+ const files=(await inventoryBudgetFiles(root)).filter(f=>f.path!=='budget-artifact.json');
+ const manifest={purpose:'afw.finite-budget-artifact.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,kind,files,operationalReadiness:false,completePackage:false,PCoff:false};
+ await writeFile(join(root,'budget-artifact.json'),JSON.stringify(manifest,null,2));return manifest;
+}
+export async function verifyBudgetArtifact(root,kind,artifactId){
+ assert.match(artifactId??'',/^[1-9][0-9]*$/);
+ const bytes=await readFile(join(root,'budget-artifact.json')),m=JSON.parse(bytes);
+ assert.equal(m.purpose,'afw.finite-budget-artifact.syn.v1');assert.equal(m.kind,kind);assert.equal(m.source,process.env.GITHUB_SHA);assert.equal(m.run,process.env.GITHUB_RUN_ID);assert.equal(m.attempt,process.env.GITHUB_RUN_ATTEMPT);
+ for(const flag of ['operationalReadiness','completePackage','PCoff'])assert.equal(m[flag],false);
+ const files=await inventoryBudgetFiles(root);assert.deepEqual(files.filter(f=>f.path!=='budget-artifact.json'),m.files,'exact same-ID downloaded path/bytes/SHA inventory');
+ console.info('BUDGET SAME ID READBACK VERIFIED',JSON.stringify({source:m.source,run:m.run,attempt:m.attempt,kind,artifactId,files:files.length,manifestBytes:bytes.length,manifestSha256:hash(bytes),operationalReadiness:false,completePackage:false,PCoff:false}));
+ return m;
+}
+
+if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
+ const [command,root]=process.argv.slice(2);
+ if(command==='preflight-budget')await preflightBudgetCompilation();
+ else if(command==='prepare-positive')await prepareBudgetProducer('positive',root);
+ else if(command==='verify-positive')await verifyBudgetCheckpoint('positive',root);
+ else if(command==='inspect-budget-graphs')await inspectBudgetCompilation(root);
+ else throw Error('SYN budget command unsupported before I0');
+}

@@ -8,6 +8,7 @@ import {ownerReferenceFixture,prepareOwnerReference,assertActualComplete,downstr
 import {createInitialEntrySynOutbound} from './finite-initial-entry-world.mjs';
 import {plain,compileCleanupSdkOnlyWorker,compileFirstConnectionCandidate} from './finite-first-connection-publication.mjs';
 import {build} from 'esbuild';
+import {attachBudgetEpochCapture} from './finite-budget-world.mjs';
 
 const P='afw.finite-initial-cleanup.v1:',sha=x=>createHash('sha256').update(x).digest('hex');
 const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
@@ -66,13 +67,13 @@ function portableOptions(options,persist){
   return value;
  }));
 }
-export async function produceCheckpoint(root,{variant='principal',deferWait=false,sdkOnly=false,unexchanged=false}={}){
+export async function produceCheckpoint(root,{variant='principal',deferWait=false,sdkOnly=false,unexchanged=false,budgetQualification=false}={}){
  assert(['principal','grant-before-link','notice-before-link'].includes(variant));
  const started=Number(process.env.AFW_JOB_STARTED_MS);assert(Number.isSafeInteger(started));
  assert(Date.now()-started<=90000,'do not open I0 without original 13min plus export margin');
  let f;
  try{
-  f=await ownerReferenceFixture({after(){}},{cleanupCheckpoint:true});
+  f=await ownerReferenceFixture({after(){}},{cleanupCheckpoint:true,budgetQualification});
   if(sdkOnly){
    assert.equal(variant,'principal');const extra=await compileCleanupSdkOnlyWorker();await f.mountCleanupSdkOnly(extra);f.cleanupSdkOnly=true;
    const initial=await plain(f.stub.ownerCleanupFacts()),original=JSON.parse(initial.rows.find(([k])=>k===P+'plan')[1]);
@@ -106,7 +107,7 @@ export async function produceCheckpoint(root,{variant='principal',deferWait=fals
   }
   const partialBoundary=variant==='principal'?null:await plain(f.stub.ownerCleanupFaultFacts());if(partialBoundary)assert.equal(partialBoundary.sqlWrites,1);
   await f.stub.ownerCleanupReset();
-  await recordOwnerReference(f,'r2-produced-'+variant);
+  const ownerReference=await recordOwnerReference(f,'r2-produced-'+variant);
   await f.stub.ownerReferenceControl('released');await f.stub.firstConnectionRestore();await f.stub.restoreMethods();
   const facts=await plain(f.stub.ownerCleanupFacts()),plan=JSON.parse(facts.rows.find(([k])=>k===P+'plan')[1]);
   assert.equal(facts.signal.entered,0);assert.equal(facts.alarm,plan.C0);assert(facts.dbNow<plan.C0);assert(Math.abs(facts.dbNow-facts.wall)<=1000);
@@ -121,20 +122,27 @@ export async function produceCheckpoint(root,{variant='principal',deferWait=fals
   const kvProof={purpose:'afw.same-oauth-kv-client.syn.v1',key:clientKey,keyHash:sha(clientKey),valueHash:sha(client),expires:false,namespaceId:'first-connection-oauth'};
   const data={purpose:'afw.owner-cleanup-persisted-facts.syn.v1',plan,facts,kvProof,variant,unexchanged,sdkUnexchanged:f.sdkUnexchanged??null,partialBoundary,lateToken:f.cleanupToken??null,sdkBeforeExchange:f.sdkBeforeExchange??null,sdkAfterExchange:f.sdkAfterExchange??null,sdkOnlyBuild:f.sdkOnlyBuild??null,options:portableOptions(input.currentMountedOptions,input.persist),factory:input.factory,state:input.state,build:f.firstConnectionBuild,modeledProviderInput:{label:'MODELED PROVIDER INPUT',bootstrapStatus:'complete',recordedAt:Date.now(),realWorkflowTerminationProved:false}};
   if(sdkOnly||unexchanged)assert(Date.now()<plan.C0-120000,'late genuine producer must finish before original export');
+  if(budgetQualification){
+   await f.captureBudgetEpoch('before-producer-checkpoint-dispose');
+   data.budget={purpose:'afw.finite-budget-checkpoint.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,epochs:structuredClone(f.budgetEpochs),ownerReference,preparedInputs:f.firstConnectionBuild.budget};
+   assert(data.budget.preparedInputs.M?.length&&data.budget.preparedInputs.QA?.length);
+  }
   await f.mf.dispose();f.disposedForCheckpoint=true;
   await mkdir(root,{recursive:true});await cp(input.persist,join(root,'state'),{recursive:true,errorOnExist:true,force:false});
   await cp('output/t2-native-graphs/'+f.firstConnectionBuild.QA.sha256,join(root,'graphs'),{recursive:true,errorOnExist:true,force:false});
   await writeFile(join(root,'checkpoint.json'),json(data));
+  if(budgetQualification)await cp('output/owner-reference/r2-produced-'+variant+'.json',join(root,'owner-reference.json'),{errorOnExist:true,force:false});
   const files=await inventory(root),manifest={purpose:'afw.owner-cleanup-checkpoint.syn.v1',source:process.env.GITHUB_SHA,I0:plan.I0,C0:plan.C0,C1:plan.C1,files,nativeClock: facts.dbNow,operationalReadiness:false,completePackage:false,PCoff:false,custodyReal:false};
   await writeFile(join(root,'manifest.json'),json(manifest));await verifyCheckpoint(root);
   console.info('R2 checkpoint produced',json({source:manifest.source,I0:plan.I0,C0:plan.C0,C1:plan.C1,nativeDbNow:facts.dbNow,files:files.length,manifestSha256:sha(await readFile(join(root,'manifest.json'))),modeledProviderInput:data.modeledProviderInput}));
   await f.cleanup();if(!deferWait)await waitUntil(plan.C0-120000);
   assert(Date.now()<started+885000,'export/upload margin exhausted');
   return manifest;
- }finally{if(f&&!f.disposedForCheckpoint){await f.mf.dispose();await f.cleanup();}}
+ }finally{if(f&&!f.disposedForCheckpoint){try{if(budgetQualification){await f.captureBudgetEpoch('producer-failure-before-dispose');await mkdir('output/finite-budget/producer',{recursive:true});await writeFile('output/finite-budget/producer/failure-epochs.json',json({source:process.env.GITHUB_SHA,epochs:f.budgetEpochs}));}}finally{try{await f.mf.dispose();}finally{await f.cleanup();}}}}
 }
-export async function recoverCheckpoint(root,{label='principal',restart=false}={}){
+export async function recoverCheckpoint(root,{label='principal',restart=false,budgetQualification=false}={}){
  const {data,manifest}=await verifyCheckpoint(root);
+ if(budgetQualification){assert.equal(restart,false);assert.equal(data.budget?.purpose,'afw.finite-budget-checkpoint.syn.v1');assert.equal(data.budget.source,process.env.GITHUB_SHA);}
  if(!restart)assert(Date.now()+30000<data.plan.C0,'native recovery requires >=30s original pre-C0 margin');
  else assert(Date.now()+10000<data.plan.C1,'native restart requires original C1 margin');
  const dest=beneath('output',join('output','r2-native-'+label));await mkdir(dest,{recursive:true});
@@ -152,6 +160,7 @@ export async function recoverCheckpoint(root,{label='principal',restart=false}={
  const entered=Date.now(),mf=new Miniflare(convertV4MiniflareOptions(options));f.mf=mf;
  try{
   const bindings=await mf.getBindings('qa-first-connection');f.stub=bindings.AFW_INDEPENDENT_CLOSURE.get(bindings.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB','qa-first-connection');
+  if(budgetQualification)attachBudgetEpochCapture(f,{segment:'consumer',epochs:structuredClone(data.budget.epochs)});
   const current=await plain(f.stub.ownerCleanupFacts());
   if(!restart){assert.equal(current.alarm,data.plan.C0);assert.equal(current.signal.entered,0);assert(Date.now()<data.plan.C0);}
   assert(Math.abs(current.dbNow-current.wall)<=1000);assert(current.dbNow>=data.facts.dbNow);

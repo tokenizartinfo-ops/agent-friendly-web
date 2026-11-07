@@ -6,9 +6,9 @@ import {join} from 'node:path';
 import {ownerReferenceFixture,prepareOwnerReference,assertActualComplete,recordOwnerReference} from './fixtures/finite-owner-cleanup.mjs';
 
 const group=process.env.AFW_BUDGET_GROUP;
-if(group!=='red')throw Error('SYN budget group unsupported before I0');
+if(!['red','positive'].includes(group))throw Error('SYN budget group unsupported before I0');
 const directory='output/finite-budget/red',hash=bytes=>createHash('sha256').update(bytes).digest('hex');
-test('R0 attributable diagnostics after genuine SDK complete and durable Reference',{timeout:180000},async t=>{
+if(group==='red')test('R0 attributable diagnostics after genuine SDK complete and durable Reference',{timeout:180000},async t=>{
  await mkdir(directory,{recursive:true});
  const source=process.env.GITHUB_SHA;assert.match(source??'',/^[a-f0-9]{40}$/);
  const outcome={purpose:'afw.finite-budget-red-outcome.syn.v1',source,caseName:'R0',startedAt:Date.now(),stage:'fixture',actualCompleteNormal:null,referenceHash:null,responseStatus:null,diagnosticsPurpose:null,expectedDeficitObserved:false,operationalReadiness:false,completePackage:false,PCoff:false};
@@ -62,4 +62,48 @@ test('R0 attributable diagnostics after genuine SDK complete and durable Referen
   outcome.finishedAt=Date.now();
   await writeFile(join(directory,'outcome.json'),JSON.stringify(outcome,null,2));
  }
+});
+
+if(group==='positive')test('P1 original 900s native lifecycle has complete attributable budget evidence',{timeout:300000},async()=>{
+ const {runBudgetConsumer}=await import('./fixtures/finite-budget-world.mjs');
+ const {persistBudgetEvidence}=await import('./fixtures/finite-budget-evidence.mjs');
+ const result=await runBudgetConsumer('positive',process.env.AFW_BUDGET_CHECKPOINT??'output/finite-budget/checkpoint');
+ const evidence=await persistBudgetEvidence({path:'output/finite-budget/positive/full-result.json',full:result,testRevision:process.env.GITHUB_SHA,caseName:'P1',counts:{tests:1}});
+ console.info('P1 native budget evidence',evidence.summary);
+ const {facts,plan,native}=result,P='afw.finite-initial-cleanup.v1:';
+ const state=JSON.parse(facts.rows.find(([k])=>k===P+'state')[1]),receipt=JSON.parse(facts.rows.find(([k])=>k.startsWith('afw.finite-owner-cleanup.v1:')&&k.endsWith(':receipt'))[1]);
+ assert.equal(plan.C0,plan.I0+900000);assert.equal(plan.C1,plan.C0+180000);
+ assert(result.recovery.ready<=plan.C0-30000);assert(facts.dbNow>=plan.C0);assert.equal(facts.alarm,null);assert.equal(state.status,'complete');assert.equal(result.restores,1);
+ assert.equal(result.pointer.versions[0].version_id,plan.baselineVersionId);assert.equal(result.kvSemanticProof.bothAliases,true);
+ assert.equal(receipt.businessAccessClosed,true);assert.equal(receipt.sdkReductionReturned,true);assert(receipt.sdkSendHash&&receipt.sdkObservedHash);
+ assert.equal(receipt.globalNativeDrainVerified,false);assert.equal(receipt.sdkNamespaceEmptyVerified,false);
+ assert(native.fence.fenced_at);assert(!native.grant||native.grant.revoked_at);assert.deepEqual(native.notices.map(n=>n.action),['grant','revoke']);assert(facts.finalInventoryProof);
+ assert.equal(result.producer.completeNormal,1);assert.equal(result.producer.referenceRows,1);assert(result.producer.referenceReadbacks>0);assert(result.sdkAfterExchange);assert(result.sdkAfterExchange.expiresAt*1000<=plan.C0);
+ const epochs=result.diagnostics.epochs,identities=new Set(),phases=new Set(),roles=new Set();
+ assert(epochs.some(e=>e.segment==='producer'));assert(epochs.some(e=>e.segment==='consumer'));
+ for(const epoch of epochs){
+  const key=epoch.segment+'|'+epoch.epoch+'|'+epoch.role;assert(!identities.has(key));identities.add(key);roles.add(epoch.role);
+  const s=epoch.snapshot;assert.equal(s.purpose,'afw.finite-budget-diagnostics.syn.v1');assert.equal(s.testRevision,process.env.GITHUB_SHA);assert.equal(s.workerRole,epoch.role);
+  assert.equal(s.coverage.overflow,false,key);assert.equal(s.coverage.invalid,0,key);assert.equal(s.coverage.unattributed,0,key);
+  assert(s.rows.length<=16384);assert.equal(s.totals.nativeStarted,s.rows.length);assert.equal(s.totals.nativeSettled,s.rows.filter(r=>r.status!=='pending').length);
+  assert.equal(s.totals.nativeRejected,s.rows.filter(r=>r.status==='rejected').length);assert.equal(s.totals.active,s.rows.filter(r=>r.status==='pending').length);
+  assert.equal(s.totals.logicalDenied,s.rows.filter(r=>r.logicalAt!==null).length);
+  assert.equal(s.totals.scopeGuardEvents,s.logicalScopeEvents.length);assert.equal(s.totals.deniedScopes,new Set(s.logicalScopeEvents.map(e=>e.rootOrdinal+'|'+e.childOrdinal+'|'+e.phase)).size);
+  const ordinals=new Set(),byteRows=s.rows.filter(r=>r.nativeBytesRead!==null);
+  assert.equal(s.totals.nativeBytesRead,byteRows.length?byteRows.reduce((v,r)=>v+r.nativeBytesRead,0):null);
+  assert(s.totals.peak>=s.totals.active&&s.totals.peak<=s.totals.nativeStarted);
+  for(const r of s.rows){
+   assert(!ordinals.has(r.opOrdinal));ordinals.add(r.opOrdinal);phases.add(r.phase);assert(r.rootOrdinal>0);
+   assert.equal(r.testRevision,process.env.GITHUB_SHA);assert.equal(r.workerRole,epoch.role);
+   if(r.childOrdinal!==null){assert(r.childOrdinal>0);assert(Number.isFinite(r.childDeadline));}
+   if(r.kind==='control')assert(Number.isFinite(r.rootDeadline));else assert.equal(r.kind,'transport');
+   if(r.nativeBytesRead!==null){assert.equal(r.operation,'read');assert.equal(r.nativeBytesReason,null);}else assert.equal(r.nativeBytesReason,'not_exposed_by_native_api');
+   if(r.operation==='fetch')assert.equal(r.nativeBytesRead,null);
+   if(r.fetchOpOrdinal!==null){assert(['read','cancel'].includes(r.operation));const f=s.rows.find(v=>v.opOrdinal===r.fetchOpOrdinal);assert(f);assert.equal(f.operation,'fetch');for(const k of ['rootOrdinal','childOrdinal','phase','resourceClass'])assert.equal(r[k],f[k]);}
+  }
+  for(const g of s.byPhaseResource){const rows=s.rows.filter(r=>r.phase===g.phase&&r.resourceClass===g.resourceClass);assert.equal(g.nativeStarted,rows.length);}
+ }
+ assert.deepEqual([...roles].sort(),['M','QA']);
+ assert.deepEqual([...phases].sort(),['setup','authorize_get','authorize_post','sdk_lookup','token_exchange','mcp_read','monitoring_get','monitoring_post','cleanup_before_restore','restore','sdk_reduction','final_inventory'].sort());
+ for(const role of roles)assert(epochs.some(e=>e.role===role&&e.snapshot.rows.length>0));
 });
