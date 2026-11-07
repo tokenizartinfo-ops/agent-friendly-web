@@ -1,3 +1,4 @@
+import {AsyncLocalStorage} from 'node:async_hooks';
 const PURPOSE='afw.finite-budget-diagnostics.syn.v1';
 const PHASES=new Set(['setup','authorize_get','authorize_post','sdk_lookup','token_exchange','mcp_read','monitoring_get','monitoring_post','cleanup_before_restore','restore','sdk_reduction','final_inventory']);
 const RESOURCES=new Set(['CFcredential','CFdeployment','CFversion','CFworkflow','CFcontainer','CFschedule','CFtail','GHsource','JWKS','DO','SQL','KV','transport','rateLimiter']);
@@ -76,7 +77,8 @@ export function createBudgetDiagnostics(options={}){
   row.status=status;row.settledAt=at;lastAt=Math.max(lastAt??at,at);touch(row,'nativeSettled');if(status==='rejected')touch(row,'nativeRejected');touch(row,'nativeDurationSumMs',at-row.enteredAt);active(row,-1);
  });
  const snapshot=safe(()=>({purpose:PURPOSE,testRevision,workerRole,rows:rows.map(row=>({...row})),totals:{...totals,observedWallMs:firstAt===null?0:(lastAt??firstAt)-firstAt,scopes:[...scopes.values()].map(m=>({...m}))},byPhaseResource:[...groups.values()].map(m=>({...m})),coverage:{...coverage},operationalReadiness:false,completePackage:false,PCoff:false}));
- return Object.freeze({root,child,begin,bytes,logical,cancel,settle,snapshot});
+ const incomplete=safe(()=>{event();return invalid(true);});
+ return Object.freeze({root,child,begin,bytes,logical,cancel,settle,snapshot,incomplete});
 }
 function passiveThen(value){
  if(!nativeObject(value))return null;
@@ -90,4 +92,206 @@ export function observeBudgetPromise(collector,opRef,promise){
   const next=passiveThen(chain);if(next)Reflect.apply(next,chain,[undefined,()=>{}]);
  }catch{try{collector.settle(opRef,{at:performance.now(),status:null});}catch{/* A sensor never changes native output. */}}
  return promise;
+}
+
+
+// SYN observer only. Native identities and captured stores never authorize work.
+export function createBudgetRuntime(options={}){
+ const collector=createBudgetDiagnostics(options),als=new AsyncLocalStorage();
+ const leaseClocks=new WeakMap(),leases=new WeakMap(),nativeHolders=new WeakMap(),nativePairs=new WeakMap(),bodies=new WeakMap(),facades=new WeakSet(),facadeHolders=new WeakSet(),nativeFunctions=new WeakMap(),requestResources=new WeakMap(),requestMethods=new WeakMap();
+ const now=()=>performance.now(),incomplete=()=>collector.incomplete();
+ const immutable=value=>Object.freeze(value);
+ const root=(lease,phase,deadline,kind='control')=>{
+  const ref=collector.root(lease,{phase,deadline,kind});
+  if(nativeObject(lease)&&ref)leases.set(lease,immutable({root:ref,child:null,phase}));
+  return lease;
+ };
+ const descendant=(parent,child,deadline)=>{
+  const parentStore=leases.get(parent),currentStore=als.getStore(),store=currentStore?.root===parentStore?.root?currentStore:parentStore;
+  if(!store||!nativeObject(child)){incomplete();return child;}
+  const ref=collector.child(store.root,child,{deadline});
+  if(ref)leases.set(child,immutable({...store,child:ref}));
+  return child;
+ };
+ const run=(lease,invoke)=>{
+  const store=leases.get(lease);if(!store&&als.getStore()?.excluded)return invoke();if(!store)incomplete();
+  return als.run(store,()=>invoke());
+ };
+ const phase=(value,invoke)=>{
+  const store=als.getStore();
+  if(!store||!PHASES.has(value)){incomplete();return invoke();}
+  return als.run(immutable({...store,phase:value}),()=>invoke());
+ };
+ const fixture=invoke=>als.run(immutable({excluded:true}),()=>invoke());
+ const nativeHolder=(holder,resource,kind='holder')=>{
+  if(holder==null)return holder;
+  if(!nativeObject(holder)||!RESOURCES.has(resource)){incomplete();return holder;}
+  const prior=nativeHolders.get(holder);if(prior&&(prior.resource!==resource||prior.kind!==kind))incomplete();else nativeHolders.set(holder,immutable({resource,kind}));
+  return holder;
+ };
+ // Called only at source-proven original acquisitions, never by method-name inference.
+ const capture=(holder,method,fn,resource)=>{
+  if(!nativeObject(holder)||typeof fn!=='function'||!RESOURCES.has(resource)){incomplete();return fn;}
+  let pairs=nativePairs.get(holder);if(!pairs){pairs=new WeakMap();nativePairs.set(holder,pairs);}
+  const prior=pairs.get(fn);if(prior&&(prior.method!==method||prior.resource!==resource))incomplete();
+  else if(!facades.has(fn)){const description=immutable({method,resource,kind:nativeHolders.get(holder)?.kind??'holder'});pairs.set(fn,description);nativeFunctions.set(fn,description);}
+  return fn;
+ };
+ const facade=value=>{if(nativeObject(value))facades.add(value);else incomplete();return value;};
+ const tagBody=(value,owner)=>{
+  if(nativeObject(value)&&owner)bodies.set(value,owner);
+  return value;
+ };
+ const request=(value,lease)=>tagBody(value,immutable({store:leases.get(lease),resource:'transport',fetch:null,origin:'inbound'}));
+ const localResponse=(value)=>{
+  const store=als.getStore();if(!store)incomplete();
+  return tagBody(value,immutable({store,resource:'transport',fetch:null,origin:'local-transport'}));
+ };
+ const body=(receiver,optional=false)=>{
+  if(optional&&receiver==null)return undefined;
+  // This getter is the business getter, evaluated once at its original access.
+  const value=receiver.body,owner=bodies.get(receiver);
+  if(owner)tagBody(value,owner);
+  return value;
+ };
+ const thenObserve=(value,fulfilled,rejected)=>{
+  try{
+   const then=passiveThen(value);
+   if(!then){fulfilled(value);return;}
+   const chained=Reflect.apply(then,value,[v=>{try{fulfilled(v);}catch{incomplete();}},()=>{try{rejected();}catch{incomplete();}}]);
+   const next=passiveThen(chained);if(next)Reflect.apply(next,chained,[undefined,()=>{}]);
+  }catch{incomplete();}
+ };
+ function invoke(fn,receiver,args,meta,original=()=>Reflect.apply(fn,receiver,args)){
+  const bodyOwner=bodies.get(receiver);
+  const store=bodyOwner?.store??als.getStore();
+  if(meta.dormant){incomplete();return original();}
+  if(meta.edge==='clone'){
+   const result=original();if(bodyOwner)tagBody(result,bodyOwner);else incomplete();return result;
+  }
+  if(meta.edge==='reader'){
+   const result=original();if(bodyOwner)tagBody(result,bodyOwner);else incomplete();return result;
+  }
+  const pair=(nativeObject(receiver)?nativePairs.get(receiver)?.get(fn):null)??nativePairs.get(globalThis)?.get(fn)??nativeFunctions.get(fn);
+  const resource=pair?.resource;
+  if(meta.edge==='holder'||pair?.kind==='namespace'&&pair.method==='get'){
+   const result=original();
+   if(resource)nativeHolder(result,resource,pair?.kind==='namespace'?'stub':'holder');
+   else if(!facades.has(fn)&&!store?.excluded)incomplete();
+   return result;
+  }
+  if(facades.has(fn)||meta.excluded||store?.excluded)return original();
+  const known=pair||bodyOwner;
+  if(!known||!store?.root){incomplete();return original();}
+  const operation=meta.operation??pair?.method,resourceClass=bodyOwner?.resource??(meta.classifyFetch?fetchResource(args[0]):meta.resource??resource);
+  const at=now(),ref=collector.begin(store.root,store.child,{phase:store.phase,resourceClass,operation,at,fetchOpRef:bodyOwner?.fetch??null});
+  if(operation==='cancel'&&bodyOwner?.fetch)collector.cancel(bodyOwner.fetch,{at,stage:'started'});
+  let result;
+  try{result=operation==='transaction'?als.run(immutable({...store,nativeTransaction:true}),()=>original()):original();}catch(error){collector.settle(ref,{at:now(),status:'rejected'});throw error;}
+  thenObserve(result,value=>{
+   const settled=now();
+   if(operation==='fetch')tagBody(value,immutable({store,resource:resourceClass,fetch:ref,origin:'outbound'}));
+   if(operation==='read'&&meta.exposedBytes){
+    // Only exposed native ArrayBuffers/chunks. No text, JSON, cloning or probing.
+    const chunk=data(value,'value'),done=data(value,'done');
+    if(value instanceof ArrayBuffer)collector.bytes(ref,{length:value.byteLength,chunks:1,durationMs:settled-at});
+    else if(ArrayBuffer.isView(chunk))collector.bytes(ref,{length:chunk.byteLength,chunks:1,durationMs:settled-at});
+    else if(done===true)collector.bytes(ref,{length:0,chunks:0,durationMs:settled-at});
+   }
+   collector.settle(ref,{at:settled,status:'fulfilled'});
+   if(operation==='cancel'&&bodyOwner?.fetch)collector.cancel(bodyOwner.fetch,{at:settled,stage:'settled'});
+  },()=>{
+   const settled=now();collector.settle(ref,{at:settled,status:'rejected'});
+   if(operation==='cancel'&&bodyOwner?.fetch)collector.cancel(bodyOwner.fetch,{at:settled,stage:'settled'});
+  });
+  return result;
+ }
+ const member=(receiver,method,meta,optionalReceiver=false,optionalMethod=false)=>{
+  if(optionalReceiver&&receiver==null)return undefined;
+  const fn=readMethod(receiver,method);
+  if(optionalMethod&&fn==null)return undefined;
+  return (...args)=>invoke(fn,receiver,args,meta);
+ };
+ const direct=(fn,meta)=>(...args)=>invoke(fn,undefined,args,meta,()=>Reflect.apply(fn,undefined,args));
+ const reflect=(apply,meta)=>(fn,receiver,args)=>invoke(fn,receiver,args,meta,()=>Reflect.apply(apply,Reflect,[fn,receiver,args]));
+ const call=(fn,meta)=>{
+  const callMethod=fn.call;
+  return (receiver,...args)=>invoke(fn,receiver,args,meta,()=>Reflect.apply(callMethod,fn,[receiver,...args]));
+ };
+ 
+ const methodValue=(request,value)=>{requestMethods.set(request,value);return value;};
+ const methodPhase=(request,prefix)=>{const method=requestMethods.get(request);if(!['GET','POST'].includes(method)){incomplete();return null;}return prefix+'_'+method.toLowerCase();};
+ const deadline=lease=>leaseClocks.get(lease);
+ const clock=(lease,deadline)=>{if(nativeObject(lease))leaseClocks.set(lease,deadline);else incomplete();return lease;};
+ const control=(lease,value,req,invoke)=>{
+  if(!leases.has(lease))root(lease,value,leaseClocks.get(lease));
+  request(req,lease);return run(lease,invoke);
+ };
+ const childCall=(parent,child,deadline,invoke)=>{if(!leases.has(parent)&&als.getStore()?.excluded)return invoke();descendant(parent,child,deadline);return run(child,invoke);};
+ const alias=(parent,child)=>{const store=leases.get(parent);if(store&&nativeObject(child))leases.set(child,store);else if(!als.getStore()?.excluded)incomplete();return child;};
+ const transport=(req,path,invoke)=>{
+  const value=path==='/oauth/token'?'token_exchange':path==='/mcp'?'mcp_read':null;
+  if(!value){incomplete();return invoke();}
+  root(req,value,null,'transport');request(req,req);return run(req,invoke);
+ };
+ function readMethod(receiver,method,optional=false){
+  if(optional&&receiver==null)return undefined;
+  const fn=receiver[method],holder=nativeHolders.get(receiver);
+  if(holder&&typeof fn==='function'&&!facades.has(fn))capture(receiver,method,fn,holder.resource);
+  return fn;
+ }
+ const facadeHolder=(value,keys)=>{
+  if(nativeObject(value))facadeHolders.add(value);
+  if(nativeObject(value))for(const key of keys){
+   const d=Object.getOwnPropertyDescriptor(value,key);
+   if(d&&Object.hasOwn(d,'value')&&typeof d.value==='function')facades.add(d.value);
+  }
+  return value;
+ };
+ const transactionArgument=value=>{
+  if(facadeHolders.has(value))return value;
+  if(als.getStore()?.nativeTransaction)nativeHolder(value,'DO','transaction');
+  else if(!als.getStore()?.excluded)incomplete();
+  return value;
+ };
+ 
+ 
+ function fetchResource(value,required=true){
+  if(nativeObject(value)&&requestResources.has(value))return requestResources.get(value);
+  let resource=null;
+  if(typeof value==='string'){
+   if(value.startsWith('https://api.github.com/'))resource='GHsource';
+   else if(value.includes('/cdn-cgi/access/certs'))resource='JWKS';
+   else if(value.startsWith('https://api.cloudflare.com/client/v4/')){
+    if(value.includes('/tokens/'))resource='CFcredential';
+    else if(value.includes('/deployments'))resource='CFdeployment';
+    else if(value.includes('/workflows'))resource='CFworkflow';
+    else if(value.includes('/containers')||value.includes('/instances-v2'))resource='CFcontainer';
+    else if(value.includes('/schedules'))resource='CFschedule';
+    else if(value.includes('/tails'))resource='CFtail';
+    else if(value.includes('/versions')||value.includes('/scripts/')||value.includes('/workers/workers/'))resource='CFversion';
+   }
+  }
+  if(required&&!resource)incomplete();
+  return resource;
+ }
+ const bind=fn=>{
+  const method=fn.bind;
+  return (...args)=>{
+   const value=Reflect.apply(method,fn,args),description=nativeFunctions.get(fn);
+   if(description&&typeof value==='function')nativeFunctions.set(value,description);
+   return value;
+  };
+ const construct=(constructor,kind)=>(...args)=>{
+  const value=Reflect.construct(constructor,args);
+  if(kind==='Request'){const resource=fetchResource(args[0],false);if(resource)requestResources.set(value,resource);}
+  const parent=bodies.get(args[0]),store=als.getStore();
+  if(parent)tagBody(value,parent);
+  else if(store)tagBody(value,immutable({store,resource:'transport',fetch:null,origin:kind==='Request'?'inbound':'local-transport'}));
+  return value;
+ };
+ // Captured once before the fixed fixture can install any of its existing facades.
+ capture(globalThis,'fetch',globalThis.fetch,'transport');
+ return immutable({collector,root,descendant,run,phase,fixture,nativeHolder,capture,facade,facadeHolder,readMethod,transactionArgument,methodValue,methodPhase,deadline,clock,control,childCall,alias,transport,request,localResponse,body,construct,bind,member,direct,reflect,call,snapshot:collector.snapshot});
+
 }

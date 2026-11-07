@@ -180,3 +180,243 @@ export async function validateBudgetPreparedSource({path,role,prepared,raw}){
  const selected=selectBudgetCallsites(prepared,path,role);
  return {role,path,rawSha256:hash(raw),rawBytes:Buffer.byteLength(raw),preparedSha256:hash(prepared),preparedBytes:Buffer.byteLength(prepared),stage:role==='M'?'M-original-source':'after-existing-QA-fixture-composition',selectors:selected.counts,calls:selected.calls.map(({selector,position,end,line,shape})=>({selector,position,end,line,shape})),selected};
 }
+
+const BUDGET_ID='__afwBudget';
+const RESOURCE_BINDINGS=Object.freeze({
+ DB:'SQL',RELEASE_DB:'SQL',AFW_QA_DB:'SQL',OAUTH_KV:'KV',AFW_FINITE_OWNER_OAUTH_KV:'KV',
+ DELEGATED_RATE_LIMITER:'rateLimiter',AFW_QA_OCCURRENCE_RATE_LIMITER:'rateLimiter',
+ AFW_FINITE_TRIAL_CONTROL:'DO',AFW_INDEPENDENT_CLOSURE:'DO',AFW_RELEASE_EVENTS_NODE:'DO',AFW_DOSSIER_EVENTS_NODE:'DO',AFW_MCP_CLOSURE_NODE:'DO'
+});
+const CAPTURE_METHODS=new Set([...METHODS,'prepare','bind','withSession','limit']);
+const FIXTURE_EXCLUDED_METHODS=new Set(["ownerReferenceConfigure","ownerReferenceObserve","ownerReferenceControl","ownerCleanupFault","ownerCleanupReset","ownerCleanupControl","ownerCleanupFaultSignal","ownerCleanupFaultFacts","ownerCleanupScopeProbe","ownerCleanupNativeRows","ownerCleanupSignal","ownerCleanupFacts","firstConnectionTicketFault","firstConnectionCorruptCompleted","firstConnectionExpiredEntry","firstConnectionBodyControl","firstConnectionBodyState","firstConnectionInstance","firstConnectionBackupFault","firstConnectionAvailability","firstConnectionRestore","firstConnectionState","firstConnectionRelease","firstConnectionConfigure","firstConnectionReseal","firstConnectionContext","firstConnectionProbe","seed","snapshot","mutateCleanup","capsuleFacts","probeCapsuleFacts","seedFutureActivation","probeActivationWire","ownerSourceRead","ownerEffectCount","preEntryCustody","probeStageAvailability","probeNativeCustody","probeOldGuard","probeHistorySchema","probeInitialInventory","alarmInfo","nominalAlarmData","installAlarm","configure","release","releaseBodyCancel","releaseBodyRead","stats","restoreMethods"]);
+const sourceOnlyHookPaths=new Set(['lib/mcp-qa-finite-initial-lease.mjs','lib/mcp-qa-finite-stage-work.mjs','worker/mcp-own/finite.mjs','lib/mcp-qa-finite-owner-oauth-qa.mjs','lib/mcp-qa-finite-owner-notice-get-qa.mjs','lib/mcp-qa-finite-owner-preparation-qa.mjs','lib/mcp-qa-finite-owner-native-receiver.mjs']);
+function descriptorMeta(selector){
+ const {family,selector:s}=selector,d=s.disposition??'';
+ if(d.startsWith('Pure ')||d.startsWith('RPC-result disposal')||d.startsWith('Source helper'))return {excluded:true};
+ if(d.startsWith('Workflow '))return {dormant:true};
+ if(family==='identity'||family==='SQL-identity'||d.includes('holder identity edge')||d.startsWith('DO namespace'))return {edge:'holder'};
+ if(family==='body')return s.method==='getReader'?{edge:'reader'}:{operation:s.method,exposedBytes:s.method==='read'};
+ if(family==='rateLimiter')return {operation:'limit',resource:'rateLimiter'};
+ if(family==='direct-fetch')return {operation:'fetch',classifyFetch:true};
+ if(d.startsWith('DO named RPC'))return {operation:'rpc',resource:'DO'};
+ if(d.startsWith('DO fetch'))return {operation:'fetch',resource:'DO'};
+ if(family==='Function.call'&&d==='fixed-selector/helper-or-dormant')return {excluded:true};
+ if(family==='Function.call'&&s.target==='withSession')return {edge:'holder'};
+ return s.method?{operation:s.method}:{};
+}
+function parseExpression(text){
+ const ast=sourceAST('const __v=('+text+');','expression.mjs');
+ return ast.statements[0].declarationList.declarations[0].initializer.expression;
+}
+function packageSelection(source,path,role){
+ const pin=budgetNativeDescriptorProposal.packages.find(p=>p.path===path);
+ assert(pin&&pin.roles.includes(role),'fixed package role');assert.equal(Buffer.byteLength(source),pin.bytes,'installed package byte pin');assert.equal(hash(source),pin.sha256,'installed package hash pin');
+ const ast=sourceAST(source,path),calls=[],counts=Object.fromEntries(Object.keys(pin.selectors).map(k=>[k,0]));
+ const sdk=path.includes('workers-oauth-provider'),agents=path.includes('handler-stateless-'),mcp=path.includes('/server/'),jose=path.includes('/jose/');
+ function visit(node){
+  if(ts.isCallExpression(node)){
+   const shape=callShape(node,ast);let group=null,meta=null;
+   if(sdk&&shape.form==='member'&&['env.OAUTH_KV','this.env.OAUTH_KV','kv'].includes(shape.receiver)&&['get','put','list','delete'].includes(shape.method)){group='kv';meta={operation:shape.method,resource:'KV'};}
+   else if(sdk&&shape.form==='direct-fetch'&&shape.callee==='fetch'){group='fetch';meta={operation:'fetch',resource:'JWKS'};}
+   else if(shape.form==='member'&&['read','cancel'].includes(shape.method)&&(['reader','response.body','callbackRequest.body'].includes(shape.receiver))){
+    group=sdk?'readCancel':shape.method;meta={operation:shape.method,exposedBytes:shape.method==='read'};
+   }else if(shape.form==='member'&&shape.method==='getReader'){group='readerFactory';meta={edge:'reader'};}
+   else if(shape.form==='member'&&shape.method==='clone'&&(sdk||mcp)){group='requestClone';meta={edge:'clone'};}
+   else if(sdk&&shape.form==='member'&&shape.method==='formData'){group='requestFormData';meta={operation:'read'};}
+   else if(mcp&&shape.form==='member'&&shape.method==='json'&&shape.receiver==='req'){group='requestJson';meta={operation:'read'};}
+   else if(mcp&&shape.form==='member'&&shape.method==='text'&&shape.receiver==='request'){group='requestText';meta={operation:'read'};}
+   else if(jose&&shape.form==='direct-fetch'&&shape.callee==='fetchImpl'){group='fetchImpl';meta={operation:'fetch',resource:'JWKS'};}
+   else if(jose&&shape.form==='member'&&shape.method==='json'&&shape.receiver==='response'){group='responseJson';meta={operation:'read'};}
+   if(group){assert(Object.hasOwn(counts,group),'package selector category '+path+' '+group);counts[group]++;calls.push({node,meta,group});}
+  }
+  ts.forEachChild(node,visit);
+ }
+ visit(ast);for(const [group,count]of Object.entries(pin.selectors))assert.equal(counts[group],count,'exact installed package selector '+path+' '+group);
+ return {ast,calls,counts,pin};
+}
+
+function entrySelection(source){
+ const pin=budgetNativeDescriptorProposal.entry;assert.equal(Buffer.byteLength(source),pin.bytes,'composed QA entry bytes');assert.equal(hash(source),pin.sha256,'composed QA entry pin');
+ const ast=sourceAST(source,'<stdin>'),counts=Object.fromEntries(Object.keys(pin.reflectSelectors).map(k=>[k,0])),calls=[];
+ function visit(node){
+  if(ts.isCallExpression(node)){
+   const shape=callShape(node,ast);
+   if(shape.form==='Reflect.apply'){
+    const key=shape.target+' → '+shape.receiver;assert(Object.hasOwn(counts,key),'unmapped QA entry Reflect.apply '+key);counts[key]++;
+    let meta={};
+    if(['nodeName','nodeString'].includes(shape.target))meta={excluded:true};
+    else if(shape.target==='selfGet')meta={edge:'holder'};
+    else if(['session','withSession','dbSession','prepare','originalPrepare','bind'].includes(shape.target))meta={edge:'holder'};
+    else if(['fetcher','actualFetch'].includes(shape.target))meta={operation:'fetch',classifyFetch:true};
+    calls.push({node,meta,group:key});
+   }
+  }
+  ts.forEachChild(node,visit);
+ }
+ visit(ast);for(const [key,count]of Object.entries(pin.reflectSelectors))assert.equal(counts[key],count,'exact composed QA entry selector '+key);
+ return {ast,calls,counts};
+}
+
+
+function budgetScopeSeams(source,path){
+ const replace=(needle,replacement)=>{assert.equal(source.split(needle).length-1,1,'fixed scope seam '+path+' '+needle);source=source.replace(needle,replacement);};
+ if(path==='lib/mcp-qa-finite-initial-lease.mjs'){
+  const n='const lease=Object.freeze({signal:controller.signal,assertCurrent:check});';
+  replace(n,n+'__afwBudget.clock(lease,end);');
+  replace('actual=work(l,until);','actual=__afwBudget.childCall(lease,l,until,()=>work(l,until));');
+ }
+ if(path==='lib/mcp-qa-finite-initial-entry.mjs'){
+  const n='parent=clock(r.createdAt+30000,holders);const lease=parent.lease;';
+  replace(n,n+"__afwBudget.root(lease,'setup',__afwBudget.deadline(lease));");
+ }
+ if(path==='lib/mcp-qa-finite-initial-cleanup.mjs'){
+  const n='parent=clock(Date.now()+30000,holders);const lease=parent.lease;';
+  replace(n,n+"__afwBudget.root(lease,'cleanup_before_restore',__afwBudget.deadline(lease));");
+ }
+ if(path==='lib/mcp-qa-finite-owner-preparation.mjs'){
+  const n='requestContexts.set(lease,{root:lease,startedAt,remaining,deadline:()=>deadline});';
+  replace(n,n+'__afwBudget.clock(lease,deadline);');
+  const d='const ancestor=requestContexts.get(parent);if(!ancestor)return;';
+  replace(d,'__afwBudget.alias(parent,lease);'+d);
+  replace('current(childLease);return work(childLease);','current(childLease);return __afwBudget.childCall(lease,childLease,end,()=>work(childLease));');
+ }
+ if(path==='lib/mcp-qa-finite-initial-material.mjs'){
+  const n='const lease=Object.freeze({signal:controller.signal,assertCurrent:check});narrow(end);';
+  replace(n,n+'__afwBudget.alias(originalLease,lease);');
+  replace('current();return work(l);','current();return __afwBudget.childCall(lease,l,childEnd,()=>work(l));');
+ }
+ if(path==='lib/mcp-qa-finite-owner-cleanup.mjs')replace('current(clock.lease);return work(clock.lease,end);','current(clock.lease);return __afwBudget.childCall(originalLease,clock.lease,end,()=>work(clock.lease,end));');
+ if(path==='lib/mcp-qa-finite-policy-transport.mjs')replace('current(c);return fn(c,end);','current(c);return __afwBudget.childCall(originalLease,c,end,()=>fn(c,end));');
+ return source;
+}
+
+export function transformBudgetPreparedSource(source,path,role){
+ source=budgetScopeSeams(source,path);
+ const selected=nativeDescriptorByPath.has(path)?selectBudgetCallsites(source,path,role):budgetNativeDescriptorProposal.packages.some(p=>p.path===path)?packageSelection(source,path,role):path==='<stdin>'?entrySelection(source):null;
+ assert(selected||sourceOnlyHookPaths.has(path)||path==='<stdin>','fixed transform input '+path);
+ const ast=selected?.ast??sourceAST(source,path),selectedNodes=new Map();
+ if(selected)for(const call of selected.calls)selectedNodes.set(call.node,call.meta??descriptorMeta(selected.row.selectors[call.selector]));
+ 
+ // Supplemental native body methods omitted by the earlier lexical method set.
+ // The fixed delegated adapter contains five existing clones and two consumers;
+ // only its actual P1 branches are claimed at runtime.
+ if(path==='lib/delegated-oauth-worker.mjs'){
+  const expected={clone:5,json:2},found={clone:0,json:0};
+  const scan=n=>{if(ts.isCallExpression(n)&&ts.isPropertyAccessExpression(n.expression)&&Object.hasOwn(expected,n.expression.name.text)){
+   const method=n.expression.name.text;found[method]++;assert(!selectedNodes.has(n));selectedNodes.set(n,method==='clone'?{edge:'clone'}:{operation:'read'});
+  }ts.forEachChild(n,scan);};scan(ast);assert.deepEqual(found,expected,'fixed delegated body methods');
+ }
+ const transactionCallbacks=new Set();
+ for(const node of selectedNodes.keys()){
+  const shape=callShape(node,ast);
+  const transaction=shape.method==='transaction'||['transaction','native.transaction','nt'].includes(shape.target);
+  if(!transaction)continue;
+  const arg=shape.form==='Reflect.apply'&&ts.isArrayLiteralExpression(node.arguments[2])?node.arguments[2].elements[0]:shape.form==='Function.call'?node.arguments[1]:node.arguments[0];
+  if(arg&&(ts.isArrowFunction(arg)||ts.isFunctionExpression(arg)))transactionCallbacks.add(arg);
+ }
+ const f=ts.factory,id=()=>f.createIdentifier(BUDGET_ID),access=name=>f.createPropertyAccessExpression(id(),name);
+ const literal=value=>parseExpression(JSON.stringify(value));
+ const hook=(name,args)=>f.createCallExpression(access(name),undefined,args);
+ let nativeCalls=0,identityEdges=0,bodyEdges=0,facadeEdges=0,scopeEdges=0;
+ const closure=expression=>f.createArrowFunction(undefined,undefined,[],undefined,f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),expression);
+ const result=ts.transform(ast,[context=>{
+  const visit=node=>{
+   const original=node;
+   // Preserve the original callee getter evaluation before argument evaluation.
+   if(ts.isCallExpression(node)&&selectedNodes.has(node)){
+    const meta=selectedNodes.get(node),expr=node.expression;
+    if(meta.excluded)return ts.visitEachChild(node,visit,context);
+    const args=node.arguments.map(arg=>ts.visitNode(arg,visit)),data=literal(meta);
+    nativeCalls++;
+    if(ts.isPropertyAccessExpression(expr)&&expr.expression.getText(ast)==='Reflect'&&expr.name.text==='apply'){
+     return f.updateCallExpression(node,hook('reflect',[ts.visitNode(expr,visit),data]),node.typeArguments,args);
+    }
+    if(ts.isPropertyAccessExpression(expr)&&expr.name.text==='call'){
+     return f.updateCallExpression(node,hook('call',[ts.visitNode(expr.expression,visit),data]),node.typeArguments,args);
+    }
+    if(ts.isPropertyAccessExpression(expr)){
+     const optionalReceiver=!!expr.questionDotToken,optionalMethod=!!node.questionDotToken;
+     const callee=hook('member',[ts.visitNode(expr.expression,visit),literal(expr.name.text),data,optionalReceiver?f.createTrue():f.createFalse(),optionalMethod?f.createTrue():f.createFalse()]);
+     return optionalReceiver||optionalMethod?f.createCallChain(callee,f.createToken(ts.SyntaxKind.QuestionDotToken),node.typeArguments,args):f.updateCallExpression(node,callee,node.typeArguments,args);
+    }
+    assert(ts.isIdentifier(expr),'fixed call form');
+    return f.updateCallExpression(node,hook('direct',[expr,data]),node.typeArguments,args);
+   }
+   node=ts.visitEachChild(node,visit,context);
+   if(path==='<stdin>'&&ts.isMethodDeclaration(original)&&ts.isClassDeclaration(original.parent)&&FIXTURE_EXCLUDED_METHODS.has(original.name.getText(ast))){
+    const modifiers=original.modifiers?.some(m=>m.kind===ts.SyntaxKind.AsyncKeyword)?[f.createModifier(ts.SyntaxKind.AsyncKeyword)]:undefined;
+    const invoke=f.createArrowFunction(modifiers,undefined,[],undefined,f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),node.body);
+    scopeEdges++;return f.updateMethodDeclaration(node,node.modifiers,node.asteriskToken,node.name,node.questionToken,node.typeParameters,node.parameters,node.type,f.createBlock([f.createReturnStatement(hook('fixture',[invoke]))],true));
+   }
+
+   if(ts.isCallExpression(original)){
+    const callee=original.expression.getText(ast),text=original.getText(ast);
+    if(path==='lib/mcp-qa-finite-stage-work.mjs'&&callee==='scopes.run'){scopeEdges++;return hook('run',[f.createIdentifier('originalLease'),closure(node)]);}
+    let phase=null;
+    if(path==='lib/mcp-qa-finite-owner-phase-context.mjs'&&callee==='readPrivateQaFiniteOwnerSdkGrant')phase='sdk_lookup';
+    if(path==='lib/mcp-qa-finite-owner-cleanup.mjs'&&callee==='child'&&text.includes('api.revokeGrant('))phase='sdk_reduction';
+    if(path==='lib/mcp-qa-finite-owner-cleanup.mjs'&&callee==='readCleanupFinalInventory')phase='final_inventory';
+    if(path==='lib/mcp-qa-finite-initial-cleanup.mjs'&&callee==='parent.child'&&text.includes("seal('RestoreSend'"))phase='restore';
+    if(phase){scopeEdges++;return hook('phase',[literal(phase),closure(node)]);}
+    if(path==='worker/mcp-own/finite.mjs'){
+     if(callee==='worker.fetch'){scopeEdges++;return hook('transport',[f.createIdentifier('request'),f.createIdentifier('path'),closure(node)]);}
+     const control=callee==='forwardFiniteOwnerChoice'?'setup':callee==='forwardPrivateFiniteOwnerOAuth'?'authorize':text.startsWith('(path===')?'monitoring':null;
+     if(control){scopeEdges++;return hook('control',[parseExpression('parent.lease'),control==='setup'?literal(control):hook('methodPhase',[f.createIdentifier('request'),literal(control)]),f.createIdentifier('request'),closure(node)]);}
+    }
+    if(path==='lib/mcp-qa-finite-owner-native-receiver.mjs'&&callee==='handlePrivateQaFiniteOwnerConnection'){
+     scopeEdges++;return hook('control',[parseExpression('parent.lease'),literal('setup'),f.createIdentifier('request'),closure(node)]);
+    }
+    if(path==='lib/mcp-qa-finite-owner-oauth-qa.mjs'&&callee==='handlePrivateQaFiniteOwnerOAuth'){
+     scopeEdges++;return hook('control',[parseExpression('parent.lease'),parseExpression("metadata.method==='POST'?'authorize_post':'authorize_get'"),f.createIdentifier('request'),closure(node)]);
+    }
+    if(path==='lib/mcp-qa-finite-owner-notice-get-qa.mjs'&&callee.startsWith('(consent?handlePrivateQaFiniteOwnerNoticeConsent')){
+     scopeEdges++;return hook('control',[parseExpression('parent.lease'),parseExpression("consent?'monitoring_post':'monitoring_get'"),f.createIdentifier('request'),closure(node)]);
+    }
+   }
+
+   if(ts.isCallExpression(original)&&ts.isPropertyAccessExpression(original.expression)&&original.expression.name.text==='bind'&&ts.isPropertyAccessExpression(original.expression.expression)&&CAPTURE_METHODS.has(original.expression.expression.name.text)){
+    identityEdges++;return f.updateCallExpression(node,hook('bind',[node.expression.expression]),node.typeArguments,node.arguments);
+   }
+   if(ts.isCallExpression(original)&&original.expression.getText(ast)==='Response.json'){
+    bodyEdges++;return hook('localResponse',[node]);
+   }
+   if(ts.isPropertyAccessExpression(original)){
+    const method=original.name.text,receiver=original.expression.getText(ast),optional=!!original.questionDotToken;
+    if(path==='worker/mcp-own/finite.mjs'&&receiver==='request'&&method==='method'){scopeEdges++;return hook('methodValue',[f.createIdentifier('request'),node]);}
+    // Passive identity capture at existing binding/storage reads only.
+    const resource=RESOURCE_BINDINGS[method];
+    if(resource&&/(?:^|\.)env$/.test(receiver)){identityEdges++;return hook('nativeHolder',[node,literal(resource),literal(resource==='DO'?'namespace':'holder')]);}
+    if(method==='storage'&&/^(?:this\.ctx|ctx|context)$/.test(receiver)){identityEdges++;return hook('nativeHolder',[node,literal('DO'),literal('storage')]);}
+    if(method==='body'&&!ts.isBinaryExpression(original.parent)){bodyEdges++;return hook('body',[node.expression,optional?f.createTrue():f.createFalse()]);}
+    if((CAPTURE_METHODS.has(method)||ts.isVariableDeclaration(original.parent)&&original.parent.name.getText(ast)==='method')&&!(ts.isCallExpression(original.parent)&&original.parent.expression===original)&&
+       !(ts.isBinaryExpression(original.parent)&&original.parent.left===original)){
+     identityEdges++;return hook('readMethod',[node.expression,literal(method),optional?f.createTrue():f.createFalse()]);
+    }
+   }
+   if(ts.isNewExpression(original)&&ts.isIdentifier(original.expression)&&['Request','Response','ReadableStream'].includes(original.expression.text)){
+    bodyEdges++;return f.createCallExpression(hook('construct',[node.expression,literal(original.expression.text)]),node.typeArguments,node.arguments??[]);
+   }
+   
+   if(transactionCallbacks.has(original)){
+    assert.equal(original.parameters.length,1,'fixed native transaction callback argument');
+    const parameter=original.parameters[0].name;assert(ts.isIdentifier(parameter),'native tx identity argument');
+    const mark=hook('transactionArgument',[parameter]);
+    const body=ts.isBlock(node.body)?f.updateBlock(node.body,[f.createExpressionStatement(mark),...node.body.statements]):f.createParenthesizedExpression(f.createCommaListExpression([mark,node.body]));
+    identityEdges++;
+    return ts.isArrowFunction(node)?f.updateArrowFunction(node,node.modifiers,node.typeParameters,node.parameters,node.type,node.equalsGreaterThanToken,body):f.updateFunctionExpression(node,node.modifiers,node.asteriskToken,node.name,node.typeParameters,node.parameters,node.type,body);
+   }
+   if(ts.isObjectLiteralExpression(original)){
+    const names=original.properties.filter(p=>(ts.isMethodDeclaration(p)||ts.isPropertyAssignment(p)&&(ts.isArrowFunction(p.initializer)||ts.isFunctionExpression(p.initializer)))&&p.name&&!ts.isComputedPropertyName(p.name)).map(p=>p.name.getText(ast).replace(/^['"]|['"]$/g,'')).filter(name=>CAPTURE_METHODS.has(name)||name==='fetch'||name==='rpc');
+    if(names.length){facadeEdges++;return hook('facadeHolder',[node,literal(names)]);}
+   }
+   if(ts.isBinaryExpression(original)&&original.operatorToken.kind===ts.SyntaxKind.EqualsToken&&ts.isPropertyAccessExpression(original.left)&&
+      (ts.isArrowFunction(original.right)||ts.isFunctionExpression(original.right))&&CAPTURE_METHODS.has(original.left.name.text)){
+    facadeEdges++;return f.updateBinaryExpression(node,node.left,node.operatorToken,hook('facade',[node.right]));
+   }
+   return node;
+  };
+  return root=>ts.visitNode(root,visit);
+ }]);
+ const transformed=ts.createPrinter({newLine:ts.NewLineKind.LineFeed}).printFile(result.transformed[0]);result.dispose();
+ return {source:"import {budget as "+BUDGET_ID+"} from 'afw:budget-runtime';\n"+transformed,counts:{nativeCalls,identityEdges,bodyEdges,facadeEdges,scopeEdges},selectorCounts:selected?.counts??[]};
+}
