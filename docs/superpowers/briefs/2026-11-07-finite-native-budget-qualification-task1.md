@@ -1,8 +1,8 @@
 # AFW — Task1 brief: attributable diagnostics and bounded evidence
 
-Read this first — requirements and exact values live here. PROJECT AFW; repo tokenizartinfo-ops/agent-friendly-web/public1347578006. Source branch feat/finite-native-cleanup-20261101 BASE29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64,3179leaves. Rootdocs branch docs/finite-pcoff-continuation-20261103. Sole Sourcewriter seat Task1 only; Root writes docs. No helpers/reviewers/subagents: Root supplies allreviewseats. Do not read the entire prior plan or start Task2.
+Read this first — requirements and exact values live here. PROJECT AFW; repo tokenizartinfo-ops/agent-friendly-web/public1347578006. Source branch feat/finite-native-cleanup-20261101 BASE29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64,3179leaves. Rootdocs docs/finite-pcoff-continuation-20261103. SoleSourcewriter finite_budget_diagnostics_impl, nohelpers/reviewers. Rootsuppliesreviewseats.
 
-Binding design docs/superpowers/specs/2026-11-07-finite-native-budget-qualification-design.md @32e75999e36b0c8f6c60ffb16d13fe980900ece0/blobbef5563af032c433aaff498e730a9429e8220e0d (20408chars). New plan docs/superpowers/plans/2026-11-07-finite-native-budget-qualification.md @38d8d2d61392bcb284085fe210dbad41baf7463b/blob1aad6aba555302736dc78cff1ef36c91a100c969. This brief contains shared interfaces+Task1 in full; no Task2 implementation required. Current ledger progress/2026-11-07-finite-native-budget-qualification.es.md @d236d1f1979c905b03978f35be63d87494bcc38c/blobf8a8415d70d1a6f887c182ea430e38d851e351ea. Designbuilder closed nothingimportantleft; userdelegatedchoices; nohumanquestionneeded.
+CURRENT preflight CLOSED by Root after your NEEDS_CONTEXT. Bindingdesign specs/2026-11-07-finite-native-budget-qualification-design.md @ec3b7d6806cc152fd369ea7512b21a525cd7e455/blob733462fec3b8f40f8ca762c9df9a378a77e28415; plan plans/2026-11-07-finite-native-budget-qualification.md @7e3ee0881f058787e4957dd278c39382647d21d5/blob787daaf88537a46be7359ffa96b4dac521bc1ae7 (pathsrelative docs/superpowers). Task1alonebelow; nowholepriorplan. Currentnewledger progress/2026-11-07-finite-native-budget-qualification.es.md (Rootdocsd236d1f1 initialblobf8a8415d); forthcomingpreflightrulingappend. NoSourcewritebeforethisRulingalreadyoccurred.
 
 ## Global Constraints
 
@@ -29,7 +29,9 @@ Binding design docs/superpowers/specs/2026-11-07-finite-native-budget-qualificat
 - MODIFY test/fixtures/finite-owner-cleanup.mjs: plumbing de instrumentación/colector, modos SYN necesarios, consola acotada; retornos completos preservados.
 - MODIFY test/fixtures/finite-owner-cleanup-persistence.mjs: opción diagnóstico/checkpoint y logging; no nueva recuperación overdue ni grupos históricos cambiados.
 - MODIFY test/fixtures/finite-initial-entry-world.mjs: plumbing opt-in de presupuesto e instrumentación en hooks esbuild existentes.
-- OPTIONAL test/fixtures/finite-owner-io-fanout.mjs sólo si preflight demuestra seam necesario; no alterar otros modos por conveniencia.
+- MODIFY test/fixtures/finite-first-connection-publication.mjs: plugin M opt-in; default y negative spy exactos.
+- MODIFY test/mcp-qa-finite-owner-cleanup-native.test.mjs: sólo dos logs directos posteriores a writer, sin registro/assert/decisiones cambiados.
+- NO modificar finite-owner-io-fanout.mjs; su instrumentación no es el seam escogido.
 - TEMP .github/workflows/afw-finite-budget-qualification.yml; sólo workflow_dispatch/contents:read, retirar antes de cadaentrega.
 - REPORT docs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task1.md y task2.md. El Source escritor no escribe ledger/briefs Root.
 
@@ -54,7 +56,7 @@ Export observeBudgetPromise(collector,opRef,promise)→la MISMA promise. Observa
 
 ### Evidencia (Task1 produce; Task2 consume)
 
-Export persistBudgetEvidence({path,full,testRevision,caseName,counts})→{path,bytes,sha256,summary}. Node-only; path fijo bajo output/finite-budget/. Serializar JSON completo saneado una vez, escribir esos bytes, hashear los mismos, luego resumen UTF8≤2048B conpurpose/source/case/estado/counts/ruta/bytes/SHA. No truncado arbitrario deJSON. El caller conserva full como retorno/artefacto; no lógica productiva lee summary.
+Export persistBudgetEvidence({path,full,testRevision,caseName,counts})→{path,bytes,sha256,summary}. Node-only; path fijo bajo output/finite-budget/,output/owner-reference/ ooutput/owner-cleanup/ según caller existente. No cambiar rutas legacy ni arbitrarypath. Serializar JSON completo saneado una vez, escribir esos bytes, hashear los mismos, luego resumen UTF8≤2048B conpurpose/source/case/estado/counts/ruta/bytes/SHA. No truncado arbitrario deJSON. El caller conserva full como retorno/artefacto; no lógica productiva lee summary.
 
 ### Fixture/CLI (Task1 produce; Task2 extiende)
 
@@ -123,3 +125,31 @@ AFW_BUDGET_GROUP=positive node --test --test-concurrency=1 --test-reporter=tap t
 Prior owner-restoration boundedplan7aab..296 accepted task+combinedreviews; Corebyteidentity to final56 tested92d proven. All seven minor findings retained. This task handles attributableSYNdiagnostics/console; operationalquota/RTT/memory/warningsownership/PCoff remainpending. Currentexistingproducer854SYNobservations/1,056,133,138B vs350partialspans/432,841,450B are differentdenominators. No real429 orcredentialsproblem established. See reviews/2026-11-07-finite-current-performance-facts.es.md onlyifneeded, no oldrunreplay.
 
 Owner unavailable before19:30UTC/16:30Argentina, PCstayson. No login/OTP/manualsecrets/consentwindow. operationalReadiness=false;completePackage=false;PCoff=false. No localtemporaryprojectfiles.
+
+
+## CURRENT Root ruling —7Nov18:12UTC supersedes initial readonly pause
+
+Root freshly read handling-reports.md and accepts your concrete preflight. CLOSED Source list12paths:
+NEW test/fixtures/finite-budget-diagnostics.mjs
+NEW test/fixtures/finite-budget-evidence.mjs
+NEW test/fixtures/finite-budget-world.mjs
+NEW test/finite-budget-diagnostics.test.mjs
+NEW test/mcp-qa-finite-budget-native.test.mjs
+MODIFY test/fixtures/finite-owner-cleanup.mjs
+MODIFY test/fixtures/finite-owner-cleanup-persistence.mjs
+MODIFY test/fixtures/finite-initial-entry-world.mjs
+MODIFY test/fixtures/finite-first-connection-publication.mjs (Mcompiler opt-in/default+negativeprofile exact)
+MODIFY test/mcp-qa-finite-owner-cleanup-native.test.mjs (onlydirectlogs22/131, noassert/register/decisionchanges)
+TEMP .github/workflows/afw-finite-budget-qualification.yml
+REPORT docs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task1.md
+Do NOT change finite-owner-io-fanout orotherfiles/Core.
+
+AsyncLocalStorage SYN carrier accepted, immutablestore/weaknativeidentities; no globalcurrentPhase, no nativepromise substitution. OfficialWorkers ALS API https://developers.cloudflare.com/workers/runtime-apis/nodejs/asynclocalstorage/ supports run returning callback'sreturn andgetStore, butthenablelimitations apply. Verify EXISTINGcompatforEVERYgraph, noflags/date/depschanges; noenterWith/disable. Capturedobservations/snapshot mayhandlethenablesonlypassively. getStoremissing→incomplete, notinventRoot. Carrierwithinallowedfiles/inlinecompiledfixture, no extra pathwithoutRootruling.
+
+Composehooks onALREADYpreparedSource, afterexistingCEILING/firstConnectioninstrumentation. Acceptedexactseams fromyourpreflight: genuineSourceRoot/childobjects inowner-preparation67–98/initial-lease8–17; OAuth648/Notice851/962 andlookup838; actualnativecallsreadonly55/reduction614; cleanup151–155/parentalarm36/finalinventory657; actualfetch/body/cancel/SQL/DO phasecontext70–135/fixedpolicy33–53; Mfetch17–22. Fixedmodule/callsitephase captureatentryandopRefcapturedtosettlement. Completeleafmarkerallowlist/counts/transformedgraphs beforepositiveI0; unexpectedcallsiteunknownstops/reports. SeparateMtransportwithoutcontrolRoot(deadlinenull).
+
+Nodeevidencehelper admits EXACTthreeoutputprefixes finite-budget/owner-reference/owner-cleanup; preservelegacyJSONpaths/fullreturnsemantics, hashactualwrittenbytesbeforeboundedconsole. No arbitrarypath, consolemonkeypatch, new authority orrawsecrets. Yourparsersearchwasbounded; reportonlywhatyouactuallyinspected, notabsenceacrossall3179files.
+
+INITIAL Sourcewrites nowAUTHORIZED ONLY native.test+TEMP tocreate R0 BASEimports/realSDKcomplete1+Reference/302beforemissingdiagnosticsassert. Preserveactualgraphs/metafiles/nativefacts/outcome+manifestbeforeassert; REDforwarddoesnotneedfullnativeDBcheckpoint. GREENcoldcheckpointdoes. Dispatchscopedcredential-freeRED underplan,freezeSourceuntilterminal, then reportSource/run/jobs/artifacts/causalcounts toRootand STOP. Do not implementhelpers/instrumentation beforeRootacceptsRED. AfterthatRootwillresumeyouforremaining12pathwork.
+
+Nohumanstepbefore19:30UTC; no runtime/credentials/sourceclockrefresh/main/Max/mail. AllCoreprotected. This is a technicalsourcepreflightruling, no newoperationalaccess.
