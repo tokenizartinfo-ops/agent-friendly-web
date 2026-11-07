@@ -346,3 +346,188 @@ Retención solicitada: siete días. Metadatos consultados el7nov2026; estos arch
 La retención de la promesa protege la misma ctx, pero no acredita que un trabajo de un isolate distinto haya sido drenado globalmente. El caso SDK-only conserva explícitamente MAdmission=false. Los artefactos y checkpoints son SYN y caducan a los siete días indicados; conservar sus identificadores no extiende su retención. La revisión independiente de Root sigue pendiente tras este reporte.
 
 Los cuatro hallazgos Minor heredados de Task1 siguen en su [revisión aceptada](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/c478cc7e85c093614c7ae705ce2ec76615ed8207/docs/superpowers/reviews/2026-11-06-finite-owner-restoration-task1-review.es.md). Task2 no los elimina por inferencia; el límite RM2 se conserva explícitamente arriba.
+
+## Independent review — fix round 1/5 (7 November 2026)
+
+Scope: Important I1 (current SDK grant qualification) and I2 (fresh operational inventory after SDK). FIX_BASE aa1e9dc0161ffa0b56777a96aa274cff272484cd / tree 258ecbd8428daa9ffecd6e463afc7971628c7e33. Original accepted Task1 and original Task2 causal RED were not rerun. Minor M1/M2/M3 remain deferred. This appendix preserves the original report and all earlier failed diagnostics rather than replacing their conclusions.
+
+### Causal RED
+
+Run 42387214095 / attempt 1, Source 94e00923a25833cd134669e03fb646f3b1255c0b / tree 505d56cbb08a649540d9027832fc1d09d2db4732, terminal FAILURE 2026-11-07T15:52:13Z. Production remained FIX_BASE byte/mode/type identical. Two producers succeeded, both exact checkpoint and outcome readbacks passed. Four cases: matching control PASS; three causal failures. g6 job128450253710: conflicting current object performed one native grant delete instead of zero, then completed; completed reentry with new Workflow waiting returned restored instead of admin_pending. g7 job128450264242: after native restore and native SDK deletion, its ACK was held 127 ms; a modeled own Workflow became waiting during the hold, yet OwnerCleanup receipt and initial complete persisted. There were no missing-import/setup/expired-premise failures. Native alarm entered at original C0 (+1ms in g6, exact in g7); recovery ready86.461s and81.555s beforeC0. No clock/TTL extension, fake admission, authority callback or fabricated receipt was used.
+
+g6 used normal real SDK complete with the original Reference, deliberately no authorization-code exchange. Genuine codeTTL 600 preserved the present current grant through C0 after authorize at C0−300. The conflict replica preserved original absolute native expiration and altered only modeled untrusted correlation content; it was not a new authorized grant. Reentry was an explicit inspection of the same original alarm entry/actor/plan inside C1 after actual settlement; it was not a fourth scheduled delivery or a new business Root.
+
+### Fix composition
+
+Only lib/mcp-qa-finite-owner-cleanup.mjs changed among the six production modules. The original Task1 forward reader body remained byte-identical. No new production API or path was introduced.
+
+I1: the existing one-get bounded native KV facade now reads grant:subject:originalSDKid with type=json before SDK Send or deletion, retaining the actual native promise and original holder/lease guards. A private validator checks pinned SDK 1.2.1 raw layout, original selector, subject, client, resource, scopes, correlation metadata and creation window. The historical Reference expiry is not rewritten; genuine postexchange expiresAt may coexist with its earlier null. True native absence requires the exact original Reference and is committed as absent_under_original_reference, never absence ACK. Only a subsequent actual normal revokeGrant return can yield SDK Observed. Conflicting objects fail before any SDK delete/Send.
+
+I2: a private native reader executes after SDK reduction and before receipt creation/reuse. It reacquires custody, bootstrap Source/pointer evidence, historical source, fixed Workflow definitions/instances with terminal status, own active Container count 0, fixed schedules/tails counts 0, pinned closed operator, restored baseline/pins, recoverable original backup chunks and eligible deployable versions. Every provider read retains fetch/body/cancellation under the original lease with 5s child bounds. Facts include actual body hashes, pins, provider dates and observation timestamps. The subsequent existing owner snapshot reacquires D1, consent, local anchors, M/QA and notice/unknown-operation facts. These facts and the final inventory are committed together into finalFactsHash. Both normal and already-complete callers enter this same finish path; old receipts are never rewritten, and the initial alarm remains the sole restore/state/alarm writer.
+
+The SYN observer only records the actual final digest input and returned hash; it supplies no facts or authority. Covering assertions link inventory timestamps after SDK Observed and before receipt, validate pins/counts, and compare receipt.finalFactsHash with the actual computed digest. Historical reentry checks compare records/alarm/counter and provider effects without replacing history.
+
+### Preserved RED artifacts
+
+| Artifact ID | Name | ZIP bytes | SHA-256 |
+|---|---|---:|---|
+| 13580690939 | r2-fix1-red-g6-prepare-evidence-94e00923a25833cd134669e03fb646f3b1255c0b | 1240804 | 0c4dc7dcdbe1485f6cc6555bd4afd19d1ce9196d41743d204df76f71f271444c |
+| 13580651329 | r2-fix1-red-g6-consume-evidence-94e00923a25833cd134669e03fb646f3b1255c0b | 20965 | e36cff3f9a8d5f7cf1cfdada6319a2a90c193827ff74a5bb19d5bfa1aa13c853 |
+| 13580621256 | r2-fix1-red-g6-checkpoint-94e00923a25833cd134669e03fb646f3b1255c0b | 10834115 | e548a5e3f52aa84391aa64da121731ae7df206e2fe1f7590055f6963abfdfc7c |
+| 13579993272 | r2-fix1-red-g7-checkpoint-94e00923a25833cd134669e03fb646f3b1255c0b | 10852386 | a587559235197682b344b42d6a24ca115aa23964161c2073d904c1d387eafd0c |
+| 13579968338 | r2-fix1-red-g7-prepare-evidence-94e00923a25833cd134669e03fb646f3b1255c0b | 1240938 | 27ca74a64a9b81e9f5740d7fd76f044bf20d10a9e58e4175e039aa70f86753f7 |
+| 13579484360 | r2-fix1-red-g7-consume-evidence-94e00923a25833cd134669e03fb646f3b1255c0b | 11813 | 793aff849944409bb0b1b7300c6eb6980335a398808ad27de174c07432bb8a30 |
+
+The two checkpoint archives remained cloud-only. Primary consumer logs were parsed in memory; no DB/script/archive extraction was needed for this round's causal RED. Exact outcome readbacks required all 5 g6 and 3 g7 payloads plus their manifest, with no unknown root entries and byte/hash/source equality.
+
+### Qualification layout and commands
+
+Focused RED/GREEN: prepare-group g6 and g7 through the file CLI, followed by AFW_R2_GROUP=g6/g7 node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-owner-cleanup-native.test.mjs. Each same-revision qualification has 4 jobs, 2 genuine lineages, 4 compiled M/QA graphs, max 2 Miniflare replicas per job and 15 min job bounds. g6 runs matching/conflicting/reentry; g7 runs drift after restore during retained SDK. Syntax/node --check and scoped ESLint run before I0. Real alarm clocks are never replaced by synthetic test time.
+
+Final covering target 56: unchanged 14 cleanup contracts + 10 inherited SDK-reference components + 9 selected issuer-native cases + 2 selected initial-cleanup guards + 5 SQL-native components = 40; original 11 native + 5 new = 16. Group counts g0=3,g1=2,g2=2,g3=2,g4=2,g5=1,g6=3,g7=1. Three lanes g0→g3→g6, g1→g4→g7, g2→g5; 16 jobs, 9 genuine lineages, 19 compiled graphs. g0 absence shares its original principal occurrence and performs no extra revoke. g6 reentry shares its matching actor. The 40-component gate is preserved from the accepted 51, not a package-wide suite or new Task1 native qualification. Final readback inventory adds only fix1-absent-current-grant.json to g0 and the bounded g6/g7 evidence files.
+
+### Focused GREEN result
+
+Run 42388746349 / attempt 1, Source c06d6661f6e8f31011d4b0c74592d17e0c622dd8 / tree 06aa87593a19d2cf2257c8267a5cb85ca606e765, terminal SUCCESS 2026-11-07T16:11:33Z. Four jobs succeeded. g6 job128454971543: tests 3 / pass 3 / fail 0 / cancelled 0 / skipped 0 / todo 0; g7 job128454982390: tests 1 / pass 1 / fail 0 / cancelled 0 / skipped 0 / todo 0. Scoped syntax/ESLint exited 0 before I0 with no ESLint diagnostics; inherited Actions/Node deprecation warnings remained visible.
+
+Both alarms entered exactly at their original native C0. Matching current grant: one exact native get(present), one grant delete, one restore and complete. Its actual final inventory entered 1794067885550 and finished 1794067885683, before receipt 1794067885936; finalFactsHash 5b85e8af3d2dfc5815534d74504d7d9bd98a6452b9e780d0a935e7de955baf24 equaled the observed actual digest. Three fixed workflows / one terminal instance, own active Container count 0, four schedule/tail counts 0, closed operator and recoverable original baseline were included, with Source pins, request-body hashes and timestamps. These are explicit SYN provider facts (including the fixture operator module), not live operational inventory.
+
+Conflicting current grant: one exact native get(present), zero SDKdeletes, no SDK Observed/no OwnerReceipt; primary stack failed in qualifyCleanupCurrentGrant. Completed reentry: unchanged-inventory control succeeded, Workflow waiting reentry returned admin_pending and all historical rows/alarm/counter/provider effects remained unchanged. g7: one get(absent under original Reference), native SDK ACK held 127 ms, actual SDK returned / Observed, then Workflow waiting failed readCleanupFinalInventory; no OwnerReceipt/no initialReceipt, state processing, one restore. No rerun or clock move was necessary.
+
+| Artifact ID | Name | ZIP bytes | SHA-256 |
+|---|---|---:|---|
+| 13581066384 | r2-fix1-green-g6-checkpoint-c06d6661f6e8f31011d4b0c74592d17e0c622dd8 | 10845168 | 0639db7b2c6a80e7a9a77efc301fa073cef9d196fbfe0ad1130fc7df95efa78a |
+| 13581057488 | r2-fix1-green-g7-prepare-evidence-c06d6661f6e8f31011d4b0c74592d17e0c622dd8 | 1243777 | 76c731707bd2d076b2607ded17090fff4eede5df930ea9d4cff87191fec2ed31 |
+| 13580728893 | r2-fix1-green-g6-consume-evidence-c06d6661f6e8f31011d4b0c74592d17e0c622dd8 | 19630 | e028fe0204434676c0034f42207eda5a073f3db947e617a2a7872fa19203119d |
+| 13580673985 | r2-fix1-green-g7-consume-evidence-c06d6661f6e8f31011d4b0c74592d17e0c622dd8 | 8859 | 73f5be1b20f63db6e0244cd47ca7f1f679fd694d8469f1f918e38d8ea24c144a |
+| 13580648856 | r2-fix1-green-g7-checkpoint-c06d6661f6e8f31011d4b0c74592d17e0c622dd8 | 10863380 | 0f3d20d31cdd2fe4559ef7d9527e7b35c61a8af31b617597b61025840336dd32 |
+| 13580294123 | r2-fix1-green-g6-prepare-evidence-c06d6661f6e8f31011d4b0c74592d17e0c622dd8 | 1243988 | 56ca17b2a8b17939048949d506b84493200ccc66caef6b081f375f564fe58261 |
+
+All checkpoint/outcome readbacks passed strict source/path/bytes/hash checks. Focal evidence is separate from the coherent final 56; its passes are not added to that total.
+
+### Added covering cases (five; existing names preserved)
+
+| Group | Exact case name | Protection |
+|---|---|---|
+| g0 | R2 fix1 absent current SDK grant uses original reference without absence ACK | Same principal occurrence; one exact native get returns null; actual SDK return still required. |
+| g6 | R2 fix1 matching current native SDK grant is qualified before reduction | Genuine unexchanged grant, exact read, successful reduction, final inventory digest and timestamps. |
+| g6 | R2 fix1 foreign current SDK object is preserved with zero deletes | Untrusted correlation drift with original absolute expiration; zero SDK deletes, no successful SDK observation or owner receipt. |
+| g6 | R2 fix1 completed reentry rejects fresh inventory drift without rewriting history | Same completed actor/plan; control then active Workflow rejection, historical bytes/alarm/counter/effects unchanged. |
+| g7 | R2 fix1 post-restore inventory drift during retained SDK blocks both completions | Real retained SDK ACK, original child budget, Workflow drift after restore; no owner or initial receipt/completion. |
+
+The final native test blob is 378c09842bef0840883c481bd6cd4bad4b66413b. Focal and final qualifiers execute identical production and test blobs. The final Source differs from focal Source only by the temporary qualifier (9th single-parent/one-path commit of this fix round); all 3179 other leaves were independently compared byte/mode/type exact. Against FIX_BASE, 3175 protected leaves remained exact while the qualifier existed. Root's separate documentation branch is outside this Source delta.
+
+The 19 compiled graph outputs are 18 M/QA outputs across 9 lineages plus the single declared SDK-only graph in g5. They are SYN compilation/qualification evidence, not provider deployment or operational readiness. The existing g5 distinction remains: SDK-only adversarial operation omits the AFW callback by explicit ruling and does not prove ordinary M token-exchange admission; actual M data denial is classified only from captured protocol/body/configuration evidence. M1 per-phase metrics, M2 paging/peak boundaries and M3 diagnostics truncation remain deferred. g2's 100 deletes / two lists are not upgraded to an unexecuted 200-delete / third-page / peak-2 claim.
+
+### Limited evidence recovery during final qualification
+
+No new execution was opened to recover diagnostic output. The second g3 and g4 native-result console lines were truncated; their tests and strict cloud readbacks remained intact. g4's normal recursive readback supplied complete sanitized outcomes and verified its 43 partial checkpoint files against manifest 39dd75e51c28833328f3ec04c0fb4ceb575ffacc123e2945fa29348bf1c7ecd3, with parent manifest f369a281fe8dc7de013ab12221bdc481f782d5c20feee410a25f7bb0cd7e08b6 and the same Source. No new g4 extraction or replay was needed.
+
+Root authorized a bounded in-memory read of existing g3 artifact 13581839130 only: run 42390108314 / attempt 1, Source 92d0255a2d5c2ac2249941e8348a0d5701742604, ZIP 16487 B / SHA-256 69b6733b03ede840d998ab82c97df7830f5db079680d6dae9bdf82309b59ca78. Central directory: 4 entries, 294017 B declared expansion; only evidence-manifest.json(641B) and same-fence-identity.json(123860B) were inflated, 124501 B total, below 2 MiB ZIP / 4 MiB expansion limits. Manifest SHA-256 80225740b5b55ed1210e7d7898ac75f9f000c8dd1c8c7ba1bf1a3c1f92e71006; selected payload SHA-256 b757a01239159e6555d6cfc47a57d8dae79eba4b6a429a63757141d80493f1b2. ID/run/Source/group/path/bytes/hashes matched. No disk, dependencies, DB/scripts or OAuth values were read/emitted; buffers were zeroed and released.
+
+Recovered facts: original three deliveries, admin_pending, alarm null, restore 0, receipt null, one SQL write, two reconciliations under the same original fence identity, no KV lists/deletes, and no successful receipt. Existing suffixes were identity,reconciled:2,reconciled:3. This records the M3 limitation and recovers already-produced evidence; it does not fix diagnostic volume or count an additional test.
+
+### Final g5 protocol/retention facts
+
+The captured M was canary-first-connection at /mcp, SHA256 c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32, namespace first-connection-oauth, unchanged window ending at original C0=1794069790000. The positive read_project_summary control passed at 1794069700488, with actual POST 200 / POST 202 / GET 405 / POST 200 protocol responses and the expected SYN summary. The post-C0 request at 1794069792622 was POST initialize 404; toolCallAttempted=false. The oracle identified service_window_closed from the exact unchanged flags/window/origin/script and closed response body. D1DenialProved=false; the protocol stopped before a business tool call.
+
+The declared SDK-only script remained 92f6554db082c30e83c6f7ae4700544ee7438f0da349b0dc2d70594d97efe66f, 320211 B. Child logical deadline was 5000 ms; actual retained SDK write lasted 77589 ms from reached to native settlement, with nativeAttempt=C0+2600ms and actual SDK return. Original token/grant expiresAt was C0−1000ms; positive and SDK entry occurred while valid, and its expiry fields and configured TTL were not modified. The late native write retained its originally captured options; physical KV expiration equality was not asserted. MAdmission=false and callbackOmitted=true remain explicit for this adversarial variant. Neither SDK return nor the final HTTP denial is generalized into a global native-drain or production admission claim.
+
+### Full graph and persistence evidence locations
+
+Each lineage's immutable checkpoint contains graphs/metafiles.json, graphs/canary-index.mjs and graphs/qa-index.mjs, plus checkpoint.json and every declared native persistence file. g5 also contains graphs/sdk-only-index.mjs and graphs/sdk-only-metafile.json. The producer prepare-evidence artifact additionally preserves output/t2-native-graphs/<actual-QA-SHA256>/ source graphs/metafiles and the producer logs. verifyCheckpoint compares the complete recursive inventory (paths, lengths and SHA256), requires the exact scripts/metafiles, validates the compiled M/QA against mounted worker options, and does not open native state. Separately, recoverCheckpoint mounts the preserved state and reads the nonexpiring client record through both actual OAUTH_KV aliases as semantic namespace proof. Per-group uploaded readbacks and their lineage manifest hashes are retained below. No graph from a prior revision was substituted.
+
+Native DO/KV/D1, SDK promises and the DB clock are real Miniflare/SQLite executions of this Source; provider inventory/pointers, Source pins, owner/protocol fixtures and terminal Workflow input are explicitly SYN. A local Workflow return does not prove a real provider Workflow terminated. The same original I0/C0/C1, plan, storage paths, namespace identities, scripts/options, native alarm and counter records survive the cold load.
+
+### Coherent final qualification — verified terminal result
+
+[Run 42390108314, attempt 1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/42390108314) completed SUCCESS at 2026-11-07T17:01:58Z. Tested Source 92d0255a2d5c2ac2249941e8348a0d5701742604, tree 7c06844f33aeb6d0ce0d75381847b8f40d5a28a9. The [immutable qualifier](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/92d0255a2d5c2ac2249941e8348a0d5701742604/.github/workflows/afw-owner-restoration-qualification.yml) preserves every exact command, selection pattern, expected TAP count, dependency, artifact path and readback assertion. Node 22/current lock used npm ci --ignore-scripts --no-audit --no-fund; contents:read only, no runtime secrets/permissions.
+
+Result: 56 tests / 56 pass / 0 fail / 0 cancelled / 0 skipped / 0 todo, in 16 successful jobs. Eight groups, nine genuine lineages, 19 graphs and 24 artifacts, all from the same Source. No successes from a prior failed or focal run were added. Wall span was 2977 s (49m37s); aggregate job elapsed time 7731 s (128.85 job-minutes), not a billing estimate. Every job stayed below 15 min; maximum observed elapsed time was 829s. This is the only coherent final covering run in this fix round.
+
+| Job | ID | Result / TAP pass | Elapsed seconds |
+|---|---:|---|---:|
+| prepare_g1 | 128455701590 | SUCCESS / 0 | 815 |
+| prepare_g2 | 128455701781 | SUCCESS / 0 | 806 |
+| prepare_g0 | 128455701913 | SUCCESS / 40 | 829 |
+| consume_g2 | 128459093629 | SUCCESS / 2 | 119 |
+| consume_g1 | 128459130424 | SUCCESS / 2 | 168 |
+| consume_g0 | 128459192501 | SUCCESS / 3 | 117 |
+| prepare_g5 | 128459590128 | SUCCESS / 0 | 803 |
+| prepare_g3 | 128459677088 | SUCCESS / 0 | 813 |
+| prepare_g4 | 128459825300 | SUCCESS / 0 | 804 |
+| consume_g5 | 128462941231 | SUCCESS / 1 | 118 |
+| consume_g3 | 128463071778 | SUCCESS / 2 | 235 |
+| consume_g4 | 128463188045 | SUCCESS / 2 | 242 |
+| prepare_g6 | 128464055364 | SUCCESS / 0 | 804 |
+| prepare_g7 | 128464207483 | SUCCESS / 0 | 820 |
+| consume_g6 | 128467399046 | SUCCESS / 3 | 125 |
+| consume_g7 | 128467605065 | SUCCESS / 1 | 113 |
+
+Final g6 repeated all three covering assertions successfully. Matching current exact native read preceded reduction and the receipt's finalFactsHash c1c34f72b4bff6fb68c9130310116ca79f819f430f3286924ade8458f64aeb4c matched the actual observed digest. Inventory entered 1794070867177, completed 1794070867370, receipt observed 1794070867788; all pins/counts and post-SDK ordering assertions passed. The conflicting object remained intact with zero SDK deletes/no successful SDK observation/receipt. Same-actor reentry control and Workflow drift rejection preserved historical bytes, counter, alarm and provider effects. Final g7 held the real SDK ACK for 126 ms, recorded actual normal SDK return, then rejected the active Workflow inventory with no owner/initial receipt or new completion. Original alarm entered at C0=1794070911000; the pending invocation finished 1794070913115. These are native SYN observations, not planted success records.
+
+All producer checkpoint readbacks and consumer evidence readbacks succeeded. g0 additionally preserved fix1-absent-current-grant.json from the SAME principal occurrence; g6 required five payloads; g7 required three. g4 required its declared partial checkpoint directory and recursive manifest. The 24 artifact envelopes below retain detailed logs, scripts, metafiles, native state manifests and sanitized outcomes for 7 days from creation; the durable report records hashes/IDs but does not extend artifact retention.
+
+| Artifact ID | Name | ZIP bytes | SHA-256 |
+|---|---|---:|---|
+| 13583065899 | r2-fix1-final-g7-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604 | 10864320 | 4baec2c2750e49656bc8d7e4a64725637a10d2d91582beb4fd6fa4dccdd37c21 |
+| 13582946396 | r2-fix1-final-g6-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 20592 | 89e6e0e6e9a9e82071dd5f93c7de4c8c05b15f20fa1b9ffd74e9ada41155923c |
+| 13582911309 | r2-fix1-final-g7-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 1243854 | 5fbb52aa7508e01805060fbb27523408adba164adf0bfcb3c6094dd21ca45ef6 |
+| 13582841821 | r2-fix1-final-g7-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 8430 | c855e22fd2f219c31c8260c8a52dd31a672f3f616a76bb82ce861ed076ea6c6d |
+| 13582225238 | r2-green-g2-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604 | 10863428 | b1baca0b44a9c7212ee2986ac4585666e6195a87d3209ad21dade38673dc33f4 |
+| 13582220733 | r2-green-g1-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 23888 | e1a236fc82d8f69553292dd55762ca4ad49362b306b4c1bc8e8d2ad84bf73e9b |
+| 13582127956 | r2-green-g3-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 1243694 | a252b2aad2674ab3d2a114a9a1464bfa93eb26b4c2f00c045437386969642ca1 |
+| 13582127944 | r2-green-g3-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604 | 10864509 | cfb357eb56b6ded5432d4137a8d028ed27efd141c805b18bc6ae289d3050023c |
+| 13582106877 | r2-green-g5-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 1325652 | 4885f9d3e6618357ff9682a228d63bc4f5df18b908206a21c198f53f6f02df35 |
+| 13581991995 | r2-green-g5-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604 | 11018737 | 319e2d1f3ef89607cd209c21024fd79d1dd77c9c485b089a9b90ffab746899e7 |
+| 13581984073 | r2-green-g4-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 10882444 | 8fa4bf7a7991f2ac14b9a6336306a00d337d695d2b45449045e32dc387b9a941 |
+| 13581888542 | r2-green-g4-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 1243569 | 7a3c5b8adbcdf0ff35cee528ad697127b846875dc779849e4f3fd4e1d2f947e4 |
+| 13581888527 | r2-green-g4-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604 | 10864401 | 7326665adf5c453cdece36df94ded3f46965b6167ed4685867e2069477ba2da2 |
+| 13581881074 | r2-green-g1-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604 | 21703221 | f348da2b0aa3ce49a254669f3c851fda54fae96fc7bdc2cd378a4effa9338f8c |
+| 13581839130 | r2-green-g3-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 16487 | 69b6733b03ede840d998ab82c97df7830f5db079680d6dae9bdf82309b59ca78 |
+| 13581816152 | r2-green-g1-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 2484746 | 05fda0616dacf497a888cc7b339e9129e50bd86b7794cb0700db1f5803be3c51 |
+| 13581776471 | r2-green-g2-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 10553 | 1dae82bb00b3fa9734552b39a7554a4886b90d044f36aaef73f14bc5aabbdc4a |
+| 13581768742 | r2-green-g5-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 20716 | 85ac3a4413b35d74ea830a56d6888337ea3c610017b9f799f708bc3623477cc1 |
+| 13581614690 | r2-fix1-final-g6-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604 | 10844277 | 33c14043b07285bdfa62262df1a0980b8d325c89ed2c5d449e1dbcd7189bc940 |
+| 13581559578 | r2-fix1-final-g6-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 1243557 | ad95ad41b031726280eeb3c92f15898c7240d2fc1df88753490900208785cdb6 |
+| 13581517110 | r2-green-g2-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 1243529 | 97a25dc29c18ad398f37777b2ed30b9d11e7657a7b90f6f004fcc5d59d4712d4 |
+| 13581352326 | r2-green-g0-prepare-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 1247133 | cebd30728287b3a5eca770600a03aeb6847d5a7caec9f21594cd8230c567e0e0 |
+| 13581327491 | r2-green-g0-checkpoint-92d0255a2d5c2ac2249941e8348a0d5701742604 | 10863483 | b06bc1a074869cf2951466f706a85014cc8d478e4104f4fe5cc87882effe89e1 |
+| 13581249389 | r2-green-g0-consume-evidence-92d0255a2d5c2ac2249941e8348a0d5701742604 | 14427 | 55c6f9ecda7a9df3c032dd2a410788f5da047cb7acb3eeb2e8439527252a2c41 |
+
+### Original clocks and same-state lineage manifests
+
+| Group / lineage | I0 ms | C0 ms | C1 ms | Native checkpoint files | Manifest SHA-256 |
+|---|---:|---:|---:|---:|---|
+| g1 / grant-before-link | 1794067967000 | 1794068867000 | 1794069047000 | 40 | 6cfb3705bb375f8b5cc06b9b7cce52e356d315fa26f4b626cdd7ec5e9fcb97a0 |
+| g1 / notice-before-link | 1794068021000 | 1794068921000 | 1794069101000 | 45 | a45040c502ad164aa608bff8e8b191b5c485185778fc43e46808bb7d2c25744c |
+| g2 / principal | 1794067963000 | 1794068863000 | 1794069043000 | 45 | ff72c7dd2493d9a272578d8b4cee8f5f6ccc2126e34ee06b3655c4a3acec33b4 |
+| g0 / principal | 1794067986000 | 1794068886000 | 1794069066000 | 45 | e3c1f619f1d38e92644680854365fc2de9df2e45a6dcdce598c2336526e2a63f |
+| g5 / principal | 1794068890000 | 1794069790000 | 1794069970000 | 47 | ce3753396628840d8ea4798219cb13d78124c421511076779a1711d42e64b464 |
+| g3 / principal | 1794068917000 | 1794069817000 | 1794069997000 | 45 | c9dc9646bf8bb93b73c977d5453fdc675e318616e90937e31dd148d19f750be9 |
+| g4 / principal | 1794068948000 | 1794069848000 | 1794070028000 | 45 | f369a281fe8dc7de013ab12221bdc481f782d5c20feee410a25f7bb0cd7e08b6 |
+| g6 / principal | 1794069965000 | 1794070865000 | 1794071045000 | 41 | 08b327a75522ef7913187c2f89a21a42eaaa603d4a3801d5649bde693272788e |
+| g7 / principal | 1794070011000 | 1794070911000 | 1794071091000 | 45 | 78f3ce3015ddebd37953e37c7d95478211284749bbdb418e199af9f5a904d2ba |
+
+All consumers recovered before their own original C0. Native DB clock and actual alarm signal times are present in each result payload and the primary logs. Unknown restore/fence outcomes retained their original three slots and remained pending; g4's recovered State reached delivery 3 without replaying the already-issued SDK operation. Reentry in g6 was explicitly labeled inspection of the same entry and did not add a scheduled slot. No clocks, production ceilings or grant expiry fields were moved to obtain a pass.
+
+### Warnings, self-review and protected Source closure
+
+Scoped syntax checks and ESLint passed with no ESLint diagnostics. Inherited warnings remain in the primary logs: Node 20-targeted Actions forced to Node 24, npm @esbuild-kit and eslint@9.39.4 deprecations, and Node punycode/url.parse/Buffer deprecations. No dependency upgrade or warning-suppression change was made. No new failed diagnostic occurred after the accepted three-causal-failure RED in this fix round. The complete prior Task2 failure history remains above unchanged.
+
+| Production path | FIX_BASE blob | Tested/final code blob |
+|---|---|---|
+| lib/mcp-qa-finite-owner-cleanup.mjs | 7cb54895677ee67852f7c42013238bfc1e366d93 | 1a5a2583d266179cdd89f799c64199f29044fec5 |
+| lib/mcp-qa-finite-initial-cleanup.mjs | 0a04ae3a4d74c2c7939b1654683054b1d5d751d4 | 0a04ae3a4d74c2c7939b1654683054b1d5d751d4 |
+| lib/mcp-qa-finite-owner-cleanup-records.mjs | 6c751081e22ba6446664014090f8015a65e22407 | 6c751081e22ba6446664014090f8015a65e22407 |
+| lib/mcp-qa-finite-owner-cleanup-journal.mjs | 127e5906891b20d2f08c74a412383b8b7e3ff1e2 | 127e5906891b20d2f08c74a412383b8b7e3ff1e2 |
+| lib/mcp-qa-finite-stage-work.mjs | 068d35c2555c7dc711c487f6021ec572bd3af067 | 068d35c2555c7dc711c487f6021ec572bd3af067 |
+| lib/mcp-qa-finite-preparation-issuer-store.mjs | b3e5f890ca525f8b3eb4e40ce4473cc9690cdcfb | b3e5f890ca525f8b3eb4e40ce4473cc9690cdcfb |
+
+Only the owner-cleanup production blob changed. The Task1 forward reader body was compared byte-for-byte, and the other five core blobs/modes/types remained exact. Full trees were checked against FIX_BASE, including every outside-scope leaf. Each of the nine implementation/qualification writes had one parent and one permitted path, with independent blob/content/ref readback; no force, CLI/GraphQL/auth workaround, main mutation or local build/test/dependency installation occurred. Main remained 0c9c475b3ebaa970fc11d628b40e50a90cceb727. Local tool use in this round was limited to reading the applicable skills and the separately approved bounded in-memory artifact inspection; no local project files were created.
+
+After terminal evidence verification, qualifier retirement commit 5e2e93090c80bf30c4220f08194c7dda173467fc removed only .github/workflows/afw-owner-restoration-qualification.yml (retired blob 70d566b9d7fbf4c4b0aac9af05f1b29f776a2e86), with parent 92d0255a2d5c2ac2249941e8348a0d5701742604. Independent recursive readback confirmed absence and all 3179 remaining leaves unchanged from the tested tree. Final code HEAD before this report append: 5e2e93090c80bf30c4220f08194c7dda173467fc, tree 099108dfbd8f3b73e3c48175b6c96e3d177da005. Against FIX_BASE, 3175 non-code-change leaves were exact at that point; the following report-only append is the sole additional allowed path. Its full content/blob/ref/tree readback and final HEAD are returned separately to Root, avoiding a self-referential commit hash inside this file.
+
+Self-review covered I1 exact-key qualification before deletion, genuine absence/reference semantics, I2 fixed native inventory after SDK in both caller paths, final-facts commitment, real promise retention/original budgets, original sole restore writer, historical reentry preservation, all original 51 scenarios plus 5 (independent name comparison retained all 15 prior literal names plus principalName and found exactly 5 additions), and complete protected-tree/CAS evidence. Root will perform a fresh scoped review of I1/I2/new breakage against FIX_BASE; this report is not that independent verdict. Minor M1/M2/M3 remain deferred as explicitly authorized. Whole-plan Source remains incomplete; operationalReadiness=false,completePackage=false,PCoff=false,globalNativeDrainVerified=false,sdkNamespaceEmptyVerified=false.
+
+Fix-round implementation status: DONE_WITH_CONCERNS. STOP Source writes after the report's independent readback. No runtime/provider/owner/OAuth-credential operation, promotion, main change, Unit3 or PC-off trial was performed.
