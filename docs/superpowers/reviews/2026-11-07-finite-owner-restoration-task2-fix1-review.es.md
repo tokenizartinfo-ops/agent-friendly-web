@@ -1,6 +1,6 @@
 # AFW Task2 — independent fix round1 review and acceptance
 
-7 November2026. PROJECT AFW; repository tokenizartinfo-ops/agent-friendly-web; SOURCE/SYN only. Reviewed fix AAaa1e9dc0161ffa0b56777a96aa274cff272484cd→29681cae2bf1094ec5c66d5b2784254f77bec697. Original reviewer resumed under scoped re-review contract; no tests or provider operations. The literal independent report follows. Root acceptance bookkeeping is appended separately in the living ledger; no operational readiness is inferred.
+7 November2026. PROJECT AFW; repository tokenizartinfo-ops/agent-friendly-web; SOURCE/SYN only. Reviewed fix aa1e9dc0161ffa0b56777a96aa274cff272484cd→29681cae2bf1094ec5c66d5b2784254f77bec697. Original reviewer resumed under scoped re-review contract; no tests or provider operations. The literal independent report follows. Root acceptance bookkeeping is appended separately in the living ledger; no operational readiness is inferred.
 
 ## Independent reviewer report (verbatim)
 
