@@ -6,7 +6,8 @@ import {pathToFileURL} from 'node:url';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {ownerReferenceFixture,prepareOwnerReference,assertActualComplete,downstreamOwnerReference,recordOwnerReference} from './finite-owner-cleanup.mjs';
 import {createInitialEntrySynOutbound} from './finite-initial-entry-world.mjs';
-import {plain} from './finite-first-connection-publication.mjs';
+import {plain,compileCleanupSdkOnlyWorker,compileFirstConnectionCandidate} from './finite-first-connection-publication.mjs';
+import {build} from 'esbuild';
 
 const P='afw.finite-initial-cleanup.v1:',sha=x=>createHash('sha256').update(x).digest('hex');
 const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
@@ -35,6 +36,13 @@ export async function verifyCheckpoint(root,{source=process.env.GITHUB_SHA}={}){
  assert.equal(sha(qa.script),data.build.QA.sha256);assert.equal(sha(m.script),data.build.M.sha256);
  assert.equal(sha(await readFile(join(root,'graphs/qa-index.mjs'))),data.build.QA.sha256);
  assert.equal(sha(await readFile(join(root,'graphs/canary-index.mjs'))),data.build.M.sha256);
+ if(data.sdkOnlyBuild){
+  const extra=data.options.workers.find(w=>w.name==='sdk-only-first-connection');assert(extra);
+  assert.equal(extra.kvNamespaces.OAUTH_KV,'first-connection-oauth');assert.equal(sha(extra.script),data.sdkOnlyBuild.sha256);
+  const bytes=await readFile(join(root,'graphs/sdk-only-index.mjs'));assert.equal(bytes.length,data.sdkOnlyBuild.bytes);assert.equal(sha(bytes),data.sdkOnlyBuild.sha256);
+  const meta=JSON.parse(await readFile(join(root,'graphs/sdk-only-metafile.json'),'utf8'));assert(Object.keys(meta.inputs).some(p=>p.includes('@cloudflare/workers-oauth-provider')));
+  assert.equal(data.sdkOnlyBuild.callbackOmitted,true);assert.equal(data.sdkOnlyBuild.MAdmission,false);assert.equal(data.sdkOnlyBuild.refreshTokenTTL,0);
+ }
  const graph=JSON.parse(await readFile(join(root,'graphs/metafiles.json'),'utf8'));
  assert(Object.hasOwn(graph.M.inputs,'worker/mcp-own/finite.mjs'));assert(Object.keys(graph.QA.inputs).some(p=>p.endsWith('mcp-qa-finite-owner-cleanup.mjs')));
  return {manifest,data};
@@ -47,13 +55,22 @@ function portableOptions(options,persist){
   return value;
  }));
 }
-export async function produceCheckpoint(root,{variant='principal',deferWait=false}={}){
+export async function produceCheckpoint(root,{variant='principal',deferWait=false,sdkOnly=false}={}){
  assert(['principal','grant-before-link','notice-before-link'].includes(variant));
  const started=Number(process.env.AFW_JOB_STARTED_MS);assert(Number.isSafeInteger(started));
  assert(Date.now()-started<=90000,'do not open I0 without original 13min plus export margin');
  let f;
  try{
   f=await ownerReferenceFixture({after(){}},{cleanupCheckpoint:true});
+  if(sdkOnly){
+   assert.equal(variant,'principal');const extra=await compileCleanupSdkOnlyWorker();await f.mountCleanupSdkOnly(extra);f.cleanupSdkOnly=true;
+   const initial=await plain(f.stub.ownerCleanupFacts()),original=JSON.parse(initial.rows.find(([k])=>k===P+'plan')[1]);
+   assert(Date.now()<original.C0-300000,'late producer must wait without a live Root');
+   await waitUntil(original.C0-300000);
+   f.sdkOnlyBuild={worker:'sdk-only-first-connection',sha256:extra.sha256,bytes:extra.bytes,inputs:Object.keys(extra.metafile.inputs),callbackOmitted:true,MAdmission:false,accessTokenTTL:300,refreshTokenTTL:0,namespaceId:'first-connection-oauth'};
+   const graphRoot='output/t2-native-graphs/'+f.firstConnectionBuild.QA.sha256;
+   await writeFile(graphRoot+'/sdk-only-index.mjs',extra.script);await writeFile(graphRoot+'/sdk-only-metafile.json',json(extra.metafile));
+  }
   const prepared=await prepareOwnerReference(f);
   if(variant==='grant-before-link')await f.stub.ownerCleanupFault(variant);
   const response=await prepared.issue();
@@ -76,7 +93,8 @@ export async function produceCheckpoint(root,{variant='principal',deferWait=fals
   input.state.cleanupRestorePlan=plan;
   const clientKey='client:'+f.source.clientId,client=await f.kv.get(clientKey);assert.equal(typeof client,'string');assert.equal(JSON.parse(client).clientId,f.source.clientId);
   const kvProof={purpose:'afw.same-oauth-kv-client.syn.v1',key:clientKey,keyHash:sha(clientKey),valueHash:sha(client),expires:false,namespaceId:'first-connection-oauth'};
-  const data={purpose:'afw.owner-cleanup-persisted-facts.syn.v1',plan,facts,kvProof,variant,partialBoundary,lateToken:f.cleanupToken??null,options:portableOptions(input.currentMountedOptions,input.persist),factory:input.factory,state:input.state,build:f.firstConnectionBuild,modeledProviderInput:{label:'MODELED PROVIDER INPUT',bootstrapStatus:'complete',recordedAt:Date.now(),realWorkflowTerminationProved:false}};
+  const data={purpose:'afw.owner-cleanup-persisted-facts.syn.v1',plan,facts,kvProof,variant,partialBoundary,lateToken:f.cleanupToken??null,sdkBeforeExchange:f.sdkBeforeExchange??null,sdkAfterExchange:f.sdkAfterExchange??null,sdkOnlyBuild:f.sdkOnlyBuild??null,options:portableOptions(input.currentMountedOptions,input.persist),factory:input.factory,state:input.state,build:f.firstConnectionBuild,modeledProviderInput:{label:'MODELED PROVIDER INPUT',bootstrapStatus:'complete',recordedAt:Date.now(),realWorkflowTerminationProved:false}};
+  if(sdkOnly)assert(Date.now()<plan.C0-120000,'g5 genuine notice/link must finish before original export');
   await f.mf.dispose();f.disposedForCheckpoint=true;
   await mkdir(root,{recursive:true});await cp(input.persist,join(root,'state'),{recursive:true,errorOnExist:true,force:false});
   await cp('output/t2-native-graphs/'+f.firstConnectionBuild.QA.sha256,join(root,'graphs'),{recursive:true,errorOnExist:true,force:false});
@@ -114,7 +132,7 @@ export async function recoverCheckpoint(root,{label='principal',restart=false}={
   assert.deepEqual(current.rows,data.facts.rows,'cold load preserves original native rows exactly before alarm');
   const mKv=await mf.getKVNamespace('OAUTH_KV','canary-first-connection'),qaKv=await mf.getKVNamespace('AFW_FINITE_OWNER_OAUTH_KV','qa-first-connection');
   for(const kv of [mKv,qaKv]){const value=await kv.get(data.kvProof.key);assert.equal(typeof value,'string');assert.equal(sha(value),data.kvProof.valueHash,'same non-expirable client after cold load');}
-  f.negative=await mf.getWorker('negative-first-connection');f.kv=mKv;f.kvSemanticProof={keyHash:data.kvProof.keyHash,valueHash:data.kvProof.valueHash,bothAliases:true,expires:false};
+  f.negative=await mf.getWorker('negative-first-connection');f.m=await mf.getWorker('canary-first-connection');if(data.sdkOnlyBuild)f.sdkOnly=await mf.getWorker('sdk-only-first-connection');f.kv=mKv;f.kvSemanticProof={keyHash:data.kvProof.keyHash,valueHash:data.kvProof.valueHash,bothAliases:true,expires:false};
   await f.stub.ownerCleanupFault('normal');
   f.plan=data.plan;f.checkpoint=data;f.directory=dest;f.recovery={entered,ready:Date.now(),nativeDbNow:current.dbNow,manifestSha256:sha(await readFile(join(root,'manifest.json')))};
   return f;
@@ -129,8 +147,8 @@ export async function writeCleanupEvidence(name,value){await mkdir('output/owner
 export async function produceGroup(group,root){
  assert(['g0','g1','g2','g3','g4','g5'].includes(group));await mkdir(root,{recursive:true});
  const variants=group==='g1'?['grant-before-link','notice-before-link']:['principal'],lineages=[];
- for(const variant of variants){const manifest=await produceCheckpoint(join(root,variant),{variant,deferWait:true});lineages.push({variant,path:variant,I0:manifest.I0,C0:manifest.C0,C1:manifest.C1,files:manifest.files.length});}
- const data={purpose:'afw.owner-cleanup-group.syn.v1',group,source:process.env.GITHUB_SHA,lineages,graphs:lineages.length*2,maxConcurrentNative:group==='g0'?1:2,operationalReadiness:false,PCoff:false};
+ for(const variant of variants){const manifest=await produceCheckpoint(join(root,variant),{variant,deferWait:true,sdkOnly:group==='g5'});lineages.push({variant,path:variant,I0:manifest.I0,C0:manifest.C0,C1:manifest.C1,files:manifest.files.length});}
+ const data={purpose:'afw.owner-cleanup-group.syn.v1',group,source:process.env.GITHUB_SHA,lineages,graphs:lineages.length*2+(group==='g5'?1:0),maxConcurrentNative:group==='g0'?1:2,operationalReadiness:false,PCoff:false};
  await writeFile(join(root,'group.json'),json(data));await waitUntil(Math.min(...lineages.map(l=>l.C0))-120000);
  assert(Date.now()<Number(process.env.AFW_JOB_STARTED_MS)+885000,'group export margin exhausted');console.info('R2 group checkpoint',json(data));
 }
@@ -149,9 +167,53 @@ export async function persistPartialCleanup(f,root){
  const files=await inventory(root),manifest={purpose:'afw.owner-cleanup-checkpoint.syn.v1',source:process.env.GITHUB_SHA,I0:f.plan.I0,C0:f.plan.C0,C1:f.plan.C1,files,nativeClock:facts.dbNow,operationalReadiness:false,completePackage:false,PCoff:false,custodyReal:false,parentManifestSha256:f.recovery.manifestSha256};
  await writeFile(join(root,'manifest.json'),json(manifest));await verifyCheckpoint(root);return manifest;
 }
+
+/** Directed SDK component qualification, no AFW I0/alarm or business admission. */
+export async function verifyCleanupQualificationPremises(){
+ const candidate=await compileCleanupSdkOnlyWorker(),M=await compileFirstConnectionCandidate('c'.repeat(40),'d'.repeat(40));
+ assert(Object.keys(candidate.metafile.inputs).some(p=>p.includes('@cloudflare/workers-oauth-provider')));
+ assert(Object.hasOwn(M.metafile.inputs,'worker/mcp-own/finite.mjs'));
+ const source=String.raw`
+ import {OAuthAuthorizationServer} from '@cloudflare/workers-oauth-provider';
+ const O='https://delegated-canary.agentfriendlyweb.dev',server=new OAuthAuthorizationServer({issuer:O,resources:[O+'/mcp'],scopesSupported:['afw:project:read'],accessTokenTTL:300,refreshTokenTTL:0,clientIdMetadataDocumentEnabled:false});
+ export default{async fetch(request,env,ctx){
+  if(new URL(request.url).pathname!=='/_component/authorize')return server.fetch(request,env,ctx);
+  const api=server.getOAuthApi(env),input=await request.json();
+  const client=await api.createClient({redirectUris:['https://client.example/cb'],clientName:'SYN SDK qualification component',grantTypes:['authorization_code'],responseTypes:['code'],tokenEndpointAuthMethod:'none'});
+  const parsed=await api.parseAuthRequest(new Request(O+'/authorize?'+new URLSearchParams({client_id:client.clientId,redirect_uri:'https://client.example/cb',response_type:'code',scope:'afw:project:read',resource:O+'/mcp',state:'SYN-component',code_challenge:input.challenge,code_challenge_method:'S256'})));
+  const result=await api.completeAuthorization({request:parsed,userId:'SYN-sdk-component',scope:parsed.scope,metadata:{afwFiniteCleanup:{purpose:'afw.finite-sdk-cleanup-correlation.v1',correlationHash:'a'.repeat(64)}},props:{componentOnly:true},revokeExistingGrants:false});
+  return Response.json({clientId:client.clientId,redirectTo:result.redirectTo});
+ }};
+`;
+ const issuer=await build({bundle:true,write:false,metafile:true,platform:'neutral',mainFields:['module','main'],format:'esm',target:'es2022',external:['node:*','cloudflare:*'],stdin:{contents:source,resolveDir:process.cwd()}});
+ const base={modules:true,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],kvNamespaces:{OAUTH_KV:'SYN-sdk-component-only'},outboundService:async()=>new Response(null,{status:503})};
+ const mf=new Miniflare(convertV4MiniflareOptions({workers:[{...base,name:'sdk-component-issuer',script:issuer.outputFiles[0].text},{...base,name:'sdk-only-first-connection',script:candidate.script}]}));let negative,response;
+ try{
+  const O='https://delegated-canary.agentfriendlyweb.dev',owner=await mf.getWorker('sdk-component-issuer');negative=await mf.getWorker('sdk-only-first-connection');const kv=await mf.getKVNamespace('OAUTH_KV','sdk-component-issuer');
+  const verifier='v'.repeat(64),challenge=createHash('sha256').update(verifier).digest('base64url');
+  const auth=await owner.fetch(O+'/_component/authorize',{method:'POST',body:json({challenge})});assert.equal(auth.status,200);const data=await auth.json(),code=new URL(data.redirectTo).searchParams.get('code');assert(code);
+  const listed=await kv.list({prefix:'grant:SYN-sdk-component:',limit:1});assert.equal(listed.keys.length,1);const key=listed.keys[0].name,before=JSON.parse(await kv.get(key));assert.equal(before.expiresAt,undefined);assert(Number.isSafeInteger(listed.keys[0].expiration));
+  const tokenResponse=await owner.fetch(O+'/oauth/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',client_id:data.clientId,redirect_uri:'https://client.example/cb',resource:O+'/mcp',code,code_verifier:verifier})});assert.equal(tokenResponse.status,200);
+  const token=await tokenResponse.json();assert.equal(typeof token.access_token,'string');assert.equal(token.refresh_token,undefined);assert.equal(token.expires_in,300);
+  const after=JSON.parse(await kv.get(key));assert.equal(after.id,before.id);assert(Number.isSafeInteger(after.expiresAt));assert(after.expiresAt*1000>Date.now());assert.deepEqual(after.metadata,before.metadata);
+  response=await negative.fetch(O+'/_fixture/sdk-only-exchange',{method:'POST',headers:{'Content-Type':'application/json'},body:json({subjectToken:token.access_token,sdkGrantId:before.id,clientId:data.clientId,correlationHash:'a'.repeat(64),referenceHash:'b'.repeat(64),C0:Date.now()+75000})});assert.equal(response.status,403);
+  const held=await (await negative.fetch(O+'/_fixture/sdk-only-signal')).json();assert(held.reached&&held.retained&&!held.settled);assert.equal(held.logicalReason,'deadline');
+  const busy=await negative.fetch(O+'/_fixture/sdk-only-exchange',{method:'POST'});assert.equal(busy.status,409);await busy.body?.cancel();
+  const body=response.text();await negative.fetch(O+'/_fixture/sdk-only-release');assert.equal(await body,'SYN SDK-only denied');
+  const settled=await (await negative.fetch(O+'/_fixture/sdk-only-signal')).json();assert(settled.settled&&!settled.retained);assert(settled.nativeReturned&&settled.sdkReturned);
+  const result={purpose:'afw.cleanup-sdk-premises.component.syn.v1',source:process.env.GITHUB_SHA,noAFWI0:true,noBusinessAdmission:true,componentOnly:true,originalGrant:sha(before.id),preExchangeExpiresAt:null,codeKVExpiration:listed.keys[0].expiration,postExchangeExpiresAt:after.expiresAt,actualAccessTTL:token.expires_in,refreshAbsent:true,held,settled,M:{sha256:sha(M.bytes),bytes:M.bytes.length,inputs:Object.keys(M.metafile.inputs).length},SDKOnly:{sha256:candidate.sha256,bytes:candidate.bytes,inputs:Object.keys(candidate.metafile.inputs).length},operationalReadiness:false,completePackage:false,PCoff:false};
+  await mkdir('output/owner-cleanup-preflight',{recursive:true});await writeFile('output/owner-cleanup-preflight/result.json',json(result));
+  await writeFile('output/owner-cleanup-preflight/sdk-only-index.mjs',candidate.script);await writeFile('output/owner-cleanup-preflight/sdk-only-metafile.json',json(candidate.metafile));
+  await writeFile('output/owner-cleanup-preflight/M-index.mjs',M.script);await writeFile('output/owner-cleanup-preflight/M-metafile.json',json(M.metafile));
+  await writeFile('output/owner-cleanup-preflight/component-index.mjs',issuer.outputFiles[0].text);await writeFile('output/owner-cleanup-preflight/component-metafile.json',json(issuer.metafile));
+  const files=await inventory('output/owner-cleanup-preflight');await writeFile('output/owner-cleanup-preflight/manifest.json',json({source:process.env.GITHUB_SHA,files}));console.info('R2 directed SDK premises',json(result));
+ }finally{if(negative)await negative.fetch('https://delegated-canary.agentfriendlyweb.dev/_fixture/sdk-only-release').catch(()=>{});await mf.dispose();}
+}
+
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  const [command,root='output/owner-cleanup/checkpoint-g0',group='g0']=process.argv.slice(2);
- if(command==='prepare')await produceCheckpoint(root);
+ if(command==='preflight')await verifyCleanupQualificationPremises();
+ else if(command==='prepare')await produceCheckpoint(root);
  else if(command==='prepare-group')await produceGroup(group,root);
  else if(command==='verify-group')console.info('R2 group uploaded readback',json(await verifyGroup(root)));
  else if(command==='verify'){const {manifest}=await verifyCheckpoint(root);console.info('R2 artifact exact readback',json({source:manifest.source,files:manifest.files.length,C0:manifest.C0}));}
