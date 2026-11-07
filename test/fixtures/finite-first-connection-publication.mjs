@@ -456,7 +456,8 @@ export async function compileCleanupSdkOnlyWorker(){
     current();check(!signal.reached&&key.startsWith(prefix),'single original token write only');
     const native=JSON.parse(value);check(native.grantId===summary.grantId&&native.userId===summary.userId&&native.audience===summary.audience&&JSON.stringify(native.scope)===JSON.stringify(scopes),'same SDK write tuple');
     signal.reached=true;signal.reachedAt=Date.now();signal.write={keyHash:await hash(key),valueHash:await hash(value),expiresAt:native.expiresAt,expirationTtl:options.expirationTtl};current();
-    await new Promise(resolve=>{release=()=>{signal.released=true;signal.releasedAt=Date.now();resolve();};});
+    release=()=>{signal.released=true;signal.releasedAt=Date.now();};
+    while(!signal.released){check(Date.now()<input.C0+180000,'original C1 retention observation exhausted');await new Promise(resolve=>setTimeout(resolve,250));}
     // The already-started SDK operation survives logical denial. No new business work is admitted.
     signal.nativeAttemptAt=Date.now();
     try{const result=await kv.put(key,value,options);signal.nativeReturned=true;return result;}
