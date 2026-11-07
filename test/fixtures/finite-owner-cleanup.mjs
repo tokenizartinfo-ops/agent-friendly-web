@@ -192,11 +192,24 @@ export async function observeCleanupSdkExchange(f,token){
  assert.equal((await plain(f.stub.ownerReferenceObserve())).rows.find(([k])=>k.endsWith(':reference'))[1],referenceRaw,'historical Reference bytes unchanged');
  return {purpose:'afw.post-exchange-sdk-fact.syn.v1',referenceHash:ref.recordHash,referenceRawHash:hash(referenceRaw),referenceExpiresAt:ref.expiresAt,selectorHash:hash(ref.sdkGrantId),subjectHash:hash(grant.userId),clientHash:hash(grant.clientId),correlationHash:ref.correlationHash,metadataHash:hash(JSON.stringify(grant.metadata)),createdAt:grant.createdAt,expiresAt:grant.expiresAt,tokenExpiresAt:nativeToken.expiresAt,tokenHash:hash(token.access_token),advertisedExpiresIn:token.expires_in,D1ExpiresAt:Date.parse(native.grant.expires_at),observedAt:Date.now(),I0:plan.I0,C0:plan.C0,C1:plan.C1,operationalReadiness:false};
 }
+/** Fixed SYN ingress to the ordinary compiled M; routing is not AFW authority. */
+export function cleanupMTransport(mf,{currentMountedOptions,expectedModuleHash}){
+ const m=currentMountedOptions.workers.find(w=>w.name==='canary-first-connection');
+ assert(m);assert.equal(currentMountedOptions.upstream,O);assert.equal(createHash('sha256').update(m.script).digest('hex'),expectedModuleHash);
+ assert.equal(m.kvNamespaces.OAUTH_KV,'first-connection-oauth');assert.equal(m.bindings.AFW_DELEGATED_OAUTH_ENABLED,'true');assert.equal(m.bindings.AFW_OAUTH_REFRESH_ENABLED,'false');
+ const identity={worker:'canary-first-connection',path:'/mcp',scriptHash:expectedModuleHash,namespaceId:'first-connection-oauth'};
+ return Object.freeze({...identity,fetch(input,init={}){
+  assert(typeof input==='string'||input instanceof URL,'fixed SYN URL input');const url=new URL(String(input));assert.equal(url.href,O+'/mcp','fixed ordinary M origin/path only');
+  const headers=new Headers(init.headers);headers.set('Host',new URL(O).host);headers.set('MF-Route-Override',identity.worker);
+  return mf.dispatchFetch(url.href,{...init,headers});
+ }});
+}
 export async function readCleanupM(worker,token,projectId){
+ assert.equal(worker.worker,'canary-first-connection');assert.equal(worker.path,'/mcp');assert.match(worker.scriptHash,/^[a-f0-9]{64}$/);assert.equal(worker.namespaceId,'first-connection-oauth');
  const requests=[],client=new Client({name:'SYN-named-M-control',version:'1.0.0'},{versionNegotiation:{mode:'legacy'}});
  try{
   await client.connect(new StreamableHTTPClientTransport(new URL(O+'/mcp'),{requestInit:{headers:{Authorization:'Bearer '+token,Host:new URL(O).host}},fetch:async(url,options)=>{const response=await worker.fetch(String(url),options);requests.push({method:options?.method??'GET',status:response.status});return response;}}));
   const result=await client.callTool({name:'read_project_summary',arguments:{}});assert.equal(result.isError,undefined);assert.equal(result.structuredContent.data.id,projectId);
-  return {worker:'canary-first-connection',path:'/mcp',at:Date.now(),requests,projectHash:createHash('sha256').update(projectId).digest('hex'),dataRead:true};
+  return {worker:worker.worker,path:worker.path,scriptHash:worker.scriptHash,namespaceId:worker.namespaceId,at:Date.now(),requests,projectHash:createHash('sha256').update(projectId).digest('hex'),dataRead:true};
  }finally{await client.close();}
 }
