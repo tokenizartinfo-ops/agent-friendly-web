@@ -6,7 +6,7 @@ PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT SOURC
 
 CURRENT: Task1 COMPLETE SOURCE/SYN at2c6b5a0eb503b8d877158f85832c510b9a45f7ca/tree57ac1355a85560dee14b2f933b4b68f877911ae2. Independent spec+quality APPROVED, Critical0/Important0/Minor4 tracked; acceptance40ebf3aa6d9982139f6507336bf352e27c5e9a4f/blob9896fc376075f5fd1bd544864dac8469a25c8692. Do not repeat Task1 or the earlier body-retention fix.
 
-CURRENT: Task2 COMPLETE SOURCE/SYN at29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64. Original reviewer scoped FIXROUND1 accepted I1/I2, SpecPASS/TaskQualityPASS/no newbreakage/no openin-scopefindings; acceptance b1d2b4da00436864ac7eda39da322d0bad6a000a/blob7ab8c08794dfb97ef4d542bf62473da6931b52f5. SourceSTOP,56/56 final42390108314,qualifierabsent. Both plantasks accepted; combinedwholeplanreview7aab..296 is ACTIVE (fresh finite_owner_restoration_combined_review, Astra high), no runtime/merge/PCoff acceptance. Task2M1/M2/M3+Task1RM1–RM4 remain tracked. Owner unavailable until19:30UTC/16:30Argentina; no human window. readiness/package/PCoff=false.
+CURRENT: PLAN COMPLETE for bounded SOURCE/SYN owner-restoration integration at29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64. Task1+Task2 gates and fresh combinedreview PASS,0Critical/Important,7Minor retained. Combined report docs/superpowers/reviews/2026-11-07-finite-owner-restoration-combined-review.es.md @ b867a64626435a7223c62b3d24781b1ca053c895/blob00816a95124ae55a3461519021aaf21e97806b8d. NO Sourcefixwave/mainmerge/promotion; remoteSource and Rootdocs preserved. Next: design bounded phase/resource diagnostics and independent readonly/reduction boundary qualification, then later functional producers afterNoticeLink. Owner unavailable until19:30UTC/16:30Argentina. operationalReadiness=false;completePackage=false;PCoff=false.
 
 OWNER SHUTDOWN historical6nov, lifted by owner7novcontinua: Gabriel planned PCoff6nov19:00Argentina/22:00UTC. Root checkpoint/stop before21:55UTC. Hosted Actions may finish independently; that is CI SOURCE/SYN, not the AFW PC-off rehearsal or persistent guard. No human step is currently needed.
 
@@ -501,3 +501,40 @@ Both tasks of this plan now satisfy their taskgates. Root read final-review.md a
 Both task gates accepted before dispatch. Root packaged ORIGINAL planBASE7aab..296, notTask2BASE/AA, into docs/superpowers/reviews/2026-11-07-finite-owner-restoration-combined-29681ca-package.md @ d3a1b3cea9e53177c87ecf45c74fea7957e7b6fb/blobff33898c927143078ba8461a94d07c3b19974314,534935chars. All98single-parentcommits/19netpaths/fulluntruncatedU10,3160protectedbaseleaves,8modified/11added; exact before/afterinventory and bothfullreports, acceptedtaskreviews, deferredTask1RM1–RM4/Task2M1–M3, exactinheritedwarnings, currentconstraints included. Fullcontent/blob/soleparent/solepath/ref verified after cloudwrite; no localclone.
 
 Fresh combinedreviewer finite_owner_restoration_combined_review dispatched with no inheritedhistory, gpt-6-astra/high per installedmost-capable final-review requirement, read-only/nohelpers/no rerun. It must read all19paths and their interfaces, triage debt withoutseverityceiling, report Spec/Quality/integrationverdict and every Declined-to-judge behavior for Rootruling. Current Source296STOP; actualruntime/main/PCoff outside this boundedplanreview and stillunqualified. ONEcompletefindings fixwave+ONEscopedrereview applies ifneeded; do not start sourcechanges or anotherreviewseat speculatively. Ownerunavailablebefore19:30UTC, no humanstep.
+
+
+## Combined plan gate accepted and branch preserved — 7Nov17:30UTC
+
+Fresh solo reviewer read all19complete diffs/bothreports/currentrules and two concrete dependencies(stage-worklifetime/issuerSQLquerybarrier); verified tested/finaltree andrunindependently. Functional/authoritySpecPASS/QualityPASS/combinedSOURCEintegrationPASS,0Critical/Important and7trackedMinor. Fullverbatimreport preservedat b867a64626435a7223c62b3d24781b1ca053c895/blob00816a95124ae55a3461519021aaf21e97806b8d; soleparent/path/content/blob/refreadback verified. No correctivecode required by this gate, so no finalfixwave or rereview invoked. Task2round1 is separatelyaccepted, notconfusedwiththisbroadgate.
+
+Root accepts debttriage: Task1RM1 historicalREDgraph omission retainedpermanentexception/no reconstruction; RM2 readonly200get/2page/thirdrefusal/queuedexpiry qualification before maximumprofilepromotion; RM3 phasecost/realbudget before runtime; RM4 inheritedwarnings ownership/lifecycle disposition before affectedruntime reliance. Task2M1 attributablephase/resource/body/cancel/concurrency diagnostics before runtime, coordinatedwithRM3butIDsnotmerged; M2 separate200total-delete (includingfinalgrant)/thirdlist/peak2 qualification before maximumprofilepromotion; M3 conciseconsole/fullartifact maintenance fornextqualification. Allseven remainopen; nonewaivedby56PASS. EarlierpreBASEMinorstatusesunchanged.
+
+### Explicit Root dispositions of every Declined-to-judge behavior
+
+Ruling: retain the earlier954-commit/preBASEquality exclusion — this planstarts7aab andprioracceptedscopeskeep theirstatuses; beforemainpromotiona separateintegrationgate isrequired — costifwrong: anoldcross-boundarydefect mayappear later, thisverdictcannotadvertise wholebranchsafety.
+
+Ruling: retain main/fullrepositoryregression/promotion exclusion and keepSource as-is, no mainmerge/PR/publish — source/testbyteidentity+selected56qualifythisboundedunit, notthewholeproduct; inheritedmainbaseline0c9c remains — costifwrong: laterintegrationmayfindadditionalregressions anddelayrelease; no prematureoperationalpromise.
+
+Ruling: retain realquota/latency/runtimecompatibility/custody/availability exclusion — require effectivecurrentresource evidence andbudget beforepromotion, notproviderinferencefromSYN — costifwrong: futureproviderchecks mayrequire furtherwork or ownercustody; cannotassume paidplan solvesperformance.
+
+Ruling: retain realsubscription/usefuldelivery/arbitraryactorwithdrawal/PCoff exclusion — keeponecoordinatedrealPCoffoccurrenceafterclosedpreflight andseparateMaxconsent, noextraPC-onrealtrial byinference — costifwrong: remainingrealend-to-end failurescanstillappear; nocustomerreadinessclaim.
+
+Ruling: retain thirdCLOSED/prearm/fullsetup/nominalhandoff exclusion — remainexplicitlydenied untiltheir own coherentproducer+retirementunit isimplemented/reviewed — costifwrong: additionalSourceworkstillneeded, thisunitcannotstandinforunsupportedphases.
+
+Ruling: retain globalSDKnamespaceempty/physicaldrain exclusion andfalsefields — boundedactualSDKreturn plusbusinessfence isdifferentfromall-isolatesphysicalproof — costifwrong: lateorforeignnativeactivitycanexist andmustnotbeadvertised asgloballydrained.
+
+Ruling: retain unknownhistorical5065msfailure andwarningcauses — preserveoriginalfacts; futuredirectedmetrics/lifecycleinvestigation, noinventedretrospectivediagnosis oroldREDreplay — costifwrong: historicalrootcause remainsuncertain; affectedruntimecannotrelyonunresolvedassumptions.
+
+Ruling: retain lateKVphysicalexpiry-equality andpostC0D1tool-denial exclusions — experimentproved neither, keeporiginalSDKoptions/servicedenialclassification andexplicittoolCallAttemptedfalse — costifwrong: no exactphysicalTTL orD1posttoolclaim maybemadefromthisevidence.
+
+### Finish adaptation under existing authorization
+
+Root read finishing-a-development-branch/SKILL.md. Owner repeatedlydelegated choices/continuouswork and iscurrentlyunavailable; choose keep-as-is, preserving remote Source296 and allRootdocs. No localworktree existsfor thiscloudplan; donot inventlocalgitdetect/cleanup or deletecloudhistory as scratch. Developer+bindingplan prohibit broadening tofullsuite byroutine when nointegrationormergeoccurs; same-tested-code56,taskgates+combinedreadback aretheappropriatechecks here. Fullrepositoryintegrationtests remaina latergate, not falselyreportedrun.
+
+Ruling: keep remote Sourcebranch andversioneddocs insteadofmenupause/localcleanup/fullsuite — sessionalreadyauthorizesautonomousreversiblechoices andrequirescloudwork; remainingfunctionalphasesarenotreadyformainpromotion — costifwrong: branchcontinuestoaccumulateworkandlaterintegrationneedsitsowngate; noevidence/rollbackisdeleted.
+
+### Current performance facts and next design, not implementation
+
+Root refreshedprimaryofficialCloudflare limits/versions/getmodulesdocs7nov and extractedexistingfinalg0logs only. New note docs/superpowers/reviews/2026-11-07-finite-current-performance-facts.es.md @965afb357145711e628d8a3e0c439a7716706a7b/blobcb020f64b50a1a1fcc496c5a8b184f6cb2580585 (7109chars), fullreadbackverified. Aggregate854SYNobservations/1,056,133,138B;350partialobserverspans/432,841,450B, differentdenominators. Cleanup168providerrequests/870childobservations; these do notproveCFquota orrealRTT. No newrun orSourcechange. Attributablediagnostics/boundaryqualification isthenextdesign; do notjumpstraighttoacacheorclockswidening. Freshbrainstormingread: ownerexplicitlyoptedoutofroutinequestions, delegatingtechnicalchoice; rootmaypreparedesign underthat exception, with choicesidentifiedasRootcalls. A buildercheckwillprecedeimplementationplanfor nontrivialwork.
+
+Planclosure isnotobjectivecompletion. operationalReadiness=false;completePackage=false;PCoff=false. Continueautonomouslywhileownerawaybefore19:30UTC; nohumanlogin/token/consentwindow.
