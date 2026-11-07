@@ -8,7 +8,7 @@
 
 **Tech Stack:** Node22/currentlock, esbuild/Miniflare/workerd, SDK1.2.1 fijado, GitHub connector/Actions; cero clone/deps/build/test locales.
 
-**Spec:** docs/superpowers/specs/2026-11-07-finite-native-budget-qualification-design.md @32e75999e36b0c8f6c60ffb16d13fe980900ece0/blobbef5563af032c433aaff498e730a9429e8220e0d (20408chars). Buildercheck fresco resolvió su única pregunta mediante dos consumidores preC0 y concluyó nothing important left. Root aprueba bajo delegación/opt-out del owner, no atribuye aprobación humana de este documento.
+**Spec:** docs/superpowers/specs/2026-11-07-finite-native-budget-qualification-design.md @ec3b7d6806cc152fd369ea7512b21a525cd7e455/blob733462fec3b8f40f8ca762c9df9a378a77e28415 (24031chars). Buildercheck fresco resolvió su única pregunta mediante dos consumidores preC0 y concluyó nothing important left. Root aprueba bajo delegación/opt-out del owner, no atribuye aprobación humana de este documento.
 
 ## Global Constraints
 
@@ -44,7 +44,9 @@
 - MODIFY test/fixtures/finite-owner-cleanup.mjs: plumbing de instrumentación/colector, modos SYN necesarios, consola acotada; retornos completos preservados.
 - MODIFY test/fixtures/finite-owner-cleanup-persistence.mjs: opción diagnóstico/checkpoint y logging; no nueva recuperación overdue ni grupos históricos cambiados.
 - MODIFY test/fixtures/finite-initial-entry-world.mjs: plumbing opt-in de presupuesto e instrumentación en hooks esbuild existentes.
-- OPTIONAL test/fixtures/finite-owner-io-fanout.mjs sólo si preflight demuestra seam necesario; no alterar otros modos por conveniencia.
+- MODIFY test/fixtures/finite-first-connection-publication.mjs: plugin M opt-in; default y negative spy exactos.
+- MODIFY test/mcp-qa-finite-owner-cleanup-native.test.mjs: sólo dos logs directos posteriores a writer, sin registro/assert/decisiones cambiados.
+- NO modificar finite-owner-io-fanout.mjs; su instrumentación no es el seam escogido.
 - TEMP .github/workflows/afw-finite-budget-qualification.yml; sólo workflow_dispatch/contents:read, retirar antes de cadaentrega.
 - REPORT docs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task1.md y task2.md. El Source escritor no escribe ledger/briefs Root.
 
@@ -69,7 +71,7 @@ Export observeBudgetPromise(collector,opRef,promise)→la MISMA promise. Observa
 
 ### Evidencia (Task1 produce; Task2 consume)
 
-Export persistBudgetEvidence({path,full,testRevision,caseName,counts})→{path,bytes,sha256,summary}. Node-only; path fijo bajo output/finite-budget/. Serializar JSON completo saneado una vez, escribir esos bytes, hashear los mismos, luego resumen UTF8≤2048B conpurpose/source/case/estado/counts/ruta/bytes/SHA. No truncado arbitrario deJSON. El caller conserva full como retorno/artefacto; no lógica productiva lee summary.
+Export persistBudgetEvidence({path,full,testRevision,caseName,counts})→{path,bytes,sha256,summary}. Node-only; path fijo bajo output/finite-budget/,output/owner-reference/ ooutput/owner-cleanup/ según caller existente. No cambiar rutas legacy ni arbitrarypath. Serializar JSON completo saneado una vez, escribir esos bytes, hashear los mismos, luego resumen UTF8≤2048B conpurpose/source/case/estado/counts/ruta/bytes/SHA. No truncado arbitrario deJSON. El caller conserva full como retorno/artefacto; no lógica productiva lee summary.
 
 ### Fixture/CLI (Task1 produce; Task2 extiende)
 
@@ -162,3 +164,10 @@ Specintención/optout/alternativas: header ydecisiónRoot; sinimplementaroptimiz
 RooteligeSDDpor dosentregables independientes con riesgosdeatribución/retención que merecenfreshgates. Decisióntécnicabajodelegación,nosepideconfirmaciónrutinariadeowner; costo: dosasientosimplementación+reviewyfinalgate. Task1implementerstandardcapable (gpt-6.1-sol/high), reviewersegúnriesgo; Task2freshimplementer, no doswriterssimultáneos. Elrevisor finalmáscapableAstra segúnskill. Si surgebloqueoirreversible/seguridad/externofueraautorización, prepararconcreto ypediralownerdespués19:30UTC; nofabricar consentimiento.
 
 Workspaceadaptacióncloud: ledger docs/superpowers/progress/2026-11-07-finite-native-budget-qualification.es.md, briefs/reports/reviews deestaunidad; no scriptlocalgitworktree ni borradoRootdocs. Sourcebranchremotaaisladademain, preservarmaterialválido. Rulings/preflight/estadoexacto guardadosantesdeimplementer. No release/main niPCoff proclamadosalacabarunatarea. Usar evidencebeforeclaims yfixloopinstaladoporcadagate. ObjectiveAFWrealcloud/PCoff/Max siguependiente.
+
+
+## Ruling de preflight Task1 incorporado
+
+Root acepta los12paths cerrados (5nuevos test/helpers,5modificados test/fixtures+caller,1TEMP,1reporte), Mcompiler opt-in yconsolecaller R2; no producción. Carrier SYN ALS con storesinmutables+weakactualidentities dentrodearchivospermitidos, run devuelveexactaretornopromise, observaciónpasiva/snapshotcapturado para thenables, sin flags/compat/deps nuevos ysin getStoreausente convertido enRootficticio. Hookallowlist/markers/grafos completosverificadosantesI0, composiciónsobrefuenteYApreparada; leaf noatribuido detiene, no zeroUnknowninventado. Especificación última ec3b7d68 esautoridadsi unmapa anterior difiere.
+
+Autorizar inicialmente sólo nuevo native.test+TEMP para R0 conimportsBASE. Preservarnativecomplete1/Reference/status302/grafos/metafiles/facts/outcome+manifestantesassertdiagnosticause. No D1DBarchiveobligatorioenREDforward; sí coldstatecompletoenGREEN. RootdebeaceptarREDantescolector/instrumentación. No codewriteconrunactivo. Refs/rulingsenbriefactual+ledgerdeestaunidad; owner nointerviene.
