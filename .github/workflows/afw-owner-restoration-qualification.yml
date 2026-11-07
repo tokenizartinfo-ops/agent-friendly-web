@@ -22,7 +22,7 @@ jobs:
         run: |
           for file in test/fixtures/finite-first-connection-publication.mjs test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs; do node --check "$file" || exit; done
           npx eslint test/fixtures/finite-first-connection-publication.mjs test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs
-      - name: Real SDK component and compiled named M no I0
+      - name: Real SDK component retention 80s and compiled named M no I0
         run: node test/fixtures/finite-owner-cleanup-persistence.mjs preflight
       - name: Preserve directed component evidence
         if: always()
