@@ -1,0 +1,62 @@
+name: AFW finite budget qualification
+run-name: AFW budget R0 source ${{ github.sha }}
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: afw-finite-budget-qualification
+  cancel-in-progress: false
+jobs:
+  red:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install current locked dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Syntax and focused lint
+        run: |
+          node --check test/mcp-qa-finite-budget-native.test.mjs
+          npx eslint test/mcp-qa-finite-budget-native.test.mjs
+      - name: R0 causal RED
+        env:
+          AFW_BUDGET_GROUP: red
+        shell: bash
+        run: |
+          mkdir -p output/finite-budget/red
+          set +e
+          set -o pipefail
+          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-budget-native.test.mjs 2>&1 | tee output/finite-budget/red/console.tap
+          status=${PIPESTATUS[0]}
+          printf '%s\n' "$status" > output/finite-budget/red/node-exit-code.txt
+          exit "$status"
+      - name: Seal exact evidence manifest
+        if: always()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile,writeFile,readdir,mkdir} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          import {join,relative} from 'node:path';
+          const root='output/finite-budget/red',files=[];
+          await mkdir(root,{recursive:true});
+          async function walk(dir){for(const e of await readdir(dir,{withFileTypes:true})){const p=join(dir,e.name);if(e.isDirectory())await walk(p);else{if(!e.isFile())throw Error('non-file evidence');if(p===join(root,'manifest.json'))continue;const b=await readFile(p);files.push({path:relative(root,p).replaceAll('\\','/'),bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});}}}
+          await walk(root);files.sort((a,b)=>a.path.localeCompare(b.path));
+          await writeFile(join(root,'manifest.json'),JSON.stringify({purpose:'afw.finite-budget-red-manifest.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,files,operationalReadiness:false,completePackage:false,PCoff:false},null,2));
+          console.info('R0 manifest sealed',JSON.stringify({source:process.env.GITHUB_SHA,files:files.length}));
+          NODE
+      - name: Upload full SYN RED evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: finite-budget-red-${{ github.sha }}
+          path: output/finite-budget/red/
+          if-no-files-found: error
+          retention-days: 7
