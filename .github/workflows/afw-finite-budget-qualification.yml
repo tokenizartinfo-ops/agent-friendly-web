@@ -1,5 +1,5 @@
 name: AFW finite budget qualification
-run-name: AFW budget compile-only source ${{ github.sha }}
+run-name: AFW final nine budget checks source ${{ github.sha }}
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -9,10 +9,14 @@ permissions:
 concurrency:
   group: afw-finite-budget-qualification
   cancel-in-progress: false
+env:
+  AFW_BUDGET_GROUP: positive
 jobs:
-  compile_only:
+  pure:
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 2
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -22,77 +26,157 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install unchanged locked dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Syntax and focused lint
-        run: |
-          node --check test/fixtures/finite-budget-world.mjs
-          node --check test/fixtures/finite-initial-entry-world.mjs
-          npx eslint test/fixtures/finite-budget-world.mjs test/fixtures/finite-initial-entry-world.mjs
-      - name: Inspect real compiler graphs without native execution
-        env:
-          AFW_BUDGET_INSPECTION: compile-only
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Static checks and eight pure contract groups before I0
         shell: bash
         run: |
-          mkdir -p output/finite-budget/compile-only
+          mkdir -p output/finite-budget/pure
           set -o pipefail
-          node test/fixtures/finite-budget-world.mjs inspect-budget-graphs output/finite-budget/compile-only 2>&1 | tee output/finite-budget/compile-only/console.log
-      - name: Seal exact compile-only artifact
-        if: always()
+          files=(test/fixtures/finite-budget-diagnostics.mjs test/fixtures/finite-budget-evidence.mjs test/fixtures/finite-budget-world.mjs test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-first-connection-publication.mjs test/finite-budget-diagnostics.test.mjs test/mcp-qa-finite-budget-native.test.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs)
+          for file in "${files[@]}"; do node --check "$file"; done
+          npx eslint "${files[@]}" 2>&1 | tee output/finite-budget/pure/lint.log
+          node --test test/finite-budget-diagnostics.test.mjs 2>&1 | tee output/finite-budget/pure/tests.log
+          node --input-type=module -e "import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';const log=await readFile('output/finite-budget/pure/tests.log','utf8');assert.match(log,/# tests 8\\b/);assert.match(log,/# pass 8\\b/);assert.match(log,/# fail 0\\b/);"
+      - name: Exact prepared AST closure before I0
         shell: bash
         run: |
-          node --input-type=module <<'NODE'
-          import {inventoryBudgetFiles} from './test/fixtures/finite-budget-world.mjs';
-          import {writeFile,mkdir} from 'node:fs/promises';
-          const root='output/finite-budget/compile-only';await mkdir(root,{recursive:true});
-          const files=await inventoryBudgetFiles(root);
-          await writeFile(root+'/manifest.json',JSON.stringify({purpose:'afw.finite-budget-compile-manifest.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,files,I0Opened:false,nativeExecutionProduced:false,nativeCheckpointProduced:false,operationalReadiness:false,completePackage:false,PCoff:false},null,2));
-          NODE
-      - name: Upload bounded compile-only evidence
+          set -o pipefail
+          node test/fixtures/finite-budget-world.mjs preflight-budget 2>&1 | tee output/finite-budget/pure/preflight.log
+      - name: Seal pure evidence
+        if: always()
+        run: node --input-type=module -e "import {sealBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await sealBudgetArtifact('output/finite-budget/pure','pure');"
+      - uses: actions/upload-artifact@v4
         id: upload
         if: always()
-        uses: actions/upload-artifact@v4
         with:
-          name: finite-budget-compile-only-${{ github.sha }}
-          path: output/finite-budget/compile-only/
+          name: finite-budget-pure-${{ github.sha }}
+          path: output/finite-budget/pure/
           if-no-files-found: error
           retention-days: 7
-      - name: Download same compile artifact by ID
+      - uses: actions/download-artifact@v4
         if: always() && steps.upload.outputs.artifact-id != ''
-        uses: actions/download-artifact@v4
         with:
           artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-budget-compile-readback
+          path: ${{ runner.temp }}/budget-pure-readback
           merge-multiple: true
-      - name: Verify exact downloaded compilation evidence
-        if: always()
+      - name: Same-ID pure readback
+        if: always() && steps.upload.outputs.artifact-id != ''
         env:
-          AFW_COMPILE_READBACK: ${{ runner.temp }}/afw-budget-compile-readback
-          AFW_COMPILE_ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+          READBACK: ${{ runner.temp }}/budget-pure-readback
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+        run: node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact(process.env.READBACK,'pure',process.env.ARTIFACT_ID);"
+  positive_prepare:
+    needs: pure
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - name: Original producer job budget
+        run: echo "AFW_JOB_STARTED_MS=$(date +%s%3N)" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.pure.outputs.artifact-id }}
+          path: output/finite-budget/prior-pure
+          merge-multiple: true
+      - name: Verify pure artifact and exact prior preflight
+        env:
+          ARTIFACT_ID: ${{ needs.pure.outputs.artifact-id }}
+        run: node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact('output/finite-budget/prior-pure','pure',process.env.ARTIFACT_ID);"
+      - name: Actual SDK Notice and original native 900s checkpoint
+        env:
+          AFW_BUDGET_PREFLIGHT: output/finite-budget/prior-pure/preflight.json
         shell: bash
         run: |
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';
-          import {readFile} from 'node:fs/promises';
-          import {createHash} from 'node:crypto';
-          import {join} from 'node:path';
-          import {inventoryBudgetFiles} from './test/fixtures/finite-budget-world.mjs';
-          const root=process.env.AFW_COMPILE_READBACK,hash=b=>createHash('sha256').update(b).digest('hex'),files=await inventoryBudgetFiles(root),json=async p=>JSON.parse(await readFile(join(root,p),'utf8'));
-          assert.match(process.env.AFW_COMPILE_ARTIFACT_ID??'',/^[1-9][0-9]*$/);
-          const expected=['candidate-map.json','console.log','manifest.json','metafiles.json','prepared-inputs.json','provenance.json','scripts/M-index.mjs','scripts/QA-index.mjs','source-inputs.json'].sort();
-          assert.deepEqual(files.map(f=>f.path).sort(),expected,'exact compile-only path set; no fabricated native files');
-          const manifest=await json('manifest.json'),map=await json('candidate-map.json'),provenance=await json('provenance.json'),inputs=await json('source-inputs.json'),prepared=await json('prepared-inputs.json'),meta=await json('metafiles.json');
-          for(const value of [manifest,map,provenance,inputs,prepared]){assert.equal(value.source,process.env.GITHUB_SHA);assert.match(value.source,/^[a-f0-9]{40}$/);assert.equal(value.run,process.env.GITHUB_RUN_ID);assert.equal(value.attempt,process.env.GITHUB_RUN_ATTEMPT);for(const flag of ['I0Opened','nativeExecutionProduced','nativeCheckpointProduced','operationalReadiness','completePackage','PCoff'])assert.equal(value[flag],false);}
-          assert.deepEqual(files.filter(f=>f.path!=='manifest.json'),manifest.files);
-          assert.equal(map.acceptedForNativeInstrumentation,false);
-          const paths=[...new Set([...Object.keys(meta.M.inputs),...Object.keys(meta.QA.inputs)])].sort();assert.deepEqual(inputs.inputs.map(i=>i.path),paths);assert.equal(map.counts.inputs,paths.length);
-          const overrides=new Map(prepared.inputs.map(i=>[i.path,i.content])),virtuals=new Map(prepared.virtualInputs.map(i=>[i.path,i.content]));
-          for(const input of inputs.inputs){let content;if(input.kind==='compiler-define-data'){content=virtuals.get(input.path);assert.equal(typeof content,'string');assert.equal(Buffer.byteLength(content),input.bytes);assert.equal(hash(content),input.sha256);}else{const raw=input.path==='<stdin>'?virtuals.get('<stdin>'):await readFile(input.path,'utf8');assert.equal(Buffer.byteLength(raw),input.diskBytes);assert.equal(hash(raw),input.diskSha256);content=overrides.get(input.path)??raw;assert.equal(Buffer.byteLength(content),input.preparedBytes);assert.equal(hash(content),input.preparedSha256);}}
-          for(const role of ['M','QA']){const bytes=await readFile(join(root,'scripts/'+role+'-index.mjs'));assert.equal(bytes.length,provenance.graphs[role].bytes);assert.equal(hash(bytes),provenance.graphs[role].sha256);assert(provenance.compatibility[role].flags.includes('nodejs_compat'));}
-          assert(Object.hasOwn(meta.M.inputs,'worker/mcp-own/finite.mjs'));assert(Object.keys(meta.QA.inputs).some(p=>p.endsWith('mcp-qa-finite-owner-cleanup.mjs')));
-          assert.equal(map.candidates.reduce((n,g)=>n+g.count,0),map.counts.candidates);assert.equal(map.candidates.filter(g=>g.classification==='unresolved').reduce((n,g)=>n+g.count,0),map.counts.unresolved);assert.equal(map.candidates.length,map.counts.groups);
-          assert.equal(map.seams.length,10);for(const seam of map.seams){assert.equal(seam.count,seam.expected);assert.equal(hash(seam.marker),seam.markerSha256);}
-          assert(provenance.modeledCompilerInput.label.startsWith('MODELED compile-only'));assert(provenance.notProduced.includes('native-checkpoint'));assert(provenance.notProduced.includes('I0'));
-          const m=files.find(f=>f.path==='manifest.json'),c=files.find(f=>f.path==='candidate-map.json');
-          console.info('COMPILE ONLY DOWNLOADED READBACK VERIFIED',JSON.stringify({source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,artifactId:process.env.AFW_COMPILE_ARTIFACT_ID,files:files.length,manifestBytes:m.bytes,manifestSha256:m.sha256,mapBytes:c.bytes,mapSha256:c.sha256,counts:map.counts,graphs:provenance.graphs,elapsedMs:provenance.finishedAt-provenance.startedAt,I0Opened:false,nativeExecutionProduced:false,nativeCheckpointProduced:false,acceptedForNativeInstrumentation:false,operationalReadiness:false,completePackage:false,PCoff:false}));
-          NODE
+          mkdir -p output/finite-budget/producer
+          set -o pipefail
+          node test/fixtures/finite-budget-world.mjs prepare-positive output/finite-budget/producer/checkpoint 2>&1 | tee output/finite-budget/producer/console.log
+      - name: Seal producer evidence
+        if: always()
+        run: node --input-type=module -e "import {sealBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await sealBudgetArtifact('output/finite-budget/producer','checkpoint');"
+      - uses: actions/upload-artifact@v4
+        id: upload
+        if: always()
+        with:
+          name: finite-budget-checkpoint-${{ github.sha }}
+          path: output/finite-budget/producer/
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/download-artifact@v4
+        if: always() && steps.upload.outputs.artifact-id != ''
+        with:
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/budget-producer-readback
+          merge-multiple: true
+      - name: Same-ID producer readback
+        if: always() && steps.upload.outputs.artifact-id != ''
+        env:
+          READBACK: ${{ runner.temp }}/budget-producer-readback
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+        run: node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact(process.env.READBACK,'checkpoint',process.env.ARTIFACT_ID);"
+  positive_consume:
+    needs: positive_prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.positive_prepare.outputs.artifact-id }}
+          path: output/finite-budget/prior-producer
+          merge-multiple: true
+      - name: Verify exact checkpoint before native cold load
+        env:
+          ARTIFACT_ID: ${{ needs.positive_prepare.outputs.artifact-id }}
+        run: |
+          node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact('output/finite-budget/prior-producer','checkpoint',process.env.ARTIFACT_ID);"
+          node test/fixtures/finite-budget-world.mjs verify-positive output/finite-budget/prior-producer/checkpoint
+      - name: P1 original alarm restore reduction and final inventory
+        env:
+          AFW_BUDGET_CHECKPOINT: output/finite-budget/prior-producer/checkpoint
+        shell: bash
+        run: |
+          mkdir -p output/finite-budget/positive
+          set -o pipefail
+          node --test test/mcp-qa-finite-budget-native.test.mjs 2>&1 | tee output/finite-budget/positive/tests.log
+          node --input-type=module -e "import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';const log=await readFile('output/finite-budget/positive/tests.log','utf8');assert.match(log,/# tests 1\\b/);assert.match(log,/# pass 1\\b/);assert.match(log,/# fail 0\\b/);"
+      - name: Seal consumer evidence
+        if: always()
+        run: node --input-type=module -e "import {sealBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await sealBudgetArtifact('output/finite-budget/positive','positive');"
+      - uses: actions/upload-artifact@v4
+        id: upload
+        if: always()
+        with:
+          name: finite-budget-positive-${{ github.sha }}
+          path: output/finite-budget/positive/
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/download-artifact@v4
+        if: always() && steps.upload.outputs.artifact-id != ''
+        with:
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/budget-positive-readback
+          merge-multiple: true
+      - name: Same-ID final evidence readback
+        if: always() && steps.upload.outputs.artifact-id != ''
+        env:
+          READBACK: ${{ runner.temp }}/budget-positive-readback
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+        run: node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact(process.env.READBACK,'positive',process.env.ARTIFACT_ID);"

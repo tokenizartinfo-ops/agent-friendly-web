@@ -27,7 +27,7 @@ import {finitePublicProfileTemplate,finiteWranglerProfileTemplate} from '../../l
 const sha=x=>createHash('sha256').update(x).digest('hex'),J=JSON.stringify;
 const M='c'.repeat(40),TREE='d'.repeat(40),COMMAND=9001;
 export async function initialEntryHarness(mode='normal',{negativeProfile=false,ownerCleanup=false,cleanupCheckpoint=false,budgetCompileOnly=false,budgetQualification=false}={}){
- if(budgetCompileOnly)assert(process.env.AFW_BUDGET_INSPECTION==='compile-only'&&mode==='first-connection-publication'&&ownerCleanup&&cleanupCheckpoint&&!negativeProfile,'SYN compile-only inspection route');
+ if(budgetCompileOnly)assert((process.env.AFW_BUDGET_INSPECTION==='compile-only'||budgetQualification&&process.env.AFW_BUDGET_GROUP==='positive')&&mode==='first-connection-publication'&&ownerCleanup&&cleanupCheckpoint&&!negativeProfile,'SYN compile-only inspection route');
  if(budgetQualification)assert(mode==='first-connection-publication'&&ownerCleanup&&cleanupCheckpoint&&!negativeProfile&&!process.env.AFW_T3_MUTANT,'fixed positive budget composition');
  const budget=budgetQualification?createBudgetCompiler('QA'):null;
  const compileInputs=new Map();

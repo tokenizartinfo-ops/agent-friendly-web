@@ -210,7 +210,7 @@ function packageSelection(source,path,role){
  const pin=budgetNativeDescriptorProposal.packages.find(p=>p.path===path);
  assert(pin&&pin.roles.includes(role),'fixed package role');assert.equal(Buffer.byteLength(source),pin.bytes,'installed package byte pin');assert.equal(hash(source),pin.sha256,'installed package hash pin');
  const ast=sourceAST(source,path),calls=[],counts=Object.fromEntries(Object.keys(pin.selectors).map(k=>[k,0]));
- const sdk=path.includes('workers-oauth-provider'),agents=path.includes('handler-stateless-'),mcp=path.includes('/server/'),jose=path.includes('/jose/');
+ const sdk=path.includes('workers-oauth-provider'),mcp=path.includes('/server/'),jose=path.includes('/jose/');
  function visit(node){
   if(ts.isCallExpression(node)){
    const shape=callShape(node,ast);let group=null,meta=null;
@@ -477,7 +477,7 @@ export function transformBudgetPreparedSource(source,path,role){
   'lib/mcp-qa-finite-initial-custody-probe.mjs':1
  };
  assert.equal(scopeEdges,expectedScopes[path]??0,'fixed prepared scope hook count '+role+' '+path);
- const transformed=ts.createPrinter({newLine:ts.NewLineKind.LineFeed}).printFile(result.transformed[0]);result.dispose();
+ const transformed=ts.createPrinter({newLine:ts.NewLineKind.LineFeed}).printFile(result.transformed[0]);result.dispose();sourceAST(transformed,path);
  return {source:"import {budget as "+BUDGET_ID+"} from 'afw:budget-runtime';\n"+transformed,counts:{nativeCalls,identityEdges,bodyEdges,facadeEdges,scopeEdges,guardEdges},selectorCounts:selected?.counts??[]};
 }
 
@@ -608,7 +608,7 @@ export async function runBudgetConsumer(kind,root){
 export async function sealBudgetArtifact(root,kind){
  assert(['pure','checkpoint','positive'].includes(kind));
  await mkdir(root,{recursive:true});
- const files=(await inventoryBudgetFiles(root)).filter(f=>f.path!=='budget-artifact.json');
+ const files=(await inventoryFiles(root)).filter(f=>f.path!=='budget-artifact.json');
  const manifest={purpose:'afw.finite-budget-artifact.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,kind,files,operationalReadiness:false,completePackage:false,PCoff:false};
  await writeFile(join(root,'budget-artifact.json'),JSON.stringify(manifest,null,2));return manifest;
 }
@@ -617,7 +617,7 @@ export async function verifyBudgetArtifact(root,kind,artifactId){
  const bytes=await readFile(join(root,'budget-artifact.json')),m=JSON.parse(bytes);
  assert.equal(m.purpose,'afw.finite-budget-artifact.syn.v1');assert.equal(m.kind,kind);assert.equal(m.source,process.env.GITHUB_SHA);assert.equal(m.run,process.env.GITHUB_RUN_ID);assert.equal(m.attempt,process.env.GITHUB_RUN_ATTEMPT);
  for(const flag of ['operationalReadiness','completePackage','PCoff'])assert.equal(m[flag],false);
- const files=await inventoryBudgetFiles(root);assert.deepEqual(files.filter(f=>f.path!=='budget-artifact.json'),m.files,'exact same-ID downloaded path/bytes/SHA inventory');
+ const files=await inventoryFiles(root);assert.deepEqual(files.filter(f=>f.path!=='budget-artifact.json'),m.files,'exact same-ID downloaded path/bytes/SHA inventory');
  console.info('BUDGET SAME ID READBACK VERIFIED',JSON.stringify({source:m.source,run:m.run,attempt:m.attempt,kind,artifactId,files:files.length,manifestBytes:bytes.length,manifestSha256:hash(bytes),operationalReadiness:false,completePackage:false,PCoff:false}));
  return m;
 }

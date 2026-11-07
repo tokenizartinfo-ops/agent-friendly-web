@@ -1236,3 +1236,14 @@ Added the required positive prepare/verify/consumer interfaces and CLI. instrume
 P1 is one case that preserves its full result before assertions, then checks actual native cleanup receipt/state/alarm/restore/SDK reduction/final inventory, original 900s lineage and cold margin, role/epoch-local row/counter/byte/link consistency and complete attribution across the twelve phases. Existing R0 remains a historical red branch and will not run. The only two older R2 console callers now persist the full object once and print its bounded hash summary; their assertions and business work are unchanged.
 
 No CI, tests, syntax execution or TEMP activation at this checkpoint. Artifact seal/same-ID verification helpers are prepared; final three-job workflow remains to be activated after editorial static review. Readiness remains false. This is not nine-check qualification or runtime evidence.
+
+
+## Authorized final nine-check activation — 2026-11-07
+
+Editorial activation review: exactly eight Q groups and one positive P1 case; three dependent jobs (pure 2m, producer 15m, consumer 15m), original principal 900s lineage and two prepared native role graphs. No historical R0/16/56 suite or standalone inventory is scheduled. Pure syntax/lint/Q tests and exact prepared AST closure precede native I0. Producer compilation compares exact role hook/selector/raw-pin records against the same-run downloaded pure preflight. Compile-only gate explicitly accepts this positive preflight while retaining its old inspection route. Removed one unused compiler binding and validated emitted AST syntax before bundling.
+
+Artifact handling: pure, checkpoint and final evidence each have a seven-day artifact, immediate exact-ID download/readback, source/run/attempt and complete path/byte/SHA manifest. Consumer verifies the producer outer artifact and unchanged inner native checkpoint before cold loading. Native persisted files and actual scripts/metafiles remain in the original checkpoint format. Artifact manifests sit outside the inner checkpoint so original exact inventory checks remain intact. No local artifact extraction or DB access is introduced.
+
+Pre-activation remote readback: Source 8b111b89d4a831c6141a0f27886342761cb192e0/tree e5ef8dc4af08ad02a0700598edfefd2a9ec21431; main remains 0c9c475b3ebaa970fc11d628b40e50a90cceb727. Full recursive trees are non-truncated: BASE3179 leaves, Source3187. Exactly thirteen approved Source paths differ from global BASE29681ca; no protected Core/package/SDK/config path differs. Final activation adds only world helper, initial-entry preflight gate, TEMP and this append.
+
+Source is frozen from this activation until CI terminal. This entry records intended execution, not a pass. Any failed gate or native qualification will be preserved and reported without an automatic retry or scope widening. All readiness flags remain false; no real provider/runtime/auth or main/publication action is authorized or performed.
