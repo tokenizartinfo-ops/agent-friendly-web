@@ -88,7 +88,7 @@ export function extendFiniteOwnerCleanup(entry){
  async ownerCleanupSignal(){return this.cleanupAlarmSignal??{entered:0,settled:0,status:null,at:null,finishedAt:null};}
  async ownerCleanupFacts(){
   const dbNow=await this.env.RELEASE_DB.prepare("SELECT CAST(unixepoch('subsec')*1000 AS INTEGER) AS now").first();
-  return {dbNow:dbNow.now,wall:Date.now(),alarm:await this.ctx.storage.getAlarm(),rows:[...await this.ctx.storage.list()],signal:await this.ownerCleanupSignal(),failures:globalThis.__r2CleanupFailures??[],children:globalThis.__r2CleanupChildren??[]};
+  return {dbNow:dbNow.now,wall:Date.now(),alarm:await this.ctx.storage.getAlarm(),rows:[...await this.ctx.storage.list()],signal:await this.ownerCleanupSignal(),failures:globalThis.__r2CleanupFailures??[],children:globalThis.__r2CleanupChildren??[],finalInventoryProof:globalThis.__r2FinalInventoryProof??null};
  }
  `;
  const marker=' export class Initial extends FiniteClosure{';assert.equal(entry.split(marker).length,2);
@@ -184,6 +184,12 @@ export function instrumentCleanupConsumer(source){
   assert.equal(source.split(child).length,2);source=source.replace(child,child+"const childAt=Date.now(),childMono=performance.now();");
   const end="try{return await clock.wait(actual);}finally{originalLease.signal.removeEventListener('abort',stop);clock.close();}";
   assert.equal(source.split(end).length,2);source=source.replace(end,"try{return await clock.wait(actual);}finally{(globalThis.__r2CleanupChildren??=[]).push({startedAt:childAt,elapsedMs:performance.now()-childMono,aborted:clock.lease.signal.aborted});originalLease.signal.removeEventListener('abort',stop);clock.close();}");
+ }
+ const finalDigest="digest('afw.finite-owner-cleanup-final-facts.v1',";
+ if(source.includes(finalDigest)){
+  assert.equal(source.split(finalDigest).length,2);
+  source=source.replace(finalDigest,"observeFinalInventoryDigest('afw.finite-owner-cleanup-final-facts.v1',");
+  source+="\nfunction observeFinalInventoryDigest(domain,value){const committedHash=digest(domain,value),i=value.inventory;globalThis.__r2FinalInventoryProof={committedHash,inventoryHash:digest('SYN.final-inventory-proof.v1',i),enteredAt:i.enteredAt,observedAt:i.observedAt,workflow:i.workflow,container:i.container,schedulesAndTails:i.schedulesAndTails,operator:i.operator,baseline:i.baseline,sourceRevision:i.bootstrap.sourceRevision,sourceTree:i.bootstrap.sourceTree,requestTimes:i.requests.map(r=>({providerDate:r.providerDate,observedAt:r.observedAt}))};return committedHash;}\n";
  }
  return source;
 }
