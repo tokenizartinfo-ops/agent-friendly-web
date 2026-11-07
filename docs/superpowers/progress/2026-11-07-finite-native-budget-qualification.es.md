@@ -212,3 +212,16 @@ ae7: wiringpositive-onlyM/QA,roles/raw/packageASTgates,bodyreceivers ybottomnati
 RootinspeccionóJSONae7: mantiene exactamente TODAS laskeys/valorespropuestaprevia y130/635; sóloañade implementationSupplement(purposefixed raw-selector expansion/originalfixtureleaves; bodyReceiverPins/scopeInputPins/entryNativeMembers/entryAdditionalCounts), no coberturaobservada. Son concrecionesdelmecanismoaceptado,cuyaspins/cuentas reales debenvalidarse antesI0. No se acepta porsercódigoescrito.
 
 Pendientedeimplementador: final/cold/checkpointepochplumbing,CLIpositive yP1linaje/evidencia,losdosconsolecallersR2, revisiónestática/conteossuplementarios y UNAactivación9. No testsQniP1corridos, noPASSnuevo niRootrulingblocker.LosúnicosrunsdeestaunidadsiguenR0causalycompile-onlyyaaceptados.Faltaestaverificaciónfresca,taskreviewyTask2. Usuarioausentehasta21:30UTC; nocódigos/ventanas. Readiness/package/PCofffalse.
+
+### 2026-11-07 21:20:32 UTC — separación de guard events y logical por operación
+
+Una excepción de guard Source es un evento de scope. No se proyecta por defecto sobre todas las invocaciones nativas anteriores de ese Root/child/fase: algunas ya terminaron correctamente y pueden ser ajenas al ACK exterior que sigue pendiente. logical(opRef) conserva su significado de denegación asociada explícitamente a una operación mediante una referencia estable; logicalDenied cuenta esas filas nativas, no eventos de guard. Nunca inferir últimaoperación ni faseglobal.
+
+Añadir observación sólo de datos scopeLogical(rootRef,childRef|null,{phase,at,reason}) (nombre privado equivalente permitido), arrayDTO logicalScopeEvents acotado y totales separados para cantidad real de eventos de guard y cantidad de scopes Root/child/fase distintos denegados. Registrar el throw real una vez en el seam fijo de guard, preservando la misma llamada/error; no sondear/reinvocar guard, registrar mensaje/Error crudos ni duplicar por catchs superiores. Usar reason guard si el branch delSource no demuestra timeout/aborted.
+
+Sin asociación individual inequívoca, la fila nativa queda sin logical y el evento queda atribuido al scope real: eso conserva la observación honesta, no inventa un fallo nativo. Scope ausente/ajeno esincomplete. Una operación quefulfilló conservaeseestado aun con guard posterior. No hay autoridad de permiso ni cambios Source. Retención total acotada alcap16384 existente yoverflowexplícito; ningúncontador dedatosexime de guard.
+
+Extender Q4 existente con nativefulfilledsinmarcaindividual+scopeevent, guard countvsdistinctscope ylogical(opRef) separados; mantener exactamente8Q/9total, sinotroCI/caso. Root yChild reales,inmutables/segmentedbyepoch comoantes. Documentar los nombres finales reales enreporte. Esta definición aclara el contrato; no permite declararcoberturaSourceuniversal.
+
+
+Ruling: rechazar el fanout de un falloScope a todaslasfilas nativasprevias — inflaría uncontador que no distingue evento/callScope/ACK y podría marcarcomoafectadas hojasexitosasajenas — costo: unaobservaciónDTOscope-data adicional ychecksdentroQ4,envezde atribución arbitraria. No modelarSourceGuardcomoNuevoNativeRoot ni actividadnativa. Implementadornobloqueóotroplumbing; sigueTask1dentro13paths/con permisoCI9vigente, Sourcefrozen sóloalactivarlo. Usuarioausentehasta21:30UTC. No testPASSnuevo aún niotroalcance operativo.
