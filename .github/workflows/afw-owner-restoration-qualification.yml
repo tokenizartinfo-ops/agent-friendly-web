@@ -6,13 +6,25 @@ on:
 permissions:
   contents: read
 jobs:
-  g5_original_checkpoint_audit:
+  g5_denial_oracle_preflight:
     permissions: {contents: read, actions: read}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
       - uses: actions/setup-node@v4
-        with: {node-version: 22}
+        with: {node-version: 22, cache: npm}
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Syntax and scoped lint before pure oracle
+        run: |
+          node --check test/fixtures/finite-owner-cleanup.mjs
+          node --check test/fixtures/finite-owner-cleanup-persistence.mjs
+          node --check test/mcp-qa-finite-owner-cleanup-native.test.mjs
+          npx eslint test/fixtures/finite-owner-cleanup.mjs test/fixtures/finite-owner-cleanup-persistence.mjs test/mcp-qa-finite-owner-cleanup-native.test.mjs
       - name: Pin original g5 checkpoint artifact
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -89,23 +101,31 @@ jobs:
           const result={label:'original g5 checkpoint byte audit; no worker mounted',sourceArtifact:expectedEvidenceSource,sourceVerifier:process.env.GITHUB_SHA,artifactId:13576692464,runId:42377143830,archiveBytes:11008780,archiveDigest:'sha256:93b3942f8aabbc44491bae7a68e69fedf6c0f7e903c3e2ccd4a983e6339b20f0',manifestSha256:hash(manifestBytes),files:manifest.files,I0:c.plan.I0,C0:c.plan.C0,C1:c.plan.C1,M:{worker:m.name,scriptHash:hash(M),bytes:M.length,inputs:Object.keys(graph.M.inputs).length,optionsHash:hash(JSON.stringify(m)),bindingsHash:hash(JSON.stringify(m.bindings)),upstream:c.options.upstream,issuer:m.bindings.AFW_OAUTH_ISSUER,resource:m.bindings.AFW_OAUTH_RESOURCE,serviceMode:m.bindings.AFW_OAUTH_SERVICE_MODE,serviceExpiresAt:m.bindings.AFW_OAUTH_PILOT_EXPIRES_AT,flags,refresh:m.bindings.AFW_OAUTH_REFRESH_ENABLED,namespace:m.kvNamespaces.OAUTH_KV,d1Databases:m.d1Databases,durableObjects:m.durableObjects,compatibilityDate:m.compatibilityDate,compatibilityFlags:m.compatibilityFlags,keys:Object.keys(m)},sdkOnly:{scriptHash:c.sdkOnlyBuild.sha256,MAdmission:c.sdkOnlyBuild.MAdmission},readbackVerified:true,newI0:false,workerMounted:false,nativeEffectsReproduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
           await writeFile('g5-existing-audit.json',JSON.stringify(result,null,2));console.info('R2 original g5 audit',JSON.stringify({...result,files:result.files.length}));
           NODE
-      - name: Inventory audit receipt
+      - name: Pure denial oracle anchored to original checkpoint
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          set -o pipefail
+          node test/fixtures/finite-owner-cleanup-persistence.mjs oracle-preflight "$RUNNER_TEMP/g5-original-checkpoint/principal" e5f96c1802e7ee2d5d242f9d4887df6bfeda33fb | tee g5-oracle.log
+      - name: Inventory pure oracle receipt
         if: always()
         run: |
           node --input-type=module <<'NODE'
           import {readFile,readdir,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';
-          const files=[];for(const path of (await readdir('.')).filter(p=>/^g5-existing-audit\.(json|log)$/.test(p)).sort()){const b=await readFile(path);files.push({path,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});}await writeFile('g5-audit-manifest.json',JSON.stringify({source:process.env.GITHUB_SHA,files},null,2));
+          const names=['g5-existing-audit.json','g5-existing-audit.log','g5-oracle-result.json','g5-oracle.log'],actual=await readdir('.'),files=[];for(const path of names.sort())if(actual.includes(path)){const b=await readFile(path);files.push({path,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});}await writeFile('g5-oracle-manifest.json',JSON.stringify({source:process.env.GITHUB_SHA,files},null,2));
           NODE
-      - name: Preserve original g5 audit receipt
+      - name: Preserve pure oracle result
         if: always()
         id: audit
         uses: actions/upload-artifact@v4
         with:
-          name: r2-g5-original-audit-${{ github.sha }}
+          name: r2-g5-denial-oracle-${{ github.sha }}
           path: |
             g5-existing-audit.json
             g5-existing-audit.log
-            g5-audit-manifest.json
+            g5-oracle-result.json
+            g5-oracle.log
+            g5-oracle-manifest.json
           if-no-files-found: error
           retention-days: 7
       - name: Download exact artifact audit_receipt attempt 1
@@ -150,12 +170,11 @@ jobs:
           ARTIFACT_ID: ${{ steps.audit.outputs.artifact-id }}
           DOWNLOAD_OK: ${{ steps.audit_receipt_1.outcome == 'success' || steps.audit_receipt_2.outcome == 'success' || steps.audit_receipt_3.outcome == 'success' }}
         run: test -n "$ARTIFACT_ID" && test "$DOWNLOAD_OK" = true
-      - name: Verify complete audit receipt readback
+      - name: Verify pure oracle receipt readback
         if: always()
         run: |
           node --input-type=module <<'NODE'
           import {readFile,readdir} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
-          const root=process.env.RUNNER_TEMP+'/audit-receipt',names=['g5-audit-manifest.json','g5-existing-audit.json','g5-existing-audit.log'];assert.deepEqual((await readdir(root)).sort(),names);
-          const m=JSON.parse(await readFile(root+'/g5-audit-manifest.json','utf8'));assert.equal(m.source,process.env.GITHUB_SHA);assert.deepEqual(m.files.map(f=>f.path),names.slice(1));for(const f of m.files){const b=await readFile(root+'/'+f.path);assert.equal(b.length,f.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),f.sha256);}
-          const a=JSON.parse(await readFile(root+'/g5-existing-audit.json','utf8'));assert.equal(a.sourceVerifier,process.env.GITHUB_SHA);assert.equal(a.sourceArtifact,'e5f96c1802e7ee2d5d242f9d4887df6bfeda33fb');assert.equal(a.artifactId,13576692464);assert.equal(a.readbackVerified,true);assert.equal(a.files.length,47);assert.equal(a.newI0,false);assert.equal(a.workerMounted,false);console.info('R2 original g5 audit receipt verified',JSON.stringify({sourceArtifact:a.sourceArtifact,sourceVerifier:a.sourceVerifier,files:a.files.length,M:a.M}));
+          const root=process.env.RUNNER_TEMP+'/audit-receipt',names=['g5-existing-audit.json','g5-existing-audit.log','g5-oracle-result.json','g5-oracle.log'].sort();assert.deepEqual((await readdir(root)).sort(),[...names,'g5-oracle-manifest.json'].sort());const m=JSON.parse(await readFile(root+'/g5-oracle-manifest.json','utf8'));assert.equal(m.source,process.env.GITHUB_SHA);assert.deepEqual(m.files.map(f=>f.path),names);for(const f of m.files){const b=await readFile(root+'/'+f.path);assert.equal(b.length,f.bytes);assert.equal(createHash('sha256').update(b).digest('hex'),f.sha256);}
+          const a=JSON.parse(await readFile(root+'/g5-oracle-result.json','utf8')),b=JSON.parse(await readFile(root+'/g5-existing-audit.json','utf8'));assert.equal(a.sourceVerifier,process.env.GITHUB_SHA);assert.equal(a.sourceArtifact,'e5f96c1802e7ee2d5d242f9d4887df6bfeda33fb');assert.equal(a.artifactId,13576692464);assert.equal(a.manifestSha256,b.manifestSha256);assert.equal(a.profile.optionsHash,b.M.optionsHash);assert.equal(a.cases.length,24);assert.equal(a.assertions,48);assert(a.cases.every(c=>c.actual===c.expected));assert.equal(a.originalFailedHttp,'UNKNOWN');assert.equal(a.workerMounted,false);assert.equal(a.newI0,false);assert.equal(a.SDKExecuted,false);assert.equal(a.newBusinessClosureProved,false);console.info('R2 pure oracle readback verified',JSON.stringify({sourceArtifact:a.sourceArtifact,sourceVerifier:a.sourceVerifier,cases:a.cases.length,assertions:a.assertions,profile:a.profile,observedOriginalHttp:a.originalFailedHttp,workerMounted:false}));
           NODE
