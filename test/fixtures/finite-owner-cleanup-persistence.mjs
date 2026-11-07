@@ -30,7 +30,11 @@ export async function verifyCheckpoint(root,{source=process.env.GITHUB_SHA}={}){
  assert.equal(data.plan.C0,data.plan.I0+900000);assert.equal(data.plan.C1,data.plan.C0+180000);if(data.checkpointKind==='partial-cleanup'){assert.equal(data.facts.alarm,data.plan.C0+60000);assert.equal(JSON.parse(data.facts.rows.find(([k])=>k===P+'state')[1]).deliveries,1);}else assert.equal(data.facts.alarm,data.plan.C0);
  if(data.checkpointKind!=='partial-cleanup')assert.equal(data.facts.signal.entered,0);assert.equal(data.state.nowOffset,0);assert.equal(data.modeledProviderInput.label,'MODELED PROVIDER INPUT');
  const qa=data.options.workers.find(w=>w.name==='qa-first-connection'),m=data.options.workers.find(w=>w.name==='canary-first-connection');
- if(data.variant!=='grant-before-link'){
+ if(data.unexchanged){
+  const ref=JSON.parse(data.facts.rows.find(([k])=>k.endsWith(':reference'))[1]),actual=data.sdkUnexchanged;assert(actual);
+  assert.equal(actual.referenceHash,ref.recordHash);assert.equal(actual.selectorHash,sha(ref.sdkGrantId));assert.equal(actual.referenceExpiresAt,null);assert.equal(ref.expiresAt,null);
+  assert.equal(data.sdkAfterExchange,null);assert.equal(data.lateToken,null);assert.equal(actual.codeExchanged,false);assert(actual.nativeKVExpiration*1000>data.plan.C0+120000);assert(actual.observedAt<data.plan.C0);
+ }else if(data.variant!=='grant-before-link'){
   const ref=JSON.parse(data.facts.rows.find(([k])=>k.endsWith(':reference'))[1]),actual=data.sdkAfterExchange;assert(actual);
   assert.equal(actual.referenceHash,ref.recordHash);assert.equal(actual.selectorHash,sha(ref.sdkGrantId));assert.equal(actual.correlationHash,ref.correlationHash);
   assert.equal(actual.referenceExpiresAt,null);assert.equal(ref.expiresAt,null);assert(Number.isSafeInteger(actual.expiresAt));assert(Number.isSafeInteger(actual.tokenExpiresAt));
@@ -62,7 +66,7 @@ function portableOptions(options,persist){
   return value;
  }));
 }
-export async function produceCheckpoint(root,{variant='principal',deferWait=false,sdkOnly=false}={}){
+export async function produceCheckpoint(root,{variant='principal',deferWait=false,sdkOnly=false,unexchanged=false}={}){
  assert(['principal','grant-before-link','notice-before-link'].includes(variant));
  const started=Number(process.env.AFW_JOB_STARTED_MS);assert(Number.isSafeInteger(started));
  assert(Date.now()-started<=90000,'do not open I0 without original 13min plus export margin');
@@ -79,13 +83,27 @@ export async function produceCheckpoint(root,{variant='principal',deferWait=fals
    const graphRoot='output/t2-native-graphs/'+f.firstConnectionBuild.QA.sha256;
    await writeFile(graphRoot+'/sdk-only-index.mjs',extra.script);await writeFile(graphRoot+'/sdk-only-metafile.json',json(extra.metafile));
   }
+  if(unexchanged){
+   assert.equal(sdkOnly,false);assert.equal(variant,'principal');
+   const initial=await plain(f.stub.ownerCleanupFacts()),original=JSON.parse(initial.rows.find(([k])=>k===P+'plan')[1]);
+   assert(Date.now()<original.C0-300000,'unexchanged producer waits outside a live Root');f.cleanupOriginalIdentityToken=await f.enrollmentToken(f.source);
+   await waitUntil(original.C0-300000);
+  }
   const prepared=await prepareOwnerReference(f);
   if(variant==='grant-before-link')await f.stub.ownerCleanupFault(variant);
   const response=await prepared.issue();
   if(variant==='grant-before-link'){
    assert.notEqual(response.status,302);await response.body?.cancel();
    const rows=await plain(f.stub.snapshot()),native=await plain(f.stub.ownerCleanupNativeRows());assert(native.grant);assert(!rows.some(([k])=>k.startsWith('connection-preparation:')&&k.endsWith(':grant')));
-  }else{assert.equal(response.status,302);await assertActualComplete(f,{reference:true});await downstreamOwnerReference(f,response,prepared,{cleanupPartial:variant==='notice-before-link'});}
+  }else{
+   assert.equal(response.status,302);const completed=await assertActualComplete(f,{reference:true});
+   if(unexchanged){
+    await response.body?.cancel();const ref=completed.reference,native=await plain(f.stub.ownerCleanupNativeRows()),key='grant:'+native.grant.user_id+':'+ref.sdkGrantId;
+    const raw=await f.kv.get(key),value=JSON.parse(raw),listed=await f.kv.list({prefix:key,limit:1});
+    assert.equal(value.id,ref.sdkGrantId);assert.equal(value.expiresAt,undefined);assert.equal(listed.keys.length,1);assert.equal(listed.keys[0].name,key);assert(Number.isSafeInteger(listed.keys[0].expiration));
+    f.sdkUnexchanged={label:'genuine original SDK authorization code, never exchanged; unchanged native TTL600',codeExchanged:false,referenceHash:ref.recordHash,selectorHash:sha(ref.sdkGrantId),referenceExpiresAt:ref.expiresAt,createdAt:value.createdAt,nativeKVExpiration:listed.keys[0].expiration,grantObjectHash:sha(raw),observedAt:Date.now()};
+   }else await downstreamOwnerReference(f,response,prepared,{cleanupPartial:variant==='notice-before-link'});
+  }
   const partialBoundary=variant==='principal'?null:await plain(f.stub.ownerCleanupFaultFacts());if(partialBoundary)assert.equal(partialBoundary.sqlWrites,1);
   await f.stub.ownerCleanupReset();
   await recordOwnerReference(f,'r2-produced-'+variant);
@@ -93,7 +111,7 @@ export async function produceCheckpoint(root,{variant='principal',deferWait=fals
   const facts=await plain(f.stub.ownerCleanupFacts()),plan=JSON.parse(facts.rows.find(([k])=>k===P+'plan')[1]);
   assert.equal(facts.signal.entered,0);assert.equal(facts.alarm,plan.C0);assert(facts.dbNow<plan.C0);assert(Math.abs(facts.dbNow-facts.wall)<=1000);
   assert(plan.C0-120000<started+870000,'original checkpoint wait must fit job budget');
-  if(variant!=='grant-before-link')assert(facts.rows.some(([k])=>k.endsWith(':reference')));assert.equal(facts.rows.some(([k])=>k.startsWith('connection-preparation:')&&k.endsWith(':notice')),variant==='principal');
+  if(variant!=='grant-before-link')assert(facts.rows.some(([k])=>k.endsWith(':reference')));assert.equal(facts.rows.some(([k])=>k.startsWith('connection-preparation:')&&k.endsWith(':notice')),variant==='principal'&&!unexchanged);
   // MODELED PROVIDER INPUT, not evidence of actual Cloudflare Workflow termination.
   f.inventoryMode='terminal';
   const input=f.cleanupCheckpointInputs();input.state.inventoryMode='terminal';
@@ -101,8 +119,8 @@ export async function produceCheckpoint(root,{variant='principal',deferWait=fals
   input.state.cleanupRestorePlan=plan;
   const clientKey='client:'+f.source.clientId,client=await f.kv.get(clientKey);assert.equal(typeof client,'string');assert.equal(JSON.parse(client).clientId,f.source.clientId);
   const kvProof={purpose:'afw.same-oauth-kv-client.syn.v1',key:clientKey,keyHash:sha(clientKey),valueHash:sha(client),expires:false,namespaceId:'first-connection-oauth'};
-  const data={purpose:'afw.owner-cleanup-persisted-facts.syn.v1',plan,facts,kvProof,variant,partialBoundary,lateToken:f.cleanupToken??null,sdkBeforeExchange:f.sdkBeforeExchange??null,sdkAfterExchange:f.sdkAfterExchange??null,sdkOnlyBuild:f.sdkOnlyBuild??null,options:portableOptions(input.currentMountedOptions,input.persist),factory:input.factory,state:input.state,build:f.firstConnectionBuild,modeledProviderInput:{label:'MODELED PROVIDER INPUT',bootstrapStatus:'complete',recordedAt:Date.now(),realWorkflowTerminationProved:false}};
-  if(sdkOnly)assert(Date.now()<plan.C0-120000,'g5 genuine notice/link must finish before original export');
+  const data={purpose:'afw.owner-cleanup-persisted-facts.syn.v1',plan,facts,kvProof,variant,unexchanged,sdkUnexchanged:f.sdkUnexchanged??null,partialBoundary,lateToken:f.cleanupToken??null,sdkBeforeExchange:f.sdkBeforeExchange??null,sdkAfterExchange:f.sdkAfterExchange??null,sdkOnlyBuild:f.sdkOnlyBuild??null,options:portableOptions(input.currentMountedOptions,input.persist),factory:input.factory,state:input.state,build:f.firstConnectionBuild,modeledProviderInput:{label:'MODELED PROVIDER INPUT',bootstrapStatus:'complete',recordedAt:Date.now(),realWorkflowTerminationProved:false}};
+  if(sdkOnly||unexchanged)assert(Date.now()<plan.C0-120000,'late genuine producer must finish before original export');
   await f.mf.dispose();f.disposedForCheckpoint=true;
   await mkdir(root,{recursive:true});await cp(input.persist,join(root,'state'),{recursive:true,errorOnExist:true,force:false});
   await cp('output/t2-native-graphs/'+f.firstConnectionBuild.QA.sha256,join(root,'graphs'),{recursive:true,errorOnExist:true,force:false});
@@ -153,19 +171,19 @@ export async function observeOriginalAlarm(f,{settled=1}={}){
 export async function writeCleanupEvidence(name,value){await mkdir('output/owner-cleanup',{recursive:true});await writeFile('output/owner-cleanup/'+name+'.json',json(value));}
 
 export async function produceGroup(group,root){
- assert(['g0','g1','g2','g3','g4','g5'].includes(group));await mkdir(root,{recursive:true});
+ assert(['g0','g1','g2','g3','g4','g5','g6','g7'].includes(group));await mkdir(root,{recursive:true});
  const variants=group==='g1'?['grant-before-link','notice-before-link']:['principal'],lineages=[];
- for(const variant of variants){const manifest=await produceCheckpoint(join(root,variant),{variant,deferWait:true,sdkOnly:group==='g5'});lineages.push({variant,path:variant,I0:manifest.I0,C0:manifest.C0,C1:manifest.C1,files:manifest.files.length});}
+ for(const variant of variants){const manifest=await produceCheckpoint(join(root,variant),{variant,deferWait:true,sdkOnly:group==='g5',unexchanged:group==='g6'});lineages.push({variant,path:variant,I0:manifest.I0,C0:manifest.C0,C1:manifest.C1,files:manifest.files.length});}
  const data={purpose:'afw.owner-cleanup-group.syn.v1',group,source:process.env.GITHUB_SHA,lineages,graphs:lineages.length*2+(group==='g5'?1:0),maxConcurrentNative:group==='g0'?1:2,operationalReadiness:false,PCoff:false};
  await writeFile(join(root,'group.json'),json(data));await waitUntil(Math.min(...lineages.map(l=>l.C0))-120000);
  assert(Date.now()<Number(process.env.AFW_JOB_STARTED_MS)+885000,'group export margin exhausted');console.info('R2 group checkpoint',json(data));
 }
 export async function verifyGroup(root){
  const data=JSON.parse(await readFile(join(root,'group.json'),'utf8'));assert.equal(data.source,process.env.GITHUB_SHA);
- assert(['g0','g1','g2','g3','g4','g5'].includes(data.group));
+ assert(['g0','g1','g2','g3','g4','g5','g6','g7'].includes(data.group));
  assert.deepEqual(data.lineages.map(l=>l.path),data.group==='g1'?['grant-before-link','notice-before-link']:['principal']);
  assert.equal(data.graphs,data.lineages.length*2+(data.group==='g5'?1:0));
- for(const l of data.lineages){const {manifest,data:checkpoint}=await verifyCheckpoint(join(root,l.path));assert.equal(!!checkpoint.sdkOnlyBuild,data.group==='g5');assert.equal(manifest.I0,l.I0);assert.equal(manifest.C0,l.C0);assert.equal(manifest.C1,l.C1);}
+ for(const l of data.lineages){const {manifest,data:checkpoint}=await verifyCheckpoint(join(root,l.path));assert.equal(!!checkpoint.sdkOnlyBuild,data.group==='g5');assert.equal(!!checkpoint.unexchanged,data.group==='g6');assert.equal(manifest.I0,l.I0);assert.equal(manifest.C0,l.C0);assert.equal(manifest.C1,l.C1);}
  return data;
 }
 export async function persistPartialCleanup(f,root){
