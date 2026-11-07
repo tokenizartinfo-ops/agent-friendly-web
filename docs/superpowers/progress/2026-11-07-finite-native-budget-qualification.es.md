@@ -2,9 +2,9 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — 2026-11-07: corregir colisión local; último G5 de hoy
+## CURRENT — CIERRE 2026-11-07: Source guardado, ninguna ejecución propia pendiente
 
-Task1 sin aceptación. G5run42420218406 terminóFAIL:8Q/preflight/producerPASS, P1 falla overflow=true enproducer|0|QA después de pasar las aserciones de cierre nativo previas. Source868f158e47f567505559d037b891d9669ff43874, TEMP retirado. Root autoriza UN job cloud de lectura del artefacto existente para obtener agregados, no otra calificación ni cambios de cap. Cierre22:55UTC/owner23:00UTC. Todos los readiness false.
+Trabajo cerrado por hoy antes del apagado pedido por Gabriel. Source1455ba78e021f41b82700035a3819898b6a255d7/tree521f2c67291569073f3a2b0a8c13a3b6b1f1e0a7; reporte03aa96c5ba3b4b4298e1a6016015d5eb86faf768. WriterSTOP, TEMP ausente, ejecuciones42420218406 y42422039237 terminales. Task1 sigueNEEDS_CONTEXT:8Q/preflight/producerPASS, P1FAILporoverflow; agregados cloud preservados. Próximo paso: separar volumen y pérdida de atribución antes de modificar el diagnóstico. Sin nueva prueba/cap/Task2/revisión autorizados por este cierre. Todos los readiness false.
 
 ## Estado inicial del plan preservado — 7Nov17:59UTC
 
@@ -347,3 +347,25 @@ Ruling: aprobar UN job de INSPECCIÓN CLOUD READONLY del artefacto actual, disti
 Seguridad del lector: Authorization sólo a api.github.com en rutas exactas de metadata/ZIP; bloquear redirect automático, validarHTTPS y host oficial de almacenamiento de artefactos, fetch del redirect SIN Authorization, rechazar otro host/redirect no previsto. No logURLfirmada/token/rawHTTPError/body; errores saneados por código fijo. Output≤64KB, sólo números/booleans/enums conocidos: coverage, totalsnúmericos, retainedRows, missingRows=started−retained, scopes y gruposphase/resource/op/status. Root/child derivados de filas se etiquetan como retenidos, no inventar cardinalidad total. eventCalls=null/not_exposed. Nada de filas, respuestas,KV/payloads/rawError ni strings desconocidos. Publicar agregado saneado al joblog y artefacto7d aggregate+manifest con SAME-IDreadback; conservar intacto el original.
 
 Mismo implementador recibió aprobación completa y procede mientras Root registra este ruling. Congelar Source al activar; al terminar guardar outcome/retirarTEMP/protegidos/main/STOP antes22:55UTC. Si falla inspección, preservar UNA vez sin retry/humano. No arreglo del colector/cap ni G6hoy. RevisiónTask1/Task2 pendientes; PCoffreal/Max siguen fuera. Owner apaga23:00UTC, no ejecución propia pendiente al cerrar.
+
+### Cierre del 7 de noviembre de 2026 — guardado antes de22:55UTC
+
+Inspección de datos42422039237/attempt1,Source189406aaf6a30a87392dedd310ef868390aceccd,job128552339285 SUCCESS terminal22:44:55UTC. No fueG6 ni ejecutó negocio/nativo/ensayo. Input13593821080 verificado; outputsummary21325B/SHA4c3e541cc788c82da477b3547bcf5adf5ebfd43f2032c48abb739571e78644a3; artifact13593613366 ZIP2911B/SHA4bee46446cb5825fda3b17a1584f3aabd666599afddcb8945e9e54797f72751d,7d/hasta14Nov22:44:54UTC. Same-ID2filesPASS,manifest241B/SHA58697ebd804335501940b5430307804acb0315122cde7fa0f7f1466dab41cd89. Root leyó el joblog primario y comprobó que el JSON saneado completo es idéntico al conservado en el reporte Source final. No descarga grande local.
+
+Los cuatro epochsQA tienenoverflow=true y observacionesinvalid/unattributed:2074,251067,296039,19801. Sus nativeStarted son5553/6628/6359/5951 y filas retenidas5537/5461/5464/5457. Los epochsM tienenoverflowfalse/invalid0/unattributed0. Son datos del sensor, no pruebas de que cada invocación se atribuya correctamente ni mediciones de tráfico físico del proveedor. eventCalls sigue null/noexpuesto; la causa temporal exacta no está identificada.
+
+Inferencia Root explícita desde contadores y código fijado: un mínimo de llamadas AL COLECTOR es nativeStarted + nativeSettled + (nativeStarted−nativeBytesUnavailable) + cancelStarted + cancelSettled + logicalDenied + scopeGuardEvents + raíces/hijos distintos presentes en filas retenidas. Cada término exige al menos una llamada separada de begin/settle/primerbytes/cancel/logical/scopeLogical/root/child. Excluye registros repetidos, incomplete y otras llamadas; NO es contador exacto de eventos, nativeI/O o paquetes físicos. El mínimo ya supera16384 en los cuatroQA:
+| Epoch QA | Mínimo derivado de llamadas al colector | Cap | Invalid/unattributed |
+| --- | ---: | ---: | ---: |
+| producer|0|QA | 16434 | 16384 | 2074 |
+| producer|1|QA | 19871 | 16384 | 251067 |
+| producer|2|QA | 19038 | 16384 | 296039 |
+| consumer|0|QA | 17869 | 16384 | 19801 |
+
+Que el mínimo exceda elcap demuestra una incompatibilidad del límite actual con las observaciones aceptadas de este recorrido. No determina si lasinvalid/unattributed precedían aloverflow o son, total/parcialmente, consecuencia de perder nuevos handles después delcap. No subircap ni suprimir filas por esta inferencia. Mañana deberá fijarse un cambio de diagnóstico acotado: cronología first-overflow/first-invalid, conteos anteriores/posteriores y motivosenum fijos de incomplete, conservando autoridad/Source/clocks. Después decidir con esos datos la retención/calificación; no hay implementación o run nuevo autorizado por este cierre.
+
+Root verificó final1455ba78e021f41b82700035a3819898b6a255d7/tree521f2c67291569073f3a2b0a8c13a3b6b1f1e0a7, único parent189406; sóloTEMPretirado+29líneas reporte03aa96c5ba3b4b4298e1a6016015d5eb86faf768. Árbol recursivo no truncado:3186hojas; comparación propia RootcontraBASE296/3179hojas: exactamente12pathspermitidos,11blobs de implementación exactos aG5bbe7, todo protegido SHA/mode/type intacto, TEMPausente. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 confirmado otra vez. Los runsG5 e inspección terminales; Sourcewritercompleted/STOP y ningún hijo activo. Bandeja privada de coordinación sin cambios desde20:37:46UTC/48comentarios; ninguna solicitud nueva paraAFW ni mensaje duplicado enviado.
+
+Estado final honesto:8Q/syntax/lint/preflightM+QA/producerPASS; el cicloSource/SYN comprobó las aserciones nativas previas al fallo de diagnóstico. P1FAIL yTask1NEEDS_CONTEXT, sin aceptación/revisiónfresca/Task2/revisiónconjunta. El plan previo56PASS conserva su cierre separado. Más adelante siguen recorrido completo/traspaso, procedencia/custodia/ejecutor cloud actuales y recepción útil/ACK/retirada para UNA ocurrencia real coordinadaPCoff; Max tiene otro alcance. operationalReadiness=false;completePackage=false;PCoff=false.
+
+Se guarda resumen de cierre en progress/2026-11-07-finite-native-budget-qualification-night-closure.es.md. Sin trabajo propio en vuelo ni paso humano esta noche. No cambios de runtime/CFAPI/auth/permisos/tokens/cron/consumidores/main/PR/publicación. Cierre por instrucción del owner; retomar mañana desde CURRENT, sin repetir RED/G1–G5/inventarios por inercia.
