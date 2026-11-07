@@ -3,11 +3,11 @@ import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
-import {monitoringCleanupScenario,O} from './fixtures/finite-owner-cleanup.mjs';
+import {monitoringCleanupScenario,readCleanupM,O} from './fixtures/finite-owner-cleanup.mjs';
 import {plain} from './fixtures/finite-first-connection-publication.mjs';
 import {recoverCheckpoint,observeOriginalAlarm,writeCleanupEvidence,principalName,waitUntil,persistPartialCleanup} from './fixtures/finite-owner-cleanup-persistence.mjs';
 const P='afw.finite-initial-cleanup.v1:',group=process.env.AFW_R2_GROUP??'g0',root=process.env.AFW_R2_CHECKPOINT??'output/owner-cleanup/checkpoint-'+group,fixtures=[];
-after(async()=>{for(const f of fixtures)if(!f.disposed){await f.stub.ownerCleanupControl().catch(()=>{});await f.mf.dispose();f.disposed=true;}});
+after(async()=>{for(const f of fixtures)if(!f.disposed){if(f.sdkOnly)await f.sdkOnly.fetch(O+'/_fixture/sdk-only-release').catch(()=>{});await f.stub.ownerCleanupControl().catch(()=>{});await f.mf.dispose();f.disposed=true;}});
 const pause=ms=>new Promise(r=>setTimeout(r,ms)),hash=v=>createHash('sha256').update(v).digest('hex');
 const row=(facts,key)=>{const v=facts.rows.find(([k])=>k===P+key);return v?JSON.parse(v[1]):null;};
 const cleanupRows=facts=>facts.rows.filter(([k])=>k.startsWith('afw.finite-owner-cleanup.v1:'));
@@ -38,9 +38,9 @@ if(group==='g0'){
  test('R2 originalSDKexpiry still permits exact historical reduction',async()=>{
   assert(principal,'shares the single untouched original occurrence');
   const {f,observed}=principal,ref=JSON.parse(f.checkpoint.facts.rows.find(([k])=>k.endsWith(':reference'))[1]);
-  assert.notEqual(ref.expiresAt,null);assert(ref.expiresAt*1000<=f.plan.C0,'actual SDK Reference expiry precedes original C0');
+  const actual=f.checkpoint.sdkAfterExchange;assert(actual);assert.equal(ref.expiresAt,null,'historical pre-302 field remains absent');assert.equal(actual.referenceHash,ref.recordHash);assert.equal(actual.selectorHash,hash(ref.sdkGrantId));assert.equal(actual.correlationHash,ref.correlationHash);assert(Number.isSafeInteger(actual.expiresAt)&&actual.expiresAt*1000<=f.plan.C0);assert(actual.observedAt<f.plan.C0);
   assert.equal(observed.receipt.sdkReductionReturned,true);assert(observed.receipt.sdkSendHash);assert(observed.receipt.sdkObservedHash);
-  await writeCleanupEvidence('sdk-expiry-same-occurrence',{label:'same principal occurrence; no second revoke',referenceHash:ref.recordHash,selectorHash:hash(ref.sdkGrantId),expiresAt:ref.expiresAt,C0:f.plan.C0,sdkObservedHash:observed.receipt.sdkObservedHash,operationalReadiness:false});
+  await writeCleanupEvidence('sdk-expiry-same-occurrence',{label:'same principal occurrence; no second revoke',referenceHash:ref.recordHash,selectorHash:hash(ref.sdkGrantId),referenceExpiresAt:ref.expiresAt,actualPostExchange:actual,C0:f.plan.C0,sdkObservedHash:observed.receipt.sdkObservedHash,operationalReadiness:false});
  });
 }
 let pair;
@@ -106,17 +106,23 @@ if(group==='g4'){
 }
 if(group==='g5'){
  test('R2 late foreign-isolate KV cannot reopen business access',async()=>{
-  const f=await recover('g5-late'),token=f.checkpoint.lateToken;assert.equal(typeof token?.refresh_token,'string','actual prior SDK refresh selector required');
-  assert.equal((await f.negative.fetch(O+'/_fixture/r2-late-arm')).status,204);
-  await waitUntil(f.plan.C0-2000);const startedAt=Date.now();assert(startedAt<f.plan.C0);
-  const actual=f.negative.fetch(O+'/oauth/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'refresh_token',client_id:f.checkpoint.state.source.clientId,refresh_token:token.refresh_token,resource:O+'/mcp'})}).then(async response=>({status:response.status,bodyHash:hash(await response.text()),finishedAt:Date.now()}));
+  const f=await recover('g5-late'),token=f.checkpoint.lateToken,expiry=f.checkpoint.sdkAfterExchange;assert.equal(typeof token?.access_token,'string');assert.equal(token.refresh_token,undefined);assert(f.sdkOnly&&expiry);
+  const ref=JSON.parse(f.checkpoint.facts.rows.find(([k])=>k.endsWith(':reference'))[1]),m=f.checkpoint.options.workers.find(w=>w.name==='canary-first-connection');
+  assert.equal(hash(m.script),f.checkpoint.build.M.sha256);assert.equal(m.bindings.AFW_DELEGATED_OAUTH_ENABLED,'true');assert.equal(m.bindings.AFW_OAUTH_REFRESH_ENABLED,'false');
+  assert(expiry.tokenExpiresAt*1000-Date.now()>=65000,'genuine token alive after cold load');
+  const positive=await readCleanupM(f.m,token.access_token,f.checkpoint.state.source.project.projectId);assert(positive.at<f.plan.C0);assert(positive.requests.some(r=>r.status===200));
+  await waitUntil(f.plan.C0-75000);assert(expiry.tokenExpiresAt*1000-Date.now()>=65000,'do not issue with insufficient original token margin');
+  const startedAt=Date.now(),request=f.sdkOnly.fetch(O+'/_fixture/sdk-only-exchange',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({subjectToken:token.access_token,sdkGrantId:ref.sdkGrantId,clientId:f.checkpoint.state.source.clientId,correlationHash:ref.correlationHash,referenceHash:ref.recordHash,C0:f.plan.C0})});
+  const response=await request,deniedHeadersAt=Date.now();assert.equal(response.status,403,'logical denial at child deadline');const pendingBody=response.text();
+  const before=await (await f.sdkOnly.fetch(O+'/_fixture/sdk-only-signal')).json();
+  assert(before.reached&&before.retained&&!before.settled,'actual SDK write must be held, not rejected early');assert.equal(before.logicalReason,'deadline');assert(before.reachedAt<before.childDeadline);assert(before.childDeadline-before.rootStartedAt<=5000);assert(before.rootDeadline-before.rootStartedAt<=30000);assert(before.logicalDeniedAt<f.plan.C0);assert.equal(before.selectorHash,expiry.selectorHash);assert.equal(before.tokenHash,expiry.tokenHash);
+  const blocked=await f.sdkOnly.fetch(O+'/_fixture/sdk-only-exchange',{method:'POST'});assert.equal(blocked.status,409,'same retained invocation excludes replacement');await blocked.body?.cancel();
   const facts=await observeOriginalAlarm(f),r=await capture(f,'late-isolate-business-closure',facts);assertClosed(f,facts,r);
-  const before=await (await f.negative.fetch(O+'/_fixture/r2-late-signal')).json();
-  await f.negative.fetch(O+'/_fixture/r2-late-release');const outcome=await actual,after=await (await f.negative.fetch(O+'/_fixture/r2-late-signal')).json();
-  assert.notEqual(outcome.status,200,'actual token response is denied after expiry or fence');
-  const mcp=await f.mf.dispatchFetch(O+'/mcp',{method:'POST',headers:{Authorization:'Bearer '+token.access_token,'Content-Type':'application/json',Accept:'application/json, text/event-stream'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-03-26',capabilities:{},clientInfo:{name:'SYN-late-denial',version:'1'}}})});
-  const mcpBody=await mcp.text();assert([401,403,503].includes(mcp.status));assert(!mcpBody.includes(f.checkpoint.state.source.project.projectId));
-  await writeCleanupEvidence('late-kv-actual-outcome',{label:'actual other-isolate request; no successful late write fabricated',startedAt,C0:f.plan.C0,before,after,outcome,mcpStatus:mcp.status,mcpBodyHash:hash(mcpBody),globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false,operationalReadiness:false});
+  await f.sdkOnly.fetch(O+'/_fixture/sdk-only-release');const deniedBody=await pendingBody;
+  const after=await (await f.sdkOnly.fetch(O+'/_fixture/sdk-only-signal')).json();assert(after.reached&&after.released&&after.settled&&!after.retained);assert(after.nativeReturned||after.nativeRejected);assert(after.nativeAttemptAt>=f.plan.C0);assert(!deniedBody.includes('access_token'));
+  const mcp=await f.m.fetch(O+'/mcp',{method:'POST',headers:{Authorization:'Bearer '+token.access_token,Host:new URL(O).host,'Content-Type':'application/json',Accept:'application/json, text/event-stream'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-03-26',capabilities:{},clientInfo:{name:'SYN-late-denial',version:'1'}}})});
+  const mcpBody=await mcp.text();assert([401,403].includes(mcp.status));assert(!mcpBody.includes(f.checkpoint.state.source.project.projectId));assert.equal(hash(m.script),f.checkpoint.build.M.sha256);
+  await writeCleanupEvidence('late-kv-actual-outcome',{label:'SYN adversarial SDK-only; not an M token-exchange admission',startedAt,deniedHeadersAt,C0:f.plan.C0,positive,build:f.checkpoint.sdkOnlyBuild,before,after,denialBodyHash:hash(deniedBody),mcpWorker:'canary-first-connection',mcpStatus:mcp.status,mcpBodyHash:hash(mcpBody),denialLayer:'not attributed from HTTP alone; native token expiry and D1 cleanup facts recorded separately',expiry,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false,operationalReadiness:false});
  });
 }
 
