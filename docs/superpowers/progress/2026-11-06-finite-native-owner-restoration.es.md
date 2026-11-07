@@ -362,3 +362,15 @@ Rootleyó fix-loop.md ycannot-verify.mdfrescos7nov15:15UTC. Ruling:ambosdefectos
 Task2 minor(deferred):M1desglosemétricasincompleto para viabilidad;M2boundary200/thirdpage/peak2delreductionfacetaúnnoejercitados;M3logsgrandesprevisiblementetruncados. Apuntarcombinedreview aesta lista; no incorporarminorsalfixloopniocultarwarnings. CannotVerifycombinedcompatibilidad/opsreadiness son gatesexternospendientes,cubiertosporplanposterior,noaceptadosporTask2. Warningsexactossepuedenrecuperardeloslogsprimariosexistentes,sinrerun. MantenerTask1RM1–RM4 yotrosMinorhistóricos.
 
 Ownerahoraausentehasta13:20Argentina/16:20UTC; autorizaciónSourcevigente yningúnlogin/OTP requerido. ContinúaSource/SYNcloud, noruntime/Max/credenciales/monitores/mail. operationalReadiness=false,completePackage=false,PCoff=false.
+
+## Fix round1 — genuine covering layout approved before Source writes
+
+Original implementer proposed private fixed helpers in owner-cleanup, no newpath/API: exact currentSDKkey qualifier before revoke and finalinventory insidefinish afterSDK. Both normal/alreadycomplete paths already invokefinish. Root approves under originalspec/no DTOorcallbackauthority; preserve initialalarm solewriter.
+
+Bindingbrief updated5507eb6992f3f1dd9d8c72f1d47075faf62bc28e/blob37a995f2793ca9fdeb09f56a4ca3c3de945c3d40. FocalREDandGREENg6/g7:4cases/4jobs/2genuine lineages. Normal authorize/SDKcomplete delayedtoC0−300, NOcodeexchange: SDKcodeTTL600 naturally keeps grant present atC0; matching/conflict copies preserveabsoluteexpiry. Foreigncontents modeleduntrusted, notnewauthorizedgrant; RootapprovedwithoutoriginalTTL/clock/grantrenewal. Absence reinforcedover SAMEg0occurrence. g6matching closesgenuinely, then explicitfixturealarm-entry reentry withnodrift/drift insideC1: no fourthslot/newbusinessadmission, preservehistoricalreceipt/State.complete byteaByte/no hashrewrite, assertcurrentpending/noextraeffects afterdrift. g7actualSDKACKheldbriefly<5s afterrestore whilemodeledWorkflowbecomesrunning; freshfinalinventorymustblockbothnewreceipts/completion, preservelegitimateactivity, noreplay.
+
+Finalcoveringrun56=original51+5necessarynewcases (40component+16native),8groups/16jobs/9lineages19graphs,SAME3lanes/max2MF/job15min. MeaningfulfocalRED→GREEN first; not arbitraryfullsuite, notrepeatingoriginalTask1/Task2RED. Onecoherent56/codefreeze/readbacks thenappendfixreport/retirequalifier/STOP/scopedrereviewAA..fixHEAD. No Sourcewrites had occurred when thislayout was proposed. Rootdoesnotimplementfixcode.
+
+Privatecoordination note: a newlydelivered compatibilitylearning wasreadfromitsoriginalrelayrecord anddeduplicated; oneACK sent andreadbackverified. Sourceinitial-cleanupHTTPadapteralreadyusesmanual redirects withstatus/rejected-body controls; no AFWcode/test/runtime/supportaction was taken from that advisory, no incident/proxyrecovery inferred. No private message body copied here. Crossprojectisolation maintained; this didnotreplace I1/I2 work.
+
+Owner unavailable until16:20UTC; no humanstep. Source/SYN only; readiness/package/PCofffalse.
