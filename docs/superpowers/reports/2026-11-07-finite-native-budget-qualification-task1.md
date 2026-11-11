@@ -1754,3 +1754,114 @@ Terminal action: retire TEMP and preserve this failed attempt. No automatic corr
 ### 2026-11-11 UTC — one corrected reader qualification authorized
 
 Root independently confirmed the single ESLint error in run 43105402978 and verified its failure artifact. The accepted RED and failed qualification are preserved above. [Root ruling](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/133f2a3303ee0df531a0961319ec9e47c3f225c3/docs/superpowers/briefs/2026-11-11-finite-budget-reader-site-diagnostic.md). From cleanup `46df7e9f6da6eb8e9793d00c1a6b345a9aed5ad6` / tree `2e0e82eff7a9b34f74dc359808f1cfd734367075` / report `b97ed2c97ea8830b04e7dc08935b38103d85b593`, only the catalog loop variable and its references are renamed from module to descriptor. Replacing the new identifier with its old name in that loop reconstructs the prior source byte-for-byte. The same temporary workflow is restored for one ordinary-cap qualification. No RED is repeated and no additional diagnostic or behavior change is part of this authorization.
+
+
+### 2026-11-11 UTC — corrected ordinary producer identifies the early reader site
+
+[Run 43106034899](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43106034899), attempt 1, push, terminal success. Source `1c10a4c4514675cf02b32878b19f4071cf299176`, tree `878c6b5ca591ace8f528dce0907fcb0d0cde4193`, parent `46df7e9f6da6eb8e9793d00c1a6b345a9aed5ad6`. Source-world blob `c768af1b01af2b8216273765da62d00894b65b33`, sensor `edec2496ef704956bd6a3357c97a783274a256a5`, Q test `dff00b554c40669a4333660ab6c64e5ae7e6bc5f`, TEMP `cfdcd1375c34a47f024caff3c73d13806155e890`, report at activation `f9facf78400908079ccea857ec89a01916e7f728`. The CAS acknowledgement was followed by a discrepant first ref read; a fresh read confirmed the intended head/parent, unchanged main, exact full tree and sole activation run. No second ref mutation or job retry was used. Source was frozen through terminal. The accepted RED and original lint failure remain recorded above.
+
+* Pure job 130809480535, 3-minute limit, success. `npm ci --ignore-scripts --no-audit --no-fund`, `node --check` and `npx eslint` on the sensor/world/Q file. `node --test test/finite-budget-diagnostics.test.mjs` executed 8 tests, 8 pass, 0 fail, 0 cancelled, 0 skipped, 0 todo. With the candidate variable absent, `node test/fixtures/finite-budget-world.mjs preflight-budget` compiled both prepared roles. Their closure covered all pinned selected reader hooks; original path/selector gates stayed enabled.
+* Dependent producer job 130809927084, 5-minute limit, success. It downloaded and reverified the same pure ID. The compiler checked the exact role/path/selector/occurrence/line/column reader map against pure before I0, alongside all existing closed input checks. `node test/fixtures/finite-budget-world.mjs prepare-positive-probe output/finite-budget/producer` used the existing single principal producer with deferred wait, no cap marker, and actual limit 16,384 in every snapshot. Genuine completeNormal=1, completeWrites=1, Reference rows/readbacks=1/1, Notice rows=1. Original I0/C0/C1 and return time are below. The return after disposal preceded C0 by 854206 ms. OriginalAlarmObserved=false. No consumer, full P1, live provider or PC-off run.
+* [Pure 13894346433](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43106034899/artifacts/13894346433), 27,353 ZIP bytes, SHA-256 `6b63607d374a5cb94495824254e70cc2b71b4d6a5b03e1caec6aeff43962529e`, expires 2026-11-18T21:47:31Z. Exact same-ID REST readback verified 5 files and budget-artifact.json of 846 bytes, SHA-256 `608ce40e38055b1f04875ed2fd1d0e2e3e9d50ff505869a3558e54770e106724`, with source/run/attempt/kind and false flags checked.
+* [Producer 13894386455](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43106034899/artifacts/13894386455), 1,515,867 ZIP bytes, SHA-256 `bf589c85c545b0409ba65dcd425e2a0626848d3ef48d7af50bbc20cea20f1e3a`, expires 2026-11-18T21:48:43Z. Exact same-ID REST readback verified 9 files and budget-artifact.json of 1504 bytes, SHA-256 `217b2d283faf8e415452c76526fcfd8275d3a04f23cf2239137baf8862e73bc3`, with source/run/attempt/kind and false flags checked.
+
+Pure inventory: tests.log, lint.log, preflight.log, preflight.json, budget-artifact.json. Producer inventory: aggregates.json, console.log, full-result.json, manifest.json, four graphs files (individual sizes/hashes below), budget-artifact.json. The safe original snapshot arrays include each fixed site 1…54 and unknown slot 0, split before/after threshold. Exact nonzero buckets are reproduced below; every omitted site/epoch bucket was zero. The full raw checkpoint is not an exported recovery artifact.
+
+**Observed early QA2 failures.** All 14 pre-overflow readerOrigin events in QA2 occurred at fixed QA site 45, `lib/mcp-qa-finite-owner-phase-context.mjs`, selector 13, occurrence 1, prepared line 116 column 13. The first occurred at ordinal 1 with actual current context `excluded`. The probe records the context only for the first reader-origin failure in an epoch. It cannot establish the individual contexts of the other 13 or the caller that established the first excluded store. QA1's first readerOrigin also occurred at site 45, with actual `no_store` at ordinal 20,157, after its own overflow. The site alone cannot justify exclusion. Known-origin propagation, real unknown-origin failures and all old increments were preserved. No attribution, early return or factory behavior was corrected here.
+
+**Verified site map.** Line and column form a one-based coordinate in the qualified prepared source, before emission. The original descriptor remains pinned at `be695028e4c12c3cb7d3b7bf2c5f2e7508f3db15`. Each numbered entry below matched both compilations. Paths and selectors are compiler proof only; runtime data carries a closed integer.
+
+| ID | Role | Pinned path | Selector | Occurrence | Prepared line | Column |
+| ---: | --- | --- | --- | ---: | ---: | ---: |
+| 1 | M | `lib/delegated-oauth-worker.mjs` | 0 | 1 | 36 | 16 |
+| 2 | M | `lib/dossier-monitoring-owner-http.mjs` | 0 | 1 | 21 | 15 |
+| 3 | M | `lib/mcp-activation-observer.mjs` | 1 | 1 | 49 | 11 |
+| 4 | M | `lib/mcp-node-private-bridge.mjs` | 1 | 1 | 69 | 33 |
+| 5 | M | `lib/mcp-original-container-runtime.mjs` | 0 | 1 | 16 | 15 |
+| 6 | M | `lib/mcp-own-synthetic-save-http.mjs` | 0 | 1 | 10 | 141 |
+| 7 | M | `lib/mcp-publication-artifact-reader.mjs` | 1 | 1 | 22 | 12 |
+| 8 | M | `lib/mcp-qa-finite-fixed-policy-engine.mjs` | 1 | 1 | 48 | 12 |
+| 9 | M | `lib/mcp-qa-finite-owner-native-wire.mjs` | 0 | 1 | 43 | 15 |
+| 10 | M | `lib/mcp-qa-finite-owner-notice-consent-body.mjs` | 0 | 1 | 5 | 15 |
+| 11 | M | `lib/mcp-qa-finite-owner-preparation.mjs` | 0 | 1 | 115 | 16 |
+| 12 | M | `lib/mcp-qa-finite-seed-wire.mjs` | 1 | 1 | 27 | 12 |
+| 13 | M | `lib/mcp-retirement-provider-reader.mjs` | 1 | 1 | 25 | 11 |
+| 14 | M | `lib/mcp-successor-deployment-reader.mjs` | 1 | 1 | 23 | 12 |
+| 15 | M | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 1 | 710 | 17 |
+| 16 | M | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 2 | 1076 | 17 |
+| 17 | M | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 3 | 4730 | 17 |
+| 18 | M | `node_modules/@modelcontextprotocol/server/dist/index.mjs` | readerFactory | 1 | 993 | 19 |
+| 19 | M | `node_modules/agents/dist/handler-stateless-VvrWSAVA.js` | readerFactory | 1 | 144 | 19 |
+| 20 | M | `node_modules/agents/dist/handler-stateless-VvrWSAVA.js` | readerFactory | 2 | 215 | 17 |
+| 21 | QA | `lib/assistance-administrative-get-transport.mjs` | 1 | 1 | 25 | 11 |
+| 22 | QA | `lib/assistance-private-provider-get-transport.mjs` | 1 | 1 | 27 | 11 |
+| 23 | QA | `lib/assistance-provider-token-name.mjs` | 1 | 1 | 18 | 16 |
+| 24 | QA | `lib/assistance-service-identity-transport.mjs` | 1 | 1 | 49 | 11 |
+| 25 | QA | `lib/mcp-activation-observer.mjs` | 1 | 1 | 49 | 11 |
+| 26 | QA | `lib/mcp-canary-restoration-transport.mjs` | 1 | 1 | 97 | 12 |
+| 27 | QA | `lib/mcp-closed-version-upload.mjs` | 1 | 1 | 38 | 12 |
+| 28 | QA | `lib/mcp-closure-reader-probe.mjs` | 7 | 1 | 115 | 14 |
+| 29 | QA | `lib/mcp-publication-artifact-reader.mjs` | 1 | 1 | 22 | 12 |
+| 30 | QA | `lib/mcp-qa-finite-bootstrap-native.mjs` | 3 | 1 | 40 | 13 |
+| 31 | QA | `lib/mcp-qa-finite-fixed-policy-engine.mjs` | 1 | 1 | 48 | 12 |
+| 32 | QA | `lib/mcp-qa-finite-historical-source.mjs` | 8 | 1 | 213 | 12 |
+| 33 | QA | `lib/mcp-qa-finite-initial-cleanup.mjs` | 11 | 1 | 128 | 12 |
+| 34 | QA | `lib/mcp-qa-finite-initial-custody-probe.mjs` | 3 | 1 | 41 | 13 |
+| 35 | QA | `lib/mcp-qa-finite-initial-entry.mjs` | 21 | 1 | 82 | 13 |
+| 36 | QA | `lib/mcp-qa-finite-initial-entry.mjs` | 21 | 2 | 242 | 15 |
+| 37 | QA | `lib/mcp-qa-finite-initial-entry.mjs` | 21 | 3 | 315 | 11 |
+| 38 | QA | `lib/mcp-qa-finite-initial-material.mjs` | 3 | 1 | 48 | 14 |
+| 39 | QA | `lib/mcp-qa-finite-initial-old-guard.mjs` | 1 | 1 | 26 | 12 |
+| 40 | QA | `lib/mcp-qa-finite-initial-owner-source.mjs` | 8 | 1 | 75 | 13 |
+| 41 | QA | `lib/mcp-qa-finite-owner-cleanup.mjs` | 10 | 1 | 183 | 13 |
+| 42 | QA | `lib/mcp-qa-finite-owner-cleanup.mjs` | 10 | 2 | 667 | 11 |
+| 43 | QA | `lib/mcp-qa-finite-owner-native-wire.mjs` | 0 | 1 | 43 | 15 |
+| 44 | QA | `lib/mcp-qa-finite-owner-notice-consent-body.mjs` | 0 | 1 | 5 | 15 |
+| 45 | QA | `lib/mcp-qa-finite-owner-phase-context.mjs` | 13 | 1 | 116 | 13 |
+| 46 | QA | `lib/mcp-qa-finite-owner-preparation.mjs` | 0 | 1 | 115 | 16 |
+| 47 | QA | `lib/mcp-qa-finite-seed-wire.mjs` | 1 | 1 | 27 | 12 |
+| 48 | QA | `lib/mcp-retirement-provider-reader.mjs` | 1 | 1 | 25 | 11 |
+| 49 | QA | `lib/mcp-successor-deployment-reader.mjs` | 1 | 1 | 23 | 12 |
+| 50 | QA | `lib/operations-service-request-controls.mjs` | 0 | 1 | 24 | 18 |
+| 51 | QA | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 1 | 710 | 17 |
+| 52 | QA | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 2 | 1076 | 17 |
+| 53 | QA | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 3 | 4730 | 17 |
+| 54 | QA | `scripts/check-own-cron-provider.mjs` | 1 | 1 | 115 | 11 |
+
+**Exact safe aggregates.** Site-map log records are represented by the verified table above; step markers are omitted. The JSONL retains the facts, chronology, fixed-reason histograms, first reader-origin observations, nonzero per-site splits and file proofs.
+
+```jsonl
+{"kind":"facts","diagnosticCandidate":null,"actualSnapshotLimits":[16384],"purpose":"afw.finite-budget-producer-probe.syn.v1","scope":"partial-producer-only","source":"1c10a4c4514675cf02b32878b19f4071cf299176","run":"43106034899","attempt":"1","I0":1794433677000,"C0":1794434577000,"C1":1794434757000,"returnedAt":1794433722794,"completeNormal":1,"completeWrites":1,"referenceRows":1,"referenceReadbacks":1,"noticeRows":1,"disposedBeforeC0":true,"originalAlarmObserved":false,"operationalReadiness":false,"completePackage":false,"PCoff":false}
+{"kind":"chronology","segment":"producer","epoch":0,"role":"M","purpose":"afw.finite-budget-chronology.syn.v1","limit":16384,"eventCalls":0,"byEvent":{"root":0,"child":0,"begin":0,"bytes":0,"logical":0,"scopeLogical":0,"cancel":0,"settle":0,"incomplete":0},"firstInvalid":null,"firstOverflow":null,"invalid":{"beforeOverflow":0,"afterOverflow":0},"unattributed":{"beforeOverflow":0,"afterOverflow":0},"coverage":{"overflow":false,"invalid":0,"unattributed":0,"nativeBytesUnavailable":0}}
+{"kind":"reasons","segment":"producer","epoch":0,"role":"M","reasons":{"unknown":0,"constructorOptions":0,"collectorException":0,"rootInput":0,"childInput":0,"childConflict":0,"beginContext":0,"beginMethodResource":0,"beginFetchLink":0,"bytesInput":0,"logicalInput":0,"scopeLogicalInput":0,"cancelInput":0,"settleInput":0,"settleTime":0,"promiseThenMissing":0,"promiseThenException":0,"descendantStore":0,"descendantChild":0,"runMissingLease":0,"phaseStore":0,"phaseValue":0,"guardRoot":0,"holderInput":0,"holderConflict":0,"captureInput":0,"captureConflict":0,"facadeInput":0,"localBodyStore":0,"observerFulfilledCallback":0,"observerRejectedCallback":0,"observerThenException":0,"dormantInvocation":0,"cloneOrigin":0,"readerOrigin":0,"holderIdentity":0,"invocationIdentity":0,"invocationRoot":0,"methodPhase":0,"clockLease":0,"aliasStore":0,"aliasChild":0,"transportPhase":0,"transactionContext":0,"fetchResource":0}}
+{"kind":"readerFirst","segment":"producer","epoch":0,"role":"M","firstReaderOrigin":null,"before":0,"after":0}
+{"kind":"chronology","segment":"producer","epoch":0,"role":"QA","purpose":"afw.finite-budget-chronology.syn.v1","limit":16384,"eventCalls":19703,"byEvent":{"root":1,"child":93,"begin":6147,"bytes":5714,"logical":0,"scopeLogical":0,"cancel":134,"settle":6147,"incomplete":1467},"firstInvalid":{"event":"incomplete","ordinal":18212,"reason":"runMissingLease","relation":"afterOverflow"},"firstOverflow":{"event":"settle","ordinal":16385},"invalid":{"beforeOverflow":0,"afterOverflow":1467},"unattributed":{"beforeOverflow":0,"afterOverflow":1467},"coverage":{"overflow":true,"invalid":1467,"unattributed":1467,"nativeBytesUnavailable":433}}
+{"kind":"reasons","segment":"producer","epoch":0,"role":"QA","reasons":{"unknown":0,"constructorOptions":0,"collectorException":0,"rootInput":0,"childInput":0,"childConflict":0,"beginContext":0,"beginMethodResource":0,"beginFetchLink":0,"bytesInput":0,"logicalInput":0,"scopeLogicalInput":0,"cancelInput":0,"settleInput":0,"settleTime":0,"promiseThenMissing":0,"promiseThenException":0,"descendantStore":0,"descendantChild":0,"runMissingLease":15,"phaseStore":0,"phaseValue":0,"guardRoot":0,"holderInput":0,"holderConflict":0,"captureInput":0,"captureConflict":0,"facadeInput":0,"localBodyStore":0,"observerFulfilledCallback":0,"observerRejectedCallback":0,"observerThenException":0,"dormantInvocation":0,"cloneOrigin":0,"readerOrigin":12,"holderIdentity":0,"invocationIdentity":1335,"invocationRoot":99,"methodPhase":0,"clockLease":0,"aliasStore":0,"aliasChild":0,"transportPhase":0,"transactionContext":6,"fetchResource":0}}
+{"kind":"readerFirst","segment":"producer","epoch":0,"role":"QA","firstReaderOrigin":{"ordinal":18252,"relation":"afterOverflow","site":32,"context":"no_store"},"before":0,"after":12}
+{"kind":"readerCounts","segment":"producer","epoch":0,"role":"QA","site":32,"before":0,"after":1}
+{"kind":"readerCounts","segment":"producer","epoch":0,"role":"QA","site":35,"before":0,"after":8}
+{"kind":"readerCounts","segment":"producer","epoch":0,"role":"QA","site":36,"before":0,"after":3}
+{"kind":"chronology","segment":"producer","epoch":1,"role":"M","purpose":"afw.finite-budget-chronology.syn.v1","limit":16384,"eventCalls":24,"byEvent":{"root":2,"child":0,"begin":8,"bytes":6,"logical":0,"scopeLogical":0,"cancel":0,"settle":8,"incomplete":0},"firstInvalid":null,"firstOverflow":null,"invalid":{"beforeOverflow":0,"afterOverflow":0},"unattributed":{"beforeOverflow":0,"afterOverflow":0},"coverage":{"overflow":false,"invalid":0,"unattributed":0,"nativeBytesUnavailable":2}}
+{"kind":"reasons","segment":"producer","epoch":1,"role":"M","reasons":{"unknown":0,"constructorOptions":0,"collectorException":0,"rootInput":0,"childInput":0,"childConflict":0,"beginContext":0,"beginMethodResource":0,"beginFetchLink":0,"bytesInput":0,"logicalInput":0,"scopeLogicalInput":0,"cancelInput":0,"settleInput":0,"settleTime":0,"promiseThenMissing":0,"promiseThenException":0,"descendantStore":0,"descendantChild":0,"runMissingLease":0,"phaseStore":0,"phaseValue":0,"guardRoot":0,"holderInput":0,"holderConflict":0,"captureInput":0,"captureConflict":0,"facadeInput":0,"localBodyStore":0,"observerFulfilledCallback":0,"observerRejectedCallback":0,"observerThenException":0,"dormantInvocation":0,"cloneOrigin":0,"readerOrigin":0,"holderIdentity":0,"invocationIdentity":0,"invocationRoot":0,"methodPhase":0,"clockLease":0,"aliasStore":0,"aliasChild":0,"transportPhase":0,"transactionContext":0,"fetchResource":0}}
+{"kind":"readerFirst","segment":"producer","epoch":1,"role":"M","firstReaderOrigin":null,"before":0,"after":0}
+{"kind":"chronology","segment":"producer","epoch":1,"role":"QA","purpose":"afw.finite-budget-chronology.syn.v1","limit":16384,"eventCalls":275074,"byEvent":{"root":2,"child":3997,"begin":6586,"bytes":6278,"logical":0,"scopeLogical":0,"cancel":48,"settle":6586,"incomplete":251577},"firstInvalid":{"event":"incomplete","ordinal":19714,"reason":"runMissingLease","relation":"afterOverflow"},"firstOverflow":{"event":"settle","ordinal":16385},"invalid":{"beforeOverflow":0,"afterOverflow":251577},"unattributed":{"beforeOverflow":0,"afterOverflow":251577},"coverage":{"overflow":true,"invalid":251577,"unattributed":251577,"nativeBytesUnavailable":308}}
+{"kind":"reasons","segment":"producer","epoch":1,"role":"QA","reasons":{"unknown":0,"constructorOptions":0,"collectorException":0,"rootInput":0,"childInput":0,"childConflict":0,"beginContext":0,"beginMethodResource":0,"beginFetchLink":0,"bytesInput":0,"logicalInput":0,"scopeLogicalInput":0,"cancelInput":0,"settleInput":0,"settleTime":0,"promiseThenMissing":0,"promiseThenException":0,"descendantStore":7889,"descendantChild":0,"runMissingLease":11655,"phaseStore":0,"phaseValue":0,"guardRoot":0,"holderInput":0,"holderConflict":0,"captureInput":0,"captureConflict":0,"facadeInput":0,"localBodyStore":0,"observerFulfilledCallback":0,"observerRejectedCallback":0,"observerThenException":0,"dormantInvocation":0,"cloneOrigin":0,"readerOrigin":824,"holderIdentity":0,"invocationIdentity":218161,"invocationRoot":12908,"methodPhase":0,"clockLease":0,"aliasStore":88,"aliasChild":0,"transportPhase":0,"transactionContext":52,"fetchResource":0}}
+{"kind":"readerFirst","segment":"producer","epoch":1,"role":"QA","firstReaderOrigin":{"ordinal":20157,"relation":"afterOverflow","site":45,"context":"no_store"},"before":0,"after":824}
+{"kind":"readerCounts","segment":"producer","epoch":1,"role":"QA","site":31,"before":0,"after":11}
+{"kind":"readerCounts","segment":"producer","epoch":1,"role":"QA","site":45,"before":0,"after":812}
+{"kind":"readerCounts","segment":"producer","epoch":1,"role":"QA","site":46,"before":0,"after":1}
+{"kind":"chronology","segment":"producer","epoch":2,"role":"M","purpose":"afw.finite-budget-chronology.syn.v1","limit":16384,"eventCalls":144,"byEvent":{"root":9,"child":0,"begin":56,"bytes":23,"logical":0,"scopeLogical":0,"cancel":0,"settle":56,"incomplete":0},"firstInvalid":null,"firstOverflow":null,"invalid":{"beforeOverflow":0,"afterOverflow":0},"unattributed":{"beforeOverflow":0,"afterOverflow":0},"coverage":{"overflow":false,"invalid":0,"unattributed":0,"nativeBytesUnavailable":33}}
+{"kind":"reasons","segment":"producer","epoch":2,"role":"M","reasons":{"unknown":0,"constructorOptions":0,"collectorException":0,"rootInput":0,"childInput":0,"childConflict":0,"beginContext":0,"beginMethodResource":0,"beginFetchLink":0,"bytesInput":0,"logicalInput":0,"scopeLogicalInput":0,"cancelInput":0,"settleInput":0,"settleTime":0,"promiseThenMissing":0,"promiseThenException":0,"descendantStore":0,"descendantChild":0,"runMissingLease":0,"phaseStore":0,"phaseValue":0,"guardRoot":0,"holderInput":0,"holderConflict":0,"captureInput":0,"captureConflict":0,"facadeInput":0,"localBodyStore":0,"observerFulfilledCallback":0,"observerRejectedCallback":0,"observerThenException":0,"dormantInvocation":0,"cloneOrigin":0,"readerOrigin":0,"holderIdentity":0,"invocationIdentity":0,"invocationRoot":0,"methodPhase":0,"clockLease":0,"aliasStore":0,"aliasChild":0,"transportPhase":0,"transactionContext":0,"fetchResource":0}}
+{"kind":"readerFirst","segment":"producer","epoch":2,"role":"M","firstReaderOrigin":null,"before":0,"after":0}
+{"kind":"chronology","segment":"producer","epoch":2,"role":"QA","purpose":"afw.finite-budget-chronology.syn.v1","limit":16384,"eventCalls":319337,"byEvent":{"root":4,"child":3764,"begin":6369,"bytes":6034,"logical":0,"scopeLogical":0,"cancel":40,"settle":6369,"incomplete":296757},"firstInvalid":{"event":"incomplete","ordinal":1,"reason":"readerOrigin","relation":"beforeOverflow"},"firstOverflow":{"event":"settle","ordinal":16385},"invalid":{"beforeOverflow":14,"afterOverflow":296743},"unattributed":{"beforeOverflow":14,"afterOverflow":296743},"coverage":{"overflow":true,"invalid":296757,"unattributed":296757,"nativeBytesUnavailable":335}}
+{"kind":"reasons","segment":"producer","epoch":2,"role":"QA","reasons":{"unknown":0,"constructorOptions":0,"collectorException":0,"rootInput":0,"childInput":0,"childConflict":0,"beginContext":0,"beginMethodResource":0,"beginFetchLink":0,"bytesInput":0,"logicalInput":0,"scopeLogicalInput":0,"cancelInput":0,"settleInput":0,"settleTime":0,"promiseThenMissing":0,"promiseThenException":0,"descendantStore":7731,"descendantChild":0,"runMissingLease":11287,"phaseStore":1,"phaseValue":0,"guardRoot":0,"holderInput":0,"holderConflict":0,"captureInput":0,"captureConflict":0,"facadeInput":0,"localBodyStore":0,"observerFulfilledCallback":0,"observerRejectedCallback":0,"observerThenException":0,"dormantInvocation":0,"cloneOrigin":0,"readerOrigin":834,"holderIdentity":0,"invocationIdentity":263120,"invocationRoot":13241,"methodPhase":0,"clockLease":0,"aliasStore":43,"aliasChild":0,"transportPhase":0,"transactionContext":500,"fetchResource":0}}
+{"kind":"readerFirst","segment":"producer","epoch":2,"role":"QA","firstReaderOrigin":{"ordinal":1,"relation":"beforeOverflow","site":45,"context":"excluded"},"before":14,"after":820}
+{"kind":"readerCounts","segment":"producer","epoch":2,"role":"QA","site":45,"before":14,"after":820}
+{"kind":"proof","path":"graphs/native-syn.json","bytes":1066,"sha256":"dd40cd78230c65b79a21991ebcdff3f2d09b69f9b418d7f525db54ef0cb035a5"}
+{"kind":"proof","path":"graphs/metafiles.json","bytes":448787,"sha256":"142cf76ce6a0e78573bafa20b09c2efda2aa27110403c2f4f49474fd32288144"}
+{"kind":"proof","path":"graphs/canary-index.mjs","bytes":2062500,"sha256":"7f45d2e952ba74acc17286855d76fde5ffaba423c1c79eba1dd391c274e19573"}
+{"kind":"proof","path":"graphs/qa-index.mjs","bytes":2695973,"sha256":"b996ae421bbe60a3490283e4ed9a0796a2834922b79c5d9c0591e91d130aa341"}
+{"kind":"proof","path":"manifest.json","bytes":9903,"sha256":"ab5d79e84bb50e5a453f8bc3fc15f927165a1cd49e2f6e4ff25e341f626d3d60"}
+```
+
+Terminal action: retire TEMP and preserve the verified source and evidence. The producer-only experiment is complete. Task1 and the PC-off rehearsal remain pending. operationalReadiness=false, completePackage=false, PCoff=false.
