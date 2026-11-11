@@ -271,3 +271,5 @@ La liberación full9 de55a093 queda retenida por checkpoint no publicable. Spec 
 - [ ] Liberar UNA orquestación3jobs8Q+P1 con original900s; checkpoint/resultados/logs nativos sólo cifrados, contextbind/byteexact/manifest/readback, preflightclave antesI0 y failurestate honesto.
 - [ ] Revisión fresca Spec+Quality GLOBALBASE..HEAD; después Task2 hereda custodia, no se transmite estado en claro.
 La revisión debe cubrir clave incorrecta/inaccesible preI0, contexto equivocado/tamper, rutas peligrosas/límites, fallo parcial y otro workflow de la misma rama (límite explícito, no promesa de secreto sólo para unarchivo). Ningún cambio del observable/business/clock/native state está autorizado por custodia. Decisión de Root bajo autonomía del owner; costo: dos módulos y una configuración aislada. No nuevo planworkspace ni reset del Task1.
+
+Enmienda de tamaño11Nov: manifiesto nativo ya preservado230266025B con44archivos exige512MiB nativos; JSONLchunk≤64KiB, gzipantesGCM,128MiB sobre,768MiB expandido/128KiB registro. La speccustodia de estecommit gobierna; no JSONmonolítico ni repetir RED43115730088. GREENsecreto-free sigue pendiente; elfull9 aún no estáliberado.
