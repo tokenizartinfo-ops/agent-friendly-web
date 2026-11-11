@@ -386,3 +386,7 @@ Ruling: añadir cronología y motivos fijos al sensor, sin arreglar todavía la 
 | Modelo/sourcewriter | Sesión anterior no recuperable | Único implementador nuevo Astrahigh por diagnóstico asíncrono/múltiples capas; Root sólo docs. |
 
 Brief vinculante nuevo: briefs/2026-11-07-finite-native-budget-qualification-chronology-resume-20261111.md. Autoriza5paths existentes (diagnostics/Qpure/worldCLI/TEMP/report), no nuevo móduloSource. RED≤3min, StageBpure≤3min→probe≤5min. Mismo disparador self-path enbranchSource/contentsread, frozenhasta terminal,7d/exactsameIDreadback/retirarTEMP/report/protegidos/main/STOP. No9/16/56niinventario separado. No cambios de lib/worker/package/lock/config/SDK/descriptor/guardas/Root30s/child5s/C0/C1/semántica. operationalReadiness=false;completePackage=false;PCoff=false. Usercontinua revoca la pausa nocturna para este trabajo autorizado, no amplía a runtime real.
+
+### Implementador de continuación — 11nov2026
+
+Root asignó /root/budget_chronology_impl (Astra high, contexto aislado) como único escritor Source de esta continuación. Al inicio informó que sólo veía el texto Hermes incrustado en el AGENTS de la carpeta por defecto; no había realizado mutaciones. Root leyó handling-reports fresco y suministró los mensajes reales del owner sobre AFW y su último «continua», diferenciándolos del documento de instrucciones. Se reanudó el mismo agente con el contexto faltante y el mismo brief; no se cambió alcance ni se forzó un retry técnico. El objetivo activo es AFW/PCoff, no Hermes/Tokenizart. No paso humano nuevo.
