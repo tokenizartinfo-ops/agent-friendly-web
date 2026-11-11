@@ -1,0 +1,156 @@
+name: AFW finite budget qualification
+run-name: AFW checkpoint custody tests ${{ github.sha }}
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: afw-finite-budget-qualification
+  cancel-in-progress: false
+env:
+  AFW_CUSTODY_MODE: GREEN
+jobs:
+  pure:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Locked tools for focused lint
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify Node-only closure and syntax
+        shell: bash
+        run: |
+          node --check test/fixtures/finite-checkpoint-custody.mjs
+          node --check test/finite-checkpoint-custody.test.mjs
+          npx --no-install eslint test/fixtures/finite-checkpoint-custody.mjs test/finite-checkpoint-custody.test.mjs
+          if git grep -q finite-checkpoint-custody -- lib worker; then exit 1; fi
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
+          const text=await readFile('test/fixtures/finite-checkpoint-custody.mjs','utf8');
+          const imports=[...text.matchAll(/^import .*? from '([^']+)';$/gm)].map(m=>m[1]);
+          assert.deepEqual(imports.sort(),['node:crypto','node:fs','node:fs/promises','node:path','node:stream','node:stream/promises','node:zlib'].sort());
+          assert(!/\b(?:require|import)\s*\(/.test(text));
+          NODE
+      - name: Run secret-free custody contract
+        id: contract
+        shell: bash
+        run: |
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          mkdir -m 700 "$RUNNER_TEMP/custody-test-public"
+          node --check test/finite-checkpoint-custody.test.mjs
+          node --test --test-reporter=tap test/finite-checkpoint-custody.test.mjs > "$RUNNER_TEMP/custody-private.tap" 2>&1 || result=$?
+          export CUSTODY_TEST_EXIT="${result:-0}"
+          node --input-type=module <<'NODE'
+          import {readFile,writeFile} from 'node:fs/promises';
+          import {join} from 'node:path';
+          import {createHash} from 'node:crypto';
+          const env=process.env,dir=join(env.RUNNER_TEMP,'custody-test-public');
+          const raw=await readFile(join(env.RUNNER_TEMP,'custody-private.tap'),'utf8');
+          const names=['tests','pass','fail','cancelled','skipped','todo'];
+          const counts=Object.fromEntries(names.map(key=>{
+            const match=raw.match(new RegExp('^# '+key+' ([0-9]+)$','m'));
+            return [key,match?Number(match[1]):null];
+          }));
+          const red=env.AFW_CUSTODY_MODE==='RED',exit=Number(env.CUSTODY_TEST_EXIT);
+          const failedCases=[...raw.matchAll(/^\s*not ok [0-9]+ - (C[1-8])\b/gm)].map(match=>match[1]);
+          const errorCodes=[...new Set([...raw.matchAll(/error: ['\"](custody_(?:key|authentication|context|changed|file|path|limit|format|integrity|size|staging|destination|cleanup|io|platform))['\"]/g)].map(match=>match[1]))];
+          const result={failedCases,errorCodes,purpose:'afw.custody-pure-result.syn.v1',source:env.GITHUB_SHA,run:env.GITHUB_RUN_ID,attempt:env.GITHUB_RUN_ATTEMPT,mode:env.AFW_CUSTODY_MODE,counts,exit,missingApi:raw.includes('missing custody API'),operationalReadiness:false,completePackage:false,PCoff:false};
+          const correct=counts.tests===(red?1:9)&&counts.pass===(red?0:9)&&counts.fail===(red?1:0)&&counts.cancelled===0&&counts.skipped===0&&counts.todo===0&&exit===(red?1:0)&&result.missingApi===red;
+          const data=Buffer.from(JSON.stringify(result)),summary=Buffer.from('CUSTODY TEST '+JSON.stringify(result)+'\n');
+          const entries=[['result.json',data],['summary.log',summary]],files=[];
+          for(const [path,body] of entries){await writeFile(join(dir,path),body);files.push({path,bytes:body.length,sha256:createHash('sha256').update(body).digest('hex')});}
+          await writeFile(join(dir,'manifest.json'),JSON.stringify({purpose:'afw.custody-test-artifact.syn.v1',source:env.GITHUB_SHA,run:env.GITHUB_RUN_ID,attempt:env.GITHUB_RUN_ATTEMPT,mode:env.AFW_CUSTODY_MODE,files}));
+          console.log(summary.toString().trimEnd());if(!correct)process.exitCode=1;
+          NODE
+      - name: Verify public staging allowlist
+        id: staged
+        if: always() && !cancelled()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';import {readdir,lstat} from 'node:fs/promises';import {join} from 'node:path';
+          const dir=join(process.env.RUNNER_TEMP,'custody-test-public');
+          assert.deepEqual((await readdir(dir)).sort(),['manifest.json','result.json','summary.log']);
+          for(const name of await readdir(dir)){const s=await lstat(join(dir,name));assert(s.isFile()&&s.nlink===1&&s.size<=2048);}
+          NODE
+      - uses: actions/upload-artifact@v4
+        id: upload
+        if: always() && steps.staged.outcome == 'success'
+        with:
+          name: finite-checkpoint-custody-${{ env.AFW_CUSTODY_MODE }}-${{ github.sha }}
+          path: ${{ runner.temp }}/custody-test-public/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download pure_receipt by immutable ID (attempt 1)
+        id: pure_receipt_1
+        if: always() && !cancelled() && steps.upload.outputs.artifact-id != ''
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/custody-test-readback
+          merge-multiple: true
+      - name: Wait 2s before pure_receipt download 2
+        id: pure_receipt_wait2
+        if: always() && !cancelled() && steps.pure_receipt_1.outcome == 'failure'
+        run: sleep 2
+      - name: Download pure_receipt by immutable ID (attempt 2)
+        id: pure_receipt_2
+        if: always() && !cancelled() && steps.pure_receipt_wait2.outcome == 'success' && steps.pure_receipt_1.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/custody-test-readback
+          merge-multiple: true
+      - name: Wait 5s before pure_receipt download 3
+        id: pure_receipt_wait3
+        if: always() && !cancelled() && steps.pure_receipt_2.outcome == 'failure'
+        run: sleep 5
+      - name: Download pure_receipt by immutable ID (attempt 3)
+        id: pure_receipt_3
+        if: always() && !cancelled() && steps.pure_receipt_wait3.outcome == 'success' && steps.pure_receipt_2.outcome == 'failure'
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/custody-test-readback
+          merge-multiple: true
+      - name: Strict same-ID inventory readback
+        if: always() && !cancelled()
+        env:
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+          DOWNLOADED: ${{ steps.pure_receipt_1.outcome == 'success' || steps.pure_receipt_2.outcome == 'success' || steps.pure_receipt_3.outcome == 'success' }}
+        run: |
+          test "$DOWNLOADED" = true
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';import {readdir,readFile,lstat} from 'node:fs/promises';import {join} from 'node:path';import {createHash} from 'node:crypto';
+          const e=process.env,dir=join(e.RUNNER_TEMP,'custody-test-readback'),hash=b=>createHash('sha256').update(b).digest('hex');
+          assert(/^[1-9][0-9]*$/.test(e.ARTIFACT_ID));assert.deepEqual((await readdir(dir)).sort(),['manifest.json','result.json','summary.log']);
+          const body=await readFile(join(dir,'manifest.json')),m=JSON.parse(body);
+          const files=[];for(const name of ['result.json','summary.log']){const b=await readFile(join(dir,name));const st=await lstat(join(dir,name));assert(st.isFile()&&st.nlink===1);files.push({path:name,bytes:b.length,sha256:hash(b)});}
+          assert.deepEqual(m,{purpose:'afw.custody-test-artifact.syn.v1',source:e.GITHUB_SHA,run:e.GITHUB_RUN_ID,attempt:e.GITHUB_RUN_ATTEMPT,mode:e.AFW_CUSTODY_MODE,files});
+          assert.deepEqual(body,await readFile(join(e.RUNNER_TEMP,'custody-test-public','manifest.json')));
+          console.log('CUSTODY READBACK '+JSON.stringify({id:e.ARTIFACT_ID,files,manifestBytes:body.length,manifestSha256:hash(body),source:m.source,run:m.run,attempt:m.attempt}));
+          NODE
