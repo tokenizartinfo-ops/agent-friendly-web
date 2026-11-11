@@ -549,8 +549,16 @@ export function transformBudgetPreparedSource(source,path,role){
 }
 
 const scopeInputPins=budgetNativeDescriptorProposal.implementationSupplement.scopeInputPins;
+function diagnosticCandidate(){
+ const marker=process.env.AFW_BUDGET_DIAGNOSTIC_CANDIDATE;
+ if(marker===undefined)return null;
+ assert.equal(marker,'cap32768','unsupported SYN diagnostic candidate before I0');
+ return 'cap32768';
+}
 export function createBudgetCompiler(role){
  assert(['M','QA'].includes(role));const testRevision=process.env.GITHUB_SHA;assert.match(testRevision??'',/^[a-f0-9]{40}$/,'budget actual Actions revision before I0');
+ const candidate=diagnosticCandidate(),runtimeOptions={testRevision,workerRole:role};
+ if(candidate){runtimeOptions.diagnosticCandidate=candidate;runtimeOptions.maxEvents=32768;}
  const records=new Map(),prepared=new Map(),expected=new Set(budgetNativeDescriptorProposal.sourceDescriptors.filter(p=>p.roles.includes(role)).map(p=>p.path));
  for(const p of scopeInputPins.filter(p=>p.roles.includes(role)))expected.add(p.path);
  for(const p of budgetNativeDescriptorProposal.packages.filter(p=>p.roles.includes(role)))expected.add(p.path);
@@ -570,7 +578,7 @@ export function createBudgetCompiler(role){
  function plugin(existing=null){
   return {name:'fixed-finite-budget-'+role,setup(builder){
    builder.onResolve({filter:/^afw:budget-runtime$/},()=>({path:'runtime',namespace:'afw-budget'}));
-   builder.onLoad({filter:/.*/,namespace:'afw-budget'},()=>({contents:"import {createBudgetRuntime} from "+JSON.stringify(resolve('test/fixtures/finite-budget-diagnostics.mjs'))+";export const budget=createBudgetRuntime("+JSON.stringify({testRevision,workerRole:role})+");",loader:'js',resolveDir:process.cwd()}));
+   builder.onLoad({filter:/.*/,namespace:'afw-budget'},()=>({contents:"import {createBudgetRuntime} from "+JSON.stringify(resolve('test/fixtures/finite-budget-diagnostics.mjs'))+";export const budget=createBudgetRuntime("+JSON.stringify(runtimeOptions)+");",loader:'js',resolveDir:process.cwd()}));
    if(existing){
     existing.setup({...builder,onLoad(options,loader){
      builder.onLoad(options,async args=>{
@@ -591,6 +599,7 @@ export function createBudgetCompiler(role){
     if(process.env.AFW_BUDGET_PREFLIGHT){
      const prior=JSON.parse(await readFile(process.env.AFW_BUDGET_PREFLIGHT,'utf8'));
      assert.equal(prior.source,testRevision);assert.equal(prior.run,process.env.GITHUB_RUN_ID);assert.equal(prior.attempt,process.env.GITHUB_RUN_ATTEMPT);
+     assert.equal(prior.diagnosticCandidate??null,candidate,'preflight and native use the same diagnostic candidate');
      const shape=list=>list.map(r=>({role:r.role,path:r.path,rawBytes:r.path==='<stdin>'?null:r.rawBytes,rawSha256:r.path==='<stdin>'?null:r.rawSha256,counts:r.counts,selectors:r.selectors})).sort((a,b)=>a.path.localeCompare(b.path));
      assert.deepEqual(shape([...records.values()]),shape(prior.inputs[role]),'native prepared role hooks match exact prior pure preflight before I0');
     }
@@ -618,12 +627,14 @@ export function attachBudgetEpochCapture(f,{segment='producer',epochs=[],epoch=0
 }
 export async function preflightBudgetCompilation(){
  assert.equal(process.env.AFW_BUDGET_GROUP,'positive');
+ const candidate=diagnosticCandidate();
  const {initialEntryHarness}=await import('./finite-initial-entry-world.mjs');
  const graphs=await initialEntryHarness('first-connection-publication',{ownerCleanup:true,cleanupCheckpoint:true,budgetCompileOnly:true,budgetQualification:true});
  assert.equal(graphs.I0Opened,false);assert.equal(graphs.nativeExecutionProduced,false);
  assert(graphs.budget?.M?.length&&graphs.budget?.QA?.length);
  assert(graphs.compatibility.M.compatibility_flags.includes('nodejs_compat'));assert(graphs.compatibility.QA.flags.includes('nodejs_compat'));
  const result={purpose:'afw.finite-budget-preflight.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,inputs:graphs.budget,I0Opened:false,nativeExecutionProduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
+ if(candidate)result.diagnosticCandidate=candidate;
  await mkdir('output/finite-budget/pure',{recursive:true});await writeFile('output/finite-budget/pure/preflight.json',JSON.stringify(result,null,2));
  return result;
 }
@@ -646,6 +657,7 @@ async function preparePositiveProbe(root){
  positiveKind('positive');
  assert.equal(root,'output/finite-budget/producer');
  assert.equal(process.env.AFW_BUDGET_PREFLIGHT,'output/finite-budget/prior-pure/preflight.json');
+ const candidate=diagnosticCandidate();
  const checkpoint='output/chronology-native-checkpoint';
  const {produceCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
  console.info('AFW_PROBE {"kind":"step","step":"producer-entered"}');
@@ -657,7 +669,10 @@ async function preparePositiveProbe(root){
  const {I0,C0,C1}=manifest;
  const {completeNormal,completeWrites,referenceRows,referenceReadbacks}=data.budget.ownerReference;
  const noticeRows=data.facts.rows.filter(([key])=>key.startsWith('connection-preparation:')&&key.endsWith(':notice')).length;
+ const epochs=data.budget.epochs;
+ const actualSnapshotLimits=[...new Set(epochs.map(({snapshot})=>snapshot.chronology.limit))];
  const facts={
+  diagnosticCandidate:candidate,actualSnapshotLimits,
   purpose:'afw.finite-budget-producer-probe.syn.v1',scope:'partial-producer-only',
   source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,
   I0,C0,C1,returnedAt,completeNormal,completeWrites,referenceRows,referenceReadbacks,noticeRows,
@@ -665,7 +680,6 @@ async function preparePositiveProbe(root){
   operationalReadiness:false,completePackage:false,PCoff:false
  };
  await mkdir(join(root,'graphs'),{recursive:true});
- const epochs=data.budget.epochs;
  await writeFile(join(root,'full-result.json'),JSON.stringify({facts,epochs,preparedInputs:data.budget.preparedInputs},null,2));
  const aggregates=[{kind:'facts',...facts}];
  for(const {segment,epoch,role,snapshot} of epochs){
@@ -697,7 +711,7 @@ async function preparePositiveProbe(root){
   assert(Number.isSafeInteger(epoch)&&epoch>=0);const key=role+'|'+epoch;assert(!identities.has(key));identities.add(key);
   const {purpose,limit,eventCalls,byEvent,reasons,firstInvalid,firstOverflow,invalid,unattributed}=snapshot.chronology;
   const sum=values=>Object.values(values).reduce((a,b)=>a+b,0);
-  assert.equal(purpose,'afw.finite-budget-chronology.syn.v1');assert.equal(limit,16384);assert.equal(sum(byEvent),eventCalls);
+  assert.equal(purpose,'afw.finite-budget-chronology.syn.v1');assert.equal(limit,candidate?32768:16384);assert.equal(sum(byEvent),eventCalls);
   assert.equal(sum(invalid),snapshot.coverage.invalid);assert.equal(sum(reasons),snapshot.coverage.invalid);
   assert.equal(sum(unattributed),snapshot.coverage.unattributed);assert.equal(!!firstInvalid,snapshot.coverage.invalid>0);
   assert.equal(!!firstOverflow,snapshot.coverage.overflow);assert.equal(!!firstOverflow,eventCalls>limit);

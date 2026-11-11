@@ -24,7 +24,11 @@ export function createBudgetDiagnostics(options={}){
  const revision=data(options,'testRevision'),role=data(options,'workerRole'),requested=data(options,'maxEvents')??16384;
  const testRevision=typeof revision==='string'&&/^[a-f0-9]{40}$/.test(revision)?revision:null;
  const workerRole=['QA','M','fixture'].includes(role)?role:'fixture';
- const limit=integer(requested)&&requested>0&&requested<=16384?requested:16384;
+ let limit=integer(requested)&&requested>0&&requested<=16384?requested:16384;
+ if(requested===32768){
+  try{if(data(options,'diagnosticCandidate')==='cap32768')limit=32768;}
+  catch{/* An unreadable candidate marker leaves the ordinary fallback intact. */}
+ }
  const coverage={overflow:false,invalid:testRevision&&workerRole===role&&limit===requested?0:1,unattributed:0,nativeBytesUnavailable:0};
  const roots=new WeakMap(),rootHandles=new WeakMap(),children=new WeakMap(),childHandles=new WeakMap(),operations=new WeakMap();
  const rows=[],logicalScopeEvents=[],deniedScopes=new Set(),groups=new Map(),scopes=new Map(),totals=metric();let rootOrdinal=0,childOrdinal=0,opOrdinal=0,scopeEventOrdinal=0,scopeGuardEvents=0,events=0,firstAt=null,lastAt=null;

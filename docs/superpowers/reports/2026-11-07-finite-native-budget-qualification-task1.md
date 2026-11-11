@@ -1614,3 +1614,14 @@ One Stage B attempt is authorized from cleanup `53e97746a3357331136a2bdf16e21b69
 | 324 | `fetchResource` |
 
 Terminal action: remove TEMP and append only these observed results. Keep Source implementation for readback; Task1 remains incomplete and Root owns subsequent decisions. No additional execution, review, Task2, production mutation or PC-off rehearsal is part of this probe.
+
+
+### 2026-11-11 UTC — explicit cap32768 diagnostic candidate: pure RED
+
+Root authorized a single candidate comparison using a private SYN marker with requested limit 32,768. Ordinary and unmarked options retain their original 16,384 ceiling. The candidate uses the same producer fixture, clocks, event increments, retention algorithm and fixed reasons. This comparison does not promote a new ordinary limit. [Ruling](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/c53caaa294ba298ac587db21a7bb849ae87fbd76/docs/superpowers/briefs/2026-11-07-finite-native-budget-qualification-chronology-resume-20261111.md)
+
+BASE-D `bc03e760c2c360755b2f94f3fbc6a0db942e4c36`, tree `b3eedfeccd64018495db72fc5550fa2ecf8e2b96`, report blob `318a77affda20793a0316bd5387c5e99da1d3ef9`. New RED Source `f671566e90673cdb1762e6e33a3fa16594e5b735`, tree `925be677a3f56c3712eaf547cdd58e7fbba23743`, Q test `dbf8304da9a281ab2e7fc7ceb1711199846acb60`, TEMP `490a5d02f39081cd0d2c602ec13e9399af33a349`; sensor `eaba60d19ef26bf7732225fae65b4c33103d50ec` stayed byte-identical to BASE-D. The Q6 extension checks marker isolation, ordinary fallback, passive/accessor handling, native Promise and return identity, snapshot stability, original overflow ordinal 16,385 and the candidate boundary at 32,769.
+
+[Candidate RED 43102922737](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43102922737), attempt 1, pure job 130798723989, terminal success. `npm ci --ignore-scripts --no-audit --no-fund`, then `node --test test/finite-budget-diagnostics.test.mjs`: 8 tests, 7 pass, 1 intended Q6 failure at `explicit SYN cap32768 candidate unavailable`, 0 cancelled, skipped or todo. The original sensor returned 16,384. No native fixture ran in the RED. Its assertion-failure gate, upload and explicit repository/run/same-ID REST download all passed.
+
+[Artifact 13892082715](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43102922737/artifacts/13892082715), 1,450 ZIP bytes, SHA-256 `b3112c2950b505036b0cae3bf352ed0e8450b80603e615f4654a6c3023078947`, expiry 2026-11-18 21:25:59 UTC. Same-ID readback verified 2 exact files (tests.log and budget-artifact.json), manifest 408 bytes, SHA-256 `b01383ed6ba3366c2e4ff67375c0b9bd81281687c467631db6b1801dbca436e5`. Source/run/attempt/kind and all three false flags matched. One pure/preflight→producer-only comparison now follows. This activation makes no native result claim.
