@@ -1865,3 +1865,12 @@ Pure inventory: tests.log, lint.log, preflight.log, preflight.json, budget-artif
 ```
 
 Terminal action: retire TEMP and preserve the verified source and evidence. The producer-only experiment is complete. Task1 and the PC-off rehearsal remain pending. operationalReadiness=false, completePackage=false, PCoff=false.
+
+
+### 2026-11-11 UTC — RED: existing fixture exclusion and unowned reader factory
+
+BASE `9ea350ca6234a520d1457569a8ca6ff61fc0d591`, tree `ec042db8fd7ff28a592fde991edc69de2b6c1d99`, report blob `757a761530f3e746d659085fd31d9b1b49bf061c`. Root authorized one test-only correction after the observed first excluded-store readerOrigin. [Bounded correction brief](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/8da761d15fc52e7431bd04c702d0dbe5c13ae7b9/docs/superpowers/briefs/2026-11-11-finite-budget-excluded-reader-fix.md)
+
+RED Source `d83865bc1a93b150e9da95b6495505c628ba43ae`, tree `921fb870a0437918513e54897bbeb1380a872be1`, test `6c7a81b9e95e4aa7c04b7c2e89262415ada20b8b`, TEMP `fb6af6265de34a362481107b22e46ad57da6c06a`, prior sensor unchanged `edec2496ef704956bd6a3357c97a783274a256a5`. [Run 43107068701](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43107068701), attempt 1, job 130813050746: locked install, then `node --test test/finite-budget-diagnostics.test.mjs`, 8 tests, 7 pass, 1 intended Q6 failure at `declared fixture-only missing reader must not count as an invalid`, 0 cancelled/skipped/todo. No native producer or I0. Same-ID REST readback verified [artifact 13894751944](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43107068701/artifacts/13894751944), 1,458 ZIP bytes, SHA-256 `18384fddf0e157062710a768668ce3b2636ef2c0b38eadf97dc894b93107dd56`, expiry 2026-11-18 21:54:13 UTC, 2 paths, manifest 408 bytes, SHA-256 `b55a60c2ac5454e59b897f60dd512c2ea9286e72bc8554e60ba04989df945e5c`, matching source/run/attempt/kind and false flags.
+
+One ordinary 16,384-cap verification follows. The proposed guard checks the actual fixture store after original invocation and known-owner propagation; it adds no site or method exclusion. The completed RED and the preceding observations are preserved regardless of the native outcome.

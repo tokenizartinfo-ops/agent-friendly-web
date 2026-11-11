@@ -243,7 +243,7 @@ export function createBudgetRuntime(options={}){
   if(meta.edge==='reader'){
    const result=original();
    if(bodyOwner)tagBody(result,localStore?immutable({...bodyOwner,store:localStore}):bodyOwner);
-   else{
+   else if(currentStore?.excluded!==true){
     const context=currentStore===undefined?'no_store':currentStore?.excluded?'excluded':currentStore?.root?'rooted':'unrooted';
     collector.incomplete('readerOrigin',READER_ORIGIN,readerSite(meta),context);
    }
