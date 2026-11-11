@@ -1,20 +1,18 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 11 DE NOVIEMBRE DE 2026: custodia antes del ciclo completo
+## CURRENT — 11 DE NOVIEMBRE DE 2026: traspaso cifrado preparado; ciclo original pendiente
 
-Objetivo: un ensayo real desde la nube con el ordenador apagado y, después, el piloto separado de Max. Sigue pendiente; SOURCE/SYN no acredita PC-off ni guardia permanente.
+Objetivo vigente: un ensayo real desde la nube con el ordenador apagado y, después, el caso separado de Max. Sigue pendiente; estos resultadosSOURCE/SYN no acreditanPCoff ni guardia permanente.
 
-El observador acotado pasó faseA run43111053230/attempt1:8Q, sintaxis/lint/preflight130paths635grupos54sitios y productor parcial. En6snapshots hubo0pérdidas de atribución,0desbordamientos numéricos y0scopesomitidos; QA1/QA2 conservaron16384filas y declararon221458/266661omisiones. Las métricas observadas pasaron; sus trazas completas no se afirman. Source preservado8452b974606171af39ee02fb41ddb124e7701ac1/tree50b818a164460052fd77344bf3bb0ddb4d6f2886; TEMP retirado. No repetir esa fase.
+Ya pasaron faseA del observador43111053230/1(8Q+productorparcial, sinpérdidas deatribución) y custodia43117597048/1(9TAP=contenedor+8casos). Custodia comprueba rondatripbyteexact, alteraciones/keys/context/paths/links/límites y dosprocesosNode, con archivosSYN pequeños y clavesefímeras. Root leyó código/primarias, no es todavía reviewformalTask1 ni8Q+P1original. No repetiresosrunsni56anteriores por historia.
 
-RED de la nueva API custodia43115730088/1 ya quedó preservado (1 fallo esperado, sin native/I0); el escritor sigue con GREEN puro. El inventario nativo230MB exige compresión/streaming y sustituye el límite inicial64MiB, según spec59c2e150.
+Sourceúltimochequeadoae688f979dc35fa2c2274703c2b6e89cc9272cdd/treee12ecc7f366ad04df8baf83ad3e2af1d0a4aafed/3188leaves,TEMPausente. Helper9a486b83/testc913c94b/informe7f586fc9(350198chars); restoexactoBASE8452. El escritor exclusivo ahora preparaTEMP3jobsINACTIVO manualsininputs/todosif:false. Brief .../briefs/2026-11-11-finite-budget-custody-orchestration-task1.md @99914b91/blobaa65d198; Root sólo docs, escritor sóloSource. Consultarrefsactuales, no asumirHEADdesdeestecheckpoint.
 
-El full8Q+P1/3jobs liberado después NO arrancó: el escritor detectó que el checkpoint nativo contiene una respuesta OAuth SYN y otros registros sin sanear, y se transferiría por artefactos de repositorio público. La autoridad de full9 quedó suspendida. No se leyó ningún valor de credencial ni se abrió runtime real. Root eligió cifrar el paquete íntegro, conservar bytes y mantener los originales I0/C0/C1.
+GitHub guardó AFW_SYN_CHECKPOINT_KEY en environment27007821967(afw-finite-syn-checkpoint), verificadoRoot11Nov20:25Argentina, única ramaSource/0tags. Sinvalor registrado, no escredencialCloudflare. No hay paso humano pendiente; su formato/acceso secomprobarán enkey-preflightantesI0. Root aún NO liberófull9. La orquestación debe mantener elprincipalSYNlocal, jamás browser/env/systemlogs o cuentasreales.
 
-Mismo escritor budget_chronology_impl trabaja ahora sólo2módulosNode de custodia+test/TEMP/report, con pruebas puras sin secreto ni I0. Requisitos vigentes en brief docs/superpowers/briefs/2026-11-11-finite-syn-checkpoint-custody-task1.md @0da68e66231eafe9d40a811add26ef737f3f7132/blobbbfc8b20d302be45f37646c1aba31fd288768942 y speccustodia blob79ec10f74a8521519fb46052c7f8d26597bf8f00. Plan38961chars/blob7f113486 y ledger vivo docs/superpowers/progress/2026-11-07-finite-native-budget-qualification.es.md/blob7af1e194 en ese mismo commit. Consultar refs actuales antes de actuar; Root sólo docs, Source sólo implementador.
+La custodia conserva estado nativo íntegro bajo gzip+AES256GCM y contextoSource/run/attempt/kind. Manifiesto anterior230MB obliga streamingchunks y límites512MiBnativos/768MiBexpandido/128MiBsobre; compresiónreal aúnno probada. Recibos públicos cerrados, rawsólopublicacióncifrada, mismoID/inventario/bytechecksantes ydespués. Mantener3jobs/original900s/recovery≤C0−30s; si falta margen falla y sepreserva, sinrearmar.
 
-Root preparó environment GitHub afw-finite-syn-checkpoint/27007821967 con única rama Source/0tags, con guardado de clave pendiente de verificación: Root dejó preparado un único pegado privado en GitHub. No tocar environments de publicación/rollback ni reutilizar credenciales de Cloudflare. Tras pruebas de custodia y configuración, Root debe liberar nominativamente UN ciclo original900s con nueva recuperación fría y evidencia cifrada antes de la revisión frescaSpec+Quality. No lanzar por instrucciones históricas.
-
-Después siguen Task2readonly/reduction y revisiónconjunta; recorrido/traspaso y comprobaciones actuales de procedencia/custodia/ejecutor/receptor, aviso útil/ACK/retirada yUNAocurrencia realPC-off coordinada. operationalReadiness=false;completePackage=false;PCoff=false. El anterior planowner-restoration56PASS sigue cerrado. Ningún OTP, permiso humano temporal ni reloj real se abre por este CURRENT.
+Siguientesgates: Rootreviewstaging→UNAcalificación8Q+P1→reviewfrescaSpec+QualityTask1→Task2readonly/reduction→reviewconjunta→recorrido/traspaso y comprobacionesactuales decandidato/custodia/ejecutor/receptor→avisoútil/ACK/retirada→UNAocurrenciarealPCoffcoordinada. operationalReadiness=false;completePackage=false;PCoff=false;Maxpendiente. No nuevaOAuth/OTP/credencial/cliente/runtime/main/PR/deployautorizadoporCURRENT.
 
 ## Checkpoint anterior preservado — 7 noviembre2026,17:31UTC
 
