@@ -174,3 +174,12 @@ Añadir observación sólo de datos scopeLogical(rootRef,childRef|null,{phase,at
 Sin asociación individual inequívoca, la fila nativa queda sin logical y el evento queda atribuido al scope real: eso conserva la observación honesta, no inventa un fallo nativo. Scope ausente/ajeno esincomplete. Una operación quefulfilló conservaeseestado aun con guard posterior. No hay autoridad de permiso ni cambios Source. Retención total acotada alcap16384 existente yoverflowexplícito; ningúncontador dedatosexime de guard.
 
 Extender Q4 existente con nativefulfilledsinmarcaindividual+scopeevent, guard countvsdistinctscope ylogical(opRef) separados; mantener exactamente8Q/9total, sinotroCI/caso. Root yChild reales,inmutables/segmentedbyepoch comoantes. Documentar los nombres finales reales enreporte. Esta definición aclara el contrato; no permite declararcoberturaSourceuniversal.
+
+
+## Addendum Root — 11 November 2026: additive chronology experiment
+
+User resumed the saved work. Source remains1455ba78e021f41b82700035a3819898b6a255d7; main and Rootdocs refs verified unchanged. Existing G5 summaries cannot identify when invalid/unattributed begins, because the sensor does not export its event counter. Root authorizes additive fixed-key chronology and reason counters, preserving the original cap16384, event ordering, retention, return values, guards and all business behavior.
+
+The snapshot may additionally expose afw.finite-budget-chronology.syn.v1: actual eventCalls/byEvent, firstOverflow/firstInvalid ordinals+fixed method/reason enums, invalid/unattributed before/after counts and fixed reason histogram. The transition event is after-overflow for classification. No raw data/capabilities, arbitrary caller strings, wall-clock authority or replacement phase globals. Snapshot reads are observational and do not consume events.
+
+One new pure-contract RED precedes implementation. Then one fresh8Q+prepared preflight and producer-only diagnostic via the existing deferWait:true API; the original genuine setup/SDK/Reference/Notice and original900s C0/C1 are preserved, the fixture disposes BEFORE C0. This is not a full lifecycle, nine-check acceptance or replacement for P1. No new real/provider operation. Full causal ruling remains pending the observed chronology. Exact narrow scope and constraints are in briefs/2026-11-07-finite-native-budget-qualification-chronology-resume-20261111.md.

@@ -2,9 +2,9 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — CIERRE 2026-11-07: Source guardado, ninguna ejecución propia pendiente
+## CURRENT — 11Nov2026: reanudación y experimento de cronología
 
-Trabajo cerrado por hoy antes del apagado pedido por Gabriel. Source1455ba78e021f41b82700035a3819898b6a255d7/tree521f2c67291569073f3a2b0a8c13a3b6b1f1e0a7; reporte03aa96c5ba3b4b4298e1a6016015d5eb86faf768. WriterSTOP, TEMP ausente, ejecuciones42420218406 y42422039237 terminales. Task1 sigueNEEDS_CONTEXT:8Q/preflight/producerPASS, P1FAILporoverflow; agregados cloud preservados. Próximo paso: separar volumen y pérdida de atribución antes de modificar el diagnóstico. Sin nueva prueba/cap/Task2/revisión autorizados por este cierre. Todos los readiness false.
+Gabriel pidió continuar. Source1455ba78e021f41b82700035a3819898b6a255d7 y main0c9c475b verificados sin cambios; Task1 sigue incompleta. Se autoriza únicamente el experimento aditivo de cronología descrito al final y en el brief del11nov: un RED puro, luego8Q/preflight y productor parcial que dispone antesC0. No alterarcap/retención/atribución ni repetirP1 completo hasta ruling causal. El implementador anterior ya no está disponible; Root asignará uno nuevo, exclusivo. Readiness/package/PCofffalse; sin paso humano.
 
 ## Estado inicial del plan preservado — 7Nov17:59UTC
 
@@ -369,3 +369,20 @@ Root verificó final1455ba78e021f41b82700035a3819898b6a255d7/tree521f2c672915690
 Estado final honesto:8Q/syntax/lint/preflightM+QA/producerPASS; el cicloSource/SYN comprobó las aserciones nativas previas al fallo de diagnóstico. P1FAIL yTask1NEEDS_CONTEXT, sin aceptación/revisiónfresca/Task2/revisiónconjunta. El plan previo56PASS conserva su cierre separado. Más adelante siguen recorrido completo/traspaso, procedencia/custodia/ejecutor cloud actuales y recepción útil/ACK/retirada para UNA ocurrencia real coordinadaPCoff; Max tiene otro alcance. operationalReadiness=false;completePackage=false;PCoff=false.
 
 Se guarda resumen de cierre en progress/2026-11-07-finite-native-budget-qualification-night-closure.es.md. Sin trabajo propio en vuelo ni paso humano esta noche. No cambios de runtime/CFAPI/auth/permisos/tokens/cron/consumidores/main/PR/publicación. Cierre por instrucción del owner; retomar mañana desde CURRENT, sin repetir RED/G1–G5/inventarios por inercia.
+
+### Reanudación 11nov2026 — ruling de cronología
+
+Lecturas frescas: refs Source1455ba78e021f41b82700035a3819898b6a255d7, Rootdocs7deb3cdaf74c0c4a555df00bb729470044d86a64, main0c9c475b3ebaa970fc11d628b40e50a90cceb727; ledger/código/briefs actuales. Chavo inventario respondido9nov conACK/REPLY propios, sin otra solicitudAFW nueva ni nueva comunicación por cortesía. No hijo activo: el implementador anterior dejó de estar disponible; se usará uno nuevo y exclusivo para esta continuación, sin repetir tareas cerradas.
+
+Ruling: añadir cronología y motivos fijos al sensor, sin arreglar todavía la supuesta causa ni subircap — los agregados anteriores demuestran pérdida pero no orden causal — costo: dos ejecuciones cloud acotadas, unaREDpura y una observación nueva de productorSYN; sin ciclo15min completo. El cap sigue16384 y el primer overflow debe seguir siendoevento16385. Mantener exactamente las decisiones y el orden del sensor existente. Las razones salen de ramas fijas, no de datos del cliente/URL/Error. Snapshot no consume eventos.
+
+| Interfaz/tareas | Conflicto revisado | Decisión |
+| --- | --- | --- |
+| Task1colector → Task2consumidor | DTO aditivo podría confundirse con autoridad o alterar decisiones | Sólo datos de propósito/version propios, backwardcompatible; Task2 sigue sin despachar. |
+| Sensorcap → nuevoexperimento | Cambiarcap o deduplicar eventos alteraría la causa a medir | Cap/orden/retención intactos; sólo contar/clasificar. |
+| TDD → native15min | REDcontract no precisa repetirSDK ni fullP1 | REDpuro8Q existente, una sola ejecución; nuevo productor sólo despuésGREEN/preflight. |
+| Productor → plazos originales | AcortarTTL/rearmar reloj sería inválido | API existente deferWait:true omite espera tras la disposición; I0/C0/C1 originales intactos, no prueba de alarm/coldcleanup. |
+| Runtime/source → GitHub | No conexión humana ni efecto fuera deSource | Branch aislada,5paths permitidos,2MFmáximo, sinruntimeAPI/auth/cliente/main/publicación. |
+| Modelo/sourcewriter | Sesión anterior no recuperable | Único implementador nuevo Astrahigh por diagnóstico asíncrono/múltiples capas; Root sólo docs. |
+
+Brief vinculante nuevo: briefs/2026-11-07-finite-native-budget-qualification-chronology-resume-20261111.md. Autoriza5paths existentes (diagnostics/Qpure/worldCLI/TEMP/report), no nuevo móduloSource. RED≤3min, StageBpure≤3min→probe≤5min. Mismo disparador self-path enbranchSource/contentsread, frozenhasta terminal,7d/exactsameIDreadback/retirarTEMP/report/protegidos/main/STOP. No9/16/56niinventario separado. No cambios de lib/worker/package/lock/config/SDK/descriptor/guardas/Root30s/child5s/C0/C1/semántica. operationalReadiness=false;completePackage=false;PCoff=false. Usercontinua revoca la pausa nocturna para este trabajo autorizado, no amplía a runtime real.
