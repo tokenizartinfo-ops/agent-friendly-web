@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,readdir,copyFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {resolve,relative,join} from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -641,6 +641,71 @@ export async function prepareBudgetProducer(kind,root){
  const {produceCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
  return produceCheckpoint(root,{variant:'principal',budgetQualification:true});
 }
+
+async function preparePositiveProbe(root){
+ positiveKind('positive');
+ assert.equal(root,'output/finite-budget/producer');
+ assert.equal(process.env.AFW_BUDGET_PREFLIGHT,'output/finite-budget/prior-pure/preflight.json');
+ const checkpoint='output/chronology-native-checkpoint';
+ const {produceCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
+ console.info('AFW_PROBE {"kind":"step","step":"producer-entered"}');
+ await produceCheckpoint(checkpoint,{variant:'principal',budgetQualification:true,deferWait:true});
+ console.info('AFW_PROBE {"kind":"step","step":"producer-returned"}');
+ const returnedAt=Date.now();
+ const {manifest,data}=await verifyBudgetCheckpoint('positive',checkpoint);
+ console.info('AFW_PROBE {"kind":"step","step":"checkpoint-verified"}');
+ const {I0,C0,C1}=manifest;
+ const {completeNormal,completeWrites,referenceRows,referenceReadbacks}=data.budget.ownerReference;
+ const noticeRows=data.facts.rows.filter(([key])=>key.startsWith('connection-preparation:')&&key.endsWith(':notice')).length;
+ const facts={
+  purpose:'afw.finite-budget-producer-probe.syn.v1',scope:'partial-producer-only',
+  source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,
+  I0,C0,C1,returnedAt,completeNormal,completeWrites,referenceRows,referenceReadbacks,noticeRows,
+  disposedBeforeC0:returnedAt<C0,originalAlarmObserved:data.facts.signal.entered!==0,
+  operationalReadiness:false,completePackage:false,PCoff:false
+ };
+ await mkdir(join(root,'graphs'),{recursive:true});
+ const epochs=data.budget.epochs;
+ await writeFile(join(root,'full-result.json'),JSON.stringify({facts,epochs,preparedInputs:data.budget.preparedInputs},null,2));
+ const aggregates=[{kind:'facts',...facts}];
+ for(const {segment,epoch,role,snapshot} of epochs){
+  const {purpose,limit,eventCalls,byEvent,firstInvalid,firstOverflow,invalid,unattributed,reasons}=snapshot.chronology;
+  const who={segment,epoch,role};
+  aggregates.push({kind:'chronology',...who,purpose,limit,eventCalls,byEvent,firstInvalid,firstOverflow,invalid,unattributed,coverage:snapshot.coverage});
+  aggregates.push({kind:'reasons',...who,reasons});
+ }
+ const proofNames=['graphs/native-syn.json','graphs/metafiles.json','graphs/canary-index.mjs','graphs/qa-index.mjs','manifest.json'];
+ for(const name of proofNames){
+  const file=join(checkpoint,name);
+  const bytes=await readFile(file);
+  const proof={path:name,bytes:bytes.length,sha256:hash(bytes)};
+  if(name!=='manifest.json')assert.deepEqual(proof,manifest.files.find(entry=>entry.path===name));
+  await copyFile(file,join(root,name));
+  aggregates.push({kind:'proof',...proof});
+ }
+ await writeFile(join(root,'aggregates.json'),JSON.stringify(aggregates,null,2));
+ for(const record of aggregates){
+  const line='AFW_PROBE '+JSON.stringify(record);
+  assert(Buffer.byteLength(line,'utf8')<=2048,'bounded SYN aggregate');
+  console.info(line);
+ }
+ assert.equal(C0,I0+900000);assert.equal(C1,C0+180000);assert(facts.disposedBeforeC0);assert.equal(facts.originalAlarmObserved,false);
+ assert.equal(completeNormal,1);assert.equal(completeWrites,1);assert.equal(referenceRows,1);assert(referenceReadbacks>0);assert.equal(noticeRows,1);
+ const identities=new Set();
+ for(const {segment,role,epoch,snapshot} of epochs){
+  assert.equal(segment,'producer');assert(['M','QA'].includes(role));
+  assert(Number.isSafeInteger(epoch)&&epoch>=0);const key=role+'|'+epoch;assert(!identities.has(key));identities.add(key);
+  const {purpose,limit,eventCalls,byEvent,reasons,firstInvalid,firstOverflow,invalid,unattributed}=snapshot.chronology;
+  const sum=values=>Object.values(values).reduce((a,b)=>a+b,0);
+  assert.equal(purpose,'afw.finite-budget-chronology.syn.v1');assert.equal(limit,16384);assert.equal(sum(byEvent),eventCalls);
+  assert.equal(sum(invalid),snapshot.coverage.invalid);assert.equal(sum(reasons),snapshot.coverage.invalid);
+  assert.equal(sum(unattributed),snapshot.coverage.unattributed);assert.equal(!!firstInvalid,snapshot.coverage.invalid>0);
+  assert.equal(!!firstOverflow,snapshot.coverage.overflow);assert.equal(!!firstOverflow,eventCalls>limit);
+  if(firstOverflow)assert.equal(firstOverflow.ordinal,limit+1);
+ }
+ for(const {epoch} of epochs){assert(identities.has('M|'+epoch));assert(identities.has('QA|'+epoch));}
+}
+
 export async function verifyBudgetCheckpoint(kind,root){
  positiveKind(kind);
  const {verifyCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
@@ -693,6 +758,7 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
  const main=async()=>{
   const [command,root]=process.argv.slice(2);
   if(command==='preflight-budget')await preflightBudgetCompilation();
+  else if(command==='prepare-positive-probe')await preparePositiveProbe(root);
   else if(command==='prepare-positive')await prepareBudgetProducer('positive',root);
   else if(command==='verify-positive')await verifyBudgetCheckpoint('positive',root);
   else if(command==='inspect-budget-graphs')await inspectBudgetCompilation(root);

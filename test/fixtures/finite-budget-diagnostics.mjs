@@ -1,5 +1,16 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 const PURPOSE='afw.finite-budget-diagnostics.syn.v1';
+const CHRONOLOGY='afw.finite-budget-chronology.syn.v1';
+const EVENTS=['root','child','begin','bytes','logical','scopeLogical','cancel','settle','incomplete'];
+const INVALID_REASONS=new Set([
+ 'unknown','constructorOptions','collectorException','rootInput','childInput','childConflict','beginContext','beginMethodResource',
+ 'beginFetchLink','bytesInput','logicalInput','scopeLogicalInput','cancelInput','settleInput','settleTime','promiseThenMissing','promiseThenException',
+ 'descendantStore','descendantChild','runMissingLease','phaseStore','phaseValue','guardRoot','holderInput','holderConflict','captureInput',
+ 'captureConflict','facadeInput','localBodyStore','observerFulfilledCallback','observerRejectedCallback','observerThenException','dormantInvocation','cloneOrigin',
+ 'readerOrigin','holderIdentity','invocationIdentity','invocationRoot','methodPhase','clockLease','aliasStore','aliasChild','transportPhase','transactionContext','fetchResource',
+]);
+const counts=keys=>Object.fromEntries(Array.from(keys,key=>[key,0]));
+const splitCount=()=>({beforeOverflow:0,afterOverflow:0});
 const PHASES=new Set(['setup','authorize_get','authorize_post','sdk_lookup','token_exchange','mcp_read','monitoring_get','monitoring_post','cleanup_before_restore','restore','sdk_reduction','final_inventory']);
 const RESOURCES=new Set(['CFcredential','CFdeployment','CFversion','CFworkflow','CFcontainer','CFschedule','CFtail','GHsource','JWKS','DO','SQL','KV','transport','rateLimiter']);
 const OPERATIONS=new Set(['get','list','put','delete','first','all','run','sync','transaction','getAlarm','setAlarm','deleteAlarm','fetch','read','cancel','batch','exec','rpc','limit']);
@@ -17,76 +28,102 @@ export function createBudgetDiagnostics(options={}){
  const coverage={overflow:false,invalid:testRevision&&workerRole===role&&limit===requested?0:1,unattributed:0,nativeBytesUnavailable:0};
  const roots=new WeakMap(),rootHandles=new WeakMap(),children=new WeakMap(),childHandles=new WeakMap(),operations=new WeakMap();
  const rows=[],logicalScopeEvents=[],deniedScopes=new Set(),groups=new Map(),scopes=new Map(),totals=metric();let rootOrdinal=0,childOrdinal=0,opOrdinal=0,scopeEventOrdinal=0,scopeGuardEvents=0,events=0,firstAt=null,lastAt=null;
- const event=()=>{events++;if(events>limit){coverage.overflow=true;return false;}return true;};
- const invalid=(unattributed=false)=>{coverage.invalid++;if(unattributed)coverage.unattributed++;return null;};
+ const byEvent=counts(EVENTS),reasons=counts(INVALID_REASONS),invalidByOverflow=splitCount(),unattributedByOverflow=splitCount();
+ let firstOverflow=null,firstInvalid=null,method='constructor';
+ const event=()=>{
+  events++;byEvent[method]++;
+  if(events>limit){coverage.overflow=true;firstOverflow??={event:method,ordinal:events};return false;}
+  return true;
+ };
+ const recordInvalid=(candidate,unattributed)=>{
+  const reason=INVALID_REASONS.has(candidate)?candidate:'unknown';
+  const relation=coverage.overflow?'afterOverflow':'beforeOverflow';
+  firstInvalid??={event:method,ordinal:events,reason,relation};
+  reasons[reason]++;invalidByOverflow[relation]++;
+  if(unattributed)unattributedByOverflow[relation]++;
+ };
+ if(coverage.invalid)recordInvalid('constructorOptions',false);
+ const invalid=(reason,unattributed=false)=>{
+  coverage.invalid++;if(unattributed)coverage.unattributed++;
+  recordInvalid(reason,unattributed);return null;
+ };
+ const chronology=()=>({
+  purpose:CHRONOLOGY,limit,eventCalls:events,byEvent:{...byEvent},
+  firstOverflow:firstOverflow&&{...firstOverflow},firstInvalid:firstInvalid&&{...firstInvalid},
+  invalid:{...invalidByOverflow},unattributed:{...unattributedByOverflow},reasons:{...reasons}
+ });
  const handle=()=>Object.freeze(Object.create(null));
  const touch=(row,field,amount=1)=>{for(const m of [totals,groups.get(row.phase+'|'+row.resourceClass),scopes.get(row.rootOrdinal+'|'+(row.childOrdinal??0))])m[field]+=amount;};
  const active=(row,delta)=>{for(const m of [totals,groups.get(row.phase+'|'+row.resourceClass),scopes.get(row.rootOrdinal+'|'+(row.childOrdinal??0))]){m.active+=delta;m.peak=Math.max(m.peak,m.active);}};
- const safe=fn=>(...args)=>{try{return fn(...args);}catch{return invalid();}};
- const root=safe((object,meta)=>{
+ const safe=(name,fn)=>(...args)=>{
+  const previous=method;method=name;
+  try{return fn(...args);}catch{return invalid('collectorException');}
+  finally{method=previous;}
+ };
+ const root=safe('root',(object,meta)=>{
   const keep=event(),phase=data(meta,'phase'),deadline=data(meta,'deadline'),kind=data(meta,'kind');
-  if(!nativeObject(object)||!PHASES.has(phase)||!['control','transport'].includes(kind)||!(deadline===null||number(deadline)))return invalid(true);
+  if(!nativeObject(object)||!PHASES.has(phase)||!['control','transport'].includes(kind)||!(deadline===null||number(deadline)))return invalid('rootInput',true);
   const previous=roots.get(object);if(previous)return previous;
   if(!keep)return null;
   const ref=handle(),value={rootOrdinal:++rootOrdinal,phase,deadline,kind};roots.set(object,ref);rootHandles.set(ref,value);return ref;
  });
- const child=safe((rootRef,object,meta)=>{
+ const child=safe('child',(rootRef,object,meta)=>{
   const keep=event(),r=nativeObject(rootRef)&&rootHandles.get(rootRef),deadline=data(meta,'deadline');
-  if(!r||!nativeObject(object)||!(deadline===null||number(deadline)))return invalid(true);
-  const previous=children.get(object);if(previous){if(childHandles.get(previous).rootOrdinal!==r.rootOrdinal)return invalid(true);return previous;}
+  if(!r||!nativeObject(object)||!(deadline===null||number(deadline)))return invalid('childInput',true);
+  const previous=children.get(object);if(previous){if(childHandles.get(previous).rootOrdinal!==r.rootOrdinal)return invalid('childConflict',true);return previous;}
   if(!keep)return null;
   const ref=handle();children.set(object,ref);childHandles.set(ref,{rootOrdinal:r.rootOrdinal,childOrdinal:++childOrdinal,deadline});return ref;
  });
- const begin=safe((rootRef,childRef,meta)=>{
+ const begin=safe('begin',(rootRef,childRef,meta)=>{
   const keep=event(),r=nativeObject(rootRef)&&rootHandles.get(rootRef),c=childRef===null?null:nativeObject(childRef)&&childHandles.get(childRef);
   const phase=data(meta,'phase'),resourceClass=data(meta,'resourceClass'),operation=data(meta,'operation'),at=data(meta,'at'),fetchOpRef=data(meta,'fetchOpRef')??null;
   const fetchRow=fetchOpRef===null?null:nativeObject(fetchOpRef)&&operations.get(fetchOpRef);
-  if(!r||childRef!==null&&!c||c&&c.rootOrdinal!==r.rootOrdinal||!PHASES.has(phase)||!RESOURCES.has(resourceClass)||!OPERATIONS.has(operation)||!number(at))return invalid(true);
-  if(operation==='rpc'&&resourceClass!=='DO'||operation==='limit'&&resourceClass!=='rateLimiter'||resourceClass==='rateLimiter'&&operation!=='limit')return invalid(true);
-  if(fetchOpRef!==null&&(!fetchRow||!['read','cancel'].includes(operation)||fetchRow.operation!=='fetch'||fetchRow.rootOrdinal!==r.rootOrdinal||fetchRow.childOrdinal!==(c?.childOrdinal??null)||fetchRow.phase!==phase||fetchRow.resourceClass!==resourceClass))return invalid(true);
+  if(!r||childRef!==null&&!c||c&&c.rootOrdinal!==r.rootOrdinal||!PHASES.has(phase)||!RESOURCES.has(resourceClass)||!OPERATIONS.has(operation)||!number(at))return invalid('beginContext',true);
+  if(operation==='rpc'&&resourceClass!=='DO'||operation==='limit'&&resourceClass!=='rateLimiter'||resourceClass==='rateLimiter'&&operation!=='limit')return invalid('beginMethodResource',true);
+  if(fetchOpRef!==null&&(!fetchRow||!['read','cancel'].includes(operation)||fetchRow.operation!=='fetch'||fetchRow.rootOrdinal!==r.rootOrdinal||fetchRow.childOrdinal!==(c?.childOrdinal??null)||fetchRow.phase!==phase||fetchRow.resourceClass!==resourceClass))return invalid('beginFetchLink',true);
   const row={testRevision,workerRole,phase,resourceClass,operation,rootOrdinal:r.rootOrdinal,childOrdinal:c?.childOrdinal??null,opOrdinal:++opOrdinal,fetchOpOrdinal:fetchRow?.opOrdinal??null,kind:r.kind,rootDeadline:r.deadline,childDeadline:c?.deadline??null,enteredAt:at,settledAt:null,status:'pending',nativeBytesRead:null,nativeBytesReason:'not_exposed_by_native_api',chunksRead:null,readDurationMs:0,logicalAt:null,logicalReason:null,cancelStartedAt:null,cancelSettledAt:null};
   const g=phase+'|'+resourceClass,scope=row.rootOrdinal+'|'+(row.childOrdinal??0);if(!groups.has(g))groups.set(g,{phase,resourceClass,...metric()});if(!scopes.has(scope))scopes.set(scope,{rootOrdinal:row.rootOrdinal,childOrdinal:row.childOrdinal,...metric()});
   coverage.nativeBytesUnavailable++;touch(row,'nativeStarted');active(row,1);
   firstAt=firstAt===null?at:Math.min(firstAt,at);lastAt=lastAt===null?at:Math.max(lastAt,at);
   const ref=handle();operations.set(ref,row);if(keep)rows.push(row);return ref;
  });
- const bytes=safe((ref,meta)=>{
+ const bytes=safe('bytes',(ref,meta)=>{
   event();const row=nativeObject(ref)&&operations.get(ref),length=data(meta,'length'),chunks=data(meta,'chunks'),durationMs=data(meta,'durationMs');
-  if(!row||row.operation!=='read'||!integer(length)||!integer(chunks)||!number(durationMs))return invalid();
+  if(!row||row.operation!=='read'||!integer(length)||!integer(chunks)||!number(durationMs))return invalid('bytesInput');
   if(row.nativeBytesRead===null){row.nativeBytesRead=0;row.chunksRead=0;row.nativeBytesReason=null;coverage.nativeBytesUnavailable--;}
   row.nativeBytesRead+=length;row.chunksRead+=chunks;row.readDurationMs+=durationMs;
   for(const m of [totals,groups.get(row.phase+'|'+row.resourceClass),scopes.get(row.rootOrdinal+'|'+(row.childOrdinal??0))]){m.nativeBytesRead=(m.nativeBytesRead??0)+length;m.chunksRead=(m.chunksRead??0)+chunks;}
  });
- const logical=safe((ref,meta)=>{
+ const logical=safe('logical',(ref,meta)=>{
   event();const row=nativeObject(ref)&&operations.get(ref),at=data(meta,'at'),reason=data(meta,'reason');
-  if(!row||!number(at)||!REASONS.has(reason))return invalid();
+  if(!row||!number(at)||!REASONS.has(reason))return invalid('logicalInput');
   if(row.logicalAt!==null)return;
   row.logicalAt=at;row.logicalReason=reason;touch(row,'logicalDenied');
  });
 
- const scopeLogical=safe((rootRef,childRef,meta)=>{
+ const scopeLogical=safe('scopeLogical',(rootRef,childRef,meta)=>{
   const keep=event(),r=nativeObject(rootRef)&&rootHandles.get(rootRef),c=childRef===null?null:nativeObject(childRef)&&childHandles.get(childRef);
   const phase=data(meta,'phase'),at=data(meta,'at'),reason=data(meta,'reason');
-  if(!r||childRef!==null&&!c||c&&c.rootOrdinal!==r.rootOrdinal||!PHASES.has(phase)||!number(at)||!REASONS.has(reason))return invalid(true);
+  if(!r||childRef!==null&&!c||c&&c.rootOrdinal!==r.rootOrdinal||!PHASES.has(phase)||!number(at)||!REASONS.has(reason))return invalid('scopeLogicalInput',true);
   scopeGuardEvents++;const eventOrdinal=++scopeEventOrdinal;
   if(keep){deniedScopes.add(r.rootOrdinal+'|'+(c?.childOrdinal??0)+'|'+phase);logicalScopeEvents.push({testRevision,workerRole,eventOrdinal,rootOrdinal:r.rootOrdinal,childOrdinal:c?.childOrdinal??null,phase,at,reason});}
  });
 
- const cancel=safe((ref,meta)=>{
+ const cancel=safe('cancel',(ref,meta)=>{
   event();const row=nativeObject(ref)&&operations.get(ref),at=data(meta,'at'),stage=data(meta,'stage');
-  if(!row||!number(at)||!['started','settled'].includes(stage))return invalid();
+  if(!row||!number(at)||!['started','settled'].includes(stage))return invalid('cancelInput');
   const key=stage==='started'?'cancelStartedAt':'cancelSettledAt';if(row[key]!==null)return;
   row[key]=at;touch(row,stage==='started'?'cancelStarted':'cancelSettled');
  });
- const settle=safe((ref,meta)=>{
+ const settle=safe('settle',(ref,meta,observerReason)=>{
   event();const row=nativeObject(ref)&&operations.get(ref),at=data(meta,'at'),status=data(meta,'status');
-  if(!row||!number(at)||!['fulfilled','rejected'].includes(status))return invalid();
+  if(!row||!number(at)||!['fulfilled','rejected'].includes(status))return invalid(observerReason==='promiseThenMissing'||observerReason==='promiseThenException'?observerReason:'settleInput');
   if(row.status!=='pending')return;
-  if(at<row.enteredAt)return invalid();
+  if(at<row.enteredAt)return invalid('settleTime');
   row.status=status;row.settledAt=at;lastAt=Math.max(lastAt??at,at);touch(row,'nativeSettled');if(status==='rejected')touch(row,'nativeRejected');touch(row,'nativeDurationSumMs',at-row.enteredAt);active(row,-1);
  });
- const snapshot=safe(()=>({purpose:PURPOSE,testRevision,workerRole,rows:rows.map(row=>({...row})),logicalScopeEvents:logicalScopeEvents.map(event=>({...event})),totals:{...totals,scopeGuardEvents,deniedScopes:deniedScopes.size,observedWallMs:firstAt===null?0:(lastAt??firstAt)-firstAt,scopes:[...scopes.values()].map(m=>({...m}))},byPhaseResource:[...groups.values()].map(m=>({...m})),coverage:{...coverage},operationalReadiness:false,completePackage:false,PCoff:false}));
- const incomplete=safe(()=>{event();return invalid(true);});
+ const snapshot=safe('snapshot',()=>({purpose:PURPOSE,testRevision,workerRole,rows:rows.map(row=>({...row})),logicalScopeEvents:logicalScopeEvents.map(event=>({...event})),totals:{...totals,scopeGuardEvents,deniedScopes:deniedScopes.size,observedWallMs:firstAt===null?0:(lastAt??firstAt)-firstAt,scopes:[...scopes.values()].map(m=>({...m}))},byPhaseResource:[...groups.values()].map(m=>({...m})),coverage:{...coverage},chronology:chronology(),operationalReadiness:false,completePackage:false,PCoff:false}));
+ const incomplete=safe('incomplete',reason=>{event();return invalid(reason,true);});
  return Object.freeze({root,child,begin,bytes,logical,scopeLogical,cancel,settle,snapshot,incomplete});
 }
 function passiveThen(value){
@@ -96,10 +133,10 @@ function passiveThen(value){
 }
 export function observeBudgetPromise(collector,opRef,promise){
  try{
-  const then=passiveThen(promise);if(!then){collector.settle(opRef,{at:performance.now(),status:null});return promise;}
+  const then=passiveThen(promise);if(!then){collector.settle(opRef,{at:performance.now(),status:null},'promiseThenMissing');return promise;}
   const chain=Reflect.apply(then,promise,[()=>collector.settle(opRef,{at:performance.now(),status:'fulfilled'}),()=>collector.settle(opRef,{at:performance.now(),status:'rejected'})]);
   const next=passiveThen(chain);if(next)Reflect.apply(next,chain,[undefined,()=>{}]);
- }catch{try{collector.settle(opRef,{at:performance.now(),status:null});}catch{/* A sensor never changes native output. */}}
+ }catch{try{collector.settle(opRef,{at:performance.now(),status:null},'promiseThenException');}catch{/* A sensor never changes native output. */}}
  return promise;
 }
 
@@ -108,7 +145,7 @@ export function observeBudgetPromise(collector,opRef,promise){
 export function createBudgetRuntime(options={}){
  const collector=createBudgetDiagnostics(options),als=new AsyncLocalStorage();
  const leaseClocks=new WeakMap(),leases=new WeakMap(),nativeHolders=new WeakMap(),nativePairs=new WeakMap(),bodies=new WeakMap(),facades=new WeakSet(),facadeHolders=new WeakSet(),nativeFunctions=new WeakMap(),requestResources=new WeakMap(),requestMethods=new WeakMap();
- const now=()=>performance.now(),incomplete=()=>collector.incomplete();
+ const now=()=>performance.now(),incomplete=reason=>collector.incomplete(reason);
  const immutable=value=>Object.freeze(value);
  const root=(lease,phase,deadline,kind='control')=>{
   const ref=collector.root(lease,{phase,deadline,kind});
@@ -117,44 +154,44 @@ export function createBudgetRuntime(options={}){
  };
  const descendant=(parent,child,deadline)=>{
   const parentStore=leases.get(parent),currentStore=als.getStore(),store=currentStore?.root===parentStore?.root?currentStore:parentStore;
-  if(!store||!nativeObject(child)){incomplete();return child;}
+  if(!store||!nativeObject(child)){incomplete(!store?'descendantStore':'descendantChild');return child;}
   const ref=collector.child(store.root,child,{deadline});
   if(ref)leases.set(child,immutable({...store,child:ref}));
   return child;
  };
  const run=(lease,invoke)=>{
-  const store=leases.get(lease);if(!store&&als.getStore()?.excluded)return invoke();if(!store)incomplete();
+  const store=leases.get(lease);if(!store&&als.getStore()?.excluded)return invoke();if(!store)incomplete('runMissingLease');
   return als.run(store,()=>invoke());
  };
  const phase=(value,invoke)=>{
   const store=als.getStore();
-  if(!store||!PHASES.has(value)){incomplete();return invoke();}
+  if(!store||!PHASES.has(value)){incomplete(!store?'phaseStore':'phaseValue');return invoke();}
   return als.run(immutable({...store,phase:value}),()=>invoke());
  };
- const guardValue=value=>{const store=als.getStore();if(store?.excluded)return value;if(store?.root)collector.scopeLogical(store.root,store.child,{phase:store.phase,at:now(),reason:'guard'});else incomplete();return value;};
+ const guardValue=value=>{const store=als.getStore();if(store?.excluded)return value;if(store?.root)collector.scopeLogical(store.root,store.child,{phase:store.phase,at:now(),reason:'guard'});else incomplete('guardRoot');return value;};
  const fixture=invoke=>als.run(immutable({excluded:true}),()=>invoke());
  const nativeHolder=(holder,resource,kind='holder')=>{
   if(holder==null)return holder;
-  if(!nativeObject(holder)||!RESOURCES.has(resource)){incomplete();return holder;}
-  const prior=nativeHolders.get(holder);if(prior&&(prior.resource!==resource||prior.kind!==kind))incomplete();else nativeHolders.set(holder,immutable({resource,kind}));
+  if(!nativeObject(holder)||!RESOURCES.has(resource)){incomplete('holderInput');return holder;}
+  const prior=nativeHolders.get(holder);if(prior&&(prior.resource!==resource||prior.kind!==kind))incomplete('holderConflict');else nativeHolders.set(holder,immutable({resource,kind}));
   return holder;
  };
  // Called only at source-proven original acquisitions, never by method-name inference.
  const capture=(holder,method,fn,resource)=>{
-  if(!nativeObject(holder)||typeof fn!=='function'||!RESOURCES.has(resource)){incomplete();return fn;}
+  if(!nativeObject(holder)||typeof fn!=='function'||!RESOURCES.has(resource)){incomplete('captureInput');return fn;}
   let pairs=nativePairs.get(holder);if(!pairs){pairs=new WeakMap();nativePairs.set(holder,pairs);}
-  const prior=pairs.get(fn);if(prior&&(prior.method!==method||prior.resource!==resource))incomplete();
+  const prior=pairs.get(fn);if(prior&&(prior.method!==method||prior.resource!==resource))incomplete('captureConflict');
   else if(!facades.has(fn)){const description=immutable({method,resource,kind:nativeHolders.get(holder)?.kind??'holder'});pairs.set(fn,description);nativeFunctions.set(fn,description);}
   return fn;
  };
- const facade=value=>{if(nativeObject(value))facades.add(value);else incomplete();return value;};
+ const facade=value=>{if(nativeObject(value))facades.add(value);else incomplete('facadeInput');return value;};
  const tagBody=(value,owner)=>{
   if(nativeObject(value)&&owner)bodies.set(value,owner);
   return value;
  };
  const request=(value,lease)=>tagBody(value,immutable({store:leases.get(lease),resource:'transport',fetch:null,origin:'inbound'}));
  const localResponse=(value)=>{
-  const store=als.getStore();if(!store)incomplete();
+  const store=als.getStore();if(!store)incomplete('localBodyStore');
   return tagBody(value,immutable({store,resource:'transport',fetch:null,origin:'local-transport'}));
  };
  const body=(receiver,optional=false)=>{
@@ -168,32 +205,32 @@ export function createBudgetRuntime(options={}){
   try{
    const then=passiveThen(value);
    if(!then){fulfilled(value);return;}
-   const chained=Reflect.apply(then,value,[v=>{try{fulfilled(v);}catch{incomplete();}},()=>{try{rejected();}catch{incomplete();}}]);
+   const chained=Reflect.apply(then,value,[v=>{try{fulfilled(v);}catch{incomplete('observerFulfilledCallback');}},()=>{try{rejected();}catch{incomplete('observerRejectedCallback');}}]);
    const next=passiveThen(chained);if(next)Reflect.apply(next,chained,[undefined,()=>{}]);
-  }catch{incomplete();}
+  }catch{incomplete('observerThenException');}
  };
  function invoke(fn,receiver,args,meta,original=()=>Reflect.apply(fn,receiver,args)){
   const bodyOwner=bodies.get(receiver),currentStore=als.getStore();
   const localStore=bodyOwner&&!bodyOwner.fetch&&bodyOwner.origin!=='outbound'&&currentStore?.root===bodyOwner.store?.root&&!currentStore?.excluded?currentStore:null;
   const store=localStore??bodyOwner?.store??currentStore;
-  if(meta.dormant){incomplete();return original();}
+  if(meta.dormant){incomplete('dormantInvocation');return original();}
   if(meta.edge==='clone'){
-   const result=original();if(bodyOwner)tagBody(result,bodyOwner);else incomplete();return result;
+   const result=original();if(bodyOwner)tagBody(result,bodyOwner);else incomplete('cloneOrigin');return result;
   }
   if(meta.edge==='reader'){
-   const result=original();if(bodyOwner)tagBody(result,localStore?immutable({...bodyOwner,store:localStore}):bodyOwner);else incomplete();return result;
+   const result=original();if(bodyOwner)tagBody(result,localStore?immutable({...bodyOwner,store:localStore}):bodyOwner);else incomplete('readerOrigin');return result;
   }
   const pair=(nativeObject(receiver)?nativePairs.get(receiver)?.get(fn):null)??nativePairs.get(globalThis)?.get(fn)??nativeFunctions.get(fn);
   const resource=pair?.resource;
   if(meta.edge==='holder'||pair?.kind==='namespace'&&pair.method==='get'){
    const result=original();
    if(resource)nativeHolder(result,resource,pair?.kind==='namespace'?'stub':'holder');
-   else if(!facades.has(fn)&&!store?.excluded)incomplete();
+   else if(!facades.has(fn)&&!store?.excluded)incomplete('holderIdentity');
    return result;
   }
   if(facades.has(fn)||meta.excluded||store?.excluded)return original();
   const known=pair||bodyOwner;
-  if(!known||!store?.root){incomplete();return original();}
+  if(!known||!store?.root){incomplete(!known?'invocationIdentity':'invocationRoot');return original();}
   const operation=meta.operation??pair?.method,resourceClass=bodyOwner?.resource??(meta.classifyFetch?fetchResource(args[0]):meta.resource??resource);
   const at=now(),ref=collector.begin(store.root,store.child,{phase:store.phase,resourceClass,operation,at,fetchOpRef:bodyOwner?.fetch??null});
   if(operation==='cancel'&&bodyOwner?.fetch)collector.cancel(bodyOwner.fetch,{at,stage:'started'});
@@ -231,19 +268,19 @@ export function createBudgetRuntime(options={}){
  };
  
  const methodValue=(request,value)=>{requestMethods.set(request,value);return value;};
- const methodPhase=(request,prefix)=>{const method=requestMethods.get(request);if(!['GET','POST'].includes(method)){incomplete();return null;}return prefix+'_'+method.toLowerCase();};
+ const methodPhase=(request,prefix)=>{const method=requestMethods.get(request);if(!['GET','POST'].includes(method)){incomplete('methodPhase');return null;}return prefix+'_'+method.toLowerCase();};
  const deadline=lease=>leaseClocks.get(lease);
- const clock=(lease,deadline)=>{if(nativeObject(lease))leaseClocks.set(lease,deadline);else incomplete();return lease;};
+ const clock=(lease,deadline)=>{if(nativeObject(lease))leaseClocks.set(lease,deadline);else incomplete('clockLease');return lease;};
  const control=(lease,value,req,invoke)=>{
   if(!leases.has(lease))root(lease,value,leaseClocks.get(lease));
   request(req,lease);return run(lease,invoke);
  };
  const childCall=(parent,child,deadline,invoke)=>{if(!leases.has(parent)&&als.getStore()?.excluded)return invoke();descendant(parent,child,deadline);return run(child,invoke);};
  const childInvoke=(parent,deadline,fn,receiver,args)=>childCall(parent,args[0],deadline,()=>Reflect.apply(fn,receiver,args));
- const alias=(parent,child)=>{const store=leases.get(parent);if(store&&nativeObject(child))leases.set(child,store);else if(!als.getStore()?.excluded)incomplete();return child;};
+ const alias=(parent,child)=>{const store=leases.get(parent);if(store&&nativeObject(child))leases.set(child,store);else if(!als.getStore()?.excluded)incomplete(!store?'aliasStore':'aliasChild');return child;};
  const transport=(req,path,invoke)=>{
   const value=path==='/oauth/token'?'token_exchange':path==='/mcp'?'mcp_read':null;
-  if(!value){incomplete();return invoke();}
+  if(!value){incomplete('transportPhase');return invoke();}
   root(req,value,null,'transport');request(req,req);return run(req,invoke);
  };
  function readMethod(receiver,method,optional=false){
@@ -263,7 +300,7 @@ export function createBudgetRuntime(options={}){
  const transactionArgument=value=>{
   if(facadeHolders.has(value))return value;
   if(als.getStore()?.nativeTransaction)nativeHolder(value,'DO','transaction');
-  else if(!als.getStore()?.excluded)incomplete();
+  else if(!als.getStore()?.excluded)incomplete('transactionContext');
   return value;
  };
  
@@ -284,7 +321,7 @@ export function createBudgetRuntime(options={}){
     else if(value.includes('/versions')||value.includes('/scripts/')||value.includes('/workers/workers/'))resource='CFversion';
    }
   }
-  if(required&&!resource)incomplete();
+  if(required&&!resource)incomplete('fetchResource');
   return resource;
  }
  const bind=fn=>{
