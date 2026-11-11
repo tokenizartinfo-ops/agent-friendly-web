@@ -1,14 +1,10 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 11 DE NOVIEMBRE DE 2026: experimento de cronología
+## CURRENT — 11 DE NOVIEMBRE DE 2026: diagnóstico medido y comparación controlada
 
-Gabriel pidió continuar. Refs verificadas: Source1455ba78e021f41b82700035a3819898b6a255d7/tree521f2c67291569073f3a2b0a8c13a3b6b1f1e0a7; Rootdocs7deb3cda; main0c9c475b. No hijo activo; el escritor anterior dejó de estar disponible, Root asignará un implementador nuevo exclusivo. Root sólo docs/finite-pcoff-continuation-20261103; Source feat/finite-native-cleanup-20261101.
+ContinuaciónSource/SYN activa. Sourcebc03e760c2c360755b2f94f3fbc6a0db942e4c36/treeb3eedfeccd64018495db72fc5550fa2ecf8e2b96,report318a77affda20793a0316bd5387c5e99da1d3ef9; main0c9c475b. Sonda43101479429 SUCCESS:8Q+preflight+productorparcial+exactosartefactos, sinconsumer/alarmoriginal. QA0/1invalidtrasoverflow; QA2readerOrigin1y14invalidprevios,noatribuir todoalcap. TEMPretirado.
 
-Task1 está incompleta. G5run42420218406 pasó8Q/preflight/producer pero P1falló poroverflowQA. El cicloSOURCE/SYN verificó el cierre previo al chequeo diagnóstico; no es aceptaciónPCoff. Los agregados del7nov permiten límites inferiores superiores a16384 pero no orden firstInvalid/firstOverflow ni razones: no se conocen las causas antes/después.
-
-NEXT autorizado por Root: añadir sólo datos de cronología/motivos enum al sensor, manteniendo cap16384/orden/retención/valores nativos y todas las guardas. Un REDpuro de contrato, después8Q/preflight y UN productor parcial con el API existente deferWait:true; completa setupSDK/Reference/Notice, conserva originalI0/C0/C1 y dispone antesC0. No cold/alarm/P1completo ni9GREEN por este experimento. Leer el nuevo brief briefs/2026-11-07-finite-native-budget-qualification-chronology-resume-20261111.md y el último ruling del ledger progress/2026-11-07-finite-native-budget-qualification.es.md. Source5paths, nada de capfix/SourceCore/permisos/runtime. Congelar al activar,7d/exactreadback/retirarTEMP/report/STOP; Root decidirá con evidencia, no retry ciego.
-
-El cierre7nov y su resumen permanecen como evidencia, no instrucciones de pausa actuales. Chavo inventario fue atendido9nov por la bandeja privada; no duplicar. El plan owner-restoration56PASS anterior continúa cerrado. Después siguen Task1review, Task2límitesreadonly/reduction y revisiónconjunta; por delante aún recorrido completo/traspaso y ejecución cloud real coordinadaPCoff, conMax separado. operationalReadiness=false;completePackage=false;PCoff=false. No paso humano necesario ahora.
+NEXT Rootautorizado: UN candidatoexplicitoSYN32768comparado condefault16384intacto, con REDpuro decontratonuevo y8Q/preflight/productorparcial, sinrelajarcriteriodeaceptación. Mismoimplementadorbudget_chronology_impl/fivepaths; lecturaexhaustivadelrulingalfinalde progress/2026-11-07-finite-native-budget-qualification.es.md y brief11nov. Nocapcreciente/retryautomático/atribucióninventada. No ensayoreal ni paso humano ahora. Task1siguependiente; operacionalReadiness/completePackage/PCofffalse; Maxseparado. RootdocsySourcesiguenaislados. Historiadebajosupersedida.
 
 ## Checkpoint anterior preservado — 7 noviembre2026,17:31UTC
 
