@@ -1679,3 +1679,73 @@ BASE-E `69f5c5da6af1407e8ecb706a96c89fb3678c5f51`, tree `eb0f0df245be309a6b0d55d
 Pure RED Source `d2d0ff36273c845f1c7d84a362d1864c0931b27d`, tree `8cf2921a7dc3b2fd4c335e6d7cbbe8b6ef3a2d33`, Q test `dff00b554c40669a4333660ab6c64e5ae7e6bc5f`, TEMP `1b4ccbfd219c9608f94e3c8c574985618d26af65`. Unchanged ordinary/candidate sensor `e87f2a05d4e6cc766ee1d3539ce72999337c7f2a`. [Run 43104984521](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43104984521), attempt 1, job 130805854383, terminal success. After locked npm ci, `node --test test/finite-budget-diagnostics.test.mjs` executed 8 tests: 7 pass, 1 intended Q6 failure at `missing fixed reader-site provenance`, 0 cancelled, skipped or todo. No native execution or I0. [Artifact 13891964990](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43104984521/artifacts/13891964990), ZIP 1,438 bytes, SHA-256 `eb297756fd1ba95aa9a152b5f5e36ae210c729453657dd38c1ef37ca0a89ff4b`, expiry 2026-11-18 21:40:06 UTC. Same-ID REST readback verified source, run, attempt, kind, flags and exact 2-file inventory; budget-artifact.json 408 bytes, SHA-256 `fa18f94eccf30296a6f76794a9584120c92513a35f47cd2ecf2e99e27ea2a6ed`.
 
 One marked-by-purpose, ordinary-limit producer-only probe follows the pure contract and strict M/QA preflight. The candidate-cap environment variable stays unset. The append records the RED and intended comparison scope, not a native result.
+
+
+### 2026-11-11 UTC — reader-site probe stopped by lint before tests and I0
+
+[Run 43105402978](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43105402978), attempt 1, push; terminal failure. Source `8ae77fc486ec308701a8058675083fc6f0e6049d`, tree `67707c731c0aa6c51152f1cd776e0a84106676ce`, parent `d2d0ff36273c845f1c7d84a362d1864c0931b27d`, report at activation `71cdcfa48d91257fa1f7fa268620b7f16c49856b`. Attempted source blobs: sensor `edec2496ef704956bd6a3357c97a783274a256a5`, world `51ab3a8cef8ac72e3085558b71c450cd2b9081b7`, test `dff00b554c40669a4333660ab6c64e5ae7e6bc5f`, TEMP `cfdcd1375c34a47f024caff3c73d13806155e890`. Descriptor remained `be695028e4c12c3cb7d3b7bf2c5f2e7508f3db15`. The Source ref remained frozen to terminal.
+
+Pure job 130807310028 installed locked dependencies with `npm ci --ignore-scripts --no-audit --no-fund`. `node --check` completed on all three paths. `npx eslint test/fixtures/finite-budget-diagnostics.mjs test/fixtures/finite-budget-world.mjs test/finite-budget-diagnostics.test.mjs` returned 1 error and 0 warnings. [World line 258](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/8ae77fc486ec308701a8058675083fc6f0e6049d/test/fixtures/finite-budget-world.mjs#L258) binds a loop variable named `module`, violating `@next/next/no-assign-module-variable`. This is a deterministic linter finding in the new compiler helper. Stage B executed zero Q groups, produced no TAP counts, skipped strict preflight and skipped its entire dependent producer job 130807573497. The previous intended RED remains 8 tests, 7 pass, 1 expected failure. There is no Stage B 8Q pass.
+
+Evidence seal/upload and same-ID REST download and inventory validation succeeded. [Artifact 13894006069](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43105402978/artifacts/13894006069), 725 ZIP bytes, SHA-256 `732db0c90ac7f21de2b3265552ac9e81ac36a5554ede67367210b2254cf8247e`, expires 2026-11-18 21:42:51 UTC. Verified 2 files including lint.log and budget-artifact.json (406 bytes; SHA-256 `af2eb72dec788be6182bef1cd30f7bb0190ea98c2e7e8ae86b6c549972f7d38b`). Manifest source/run/attempt/kind and all three false flags matched. No candidate binary artifact or native checkpoint was produced. I0, C0, C1, SDK/Reference/Notice and actual reader-site counts/context are unobserved in this attempt, as is an actual snapshot limit. Zero observations must not be reported as a measured zero histogram.
+
+**Unqualified, static catalog from the pinned descriptor.** The numbering below follows the selected role, lexical path, fixed selector and one-based occurrence. These are declared slots: 33 Source selector groups, 36 source occurrences before role expansion, 45 role-specific source slots, 9 role-specific package slots, 54 total. Zero is reserved for unknown. Existing supplemental/entry selections add no declared reader slot. Raw source lines come from the descriptor; blank package line entries require actual prepared AST proof. No complete compiler match or prepared line/column for this revision can be claimed because its preflight was skipped.
+
+| ID | Role | Pinned path | Selector | Occurrence | Descriptor raw line |
+| ---: | --- | --- | --- | ---: | ---: |
+| 1 | M | `lib/delegated-oauth-worker.mjs` | 0 | 1 | 36 |
+| 2 | M | `lib/dossier-monitoring-owner-http.mjs` | 0 | 1 | 21 |
+| 3 | M | `lib/mcp-activation-observer.mjs` | 1 | 1 | 49 |
+| 4 | M | `lib/mcp-node-private-bridge.mjs` | 1 | 1 | 69 |
+| 5 | M | `lib/mcp-original-container-runtime.mjs` | 0 | 1 | 16 |
+| 6 | M | `lib/mcp-own-synthetic-save-http.mjs` | 0 | 1 | 10 |
+| 7 | M | `lib/mcp-publication-artifact-reader.mjs` | 1 | 1 | 22 |
+| 8 | M | `lib/mcp-qa-finite-fixed-policy-engine.mjs` | 1 | 1 | 48 |
+| 9 | M | `lib/mcp-qa-finite-owner-native-wire.mjs` | 0 | 1 | 43 |
+| 10 | M | `lib/mcp-qa-finite-owner-notice-consent-body.mjs` | 0 | 1 | 5 |
+| 11 | M | `lib/mcp-qa-finite-owner-preparation.mjs` | 0 | 1 | 115 |
+| 12 | M | `lib/mcp-qa-finite-seed-wire.mjs` | 1 | 1 | 27 |
+| 13 | M | `lib/mcp-retirement-provider-reader.mjs` | 1 | 1 | 25 |
+| 14 | M | `lib/mcp-successor-deployment-reader.mjs` | 1 | 1 | 23 |
+| 15 | M | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 1 |  |
+| 16 | M | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 2 |  |
+| 17 | M | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 3 |  |
+| 18 | M | `node_modules/@modelcontextprotocol/server/dist/index.mjs` | readerFactory | 1 |  |
+| 19 | M | `node_modules/agents/dist/handler-stateless-VvrWSAVA.js` | readerFactory | 1 |  |
+| 20 | M | `node_modules/agents/dist/handler-stateless-VvrWSAVA.js` | readerFactory | 2 |  |
+| 21 | QA | `lib/assistance-administrative-get-transport.mjs` | 1 | 1 | 25 |
+| 22 | QA | `lib/assistance-private-provider-get-transport.mjs` | 1 | 1 | 27 |
+| 23 | QA | `lib/assistance-provider-token-name.mjs` | 1 | 1 | 18 |
+| 24 | QA | `lib/assistance-service-identity-transport.mjs` | 1 | 1 | 49 |
+| 25 | QA | `lib/mcp-activation-observer.mjs` | 1 | 1 | 49 |
+| 26 | QA | `lib/mcp-canary-restoration-transport.mjs` | 1 | 1 | 97 |
+| 27 | QA | `lib/mcp-closed-version-upload.mjs` | 1 | 1 | 38 |
+| 28 | QA | `lib/mcp-closure-reader-probe.mjs` | 7 | 1 | 115 |
+| 29 | QA | `lib/mcp-publication-artifact-reader.mjs` | 1 | 1 | 22 |
+| 30 | QA | `lib/mcp-qa-finite-bootstrap-native.mjs` | 3 | 1 | 40 |
+| 31 | QA | `lib/mcp-qa-finite-fixed-policy-engine.mjs` | 1 | 1 | 48 |
+| 32 | QA | `lib/mcp-qa-finite-historical-source.mjs` | 8 | 1 | 213 |
+| 33 | QA | `lib/mcp-qa-finite-initial-cleanup.mjs` | 11 | 1 | 128 |
+| 34 | QA | `lib/mcp-qa-finite-initial-custody-probe.mjs` | 3 | 1 | 41 |
+| 35 | QA | `lib/mcp-qa-finite-initial-entry.mjs` | 21 | 1 | 82 |
+| 36 | QA | `lib/mcp-qa-finite-initial-entry.mjs` | 21 | 2 | 242 |
+| 37 | QA | `lib/mcp-qa-finite-initial-entry.mjs` | 21 | 3 | 315 |
+| 38 | QA | `lib/mcp-qa-finite-initial-material.mjs` | 3 | 1 | 48 |
+| 39 | QA | `lib/mcp-qa-finite-initial-old-guard.mjs` | 1 | 1 | 26 |
+| 40 | QA | `lib/mcp-qa-finite-initial-owner-source.mjs` | 8 | 1 | 75 |
+| 41 | QA | `lib/mcp-qa-finite-owner-cleanup.mjs` | 10 | 1 | 183 |
+| 42 | QA | `lib/mcp-qa-finite-owner-cleanup.mjs` | 10 | 2 | 667 |
+| 43 | QA | `lib/mcp-qa-finite-owner-native-wire.mjs` | 0 | 1 | 43 |
+| 44 | QA | `lib/mcp-qa-finite-owner-notice-consent-body.mjs` | 0 | 1 | 5 |
+| 45 | QA | `lib/mcp-qa-finite-owner-phase-context.mjs` | 13 | 1 | 116 |
+| 46 | QA | `lib/mcp-qa-finite-owner-preparation.mjs` | 0 | 1 | 115 |
+| 47 | QA | `lib/mcp-qa-finite-seed-wire.mjs` | 1 | 1 | 27 |
+| 48 | QA | `lib/mcp-retirement-provider-reader.mjs` | 1 | 1 | 25 |
+| 49 | QA | `lib/mcp-successor-deployment-reader.mjs` | 1 | 1 | 23 |
+| 50 | QA | `lib/operations-service-request-controls.mjs` | 0 | 1 | 24 |
+| 51 | QA | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 1 |  |
+| 52 | QA | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 2 |  |
+| 53 | QA | `node_modules/@cloudflare/workers-oauth-provider/dist/oauth-provider.js` | readerFactory | 3 |  |
+| 54 | QA | `scripts/check-own-cron-provider.mjs` | 1 | 1 | 115 |
+
+Terminal action: retire TEMP and preserve this failed attempt. No automatic correction, rerun, promotion, lifecycle acceptance or PC-off rehearsal. Task1 NEEDS_CONTEXT for Root ruling. operationalReadiness=false, completePackage=false, PCoff=false.
