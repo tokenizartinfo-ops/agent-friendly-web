@@ -67,3 +67,9 @@ Un builder fresco señaló tres preguntas; Root resuelve, sin pedir arquitectura
 
 ## Enmienda de tamaño fundada en evidencia — 11Nov2026
 Ruling: sustituir límite64MiB/JSONmonolítico por512MiB nativos y JSONL porchunks+gzip+GCM — inventario primario230266025bytes y riesgo V8 de strings grandes invalidan la suposición inicial — costo: dos pasadas de descompresión para no escribir antes de validar, más códigoNode acotado. El ratio comprimido128MiB no está medido: se comprueba de verdad antes deupload y falla cerrado si no cabe. No aumentar a ciegas si falla ni alterar relojes. El RED APIausente43115730088/1 ya es válido para el contrato de existencia; no repetirlo por esta enmienda.
+
+## Fuentes primarias de implementación consultadas
+- Node22Crypto: https://nodejs.org/docs/latest-v22.x/api/crypto.html — primitivas GCM/AAD/tag; ninguna librería criptográfica nueva.
+- GitHubsecrets: https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets — environmentsecret y paso por env, no argumento.
+- GitHubenvironments: https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments — reglas y disponibilidad de secrets; no aislamiento porworkflow/SHA inferido.
+Estas referencias no acreditan la implementación ni el runtime de AFW. Nodebuiltins auxiliares url/os/child_process/test/assert son admisibles para CLI/fixtures/proceso separado; ninguna red o dependencia nueva. No ampliar por esa aclaración el alcanceNode-only de los2archivos.
