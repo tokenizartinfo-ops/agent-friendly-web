@@ -1,10 +1,18 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 11 DE NOVIEMBRE DE 2026: diagnóstico medido y comparación controlada
+## CURRENT — 11 DE NOVIEMBRE DE 2026: observador acotado en implementación
 
-ContinuaciónSource/SYN activa. Sourcebc03e760c2c360755b2f94f3fbc6a0db942e4c36/treeb3eedfeccd64018495db72fc5550fa2ecf8e2b96,report318a77affda20793a0316bd5387c5e99da1d3ef9; main0c9c475b. Sonda43101479429 SUCCESS:8Q+preflight+productorparcial+exactosartefactos, sinconsumer/alarmoriginal. QA0/1invalidtrasoverflow; QA2readerOrigin1y14invalidprevios,noatribuir todoalcap. TEMPretirado.
+El objetivo sigue siendo un ensayo real desde la nube con el ordenador apagado y, después, el piloto separado de Max. Estamos aún en preparación SOURCE/SYN de AFW; no hay aceptación PC-off ni guardia permanente acreditada.
 
-NEXT Rootautorizado: UN candidatoexplicitoSYN32768comparado condefault16384intacto, con REDpuro decontratonuevo y8Q/preflight/productorparcial, sinrelajarcriteriodeaceptación. Mismoimplementadorbudget_chronology_impl/fivepaths; lecturaexhaustivadelrulingalfinalde progress/2026-11-07-finite-native-budget-qualification.es.md y brief11nov. Nocapcreciente/retryautomático/atribucióninventada. No ensayoreal ni paso humano ahora. Task1siguependiente; operacionalReadiness/completePackage/PCofffalse; Maxseparado. RootdocsySourcesiguenaislados. Historiadebajosupersedida.
+El ensayo diagnóstico43108015025/1 confirmó la corrección del lector auxiliar: QA2 pasó de14observaciones inválidas antes de la saturación a0, conservando las lecturas sin contexto reales después de ella. Pasaron8Q, la compilación de54sitios y el productor parcial conSDK/Reference/Notice. Las3descargas de artefactos verificaron el mismoID a la primera; no se ejercitaron los reintentos. Esto no ensayó el alarmoriginal ni recuperación fría. Checkpoint SOURCE d23c2befeeaf1b269eb70161ad8023910099a29b, árbol727b00bb9df95afa8b2869968032ab8f4850be30, informe88ef7625fe7dda7c5f4d1cc1e4d5922bb37ab465. TEMP se retiró entonces.
+
+Ahora está ACTIVO el mismo escritor exclusivo budget_chronology_impl en faseA del observador acotado. BASE liberado d23c2bef; consultar el ref actual antes de actuar. Root sólo escribe docs/finite-pcoff-continuation-20261103; el implementador sólo feat/finite-native-cleanup-20261101. No usar este BASE como una afirmación del HEAD futuro.
+
+Autoridad vigente: brief docs/superpowers/briefs/2026-11-11-finite-budget-bounded-observer-task1.md @ae7070963021352ec711979d80efd00e645849fa/blob932095cca592559b44d31914432876e0f96c802b. Spec bounded-observer-design36be7c68 y plan revisado0c45396a; ledger vivo docs/superpowers/progress/2026-11-07-finite-native-budget-qualification.es.md @ae707096/blob b4bdac63. El REDcausal nuevo77a076e9/run43109332082 ya detectó la pérdida de un Root por el límite antiguo. No repetirlo.
+
+Se separan registros retenidos, identidades débiles y métricas exactas. Una traza truncada seguirá declarándose incompleta; los desconocidos, pérdidas de atribución, omisiones de scopes y desbordamientos numéricos impiden aceptar las métricas. No se cambian la lógica productiva, guardas, SDK, fuentes ni relojes reales. FaseA permite7rutas,8Q/preflight yUNproductorparcial, después informe/TEMPcleanup/STOP. El ciclo completo9/P1 sigue sin liberarse hasta la decisión causal deRoot. No pedir códigos, renovar permisos ni abrir un ensayo humano.
+
+Después faltan aceptar Task1 con revisión frescaSpec+Quality, Task2 de límitesreadonly/reduction y revisiónconjunta; recorrido completo/traspaso y comprobaciones actuales de procedencia/custodia/ejecutor/receptor, aviso útil/ACK/retirada yUNAocurrencia realPC-off coordinada. operationalReadiness=false;completePackage=false;PCoff=false. El plan owner-restoration56PASS anterior sigue cerrado: no repetirlo ni seguir instrucciones históricas de abajo.
 
 ## Checkpoint anterior preservado — 7 noviembre2026,17:31UTC
 
