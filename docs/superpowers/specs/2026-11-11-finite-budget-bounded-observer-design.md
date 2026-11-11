@@ -1,5 +1,5 @@
 # AFW — bounded observer and explicit evidence completeness, design draft
-Date: 11 Nov 2026. Status: DRAFT / builder check, not implementation authority.
+Date: 11 Nov 2026. Status: design choices resolved by Root after fresh builder check; NOT implementation authority.
 
 ## Intent and project boundary
 
@@ -83,3 +83,13 @@ Source frozen during every finite run. Same-ID exact artifact readbacks, origina
 No Source work is authorized by this draft. After reader provenance completes, Root resolves builder questions, commits the final design and amends the existing Task1 plan/brief with exact paths, field vocabulary, tests and stop gates. Sole implementer only; no main/PR/publish/runtime/permissions/OAuth/OTP/cron/Containers/customer/Max/mail changes. Future implementation is test-only and reversible on the isolated branch.
 
 If any native correctness or reader-ownership issue remains, it gets a separate precise fix; this memory design cannot redefine it away. operationalReadiness=false, completePackage=false, PCoff=false throughout this design work.
+
+## Builder check resolved by Root — 11 Nov 2026
+
+Fresh builder budget_retention_builder_check read this design and raised three important planning questions. Root settled them under the owner's delegated design authority; this is not the eventual Task1 Spec/Quality review.
+
+1. ALL observed scope metric rows must be enumerable for observedMetricsComplete in qualification. Any omitted scope row makes this proof incomplete and fails P1; no designated-scope exemption. P1 identifies phases/Root/child using actual captured identities and the full retained scope metric table, never a fabricated label or unrelated retained operation. Any specifically asserted guard/native event must also have its real required witness; aggregate totals cannot replace a missing named witness.
+2. Full-trace reconstruction must reproduce exact concurrency peaks even when timestamps tie. Every operation DTO must carry enteredEventOrdinal and settledEventOrdinal (null while pending) from actual collector event transitions. Replay that strict ordering for active/peak reconstruction; timestamps remain for duration and are not used to guess ordering. Ordinals are data-only and use the same event counter, not extra events. Preserve callback/promise ordering. Test two traces with tied timestamps and different real begin/settle order.
+3. The producer-only diagnostic may satisfy its gate with no record kind saturated. Deterministic small-cap Q cases establish omission semantics; do not add native work or extra runs to force omission. Before advancing to fullP1, require observedMetricsComplete with zero real attribution/numeric/scope loss and all original producer facts. Report whether retention was actually exercised in native execution; a green diagnostic without truncation does not itself prove a native truncation case.
+
+Status: design choices resolved for planning; implementation remains withheld until reader provenance completes, its actual defect is assessed, and Root commits the revised Task1 plan/brief. Existing tests may not be weakened or relabeled by this draft.
