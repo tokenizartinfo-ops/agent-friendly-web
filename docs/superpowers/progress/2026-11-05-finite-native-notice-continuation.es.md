@@ -1,18 +1,16 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 11 DE NOVIEMBRE DE 2026: traspaso cifrado preparado; ciclo original pendiente
+## CURRENT — 11NOV23:42:57UTC: ciclo original SYN en ejecución
 
-Objetivo vigente: un ensayo real desde la nube con el ordenador apagado y, después, el caso separado de Max. Sigue pendiente; estos resultadosSOURCE/SYN no acreditanPCoff ni guardia permanente.
+Objetivopendiente: ensayo real desde nube conPCapagada ydespuéscasoMaxseparado. No confundir Source/SYN con operaciónreal/guardia.
 
-Ya pasaron faseA del observador43111053230/1(8Q+productorparcial, sinpérdidas deatribución) y custodia43117597048/1(9TAP=contenedor+8casos). Custodia comprueba rondatripbyteexact, alteraciones/keys/context/paths/links/límites y dosprocesosNode, con archivosSYN pequeños y clavesefímeras. Root leyó código/primarias, no es todavía reviewformalTask1 ni8Q+P1original. No repetiresosrunsni56anteriores por historia.
+Run43121646075/attempt1/eventpush ENCURSO, Source14071b396f8c9c66b70cf630d8823692a4521bd3/tree32208a45c1f55a17bb327b466942f720e2a240df,TEMPe2b057db. SOURCECONGELADA hasta terminal, escritorbudget_chronology_impl. Root sólo docs. Prohibidoredisparar, mutarSource, rearmarC0ocombinarruns. Bodyworkflow exacto alstaging910líneas revisado; sólo5elementosactivados.
 
-Sourceúltimochequeadoae688f979dc35fa2c2274703c2b6e89cc9272cdd/treee12ecc7f366ad04df8baf83ad3e2af1d0a4aafed/3188leaves,TEMPausente. Helper9a486b83/testc913c94b/informe7f586fc9(350198chars); restoexactoBASE8452. El escritor exclusivo ahora preparaTEMP3jobsINACTIVO manualsininputs/todosif:false. Brief .../briefs/2026-11-11-finite-budget-custody-orchestration-task1.md @99914b91/blobaa65d198; Root sólo docs, escritor sóloSource. Consultarrefsactuales, no asumirHEADdesdeestecheckpoint.
+Pure130863336304SUCCESS (8Q+lint/preflight+sameID); producer130863622662IN_PROGRESS yvalidóclave/pureartifactantesdelprincipal. NoI0exactopublicado,noP1niconsumidorcompletos. AFW_SYN_CHECKPOINT_KEY quedóguardadoenGitHubenvironment27007821967/Sourceúnica/0tags ykey-preflightyaSUCCESS; nohayacciónhumanapendiente.
 
-GitHub guardó AFW_SYN_CHECKPOINT_KEY en environment27007821967(afw-finite-syn-checkpoint), verificadoRoot11Nov20:25Argentina, única ramaSource/0tags. Sinvalor registrado, no escredencialCloudflare. No hay paso humano pendiente; su formato/acceso secomprobarán enkey-preflightantesI0. Root aún NO liberófull9. La orquestación debe mantener elprincipalSYNlocal, jamás browser/env/systemlogs o cuentasreales.
+Autoridad: brief .../briefs/2026-11-11-finite-budget-custody-full-lifecycle-task1.md @197400ad1d2b2a38e54cafbde7b7ef1eef12b114/blob2f4708aa; ledger vivo .../progress/2026-11-07-finite-native-budget-qualification.es.md. Mantener3jobs/original900s/mismoestado/ready≤C0−30s yrawsólopublicacióncifrada/contexto/hash/readbacks. Elcliente/token sonSYNdeMiniflare; no datosdeowner/Max ni APIreal. El ratio128MiB/recuperación/alarmaoriginaltodavíanoestánprobados.
 
-La custodia conserva estado nativo íntegro bajo gzip+AES256GCM y contextoSource/run/attempt/kind. Manifiesto anterior230MB obliga streamingchunks y límites512MiBnativos/768MiBexpandido/128MiBsobre; compresiónreal aúnno probada. Recibos públicos cerrados, rawsólopublicacióncifrada, mismoID/inventario/bytechecksantes ydespués. Mantener3jobs/original900s/recovery≤C0−30s; si falta margen falla y sepreserva, sinrearmar.
-
-Siguientesgates: Rootreviewstaging→UNAcalificación8Q+P1→reviewfrescaSpec+QualityTask1→Task2readonly/reduction→reviewconjunta→recorrido/traspaso y comprobacionesactuales decandidato/custodia/ejecutor/receptor→avisoútil/ACK/retirada→UNAocurrenciarealPCoffcoordinada. operationalReadiness=false;completePackage=false;PCoff=false;Maxpendiente. No nuevaOAuth/OTP/credencial/cliente/runtime/main/PR/deployautorizadoporCURRENT.
+Alterminal SourcewriterretiraTEMP/appendreport/preserva/STOP. RootverificayrequierefreshSpec+Quality antesTask1aceptado; despuésTask2ylosrestantescierres(recorrido/traspaso/candidato/custodia/ejecutor/receptor/avisoútil/ACK/retirada/UNAocurrenciarealPCoff). operationalReadiness=false;completePackage=false;PCoff=false. No repetirfaseA/custodiaunit9/old56 desdehistoria.
 
 ## Checkpoint anterior preservado — 7 noviembre2026,17:31UTC
 
