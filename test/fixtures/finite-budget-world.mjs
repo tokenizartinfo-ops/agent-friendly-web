@@ -255,12 +255,12 @@ const readerCatalog=[];
 for(const role of ['M','QA']){
  const modules=[...budgetNativeDescriptorProposal.sourceDescriptors,...budgetNativeDescriptorProposal.packages]
   .filter(module=>module.roles.includes(role)).sort((a,b)=>a.path<b.path?-1:a.path>b.path?1:0);
- for(const module of modules){
-  const groups=Array.isArray(module.selectors)
-   ?module.selectors.flatMap((row,index)=>descriptorMeta(row).edge==='reader'?[[index,row.expectedCount]]:[])
-   :[['readerFactory',module.selectors.readerFactory??0]];
+ for(const descriptor of modules){
+  const groups=Array.isArray(descriptor.selectors)
+   ?descriptor.selectors.flatMap((row,index)=>descriptorMeta(row).edge==='reader'?[[index,row.expectedCount]]:[])
+   :[['readerFactory',descriptor.selectors.readerFactory??0]];
   for(const [selector,count] of groups)for(let occurrence=1;occurrence<=count;occurrence++){
-   readerCatalog.push({id:readerCatalog.length+1,role,path:module.path,selector,occurrence});
+   readerCatalog.push({id:readerCatalog.length+1,role,path:descriptor.path,selector,occurrence});
   }
  }
 }

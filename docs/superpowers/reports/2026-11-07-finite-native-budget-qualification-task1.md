@@ -1749,3 +1749,8 @@ Evidence seal/upload and same-ID REST download and inventory validation succeede
 | 54 | QA | `scripts/check-own-cron-provider.mjs` | 1 | 1 | 115 |
 
 Terminal action: retire TEMP and preserve this failed attempt. No automatic correction, rerun, promotion, lifecycle acceptance or PC-off rehearsal. Task1 NEEDS_CONTEXT for Root ruling. operationalReadiness=false, completePackage=false, PCoff=false.
+
+
+### 2026-11-11 UTC — one corrected reader qualification authorized
+
+Root independently confirmed the single ESLint error in run 43105402978 and verified its failure artifact. The accepted RED and failed qualification are preserved above. [Root ruling](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/133f2a3303ee0df531a0961319ec9e47c3f225c3/docs/superpowers/briefs/2026-11-11-finite-budget-reader-site-diagnostic.md). From cleanup `46df7e9f6da6eb8e9793d00c1a6b345a9aed5ad6` / tree `2e0e82eff7a9b34f74dc359808f1cfd734367075` / report `b97ed2c97ea8830b04e7dc08935b38103d85b593`, only the catalog loop variable and its references are renamed from module to descriptor. Replacing the new identifier with its old name in that loop reconstructs the prior source byte-for-byte. The same temporary workflow is restored for one ordinary-cap qualification. No RED is repeated and no additional diagnostic or behavior change is part of this authorization.

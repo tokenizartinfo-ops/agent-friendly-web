@@ -1,0 +1,137 @@
+name: AFW finite budget qualification
+run-name: AFW ordinary reader-site preflight and producer probe ${{ github.sha }}
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: afw-finite-budget-qualification
+  cancel-in-progress: false
+env:
+  AFW_BUDGET_GROUP: positive
+jobs:
+  pure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Static checks and eight pure contract groups before I0
+        shell: bash
+        run: |
+          mkdir -p output/finite-budget/pure
+          set -o pipefail
+          files=(test/fixtures/finite-budget-diagnostics.mjs test/fixtures/finite-budget-world.mjs test/finite-budget-diagnostics.test.mjs)
+          for file in "${files[@]}"; do node --check "$file"; done
+          npx eslint "${files[@]}" 2>&1 | tee output/finite-budget/pure/lint.log
+          node --test test/finite-budget-diagnostics.test.mjs 2>&1 | tee output/finite-budget/pure/tests.log
+          node --input-type=module -e "import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';const log=await readFile('output/finite-budget/pure/tests.log','utf8');assert.match(log,/# tests 8\\b/);assert.match(log,/# pass 8\\b/);assert.match(log,/# fail 0\\b/);"
+      - name: Exact prepared AST closure before I0
+        shell: bash
+        run: |
+          set -o pipefail
+          test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
+          node test/fixtures/finite-budget-world.mjs preflight-budget 2>&1 | tee output/finite-budget/pure/preflight.log
+      - name: Seal pure evidence
+        if: always()
+        run: node --input-type=module -e "import {sealBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await sealBudgetArtifact('output/finite-budget/pure','pure');"
+      - uses: actions/upload-artifact@v4
+        id: upload
+        if: always()
+        with:
+          name: finite-budget-reader-site-pure-${{ github.sha }}
+          path: output/finite-budget/pure/
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/download-artifact@v4
+        if: always() && steps.upload.outputs.artifact-id != ''
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/budget-pure-readback
+          merge-multiple: true
+      - name: Same-ID pure readback
+        if: always() && steps.upload.outputs.artifact-id != ''
+        env:
+          READBACK: ${{ runner.temp }}/budget-pure-readback
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+        run: node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact(process.env.READBACK,'pure',process.env.ARTIFACT_ID);"
+  positive_prepare:
+    needs: pure
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - name: Original producer job budget
+        run: echo "AFW_JOB_STARTED_MS=$(date +%s%3N)" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ needs.pure.outputs.artifact-id }}
+          path: output/finite-budget/prior-pure
+          merge-multiple: true
+      - name: Verify pure artifact and exact prior preflight
+        env:
+          ARTIFACT_ID: ${{ needs.pure.outputs.artifact-id }}
+        run: node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact('output/finite-budget/prior-pure','pure',process.env.ARTIFACT_ID);"
+      - name: Partial producer probe before the original C0
+        env:
+          AFW_BUDGET_PREFLIGHT: output/finite-budget/prior-pure/preflight.json
+        shell: bash
+        run: |
+          mkdir -p output/finite-budget/producer
+          set -o pipefail
+          test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
+          LC_ALL=C node test/fixtures/finite-budget-world.mjs prepare-positive-probe output/finite-budget/producer 2>&1 | LC_ALL=C awk '/^AFW_PROBE / && length($0)<=2048 {print}' | tee output/finite-budget/producer/console.log
+      - name: Seal producer evidence
+        if: always()
+        run: node --input-type=module -e "import {sealBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await sealBudgetArtifact('output/finite-budget/producer','checkpoint');"
+      - uses: actions/upload-artifact@v4
+        id: upload
+        if: always()
+        with:
+          name: finite-budget-reader-site-producer-${{ github.sha }}
+          path: output/finite-budget/producer/
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/download-artifact@v4
+        if: always() && steps.upload.outputs.artifact-id != ''
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/budget-producer-readback
+          merge-multiple: true
+      - name: Same-ID producer readback
+        if: always() && steps.upload.outputs.artifact-id != ''
+        env:
+          READBACK: ${{ runner.temp }}/budget-producer-readback
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+        run: node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact(process.env.READBACK,'checkpoint',process.env.ARTIFACT_ID);"
