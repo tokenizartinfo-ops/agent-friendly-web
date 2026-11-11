@@ -250,6 +250,39 @@ test('Q6 overflow at 16385 events is explicit and does not change native output'
  assert.equal(runtimeSnapshot.chronology.reasons.runMissingLease,1);
  assert.equal(runtimeSnapshot.chronology.reasons.invocationIdentity,1);
  assert.equal(runtimeSnapshot.coverage.invalid,2);
+ const options={testRevision:revision,workerRole:'QA',maxEvents:32768};
+ for(const rejected of [options,{...options,diagnosticCandidate:'cap32769'}]){
+  const snapshot=createBudgetDiagnostics(rejected).snapshot();
+  assert.equal(snapshot.chronology.limit,16384);
+  assert.equal(snapshot.coverage.invalid,1);
+  assert.equal(snapshot.chronology.firstInvalid.reason,'constructorOptions');
+ }
+ let markerRead=false;
+ const accessor=Object.defineProperty({...options},'diagnosticCandidate',{get(){markerRead=true;return 'cap32768';}});
+ assert.equal(createBudgetDiagnostics(accessor).snapshot().chronology.limit,16384);assert.equal(markerRead,false);
+ const marked={...options,diagnosticCandidate:'cap32768'};
+ const wrongCap=createBudgetDiagnostics({...marked,maxEvents:32769}).snapshot();
+ assert.equal(wrongCap.chronology.limit,16384);assert.equal(wrongCap.coverage.invalid,1);
+ const candidate=createBudgetDiagnostics(marked);
+ assert.equal(candidate.snapshot().chronology.limit,32768,'explicit SYN cap32768 candidate unavailable');
+ assert.equal(candidate.snapshot().coverage.invalid,0);
+ const identity={},meta={phase:'setup',deadline:null,kind:'control'},held=candidate.root(identity,meta);
+ for(let i=1;i<32767;i++)assert.equal(candidate.root(identity,meta),held);
+ const pending=begin(candidate,held,null,'setup');
+ const atLimit=candidate.snapshot();
+ assert.equal(atLimit.chronology.eventCalls,32768);assert.equal(atLimit.rows.length,1);assert.equal(atLimit.chronology.firstOverflow,null);
+ assert.equal(candidate.root({},meta),null);assert.equal(candidate.root(identity,meta),held);
+ candidate.incomplete();
+ const output=Promise.resolve(23);
+ assert.equal(observeBudgetPromise(candidate,pending,output),output);assert.equal(await output,23);
+ const both=candidate.snapshot();assert.deepEqual(candidate.snapshot(),both);
+ assert.equal(both.chronology.eventCalls,32772);
+ assert.deepEqual(both.chronology.firstOverflow,{event:'root',ordinal:32769});
+ assert.deepEqual(both.chronology.firstInvalid,{event:'incomplete',ordinal:32771,reason:'unknown',relation:'afterOverflow'});
+ assert.deepEqual(both.chronology.invalid,{beforeOverflow:0,afterOverflow:1});
+ assert.equal(both.rows.length,1);assert.equal(both.rows[0].status,'fulfilled');assert.equal(both.totals.nativeSettled,1);
+ assert(!JSON.stringify(both).includes('cap32768'));
+
 });
 test('Q7 bounded UTF8 summary hashes the exact complete JSON written',async t=>{
  const path='output/finite-budget/q7-evidence.json';t.after(()=>rm(path,{force:true}));const full={purpose:'SYN',payload:'ñ'.repeat(10000),nested:{preserved:true}},before=JSON.stringify(full),result=await persistBudgetEvidence({path,full,testRevision:revision,caseName:'Q7',counts:{tests:1,pass:1,unsafe:'SECRET_Q7'}});
