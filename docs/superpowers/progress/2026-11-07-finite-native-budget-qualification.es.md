@@ -2,9 +2,9 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — 11Nov2026: arreglolector comprobado; implementar observador acotado
+## CURRENT — 11Nov2026: observador completo en sonda; calificar ciclooriginal
 
-El arreglo eliminó14errores tempranos y conservó los errores reales posteriores. Source d23c2bef preservado/TEMPretirado. Root libera faseA del diseño de observador acotado: identidad débil independiente de traza, agregados exactos, límites de registros y niveles de evidencia explícitos. Brief bounded-observer-task1 gobierna7rutas, REDcausalnuevo+UN8Q/preflight/productorparcial ySTOP. FullP1/9aúnnoautorizado hasta métricas completas en sonda. Mismoescritor; Task1incompleta/readinesspackagePCofffalse; sin paso humano.
+La faseA pasó métricas observadas en6snapshots,0pérdidas de atribución/números/scopes y truncamiento real honesto enQA1/QA2. Source8452b974 preservado/TEMPretirado. Root libera UN8Q+P1original en3jobs con espera realC0=I0+900s y recuperaciónfría antesC0−30s. SóloTEMP/report; nada de cambiarcódigo/rearmarreloj/ensayoPCoff. Brief full-lifecycle-task1 gobierna y exigeSTOPalterminal para revisiónfrescaSpec+Quality. Mismoescritor; Task1noaceptadaaún/readinesspackagePCofffalse; sin paso humano.
 
 ## Estado inicial del plan preservado — 7Nov17:59UTC
 
@@ -467,3 +467,13 @@ Ruling: release the explicit bounded-observer architecture to stop trace-retenti
 | Task2text vs itself | Original16/3lanes business scope unchanged and not yet implemented | Keep pending until Task1Spec+Quality acceptance; no newwriter forTask2 now |
 
 Same writerbudget_chronology_impl; sourceBASEd23c2bef. New binding phaseA brief docs/superpowers/briefs/2026-11-11-finite-budget-bounded-observer-task1.md. It explicitly allows7paths, one causalpureRED and one8Q/preflight/producer-only, thenSTOP. ActualfullP1steps8+ remain unreleased. No helpers. readiness/package/PCofffalse.
+
+## 2026-11-11 22:29 UTC — bounded observer measured; original full9 released
+
+Root independently verified phaseA43111053230/1 Sourcebbd7570e/tree20a489df: pure8PASS/0fail/cancel/skip/todo +strictpreflight and producer-only. All6snapshots passed Nodeobserved_metrics with0invalid/unattributed/unknown/numericOverflow/scopeOmissions and0readerOrigin. QA1/2 exercised true rawprefixloss:16384operation rows retained each,221458/266661omitted; scopeRows11836/11498,0omitted. Their traces remain incomplete. Fourother snapshots passed complete_trace. No claim of physicalprovider IO, nativeglobaldrain, billing or namespaceempty.
+
+Pure13896052382 ZIP27457B/SHA9b1b6c4b9b2b1fdbf5674b990eaf9a1b303f55447df5b5670eda7aaf824a2590,5files/manifest846B/SHA6d0c3cd841a448142995554ca5194f353fb0b293b1ae20f76c5f125ef748e3fa. Producer13896821273 ZIP2253614B/SHA9af6a5929285d3e45f126974c22893a92f7f38112e8b8bce7e15d2ed012c1622,9files/manifest1504B/SHAccd20e41d95d4bb3061812157b8444c7a8a3846bd27f9717d9863703fe151eb2. Three same-ID downloads succeeded onfirstattempt; retrybranches unexercised. OriginalI01794435740000/C01794436640000/C11794436820000/return1794435831998,SDKnormalcomplete1/Reference1/Notice1/disposebeforeC0/originalAlarmObservedfalse.
+
+Sourcecleanup8452b974606171af39ee02fb41ddb124e7701ac1/tree50b818a164460052fd77344bf3bb0ddb4d6f2886/report1e9277d1a6f63d841f7deb5d53e5161efbcf4af8, TEMPabsent/3186leaves/protectedmain. Ruling: phaseA satisfies declared causal gate; release ONE original full9 qualification under revised explicit metric contract. This is still test-only and cannot be called a complete raw trace for QA1/2. Keep every business/lifecycle assertion; no code changes, onlyTEMP/report. Cost if wrong: coherentP1 fails or freshSpec/Qualityrejects, bounded isolated rework; no production mutation.
+
+Binding brief docs/superpowers/briefs/2026-11-11-finite-budget-full-lifecycle-task1.md. Exactly3jobs/pure8→originalpositive_prepare(defaultwait toC0−120s)→coldpositive_consume(originalalarm ready≤C0−30s), one lineage/two graphs, actual900sC0/180sC1 original clocks, exact7d/sameID proof. No oldRED/partial/16/56; no clockrefresh/retrybywriter. SameSourcecode exact to8452; freezeactivation→terminal,report/TEMPcleanup/fullreadbacks/STOP. FullTask1freshSpec+Quality and Task2 still pending; readiness/package/PCofffalse. No human step.
