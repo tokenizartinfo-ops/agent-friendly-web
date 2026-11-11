@@ -283,6 +283,36 @@ test('Q6 overflow at 16385 events is explicit and does not change native output'
  assert.equal(both.rows.length,1);assert.equal(both.rows[0].status,'fulfilled');assert.equal(both.totals.nativeSettled,1);
  assert(!JSON.stringify(both).includes('cap32768'));
 
+ const readerRuntime=createBudgetRuntime({testRevision:revision,workerRole:'QA'});
+ const token=Promise.resolve(19);
+ let underlyingCalls=0,siteGetterRuns=0,coercions=0;
+ const receiver={getReader(){assert.equal(this,receiver);underlyingCalls++;return token;}};
+ const invokeReader=metadata=>readerRuntime.member(receiver,'getReader',metadata)();
+ assert.equal(invokeReader({edge:'reader',readerSite:1}),token);
+ const startedReader=readerRuntime.snapshot();
+ assert.equal(startedReader.chronology.readerOrigins?.firstReaderOrigin?.site,1,'missing fixed reader-site provenance');
+ assert.deepEqual(startedReader.chronology.readerOrigins.firstReaderOrigin,{ordinal:1,relation:'beforeOverflow',site:1,context:'no_store'});
+ assert.equal(startedReader.chronology.eventCalls,1);assert.equal(startedReader.coverage.invalid,1);
+ const leaseForReader={};readerRuntime.root(leaseForReader,'setup',null);
+ for(let ordinal=2;ordinal<16384;ordinal++)readerRuntime.collector.root(leaseForReader,{phase:'setup',deadline:null,kind:'control'});
+ assert.equal(readerRuntime.run(leaseForReader,()=>invokeReader({edge:'reader',readerSite:2})),token);
+ const accessorSite=Object.defineProperty({edge:'reader'},'readerSite',{get(){siteGetterRuns++;throw Error('private site');}});
+ assert.equal(invokeReader(accessorSite),token);
+ assert.equal(invokeReader({edge:'reader',readerSite:{toString(){coercions++;throw Error('private label');}}}),token);
+ const doneReader=readerRuntime.snapshot(),origin=doneReader.chronology.readerOrigins;
+ assert.equal(await token,19);assert.equal(underlyingCalls,4);assert.equal(siteGetterRuns,0);assert.equal(coercions,0);
+ assert.deepEqual(readerRuntime.snapshot(),doneReader);
+ assert.equal(doneReader.chronology.eventCalls,16387);assert.equal(doneReader.chronology.byEvent.incomplete,4);
+ assert.deepEqual(doneReader.chronology.firstOverflow,{ordinal:16385,event:'incomplete'});
+ assert.equal(doneReader.chronology.reasons.readerOrigin,4);assert.equal(doneReader.coverage.invalid,4);assert.equal(doneReader.coverage.unattributed,4);
+ assert.equal(origin.beforeOverflow[1],1);assert.equal(origin.afterOverflow[2],1);assert.equal(origin.afterOverflow[0],2);
+ assert.equal(origin.beforeOverflow.reduce((sum,n)=>sum+n,0),1);assert.equal(origin.afterOverflow.reduce((sum,n)=>sum+n,0),3);
+ assert(!JSON.stringify(origin).includes('private'));
+ const scopedReader=createBudgetRuntime({testRevision:revision,workerRole:'QA'}),activeLease={};
+ scopedReader.root(activeLease,'setup',null);
+ assert.equal(scopedReader.run(activeLease,()=>scopedReader.member(receiver,'getReader',{edge:'reader',readerSite:2})()),token);
+ assert.deepEqual(scopedReader.snapshot().chronology.readerOrigins.firstReaderOrigin,{ordinal:2,relation:'beforeOverflow',site:2,context:'rooted'});
+
 });
 test('Q7 bounded UTF8 summary hashes the exact complete JSON written',async t=>{
  const path='output/finite-budget/q7-evidence.json';t.after(()=>rm(path,{force:true}));const full={purpose:'SYN',payload:'ñ'.repeat(10000),nested:{preserved:true}},before=JSON.stringify(full),result=await persistBudgetEvidence({path,full,testRevision:revision,caseName:'Q7',counts:{tests:1,pass:1,unsafe:'SECRET_Q7'}});
