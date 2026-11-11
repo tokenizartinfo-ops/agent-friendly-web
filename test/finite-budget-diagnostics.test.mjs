@@ -313,6 +313,42 @@ test('Q6 overflow at 16385 events is explicit and does not change native output'
  assert.equal(scopedReader.run(activeLease,()=>scopedReader.member(receiver,'getReader',{edge:'reader',readerSite:2})()),token);
  assert.deepEqual(scopedReader.snapshot().chronology.readerOrigins.firstReaderOrigin,{ordinal:2,relation:'beforeOverflow',site:2,context:'rooted'});
 
+ const exclusion=createBudgetRuntime({testRevision:revision,workerRole:'QA'});
+ const argument={},sentinel=Promise.resolve('reader value'),nativeFailure=Error('native failure');
+ let unsupportedCalls=0;
+ const unowned={getReader(value){assert.equal(this,unowned);unsupportedCalls++;if(value===nativeFailure)throw nativeFailure;assert.equal(value,argument);return sentinel;}};
+ const readUnowned=value=>exclusion.member(unowned,'getReader',{edge:'reader',readerSite:45})(value);
+ assert.equal(exclusion.fixture(()=>readUnowned(argument)),sentinel);
+ assert.throws(()=>exclusion.fixture(()=>readUnowned(nativeFailure)),error=>error===nativeFailure);
+ const ignored=exclusion.snapshot();
+ assert.equal(ignored.coverage.invalid,0,'declared fixture-only missing reader must not count as an invalid');
+ assert.equal(ignored.coverage.unattributed,0);assert.equal(ignored.chronology.eventCalls,0);assert.equal(ignored.chronology.reasons.readerOrigin,0);
+ assert.equal(ignored.chronology.readerOrigins.firstReaderOrigin,null);assert(ignored.chronology.readerOrigins.beforeOverflow.every(n=>n===0));
+ assert(ignored.chronology.readerOrigins.afterOverflow.every(n=>n===0));
+ assert.equal(readUnowned(argument),sentinel);assert.equal(await sentinel,'reader value');assert.equal(unsupportedCalls,3);
+ const exposed=exclusion.snapshot();assert.equal(exposed.coverage.invalid,1);assert.equal(exposed.coverage.unattributed,1);
+ assert.equal(exposed.chronology.reasons.readerOrigin,1);assert.equal(exposed.chronology.readerOrigins.beforeOverflow[45],1);
+ assert.deepEqual(exposed.chronology.readerOrigins.firstReaderOrigin,{ordinal:1,relation:'beforeOverflow',site:45,context:'no_store'});
+
+ const ownerRuntime=createBudgetRuntime({testRevision:revision,workerRole:'QA'}),ownerRoot={},ownerChild={};
+ ownerRuntime.root(ownerRoot,'authorize_get',30000);ownerRuntime.descendant(ownerRoot,ownerChild,5000);
+ const value={done:true},readPromise=Promise.resolve(value);let reads=0,factories=0,fetches=0;
+ const ownedReader={read(){assert.equal(this,ownedReader);reads++;return readPromise;}};
+ const ownedStream={getReader(option){assert.equal(this,ownedStream);assert.equal(option,argument);factories++;return ownedReader;}};
+ const ownedResponse={body:ownedStream},fetchPromise=Promise.resolve(ownedResponse);
+ const source={fetch(){assert.equal(this,source);fetches++;return fetchPromise;}};
+ ownerRuntime.nativeHolder(source,'CFversion');
+ const fetchResult=ownerRuntime.run(ownerChild,()=>ownerRuntime.member(source,'fetch',{operation:'fetch',resource:'CFversion'})());
+ assert.equal(fetchResult,fetchPromise);assert.equal(await fetchResult,ownedResponse);
+ const heldReader=ownerRuntime.fixture(()=>ownerRuntime.member(ownerRuntime.body(ownedResponse),'getReader',{edge:'reader',readerSite:45})(argument));
+ assert.equal(heldReader,ownedReader);
+ const observedRead=ownerRuntime.member(heldReader,'read',{operation:'read',exposedBytes:true})();
+ assert.equal(observedRead,readPromise);assert.equal(await observedRead,value);assert.deepEqual([fetches,factories,reads],[1,1,1]);
+ const routed=ownerRuntime.snapshot();assert.equal(routed.coverage.invalid,0);assert.equal(routed.coverage.unattributed,0);
+ assert.equal(routed.rows.length,2);const [outbound,bodyRead]=routed.rows;
+ assert.equal(bodyRead.fetchOpOrdinal,outbound.opOrdinal);assert.equal(bodyRead.rootOrdinal,outbound.rootOrdinal);assert.equal(bodyRead.childOrdinal,outbound.childOrdinal);
+ assert.equal(bodyRead.childDeadline,5000);assert.equal(bodyRead.rootDeadline,30000);assert.equal(bodyRead.phase,'authorize_get');assert.equal(bodyRead.resourceClass,'CFversion');
+
 });
 test('Q7 bounded UTF8 summary hashes the exact complete JSON written',async t=>{
  const path='output/finite-budget/q7-evidence.json';t.after(()=>rm(path,{force:true}));const full={purpose:'SYN',payload:'ñ'.repeat(10000),nested:{preserved:true}},before=JSON.stringify(full),result=await persistBudgetEvidence({path,full,testRevision:revision,caseName:'Q7',counts:{tests:1,pass:1,unsafe:'SECRET_Q7'}});
