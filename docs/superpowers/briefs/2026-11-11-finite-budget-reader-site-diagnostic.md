@@ -1,0 +1,41 @@
+# AFW Task1 — fixed reader provenance diagnostic (11 Nov 2026)
+
+PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT SOURCE/SYN GitHub Actions; ORIGIN GitHub connector; RESOURCE_TYPE isolated Source branch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION additive test-only provenance diagnostic; ROLLBACK own CAS commits only, no force/reset/main/runtime.
+
+## Read this first — requirements and exact values
+
+Owner asks to continue all AFW work autonomously. Same Task1 writer budget_chronology_impl, no helpers/reviewer; Root owns docs branch. BASE-E is Source69f5c5da6af1407e8ecb706a96c89fb3678c5f51/treeeb0f0df245be309a6b0d55dc25dee88e0a46f80d. Current report dbf341d434b2a1befd770ad9ffec64e29d89eb8c/235980chars is append-only. Main0c9c475b remains protected.
+
+Allowed Source paths are ONLY test/fixtures/finite-budget-diagnostics.mjs, test/finite-budget-diagnostics.test.mjs, test/fixtures/finite-budget-world.mjs, existing TEMP .github/workflows/afw-finite-budget-qualification.yml, and existing Task1 report docs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task1.md. No JSON descriptor edits; preserve its blobbe695028e4c12c3cb7d3b7bf2c5f2e7508f3db15 and all other code/package/config/SDK/mode/type blobs. No local checkout/build/deps/test.
+
+## Evidence and ruling — not a completed fix
+
+Comparison43103332654/attempt1/push Source80c85c784f38659e5927c5df27613afba21978a9 SUCCESS:8Q/preflight/partialproducer, exactRESTartifact readbacks. The explicit32768 candidate cured QA0 (22451events/0invalid/0overflow) but QA1 stilloverflowed at32769/firstinvalid34796runMissingLease/245940invalid; QA2 againreaderOrigin ordinal1 with14invalid before overflow and291482after. AllM clean. Actual SDKnormalcomplete1/Reference1/Notice1; dispose before originalC0; no originalalarm/consumer. This does not justify any further cap increase or promotion. No more cap experiments.
+
+Static mechanism is established: collector root/child refuse new handles after eventcallcap; runtime records leases only when a handle exists; later run observes missinglease. Separating bounded raw evidence retention from identity/aggregate bookkeeping is a prospective architecture correction requiring explicit spec/gate design, not an edit authorized by this brief. No changing retention/bounds/identity/deniedScopes/scopes/P1 here. Do NOT suppress unknowns or call a truncated trace complete.
+
+The independent question still unmeasured is which fixed getReader sites generate the14 early QA2 failures and what real context is present there. Instrument that observation only. No invented ownership, Root or phase; no retagging, exclusions, new callbacks/awaits/IO or business fix.
+
+## Add bounded provenance without changing existing counters
+
+Use a finite compile-time enum for EVERY instrumented getReader site in both compiler selection paths. Derive/register deterministic IDs from the existing accepted role/path/selectors and exact matched occurrence, covering Source descriptors, supplemental pins/entry and package readerFactory selections. There are33 Source descriptor groups with getReader (some multipleoccurrences) plus package sites; do not assume33actualsites or hardcode an incomplete count. Stable order must not depend on concurrent esbuild onLoad completion.
+
+Expose a closed runtime enum/allowlist in the existing sensor (or equivalent static literal projection); do not emit arbitrary path/URL/source/snippets/arguments/receiver names/headers/credentials/stack/capability/identity from runtime. Opaque fixed labels or bounded fixed integer siteIDs are data only, never authority. Unknown/unregistered metadata normalizes to an explicit unknown bucket without object coercion/accessor reads. Do not build unbounded lists from callers or auto-register them.
+
+Attach the fixed site label as passive metadata to existing getReader hooks; preserve exact original lookup/evaluation/call/this/args/return/throw/promise behavior and call count. On the EXISTING readerOrigin failure only, preserve exactly ONE existing incomplete event and old fixed reason. Add a bounded per-site histogram split beforeOverflow/afterOverflow and one firstReaderOrigin detail with the actual event ordinal/relation/site and fixed context enum derived from existing currentStore (e.g.no_store/excluded/rooted/unrooted). Snapshot observations consume no events. New diagnostic data must not alter existing coverage.invalid/unattributed, eventCalls/byEvent, retained rows, dedup or root/child admission.
+
+Map every ID to role/path/exact original or prepared line/selector/occurrence in compile-time proof/report, not runtime failure strings. Pure preflight and actual native compilation must verify the identical reader-site mapping and selection counts before I0, on the same Source/run/attempt. Existing130paths/635groups role closure is preserved. If a site cannot be resolved, stop beforeI0; do not fall back by method name or omit it to pass.
+
+## Verification sequence, exactly two bounded executions
+
+1. Extend existing Q6 (or an appropriate existing Q group, keeping total8) with a deliberate missing-body-owner at a known fixed reader site and actual/no_store or rooted scope: one underlying getReader effect and original returned value, old reason/counters exactlyone, known bucket and firstdetail, snapshot no mutation. Include two fixed sites and before/after crossing the original limit, unknown-site normalization, accessor/noncoercion privacy and no authority/Promise changes. Existing Q1–Q8/default16384/candidate32768 contracts remain. ONE pureRED on unchanged sensor proving the intended new provenance assertion fails; exactsameIDartifactREST readback. No nativeproducer onRED. Stop if RED cause/counts wrong.
+
+2. Implement additive data and run ONE8Q/syntax/lint + strict preflight → producer-only probe, UNMARKED ordinary cap16384 (do not set AFW_BUDGET_DIAGNOSTIC_CANDIDATE, and actualsnapshotlimits must be16384). Reuse filename/setImmediate CLI and produceCheckpoint({variant:'principal',budgetQualification:true,deferWait:true}). Same genuine setup/SDKcomplete/Reference/Notice, originalI0/C0I0+900000/C1C0+180000/Root≤30000/child≤5000, max2MF, disposebeforeC0, no consumer/originalalarm. This is a new provenance measurement, not repetition of prior failing cap test and not full9/16/56 acceptance.
+
+Facts retain actualSource/run/attempt/I0/C0/C1/return/complete/Reference/Notice/actualsnapshotlimits/disposedBeforeC0true/originalAlarmObservedfalse and all readinessflagsfalse. Full safe JSON contains every fixed reader bucket/map; safe console can split the bounded nonzero per-site entries across ≤2048UTF8-byte lines. Clearly state implicit zero buckets and copy complete safe aggregates/mapping to report. No raw native rows/DB/KV/stack in console/report.
+
+Purejobs≤3min, producer≤5min; contents:read/actions:read ephemeralGITHUB_TOKEN only; exact Source branch/self-path push, checkoutSHA/persistcredentialsfalse, Node22/lockednpmci ignorescripts/audit/fund, cancel-in-progressfalse. SameID RESTdownload with explicitrepo/run, 7day safeartifacts, fullscripts/metafiles/provenance and exact path/bytes/SHA/source/run/attempt readbacks, as acceptedpreviousruns. No new credentials or account permissions.
+
+Source frozen activation→terminal. On wrongRED/failedgate:preserve, retireTEMP, NEEDS_CONTEXT and no retry. Atterminal append report with actualTAP counts/no claims beyond probe, complete fixed site map and observed site/context counts, retireTEMP and fulltree/protected/main/CAS/ref/fullreportblobreadback, thenSTOP_WRITES. No scope expansion, helpers, taskreview, Task2 or production work. Root uses results to design the sustainable observer and/or ownership correction.
+
+No real Cloudflare API/runtime/DDL/OAuth/OTP/tokens/permissions/cron/Container/consumer/customer/Max/mail/newchat/main/PR/publish. operationalReadiness=false; completePackage=false; PCoff=false. No human intervention required.
