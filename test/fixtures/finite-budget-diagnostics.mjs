@@ -1,6 +1,6 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 const PURPOSE='afw.finite-budget-diagnostics.syn.v1';
-const CHRONOLOGY='afw.finite-budget-chronology.syn.v1';
+const CHRONOLOGY='afw.finite-budget-chronology.syn.v2';
 // IDs 1..54 are closed over the pinned compiler manifest. 0 denotes unknown.
 export const budgetReaderSiteCount=54;
 const READER_ORIGIN=Symbol('reader-origin');
@@ -18,8 +18,9 @@ const INVALID_REASONS=new Set([
  'readerOrigin','holderIdentity','invocationIdentity','invocationRoot','methodPhase','clockLease','aliasStore','aliasChild','transportPhase','transactionContext','fetchResource',
 ]);
 const counts=keys=>Object.fromEntries(Array.from(keys,key=>[key,0]));
-const splitCount=()=>({beforeOverflow:0,afterOverflow:0});
+const splitCount=()=>({beforeRetentionOmission:0,afterRetentionOmission:0});
 const PHASES=new Set(['setup','authorize_get','authorize_post','sdk_lookup','token_exchange','mcp_read','monitoring_get','monitoring_post','cleanup_before_restore','restore','sdk_reduction','final_inventory']);
+const PHASE_BITS=new Map([...PHASES].map((phase,index)=>[phase,1<<index]));
 const RESOURCES=new Set(['CFcredential','CFdeployment','CFversion','CFworkflow','CFcontainer','CFschedule','CFtail','GHsource','JWKS','DO','SQL','KV','transport','rateLimiter']);
 const OPERATIONS=new Set(['get','list','put','delete','first','all','run','sync','transaction','getAlarm','setAlarm','deleteAlarm','fetch','read','cancel','batch','exec','rpc','limit']);
 const REASONS=new Set(['timeout','denied','aborted','guard']);
@@ -27,87 +28,118 @@ const data=(value,key)=>{if(!value||typeof value!=='object')return undefined;con
 const nativeObject=value=>value!==null&&(typeof value==='object'||typeof value==='function');
 const number=value=>typeof value==='number'&&Number.isFinite(value)&&value>=0;
 const integer=value=>Number.isSafeInteger(value)&&value>=0;
-const metric=()=>({nativeStarted:0,nativeSettled:0,nativeRejected:0,logicalDenied:0,cancelStarted:0,cancelSettled:0,active:0,peak:0,nativeBytesRead:null,chunksRead:null,nativeDurationSumMs:0});
+const metric=()=>({nativeBytesUnavailable:0,nativeStarted:0,nativeSettled:0,nativeRejected:0,logicalDenied:0,cancelStarted:0,cancelSettled:0,active:0,peak:0,nativeBytesRead:null,chunksRead:null,nativeDurationSumMs:0});
+export const budgetProofVocabulary=Object.freeze(Object.fromEntries(Object.entries({
+ phases:PHASES,resources:RESOURCES,operations:OPERATIONS,logicalReasons:REASONS,events:EVENTS,invalidReasons:INVALID_REASONS
+}).map(([key,values])=>[key,Object.freeze([...values])])));
 export function createBudgetDiagnostics(options={}){
- const revision=data(options,'testRevision'),role=data(options,'workerRole'),requested=data(options,'maxEvents')??16384;
+
+ const revision=data(options,'testRevision'),role=data(options,'workerRole');
  const testRevision=typeof revision==='string'&&/^[a-f0-9]{40}$/.test(revision)?revision:null;
  const workerRole=['QA','M','fixture'].includes(role)?role:'fixture';
- let limit=integer(requested)&&requested>0&&requested<=16384?requested:16384;
- if(requested===32768){
-  try{if(data(options,'diagnosticCandidate')==='cap32768')limit=32768;}
-  catch{/* An unreadable candidate marker leaves the ordinary fallback intact. */}
+ let optionsValid=!!testRevision&&role===workerRole;
+ function recordLimit(key){
+  const descriptor=Object.getOwnPropertyDescriptor(options??{},key);
+  if(!descriptor)return 16384;
+  if(Object.hasOwn(descriptor,'value')&&integer(descriptor.value)&&descriptor.value>=1&&descriptor.value<=16384)return descriptor.value;
+  optionsValid=false;return 16384;
  }
- const coverage={overflow:false,invalid:testRevision&&workerRole===role&&limit===requested?0:1,unattributed:0,nativeBytesUnavailable:0};
+ const limits={operation:recordLimit('maxRows'),guard:recordLimit('maxGuards'),scope:recordLimit('maxScopes')};
+ if(Object.getOwnPropertyDescriptor(options??{},'maxEvents')||Object.getOwnPropertyDescriptor(options??{},'diagnosticCandidate'))optionsValid=false;
+ const budget=Object.fromEntries(Object.entries(limits).map(([kind,limit])=>[kind,{limit,retained:0,omitted:0,firstOmittedOrdinal:null}]));
+ const coverage={overflow:false,invalid:optionsValid?0:1,unattributed:0,nativeBytesUnavailable:0,numericOverflow:false};
  const roots=new WeakMap(),rootHandles=new WeakMap(),children=new WeakMap(),childHandles=new WeakMap(),operations=new WeakMap();
- const rows=[],logicalScopeEvents=[],deniedScopes=new Set(),groups=new Map(),scopes=new Map(),totals=metric();let rootOrdinal=0,childOrdinal=0,opOrdinal=0,scopeEventOrdinal=0,scopeGuardEvents=0,events=0,firstAt=null,lastAt=null;
- const byEvent=counts(EVENTS),reasons=counts(INVALID_REASONS),invalidByOverflow=splitCount(),unattributedByOverflow=splitCount();
+ const rowMetrics=new WeakMap(),rows=[],logicalScopeEvents=[],scopeRows=[],groups=new Map(),totals=metric();
+ let rootOrdinal=0,childOrdinal=0,opOrdinal=0,scopeGuardEvents=0,deniedScopes=0,events=0,firstAt=null,lastAt=null;
+ const byEvent=counts(EVENTS),reasons=counts(INVALID_REASONS),invalidByRetention=splitCount(),unattributedByRetention=splitCount();
  const readerBefore=Array(budgetReaderSiteCount+1).fill(0),readerAfter=Array(budgetReaderSiteCount+1).fill(0);
- let firstReaderOrigin=null;
- let firstOverflow=null,firstInvalid=null,method='constructor';
- const event=()=>{
-  events++;byEvent[method]++;
-  if(events>limit){coverage.overflow=true;firstOverflow??={event:method,ordinal:events};return false;}
-  return true;
- };
+ let firstReaderOrigin=null,firstOmission=null,firstInvalid=null,method='constructor';
+ function plus(value,delta=1,duration=false){
+  const next=value+delta;
+  if(duration?number(next):integer(next))return next;
+  coverage.numericOverflow=true;return value;
+ }
+ function increment(target,key,delta=1,duration=false){target[key]=plus(target[key]??0,delta,duration);}
+ const event=()=>{events=plus(events);increment(byEvent,method);};
+ const relation=()=>firstOmission?'afterRetentionOmission':'beforeRetentionOmission';
+ function admit(kind){
+  const entry=budget[kind];
+  if(entry.retained<entry.limit){increment(entry,'retained');return true;}
+  increment(entry,'omitted');entry.firstOmittedOrdinal??=events;
+  firstOmission??={event:method,ordinal:events,kind};coverage.overflow=true;return false;
+ }
+ const retention=()=>({
+  purpose:'afw.finite-budget-retention.syn.v1',operationRows:{...budget.operation},
+  guardRows:{...budget.guard},scopeRows:{...budget.scope},firstOmission:firstOmission&&{...firstOmission},traceComplete:!coverage.overflow
+ });
  const recordInvalid=(candidate,unattributed)=>{
-  const reason=INVALID_REASONS.has(candidate)?candidate:'unknown';
-  const relation=coverage.overflow?'afterOverflow':'beforeOverflow';
-  firstInvalid??={event:method,ordinal:events,reason,relation};
-  reasons[reason]++;invalidByOverflow[relation]++;
-  if(unattributed)unattributedByOverflow[relation]++;
+  const reason=INVALID_REASONS.has(candidate)?candidate:'unknown',where=relation();
+  firstInvalid??={event:method,ordinal:events,reason,relation:where};
+  increment(reasons,reason);increment(invalidByRetention,where);
+  if(unattributed)increment(unattributedByRetention,where);
  };
  if(coverage.invalid)recordInvalid('constructorOptions',false);
  const invalid=(reason,unattributed=false)=>{
-  coverage.invalid++;if(unattributed)coverage.unattributed++;
+  increment(coverage,'invalid');if(unattributed)increment(coverage,'unattributed');
   recordInvalid(reason,unattributed);return null;
  };
  const chronology=()=>({
-  purpose:CHRONOLOGY,limit,eventCalls:events,byEvent:{...byEvent},
-  firstOverflow:firstOverflow&&{...firstOverflow},firstInvalid:firstInvalid&&{...firstInvalid},
-  invalid:{...invalidByOverflow},unattributed:{...unattributedByOverflow},reasons:{...reasons},
-  readerOrigins:{beforeOverflow:readerBefore.slice(),afterOverflow:readerAfter.slice(),firstReaderOrigin:firstReaderOrigin&&{...firstReaderOrigin}}
+  purpose:CHRONOLOGY,eventCalls:events,byEvent:{...byEvent},firstInvalid:firstInvalid&&{...firstInvalid},
+  invalid:{...invalidByRetention},unattributed:{...unattributedByRetention},reasons:{...reasons},
+  readerOrigins:{beforeRetentionOmission:readerBefore.slice(),afterRetentionOmission:readerAfter.slice(),firstReaderOrigin:firstReaderOrigin&&{...firstReaderOrigin}}
  });
  const handle=()=>Object.freeze(Object.create(null));
- const touch=(row,field,amount=1)=>{for(const m of [totals,groups.get(row.phase+'|'+row.resourceClass),scopes.get(row.rootOrdinal+'|'+(row.childOrdinal??0))])m[field]+=amount;};
- const active=(row,delta)=>{for(const m of [totals,groups.get(row.phase+'|'+row.resourceClass),scopes.get(row.rootOrdinal+'|'+(row.childOrdinal??0))]){m.active+=delta;m.peak=Math.max(m.peak,m.active);}};
+ function metricForScope(owner){
+  if(owner.metric===undefined){
+   owner.metric=admit('scope')?{rootOrdinal:owner.rootOrdinal,childOrdinal:owner.childOrdinal??null,...metric()}:null;
+   if(owner.metric)scopeRows.push(owner.metric);
+  }
+  return owner.metric;
+ }
+ const touch=(row,field,amount=1,duration=false)=>{for(const m of rowMetrics.get(row))increment(m,field,amount,duration);};
+ const active=(row,delta)=>{for(const m of rowMetrics.get(row)){increment(m,'active',delta);m.peak=Math.max(m.peak,m.active);}};
  const safe=(name,fn)=>(...args)=>{
   const previous=method;method=name;
   try{return fn(...args);}catch{return invalid('collectorException');}
   finally{method=previous;}
  };
  const root=safe('root',(object,meta)=>{
-  const keep=event(),phase=data(meta,'phase'),deadline=data(meta,'deadline'),kind=data(meta,'kind');
+  event();const phase=data(meta,'phase'),deadline=data(meta,'deadline'),kind=data(meta,'kind');
   if(!nativeObject(object)||!PHASES.has(phase)||!['control','transport'].includes(kind)||!(deadline===null||number(deadline)))return invalid('rootInput',true);
   const previous=roots.get(object);if(previous)return previous;
-  if(!keep)return null;
-  const ref=handle(),value={rootOrdinal:++rootOrdinal,phase,deadline,kind};roots.set(object,ref);rootHandles.set(ref,value);return ref;
+  rootOrdinal=plus(rootOrdinal);
+  const ref=handle(),value={rootOrdinal,phase,deadline,kind,denialMask:0};roots.set(object,ref);rootHandles.set(ref,value);return ref;
  });
  const child=safe('child',(rootRef,object,meta)=>{
-  const keep=event(),r=nativeObject(rootRef)&&rootHandles.get(rootRef),deadline=data(meta,'deadline');
+  event();const r=nativeObject(rootRef)&&rootHandles.get(rootRef),deadline=data(meta,'deadline');
   if(!r||!nativeObject(object)||!(deadline===null||number(deadline)))return invalid('childInput',true);
   const previous=children.get(object);if(previous){if(childHandles.get(previous).rootOrdinal!==r.rootOrdinal)return invalid('childConflict',true);return previous;}
-  if(!keep)return null;
-  const ref=handle();children.set(object,ref);childHandles.set(ref,{rootOrdinal:r.rootOrdinal,childOrdinal:++childOrdinal,deadline});return ref;
+  childOrdinal=plus(childOrdinal);
+  const ref=handle();children.set(object,ref);childHandles.set(ref,{rootOrdinal:r.rootOrdinal,childOrdinal,deadline,denialMask:0});return ref;
  });
  const begin=safe('begin',(rootRef,childRef,meta)=>{
-  const keep=event(),r=nativeObject(rootRef)&&rootHandles.get(rootRef),c=childRef===null?null:nativeObject(childRef)&&childHandles.get(childRef);
+  event();const r=nativeObject(rootRef)&&rootHandles.get(rootRef),c=childRef===null?null:nativeObject(childRef)&&childHandles.get(childRef);
   const phase=data(meta,'phase'),resourceClass=data(meta,'resourceClass'),operation=data(meta,'operation'),at=data(meta,'at'),fetchOpRef=data(meta,'fetchOpRef')??null;
   const fetchRow=fetchOpRef===null?null:nativeObject(fetchOpRef)&&operations.get(fetchOpRef);
   if(!r||childRef!==null&&!c||c&&c.rootOrdinal!==r.rootOrdinal||!PHASES.has(phase)||!RESOURCES.has(resourceClass)||!OPERATIONS.has(operation)||!number(at))return invalid('beginContext',true);
   if(operation==='rpc'&&resourceClass!=='DO'||operation==='limit'&&resourceClass!=='rateLimiter'||resourceClass==='rateLimiter'&&operation!=='limit')return invalid('beginMethodResource',true);
   if(fetchOpRef!==null&&(!fetchRow||!['read','cancel'].includes(operation)||fetchRow.operation!=='fetch'||fetchRow.rootOrdinal!==r.rootOrdinal||fetchRow.childOrdinal!==(c?.childOrdinal??null)||fetchRow.phase!==phase||fetchRow.resourceClass!==resourceClass))return invalid('beginFetchLink',true);
-  const row={testRevision,workerRole,phase,resourceClass,operation,rootOrdinal:r.rootOrdinal,childOrdinal:c?.childOrdinal??null,opOrdinal:++opOrdinal,fetchOpOrdinal:fetchRow?.opOrdinal??null,kind:r.kind,rootDeadline:r.deadline,childDeadline:c?.deadline??null,enteredAt:at,settledAt:null,status:'pending',nativeBytesRead:null,nativeBytesReason:'not_exposed_by_native_api',chunksRead:null,readDurationMs:0,logicalAt:null,logicalReason:null,cancelStartedAt:null,cancelSettledAt:null};
-  const g=phase+'|'+resourceClass,scope=row.rootOrdinal+'|'+(row.childOrdinal??0);if(!groups.has(g))groups.set(g,{phase,resourceClass,...metric()});if(!scopes.has(scope))scopes.set(scope,{rootOrdinal:row.rootOrdinal,childOrdinal:row.childOrdinal,...metric()});
-  coverage.nativeBytesUnavailable++;touch(row,'nativeStarted');active(row,1);
+  opOrdinal=plus(opOrdinal);
+  const row={testRevision,workerRole,phase,resourceClass,operation,rootOrdinal:r.rootOrdinal,childOrdinal:c?.childOrdinal??null,opOrdinal,enteredEventOrdinal:events,settledEventOrdinal:null,fetchOpOrdinal:fetchRow?.opOrdinal??null,kind:r.kind,rootDeadline:r.deadline,childDeadline:c?.deadline??null,enteredAt:at,settledAt:null,status:'pending',nativeBytesRead:null,nativeBytesReason:'not_exposed_by_native_api',chunksRead:null,readDurationMs:0,logicalAt:null,logicalReason:null,cancelStartedAt:null,cancelSettledAt:null};
+  const g=phase+'|'+resourceClass;if(!groups.has(g))groups.set(g,{phase,resourceClass,...metric()});
+  const scopeMetric=metricForScope(c??r),metrics=[totals,groups.get(g)];
+  if(scopeMetric)metrics.push(scopeMetric);
+  rowMetrics.set(row,metrics);
+  increment(coverage,'nativeBytesUnavailable');touch(row,'nativeBytesUnavailable');touch(row,'nativeStarted');active(row,1);
   firstAt=firstAt===null?at:Math.min(firstAt,at);lastAt=lastAt===null?at:Math.max(lastAt,at);
-  const ref=handle();operations.set(ref,row);if(keep)rows.push(row);return ref;
+  const ref=handle();operations.set(ref,row);if(admit('operation'))rows.push(row);return ref;
  });
  const bytes=safe('bytes',(ref,meta)=>{
   event();const row=nativeObject(ref)&&operations.get(ref),length=data(meta,'length'),chunks=data(meta,'chunks'),durationMs=data(meta,'durationMs');
   if(!row||row.operation!=='read'||!integer(length)||!integer(chunks)||!number(durationMs))return invalid('bytesInput');
-  if(row.nativeBytesRead===null){row.nativeBytesRead=0;row.chunksRead=0;row.nativeBytesReason=null;coverage.nativeBytesUnavailable--;}
-  row.nativeBytesRead+=length;row.chunksRead+=chunks;row.readDurationMs+=durationMs;
-  for(const m of [totals,groups.get(row.phase+'|'+row.resourceClass),scopes.get(row.rootOrdinal+'|'+(row.childOrdinal??0))]){m.nativeBytesRead=(m.nativeBytesRead??0)+length;m.chunksRead=(m.chunksRead??0)+chunks;}
+  if(row.nativeBytesRead===null){row.nativeBytesRead=0;row.chunksRead=0;row.nativeBytesReason=null;increment(coverage,'nativeBytesUnavailable',-1);touch(row,'nativeBytesUnavailable',-1);}
+  increment(row,'nativeBytesRead',length);increment(row,'chunksRead',chunks);increment(row,'readDurationMs',durationMs,true);
+  touch(row,'nativeBytesRead',length);touch(row,'chunksRead',chunks);
  });
  const logical=safe('logical',(ref,meta)=>{
   event();const row=nativeObject(ref)&&operations.get(ref),at=data(meta,'at'),reason=data(meta,'reason');
@@ -117,11 +149,13 @@ export function createBudgetDiagnostics(options={}){
  });
 
  const scopeLogical=safe('scopeLogical',(rootRef,childRef,meta)=>{
-  const keep=event(),r=nativeObject(rootRef)&&rootHandles.get(rootRef),c=childRef===null?null:nativeObject(childRef)&&childHandles.get(childRef);
+  event();const r=nativeObject(rootRef)&&rootHandles.get(rootRef),c=childRef===null?null:nativeObject(childRef)&&childHandles.get(childRef);
   const phase=data(meta,'phase'),at=data(meta,'at'),reason=data(meta,'reason');
   if(!r||childRef!==null&&!c||c&&c.rootOrdinal!==r.rootOrdinal||!PHASES.has(phase)||!number(at)||!REASONS.has(reason))return invalid('scopeLogicalInput',true);
-  scopeGuardEvents++;const eventOrdinal=++scopeEventOrdinal;
-  if(keep){deniedScopes.add(r.rootOrdinal+'|'+(c?.childOrdinal??0)+'|'+phase);logicalScopeEvents.push({testRevision,workerRole,eventOrdinal,rootOrdinal:r.rootOrdinal,childOrdinal:c?.childOrdinal??null,phase,at,reason});}
+  const owner=c??r,bit=PHASE_BITS.get(phase);metricForScope(owner);
+  scopeGuardEvents=plus(scopeGuardEvents);
+  if(!(owner.denialMask&bit)){owner.denialMask|=bit;deniedScopes=plus(deniedScopes);}
+  if(admit('guard'))logicalScopeEvents.push({testRevision,workerRole,eventOrdinal:scopeGuardEvents,rootOrdinal:r.rootOrdinal,childOrdinal:c?.childOrdinal??null,phase,at,reason});
  });
 
  const cancel=safe('cancel',(ref,meta)=>{
@@ -135,15 +169,14 @@ export function createBudgetDiagnostics(options={}){
   if(!row||!number(at)||!['fulfilled','rejected'].includes(status))return invalid(observerReason==='promiseThenMissing'||observerReason==='promiseThenException'?observerReason:'settleInput');
   if(row.status!=='pending')return;
   if(at<row.enteredAt)return invalid('settleTime');
-  row.status=status;row.settledAt=at;lastAt=Math.max(lastAt??at,at);touch(row,'nativeSettled');if(status==='rejected')touch(row,'nativeRejected');touch(row,'nativeDurationSumMs',at-row.enteredAt);active(row,-1);
+  row.status=status;row.settledAt=at;row.settledEventOrdinal=events;lastAt=Math.max(lastAt??at,at);touch(row,'nativeSettled');if(status==='rejected')touch(row,'nativeRejected');touch(row,'nativeDurationSumMs',at-row.enteredAt,true);active(row,-1);
  });
- const snapshot=safe('snapshot',()=>({purpose:PURPOSE,testRevision,workerRole,rows:rows.map(row=>({...row})),logicalScopeEvents:logicalScopeEvents.map(event=>({...event})),totals:{...totals,scopeGuardEvents,deniedScopes:deniedScopes.size,observedWallMs:firstAt===null?0:(lastAt??firstAt)-firstAt,scopes:[...scopes.values()].map(m=>({...m}))},byPhaseResource:[...groups.values()].map(m=>({...m})),coverage:{...coverage},chronology:chronology(),operationalReadiness:false,completePackage:false,PCoff:false}));
+ const snapshot=safe('snapshot',()=>({purpose:PURPOSE,testRevision,workerRole,rows:rows.map(row=>({...row})),logicalScopeEvents:logicalScopeEvents.map(event=>({...event})),totals:{...totals,scopeGuardEvents,deniedScopes,observedWallMs:firstAt===null?0:(lastAt??firstAt)-firstAt,scopes:scopeRows.map(m=>({...m}))},byPhaseResource:[...groups.values()].map(m=>({...m})),coverage:{...coverage,observedMetricsComplete:coverage.invalid===0&&coverage.unattributed===0&&!coverage.numericOverflow&&budget.scope.omitted===0},retention:retention(),chronology:chronology(),operationalReadiness:false,completePackage:false,PCoff:false}));
  const incomplete=safe('incomplete',(reason,origin,site,context)=>{
   event();
   if(origin===READER_ORIGIN){
-   const relation=coverage.overflow?'afterOverflow':'beforeOverflow';
-   const buckets=coverage.overflow?readerAfter:readerBefore;
-   buckets[site]++;firstReaderOrigin??={ordinal:events,relation,site,context};
+   const buckets=firstOmission?readerAfter:readerBefore;
+   increment(buckets,site);firstReaderOrigin??={ordinal:events,relation:relation(),site,context};
   }
   return invalid(reason,true);
  });

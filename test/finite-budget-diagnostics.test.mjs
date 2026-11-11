@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,rm} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {createBudgetDiagnostics,observeBudgetPromise,createBudgetRuntime} from './fixtures/finite-budget-diagnostics.mjs';
-import {persistBudgetEvidence} from './fixtures/finite-budget-evidence.mjs';
+import {persistBudgetEvidence,verifyObservedBudgetMetrics,verifyCompleteBudgetTrace} from './fixtures/finite-budget-evidence.mjs';
 const revision='a'.repeat(40);
 const fixture=()=>{const c=createBudgetDiagnostics({testRevision:revision,workerRole:'QA'}),r=c.root({},{phase:'authorize_get',deadline:30000,kind:'control'}),child=c.child(r,{},{deadline:5000});return {c,r,child};};
 const begin=(c,r,child,phase='authorize_get',at=0)=>c.begin(r,child,{phase,resourceClass:'KV',operation:'get',at});
@@ -19,6 +19,17 @@ test('Q2 one native entry and duplicate settlement retain consistent denominator
  const c2=createBudgetDiagnostics({testRevision:revision,workerRole:'M'}),r2=c2.root({},{phase:'mcp_read',deadline:null,kind:'transport'});
  for(const [resourceClass,operation]of [['rateLimiter','limit'],['DO','rpc']]){const ref=c2.begin(r2,null,{phase:'mcp_read',resourceClass,operation,at:0});assert(ref);c2.settle(ref,{at:1,status:'fulfilled'});}
  const typed=c2.snapshot();assert.equal(typed.totals.nativeStarted,2);assert.equal(typed.totals.nativeSettled,2);assert.equal(typed.coverage.unattributed,0);assert.deepEqual(typed.rows.map(r=>[r.resourceClass,r.operation,r.fetchOpOrdinal]),[['rateLimiter','limit',null],['DO','rpc',null]]);
+ for(const overlap of [true,false]){
+  const probe=createBudgetDiagnostics({testRevision:revision,workerRole:'fixture'}),root=probe.root({},{phase:'setup',deadline:null,kind:'transport'});
+  const left=begin(probe,root,null,'setup',7);
+  if(!overlap)probe.settle(left,{at:7,status:'fulfilled'});
+  const right=begin(probe,root,null,'setup',7);
+  if(overlap)probe.settle(left,{at:7,status:'fulfilled'});
+  probe.settle(right,{at:7,status:'fulfilled'});
+  const sameTime=probe.snapshot();assert.equal(sameTime.totals.peak,overlap?2:1);
+  assert.equal(verifyCompleteBudgetTrace(sameTime).level,'complete_trace');assert.equal(verifyObservedBudgetMetrics(sameTime).level,'observed_metrics');
+  const altered=structuredClone(sameTime);altered.totals.peak=overlap?1:2;assert.throws(()=>verifyCompleteBudgetTrace(altered));
+ }
 });
 test('Q3 fixed Root and phase survive a concurrent Root and late settlement',async()=>{
  const {c,r,child}=fixture(),a=begin(c,r,child,'authorize_get',0),r2=c.root({},{phase:'monitoring_post',deadline:31000,kind:'control'}),b=begin(c,r2,null,'monitoring_post',1);
@@ -43,6 +54,13 @@ test('Q4 logical denial and cancellation do not fabricate native settlement',()=
  const runtime=createBudgetRuntime({testRevision:revision,workerRole:'QA'}),lease={},originalError=Error('not serialized');runtime.clock(lease,30000);
  assert.throws(()=>runtime.control(lease,'authorize_get',{},()=>{throw runtime.guardValue(originalError);}),error=>error===originalError);
  const guardSnapshot=runtime.snapshot();assert.equal(guardSnapshot.totals.scopeGuardEvents,1);assert.equal(guardSnapshot.totals.logicalDenied,0);assert.equal(guardSnapshot.rows.length,0);assert(!JSON.stringify(guardSnapshot).includes('not serialized'));
+
+ assert.equal(verifyCompleteBudgetTrace(scoped).level,'complete_trace');
+ const guardPrefix=createBudgetDiagnostics({testRevision:revision,workerRole:'QA',maxGuards:1});
+ const gr=guardPrefix.root({},{phase:'setup',deadline:30000,kind:'control'});
+ for(const phase of ['setup','setup','restore','restore'])guardPrefix.scopeLogical(gr,null,{phase,at:0,reason:'guard'});
+ const guarded=guardPrefix.snapshot();assert.equal(guarded.totals.deniedScopes,2);assert.equal(guarded.retention.guardRows.omitted,3);
+ assert.equal(verifyObservedBudgetMetrics(guarded).level,'observed_metrics');assert.throws(()=>verifyCompleteBudgetTrace(guarded));
 
 });
 test('Q5 observing preserves actual promise identity, resolution, rejection and no authority',async()=>{
@@ -207,91 +225,72 @@ test('Q5 observing preserves actual promise identity, resolution, rejection and 
  const snapshot=runtime.snapshot();assert.equal(snapshot.totals.nativeStarted,4,'outer facade ACK is not a second native row');assert.equal(snapshot.totals.nativeRejected,1);assert.equal(snapshot.coverage.unattributed,0);
 
 });
-test('Q6 overflow at 16385 events is explicit and does not change native output',async()=>{
+test('Q6 retained record bounds preserve native identity, observed metrics and omission evidence',async()=>{
  const bounded=createBudgetDiagnostics({testRevision:revision,workerRole:'QA',maxRows:1});
- const metaForBound={phase:'setup',deadline:null,kind:'control'};
+ const metaForBound={phase:'setup',deadline:30000,kind:'control'};
  const firstLease={},firstRef=bounded.root(firstLease,metaForBound);
  for(let event=1;event<16385;event++)bounded.root(firstLease,metaForBound);
  const laterRoot=bounded.root({},metaForBound);
  assert(laterRoot,'retention must not drop a legitimate new Root after 16384 collector calls');
  assert.notEqual(laterRoot,firstRef);
 
- const {c,r}=fixture();for(let i=0;i<16385;i++)begin(c,r,null,'setup',i);
- const s=c.snapshot();assert.equal(s.coverage.overflow,true);assert(s.rows.length<=16384);assert.equal(s.totals.nativeStarted,16385);
- const actual=Promise.resolve('same native output');const op=begin(c,r,null,'setup',performance.now());assert.equal(observeBudgetPromise(c,op,actual),actual);assert.equal(await actual,'same native output');assert(c.snapshot().coverage.overflow);
- const observed=c.snapshot().chronology;
- assert.equal(observed?.purpose,'afw.finite-budget-chronology.syn.v1','missing bounded chronology contract');
- assert.equal(observed.limit,16384);
- assert.deepEqual(observed.firstOverflow,{event:'begin',ordinal:16385});
- assert.equal(observed.eventCalls,16389);
- assert.deepEqual(observed.byEvent,{root:1,child:1,begin:16386,bytes:0,logical:0,scopeLogical:0,cancel:0,settle:1,incomplete:0});
- assert.equal(observed.firstInvalid,null);
- const small=createBudgetDiagnostics({testRevision:revision,workerRole:'QA',maxEvents:2});
- let touched=0;
- const hostile={get reason(){touched++;throw Error('private reason');},toString(){touched++;throw Error('private text');}};
- small.incomplete(hostile);
- small.incomplete('arbitrary-private-string');
- small.incomplete();
- small.bytes(null,{});
- const beforeRead=small.snapshot();
- assert.deepEqual(small.snapshot(),beforeRead);
- const {chronology,coverage}=beforeRead;
- assert.equal(touched,0);
- assert.equal(coverage.invalid,4);assert.equal(coverage.unattributed,3);
- assert.deepEqual(chronology.firstInvalid,{event:'incomplete',ordinal:1,reason:'unknown',relation:'beforeOverflow'});
- assert.deepEqual(chronology.firstOverflow,{event:'incomplete',ordinal:3});
- assert.deepEqual(chronology.invalid,{beforeOverflow:2,afterOverflow:2});
- assert.deepEqual(chronology.unattributed,{beforeOverflow:2,afterOverflow:1});
- assert.equal(chronology.reasons.unknown,3);assert.equal(chronology.reasons.bytesInput,1);
- assert(!JSON.stringify(chronology).includes('private'));
- const crossing=createBudgetDiagnostics({testRevision:revision,workerRole:'M',maxEvents:1});
- crossing.root({},{phase:'setup',deadline:null,kind:'control'});crossing.incomplete();
- assert.deepEqual(crossing.snapshot().chronology.firstInvalid,{event:'incomplete',ordinal:2,reason:'unknown',relation:'afterOverflow'});
- const bad=createBudgetDiagnostics({}).snapshot();
- assert.deepEqual(bad.chronology.firstInvalid,{event:'constructor',ordinal:0,reason:'constructorOptions',relation:'beforeOverflow'});
- assert.equal(bad.chronology.eventCalls,0);assert.equal(bad.coverage.invalid,1);assert.equal(bad.chronology.reasons.constructorOptions,1);
+
+ const early=begin(bounded,firstRef,null,'setup',0);
+ const lateChild=bounded.child(laterRoot,{}, {deadline:5000});
+ const late=begin(bounded,laterRoot,lateChild,'setup',0);
+ const newest=bounded.root({},metaForBound);assert(newest);const newestChild=bounded.child(newest,{}, {deadline:5000});assert(newestChild);
+ const third=begin(bounded,newest,newestChild,'setup',0);assert(third);bounded.settle(third,{at:7,status:'fulfilled'});
+ bounded.settle(early,{at:10,status:'fulfilled'});
+ const promise=Promise.resolve('original native output');assert.equal(observeBudgetPromise(bounded,late,promise),promise);assert.equal(await promise,'original native output');
+ bounded.settle(late,{at:100,status:'rejected'});
+ const kept=bounded.snapshot();assert.deepEqual(bounded.snapshot(),kept);
+ assert.equal(kept.retention.operationRows.limit,1);assert.equal(kept.retention.operationRows.retained,1);assert.equal(kept.retention.operationRows.omitted,2);
+ assert.equal(kept.retention.firstOmission.kind,'operation');assert.equal(kept.retention.firstOmission.ordinal,kept.retention.operationRows.firstOmittedOrdinal);
+ assert.equal(kept.totals.nativeStarted,3);assert.equal(kept.totals.nativeSettled,3);assert.equal(kept.totals.nativeRejected,0);assert.equal(kept.totals.peak,3);
+ assert(kept.totals.scopes.some(scope=>scope.rootOrdinal===3&&scope.childOrdinal===2&&scope.nativeSettled===1));
+ assert.equal(kept.rows[0].settledAt,10);assert.equal(kept.coverage.invalid,0);
+ assert.equal(verifyObservedBudgetMetrics(kept).traceComplete,false);assert.throws(()=>verifyCompleteBudgetTrace(kept),/incomplete retained trace/);
+
+ const limited=createBudgetDiagnostics({testRevision:revision,workerRole:'QA',maxRows:1,maxScopes:1,maxGuards:1});
+ const one=limited.root({},metaForBound),two=limited.root({},metaForBound);
+ const single=begin(limited,one,null,'setup',0),other=begin(limited,two,null,'setup',0);
+ limited.scopeLogical(two,null,{phase:'setup',at:0,reason:'guard'});limited.scopeLogical(two,null,{phase:'setup',at:0,reason:'guard'});
+ limited.scopeLogical(two,null,{phase:'restore',at:0,reason:'denied'});limited.scopeLogical(one,null,{phase:'setup',at:0,reason:'guard'});
+ limited.settle(other,{at:0,status:'fulfilled'});limited.settle(single,{at:0,status:'fulfilled'});
+ const lost=limited.snapshot();assert.deepEqual(lost.retention.firstOmission,{event:'begin',ordinal:4,kind:'scope'});
+ assert.equal(lost.retention.operationRows.firstOmittedOrdinal,4);assert.equal(lost.retention.scopeRows.omitted,1);
+ assert.equal(lost.retention.guardRows.omitted,3);assert.equal(lost.totals.deniedScopes,3);assert.equal(lost.totals.scopeGuardEvents,4);
+ assert.equal(lost.coverage.invalid,0);assert.equal(lost.coverage.observedMetricsComplete,false);
+ assert.throws(()=>verifyObservedBudgetMetrics(lost),/incomplete observed metrics/);
+ const hidden={get reason(){throw Error('private reason');},toString(){throw Error('private label');}};
+ limited.incomplete(hidden);limited.bytes(null,{});const losses=limited.snapshot();
+ assert.equal(losses.chronology.reasons.unknown,1);assert.equal(losses.chronology.reasons.bytesInput,1);
+ assert.deepEqual(losses.chronology.firstInvalid,{event:'incomplete',ordinal:11,reason:'unknown',relation:'afterRetentionOmission'});
+ assert(!JSON.stringify(losses).includes('private'));
+ const bad=createBudgetDiagnostics({}).snapshot();assert.equal(bad.chronology.firstInvalid.ordinal,0);assert.equal(bad.chronology.firstInvalid.reason,'constructorOptions');
+ const overflow=createBudgetDiagnostics({testRevision:revision,workerRole:'fixture'}),oroot=overflow.root({},metaForBound);
+ const read=overflow.begin(oroot,null,{phase:'setup',resourceClass:'transport',operation:'read',at:0});
+ overflow.bytes(read,{length:Number.MAX_SAFE_INTEGER,chunks:1,durationMs:0});overflow.bytes(read,{length:1,chunks:1,durationMs:0});
+ assert.equal(overflow.snapshot().coverage.numericOverflow,true);assert.equal(overflow.snapshot().coverage.observedMetricsComplete,false);
+ assert.throws(()=>verifyObservedBudgetMetrics(overflow.snapshot()),/numeric overflow/);
+ let capGetterCalls=0;const capInput=Object.defineProperty({testRevision:revision,workerRole:'QA'},'maxRows',{get(){capGetterCalls++;throw Error('private');}});
+ assert.equal(createBudgetDiagnostics(capInput).snapshot().coverage.invalid,1);assert.equal(capGetterCalls,0);
+ for(const stale of [{maxEvents:16384},{diagnosticCandidate:'cap32768'},{maxScopes:0},{maxGuards:16385}]){
+  const fallback=createBudgetDiagnostics({testRevision:revision,workerRole:'QA',...stale}).snapshot();
+  assert.equal(fallback.coverage.observedMetricsComplete,false);assert.equal(fallback.chronology.firstInvalid.reason,'constructorOptions');
+ }
+ const falseClaim=structuredClone(lost);falseClaim.coverage.observedMetricsComplete=true;
+ assert.throws(()=>verifyObservedBudgetMetrics(falseClaim),/completeness flag/);
+ const corrupt=structuredClone(kept);let proofGetterCalls=0;
+ Object.defineProperty(corrupt.rows[0],'capability',{enumerable:true,get(){proofGetterCalls++;throw Error('private');}});
+ assert.throws(()=>verifyObservedBudgetMetrics(corrupt),/closed data fields/);assert.equal(proofGetterCalls,0);
  const runtime=createBudgetRuntime({testRevision:revision,workerRole:'fixture'});
  const promised=Promise.resolve(17);let effects=0;
  const preserved=runtime.run({},()=>runtime.direct(()=>{effects++;return promised;},{})());
  assert.equal(preserved,promised);assert.equal(await preserved,17);assert.equal(effects,1);
- const runtimeSnapshot=runtime.snapshot();
- assert.equal(runtimeSnapshot.chronology.reasons.runMissingLease,1);
- assert.equal(runtimeSnapshot.chronology.reasons.invocationIdentity,1);
- assert.equal(runtimeSnapshot.coverage.invalid,2);
- const options={testRevision:revision,workerRole:'QA',maxEvents:32768};
- for(const rejected of [options,{...options,diagnosticCandidate:'cap32769'}]){
-  const snapshot=createBudgetDiagnostics(rejected).snapshot();
-  assert.equal(snapshot.chronology.limit,16384);
-  assert.equal(snapshot.coverage.invalid,1);
-  assert.equal(snapshot.chronology.firstInvalid.reason,'constructorOptions');
- }
- let markerRead=false;
- const accessor=Object.defineProperty({...options},'diagnosticCandidate',{get(){markerRead=true;return 'cap32768';}});
- assert.equal(createBudgetDiagnostics(accessor).snapshot().chronology.limit,16384);assert.equal(markerRead,false);
- const marked={...options,diagnosticCandidate:'cap32768'};
- const wrongCap=createBudgetDiagnostics({...marked,maxEvents:32769}).snapshot();
- assert.equal(wrongCap.chronology.limit,16384);assert.equal(wrongCap.coverage.invalid,1);
- const candidate=createBudgetDiagnostics(marked);
- assert.equal(candidate.snapshot().chronology.limit,32768,'explicit SYN cap32768 candidate unavailable');
- assert.equal(candidate.snapshot().coverage.invalid,0);
- const identity={},meta={phase:'setup',deadline:null,kind:'control'},held=candidate.root(identity,meta);
- for(let i=1;i<32767;i++)assert.equal(candidate.root(identity,meta),held);
- const pending=begin(candidate,held,null,'setup');
- const atLimit=candidate.snapshot();
- assert.equal(atLimit.chronology.eventCalls,32768);assert.equal(atLimit.rows.length,1);assert.equal(atLimit.chronology.firstOverflow,null);
- assert.equal(candidate.root({},meta),null);assert.equal(candidate.root(identity,meta),held);
- candidate.incomplete();
- const output=Promise.resolve(23);
- assert.equal(observeBudgetPromise(candidate,pending,output),output);assert.equal(await output,23);
- const both=candidate.snapshot();assert.deepEqual(candidate.snapshot(),both);
- assert.equal(both.chronology.eventCalls,32772);
- assert.deepEqual(both.chronology.firstOverflow,{event:'root',ordinal:32769});
- assert.deepEqual(both.chronology.firstInvalid,{event:'incomplete',ordinal:32771,reason:'unknown',relation:'afterOverflow'});
- assert.deepEqual(both.chronology.invalid,{beforeOverflow:0,afterOverflow:1});
- assert.equal(both.rows.length,1);assert.equal(both.rows[0].status,'fulfilled');assert.equal(both.totals.nativeSettled,1);
- assert(!JSON.stringify(both).includes('cap32768'));
-
- const readerRuntime=createBudgetRuntime({testRevision:revision,workerRole:'QA'});
+ assert.equal(runtime.snapshot().chronology.reasons.runMissingLease,1);assert.equal(runtime.snapshot().chronology.reasons.invocationIdentity,1);
+ assert.throws(()=>verifyObservedBudgetMetrics(runtime.snapshot()),/incomplete observed metrics/);
+ const readerRuntime=createBudgetRuntime({testRevision:revision,workerRole:'QA',maxRows:1});
  const token=Promise.resolve(19);
  let underlyingCalls=0,siteGetterRuns=0,coercions=0;
  const receiver={getReader(){assert.equal(this,receiver);underlyingCalls++;return token;}};
@@ -299,10 +298,11 @@ test('Q6 overflow at 16385 events is explicit and does not change native output'
  assert.equal(invokeReader({edge:'reader',readerSite:1}),token);
  const startedReader=readerRuntime.snapshot();
  assert.equal(startedReader.chronology.readerOrigins?.firstReaderOrigin?.site,1,'missing fixed reader-site provenance');
- assert.deepEqual(startedReader.chronology.readerOrigins.firstReaderOrigin,{ordinal:1,relation:'beforeOverflow',site:1,context:'no_store'});
+ assert.deepEqual(startedReader.chronology.readerOrigins.firstReaderOrigin,{ordinal:1,relation:'beforeRetentionOmission',site:1,context:'no_store'});
  assert.equal(startedReader.chronology.eventCalls,1);assert.equal(startedReader.coverage.invalid,1);
  const leaseForReader={};readerRuntime.root(leaseForReader,'setup',null);
- for(let ordinal=2;ordinal<16384;ordinal++)readerRuntime.collector.root(leaseForReader,{phase:'setup',deadline:null,kind:'control'});
+ const readerRoot=readerRuntime.collector.root(leaseForReader,{phase:'setup',deadline:null,kind:'control'});
+ begin(readerRuntime.collector,readerRoot,null,'setup',0);begin(readerRuntime.collector,readerRoot,null,'setup',0);
  assert.equal(readerRuntime.run(leaseForReader,()=>invokeReader({edge:'reader',readerSite:2})),token);
  const accessorSite=Object.defineProperty({edge:'reader'},'readerSite',{get(){siteGetterRuns++;throw Error('private site');}});
  assert.equal(invokeReader(accessorSite),token);
@@ -310,16 +310,16 @@ test('Q6 overflow at 16385 events is explicit and does not change native output'
  const doneReader=readerRuntime.snapshot(),origin=doneReader.chronology.readerOrigins;
  assert.equal(await token,19);assert.equal(underlyingCalls,4);assert.equal(siteGetterRuns,0);assert.equal(coercions,0);
  assert.deepEqual(readerRuntime.snapshot(),doneReader);
- assert.equal(doneReader.chronology.eventCalls,16387);assert.equal(doneReader.chronology.byEvent.incomplete,4);
- assert.deepEqual(doneReader.chronology.firstOverflow,{ordinal:16385,event:'incomplete'});
+ assert.equal(doneReader.chronology.eventCalls,8);assert.equal(doneReader.chronology.byEvent.incomplete,4);
+ assert.deepEqual(doneReader.retention.firstOmission,{ordinal:5,event:'begin',kind:'operation'});
  assert.equal(doneReader.chronology.reasons.readerOrigin,4);assert.equal(doneReader.coverage.invalid,4);assert.equal(doneReader.coverage.unattributed,4);
- assert.equal(origin.beforeOverflow[1],1);assert.equal(origin.afterOverflow[2],1);assert.equal(origin.afterOverflow[0],2);
- assert.equal(origin.beforeOverflow.reduce((sum,n)=>sum+n,0),1);assert.equal(origin.afterOverflow.reduce((sum,n)=>sum+n,0),3);
+ assert.equal(origin.beforeRetentionOmission[1],1);assert.equal(origin.afterRetentionOmission[2],1);assert.equal(origin.afterRetentionOmission[0],2);
+ assert.equal(origin.beforeRetentionOmission.reduce((sum,n)=>sum+n,0),1);assert.equal(origin.afterRetentionOmission.reduce((sum,n)=>sum+n,0),3);
  assert(!JSON.stringify(origin).includes('private'));
  const scopedReader=createBudgetRuntime({testRevision:revision,workerRole:'QA'}),activeLease={};
  scopedReader.root(activeLease,'setup',null);
  assert.equal(scopedReader.run(activeLease,()=>scopedReader.member(receiver,'getReader',{edge:'reader',readerSite:2})()),token);
- assert.deepEqual(scopedReader.snapshot().chronology.readerOrigins.firstReaderOrigin,{ordinal:2,relation:'beforeOverflow',site:2,context:'rooted'});
+ assert.deepEqual(scopedReader.snapshot().chronology.readerOrigins.firstReaderOrigin,{ordinal:2,relation:'beforeRetentionOmission',site:2,context:'rooted'});
 
  const exclusion=createBudgetRuntime({testRevision:revision,workerRole:'QA'});
  const argument={},sentinel=Promise.resolve('reader value'),nativeFailure=Error('native failure');
@@ -331,12 +331,12 @@ test('Q6 overflow at 16385 events is explicit and does not change native output'
  const ignored=exclusion.snapshot();
  assert.equal(ignored.coverage.invalid,0,'declared fixture-only missing reader must not count as an invalid');
  assert.equal(ignored.coverage.unattributed,0);assert.equal(ignored.chronology.eventCalls,0);assert.equal(ignored.chronology.reasons.readerOrigin,0);
- assert.equal(ignored.chronology.readerOrigins.firstReaderOrigin,null);assert(ignored.chronology.readerOrigins.beforeOverflow.every(n=>n===0));
- assert(ignored.chronology.readerOrigins.afterOverflow.every(n=>n===0));
+ assert.equal(ignored.chronology.readerOrigins.firstReaderOrigin,null);assert(ignored.chronology.readerOrigins.beforeRetentionOmission.every(n=>n===0));
+ assert(ignored.chronology.readerOrigins.afterRetentionOmission.every(n=>n===0));
  assert.equal(readUnowned(argument),sentinel);assert.equal(await sentinel,'reader value');assert.equal(unsupportedCalls,3);
  const exposed=exclusion.snapshot();assert.equal(exposed.coverage.invalid,1);assert.equal(exposed.coverage.unattributed,1);
- assert.equal(exposed.chronology.reasons.readerOrigin,1);assert.equal(exposed.chronology.readerOrigins.beforeOverflow[45],1);
- assert.deepEqual(exposed.chronology.readerOrigins.firstReaderOrigin,{ordinal:1,relation:'beforeOverflow',site:45,context:'no_store'});
+ assert.equal(exposed.chronology.reasons.readerOrigin,1);assert.equal(exposed.chronology.readerOrigins.beforeRetentionOmission[45],1);
+ assert.deepEqual(exposed.chronology.readerOrigins.firstReaderOrigin,{ordinal:1,relation:'beforeRetentionOmission',site:45,context:'no_store'});
 
  const ownerRuntime=createBudgetRuntime({testRevision:revision,workerRole:'QA'}),ownerRoot={},ownerChild={};
  ownerRuntime.root(ownerRoot,'authorize_get',30000);ownerRuntime.descendant(ownerRoot,ownerChild,5000);
@@ -399,5 +399,9 @@ test('Q8 opaque wire bytes and linked body invocations preserve interval and byt
   await runtime.member(reader,'cancel',{operation:'cancel'})();
  });
  const nativeRows=runtime.snapshot();assert.equal(nativeRows.coverage.unattributed,0);assert.equal(nativeRows.totals.nativeStarted,4);assert.equal(nativeRows.totals.nativeSettled,4);assert.equal(nativeRows.totals.nativeBytesRead,3);assert.deepEqual(nativeRows.rows.map(r=>r.fetchOpOrdinal),[null,1,1,1]);assert.equal(nativeRows.rows[0].nativeBytesRead,null);assert.equal(nativeRows.totals.cancelStarted,1);assert.equal(nativeRows.totals.cancelSettled,1);
+
+ assert.equal(verifyCompleteBudgetTrace(nativeRows).level,'complete_trace');
+ const wrongLink=structuredClone(nativeRows);wrongLink.rows[1].fetchOpOrdinal=wrongLink.rows[1].opOrdinal;
+ assert.throws(()=>verifyObservedBudgetMetrics(wrongLink),/fetch parent/);
 
 });

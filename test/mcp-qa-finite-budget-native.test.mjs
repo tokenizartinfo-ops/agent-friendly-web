@@ -5,6 +5,8 @@ import {mkdir,readFile,writeFile,cp} from 'node:fs/promises';
 import {join} from 'node:path';
 import {ownerReferenceFixture,prepareOwnerReference,assertActualComplete,recordOwnerReference} from './fixtures/finite-owner-cleanup.mjs';
 
+import {verifyObservedBudgetMetrics,verifyCompleteBudgetTrace} from './fixtures/finite-budget-evidence.mjs';
+
 const group=process.env.AFW_BUDGET_GROUP;
 if(!['red','positive'].includes(group))throw Error('SYN budget group unsupported before I0');
 const directory='output/finite-budget/red',hash=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -64,7 +66,7 @@ if(group==='red')test('R0 attributable diagnostics after genuine SDK complete an
  }
 });
 
-if(group==='positive')test('P1 original 900s native lifecycle has complete attributable budget evidence',{timeout:300000},async()=>{
+if(group==='positive')test('P1 original 900s native lifecycle proves observed metrics and any complete retained traces',{timeout:300000},async()=>{
  const {runBudgetConsumer}=await import('./fixtures/finite-budget-world.mjs');
  const {persistBudgetEvidence}=await import('./fixtures/finite-budget-evidence.mjs');
  const result=await runBudgetConsumer('positive',process.env.AFW_BUDGET_CHECKPOINT??'output/finite-budget/checkpoint');
@@ -83,25 +85,10 @@ if(group==='positive')test('P1 original 900s native lifecycle has complete attri
  assert(epochs.some(e=>e.segment==='producer'));assert(epochs.some(e=>e.segment==='consumer'));
  for(const epoch of epochs){
   const key=epoch.segment+'|'+epoch.epoch+'|'+epoch.role;assert(!identities.has(key));identities.add(key);roles.add(epoch.role);
-  const s=epoch.snapshot;assert.equal(s.purpose,'afw.finite-budget-diagnostics.syn.v1');assert.equal(s.testRevision,process.env.GITHUB_SHA);assert.equal(s.workerRole,epoch.role);
-  assert.equal(s.coverage.overflow,false,key);assert.equal(s.coverage.invalid,0,key);assert.equal(s.coverage.unattributed,0,key);
-  assert(s.rows.length<=16384);assert.equal(s.totals.nativeStarted,s.rows.length);assert.equal(s.totals.nativeSettled,s.rows.filter(r=>r.status!=='pending').length);
-  assert.equal(s.totals.nativeRejected,s.rows.filter(r=>r.status==='rejected').length);assert.equal(s.totals.active,s.rows.filter(r=>r.status==='pending').length);
-  assert.equal(s.totals.logicalDenied,s.rows.filter(r=>r.logicalAt!==null).length);
-  assert.equal(s.totals.scopeGuardEvents,s.logicalScopeEvents.length);assert.equal(s.totals.deniedScopes,new Set(s.logicalScopeEvents.map(e=>e.rootOrdinal+'|'+e.childOrdinal+'|'+e.phase)).size);
-  const ordinals=new Set(),byteRows=s.rows.filter(r=>r.nativeBytesRead!==null);
-  assert.equal(s.totals.nativeBytesRead,byteRows.length?byteRows.reduce((v,r)=>v+r.nativeBytesRead,0):null);
-  assert(s.totals.peak>=s.totals.active&&s.totals.peak<=s.totals.nativeStarted);
-  for(const r of s.rows){
-   assert(!ordinals.has(r.opOrdinal));ordinals.add(r.opOrdinal);phases.add(r.phase);assert(r.rootOrdinal>0);
-   assert.equal(r.testRevision,process.env.GITHUB_SHA);assert.equal(r.workerRole,epoch.role);
-   if(r.childOrdinal!==null){assert(r.childOrdinal>0);assert(Number.isFinite(r.childDeadline));}
-   if(r.kind==='control')assert(Number.isFinite(r.rootDeadline));else assert.equal(r.kind,'transport');
-   if(r.nativeBytesRead!==null){assert.equal(r.operation,'read');assert.equal(r.nativeBytesReason,null);}else assert.equal(r.nativeBytesReason,'not_exposed_by_native_api');
-   if(r.operation==='fetch')assert.equal(r.nativeBytesRead,null);
-   if(r.fetchOpOrdinal!==null){assert(['read','cancel'].includes(r.operation));const f=s.rows.find(v=>v.opOrdinal===r.fetchOpOrdinal);assert(f);assert.equal(f.operation,'fetch');for(const k of ['rootOrdinal','childOrdinal','phase','resourceClass'])assert.equal(r[k],f[k]);}
-  }
-  for(const g of s.byPhaseResource){const rows=s.rows.filter(r=>r.phase===g.phase&&r.resourceClass===g.resourceClass);assert.equal(g.nativeStarted,rows.length);}
+  const s=epoch.snapshot;assert.equal(s.testRevision,process.env.GITHUB_SHA);assert.equal(s.workerRole,epoch.role);
+  const observed=verifyObservedBudgetMetrics(s),full=s.retention.traceComplete?verifyCompleteBudgetTrace(s):null;
+  for(const group of s.byPhaseResource)if(group.nativeStarted>0)phases.add(group.phase);
+  console.info('P1 SYN proof',JSON.stringify({segment:epoch.segment,epoch:epoch.epoch,role:epoch.role,observed,full,retention:s.retention}));
  }
  assert.deepEqual([...roles].sort(),['M','QA']);
  assert.deepEqual([...phases].sort(),['setup','authorize_get','authorize_post','sdk_lookup','token_exchange','mcp_read','monitoring_get','monitoring_post','cleanup_before_restore','restore','sdk_reduction','final_inventory'].sort());

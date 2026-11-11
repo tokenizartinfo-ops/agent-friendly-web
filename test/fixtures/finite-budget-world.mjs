@@ -5,6 +5,7 @@ import {resolve,relative,join} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import ts from 'typescript';
 import {budgetReaderSiteCount} from './finite-budget-diagnostics.mjs';
+import {verifyObservedBudgetMetrics,verifyCompleteBudgetTrace} from './finite-budget-evidence.mjs';
 
 
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -585,16 +586,12 @@ export function transformBudgetPreparedSource(source,path,role){
 }
 
 const scopeInputPins=budgetNativeDescriptorProposal.implementationSupplement.scopeInputPins;
-function diagnosticCandidate(){
- const marker=process.env.AFW_BUDGET_DIAGNOSTIC_CANDIDATE;
- if(marker===undefined)return null;
- assert.equal(marker,'cap32768','unsupported SYN diagnostic candidate before I0');
- return 'cap32768';
+function requireOrdinaryObserver(){
+ assert.equal(process.env.AFW_BUDGET_DIAGNOSTIC_CANDIDATE,undefined,'deprecated diagnostic candidate rejected before I0');
 }
 export function createBudgetCompiler(role){
  assert(['M','QA'].includes(role));const testRevision=process.env.GITHUB_SHA;assert.match(testRevision??'',/^[a-f0-9]{40}$/,'budget actual Actions revision before I0');
- const candidate=diagnosticCandidate(),runtimeOptions={testRevision,workerRole:role};
- if(candidate){runtimeOptions.diagnosticCandidate=candidate;runtimeOptions.maxEvents=32768;}
+ requireOrdinaryObserver();const runtimeOptions={testRevision,workerRole:role};
  const records=new Map(),prepared=new Map(),expected=new Set(budgetNativeDescriptorProposal.sourceDescriptors.filter(p=>p.roles.includes(role)).map(p=>p.path));
  for(const p of scopeInputPins.filter(p=>p.roles.includes(role)))expected.add(p.path);
  for(const p of budgetNativeDescriptorProposal.packages.filter(p=>p.roles.includes(role)))expected.add(p.path);
@@ -631,13 +628,13 @@ export function createBudgetCompiler(role){
    builder.onEnd(async result=>{
     if(result.errors.length)return;
     assert.deepEqual([...records.keys()].sort(),[...expected].sort(),'closed prepared role input map '+role);
-    assert(!Object.keys(result.metafile?.inputs??{}).some(path=>path.endsWith('finite-budget-descriptors.json')||path.endsWith('finite-budget-world.mjs')),'Node-only map/compiler excluded from Worker bundle');
+    assert(!Object.keys(result.metafile?.inputs??{}).some(path=>path.endsWith('finite-budget-descriptors.json')||path.endsWith('finite-budget-world.mjs')||path.endsWith('finite-budget-evidence.mjs')),'Node-only map/compiler excluded from Worker bundle');
     const actualIds=[...records.values()].flatMap(record=>record.readerSites.map(site=>site.id)).sort((a,b)=>a-b);
     assert.deepEqual(actualIds,readerCatalog.filter(site=>site.role===role).map(site=>site.id),'complete role reader catalog before I0');
     if(process.env.AFW_BUDGET_PREFLIGHT){
      const prior=JSON.parse(await readFile(process.env.AFW_BUDGET_PREFLIGHT,'utf8'));
      assert.equal(prior.source,testRevision);assert.equal(prior.run,process.env.GITHUB_RUN_ID);assert.equal(prior.attempt,process.env.GITHUB_RUN_ATTEMPT);
-     assert.equal(prior.diagnosticCandidate??null,candidate,'preflight and native use the same diagnostic candidate');
+     assert.equal(prior.observerChronology,'afw.finite-budget-chronology.syn.v2','same v2 preflight');
      const shape=list=>list.map(r=>({role:r.role,path:r.path,rawBytes:r.path==='<stdin>'?null:r.rawBytes,rawSha256:r.path==='<stdin>'?null:r.rawSha256,counts:r.counts,selectors:r.selectors,readerSites:r.readerSites})).sort((a,b)=>a.path.localeCompare(b.path));
      assert.deepEqual(shape([...records.values()]),shape(prior.inputs[role]),'native prepared role hooks match exact prior pure preflight before I0');
     }
@@ -665,14 +662,14 @@ export function attachBudgetEpochCapture(f,{segment='producer',epochs=[],epoch=0
 }
 export async function preflightBudgetCompilation(){
  assert.equal(process.env.AFW_BUDGET_GROUP,'positive');
- const candidate=diagnosticCandidate();
+ requireOrdinaryObserver();
  const {initialEntryHarness}=await import('./finite-initial-entry-world.mjs');
  const graphs=await initialEntryHarness('first-connection-publication',{ownerCleanup:true,cleanupCheckpoint:true,budgetCompileOnly:true,budgetQualification:true});
  assert.equal(graphs.I0Opened,false);assert.equal(graphs.nativeExecutionProduced,false);
  assert(graphs.budget?.M?.length&&graphs.budget?.QA?.length);
  assert(graphs.compatibility.M.compatibility_flags.includes('nodejs_compat'));assert(graphs.compatibility.QA.flags.includes('nodejs_compat'));
  const result={purpose:'afw.finite-budget-preflight.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,inputs:graphs.budget,I0Opened:false,nativeExecutionProduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
- if(candidate)result.diagnosticCandidate=candidate;
+ result.observerChronology='afw.finite-budget-chronology.syn.v2';
  await mkdir('output/finite-budget/pure',{recursive:true});await writeFile('output/finite-budget/pure/preflight.json',JSON.stringify(result,null,2));
  return result;
 }
@@ -695,7 +692,7 @@ async function preparePositiveProbe(root){
  positiveKind('positive');
  assert.equal(root,'output/finite-budget/producer');
  assert.equal(process.env.AFW_BUDGET_PREFLIGHT,'output/finite-budget/prior-pure/preflight.json');
- const candidate=diagnosticCandidate();
+ requireOrdinaryObserver();
  const checkpoint='output/chronology-native-checkpoint';
  const {produceCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
  console.info('AFW_PROBE {"kind":"step","step":"producer-entered"}');
@@ -708,9 +705,9 @@ async function preparePositiveProbe(root){
  const {completeNormal,completeWrites,referenceRows,referenceReadbacks}=data.budget.ownerReference;
  const noticeRows=data.facts.rows.filter(([key])=>key.startsWith('connection-preparation:')&&key.endsWith(':notice')).length;
  const epochs=data.budget.epochs;
- const actualSnapshotLimits=[...new Set(epochs.map(({snapshot})=>snapshot.chronology.limit))];
+ const recordLimits={operations:16384,guards:16384,scopes:16384};
  const facts={
-  diagnosticCandidate:candidate,actualSnapshotLimits,
+  recordLimits,
   purpose:'afw.finite-budget-producer-probe.syn.v1',scope:'partial-producer-only',
   source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,
   I0,C0,C1,returnedAt,completeNormal,completeWrites,referenceRows,referenceReadbacks,noticeRows,
@@ -719,23 +716,42 @@ async function preparePositiveProbe(root){
  };
  await mkdir(join(root,'graphs'),{recursive:true});
  await writeFile(join(root,'full-result.json'),JSON.stringify({facts,epochs,preparedInputs:data.budget.preparedInputs},null,2));
- const aggregates=[{kind:'facts',...facts}];
+ const aggregates=[{kind:'facts',...facts}];let rejectedProjection=false;
  const siteMap=Object.values(data.budget.preparedInputs).flatMap(records=>records.flatMap(record=>record.readerSites)).sort((a,b)=>a.id-b.id);
  assert.deepEqual(siteMap.map(site=>site.id),readerCatalog.map(site=>site.id),'producer contains every fixed site');
  for(const site of siteMap)aggregates.push({kind:'readerSite',...site});
  for(const {segment,epoch,role,snapshot} of epochs){
-  const {purpose,limit,eventCalls,byEvent,firstInvalid,firstOverflow,invalid,unattributed,reasons}=snapshot.chronology;
+  const {purpose,eventCalls,byEvent,firstInvalid,invalid,unattributed,reasons}=snapshot.chronology;
   const who={segment,epoch,role};
-  aggregates.push({kind:'chronology',...who,purpose,limit,eventCalls,byEvent,firstInvalid,firstOverflow,invalid,unattributed,coverage:snapshot.coverage});
+  const {retention,coverage}=snapshot,{scopes,...totals}=snapshot.totals;
+  assert.equal(retention.operationRows.limit,recordLimits.operations);assert.equal(retention.guardRows.limit,recordLimits.guards);assert.equal(retention.scopeRows.limit,recordLimits.scopes);
+  const expectedComplete=coverage.invalid===0&&coverage.unattributed===0&&!coverage.numericOverflow&&retention.scopeRows.omitted===0;
+  assert.equal(coverage.observedMetricsComplete,expectedComplete);
+  let observedProof=null,traceProof=null;
+  try{
+   if(expectedComplete){
+    observedProof=verifyObservedBudgetMetrics(snapshot);
+    if(retention.traceComplete)traceProof=verifyCompleteBudgetTrace(snapshot);
+   }else{
+    assert.throws(()=>verifyObservedBudgetMetrics(snapshot),coverage.numericOverflow?/numeric overflow/:/incomplete observed metrics/);
+   }
+  }catch{
+   rejectedProjection=true;
+   aggregates.push({kind:'proofRejected',...who,expectedComplete});
+  }
+  aggregates.push({kind:'chronology',...who,purpose,eventCalls,byEvent,firstInvalid,invalid,unattributed,coverage});
+  aggregates.push({kind:'retention',...who,retention,observedProof,traceProof});
+  aggregates.push({kind:'totals',...who,totals,enumeratedScopes:scopes.length,maximumEnumeratedScopePeak:scopes.reduce((peak,s)=>Math.max(peak,s.peak),0)});
+  for(const group of snapshot.byPhaseResource)aggregates.push({kind:'phaseResource',...who,...group});
   aggregates.push({kind:'reasons',...who,reasons});
-  const {beforeOverflow,afterOverflow,firstReaderOrigin}=snapshot.chronology.readerOrigins;
-  assert.equal(beforeOverflow.length,budgetReaderSiteCount+1);assert.equal(afterOverflow.length,budgetReaderSiteCount+1);
+  const {beforeRetentionOmission,afterRetentionOmission,firstReaderOrigin}=snapshot.chronology.readerOrigins;
+  assert.equal(beforeRetentionOmission.length,budgetReaderSiteCount+1);assert.equal(afterRetentionOmission.length,budgetReaderSiteCount+1);
   const sum=array=>array.reduce((total,value)=>total+value,0);
-  assert.equal(sum(beforeOverflow)+sum(afterOverflow),reasons.readerOrigin);
-  aggregates.push({kind:'readerFirst',...who,firstReaderOrigin,before:sum(beforeOverflow),after:sum(afterOverflow)});
-  for(let site=0;site<=budgetReaderSiteCount;site++)if(beforeOverflow[site]||afterOverflow[site]){
+  assert.equal(sum(beforeRetentionOmission)+sum(afterRetentionOmission),reasons.readerOrigin);
+  aggregates.push({kind:'readerFirst',...who,firstReaderOrigin,before:sum(beforeRetentionOmission),after:sum(afterRetentionOmission)});
+  for(let site=0;site<=budgetReaderSiteCount;site++)if(beforeRetentionOmission[site]||afterRetentionOmission[site]){
    if(site)assert.equal(siteMap[site-1].role,role);
-   aggregates.push({kind:'readerCounts',...who,site,before:beforeOverflow[site],after:afterOverflow[site]});
+   aggregates.push({kind:'readerCounts',...who,site,before:beforeRetentionOmission[site],after:afterRetentionOmission[site]});
   }
  }
  const proofNames=['graphs/native-syn.json','graphs/metafiles.json','graphs/canary-index.mjs','graphs/qa-index.mjs','manifest.json'];
@@ -753,19 +769,19 @@ async function preparePositiveProbe(root){
   assert(Buffer.byteLength(line,'utf8')<=2048,'bounded SYN aggregate');
   console.info(line);
  }
+ assert.equal(rejectedProjection,false,'producer projection failed its declared evidence check');
  assert.equal(C0,I0+900000);assert.equal(C1,C0+180000);assert(facts.disposedBeforeC0);assert.equal(facts.originalAlarmObserved,false);
  assert.equal(completeNormal,1);assert.equal(completeWrites,1);assert.equal(referenceRows,1);assert(referenceReadbacks>0);assert.equal(noticeRows,1);
  const identities=new Set();
  for(const {segment,role,epoch,snapshot} of epochs){
   assert.equal(segment,'producer');assert(['M','QA'].includes(role));
   assert(Number.isSafeInteger(epoch)&&epoch>=0);const key=role+'|'+epoch;assert(!identities.has(key));identities.add(key);
-  const {purpose,limit,eventCalls,byEvent,reasons,firstInvalid,firstOverflow,invalid,unattributed}=snapshot.chronology;
+  const {purpose,eventCalls,byEvent,reasons,firstInvalid,invalid,unattributed}=snapshot.chronology;
   const sum=values=>Object.values(values).reduce((a,b)=>a+b,0);
-  assert.equal(purpose,'afw.finite-budget-chronology.syn.v1');assert.equal(limit,candidate?32768:16384);assert.equal(sum(byEvent),eventCalls);
+  assert.equal(purpose,'afw.finite-budget-chronology.syn.v2');assert.equal(sum(byEvent),eventCalls);
   assert.equal(sum(invalid),snapshot.coverage.invalid);assert.equal(sum(reasons),snapshot.coverage.invalid);
   assert.equal(sum(unattributed),snapshot.coverage.unattributed);assert.equal(!!firstInvalid,snapshot.coverage.invalid>0);
-  assert.equal(!!firstOverflow,snapshot.coverage.overflow);assert.equal(!!firstOverflow,eventCalls>limit);
-  if(firstOverflow)assert.equal(firstOverflow.ordinal,limit+1);
+  assert.equal(!snapshot.retention.traceComplete,snapshot.coverage.overflow);
  }
  for(const {epoch} of epochs){assert(identities.has('M|'+epoch));assert(identities.has('QA|'+epoch));}
 }
