@@ -262,3 +262,12 @@ Distinct denied Root/child/phase scopes are tracked independently of retained gu
 This supplement changes only observer evidence semantics and explicitly names the cost of incomplete raw trace; no business guard is weakened. All3 builder questions are answered in the spec and tests above. File/interface ownership is single-writer; pure and native share the exact same DTO schema and Node verifiers. The reader-provenance/exclusion work must finish first and its latest fixed site map remains mandatory. Original Task2 readonly/reduction business cases and finalcombined review remain pending and unchanged, with their future brief updated to consume this interface after Task1acceptance.
 
 Prepared by Root using writing-plans under owner's explicit autonomy. Source implementation remains unreleased until the current reader fix is observed and Root supplies a precise brief/BASE. No user confirmation or expiring human window is needed for this reversible SYN work.
+
+## 11Nov2026 — ampliación de custodia antes de Task1 phaseB
+La liberación full9 de55a093 queda retenida por checkpoint no publicable. Spec complementaria vinculante: docs/superpowers/specs/2026-11-11-finite-syn-checkpoint-custody-design.md. Brief ejecutable: docs/superpowers/briefs/2026-11-11-finite-syn-checkpoint-custody-task1.md. Mismo Task1/escritor/ledger/GLOBALBASE; Task2 aún no comienza.
+- [ ] Crear helper y test Node-only en los dos paths fijados por spec; RED de función nueva y GREEN puro sin secretos/native/I0.
+- [ ] Preservar resultados/readbacks exactos y retirar TEMP; revisión Root de custodia previa a uso de clave.
+- [ ] Configurar clave exclusiva AFW_SYN_CHECKPOINT_KEY en environment afw-finite-syn-checkpoint, ramaSourceexacta/0tags; comprobar sin valor. Root controla UI; no reuse de claves.
+- [ ] Liberar UNA orquestación3jobs8Q+P1 con original900s; checkpoint/resultados/logs nativos sólo cifrados, contextbind/byteexact/manifest/readback, preflightclave antesI0 y failurestate honesto.
+- [ ] Revisión fresca Spec+Quality GLOBALBASE..HEAD; después Task2 hereda custodia, no se transmite estado en claro.
+La revisión debe cubrir clave incorrecta/inaccesible preI0, contexto equivocado/tamper, rutas peligrosas/límites, fallo parcial y otro workflow de la misma rama (límite explícito, no promesa de secreto sólo para unarchivo). Ningún cambio del observable/business/clock/native state está autorizado por custodia. Decisión de Root bajo autonomía del owner; costo: dos módulos y una configuración aislada. No nuevo planworkspace ni reset del Task1.
