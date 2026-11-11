@@ -1,0 +1,106 @@
+name: AFW finite budget qualification
+run-name: AFW independent identity pure RED ${{ github.sha }}
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: afw-finite-budget-qualification
+  cancel-in-progress: false
+env:
+  AFW_BUDGET_GROUP: positive
+jobs:
+  pure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run pure independent-identity contract against unchanged sensor
+        shell: bash
+        run: |
+          mkdir -p output/finite-budget/pure
+          node --test test/finite-budget-diagnostics.test.mjs > output/finite-budget/pure/tests.log 2>&1 || status=$?
+          cat output/finite-budget/pure/tests.log
+          test "${status:-0}" = 1
+          grep -Fx '# tests 8' output/finite-budget/pure/tests.log
+          grep -Fx '# pass 7' output/finite-budget/pure/tests.log
+          grep -Fx '# fail 1' output/finite-budget/pure/tests.log
+          grep -F 'retention must not drop a legitimate new Root after 16384 collector calls' output/finite-budget/pure/tests.log
+          grep -E '^not ok 6 - Q6' output/finite-budget/pure/tests.log
+      - name: Seal pure evidence
+        if: always()
+        run: node --input-type=module -e "import {sealBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await sealBudgetArtifact('output/finite-budget/pure','pure');"
+      - uses: actions/upload-artifact@v4
+        id: upload
+        if: always()
+        with:
+          name: finite-budget-v2-identity-red-${{ github.sha }}
+          path: output/finite-budget/pure/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download pure_receipt by immutable ID (attempt 1)
+        id: pure_receipt_1
+        if: always() && !cancelled() && steps.upload.outputs.artifact-id != ''
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/budget-pure-readback
+          merge-multiple: true
+      - name: Wait 2s before pure_receipt download 2
+        id: pure_receipt_wait2
+        if: always() && !cancelled() && steps.pure_receipt_1.outcome == 'failure'
+        run: sleep 2
+      - name: Download pure_receipt by immutable ID (attempt 2)
+        id: pure_receipt_2
+        if: always() && !cancelled() && steps.pure_receipt_wait2.outcome == 'success' && steps.pure_receipt_1.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/budget-pure-readback
+          merge-multiple: true
+      - name: Wait 5s before pure_receipt download 3
+        id: pure_receipt_wait3
+        if: always() && !cancelled() && steps.pure_receipt_2.outcome == 'failure'
+        run: sleep 5
+      - name: Download pure_receipt by immutable ID (attempt 3)
+        id: pure_receipt_3
+        if: always() && !cancelled() && steps.pure_receipt_wait3.outcome == 'success' && steps.pure_receipt_2.outcome == 'failure'
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/budget-pure-readback
+          merge-multiple: true
+      - name: Same-ID pure readback
+        if: always() && !cancelled()
+        env:
+          READBACK: ${{ runner.temp }}/budget-pure-readback
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+          DOWNLOAD_SUCCEEDED: ${{ steps.pure_receipt_1.outcome == 'success' || steps.pure_receipt_2.outcome == 'success' || steps.pure_receipt_3.outcome == 'success' }}
+        run: |
+          test -n "$ARTIFACT_ID"
+          test "$DOWNLOAD_SUCCEEDED" = true
+          node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact(process.env.READBACK,'pure',process.env.ARTIFACT_ID);"

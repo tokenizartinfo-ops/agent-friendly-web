@@ -208,6 +208,14 @@ test('Q5 observing preserves actual promise identity, resolution, rejection and 
 
 });
 test('Q6 overflow at 16385 events is explicit and does not change native output',async()=>{
+ const bounded=createBudgetDiagnostics({testRevision:revision,workerRole:'QA',maxRows:1});
+ const metaForBound={phase:'setup',deadline:null,kind:'control'};
+ const firstLease={},firstRef=bounded.root(firstLease,metaForBound);
+ for(let event=1;event<16385;event++)bounded.root(firstLease,metaForBound);
+ const laterRoot=bounded.root({},metaForBound);
+ assert(laterRoot,'retention must not drop a legitimate new Root after 16384 collector calls');
+ assert.notEqual(laterRoot,firstRef);
+
  const {c,r}=fixture();for(let i=0;i<16385;i++)begin(c,r,null,'setup',i);
  const s=c.snapshot();assert.equal(s.coverage.overflow,true);assert(s.rows.length<=16384);assert.equal(s.totals.nativeStarted,16385);
  const actual=Promise.resolve('same native output');const op=begin(c,r,null,'setup',performance.now());assert.equal(observeBudgetPromise(c,op,actual),actual);assert.equal(await actual,'same native output');assert(c.snapshot().coverage.overflow);
