@@ -1,0 +1,64 @@
+name: AFW finite budget qualification
+run-name: AFW chronology pure RED source ${{ github.sha }}
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
+permissions:
+  contents: read
+concurrency:
+  group: afw-finite-budget-qualification
+  cancel-in-progress: false
+env:
+  AFW_BUDGET_GROUP: positive
+jobs:
+  pure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run pure chronology contract against unchanged sensor
+        shell: bash
+        run: |
+          mkdir -p output/finite-budget/pure
+          node --test test/finite-budget-diagnostics.test.mjs > output/finite-budget/pure/tests.log 2>&1 || status=$?
+          cat output/finite-budget/pure/tests.log
+          test "${status:-0}" = 1
+          grep -Fx '# tests 8' output/finite-budget/pure/tests.log
+          grep -Fx '# pass 7' output/finite-budget/pure/tests.log
+          grep -Fx '# fail 1' output/finite-budget/pure/tests.log
+          grep -F 'missing bounded chronology contract' output/finite-budget/pure/tests.log
+          grep -E '^not ok 6 - Q6' output/finite-budget/pure/tests.log
+      - name: Seal pure evidence
+        if: always()
+        run: node --input-type=module -e "import {sealBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await sealBudgetArtifact('output/finite-budget/pure','pure');"
+      - uses: actions/upload-artifact@v4
+        id: upload
+        if: always()
+        with:
+          name: finite-budget-chronology-red-${{ github.sha }}
+          path: output/finite-budget/pure/
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/download-artifact@v4
+        if: always() && steps.upload.outputs.artifact-id != ''
+        with:
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/budget-pure-readback
+          merge-multiple: true
+      - name: Same-ID pure readback
+        if: always() && steps.upload.outputs.artifact-id != ''
+        env:
+          READBACK: ${{ runner.temp }}/budget-pure-readback
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+        run: node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact(process.env.READBACK,'pure',process.env.ARTIFACT_ID);"
