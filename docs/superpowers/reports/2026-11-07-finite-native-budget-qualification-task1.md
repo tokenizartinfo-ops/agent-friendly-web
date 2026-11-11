@@ -1670,3 +1670,12 @@ Static provenance at qualified Source: `test/fixtures/finite-initial-entry-world
 ```
 
 Terminal action: retire TEMP, append these results, verify feature/main and full protected tree. No automatic cap increase, promotion or further experiment. Root's causal decision remains pending. operationalReadiness=false, completePackage=false, PCoff=false.
+
+
+### 2026-11-11 UTC — fixed reader-site provenance, pure RED
+
+BASE-E `69f5c5da6af1407e8ecb706a96c89fb3678c5f51`, tree `eb0f0df245be309a6b0d55dc25dee88e0a46f80d`, report blob `dbf341d434b2a1befd770ad9ffec64e29d89eb8c`. Root authorized an ordinary 16,384-cap diagnostic to identify the selected reader sites and the actual store context on the first reader-origin failure. Existing retention, calls, ownership, validation and attribution decisions remain fixed. [Diagnostic brief](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/92daaa99a040a2754d6876efc9b423a95500d3f3/docs/superpowers/briefs/2026-11-11-finite-budget-reader-site-diagnostic.md)
+
+Pure RED Source `d2d0ff36273c845f1c7d84a362d1864c0931b27d`, tree `8cf2921a7dc3b2fd4c335e6d7cbbe8b6ef3a2d33`, Q test `dff00b554c40669a4333660ab6c64e5ae7e6bc5f`, TEMP `1b4ccbfd219c9608f94e3c8c574985618d26af65`. Unchanged ordinary/candidate sensor `e87f2a05d4e6cc766ee1d3539ce72999337c7f2a`. [Run 43104984521](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43104984521), attempt 1, job 130805854383, terminal success. After locked npm ci, `node --test test/finite-budget-diagnostics.test.mjs` executed 8 tests: 7 pass, 1 intended Q6 failure at `missing fixed reader-site provenance`, 0 cancelled, skipped or todo. No native execution or I0. [Artifact 13891964990](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43104984521/artifacts/13891964990), ZIP 1,438 bytes, SHA-256 `eb297756fd1ba95aa9a152b5f5e36ae210c729453657dd38c1ef37ca0a89ff4b`, expiry 2026-11-18 21:40:06 UTC. Same-ID REST readback verified source, run, attempt, kind, flags and exact 2-file inventory; budget-artifact.json 408 bytes, SHA-256 `fa18f94eccf30296a6f76794a9584120c92513a35f47cd2ecf2e99e27ea2a6ed`.
+
+One marked-by-purpose, ordinary-limit producer-only probe follows the pure contract and strict M/QA preflight. The candidate-cap environment variable stays unset. The append records the RED and intended comparison scope, not a native result.

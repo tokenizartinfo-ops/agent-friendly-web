@@ -1,6 +1,14 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 const PURPOSE='afw.finite-budget-diagnostics.syn.v1';
 const CHRONOLOGY='afw.finite-budget-chronology.syn.v1';
+// IDs 1..54 are closed over the pinned compiler manifest. 0 denotes unknown.
+export const budgetReaderSiteCount=54;
+const READER_ORIGIN=Symbol('reader-origin');
+function readerSite(meta){
+ let value;
+ try{value=data(meta,'readerSite');}catch{return 0;}
+ return Number.isInteger(value)&&value>=1&&value<=budgetReaderSiteCount?value:0;
+}
 const EVENTS=['root','child','begin','bytes','logical','scopeLogical','cancel','settle','incomplete'];
 const INVALID_REASONS=new Set([
  'unknown','constructorOptions','collectorException','rootInput','childInput','childConflict','beginContext','beginMethodResource',
@@ -33,6 +41,8 @@ export function createBudgetDiagnostics(options={}){
  const roots=new WeakMap(),rootHandles=new WeakMap(),children=new WeakMap(),childHandles=new WeakMap(),operations=new WeakMap();
  const rows=[],logicalScopeEvents=[],deniedScopes=new Set(),groups=new Map(),scopes=new Map(),totals=metric();let rootOrdinal=0,childOrdinal=0,opOrdinal=0,scopeEventOrdinal=0,scopeGuardEvents=0,events=0,firstAt=null,lastAt=null;
  const byEvent=counts(EVENTS),reasons=counts(INVALID_REASONS),invalidByOverflow=splitCount(),unattributedByOverflow=splitCount();
+ const readerBefore=Array(budgetReaderSiteCount+1).fill(0),readerAfter=Array(budgetReaderSiteCount+1).fill(0);
+ let firstReaderOrigin=null;
  let firstOverflow=null,firstInvalid=null,method='constructor';
  const event=()=>{
   events++;byEvent[method]++;
@@ -54,7 +64,8 @@ export function createBudgetDiagnostics(options={}){
  const chronology=()=>({
   purpose:CHRONOLOGY,limit,eventCalls:events,byEvent:{...byEvent},
   firstOverflow:firstOverflow&&{...firstOverflow},firstInvalid:firstInvalid&&{...firstInvalid},
-  invalid:{...invalidByOverflow},unattributed:{...unattributedByOverflow},reasons:{...reasons}
+  invalid:{...invalidByOverflow},unattributed:{...unattributedByOverflow},reasons:{...reasons},
+  readerOrigins:{beforeOverflow:readerBefore.slice(),afterOverflow:readerAfter.slice(),firstReaderOrigin:firstReaderOrigin&&{...firstReaderOrigin}}
  });
  const handle=()=>Object.freeze(Object.create(null));
  const touch=(row,field,amount=1)=>{for(const m of [totals,groups.get(row.phase+'|'+row.resourceClass),scopes.get(row.rootOrdinal+'|'+(row.childOrdinal??0))])m[field]+=amount;};
@@ -127,7 +138,15 @@ export function createBudgetDiagnostics(options={}){
   row.status=status;row.settledAt=at;lastAt=Math.max(lastAt??at,at);touch(row,'nativeSettled');if(status==='rejected')touch(row,'nativeRejected');touch(row,'nativeDurationSumMs',at-row.enteredAt);active(row,-1);
  });
  const snapshot=safe('snapshot',()=>({purpose:PURPOSE,testRevision,workerRole,rows:rows.map(row=>({...row})),logicalScopeEvents:logicalScopeEvents.map(event=>({...event})),totals:{...totals,scopeGuardEvents,deniedScopes:deniedScopes.size,observedWallMs:firstAt===null?0:(lastAt??firstAt)-firstAt,scopes:[...scopes.values()].map(m=>({...m}))},byPhaseResource:[...groups.values()].map(m=>({...m})),coverage:{...coverage},chronology:chronology(),operationalReadiness:false,completePackage:false,PCoff:false}));
- const incomplete=safe('incomplete',reason=>{event();return invalid(reason,true);});
+ const incomplete=safe('incomplete',(reason,origin,site,context)=>{
+  event();
+  if(origin===READER_ORIGIN){
+   const relation=coverage.overflow?'afterOverflow':'beforeOverflow';
+   const buckets=coverage.overflow?readerAfter:readerBefore;
+   buckets[site]++;firstReaderOrigin??={ordinal:events,relation,site,context};
+  }
+  return invalid(reason,true);
+ });
  return Object.freeze({root,child,begin,bytes,logical,scopeLogical,cancel,settle,snapshot,incomplete});
 }
 function passiveThen(value){
@@ -222,7 +241,13 @@ export function createBudgetRuntime(options={}){
    const result=original();if(bodyOwner)tagBody(result,bodyOwner);else incomplete('cloneOrigin');return result;
   }
   if(meta.edge==='reader'){
-   const result=original();if(bodyOwner)tagBody(result,localStore?immutable({...bodyOwner,store:localStore}):bodyOwner);else incomplete('readerOrigin');return result;
+   const result=original();
+   if(bodyOwner)tagBody(result,localStore?immutable({...bodyOwner,store:localStore}):bodyOwner);
+   else{
+    const context=currentStore===undefined?'no_store':currentStore?.excluded?'excluded':currentStore?.root?'rooted':'unrooted';
+    collector.incomplete('readerOrigin',READER_ORIGIN,readerSite(meta),context);
+   }
+   return result;
   }
   const pair=(nativeObject(receiver)?nativePairs.get(receiver)?.get(fn):null)??nativePairs.get(globalThis)?.get(fn)??nativeFunctions.get(fn);
   const resource=pair?.resource;

@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {resolve,relative,join} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import ts from 'typescript';
+import {budgetReaderSiteCount} from './finite-budget-diagnostics.mjs';
 
 
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -249,6 +250,40 @@ export function createBudgetScopeExpression(text){
   default:assert.fail('fixed compiler scope expression required');
  }
 }
+// Source order is independent of esbuild's concurrent onLoad callbacks.
+const readerCatalog=[];
+for(const role of ['M','QA']){
+ const modules=[...budgetNativeDescriptorProposal.sourceDescriptors,...budgetNativeDescriptorProposal.packages]
+  .filter(module=>module.roles.includes(role)).sort((a,b)=>a.path<b.path?-1:a.path>b.path?1:0);
+ for(const module of modules){
+  const groups=Array.isArray(module.selectors)
+   ?module.selectors.flatMap((row,index)=>descriptorMeta(row).edge==='reader'?[[index,row.expectedCount]]:[])
+   :[['readerFactory',module.selectors.readerFactory??0]];
+  for(const [selector,count] of groups)for(let occurrence=1;occurrence<=count;occurrence++){
+   readerCatalog.push({id:readerCatalog.length+1,role,path:module.path,selector,occurrence});
+  }
+ }
+}
+assert.equal(readerCatalog.length,budgetReaderSiteCount,'closed reader catalog and runtime enum agree');
+
+function attachReaderSites(ast,nodes,selected,role,path){
+ const expected=readerCatalog.filter(entry=>entry.role===role&&entry.path===path);
+ const slots=new Map((selected?.calls??[]).map(call=>[call.node,call.selector??call.group]));
+ const occurrences=new Map(),proof=[];
+ for(const [node,meta] of nodes){
+  if(meta.edge!=='reader')continue;
+  const selector=slots.get(node),occurrence=(occurrences.get(selector)??0)+1;occurrences.set(selector,occurrence);
+  const entry=expected.find(row=>row.selector===selector&&row.occurrence===occurrence);
+  assert(entry,'unregistered selected getReader in pinned module '+role+' '+path);
+  assert.equal(callShape(node,ast).method,'getReader');
+  const start=ast.getLineAndCharacterOfPosition(node.getStart(ast));
+  proof.push({...entry,preparedLine:start.line+1,preparedColumn:start.character+1});
+  nodes.set(node,{...meta,readerSite:entry.id});
+ }
+ proof.sort((a,b)=>a.id-b.id);
+ assert.deepEqual(proof.map(row=>row.id),expected.map(row=>row.id),'all pinned readers emitted in '+role+' '+path);
+ return proof;
+}
 function packageSelection(source,path,role){
  const pin=budgetNativeDescriptorProposal.packages.find(p=>p.path===path);
  assert(pin&&pin.roles.includes(role),'fixed package role');assert.equal(Buffer.byteLength(source),pin.bytes,'installed package byte pin');assert.equal(hash(source),pin.sha256,'installed package hash pin');
@@ -406,6 +441,7 @@ export function transformBudgetPreparedSource(source,path,role){
    const method=n.expression.name.text;found[method]++;assert(!selectedNodes.has(n));selectedNodes.set(n,method==='clone'?{edge:'clone'}:{operation:'read'});
   }ts.forEachChild(n,scan);};scan(ast);assert.deepEqual(found,expected,'fixed delegated body methods');
  }
+ const readerSites=attachReaderSites(ast,selectedNodes,selected,role,path);
  const transactionCallbacks=new Set();
  for(const node of selectedNodes.keys()){
   const shape=callShape(node,ast);
@@ -545,7 +581,7 @@ export function transformBudgetPreparedSource(source,path,role){
  };
  assert.equal(scopeEdges,expectedScopes[path]??0,'fixed prepared scope hook count '+role+' '+path);
  const transformed=ts.createPrinter({newLine:ts.NewLineKind.LineFeed}).printFile(result.transformed[0]);result.dispose();sourceAST(transformed,path);
- return {source:"import {budget as "+BUDGET_ID+"} from 'afw:budget-runtime';\n"+transformed,counts:{nativeCalls,identityEdges,bodyEdges,facadeEdges,scopeEdges,guardEdges},selectorCounts:selected?.counts??[]};
+ return {source:"import {budget as "+BUDGET_ID+"} from 'afw:budget-runtime';\n"+transformed,counts:{nativeCalls,identityEdges,bodyEdges,facadeEdges,scopeEdges,guardEdges},selectorCounts:selected?.counts??[],readerSites};
 }
 
 const scopeInputPins=budgetNativeDescriptorProposal.implementationSupplement.scopeInputPins;
@@ -572,7 +608,7 @@ export function createBudgetCompiler(role){
    const pin=scopeInputPins.find(p=>p.path===path);assert(pin?.roles.includes(role));assert.equal(hash(raw),pin.rawSha256,'scope input raw pin '+path);assert.equal(Buffer.byteLength(raw),pin.rawBytes);if(role==='M')assert.equal(source,raw);
   }
   const result=transformBudgetPreparedSource(source,path,role);
-  records.set(path,{role,path,rawBytes:Buffer.byteLength(raw),rawSha256:hash(raw),preparedBytes:Buffer.byteLength(source),preparedSha256:hash(source),emittedBytes:Buffer.byteLength(result.source),emittedSha256:hash(result.source),counts:result.counts,selectors:result.selectorCounts});
+  records.set(path,{role,path,rawBytes:Buffer.byteLength(raw),rawSha256:hash(raw),preparedBytes:Buffer.byteLength(source),preparedSha256:hash(source),emittedBytes:Buffer.byteLength(result.source),emittedSha256:hash(result.source),counts:result.counts,selectors:result.selectorCounts,readerSites:result.readerSites});
   prepared.set(path,result.source);return result.source;
  }
  function plugin(existing=null){
@@ -596,11 +632,13 @@ export function createBudgetCompiler(role){
     if(result.errors.length)return;
     assert.deepEqual([...records.keys()].sort(),[...expected].sort(),'closed prepared role input map '+role);
     assert(!Object.keys(result.metafile?.inputs??{}).some(path=>path.endsWith('finite-budget-descriptors.json')||path.endsWith('finite-budget-world.mjs')),'Node-only map/compiler excluded from Worker bundle');
+    const actualIds=[...records.values()].flatMap(record=>record.readerSites.map(site=>site.id)).sort((a,b)=>a-b);
+    assert.deepEqual(actualIds,readerCatalog.filter(site=>site.role===role).map(site=>site.id),'complete role reader catalog before I0');
     if(process.env.AFW_BUDGET_PREFLIGHT){
      const prior=JSON.parse(await readFile(process.env.AFW_BUDGET_PREFLIGHT,'utf8'));
      assert.equal(prior.source,testRevision);assert.equal(prior.run,process.env.GITHUB_RUN_ID);assert.equal(prior.attempt,process.env.GITHUB_RUN_ATTEMPT);
      assert.equal(prior.diagnosticCandidate??null,candidate,'preflight and native use the same diagnostic candidate');
-     const shape=list=>list.map(r=>({role:r.role,path:r.path,rawBytes:r.path==='<stdin>'?null:r.rawBytes,rawSha256:r.path==='<stdin>'?null:r.rawSha256,counts:r.counts,selectors:r.selectors})).sort((a,b)=>a.path.localeCompare(b.path));
+     const shape=list=>list.map(r=>({role:r.role,path:r.path,rawBytes:r.path==='<stdin>'?null:r.rawBytes,rawSha256:r.path==='<stdin>'?null:r.rawSha256,counts:r.counts,selectors:r.selectors,readerSites:r.readerSites})).sort((a,b)=>a.path.localeCompare(b.path));
      assert.deepEqual(shape([...records.values()]),shape(prior.inputs[role]),'native prepared role hooks match exact prior pure preflight before I0');
     }
    });
@@ -682,11 +720,23 @@ async function preparePositiveProbe(root){
  await mkdir(join(root,'graphs'),{recursive:true});
  await writeFile(join(root,'full-result.json'),JSON.stringify({facts,epochs,preparedInputs:data.budget.preparedInputs},null,2));
  const aggregates=[{kind:'facts',...facts}];
+ const siteMap=Object.values(data.budget.preparedInputs).flatMap(records=>records.flatMap(record=>record.readerSites)).sort((a,b)=>a.id-b.id);
+ assert.deepEqual(siteMap.map(site=>site.id),readerCatalog.map(site=>site.id),'producer contains every fixed site');
+ for(const site of siteMap)aggregates.push({kind:'readerSite',...site});
  for(const {segment,epoch,role,snapshot} of epochs){
   const {purpose,limit,eventCalls,byEvent,firstInvalid,firstOverflow,invalid,unattributed,reasons}=snapshot.chronology;
   const who={segment,epoch,role};
   aggregates.push({kind:'chronology',...who,purpose,limit,eventCalls,byEvent,firstInvalid,firstOverflow,invalid,unattributed,coverage:snapshot.coverage});
   aggregates.push({kind:'reasons',...who,reasons});
+  const {beforeOverflow,afterOverflow,firstReaderOrigin}=snapshot.chronology.readerOrigins;
+  assert.equal(beforeOverflow.length,budgetReaderSiteCount+1);assert.equal(afterOverflow.length,budgetReaderSiteCount+1);
+  const sum=array=>array.reduce((total,value)=>total+value,0);
+  assert.equal(sum(beforeOverflow)+sum(afterOverflow),reasons.readerOrigin);
+  aggregates.push({kind:'readerFirst',...who,firstReaderOrigin,before:sum(beforeOverflow),after:sum(afterOverflow)});
+  for(let site=0;site<=budgetReaderSiteCount;site++)if(beforeOverflow[site]||afterOverflow[site]){
+   if(site)assert.equal(siteMap[site-1].role,role);
+   aggregates.push({kind:'readerCounts',...who,site,before:beforeOverflow[site],after:afterOverflow[site]});
+  }
  }
  const proofNames=['graphs/native-syn.json','graphs/metafiles.json','graphs/canary-index.mjs','graphs/qa-index.mjs','manifest.json'];
  for(const name of proofNames){
