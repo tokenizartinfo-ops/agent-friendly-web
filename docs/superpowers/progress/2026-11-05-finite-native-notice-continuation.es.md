@@ -1,10 +1,10 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — freshfix4 ALLPASS123controls+crypto; actualcandidatec433 INACTIVE; scopedreviewpending
+## CURRENT — inspectorPREPARATIONreviewCLEAN; ONEactualreadonlyreceipt5+2released
 
-2026-11-12 16:34UTC. FreshAstraxhighfix4 trial43258702864/1 Source7a58SUCCESS (serialproducer12s/verifier6s):91CORE+16ZIP+16ACTUALpairCURRENTGREEN, I7/I8oldREDSTATICONLY. Metadata200/776B andrawZIPtripleSHA/full2JSON allpass. Rootartifact13961714753/1824B/SHAb2997086/schema/counts/context/manifest andEXACT4closedrecords/codeSource-reconstructed573f9c32 verified. [Primary](../reviews/2026-11-12-native-inspector-pair-fix4-primary.md).
+2026-11-12 16:38UTC. SAMEreview I7/I8ADDRESSED/no newfindings, I5/M1/I6closed; M2deferred. [Cleanreview](../reviews/2026-11-12-native-inspector-preparation-clean.md). PreparationunitCOMPLETE c433/43a926fd under123currentinertcontrols+transport/crypto/Sourceidentityreadbacks; NOTNativequalification. FreshSourceowner /root/inspector_pair_fix4 gets [ONEactualinspectionrelease](../briefs/2026-11-12-native-readonly-receipt-single-inspection.md): explicitTWOserialjobs5minprivateproducer+2minkeylessverifier, activateevent+2guardsONLY/no codechanges, fixedoriginalcipher13949168304/13,680,188B/SHA8a408941/AAD1978/43229236340/1/consumer-failure, existingkeyonlyopenstepinGitHub. Root/PCneverdownloadsoriginalcipher. Freeze/run/readbacks; restoreexactF7/report/0activeSTOP aftereitheroutcome, no retries/native/SDK/I0.
 
-Completec433b925/treed6040d79/WF43a926fd/reportb3efc0f7 manual/noinputs/noPush/BOTHfalse5+2proposal; Rootfullbody/ref/appendprefix/coveredCOREZIPDTODRIVERPAIRTESTS/complete7f..c433U10/twopath/0active readbacks. [Scopedpackage](../reviews/2026-11-12-native-inspector-fix4-scoped-review-package.md) toSAMEreviewerI7/I8/newbreakage; original+freshwritersSTOP. Core91d514/ZIPb36cunchanged, parentidentityreal vschildzeroisolationpreserved. ActualprivateinspectionNOTreleased; needscleanreview+Rootexplicit5+2amendment/oneinspection. M2deferred, originalRcause/statusUNKNOWN, allreadinessfalse.
+Sourcec433inactivebeforeactivation; onepermitconsumedwhenpush regardlessoutcome. ActualR1–R3cause/statusUNKNOWN untilsafeDTO; allreadinessfalse. OriginalNative16failedreadonly/Bskipped, no rerunreleased. Rootwillreadpublicclosedpaironly afterterminalandroutecausalfacts.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 
