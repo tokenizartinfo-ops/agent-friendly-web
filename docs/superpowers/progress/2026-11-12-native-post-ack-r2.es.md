@@ -97,3 +97,11 @@ Implementation6599b33d, one activation4e37de51, KEYLESS43325790437/1 producer131
 Closure79afec41 then final append efa4bd8b/tree42840228: World EXACT original; bothnewWFmanual/twofalse; F7seventhfalse unchanged;3188protected/3194leaves/reportoriginalprefix531979current/main0c9/fivestate0 independently Root-verified. All readinessfalse, Native held.
 
 Review package docs/superpowers/reviews/2026-11-12-native-post-ack-r2-task1-failed-candidate-package.md: intended full codeBASE408→6599 (allpatchescomplete), separately actualactivation4e37 and explicit rollbackcurrentefa4. Fresh independent reviewer to return fullTask1spec/quality findings; then original Sourcebuilder gets scoped fix round1/new exact permit, never controller source fix. No run released by this entry.
+
+## Task1 review FAIL — 2 Critical / 5 Important / 1 Minor
+
+Fresh independent Astra review preserved at docs/superpowers/reviews/2026-11-12-native-post-ack-r2-task1-review.md; allfieldsSource references in review. C1actualcomposed first read rewrites literalpair matcher, causing6protocolbranches; C2helper-onlypass omits frozenfullR2assertions. I1original/evidenceoutcomes mask; I2preMFsealing+futurejobstart; I3raw-onlycontrol/identity/race/witnessgaps; I4supplement/OFFON/sealreadback; I5independentpins/shape/tripleSHA/cipher/outcomewiring. M1deferred mapsort, notloopgate. Verifiedstrengthsone-shot/N3/N1/truthfulfailedreport.
+
+Ruling: one fixed private R2 assertion oracle copy is allowed withinexistingWorld because protected original testmodule would registerthreeNativecases; pin original533dafb5/testassertioninventory and preserveallR2criteria onONEresult, noOriginaltestedit/extraNativecalls. Costifwrong: candidate remainsunqualified, noNativepassclaim.
+Ruling: originalcaseoutcomeindependent ofevidence/cleanup; actualMFattachmentdistinctfromscratch; immutablemodelseal/readback; independentlyverifiedcheckoutpins/uploaded/API/rawdigest required. Clarifies existingSPEC, noScopeexpansion.
+Task1 fix round1/5 release docs/superpowers/briefs/2026-11-12-native-post-ack-r2-task1-fix1.md: originalactualimplementerSol/xhigh resumes, same6paths, currentbaseefa4, restoreintendedWorldfrom6599thenfix, ONEnewKEYLESS7+2attempt1 only. Previousrunconsumednoreplay; NativeHELD. ControllerdoesnoteditSource. No humanstepneeded.
