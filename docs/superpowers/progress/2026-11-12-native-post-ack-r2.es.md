@@ -79,3 +79,9 @@ Implementer correctly found that existing885–887 verifies an archive but does 
 Second implementer supplied useful N5/directory-preservation findings, accepted and bound, but then declined passive future R2 integration as possible security-failure reproduction. No Source writes/tests/runs occurred. Root independently reviewed actual scope: an existing owned SYN functional fixture with simulated providers/identities and no bypass/exploit input; Task1 executes ONLY inert controls and leaves all Native jobs inactive. Root does not accept an implication that ordinary authorized SDK/own-software diagnosis itself is prohibited. No control or safety boundary is removed; independent implementation review and all original gates remain.
 
 Ruling: retain this bounded defensive scope and assign a fresh standard integration implementer, with full transparency about prior refusal and concrete no-exploit/no-third-party/no-guard-change limits. Cost if wrong is reversible isolated Source work, never Native effects in Task1. All prior actors STOPPED; base408 and one KEYLESS entitlement remain unchanged. This is not a fix round because no implementation exists.
+
+## Task1 registry-interface ruling
+
+Fresh sole implementer /root/native_postack_source_builder (Sol/xhigh) confirmed exact base/main/tree3190/F7/World/report/fournewabsent/60eventinventory/0active, no writes. Concrete ambiguity: 24 IDs versus24 Node test registrations.
+
+Ruling: accept fixed24 actual module-scope action callbacks with callback-own private postassertion witnesses and one controls-mode Node test wrapper; counts must be reported separately and honestly. Cost if wrong is no claim of24 independent framework tests; substantive24 current-code assertions and authenticity/exactonce barrier remain mandatory. Missing/no-op/skipped/forged negative cases required. No scope or run expansion; Native held.
