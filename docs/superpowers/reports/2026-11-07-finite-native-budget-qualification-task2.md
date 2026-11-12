@@ -1497,3 +1497,154 @@ Only lifecycle business-state change: complete requires failures.length===0 AND 
 Current existing seven owned childcases now READ ACTUAL persisted ownership.json before success: normalclosurecomplete true/uncertain false/disposed+archived true; all uncertainty arms complete false/disposed+archived false; persisted ancillarycount must equal original distinct ancillaryerrorcount. dispose_reject specifically requires0ancillary and SAME originalD. Adds persistedComplete and persistedAncillaryFailureCount proof fields to fixed case result. No mock-count-only replacement or newgenericcase/API. Historical RED command remains intentionally unqualified on fixedcode and is not rerun.
 
 ONE fresh attempt1 <=2min keyless fullcovering: same5 syntax/lint/inactive1/business0/invalidpreI0, unchangedQ8exact8/0failcancelSkipTodo, F1–F8 with actual persistedF9regression/currentsealer controls, three FULL strictprofiles positive0/readonly3/reduction_a3/12primaryblocks+work2/wait2. Complete existing seven graph with onlycontracts runnable/sixnativefalse. Fixedpublicsealer/nativebodies sameSAFEf7a71; no broadsuite/custody/native16/MF/I0/SDKbusiness/newsecret. Freezeuntilterminal/sameIDfullinventory proof. Unexpectedfailure SAFEexactf7a71/manual7false/reportSTOP/noautoretry; allpasslatestFIXEDcomplete7/manualallfalse/currentwiring/readbacks/reportSTOP for SAMEreviewer FULL2baae765..final onF9+newbreakageonly.
+
+
+## Round3 F9 RED→GREEN complete — COMPLETE7 SAFE INACTIVE for SAME review
+
+Formal FIX_BASE2baae7652c450265a56acaf70aba772b0a12a727; SAMEwriter/nohelpers. Exact causalRED43225144081/1/Source276a2dad/job131206290914/art13946878606 (902B/SHA74c63bd2..., strict2JSON/firstsameID), actualpersistedcompletetrue vsfalse/ancillary0/uncertain/disposedfalse/archivedfalse/Dsame/oneattempt/copies0/sourceRetained/poison, CLIexit1/errornull validexpectedtrue. SAFEf7a71closure3da29997 fullyread before conditionrepair. Only this exact precondition authorized the following minimalfix+singleGREEN; no REDrepeat/newdiagnostic.
+
+ONE covering GREEN run43225744579/attempt1/Sourcea015a480c445ae9d8592f04fb506eca9bb8458a0/tree38be0f598803cdae9badb9a24a4e641b89a32006/world5fb78c057b7e80260ae683abf4af892767ce110e/TEMPc317374838bf79ec313e93cbac32b2ba973cb352. Contracts131208323208 terminalSUCCESS; job2026-11-12T13:16:37Z..2026-11-12T13:17:30Z; runcreated2026-11-12T13:16:35Z/terminalupdated2026-11-12T13:17:31Z. Six nativejobs terminalSKIPPED. No MF/I0/actualSDK/businessRoot/native16/clock/runtime.
+
+ExecutedPASS: samefixed5 node --check +locked scopedESLint; unset-group wrapper1/pass1/business0/nooutput; invalidgroup rejection preoutput/I0; unchangedQ8tests8/pass8/fail0/cancelled0/skipped0/todo0. AllF1–F8/currentsealercontrols pass/errornull. New F9 persistedownership assertions execute inside actual CURRENT seven fixedowned Node childcases: normalcomplete true with certaindisposed/archive; each uncertaintycomplete false; persistedancillary exactly original distinctancillarycount; dispose_reject specifically persistedcompletefalse/ancillary0 and SAME originalD with oneattempt/no checkpointcopy/sourceRetained/poison. F5 groupprivatefullevidence16524B/SHA25646246d9f7d0c795f5fd22ff5908df8e745be38f608298ae45ec0b891f51392d4 binds those case results and newpersisted fields; publiccaseCount3 is legacynamedarraycount, not count of seven childcases or nativebusiness16. This is a passed actual-file regression, not a mock completeflag.
+
+Minimalcondition only changes complete boolean, requiring noancillaryfailure AND all actualowned resources certain/attachedMFdisposed/attachedpersistarchived. PrimaryD never added to ancillarycount, originalError/throw object/order, lifecycle originaldisposeattempt, source retention/delete fence/archive/default/production/persistence/SDK/12observer/clock/pins/crypto remain unchanged. Safe noadapter/normal/partialresource semantics preserved; custodycompletion remains separate from business success. No broad ownership algorithm rewrite.
+
+Three FULL strictprofiles positive/readonly/reduction_a all complete/passed with additionalSYN0/3/3; complete validated inventories/preflight JSON retained (M61/QA115, original raw/prefix/SDK pins and observer12+work2/wait2 guarded unchanged in same publicsealer). Actual closed group/profile proofs:
+
+```json
+{
+  "controls": {
+    "purpose": "afw.closed-pure-controls.syn.v2",
+    "source": "a015a480c445ae9d8592f04fb506eca9bb8458a0",
+    "run": "43225744579",
+    "attempt": "1",
+    "groups": [
+      {
+        "group": "F1",
+        "passed": true,
+        "caseCount": 2,
+        "evidence": {
+          "bytes": 904,
+          "sha256": "dcae1ea26b1b09c6f2eacc5fd66701bdb3c61d2ccd431281b3c5325827b0909f"
+        },
+        "error": null
+      },
+      {
+        "group": "F2",
+        "passed": true,
+        "caseCount": 1,
+        "evidence": {
+          "bytes": 3332,
+          "sha256": "dac450adc2e8566f01427d907b835f22a7e64301654f58a58cd9ef5557d12a21"
+        },
+        "error": null
+      },
+      {
+        "group": "F3",
+        "passed": true,
+        "caseCount": 4,
+        "evidence": {
+          "bytes": 5431,
+          "sha256": "d46381213a8df33a326bc10f3b580eb4cbb022f4b742cef29069be1063b9e3d3"
+        },
+        "error": null
+      },
+      {
+        "group": "F4",
+        "passed": true,
+        "caseCount": 1,
+        "evidence": {
+          "bytes": 2528,
+          "sha256": "fde2eea49ef543f0d36347cda87d7035f10657716cc6cd418bff1fb4548bb33b"
+        },
+        "error": null
+      },
+      {
+        "group": "F5",
+        "passed": true,
+        "caseCount": 3,
+        "evidence": {
+          "bytes": 16524,
+          "sha256": "46246d9f7d0c795f5fd22ff5908df8e745be38f608298ae45ec0b891f51392d4"
+        },
+        "error": null
+      },
+      {
+        "group": "F6",
+        "passed": true,
+        "caseCount": 1,
+        "evidence": {
+          "bytes": 218,
+          "sha256": "0cf03851592354cf957c3248d37b1585d924dfc009b79704db924a8145070e5a"
+        },
+        "error": null
+      },
+      {
+        "group": "F7",
+        "passed": true,
+        "caseCount": 4,
+        "evidence": {
+          "bytes": 599,
+          "sha256": "7362a7cc15236bd1958794837bccc943ebf5ea87ef2f3db7c06b8d6382c08036"
+        },
+        "error": null
+      },
+      {
+        "group": "F8",
+        "passed": true,
+        "caseCount": 6,
+        "evidence": {
+          "bytes": 1532,
+          "sha256": "ac5c7c49185dc53cdd285c8e87294359d23d4fbcb31f60ba816c8fa2d3398d68"
+        },
+        "error": null
+      }
+    ],
+    "passed": true,
+    "I0Opened": false,
+    "nativeExecutionProduced": false,
+    "businessCases": 0
+  },
+  "diagnostics": {
+    "purpose": "afw.closed-pure-diagnostic.syn.v2",
+    "source": "a015a480c445ae9d8592f04fb506eca9bb8458a0",
+    "run": "43225744579",
+    "attempt": "1",
+    "profiles": [
+      {
+        "profile": "positive",
+        "stage": "complete",
+        "passed": true,
+        "I0Opened": false,
+        "nativeExecutionProduced": false,
+        "additionalSYNCount": 0
+      },
+      {
+        "profile": "readonly",
+        "stage": "complete",
+        "passed": true,
+        "I0Opened": false,
+        "nativeExecutionProduced": false,
+        "additionalSYNCount": 3
+      },
+      {
+        "profile": "reduction_a",
+        "stage": "complete",
+        "passed": true,
+        "I0Opened": false,
+        "nativeExecutionProduced": false,
+        "additionalSYNCount": 3
+      }
+    ],
+    "allPassed": true,
+    "I0Opened": false,
+    "nativeExecutionProduced": false
+  }
+}
+```
+
+Artifact13946698704 / finite-budget-fixed-preparation-a015a480c445ae9d8592f04fb506eca9bb8458a0, ZIP111751B/SHA256ea941332d156f5d9fbf420f52f6b7b59c88273ea92d9b88a949076dc0421ec5a, created2026-11-12T13:17:25Z/expires2026-11-19T13:17:23Z. FIRST assignedIDdownload SUCCESS and uploaded/downloaded digestmatch; retrieval2/3SKIPPED. Independent exact full10file inventory/context/manifest/local byteequality SUCCESS, manifest1635B/SHA256b19608971e52712348729a7f88234b08607276213caeb9fce42cf780e42af5b7. Exactclosed filenames are the unchanged fixedpublisher inventory: budget-artifact.json,controls.json,diagnostics.json,inactive.json,preflight-positive.json,preflight-readonly.json,preflight-reduction_a.json,preflight.json,q-counts.json,status.json. No Source/rawlog/TAP/stack/credential bytes promoted. Rawpure logs/fullprivategrouptrace retainedrunner-only untilcleanup, not native7d encryptedcustody. Existingnativecustody notrerun/no newkeys. No connector ZIPdownload by writer needed for this GREEN because runner fullsameIDproof+safeDTOlogs complete; Root may perform independent primaryaudit once.
+
+Successful reconciliation changes only workflowevent/name/gates and this append: restore EXACTlatestknownSAFEf7a71f1a0fa4f5ddf069ff411f008a098455e5cc COMPLETE7/MANUALworkflow_dispatch/noinputs/nopush/noschedule/ALL7literalfalse, lateststrictFIXEDsealer and currentwiring bodyunchanged fromreviewFIX_BASE. Coveredworld5fb78c05 remains exact; no post-GREEN code edits. Do NOT restoreunsafeoldc72 or activateNative16. Static sevenjob DAG/role/group/lane/kind/cases remain exactpriorreviewedpreparation; B has no positive/A completion dependency, futureRootpostrunall7terminal proof stillrequired. No extra tests/jobs aftercovering.
+
+Fullref/tree/report/workflowbyteequality/all7false/3190leaves/3183protectedfromNEWFIX_BASE2baae/other6allowedpathhashes/closureSHA0runs/branch0active readbacks follow. Root builds SAMEreviewer FULL2baae765..final forF9+newbreakageonly; priorF1–F8closed. Formalround3 remainsopen pendingreview. Native16/Task2final/GLOBAL296/realPCoff and operationalreadiness remainHELD/false. STOP afterreadbacks; no nextjobs/main/production/Rootdocs/O4/ORD/CF/OAuth/permissions/mail/Max action.
