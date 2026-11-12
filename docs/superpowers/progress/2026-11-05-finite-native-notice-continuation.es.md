@@ -4,7 +4,7 @@
 
 Gabriel requests PCshutdownfor~1hour. STOP/no newwork orround2untilresume. Cloudcheckpoint docs/superpowers/progress/2026-11-12-shutdown-0932.es.md. Sourcefinald9b7/tree f5f5a676/report5f512869/workflowc72e3191 complete7manualfalse; latest43189940398 Q8/allF/all3profilesPASS/noI0. Rootprimary3190/3184protected/ref/diff allverified.
 Task2fixround1 reviewed:5addressed(F1,F3,F4,F6,F7),3openImportant(F2causaldeadlineclassification,F5disposefailurecontinuation,F8rawfailurelogpublication). Verbatim docs/superpowers/reviews/2026-11-12-finite-budget-native-fix-round1-review.md. Native16HELD; round2notdispatched. NextresumeSAMEwriter/SAMEreviewer d9b7base/readfixloopfresh; anyscopeextensionrecordedbeforeedit.
-O4priorinspectionclosedbc0d7382/inactiveaf862/Rootauditcf6f1fef: buildPASSED2.1MiB, parserallocationcap→INCOMPLETE/nooriginclaim. O4capamendmentpartialUNREVIEWED savingonly/no newjob. Source/O4queued0+in_progress0 at09:32:18UTC. No realruntime/keys/mail/main/Maxchanges; actualprovider/runtimeUNKNOWN. Allreadinessfalse; localRootnotcloudguard. Complete stop/resume details in checkpoint.
+O4priorinspectionclosedbc0d7382/inactiveaf862/Rootauditcf6f1fef: buildPASSED2.1MiB, parserallocationcap→INCOMPLETE/nooriginclaim. O4capamendmentPARTIAL_UNREVIEWED SAVED6ecd5762/helper e0385852/report38e22eb8/workflowaf862exact/1previousrunterminal/0active; no newjob. Source/O4queued0+in_progress0 at09:32:18UTC. No realruntime/keys/mail/main/Maxchanges; actualprovider/runtimeUNKNOWN. Allreadinessfalse; localRootnotcloudguard. Root finalclosing09:34:12UTC and relay0new verified. Complete stop/resume details in checkpoint.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 
