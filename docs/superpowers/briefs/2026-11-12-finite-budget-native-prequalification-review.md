@@ -1,0 +1,26 @@
+# Task2 fixed native preparation — pre-clock architecture review
+
+2026-11-12 06:44:34 UTC. PROJECTAFW/repositorytokenizartinfo-ops/agent-friendly-web/public1347578006. ENVIRONMENTGitHubSOURCE/SYN. Readonly reviewer, no code/Git/runtime/workflow/keys/permissions/tests or subagents. This is a bounded architecture prequalification gate before expensive original900s run, NOT final Task2 acceptance or broad whole-branch review. Native16/I0 unexecuted; all7jobs false. Actual run/artifacts/effects must remain pending.
+
+Read requirement brief docs/superpowers/briefs/2026-11-12-finite-budget-fixed-native-preparation.md, then binding approved interfaces/rulings in docs/superpowers/briefs/2026-11-12-finite-budget-fixed-native-code-release.md; docs/superpowers/briefs/2026-11-12-finite-budget-sdk-observer-selector-fix.md; docs/superpowers/briefs/2026-11-12-finite-budget-native-completion-metadata.md. These are present in Rootdocs snapshot578d96ae06a1ecebaf156c769beb884a5e9f1f92. Do not load historical ledger/full plans. Report docs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task2.md @3590f42f3c58d2c14f176230081c402c6b97bf93 (included complete in package).
+
+Complete BASE7852f3a71de7cfcb98fedbd7b51c6a9886bf17da..HEAD3590f42f3c58d2c14f176230081c402c6b97bf93 package docs/superpowers/reviews/2026-11-12-finite-budget-native-prequalification-package.md @578d96ae06a1ecebaf156c769beb884a5e9f1f92 blob07fd7b2987fff8a7002749b7b40625c49e1b006c/203392chars;11commits/all7paths/fullU10;3183unchanged exact/3190leaves. Read in passes/ranges if tools truncate; do not omit long hunks. Inspect unchanged code only for named concrete dependency risk, boundedcheck; record why. No test reruns. Use standard task-review output Spec Compliance, Strengths, Critical/Important/Minor(file:line), Quality verdict. Return report directly; Root persists it.
+
+Review concrete new cross-file composition before clock: fixed R/D genuine SDK / clocks / real roots / queue/settlement observation; private inert input separation and foreignsentinels; both-replica disposal in every failure path; wrapper registration/negative evidence; authenticated custody provenance and seven-job lanes/ids/timing/aggregation/failure artifacts. Same frozen16=8Q+3R+4D+P1,3lanes,5genuinefixtureoccurrences/10rolegraphmountrecords (not10uniquehashes),same reductioncheckpoint/fourDreplicas. B starts readonly+reductionproducer, not A/P1; after native/disposal may collect other results; B cannot contain own terminalend before upload, Root postrun7job readback completes proof. No source/runtimeauthority from metrics. Covering pure preflight43165811990 and actualdisposercontrol43167323999 green already; avoid replay. Warnings/untested new branches honest.
+
+## Global Constraints
+
+- Ningún archivo lib/**,worker/**,package/lock,configuración productiva,SDK1.2.1,compatflag o API pública cambia. No se exporta la faceta privada, se crea una fábrica de autoridad o se sustituye por una copia del algoritmo.
+- Cualquier instrumentación de fuente ocurre sólo en el compilador SYN de fixtures, con marcadores exactos y conteo de ocurrencias antes de I0. Mantiene cuerpo/orden/guardas/promesas/retención nativa y bytes originales en disco; grafos y script transformado se archivan como SYN explícito, no deploy.
+- Fuente real3nov02:59UTC sigue vencida. OriginalI0/C0=I0+900000/C1=C0+180000, Root30s/child5s y tres slots originales se conservan. Nada de fake clock, refresco de Access/Source/identidad, cambio de TTL o segundo alarm.
+- No repetir los RED/16/51/56 anteriores por rutina; su evidencia queda aceptada y fechada. No broad suite por inercia. Nuevas pruebas sólo cubren los defectos de observabilidad y límites enumerados aquí.
+- No Cloudflare API real, runtime, DDL remoto, OAuth/OTP/tokens/permisos, cron/Container/consumidor/avisos reales, nuevo chat, main/PR/publish, Max ni correo.
+- Los diagnósticos son datos, nunca autoridad: no habilitan acciones, no son un ACK, no se leen para permitir business/cleanup ni permiten construir Root/lease/SDKselector.
+- operationalReadiness=false;completePackage=false;PCoff=false; globalNativeDrainVerified=false/sdkNamespaceEmptyVerified=false.
+- PROJECT AFW; repo tokenizartinfo-ops/agent-friendly-web/public1347578006. Source feat/finite-native-cleanup-20261101 BASE29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64. Rootdocs docs/finite-pcoff-continuation-20261103. Un Source writer; Root sólo docs. CAS/readbacks/protectedtree; rollback sólo cambios propios, no force/reset/eliminarhistoria.
+- Cloudnamespace de ESTA unidad: specs/plans/progress/briefs/reports/reviews/2026-11-07-finite-native-budget-qualification*. No leer/escribir el ledger del plan anterior como workspace nuevo. Evidencia previa sólo por referencias concretas; no nuevos procesos locales. Owner ausente hasta19:30UTC/16:30Argentina; no pasos humanos.
+
+## Review Focus
+
+
+Review implications of concrete diff without pre-grading findings. Actual16, native effects, globaloverlap/artifactreadbacks cannot be proved from static diff; identify exact postrun checks instead of treating runtime as observed. Pre-clock approval doesn't complete Task2; final taskSpec+Quality and global296..final remain.
