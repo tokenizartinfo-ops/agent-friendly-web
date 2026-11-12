@@ -2,13 +2,12 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — one Native16 batch active; readonly failed, cause still unknown
+## CURRENT — Native16 not qualified; closed receipt-inspector preparation released
 
-2026-11-12 13:54UTC. Actual run43229236340/attempt1/push, frozen Source19789b5f31935e0b5be00cbb24c5f45de2a0100a/tree5c8298022ed85903a8f9d50f598d9c58fbba6f71/WF26ca7518. Root independently checked one activation commit/onlyWF+report, same code, and primary run/jobs.
-Contracts131219969596 passed13:39:03..13:40:10. Native readonly131220486739 failed13:40:18..13:45:39; actualcommandexit1, exact casecounts/cause UNKNOWN. Its failure custody succeeded: encrypted consumer-failure artifact13949168304/13680188B/SHA8a408941c11e93e342fe2ccbf09763caf04e96fc5a1aaf12bde52da0fcaf19d5, expires19Nov13:45:23Z; runner same-ID authenticated readback reported. No private payload transferred to PC.
-Primary jobs read13:53 confirms positive_prepare131220491777 and reduction_prepare131220487200 remainactive from13:40:18; no downstream jobs yet. Original bounds remain; no timer reset, repair, retry, cancellation or further Source write while active. Actual coherent16 NOTqualified. Source writer lets authorized finite jobs settle, then preserves evidence/restores exactsafe f7a71/report/readbacks/STOP.
-Independent failure_boundaries_impl now READONLY designs a finite AFTER-RUN authenticated receipt inspector on same Source environment/key, no actual decryption/job yet. No new credential or human step. [O5 stack-location proposal](../reviews/2026-11-12-own-import-postfailure-location-readonly.md) preserved but deferred; no O5 code/probe.
-Preparation F1–F9 closed; final Task2/global review pending. All operational/PCoff flagsfalse. Actual provider/runtime UNKNOWN; no CF/main/OAuth/permissions/Max/mail action.
+2026-11-12 14:08UTC. Sole43229236340/1 Source19789b5f terminalFAILURE. Root independently verified all7terminal primary timestamps and observed native-job interval peak3. Q8/P1/D1–D2 validation passed; readonlyfailed/Rcasecounts+causeUNKNOWN; B/D3D4skipped. [Terminal primary audit](../reviews/2026-11-12-native16-terminal-primary.md). Five native payloads encrypted/seven-day; no private data to PC.
+FINALSTOP62517772/tree3f231956/report7fd17ef3/WFEXACTsafeF7a71/0active/3183protected. Rootref/fullWF/report primaryreadback matches. Allcode stillreviewed5fb78c05, F1–F9prepclosed. Single-run entitlement consumed, no repair/retry.
+[Receipt-inspector preparation brief](../briefs/2026-11-12-native-readonly-receipt-inspector-preparation.md): onlyWF+appendreport; manual/disabled job, NO EXECUTION yet. Exact originalreadonlycipher13949168304/digest8a408941/originalAAD; builtin custody only, separate failureidentity, safe fixedJSON/TAP projection; no SDK/I0 or newkey. Root independent code review before one future cloud inspection.
+O5 stack-location proposal preserved/deferred, no O5 code/probe. Task2actual16/final/global review and PCoff pending; readinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 
