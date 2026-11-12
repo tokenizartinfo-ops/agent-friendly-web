@@ -119,3 +119,9 @@ N6 parsing clarification: the4MiB limit bounds BOTH rawMODELZIP and combinedunco
 Builder identified that real MODEL readback would make generic npm-test discovery fail without an assigned artifact. Root rejects a dummy/local artifact fallback.
 
 Ruling: explicit opt-in lab test file, matching existing grouped native tests. Absent/emptymode is inert/no registration/no proof, explicitcontrols requires realMODEL and24callbacks, explicitnative strictoneR2, othernonemptymodesreject. Supersedes prior default=>controls shorthand, preserves defaultOFFproductioncompiler. Costifwrong: genericCIclaims no diagnosticcoverage; dedicated explicitcontracts job owns it. No skipped/fakequalification or newCIproject. Scope/budgets/onefix1permit unchanged. Addedprofile_scopechecks/SourceReport required.
+
+## Task1 fix round1/5 — execution PASS, scoped review pending
+
+Buildercompleted384b36d8/qualif4ceaeaf4/close8e244d36/final2910fcdc,STOPPED. Actual43331779408/1BOTHproducer131577995361/verifier131578423619SUCCESS;24namedcallbacks/ONEwrapper,8fixedgroups22cases,17puretests,21originalR2negativefamilies. No skips/fails. RootstrictSMALLSAFE ZIP/CRC/wholemanifest/currentctx/all11programSHA/modelmetadata/OFFONequality independentlypassed. MODELnotdownloadedbyRoot. Primary docs/superpowers/reviews/2026-11-12-native-post-ack-r2-fix1-primary.md.
+ClosureRootfullcurrent2910/tree98e9d674/3194/3188protected/569273reportwith531979prefix/bothnewWFclosed/F7seventhfalse/main0c9/fiveactive0. Native/MF/I0/key/CFexecutedNONE.
+Task1 fixround1/5 pendingSCOPEDrereviewC1/C2/I1–I5; M1deferredunlessnaturalnormalizationaddresses. Fullfixdiffpkgdocs/superpowers/reviews/2026-11-12-native-post-ack-r2-task1-fix1-package.md BASE6599→384plusactualclosed2910evidence. Nonewrun orNativepermitreleased.
