@@ -69,3 +69,7 @@ SPEC N5 and PLAN updated; revised Task1 brief in this commit. Same implementer t
 ## N5 accepted and Task1 resumed
 
 Independent Astra confirmed timing/ownership: QA actual compile after original rounded/backdated I0, before setOptions; command date is not headroom basis; both actual retained mounted options/lifecycle required. Root N5 contains these conditions. Revised brief18f3e74/blob30a9b65 reissued to SAME /root/native_postack_impl_escalated, no fix round/no permit consumed. Implementation in progress; one KEYLESS permit available; Native HELD.
+
+## Concrete pre-MF preservation limitation
+
+Implementer correctly found that existing885–887 verifies an archive but does not delete the original temporary directory when attachPersist fails before harness callback installation. Root corrected “preserve and remove” in SPEC; no Source repair or broadened cleanup task is authorized here. Any such preMF outcome remains unavailable, with deletion/disposal unverified. This prevents an unsupported cleanup claim; all5flagsfalse. Zero Source writes/tests/runs so far.
