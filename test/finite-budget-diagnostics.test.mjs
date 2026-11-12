@@ -551,14 +551,15 @@ async function coldPhaseReentry(){
 }
 
 function optionalBudgetDefaultMode(){
- const env={...process.env};delete env.AFW_BUDGET_GROUP;
+ const env={...process.env};delete env.AFW_BUDGET_GROUP;delete env.NODE_TEST_CONTEXT;
  const run=group=>spawnSync(process.execPath,['test/mcp-qa-finite-budget-native.test.mjs'],{env:group===undefined?env:{...env,AFW_BUDGET_GROUP:group},encoding:'utf8',timeout:30000,maxBuffer:256*1024});
  const ordinary=run(undefined);
  assert.equal(ordinary.error,undefined,'bounded default-mode subprocess');
+ if(ordinary.status!==0)assert(ordinary.stderr.includes('SYN budget group unsupported before I0'),'R1 default failure is existing before-I0 group guard');
  assert.equal(ordinary.status,0,'R1 optional qualification inactive in ordinary command');
  assert(!/^# Subtest: (?:R0|P1) /m.test(ordinary.stdout),'absent group registers no native qualification');
  for(const group of ['', 'unknown']){
-  const rejected=run(group);assert.equal(rejected.status,1);assert((rejected.stdout+rejected.stderr).includes('SYN budget group unsupported before I0'));
+  const rejected=run(group);assert.equal(rejected.status,1);assert(rejected.stderr.includes('SYN budget group unsupported before I0'));
  }
 }
 
