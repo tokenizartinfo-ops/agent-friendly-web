@@ -1,9 +1,9 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 2026-11-12 07:27:36 UTC: native preparation fixes executing; ordinary date diagnostic isolated
+## CURRENT — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 
-Task1native9COMPLETE7852; Task2native16HELD/all7false untilfixed. Fullprepared3590reviewidentifiedF1–F7, formalfixround1B1releasedtoSAMEwriter scoped6fixtures/typedSYNobservations+pureRED/GREENgates (noMF/I0), production/SDK/pins/originalclocksintact. Currentbudgetledgerauthoritative. Awaitactualgateevidence beforeSAMEreviewer/actual16/final/globalreviews.
-O2singleprobecloseddd5f9a6d/ONErun43170408910/inactive/0active, statusincomplete2selectedfailuresratherthanoldskipconvention. NewstaticcausecandidateadoptionfixtureDate.nowmakesR1laterthanimmutablecustodyexpiry8Nov; actualfirstguardstillunknown. O3isolateddiagbranchf5preparingfixedhistorical-vs-currentclockcomparisonwithreceipt/lib/pinsunchanged, nojobsoractualfreshauth. Ownimportcauseunresolved. No actualprovider/runtime/keys/permissions/mail/mainchanges, nohumanbefore11UTC. Alloperationalreadiness/package/PCofffalse. Currentrootsummaryisnotcloudguardorreallivenessproof.
+Task1native9COMPLETE7852. Task2native16HELD; formalfix1 partialcoveringf772 passed8Q/F1/F2butfailedF3F4. Closed4f35/TEMPecabeall7manualfalse. Rootexact14640hash+SourceflowprovesDReturnStatementselectorbug; targetedrepairtorecovercorrectinnercheck/+granularallgroupdata/independentprofilesONEcoveringreleased(e39f4256), SAMEwriteractive. Rawproduction/SDK/pins/originalclocksunchanged. InertUNVERIFIEDfull7jobdraftblob67486underreviewsoutsideActions, notrunnableevidence. Nextcoveringallpass→publishupdated7false→SAMEreviewerfixscope3590..head→actualcoherent16→task/globalreviews; noneclaimedcomplete.
+O3isolatedA/Bcompleted: current1FAILvsfixedhistorical1PASSwithunchangedf5libs/expiredreceipt; SourceT0alignmentexplainsTHATselectedordinarycase, notfreshactualauth/whole20suite. RootindependentZIPauditverifiedcounts/clocks/privacy/digests. O3closedinactive/protected/oneconsumedrun; own9b4andproductionpincontractstillunresolved. ActualCF/provider/runtimecurrentstatusnotqueriedbythisSYNunit. No humanbefore11UTC/08Argentina, no credentials/OTP/main/deploy/Max/mailchanges. Alloperationalreadiness/package/PCofffalse. Currentbudgetledgerauthoritative; thislocalRootisnotcloudguard.
 
 ## Estado anterior — 12Nov04:59UTC: Task1diagnóstico COMPLETE; Task2preflight yORD-1review
 
