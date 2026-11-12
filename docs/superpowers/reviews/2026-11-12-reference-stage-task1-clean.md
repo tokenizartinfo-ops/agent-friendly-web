@@ -1,0 +1,10 @@
+# Reference-stage Task1 fix1 — scoped CLEAN
+
+IndependentAstra/xhigh review b0dfcf5053018aa34304ffea9717a756c13b6b5d..cf223f03857ede51af6943eab293fdc8d24102df returnsCLEAN: I1/I2/I3allADDRESSED, newCritical0/Important0/Minor0. Exactfullscopedpatchreconstructed11WFhunks+reportappend;7qualified/candidatebodiesidentical, productionmoduleunchanged.
+
+I1 WF912–925 fixed22IDs/privateper-IDissuance+return/exactoncebarrier; callbacksregistered1055–56BEFOREsinglerunner1059; sameharnesscounterexamples1044–51; closedkeylesswitnessstrictlychecked1157–61. New43311629787/1 passed91+40+16+16 plus22count1. SourceAPPENDcorrectsold43307790578not22coverage.
+PositivefileMinorCLOSED:WF943–955bothconsume/grant throughrealcoordinatorio.references/realreaderexactlyonceperpair/hardcodedFULLbothrows+cert+stageandbothtransports.
+I2 WF875–876canonicalunknownR1stage+validR2, otherwiseidenticalmissing/invalidpartialaccept+oversizereject,freshwholemanifestEACH,bothactualtransports; R2test873preserved.
+I3 WF998–1003 actualOSENOTDIR independentlylstatbelowregularfile thenSAMeplainpathrealreaderinvalid/file_policy; oldguardsretained.
+
+RootacceptsTask1COMPLETE/CLEAN, round1/5=3addressed0open. Sourcecf223f03/WF5155f694 completeinactive5+2/BOTHfalse/mainunchanged/protected3188/0active/writerSTOPPED. Allreadinessfalse. ThisreviewaloneNOTactualpermit; Rootseparateexactbrief+freshsoleexecutorrequired. NoNative/runtime/PCoffauthority.
