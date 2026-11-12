@@ -7,3 +7,5 @@ Binding spec docs/superpowers/specs/2026-11-12-own-import-literal-inspection.md.
 5. Root independent read-only Spec/Quality review; fix any load-bearing gaps on same branch, no unapproved runtime path.
 6. Only later Root one-run release on approved fixed SHA, excluding any actual native clock overlap; collect full compile/parse result+limits/unknowns/ZIP inventory/digest; restore inactive and STOP. This step remains HELD now.
 Causal verdict remains static candidate vs no-match/incomplete; cannot claim origin/repair/current ordinary suite pass or PCoff.
+
+Preparation amendment: see bounded measurement spec addendum and brief docs/superpowers/briefs/2026-11-12-own-import-literal-cap-preparation.md. Original one-run entitlement consumed; only inactive amendment preparation and SAME-reviewer scoped review now authorized. New one-run release separately required.
