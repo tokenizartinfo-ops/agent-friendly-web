@@ -2,10 +2,10 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — complete inactive inspector awaiting final review
+## CURRENT — inspector fix round1; one keyless controls job released
 
-2026-11-12 14:47UTC. Candidate954bcbcc/tree9a003dc1/WF97b37fec/report6f1a0604, complete driver/59UNEXECUTEDfixtures/safe publisher/readback encoded. Rootref/fullfiles/2commit2pathcompare/reportexactappend/manualsinglefalsejob checked. Source0runs/0active/3188othersunchanged reported.
-[Complete review package](../reviews/2026-11-12-native-receipt-inspector-complete-package.md) includes FULL83462charworkflow+fullreportappend; API omitted largeWFdiff, no missingpatch claimedcomplete. SAMEsingleindependentreviewseat verifies priorI1–I4+allcurrentintegration beforeRootallowsanyjob/download/key/decryption. OriginalNative16 failedreadonly/Bskipped; Source625safeclosure, causeR1–R3stillUNKNOWN. No native retry/privatepayloadPC/newkey/Sourcebusinesschange. Allreadinessfalse; O5deferred.
+2026-11-12 14:53UTC. Complete954/WF97b review: I1–I4 ADDRESSED; newI5 timeout-rejection canbe falselygreen, I6 assignedID remote digest notcompared to upload +bodycap afterload. M1 independentgate fixtures overlap (planmandated correction); M2 invalidcounts renderedmissing is MINORDEFERRED forfinalreview. [Review](../reviews/2026-11-12-native-receipt-inspector-complete-review.md).
+[Fix round1 brief](../briefs/2026-11-12-native-receipt-inspector-fix-round1.md) allows minimal samewriter2pathpatch and ONE<=2min KEYLESScurrent-fixtures covering job, noenvironment/secrets/download/originalartifact/open/I0/SDK. Actualcodeverdict/digest/streamcap regressions required; freeze/readbacks. Unexpectedfailure safeF7restore+STOP; allpass COMPLETEamendedinspector/manualfalse/reportSTOP then same scopedFULL954..finalreview. No actualreceipt inspection yet; no Rcause/status known. Native16 failedreadonly/Bskipped closed625, privatepayloads remainGitHubonly; readinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 
