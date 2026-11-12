@@ -2008,3 +2008,114 @@ Expected two safe ZIP entries result.json andmanifest.json; purposeCONTROLS, nev
 Unexpected-failure rule now restores EXACTSAFEf7a71f1a0fa4f5ddf069ff411f008a098455e5cc COMPLETE7/manual/noinputs/noPush/all7literalfalse, plus this append only. No fix/retry/extra diagnostic/job. All3188otherblobs/modes remain625/954 unchanged; full ref/tree/WF/report/zeroactive readbacks follow. The amended real-inspector draft remains recoverable blob24a33f5913d070e577295a9c73e307cd8199a1d7/99343bytes, but is UNQUALIFIED and NOT installed for use. I5/I6/M1 covering acceptance remains incomplete due metadata gate; M2 counts distinction stays deferred. Root alone will classify available primary safe proof and rule any next step.
 
 STOP. No automatic repair, retry, activation, key access, original receipt inspection, source-business change or new permission.
+
+
+## Receipt inspector fix2 — one observable KEYLESS CONTROLS candidate / PENDING
+
+Root release88c4c159830d155d0221054ba68473d9270e20f0 @6cbdbe7549baf3189b52481ca8b6549309a6bf53; safeBASE844246c98f37de5e321e92803bbbf49a1aa607d3/tree d14e30dc. SAME solewriter, onlyworkflow+appendreport, all3188others/main protected. Root primary/same-review32791827 accepted I5/M1 current code and all76actual prior controls, but I6 remains integrationOPEN. Original43244518810 firstfailed predicate was lost; cause remainsUNKNOWN despite later equalmetadata/upload digests. No credential/provider/timing/field hypothesis is a ruling or repair.
+
+Minimal change is observational only: same shared validation/stream/digest/oneGET15s/success/output rules, split existing assertions into closed first-predicate labels and preserve original Rejected reason/Error identity. No validation relaxed or offset/retry/delay/poll/alternate endpoint. Current runMetadataReadback calls one fixed request, current readMetadataResponse/validateAssignedMetadata, then original GITHUB_OUTPUT write. It emits exactlyone safe JSON logline on success/failure, markerAFW_METADATA_READBACK/1, <=2048UTF8B. Fields are exact marker/source/run/attempt/assignedArtifactId/stage/firstFailedPredicate/reason/httpStatus/receivedBytes/timeoutObserved/verified. Context is current publicSource/run/attempt/assignedID only (strict typed sanitized/null). No arbitrary message/stack/body/header/URL/token/proxy/environment values. Observed HTTP integer100..599 ornull; actual streamed bytecount bounded0..4295032832; timeoutObserved only actual captured signal.aborted boolean ornull, never inferred from exception names. Unknown non-owned errors stayreasonunknown/firstunknown at actualstage; known UTF8/JSON/output operations get their actualsite label while original exception is rethrown. Reporting failures never replace a primary rejection.
+
+Nine stages: input/request/response/stream/utf8/json/validate/output/complete.
+Twenty-two predicates: none/unknown/assigned_id/upload_digest_type/upload_digest_format/http_status/response_body/stream_cap/utf8_decode/json_decode/metadata_object/artifact_id/artifact_name/artifact_expired/artifact_size/remote_digest_format/digest_equality/workflow_run_id/source_sha/source_branch/retention/output_write.
+Reasons: none/unknown/metadata_identity/metadata_digest/metadata_bound. Strict keys/enums/stringtypes/numericbounds/coherent verified outcome and2048B serialization checked before emission. Diagnostic stdout is public ONLY this closed line; stderr remains private. No raw error catch logging.
+
+Retained EXACT prior76 named checks/order, added15 meaningful CURRENT helper tests, total91/max96. Full current inventory:
+[
+  "zip_valid",
+  "zip_signed_descriptor",
+  "zip_extra",
+  "zip_traversal",
+  "zip_duplicate",
+  "zip_bad_crc",
+  "zip_link",
+  "zip_bad_range",
+  "failure_identity_valid",
+  "failure_identity_success_reject",
+  "failure_identity_role_reject",
+  "failure_identity_kind_reject",
+  "failure_identity_unknown_reject",
+  "ownership_valid",
+  "ownership_unknown_reject",
+  "ownership_enum_reject",
+  "optional_missing_unknown",
+  "full_result_valid",
+  "full_result_unknown_reject",
+  "tap_valid_canaries",
+  "tap_unknown_scalar",
+  "tap_duplicate_case",
+  "tap_case_number_collision",
+  "tap_wrapper_number_collision",
+  "tap_unknown_number_collision",
+  "tap_late_diag_comment",
+  "tap_late_diag_unrelated",
+  "tap_injected_name",
+  "tap_long_line",
+  "tap_long_block",
+  "public_authenticated_valid",
+  "gate_artifact_count",
+  "gate_artifact_actual",
+  "gate_artifact_candidate",
+  "gate_artifact_duration",
+  "gate_artifact_business",
+  "gate_authenticated_count",
+  "gate_authenticated_actual",
+  "gate_authenticated_candidate",
+  "gate_authenticated_duration",
+  "gate_authenticated_business",
+  "gate_inventory_count",
+  "gate_inventory_actual",
+  "gate_inventory_candidate",
+  "gate_inventory_duration",
+  "gate_inventory_business",
+  "gate_identity_count",
+  "gate_identity_actual",
+  "gate_identity_candidate",
+  "gate_identity_duration",
+  "gate_identity_business",
+  "scalar_boolean_wrong",
+  "scalar_false_null_wrong",
+  "scalar_array_hash_wrong",
+  "scalar_half_hash_wrong",
+  "scalar_boolean_valid",
+  "scalar_null_valid",
+  "scalar_integer_valid",
+  "scalar_typed_valid",
+  "verdict_accepted",
+  "verdict_parse_timeout_old_current",
+  "verdict_other_failure",
+  "verdict_rejected_status",
+  "verdict_partial_status",
+  "verdict_missing_clock",
+  "verdict_open_over_deadline",
+  "verdict_download_over_deadline",
+  "digest_match_bare",
+  "digest_match_prefixed",
+  "digest_mismatch_old_current",
+  "digest_upload_malformed",
+  "digest_remote_malformed",
+  "metadata_wrong_id",
+  "metadata_wrong_context",
+  "metadata_stream_valid",
+  "metadata_stream_overcap",
+  "diagnostic_http_rejected",
+  "diagnostic_json_malformed",
+  "diagnostic_stream_overcap",
+  "diagnostic_identity_first_field",
+  "diagnostic_digest_mismatch",
+  "diagnostic_success_output",
+  "diagnostic_unknown_request_error",
+  "diagnostic_observed_timeout",
+  "diagnostic_schema_extra_field",
+  "diagnostic_schema_arbitrary_enum",
+  "diagnostic_record_over_2048",
+  "diagnostic_primary_first_failure_preserved",
+  "diagnostic_output_write_error",
+  "diagnostic_utf8_malformed",
+  "diagnostic_input_id_rejected"
+]
+Added controls exercise rejectedHTTP403, malformedJSON, actual65537B cap/receivedbytes, concrete identity-first field, exactdigest mismatch, success/write/oneemission, unknownrequestError identity, observedaborted signal, schemaunknownfield/arbitraryenum/oversize, firstpredicate+primarypreserved when reporter also fails, outputwriteError identity, strictUTF8 and badinputIDbefore request. Tests invoke SAME current orchestration/helper/schema as actualreadback; no mirrored validator. All old76 currentinert checks retained; I5/M1 unchanged, M2 minor counts-invalid distinction DEFERRED.
+
+ONE new keyless Sourcepush attempt1<=2min/Node22.23.4 authorized; no GitHubenvironment/secrets bindings, no AFWkey supplied, no actual originalartifact/download/open/project, domain/SDK import, MF/I0/nativebusiness. Current fullcore identical between controls and COMPLETE amended inactive realinspector. Fixed controls CLI source-pin reads +runFixtures+closedproof only. StdNode/no npm. Only safe newly assigned controlsartifact gets metadata GET/current exact uploaddigestcomparison/streamcap, then exact2file safe inventory readback. Rawsyntax/fixture/TAP/code logs private; publiconlyCONTROLS result.json+manifest.json<=65536B, exact91IDs/counts/hash-only failure/coreSHA/allreadinessfalse. Commands remain node--check currentmodule; node currentmodule controls; independentfallback +strictseal; currentmetadatareadback (closed diagnostic stdout); assignedsafeactiondownload +strictfullinventory. No test executed in preparation: only grammar construction and byte-exact final7heredoc payload comparisons.
+
+Complete amended actual-inspector draft is recoverably preserved blob9994894916158e92665f780a30513015d8489273/117088bytes, still UNQUALIFIED/manual/noinputs/noPush/jobfalse with allreal drivers/publisher/readback. It is NOT activated. Freeze solecontrolscandidate throughterminal/evidence. Anyfailure => preserveactualclosedproof+diagnostic, EXACTsafeF7complete7manualfalse/report/readbacks0active/STOP, no repair/retry. OnlyALLPASS allows reconcile that COMPLETE actualinspector +currentsharedhelpers/diagnostic +report/readbacks/STOP for SAMEreviewer; no privateinspection release. Current outcomesPENDING, originalR1–R3cause/statusUNKNOWN, Native16consumed/no replay.
