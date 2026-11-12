@@ -2,13 +2,11 @@
 
 PROJECTAFW; repositorytokenizartinfo-ops/agent-friendly-web/public1347578006; Source/SYN GitHubActions; originGitHubconnector; Sourcebranchfeat/finite-native-cleanup-20261101; allowedONLY2SourcepathsWF+appendreport/ownCAS/exactF7rollback. Rootdocsbranchdocs/finite-pcoff-continuation-20261103 ownsledger/spec/plan. ParentNativeTask2ledger2026-11-07 remainspending; thisisaseparateboundeddiagnosticunit.
 
-## CURRENT — Task1 keyless PASS; COMPLETE actual proposal inactive; independent review active
+## CURRENT — Task1 review HOLD; fixround1/5 I1/I2/I3 released; actualTask2 held
 
-2026-11-12 17:49 UTC. Solekeyless43272182415/1 atc0524de57c4b688c11df67c58bcc72cd3f472870 SUCCESS:91Core+24supplement+16V1pair+16ZIP ALLPASS. Root independent safe2312BZIP/CRC/twoJSON/closedDTO/currentidentity/wholemanifest/91+24orderedIDs/codehash audit PASS. Reference7fb8dea6/tests e279e658/bootstrap2a04ef50; reconstructedverifier40595B/73d5579a matchesruntime. [Primaryproof](../reviews/2026-11-12-reference-supplement-keyless-primary.md). No privatecipher/key/native/SDK/I0 accessed; permitconsumed.
+2026-11-12 17:52 UTC. Keyless43272182415/1 PASS91+24+16+16 and Source498completeinactive preserved. SAMEexpertfullreviewfound noCritical/3Important: rejectedrowprovenancebarrier; cleanupunsettledoverwritesprimary; unexpectedIOclassifiedinvalidpartial. No pre-authfile-read or observedleakfound. Rootacceptedminimalfixrulings andONEnewKEYLESS2+2 entitlement in [fixbrief](../briefs/2026-11-12-reference-supplement-task1-fix1.md), [findings](../reviews/2026-11-12-reference-supplement-task1-findings.md). OriginalwriterresumesexclusiveSource, noOriginalcipher/key/SDK/native/CF/runtimeaccess. Same2paths, Cored514/ZIPb36c/3188protectedunchanged. FailureF7/0activeSTOP; successcompleteactual5+2inactive/SAMEscopedreview. ActualTask2HELD, R1/R2valuesunobserved, allreadinessfalse.
 
-Source498791705aa1715da3fb3bf43961e90920b098bc/treeb05da0dfee25b37fca3d4d67ef579b6362f49c5d, WF05ca1fbe9eaf3aa7d75e939a28ad9553d7cb0da3 COMPLETEactual5+2INACTIVE/BOTHfalse/manual/noinputs/nopush. Report5adaf9a6 retains233078prefix. Root fullbodies/ref/tree verified3190leaves/3188protected/only2paths, main0c9c475 unchanged, queued/inprogress/waiting/pending/requested all0 at17:48:48Z. Testedhelperbodies/Cored514/ZIPb36c byteidentical. FreshimplementerSTOPPED.
-
-SAMEexpertprequalificationreviewer now reviewing COMPLETE task range BASE093..498, fullvalidatedU10global/logical/reportdiffs andwholefinalcode/spec/plan/preflight/brief under [package](../reviews/2026-11-12-reference-supplement-task1-review-package.md), Rootdocs30f7731d. ActualTask2 HELD pendingcleanreview/separateexactRootrelease. R1/R2membership/values unobserved; OriginalNative43229236340 FAILED, no provedcause/repair, noNative retry. Allreadinessfalse; no userintervention needed.
+Task1 minor(deferred): aggregateabsent vs ledgerwordmissing, numericnulls preserved; outsidefixloop. KnownM2deferred. No userinterventionneeded.
 ## Preflight scan and Root rulings
 
 | Scope | Producer -> consumer / internal agreement | Finding and ruling |
@@ -33,3 +31,15 @@ Ruling: no user design check-in because Gabriel explicitly delegated choices/con
 ## Independent preflight result
 
 Reviewer: viable, with three concrete conditions. Root rulings in docs/superpowers/reviews/2026-11-12-reference-supplement-preflight-rulings.md: HTTP from httpSpans and recorded-zero semantics, no cleanup while child termination unconfirmed or clock renewed, valid partial transport distinct from completeness. All resolved in spec/plan before Task1. Root may release one keyless preparation attempt; actual private projection remains held. Parent Source still093/F7.
+
+## Fixloop ruling — Task1 round1/5
+
+
+
+AcceptedI1/I2/I3 asloadbearing. I1 is schema/publicationbarrier flaw, NOT observedprivateleak orprematurefile-read; keeptruthfulscope. Minimal stronger rule: every rejected supplement carries both exact unknownReference(case,not_examined) rows. Coordinator/fallback/validator agree; authenticatedcomplete/validpartial unchanged. Lostmetricsafterfailedcleanup preferable to unauth/unclassifiedfacts.
+
+I2 preserve the first closed failure using fail() semantics; settled=false and cleanup phaseunknown continue torecorduncertainty. Neverrenew/deletewithunconfirmedchild. Combinedprimaryfailure+unsettledcleanupmustbetested.
+
+I3 distinguish provencontent/policyreject fromunexpectedOS/EIO. Only proven missing/oversize/shape/link/UTF8JSON failures yieldclassifiedrows; unexpectedread/stat/open/etc failure propagates and overallcoordinatorrejectswithrowsnotexamined+safeexistingcleanup. Testcurrentreaderfaultseam as needed, productionmustnotacceptenvironment/pathoverride/noalternateFS. Keepactualfixedpaths/caps/currentfunctionreuse.
+
+No structuralbudget/core/SDK changes. Fixround1/5 underSDD, originalimplementer resumes. One new scoped KEYLESS2+2covering attempt expresslyreleased for amendedcode; oldpermitconsumed, notrerun. FailureF7/report/0activeSTOP/no retry. Successcompleteamendedactual5+2INACTIVE/fullreadbacksSTOP/SAMEreviewer. ActualTask2 stillHELD.

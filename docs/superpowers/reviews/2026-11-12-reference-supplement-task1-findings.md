@@ -1,0 +1,19 @@
+# Task1 review — HOLD actual supplement
+
+2026-11-12 17:52 UTC. SAMEexpertreviewer independentlyreviewed full093..498. NoCritical; threeImportant open. ActualTask2 remainsHELD; noOriginalcipher/key/privateopen undertaken. Qualifiedkeyless controls passed butdidnotcoverthesecombinedbarriers.
+
+1. Important I1: El esquema de publicación admite hechos suplementarios sin procedencia autenticada. Para un sobre rejected, validateSupplementResult exige un fallo tipado, pero acepta filas R1/R2 present aunque la inspección anidada indique que no hubo autenticación o verificación de inventario. El publicador escribe ese sobre y el workflow lo puede subir antes de que falle el gate de transporte. El lector real sí comprueba la autenticación antes de abrir los dos archivos; la revisión no encontró una lectura privada previa a ese control ni una fuga observada. La brecha está en la última barrera de publicación. Sin procedencia autenticada, ambas filas deben coincidir íntegramente con not_examined, incluso en un sobre rechazado. WF498 lines616–622/704–723/845–854.
+2. Important I2: Una limpieza cuya terminación no se confirma borra el fallo primario. Si falla reference-child y después cleanup-child devuelve settled:false, la asignación directa a failure sustituye projection/project_failed por cleanup/termination_unverified. El resultado queda rechazado y la fase de limpieza queda unknown, pero se pierde la primera causa. El control actual cubre los dos fallos por separado. El caso combinado debe conservar el primer fallo, registrar la limpieza incierta y mantener el rechazo. WF498647–668/768–771.
+3. Important I3: Un fallo de E/S puede obtener un partial válido. readReference clasifica cualquier excepción distinta de ENOENT u oversize como fila invalid. Si open, stat o readFile fallan por E/S, el productor y el verificador pueden certificar un parcial como si hubieran establecido que el recibo era inválido. Reservar invalid para rechazo comprobado de estructura/enlace/codificación/contenido. Un fallo de lectura que impida clasificar el archivo debe propagarse como fallo del proyector, con valores desconocidos y limpieza según el presupuesto existente. WF498635–645/619–633.
+
+Task1 minor(deferred): aggregate absent enum differs from earlier ledger word missing, numbers remainnull; this doesnotenterfixloop. Original rawlookup absent enum is separate. Rootwillpinspellingconsistentlybeforeactualcontract acceptance, withoutsilentrewritinghistory. KnownM2remainsdeferred.
+
+## Root fix1 rulings
+
+AcceptedI1/I2/I3 asloadbearing. I1 is schema/publicationbarrier flaw, NOT observedprivateleak orprematurefile-read; keeptruthfulscope. Minimal stronger rule: every rejected supplement carries both exact unknownReference(case,not_examined) rows. Coordinator/fallback/validator agree; authenticatedcomplete/validpartial unchanged. Lostmetricsafterfailedcleanup preferable to unauth/unclassifiedfacts.
+
+I2 preserve the first closed failure using fail() semantics; settled=false and cleanup phaseunknown continue torecorduncertainty. Neverrenew/deletewithunconfirmedchild. Combinedprimaryfailure+unsettledcleanupmustbetested.
+
+I3 distinguish provencontent/policyreject fromunexpectedOS/EIO. Only proven missing/oversize/shape/link/UTF8JSON failures yieldclassifiedrows; unexpectedread/stat/open/etc failure propagates and overallcoordinatorrejectswithrowsnotexamined+safeexistingcleanup. Testcurrentreaderfaultseam as needed, productionmustnotacceptenvironment/pathoverride/noalternateFS. Keepactualfixedpaths/caps/currentfunctionreuse.
+
+No structuralbudget/core/SDK changes. Fixround1/5 underSDD, originalimplementer resumes. One new scoped KEYLESS2+2covering attempt expresslyreleased for amendedcode; oldpermitconsumed, notrerun. FailureF7/report/0activeSTOP/no retry. Successcompleteamendedactual5+2INACTIVE/fullreadbacksSTOP/SAMEreviewer. ActualTask2 stillHELD.
