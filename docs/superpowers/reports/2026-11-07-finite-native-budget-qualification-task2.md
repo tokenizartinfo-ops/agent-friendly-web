@@ -1985,3 +1985,26 @@ Original954 old verdict and old digest-format predicates were copied exactly fro
 Commands prepared: node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs"; node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" controls; independent closed fallback; strict local seal validator; same current metadata helper; actions/download-artifact@v4 ONLY newly assigned safe pair; strict remote complete-inventory validator. Raw syntax/controls output stays runner-private. Public exactresult.json+manifest.json purposeCONTROLS, combined<=65536B, knownIDs/counts/fixedreason/messagehash-only failure; all originalArtifactAccessed/custodyOpened/SDKImported/I0Created and five operationalflagsfalse. Same assigned artifact ID remote/upload digest comparison and7d retention, then full two-file byte-equal/readback/current corehash/context/manifest/inventory checks; no original/private payload readback. Final gate requires actual controls success plus metadata+complete inventory. Failure will preserve actual closed proof and restore EXACTSAFEf7a71 complete7/manualfalse/report/0active/STOP, no repair/retry.
 
 Amended COMPLETE inactive real-inspector workflow is durably preserved as blob24a33f5913d070e577295a9c73e307cd8199a1d7, 99343 UTF8bytes (no activation); all real drivers remain, core/publisher/verdict/readback helpers match tested candidate source exactly. All final generated heredoc bytes compared statically; grammar construction only, no generated function invoked in preparation. Current controls job has not started at this report append; outcomes arePENDING. Freeze candidate until terminal/assigned-ID/inventory. Allpass permits only reconciliation of complete MANUAL/noinputs/noPush/jobliteralfalse inspector, final report/readbacks/0active/STOP for SAMEreviewer FULL954..final. No actual private inspection or Native16 retry.
+
+
+## Receipt inspector fix1 — unexpected metadata gate FAILURE / exactSAFE restore / STOP
+
+Sole authorized KEYLESS CONTROLS run43244518810/attempt1, frozenSource59bb67d60ab6b32c57b81ff3cfbb9117a95aa0b4/treeee69323cbd43a7c086f8077c85ce60e373b27f3d/WFf256276628fb624a74f648b4a8cb69dfac1d3e4f, created2026-11-12T15:08:14Z, terminalFAILURE updated15:08:29Z. Singlejob131273482472 started15:08:18Z, completed15:08:28Z. Materialization/syntax SUCCESS15:08:23; current76-inert-fixture step SUCCESS15:08:23; strict local closedproof SUCCESS15:08:23; safe upload SUCCESS15:08:23..24. Assigned remote/upload digest + boundedmetadata step FAILURE15:08:24..25. Safeartifact retrieval and full remoteinventory were SKIPPED. Final terminal gate FAILURE15:08:25. This is not a passing covering job or inspection qualification. Metadata rejection's first site/cause remainsUNKNOWN; no inference from label, artifact presence or absent rawprivate log.
+
+Exactlyone public safe CONTROLS artifact assigned:
+{
+  "id": 13955248447,
+  "name": "afw-readonly-receipt-inspection-43244518810-1",
+  "bytes": 1682,
+  "digest": "sha256:c13f9bfeb01dea46ddf66ef874d160acef25490a1d225dfb8ef3e7dc7747a2f5",
+  "created": "2026-11-12T15:08:24Z",
+  "expires": "2026-11-19T15:08:23Z",
+  "expired": false,
+  "source": "59bb67d60ab6b32c57b81ff3cfbb9117a95aa0b4",
+  "run": 43244518810
+}
+Expected two safe ZIP entries result.json andmanifest.json; purposeCONTROLS, never native case evidence. Artifact metadata was read directly from the exact run. This seat has not downloaded this safeZIP; actual closed DTO and CRC/full inner inventory remain pending Root's independent safe audit. The workflow's local proof/controls steps succeeded, but same-ID remote digest/fullinventory gate DID NOT; do not promote76 counts/counterexample receipts to fully audited evidence from step labels alone. Existing rawsyntax/fixture/metadata logs remain runner-private and were not retained publicly; public artifact contains only the closed safe pair/hash-only failures, not rawcode/TAP/Source/canary output. No original artifact13949168304 access, key/environment binding, custody opening, SDK, I0 or native work occurred. No actual private inspection or Native16 retry.
+
+Unexpected-failure rule now restores EXACTSAFEf7a71f1a0fa4f5ddf069ff411f008a098455e5cc COMPLETE7/manual/noinputs/noPush/all7literalfalse, plus this append only. No fix/retry/extra diagnostic/job. All3188otherblobs/modes remain625/954 unchanged; full ref/tree/WF/report/zeroactive readbacks follow. The amended real-inspector draft remains recoverable blob24a33f5913d070e577295a9c73e307cd8199a1d7/99343bytes, but is UNQUALIFIED and NOT installed for use. I5/I6/M1 covering acceptance remains incomplete due metadata gate; M2 counts distinction stays deferred. Root alone will classify available primary safe proof and rule any next step.
+
+STOP. No automatic repair, retry, activation, key access, original receipt inspection, source-business change or new permission.
