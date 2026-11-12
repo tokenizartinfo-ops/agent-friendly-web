@@ -194,10 +194,20 @@ export function createBudgetDiagnostics(options={}){
  return Object.freeze({root,child,begin,bytes,logical,scopeLogical,cancel,settle,snapshot,incomplete});
 }
 const UNOBSERVABLE_THEN=Symbol('unobservable-then');
+const passivePrototypeOf=Object.getPrototypeOf,passiveDescriptor=Object.getOwnPropertyDescriptor,passiveHasOwn=Object.hasOwn;
+const ordinaryPrototype=Object.prototype,promisePrototype=Promise.prototype;
 function passiveThen(value){
  if(!nativeObject(value))return null;
- for(let object=value;object!==null;object=Object.getPrototypeOf(object)){const d=Object.getOwnPropertyDescriptor(object,'then');if(d)return Object.hasOwn(d,'value')&&typeof d.value==='function'?d.value:UNOBSERVABLE_THEN;}
- return null;
+ let nonCallable=false,ordinary=false;
+ for(let object=value;object!==null;object=passivePrototypeOf(object)){
+  if(nonCallable&&object===promisePrototype)return UNOBSERVABLE_THEN;
+  if(object===ordinaryPrototype)ordinary=true;
+  const descriptor=passiveDescriptor(object,'then');if(!descriptor)continue;
+  if(!passiveHasOwn(descriptor,'value'))return UNOBSERVABLE_THEN;
+  if(typeof descriptor.value==='function')return nonCallable?UNOBSERVABLE_THEN:descriptor.value;
+  nonCallable=true;
+ }
+ return nonCallable&&!ordinary?UNOBSERVABLE_THEN:null;
 }
 export function observeBudgetPromise(collector,opRef,promise){
  try{
