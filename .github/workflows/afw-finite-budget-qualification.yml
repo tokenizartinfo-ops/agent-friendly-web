@@ -1,5 +1,5 @@
 name: AFW finite budget qualification
-run-name: AFW Task1 fix round1 causal red ${{ github.sha }}
+run-name: AFW Task1 fix round1 causal red corrected subprocess ${{ github.sha }}
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]

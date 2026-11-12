@@ -552,7 +552,7 @@ async function coldPhaseReentry(){
 
 function optionalBudgetDefaultMode(){
  const env={...process.env};delete env.AFW_BUDGET_GROUP;
- const run=group=>spawnSync(process.execPath,['--test','--test-reporter=tap','test/mcp-qa-finite-budget-native.test.mjs'],{env:group===undefined?env:{...env,AFW_BUDGET_GROUP:group},encoding:'utf8',timeout:30000,maxBuffer:256*1024});
+ const run=group=>spawnSync(process.execPath,['test/mcp-qa-finite-budget-native.test.mjs'],{env:group===undefined?env:{...env,AFW_BUDGET_GROUP:group},encoding:'utf8',timeout:30000,maxBuffer:256*1024});
  const ordinary=run(undefined);
  assert.equal(ordinary.error,undefined,'bounded default-mode subprocess');
  assert.equal(ordinary.status,0,'R1 optional qualification inactive in ordinary command');
@@ -573,7 +573,12 @@ function truncatedPeakConsistency(){
   s=>{s.totals.peak=2;}
  ];
  const rejected=mutations.map(mutate=>{const sample=structuredClone(valid);mutate(sample);try{verifyObservedBudgetMetrics(sample);return false;}catch(error){assert.equal(error.code,'ERR_ASSERTION');return true;}});
- assert.deepEqual(rejected,[true,true,true],'R2 scope group and global peak reconciliation');
+ const multi=createBudgetDiagnostics({testRevision:revision,workerRole:'QA',maxRows:1}),left=multi.root({},{phase:'setup',deadline:30000,kind:'control'}),right=multi.root({},{phase:'restore',deadline:30000,kind:'control'});
+ for(const [i,root,phase]of [[0,left,'setup'],[1,left,'setup'],[2,right,'restore']]){const op=multi.begin(root,null,{phase,resourceClass:'KV',operation:'get',at:i*2});multi.settle(op,{at:i*2+1,status:'fulfilled'});}
+ const multiple=multi.snapshot();assert.equal(verifyObservedBudgetMetrics(multiple).level,'observed_metrics');assert.deepEqual([multiple.totals.peak,...multiple.totals.scopes.map(s=>s.peak),...multiple.byPhaseResource.map(g=>g.peak)],[1,1,1,1,1]);
+ const impossible=structuredClone(multiple);impossible.totals.peak=3;
+ try{verifyObservedBudgetMetrics(impossible);rejected.push(false);}catch(error){assert.equal(error.code,'ERR_ASSERTION');rejected.push(true);}
+ assert.deepEqual(rejected,[true,true,true,true],'R2 scope group and global peak reconciliation');
 }
 
 async function unobservablePromiseSettlement(){
