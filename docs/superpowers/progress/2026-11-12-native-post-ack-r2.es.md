@@ -19,3 +19,14 @@ Scopeworld+report+4newfiles/F7and3188oldleavesprotected; defaultgraphsbyteidenti
 | Diagnostic / normal operation | Two opt-in QA emission changes; M and profile-OFF baseline behavior unchanged | Synchronous overhead remains an observation limit. Ruling: it may identify a current boundary, never prove historical timing cause or justify budget expansion. |
 
 Preflight builder review pending. This scan does not release implementation or execution.
+
+## Preflight builder review and Root rulings — 22:09 UTC
+
+Independent Astra review returned HOLD: Important N1 (same-job step binding versus independent isolation claim) and N2 (unavailable outcome/custody mapping and byte-level observation digest). It also identified headroom as an implementation gate.
+
+Ruling: retain one producer job and claim only absent key environment binding; no independent same-runner isolation — avoids unauthorized raw handoff/infrastructure; cost if wrong is no stronger confidentiality certification, explicitly unclaimed.
+Ruling: unavailable is not failed, never qualifies; existing consumer-failure kind may quarantine partial producer evidence only, with unavailable original outcome and no verified custody claim — preserves evidence without inventing Native completion.
+Ruling: exact rebuilt JSON field order/UTF8/no-newline SHA contract + fixed known-answer vector within existing controls — prevents cross-implementation digest ambiguity.
+Ruling: current official job metadata/Date + precision/request/age margins supplies conservative headroom; missing or <240s blocks before allocation — possible lost trial opportunity, never budget expansion.
+
+Spec/plan updated; independent scoped preflight re-review PENDING. Task1 and Native permits still NOT RELEASED.

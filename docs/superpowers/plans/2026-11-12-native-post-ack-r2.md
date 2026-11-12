@@ -54,3 +54,7 @@
 ## Self-review
 
 Scope6filesmapped; newNodefixturemustnotimportworld(cycle); Worldfixedexports/testMODEsignaturesconsistent. Everyprivacy/provenance/error/selection/custody/budgetrequirementcoveredTask1tests+Task2fences. CurrentpreflightvsStage1identityexplicit; defaultbyteidentitysame-defines, no self-hashgraphloop. Unique-qualified-selection avoidscollectorarrivalcausality. ExistingNativeassertionfailurepreserved. No userquestionneededunderpersistentdecisiondelegation; Sourcepreflightisnext, notexecution.
+
+## Binding preflight additions
+
+Read SPEC rulings N1–N4 as part of both tasks. N1 guarantees step environment binding only, not independent same-runner key isolation; key-preflight/seal/open are the only three key-bearing steps. N2 distinguishes original unavailable from failed and allows only nonqualifying encrypted quarantine of a partial producer-failure archive. N3 fixes digest projection bytes and known-answer controls within schema/provenance. N4 requires conservative current job timing; no timer reset or inferred headroom. Task1 must implement and qualify all four before Native pipeline review. No additional Source paths or runtime authority.
