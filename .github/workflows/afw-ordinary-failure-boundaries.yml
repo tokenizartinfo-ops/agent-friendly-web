@@ -1,7 +1,9 @@
-name: AFW ordinary failure boundaries (INACTIVE)
+name: AFW ordinary failure boundaries (ONE PROBE)
 # PREPARATION ONLY. Root review and a separate single-run release are required.
 'on':
-  workflow_dispatch:
+  push:
+    branches: [diag/afw-failure-boundaries-20261112]
+    paths: [.github/workflows/afw-ordinary-failure-boundaries.yml]
 permissions:
   contents: read
   actions: read
@@ -10,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   boundaries:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-failure-boundaries-20261112' && github.event_name == 'workflow_dispatch' && github.run_attempt == '1' }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-failure-boundaries-20261112' && github.event_name == 'push' && github.run_attempt == '1' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
