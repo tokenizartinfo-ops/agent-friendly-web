@@ -1,5 +1,5 @@
 name: AFW finite budget qualification
-run-name: AFW Task1 R4 source-faithful covering green ${{ github.sha }}
+run-name: AFW Task1 reporter only ordinary diagnostic ${{ github.sha }}
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -10,13 +10,11 @@ permissions:
 concurrency:
   group: afw-finite-budget-qualification
   cancel-in-progress: false
-env:
-  AFW_BUDGET_GROUP: positive
 jobs:
-  pure:
+  diagnostic:
     if: ${{ github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 7
+    timeout-minutes: 12
     outputs:
       artifact-id: ${{ steps.upload.outputs.artifact-id }}
     steps:
@@ -30,14 +28,17 @@ jobs:
           test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
           test "$GITHUB_RUN_ATTEMPT" = 1
           test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
-          mkdir -m 700 "$RUNNER_TEMP/afw-pure-private"
+          test -z "${AFW_BUDGET_GROUP+x}"
+          mkdir -m 700 "$RUNNER_TEMP/afw-ordinary-diag"
+          mkdir -m 700 "$RUNNER_TEMP/afw-ordinary-diag/private"
+          mkdir -m 700 "$RUNNER_TEMP/afw-ordinary-diag/public"
       - name: Checkout this exact revision
         uses: actions/checkout@v4
         with:
           repository: tokenizartinfo-ops/agent-friendly-web
           ref: ${{ github.sha }}
           persist-credentials: false
-          fetch-depth: 1
+          fetch-depth: 0
       - name: Use Node 22
         uses: actions/setup-node@v4
         with:
@@ -48,94 +49,175 @@ jobs:
           set -euo pipefail
           umask 077
           npm ci --ignore-scripts --no-audit --no-fund >"$RUNNER_TEMP/afw-locked-install.log" 2>&1 || { echo locked_install_failed; exit 1; }
-      - name: Run eight pure qualifications on actual source
-        id: cases
+      - name: Prepare temporary Node reporter and bounded wrapper
+        id: reporter_setup
         shell: bash
         run: |
           set -euo pipefail
           umask 077
+          cat >"$RUNNER_TEMP/afw-ordinary-diag/reporter.mjs" <<'AFW_REPORTER'
+          import {readFileSync,writeFileSync,renameSync} from 'node:fs';
+          import {resolve} from 'node:path';
+          const env=process.env,source=env.GITHUB_SHA,run=env.GITHUB_RUN_ID,attempt=Number(env.GITHUB_RUN_ATTEMPT);
+          if(!/^[a-f0-9]{40}$/.test(source??'')||!/^\d+$/.test(run??'')||attempt!==1)throw Error('reporter context');
+          const allowed=JSON.parse(readFileSync(env.AFW_REPORTER_ALLOWLIST,'utf8')),paths=new Map();
+          for(const path of allowed){if(!/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(path))throw Error('reporter allowlist');paths.set(resolve(path),path);}
+          const counters=()=>({dequeued:0,completed:0,passed:0,failed:0,skipped:0,todo:0,summaries:0});
+          const state={source,run,attempt,utc:new Date().toISOString(),elapsedMs:0,counts:counters(),files:allowed.map(file=>({file,type:null,line:null,column:null,nesting:null,counts:counters(),summary:null,codes:[]})),totals:null};
+          const files=new Map(state.files.map(row=>[row.file,row])),started=Date.now(),codes=new Set(['ERR_ASSERTION','ERR_TEST_FAILURE','ERR_TEST_TIMEOUT','ERR_INVALID_ARG_TYPE','ERR_MODULE_NOT_FOUND','ERR_UNKNOWN_BUILTIN_MODULE']);
+          const data=(o,k)=>{if(!o||typeof o!=='object')return undefined;const d=Object.getOwnPropertyDescriptor(o,k);return d&&Object.hasOwn(d,'value')?d.value:undefined;};
+          const num=value=>Number.isSafeInteger(value)&&value>=0?value:null;
+          const scalar=value=>typeof value==='number'&&Number.isFinite(value)&&value>=0?value:null;
+          const countKeys=['tests','suites','passed','failed','cancelled','skipped','todo','topLevel'];
+          const summary=d=>({counts:Object.fromEntries(countKeys.map(k=>[k,num(data(data(d,'counts'),k))])),success:data(d,'success')===true?1:data(d,'success')===false?0:null,durationMs:scalar(data(d,'duration_ms'))});
+          const plus=(target,key)=>{target[key]=target[key]===null?null:num(target[key]+1);};
+          function persist(){state.utc=new Date().toISOString();state.elapsedMs=Date.now()-started;writeFileSync(env.AFW_REPORTER_STATE+'.tmp',JSON.stringify(state),{mode:0o600});renameSync(env.AFW_REPORTER_STATE+'.tmp',env.AFW_REPORTER_STATE);}
+          function errorCodes(error){const found=[];for(let i=0;i<2&&error;i++,error=data(error,'cause')){const code=data(error,'code');if(codes.has(code)&&!found.includes(code))found.push(code);}return found;}
+          export default async function* reporter(events){
+           persist();const timer=setInterval(persist,1000);timer.unref();let lastOutput=0;
+           try{
+            for await(const event of events){
+             if(!['test:dequeue','test:complete','test:summary'].includes(event.type))continue;
+             const d=event.data,fileValue=data(d,'file'),file=typeof fileValue==='string'?paths.get(resolve(fileValue))??null:null,row=files.get(file);
+             const record={type:event.type,source,run,attempt,utc:new Date().toISOString(),elapsedMs:Date.now()-started,file,line:num(data(d,'line')),column:num(data(d,'column')),nesting:num(data(d,'nesting'))};
+             if(row){row.type=event.type;for(const key of ['line','column','nesting'])if(record[key]!==null)row[key]=record[key];}
+             if(event.type==='test:dequeue'){plus(state.counts,'dequeued');if(row)plus(row.counts,'dequeued');}
+             if(event.type==='test:complete'){
+              const detail=data(d,'details'),passed=data(detail,'passed'),skip=data(d,'skip'),todo=data(d,'todo');
+              const increments=['completed',...(passed===true?['passed']:passed===false?['failed']:[]),...(skip!==undefined&&skip!==false?['skipped']:[]),...(todo!==undefined&&todo!==false?['todo']:[])];
+              for(const key of increments){plus(state.counts,key);if(row)plus(row.counts,key);}
+              record.passed=passed===true?1:0;record.failed=passed===false?1:0;record.codes=errorCodes(data(detail,'error'));
+              if(row)row.codes=[...new Set([...row.codes,...record.codes])];
+             }
+             if(event.type==='test:summary'){plus(state.counts,'summaries');record.summary=summary(d);if(row){plus(row.counts,'summaries');row.summary=record.summary;}if(fileValue===undefined)state.totals=record.summary;}
+             if(event.type==='test:summary'||record.failed===1)persist();
+             if(Date.now()-lastOutput>=1000||event.type==='test:summary'||record.failed===1){lastOutput=Date.now();const line=JSON.stringify(record);if(Buffer.byteLength(line)>2048)throw Error('reporter record bound');yield line+'\n';}
+            }
+           }finally{clearInterval(timer);persist();}
+          }
+          
+          AFW_REPORTER
+          cat >"$RUNNER_TEMP/afw-ordinary-diag/wrapper.mjs" <<'AFW_WRAPPER'
+          import assert from 'node:assert/strict';
+          import {spawn,execFileSync} from 'node:child_process';
+          import {readFileSync,writeFileSync,mkdirSync,openSync,closeSync,existsSync,readdirSync,createReadStream,statSync} from 'node:fs';
+          import {join,resolve} from 'node:path';
+          import {createHash} from 'node:crypto';
+          const env=process.env,root=join(env.RUNNER_TEMP,'afw-ordinary-diag'),privateDir=join(root,'private'),publicDir=join(root,'public'),reporter=join(root,'reporter.mjs'),mode=process.argv[2];
+          assert(['plumbing','ordinary'].includes(mode));assert(/^[a-f0-9]{40}$/.test(env.GITHUB_SHA));assert(/^\d+$/.test(env.GITHUB_RUN_ID));assert.equal(env.GITHUB_RUN_ATTEMPT,'1');
+          const context={source:env.GITHUB_SHA,run:env.GITHUB_RUN_ID,attempt:1};
+          const digest=async path=>{if(!existsSync(path))return {bytes:null,sha256:null};const bytes=statSync(path).size,hash=createHash('sha256');for await(const chunk of createReadStream(path,{highWaterMark:65536}))hash.update(chunk);return {bytes,sha256:hash.digest('hex')};};
+          const read=path=>{try{return JSON.parse(readFileSync(path,'utf8'));}catch{return null;}};
+          const safeSummary=result=>({type:'diagnostic:result',...context,status:result.status,exit:result.exit,elapsedMs:result.elapsedMs,counts:result.state?.counts??null,totals:result.state?.totals??null});
+          async function execute(label,files,allowlist,limit){
+           const base=join(privateDir,label);mkdirSync(base,{mode:0o700});
+           const manifest=join(base,'allowlist.json'),statePath=join(base,'progress.json'),specPath=join(base,'spec.log'),progressPath=join(base,'progress.ndjson'),stderrPath=join(base,'stderr.log');
+           writeFileSync(manifest,JSON.stringify(allowlist),{mode:0o600});
+           const childEnv={...env,AFW_REPORTER_ALLOWLIST:manifest,AFW_REPORTER_STATE:statePath};delete childEnv.AFW_BUDGET_GROUP;delete childEnv.NODE_TEST_CONTEXT;
+           const specFd=openSync(specPath,'wx',0o600),stderrFd=openSync(stderrPath,'wx',0o600);closeSync(specFd);
+           const args=['--test','--test-reporter=spec','--test-reporter='+reporter,'--test-reporter-destination='+specPath,'--test-reporter-destination='+progressPath,...files];
+           const started=Date.now(),child=spawn(process.execPath,args,{env:childEnv,detached:true,stdio:['ignore','ignore',stderrFd]});
+           let timedOut=false,killDone=null,startup=false;
+           child.once('error',()=>{startup=true;});
+           const stop=()=>{timedOut=true;killDone=new Promise(done=>{try{process.kill(-child.pid,'SIGTERM');}catch{}setTimeout(()=>{try{process.kill(-child.pid,'SIGKILL');}catch{}done();},5000);});};
+           const deadline=setTimeout(stop,limit);
+           const breadcrumbs=setInterval(()=>{if(label!=='ordinary')return;const s=read(statePath),line='AFW_ORDINARY_PROGRESS '+JSON.stringify({type:'diagnostic:progress',...context,utc:new Date().toISOString(),elapsedMs:Date.now()-started,counts:s?.counts??null,filesStarted:s?.files.filter(f=>f.counts.dequeued>0).length??null,filesWithSummary:s?.files.filter(f=>f.summary!==null).length??null,pending:s?.files.filter(f=>f.counts.dequeued>f.counts.completed&&f.summary===null).slice(0,4).map(({file,type,line,column,nesting})=>({file,type,line,column,nesting}))??null});assert(Buffer.byteLength(line)<=2048);console.log(line);},15000);
+           const exit=await new Promise(done=>child.once('close',code=>done(Number.isSafeInteger(code)&&code>=0?code:null)));
+           clearTimeout(deadline);if(killDone)await killDone;clearInterval(breadcrumbs);closeSync(stderrFd);
+           const state=read(statePath),status=timedOut?'timeout':startup?'unknown':exit===0&&state?.totals?.success===1?'passed':exit!==null&&state?.totals?'failed':'unknown';
+           const result={...context,status,exit,elapsedMs:Date.now()-started,state,spec:await digest(specPath),stderr:await digest(stderrPath),progress:await digest(progressPath)};
+           writeFileSync(join(base,'result.json'),JSON.stringify(result),{mode:0o600});return result;
+          }
+          try{
+           if(mode==='plumbing'){
+            const canary='AFW_REPORTER_CANARY_PAYLOAD_MUST_NOT_ESCAPE';
+            const sources={
+             pass:"import test from 'node:test';test('"+canary+"',t=>{console.log('"+canary+"');console.error('"+canary+"');t.diagnostic('"+canary+"');});",
+             fail:"import test from 'node:test';test('"+canary+"',()=>{throw Object.assign(Error('"+canary+"'),{code:'ERR_ASSERTION',actual:'"+canary+"',expected:'"+canary+"'});});",
+             hang:"import test from 'node:test';test('"+canary+"',async()=>{console.log('"+canary+"');await new Promise(resolve=>setTimeout(resolve,60000));});"
+            },results=[];
+            for(const label of ['pass','fail','hang']){
+             const path=join(privateDir,label+'.test.mjs');writeFileSync(path,sources[label],{mode:0o600});
+             const result=await execute(label,[path],[],label==='hang'?2000:15000);
+             results.push(safeSummary(result));writeFileSync(join(publicDir,'plumbing-progress.json'),JSON.stringify(results),{mode:0o600});
+             const output=readFileSync(join(privateDir,label,'progress.ndjson'),'utf8'),checkpoint=JSON.stringify(result.state);
+             assert(!output.includes(canary)&&!checkpoint.includes(canary));assert(result.state?.counts.dequeued>0);assert(readFileSync(join(privateDir,label,'spec.log'),'utf8').includes(canary));
+             if(label==='pass'){assert.equal(result.status,'passed');assert.equal(result.state.totals.counts.tests,1);assert.equal(result.state.totals.counts.passed,1);}
+             if(label==='fail'){assert.equal(result.status,'failed');assert.equal(result.exit,1);assert.equal(result.state.totals.counts.failed,1);}
+             if(label==='hang'){assert.equal(result.status,'timeout');assert(result.state.counts.completed<result.state.counts.dequeued);}
+             results[results.length-1]={...safeSummary(result),canaryEmitted:0,partialPreserved:1};
+            }
+            writeFileSync(join(publicDir,'plumbing.json'),JSON.stringify(results),{mode:0o600});
+            console.log('AFW_REPORTER_PLUMBING '+JSON.stringify({type:'plumbing:summary',...context,pass:1,fail:1,hang:1,canaryEmitted:0,partialPreserved:1}));
+           }else{
+            assert(existsSync(join(publicDir,'plumbing.json')));
+            const glob=execFileSync('/bin/bash',['--noprofile','--norc','-c',"printf '%s\\0' test/*.test.mjs"],{encoding:'buffer'});
+            const files=glob.toString('utf8').split('\0').filter(Boolean);
+            assert(files.length>0&&files.every(path=>/^test\/[A-Za-z0-9_.-]+\.test\.mjs$/.test(path)));
+            assert.deepEqual(files,[...files].sort());assert(files.includes('test/finite-budget-diagnostics.test.mjs')&&files.includes('test/mcp-qa-finite-budget-native.test.mjs'));
+            const pkg=JSON.parse(readFileSync('package.json','utf8'));assert.equal(pkg.scripts.test,'node --test --test-reporter=spec test/*.test.mjs');
+            const result=await execute('ordinary',files,files,480000);
+            const publicResult={...safeSummary(result),utc:new Date().toISOString(),fileCount:files.length,command:'node --test --test-reporter=spec --test-reporter=<temporary-safe-reporter> --test-reporter-destination=<private-spec> --test-reporter-destination=<safe-progress> test/*.test.mjs',literalNpmTest:0,spec:result.spec,stderr:result.stderr,progress:result.progress};
+            writeFileSync(join(publicDir,'result.json'),JSON.stringify(publicResult),{mode:0o600});
+            writeFileSync(join(publicDir,'progress.json'),JSON.stringify(result.state),{mode:0o600});
+            const line='AFW_ORDINARY_DIAGNOSTIC '+JSON.stringify(publicResult);assert(Buffer.byteLength(line)<=2048);console.log(line);
+            if(result.status!=='passed')process.exitCode=1;
+           }
+          }catch{
+           writeFileSync(join(publicDir,'setup-status.json'),JSON.stringify({type:'diagnostic:result',...context,status:'unknown',utc:new Date().toISOString()}),{mode:0o600});
+           console.log('diagnostic_setup_failed');process.exitCode=1;
+          }
+          
+          AFW_WRAPPER
+          node --check "$RUNNER_TEMP/afw-ordinary-diag/reporter.mjs" >"$RUNNER_TEMP/afw-ordinary-diag/private/syntax.log" 2>&1 || { echo reporter_setup_failed; exit 1; }
+          node --check "$RUNNER_TEMP/afw-ordinary-diag/wrapper.mjs" >>"$RUNNER_TEMP/afw-ordinary-diag/private/syntax.log" 2>&1 || { echo reporter_setup_failed; exit 1; }
+      - name: Validate reporter plumbing pass fail hang and canary suppression
+        id: plumbing
+        shell: bash
+        run: |
+          set -euo pipefail
+          node "$RUNNER_TEMP/afw-ordinary-diag/wrapper.mjs" plumbing
+      - name: Diagnose all ordinary files with reporter only and eight minute deadline
+        id: cases
+        if: steps.plumbing.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          mkdir -m 700 "$RUNNER_TEMP/afw-pure-public"
-          code=0
-          node --test --test-reporter=tap test/finite-budget-diagnostics.test.mjs >"$RUNNER_TEMP/afw-pure-private/tests.tap" 2>&1 || code=$?
-          AFW_EXIT="$code" node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';
-          import {readFileSync,writeFileSync} from 'node:fs';
-          import {join} from 'node:path';
-          const env=process.env,stage='green',out=join(env.RUNNER_TEMP,'afw-pure-public');
-          const tap=readFileSync(join(env.RUNNER_TEMP,'afw-pure-private/tests.tap'),'utf8');
-          assert(Buffer.byteLength(tap)<=256*1024);
-          const expected={1:'R1 optional qualification inactive in ordinary command',3:'R4 missing empty consumer epoch rejected',5:'R3 uninspectable pending Promise remains unsettled',6:'R2 scope group and global peak reconciliation',8:'R5 byte lengths bypass own business getters'};
-          const blocks=[...tap.matchAll(/^(not ok|ok) (\d+) - Q(\d+)[^\n]*\n([\s\S]*?)(?=^# Subtest:|^1\.\.)/gm)];
-          const failures=[],counts={};
-          for(const key of ['tests','pass','fail','cancelled','skipped','todo']){
-           const m=tap.match(new RegExp('^# '+key+' (\\d+)$','m'));counts[key]=m?Number(m[1]):null;
-          }
-          let causal=blocks.length===8&&blocks.every((m,i)=>Number(m[2])===i+1&&Number(m[3])===i+1);
-          for(const [all,status,,q] of blocks){
-           if(status==='ok')continue;
-           const confirmed=Boolean(expected[q]&&all.includes(expected[q])&&all.includes('ERR_ASSERTION'));
-           const code=all.match(/^\s+code: ['"]?(ERR_[A-Z_]+)['"]?$/m)?.[1]??null;
-           const frame=all.match(/finite-budget-diagnostics\.test\.mjs:(\d+):(\d+)/g)?.at(1)??null;
-           failures.push({q:Number(q),confirmed,code,frame});causal&&=confirmed;
-          }
-          const wanted=stage==='red'?failures.length>0&&env.AFW_EXIT==='1':failures.length===0&&env.AFW_EXIT==='0';
-          const valid=causal&&wanted&&counts.tests===8&&counts.fail===failures.length&&counts.pass===8-counts.fail&&counts.cancelled===0&&counts.skipped===0&&counts.todo===0;
-          const result={stage,source:env.GITHUB_SHA,run:env.GITHUB_RUN_ID,attempt:env.GITHUB_RUN_ATTEMPT,exit:Number(env.AFW_EXIT),counts,failures,valid,I0Opened:false,nativeExecutionProduced:false};
-          writeFileSync(join(out,'result.json'),JSON.stringify(result));console.log('AFW_PURE '+JSON.stringify(result));
-          if(valid){writeFileSync(join(out,'tests.tap'),tap);console.log(tap);}else{console.log('unexpected pure gate');process.exitCode=1;}
-          NODE
-      - name: Check syntax and lint
+          test -z "${AFW_BUDGET_GROUP+x}"
+          node "$RUNNER_TEMP/afw-ordinary-diag/wrapper.mjs" ordinary
+      - name: Preserve sanitized partial or terminal diagnostic evidence
+        id: diagnostic_seal
+        if: always() && !cancelled()
         shell: bash
         run: |
           set -euo pipefail
-          files=(test/fixtures/finite-budget-diagnostics.mjs test/fixtures/finite-budget-evidence.mjs test/finite-budget-diagnostics.test.mjs test/mcp-qa-finite-budget-native.test.mjs)
-          for file in "${files[@]}"; do node --check "$file"; done
-          npx --no-install eslint "${files[@]}"
-      - name: Verify exact compilation before I0
-        shell: bash
-        run: |
-          set -euo pipefail
-          node test/fixtures/finite-budget-world.mjs preflight-budget >"$RUNNER_TEMP/afw-pure-private/preflight.log" 2>&1 || { echo preflight_failed; exit 1; }
+          umask 077
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
-          import {readFileSync,writeFileSync} from 'node:fs';
-          const p=JSON.parse(readFileSync('output/finite-budget/pure/preflight.json','utf8'));
-          assert.equal(p.source,process.env.GITHUB_SHA);assert.equal(p.run,process.env.GITHUB_RUN_ID);assert.equal(p.attempt,process.env.GITHUB_RUN_ATTEMPT);
-          assert.equal(p.I0Opened,false);assert.equal(p.nativeExecutionProduced,false);
-          const rows=[...p.inputs.M,...p.inputs.QA];
-          const d=JSON.parse(readFileSync('test/fixtures/finite-budget-descriptors.json','utf8'));
-          const paths=d.sourceDescriptors.length,groups=d.sourceDescriptors.reduce((sum,entry)=>sum+entry.selectors.length,0),sites=rows.flatMap(entry=>entry.readerSites.map(site=>site.id));
-          assert.equal(paths,130);assert.equal(groups,635);assert.equal(sites.length,54);assert.equal(new Set(sites).size,54);
-          const observations={roles:['M','QA'],inputs:rows.length,paths,groups,readerSites:sites.length,I0Opened:false,nativeExecutionProduced:false,syntax:true,lint:true};
-          console.log('AFW_PREFLIGHT '+JSON.stringify(observations));
-          const out=process.env.RUNNER_TEMP+'/afw-pure-public/result.json',r=JSON.parse(readFileSync(out,'utf8'));writeFileSync(out,JSON.stringify({...r,preflight:observations}));
-          NODE
-      - name: Seal pure TAP and source-bound outcome
-        id: pure_seal
-        if: always() && !cancelled() && steps.cases.outcome != 'skipped'
-        shell: bash
-        run: |
-          set -euo pipefail
-          node --input-type=module <<'NODE'
+          import {readFile,writeFile,readdir,lstat} from 'node:fs/promises';
           import {sealBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';
-          import {readdir,readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
-          const out=process.env.RUNNER_TEMP+'/afw-pure-public';
-          const r=JSON.parse(await readFile(out+'/result.json','utf8'));
-          assert.deepEqual((await readdir(out)).sort(),r.valid?['result.json','tests.tap']:['result.json']);
+          const out=process.env.RUNNER_TEMP+'/afw-ordinary-diag/public';
+          const files=await readdir(out),allowed=['result.json','progress.json','plumbing.json','plumbing-progress.json','setup-status.json'];
+          assert(files.every(file=>allowed.includes(file)));
+          for(const file of files){const stat=await lstat(out+'/'+file);assert(stat.isFile()&&stat.nlink===1);}
+          for(const file of ['progress.json','plumbing.json','plumbing-progress.json'])if(!files.includes(file))await writeFile(out+'/'+file,'null',{mode:0o600});
+          if(!files.includes('result.json'))await writeFile(out+'/result.json',JSON.stringify({type:'diagnostic:result',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,status:'unknown',counts:null,totals:null}),{mode:0o600});
           await sealBudgetArtifact(out,'pure');
+          console.log('diagnostic_safe_evidence_sealed');
           NODE
-      - name: Upload finite-budget-pure only
+      - name: Upload sanitized diagnostic only
         id: upload
-        if: always() && !cancelled() && steps.pure_seal.outcome == 'success'
+        if: always() && !cancelled() && steps.diagnostic_seal.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
-          name: finite-budget-pure-${{ github.sha }}
-          path: ${{ runner.temp }}/afw-pure-public/
+          name: finite-budget-ordinary-diagnostic-${{ github.sha }}
+          path: ${{ runner.temp }}/afw-ordinary-diag/public/
           if-no-files-found: error
           retention-days: 7
-      - name: Download pure_receipt by exact ID attempt 1
-        id: pure_receipt_1
+      - name: Download diagnostic_receipt by exact ID attempt 1
+        id: diagnostic_receipt_1
         if: always() && !cancelled() && steps.upload.outcome == 'success' && steps.upload.outputs.artifact-id != ''
         continue-on-error: true
         uses: actions/download-artifact@v4
@@ -144,19 +226,19 @@ jobs:
           repository: ${{ github.repository }}
           run-id: ${{ github.run_id }}
           artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-pure-receipt
+          path: ${{ runner.temp }}/afw-ordinary-diag/readback
           merge-multiple: true
-      - name: Wait 2s before pure_receipt retrieval 2
-        id: pure_receipt_wait2
-        if: always() && !cancelled() && steps.pure_receipt_1.outcome == 'failure'
+      - name: Wait 2s before diagnostic_receipt retrieval 2
+        id: diagnostic_receipt_wait2
+        if: always() && !cancelled() && steps.diagnostic_receipt_1.outcome == 'failure'
         shell: bash
         run: |
           set -euo pipefail
           umask 077
           sleep 2
-      - name: Download pure_receipt by exact ID attempt 2
-        id: pure_receipt_2
-        if: always() && !cancelled() && steps.pure_receipt_wait2.outcome == 'success' && steps.pure_receipt_1.outcome == 'failure'
+      - name: Download diagnostic_receipt by exact ID attempt 2
+        id: diagnostic_receipt_2
+        if: always() && !cancelled() && steps.diagnostic_receipt_wait2.outcome == 'success' && steps.diagnostic_receipt_1.outcome == 'failure'
         continue-on-error: true
         uses: actions/download-artifact@v4
         with:
@@ -164,41 +246,53 @@ jobs:
           repository: ${{ github.repository }}
           run-id: ${{ github.run_id }}
           artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-pure-receipt
+          path: ${{ runner.temp }}/afw-ordinary-diag/readback
           merge-multiple: true
-      - name: Wait 5s before pure_receipt retrieval 3
-        id: pure_receipt_wait3
-        if: always() && !cancelled() && steps.pure_receipt_2.outcome == 'failure'
+      - name: Wait 5s before diagnostic_receipt retrieval 3
+        id: diagnostic_receipt_wait3
+        if: always() && !cancelled() && steps.diagnostic_receipt_2.outcome == 'failure'
         shell: bash
         run: |
           set -euo pipefail
           umask 077
           sleep 5
-      - name: Download pure_receipt by exact ID attempt 3
-        id: pure_receipt_3
-        if: always() && !cancelled() && steps.pure_receipt_wait3.outcome == 'success' && steps.pure_receipt_2.outcome == 'failure'
+      - name: Download diagnostic_receipt by exact ID attempt 3
+        id: diagnostic_receipt_3
+        if: always() && !cancelled() && steps.diagnostic_receipt_wait3.outcome == 'success' && steps.diagnostic_receipt_2.outcome == 'failure'
         uses: actions/download-artifact@v4
         with:
           github-token: ${{ github.token }}
           repository: ${{ github.repository }}
           run-id: ${{ github.run_id }}
           artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-pure-receipt
+          path: ${{ runner.temp }}/afw-ordinary-diag/readback
           merge-multiple: true
-      - name: Verify exact same-ID pure inventory
-        id: pure_verified
+      - name: Verify exact same-ID diagnostic inventory
+        id: diagnostic_verified
         if: always() && !cancelled() && steps.upload.outcome == 'success'
         env:
           ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
-          DOWNLOADED: ${{ steps.pure_receipt_1.outcome == 'success' || steps.pure_receipt_2.outcome == 'success' || steps.pure_receipt_3.outcome == 'success' }}
-          READBACK: ${{ runner.temp }}/afw-pure-receipt
+          DOWNLOADED: ${{ steps.diagnostic_receipt_1.outcome == 'success' || steps.diagnostic_receipt_2.outcome == 'success' || steps.diagnostic_receipt_3.outcome == 'success' }}
+          READBACK: ${{ runner.temp }}/afw-ordinary-diag/readback
         shell: bash
         run: |
           set -euo pipefail
           umask 077
           test -n "$ARTIFACT_ID"
           test "$DOWNLOADED" = true || { echo evidence_not_preserved; exit 1; }
-          if ! node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact(process.env.READBACK,'pure',process.env.ARTIFACT_ID);" >"$RUNNER_TEMP/afw-pure-private/readback.log" 2>&1; then echo evidence_not_preserved; exit 1; fi
-          if ! cmp -s "$RUNNER_TEMP/afw-pure-public/budget-artifact.json" "$READBACK/budget-artifact.json"; then echo evidence_not_preserved; exit 1; fi
-          cat "$RUNNER_TEMP/afw-pure-private/readback.log"
-          printf 'pure_verified artifact_id=%s\n' "$ARTIFACT_ID"
+          if ! node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact(process.env.READBACK,'pure',process.env.ARTIFACT_ID);" >"$RUNNER_TEMP/afw-ordinary-diag/private/readback.log" 2>&1; then echo evidence_not_preserved; exit 1; fi
+          if ! cmp -s "$RUNNER_TEMP/afw-ordinary-diag/public/budget-artifact.json" "$READBACK/budget-artifact.json"; then echo evidence_not_preserved; exit 1; fi
+          cat "$RUNNER_TEMP/afw-ordinary-diag/private/readback.log"
+          printf 'diagnostic_verified artifact_id=%s\n' "$ARTIFACT_ID"
+
+      - name: Require complete passing diagnostic after preserving evidence
+        if: always() && !cancelled()
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';import {readFile,access} from 'node:fs/promises';
+          const out=process.env.RUNNER_TEMP+'/afw-ordinary-diag/public',result=JSON.parse(await readFile(out+'/result.json','utf8'));
+          let setupFailed=false;try{await access(out+'/setup-status.json');setupFailed=true;}catch{}
+          assert(!setupFailed&&result.status==='passed','ordinary diagnostic incomplete or failed; safe evidence preserved');
+          NODE
