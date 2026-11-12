@@ -1,8 +1,10 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-12-authenticated-payload-bounded-reference.md
 
-## CURRENT — USERRESUMED; TaskA COMPLETE/CLEAN; ONE TaskB actual projection released
+## CURRENT — TaskB COMPLETE/PARTIAL, R2 metrics observed, R1 invalid; exactF7 closed
 
-2026-11-12 19:10 UTC. Gabrielresumedvia“continua”; priorpause lifted. Sourcec4c98844bc96538d955d28cc434d25e6b3f66177/WF480a9878 unchangedINACTIVE/BOTHfalse/manual/noinputs/nopush,5activecounts0 checked19:08Z. TaskAcleanreviewandall91+24+16+16qualificationdone; no replay. RootnowreleasesONEnewactual5+2 boundedprojectionunder [exactbrief](../briefs/2026-11-12-authenticated-payload-bound-taskB-single-projection.md), freshsoleSourceexecutor. No codechange/newcredential/browser/OriginalNativecase. Originalcipher/keyONLYGitHubrunner, same2Rpaths/10+15s, F7restore/0activeSTOP afterterminalregardlessoutcome. No Nativecause/repair/PCoffclaim; allreadinessfalse. No userinterventionneededcurrently.
+2026-11-12 19:18UTC Rootclock. Actual43290649461/1atd043c3b711fa1fb788426e41ff05947b0df4e078 SUCCESStransportPARTIAL, permitCONSUMED/no repeat. [Fullprimary](../reviews/2026-11-12-authenticated-payload-bound-taskB-primary.md): strictRootsafe3014B/wholemanifest/currentidentity/nestedOriginalfacts/rowtypes/hashauditPASS. R1invalid/allmetricsUNKNOWN. R2response503/completeWrites0/completeNormal0/lookupabsent;5children/max5018ms/1aborted (NOTcorrelatedtoonechild), roots2x30000ms, HTTPspan254/max183ms. CauseUNKNOWN; noSDKeffect/globalabsenceconclusionfromcounters. GitHubtimestamps19:29vsRoot19:13–17 recordedseparately,nocompensation.
+
+Source2957681ebfe154b00bb586b8a53337e175ab5925 restoredexactF7f7a71f1a/manual/noinputs/nopush/7false; reportb9aa8c5d/331874chars,3188protected/mainunchanged/0activeRoot19:17:36Z, executorSTOPPED. TaskAclean, TasksA+Boperationcomplete; no newSource/privateopen/nativeSDK/runtimepermit. RootnextpublicSourceanalysisforearlyR2failure/R1rejection; no blindarraycapincrease/Native16retry. Allreadinessfalse/PCoffMaxpending; useractionnotneededcurrently.
 ## Evidence and proposed ruling
 
 Exactknownauthenticatedtotal298888337B/128files, sameOriginal13.7MBZIP/hash/AAD. ProposedMAXselectedfile298888337+exactbasisguard128/298888337, parser/time/output/Core/ZIPunchanged; tests17MiBpositive+sparsecap+1. Costifwrong: cloudRAM/time/rejection, nofalsegreen/PCcost/nativeeffect. PrivateactualTaskBstillrequirescleanpreparationreviewandseparateRootrelease. Noautomaticwidening/retry.
