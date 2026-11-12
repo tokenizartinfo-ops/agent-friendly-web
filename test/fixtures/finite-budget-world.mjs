@@ -888,7 +888,7 @@ async function closeFixedOwnedFrame(frame,primary){
   }
   primary=frame.operationPrimary??primary??frame.cleanupPrimary??null;
   const phaseFacts=[...(frame.notes??[]),...frame.failures,...frame.records.flatMap(r=>r.failures)],failures=[];const identities=new Set();for(const fact of phaseFacts){if(fact.error!==primary&&!identities.has(fact.error)){identities.add(fact.error);failures.push(fact);}}
-  const result={purpose:'afw.fixed-budget-owned-lifecycle.syn.v1',caseName:frame.caseName,records:frame.records.map(r=>({ordinal:r.ordinal,caseName:r.caseName,kind:r.kind,graphs:r.graphs??[],disposalUncertain:r.disposalUncertain===true,disposed:r.disposed,archived:r.archived,terminalCapture:r.terminalCapture,archive:r.archive,events:r.events,phases:r.phases??[],failures:r.failures.map(x=>({phase:x.phase,name:Object.getOwnPropertyDescriptor(x.error??{},'name')?.value??'Error'})),epochs:r.epochs})),callbackCount:frame.callbacks.length,ancillaryFailureCount:failures.length,primaryPreserved:primary!==null,complete:failures.length===0};
+  const result={purpose:'afw.fixed-budget-owned-lifecycle.syn.v1',caseName:frame.caseName,records:frame.records.map(r=>({ordinal:r.ordinal,caseName:r.caseName,kind:r.kind,graphs:r.graphs??[],disposalUncertain:r.disposalUncertain===true,disposed:r.disposed,archived:r.archived,terminalCapture:r.terminalCapture,archive:r.archive,events:r.events,phases:r.phases??[],failures:r.failures.map(x=>({phase:x.phase,name:Object.getOwnPropertyDescriptor(x.error??{},'name')?.value??'Error'})),epochs:r.epochs})),callbackCount:frame.callbacks.length,ancillaryFailureCount:failures.length,primaryPreserved:primary!==null,complete:failures.length===0&&frame.records.every(record=>!record.disposalUncertain&&(!record.mf||record.disposed)&&(!record.persist||record.archived))};
   try{await mkdir(frame.root,{recursive:true});await writeFile(join(frame.root,'ownership.json'),JSON.stringify(result,null,2));}catch(error){failures.push({phase:'ownership_preservation',error});result.complete=false;result.ancillaryFailureCount=failures.length;}
   const error=primary??failures[0]?.error;if(error){fixedBudgetOwnerErrors.set(error,{primary,failures,result,phaseFacts});throw error;}return result;
  });return frame.closed;
@@ -1805,6 +1805,13 @@ async function runRound2OwnedCase(name){
  });}catch(error){actual=error;}
  const expected=name==='normal'?null:name==='callback_dispose_sibling'?A:['operation_dispose','operation_evidence_dispose','recovery_dispose'].includes(name)?E:name==='evidence_dispose'?F:D,saved=actual?fixedBudgetOwnerErrors.get(actual):null,errors=saved?.failures.map(value=>value.error)??[];
  stage.stage='assert';stage.primary=actual?fixedControlError(actual):null;stage.cleanup=saved?.failures.map(value=>({phase:value.phase,error:fixedControlError(value.error)}))??[];await progress();
+ const persisted=JSON.parse(await readFile(join(root,'owned','ownership.json'),'utf8'));assert.equal(persisted.purpose,'afw.fixed-budget-owned-lifecycle.syn.v1');assert.equal(persisted.records.length,1);const persistedRecord=persisted.records[0];
+ stage.persistedClosure={complete:persisted.complete,ancillaryFailureCount:persisted.ancillaryFailureCount,disposalUncertain:persistedRecord.disposalUncertain,disposed:persistedRecord.disposed,archived:persistedRecord.archived};await progress();
+ assert.equal(persisted.complete,name==='normal','round3 actual persisted resource custody completion');
+ assert.equal(persisted.ancillaryFailureCount,errors.length,'round3 primary not counted as ancillary');
+ assert.equal(persistedRecord.disposalUncertain,name!=='normal');assert.equal(persistedRecord.disposed,name==='normal');assert.equal(persistedRecord.archived,name==='normal');
+ if(name==='dispose_reject'){assert.equal(persisted.ancillaryFailureCount,0);assert.equal(actual,D,'round3 same original primary disposer');}
+
  assert.equal(actual,expected,'current exact Node primary identity '+name);assert.equal(attempts,1,'one original disposer attempt');assert.equal(copies,name==='normal'?1:0);assert.equal(fixture.disposedForCheckpoint===true,name==='normal');
  if(name==='normal'){assert(afterDisposed);assert(record.disposed&&record.archived);assert.equal(saved,null);}
  else{
@@ -1812,7 +1819,7 @@ async function runRound2OwnedCase(name){
   if(expected!==D){assert(errors.includes(D),'disposer retained ancillary');assert.equal(errors.filter(error=>error===D).length,1,'propagation deduplicated by identity');}
   if(name==='operation_evidence_dispose')assert(errors.includes(F));if(name==='callback_dispose_sibling'){assert(errors.includes(B));assert(trace.includes('sibling'));assert(trace.indexOf('legacy_restore')<trace.indexOf('dispose'));}
  }
- const result={subcase:name,passed:true,stage:'complete',originalAttempts:attempts,copies,cleanupCalls,flag:fixture.disposedForCheckpoint===true,copyAfterDispose:afterDisposed,primarySame:true,ancillaryCount:errors.length,disposeAncillaryOnce:expected===D?null:errors.filter(error=>error===D).length,sourceRetained:name==='normal'?null:true,poisonPreserved:name!=='normal',exactCurrentBodies:parts.proof,noMF:true,I0Opened:false};
+ const result={subcase:name,passed:true,stage:'complete',persistedComplete:persisted.complete,persistedAncillaryFailureCount:persisted.ancillaryFailureCount,originalAttempts:attempts,copies,cleanupCalls,flag:fixture.disposedForCheckpoint===true,copyAfterDispose:afterDisposed,primarySame:true,ancillaryCount:errors.length,disposeAncillaryOnce:expected===D?null:errors.filter(error=>error===D).length,sourceRetained:name==='normal'?null:true,poisonPreserved:name!=='normal',exactCurrentBodies:parts.proof,noMF:true,I0Opened:false};
  await writeFile(join(root,'result.json'),JSON.stringify(result));return result;
 }
 async function runRound2OwnedControls(){
