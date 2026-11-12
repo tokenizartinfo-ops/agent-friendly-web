@@ -2,11 +2,11 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — keyless76 pass; integration failed; safe closure; diagnosis/re-review pending
+## CURRENT — inspector fix2/5; one instrumented keyless integration released
 
-2026-11-12 15:12UTC. Sole controlsrun43244518810/1 Source59bb67d6:76/76 current inert checksPASS, old954 counterexamplesEXECUTED, coreSHA41e3b76e. OveralljobFAILURE at assignedID remote/upload metadata check; reasonUNKNOWN, remoteinventorySKIPPED. Root independently strict-audited safe artifact13955248447/1682B/SHA c13f9bfe (complete2JSON, schema/context/hash/counts/core). [Primary evidence](../reviews/2026-11-12-native-inspector-controls-primary.md). No key/nativeoriginalcipher/SDK/I0; no more tests/trials released.
+2026-11-12 15:16UTC. SAMEreview fix1: I5/M1ADDRESSED, I6OPENintegration afterstep8metadatafailure, noothernewbreakage; M2deferred. [Review](../reviews/2026-11-12-native-inspector-fix1-review.md). Source844safeexactF7, Rootverifiedzeroactive; all76controlsANDcorehash audited butwholejobFAILURE, privateoriginal untouched.
 
-SafeSource844246c9/tree d14e30dc, exactF7a71 manual/noinputs/nopush/sevenfalse; reportb2918582, two-pathappend-only scope; Rootref/fullbody/0active readbacks. COMPLETEamendedactual-inspector was not reconciled afterfailure. [Scoped current-helper re-review package](../reviews/2026-11-12-native-inspector-fix1-controls-package.md) for SAME reviewer I5/I6/M1 and failedintegration; M2deferred. Need concrete bounded diagnosis before new release; no blindretry/newkey. OriginalNative16 failedreadonly/Bskipped closed; R1–R3cause/statusUNKNOWN, encryptedpayloadGitHubonly; allreadinessfalse.
+[Fix2brief](../briefs/2026-11-12-native-inspector-fix-round2.md) releases minimal CLOSED firstpredicate/stage/HTTP/bytes/timeout diagnostic and one<=2min KEYLESS76+finitecurrentchecks+sameIDmetadatainventoryintegration, noAFWkey/data/SDK/I0. Preserve existingvalidation, no speculativefix/retry. Failure=>exactF7restore+proofSTOP; success=>COMPLETEamendedactualinspector/manualfalse/coveredcode/report/readbacksSTOP thensamefullreview. Actualreceiptinspection NOTreleased. R1–R3cause/statusUNKNOWN; allreadinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 
