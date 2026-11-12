@@ -1,6 +1,14 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 2026-11-12T00:19:28Z: diagnóstico autenticado; investigación estática de atribución
+## CURRENT — 2026-11-12 00:25:44 UTC: regresiones puras causales autorizadas
+
+Ruling: ejecutar primero un RED pequeño del transformador/runtime real para las hipótesis A (fachada put abreviada), B (argumento tx frío de c.transaction) y C (fase perdida en reentrada de la misma Root), y corregir sólo cada comportamiento que falle por la causa esperada. Motivo: el diagnóstico autenticado identificó invocationIdentity y cobertura de fases, pero no guarda los sitios de las 16 llamadas; otro descifrado idéntico no resolvería esa falta. Costo si una hipótesis es falsa: una comprobación pura breve y ninguna mutación de ese candidato. No repetir P1 ni usar retención/tiempo/clave como explicación por descarte.
+
+Brief único vigente: docs/superpowers/briefs/2026-11-12-finite-budget-cold-attribution-regression-task1.md. BASE Source 0da5ff6a51abf559139b86e41925af72d5b49e1d/tree7f69b3a1ae7a5b7a082ee516214826b2591d6a5d. Mismo escritor budget_chronology_impl, sólo tres archivos test/compiler/runtime, TEMP y reporte; sin producción, descriptor, helper de custodia ni P1. Permiso condicional para corrección mínima sólo tras RED observado; GREEN 8Q/preflight, sin I0/Miniflare/native900s. Después retirar TEMP y STOP para ruling Root. Root no altera Source.
+
+Se conserva abajo el diagnóstico primario. Ninguna hipótesis está confirmada por ejecución aún. Task1 sigue incompleta; Task2/revisión formal y ensayo PCoff pendientes. operationalReadiness=false; completePackage=false; PCoff=false. No acción humana pendiente.
+
+## Diagnóstico previo preservado — 12 noviembre, 00:19:28 UTC
 
 El diagnóstico de lectura [43125759405/1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43125759405), job 130877292806, terminó SUCCESS. Source ejecutada bf96af7a693956ae9b03e50f402fa78428159364; abrió únicamente el artefacto consumer-failure 13902156351 de Source 14071b396f8c9c66b70cf630d8823692a4521bd3/run 43121646075/1. No creó I0 ni ejecutó Miniflare, SDK o P1. Contexto original y contexto del diagnóstico permanecieron separados.
 
