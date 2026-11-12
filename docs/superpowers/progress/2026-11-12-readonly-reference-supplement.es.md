@@ -2,13 +2,11 @@
 
 PROJECTAFW; repositorytokenizartinfo-ops/agent-friendly-web/public1347578006; Source/SYN GitHubActions; originGitHubconnector; Sourcebranchfeat/finite-native-cleanup-20261101; allowedONLY2SourcepathsWF+appendreport/ownCAS/exactF7rollback. Rootdocsbranchdocs/finite-pcoff-continuation-20261103 ownsledger/spec/plan. ParentNativeTask2ledger2026-11-07 remainspending; thisisaseparateboundeddiagnosticunit.
 
-## CURRENT — Task1 fix1 keyless PASS; amended inactive candidate in SAME scoped review
+## CURRENT — Task1 COMPLETE clean afterfix1; ONE actual Task2 projection released
 
-2026-11-12 18:01 UTC. Fixround1/5 candidateSource d5cdaabd4c096bca089c11f9b5e414e2007ef12b/tree00c75401f5484fe8bc5413083a208bde5c280a0c/WFa0e1d838d11546bbaf698c892588654c349edb93/report9392d3748b4f0d917c0579aa00012eb60932d612. COMPLETEactual5+2INACTIVE/BOTHfalse/manual/noinputs/nopush, authorSTOPPED. Rootfullbodies/ref/reportprefix+tree3190leaves/protected3188/mainunchanged/5activecounts0 independentlyverified18:01:12Z.
+2026-11-12 18:03 UTC. SAMEreviewer I1/I2/I3ADDRESSED, nonewCritical/Important; [cleanreview/minorcontractruling](../reviews/2026-11-12-reference-supplement-preparation-clean.md). SourceD5/WFa0e1d838 COMPLETEinactive andprotected/0activeRootverified. Bothkeylesspermitsconsumed, current43274672298/1 PASS91+24+16+16, Rootsafeartifact/codepinsverified. Task1writerSTOPPED.
 
-Solefix1keyless43274672298/1 at2b970b496b993fca1a6879478601b5dfa4c18a6e SUCCESS91+24+16+16; safeartifact13968789473/2311B/SHA8018f12f... strictRootZIP/schema/currentcode/wholemanifest auditPASS. Verifier40595B/42728b5c matchesRootDATAreconstruction. [Primaryproof](../reviews/2026-11-12-reference-supplement-fix1-primary.md). SAMEexpert scopedI1/I2/I3+newbreakagereview under [fullvalidatedpackage](../reviews/2026-11-12-reference-supplement-fix1-review-package.md), Rootdocs8094fe26.
-
-Amendments notyetaccepted untilreview: rejectedrows exactnot_examined; preserveprimaryfailure withcleanupunknown; unexpectedreaderIO propagates. Currentcontrols covercombinedcases, EIO/EACCESfiveactualreaderstages, genuinepartialstillaccepted. ActualTask2HELD, noprivatecipher/key/SDK/native/CF operation. Minorabsentspelling andM2deferred; OriginalNativeFAILED/R1R2valuesunobserved/allreadinessfalse. No useractionneeded.
+RootseparatelyreleasedONEactual5+2 existing-receipt projection under [exactTask2brief](../briefs/2026-11-12-reference-supplement-task2-single-projection.md). FreshsoleexecutorwillownSource; no codechanges, activateevent+twofalseprefixesonly/reportappend, Originalcipher/keyinsideGitHubonly, sameoriginplus2fixedR1/R2receipts, restoreEXACTF7/0activeafterterminalregardlessoutcome. NoNative/SDK/MF/I0/business/CF/runtime/keychanges. R1/R2valuesstillunobserved, no repairorPCoffclaim, allreadinessfalse. No useractionneeded.
 ## Preflight scan and Root rulings
 
 | Scope | Producer -> consumer / internal agreement | Finding and ruling |

@@ -1,0 +1,11 @@
+# Supplement preparation clean — Task1 complete
+
+2026-11-12 18:03 UTC. SAMEexpert scopedreview49879170..d5cdaabd: I1ADDRESSED, I2ADDRESSED, I3ADDRESSED; noCritical/Important/Minornew in fixdelta. Fullpriorreview093..498 plus completefixdeltaaccountforentireproposal. I1constructor/validator/publication exactnot_examined rejectedrows; I2firstprimaryfailurepreserved/cleanupunknown; I3unexpectedIOpropagateswithcurrentfaulttests. Both literalfalse gates remain, noprivatecipher/key inspected. ReviewerexplicitlyallowsRoot toconsiderONEseparate5+2projection.
+
+Task1 fixround1/5 (3addressed,0open; commits498791705aa1715da3fb3bf43961e90920b098bc..d5cdaabd4c096bca089c11f9b5e414e2007ef12b). Keyless43274672298/1 at2b970b4 SUCCESS91+24+16+16; Root safe2311B/currentidentity/wholehash/inventory/CRC/closedDTO/codepins verified. Standalone40595B/42728b5c matched. [Primaryproof](2026-11-12-reference-supplement-fix1-primary.md), [scopedfullpackage](2026-11-12-reference-supplement-fix1-review-package.md). CurrentSourceD5/WFa0e1d838/report9392d374 fullreadback; protected3188/mainunchanged/0active18:01Z verified. Task1solewriterSTOPPED.
+
+## Minor contract spelling ruling
+
+Task1 minor(deferred) aggregate absent vs provisional ledger missing is now triaged before any actualsupplement. Ruling: retain implemented aggregate statuses present/absent/unknown: a missing optional array is absent with allmetricsnull, an unexamined/invalidrow has unknown aggregate with allmetricsnull, invalid sourcecontent classifies the ROW invalid (not an observed aggregate). Lookup remains absent/incomplete/present/unknown separately. This pins the previously unspecifiedaggregateenum in thedesign; earlier ledger shorthand present/missing/invalid is historicalprovisional, not a downstreamAPI promise. No Sourcechange, coercion, counterinventing or rowstatuschange. Costifwrong: futureclientcontractmigration; noexternalconsumer/deploymentyet. Rootauditorwilluseexactreviewedcontract. KnownM2andhistoricalownershipprojectionlimits remaindeferredandoutsideactualscope.
+
+OriginalNativeFAILED, noSDK/world/rootbudgetfix, allreadinessfalse. NewactualTask2 separatelyreleased inexactbrief; this cleanreview alone is not its execution or PCoffproof.
