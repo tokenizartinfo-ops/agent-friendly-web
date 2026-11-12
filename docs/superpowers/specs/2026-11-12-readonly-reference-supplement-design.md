@@ -41,3 +41,8 @@ Task2actual: ONLYaftercleanreviewandRootSEPARATEexplicitrelease, ONEnew5+2readon
 ## Scope and anti-goals
 
 NoCryptoCore/ZIP/nativebudget/SDK/world/business/runtime/main/PR/merge/deploy/Cloudflare/OAuth/OTP/keyrotation/callback/consumer/cron/Max/mailchanges. No R3 extraJSON/SQLitequeries ornewnativefailure-snapshot; sourceanalysiscanproposelaterifneeded. M2countspresentation/ownershipprojectioninvalidremainknownlimitations, notfixedhere. Noclaimseedingcauseddeadlineuntildata/ordercorrelated. NoRawprivatepayload/tool-download. No newservices/costsubscriptions.
+
+
+## Preflight clarification
+
+“Only R1/R2 paths” means only TWO ADDITIONAL receipt reads; the unchanged Core retains its already-reviewed V1 projected paths/TAP. Pin aggregate and lookup keys exactly as the preflight ledger table, not arbitrary method/epoch fields. Arrays <=256, counters <=1000000, finite relative durations <=900000ms. Empty arrays and absent observations preserve the known-count distinctions. Task1 does not modify the Core or its baseline data reads.

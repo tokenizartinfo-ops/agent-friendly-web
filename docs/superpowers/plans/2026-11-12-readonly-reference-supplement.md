@@ -13,7 +13,7 @@
 ## Global Constraints
 
 - AFWonlyrepo1347578006, Sourcebranchfeat/finite-native-cleanup-20261101, BASE093e00793de9a9eac193281a7ec4e55d018a476b, currentF7safe/manualsevenfalse; Rootdocsbranchseparate.
-- OnlyWF.github/workflows/afw-finite-budget-qualification.yml andAPPENDdocs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task2.md; protect3188/main/SDK/domain/custody. ReadrepoAGENTSprogressivelybeforeedit.
+- Only .github/workflows/afw-finite-budget-qualification.yml andAPPENDdocs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task2.md; protect3188/main/SDK/domain/custody. ReadrepoAGENTSprogressivelybeforeedit.
 - CORE77002B/d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246 andZIP13305B/b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d unchanged; retain91+16+16checks.
 - Original13949168304/13680188B/8a408941c11e93e342fe2ccbf09763caf04e96fc5a1aaf12bde52da0fcaf19d5,1978/43229236340/1/consumer-failureAAD; existingkeyonlyGitHubopenstep/no newcredentials/no originalcipherRoottools.
 - Projectors10scombined+cleanupwithin15sfrombeforefirstchild; physicallysettledbeforecleanup. Actual5+2minproposal, keyless2+2minONEattemptwhenRootreleased; no retries/polls/SDK/Miniflare/I0/nativebusiness.
