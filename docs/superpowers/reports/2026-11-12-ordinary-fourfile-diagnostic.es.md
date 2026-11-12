@@ -322,3 +322,326 @@ Excepción local mínima expresa del brief: ocho invocaciones de registros inert
 Comprobación independiente del texto: exactamente tres cambios m[4]→m[3] dentro de tuples; al invertir esa única línea se recupera byte a byte el helper base. El informe conserva íntegro el prefijo base. El commit sólo puede cambiar helper e informe; se comprobarán los otros 3189 blobs/modos íntegros y árbol total 3191, ref/CAS y cero runs. Workflow debe conservar blob exacto `0f004c70976f5e4e64c1e554c0ebfad8039b9921`, manual-only, dos false. Hashes/tip finales se entregan externamente, sin autorreferencia.
 
 No otra conclusión nueva sobre las 36 fallas. El mismo reviewer de Root debe hacer re-review scoped FIX_BASE..FIX_HEAD del finding y cualquier regresión nueva antes de un probe. Cero jobs autorizados/despachados por este fix. Tras los readbacks finales: **STOP_WRITES**. `operationalReadiness=false; completePackage=false; PCoff=false`.
+
+
+## ORD-1 — único probe cloud consumido y cierre inactivo (2026-11-12)
+
+Release de Root leído en `64265ea857d2394c35ec8b8652c6c6c4d5e26734`, brief `c4b781226f99b36173277a2182dc987ae8fceb04`, después de re-review limpio del mismo reviewer (Root preservó `25869c66`). No se interpreta como autorización para reparar producto o repetir el ensayo.
+
+### Fuentes y ejecución primaria
+
+BASE `174eb0dc0dca90f3b274c8ccd191c3a2b36f6ccc` / árbol `a7ef8bd03ebb1095af56f4716293493622917177`, 3191 blobs. Activación única mediante CAS expected=BASE, force=false:
+- head `a0c9cbe079a30924b0715ac45582c7d3469d1d05`;
+- árbol `84162e5313d02e931adcae6ec384ab4222d12e62`;
+- workflow activo `9637cae1b478a723d171bb19e34bfa84b95b5654`.
+
+Sólo cambió ese workflow: nombre, trigger push limitado a esta rama y su único path, y dos guards. Normalización inversa recuperó exactamente el body inactivo `0f004c70976f5e4e64c1e554c0ebfad8039b9921`; 3190 otros blobs/modos intactos. La rama quedó congelada hasta terminar ambos jobs y los readbacks de artefactos. No se escribieron informes durante el run.
+
+[Run único 43159614775/attempt 1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43159614775): push, head real exacto de activación, creado 05:10:43Z, completado 05:11:24Z, conclusión success. A job `130987429700`: 05:10:45–05:11:07Z; step del brazo 05:11:01–05:11:03Z. B job `130987429449`: 05:10:45–05:11:23Z; step del brazo 05:11:13–05:11:17Z. Ambos jobs terminales success.
+
+Helper INMUTABLE `ee4bbaa44edf02c10224e4e6085baa6a8e40a0bd`, SHA256 de contenido `9ad32cf208595677cf84cbd045a6d0206777068ce2960d91d3e3e14c35603df8`, comprobado independientemente y coincidente en ambos artefactos. Workflow source/checkout reales a0c9; testSource f5f52660d19ec9fc634bbc49558db75582fdaf88; Node real reportado `v22.23.4`; runner configurado Ubuntu24.04; grupo UNSET. Child MODELED_STERILE_SYNTHETIC conserva esa etiqueta y no representa admisión real. Los cinco overlays y sus hashes/ocurrencias son exactamente iguales A/B; entry instrumentado también idéntico y normalizable. Subject: 3188 blobs, inventario before=after en ambos brazos `c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7`.
+
+### Resultado observado y alcance causal
+
+| Archivo | A fallos | B fallos |
+|---|---:|---:|
+| mcp-own-finite-entrypoints | 2 | 2 |
+| mcp-qa-cloud-native-cli | 12 | 0 |
+| mcp-qa-finite-adoption-wait | 20 | 20 |
+| mcp-qa-finite-command | 2 | 2 |
+| Total | 36 | 24 |
+
+A: **109 tests / 73 pass / 36 fail**; reprodujo el baseline exigido. B: **109 / 85 / 24**; recuperó exactamente las 12 fallas nativas previstas, sin recuperar ni introducir otras. Sin cancelados, skips o todo. Ambos hijos finalizaron exit 1 porque quedan tests rojos; el job verde acredita la completitud diagnóstica, no una suite verde.
+
+Artefacto wrapper real construido en A y B: **63840 bytes**, SHA256 `198d1675b8b680bb759336ef37a73bae248192597a425a299a199dd3cb692e4b`. Pin productivo fijado: 48388 bytes / `5b06e2012d906269b6ad829f666d3d01fd197f6b4ea90f04bb6591dad4d18953`. Ambos booleans de igualdad false. A: controllerInvoked=0, 32 entradas artifact_load y 32 rechazos. B: controllerInvoked=12, 12 entradas controller y 11 settlement; permanecen los rechazos esperados por tests negativos. Los 12 tests antes fallidos pasan al sustituir exclusivamente valores esperados del pin dentro del VM sintético.
+
+**Veredicto acotado:** evidencia causal a favor del desajuste entre el artefacto actual y la expectativa del pin como causa próxima de esas 12 fallas del CLI sintético bajo f5/Node22/este setup. No prueba que deba repinearse producción, que el artefacto actual esté cualificado para publicarse, ni que haya un defecto productivo. No se modificó pin/validator de producción, helper o Source. Elegir una reparación futura requiere decisión separada de Root.
+
+Own: build completó dos veces y la importación falló dos veces, hash `9b4dd8bed13ebaeeb9a8c7a0d998cb01b73b0dfdcedafa4dadb12f9631005bff` idéntico al previo; ahora la frontera import está observada, pero no la causa exacta ni un defecto en guards. Adoption20/command2: fallo dentro de fixture, hash `a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e`; no aparece marker site4/build del HTTP helper. La investigación no llega a esa frontera y no demuestra un defecto del algoritmo de adopción.
+
+El reporter actual cuenta 36/24 eventos de tests fallidos y wrapperFailed=0. La matriz anterior contenía 40 eventos incluyendo cuatro wrappers de archivo: no se presenta este reporter como reproducción de esos cuatro wrappers. Los conteos de tests y hashes de las 36 fallas de A sí coinciden. Las posiciones nativas del overlay llevan +4 líneas frente al original por las inserciones; el texto es normalizable y no se confunden esas posiciones con líneas originales.
+
+### Privacidad, plazos y artefactos independientes
+
+En cada brazo: control del padre pass=true; cuatro controles hijos pass=true, stackReads=0, oversizeSuppressed=true; networkDenied=0, errorOverflow=0, termination=null. Esto acredita controles observados y ausencia de intentos registrados en esta ejecución, no cobertura universal del fence. Los límites de timeout/kill no se activaron; no se declara probado un timeout real. Los steps de 2/4 s quedaron dentro de child110s/+5, comando120s/+5 y job7min.
+
+JSON result A 25641B / B 21531B, ambos menores de 64KiB. Los logs privados NO se recuperaron ni subieron. Sólo sus metadatos: stdout A11591B/hash `4d81e148f3654e1ccf49bf6717ea12422f68aaf40227e451b425f98af743e7ba`, B8961B/hash `fe55e9edf7b91e60d4da2d95ab796c0224532b3867d37b3ebf9d1e9c412ebb1e`; stderr cero bytes en ambos. No se imprimieron stacks, raw stdout/stderr, bundles o URLs firmadas. No hubo llamadas de negocio, credenciales, CF, instalaciones/builds/proyecto locales o recursos ajenos.
+
+Inventario primario de artefactos del run: exactamente dos, no expirados, ambos con source/head/run/branch exactos y retención siete días:
+- A `13916689128`, nombre `afw-ord1-A-43159614775-1`, ZIP4831B, digest `0c846dfe8ec966fb7480cc2fc5ab4938c12a7f85345877652bf677d6e235a563`; creado05:11:04Z, expira2026-11-19T05:11:04Z.
+- B `13916993516`, nombre `afw-ord1-B-43159614775-1`, ZIP4638B, digest `95ac3ec875a29c3c295b0839f187a18111574192da19f0066e7eecda0ed3747d`; creado05:11:18Z, expira2026-11-19T05:11:17Z.
+
+Primera lectura del listado:434ms. GET individual de metadata por github_fetch NO soportado por la allowlist del connector: A282ms/B172ms; sin repetir esas llamadas. Se conserva esa limitación: la metadata exacta procede del listado primario. La herramienta dedicada de descarga recibió cada ID fijo UNA sola vez: A1557ms/B1571ms, exitosas; no expone opción de timeout, por lo que son tiempos medidos, no deadline garantizado de 5s.
+
+Excepción RAM pública y acotada autorizada: se leyó UNA vez cada file reference devuelta por esa descarga, nunca otra descarga GitHub. fetch con AbortSignal.timeout(5000), redirect:error: A257ms/B168ms. ZIP y expansión se limitaron a 256KiB sin escribir/extractar a disco, instalar o ejecutar. ZIPs comprimidos4831/4638B y expansión26526/22416B. Exactamente result.json + manifest.json, directorio/local headers, CRC32, digest ZIP contra metadata primaria y bytes/SHA256 del result contra manifiesto verificados. Ninguna URL temporal se incluyó en chat/informe/Git. Wall-clock inicial de esas llamadas no se conservó por separado; las latencias son medidas, no tiempos inferidos.
+
+A result SHA256 `9aa92e6ed99582b2a3dfbcc913c45c989cd0f463c535a6548c5c563d198e3bde`; manifest885B / SHA256 `a86e25111a4fcca90d04095d7c23d8e3e6e6a8c11be113da0520e044ecba036e`.
+B result SHA256 `e8f7e7a8f9ca488f5c9a0bc05279938a4a68cd6b67cfcb6cfc43e17fc3216060`; manifest885B / SHA256 `88e3d24da56ccf29dd7e860611dde34ce590f2ac3c4e39c99a2e7f5f3667bf23`.
+
+### Evidencia segura condensada
+
+```json
+[
+  {
+    "id": 13916689128,
+    "arm": "A",
+    "status": "diagnostic_complete",
+    "summary": {
+      "tests": 109,
+      "pass": 73,
+      "fail": 36,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testEvents": {
+      "passed": 73,
+      "failed": 36,
+      "wrapperFailed": 0
+    },
+    "baselineMatches": true,
+    "controllerInvoked": 0,
+    "boundaries": {
+      "0:build:enter": 2,
+      "0:build:return": 2,
+      "0:import:enter": 2,
+      "0:import:throw": 2,
+      "1:build:enter": 71,
+      "1:build:return": 71,
+      "1:artifact_load:enter": 32,
+      "1:artifact_load:throw": 32,
+      "2:fixture:enter": 20,
+      "2:fixture:throw": 20,
+      "3:fixture:enter": 2,
+      "3:fixture:throw": 2
+    },
+    "nativeResults": {
+      "0:1:1": 40,
+      "0:1:0": 29,
+      "0:0:1": 1
+    },
+    "currentWrapper": [
+      {
+        "bytes": 63840,
+        "sha256": "198d1675b8b680bb759336ef37a73bae248192597a425a299a199dd3cb692e4b",
+        "bytesEqual": false,
+        "hashEqual": false
+      }
+    ],
+    "pinModels": [
+      {
+        "arm": "A",
+        "sourceHash": "98e41e137f400867e7c9b175f8ad4f069c8bb406c55bfe520070daa1a55fc03d",
+        "productionPinUnchanged": true,
+        "modeled": false
+      }
+    ],
+    "loadedEntry": {
+      "originalHash": "011391848605867b437270e6c940b238c2b20df3907cda217276cfecd0f64d5f",
+      "newHash": "a9892370102f6047fa458eb9ba12a18dbbc2f52fa116123929442d94a0720fb3",
+      "normalized": true,
+      "occurrences": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "privacy": {
+      "pass": true,
+      "stackReads": 0,
+      "oversizeSuppressed": true
+    },
+    "privacyControls": [
+      {
+        "pass": true,
+        "stackReads": 0,
+        "oversizeSuppressed": true
+      },
+      {
+        "pass": true,
+        "stackReads": 0,
+        "oversizeSuppressed": true
+      },
+      {
+        "pass": true,
+        "stackReads": 0,
+        "oversizeSuppressed": true
+      },
+      {
+        "pass": true,
+        "stackReads": 0,
+        "oversizeSuppressed": true
+      }
+    ],
+    "networkDenied": 0,
+    "errorOverflow": 0,
+    "termination": null,
+    "exit": {
+      "code": 1,
+      "signal": null,
+      "spawnFailed": false
+    },
+    "protectedBase": {
+      "leaves": 3188,
+      "before": "c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7",
+      "after": "c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7",
+      "equal": true
+    },
+    "zipBytes": 4831,
+    "zipSHA256": "0c846dfe8ec966fb7480cc2fc5ab4938c12a7f85345877652bf677d6e235a563",
+    "expandedBytes": 26526,
+    "files": {
+      "result.json": {
+        "bytes": 25641,
+        "sha256": "9aa92e6ed99582b2a3dfbcc913c45c989cd0f463c535a6548c5c563d198e3bde"
+      },
+      "manifest.json": {
+        "bytes": 885,
+        "sha256": "a86e25111a4fcca90d04095d7c23d8e3e6e6a8c11be113da0520e044ecba036e"
+      }
+    },
+    "manifestMatches": true,
+    "firstFetchMs": 257,
+    "enforcedFetchDeadlineMs": 5000
+  },
+  {
+    "id": 13916993516,
+    "arm": "B",
+    "status": "diagnostic_complete",
+    "summary": {
+      "tests": 109,
+      "pass": 85,
+      "fail": 24,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testEvents": {
+      "passed": 85,
+      "failed": 24,
+      "wrapperFailed": 0
+    },
+    "baselineMatches": false,
+    "controllerInvoked": 12,
+    "boundaries": {
+      "0:build:enter": 2,
+      "0:build:return": 2,
+      "0:import:enter": 2,
+      "0:import:throw": 2,
+      "1:build:enter": 71,
+      "1:build:return": 71,
+      "1:artifact_load:enter": 32,
+      "1:controller:enter": 12,
+      "1:settlement:enter": 11,
+      "1:artifact_load:throw": 20,
+      "1:controller:throw": 1,
+      "1:settlement:throw": 5,
+      "2:fixture:enter": 20,
+      "2:fixture:throw": 20,
+      "3:fixture:enter": 2,
+      "3:fixture:throw": 2
+    },
+    "nativeResults": {
+      "1:0:1": 3,
+      "1:1:1": 8,
+      "0:1:1": 29,
+      "1:1:0": 1,
+      "0:0:1": 1,
+      "0:1:0": 28
+    },
+    "currentWrapper": [
+      {
+        "bytes": 63840,
+        "sha256": "198d1675b8b680bb759336ef37a73bae248192597a425a299a199dd3cb692e4b",
+        "bytesEqual": false,
+        "hashEqual": false
+      }
+    ],
+    "pinModels": [
+      {
+        "arm": "B",
+        "sourceHash": "80479852412fcfd8a02e20152c2ad15768467ab5ef7cf1d3a7446bfc92ab777e",
+        "productionPinUnchanged": true,
+        "modeled": true
+      }
+    ],
+    "loadedEntry": {
+      "originalHash": "011391848605867b437270e6c940b238c2b20df3907cda217276cfecd0f64d5f",
+      "newHash": "a9892370102f6047fa458eb9ba12a18dbbc2f52fa116123929442d94a0720fb3",
+      "normalized": true,
+      "occurrences": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "privacy": {
+      "pass": true,
+      "stackReads": 0,
+      "oversizeSuppressed": true
+    },
+    "privacyControls": [
+      {
+        "pass": true,
+        "stackReads": 0,
+        "oversizeSuppressed": true
+      },
+      {
+        "pass": true,
+        "stackReads": 0,
+        "oversizeSuppressed": true
+      },
+      {
+        "pass": true,
+        "stackReads": 0,
+        "oversizeSuppressed": true
+      },
+      {
+        "pass": true,
+        "stackReads": 0,
+        "oversizeSuppressed": true
+      }
+    ],
+    "networkDenied": 0,
+    "errorOverflow": 0,
+    "termination": null,
+    "exit": {
+      "code": 1,
+      "signal": null,
+      "spawnFailed": false
+    },
+    "protectedBase": {
+      "leaves": 3188,
+      "before": "c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7",
+      "after": "c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7",
+      "equal": true
+    },
+    "zipBytes": 4638,
+    "zipSHA256": "95ac3ec875a29c3c295b0839f187a18111574192da19f0066e7eecda0ed3747d",
+    "expandedBytes": 22416,
+    "files": {
+      "result.json": {
+        "bytes": 21531,
+        "sha256": "e8f7e7a8f9ca488f5c9a0bc05279938a4a68cd6b67cfcb6cfc43e17fc3216060"
+      },
+      "manifest.json": {
+        "bytes": 885,
+        "sha256": "88e3d24da56ccf29dd7e860611dde34ce590f2ac3c4e39c99a2e7f5f3667bf23"
+      }
+    },
+    "manifestMatches": true,
+    "firstFetchMs": 168,
+    "enforcedFetchDeadlineMs": 5000
+  }
+]
+```
+
+### Cierre y límites
+
+Antes de cleanup: head seguía a0c9, un único run en esta rama, ambos jobs terminales, dos artefactos y sus readbacks realizados; el head del diagnóstico siguió congelado durante toda la ventana. Se restaura el workflow por referencia al blob EXACTO inactivo `0f004c70976f5e4e64c1e554c0ebfad8039b9921` y se añade únicamente este apartado al informe base `bdd56d50a21f82a572184f90ef963769481798da`. El helper ee4b permanece protegido. Se verificará árbol completo/CAS/ref/prefijo del informe y cero jobs activos; tip/árbol/blob de este cierre se entregan externamente sin autorreferencia.
+
+Ensayo CONSUMIDO, sin redispatch/rerun/retry/replacement. Ningún producto reparado. Quedan 24 fallas y su causa exacta pendiente; los tres casos nativos pendientes del antiguo comando725 y la integración ORD-1 no se cualifican aquí. No se afirma PC apagada, disponibilidad operativa ni paquete completo. Root debe reconciliar evidencia primaria y decidir el siguiente bloque.
+
+**STOP_WRITES tras readback del cierre.** `operationalReadiness=false; completePackage=false; PCoff=false`.

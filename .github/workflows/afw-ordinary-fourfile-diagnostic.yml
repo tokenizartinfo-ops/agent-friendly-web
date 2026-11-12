@@ -1,12 +1,8 @@
-name: AFW ordinary four-file diagnostic (ONE PROBE)
+name: AFW ordinary four-file diagnostic (INACTIVE)
 # PREPARATION ONLY. Both jobs fail closed behind literal false.
 # No input can choose a subject, target, compiler, credential, or pin.
 on:
-  push:
-    branches:
-      - diag/afw-ordinary-fourfile-20261112
-    paths:
-      - .github/workflows/afw-ordinary-fourfile-diagnostic.yml
+  workflow_dispatch:
 permissions:
   contents: read
   actions: read
@@ -15,7 +11,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   arm_a:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-ordinary-fourfile-20261112' && github.event_name == 'push' && github.run_attempt == '1' }}
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-ordinary-fourfile-20261112' && github.event_name == 'workflow_dispatch' && github.run_attempt == '1' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
@@ -75,7 +71,7 @@ jobs:
           [[ "$ARTIFACT_DIGEST" =~ ^[a-f0-9]{64}$ ]]
           printf 'ORD1 artifact A: id=%s sha256=%s retention-days=7\n' "$ARTIFACT_ID" "$ARTIFACT_DIGEST"
   arm_b:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-ordinary-fourfile-20261112' && github.event_name == 'push' && github.run_attempt == '1' }}
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-ordinary-fourfile-20261112' && github.event_name == 'workflow_dispatch' && github.run_attempt == '1' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
