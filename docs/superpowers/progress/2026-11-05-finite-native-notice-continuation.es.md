@@ -1,6 +1,16 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 12Nov02:10UTC: revisión completa5Important, fix round1/5 pendiente
+## CURRENT — 12Nov05:10UTC: Task1diagnóstico COMPLETE; Task2preflight yORD-1review
+
+Continuidadautorizada: AFW haciaensayoPCoff; eltextoHermes dentroAGENTS.md escontextodelworkspace, no sustituyelatarea. Sourcefinal7852f3a71de7cfcb98fedbd7b51c6a9886bf17da/treeb4246c3128e77a0b1276ea3da9e4dede17f1f8a3/3188leaves/TEMPausente, main0c9c475b protegido. Task1freshSpec+Quality cerró5hallazgos en2rondas; run43154341161/1 sobre1c2a40cf dio8Q+P1=9/9,0fail/cancel/skip/todo. ColdconsumerC0−58907ms;8épocas reales; preservacióncifrada/sameID7d. Reportfinal8f789b70 appendonly; sóloTEMPdelete/reportappend vs59d,3187blobs restantes exactos. No confundirQualifiedSource1c2 concleanuphead7852. Task1no se repite.
+
+Workspaceúnicoactual: ledger docs/superpowers/progress/2026-11-07-finite-native-budget-qualification.es.md (Task1complete@0ce777c1). Task2freshbudget_task2_impl/Astrahigh, brief docs/superpowers/briefs/2026-11-12-finite-budget-task2-preflight.md@0ce777c1/blob7fb0d96d: solamentepreflightRO, ningúnSourcewrite/job hastaRootwhitelist. Objetivo3readonly+4reduction yfinal16coherentes/7jobs/3lanes; no sumar9históricos. CustodiaAADfixedreductionkinds/coveringtests permitidos, sin clavesnuevas. NoejecuciónhastaRootgates.
+
+ORD-1deudaintegración sigueOPEN. Ramaaislada diag/afw-ordinary-fourfile-20261112 preparadaf143b866/tree74dd2255/3altas/3188baseexact/0runs. Reviewerfrescoordinary_preparation_review examina diffcompleto59fc06c4. CandidatoINACTIVO, todavía sinactivar ni repararproducto; hipótesispin/build/import noconfirmadas. Elrevisorhallóunbloqueopre-ejecuciónenpreparador; esperarinformecompleto yresolverroundacotado antesdeprobe. No ampliarelSourcefixTask1aceptado.
+
+Ownerasleep:noOTP,claves,clics/loginwindows antes12Nov11UTC/08Argentina. TodoactualesSYNpropioaisladoenActions, no APIsCloudflare/egress/OAuthreal/Max. FaltaTask2/ORD1/integraciónglobal yrecorridocloudreal/entregaútil/baja/ensayoPCoff. operationalReadiness=false;completePackage=false;PCoff=false. EstasesiónlocalPCencendido no acredita guardiacloud ni operaciónPCoff.
+
+## Estado anterior — 12Nov02:10UTC: revisión completa5Important, fix round1/5 pendiente
 
 Revisor fresco budget_task1_review (Astra/high) emitió Spec❌/QualityNeeds fixes sobre GLOBALBASE29681cae..eaf019a. CincoImportant: módulo optativo rompe npmtest sin grupo; peaks inconsistentes aceptados; then accessor pendiente certificado fulfilled; P1 acepta época vacía ausente; byteLength propio ejecuta getter. NingúnCritical niMinor adicional. Informe íntegro de hallazgos en docs/superpowers/reviews/2026-11-12-finite-budget-task1-review.es.md. La ejecución9PASSbaef sigue siendo evidencia válida del caso medido; no prueba ausencia de esos defectos. Task1 NOcomplete yTask2 bloqueada por el gate.
 
