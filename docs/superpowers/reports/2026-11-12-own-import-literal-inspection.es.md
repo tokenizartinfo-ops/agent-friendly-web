@@ -576,3 +576,204 @@ Rango completo de SAME-reviewer:53176240de1fcac9d9a423a62ec44cea1e88b3e8..HEAD e
 Commit con padre6ecd, [skip ci], expected_sha6ecd/force=false. Criterio externo de cierre: ref/commit/árbol completo no truncado3191blobs,3189tuples fuera de helper+informe intactos,3188originales f5 preservados, tres archivos completos leídos, workflow manualfalse, prefijo de informe exacto, un solo run histórico terminal/attempt1 y cero adicionales/activos. Head/tree/blob final del informe y CAS/readbacks efectivos van en contrato externo, sin autorreferencia.
 
 Preparación terminada INACTIVA; SAME-reviewer y nueva decisión Root pendientes. No autoactivación, nuevo job, rerun o cambio de cap por inferencia. STOP_WRITES al cerrar. operationalReadiness=false; completePackage=false; PCoff=false.
+
+
+## Nueva medición acotada O4 consumida — inspección completa e inactiva al cierre
+
+Liberación nueva leída: docs/superpowers/briefs/2026-11-12-own-import-literal-cap-single-inspection.md @3a94af508f4b017741adf0b1f4916b2fb8e6c713, blob c00392d0ff7ff543c8d0f2dbe1e3f451f8967769. SAME-reviewer Spec/Quality aprobado sin findings, revisión561388bde50f303d771091432202dd7b308db53f y paquete04acf771. Esta autorización consumió una medición NUEVA con parámetros revisados a partir del agotamiento medido previo, no un rerun del job antiguo. La inspección43189735097 conserva su resultado incomplete y su entitlement consumido.
+
+BASEd0cfcac70811cd6eb23edd416e579d402955626c/árbolcb2716898870dc835f73ce2349e82b5b6c2b87a5; helperfd03d1e611a607b2011c2c519158e468f5e9d976; informe previo c5800106d8b8c1810a5e5a8657d2fdf7e10a01b8; workflow inactivoaf862de67987090a3b0e4debc528a0f9abff0020. Se verificaron antes de activar head/tres archivos/tree completo/un único run viejo terminal/sin activos. Este APPEND conserva el prefijo íntegro.
+
+### Activación, fuente y comandos exactos
+
+Sólo header del workflow a push/rama exacta/selfpath exacto, nombre ONE INSPECTION, evento push y eliminación única de false&&; normalización inversa igual al workflowaf862 preparado. Cuerpo/pins/permisos/Node/heap/caps/budgets no cambiaron. Activación blob2f379f49ad4f8aa27ab5f862f5f0e342a700cc37/SHAfbc1a784900dfdf91942ba4cc22f389832ff5b7b58177a2ee11e9f0b72673698.
+
+Commit real86d5aca565bb460b19191880547440248929b6b8/árbol1393aa704b4e0a64683716452a3420a7f7590bc8, padre d0cfcac7; CAS exacto force=false. Tree3191/no truncado y3190tuples fuera de workflow idénticos. Ref permaneció congelado en86d5 hasta terminal/metadata y aceptación del ZIP primario. No hubo otra activación, cambio de helper o elevación automática de cap.
+
+Run [43209668123](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43209668123), push/attempt1/job único131153755154: TERMINAL SUCCESS. run_started_at2026-11-12T11:30:03Z/updated_at2026-11-12T11:30:43Z; intervalo metadata40s, no duración fina de parser ni medición de memoria pico. Setup/checkout/Node/install/inspección/preservación/upload/metadata/gate final con conclusión success. El gate final y el DTO primario confirman inspection_complete, no sólo continue-on-error de un paso.
+
+Comandos del cuerpo revisado:
+
+```text
+timeout --signal=TERM --kill-after=3s 25s npm ci --ignore-scripts --no-audit --no-fund
+timeout --signal=TERM --kill-after=3s 60s node diagnostic-code/scripts/diagnostics/own-import-literal-inspection.mjs
+```
+
+El hijo usó el flag fijo --max-heap-size=256; startup leyó límiteV8heap268435456bytes y verificó argv/ausencia de flags en conflicto. No es RSS, heap usado/pico, memoria de buffers externos ni límite del subprocess esbuild. Hijo45s+3/comando60s+3/job2min no ejercitados como deadline: exit0/signalnull/spawnFailedfalse/terminationnull.
+
+### Hechos de la medición
+
+Misma emisión exacta2111553bytes/SHA2b2334f3bb333d13b6e7a6238fe8091a681a986d233fc1253157e64bdbd0f2f2, identityMatches=true, warnings0, outputFiles1, build literal79f548435ad46645bd22d1a036aa108dee5dc98a1861d567312d6bf19eee7a7b, compiler0.28.2/profilefinite_trial_event. imported=false/evaluated=false. No test fue importado o ejecutado; no Miniflare, SDK/auth factory o I0 de aplicación.
+
+Acorn8.18.0 completó parse y diccionario con:
+
+- allocationAttempts/completions289982/289982.
+- uniqueVisitAttempts/completions289702/289702.
+- Ambos debajo de600000, conservados por separado; no se atribuye la diferencia280 a una clase específica de nodos.
+- candidates793; folded363 ocurrencias de payload estático, no necesariamente363mensajes únicos; foldedBytes20379 es el contador de presupuesto de fold que incluye intermedios.
+- unknown426unsupported_ast+4missing_payload=430; los desconocidos no se convierten en no-error.
+- matches0 para hash9b4dd8bed13ebaeeb9a8c7a0d998cb01b73b0dfdcedafa4dadb12f9631005bff; conclusión exacta NO_MATCH_IN_BOUNDED_STATIC_DICTIONARY, sin atribución a módulo.
+
+Esto descarta el hash sólo entre esas363ocurrencias que el lenguaje de fold pudo determinar en esta emisión. No descarta mensajes dinámicos, alias, formas fuera del diccionario, throws implícitos/nativos ni identifica el origen ejecutado. El Error own9b4 sigue SIN RESOLVER. No es reparación, ordinary-suite green, guardia ni PCoff. Sólo este run/emisión completó bajo los límites configurados; no se generaliza suficiencia de600k/256MiB a otros inputs.
+
+Fuente3188hojas/modos antes/después c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7 igual; helperHashde88e032aa15542eeaf7adf01a0e820a2904e63397032176843450a5948e0fd2 igual a fd03. Privacidad y siete metadata controles padre/hijo pass/getter0/Proxy0; networkDenied0; no raw logs subidos.
+
+DTO cerrado relevante, conservado desde auditoría primaria independiente:
+
+```json
+{
+  "status": "inspection_complete",
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "workflowRef": "refs/heads/diag/afw-own-literal-20261112",
+    "trigger": "push",
+    "workflowSource": "86d5aca565bb460b19191880547440248929b6b8",
+    "testSource": "f5f52660d19ec9fc634bbc49558db75582fdaf88",
+    "runId": "43209668123",
+    "attempt": 1,
+    "node": "v22.23.4",
+    "os": "Ubuntu24.04",
+    "mode": "SYN_COMPILE_ONLY_NO_IMPORT",
+    "childContext": "MODELED_STERILE_SYNTHETIC",
+    "workflowContextIsAdmissionAuthority": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false
+  },
+  "helperHash": "de88e032aa15542eeaf7adf01a0e820a2904e63397032176843450a5948e0fd2",
+  "expectedEmission": {
+    "bytes": 2111553,
+    "sha256": "2b2334f3bb333d13b6e7a6238fe8091a681a986d233fc1253157e64bdbd0f2f2"
+  },
+  "protectedBase": {
+    "leaves": 3188,
+    "before": "c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7",
+    "after": "c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7",
+    "equal": true
+  },
+  "privacy": {
+    "pass": true,
+    "getterTouches": 0,
+    "proxyTrapTouches": 0,
+    "proxyPrototypesSafe": true,
+    "ordinaryNative": true,
+    "crossRealmNative": true,
+    "crossRealmExactUnknown": true,
+    "spoofRejected": true,
+    "oversizeSuppressed": true,
+    "cycleBounded": true,
+    "rawCanaryAbsent": true
+  },
+  "metadata": {
+    "pass": true,
+    "cases": 7,
+    "touches": 0,
+    "literal": true,
+    "addition": true,
+    "template": true,
+    "primitiveAddition": true,
+    "gettersUntouched": true,
+    "proxyUntouched": true,
+    "callNotEvaluated": true
+  },
+  "progress": {
+    "state": "observed",
+    "allocationAttempts": 289982,
+    "allocationCompletions": 289982,
+    "uniqueVisitAttempts": 289702,
+    "uniqueVisitCompletions": 289702
+  },
+  "execution": {
+    "exit": {
+      "code": 0,
+      "signal": null,
+      "spawnFailed": false
+    },
+    "termination": null,
+    "heap": {
+      "kind": "V8_HEAP_ONLY",
+      "flag": "--max-heap-size=256",
+      "requestedBytes": 268435456,
+      "heapSizeLimitBytes": 268435456,
+      "verified": true,
+      "rssBounded": false,
+      "externalBuffersBounded": false,
+      "compilerSubprocessBounded": false
+    },
+    "emission": {
+      "bytes": 2111553,
+      "sha256": "2b2334f3bb333d13b6e7a6238fe8091a681a986d233fc1253157e64bdbd0f2f2",
+      "identityMatches": true,
+      "imported": false,
+      "evaluated": false
+    },
+    "build": {
+      "profile": "finite_trial_event",
+      "literalHash": "79f548435ad46645bd22d1a036aa108dee5dc98a1861d567312d6bf19eee7a7b",
+      "compiler": "0.28.2",
+      "warnings": 0,
+      "outputFiles": 1
+    },
+    "parser": {
+      "name": "acorn",
+      "version": "8.18.0",
+      "sourceType": "module",
+      "errorRecovery": false,
+      "allocationAttempts": 289982,
+      "allocationCompletions": 289982
+    },
+    "inspection": {
+      "nodes": 289702,
+      "candidates": 793,
+      "folded": 363,
+      "foldedBytes": 20379,
+      "unknown": {
+        "unsupported_ast": 426,
+        "missing_payload": 4
+      },
+      "matches": [],
+      "conclusion": "NO_MATCH_IN_BOUNDED_STATIC_DICTIONARY",
+      "moduleAttribution": false
+    },
+    "networkDenied": 0,
+    "rawFiles": [
+      {
+        "name": "raw.stdout",
+        "bytes": 1678,
+        "sha256": "b1501398f90d56d2417341c58af1acec6810068a414d95367364dac2b1d15959",
+        "uploaded": false
+      },
+      {
+        "name": "raw.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uploaded": false
+      }
+    ],
+    "rawLogsUploaded": false
+  }
+}
+```
+
+### Custodia primaria y auditoría única Root
+
+Listing especializado del actor por run/nombre exactos: ID13940628317, afw-own-literal-43209668123-1, 2381bytes, digestsha256:08d675baf81b89f4027c0c355894ed9096c19b9c010c27d7a87f38d3132406db, expired=false, created_at2026-11-12T11:30:37Z, expires_at2026-11-19T11:30:36Z; run/head/branch/repositoryId corresponden a43209668123/86d5. Tiempo medido810ms, sin timeout impuesto por la herramienta. No se leyó el endpoint genérico de artefacto ni logs.
+
+Root realizó la ÚNICA descarga/auditoría de bytes; actor0downloads. Fuente inmutable de la aceptación: docs/superpowers/reviews/2026-11-12-own-import-literal-cap-primary-audit.md @9adea2bc2ccc50105aa8deb9f9db81e39310f3e4, blob559cdede226e3a76f0c942f8a1bafebd1b223d88. No se presenta como auditoría ZIP propia del actor.
+
+Root registró lectura2026-11-12 11:33:31UTC, fetch579.6124ms, Abort5s/no redirects/cap128KiB, RAM sin filesystem ni URLs impresas. ZIP2381bytes/SHA08d675baf81b89f4027c0c355894ed9096c19b9c010c27d7a87f38d3132406db coincide con digest primario. CRC vector conocido correcto/local-central/exact2paths/sin extras/sin symlinks/manifiesto/inventario/schema/contexto/flags verificados:
+
+- result.json5842B/SHA5b3d3af2a87448be297d513b416f5fb0e3f92820f683633eb9dcd17b258ae3e2/CRC9dfd63bb.
+- manifest.json259B/SHAe93c869fe2d7bcb694e5a015da11a7a261e5b3909b6c671387a1a92ab7361cf3/CRC9ffdd816.
+- Total expandido6101bytes; retención7d hasta2026-11-19T11:30:36Z.
+- Logs privados sólometadata: stdout1678bytes/hashb1501398f90d56d2417341c58af1acec6810068a414d95367364dac2b1d15959; stderr0/emptyhash. uploaded=false; no se leyó su contenido.
+
+Ningún download_url/file_uri/URL firmada, header, payload, stack, bundle o AST se imprimió o persistió por el actor en esta unidad. El artefacto contiene exclusivamente los dos JSON cerrados.
+
+### Cierre y alcance final
+
+Tras terminal/ref congelado/metadata/auditoría Root, restauración EXACTA del workflowaf862/manualfalse/sin inputs y sólo este APPEND del informe. Helperfd03 y los3189tuples fuera de workflow+informe intactos respecto al run86d5. Respecto a BASEd0cfcac7 sólo cambia el informe.
+
+Commit de cierre separado de fuente de ejecución, padre86d5, expected_sha exacto, force=false, [skip ci]. Contrato externo prueba ref/commit/árbol completo3191/no truncado,3188originales f5 protegidos, tres archivos leídos completos, helperfd03/workflowaf862/prefijo de informec580 intactos. Totalruns=2, ambosattempt1/terminales, ningún adicional/activo. Los hashes propios finales del informe/head/tree y resultados efectivos van externamente, no por autorreferencia.
+
+NativeSource sólo ejecutó/preparó unidades PURE separadas, según Root; no se tomó eso como prueba de actual I0. ActualNative16 continúa HELD hasta sus propias condiciones. Esta unidad no autoriza otra inspección, mayor cap ni cambio de implementación. STOP_WRITES al cerrar; operationalReadiness=false; completePackage=false; PCoff=false.
