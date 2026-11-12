@@ -1,7 +1,9 @@
 name: AFW reference supplement TWO-JOB KEYLESS CONTROLS
-run-name: AFW reference supplement INACTIVE CONTROLS ONLY ${{ github.sha }}
+run-name: AFW reference supplement SERIAL CONTROLS ONLY ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
 permissions:
   contents: read
   actions: read
@@ -10,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   producer:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     outputs:
@@ -919,7 +921,7 @@ jobs:
 
   verifier:
     needs: producer
-    if: ${{ false && success() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ success() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
