@@ -1,0 +1,3 @@
+# UNVERIFIED inactive native orchestration draft
+
+2026-11-12 08:31:37 UTC. Preserve-only artifact: Gitblob67486c24cb02bc4105d617fbed967bac288e60ce/106545ASCIIUTF8bytes, manual/all7false/noinputs/no push. Gitblobreaderreturnedcontentonly(noSHAfield); initialRootmetadataassertionmistakenlyexpectedSHAandstoppedbeforeanymutation. Reusedcachedcontent(no reread), validatedinertshape, andanchoredbyrequestedimmutableblobSHAwithfetch_fileSHAreadbackrequired. Not an executableworkflow/notqualified/notNative16release. Source4f35checkpointstillolderinactivemanualecabe; thisdraftcontainsplannedF6/F7/M2wiringandmustbereconciledwithcoveringGREEN/staticreviewbeforeuse. Pathoutside.github/workflowsisinert. No secretvalues; environmentkeynamesreferencesonly.
