@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,rm} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
 import {createBudgetDiagnostics,observeBudgetPromise,createBudgetRuntime} from './fixtures/finite-budget-diagnostics.mjs';
 import {persistBudgetEvidence,verifyObservedBudgetMetrics,verifyCompleteBudgetTrace} from './fixtures/finite-budget-evidence.mjs';
 const revision='a'.repeat(40);
@@ -12,6 +13,7 @@ test('Q1 projection redacts secret markers and ignores accessors',()=>{
  const op=c.begin(r,child,metadata);c.settle(op,{at:2,status:'fulfilled'});const dto=c.snapshot(),raw=JSON.stringify(dto);
  assert(!raw.includes('SECRET_Q1'));assert(!raw.includes('url'));assert.equal(accessed,false);assert.equal(dto.rows[0].resourceClass,'KV');assert.equal(dto.testRevision,revision);
  const invalid=c.begin(r,child,{phase:'SECRET_Q1',resourceClass:'KV',operation:'get',at:3});assert.equal(invalid,null);assert(c.snapshot().coverage.invalid>0);assert(!JSON.stringify(c.snapshot()).includes('SECRET_Q1'));
+ optionalBudgetDefaultMode();
 });
 test('Q2 one native entry and duplicate settlement retain consistent denominators',async()=>{
  const {c,r,child}=fixture(),op=begin(c,r,child);c.settle(op,{at:10,status:'fulfilled'});c.settle(op,{at:20,status:'rejected'});
@@ -45,6 +47,7 @@ test('Q3 fixed Root and phase survive a concurrent Root and late settlement',asy
  const rows=runtime.snapshot().rows;assert.deepEqual(rows.map(v=>[v.rootOrdinal,v.phase]),[[1,'authorize_get'],[2,'monitoring_post']]);assert(rows[0].settledAt>=rows[1].settledAt);assert.equal(runtime.snapshot().totals.peak,2);
 
  await coldPhaseReentry();
+ await positiveEpochInventory();
 });
 test('Q4 logical denial and cancellation do not fabricate native settlement',()=>{
  const {c,r,child}=fixture(),op=begin(c,r,child);c.logical(op,{at:5,reason:'timeout'});c.cancel(op,{at:6,stage:'started'});
@@ -227,6 +230,7 @@ test('Q5 observing preserves actual promise identity, resolution, rejection and 
  const snapshot=runtime.snapshot();assert.equal(snapshot.totals.nativeStarted,4,'outer facade ACK is not a second native row');assert.equal(snapshot.totals.nativeRejected,1);assert.equal(snapshot.coverage.unattributed,0);
 
  await coldFacadeBinding();
+ await unobservablePromiseSettlement();
 });
 test('Q6 retained record bounds preserve native identity, observed metrics and omission evidence',async()=>{
  const bounded=createBudgetDiagnostics({testRevision:revision,workerRole:'QA',maxRows:1});
@@ -360,6 +364,7 @@ test('Q6 retained record bounds preserve native identity, observed metrics and o
  assert.equal(bodyRead.fetchOpOrdinal,outbound.opOrdinal);assert.equal(bodyRead.rootOrdinal,outbound.rootOrdinal);assert.equal(bodyRead.childOrdinal,outbound.childOrdinal);
  assert.equal(bodyRead.childDeadline,5000);assert.equal(bodyRead.rootDeadline,30000);assert.equal(bodyRead.phase,'authorize_get');assert.equal(bodyRead.resourceClass,'CFversion');
 
+ truncatedPeakConsistency();
 });
 test('Q7 bounded UTF8 summary hashes the exact complete JSON written',async t=>{
  const path='output/finite-budget/q7-evidence.json';t.after(()=>rm(path,{force:true}));const full={purpose:'SYN',payload:'ñ'.repeat(10000),nested:{preserved:true}},before=JSON.stringify(full),result=await persistBudgetEvidence({path,full,testRevision:revision,caseName:'Q7',counts:{tests:1,pass:1,unsafe:'SECRET_Q7'}});
@@ -407,6 +412,7 @@ test('Q8 opaque wire bytes and linked body invocations preserve interval and byt
  const wrongLink=structuredClone(nativeRows);wrongLink.rows[1].fetchOpOrdinal=wrongLink.rows[1].opOrdinal;
  assert.throws(()=>verifyObservedBudgetMetrics(wrongLink),/fetch parent/);
 
+ await intrinsicReadBytes();
 });
 
 async function coldSourceExpressions(kind, controls=''){
@@ -542,4 +548,103 @@ async function coldPhaseReentry(){
  const callback=function(){'use strict';return this;};
  const receivers=[runtime.run(child,callback),runtime.run(child,()=>runtime.phase('sdk_lookup',callback)),runtime.run(child,()=>runtime.phase('sdk_lookup',()=>runtime.run(child,callback)))];
  assert.deepEqual(receivers,[undefined,undefined,undefined],'cold-C original strict callback receiver');
+}
+
+function optionalBudgetDefaultMode(){
+ const env={...process.env};delete env.AFW_BUDGET_GROUP;
+ const run=group=>spawnSync(process.execPath,['--test','--test-reporter=tap','test/mcp-qa-finite-budget-native.test.mjs'],{env:group===undefined?env:{...env,AFW_BUDGET_GROUP:group},encoding:'utf8',timeout:30000,maxBuffer:256*1024});
+ const ordinary=run(undefined);
+ assert.equal(ordinary.error,undefined,'bounded default-mode subprocess');
+ assert.equal(ordinary.status,0,'R1 optional qualification inactive in ordinary command');
+ assert(!/^# Subtest: (?:R0|P1) /m.test(ordinary.stdout),'absent group registers no native qualification');
+ for(const group of ['', 'unknown']){
+  const rejected=run(group);assert.equal(rejected.status,1);assert((rejected.stdout+rejected.stderr).includes('SYN budget group unsupported before I0'));
+ }
+}
+
+function truncatedPeakConsistency(){
+ const c=createBudgetDiagnostics({testRevision:revision,workerRole:'QA',maxRows:1}),r=c.root({},{phase:'setup',deadline:30000,kind:'control'});
+ for(let i=0;i<2;i++){const op=c.begin(r,null,{phase:'setup',resourceClass:'KV',operation:'get',at:i*2});c.settle(op,{at:i*2+1,status:'fulfilled'});}
+ const valid=c.snapshot();assert.equal(valid.retention.operationRows.omitted,1);assert.equal(verifyObservedBudgetMetrics(valid).level,'observed_metrics');
+ assert.deepEqual([valid.totals.peak,valid.totals.scopes[0].peak,valid.byPhaseResource[0].peak],[1,1,1]);
+ const mutations=[
+  s=>{s.totals.scopes[0].peak=2;},
+  s=>{s.byPhaseResource[0].peak=2;},
+  s=>{s.totals.peak=2;}
+ ];
+ const rejected=mutations.map(mutate=>{const sample=structuredClone(valid);mutate(sample);try{verifyObservedBudgetMetrics(sample);return false;}catch(error){assert.equal(error.code,'ERR_ASSERTION');return true;}});
+ assert.deepEqual(rejected,[true,true,true],'R2 scope group and global peak reconciliation');
+}
+
+async function unobservablePromiseSettlement(){
+ const {runtime,child}=memoryScope();let release,getters=0,calls=0;
+ const pending=new Promise(resolve=>{release=resolve;});
+ Object.defineProperty(pending,'then',{get(){getters++;throw Error('must not inspect then accessor');}});
+ const holder={get(arg){assert.equal(this,holder);assert.equal(arg,17);calls++;return pending;}};runtime.nativeHolder(holder,'KV');
+ const returned=runtime.run(child,()=>runtime.member(holder,'get',{operation:'get'})(17));
+ assert.equal(returned,pending);assert.deepEqual([calls,getters],[1,0]);
+ const s=runtime.snapshot(),observed=[s.rows[0].status,s.totals.nativeSettled,s.totals.active,s.coverage.observedMetricsComplete];
+ release('same');assert.equal(await pending,'same');assert.equal(getters,0);
+ assert.deepEqual(observed,['pending',0,1,false],'R3 uninspectable pending Promise remains unsettled');
+ const after=runtime.snapshot();assert.equal(after.rows[0].status,'pending');assert.equal(after.totals.nativeSettled,0);assert(after.coverage.invalid>0);assert.equal(after.totals.nativeRejected,0);
+ const control=memoryScope(),normal=Promise.resolve('normal'),syncValue={same:true};let controlCalls=0;
+ const native={get(value){assert.equal(this,native);controlCalls++;return value;}};control.runtime.nativeHolder(native,'KV');
+ assert.equal(control.runtime.run(control.child,()=>control.runtime.member(native,'get',{operation:'get'})(syncValue)),syncValue);
+ const normalReturned=control.runtime.run(control.child,()=>control.runtime.member(native,'get',{operation:'get'})(normal));assert.equal(normalReturned,normal);assert.equal(await normalReturned,'normal');
+ assert.deepEqual([controlCalls,control.runtime.snapshot().totals.nativeSettled,control.runtime.snapshot().totals.active,control.runtime.snapshot().coverage.invalid],[2,2,0,0]);
+ const c=createBudgetDiagnostics({testRevision:revision,workerRole:'QA'}),root=c.root({},{phase:'setup',deadline:30000,kind:'control'}),op=begin(c,root,null,'setup',performance.now());
+ assert.equal(observeBudgetPromise(c,op,pending),pending);assert.equal(getters,0);assert.equal(c.snapshot().totals.nativeSettled,0);assert.equal(c.snapshot().totals.active,1);assert(c.snapshot().coverage.invalid>0);
+}
+
+async function positiveEpochInventory(){
+ const ts=(await import('typescript')).default;
+ const evidence=await import('./fixtures/finite-budget-evidence.mjs');
+ const source=await readFile('test/mcp-qa-finite-budget-native.test.mjs','utf8'),ast=ts.createSourceFile('native-test.mjs',source,ts.ScriptTarget.ESNext,true,ts.ScriptKind.JS);
+ assert.equal(ast.parseDiagnostics.length,0);
+ const callbacks=[];
+ function visit(node){if(ts.isCallExpression(node)&&ts.isIdentifier(node.expression)&&node.expression.text==='test'&&ts.isStringLiteral(node.arguments[0])&&node.arguments[0].text.startsWith('P1 '))callbacks.push(node.arguments.at(-1));ts.forEachChild(node,visit);}
+ visit(ast);assert.equal(callbacks.length,1);const statements=callbacks[0].body.statements;
+ const first=statements.findIndex(node=>ts.isVariableStatement(node)&&node.declarationList.declarations.some(d=>ts.isIdentifier(d.name)&&d.name.text==='epochs'));
+ assert(first>=0,'actual P1 epoch validation block');
+ const block=statements.slice(first).map(node=>node.getText(ast)).join('\n');
+ const validate=Function('assert','result','process','console','verifyObservedBudgetMetrics','verifyCompleteBudgetTrace','verifyPositiveBudgetEpochInventory','"use strict";'+block);
+ const keys=[['producer',0,'M'],['producer',0,'QA'],['producer',1,'M'],['producer',1,'QA'],['producer',2,'M'],['producer',2,'QA'],['consumer',0,'M'],['consumer',0,'QA']];
+ const phases=['setup','authorize_get','authorize_post','sdk_lookup','token_exchange','mcp_read','monitoring_get','monitoring_post','cleanup_before_restore','restore','sdk_reduction','final_inventory'];
+ // MODELED DTOs from the real collector; no native fixture, clock or identity.
+ const epochs=keys.map(([segment,epoch,role])=>{
+  const c=createBudgetDiagnostics({testRevision:revision,workerRole:role}),r=c.root({},{phase:'setup',deadline:30000,kind:'control'});
+  if(!(segment==='consumer'&&role==='M'))for(const [i,phase]of (segment==='producer'&&epoch===0&&role==='QA'?phases:['setup']).entries()){
+   const op=c.begin(r,null,{phase,resourceClass:'KV',operation:'get',at:i*2});c.settle(op,{at:i*2+1,status:'fulfilled'});
+  }
+  return {segment,epoch,role,snapshot:c.snapshot()};
+ });
+ const check=value=>validate(assert,{diagnostics:{epochs:value}},{env:{GITHUB_SHA:revision}},{info(){}},verifyObservedBudgetMetrics,verifyCompleteBudgetTrace,evidence.verifyPositiveBudgetEpochInventory);
+ check(epochs);
+ assert.throws(()=>check(epochs.filter(e=>!(e.segment==='consumer'&&e.role==='M'&&e.epoch===0))),{code:'ERR_ASSERTION'},'R4 missing empty consumer epoch rejected');
+ const invalid=[
+  [...epochs,epochs[0]],
+  [...epochs.slice(0,-1),{...epochs.at(-1),epoch:1}],
+  [...epochs.slice(0,-1),{...epochs.at(-1),role:'fixture'}],
+  [...epochs.slice(0,-1),{...epochs.at(-1),epoch:'0'}]
+ ];
+ for(const value of invalid)assert.throws(()=>check(value),{code:'ERR_ASSERTION'});
+}
+
+async function intrinsicReadBytes(){
+ const cases=[
+  {bytes:new ArrayBuffer(7),length:7,direct:true,throws:true},
+  {bytes:new Uint8Array(5),length:5,direct:false,throws:false},
+  {bytes:new DataView(new ArrayBuffer(3)),length:3,direct:false,throws:true}
+ ];
+ const observations=[];
+ for(const item of cases){
+  let getters=0,calls=0;Object.defineProperty(item.bytes,'byteLength',{get(){getters++;if(item.throws)throw Error('must not inspect byteLength accessor');return 999;}});
+  const value=item.direct?item.bytes:{value:item.bytes,done:false},actual=Promise.resolve(value);
+  const reader={read(arg){assert.equal(this,reader);assert.equal(arg,17);calls++;return actual;}},stream={getReader(){return reader;}},response={body:stream};
+  const {runtime,child}=memoryScope();
+  const returned=runtime.run(child,()=>{runtime.localResponse(response);const nativeReader=runtime.member(runtime.body(response),'getReader',{edge:'reader'})();return runtime.member(nativeReader,'read',{operation:'read',exposedBytes:true})(17);});
+  assert.equal(returned,actual);assert.equal(await returned,value);assert.equal(calls,1);
+  const s=runtime.snapshot(),row=s.rows[0];observations.push([getters,row.nativeBytesRead,row.status,s.totals.nativeSettled,s.totals.active,s.coverage.invalid]);
+ }
+ assert.deepEqual(observations,cases.map(c=>[0,c.length,'fulfilled',1,0,0]),'R5 byte lengths bypass own business getters');
 }
