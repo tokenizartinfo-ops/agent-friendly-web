@@ -2724,3 +2724,56 @@ Final full-tree comparison against BASE2 must show only runtime, pure test and t
 R1/R2/R4/R5 remain addressed by the scoped prior verdict; R3 now has causal RED/GREEN evidence and awaits the ONE scoped re-review of R3/new breakage. ORD-1 independently remains OPEN for integration; no waiver or repair of its36pre-round failures is implied. Current-source native qualification remains pending. No human step was needed/requested; no Source/main force/reset, unrelated edit, runtime/Cloudflare/OAuth/OTP/credential/cron/Container/realconsumer/Max/mail/PR/deploy action occurred. STOP_WRITES after final restore/report readback.
 
 operationalReadiness=false; completePackage=false; PCoff=false.
+
+## 2026-11-12 — Reviewed current-source native positive qualification (one activation, attempt 1)
+
+Authority: Rootdocs `0ca1d4b5345937b71383dd115cad8912c14ad90a`, brief `docs/superpowers/briefs/2026-11-12-finite-budget-reviewed-native-positive-task1.md` blob `8e8e97c7b4ca52e39e5766739f5873fd323d3b6e`. Fresh fix2 re-review blob `deb9d18d5adff944f412c559999a920d5488525d` returned R3 ADDRESSED / Spec✅ / QualityApproved / zero new Critical, Important or Minor; all five findings closed. This section supersedes the earlier “current-source qualification pending” status only for this measured SYN case. ORD-1 remains OPEN.
+
+BASE `59d7bb15c01772550c8f38a90d771dba4a5342f5`, tree `8478646e2cd83968ab8e4678f48bd9a93c8877df` (3189 leaves). Qualified activation Source `1c2a40cf43a43ca7bb836bcfadc8be903569ac4d`, tree `76bc59660837a9a5e3a2c7b23e264795cf4b7a93`, parent exactly BASE. TEMP activation blob `522da7d5933edee603f5f263373812bf0e75640c` normalized exactly to reviewed inactive template `6f48afaaf998abc9a120410a10cfca27b1afed87` after reversing only run-name, fixed self-path push header and three original guards. All other3188 leaves equalled BASE before CAS/readback. Source stayed frozen through all terminal jobs and required preservation.
+
+[Run43154341161/1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43154341161) completed SUCCESS on this ONE Source/push/attempt1: pure job130970661778 (8tests/8pass/0fail/cancelled/skipped/todo), positive_prepare job130970904448 SUCCESS, positive_consume job130975673077 (P1 1test/1pass/0fail/cancelled/skipped/todo). Coherent current9/9, rather than adding tests from different revisions. Seven-file syntax/focused lint and strict prepared M/QA preflight passed. Original3/15/5minute jobs, Ubuntu24.04, locked dependencies and real script Node v22.23.4 retained. Platform warning: Node20 action runtimes were forced to Node24; this did not change script Node22. Both dedicated custody key-preflights succeeded before fixture use/I0; no secret value was read or copied.
+
+Original lifecycle: I0=1794457394000 (04:23:14.000Z), C0=1794458294000 (04:38:14.000Z), C1=1794458474000 (04:41:14.000Z), preserving900000+180000ms, Root30s/child5s and default prepare stop C0−120s. Cold consumer ready=1794458235093 (04:37:15.093Z), C0−58907ms, exceeding required30s by28907ms. dbNow=1794458298251 (04:38:18.251Z), C0+4251ms. No restarted clock/window, extra native run, alarm or replay.
+
+Closed business projection: alarmNull/stateComplete/baselineRestored/kvAliases/receiptClosed/sdkReductionReturned/fence/grantRevoked/finalInventory all true; completeNormal1/referenceRows1/referenceReadbacks1; noticeCount2, actions grant/revoke. sendHash `ad71dc41a0d7934e4a13dfeeeb6311cadbc01c300da1a02ad37ccc611964ebd1`; observedHash `69da9b7c4032fceb7586da75fb991f38529de0ea4f4272853583d3b40bd14414`. Unchanged P1 validates all12 native phases actually started, one baseline restore and SDK postexchange expiry≤C0. globalNativeDrainVerified=false and sdkNamespaceEmptyVerified=false remain explicit limits; no physical global drain/empty namespace claim.
+
+Exact eight real epochs, including both empty M0 captures, passed the inventory helper and real validators. Every row has invalid0, unattributed0, NUMERIC overflow false, scopesOmitted0 and guards retained0/omitted0. Retention overflow is not asserted false for truncated traces.
+
+| segment | role/epoch | operations retained/omitted | scopes retained/omitted | proof |
+| --- | --- | --- | --- | --- |
+| producer | M0 | 0/0 | 0/0 | complete_trace |
+| producer | QA0 | 7548/0 | 94/0 | complete_trace |
+| producer | M1 | 8/0 | 2/0 | complete_trace |
+| producer | QA1 | 16384/221731 | 11836/0 | observed_metrics; traceComplete=false |
+| producer | M2 | 56/0 | 9/0 | complete_trace |
+| producer | QA2 | 16384/266821 | 11498/0 | observed_metrics; traceComplete=false |
+| consumer | M0 | 0/0 | 0/0 | complete_trace |
+| consumer | QA0 | 16384/8413 | 1097/0 | observed_metrics; traceComplete=false |
+
+Custody retained original authenticated gzip/AES256GCM, same Source/run/ref/kind context, limits and inner inventory. Raw native state, snapshots, TAP and logs remain only inside encrypted envelopes; public projections are closed counts/enums/hashes. Both producer and consumer local open, postupload same-ID authenticated open, exact outer inventory/content comparison and reconstructed evidence verification succeeded.
+
+| artifact | exact ID | ZIP bytes | ZIP SHA256 | expiry UTC |
+| --- | --- | --- | --- | --- |
+| pure | 13915266275 | 26919 | 775f34b3b20bc561e15adc7cc0199cd8fc8d301706a4970cdefeb1e3d3c06299 | 2026-11-19T04:22:49Z |
+| sealed prep | 13915458669 | 22326830 | f6c25bf0f7bb91080ac435fdb8f4b9e4fef37fde7d4a9a49e29e8ed1ddef7664 | 2026-11-19T04:36:21Z |
+| sealed result | 13915368284 | 5303424 | 459281adb1a7854ba6924bde2f7c321c8737aed05b4ffe3ce19dc72537a88ed7 | 2026-11-19T04:38:33Z |
+
+Prep envelope22318902bytes/SHA256 `cd6f346b6e3a23f2b4f1fd95a4bc7c44a6a4839d865cd728b7893d14a61df340`,49 inner files/230413863raw bytes. Result envelope5300682bytes/SHA256 `49c0eda3154e8bbe33bc79257f364c7d4f51efb61d140749ebce69e5495d473d`,5 inner files/198340166raw bytes. Receipt authenticated=true/innerInventoryVerified=true. Pure public directory is the original five-file full9 inventory, not the separate regression-only format.
+
+Primary logs and actual job steps were read for each retrieval, avoiding a continue-on-error conclusion-only inference: pure own GET1/readback04:22:51.767Z; producer prior-pure GET1 at04:23:13.500Z; producer own-prep GET1 at04:36:24.652Z/custody_verified04:36:28.237Z; consumer prior-checkpoint GET1 at04:37:03.035Z/authenticated checkpoint receipt04:37:08.434Z; consumer own-result GET1 at04:38:36.780Z/custody_verified04:38:41.249Z. All first downloads succeeded; every second/third retrieval and2s/5s wait was skipped. Business/custody failure terminal checks succeeded, not a masked failure.
+
+Executed protected blobs (also preserved by cleanup):
+- `test/fixtures/finite-budget-diagnostics.mjs`: `3aba82b323837f3c14463875d472500d49c0c2e0`
+- `test/finite-budget-diagnostics.test.mjs`: `1f8b02d5b2dddb474c7db7daa04aa24e2dc948d8`
+- `test/fixtures/finite-budget-evidence.mjs`: `0d95b1616a167f7f089e3a8ca59ca9628aa8aaa9`
+- `test/mcp-qa-finite-budget-native.test.mjs`: `082340b6ede2a252a8602721ec19063cc68fafc8`
+- `test/fixtures/finite-budget-world.mjs`: `f654001b027555c41dbe3f287445e73ac849094b`
+- `test/fixtures/finite-budget-descriptors.json`: `be695028e4c12c3cb7d3b7bf2c5f2e7508f3db15`
+- `test/fixtures/finite-checkpoint-custody.mjs`: `9a486b839874ed8e9a950f6a823b18e7585de52e`
+- `test/finite-checkpoint-custody.test.mjs`: `c913c94be080597704fbf7d370475443e1f1b96d`
+
+After all terminal/readbacks, cleanup removes TEMP and appends only this section. Qualified codehead remains1c2a40 above; the subsequent cleanup head is an evidence-only descendant, not an executed qualification Source. Final fulltree must contain3188 leaves, with only TEMP deletion and report append versus BASE59d; remaining3187 leaves and every executed code blob exact. Final ref/commit/parent/tree/report-prefix/TEMP-absence readbacks and unchanged main `0c9c475b3ebaa970fc11d628b40e50a90cceb727` are checked at handoff. Root records acceptance separately.
+
+ORD-1 ordinary integration gate remains OPEN; the36pre-round failures observed in the earlier isolated A/B are not waived and their cause is not established here. No universal npmPASS, production/hosted readiness or PCoff operation is established. No Task2/merge/deploy/real grant/Cloudflare/owner/OTP/secret change occurred; no human step was required. STOP_WRITES after cleanup/readback.
+
+operationalReadiness=false; completePackage=false; PCoff=false.
