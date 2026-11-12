@@ -1,4 +1,4 @@
-import test from 'node:test';
+import test,{before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile,cp} from 'node:fs/promises';
@@ -8,7 +8,7 @@ import {ownerReferenceFixture,prepareOwnerReference,assertActualComplete,recordO
 import {verifyObservedBudgetMetrics,verifyCompleteBudgetTrace,verifyPositiveBudgetEpochInventory} from './fixtures/finite-budget-evidence.mjs';
 
 const group=process.env.AFW_BUDGET_GROUP;
-if(group!==undefined&&!['red','positive'].includes(group))throw Error('SYN budget group unsupported before I0');
+if(group!==undefined&&!['red','positive','readonly','reduction_a','reduction_b'].includes(group))throw Error('SYN budget group unsupported before I0');
 const directory='output/finite-budget/red',hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 if(group==='red')test('R0 attributable diagnostics after genuine SDK complete and durable Reference',{timeout:180000},async t=>{
  await mkdir(directory,{recursive:true});
@@ -95,3 +95,52 @@ if(group==='positive')test('P1 original 900s native lifecycle proves observed me
  assert.deepEqual([...phases].sort(),['setup','authorize_get','authorize_post','sdk_lookup','token_exchange','mcp_read','monitoring_get','monitoring_post','cleanup_before_restore','restore','sdk_reduction','final_inventory'].sort());
  for(const role of roles)assert(epochs.some(e=>e.role===role&&e.snapshot.rows.length>0));
 });
+
+
+// Fixed owned SYN cases. No producer, clock or SDK work occurs without an
+// explicitly selected native group; the preparation workflow does not run it.
+if(group==='readonly'){
+ for(const name of ['R1','R2','R3'])test(name+' fixed original SDK readonly budget',{timeout:120000},async()=>{
+  const {runBudgetReadonlyCase}=await import('./fixtures/finite-budget-world.mjs');
+  const result=await runBudgetReadonlyCase(name),f=result.facts;
+  assert.equal(result.caseName,name);assert.equal(f.completeWrites,1);assert.equal(f.completeNormal,1);
+  assert.equal(f.input.entries,name==='R2'?201:200);
+  assert.equal(f.input.correlations,1);assert.equal(f.input.expirationPreserved,true);
+  assert.equal(f.foreignUnchanged,true);assert(f.lists<=2&&f.gets<=200&&f.scopePeak<=2);
+  assert.equal(f.sdkReplay,0);assert.equal(f.nativeUnsettled,0);assert.equal(f.outwardPending,0);
+  if(name==='R1'){assert.equal(f.lists,2);assert.equal(f.gets,200);assert.equal(f.scopePeak,2);assert.equal(f.responseStatus,302);assert.equal(f.referenceRows,1);assert.equal(f.referenceBefore302,true);}
+  else{assert.notEqual(f.responseStatus,302);assert.equal(f.referenceRows,0);assert.equal(f.thirdListEntered,false);}
+  if(name==='R3'){
+   assert.equal(f.holdLabel,'holdpostnativeACK');assert.equal(f.heldNativeSettled,2);assert(f.queuedAtHold>0);
+   assert.equal(f.rootBefore.available,true);assert.equal(f.rootDuring.available,false);assert.equal(f.rootDuring.live,true);assert.equal(f.rootAfter.available,true);
+   assert(f.originalChildElapsedMs>=4900&&f.originalChildElapsedMs<10000);
+   assert.equal(f.callsAfterRelease,0);assert.equal(f.lateReference,false);
+  }
+  assert.equal(result.operationalReadiness,false);assert.equal(result.completePackage,false);assert.equal(result.PCoff,false);
+ });
+}
+if(group==='reduction_a'||group==='reduction_b'){
+ let pair;
+ before(async()=>{const {prepareBudgetReductionPair}=await import('./fixtures/finite-budget-world.mjs');pair=await prepareBudgetReductionPair(group,process.env.AFW_BUDGET_CHECKPOINT??'output/finite-budget/checkpoint');});
+ after(async()=>{if(pair)await pair.dispose();});
+ for(const name of group==='reduction_a'?['D1','D2']:['D3','D4'])test(name+' fixed original SDK reduction budget',{timeout:300000},async()=>{
+  const result=await pair.result(name),f=result.facts;
+  assert.equal(result.caseName,name);assert.equal(result.plan.C0,result.plan.I0+900000);assert.equal(result.plan.C1,result.plan.C0+180000);
+  assert.equal(result.producer.unexchanged,true);assert.equal(result.producer.codeExchanged,false);assert.equal(result.producer.normalComplete,1);
+  assert.equal(result.producer.sameCheckpoint,true);assert.equal(result.producer.consumerGroup,group);
+  assert.equal(result.recovery.pairSize,2);assert(result.recovery.pairReady<=result.plan.C0-30000);assert.equal(result.recovery.restart,false);
+  assert.equal(result.recovery.coldInventoryVerified,true);assert.equal(result.recovery.bothAliases,true);
+  assert.equal(f.input.ownTokens,name==='D2'?200:name==='D3'?201:199);assert.equal(f.input.expirationPreserved,true);assert.equal(f.foreignUnchanged,true);
+  assert(f.lists<=2&&f.deletes<=200&&f.scopePeak<=2);assert.equal(f.sdkReplay,0);
+  if(name==='D1'){assert.equal(f.deletes,200);assert.equal(f.grantRemaining,false);assert.equal(f.sdkReturned,true);assert.equal(f.sdkObserved,true);assert.equal(f.ownerReceipt,true);assert.equal(f.completed,true);}
+  else{assert.equal(f.sdkReturned,false);assert.equal(f.sdkObserved,false);assert.equal(f.ownerReceipt,false);assert.equal(f.completed,false);assert.equal(f.uncertainSendRetried,false);}
+  if(name==='D2'){assert.equal(f.deletes,200);assert.equal(f.grantRemaining,true);assert.equal(f.grantDeleteEntered,false);}
+  if(name==='D3'){assert.equal(f.thirdListEntered,false);assert.equal(f.grantRemaining,true);assert.equal(f.pendingPreserved,true);}
+  if(name==='D4'){
+   assert.equal(f.holdLabel,'holdpostnativeACK');assert.equal(f.heldNativeSettled,2);assert(f.queuedAtHold>0);
+   assert.equal(f.rootBefore.available,true);assert.equal(f.rootDuring.available,false);assert.equal(f.rootDuring.live,true);assert.equal(f.rootAfter.available,true);
+   assert(f.originalChildElapsedMs>=4900&&f.originalChildElapsedMs<10000);assert.equal(f.callsAfterRelease,0);assert.equal(f.falseSdkReturn,false);
+  }
+  assert.equal(result.operationalReadiness,false);assert.equal(result.completePackage,false);assert.equal(result.PCoff,false);
+ });
+}
