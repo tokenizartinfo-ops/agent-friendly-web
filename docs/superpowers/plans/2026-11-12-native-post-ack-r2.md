@@ -62,3 +62,7 @@ Read SPEC rulings N1–N4 as part of both tasks. N1 guarantees step environment 
 ## N5 implementation correction
 
 Read SPEC N5. Model preflight qualifies stable pins before MF/I0, but dynamic harness inputs prevent predicting Native graph hashes. Validate actual compiler outputs before mounting/first business invocation, after original I0 where applicable; reuse BOTH retained mounted-option proofs and completed ownership lifecycle before verified SAFE provenance. OFF baseline/candidate use the same captured compile inputs. N5 replaces all old full model-to-Native graph equality language; scope, one-run permits, unchanged harness/time/IDs/history and all five false flags remain.
+
+## N7 test discovery correction
+
+Laboratory test entrypoint is explicitly opt-in under SPEC N7. Absent/empty mode is inert/no registration/no proof; explicit controls requires real model receipt and runs24callbacks; explicit Native stays separately gated. This resolves N6 artifact dependency without breaking generic CI or inventing dummy assignment. Dedicated Task1 command, budgets, Source scope and permits unchanged.

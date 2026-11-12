@@ -42,7 +42,7 @@ WorldexportsONLYtwofixedadapters:
 preflightPostAckDiagnostic() -> DiagnosticPreflight;
 runPostAckR2Diagnostic() -> writesfixedownedSAFEobservationafterunwind, returnsnormallyonoriginalR2success, rethrowsSAMEoriginalR2erroronfailure.
 No exportsWeakMap/errors/fullsnapshots; noarbitrarytransform/module/case/destinationarg. NodeAsyncLocalStoragefixedprofilecontextmayisolatecompilerparallelism; oldAFW_BUDGET_DIAGNOSTIC_CANDIDATE remainsrejected.
-TestMODEempty/controls=>24KEYLESSonly; native_r2_once=>ONEtestR2onlystrictrepo/ref/workflow/attempt1gates. UnknownMODErejectsbeforeMF/I0. NativeentryinvokesrunBudgetReadonlyCase('R2')EXACTLYonce, NEVERold3Rtestfile/filter.
+Test MODE absent/empty => inert with NO diagnostic registration/proof; explicit controls =>24 KEYLESS callbacks after real model receipt; native_r2_once=>ONEtestR2onlystrictrepo/ref/workflow/attempt1gates. UnknownMODErejectsbeforeMF/I0. NativeentryinvokesrunBudgetReadonlyCase('R2')EXACTLYonce, NEVERold3Rtestfile/filter.
 
 ## Default byteidentity and diagnostic emission/provenance
 
@@ -177,3 +177,14 @@ Upload immutable MODEL directory; retain actual uploader artifact-ID AND digest.
 Producer job outputs expose assigned model ID/digest for independent verifier. Independent verifier may download only this sanitized model artifact and SMALLSAFE (and inspect encrypted metadata), verify complete closed model summary/manifest and actual checkout pins. provenance.preflightSha256 binds EXACT UTF8 whole-file bytes of model.json, no BOM or trailing invented data; the independently read model summary supplies that hash. It is a MODEL qualification document, never equality of modeled versus actual Native bundle. SDK/lock/transform/context pins still independently checked.
 
 Task1 has MODEL + SMALLSAFE artifacts; future Task2 may have MODEL + encrypted Native + SMALLSAFE. ONE of each per run, no new workflow/job/run/credential/service/permission. Budgets remain7+2 and Native preallocation headroom>=240s, so extra setup cannot extend any clock. Root/MCP downloads ONLY SMALLSAFE; MODEL artifact metadata may be read, no raw model archive download to PC. Runner verifier/model readback handles MODEL. All six committed paths unchanged; F7/protected harness unaffected. Native remains held.
+
+## Binding N7 — opt-in laboratory test entrypoint
+
+N6 makes authoritative model readback depend on a real assigned cloud artifact. Default generic npm-test discovery must neither fail due to absent MODEL receipt nor fabricate a local/synthetic assignment. Therefore N7 OVERRIDES all earlier empty/default=>controls shorthand:
+
+- AFW_POST_ACK_MODE absent or empty: register NO diagnostic tests, perform no model/context/key checks, allocate nothing and emit no proof or diagnostic qualification claim. Normal compiler/profile remains OFF. This is an inactive laboratory file, not24passed or a skipped qualification.
+- Explicit controls: register the ONE Node test wrapper, require real assigned MODEL readback, actually execute24fixed named callbacks/witness barrier and qualify only through the dedicated contracts pipeline.
+- Explicit native_r2_once: register ONE R2 test under all strict repo/ref/workflow/job/attempt guards; remains separately held.
+- Other nonempty modes reject before allocation; no local/dummy ID or automatic Native fallback.
+
+The unchanged dedicated controls command explicitly sets controls; all original proof gates remain. Cover inactive/default and unknown mode behavior within existing profile_scope control, no new control ID/workflow/Source file/run. Cost: generic CI does not claim diagnostic coverage; explicit lab CI owns that coverage. No broad standalone support project is opened.

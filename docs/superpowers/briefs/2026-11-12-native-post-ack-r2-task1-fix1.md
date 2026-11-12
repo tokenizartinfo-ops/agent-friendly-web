@@ -117,3 +117,14 @@ Root authorizes SPEC N6: ONE sanitized MODEL artifact before dependent controls/
 Upload model and retain uploaderID+digest, exact REAL assignedID download toseparate readback, API/raw/uploader triplehash + currentcontext, call protected verifyBudgetArtifact(readback,'pure',REAL_ID). No dummyID1, fakeSameIDstatement or extra workflow/run. Carry modelID/digest to independentverifier; it can validate sanitizedmodel+SMALLSAFE and encryptedmetadataonly. preflightSha256 = EXACTUTF8 model.json filebytes hash, checked against independently downloaded model. SDK/lock/transform pins recomputedfromcheckout. MODEL is never actualNativegraphprediction. Root/MCP does not downloadMODEL; metadataonly, SMALLSAFEonlydownload. Task1 artifactsMODEL+SAFE; futureNative MODEL+cipher+SAFE, oneeach/run. Same7+2/240sheadroom/sixSourcepaths, noNativepermission.
 
 N6 parsing cap clarification:4MiB bounds rawMODELZIP AND combineduncompressedtwofiles; manifest<=65536bytes; exact2regularUTF8JSON entries with CRC/path/range/EOF checks. No newfiles/artifact/run.
+
+## Binding N7 — opt-in laboratory test entrypoint
+
+N6 makes authoritative model readback depend on a real assigned cloud artifact. Default generic npm-test discovery must neither fail due to absent MODEL receipt nor fabricate a local/synthetic assignment. Therefore N7 OVERRIDES all earlier empty/default=>controls shorthand:
+
+- AFW_POST_ACK_MODE absent or empty: register NO diagnostic tests, perform no model/context/key checks, allocate nothing and emit no proof or diagnostic qualification claim. Normal compiler/profile remains OFF. This is an inactive laboratory file, not24passed or a skipped qualification.
+- Explicit controls: register the ONE Node test wrapper, require real assigned MODEL readback, actually execute24fixed named callbacks/witness barrier and qualify only through the dedicated contracts pipeline.
+- Explicit native_r2_once: register ONE R2 test under all strict repo/ref/workflow/job/attempt guards; remains separately held.
+- Other nonempty modes reject before allocation; no local/dummy ID or automatic Native fallback.
+
+The unchanged dedicated controls command explicitly sets controls; all original proof gates remain. Cover inactive/default and unknown mode behavior within existing profile_scope control, no new control ID/workflow/Source file/run. Cost: generic CI does not claim diagnostic coverage; explicit lab CI owns that coverage. No broad standalone support project is opened.

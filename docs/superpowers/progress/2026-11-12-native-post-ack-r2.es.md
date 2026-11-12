@@ -113,3 +113,9 @@ Builder correctly identified that protected verifyBudgetArtifact requires a real
 Ruling: authorize exactlyone sanitized MODEL artifact (model.json + protectedbudget-artifact.json, <=4MiB ZIP,7d, no source bodies/defines/Worker code/Native payload/private data) per relevant run. Real uploaderID/digest→separate exactIDdownload→API/raw/uploader triplehash→protected readback before dependent work. Model dir immutable, current composed inputs remain separate runner-private with hash binding. Independent verifier receives model ID/digest and hashes model.json bytes for preflightSha; Root/MCP metadata-only forMODEL, downloadonlySMALLSAFE. Costifwrong: additional bounded storage/readback/setup may block240sheadroom; never raisesbudgets or releasesNative. Existing sixSourcepaths/onefix1KEYLESSpermit remain.
 
 N6 parsing clarification: the4MiB limit bounds BOTH rawMODELZIP and combineduncompressedtwofiles; protectedmanifest<=65536bytes, exact2regularUTF8JSON/CRC/path/range/EOF. Sent tobuilder duringfix1; no Sourcefile/artifact/run expansion. Source strings for allfindings+N6 drafted; self-review underway, fix1permitunconsumed.
+
+## Fix1 default-discovery contract ruling — N7
+
+Builder identified that real MODEL readback would make generic npm-test discovery fail without an assigned artifact. Root rejects a dummy/local artifact fallback.
+
+Ruling: explicit opt-in lab test file, matching existing grouped native tests. Absent/emptymode is inert/no registration/no proof, explicitcontrols requires realMODEL and24callbacks, explicitnative strictoneR2, othernonemptymodesreject. Supersedes prior default=>controls shorthand, preserves defaultOFFproductioncompiler. Costifwrong: genericCIclaims no diagnosticcoverage; dedicated explicitcontracts job owns it. No skipped/fakequalification or newCIproject. Scope/budgets/onefix1permit unchanged. Addedprofile_scopechecks/SourceReport required.
