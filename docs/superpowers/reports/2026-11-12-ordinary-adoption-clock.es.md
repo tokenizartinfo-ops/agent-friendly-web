@@ -42,3 +42,17 @@ Ruling: el límite específico de esta preparación sustituye tests/builds/revie
 
 ## Cierre pendiente de readback
 Tras commit se requieren comparación íntegra de hojas/modos, contenidos de los tres archivos, CAS/ref y cero runs. El readback fechado se añadirá aquí conservando este bloque. Sin activar, ejecutar, tocar native Task2 ni su reloj; sin Source/main/lib/pins/recibos/credenciales/permisos/runtime/CF/OAuth/Max/correo. No overlap de jobs con reloj nativo. Después STOP_WRITES; una futura comparación única requiere revisión Root y autorización separada.
+
+## Readback primario — 2026-11-12 07:27:47 UTC
+Primer commit de preparación b4a388d459496cd6d6a58b81fc631e2805c39c4f; parent exacto f5f52660d19ec9fc634bbc49558db75582fdaf88; árbol a824a8a5708c231083909a1005641e36896cfe99. update_ref con expected_sha=f5, force=false devolvió success=true; GET ref posterior confirmó b4a388d459496cd6d6a58b81fc631e2805c39c4f.
+
+GET árbol recursivo completo: truncated=false, 3191 hojas, 3188 originales con SHA y modo exactos, cero originales modificados, solo tres adiciones 100644:
+- .github/workflows/afw-ordinary-adoption-clock.yml — 0555cd08558d89d886e67800e1a6e4d9166b1d85, 9097 bytes.
+- scripts/diagnostics/ordinary-adoption-clock.mjs — c9a22bc75ee0b66627baa64cf52955092f3c6c7f, 29622 bytes.
+- docs/superpowers/reports/2026-11-12-ordinary-adoption-clock.es.md — fdc9df0962ba7297a06838d16ad6936d790266bd, 6698 bytes antes de este append.
+
+Los tres cuerpos completos se recuperaron por SHA del commit y fueron iguales a los textos preparados, byte lógico UTF-8; no lectura parcial. Workflow preservó dos gates false, evento manual sin inputs, ningún trigger push. Segundo GET actions/runs filtrado por rama devolvió total_count=0, workflow_runs=[]. No se despachó nada.
+
+Aclaración de precisión: no se ejecutó parser YAML completo; su disponibilidad no fue comprobada. Sí se inspeccionó la estructura fija y se parsearon sin evaluar ambos programas JavaScript embebidos.
+
+Este append es únicamente evidencia de preparación: la revisión completa f5..HEAD, el hash final de este informe y el último CAS/readback se entregan a Root después de preservar este bloque. Ningún A/B ejecutado; ningún resultado B, timeout, control de privacidad, argumento de llamada o guard real medido en esta preparación. Estado PREPARED_INACTIVE; todos los indicadores operativos false. STOP_WRITES tras el readback final; Root debe revisar íntegramente antes de una futura release de UNA comparación separada.
