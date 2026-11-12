@@ -13,3 +13,7 @@ Writeradoption_clock_preparation_implSTOPatff299a4c/treef03771e6. Rootprimaryall
 ## 2026-11-12 07:35:02 UTC — preparation review approved; P3 report erratum before run
 
 FreshSpec✅QualityApproved/noP1P2; P3reportinventoryobserverblobincorrect (68dc→actualb5a5245712a08684c40c28ceac70508516950a44atf5), helper/libraryunchanged. Exactfindingdocs/superpowers/reviews/2026-11-12-ordinary-adoption-clock-preparation-review.md; SAMEwriterappendexpliciterratumONLYthenfullreadback/STOP. NoformalfixloopforMinor/no repeats/tests; RootdocprimarycheckthenfutureONEA/Brelease. Nativeclocknone/F1pureREDindependentzeroMFallowed. Task1codeaccepted, minorcorrectionpending/actualcomparisonstillnotexecuted.
+
+## 2026-11-12 07:40:20 UTC — Task1 inactive preparation complete; ONE comparison release
+
+Task1complete(f5..5d747,reviewcodeclean/P3reporterratumcorrectedonly). Rootprimaryreportc087/prefix+3190protected/ref/tree21c93verified, helperc9a/workflow0555unchanged. Comparisonentitlementnew/unconsumed; docs/superpowers/briefs/2026-11-12-ordinary-adoption-clock-single-comparison.md releasesONEpush/twofixedarmjobs/attempt1, sourcefreeze/safeartifacts/restoreexactmanualfalse/reportappend/STOP. No nativeclockconcurrent; F1purecontrols0MFallowed. Btest/firstsharedguardUNKNOWN. actualjobresult≠Bsuccess, nofreshSourceauthority/actualCF.
