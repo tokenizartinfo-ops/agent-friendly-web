@@ -17,6 +17,11 @@ Owner: Gabriel dejaPCencendida y se va a dormir; no puede intervenir antes del12
 
 Round1 remains0addressed/5open. RED1(43140111119) confirmed four, Q1 probe was noncausal due nestedNodeTestcontext. RED2(43140336358) test-only direct-load probe had expected5markers but no underlying stderr guard check. Source15df40fb488660c6510b4d55866320b3cb577c7f frozen; runtime/evidence/P1 stillBASEeaf. Root read handling-reports again and permits ONE final corrected pureRED, directNode+childNODE_TEST_CONTEXT/group removal and exact baseline guard literal 'SYN budget group unsupported before I0' before accepting default exit1. No Re-runjobs or implementation until causal; if another unexpected cause persists, STOP. Brief updated in same path. R2 clarifies max<=global<=sum for each independent partition. No new human need or nativeI0. Owner unavailable before08Argentina.
 
+
+### R4 source-fidelity repair inside round1 — 12Nov02:31UTC
+
+Final causalRED43141085705/1 Sourceca6a776be0be5289f7891533061520f743808beb passed expected8Q/3pass5ERR_ASSERTION after exact guard cause check; artifact13909612479 sameID preserved. Five corrections were implemented inSource1c7c4d191b3eb03a0d74882af7d87fde07076a18. Covering8Q/preflight passed but ordinary43141464770/1 still runs. Root found new R4 breakage before review/native: helperclosed4 vs unchanged actualepoch6fields(reason,capturedAt). Writer agrees; no Source mutation during activejob. Ruling authorizes source-faithful Q3controlRED, six-fieldrepair, final8Q/preflight plus repeatedordinarynpm on finalSource, theninactivequalifier/STOP. SamefindingR4/sameround1, notTask2 ornewfull9. All5remainopenuntilscopedreview. Brief amended, owner not needed.
+
 ## Bloque previo preservado — 12 noviembre, 01:13:58 UTC
 
 A/B/C se reprodujeron en RED43128157794/1 (8Q,5pass/3ERR_ASSERTION) y pasaron tras corrección en GREEN43128506060/1 (8/8,syntax/lint,preflight176/130/635/54). Artefactos13904395425 y13904770974 tuvieron readback; Root leyó TAP/logs y delta. No se abrió I0 ni se ejecutó P1. Source final limpio da70e2358b18f9db750e67ea6eab37fb54a96257/treec807af716c5dd14e09a59df7f9b082646bf90bf2/3188hojas,TEMPausente; reporte5173c1033d88ae18f9d494f686fa2fd2ea4dd708.
