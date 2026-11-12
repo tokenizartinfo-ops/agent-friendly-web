@@ -2575,3 +2575,129 @@ Existing24 IDs retained. Credentialless fixture basis metadata128/298888337 is S
 STATIC RED ONLY: previous selected-file MAX16*1024*1024 rejects17MiB; shared previous basis lacks exact counts and previous complete_partial/verifier controls accept oversizepartial. No baseline dynamic run claimed. Current GREEN requires the single released GitHub run,91Core+24supplement+16pair+16ZIP controls. Core77002B/SHA256d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246 and ZIP13305B/SHA256b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d byteexact. Amended shared module22454B/SHA256cd5591be711f253a0f4269ece4abd9bf7ec5b39cc062c78aebd50d72a11c5778; tests16171B/SHA2561503df1943d6bf28d59fbd57186ff565c3cce503342dc4c1db031666d047f631; bootstrap1370B/SHA2562a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1. Entire keyless WF SHA256ff9f2d0167085b9130cafc7460431f6fd551660cda2a2316a00d529d966cd464. Exact shared heredocs reused in amended actual.
 
 Permit consumed on CAS push regardless of result; freeze Source SHA/run until both terminal and send IDs. No environment/secrets/Original ciphertext/key/payload/private producer logs/SDK/Miniflare/I0/native case/runtime/Cloudflare/OAuth/OTP/cron/callback/consumer/Max/mail/main/PR/merge/deploy changes. All fixtures execute only in unique owned GitHub runner temp/cleanup, no local Source execution/clones/dependencies/temp Source files. Unchanged10s projection+validation/15s cleanup and physical child close fences; no renewal. Fixed input bound does not cap peak RAM;17MiB is not max-performance proof. OOM/runnerloss leaves UNKNOWN/no final evidence, never false green/retry. All readiness false.
+
+
+## Authenticated-payload bounded reference TaskA — current dynamic GREEN; complete actual candidate INACTIVE
+
+[Run43280472462/attempt1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43280472462), push, created2026-11-12T18:30:08Z, completed/SUCCESS2026-11-12T18:30:32Z. Frozen Sourceb30b7f4fed395d007bef81aab5323b238c7a6cb0/tree63a1ffc5f58b07e7fc3ca6d0e9145cfc56bfb517/WF099e241f002673b4d97561a2727381d25d817c19/reportbe2ff167d96ed604c780a0e7ede915214baff5b8. Exactly ONE new keyless2+2 attempt; both serial jobs terminal success before candidate mutation.91Core+24supplement+16V1pair+16ZIP controls passed0failed. No Original artifact/context private open, SDK/native/I0, environment or secret binding in this run. Full frozen WF/report bodies read back equal before push; report exact290697-character prefix retained and3188 other leaves/types/modes/SHA preserved.
+
+producer 131400113570 | completed/success | 2026-11-12T18:30:11Z to 2026-11-12T18:30:20Z
+- Set up job | success | 2026-11-12T18:30:11Z to 2026-11-12T18:30:12Z
+- Run actions/checkout@v4 | success | 2026-11-12T18:30:12Z to 2026-11-12T18:30:14Z
+- Run actions/setup-node@v4 | success | 2026-11-12T18:30:14Z to 2026-11-12T18:30:15Z
+- Materialize current exact code and finite safe proof validators | success | 2026-11-12T18:30:15Z to 2026-11-12T18:30:15Z
+- Materialize shared reference supplement and isolated controls | success | 2026-11-12T18:30:15Z to 2026-11-12T18:30:15Z
+- Pin exact previously tested core bytes | success | 2026-11-12T18:30:15Z to 2026-11-12T18:30:15Z
+- Execute only the ninety-one fixed inert fixtures | success | 2026-11-12T18:30:15Z to 2026-11-12T18:30:16Z
+- Execute twenty-four current supplement controls in credentialless synthetic context | success | 2026-11-12T18:30:16Z to 2026-11-12T18:30:16Z
+- Preserve strict closed CONTROLS proof on success or failure | success | 2026-11-12T18:30:16Z to 2026-11-12T18:30:16Z
+- Preserve only the exact safe pair | success | 2026-11-12T18:30:16Z to 2026-11-12T18:30:17Z
+- Require successful producer before any verifier | success | 2026-11-12T18:30:17Z to 2026-11-12T18:30:17Z
+- Post Run actions/setup-node@v4 | success | 2026-11-12T18:30:17Z to 2026-11-12T18:30:17Z
+- Post Run actions/checkout@v4 | success | 2026-11-12T18:30:17Z to 2026-11-12T18:30:17Z
+- Complete job | success | 2026-11-12T18:30:17Z to 2026-11-12T18:30:17Z
+
+verifier 131400232932 | completed/success | 2026-11-12T18:30:22Z to 2026-11-12T18:30:32Z
+- Set up job | success | 2026-11-12T18:30:23Z to 2026-11-12T18:30:24Z
+- Run actions/checkout@v4 | success | 2026-11-12T18:30:24Z to 2026-11-12T18:30:26Z
+- Run actions/setup-node@v4 | success | 2026-11-12T18:30:26Z to 2026-11-12T18:30:27Z
+- Reconstruct and pin validators from this frozen Source | success | 2026-11-12T18:30:27Z to 2026-11-12T18:30:27Z
+- Verify sixteen synthetic inspection pairs before artifact access | success | 2026-11-12T18:30:27Z to 2026-11-12T18:30:27Z
+- Verify sixteen controls then the assigned safe artifact exactly once | success | 2026-11-12T18:30:27Z to 2026-11-12T18:30:28Z
+- Post Run actions/setup-node@v4 | success | 2026-11-12T18:30:28Z to 2026-11-12T18:30:28Z
+- Post Run actions/checkout@v4 | success | 2026-11-12T18:30:28Z to 2026-11-12T18:30:29Z
+- Complete job | success | 2026-11-12T18:30:29Z to 2026-11-12T18:30:29Z
+
+Exact top-level shell commands from frozen workflow below. Heredoc definitions are pinned complete in the immutable Source, with exact module hashes in preceding preparation entry; their bodies are omitted here to avoid duplicating executable code. Every covering invocation and outcome is retained.
+```bash
+set -euo pipefail
+umask 077
+cat >"$RUNNER_TEMP/afw-readonly-inspector-current.mjs" <<'NODE_CORE'
+# Exact heredoc body pinned in frozen Source b30b7f4fed395d007bef81aab5323b238c7a6cb0 (NODE_CORE); omitted here.
+NODE_CORE
+cat >"$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.mjs" <<'NODE_FALLBACK'
+# Exact heredoc body pinned in frozen Source b30b7f4fed395d007bef81aab5323b238c7a6cb0 (NODE_FALLBACK); omitted here.
+NODE_FALLBACK
+cat >"$RUNNER_TEMP/afw-readonly-inspector-controls-verify.mjs" <<'NODE_VERIFY'
+# Exact heredoc body pinned in frozen Source b30b7f4fed395d007bef81aab5323b238c7a6cb0 (NODE_VERIFY); omitted here.
+NODE_VERIFY
+node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-controls-syntax.private" 2>&1
+set -euo pipefail
+umask 077
+cat >"$RUNNER_TEMP/afw-reference-supplement-current.mjs" <<'NODE_REFERENCE'
+# Exact heredoc body pinned in frozen Source b30b7f4fed395d007bef81aab5323b238c7a6cb0 (NODE_REFERENCE); omitted here.
+NODE_REFERENCE
+cat >"$RUNNER_TEMP/afw-reference-controls-current.mjs" <<'NODE_REFERENCE_TESTS'
+# Exact heredoc body pinned in frozen Source b30b7f4fed395d007bef81aab5323b238c7a6cb0 (NODE_REFERENCE_TESTS); omitted here.
+NODE_REFERENCE_TESTS
+cat >"$RUNNER_TEMP/afw-reference-bootstrap-current.mjs" <<'NODE_REFERENCE_BOOTSTRAP'
+# Exact heredoc body pinned in frozen Source b30b7f4fed395d007bef81aab5323b238c7a6cb0 (NODE_REFERENCE_BOOTSTRAP); omitted here.
+NODE_REFERENCE_BOOTSTRAP
+node "$RUNNER_TEMP/afw-reference-bootstrap-current.mjs"
+node --check "$RUNNER_TEMP/afw-reference-supplement-current.mjs"
+node --check "$RUNNER_TEMP/afw-reference-controls-current.mjs"
+set -euo pipefail
+cat >"$RUNNER_TEMP/afw-core-pin.mjs" <<'NODE_PIN'
+# Exact heredoc body pinned in frozen Source b30b7f4fed395d007bef81aab5323b238c7a6cb0 (NODE_PIN); omitted here.
+NODE_PIN
+node "$RUNNER_TEMP/afw-core-pin.mjs" >"$RUNNER_TEMP/afw-core-pin.private" 2>&1
+set -euo pipefail
+node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" controls >"$RUNNER_TEMP/afw-readonly-inspector-controls.private" 2>&1
+set -euo pipefail
+result=0
+timeout --kill-after=1s 10s env -i RUNNER_TEMP="$RUNNER_TEMP" GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 "$(command -v node)" --no-experimental-fetch "$RUNNER_TEMP/afw-reference-controls-current.mjs" >"$RUNNER_TEMP/afw-reference-controls-safe.json" 2>"$RUNNER_TEMP/afw-reference-controls.private" || result=$?
+cat "$RUNNER_TEMP/afw-reference-controls-safe.json"
+test "$result" = 0
+node --input-type=module <<'NODE_REFERENCE_PROOF'
+# Exact heredoc body pinned in frozen Source b30b7f4fed395d007bef81aab5323b238c7a6cb0 (NODE_REFERENCE_PROOF); omitted here.
+NODE_REFERENCE_PROOF
+set -euo pipefail
+node "$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.private" 2>&1
+node "$RUNNER_TEMP/afw-readonly-inspector-controls-verify.mjs" seal >"$RUNNER_TEMP/afw-readonly-inspector-controls-seal.private" 2>&1
+set -euo pipefail
+test "$CONTROLS_OUTCOME" = success
+test "$REFERENCE_OUTCOME" = success
+test "$SEAL_OUTCOME" = success
+test "$UPLOAD_OUTCOME" = success
+test "$CORE_SHA" = d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246
+
+set -euo pipefail
+umask 077
+test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+cat >"$RUNNER_TEMP/afw-safe-pair-current.mjs" <<'NODE_SAFE_ZIP'
+# Exact heredoc body pinned in frozen Source b30b7f4fed395d007bef81aab5323b238c7a6cb0 (NODE_SAFE_ZIP); omitted here.
+NODE_SAFE_ZIP
+cat >"$RUNNER_TEMP/afw-safe-materialize.mjs" <<'NODE_MATERIALIZE'
+# Exact heredoc body pinned in frozen Source b30b7f4fed395d007bef81aab5323b238c7a6cb0 (NODE_MATERIALIZE); omitted here.
+NODE_MATERIALIZE
+node "$RUNNER_TEMP/afw-safe-materialize.mjs" >"$RUNNER_TEMP/afw-safe-materialize.private" 2>&1
+node "$RUNNER_TEMP/afw-reference-bootstrap-current.mjs"
+node --check "$RUNNER_TEMP/afw-safe-verifier-current.mjs" >"$RUNNER_TEMP/afw-safe-verifier-syntax.private" 2>&1
+set -euo pipefail
+cat >>"$RUNNER_TEMP/afw-inspection-pair-controls.mjs" <<'NODE_PAIR_TESTS'
+# Exact heredoc body pinned in frozen Source b30b7f4fed395d007bef81aab5323b238c7a6cb0 (NODE_PAIR_TESTS); omitted here.
+NODE_PAIR_TESTS
+timeout --kill-after=1s 5s env -i GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 "$(command -v node)" --no-experimental-fetch "$RUNNER_TEMP/afw-inspection-pair-controls.mjs" 2>"$RUNNER_TEMP/afw-inspection-pair-controls.private"
+set -euo pipefail
+node "$RUNNER_TEMP/afw-safe-verifier-current.mjs" 2>"$RUNNER_TEMP/afw-safe-verifier.private"
+
+```
+
+Current24 supplement controls execute amended real readReference/readActualReferences/validateActualReferenceRows/validateInspectionBasis/coordinateSupplement/producerTransportAccepted/validateSupplementPair helpers, not a mirrored global-cap predicate. file_bound_links PASSED includes small vs17MiB same projected row, owned sparse literal298888338 with file_read/EIO => oversize pre-read, shared actual helper contradiction => project_failed + both not_examined + cleanup, and preserved symlink/hardlink/directory negatives. gate_no_read PASSED independently mutates fileCount and totalBytes, asserting zero reference-child. nested_identity PASSED mutates each at final transport. complete_partial/producer_transport/verifier_transport PASSED preserve missing/invalid validpartial and reject new oversizepartial/complete. Other existing18 control IDs and negative cases unchanged except credentialless SYN fixture metadata128/298888337. All24 IDs identical to prior template;91Core+16pair+16ZIP unchanged and passed.
+
+Closed output extracted from KEYLESS producer and KEYLESS verifier logs only; no actual/private producer logs fetched. Each emitted record<=2048B. Core91 validated by successful producer gate and verifier strict closed controls artifact; source-bound control module/test/bootstrap hashes in safe controls result. STATIC baseline counterexamples were not run dynamically; current controls were.
+```jsonl
+{"marker":"REFERENCE_CONTROLS/1","expected":24,"completed":24,"pass":24,"fail":0,"inventory":[{"id":"two_valid","status":"passed"},{"id":"zero_fraction_false","status":"passed"},{"id":"lookup_states","status":"passed"},{"id":"identities_flags","status":"passed"},{"id":"required_bounds","status":"passed"},{"id":"optional_types","status":"passed"},{"id":"array_bounds","status":"passed"},{"id":"empty_absent","status":"passed"},{"id":"writer_http","status":"passed"},{"id":"private_canary","status":"passed"},{"id":"file_missing_bad","status":"passed"},{"id":"file_bound_links","status":"passed"},{"id":"gate_no_read","status":"passed"},{"id":"one_cleanup","status":"passed"},{"id":"primary_cleanup","status":"passed"},{"id":"timeout_cleanup","status":"passed"},{"id":"uncertain_no_cleanup","status":"passed"},{"id":"cleanup_late_fail","status":"passed"},{"id":"whole_hash_bytes","status":"passed"},{"id":"nested_identity","status":"passed"},{"id":"complete_partial","status":"passed"},{"id":"strict_envelope","status":"passed"},{"id":"producer_transport","status":"passed"},{"id":"verifier_transport","status":"passed"}],"firstFailure":null}
+{"marker":"INSPECTION_PAIR_CONTROLS","expected":16,"completed":16,"pass":16,"fail":0,"inventory":[{"id":"observed_pass","status":"passed"},{"id":"observed_failure","status":"passed"},{"id":"observed_skip_todo","status":"passed"},{"id":"result_source","status":"passed"},{"id":"result_run","status":"passed"},{"id":"manifest_source","status":"passed"},{"id":"manifest_run","status":"passed"},{"id":"foreign_pair","status":"passed"},{"id":"fixture_count","status":"passed"},{"id":"unexamined","status":"passed"},{"id":"two_records","status":"passed"},{"id":"unknown_case","status":"passed"},{"id":"wrapper_only","status":"passed"},{"id":"manifest_bytes","status":"passed"},{"id":"manifest_digest","status":"passed"},{"id":"case_order","status":"passed"}],"firstFailure":null}
+{"marker":"SAFE_ZIP_CONTROLS","expected":16,"completed":16,"pass":16,"fail":0,"inventory":[{"id":"validator_capture_after_success","status":"passed"},{"id":"validator_rejection_identity_no_capture","status":"passed"},{"id":"zip_valid_store_crc_vector","status":"passed"},{"id":"zip_valid_deflate","status":"passed"},{"id":"zip_signed_unsigned_descriptors","status":"passed"},{"id":"zip_wrong_size","status":"passed"},{"id":"zip_wrong_upload_sha","status":"passed"},{"id":"zip_wrong_metadata_sha","status":"passed"},{"id":"zip_extra_entry","status":"passed"},{"id":"zip_duplicate_entry","status":"passed"},{"id":"zip_traversal_entry","status":"passed"},{"id":"zip_symlink","status":"passed"},{"id":"zip_bad_crc","status":"passed"},{"id":"zip_noncontiguous_ranges","status":"passed"},{"id":"zip_declared_and_inflate_caps","status":"passed"},{"id":"download_stream_redirect_auth_bounds","status":"passed"}],"failure":null}
+{"marker":"AFW_METADATA_READBACK/1","source":"b30b7f4fed395d007bef81aab5323b238c7a6cb0","run":"43280472462","attempt":1,"assignedArtifactId":"13970844891","stage":"complete","firstFailedPredicate":"none","reason":"none","httpStatus":200,"receivedBytes":776,"timeoutObserved":false,"verified":true}
+{"marker":"AFW_SAFE_READBACK/1","kind":"controls","source":"b30b7f4fed395d007bef81aab5323b238c7a6cb0","run":"43280472462","attempt":1,"artifactId":"13970844891","coreSha256":"d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246","verifierSha256":"204f829009b1fabe3d241b536e97354e086b08c31b63d9bc5caf8ae0832e8a22","safeZipModuleSha256":"b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d","producerCoreVerified":true,"sourceCoreVerified":true,"safeControlsPass":true,"metadataVerified":true,"rawZipVerified":true,"inventoryVerified":true,"producerControlCount":91,"supplementStatus":null,"zipBytes":2311,"metadataZipBytes":2311,"uploadDigest":"38a08bf25644b9a39931e5b275be491d60c443dc6c0eba450e7d8eff4ee8d1b0","metadataDigest":"sha256:38a08bf25644b9a39931e5b275be491d60c443dc6c0eba450e7d8eff4ee8d1b0","rawZipSha256":"38a08bf25644b9a39931e5b275be491d60c443dc6c0eba450e7d8eff4ee8d1b0","resultBytes":10557,"resultSha256":"63385b2cc574a47814f3c13e30ca0dd93b24ab2bd3a7158b1a24849c91684bdb","manifestBytes":335,"manifestSha256":"55190e58c10b1b66edeb7fafc5b5e7ae2d80afe26dfc1380818ca507d1c85532","stage":"complete","reason":"none","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+Exactly one safe controls artifact13970844891, afw-readonly-receipt-inspection-43280472462-1, 2311B, expired=false, created2026-11-12T18:30:17Z, expires2026-11-19T18:30:16Z, tied Sourceb30b7f4f/run43280472462/attempt1. Upload digest=metadata digest=raw ZIP SHA25638a08bf25644b9a39931e5b275be491d60c443dc6c0eba450e7d8eff4ee8d1b0. Exact two-entry inventory result.json10557B/SHA25663385b2cc574a47814f3c13e30ca0dd93b24ab2bd3a7158b1a24849c91684bdb; manifest.json335B/SHA25655190e58c10b1b66edeb7fafc5b5e7ae2d80afe26dfc1380818ca507d1c85532. Verifier SHA256204f829009b1fabe3d241b536e97354e086b08c31b63d9bc5caf8ae0832e8a22, sourceCoreVerified/producerCoreVerified/safeControlsPass/metadataVerified/rawZipVerified/inventoryVerified alltrue, producerControlCount91, stagecomplete/reasonnone. Root owns independent safe-pair audit; executor did not download pair.
+
+Success candidate is COMPLETE amended D5actual5+2: WF480a9878bac51628b73774c0b81598466a7ed6dc/SHA256d2cbf5961f1810ff9c3928481ddf5d8db5642b8a538e702e15dc8269375f6b3d,173321 characters; sole workflow_dispatch/noinputs/nopush/both literal false. All exact shared amended helpers/tests/bootstrap and untouched Core77002/d514 and ZIP13305/b36c reused byte-for-byte from qualifying Source. Producer retains ONLY existing environment afw-finite-syn-checkpoint and exactly one existing AFW_SYN_CHECKPOINT_KEY binding at original private open step; verifier keyless. Actual candidate has NOT executed, been enabled, nor received separate TaskB release. Current-source transport rejects new globalcap oversize; historical old16MiB PARTIAL remains valid dated evidence. All original caps/timers/fields/purposes/identity/path/custody/cleanup/I1I2I3/privacy retained except expressly reviewed selected-fileMAX+exactbasis+integrity-rejection changes.10sprojection+validation/15scleanup/physicalclose and actual5+2 unchanged, no renewal.
+
+Operational note: one idempotent inactive-WF blob creation transport disconnected without response after terminal run. Expected Git blob SHA480a9878bac51628b73774c0b81598466a7ed6dc independently computed, read found404, then same content created exactly. No branch update uncertainty, workflow retry/rerun, source repair or second execution occurred.
+
+After this inactive candidate+append commit, full body/ref/tree/3188protected/main and five zero-active readbacks are mandatory and will be recorded by one final report-only checkpoint. No TaskB/Original open released; no runtime/CF/SDK/native/mail/main/PR/merge/deploy/publication changes. No localSource execution/clones/deps/largefixtures/tempSourcefiles. OOM/maxperformance/PCoff/native cause/repair remain unproved. All readinessfalse. STOP after final readbacks for independent review.
