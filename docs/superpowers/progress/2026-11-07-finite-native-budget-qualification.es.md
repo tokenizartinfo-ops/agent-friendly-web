@@ -2,7 +2,7 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — 12Nov02:10UTC: revisión completa5Important, fix round1/5 pendiente
+## CURRENT — 12Nov02:56UTC: fix round1/5; ordinary incompleto, diagnóstico acotado
 
 Revisor fresco budget_task1_review (Astra/high) emitió Spec❌/QualityNeeds fixes sobre GLOBALBASE29681cae..eaf019a. CincoImportant: módulo optativo rompe npmtest sin grupo; peaks inconsistentes aceptados; then accessor pendiente certificado fulfilled; P1 acepta época vacía ausente; byteLength propio ejecuta getter. NingúnCritical niMinor adicional. Informe íntegro de hallazgos en docs/superpowers/reviews/2026-11-12-finite-budget-task1-review.es.md. La ejecución9PASSbaef sigue siendo evidencia válida del caso medido; no prueba ausencia de esos defectos. Task1 NOcomplete yTask2 bloqueada por el gate.
 
@@ -21,6 +21,14 @@ Round1 remains0addressed/5open. RED1(43140111119) confirmed four, Q1 probe was n
 ### R4 source-fidelity repair inside round1 — 12Nov02:31UTC
 
 Final causalRED43141085705/1 Sourceca6a776be0be5289f7891533061520f743808beb passed expected8Q/3pass5ERR_ASSERTION after exact guard cause check; artifact13909612479 sameID preserved. Five corrections were implemented inSource1c7c4d191b3eb03a0d74882af7d87fde07076a18. Covering8Q/preflight passed but ordinary43141464770/1 still runs. Root found new R4 breakage before review/native: helperclosed4 vs unchanged actualepoch6fields(reason,capturedAt). Writer agrees; no Source mutation during activejob. Ruling authorizes source-faithful Q3controlRED, six-fieldrepair, final8Q/preflight plus repeatedordinarynpm on finalSource, theninactivequalifier/STOP. SamefindingR4/sameround1, notTask2 ornewfull9. All5remainopenuntilscopedreview. Brief amended, owner not needed.
+
+
+
+### Ordinary cancellation and diagnostic ruling — 12Nov02:56UTC
+
+Root verified jobs/logs43141464770/1: pure8Q/preflight PASS/artifact13910245453; ordinary130929409824 CANCELLED at20min, npm stdout lost in runner.temp, seal/upload/readbacks SKIPPED. No totals, failure names or ordinary artifact; no PASS or code/provider/key diagnosis inferred. Source1c7c unchanged. R4 six-field source-faithful pure RED/GREEN is independent and released after this terminal check.
+
+Ruling: replace blind ordinary replay with ONE reporter-instrumented equivalent of its complete Node test command, same glob/default execution policy/groupUNSET, custom safe lifecycle recorder +private spec log, internal8min vsjob12min and separate always preservation/readback — yields actionable file/line/partial counts even on timeout — cost: one bounded cloud diagnostic, no production change or relaxed assertions. First verify reporter on ephemeral synthetic pass/fail/hang and secret canary. No unencrypted raw log or dynamic test names; fixed filenames/numeric/enum/whitelistedcodes only. Exact command deviation disclosed; cannot call literalnpm PASS. On terminal/partial STOP for Root; no automatic furtherordinary/full9/staging until ruling. Binding addendum in SAME fixbrief. Same round1,0addressed/5open; owner asleep/no requests before08Argentina.
 
 ## Bloque previo preservado — 12 noviembre, 01:13:58 UTC
 
