@@ -1,11 +1,10 @@
 # SDD ledger — docs/superpowers/plans/2026-11-12-reference-stage.md
 
-## CURRENT — Task1 COMPLETE/CLEAN; fix1 all3ADDRESSED; priorMinorCLOSED; ONEactualTask2released
+## CURRENT — Task2 valid PARTIAL; newstage=http/grant; oldrows+cert unchanged; F7 closure underway
 
-[Cleanreview](../reviews/2026-11-12-reference-stage-task1-clean.md) acceptsI1/I2/I3andactualpositivefilefixtureexecution; new0findings. Sourcecf223f03 completeinactive5+2/BOTHfalse/protected3188/main0c9/0active/allactorsSTOPPED. [ExactTask2brief](../briefs/2026-11-12-reference-stage-task2-single-projection.md) releasesfreshsoleexecutorONEfixedOriginal5+2/codebyteexact/event2falseprefix/runlabel/reportonly; bothterminalANYoutcome exactF7/fullreadbacks/five0activeSTOP. NoNative/runtimeauthority. Rootwillcompareoldrows+WHOLEoldcertvs43303568700. Allreadinessfalse.
+ONEactual43313662894/1Source1b6aab04 BOTHsuccess. [Rootprimary](../reviews/2026-11-12-reference-stage-task2-primary.md) strictsmallSAFE/wholemanifest/currentidentity/Originalfacts/deepBOTHoldrows+WHOLEoldcertunchanged. Newr1grouphttp=inspectorvalidationonly(notcount/provider/Nativecause), r2lastrecordedentrygrant(notACK/cause/effect). R1stillinvalid; oldR2child5/5018abort/issuer-ack/pair706same. SourceexecutorrestoresF7/fullreadbacks/five0activeSTOP; independentclosurepending. NoNative/nextSourcepermit; allreadinessfalse.
 
-Task1: fix round1/5 (3 addressed,0 open — expandedinvocation/witness; R1oversizeshadow; ENOTDIRbranch; commitsb0dfcf50..cf223f03).
-PriorpositivefixedfileMinor CLOSED bydynamicfixtureconsume+grant/fullindependentrows+certandindependentreview, notretroactivecoverageofoldrun.
+Task1: fix round1/5 (3 addressed,0 open — invocation/witness, R1oversizeshadow, ENOTDIR; b0dfcf50..cf223f03); priorpositivefileMinorCLOSED byactualfixture+review.
 
 ## Prior proposal checkpoint
 
