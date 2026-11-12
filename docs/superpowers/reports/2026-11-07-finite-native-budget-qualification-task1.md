@@ -2511,3 +2511,104 @@ Recorder limitation found by Root: the optional failureDetails enrichment scanne
 Checkpoint cleanup retires this TEMP and appends only this section. Relative to delivered f5f, report alone changes;3,188leaves and3,187other blobs exact, including the four corrected core blobs. Main remains `0c9c475b3ebaa970fc11d628b40e50a90cceb727`. The five original Important findings, integration ordinary-suite debt and current-source native qualification remain OPEN. Any subsequent recorder work follows the separately pinned03:33 ruling, not an automatic retry of this run.
 
 operationalReadiness=false; completePackage=false; PCoff=false.
+
+
+## Task1 round1 — recorder omission control and corrected four-file A/B — 2026-11-12 UTC
+
+Outcome: the corrected A/B completed and reproduced the SAME36failed tests under matched setup at FIX_BASEeaf and deliveredf5. This establishes that these four-file failures predate THIS fix round in that setup. It does NOT establish that they predate Task1, identify their root cause, approve the whole ordinary suite or waive its integration gate. The five original Important findings remain open for scoped review. Historical inconclusive A/B43148329682/1 is preserved above without rewriting its outcome.
+
+Authority: [Root03:33 recorder-correction ruling](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/78937357cf5715a166bf48e6592fccbcfab71ca7/docs/superpowers/briefs/2026-11-12-finite-budget-task1-fix-round1.md), blob `708b0ea58ac92eca0c9ab38bf1b92c560973e72f`. Sub-block scope remains TEMP plus append-only report only. All four delivered core code blobs, production/lib/worker/SDK/package/lock/config/compatibility/compiler/world/descriptor/custody code stayed exact delivered f5. No broad suite, pending native fixture,900s/P1, Task2, source-code repair, owner/credential/provider/browser/mail action, subagent or reviewer was started.
+
+The historical inconclusive A/B checkpoint was independently preserved first: Source `4fa63c8714d7818cd671dad9f80e87df059c4ea2`, tree `ed027133eacca328e7ffcc8181961795a95970a3`, append-only report `10e8dd88121dfdc8ef1df2b0a094151008303064`, TEMP absent/3,188leaves. This separates the new authorized recorder test from an automatic replay.
+
+### Pure MODELED recorder control
+
+The NEW reporter completely omits stack/esbuild errors/locations; it does not read or process stack or errors at all. Failures retain only event identities(file,line,column,nesting,testNumber), whitelisted codes and own-data message hashes for strings<=1MiB. Larger/unobservable messages retain null rather than payload; oversized messages set messageTooLarge=1. No runtime titles/messages/stacks/actual/expected are printed.
+
+Before the corrected A/B, each pinned job performed a short ephemeral pure recorder control, with no AFW fixture/native/I0. It constructed the SAME failed MODELED event with a1,048,779-byte data:base64 stack, canary, oversized own-data message and known source location. Event SHA-256 `0de032a11e9a02454239c825c541a0a17024400c9553f04d6c0a260230e2fa21` matched across old/new/guarded probes and both jobs.
+
+The old reporter was extracted verbatim from the quoted AFW_REPORTER heredoc in git object `41b7cefae63c5ba335ad846f4f3eb32bf47e27d7:.github/workflows/afw-finite-budget-qualification.yml`; workflow blob `672a5ed9fd0281eff42d97542708285e516423fd` was checked by git hash-object. No reimplemented regex stood in for it. Old module SHA-256 `8d3150d71567498882e8f44072d1e3f820da96a365d210541809a2b0c4a505db`; new module SHA-256 `c444d4be9943c6f749def5d596663e13826eafdc5cfb5979c0512b1dae42daf3`.
+
+| Probe | A observed wall time | B observed wall time | Actual result |
+| --- | --- | --- | --- |
+| exact old module, configured1,000ms child deadline | 1,005ms | 1,004ms | timeout/SIGKILL at the configured boundary; stdout/stderr0bytes |
+| new module, configured3,000ms deadline | 49ms | 45ms | completed/exit0; safe event identity retained |
+| new module with guarded stack/errors accessors and descriptor traps | 47ms | 41ms | completed/exit0; every stack/errors probe/getter counter0 |
+
+The few milliseconds above the old configured deadline include process termination/reaping overhead. The control did not require an old timeout to pass; it would have reported normal completion honestly. Here the actual timeout reproduces a MODELED risk of the old diagnostic enrichment, not proof of the unknown actual stack content/cause in the previous A/B. New controls preserved the known file:10:1/code identity, canaryEmitted0, stackProbes0/errorsProbes0/stackGetterCalls0/errorsGetterCalls0; oversized message projection was null+messageTooLarge1. Original ephemeral pass/fail/hang/canary plumbing also passed on both sides before AFW comparison. No modeled payload, recorder script, canary, raw stack or raw control log was uploaded; only safe control status, numeric facts and hashes.
+
+### Exact sources and matched four-file execution
+
+Workflow Source `7fe2f275a0a0d43c9cb117d756c85836529cacc0`, tree `24bb8ddb5d3e46bd5faae45488006bd28f879fea`, TEMP `f36a4a55bf0ba4fd346ad18a0c33f10ea83a29a1`. This workflow version contains only temporary recorder/plumbing changes relative to the earlier cleanup checkpoint. It is separate from the historical test sources:
+
+| Side | Actual test checkout / child GITHUB_SHA | Job in run43149728253/1 | Test result / outer command elapsed |
+| --- | --- | --- | --- |
+| A | `eaf019aa872709d867aac53d9684ecdf1c21d013` | [130955809154](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43149728253/job/130955809154) | failed/exit1;12,208ms |
+| B | `f5f52660d19ec9fc634bbc49558db75582fdaf88` | [130955808671](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43149728253/job/130955808671) | failed/exit1;9,933ms |
+
+Both completed within the unchanged120-second command /7-minute job limits; no escalation was needed for the actual four-file commands. Node test summary duration was1,511.379925ms(A)/1,364.251877ms(B), distinct from outer process/reporter/log completion time. Workflow/job conclusions SUCCESS mean classification, control and preservation succeeded; they do NOT mean the tests passed. The command's continue-on-error conclusion does not hide its explicit failed/exit1 result.
+
+Both jobs independently checked exact git HEAD, full history/persist-credentials:false, Node22.23.4/Ubuntu24.04, group UNSET, package.json `f4fd38ac380c46a149d8cf0f3bd828a28406f761` and lock `36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b`. Child GITHUB_SHA matched the historical checkout; original workflowSource and side were separately recorded. No historical ref was moved or source code changed.
+
+Actual command on each checkout (same explicit files/order/default concurrency/isolation, spec plus safe reporter):
+```text
+node --test --test-reporter=spec --test-reporter=<temporary-safe-reporter> --test-reporter-destination=<private-spec> --test-reporter-destination=<safe-progress> test/mcp-own-finite-entrypoints.test.mjs test/mcp-qa-cloud-native-cli.test.mjs test/mcp-qa-finite-adoption-wait.test.mjs test/mcp-qa-finite-command.test.mjs
+```
+This is matched FOUR-FILE reporter diagnostics, not a filtered claim that npm/the whole ordinary suite is green.
+
+### Complete comparison
+
+Both global summaries:109tests,73passed,36failed,0suites/cancelled/skipped/todo; topLevel109, success0. Per-file counts below are identical on both sides:
+
+| File | Tests | Passed | Failed |
+| --- | --- | --- | --- |
+| test/mcp-own-finite-entrypoints.test.mjs | 2 | 0 | 2 |
+| test/mcp-qa-cloud-native-cli.test.mjs | 70 | 58 | 12 |
+| test/mcp-qa-finite-adoption-wait.test.mjs | 20 | 0 | 20 |
+| test/mcp-qa-finite-command.test.mjs | 17 | 15 | 2 |
+
+There are113 dequeue/complete records, with40failed completion events =36failed tests plus4failed file wrappers. This is why40events must not be reported as40failed tests. All four per-file and one global summary are present; no failure records were omitted.
+
+A/B comparison used MULTISETS, preserving repeated occurrences. It compared file/line/column/nesting/testNumber/code identities, and then the same identities plus messageHashes/messageTooLarge; both comparisons are exactly equal. Only Source/workflow/side/run context and execution timing are excluded from failure identity; testNumber remains included. All actual failure messageTooLarge flags were0; hashes remained valid bounded message digests. No stack content was read. The common grouped event identities, including wrappers at1:1, are:
+
+| Failure file:line:column | Multiplicity per side | Whitelisted codes |
+| --- | --- | --- |
+| test/mcp-own-finite-entrypoints.test.mjs:1:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-own-finite-entrypoints.test.mjs:10:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-own-finite-entrypoints.test.mjs:19:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-cloud-native-cli.test.mjs:1:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-cloud-native-cli.test.mjs:93:1 | 1 | ERR_TEST_FAILURE, ERR_ASSERTION |
+| test/mcp-qa-cloud-native-cli.test.mjs:99:43 | 2 | ERR_TEST_FAILURE, ERR_ASSERTION |
+| test/mcp-qa-cloud-native-cli.test.mjs:108:27 | 6 | ERR_TEST_FAILURE, ERR_ASSERTION |
+| test/mcp-qa-cloud-native-cli.test.mjs:111:1 | 1 | ERR_TEST_FAILURE, ERR_ASSERTION |
+| test/mcp-qa-cloud-native-cli.test.mjs:124:58 | 2 | ERR_TEST_FAILURE, ERR_ASSERTION |
+| test/mcp-qa-finite-adoption-wait.test.mjs:1:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-adoption-wait.test.mjs:38:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-adoption-wait.test.mjs:41:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-adoption-wait.test.mjs:42:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-adoption-wait.test.mjs:43:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-adoption-wait.test.mjs:44:172 | 12 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-adoption-wait.test.mjs:46:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-adoption-wait.test.mjs:47:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-adoption-wait.test.mjs:49:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-adoption-wait.test.mjs:51:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-command.test.mjs:1:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-command.test.mjs:33:1 | 1 | ERR_TEST_FAILURE |
+| test/mcp-qa-finite-command.test.mjs:53:1 | 1 | ERR_TEST_FAILURE |
+
+Safe progress.json and primary AFW_AB_FAILURE projections retain every individual closed identity/message hash, with no raw names/messages/stacks. Matching results demonstrate the failures already occur at FIX_BASEeaf under this matched setup, not merely that their direct files were unchanged. They do not locate the cause, establish Task1-global provenance, classify the pending native failures or complete the integration ordinary-suite gate.
+
+### Preserved artifacts and scope
+
+| Side | Safe artifact | ZIP bytes | ZIP SHA-256 | Expiry UTC |
+| --- | --- | --- | --- | --- |
+| A | [13912694932](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43149728253/artifacts/13912694932) | 4970 | `a03d248162db898cf5013c4487a3d3dc557824d8b6d4f008aa02d5e4d14cf047` | 2026-11-19T03:40:58Z |
+| B | [13913695034](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43149728253/artifacts/13913695034) | 4978 | `31be4c09fb8cd970246d27934905f04e3d285447313976fef86625d6b7953e21` | 2026-11-19T03:40:51Z |
+
+Both seven-file bundles contain result.json, progress.json, plumbing.json, plumbing-progress.json, recorder-control.json, recorder-control-status.json and budget-artifact.json. Both exact-ID GET1/inventory/hash readbacks passed; later attempts/waits were skipped. A manifest1,182bytes/SHA `768ef77d6ea2776ac27d04315a20dbbe0f3820782684a2963168c7ba090164b9`; B manifest1,182bytes/SHA `69d32f372572ec57861761ec3e3cc701537042748601d0e37bbb64e771ef3e3b`. Original actual test Source/run/attempt/kind were checked; payloads separately bind workflow Source/side.
+
+Raw spec stayed private: A33,809,117bytes/SHA `f9e1077e96043469c88bdf18663d5b6b1bc7fbd61f7fddc390eec27511064f7c`; B33,809,099bytes/SHA `ca05d6569d56933add0d956f92905f78681d3ffbd5536a5c1b3746fa8f3ed81f`. Stderr0bytes/empty SHA on both. Only bytes/hashes were public; no raw log was uploaded or read to infer a cause. Platform Node20-actions-forced-to24 warning remains unrelated to the actual Node22.23.4 test processes.
+
+Cleanup retires TEMP and appends only this section. Relative to delivered f5, report alone differs;3,188leaves/3,187other blobs remain exact, including all four corrected core code blobs. Main freshly checked `0c9c475b3ebaa970fc11d628b40e50a90cceb727`. No inactive full9 candidate is prepared. No further test, recorder iteration, npm/broad/native run or unrelated repair follows automatically.
+
+The writer returns STOP_WRITES after cleanup readback for Root's decision. The five Important findings remain open until scoped review; ordinary-suite integration debt and current-source native qualification remain OPEN, not waived. operationalReadiness=false; completePackage=false; PCoff=false.
