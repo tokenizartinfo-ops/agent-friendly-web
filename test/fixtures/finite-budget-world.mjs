@@ -613,10 +613,41 @@ function requireOrdinaryObserver(){
  assert.equal(process.env.AFW_BUDGET_DIAGNOSTIC_CANDIDATE,undefined,'deprecated diagnostic candidate rejected before I0');
 }
 
-function fixedQueueObservation(baseline){
- const ast=sourceAST(baseline,'SYN-fixed-queue-observation'),sites=[],sdkSites=[];
+
+function fixedSdkSettlementSequence(source,label){
+ const ast=sourceAST(source,'SYN-fixed-SDK-sequence-'+label),matches=[],receivers=[];
+ const call=(node,receiver,method,args)=>ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.expression.getText(ast)===receiver&&node.expression.name.text===method&&node.arguments.length===args.length&&node.arguments.every((arg,index)=>arg.getText(ast)===args[index]);
+ const declaration=(statement,name)=>ts.isVariableStatement(statement)&&statement.declarationList.declarations.length===1&&statement.declarationList.declarations[0].name.getText(ast)===name?statement.declarationList.declarations[0]:null;
+ const retainedSdk=statement=>{
+  const d=declaration(statement,'actual'),outer=d?.initializer;
+  return outer&&ts.isCallExpression(outer)&&outer.expression.getText(ast)==='retain'&&outer.arguments.length===1&&call(outer.arguments[0],'api','revokeGrant',['selector','i.subject']);
+ };
  const walk=node=>{
-  if(ts.isVariableStatement(node)&&node.declarationList.declarations.some(d=>d.name.getText(ast)==='actual'&&d.initializer?.getText(ast).includes('revokeGrant')))sdkSites.push(node.end);
+  if(ts.isVariableStatement(node)){
+   const d=declaration(node,'actual'),outer=d?.initializer;
+   if(outer&&ts.isCallExpression(outer)&&outer.expression.getText(ast)==='retain'&&outer.arguments.length===1){
+    const inner=outer.arguments[0];
+    if(ts.isCallExpression(inner)&&ts.isPropertyAccessExpression(inner.expression)&&inner.expression.name.text==='revokeGrant')receivers.push(inner.expression.expression.getText(ast));
+   }
+  }
+  if(ts.isBlock(node))for(let index=0;index+3<node.statements.length;index++){
+   const [assignment,awaited,checked,metrics]=node.statements.slice(index,index+4);
+   if(!retainedSdk(assignment))continue;
+   assert(ts.isExpressionStatement(awaited)&&ts.isAwaitExpression(awaited.expression)&&ts.isIdentifier(awaited.expression.expression)&&awaited.expression.expression.text==='actual','SDK actual standalone await adjacency '+label);
+   assert(ts.isExpressionStatement(checked)&&ts.isCallExpression(checked.expression)&&checked.expression.expression.getText(ast)==='check'&&checked.expression.arguments.length===0,'SDK original check adjacency '+label);
+   const metric=declaration(metrics,'metrics');assert(metric&&call(metric.initializer,'bounded','facts',[]),'SDK bounded metrics same-block adjacency '+label);
+   matches.push(assignment.end);
+  }
+  ts.forEachChild(node,walk);
+ };walk(ast);
+ assert.equal(matches.length,1,'single structural actual SDK settlement sequence '+label);
+ assert.deepEqual(receivers.sort(),['api','store'],'two distinct original revokeGrant receivers '+label);
+ return {end:matches[0],sites:matches.length,sameNameReceivers:receivers,receiver:'api',method:'revokeGrant',args:['selector','i.subject'],adjacency:['const-actual-retain-api','await-actual','check','bounded-facts']};
+}
+
+function fixedQueueObservation(baseline,originalSdk){
+ const ast=sourceAST(baseline,'SYN-fixed-queue-observation'),sites=[],sdk=fixedSdkSettlementSequence(baseline,'emitted-baseline'),sdkSites=[sdk.end];
+ const walk=node=>{
   if(ts.isExpressionStatement(node)&&ts.isCallExpression(node.expression)&&ts.isPropertyAccessExpression(node.expression.expression)&&node.expression.expression.getText(ast)==='queue.push'){
    let owner=node.parent,family=null;
    while(owner){if(ts.isFunctionDeclaration(owner)&&['readonlyGrantKv','reductionKv'].includes(owner.name?.text)){family=owner.name.text==='readonlyGrantKv'?1:2;break;}owner=owner.parent;}
@@ -633,7 +664,7 @@ function fixedQueueObservation(baseline){
  let source=baseline;for(const edit of edits.sort((a,b)=>b.end-a.end))source=source.slice(0,edit.end)+edit.text+source.slice(edit.end);
  source="const __afwFixedSynPromiseThen=Promise.prototype.then;\n"+source;
  sourceAST(source,'SYN-fixed-queue-emission');
- return {source,proof:{purpose:'afw.fixed-syn-queue-observation.v1',baselineBytes:Buffer.byteLength(baseline),baselineSha256:hash(baseline),emittedBytes:Buffer.byteLength(source),emittedSha256:hash(source),sites:sites.map(s=>s.family),sdkSettlementSites:sdkSites.length,fields:['alias-identity','numeric-family','queued','active','timestamp'],businessAuthority:false}};
+ return {source,proof:{purpose:'afw.fixed-syn-queue-observation.v1',baselineBytes:Buffer.byteLength(baseline),baselineSha256:hash(baseline),emittedBytes:Buffer.byteLength(source),emittedSha256:hash(source),sites:sites.map(s=>s.family),sdkSettlementSites:sdkSites.length,sdkDeclarationProvenance:{original:originalSdk,emitted:Object.fromEntries(Object.entries(sdk).filter(([key])=>key!=='end')),protectedModuleBlob:'1a5a2583d266179cdd89f799c64199f29044fec5',originalStatementSha256:hash('const actual=retain(api.revokeGrant(selector,i.subject));')},fields:['alias-identity','numeric-family','queued','active','timestamp'],businessAuthority:false}};
 }
 async function appendFixedSynAdapter(baseline,family){
  const ast=sourceAST(baseline,'SYN-baseline-entry'),classes=ast.statements.filter(n=>ts.isClassDeclaration(n)&&n.name?.text==='Initial');
@@ -670,9 +701,10 @@ export function createBudgetCompiler(role){
   else if(path!=='<stdin>'&&!path.startsWith('node_modules/')){
    const pin=scopeInputPins.find(p=>p.path===path);assert(pin?.roles.includes(role));assert.equal(hash(raw),pin.rawSha256,'scope input raw pin '+path);assert.equal(Buffer.byteLength(raw),pin.rawBytes);if(role==='M')assert.equal(source,raw);
   }
-  let result=transformBudgetPreparedSource(source,path,role);const family=fixedAdapterFamily();let additionalSYN=null;
+  const family=fixedAdapterFamily(),originalSdk=family&&role==='QA'&&path==='lib/mcp-qa-finite-owner-cleanup.mjs'?fixedSdkSettlementSequence(source,'original-prepared'):null;
+  let result=transformBudgetPreparedSource(source,path,role);let additionalSYN=null;
   if(family&&role==='QA'&&path==='<stdin>'){const emitted=await appendFixedSynAdapter(result.source,family);additionalSYN=emitted.proof;result={...result,source:emitted.source};}
-  if(family&&role==='QA'&&path==='lib/mcp-qa-finite-owner-cleanup.mjs'){assert.equal(source.split('const actual=retain(api.revokeGrant(selector,i.subject));').length-1,1,'original SDK call and retain unchanged');const emitted=fixedQueueObservation(result.source);additionalSYN=emitted.proof;result={...result,source:emitted.source};}
+  if(family&&role==='QA'&&path==='lib/mcp-qa-finite-owner-cleanup.mjs'){assert.equal(source.split('const actual=retain(api.revokeGrant(selector,i.subject));').length-1,1,'original SDK call and retain unchanged');const emitted=fixedQueueObservation(result.source,Object.fromEntries(Object.entries(originalSdk).filter(([key])=>key!=='end')));additionalSYN=emitted.proof;result={...result,source:emitted.source};}
   records.set(path,{role,path,rawBytes:Buffer.byteLength(raw),rawSha256:hash(raw),preparedBytes:Buffer.byteLength(source),preparedSha256:hash(source),emittedBytes:Buffer.byteLength(result.source),emittedSha256:hash(result.source),counts:result.counts,selectors:result.selectorCounts,readerSites:result.readerSites,...additionalSYN?{additionalSYN}:{}});
   prepared.set(path,result.source);return result.source;
  }
