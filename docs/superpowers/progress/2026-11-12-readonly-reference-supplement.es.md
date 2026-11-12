@@ -2,11 +2,11 @@
 
 PROJECTAFW; repositorytokenizartinfo-ops/agent-friendly-web/public1347578006; Source/SYN GitHubActions; originGitHubconnector; Sourcebranchfeat/finite-native-cleanup-20261101; allowedONLY2SourcepathsWF+appendreport/ownCAS/exactF7rollback. Rootdocsbranchdocs/finite-pcoff-continuation-20261103 ownsledger/spec/plan. ParentNativeTask2ledger2026-11-07 remainspending; thisisaseparateboundeddiagnosticunit.
 
-## CURRENT — Task1 COMPLETE clean afterfix1; ONE actual Task2 projection released
+## CURRENT — Task2 COMPLETE/PARTIAL: both R1/R2 oversize; exactF7 closed; no metrics inferred
 
-2026-11-12 18:03 UTC. SAMEreviewer I1/I2/I3ADDRESSED, nonewCritical/Important; [cleanreview/minorcontractruling](../reviews/2026-11-12-reference-supplement-preparation-clean.md). SourceD5/WFa0e1d838 COMPLETEinactive andprotected/0activeRootverified. Bothkeylesspermitsconsumed, current43274672298/1 PASS91+24+16+16, Rootsafeartifact/codepinsverified. Task1writerSTOPPED.
+2026-11-12 18:11 UTC. Soleactual43276435787/1 SUCCESS atdfa0ec1; safeartifact13971740416/2921B/d1882379... RootstrictZIP/envelope/nestedOriginalinspection/currentidentity/wholemanifestauditPASS. BOTHrequestedR1/R2files exist butexceed16MiB; rowstatusesoversize, ALLmetricsUNKNOWN/null. Exactfilesizesunobserved. Authenticatedplaintexttotal128files/298888337B. [Primaryproof](../reviews/2026-11-12-reference-supplement-actual-primary.md). Sourceactivationbodyunchanged; permitCONSUMED/no repeat.
 
-RootseparatelyreleasedONEactual5+2 existing-receipt projection under [exactTask2brief](../briefs/2026-11-12-reference-supplement-task2-single-projection.md). FreshsoleexecutorwillownSource; no codechanges, activateevent+twofalseprefixesonly/reportappend, Originalcipher/keyinsideGitHubonly, sameoriginplus2fixedR1/R2receipts, restoreEXACTF7/0activeafterterminalregardlessoutcome. NoNative/SDK/MF/I0/business/CF/runtime/keychanges. R1/R2valuesstillunobserved, no repairorPCoffclaim, allreadinessfalse. No useractionneeded.
+FinalSource41520e037d80e6a658e92932709cd1df11e13c39/WFexactF7f7a71f1a/report4b7d4c11, complete7manual/noinputs/nopush/all7false. Rootfullbodies/ref/tree/protected3188/mainunchanged/5activecounts0 verified18:11:26Z. ONLYreportdiffersfromBASE093; executorsSTOPPED. Task1cleanafterfix1; Task2diagnosticCOMPLETEwithPARTIALdata, no SDKcause/repair/Native/PCoffproof. Noautomaticcapincrease/privateopenretry; RootevaluatingNEWboundedinputdesignbasedonobservedoversizeandknownauthenticatedpayloadtotal. Allreadinessfalse, no useractionneeded.
 ## Preflight scan and Root rulings
 
 | Scope | Producer -> consumer / internal agreement | Finding and ruling |

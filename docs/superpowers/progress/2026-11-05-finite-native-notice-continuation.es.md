@@ -1,8 +1,10 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — supplement Task1 COMPLETE clean; ONE actual Task2 diagnostic released; Native16 pending
+## CURRENT — actual supplement safelyclosed/PARTIAL: both receipts >16MiB; Native16 pending
 
-2026-11-12 18:03 UTC. [Supplementledger](2026-11-12-readonly-reference-supplement.es.md) hasbindingrulings. SAMEexpertfix1reviewI1/I2/I3ADDRESSED/noImportantnew, SourceD5/WFa0e1d838 inactive/protected3188/0activeverified. Currentkeyless43274672298/1 PASS91+24+16+16; Rootstrictsafe2311B/currentcode/wholemanifest auditPASS. RootseparatelyreleasedONEactual5+2projection usingexistingOriginalcipher/keyONLYGitHubrunner, nohelperchanges, fixedtwoextraR1/R2receiptreadsafterguards; freshsoleexecutorandEXACTF7closure/0active requiredregardlessoutcome. NoNative16/SDK/I0/world/runtime/CF/credentialoperation. R1/R2metricsunobserveduntilactualresult, causalrepairUNKNOWN, allreadinessfalse. No userinterventionneeded.
+2026-11-12 18:11 UTC. [Supplementledger](2026-11-12-readonly-reference-supplement.es.md) carriesprimaryproof. ONEactual43276435787/1 atdfa0ec1 SUCCESStransport, safeartifact13971740416/2921B/d1882379... Rootstrictschema/hash/contextauditPASS. BothR1/R2receipts exist but exceed16MiBreadcap; ALLnewmetricsUNKNOWN/null, cause/repairunproved. Knownauthenticatedplaintext128files/298888337B. No automaticcapincrease/retry.
+
+Source41520e037d80e6a658e92932709cd1df11e13c39 restoredEXACTF7f7a71f1a/manual/noinputs/nopush/7false; report4b7d4c11appendonly. Rootref/fullbodies/tree3188protected/mainunchanged/0activeverified18:11:26Z, executorSTOPPED. CurrentdiagnosticplanTasks1+2complete butpartialdata; RootevaluatingNEWboundedread proposal, notNative replay. OriginalNativeFAILED/PCoff/Maxpending/allreadinessfalse. No userinterventionneeded.
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 
 Task1native9COMPLETE7852. Task2native16HELD; formalfix1 partialcoveringf772 passed8Q/F1/F2butfailedF3F4. Closed4f35/TEMPecabeall7manualfalse. Rootexact14640hash+SourceflowprovesDReturnStatementselectorbug; targetedrepairtorecovercorrectinnercheck/+granularallgroupdata/independentprofilesONEcoveringreleased(e39f4256), SAMEwriteractive. Rawproduction/SDK/pins/originalclocksunchanged. InertUNVERIFIEDfull7jobdraftblob67486underreviewsoutsideActions, notrunnableevidence. Nextcoveringallpass→publishupdated7false→SAMEreviewerfixscope3590..head→actualcoherent16→task/globalreviews; noneclaimedcomplete.
