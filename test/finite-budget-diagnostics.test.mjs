@@ -231,6 +231,7 @@ test('Q5 observing preserves actual promise identity, resolution, rejection and 
 
  await coldFacadeBinding();
  await unobservablePromiseSettlement();
+ await readableNonCallableThen();
 });
 test('Q6 retained record bounds preserve native identity, observed metrics and omission evidence',async()=>{
  const bounded=createBudgetDiagnostics({testRevision:revision,workerRole:'QA',maxRows:1});
@@ -657,4 +658,28 @@ async function intrinsicReadBytes(){
   const s=runtime.snapshot(),row=s.rows[0];observations.push([getters,row.nativeBytesRead,row.status,s.totals.nativeSettled,s.totals.active,s.coverage.invalid]);
  }
  assert.deepEqual(observations,cases.map(c=>[0,c.length,'fulfilled',1,0,0]),'R5 byte lengths bypass own business getters');
+}
+
+async function readableNonCallableThen(){
+ const pendingControl=memoryScope();let release,pendingCalls=0,pendingTags=0;
+ const pending=new Promise(resolve=>{release=resolve;});
+ Object.defineProperty(pending,'then',{value:null});
+ Object.defineProperty(pending,Symbol.toStringTag,{get(){pendingTags++;throw Error('metadata getter forbidden');}});
+ const asyncHolder={get(arg){assert.equal(this,asyncHolder);assert.equal(arg,17);pendingCalls++;return pending;}};pendingControl.runtime.nativeHolder(asyncHolder,'KV');
+ const actual=pendingControl.runtime.run(pendingControl.child,()=>pendingControl.runtime.member(asyncHolder,'get',{operation:'get'})(17));
+ assert.equal(actual,pending);
+ const before=pendingControl.runtime.snapshot();
+ assert.deepEqual([before.rows[0].status,before.totals.nativeSettled,before.totals.active,before.coverage.invalid>0,before.coverage.observedMetricsComplete,pendingCalls,pendingTags],['pending',0,1,true,false,1,0],'R3 pending Promise with own data then null stays unobserved');
+ release('same');assert.equal(await pending,'same');assert.equal(pendingTags,0);
+ const after=pendingControl.runtime.snapshot();assert.equal(after.rows[0].status,'pending');assert.equal(after.totals.nativeSettled,0);assert.equal(after.totals.active,1);
+
+ const inherited=Object.create({then:null}),values=[{then:null},{then:undefined},{then:false},{then:0},inherited],observed=[];
+ for(const value of values){
+  const {runtime,child}=memoryScope();let calls=0,tags=0;
+  Object.defineProperty(value,Symbol.toStringTag,{get(){tags++;throw Error('metadata getter forbidden');}});
+  const holder={get(arg){assert.equal(this,holder);assert.equal(arg,17);calls++;return value;}};runtime.nativeHolder(holder,'KV');
+  const returned=runtime.run(child,()=>runtime.member(holder,'get',{operation:'get'})(17));assert.equal(returned,value);
+  const s=runtime.snapshot();observed.push([s.rows[0].status,s.totals.nativeStarted,s.totals.nativeSettled,s.totals.active,s.coverage.invalid,calls,tags]);
+ }
+ assert.deepEqual(observed,values.map(()=>['fulfilled',1,1,0,0,1,0]),'R3 readable non-callable data then settles synchronously');
 }
