@@ -1,5 +1,5 @@
-name: AFW native preparation round1 owner covering
-run-name: AFW fixed control owner bounded covering ${{ github.sha }}
+name: AFW native preparation round1 lifecycle covering
+run-name: AFW positive lifecycle bounded covering ${{ github.sha }}
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]

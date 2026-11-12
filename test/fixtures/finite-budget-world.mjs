@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir,readdir,copyFile,cp} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,readdir,copyFile,cp,rm} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {AsyncLocalStorage} from 'node:async_hooks';
 import {mkdirSync,writeFileSync} from 'node:fs';
@@ -853,12 +853,21 @@ function registerFixedOwnedCleanup(fn){const frame=fixedBudgetOwners.getStore();
 async function closeFixedOwnedFrame(frame,primary){
  if(frame.closed)return frame.closed;
  frame.closed=(async()=>{
-  // Release and restore each owned fixture independently before disposal.
+  // SYN RPCs belong only to fixed R/D adapters before owned disposal begins.
   await Promise.allSettled(frame.records.map(async record=>{
-   for(const phase of ['release','restore'])try{const f=record.fixture;if(f?.stub)await f.stub[phase==='release'?'finiteBudgetRelease':'finiteBudgetRestore']();record.events.push(phase);}catch(error){ownedFailure(record,phase,error);}
-   try{await record.dispose();}catch{}
+   for(const phase of ['release','restore']){
+    const applicable=['R1','R2','R3','D1','D2','D3','D4'].includes(frame.caseName),reason=!applicable?'case_identity':record.disposal||record.disposed||record.disposalUncertain?'disposal_started':!record.fixture?.stub?'fixture_unavailable':null;
+    record.phases??=[];
+    if(reason){record.phases.push({phase,status:'not_applicable',reason});record.events.push(phase+'-not-applicable');continue;}
+    record.phases.push({phase,status:'attempted'});
+    try{await record.fixture.stub[phase==='release'?'finiteBudgetRelease':'finiteBudgetRestore']();record.phases.push({phase,status:'fulfilled'});record.events.push(phase);}
+    catch(error){record.phases.push({phase,status:'rejected'});ownedFailure(record,phase,error);}
+   }
   }));
+  // Original callbacks may still need live RPC and may dispose through our wrapper.
   for(const callback of frame.callbacks.reverse())try{await callback();}catch(error){frame.failures.push({phase:'registered_cleanup',error});}
+  // Every partial/fulfilled allocation receives an idempotent fallback attempt.
+  await Promise.allSettled(frame.records.map(async record=>{try{await record.dispose();}catch{}}));
   for(const record of frame.records){
    // A pre-assignment allocation can still own a persistence directory.
    if(record.persist&&!record.mf)try{
@@ -866,7 +875,7 @@ async function closeFixedOwnedFrame(frame,primary){
    }catch(error){ownedFailure(record,'partial_archive',error);}
   }
   const failures=[...frame.failures,...frame.records.flatMap(r=>r.failures)];
-  const result={purpose:'afw.fixed-budget-owned-lifecycle.syn.v1',caseName:frame.caseName,records:frame.records.map(r=>({ordinal:r.ordinal,caseName:r.caseName,kind:r.kind,graphs:r.graphs??[],disposalUncertain:r.disposalUncertain===true,disposed:r.disposed,archived:r.archived,terminalCapture:r.terminalCapture,archive:r.archive,events:r.events,failures:r.failures.map(x=>({phase:x.phase,name:Object.getOwnPropertyDescriptor(x.error??{},'name')?.value??'Error'})),epochs:r.epochs})),callbackCount:frame.callbacks.length,ancillaryFailureCount:failures.length,primaryPreserved:primary!==null,complete:failures.length===0};
+  const result={purpose:'afw.fixed-budget-owned-lifecycle.syn.v1',caseName:frame.caseName,records:frame.records.map(r=>({ordinal:r.ordinal,caseName:r.caseName,kind:r.kind,graphs:r.graphs??[],disposalUncertain:r.disposalUncertain===true,disposed:r.disposed,archived:r.archived,terminalCapture:r.terminalCapture,archive:r.archive,events:r.events,phases:r.phases??[],failures:r.failures.map(x=>({phase:x.phase,name:Object.getOwnPropertyDescriptor(x.error??{},'name')?.value??'Error'})),epochs:r.epochs})),callbackCount:frame.callbacks.length,ancillaryFailureCount:failures.length,primaryPreserved:primary!==null,complete:failures.length===0};
   try{await mkdir(frame.root,{recursive:true});await writeFile(join(frame.root,'ownership.json'),JSON.stringify(result,null,2));}catch(error){failures.push({phase:'ownership_preservation',error});result.complete=false;result.ancillaryFailureCount=failures.length;}
   const error=primary??failures[0]?.error;if(error){fixedBudgetOwnerErrors.set(error,{primary,failures,result});throw error;}return result;
  })();return frame.closed;
@@ -1361,6 +1370,62 @@ async function runFixedFacetControls(group){
 }
 
 
+
+async function fixedOriginalFixtureCleanup(){
+ const source=await readFile('test/fixtures/finite-owner-cleanup.mjs','utf8'),blob=createHash('sha1').update('blob '+Buffer.byteLength(source)+'\0'+source).digest('hex');assert.equal(blob,'cda4ab10544fc8be127aa7a89f86b74141784dd3','fixed original cleanup fixture blob');
+ const ast=sourceAST(source,'fixed-original-owner-cleanup-callback'),owners=ast.statements.filter(node=>ts.isFunctionDeclaration(node)&&node.name?.text==='ownerReferenceFixture');assert.equal(owners.length,1);
+ const matches=[];const walk=node=>{if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.expression.getText(ast)==='t'&&node.expression.name.text==='after')matches.push(node);ts.forEachChild(node,walk);};walk(owners[0]);assert.equal(matches.length,1,'unique actual ownerReferenceFixture cleanup callback');
+ const call=matches[0];assert.equal(call.arguments.length,1);const arrow=call.arguments[0];assert(ts.isArrowFunction(arrow)&&arrow.parameters.length===0&&arrow.modifiers?.some(m=>m.kind===ts.SyntaxKind.AsyncKeyword));
+ const references=new Set();const refs=node=>{if(ts.isIdentifier(node)){const property=ts.isPropertyAccessExpression(node.parent)&&node.parent.name===node;if(!property)references.add(node.text);}ts.forEachChild(node,refs);};refs(arrow);assert.deepEqual([...references].sort(),['f'],'original cleanup callback f-only closure');
+ return {source:arrow.getText(ast),proof:{blob,bytes:Buffer.byteLength(arrow.getText(ast)),sha256:hash(arrow.getText(ast)),matches:1,freeReferences:['f']}};
+}
+async function runFixedNoAdapterControls(){
+ const cases=[];
+ for(const identity of ['P1','positive_producer','reduction_producer']){
+  const root='output/finite-budget/round1-controls/no-adapter-'+identity,persist=join(root,'source'),bytes=Buffer.from('SYN fixed no-adapter cold bytes');await mkdir(persist,{recursive:true});await writeFile(join(persist,'native.bin'),bytes);
+  const trace=[];let touched=0,disposed=0,captured=0,cleaned=0,record;
+  const value=await withFixedBudgetOwner(identity,join(root,'preserved'),async()=>{
+   record=beginFixedBudgetOwnedAllocation();record.attachPersist(persist);
+   const stub={};for(const method of ['finiteBudgetRelease','finiteBudgetRestore'])Object.defineProperty(stub,method,{get(){touched++;throw Error('SYN absent adapter touched');}});
+   const fixture={stub,budgetEpochs:[],async captureBudgetEpoch(reason){captured++;trace.push('capture');fixture.budgetEpochs.push({reason,role:'QA',epoch:0});},async cleanup(){cleaned++;trace.push('original-cleanup');assert.equal(await record.beforeDelete(),true);trace.push('delete');await rm(persist,{recursive:true});}};
+   record.attachFixture(fixture);record.attachMiniflare({async dispose(){disposed++;trace.push('dispose');}});
+   registerFixedOwnedCleanup(()=>fixture.cleanup());return {};
+  });
+  assert.equal(touched,0);assert.equal(disposed,1);assert.equal(captured,1);assert.equal(cleaned,1);assert.equal(record.archived,true);assert.equal(record.events.filter(event=>event==='archived').length,1);assert(trace.indexOf('capture')<trace.indexOf('dispose'));assert(trace.indexOf('dispose')<trace.indexOf('delete'));assert((await readFile(join(record.archive.path,'native.bin'))).equals(bytes));await assert.rejects(()=>readFile(join(persist,'native.bin')),{code:'ENOENT'});
+  assert.equal(value.ownership.complete,true);assert(record.phases.length===2&&record.phases.every(phase=>phase.status==='not_applicable'&&phase.reason==='case_identity'));
+  cases.push({identity,adapterTouches:touched,originalDisposeAttempts:disposed,terminalCaptures:captured,originalCleanupCalls:cleaned,coldArchiveVerified:true,deletedAfterArchive:true,phaseEvidence:record.phases});
+ }
+ return cases;
+}
+async function runFixedActualCleanupControls(){
+ const extracted=await fixedOriginalFixtureCleanup(),{Script,createContext}=await import('node:vm'),cases=[];
+ for(const scenario of ['normal','preassignment','ancillary']){
+  const root='output/finite-budget/round1-controls/actual-callback-'+scenario,persist=join(root,'source'),bytes=Buffer.from('SYN actual callback cold bytes');await mkdir(persist,{recursive:true});await writeFile(join(persist,'native.bin'),bytes);
+  const trace=[],primary=Error('SYN preassignment original'),rpcError=Error('SYN legacy RPC cleanup'),callbackError=Error('SYN independent cleanup');let alive=true,disposed=0,cleaned=0,record,actual;
+  try{await withFixedBudgetOwner('R1',join(root,'preserved'),async()=>{
+   record=beginFixedBudgetOwnedAllocation();record.attachPersist(persist);
+   const fixture={budgetEpochs:[],stub:{
+    async finiteBudgetRelease(){assert(alive);trace.push('syn-release');},
+    async finiteBudgetRestore(){assert(alive);trace.push('syn-restore');},
+    async ownerReferenceControl(value){assert.equal(value,'released');assert(alive);trace.push('legacy-release');},
+    async firstConnectionRestore(){assert(alive);trace.push('legacy-first-restore');if(scenario==='ancillary')throw rpcError;},
+    async restoreMethods(){assert(alive);trace.push('legacy-methods-restore');}
+   },async captureBudgetEpoch(reason){assert(alive);trace.push('capture:'+reason);fixture.budgetEpochs.push({reason,role:'QA',epoch:0});},
+   async cleanup(){cleaned++;trace.push('cleanup');assert.equal(await record.beforeDelete(),true);assert(record.archived);trace.push('delete');await rm(persist,{recursive:true});}};
+   record.attachFixture(fixture);record.attachMiniflare({async dispose(){assert(alive);disposed++;trace.push('dispose');alive=false;}});
+   const context=createContext({__fixedOwnedFixture:fixture});const callback=new Script('(function(f){return '+extracted.source+';})(__fixedOwnedFixture)').runInContext(context,{timeout:1000});assert.equal(typeof callback,'function');registerFixedOwnedCleanup(callback);
+   if(scenario==='ancillary')registerFixedOwnedCleanup(async()=>{trace.push('independent-callback');throw callbackError;});
+   if(scenario!=='normal')throw primary;return {};
+  });}catch(error){actual=error;}
+  assert.equal(disposed,1);assert.equal(cleaned,1);assert.equal(record.archived,true);assert(trace.indexOf('legacy-release')<trace.indexOf('dispose'));assert(trace.indexOf('legacy-first-restore')<trace.indexOf('dispose'));assert(trace.indexOf('capture:before-fixture-dispose')<trace.indexOf('dispose'));assert(trace.indexOf('capture:terminal-owned-before-dispose')<trace.indexOf('dispose'));assert(trace.indexOf('dispose')<trace.indexOf('delete'));assert((await readFile(join(record.archive.path,'native.bin'))).equals(bytes));
+  if(scenario==='normal'){assert.equal(actual,undefined);assert(trace.indexOf('legacy-methods-restore')<trace.indexOf('dispose'));}
+  else{assert.equal(actual,primary);const saved=fixedBudgetOwnerErrors.get(primary);assert.equal(saved.primary,primary);if(scenario==='ancillary'){assert.equal(saved.failures.length,2);assert(saved.failures.some(value=>value.error===rpcError));assert(saved.failures.some(value=>value.error===callbackError));assert(!trace.includes('legacy-methods-restore'),'actual original callback preserves its own failure control flow');}else assert.equal(saved.failures.length,0);}
+  await record.dispose();assert.equal(disposed,1,'fallback original dispose once');
+  cases.push({scenario,actualOriginalCallback:true,primaryIdentityPreserved:scenario==='normal'?true:actual===primary,originalDisposeAttempts:disposed,originalCleanupCalls:cleaned,rpcAndCaptureBeforeDispose:true,coldArchiveBeforeDelete:true,ancillaryFailures:scenario==='ancillary'?2:0,trace});
+ }
+ return {callback:extracted.proof,cases};
+}
+
 async function runFixedOwnershipControls(){
  const results=[];
  for(const scenario of ['normal','preassignment','multiple_cleanup']){
@@ -1415,7 +1480,7 @@ async function verifyNativePreparationRound1(){
   ['F2',async()=>({cases:await runFixedObserverControls('F2')})],
   ['F3',()=>runFixedFacetControls('F3')],
   ['F4',async()=>({calls:await runFixedObserverControls('F4'),boundaries:await runFixedFacetControls('F4')})],
-  ['F5',async()=>{fixedControlProgress('ownership');await verifyFixedPairDisposer();return {cases:await runFixedOwnershipControls(),actualPairedDisposerControl:true};}],
+  ['F5',async()=>{fixedControlProgress('ownership');await verifyFixedPairDisposer();const noAdapter=await runFixedNoAdapterControls(),actualCleanup=await runFixedActualCleanupControls();return {noAdapter,actualCleanup,cases:await runFixedOwnershipControls(),actualPairedDisposerControl:true};}],
   ['F6',async()=>{fixedControlProgress('manifest');return {cases:await runFixedManifestControls()};}],
   ['F7',async()=>{fixedControlProgress('peer_wait');return {cases:await runFixedPeerWaitControls()};}]
  ];
