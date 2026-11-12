@@ -37,7 +37,7 @@ function expectedContext(c){
  fields(c,['purpose','repository','ref','sourceSha','runId','runAttempt','kind']);
  requireValue(c.purpose===PURPOSE&&c.repository===REPOSITORY&&c.ref===REF,'context');
  requireValue(typeof c.sourceSha==='string'&&c.sourceSha.length===40&&/^[0-9a-f]{40}$/.test(c.sourceSha)&&typeof c.runId==='string'&&c.runId.trim()===c.runId&&/^[1-9][0-9]*$/.test(c.runId)&&c.runAttempt===1,'context');
- requireValue(['checkpoint','positive-result','producer-failure','consumer-failure'].includes(c.kind),'context');
+ requireValue(['checkpoint','positive-result','producer-failure','consumer-failure','readonly-result','reduction-checkpoint','reduction-result-a','reduction-result-b'].includes(c.kind),'context');
  return {purpose:PURPOSE,repository:REPOSITORY,ref:REF,sourceSha:c.sourceSha,runId:c.runId,runAttempt:1,kind:c.kind};
 }
 function keyFromEnvironment(){
